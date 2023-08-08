@@ -28,7 +28,7 @@
 #include "vscenestylesheet.h"
 
 #include "../def.h"
-#include "vmisc/theme/vmanuallayoutstyle.h"
+#include "vmanuallayoutstyle.h"
 #include "vtheme.h"
 
 #include <QColor>

@@ -48,7 +48,8 @@ include(vmisc.pri)
 RESOURCES += \
     share/resources/icon.qrc \ # All other icons except cursors and Windows theme.
     share/resources/flags.qrc \
-    share/resources/breezethemes/breeze.qrc
+    share/resources/breezethemes/breeze.qrc \
+    share/resources/scenestyle.qrc
 
 macx {
     RESOURCES += \

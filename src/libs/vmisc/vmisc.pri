@@ -13,7 +13,12 @@ SOURCES += \
     $$PWD/svgfont/vsvgpathtokenizer.cpp \
     $$PWD/testpath.cpp \
     $$PWD/theme/vapplicationstyle.cpp \
+    $$PWD/theme/vmanuallayoutstyle.cpp \
+    $$PWD/theme/vpatternpiecestyle.cpp \
+    $$PWD/theme/vscenestylesheet.cpp \
+    $$PWD/theme/vstylesheetstyle.cpp \
     $$PWD/theme/vtheme.cpp \
+    $$PWD/theme/vtoolstyle.cpp \
     $$PWD/vabstractvalapplication.cpp \
     $$PWD/vabstractapplication.cpp \
     $$PWD/projectversion.cpp \
@@ -84,8 +89,14 @@ HEADERS += \
     $$PWD/svgfont/vsvgglyph_p.h \
     $$PWD/svgfont/vsvgpathtokenizer.h \
     $$PWD/testpath.h \
+    $$PWD/theme/themeDef.h \
     $$PWD/theme/vapplicationstyle.h \
+    $$PWD/theme/vmanuallayoutstyle.h \
+    $$PWD/theme/vpatternpiecestyle.h \
+    $$PWD/theme/vscenestylesheet.h \
+    $$PWD/theme/vstylesheetstyle.h \
     $$PWD/theme/vtheme.h \
+    $$PWD/theme/vtoolstyle.h \
     $$PWD/vabstractvalapplication.h \
     $$PWD/vmath.h \
     $$PWD/vabstractapplication.h \
