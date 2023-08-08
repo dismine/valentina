@@ -772,6 +772,7 @@ QFrame[frameShape] QAbstractItemView:hover
 QToolBar
 {
     font-weight: bold;
+    border: 1px;
 }
 
 QToolBar:horizontal
