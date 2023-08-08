@@ -52,10 +52,12 @@ RESOURCES += \
 
 macx {
     RESOURCES += \
-        share/resources/mac_theme.qrc
+        share/resources/mac_light_theme.qrc \
+        share/resources/mac_dark_theme.qrc
 } else {
     RESOURCES += \
-        share/resources/win_theme.qrc
+        share/resources/win_light_theme.qrc \
+        share/resources/win_dark_theme.qrc
 }
 
 # This is static library so no need in "make install"
