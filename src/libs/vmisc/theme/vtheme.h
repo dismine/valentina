@@ -82,14 +82,10 @@ private:
     explicit VTheme(QObject *parent = nullptr);
 
     QString m_defaultThemeName{};
-    QStyle *m_defaultApplicationStyle{nullptr};
 #if QT_VERSION < QT_VERSION_CHECK(6, 5, 0)
     QTimer *m_themeTimer{nullptr};
     bool m_darkTheme{false};
 #endif
-
-    auto GetDefaultApplicationStyle() const -> QStyle *;
-    void SetDefaultApplicationStyle(QStyle *defaultApplicationStyle);
 };
 
 #endif // VTHEME_H

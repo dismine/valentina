@@ -280,11 +280,20 @@ auto VTheme::IsInDarkTheme() -> bool
 {
     if (NativeDarkThemeAvailable())
     {
+#if QT_VERSION >= QT_VERSION_CHECK(6, 5, 0)
+        QStyleHints *hints = QGuiApplication::styleHints();
+        return hints->colorScheme() == Qt::ColorScheme::Dark;
+#else
 #if defined(Q_OS_MACX)
         return NSMacIsInDarkTheme();
-#else
+#elif defined(Q_OS_WIN)
+        QSettings settings("HKEY_CURRENT_USER\\Software\\Microsoft\\Windows\\CurrentVersion\\Themes\\Personalize",
+                           QSettings::NativeFormat);
+        return settings.value("AppsUseLightTheme", 1).toInt() == 0;
+#elif defined(Q_OS_LINUX)
         return ShouldApplyDarkTheme();
 #endif
+#endif // QT_VERSION >= QT_VERSION_CHECK(6, 5, 0)
     }
 
     return false;
@@ -353,11 +362,8 @@ void VTheme::InitApplicationStyle()
         QStyle *style = QStyleFactory::create(QStringLiteral("fusion"));
         if (style != nullptr)
         {
-            // NOLINTNEXTLINE(cppcoreguidelines-pro-type-static-cast-downcast)
-            Instance()->SetDefaultApplicationStyle(qApp->style());
             style = new VApplicationStyle(style);
-            // NOLINTNEXTLINE(cppcoreguidelines-pro-type-static-cast-downcast)
-            qApp->setStyle(style);
+            QApplication::setStyle(style);
         }
 
         return;
@@ -369,14 +375,7 @@ void VTheme::InitApplicationStyle()
     {
         if (QGuiApplication::styleHints()->colorScheme() == Qt::ColorScheme::Dark)
         {
-            QStyle *style = QStyleFactory::create(QStringLiteral("fusion"));
-            if (style != nullptr)
-            {
-                // NOLINTNEXTLINE(cppcoreguidelines-pro-type-static-cast-downcast)
-                Instance()->SetDefaultApplicationStyle(qApp->style());
-                // NOLINTNEXTLINE(cppcoreguidelines-pro-type-static-cast-downcast)
-                qApp->setStyle(style);
-            }
+            QApplication::setStyle(QStyleFactory::create(QStringLiteral("fusion")));
         }
     }
 #endif
@@ -538,9 +537,8 @@ auto VTheme::ThemeStylesheet() -> QString
 //---------------------------------------------------------------------------------------------------------------------
 void VTheme::ResetThemeSettings() const
 {
-    qApp->setStyle(Instance()->GetDefaultApplicationStyle());
-    SetToAutoTheme();
     InitApplicationStyle();
+    SetToAutoTheme();
     SetIconTheme();
     InitThemeMode();
     VSceneStylesheet::ResetStyles();
@@ -597,7 +595,29 @@ VTheme::VTheme(QObject *parent)
 {
 #if QT_VERSION >= QT_VERSION_CHECK(6, 5, 0)
     QStyleHints *hints = QGuiApplication::styleHints();
-    connect(hints, &QStyleHints::colorSchemeChanged, this, []() { VTheme::Instance()->ResetThemeSettings(); });
+    connect(hints, &QStyleHints::colorSchemeChanged, this,
+            [this]()
+            {
+                VCommonSettings *settings = VAbstractApplication::VApp()->Settings();
+                VThemeMode themeMode = settings->GetThemeMode();
+                if (themeMode == VThemeMode::System && VTheme::NativeDarkThemeAvailable())
+                {
+                    if (QGuiApplication::styleHints()->colorScheme() == Qt::ColorScheme::Dark)
+                    {
+                        settings->SetThemeMode(VThemeMode::Light);
+                    }
+                    else
+                    {
+                        settings->SetThemeMode(VThemeMode::Dark);
+                    }
+
+                    ResetThemeSettings();
+                    QCoreApplication::processEvents();
+                    settings->SetThemeMode(themeMode);
+                }
+
+                ResetThemeSettings();
+            });
 #else
     if (VTheme::NativeDarkThemeAvailable())
     {
@@ -611,33 +631,10 @@ VTheme::VTheme(QObject *parent)
                     if (m_darkTheme != darkTheme)
                     {
                         m_darkTheme = darkTheme;
-                        VTheme::Instance()->ResetThemeSettings();
+                        ResetThemeSettings();
                     }
                 });
         m_themeTimer->start(V_SECONDS(5));
     }
-#endif
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-auto VTheme::GetDefaultApplicationStyle() const -> QStyle *
-{
-    return m_defaultApplicationStyle;
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-void VTheme::SetDefaultApplicationStyle(QStyle *defaultApplicationStyle)
-{
-    QStyle *old = m_defaultApplicationStyle;
-
-    m_defaultApplicationStyle = defaultApplicationStyle;
-    if (m_defaultApplicationStyle)
-    {
-        m_defaultApplicationStyle->setParent(this);
-    }
-
-    if (old && old->parent() == this)
-    {
-        delete old;
-    }
+#endif // QT_VERSION >= QT_VERSION_CHECK(6, 5, 0)
 }

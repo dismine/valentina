@@ -29,14 +29,17 @@
 #include "tapepreferencesconfigurationpage.h"
 #include "../../mapplication.h"
 #include "../../vtapesettings.h"
-#include "../vpatterndb/pmsystems.h"
-#include "ui_tapepreferencesconfigurationpage.h"
-#if QT_VERSION < QT_VERSION_CHECK(5, 7, 0)
-#include "../vmisc/backport/qoverload.h"
-#endif // QT_VERSION < QT_VERSION_CHECK(5, 7, 0)
 #include "../qmuparser/qmudef.h"
 #include "../vganalytics/vganalytics.h"
 #include "../vmisc/theme/vtheme.h"
+#include "../vpatterndb/pmsystems.h"
+#include "ui_tapepreferencesconfigurationpage.h"
+
+#if QT_VERSION < QT_VERSION_CHECK(5, 7, 0)
+#include "../vmisc/backport/qoverload.h"
+#endif // QT_VERSION < QT_VERSION_CHECK(5, 7, 0)
+
+#include <QStyleHints>
 
 //---------------------------------------------------------------------------------------------------------------------
 TapePreferencesConfigurationPage::TapePreferencesConfigurationPage(QWidget *parent)
@@ -122,6 +125,23 @@ auto TapePreferencesConfigurationPage::Apply() -> QStringList
     auto themeMode = static_cast<VThemeMode>(ui->comboBoxThemeMode->currentData().toInt());
     if (settings->GetThemeMode() != themeMode)
     {
+#if QT_VERSION >= QT_VERSION_CHECK(6, 5, 0)
+        if (themeMode == VThemeMode::System && VTheme::NativeDarkThemeAvailable())
+        {
+            if (QGuiApplication::styleHints()->colorScheme() == Qt::ColorScheme::Dark)
+            {
+                settings->SetThemeMode(VThemeMode::Light);
+            }
+            else
+            {
+                settings->SetThemeMode(VThemeMode::Dark);
+            }
+
+            VTheme::Instance()->ResetThemeSettings();
+            QCoreApplication::processEvents();
+        }
+#endif
+
         settings->SetThemeMode(themeMode);
         VTheme::Instance()->ResetThemeSettings();
     }
