@@ -35,6 +35,7 @@
 #include <QPixmap>
 #include <QScreen>
 #include <QUndoStack>
+#include <QtMath>
 
 #include "../../undocommands/image/rotatebackgroundimage.h"
 #include "../../undocommands/image/scalebackgroundimage.h"
