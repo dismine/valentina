@@ -280,20 +280,11 @@ auto VTheme::IsInDarkTheme() -> bool
 {
     if (NativeDarkThemeAvailable())
     {
-#if QT_VERSION >= QT_VERSION_CHECK(6, 5, 0)
-        QStyleHints *hints = QGuiApplication::styleHints();
-        return hints->colorScheme() == Qt::ColorScheme::Dark;
-#else
 #if defined(Q_OS_MACX)
         return NSMacIsInDarkTheme();
-#elif defined(Q_OS_WIN)
-        QSettings settings("HKEY_CURRENT_USER\\Software\\Microsoft\\Windows\\CurrentVersion\\Themes\\Personalize",
-                           QSettings::NativeFormat);
-        return settings.value("AppsUseLightTheme", 1).toInt() == 0;
-#elif defined(Q_OS_LINUX)
+#else
         return ShouldApplyDarkTheme();
 #endif
-#endif // QT_VERSION >= QT_VERSION_CHECK(6, 5, 0)
     }
 
     return false;
