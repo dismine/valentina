@@ -32,9 +32,12 @@
 #include <QPainter>
 #include <QPalette>
 #include <QPixmap>
+#include <QStyle>
+#include <QStyleFactory>
 #include <QTextStream>
 #include <QtDebug>
 #include <QtGlobal>
+#include <QtSvg/QSvgRenderer>
 
 #if QT_VERSION >= QT_VERSION_CHECK(5, 9, 0)
 #include <QOperatingSystemVersion>
@@ -66,9 +69,8 @@ using namespace bpstd::literals::chrono_literals;
 
 #include "../defglobal.h"
 #include "../vabstractapplication.h"
+#include "vapplicationstyle.h"
 #include "vscenestylesheet.h"
-
-#include <QtSvg/QSvgRenderer>
 
 namespace
 {
@@ -351,6 +353,46 @@ auto VTheme::DefaultThemeName() -> QString
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+void VTheme::InitApplicationStyle()
+{
+    VThemeMode themeMode = VAbstractApplication::VApp()->Settings()->GetThemeMode();
+
+    if (themeMode == VThemeMode::Light || themeMode == VThemeMode::Dark)
+    {
+        QStyle *style = QStyleFactory::create(QStringLiteral("fusion"));
+        if (style != nullptr)
+        {
+            // NOLINTNEXTLINE(cppcoreguidelines-pro-type-static-cast-downcast)
+            Instance()->SetDefaultApplicationStyle(qApp->style());
+            style = new VApplicationStyle(style);
+            // NOLINTNEXTLINE(cppcoreguidelines-pro-type-static-cast-downcast)
+            qApp->setStyle(style);
+        }
+
+        return;
+    }
+
+#if defined(Q_OS_WIN)
+#if QT_VERSION >= QT_VERSION_CHECK(6, 5, 0)
+    if (NativeDarkThemeAvailable())
+    {
+        if (QGuiApplication::styleHints()->colorScheme() == Qt::ColorScheme::Dark)
+        {
+            QStyle *style = QStyleFactory::create(QStringLiteral("fusion"));
+            if (style != nullptr)
+            {
+                // NOLINTNEXTLINE(cppcoreguidelines-pro-type-static-cast-downcast)
+                Instance()->SetDefaultApplicationStyle(qApp->style());
+                // NOLINTNEXTLINE(cppcoreguidelines-pro-type-static-cast-downcast)
+                qApp->setStyle(style);
+            }
+        }
+    }
+#endif
+#endif
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 void VTheme::SetIconTheme()
 {
     static const char *GENERIC_ICON_TO_CHECK = "document-open";
@@ -505,7 +547,9 @@ auto VTheme::ThemeStylesheet() -> QString
 //---------------------------------------------------------------------------------------------------------------------
 void VTheme::ResetThemeSettings() const
 {
+    qApp->setStyle(Instance()->GetDefaultApplicationStyle());
     SetToAutoTheme();
+    InitApplicationStyle();
     SetIconTheme();
     InitThemeMode();
     VSceneStylesheet::ResetStyles();
@@ -582,4 +626,27 @@ VTheme::VTheme(QObject *parent)
         m_themeTimer->start(V_SECONDS(5));
     }
 #endif
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+auto VTheme::GetDefaultApplicationStyle() const -> QStyle *
+{
+    return m_defaultApplicationStyle;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VTheme::SetDefaultApplicationStyle(QStyle *defaultApplicationStyle)
+{
+    QStyle *old = m_defaultApplicationStyle;
+
+    m_defaultApplicationStyle = defaultApplicationStyle;
+    if (m_defaultApplicationStyle)
+    {
+        m_defaultApplicationStyle->setParent(this);
+    }
+
+    if (old && old->parent() == this)
+    {
+        delete old;
+    }
 }

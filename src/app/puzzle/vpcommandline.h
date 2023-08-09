@@ -65,8 +65,6 @@ public:
 
     Q_NORETURN void ShowHelp(int exitCode = 0);
 
-    auto OptionStyle() const -> QString;
-
 protected:
     VPCommandLine();
 

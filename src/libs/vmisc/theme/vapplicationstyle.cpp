@@ -131,16 +131,19 @@ auto StandardIconPaths() -> QHash<QStyle::StandardPixmap, QString>
 } // namespace
 
 //---------------------------------------------------------------------------------------------------------------------
-VApplicationStyle::VApplicationStyle(const QStyle *style)
+VApplicationStyle::VApplicationStyle(QStyle *style)
   : m_style(style)
 {
+    m_style->setParent(this);
 }
 
+#if QT_VERSION >= QT_VERSION_CHECK(6, 1, 0)
 //---------------------------------------------------------------------------------------------------------------------
-VApplicationStyle::~VApplicationStyle()
+auto VApplicationStyle::name() const -> QString
 {
-    delete m_style;
+    return m_style->name();
 }
+#endif
 
 //---------------------------------------------------------------------------------------------------------------------
 void VApplicationStyle::drawPrimitive(PrimitiveElement pe, const QStyleOption *opt, QPainter *p, const QWidget *w) const

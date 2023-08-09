@@ -40,8 +40,12 @@ class VApplicationStyle : public QStyle
     Q_OBJECT // NOLINT
 
 public:
-    VApplicationStyle(const QStyle *style);
-    ~VApplicationStyle() override;
+    explicit VApplicationStyle(QStyle *style);
+    ~VApplicationStyle() override = default;
+
+#if QT_VERSION >= QT_VERSION_CHECK(6, 1, 0)
+    auto name() const -> QString;
+#endif
 
     void drawPrimitive(PrimitiveElement pe, const QStyleOption *opt, QPainter *p, const QWidget *w) const override;
     void drawControl(ControlElement element, const QStyleOption *opt, QPainter *p, const QWidget *w) const override;
@@ -71,7 +75,7 @@ public:
 private:
     Q_DISABLE_COPY_MOVE(VApplicationStyle) // NOLINT
 
-    const QStyle *m_style;
+    QStyle *m_style;
 
     auto StyleIcon(StandardPixmap standardIcon, const QStyleOption *option, const QWidget *widget) const -> QIcon;
     auto StylesheetIcon(StandardPixmap standardIcon, const QStyleOption *option, const QWidget *widget) const -> QIcon;

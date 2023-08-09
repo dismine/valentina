@@ -134,9 +134,6 @@ const QString LONG_OPTION_LANDSCAPE_ORIENTATION = QStringLiteral("landscapeOrien
 const QString LONG_OPTION_NEST_QUANTITY = QStringLiteral("nestQuantity");
 const QString LONG_OPTION_PREFER_ONE_SHEET_SOLUTION = QStringLiteral("preferOneSheetSolution");
 
-const QString LONG_OPTION_STYLE = QStringLiteral("style");
-const QString LONG_OPTION_STYLESHEET = QStringLiteral("stylesheet");
-
 //---------------------------------------------------------------------------------------------------------------------
 /**
  * @brief AllKeys return list with all command line keys (short and long forms). Used for testing on conflicts.
@@ -215,7 +212,5 @@ auto AllKeys() -> QStringList
                        LONG_OPTION_MANUAL_PRIORITY,
                        LONG_OPTION_LANDSCAPE_ORIENTATION,
                        LONG_OPTION_NEST_QUANTITY,
-                       LONG_OPTION_PREFER_ONE_SHEET_SOLUTION,
-                       LONG_OPTION_STYLE,
-                       LONG_OPTION_STYLESHEET};
+                       LONG_OPTION_PREFER_ONE_SHEET_SOLUTION};
 }

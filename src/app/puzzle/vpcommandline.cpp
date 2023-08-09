@@ -68,18 +68,6 @@ void VPCommandLine::ShowHelp(int exitCode)
 }
 
 //----------------------------------------------------------------------------------------------------------------------
-auto VPCommandLine::OptionStyle() const -> QString
-{
-    QString value = OptionValue(LONG_OPTION_STYLE);
-    if (value.isEmpty())
-    {
-        return QStringLiteral("native");
-    }
-
-    return value;
-}
-
-//----------------------------------------------------------------------------------------------------------------------
 VPCommandLine::VPCommandLine()
 {
     parser.setApplicationDescription(translate("Puzzle", "Valentina's manual layout editor."));
@@ -120,7 +108,6 @@ void VPCommandLine::InitCommandLineOptions()
          translate("VCommandLine", "Disable high dpi scaling. Call this option if has problem with scaling (by default "
                                    "scaling enabled). Alternatively you can use the %1 environment variable.")
              .arg(QStringLiteral("QT_AUTO_SCREEN_SCALE_FACTOR=0"))},
-        {LONG_OPTION_STYLE, tr("Application style") + QString(" `Fusion`, `Windows`, `native`, ..."), "", "native"},
     });
 }
 

@@ -127,8 +127,6 @@ public:
     auto OptTiledPaperSize() const -> VAbstractLayoutDialog::PaperSizeTemplate;
     auto OptTiledPageOrientation() const -> PageOrientation;
 
-    auto OptStyle() const -> QString;
-
 protected:
     VCommandLine();
 

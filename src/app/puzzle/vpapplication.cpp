@@ -36,7 +36,6 @@
 #include "../vganalytics/def.h"
 #include "../vganalytics/vganalytics.h"
 #include "../vmisc/qt_dispatch/qt_dispatch.h"
-#include "../vmisc/theme/vapplicationstyle.h"
 #include "../vmisc/theme/vtheme.h"
 #include "../vmisc/vsysexits.h"
 #include "version.h"
@@ -435,6 +434,7 @@ void VPApplication::InitOptions()
 
     CheckSystemLocale();
 
+    VTheme::InitApplicationStyle();
     VTheme::SetIconTheme();
     VTheme::InitThemeMode();
 
@@ -499,17 +499,6 @@ void VPApplication::ParseCommandLine(const SocketConnection &connection, const Q
         qCDebug(pApp, "Can't establish connection to the server '%s'", qUtf8Printable(serverName));
         StartLocalServer(serverName);
         LoadTranslation(PuzzleSettings()->GetLocale());
-
-        QString styleOpt = cmd->OptionStyle();
-        if (styleOpt != QLatin1String("native"))
-        {
-            QStyle *style = QStyleFactory::create(styleOpt);
-            if (style != nullptr)
-            {
-                style = new VApplicationStyle(style);
-                setStyle(style);
-            }
-        }
     }
 
     ProcessArguments(cmd);

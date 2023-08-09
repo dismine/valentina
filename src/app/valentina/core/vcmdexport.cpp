@@ -595,18 +595,6 @@ auto VCommandLine::OptTiledPageOrientation() const -> PageOrientation
     return static_cast<PageOrientation>(not IsOptionSet(LONG_OPTION_TILED_PDF_LANDSCAPE));
 }
 
-//---------------------------------------------------------------------------------------------------------------------
-auto VCommandLine::OptStyle() const -> QString
-{
-    QString style = OptionValue(LONG_OPTION_STYLE);
-    if (style.isEmpty())
-    {
-        return QStringLiteral("native");
-    }
-
-    return style;
-}
-
 //----------------------------------------------------------------------------------------------------------------------
 void VCommandLine::InitCommandLineOptions()
 {
@@ -812,9 +800,6 @@ void VCommandLine::InitCommandLineOptions()
         {LONG_OPTION_TILED_PDF_LANDSCAPE,
          translate("VCommandLine", "Set tiled page orienatation to landscape (export mode). Default value if not set "
                                    "portrait.")},
-        //==============================================================================================================
-        {LONG_OPTION_STYLE,
-         translate("VCommandLine", "Application style") + QString(" `Fusion`, `Windows`, `native`, ..."), "", "native"},
     });
 }
 

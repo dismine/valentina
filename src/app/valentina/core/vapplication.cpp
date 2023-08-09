@@ -39,7 +39,6 @@
 #include "../vganalytics/def.h"
 #include "../vganalytics/vganalytics.h"
 #include "../vmisc/qt_dispatch/qt_dispatch.h"
-#include "../vmisc/theme/vapplicationstyle.h"
 #include "../vmisc/theme/vtheme.h"
 #include "../vmisc/vsysexits.h"
 #include "../vmisc/vvalentinasettings.h"
@@ -690,19 +689,9 @@ void VApplication::InitOptions()
     {
         LoadTranslation(ValentinaSettings()->GetLocale());
 
+        VTheme::InitApplicationStyle();
         VTheme::SetIconTheme();
         VTheme::InitThemeMode();
-
-        QString styleOpt = VApplication::CommandLine()->OptStyle();
-        if (styleOpt != QLatin1String("native"))
-        {
-            QStyle *style = QStyleFactory::create(styleOpt);
-            if (style != nullptr)
-            {
-                style = new VApplicationStyle(style);
-                setStyle(style);
-            }
-        }
     }
 
     auto *statistic = VGAnalytics::Instance();

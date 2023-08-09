@@ -130,8 +130,6 @@ extern const QString LONG_OPTION_MANUAL_PRIORITY;
 extern const QString LONG_OPTION_LANDSCAPE_ORIENTATION;
 extern const QString LONG_OPTION_NEST_QUANTITY;
 extern const QString LONG_OPTION_PREFER_ONE_SHEET_SOLUTION;
-extern const QString LONG_OPTION_STYLE;
-extern const QString LONG_OPTION_STYLESHEET;
 
 auto AllKeys() -> QStringList;
 

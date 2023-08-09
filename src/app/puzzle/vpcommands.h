@@ -33,9 +33,6 @@
 extern const QString LONG_OPTION_RAW_LAYOUT;
 extern const QString SINGLE_OPTION_RAW_LAYOUT;
 
-extern const QString LONG_OPTION_STYLE;
-extern const QString LONG_OPTION_STYLESHEET;
-
 auto AllKeys() -> QStringList;
 
 #endif // VPCOMMANDS_H

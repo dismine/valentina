@@ -101,8 +101,6 @@ Q_GLOBAL_STATIC_WITH_ARGS(const QString, SINGLE_OPTION_UNITS, (QChar('u')))     
 
 Q_GLOBAL_STATIC_WITH_ARGS(const QString, LONG_OPTION_TEST, (QLatin1String("test"))) // NOLINT
 
-Q_GLOBAL_STATIC_WITH_ARGS(const QString, LONG_OPTION_STYLE, (QLatin1String("style"))) // NOLINT
-
 QT_WARNING_POP
 } // namespace
 
@@ -480,6 +478,7 @@ void MApplication::InitOptions()
 
     CheckSystemLocale();
 
+    VTheme::InitApplicationStyle();
     VTheme::SetIconTheme();
     VTheme::InitThemeMode();
 
@@ -694,22 +693,6 @@ void MApplication::ParseCommandLine(const SocketConnection &connection, const QS
         qCDebug(mApp, "Can't establish connection to the server '%s'", qUtf8Printable(serverName));
         StartLocalServer(serverName);
         LoadTranslation(TapeSettings()->GetLocale());
-
-        QString styleOpt = parser.value(*LONG_OPTION_STYLE);
-        if (styleOpt.isEmpty())
-        {
-            styleOpt = QLatin1String("native");
-        }
-
-        if (styleOpt != QLatin1String("native"))
-        {
-            QStyle *style = QStyleFactory::create(styleOpt);
-            if (style != nullptr)
-            {
-                style = new VApplicationStyle(style);
-                setStyle(style);
-            }
-        }
     }
 
     const QStringList args = parser.positionalArguments();
@@ -822,7 +805,6 @@ void MApplication::InitParserOptions(QCommandLineParser &parser)
          tr("Disable high dpi scaling. Call this option if has problem with scaling (by default scaling enabled). "
             "Alternatively you can use the %1 environment variable.")
              .arg("QT_AUTO_SCREEN_SCALE_FACTOR=0")},
-        {*LONG_OPTION_STYLE, tr("Application style") + QString(" `Fusion`, `Windows`, `native`, ..."), "", "native"},
     });
 }
 
