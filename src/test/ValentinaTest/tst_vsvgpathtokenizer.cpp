@@ -30,6 +30,7 @@
 #include "../vmisc/svgfont/vsvgpathtokenizer.h"
 #include "def.h"
 
+#include <QList>
 #include <QtTest>
 
 namespace
