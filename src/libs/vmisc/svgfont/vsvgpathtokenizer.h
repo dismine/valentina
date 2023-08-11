@@ -43,6 +43,13 @@ class QPainterPath;
 
 struct VSVGPathCommand
 {
+    VSVGPathCommand() = default;
+    VSVGPathCommand(QChar command, const std::vector<qreal> &arguments)
+      : m_command(command),
+        m_arguments(arguments)
+    {
+    }
+
     QChar m_command{};
     std::vector<qreal> m_arguments{};
 };

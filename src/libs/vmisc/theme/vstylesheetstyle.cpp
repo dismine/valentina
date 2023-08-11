@@ -36,6 +36,7 @@
 #include <QJsonObject>
 #include <QJsonValue>
 #include <QString>
+#include <QtDebug>
 #include <algorithm>
 #include <vector>
 
