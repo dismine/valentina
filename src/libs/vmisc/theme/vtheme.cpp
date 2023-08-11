@@ -593,47 +593,70 @@ auto VTheme::GetResourceName(const QString &root, const QString &iconName) -> QS
 VTheme::VTheme(QObject *parent)
   : QObject(parent)
 {
+    bool isProcessingColorSchemeChange = false;
+
 #if QT_VERSION >= QT_VERSION_CHECK(6, 5, 0)
-    QStyleHints *hints = QGuiApplication::styleHints();
-    connect(hints, &QStyleHints::colorSchemeChanged, this,
-            [this]()
+    auto colorSchemeChangedSlot = [this, &isProcessingColorSchemeChange]()
+    {
+        if (isProcessingColorSchemeChange)
+        {
+            return; // Already processing, avoid recursion
+        }
+
+        isProcessingColorSchemeChange = true;
+
+        VCommonSettings *settings = VAbstractApplication::VApp()->Settings();
+        VThemeMode themeMode = settings->GetThemeMode();
+        if (themeMode == VThemeMode::System && VTheme::NativeDarkThemeAvailable())
+        {
+            if (QGuiApplication::styleHints()->colorScheme() == Qt::ColorScheme::Dark)
             {
-                VCommonSettings *settings = VAbstractApplication::VApp()->Settings();
-                VThemeMode themeMode = settings->GetThemeMode();
-                if (themeMode == VThemeMode::System && VTheme::NativeDarkThemeAvailable())
-                {
-                    if (QGuiApplication::styleHints()->colorScheme() == Qt::ColorScheme::Dark)
-                    {
-                        settings->SetThemeMode(VThemeMode::Light);
-                    }
-                    else
-                    {
-                        settings->SetThemeMode(VThemeMode::Dark);
-                    }
+                settings->SetThemeMode(VThemeMode::Light);
+            }
+            else
+            {
+                settings->SetThemeMode(VThemeMode::Dark);
+            }
 
-                    ResetThemeSettings();
-                    QCoreApplication::processEvents();
-                    settings->SetThemeMode(themeMode);
-                }
+            ResetThemeSettings();
+            QCoreApplication::processEvents();
+            settings->SetThemeMode(themeMode);
+        }
 
-                ResetThemeSettings();
-            });
+        ResetThemeSettings();
+
+        isProcessingColorSchemeChange = false;
+    };
+
+    QStyleHints *hints = QGuiApplication::styleHints();
+    connect(hints, &QStyleHints::colorSchemeChanged, this, colorSchemeChangedSlot);
 #else
     if (VTheme::NativeDarkThemeAvailable())
     {
         m_darkTheme = IsInDarkTheme();
         m_themeTimer = new QTimer(this);
         m_themeTimer->setTimerType(Qt::VeryCoarseTimer);
-        connect(m_themeTimer, &QTimer::timeout, this,
-                [this]()
-                {
-                    bool darkTheme = IsInDarkTheme();
-                    if (m_darkTheme != darkTheme)
-                    {
-                        m_darkTheme = darkTheme;
-                        ResetThemeSettings();
-                    }
-                });
+
+        auto colorSchemeTimeoutCheck = [this, &isProcessingColorSchemeChange]()
+        {
+            if (isProcessingColorSchemeChange)
+            {
+                return; // Already processing, avoid recursion
+            }
+
+            isProcessingColorSchemeChange = true;
+
+            bool darkTheme = IsInDarkTheme();
+            if (m_darkTheme != darkTheme)
+            {
+                m_darkTheme = darkTheme;
+                ResetThemeSettings();
+            }
+
+            isProcessingColorSchemeChange = false;
+        };
+
+        connect(m_themeTimer, &QTimer::timeout, this, colorSchemeTimeoutCheck);
         m_themeTimer->start(V_SECONDS(5));
     }
 #endif // QT_VERSION >= QT_VERSION_CHECK(6, 5, 0)
