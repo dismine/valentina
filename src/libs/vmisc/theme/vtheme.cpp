@@ -86,7 +86,7 @@ bool GetTrueWindowsVersion(RTL_OSVERSIONINFOW &osVersionInfo)
     RtlGetVersionFunc pRtlGetVersion = nullptr;
 
     // Load the System-DLL
-    HINSTANCE hNTdllDll = LoadLibrary(L"ntdll.dll");
+    HMODULE hNTdllDll = LoadLibrary(L"ntdll.dll");
 
     // Successfully loaded?
     if (hNTdllDll != nullptr)
