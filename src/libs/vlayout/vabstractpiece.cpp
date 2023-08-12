@@ -607,7 +607,7 @@ auto AngleBySecondRightAngle(QVector<VRawSAPoint> points, QPointF p1, QPointF p2
         if (success)
         {
             points = temp;
-            px = ConstLast(points);
+            px = points.constLast();
         }
 
         if (countBefore > 0)
@@ -745,9 +745,9 @@ auto Rollback(QVector<VRawSAPoint> &points, const QLineF &edge) -> bool
 
         if (not points.isEmpty())
         {
-            if (ConstLast(points).toPoint() != ConstFirst(points).toPoint())
+            if (points.constLast().toPoint() != points.constFirst().toPoint())
             {
-                points.append(ConstFirst(points)); // Should be always closed
+                points.append(points.constFirst()); // Should be always closed
             }
         }
     }
@@ -810,7 +810,7 @@ void RollbackByPointsIntersection(QVector<VRawSAPoint> &ekvPoints, const QVector
     const QLineF bigLine1 = VAbstractPiece::ParallelLine(points.at(points.size() - 2), points.at(0), width);
     QVector<VRawSAPoint> temp = ekvPoints;
     temp.insert(ekvPoints.size() - 1, VRawSAPoint(bigLine1.p2(), points.at(0).CurvePoint(), points.at(0).TurnPoint()));
-    bool success = Rollback(temp, QLineF(ConstLast(points), points.at(1)));
+    bool success = Rollback(temp, QLineF(points.constLast(), points.at(1)));
 
     if (success)
     {
@@ -829,7 +829,7 @@ void RollbackBySecondEdgeRightAngle(QVector<VRawSAPoint> &ekvPoints, const QVect
 {
     if (not ekvPoints.isEmpty())
     {
-        const QLineF edge(ConstLast(points), points.at(1));
+        const QLineF edge(points.constLast(), points.at(1));
         const QLineF bigLine1 = VAbstractPiece::ParallelLine(points.at(points.size() - 2), points.at(0), width);
 
         QPointF px;
@@ -841,7 +841,7 @@ void RollbackBySecondEdgeRightAngle(QVector<VRawSAPoint> &ekvPoints, const QVect
         {
             if (ekvPoints.size() > 3)
             {
-                const QLineF edge1(ekvPoints.at(ekvPoints.size() - 2), ConstLast(ekvPoints));
+                const QLineF edge1(ekvPoints.at(ekvPoints.size() - 2), ekvPoints.constLast());
                 const QLineF edge2(ekvPoints.at(0), ekvPoints.at(1));
 
                 QPointF crosPoint;
@@ -866,7 +866,7 @@ void RollbackBySecondEdgeRightAngle(QVector<VRawSAPoint> &ekvPoints, const QVect
             if (success)
             {
                 ekvPoints = temp;
-                px = ConstLast(ekvPoints);
+                px = ekvPoints.constLast();
             }
 
             QLineF seam(px, points.at(1));
@@ -876,15 +876,15 @@ void RollbackBySecondEdgeRightAngle(QVector<VRawSAPoint> &ekvPoints, const QVect
 
             if (not ekvPoints.isEmpty())
             {
-                ekvPoints.append(ConstFirst(ekvPoints));
+                ekvPoints.append(ekvPoints.constFirst());
             }
         }
 
         if (not ekvPoints.isEmpty())
         {
-            if (ConstLast(ekvPoints).toPoint() != ConstFirst(ekvPoints).toPoint())
+            if (ekvPoints.constLast().toPoint() != ekvPoints.constFirst().toPoint())
             {
-                ekvPoints.append(ConstFirst(ekvPoints)); // Should be always closed
+                ekvPoints.append(ekvPoints.constFirst()); // Should be always closed
             }
         }
     }
@@ -1077,7 +1077,7 @@ auto VAbstractPiece::Equidistant(QVector<VSAPoint> points, qreal width, const QS
         return {};
     }
 
-    if (ConstLast(points).toPoint() != ConstFirst(points).toPoint())
+    if (points.constLast().toPoint() != points.constFirst().toPoint())
     {
         points.append(points.at(0)); // Should be always closed
     }
@@ -1097,7 +1097,7 @@ auto VAbstractPiece::Equidistant(QVector<VSAPoint> points, qreal width, const QS
         { // last point
             if (not ekvPoints.isEmpty())
             {
-                ekvPoints.append(ConstFirst(ekvPoints));
+                ekvPoints.append(ekvPoints.constFirst());
             }
             continue;
         }
@@ -1111,7 +1111,7 @@ auto VAbstractPiece::Equidistant(QVector<VSAPoint> points, qreal width, const QS
         QT_WARNING_DISABLE_GCC("-Wswitch-default")
         // This check helps to find missed angle types in the switch
         Q_STATIC_ASSERT_X(static_cast<int>(PieceNodeAngle::LAST_ONE_DO_NOT_USE) == 7, "Not all types were handled.");
-        switch (ConstLast(points).GetAngleType())
+        switch (points.constLast().GetAngleType())
         {
             case PieceNodeAngle::LAST_ONE_DO_NOT_USE:
             case PieceNodeAngle::ByFirstEdgeRightAngle:
@@ -1933,9 +1933,9 @@ auto VAbstractPiece::PlaceLabelShape(const VLayoutPlaceLabel &label) -> PlaceLab
         arc.SetApproximationScale(10);
 
         QVector<QPointF> points = arc.GetPoints();
-        if (not points.isEmpty() && ConstFirst(points) != ConstLast(points))
+        if (not points.isEmpty() && points.constFirst() != points.constLast())
         {
-            points.append(ConstFirst(points));
+            points.append(points.constFirst());
         }
 
         QVector<VLayoutPoint> shape3;
@@ -1959,9 +1959,9 @@ auto VAbstractPiece::PlaceLabelShape(const VLayoutPlaceLabel &label) -> PlaceLab
         arc.SetApproximationScale(10);
 
         QVector<QPointF> points = arc.GetPoints();
-        if (not points.isEmpty() && ConstFirst(points) != ConstLast(points))
+        if (not points.isEmpty() && points.constFirst() != points.constLast())
         {
-            points.append(ConstFirst(points));
+            points.append(points.constFirst());
         }
 
         QVector<VLayoutPoint> circle;
@@ -2021,7 +2021,7 @@ auto VAbstractPiece::LabelShapePath(const PlaceLabelImg &shape) -> QPainterPath
     {
         if (not p.isEmpty())
         {
-            path.moveTo(ConstFirst<QPointF>(p));
+            path.moveTo(p.constFirst());
             QVector<QPointF> polygon;
             CastTo(p, polygon);
             path.addPolygon(polygon);

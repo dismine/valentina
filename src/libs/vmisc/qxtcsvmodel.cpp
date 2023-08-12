@@ -46,10 +46,6 @@
 #include <QTextCodec>
 #endif
 
-#if QT_VERSION < QT_VERSION_CHECK(5, 5, 0)
-#include "../vmisc/diagnostic.h"
-#endif // QT_VERSION < QT_VERSION_CHECK(5, 5, 0)
-
 #if QT_VERSION < QT_VERSION_CHECK(5, 14, 0)
 #include "backport/text.h"
 #endif

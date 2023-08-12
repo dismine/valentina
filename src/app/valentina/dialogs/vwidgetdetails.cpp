@@ -35,10 +35,6 @@
 #include "../vtools/undocommands/togglepiecestate.h"
 #include "ui_vwidgetdetails.h"
 
-#if QT_VERSION < QT_VERSION_CHECK(5, 5, 0)
-#include "../vmisc/diagnostic.h"
-#endif // QT_VERSION < QT_VERSION_CHECK(5, 5, 0)
-
 #include <QMenu>
 #include <QTimer>
 #include <QUndoStack>

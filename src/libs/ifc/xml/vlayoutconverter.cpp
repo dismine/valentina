@@ -29,11 +29,6 @@
 #include "../exception/vexception.h"
 #include "../ifcdef.h"
 #include "../vlayout/vlayoutpoint.h"
-#include "compatibility.h"
-
-#if QT_VERSION < QT_VERSION_CHECK(5, 5, 0)
-#include "../vmisc/diagnostic.h"
-#endif // QT_VERSION < QT_VERSION_CHECK(5, 5, 0)
 
 /*
  * Version rules:
@@ -367,7 +362,7 @@ void VLayoutConverter::ConvertPiecesToV0_1_5()
                     return PointToString(line.p1()) + groupSep + PointToString(line.p2());
                 };
 
-                node.firstChild().toText().setData(LineToString(QLineF(ConstFirst(path), ConstLast(path))));
+                node.firstChild().toText().setData(LineToString(QLineF(path.constFirst(), path.constLast())));
             }
         }
     }

@@ -29,12 +29,9 @@
 #ifndef VPOINTF_P_H
 #define VPOINTF_P_H
 
-#include <QSharedData>
-#if QT_VERSION < QT_VERSION_CHECK(5, 5, 0)
-#include "../vmisc/diagnostic.h"
-#endif // QT_VERSION < QT_VERSION_CHECK(5, 5, 0)
 #include "../vmisc/defglobal.h"
 #include <QPointF>
+#include <QSharedData>
 
 QT_WARNING_PUSH
 QT_WARNING_DISABLE_GCC("-Weffc++")

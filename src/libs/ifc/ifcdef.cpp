@@ -35,10 +35,6 @@
 #include <QPen>
 #include <QPixmap>
 
-#if QT_VERSION < QT_VERSION_CHECK(5, 5, 0)
-#include "../vmisc/diagnostic.h"
-#endif // QT_VERSION < QT_VERSION_CHECK(5, 5, 0)
-
 const QString CustomMSign = QStringLiteral("@");
 const QString CustomIncrSign = QStringLiteral("#");
 

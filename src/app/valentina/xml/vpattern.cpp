@@ -281,7 +281,7 @@ void VPattern::setCurrentData()
         return;
     }
 
-    const quint32 id = ConstLast(localHistory).getId();
+    const quint32 id = localHistory.constLast().getId();
     qCDebug(vXML, "Resoring data from tool with id %u", id);
 
     if (tools.isEmpty())
@@ -334,7 +334,7 @@ auto VPattern::GetCompleteData() const -> VContainer
         return (data != nullptr ? *data : VContainer(nullptr, nullptr, VContainer::UniqueNamespace()));
     }
 
-    const quint32 id = (countPP == 1 ? ConstLast(history).getId() : LastToolId());
+    const quint32 id = (countPP == 1 ? history.constLast().getId() : LastToolId());
 
     if (id == NULL_ID)
     {
@@ -369,7 +369,7 @@ auto VPattern::GetCompletePPData(const QString &name) const -> VContainer
         return (data != nullptr ? *data : VContainer(nullptr, nullptr, VContainer::UniqueNamespace()));
     }
 
-    const quint32 id = (countPP == 1 ? ConstLast(history).getId() : PPLastToolId(name));
+    const quint32 id = (countPP == 1 ? history.constLast().getId() : PPLastToolId(name));
 
     if (id == NULL_ID)
     {
@@ -3777,7 +3777,7 @@ auto VPattern::PPLastToolId(const QString &name) const -> quint32
 {
     const QVector<VToolRecord> localHistory = getLocalHistory(name);
 
-    return (not localHistory.isEmpty() ? ConstLast(localHistory).getId() : NULL_ID);
+    return (not localHistory.isEmpty() ? localHistory.constLast().getId() : NULL_ID);
 }
 
 //---------------------------------------------------------------------------------------------------------------------

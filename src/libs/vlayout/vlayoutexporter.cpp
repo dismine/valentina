@@ -52,10 +52,6 @@
 #include "vprintlayout.h"
 #include "vrawlayout.h"
 
-#if QT_VERSION < QT_VERSION_CHECK(5, 5, 0)
-#include "../vmisc/diagnostic.h"
-#endif // QT_VERSION < QT_VERSION_CHECK(5, 5, 0)
-
 namespace
 {
 QT_WARNING_PUSH
@@ -457,11 +453,10 @@ void VLayoutExporter::PdfToPs(const QStringList &params)
     QGuiApplication::restoreOverrideCursor();
 #endif
 
-    QFile f(ConstLast<QString>(params));
+    QFile f(params.constLast());
     if (not f.exists())
     {
-        qCritical() << qUtf8Printable(
-            tr("Creating file '%1' failed! %2").arg(ConstLast<QString>(params), proc.errorString()));
+        qCritical() << qUtf8Printable(tr("Creating file '%1' failed! %2").arg(params.constLast(), proc.errorString()));
     }
 }
 

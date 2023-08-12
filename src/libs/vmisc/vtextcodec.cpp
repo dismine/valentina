@@ -31,7 +31,6 @@
 #include <QStringConverter>
 
 #include "vabstractapplication.h"
-#include "compatibility.h"
 
 namespace
 {
@@ -134,7 +133,7 @@ auto VTextCodec::availableCodecs() -> QList<QByteArray>
     auto i = codecs.constBegin();
     while (i != codecs.constEnd())
     {
-        names.append(ConstFirst(i.value()).toLatin1());
+        names.append(i.value().constFirst().toLatin1());
         ++i;
     }
 
@@ -144,7 +143,7 @@ auto VTextCodec::availableCodecs() -> QList<QByteArray>
 //---------------------------------------------------------------------------------------------------------------------
 auto VTextCodec::name() const -> QString
 {
-    return ConstFirst(QtCodecs().value(m_encoding));
+    return QtCodecs().value(m_encoding).constFirst();
 }
 
 //---------------------------------------------------------------------------------------------------------------------

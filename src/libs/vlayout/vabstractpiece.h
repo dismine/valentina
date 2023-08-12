@@ -274,9 +274,9 @@ inline auto VAbstractPiece::CorrectEquidistantPoints(const QVector<T> &points, b
         }
     }
 
-    if (not buf2.isEmpty() && ConstFirst(buf2) != ConstLast(buf2))
+    if (not buf2.isEmpty() && buf2.constFirst() != buf2.constLast())
     {
-        buf2.append(ConstFirst(buf2));
+        buf2.append(buf2.constFirst());
     }
 
     buf2 = RemoveDublicates(buf2, false);
@@ -297,7 +297,7 @@ inline auto VAbstractPiece::RemoveDublicates(const QVector<T> &points, bool remo
     QVector<T> p;
     p.reserve(points.size());
 
-    p.append(ConstFirst(points));
+    p.append(points.constFirst());
 
     // Default accuracy is not enough
     constexpr qreal accuracy = MmToPixel(0.5);
@@ -408,8 +408,8 @@ template <class T> inline auto VAbstractPiece::CompareFirstAndLastPoints(QVector
         return;
     }
 
-    const T &first = ConstFirst(points);
-    const T &last = ConstLast(points);
+    const T &first = points.constFirst();
+    const T &last = points.constLast();
 
     qreal testAccuracy = accuracy;
     if (last.TurnPoint())
@@ -441,8 +441,8 @@ template <> inline auto VAbstractPiece::CompareFirstAndLastPoints(QVector<VRawSA
         return;
     }
 
-    const VRawSAPoint &first = ConstFirst(points);
-    const VRawSAPoint &last = ConstLast(points);
+    const VRawSAPoint &first = points.constFirst();
+    const VRawSAPoint &last = points.constLast();
 
     qreal testAccuracy = accuracy;
     if ((first.Primary() && last.Primary()) || last.TurnPoint())
@@ -475,7 +475,7 @@ inline auto VAbstractPiece::CompareFirstAndLastPoints<QPointF>(QVector<QPointF> 
         return;
     }
 
-    if (VFuzzyComparePoints(ConstFirst(points), ConstLast(points), accuracy))
+    if (VFuzzyComparePoints(points.constFirst(), points.constLast(), accuracy))
     {
         points.removeLast();
     }
@@ -581,7 +581,7 @@ template <class T> inline auto VAbstractPiece::CheckLoop(const QVector<T> &point
 {
     loopFound = false;
 
-    const bool pathClosed = (ConstFirst(points) == ConstLast(points));
+    const bool pathClosed = (points.constFirst() == points.constLast());
 
     QVector<T> ekvPoints;
     ekvPoints.reserve(points.size());

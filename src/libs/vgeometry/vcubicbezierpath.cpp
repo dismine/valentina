@@ -33,7 +33,6 @@
 #include <QtMath>
 
 #include "../ifc/exception/vexception.h"
-#include "../vmisc/compatibility.h"
 #include "vabstractcurve.h"
 #include "vcubicbezierpath_p.h"
 #include "vspline.h"
@@ -350,7 +349,7 @@ auto VCubicBezierPath::FirstPoint() const -> VPointF
 {
     if (not d->path.isEmpty())
     {
-        return ConstFirst(d->path);
+        return d->path.constFirst();
     }
     return {};
 }

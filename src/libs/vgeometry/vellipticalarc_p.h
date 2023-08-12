@@ -3,9 +3,7 @@
 
 #include <QSharedData>
 #include <QTransform>
-#if QT_VERSION < QT_VERSION_CHECK(5, 5, 0)
-#include "../vmisc/diagnostic.h"
-#endif // QT_VERSION < QT_VERSION_CHECK(5, 5, 0)
+
 #include "../vmisc/defglobal.h"
 
 QT_WARNING_PUSH

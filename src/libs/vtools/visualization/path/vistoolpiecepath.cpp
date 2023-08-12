@@ -29,7 +29,6 @@
 #include "vistoolpiecepath.h"
 #include "../vgeometry/vpointf.h"
 #include "../vlayout/vlayoutpoint.h"
-#include "../vmisc/compatibility.h"
 #include "../vwidgets/scalesceneitems.h"
 #include "../vwidgets/vsimplepoint.h"
 
@@ -66,7 +65,7 @@ void VisToolPiecePath::RefreshGeometry()
             const QVector<VLayoutPoint> points = m_path.PathPoints(GetData());
             if (not points.empty())
             {
-                DrawLine(m_line, QLineF(ConstLast(points), ScenePos()), Qt::DashLine);
+                DrawLine(m_line, QLineF(points.constLast(), ScenePos()), Qt::DashLine);
             }
         }
     }

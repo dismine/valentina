@@ -203,10 +203,6 @@
 #include "../vmisc/backport/qoverload.h"
 #endif // QT_VERSION < QT_VERSION_CHECK(5, 7, 0)
 
-#if QT_VERSION < QT_VERSION_CHECK(5, 5, 0)
-#include "../vmisc/diagnostic.h"
-#endif // QT_VERSION < QT_VERSION_CHECK(5, 5, 0)
-
 #if QT_VERSION < QT_VERSION_CHECK(5, 12, 0)
 #include "../vmisc/backport/qscopeguard.h"
 #else
@@ -4044,7 +4040,7 @@ void MainWindow::on_actionOpen_triggered()
     else
     {
         // Absolute path to last open file
-        dir = QFileInfo(ConstFirst<QString>(files)).absolutePath();
+        dir = QFileInfo(files.constFirst()).absolutePath();
     }
     qCDebug(vMainWindow, "Run QFileDialog::getOpenFileName: dir = %s.", qUtf8Printable(dir));
     const QString filePath = QFileDialog::getOpenFileName(this, tr("Open file"), dir, filter, nullptr,
@@ -7180,7 +7176,7 @@ void MainWindow::ProcessCMD()
 
         VAbstractValApplication::VApp()->SetUserMaterials(cmd->OptUserMaterials());
 
-        const bool loaded = LoadPattern(ConstFirst<QString>(args), cmd->OptMeasurePath());
+        const bool loaded = LoadPattern(args.constFirst(), cmd->OptMeasurePath());
 
         if (not loaded)
         {
@@ -7599,11 +7595,9 @@ void MainWindow::PrintPatternMessage(QEvent *event)
         case QtFatalMsg:
             severity = tr("FATAL");
             break;
-#if QT_VERSION >= QT_VERSION_CHECK(5, 5, 0)
         case QtInfoMsg:
             severity = tr("INFO");
             break;
-#endif
         default:
             break;
     }

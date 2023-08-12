@@ -41,10 +41,6 @@
 #include "version.h"
 #include "vpmainwindow.h"
 
-#if QT_VERSION < QT_VERSION_CHECK(5, 5, 0)
-#include "../vmisc/diagnostic.h"
-#endif // QT_VERSION < QT_VERSION_CHECK(5, 5, 0)
-
 #include <QCommandLineParser>
 #include <QFileOpenEvent>
 #include <QLocalServer>
@@ -106,7 +102,7 @@ inline void noisyFailureMsgHandler(QtMsgType type, const QMessageLogContext &con
 #endif // defined(V_NO_ASSERT)
 
 #if defined(Q_OS_MAC)
-#if QT_VERSION >= QT_VERSION_CHECK(5, 4, 0) && QT_VERSION < QT_VERSION_CHECK(5, 7, 0)
+#if QT_VERSION < QT_VERSION_CHECK(5, 7, 0)
     // Try hide very annoying, Qt related, warnings in Mac OS X
     // QNSView mouseDragged: Internal mouse button tracking invalid (missing Qt::LeftButton)
     // https://bugreports.qt.io/browse/QTBUG-42846
@@ -179,11 +175,9 @@ inline void noisyFailureMsgHandler(QtMsgType type, const QMessageLogContext &con
         case QtFatalMsg:
             vStdErr() << QApplication::translate("mNoisyHandler", "FATAL:") << msg << "\n";
             break;
-#if QT_VERSION >= QT_VERSION_CHECK(5, 5, 0)
         case QtInfoMsg:
             vStdOut() << QApplication::translate("mNoisyHandler", "INFO:") << msg << "\n";
             break;
-#endif
         default:
             break;
     }
@@ -212,12 +206,10 @@ inline void noisyFailureMsgHandler(QtMsgType type, const QMessageLogContext &con
                 messageBox.setWindowTitle(QApplication::translate("mNoisyHandler", "Fatal error"));
                 messageBox.setIcon(QMessageBox::Critical);
                 break;
-#if QT_VERSION >= QT_VERSION_CHECK(5, 5, 0)
             case QtInfoMsg:
                 messageBox.setWindowTitle(QApplication::translate("mNoisyHandler", "Information"));
                 messageBox.setIcon(QMessageBox::Information);
                 break;
-#endif
             case QtDebugMsg:
                 Q_UNREACHABLE(); //-V501
                 break;
@@ -397,7 +389,7 @@ auto VPApplication::MainWindows() -> QList<VPMainWindow *>
 auto VPApplication::NewMainWindow() -> VPMainWindow *
 {
     VPCommandLinePtr cmd;
-    VPCommandLine::ProcessInstance(cmd, {ConstFirst<QString>(VPApplication::arguments())});
+    VPCommandLine::ProcessInstance(cmd, {VPApplication::arguments().constFirst()});
     return NewMainWindow(cmd);
 }
 

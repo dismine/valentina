@@ -55,10 +55,6 @@
 #include "../vpatterndb/vcontainer.h"
 #include "vtextmanager.h"
 
-#if QT_VERSION < QT_VERSION_CHECK(5, 5, 0)
-#include "../vmisc/diagnostic.h"
-#endif // QT_VERSION < QT_VERSION_CHECK(5, 5, 0)
-
 namespace
 {
 QT_WARNING_PUSH
@@ -914,9 +910,9 @@ auto VTextManager::BreakTextIntoLines(const QString &text, const QFont &font, in
             }
             else
             {
-                const int width = TextWidth(fontMetrics, ConstFirst<QString>(subWords));
+                const int width = TextWidth(fontMetrics, subWords.constFirst());
                 const int tWidth = !currentLine.isEmpty() ? currentLineWidth + spaceWidth + width : width;
-                AppendWord(ConstFirst<QString>(subWords), tWidth);
+                AppendWord(subWords.constFirst(), tWidth);
                 lines.append(currentLine);
 
                 if (subWords.size() == 2)
@@ -925,7 +921,7 @@ auto VTextManager::BreakTextIntoLines(const QString &text, const QFont &font, in
                     currentLineWidth = 0;
 
                     // Insert the item after the current item
-                    iterator.insert(ConstLast<QString>(subWords));
+                    iterator.insert(subWords.constLast());
                     iterator.previous();
                 }
             }
@@ -1014,9 +1010,9 @@ auto VTextManager::BreakTextIntoLines(const QString &text, const VSvgFont &font,
             }
             else
             {
-                const int width = qRound(engine.TextWidth(ConstFirst<QString>(subWords), penWidth));
+                const int width = qRound(engine.TextWidth(subWords.constFirst(), penWidth));
                 const int tWidth = !currentLine.isEmpty() ? currentLineWidth + spaceWidth + width : width;
-                AppendWord(ConstFirst<QString>(subWords), tWidth);
+                AppendWord(subWords.constFirst(), tWidth);
                 lines.append(currentLine);
 
                 if (subWords.size() == 2)
@@ -1025,7 +1021,7 @@ auto VTextManager::BreakTextIntoLines(const QString &text, const VSvgFont &font,
                     currentLineWidth = 0;
 
                     // Insert the item after the current item
-                    iterator.insert(ConstLast<QString>(subWords));
+                    iterator.insert(subWords.constLast());
                     iterator.previous();
                 }
             }

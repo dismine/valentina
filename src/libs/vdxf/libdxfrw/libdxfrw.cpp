@@ -21,9 +21,6 @@
 #include <fstream>
 #include <memory>
 #include <sstream>
-#if QT_VERSION < QT_VERSION_CHECK(5, 5, 0)
-#include "../vmisc/diagnostic.h"
-#endif // QT_VERSION < QT_VERSION_CHECK(5, 5, 0)
 
 #define FIRSTHANDLE 48
 

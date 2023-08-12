@@ -19,10 +19,6 @@
 #include "drw_header.h"
 #include "drw_objects.h"
 
-#if QT_VERSION < QT_VERSION_CHECK(5, 5, 0)
-#include "../vmisc/diagnostic.h"
-#endif // QT_VERSION < QT_VERSION_CHECK(5, 5, 0)
-
 QT_WARNING_PUSH
 QT_WARNING_DISABLE_GCC("-Wsuggest-final-types")
 QT_WARNING_DISABLE_GCC("-Wsuggest-final-methods")

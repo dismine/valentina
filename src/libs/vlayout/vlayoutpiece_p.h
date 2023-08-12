@@ -36,11 +36,6 @@
 
 #include "../vpatterndb/floatItemData/floatitemdef.h"
 #include "../vwidgets/vpiecegrainline.h"
-#include "compatibility.h"
-
-#if QT_VERSION < QT_VERSION_CHECK(5, 5, 0)
-#include "../vmisc/diagnostic.h"
-#endif // QT_VERSION < QT_VERSION_CHECK(5, 5, 0)
 
 #if QT_VERSION < QT_VERSION_CHECK(5, 14, 0)
 #include "../vmisc/vdatastreamenum.h"
@@ -262,7 +257,7 @@ inline auto operator>>(QDataStream &dataStream, VLayoutPieceData &piece) -> QDat
     {
         if (shape.size() >= 2)
         {
-            piece.m_grainline = VPieceGrainline(QLineF(ConstFirst(shape), ConstLast(shape)), arrowType);
+            piece.m_grainline = VPieceGrainline(QLineF(shape.constFirst(), shape.constLast()), arrowType);
             piece.m_grainline.SetEnabled(false);
         }
         else

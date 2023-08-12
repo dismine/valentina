@@ -69,7 +69,7 @@ auto GetSeamPassmarkSAPoint(const VPiecePassmarkData &passmarkData, const QVecto
         return PassmarkStatus::Error; // Something wrong
     }
 
-    point = ConstFirst(ekvPoints); // NOLINT(cppcoreguidelines-slicing)
+    point = ekvPoints.constFirst(); // NOLINT(cppcoreguidelines-slicing)
     return needRollback ? PassmarkStatus::Rollback : PassmarkStatus::Common;
 }
 
@@ -197,7 +197,7 @@ auto FixNotchPoint(const QVector<QPointF> &seamAllowance, const VPiecePassmarkDa
         const QVector<QPointF> points = VAbstractCurve::CurveIntersectLine(seamAllowance, axis);
         if (points.size() == 1)
         {
-            *notch = ConstFirst(points);
+            *notch = points.constFirst();
         }
         return true;
     }
@@ -714,7 +714,7 @@ auto VPassmark::FindIntersection(const QLineF &line, const QVector<QPointF> &sea
     QVector<QPointF> intersections = VAbstractCurve::CurveIntersectLine(seamAllowance, testLine);
     if (not intersections.isEmpty())
     {
-        return {line.p1(), ConstLast(intersections)};
+        return {line.p1(), intersections.constLast()};
     }
 
     return line;
@@ -733,9 +733,9 @@ auto VPassmark::PassmarkIntersection(const QVector<QPointF> &path, QLineF line, 
 
     if (not intersections.isEmpty())
     {
-        if (ConstLast(intersections) != m_data.passmarkSAPoint)
+        if (intersections.constLast() != m_data.passmarkSAPoint)
         {
-            line = QLineF(ConstLast(intersections), m_data.passmarkSAPoint);
+            line = QLineF(intersections.constLast(), m_data.passmarkSAPoint);
 
             bool ok = false;
             const qreal length = PassmarkLength(m_data, width, ok);
@@ -1081,19 +1081,19 @@ auto VPassmark::CreatePassmarkLines(const QVector<QLineF> &lines, const QVector<
     {
         if (m_data.passmarkAngleType == PassmarkAngleType::Straightforward)
         {
-            return (*create)(m_data, ConstFirst(lines), seamAllowance);
+            return (*create)(m_data, lines.constFirst(), seamAllowance);
         }
 
         QVector<QLineF> passmarksLines;
 
         if (side == PassmarkSide::All || side == PassmarkSide::Left)
         {
-            passmarksLines += (*create)(m_data, ConstFirst(lines), seamAllowance);
+            passmarksLines += (*create)(m_data, lines.constFirst(), seamAllowance);
         }
 
         if (side == PassmarkSide::All || side == PassmarkSide::Right)
         {
-            passmarksLines += (*create)(m_data, ConstLast(lines), seamAllowance);
+            passmarksLines += (*create)(m_data, lines.constLast(), seamAllowance);
         }
 
         return passmarksLines;
@@ -1104,19 +1104,19 @@ auto VPassmark::CreatePassmarkLines(const QVector<QLineF> &lines, const QVector<
     {
         if (m_data.passmarkAngleType == PassmarkAngleType::Straightforward)
         {
-            return (*create)(m_data, ConstFirst(lines));
+            return (*create)(m_data, lines.constFirst());
         }
 
         QVector<QLineF> passmarksLines;
 
         if (side == PassmarkSide::All || side == PassmarkSide::Left)
         {
-            passmarksLines += (*create)(m_data, ConstFirst(lines));
+            passmarksLines += (*create)(m_data, lines.constFirst());
         }
 
         if (side == PassmarkSide::All || side == PassmarkSide::Right)
         {
-            passmarksLines += (*create)(m_data, ConstLast(lines));
+            passmarksLines += (*create)(m_data, lines.constLast());
         }
 
         return passmarksLines;
@@ -1151,7 +1151,7 @@ auto VPassmark::CreatePassmarkLines(const QVector<QLineF> &lines, const QVector<
     switch (m_data.passmarkLineType)
     {
         case PassmarkLineType::TMark:
-            return CreateTMarkPassmark(m_data, ConstFirst(lines));
+            return CreateTMarkPassmark(m_data, lines.constFirst());
         case PassmarkLineType::OneLine:
         case PassmarkLineType::TwoLines:
         case PassmarkLineType::ThreeLines:
@@ -1161,6 +1161,6 @@ auto VPassmark::CreatePassmarkLines(const QVector<QLineF> &lines, const QVector<
         case PassmarkLineType::BoxMark:
         case PassmarkLineType::CheckMark:
         default:
-            return {ConstFirst(lines)};
+            return {lines.constFirst()};
     }
 }

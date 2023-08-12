@@ -33,7 +33,6 @@
 #include <QPoint>
 
 #include "../ifc/exception/vexception.h"
-#include "../vmisc/compatibility.h"
 #include "vabstractcurve.h"
 #include "vsplinepath_p.h"
 
@@ -365,7 +364,7 @@ auto VSplinePath::ToJson() const -> QJsonObject
 //---------------------------------------------------------------------------------------------------------------------
 auto VSplinePath::GetStartAngle() const -> qreal
 {
-    return CountPoints() > 0 ? ConstFirst(GetSplinePath()).Angle2() : 0;
+    return CountPoints() > 0 ? GetSplinePath().constFirst().Angle2() : 0;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -373,30 +372,28 @@ auto VSplinePath::GetEndAngle() const -> qreal
 {
     if (CountPoints() > 0)
     {
-        return ConstLast(GetSplinePath()).Angle1();
+        return GetSplinePath().constLast().Angle1();
     }
-    else
-    {
-        return 0;
-    }
+
+    return 0;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 auto VSplinePath::GetC1Length() const -> qreal
 {
-    return CountPoints() > 0 ? ConstFirst(GetSplinePath()).Length2() : 0;
+    return CountPoints() > 0 ? GetSplinePath().constFirst().Length2() : 0;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 auto VSplinePath::GetC2Length() const -> qreal
 {
-    return CountPoints() > 0 ? ConstFirst(GetSplinePath()).Length1() : 0;
+    return CountPoints() > 0 ? GetSplinePath().constFirst().Length1() : 0;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 auto VSplinePath::FirstPoint() const -> VPointF
 {
-    return not d->path.isEmpty() ? ConstFirst(d->path).P() : VPointF();
+    return not d->path.isEmpty() ? d->path.constFirst().P() : VPointF();
 }
 
 //---------------------------------------------------------------------------------------------------------------------

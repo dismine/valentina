@@ -81,7 +81,7 @@ auto FillPath(const QVector<QPointF> &path, qreal accuracy) -> QVector<QPointF>
         }
     }
 
-    pathFilled.append(ConstLast(path));
+    pathFilled.append(path.constLast());
 
     return pathFilled;
 }

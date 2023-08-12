@@ -39,7 +39,6 @@
 #include "../vgeometry/vpointf.h"
 #include "../vgeometry/vspline.h"
 #include "../visualization.h"
-#include "../vmisc/compatibility.h"
 #include "../vmisc/vmodifierkey.h"
 #include "../vwidgets/scalesceneitems.h"
 #include "theme/themeDef.h"
@@ -186,7 +185,7 @@ void VisToolCubicBezierPath::Creating(const QVector<VPointF> &pathPoints, vsizet
     {
         case 0:
         {
-            const VPointF &p1 = ConstLast(pathPoints);
+            const VPointF &p1 = pathPoints.constLast();
             if (pathPoints.size() >= 4)
             {
                 QLineF p1p2(static_cast<QPointF>(p1), ScenePos());

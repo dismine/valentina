@@ -49,10 +49,6 @@
 #include "../undocommands/vpundopiecerotate.h"
 #include "../undocommands/vpundoremovesheet.h"
 
-#if QT_VERSION < QT_VERSION_CHECK(5, 5, 0)
-#include "../vmisc/diagnostic.h"
-#endif // QT_VERSION < QT_VERSION_CHECK(5, 5, 0)
-
 #include <QLoggingCategory>
 
 QT_WARNING_PUSH
@@ -466,7 +462,7 @@ void VPMainGraphicsView::RotatePiecesByAngle(qreal angle)
 
     if (pieces.size() == 1)
     {
-        auto *command = new VPUndoPieceRotate(ConstFirst(pieces), origin, angle, m_rotationSum, m_allowChangeMerge);
+        auto *command = new VPUndoPieceRotate(pieces.constFirst(), origin, angle, m_rotationSum, m_allowChangeMerge);
         layout->UndoStack()->push(command);
     }
     else if (pieces.size() > 1)
@@ -500,7 +496,7 @@ void VPMainGraphicsView::TranslatePiecesOn(qreal dx, qreal dy)
         return;
     }
 
-    VPPiecePtr piece = ConstFirst(graphicsPieces)->GetPiece();
+    VPPiecePtr piece = graphicsPieces.constFirst()->GetPiece();
     if (piece.isNull())
     {
         return;
@@ -525,7 +521,7 @@ void VPMainGraphicsView::TranslatePiecesOn(qreal dx, qreal dy)
     QList<VPPiecePtr> pieces = PreparePieces();
     if (pieces.size() == 1)
     {
-        const VPPiecePtr &p = ConstFirst(pieces);
+        const VPPiecePtr &p = pieces.constFirst();
         auto *command = new VPUndoPieceMove(p, dx, dy, m_allowChangeMerge);
         layout->UndoStack()->push(command);
 
@@ -627,7 +623,7 @@ void VPMainGraphicsView::ZValueMove(int move)
 
     if (selectedPieces.size() == 1)
     {
-        layout->UndoStack()->push(new VPUndoPieceZValueMove(ConstFirst(selectedPieces), zMove));
+        layout->UndoStack()->push(new VPUndoPieceZValueMove(selectedPieces.constFirst(), zMove));
     }
     else if (selectedPieces.size() > 1)
     {
@@ -708,7 +704,7 @@ void VPMainGraphicsView::MovePiece(QKeyEvent *event)
                 QList<VPPiecePtr> pieces = PreparePieces();
                 if (pieces.size() == 1)
                 {
-                    const VPPiecePtr &p = ConstFirst(pieces);
+                    const VPPiecePtr &p = pieces.constFirst();
 
                     auto *command = new VPUndoPieceMove(p, m_stickyTranslateX, m_stickyTranslateY, m_allowChangeMerge);
                     layout->UndoStack()->push(command);

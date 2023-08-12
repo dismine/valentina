@@ -27,7 +27,6 @@
  *************************************************************************/
 
 #include "global.h"
-#include "../vmisc/compatibility.h"
 #include "../vmisc/def.h"
 #include "../vmisc/vabstractapplication.h"
 
@@ -56,7 +55,7 @@ auto SceneScale(QGraphicsScene *scene) -> qreal
         const QList<QGraphicsView *> views = scene->views();
         if (not views.isEmpty())
         {
-            scale = ConstFirst(views)->transform().m11();
+            scale = views.constFirst()->transform().m11();
         }
     }
 

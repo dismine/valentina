@@ -197,7 +197,7 @@ auto VPLayout::IsSheetsUniform() const -> bool
         return true;
     }
 
-    const VPSheetPtr &sheet = ConstFirst(sheets);
+    const VPSheetPtr &sheet = sheets.constFirst();
     if (sheet.isNull())
     {
         return false;
@@ -312,7 +312,7 @@ void VPLayout::SetFocusedSheet(const VPSheetPtr &focusedSheet)
     }
     else
     {
-        m_focusedSheet = focusedSheet.isNull() ? ConstFirst(m_sheets) : focusedSheet;
+        m_focusedSheet = focusedSheet.isNull() ? m_sheets.constFirst() : focusedSheet;
     }
 
     emit ActiveSheetChanged(m_focusedSheet);

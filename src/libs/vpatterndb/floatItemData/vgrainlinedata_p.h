@@ -34,9 +34,6 @@
 
 #include "../vmisc/defglobal.h"
 #include "../vmisc/typedef.h"
-#if QT_VERSION < QT_VERSION_CHECK(5, 5, 0)
-#include "../vmisc/diagnostic.h"
-#endif // QT_VERSION < QT_VERSION_CHECK(5, 5, 0)
 #include "floatitemdef.h"
 
 QT_WARNING_PUSH

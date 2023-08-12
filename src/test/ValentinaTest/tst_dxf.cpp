@@ -29,10 +29,7 @@
 
 #include <QtTest>
 
-#include "../vmisc/def.h"
 #include "../vmisc/compatibility.h"
-#include "../vdxf/dxfdef.h"
-#include "../vdxf/libdxfrw/intern/drw_textcodec.h"
 
 #if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
 #include "../vmisc/vtextcodec.h"
@@ -51,25 +48,26 @@ auto AvailableCodecs() -> QStringList
 {
     QList<QByteArray> codecs = VTextCodec::availableCodecs();
     QSet<QString> uniqueNames;
-    for(auto &codec: codecs)
+    for (auto &codec : codecs)
     {
         uniqueNames.insert(codec);
     }
 
     return ConvertToList(uniqueNames);
 }
-}  // namespace
+} // namespace
 
 //---------------------------------------------------------------------------------------------------------------------
 TST_DXF::TST_DXF(QObject *parent)
-    :QObject(parent)
-{}
+  : QObject(parent)
+{
+}
 
 //---------------------------------------------------------------------------------------------------------------------
 void TST_DXF::initTestCase()
 {
     QTextStream ts(stdout);
-    ts << QStringLiteral("Available codecs:\n%2.").arg(AvailableCodecs().join(", "))<< Qt::endl;
+    ts << QStringLiteral("Available codecs:\n%2.").arg(AvailableCodecs().join(", ")) << Qt::endl;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -80,7 +78,7 @@ void TST_DXF::TestCodecPage_data()
 
     QStringList locales = SupportedLocales();
 
-    for (auto & locale : locales)
+    for (auto &locale : locales)
     {
         QTest::newRow(locale.toLatin1()) << locale;
     }
@@ -93,14 +91,14 @@ void TST_DXF::TestCodecPage()
 #if QT_VERSION < QT_VERSION_CHECK(6, 0, 0)
     QFETCH(QString, locale);
 
-    static QMap <QString, QString> locMap = LocaleMap();
+    static QMap<QString, QString> locMap = LocaleMap();
     locMap.insert("en", "ISO8859-1");
     locMap.insert("en_US", "ISO8859-1");
     locMap.insert("en_CA", "ISO8859-1");
     locMap.insert("en_IN", "ISO8859-1");
 
     QString language = QLocale(locale).name();
-    QVERIFY (locMap.contains(language));
+    QVERIFY(locMap.contains(language));
 
     QString codePage = locMap.value(language);
     codePage = codePage.toUpper();
@@ -119,12 +117,11 @@ void TST_DXF::TestCodecPage()
         ++i;
     }
 
-    QVERIFY (not dxfCodePage.isEmpty());
+    QVERIFY(not dxfCodePage.isEmpty());
 
     VTextCodec *codec = DRW_TextCodec::CodecForName(dxfCodePage);
 
-    QVERIFY2(codec != nullptr, qUtf8Printable(QStringLiteral("No codec for dxf codepage %1 found.")
-                                              .arg(dxfCodePage)));
+    QVERIFY2(codec != nullptr, qUtf8Printable(QStringLiteral("No codec for dxf codepage %1 found.").arg(dxfCodePage)));
 #else
     QSKIP("No full support for old codecs since Qt6.");
 #endif

@@ -168,7 +168,7 @@ inline void noisyFailureMsgHandler(QtMsgType type, const QMessageLogContext &con
 #endif // defined(V_NO_ASSERT)
 
 #if defined(Q_OS_MAC)
-#if QT_VERSION >= QT_VERSION_CHECK(5, 4, 0) && QT_VERSION < QT_VERSION_CHECK(5, 7, 0)
+#if QT_VERSION < QT_VERSION_CHECK(5, 7, 0)
     // Try hide very annoying, Qt related, warnings in Mac OS X
     // QNSView mouseDragged: Internal mouse button tracking invalid (missing Qt::LeftButton)
     // https://bugreports.qt.io/browse/QTBUG-42846
@@ -275,7 +275,6 @@ inline void noisyFailureMsgHandler(QtMsgType type, const QMessageLogContext &con
                                  .arg(context.function, context.category, logMsg);
                 vStdErr() << QApplication::translate("vNoisyHandler", "FATAL:") << logMsg << "\n";
                 break;
-#if QT_VERSION >= QT_VERSION_CHECK(5, 5, 0)
             case QtInfoMsg:
                 if (isPatternMessage)
                 {
@@ -287,7 +286,6 @@ inline void noisyFailureMsgHandler(QtMsgType type, const QMessageLogContext &con
                                  .arg(context.function, context.category, logMsg);
                 vStdOut() << QApplication::translate("vNoisyHandler", "INFO:") << logMsg << "\n";
                 break;
-#endif
             default:
                 break;
         }
@@ -325,12 +323,10 @@ inline void noisyFailureMsgHandler(QtMsgType type, const QMessageLogContext &con
                             messageBox.setWindowTitle(QApplication::translate("vNoisyHandler", "Fatal error"));
                             messageBox.setIcon(QMessageBox::Critical);
                             break;
-#if QT_VERSION >= QT_VERSION_CHECK(5, 5, 0)
                         case QtInfoMsg:
                             messageBox.setWindowTitle(QApplication::translate("vNoisyHandler", "Information"));
                             messageBox.setIcon(QMessageBox::Information);
                             break;
-#endif
                         case QtDebugMsg:
                         default:
                             break;

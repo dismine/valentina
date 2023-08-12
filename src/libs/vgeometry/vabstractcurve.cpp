@@ -102,8 +102,8 @@ auto VAbstractCurve::GetSegmentPoints(const QVector<QPointF> &points, const QPoi
 
     if (begin == end)
     {
-        start = ConstFirst(segment);
-        finish = ConstLast(segment);
+        start = segment.constFirst();
+        finish = segment.constLast();
     }
 
     bool ok = false;
@@ -176,7 +176,7 @@ auto VAbstractCurve::FromBegin(const QVector<QPointF> &points, const QPointF &be
         return points;
     }
 
-    if (ConstFirst(points).toPoint() == begin.toPoint())
+    if (points.constFirst().toPoint() == begin.toPoint())
     {
         SetResult(true);
         return points;
@@ -240,9 +240,9 @@ auto VAbstractCurve::ClosestPoint(QPointF scenePoint) const -> QPointF
         return {};
     }
 
-    if (VFuzzyComparePoints(ConstFirst(points), scenePoint))
+    if (VFuzzyComparePoints(points.constFirst(), scenePoint))
     {
-        return ConstFirst(points);
+        return points.constFirst();
     }
 
     QPointF candidatePoint;
@@ -301,7 +301,7 @@ auto VAbstractCurve::GetLengthByPoint(const QPointF &point) const -> qreal
         return -1;
     }
 
-    if (ConstFirst(points).toPoint() == point.toPoint())
+    if (points.constFirst().toPoint() == point.toPoint())
     {
         return 0;
     }

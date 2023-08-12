@@ -34,7 +34,6 @@ VLib {
             "commandoptions.h",
             "qxtcsvmodel.h",
             "vtablesearch.h",
-            "diagnostic.h",
             "customevents.h",
             "defglobal.h",
             "testvapplication.h",

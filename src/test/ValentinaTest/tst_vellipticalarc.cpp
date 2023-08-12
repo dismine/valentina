@@ -487,15 +487,15 @@ void TST_VEllipticalArc::TestGetPoints5()
     if (points.size() > 2 && qFuzzyIsNull(rotationAngle))
     {
         const qreal testAccuracy = ToPixel(1.5, Unit::Mm);
-        ComparePointsDistance(arc.GetP1(), ConstFirst(points), testAccuracy);
-        ComparePointsDistance(arc.GetP2(), ConstLast(points), testAccuracy);
+        ComparePointsDistance(arc.GetP1(), points.constFirst(), testAccuracy);
+        ComparePointsDistance(arc.GetP2(), points.constLast(), testAccuracy);
 
         const qreal eps = 0.15;
 
-        f1 = QLineF(static_cast<QPointF>(center), ConstFirst(points)).angle();
+        f1 = QLineF(static_cast<QPointF>(center), points.constFirst()).angle();
         QVERIFY2(f1 - stAngle <= eps, qUtf8Printable(QStringLiteral("f1: %1; expected: %2").arg(f1).arg(stAngle)));
 
-        f2 = QLineF(static_cast<QPointF>(center), ConstLast(points)).angle();
+        f2 = QLineF(static_cast<QPointF>(center), points.constLast()).angle();
         QVERIFY2(f2 - enAngle <= eps, qUtf8Printable(QStringLiteral("f2: %1; expected: %2").arg(f2).arg(enAngle)));
     }
 }

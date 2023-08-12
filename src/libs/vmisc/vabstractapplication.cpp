@@ -42,7 +42,6 @@
 
 #include "QtConcurrent/qtconcurrentrun.h"
 #include "compatibility.h"
-#include "literals.h"
 #include "svgfont/vsvgfontdatabase.h"
 
 #if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
@@ -112,7 +111,6 @@ VAbstractApplication::VAbstractApplication(int &argc, char **argv)
 {
     QString rules;
 
-#if QT_VERSION >= QT_VERSION_CHECK(5, 4, 1)
 #if defined(V_NO_ASSERT)
     // Ignore SSL-related warnings
     // See issue #528: Error: QSslSocket: cannot resolve SSLv2_client_method.
@@ -121,7 +119,6 @@ VAbstractApplication::VAbstractApplication(int &argc, char **argv)
     rules += QLatin1String("qt.network.ssl.critical=false\n"
                            "qt.network.ssl.fatal=false\n");
 #endif // defined(V_NO_ASSERT)
-#endif // QT_VERSION >= QT_VERSION_CHECK(5, 4, 1)
 
 #if defined(V_NO_ASSERT)
     // See issue #992: QXcbConnection: XCB Error.
@@ -135,7 +132,7 @@ VAbstractApplication::VAbstractApplication(int &argc, char **argv)
         QLoggingCategory::setFilterRules(rules);
     }
 
-#if QT_VERSION >= QT_VERSION_CHECK(5, 6, 0) && QT_VERSION < QT_VERSION_CHECK(6, 0, 0)
+#if QT_VERSION < QT_VERSION_CHECK(6, 0, 0)
     // Enable support for HiDPI bitmap resources
     // The attribute is available since Qt 5.1, but by default disabled.
     // Because on Windows and Mac OS X we always use last version
@@ -538,19 +535,11 @@ void VAbstractApplication::InitHighDpiScaling(int argc, char *argv[])
     /* For more info see: http://doc.qt.io/qt-5/highdpi.html */
     if (IsOptionSet(argc, argv, qPrintable(QLatin1String("--") + LONG_OPTION_NO_HDPI_SCALING)))
     {
-#if QT_VERSION >= QT_VERSION_CHECK(5, 6, 0)
         QCoreApplication::setAttribute(Qt::AA_DisableHighDpiScaling);
-#else
-        qputenv("QT_DEVICE_PIXEL_RATIO", QByteArray("1"));
-#endif
     }
     else
     {
-#if QT_VERSION >= QT_VERSION_CHECK(5, 6, 0)
         QApplication::setAttribute(Qt::AA_EnableHighDpiScaling); // DPI support
-#else
-        qputenv("QT_AUTO_SCREEN_SCALE_FACTOR", QByteArray("1"));
-#endif
     }
 #else
     Q_UNUSED(argc);

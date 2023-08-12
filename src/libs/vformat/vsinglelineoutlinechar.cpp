@@ -28,10 +28,6 @@
 #include "vsinglelineoutlinechar.h"
 #include "../vmisc/compatibility.h"
 
-#if QT_VERSION < QT_VERSION_CHECK(5, 5, 0)
-#include "../vmisc/diagnostic.h"
-#endif // QT_VERSION < QT_VERSION_CHECK(5, 5, 0)
-
 #include <QCache>
 #include <QDir>
 #include <QFile>
@@ -171,7 +167,7 @@ void VSingleLineOutlineChar::LoadCorrections(const QString &dirPath) const
     {
         return;
     }
-    QString filePath = directory.absoluteFilePath(ConstFirst<QString>(matchingFiles));
+    QString filePath = directory.absoluteFilePath(matchingFiles.constFirst());
 
     QFile jsonFile(filePath);
     if (!jsonFile.open(QIODevice::ReadOnly | QIODevice::Text))

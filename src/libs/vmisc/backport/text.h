@@ -33,10 +33,6 @@
 #if QT_VERSION < QT_VERSION_CHECK(5, 14, 0)
 #include <QTextStream>
 
-#if QT_VERSION < QT_VERSION_CHECK(5, 5, 0)
-#include "../vmisc/diagnostic.h"
-#endif // QT_VERSION < QT_VERSION_CHECK(5, 5, 0)
-
 namespace Qt
 {
 QT_WARNING_PUSH

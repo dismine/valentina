@@ -43,31 +43,12 @@
 
 #include "debugbreak.h"
 #include "defglobal.h"
-#if QT_VERSION < QT_VERSION_CHECK(5, 5, 0)
-#include "diagnostic.h"
-#endif // QT_VERSION < QT_VERSION_CHECK(5, 5, 0)
 
 template <class T> class QSharedPointer;
 
 // Header <ciso646> is removed in C++20.
 #if __cplusplus <= 201703L
 #include <ciso646> // and, not, or
-#endif
-
-// Backport of relaxed constexpr
-#if QT_VERSION < QT_VERSION_CHECK(5, 5, 0)
-#if defined Q_COMPILER_CONSTEXPR
-#if defined(__cpp_constexpr) && __cpp_constexpr - 0 >= 201304
-#define Q_DECL_RELAXED_CONSTEXPR constexpr
-#define Q_RELAXED_CONSTEXPR constexpr
-#else
-#define Q_DECL_RELAXED_CONSTEXPR
-#define Q_RELAXED_CONSTEXPR const
-#endif
-#else
-#define Q_DECL_RELAXED_CONSTEXPR
-#define Q_RELAXED_CONSTEXPR const
-#endif
 #endif
 
 #if (defined(Q_CC_GNU) && Q_CC_GNU <= 409) && !defined(Q_CC_CLANG)

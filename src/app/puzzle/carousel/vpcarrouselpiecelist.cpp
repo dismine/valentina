@@ -145,7 +145,8 @@ void VPCarrouselPieceList::mouseMoveEvent(QMouseEvent *event)
     if (((event->buttons() & Qt::LeftButton) != 0U) &&
         ((event->pos() - m_dragStart).manhattanLength() >= QApplication::startDragDistance()) &&
         (selectedItems().count() > 0) &&
-        (not m_pieceList.isEmpty() && ConstFirst(m_pieceList)->Sheet() == nullptr)) // only if it's from unplaced pieces
+        (not m_pieceList.isEmpty() &&
+         m_pieceList.constFirst()->Sheet() == nullptr)) // only if it's from unplaced pieces
     {
         startDrag(Qt::MoveAction);
     }
@@ -262,13 +263,13 @@ void VPCarrouselPieceList::contextMenuEvent(QContextMenuEvent *event)
     QAction *removeAction = menu.addAction(tr("Remove from Sheet"));
     removeAction->setVisible(false);
 
-    if (not m_pieceList.isEmpty() && ConstFirst(m_pieceList)->Sheet() == nullptr)
+    if (not m_pieceList.isEmpty() && m_pieceList.constFirst()->Sheet() == nullptr)
     {
         moveAction->setVisible(true);
         deleteAction->setVisible(true);
     }
 
-    if (not m_pieceList.isEmpty() && ConstFirst(m_pieceList)->Sheet() != nullptr)
+    if (not m_pieceList.isEmpty() && m_pieceList.constFirst()->Sheet() != nullptr)
     {
         removeAction->setVisible(true);
     }

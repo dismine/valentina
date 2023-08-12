@@ -51,9 +51,6 @@
 #include "../vgeometry/vpointf.h"
 #include "../vmisc/vabstractapplication.h"
 #include "../vmisc/vcommonsettings.h"
-#if QT_VERSION < QT_VERSION_CHECK(5, 5, 0)
-#include "../vmisc/diagnostic.h"
-#endif // QT_VERSION < QT_VERSION_CHECK(5, 5, 0)
 #include "../vpatterndb/vcontainer.h"
 #include "../vpatterndb/vformula.h"
 #include "../vpatterndb/vtranslatevars.h"

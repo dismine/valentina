@@ -918,7 +918,7 @@ auto VPiece::GetPassmarkSAPoint(const QVector<VPieceNode> &path, vsizetype index
         return false;
     }
 
-    point = ConstFirst(points);
+    point = points.constFirst();
     return true;
 }
 
@@ -1090,11 +1090,7 @@ auto VPiece::CreatePassmark(const QVector<VPieceNode> &path, vsizetype previousI
         const QString infoMsg = tr("Notch for point '%1' in piece '%2' will be disabled. Manual length is less than "
                                    "allowed value.")
                                     .arg(VPiecePath::NodeName(path, passmarkIndex, data), GetName());
-#if QT_VERSION >= QT_VERSION_CHECK(5, 5, 0)
         qInfo() << VAbstractValApplication::warningMessageSignature + infoMsg;
-#else
-        qWarning() << VAbstractValApplication::warningMessageSignature + infoMsg;
-#endif
         return {};
     }
 
@@ -1157,7 +1153,7 @@ auto VPiece::Area(const QVector<QPointF> &shape, const VContainer *data) const -
 
         QVector<QPointF> points;
         CastTo(path.PathPoints(data, shape), points);
-        if (points.isEmpty() || not VFuzzyComparePoints(ConstFirst(points), ConstLast(points)))
+        if (points.isEmpty() || not VFuzzyComparePoints(points.constFirst(), points.constLast()))
         {
             continue;
         }
@@ -1340,7 +1336,7 @@ void VPiece::TestInternalPathCuttingPathIntersection(const VContainer *data) con
 
         QVector<QPointF> points;
         CastTo(path.PathPoints(data, cuttingPoints), points);
-        if (points.isEmpty() || not VFuzzyComparePoints(ConstFirst(points), ConstLast(points)))
+        if (points.isEmpty() || not VFuzzyComparePoints(points.constFirst(), points.constLast()))
         {
             continue;
         }
@@ -1398,7 +1394,7 @@ void VPiece::TestInternalPathsIntersections(const VContainer *data) const
 
         QVector<QPointF> pointsPath1;
         CastTo(path1.PathPoints(data, cuttingPoints), pointsPath1);
-        if (pointsPath1.isEmpty() || not VFuzzyComparePoints(ConstFirst(pointsPath1), ConstLast(pointsPath1)))
+        if (pointsPath1.isEmpty() || not VFuzzyComparePoints(pointsPath1.constFirst(), pointsPath1.constLast()))
         {
             continue;
         }
@@ -1422,7 +1418,7 @@ void VPiece::TestInternalPathsIntersections(const VContainer *data) const
 
             QVector<QPointF> pointsPath2;
             CastTo(path2.PathPoints(data, cuttingPoints), pointsPath2);
-            if (pointsPath2.isEmpty() || not VFuzzyComparePoints(ConstFirst(pointsPath2), ConstLast(pointsPath2)))
+            if (pointsPath2.isEmpty() || not VFuzzyComparePoints(pointsPath2.constFirst(), pointsPath2.constLast()))
             {
                 continue;
             }

@@ -57,16 +57,11 @@
 #include "../vgeometry/vpointf.h"
 #include "../vgeometry/vspline.h"
 #include "../vgeometry/vsplinepath.h"
-#include "../vmisc/compatibility.h"
 #include "../vmisc/vabstractapplication.h"
 #include "../vmisc/vcommonsettings.h"
-#if QT_VERSION < QT_VERSION_CHECK(5, 5, 0)
-#include "../vmisc/diagnostic.h"
-#endif // QT_VERSION < QT_VERSION_CHECK(5, 5, 0)
 #include "../vpatterndb/vcontainer.h"
 #include "../vpatterndb/vformula.h"
 #include "../vpatterndb/vtranslatevars.h"
-#include "../vwidgets/vabstractsimple.h"
 #include "../vwidgets/vmaingraphicsscene.h"
 
 template <class T> class QSharedPointer;
@@ -100,7 +95,7 @@ auto GetOriginPoint(const QVector<SourceItem> &objects, const VContainer *data, 
             case GOType::SplinePath:
             case GOType::CubicBezier:
             case GOType::CubicBezierPath:
-                AppendTo(originObjects, data->GeometricObject<VAbstractCurve>(object.id)->GetPoints());
+                originObjects.append(data->GeometricObject<VAbstractCurve>(object.id)->GetPoints());
                 break;
             case GOType::Unknown:
             case GOType::PlaceLabel:

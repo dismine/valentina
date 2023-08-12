@@ -47,18 +47,12 @@
 #include "../../visualization/line/operation/vistoolflippingbyline.h"
 #include "../../visualization/visualization.h"
 #include "../ifc/xml/vabstractpattern.h"
-#include "../ifc/xml/vdomdocument.h"
 #include "../qmuparser/qmudef.h"
-#include "../vgeometry/vpointf.h"
-#include "../vmisc/compatibility.h"
-#include "../vmisc/vabstractapplication.h"
-#include "../vmisc/vcommonsettings.h"
 #if QT_VERSION < QT_VERSION_CHECK(5, 7, 0)
 #include "../vmisc/backport/qoverload.h"
 #endif // QT_VERSION < QT_VERSION_CHECK(5, 7, 0)
 #include "../../tools/drawTools/operation/vabstractoperation.h"
 #include "../vpatterndb/vcontainer.h"
-#include "../vwidgets/vabstractmainwindow.h"
 #include "../vwidgets/vmaingraphicsscene.h"
 #include "../vwidgets/vmaingraphicsview.h"
 #include "ui_dialogflippingbyline.h"

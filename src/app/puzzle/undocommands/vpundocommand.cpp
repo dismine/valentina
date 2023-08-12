@@ -27,10 +27,6 @@
  *************************************************************************/
 #include "vpundocommand.h"
 
-#if QT_VERSION < QT_VERSION_CHECK(5, 5, 0)
-#include "diagnostic.h"
-#endif // QT_VERSION < QT_VERSION_CHECK(5, 5, 0)
-
 QT_WARNING_PUSH
 QT_WARNING_DISABLE_CLANG("-Wmissing-prototypes")
 QT_WARNING_DISABLE_INTEL(1418)

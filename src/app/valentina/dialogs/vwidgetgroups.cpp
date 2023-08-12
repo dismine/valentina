@@ -134,7 +134,7 @@ auto VWidgetGroups::FilterGroups(const QMap<quint32, VGroupData> &groups) -> QMa
     {
         const VGroupData &data = i.value();
         QSet<QString> groupCategories = ConvertToSet<QString>(data.tags);
-        if (SetIntersects(filterCategories, groupCategories))
+        if (filterCategories.intersects(groupCategories))
         {
             filtered.insert(i.key(), data);
         }

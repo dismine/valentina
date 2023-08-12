@@ -53,10 +53,6 @@
 #include <QTextCodec>
 #endif
 
-#if QT_VERSION < QT_VERSION_CHECK(5, 5, 0)
-#include "../vmisc/diagnostic.h"
-#endif // QT_VERSION < QT_VERSION_CHECK(5, 5, 0)
-
 #include "../vgeometry/vgeometrydef.h"
 #include "../vgeometry/vlayoutplacelabel.h"
 #include "../vlayout/vlayoutpiece.h"
@@ -203,7 +199,7 @@ void VDxfEngine::drawPath(const QPainterPath &path)
             poly->lWeight = DRW_LW_Conv::widthByLayer;
             poly->lineType = GetPenStyle();
 
-            if (polygon.size() > 1 && ConstFirst<QPointF>(polygon) == ConstLast<QPointF>(polygon))
+            if (polygon.size() > 1 && polygon.constFirst() == polygon.constLast())
             {
                 poly->flags |= 0x1; // closed NOLINT(hicpp-signed-bitwise)
             }
@@ -225,7 +221,7 @@ void VDxfEngine::drawPath(const QPainterPath &path)
             poly->color = GetPenColor();
             poly->lWeight = DRW_LW_Conv::widthByLayer;
             poly->lineType = GetPenStyle();
-            if (polygon.size() > 1 && ConstFirst<QPointF>(polygon) == ConstLast<QPointF>(polygon))
+            if (polygon.size() > 1 && polygon.constFirst() == polygon.constLast())
             {
                 poly->flags |= 0x1; // closed NOLINT(hicpp-signed-bitwise)
             }
@@ -1177,20 +1173,20 @@ void VDxfEngine::ExportASTMNotch(const QSharedPointer<dx_ifaceBlock> &detailBloc
                 case PassmarkLineType::ExternalVMark:
                 case PassmarkLineType::InternalVMark:
                 { // V-Notch
-                    QLineF boundaryLine(ConstFirst(passmark.lines).p1(), ConstLast(passmark.lines).p2());
+                    QLineF boundaryLine(passmark.lines.constFirst().p1(), passmark.lines.constLast().p2());
                     notch->thickness = FromPixel(boundaryLine.length(), m_varInsunits); // width
                     notch->layer = *layer4;
                     break;
                 }
                 case PassmarkLineType::TMark:
                     // T-Notch
-                    notch->thickness = FromPixel(ConstLast(passmark.lines).length(), m_varInsunits); // width
+                    notch->thickness = FromPixel(passmark.lines.constLast().length(), m_varInsunits); // width
                     notch->layer = *layer80;
                     break;
                 case PassmarkLineType::BoxMark:
                 { // Castle Notch
-                    QPointF start = ConstFirst(passmark.lines).p1();
-                    QPointF end = ConstLast(passmark.lines).p2();
+                    QPointF start = passmark.lines.constFirst().p1();
+                    QPointF end = passmark.lines.constLast().p2();
 
                     notch->layer = *layer81;
                     notch->thickness = FromPixel(QLineF(start, end).length(), m_varInsunits); // width
@@ -1198,8 +1194,8 @@ void VDxfEngine::ExportASTMNotch(const QSharedPointer<dx_ifaceBlock> &detailBloc
                 }
                 case PassmarkLineType::UMark:
                 { // U-Notch
-                    QPointF start = ConstFirst(passmark.lines).p1();
-                    QPointF end = ConstLast(passmark.lines).p2();
+                    QPointF start = passmark.lines.constFirst().p1();
+                    QPointF end = passmark.lines.constLast().p2();
 
                     notch->thickness = FromPixel(QLineF(start, end).length(), m_varInsunits); // width
 
@@ -1208,8 +1204,8 @@ void VDxfEngine::ExportASTMNotch(const QSharedPointer<dx_ifaceBlock> &detailBloc
                 }
                 case PassmarkLineType::CheckMark:
                 { // Check Notch
-                    const QLineF &line1 = ConstFirst(passmark.lines);
-                    const QLineF &line2 = ConstLast(passmark.lines);
+                    const QLineF &line1 = passmark.lines.constFirst();
+                    const QLineF &line2 = passmark.lines.constLast();
 
                     qreal width = QLineF(line1.p1(), line2.p2()).length();
 
@@ -1346,7 +1342,7 @@ auto VDxfEngine::CreateAAMAPolygon(const QVector<C> &polygon, const UTF8STRING &
     }
     else
     {
-        if (polygon.size() > 1 && ConstFirst<QPointF>(polygon) == ConstLast<QPointF>(polygon))
+        if (polygon.size() > 1 && polygon.constFirst() == polygon.constLast())
         {
             poly->flags |= 0x1; // closed NOLINT(hicpp-signed-bitwise)
         }

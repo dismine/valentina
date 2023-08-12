@@ -187,7 +187,7 @@ auto PreparePrinter(const QPrinterInfo &info, QPrinter::PrinterMode mode) -> QSh
             return {};
         }
 
-        tmpInfo = QPrinterInfo::printerInfo(ConstFirst<QString>(list));
+        tmpInfo = QPrinterInfo::printerInfo(list.constFirst());
     }
 
     auto printer = QSharedPointer<QPrinter>(new QPrinter(tmpInfo, mode));
@@ -706,7 +706,7 @@ void VPMainWindow::InitPropertyTabCurrentPiece()
                 QList<VPPiecePtr> selectedPieces = SelectedPieces();
                 if (selectedPieces.size() == 1)
                 {
-                    const VPPiecePtr &selectedPiece = ConstFirst(selectedPieces);
+                    const VPPiecePtr &selectedPiece = selectedPieces.constFirst();
                     if (not selectedPiece.isNull())
                     {
                         selectedPiece->SetHideMainPath(not checked);
@@ -723,7 +723,7 @@ void VPMainWindow::InitPropertyTabCurrentPiece()
                 QList<VPPiecePtr> selectedPieces = SelectedPieces();
                 if (selectedPieces.size() == 1)
                 {
-                    const VPPiecePtr &selectedPiece = ConstFirst(selectedPieces);
+                    const VPPiecePtr &selectedPiece = selectedPieces.constFirst();
                     if (not selectedPiece.isNull())
                     {
                         if (selectedPiece->IsMirror() != checked)
@@ -1212,7 +1212,7 @@ void VPMainWindow::SetPropertyTabCurrentPieceData()
         ui->groupBoxCurrentPieceSeamline->setVisible(true);
         ui->groupBoxCurrentPieceGeometry->setVisible(true);
 
-        const VPPiecePtr &selectedPiece = ConstFirst(selectedPieces);
+        const VPPiecePtr &selectedPiece = selectedPieces.constFirst();
 
         // set the value to the current piece
         SetLineEditValue(ui->lineEditCurrentPieceName, selectedPiece->GetName());
@@ -1769,11 +1769,7 @@ void VPMainWindow::CreateWindowMenu(QMenu *menu)
             window->isWindowModified() ? title.replace(index, 3, QChar('*')) : title.replace(index, 3, QString());
         }
 
-#if QT_VERSION < QT_VERSION_CHECK(5, 6, 0)
-        QAction *action = menu->addAction(title, this, SLOT(ShowWindow()));
-#else
         QAction *action = menu->addAction(title, this, &VPMainWindow::ShowWindow);
-#endif // QT_VERSION < QT_VERSION_CHECK(5, 6, 0)
         action->setData(i);
         action->setCheckable(true);
         action->setMenuRole(QAction::NoRole);
@@ -3137,7 +3133,7 @@ void VPMainWindow::ZValueMove(int move)
 
     if (selectedPieces.size() == 1)
     {
-        m_layout->UndoStack()->push(new VPUndoPieceZValueMove(ConstFirst(selectedPieces), zMove));
+        m_layout->UndoStack()->push(new VPUndoPieceZValueMove(selectedPieces.constFirst(), zMove));
     }
     else if (selectedPieces.size() > 1)
     {
@@ -3247,7 +3243,7 @@ void VPMainWindow::TranslatePieces()
 
         if (selectedPieces.size() == 1)
         {
-            auto *command = new VPUndoPieceMove(ConstFirst(selectedPieces), pieceDx, pieceDy);
+            auto *command = new VPUndoPieceMove(selectedPieces.constFirst(), pieceDx, pieceDy);
             m_layout->UndoStack()->push(command);
         }
         else
@@ -4195,7 +4191,7 @@ void VPMainWindow::on_actionPrintLayout_triggered()
                         QCoreApplication::applicationVersion());
 
     QList<VPSheetPtr> sheets = m_layout->GetSheets();
-    const VPSheetPtr &firstSheet = ConstFirst(sheets);
+    const VPSheetPtr &firstSheet = sheets.constFirst();
     if (firstSheet.isNull())
     {
         qCritical() << tr("Unable to get sheet page settings");
@@ -4246,7 +4242,7 @@ void VPMainWindow::on_actionPrintPreviewLayout_triggered()
                         QCoreApplication::applicationVersion());
 
     QList<VPSheetPtr> sheets = m_layout->GetSheets();
-    const VPSheetPtr &firstSheet = ConstFirst(sheets);
+    const VPSheetPtr &firstSheet = sheets.constFirst();
     if (firstSheet.isNull())
     {
         qCritical() << tr("Unable to get sheet page settings");
@@ -4281,7 +4277,7 @@ void VPMainWindow::on_actionPrintTiledLayout_triggered()
                         QCoreApplication::applicationVersion());
 
     QList<VPSheetPtr> sheets = m_layout->GetSheets();
-    const VPSheetPtr &firstSheet = ConstFirst(sheets);
+    const VPSheetPtr &firstSheet = sheets.constFirst();
     if (firstSheet.isNull())
     {
         qCritical() << tr("Unable to get sheet page settings");
@@ -4319,7 +4315,7 @@ void VPMainWindow::on_actionPrintPreviewTiledLayout_triggered()
                         QCoreApplication::applicationVersion());
 
     QList<VPSheetPtr> sheets = m_layout->GetSheets();
-    const VPSheetPtr &firstSheet = ConstFirst(sheets);
+    const VPSheetPtr &firstSheet = sheets.constFirst();
     if (firstSheet.isNull())
     {
         qCritical() << tr("Unable to get sheet page settings");

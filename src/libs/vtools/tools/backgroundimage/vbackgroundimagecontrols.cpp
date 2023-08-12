@@ -94,13 +94,11 @@ VBackgroundImageControls::VBackgroundImageControls(VAbstractPattern *doc, QGraph
 
     InitPixmaps();
 
-#if QT_VERSION >= QT_VERSION_CHECK(5, 6, 0)
     QGuiApplication *guiApp = qGuiApp;
     if (guiApp != nullptr)
     {
         connect(guiApp, &QGuiApplication::primaryScreenChanged, this, &VBackgroundImageControls::ScreenChanged);
     }
-#endif
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -490,7 +488,6 @@ void VBackgroundImageControls::InitPixmaps()
 
         const QString resource = QStringLiteral("icon");
 
-#if QT_VERSION >= QT_VERSION_CHECK(5, 5, 0)
         if (QGuiApplication::primaryScreen()->devicePixelRatio() >= 2)
         {
             const QString fileName2x = QStringLiteral("32x32/%1@2x.png").arg(imageName);
@@ -507,11 +504,7 @@ void VBackgroundImageControls::InitPixmaps()
             m_handleHoverPixmaps.insert(type, VTheme::GetPixmapResource(resource, fileNameHover));
             m_handleDisabledPixmaps.insert(type, VTheme::GetPixmapResource(resource, fileNameDisabled));
         }
-#else
-        m_handlePixmaps.insert(type, VTheme::GetPixmapResource(resource, fileName));
-        m_handleHoverPixmaps.insert(type, VTheme::GetPixmapResource(resource, fileNameHover));
-        m_handleDisabledPixmaps.insert(type, VTheme::GetPixmapResource(resource, fileNameDisabled));
-#endif
+
         QPainterPath p = PixmapToPainterPath(m_handlePixmaps.value(type));
         p.setFillRule(Qt::WindingFill);
         p.closeSubpath();

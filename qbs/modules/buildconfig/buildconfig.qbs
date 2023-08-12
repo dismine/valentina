@@ -175,10 +175,7 @@ Module {
             if (Qt.core.versionMinor >= 7) // Qt 5.7
                 return "10.8";
 
-            if (Qt.core.versionMinor >= 4) // Qt 5.4
-                return "10.7";
-
-            return "10.6";
+            return "10.7";
         }
 
         return undefined;

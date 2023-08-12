@@ -48,9 +48,6 @@
 #include "../vgeometry/vabstractcurve.h"
 #include "../vgeometry/vgobject.h"
 #include "../vmisc/def.h"
-#if QT_VERSION < QT_VERSION_CHECK(5, 5, 0)
-#include "../vmisc/diagnostic.h"
-#endif // QT_VERSION < QT_VERSION_CHECK(5, 5, 0)
 #include "variables/vinternalvariable.h"
 #include "vpiece.h"
 #include "vpiecepath.h"

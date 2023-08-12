@@ -31,9 +31,7 @@
 #include <QChar>
 #include <QPainterPath>
 #include <QSharedData>
-#if QT_VERSION < QT_VERSION_CHECK(5, 5, 0)
-#include "../diagnostic.h"
-#endif // QT_VERSION < QT_VERSION_CHECK(5, 5, 0)
+
 #include "../defglobal.h"
 
 QT_WARNING_PUSH

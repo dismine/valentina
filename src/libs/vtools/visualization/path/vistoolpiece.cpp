@@ -78,11 +78,11 @@ void VisToolPiece::RefreshGeometry()
                 DrawPath(path, m_cachedCurvesPath.at(i));
             }
 
-            DrawLine(m_line1, QLineF(ConstFirst(m_cachedMainPathPoints), ScenePos()), Qt::DashLine);
+            DrawLine(m_line1, QLineF(m_cachedMainPathPoints.constFirst(), ScenePos()), Qt::DashLine);
 
             if (m_cachedMainPathPoints.size() > 1)
             {
-                DrawLine(m_line2, QLineF(ConstLast(m_cachedMainPathPoints), ScenePos()), Qt::DashLine);
+                DrawLine(m_line2, QLineF(m_cachedMainPathPoints.constLast(), ScenePos()), Qt::DashLine);
             }
         }
     }

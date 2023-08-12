@@ -47,13 +47,13 @@ void PrepareTestCase(const QPointF &center, qreal startAngle, qreal endAngle)
                                            .arg(radius)
                                            .arg(startAngle)
                                            .arg(endAngle);
-        QTest::newRow(qUtf8Printable(testStartAngle)) << center << startAngle << points << ConstFirst(points) << true;
+        QTest::newRow(qUtf8Printable(testStartAngle)) << center << startAngle << points << points.constFirst() << true;
 
         const QString testEndAngle = QString("Test end angel. Arc radius %1, start angle %2, end angle %3")
                                          .arg(radius)
                                          .arg(startAngle)
                                          .arg(endAngle);
-        QTest::newRow(qUtf8Printable(testEndAngle)) << center << endAngle << points << ConstLast(points) << true;
+        QTest::newRow(qUtf8Printable(testEndAngle)) << center << endAngle << points << points.constLast() << true;
 
         radius += UnitConvertor(5, Unit::Cm, Unit::Px);
     }

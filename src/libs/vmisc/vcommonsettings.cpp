@@ -53,10 +53,6 @@
 #include "defglobal.h"
 #include "literals.h"
 
-#if QT_VERSION < QT_VERSION_CHECK(5, 5, 0)
-#include "diagnostic.h"
-#endif // QT_VERSION < QT_VERSION_CHECK(5, 5, 0)
-
 const int VCommonSettings::defaultScrollingDuration = 300;
 const int VCommonSettings::scrollingDurationMin = 100;
 const int VCommonSettings::scrollingDurationMax = 1000;
@@ -1338,10 +1334,10 @@ void VCommonSettings::SetShowAccuracyRadius(bool value)
 auto VCommonSettings::GetLabelDateFormat() const -> QString
 {
     const QString format =
-        value(*settingLabelDateFormat, ConstFirst<QString>(VCommonSettings::PredefinedDateFormats())).toString();
+        value(*settingLabelDateFormat, VCommonSettings::PredefinedDateFormats().constFirst()).toString();
     const QStringList allFormats = VCommonSettings::PredefinedDateFormats() + GetUserDefinedDateFormats();
 
-    return allFormats.contains(format) ? format : ConstFirst<QString>(VCommonSettings::PredefinedDateFormats());
+    return allFormats.contains(format) ? format : VCommonSettings::PredefinedDateFormats().constFirst();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -1391,10 +1387,10 @@ void VCommonSettings::SetUserDefinedDateFormats(const QStringList &formats)
 auto VCommonSettings::GetLabelTimeFormat() const -> QString
 {
     const QString format =
-        value(*settingLabelTimeFormat, ConstFirst<QString>(VCommonSettings::PredefinedTimeFormats())).toString();
+        value(*settingLabelTimeFormat, VCommonSettings::PredefinedTimeFormats().constFirst()).toString();
     const QStringList allFormats = VCommonSettings::PredefinedTimeFormats() + GetUserDefinedTimeFormats();
 
-    return allFormats.contains(format) ? format : ConstFirst<QString>(VCommonSettings::PredefinedTimeFormats());
+    return allFormats.contains(format) ? format : VCommonSettings::PredefinedTimeFormats().constFirst();
 }
 
 //---------------------------------------------------------------------------------------------------------------------

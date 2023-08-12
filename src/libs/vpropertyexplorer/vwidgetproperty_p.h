@@ -24,9 +24,6 @@
 // ONLY INCLUDE THIS IN .CPP FILES
 
 #include "vproperty_p.h"
-#if QT_VERSION < QT_VERSION_CHECK(5, 5, 0)
-#include "../vmisc/diagnostic.h"
-#endif // QT_VERSION < QT_VERSION_CHECK(5, 5, 0)
 
 #include <QPointer>
 #include <QWidget>

@@ -28,7 +28,6 @@
 
 #include "dialogfinalmeasurements.h"
 #include "../qmuparser/qmudef.h"
-#include "../vmisc/compatibility.h"
 #include "../vmisc/theme/vtheme.h"
 #include "../vmisc/vabstractvalapplication.h"
 #include "../vmisc/vvalentinasettings.h"
@@ -296,7 +295,7 @@ void DialogFinalMeasurements::MoveUp()
         return;
     }
 
-    Move(m_measurements, row, row - 1);
+    m_measurements.move(row, row - 1);
     UpdateTree();
 
     ui->tableWidget->selectRow(row - 1);
@@ -313,7 +312,7 @@ void DialogFinalMeasurements::MoveDown()
         return;
     }
 
-    Move(m_measurements, row, row + 1);
+    m_measurements.move(row, row + 1);
     UpdateTree();
 
     ui->tableWidget->selectRow(row + 1);

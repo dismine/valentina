@@ -218,7 +218,7 @@ auto JoinVectors(const QVector<QPointF> &v1, const QVector<QPointF> &v2) -> QVec
 
     for (auto p : v2)
     {
-        if (not VFuzzyComparePoints(ConstLast(v), p, accuracy))
+        if (not VFuzzyComparePoints(v.constLast(), p, accuracy))
         {
             v.append(p);
         }

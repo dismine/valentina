@@ -45,7 +45,6 @@
 #include "../ifc/exception/vexception.h"
 #include "../ifc/xml/vwatermarkconverter.h"
 #include "../vformat/vwatermark.h"
-#include "../vmisc/compatibility.h"
 #include "../vmisc/vabstractvalapplication.h"
 #include "../vpropertyexplorer/checkablemessagebox.h"
 #include "dialogs/dialoglayoutscale.h"
@@ -126,7 +125,7 @@ auto PreparePrinter(const QPrinterInfo &info, QPrinter::PrinterMode mode) -> QSh
             return {};
         }
 
-        tmpInfo = QPrinterInfo::printerInfo(ConstFirst<QString>(list));
+        tmpInfo = QPrinterInfo::printerInfo(list.constFirst());
     }
 
     auto printer = QSharedPointer<QPrinter>(new QPrinter(tmpInfo, mode));

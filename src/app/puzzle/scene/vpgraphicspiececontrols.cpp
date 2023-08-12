@@ -43,14 +43,9 @@
 #include "../layout/vpsheet.h"
 #include "../undocommands/vpundooriginmove.h"
 #include "../undocommands/vpundopiecerotate.h"
-#include "../vmisc/compatibility.h"
 #include "../vmisc/theme/vscenestylesheet.h"
 #include "../vmisc/theme/vtheme.h"
 #include "../vwidgets/global.h"
-
-#if QT_VERSION < QT_VERSION_CHECK(5, 5, 0)
-#include "../vmisc/diagnostic.h"
-#endif // QT_VERSION < QT_VERSION_CHECK(5, 5, 0)
 
 namespace
 {
@@ -469,7 +464,7 @@ void VPGraphicsPieceControls::mouseMoveEvent(QGraphicsSceneMouseEvent *event)
 
             if (pieces.size() == 1)
             {
-                auto *command = new VPUndoPieceRotate(ConstFirst(pieces), rotationOrigin, rotateOn, m_rotationSum,
+                auto *command = new VPUndoPieceRotate(pieces.constFirst(), rotationOrigin, rotateOn, m_rotationSum,
                                                       allowChangeMerge);
                 layout->UndoStack()->push(command);
             }
@@ -576,7 +571,6 @@ void VPGraphicsPieceControls::InitPixmaps()
 
         const QString resource = QStringLiteral("icon");
 
-#if QT_VERSION >= QT_VERSION_CHECK(5, 5, 0)
         if (QGuiApplication::primaryScreen()->devicePixelRatio() >= 2)
         {
             const QString fileName2x = QStringLiteral("32x32/%1@2x.png").arg(imageName);
@@ -590,10 +584,7 @@ void VPGraphicsPieceControls::InitPixmaps()
             m_handlePixmaps.insert(type, VTheme::GetPixmapResource(resource, fileName));
             m_handleHoverPixmaps.insert(type, VTheme::GetPixmapResource(resource, fileNameHover));
         }
-#else
-        m_handlePixmaps.insert(type, VTheme::GetPixmapResource(resource, fileName));
-        m_handleHoverPixmaps.insert(type, VTheme::GetPixmapResource(resource, fileNameHover));
-#endif
+
         QPainterPath p = PixmapToPainterPath(m_handlePixmaps.value(type));
         p.setFillRule(Qt::WindingFill);
         p.closeSubpath();

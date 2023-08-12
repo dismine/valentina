@@ -30,20 +30,19 @@
 
 #include <QDomNode>
 
-#include "../vmisc/def.h"
-#include "../vmisc/compatibility.h"
 #include "../ifc/xml/vabstractpattern.h"
+#include "../vmisc/compatibility.h"
 #include "vundocommand.h"
 
 //---------------------------------------------------------------------------------------------------------------------
 SaveToolOptions::SaveToolOptions(const QDomElement &oldXml, const QDomElement &newXml,
                                  const QList<quint32> &oldDependencies, const QList<quint32> &newDependencies,
                                  VAbstractPattern *doc, const quint32 &id, QUndoCommand *parent)
-    : VUndoCommand(QDomElement(), doc, parent),
-      oldXml(oldXml),
-      newXml(newXml),
-      oldDependencies(oldDependencies),
-      newDependencies(newDependencies)
+  : VUndoCommand(QDomElement(), doc, parent),
+    oldXml(oldXml),
+    newXml(newXml),
+    oldDependencies(oldDependencies),
+    newDependencies(newDependencies)
 {
     setText(tr("save tool option"));
     nodeId = id;

@@ -12,10 +12,6 @@
 #include "layout/vpsheet.h"
 #include "theme/vtheme.h"
 
-#if QT_VERSION < QT_VERSION_CHECK(5, 5, 0)
-#include "../vmisc/diagnostic.h"
-#endif // QT_VERSION < QT_VERSION_CHECK(5, 5, 0)
-
 namespace
 {
 QT_WARNING_PUSH

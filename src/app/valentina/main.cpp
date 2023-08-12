@@ -104,7 +104,7 @@ auto main(int argc, char *argv[]) -> int
     VApplication app(argc, argv);
     app.InitOptions();
 
-    QT_REQUIRE_VERSION(argc, argv, "5.4.0") // clazy:exclude=qstring-arg,qstring-allocations NOLINT
+    QT_REQUIRE_VERSION(argc, argv, "5.6.0") // clazy:exclude=qstring-arg,qstring-allocations NOLINT
 
 #if QT_VERSION >= QT_VERSION_CHECK(5, 7, 0)
     VApplication::setDesktopFileName(QStringLiteral("ua.com.smart-pattern.valentina.desktop"));

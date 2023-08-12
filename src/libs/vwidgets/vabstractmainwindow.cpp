@@ -112,8 +112,7 @@ auto RecentFiles(const QStringList &paths) -> QStringList
 
         if (optimized.size() >= 3)
         {
-            optimized = QStringList({ConstFirst<QString>(optimized), QStringLiteral("…"),
-                                     ConstLast<QString>(optimized)});
+            optimized = QStringList({optimized.constFirst(), QStringLiteral("…"), optimized.constLast()});
         }
 
         return optimized;

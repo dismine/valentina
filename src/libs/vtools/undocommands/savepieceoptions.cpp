@@ -28,28 +28,24 @@
 
 #include "savepieceoptions.h"
 
+#include <QDebug>
 #include <QDomElement>
 #include <QPointF>
 #include <QUndoCommand>
-#include <QDebug>
 
 #include "../ifc/xml/vabstractpattern.h"
-#include "../ifc/ifcdef.h"
-#include "../vmisc/def.h"
-#include "../vmisc/compatibility.h"
-#include "../vpatterndb/vpiecenode.h"
-#include "../vpatterndb/floatItemData/vpatternlabeldata.h"
-#include "../vpatterndb/floatItemData/vpiecelabeldata.h"
-#include "../vpatterndb/floatItemData/vgrainlinedata.h"
 #include "../tools/vtoolseamallowance.h"
+#include "../vmisc/compatibility.h"
+#include "../vmisc/def.h"
+#include "../vpatterndb/vpiecenode.h"
 #include "vundocommand.h"
 
 //---------------------------------------------------------------------------------------------------------------------
 SavePieceOptions::SavePieceOptions(const VPiece &oldDet, const VPiece &newDet, VAbstractPattern *doc, quint32 id,
                                    QUndoCommand *parent)
-    : VUndoCommand(QDomElement(), doc, parent),
-      m_oldDet(oldDet),
-      m_newDet(newDet)
+  : VUndoCommand(QDomElement(), doc, parent),
+    m_oldDet(oldDet),
+    m_newDet(newDet)
 {
     setText(tr("save detail options"));
     nodeId = id;
@@ -64,7 +60,7 @@ void SavePieceOptions::undo()
     if (domElement.isElement())
     {
         VToolSeamAllowance::AddAttributes(doc, domElement, nodeId, m_oldDet);
-        doc->RemoveAllChildren(domElement);//Very important to clear before rewrite
+        doc->RemoveAllChildren(domElement); // Very important to clear before rewrite
         VToolSeamAllowance::AddPatternPieceData(doc, domElement, m_oldDet);
         VToolSeamAllowance::AddPatternInfo(doc, domElement, m_oldDet);
         VToolSeamAllowance::AddGrainline(doc, domElement, m_oldDet);
@@ -88,7 +84,7 @@ void SavePieceOptions::undo()
 
         DecrementReferences(m_newDet.MissingPlaceLabels(m_oldDet));
         IncrementReferences(m_oldDet.MissingPlaceLabels(m_newDet));
-        
+
         if (VToolSeamAllowance *tool = qobject_cast<VToolSeamAllowance *>(VAbstractPattern::getTool(nodeId)))
         {
             tool->Update(m_oldDet);
@@ -111,7 +107,7 @@ void SavePieceOptions::redo()
     if (domElement.isElement())
     {
         VToolSeamAllowance::AddAttributes(doc, domElement, nodeId, m_newDet);
-        doc->RemoveAllChildren(domElement);//Very important to clear before rewrite
+        doc->RemoveAllChildren(domElement); // Very important to clear before rewrite
         VToolSeamAllowance::AddPatternPieceData(doc, domElement, m_newDet);
         VToolSeamAllowance::AddPatternInfo(doc, domElement, m_newDet);
         VToolSeamAllowance::AddGrainline(doc, domElement, m_newDet);
@@ -181,9 +177,9 @@ auto SavePieceOptions::mergeWith(const QUndoCommand *command) -> bool
 
         for (int i = 0; i < nodes.size(); ++i)
         {
-            if (nodes.at(i).IsExcluded() != candidateNodes.at(i).IsExcluded()
-                    || nodes.at(i).IsCheckUniqueness() != candidateNodes.at(i).IsCheckUniqueness()
-                    || nodes.at(i).IsPassmark() != candidateNodes.at(i).IsPassmark())
+            if (nodes.at(i).IsExcluded() != candidateNodes.at(i).IsExcluded() ||
+                nodes.at(i).IsCheckUniqueness() != candidateNodes.at(i).IsCheckUniqueness() ||
+                nodes.at(i).IsPassmark() != candidateNodes.at(i).IsPassmark())
             {
                 return false;
             }

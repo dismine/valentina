@@ -109,7 +109,6 @@ HEADERS += \
     $$PWD/commandoptions.h \
     $$PWD/qxtcsvmodel.h \
     $$PWD/vtablesearch.h \
-    $$PWD/diagnostic.h \
     $$PWD/dialogs/dialogexporttocsv.h \
     $$PWD/customevents.h \
     $$PWD/defglobal.h \

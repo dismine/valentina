@@ -349,9 +349,9 @@ void TST_VAbstractPiece::TestAreaCalculation_data()
         VArc circle(VPointF(100, 100, QChar('C'), 0, 0), 100, 35, 35);
         circle.SetApproximationScale(maxCurveApproximationScale);
         QVector<QPointF> circlePath = circle.GetPoints();
-        if (not circlePath.isEmpty() && not VFuzzyComparePoints(ConstFirst(circlePath), ConstLast(circlePath)))
+        if (not circlePath.isEmpty() && not VFuzzyComparePoints(circlePath.constFirst(), circlePath.constLast()))
         {
-            circlePath.append(ConstFirst(circlePath));
+            circlePath.append(circlePath.constFirst());
         }
         QTest::newRow("Circle radis 100") << circlePath << M_PI * pow(100, 2);
     }
@@ -362,7 +362,7 @@ void TST_VAbstractPiece::TestAreaCalculation_data()
         sector.SetApproximationScale(maxCurveApproximationScale);
         QVector<QPointF> sectorPath = sector.GetPoints();
         sectorPath.append(sectorCenter.toQPointF());
-        sectorPath.append(ConstFirst(sectorPath));
+        sectorPath.append(sectorPath.constFirst());
         QTest::newRow("Sector radius 100, 30 degree") << sectorPath << (M_PI * pow(100, 2) * 30.0) / 360.0;
     }
 }

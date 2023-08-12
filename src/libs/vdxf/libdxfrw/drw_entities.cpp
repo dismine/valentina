@@ -16,10 +16,6 @@
 #include "intern/drw_dbg.h"
 #include "intern/dxfreader.h"
 #include <cstdlib>
-#if QT_VERSION < QT_VERSION_CHECK(5, 5, 0)
-#include "../vmisc/diagnostic.h"
-#endif // QT_VERSION < QT_VERSION_CHECK(5, 5, 0)
-
 
 //! Calculate arbitrary axis
 /*!

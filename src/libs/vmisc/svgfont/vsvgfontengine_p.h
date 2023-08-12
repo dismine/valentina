@@ -32,9 +32,7 @@
 #include <QChar>
 #include <QHash>
 #include <QSharedData>
-#if QT_VERSION < QT_VERSION_CHECK(5, 5, 0)
-#include "../diagnostic.h"
-#endif // QT_VERSION < QT_VERSION_CHECK(5, 5, 0)
+
 #include "../defglobal.h"
 #include "vsvgglyph.h"
 

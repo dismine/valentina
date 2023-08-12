@@ -60,9 +60,6 @@
 #include "../vpatterndb/vcontainer.h"
 #include "../vpatterndb/vformula.h"
 #include "../vpatterndb/vtranslatevars.h"
-#if QT_VERSION < QT_VERSION_CHECK(5, 5, 0)
-#include "../vmisc/diagnostic.h"
-#endif // QT_VERSION < QT_VERSION_CHECK(5, 5, 0)
 #include "../vwidgets/vmaingraphicsscene.h"
 
 class QDomElement;

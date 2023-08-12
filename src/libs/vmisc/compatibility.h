@@ -52,54 +52,9 @@
 #define REGISTER_META_TYPE_STREAM_OPERATORS(TYPE) qRegisterMetaTypeStreamOperators<TYPE>(#TYPE);
 #endif // QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
 
-#if QT_VERSION < QT_VERSION_CHECK(5, 5, 0)
-#include "diagnostic.h"
-#endif // QT_VERSION < QT_VERSION_CHECK(5, 5, 0)
-
 class QPointF;
 
 // Contains helpful methods to hide version dependent code. It can be deprecation of method or change in API
-
-//---------------------------------------------------------------------------------------------------------------------
-template <typename T, template <typename> class Cont> inline auto ConstFirst(const Cont<T> &container) -> const T &
-{
-#if QT_VERSION >= QT_VERSION_CHECK(5, 6, 0)
-    return container.constFirst();
-#else
-    return container.first(); // clazy:exclude=detaching-temporary
-#endif
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-template <typename T, typename C> inline auto ConstFirst(const C &container) -> const T &
-{
-#if QT_VERSION >= QT_VERSION_CHECK(5, 6, 0)
-    return container.constFirst();
-#else
-    return container.first(); // clazy:exclude=detaching-temporary
-#endif
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-template <typename T, template <typename> class Cont> inline auto ConstLast(const Cont<T> &container) -> const T &
-{
-#if QT_VERSION >= QT_VERSION_CHECK(5, 6, 0)
-    return container.constLast();
-#else
-    return container.last();  // clazy:exclude=detaching-temporary
-#endif
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-template <typename T, typename C> inline auto ConstLast(const C &container) -> const T &
-{
-#if QT_VERSION >= QT_VERSION_CHECK(5, 6, 0)
-    return container.constLast();
-#else
-    return container.last();  // clazy:exclude=detaching-temporary
-#endif
-}
-
 //---------------------------------------------------------------------------------------------------------------------
 template <typename T>
 inline auto Intersects(const T &l1, const T &l2, QPointF *intersectionPoint) -> typename T::IntersectType
@@ -180,29 +135,6 @@ template <typename T> inline auto ConvertToVector(const QSet<T> &container) -> Q
 //}
 
 //---------------------------------------------------------------------------------------------------------------------
-template <typename T> inline void Move(T &vector, int from, int to)
-{
-    QT_WARNING_PUSH
-    // cppcheck-suppress unknownMacro
-    QT_WARNING_DISABLE_GCC("-Wstrict-overflow")
-
-#if QT_VERSION < QT_VERSION_CHECK(5, 6, 0)
-    Q_ASSERT_X(from >= 0 && from < vector.size(), "QVector::move(int,int)", "'from' is out-of-range");
-    Q_ASSERT_X(to >= 0 && to < vector.size(), "QVector::move(int,int)", "'to' is out-of-range");
-    if (from == to) // don't detach when no-op
-    {
-        return;
-    }
-    typename T::iterator b = vector.begin();
-    from < to ? std::rotate(b + from, b + from + 1, b + to + 1) : std::rotate(b + to, b + from, b + from + 1);
-#else
-    vector.move(from, to);
-#endif // QT_VERSION < QT_VERSION_CHECK(5, 6, 0)
-
-    QT_WARNING_POP
-}
-
-//---------------------------------------------------------------------------------------------------------------------
 template <typename T> inline auto Reverse(const QVector<T> &container) -> QVector<T>
 {
     if (container.isEmpty())
@@ -231,42 +163,6 @@ template <typename T, typename std::enable_if<std::is_same<T, QStringList>::valu
 inline auto Reverse(const T &container) -> T
 {
     return Reverse<QString, QList>(container);
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-template <typename Cont, typename Input> inline void AppendTo(Cont &container, const Input &input)
-{
-#if QT_VERSION >= QT_VERSION_CHECK(5, 5, 0)
-    container.append(input);
-#else
-    for (auto &item : input)
-    {
-        container.append(item);
-    }
-#endif // QT_VERSION >= QT_VERSION_CHECK(5, 5, 0)
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-template <typename T> inline auto SetIntersects(const QSet<T> &set1, const QSet<T> &set2) -> bool
-{
-#if QT_VERSION >= QT_VERSION_CHECK(5, 6, 0)
-    return set1.intersects(set2);
-#else
-    const bool otherIsBigger = set2.size() > set1.size();
-    const QSet<T> &smallestSet = otherIsBigger ? set1 : set2;
-    const QSet<T> &biggestSet = otherIsBigger ? set2 : set1;
-    typename QSet<T>::const_iterator i = smallestSet.cbegin();
-    typename QSet<T>::const_iterator e = smallestSet.cend();
-    while (i != e)
-    {
-        if (biggestSet.contains(*i))
-        {
-            return true;
-        }
-        ++i;
-    }
-    return false;
-#endif
 }
 
 //---------------------------------------------------------------------------------------------------------------------

@@ -276,11 +276,11 @@ auto PrepareSAPassmark(const VPiece &piece, const VContainer *pattern, const VPa
 
     if (side == PassmarkSide::All || side == PassmarkSide::Right)
     {
-        layoutPassmark.baseLine = ConstFirst(baseLines);
+        layoutPassmark.baseLine = baseLines.constFirst();
     }
     else if (side == PassmarkSide::Right)
     {
-        layoutPassmark.baseLine = ConstLast(baseLines);
+        layoutPassmark.baseLine = baseLines.constLast();
     }
 
     const QVector<QLineF> lines = passmark.SAPassmark(piece, pattern, side);
@@ -358,7 +358,7 @@ auto PreapreBuiltInSAPassmark(const VPiece &piece, const VContainer *pattern, co
         return {};
     }
 
-    layoutPassmark.baseLine = ConstFirst(baseLines);
+    layoutPassmark.baseLine = baseLines.constFirst();
     layoutPassmark.type = pData.passmarkLineType;
     layoutPassmark.isBuiltIn = true;
     layoutPassmark.isClockwiseOpening = pData.passmarkSAPoint.IsPassmarkClockwiseOpening();
@@ -830,7 +830,7 @@ auto VLayoutPiece::GetPieceTextPosition() const -> QPointF
 {
     if (d->m_detailLabel.count() > 2)
     {
-        return d->m_matrix.map(ConstFirst(d->m_detailLabel));
+        return d->m_matrix.map(d->m_detailLabel.constFirst());
     }
 
     return {};
@@ -914,7 +914,7 @@ auto VLayoutPiece::GetPatternTextPosition() const -> QPointF
 {
     if (d->m_patternInfo.count() > 2)
     {
-        return d->m_matrix.map(ConstFirst(d->m_patternInfo));
+        return d->m_matrix.map(d->m_patternInfo.constFirst());
     }
 
     return {};
@@ -1383,7 +1383,7 @@ auto VLayoutPiece::ContourPath() const -> QPainterPath
             // Draw seam allowance
             QVector<VLayoutPoint> points = GetSeamAllowancePoints();
 
-            if (ConstLast(points).toPoint() != ConstFirst(points).toPoint())
+            if (points.constLast().toPoint() != points.constFirst().toPoint())
             {
                 points.append(points.at(0)); // Should be always closed
             }
@@ -1527,7 +1527,7 @@ auto VLayoutPiece::MapPlaceLabelShape(PlaceLabelImg shape) const -> PlaceLabelIm
 //---------------------------------------------------------------------------------------------------------------------
 auto VLayoutPiece::BoundingRect(QVector<QPointF> points) -> QRectF
 {
-    points.append(ConstFirst(points));
+    points.append(points.constFirst());
     return QPolygonF(points).boundingRect();
 }
 

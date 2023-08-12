@@ -48,7 +48,6 @@
 #include "../vmisc/compatibility.h"
 #include "../vmisc/def.h"
 #include "../vmisc/vabstractvalapplication.h"
-#include "../vmisc/vmath.h"
 
 namespace
 {
@@ -158,11 +157,7 @@ auto VPoster::Tile(QGraphicsItem *parent, const PosterData &img, vsizetype sheet
                    const QString &watermarkPath) const -> QVector<QGraphicsItem *>
 {
     QVector<QGraphicsItem *> data;
-#if QT_VERSION >= QT_VERSION_CHECK(5, 5, 0)
     data.append(Borders(parent, img, sheets));
-#else
-    data += Borders(parent, img, sheets);
-#endif
 
     if (watermarkData.opacity > 0)
     {

@@ -86,7 +86,7 @@ auto CurveStartPoint(VSAPoint candidate, const VContainer *data, const VPieceNod
 
     for (auto &p : intersections)
     {
-        if (VFuzzyComparePoints(p, ConstFirst(curvePoints)) || VFuzzyComparePoints(p, ConstLast(curvePoints)))
+        if (VFuzzyComparePoints(p, curvePoints.constFirst()) || VFuzzyComparePoints(p, curvePoints.constLast()))
         {
             continue;
         }
@@ -126,7 +126,7 @@ auto CurveEndPoint(VSAPoint candidate, const VContainer *data, const VPieceNode 
 
     for (auto &p : intersections)
     {
-        if (VFuzzyComparePoints(p, ConstFirst(curvePoints)) || VFuzzyComparePoints(p, ConstLast(curvePoints)))
+        if (VFuzzyComparePoints(p, curvePoints.constFirst()) || VFuzzyComparePoints(p, curvePoints.constLast()))
         {
             continue;
         }
@@ -181,7 +181,7 @@ template <class T> auto FindTipDirection(const QVector<T> &points) -> qreal
         return 0;
     }
 
-    const T &first = ConstFirst(points);
+    const T &first = points.constFirst();
 
     for (int i = 1; i < points.size(); ++i)
     {
@@ -205,7 +205,7 @@ auto IntersectionWithCuttingContour(const QVector<QPointF> &cuttingPath, const Q
         return false;
     }
 
-    const QPointF &first = ConstFirst(points);
+    const QPointF &first = points.constFirst();
 
     if (VAbstractCurve::IsPointOnCurve(cuttingPath, first))
     { // Point is already part of a cutting contour
@@ -615,7 +615,7 @@ auto VPiecePath::StartSegment(const VContainer *data, const QVector<VPieceNode> 
         points = Reverse(points);
     }
 
-    VSAPoint begin(ConstFirst(points));
+    VSAPoint begin(points.constFirst());
 
     if (nodes.size() > 1)
     {
@@ -650,7 +650,7 @@ auto VPiecePath::EndSegment(const VContainer *data, const QVector<VPieceNode> &n
         points = Reverse(points);
     }
 
-    VSAPoint end(ConstLast(points));
+    VSAPoint end(points.constLast());
 
     if (nodes.size() > 2)
     {

@@ -54,10 +54,6 @@
 #include "../vpatterndb/vcontainer.h"
 #include "def.h"
 
-#if QT_VERSION < QT_VERSION_CHECK(5, 5, 0)
-#include "../vmisc/diagnostic.h"
-#endif // QT_VERSION < QT_VERSION_CHECK(5, 5, 0)
-
 const QString VMeasurements::TagVST = QStringLiteral("vst");
 const QString VMeasurements::TagVIT = QStringLiteral("vit");
 const QString VMeasurements::TagBodyMeasurements = QStringLiteral("body-measurements");

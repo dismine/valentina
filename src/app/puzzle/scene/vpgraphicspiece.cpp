@@ -57,10 +57,6 @@
 #include "undocommands/vpundopiecemove.h"
 #include "vpiecegrainline.h"
 
-#if QT_VERSION < QT_VERSION_CHECK(5, 5, 0)
-#include "../vmisc/diagnostic.h"
-#endif // QT_VERSION < QT_VERSION_CHECK(5, 5, 0)
-
 #include <QLoggingCategory>
 
 QT_WARNING_PUSH
@@ -659,7 +655,7 @@ void VPGraphicsPiece::PaintSeamLine(QPainter *painter, const VPPiecePtr &piece)
         QVector<VLayoutPoint> seamLinePoints = piece->GetMappedContourPoints();
         if (!seamLinePoints.isEmpty())
         {
-            m_seamLine.moveTo(ConstFirst(seamLinePoints));
+            m_seamLine.moveTo(seamLinePoints.constFirst());
             for (int i = 1; i < seamLinePoints.size(); i++)
             {
                 m_seamLine.lineTo(seamLinePoints.at(i));
@@ -684,7 +680,7 @@ void VPGraphicsPiece::PaintCuttingLine(QPainter *painter, const VPPiecePtr &piec
         QVector<VLayoutPoint> cuttingLinepoints = piece->GetMappedSeamAllowancePoints();
         if (!cuttingLinepoints.isEmpty())
         {
-            m_cuttingLine.moveTo(ConstFirst(cuttingLinepoints));
+            m_cuttingLine.moveTo(cuttingLinepoints.constFirst());
             for (int i = 1; i < cuttingLinepoints.size(); i++)
             {
                 m_cuttingLine.lineTo(cuttingLinepoints.at(i));
@@ -773,7 +769,7 @@ void VPGraphicsPiece::PaintStickyPath(QPainter *painter)
 {
     if (not m_stickyPoints.isEmpty())
     {
-        m_stickyPath.moveTo(ConstFirst(m_stickyPoints));
+        m_stickyPath.moveTo(m_stickyPoints.constFirst());
         for (int i = 1; i < m_stickyPoints.size(); i++)
         {
             m_stickyPath.lineTo(m_stickyPoints.at(i));
@@ -833,7 +829,7 @@ void VPGraphicsPiece::GroupMove(const QPointF &pos)
 
     if (pieces.size() == 1)
     {
-        const VPPiecePtr &p = ConstFirst(pieces);
+        const VPPiecePtr &p = pieces.constFirst();
         auto *command = new VPUndoPieceMove(piece, newPos.x(), newPos.y(), m_allowChangeMerge);
         layout->UndoStack()->push(command);
 
