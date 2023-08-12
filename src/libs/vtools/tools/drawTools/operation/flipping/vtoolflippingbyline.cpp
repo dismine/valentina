@@ -28,8 +28,6 @@
 
 #include "vtoolflippingbyline.h"
 
-#include <climits>
-#include <qiterator.h>
 #include <QColor>
 #include <QDomNode>
 #include <QDomNodeList>
@@ -37,14 +35,20 @@
 #include <QPoint>
 #include <QSharedPointer>
 #include <QUndoStack>
+#include <climits>
 #include <new>
+#include <qiterator.h>
 
-#include "../../../../dialogs/tools/dialogtool.h"
 #include "../../../../dialogs/tools/dialogflippingbyline.h"
+#include "../../../../dialogs/tools/dialogtool.h"
 #include "../../../../visualization/line/operation/vistoolflippingbyline.h"
 #include "../../../../visualization/visualization.h"
+#include "../../../vabstracttool.h"
+#include "../../../vdatatool.h"
+#include "../../vdrawtool.h"
+#include "../ifc/exception/vexception.h"
+#include "../ifc/ifcdef.h"
 #include "../vgeometry/vpointf.h"
-#include "../vpatterndb/vtranslatevars.h"
 #include "../vmisc/vabstractapplication.h"
 #include "../vmisc/vcommonsettings.h"
 #if QT_VERSION < QT_VERSION_CHECK(5, 5, 0)
@@ -52,13 +56,9 @@
 #endif // QT_VERSION < QT_VERSION_CHECK(5, 5, 0)
 #include "../vpatterndb/vcontainer.h"
 #include "../vpatterndb/vformula.h"
-#include "../ifc/ifcdef.h"
-#include "../ifc/exception/vexception.h"
+#include "../vpatterndb/vtranslatevars.h"
 #include "../vwidgets/vabstractsimple.h"
 #include "../vwidgets/vmaingraphicsscene.h"
-#include "../../../vabstracttool.h"
-#include "../../../vdatatool.h"
-#include "../../vdrawtool.h"
 
 template <class T> class QSharedPointer;
 
@@ -102,7 +102,7 @@ auto VToolFlippingByLine::Create(const QPointer<DialogTool> &dialog, VMainGraphi
     initData.typeCreation = Source::FromGui;
     initData.notes = dialogTool->GetNotes();
 
-    VToolFlippingByLine* operation = Create(initData);
+    VToolFlippingByLine *operation = Create(initData);
     if (operation != nullptr)
     {
         operation->m_dialog = dialog;
@@ -176,10 +176,10 @@ void VToolFlippingByLine::ShowContextMenu(QGraphicsSceneContextMenuEvent *event,
     {
         ContextMenu<DialogFlippingByLine>(event, id);
     }
-    catch(const VExceptionToolWasDeleted &e)
+    catch (const VExceptionToolWasDeleted &e)
     {
         Q_UNUSED(e)
-        return;//Leave this method immediately!!!
+        return; // Leave this method immediately!!!
     }
 }
 
@@ -216,7 +216,7 @@ void VToolFlippingByLine::SaveDialog(QDomElement &domElement, QList<quint32> &ol
     doc->SetAttribute(domElement, AttrP2Line, QString().setNum(dialogTool->GetSecondLinePointId()));
     doc->SetAttribute(domElement, AttrSuffix, dialogTool->GetSuffix());
     doc->SetAttributeOrRemoveIf<QString>(domElement, AttrNotes, dialogTool->GetNotes(),
-                                         [](const QString &notes) noexcept {return notes.isEmpty();});
+                                         [](const QString &notes) noexcept { return notes.isEmpty(); });
 
     source = dialogTool->GetSourceObjects();
     SaveSourceDestination(domElement);
@@ -250,16 +250,15 @@ auto VToolFlippingByLine::MakeToolTip() const -> QString
     return QStringLiteral("<tr> <td><b>%1:</b> %2</td> </tr>"
                           "<tr> <td><b>%3:</b> %4</td> </tr>"
                           "%5")
-            .arg(tr("First line point"), FirstLinePointName(),
-             tr("Second line point"), SecondLinePointName()) // 1, 2, 3, 4
-            .arg(VisibilityGroupToolTip()); // 5
+        .arg(tr("First line point"), FirstLinePointName(), tr("Second line point"), SecondLinePointName()) // 1, 2, 3, 4
+        .arg(VisibilityGroupToolTip());                                                                    // 5
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 VToolFlippingByLine::VToolFlippingByLine(const VToolFlippingByLineInitData &initData, QGraphicsItem *parent)
-    : VAbstractFlipping(initData, parent),
-      m_firstLinePointId(initData.firstLinePointId),
-      m_secondLinePointId(initData.secondLinePointId)
+  : VAbstractFlipping(initData, parent),
+    m_firstLinePointId(initData.firstLinePointId),
+    m_secondLinePointId(initData.secondLinePointId)
 {
     InitOperatedObjects();
     ToolCreation(initData.typeCreation);

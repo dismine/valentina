@@ -28,13 +28,14 @@
 
 #include "dialogsavelayout.h"
 #include "../core/vapplication.h"
+#include "../ifc/exception/vexception.h"
+#include "../vlayout/vlayoutexporter.h"
 #include "../vmisc/vvalentinasettings.h"
 #include "ui_dialogsavelayout.h"
+
 #if QT_VERSION < QT_VERSION_CHECK(5, 7, 0)
 #include "../vmisc/backport/qoverload.h"
 #endif // QT_VERSION < QT_VERSION_CHECK(5, 7, 0)
-#include "../ifc/exception/vexception.h"
-#include "../vlayout/vlayoutexporter.h"
 
 #if QT_VERSION < QT_VERSION_CHECK(5, 5, 0)
 #include "../vmisc/diagnostic.h"

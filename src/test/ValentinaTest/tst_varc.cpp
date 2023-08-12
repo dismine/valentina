@@ -38,28 +38,33 @@ void PrepareTestCase(const QPointF &center, qreal startAngle, qreal endAngle)
 {
     qreal radius = UnitConvertor(1, Unit::Cm, Unit::Px);
     const qreal threshold = UnitConvertor(2000, Unit::Cm, Unit::Px);
-    while(radius <= threshold)
+    while (radius <= threshold)
     {
         VArc arc(VPointF(center), radius, startAngle, endAngle);
         const QVector<QPointF> points = arc.GetPoints();
 
         const QString testStartAngle = QString("Test start angel. Arc radius %1, start angle %2, end angle %3")
-                                           .arg(radius).arg(startAngle).arg(endAngle);
+                                           .arg(radius)
+                                           .arg(startAngle)
+                                           .arg(endAngle);
         QTest::newRow(qUtf8Printable(testStartAngle)) << center << startAngle << points << ConstFirst(points) << true;
 
         const QString testEndAngle = QString("Test end angel. Arc radius %1, start angle %2, end angle %3")
-                                         .arg(radius).arg(startAngle).arg(endAngle);
+                                         .arg(radius)
+                                         .arg(startAngle)
+                                         .arg(endAngle);
         QTest::newRow(qUtf8Printable(testEndAngle)) << center << endAngle << points << ConstLast(points) << true;
 
         radius += UnitConvertor(5, Unit::Cm, Unit::Px);
     }
 }
-}  // namespace
+} // namespace
 
 //---------------------------------------------------------------------------------------------------------------------
 TST_VArc::TST_VArc(QObject *parent)
-    :AbstractTest(parent)
-{}
+  : AbstractTest(parent)
+{
+}
 
 //---------------------------------------------------------------------------------------------------------------------
 // cppcheck-suppress unusedFunction
@@ -69,7 +74,7 @@ void TST_VArc::CompareTwoWays()
     const qreal radius = 100;
     const qreal f1 = 1;
     const qreal f2 = 46;
-    const qreal length = M_PI*radius/180*(f2-f1);
+    const qreal length = M_PI * radius / 180 * (f2 - f1);
 
     VArc arc1(center, radius, f1, f2);
     VArc arc2(length, center, radius, f1);
@@ -92,7 +97,7 @@ void TST_VArc::NegativeArc()
     const qreal radius = 100;
     const qreal f1 = 1;
     const qreal f2 = 316;
-    const qreal length = M_PI*radius/180*45;
+    const qreal length = M_PI * radius / 180 * 45;
     VArc arc(-length, center, radius, f1);
 
     QCOMPARE(arc.GetLength(), -length);
@@ -209,30 +214,31 @@ void TST_VArc::TestGetPoints()
             const qreal value = qAbs(rLine.length() - radius);
             // cppcheck-suppress unreadVariable
             const QString errorMsg = QString("Broken the first rule. All points should be on the same distance from "
-                                             "the center. Error ='%1'.").arg(value);
+                                             "the center. Error ='%1'.")
+                                         .arg(value);
             QVERIFY2(value <= epsRadius, qUtf8Printable(errorMsg));
         }
     }
 
     {
-        qreal gSquare = 0.0;// geometry square
+        qreal gSquare = 0.0; // geometry square
 
         if (VFuzzyComparePossibleNulls(arc.AngleArc(), 360.0))
-        {// circle square
+        { // circle square
             gSquare = M_PI * radius * radius;
         }
         else
-        {// sector square
+        { // sector square
             gSquare = (M_PI * radius * radius) / 360.0 * arc.AngleArc();
             points.append(static_cast<QPointF>(center));
         }
 
         // calculated square
-        const qreal cSquare = qAbs(VAbstractPiece::SumTrapezoids(points)/2.0);
+        const qreal cSquare = qAbs(VAbstractPiece::SumTrapezoids(points) / 2.0);
         const qreal value = qAbs(gSquare - cSquare);
         // cppcheck-suppress unreadVariable
         const QString errorMsg =
-                QString("Broken the second rule. Interpolation has too big computing error. Error ='%1'.").arg(value);
+            QString("Broken the second rule. Interpolation has too big computing error. Error ='%1'.").arg(value);
         const qreal epsSquare = gSquare * 0.24 / 100; // computing error 0.24 % from origin square
         QVERIFY2(value <= epsSquare, qUtf8Printable(errorMsg));
     }
@@ -311,7 +317,7 @@ void TST_VArc::TestFlip_data()
     l.setAngle(225);
     p1 = l.p2();
 
-    l.setAngle(45+90);
+    l.setAngle(45 + 90);
     l.setLength(5);
 
     const QPointF p1Axis = l.p2();
@@ -341,7 +347,7 @@ void TST_VArc::TestFlip()
 
     QVERIFY2(res.IsFlipped(), qUtf8Printable("The arc is not flipped"));
 
-    QCOMPARE(originArc.GetLength()*-1, res.GetLength());
+    QCOMPARE(originArc.GetLength() * -1, res.GetLength());
     QCOMPARE(originArc.GetRadius(), res.GetRadius());
     QCOMPARE(originArc.AngleArc(), res.AngleArc());
 }
@@ -356,7 +362,7 @@ void TST_VArc::TestCutArc_data()
     QTest::addColumn<qreal>("cutLength");
     QTest::addColumn<QPointF>("cutPoint");
 
-    QPointF center (189.13625196850393, 344.1267401574803);
+    QPointF center(189.13625196850393, 344.1267401574803);
     qreal radius = ToPixel(10, Unit::Cm);
     qreal startAngle = 45.0;
     qreal length = ToPixel(-10, Unit::Cm);
@@ -364,14 +370,14 @@ void TST_VArc::TestCutArc_data()
     QPointF cutPoint(539.3657292513009, 202.04366960088566);
 
     // See file <root>/src/app/share/collection/bugs/Issue_#957.val
-    QTest::newRow("Arc -10 cm length, cut length 6 cm") << center << radius << startAngle << length << cutLength
-                                                        << cutPoint;
+    QTest::newRow("Arc -10 cm length, cut length 6 cm")
+        << center << radius << startAngle << length << cutLength << cutPoint;
 
     cutLength = ToPixel(-4, Unit::Cm);
 
     // Opposite case
-    QTest::newRow("Arc -10 cm length, cut length -4 cm") << center << radius << startAngle << length << cutLength
-                                                         << cutPoint;
+    QTest::newRow("Arc -10 cm length, cut length -4 cm")
+        << center << radius << startAngle << length << cutLength << cutPoint;
 
     startAngle = 135;
     length = ToPixel(10, Unit::Cm);
@@ -379,13 +385,13 @@ void TST_VArc::TestCutArc_data()
     cutPoint = QPointF(-145.1588983496871, 167.78888781060192);
 
     // See file <root>/src/app/share/collection/bugs/Issue_#957.val
-    QTest::newRow("Arc 10 cm length, cut length -7 cm") << center << radius << startAngle << length << cutLength
-                                                        << cutPoint;
+    QTest::newRow("Arc 10 cm length, cut length -7 cm")
+        << center << radius << startAngle << length << cutLength << cutPoint;
 
     // Opposite case
     cutLength = ToPixel(3, Unit::Cm);
-    QTest::newRow("Arc 10 cm length, cut length 3 cm") << center << radius << startAngle << length << cutLength
-                                                       << cutPoint;
+    QTest::newRow("Arc 10 cm length, cut length 3 cm")
+        << center << radius << startAngle << length << cutLength << cutPoint;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -398,7 +404,7 @@ void TST_VArc::TestCutArc()
     QFETCH(qreal, cutLength);
     QFETCH(QPointF, cutPoint);
 
-    VArc arc (length, VPointF(center), radius, startAngle);
+    VArc arc(length, VPointF(center), radius, startAngle);
     arc.SetApproximationScale(0.5);
 
     VArc arc1;

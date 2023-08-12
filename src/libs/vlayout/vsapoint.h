@@ -28,15 +28,16 @@
 #ifndef VSAPOINT_H
 #define VSAPOINT_H
 
-#include <QtGlobal>
 #include <QMetaType>
+#include <QtGlobal>
+
+#include "../vgeometry/vgeometrydef.h"
+#include "../vmisc/def.h"
+#include "vlayoutpoint.h"
 
 #if QT_VERSION < QT_VERSION_CHECK(5, 5, 0)
 #include "../vmisc/diagnostic.h"
 #endif // QT_VERSION < QT_VERSION_CHECK(5, 5, 0)
-#include "../vmisc/def.h"
-#include "../vgeometry/vgeometrydef.h"
-#include "vlayoutpoint.h"
 
 QT_WARNING_PUSH
 QT_WARNING_DISABLE_GCC("-Weffc++")
@@ -99,7 +100,7 @@ public:
 
     static constexpr qreal passmarkFactor{0.5};
     static constexpr qreal maxPassmarkLength{MmToPixel(10.)};
-    static constexpr qreal minSAWidth{accuracyPointOnLine + accuracyPointOnLine*0.5};
+    static constexpr qreal minSAWidth{accuracyPointOnLine + accuracyPointOnLine * 0.5};
 
 private:
     qreal m_before{-1};
@@ -114,23 +115,26 @@ private:
     bool m_passmarkClockwiseOpening{false};
 };
 
-Q_DECLARE_METATYPE(VSAPoint)  // NOLINT
+Q_DECLARE_METATYPE(VSAPoint)                  // NOLINT
 Q_DECLARE_TYPEINFO(VSAPoint, Q_MOVABLE_TYPE); // NOLINT
 
 //---------------------------------------------------------------------------------------------------------------------
 Q_DECL_CONSTEXPR inline VSAPoint::VSAPoint(qreal xpos, qreal ypos)
-    : VLayoutPoint(xpos, ypos)
-{}
+  : VLayoutPoint(xpos, ypos)
+{
+}
 
 //---------------------------------------------------------------------------------------------------------------------
 Q_DECL_CONSTEXPR inline VSAPoint::VSAPoint(QPointF p)
-    : VLayoutPoint(p)
-{}
+  : VLayoutPoint(p)
+{
+}
 
 //---------------------------------------------------------------------------------------------------------------------
 Q_DECL_CONSTEXPR inline VSAPoint::VSAPoint(const VLayoutPoint &p)
-    : VLayoutPoint(p)
-{}
+  : VLayoutPoint(p)
+{
+}
 
 //---------------------------------------------------------------------------------------------------------------------
 Q_DECL_CONSTEXPR inline auto VSAPoint::GetSABefore() const -> qreal

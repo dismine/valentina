@@ -50,6 +50,6 @@ public:
 
 QT_WARNING_POP
 
-}
+} // namespace VPE
 
 #endif // VABSTRACTPROPERTYFACTORY_H

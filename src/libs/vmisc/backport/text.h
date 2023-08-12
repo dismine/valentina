@@ -43,13 +43,13 @@ QT_WARNING_PUSH
 QT_WARNING_DISABLE_GCC("-Wunused-variable")
 QT_WARNING_DISABLE_CLANG("-Wunused-variable")
 
-static auto endl Q_DECL_UNUSED = ::endl; // NOLINT
-static auto flush Q_DECL_UNUSED = ::flush; // NOLINT
-static auto dec Q_DECL_UNUSED = ::dec; // NOLINT
+static auto endl Q_DECL_UNUSED = ::endl;                            // NOLINT
+static auto flush Q_DECL_UNUSED = ::flush;                          // NOLINT
+static auto dec Q_DECL_UNUSED = ::dec;                              // NOLINT
 static auto SkipEmptyParts Q_DECL_UNUSED = QString::SkipEmptyParts; // NOLINT
 
 QT_WARNING_POP
-}  // namespace Qt
+} // namespace Qt
 
 #endif
 

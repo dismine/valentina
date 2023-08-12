@@ -38,10 +38,10 @@ class VPropertyFormViewPrivate : public VPropertyFormWidgetPrivate
 {
 public:
     //! The current property model
-    VPropertyModel* Model;
+    VPropertyModel *Model;
 
     //! The currently used property set
-    VPropertySet* PropertySet;
+    VPropertySet *PropertySet;
 
     //! Determines whether the widget needs to be rebuild
     bool NeedsRebuild;
@@ -50,19 +50,31 @@ public:
     bool IgnoreDataChangedSignal;
 
     VPropertyFormViewPrivate()
-        : VPropertyFormWidgetPrivate(), Model(nullptr), PropertySet(nullptr), NeedsRebuild(false),
-          IgnoreDataChangedSignal(false)
-    {}
+      : VPropertyFormWidgetPrivate(),
+        Model(nullptr),
+        PropertySet(nullptr),
+        NeedsRebuild(false),
+        IgnoreDataChangedSignal(false)
+    {
+    }
 
-    explicit VPropertyFormViewPrivate(VPropertyModel* prop_model)
-        : VPropertyFormWidgetPrivate(), Model(prop_model), PropertySet(nullptr), NeedsRebuild(false),
-          IgnoreDataChangedSignal(false)
-    {}
+    explicit VPropertyFormViewPrivate(VPropertyModel *prop_model)
+      : VPropertyFormWidgetPrivate(),
+        Model(prop_model),
+        PropertySet(nullptr),
+        NeedsRebuild(false),
+        IgnoreDataChangedSignal(false)
+    {
+    }
 
-    explicit VPropertyFormViewPrivate(VPropertySet* prop_set)
-        : VPropertyFormWidgetPrivate(), Model(nullptr), PropertySet(prop_set), NeedsRebuild(false),
-          IgnoreDataChangedSignal(false)
-    {}
+    explicit VPropertyFormViewPrivate(VPropertySet *prop_set)
+      : VPropertyFormWidgetPrivate(),
+        Model(nullptr),
+        PropertySet(prop_set),
+        NeedsRebuild(false),
+        IgnoreDataChangedSignal(false)
+    {
+    }
 
     virtual ~VPropertyFormViewPrivate() override {}
 
@@ -72,6 +84,6 @@ private:
 
 QT_WARNING_POP
 
-}
+} // namespace VPE
 
 #endif // VPROPERTYFORMVIEW_P_H

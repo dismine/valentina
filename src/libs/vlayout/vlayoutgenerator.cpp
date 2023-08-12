@@ -33,42 +33,42 @@
 #include <QRectF>
 #include <QThreadPool>
 
-#include "../vmisc/def.h"
-#include "../vmisc/vmath.h"
-#include "../vmisc/compatibility.h"
-#include "vlayoutpiece.h"
-#include "vlayoutpaper.h"
 #include "../ifc/exception/vexceptionterminatedposition.h"
+#include "../vmisc/compatibility.h"
+#include "../vmisc/def.h"
+#include "vlayoutpaper.h"
+#include "vlayoutpiece.h"
 
 //---------------------------------------------------------------------------------------------------------------------
 VLayoutGenerator::VLayoutGenerator(QObject *parent)
-    : QObject(parent),
-      papers(),
-      bank(new VBank()),
-      paperHeight(0),
-      paperWidth(0),
-      margins(),
-      usePrinterFields(true),
+  : QObject(parent),
+    papers(),
+    bank(new VBank()),
+    paperHeight(0),
+    paperWidth(0),
+    margins(),
+    usePrinterFields(true),
 #ifdef Q_CC_MSVC
-      // See https://stackoverflow.com/questions/15750917/initializing-stdatomic-bool
-      stopGeneration(ATOMIC_VAR_INIT(false)),
+    // See https://stackoverflow.com/questions/15750917/initializing-stdatomic-bool
+    stopGeneration(ATOMIC_VAR_INIT(false)),
 #else
-      stopGeneration(false),
+    stopGeneration(false),
 #endif
-      state(LayoutErrors::NoError),
-      shift(0),
-      rotate(true),
-      followGrainline(false),
-      rotationNumber(2),
-      autoCropLength(false),
-      autoCropWidth(false),
-      saveLength(false),
-      unitePages(false),
-      stripOptimizationEnabled(false),
-      multiplier(1),
-      stripOptimization(false),
-      textAsPaths(false)
-{}
+    state(LayoutErrors::NoError),
+    shift(0),
+    rotate(true),
+    followGrainline(false),
+    rotationNumber(2),
+    autoCropLength(false),
+    autoCropWidth(false),
+    saveLength(false),
+    unitePages(false),
+    stripOptimizationEnabled(false),
+    multiplier(1),
+    stripOptimization(false),
+    textAsPaths(false)
+{
+}
 
 //---------------------------------------------------------------------------------------------------------------------
 VLayoutGenerator::~VLayoutGenerator()
@@ -149,10 +149,10 @@ void VLayoutGenerator::Generate(const QElapsedTimer &timer, qint64 timeout, Layo
 
             auto SetStrip = [this, b](int &side)
             {
-                if (side >= b*2)
+                if (side >= b * 2)
                 {
                     stripOptimizationEnabled = true;
-                    side = qFloor(side / qFloor(side/b));
+                    side = qFloor(side / qFloor(side / b));
                 }
             };
 
@@ -224,7 +224,7 @@ void VLayoutGenerator::Generate(const QElapsedTimer &timer, qint64 timeout, Layo
                 {
                     return;
                 }
-            } while(bank->LeftToArrange() > 0);
+            } while (bank->LeftToArrange() > 0);
 
             if (stopGeneration.load())
             {
@@ -329,7 +329,7 @@ auto VLayoutGenerator::GetGlobalContours() const -> QList<QGraphicsItem *>
 //---------------------------------------------------------------------------------------------------------------------
 auto VLayoutGenerator::GetAllDetailsItems() const -> QList<QList<QGraphicsItem *>>
 {
-    QList<QList<QGraphicsItem *> > list;
+    QList<QList<QGraphicsItem *>> list;
     list.reserve(papers.count());
     for (const auto &paper : papers)
     {
@@ -341,7 +341,7 @@ auto VLayoutGenerator::GetAllDetailsItems() const -> QList<QList<QGraphicsItem *
 //---------------------------------------------------------------------------------------------------------------------
 auto VLayoutGenerator::GetAllDetails() const -> QVector<QVector<VLayoutPiece>>
 {
-    QVector<QVector<VLayoutPiece> > list;
+    QVector<QVector<VLayoutPiece>> list;
     list.reserve(papers.count());
     for (const auto &paper : papers)
     {
@@ -459,9 +459,9 @@ void VLayoutGenerator::GatherPages()
         {
             int paperHeight = qRound(rec.y() + rec.height());
 
-            if (i != papers.size()-1)
+            if (i != papers.size() - 1)
             {
-                paperHeight += qRound(bank->GetLayoutWidth()*2);
+                paperHeight += qRound(bank->GetLayoutWidth() * 2);
             }
 
             if (length + paperHeight <= PageHeight())
@@ -472,7 +472,7 @@ void VLayoutGenerator::GatherPages()
             else
             {
                 length = 0; // Start new paper
-                ++j;// New paper
+                ++j;        // New paper
                 UniteDetails(j, nDetails, length, i);
                 length += paperHeight;
             }
@@ -481,9 +481,9 @@ void VLayoutGenerator::GatherPages()
         {
             int paperWidth = qRound(rec.x() + rec.width());
 
-            if (i != papers.size()-1)
+            if (i != papers.size() - 1)
             {
-                paperWidth += qRound(bank->GetLayoutWidth()*2);
+                paperWidth += qRound(bank->GetLayoutWidth() * 2);
             }
 
             if (length + paperWidth <= PageWidth())
@@ -494,7 +494,7 @@ void VLayoutGenerator::GatherPages()
             else
             {
                 length = 0; // Start new paper
-                ++j;// New paper
+                ++j;        // New paper
                 UniteDetails(j, nDetails, length, i);
                 length += paperWidth;
             }
@@ -534,7 +534,7 @@ void VLayoutGenerator::OptimizeWidth()
         newDetails.reserve(details.size());
         for (auto &d : details)
         {
-            IsPortrait() ? d.Translate(-rec.x()+1, 0) : d.Translate(0, -rec.y()+1);
+            IsPortrait() ? d.Translate(-rec.x() + 1, 0) : d.Translate(0, -rec.y() + 1);
             newDetails.append(d);
         }
 
@@ -551,7 +551,7 @@ void VLayoutGenerator::UnitePages()
     }
 
     QList<qreal> papersLength;
-    QList<QList<VLayoutPiece> > nDetails;
+    QList<QList<VLayoutPiece>> nDetails;
     qreal length = 0;
     int j = 0; // papers count
 
@@ -570,9 +570,9 @@ void VLayoutGenerator::UnitePages()
                 paperHeight = papers.at(i).GetHeight();
             }
 
-            if (i != papers.size()-1)
+            if (i != papers.size() - 1)
             {
-                paperHeight = qRound(paperHeight + bank->GetLayoutWidth()*2);
+                paperHeight = qRound(paperHeight + bank->GetLayoutWidth() * 2);
             }
 
             if (length + paperHeight <= QIMAGE_MAX)
@@ -584,7 +584,7 @@ void VLayoutGenerator::UnitePages()
             else
             {
                 length = 0; // Start new paper
-                ++j;// New paper
+                ++j;        // New paper
                 UniteDetails(j, nDetails, length, i);
                 length += paperHeight;
                 UnitePapers(j, papersLength, length);
@@ -603,9 +603,9 @@ void VLayoutGenerator::UnitePages()
                 paperWidth = papers.at(i).GetWidth();
             }
 
-            if (i != papers.size()-1)
+            if (i != papers.size() - 1)
             {
-                paperWidth = qRound(paperWidth + bank->GetLayoutWidth()*2);
+                paperWidth = qRound(paperWidth + bank->GetLayoutWidth() * 2);
             }
 
             if (length + paperWidth <= QIMAGE_MAX)
@@ -617,7 +617,7 @@ void VLayoutGenerator::UnitePages()
             else
             {
                 length = 0; // Start new paper
-                ++j;// New paper
+                ++j;        // New paper
                 UniteDetails(j, nDetails, length, i);
                 length += paperWidth;
                 UnitePapers(j, papersLength, length);
@@ -629,8 +629,8 @@ void VLayoutGenerator::UnitePages()
     nPapers.reserve(nDetails.size());
     for (int i = 0; i < nDetails.size(); ++i)
     {
-        const int height = IsPortrait() ? qRound(papersLength.at(i)+accuracyPointOnLine*4) : PageHeight();
-        const int width = IsPortrait() ? PageWidth() : qRound(papersLength.at(i)+accuracyPointOnLine*4);
+        const int height = IsPortrait() ? qRound(papersLength.at(i) + accuracyPointOnLine * 4) : PageHeight();
+        const int width = IsPortrait() ? PageWidth() : qRound(papersLength.at(i) + accuracyPointOnLine * 4);
 
         VLayoutPaper paper(height, width, bank->GetLayoutWidth());
         paper.SetShift(shift);
@@ -649,10 +649,10 @@ void VLayoutGenerator::UnitePages()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VLayoutGenerator::UniteDetails(int j, QList<QList<VLayoutPiece> > &nDetails, qreal length, int i) const
+void VLayoutGenerator::UniteDetails(int j, QList<QList<VLayoutPiece>> &nDetails, qreal length, int i) const
 {
     if ((j == 0 && nDetails.isEmpty()) || j >= nDetails.size())
-    {//First or new details in paper
+    { // First or new details in paper
         nDetails.insert(j, MoveDetails(length, papers.at(i).GetDetails()));
     }
     else
@@ -708,7 +708,7 @@ auto VLayoutGenerator::MasterPage() const -> VLayoutPaper
         return ConstFirst(papers);
     }
 
-    QList<QList<VLayoutPiece> > nDetails;
+    QList<QList<VLayoutPiece>> nDetails;
     qreal length = 0;
     const int j = 0; // papers count. Always 1.
 
@@ -727,9 +727,9 @@ auto VLayoutGenerator::MasterPage() const -> VLayoutPaper
                 paperHeight = papers.at(i).GetHeight();
             }
 
-            if (i != papers.size()-1)
+            if (i != papers.size() - 1)
             {
-                paperHeight = qRound(paperHeight + bank->GetLayoutWidth()*2);
+                paperHeight = qRound(paperHeight + bank->GetLayoutWidth() * 2);
             }
 
             UniteDetails(j, nDetails, length, i);
@@ -748,9 +748,9 @@ auto VLayoutGenerator::MasterPage() const -> VLayoutPaper
                 paperWidth = papers.at(i).GetWidth();
             }
 
-            if (i != papers.size()-1)
+            if (i != papers.size() - 1)
             {
-                paperWidth = qRound(paperWidth + bank->GetLayoutWidth()*2);
+                paperWidth = qRound(paperWidth + bank->GetLayoutWidth() * 2);
             }
 
             UniteDetails(j, nDetails, length, i);
@@ -758,8 +758,8 @@ auto VLayoutGenerator::MasterPage() const -> VLayoutPaper
         }
     }
 
-    const int height = IsPortrait() ? qRound(length+accuracyPointOnLine*4) : PageHeight();
-    const int width = IsPortrait() ? PageWidth() : qRound(length+accuracyPointOnLine*4);
+    const int height = IsPortrait() ? qRound(length + accuracyPointOnLine * 4) : PageHeight();
+    const int width = IsPortrait() ? PageWidth() : qRound(length + accuracyPointOnLine * 4);
 
     VLayoutPaper paper(height, width, bank->GetLayoutWidth());
     paper.SetShift(shift);

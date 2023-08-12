@@ -34,7 +34,7 @@ namespace qmu
 
 //---------------------------------------------------------------------------------------------------------------------
 QmuFormulaBase::QmuFormulaBase()
-    :QmuParser()
+  : QmuParser()
 {
 }
 
@@ -55,22 +55,25 @@ void QmuFormulaBase::InitCharSets()
 {
     QString symbolsStr;
     {
-    //String with all unique symbols for supported alphabets.
-    //See script alphabets.py for generation and more information.
-    //Note. MSVC doesn't support normal string concatenation for long string. That's why we use QStringList in this
-    //case.
-    const QStringList symbols
-    {
-        QStringLiteral("ցЀĆЈVӧĎАғΕĖӅИқΝĞơРңњΥĦШҫ̆έجگĮаҳѕεشԶиһνԾрÃυلՆӝшËύՎїPÓՖXӛӟŞãզhëҔծpóӞնxßվāŁЃֆĉЋΊCŬđҐГΒęҘЛΚŘġҠУGا"),
-        QStringLiteral("հЫΪŪدԱҰгβطԹõлκKՁÀуςهՉÈыvیՑÐSOřӘћաőcӐթèkàѓżűðsķչøӥӔĀփӣІĈΏЎґĐΗЖҙĘȚΟОҡĠآΧЦتίЮұİزηжԸغẽοоÁՀقχц"),
-        QStringLiteral("ÉՈيюÑՐђӋіәťӆўáŠĺѐfөըnñŰӤӨӹոľЁրăЉŭċΌБӸēłΔҖЙŤěΜӜDСձģΤӰЩīņحάҮбưԳصδHйԻŇμӴсՃمτƠщՋόєLQŹՓŕÖYśÞaգĽ"),
-        QStringLiteral("æiŽիӓîqճöyջþĂօЄӦΉĊЌΑĒДҗјΙȘĚМΡéĵĢФūӚΩبĪЬүќαذԲдҷιظԺмρՂфÇωوՊьÏՒTŚĻJբdçժlïӪղtպӫAւąЇΆčŃЏΎĕӯЗΖEțŮ"),
-        QStringLiteral("ĝПΞأĥĹЧΦثÆӳЯήIسŲԵзζԽпξكՅÄчφNMՍӌяώӢӲՕÔWÎŝÜџёźեägխoӒյôwĶBžսüЂĄև̈ЊČƏљΓВҕĔӮΛКĜΣТҥĤکΫЪƯخγвŅԴϊضλкԼ"),
-        QStringLiteral("ĴσтÅՄنϋъÍՌRӕՔZÝŜbåդﻩjíլļrӵմӱzýռپêЅքćچΈЍďΐҒЕůėژșΘØҚНğńءΠFҢХħΨҪЭųįҶرΰҲеԷňعθҺнԿفπÂхՇψÊэšՏÒUəÚѝ"),
-        QStringLiteral("ŻşҤӑâeէŐımկòuշÕúտŔ")
-    };
+        // String with all unique symbols for supported alphabets.
+        // See script alphabets.py for generation and more information.
+        // Note. MSVC doesn't support normal string concatenation for long string. That's why we use QStringList in this
+        // case.
+        const QStringList symbols{
+            QStringLiteral(
+                "ցЀĆЈVӧĎАғΕĖӅИқΝĞơРңњΥĦШҫ̆έجگĮаҳѕεشԶиһνԾрÃυلՆӝшËύՎїPÓՖXӛӟŞãզhëҔծpóӞնxßվāŁЃֆĉЋΊCŬđҐГΒęҘЛΚŘġҠУGا"),
+            QStringLiteral("հЫΪŪدԱҰгβطԹõлκKՁÀуςهՉÈыvیՑÐSOřӘћաőcӐթèkàѓżűðsķչøӥӔĀփӣІĈΏЎґĐΗЖҙĘȚΟОҡĠآΧЦتίЮұİزηжԸغẽοоÁՀقχц"),
+            QStringLiteral(
+                "ÉՈيюÑՐђӋіәťӆўáŠĺѐfөըnñŰӤӨӹոľЁրăЉŭċΌБӸēłΔҖЙŤěΜӜDСձģΤӰЩīņحάҮбưԳصδHйԻŇμӴсՃمτƠщՋόєLQŹՓŕÖYśÞaգĽ"),
+            QStringLiteral(
+                "æiŽիӓîqճöyջþĂօЄӦΉĊЌΑĒДҗјΙȘĚМΡéĵĢФūӚΩبĪЬүќαذԲдҷιظԺмρՂфÇωوՊьÏՒTŚĻJբdçժlïӪղtպӫAւąЇΆčŃЏΎĕӯЗΖEțŮ"),
+            QStringLiteral(
+                "ĝПΞأĥĹЧΦثÆӳЯήIسŲԵзζԽпξكՅÄчφNMՍӌяώӢӲՕÔWÎŝÜџёźեägխoӒյôwĶBžսüЂĄև̈ЊČƏљΓВҕĔӮΛКĜΣТҥĤکΫЪƯخγвŅԴϊضλкԼ"),
+            QStringLiteral(
+                "ĴσтÅՄنϋъÍՌRӕՔZÝŜbåդﻩjíլļrӵմӱzýռپêЅքćچΈЍďΐҒЕůėژșΘØҚНğńءΠFҢХħΨҪЭųįҶرΰҲеԷňعθҺнԿفπÂхՇψÊэšՏÒUəÚѝ"),
+            QStringLiteral("ŻşҤӑâeէŐımկòuշÕúտŔ")};
 
-    symbolsStr = symbols.join(QString());
+        symbolsStr = symbols.join(QString());
     }
 
     INIT_LOCALE_VARIABLES(m_locale);
@@ -153,7 +156,7 @@ void QmuFormulaBase::SetSepForTr(bool osSeparator, bool fromUser)
         }
     }
 
-    SetSepForEval();//Same separators (internal) as for eval.
+    SetSepForEval(); // Same separators (internal) as for eval.
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -177,13 +180,13 @@ void QmuFormulaBase::SetSepForEval()
  * @param map map with tokens
  * @param val token that need delete
  */
-void QmuFormulaBase::RemoveAll(QMap<vsizetype, QString> &map, const QString &val)
+void QmuFormulaBase::RemoveAll(QMap<qmusizetype, QString> &map, const QString &val)
 {
-    const QList<vsizetype> listKeys = map.keys(val);//Take all keys that contain token.
+    const QList<qmusizetype> listKeys = map.keys(val); // Take all keys that contain token.
     for (auto key : listKeys)
     {
         map.remove(key);
     }
 }
 
-}// namespace qmu
+} // namespace qmu

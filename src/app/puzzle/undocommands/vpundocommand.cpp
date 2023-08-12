@@ -41,11 +41,13 @@ QT_WARNING_POP
 
 //---------------------------------------------------------------------------------------------------------------------
 VPUndoCommand::VPUndoCommand(QUndoCommand *parent)
-    : QUndoCommand(parent)
-{}
+  : QUndoCommand(parent)
+{
+}
 
 //---------------------------------------------------------------------------------------------------------------------
 VPUndoCommand::VPUndoCommand(bool allowMerge, QUndoCommand *parent)
-    : QUndoCommand(parent),
-      m_allowMerge(allowMerge)
-{}
+  : QUndoCommand(parent),
+    m_allowMerge(allowMerge)
+{
+}

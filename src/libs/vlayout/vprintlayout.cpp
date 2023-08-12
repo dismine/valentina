@@ -27,31 +27,30 @@
  *************************************************************************/
 #include "vprintlayout.h"
 
-#include <QPrinterInfo>
-#include <QMessageBox>
-#include <QSpacerItem>
-#include <QGridLayout>
-#include <QPrintDialog>
-#include <QGuiApplication>
-#include <QDir>
 #include <QDebug>
+#include <QDir>
 #include <QGraphicsRectItem>
+#include <QGraphicsScene>
+#include <QGridLayout>
+#include <QGuiApplication>
+#include <QMessageBox>
+#include <QPageSize>
 #include <QPainter>
 #include <QPixmapCache>
-#include <QGraphicsScene>
+#include <QPrintDialog>
 #include <QPrintPreviewDialog>
-#include <QPageSize>
+#include <QPrinterInfo>
+#include <QSpacerItem>
 
-#include "dialogs/dialoglayoutscale.h"
+#include "../ifc/exception/vexception.h"
+#include "../ifc/xml/vwatermarkconverter.h"
+#include "../vformat/vwatermark.h"
+#include "../vmisc/compatibility.h"
 #include "../vmisc/vabstractvalapplication.h"
+#include "../vpropertyexplorer/checkablemessagebox.h"
+#include "dialogs/dialoglayoutscale.h"
 #include "dialogs/vabstractlayoutdialog.h"
 #include "vposter.h"
-#include "../vformat/vwatermark.h"
-#include "../ifc/xml/vwatermarkconverter.h"
-#include "../ifc/exception/vexception.h"
-#include "../vmisc/vmath.h"
-#include "../vpropertyexplorer/checkablemessagebox.h"
-#include "../vmisc/compatibility.h"
 
 namespace
 {
@@ -59,9 +58,7 @@ namespace
 auto FindPageSizeId(QSizeF size) -> QPageSize::PageSizeId
 {
     auto TestSize = [size](float width, float height)
-    {
-        return size == QSizeF(width, height) || size == QSizeF(height, width);
-    };
+    { return size == QSizeF(width, height) || size == QSizeF(height, width); };
 
     constexpr int A0Width = 841;
     constexpr int A0Height = 1189;
@@ -116,15 +113,15 @@ auto FindPageSizeId(QSizeF size) -> QPageSize::PageSizeId
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-Q_REQUIRED_RESULT auto PreparePrinter(
-        const QPrinterInfo &info, QPrinter::PrinterMode mode = QPrinter::ScreenResolution) -> QSharedPointer<QPrinter>;
+Q_REQUIRED_RESULT auto PreparePrinter(const QPrinterInfo &info, QPrinter::PrinterMode mode = QPrinter::ScreenResolution)
+    -> QSharedPointer<QPrinter>;
 auto PreparePrinter(const QPrinterInfo &info, QPrinter::PrinterMode mode) -> QSharedPointer<QPrinter>
 {
     QPrinterInfo tmpInfo = info;
-    if(tmpInfo.isNull() || tmpInfo.printerName().isEmpty())
+    if (tmpInfo.isNull() || tmpInfo.printerName().isEmpty())
     {
         const QStringList list = QPrinterInfo::availablePrinterNames();
-        if(list.isEmpty())
+        if (list.isEmpty())
         {
             return {};
         }
@@ -136,12 +133,13 @@ auto PreparePrinter(const QPrinterInfo &info, QPrinter::PrinterMode mode) -> QSh
     printer->setResolution(static_cast<int>(PrintDPI));
     return printer;
 }
-}  // namespace
+} // namespace
 
 //---------------------------------------------------------------------------------------------------------------------
 VPrintLayout::VPrintLayout(QObject *parent)
-    : QObject(parent)
-{}
+  : QObject(parent)
+{
+}
 
 //---------------------------------------------------------------------------------------------------------------------
 VPrintLayout::~VPrintLayout()
@@ -161,7 +159,7 @@ void VPrintLayout::PrintOrigin()
 {
     if (not IsPagesUniform())
     {
-        qCritical()<<tr("For printing multipages document all sheet should have the same size.");
+        qCritical() << tr("For printing multipages document all sheet should have the same size.");
         return;
     }
 
@@ -181,7 +179,7 @@ void VPrintLayout::PrintPreviewOrigin()
 {
     if (not IsPagesUniform())
     {
-        qCritical()<<tr("For previewing multipage document all sheet should have the same size.");
+        qCritical() << tr("For previewing multipage document all sheet should have the same size.");
         return;
     }
 
@@ -207,7 +205,7 @@ void VPrintLayout::PdfTiledFile(const QString &name)
     // Call IsPagesFit after setting a printer settings and check if pages is not bigger than printer's paper size
     if (not m_isTiled && not IsPagesFit(printer.pageLayout().paintRectPixels(printer.resolution()).size()))
     {
-        qWarning()<<tr("Pages will be cropped because they do not fit printer paper size.");
+        qWarning() << tr("Pages will be cropped because they do not fit printer paper size.");
     }
 
     printer.setResolution(static_cast<int>(PrintDPI));
@@ -235,7 +233,7 @@ void VPrintLayout::PrintLayout()
     }
     // display print dialog and if accepted print
     QPrinterInfo info = QPrinterInfo::printerInfo(m_layoutPrinterName);
-    if(info.isNull() || info.printerName().isEmpty())
+    if (info.isNull() || info.printerName().isEmpty())
     {
         info = QPrinterInfo::defaultPrinter();
     }
@@ -280,7 +278,7 @@ void VPrintLayout::PrintPreview()
     }
 
     QPrinterInfo info = QPrinterInfo::printerInfo(m_layoutPrinterName);
-    if(info.isNull() || info.printerName().isEmpty())
+    if (info.isNull() || info.printerName().isEmpty())
     {
         info = QPrinterInfo::defaultPrinter();
     }
@@ -324,7 +322,7 @@ void VPrintLayout::PrintPages(QPrinter *printer)
     painter.setRenderHint(QPainter::Antialiasing, true);
     painter.setPen(QPen(Qt::black, VAbstractApplication::VApp()->Settings()->WidthMainLine(), Qt::SolidLine,
                         Qt::RoundCap, Qt::RoundJoin));
-    painter.setBrush ( QBrush ( Qt::NoBrush ) );
+    painter.setBrush(QBrush(Qt::NoBrush));
 
     vsizetype count = 0;
     QSharedPointer<QVector<PosterData>> poster;
@@ -334,7 +332,7 @@ void VPrintLayout::PrintPages(QPrinter *printer)
     {
         // when isTiled, the landscape tiles have to be rotated, because the pages
         // stay portrait in the pdf
-        if(m_tiledPDFOrientation == PageOrientation::Landscape)
+        if (m_tiledPDFOrientation == PageOrientation::Landscape)
         {
             const int angle = -90;
             painter.rotate(angle);
@@ -344,7 +342,7 @@ void VPrintLayout::PrintPages(QPrinter *printer)
         poster = QSharedPointer<QVector<PosterData>>(new QVector<PosterData>());
         posterazor = QSharedPointer<VPoster>(new VPoster(printer));
 
-        for (int i=0; i < m_layoutScenes.size(); ++i)
+        for (int i = 0; i < m_layoutScenes.size(); ++i)
         {
             auto *paper = qgraphicsitem_cast<QGraphicsRectItem *>(m_layoutPapers.at(i));
             if (paper != nullptr)
@@ -421,8 +419,8 @@ void VPrintLayout::PrintPages(QPrinter *printer)
                 if (m_isTiled)
                 {
                     // Draw tile
-                    posterData = posterazor->Tile(paper, poster->at(index), m_layoutScenes.size(), data,
-                                                  m_watermarkPath);
+                    posterData =
+                        posterazor->Tile(paper, poster->at(index), m_layoutScenes.size(), data, m_watermarkPath);
                 }
 
                 PreparePaper(paperIndex);
@@ -431,8 +429,8 @@ void VPrintLayout::PrintPages(QPrinter *printer)
                 QRectF source;
                 m_isTiled ? source = poster->at(index).rect : source = paper->rect();
 
-                m_layoutScenes.at(paperIndex)->render(&painter, VPrintLayout::SceneTargetRect(printer, source), source,
-                                                      Qt::IgnoreAspectRatio);
+                m_layoutScenes.at(paperIndex)
+                    ->render(&painter, VPrintLayout::SceneTargetRect(printer, source), source, Qt::IgnoreAspectRatio);
 
                 if (m_isTiled)
                 {
@@ -475,12 +473,12 @@ void VPrintLayout::SetPrinterPrinterMargins(QPrinter *printer)
     }
     else
     {
-        if(m_tiledPDFOrientation == PageOrientation::Landscape)
+        if (m_tiledPDFOrientation == PageOrientation::Landscape)
         {
             // because when painting we have a -90rotation in landscape mode,
             // see function PrintPages.
-            printerMargins = QMarginsF(m_tiledMargins.bottom(), m_tiledMargins.left(), m_tiledMargins.top(),
-                                       m_tiledMargins.right());
+            printerMargins =
+                QMarginsF(m_tiledMargins.bottom(), m_tiledMargins.left(), m_tiledMargins.top(), m_tiledMargins.right());
         }
         else
         {
@@ -500,12 +498,12 @@ void VPrintLayout::SetPrinterOutputFileName(QPrinter *printer, PrintType printTy
 {
     SCASSERT(printer != nullptr)
 
-    switch(printType)
+    switch (printType)
     {
         case PrintType::PrintPDF:
         {
-            const QString outputFileName = filePath.isEmpty() ? QDir::homePath() + QDir::separator() + DocName()
-                                                              : filePath;
+            const QString outputFileName =
+                filePath.isEmpty() ? QDir::homePath() + QDir::separator() + DocName() : filePath;
             printer->setOutputFileName(outputFileName + QStringLiteral(".pdf"));
 
 #ifdef Q_OS_MAC
@@ -516,7 +514,7 @@ void VPrintLayout::SetPrinterOutputFileName(QPrinter *printer, PrintType printTy
             break;
         }
         case PrintType::PrintNative:
-            printer->setOutputFileName(QString());//Disable printing to file if was enabled.
+            printer->setOutputFileName(QString()); // Disable printing to file if was enabled.
             printer->setOutputFormat(QPrinter::NativeFormat);
             break;
         case PrintType::PrintPreview: /*do nothing*/
@@ -542,13 +540,13 @@ void VPrintLayout::SetPrinterPageSize(QPrinter *printer)
             {
                 if (m_isLayoutPortrait)
                 {
-                    height = FromPixel(paper->rect().height() + m_layoutMargins.top() + m_layoutMargins.bottom(),
-                                       Unit::Mm);
+                    height =
+                        FromPixel(paper->rect().height() + m_layoutMargins.top() + m_layoutMargins.bottom(), Unit::Mm);
                 }
                 else
                 {
-                    width = FromPixel(paper->rect().width() + m_layoutMargins.left() + m_layoutMargins.right(),
-                                      Unit::Mm);
+                    width =
+                        FromPixel(paper->rect().width() + m_layoutMargins.left() + m_layoutMargins.right(), Unit::Mm);
                 }
             }
         }
@@ -560,13 +558,13 @@ void VPrintLayout::SetPrinterPageSize(QPrinter *printer)
             {
                 if (m_isLayoutPortrait)
                 {
-                    width = FromPixel(paper->rect().width() + m_layoutMargins.left() + m_layoutMargins.right(),
-                                      Unit::Mm);
+                    width =
+                        FromPixel(paper->rect().width() + m_layoutMargins.left() + m_layoutMargins.right(), Unit::Mm);
                 }
                 else
                 {
-                    height = FromPixel(paper->rect().height() + m_layoutMargins.top() + m_layoutMargins.bottom(),
-                                       Unit::Mm);
+                    height =
+                        FromPixel(paper->rect().height() + m_layoutMargins.top() + m_layoutMargins.bottom(), Unit::Mm);
                 }
             }
         }
@@ -619,7 +617,7 @@ void VPrintLayout::PreparePaper(vsizetype index) const
         m_layoutScenes.at(index)->setBackgroundBrush(brush);
         m_layoutShadows.at(index)->setVisible(false);
         const float thinPen = 0.1F;
-        paper->setPen(QPen(Qt::white, thinPen, Qt::NoPen));// border
+        paper->setPen(QPen(Qt::white, thinPen, Qt::NoPen)); // border
     }
 
     QTransform matrix;
@@ -648,7 +646,7 @@ void VPrintLayout::RestorePaper(vsizetype index) const
     }
 
     QTransform matrix;
-    matrix.scale(1./m_xscale, 1./m_yscale);
+    matrix.scale(1. / m_xscale, 1. / m_yscale);
 
     QList<QGraphicsItem *> paperDetails = m_layoutDetails.at(index);
     for (auto *detail : paperDetails)
@@ -670,12 +668,13 @@ auto VPrintLayout::IsPagesUniform() const -> bool
     auto *paper = qgraphicsitem_cast<QGraphicsRectItem *>(m_layoutPapers.at(0));
     SCASSERT(paper != nullptr)
 
-    return std::all_of(m_layoutPapers.begin(), m_layoutPapers.end(), [paper](QGraphicsItem *paperItem)
-    {
-        auto *p = qgraphicsitem_cast<QGraphicsRectItem *>(paperItem);
-        SCASSERT(p != nullptr)
-        return paper->rect() == p->rect();
-    });
+    return std::all_of(m_layoutPapers.begin(), m_layoutPapers.end(),
+                       [paper](QGraphicsItem *paperItem)
+                       {
+                           auto *p = qgraphicsitem_cast<QGraphicsRectItem *>(paperItem);
+                           SCASSERT(p != nullptr)
+                           return paper->rect() == p->rect();
+                       });
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -711,8 +710,9 @@ auto VPrintLayout::WatermarkData() const -> VWatermarkData
         catch (VException &e)
         {
             const QString errorMsg = tr("File error.\n\n%1\n\n%2").arg(e.ErrorMessage(), e.DetailedInformation());
-            VAbstractApplication::VApp()->IsPedantic() ? throw VException(errorMsg) :
-                                              qWarning() << VAbstractValApplication::warningMessageSignature + errorMsg;
+            VAbstractApplication::VApp()->IsPedantic()
+                ? throw VException(errorMsg)
+                : qWarning() << VAbstractValApplication::warningMessageSignature + errorMsg;
         }
     }
 
@@ -730,10 +730,10 @@ auto VPrintLayout::ContinueIfLayoutStale(QWidget *parent) -> int
         }
 
         Utils::CheckableMessageBox msgBox(parent);
-        msgBox.setIconPixmap(QApplication::style()->standardIcon(QStyle::SP_MessageBoxQuestion).pixmap(32, 32) );
+        msgBox.setIconPixmap(QApplication::style()->standardIcon(QStyle::SP_MessageBoxQuestion).pixmap(32, 32));
         msgBox.setWindowTitle(tr("The layout is stale."));
         msgBox.setText(tr("The layout was not updated since last pattern modification. Do you want to continue?"));
-        msgBox.setStandardButtons(QDialogButtonBox::Yes|QDialogButtonBox::No);
+        msgBox.setStandardButtons(QDialogButtonBox::Yes | QDialogButtonBox::No);
         msgBox.setDefaultButton(QDialogButtonBox::No);
 
         int dialogResult = msgBox.exec();
@@ -756,7 +756,7 @@ auto VPrintLayout::SceneTargetRect(QPrinter *printer, const QRectF &source) -> Q
 
     qreal x;
     qreal y;
-    if(printer->fullPage())
+    if (printer->fullPage())
     {
         QPageLayout layout = printer->pageLayout();
         layout.setUnits(QPageLayout::Millimeter);
@@ -766,7 +766,8 @@ auto VPrintLayout::SceneTargetRect(QPrinter *printer, const QRectF &source) -> Q
     }
     else
     {
-        x = 0; y = 0;
+        x = 0;
+        y = 0;
     }
 
     QPair<qreal, qreal> scaleDiff = PrinterScaleDiff(printer);

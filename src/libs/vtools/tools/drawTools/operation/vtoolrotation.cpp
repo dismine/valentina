@@ -42,6 +42,11 @@
 #include "../../../dialogs/tools/dialogtool.h"
 #include "../../../visualization/line/operation/vistoolrotation.h"
 #include "../../../visualization/visualization.h"
+#include "../../vabstracttool.h"
+#include "../../vdatatool.h"
+#include "../ifc/exception/vexception.h"
+#include "../ifc/ifcdef.h"
+#include "../vdrawtool.h"
 #include "../vgeometry/varc.h"
 #include "../vgeometry/vcubicbezier.h"
 #include "../vgeometry/vcubicbezierpath.h"
@@ -52,17 +57,12 @@
 #include "../vgeometry/vsplinepath.h"
 #include "../vmisc/vabstractapplication.h"
 #include "../vmisc/vcommonsettings.h"
+#include "../vpatterndb/vcontainer.h"
+#include "../vpatterndb/vformula.h"
 #include "../vpatterndb/vtranslatevars.h"
 #if QT_VERSION < QT_VERSION_CHECK(5, 5, 0)
 #include "../vmisc/diagnostic.h"
 #endif // QT_VERSION < QT_VERSION_CHECK(5, 5, 0)
-#include "../../vabstracttool.h"
-#include "../../vdatatool.h"
-#include "../ifc/exception/vexception.h"
-#include "../ifc/ifcdef.h"
-#include "../vdrawtool.h"
-#include "../vpatterndb/vcontainer.h"
-#include "../vpatterndb/vformula.h"
 #include "../vwidgets/vmaingraphicsscene.h"
 
 class QDomElement;

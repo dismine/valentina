@@ -27,23 +27,23 @@
  *************************************************************************/
 
 #include "vabstractmainwindow.h"
-#include "../vpropertyexplorer/checkablemessagebox.h"
-#include "../vmisc/vabstractapplication.h"
 #include "../vmisc/compatibility.h"
 #include "../vmisc/def.h"
+#include "../vmisc/vabstractapplication.h"
 #include "../vmisc/vsysexits.h"
+#include "../vpropertyexplorer/checkablemessagebox.h"
 #include "dialogs/dialogexporttocsv.h"
 
-#include <QStyle>
-#include <QToolBar>
-#include <QFileDialog>
 #include <QAction>
+#include <QFileDialog>
 #include <QLockFile>
 #include <QMessageBox>
+#include <QStyle>
+#include <QToolBar>
 
-//#ifdef Q_OS_WIN
-//extern Q_CORE_EXPORT int qt_ntfs_permission_lookup;
-//#endif /*Q_OS_WIN*/
+// #ifdef Q_OS_WIN
+// extern Q_CORE_EXPORT int qt_ntfs_permission_lookup;
+// #endif /*Q_OS_WIN*/
 
 #if defined(Q_OS_MAC)
 #include <QStyleFactory>
@@ -75,7 +75,7 @@ auto RecentFiles(const QStringList &paths) -> QStringList
     QVector<QStringList> table;
     table.reserve(paths.size());
 
-    for(const auto &path : paths)
+    for (const auto &path : paths)
     {
         table.append(SplitFilePaths(path));
     }
@@ -83,7 +83,7 @@ auto RecentFiles(const QStringList &paths) -> QStringList
     auto CreateOptimized = [table](int tableRow)
     {
         QStringList optimized;
-        const QStringList& path = table.at(tableRow);
+        const QStringList &path = table.at(tableRow);
         for (int count = 1; count <= path.size(); ++count)
         {
             bool isUnique = true;
@@ -130,20 +130,20 @@ auto RecentFiles(const QStringList &paths) -> QStringList
     QStringList recentFiles;
     recentFiles.reserve(paths.size());
 
-    for(auto &path : optimizedPaths)
+    for (auto &path : optimizedPaths)
     {
         recentFiles.append(path.join(QDir::separator()));
     }
 
     return recentFiles;
 }
-}
+} // namespace
 
 //---------------------------------------------------------------------------------------------------------------------
 VAbstractMainWindow::VAbstractMainWindow(QWidget *parent)
-    : QMainWindow(parent),
-      m_curFileFormatVersion(0x0),
-      m_curFileFormatVersionStr(QLatin1String("0.0.0"))
+  : QMainWindow(parent),
+    m_curFileFormatVersion(0x0),
+    m_curFileFormatVersionStr(QLatin1String("0.0.0"))
 {
     for (int i = 0; i < MaxRecentFiles; ++i)
     {
@@ -169,7 +169,8 @@ auto VAbstractMainWindow::ContinueFormatRewrite(const QString &currentFormatVers
         msgBox.setText(tr("This file is using previous format version v%1. The current is v%2. "
                           "Saving the file with this app version will update the format version for this "
                           "file. This may prevent you from be able to open the file with older app versions. "
-                          "Do you really want to continue?").arg(currentFormatVersion, maxFormatVersion));
+                          "Do you really want to continue?")
+                           .arg(currentFormatVersion, maxFormatVersion));
         msgBox.setStandardButtons(QDialogButtonBox::Yes | QDialogButtonBox::No);
         msgBox.setDefaultButton(QDialogButtonBox::No);
         msgBox.setIconPixmap(QApplication::style()->standardIcon(QStyle::SP_MessageBoxQuestion).pixmap(32, 32));
@@ -212,7 +213,7 @@ auto VAbstractMainWindow::CSVFilePath() -> QString
         return fileName;
     }
 
-    QFileInfo f( fileName );
+    QFileInfo f(fileName);
     if (f.suffix().isEmpty() && f.suffix() != suffix)
     {
         fileName += QChar('.') + suffix;
@@ -250,7 +251,7 @@ void VAbstractMainWindow::UpdateRecentFileActions()
         }
     }
 
-    m_separatorAct->setVisible(numRecentFiles>0);
+    m_separatorAct->setVisible(numRecentFiles > 0);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -258,9 +259,9 @@ auto VAbstractMainWindow::CheckFilePermissions(const QString &path, QWidget *mes
 {
     QFileInfo info(path);
 
-//#ifdef Q_OS_WIN32
-//        qt_ntfs_permission_lookup++; // turn checking on
-//#endif /*Q_OS_WIN32*/
+    // #ifdef Q_OS_WIN32
+    //         qt_ntfs_permission_lookup++; // turn checking on
+    // #endif /*Q_OS_WIN32*/
 
     if (not info.exists())
     {
@@ -269,9 +270,9 @@ auto VAbstractMainWindow::CheckFilePermissions(const QString &path, QWidget *mes
 
     const bool isFileWritable = info.isWritable();
 
-//#ifdef Q_OS_WIN32
-//        qt_ntfs_permission_lookup--; // turn it off again
-//#endif /*Q_OS_WIN32*/
+    // #ifdef Q_OS_WIN32
+    //         qt_ntfs_permission_lookup--; // turn it off again
+    // #endif /*Q_OS_WIN32*/
 
     if (not isFileWritable)
     {
@@ -284,13 +285,13 @@ auto VAbstractMainWindow::CheckFilePermissions(const QString &path, QWidget *mes
 
         if (messageBox.exec() == QMessageBox::Yes)
         {
-//#ifdef Q_OS_WIN32
-//            qt_ntfs_permission_lookup++; // turn checking on
-//#endif /*Q_OS_WIN32*/
+            // #ifdef Q_OS_WIN32
+            //             qt_ntfs_permission_lookup++; // turn checking on
+            // #endif /*Q_OS_WIN32*/
             bool changed = QFile::setPermissions(path, QFileInfo(path).permissions() | QFileDevice::WriteUser);
-//#ifdef Q_OS_WIN32
-//            qt_ntfs_permission_lookup--; // turn it off again
-//#endif /*Q_OS_WIN32*/
+            // #ifdef Q_OS_WIN32
+            //             qt_ntfs_permission_lookup--; // turn it off again
+            // #endif /*Q_OS_WIN32*/
 
             if (not changed)
             {
@@ -317,27 +318,27 @@ auto VAbstractMainWindow::IgnoreLocking(int error, const QString &path, bool gui
     QMessageBox::StandardButton answer = QMessageBox::Abort;
     if (guiMode)
     {
-        switch(error)
+        switch (error)
         {
             case QLockFile::LockFailedError:
                 answer = QMessageBox::warning(this, tr("Locking file"),
                                               tr("This file already opened in another window. Ignore if you want "
                                                  "to continue (not recommended, can cause a data corruption)."),
-                                              QMessageBox::Abort|QMessageBox::Ignore, QMessageBox::Abort);
+                                              QMessageBox::Abort | QMessageBox::Ignore, QMessageBox::Abort);
                 break;
             case QLockFile::PermissionError:
                 answer = QMessageBox::question(this, tr("Locking file"),
                                                tr("The lock file could not be created, for lack of permissions. "
                                                   "Ignore if you want to continue (not recommended, can cause "
                                                   "a data corruption)."),
-                                               QMessageBox::Abort|QMessageBox::Ignore, QMessageBox::Abort);
+                                               QMessageBox::Abort | QMessageBox::Ignore, QMessageBox::Abort);
                 break;
             case QLockFile::UnknownError:
                 answer = QMessageBox::question(this, tr("Locking file"),
                                                tr("Unknown error happened, for instance a full partition "
                                                   "prevented writing out the lock file. Ignore if you want to "
                                                   "continue (not recommended, can cause a data corruption)."),
-                                               QMessageBox::Abort|QMessageBox::Ignore, QMessageBox::Abort);
+                                               QMessageBox::Abort | QMessageBox::Ignore, QMessageBox::Abort);
                 break;
             default:
                 answer = QMessageBox::Abort;
@@ -351,7 +352,7 @@ auto VAbstractMainWindow::IgnoreLocking(int error, const QString &path, bool gui
         qCDebug(abstactMainWindow, "Error type: %d", error);
         if (not guiMode)
         {
-            switch(error)
+            switch (error)
             {
                 case QLockFile::LockFailedError:
                     qCCritical(abstactMainWindow, "%s",

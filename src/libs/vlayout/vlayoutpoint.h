@@ -28,10 +28,10 @@
 #ifndef VLAYOUTPOINT_H
 #define VLAYOUTPOINT_H
 
-#include <QtGlobal>
-#include <QPointF>
 #include <QMetaType>
+#include <QPointF>
 #include <QVector>
+#include <QtGlobal>
 
 #if QT_VERSION < QT_VERSION_CHECK(5, 5, 0)
 #include "../vmisc/diagnostic.h"
@@ -62,20 +62,19 @@ private:
     bool m_curvePoint{false};
 };
 
-Q_DECLARE_METATYPE(VLayoutPoint) // NOLINT
+Q_DECLARE_METATYPE(VLayoutPoint)                  // NOLINT
 Q_DECLARE_TYPEINFO(VLayoutPoint, Q_MOVABLE_TYPE); // NOLINT
 
 //---------------------------------------------------------------------------------------------------------------------
-template <class T>
-inline auto CastTo(const QVector<T> &points, QVector<T> &casted) -> void
+template <class T> inline auto CastTo(const QVector<T> &points, QVector<T> &casted) -> void
 {
     Q_UNUSED(points)
     Q_UNUSED(casted)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-//upcast
-template <class Derived, class Base, typename std::enable_if<std::is_base_of<Base, Derived>::value>::type* = nullptr>
+// upcast
+template <class Derived, class Base, typename std::enable_if<std::is_base_of<Base, Derived>::value>::type * = nullptr>
 inline auto CastTo(const QVector<Base> &points, QVector<Derived> &casted) -> void
 {
     casted.clear();
@@ -87,8 +86,8 @@ inline auto CastTo(const QVector<Base> &points, QVector<Derived> &casted) -> voi
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-//downcast
-template <class Base, class Derived, typename std::enable_if<std::is_base_of<Base, Derived>::value>::type* = nullptr>
+// downcast
+template <class Base, class Derived, typename std::enable_if<std::is_base_of<Base, Derived>::value>::type * = nullptr>
 inline auto CastTo(const QVector<Derived> &points, QVector<Base> &casted) -> void
 {
     casted.clear();
@@ -109,13 +108,15 @@ auto operator>>(QDataStream &, VLayoutPoint &) -> QDataStream &;
 
 //---------------------------------------------------------------------------------------------------------------------
 Q_DECL_CONSTEXPR inline VLayoutPoint::VLayoutPoint(qreal xpos, qreal ypos)
-    : QPointF(xpos, ypos)
-{}
+  : QPointF(xpos, ypos)
+{
+}
 
 //---------------------------------------------------------------------------------------------------------------------
 Q_DECL_CONSTEXPR inline VLayoutPoint::VLayoutPoint(QPointF p)
-    : QPointF(p)
-{}
+  : QPointF(p)
+{
+}
 
 //---------------------------------------------------------------------------------------------------------------------
 Q_DECL_CONSTEXPR inline auto VLayoutPoint::TurnPoint() const -> bool

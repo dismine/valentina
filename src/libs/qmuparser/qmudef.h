@@ -90,6 +90,10 @@
     Class &operator=(Class &&) = delete;
 #endif
 
+#ifndef Q_DISABLE_ASSIGN
+#define Q_DISABLE_ASSIGN(Class) Class &operator=(const Class &) = delete;
+#endif
+
 #ifndef Q_DISABLE_ASSIGN_MOVE
 #define Q_DISABLE_ASSIGN_MOVE(Class)                                                                                   \
     Q_DISABLE_ASSIGN(Class)                                                                                            \

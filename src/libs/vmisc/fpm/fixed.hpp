@@ -1,17 +1,13 @@
 #ifndef FPM_FIXED_HPP
 #define FPM_FIXED_HPP
 
+#include <QtGlobal>
 #include <cassert>
 #include <cmath>
 #include <cstdint>
 #include <functional>
 #include <limits>
 #include <type_traits>
-#include <QtGlobal>
-
-#if QT_VERSION < QT_VERSION_CHECK(5, 5, 0)
-#include "../diagnostic.h"
-#endif // QT_VERSION < QT_VERSION_CHECK(5, 5, 0)
 
 namespace fpm
 {
@@ -21,8 +17,7 @@ namespace fpm
 //! unsigned type.
 //! \tparam IntermediateType the integer type used to store intermediate results during calculations.
 //! \tparam FractionBits     the number of bits of the BaseType used to store the fraction
-template <typename BaseType, typename IntermediateType, unsigned int FractionBits>
-class fixed
+template <typename BaseType, typename IntermediateType, unsigned int FractionBits> class fixed
 {
     static_assert(std::is_integral<BaseType>::value, "BaseType must be an integral type");
     static_assert(FractionBits > 0, "FractionBits must be greater than zero");
@@ -36,42 +31,50 @@ class fixed
     // is incorrect (flips from positive to negative), so we must extend the size to IntermediateType.
     static constexpr IntermediateType FRACTION_MULT = IntermediateType(1) << FractionBits;
 
-    struct raw_construct_tag {};
-    constexpr inline fixed(BaseType val, raw_construct_tag /*unused*/) noexcept : m_value(val) {}
+    struct raw_construct_tag
+    {
+    };
+    constexpr inline fixed(BaseType val, raw_construct_tag /*unused*/) noexcept
+      : m_value(val)
+    {
+    }
 
 public:
     inline fixed() noexcept = default;
 
     // Converts an integral number to the fixed-point type.
     // Like static_cast, this truncates bits that don't fit.
-    template <typename T, typename std::enable_if<std::is_integral<T>::value>::type* = nullptr>
+    template <typename T, typename std::enable_if<std::is_integral<T>::value>::type * = nullptr>
     constexpr inline explicit fixed(T val) noexcept
-        : m_value(static_cast<BaseType>(val * FRACTION_MULT))
-    {}
+      : m_value(static_cast<BaseType>(val * FRACTION_MULT))
+    {
+    }
 
     // Converts an floating-point number to the fixed-point type.
     // Like static_cast, this truncates bits that don't fit.
-    template <typename T, typename std::enable_if<std::is_floating_point<T>::value>::type* = nullptr>
+    template <typename T, typename std::enable_if<std::is_floating_point<T>::value>::type * = nullptr>
     constexpr inline explicit fixed(T val) noexcept
-        : m_value(static_cast<BaseType>((val >= 0.0) ? (val * FRACTION_MULT + T{0.5}) : (val * FRACTION_MULT - T{0.5})))
-    {}
+      : m_value(static_cast<BaseType>((val >= 0.0) ? (val * FRACTION_MULT + T{0.5}) : (val * FRACTION_MULT - T{0.5})))
+    {
+    }
 
     // Constructs from another fixed-point type with possibly different underlying representation.
     // Like static_cast, this truncates bits that don't fit.
     template <typename B, typename I, unsigned int F>
-    constexpr inline explicit fixed(fixed<B,I,F> val) noexcept
-        : m_value(from_fixed_point<F>(val.raw_value()).raw_value())
-    {}
+    constexpr inline explicit fixed(fixed<B, I, F> val) noexcept
+      : m_value(from_fixed_point<F>(val.raw_value()).raw_value())
+    {
+    }
 
     // Explicit conversion to a floating-point type
-    template <typename T, typename std::enable_if<std::is_floating_point<T>::value>::type* = nullptr>
+    template <typename T, typename std::enable_if<std::is_floating_point<T>::value>::type * = nullptr>
     constexpr inline explicit operator T() const noexcept
     {
         return static_cast<T>(m_value) / FRACTION_MULT;
     }
 
     // Explicit conversion to an integral type
-    template <typename T, typename std::enable_if<std::is_integral<T>::value>::type* = nullptr>
+    template <typename T, typename std::enable_if<std::is_integral<T>::value>::type * = nullptr>
     constexpr inline explicit operator T() const noexcept
     {
         return static_cast<T>(m_value / FRACTION_MULT);
@@ -79,33 +82,27 @@ public:
 
     // Returns the raw underlying value of this type.
     // Do not use this unless you know what you're doing.
-    constexpr inline auto raw_value() const noexcept -> BaseType
-    {
-        return m_value;
-    }
+    constexpr inline auto raw_value() const noexcept -> BaseType { return m_value; }
 
     //! Constructs a fixed-point number from another fixed-point number.
     //! \tparam NumFractionBits the number of bits used by the fraction in \a value.
     //! \param value the integer fixed-point number
     template <unsigned int NumFractionBits, typename T,
-             typename std::enable_if<(NumFractionBits > FractionBits)>::type* = nullptr>
+              typename std::enable_if<(NumFractionBits > FractionBits)>::type * = nullptr>
     static constexpr inline auto from_fixed_point(T value) noexcept -> fixed
     {
         // To correctly round the last bit in the result, we need one more bit of information.
         // We do this by multiplying by two before dividing and adding the LSB to the real result.
-        return fixed(static_cast<BaseType>(
-             value / (T(1) << (NumFractionBits - FractionBits)) +
-            (value / (T(1) << (NumFractionBits - FractionBits - 1)) % 2)),
-            raw_construct_tag{});
+        return fixed(static_cast<BaseType>(value / (T(1) << (NumFractionBits - FractionBits)) +
+                                           (value / (T(1) << (NumFractionBits - FractionBits - 1)) % 2)),
+                     raw_construct_tag{});
     }
 
     template <unsigned int NumFractionBits, typename T,
-             typename std::enable_if<(NumFractionBits <= FractionBits)>::type* = nullptr>
+              typename std::enable_if<(NumFractionBits <= FractionBits)>::type * = nullptr>
     static constexpr inline auto from_fixed_point(T value) noexcept -> fixed
     {
-        return fixed(static_cast<BaseType>(
-            value * (T(1) << (FractionBits - NumFractionBits))),
-            raw_construct_tag{});
+        return fixed(static_cast<BaseType>(value * (T(1) << (FractionBits - NumFractionBits))), raw_construct_tag{});
     }
 
     // Constructs a fixed-point number from its raw underlying value.
@@ -127,56 +124,53 @@ public:
     // Arithmetic member operators
     //
 
-    constexpr inline auto operator-() const noexcept -> fixed
-    {
-        return fixed::from_raw_value(-m_value);
-    }
+    constexpr inline auto operator-() const noexcept -> fixed { return fixed::from_raw_value(-m_value); }
 
-    inline auto operator+=(const fixed& y) noexcept -> fixed&
+    inline auto operator+=(const fixed &y) noexcept -> fixed &
     {
         m_value += y.m_value;
         return *this;
     }
 
-    template <typename I, typename std::enable_if<std::is_integral<I>::value>::type* = nullptr>
-    inline auto operator+=(I y) noexcept -> fixed&
+    template <typename I, typename std::enable_if<std::is_integral<I>::value>::type * = nullptr>
+    inline auto operator+=(I y) noexcept -> fixed &
     {
         m_value += y * FRACTION_MULT;
         return *this;
     }
 
-    inline auto operator-=(const fixed& y) noexcept -> fixed&
+    inline auto operator-=(const fixed &y) noexcept -> fixed &
     {
         m_value -= y.m_value;
         return *this;
     }
 
-    template <typename I, typename std::enable_if<std::is_integral<I>::value>::type* = nullptr>
-    inline auto operator-=(I y) noexcept -> fixed&
+    template <typename I, typename std::enable_if<std::is_integral<I>::value>::type * = nullptr>
+    inline auto operator-=(I y) noexcept -> fixed &
     {
         m_value -= y * FRACTION_MULT;
         return *this;
     }
 
-    inline auto operator*=(const fixed& y) noexcept -> fixed&
+    inline auto operator*=(const fixed &y) noexcept -> fixed &
     {
         // Normal fixed-point multiplication is: x * y / 2**FractionBits.
         // To correctly round the last bit in the result, we need one more bit of information.
         // We do this by multiplying by two before dividing and adding the LSB to the real result.
-        auto value =  static_cast<IntermediateType>(
+        auto value = static_cast<IntermediateType>(
             static_cast<double>(static_cast<IntermediateType>(m_value) * y.m_value) / (FRACTION_MULT / 2));
         m_value = static_cast<BaseType>((value / 2) + (value % 2));
         return *this;
     }
 
-    template <typename I, typename std::enable_if<std::is_integral<I>::value>::type* = nullptr>
-    inline auto operator*=(I y) noexcept -> fixed&
+    template <typename I, typename std::enable_if<std::is_integral<I>::value>::type * = nullptr>
+    inline auto operator*=(I y) noexcept -> fixed &
     {
         m_value *= y;
         return *this;
     }
 
-    inline auto operator/=(const fixed& y) noexcept -> fixed&
+    inline auto operator/=(const fixed &y) noexcept -> fixed &
     {
         assert(y.m_value != 0);
         // Normal fixed-point division is: x * 2**FractionBits / y.
@@ -187,8 +181,8 @@ public:
         return *this;
     }
 
-    template <typename I, typename std::enable_if<std::is_integral<I>::value>::type* = nullptr>
-    inline auto operator/=(I y) noexcept -> fixed&
+    template <typename I, typename std::enable_if<std::is_integral<I>::value>::type * = nullptr>
+    inline auto operator/=(I y) noexcept -> fixed &
     {
         m_value /= y;
         return *this;
@@ -198,15 +192,15 @@ public:
     // Shift operators
     //
 
-    template <typename I, typename std::enable_if<std::is_integral<I>::value>::type* = nullptr>
-    inline auto operator>>=(I y) noexcept -> fixed&
+    template <typename I, typename std::enable_if<std::is_integral<I>::value>::type * = nullptr>
+    inline auto operator>>=(I y) noexcept -> fixed &
     {
         m_value >>= y;
         return *this;
     }
 
-    template <typename I, typename std::enable_if<std::is_integral<I>::value>::type* = nullptr>
-    inline auto operator<<=(I y) noexcept -> fixed&
+    template <typename I, typename std::enable_if<std::is_integral<I>::value>::type * = nullptr>
+    inline auto operator<<=(I y) noexcept -> fixed &
     {
         m_value <<= y;
         return *this;
@@ -229,21 +223,21 @@ using fixed_8_24 = fixed<std::int32_t, std::int64_t, 24>;
 //
 
 template <typename B, typename I, unsigned int F>
-constexpr inline auto operator+(const fixed<B, I, F>& x, const fixed<B, I, F>& y) noexcept -> fixed<B, I, F>
+constexpr inline auto operator+(const fixed<B, I, F> &x, const fixed<B, I, F> &y) noexcept -> fixed<B, I, F>
 {
     return fixed<B, I, F>(x) += y;
 }
 
 template <typename B, typename I, unsigned int F, typename T,
-         typename std::enable_if<std::is_integral<T>::value>::type* = nullptr>
-constexpr inline auto operator+(const fixed<B, I, F>& x, T y) noexcept -> fixed<B, I, F>
+          typename std::enable_if<std::is_integral<T>::value>::type * = nullptr>
+constexpr inline auto operator+(const fixed<B, I, F> &x, T y) noexcept -> fixed<B, I, F>
 {
     return fixed<B, I, F>(x) += y;
 }
 
 template <typename B, typename I, unsigned int F, typename T,
-         typename std::enable_if<std::is_integral<T>::value>::type* = nullptr>
-constexpr inline auto operator+(T x, const fixed<B, I, F>& y) noexcept -> fixed<B, I, F>
+          typename std::enable_if<std::is_integral<T>::value>::type * = nullptr>
+constexpr inline auto operator+(T x, const fixed<B, I, F> &y) noexcept -> fixed<B, I, F>
 {
     return fixed<B, I, F>(y) += x;
 }
@@ -253,21 +247,21 @@ constexpr inline auto operator+(T x, const fixed<B, I, F>& y) noexcept -> fixed<
 //
 
 template <typename B, typename I, unsigned int F>
-constexpr inline auto operator-(const fixed<B, I, F>& x, const fixed<B, I, F>& y) noexcept -> fixed<B, I, F>
+constexpr inline auto operator-(const fixed<B, I, F> &x, const fixed<B, I, F> &y) noexcept -> fixed<B, I, F>
 {
     return fixed<B, I, F>(x) -= y;
 }
 
 template <typename B, typename I, unsigned int F, typename T,
-         typename std::enable_if<std::is_integral<T>::value>::type* = nullptr>
-constexpr inline auto operator-(const fixed<B, I, F>& x, T y) noexcept -> fixed<B, I, F>
+          typename std::enable_if<std::is_integral<T>::value>::type * = nullptr>
+constexpr inline auto operator-(const fixed<B, I, F> &x, T y) noexcept -> fixed<B, I, F>
 {
     return fixed<B, I, F>(x) -= y;
 }
 
 template <typename B, typename I, unsigned int F, typename T,
-         typename std::enable_if<std::is_integral<T>::value>::type* = nullptr>
-constexpr inline auto operator-(T x, const fixed<B, I, F>& y) noexcept -> fixed<B, I, F>
+          typename std::enable_if<std::is_integral<T>::value>::type * = nullptr>
+constexpr inline auto operator-(T x, const fixed<B, I, F> &y) noexcept -> fixed<B, I, F>
 {
     return fixed<B, I, F>(x) -= y;
 }
@@ -277,21 +271,21 @@ constexpr inline auto operator-(T x, const fixed<B, I, F>& y) noexcept -> fixed<
 //
 
 template <typename B, typename I, unsigned int F>
-constexpr inline auto operator*(const fixed<B, I, F>& x, const fixed<B, I, F>& y) noexcept -> fixed<B, I, F>
+constexpr inline auto operator*(const fixed<B, I, F> &x, const fixed<B, I, F> &y) noexcept -> fixed<B, I, F>
 {
     return fixed<B, I, F>(x) *= y;
 }
 
 template <typename B, typename I, unsigned int F, typename T,
-         typename std::enable_if<std::is_integral<T>::value>::type* = nullptr>
-constexpr inline auto operator*(const fixed<B, I, F>& x, T y) noexcept -> fixed<B, I, F>
+          typename std::enable_if<std::is_integral<T>::value>::type * = nullptr>
+constexpr inline auto operator*(const fixed<B, I, F> &x, T y) noexcept -> fixed<B, I, F>
 {
     return fixed<B, I, F>(x) *= y;
 }
 
 template <typename B, typename I, unsigned int F, typename T,
-         typename std::enable_if<std::is_integral<T>::value>::type* = nullptr>
-constexpr inline auto operator*(T x, const fixed<B, I, F>& y) noexcept -> fixed<B, I, F>
+          typename std::enable_if<std::is_integral<T>::value>::type * = nullptr>
+constexpr inline auto operator*(T x, const fixed<B, I, F> &y) noexcept -> fixed<B, I, F>
 {
     return fixed<B, I, F>(y) *= x;
 }
@@ -301,21 +295,21 @@ constexpr inline auto operator*(T x, const fixed<B, I, F>& y) noexcept -> fixed<
 //
 
 template <typename B, typename I, unsigned int F>
-constexpr inline auto operator/(const fixed<B, I, F>& x, const fixed<B, I, F>& y) noexcept -> fixed<B, I, F>
+constexpr inline auto operator/(const fixed<B, I, F> &x, const fixed<B, I, F> &y) noexcept -> fixed<B, I, F>
 {
     return fixed<B, I, F>(x) /= y;
 }
 
 template <typename B, typename I, unsigned int F, typename T,
-         typename std::enable_if<std::is_integral<T>::value>::type* = nullptr>
-constexpr inline auto operator/(const fixed<B, I, F>& x, T y) noexcept -> fixed<B, I, F>
+          typename std::enable_if<std::is_integral<T>::value>::type * = nullptr>
+constexpr inline auto operator/(const fixed<B, I, F> &x, T y) noexcept -> fixed<B, I, F>
 {
     return fixed<B, I, F>(x) /= y;
 }
 
 template <typename B, typename I, unsigned int F, typename T,
-         typename std::enable_if<std::is_integral<T>::value>::type* = nullptr>
-constexpr inline auto operator/(T x, const fixed<B, I, F>& y) noexcept -> fixed<B, I, F>
+          typename std::enable_if<std::is_integral<T>::value>::type * = nullptr>
+constexpr inline auto operator/(T x, const fixed<B, I, F> &y) noexcept -> fixed<B, I, F>
 {
     return fixed<B, I, F>(x) /= y;
 }
@@ -325,15 +319,15 @@ constexpr inline auto operator/(T x, const fixed<B, I, F>& y) noexcept -> fixed<
 //
 
 template <typename B, typename I, unsigned int F, typename T,
-         typename std::enable_if<std::is_integral<T>::value>::type* = nullptr>
-constexpr inline auto operator>>(const fixed<B, I, F>& x, T y) noexcept -> fixed<B, I, F>
+          typename std::enable_if<std::is_integral<T>::value>::type * = nullptr>
+constexpr inline auto operator>>(const fixed<B, I, F> &x, T y) noexcept -> fixed<B, I, F>
 {
     return fixed<B, I, F>(x) >>= y;
 }
 
 template <typename B, typename I, unsigned int F, typename T,
-         typename std::enable_if<std::is_integral<T>::value>::type* = nullptr>
-constexpr inline auto operator<<(const fixed<B, I, F>& x, T y) noexcept -> fixed<B, I, F>
+          typename std::enable_if<std::is_integral<T>::value>::type * = nullptr>
+constexpr inline auto operator<<(const fixed<B, I, F> &x, T y) noexcept -> fixed<B, I, F>
 {
     return fixed<B, I, F>(x) <<= y;
 }
@@ -343,37 +337,37 @@ constexpr inline auto operator<<(const fixed<B, I, F>& x, T y) noexcept -> fixed
 //
 
 template <typename B, typename I, unsigned int F>
-constexpr inline auto operator==(const fixed<B, I, F>& x, const fixed<B, I, F>& y) noexcept -> bool
+constexpr inline auto operator==(const fixed<B, I, F> &x, const fixed<B, I, F> &y) noexcept -> bool
 {
     return x.raw_value() == y.raw_value();
 }
 
 template <typename B, typename I, unsigned int F>
-constexpr inline auto operator!=(const fixed<B, I, F>& x, const fixed<B, I, F>& y) noexcept -> bool
+constexpr inline auto operator!=(const fixed<B, I, F> &x, const fixed<B, I, F> &y) noexcept -> bool
 {
     return x.raw_value() != y.raw_value();
 }
 
 template <typename B, typename I, unsigned int F>
-constexpr inline auto operator<(const fixed<B, I, F>& x, const fixed<B, I, F>& y) noexcept -> bool
+constexpr inline auto operator<(const fixed<B, I, F> &x, const fixed<B, I, F> &y) noexcept -> bool
 {
     return x.raw_value() < y.raw_value();
 }
 
 template <typename B, typename I, unsigned int F>
-constexpr inline auto operator>(const fixed<B, I, F>& x, const fixed<B, I, F>& y) noexcept -> bool
+constexpr inline auto operator>(const fixed<B, I, F> &x, const fixed<B, I, F> &y) noexcept -> bool
 {
     return x.raw_value() > y.raw_value();
 }
 
 template <typename B, typename I, unsigned int F>
-constexpr inline auto operator<=(const fixed<B, I, F>& x, const fixed<B, I, F>& y) noexcept -> bool
+constexpr inline auto operator<=(const fixed<B, I, F> &x, const fixed<B, I, F> &y) noexcept -> bool
 {
     return x.raw_value() <= y.raw_value();
 }
 
 template <typename B, typename I, unsigned int F>
-constexpr inline auto operator>=(const fixed<B, I, F>& x, const fixed<B, I, F>& y) noexcept -> bool
+constexpr inline auto operator>=(const fixed<B, I, F> &x, const fixed<B, I, F> &y) noexcept -> bool
 {
     return x.raw_value() >= y.raw_value();
 }
@@ -388,7 +382,7 @@ QT_WARNING_DISABLE_CLANG("-Wunneeded-internal-declaration")
 static constexpr auto max_digits10(int bits) -> int
 {
     // 8.24 fixed-point equivalent of (int)ceil(bits * std::log10(2));
-    using T = long long; // NOLINT(google-runtime-int)
+    using T = long long;                                                   // NOLINT(google-runtime-int)
     return static_cast<int>((T{bits} * 5050445 + (T{1} << 24) - 1) >> 24); // NOLINT(hicpp-signed-bitwise)
 }
 
@@ -396,8 +390,8 @@ static constexpr auto max_digits10(int bits) -> int
 static constexpr auto digits10(int bits) -> int
 {
     // 8.24 fixed-point equivalent of (int)(bits * std::log10(2));
-    using T = long long; // NOLINT(google-runtime-int)
-    return static_cast<int>((T{bits} * 5050445) >> 24); //NOLINT(hicpp-signed-bitwise)
+    using T = long long;                                // NOLINT(google-runtime-int)
+    return static_cast<int>((T{bits} * 5050445) >> 24); // NOLINT(hicpp-signed-bitwise)
 }
 
 QT_WARNING_POP
@@ -409,8 +403,7 @@ QT_WARNING_POP
 namespace std // NOLINT(cert-dcl58-cpp)
 {
 
-template <typename B, typename I, unsigned int F>
-struct hash<fpm::fixed<B,I,F>>
+template <typename B, typename I, unsigned int F> struct hash<fpm::fixed<B, I, F>>
 {
     using argument_type = fpm::fixed<B, I, F>;
     using result_type = std::size_t;
@@ -425,8 +418,7 @@ private:
     std::hash<B> m_hash;
 };
 
-template <typename B, typename I, unsigned int F>
-struct numeric_limits<fpm::fixed<B,I,F>>
+template <typename B, typename I, unsigned int F> struct numeric_limits<fpm::fixed<B, I, F>>
 {
     static constexpr bool is_specialized = true;
     static constexpr bool is_signed = std::numeric_limits<B>::is_signed;
@@ -461,87 +453,77 @@ struct numeric_limits<fpm::fixed<B,I,F>>
     static constexpr bool traps = true;
     static constexpr bool tinyness_before = false;
 
-    static constexpr auto lowest() noexcept -> fpm::fixed<B,I,F>
+    static constexpr auto lowest() noexcept -> fpm::fixed<B, I, F>
     {
-        return fpm::fixed<B,I,F>::from_raw_value(std::numeric_limits<B>::lowest());
+        return fpm::fixed<B, I, F>::from_raw_value(std::numeric_limits<B>::lowest());
     }
 
-    static constexpr auto min() noexcept -> fpm::fixed<B,I,F>
+    static constexpr auto min() noexcept -> fpm::fixed<B, I, F> { return lowest(); }
+
+    static constexpr auto max() noexcept -> fpm::fixed<B, I, F>
     {
-        return lowest();
+        return fpm::fixed<B, I, F>::from_raw_value(std::numeric_limits<B>::max());
     }
 
-    static constexpr auto max() noexcept -> fpm::fixed<B,I,F>
-    {
-        return fpm::fixed<B,I,F>::from_raw_value(std::numeric_limits<B>::max());
-    }
+    static constexpr auto epsilon() noexcept -> fpm::fixed<B, I, F> { return fpm::fixed<B, I, F>::from_raw_value(1); }
 
-    static constexpr auto epsilon() noexcept -> fpm::fixed<B,I,F>
-    {
-        return fpm::fixed<B,I,F>::from_raw_value(1);
-    }
+    static constexpr auto round_error() noexcept -> fpm::fixed<B, I, F> { return fpm::fixed<B, I, F>(1) / 2; }
 
-    static constexpr auto round_error() noexcept -> fpm::fixed<B,I,F>
-    {
-        return fpm::fixed<B,I,F>(1) / 2;
-    }
-
-    static constexpr auto denorm_min() noexcept -> fpm::fixed<B,I,F>
-    {
-        return min();
-    }
+    static constexpr auto denorm_min() noexcept -> fpm::fixed<B, I, F> { return min(); }
 };
 
 // See https://stackoverflow.com/a/46719572/3045403
 #if __cplusplus < 201703L
 template <typename B, typename I, unsigned int F>
-constexpr bool numeric_limits<fpm::fixed<B,I,F>>::is_specialized; // NOLINT(readability-redundant-declaration)
+constexpr bool numeric_limits<fpm::fixed<B, I, F>>::is_specialized; // NOLINT(readability-redundant-declaration)
 template <typename B, typename I, unsigned int F>
-constexpr bool numeric_limits<fpm::fixed<B,I,F>>::is_signed; // NOLINT(readability-redundant-declaration)
+constexpr bool numeric_limits<fpm::fixed<B, I, F>>::is_signed; // NOLINT(readability-redundant-declaration)
 template <typename B, typename I, unsigned int F>
-constexpr bool numeric_limits<fpm::fixed<B,I,F>>::is_integer; // NOLINT(readability-redundant-declaration)
+constexpr bool numeric_limits<fpm::fixed<B, I, F>>::is_integer; // NOLINT(readability-redundant-declaration)
 template <typename B, typename I, unsigned int F>
-constexpr bool numeric_limits<fpm::fixed<B,I,F>>::is_exact; // NOLINT(readability-redundant-declaration)
+constexpr bool numeric_limits<fpm::fixed<B, I, F>>::is_exact; // NOLINT(readability-redundant-declaration)
 template <typename B, typename I, unsigned int F>
-constexpr bool numeric_limits<fpm::fixed<B,I,F>>::has_infinity; // NOLINT(readability-redundant-declaration)
+constexpr bool numeric_limits<fpm::fixed<B, I, F>>::has_infinity; // NOLINT(readability-redundant-declaration)
 template <typename B, typename I, unsigned int F>
-constexpr bool numeric_limits<fpm::fixed<B,I,F>>::has_quiet_NaN; // NOLINT(readability-redundant-declaration)
+constexpr bool numeric_limits<fpm::fixed<B, I, F>>::has_quiet_NaN; // NOLINT(readability-redundant-declaration)
 template <typename B, typename I, unsigned int F>
-constexpr bool numeric_limits<fpm::fixed<B,I,F>>::has_signaling_NaN; // NOLINT(readability-redundant-declaration)
+constexpr bool numeric_limits<fpm::fixed<B, I, F>>::has_signaling_NaN; // NOLINT(readability-redundant-declaration)
 template <typename B, typename I, unsigned int F>
-constexpr std::float_denorm_style numeric_limits<fpm::fixed<B,I,F>>::has_denorm; // NOLINT(readability-redundant-declaration)
+constexpr std::float_denorm_style
+    numeric_limits<fpm::fixed<B, I, F>>::has_denorm; // NOLINT(readability-redundant-declaration)
 template <typename B, typename I, unsigned int F>
-constexpr bool numeric_limits<fpm::fixed<B,I,F>>::has_denorm_loss; // NOLINT(readability-redundant-declaration)
+constexpr bool numeric_limits<fpm::fixed<B, I, F>>::has_denorm_loss; // NOLINT(readability-redundant-declaration)
 template <typename B, typename I, unsigned int F>
-constexpr std::float_round_style numeric_limits<fpm::fixed<B,I,F>>::round_style; // NOLINT(readability-redundant-declaration)
+constexpr std::float_round_style
+    numeric_limits<fpm::fixed<B, I, F>>::round_style; // NOLINT(readability-redundant-declaration)
 template <typename B, typename I, unsigned int F>
-constexpr bool numeric_limits<fpm::fixed<B,I,F>>::is_iec_559; // NOLINT(readability-redundant-declaration)
+constexpr bool numeric_limits<fpm::fixed<B, I, F>>::is_iec_559; // NOLINT(readability-redundant-declaration)
 template <typename B, typename I, unsigned int F>
-constexpr bool numeric_limits<fpm::fixed<B,I,F>>::is_bounded; // NOLINT(readability-redundant-declaration)
+constexpr bool numeric_limits<fpm::fixed<B, I, F>>::is_bounded; // NOLINT(readability-redundant-declaration)
 template <typename B, typename I, unsigned int F>
-constexpr bool numeric_limits<fpm::fixed<B,I,F>>::is_modulo; // NOLINT(readability-redundant-declaration)
+constexpr bool numeric_limits<fpm::fixed<B, I, F>>::is_modulo; // NOLINT(readability-redundant-declaration)
 template <typename B, typename I, unsigned int F>
-constexpr int numeric_limits<fpm::fixed<B,I,F>>::digits; // NOLINT(readability-redundant-declaration)
+constexpr int numeric_limits<fpm::fixed<B, I, F>>::digits; // NOLINT(readability-redundant-declaration)
 template <typename B, typename I, unsigned int F>
-constexpr int numeric_limits<fpm::fixed<B,I,F>>::digits10; // NOLINT(readability-redundant-declaration)
+constexpr int numeric_limits<fpm::fixed<B, I, F>>::digits10; // NOLINT(readability-redundant-declaration)
 template <typename B, typename I, unsigned int F>
-constexpr int numeric_limits<fpm::fixed<B,I,F>>::max_digits10; // NOLINT(readability-redundant-declaration)
+constexpr int numeric_limits<fpm::fixed<B, I, F>>::max_digits10; // NOLINT(readability-redundant-declaration)
 template <typename B, typename I, unsigned int F>
-constexpr int numeric_limits<fpm::fixed<B,I,F>>::radix; // NOLINT(readability-redundant-declaration)
+constexpr int numeric_limits<fpm::fixed<B, I, F>>::radix; // NOLINT(readability-redundant-declaration)
 template <typename B, typename I, unsigned int F>
-constexpr int numeric_limits<fpm::fixed<B,I,F>>::min_exponent; // NOLINT(readability-redundant-declaration)
+constexpr int numeric_limits<fpm::fixed<B, I, F>>::min_exponent; // NOLINT(readability-redundant-declaration)
 template <typename B, typename I, unsigned int F>
-constexpr int numeric_limits<fpm::fixed<B,I,F>>::min_exponent10; // NOLINT(readability-redundant-declaration)
+constexpr int numeric_limits<fpm::fixed<B, I, F>>::min_exponent10; // NOLINT(readability-redundant-declaration)
 template <typename B, typename I, unsigned int F>
-constexpr int numeric_limits<fpm::fixed<B,I,F>>::max_exponent; // NOLINT(readability-redundant-declaration)
+constexpr int numeric_limits<fpm::fixed<B, I, F>>::max_exponent; // NOLINT(readability-redundant-declaration)
 template <typename B, typename I, unsigned int F>
-constexpr int numeric_limits<fpm::fixed<B,I,F>>::max_exponent10; // NOLINT(readability-redundant-declaration)
+constexpr int numeric_limits<fpm::fixed<B, I, F>>::max_exponent10; // NOLINT(readability-redundant-declaration)
 template <typename B, typename I, unsigned int F>
-constexpr bool numeric_limits<fpm::fixed<B,I,F>>::traps; // NOLINT(readability-redundant-declaration)
+constexpr bool numeric_limits<fpm::fixed<B, I, F>>::traps; // NOLINT(readability-redundant-declaration)
 template <typename B, typename I, unsigned int F>
-constexpr bool numeric_limits<fpm::fixed<B,I,F>>::tinyness_before; // NOLINT(readability-redundant-declaration)
+constexpr bool numeric_limits<fpm::fixed<B, I, F>>::tinyness_before; // NOLINT(readability-redundant-declaration)
 #endif
 
-}  // namespace std
+} // namespace std
 
 #endif

@@ -40,45 +40,48 @@
 QT_WARNING_PUSH
 QT_WARNING_DISABLE_GCC("-Weffc++")
 
-template <typename... Args>
-struct QNonConstOverload
+template <typename... Args> struct QNonConstOverload
 {
     template <typename R, typename T>
     Q_DECL_CONSTEXPR auto operator()(R (T::*ptr)(Args...)) const noexcept -> decltype(ptr)
-    { return ptr; }
+    {
+        return ptr;
+    }
 
-    template <typename R, typename T>
-    static Q_DECL_CONSTEXPR auto of(R (T::*ptr)(Args...)) noexcept -> decltype(ptr)
-    { return ptr; }
+    template <typename R, typename T> static Q_DECL_CONSTEXPR auto of(R (T::*ptr)(Args...)) noexcept -> decltype(ptr)
+    {
+        return ptr;
+    }
 };
 
-template <typename... Args>
-struct QConstOverload
+template <typename... Args> struct QConstOverload
 {
     template <typename R, typename T>
     Q_DECL_CONSTEXPR auto operator()(R (T::*ptr)(Args...) const) const noexcept -> decltype(ptr)
-    { return ptr; }
+    {
+        return ptr;
+    }
 
     template <typename R, typename T>
     static Q_DECL_CONSTEXPR auto of(R (T::*ptr)(Args...) const) noexcept -> decltype(ptr)
-    { return ptr; }
+    {
+        return ptr;
+    }
 };
 
-template <typename... Args>
-struct QOverload : QConstOverload<Args...>, QNonConstOverload<Args...>
+template <typename... Args> struct QOverload : QConstOverload<Args...>, QNonConstOverload<Args...>
 {
     using QConstOverload<Args...>::of;
     using QConstOverload<Args...>::operator();
     using QNonConstOverload<Args...>::of;
     using QNonConstOverload<Args...>::operator();
 
-    template <typename R>
-    Q_DECL_CONSTEXPR auto operator()(R (*ptr)(Args...)) const noexcept -> decltype(ptr)
-    { return ptr; }
+    template <typename R> Q_DECL_CONSTEXPR auto operator()(R (*ptr)(Args...)) const noexcept -> decltype(ptr)
+    {
+        return ptr;
+    }
 
-    template <typename R>
-    static Q_DECL_CONSTEXPR auto of(R (*ptr)(Args...)) noexcept -> decltype(ptr)
-    { return ptr; }
+    template <typename R> static Q_DECL_CONSTEXPR auto of(R (*ptr)(Args...)) noexcept -> decltype(ptr) { return ptr; }
 };
 
 #if defined(__cpp_variable_templates) && __cpp_variable_templates >= 201304 // C++14

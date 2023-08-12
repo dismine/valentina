@@ -64,27 +64,30 @@ private:
     bool m_primary{false};
 };
 
-Q_DECLARE_METATYPE(VRawSAPoint) // NOLINT
+Q_DECLARE_METATYPE(VRawSAPoint)                  // NOLINT
 Q_DECLARE_TYPEINFO(VRawSAPoint, Q_MOVABLE_TYPE); // NOLINT
 
 //---------------------------------------------------------------------------------------------------------------------
 Q_DECL_CONSTEXPR inline VRawSAPoint::VRawSAPoint(qreal xpos, qreal ypos)
-    : VLayoutPoint(xpos, ypos)
-{}
+  : VLayoutPoint(xpos, ypos)
+{
+}
 
 //---------------------------------------------------------------------------------------------------------------------
 Q_DECL_CONSTEXPR inline VRawSAPoint::VRawSAPoint(QPointF p)
-    : VLayoutPoint(p)
-{}
+  : VLayoutPoint(p)
+{
+}
 
 //---------------------------------------------------------------------------------------------------------------------
 Q_DECL_CONSTEXPR inline VRawSAPoint::VRawSAPoint(const VLayoutPoint &p)
-    : VLayoutPoint(p)
-{}
+  : VLayoutPoint(p)
+{
+}
 
 //---------------------------------------------------------------------------------------------------------------------
 Q_DECL_RELAXED_CONSTEXPR inline VRawSAPoint::VRawSAPoint(QPointF p, bool curvePoint, bool turnPoint)
-    : VLayoutPoint(p)
+  : VLayoutPoint(p)
 {
     SetCurvePoint(curvePoint);
     SetTurnPoint(turnPoint);
@@ -92,8 +95,8 @@ Q_DECL_RELAXED_CONSTEXPR inline VRawSAPoint::VRawSAPoint(QPointF p, bool curvePo
 
 //---------------------------------------------------------------------------------------------------------------------
 Q_DECL_RELAXED_CONSTEXPR inline VRawSAPoint::VRawSAPoint(QPointF p, bool curvePoint, bool turnPoint, bool loopPoint)
-    : VLayoutPoint(p),
-      m_loopPoint(loopPoint)
+  : VLayoutPoint(p),
+    m_loopPoint(loopPoint)
 {
     SetCurvePoint(curvePoint);
     SetTurnPoint(turnPoint);

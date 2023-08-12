@@ -38,19 +38,18 @@ namespace
 //---------------------------------------------------------------------------------------------------------------------
 auto QtCodecs() -> QMap<QStringConverter::Encoding, QStringList>
 {
-    static auto codecs = QMap<QStringConverter::Encoding, QStringList>
-    {
-        {QStringConverter::Latin1, {"ISO-8859-1", "ANSI_1252", "CP1252", "windows-1252", "LATIN1", "CP819", "CSISO",
-            "IBM819", "ISO_8859-1", "APPLE ROMAN", "ISO8859-1", "ISO8859-15", "ISO-IR-100", "L1", "IBM 850",
-            "850"}}, // Western Europe
+    static auto codecs = QMap<QStringConverter::Encoding, QStringList>{
+        {QStringConverter::Latin1,
+         {"ISO-8859-1", "ANSI_1252", "CP1252", "windows-1252", "LATIN1", "CP819", "CSISO", "IBM819", "ISO_8859-1",
+          "APPLE ROMAN", "ISO8859-1", "ISO8859-15", "ISO-IR-100", "L1", "IBM 850", "850"}}, // Western Europe
         {QStringConverter::Utf8, {"UTF-8", "UTF8", "UTF8-BIT"}},
         {QStringConverter::Utf16, {"UTF-16", "UTF16", "UTF16-BIT"}},
-        {QStringConverter::Utf16BE,	{"UTF-16BE"}},
+        {QStringConverter::Utf16BE, {"UTF-16BE"}},
         {QStringConverter::Utf16LE, {"UTF-16LE"}},
-        {QStringConverter::Utf32,	{"UTF-32"}},
-        {QStringConverter::Utf32BE,	{"UTF-32BE"}},
-        {QStringConverter::Utf32LE,	{"UTF-32LE"}},
-        {QStringConverter::System,  {"System"}},
+        {QStringConverter::Utf32, {"UTF-32"}},
+        {QStringConverter::Utf32BE, {"UTF-32BE"}},
+        {QStringConverter::Utf32LE, {"UTF-32LE"}},
+        {QStringConverter::System, {"System"}},
     };
 
     return codecs;
@@ -59,27 +58,21 @@ auto QtCodecs() -> QMap<QStringConverter::Encoding, QStringList>
 //---------------------------------------------------------------------------------------------------------------------
 auto CodecMibs() -> QMap<QStringConverter::Encoding, int>
 {
-    static auto mibs = QMap<QStringConverter::Encoding, int>
-    {
-        {QStringConverter::Utf8,	106},
-        {QStringConverter::Utf16,	1015},
-        {QStringConverter::Utf16BE,	1013},
-        {QStringConverter::Utf16LE, 1014},
-        {QStringConverter::Utf32,	1017},
-        {QStringConverter::Utf32BE,	1018},
-        {QStringConverter::Utf32LE,	1019},
-        {QStringConverter::Latin1,	4},
-        {QStringConverter::System,  0},
+    static auto mibs = QMap<QStringConverter::Encoding, int>{
+        {QStringConverter::Utf8, 106},     {QStringConverter::Utf16, 1015}, {QStringConverter::Utf16BE, 1013},
+        {QStringConverter::Utf16LE, 1014}, {QStringConverter::Utf32, 1017}, {QStringConverter::Utf32BE, 1018},
+        {QStringConverter::Utf32LE, 1019}, {QStringConverter::Latin1, 4},   {QStringConverter::System, 0},
     };
 
     return mibs;
 }
-}  // namespace
+} // namespace
 
 //---------------------------------------------------------------------------------------------------------------------
 VTextCodec::VTextCodec(QStringConverter::Encoding encoding)
-    : m_encoding(encoding)
-{}
+  : m_encoding(encoding)
+{
+}
 
 //---------------------------------------------------------------------------------------------------------------------
 auto VTextCodec::codecForName(const QString &name) -> VTextCodec *

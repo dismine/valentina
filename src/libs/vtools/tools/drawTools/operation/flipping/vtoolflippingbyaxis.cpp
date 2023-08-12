@@ -28,8 +28,6 @@
 
 #include "vtoolflippingbyaxis.h"
 
-#include <climits>
-#include <qiterator.h>
 #include <QColor>
 #include <QDomNode>
 #include <QDomNodeList>
@@ -37,28 +35,27 @@
 #include <QPoint>
 #include <QSharedPointer>
 #include <QUndoStack>
+#include <climits>
 #include <new>
+#include <qiterator.h>
 
-#include "../../../../dialogs/tools/dialogtool.h"
 #include "../../../../dialogs/tools/dialogflippingbyaxis.h"
+#include "../../../../dialogs/tools/dialogtool.h"
 #include "../../../../visualization/line/operation/vistoolflippingbyaxis.h"
 #include "../../../../visualization/visualization.h"
-#include "../vgeometry/vpointf.h"
-#include "../vpatterndb/vtranslatevars.h"
-#include "../vmisc/vabstractapplication.h"
-#include "../vmisc/vcommonsettings.h"
-#if QT_VERSION < QT_VERSION_CHECK(5, 5, 0)
-#include "../vmisc/diagnostic.h"
-#endif // QT_VERSION < QT_VERSION_CHECK(5, 5, 0)
-#include "../vpatterndb/vcontainer.h"
-#include "../vpatterndb/vformula.h"
-#include "../ifc/ifcdef.h"
-#include "../ifc/exception/vexception.h"
-#include "../vwidgets/vabstractsimple.h"
-#include "../vwidgets/vmaingraphicsscene.h"
 #include "../../../vabstracttool.h"
 #include "../../../vdatatool.h"
 #include "../../vdrawtool.h"
+#include "../ifc/exception/vexception.h"
+#include "../ifc/ifcdef.h"
+#include "../vgeometry/vpointf.h"
+#include "../vmisc/vabstractapplication.h"
+#include "../vmisc/vcommonsettings.h"
+#include "../vpatterndb/vcontainer.h"
+#include "../vpatterndb/vformula.h"
+#include "../vpatterndb/vtranslatevars.h"
+#include "../vwidgets/vabstractsimple.h"
+#include "../vwidgets/vmaingraphicsscene.h"
 
 template <class T> class QSharedPointer;
 
@@ -102,7 +99,7 @@ auto VToolFlippingByAxis::Create(const QPointer<DialogTool> &dialog, VMainGraphi
     initData.typeCreation = Source::FromGui;
     initData.notes = dialogTool->GetNotes();
 
-    VToolFlippingByAxis* operation = Create(initData);
+    VToolFlippingByAxis *operation = Create(initData);
     if (operation != nullptr)
     {
         operation->m_dialog = dialog;
@@ -191,10 +188,10 @@ void VToolFlippingByAxis::ShowContextMenu(QGraphicsSceneContextMenuEvent *event,
     {
         ContextMenu<DialogFlippingByAxis>(event, id);
     }
-    catch(const VExceptionToolWasDeleted &e)
+    catch (const VExceptionToolWasDeleted &e)
     {
         Q_UNUSED(e)
-        return;//Leave this method immediately!!!
+        return; // Leave this method immediately!!!
     }
 }
 
@@ -229,7 +226,7 @@ void VToolFlippingByAxis::SaveDialog(QDomElement &domElement, QList<quint32> &ol
     doc->SetAttribute(domElement, AttrAxisType, QString().setNum(static_cast<int>(dialogTool->GetAxisType())));
     doc->SetAttribute(domElement, AttrSuffix, dialogTool->GetSuffix());
     doc->SetAttributeOrRemoveIf<QString>(domElement, AttrNotes, dialogTool->GetNotes(),
-                                         [](const QString &notes) noexcept {return notes.isEmpty();});
+                                         [](const QString &notes) noexcept { return notes.isEmpty(); });
 
     source = dialogTool->GetSourceObjects();
     SaveSourceDestination(domElement);
@@ -262,15 +259,15 @@ auto VToolFlippingByAxis::MakeToolTip() const -> QString
 {
     return QStringLiteral("<tr> <td><b>%1:</b> %2</td> </tr>"
                           "%3")
-            .arg(tr("Origin point"), OriginPointName()) // 1, 2
-            .arg(VisibilityGroupToolTip());             // 3
+        .arg(tr("Origin point"), OriginPointName()) // 1, 2
+        .arg(VisibilityGroupToolTip());             // 3
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 VToolFlippingByAxis::VToolFlippingByAxis(const VToolFlippingByAxisInitData &initData, QGraphicsItem *parent)
-    : VAbstractFlipping(initData, parent),
-      m_originPointId(initData.originPointId),
-      m_axisType(initData.axisType)
+  : VAbstractFlipping(initData, parent),
+    m_originPointId(initData.originPointId),
+    m_axisType(initData.axisType)
 {
     InitOperatedObjects();
     ToolCreation(initData.typeCreation);

@@ -37,7 +37,10 @@
 
 //---------------------------------------------------------------------------------------------------------------------
 VObjPaintDevice::VObjPaintDevice()
-    :QPaintDevice(), engine(new VObjEngine()), fileName(), owns_iodevice(1)
+  : QPaintDevice(),
+    engine(new VObjEngine()),
+    fileName(),
+    owns_iodevice(1)
 {
     owns_iodevice = static_cast<int>(false);
 }

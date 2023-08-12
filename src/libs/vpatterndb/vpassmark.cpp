@@ -61,11 +61,11 @@ auto GetSeamPassmarkSAPoint(const VPiecePassmarkData &passmarkData, const QVecto
     if (needRollback && not seamAllowance.isEmpty())
     {
         ekvPoints.clear();
-        ekvPoints += VRawSAPoint(seamAllowance.at(seamAllowance.size()-1));
+        ekvPoints += VRawSAPoint(seamAllowance.at(seamAllowance.size() - 1));
     }
 
     if (ekvPoints.isEmpty())
-    { // Just in case
+    {                                 // Just in case
         return PassmarkStatus::Error; // Something wrong
     }
 
@@ -80,9 +80,9 @@ auto PointsToSegments(const QVector<QPointF> &points) -> QVector<QLineF>
     if (points.size() >= 2)
     {
         lines.reserve(points.size() - 1);
-        for (int i=0; i < points.size()-1; ++i)
+        for (int i = 0; i < points.size() - 1; ++i)
         {
-            QLineF segment = QLineF(points.at(i), points.at(i+1));
+            QLineF segment = QLineF(points.at(i), points.at(i + 1));
             if (segment.length() > 0)
             {
                 lines.append(segment);
@@ -604,15 +604,14 @@ auto VPiecePassmarkData::toJson() const -> QJsonObject
 
 //---------------------------------------------------------------------------------------------------------------------
 VPassmark::VPassmark(const VPiecePassmarkData &data)
-    : m_data(data),
-      m_null(false)
+  : m_data(data),
+    m_null(false)
 {
     // Correct distorsion
-    if (VGObject::IsPointOnLineSegment(m_data.passmarkSAPoint, m_data.previousSAPoint,
-                                       m_data.nextSAPoint))
+    if (VGObject::IsPointOnLineSegment(m_data.passmarkSAPoint, m_data.previousSAPoint, m_data.nextSAPoint))
     {
-        const QPointF p = VGObject::CorrectDistortion(m_data.passmarkSAPoint, m_data.previousSAPoint,
-                                                      m_data.nextSAPoint);
+        const QPointF p =
+            VGObject::CorrectDistortion(m_data.passmarkSAPoint, m_data.previousSAPoint, m_data.nextSAPoint);
         m_data.passmarkSAPoint.setX(p.x());
         m_data.passmarkSAPoint.setY(p.y());
     }
@@ -630,16 +629,14 @@ auto VPassmark::FullPassmark(const VPiece &piece, const VContainer *data) const 
     {
         QVector<QLineF> lines;
         lines += SAPassmark(piece, data, PassmarkSide::All);
-        if (VAbstractApplication::VApp()->Settings()->IsDoublePassmark()
-                && (VAbstractApplication::VApp()->Settings()->IsPieceShowMainPath() || not piece.IsHideMainPath())
-                && m_data.isMainPathNode
-                && m_data.passmarkAngleType != PassmarkAngleType::Intersection
-                && m_data.passmarkAngleType != PassmarkAngleType::IntersectionOnlyLeft
-                && m_data.passmarkAngleType != PassmarkAngleType::IntersectionOnlyRight
-                && m_data.passmarkAngleType != PassmarkAngleType::Intersection2
-                && m_data.passmarkAngleType != PassmarkAngleType::Intersection2OnlyLeft
-                && m_data.passmarkAngleType != PassmarkAngleType::Intersection2OnlyRight
-                && m_data.isShowSecondPassmark)
+        if (VAbstractApplication::VApp()->Settings()->IsDoublePassmark() &&
+            (VAbstractApplication::VApp()->Settings()->IsPieceShowMainPath() || not piece.IsHideMainPath()) &&
+            m_data.isMainPathNode && m_data.passmarkAngleType != PassmarkAngleType::Intersection &&
+            m_data.passmarkAngleType != PassmarkAngleType::IntersectionOnlyLeft &&
+            m_data.passmarkAngleType != PassmarkAngleType::IntersectionOnlyRight &&
+            m_data.passmarkAngleType != PassmarkAngleType::Intersection2 &&
+            m_data.passmarkAngleType != PassmarkAngleType::Intersection2OnlyLeft &&
+            m_data.passmarkAngleType != PassmarkAngleType::Intersection2OnlyRight && m_data.isShowSecondPassmark)
         {
             lines += BuiltInSAPassmark(piece, data);
         }
@@ -713,7 +710,7 @@ auto VPassmark::Data() const -> VPiecePassmarkData
 auto VPassmark::FindIntersection(const QLineF &line, const QVector<QPointF> &seamAllowance) -> QLineF
 {
     QLineF testLine = line;
-    testLine.setLength(testLine.length()*10);
+    testLine.setLength(testLine.length() * 10);
     QVector<QPointF> intersections = VAbstractCurve::CurveIntersectLine(seamAllowance, testLine);
     if (not intersections.isEmpty())
     {
@@ -940,10 +937,10 @@ auto VPassmark::BuiltInSAPassmarkBaseLine(const VPiece &piece) const -> QVector<
             {
                 const QString errorMsg = QObject::tr("Cannot calculate a notch for point '%1' in piece '%2' with built "
                                                      "in seam allowance. User must manually provide length.")
-                        .arg(m_data.nodeName, m_data.pieceName);
+                                             .arg(m_data.nodeName, m_data.pieceName);
                 VAbstractApplication::VApp()->IsPedantic()
-                        ? throw VExceptionInvalidNotch(errorMsg)
-                        : qWarning() << VAbstractValApplication::warningMessageSignature + errorMsg;
+                    ? throw VExceptionInvalidNotch(errorMsg)
+                    : qWarning() << VAbstractValApplication::warningMessageSignature + errorMsg;
                 return {};
             }
         }
@@ -952,7 +949,7 @@ auto VPassmark::BuiltInSAPassmarkBaseLine(const VPiece &piece) const -> QVector<
     QLineF edge1 = QLineF(m_data.passmarkSAPoint, m_data.previousSAPoint);
     QLineF edge2 = QLineF(m_data.passmarkSAPoint, m_data.nextSAPoint);
 
-    edge1.setAngle(edge1.angle() + edge1.angleTo(edge2)/2.);
+    edge1.setAngle(edge1.angle() + edge1.angleTo(edge2) / 2.);
     edge1.setLength(length);
 
     return {edge1};
@@ -994,9 +991,11 @@ auto VPassmark::SAPassmarkBaseLine(const QVector<QPointF> &seamAllowance, const 
     if (rotatedSeamAllowance.size() < 2)
     {
         const QString errorMsg = QObject::tr("Cannot calculate a notch for point '%1' in piece '%2'. Seam allowance is "
-                                             "empty.").arg(m_data.nodeName, m_data.pieceName);
-        VAbstractApplication::VApp()->IsPedantic() ? throw VExceptionInvalidNotch(errorMsg) :
-            qWarning() << VAbstractValApplication::warningMessageSignature + errorMsg;
+                                             "empty.")
+                                     .arg(m_data.nodeName, m_data.pieceName);
+        VAbstractApplication::VApp()->IsPedantic()
+            ? throw VExceptionInvalidNotch(errorMsg)
+            : qWarning() << VAbstractValApplication::warningMessageSignature + errorMsg;
         return {}; // Something wrong
     }
 
@@ -1007,12 +1006,13 @@ auto VPassmark::SAPassmarkBaseLine(const QVector<QPointF> &seamAllowance, const 
         const QString errorMsg = QObject::tr("Cannot calculate a notch for point '%1' in piece '%2'. Cannot find "
                                              "position for a notch.")
                                      .arg(m_data.nodeName, m_data.pieceName);
-        VAbstractApplication::VApp()->IsPedantic() ? throw VExceptionInvalidNotch(errorMsg) :
-            qWarning() << VAbstractValApplication::warningMessageSignature + errorMsg;
+        VAbstractApplication::VApp()->IsPedantic()
+            ? throw VExceptionInvalidNotch(errorMsg)
+            : qWarning() << VAbstractValApplication::warningMessageSignature + errorMsg;
         return {}; // Something wrong
     }
 
-    const QVector<QPointF>& path = (m_data.passmarkAngleType == PassmarkAngleType::Straightforward ||
+    const QVector<QPointF> &path = (m_data.passmarkAngleType == PassmarkAngleType::Straightforward ||
                                     m_data.passmarkAngleType == PassmarkAngleType::Bisector)
                                        ? rotatedSeamAllowance
                                        : seamAllowance;
@@ -1022,8 +1022,9 @@ auto VPassmark::SAPassmarkBaseLine(const QVector<QPointF> &seamAllowance, const 
         const QString errorMsg = QObject::tr("Cannot calculate a notch for point '%1' in piece '%2'. Unable to fix a "
                                              "notch position.")
                                      .arg(m_data.nodeName, m_data.pieceName);
-        VAbstractApplication::VApp()->IsPedantic() ? throw VExceptionInvalidNotch(errorMsg) :
-            qWarning() << VAbstractValApplication::warningMessageSignature + errorMsg;
+        VAbstractApplication::VApp()->IsPedantic()
+            ? throw VExceptionInvalidNotch(errorMsg)
+            : qWarning() << VAbstractValApplication::warningMessageSignature + errorMsg;
     }
 
     if (m_data.passmarkAngleType == PassmarkAngleType::Straightforward)

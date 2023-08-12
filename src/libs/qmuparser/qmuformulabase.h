@@ -43,7 +43,7 @@ public:
 
     void SetSepForTr(bool osSeparator, bool fromUser);
 
-    static void RemoveAll(QMap<vsizetype, QString> &map, const QString &val);
+    static void RemoveAll(QMap<qmusizetype, QString> &map, const QString &val);
 
 protected:
     static auto AddVariable(const QString &a_szName, void *a_pUserData) -> qreal *;
