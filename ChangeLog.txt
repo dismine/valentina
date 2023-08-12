@@ -34,6 +34,7 @@
 - Fix crash after using tool Union of details.
 - Tool box redesign.
 - Increased requirement for minimal Qt version.
+- Support for Dark mode.
 
 # Valentina 0.7.52 September 12, 2022
 - Fix crash when default locale is ru.
