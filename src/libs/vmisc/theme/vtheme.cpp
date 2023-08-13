@@ -604,6 +604,7 @@ VTheme::VTheme(QObject *parent)
         }
 
         isProcessingColorSchemeChange = true;
+        QGuiApplication::setOverrideCursor(QCursor(Qt::WaitCursor));
 
         VCommonSettings *settings = VAbstractApplication::VApp()->Settings();
         VThemeMode themeMode = settings->GetThemeMode();
@@ -624,6 +625,7 @@ VTheme::VTheme(QObject *parent)
         }
 
         ResetThemeSettings();
+        QGuiApplication::restoreOverrideCursor();
 
         isProcessingColorSchemeChange = false;
     };
@@ -645,6 +647,7 @@ VTheme::VTheme(QObject *parent)
             }
 
             isProcessingColorSchemeChange = true;
+            QGuiApplication::setOverrideCursor(QCursor(Qt::WaitCursor));
 
             bool darkTheme = IsInDarkTheme();
             if (m_darkTheme != darkTheme)
@@ -653,6 +656,7 @@ VTheme::VTheme(QObject *parent)
                 ResetThemeSettings();
             }
 
+            QGuiApplication::restoreOverrideCursor();
             isProcessingColorSchemeChange = false;
         };
 

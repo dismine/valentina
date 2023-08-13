@@ -125,6 +125,7 @@ auto TapePreferencesConfigurationPage::Apply() -> QStringList
     auto themeMode = static_cast<VThemeMode>(ui->comboBoxThemeMode->currentData().toInt());
     if (settings->GetThemeMode() != themeMode)
     {
+        QGuiApplication::setOverrideCursor(QCursor(Qt::WaitCursor));
 #if QT_VERSION >= QT_VERSION_CHECK(6, 5, 0)
         if (themeMode == VThemeMode::System && VTheme::NativeDarkThemeAvailable())
         {
@@ -144,6 +145,7 @@ auto TapePreferencesConfigurationPage::Apply() -> QStringList
 
         settings->SetThemeMode(themeMode);
         VTheme::Instance()->ResetThemeSettings();
+        QGuiApplication::restoreOverrideCursor();
     }
 
     if (settings->IsDontUseNativeDialog() != ui->checkBoxDontUseNativeDialog->isChecked())
