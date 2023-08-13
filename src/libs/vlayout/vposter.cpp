@@ -43,6 +43,7 @@
 #include <QRectF>
 #include <QString>
 #include <QVector>
+#include <QtMath>
 
 #include "../ifc/exception/vexception.h"
 #include "../vmisc/compatibility.h"

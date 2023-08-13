@@ -31,6 +31,12 @@
 
 #include "../vmisc/compatibility.h"
 
+#if QT_VERSION < QT_VERSION_CHECK(6, 0, 0)
+#include "../vdxf/dxfdef.h"
+#include "../vdxf/libdxfrw/intern/drw_textcodec.h"
+#include "../vmisc/def.h"
+#endif
+
 #if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
 #include "../vmisc/vtextcodec.h"
 #else

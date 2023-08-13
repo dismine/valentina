@@ -41,6 +41,7 @@
 #include <QPrintPreviewDialog>
 #include <QPrinterInfo>
 #include <QSpacerItem>
+#include <QtMath>
 
 #include "../ifc/exception/vexception.h"
 #include "../ifc/xml/vwatermarkconverter.h"
