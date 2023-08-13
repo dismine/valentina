@@ -44,8 +44,12 @@
 #include "compatibility.h"
 #include "svgfont/vsvgfontdatabase.h"
 
+#if QT_VERSION < QT_VERSION_CHECK(6, 0, 0)
+#include "literals.h"
+#endif
+
 #if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
-#include "../vmisc/vtextcodec.h"
+#include "vtextcodec.h"
 #else
 #include <QTextCodec>
 #endif

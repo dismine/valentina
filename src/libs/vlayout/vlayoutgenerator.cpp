@@ -32,6 +32,7 @@
 #include <QGraphicsRectItem>
 #include <QRectF>
 #include <QThreadPool>
+#include <QtMath>
 
 #include "../ifc/exception/vexceptionterminatedposition.h"
 #include "../vmisc/compatibility.h"
