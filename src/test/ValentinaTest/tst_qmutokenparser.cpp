@@ -27,15 +27,15 @@
  *************************************************************************/
 
 #include "tst_qmutokenparser.h"
-#include "../qmuparser/qmutokenparser.h"
 #include "../qmuparser/qmudef.h"
+#include "../qmuparser/qmutokenparser.h"
 
 #include <QtTest>
 
 //---------------------------------------------------------------------------------------------------------------------
 TST_QmuTokenParser::TST_QmuTokenParser(QObject *parent)
-    : QObject(parent),
-      m_systemLocale(QLocale::system())
+  : QObject(parent),
+    m_systemLocale(QLocale::system())
 {
 }
 
@@ -83,8 +83,8 @@ void TST_QmuTokenParser::TokenFromUser_data()
     QTest::addColumn<QLocale>("locale");
 
     const QList<QLocale> allLocales =
-            QLocale::matchingLocales(QLocale::AnyLanguage, QLocale::AnyScript, QLocale::AnyCountry);
-    for(const auto &locale : allLocales)
+        QLocale::matchingLocales(QLocale::AnyLanguage, QLocale::AnyScript, QLocale::AnyCountry);
+    for (const auto &locale : allLocales)
     {
         if (not SupportedLocale(locale))
         {
@@ -121,15 +121,15 @@ void TST_QmuTokenParser::PrepareVal(qreal val, const QLocale &locale)
     QString tag = QString("%1. String '%2'").arg(locale.name(), string);
     QTest::newRow(qUtf8Printable(tag)) << string << true << locale;
 
-    string = formula+QLatin1String("+");
+    string = formula + QLatin1String("+");
     tag = QString("%1. String '%2'").arg(locale.name(), string);
     QTest::newRow(qUtf8Printable(tag)) << string << false << locale;
 
-    string = formula+QLatin1String("+")+formula;
+    string = formula + QLatin1String("+") + formula;
     tag = QString("%1. String '%2'").arg(locale.name(), string);
     QTest::newRow(qUtf8Printable(tag)) << string << false << locale;
 
-    string = formula+QString("+б");
+    string = formula + QString("+б");
     tag = QString("%1. String '%2'").arg(locale.name(), string);
     QTest::newRow(qUtf8Printable(tag)) << string << false << locale;
 }
@@ -139,22 +139,22 @@ auto TST_QmuTokenParser::IsSingleFromUser(const QString &formula) -> bool
 {
     if (formula.isEmpty())
     {
-        return false;// if don't know say no
+        return false; // if don't know say no
     }
 
-    QMap<vsizetype, QString> tokens;
-    QMap<vsizetype, QString> numbers;
+    QMap<qmusizetype, QString> tokens;
+    QMap<qmusizetype, QString> numbers;
 
     try
     {
         QScopedPointer<qmu::QmuTokenParser> cal(new qmu::QmuTokenParser(formula, true, true));
-        tokens = cal->GetTokens();// Tokens (variables, measurements)
-        numbers = cal->GetNumbers();// All numbers in expression
+        tokens = cal->GetTokens();   // Tokens (variables, measurements)
+        numbers = cal->GetNumbers(); // All numbers in expression
     }
     catch (const qmu::QmuParserError &e)
     {
         Q_UNUSED(e)
-        return false;// something wrong with formula, say no
+        return false; // something wrong with formula, say no
     }
 
     // Remove "-" from tokens list if exist. If don't do that unary minus operation will broken.

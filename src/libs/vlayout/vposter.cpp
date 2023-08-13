@@ -371,10 +371,8 @@ auto VPoster::CountRows(int height, PageOrientation orientation) const -> int
     {
         return 1;
     }
-    else
-    {
-        return qCeil(imgLength / (pageLength - static_cast<int>(allowance)));
-    }
+
+    return qCeil(imgLength / (pageLength - static_cast<int>(allowance)));
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -396,10 +394,8 @@ auto VPoster::CountColumns(int width, PageOrientation orientation) const -> int
     {
         return 1;
     }
-    else
-    {
-        return qCeil(imgLength / (pageLength - static_cast<int>(allowance)));
-    }
+
+    return qCeil(imgLength / (pageLength - static_cast<int>(allowance)));
 }
 
 //---------------------------------------------------------------------------------------------------------------------
