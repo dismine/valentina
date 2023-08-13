@@ -218,12 +218,59 @@ void ActivateCustomDarkTheme()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+#if defined(Q_OS_WIN)
+void ActivateDefaultThemeWin()
+{
+#if QT_VERSION >= QT_VERSION_CHECK(6, 5, 0)
+    qApp->setStyleSheet(QString()); // NOLINT(cppcoreguidelines-pro-type-static-cast-downcast)
+#else
+    if (VTheme::IsInDarkTheme())
+    {
+        ActivateCustomDarkTheme();
+    }
+    else
+    {
+        ActivateCustomLightTheme();
+    }
+#endif // QT_VERSION >= QT_VERSION_CHECK(6, 5, 0)
+}
+#endif // defined(Q_OS_WIN)
+
+//---------------------------------------------------------------------------------------------------------------------
+#if defined(Q_OS_MACX)
+void ActivateDefaultThemeMac()
+{
+#if QT_VERSION >= QT_VERSION_CHECK(5, 12, 0)
+    qApp->setStyleSheet(QString()); // NOLINT(cppcoreguidelines-pro-type-static-cast-downcast)
+#else
+    if (VTheme::IsInDarkTheme())
+    {
+        ActivateCustomDarkTheme();
+    }
+    else
+    {
+        ActivateCustomLightTheme();
+    }
+#endif // QT_VERSION >= QT_VERSION_CHECK(5, 12, 0)
+}
+#endif // defined(Q_OS_MACX)
+
+//---------------------------------------------------------------------------------------------------------------------
 void ActivateDefaultTheme()
 {
-    qApp->setStyleSheet(QString()); // NOLINT(cppcoreguidelines-pro-type-static-cast-downcast)
-
-#if defined(Q_OS_MACX)
-    NSMacSetToAutoTheme();
+#if defined(Q_OS_WIN)
+    ActivateDefaultThemeWin();
+#elif defined(Q_OS_MACX)
+    ActivateDefaultThemeMac();
+#else
+    if (VTheme::IsInDarkTheme())
+    {
+        ActivateCustomDarkTheme();
+    }
+    else
+    {
+        ActivateCustomLightTheme();
+    }
 #endif
 }
 
@@ -465,10 +512,6 @@ void VTheme::InitThemeMode()
             if (ShouldApplyDarkTheme())
             {
                 ActivateCustomDarkTheme();
-            }
-            else
-            {
-                ActivateCustomLightTheme();
             }
         }
     }
