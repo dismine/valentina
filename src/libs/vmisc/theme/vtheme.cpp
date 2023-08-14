@@ -230,7 +230,7 @@ void ActivateDefaultThemeWin()
     }
     else
     {
-        ActivateCustomLightTheme();
+        qApp->setStyleSheet(QString()); // NOLINT(cppcoreguidelines-pro-type-static-cast-downcast)
     }
 #endif // QT_VERSION >= QT_VERSION_CHECK(6, 5, 0)
 }
@@ -249,7 +249,7 @@ void ActivateDefaultThemeMac()
     }
     else
     {
-        ActivateCustomLightTheme();
+        qApp->setStyleSheet(QString()); // NOLINT(cppcoreguidelines-pro-type-static-cast-downcast)
     }
 #endif // QT_VERSION >= QT_VERSION_CHECK(5, 12, 0)
 }
@@ -269,7 +269,7 @@ void ActivateDefaultTheme()
     }
     else
     {
-        ActivateCustomLightTheme();
+        qApp->setStyleSheet(QString()); // NOLINT(cppcoreguidelines-pro-type-static-cast-downcast)
     }
 #endif
 }
