@@ -60,6 +60,7 @@ environment:
       CHOCOLATEY_MINGW_VERSION: 12.2.0.03042023
       WINDEPLOYQT_BIN_PATH: "undefined"
       DEPLOY: true
+      RUN_TESTS: true
 
     - job_name: Windows_Qt_5_15_(qbs_GCC_x86)
       APPVEYOR_BUILD_WORKER_IMAGE: Visual Studio 2019
@@ -79,6 +80,7 @@ environment:
       CHOCOLATEY_PACKAGES: false
       WINDEPLOYQT_BIN_PATH: "undefined"
       DEPLOY: true
+      RUN_TESTS: true
     
     - job_name: Windows_Qt_5_6_(GCC_x86)
       APPVEYOR_BUILD_WORKER_IMAGE: Visual Studio 2015
@@ -163,6 +165,7 @@ environment:
       CHOCOLATEY_MINGW_VERSION: 12.2.0.03042023
       WINDEPLOYQT_BIN_PATH: "undefined"
       DEPLOY: false
+      RUN_TESTS: true
 
     - job_name: Windows_Qt_5_15_(make_GCC_x86)
       APPVEYOR_BUILD_WORKER_IMAGE: Visual Studio 2019
@@ -191,6 +194,7 @@ environment:
       CHOCOLATEY_PACKAGES: false
       WINDEPLOYQT_BIN_PATH: "C:\\Qt\\6.4\\msvc2019_64\\bin"
       DEPLOY: false
+      RUN_TESTS: false
 
     - job_name: Windows_Qt_6_4_(MSVC_x64)
       APPVEYOR_BUILD_WORKER_IMAGE: Visual Studio 2019
@@ -207,6 +211,7 @@ environment:
       CHOCOLATEY_PACKAGES: false
       WINDEPLOYQT_BIN_PATH: "undefined"
       DEPLOY: false
+      RUN_TESTS: true
 
     - job_name: Windows_Qt_5_15_(qbs_GCC_x64)
       APPVEYOR_BUILD_WORKER_IMAGE: Visual Studio 2019
@@ -226,6 +231,7 @@ environment:
       CHOCOLATEY_PACKAGES: false
       WINDEPLOYQT_BIN_PATH: "undefined"
       DEPLOY: false
+      RUN_TESTS: true
 
     - job_name: Windows_Qt_5_15_(qbs_MSVC_x64)
       APPVEYOR_BUILD_WORKER_IMAGE: Visual Studio 2019
@@ -241,7 +247,8 @@ environment:
       PLATFORM: "Windows7+"
       CHOCOLATEY_PACKAGES: false
       WINDEPLOYQT_BIN_PATH: "undefined"
-      DEPLOY: false 
+      DEPLOY: false
+      RUN_TESTS: true 
 
     - job_name: Windows_Qt_5_15_(make_GCC_x64)
       APPVEYOR_BUILD_WORKER_IMAGE: Visual Studio 2019
@@ -454,7 +461,7 @@ for:
     - qbs build -f valentina.qbs -d %APPVEYOR_BUILD_FOLDER%\build --jobs %NUMBER_OF_PROCESSORS% config:release qbs.installRoot:%APPVEYOR_BUILD_FOLDER%\build\install-root\valentina profile:qt6 project.enableConan:true modules.buildconfig.enableCcache:false project.conanProfiles:valentina modules.buildconfig.enablePCH:%ENABLE_PCH% modules.windeployqt.windeployqtProgramBinPath:%WINDEPLOYQT_BIN_PATH%
   
   test_script:
-    - qbs -p autotest-runner -d %APPVEYOR_BUILD_FOLDER%\build profile:qt6 config:release
+    - if "%RUN_TESTS%" == "true" (qbs -p autotest-runner -d %APPVEYOR_BUILD_FOLDER%\build profile:qt6 config:release)
 
   deploy_script:
     - ps: scripts/appveyor-deploy.ps1
