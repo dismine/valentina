@@ -91,8 +91,13 @@ bool GetTrueWindowsVersion(RTL_OSVERSIONINFOW &osVersionInfo)
     // Successfully loaded?
     if (hNTdllDll != nullptr)
     {
+        QT_WARNING_PUSH
+        QT_WARNING_DISABLE_MSVC(4191)
+
         // Get the function pointer to RtlGetVersion
         pRtlGetVersion = reinterpret_cast<RtlGetVersionFunc>(GetProcAddress(hNTdllDll, "RtlGetVersion"));
+
+        QT_WARNING_POP
 
         // If successful then read the function
         if (pRtlGetVersion != nullptr)
