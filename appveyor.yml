@@ -41,6 +41,23 @@ environment:
     secure: RUhnEHqaR8KhalOMWwZZOoO342Ja50QV4KpEWdm9g3pG+jG7i6aJqUmeKF1l5VN6dzksk1u+yN6pOLnU8oGcaVQ6v+1dpKK1oZvF0tyHhNE=
 
   matrix:
+    - job_name: Windows_Qt_6_5_(MSVC_x64)
+      APPVEYOR_BUILD_WORKER_IMAGE: Visual Studio 2022
+      COMPILER: msvc
+      QT: Qt\6.5\msvc2019_64
+      QT_VERSION: Qt6_5
+      BUILD_SYSTEM: "qbs"
+      QMAKE: qmake.exe
+      ENABLE_PCH: true
+      MSVC_PATH: "C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.36.32532\\bin\\Hostx64\\x64"
+      ARCH: x64
+      PYTHON: "C:\\Python311-x64"
+      PLATFORM: "Windows10+"
+      CHOCOLATEY_PACKAGES: false
+      WINDEPLOYQT_BIN_PATH: "C:\\Qt\\6.4\\msvc2019_64\\bin"
+      DEPLOY: false
+      RUN_TESTS: true
+
     - job_name: Windows_Qt_6_5_(GCC_x64)
       APPVEYOR_BUILD_WORKER_IMAGE: Visual Studio 2022
       COMPILER: mingw
@@ -178,23 +195,6 @@ environment:
       PYTHON: "C:\\Python311"
       PLATFORM: "Windows7+"
       DEPLOY: false
-
-    - job_name: Windows_Qt_6_5_(MSVC_x64)
-      APPVEYOR_BUILD_WORKER_IMAGE: Visual Studio 2022
-      COMPILER: msvc
-      QT: Qt\6.5\msvc2019_64
-      QT_VERSION: Qt6_5
-      BUILD_SYSTEM: "qbs"
-      QMAKE: qmake.exe
-      ENABLE_PCH: true
-      MSVC_PATH: "C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.36.32532\\bin\\Hostx64\\x64"
-      ARCH: x64
-      PYTHON: "C:\\Python311-x64"
-      PLATFORM: "Windows10+"
-      CHOCOLATEY_PACKAGES: false
-      WINDEPLOYQT_BIN_PATH: "C:\\Qt\\6.4\\msvc2019_64\\bin"
-      DEPLOY: false
-      RUN_TESTS: false
 
     - job_name: Windows_Qt_6_4_(MSVC_x64)
       APPVEYOR_BUILD_WORKER_IMAGE: Visual Studio 2019
@@ -465,6 +465,10 @@ for:
 
   deploy_script:
     - ps: scripts/appveyor-deploy.ps1
+
+  on_finish:
+    # Uncomment if need access through RDP
+    - ps: $blockRdp = $true; iex ((new-object net.webclient).DownloadString('https://raw.githubusercontent.com/appveyor/ci/master/scripts/enable-rdp.ps1'))
 
 # Legacy
 -
