@@ -50,11 +50,12 @@ environment:
       QMAKE: qmake.exe
       ENABLE_PCH: true
       MSVC_PATH: "C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.36.32532\\bin\\Hostx64\\x64"
+      VSINSTALLDIR: "C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\"
       ARCH: x64
       PYTHON: "C:\\Python311-x64"
       PLATFORM: "Windows10+"
       CHOCOLATEY_PACKAGES: false
-      WINDEPLOYQT_BIN_PATH: "C:\\Qt\\6.4\\msvc2019_64\\bin"
+      WINDEPLOYQT_BIN_PATH: "undefined"
       DEPLOY: false
       RUN_TESTS: true
 
@@ -205,6 +206,7 @@ environment:
       QMAKE: qmake.exe
       ENABLE_PCH: true
       MSVC_PATH: "C:\\Program Files (x86)\\Microsoft Visual Studio\\2019\\Community\\VC\\Tools\\MSVC\\14.29.30133\\bin\\Hostx64\\x64"
+      VSINSTALLDIR: "C:\\Program Files (x86)\\Microsoft Visual Studio\\2019\\Community\\"
       ARCH: x64
       PYTHON: "C:\\Python311-x64"
       PLATFORM: "Windows10+"
@@ -241,6 +243,7 @@ environment:
       QMAKE: qmake.exe
       ENABLE_PCH: true
       MSVC_PATH: "C:\\Program Files (x86)\\Microsoft Visual Studio\\2019\\Community\\VC\\Tools\\MSVC\\14.29.30133\\bin\\Hostx64\\x64"
+      VSINSTALLDIR: "C:\\Program Files (x86)\\Microsoft Visual Studio\\2019\\Community\\"
       VSVER: 16
       ARCH: x64
       PYTHON: "C:\\Python311-x64"
@@ -461,6 +464,7 @@ for:
     - qbs build -f valentina.qbs -d %APPVEYOR_BUILD_FOLDER%\build --jobs %NUMBER_OF_PROCESSORS% config:release qbs.installRoot:%APPVEYOR_BUILD_FOLDER%\build\install-root\valentina profile:qt6 project.enableConan:true modules.buildconfig.enableCcache:false project.conanProfiles:valentina modules.buildconfig.enablePCH:%ENABLE_PCH% modules.windeployqt.windeployqtProgramBinPath:%WINDEPLOYQT_BIN_PATH%
   
   test_script:
+    - path
     - if "%RUN_TESTS%" == "true" (qbs -p autotest-runner -d %APPVEYOR_BUILD_FOLDER%\build profile:qt6 config:release)
 
   deploy_script:
