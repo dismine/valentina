@@ -52,6 +52,21 @@ QToolTip
     opacity: 200;
 }
 
+QListWidget 
+{
+  background-color: #eff0f1;
+}
+
+QListWidget::item 
+{
+  color: #272b2f; 
+}
+
+QListWidget::item:selected 
+{
+  background-color: #e0e9f0;
+}
+
 QWidget
 {
     color: #31363b;
@@ -760,6 +775,7 @@ QFrame[frameShape] QAbstractItemView:hover
 QToolBar
 {
     font-weight: bold;
+    border: 1px;
 }
 
 QToolBar:horizontal
@@ -1076,6 +1092,11 @@ QAbstractSpinBox:hover
     border: 0.09em solid rgba(51, 164, 223, 0.5);
 }
 
+QAbstractSpinBox:disabled 
+{ 
+  color: #c0c0c0; 
+}
+
 QAbstractSpinBox:up-button,
 QAbstractSpinBox:up-button:hover
 {
@@ -1279,6 +1300,11 @@ QCalendarWidget QSpinBox
 QLabel
 {
     border: 0em solid black;
+}
+
+QLabel:disabled 
+{ 
+  color: #c0c0c0; 
 }
 
 /* BORDERS */
@@ -1994,6 +2020,16 @@ QDialog QToolBar QToolButton[hasMenu="false"][popupMode="2"]
     padding: 0em;
 }
 
+QToolButton[text]:disabled
+{
+    color: #8c8c8c;
+}
+
+QToolButton[text]:enabled
+{
+    color: #333333;
+}
+
 QToolButton[autoRaise="false"]
 {
     background-color: #eff0f1;
@@ -2018,6 +2054,12 @@ QDialog QToolBar QToolButton[hasMenu="true"][popupMode="2"]
     padding: 0.23em;
     padding-top: 0.1em;
     padding-right: 1.2em;
+}
+
+/* Target the QAction on the QToolBar */
+QToolBar QToolButton[enabled="false"] {
+    /* Set custom text color for the disabled QAction */
+    color: #8C8C8C; /* A lighter shade of gray for better contrast */
 }
 
 QToolButton:hover
