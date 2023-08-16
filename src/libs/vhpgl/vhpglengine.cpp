@@ -488,7 +488,7 @@ void VHPGLEngine::PlotMainPath(QTextStream &out, const VLayoutPiece &detail)
             points.append(points.first()); // must be closed
         }
 
-        PlotPath(out, points, Qt::DashLine);
+        PlotPath(out, points, Qt::SolidLine);
     }
 }
 
@@ -504,7 +504,7 @@ void VHPGLEngine::PlotSeamAllowance(QTextStream &out, const VLayoutPiece &detail
         points.append(points.first()); // must be closed
     }
 
-    PlotPath(out, points, Qt::DashDotLine);
+    PlotPath(out, points, Qt::SolidLine);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
