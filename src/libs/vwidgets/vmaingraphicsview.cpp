@@ -73,7 +73,7 @@ auto ScrollingSteps(QWheelEvent *wheel_event) -> qreal
     const QPoint numPixels = wheel_event->pixelDelta();
     const QPoint numDegrees = wheel_event->angleDelta() / 8;
     qreal numSteps = 0;
-    VCommonSettings *settings = qobject_cast<VCommonSettings *>(VAbstractApplication::VApp()->Settings());
+    VCommonSettings *settings = VAbstractApplication::VApp()->Settings();
 
     if (not numPixels.isNull())
     {
@@ -108,8 +108,7 @@ auto PrepareScrolling(qreal scheduledScrollings, QWheelEvent *wheel_event) -> qr
         scheduledScrollings += numSteps;
     }
 
-    scheduledScrollings *=
-        qobject_cast<VCommonSettings *>(VAbstractApplication::VApp()->Settings())->GetScrollingAcceleration();
+    scheduledScrollings *= VAbstractApplication::VApp()->Settings()->GetScrollingAcceleration();
 
     return scheduledScrollings;
 }
@@ -138,15 +137,7 @@ auto PrioritizeItems(const QList<QGraphicsItem *> &list) -> QList<QGraphicsItem 
 //---------------------------------------------------------------------------------------------------------------------
 GraphicsViewZoom::GraphicsViewZoom(QGraphicsView *view)
   : QObject(view),
-    _view(view),
-    _modifiers(Qt::ControlModifier),
-    _zoom_factor_base(1.0015),
-    target_scene_pos(),
-    target_viewport_pos(),
-    verticalScrollAnim(),
-    _numScheduledVerticalScrollings(0),
-    horizontalScrollAnim(),
-    _numScheduledHorizontalScrollings(0)
+    _view(view)
 {
     _view->viewport()->installEventFilter(this);
 #if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
@@ -205,12 +196,12 @@ void GraphicsViewZoom::set_zoom_factor_base(double value)
 //---------------------------------------------------------------------------------------------------------------------
 void GraphicsViewZoom::InitScrollingAnimation()
 {
-    VCommonSettings *settings = qobject_cast<VCommonSettings *>(VAbstractApplication::VApp()->Settings());
-
     if (not verticalScrollAnim.isNull())
     {
         delete verticalScrollAnim;
     }
+
+    VCommonSettings *settings = VAbstractApplication::VApp()->Settings();
 
     verticalScrollAnim = new QTimeLine(settings->GetScrollingDuration(), this);
     verticalScrollAnim->setUpdateInterval(settings->GetScrollingUpdateInterval());
@@ -277,7 +268,8 @@ auto GraphicsViewZoom::eventFilter(QObject *object, QEvent *event) -> bool
          * This data need for gentle_zoom().
          * Almoust the same we do in method GraphicsViewZoom::animFinished.
          */
-        QMouseEvent *mouse_event = static_cast<QMouseEvent *>(event);
+        // NOLINTNEXTLINE(cppcoreguidelines-pro-type-static-cast-downcast)
+        auto *mouse_event = static_cast<QMouseEvent *>(event);
         QPointF delta = target_viewport_pos - mouse_event->pos();
         if (qAbs(delta.x()) > 5 || qAbs(delta.y()) > 5)
         {
@@ -286,9 +278,11 @@ auto GraphicsViewZoom::eventFilter(QObject *object, QEvent *event) -> bool
         }
         return false;
     }
+
     if (event->type() == QEvent::Wheel)
     {
-        if (QWheelEvent *wheel_event = static_cast<QWheelEvent *>(event))
+        // NOLINTNEXTLINE(cppcoreguidelines-pro-type-static-cast-downcast)
+        if (auto *wheel_event = static_cast<QWheelEvent *>(event))
         {
             const QPoint numDegrees = wheel_event->angleDelta();
             if (numDegrees.x() == 0)
@@ -298,31 +292,29 @@ auto GraphicsViewZoom::eventFilter(QObject *object, QEvent *event) -> bool
                     gentle_zoom(qPow(_zoom_factor_base, numDegrees.y()));
                     return true;
                 }
-                else if (QGuiApplication::keyboardModifiers() == Qt::ShiftModifier)
+
+                if (QGuiApplication::keyboardModifiers() == Qt::ShiftModifier)
                 {
                     StartHorizontalScrollings(wheel_event);
                     return true;
                 }
-                else
-                {
-                    StartVerticalScrollings(wheel_event);
-                    return true;
-                }
-            }
-            else
-            {
-                if (QGuiApplication::keyboardModifiers() == _modifiers)
-                {
-                    return true; // ignore
-                }
 
-                StartHorizontalScrollings(wheel_event);
+                StartVerticalScrollings(wheel_event);
                 return true;
             }
+
+            if (QGuiApplication::keyboardModifiers() == _modifiers)
+            {
+                return true; // ignore
+            }
+
+            StartHorizontalScrollings(wheel_event);
+            return true;
         }
     }
     else if (event->type() == QEvent::Gesture)
     {
+        // NOLINTNEXTLINE(cppcoreguidelines-pro-type-static-cast-downcast)
         return GestureEvent(static_cast<QGestureEvent *>(event));
     }
 
@@ -403,7 +395,7 @@ auto GraphicsViewZoom::GestureEvent(QGestureEvent *event) -> bool
 {
     if (QGesture *pinch = event->gesture(Qt::PinchGesture))
     {
-        PinchTriggered(static_cast<QPinchGesture *>(pinch));
+        PinchTriggered(static_cast<QPinchGesture *>(pinch)); // NOLINT(cppcoreguidelines-pro-type-static-cast-downcast)
         return true;
     }
     return false;
@@ -428,20 +420,14 @@ const unsigned long VMainGraphicsView::scrollDelay = 160;
  * @param parent parent object.
  */
 VMainGraphicsView::VMainGraphicsView(QWidget *parent)
-  : QGraphicsView(parent),
-    zoom(nullptr),
-    showToolOptions(true),
-    isAllowRubberBand(true),
-    m_ptStartPos(),
-    m_oldCursor(),
-    m_currentCursor(Qt::ArrowCursor)
+  : QGraphicsView(parent)
 {
     setAcceptDrops(true);
 
-    VCommonSettings *settings = qobject_cast<VCommonSettings *>(VAbstractApplication::VApp()->Settings());
+    VCommonSettings *settings = VAbstractApplication::VApp()->Settings();
     if (settings && settings->IsOpenGLRender())
     {
-        QOpenGLWidget *viewport = new QOpenGLWidget();
+        auto *viewport = new QOpenGLWidget();
         QSurfaceFormat fmt;
         fmt.setSamples(settings->GetGraphicalOutput() ? 10 : 0);
         fmt.setStencilBufferSize(8);
@@ -512,7 +498,7 @@ void VMainGraphicsView::ZoomOriginal()
 //---------------------------------------------------------------------------------------------------------------------
 void VMainGraphicsView::ZoomFitBest()
 {
-    VMainGraphicsScene *currentScene = qobject_cast<VMainGraphicsScene *>(scene());
+    auto *currentScene = qobject_cast<VMainGraphicsScene *>(scene());
     SCASSERT(currentScene)
     currentScene->SetOriginsVisible(false);
     const QRectF rect = currentScene->VisibleItemsBoundingRect();
@@ -758,7 +744,7 @@ void VMainGraphicsView::EnsureItemVisibleWithDelay(const QGraphicsItem *item, un
     else
     {
         // Ensure visible only small rect around a cursor
-        VMainGraphicsScene *currentScene = qobject_cast<VMainGraphicsScene *>(item->scene());
+        auto *currentScene = qobject_cast<VMainGraphicsScene *>(item->scene());
         SCASSERT(currentScene);
         const QPointF cursorPosition = currentScene->getScenePos();
         EnsureVisibleWithDelay(
@@ -810,15 +796,8 @@ void VMainGraphicsView::SetAntialiasing(bool value)
 //---------------------------------------------------------------------------------------------------------------------
 auto VMainGraphicsView::IsOpenGLRender() const -> bool
 {
-    QOpenGLWidget *viewport = qobject_cast<QOpenGLWidget *>(this->viewport());
-    if (viewport)
-    {
-        return true;
-    }
-    else
-    {
-        return false;
-    }
+    auto *viewport = qobject_cast<QOpenGLWidget *>(this->viewport());
+    return viewport != nullptr;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -850,7 +829,7 @@ void VMainGraphicsView::NewSceneRect(QGraphicsScene *sc, QGraphicsView *view, QG
         const QRectF viewRect = SceneVisibleArea(view);
 
         // Calculate scene rect
-        VMainGraphicsScene *currentScene = qobject_cast<VMainGraphicsScene *>(sc);
+        auto *currentScene = qobject_cast<VMainGraphicsScene *>(sc);
         SCASSERT(currentScene)
         const QRectF itemsRect = currentScene->VisibleItemsBoundingRect();
 
@@ -881,5 +860,5 @@ auto VMainGraphicsView::SceneVisibleArea(QGraphicsView *view) -> QRectF
 {
     SCASSERT(view != nullptr)
     // to receive the currently visible area, map the widgets bounds to the scene
-    return QRectF(view->mapToScene(0, 0), view->mapToScene(view->width(), view->height()));
+    return {view->mapToScene(0, 0), view->mapToScene(view->width(), view->height())};
 }
