@@ -56,10 +56,10 @@ Module {
                 var cmdArgs = [installRoot + "/" + product.targetName + ".app"];
 
                 if (product.macdeployqt.noPlugins)
-                    cmdArgs.push("--no-plugins");
+                    cmdArgs.push("-no-plugins");
 
                 if (product.macdeployqt.verbose !== undefined)
-                    cmdArgs.push("--verbose", product.macdeployqt.verbose);
+                    cmdArgs.push("-verbose", product.macdeployqt.verbose);
 
                 if (product.macdeployqt.noStrip)
                     cmdArgs.push("-no-strip");
@@ -74,7 +74,7 @@ Module {
                     cmdArgs.push("-appstore-compliant");
 
                 if (product.macdeployqt.libpath !== undefined)
-                    cmdArgs.push("--libpath", product.macdeployqt.libpath);
+                    cmdArgs.push("-libpath", product.macdeployqt.libpath);
 
                 if (product.macdeployqt.targetApps !== undefined && !product.buildconfig.enableMultiBundle && product.primaryApp)
                 {
