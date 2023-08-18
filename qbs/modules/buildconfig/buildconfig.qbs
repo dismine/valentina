@@ -823,7 +823,7 @@ Module {
 
                 for(var i = 0; i < includePaths.length; i++)
                 {
-                    if (includePaths[i].includes("xerces-c"))
+                    if (typeof includePaths[i] === 'string' && includePaths[i].includes("xerces-c"))
                     {
                         paths.push(includePaths[i]);
                     }
