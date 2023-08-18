@@ -69,10 +69,9 @@ auto main(int argc, char *argv[]) -> int
 #if defined(Q_OS_MACX)
     Q_INIT_RESOURCE(mac_light_theme); // NOLINT
     Q_INIT_RESOURCE(mac_dark_theme);  // NOLINT
-#else
+#endif
     Q_INIT_RESOURCE(win_light_theme); // NOLINT
     Q_INIT_RESOURCE(win_dark_theme);  // NOLINT
-#endif
 
 #if defined(Q_OS_WIN)
     VAbstractApplication::WinAttachConsole();

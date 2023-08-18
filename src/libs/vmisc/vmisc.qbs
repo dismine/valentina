@@ -205,7 +205,6 @@ VLib {
             "win_light_theme.qrc",
             "win_dark_theme.qrc"
         ]
-        condition: !qbs.targetOS.contains("macos")
     }
 
     Group {
