@@ -8,6 +8,7 @@ Project {
 
     property bool enableConan: false
     property string minimumMacosVersion: undefined
+    property string minimumQtVersion: "5.6"
     property stringList conanProfiles: []
     property bool enableSigning: true
 
