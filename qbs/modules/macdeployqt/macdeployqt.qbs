@@ -32,6 +32,8 @@ Module {
 
     property stringList targetApps: undefined
 
+    property string signingIdentity: "-" // ad-hoc
+
     Rule {
 //        alwaysRun: true
         multiplex: true
@@ -75,6 +77,9 @@ Module {
 
                 if (product.macdeployqt.libpath !== undefined)
                     cmdArgs.push("-libpath", product.macdeployqt.libpath);
+
+                if (product.buildconfig.enableCodeSigning)
+                    cmdArgs.push("-codesign=" + product.macdeployqt.signingIdentity);
 
                 if (product.macdeployqt.targetApps !== undefined && !product.buildconfig.enableMultiBundle && product.primaryApp)
                 {

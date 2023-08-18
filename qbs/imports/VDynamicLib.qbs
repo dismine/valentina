@@ -14,6 +14,8 @@ VLib {
     Properties {
         condition: qbs.targetOS.contains("macos")
         bundle.identifierPrefix: 'ua.com.smart-pattern'
+        codesign.enableCodeSigning: buildconfig.enableCodeSigning
+        codesign.codesignFlags: ["--deep"]
     }
 
     Properties {

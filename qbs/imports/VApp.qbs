@@ -8,6 +8,8 @@ CppApplication {
     Properties {
         condition: qbs.targetOS.contains("macos")
         cpp.minimumMacosVersion: buildconfig.minimumMacosVersion
+        codesign.enableCodeSigning: buildconfig.enableCodeSigning
+        codesign.codesignFlags: ["--deep"]
     }
 
     Properties {

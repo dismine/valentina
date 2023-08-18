@@ -9,6 +9,7 @@ Project {
     property bool enableConan: false
     property string minimumMacosVersion: undefined
     property stringList conanProfiles: []
+    property bool enableSigning: true
 
     // Temporary probe until qbs doesn't support conan 2.0
     ConanfileProbe {

@@ -45,6 +45,10 @@ Module {
         return project.enableConan;
     }
 
+    readonly property bool enableCodeSigning : {
+        return project.enableSigning;
+    }
+
     property string libDirName: "lib"
 
     property string appTarget
