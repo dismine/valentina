@@ -149,6 +149,10 @@ GraphicsViewZoom::GraphicsViewZoom(QGraphicsView *view)
     _numScheduledHorizontalScrollings(0)
 {
     _view->viewport()->installEventFilter(this);
+#if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
+    // Disabled because of bug QTBUG-103935
+    _view->viewport()->setAttribute(Qt::WA_AcceptTouchEvents, false);
+#endif
     _view->viewport()->grabGesture(Qt::PinchGesture);
     _view->setMouseTracking(true);
 
