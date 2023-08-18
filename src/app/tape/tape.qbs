@@ -15,7 +15,16 @@ VToolApp {
     Depends { name: "ebr" }
     Depends { name: "multibundle"; }
     Depends { name: "VGAnalyticsLib" }
-    Depends { name: "conan.XercesC"; condition: buildconfig.useConanPackages }
+
+    Depends {
+        name: "xerces-c";
+        condition: Utilities.versionCompare(Qt.core.version, "6") >= 0 && !buildconfig.useConanPackages
+    }
+
+    Depends {
+        name: "conan.XercesC";
+        condition: Utilities.versionCompare(Qt.core.version, "6") >= 0 && buildconfig.useConanPackages
+    }
 
     name: "Tape"
     buildconfig.appTarget: qbs.targetOS.contains("macos") ? "Tape" : "tape"

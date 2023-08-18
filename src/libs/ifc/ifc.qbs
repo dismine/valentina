@@ -98,9 +98,10 @@ VLib {
 
     Export {
         Depends { name: "cpp" }
-        Depends { name: "Qt"; submodules: ["xml"] }
+        Depends { name: "Qt"; submodules: ["core", "xml"] }
         Depends { name: "VMiscLib" }
-        Depends { name: "conan.XercesC"; condition: buildconfig.useConanPackages }
+        Depends { name: "xerces-c"; condition: Utilities.versionCompare(Qt.core.version, "6") >= 0 && !buildconfig.useConanPackages }
+        Depends { name: "conan.XercesC"; condition: Utilities.versionCompare(Qt.core.version, "6") >= 0 && buildconfig.useConanPackages }
         cpp.includePaths: [exportingProduct.sourceDirectory]
     }
 }

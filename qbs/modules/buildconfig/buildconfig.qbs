@@ -813,7 +813,21 @@ Module {
         cpp.systemIncludePaths: {
             var paths = [FileInfo.joinPaths(product.buildDirectory, "qt.headers")];
 
-            if (Utilities.versionCompare(qbs.version, "1.22") < 0) {
+            if (Utilities.versionCompare(Qt.core.version, "6") >= 0 && !useConanPackages)
+            {
+                var includePaths = product.cpp.includePaths;
+
+                for(var i = 0; i < includePaths.length; i++)
+                {
+                    if (includePaths[i].includes("xerces-c"))
+                    {
+                        paths.push(includePaths[i]);
+                    }
+                }
+            }
+
+            if (Utilities.versionCompare(qbs.version, "1.22") < 0)
+            {
                 var qtLibs = [
                     "QtCore",
                     "QtSvg",
