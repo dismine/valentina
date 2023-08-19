@@ -49,16 +49,14 @@ RESOURCES += \
     share/resources/icon.qrc \ # All other icons except cursors and Windows theme.
     share/resources/flags.qrc \
     share/resources/breezethemes/breeze.qrc \
-    share/resources/scenestyle.qrc
+    share/resources/scenestyle.qrc \
+    share/resources/win_light_theme.qrc \
+    share/resources/win_dark_theme.qrc
 
 macx {
     RESOURCES += \
         share/resources/mac_light_theme.qrc \
         share/resources/mac_dark_theme.qrc
-} else {
-    RESOURCES += \
-        share/resources/win_light_theme.qrc \
-        share/resources/win_dark_theme.qrc
 }
 
 # This is static library so no need in "make install"
