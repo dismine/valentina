@@ -864,19 +864,19 @@ auto MApplication::StartWithFiles(QCommandLineParser &parser) -> bool
             continue;
         }
 
-        if (flagDimensionA && not MainWindow()->SetDimensionABase(dimensionAValue))
+        if (flagDimensionA)
         {
-            parser.showHelp(V_EX_USAGE);
+            MainWindow()->SetDimensionABase(dimensionAValue);
         }
 
-        if (flagDimensionB && not MainWindow()->SetDimensionBBase(dimensionBValue))
+        if (flagDimensionB)
         {
-            parser.showHelp(V_EX_USAGE);
+            MainWindow()->SetDimensionBBase(dimensionBValue);
         }
 
-        if (flagDimensionC && not MainWindow()->SetDimensionCBase(dimensionCValue))
+        if (flagDimensionC)
         {
-            parser.showHelp(V_EX_USAGE);
+            MainWindow()->SetDimensionCBase(dimensionCValue);
         }
 
         if (flagUnits)

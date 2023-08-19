@@ -902,16 +902,26 @@ void VAbstractPattern::SetMPath(const QString &path)
     QDomElement domElement = UniqueTag(TagMeasurements);
     if (not domElement.isNull())
     {
+        auto RemoveDimensions = [&domElement]()
+        {
+            domElement.removeAttribute(AttrDimensionA);
+            domElement.removeAttribute(AttrDimensionB);
+            domElement.removeAttribute(AttrDimensionC);
+        };
+
         if (not path.isEmpty())
         {
             SetAttribute(domElement, AttrPath, path);
+
+            if (path.endsWith(QStringLiteral(".vit")) || QFileInfo(m_MPath).fileName() != QFileInfo(path).fileName())
+            {
+                RemoveDimensions();
+            }
         }
         else
         {
             domElement.removeAttribute(AttrPath);
-            domElement.removeAttribute(AttrDimensionA);
-            domElement.removeAttribute(AttrDimensionB);
-            domElement.removeAttribute(AttrDimensionC);
+            RemoveDimensions();
         }
         m_MPath = path;
         patternLabelWasChanged = true;

@@ -35,6 +35,7 @@
 - Tool box redesign.
 - Increased requirement for minimal Qt version.
 - Support for Dark mode.
+- Fix issue with passing incorrect number of dimension to Tape.
 
 # Valentina 0.7.52 September 12, 2022
 - Fix crash when default locale is ru.

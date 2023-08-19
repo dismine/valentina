@@ -343,14 +343,14 @@ void TMainWindow::RetranslateTable()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-auto TMainWindow::SetDimensionABase(int base) -> bool
+void TMainWindow::SetDimensionABase(int base)
 {
     const QList<MeasurementDimension_p> dimensions = m_m->Dimensions().values();
 
     if (dimensions.isEmpty())
     {
-        qCCritical(tMainWindow, "%s\n", qPrintable(tr("The table doesn't provide dimensions")));
-        return false;
+        qCWarning(tMainWindow, "%s\n", qPrintable(tr("The table doesn't provide dimensions")));
+        return;
     }
 
     const qint32 i = m_gradationDimensionA->findData(base);
@@ -361,21 +361,20 @@ auto TMainWindow::SetDimensionABase(int base) -> bool
 
     if (not VFuzzyComparePossibleNulls(base, m_currentDimensionA))
     {
-        qCCritical(tMainWindow, "%s\n", qPrintable(tr("Invalid base value for dimension A")));
-        return false;
+        qCWarning(tMainWindow, "%s\n", qPrintable(tr("Invalid base value for dimension A")));
+        return;
     }
-    return true;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-auto TMainWindow::SetDimensionBBase(int base) -> bool
+void TMainWindow::SetDimensionBBase(int base)
 {
     const QList<MeasurementDimension_p> dimensions = m_m->Dimensions().values();
 
     if (dimensions.size() <= 1)
     {
-        qCCritical(tMainWindow, "%s\n", qPrintable(tr("The table doesn't support dimension B")));
-        return false;
+        qCWarning(tMainWindow, "%s\n", qPrintable(tr("The table doesn't support dimension B")));
+        return;
     }
 
     const qint32 i = m_gradationDimensionB->findData(base);
@@ -386,22 +385,20 @@ auto TMainWindow::SetDimensionBBase(int base) -> bool
 
     if (not VFuzzyComparePossibleNulls(base, m_currentDimensionB))
     {
-        qCCritical(tMainWindow, "%s\n", qPrintable(tr("Invalid base value for dimension B")));
-        return false;
+        qCWarning(tMainWindow, "%s\n", qPrintable(tr("Invalid base value for dimension B")));
+        return;
     }
-
-    return true;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-auto TMainWindow::SetDimensionCBase(int base) -> bool
+void TMainWindow::SetDimensionCBase(int base)
 {
     const QList<MeasurementDimension_p> dimensions = m_m->Dimensions().values();
 
     if (dimensions.size() <= 2)
     {
-        qCCritical(tMainWindow, "%s\n", qPrintable(tr("The table doesn't support dimension C")));
-        return false;
+        qCWarning(tMainWindow, "%s\n", qPrintable(tr("The table doesn't support dimension C")));
+        return;
     }
 
     const qint32 i = m_gradationDimensionC->findData(base);
@@ -412,10 +409,9 @@ auto TMainWindow::SetDimensionCBase(int base) -> bool
 
     if (not VFuzzyComparePossibleNulls(base, m_currentDimensionC))
     {
-        qCCritical(tMainWindow, "%s\n", qPrintable(tr("Invalid base value for dimension C")));
-        return false;
+        qCWarning(tMainWindow, "%s\n", qPrintable(tr("Invalid base value for dimension C")));
+        return;
     }
-    return true;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
