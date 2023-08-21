@@ -411,17 +411,24 @@ auto dxfRW::writeLayer(DRW_Layer *ent) -> bool
 auto dxfRW::writeTextstyle(DRW_Textstyle *ent) -> bool
 {
     writer->writeString(0, "STYLE");
+    // stringstream cause crash in OS/X, bug#3597944
+    std::string name = ent->name;
+    transform(name.begin(), name.end(), name.begin(), toupper);
     if (!dimstyleStd)
     {
-        // stringstream cause crash in OS/X, bug#3597944
-        std::string name = ent->name;
-        transform(name.begin(), name.end(), name.begin(), toupper);
         if (name == "STANDARD")
-            dimstyleStd = true;
+        {
+            // stringstream cause crash in OS/X, bug#3597944
+            std::string name = ent->name;
+            transform(name.begin(), name.end(), name.begin(), toupper);
+            if (name == "STANDARD")
+                dimstyleStd = true;
+        }
     }
     if (version > DRW::AC1009)
     {
         writer->writeString(5, toHexStr(++entCount));
+        textStyleMap[name] = entCount;
     }
 
     if (version > DRW::AC1012)
@@ -555,12 +562,10 @@ auto dxfRW::writeDimstyle(DRW_Dimstyle *ent) -> bool
         if (name == "STANDARD")
             dimstyleStd = true;
     }
-
     if (version > DRW::AC1009)
     {
         writer->writeString(105, toHexStr(++entCount));
     }
-
     if (version > DRW::AC1012)
     {
         writer->writeString(330, "A");
@@ -574,15 +579,15 @@ auto dxfRW::writeDimstyle(DRW_Dimstyle *ent) -> bool
     else
         writer->writeUtf8Caps(2, ent->name);
     writer->writeInt16(70, ent->flags);
-    if (version <= DRW::AC1009 || !(ent->dimpost.empty()))
+    if (version == DRW::AC1009 || !(ent->dimpost.empty()))
         writer->writeUtf8String(3, ent->dimpost);
-    if (version <= DRW::AC1009 || !(ent->dimapost.empty()))
+    if (version == DRW::AC1009 || !(ent->dimapost.empty()))
         writer->writeUtf8String(4, ent->dimapost);
-    if (version <= DRW::AC1009 || !(ent->dimblk.empty()))
+    if (version == DRW::AC1009 || !(ent->dimblk.empty()))
         writer->writeUtf8String(5, ent->dimblk);
-    if (version <= DRW::AC1009 || !(ent->dimblk1.empty()))
+    if (version == DRW::AC1009 || !(ent->dimblk1.empty()))
         writer->writeUtf8String(6, ent->dimblk1);
-    if (version <= DRW::AC1009 || !(ent->dimblk2.empty()))
+    if (version == DRW::AC1009 || !(ent->dimblk2.empty()))
         writer->writeUtf8String(7, ent->dimblk2);
     writer->writeDouble(40, ent->dimscale);
     writer->writeDouble(41, ent->dimasz);
@@ -593,6 +598,8 @@ auto dxfRW::writeDimstyle(DRW_Dimstyle *ent) -> bool
     writer->writeDouble(46, ent->dimdle);
     writer->writeDouble(47, ent->dimtp);
     writer->writeDouble(48, ent->dimtm);
+    if (version > DRW::AC1018 || !qFuzzyIsNull(ent->dimfxl))
+        writer->writeDouble(49, ent->dimfxl);
     writer->writeDouble(140, ent->dimtxt);
     writer->writeDouble(141, ent->dimcen);
     writer->writeDouble(142, ent->dimtsz);
@@ -664,15 +671,27 @@ auto dxfRW::writeDimstyle(DRW_Dimstyle *ent) -> bool
     {
         writer->writeInt16(289, ent->dimatfit);
     }
-    if (version > DRW::AC1009 && !ent->dimtxsty.empty())
+    if (version > DRW::AC1018 && ent->dimfxlon != 0)
+        writer->writeInt16(290, ent->dimfxlon);
+    if (version > DRW::AC1009)
     {
-        writer->writeUtf8String(340, ent->dimtxsty);
+        std::string txstyname = ent->dimtxsty;
+        std::transform(txstyname.begin(), txstyname.end(), txstyname.begin(), ::toupper);
+        if (textStyleMap.count(txstyname) > 0)
+        {
+            int txstyHandle = (*(textStyleMap.find(txstyname))).second;
+            writer->writeUtf8String(340, toHexStr(txstyHandle));
+        }
     }
     if (version > DRW::AC1014)
     {
-        writer->writeUtf8String(341, ent->dimldrblk);
-        writer->writeInt16(371, ent->dimlwd);
-        writer->writeInt16(372, ent->dimlwe);
+        if (blockMap.count(ent->dimldrblk) > 0)
+        {
+            int blkHandle = (*(blockMap.find(ent->dimldrblk))).second;
+            writer->writeUtf8String(341, toHexStr(blkHandle));
+            writer->writeInt16(371, ent->dimlwd);
+            writer->writeInt16(372, ent->dimlwe);
+        }
     }
     return true;
 }
