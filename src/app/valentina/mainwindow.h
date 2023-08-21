@@ -133,6 +133,7 @@ private slots:
     void PreviousPatternPiece();
     void NextPatternPiece();
     void ToolBarStyles();
+    void ToolboxIconSize();
     void ShowPaper(int index);
     void Preferences();
 #if defined(Q_OS_MAC)

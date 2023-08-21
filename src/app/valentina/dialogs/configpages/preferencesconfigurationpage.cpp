@@ -133,6 +133,7 @@ PreferencesConfigurationPage::PreferencesConfigurationPage(QWidget *parent)
 
     //----------------------- Toolbar
     ui->toolBarStyleCheck->setChecked(settings->GetToolBarStyle());
+    ui->radioButtonToolboxIconSizeSmall->setChecked(settings->GetToolboxIconSizeSmall());
 
     // Theme
     SetThemeModeComboBox();
@@ -195,6 +196,7 @@ auto PreferencesConfigurationPage::Apply() -> QStringList
 
     settings->SetOsSeparator(ui->osOptionCheck->isChecked());
     settings->SetToolBarStyle(ui->toolBarStyleCheck->isChecked());
+    settings->SetToolboxIconSizeSmall(ui->radioButtonToolboxIconSizeSmall->isChecked());
 
     auto themeMode = static_cast<VThemeMode>(ui->comboBoxThemeMode->currentData().toInt());
     if (settings->GetThemeMode() != themeMode)

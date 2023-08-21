@@ -122,6 +122,9 @@ Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingConfigurationAskContinueIfLayout
 Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingConfigurationToolBarStyle,
                           (QLatin1String("configuration/tool_bar_style")))
 // NOLINTNEXTLINE
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingConfigurationToolboxIconSizeSmall,
+                          (QLatin1String("configuration/toolboxIconSizeSmall")))
+// NOLINTNEXTLINE
 Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingConfigurationFreeCurveMode,
                           (QLatin1String("configuration/freeCurveMode")))
 // NOLINTNEXTLINE
@@ -719,6 +722,18 @@ auto VCommonSettings::GetToolBarStyle() const -> bool
 void VCommonSettings::SetToolBarStyle(const bool &value)
 {
     setValue(*settingConfigurationToolBarStyle, value);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+auto VCommonSettings::GetToolboxIconSizeSmall() const -> bool
+{
+    return value(*settingConfigurationToolboxIconSizeSmall, 1).toBool();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VCommonSettings::SetToolboxIconSizeSmall(bool value)
+{
+    setValue(*settingConfigurationToolboxIconSizeSmall, value);
 }
 
 //---------------------------------------------------------------------------------------------------------------------

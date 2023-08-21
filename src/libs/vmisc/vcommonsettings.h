@@ -128,6 +128,9 @@ public:
     auto GetToolBarStyle() const -> bool;
     void SetToolBarStyle(const bool &value);
 
+    auto GetToolboxIconSizeSmall() const -> bool;
+    void SetToolboxIconSizeSmall(bool value);
+
     auto GetThemeMode() const -> VThemeMode;
     void SetThemeMode(VThemeMode mode);
 

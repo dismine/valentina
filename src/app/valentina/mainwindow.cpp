@@ -5503,6 +5503,8 @@ void MainWindow::ReadSettings()
         // Text under tool buton icon
         ToolBarStyles();
 
+        ToolboxIconSize();
+
         QFont f = ui->plainTextEditPatternMessages->font();
         f.setPointSize(settings->GetPatternMessageFontSize(f.pointSize()));
         ui->plainTextEditPatternMessages->setFont(f);
@@ -6420,6 +6422,24 @@ void MainWindow::ToolBarStyles()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+void MainWindow::ToolboxIconSize()
+{
+    auto SetIconSize = [](QToolBar *bar)
+    {
+        VCommonSettings *settings = VAbstractApplication::VApp()->Settings();
+        QSize size = settings->GetToolboxIconSizeSmall() ? QSize(24, 24) : QSize(32, 32);
+        bar->setIconSize(size);
+    };
+
+    SetIconSize(ui->toolBarCurveTools);
+    SetIconSize(ui->toolBarDetailTools);
+    SetIconSize(ui->toolBarLineTools);
+    SetIconSize(ui->toolBarOperationTools);
+    SetIconSize(ui->toolBarPointTools);
+    SetIconSize(ui->toolBarSelectingTools);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 void MainWindow::ShowPaper(int index)
 {
     if (index < 0 || index >= m_layoutSettings->LayoutScenes().size())
@@ -6450,6 +6470,7 @@ void MainWindow::Preferences()
         connect(dlg.data(), &DialogPreferences::UpdateProperties, m_toolOptions,
                 &VToolOptionsPropertyBrowser::RefreshOptions);
         connect(dlg.data(), &DialogPreferences::UpdateProperties, this, &MainWindow::ToolBarStyles);
+        connect(dlg.data(), &DialogPreferences::UpdateProperties, this, &MainWindow::ToolboxIconSize);
         connect(dlg.data(), &DialogPreferences::UpdateProperties, this, [this]() { emit doc->FullUpdateFromFile(); });
         connect(dlg.data(), &DialogPreferences::UpdateProperties, ui->view,
                 &VMainGraphicsView::ResetScrollingAnimation);
