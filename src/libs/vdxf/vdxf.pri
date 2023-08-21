@@ -9,6 +9,11 @@ SOURCES += \
     $$PWD/libdxfrw/intern/drw_textcodec.cpp \
     $$PWD/libdxfrw/intern/dxfreader.cpp \
     $$PWD/libdxfrw/intern/dxfwriter.cpp \
+    $$PWD/libdxfrw/intern/drw_cptable932.h \
+    $$PWD/libdxfrw/intern/drw_cptable936.h \
+    $$PWD/libdxfrw/intern/drw_cptable949.h \
+    $$PWD/libdxfrw/intern/drw_cptable950.h \
+    $$PWD/libdxfrw/intern/drw_cptables.h \
     $$PWD/libdxfrw/drw_classes.cpp \
     $$PWD/libdxfrw/drw_entities.cpp \
     $$PWD/libdxfrw/drw_header.cpp \
