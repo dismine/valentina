@@ -133,7 +133,7 @@ PreferencesConfigurationPage::PreferencesConfigurationPage(QWidget *parent)
 
     //----------------------- Toolbar
     ui->toolBarStyleCheck->setChecked(settings->GetToolBarStyle());
-    ui->radioButtonToolboxIconSizeSmall->setChecked(settings->GetToolboxIconSizeSmall());
+    ui->radioButtonToolboxIconSizeNormal->setChecked(!settings->GetToolboxIconSizeSmall());
 
     // Theme
     SetThemeModeComboBox();
