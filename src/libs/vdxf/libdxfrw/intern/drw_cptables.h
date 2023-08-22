@@ -1,12 +1,14 @@
 #ifndef DRW_CPTABLES_H
 #define DRW_CPTABLES_H
 
+#include <array>
+
 //first entry in all tables are 0x80
 #define CPOFFSET 0x80
-#define CPLENGTHCOMMON 128
+constexpr int CPLENGTHCOMMON = 128;
 
 //Table 874
-static const int DRW_Table874[] = {
+static const std::array<int, CPLENGTHCOMMON> DRW_Table874 = {
     0x20AC, //1 #EURO SIGN
     0x00  , //2 #UNDEFINED
     0x00  , //3 #UNDEFINED
@@ -138,7 +140,7 @@ static const int DRW_Table874[] = {
 };
 
 //Table 1250
-static const int DRW_Table1250[] = {
+static const std::array<int, CPLENGTHCOMMON> DRW_Table1250 = {
 0x20AC, //1 #EURO SIGN
 0x00,   //2 #UNDEFINED
 0x201A, //3 #SINGLE LOW-9 QUOTATION MARK
@@ -271,7 +273,7 @@ static const int DRW_Table1250[] = {
 
 
 //Table 1251
-static const int DRW_Table1251[] = {
+static const std::array<int, CPLENGTHCOMMON> DRW_Table1251 = {
     0x0402, //1 #CYRILLIC CAPITAL LETTER DJE
     0x0403, //2 #CYRILLIC CAPITAL LETTER GJE
     0x201A, //3 #SINGLE LOW-9 QUOTATION MARK
@@ -404,7 +406,7 @@ static const int DRW_Table1251[] = {
 
 
 //Table 1252
-static const int DRW_Table1252[] = {
+static const std::array<int, CPLENGTHCOMMON> DRW_Table1252 = {
     0x20AC, //1 #EURO SIGN
     0x00,   //2 #UNDEFINED
     0x201A, //3 #SINGLE LOW-9 QUOTATION MARK
@@ -536,7 +538,7 @@ static const int DRW_Table1252[] = {
 };
 
 //Table 1253
-static const int DRW_Table1253[] = {
+static const std::array<int, CPLENGTHCOMMON> DRW_Table1253 = {
     0x20AC, //1 #EURO SIGN
     0x00  , //2 #UNDEFINED
     0x201A, //3 #SINGLE LOW-9 QUOTATION MARK
@@ -668,7 +670,7 @@ static const int DRW_Table1253[] = {
 };
 
 //Table 1254
-static const int DRW_Table1254[] = {
+static const std::array<int, CPLENGTHCOMMON> DRW_Table1254 = {
     0x20AC, //1 #EURO SIGN
     0x00  , //2 #UNDEFINED
     0x201A, //3 #SINGLE LOW-9 QUOTATION MARK
@@ -800,7 +802,7 @@ static const int DRW_Table1254[] = {
 };
 
 //Table 1255
-static const int DRW_Table1255[] = {
+static const std::array<int, CPLENGTHCOMMON> DRW_Table1255 = {
     0x20AC, //1 #EURO SIGN
     0x00  , //2 #UNDEFINED
     0x201A, //3 #SINGLE LOW-9 QUOTATION MARK
@@ -932,7 +934,7 @@ static const int DRW_Table1255[] = {
 };
 
 //Table 1256
-static const int DRW_Table1256[] = {
+static const std::array<int, CPLENGTHCOMMON> DRW_Table1256 = {
     0x20AC, //1 #EURO SIGN
     0x067E, //2 #ARABIC LETTER PEH
     0x201A, //3 #SINGLE LOW-9 QUOTATION MARK
@@ -1064,7 +1066,7 @@ static const int DRW_Table1256[] = {
 };
 
 //Table 1257
-static const int DRW_Table1257[] = {
+static const std::array<int, CPLENGTHCOMMON> DRW_Table1257 = {
     0x20AC, //1 #EURO SIGN
     0x00  , //2 #UNDEFINED
     0x201A, //3 #SINGLE LOW-9 QUOTATION MARK
@@ -1196,7 +1198,7 @@ static const int DRW_Table1257[] = {
 };
 
 //Table 1258
-static const int DRW_Table1258[] = {
+static const std::array<int, CPLENGTHCOMMON> DRW_Table1258 = {
     0x20AC, //1 #EURO SIGN
     0x00  , //2 #UNDEFINED
     0x201A, //3 #SINGLE LOW-9 QUOTATION MARK

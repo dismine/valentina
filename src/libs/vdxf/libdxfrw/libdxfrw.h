@@ -33,6 +33,7 @@ class dxfRW
 public:
     explicit dxfRW(const char *name);
     ~dxfRW();
+
     static void setDebug(DRW::DebugLevel lvl);
     /// reads the file specified in constructor
     /*!
@@ -136,32 +137,32 @@ private:
     static auto toHexStr(int n) -> std::string; // RLZ removeme
     auto writeAppData(const std::list<std::list<DRW_Variant>> &appData) -> bool;
 
-    auto setError(const DRW::error lastError) -> bool;
+    auto setError(DRW::error lastError) -> bool;
 
 private:
-    DRW::Version version;
+    DRW::Version version{};
     DRW::error error{DRW::BAD_NONE};
     std::string fileName;
-    std::string codePage;
-    bool binFile;
+    std::string codePage{};
+    bool binFile{false};
     bool m_xSpaceBlock{true};
-    dxfReader *reader;
-    dxfWriter *writer;
-    DRW_Interface *iface;
-    DRW_Header header;
+    dxfReader *reader{nullptr};
+    dxfWriter *writer{nullptr};
+    DRW_Interface *iface{nullptr};
+    DRW_Header header{};
     //    int section;
-    std::string nextentity;
-    int entCount;
-    bool wlayer0;
-    bool dimstyleStd;
-    bool applyExt;
-    bool writingBlock;
-    int elParts; /*!< parts number when convert ellipse to polyline */
-    std::unordered_map<std::string, int> blockMap;
-    std::unordered_map<std::string, int> textStyleMap;
-    std::vector<DRW_ImageDef *> imageDef; /*!< imageDef list */
+    std::string nextentity{};
+    int entCount{};
+    bool wlayer0{};
+    bool dimstyleStd{};
+    bool applyExt{false};
+    bool writingBlock{};
+    int elParts{128}; /*!< parts number when convert ellipse to polyline */
+    std::unordered_map<std::string, int> blockMap{};
+    std::unordered_map<std::string, int> textStyleMap{};
+    std::vector<DRW_ImageDef *> imageDef{}; /*!< imageDef list */
 
-    int currHandle;
+    int currHandle{};
 
     std::string errorString{};
 };

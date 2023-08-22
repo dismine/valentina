@@ -12,7 +12,6 @@
 
 #include "libdxfrw.h"
 #include "intern/drw_dbg.h"
-#include "intern/drw_textcodec.h"
 #include "intern/dxfreader.h"
 #include "intern/dxfwriter.h"
 #include <QScopedPointer>
@@ -34,24 +33,7 @@
 };*/
 
 dxfRW::dxfRW(const char *name)
-  : version(),
-    fileName(name),
-    codePage(),
-    binFile(),
-    reader(nullptr),
-    writer(nullptr),
-    iface(),
-    header(),
-    nextentity(),
-    entCount(),
-    wlayer0(),
-    dimstyleStd(),
-    applyExt(false),
-    writingBlock(),
-    elParts(128), // parts number when convert ellipse to polyline
-    blockMap(),
-    imageDef(),
-    currHandle()
+  : fileName(name)
 {
     DRW_DBGSL(DRW_dbg::Level::None);
 }
@@ -60,8 +42,10 @@ dxfRW::~dxfRW()
 {
     delete reader;
     delete writer;
-    for (std::vector<DRW_ImageDef *>::iterator it = imageDef.begin(); it != imageDef.end(); ++it)
-        delete *it;
+    for (auto &it : imageDef)
+    {
+        delete it;
+    }
 
     imageDef.clear();
 }
@@ -3772,7 +3756,7 @@ auto dxfRW::getError() const -> DRW::error
     return error;
 }
 
-auto dxfRW::setError(const DRW::error lastError) -> bool
+auto dxfRW::setError(DRW::error lastError) -> bool
 {
     error = lastError;
     return (DRW::BAD_NONE == error);

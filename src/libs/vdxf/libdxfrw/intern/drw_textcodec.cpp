@@ -6,8 +6,10 @@
 #include "drw_cptable950.h"
 #include "drw_cptables.h"
 #include <QDebug>
+#include <QSet>
 #include <QString>
 #include <algorithm>
+#include <cstddef>
 #include <cstring>
 #include <iomanip>
 #include <memory>
@@ -15,7 +17,7 @@
 
 DRW_TextCodec::DRW_TextCodec()
   : version(DRW::AC1021),
-    conv(new DRW_Converter(nullptr, 0))
+    conv(new DRW_Converter())
 {
 }
 
@@ -98,7 +100,7 @@ void DRW_TextCodec::setCodePage(const std::string &c, bool dxfFormat)
     {
         if (cp == "ANSI_874")
         {
-            conv = std::make_unique<DRW_ConvTable>(DRW_Table874, CPLENGTHCOMMON);
+            conv = std::make_unique<DRW_ConvTable>(DRW_Table874);
         }
         else if (cp == "ANSI_932")
         {
@@ -106,63 +108,63 @@ void DRW_TextCodec::setCodePage(const std::string &c, bool dxfFormat)
         }
         else if (cp == "ANSI_936")
         {
-            conv = std::make_unique<DRW_ConvDBCSTable>(DRW_Table936, DRW_LeadTable936, DRW_DoubleTable936, CPLENGTH936);
+            conv = std::make_unique<DRW_ConvDBCSTable<CPLENGTH936>>(DRW_LeadTable936, DRW_DoubleTable936);
         }
         else if (cp == "ANSI_949")
         {
-            conv = std::make_unique<DRW_ConvDBCSTable>(DRW_Table949, DRW_LeadTable949, DRW_DoubleTable949, CPLENGTH949);
+            conv = std::make_unique<DRW_ConvDBCSTable<CPLENGTH949>>(DRW_LeadTable949, DRW_DoubleTable949);
         }
         else if (cp == "ANSI_950")
         {
-            conv = std::make_unique<DRW_ConvDBCSTable>(DRW_Table950, DRW_LeadTable950, DRW_DoubleTable950, CPLENGTH950);
+            conv = std::make_unique<DRW_ConvDBCSTable<CPLENGTH950>>(DRW_LeadTable950, DRW_DoubleTable950);
         }
         else if (cp == "ANSI_1250")
         {
-            conv = std::make_unique<DRW_ConvTable>(DRW_Table1250, CPLENGTHCOMMON);
+            conv = std::make_unique<DRW_ConvTable>(DRW_Table1250);
         }
         else if (cp == "ANSI_1251")
         {
-            conv = std::make_unique<DRW_ConvTable>(DRW_Table1251, CPLENGTHCOMMON);
+            conv = std::make_unique<DRW_ConvTable>(DRW_Table1251);
         }
         else if (cp == "ANSI_1253")
         {
-            conv = std::make_unique<DRW_ConvTable>(DRW_Table1253, CPLENGTHCOMMON);
+            conv = std::make_unique<DRW_ConvTable>(DRW_Table1253);
         }
         else if (cp == "ANSI_1254")
         {
-            conv = std::make_unique<DRW_ConvTable>(DRW_Table1254, CPLENGTHCOMMON);
+            conv = std::make_unique<DRW_ConvTable>(DRW_Table1254);
         }
         else if (cp == "ANSI_1255")
         {
-            conv = std::make_unique<DRW_ConvTable>(DRW_Table1255, CPLENGTHCOMMON);
+            conv = std::make_unique<DRW_ConvTable>(DRW_Table1255);
         }
         else if (cp == "ANSI_1256")
         {
-            conv = std::make_unique<DRW_ConvTable>(DRW_Table1256, CPLENGTHCOMMON);
+            conv = std::make_unique<DRW_ConvTable>(DRW_Table1256);
         }
         else if (cp == "ANSI_1257")
         {
-            conv = std::make_unique<DRW_ConvTable>(DRW_Table1257, CPLENGTHCOMMON);
+            conv = std::make_unique<DRW_ConvTable>(DRW_Table1257);
         }
         else if (cp == "ANSI_1258")
         {
-            conv = std::make_unique<DRW_ConvTable>(DRW_Table1258, CPLENGTHCOMMON);
+            conv = std::make_unique<DRW_ConvTable>(DRW_Table1258);
         }
         else if (cp == "UTF-8")
         { // DXF older than 2007 are write in win codepages
             cp = "ANSI_1252";
-            conv = std::make_unique<DRW_Converter>(nullptr, 0);
+            conv = std::make_unique<DRW_Converter>();
         }
         else
         {
-            conv = std::make_unique<DRW_ConvTable>(DRW_Table1252, CPLENGTHCOMMON);
+            conv = std::make_unique<DRW_ConvTable>(DRW_Table1252);
         }
     }
     else
     {
         if (dxfFormat)
         {
-            conv = std::make_unique<DRW_Converter>(nullptr, 0); // utf16 to utf8
+            conv = std::make_unique<DRW_Converter>(); // utf16 to utf8
         }
         else
         {
@@ -187,7 +189,7 @@ auto DRW_TextCodec::correctCodePage(const std::string &s) -> std::string
     std::string cp = s;
     transform(cp.begin(), cp.end(), cp.begin(), toupper);
 
-    static auto map = QMap<std::string, QSet<std::string>>{
+    static auto map = QMap<std::string, QSet<QString>>{
         // Latin/Thai
         {"ANSI_874", {"ANSI_874", "CP874", "ISO8859-11", "TIS-620"}}, // Central Europe and Eastern Europe
         {"ANSI_1250", {"ANSI_1250", "CP1250", "ISO8859-2"}},          // Cyrillic script
@@ -217,7 +219,8 @@ auto DRW_TextCodec::correctCodePage(const std::string &s) -> std::string
     auto i = map.constBegin();
     while (i != map.constEnd())
     {
-        if (i.value().contains(cp))
+        // TODO: Since Qt 6.1 possible to use std::string instead of QString
+        if (i.value().contains(QString::fromStdString(cp)))
         {
             return i.key();
         }
@@ -282,7 +285,7 @@ auto DRW_ConvTable::fromUtf8(const std::string &s) -> std::string
             j = i + l;
             i = j - 1;
             notFound = true;
-            for (int k = 0; k < cpLength; k++)
+            for (size_t k = 0; k < table.size(); k++)
             {
                 if (table[k] == code)
                 {
@@ -432,7 +435,7 @@ auto DRW_Converter::decodeNum(const std::string &s, unsigned int *b) -> int
     return code;
 }
 
-auto DRW_ConvDBCSTable::fromUtf8(const std::string &s) -> std::string
+template <size_t DoubleTableSize> auto DRW_ConvDBCSTable<DoubleTableSize>::fromUtf8(const std::string &s) -> std::string
 {
     std::string result;
     bool notFound;
@@ -451,11 +454,11 @@ auto DRW_ConvDBCSTable::fromUtf8(const std::string &s) -> std::string
             j = i + l;
             i = j - 1;
             notFound = true;
-            for (int k = 0; k < cpLength; k++)
+            for (const auto &row : doubleTable)
             {
-                if (doubleTable[k][1] == code)
+                if (row[1] == code)
                 {
-                    int data = doubleTable[k][0];
+                    int data = row[0];
                     char d[3];
                     d[0] = static_cast<char>(data >> 8);
                     d[1] = static_cast<char>(data & 0xFF);
@@ -476,7 +479,7 @@ auto DRW_ConvDBCSTable::fromUtf8(const std::string &s) -> std::string
     return result;
 }
 
-auto DRW_ConvDBCSTable::toUtf8(const std::string &s) -> std::string
+template <size_t DoubleTableSize> auto DRW_ConvDBCSTable<DoubleTableSize>::toUtf8(const std::string &s) -> std::string
 {
     std::string res;
     for (auto it = s.begin(); it < s.end(); ++it)
@@ -513,7 +516,7 @@ auto DRW_ConvDBCSTable::toUtf8(const std::string &s) -> std::string
             int code = (c << 8) | static_cast<unsigned char>(*it);
             int sta = leadTable[c - 0x81];
             int end = leadTable[c - 0x80];
-            for (int k = sta; k < end; k++)
+            for (size_t k = static_cast<size_t>(sta); k < static_cast<size_t>(end); k++)
             {
                 if (doubleTable[k][0] == code)
                 {
@@ -531,11 +534,6 @@ auto DRW_ConvDBCSTable::toUtf8(const std::string &s) -> std::string
     } // end for
 
     return res;
-}
-
-DRW_Conv932Table::DRW_Conv932Table()
-  : DRW_Converter(DRW_Table932, CPLENGTH932)
-{
 }
 
 auto DRW_Conv932Table::fromUtf8(const std::string &s) -> std::string
@@ -566,11 +564,11 @@ auto DRW_Conv932Table::fromUtf8(const std::string &s) -> std::string
             if (notFound &&
                 (code < 0xF8 || (code > 0x390 && code < 0x542) || (code > 0x200F && code < 0x9FA1) || code > 0xF928))
             {
-                for (int k = 0; k < cpLength; k++)
+                for (const auto &row : DRW_DoubleTable932)
                 {
-                    if (DRW_DoubleTable932[k][1] == code)
+                    if (row[1] == code)
                     {
-                        int data = DRW_DoubleTable932[k][0];
+                        int data = row[0];
                         char d[3];
                         d[0] = static_cast<char>(data >> 8);
                         d[1] = static_cast<char>(data & 0xFF);
@@ -641,7 +639,7 @@ auto DRW_Conv932Table::toUtf8(const std::string &s) -> std::string
             }
             if (end > 0)
             {
-                for (int k = sta; k < end; k++)
+                for (size_t k = static_cast<size_t>(sta); k < static_cast<size_t>(end); k++)
                 {
                     if (DRW_DoubleTable932[k][0] == code)
                     {

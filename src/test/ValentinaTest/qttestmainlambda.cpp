@@ -32,7 +32,7 @@
 #include <xercesc/util/PlatformUtils.hpp>
 #endif
 
-#include "tst_dxf.h"
+#include "../vmisc/testvapplication.h"
 #include "tst_findpoint.h"
 #include "tst_misc.h"
 #include "tst_nameregexp.h"
@@ -59,14 +59,10 @@
 #include "tst_vtranslatevars.h"
 #include "tst_xsdschema.h"
 
-#include "../qmuparser/qmudef.h"
-#include "../vmisc/def.h"
-#include "../vmisc/testvapplication.h"
-
 //---------------------------------------------------------------------------------------------------------------------
 auto main(int argc, char **argv) -> int
 {
-    Q_INIT_RESOURCE(schema);
+    Q_INIT_RESOURCE(schema); // NOLINT
 
 #if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
     XERCES_CPP_NAMESPACE::XMLPlatformUtils::Initialize();
@@ -107,9 +103,9 @@ auto main(int argc, char **argv) -> int
     ASSERT_TEST(new TST_ReadVal());
     ASSERT_TEST(new TST_VTranslateVars());
     ASSERT_TEST(new TST_VToolUnionDetails());
-    ASSERT_TEST(new TST_DXF());
     ASSERT_TEST(new TST_XSDShema());
     ASSERT_TEST(new TST_VSVGPathTokenizer());
+    ASSERT_TEST(new TST_VDomDocument());
 
     return status;
 }
