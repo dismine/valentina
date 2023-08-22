@@ -52,7 +52,6 @@ DEFINES += SRCDIR=\\\"$$PWD/\\\"
 
 SOURCES += \
     qttestmainlambda.cpp \
-    tst_vdomdocument.cpp \
     tst_vposter.cpp \
     tst_vspline.cpp \
     tst_nameregexp.cpp \
@@ -81,7 +80,6 @@ SOURCES += \
 *msvc*:SOURCES += stable.cpp
 
 HEADERS += \
-    tst_vdomdocument.h \
     tst_vposter.h \
     tst_vspline.h \
     tst_nameregexp.h \

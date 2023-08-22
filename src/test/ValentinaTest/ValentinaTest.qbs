@@ -25,7 +25,6 @@ VTestApp {
 
     files: [
         "qttestmainlambda.cpp",
-        "tst_vdomdocument.cpp",
         "tst_vposter.cpp",
         "tst_vspline.cpp",
         "tst_nameregexp.cpp",
@@ -50,7 +49,6 @@ VTestApp {
         "tst_vtranslatevars.cpp",
         "tst_vabstractpiece.cpp",
         "tst_vtooluniondetails.cpp",
-        "tst_vdomdocument.h",
         "tst_vposter.h",
         "tst_vspline.h",
         "tst_nameregexp.h",
