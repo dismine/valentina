@@ -373,34 +373,32 @@ auto DRW_Converter::decodeText(int c) -> std::string
 
 auto DRW_Converter::encodeNum(int c) -> std::string
 {
-    unsigned char ret[5];
+    std::string ret;
+
     if (c < 128)
     { // 0-7F US-ASCII 7 bits
-        ret[0] = static_cast<unsigned char>(c);
-        ret[1] = 0;
+        ret += static_cast<char>(c);
     }
     else if (c < 0x800)
     { // 80-07FF 2 bytes
-        ret[0] = static_cast<unsigned char>(0xC0 | (c >> 6));
-        ret[1] = 0x80 | (c & 0x3f);
-        ret[2] = 0;
+        ret += static_cast<char>(0xC0 | (c >> 6));
+        ret += static_cast<char>(0x80 | (c & 0x3F));
     }
     else if (c < 0x10000)
     { // 800-FFFF 3 bytes
-        ret[0] = static_cast<unsigned char>(0xe0 | (c >> 12));
-        ret[1] = 0x80 | ((c >> 6) & 0x3f);
-        ret[2] = 0x80 | (c & 0x3f);
-        ret[3] = 0;
+        ret += static_cast<char>(0xE0 | (c >> 12));
+        ret += static_cast<char>(0x80 | ((c >> 6) & 0x3F));
+        ret += static_cast<char>(0x80 | (c & 0x3F));
     }
     else
     { // 10000-10FFFF 4 bytes
-        ret[0] = static_cast<unsigned char>(0xf0 | (c >> 18));
-        ret[1] = 0x80 | ((c >> 12) & 0x3f);
-        ret[2] = 0x80 | ((c >> 6) & 0x3f);
-        ret[3] = 0x80 | (c & 0x3f);
-        ret[4] = 0;
+        ret += static_cast<char>(0xF0 | (c >> 18));
+        ret += static_cast<char>(0x80 | ((c >> 12) & 0x3F));
+        ret += static_cast<char>(0x80 | ((c >> 6) & 0x3F));
+        ret += static_cast<char>(0x80 | (c & 0x3F));
     }
-    return {reinterpret_cast<char *>(ret)};
+
+    return ret;
 }
 
 /** 's' is a string with at least 4 bytes length
