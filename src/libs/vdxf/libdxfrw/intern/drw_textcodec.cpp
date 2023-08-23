@@ -332,8 +332,8 @@ auto DRW_ConvTable::toUtf8(const std::string &s) -> std::string
             }
         }
         else
-        {                                      // end c < 0x80
-            res += encodeNum(table[c - 0x80]); // translate from table
+        {                                                           // end c < 0x80
+            res += encodeNum(table[static_cast<size_t>(c - 0x80)]); // translate from table
         }
     } // end for
 
@@ -501,7 +501,9 @@ template <size_t DoubleTableSize> auto DRW_ConvDBCSTable<DoubleTableSize>::toUtf
                 }
             }
             else
+            {
                 res += static_cast<char>(c); // c!='\' ascii char write
+            }
         }
         else if (c == 0x80)
         { // 1 byte table
@@ -512,9 +514,9 @@ template <size_t DoubleTableSize> auto DRW_ConvDBCSTable<DoubleTableSize>::toUtf
         { // 2 bytes
             ++it;
             int code = (c << 8) | static_cast<unsigned char>(*it);
-            int sta = leadTable[c - 0x81];
-            int end = leadTable[c - 0x80];
-            for (size_t k = static_cast<size_t>(sta); k < static_cast<size_t>(end); k++)
+            int sta = leadTable[static_cast<size_t>(c - 0x81)];
+            int end = leadTable[static_cast<size_t>(c - 0x80)];
+            for (auto k = static_cast<size_t>(sta); k < static_cast<size_t>(end); k++)
             {
                 if (doubleTable[k][0] == code)
                 {
@@ -627,13 +629,13 @@ auto DRW_Conv932Table::toUtf8(const std::string &s) -> std::string
             int end = 0;
             if (c > 0x80 && c < 0xA0)
             {
-                sta = DRW_LeadTable932[c - 0x81];
-                end = DRW_LeadTable932[c - 0x80];
+                sta = DRW_LeadTable932[static_cast<size_t>(c - 0x81)];
+                end = DRW_LeadTable932[static_cast<size_t>(c - 0x80)];
             }
             else if (c > 0xDF && c < 0xFD)
             {
-                sta = DRW_LeadTable932[c - 0xC1];
-                end = DRW_LeadTable932[c - 0xC0];
+                sta = DRW_LeadTable932[static_cast<size_t>(c - 0xC1)];
+                end = DRW_LeadTable932[static_cast<size_t>(c - 0xC0)];
             }
             if (end > 0)
             {
