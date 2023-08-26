@@ -2127,7 +2127,7 @@ auto VToolSeamAllowance::PrepareLabelData(const VPatternLabelData &labelData, co
         const int iFS = labelData.GetFontSize() < VCommonSettings::MinPieceLabelFontPointSize()
                             ? settings->GetPieceLabelFontPointSize()
                             : labelData.GetFontSize();
-        fnt.setPointSize(iFS);
+        fnt.setPointSize(qMax(iFS, 1));
         labelItem->SetSVGFontPointSize(iFS);
     }
     labelItem->SetFont(fnt);

@@ -454,7 +454,7 @@ MainWindow::MainWindow(QWidget *parent)
                 QFont f = ui->plainTextEditPatternMessages->font();
                 if (f.pointSize() < VValentinaSettings::GetDefMaxPatternMessageFontSize())
                 {
-                    f.setPointSize(f.pointSize() + 1);
+                    f.setPointSize(qMax(f.pointSize() + 1, 1));
                     ui->plainTextEditPatternMessages->setFont(f);
                     settings->SetPatternMessageFontSize(f.pointSize());
                 }
@@ -467,7 +467,7 @@ MainWindow::MainWindow(QWidget *parent)
                 QFont f = ui->plainTextEditPatternMessages->font();
                 if (f.pointSize() > VValentinaSettings::GetDefMinPatternMessageFontSize())
                 {
-                    f.setPointSize(f.pointSize() - 1);
+                    f.setPointSize(qMax(f.pointSize() - 1, 1));
                     ui->plainTextEditPatternMessages->setFont(f);
                     settings->SetPatternMessageFontSize(f.pointSize());
                 }
@@ -5506,7 +5506,7 @@ void MainWindow::ReadSettings()
         ToolboxIconSize();
 
         QFont f = ui->plainTextEditPatternMessages->font();
-        f.setPointSize(settings->GetPatternMessageFontSize(f.pointSize()));
+        f.setPointSize(qMax(settings->GetPatternMessageFontSize(f.pointSize()), 1));
         ui->plainTextEditPatternMessages->setFont(f);
     }
     else

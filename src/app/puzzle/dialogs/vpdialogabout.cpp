@@ -125,7 +125,7 @@ void VPDialogAbout::FontPointSize(QWidget *w, int pointSize)
     SCASSERT(w != nullptr)
 
     QFont font = w->font();
-    font.setPointSize(pointSize);
+    font.setPointSize(qMax(pointSize, 1));
     w->setFont(font);
 }
 

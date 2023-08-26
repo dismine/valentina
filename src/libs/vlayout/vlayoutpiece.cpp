@@ -1677,7 +1677,7 @@ void VLayoutPiece::LabelStringsOutlineFont(QGraphicsItem *parent, const QVector<
     for (const auto &tl : labelLines)
     {
         QFont fnt = tm.GetFont();
-        fnt.setPointSize(tm.GetFont().pointSize() + tl.m_iFontSize);
+        fnt.setPointSize(qMax(tm.GetFont().pointSize() + tl.m_iFontSize, 1));
         fnt.setBold(tl.m_bold);
         fnt.setItalic(tl.m_italic);
 

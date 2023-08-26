@@ -413,7 +413,7 @@ void DialogEditLabel::SaveAdditionalFontSize(int i)
     if (curLine)
     {
         QFont lineFont = curLine->font();
-        lineFont.setPointSize(lineFont.pointSize() - curLine->data(Qt::UserRole).toInt() + i);
+        lineFont.setPointSize(qMax(lineFont.pointSize() - curLine->data(Qt::UserRole).toInt() + i, 1));
         curLine->setFont(lineFont);
         curLine->setData(Qt::UserRole, i);
     }
@@ -771,7 +771,7 @@ void DialogEditLabel::SetTemplate(const QVector<VLabelTemplateLine> &lines)
         QFont font = item->font();
         font.setBold(line.bold);
         font.setItalic(line.italic);
-        font.setPointSize(font.pointSize() + line.fontSizeIncrement);
+        font.setPointSize(qMax(font.pointSize() + line.fontSizeIncrement, 1));
         item->setFont(font);
 
         ui->listWidgetEdit->insertItem(++row, item);
@@ -853,7 +853,7 @@ void DialogEditLabel::InitPreviewLines(const QVector<VLabelTemplateLine> &lines)
         QFont font = item->font();
         font.setBold(line.bold);
         font.setItalic(line.italic);
-        font.setPointSize(font.pointSize() + line.fontSizeIncrement);
+        font.setPointSize(qMax(font.pointSize() + line.fontSizeIncrement, 1));
         item->setFont(font);
 
         ui->listWidgetPreview->insertItem(++row, item);

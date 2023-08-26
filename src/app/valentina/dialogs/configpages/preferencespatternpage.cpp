@@ -125,7 +125,7 @@ PreferencesPatternPage::PreferencesPatternPage(QWidget *parent)
 
     QFont labelFont = settings->GetLabelFont();
     int pointSize = settings->GetPieceLabelFontPointSize();
-    labelFont.setPointSize(pointSize);
+    labelFont.setPointSize(qMax(pointSize, 1));
 
     ui->fontComboBoxLabelFont->setCurrentFont(labelFont);
 

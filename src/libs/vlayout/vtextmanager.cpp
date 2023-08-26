@@ -610,8 +610,8 @@ auto VTextManager::GetSVGFontPointSize() const -> int
 void VTextManager::SetFontSize(int iFS)
 {
     iFS < VCommonSettings::MinPieceLabelFontPointSize()
-        ? m_font.setPointSize(VCommonSettings::MinPieceLabelFontPointSize())
-        : m_font.setPointSize(iFS);
+        ? m_font.setPointSize(qMax(VCommonSettings::MinPieceLabelFontPointSize(), 1))
+        : m_font.setPointSize(qMax(iFS, 1));
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -659,7 +659,7 @@ auto VTextManager::GetLabelSourceLines(int width, const QFont &font) const -> QV
 
     for (const auto &tl : m_liLines)
     {
-        fnt.setPointSize(fSize + tl.m_iFontSize);
+        fnt.setPointSize(qMax(fSize + tl.m_iFontSize, 1));
         fnt.setBold(tl.m_bold);
         fnt.setItalic(tl.m_italic);
 
@@ -740,7 +740,7 @@ auto VTextManager::MaxLineWidthOutlineFont(int width) const -> int
         const TextLine &tl = m_liLines.at(i);
 
         QFont fnt = m_font;
-        fnt.setPointSize(fnt.pointSize() + tl.m_iFontSize);
+        fnt.setPointSize(qMax(fnt.pointSize() + tl.m_iFontSize, 1));
         fnt.setBold(tl.m_bold);
         fnt.setItalic(tl.m_italic);
 
