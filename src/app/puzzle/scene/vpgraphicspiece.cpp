@@ -53,7 +53,6 @@
 #include "../vmisc/theme/vscenestylesheet.h"
 #include "../vpapplication.h"
 #include "compatibility.h"
-#include "qminmax.h"
 #include "undocommands/vpundomovepieceonsheet.h"
 #include "undocommands/vpundopiecemove.h"
 #include "vpiecegrainline.h"
