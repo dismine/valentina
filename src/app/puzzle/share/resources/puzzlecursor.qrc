@@ -1,0 +1,6 @@
+<RCC>
+    <qresource prefix="/">
+        <file>puzzlecursor/collect.png</file>
+        <file>puzzlecursor/collect@2x.png</file>
+    </qresource>
+</RCC>

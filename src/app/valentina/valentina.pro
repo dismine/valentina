@@ -75,7 +75,7 @@ include(valentina.pri)
 
 # Resource files. This files will be included in binary.
 RESOURCES += \
-    share/resources/cursor.qrc \ # Tools cursor icons.
+    share/resources/toolcursor.qrc \ # Tools cursor icons.
     share/resources/toolicon.qrc
 
 # Compilation will fail without this files after we added them to this section.

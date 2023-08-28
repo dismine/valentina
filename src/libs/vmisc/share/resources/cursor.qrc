@@ -1,0 +1,6 @@
+<RCC>
+    <qresource prefix="/">
+        <file>cursor/cursor-arrow-closehand.png</file>
+        <file>cursor/cursor-arrow-openhand.png</file>
+    </qresource>
+</RCC>

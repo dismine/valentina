@@ -62,7 +62,7 @@ UI_DIR = uic
 include(puzzle.pri)
 
 RESOURCES += \
-    share/resources/cursor.qrc \
+    share/resources/puzzlecursor.qrc \
     share/resources/puzzleicon.qrc
 
 include(../svgfont.pri)

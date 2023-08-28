@@ -195,6 +195,7 @@ VLib {
             "flags.qrc",
             "breezethemes/breeze.qrc",
             "scenestyle.qrc",
+            "cursor.qrc",
         ]
     }
 

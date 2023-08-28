@@ -1,6 +1,0 @@
-<RCC>
-    <qresource prefix="/">
-        <file>cursor/collect.png</file>
-        <file>cursor/collect@2x.png</file>
-    </qresource>
-</RCC>

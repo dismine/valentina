@@ -50,6 +50,7 @@ RESOURCES += \
     share/resources/flags.qrc \
     share/resources/breezethemes/breeze.qrc \
     share/resources/scenestyle.qrc \
+    share/resources/cursor.qrc \
     share/resources/win_light_theme.qrc \
     share/resources/win_dark_theme.qrc
 

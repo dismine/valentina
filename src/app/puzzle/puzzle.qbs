@@ -173,7 +173,7 @@ VToolApp {
         name: "Resources"
         prefix: "share/resources/"
         files: [
-            "cursor.qrc", // Tools cursor icons
+            "puzzlecursor.qrc", // Tools cursor icons
             "puzzleicon.qrc",
         ]
     }

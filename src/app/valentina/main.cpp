@@ -59,6 +59,7 @@ auto main(int argc, char *argv[]) -> int
 #endif // defined(APPIMAGE) && defined(Q_OS_LINUX)
 
     Q_INIT_RESOURCE(cursor);     // NOLINT
+    Q_INIT_RESOURCE(toolcursor); // NOLINT
     Q_INIT_RESOURCE(icon);       // NOLINT
     Q_INIT_RESOURCE(schema);     // NOLINT
     Q_INIT_RESOURCE(flags);      // NOLINT
