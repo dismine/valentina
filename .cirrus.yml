@@ -93,12 +93,9 @@ linux_task:
     PACKAGE_MANAGER_INSTALL: "apt-get -qq update && apt-get install -y"
     DISPLAY: ":90"
     XDG_RUNTIME_DIR: "/tmp/runtime-kdeci/"
-  container:
-    cpu: 4
   matrix:
     - container:
         image: dismine/clang-ubuntu:latest
-        memory: 12G  # Set to 12GB to avoid OOM. https://cirrus-ci.org/guide/linux/#linux-container
       env:
         COMPILER: clang
         QMAKE_SPEC: "linux-clang"
@@ -108,19 +105,27 @@ linux_task:
           << :  *LINUX_QT5_QMAKE_TASK_TEMPLATE
           env:
             QT_SELECT: "qt5"
+          container:
+            cpu: 2
+            memory: 6G  # Set to 6GB to avoid OOM. https://cirrus-ci.org/guide/linux/#linux-container
         - name: 'latest Clang [Qt5 QBS]'
           << : *LINUX_QT5_QBS_TASK_TEMPLATE
           env:
             QT_SELECT: "qt5"
             ENABLE_CCACHE: false
+          container:
+            cpu: 2
+            memory: 6G  # Set to 6GB to avoid OOM. https://cirrus-ci.org/guide/linux/#linux-container
         - name: 'latest Clang [Qt6]'
           << : *LINUX_QT6_TASK_TEMPLATE
           env:
             QT_SELECT: "qt6"
             ENABLE_CCACHE: false
+          container:
+            cpu: 8
+            memory: 8G  # Set to 8GB to avoid OOM. https://cirrus-ci.org/guide/linux/#linux-container
     - container:
         image: dismine/gcc-ubuntu:latest
-        memory: 16G   # Set to 16GB to avoid OOM. https://cirrus-ci.org/guide/linux/#linux-container
       env:
         COMPILER: gcc
         QMAKE_SPEC: "linux-g++"
@@ -131,16 +136,25 @@ linux_task:
           << :  *LINUX_QT5_QMAKE_TASK_TEMPLATE
           env:
             QT_SELECT: "qt5"
+          container:
+            cpu: 2 
+            memory: 8G  # Set to 8GB to avoid OOM. https://cirrus-ci.org/guide/linux/#linux-container
         - name: 'latest GCC [Qt5 QBS]'
           << : *LINUX_QT5_QBS_TASK_TEMPLATE
           env:
             QT_SELECT: "qt5"
             ENABLE_CCACHE: true
+          container:
+            cpu: 3
+            memory: 10G  # Set to 10GB to avoid OOM. https://cirrus-ci.org/guide/linux/#linux-container
         - name: 'latest GCC [Qt6]'
           << : *LINUX_QT6_TASK_TEMPLATE
           env:
             QT_SELECT: "qt6"
             ENABLE_CCACHE: true
+          container:
+            cpu: 3
+            memory: 12G  # Set to 12GB to avoid OOM. https://cirrus-ci.org/guide/linux/#linux-container
 
 macos_task_template: &MACOS_TASK_TEMPLATE
   << : *REGULER_TASK_TEMPLATE
