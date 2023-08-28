@@ -26,6 +26,19 @@ VToolApp {
         condition: Utilities.versionCompare(Qt.core.version, "6") >= 0 && buildconfig.useConanPackages
     }
 
+    // Explicitly link to libcrypto and libssl to avoid error: Failed to load libssl/libcrypto.
+    // Path must be inside PKG_CONFIG_PATH variable.
+    // Explicit linking will help macdeployqt undertsand that we want to see them inside the bundle.
+    Depends {
+        name: "libcrypto"
+        condition: qbs.targetOS.contains("macos") && Utilities.versionCompare(Qt.core.version, "6") >= 0
+    }
+
+    Depends {
+        name: "libssl"
+        condition: qbs.targetOS.contains("macos") && Utilities.versionCompare(Qt.core.version, "6") >= 0
+    }
+
     name: "Tape"
     buildconfig.appTarget: qbs.targetOS.contains("macos") ? "Tape" : "tape"
     targetName: buildconfig.appTarget

@@ -581,6 +581,107 @@ for:
     only:
       - job_name: MacOS_12_Qt_6_4 (multibundle)
       - job_name: MacOS_12_Qt_6_4 (singlebundle)
+
+  environment:
+    CONAN_USER_HOME: /Users/appveyor/.conan
+    HOMEBREW_NO_INSTALL_CLEANUP: 1
+
+  cache:
+    - /Users/appveyor/.conan/data -> conan-cache
+    - /Users/appveyor/cache_dir
+
+  init:
+    - find /Applications -maxdepth 1 -type d -name 'Xcode*.app'
+    - sudo xcode-select -p
+    - sudo xcode-select -s /Applications/Xcode-$XCODE_VERSION.app
+    - sudo xcode-select -p
+    
+  before_build:
+    - ls ${HOME}/Qt
+    - export QTDIR="${HOME}/${QT}"
+    - export PATH="$QTDIR/bin:$HOME/.local/bin:`python3 -m site --user-base`/bin:${HOME}/Qt/Qt Creator.app/Contents/MacOS:$PATH"
+    - echo $PATH
+    - python3 --version
+    - |-
+
+      ###############################################################
+      # Set up macOS dependencies
+
+      sudo ln -s /usr/local /opt/local;
+
+      cache_tag=usr_local_1 # this can be modified to rebuild deps
+
+      cdir=$HOME/cache_dir
+      cache_tar=$cdir/$cache_tag.tar
+      cache=$cache_tar.xz
+
+      CPUS=$(sysctl -n hw.ncpu)
+
+      if [ -d $cdir ] && [ -f $cache ]; then
+        echo "=== Unpacking cached Homebrew $cache ==="
+        (
+          cd /
+          tar xf $cache
+        )
+        echo "done"
+      else
+        echo "=== Building dependencies ==="
+        echo "Couldn't find cache $cache"
+        ls -alrt "$cdir"
+
+        echo "Recording /usr/local state"
+        python3 ./scripts/treestate.py scan /usr/local usrlocal.json
+
+        brew update
+        brew install coreutils ccache git openssl@1.1
+
+        # The build environment is now ready for use. We can complete
+        # the rest of the process of creating the Homebrew archive
+        # during the rest of the build, using idle CPU time. To minimise
+        # the amount of space needed for the archive, we compress with
+        # xz, which adds only about a minute to the non-cached build.
+        (
+          echo "=== Creating cache tarball $cache ==="
+          echo "Check /usr/local for updates"
+          python3 ./scripts/treestate.py updates usrlocal.json /usr/local | fgrep -v .git > updated_list
+          echo Need to record $( wc -l updated_list ) updates
+
+          mkdir -p $cdir
+          rm -f $cdir/*
+          nice tar cf $cache_tar -T updated_list
+          echo nice xz -9 -T$CPUS $cache_tar
+          nice xz -9 -T$CPUS $cache_tar
+          du -h $cdir
+        ) 2>&1 | sed 's/^/CACHE: /' &
+
+      fi
+
+      export PKG_CONFIG_PATH="$(brew --prefix openssl@1.1)/lib/pkgconfig";
+    - sudo python3 -m pip install --upgrade pip
+    - pip3 install --user --upgrade pip dropbox conan==1.60
+    - conan --version
+    - clang --version
+    - qmake --version
+    - which qmake
+    - qbs --version
+    - cd ${APPVEYOR_BUILD_FOLDER}
+
+  build_script:
+    - pwd
+    - conan install . -s os=Macos -s os.version=${MACOS_DEPLOYMENT_TARGET} --build=missing
+    - qbs setup-toolchains --detect
+    - qbs config --list profiles
+    - qbs setup-qt ${QTDIR}/bin/qmake qt6
+    - qbs config defaultProfile qt6
+    - qbs config profiles.qt6.baseProfile clang
+    - qbs build -f valentina.qbs -d ${APPVEYOR_BUILD_FOLDER}/build --jobs $(nproc) config:release modules.buildconfig.enableUnitTests:false modules.buildconfig.enableMultiBundle:${MULTI_BUNDLE} qbs.installRoot:${APPVEYOR_BUILD_FOLDER}/build/install-root profile:qt6 project.enableConan:true project.minimumMacosVersion:${MACOS_DEPLOYMENT_TARGET} modules.buildconfig.enableCcache:false
+
+  deploy_script:
+    - CIRRUS_WORKING_DIR=${APPVEYOR_BUILD_FOLDER} CIRRUS_CHANGE_IN_REPO=${APPVEYOR_REPO_COMMIT} CIRRUS_BRANCH=${APPVEYOR_REPO_BRANCH} ${APPVEYOR_BUILD_FOLDER}/scripts/cirrus-deploy.sh
+
+-
+  matrix:
+    only:
       - job_name: MacOS_10_15_Qt_5_15 (qbs, multibundle)
       - job_name: MacOS_10_15_Qt_5_15 (qbs, singlebundle)
 
@@ -596,6 +697,8 @@ for:
     - sudo xcode-select -p
     - sudo xcode-select -s /Applications/Xcode-$XCODE_VERSION.app
     - sudo xcode-select -p
+
+  before_build:
     - ls ${HOME}/Qt
     - export QTDIR="${HOME}/${QT}"
     - export PATH="$QTDIR/bin:$HOME/.local/bin:`python3 -m site --user-base`/bin:${HOME}/Qt/Qt Creator.app/Contents/MacOS:$PATH"
@@ -608,8 +711,6 @@ for:
     - qmake --version
     - which qmake
     - qbs --version
-
-  before_build:
     - cd ${APPVEYOR_BUILD_FOLDER}
 
   build_script:
@@ -631,18 +732,18 @@ for:
       - job_name: MacOS_10_15_Qt_5_15 (make)
 
   init:
-    - export QTDIR="${HOME}/${QT}"
-    - export PATH="$QTDIR/bin:$PATH"
-    - echo $PATH
     - find /Applications -maxdepth 1 -type d -name 'Xcode*.app'
     - sudo xcode-select -p
     - sudo xcode-select -s /Applications/Xcode-$XCODE_VERSION.app
     - sudo xcode-select -p
+
+  before_build:
+    - export QTDIR="${HOME}/${QT}"
+    - export PATH="$QTDIR/bin:$PATH"
+    - echo $PATH
     - clang --version
     - qmake --version
     - which qmake
-
-  before_build:
     - cd ${APPVEYOR_BUILD_FOLDER}
     - mkdir build
     - cd build

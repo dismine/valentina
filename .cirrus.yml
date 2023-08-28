@@ -167,7 +167,6 @@ macos_task_template: &MACOS_TASK_TEMPLATE
     PIP_CACHE_DIR: ${HOME}/.cache/pip
     LDFLAGS: "-L$QTDIR/lib"
     CPPFLAGS: "-I$QTDIR/include"
-    PKG_CONFIG_PATH: "/opt/homebrew/opt/qt6/lib/pkgconfig"
   local_homebrew_cache:
     folder: "$HOME/Library/Caches/Homebrew"
   global_conan_cache:
@@ -182,12 +181,14 @@ macos_task_template: &MACOS_TASK_TEMPLATE
     - sudo xcode-select -p
     - brew update > /dev/null
     - brew outdated
-    - brew install --force qt6 coreutils ccache qbs cmake git
-    - brew upgrade qt6 coreutils ccache qbs cmake git
+    - brew install --force qt6 coreutils ccache qbs cmake git openssl@1.1
+    - brew upgrade qt6 coreutils ccache qbs cmake git openssl@1.1
     - echo $PATH
     - export PATH="${HOME}/.local/bin:`python3 -m site --user-base`/bin:$PATH"
     - echo $PATH
     - chmod -R 755 /opt/homebrew/opt/qt6/*
+    - chmod -R 755 /opt/homebrew/opt/openssl@1.1/*
+    - export PKG_CONFIG_PATH="$(brew --prefix qt6)/lib/pkgconfig:$(brew --prefix openssl@1.1)/lib/pkgconfig"
     - python3 --version
     - pip3 install --user --upgrade pip dropbox conan==1.60
     - ccache --set-config=sloppiness=pch_defines,time_macros 
