@@ -813,14 +813,16 @@ void MainWindow::SetToolButton(bool checked, Tool t, const QString &cursor, cons
         CancelTool();
         emit EnableItemMove(false);
         m_currentTool = m_lastUsedTool = t;
-        auto cursorResource = VTheme::GetResourceName(QStringLiteral("cursor"), cursor);
+        const QString resource = QStringLiteral("toolcursor");
+        auto cursorResource = VTheme::GetResourceName(resource, cursor);
         if (qApp->devicePixelRatio() >= 2) // NOLINT(cppcoreguidelines-pro-type-static-cast-downcast)
         {
             // Try to load HiDPI versions of the cursors if availible
-            auto cursorHidpiResource = QString(cursor).replace(QLatin1String(".png"), QLatin1String("@2x.png"));
-            if (QFileInfo::exists(cursorResource))
+            auto hiDPICursor = QString(cursor).replace(QLatin1String(".png"), QLatin1String("@2x.png"));
+            auto cursorHiDPIResource = VTheme::GetResourceName(resource, hiDPICursor);
+            if (QFileInfo::exists(cursorHiDPIResource))
             {
-                cursorResource = cursorHidpiResource;
+                cursorResource = cursorHiDPIResource;
             }
         }
         QPixmap pixmap(cursorResource);
