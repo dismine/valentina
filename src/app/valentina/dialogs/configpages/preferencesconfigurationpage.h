@@ -65,6 +65,7 @@ private:
 
     void SetLabelComboBox(const QStringList &list);
     void SetThemeModeComboBox();
+    void SetPointerModeComboBox();
     void InitUnits();
     void RetranslateUi();
 };

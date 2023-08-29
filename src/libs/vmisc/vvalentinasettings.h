@@ -37,6 +37,12 @@
 
 #include "vcommonsettings.h"
 
+enum class VToolPointerMode
+{
+    ToolIcon = 0,
+    Arrow = 1
+};
+
 class VValentinaSettings : public VCommonSettings
 {
     Q_OBJECT // NOLINT
@@ -241,6 +247,9 @@ public:
 
     auto GetShowGrainline() const -> bool;
     void SetShowGrainline(bool value);
+
+    auto GetPointerMode() const -> VToolPointerMode;
+    void SetPointerMode(VToolPointerMode mode);
 
 private:
     Q_DISABLE_COPY_MOVE(VValentinaSettings) // NOLINT

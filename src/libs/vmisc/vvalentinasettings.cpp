@@ -56,6 +56,9 @@ QT_WARNING_DISABLE_CLANG("-Wunused-member-function")
 Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingConfigurationLabelLanguage,
                           (QLatin1String("configuration/label_language")))
 // NOLINTNEXTLINE
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingConfigurationToolPointerMode,
+                          (QLatin1String("configuration/toolPointerMode")))
+// NOLINTNEXTLINE
 Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingAutoRefreshPatternMessage,
                           (QLatin1String("configuration/autoRefreshPatternMessage")))
 
@@ -1032,6 +1035,25 @@ auto VValentinaSettings::GetShowGrainline() const -> bool
 void VValentinaSettings::SetShowGrainline(bool value)
 {
     setValue(*settingLayoutShowGrainline, value);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+auto VValentinaSettings::GetPointerMode() const -> VToolPointerMode
+{
+    int val = value(*settingConfigurationToolPointerMode, static_cast<int>(VToolPointerMode::ToolIcon)).toInt();
+
+    if (val < 0 || val > 2)
+    {
+        val = 0;
+    }
+
+    return static_cast<VToolPointerMode>(val);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VValentinaSettings::SetPointerMode(VToolPointerMode mode)
+{
+    setValue(*settingConfigurationToolPointerMode, static_cast<int>(mode));
 }
 
 //---------------------------------------------------------------------------------------------------------------------

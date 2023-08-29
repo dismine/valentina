@@ -78,6 +78,7 @@
 #include "../vmisc/dialogs/dialogselectlanguage.h"
 #include "../vmisc/qxtcsvmodel.h"
 #include "../vmisc/theme/vtheme.h"
+#include "../vmisc/vcommonsettings.h"
 #include "../vmisc/vmodifierkey.h"
 #include "../vmisc/vsysexits.h"
 #include "../vmisc/vvalentinasettings.h"
@@ -813,22 +814,28 @@ void MainWindow::SetToolButton(bool checked, Tool t, const QString &cursor, cons
         CancelTool();
         emit EnableItemMove(false);
         m_currentTool = m_lastUsedTool = t;
-        const QString resource = QStringLiteral("toolcursor");
-        auto cursorResource = VTheme::GetResourceName(resource, cursor);
-        if (qApp->devicePixelRatio() >= 2) // NOLINT(cppcoreguidelines-pro-type-static-cast-downcast)
+
+        VValentinaSettings *settings = VAbstractValApplication::VApp()->ValentinaSettings();
+        if (settings->GetPointerMode() == VToolPointerMode::ToolIcon)
         {
-            // Try to load HiDPI versions of the cursors if availible
-            auto hiDPICursor = QString(cursor).replace(QLatin1String(".png"), QLatin1String("@2x.png"));
-            auto cursorHiDPIResource = VTheme::GetResourceName(resource, hiDPICursor);
-            if (QFileInfo::exists(cursorHiDPIResource))
+            const QString resource = QStringLiteral("toolcursor");
+            auto cursorResource = VTheme::GetResourceName(resource, cursor);
+            if (qApp->devicePixelRatio() >= 2) // NOLINT(cppcoreguidelines-pro-type-static-cast-downcast)
             {
-                cursorResource = cursorHiDPIResource;
+                // Try to load HiDPI versions of the cursors if availible
+                auto hiDPICursor = QString(cursor).replace(QLatin1String(".png"), QLatin1String("@2x.png"));
+                auto cursorHiDPIResource = VTheme::GetResourceName(resource, hiDPICursor);
+                if (QFileInfo::exists(cursorHiDPIResource))
+                {
+                    cursorResource = cursorHiDPIResource;
+                }
             }
+            QPixmap pixmap(cursorResource);
+            QCursor cur(pixmap, 2, 2);
+            ui->view->viewport()->setCursor(cur);
+            ui->view->setCurrentCursorShape(); // Hack to fix problem with a cursor
         }
-        QPixmap pixmap(cursorResource);
-        QCursor cur(pixmap, 2, 2);
-        ui->view->viewport()->setCursor(cur);
-        ui->view->setCurrentCursorShape(); // Hack to fix problem with a cursor
+
         m_statusLabel->setText(toolTip);
         ui->view->setShowToolOptions(false);
         m_dialogTool = new Dialog(pattern, 0, this);

@@ -143,6 +143,14 @@ PreferencesConfigurationPage::PreferencesConfigurationPage(QWidget *parent)
         ui->comboBoxThemeMode->setCurrentIndex(index);
     }
 
+    // Pointer mode
+    SetPointerModeComboBox();
+    index = ui->comboBoxPointerMode->findData(static_cast<int>(settings->GetPointerMode()));
+    if (index != -1)
+    {
+        ui->comboBoxPointerMode->setCurrentIndex(index);
+    }
+
     // Native dialogs
     ui->checkBoxDontUseNativeDialog->setChecked(settings->IsDontUseNativeDialog());
 
@@ -223,6 +231,8 @@ auto PreferencesConfigurationPage::Apply() -> QStringList
         VTheme::Instance()->ResetThemeSettings();
         QGuiApplication::restoreOverrideCursor();
     }
+
+    settings->SetPointerMode(static_cast<VToolPointerMode>(ui->comboBoxPointerMode->currentData().toInt()));
 
     if (settings->IsDontUseNativeDialog() != ui->checkBoxDontUseNativeDialog->isChecked())
     {
@@ -317,6 +327,14 @@ void PreferencesConfigurationPage::SetThemeModeComboBox()
     ui->comboBoxThemeMode->addItem(tr("System", "theme"), static_cast<int>(VThemeMode::System));
     ui->comboBoxThemeMode->addItem(tr("Dark", "theme"), static_cast<int>(VThemeMode::Dark));
     ui->comboBoxThemeMode->addItem(tr("Light", "theme"), static_cast<int>(VThemeMode::Light));
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void PreferencesConfigurationPage::SetPointerModeComboBox()
+{
+    ui->comboBoxPointerMode->clear();
+    ui->comboBoxPointerMode->addItem(tr("Tool icon cursor"), static_cast<int>(VToolPointerMode::ToolIcon));
+    ui->comboBoxPointerMode->addItem(tr("Arrow cursor"), static_cast<int>(VToolPointerMode::Arrow));
 }
 
 //---------------------------------------------------------------------------------------------------------------------
