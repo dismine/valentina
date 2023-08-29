@@ -657,6 +657,9 @@ for:
       fi
     - sudo python3 -m pip install --upgrade pip
     - pip3 install --user --upgrade pip dropbox conan==1.60
+    - export PATH="`python3 -m site --user-base`/bin:$PATH"
+    - echo $PATH
+    - python3 --version
     - conan --version
     - clang --version
     - qmake --version
