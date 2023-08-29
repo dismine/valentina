@@ -27,7 +27,7 @@ VToolApp {
     }
 
     // Explicitly link to libcrypto and libssl to avoid error: Failed to load libssl/libcrypto.
-    // Path must be inside PKG_CONFIG_PATH variable.
+    // Use moduleProviders.qbspkgconfig.extraPaths to define the missing dependency.
     // Explicit linking will help macdeployqt undertsand that we want to see them inside the bundle.
     Depends {
         name: "libcrypto"
