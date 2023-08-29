@@ -5,6 +5,7 @@ import "qbs/imports/conan/ConanfileProbe.qbs" as ConanfileProbe
 Project {
     name: "Valentina"
     minimumQbsVersion: "1.16"
+    qbsModuleProviders: ["Qt", "qbspkgconfig"]
 
     property bool enableConan: false
     property string minimumMacosVersion: undefined

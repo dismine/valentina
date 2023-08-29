@@ -188,8 +188,6 @@ macos_task_template: &MACOS_TASK_TEMPLATE
     - echo $PATH
     - chmod -R 755 /opt/homebrew/opt/qt6/*
     - chmod -R 755 /opt/homebrew/opt/openssl@1.1/*
-    - export PKG_CONFIG_PATH="$(brew --prefix qt6)/lib/pkgconfig:$(brew --prefix openssl@1.1)/lib/pkgconfig"
-    - echo $PKG_CONFIG_PATH
     - python3 --version
     - pip3 install --user --upgrade pip dropbox conan==1.60
     - ccache --set-config=sloppiness=pch_defines,time_macros 
@@ -216,7 +214,7 @@ macos_task_template: &MACOS_TASK_TEMPLATE
     - qbs setup-qt /opt/homebrew/opt/qt6/bin/qmake qt6
     - qbs-config defaultProfile qt6
     - qbs config profiles.qt6.baseProfile clang
-    - qbs build -f valentina.qbs -d $CIRRUS_WORKING_DIR/build --command-echo-mode command-line --jobs $(nproc) config:release modules.buildconfig.enableUnitTests:false modules.buildconfig.enableMultiBundle:${MULTI_BUNDLE} qbs.installRoot:$CIRRUS_WORKING_DIR/build/install-root profile:qt6 project.enableConan:true project.minimumMacosVersion:${MACOS_DEPLOYMENT_TARGET} modules.buildconfig.enableCcache:${ENABLE_CCACHE} project.conanProfiles:valentina
+    - qbs build -f valentina.qbs -d $CIRRUS_WORKING_DIR/build --command-echo-mode command-line --jobs $(nproc) config:release modules.buildconfig.enableUnitTests:false modules.buildconfig.enableMultiBundle:${MULTI_BUNDLE} qbs.installRoot:$CIRRUS_WORKING_DIR/build/install-root profile:qt6 project.enableConan:true project.minimumMacosVersion:${MACOS_DEPLOYMENT_TARGET} modules.buildconfig.enableCcache:${ENABLE_CCACHE} project.conanProfiles:valentina moduleProvides.qbspkgconfig.extraPaths:$(brew --prefix qt6)/lib/pkgconfig,$(brew --prefix openssl@1.1)/lib/pkgconfig
     - ccache -s
   deploy_script:
     - pwd
