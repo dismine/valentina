@@ -672,7 +672,7 @@ for:
     - qbs setup-qt ${QTDIR}/bin/qmake qt6
     - qbs config defaultProfile qt6
     - qbs config profiles.qt6.baseProfile clang
-    - qbs build -f valentina.qbs -d ${APPVEYOR_BUILD_FOLDER}/build --jobs $(nproc) config:release modules.buildconfig.enableUnitTests:false modules.buildconfig.enableMultiBundle:${MULTI_BUNDLE} qbs.installRoot:${APPVEYOR_BUILD_FOLDER}/build/install-root profile:qt6 project.enableConan:true project.minimumMacosVersion:${MACOS_DEPLOYMENT_TARGET} modules.buildconfig.enableCcache:false moduleProvides.qbspkgconfig.extraPaths:$(brew --prefix openssl@1.1)/lib/pkgconfig
+    - qbs build -f valentina.qbs -d ${APPVEYOR_BUILD_FOLDER}/build --jobs $(nproc) config:release modules.buildconfig.enableUnitTests:false modules.buildconfig.enableMultiBundle:${MULTI_BUNDLE} qbs.installRoot:${APPVEYOR_BUILD_FOLDER}/build/install-root profile:qt6 project.enableConan:true project.minimumMacosVersion:${MACOS_DEPLOYMENT_TARGET} modules.buildconfig.enableCcache:false moduleProviders.qbspkgconfig.extraPaths:$(brew --prefix openssl@1.1)/lib/pkgconfig
 
   deploy_script:
     - CIRRUS_WORKING_DIR=${APPVEYOR_BUILD_FOLDER} CIRRUS_CHANGE_IN_REPO=${APPVEYOR_REPO_COMMIT} CIRRUS_BRANCH=${APPVEYOR_REPO_BRANCH} ${APPVEYOR_BUILD_FOLDER}/scripts/cirrus-deploy.sh
