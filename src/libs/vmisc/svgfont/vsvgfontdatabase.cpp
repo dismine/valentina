@@ -366,7 +366,11 @@ auto VSvgFontDatabase::QueryFontEngine(const QString &family, SVGFontStyle style
     QByteArray hash = font.Hash();
     if (m_fontEngineCache.contains(hash))
     {
-        return {*m_fontEngineCache.object(hash)};
+        VSvgFontEngine engine = *m_fontEngineCache.object(hash);
+        VCommonSettings *settings = VAbstractApplication::VApp()->Settings();
+        engine.SetFontPointSize(pointSize > 0 ? pointSize : settings->GetPatternLabelFontSize());
+
+        return engine;
     }
 
     if (font.IsValid())
