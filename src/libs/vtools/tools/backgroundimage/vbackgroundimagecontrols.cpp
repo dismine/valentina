@@ -482,11 +482,10 @@ void VBackgroundImageControls::InitPixmaps()
 
     auto InitPixmap = [this](BIHandleCornerType type, const QString &imageName)
     {
-        const QString fileName = QStringLiteral("32x32/%1.png").arg(imageName);
-        const QString fileNameHover = QStringLiteral("32x32/%1-hover.png").arg(imageName);
-        const QString fileNameDisabled = QStringLiteral("32x32/%1-disabled.png").arg(imageName);
-
         const QString resource = QStringLiteral("icon");
+
+        const QString fileName = QStringLiteral("32x32/%1.png").arg(imageName);
+        QPixmap handlePixmap = VTheme::GetPixmapResource(resource, fileName);
 
         if (QGuiApplication::primaryScreen()->devicePixelRatio() >= 2)
         {
@@ -500,12 +499,15 @@ void VBackgroundImageControls::InitPixmaps()
         }
         else
         {
-            m_handlePixmaps.insert(type, VTheme::GetPixmapResource(resource, fileName));
+            const QString fileNameHover = QStringLiteral("32x32/%1-hover.png").arg(imageName);
+            const QString fileNameDisabled = QStringLiteral("32x32/%1-disabled.png").arg(imageName);
+
+            m_handlePixmaps.insert(type, handlePixmap);
             m_handleHoverPixmaps.insert(type, VTheme::GetPixmapResource(resource, fileNameHover));
             m_handleDisabledPixmaps.insert(type, VTheme::GetPixmapResource(resource, fileNameDisabled));
         }
 
-        QPainterPath p = PixmapToPainterPath(m_handlePixmaps.value(type));
+        QPainterPath p = PixmapToPainterPath(handlePixmap);
         p.setFillRule(Qt::WindingFill);
         p.closeSubpath();
         m_handlePaths.insert(type, p);
