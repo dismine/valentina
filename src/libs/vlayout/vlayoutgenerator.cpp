@@ -214,8 +214,6 @@ void VLayoutGenerator::Generate(const QElapsedTimer &timer, qint64 timeout, Layo
                     return;
                 }
 
-                QCoreApplication::processEvents();
-
                 if (stopGeneration.load())
                 {
                     break;

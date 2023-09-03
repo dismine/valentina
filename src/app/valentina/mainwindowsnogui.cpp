@@ -193,7 +193,7 @@ auto MainWindowsNoGUI::GenerateLayout(VLayoutGenerator &lGenerator) -> bool
 #if defined(Q_OS_WIN32) && QT_VERSION < QT_VERSION_CHECK(6, 0, 0) && QT_VERSION >= QT_VERSION_CHECK(5, 7, 0)
     QTimer *progressTimer = nullptr;
 #endif
-    
+
     QSharedPointer<DialogLayoutProgress> progress;
     if (VApplication::IsGUIMode())
     {
@@ -206,10 +206,10 @@ auto MainWindowsNoGUI::GenerateLayout(VLayoutGenerator &lGenerator) -> bool
                 [this, timer]() { m_taskbarProgress->setValue(static_cast<int>(timer.elapsed() / 1000)); });
         progressTimer->start(1000);
 #endif
-        
+
         progress = QSharedPointer<DialogLayoutProgress>(
             new DialogLayoutProgress(timer, lGenerator.GetNestingTimeMSecs(), this));
-        
+
         connect(progress.data(), &DialogLayoutProgress::Abort, &lGenerator, &VLayoutGenerator::Abort);
         connect(progress.data(), &DialogLayoutProgress::Timeout, &lGenerator, &VLayoutGenerator::Timeout);
 
@@ -278,7 +278,15 @@ auto MainWindowsNoGUI::GenerateLayout(VLayoutGenerator &lGenerator) -> bool
             break;
         }
 
-        lGenerator.Generate(timer, lGenerator.GetNestingTimeMSecs(), nestingState);
+        {
+            QEventLoop wait;
+            QFutureWatcher<void> fw;
+            fw.setFuture(
+                QtConcurrent::run([&lGenerator, timer, nestingState]()
+                                  { lGenerator.Generate(timer, lGenerator.GetNestingTimeMSecs(), nestingState); }));
+            QObject::connect(&fw, &QFutureWatcher<void>::finished, &wait, &QEventLoop::quit);
+            wait.exec();
+        }
 
         if (IsTimeout())
         {
@@ -380,12 +388,14 @@ auto MainWindowsNoGUI::GenerateLayout(VLayoutGenerator &lGenerator) -> bool
                 break;
         }
 
-        nestingState = lGenerator.State();
-
         if (nestingState == LayoutErrors::PrepareLayoutError || nestingState == LayoutErrors::ProcessStoped ||
-            nestingState == LayoutErrors::TerminatedByException ||
-            (nestingState == LayoutErrors::NoError && not qFuzzyIsNull(lGenerator.GetEfficiencyCoefficient()) &&
-             efficiency >= lGenerator.GetEfficiencyCoefficient()))
+            nestingState == LayoutErrors::TerminatedByException)
+        {
+            break;
+        }
+
+        if (nestingState == LayoutErrors::NoError && not qFuzzyIsNull(lGenerator.GetEfficiencyCoefficient()) &&
+            efficiency >= lGenerator.GetEfficiencyCoefficient())
         {
             if (not lGenerator.IsPreferOneSheetSolution() || lGenerator.PapersCount() == 1)
             {

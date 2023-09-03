@@ -238,27 +238,12 @@ auto VPosition::ArrangeDetail(const VPositionData &data, std::atomic_bool *stop,
 
     watcher.setFuture(QtConcurrent::mapped(jobs, Nest));
 
-    while (not watcher.isStarted())
-    {
-        QCoreApplication::processEvents();
-        QThread::msleep(250);
-    }
-
-    // Wait for done
-    do
-    {
-        QCoreApplication::processEvents();
-        QThread::msleep(250);
-    } while (watcher.isRunning() && not stop->load());
+    QEventLoop wait;
+    QObject::connect(&watcher, &QFutureWatcher<VBestSquare>::finished, &wait, &QEventLoop::quit);
+    wait.exec();
 
     if (stop->load())
     {
-        do
-        {
-            QCoreApplication::processEvents();
-            QThread::msleep(250);
-        } while (watcher.isRunning());
-
         return bestResult;
     }
 
