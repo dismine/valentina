@@ -251,6 +251,9 @@ public:
     auto GetPointerMode() const -> VToolPointerMode;
     void SetPointerMode(VToolPointerMode mode);
 
+    auto IsUseToolGroups() const -> bool;
+    void SetUseToolGroups(bool value);
+
 private:
     Q_DISABLE_COPY_MOVE(VValentinaSettings) // NOLINT
 

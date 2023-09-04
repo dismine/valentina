@@ -151,6 +151,9 @@ PreferencesConfigurationPage::PreferencesConfigurationPage(QWidget *parent)
         ui->comboBoxPointerMode->setCurrentIndex(index);
     }
 
+    // Use tool groups
+    ui->checkBoxUseToolGroups->setChecked(settings->IsUseToolGroups());
+
     // Native dialogs
     ui->checkBoxDontUseNativeDialog->setChecked(settings->IsDontUseNativeDialog());
 
@@ -233,6 +236,11 @@ auto PreferencesConfigurationPage::Apply() -> QStringList
     }
 
     settings->SetPointerMode(static_cast<VToolPointerMode>(ui->comboBoxPointerMode->currentData().toInt()));
+
+    if (settings->IsUseToolGroups() != ui->checkBoxUseToolGroups->isChecked())
+    {
+        settings->SetUseToolGroups(ui->checkBoxUseToolGroups->isChecked());
+    }
 
     if (settings->IsDontUseNativeDialog() != ui->checkBoxDontUseNativeDialog->isChecked())
     {

@@ -33,9 +33,9 @@
           <property name="geometry">
            <rect>
             <x>0</x>
-            <y>-101</y>
+            <y>-134</y>
             <width>624</width>
-            <height>937</height>
+            <height>966</height>
            </rect>
           </property>
           <layout class="QVBoxLayout" name="verticalLayout_2">
@@ -384,6 +384,13 @@
                  </widget>
                 </item>
                </layout>
+              </item>
+              <item>
+               <widget class="QCheckBox" name="checkBoxUseToolGroups">
+                <property name="text">
+                 <string>Use tool groups</string>
+                </property>
+               </widget>
               </item>
               <item>
                <widget class="QCheckBox" name="checkBoxDontUseNativeDialog">

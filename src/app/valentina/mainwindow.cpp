@@ -3041,186 +3041,288 @@ void MainWindow::ToolBarDrawTools()
 {
     SetupDrawToolsIcons();
 
-    // Point tools
+    VValentinaSettings *settings = VApplication::VApp()->ValentinaSettings();
+
+    ui->toolBarPointTools->clear();
+    if (settings->IsUseToolGroups())
     {
-        auto *linePointToolMenu = new QMenu(this);
-        linePointToolMenu->addAction(ui->actionEndLineTool);
-        linePointToolMenu->addAction(ui->actionAlongLineTool);
-        linePointToolMenu->addAction(ui->actionMidpointTool);
+        // Point tools
+        {
+            auto *linePointToolMenu = new QMenu(this);
+            linePointToolMenu->addAction(ui->actionEndLineTool);
+            linePointToolMenu->addAction(ui->actionAlongLineTool);
+            linePointToolMenu->addAction(ui->actionMidpointTool);
 
-        auto *linePointTool = new VToolButtonPopup(this);
-        linePointTool->setMenu(linePointToolMenu);
-        linePointTool->setDefaultAction(ui->actionEndLineTool);
+            auto *linePointTool = new VToolButtonPopup(this);
+            linePointTool->setMenu(linePointToolMenu);
+            linePointTool->setDefaultAction(ui->actionEndLineTool);
 
-        ui->toolBarPointTools->addWidget(linePointTool);
+            ui->toolBarPointTools->addWidget(linePointTool);
+        }
+
+        {
+            auto *angleLinePointToolMenu = new QMenu(this);
+            angleLinePointToolMenu->addAction(ui->actionNormalTool);
+            angleLinePointToolMenu->addAction(ui->actionBisectorTool);
+            angleLinePointToolMenu->addAction(ui->actionHeightTool);
+
+            auto *angleLinePointTool = new VToolButtonPopup(this);
+            angleLinePointTool->setMenu(angleLinePointToolMenu);
+            angleLinePointTool->setDefaultAction(ui->actionNormalTool);
+
+            ui->toolBarPointTools->addWidget(angleLinePointTool);
+        }
+
+        {
+            auto *lineIntersectionPointToolMenu = new QMenu(this);
+            lineIntersectionPointToolMenu->addAction(ui->actionPointOfIntersectionTool);
+            lineIntersectionPointToolMenu->addAction(ui->actionLineIntersectTool);
+
+            auto *lineIntersectionPointTool = new VToolButtonPopup(this);
+            lineIntersectionPointTool->setMenu(lineIntersectionPointToolMenu);
+            lineIntersectionPointTool->setDefaultAction(ui->actionPointOfIntersectionTool);
+
+            ui->toolBarPointTools->addWidget(lineIntersectionPointTool);
+        }
+
+        {
+            auto *specialPointToolMenu = new QMenu(this);
+            specialPointToolMenu->addAction(ui->actionShoulderPointTool);
+            specialPointToolMenu->addAction(ui->actionTriangleTool);
+
+            auto *specialPointTool = new VToolButtonPopup(this);
+            specialPointTool->setMenu(specialPointToolMenu);
+            specialPointTool->setDefaultAction(ui->actionShoulderPointTool);
+
+            ui->toolBarPointTools->addWidget(specialPointTool);
+        }
+
+        {
+            auto *axisPointToolMenu = new QMenu(this);
+            axisPointToolMenu->addAction(ui->actionLineIntersectAxisTool);
+            axisPointToolMenu->addAction(ui->actionCurveIntersectAxisTool);
+            axisPointToolMenu->addAction(ui->actionArcIntersectAxisTool);
+
+            auto *axisPointTool = new VToolButtonPopup(this);
+            axisPointTool->setMenu(axisPointToolMenu);
+            axisPointTool->setDefaultAction(ui->actionLineIntersectAxisTool);
+
+            ui->toolBarPointTools->addWidget(axisPointTool);
+        }
+
+        {
+            auto *curveSegmentPointToolMenu = new QMenu(this);
+            curveSegmentPointToolMenu->addAction(ui->actionSplineCutPointTool);
+            curveSegmentPointToolMenu->addAction(ui->actionSplinePathCutPointTool);
+            curveSegmentPointToolMenu->addAction(ui->actionArcCutPointTool);
+
+            auto *curveSegmentPointTool = new VToolButtonPopup(this);
+            curveSegmentPointTool->setMenu(curveSegmentPointToolMenu);
+            curveSegmentPointTool->setDefaultAction(ui->actionSplineCutPointTool);
+
+            ui->toolBarPointTools->addWidget(curveSegmentPointTool);
+        }
+
+        {
+            auto *curveIntersectionPointToolMenu = new QMenu(this);
+            curveIntersectionPointToolMenu->addAction(ui->actionIntersectionCurvesTool);
+            curveIntersectionPointToolMenu->addAction(ui->actionPointOfIntersectionArcsTool);
+            curveIntersectionPointToolMenu->addAction(ui->actionPointOfIntersectionCirclesTool);
+
+            auto *curveIntersectionPointTool = new VToolButtonPopup(this);
+            curveIntersectionPointTool->setMenu(curveIntersectionPointToolMenu);
+            curveIntersectionPointTool->setDefaultAction(ui->actionIntersectionCurvesTool);
+
+            ui->toolBarPointTools->addWidget(curveIntersectionPointTool);
+        }
+
+        {
+            auto *tangentPointToolMenu = new QMenu(this);
+            tangentPointToolMenu->addAction(ui->actionPointFromArcAndTangentTool);
+            tangentPointToolMenu->addAction(ui->actionPointFromCircleAndTangentTool);
+            tangentPointToolMenu->addAction(ui->actionPointOfContactTool);
+
+            auto *tangentPointTool = new VToolButtonPopup(this);
+            tangentPointTool->setMenu(tangentPointToolMenu);
+            tangentPointTool->setDefaultAction(ui->actionPointFromArcAndTangentTool);
+
+            ui->toolBarPointTools->addWidget(tangentPointTool);
+        }
+    }
+    else
+    {
+        ui->toolBarPointTools->addAction(ui->actionEndLineTool);
+        ui->toolBarPointTools->addAction(ui->actionAlongLineTool);
+        ui->toolBarPointTools->addAction(ui->actionMidpointTool);
+
+        ui->toolBarPointTools->addAction(ui->actionNormalTool);
+        ui->toolBarPointTools->addAction(ui->actionBisectorTool);
+        ui->toolBarPointTools->addAction(ui->actionHeightTool);
+
+        ui->toolBarPointTools->addAction(ui->actionPointOfIntersectionTool);
+        ui->toolBarPointTools->addAction(ui->actionLineIntersectTool);
+
+        ui->toolBarPointTools->addAction(ui->actionShoulderPointTool);
+        ui->toolBarPointTools->addAction(ui->actionTriangleTool);
+
+        ui->toolBarPointTools->addAction(ui->actionLineIntersectAxisTool);
+        ui->toolBarPointTools->addAction(ui->actionCurveIntersectAxisTool);
+        ui->toolBarPointTools->addAction(ui->actionArcIntersectAxisTool);
+
+        ui->toolBarPointTools->addAction(ui->actionSplineCutPointTool);
+        ui->toolBarPointTools->addAction(ui->actionSplinePathCutPointTool);
+        ui->toolBarPointTools->addAction(ui->actionArcCutPointTool);
+
+        ui->toolBarPointTools->addAction(ui->actionIntersectionCurvesTool);
+        ui->toolBarPointTools->addAction(ui->actionPointOfIntersectionArcsTool);
+        ui->toolBarPointTools->addAction(ui->actionPointOfIntersectionCirclesTool);
+
+        ui->toolBarPointTools->addAction(ui->actionPointFromArcAndTangentTool);
+        ui->toolBarPointTools->addAction(ui->actionPointFromCircleAndTangentTool);
+        ui->toolBarPointTools->addAction(ui->actionPointOfContactTool);
     }
 
+    ui->toolBarCurveTools->clear();
+    if (settings->IsUseToolGroups())
     {
-        auto *angleLinePointToolMenu = new QMenu(this);
-        angleLinePointToolMenu->addAction(ui->actionNormalTool);
-        angleLinePointToolMenu->addAction(ui->actionBisectorTool);
-        angleLinePointToolMenu->addAction(ui->actionHeightTool);
+        // Curve tools
+        {
+            auto *curveToolMenu = new QMenu(this);
+            curveToolMenu->addAction(ui->actionSplineTool);
+            curveToolMenu->addAction(ui->actionCubicBezierTool);
+            curveToolMenu->addAction(ui->actionSplinePathTool);
+            curveToolMenu->addAction(ui->actionCubicBezierPathTool);
+            curveToolMenu->addAction(ui->actionArcTool);
+            curveToolMenu->addAction(ui->actionArcWithLengthTool);
+            curveToolMenu->addAction(ui->actionEllipticalArcTool);
 
-        auto *angleLinePointTool = new VToolButtonPopup(this);
-        angleLinePointTool->setMenu(angleLinePointToolMenu);
-        angleLinePointTool->setDefaultAction(ui->actionNormalTool);
+            auto *curvePointTool = new VToolButtonPopup(this);
+            curvePointTool->setMenu(curveToolMenu);
+            curvePointTool->setDefaultAction(ui->actionSplineTool);
 
-        ui->toolBarPointTools->addWidget(angleLinePointTool);
+            ui->toolBarCurveTools->addWidget(curvePointTool);
+        }
+    }
+    else
+    {
+        ui->toolBarCurveTools->addAction(ui->actionSplineTool);
+        ui->toolBarCurveTools->addAction(ui->actionCubicBezierTool);
+        ui->toolBarCurveTools->addAction(ui->actionSplinePathTool);
+        ui->toolBarCurveTools->addAction(ui->actionCubicBezierPathTool);
+        ui->toolBarCurveTools->addAction(ui->actionArcTool);
+        ui->toolBarCurveTools->addAction(ui->actionArcWithLengthTool);
+        ui->toolBarCurveTools->addAction(ui->actionEllipticalArcTool);
     }
 
+    ui->toolBarOperationTools->clear();
+    if (settings->IsUseToolGroups())
     {
-        auto *lineIntersectionPointToolMenu = new QMenu(this);
-        lineIntersectionPointToolMenu->addAction(ui->actionPointOfIntersectionTool);
-        lineIntersectionPointToolMenu->addAction(ui->actionLineIntersectTool);
+        // Group tools
+        ui->toolBarOperationTools->addAction(ui->actionGroupTool);
 
-        auto *lineIntersectionPointTool = new VToolButtonPopup(this);
-        lineIntersectionPointTool->setMenu(lineIntersectionPointToolMenu);
-        lineIntersectionPointTool->setDefaultAction(ui->actionPointOfIntersectionTool);
+        {
+            auto *symmetryToolMenu = new QMenu(this);
+            symmetryToolMenu->addAction(ui->actionFlippingByAxisTool);
+            symmetryToolMenu->addAction(ui->actionFlippingByLineTool);
 
-        ui->toolBarPointTools->addWidget(lineIntersectionPointTool);
+            auto *symmetryTool = new VToolButtonPopup(this);
+            symmetryTool->setMenu(symmetryToolMenu);
+            symmetryTool->setDefaultAction(ui->actionFlippingByAxisTool);
+
+            ui->toolBarOperationTools->addWidget(symmetryTool);
+        }
+
+        {
+            auto *symmetryToolMenu = new QMenu(this);
+            symmetryToolMenu->addAction(ui->actionFlippingByAxisTool);
+            symmetryToolMenu->addAction(ui->actionFlippingByLineTool);
+
+            auto *symmetryTool = new VToolButtonPopup(this);
+            symmetryTool->setMenu(symmetryToolMenu);
+            symmetryTool->setDefaultAction(ui->actionFlippingByAxisTool);
+
+            ui->toolBarOperationTools->addWidget(symmetryTool);
+        }
+
+        {
+            auto *transformToolMenu = new QMenu(this);
+            transformToolMenu->addAction(ui->actionRotationTool);
+            transformToolMenu->addAction(ui->actionMoveTool);
+
+            auto *transformTool = new VToolButtonPopup(this);
+            transformTool->setMenu(transformToolMenu);
+            transformTool->setDefaultAction(ui->actionRotationTool);
+
+            ui->toolBarOperationTools->addWidget(transformTool);
+        }
+
+        ui->toolBarOperationTools->addAction(ui->actionTrueDartsTool);
+        ui->toolBarOperationTools->addAction(ui->actionExportDraw);
+    }
+    else
+    {
+        ui->toolBarOperationTools->addAction(ui->actionGroupTool);
+
+        ui->toolBarOperationTools->addAction(ui->actionFlippingByAxisTool);
+        ui->toolBarOperationTools->addAction(ui->actionFlippingByLineTool);
+
+        ui->toolBarOperationTools->addAction(ui->actionFlippingByAxisTool);
+        ui->toolBarOperationTools->addAction(ui->actionFlippingByLineTool);
+
+        ui->toolBarOperationTools->addAction(ui->actionRotationTool);
+        ui->toolBarOperationTools->addAction(ui->actionMoveTool);
+
+        ui->toolBarOperationTools->addAction(ui->actionTrueDartsTool);
+        ui->toolBarOperationTools->addAction(ui->actionExportDraw);
     }
 
+    ui->toolBarDetailTools->clear();
+    if (settings->IsUseToolGroups())
     {
-        auto *specialPointToolMenu = new QMenu(this);
-        specialPointToolMenu->addAction(ui->actionShoulderPointTool);
-        specialPointToolMenu->addAction(ui->actionTriangleTool);
+        // Detail tools
+        ui->toolBarDetailTools->addAction(ui->actionNewDetailTool);
+        {
+            auto *detailToolMenu = new QMenu(this);
+            detailToolMenu->addAction(ui->actionUnionDetailsTool);
+            detailToolMenu->addAction(ui->actionDuplicateDetailTool);
 
-        auto *specialPointTool = new VToolButtonPopup(this);
-        specialPointTool->setMenu(specialPointToolMenu);
-        specialPointTool->setDefaultAction(ui->actionShoulderPointTool);
+            auto *detailTool = new VToolButtonPopup(this);
+            detailTool->setMenu(detailToolMenu);
+            detailTool->setDefaultAction(ui->actionUnionDetailsTool);
 
-        ui->toolBarPointTools->addWidget(specialPointTool);
+            ui->toolBarDetailTools->addWidget(detailTool);
+        }
+
+        {
+            auto *internalDetailItemToolMenu = new QMenu(this);
+            internalDetailItemToolMenu->addAction(ui->actionInternalPathTool);
+            internalDetailItemToolMenu->addAction(ui->actionPinTool);
+            internalDetailItemToolMenu->addAction(ui->actionInsertNodeTool);
+            internalDetailItemToolMenu->addAction(ui->actionPlaceLabelTool);
+
+            auto *detailTool = new VToolButtonPopup(this);
+            detailTool->setMenu(internalDetailItemToolMenu);
+            detailTool->setDefaultAction(ui->actionInternalPathTool);
+
+            ui->toolBarDetailTools->addWidget(detailTool);
+        }
+
+        ui->toolBarDetailTools->addAction(ui->actionDetailExportAs);
     }
-
+    else
     {
-        auto *axisPointToolMenu = new QMenu(this);
-        axisPointToolMenu->addAction(ui->actionLineIntersectAxisTool);
-        axisPointToolMenu->addAction(ui->actionCurveIntersectAxisTool);
-        axisPointToolMenu->addAction(ui->actionArcIntersectAxisTool);
+        ui->toolBarDetailTools->addAction(ui->actionNewDetailTool);
 
-        auto *axisPointTool = new VToolButtonPopup(this);
-        axisPointTool->setMenu(axisPointToolMenu);
-        axisPointTool->setDefaultAction(ui->actionLineIntersectAxisTool);
+        ui->toolBarDetailTools->addAction(ui->actionUnionDetailsTool);
+        ui->toolBarDetailTools->addAction(ui->actionDuplicateDetailTool);
 
-        ui->toolBarPointTools->addWidget(axisPointTool);
+        ui->toolBarDetailTools->addAction(ui->actionInternalPathTool);
+        ui->toolBarDetailTools->addAction(ui->actionPinTool);
+        ui->toolBarDetailTools->addAction(ui->actionInsertNodeTool);
+        ui->toolBarDetailTools->addAction(ui->actionPlaceLabelTool);
+
+        ui->toolBarDetailTools->addAction(ui->actionDetailExportAs);
     }
-
-    {
-        auto *curveSegmentPointToolMenu = new QMenu(this);
-        curveSegmentPointToolMenu->addAction(ui->actionSplineCutPointTool);
-        curveSegmentPointToolMenu->addAction(ui->actionSplinePathCutPointTool);
-        curveSegmentPointToolMenu->addAction(ui->actionArcCutPointTool);
-
-        auto *curveSegmentPointTool = new VToolButtonPopup(this);
-        curveSegmentPointTool->setMenu(curveSegmentPointToolMenu);
-        curveSegmentPointTool->setDefaultAction(ui->actionSplineCutPointTool);
-
-        ui->toolBarPointTools->addWidget(curveSegmentPointTool);
-    }
-
-    {
-        auto *curveIntersectionPointToolMenu = new QMenu(this);
-        curveIntersectionPointToolMenu->addAction(ui->actionIntersectionCurvesTool);
-        curveIntersectionPointToolMenu->addAction(ui->actionPointOfIntersectionArcsTool);
-        curveIntersectionPointToolMenu->addAction(ui->actionPointOfIntersectionCirclesTool);
-
-        auto *curveIntersectionPointTool = new VToolButtonPopup(this);
-        curveIntersectionPointTool->setMenu(curveIntersectionPointToolMenu);
-        curveIntersectionPointTool->setDefaultAction(ui->actionIntersectionCurvesTool);
-
-        ui->toolBarPointTools->addWidget(curveIntersectionPointTool);
-    }
-
-    {
-        auto *tangentPointToolMenu = new QMenu(this);
-        tangentPointToolMenu->addAction(ui->actionPointFromArcAndTangentTool);
-        tangentPointToolMenu->addAction(ui->actionPointFromCircleAndTangentTool);
-        tangentPointToolMenu->addAction(ui->actionPointOfContactTool);
-
-        auto *tangentPointTool = new VToolButtonPopup(this);
-        tangentPointTool->setMenu(tangentPointToolMenu);
-        tangentPointTool->setDefaultAction(ui->actionPointFromArcAndTangentTool);
-
-        ui->toolBarPointTools->addWidget(tangentPointTool);
-    }
-
-    // Curve tools
-    {
-        auto *curveToolMenu = new QMenu(this);
-        curveToolMenu->addAction(ui->actionSplineTool);
-        curveToolMenu->addAction(ui->actionCubicBezierTool);
-        curveToolMenu->addAction(ui->actionSplinePathTool);
-        curveToolMenu->addAction(ui->actionCubicBezierPathTool);
-        curveToolMenu->addAction(ui->actionArcTool);
-        curveToolMenu->addAction(ui->actionArcWithLengthTool);
-        curveToolMenu->addAction(ui->actionEllipticalArcTool);
-
-        auto *curvePointTool = new VToolButtonPopup(this);
-        curvePointTool->setMenu(curveToolMenu);
-        curvePointTool->setDefaultAction(ui->actionSplineTool);
-
-        ui->toolBarCurveTools->addWidget(curvePointTool);
-    }
-
-    // Group tools
-    ui->toolBarOperationTools->addAction(ui->actionGroupTool);
-
-    {
-        auto *symmetryToolMenu = new QMenu(this);
-        symmetryToolMenu->addAction(ui->actionFlippingByAxisTool);
-        symmetryToolMenu->addAction(ui->actionFlippingByLineTool);
-
-        auto *symmetryTool = new VToolButtonPopup(this);
-        symmetryTool->setMenu(symmetryToolMenu);
-        symmetryTool->setDefaultAction(ui->actionFlippingByAxisTool);
-
-        ui->toolBarOperationTools->addWidget(symmetryTool);
-    }
-
-    {
-        auto *transformToolMenu = new QMenu(this);
-        transformToolMenu->addAction(ui->actionRotationTool);
-        transformToolMenu->addAction(ui->actionMoveTool);
-
-        auto *transformTool = new VToolButtonPopup(this);
-        transformTool->setMenu(transformToolMenu);
-        transformTool->setDefaultAction(ui->actionRotationTool);
-
-        ui->toolBarOperationTools->addWidget(transformTool);
-    }
-
-    ui->toolBarOperationTools->addAction(ui->actionTrueDartsTool);
-    ui->toolBarOperationTools->addAction(ui->actionExportDraw);
-
-    // Detail tools
-    ui->toolBarDetailTools->addAction(ui->actionNewDetailTool);
-    {
-        auto *detailToolMenu = new QMenu(this);
-        detailToolMenu->addAction(ui->actionUnionDetailsTool);
-        detailToolMenu->addAction(ui->actionDuplicateDetailTool);
-
-        auto *detailTool = new VToolButtonPopup(this);
-        detailTool->setMenu(detailToolMenu);
-        detailTool->setDefaultAction(ui->actionUnionDetailsTool);
-
-        ui->toolBarDetailTools->addWidget(detailTool);
-    }
-
-    {
-        auto *internalDetailItemToolMenu = new QMenu(this);
-        internalDetailItemToolMenu->addAction(ui->actionInternalPathTool);
-        internalDetailItemToolMenu->addAction(ui->actionPinTool);
-        internalDetailItemToolMenu->addAction(ui->actionInsertNodeTool);
-        internalDetailItemToolMenu->addAction(ui->actionPlaceLabelTool);
-
-        auto *detailTool = new VToolButtonPopup(this);
-        detailTool->setMenu(internalDetailItemToolMenu);
-        detailTool->setDefaultAction(ui->actionInternalPathTool);
-
-        ui->toolBarDetailTools->addWidget(detailTool);
-    }
-
-    ui->toolBarDetailTools->addAction(ui->actionDetailExportAs);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -3496,6 +3598,9 @@ void MainWindow::CancelTool()
 void MainWindow::SetupDrawToolsIcons()
 {
     const QString resource = QStringLiteral("toolicon");
+
+    // This check helps to find missed tools
+    Q_STATIC_ASSERT_X(static_cast<int>(Tool::LAST_ONE_DO_NOT_USE) == 59, "Not all tools were handled.");
 
     ui->actionLineTool->setIcon(VTheme::GetIconResource(resource, QStringLiteral("line.png")));
     ui->actionEndLineTool->setIcon(VTheme::GetIconResource(resource, QStringLiteral("segment.png")));
@@ -6480,6 +6585,7 @@ void MainWindow::Preferences()
                 &VToolOptionsPropertyBrowser::RefreshOptions);
         connect(dlg.data(), &DialogPreferences::UpdateProperties, this, &MainWindow::ToolBarStyles);
         connect(dlg.data(), &DialogPreferences::UpdateProperties, this, &MainWindow::ToolboxIconSize);
+        connect(dlg.data(), &DialogPreferences::UpdateProperties, this, &MainWindow::ToolBarDrawTools);
         connect(dlg.data(), &DialogPreferences::UpdateProperties, this, [this]() { emit doc->FullUpdateFromFile(); });
         connect(dlg.data(), &DialogPreferences::UpdateProperties, ui->view,
                 &VMainGraphicsView::ResetScrollingAnimation);

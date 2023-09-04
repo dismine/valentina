@@ -59,6 +59,9 @@ Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingConfigurationLabelLanguage,
 Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingConfigurationToolPointerMode,
                           (QLatin1String("configuration/toolPointerMode")))
 // NOLINTNEXTLINE
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingConfigurationUseToolGroups,
+                          (QLatin1String("configuration/useToolGroups")))
+// NOLINTNEXTLINE
 Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingAutoRefreshPatternMessage,
                           (QLatin1String("configuration/autoRefreshPatternMessage")))
 
@@ -1054,6 +1057,18 @@ auto VValentinaSettings::GetPointerMode() const -> VToolPointerMode
 void VValentinaSettings::SetPointerMode(VToolPointerMode mode)
 {
     setValue(*settingConfigurationToolPointerMode, static_cast<int>(mode));
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+auto VValentinaSettings::IsUseToolGroups() const -> bool
+{
+    return value(*settingConfigurationUseToolGroups, true).toBool();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VValentinaSettings::SetUseToolGroups(bool value)
+{
+    setValue(*settingConfigurationUseToolGroups, value);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
