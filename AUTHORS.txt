@@ -36,3 +36,5 @@ Patch contributors:
 		* Testing
     Timo Virtaneva
 		* Testing
+	Serhii Olendarenko <sergey.olendarenko@gmail.com>
+		* Icons
