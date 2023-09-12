@@ -3,24 +3,24 @@ to the Valentina project.
 
 Maintainer and founder of the project:
 	Roman Telezhynskyi <dismine@gmail.com>
-	    
+
 Community manager, web site:
 	Susan Spencer <susan.spencer@gmail.com>
-	    
+
 Patch contributors:
 	Patrick Proy <patrick@proy.org>
 		* Developing.
 	Christine Neupert <enaisoc@googlemail.com>
-	    * Testing. 
+		* Testing.
 		* Translation.
 	Lindsay Williams <linzkitt@gmail.com>
-        * Design logo.
+		* Design logo.
 	Sabine Schmaltz <sabineschmaltz@gmail.com >
-	    * Developing. 
+		* Developing.
 		* Documantation.
 	Felix Ulber <felix.ulber@gmx.de >
-	    * Developing. 
-        * Translation.
+		* Developing.
+		* Translation.
 	Mischa Krempel
 		* Developing.
 		* Mac OS package.
@@ -34,5 +34,7 @@ Patch contributors:
 		* Translation.
 	Bettina Gatzlaff <bettina.gatzlaff@gmail.com>
 		* Testing
-    Timo Virtaneva
+	Timo Virtaneva
 		* Testing
+	Serhii Olendarenko <sergey.olendarenko@gmail.com>
+		* Icons
