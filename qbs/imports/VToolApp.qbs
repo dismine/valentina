@@ -10,7 +10,7 @@ VApp {
     Depends { name: "ib"; condition: qbs.targetOS.contains("macos") }
     Depends { name: "macdeployqt"; condition: qbs.targetOS.contains("macos") }
 
-    version: "0.7.52"
+    version: buildconfig.projectVersion
     install: true
     installDir: buildconfig.installBinaryPath
     installDebugInformation: qbs.buildVariant !== "release"

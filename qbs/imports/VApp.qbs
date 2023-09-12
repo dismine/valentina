@@ -4,12 +4,25 @@ import qbs.Utilities
 CppApplication {
     Depends { name: "buildconfig" }
     Depends { name: "bundle"; condition: qbs.targetOS.contains("macos") }
+    Depends { name: "macdeployqt"; condition: qbs.targetOS.contains("macos") }
 
     Properties {
         condition: qbs.targetOS.contains("macos")
         cpp.minimumMacosVersion: buildconfig.minimumMacosVersion
         codesign.enableCodeSigning: buildconfig.enableCodeSigning
+    }
+
+    Properties {
+        condition: qbs.targetOS.contains("macos") && qbs.buildVariant !== "release"
         codesign.codesignFlags: ["--deep"]
+        codesign.signingType: "ad-hoc"
+    }
+
+    Properties {
+        condition: qbs.targetOS.contains("macos") && qbs.buildVariant === "release"
+        codesign.signingType: "apple-id"
+        macdeployqt.signingIdentity: buildconfig.signingIdentity
+        macdeployqt.signForNotarization: true
     }
 
     Properties {

@@ -45,13 +45,14 @@ Module {
         return project.enableConan;
     }
 
-    readonly property bool enableCodeSigning : {
-        return project.enableSigning;
-    }
+    readonly property bool enableCodeSigning: project.enableSigning
+
+    property string signingIdentity: "-"
 
     property string libDirName: "lib"
 
     property string appTarget
+    property string projectVersion: "0.7.52"
 
     readonly property string installAppPath: {
         if (qbs.targetOS.contains("macos"))

@@ -316,7 +316,6 @@ VToolApp {
     }
 
     Rule {
-        alwaysRun: true
         condition: product.qbs.targetOS.contains("macos") && product.buildconfig.enableMultiBundle
         inputs: ["svg_fonts"]
         Artifact {
