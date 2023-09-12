@@ -266,15 +266,6 @@ VToolApp {
     }
 
     Group {
-        condition: qbs.targetOS.contains("macos") && qbs.architecture.contains("x86_64")
-        name: "pdftops MacOS"
-        prefix: project.sourceDirectory + "/dist/macx/bin64/"
-        files: ["pdftops"]
-        qbs.install: true
-        qbs.installDir: buildconfig.installBinaryPath
-    }
-
-    Group {
         name: "freedesktop"
         prefix: project.sourceDirectory + "/dist/"
         files: [

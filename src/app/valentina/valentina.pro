@@ -304,10 +304,6 @@ unix{
             puzzle.path = $$MACOS_DIR
             puzzle.files += $${OUT_PWD}/../puzzle/$${DESTDIR}/puzzle.app/$$MACOS_DIR/puzzle
 
-            # Utility pdftops need for saving a layout image to PS and EPS formates.
-            xpdf.path = $$MACOS_DIR
-            xpdf.files += $${PWD}/../../../dist/macx/bin64/pdftops
-
             # logo on macx.
             ICON = ../../../dist/Valentina.icns
 
@@ -346,7 +342,6 @@ unix{
                 libraries \
                 tape \
                 puzzle \
-                xpdf \
                 icns_resources
         }
     }
