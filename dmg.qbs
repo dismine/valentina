@@ -1,3 +1,6 @@
+import qbs.File
+import qbs.FileInfo
+
 VAppleApplicationDiskImage {
     Depends { name: "buildconfig" }
     Depends { name: "ib" }
@@ -5,12 +8,28 @@ VAppleApplicationDiskImage {
     Depends { name: "Tape"; condition: buildconfig.enableMultiBundle }
     Depends { name: "Puzzle"; condition: buildconfig.enableMultiBundle }
 
-    condition: qbs.targetOS.contains("macos")
+    condition: qbs.targetOS.contains("macos") && bundleProbe.ready
     name: "Valentina DMG"
     targetName: "valentina"
     version: buildconfig.projectVersion
     builtByDefault: false
     codesign.enableCodeSigning: buildconfig.enableCodeSigning
+
+    Probe {
+        id: bundleProbe
+        property string root: absoluteSourceBase
+        property bool enableMultiBundle: buildconfig.enableMultiBundle
+        property bool ready
+        configure: {
+            if (!enableMultiBundle)
+                ready = File.exists(FileInfo.joinPaths(root, "Valentina.app"));
+            else
+                ready = File.exists(FileInfo.joinPaths(root, "Valentina.app"))
+                        && File.exists(FileInfo.joinPaths(root, "Tape.app"))
+                        && File.exists(FileInfo.joinPaths(root, "Puzzle.app"));
+            found = true;
+        }
+    }
 
     Properties {
         condition: qbs.buildVariant !== "release"
