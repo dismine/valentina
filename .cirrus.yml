@@ -161,6 +161,20 @@ macos_task_template: &MACOS_TASK_TEMPLATE
   timeout_in: 120m
   env:
     ACCESS_TOKEN: ENCRYPTED[81e0b2381ffb628b73f5c94f834010e6631191e0ad03cdd0850d440fb2737a74b68131d842030f010c1bf73ab4cdc1ae]
+    # Should contain the base64 of the certificate
+    MACOS_CERTIFICATE: ENCRYPTED[6600e8c131eaa3ca1d8e4d61a266bfbbf072d557ba89d34e5fb044f8d07af857ea163543824a4a664636a50c1d6d9456]
+    # Should contain the full certificate name, such as Developer ID Application: Your Name (K1234567)
+    MACOS_CERTIFICATE_NAME: ENCRYPTED[9b9e4b0b596a19690a97abfaa8ec90176d8c9567c0c807757ee5dda02672a7426cd25fea3bb7652958abc970912b2138]
+    # Should contain the password you chose when exported the certificate from the Keychain Access app
+    MACOS_CERTIFICATE_PWD: ENCRYPTED[ad78a1c7b5b17ef56c833664cd6a71563b7ea4157ad2daa8e89d88988bdc3f7a669b9d2ee3e47b911707c37f6d84153e]
+    # Should contain apple developer email, the same used the Apple Developer subscription
+    MACOS_NOTARIZATION_APPLE_ID: ENCRYPTED[38dc4848b24abb90c25a0a1156de39af8c88aea6267e934e59cc5fb17dc528e3c1a93d8a9695fe937f4894d10eac707e]
+    # Should contain the app-specific password
+    MACOS_NOTARIZATION_PWD: ENCRYPTED[1df7f3455fb6837adf9ccf2913b5609c0a5125dca3147ece0a51001cf322234c5382977f28a783222f974525a1794cf4]
+    # Should contain the Team ID
+    MACOS_NOTARIZATION_TEAM_ID: ENCRYPTED[8499d687ffd7f6eacda48bd3692bfb22ea6a25eb4a59637b9ff10caa3c8a2df681a790e99b976e7a419d8e5fad2ad35c]
+    # Should contain a strong, randomly generated password
+    MACOS_CI_KEYCHAIN_PWD: ENCRYPTED[7f08698aea44fb7c900267c439c1dfe54e218082e5d6b2354cecc00e21bc640058a55036fd027a1fb5a3d72356abb9ea]
     QTDIR: "/opt/homebrew/opt/qt6"
     PATH: $QTDIR/bin:${PATH}
     # ^  add user paths
@@ -179,6 +193,35 @@ macos_task_template: &MACOS_TASK_TEMPLATE
     - clang --version
     - find /Applications -maxdepth 1 -type d -name 'Xcode*.app'
     - sudo xcode-select -p
+    # Decode the environment variable into a regular .p12 file
+    - echo $MACOS_CERTIFICATE | base64 --decode > certificate.p12
+    # We need to create a new keychain, otherwise using the certificate will prompt
+    # with a UI dialog asking for the certificate password, which we can't
+    # use in a headless CI environment
+    # Create the keychain with a password ($MACOS_CI_KEYCHAIN_PWD)
+    - security create-keychain -p "$MACOS_CI_KEYCHAIN_PWD" build.keychain
+    # Make the custom keychain default, so xcodebuild will use it for signing
+    - security default-keychain -s build.keychain
+    # Unlock the keychain
+    - security unlock-keychain -p "$MACOS_CI_KEYCHAIN_PWD" build.keychain
+    # Add certificates to keychain and allow codesign to access them
+    # 1) Apple Worldwide Developer Relations Certification Authority
+    - curl https://www.apple.com/certificateauthority/AppleWWDRCAG3.cer --output $HOME/AppleWWDRCAG3.cer --silent
+    - security import $HOME/AppleWWDRCAG3.cer -k ~/Library/Keychains/build.keychain -T /usr/bin/codesign
+    # 2) Developer Authentication Certification Authority
+    - curl https://www.apple.com/certificateauthority/DeveloperIDG2CA.cer --output $HOME/DeveloperIDG2CA.cer --silent
+    - security import $HOME/DeveloperIDG2CA.cer -k ~/Library/Keychains/build.keychain -T /usr/bin/codesign
+    # 3) Developer ID
+    - security import certificate.p12 -k build.keychain -P "$MACOS_CERTIFICATE_PWD" -T /usr/bin/codesign
+    # Delete the files, we no longer need them
+    - rm $HOME/AppleWWDRCAG3.cer
+    - rm $HOME/DeveloperIDG2CA.cer
+    - rm certificate.p12
+    # Set the partition list (sort of like an access control list)
+    - security set-key-partition-list -S apple-tool:,apple:,codesign: -s -k "$MACOS_CI_KEYCHAIN_PWD" build.keychain
+    # Echo the identity, just so that we know it worked.
+    # This won't display anything secret.
+    - security find-identity -v -p codesigning
     - brew update > /dev/null
     - brew outdated
     - brew install --force qt6 coreutils ccache qbs cmake git openssl@1.1 pkg-config
@@ -214,7 +257,22 @@ macos_task_template: &MACOS_TASK_TEMPLATE
     - qbs setup-qt /opt/homebrew/opt/qt6/bin/qmake qt6
     - qbs-config defaultProfile qt6
     - qbs config profiles.qt6.baseProfile clang
-    - qbs build -f valentina.qbs -d $CIRRUS_WORKING_DIR/build --command-echo-mode command-line --jobs $(nproc) config:release modules.buildconfig.enableUnitTests:false modules.buildconfig.enableMultiBundle:${MULTI_BUNDLE} qbs.installRoot:$CIRRUS_WORKING_DIR/build/install-root profile:qt6 project.enableConan:true project.minimumMacosVersion:${MACOS_DEPLOYMENT_TARGET} modules.buildconfig.enableCcache:${ENABLE_CCACHE} project.conanProfiles:valentina moduleProviders.qbspkgconfig.extraPaths:$(brew --prefix qt6)/lib/pkgconfig,$(brew --prefix openssl@1.1)/lib/pkgconfig
+    - qbs build -f valentina.qbs -d $CIRRUS_WORKING_DIR/build --command-echo-mode command-line --jobs $(nproc) config:release modules.buildconfig.enableUnitTests:false modules.buildconfig.enableMultiBundle:${MULTI_BUNDLE} qbs.installRoot:$CIRRUS_WORKING_DIR/build/install-root profile:qt6 project.enableConan:true project.minimumMacosVersion:${MACOS_DEPLOYMENT_TARGET} modules.buildconfig.enableCcache:${ENABLE_CCACHE} project.conanProfiles:valentina moduleProviders.qbspkgconfig.extraPaths:$(brew --prefix qt6)/lib/pkgconfig,$(brew --prefix openssl@1.1)/lib/pkgconfig 'modules.buildconfig.signingIdentity:$MACOS_CERTIFICATE_NAME'
+    - qbs build -f valentina.qbs -d $CIRRUS_WORKING_DIR/build -p 'Valentina DMG' --jobs $(nproc) config:release modules.buildconfig.enableUnitTests:false modules.buildconfig.enableMultiBundle:${MULTI_BUNDLE} qbs.installRoot:$CIRRUS_WORKING_DIR/build/install-root profile:qt6 project.enableConan:true project.minimumMacosVersion:${MACOS_DEPLOYMENT_TARGET} modules.buildconfig.enableCcache:${ENABLE_CCACHE} project.conanProfiles:valentina moduleProviders.qbspkgconfig.extraPaths:$(brew --prefix qt6)/lib/pkgconfig,$(brew --prefix openssl@1.1)/lib/pkgconfig 'modules.buildconfig.signingIdentity:$MACOS_CERTIFICATE_NAME'
+    # Store the notarization credentials so that we can prevent a UI password dialog
+    # from blocking the CI
+    - echo "Create keychain profile"
+    - xcrun notarytool store-credentials "notarytool-profile" --apple-id "$MACOS_NOTARIZATION_APPLE_ID" --team-id "$MACOS_NOTARIZATION_TEAM_ID" --password "$MACOS_NOTARIZATION_PWD"
+    # Here we send the notarization request to the Apple's Notarization service, waiting for the result.
+    # This typically takes a few seconds inside a CI environment, but it might take more depending on the App
+    # characteristics. Visit the Notarization docs for more information and strategies on how to optimize it if
+    # you're curious
+    - echo "Notarize app"
+    - xcrun notarytool submit "$CIRRUS_WORKING_DIR/build/install-root/share/valentina.dmg" --keychain-profile "notarytool-profile" --wait --timeout 5m
+    # Finally, we need to "attach the staple" to our executable, which will allow our app to be
+    # validated by macOS even when an internet connection is not available.
+    - echo "Attach staple"
+    - xcrun stapler staple $CIRRUS_WORKING_DIR/build/install-root/share/valentina.dmg || true
     - ccache -s
   deploy_script:
     - pwd
