@@ -219,7 +219,7 @@ macos_task_template: &MACOS_TASK_TEMPLATE
     - rm $HOME/DeveloperIDG2CA.cer
     - rm certificate.p12
     # Set the partition list (sort of like an access control list)
-    - security set-key-partition-list -S apple-tool:,apple:,codesign: -s -k "$MACOS_CI_KEYCHAIN_PWD" build.keychain
+    - security set-key-partition-list -S "apple-tool:,apple:,codesign:" -s -k "$MACOS_CI_KEYCHAIN_PWD" build.keychain
     # Echo the identity, just so that we know it worked.
     # This won't display anything secret.
     - security find-identity -v -p codesigning
