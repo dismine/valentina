@@ -230,7 +230,7 @@ macos_task_template: &MACOS_TASK_TEMPLATE
     - echo $PATH
     - export PATH="${HOME}/.local/bin:`python3 -m site --user-base`/bin:$PATH"
     - echo $PATH
-    - ln -s -f /usr/local/bin/python3 /usr/local/bin/python
+    - sudo ln -s -f /usr/local/bin/python3 /usr/local/bin/python
     - chmod -R 755 /opt/homebrew/opt/qt6/*
     - chmod -R 755 /opt/homebrew/opt/openssl@1.1/*
     - python3 --version
