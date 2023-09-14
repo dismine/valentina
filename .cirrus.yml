@@ -200,11 +200,11 @@ macos_task_template: &MACOS_TASK_TEMPLATE
     # with a UI dialog asking for the certificate password, which we can't
     # use in a headless CI environment
     # Create the keychain with a password ($MACOS_CI_KEYCHAIN_PWD)
-    - security create-keychain -p "$MACOS_CI_KEYCHAIN_PWD" build.keychain
+    - security create-keychain -p "$MACOS_CI_KEYCHAIN_PWD" $HOME/Library/Keychains/build.keychain
     # Make the custom keychain default, so xcodebuild will use it for signing
-    - security default-keychain -s build.keychain
+    - security default-keychain -s $HOME/Library/Keychains/build.keychain
     # Unlock the keychain
-    - security unlock-keychain -p "$MACOS_CI_KEYCHAIN_PWD" build.keychain
+    - security unlock-keychain -p "$MACOS_CI_KEYCHAIN_PWD" $HOME/Library/Keychains/build.keychain
     # Check if System.keychain is not cluttered
     # good: 60K
     # bad: 25MB
@@ -217,13 +217,13 @@ macos_task_template: &MACOS_TASK_TEMPLATE
     - curl https://www.apple.com/certificateauthority/DeveloperIDG2CA.cer --output $HOME/DeveloperIDG2CA.cer --silent
     - sudo security import $HOME/DeveloperIDG2CA.cer -k /Library/Keychains/System.keychain -T /usr/bin/codesign
     # 3) Developer ID
-    - security import certificate.p12 -k build.keychain -P "$MACOS_CERTIFICATE_PWD" -T /usr/bin/codesign
+    - security import certificate.p12 -k $HOME/Library/Keychains/build.keychain -P "$MACOS_CERTIFICATE_PWD" -T /usr/bin/codesign
     # Delete the files, we no longer need them
     - rm $HOME/AppleWWDRCAG3.cer
     - rm $HOME/DeveloperIDG2CA.cer
     - rm certificate.p12
     # Set the partition list (sort of like an access control list)
-    - security set-key-partition-list -S "apple-tool:,apple:,codesign:" -s -k "$MACOS_CI_KEYCHAIN_PWD" build.keychain
+    - security set-key-partition-list -S "apple-tool:,apple:,codesign:" -s -k "$MACOS_CI_KEYCHAIN_PWD" $HOME/Library/Keychains/build.keychain
     # Echo the identity, just so that we know it worked.
     # This won't display anything secret.
     - security find-identity -v -p codesigning
@@ -256,6 +256,7 @@ macos_task_template: &MACOS_TASK_TEMPLATE
     - sudo ln -s /Library/Developer/CommandLineTools/usr/bin/python3 /Library/Developer/CommandLineTools/usr/bin/python
     - whereis python
     - pwd
+    - security unlock-keychain -p "$MACOS_CI_KEYCHAIN_PWD" $HOME/Library/Keychains/build.keychain
     - conan profile new valentina
     - conan profile update settings.build_type=Release valentina
     - conan profile update settings.os=Macos valentina
