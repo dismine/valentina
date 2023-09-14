@@ -41,6 +41,58 @@ environment:
     secure: RUhnEHqaR8KhalOMWwZZOoO342Ja50QV4KpEWdm9g3pG+jG7i6aJqUmeKF1l5VN6dzksk1u+yN6pOLnU8oGcaVQ6v+1dpKK1oZvF0tyHhNE=
 
   matrix:
+    - job_name: MacOS_12_Qt_6_4 (multibundle)
+      APPVEYOR_BUILD_WORKER_IMAGE: macos-monterey
+      COMPILER: clang
+      QT: Qt/6.4/macos
+      QT_VERSION: Qt6_4
+      BUILD_SYSTEM: "qbs"
+      ARCH: x64
+      XCODE_VERSION: 13.4.1
+      PLATFORM: "macOS_11+"
+      MACOS_DEPLOYMENT_TARGET: 11.0
+      MULTI_BUNDLE: true
+      DEPLOY: true
+
+    - job_name: MacOS_12_Qt_6_4 (singlebundle)
+      APPVEYOR_BUILD_WORKER_IMAGE: macos-monterey
+      COMPILER: clang
+      QT: Qt/6.4/macos
+      QT_VERSION: Qt6_4
+      BUILD_SYSTEM: "qbs"
+      ARCH: x64
+      XCODE_VERSION: 13.4.1
+      PLATFORM: "macOS_11+"
+      MACOS_DEPLOYMENT_TARGET: 11.0
+      MULTI_BUNDLE: false
+      DEPLOY: true
+
+    - job_name: MacOS_10_15_Qt_5_15 (qbs, multibundle)
+      APPVEYOR_BUILD_WORKER_IMAGE: macos-catalina
+      COMPILER: clang
+      QT: Qt/5.15/clang_64
+      QT_VERSION: Qt5_15
+      BUILD_SYSTEM: "qbs"
+      ARCH: x64
+      XCODE_VERSION: 12.3
+      PLATFORM: "macOS_10.13+"
+      MACOS_DEPLOYMENT_TARGET: 10.13
+      MULTI_BUNDLE: true
+      DEPLOY: true
+
+    - job_name: MacOS_10_15_Qt_5_15 (qbs, singlebundle)
+      APPVEYOR_BUILD_WORKER_IMAGE: macos-catalina
+      COMPILER: clang
+      QT: Qt/5.15/clang_64
+      QT_VERSION: Qt5_15
+      BUILD_SYSTEM: "qbs"
+      ARCH: x64
+      XCODE_VERSION: 12.3
+      PLATFORM: "macOS_10.13+"
+      MACOS_DEPLOYMENT_TARGET: 10.13
+      MULTI_BUNDLE: false
+      DEPLOY: true
+
     - job_name: Windows_Qt_6_5_(GCC_x64)
       APPVEYOR_BUILD_WORKER_IMAGE: Visual Studio 2022
       COMPILER: mingw
@@ -92,58 +144,6 @@ environment:
       ARCH: x86
       PYTHON: "C:\\Python38"
       PLATFORM: "WindowsXP+"
-      DEPLOY: true
-
-    - job_name: MacOS_12_Qt_6_4 (multibundle)
-      APPVEYOR_BUILD_WORKER_IMAGE: macos-monterey
-      COMPILER: clang
-      QT: Qt/6.4/macos
-      QT_VERSION: Qt6_4
-      BUILD_SYSTEM: "qbs"
-      ARCH: x64
-      XCODE_VERSION: 13.4.1
-      PLATFORM: "macOS_11+"
-      MACOS_DEPLOYMENT_TARGET: 11.0
-      MULTI_BUNDLE: true
-      DEPLOY: true
-
-    - job_name: MacOS_12_Qt_6_4 (singlebundle)
-      APPVEYOR_BUILD_WORKER_IMAGE: macos-monterey
-      COMPILER: clang
-      QT: Qt/6.4/macos
-      QT_VERSION: Qt6_4
-      BUILD_SYSTEM: "qbs"
-      ARCH: x64
-      XCODE_VERSION: 13.4.1
-      PLATFORM: "macOS_11+"
-      MACOS_DEPLOYMENT_TARGET: 11.0
-      MULTI_BUNDLE: false
-      DEPLOY: true
-
-    - job_name: MacOS_10_15_Qt_5_15 (qbs, multibundle)
-      APPVEYOR_BUILD_WORKER_IMAGE: macos-catalina
-      COMPILER: clang
-      QT: Qt/5.15/clang_64
-      QT_VERSION: Qt5_15
-      BUILD_SYSTEM: "qbs"
-      ARCH: x64
-      XCODE_VERSION: 12.3
-      PLATFORM: "macOS_10.13+"
-      MACOS_DEPLOYMENT_TARGET: 10.13
-      MULTI_BUNDLE: true
-      DEPLOY: true
-
-    - job_name: MacOS_10_15_Qt_5_15 (qbs, singlebundle)
-      APPVEYOR_BUILD_WORKER_IMAGE: macos-catalina
-      COMPILER: clang
-      QT: Qt/5.15/clang_64
-      QT_VERSION: Qt5_15
-      BUILD_SYSTEM: "qbs"
-      ARCH: x64
-      XCODE_VERSION: 12.3
-      PLATFORM: "macOS_10.13+"
-      MACOS_DEPLOYMENT_TARGET: 10.13
-      MULTI_BUNDLE: false
       DEPLOY: true
 
     - job_name: Windows_Qt_6_4_(GCC_x64)
