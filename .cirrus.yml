@@ -205,6 +205,10 @@ macos_task_template: &MACOS_TASK_TEMPLATE
     - security default-keychain -s build.keychain
     # Unlock the keychain
     - security unlock-keychain -p "$MACOS_CI_KEYCHAIN_PWD" build.keychain
+    # Check if System.keychain is not cluttered
+    # good: 60K
+    # bad: 25MB
+    - du -h /Library/Keychains/System.keychain
     # Add certificates to keychain and allow codesign to access them
     # 1) Apple Worldwide Developer Relations Certification Authority
     - curl https://www.apple.com/certificateauthority/AppleWWDRCAG3.cer --output $HOME/AppleWWDRCAG3.cer --silent
