@@ -208,10 +208,10 @@ macos_task_template: &MACOS_TASK_TEMPLATE
     # Add certificates to keychain and allow codesign to access them
     # 1) Apple Worldwide Developer Relations Certification Authority
     - curl https://www.apple.com/certificateauthority/AppleWWDRCAG3.cer --output $HOME/AppleWWDRCAG3.cer --silent
-    - security import $HOME/AppleWWDRCAG3.cer -k build.keychain -T /usr/bin/codesign
+    - security import $HOME/AppleWWDRCAG3.cer -k /Library/Keychains/System.keychain -T /usr/bin/codesign
     # 2) Developer Authentication Certification Authority
     - curl https://www.apple.com/certificateauthority/DeveloperIDG2CA.cer --output $HOME/DeveloperIDG2CA.cer --silent
-    - security import $HOME/DeveloperIDG2CA.cer -k build.keychain -T /usr/bin/codesign
+    - security import $HOME/DeveloperIDG2CA.cer -k /Library/Keychains/System.keychain -T /usr/bin/codesign
     # 3) Developer ID
     - security import certificate.p12 -k build.keychain -P "$MACOS_CERTIFICATE_PWD" -T /usr/bin/codesign
     # Delete the files, we no longer need them
