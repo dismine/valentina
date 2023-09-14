@@ -657,7 +657,7 @@ for:
     - echo $PATH
     - python3 --version
     - whereis python3
-    - sudo ln -s -f /usr/bin/python3 /usr/bin/python
+    - sudo ln -s -f /usr/bin/python3 /usr/local/bin/python
     - whereis python
     - |-
 
@@ -832,7 +832,7 @@ for:
     - echo $PATH
     - python3 --version
     - whereis python3
-    - sudo ln -s -f /usr/bin/python3 /usr/bin/python
+    - sudo ln -s -f /usr/bin/python3 /usr/local/bin/python
     - whereis python
     - sudo python3 -m pip install --upgrade pip
     - pip3 install --user --upgrade pip dropbox conan==1.60
