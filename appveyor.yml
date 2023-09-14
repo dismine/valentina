@@ -659,6 +659,7 @@ for:
     - python3 --version
     - whereis python3
     - sudo ln -s -f /usr/bin/python3 /usr/local/bin/python
+    - sudo ln -s /Library/Developer/CommandLineTools/usr/bin/python3 /Library/Developer/CommandLineTools/usr/bin/python
     - whereis python
     - |-
 
@@ -834,6 +835,7 @@ for:
     - python3 --version
     - whereis python3
     - sudo ln -s -f /usr/bin/python3 /usr/local/bin/python
+    - sudo ln -s /Library/Developer/CommandLineTools/usr/bin/python3 /Library/Developer/CommandLineTools/usr/bin/python
     - whereis python
     - sudo python3 -m pip install --upgrade pip
     - pip3 install --user --upgrade pip dropbox conan==1.60
