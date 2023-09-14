@@ -205,6 +205,7 @@ macos_task_template: &MACOS_TASK_TEMPLATE
     - security default-keychain -s $HOME/Library/Keychains/build.keychain
     # Unlock the keychain
     - security unlock-keychain -p "$MACOS_CI_KEYCHAIN_PWD" $HOME/Library/Keychains/build.keychain
+    - security set-keychain-settings $HOME/Library/Keychains/build.keychain
     # Check if System.keychain is not cluttered
     # good: 60K
     # bad: 25MB
@@ -256,7 +257,6 @@ macos_task_template: &MACOS_TASK_TEMPLATE
     - sudo ln -s /Library/Developer/CommandLineTools/usr/bin/python3 /Library/Developer/CommandLineTools/usr/bin/python
     - whereis python
     - pwd
-    - security unlock-keychain -p "$MACOS_CI_KEYCHAIN_PWD" $HOME/Library/Keychains/build.keychain
     - conan profile new valentina
     - conan profile update settings.build_type=Release valentina
     - conan profile update settings.os=Macos valentina

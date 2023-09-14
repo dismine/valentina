@@ -628,6 +628,7 @@ for:
     - security default-keychain -s $HOME/Library/Keychains/build.keychain
     # Unlock the keychain
     - security unlock-keychain -p "$MACOS_CI_KEYCHAIN_PWD" $HOME/Library/Keychains/build.keychain
+    - security set-keychain-settings $HOME/Library/Keychains/build.keychain
     # Check if System.keychain is not cluttered
     # good: 60K
     # bad: 25MB
@@ -728,7 +729,6 @@ for:
 
   build_script:
     - pwd
-    - security unlock-keychain -p "$MACOS_CI_KEYCHAIN_PWD" $HOME/Library/Keychains/build.keychain
     - conan install . -s os=Macos -s os.version=${MACOS_DEPLOYMENT_TARGET} --build=missing
     - qbs setup-toolchains --detect
     - qbs config --list profiles
@@ -805,6 +805,7 @@ for:
     - security default-keychain -s $HOME/Library/Keychains/build.keychain
     # Unlock the keychain
     - security unlock-keychain -p "$MACOS_CI_KEYCHAIN_PWD" $HOME/Library/Keychains/build.keychain
+    - security set-keychain-settings $HOME/Library/Keychains/build.keychain
     # Check if System.keychain is not cluttered
     # good: 60K
     # bad: 25MB
@@ -849,7 +850,6 @@ for:
 
   build_script:
     - pwd
-    - security unlock-keychain -p "$MACOS_CI_KEYCHAIN_PWD" $HOME/Library/Keychains/build.keychain
     - conan install . -s os=Macos -s os.version=${MACOS_DEPLOYMENT_TARGET} --build=missing
     - qbs setup-toolchains --detect
     - qbs config --list profiles
