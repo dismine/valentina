@@ -652,6 +652,7 @@ for:
     - export PATH="$QTDIR/bin:$HOME/.local/bin:`python3 -m site --user-base`/bin:${HOME}/Qt/Qt Creator.app/Contents/MacOS:$PATH"
     - echo $PATH
     - python3 --version
+    - ln -s -f /usr/local/bin/python3 /usr/local/bin/python
     - |-
 
       ###############################################################
@@ -820,6 +821,7 @@ for:
     - export PATH="$QTDIR/bin:$HOME/.local/bin:`python3 -m site --user-base`/bin:${HOME}/Qt/Qt Creator.app/Contents/MacOS:$PATH"
     - echo $PATH
     - python3 --version
+    - ln -s -f /usr/local/bin/python3 /usr/local/bin/python
     - sudo python3 -m pip install --upgrade pip
     - pip3 install --user --upgrade pip dropbox conan==1.60
     - conan --version
