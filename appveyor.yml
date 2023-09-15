@@ -669,7 +669,7 @@ for:
 
       sudo ln -s /usr/local /opt/local;
 
-      cache_tag=usr_local_1 # this can be modified to rebuild deps
+      cache_tag=usr_local_2 # this can be modified to rebuild deps
 
       cdir=$HOME/cache_dir
       cache_tar=$cdir/$cache_tag.tar
