@@ -693,7 +693,7 @@ for:
         python3 ./scripts/treestate.py scan /usr/local usrlocal.json
 
         brew update
-        brew install coreutils ccache git openssl@1.1 pkg-config qbs
+        brew install coreutils ccache git openssl@1.1 pkg-config qbs curl
 
         # The build environment is now ready for use. We can complete
         # the rest of the process of creating the Homebrew archive
@@ -717,13 +717,14 @@ for:
       fi
     - sudo python3 -m pip install --upgrade pip
     - pip3 install --user --upgrade pip dropbox conan==1.60
-    - export PATH="`python3 -m site --user-base`/bin:$PATH"
+    - export PATH="$PATH:`python3 -m site --user-base`/bin"
     - echo $PATH
     - python3 --version
     - conan --version
     - clang --version
     - qmake --version
     - which qmake
+    - which qbs
     - qbs --version
     # Patch Qbs. Remove after Qbs 2.1.2+.
     - curl https://gist.githubusercontent.com/dismine/43a20f66f563232e54e02f2e85732e7a/raw/e80a0c827348da3e99310ba4a648c1860bb3a8a6/BundleModule.qbs --output $HOME/BundleModule.qbs --silent
