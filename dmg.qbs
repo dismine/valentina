@@ -1,5 +1,6 @@
 import qbs.File
 import qbs.FileInfo
+import qbs.Utilities
 
 VAppleApplicationDiskImage {
     Depends { name: "buildconfig" }
@@ -43,10 +44,15 @@ VAppleApplicationDiskImage {
         codesign.signingType: "apple-id"
     }
 
-    files: [
-        "dist/macx/dmg/dmg.iconset",
-        "dist/macx/dmg/en_US.lproj/LICENSE"
-    ]
+    files: {
+        var files = ["dist/macx/dmg/dmg.iconset"];
+
+        // Tested on 2.1.1. At least this version doesn't crash even if the feature still doesn't work
+        if (Utilities.versionCompare(qbs.version, "2.1.1") >= 0)
+            files.push("dist/macx/dmg/en_US.lproj/LICENSE");
+
+        return files;
+    }
 
     Group {
         name: "Bundles"

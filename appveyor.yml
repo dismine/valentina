@@ -693,7 +693,7 @@ for:
         python3 ./scripts/treestate.py scan /usr/local usrlocal.json
 
         brew update
-        brew install coreutils ccache git openssl@1.1 pkg-config
+        brew install coreutils ccache git openssl@1.1 pkg-config qbs
 
         # The build environment is now ready for use. We can complete
         # the rest of the process of creating the Homebrew archive
@@ -725,6 +725,10 @@ for:
     - qmake --version
     - which qmake
     - qbs --version
+    # Patch Qbs. Remove after Qbs 2.1.2+.
+    - curl https://gist.githubusercontent.com/dismine/43a20f66f563232e54e02f2e85732e7a/raw/e80a0c827348da3e99310ba4a648c1860bb3a8a6/BundleModule.qbs --output $HOME/BundleModule.qbs --silent
+    - cp -f $HOME/BundleModule.qbs $(brew --prefix qbs)/share/qbs/modules/bundle/BundleModule.qbs
+    - rm $HOME/BundleModule.qbs
     - cd ${APPVEYOR_BUILD_FOLDER}
 
   build_script:
