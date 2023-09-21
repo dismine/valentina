@@ -404,22 +404,34 @@ void VLayoutExporter::ExportToHPGL2(const QVector<VLayoutPiece> &details) const
 //---------------------------------------------------------------------------------------------------------------------
 auto VLayoutExporter::SupportPDFConversion() -> bool
 {
-    QProcess proc;
-#if defined(Q_OS_WIN) || defined(Q_OS_OSX)
-    // Seek pdftops in app bundle or near valentina.exe
-    proc.start(qApp->applicationDirPath() + QLatin1String("/") + *PDFTOPS, QStringList());
-#else
-    proc.start(*PDFTOPS, QStringList());                                      // Seek pdftops in standard path
-#endif
-
-    const int timeout = 15000;
-    if (proc.waitForStarted(timeout) && (proc.waitForFinished(timeout) || proc.state() == QProcess::NotRunning))
+    auto Test = [](const QString &program)
     {
-        return true;
-    }
+        QProcess proc;
+        proc.start(program);
 
-    qDebug() << *PDFTOPS << "error" << proc.error() << proc.errorString();
-    return false;
+        const int timeout = 15000;
+        if (proc.waitForStarted(timeout) && (proc.waitForFinished(timeout) || proc.state() == QProcess::NotRunning))
+        {
+            return true;
+        }
+
+        qDebug() << program << "error" << proc.error() << proc.errorString();
+        return false;
+    };
+
+#if defined(Q_OS_OSX)
+    // Seek pdftops in app bundle
+    bool found = Test(qApp->applicationDirPath() + QLatin1String("/") + *PDFTOPS);
+    if (not found)
+    {
+        found = Test(*PDFTOPS);
+    }
+    return found;
+#elif defined(Q_OS_WIN)
+    return Test(qApp->applicationDirPath() + QLatin1String("/") + *PDFTOPS);
+#else
+    return Test(*PDFTOPS);
+#endif
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -436,9 +448,14 @@ void VLayoutExporter::PdfToPs(const QStringList &params)
 
     QProcess proc;
 #if defined(Q_OS_MAC)
-    // Fix issue #594. Broken export on Mac.
-    proc.setWorkingDirectory(qApp->applicationDirPath());
-    proc.start(QLatin1String("./") + *PDFTOPS, params);
+    if (QFileInfo::exists(qApp->applicationDirPath() + QLatin1String("/") + *PDFTOPS))
+    {
+        proc.start(QLatin1String(qApp->applicationDirPath() + QLatin1String("/") + *PDFTOPS, params);
+    }
+    else
+    {
+        proc.start(*PDFTOPS, params);
+    }
 #else
     proc.start(*PDFTOPS, params);
 #endif

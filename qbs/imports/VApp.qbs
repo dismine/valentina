@@ -123,4 +123,9 @@ CppApplication {
         }
         fileTags: ["cpp_pch_src"]
     }
+
+    Export {
+        Depends { name: "bundle"; condition: qbs.targetOS.contains("macos") }
+        Depends { name: "macdeployqt"; condition: qbs.targetOS.contains("macos") }
+    }
 }

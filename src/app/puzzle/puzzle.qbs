@@ -14,6 +14,7 @@ VToolApp {
     Depends { name: "FervorLib" }
     Depends { name: "multibundle"; }
     Depends { name: "VGAnalyticsLib" }
+    Depends { name: "pdftops"; condition: qbs.targetOS.contains("macos") }
 
     // Explicitly link to libcrypto and libssl to avoid error: Failed to load libssl/libcrypto.
     // Use moduleProviders.qbspkgconfig.extraPaths to define the missing dependency.
@@ -201,14 +202,23 @@ VToolApp {
         qbs.installDir: buildconfig.installBinaryPath
     }
 
+    Properties {
+        condition: qbs.targetOS.contains("macos") && buildconfig.enableMultiBundle
+        macdeployqt.targetApps: {
+            var apps = [];
+
+            if (pdftops.pdftopsPresent)
+                apps.push("pdftops");
+
+            return apps;
+        }
+    }
+
     Group {
-        condition: qbs.targetOS.contains("macos") && qbs.architecture.contains("x86_64") && buildconfig.enableMultiBundle
+        condition: qbs.targetOS.contains("macos") && buildconfig.enableMultiBundle && pdftops.pdftopsPresent
         name: "pdftops MacOS"
-        prefix: project.sourceDirectory + "/dist/macx/bin64/"
-        files: ["pdftops"]
-        fileTags: ["pdftops_dist_macx"]
-        qbs.install: true
-        qbs.installDir: buildconfig.installBinaryPath
+        files: [pdftops.pdftopsPath]
+        fileTags: ["pdftops.in"]
     }
 
     Group {

@@ -15,6 +15,7 @@ VToolApp {
     Depends { name: "VFormatLib"; }
     Depends { name: "VMiscLib"; }
     Depends { name: "VGAnalyticsLib" }
+    Depends { name: "pdftops"; condition: qbs.targetOS.contains("macos") }
     Depends { name: "Tape"; condition: qbs.targetOS.contains("macos") && buildconfig.enableMultiBundle }
     Depends { name: "Puzzle"; condition: qbs.targetOS.contains("macos") && buildconfig.enableMultiBundle }
 
@@ -44,7 +45,6 @@ VToolApp {
     }
 
     primaryApp: true
-
     name: "Valentina"
     buildconfig.appTarget: qbs.targetOS.contains("macos") ? "Valentina" : "valentina"
     targetName: buildconfig.appTarget
@@ -258,6 +258,20 @@ VToolApp {
         }
     }
 
+    Properties {
+        condition: qbs.targetOS.contains("macos")
+        macdeployqt.targetApps: {
+            var apps = [];
+            if (!buildconfig.enableMultiBundle)
+                apps.push("Tape", "Puzzle");
+
+            if (pdftops.pdftopsPresent)
+                apps.push("pdftops");
+
+            return apps;
+        }
+    }
+
     Group {
         condition: qbs.targetOS.contains("windows") && (qbs.architecture.contains("x86_64") || qbs.architecture.contains("x86"))
         name: "pdftops Windows"
@@ -268,12 +282,10 @@ VToolApp {
     }
 
     Group {
-        condition: qbs.targetOS.contains("macos") && qbs.architecture.contains("x86_64")
         name: "pdftops MacOS"
-        prefix: project.sourceDirectory + "/dist/macx/bin64/"
-        files: ["pdftops"]
-        qbs.install: true
-        qbs.installDir: buildconfig.installBinaryPath
+        condition: qbs.targetOS.contains("macos") && pdftops.pdftopsPresent
+        files: [pdftops.pdftopsPath]
+        fileTags: ["pdftops.in"]
     }
 
     Group {

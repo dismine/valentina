@@ -87,10 +87,10 @@ Module {
                         cmdArgs.push("-codesign=" + product.macdeployqt.signingIdentity);
                 }
 
-                if (product.macdeployqt.targetApps !== undefined && !product.buildconfig.enableMultiBundle && product.primaryApp)
+                if (product.macdeployqt.targetApps !== undefined)
                 {
                     product.macdeployqt.targetApps.forEach(function(targetApp) {
-                        cmdArgs.push("-executable=\"" + installRoot + "/" + product.targetName + ".app/Contents/MacOS/" + targetApp + "\"");
+                        cmdArgs.push("-executable=" + FileInfo.joinPaths(installRoot, product.targetName + ".app", "Contents", "MacOS", targetApp));
                     });
                 }
 
