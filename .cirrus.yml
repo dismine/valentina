@@ -257,7 +257,7 @@ macos_task_template: &MACOS_TASK_TEMPLATE
     - whereis python
     - pwd
     - curl -LJ https://github.com/dismine/macdeployqt/archive/refs/heads/main.zip --output ${HOME}/macdeployqt-main.zip --silent
-    - unzip ${HOME}/macdeployqt-main.zip
+    - unzip ${HOME}/macdeployqt-main.zip -d ${HOME}/macdeployqt-main
     - cmake -GNinja -S ${HOME}/macdeployqt-main -B ${HOME}/macdeployqt-build-dir -DCMAKE_INSTALL_PREFIX=${HOME}/macdeployqt-install-dir -DCMAKE_BUILD_TYPE=Release
     - cmake --build ${HOME}/macdeployqt-build-dir --target install
     - conan profile new valentina
