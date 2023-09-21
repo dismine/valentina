@@ -732,8 +732,8 @@ for:
     - rm $HOME/BundleModule.qbs
     - curl -LJ https://github.com/dismine/macdeployqt/archive/refs/heads/main.zip --output ${HOME}/macdeployqt-main.zip --silent
     - unzip ${HOME}/macdeployqt-main.zip -d ${HOME}/macdeployqt-main
-    - cmake -GNinja -S ${HOME}/macdeployqt-main -B ${HOME}/macdeployqt-build-dir -DCMAKE_INSTALL_PREFIX=${HOME}/macdeployqt-install-dir -DCMAKE_BUILD_TYPE=Release
-    - cmake --build ${HOME}/macdeployqt-build-dir --target install
+    - cmake ${HOME}/macdeployqt-main -GNinja -S ${HOME}/macdeployqt-main -B ${HOME}/macdeployqt-build-dir -DCMAKE_INSTALL_PREFIX=${HOME}/macdeployqt-install-dir -DCMAKE_BUILD_TYPE=Release
+    - cmake ${HOME}/macdeployqt-main --build ${HOME}/macdeployqt-build-dir --target install
     - cd ${APPVEYOR_BUILD_FOLDER}
 
   build_script:
