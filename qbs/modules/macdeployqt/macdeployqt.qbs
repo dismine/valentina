@@ -14,6 +14,8 @@ Module {
 
     property string macdeployqtArtifact: artifacts ? "maceployqt.txt" : undefined
 
+    property string macdeployqtProgramBinPath : undefined
+
     property string macdeployqtProgram: "macdeployqt"
 
     property bool noPlugins: false
@@ -94,7 +96,11 @@ Module {
                     });
                 }
 
-                var cmd = new Command(product.Qt.core.binPath + "/" + macdeployqtProgram, cmdArgs);
+                var macdeployqtProgramBinPath = product.Qt.core.binPath;
+                if (product.macdeployqt.macdeployqtProgramBinPath !== undefined)
+                    macdeployqtProgramBinPath = product.macdeployqt.macdeployqtProgramBinPath;
+
+                var cmd = new Command(macdeployqtProgramBinPath + "/" + macdeployqtProgram, cmdArgs);
                 cmd.jobPool = "macdeployqt";
                 cmd.description = "invoking '" + macdeployqtProgram;
                 cmd.stdoutFilePath = product.buildDirectory + "/" + product.macdeployqt.macdeployqtArtifact;
