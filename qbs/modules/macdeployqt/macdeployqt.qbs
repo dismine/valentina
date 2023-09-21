@@ -28,9 +28,9 @@ Module {
 
     property bool alwaysOverwrite: false
 
-     property bool appstoreCompliant: false
+    property bool appstoreCompliant: false
 
-    property string libpath: undefined
+    property stringList libpath: undefined
 
     property stringList targetApps: undefined
 
@@ -65,7 +65,7 @@ Module {
                     cmdArgs.push("-no-plugins");
 
                 if (product.macdeployqt.verbose !== undefined)
-                    cmdArgs.push("-verbose", product.macdeployqt.verbose);
+                    cmdArgs.push("-verbose=" + product.macdeployqt.verbose);
 
                 if (product.macdeployqt.noStrip)
                     cmdArgs.push("-no-strip");
@@ -80,7 +80,9 @@ Module {
                     cmdArgs.push("-appstore-compliant");
 
                 if (product.macdeployqt.libpath !== undefined)
-                    cmdArgs.push("-libpath", product.macdeployqt.libpath);
+                    product.macdeployqt.libpath.forEach(function(libpath) {
+                        cmdArgs.push("-libpath=" + libpath);
+                    });
 
                 if (product.buildconfig.enableCodeSigning) {
                     if (product.macdeployqt.signForNotarization)
