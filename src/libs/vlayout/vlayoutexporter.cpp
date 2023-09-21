@@ -405,7 +405,7 @@ void VLayoutExporter::ExportToHPGL2(const QVector<VLayoutPiece> &details) const
 auto VLayoutExporter::SupportPDFConversion() -> bool
 {
     QProcess proc;
-#if defined(Q_OS_WIN)
+#if defined(Q_OS_WIN) || defined(Q_OS_OSX)
     // Seek pdftops in app bundle or near valentina.exe
     proc.start(qApp->applicationDirPath() + QLatin1String("/") + *PDFTOPS, QStringList());
 #else
@@ -435,7 +435,13 @@ void VLayoutExporter::PdfToPs(const QStringList &params)
 #endif
 
     QProcess proc;
+#if defined(Q_OS_MAC)
+    // Fix issue #594. Broken export on Mac.
+    proc.setWorkingDirectory(qApp->applicationDirPath());
+    proc.start(QLatin1String("./") + *PDFTOPS, params);
+#else
     proc.start(*PDFTOPS, params);
+#endif
 
     const int timeout = 15000;
     if (proc.waitForStarted(timeout))

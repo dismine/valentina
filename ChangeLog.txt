@@ -39,7 +39,6 @@
 - New option: Pointer mode.
 - Fix GUI freezing while nesting.
 - New option: Use Tool Groups.
-- Switch to using external pdftops utility to convert pdf to ps on mac.
 
 # Valentina 0.7.52 September 12, 2022
 - Fix crash when default locale is ru.

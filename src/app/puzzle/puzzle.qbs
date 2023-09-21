@@ -202,6 +202,16 @@ VToolApp {
     }
 
     Group {
+        condition: qbs.targetOS.contains("macos") && qbs.architecture.contains("x86_64") && buildconfig.enableMultiBundle
+        name: "pdftops MacOS"
+        prefix: project.sourceDirectory + "/dist/macx/bin64/"
+        files: ["pdftops"]
+        fileTags: ["pdftops_dist_macx"]
+        qbs.install: true
+        qbs.installDir: buildconfig.installBinaryPath
+    }
+
+    Group {
         name: "48x48/apps"
         prefix: project.sourceDirectory + "/share/icons/48x48/apps/"
         files: "puzzle.png"
