@@ -70,7 +70,7 @@ Module {
     Rule {
 //        alwaysRun: true
         condition: product.qbs.targetOS.contains("macos") && !product.buildconfig.enableMultiBundle && product.type.contains("application")
-        inputs: ["application"]
+        inputs: ["bundle.application-executable"]
         outputFileTags: ["multibundle"]
         outputArtifacts: {
             var artifactNames = [];
