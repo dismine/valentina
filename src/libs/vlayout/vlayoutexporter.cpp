@@ -407,7 +407,11 @@ auto VLayoutExporter::SupportPDFConversion() -> bool
     auto Test = [](const QString &program)
     {
         QProcess proc;
+#if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
         proc.start(program);
+#else
+        proc.start(program, QStringList());
+#endif
 
         const int timeout = 15000;
         if (proc.waitForStarted(timeout) && (proc.waitForFinished(timeout) || proc.state() == QProcess::NotRunning))
