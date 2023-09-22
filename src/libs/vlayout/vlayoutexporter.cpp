@@ -454,7 +454,7 @@ void VLayoutExporter::PdfToPs(const QStringList &params)
 #if defined(Q_OS_MAC)
     if (QFileInfo::exists(qApp->applicationDirPath() + QLatin1String("/") + *PDFTOPS))
     {
-        proc.start(QLatin1String(qApp->applicationDirPath() + QLatin1String("/") + *PDFTOPS, params);
+        proc.start(qApp->applicationDirPath() + QLatin1String("/") + *PDFTOPS, params);
     }
     else
     {
