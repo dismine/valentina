@@ -237,7 +237,7 @@ macos_task_template: &MACOS_TASK_TEMPLATE
     - chmod -R 755 /opt/homebrew/opt/openssl@1.1/*
     - chmod -R 755 /opt/homebrew/opt/poppler/*
     - python3 --version
-    - pip3 install --user --upgrade pip dropbox conan==1.60
+    - pip3 install --user --upgrade pip dropbox conan==1.61.0
     - ccache --set-config sloppiness=pch_defines,time_macros max_size="$CCACHE_SIZE"
     - conan --version
     - qmake --version

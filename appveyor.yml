@@ -411,7 +411,7 @@ for:
     # Install the build dependencies of the project.
     - (python -m pip install --upgrade pip)
     - if "%DEPLOY%" == "true" (python -m pip install dropbox)
-    - python -m pip install conan==1.60
+    - python -m pip install conan==1.61.0
     # Trick qmake to not work through MSYS
     - del /F "C:\Program Files\Git\usr\bin\sh.exe"
     - del /F "C:\Program Files\Git\bin\sh.exe"
@@ -716,7 +716,7 @@ for:
 
       fi
     - sudo python3 -m pip install --upgrade pip
-    - pip3 install --user --upgrade pip dropbox conan==1.60
+    - pip3 install --user --upgrade pip dropbox conan==1.61.0
     - export PATH="$PATH:`python3 -m site --user-base`/bin"
     - echo $PATH
     - python3 --version
@@ -849,7 +849,7 @@ for:
     - sudo ln -s /Library/Developer/CommandLineTools/usr/bin/python3 /Library/Developer/CommandLineTools/usr/bin/python
     - whereis python
     - sudo python3 -m pip install --upgrade pip
-    - pip3 install --user --upgrade pip dropbox conan==1.60
+    - pip3 install --user --upgrade pip dropbox conan==1.61.0
     - conan --version
     - clang --version
     - qmake --version
