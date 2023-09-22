@@ -240,7 +240,6 @@ macos_task_template: &MACOS_TASK_TEMPLATE
     - python3 --version
     - pip3 install --user --upgrade pip dropbox
     - ccache --set-config sloppiness=pch_defines,time_macros max_size="$CCACHE_SIZE"
-    - conan --version
     - qmake --version
     - which qmake
     - qbs --version
