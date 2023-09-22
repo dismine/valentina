@@ -608,7 +608,7 @@ for:
       secure: B8yHPBym+BTDPK5ZCg7WlSnUCHLbcim8WqLTC6/PSNs=
 
   cache:
-    - /Users/appveyor/.conan/data -> conanfile.py
+    #- /Users/appveyor/.conan/data -> conanfile.py
     - /Users/appveyor/cache_dir
 
   init:
