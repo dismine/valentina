@@ -45,7 +45,7 @@ environment:
       APPVEYOR_BUILD_WORKER_IMAGE: macos-monterey
       COMPILER: clang
       QT: Qt/6.4/macos
-      QT_VERSION: Qt6_4
+      QT_VERSION: Qt6
       BUILD_SYSTEM: "qbs"
       ARCH: x64
       XCODE_VERSION: 13.4.1
@@ -58,7 +58,7 @@ environment:
       APPVEYOR_BUILD_WORKER_IMAGE: macos-monterey
       COMPILER: clang
       QT: Qt/6.4/macos
-      QT_VERSION: Qt6_4
+      QT_VERSION: Qt6
       BUILD_SYSTEM: "qbs"
       ARCH: x64
       XCODE_VERSION: 13.4.1
@@ -583,7 +583,7 @@ for:
       - job_name: MacOS_12_Qt_6_4 (singlebundle)
 
   environment:
-    CONAN_USER_HOME: /Users/appveyor/.conan
+    CONAN_USER_HOME: /Users/appveyor
     HOMEBREW_NO_INSTALL_CLEANUP: 1
     # Should contain the base64 of the certificate
     MACOS_CERTIFICATE:
@@ -770,7 +770,7 @@ for:
       - job_name: MacOS_10_15_Qt_5_15 (qbs, singlebundle)
 
   environment:
-    CONAN_USER_HOME: /Users/appveyor/.conan
+    CONAN_USER_HOME: /Users/appveyor
     HOMEBREW_NO_INSTALL_CLEANUP: 1
     # Should contain the base64 of the certificate
     MACOS_CERTIFICATE:
