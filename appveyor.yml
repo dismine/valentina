@@ -742,7 +742,7 @@ for:
     - conan profile update settings.build_type=Release valentina
     - conan profile update settings.os=Macos valentina
     - conan profile update settings.os.version=${MACOS_DEPLOYMENT_TARGET} valentina
-    - conan profile update settings.arch=${ARCH} valentina
+    - conan profile update settings.arch=x86_64 valentina
     - conan profile update settings.compiler=apple-clang valentina
     - conan profile update settings.compiler.libcxx=libc++ valentina
     - conan profile update settings.compiler.version=14 valentina
@@ -871,7 +871,7 @@ for:
     - conan profile update settings.build_type=Release valentina
     - conan profile update settings.os=Macos valentina
     - conan profile update settings.os.version=${MACOS_DEPLOYMENT_TARGET} valentina
-    - conan profile update settings.arch=${ARCH} valentina
+    - conan profile update settings.arch=x86_64 valentina
     - conan profile update settings.compiler=apple-clang valentina
     - conan profile update settings.compiler.libcxx=libc++ valentina
     - conan profile update settings.compiler.version=14 valentina
