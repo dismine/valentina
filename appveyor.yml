@@ -608,7 +608,7 @@ for:
       secure: B8yHPBym+BTDPK5ZCg7WlSnUCHLbcim8WqLTC6/PSNs=
 
   cache:
-    - /Users/appveyor/.conan/data -> conan-cache
+    - /Users/appveyor/.conan/data -> conanfile.py
     - /Users/appveyor/cache_dir
 
   init:
@@ -738,14 +738,22 @@ for:
 
   build_script:
     - pwd
-    - conan install . -s os=Macos -s os.version=${MACOS_DEPLOYMENT_TARGET} --build=missing
+    - conan profile new valentina
+    - conan profile update settings.build_type=Release valentina
+    - conan profile update settings.os=Macos valentina
+    - conan profile update settings.os.version=${MACOS_DEPLOYMENT_TARGET} valentina
+    - conan profile update settings.arch=${ARCH} valentina
+    - conan profile update settings.compiler=apple-clang valentina
+    - conan profile update settings.compiler.libcxx=libc++ valentina
+    - conan profile update settings.compiler.version=14 valentina
+    - conan install . --build=missing -pr valentina
     - qbs setup-toolchains --detect
     - qbs config --list profiles
     - qbs setup-qt ${QTDIR}/bin/qmake qt6
     - qbs config defaultProfile qt6
     - qbs config profiles.qt6.baseProfile clang
-    - qbs build -f valentina.qbs -d ${APPVEYOR_BUILD_FOLDER}/build --jobs $(nproc) config:release modules.buildconfig.enableUnitTests:false modules.buildconfig.enableMultiBundle:${MULTI_BUNDLE} qbs.installRoot:${APPVEYOR_BUILD_FOLDER}/build/install-root profile:qt6 project.enableConan:true project.minimumMacosVersion:${MACOS_DEPLOYMENT_TARGET} modules.buildconfig.enableCcache:false moduleProviders.qbspkgconfig.extraPaths:$(brew --prefix openssl@1.1)/lib/pkgconfig "modules.buildconfig.signingIdentity:$MACOS_CERTIFICATE_NAME" modules.macdeployqt.libpath:$(brew --prefix poppler)/lib modules.macdeployqt.macdeployqtProgramBinPath:${HOME}/macdeployqt-install-dir
-    - qbs build -f valentina.qbs -d ${APPVEYOR_BUILD_FOLDER}/build -p 'Valentina DMG' --force-probe-execution --jobs $(nproc) config:release modules.buildconfig.enableUnitTests:false modules.buildconfig.enableMultiBundle:${MULTI_BUNDLE} qbs.installRoot:${APPVEYOR_BUILD_FOLDER}/build/install-root profile:qt6 project.enableConan:true project.minimumMacosVersion:${MACOS_DEPLOYMENT_TARGET} modules.buildconfig.enableCcache:false moduleProviders.qbspkgconfig.extraPaths:$(brew --prefix openssl@1.1)/lib/pkgconfig "modules.buildconfig.signingIdentity:$MACOS_CERTIFICATE_NAME" modules.macdeployqt.libpath:$(brew --prefix poppler)/lib modules.macdeployqt.macdeployqtProgramBinPath:${HOME}/macdeployqt-install-dir
+    - qbs build -f valentina.qbs -d ${APPVEYOR_BUILD_FOLDER}/build --jobs $(nproc) config:release modules.buildconfig.enableUnitTests:false modules.buildconfig.enableMultiBundle:${MULTI_BUNDLE} qbs.installRoot:${APPVEYOR_BUILD_FOLDER}/build/install-root profile:qt6 project.enableConan:true project.minimumMacosVersion:${MACOS_DEPLOYMENT_TARGET} modules.buildconfig.enableCcache:false project.conanProfiles:valentina moduleProviders.qbspkgconfig.extraPaths:$(brew --prefix openssl@1.1)/lib/pkgconfig "modules.buildconfig.signingIdentity:$MACOS_CERTIFICATE_NAME" modules.macdeployqt.libpath:$(brew --prefix poppler)/lib modules.macdeployqt.macdeployqtProgramBinPath:${HOME}/macdeployqt-install-dir
+    - qbs build -f valentina.qbs -d ${APPVEYOR_BUILD_FOLDER}/build -p 'Valentina DMG' --force-probe-execution --jobs $(nproc) config:release modules.buildconfig.enableUnitTests:false modules.buildconfig.enableMultiBundle:${MULTI_BUNDLE} qbs.installRoot:${APPVEYOR_BUILD_FOLDER}/build/install-root profile:qt6 project.enableConan:true project.minimumMacosVersion:${MACOS_DEPLOYMENT_TARGET} modules.buildconfig.enableCcache:false project.conanProfiles:valentina moduleProviders.qbspkgconfig.extraPaths:$(brew --prefix openssl@1.1)/lib/pkgconfig "modules.buildconfig.signingIdentity:$MACOS_CERTIFICATE_NAME" modules.macdeployqt.libpath:$(brew --prefix poppler)/lib modules.macdeployqt.macdeployqtProgramBinPath:${HOME}/macdeployqt-install-dir
     # Store the notarization credentials so that we can prevent a UI password dialog
     # from blocking the CI
     - echo "Create keychain profile"
@@ -796,7 +804,7 @@ for:
       secure: B8yHPBym+BTDPK5ZCg7WlSnUCHLbcim8WqLTC6/PSNs=
 
   cache:
-    - /Users/appveyor/.conan/data -> conan-cache
+    - /Users/appveyor/.conan/data -> conanfile.py
 
   init:
     - find /Applications -maxdepth 1 -type d -name 'Xcode*.app'
@@ -859,14 +867,22 @@ for:
 
   build_script:
     - pwd
-    - conan install . -s os=Macos -s os.version=${MACOS_DEPLOYMENT_TARGET} --build=missing
+    - conan profile new valentina
+    - conan profile update settings.build_type=Release valentina
+    - conan profile update settings.os=Macos valentina
+    - conan profile update settings.os.version=${MACOS_DEPLOYMENT_TARGET} valentina
+    - conan profile update settings.arch=${ARCH} valentina
+    - conan profile update settings.compiler=apple-clang valentina
+    - conan profile update settings.compiler.libcxx=libc++ valentina
+    - conan profile update settings.compiler.version=14 valentina
+    - conan install . --build=missing -pr valentina
     - qbs setup-toolchains --detect
     - qbs config --list profiles
     - qbs setup-qt ${QTDIR}/bin/qmake qt6
     - qbs config defaultProfile qt6
     - qbs config profiles.qt6.baseProfile clang
-    - qbs build -f valentina.qbs -d ${APPVEYOR_BUILD_FOLDER}/build --jobs $(nproc) config:release modules.buildconfig.enableUnitTests:false modules.buildconfig.enableMultiBundle:${MULTI_BUNDLE} qbs.installRoot:${APPVEYOR_BUILD_FOLDER}/build/install-root profile:qt6 project.enableConan:true project.minimumMacosVersion:${MACOS_DEPLOYMENT_TARGET} modules.buildconfig.enableCcache:false "modules.buildconfig.signingIdentity:$MACOS_CERTIFICATE_NAME"
-    - qbs build -f valentina.qbs -d ${APPVEYOR_BUILD_FOLDER}/build -p 'Valentina DMG' --force-probe-execution --jobs $(nproc) config:release modules.buildconfig.enableUnitTests:false modules.buildconfig.enableMultiBundle:${MULTI_BUNDLE} qbs.installRoot:${APPVEYOR_BUILD_FOLDER}/build/install-root profile:qt6 project.enableConan:true project.minimumMacosVersion:${MACOS_DEPLOYMENT_TARGET} modules.buildconfig.enableCcache:false moduleProviders.qbspkgconfig.extraPaths:$(brew --prefix openssl@1.1)/lib/pkgconfig "modules.buildconfig.signingIdentity:$MACOS_CERTIFICATE_NAME"
+    - qbs build -f valentina.qbs -d ${APPVEYOR_BUILD_FOLDER}/build --jobs $(nproc) config:release modules.buildconfig.enableUnitTests:false modules.buildconfig.enableMultiBundle:${MULTI_BUNDLE} qbs.installRoot:${APPVEYOR_BUILD_FOLDER}/build/install-root profile:qt6 project.enableConan:true project.minimumMacosVersion:${MACOS_DEPLOYMENT_TARGET} modules.buildconfig.enableCcache:false project.conanProfiles:valentina "modules.buildconfig.signingIdentity:$MACOS_CERTIFICATE_NAME"
+    - qbs build -f valentina.qbs -d ${APPVEYOR_BUILD_FOLDER}/build -p 'Valentina DMG' --force-probe-execution --jobs $(nproc) config:release modules.buildconfig.enableUnitTests:false modules.buildconfig.enableMultiBundle:${MULTI_BUNDLE} qbs.installRoot:${APPVEYOR_BUILD_FOLDER}/build/install-root profile:qt6 project.enableConan:true project.minimumMacosVersion:${MACOS_DEPLOYMENT_TARGET} modules.buildconfig.enableCcache:false project.conanProfiles:valentina moduleProviders.qbspkgconfig.extraPaths:$(brew --prefix openssl@1.1)/lib/pkgconfig "modules.buildconfig.signingIdentity:$MACOS_CERTIFICATE_NAME"
     # notarytool supported since XCode 13. First we need to backport it.
     - curl https://bitbucket.org/valentinaproject/valentinaproject.bitbucket.io/downloads/notarytool.tar.xz --output $HOME/notarytool.tar.xz --silent
     - tar -xf $HOME/notarytool.tar.xz
