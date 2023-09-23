@@ -715,7 +715,7 @@ for:
 
       fi
     - sudo python3 -m pip install --upgrade pip
-    - pip3 install --user --upgrade pip dropbox
+    - pip3 install --user --upgrade pip dropbox 'urllib3<2.0'
     - export QTDIR=`$(brew --prefix qt6)`
     - export PATH="$PATH:`python3 -m site --user-base`/bin:$QTDIR/bin"
     - echo $PATH
@@ -849,7 +849,7 @@ for:
     - sudo ln -s /Library/Developer/CommandLineTools/usr/bin/python3 /Library/Developer/CommandLineTools/usr/bin/python
     - whereis python
     - sudo python3 -m pip install --upgrade pip
-    - pip3 install --user --upgrade pip dropbox conan==1.61.0
+    - pip3 install --user --upgrade pip dropbox conan==1.61.0 'urllib3<2.0'
     - conan --version
     - clang --version
     - qmake --version
