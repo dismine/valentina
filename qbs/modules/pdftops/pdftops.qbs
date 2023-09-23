@@ -16,6 +16,7 @@ Module {
         property string path
         property string sourceDirectory: project.sourceDirectory
         property string qtVersion: product.Qt.core.version
+        property string architecture: product.qbs.architecture
 
         configure: {
             if (Utilities.versionCompare(qtVersion, "6") >= 0) {
@@ -34,7 +35,7 @@ Module {
                 }
             } else {
                 var binPath = sourceDirectory + "/dist/macx/bin64/pdftops";
-                if (product.qbs.architecture.contains("x86_64") && File.exists(binPath)) {
+                if (architecture.contains("x86_64") && File.exists(binPath)) {
                     path = binPath;
                     found = true;
                 }
