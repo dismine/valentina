@@ -654,8 +654,7 @@ for:
     
   before_build:
     - ls ${HOME}/Qt
-    - export QTDIR="${HOME}/${QT}"
-    - export PATH="$QTDIR/bin:$HOME/.local/bin:`python3 -m site --user-base`/bin:${HOME}/Qt/Qt Creator.app/Contents/MacOS:$PATH"
+    - export PATH="$HOME/.local/bin:`python3 -m site --user-base`/bin:$PATH"
     - echo $PATH
     - python3 --version
     - whereis python3
@@ -717,7 +716,8 @@ for:
       fi
     - sudo python3 -m pip install --upgrade pip
     - pip3 install --user --upgrade pip dropbox
-    - export PATH="$PATH:`python3 -m site --user-base`/bin"
+    - export QTDIR=`$(brew --prefix qt6)`
+    - export PATH="$PATH:`python3 -m site --user-base`/bin:$QTDIR/bin"
     - echo $PATH
     - python3 --version
     - clang --version
