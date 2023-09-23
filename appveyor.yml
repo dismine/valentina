@@ -721,6 +721,8 @@ for:
     - echo $PATH
     - python3 --version
     - clang --version
+    # Annoying clang issue: clang++ does not respect -isystem flag
+    - rm /usr/local/include/xercesc
     - qmake --version
     - which qmake
     - which qbs
