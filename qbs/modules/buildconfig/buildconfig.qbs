@@ -829,6 +829,15 @@ Module {
                         paths.push(includePaths[i]);
                     }
                 }
+
+                if (qbs.targetPlatform.contains("unix"))
+                {
+                    var xercescHeaders = "/usr/local/include/xercesc";
+                    if (File.exists(xercescHeaders) && !paths.contains(xercescHeaders))
+                    {
+                        paths.push(xercescHeaders);
+                    }
+                }
             }
 
             if (Utilities.versionCompare(qbs.version, "1.22") < 0)
