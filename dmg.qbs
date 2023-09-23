@@ -5,9 +5,6 @@ import qbs.Utilities
 VAppleApplicationDiskImage {
     Depends { name: "buildconfig" }
     Depends { name: "ib" }
-    Depends { name: "Valentina"; }
-    Depends { name: "Tape"; condition: buildconfig.enableMultiBundle }
-    Depends { name: "Puzzle"; condition: buildconfig.enableMultiBundle }
 
     condition: qbs.targetOS.contains("macos") && bundleProbe.ready
     name: "Valentina DMG"
@@ -74,6 +71,7 @@ VAppleApplicationDiskImage {
     // set to false to use a solid-color background (see dmg.backgroundColor below)
     property bool useImageBackground: true
     Group {
+        name "Background image"
         condition: useImageBackground
         files: {
             if (buildconfig.enableMultiBundle)
@@ -105,8 +103,13 @@ VAppleApplicationDiskImage {
         return 576;
     }
 
-    dmg.windowHeight: 600
-    dmg.iconSize: 128
+    dmg.windowHeight: 606
+    dmg.iconSize: {
+        if (buildconfig.enableMultiBundle)
+            return 64;
+
+        return 128;
+    }
     dmg.format: {
         if (Qt.core.versionMajor >= 6)
             return "ULMO"; // macOS 10.15+ only
