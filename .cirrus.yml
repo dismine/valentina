@@ -238,7 +238,7 @@ macos_task_template: &MACOS_TASK_TEMPLATE
     - chmod -R 755 /opt/homebrew/opt/poppler/*
     - chmod -R 755 /opt/homebrew/opt/xerces-c/*
     - python3 --version
-    - pip3 install --user --upgrade pip dropbox
+    - pip3 install --user --upgrade pip dropbox 'urllib3<2.0'
     - ccache --set-config sloppiness=pch_defines,time_macros max_size="$CCACHE_SIZE"
     - qmake --version
     - which qmake
