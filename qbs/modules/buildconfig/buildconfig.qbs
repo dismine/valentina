@@ -830,7 +830,7 @@ Module {
                     }
                 }
 
-                if (qbs.targetPlatform.contains("unix"))
+                if (qbs.targetOS.contains("unix"))
                 {
                     var xercescHeaders = "/usr/local/include/xercesc";
                     if (File.exists(xercescHeaders) && !paths.contains(xercescHeaders))
