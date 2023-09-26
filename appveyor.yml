@@ -916,6 +916,10 @@ for:
     - unzip ${HOME}/macdeployqt-main.zip -d ${HOME}
     - cmake ${HOME}/macdeployqt-main -S ${HOME}/macdeployqt-main -B ${HOME}/macdeployqt-build-dir -DCMAKE_INSTALL_PREFIX=${HOME}/macdeployqt-install-dir -DCMAKE_BUILD_TYPE=Release
     - cmake --build ${HOME}/macdeployqt-build-dir --target install
+    # Clean /usr/local/include from Qt6
+    - find /usr/local/include -type l -name 'Qt*' > /tmp/qt_symlinks.txt
+    - cat /tmp/qt_symlinks.txt
+    - xargs -I {} unlink {} < /tmp/qt_symlinks.txt
     - cd ${APPVEYOR_BUILD_FOLDER}
 
   build_script:
