@@ -880,7 +880,7 @@ for:
         python3 ./scripts/treestate.py scan /usr/local usrlocal.json
 
         brew update
-        brew install coreutils ccache git pkg-config qbs qt6 cmake ninja xerces-c
+        brew install coreutils ccache git pkg-config qbs qt6 xerces-c
 
         # The build environment is now ready for use. We can complete
         # the rest of the process of creating the Homebrew archive
@@ -914,7 +914,7 @@ for:
     - rm $HOME/BundleModule.qbs
     - /usr/bin/curl -LJ https://github.com/dismine/macdeployqt/archive/refs/heads/main.zip --output ${HOME}/macdeployqt-main.zip --silent
     - unzip ${HOME}/macdeployqt-main.zip -d ${HOME}
-    - cmake ${HOME}/macdeployqt-main -GNinja -S ${HOME}/macdeployqt-main -B ${HOME}/macdeployqt-build-dir -DCMAKE_INSTALL_PREFIX=${HOME}/macdeployqt-install-dir -DCMAKE_BUILD_TYPE=Release
+    - cmake ${HOME}/macdeployqt-main -S ${HOME}/macdeployqt-main -B ${HOME}/macdeployqt-build-dir -DCMAKE_INSTALL_PREFIX=${HOME}/macdeployqt-install-dir -DCMAKE_BUILD_TYPE=Release
     - cmake --build ${HOME}/macdeployqt-build-dir --target install
     - cd ${APPVEYOR_BUILD_FOLDER}
 
