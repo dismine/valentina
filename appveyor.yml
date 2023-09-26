@@ -41,32 +41,6 @@ environment:
     secure: RUhnEHqaR8KhalOMWwZZOoO342Ja50QV4KpEWdm9g3pG+jG7i6aJqUmeKF1l5VN6dzksk1u+yN6pOLnU8oGcaVQ6v+1dpKK1oZvF0tyHhNE=
 
   matrix:
-    - job_name: MacOS_12_Qt_6_4 (multibundle)
-      APPVEYOR_BUILD_WORKER_IMAGE: macos-monterey
-      COMPILER: clang
-      QT: Qt/6.4/macos
-      QT_VERSION: Qt6
-      BUILD_SYSTEM: "qbs"
-      ARCH: x64
-      XCODE_VERSION: 13.4.1
-      PLATFORM: "macOS_11+"
-      MACOS_DEPLOYMENT_TARGET: 11.0
-      MULTI_BUNDLE: true
-      DEPLOY: true
-
-    - job_name: MacOS_12_Qt_6_4 (singlebundle)
-      APPVEYOR_BUILD_WORKER_IMAGE: macos-monterey
-      COMPILER: clang
-      QT: Qt/6.4/macos
-      QT_VERSION: Qt6
-      BUILD_SYSTEM: "qbs"
-      ARCH: x64
-      XCODE_VERSION: 13.4.1
-      PLATFORM: "macOS_11+"
-      MACOS_DEPLOYMENT_TARGET: 11.0
-      MULTI_BUNDLE: false
-      DEPLOY: true
-
     - job_name: MacOS_10_15_Qt_5_15 (qbs, multibundle)
       APPVEYOR_BUILD_WORKER_IMAGE: macos-catalina
       COMPILER: clang
@@ -90,6 +64,32 @@ environment:
       XCODE_VERSION: 12.3
       PLATFORM: "macOS_10.13+"
       MACOS_DEPLOYMENT_TARGET: 10.13
+      MULTI_BUNDLE: false
+      DEPLOY: true
+
+    - job_name: MacOS_12_Qt_6_4 (multibundle)
+      APPVEYOR_BUILD_WORKER_IMAGE: macos-monterey
+      COMPILER: clang
+      QT: Qt/6.4/macos
+      QT_VERSION: Qt6
+      BUILD_SYSTEM: "qbs"
+      ARCH: x64
+      XCODE_VERSION: 13.4.1
+      PLATFORM: "macOS_11+"
+      MACOS_DEPLOYMENT_TARGET: 11.0
+      MULTI_BUNDLE: true
+      DEPLOY: true
+
+    - job_name: MacOS_12_Qt_6_4 (singlebundle)
+      APPVEYOR_BUILD_WORKER_IMAGE: macos-monterey
+      COMPILER: clang
+      QT: Qt/6.4/macos
+      QT_VERSION: Qt6
+      BUILD_SYSTEM: "qbs"
+      ARCH: x64
+      XCODE_VERSION: 13.4.1
+      PLATFORM: "macOS_11+"
+      MACOS_DEPLOYMENT_TARGET: 11.0
       MULTI_BUNDLE: false
       DEPLOY: true
 
@@ -612,7 +612,6 @@ for:
     - /Users/appveyor/cache_dir
 
   init:
-    - sh: curl -sflL 'https://raw.githubusercontent.com/appveyor/ci/master/scripts/enable-vnc.sh' | bash -e -
     - find /Applications -maxdepth 1 -type d -name 'Xcode*.app'
     - sudo xcode-select -p
     - sudo xcode-select -s /Applications/Xcode-$XCODE_VERSION.app
@@ -796,9 +795,11 @@ for:
       secure: B8yHPBym+BTDPK5ZCg7WlSnUCHLbcim8WqLTC6/PSNs=
 
   cache:
-    - /Users/appveyor/.conan/data -> conanfile.py
+    #- /Users/appveyor/.conan/data -> conanfile.py
+    - /Users/appveyor/cache_dir
 
   init:
+    - sh: curl -sflL 'https://raw.githubusercontent.com/appveyor/ci/master/scripts/enable-vnc.sh' | bash -e -
     - find /Applications -maxdepth 1 -type d -name 'Xcode*.app'
     - sudo xcode-select -p
     - sudo xcode-select -s /Applications/Xcode-$XCODE_VERSION.app
@@ -848,33 +849,84 @@ for:
     - sudo ln -s -f /usr/bin/python3 /usr/local/bin/python
     - sudo ln -s /Library/Developer/CommandLineTools/usr/bin/python3 /Library/Developer/CommandLineTools/usr/bin/python
     - whereis python
+    - |-
+
+      ###############################################################
+      # Set up macOS dependencies
+
+      sudo ln -s /usr/local /opt/local;
+
+      cache_tag=usr_local_1 # this can be modified to rebuild deps
+
+      cdir=$HOME/cache_dir
+      cache_tar=$cdir/$cache_tag.tar
+      cache=$cache_tar.xz
+
+      CPUS=$(sysctl -n hw.ncpu)
+
+      if [ -d $cdir ] && [ -f $cache ]; then
+        echo "=== Unpacking cached Homebrew $cache ==="
+        (
+          cd /
+          tar xf $cache
+        )
+        echo "done"
+      else
+        echo "=== Building dependencies ==="
+        echo "Couldn't find cache $cache"
+        ls -alrt "$cdir"
+
+        echo "Recording /usr/local state"
+        python3 ./scripts/treestate.py scan /usr/local usrlocal.json
+
+        brew update
+        brew install coreutils ccache git pkg-config qbs qt6 cmake ninja xerces-c
+
+        # The build environment is now ready for use. We can complete
+        # the rest of the process of creating the Homebrew archive
+        # during the rest of the build, using idle CPU time. To minimise
+        # the amount of space needed for the archive, we compress with
+        # xz, which adds only about a minute to the non-cached build.
+        (
+          echo "=== Creating cache tarball $cache ==="
+          echo "Check /usr/local for updates"
+          python3 ./scripts/treestate.py updates usrlocal.json /usr/local | fgrep -v .git > updated_list
+          echo Need to record $( wc -l updated_list ) updates
+
+          mkdir -p $cdir
+          rm -f $cdir/*
+          nice tar cf $cache_tar -T updated_list
+          echo nice xz -9 -T$CPUS $cache_tar
+          nice xz -9 -T$CPUS $cache_tar
+          du -h $cdir
+        ) 2>&1 | sed 's/^/CACHE: /' &
+
+      fi
     - sudo python3 -m pip install --upgrade pip
-    - pip3 install --user --upgrade pip dropbox conan==1.61.0 'urllib3<2.0'
-    - conan --version
+    - pip3 install --user --upgrade pip dropbox 'urllib3<2.0'
     - clang --version
     - qmake --version
     - which qmake
     - qbs --version
+    # Patch Qbs. Remove after Qbs 2.1.2+.
+    - /usr/bin/curl https://gist.githubusercontent.com/dismine/43a20f66f563232e54e02f2e85732e7a/raw/e80a0c827348da3e99310ba4a648c1860bb3a8a6/BundleModule.qbs --output $HOME/BundleModule.qbs --silent
+    - cp -f $HOME/BundleModule.qbs $(brew --prefix qbs)/share/qbs/modules/bundle/BundleModule.qbs
+    - rm $HOME/BundleModule.qbs
+    - /usr/bin/curl -LJ https://github.com/dismine/macdeployqt/archive/refs/heads/main.zip --output ${HOME}/macdeployqt-main.zip --silent
+    - unzip ${HOME}/macdeployqt-main.zip -d ${HOME}
+    - cmake ${HOME}/macdeployqt-main -GNinja -S ${HOME}/macdeployqt-main -B ${HOME}/macdeployqt-build-dir -DCMAKE_INSTALL_PREFIX=${HOME}/macdeployqt-install-dir -DCMAKE_BUILD_TYPE=Release
+    - cmake --build ${HOME}/macdeployqt-build-dir --target install
     - cd ${APPVEYOR_BUILD_FOLDER}
 
   build_script:
     - pwd
-    - conan profile new valentina
-    - conan profile update settings.build_type=Release valentina
-    - conan profile update settings.os=Macos valentina
-    - conan profile update settings.os.version=${MACOS_DEPLOYMENT_TARGET} valentina
-    - conan profile update settings.arch=x86_64 valentina
-    - conan profile update settings.compiler=apple-clang valentina
-    - conan profile update settings.compiler.libcxx=libc++ valentina
-    - conan profile update settings.compiler.version=14 valentina
-    - conan install . --build=missing -pr valentina
     - qbs setup-toolchains --detect
     - qbs config --list profiles
-    - qbs setup-qt ${QTDIR}/bin/qmake qt6
-    - qbs config defaultProfile qt6
-    - qbs config profiles.qt6.baseProfile clang
-    - qbs build -f valentina.qbs -d ${APPVEYOR_BUILD_FOLDER}/build --jobs $(nproc) config:release modules.buildconfig.enableUnitTests:false modules.buildconfig.enableMultiBundle:${MULTI_BUNDLE} qbs.installRoot:${APPVEYOR_BUILD_FOLDER}/build/install-root profile:qt6 project.enableConan:true project.minimumMacosVersion:${MACOS_DEPLOYMENT_TARGET} modules.buildconfig.enableCcache:false project.conanProfiles:valentina "modules.buildconfig.signingIdentity:$MACOS_CERTIFICATE_NAME"
-    - qbs build -f valentina.qbs -d ${APPVEYOR_BUILD_FOLDER}/build -p 'Valentina DMG' --force-probe-execution --jobs $(nproc) config:release modules.buildconfig.enableUnitTests:false modules.buildconfig.enableMultiBundle:${MULTI_BUNDLE} qbs.installRoot:${APPVEYOR_BUILD_FOLDER}/build/install-root profile:qt6 project.enableConan:true project.minimumMacosVersion:${MACOS_DEPLOYMENT_TARGET} modules.buildconfig.enableCcache:false project.conanProfiles:valentina "modules.buildconfig.signingIdentity:$MACOS_CERTIFICATE_NAME"
+    - qbs setup-qt ${QTDIR}/bin/qmake qt5
+    - qbs config defaultProfile qt5
+    - qbs config profiles.qt5.baseProfile clang
+    - qbs build -f valentina.qbs -d ${APPVEYOR_BUILD_FOLDER}/build --jobs $(nproc) config:release modules.buildconfig.enableUnitTests:false modules.buildconfig.enableMultiBundle:${MULTI_BUNDLE} qbs.installRoot:${APPVEYOR_BUILD_FOLDER}/build/install-root profile:qt5 project.minimumMacosVersion:${MACOS_DEPLOYMENT_TARGET} modules.buildconfig.enableCcache:false moduleProviders.qbspkgconfig.extraPaths:$(brew --prefix xerces-c)/lib/pkgconfig "modules.buildconfig.signingIdentity:$MACOS_CERTIFICATE_NAME" modules.macdeployqt.libpath:${QTDIR}/lib modules.macdeployqt.pluginspath:${QTDIR}/plugins modules.macdeployqt.macdeployqtProgramBinPath:${HOME}/macdeployqt-install-dir
+    - qbs build -f valentina.qbs -d ${APPVEYOR_BUILD_FOLDER}/build -p 'Valentina DMG' --force-probe-execution --jobs $(nproc) config:release modules.buildconfig.enableUnitTests:false modules.buildconfig.enableMultiBundle:${MULTI_BUNDLE} qbs.installRoot:${APPVEYOR_BUILD_FOLDER}/build/install-root profile:qt5 project.minimumMacosVersion:${MACOS_DEPLOYMENT_TARGET} modules.buildconfig.enableCcache:false moduleProviders.qbspkgconfig.extraPaths:$(brew --prefix xerces-c)/lib/pkgconfig "modules.buildconfig.signingIdentity:$MACOS_CERTIFICATE_NAME" modules.macdeployqt.libpath:${QTDIR}/lib modules.macdeployqt.pluginspath:${QTDIR}/plugins modules.macdeployqt.macdeployqtProgramBinPath:${HOME}/macdeployqt-install-dir
     # notarytool supported since XCode 13. First we need to backport it.
     - curl https://bitbucket.org/valentinaproject/valentinaproject.bitbucket.io/downloads/notarytool.tar.xz --output $HOME/notarytool.tar.xz --silent
     - tar -xf $HOME/notarytool.tar.xz

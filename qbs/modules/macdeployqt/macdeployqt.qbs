@@ -32,6 +32,8 @@ Module {
 
     property stringList libpath: undefined
 
+    property string pluginspath: undefined
+
     property stringList targetApps: undefined
 
     property bool signForNotarization: false
@@ -83,6 +85,9 @@ Module {
                     product.macdeployqt.libpath.forEach(function(libpath) {
                         cmdArgs.push("-libpath=" + libpath);
                     });
+
+                if (product.macdeployqt.pluginspath !== undefined)
+                    cmdArgs.push("-pluginspath=" + product.macdeployqt.pluginspath);
 
                 if (product.buildconfig.enableCodeSigning) {
                     if (product.macdeployqt.signForNotarization)
