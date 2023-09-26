@@ -71,7 +71,7 @@ VAppleApplicationDiskImage {
     // set to false to use a solid-color background (see dmg.backgroundColor below)
     property bool useImageBackground: true
     Group {
-        name "Background image"
+        name: "Background image"
         condition: useImageBackground
         files: {
             if (buildconfig.enableMultiBundle)
