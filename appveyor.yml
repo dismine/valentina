@@ -42,26 +42,26 @@ environment:
 
   matrix:
     - job_name: MacOS_10_15_Qt_5_15 (qbs, multibundle)
-      APPVEYOR_BUILD_WORKER_IMAGE: macos-catalina
+      APPVEYOR_BUILD_WORKER_IMAGE: macos-monterey
       COMPILER: clang
       QT: Qt/5.15/clang_64
       QT_VERSION: Qt5_15
       BUILD_SYSTEM: "qbs"
       ARCH: x64
-      XCODE_VERSION: 12.3
+      XCODE_VERSION: 14.1
       PLATFORM: "macOS_10.13+"
       MACOS_DEPLOYMENT_TARGET: 10.13
       MULTI_BUNDLE: true
       DEPLOY: true
 
     - job_name: MacOS_10_15_Qt_5_15 (qbs, singlebundle)
-      APPVEYOR_BUILD_WORKER_IMAGE: macos-catalina
+      APPVEYOR_BUILD_WORKER_IMAGE: macos-monterey
       COMPILER: clang
       QT: Qt/5.15/clang_64
       QT_VERSION: Qt5_15
       BUILD_SYSTEM: "qbs"
       ARCH: x64
-      XCODE_VERSION: 12.3
+      XCODE_VERSION: 14.1
       PLATFORM: "macOS_10.13+"
       MACOS_DEPLOYMENT_TARGET: 10.13
       MULTI_BUNDLE: false
@@ -74,7 +74,7 @@ environment:
       QT_VERSION: Qt6
       BUILD_SYSTEM: "qbs"
       ARCH: x64
-      XCODE_VERSION: 13.4.1
+      XCODE_VERSION: 14.1
       PLATFORM: "macOS_11+"
       MACOS_DEPLOYMENT_TARGET: 11.0
       MULTI_BUNDLE: true
@@ -87,7 +87,7 @@ environment:
       QT_VERSION: Qt6
       BUILD_SYSTEM: "qbs"
       ARCH: x64
-      XCODE_VERSION: 13.4.1
+      XCODE_VERSION: 14.1
       PLATFORM: "macOS_11+"
       MACOS_DEPLOYMENT_TARGET: 11.0
       MULTI_BUNDLE: false
@@ -880,7 +880,7 @@ for:
         python3 ./scripts/treestate.py scan /usr/local usrlocal.json
 
         brew update
-        brew install coreutils ccache git pkg-config qbs qt6 xerces-c
+        brew install coreutils ccache git pkg-config qbs qt6 cmake ninja xerces-c
 
         # The build environment is now ready for use. We can complete
         # the rest of the process of creating the Homebrew archive
@@ -927,19 +927,16 @@ for:
     - qbs config profiles.qt5.baseProfile clang
     - qbs build -f valentina.qbs -d ${APPVEYOR_BUILD_FOLDER}/build --jobs $(nproc) config:release modules.buildconfig.enableUnitTests:false modules.buildconfig.enableMultiBundle:${MULTI_BUNDLE} qbs.installRoot:${APPVEYOR_BUILD_FOLDER}/build/install-root profile:qt5 project.minimumMacosVersion:${MACOS_DEPLOYMENT_TARGET} modules.buildconfig.enableCcache:false moduleProviders.qbspkgconfig.extraPaths:$(brew --prefix xerces-c)/lib/pkgconfig "modules.buildconfig.signingIdentity:$MACOS_CERTIFICATE_NAME" modules.macdeployqt.libpath:${QTDIR}/lib modules.macdeployqt.pluginspath:${QTDIR}/plugins modules.macdeployqt.macdeployqtProgramBinPath:${HOME}/macdeployqt-install-dir
     - qbs build -f valentina.qbs -d ${APPVEYOR_BUILD_FOLDER}/build -p 'Valentina DMG' --force-probe-execution --jobs $(nproc) config:release modules.buildconfig.enableUnitTests:false modules.buildconfig.enableMultiBundle:${MULTI_BUNDLE} qbs.installRoot:${APPVEYOR_BUILD_FOLDER}/build/install-root profile:qt5 project.minimumMacosVersion:${MACOS_DEPLOYMENT_TARGET} modules.buildconfig.enableCcache:false moduleProviders.qbspkgconfig.extraPaths:$(brew --prefix xerces-c)/lib/pkgconfig "modules.buildconfig.signingIdentity:$MACOS_CERTIFICATE_NAME" modules.macdeployqt.libpath:${QTDIR}/lib modules.macdeployqt.pluginspath:${QTDIR}/plugins modules.macdeployqt.macdeployqtProgramBinPath:${HOME}/macdeployqt-install-dir
-    # notarytool supported since XCode 13. First we need to backport it.
-    - curl https://bitbucket.org/valentinaproject/valentinaproject.bitbucket.io/downloads/notarytool.tar.xz --output $HOME/notarytool.tar.xz --silent
-    - tar -xf $HOME/notarytool.tar.xz
     # Store the notarization credentials so that we can prevent a UI password dialog
     # from blocking the CI
     - echo "Create keychain profile"
-    - $HOME/notarytool store-credentials "notarytool-profile" --apple-id "$MACOS_NOTARIZATION_APPLE_ID" --team-id "$MACOS_NOTARIZATION_TEAM_ID" --password "$MACOS_NOTARIZATION_PWD"
+    - xcrun notarytool store-credentials "notarytool-profile" --apple-id "$MACOS_NOTARIZATION_APPLE_ID" --team-id "$MACOS_NOTARIZATION_TEAM_ID" --password "$MACOS_NOTARIZATION_PWD"
     # Here we send the notarization request to the Apple's Notarization service, waiting for the result.
     # This typically takes a few seconds inside a CI environment, but it might take more depending on the App
     # characteristics. Visit the Notarization docs for more information and strategies on how to optimize it if
     # you're curious
     - echo "Notarize app"
-    - $HOME/notarytool submit "${APPVEYOR_BUILD_FOLDER}/build/install-root/share/valentina.dmg" --keychain-profile "notarytool-profile" --wait --timeout 5m
+    - xcrun notarytool submit "${APPVEYOR_BUILD_FOLDER}/build/install-root/share/valentina.dmg" --keychain-profile "notarytool-profile" --wait --timeout 5m
     # Finally, we need to "attach the staple" to our executable, which will allow our app to be
     # validated by macOS even when an internet connection is not available.
     - echo "Attach staple"
