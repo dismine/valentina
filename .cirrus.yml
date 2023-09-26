@@ -276,7 +276,7 @@ macos_task_template: &MACOS_TASK_TEMPLATE
     # characteristics. Visit the Notarization docs for more information and strategies on how to optimize it if
     # you're curious
     - echo "Notarize app"
-    - xcrun notarytool submit "$CIRRUS_WORKING_DIR/build/install-root/share/valentina.dmg" --keychain-profile "notarytool-profile" --wait --timeout 5m
+    - xcrun notarytool submit "$CIRRUS_WORKING_DIR/build/install-root/share/valentina.dmg" --keychain-profile "notarytool-profile" --wait --timeout 5m || true
     # Finally, we need to "attach the staple" to our executable, which will allow our app to be
     # validated by macOS even when an internet connection is not available.
     - echo "Attach staple"

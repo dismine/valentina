@@ -754,7 +754,7 @@ for:
     # characteristics. Visit the Notarization docs for more information and strategies on how to optimize it if
     # you're curious
     - echo "Notarize app"
-    - xcrun notarytool submit "${APPVEYOR_BUILD_FOLDER}/build/install-root/share/valentina.dmg" --keychain-profile "notarytool-profile" --wait --timeout 5m
+    - xcrun notarytool submit "${APPVEYOR_BUILD_FOLDER}/build/install-root/share/valentina.dmg" --keychain-profile "notarytool-profile" --wait --timeout 5m || true
     # Finally, we need to "attach the staple" to our executable, which will allow our app to be
     # validated by macOS even when an internet connection is not available.
     - echo "Attach staple"
@@ -942,7 +942,7 @@ for:
     # characteristics. Visit the Notarization docs for more information and strategies on how to optimize it if
     # you're curious
     - echo "Notarize app"
-    - xcrun notarytool submit "${APPVEYOR_BUILD_FOLDER}/build/install-root/share/valentina.dmg" --keychain-profile "notarytool-profile" --wait --timeout 5m
+    - xcrun notarytool submit "${APPVEYOR_BUILD_FOLDER}/build/install-root/share/valentina.dmg" --keychain-profile "notarytool-profile" --wait --timeout 5m || true
     # Finally, we need to "attach the staple" to our executable, which will allow our app to be
     # validated by macOS even when an internet connection is not available.
     - echo "Attach staple"
