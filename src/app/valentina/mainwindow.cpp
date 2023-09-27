@@ -3233,18 +3233,6 @@ void MainWindow::ToolBarDrawTools()
         }
 
         {
-            auto *symmetryToolMenu = new QMenu(this);
-            symmetryToolMenu->addAction(ui->actionFlippingByAxisTool);
-            symmetryToolMenu->addAction(ui->actionFlippingByLineTool);
-
-            auto *symmetryTool = new VToolButtonPopup(this);
-            symmetryTool->setMenu(symmetryToolMenu);
-            symmetryTool->setDefaultAction(ui->actionFlippingByAxisTool);
-
-            ui->toolBarOperationTools->addWidget(symmetryTool);
-        }
-
-        {
             auto *transformToolMenu = new QMenu(this);
             transformToolMenu->addAction(ui->actionRotationTool);
             transformToolMenu->addAction(ui->actionMoveTool);
@@ -3262,9 +3250,6 @@ void MainWindow::ToolBarDrawTools()
     else
     {
         ui->toolBarOperationTools->addAction(ui->actionGroupTool);
-
-        ui->toolBarOperationTools->addAction(ui->actionFlippingByAxisTool);
-        ui->toolBarOperationTools->addAction(ui->actionFlippingByLineTool);
 
         ui->toolBarOperationTools->addAction(ui->actionFlippingByAxisTool);
         ui->toolBarOperationTools->addAction(ui->actionFlippingByLineTool);
