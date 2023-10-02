@@ -106,7 +106,6 @@ private:
     void InitPassmarkMenu(QMenu *menu, vidtype pieceId, QHash<int, QAction *> &contextMenu);
     void InitAngleTypeMenu(QMenu *menu, vidtype pieceId, QHash<int, QAction *> &contextMenu);
     void InitPassmarkAngleTypeMenu(QMenu *menu, vidtype pieceId, QHash<int, QAction *> &contextMenu);
-    void InitPassmarkLineTypeMenu(QMenu *menu, vidtype pieceId, QHash<int, QAction *> &contextMenu);
 };
 
 #endif // VNODEPOINT_H

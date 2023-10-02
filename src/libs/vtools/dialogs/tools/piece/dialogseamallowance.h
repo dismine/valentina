@@ -346,6 +346,8 @@ private:
     void InitPassmarkAngleType(const VPieceNode &node);
 
     void InitIcons();
+
+    auto InitMainPathContextMenu(QMenu *menu, const VPieceNode &rowNode) const -> QHash<int, QAction *>;
 };
 
 //---------------------------------------------------------------------------------------------------------------------

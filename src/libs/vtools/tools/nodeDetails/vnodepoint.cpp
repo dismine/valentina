@@ -69,7 +69,7 @@ enum class ContextMenuOption : int
 {
     NoSelection,
     ShowLabel,
-    Passmark,
+    NonePassmark,
     Exclude,
     ByLength,
     ByPointsIntersection,
@@ -89,8 +89,8 @@ enum class ContextMenuOption : int
     TwoLines,
     ThreeLines,
     TMark,
-    VMark,
-    VMark2,
+    ExternalVMark,
+    InternalVMark,
     UMark,
     BoxMark,
     CheckMark,
@@ -326,7 +326,6 @@ auto VNodePoint::InitContextMenu(QMenu *menu, vidtype pieceId, quint32 referens)
 
     InitAngleTypeMenu(menu, pieceId, contextMenu);
     InitPassmarkAngleTypeMenu(menu, pieceId, contextMenu);
-    InitPassmarkLineTypeMenu(menu, pieceId, contextMenu);
 
     auto *separatorAct = new QAction(this);
     separatorAct->setSeparator(true);
@@ -374,20 +373,53 @@ void VNodePoint::InitPassmarkMenu(QMenu *menu, vidtype pieceId, QHash<int, QActi
     const VPiece detail = VAbstractTool::data.GetPiece(pieceId);
     const VPiecePath &path = detail.GetPath();
     const int nodeIndex = path.indexOfNode(m_id);
-    if (nodeIndex != -1)
+    if (nodeIndex == -1)
     {
-        const VPieceNode &node = path.at(nodeIndex);
-
-        QAction *actionPassmark = menu->addAction(tr("Passmark"));
-        actionPassmark->setCheckable(true);
-        actionPassmark->setChecked(node.IsPassmark());
-        contextMenu.insert(static_cast<int>(ContextMenuOption::Passmark), actionPassmark);
-
-        QAction *actionTurnPoint = menu->addAction(tr("Turn point"));
-        actionTurnPoint->setCheckable(true);
-        actionTurnPoint->setChecked(node.IsTurnPoint());
-        contextMenu.insert(static_cast<int>(ContextMenuOption::TurnPoint), actionTurnPoint);
+        return;
     }
+
+    const VPieceNode &node = path.at(nodeIndex);
+
+    QMenu *passmarkSubmenu = menu->addMenu(tr("Passmark"));
+
+    QAction *actionNonePassmark = passmarkSubmenu->addAction(tr("None"));
+    actionNonePassmark->setCheckable(true);
+    actionNonePassmark->setChecked(!node.IsPassmark());
+    contextMenu.insert(static_cast<int>(ContextMenuOption::NonePassmark), actionNonePassmark);
+
+    Q_STATIC_ASSERT_X(static_cast<int>(PassmarkLineType::LAST_ONE_DO_NOT_USE) == 9, "Not all types were handled.");
+
+    auto InitPassmarkLineTypeAction = [passmarkSubmenu, node](const QString &name, PassmarkLineType lineType)
+    {
+        QAction *action = passmarkSubmenu->addAction(name);
+        action->setCheckable(true);
+        action->setChecked(node.IsPassmark() && lineType == node.GetPassmarkLineType());
+        return action;
+    };
+
+    contextMenu.insert(static_cast<int>(ContextMenuOption::OneLine),
+                       InitPassmarkLineTypeAction(tr("One line"), PassmarkLineType::OneLine));
+    contextMenu.insert(static_cast<int>(ContextMenuOption::TwoLines),
+                       InitPassmarkLineTypeAction(tr("Two lines"), PassmarkLineType::TwoLines));
+    contextMenu.insert(static_cast<int>(ContextMenuOption::ThreeLines),
+                       InitPassmarkLineTypeAction(tr("Three lines"), PassmarkLineType::ThreeLines));
+    contextMenu.insert(static_cast<int>(ContextMenuOption::TMark),
+                       InitPassmarkLineTypeAction(tr("T mark"), PassmarkLineType::TMark));
+    contextMenu.insert(static_cast<int>(ContextMenuOption::ExternalVMark),
+                       InitPassmarkLineTypeAction(tr("External V mark"), PassmarkLineType::ExternalVMark));
+    contextMenu.insert(static_cast<int>(ContextMenuOption::InternalVMark),
+                       InitPassmarkLineTypeAction(tr("Internal V mark"), PassmarkLineType::InternalVMark));
+    contextMenu.insert(static_cast<int>(ContextMenuOption::UMark),
+                       InitPassmarkLineTypeAction(tr("U mark"), PassmarkLineType::UMark));
+    contextMenu.insert(static_cast<int>(ContextMenuOption::BoxMark),
+                       InitPassmarkLineTypeAction(tr("Box mark"), PassmarkLineType::BoxMark));
+    contextMenu.insert(static_cast<int>(ContextMenuOption::CheckMark),
+                       InitPassmarkLineTypeAction(tr("Check mark"), PassmarkLineType::CheckMark));
+
+    QAction *actionTurnPoint = menu->addAction(tr("Turn point"));
+    actionTurnPoint->setCheckable(true);
+    actionTurnPoint->setChecked(node.IsTurnPoint());
+    contextMenu.insert(static_cast<int>(ContextMenuOption::TurnPoint), actionTurnPoint);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -436,29 +468,24 @@ void VNodePoint::InitAngleTypeMenu(QMenu *menu, vidtype pieceId, QHash<int, QAct
 //---------------------------------------------------------------------------------------------------------------------
 void VNodePoint::InitPassmarkAngleTypeMenu(QMenu *menu, vidtype pieceId, QHash<int, QAction *> &contextMenu)
 {
-    QMenu *passmarkAngleMenu = menu->addMenu(tr("Passmark angle"));
-    PassmarkAngleType passmarkAngleCurType = PassmarkAngleType::Straightforward;
-
     const VPiece detail = VAbstractTool::data.GetPiece(pieceId);
     const VPiecePath &path = detail.GetPath();
     const int nodeIndex = path.indexOfNode(m_id);
-    if (nodeIndex != -1)
+    if (nodeIndex == -1)
     {
-        const VPieceNode &node = path.at(nodeIndex);
-        passmarkAngleMenu->setEnabled(node.IsPassmark());
-        passmarkAngleCurType = node.GetPassmarkAngleType();
-    }
-    else
-    {
-        passmarkAngleMenu->setVisible(false);
+        return;
     }
 
-    auto InitPassmarkAngleAction =
-        [passmarkAngleMenu, passmarkAngleCurType](const QString &name, PassmarkAngleType checkType)
+    const VPieceNode &node = path.at(nodeIndex);
+
+    QMenu *passmarkAngleMenu = menu->addMenu(tr("Passmark angle"));
+
+    auto InitPassmarkAngleAction = [passmarkAngleMenu, node](const QString &name, PassmarkAngleType checkType)
     {
         QAction *action = passmarkAngleMenu->addAction(name);
         action->setCheckable(true);
-        action->setChecked(passmarkAngleCurType == checkType);
+        action->setChecked(node.IsPassmark() && node.GetPassmarkAngleType() == checkType);
+        action->setEnabled(node.IsPassmark());
         return action;
     };
 
@@ -486,56 +513,6 @@ void VNodePoint::InitPassmarkAngleTypeMenu(QMenu *menu, vidtype pieceId, QHash<i
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VNodePoint::InitPassmarkLineTypeMenu(QMenu *menu, vidtype pieceId, QHash<int, QAction *> &contextMenu)
-{
-    QMenu *passmarkLineTypeMenu = menu->addMenu(tr("Passmark mark"));
-    PassmarkLineType passmarkLineCurType = PassmarkLineType::OneLine;
-
-    const VPiece detail = VAbstractTool::data.GetPiece(pieceId);
-    const VPiecePath &path = detail.GetPath();
-    const int nodeIndex = path.indexOfNode(m_id);
-    if (nodeIndex != -1)
-    {
-        const VPieceNode &node = path.at(nodeIndex);
-        passmarkLineTypeMenu->setEnabled(node.IsPassmark());
-        passmarkLineCurType = node.GetPassmarkLineType();
-    }
-    else
-    {
-        passmarkLineTypeMenu->setVisible(false);
-    }
-
-    auto InitPassmarkLineTypeAction =
-        [passmarkLineTypeMenu, passmarkLineCurType](const QString &name, PassmarkLineType checkType)
-    {
-        QAction *action = passmarkLineTypeMenu->addAction(name);
-        action->setCheckable(true);
-        action->setChecked(passmarkLineCurType == checkType);
-        return action;
-    };
-
-    Q_STATIC_ASSERT_X(static_cast<int>(PassmarkLineType::LAST_ONE_DO_NOT_USE) == 9, "Not all types were handled.");
-    contextMenu.insert(static_cast<int>(ContextMenuOption::OneLine),
-                       InitPassmarkLineTypeAction(tr("One line"), PassmarkLineType::OneLine));
-    contextMenu.insert(static_cast<int>(ContextMenuOption::TwoLines),
-                       InitPassmarkLineTypeAction(tr("Two lines"), PassmarkLineType::TwoLines));
-    contextMenu.insert(static_cast<int>(ContextMenuOption::ThreeLines),
-                       InitPassmarkLineTypeAction(tr("Three lines"), PassmarkLineType::ThreeLines));
-    contextMenu.insert(static_cast<int>(ContextMenuOption::TMark),
-                       InitPassmarkLineTypeAction(tr("T mark"), PassmarkLineType::TMark));
-    contextMenu.insert(static_cast<int>(ContextMenuOption::VMark),
-                       InitPassmarkLineTypeAction(tr("External V mark"), PassmarkLineType::ExternalVMark));
-    contextMenu.insert(static_cast<int>(ContextMenuOption::VMark2),
-                       InitPassmarkLineTypeAction(tr("Internal V mark"), PassmarkLineType::InternalVMark));
-    contextMenu.insert(static_cast<int>(ContextMenuOption::UMark),
-                       InitPassmarkLineTypeAction(tr("U mark"), PassmarkLineType::UMark));
-    contextMenu.insert(static_cast<int>(ContextMenuOption::BoxMark),
-                       InitPassmarkLineTypeAction(tr("Box mark"), PassmarkLineType::BoxMark));
-    contextMenu.insert(static_cast<int>(ContextMenuOption::CheckMark),
-                       InitPassmarkLineTypeAction(tr("Check mark"), PassmarkLineType::CheckMark));
-}
-
-//---------------------------------------------------------------------------------------------------------------------
 void VNodePoint::contextMenuEvent(QGraphicsSceneContextMenuEvent *event)
 {
     if (m_suppressContextMenu)
@@ -543,179 +520,180 @@ void VNodePoint::contextMenuEvent(QGraphicsSceneContextMenuEvent *event)
         return;
     }
 
-    if (auto *piece = qgraphicsitem_cast<VToolSeamAllowance *>(parentItem()))
+    auto *piece = qgraphicsitem_cast<VToolSeamAllowance *>(parentItem());
+    if (piece == nullptr)
     {
-        QMenu menu;
-        QHash<int, QAction *> contextMenu = InitContextMenu(&menu, piece->getId(), piece->referens());
-
-        PieceNodeAngle angleCurType = PieceNodeAngle::ByLength;
-        PassmarkAngleType passmarkAngleCurType = PassmarkAngleType::Straightforward;
-        PassmarkLineType passmarkLineCurType = PassmarkLineType::OneLine;
-        bool isPassmark = false;
-
-        const VPiece detail = VAbstractTool::data.GetPiece(piece->getId());
-        const VPiecePath &path = detail.GetPath();
-        const int nodeIndex = path.indexOfNode(m_id);
-        if (nodeIndex != -1)
-        {
-            const VPieceNode &node = path.at(nodeIndex);
-            angleCurType = node.GetAngleType();
-            passmarkAngleCurType = node.GetPassmarkAngleType();
-            passmarkLineCurType = node.GetPassmarkLineType();
-            isPassmark = node.IsPassmark();
-        }
-
-        auto SelectSeamAllowanceAngle = [angleCurType, this](PieceNodeAngle type)
-        {
-            if (angleCurType != type)
-            {
-                emit ToggleSeamAllowanceAngleType(m_id, type);
-            }
-        };
-
-        auto SelectPassmarkAngle = [passmarkAngleCurType, this](PassmarkAngleType type)
-        {
-            if (passmarkAngleCurType != type)
-            {
-                emit TogglePassmarkAngleType(m_id, type);
-            }
-        };
-
-        auto SelectPassmarkLine = [passmarkLineCurType, this](PassmarkLineType type)
-        {
-            if (passmarkLineCurType != type)
-            {
-                emit TogglePassmarkLineType(m_id, type);
-            }
-        };
-
-        QAction *selectedAction = menu.exec(event->screenPos());
-        ContextMenuOption selectedOption = static_cast<ContextMenuOption>(
-            contextMenu.key(selectedAction, static_cast<int>(ContextMenuOption::NoSelection)));
-
-        Q_STATIC_ASSERT_X(static_cast<int>(ContextMenuOption::LAST_ONE_DO_NOT_USE) == 34,
-                          "Not all options were handled.");
-
-        QT_WARNING_PUSH
-        QT_WARNING_DISABLE_GCC("-Wswitch-default")
-        switch (selectedOption)
-        {
-            case ContextMenuOption::LAST_ONE_DO_NOT_USE:
-                Q_UNREACHABLE();
-                break;
-            case ContextMenuOption::NoSelection:
-                return;
-            case ContextMenuOption::Option:
-                emit ShowOptions();
-                break;
-            case ContextMenuOption::InLayout:
-                emit ToggleInLayout(selectedAction->isChecked());
-                break;
-            case ContextMenuOption::ForbidFlipping:
-                emit ToggleForbidFlipping(selectedAction->isChecked());
-                break;
-            case ContextMenuOption::ForceFlipping:
-                emit ToggleForceFlipping(selectedAction->isChecked());
-                break;
-            case ContextMenuOption::ResetLabelTemplate:
-                emit ResetPieceLabelTemplate();
-                break;
-            case ContextMenuOption::Remove:
-                try
-                {
-                    emit Delete();
-                }
-                catch (const VExceptionToolWasDeleted &e)
-                {
-                    Q_UNUSED(e);
-                    return; // Leave this method immediately!!!
-                }
-                return; // Leave this method immediately after call!!!
-            case ContextMenuOption::ShowLabel:
-                VAbstractApplication::VApp()->getUndoStack()->push(
-                    new ShowLabel(doc, m_id, selectedAction->isChecked()));
-                break;
-            case ContextMenuOption::Exclude:
-                emit ToggleExcludeState(m_id);
-                break;
-            case ContextMenuOption::TurnPoint:
-                emit ToggleTurnPointState(m_id);
-                break;
-            case ContextMenuOption::ByLength:
-                SelectSeamAllowanceAngle(PieceNodeAngle::ByLength);
-                break;
-            case ContextMenuOption::ByPointsIntersection:
-                SelectSeamAllowanceAngle(PieceNodeAngle::ByPointsIntersection);
-                break;
-            case ContextMenuOption::ByFirstEdgeSymmetry:
-                SelectSeamAllowanceAngle(PieceNodeAngle::ByFirstEdgeSymmetry);
-                break;
-            case ContextMenuOption::BySecondEdgeSymmetry:
-                SelectSeamAllowanceAngle(PieceNodeAngle::BySecondEdgeSymmetry);
-                break;
-            case ContextMenuOption::ByFirstEdgeRightAngle:
-                SelectSeamAllowanceAngle(PieceNodeAngle::ByFirstEdgeRightAngle);
-                break;
-            case ContextMenuOption::BySecondEdgeRightAngle:
-                SelectSeamAllowanceAngle(PieceNodeAngle::BySecondEdgeRightAngle);
-                break;
-            case ContextMenuOption::Passmark:
-                emit TogglePassmark(m_id, not isPassmark);
-                break;
-            case ContextMenuOption::Straightforward:
-                SelectPassmarkAngle(PassmarkAngleType::Straightforward);
-                break;
-            case ContextMenuOption::Bisector:
-                SelectPassmarkAngle(PassmarkAngleType::Bisector);
-                break;
-            case ContextMenuOption::Intersection:
-                SelectPassmarkAngle(PassmarkAngleType::Intersection);
-                break;
-            case ContextMenuOption::IntersectionOnlyLeft:
-                SelectPassmarkAngle(PassmarkAngleType::IntersectionOnlyLeft);
-                break;
-            case ContextMenuOption::IntersectionOnlyRight:
-                SelectPassmarkAngle(PassmarkAngleType::IntersectionOnlyRight);
-                break;
-            case ContextMenuOption::Intersection2:
-                SelectPassmarkAngle(PassmarkAngleType::Intersection2);
-                break;
-            case ContextMenuOption::Intersection2OnlyLeft:
-                SelectPassmarkAngle(PassmarkAngleType::Intersection2OnlyLeft);
-                break;
-            case ContextMenuOption::Intersection2OnlyRight:
-                SelectPassmarkAngle(PassmarkAngleType::Intersection2OnlyRight);
-                break;
-            case ContextMenuOption::OneLine:
-                SelectPassmarkLine(PassmarkLineType::OneLine);
-                break;
-            case ContextMenuOption::TwoLines:
-                SelectPassmarkLine(PassmarkLineType::TwoLines);
-                break;
-            case ContextMenuOption::ThreeLines:
-                SelectPassmarkLine(PassmarkLineType::ThreeLines);
-                break;
-            case ContextMenuOption::TMark:
-                SelectPassmarkLine(PassmarkLineType::TMark);
-                break;
-            case ContextMenuOption::VMark:
-                SelectPassmarkLine(PassmarkLineType::ExternalVMark);
-                break;
-            case ContextMenuOption::VMark2:
-                SelectPassmarkLine(PassmarkLineType::InternalVMark);
-                break;
-            case ContextMenuOption::UMark:
-                SelectPassmarkLine(PassmarkLineType::UMark);
-                break;
-            case ContextMenuOption::BoxMark:
-                SelectPassmarkLine(PassmarkLineType::BoxMark);
-                break;
-            case ContextMenuOption::CheckMark:
-                SelectPassmarkLine(PassmarkLineType::CheckMark);
-                break;
-        };
-        QT_WARNING_POP
+        return;
     }
+
+    QMenu menu;
+    QHash<int, QAction *> contextMenu = InitContextMenu(&menu, piece->getId(), piece->referens());
+
+    PieceNodeAngle angleCurType = PieceNodeAngle::ByLength;
+    PassmarkAngleType passmarkAngleCurType = PassmarkAngleType::Straightforward;
+    PassmarkLineType passmarkLineCurType = PassmarkLineType::OneLine;
+
+    const VPiece detail = VAbstractTool::data.GetPiece(piece->getId());
+    const VPiecePath &path = detail.GetPath();
+    const int nodeIndex = path.indexOfNode(m_id);
+    if (nodeIndex != -1)
+    {
+        const VPieceNode &node = path.at(nodeIndex);
+        angleCurType = node.GetAngleType();
+        passmarkAngleCurType = node.GetPassmarkAngleType();
+        passmarkLineCurType = node.GetPassmarkLineType();
+    }
+
+    auto SelectSeamAllowanceAngle = [angleCurType, this](PieceNodeAngle type)
+    {
+        if (angleCurType != type)
+        {
+            emit ToggleSeamAllowanceAngleType(m_id, type);
+        }
+    };
+
+    auto SelectPassmarkAngle = [passmarkAngleCurType, this](PassmarkAngleType type)
+    {
+        if (passmarkAngleCurType != type)
+        {
+            emit TogglePassmarkAngleType(m_id, type);
+        }
+    };
+
+    auto SelectPassmarkLine = [passmarkLineCurType, this](PassmarkLineType type)
+    {
+        emit TogglePassmark(m_id, true);
+
+        if (passmarkLineCurType != type)
+        {
+            emit TogglePassmarkLineType(m_id, type);
+        }
+    };
+
+    QAction *selectedAction = menu.exec(event->screenPos());
+    ContextMenuOption selectedOption = static_cast<ContextMenuOption>(
+        contextMenu.key(selectedAction, static_cast<int>(ContextMenuOption::NoSelection)));
+
+    Q_STATIC_ASSERT_X(static_cast<int>(ContextMenuOption::LAST_ONE_DO_NOT_USE) == 34, "Not all options were handled.");
+
+    QT_WARNING_PUSH
+    QT_WARNING_DISABLE_GCC("-Wswitch-default")
+    switch (selectedOption)
+    {
+        case ContextMenuOption::LAST_ONE_DO_NOT_USE:
+            Q_UNREACHABLE();
+            break;
+        case ContextMenuOption::NoSelection:
+            return;
+        case ContextMenuOption::Option:
+            emit ShowOptions();
+            break;
+        case ContextMenuOption::InLayout:
+            emit ToggleInLayout(selectedAction->isChecked());
+            break;
+        case ContextMenuOption::ForbidFlipping:
+            emit ToggleForbidFlipping(selectedAction->isChecked());
+            break;
+        case ContextMenuOption::ForceFlipping:
+            emit ToggleForceFlipping(selectedAction->isChecked());
+            break;
+        case ContextMenuOption::ResetLabelTemplate:
+            emit ResetPieceLabelTemplate();
+            break;
+        case ContextMenuOption::Remove:
+            try
+            {
+                emit Delete();
+            }
+            catch (const VExceptionToolWasDeleted &e)
+            {
+                Q_UNUSED(e);
+                return; // Leave this method immediately!!!
+            }
+            return; // Leave this method immediately after call!!!
+        case ContextMenuOption::ShowLabel:
+            VAbstractApplication::VApp()->getUndoStack()->push(new ShowLabel(doc, m_id, selectedAction->isChecked()));
+            break;
+        case ContextMenuOption::Exclude:
+            emit ToggleExcludeState(m_id);
+            break;
+        case ContextMenuOption::TurnPoint:
+            emit ToggleTurnPointState(m_id);
+            break;
+        case ContextMenuOption::ByLength:
+            SelectSeamAllowanceAngle(PieceNodeAngle::ByLength);
+            break;
+        case ContextMenuOption::ByPointsIntersection:
+            SelectSeamAllowanceAngle(PieceNodeAngle::ByPointsIntersection);
+            break;
+        case ContextMenuOption::ByFirstEdgeSymmetry:
+            SelectSeamAllowanceAngle(PieceNodeAngle::ByFirstEdgeSymmetry);
+            break;
+        case ContextMenuOption::BySecondEdgeSymmetry:
+            SelectSeamAllowanceAngle(PieceNodeAngle::BySecondEdgeSymmetry);
+            break;
+        case ContextMenuOption::ByFirstEdgeRightAngle:
+            SelectSeamAllowanceAngle(PieceNodeAngle::ByFirstEdgeRightAngle);
+            break;
+        case ContextMenuOption::BySecondEdgeRightAngle:
+            SelectSeamAllowanceAngle(PieceNodeAngle::BySecondEdgeRightAngle);
+            break;
+        case ContextMenuOption::NonePassmark:
+            emit TogglePassmark(m_id, false);
+            break;
+        case ContextMenuOption::Straightforward:
+            SelectPassmarkAngle(PassmarkAngleType::Straightforward);
+            break;
+        case ContextMenuOption::Bisector:
+            SelectPassmarkAngle(PassmarkAngleType::Bisector);
+            break;
+        case ContextMenuOption::Intersection:
+            SelectPassmarkAngle(PassmarkAngleType::Intersection);
+            break;
+        case ContextMenuOption::IntersectionOnlyLeft:
+            SelectPassmarkAngle(PassmarkAngleType::IntersectionOnlyLeft);
+            break;
+        case ContextMenuOption::IntersectionOnlyRight:
+            SelectPassmarkAngle(PassmarkAngleType::IntersectionOnlyRight);
+            break;
+        case ContextMenuOption::Intersection2:
+            SelectPassmarkAngle(PassmarkAngleType::Intersection2);
+            break;
+        case ContextMenuOption::Intersection2OnlyLeft:
+            SelectPassmarkAngle(PassmarkAngleType::Intersection2OnlyLeft);
+            break;
+        case ContextMenuOption::Intersection2OnlyRight:
+            SelectPassmarkAngle(PassmarkAngleType::Intersection2OnlyRight);
+            break;
+        case ContextMenuOption::OneLine:
+            SelectPassmarkLine(PassmarkLineType::OneLine);
+            break;
+        case ContextMenuOption::TwoLines:
+            SelectPassmarkLine(PassmarkLineType::TwoLines);
+            break;
+        case ContextMenuOption::ThreeLines:
+            SelectPassmarkLine(PassmarkLineType::ThreeLines);
+            break;
+        case ContextMenuOption::TMark:
+            SelectPassmarkLine(PassmarkLineType::TMark);
+            break;
+        case ContextMenuOption::ExternalVMark:
+            SelectPassmarkLine(PassmarkLineType::ExternalVMark);
+            break;
+        case ContextMenuOption::InternalVMark:
+            SelectPassmarkLine(PassmarkLineType::InternalVMark);
+            break;
+        case ContextMenuOption::UMark:
+            SelectPassmarkLine(PassmarkLineType::UMark);
+            break;
+        case ContextMenuOption::BoxMark:
+            SelectPassmarkLine(PassmarkLineType::BoxMark);
+            break;
+        case ContextMenuOption::CheckMark:
+            SelectPassmarkLine(PassmarkLineType::CheckMark);
+            break;
+    };
+    QT_WARNING_POP
 }
 
 //---------------------------------------------------------------------------------------------------------------------

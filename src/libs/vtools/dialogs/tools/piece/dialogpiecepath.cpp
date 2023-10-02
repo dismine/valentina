@@ -51,6 +51,27 @@
 
 namespace
 {
+enum class ContextMenuOption : int
+{
+    NoSelection,
+    Reverse,
+    NonePassmark,
+    OneLine,
+    TwoLines,
+    ThreeLines,
+    TMark,
+    ExternalVMark,
+    InternalVMark,
+    UMark,
+    BoxMark,
+    CheckMark,
+    Uniqueness,
+    TurnPoint,
+    Excluded,
+    Delete,
+    LAST_ONE_DO_NOT_USE
+};
+
 auto CuttingPath(quint32 id, const VContainer *data) -> QVector<QPointF>
 {
     QVector<QPointF> path;
@@ -340,85 +361,94 @@ void DialogPiecePath::ShowContextMenu(const QPoint &pos)
         return;
     }
 
-    QScopedPointer<QMenu> menu(new QMenu());
-
     QListWidgetItem *rowItem = ui->listWidget->item(row);
     SCASSERT(rowItem != nullptr);
     auto rowNode = qvariant_cast<VPieceNode>(rowItem->data(Qt::UserRole));
 
-    QAction *actionPassmark = nullptr;
-    QAction *actionUniqueness = nullptr;
-    QAction *actionReverse = nullptr;
-    QAction *actionTurnPoint = nullptr;
+    QMenu menu;
+    QHash<int, QAction *> contextMenu = InitContextMenu(&menu, rowNode);
 
-    if (rowNode.GetTypeTool() != Tool::NodePoint)
+    QAction *selectedAction = menu.exec(ui->listWidget->viewport()->mapToGlobal(pos));
+    auto selectedOption = static_cast<ContextMenuOption>(
+        contextMenu.key(selectedAction, static_cast<int>(ContextMenuOption::NoSelection)));
+
+    auto SelectPassmarkLineType = [this, &rowNode, rowItem](PassmarkLineType type)
     {
-        actionReverse = menu->addAction(tr("Reverse"));
-        actionReverse->setCheckable(true);
-        actionReverse->setChecked(rowNode.GetReverse());
-    }
-    else
-    {
-        if (m_showMode && GetType() == PiecePathType::CustomSeamAllowance &&
-            ui->tabWidget->indexOf(ui->tabPassmarks) != -1)
-        {
-            actionPassmark = menu->addAction(tr("Passmark"));
-            actionPassmark->setCheckable(true);
-            actionPassmark->setChecked(rowNode.IsPassmark());
-        }
-
-        actionUniqueness = menu->addAction(tr("Check uniqueness"));
-        actionUniqueness->setCheckable(true);
-        actionUniqueness->setChecked(rowNode.IsCheckUniqueness());
-
-        actionTurnPoint = menu->addAction(tr("Turn point"));
-        actionTurnPoint->setCheckable(true);
-        actionTurnPoint->setChecked(rowNode.IsTurnPoint());
-    }
-
-    QAction *actionExcluded = menu->addAction(tr("Excluded"));
-    actionExcluded->setCheckable(true);
-    actionExcluded->setChecked(rowNode.IsExcluded());
-
-    QAction *actionDelete = menu->addAction(QIcon::fromTheme(QStringLiteral("edit-delete")), tr("Delete"));
-
-    QAction *selectedAction = menu->exec(ui->listWidget->viewport()->mapToGlobal(pos));
-    if (selectedAction == actionDelete)
-    {
-        delete ui->listWidget->item(row);
-    }
-    else if (rowNode.GetTypeTool() != Tool::NodePoint && selectedAction == actionReverse)
-    {
-        rowNode.SetReverse(not rowNode.GetReverse());
+        rowNode.SetPassmark(true);
+        rowNode.SetPassmarkLineType(type);
         rowItem->setData(Qt::UserRole, QVariant::fromValue(rowNode));
         rowItem->setText(GetNodeName(data, rowNode, IsShowNotch()));
-    }
-    else if (m_showMode && rowNode.GetTypeTool() == Tool::NodePoint && selectedAction == actionPassmark &&
-             GetType() == PiecePathType::CustomSeamAllowance && ui->tabWidget->indexOf(ui->tabPassmarks) != -1)
+    };
+
+    Q_STATIC_ASSERT_X(static_cast<int>(ContextMenuOption::LAST_ONE_DO_NOT_USE) == 16, "Not all options were handled.");
+
+    QT_WARNING_PUSH
+    QT_WARNING_DISABLE_GCC("-Wswitch-default")
+    switch (selectedOption)
     {
-        rowNode.SetPassmark(not rowNode.IsPassmark());
-        rowItem->setData(Qt::UserRole, QVariant::fromValue(rowNode));
-        rowItem->setText(GetNodeName(data, rowNode, IsShowNotch()));
-    }
-    else if (selectedAction == actionExcluded)
-    {
-        rowNode.SetExcluded(not rowNode.IsExcluded());
-        rowItem->setData(Qt::UserRole, QVariant::fromValue(rowNode));
-        rowItem->setText(GetNodeName(data, rowNode, true));
-        rowItem->setFont(NodeFont(rowItem->font(), rowNode.IsExcluded()));
-    }
-    else if (rowNode.GetTypeTool() == Tool::NodePoint && selectedAction == actionUniqueness)
-    {
-        rowNode.SetCheckUniqueness(not rowNode.IsCheckUniqueness());
-        rowItem->setData(Qt::UserRole, QVariant::fromValue(rowNode));
-        rowItem->setText(GetNodeName(data, rowNode, IsShowNotch()));
-    }
-    else if (rowNode.GetTypeTool() == Tool::NodePoint && selectedAction == actionTurnPoint)
-    {
-        rowNode.SetTurnPoint(not rowNode.IsTurnPoint());
-        rowItem->setData(Qt::UserRole, QVariant::fromValue(rowNode));
-        rowItem->setText(GetNodeName(data, rowNode, IsShowNotch()));
-    }
+        case ContextMenuOption::NoSelection:
+            return;
+        case ContextMenuOption::Reverse:
+            rowNode.SetReverse(not rowNode.GetReverse());
+            rowItem->setData(Qt::UserRole, QVariant::fromValue(rowNode));
+            rowItem->setText(GetNodeName(data, rowNode, IsShowNotch()));
+            break;
+        case ContextMenuOption::NonePassmark:
+            rowNode.SetPassmark(false);
+            rowItem->setData(Qt::UserRole, QVariant::fromValue(rowNode));
+            rowItem->setText(GetNodeName(data, rowNode, IsShowNotch()));
+            break;
+        case ContextMenuOption::OneLine:
+            SelectPassmarkLineType(PassmarkLineType::OneLine);
+            break;
+        case ContextMenuOption::TwoLines:
+            SelectPassmarkLineType(PassmarkLineType::TwoLines);
+            break;
+        case ContextMenuOption::ThreeLines:
+            SelectPassmarkLineType(PassmarkLineType::ThreeLines);
+            break;
+        case ContextMenuOption::TMark:
+            SelectPassmarkLineType(PassmarkLineType::TMark);
+            break;
+        case ContextMenuOption::ExternalVMark:
+            SelectPassmarkLineType(PassmarkLineType::ExternalVMark);
+            break;
+        case ContextMenuOption::InternalVMark:
+            SelectPassmarkLineType(PassmarkLineType::InternalVMark);
+            break;
+        case ContextMenuOption::UMark:
+            SelectPassmarkLineType(PassmarkLineType::UMark);
+            break;
+        case ContextMenuOption::BoxMark:
+            SelectPassmarkLineType(PassmarkLineType::BoxMark);
+            break;
+        case ContextMenuOption::CheckMark:
+            SelectPassmarkLineType(PassmarkLineType::CheckMark);
+            break;
+        case ContextMenuOption::Uniqueness:
+            rowNode.SetCheckUniqueness(not rowNode.IsCheckUniqueness());
+            rowItem->setData(Qt::UserRole, QVariant::fromValue(rowNode));
+            rowItem->setText(GetNodeName(data, rowNode, IsShowNotch()));
+            break;
+        case ContextMenuOption::TurnPoint:
+            rowNode.SetTurnPoint(not rowNode.IsTurnPoint());
+            rowItem->setData(Qt::UserRole, QVariant::fromValue(rowNode));
+            rowItem->setText(GetNodeName(data, rowNode, IsShowNotch()));
+            break;
+        case ContextMenuOption::Excluded:
+            rowNode.SetExcluded(not rowNode.IsExcluded());
+            rowItem->setData(Qt::UserRole, QVariant::fromValue(rowNode));
+            rowItem->setText(GetNodeName(data, rowNode, true));
+            rowItem->setFont(NodeFont(rowItem->font(), rowNode.IsExcluded()));
+            break;
+        case ContextMenuOption::Delete:
+            delete ui->listWidget->item(row);
+            break;
+        case ContextMenuOption::LAST_ONE_DO_NOT_USE:
+            Q_UNREACHABLE();
+            break;
+    };
+    QT_WARNING_POP
 
     ValidObjects(PathIsValid());
     ListChanged();
@@ -2244,4 +2274,82 @@ void DialogPiecePath::InitIcons()
     ui->label_6->setPixmap(VTheme::GetPixmapResource(resource, equalIcon));
     ui->label_10->setPixmap(VTheme::GetPixmapResource(resource, equalIcon));
     ui->label_5->setPixmap(VTheme::GetPixmapResource(resource, equalIcon));
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+auto DialogPiecePath::InitContextMenu(QMenu *menu, const VPieceNode &rowNode) -> QHash<int, QAction *>
+{
+    SCASSERT(menu != nullptr)
+
+    QHash<int, QAction *> contextMenu;
+
+    if (rowNode.GetTypeTool() != Tool::NodePoint)
+    {
+        QAction *actionReverse = menu->addAction(tr("Reverse"));
+        actionReverse->setCheckable(true);
+        actionReverse->setChecked(rowNode.GetReverse());
+    }
+    else
+    {
+        if (m_showMode && GetType() == PiecePathType::CustomSeamAllowance &&
+            ui->tabWidget->indexOf(ui->tabPassmarks) != -1)
+        {
+            QMenu *passmarkSubmenu = menu->addMenu(tr("Passmark"));
+
+            QAction *actionNonePassmark = passmarkSubmenu->addAction(tr("None"));
+            actionNonePassmark->setCheckable(true);
+            actionNonePassmark->setChecked(!rowNode.IsPassmark());
+            contextMenu.insert(static_cast<int>(ContextMenuOption::NonePassmark), actionNonePassmark);
+
+            Q_STATIC_ASSERT_X(static_cast<int>(PassmarkLineType::LAST_ONE_DO_NOT_USE) == 9,
+                              "Not all types were handled.");
+
+            auto InitPassmarkLineTypeAction = [passmarkSubmenu, rowNode](const QString &name, PassmarkLineType lineType)
+            {
+                QAction *action = passmarkSubmenu->addAction(name);
+                action->setCheckable(true);
+                action->setChecked(rowNode.IsPassmark() && lineType == rowNode.GetPassmarkLineType());
+                return action;
+            };
+
+            contextMenu.insert(static_cast<int>(ContextMenuOption::OneLine),
+                               InitPassmarkLineTypeAction(tr("One line"), PassmarkLineType::OneLine));
+            contextMenu.insert(static_cast<int>(ContextMenuOption::TwoLines),
+                               InitPassmarkLineTypeAction(tr("Two lines"), PassmarkLineType::TwoLines));
+            contextMenu.insert(static_cast<int>(ContextMenuOption::ThreeLines),
+                               InitPassmarkLineTypeAction(tr("Three lines"), PassmarkLineType::ThreeLines));
+            contextMenu.insert(static_cast<int>(ContextMenuOption::TMark),
+                               InitPassmarkLineTypeAction(tr("T mark"), PassmarkLineType::TMark));
+            contextMenu.insert(static_cast<int>(ContextMenuOption::ExternalVMark),
+                               InitPassmarkLineTypeAction(tr("External V mark"), PassmarkLineType::ExternalVMark));
+            contextMenu.insert(static_cast<int>(ContextMenuOption::InternalVMark),
+                               InitPassmarkLineTypeAction(tr("Internal V mark"), PassmarkLineType::InternalVMark));
+            contextMenu.insert(static_cast<int>(ContextMenuOption::UMark),
+                               InitPassmarkLineTypeAction(tr("U mark"), PassmarkLineType::UMark));
+            contextMenu.insert(static_cast<int>(ContextMenuOption::BoxMark),
+                               InitPassmarkLineTypeAction(tr("Box mark"), PassmarkLineType::BoxMark));
+            contextMenu.insert(static_cast<int>(ContextMenuOption::CheckMark),
+                               InitPassmarkLineTypeAction(tr("Check mark"), PassmarkLineType::CheckMark));
+        }
+
+        QAction *actionUniqueness = menu->addAction(tr("Check uniqueness"));
+        actionUniqueness->setCheckable(true);
+        actionUniqueness->setChecked(rowNode.IsCheckUniqueness());
+        contextMenu.insert(static_cast<int>(ContextMenuOption::Uniqueness), actionUniqueness);
+
+        QAction *actionTurnPoint = menu->addAction(tr("Turn point"));
+        actionTurnPoint->setCheckable(true);
+        actionTurnPoint->setChecked(rowNode.IsTurnPoint());
+        contextMenu.insert(static_cast<int>(ContextMenuOption::TurnPoint), actionTurnPoint);
+    }
+
+    QAction *actionExcluded = menu->addAction(tr("Excluded"));
+    actionExcluded->setCheckable(true);
+    actionExcluded->setChecked(rowNode.IsExcluded());
+    contextMenu.insert(static_cast<int>(ContextMenuOption::Excluded), actionExcluded);
+
+    QAction *actionDelete = menu->addAction(QIcon::fromTheme(QStringLiteral("edit-delete")), tr("Delete"));
+    contextMenu.insert(static_cast<int>(ContextMenuOption::Delete), actionDelete);
+
+    return contextMenu;
 }
