@@ -817,6 +817,7 @@
       <xs:attribute name="readOnly" type="xs:boolean"/>
       <xs:attribute name="labelPrefix" type="labelPrefixType"/>
       <xs:attribute name="passmarkLength" type="xs:string"/>
+      <xs:attribute name="passmarkWidth" type="xs:string"/>
     </xs:complexType>
     <xs:unique name="incrementName">
       <xs:selector xpath=".//increment"/>
