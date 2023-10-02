@@ -56,9 +56,9 @@ class QDomElement;
  * 4. patch - little change.
  */
 
-const QString VPatternConverter::PatternMinVerStr = QStringLiteral("0.1.4");
-const QString VPatternConverter::PatternMaxVerStr = QStringLiteral("0.9.2");
-const QString VPatternConverter::CurrentSchema = QStringLiteral("://schema/pattern/v0.9.2.xsd");
+const QString VPatternConverter::PatternMinVerStr = QStringLiteral("0.1.4");                     // NOLINT
+const QString VPatternConverter::PatternMaxVerStr = QStringLiteral("0.9.2");                     // NOLINT
+const QString VPatternConverter::CurrentSchema = QStringLiteral("://schema/pattern/v0.9.2.xsd"); // NOLINT
 
 // VPatternConverter::PatternMinVer; // <== DON'T FORGET TO UPDATE TOO!!!!
 // VPatternConverter::PatternMaxVer; // <== DON'T FORGET TO UPDATE TOO!!!!
@@ -109,8 +109,8 @@ Q_GLOBAL_STATIC_WITH_ARGS(const QString, strIdTool, (QLatin1String("idTool")))  
 Q_GLOBAL_STATIC_WITH_ARGS(const QString, strIdObject, (QLatin1String("idObject")))                       // NOLINT
 Q_GLOBAL_STATIC_WITH_ARGS(const QString, strChildren, (QLatin1String("children")))                       // NOLINT
 Q_GLOBAL_STATIC_WITH_ARGS(const QString, strChild, (QLatin1String("child")))                             // NOLINT
-Q_GLOBAL_STATIC_WITH_ARGS(const QString, strPointOfIntersectionCurves,
-                          (QLatin1String("pointOfIntersectionCurves")))                                        // NOLINT
+// NOLINTNEXTLINE
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, strPointOfIntersectionCurves, (QLatin1String("pointOfIntersectionCurves")))
 Q_GLOBAL_STATIC_WITH_ARGS(const QString, strCurveIntersectAxis, (QLatin1String("curveIntersectAxis")))         // NOLINT
 Q_GLOBAL_STATIC_WITH_ARGS(const QString, strCurve, (QLatin1String("curve")))                                   // NOLINT
 Q_GLOBAL_STATIC_WITH_ARGS(const QString, strCurve1, (QLatin1String("curve1")))                                 // NOLINT
@@ -118,8 +118,8 @@ Q_GLOBAL_STATIC_WITH_ARGS(const QString, strCurve2, (QLatin1String("curve2")))  
 Q_GLOBAL_STATIC_WITH_ARGS(const QString, strModelingPath, (QLatin1String("modelingPath")))                     // NOLINT
 Q_GLOBAL_STATIC_WITH_ARGS(const QString, strModelingSpline, (QLatin1String("modelingSpline")))                 // NOLINT
 Q_GLOBAL_STATIC_WITH_ARGS(const QString, strPointFromArcAndTangent, (QLatin1String("pointFromArcAndTangent"))) // NOLINT
-Q_GLOBAL_STATIC_WITH_ARGS(const QString, strPointOfIntersectionArcs,
-                          (QLatin1String("pointOfIntersectionArcs")))                  // NOLINT
+// NOLINTNEXTLINE
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, strPointOfIntersectionArcs, (QLatin1String("pointOfIntersectionArcs")))
 Q_GLOBAL_STATIC_WITH_ARGS(const QString, strFirstArc, (QLatin1String("firstArc")))     // NOLINT
 Q_GLOBAL_STATIC_WITH_ARGS(const QString, strSecondArc, (QLatin1String("secondArc")))   // NOLINT
 Q_GLOBAL_STATIC_WITH_ARGS(const QString, strDetail, (QLatin1String("detail")))         // NOLINT
