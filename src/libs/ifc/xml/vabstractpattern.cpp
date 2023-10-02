@@ -1331,7 +1331,8 @@ void VAbstractPattern::SetPassmarkLengthVariable(const QString &name)
 
     if (not pattern.isNull())
     {
-        SetAttribute(pattern, AttrPassmarkLength, name);
+        SetAttributeOrRemoveIf<QString>(pattern, AttrPassmarkLength, name,
+                                        [](const QString &name) noexcept { return name.isEmpty(); });
         modified = true;
     }
 }
@@ -1356,7 +1357,8 @@ void VAbstractPattern::SetPassmarkWidthVariable(const QString &name)
 
     if (not pattern.isNull())
     {
-        SetAttribute(pattern, AttrPassmarkWidth, name);
+        SetAttributeOrRemoveIf<QString>(pattern, AttrPassmarkWidth, name,
+                                        [](const QString &name) noexcept { return name.isEmpty(); });
         modified = true;
     }
 }
