@@ -74,6 +74,8 @@ public:
     QString m_appName{};                               // NOLINT(misc-non-private-member-variables-in-classes)
     QString m_appVersion{};                            // NOLINT(misc-non-private-member-variables-in-classes)
     QString m_guiLanguage{};                           // NOLINT(misc-non-private-member-variables-in-classes)
+    QString m_screensNumber{};                         // NOLINT(misc-non-private-member-variables-in-classes)
+    QString m_screenPixelRatio{};                      // NOLINT(misc-non-private-member-variables-in-classes)
     QString m_screenResolution{QStringLiteral("0x0")}; // NOLINT(misc-non-private-member-variables-in-classes)
     QString m_repoRevision{QStringLiteral("Unknown")}; // NOLINT(misc-non-private-member-variables-in-classes)
 

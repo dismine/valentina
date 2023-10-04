@@ -58,10 +58,17 @@ VGAnalyticsWorker::VGAnalyticsWorker(QObject *parent)
 
     m_guiLanguage = QLocale::system().name().toLower().replace(QChar('_'), QChar('-'));
 
-    QScreen *screen = QGuiApplication::primaryScreen();
-    QSize size = screen->size();
+    m_screensNumber = QString::number(QGuiApplication::screens().size());
 
-    m_screenResolution = QStringLiteral("%1x%2").arg(size.width()).arg(size.height());
+    QScreen *screen = QGuiApplication::primaryScreen();
+    QSize logicalSize = screen->size();
+    qreal devicePixelRatio = screen->devicePixelRatio();
+    m_screenPixelRatio = QString::number(devicePixelRatio);
+
+    int screenWidth = qRound(logicalSize.width() * devicePixelRatio);
+    int screenHeight = qRound(logicalSize.height() * devicePixelRatio);
+
+    m_screenResolution = QStringLiteral("%1x%2").arg(screenWidth).arg(screenHeight);
     m_screenScaleFactor = screen->logicalDotsPerInchX() / 96.0;
 
     m_timer.setInterval(m_timerInterval);

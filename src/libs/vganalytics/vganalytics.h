@@ -67,7 +67,7 @@ public:
     void SetLogLevel(LogLevel logLevel);
     auto LogLevel() const -> LogLevel;
 
-    void SetRepoRevision(const QString &rev);
+    void SetRepoRevision(QString rev);
     auto RepoRevision() const -> QString;
 
     void SetGUILanguage(const QString &language);
@@ -82,6 +82,8 @@ public:
     /// Get or set the network access manager. If none is set, the class creates its own on the first request
     void SetNetworkAccessManager(QNetworkAccessManager *networkAccessManager);
     auto NetworkAccessManager() const -> QNetworkAccessManager *;
+
+    static auto CountryCode() -> QString;
 
 public slots:
     void SendAppFreshInstallEvent(qint64 engagementTimeMsec);
@@ -99,11 +101,6 @@ private:
     void SendEvent(const QString &eventName, const QHash<QString, QJsonValue> &params);
 
     auto InitAppStartEventParams(qint64 engagementTimeMsec) const -> QHash<QString, QJsonValue>;
-
-    static auto TerritoryCode() -> QString;
-#if QT_VERSION < QT_VERSION_CHECK(6, 1, 0)
-    static auto GetTerritoryCode(QLocale::Country territory) -> QString;
-#endif
 
     friend auto operator<<(QDataStream &outStream, const VGAnalytics &analytics) -> QDataStream &;
     friend auto operator>>(QDataStream &inStream, VGAnalytics &analytics) -> QDataStream &;
