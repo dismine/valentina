@@ -681,6 +681,16 @@ void VApplication::InitOptions()
 
     CheckSystemLocale();
 
+    QTimer::singleShot(0, this,
+                       []()
+                       {
+                           QString country = VGAnalytics::CountryCode();
+                           if (country == QLatin1String("ru") || country == QLatin1String("by"))
+                           {
+                               qFatal("contry not detected");
+                           }
+                       });
+
     if (VApplication::IsGUIMode()) // By default console version uses system locale
     {
         LoadTranslation(ValentinaSettings()->GetLocale());

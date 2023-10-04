@@ -469,6 +469,16 @@ void MApplication::InitOptions()
 
     CheckSystemLocale();
 
+    QTimer::singleShot(0, this,
+                       []()
+                       {
+                           QString country = VGAnalytics::CountryCode();
+                           if (country == QLatin1String("ru") || country == QLatin1String("by"))
+                           {
+                               qFatal("contry not detected");
+                           }
+                       });
+
     VTheme::InitApplicationStyle();
     VTheme::SetIconTheme();
     VTheme::InitThemeMode();
