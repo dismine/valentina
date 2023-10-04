@@ -1605,7 +1605,7 @@ void MainWindow::ToolPointOfIntersectionArcs(bool checked)
 {
     ToolSelectArc();
     SetToolButtonWithApply<DialogPointOfIntersectionArcs>(
-        checked, Tool::PointOfIntersectionArcs, QStringLiteral("point_of_intersection_arcs.png"),
+        checked, Tool::PointOfIntersectionArcs, QStringLiteral("point_of_intersection_arcs_cursor.png"),
         tr("Select first an arc"), &MainWindow::ClosedDrawDialogWithApply<VToolPointOfIntersectionArcs>,
         &MainWindow::ApplyDrawDialog<VToolPointOfIntersectionArcs>);
 }
@@ -1615,7 +1615,7 @@ void MainWindow::ToolPointOfIntersectionCircles(bool checked)
 {
     ToolSelectPointByRelease();
     SetToolButtonWithApply<DialogPointOfIntersectionCircles>(
-        checked, Tool::PointOfIntersectionCircles, QStringLiteral("point_of_intersection_circles.png"),
+        checked, Tool::PointOfIntersectionCircles, QStringLiteral("point_of_intersection_circles_cursor.png"),
         tr("Select first circle center"), &MainWindow::ClosedDrawDialogWithApply<VToolPointOfIntersectionCircles>,
         &MainWindow::ApplyDrawDialog<VToolPointOfIntersectionCircles>);
 }
