@@ -89,6 +89,7 @@ public slots:
     void SendAppFreshInstallEvent(qint64 engagementTimeMsec);
     void SendAppStartEvent(qint64 engagementTimeMsec);
     void SendAppCloseEvent(qint64 engagementTimeMsec);
+    void SendPatternToolUsedEvent(qint64 engagementTimeMsec, const QString &toolName);
 
 private:
     Q_DISABLE_COPY_MOVE(VGAnalytics) // NOLINT

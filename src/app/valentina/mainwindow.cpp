@@ -253,6 +253,32 @@ Q_GLOBAL_STATIC_WITH_ARGS(const QString, autosavePrefix, (QLatin1String(".autosa
 QT_WARNING_POP
 
 //---------------------------------------------------------------------------------------------------------------------
+void LogPatternToolUsed(bool checked, const QString &toolName)
+{
+    if (checked)
+    {
+        VValentinaSettings *settings = VAbstractValApplication::VApp()->ValentinaSettings();
+        if (settings->IsCollectStatistic())
+        {
+            auto *statistic = VGAnalytics::Instance();
+
+            QString clientID = settings->GetClientID();
+            if (clientID.isEmpty())
+            {
+                clientID = QUuid::createUuid().toString();
+                settings->SetClientID(clientID);
+                statistic->SetClientID(clientID);
+            }
+
+            statistic->Enable(true);
+
+            const qint64 uptime = VAbstractValApplication::VApp()->AppUptime();
+            statistic->SendPatternToolUsedEvent(uptime, toolName);
+        }
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 auto SortDetailsForLayout(const QHash<quint32, VPiece> *allDetails, const QString &nameRegex = QString())
     -> QVector<DetailForLayout>
 {
@@ -1029,6 +1055,7 @@ void MainWindow::ToolEndLine(bool checked)
     SetToolButtonWithApply<DialogEndLine>(checked, Tool::EndLine, QStringLiteral("segment_cursor.png"),
                                           tr("Select point"), &MainWindow::ClosedDrawDialogWithApply<VToolEndLine>,
                                           &MainWindow::ApplyDrawDialog<VToolEndLine>);
+    LogPatternToolUsed(checked, QStringLiteral("Segment tool"));
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -1042,6 +1069,7 @@ void MainWindow::ToolLine(bool checked)
     SetToolButtonWithApply<DialogLine>(checked, Tool::Line, QStringLiteral("line_cursor.png"), tr("Select first point"),
                                        &MainWindow::ClosedDrawDialogWithApply<VToolLine>,
                                        &MainWindow::ApplyDrawDialog<VToolLine>);
+    LogPatternToolUsed(checked, QStringLiteral("Line tool"));
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -1055,6 +1083,7 @@ void MainWindow::ToolAlongLine(bool checked)
     SetToolButtonWithApply<DialogAlongLine>(checked, Tool::AlongLine, QStringLiteral("along_line_cursor.png"),
                                             tr("Select point"), &MainWindow::ClosedDrawDialogWithApply<VToolAlongLine>,
                                             &MainWindow::ApplyDrawDialog<VToolAlongLine>);
+    LogPatternToolUsed(checked, QStringLiteral("Along line tool"));
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -1065,6 +1094,7 @@ void MainWindow::ToolMidpoint(bool checked)
     SetToolButtonWithApply<DialogAlongLine>(checked, Tool::Midpoint, QStringLiteral("midpoint_cursor.png"),
                                             tr("Select point"), &MainWindow::ClosedDrawDialogWithApply<VToolAlongLine>,
                                             &MainWindow::ApplyDrawDialog<VToolAlongLine>);
+    LogPatternToolUsed(checked, QStringLiteral("Midpoint tool"));
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -1078,6 +1108,7 @@ void MainWindow::ToolShoulderPoint(bool checked)
     SetToolButtonWithApply<DialogShoulderPoint>(
         checked, Tool::ShoulderPoint, QStringLiteral("shoulder_cursor.png"), tr("Select point"),
         &MainWindow::ClosedDrawDialogWithApply<VToolShoulderPoint>, &MainWindow::ApplyDrawDialog<VToolShoulderPoint>);
+    LogPatternToolUsed(checked, QStringLiteral("Shoulder point tool"));
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -1091,6 +1122,7 @@ void MainWindow::ToolNormal(bool checked)
     SetToolButtonWithApply<DialogNormal>(
         checked, Tool::Normal, QStringLiteral("normal_cursor.png"), tr("Select first point of line"),
         &MainWindow::ClosedDrawDialogWithApply<VToolNormal>, &MainWindow::ApplyDrawDialog<VToolNormal>);
+    LogPatternToolUsed(checked, QStringLiteral("Normal tool"));
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -1104,6 +1136,7 @@ void MainWindow::ToolBisector(bool checked)
     SetToolButtonWithApply<DialogBisector>(
         checked, Tool::Bisector, QStringLiteral("bisector_cursor.png"), tr("Select first point of angle"),
         &MainWindow::ClosedDrawDialogWithApply<VToolBisector>, &MainWindow::ApplyDrawDialog<VToolBisector>);
+    LogPatternToolUsed(checked, QStringLiteral("Bisector tool"));
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -1117,6 +1150,7 @@ void MainWindow::ToolLineIntersect(bool checked)
     SetToolButtonWithApply<DialogLineIntersect>(
         checked, Tool::LineIntersect, QStringLiteral("intersect_cursor.png"), tr("Select first point of first line"),
         &MainWindow::ClosedDrawDialogWithApply<VToolLineIntersect>, &MainWindow::ApplyDrawDialog<VToolLineIntersect>);
+    LogPatternToolUsed(checked, QStringLiteral("Line intersect tool"));
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -1130,6 +1164,7 @@ void MainWindow::ToolSpline(bool checked)
     SetToolButtonWithApply<DialogSpline>(
         checked, Tool::Spline, QStringLiteral("spline_cursor.png"), tr("Select first point curve"),
         &MainWindow::ClosedDrawDialogWithApply<VToolSpline>, &MainWindow::ApplyDrawDialog<VToolSpline>);
+    LogPatternToolUsed(checked, QStringLiteral("Spline tool"));
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -1139,6 +1174,7 @@ void MainWindow::ToolCubicBezier(bool checked)
     SetToolButtonWithApply<DialogCubicBezier>(
         checked, Tool::CubicBezier, QStringLiteral("cubic_bezier_cursor.png"), tr("Select first curve point"),
         &MainWindow::ClosedDrawDialogWithApply<VToolCubicBezier>, &MainWindow::ApplyDrawDialog<VToolCubicBezier>);
+    LogPatternToolUsed(checked, QStringLiteral("Cubic bezier tool"));
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -1152,6 +1188,7 @@ void MainWindow::ToolCutSpline(bool checked)
     SetToolButtonWithApply<DialogCutSpline>(
         checked, Tool::CutSpline, QStringLiteral("spline_cut_point_cursor.png"), tr("Select simple curve"),
         &MainWindow::ClosedDrawDialogWithApply<VToolCutSpline>, &MainWindow::ApplyDrawDialog<VToolCutSpline>);
+    LogPatternToolUsed(checked, QStringLiteral("Cut spline tool"));
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -1165,6 +1202,7 @@ void MainWindow::ToolArc(bool checked)
     SetToolButtonWithApply<DialogArc>(
         checked, Tool::Arc, QStringLiteral("arc_cursor.png"), tr("Select point of center of arc"),
         &MainWindow::ClosedDrawDialogWithApply<VToolArc>, &MainWindow::ApplyDrawDialog<VToolArc>);
+    LogPatternToolUsed(checked, QStringLiteral("Arc tool"));
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -1179,6 +1217,7 @@ void MainWindow::ToolEllipticalArc(bool checked)
                                                 tr("Select point of center of elliptical arc"),
                                                 &MainWindow::ClosedDrawDialogWithApply<VToolEllipticalArc>,
                                                 &MainWindow::ApplyDrawDialog<VToolEllipticalArc>);
+    LogPatternToolUsed(checked, QStringLiteral("Elliptical arc tool"));
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -1192,6 +1231,7 @@ void MainWindow::ToolSplinePath(bool checked)
     SetToolButtonWithApply<DialogSplinePath>(
         checked, Tool::SplinePath, QStringLiteral("splinePath_cursor.png"), tr("Select point of curve path"),
         &MainWindow::ClosedDrawDialogWithApply<VToolSplinePath>, &MainWindow::ApplyDrawDialog<VToolSplinePath>);
+    LogPatternToolUsed(checked, QStringLiteral("Spline path tool"));
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -1202,6 +1242,7 @@ void MainWindow::ToolCubicBezierPath(bool checked)
         checked, Tool::CubicBezierPath, QStringLiteral("cubic_bezier_path_cursor.png"),
         tr("Select point of cubic bezier path"), &MainWindow::ClosedDrawDialogWithApply<VToolCubicBezierPath>,
         &MainWindow::ApplyDrawDialog<VToolCubicBezierPath>);
+    LogPatternToolUsed(checked, QStringLiteral("Cubic bezier path tool"));
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -1215,6 +1256,7 @@ void MainWindow::ToolCutSplinePath(bool checked)
     SetToolButtonWithApply<DialogCutSplinePath>(
         checked, Tool::CutSplinePath, QStringLiteral("splinePath_cut_point_cursor.png"), tr("Select curve path"),
         &MainWindow::ClosedDrawDialogWithApply<VToolCutSplinePath>, &MainWindow::ApplyDrawDialog<VToolCutSplinePath>);
+    LogPatternToolUsed(checked, QStringLiteral("Cut spline path tool"));
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -1228,6 +1270,7 @@ void MainWindow::ToolPointOfContact(bool checked)
     SetToolButtonWithApply<DialogPointOfContact>(
         checked, Tool::PointOfContact, QStringLiteral("point_of_contact_cursor.png"), tr("Select first point of line"),
         &MainWindow::ClosedDrawDialogWithApply<VToolPointOfContact>, &MainWindow::ApplyDrawDialog<VToolPointOfContact>);
+    LogPatternToolUsed(checked, QStringLiteral("Point of contact tool"));
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -1242,6 +1285,7 @@ void MainWindow::ToolDetail(bool checked)
                                                 tr("Select main path objects clockwise."),
                                                 &MainWindow::ClosedDetailsDialogWithApply<VToolSeamAllowance>,
                                                 &MainWindow::ApplyDetailsDialog<VToolSeamAllowance>);
+    LogPatternToolUsed(checked, QStringLiteral("Piece tool"));
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -1252,6 +1296,7 @@ void MainWindow::ToolPiecePath(bool checked)
         checked, Tool::PiecePath, QStringLiteral("path_cursor.png"),
         tr("Select path objects, <b>%1</b> - reverse direction curve").arg(VModifierKey::Shift()),
         &MainWindow::ClosedDialogPiecePath);
+    LogPatternToolUsed(checked, QStringLiteral("Piece path tool"));
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -1260,6 +1305,7 @@ void MainWindow::ToolPin(bool checked)
     ToolSelectPointByRelease();
     SetToolButton<DialogPin>(checked, Tool::Pin, QStringLiteral("pin_cursor.png"), tr("Select pin point"),
                              &MainWindow::ClosedDialogPin);
+    LogPatternToolUsed(checked, QStringLiteral("Pin tool"));
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -1268,6 +1314,7 @@ void MainWindow::ToolPlaceLabel(bool checked)
     ToolSelectPointByRelease();
     SetToolButton<DialogPlaceLabel>(checked, Tool::PlaceLabel, QStringLiteral("place_label_cursor.png"),
                                     tr("Select placelabel center point"), &MainWindow::ClosedDialogPlaceLabel);
+    LogPatternToolUsed(checked, QStringLiteral("Place label tool"));
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -1281,6 +1328,7 @@ void MainWindow::ToolHeight(bool checked)
     SetToolButtonWithApply<DialogHeight>(checked, Tool::Height, QStringLiteral("height_cursor.png"),
                                          tr("Select base point"), &MainWindow::ClosedDrawDialogWithApply<VToolHeight>,
                                          &MainWindow::ApplyDrawDialog<VToolHeight>);
+    LogPatternToolUsed(checked, QStringLiteral("Height tool"));
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -1294,6 +1342,7 @@ void MainWindow::ToolTriangle(bool checked)
     SetToolButtonWithApply<DialogTriangle>(
         checked, Tool::Triangle, QStringLiteral("triangle_cursor.png"), tr("Select first point of axis"),
         &MainWindow::ClosedDrawDialogWithApply<VToolTriangle>, &MainWindow::ApplyDrawDialog<VToolTriangle>);
+    LogPatternToolUsed(checked, QStringLiteral("Triangle tool"));
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -1308,6 +1357,7 @@ void MainWindow::ToolPointOfIntersection(bool checked)
         checked, Tool::PointOfIntersection, QStringLiteral("point_of_intersection_cursor.png"),
         tr("Select point for X value (vertical)"), &MainWindow::ClosedDrawDialogWithApply<VToolPointOfIntersection>,
         &MainWindow::ApplyDrawDialog<VToolPointOfIntersection>);
+    LogPatternToolUsed(checked, QStringLiteral("Point of intersection tool"));
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -1320,6 +1370,7 @@ void MainWindow::ToolUnionDetails(bool checked)
     ToolSelectDetail();
     SetToolButton<DialogUnionDetails>(checked, Tool::UnionDetails, QStringLiteral("union_cursor.png"),
                                       tr("Select detail"), &MainWindow::ClosedDialogUnionDetails);
+    LogPatternToolUsed(checked, QStringLiteral("Union details tool"));
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -1338,6 +1389,7 @@ void MainWindow::ToolDuplicateDetail(bool checked)
     ToolSelectDetail();
     SetToolButton<DialogDuplicateDetail>(checked, Tool::DuplicateDetail, QStringLiteral("duplicate_detail_cursor.png"),
                                          tr("Select detail"), &MainWindow::ClosedDialogDuplicateDetail);
+    LogPatternToolUsed(checked, QStringLiteral("Duplicate detail tool"));
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -1365,6 +1417,7 @@ void MainWindow::ToolGroup(bool checked)
                                 .arg(VModifierKey::Control(), VModifierKey::EnterKey());
     SetToolButton<DialogGroup>(checked, Tool::Group, QStringLiteral("group_plus_cursor.png"), tooltip,
                                &MainWindow::ClosedDialogGroup);
+    LogPatternToolUsed(checked, QStringLiteral("Group tool"));
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -1377,6 +1430,7 @@ void MainWindow::ToolRotation(bool checked)
     SetToolButtonWithApply<DialogRotation>(checked, Tool::Rotation, QStringLiteral("rotation_cursor.png"), tooltip,
                                            &MainWindow::ClosedDrawDialogWithApply<VToolRotation>,
                                            &MainWindow::ApplyDrawDialog<VToolRotation>);
+    LogPatternToolUsed(checked, QStringLiteral("Rotation tool"));
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -1389,6 +1443,7 @@ void MainWindow::ToolFlippingByLine(bool checked)
     SetToolButtonWithApply<DialogFlippingByLine>(
         checked, Tool::FlippingByLine, QStringLiteral("flipping_line_cursor.png"), tooltip,
         &MainWindow::ClosedDrawDialogWithApply<VToolFlippingByLine>, &MainWindow::ApplyDrawDialog<VToolFlippingByLine>);
+    LogPatternToolUsed(checked, QStringLiteral("Flipping by line tool"));
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -1401,6 +1456,7 @@ void MainWindow::ToolFlippingByAxis(bool checked)
     SetToolButtonWithApply<DialogFlippingByAxis>(
         checked, Tool::FlippingByAxis, QStringLiteral("flipping_axis_cursor.png"), tooltip,
         &MainWindow::ClosedDrawDialogWithApply<VToolFlippingByAxis>, &MainWindow::ApplyDrawDialog<VToolFlippingByAxis>);
+    LogPatternToolUsed(checked, QStringLiteral("Flipping by axis tool"));
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -1413,6 +1469,7 @@ void MainWindow::ToolMove(bool checked)
     SetToolButtonWithApply<DialogMove>(checked, Tool::Move, QStringLiteral("move_cursor.png"), tooltip,
                                        &MainWindow::ClosedDrawDialogWithApply<VToolMove>,
                                        &MainWindow::ApplyDrawDialog<VToolMove>);
+    LogPatternToolUsed(checked, QStringLiteral("Move tool"));
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -1567,6 +1624,7 @@ void MainWindow::ToolCutArc(bool checked)
     SetToolButtonWithApply<DialogCutArc>(checked, Tool::CutArc, QStringLiteral("arc_cut_cursor.png"), tr("Select arc"),
                                          &MainWindow::ClosedDrawDialogWithApply<VToolCutArc>,
                                          &MainWindow::ApplyDrawDialog<VToolCutArc>);
+    LogPatternToolUsed(checked, QStringLiteral("Cut arc tool"));
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -1577,6 +1635,7 @@ void MainWindow::ToolLineIntersectAxis(bool checked)
         checked, Tool::LineIntersectAxis, QStringLiteral("line_intersect_axis_cursor.png"),
         tr("Select first point of line"), &MainWindow::ClosedDrawDialogWithApply<VToolLineIntersectAxis>,
         &MainWindow::ApplyDrawDialog<VToolLineIntersectAxis>);
+    LogPatternToolUsed(checked, QStringLiteral("Line intersect axis tool"));
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -1587,6 +1646,7 @@ void MainWindow::ToolCurveIntersectAxis(bool checked)
         checked, Tool::CurveIntersectAxis, QStringLiteral("curve_intersect_axis_cursor.png"), tr("Select curve"),
         &MainWindow::ClosedDrawDialogWithApply<VToolCurveIntersectAxis>,
         &MainWindow::ApplyDrawDialog<VToolCurveIntersectAxis>);
+    LogPatternToolUsed(checked, QStringLiteral("Curve intersect axis tool"));
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -1598,6 +1658,7 @@ void MainWindow::ToolArcIntersectAxis(bool checked)
                                                      QStringLiteral("arc_intersect_axis_cursor.png"), tr("Select arc"),
                                                      &MainWindow::ClosedDrawDialogWithApply<VToolCurveIntersectAxis>,
                                                      &MainWindow::ApplyDrawDialog<VToolCurveIntersectAxis>);
+    LogPatternToolUsed(checked, QStringLiteral("Arc intersect axis tool"));
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -1608,6 +1669,7 @@ void MainWindow::ToolPointOfIntersectionArcs(bool checked)
         checked, Tool::PointOfIntersectionArcs, QStringLiteral("point_of_intersection_arcs_cursor.png"),
         tr("Select first an arc"), &MainWindow::ClosedDrawDialogWithApply<VToolPointOfIntersectionArcs>,
         &MainWindow::ApplyDrawDialog<VToolPointOfIntersectionArcs>);
+    LogPatternToolUsed(checked, QStringLiteral("Point of intersection arcs tool"));
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -1618,6 +1680,7 @@ void MainWindow::ToolPointOfIntersectionCircles(bool checked)
         checked, Tool::PointOfIntersectionCircles, QStringLiteral("point_of_intersection_circles_cursor.png"),
         tr("Select first circle center"), &MainWindow::ClosedDrawDialogWithApply<VToolPointOfIntersectionCircles>,
         &MainWindow::ApplyDrawDialog<VToolPointOfIntersectionCircles>);
+    LogPatternToolUsed(checked, QStringLiteral("Point of intersection circles tool"));
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -1628,6 +1691,7 @@ void MainWindow::ToolPointOfIntersectionCurves(bool checked)
         checked, Tool::PointOfIntersectionCurves, QStringLiteral("intersection_curves_cursor.png"),
         tr("Select first curve"), &MainWindow::ClosedDrawDialogWithApply<VToolPointOfIntersectionCurves>,
         &MainWindow::ApplyDrawDialog<VToolPointOfIntersectionCurves>);
+    LogPatternToolUsed(checked, QStringLiteral("Point of intersection curves tool"));
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -1638,6 +1702,7 @@ void MainWindow::ToolPointFromCircleAndTangent(bool checked)
         checked, Tool::PointFromCircleAndTangent, QStringLiteral("point_from_circle_and_tangent_cursor.png"),
         tr("Select point on tangent"), &MainWindow::ClosedDrawDialogWithApply<VToolPointFromCircleAndTangent>,
         &MainWindow::ApplyDrawDialog<VToolPointFromCircleAndTangent>);
+    LogPatternToolUsed(checked, QStringLiteral("Point from circle and tangent tool"));
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -1648,6 +1713,7 @@ void MainWindow::ToolPointFromArcAndTangent(bool checked)
         checked, Tool::PointFromArcAndTangent, QStringLiteral("point_from_arc_and_tangent_cursor.png"),
         tr("Select point on tangent"), &MainWindow::ClosedDrawDialogWithApply<VToolPointFromArcAndTangent>,
         &MainWindow::ApplyDrawDialog<VToolPointFromArcAndTangent>);
+    LogPatternToolUsed(checked, QStringLiteral("Point from arc and tangent tool"));
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -1658,6 +1724,7 @@ void MainWindow::ToolArcWithLength(bool checked)
         checked, Tool::ArcWithLength, QStringLiteral("arc_with_length_cursor.png"),
         tr("Select point of the center of the arc"), &MainWindow::ClosedDrawDialogWithApply<VToolArcWithLength>,
         &MainWindow::ApplyDrawDialog<VToolArcWithLength>);
+    LogPatternToolUsed(checked, QStringLiteral("Arc with length tool"));
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -1667,6 +1734,7 @@ void MainWindow::ToolTrueDarts(bool checked)
     SetToolButtonWithApply<DialogTrueDarts>(
         checked, Tool::TrueDarts, QStringLiteral("true_darts_cursor.png"), tr("Select the first base line point"),
         &MainWindow::ClosedDrawDialogWithApply<VToolTrueDarts>, &MainWindow::ApplyDrawDialog<VToolTrueDarts>);
+    LogPatternToolUsed(checked, QStringLiteral("True darts tool"));
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -1678,6 +1746,7 @@ void MainWindow::ToolInsertNode(bool checked)
                                 .arg(VModifierKey::Control(), VModifierKey::EnterKey());
     SetToolButton<DialogInsertNode>(checked, Tool::InsertNode, QStringLiteral("insert_node_cursor.png"), tooltip,
                                     &MainWindow::ClosedDialogInsertNode);
+    LogPatternToolUsed(checked, QStringLiteral("Insert node tool"));
 }
 
 //---------------------------------------------------------------------------------------------------------------------

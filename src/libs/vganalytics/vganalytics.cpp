@@ -291,6 +291,21 @@ void VGAnalytics::SendAppCloseEvent(qint64 engagementTimeMsec)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+void VGAnalytics::SendPatternToolUsedEvent(qint64 engagementTimeMsec, const QString &toolName)
+{
+    QHash<QString, QJsonValue> params{
+        // {QStringLiteral("category"), ""},
+        // In order for user activity to display in standard reports like Realtime, engagement_time_msec and session_id
+        // must be supplied as part of the params for an event.
+        // https://developers.google.com/analytics/devguides/collection/protocol/ga4/sending-events?client_type=gtag#optional_parameters_for_reports
+        {QStringLiteral("engagement_time_msec"), engagementTimeMsec},
+        {QStringLiteral("tool_name"), toolName},
+    };
+
+    SendEvent(QStringLiteral("vapp_pattern_tool_used"), params);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 /**
  * A query for a POST message will be created to report this event. The
  * created query will be stored in a message queue.
