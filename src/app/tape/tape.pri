@@ -15,7 +15,6 @@ SOURCES  += \
     $$PWD/vlitepattern.cpp \
     $$PWD/dialogs/dialogtapepreferences.cpp \
     $$PWD/dialogs/configpages/tapepreferencesconfigurationpage.cpp \
-    $$PWD/dialogs/configpages/tapepreferencespathpage.cpp \
     $$PWD/vtapesettings.cpp \
     $$PWD/dialogs/dialogsetupmultisize.cpp
 
@@ -36,7 +35,6 @@ HEADERS  += \
     $$PWD/vlitepattern.h \
     $$PWD/dialogs/dialogtapepreferences.h \
     $$PWD/dialogs/configpages/tapepreferencesconfigurationpage.h \
-    $$PWD/dialogs/configpages/tapepreferencespathpage.h \
     $$PWD/vtapesettings.h \
     $$PWD/dialogs/dialogsetupmultisize.h
 
@@ -51,5 +49,4 @@ FORMS    += \
     $$PWD/dialogs/dialogmdatabase.ui \
     $$PWD/dialogs/dialogtapepreferences.ui \
     $$PWD/dialogs/configpages/tapepreferencesconfigurationpage.ui \
-    $$PWD/dialogs/configpages/tapepreferencespathpage.ui \
     $$PWD/dialogs/dialogsetupmultisize.ui

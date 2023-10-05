@@ -237,7 +237,7 @@ private:
     auto EvalFormula(const QString &formula, bool fromUser, VContainer *data, QLabel *label, bool specialUnits) -> bool;
     void ShowMDiagram(const QString &name);
 
-    void Open(const QString &pathTo, const QString &filter);
+    auto Open(const QString &pathTo, const QString &filter) -> QString;
     void UpdatePadlock(bool ro);
     void MeasurementGUI();
     void Controls();

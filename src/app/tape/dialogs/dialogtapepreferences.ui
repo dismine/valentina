@@ -70,21 +70,6 @@
          <set>ItemIsSelectable|ItemIsUserCheckable|ItemIsEnabled</set>
         </property>
        </item>
-       <item>
-        <property name="text">
-         <string>Paths</string>
-        </property>
-        <property name="textAlignment">
-         <set>AlignCenter</set>
-        </property>
-        <property name="icon">
-         <iconset resource="../../../libs/vmisc/share/resources/icon.qrc">
-          <normaloff>:/icon/path_config.png</normaloff>:/icon/path_config.png</iconset>
-        </property>
-        <property name="flags">
-         <set>ItemIsSelectable|ItemIsUserCheckable|ItemIsEnabled</set>
-        </property>
-       </item>
       </widget>
      </item>
      <item>

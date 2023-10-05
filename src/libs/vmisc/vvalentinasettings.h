@@ -52,16 +52,12 @@ public:
                        QObject *parent = nullptr);
     VValentinaSettings(const QString &fileName, Format format, QObject *parent = nullptr);
 
-    static auto PrepareLabelTemplates(const QString &currentPath) -> QString;
-
     auto GetLabelLanguage() const -> QString;
     void SetLabelLanguage(const QString &value);
 
-    static auto GetDefPathLayout() -> QString;
     auto GetPathLayout() const -> QString;
     void SetPathLayout(const QString &value);
 
-    static auto GetDefPathLabelTemplate() -> QString;
     auto GetPathLabelTemplate() const -> QString;
     void SetPathLabelTemplate(const QString &value);
 

@@ -130,13 +130,8 @@ DialogSaveLayout::DialogSaveLayout(int count, Draw mode, const QString &fileName
     connect(ui->pushButtonBrowse, &QPushButton::clicked, this,
             [this]()
             {
-                const QString dirPath = VAbstractValApplication::VApp()->ValentinaSettings()->GetPathLayout();
-                bool usedNotExistedDir = false;
-                QDir directory(dirPath);
-                if (not directory.exists())
-                {
-                    usedNotExistedDir = directory.mkpath(QChar('.'));
-                }
+                VValentinaSettings *settings = VAbstractValApplication::VApp()->ValentinaSettings();
+                const QString dirPath = settings->GetPathLayout();
 
                 const QString dir = QFileDialog::getExistingDirectory(
                     this, tr("Select folder"), dirPath,
@@ -145,12 +140,8 @@ DialogSaveLayout::DialogSaveLayout(int count, Draw mode, const QString &fileName
                 if (not dir.isEmpty())
                 { // If paths equal the signal will not be called, we will do this manually
                     dir == ui->lineEditPath->text() ? PathChanged(dir) : ui->lineEditPath->setText(dir);
-                }
 
-                if (usedNotExistedDir)
-                {
-                    QDir directory(dirPath);
-                    directory.rmpath(QChar('.'));
+                    settings->SetPathLayout(dir);
                 }
             });
     connect(ui->lineEditPath, &QLineEdit::textChanged, this, &DialogSaveLayout::PathChanged);
@@ -396,6 +387,12 @@ void DialogSaveLayout::Save()
             break;
         }
     }
+
+    if (QFile::exists(Path()))
+    {
+        VAbstractValApplication::VApp()->ValentinaSettings()->SetPathLayout(Path());
+    }
+
     accept();
 }
 

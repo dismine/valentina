@@ -54,6 +54,7 @@
 #include <chrono>
 #include <memory>
 #include <thread>
+#include <QFileInfo>
 
 #include "../ifc/exception/vexceptionconversionerror.h"
 #include "../ifc/exception/vexceptionemptyparameter.h"
@@ -2008,17 +2009,11 @@ void MainWindow::ScaleChanged(qreal scale)
 //---------------------------------------------------------------------------------------------------------------------
 void MainWindow::LoadIndividual()
 {
+    VValentinaSettings *settings = VAbstractValApplication::VApp()->ValentinaSettings();
     const QString filter = tr("Individual measurements") + QStringLiteral(" (*.vit);;") + tr("Multisize measurements") +
                            QStringLiteral(" (*.vst)");
     // Use standard path to individual measurements
-    const QString path = VAbstractValApplication::VApp()->ValentinaSettings()->GetPathIndividualMeasurements();
-
-    bool usedNotExistedDir = false;
-    QDir directory(path);
-    if (not directory.exists())
-    {
-        usedNotExistedDir = directory.mkpath(QChar('.'));
-    }
+    const QString path = settings->GetPathIndividualMeasurements();
 
     const QString mPath = QFileDialog::getOpenFileName(this, tr("Open file"), path, filter, nullptr,
                                                        VAbstractApplication::VApp()->NativeFileDialog());
@@ -2041,12 +2036,8 @@ void MainWindow::LoadIndividual()
 
             UpdateWindowTitle();
         }
-    }
 
-    if (usedNotExistedDir)
-    {
-        QDir directory(path);
-        directory.rmpath(QChar('.'));
+        settings->SetPathIndividualMeasurements(QFileInfo(mPath).absolutePath());
     }
 }
 
@@ -2057,29 +2048,32 @@ void MainWindow::LoadMultisize()
                            QStringLiteral("(*.vit)");
     // Use standard path to multisize measurements
     QString path = VAbstractValApplication::VApp()->ValentinaSettings()->GetPathMultisizeMeasurements();
-    path = VCommonSettings::PrepareMultisizeTables(path);
     const QString mPath = QFileDialog::getOpenFileName(this, tr("Open file"), path, filter, nullptr,
                                                        VAbstractApplication::VApp()->NativeFileDialog());
 
-    if (not mPath.isEmpty())
+    if (mPath.isEmpty())
     {
-        if (LoadMeasurements(mPath))
-        {
-            if (not doc->MPath().isEmpty())
-            {
-                m_watcher->removePath(AbsoluteMPath(VAbstractValApplication::VApp()->GetPatternPath(), doc->MPath()));
-            }
-            ui->actionUnloadMeasurements->setEnabled(true);
-            doc->SetMPath(RelativeMPath(VAbstractValApplication::VApp()->GetPatternPath(), mPath));
-            m_watcher->addPath(mPath);
-            PatternChangesWereSaved(false);
-            ui->actionEditCurrent->setEnabled(true);
-            statusBar()->showMessage(tr("Measurements loaded"), 5000);
-            doc->LiteParseTree(Document::FullLiteParse);
-
-            UpdateWindowTitle();
-        }
+        return;
     }
+
+    if (!LoadMeasurements(mPath))
+    {
+        return;
+    }
+
+    if (not doc->MPath().isEmpty())
+    {
+        m_watcher->removePath(AbsoluteMPath(VAbstractValApplication::VApp()->GetPatternPath(), doc->MPath()));
+    }
+    ui->actionUnloadMeasurements->setEnabled(true);
+    doc->SetMPath(RelativeMPath(VAbstractValApplication::VApp()->GetPatternPath(), mPath));
+    m_watcher->addPath(mPath);
+    PatternChangesWereSaved(false);
+    ui->actionEditCurrent->setEnabled(true);
+    statusBar()->showMessage(tr("Measurements loaded"), 5000);
+    doc->LiteParseTree(Document::FullLiteParse);
+
+    UpdateWindowTitle();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -4082,42 +4076,19 @@ void MainWindow::ActionLayout(bool checked)
  */
 auto MainWindow::on_actionSaveAs_triggered() -> bool
 {
-    QString dir;
-    if (VAbstractValApplication::VApp()->GetPatternPath().isEmpty())
-    {
-        dir = VAbstractValApplication::VApp()->ValentinaSettings()->GetPathPattern();
-    }
-    else
-    {
-        dir = QFileInfo(VAbstractValApplication::VApp()->GetPatternPath()).absolutePath();
-    }
-
-    bool usedNotExistedDir = false;
-    QDir directory(dir);
-    if (not directory.exists())
-    {
-        usedNotExistedDir = directory.mkpath(QChar('.'));
-    }
+    VValentinaSettings *settings = VAbstractValApplication::VApp()->ValentinaSettings();
+    QString patternPath = VAbstractValApplication::VApp()->GetPatternPath();
+    QString dir = patternPath.isEmpty() ? settings->GetPathPattern() : QFileInfo(patternPath).absolutePath();
 
     QString newFileName = tr("pattern") + QStringLiteral(".val");
-    if (not VAbstractValApplication::VApp()->GetPatternPath().isEmpty())
+    if (not patternPath.isEmpty())
     {
-        newFileName = StrippedName(VAbstractValApplication::VApp()->GetPatternPath());
+        newFileName = StrippedName(patternPath);
     }
 
     QString filters(tr("Pattern files") + QStringLiteral("(*.val)"));
     QString fileName = QFileDialog::getSaveFileName(this, tr("Save as"), dir + QChar('/') + newFileName, filters,
                                                     nullptr, VAbstractApplication::VApp()->NativeFileDialog());
-
-    auto RemoveTempDir = qScopeGuard(
-        [usedNotExistedDir, dir]()
-        {
-            if (usedNotExistedDir)
-            {
-                QDir directory(dir);
-                directory.rmpath(QChar('.'));
-            }
-        });
 
     if (fileName.isEmpty())
     {
@@ -4130,7 +4101,12 @@ auto MainWindow::on_actionSaveAs_triggered() -> bool
         fileName += QLatin1String(".val");
     }
 
-    if (f.exists() && VAbstractValApplication::VApp()->GetPatternPath() != fileName)
+    if (patternPath.isEmpty())
+    {
+        settings->SetPathPattern(QFileInfo(fileName).absolutePath());
+    }
+
+    if (f.exists() && patternPath != fileName)
     {
         // Temporary try to lock the file before saving
         // Also help to rewite current read-only pattern
@@ -4294,25 +4270,10 @@ void MainWindow::on_actionUpdateManualLayout_triggered()
 {
     const QString filter(tr("Manual layout files") + QStringLiteral(" (*.vlt)"));
 
+    VValentinaSettings *settings = VAbstractValApplication::VApp()->ValentinaSettings();
+
     // Use standard path to manual layouts
-    const QString path = VAbstractValApplication::VApp()->ValentinaSettings()->GetPathManualLayouts();
-
-    bool usedNotExistedDir = false;
-    QDir directory(path);
-    if (not directory.exists())
-    {
-        usedNotExistedDir = directory.mkpath(QChar('.'));
-    }
-
-    auto RemoveUnsuded = qScopeGuard(
-        [usedNotExistedDir, path]()
-        {
-            if (usedNotExistedDir)
-            {
-                QDir directory(path);
-                directory.rmpath(QChar('.'));
-            }
-        });
+    const QString path = settings->GetPathManualLayouts();
 
     const QString filePath = QFileDialog::getOpenFileName(this, tr("Select manual layout"), path, filter, nullptr);
 
@@ -4320,6 +4281,8 @@ void MainWindow::on_actionUpdateManualLayout_triggered()
     {
         return;
     }
+
+    settings->SetPathManualLayouts(QFileInfo(filePath).absolutePath());
 
     QTemporaryFile rldFile(QDir::tempPath() + "/puzzle.rld.XXXXXX");
     rldFile.setAutoRemove(false);
@@ -6848,145 +6811,132 @@ auto MainWindow::CheckPathToMeasurements(const QString &patternPath, const QStri
 
     auto FindLocation = [this](const QString &filter, const QString &dirPath, const QString &selectedName)
     {
-        VCommonSettings::PrepareMultisizeTables(VCommonSettings::GetDefPathMultisizeMeasurements());
-
-        bool usedNotExistedDir = false;
-        QDir directory(dirPath);
-        if (not directory.exists())
-        {
-            usedNotExistedDir = directory.mkpath(QChar('.'));
-        }
-
-        QString mPath;
-
         QFileDialog dialog(this, tr("Open file"), dirPath, filter);
         dialog.selectFile(selectedName);
         dialog.setFileMode(QFileDialog::ExistingFile);
         dialog.setOption(QFileDialog::DontUseNativeDialog,
                          VAbstractApplication::VApp()->Settings()->IsDontUseNativeDialog());
+
+        QString mPath;
         if (dialog.exec() == QDialog::Accepted)
         {
             mPath = dialog.selectedFiles().value(0);
-        }
-
-        if (usedNotExistedDir)
-        {
-            QDir(dirPath).rmpath(QChar('.'));
         }
 
         return mPath;
     };
 
     QFileInfo table(path);
-    if (not table.exists())
+    if (table.exists())
     {
-        if (not VApplication::IsGUIMode())
-        {
-            return {}; // console mode doesn't support fixing path to a measurement file
-        }
+        return path;
+    }
 
-        const QString text = tr("The measurements file <br/><br/> <b>%1</b> <br/><br/> could not be found. Do you "
-                                "want to update the file location?")
-                                 .arg(path);
-        QMessageBox::StandardButton res = QMessageBox::question(this, tr("Loading measurements file"), text,
-                                                                QMessageBox::Yes | QMessageBox::No, QMessageBox::Yes);
-        if (res == QMessageBox::No)
-        {
-            return {};
-        }
+    if (not VApplication::IsGUIMode())
+    {
+        return {}; // console mode doesn't support fixing path to a measurement file
+    }
 
-        MeasurementsType patternType;
-        if (table.suffix() == QLatin1String("vst"))
-        {
-            patternType = MeasurementsType::Multisize;
-        }
-        else
-        {
-            patternType = MeasurementsType::Individual; // or Unknown
-        }
+    const QString text = tr("The measurements file <br/><br/> <b>%1</b> <br/><br/> could not be found. Do you "
+                            "want to update the file location?")
+                             .arg(path);
+    QMessageBox::StandardButton res = QMessageBox::question(this, tr("Loading measurements file"), text,
+                                                            QMessageBox::Yes | QMessageBox::No, QMessageBox::Yes);
+    if (res == QMessageBox::No)
+    {
+        return {};
+    }
 
-        auto DirPath = [patternPath, table](const QString &defPath, QString &selectedName)
-        {
-            QString dirPath;
-            const QDir patternDir = QFileInfo(patternPath).absoluteDir();
-            QString measurements = table.fileName();
-            if (patternDir.exists(measurements))
-            {
-                selectedName = measurements;
-                dirPath = patternDir.absolutePath();
-            }
-            else if (patternDir.exists(measurements.replace(' ', '_')))
-            {
-                selectedName = measurements.replace(' ', '_');
-                dirPath = patternDir.absolutePath();
-            }
-            else
-            {
-                dirPath = defPath;
-            }
-            return dirPath;
-        };
+    MeasurementsType patternType;
+    if (table.suffix() == QLatin1String("vst"))
+    {
+        patternType = MeasurementsType::Multisize;
+    }
+    else
+    {
+        patternType = MeasurementsType::Individual; // or Unknown
+    }
 
-        QString mPath;
-        if (patternType == MeasurementsType::Multisize)
+    auto DirPath = [patternPath, table](const QString &defPath, QString &selectedName)
+    {
+        QString dirPath;
+        const QDir patternDir = QFileInfo(patternPath).absoluteDir();
+        QString measurements = table.fileName();
+        if (patternDir.exists(measurements))
         {
-            const QString filter = tr("Multisize measurements") + QStringLiteral(" (*.vst);;") +
-                                   tr("Individual measurements") + QStringLiteral(" (*.vit)");
-            // Use standard path to multisize measurements
-            QString selectedName;
-            const QString dirPath = DirPath(
-                VAbstractValApplication::VApp()->ValentinaSettings()->GetPathMultisizeMeasurements(), selectedName);
-            mPath = FindLocation(filter, dirPath, selectedName);
+            selectedName = measurements;
+            dirPath = patternDir.absolutePath();
+        }
+        else if (patternDir.exists(measurements.replace(' ', '_')))
+        {
+            selectedName = measurements.replace(' ', '_');
+            dirPath = patternDir.absolutePath();
         }
         else
         {
-            const QString filter = tr("Individual measurements") + QStringLiteral(" (*.vit);;") +
-                                   tr("Multisize measurements") + QStringLiteral(" (*.vst)");
-            // Use standard path to individual measurements
-            QString selectedName;
-            const QString dirPath = DirPath(
-                VAbstractValApplication::VApp()->ValentinaSettings()->GetPathIndividualMeasurements(), selectedName);
-            mPath = FindLocation(filter, dirPath, selectedName);
+            dirPath = defPath;
         }
+        return dirPath;
+    };
 
-        if (mPath.isEmpty())
-        {
-            return mPath;
-        }
+    QString mPath;
+    if (patternType == MeasurementsType::Multisize)
+    {
+        const QString filter = tr("Multisize measurements") + QStringLiteral(" (*.vst);;") +
+                               tr("Individual measurements") + QStringLiteral(" (*.vit)");
+        // Use standard path to multisize measurements
+        QString selectedName;
+        const QString dirPath =
+            DirPath(VAbstractValApplication::VApp()->ValentinaSettings()->GetPathMultisizeMeasurements(), selectedName);
+        mPath = FindLocation(filter, dirPath, selectedName);
+    }
+    else
+    {
+        const QString filter = tr("Individual measurements") + QStringLiteral(" (*.vit);;") +
+                               tr("Multisize measurements") + QStringLiteral(" (*.vst)");
+        // Use standard path to individual measurements
+        QString selectedName;
+        const QString dirPath = DirPath(
+            VAbstractValApplication::VApp()->ValentinaSettings()->GetPathIndividualMeasurements(), selectedName);
+        mPath = FindLocation(filter, dirPath, selectedName);
+    }
 
-        QScopedPointer<VMeasurements> m(new VMeasurements(pattern));
-        m->setXMLContent(mPath);
-
-        patternType = m->Type();
-
-        if (patternType == MeasurementsType::Unknown)
-        {
-            throw VException(tr("Measurement file has unknown format."));
-        }
-
-        if (patternType == MeasurementsType::Multisize)
-        {
-            VVSTConverter converter(mPath);
-            m->setXMLContent(converter.Convert()); // Read again after conversion
-        }
-        else
-        {
-            VVITConverter converter(mPath);
-            m->setXMLContent(converter.Convert()); // Read again after conversion
-        }
-
-        if (not m->IsDefinedKnownNamesValid())
-        {
-            throw VException(tr("Measurement file contains invalid known measurement(s)."));
-        }
-
-        CheckRequiredMeasurements(m.data());
-
-        VAbstractValApplication::VApp()->SetMeasurementsType(patternType);
-        doc->SetMPath(RelativeMPath(patternPath, mPath));
+    if (mPath.isEmpty())
+    {
         return mPath;
     }
-    return path;
+
+    QScopedPointer<VMeasurements> m(new VMeasurements(pattern));
+    m->setXMLContent(mPath);
+
+    patternType = m->Type();
+
+    if (patternType == MeasurementsType::Unknown)
+    {
+        throw VException(tr("Measurement file has unknown format."));
+    }
+
+    if (patternType == MeasurementsType::Multisize)
+    {
+        VVSTConverter converter(mPath);
+        m->setXMLContent(converter.Convert()); // Read again after conversion
+    }
+    else
+    {
+        VVITConverter converter(mPath);
+        m->setXMLContent(converter.Convert()); // Read again after conversion
+    }
+
+    if (not m->IsDefinedKnownNamesValid())
+    {
+        throw VException(tr("Measurement file contains invalid known measurement(s)."));
+    }
+
+    CheckRequiredMeasurements(m.data());
+
+    VAbstractValApplication::VApp()->SetMeasurementsType(patternType);
+    doc->SetMPath(RelativeMPath(patternPath, mPath));
+    return mPath;
 }
 
 //---------------------------------------------------------------------------------------------------------------------

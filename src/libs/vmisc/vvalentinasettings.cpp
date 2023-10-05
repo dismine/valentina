@@ -205,12 +205,6 @@ VValentinaSettings::VValentinaSettings(const QString &fileName, QSettings::Forma
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-auto VValentinaSettings::PrepareLabelTemplates(const QString &currentPath) -> QString
-{
-    return PrepareStandardFiles(currentPath, LabelTemplatesPath(), GetDefPathLabelTemplate());
-}
-
-//---------------------------------------------------------------------------------------------------------------------
 auto VValentinaSettings::GetLabelLanguage() const -> QString
 {
     return value(*settingConfigurationLabelLanguage, QLocale().bcp47Name()).toString();
@@ -223,16 +217,10 @@ void VValentinaSettings::SetLabelLanguage(const QString &value)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-auto VValentinaSettings::GetDefPathLayout() -> QString
-{
-    return QDir::homePath() + QStringLiteral("/valentina/") + tr("layouts");
-}
-
-//---------------------------------------------------------------------------------------------------------------------
 auto VValentinaSettings::GetPathLayout() const -> QString
 {
     QSettings settings(this->format(), this->scope(), this->organizationName(), this->applicationName());
-    return settings.value(*settingPathsLayout, GetDefPathLayout()).toString();
+    return settings.value(*settingPathsLayout, QDir::homePath()).toString();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -244,15 +232,9 @@ void VValentinaSettings::SetPathLayout(const QString &value)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-auto VValentinaSettings::GetDefPathLabelTemplate() -> QString
-{
-    return QDir::homePath() + QStringLiteral("/valentina/") + tr("label templates");
-}
-
-//---------------------------------------------------------------------------------------------------------------------
 auto VValentinaSettings::GetPathLabelTemplate() const -> QString
 {
-    return value(*settingPathsLabelTemplate, GetDefPathLabelTemplate()).toString();
+    return value(*settingPathsLabelTemplate, QDir::homePath()).toString();
 }
 
 //---------------------------------------------------------------------------------------------------------------------

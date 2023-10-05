@@ -265,89 +265,6 @@ Q_GLOBAL_STATIC_WITH_ARGS(const QString, commonIniFilename, (QLatin1String("comm
 const QString VCommonSettings::unixStandardSharePath = QStringLiteral(PKGDATADIR); // NOLINT(cert-err58-cpp)
 #endif
 
-namespace
-{
-//---------------------------------------------------------------------------------------------------------------------
-void SymlinkCopyDirRecursive(const QString &fromDir, const QString &toDir, bool replaceOnConflit)
-{
-    QDir dir;
-    dir.setPath(fromDir);
-
-    const QStringList list = dir.entryList(QDir::Files);
-    for (const QString &copyFile : list)
-    {
-        const QString from = fromDir + QDir::separator() + copyFile;
-        QString to = toDir + QDir::separator() + copyFile;
-
-#ifdef Q_OS_WIN
-        {
-            // To fix issue #702 check each not symlink if it is actually broken symlink.
-            // Also trying to mimic Unix symlink. If a file eaxists do not create a symlink and remove it if exists.
-            QFile fileTo(to);
-            if (fileTo.exists())
-            {
-                if (not fileTo.rename(to + QLatin1String(".lnk")))
-                {
-                    QFile::remove(to + QLatin1String(".lnk"));
-                    fileTo.rename(to + QLatin1String(".lnk"));
-                }
-
-                QFileInfo info(to + QLatin1String(".lnk"));
-                if (info.symLinkTarget().isEmpty())
-                {
-                    fileTo.copy(to);
-                    fileTo.remove();
-                    continue; // The file already exists, skip creating shortcut
-                }
-            }
-        }
-
-        to = to + QLatin1String(".lnk");
-#endif
-
-        QFileInfo fileTo(to);
-        if (not fileTo.isSymLink() && fileTo.exists())
-        {
-            if (replaceOnConflit)
-            {
-                QFile::remove(to);
-            }
-            else
-            {
-                continue;
-            }
-        }
-        else if (fileTo.isSymLink())
-        {
-            if (not fileTo.exists() || replaceOnConflit)
-            { // automatically fix broken symlink
-                QFile::remove(to);
-            }
-            else
-            {
-                continue;
-            }
-        }
-
-        QFile::link(from, to);
-    }
-
-    const QStringList dirList = dir.entryList(QDir::Dirs | QDir::NoDotAndDotDot);
-    for (const QString &copyDir : dirList)
-    {
-        const QString from = fromDir + QDir::separator() + copyDir;
-        const QString to = toDir + QDir::separator() + copyDir;
-
-        if (not dir.mkpath(to))
-        {
-            return;
-        }
-
-        SymlinkCopyDirRecursive(from, to, replaceOnConflit);
-    }
-}
-} // namespace
-
 QT_WARNING_POP
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -361,64 +278,6 @@ VCommonSettings::VCommonSettings(Format format, Scope scope, const QString &orga
 VCommonSettings::VCommonSettings(const QString &fileName, QSettings::Format format, QObject *parent)
   : QSettings(fileName, format, parent)
 {
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-auto VCommonSettings::SharePath(const QString &shareItem) -> QString
-{
-#ifdef Q_OS_WIN
-    return QCoreApplication::applicationDirPath() + shareItem;
-#elif defined(Q_OS_MAC)
-    QDir dirBundle(QCoreApplication::applicationDirPath() + QStringLiteral("/../Resources") + shareItem);
-    if (dirBundle.exists())
-    {
-        return dirBundle.absolutePath();
-    }
-
-    QDir appDir = QDir(qApp->applicationDirPath());
-    appDir.cdUp();
-    appDir.cdUp();
-    appDir.cdUp();
-    QDir dir(appDir.absolutePath() + shareItem);
-    if (dir.exists())
-    {
-        return dir.absolutePath();
-    }
-
-    return VCommonSettings::unixStandardSharePath + shareItem;
-#else // Unix
-    QDir dir(QCoreApplication::applicationDirPath() + shareItem);
-    if (dir.exists())
-    {
-        return dir.absolutePath();
-    }
-
-    return VCommonSettings::unixStandardSharePath + shareItem;
-#endif
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-auto VCommonSettings::MultisizeTablesPath() -> QString
-{
-    return SharePath(QStringLiteral("/tables/multisize"));
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-auto VCommonSettings::StandardTemplatesPath() -> QString
-{
-    return SharePath(QStringLiteral("/tables/templates"));
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-auto VCommonSettings::LabelTemplatesPath() -> QString
-{
-    return SharePath(QStringLiteral("/labels"));
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-auto VCommonSettings::PrepareMultisizeTables(const QString &currentPath) -> QString
-{
-    return PrepareStandardFiles(currentPath, MultisizeTablesPath(), GetDefPathMultisizeMeasurements());
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -438,17 +297,10 @@ auto VCommonSettings::CastToLayoutExportFormat(qint8 f) -> qint8
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-auto VCommonSettings::GetDefPathIndividualMeasurements() -> QString
-{
-    return QDir::homePath() + QStringLiteral("/valentina/") + tr("measurements") + QStringLiteral("/") +
-           tr("individual");
-}
-
-//---------------------------------------------------------------------------------------------------------------------
 auto VCommonSettings::GetPathIndividualMeasurements() const -> QString
 {
     QSettings settings(this->format(), this->scope(), this->organizationName(), *commonIniFilename);
-    return settings.value(*settingPathsIndividualMeasurements, GetDefPathIndividualMeasurements()).toString();
+    return settings.value(*settingPathsIndividualMeasurements, QDir::homePath()).toString();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -460,16 +312,10 @@ void VCommonSettings::SetPathIndividualMeasurements(const QString &value)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-auto VCommonSettings::GetDefPathMultisizeMeasurements() -> QString
-{
-    return QDir::homePath() + QStringLiteral("/valentina/") + tr("measurements") + QChar('/') + tr("multisize");
-}
-
-//---------------------------------------------------------------------------------------------------------------------
 auto VCommonSettings::GetPathMultisizeMeasurements() const -> QString
 {
     QSettings settings(this->format(), this->scope(), this->organizationName(), *commonIniFilename);
-    return settings.value(*settingPathsMultisizeMeasurements, GetDefPathMultisizeMeasurements()).toString();
+    return settings.value(*settingPathsMultisizeMeasurements, QDir::homePath()).toString();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -481,16 +327,10 @@ void VCommonSettings::SetPathMultisizeMeasurements(const QString &value)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-auto VCommonSettings::GetDefPathPattern() -> QString
-{
-    return QDir::homePath() + QStringLiteral("/valentina/") + tr("patterns");
-}
-
-//---------------------------------------------------------------------------------------------------------------------
 auto VCommonSettings::GetPathPattern() const -> QString
 {
     QSettings settings(this->format(), this->scope(), this->organizationName(), *commonIniFilename);
-    return settings.value(*settingPathsPattern, GetDefPathPattern()).toString();
+    return settings.value(*settingPathsPattern, QDir::homePath()).toString();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -502,16 +342,10 @@ void VCommonSettings::SetPathPattern(const QString &value)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-auto VCommonSettings::GetDefPathManualLayouts() -> QString
-{
-    return QDir::homePath() + QStringLiteral("/valentina/") + tr("manual layouts");
-}
-
-//---------------------------------------------------------------------------------------------------------------------
 auto VCommonSettings::GetPathManualLayouts() const -> QString
 {
     QSettings settings(this->format(), this->scope(), this->organizationName(), *commonIniFilename);
-    return settings.value(*settingPathsManualLayouts, GetDefPathManualLayouts()).toString();
+    return settings.value(*settingPathsManualLayouts, QDir::homePath()).toString();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -525,7 +359,7 @@ void VCommonSettings::SetPathManualLayouts(const QString &value)
 //---------------------------------------------------------------------------------------------------------------------
 auto VCommonSettings::GetDefPathSVGFonts() -> QString
 {
-    return QDir::homePath() + QStringLiteral("/valentina/") + tr("svg fonts");
+    return QDir::homePath() + QStringLiteral("/valentina/svg fonts");
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -551,7 +385,7 @@ void VCommonSettings::SetPathSVGFonts(const QString &value)
 //---------------------------------------------------------------------------------------------------------------------
 auto VCommonSettings::GetDefPathFontCorrections() -> QString
 {
-    return QDir::homePath() + QStringLiteral("/valentina/") + tr("font corrections");
+    return QDir::homePath() + QStringLiteral("/valentina/font corrections");
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -1796,22 +1630,4 @@ void VCommonSettings::SetClientID(const QString &clientID)
     QSettings settings(this->format(), this->scope(), this->organizationName(), *commonIniFilename);
     settings.setValue(*settingsStatistictClientID, clientID);
     settings.sync();
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-auto VCommonSettings::PrepareStandardFiles(const QString &currentPath, const QString &standardPath,
-                                           const QString &defPath) -> QString
-{
-    QDir standardPathDir(standardPath);
-    QDir currentPathDir(currentPath);
-    if ((currentPath == defPath || not currentPathDir.exists()) && standardPathDir.exists())
-    {
-        const QDir localdata(defPath);
-        if (localdata.mkpath(QChar('.')))
-        {
-            SymlinkCopyDirRecursive(standardPath, defPath, false);
-        }
-        return defPath;
-    }
-    return currentPath;
 }

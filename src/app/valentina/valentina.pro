@@ -133,9 +133,6 @@ message(Examples: $$[QT_INSTALL_EXAMPLES])
 # Path to recource file.
 win32:RC_FILE = share/resources/valentina.rc
 
-# INSTALL_MULTISIZE_MEASUREMENTS and INSTALL_STANDARD_TEMPLATES inside tables.pri
-include(../tables.pri)
-
 include(../svgfont.pri)
 
 win32 {
@@ -236,17 +233,9 @@ unix{
         translations.path = $$PKGDATADIR/translations/
         translations.files = $$INSTALL_TRANSLATIONS
 
-        # Path to multisize measurement after installation
-        multisize.path = $$PKGDATADIR/tables/multisize/
-        multisize.files = $$INSTALL_MULTISIZE_MEASUREMENTS
-
         # Path to templates after installation
         templates.path = $$PKGDATADIR/tables/templates/
         templates.files = $$INSTALL_STANDARD_TEMPLATES
-
-        # Path to label templates after installation
-        label.path = $$PKGDATADIR/labels/
-        label.files = $$INSTALL_LABEL_TEMPLATES
 
         svgfonts.path = $$PKGDATADIR/svgfonts/
         svgfonts.files = $$INSTALL_SVG_FONTS
@@ -268,9 +257,7 @@ unix{
             hicolor_512_apps \
             hicolor_512_mimetypes \
             translations \
-            multisize \
             templates \
-            label \
             svgfonts
     }
     macx{
@@ -313,17 +300,9 @@ unix{
 
             QMAKE_INFO_PLIST = $$PWD/../../../dist/macx/valentina/Info.plist
 
-            # Copy to bundle multisize measurements files
-            multisize.path = $$RESOURCES_DIR/tables/multisize/
-            multisize.files = $$INSTALL_MULTISIZE_MEASUREMENTS
-
             # Copy to bundle templates files
             templates.path = $$RESOURCES_DIR/tables/templates/
             templates.files = $$INSTALL_STANDARD_TEMPLATES
-
-            # Path to label templates after installation
-            label.path = $$RESOURCES_DIR/labels/
-            label.files = $$INSTALL_LABEL_TEMPLATES
 
             svgfonts.path = $$RESOURCES_DIR/svgfonts/
             svgfonts.files = $$INSTALL_SVG_FONTS
@@ -340,8 +319,6 @@ unix{
 
             QMAKE_BUNDLE_DATA += \
                 templates \
-                multisize \
-                label \
                 svgfonts \
                 libraries \
                 tape \
@@ -442,17 +419,9 @@ win32:*g++* {
     package.CONFIG = no_check_exist
     INSTALLS += package
 
-    package_tables.path = $${OUT_PWD}/../../../package/valentina/tables/multisize
-    package_tables.files += $$INSTALL_MULTISIZE_MEASUREMENTS
-    INSTALLS += package_tables
-
     package_templates.path = $${OUT_PWD}/../../../package/valentina/tables/templates
     package_templates.files += $$INSTALL_STANDARD_TEMPLATES
     INSTALLS += package_templates
-
-    package_labels.path = $${OUT_PWD}/../../../package/valentina/labels
-    package_labels.files += $$INSTALL_LABEL_TEMPLATES
-    INSTALLS += package_labels
 
     package_svgfonts.path = $${OUT_PWD}/../../../package/valentina/svgfonts
     package_svgfonts.files += $$INSTALL_SVG_FONTS

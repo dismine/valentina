@@ -60,28 +60,17 @@ public:
     VCommonSettings(const QString &fileName, Format format, QObject *parent = nullptr);
     ~VCommonSettings() override = default;
 
-    static auto SharePath(const QString &shareItem) -> QString;
-    static auto MultisizeTablesPath() -> QString;
-    static auto StandardTemplatesPath() -> QString;
-    static auto LabelTemplatesPath() -> QString;
-
-    static auto PrepareMultisizeTables(const QString &currentPath) -> QString;
-
     static auto CastToLayoutExportFormat(qint8 f) -> qint8;
 
-    static auto GetDefPathIndividualMeasurements() -> QString;
     auto GetPathIndividualMeasurements() const -> QString;
     void SetPathIndividualMeasurements(const QString &value);
 
-    static auto GetDefPathMultisizeMeasurements() -> QString;
     auto GetPathMultisizeMeasurements() const -> QString;
     void SetPathMultisizeMeasurements(const QString &value);
 
-    static auto GetDefPathPattern() -> QString;
     auto GetPathPattern() const -> QString;
     void SetPathPattern(const QString &value);
 
-    static auto GetDefPathManualLayouts() -> QString;
     auto GetPathManualLayouts() const -> QString;
     void SetPathManualLayouts(const QString &value);
 
@@ -350,9 +339,6 @@ protected:
 
     template <class T>
     static auto ValueOrDef(const QSettings &settings, const QString &setting, const T &defValue) -> T;
-
-    static auto PrepareStandardFiles(const QString &currentPath, const QString &standardPath, const QString &defPath)
-        -> QString;
 
 private:
     Q_DISABLE_COPY_MOVE(VCommonSettings) // NOLINT

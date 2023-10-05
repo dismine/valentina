@@ -41,6 +41,7 @@
 #include <QtMath>
 #include <chrono>
 #include <thread>
+#include <QFileInfo>
 
 #include "../ifc/exception/vexception.h"
 #include "../ifc/xml/vlayoutconverter.h"
@@ -3437,24 +3438,13 @@ void VPMainWindow::on_actionOpen_triggered()
     // Use standard path to individual measurements
     const QString pathTo = VPApplication::VApp()->PuzzleSettings()->GetPathManualLayouts();
 
-    bool usedNotExistedDir = false;
-    QDir directory(pathTo);
-    if (not directory.exists())
-    {
-        usedNotExistedDir = directory.mkpath(QChar('.'));
-    }
-
     const QString mPath = QFileDialog::getOpenFileName(this, tr("Open file"), pathTo, filter, nullptr,
                                                        VAbstractApplication::VApp()->NativeFileDialog());
 
     if (not mPath.isEmpty())
     {
         VPApplication::VApp()->NewMainWindow()->LoadFile(mPath);
-    }
-
-    if (usedNotExistedDir)
-    {
-        QDir(pathTo).rmpath(QChar('.'));
+        VPApplication::VApp()->PuzzleSettings()->SetPathManualLayouts(QFileInfo(mPath).absolutePath());
     }
 }
 
@@ -3513,24 +3503,8 @@ auto VPMainWindow::on_actionSaveAs_triggered() -> bool
         dir = QFileInfo(curFile).absolutePath();
     }
 
-    bool usedNotExistedDir = false;
-    QDir directory(dir);
-    if (not directory.exists())
-    {
-        usedNotExistedDir = directory.mkpath(QChar('.'));
-    }
-
     QString fileName = QFileDialog::getSaveFileName(this, tr("Save as"), dir + QChar('/') + fName, filters, nullptr,
                                                     VAbstractApplication::VApp()->NativeFileDialog());
-
-    auto RemoveTempDir = qScopeGuard(
-        [usedNotExistedDir, dir]()
-        {
-            if (usedNotExistedDir)
-            {
-                QDir(dir).rmpath(QChar('.'));
-            }
-        });
 
     if (fileName.isEmpty())
     {
@@ -3541,6 +3515,11 @@ auto VPMainWindow::on_actionSaveAs_triggered() -> bool
     if (f.suffix().isEmpty() && f.suffix() != suffix)
     {
         fileName += QChar('.') + suffix;
+    }
+
+    if (curFile.isEmpty())
+    {
+        VPApplication::VApp()->PuzzleSettings()->SetPathManualLayouts(QFileInfo(fileName).absolutePath());
     }
 
     if (not CheckFilePermissions(fileName, this))

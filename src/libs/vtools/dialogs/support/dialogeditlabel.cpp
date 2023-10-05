@@ -302,9 +302,10 @@ void DialogEditLabel::NewTemplate()
 //---------------------------------------------------------------------------------------------------------------------
 void DialogEditLabel::ExportTemplate()
 {
+    VValentinaSettings *settings = VAbstractValApplication::VApp()->ValentinaSettings();
+
     QString filters(tr("Label template") + QLatin1String("(*.xml)"));
-    const QString path = VValentinaSettings::PrepareLabelTemplates(
-        VAbstractValApplication::VApp()->ValentinaSettings()->GetPathLabelTemplate());
+    const QString path = settings->GetPathLabelTemplate();
 
     QString fileName = QFileDialog::getSaveFileName(this, tr("Export label template"),
                                                     path + QLatin1String("/") + tr("template") + QLatin1String(".xml"),
@@ -320,6 +321,8 @@ void DialogEditLabel::ExportTemplate()
     {
         fileName += QLatin1String(".xml");
     }
+
+    settings->SetPathLabelTemplate(QFileInfo(fileName).absolutePath());
 
     VLabelTemplate ltemplate;
     ltemplate.CreateEmptyTemplate();
@@ -357,8 +360,7 @@ void DialogEditLabel::ImportTemplate()
 
     QString filter(tr("Label template") + QLatin1String(" (*.xml)"));
     // Use standard path to label templates
-    const QString path = VValentinaSettings::PrepareLabelTemplates(
-        VAbstractValApplication::VApp()->ValentinaSettings()->GetPathLabelTemplate());
+    const QString path = VAbstractValApplication::VApp()->ValentinaSettings()->GetPathLabelTemplate();
     const QString fileName = QFileDialog::getOpenFileName(this, tr("Import template"), path, filter, nullptr,
                                                           VAbstractApplication::VApp()->NativeFileDialog());
     if (fileName.isEmpty())

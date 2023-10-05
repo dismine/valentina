@@ -136,15 +136,9 @@ auto SaveDirPath(const QString &curFile, MeasurementsType mType) -> QString
     QString dir;
     if (curFile.isEmpty())
     {
-        if (mType == MeasurementsType::Individual)
-        {
-            dir = MApplication::VApp()->TapeSettings()->GetPathIndividualMeasurements();
-        }
-        else
-        {
-            dir = MApplication::VApp()->TapeSettings()->GetPathMultisizeMeasurements();
-            dir = VCommonSettings::PrepareMultisizeTables(dir);
-        }
+        VTapeSettings *settings = MApplication::VApp()->TapeSettings();
+        dir = (mType == MeasurementsType::Individual ? settings->GetPathIndividualMeasurements()
+                                                     : settings->GetPathMultisizeMeasurements());
     }
     else
     {
@@ -614,20 +608,13 @@ void TMainWindow::OpenIndividual()
     const QString filter = tr("Individual measurements") + QStringLiteral(" (*.vit);;") + tr("Multisize measurements") +
                            QStringLiteral(" (*.vst);;") + tr("All files") + QStringLiteral(" (*.*)");
     // Use standard path to individual measurements
-    const QString pathTo = MApplication::VApp()->TapeSettings()->GetPathIndividualMeasurements();
+    QString pathTo = MApplication::VApp()->TapeSettings()->GetPathIndividualMeasurements();
 
-    bool usedNotExistedDir = false;
-    QDir directory(pathTo);
-    if (not directory.exists())
+    pathTo = Open(pathTo, filter);
+
+    if (!pathTo.isEmpty())
     {
-        usedNotExistedDir = directory.mkpath(QChar('.'));
-    }
-
-    Open(pathTo, filter);
-
-    if (usedNotExistedDir)
-    {
-        QDir(pathTo).rmpath(QChar('.'));
+        MApplication::VApp()->TapeSettings()->SetPathIndividualMeasurements(pathTo);
     }
 }
 
@@ -638,9 +625,13 @@ void TMainWindow::OpenMultisize()
                            QStringLiteral(" (*.vit);;") + tr("All files") + QStringLiteral(" (*.*)");
     // Use standard path to multisize measurements
     QString pathTo = MApplication::VApp()->TapeSettings()->GetPathMultisizeMeasurements();
-    pathTo = VCommonSettings::PrepareMultisizeTables(pathTo);
 
-    Open(pathTo, filter);
+    pathTo = Open(pathTo, filter);
+
+    if (!pathTo.isEmpty())
+    {
+        MApplication::VApp()->TapeSettings()->SetPathMultisizeMeasurements(pathTo);
+    }
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -650,8 +641,12 @@ void TMainWindow::OpenTemplate()
         tr("Measurements") + QStringLiteral(" (*.vst *.vit);;") + tr("All files") + QStringLiteral(" (*.*)");
     // Use standard path to template files
     QString pathTo = MApplication::VApp()->TapeSettings()->GetPathTemplate();
-    pathTo = VTapeSettings::PrepareStandardTemplates(pathTo);
-    Open(pathTo, filter);
+    pathTo = Open(pathTo, filter);
+
+    if (!pathTo.isEmpty())
+    {
+        MApplication::VApp()->TapeSettings()->SetPathTemplate(pathTo);
+    }
 
     if (m_m != nullptr)
     {                              // The file was opened.
@@ -991,12 +986,6 @@ auto TMainWindow::FileSaveAs() -> bool
     fName += QChar('.') + suffix;
 
     const QString dir = SaveDirPath(m_curFile, m_mType);
-    bool usedNotExistedDir = false;
-    QDir directory(dir);
-    if (not directory.exists())
-    {
-        usedNotExistedDir = directory.mkpath(QChar('.'));
-    }
 
     if (not m_curFile.isEmpty())
     {
@@ -1005,15 +994,6 @@ auto TMainWindow::FileSaveAs() -> bool
 
     QString fileName = QFileDialog::getSaveFileName(this, tr("Save as"), dir + QChar('/') + fName, filters, nullptr,
                                                     VAbstractApplication::VApp()->NativeFileDialog());
-
-    auto RemoveTempDir = qScopeGuard(
-        [usedNotExistedDir, dir]()
-        {
-            if (usedNotExistedDir)
-            {
-                QDir(dir).rmpath(QChar('.'));
-            }
-        });
 
     if (fileName.isEmpty())
     {
@@ -1024,6 +1004,14 @@ auto TMainWindow::FileSaveAs() -> bool
     if (f.suffix().isEmpty() && f.suffix() != suffix)
     {
         fileName += QChar('.') + suffix;
+    }
+
+    if (m_curFile.isEmpty())
+    {
+        VTapeSettings *settings = MApplication::VApp()->TapeSettings();
+        m_mType == MeasurementsType::Individual
+            ? settings->SetPathIndividualMeasurements(QFileInfo(fileName).absolutePath())
+            : settings->SetPathMultisizeMeasurements(QFileInfo(fileName).absolutePath());
     }
 
     if (QFileInfo::exists(fileName) && m_curFile != fileName)
@@ -2371,26 +2359,10 @@ void TMainWindow::ExportToIndividual()
         dir = QFileInfo(m_curFile).absolutePath();
     }
 
-    bool usedNotExistedDir = false;
-    QDir directory(dir);
-    if (not directory.exists())
-    {
-        usedNotExistedDir = directory.mkpath(QChar('.'));
-    }
-
     QString filters = tr("Individual measurements") + QStringLiteral(" (*.vit)");
     QString fName = tr("measurements.vit");
     QString fileName = QFileDialog::getSaveFileName(this, tr("Export to individual"), dir + QChar('/') + fName, filters,
                                                     nullptr, VAbstractApplication::VApp()->NativeFileDialog());
-
-    auto RemoveTempDir = qScopeGuard(
-        [usedNotExistedDir, dir]()
-        {
-            if (usedNotExistedDir)
-            {
-                QDir(dir).rmpath(QChar('.'));
-            }
-        });
 
     if (fileName.isEmpty())
     {
@@ -2402,6 +2374,11 @@ void TMainWindow::ExportToIndividual()
     if (f.suffix().isEmpty() && f.suffix() != suffix)
     {
         fileName += QChar('.') + suffix;
+    }
+
+    if (m_curFile.isEmpty())
+    {
+        MApplication::VApp()->TapeSettings()->SetPathIndividualMeasurements(QFileInfo(fileName).absolutePath());
     }
 
     QScopedPointer<VContainer> tmpData(
@@ -3633,7 +3610,7 @@ auto TMainWindow::EvalFormula(const QString &formula, bool fromUser, VContainer 
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void TMainWindow::Open(const QString &pathTo, const QString &filter)
+auto TMainWindow::Open(const QString &pathTo, const QString &filter) -> QString
 {
     const QString mPath = QFileDialog::getOpenFileName(this, tr("Open file"), pathTo, filter, nullptr,
                                                        VAbstractApplication::VApp()->NativeFileDialog());
@@ -3649,6 +3626,8 @@ void TMainWindow::Open(const QString &pathTo, const QString &filter)
             MApplication::VApp()->NewMainWindow()->LoadFile(mPath);
         }
     }
+
+    return mPath;
 }
 
 //---------------------------------------------------------------------------------------------------------------------

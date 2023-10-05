@@ -64,21 +64,9 @@ VTapeSettings::VTapeSettings(Format format, Scope scope, const QString &organiza
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-auto VTapeSettings::PrepareStandardTemplates(const QString &currentPath) -> QString
-{
-    return PrepareStandardFiles(currentPath, StandardTemplatesPath(), GetDefPathTemplate());
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-auto VTapeSettings::GetDefPathTemplate() -> QString
-{
-    return QDir::homePath() + QStringLiteral("/valentina/") + tr("templates");
-}
-
-//---------------------------------------------------------------------------------------------------------------------
 auto VTapeSettings::GetPathTemplate() const -> QString
 {
-    return value(*settingPathsTemplates, GetDefPathTemplate()).toString();
+    return value(*settingPathsTemplates, QDir::homePath()).toString();
 }
 
 //---------------------------------------------------------------------------------------------------------------------

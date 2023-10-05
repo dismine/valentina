@@ -506,11 +506,12 @@ void DialogPatternProperties::ShowImage()
 //---------------------------------------------------------------------------------------------------------------------
 void DialogPatternProperties::BrowseLabelPath()
 {
+    VValentinaSettings *settings = VAbstractValApplication::VApp()->ValentinaSettings();
+
     QString path = ui->lineEditPieceLabelPath->text();
     if (path.isEmpty())
     {
-        path = VValentinaSettings::PrepareLabelTemplates(
-            VAbstractValApplication::VApp()->ValentinaSettings()->GetPathLabelTemplate());
+        path = settings->GetPathLabelTemplate();
     }
 
     QString filters(tr("Label template") + QLatin1String("(*.xml)"));
@@ -519,6 +520,11 @@ void DialogPatternProperties::BrowseLabelPath()
                                                           VAbstractApplication::VApp()->NativeFileDialog());
 
     ui->lineEditPieceLabelPath->setText(filePath);
+
+    if (!filePath.isEmpty() && QFileInfo::exists(filePath))
+    {
+        settings->SetPathLabelTemplate(QFileInfo(filePath).absolutePath());
+    }
 }
 
 //---------------------------------------------------------------------------------------------------------------------

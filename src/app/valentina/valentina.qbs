@@ -197,38 +197,6 @@ VToolApp {
     }
 
     Group {
-        name: "Label templates"
-        prefix: project.sourceDirectory + "/src/app/share/labels/"
-        files: [
-            "def_pattern_label.xml",
-            "def_piece_label.xml"
-        ]
-        qbs.install: true
-        qbs.installDir: buildconfig.installDataPath + "/labels"
-    }
-
-    Group {
-        name: "Multisize tables"
-        prefix: project.sourceDirectory + "/src/app/share/tables/multisize/"
-        files: [
-            "GOST_man_ru.vst"
-        ]
-        qbs.install: true
-        qbs.installDir: buildconfig.installDataPath + "/tables/multisize"
-    }
-
-    Group {
-        name: "Measurements templates"
-        prefix: project.sourceDirectory + "/src/app/share/tables/templates/"
-        files: [
-            "template_all_measurements.vit",
-            "t_Aldrich_Women.vit"
-        ]
-        qbs.install: true
-        qbs.installDir: buildconfig.installDataPath + "/tables/templates"
-    }
-
-    Group {
         name: "SVG Fonts"
         prefix: project.sourceDirectory + "/src/app/share/svgfonts/"
         files: [

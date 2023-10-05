@@ -62,8 +62,8 @@ PuzzlePreferencesPathPage::~PuzzlePreferencesPathPage()
 void PuzzlePreferencesPathPage::Apply()
 {
     VPSettings *settings = VPApplication::VApp()->PuzzleSettings();
-    settings->SetPathManualLayouts(ui->pathTable->item(0, 1)->text());
-    settings->SetPathSVGFonts(ui->pathTable->item(1, 1)->text());
+    settings->SetPathSVGFonts(ui->pathTable->item(0, 1)->text());
+    settings->SetPathFontCorrections(ui->pathTable->item(1, 1)->text());
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -89,11 +89,11 @@ void PuzzlePreferencesPathPage::DefaultPath()
     QString path;
     switch (row)
     {
-        case 0: // layouts
-            path = VCommonSettings::GetDefPathManualLayouts();
-            break;
-        case 1: // svg fonts
+        case 0: // svg fonts
             path = VCommonSettings::GetDefPathSVGFonts();
+            break;
+        case 1: // font corrections
+            path = VCommonSettings::GetDefPathFontCorrections();
             break;
         default:
             break;
@@ -113,11 +113,11 @@ void PuzzlePreferencesPathPage::EditPath()
     QString path;
     switch (row)
     {
-        case 0: // layouts
-            path = VPApplication::VApp()->PuzzleSettings()->GetPathManualLayouts();
-            break;
-        case 1: // svg fonts
+        case 0: // svg fonts
             path = VPApplication::VApp()->PuzzleSettings()->GetPathSVGFonts();
+            break;
+        case 1: // font corrections
+            path = VPApplication::VApp()->PuzzleSettings()->GetPathFontCorrections();
             break;
         default:
             break;
@@ -158,16 +158,16 @@ void PuzzlePreferencesPathPage::InitTable()
     const VPSettings *settings = VPApplication::VApp()->PuzzleSettings();
 
     {
-        ui->pathTable->setItem(0, 0, new QTableWidgetItem(tr("My Layouts")));
-        auto *item = new QTableWidgetItem(settings->GetPathManualLayouts());
-        item->setToolTip(settings->GetPathManualLayouts());
+        ui->pathTable->setItem(0, 0, new QTableWidgetItem(tr("My SVG Fonts")));
+        auto *item = new QTableWidgetItem(settings->GetPathSVGFonts());
+        item->setToolTip(settings->GetPathSVGFonts());
         ui->pathTable->setItem(0, 1, item);
     }
 
     {
-        ui->pathTable->setItem(1, 0, new QTableWidgetItem(tr("My SVG Fonts")));
-        auto *item = new QTableWidgetItem(settings->GetPathSVGFonts());
-        item->setToolTip(settings->GetPathSVGFonts());
+        ui->pathTable->setItem(1, 0, new QTableWidgetItem(tr("My font corrections")));
+        auto *item = new QTableWidgetItem(settings->GetPathFontCorrections());
+        item->setToolTip(settings->GetPathFontCorrections());
         ui->pathTable->setItem(1, 1, item);
     }
 

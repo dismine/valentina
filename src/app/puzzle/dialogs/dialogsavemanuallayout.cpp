@@ -117,12 +117,6 @@ DialogSaveManualLayout::DialogSaveManualLayout(vsizetype count, bool consoleExpo
             [this]()
             {
                 const QString dirPath = VPApplication::VApp()->PuzzleSettings()->GetPathManualLayouts();
-                bool usedNotExistedDir = false;
-                QDir directory(dirPath);
-                if (not directory.exists())
-                {
-                    usedNotExistedDir = directory.mkpath(QChar('.'));
-                }
 
                 const QString dir = QFileDialog::getExistingDirectory(
                     this, tr("Select folder"), dirPath,
@@ -131,12 +125,8 @@ DialogSaveManualLayout::DialogSaveManualLayout(vsizetype count, bool consoleExpo
                 if (not dir.isEmpty())
                 { // If paths equal the signal will not be called, we will do this manually
                     dir == ui->lineEditPath->text() ? PathChanged(dir) : ui->lineEditPath->setText(dir);
-                }
 
-                if (usedNotExistedDir)
-                {
-                    QDir directory(dirPath);
-                    directory.rmpath(QChar('.'));
+                    VPApplication::VApp()->PuzzleSettings()->SetPathManualLayouts(dir);
                 }
             });
     connect(ui->lineEditPath, &QLineEdit::textChanged, this, &DialogSaveManualLayout::PathChanged);
