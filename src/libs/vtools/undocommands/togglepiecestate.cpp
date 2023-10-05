@@ -35,20 +35,19 @@
 
 #include "../ifc/ifcdef.h"
 #include "../ifc/xml/vabstractpattern.h"
-#include "../vmisc/def.h"
 #include "../vpatterndb/vcontainer.h"
 #include "../vpatterndb/vpiece.h"
-#include "vundocommand.h"
 #include "../vtools/tools/vtoolseamallowance.h"
+#include "vundocommand.h"
 
 //---------------------------------------------------------------------------------------------------------------------
 TogglePieceInLayout::TogglePieceInLayout(quint32 id, bool state, VContainer *data, VAbstractPattern *doc,
                                          QUndoCommand *parent)
-    : VUndoCommand(QDomElement(), doc, parent),
-      m_id(id),
-      m_data(data),
-      m_oldState(not state),
-      m_newState(state)
+  : VUndoCommand(QDomElement(), doc, parent),
+    m_id(id),
+    m_data(data),
+    m_oldState(not state),
+    m_newState(state)
 {
     setText(tr("detail in layout list"));
     m_oldState = m_data->DataPieces()->value(m_id).IsInLayout();
@@ -74,7 +73,7 @@ void TogglePieceInLayout::Do(bool state)
     QDomElement detail = doc->elementById(m_id, VAbstractPattern::TagDetail);
     if (detail.isElement())
     {
-        doc->SetAttributeOrRemoveIf<bool>(detail, AttrInLayout, state, [](bool state) noexcept {return state;});
+        doc->SetAttributeOrRemoveIf<bool>(detail, AttrInLayout, state, [](bool state) noexcept { return state; });
 
         VPiece det = m_data->DataPieces()->value(m_id);
         det.SetInLayout(state);
@@ -91,14 +90,10 @@ void TogglePieceInLayout::Do(bool state)
 TogglePieceForceForbidFlipping::TogglePieceForceForbidFlipping(quint32 id, bool state, ForceForbidFlippingType type,
                                                                VContainer *data, VAbstractPattern *doc,
                                                                QUndoCommand *parent)
-    : VUndoCommand(QDomElement(), doc, parent),
-      m_id(id),
-      m_data(data),
-      m_type(type),
-      m_oldForceState(false),
-      m_newForceState(false),
-      m_oldForbidState(false),
-      m_newForbidState(false)
+  : VUndoCommand(QDomElement(), doc, parent),
+    m_id(id),
+    m_data(data),
+    m_type(type)
 {
     setText(tr("piece flipping"));
 
@@ -168,6 +163,52 @@ void TogglePieceForceForbidFlipping::redo()
 
         // Probably overkill, but will help to avoid mistakes
         VToolSeamAllowance::AddAttributes(doc, detail, m_id, det);
+    }
+    else
+    {
+        qDebug("Can't get detail by id = %u.", m_id);
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+ToggleHideMainPath::ToggleHideMainPath(quint32 id, bool state, VContainer *data, VAbstractPattern *doc,
+                                       QUndoCommand *parent)
+  : VUndoCommand(QDomElement(), doc, parent),
+    m_id(id),
+    m_data(data),
+    m_oldState(not state),
+    m_newState(state)
+{
+    setText(tr("detail hide main path"));
+    m_oldState = m_data->DataPieces()->value(m_id).IsHideMainPath();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void ToggleHideMainPath::undo()
+{
+    qCDebug(vUndo, "ToggleHideMainPath::undo().");
+    Do(m_oldState);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void ToggleHideMainPath::redo()
+{
+    qCDebug(vUndo, "ToggleHideMainPath::redo().");
+    Do(m_newState);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void ToggleHideMainPath::Do(bool state)
+{
+    QDomElement detail = doc->elementById(m_id, VAbstractPattern::TagDetail);
+    if (detail.isElement())
+    {
+        doc->SetAttribute(detail, VToolSeamAllowance::AttrHideMainPath, state);
+
+        VPiece det = m_data->DataPieces()->value(m_id);
+        det.SetHideMainPath(state);
+        m_data->UpdatePiece(m_id, det);
+        emit Toggled(m_id);
     }
     else
     {

@@ -162,6 +162,7 @@ protected:
 
 private slots:
     void ToggleInLayout(bool checked);
+    void ToggleHideMainPath(bool checked);
     void ToggleForbidFlipping(bool checked);
     void ToggleForceFlipping(bool checked);
     void ToggleExcludeState(quint32 id);
