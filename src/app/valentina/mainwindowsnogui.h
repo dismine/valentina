@@ -34,12 +34,12 @@
 #include <QPointer>
 #include <QPrinter>
 
-#include "../vlayout/vlayoutpiece.h"
-#include "xml/vpattern.h"
-#include "dialogs/dialogsavelayout.h"
 #include "../vlayout/vlayoutgenerator.h"
-#include "../vwidgets/vabstractmainwindow.h"
+#include "../vlayout/vlayoutpiece.h"
 #include "../vlayout/vprintlayout.h"
+#include "../vwidgets/vabstractmainwindow.h"
+#include "dialogs/dialogsavelayout.h"
+#include "xml/vpattern.h"
 
 class QGraphicsScene;
 struct PosterData;
@@ -59,8 +59,10 @@ struct DetailForLayout
     DetailForLayout() = default;
 
     DetailForLayout(quint32 id, const VPiece &piece)
-        : id(id), piece(piece)
-    {}
+      : id(id),
+        piece(piece)
+    {
+    }
 
     quint32 id{NULL_ID}; // NOLINT(misc-non-private-member-variables-in-classes)
     VPiece piece{};      // NOLINT(misc-non-private-member-variables-in-classes)
@@ -68,11 +70,16 @@ struct DetailForLayout
 
 QT_WARNING_POP
 
-enum class PreviewQuatilty : bool {Fast = true, Slow = false};
+enum class PreviewQuatilty : bool
+{
+    Fast = true,
+    Slow = false
+};
 
 class MainWindowsNoGUI : public VAbstractMainWindow
 {
     Q_OBJECT // NOLINT
+
 public:
     explicit MainWindowsNoGUI(QWidget *parent = nullptr);
     ~MainWindowsNoGUI() override;
@@ -85,6 +92,7 @@ public slots:
     void PrintTiled();
 protected slots:
     void ExportFMeasurementsToCSV();
+
 protected:
     QVector<VLayoutPiece> listDetails{}; // NOLINT(misc-non-private-member-variables-in-classes)
 
@@ -129,8 +137,8 @@ protected:
     void ExportData(const QVector<VLayoutPiece> &listDetails);
 
     void InitTempLayoutScene();
-    virtual void CleanLayout()=0;
-    virtual void PrepareSceneList(PreviewQuatilty quality)=0;
+    virtual void CleanLayout() = 0;
+    virtual void PrepareSceneList(PreviewQuatilty quality) = 0;
     auto RecentFileList() const -> QStringList override;
     auto ScenePreview(int i, QSize iconSize, PreviewQuatilty quality) const -> QIcon;
     auto GenerateLayout(VLayoutGenerator &lGenerator) -> bool;
@@ -152,20 +160,16 @@ private:
 
     void PdfTiledFile(const QString &name);
 
-    void ExportScene(const QList<QGraphicsScene *> &scenes,
-                     const QList<QGraphicsItem *> &papers,
-                     const QList<QGraphicsItem *> &shadows,
-                     const QList<QList<QGraphicsItem *> > &details,
+    void ExportScene(const QList<QGraphicsScene *> &scenes, const QList<QGraphicsItem *> &papers,
+                     const QList<QGraphicsItem *> &shadows, const QList<QList<QGraphicsItem *>> &details,
                      bool ignorePrinterFields, const QMarginsF &margins) const;
 
     void ExportApparelLayout(const QVector<VLayoutPiece> &details, const QString &name, const QSize &size) const;
 
     void ExportDetailsAsApparelLayout(QVector<VLayoutPiece> listDetails);
 
-    void ExportFlatLayout(const QList<QGraphicsScene *> &scenes,
-                          const QList<QGraphicsItem *> &papers,
-                          const QList<QGraphicsItem *> &shadows,
-                          const QList<QList<QGraphicsItem *> > &details,
+    void ExportFlatLayout(const QList<QGraphicsScene *> &scenes, const QList<QGraphicsItem *> &papers,
+                          const QList<QGraphicsItem *> &shadows, const QList<QList<QGraphicsItem *>> &details,
                           bool ignorePrinterFields, const QMarginsF &margins);
 
     void ExportDetailsAsFlatLayout(const QVector<VLayoutPiece> &listDetails);
