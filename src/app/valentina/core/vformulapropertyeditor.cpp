@@ -28,23 +28,23 @@
 
 #include "vformulapropertyeditor.h"
 
-#include <QHBoxLayout>
-#include <QFileDialog>
-#include <QKeyEvent>
 #include <QApplication>
 #include <QColorDialog>
 #include <QDebug>
+#include <QFileDialog>
+#include <QHBoxLayout>
+#include <QKeyEvent>
 #include <QRegularExpression>
 #include <QSpacerItem>
 
+#include "../vmisc/vabstractvalapplication.h"
 #include "../vpropertyexplorer/vproperty.h"
 #include "../vtools/dialogs/support/dialogeditwrongformula.h"
-#include "../vmisc/vabstractvalapplication.h"
 
 // VFormulaPropertyEditor
 //---------------------------------------------------------------------------------------------------------------------
 VFormulaPropertyEditor::VFormulaPropertyEditor(QWidget *parent)
-    : QWidget(parent)
+  : QWidget(parent)
 {
     setAutoFillBackground(true);
 
@@ -56,7 +56,7 @@ VFormulaPropertyEditor::VFormulaPropertyEditor(QWidget *parent)
     m_ToolButton->setIconSize(QSize(16, 16));
     m_ToolButton->setFixedSize(24, 24);
     m_ToolButton->installEventFilter(this);
-    setFocusProxy(m_ToolButton);  // Make the ToolButton the focus proxy
+    setFocusProxy(m_ToolButton); // Make the ToolButton the focus proxy
     setFocusPolicy(m_ToolButton->focusPolicy());
     connect(m_ToolButton, &QToolButton::clicked, this, &VFormulaPropertyEditor::onToolButtonClicked);
 
@@ -66,7 +66,7 @@ VFormulaPropertyEditor::VFormulaPropertyEditor(QWidget *parent)
     m_TextLabel->setText(m_formula.getStringValue());
 
     // The layout (a horizontal layout)
-    auto* layout = new QHBoxLayout(this);
+    auto *layout = new QHBoxLayout(this);
     layout->setSpacing(3);
     layout->setContentsMargins(0, 0, 0, 0);
     layout->addWidget(m_TextLabel);
@@ -76,7 +76,7 @@ VFormulaPropertyEditor::VFormulaPropertyEditor(QWidget *parent)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VFormulaPropertyEditor::SetFormula(const VFormula& formula)
+void VFormulaPropertyEditor::SetFormula(const VFormula &formula)
 {
     if (this->m_formula != formula)
     {
@@ -88,9 +88,8 @@ void VFormulaPropertyEditor::SetFormula(const VFormula& formula)
 //---------------------------------------------------------------------------------------------------------------------
 void VFormulaPropertyEditor::onToolButtonClicked()
 {
-    QScopedPointer<DialogEditWrongFormula> tmpWidget(
-                new DialogEditWrongFormula(m_formula.getData(), m_formula.getToolId(),
-                                           VAbstractValApplication::VApp()->getMainWindow()));
+    QScopedPointer<DialogEditWrongFormula> tmpWidget(new DialogEditWrongFormula(
+        m_formula.getData(), m_formula.getToolId(), VAbstractValApplication::VApp()->getMainWindow()));
     tmpWidget->setCheckZero(m_formula.getCheckZero());
     tmpWidget->setPostfix(m_formula.getPostfix());
     tmpWidget->SetFormula(m_formula.GetFormula(FormulaType::FromUser));
