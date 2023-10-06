@@ -107,9 +107,9 @@ private:
     auto StartWithFiles(QCommandLineParser &parser) -> bool;
     auto SingleStart(QCommandLineParser &parser) -> bool;
 
-    static void ParseDimensionAOption(QCommandLineParser &parser, int &dimensionAValue, bool &flagDimensionA);
-    static void ParseDimensionBOption(QCommandLineParser &parser, int &dimensionBValue, bool &flagDimensionB);
-    static void ParseDimensionCOption(QCommandLineParser &parser, int &dimensionCValue, bool &flagDimensionC);
+    static void ParseDimensionAOption(QCommandLineParser &parser, qreal &dimensionAValue, bool &flagDimensionA);
+    static void ParseDimensionBOption(QCommandLineParser &parser, qreal &dimensionBValue, bool &flagDimensionB);
+    static void ParseDimensionCOption(QCommandLineParser &parser, qreal &dimensionCValue, bool &flagDimensionC);
     static void ParseUnitsOption(QCommandLineParser &parser, Unit &unit, bool &flagUnits);
 };
 

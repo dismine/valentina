@@ -337,7 +337,7 @@ void TMainWindow::RetranslateTable()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void TMainWindow::SetDimensionABase(int base)
+void TMainWindow::SetDimensionABase(qreal base)
 {
     const QList<MeasurementDimension_p> dimensions = m_m->Dimensions().values();
 
@@ -361,7 +361,7 @@ void TMainWindow::SetDimensionABase(int base)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void TMainWindow::SetDimensionBBase(int base)
+void TMainWindow::SetDimensionBBase(qreal base)
 {
     const QList<MeasurementDimension_p> dimensions = m_m->Dimensions().values();
 
@@ -385,7 +385,7 @@ void TMainWindow::SetDimensionBBase(int base)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void TMainWindow::SetDimensionCBase(int base)
+void TMainWindow::SetDimensionCBase(qreal base)
 {
     const QList<MeasurementDimension_p> dimensions = m_m->Dimensions().values();
 

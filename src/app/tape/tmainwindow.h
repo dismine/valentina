@@ -58,9 +58,9 @@ public:
 
     void RetranslateTable();
 
-    void SetDimensionABase(int base);
-    void SetDimensionBBase(int base);
-    void SetDimensionCBase(int base);
+    void SetDimensionABase(qreal base);
+    void SetDimensionBBase(qreal base);
+    void SetDimensionCBase(qreal base);
     void SetPUnit(Unit unit);
 
     auto LoadFile(const QString &path) -> bool;

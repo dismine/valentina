@@ -851,9 +851,9 @@ auto MApplication::StartWithFiles(QCommandLineParser &parser) -> bool
     bool flagDimensionC = false;
     bool flagUnits = false;
 
-    int dimensionAValue = 0;
-    int dimensionBValue = 0;
-    int dimensionCValue = 0;
+    qreal dimensionAValue = 0;
+    qreal dimensionBValue = 0;
+    qreal dimensionCValue = 0;
     Unit unit = Unit::Cm;
 
     ParseDimensionAOption(parser, dimensionAValue, flagDimensionA);
@@ -916,14 +916,14 @@ auto MApplication::SingleStart(QCommandLineParser &parser) -> bool
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void MApplication::ParseDimensionAOption(QCommandLineParser &parser, int &dimensionAValue, bool &flagDimensionA)
+void MApplication::ParseDimensionAOption(QCommandLineParser &parser, qreal &dimensionAValue, bool &flagDimensionA)
 {
     if (parser.isSet(*LONG_OPTION_DIMENSION_A))
     {
         const QString value = parser.value(*LONG_OPTION_DIMENSION_A);
 
         bool ok = false;
-        dimensionAValue = value.toInt(&ok);
+        dimensionAValue = value.toDouble(&ok);
         if (ok && dimensionAValue > 0)
         {
             flagDimensionA = true;
@@ -937,14 +937,14 @@ void MApplication::ParseDimensionAOption(QCommandLineParser &parser, int &dimens
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void MApplication::ParseDimensionBOption(QCommandLineParser &parser, int &dimensionBValue, bool &flagDimensionB)
+void MApplication::ParseDimensionBOption(QCommandLineParser &parser, qreal &dimensionBValue, bool &flagDimensionB)
 {
     if (parser.isSet(*LONG_OPTION_DIMENSION_B))
     {
         const QString value = parser.value(*LONG_OPTION_DIMENSION_B);
 
         bool ok = false;
-        dimensionBValue = value.toInt(&ok);
+        dimensionBValue = value.toDouble(&ok);
         if (ok && dimensionBValue > 0)
         {
             flagDimensionB = true;
@@ -958,14 +958,14 @@ void MApplication::ParseDimensionBOption(QCommandLineParser &parser, int &dimens
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void MApplication::ParseDimensionCOption(QCommandLineParser &parser, int &dimensionCValue, bool &flagDimensionC)
+void MApplication::ParseDimensionCOption(QCommandLineParser &parser, qreal &dimensionCValue, bool &flagDimensionC)
 {
     if (parser.isSet(*LONG_OPTION_DIMENSION_C))
     {
         const QString value = parser.value(*LONG_OPTION_DIMENSION_C);
 
         bool ok = false;
-        dimensionCValue = value.toInt(&ok);
+        dimensionCValue = value.toDouble(&ok);
         if (ok && dimensionCValue > 0)
         {
             flagDimensionC = true;
