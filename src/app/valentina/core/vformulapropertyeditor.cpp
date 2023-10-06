@@ -37,6 +37,7 @@
 #include <QRegularExpression>
 #include <QSpacerItem>
 
+#include "../vmisc/theme/vtheme.h"
 #include "../vmisc/vabstractvalapplication.h"
 #include "../vpropertyexplorer/vproperty.h"
 #include "../vtools/dialogs/support/dialogeditwrongformula.h"
@@ -52,7 +53,7 @@ VFormulaPropertyEditor::VFormulaPropertyEditor(QWidget *parent)
     m_ToolButton = new QToolButton(this);
     m_ToolButton->setSizePolicy(QSizePolicy::Fixed, QSizePolicy::Fixed);
     m_ToolButton->setText(QStringLiteral("..."));
-    m_ToolButton->setIcon(QIcon("://icon/16x16/fx.png"));
+    m_ToolButton->setIcon(VTheme::GetIconResource(QStringLiteral("icon"), QStringLiteral("16x16/fx.png")));
     m_ToolButton->setIconSize(QSize(16, 16));
     m_ToolButton->setFixedSize(24, 24);
     m_ToolButton->installEventFilter(this);
