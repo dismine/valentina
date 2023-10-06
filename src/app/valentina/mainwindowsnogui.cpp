@@ -31,6 +31,7 @@
 #include "../ifc/xml/vvstconverter.h"
 #include "../vdxf/libdxfrw/drw_base.h"
 #include "../vformat/vmeasurements.h"
+#include "../vganalytics/vganalytics.h"
 #include "../vlayout/vlayoutexporter.h"
 #include "../vlayout/vlayoutgenerator.h"
 #include "../vmisc/compatibility.h"
@@ -1299,11 +1300,49 @@ auto MainWindowsNoGUI::OpenMeasurementFile(const QString &path) const -> QShared
         {
             VVSTConverter converter(path);
             m->setXMLContent(converter.Convert()); // Read again after conversion
+
+            VCommonSettings *settings = VAbstractApplication::VApp()->Settings();
+            if (settings->IsCollectStatistic())
+            {
+                auto *statistic = VGAnalytics::Instance();
+
+                QString clientID = settings->GetClientID();
+                if (clientID.isEmpty())
+                {
+                    clientID = QUuid::createUuid().toString();
+                    settings->SetClientID(clientID);
+                    statistic->SetClientID(clientID);
+                }
+
+                statistic->Enable(true);
+
+                const qint64 uptime = VAbstractApplication::VApp()->AppUptime();
+                statistic->SendMultisizeMeasurementsFormatVersion(uptime, converter.GetFormatVersionStr());
+            }
         }
         else
         {
             VVITConverter converter(path);
             m->setXMLContent(converter.Convert()); // Read again after conversion
+
+            VCommonSettings *settings = VAbstractApplication::VApp()->Settings();
+            if (settings->IsCollectStatistic())
+            {
+                auto *statistic = VGAnalytics::Instance();
+
+                QString clientID = settings->GetClientID();
+                if (clientID.isEmpty())
+                {
+                    clientID = QUuid::createUuid().toString();
+                    settings->SetClientID(clientID);
+                    statistic->SetClientID(clientID);
+                }
+
+                statistic->Enable(true);
+
+                const qint64 uptime = VAbstractApplication::VApp()->AppUptime();
+                statistic->SendIndividualMeasurementsFormatVersion(uptime, converter.GetFormatVersionStr());
+            }
         }
 
         if (not m->IsDefinedKnownNamesValid())

@@ -90,6 +90,10 @@ public slots:
     void SendAppStartEvent(qint64 engagementTimeMsec);
     void SendAppCloseEvent(qint64 engagementTimeMsec);
     void SendPatternToolUsedEvent(qint64 engagementTimeMsec, const QString &toolName);
+    void SendPatternFormatVersion(qint64 engagementTimeMsec, const QString &version);
+    void SendIndividualMeasurementsFormatVersion(qint64 engagementTimeMsec, const QString &version);
+    void SendMultisizeMeasurementsFormatVersion(qint64 engagementTimeMsec, const QString &version);
+    void SendLayoutFormatVersion(qint64 engagementTimeMsec, const QString &version);
 
 private:
     Q_DISABLE_COPY_MOVE(VGAnalytics) // NOLINT

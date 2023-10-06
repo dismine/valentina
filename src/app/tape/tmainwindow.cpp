@@ -475,6 +475,25 @@ auto TMainWindow::LoadFile(const QString &path) -> bool
             m_curFileFormatVersion = converter.GetCurrentFormatVersion();
             m_curFileFormatVersionStr = converter.GetFormatVersionStr();
             m_m->setXMLContent(converter.Convert()); // Read again after conversion
+
+            VCommonSettings *settings = VAbstractApplication::VApp()->Settings();
+            if (settings->IsCollectStatistic())
+            {
+                auto *statistic = VGAnalytics::Instance();
+
+                QString clientID = settings->GetClientID();
+                if (clientID.isEmpty())
+                {
+                    clientID = QUuid::createUuid().toString();
+                    settings->SetClientID(clientID);
+                    statistic->SetClientID(clientID);
+                }
+
+                statistic->Enable(true);
+
+                const qint64 uptime = VAbstractApplication::VApp()->AppUptime();
+                statistic->SendMultisizeMeasurementsFormatVersion(uptime, m_curFileFormatVersionStr);
+            }
         }
         else
         {
@@ -482,6 +501,25 @@ auto TMainWindow::LoadFile(const QString &path) -> bool
             m_curFileFormatVersion = converter.GetCurrentFormatVersion();
             m_curFileFormatVersionStr = converter.GetFormatVersionStr();
             m_m->setXMLContent(converter.Convert()); // Read again after conversion
+
+            VCommonSettings *settings = VAbstractApplication::VApp()->Settings();
+            if (settings->IsCollectStatistic())
+            {
+                auto *statistic = VGAnalytics::Instance();
+
+                QString clientID = settings->GetClientID();
+                if (clientID.isEmpty())
+                {
+                    clientID = QUuid::createUuid().toString();
+                    settings->SetClientID(clientID);
+                    statistic->SetClientID(clientID);
+                }
+
+                statistic->Enable(true);
+
+                const qint64 uptime = VAbstractApplication::VApp()->AppUptime();
+                statistic->SendIndividualMeasurementsFormatVersion(uptime, m_curFileFormatVersionStr);
+            }
         }
 
         if (not m_m->IsDefinedKnownNamesValid())
@@ -1635,6 +1673,25 @@ void TMainWindow::ImportFromPattern()
         QScopedPointer<VLitePattern> doc(new VLitePattern());
         doc->setXMLContent(converter.Convert());
         measurements = doc->ListMeasurements();
+
+        VCommonSettings *settings = VAbstractApplication::VApp()->Settings();
+        if (settings->IsCollectStatistic())
+        {
+            auto *statistic = VGAnalytics::Instance();
+
+            QString clientID = settings->GetClientID();
+            if (clientID.isEmpty())
+            {
+                clientID = QUuid::createUuid().toString();
+                settings->SetClientID(clientID);
+                statistic->SetClientID(clientID);
+            }
+
+            statistic->Enable(true);
+
+            const qint64 uptime = VAbstractApplication::VApp()->AppUptime();
+            statistic->SendPatternFormatVersion(uptime, converter.GetFormatVersionStr());
+        }
     }
     catch (VException &e)
     {

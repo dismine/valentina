@@ -33,6 +33,7 @@
 #include <QDesktopServices>
 #include <QDoubleSpinBox>
 #include <QFileDialog>
+#include <QFileInfo>
 #include <QFileSystemWatcher>
 #include <QFuture>
 #include <QGlobalStatic>
@@ -54,7 +55,6 @@
 #include <chrono>
 #include <memory>
 #include <thread>
-#include <QFileInfo>
 
 #include "../ifc/exception/vexceptionconversionerror.h"
 #include "../ifc/exception/vexceptionemptyparameter.h"
@@ -6349,6 +6349,25 @@ auto MainWindow::LoadPattern(QString fileName, const QString &customMeasureFile)
             m_curFileFormatVersion = converter->GetCurrentFormatVersion();
             m_curFileFormatVersionStr = converter->GetFormatVersionStr();
             doc->setXMLContent(converter->Convert());
+
+            VCommonSettings *settings = VAbstractApplication::VApp()->Settings();
+            if (settings->IsCollectStatistic())
+            {
+                auto *statistic = VGAnalytics::Instance();
+
+                QString clientID = settings->GetClientID();
+                if (clientID.isEmpty())
+                {
+                    clientID = QUuid::createUuid().toString();
+                    settings->SetClientID(clientID);
+                    statistic->SetClientID(clientID);
+                }
+
+                statistic->Enable(true);
+
+                const qint64 uptime = VAbstractApplication::VApp()->AppUptime();
+                statistic->SendPatternFormatVersion(uptime, m_curFileFormatVersionStr);
+            }
         }
 
         if (!customMeasureFile.isEmpty())
@@ -6920,11 +6939,49 @@ auto MainWindow::CheckPathToMeasurements(const QString &patternPath, const QStri
     {
         VVSTConverter converter(mPath);
         m->setXMLContent(converter.Convert()); // Read again after conversion
+
+        VCommonSettings *settings = VAbstractApplication::VApp()->Settings();
+        if (settings->IsCollectStatistic())
+        {
+            auto *statistic = VGAnalytics::Instance();
+
+            QString clientID = settings->GetClientID();
+            if (clientID.isEmpty())
+            {
+                clientID = QUuid::createUuid().toString();
+                settings->SetClientID(clientID);
+                statistic->SetClientID(clientID);
+            }
+
+            statistic->Enable(true);
+
+            const qint64 uptime = VAbstractApplication::VApp()->AppUptime();
+            statistic->SendMultisizeMeasurementsFormatVersion(uptime, converter.GetFormatVersionStr());
+        }
     }
     else
     {
         VVITConverter converter(mPath);
         m->setXMLContent(converter.Convert()); // Read again after conversion
+
+        VCommonSettings *settings = VAbstractApplication::VApp()->Settings();
+        if (settings->IsCollectStatistic())
+        {
+            auto *statistic = VGAnalytics::Instance();
+
+            QString clientID = settings->GetClientID();
+            if (clientID.isEmpty())
+            {
+                clientID = QUuid::createUuid().toString();
+                settings->SetClientID(clientID);
+                statistic->SetClientID(clientID);
+            }
+
+            statistic->Enable(true);
+
+            const qint64 uptime = VAbstractApplication::VApp()->AppUptime();
+            statistic->SendIndividualMeasurementsFormatVersion(uptime, converter.GetFormatVersionStr());
+        }
     }
 
     if (not m->IsDefinedKnownNamesValid())

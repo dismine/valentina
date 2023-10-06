@@ -29,6 +29,7 @@
 
 #include <QCloseEvent>
 #include <QFileDialog>
+#include <QFileInfo>
 #include <QFileSystemWatcher>
 #include <QLoggingCategory>
 #include <QPrintDialog>
@@ -41,7 +42,6 @@
 #include <QtMath>
 #include <chrono>
 #include <thread>
-#include <QFileInfo>
 
 #include "../ifc/exception/vexception.h"
 #include "../ifc/xml/vlayoutconverter.h"
@@ -464,6 +464,25 @@ auto VPMainWindow::LoadFile(const QString &path) -> bool
                        qUtf8Printable(tr("Unable to read a layout file. %1").arg(fileReader.errorString())));
             lock.reset();
             return false;
+        }
+
+        VCommonSettings *settings = VAbstractApplication::VApp()->Settings();
+        if (settings->IsCollectStatistic())
+        {
+            auto *statistic = VGAnalytics::Instance();
+
+            QString clientID = settings->GetClientID();
+            if (clientID.isEmpty())
+            {
+                clientID = QUuid::createUuid().toString();
+                settings->SetClientID(clientID);
+                statistic->SetClientID(clientID);
+            }
+
+            statistic->Enable(true);
+
+            const qint64 uptime = VAbstractApplication::VApp()->AppUptime();
+            statistic->SendLayoutFormatVersion(uptime, converter.GetFormatVersionStr());
         }
     }
     catch (VException &e)

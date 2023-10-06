@@ -306,6 +306,62 @@ void VGAnalytics::SendPatternToolUsedEvent(qint64 engagementTimeMsec, const QStr
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+void VGAnalytics::SendPatternFormatVersion(qint64 engagementTimeMsec, const QString &version)
+{
+    QHash<QString, QJsonValue> params{
+        // In order for user activity to display in standard reports like Realtime, engagement_time_msec and session_id
+        // must be supplied as part of the params for an event.
+        // https://developers.google.com/analytics/devguides/collection/protocol/ga4/sending-events?client_type=gtag#optional_parameters_for_reports
+        {QStringLiteral("engagement_time_msec"), engagementTimeMsec},
+        {QStringLiteral("format_version"), version},
+    };
+
+    SendEvent(QStringLiteral("vapp_pattern_format_version"), params);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VGAnalytics::SendIndividualMeasurementsFormatVersion(qint64 engagementTimeMsec, const QString &version)
+{
+    QHash<QString, QJsonValue> params{
+        // In order for user activity to display in standard reports like Realtime, engagement_time_msec and session_id
+        // must be supplied as part of the params for an event.
+        // https://developers.google.com/analytics/devguides/collection/protocol/ga4/sending-events?client_type=gtag#optional_parameters_for_reports
+        {QStringLiteral("engagement_time_msec"), engagementTimeMsec},
+        {QStringLiteral("format_version"), version},
+    };
+
+    SendEvent(QStringLiteral("vapp_individual_measurements_format_version"), params);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VGAnalytics::SendMultisizeMeasurementsFormatVersion(qint64 engagementTimeMsec, const QString &version)
+{
+    QHash<QString, QJsonValue> params{
+        // In order for user activity to display in standard reports like Realtime, engagement_time_msec and session_id
+        // must be supplied as part of the params for an event.
+        // https://developers.google.com/analytics/devguides/collection/protocol/ga4/sending-events?client_type=gtag#optional_parameters_for_reports
+        {QStringLiteral("engagement_time_msec"), engagementTimeMsec},
+        {QStringLiteral("format_version"), version},
+    };
+
+    SendEvent(QStringLiteral("vapp_multisize_measurements_format_version"), params);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VGAnalytics::SendLayoutFormatVersion(qint64 engagementTimeMsec, const QString &version)
+{
+    QHash<QString, QJsonValue> params{
+        // In order for user activity to display in standard reports like Realtime, engagement_time_msec and session_id
+        // must be supplied as part of the params for an event.
+        // https://developers.google.com/analytics/devguides/collection/protocol/ga4/sending-events?client_type=gtag#optional_parameters_for_reports
+        {QStringLiteral("engagement_time_msec"), engagementTimeMsec},
+        {QStringLiteral("format_version"), version},
+    };
+
+    SendEvent(QStringLiteral("vapp_layout_format_version"), params);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 /**
  * A query for a POST message will be created to report this event. The
  * created query will be stored in a message queue.
