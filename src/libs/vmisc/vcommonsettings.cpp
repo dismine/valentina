@@ -177,6 +177,8 @@ Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingPatternShowAccuracyRadius,
 Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingPatternUseOpenGLRender, (QLatin1String("pattern/useOpenGLRender")))
 // NOLINTNEXTLINE
 Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingPatternGraphicalOutput, (QLatin1String("pattern/graphicalOutput")))
+// NOLINTNEXTLINE
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingsPatternTranslateFormula, (QLatin1String("pattern/translateFormula")))
 Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingGeneralRecentFileList, (QLatin1String("recentFileList")))   // NOLINT
 Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingGeneralRestoreFileList, (QLatin1String("restoreFileList"))) // NOLINT
 Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingGeneralGeometry, (QLatin1String("geometry")))               // NOLINT
@@ -1629,5 +1631,20 @@ void VCommonSettings::SetClientID(const QString &clientID)
 {
     QSettings settings(this->format(), this->scope(), this->organizationName(), *commonIniFilename);
     settings.setValue(*settingsStatistictClientID, clientID);
+    settings.sync();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+auto VCommonSettings::IsTranslateFormula() const -> bool
+{
+    QSettings settings(this->format(), this->scope(), this->organizationName(), *commonIniFilename);
+    return settings.value(*settingsPatternTranslateFormula, 1).toBool();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VCommonSettings::SetTranslateFormula(bool value)
+{
+    QSettings settings(this->format(), this->scope(), this->organizationName(), *commonIniFilename);
+    settings.setValue(*settingsPatternTranslateFormula, value);
     settings.sync();
 }

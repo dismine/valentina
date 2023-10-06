@@ -34,8 +34,8 @@
            <rect>
             <x>0</x>
             <y>0</y>
-            <width>522</width>
-            <height>617</height>
+            <width>508</width>
+            <height>646</height>
            </rect>
           </property>
           <layout class="QVBoxLayout" name="verticalLayout_2">
@@ -140,6 +140,16 @@
               <string>Measurements editing</string>
              </property>
              <layout class="QVBoxLayout" name="verticalLayout_3">
+              <item>
+               <widget class="QCheckBox" name="checkBoxTranslateFormula">
+                <property name="toolTip">
+                 <string>Enable to translate formula according to locale</string>
+                </property>
+                <property name="text">
+                 <string>Translate formula</string>
+                </property>
+               </widget>
+              </item>
               <item>
                <widget class="QPushButton" name="resetWarningsButton">
                 <property name="sizePolicy">

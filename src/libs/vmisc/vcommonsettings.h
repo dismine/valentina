@@ -329,6 +329,9 @@ public:
     auto GetClientID() const -> QString;
     void SetClientID(const QString &clientID);
 
+    auto IsTranslateFormula() const -> bool;
+    void SetTranslateFormula(bool value);
+
 signals:
     void SVGFontsPathChanged(const QString &oldPath, const QString &newPath);
 

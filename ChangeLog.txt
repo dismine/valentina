@@ -41,6 +41,7 @@
 - New option: Use Tool Groups.
 - Redesign notch context menu to allow quick selection of the notch type.
 - Redesign standard path system.
+- New option: Translate formula
 
 # Valentina 0.7.52 September 12, 2022
 - Fix crash when default locale is ru.

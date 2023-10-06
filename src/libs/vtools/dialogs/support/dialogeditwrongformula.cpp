@@ -727,6 +727,7 @@ void DialogEditWrongFormula::ShowFunctions()
     ui->tableWidget->setColumnHidden(ColumnFullName, true);
     ui->labelDescription->setText(QString());
 
+    VCommonSettings *settings = VAbstractApplication::VApp()->Settings();
     const VTranslateVars *trVars = VAbstractApplication::VApp()->TrVars();
     const QMap<QString, qmu::QmuTranslation> functionsDescriptions = trVars->GetFunctionsDescriptions();
     const QMap<QString, qmu::QmuTranslation> functions = trVars->GetFunctions();
@@ -734,16 +735,30 @@ void DialogEditWrongFormula::ShowFunctions()
     while (i != functions.constEnd())
     {
         ui->tableWidget->setRowCount(ui->tableWidget->rowCount() + 1);
-        auto *item = new QTableWidgetItem(i.value().translate(VAbstractApplication::VApp()->Settings()->GetLocale()));
+
+        QString name = (!settings->IsTranslateFormula()
+                            ? i.value().getMsourceText()
+                            : i.value().translate(VAbstractApplication::VApp()->Settings()->GetLocale()));
+
+        auto *item = new QTableWidgetItem(name);
         item->setData(Qt::UserRole, i.key());
         QFont font = item->font();
         font.setBold(true);
         item->setFont(font);
         ui->tableWidget->setItem(ui->tableWidget->rowCount() - 1, ColumnName, item);
 
-        functionsDescriptions.contains(i.key()) ? item->setToolTip(functionsDescriptions.value(i.key()).translate(
-                                                      VAbstractApplication::VApp()->Settings()->GetLocale()))
-                                                : item->setToolTip(i.value().getMdisambiguation());
+        if (functionsDescriptions.contains(i.key()))
+        {
+            QString description =
+                (!settings->IsTranslateFormula() ? functionsDescriptions.value(i.key()).getMsourceText()
+                                                 : functionsDescriptions.value(i.key()).translate(
+                                                       VAbstractApplication::VApp()->Settings()->GetLocale()));
+            item->setToolTip(description);
+        }
+        else
+        {
+            item->setToolTip(i.value().getMdisambiguation());
+        }
         ++i;
     }
 
@@ -800,7 +815,8 @@ void DialogEditWrongFormula::FilterVariablesEdited(const QString &filter)
         const QList<QTableWidgetItem *> items = ui->tableWidget->findItems(filter, Qt::MatchContains);
         for (auto *item : items)
         {
-            // If filter is empty findItems() for unknown reason returns nullptr items.
+            // If filter is empty findItems() for unknown reason returns nullptr
+            // items.
             if (item)
             {
                 ui->tableWidget->showRow(item->row());

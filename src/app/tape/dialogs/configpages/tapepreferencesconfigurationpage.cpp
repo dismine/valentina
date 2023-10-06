@@ -97,6 +97,8 @@ TapePreferencesConfigurationPage::TapePreferencesConfigurationPage(QWidget *pare
     connect(ui->resetWarningsButton, &QPushButton::released, this,
             []() { MApplication::VApp()->TapeSettings()->SetConfirmFormatRewriting(true); });
 
+    ui->checkBoxTranslateFormula->setChecked(settings->IsTranslateFormula());
+
     //----------------------- Toolbar
     ui->toolBarStyleCheck->setChecked(settings->GetToolBarStyle());
 
@@ -147,6 +149,8 @@ auto TapePreferencesConfigurationPage::Apply() -> QStringList
         VTheme::Instance()->ResetThemeSettings();
         QGuiApplication::restoreOverrideCursor();
     }
+
+    settings->SetTranslateFormula(ui->checkBoxTranslateFormula->isChecked());
 
     if (settings->IsDontUseNativeDialog() != ui->checkBoxDontUseNativeDialog->isChecked())
     {

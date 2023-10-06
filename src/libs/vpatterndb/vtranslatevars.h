@@ -40,12 +40,6 @@ public:
     explicit VTranslateVars();
     ~VTranslateVars() override = default;
 
-    auto VariablesFromUser(QString &newFormula, vsizetype position, const QString &token, vsizetype &bias) const
-        -> bool;
-    auto FunctionsFromUser(QString &newFormula, vsizetype position, const QString &token, vsizetype &bias) const
-        -> bool;
-    auto VariablesToUser(QString &newFormula, vsizetype position, const QString &token, vsizetype &bias) const -> bool;
-
     auto InternalVarToUser(const QString &var) const -> QString;
 
     auto VarToUser(const QString &var) const -> QString;
@@ -86,6 +80,12 @@ private:
     void InitPatternMakingSystems();
     void InitVariables();
     void InitFunctions();
+
+    auto VariablesFromUser(QString &newFormula, vsizetype position, const QString &token, vsizetype &bias) const
+        -> bool;
+    auto FunctionsFromUser(QString &newFormula, vsizetype position, const QString &token, vsizetype &bias) const
+        -> bool;
+    auto VariablesToUser(QString &newFormula, vsizetype position, const QString &token, vsizetype &bias) const -> bool;
 
     void PrepareFunctionTranslations();
 

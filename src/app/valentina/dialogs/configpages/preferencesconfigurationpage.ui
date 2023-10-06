@@ -33,9 +33,9 @@
           <property name="geometry">
            <rect>
             <x>0</x>
-            <y>-134</y>
+            <y>-163</y>
             <width>624</width>
-            <height>966</height>
+            <height>995</height>
            </rect>
           </property>
           <layout class="QVBoxLayout" name="verticalLayout_2">
@@ -259,6 +259,19 @@
                 </property>
                 <property name="text">
                  <string>Interactive tools</string>
+                </property>
+                <property name="checked">
+                 <bool>true</bool>
+                </property>
+               </widget>
+              </item>
+              <item>
+               <widget class="QCheckBox" name="checkBoxTranslateFormula">
+                <property name="toolTip">
+                 <string>Enable to translate formula according to locale</string>
+                </property>
+                <property name="text">
+                 <string>Translate formula</string>
                 </property>
                 <property name="checked">
                  <bool>true</bool>

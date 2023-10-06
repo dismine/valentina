@@ -130,6 +130,7 @@ PreferencesConfigurationPage::PreferencesConfigurationPage(QWidget *parent)
     ui->checkBoxFreeCurve->setChecked(settings->IsFreeCurveMode());
     ui->checkBoxZoomFitBestCurrentPP->setChecked(settings->IsDoubleClickZoomFitBestCurrentPP());
     ui->checkBoxInteractiveTools->setChecked(settings->IsInteractiveTools());
+    ui->checkBoxTranslateFormula->setChecked(settings->IsTranslateFormula());
 
     //----------------------- Toolbar
     ui->toolBarStyleCheck->setChecked(settings->GetToolBarStyle());
@@ -250,6 +251,7 @@ auto PreferencesConfigurationPage::Apply() -> QStringList
     settings->SetFreeCurveMode(ui->checkBoxFreeCurve->isChecked());
     settings->SetDoubleClickZoomFitBestCurrentPP(ui->checkBoxZoomFitBestCurrentPP->isChecked());
     settings->SetInteractiveTools(ui->checkBoxInteractiveTools->isChecked());
+    settings->SetTranslateFormula(ui->checkBoxTranslateFormula->isChecked());
 
     if (m_pieceLabelLangChanged)
     {

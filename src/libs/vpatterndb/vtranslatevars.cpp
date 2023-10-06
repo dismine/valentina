@@ -968,6 +968,12 @@ auto VTranslateVars::VariablesToUser(QString &newFormula, vsizetype position, co
 //---------------------------------------------------------------------------------------------------------------------
 auto VTranslateVars::InternalVarToUser(const QString &var) const -> QString
 {
+    VCommonSettings *settings = VAbstractApplication::VApp()->Settings();
+    if (!settings->IsTranslateFormula())
+    {
+        return var;
+    }
+
     QString newVar = var;
     vsizetype bias = 0;
     if (VariablesToUser(newVar, 0, var, bias))
@@ -985,6 +991,12 @@ auto VTranslateVars::VarToUser(const QString &var) const -> QString
     if (locale == QStringLiteral("zh_CN") || locale == QStringLiteral("he_IL"))
     {
         return var; // We do not support translation of variables for these locales
+    }
+
+    VCommonSettings *settings = VAbstractApplication::VApp()->Settings();
+    if (!settings->IsTranslateFormula())
+    {
+        return var;
     }
 
     if (measurements.contains(var))
@@ -1007,6 +1019,12 @@ auto VTranslateVars::VarFromUser(const QString &var) const -> QString
     if (locale == QStringLiteral("zh_CN") || locale == QStringLiteral("he_IL"))
     {
         return var; // We do not support translation of variables for Chinese
+    }
+
+    VCommonSettings *settings = VAbstractApplication::VApp()->Settings();
+    if (!settings->IsTranslateFormula())
+    {
+        return var;
     }
 
     QString newVar = var;
@@ -1061,6 +1079,12 @@ auto VTranslateVars::FormulaFromUser(const QString &formula, bool osSeparator) c
         return formula;
     }
 
+    VCommonSettings *settings = VAbstractApplication::VApp()->Settings();
+    if (!settings->IsTranslateFormula())
+    {
+        return formula;
+    }
+
     // Eval formula
     QScopedPointer<qmu::QmuTokenParser> cal(
         new qmu::QmuTokenParser(formula, osSeparator, true, GetTranslatedFunctions()));
@@ -1101,6 +1125,12 @@ auto VTranslateVars::TryFormulaFromUser(const QString &formula, bool osSeparator
 auto VTranslateVars::FormulaToUser(const QString &formula, bool osSeparator) const -> QString
 {
     if (formula.isEmpty())
+    {
+        return formula;
+    }
+
+    VCommonSettings *settings = VAbstractApplication::VApp()->Settings();
+    if (!settings->IsTranslateFormula())
     {
         return formula;
     }
