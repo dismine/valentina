@@ -61,6 +61,12 @@
 #include "../ifc/exception/vexception.h"
 #include "literals.h"
 
+#if QT_VERSION < QT_VERSION_CHECK(6, 4, 0)
+#include "compatibility.h"
+#endif
+
+using namespace Qt::Literals::StringLiterals;
+
 namespace
 {
 //---------------------------------------------------------------------------------------------------------------------
@@ -100,7 +106,7 @@ void InitLanguageList(QComboBox *combobox)
         locale.truncate(locale.lastIndexOf('.'));  // "valentina_de_De"
         locale.remove(0, locale.indexOf('_') + 1); // "de_De"
 
-        if (locale.startsWith(QLatin1String("ru")))
+        if (locale.startsWith("ru"_L1))
         {
             continue;
         }
@@ -114,11 +120,11 @@ void InitLanguageList(QComboBox *combobox)
         QString lang = loc.nativeLanguageName();
         // Since Qt 5.12 country names have spaces
         QString country = QLocale::countryToString(loc.country()).remove(' ');
-        if (country == QLatin1String("Czechia"))
+        if (country == "Czechia"_L1)
         {
-            country = QLatin1String("CzechRepublic");
+            country = "CzechRepublic"_L1;
         }
-        QIcon ico(QString("://flags/%1.png").arg(country));
+        QIcon ico(u"://flags/%1.png"_s.arg(country));
 
         combobox->addItem(ico, lang, locale);
     }
@@ -127,7 +133,7 @@ void InitLanguageList(QComboBox *combobox)
     {
         // English language is internal and doens't have own *.qm file.
         // Since Qt 5.12 country names have spaces
-        QIcon ico(QString("://flags/%1.png").arg(QLocale::countryToString(QLocale::UnitedStates).remove(' ')));
+        QIcon ico(u"://flags/%1.png"_s.arg(QLocale::countryToString(QLocale::UnitedStates).remove(' ')));
         QString lang = QLocale(en_US).nativeLanguageName();
         combobox->addItem(ico, lang, en_US);
     }
@@ -332,12 +338,12 @@ void MacosEnableLayerBacking()
 QT_WARNING_PUSH
 QT_WARNING_DISABLE_CLANG("-Wunused-member-function")
 
-Q_GLOBAL_STATIC_WITH_ARGS(const QString, strTMark, (QLatin1String("tMark")))         // NOLINT
-Q_GLOBAL_STATIC_WITH_ARGS(const QString, strVMark, (QLatin1String("vMark")))         // NOLINT
-Q_GLOBAL_STATIC_WITH_ARGS(const QString, strVMark2, (QLatin1String("vMark2")))       // NOLINT
-Q_GLOBAL_STATIC_WITH_ARGS(const QString, strUMark, (QLatin1String("uMark")))         // NOLINT
-Q_GLOBAL_STATIC_WITH_ARGS(const QString, strBoxMark, (QLatin1String("boxMark")))     // NOLINT
-Q_GLOBAL_STATIC_WITH_ARGS(const QString, strCheckMark, (QLatin1String("checkMark"))) // NOLINT
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, strTMark, ("tMark"_L1))         // NOLINT
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, strVMark, ("vMark"_L1))         // NOLINT
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, strVMark2, ("vMark2"_L1))       // NOLINT
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, strUMark, ("uMark"_L1))         // NOLINT
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, strBoxMark, ("boxMark"_L1))     // NOLINT
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, strCheckMark, ("checkMark"_L1)) // NOLINT
 
 QT_WARNING_POP
 
@@ -567,8 +573,8 @@ auto operator>>(QDataStream &in, CustomSARecord &record) -> QDataStream &
     {
         QString message = QCoreApplication::tr("CustomSARecord prefix mismatch error: actualStreamHeader = 0x%1 "
                                                "and streamHeader = 0x%2")
-                              .arg(actualStreamHeader, 8, 0x10, QChar('0'))
-                              .arg(CustomSARecord::streamHeader, 8, 0x10, QChar('0'));
+                              .arg(actualStreamHeader, 8, 0x10, '0'_L1)
+                              .arg(CustomSARecord::streamHeader, 8, 0x10, '0'_L1);
         throw VException(message);
     }
 

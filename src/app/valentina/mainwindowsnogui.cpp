@@ -76,6 +76,8 @@
 #include <QWinTaskbarProgress>
 #endif
 
+using namespace Qt::Literals::StringLiterals;
+
 QT_WARNING_PUSH
 QT_WARNING_DISABLE_CLANG("-Wmissing-prototypes")
 QT_WARNING_DISABLE_INTEL(1418)
@@ -555,7 +557,7 @@ void MainWindowsNoGUI::ExportFlatLayout(const QList<QGraphicsScene *> &scenes, c
 
     if (format == LayoutExportFormats::PDFTiled && m_dialogSaveLayout->Mode() == Draw::Layout)
     {
-        const QString name = path + '/' + m_dialogSaveLayout->FileName() + QChar('1');
+        const QString name = path + '/'_L1 + m_dialogSaveLayout->FileName() + '1'_L1;
         PdfTiledFile(name);
     }
     else

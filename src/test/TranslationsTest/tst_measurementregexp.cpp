@@ -35,6 +35,12 @@
 #include <QTranslator>
 #include <QtTest>
 
+#if QT_VERSION < QT_VERSION_CHECK(6, 4, 0)
+#include "../vmisc/compatibility.h"
+#endif
+
+using namespace Qt::Literals::StringLiterals;
+
 namespace
 {
 auto InitializePmSystems() noexcept -> QStringList
@@ -82,8 +88,7 @@ void TST_MeasurementRegExp::initTestCase()
     const int res = LoadMeasurements(m_systemCode, m_locale);
     if (res != NoError)
     {
-        const QString message =
-            QStringLiteral("Couldn't load measurements. System = %1, locale = %2").arg(m_systemCode, m_locale);
+        const QString message = u"Couldn't load measurements. System = %1, locale = %2"_s.arg(m_systemCode, m_locale);
 
         if (res == ErrorMissing)
         {
@@ -93,8 +98,7 @@ void TST_MeasurementRegExp::initTestCase()
 
     if (LoadVariables(m_locale) != NoError)
     {
-        const QString message =
-            QString("Couldn't load variables. System = %1, locale = %2").arg(m_systemCode, m_locale);
+        const QString message = u"Couldn't load variables. System = %1, locale = %2"_s.arg(m_systemCode, m_locale);
         QSKIP(qUtf8Printable(message));
     }
 
@@ -143,7 +147,7 @@ void TST_MeasurementRegExp::TestCheckIsNamesUnique_data()
     QList<QString> keys = names.uniqueKeys();
     for (const auto &key : keys)
     {
-        const QString tag = QString("System: '%1', locale: '%2'. Name '%3'").arg(m_systemCode, m_locale, key);
+        const QString tag = u"System: '%1', locale: '%2'. Name '%3'"_s.arg(m_systemCode, m_locale, key);
         QTest::newRow(qUtf8Printable(tag)) << key << QStringList(names.values(key));
     }
 }
@@ -156,8 +160,8 @@ void TST_MeasurementRegExp::TestCheckIsNamesUnique()
 
     if (originalNames.size() > 1)
     {
-        const QString message = QString("Name is not unique. Translated name:'%1' also assosiated with: %2.")
-                                    .arg(translatedName, originalNames.join(", "));
+        const QString message = u"Name is not unique. Translated name:'%1' also assosiated with: %2."_s.arg(
+            translatedName, originalNames.join(", "));
         QFAIL(qUtf8Printable(message));
     }
 }
@@ -202,8 +206,7 @@ void TST_MeasurementRegExp::TestCombinations(const QStringList &locales) const
     const QStringList fileNames = dir.entryList(QStringList("measurements_p*_*.qm"));
 
     // cppcheck-suppress unreadVariable
-    const QString error =
-        QString("Unexpected count of files. Excpected %1, got %2.").arg(combinations).arg(fileNames.size());
+    const QString error = u"Unexpected count of files. Excpected %1, got %2."_s.arg(combinations).arg(fileNames.size());
     QVERIFY2(combinations == fileNames.size(), qUtf8Printable(error));
 }
 
@@ -216,7 +219,7 @@ void TST_MeasurementRegExp::PrepareData()
 
     for (const auto &str : originalNames)
     {
-        const QString tag = QString("System: '%1', locale: '%2'. Name '%3'").arg(m_systemCode, m_locale, str);
+        const QString tag = u"System: '%1', locale: '%2'. Name '%3'"_s.arg(m_systemCode, m_locale, str);
         QTest::newRow(qUtf8Printable(tag)) << str;
     }
 }
@@ -233,22 +236,22 @@ auto TST_MeasurementRegExp::LoadMeasurements(const QString &checkedSystem, const
     const QString path = TranslationsPath();
     const QString file = QStringLiteral("measurements_%1_%2.qm").arg(checkedSystem, checkedLocale);
 
-    QFileInfo info(path + QLatin1String("/") + file);
+    QFileInfo info(path + '/'_L1 + file);
 
     if (not info.exists())
     {
         const QString message =
-            QString("File for translation for system = %1 and locale = %2 doesn't exists. \nFull path: %3/%4")
-                .arg(checkedSystem, checkedLocale, path, file);
+            u"File for translation for system = %1 and locale = %2 doesn't exists. \nFull path: %3/%4"_s.arg(
+                checkedSystem, checkedLocale, path, file);
         QWARN(qUtf8Printable(message));
 
         return ErrorMissing;
     }
 
-    if (QFileInfo(path + QLatin1String("/") + file).size() <= 34)
+    if (QFileInfo(path + '/'_L1 + file).size() <= 34)
     {
-        const QString message = QString("Translation for system = %1 and locale = %2 is empty. \nFull path: %3/%4")
-                                    .arg(checkedSystem, checkedLocale, path, file);
+        const QString message = u"Translation for system = %1 and locale = %2 is empty. \nFull path: %3/%4"_s.arg(
+            checkedSystem, checkedLocale, path, file);
         QWARN(qUtf8Printable(message));
 
         return ErrorSize;
@@ -259,8 +262,8 @@ auto TST_MeasurementRegExp::LoadMeasurements(const QString &checkedSystem, const
 
     if (not m_pmsTranslator->load(file, path))
     {
-        const QString message = QString("Can't load translation for system = %1 and locale = %2. \nFull path: %3/%4")
-                                    .arg(checkedSystem, checkedLocale, path, file);
+        const QString message = u"Can't load translation for system = %1 and locale = %2. \nFull path: %3/%4"_s.arg(
+            checkedSystem, checkedLocale, path, file);
         QWARN(qUtf8Printable(message));
 
         delete m_pmsTranslator;
@@ -270,8 +273,8 @@ auto TST_MeasurementRegExp::LoadMeasurements(const QString &checkedSystem, const
 
     if (not QCoreApplication::installTranslator(m_pmsTranslator))
     {
-        const QString message = QString("Can't install translation for system = %1 and locale = %2. \nFull path: %3/%4")
-                                    .arg(checkedSystem, checkedLocale, path, file);
+        const QString message = u"Can't install translation for system = %1 and locale = %2. \nFull path: %3/%4"_s.arg(
+            checkedSystem, checkedLocale, path, file);
         QWARN(qUtf8Printable(message));
 
         delete m_pmsTranslator;
@@ -292,7 +295,7 @@ void TST_MeasurementRegExp::RemoveTrMeasurements(const QString &checkedSystem, c
         if (result == false)
         {
             const QString message =
-                QString("Can't remove translation for system = %1 and locale = %2").arg(checkedSystem, checkedLocale);
+                u"Can't remove translation for system = %1 and locale = %2"_s.arg(checkedSystem, checkedLocale);
             QWARN(qUtf8Printable(message));
         }
         delete m_pmsTranslator;

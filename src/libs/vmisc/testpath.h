@@ -29,8 +29,8 @@
 #define TESTPATH_H
 
 #include <QDir>
-#include <QJsonDocument>
 #include <QJsonArray>
+#include <QJsonDocument>
 #include <QJsonObject>
 #include <QString>
 #include <QTemporaryFile>
@@ -45,14 +45,12 @@ class VRawSAPoint;
 auto PointToJson(const QPointF &point) -> QJsonObject;
 void VectorToJson(const QVector<QPointF> &points, QJsonObject &json);
 
-template <class T>
-void VectorToJson(const QVector<T> &points, QJsonObject &json);
+template <class T> void VectorToJson(const QVector<T> &points, QJsonObject &json);
 
 //---------------------------------------------------------------------------------------------------------------------
-template <class T>
-void DumpVector(const QVector<T> &points, const QString &templateName=QString())
+template <class T> void DumpVector(const QVector<T> &points, const QString &templateName = QString())
 {
-    QTemporaryFile temp; // Go to tmp folder to find dump
+    QTemporaryFile temp;       // Go to tmp folder to find dump
     temp.setAutoRemove(false); // Remove dump manually
 
     if (not templateName.isEmpty())
@@ -63,14 +61,14 @@ void DumpVector(const QVector<T> &points, const QString &templateName=QString())
     if (temp.open())
     {
 #if defined(Q_OS_LINUX)
-    #if QT_VERSION >= QT_VERSION_CHECK(5, 10, 0)
-//        On Linux, QTemporaryFile will attempt to create unnamed temporary
-//        files. If that succeeds, open() will return true but exists() will be
-//        false. If you call fileName() or any function that calls it,
-//        QTemporaryFile will give the file a name, so most applications will
-//        not see a difference.
+#if QT_VERSION >= QT_VERSION_CHECK(5, 10, 0)
+        //        On Linux, QTemporaryFile will attempt to create unnamed temporary
+        //        files. If that succeeds, open() will return true but exists() will be
+        //        false. If you call fileName() or any function that calls it,
+        //        QTemporaryFile will give the file a name, so most applications will
+        //        not see a difference.
         temp.fileName(); // call to create a file on disk
-    #endif
+#endif
 #endif
         QJsonObject vectorObject;
         VectorToJson(points, vectorObject);
@@ -83,11 +81,10 @@ void DumpVector(const QVector<T> &points, const QString &templateName=QString())
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-template <class T>
-void VectorToJson(const QVector<T> &points, QJsonObject &json)
+template <class T> void VectorToJson(const QVector<T> &points, QJsonObject &json)
 {
     QJsonArray pointsArray;
-    for (auto point: points)
+    for (auto point : points)
     {
         pointsArray.append(point.toJson());
     }

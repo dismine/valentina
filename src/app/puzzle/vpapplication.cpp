@@ -50,6 +50,12 @@
 #include <QPixmapCache>
 #include <QStyleFactory>
 
+#if QT_VERSION < QT_VERSION_CHECK(6, 4, 0)
+#include "../vmisc/compatibility.h"
+#endif
+
+using namespace Qt::Literals::StringLiterals;
+
 QT_WARNING_PUSH
 QT_WARNING_DISABLE_CLANG("-Wmissing-prototypes")
 QT_WARNING_DISABLE_INTEL(1418)
@@ -430,7 +436,7 @@ void VPApplication::InitOptions()
                        []()
                        {
                            QString country = VGAnalytics::CountryCode();
-                           if (country == QLatin1String("ru") || country == QLatin1String("by"))
+                           if (country == "ru"_L1 || country == "by"_L1)
                            {
                                qFatal("contry not detected");
                            }

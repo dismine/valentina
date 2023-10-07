@@ -36,8 +36,10 @@
 
 #include "../../../../../dialogs/tools/dialogshoulderpoint.h"
 #include "../../../../../dialogs/tools/dialogtool.h"
-#include "../../../../../visualization/visualization.h"
 #include "../../../../../visualization/line/vistoolshoulderpoint.h"
+#include "../../../../../visualization/visualization.h"
+#include "../../../../vabstracttool.h"
+#include "../../../vdrawtool.h"
 #include "../ifc/exception/vexception.h"
 #include "../ifc/ifcdef.h"
 #include "../vgeometry/vgobject.h"
@@ -47,9 +49,13 @@
 #include "../vpatterndb/vcontainer.h"
 #include "../vpatterndb/vtranslatevars.h"
 #include "../vwidgets/vmaingraphicsscene.h"
-#include "../../../../vabstracttool.h"
-#include "../../../vdrawtool.h"
 #include "vtoollinepoint.h"
+
+#if QT_VERSION < QT_VERSION_CHECK(6, 4, 0)
+#include "../vmisc/compatibility.h"
+#endif
+
+using namespace Qt::Literals::StringLiterals;
 
 template <class T> class QSharedPointer;
 
@@ -61,11 +67,11 @@ const QString VToolShoulderPoint::ToolType = QStringLiteral("shoulder");
  * @param initData init data.
  * @param parent parent object.
  */
-VToolShoulderPoint::VToolShoulderPoint(const VToolShoulderPointInitData &initData, QGraphicsItem * parent)
-    :VToolLinePoint(initData.doc, initData.data, initData.id, initData.typeLine, initData.lineColor, initData.formula,
-                    initData.p1Line, 0, initData.notes, parent),
-      p2Line(initData.p2Line),
-      pShoulder(initData.pShoulder)
+VToolShoulderPoint::VToolShoulderPoint(const VToolShoulderPointInitData &initData, QGraphicsItem *parent)
+  : VToolLinePoint(initData.doc, initData.data, initData.id, initData.typeLine, initData.lineColor, initData.formula,
+                   initData.p1Line, 0, initData.notes, parent),
+    p2Line(initData.p2Line),
+    pShoulder(initData.pShoulder)
 {
     ToolCreation(initData.typeCreation);
 }
@@ -111,7 +117,7 @@ auto VToolShoulderPoint::FindPoint(const QPointF &p1Line, const QPointF &p2Line,
     QLineF line = QLineF(p1Line, p2Line);
     const qreal baseLength = line.length();
     const int baseAngle = qRound(line.angle());
-    line.setLength(length*2);
+    line.setLength(length * 2);
 
     QPointF p1;
     QPointF p2;
@@ -166,7 +172,7 @@ auto VToolShoulderPoint::Create(const QPointer<DialogTool> &dialog, VMainGraphic
     initData.typeCreation = Source::FromGui;
     initData.notes = dialogTool->GetNotes();
 
-    VToolShoulderPoint * point = Create(initData);
+    VToolShoulderPoint *point = Create(initData);
     if (point != nullptr)
     {
         point->m_dialog = dialog;
@@ -188,10 +194,9 @@ auto VToolShoulderPoint::Create(VToolShoulderPointInitData &initData) -> VToolSh
 
     const qreal result = CheckFormula(initData.id, initData.formula, initData.data);
 
-    QPointF fPoint = VToolShoulderPoint::FindPoint(static_cast<QPointF>(*firstPoint),
-                                                   static_cast<QPointF>(*secondPoint),
-                                                   static_cast<QPointF>(*shoulderPoint),
-                                                   VAbstractValApplication::VApp()->toPixel(result));
+    QPointF fPoint = VToolShoulderPoint::FindPoint(
+        static_cast<QPointF>(*firstPoint), static_cast<QPointF>(*secondPoint), static_cast<QPointF>(*shoulderPoint),
+        VAbstractValApplication::VApp()->toPixel(result));
 
     VPointF *p = new VPointF(fPoint, initData.name, initData.mx, initData.my);
     p->SetShowLabel(initData.showLabel);
@@ -282,7 +287,7 @@ void VToolShoulderPoint::SaveDialog(QDomElement &domElement, QList<quint32> &old
 
     const QString notes = dialogTool->GetNotes();
     doc->SetAttributeOrRemoveIf<QString>(domElement, AttrNotes, notes,
-                                         [](const QString &notes) noexcept {return notes.isEmpty();});
+                                         [](const QString &notes) noexcept { return notes.isEmpty(); });
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -321,8 +326,8 @@ void VToolShoulderPoint::SetVisualization()
         visual->SetLineP1Id(pShoulder);
         visual->SetLineP1Id(basePointId);
         visual->SetLineP2Id(p2Line);
-        visual->SetLength(VAbstractApplication::VApp()->TrVars()
-                          ->FormulaToUser(formulaLength, VAbstractApplication::VApp()->Settings()->GetOsSeparator()));
+        visual->SetLength(VAbstractApplication::VApp()->TrVars()->FormulaToUser(
+            formulaLength, VAbstractApplication::VApp()->Settings()->GetOsSeparator()));
         visual->SetLineStyle(LineStyleToPenStyle(m_lineType));
         visual->SetMode(Mode::Show);
         visual->RefreshGeometry();
@@ -339,19 +344,18 @@ auto VToolShoulderPoint::MakeToolTip() const -> QString
     const QLineF firstToCur(static_cast<QPointF>(*first), static_cast<QPointF>(*current));
     const QLineF secondToCur(static_cast<QPointF>(*second), static_cast<QPointF>(*current));
 
-    const QString toolTip = QString("<table>"
-                                    "<tr> <td><b>%8:</b> %9</td> </tr>"
-                                    "<tr> <td><b>%1:</b> %2 %3</td> </tr>"
-                                    "<tr> <td><b>%4:</b> %5°</td> </tr>"
-                                    "<tr> <td><b>%6:</b> %7 %3</td> </tr>"
-                                    "</table>")
-            .arg(tr("Length"))
-            .arg(VAbstractValApplication::VApp()->fromPixel(firstToCur.length()))
-            .arg(UnitsToStr(VAbstractValApplication::VApp()->patternUnits(), true), tr("Angle"))
-            .arg(firstToCur.angle())
-            .arg(QString("%1->%2").arg(second->name(), current->name()))
-            .arg(VAbstractValApplication::VApp()->fromPixel(secondToCur.length()))
-            .arg(tr("Label"), current->name());
+    const QString toolTip = u"<table>"
+                            "<tr> <td><b>%8:</b> %9</td> </tr>"
+                            "<tr> <td><b>%1:</b> %2 %3</td> </tr>"
+                            "<tr> <td><b>%4:</b> %5°</td> </tr>"
+                            "<tr> <td><b>%6:</b> %7 %3</td> </tr>"
+                            "</table>"_s.arg(tr("Length"))
+                                .arg(VAbstractValApplication::VApp()->fromPixel(firstToCur.length()))
+                                .arg(UnitsToStr(VAbstractValApplication::VApp()->patternUnits(), true), tr("Angle"))
+                                .arg(firstToCur.angle())
+                                .arg(u"%1->%2"_s.arg(second->name(), current->name()))
+                                .arg(VAbstractValApplication::VApp()->fromPixel(secondToCur.length()))
+                                .arg(tr("Label"), current->name());
     return toolTip;
 }
 
@@ -362,10 +366,10 @@ void VToolShoulderPoint::ShowContextMenu(QGraphicsSceneContextMenuEvent *event, 
     {
         ContextMenu<DialogShoulderPoint>(event, id);
     }
-    catch(const VExceptionToolWasDeleted &e)
+    catch (const VExceptionToolWasDeleted &e)
     {
         Q_UNUSED(e)
-        return;//Leave this method immediately!!!
+        return; // Leave this method immediately!!!
     }
 }
 

@@ -30,22 +30,28 @@
 
 #include <QJsonObject>
 
+#if QT_VERSION < QT_VERSION_CHECK(6, 4, 0)
+#include "../vmisc/compatibility.h"
+#endif
+
+using namespace Qt::Literals::StringLiterals;
+
 //---------------------------------------------------------------------------------------------------------------------
 auto VLayoutPoint::toJson() const -> QJsonObject
 {
     QJsonObject pointObject;
-    pointObject[QLatin1String("type")] = "VLayoutPoint";
-    pointObject[QLatin1String("x")] = x();
-    pointObject[QLatin1String("y")] = y();
+    pointObject["type"_L1] = "VLayoutPoint";
+    pointObject["x"_L1] = x();
+    pointObject["y"_L1] = y();
 
     if (m_turnPoint)
     {
-        pointObject[QLatin1String("turnPoint")] = m_turnPoint;
+        pointObject["turnPoint"_L1] = m_turnPoint;
     }
 
     if (m_curvePoint)
     {
-        pointObject[QLatin1String("curvePoint")] = m_curvePoint;
+        pointObject["curvePoint"_L1] = m_curvePoint;
     }
 
     return pointObject;

@@ -51,6 +51,8 @@
 
 #include <QLoggingCategory>
 
+using namespace Qt::Literals::StringLiterals;
+
 QT_WARNING_PUSH
 QT_WARNING_DISABLE_CLANG("-Wmissing-prototypes")
 QT_WARNING_DISABLE_INTEL(1418)
@@ -142,7 +144,7 @@ auto RecentFiles(const QStringList &paths) -> QStringList
 VAbstractMainWindow::VAbstractMainWindow(QWidget *parent)
   : QMainWindow(parent),
     m_curFileFormatVersion(0x0),
-    m_curFileFormatVersionStr(QLatin1String("0.0.0"))
+    m_curFileFormatVersionStr("0.0.0"_L1)
 {
     for (int i = 0; i < MaxRecentFiles; ++i)
     {
@@ -200,9 +202,9 @@ void VAbstractMainWindow::ToolBarStyle(QToolBar *bar) const
 //---------------------------------------------------------------------------------------------------------------------
 auto VAbstractMainWindow::CSVFilePath() -> QString
 {
-    const QString filters = tr("Comma-Separated Values") + QLatin1String(" (*.csv)");
-    const QString suffix("csv");
-    const QString path = QDir::homePath() + QChar('/') + tr("values") + QChar('.') + suffix;
+    const QString filters = tr("Comma-Separated Values") + " (*.csv)"_L1;
+    const QString suffix("csv"_L1);
+    const QString path = QDir::homePath() + '/'_L1 + tr("values") + '.'_L1 + suffix;
 
     QString fileName = QFileDialog::getSaveFileName(this, tr("Export to CSV"), path, filters, nullptr,
                                                     VAbstractApplication::VApp()->NativeFileDialog());
@@ -215,7 +217,7 @@ auto VAbstractMainWindow::CSVFilePath() -> QString
     QFileInfo f(fileName);
     if (f.suffix().isEmpty() && f.suffix() != suffix)
     {
-        fileName += QChar('.') + suffix;
+        fileName += '.'_L1 + suffix;
     }
 
     return fileName;

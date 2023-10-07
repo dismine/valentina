@@ -34,6 +34,8 @@
 
 #include "../compatibility.h"
 
+using namespace Qt::Literals::StringLiterals;
+
 namespace
 {
 QT_WARNING_PUSH
@@ -410,7 +412,7 @@ void VSVGPathTokenizer::Command_m(QPainterPath &path) const
     // As per 1.2  spec 8.3.2 The "moveto" commands
     // If a 'moveto' is followed by multiple pairs of coordinates without explicit commands,
     // the subsequent pairs shall be treated as implicit 'lineto' commands.
-    m_pathElem = QLatin1Char('l');
+    m_pathElem = 'l'_L1;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -430,7 +432,7 @@ void VSVGPathTokenizer::Command_M(QPainterPath &path) const
     // As per 1.2  spec 8.3.2 The "moveto" commands
     // If a 'moveto' is followed by multiple pairs of coordinates without explicit commands,
     // the subsequent pairs shall be treated as implicit 'lineto' commands.
-    m_pathElem = QLatin1Char('L');
+    m_pathElem = 'L'_L1;
 }
 
 //---------------------------------------------------------------------------------------------------------------------

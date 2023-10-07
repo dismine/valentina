@@ -28,28 +28,35 @@
 #include "vlayoutplacelabel.h"
 
 #if QT_VERSION < QT_VERSION_CHECK(5, 14, 0)
-#   include "../vmisc/vdatastreamenum.h"
+#include "../vmisc/vdatastreamenum.h"
 #endif
 
 #include "../ifc/exception/vexception.h"
 
+#if QT_VERSION < QT_VERSION_CHECK(6, 4, 0)
+#include "../vmisc/compatibility.h"
+#endif
+
+using namespace Qt::Literals::StringLiterals;
+
 // See https://stackoverflow.com/a/46719572/3045403
-#if __cplusplus < 201703L // C++17
-constexpr quint32 VLayoutPlaceLabel::streamHeader;  // NOLINT(readability-redundant-declaration)
-constexpr quint16 VLayoutPlaceLabel::classVersion;  // NOLINT(readability-redundant-declaration)
+#if __cplusplus < 201703L                          // C++17
+constexpr quint32 VLayoutPlaceLabel::streamHeader; // NOLINT(readability-redundant-declaration)
+constexpr quint16 VLayoutPlaceLabel::classVersion; // NOLINT(readability-redundant-declaration)
 #endif
 
 //---------------------------------------------------------------------------------------------------------------------
 VLayoutPlaceLabel::VLayoutPlaceLabel(const VPlaceLabelItem &item)
-    : m_center(item.toQPointF()),
-      m_type(item.GetLabelType()),
-      m_rotationMatrix(item.RotationMatrix()),
-      m_box(item.Box())
-{}
+  : m_center(item.toQPointF()),
+    m_type(item.GetLabelType()),
+    m_rotationMatrix(item.RotationMatrix()),
+    m_box(item.Box())
+{
+}
 
 // Friend functions
 //---------------------------------------------------------------------------------------------------------------------
-auto operator<<(QDataStream &dataStream, const VLayoutPlaceLabel &data) -> QDataStream&
+auto operator<<(QDataStream &dataStream, const VLayoutPlaceLabel &data) -> QDataStream &
 {
     dataStream << VLayoutPlaceLabel::streamHeader << VLayoutPlaceLabel::classVersion;
 
@@ -65,7 +72,7 @@ auto operator<<(QDataStream &dataStream, const VLayoutPlaceLabel &data) -> QData
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-auto operator>>(QDataStream &dataStream, VLayoutPlaceLabel &data) -> QDataStream&
+auto operator>>(QDataStream &dataStream, VLayoutPlaceLabel &data) -> QDataStream &
 {
     quint32 actualStreamHeader = 0;
     dataStream >> actualStreamHeader;
@@ -74,8 +81,8 @@ auto operator>>(QDataStream &dataStream, VLayoutPlaceLabel &data) -> QDataStream
     {
         QString message = QCoreApplication::tr("VLayoutPlaceLabel prefix mismatch error: actualStreamHeader = 0x%1 and "
                                                "streamHeader = 0x%2")
-                              .arg(actualStreamHeader, 8, 0x10, QChar('0'))
-                              .arg(VLayoutPlaceLabel::streamHeader, 8, 0x10, QChar('0'));
+                              .arg(actualStreamHeader, 8, 0x10, '0'_L1)
+                              .arg(VLayoutPlaceLabel::streamHeader, 8, 0x10, '0'_L1);
         throw VException(message);
     }
 
@@ -86,7 +93,8 @@ auto operator>>(QDataStream &dataStream, VLayoutPlaceLabel &data) -> QDataStream
     {
         QString message = QCoreApplication::tr("VLayoutPlaceLabel compatibility error: actualClassVersion = %1 and "
                                                "classVersion = %2")
-                              .arg(actualClassVersion).arg(VLayoutPlaceLabel::classVersion);
+                              .arg(actualClassVersion)
+                              .arg(VLayoutPlaceLabel::classVersion);
         throw VException(message);
     }
 

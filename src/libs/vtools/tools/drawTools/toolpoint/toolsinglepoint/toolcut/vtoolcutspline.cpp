@@ -34,8 +34,10 @@
 
 #include "../../../../../dialogs/tools/dialogcutspline.h"
 #include "../../../../../dialogs/tools/dialogtool.h"
-#include "../../../../../visualization/visualization.h"
 #include "../../../../../visualization/path/vistoolcutspline.h"
+#include "../../../../../visualization/visualization.h"
+#include "../../../../vabstracttool.h"
+#include "../../../vdrawtool.h"
 #include "../ifc/exception/vexception.h"
 #include "../ifc/ifcdef.h"
 #include "../vgeometry/vabstractcubicbezier.h"
@@ -44,18 +46,22 @@
 #include "../vgeometry/vspline.h"
 #include "../vmisc/vabstractapplication.h"
 #include "../vmisc/vcommonsettings.h"
+#include "../vpatterndb/variables/vcurvelength.h"
 #include "../vpatterndb/vcontainer.h"
 #include "../vpatterndb/vtranslatevars.h"
-#include "../vpatterndb/variables/vcurvelength.h"
 #include "../vwidgets/vmaingraphicsscene.h"
-#include "../../../../vabstracttool.h"
-#include "../../../vdrawtool.h"
 #include "vtoolcut.h"
+
+#if QT_VERSION < QT_VERSION_CHECK(6, 4, 0)
+#include "../vmisc/compatibility.h"
+#endif
+
+using namespace Qt::Literals::StringLiterals;
 
 template <class T> class QSharedPointer;
 
-const QString VToolCutSpline::ToolType   = QStringLiteral("cutSpline"); // NOLINT(cert-err58-cpp)
-const QString VToolCutSpline::AttrSpline = QStringLiteral("spline"); // NOLINT(cert-err58-cpp)
+const QString VToolCutSpline::ToolType = QStringLiteral("cutSpline"); // NOLINT(cert-err58-cpp)
+const QString VToolCutSpline::AttrSpline = QStringLiteral("spline");  // NOLINT(cert-err58-cpp)
 
 //---------------------------------------------------------------------------------------------------------------------
 /**
@@ -64,7 +70,7 @@ const QString VToolCutSpline::AttrSpline = QStringLiteral("spline"); // NOLINT(c
  * @param parent parent object.
  */
 VToolCutSpline::VToolCutSpline(const VToolCutInitData &initData, QGraphicsItem *parent)
-    :VToolCut(initData, parent)
+  : VToolCut(initData, parent)
 {
     ToolCreation(initData.typeCreation);
 }
@@ -96,7 +102,7 @@ void VToolCutSpline::SetDialog()
  * @param data container with variables.
  */
 auto VToolCutSpline::Create(const QPointer<DialogTool> &dialog, VMainGraphicsScene *scene, VAbstractPattern *doc,
-                            VContainer *data) -> VToolCutSpline*
+                            VContainer *data) -> VToolCutSpline *
 {
     SCASSERT(not dialog.isNull())
     const QPointer<DialogCutSpline> dialogTool = qobject_cast<DialogCutSpline *>(dialog);
@@ -115,7 +121,7 @@ auto VToolCutSpline::Create(const QPointer<DialogTool> &dialog, VMainGraphicsSce
     initData.aliasSuffix1 = dialogTool->GetAliasSuffix1();
     initData.aliasSuffix2 = dialogTool->GetAliasSuffix2();
 
-    VToolCutSpline* point = Create(initData);
+    VToolCutSpline *point = Create(initData);
     if (point != nullptr)
     {
         point->m_dialog = dialog;
@@ -128,21 +134,21 @@ auto VToolCutSpline::Create(const QPointer<DialogTool> &dialog, VMainGraphicsSce
  * @brief Create help create tool.
  * @param initData init data.
  */
-auto VToolCutSpline::Create(VToolCutInitData &initData) -> VToolCutSpline*
+auto VToolCutSpline::Create(VToolCutInitData &initData) -> VToolCutSpline *
 {
     const auto spl = initData.data->GeometricObject<VAbstractCubicBezier>(initData.baseCurveId);
 
-    //Declare special variable "CurrentLength"
-    auto *length = new VCurveLength(initData.baseCurveId, initData.baseCurveId, spl.data(),
-                                    *initData.data->GetPatternUnit());
+    // Declare special variable "CurrentLength"
+    auto *length =
+        new VCurveLength(initData.baseCurveId, initData.baseCurveId, spl.data(), *initData.data->GetPatternUnit());
     length->SetName(currentLength);
     initData.data->AddVariable(length);
 
     const qreal result = CheckFormula(initData.id, initData.formula, initData.data);
 
     QPointF spl1p2, spl1p3, spl2p2, spl2p3;
-    QPointF point = spl->CutSpline(VAbstractValApplication::VApp()->toPixel(result), spl1p2, spl1p3, spl2p2, spl2p3,
-                                   initData.name);
+    QPointF point =
+        spl->CutSpline(VAbstractValApplication::VApp()->toPixel(result), spl1p2, spl1p3, spl2p2, spl2p3, initData.name);
 
     auto *p = new VPointF(point, initData.name, initData.mx, initData.my);
     p->SetShowLabel(initData.showLabel);
@@ -190,7 +196,7 @@ auto VToolCutSpline::Create(VToolCutInitData &initData) -> VToolCutSpline*
         VAbstractPattern::AddTool(initData.id, tool);
         initData.doc->IncrementReferens(spl->getIdTool());
     }
-    //Very important to delete it. Only this tool need this special variable.
+    // Very important to delete it. Only this tool need this special variable.
     initData.data->RemoveVariable(currentLength);
     return tool;
 }
@@ -208,10 +214,10 @@ void VToolCutSpline::ShowContextMenu(QGraphicsSceneContextMenuEvent *event, quin
     {
         ContextMenu<DialogCutSpline>(event, id);
     }
-    catch(const VExceptionToolWasDeleted &e)
+    catch (const VExceptionToolWasDeleted &e)
     {
         Q_UNUSED(e)
-        return;//Leave this method immediately!!!
+        return; // Leave this method immediately!!!
     }
 }
 
@@ -233,11 +239,11 @@ void VToolCutSpline::SaveDialog(QDomElement &domElement, QList<quint32> &oldDepe
     doc->SetAttribute(domElement, AttrLength, dialogTool->GetFormula());
     doc->SetAttribute(domElement, AttrSpline, QString().setNum(dialogTool->getSplineId()));
     doc->SetAttributeOrRemoveIf<QString>(domElement, AttrAlias1, dialogTool->GetAliasSuffix1(),
-                                         [](const QString &suffix) noexcept {return suffix.isEmpty();});
+                                         [](const QString &suffix) noexcept { return suffix.isEmpty(); });
     doc->SetAttributeOrRemoveIf<QString>(domElement, AttrAlias2, dialogTool->GetAliasSuffix2(),
-                                         [](const QString &suffix) noexcept {return suffix.isEmpty();});
+                                         [](const QString &suffix) noexcept { return suffix.isEmpty(); });
     doc->SetAttributeOrRemoveIf<QString>(domElement, AttrNotes, dialogTool->GetNotes(),
-                                         [](const QString &notes) noexcept {return notes.isEmpty();});
+                                         [](const QString &notes) noexcept { return notes.isEmpty(); });
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -268,8 +274,8 @@ void VToolCutSpline::SetVisualization()
         SCASSERT(visual != nullptr)
 
         visual->SetSplineId(baseCurveId);
-        visual->SetLength(VAbstractApplication::VApp()->TrVars()
-                          ->FormulaToUser(formula, VAbstractApplication::VApp()->Settings()->GetOsSeparator()));
+        visual->SetLength(VAbstractApplication::VApp()->TrVars()->FormulaToUser(
+            formula, VAbstractApplication::VApp()->Settings()->GetOsSeparator()));
 
         const QSharedPointer<VAbstractCurve> curve = VAbstractTool::data.GeometricObject<VAbstractCurve>(baseCurveId);
         visual->SetLineStyle(LineStyleToPenStyle(curve->GetPenStyle()));
@@ -283,15 +289,15 @@ auto VToolCutSpline::MakeToolTip() const -> QString
 {
     const auto spl = VAbstractTool::data.GeometricObject<VAbstractCubicBezier>(baseCurveId);
 
-    const QString expression = VAbstractApplication::VApp()->TrVars()
-            ->FormulaToUser(formula, VAbstractApplication::VApp()->Settings()->GetOsSeparator());
+    const QString expression = VAbstractApplication::VApp()->TrVars()->FormulaToUser(
+        formula, VAbstractApplication::VApp()->Settings()->GetOsSeparator());
     const qreal length = Visualization::FindValFromUser(expression, VAbstractTool::data.DataVariables());
 
     const QSharedPointer<VPointF> p = VAbstractTool::data.GeometricObject<VPointF>(m_id);
 
     QPointF spl1p2, spl1p3, spl2p2, spl2p3;
-    QPointF point = spl->CutSpline(VAbstractValApplication::VApp()->toPixel(length), spl1p2, spl1p3, spl2p2, spl2p3,
-                                   p->name());
+    QPointF point =
+        spl->CutSpline(VAbstractValApplication::VApp()->toPixel(length), spl1p2, spl1p3, spl2p2, spl2p3, p->name());
 
     VSpline spline1 = VSpline(spl->GetP1(), spl1p2, spl1p3, VPointF(point));
     spline1.SetAliasSuffix(m_aliasSuffix1);
@@ -302,21 +308,21 @@ auto VToolCutSpline::MakeToolTip() const -> QString
     const QString curveStr = QCoreApplication::translate("VToolCutSpline", "Curve");
     const QString lengthStr = QCoreApplication::translate("VToolCutSpline", "length");
 
-    const QString toolTip = QString("<table>"
-                                    "<tr> <td><b>%6:</b> %7</td> </tr>"
-                                    "<tr> <td><b>%1:</b> %2 %3</td> </tr>"
-                                    "<tr> <td><b>%8:</b> %9</td> </tr>"
-                                    "<tr> <td><b>%4:</b> %5 %3</td> </tr>"
-                                    "</table>")
-            .arg(curveStr + QStringLiteral("1 ") + lengthStr)
+    const QString toolTip =
+        u"<table>"
+        "<tr> <td><b>%6:</b> %7</td> </tr>"
+        "<tr> <td><b>%1:</b> %2 %3</td> </tr>"
+        "<tr> <td><b>%8:</b> %9</td> </tr>"
+        "<tr> <td><b>%4:</b> %5 %3</td> </tr>"
+        "</table>"_s.arg(curveStr + QStringLiteral("1 ") + lengthStr)
             .arg(VAbstractValApplication::VApp()->fromPixel(spline1.GetLength()))
             .arg(UnitsToStr(VAbstractValApplication::VApp()->patternUnits(), true),
                  curveStr + QStringLiteral("2 ") + lengthStr)
             .arg(VAbstractValApplication::VApp()->fromPixel(spline2.GetLength()))
             .arg(curveStr + QStringLiteral(" 1") + QCoreApplication::translate("VToolCutSpline", "label"),
-                                     spline1.ObjectName(),
+                 spline1.ObjectName(),
                  curveStr + QStringLiteral(" 2") + QCoreApplication::translate("VToolCutSpline", "label"),
-                                     spline2.ObjectName());
+                 spline2.ObjectName());
 
     return toolTip;
 }

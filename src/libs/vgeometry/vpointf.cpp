@@ -34,6 +34,12 @@
 #include <QString>
 #include <QTransform>
 
+#if QT_VERSION < QT_VERSION_CHECK(6, 4, 0)
+#include "../vmisc/compatibility.h"
+#endif
+
+using namespace Qt::Literals::StringLiterals;
+
 //---------------------------------------------------------------------------------------------------------------------
 /**
  * @brief VPointF creat empty point
@@ -258,11 +264,11 @@ void VPointF::SetShowLabel(bool hide)
 auto VPointF::ToJson() const -> QJsonObject
 {
     QJsonObject object = VGObject::ToJson();
-    object[QLatin1String("x")] = x();
-    object[QLatin1String("y")] = y();
-    object[QLatin1String("name")] = name();
-    object[QLatin1String("mx")] = mx();
-    object[QLatin1String("my")] = my();
+    object["x"_L1] = x();
+    object["y"_L1] = y();
+    object["name"_L1] = name();
+    object["mx"_L1] = mx();
+    object["my"_L1] = my();
     return object;
 }
 

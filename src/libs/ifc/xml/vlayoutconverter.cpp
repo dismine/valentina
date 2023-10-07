@@ -30,6 +30,12 @@
 #include "../ifcdef.h"
 #include "../vlayout/vlayoutpoint.h"
 
+#if QT_VERSION < QT_VERSION_CHECK(6, 4, 0)
+#include "../vmisc/compatibility.h"
+#endif
+
+using namespace Qt::Literals::StringLiterals;
+
 /*
  * Version rules:
  * 1. Version have three parts "major.minor.patch";
@@ -52,28 +58,28 @@ QT_WARNING_DISABLE_CLANG("-Wunused-member-function")
 
 // The list of all string we use for conversion
 // Better to use global variables because repeating QStringLiteral blows up code size
-Q_GLOBAL_STATIC_WITH_ARGS(const QString, strSeamLineTag, (QLatin1String("seamLine")))              // NOLINT
-Q_GLOBAL_STATIC_WITH_ARGS(const QString, strSeamAllowanceTag, (QLatin1String("seamAllowance")))    // NOLINT
-Q_GLOBAL_STATIC_WITH_ARGS(const QString, strInternalPathTag, (QLatin1String("internalPath")))      // NOLINT
-Q_GLOBAL_STATIC_WITH_ARGS(const QString, strMarkerTag, (QLatin1String("marker")))                  // NOLINT
-Q_GLOBAL_STATIC_WITH_ARGS(const QString, strPointTag, (QLatin1String("point")))                    // NOLINT
-Q_GLOBAL_STATIC_WITH_ARGS(const QString, strPieceTag, (QLatin1String("piece")))                    // NOLINT
-Q_GLOBAL_STATIC_WITH_ARGS(const QString, strGrainlineTag, (QLatin1String("grainline")))            // NOLINT
-Q_GLOBAL_STATIC_WITH_ARGS(const QString, strAttrX, (QLatin1String("x")))                           // NOLINT
-Q_GLOBAL_STATIC_WITH_ARGS(const QString, strAttrY, (QLatin1String("y")))                           // NOLINT
-Q_GLOBAL_STATIC_WITH_ARGS(const QString, strAttrTurnPoint, (QLatin1String("turnPoint")))           // NOLINT
-Q_GLOBAL_STATIC_WITH_ARGS(const QString, strAttrCurvePoint, (QLatin1String("curvePoint")))         // NOLINT
-Q_GLOBAL_STATIC_WITH_ARGS(const QString, strAttrId, (QLatin1String("id")))                         // NOLINT
-Q_GLOBAL_STATIC_WITH_ARGS(const QString, strAttrUId, (QLatin1String("uid")))                       // NOLINT
-Q_GLOBAL_STATIC_WITH_ARGS(const QString, strAttrAngle, (QLatin1String("angle")))                   // NOLINT
-Q_GLOBAL_STATIC_WITH_ARGS(const QString, strAttrArrowDirection, (QLatin1String("arrowDirection"))) // NOLINT
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, strSeamLineTag, ("seamLine"_L1))              // NOLINT
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, strSeamAllowanceTag, ("seamAllowance"_L1))    // NOLINT
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, strInternalPathTag, ("internalPath"_L1))      // NOLINT
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, strMarkerTag, ("marker"_L1))                  // NOLINT
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, strPointTag, ("point"_L1))                    // NOLINT
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, strPieceTag, ("piece"_L1))                    // NOLINT
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, strGrainlineTag, ("grainline"_L1))            // NOLINT
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, strAttrX, ("x"_L1))                           // NOLINT
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, strAttrY, ("y"_L1))                           // NOLINT
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, strAttrTurnPoint, ("turnPoint"_L1))           // NOLINT
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, strAttrCurvePoint, ("curvePoint"_L1))         // NOLINT
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, strAttrId, ("id"_L1))                         // NOLINT
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, strAttrUId, ("uid"_L1))                       // NOLINT
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, strAttrAngle, ("angle"_L1))                   // NOLINT
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, strAttrArrowDirection, ("arrowDirection"_L1)) // NOLINT
 
 QT_WARNING_POP
 
-const QChar groupSep = QLatin1Char(';');
-const QChar coordintatesSep = QLatin1Char(',');
-const QChar pointsSep = QLatin1Char(' ');
-// const QChar itemsSep        = QLatin1Char('*');
+const QChar groupSep = ';'_L1;
+const QChar coordintatesSep = ','_L1;
+const QChar pointsSep = ' '_L1;
+// const QChar itemsSep        = '*'_L1;
 
 //---------------------------------------------------------------------------------------------------------------------
 auto StringV0_1_2ToPoint(const QString &point) -> QPointF
@@ -307,17 +313,17 @@ void VLayoutConverter::ConvertPiecesToV0_1_5()
                 switch (arrows.indexOf(arrowDirection))
                 {
                     case 0: // at front
-                        SetAttribute(node, *strAttrArrowDirection, QLatin1String("oneWayUp"));
+                        SetAttribute(node, *strAttrArrowDirection, "oneWayUp"_L1);
                         break;
                     case 1: // at rear
-                        SetAttribute(node, *strAttrArrowDirection, QLatin1String("oneWayDown"));
+                        SetAttribute(node, *strAttrArrowDirection, "oneWayDown"_L1);
                         break;
                     case 2: // at four way
-                        SetAttribute(node, *strAttrArrowDirection, QLatin1String("fourWays"));
+                        SetAttribute(node, *strAttrArrowDirection, "fourWays"_L1);
                         break;
                     case 3: // at both
                     default:
-                        SetAttribute(node, *strAttrArrowDirection, QLatin1String("twoWaysUpDown"));
+                        SetAttribute(node, *strAttrArrowDirection, "twoWaysUpDown"_L1);
                         break;
                 }
             }

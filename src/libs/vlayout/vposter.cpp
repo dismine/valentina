@@ -50,6 +50,8 @@
 #include "../vmisc/def.h"
 #include "../vmisc/vabstractvalapplication.h"
 
+using namespace Qt::Literals::StringLiterals;
+
 namespace
 {
 //---------------------------------------------------------------------------------------------------------------------
@@ -254,12 +256,11 @@ auto VPoster::Borders(QGraphicsItem *parent, const PosterData &img, vsizetype sh
         sheet = QCoreApplication::translate("VPoster", "Sheet %1 of %2").arg(img.index + 1).arg(sheets);
     }
 
-    labels->setHtml(QString("<table width='100%'>"
-                            "<tr>"
-                            "<td>%1</td><td align='center'>%2</td><td align='right'>%3</td>"
-                            "</tr>"
-                            "</table>")
-                        .arg(grid, page, sheet));
+    labels->setHtml(u"<table width='100%'>"
+                    "<tr>"
+                    "<td>%1</td><td align='center'>%2</td><td align='right'>%3</td>"
+                    "</tr>"
+                    "</table>"_s.arg(grid, page, sheet));
 
     data.append(labels);
 
@@ -317,7 +318,7 @@ auto VPoster::ImageWatermark(QGraphicsItem *parent, const PosterData &img, const
         if (watermark.isNull())
         {
             const QString errorMsg =
-                QCoreApplication::translate("VPoster", "Cannot open the watermark image.") + QChar(' ') + error;
+                QCoreApplication::translate("VPoster", "Cannot open the watermark image.") + ' '_L1 + error;
             VAbstractApplication::VApp()->IsPedantic()
                 ? throw VException(errorMsg)
                 : qWarning() << VAbstractValApplication::warningMessageSignature + errorMsg;

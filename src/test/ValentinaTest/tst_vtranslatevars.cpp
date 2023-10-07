@@ -27,18 +27,20 @@
  *************************************************************************/
 
 #include "tst_vtranslatevars.h"
-#include "../vpatterndb/vtranslatevars.h"
 #include "../qmuparser/qmudef.h"
-#include "testvapplication.h"
 #include "../vmisc/compatibility.h"
+#include "../vpatterndb/vtranslatevars.h"
+#include "testvapplication.h"
 
 #include <QtTest>
 
+using namespace Qt::Literals::StringLiterals;
+
 //---------------------------------------------------------------------------------------------------------------------
 TST_VTranslateVars::TST_VTranslateVars(QObject *parent)
-    : QObject(parent),
-      m_trMs(nullptr),
-      m_systemLocale(QLocale::system())
+  : QObject(parent),
+    m_trMs(nullptr),
+    m_systemLocale(QLocale::system())
 {
 }
 
@@ -57,7 +59,7 @@ void TST_VTranslateVars::TestFormulaFromUser_data()
     QTest::addColumn<QLocale>("locale");
 
     const QList<QLocale> allLocales =
-            QLocale::matchingLocales(QLocale::AnyLanguage, QLocale::AnyScript, QLocale::AnyCountry);
+        QLocale::matchingLocales(QLocale::AnyLanguage, QLocale::AnyScript, QLocale::AnyCountry);
     for (const auto &locale : allLocales)
     {
         if (not SupportedLocale(locale))
@@ -92,7 +94,7 @@ void TST_VTranslateVars::TestFormulaToUser_data()
     QTest::addColumn<QLocale>("locale");
 
     const QList<QLocale> allLocales =
-            QLocale::matchingLocales(QLocale::AnyLanguage, QLocale::AnyScript, QLocale::AnyCountry);
+        QLocale::matchingLocales(QLocale::AnyLanguage, QLocale::AnyScript, QLocale::AnyCountry);
     for (const auto &locale : allLocales)
     {
         if (not SupportedLocale(locale))
@@ -156,17 +158,17 @@ void TST_VTranslateVars::PrepareVal(const QString &inputFormula, const QString &
 
     auto PREPARE_CASE = [locale](const QString &inputString, const QString &outputString)
     {
-        QString tag = QString("%1. String '%2'").arg(locale.name(), inputString);
+        QString tag = u"%1. String '%2'"_s.arg(locale.name(), inputString);
         QTest::newRow(qUtf8Printable(tag)) << inputString << outputString << locale;
     };
 
     PREPARE_CASE(inputString, outputString);
 
-    inputString = inputFormula+QLatin1String("+")+inputFormula;
-    outputString = outputFormula+QLatin1String("+")+outputFormula;
+    inputString = inputFormula + '+'_L1 + inputFormula;
+    outputString = outputFormula + '+'_L1 + outputFormula;
     PREPARE_CASE(inputString, outputString);
 
-    inputString = inputFormula+QString("+a");
-    outputString = outputFormula+QString("+a");
+    inputString = inputFormula + u"+a"_s;
+    outputString = outputFormula + u"+a"_s;
     PREPARE_CASE(inputString, outputString);
 }

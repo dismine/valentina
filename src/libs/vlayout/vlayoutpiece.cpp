@@ -69,6 +69,8 @@
 #include "vlayoutpiece_p.h"
 #include "vtextmanager.h"
 
+using namespace Qt::Literals::StringLiterals;
+
 namespace
 {
 //---------------------------------------------------------------------------------------------------------------------
@@ -509,7 +511,7 @@ auto ReplacePlaceholders(const QMap<QString, QString> &placeholders, QString lin
 
     auto TestDimension = [per, placeholders, line](const QString &placeholder, const QString &errorMsg)
     {
-        if (line.contains(per + placeholder + per) && placeholders.value(placeholder) == QChar('0'))
+        if (line.contains(per + placeholder + per) && placeholders.value(placeholder) == '0'_L1)
         {
             VAbstractApplication::VApp()->IsPedantic()
                 ? throw VException(errorMsg)

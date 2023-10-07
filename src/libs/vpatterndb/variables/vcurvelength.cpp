@@ -36,16 +36,22 @@
 #include "../vgeometry/vspline.h"
 #include "vcurvevariable.h"
 
+#if QT_VERSION < QT_VERSION_CHECK(6, 4, 0)
+#include "../vmisc/compatibility.h"
+#endif
+
+using namespace Qt::Literals::StringLiterals;
+
 //---------------------------------------------------------------------------------------------------------------------
 VCurveLength::VCurveLength()
-    :VCurveVariable()
+  : VCurveVariable()
 {
     SetType(VarType::CurveLength);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 VCurveLength::VCurveLength(const quint32 &id, const quint32 &parentId, const VAbstractCurve *curve, Unit patternUnit)
-    :VCurveVariable(id, parentId)
+  : VCurveVariable(id, parentId)
 {
     SetType(VarType::CurveLength);
     // cppcheck-suppress unknownMacro
@@ -63,16 +69,16 @@ VCurveLength::VCurveLength(const quint32 &id, const quint32 &parentId, const VAb
 //---------------------------------------------------------------------------------------------------------------------
 VCurveLength::VCurveLength(const quint32 &id, const quint32 &parentId, const VAbstractCurve *baseCurve,
                            const VSpline &spl, Unit patternUnit, qint32 segment)
-    :VCurveVariable(id, parentId)
+  : VCurveVariable(id, parentId)
 {
     SCASSERT(baseCurve != nullptr)
 
     SetType(VarType::CurveLength);
-    SetName(baseCurve->name() + QLatin1String("_") + seg_ + QString().setNum(segment));
+    SetName(baseCurve->name() + '_'_L1 + seg_ + QString().setNum(segment));
 
     if (not baseCurve->GetAlias().isEmpty())
     {
-        SetAlias(baseCurve->GetAlias() + QLatin1String("_") + seg_ + QString().setNum(segment));
+        SetAlias(baseCurve->GetAlias() + '_'_L1 + seg_ + QString().setNum(segment));
     }
 
     SetValue(FromPixel(spl.GetLength(), patternUnit));
@@ -80,13 +86,14 @@ VCurveLength::VCurveLength(const quint32 &id, const quint32 &parentId, const VAb
 
 //---------------------------------------------------------------------------------------------------------------------
 VCurveLength::VCurveLength(const VCurveLength &var)
-    :VCurveVariable(var)
-{}
+  : VCurveVariable(var)
+{
+}
 
 //---------------------------------------------------------------------------------------------------------------------
 auto VCurveLength::operator=(const VCurveLength &var) -> VCurveLength &
 {
-    if ( &var == this )
+    if (&var == this)
     {
         return *this;
     }
@@ -96,4 +103,5 @@ auto VCurveLength::operator=(const VCurveLength &var) -> VCurveLength &
 
 //---------------------------------------------------------------------------------------------------------------------
 VCurveLength::~VCurveLength()
-{}
+{
+}

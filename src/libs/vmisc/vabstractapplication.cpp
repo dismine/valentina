@@ -62,6 +62,8 @@
 #include "appimage.h"
 #endif // defined(APPIMAGE) && defined(Q_OS_LINUX)
 
+using namespace Qt::Literals::StringLiterals;
+
 namespace
 {
 auto FilterLocales(const QStringList &locales) -> QStringList
@@ -69,7 +71,7 @@ auto FilterLocales(const QStringList &locales) -> QStringList
     QStringList filtered;
     for (const auto &locale : locales)
     {
-        if (not locale.startsWith(QLatin1String("ru")))
+        if (not locale.startsWith("ru"_L1))
         {
             filtered.append(locale);
         }
@@ -118,17 +120,17 @@ VAbstractApplication::VAbstractApplication(int &argc, char **argv)
 #if defined(V_NO_ASSERT)
     // Ignore SSL-related warnings
     // See issue #528: Error: QSslSocket: cannot resolve SSLv2_client_method.
-    rules += QLatin1String("qt.network.ssl.warning=false\n");
+    rules += "qt.network.ssl.warning=false\n"_L1;
     // See issue #568: Certificate checking on Mac OS X.
-    rules += QLatin1String("qt.network.ssl.critical=false\n"
-                           "qt.network.ssl.fatal=false\n");
+    rules += "qt.network.ssl.critical=false\n"
+             "qt.network.ssl.fatal=false\n"_L1;
 #endif // defined(V_NO_ASSERT)
 
 #if defined(V_NO_ASSERT)
     // See issue #992: QXcbConnection: XCB Error.
-    rules += QLatin1String("qt.qpa*=false\n");
-    rules += QLatin1String("kf5.kio.core*=false\n");
-    rules += QLatin1String("qt.gui.icc.warning=false\n");
+    rules += "qt.qpa*=false\n"_L1;
+    rules += "kf5.kio.core*=false\n"_L1;
+    rules += "qt.gui.icc.warning=false\n"_L1;
 #endif
 
     if (not rules.isEmpty())
@@ -189,12 +191,11 @@ auto VAbstractApplication::translationsPath(const QString &locale) -> QString
     QString mainPath;
     if (locale.isEmpty())
     {
-        mainPath = QCoreApplication::applicationDirPath() + QLatin1String("/../Resources") + trPath;
+        mainPath = QCoreApplication::applicationDirPath() + "/../Resources"_L1 + trPath;
     }
     else
     {
-        mainPath = QCoreApplication::applicationDirPath() + QLatin1String("/../Resources") + trPath +
-                   QLatin1String("/") + locale + QLatin1String(".lproj");
+        mainPath = QCoreApplication::applicationDirPath() + "/../Resources"_L1 + trPath + '/'_L1 + locale + ".lproj"_L1;
     }
     QDir dirBundle(mainPath);
     if (dirBundle.exists())
@@ -285,7 +286,7 @@ void VAbstractApplication::WinAttachConsole()
 //---------------------------------------------------------------------------------------------------------------------
 void VAbstractApplication::LoadTranslation(QString locale)
 {
-    if (locale.startsWith(QLatin1String("ru")))
+    if (locale.startsWith("ru"_L1))
     {
         locale = QString();
     }
@@ -468,7 +469,7 @@ void VAbstractApplication::CacheTextCodec(QStringConverter::Encoding encoding, V
 void VAbstractApplication::CheckSystemLocale()
 {
     const QString defLocale = QLocale::system().name();
-    if (defLocale.startsWith(QLatin1String("ru")))
+    if (defLocale.startsWith("ru"_L1))
     {
         qFatal("Incompatible locale \"%s\"", qPrintable(defLocale));
     }
@@ -537,7 +538,7 @@ void VAbstractApplication::InitHighDpiScaling(int argc, char *argv[])
 {
 #if QT_VERSION < QT_VERSION_CHECK(6, 0, 0)
     /* For more info see: http://doc.qt.io/qt-5/highdpi.html */
-    if (IsOptionSet(argc, argv, qPrintable(QLatin1String("--") + LONG_OPTION_NO_HDPI_SCALING)))
+    if (IsOptionSet(argc, argv, qPrintable("--"_L1 + LONG_OPTION_NO_HDPI_SCALING)))
     {
         QCoreApplication::setAttribute(Qt::AA_DisableHighDpiScaling);
     }

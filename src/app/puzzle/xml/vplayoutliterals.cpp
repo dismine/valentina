@@ -27,6 +27,12 @@
  *************************************************************************/
 #include "vplayoutliterals.h"
 
+#if QT_VERSION < QT_VERSION_CHECK(6, 4, 0)
+#include "../vmisc/compatibility.h"
+#endif
+
+using namespace Qt::Literals::StringLiterals;
+
 namespace ML // Manual layout
 {
 const QString TagLayout = QStringLiteral("layout");                 // NOLINT(cert-err58-cpp)
@@ -129,8 +135,8 @@ const QString threeWaysUpDownRightStr = QStringLiteral("threeWaysUpDownRight"); 
 const QString threeWaysUpLeftRightStr = QStringLiteral("threeWaysUpLeftRight");     // NOLINT(cert-err58-cpp)
 const QString threeWaysDownLeftRightStr = QStringLiteral("threeWaysDownLeftRight"); // NOLINT(cert-err58-cpp)
 
-const QChar groupSep = QLatin1Char(';');
-const QChar coordintatesSep = QLatin1Char(',');
-const QChar pointsSep = QLatin1Char(' ');
-const QChar itemsSep = QLatin1Char('*');
+const QChar groupSep = ';'_L1;
+const QChar coordintatesSep = ','_L1;
+const QChar pointsSep = ' '_L1;
+const QChar itemsSep = '*'_L1;
 } // namespace ML

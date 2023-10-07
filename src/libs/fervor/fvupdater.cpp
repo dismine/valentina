@@ -49,17 +49,21 @@
 #include "fvavailableupdate.h"
 #include "fvupdatewindow.h"
 
+#if QT_VERSION < QT_VERSION_CHECK(6, 4, 0)
+#include "../vmisc/compatibility.h"
+#endif
+
+using namespace Qt::Literals::StringLiterals;
+
 namespace
 {
 QT_WARNING_PUSH
 QT_WARNING_DISABLE_CLANG("-Wunused-member-function")
 
 // NOLINTNEXTLINE
-Q_GLOBAL_STATIC_WITH_ARGS(const QString, defaultFeedURL,
-                          (QLatin1String("https://valentinaproject.bitbucket.io/Appcast.xml")))
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, defaultFeedURL, ("https://valentinaproject.bitbucket.io/Appcast.xml"_L1))
 // NOLINTNEXTLINE
-Q_GLOBAL_STATIC_WITH_ARGS(const QString, testFeedURL,
-                          (QLatin1String("https://valentinaproject.bitbucket.io/Appcast_testing.xml")))
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, testFeedURL, ("https://valentinaproject.bitbucket.io/Appcast_testing.xml"_L1))
 
 QT_WARNING_POP
 } // namespace
@@ -416,13 +420,13 @@ auto FvUpdater::xmlParseFeed() -> bool
 
         if (m_xml.isStartElement())
         {
-            if (m_xml.name() == QLatin1String("item"))
+            if (m_xml.name() == "item"_L1)
             {
                 xmlEnclosureUrl.clear();
                 xmlEnclosureVersion.clear();
                 xmlEnclosurePlatform.clear();
             }
-            else if (m_xml.name() == QLatin1String("enclosure"))
+            else if (m_xml.name() == "enclosure"_L1)
             {
                 const QXmlStreamAttributes attribs = m_xml.attributes();
                 const QString fervorPlatform = QStringLiteral("fervor:platform");
@@ -458,7 +462,7 @@ auto FvUpdater::xmlParseFeed() -> bool
         }
         else if (m_xml.isEndElement())
         {
-            if (m_xml.name() == QLatin1String("item"))
+            if (m_xml.name() == "item"_L1)
             {
                 // That's it - we have analyzed a single <item> and we'll stop
                 // here (because the topmost is the most recent one, and thus

@@ -32,12 +32,18 @@
 #include <QGlobalStatic>
 #include <QtTest>
 
+#if QT_VERSION < QT_VERSION_CHECK(6, 4, 0)
+#include "../vmisc/compatibility.h"
+#endif
+
+using namespace Qt::Literals::StringLiterals;
+
 namespace
 {
 QT_WARNING_PUSH
 QT_WARNING_DISABLE_CLANG("-Wunused-member-function")
 
-Q_GLOBAL_STATIC_WITH_ARGS(const QString, tmpTestFolder, (QLatin1String("tst_tape_tmp"))) // NOLINT
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, tmpTestFolder, ("tst_tape_tmp"_L1)) // NOLINT
 
 QT_WARNING_POP
 } // namespace

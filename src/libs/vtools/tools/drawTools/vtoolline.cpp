@@ -52,6 +52,12 @@
 #include "../vwidgets/vmaingraphicsscene.h"
 #include "vdrawtool.h"
 
+#if QT_VERSION < QT_VERSION_CHECK(6, 4, 0)
+#include "../vmisc/compatibility.h"
+#endif
+
+using namespace Qt::Literals::StringLiterals;
+
 template <class T> class QSharedPointer;
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -441,11 +447,10 @@ auto VToolLine::MakeToolTip() const -> QString
 
     const QLineF line(static_cast<QPointF>(*first), static_cast<QPointF>(*second));
 
-    const QString toolTip = QString("<table>"
-                                    "<tr> <td><b>%1:</b> %2 %3</td> </tr>"
-                                    "<tr> <td><b>%4:</b> %5°</td> </tr>"
-                                    "</table>")
-                                .arg(tr("Length"))
+    const QString toolTip = u"<table>"
+                            "<tr> <td><b>%1:</b> %2 %3</td> </tr>"
+                            "<tr> <td><b>%4:</b> %5°</td> </tr>"
+                            "</table>"_s.arg(tr("Length"))
                                 .arg(VAbstractValApplication::VApp()->fromPixel(line.length()))
                                 .arg(UnitsToStr(VAbstractValApplication::VApp()->patternUnits(), true), tr("Angle"))
                                 .arg(line.angle());

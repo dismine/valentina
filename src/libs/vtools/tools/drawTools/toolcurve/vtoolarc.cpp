@@ -51,6 +51,12 @@
 #include "../vwidgets/vmaingraphicsscene.h"
 #include "vabstractspline.h"
 
+#if QT_VERSION < QT_VERSION_CHECK(6, 4, 0)
+#include "../vmisc/compatibility.h"
+#endif
+
+using namespace Qt::Literals::StringLiterals;
+
 const QString VToolArc::ToolType = QStringLiteral("simple"); // NOLINT
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -385,14 +391,13 @@ auto VToolArc::MakeToolTip() const -> QString
 {
     const QSharedPointer<VArc> arc = VAbstractTool::data.GeometricObject<VArc>(m_id);
 
-    const QString toolTip = QString("<table>"
-                                    "<tr> <td><b>%10:</b> %11</td> </tr>"
-                                    "<tr> <td><b>%1:</b> %2 %3</td> </tr>"
-                                    "<tr> <td><b>%4:</b> %5 %3</td> </tr>"
-                                    "<tr> <td><b>%6:</b> %7°</td> </tr>"
-                                    "<tr> <td><b>%8:</b> %9°</td> </tr>"
-                                    "</table>")
-                                .arg(tr("Length"))
+    const QString toolTip = u"<table>"
+                            "<tr> <td><b>%10:</b> %11</td> </tr>"
+                            "<tr> <td><b>%1:</b> %2 %3</td> </tr>"
+                            "<tr> <td><b>%4:</b> %5 %3</td> </tr>"
+                            "<tr> <td><b>%6:</b> %7°</td> </tr>"
+                            "<tr> <td><b>%8:</b> %9°</td> </tr>"
+                            "</table>"_s.arg(tr("Length"))
                                 .arg(VAbstractValApplication::VApp()->fromPixel(arc->GetLength()))
                                 .arg(UnitsToStr(VAbstractValApplication::VApp()->patternUnits(), true), tr("Radius"))
                                 .arg(VAbstractValApplication::VApp()->fromPixel(arc->GetRadius()))

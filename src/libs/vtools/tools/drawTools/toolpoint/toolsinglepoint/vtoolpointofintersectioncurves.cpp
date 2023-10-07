@@ -47,6 +47,12 @@
 #include "../vwidgets/vmaingraphicsscene.h"
 #include "vtoolsinglepoint.h"
 
+#if QT_VERSION < QT_VERSION_CHECK(6, 4, 0)
+#include "../vmisc/compatibility.h"
+#endif
+
+using namespace Qt::Literals::StringLiterals;
+
 template <class T> class QSharedPointer;
 
 const QString VToolPointOfIntersectionCurves::ToolType = QStringLiteral("pointOfIntersectionCurves");
@@ -480,13 +486,13 @@ auto VToolPointOfIntersectionCurves::MakeToolTip() const -> QString
 {
     const QSharedPointer<VPointF> p = VAbstractTool::data.GeometricObject<VPointF>(m_id);
 
-    const QString toolTip = QString("<table>"
-                                    "<tr> <td><b>%1:</b> %2</td> </tr>"
-                                    "<tr> <td><b>%3:</b> %4</td> </tr>"
-                                    "<tr> <td><b>%5:</b> %6</td> </tr>"
-                                    "<tr> <td><b>%7:</b> %8</td> </tr>"
-                                    "<tr> <td><b>%9:</b> %10</td> </tr>"
-                                    "</table>")
+    const QString toolTip = u"<table>"
+                            "<tr> <td><b>%1:</b> %2</td> </tr>"
+                            "<tr> <td><b>%3:</b> %4</td> </tr>"
+                            "<tr> <td><b>%5:</b> %6</td> </tr>"
+                            "<tr> <td><b>%7:</b> %8</td> </tr>"
+                            "<tr> <td><b>%9:</b> %10</td> </tr>"
+                            "</table>"_s
                                 .arg(tr("Label"), p->name(),                            /* 1, 2 */
                                      tr("Curve 1 segment 1"), m_curve1Segments.first,   /* 3, 4 */
                                      tr("Curve 1 segment 2"), m_curve1Segments.second)  /* 5, 6 */

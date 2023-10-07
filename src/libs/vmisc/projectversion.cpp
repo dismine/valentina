@@ -41,6 +41,12 @@
 #define LATEST_TAG_DISTANCE VCS_REPO_STATE_DISTANCE
 #endif
 
+#if QT_VERSION < QT_VERSION_CHECK(6, 4, 0)
+#include "compatibility.h"
+#endif
+
+using namespace Qt::Literals::StringLiterals;
+
 //---------------------------------------------------------------------------------------------------------------------
 auto AppVersionStr() -> const QString &
 {
@@ -55,13 +61,13 @@ auto compilerString() -> QString
 #if defined(Q_CC_INTEL) // must be before GNU, Clang and MSVC because ICC/ICL claim to be them
     QString iccCompact;
 #ifdef __INTEL_CLANG_COMPILER
-    iccCompact = QLatin1String("Clang");
+    iccCompact = "Clang"_L1;
 #elif defined(__INTEL_MS_COMPAT_LEVEL)
-    iccCompact = QLatin1String("Microsoft");
+    iccCompact = "Microsoft"_L1;
 #elif defined(__GNUC__)
-    iccCompact = QLatin1String("GCC");
+    iccCompact = Q "GCC"_L1;
 #else
-    iccCompact = QLatin1String("no");
+    iccCompact = "no"_L1;
 #endif
     QString iccVersion;
     if (__INTEL_COMPILER >= 1300)
@@ -73,34 +79,31 @@ auto compilerString() -> QString
         iccVersion = QLatin1String(__INTEL_COMPILER);
     }
 #ifdef __INTEL_COMPILER_UPDATE
-    return QLatin1String("Intel(R) C++ ") + iccVersion + QChar('.') + QLatin1String(__INTEL_COMPILER_UPDATE) +
-           QLatin1String(" build ") + QLatin1String(__INTEL_COMPILER_BUILD_DATE) + QLatin1String(" [") +
-           QLatin1String(iccCompact) + QLatin1String(" compatibility]");
+    return "Intel(R) C++ "_L1 + iccVersion + '.'_L1 + QLatin1String(__INTEL_COMPILER_UPDATE) + " build "_L1 +
+           QLatin1String(__INTEL_COMPILER_BUILD_DATE) + " ["_L1 + QLatin1String(iccCompact) + " compatibility]"_L1;
 #else
-    return QLatin1String("Intel(R) C++ ") + iccVersion + QLatin1String(" build ") +
-           QLatin1String(__INTEL_COMPILER_BUILD_DATE) + QLatin1String(" [") + iccCompact +
-           QLatin1String(" compatibility]");
+    return "Intel(R) C++ "_L1 + iccVersion + " build "_L1 + QLatin1String(__INTEL_COMPILER_BUILD_DATE) + " ["_L1 +
+           iccCompact + " compatibility]"_L1;
 #endif
 #elif defined(Q_CC_CLANG)            // must be before GNU, because clang claims to be GNU too
     // cppcheck-suppress unassignedVariable
     QString isAppleString;
 #if defined(__apple_build_version__) // Apple clang has other version numbers
-    isAppleString = QLatin1String(" (Apple)");
+    isAppleString = " (Apple)"_L1;
 #endif
-    return QLatin1String("Clang ") + QString::number(__clang_major__) + QLatin1Char('.') +
-           QString::number(__clang_minor__) + isAppleString;
+    return "Clang "_L1 + QString::number(__clang_major__) + '.'_L1 + QString::number(__clang_minor__) + isAppleString;
 #elif defined(Q_CC_GNU)
-    return QLatin1String("GCC ") + QLatin1String(__VERSION__);
+    return "GCC "_L1 + QLatin1String(__VERSION__);
 #elif defined(Q_CC_MSVC)
     if (_MSC_VER >= 1800) // 1800: MSVC 2013 (yearly release cycle)
     {
-        return QLatin1String("MSVC ") + QString::number(2008 + ((_MSC_VER / 100) - 13));
+        return "MSVC "_L1 + QString::number(2008 + ((_MSC_VER / 100) - 13));
     }
     if (_MSC_VER >= 1500) // 1500: MSVC 2008, 1600: MSVC 2010, ... (2-year release cycle)
     {
-        return QLatin1String("MSVC ") + QString::number(2008 + 2 * ((_MSC_VER / 100) - 15));
+        return "MSVC "_L1 + QString::number(2008 + 2 * ((_MSC_VER / 100) - 15));
     }
-    return QLatin1String("MSVC <unknown version>");
+    return "MSVC <unknown version>"_L1;
 #else
     return QStringLiteral("<unknown compiler>");
 #endif

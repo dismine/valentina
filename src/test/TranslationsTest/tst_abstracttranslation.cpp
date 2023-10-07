@@ -29,38 +29,45 @@
 
 #include <QtTest>
 
-const QString TST_AbstractTranslation::TagName           = QStringLiteral("name");
-const QString TST_AbstractTranslation::TagMessage        = QStringLiteral("message");
-const QString TST_AbstractTranslation::TagSource         = QStringLiteral("source");
-const QString TST_AbstractTranslation::TagTranslation    = QStringLiteral("translation");
+#if QT_VERSION < QT_VERSION_CHECK(6, 4, 0)
+#include "../vmisc/compatibility.h"
+#endif
 
-const QString TST_AbstractTranslation::AttrType          = QStringLiteral("type");
-const QString TST_AbstractTranslation::AttrValVanished   = QStringLiteral("vanished");
+using namespace Qt::Literals::StringLiterals;
+
+const QString TST_AbstractTranslation::TagName = QStringLiteral("name");
+const QString TST_AbstractTranslation::TagMessage = QStringLiteral("message");
+const QString TST_AbstractTranslation::TagSource = QStringLiteral("source");
+const QString TST_AbstractTranslation::TagTranslation = QStringLiteral("translation");
+
+const QString TST_AbstractTranslation::AttrType = QStringLiteral("type");
+const QString TST_AbstractTranslation::AttrValVanished = QStringLiteral("vanished");
 const QString TST_AbstractTranslation::AttrValUnfinished = QStringLiteral("unfinished");
-const QString TST_AbstractTranslation::AttrValObsolete   = QStringLiteral("obsolete");
+const QString TST_AbstractTranslation::AttrValObsolete = QStringLiteral("obsolete");
 
 //---------------------------------------------------------------------------------------------------------------------
 TST_AbstractTranslation::TST_AbstractTranslation(QObject *parent)
-    : QObject(parent),
-      tsFile(),
-      tsXML()
-{}
+  : QObject(parent),
+    tsFile(),
+    tsXML()
+{
+}
 
 //---------------------------------------------------------------------------------------------------------------------
 auto TST_AbstractTranslation::LoadTSFile(const QString &filename) -> QDomNodeList
 {
     tsFile.reset();
-    tsFile = QSharedPointer<QFile>(new QFile(QString("%1/%2").arg(TS_DIR, filename)));
+    tsFile = QSharedPointer<QFile>(new QFile(u"%1/%2"_s.arg(TS_DIR, filename)));
     if (not tsFile->exists())
     {
-        const QString message = QString("Can't find '%1'.\n%2.").arg(filename, tsFile->errorString());
+        const QString message = u"Can't find '%1'.\n%2."_s.arg(filename, tsFile->errorString());
         QWARN(qUtf8Printable(message));
         return QDomNodeList();
     }
 
     if (tsFile->open(QIODevice::ReadOnly) == false)
     {
-        const QString message = QString("Can't open file '%1'.\n%2.").arg(filename, tsFile->errorString());
+        const QString message = u"Can't open file '%1'.\n%2."_s.arg(filename, tsFile->errorString());
         QWARN(qUtf8Printable(message));
         return QDomNodeList();
     }
@@ -72,8 +79,8 @@ auto TST_AbstractTranslation::LoadTSFile(const QString &filename) -> QDomNodeLis
     tsXML = QSharedPointer<QDomDocument>(new QDomDocument());
     if (tsXML->setContent(tsFile.data(), &errorMsg, &errorLine, &errorColumn) == false)
     {
-        const QString message = QString("Parsing error file %1 in line %2 column %3.")
-                .arg(filename).arg(errorLine).arg(errorColumn);
+        const QString message =
+            u"Parsing error file %1 in line %2 column %3."_s.arg(filename).arg(errorLine).arg(errorColumn);
         QWARN(qUtf8Printable(message));
         return QDomNodeList();
     }

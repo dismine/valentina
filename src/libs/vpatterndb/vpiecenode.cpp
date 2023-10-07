@@ -28,7 +28,6 @@
 
 #include "vpiecenode.h"
 #include "../vmisc/vabstractvalapplication.h"
-#include "calculator.h"
 #include "vcontainer.h"
 #include "vformula.h"
 #include "vpiecenode_p.h"

@@ -35,6 +35,12 @@
 #include "vabstractcurve.h"
 #include "vspline_p.h"
 
+#if QT_VERSION < QT_VERSION_CHECK(6, 4, 0)
+#include "../vmisc/compatibility.h"
+#endif
+
+using namespace Qt::Literals::StringLiterals;
+
 //---------------------------------------------------------------------------------------------------------------------
 /**
  * @brief VSpline default constructor
@@ -585,17 +591,17 @@ auto VSpline::ParamT(const QPointF &pBt) const -> qreal
 auto VSpline::ToJson() const -> QJsonObject
 {
     QJsonObject object = VAbstractCubicBezier::ToJson();
-    object[QLatin1String("aScale")] = GetApproximationScale();
-    object[QLatin1String("p1")] = GetP1().ToJson();
-    object[QLatin1String("p4")] = GetP4().ToJson();
-    object[QLatin1String("angle1")] = GetStartAngle();
-    object[QLatin1String("angle1Formula")] = GetStartAngleFormula();
-    object[QLatin1String("angle2")] = GetEndAngle();
-    object[QLatin1String("angle2Formula")] = GetEndAngleFormula();
-    object[QLatin1String("c1Length")] = GetC1Length();
-    object[QLatin1String("c1LengthFormula")] = GetC1LengthFormula();
-    object[QLatin1String("c2Length")] = GetC2Length();
-    object[QLatin1String("c2LengthFormula")] = GetC2LengthFormula();
+    object["aScale"_L1] = GetApproximationScale();
+    object["p1"_L1] = GetP1().ToJson();
+    object["p4"_L1] = GetP4().ToJson();
+    object["angle1"_L1] = GetStartAngle();
+    object["angle1Formula"_L1] = GetStartAngleFormula();
+    object["angle2"_L1] = GetEndAngle();
+    object["angle2Formula"_L1] = GetEndAngleFormula();
+    object["c1Length"_L1] = GetC1Length();
+    object["c1LengthFormula"_L1] = GetC1LengthFormula();
+    object["c2Length"_L1] = GetC2Length();
+    object["c2LengthFormula"_L1] = GetC2LengthFormula();
     return object;
 }
 

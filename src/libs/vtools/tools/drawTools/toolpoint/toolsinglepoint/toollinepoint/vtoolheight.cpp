@@ -33,17 +33,23 @@
 
 #include "../../../../../dialogs/tools/dialogheight.h"
 #include "../../../../../dialogs/tools/dialogtool.h"
-#include "../../../../../visualization/visualization.h"
 #include "../../../../../visualization/line/vistoolheight.h"
+#include "../../../../../visualization/visualization.h"
+#include "../../../../vabstracttool.h"
+#include "../../../vdrawtool.h"
 #include "../ifc/exception/vexception.h"
 #include "../ifc/ifcdef.h"
 #include "../vgeometry/vgobject.h"
 #include "../vgeometry/vpointf.h"
 #include "../vpatterndb/vcontainer.h"
 #include "../vwidgets/vmaingraphicsscene.h"
-#include "../../../../vabstracttool.h"
-#include "../../../vdrawtool.h"
 #include "vtoollinepoint.h"
+
+#if QT_VERSION < QT_VERSION_CHECK(6, 4, 0)
+#include "../vmisc/compatibility.h"
+#endif
+
+using namespace Qt::Literals::StringLiterals;
 
 template <class T> class QSharedPointer;
 
@@ -55,11 +61,11 @@ const QString VToolHeight::ToolType = QStringLiteral("height");
  * @param initData init data.
  * @param parent parent object.
  */
-VToolHeight::VToolHeight(const VToolHeightInitData &initData, QGraphicsItem * parent)
-    :VToolLinePoint(initData.doc, initData.data, initData.id, initData.typeLine, initData.lineColor, QString(),
-                    initData.basePointId, 0, initData.notes, parent),
-      p1LineId(initData.p1LineId),
-      p2LineId(initData.p2LineId)
+VToolHeight::VToolHeight(const VToolHeightInitData &initData, QGraphicsItem *parent)
+  : VToolLinePoint(initData.doc, initData.data, initData.id, initData.typeLine, initData.lineColor, QString(),
+                   initData.basePointId, 0, initData.notes, parent),
+    p1LineId(initData.p1LineId),
+    p2LineId(initData.p2LineId)
 {
     ToolCreation(initData.typeCreation);
 }
@@ -200,8 +206,7 @@ auto VToolHeight::SecondLinePointName() const -> QString
 /**
  * @brief SaveDialog save options into file after change in dialog.
  */
-void VToolHeight::SaveDialog(QDomElement &domElement, QList<quint32> &oldDependencies,
-                             QList<quint32> &newDependencies)
+void VToolHeight::SaveDialog(QDomElement &domElement, QList<quint32> &oldDependencies, QList<quint32> &newDependencies)
 {
     SCASSERT(not m_dialog.isNull())
     const QPointer<DialogHeight> dialogTool = qobject_cast<DialogHeight *>(m_dialog);
@@ -223,7 +228,7 @@ void VToolHeight::SaveDialog(QDomElement &domElement, QList<quint32> &oldDepende
 
     const QString notes = dialogTool->GetNotes();
     doc->SetAttributeOrRemoveIf<QString>(domElement, AttrNotes, notes,
-                                         [](const QString &notes) noexcept {return notes.isEmpty();});
+                                         [](const QString &notes) noexcept { return notes.isEmpty(); });
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -278,22 +283,21 @@ auto VToolHeight::MakeToolTip() const -> QString
     const QLineF p1ToCur(static_cast<QPointF>(*p1Line), static_cast<QPointF>(*current));
     const QLineF p2ToCur(static_cast<QPointF>(*p2Line), static_cast<QPointF>(*current));
 
-    const QString toolTip = QString("<table>"
-                                    "<tr> <td><b>%10:</b> %11</td> </tr>"
-                                    "<tr> <td><b>%1:</b> %2 %3</td> </tr>"
-                                    "<tr> <td><b>%4:</b> %5°</td> </tr>"
-                                    "<tr> <td><b>%6:</b> %7 %3</td> </tr>"
-                                    "<tr> <td><b>%8:</b> %9 %3</td> </tr>"
-                                    "</table>")
-            .arg(tr("Length"))
-            .arg(VAbstractValApplication::VApp()->fromPixel(curLine.length()))
-            .arg(UnitsToStr(VAbstractValApplication::VApp()->patternUnits(), true), tr("Angle"))
-            .arg(curLine.angle())
-            .arg(QString("%1->%2").arg(p1Line->name(), current->name()))
-            .arg(VAbstractValApplication::VApp()->fromPixel(p1ToCur.length()))
-            .arg(QString("%1->%2").arg(p2Line->name(), current->name()))
-            .arg(VAbstractValApplication::VApp()->fromPixel(p2ToCur.length()))
-            .arg(tr("Label"), current->name());
+    const QString toolTip = u"<table>"
+                            "<tr> <td><b>%10:</b> %11</td> </tr>"
+                            "<tr> <td><b>%1:</b> %2 %3</td> </tr>"
+                            "<tr> <td><b>%4:</b> %5°</td> </tr>"
+                            "<tr> <td><b>%6:</b> %7 %3</td> </tr>"
+                            "<tr> <td><b>%8:</b> %9 %3</td> </tr>"
+                            "</table>"_s.arg(tr("Length"))
+                                .arg(VAbstractValApplication::VApp()->fromPixel(curLine.length()))
+                                .arg(UnitsToStr(VAbstractValApplication::VApp()->patternUnits(), true), tr("Angle"))
+                                .arg(curLine.angle())
+                                .arg(u"%1->%2"_s.arg(p1Line->name(), current->name()))
+                                .arg(VAbstractValApplication::VApp()->fromPixel(p1ToCur.length()))
+                                .arg(u"%1->%2"_s.arg(p2Line->name(), current->name()))
+                                .arg(VAbstractValApplication::VApp()->fromPixel(p2ToCur.length()))
+                                .arg(tr("Label"), current->name());
     return toolTip;
 }
 
@@ -310,9 +314,9 @@ void VToolHeight::ShowContextMenu(QGraphicsSceneContextMenuEvent *event, quint32
     {
         ContextMenu<DialogHeight>(event, id);
     }
-    catch(const VExceptionToolWasDeleted &e)
+    catch (const VExceptionToolWasDeleted &e)
     {
         Q_UNUSED(e)
-        return;//Leave this method immediately!!!
+        return; // Leave this method immediately!!!
     }
 }

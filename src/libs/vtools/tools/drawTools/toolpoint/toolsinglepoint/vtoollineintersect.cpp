@@ -35,20 +35,22 @@
 #include <new>
 
 #include "../../../../dialogs/tools/dialoglineintersect.h"
+#include "../../../../dialogs/tools/dialogtool.h"
 #include "../../../../visualization/line/vistoollineintersect.h"
+#include "../../../../visualization/visualization.h"
+#include "../../../vabstracttool.h"
+#include "../../vdrawtool.h"
 #include "../ifc/exception/vexception.h"
 #include "../ifc/exception/vexceptionobjecterror.h"
 #include "../ifc/ifcdef.h"
 #include "../vgeometry/vgobject.h"
 #include "../vgeometry/vpointf.h"
+#include "../vmisc/compatibility.h"
 #include "../vpatterndb/vcontainer.h"
 #include "../vwidgets/vmaingraphicsscene.h"
-#include "../../../../dialogs/tools/dialogtool.h"
-#include "../../../../visualization/visualization.h"
-#include "../../../vabstracttool.h"
-#include "../../vdrawtool.h"
 #include "vtoolsinglepoint.h"
-#include "../vmisc/compatibility.h"
+
+using namespace Qt::Literals::StringLiterals;
 
 template <class T> class QSharedPointer;
 
@@ -61,11 +63,11 @@ const QString VToolLineIntersect::ToolType = QStringLiteral("lineIntersect");
  * @param parent parent object.
  */
 VToolLineIntersect::VToolLineIntersect(const VToolLineIntersectInitData &initData, QGraphicsItem *parent)
-    :VToolSinglePoint(initData.doc, initData.data, initData.id, initData.notes, parent),
-      p1Line1(initData.p1Line1Id),
-      p2Line1(initData.p2Line1Id),
-      p1Line2(initData.p1Line2Id),
-      p2Line2(initData.p2Line2Id)
+  : VToolSinglePoint(initData.doc, initData.data, initData.id, initData.notes, parent),
+    p1Line1(initData.p1Line1Id),
+    p2Line1(initData.p2Line1Id),
+    p1Line2(initData.p1Line2Id),
+    p2Line2(initData.p2Line2Id)
 {
     ToolCreation(initData.typeCreation);
 }
@@ -78,7 +80,7 @@ void VToolLineIntersect::SetDialog()
 {
     SCASSERT(not m_dialog.isNull())
     const QPointer<DialogLineIntersect> dialogTool = qobject_cast<DialogLineIntersect *>(m_dialog);
-    SCASSERT(not dialogTool.isNull())     
+    SCASSERT(not dialogTool.isNull())
     const QSharedPointer<VPointF> p = VAbstractTool::data.GeometricObject<VPointF>(m_id);
     dialogTool->SetP1Line1(p1Line1);
     dialogTool->SetP2Line1(p2Line1);
@@ -117,7 +119,7 @@ auto VToolLineIntersect::Create(const QPointer<DialogTool> &dialog, VMainGraphic
     initData.typeCreation = Source::FromGui;
     initData.notes = dialogTool->GetNotes();
 
-    VToolLineIntersect* point = Create(initData);
+    VToolLineIntersect *point = Create(initData);
     if (point != nullptr)
     {
         point->m_dialog = dialog;
@@ -145,11 +147,13 @@ auto VToolLineIntersect::Create(VToolLineIntersectInitData initData) -> VToolLin
 
     if (intersect == QLineF::NoIntersection)
     {
-        const QString errorMsg = tr("Error calculating point '%1'. Lines (%2;%3) and (%4;%5) have no point of "
-                                    "intersection")
+        const QString errorMsg =
+            tr("Error calculating point '%1'. Lines (%2;%3) and (%4;%5) have no point of "
+               "intersection")
                 .arg(initData.name, p1Line1->name(), p2Line1->name(), p1Line2->name(), p2Line2->name());
-        VAbstractApplication::VApp()->IsPedantic() ? throw VExceptionObjectError(errorMsg) :
-                                              qWarning() << VAbstractValApplication::warningMessageSignature + errorMsg;
+        VAbstractApplication::VApp()->IsPedantic()
+            ? throw VExceptionObjectError(errorMsg)
+            : qWarning() << VAbstractValApplication::warningMessageSignature + errorMsg;
     }
 
     VPointF *p = new VPointF(fPoint, initData.name, initData.mx, initData.my);
@@ -259,7 +263,7 @@ void VToolLineIntersect::SaveDialog(QDomElement &domElement, QList<quint32> &old
     doc->SetAttribute(domElement, AttrP1Line2, QString().setNum(dialogTool->GetP1Line2()));
     doc->SetAttribute(domElement, AttrP2Line2, QString().setNum(dialogTool->GetP2Line2()));
     doc->SetAttributeOrRemoveIf<QString>(domElement, AttrNotes, dialogTool->GetNotes(),
-                                         [](const QString &notes) noexcept {return notes.isEmpty();});
+                                         [](const QString &notes) noexcept { return notes.isEmpty(); });
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -316,23 +320,22 @@ auto VToolLineIntersect::MakeToolTip() const -> QString
     const QLineF p1L2ToCur(static_cast<QPointF>(*p1L2), static_cast<QPointF>(*current));
     const QLineF curToP2L2(static_cast<QPointF>(*current), static_cast<QPointF>(*p2L2));
 
-    const QString toolTip = QString("<table>"
-                                    "<tr> <td><b>%10:</b> %11</td> </tr>"
-                                    "<tr> <td><b>%1:</b> %2 %3</td> </tr>"
-                                    "<tr> <td><b>%4:</b> %5 %3</td> </tr>"
-                                    "<tr> <td><b>%6:</b> %7 %3</td> </tr>"
-                                    "<tr> <td><b>%8:</b> %9 %3</td> </tr>"
-                                    "</table>")
-            .arg(QString("%1->%2").arg(p1L1->name(), current->name()))
-            .arg(VAbstractValApplication::VApp()->fromPixel(p1L1ToCur.length()))
-            .arg(UnitsToStr(VAbstractValApplication::VApp()->patternUnits(), true),
-                 QString("%1->%2").arg(current->name(), p2L1->name()))
-            .arg(VAbstractValApplication::VApp()->fromPixel(curToP2L1.length()))
-            .arg(QString("%1->%2").arg(p1L2->name(), current->name()))
-            .arg(VAbstractValApplication::VApp()->fromPixel(p1L2ToCur.length()))
-            .arg(QString("%1->%2").arg(current->name(), p2L2->name()))
-            .arg(VAbstractValApplication::VApp()->fromPixel(curToP2L2.length()))
-            .arg(tr("Label"), current->name());
+    const QString toolTip = u"<table>"
+                            "<tr> <td><b>%10:</b> %11</td> </tr>"
+                            "<tr> <td><b>%1:</b> %2 %3</td> </tr>"
+                            "<tr> <td><b>%4:</b> %5 %3</td> </tr>"
+                            "<tr> <td><b>%6:</b> %7 %3</td> </tr>"
+                            "<tr> <td><b>%8:</b> %9 %3</td> </tr>"
+                            "</table>"_s.arg(u"%1->%2"_s.arg(p1L1->name(), current->name()))
+                                .arg(VAbstractValApplication::VApp()->fromPixel(p1L1ToCur.length()))
+                                .arg(UnitsToStr(VAbstractValApplication::VApp()->patternUnits(), true),
+                                     u"%1->%2"_s.arg(current->name(), p2L1->name()))
+                                .arg(VAbstractValApplication::VApp()->fromPixel(curToP2L1.length()))
+                                .arg(u"%1->%2"_s.arg(p1L2->name(), current->name()))
+                                .arg(VAbstractValApplication::VApp()->fromPixel(p1L2ToCur.length()))
+                                .arg(u"%1->%2"_s.arg(current->name(), p2L2->name()))
+                                .arg(VAbstractValApplication::VApp()->fromPixel(curToP2L2.length()))
+                                .arg(tr("Label"), current->name());
     return toolTip;
 }
 
@@ -349,9 +352,9 @@ void VToolLineIntersect::ShowContextMenu(QGraphicsSceneContextMenuEvent *event, 
     {
         ContextMenu<DialogLineIntersect>(event, id);
     }
-    catch(const VExceptionToolWasDeleted &e)
+    catch (const VExceptionToolWasDeleted &e)
     {
         Q_UNUSED(e)
-        return;//Leave this method immediately!!!
+        return; // Leave this method immediately!!!
     }
 }

@@ -31,6 +31,12 @@
 #include <QDomDocument>
 #include <QtTest>
 
+#if QT_VERSION < QT_VERSION_CHECK(6, 4, 0)
+#include "../vmisc/compatibility.h"
+#endif
+
+using namespace Qt::Literals::StringLiterals;
+
 Q_DECLARE_METATYPE(QDomElement) // Need for testing
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -131,7 +137,7 @@ void TST_TSTranslation::CheckEmptyToolButton()
     QFETCH(QString, source);
     QFETCH(QDomElement, message);
 
-    if (source == QLatin1String("..."))
+    if (source == "..."_L1)
     {
         const QDomElement translationTag = message.firstChildElement(TagTranslation);
         if (translationTag.hasAttribute(AttrType))
@@ -150,7 +156,7 @@ void TST_TSTranslation::CheckEmptyToolButton()
         }
 
         const QString contextName = context.firstChildElement(TagName).text();
-        const QString error = QString("Found '...' in context '%1'").arg(contextName);
+        const QString error = u"Found '...' in context '%1'"_s.arg(contextName);
         QFAIL(qUtf8Printable(error));
     }
 }
@@ -187,7 +193,7 @@ void TST_TSTranslation::CheckEllipsis()
 
         const QString contextName = context.firstChildElement(TagName).text();
         const QString error =
-            QString("String '%1' ends with '...' in context '%2'. Repalce it with '…'.").arg(source, contextName);
+            u"String '%1' ends with '...' in context '%2'. Repalce it with '…'."_s.arg(source, contextName);
         QFAIL(qUtf8Printable(error));
     }
 }
@@ -204,7 +210,7 @@ void TST_TSTranslation::CheckInvalidCharacter()
     QFETCH(QString, source);
     QFETCH(QDomElement, message);
 
-    if (source == QChar('=') or source == QChar('%'))
+    if (source == '='_L1 or source == '%'_L1)
     {
         const QDomNode context = message.parentNode();
         if (context.isNull())
@@ -213,9 +219,8 @@ void TST_TSTranslation::CheckInvalidCharacter()
         }
 
         const QString contextName = context.firstChildElement(TagName).text();
-        const QString error = QString("String contains invalid character '%1' in context '%2'. It should not be "
-                                      "marked for translation.")
-                                  .arg(source, contextName);
+        const QString error = u"String contains invalid character '%1' in context '%2'. It should not be "
+                              "marked for translation."_s.arg(source, contextName);
         QFAIL(qUtf8Printable(error));
     }
 }

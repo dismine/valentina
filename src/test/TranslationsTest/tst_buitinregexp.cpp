@@ -34,6 +34,12 @@
 #include <QTranslator>
 #include <QtTest>
 
+#if QT_VERSION < QT_VERSION_CHECK(6, 4, 0)
+#include "../vmisc/compatibility.h"
+#endif
+
+using namespace Qt::Literals::StringLiterals;
+
 //---------------------------------------------------------------------------------------------------------------------
 TST_BuitInRegExp::TST_BuitInRegExp(const QString &locale, QObject *parent)
   : TST_AbstractRegExp(locale, parent)
@@ -57,7 +63,7 @@ void TST_BuitInRegExp::initTestCase()
 
     if (LoadVariables(m_locale) != NoError)
     {
-        const QString message = QString("Couldn't load variables. Locale = %1").arg(m_locale);
+        const QString message = u"Couldn't load variables. Locale = %1"_s.arg(m_locale);
         QSKIP(qUtf8Printable(message));
     }
 
@@ -106,7 +112,7 @@ void TST_BuitInRegExp::TestCheckIsNamesUnique_data()
     QList<QString> keys = names.uniqueKeys();
     for (const auto &key : keys)
     {
-        const QString tag = QString("Locale: '%1'. Name '%2'").arg(m_locale, key);
+        const QString tag = u"Locale: '%1'. Name '%2'"_s.arg(m_locale, key);
         QTest::newRow(qUtf8Printable(tag)) << key << QStringList(names.values(key));
     }
 }
@@ -119,8 +125,8 @@ void TST_BuitInRegExp::TestCheckIsNamesUnique()
 
     if (originalNames.size() > 1)
     {
-        const QString message = QString("Name is not unique. Translated name:'%1' also assosiated with: %2.")
-                                    .arg(translatedName, originalNames.join(", "));
+        const QString message = u"Name is not unique. Translated name:'%1' also assosiated with: %2."_s.arg(
+            translatedName, originalNames.join(", "));
         QFAIL(qUtf8Printable(message));
     }
 }
@@ -181,7 +187,7 @@ void TST_BuitInRegExp::TestCheckUnderlineExists_data()
     auto i = data.constBegin();
     while (i != data.constEnd())
     {
-        const QString tag = QString("Locale: '%1'. Name '%2'").arg(m_locale, i.key());
+        const QString tag = u"Locale: '%1'. Name '%2'"_s.arg(m_locale, i.key());
         QTest::newRow(qUtf8Printable(tag)) << i.key() << i.value();
         ++i;
     }
@@ -194,10 +200,10 @@ void TST_BuitInRegExp::TestCheckUnderlineExists()
     QFETCH(bool, exists);
 
     const QString translated = m_trMs->InternalVarToUser(name);
-    if ((translated.right(1) == QLatin1String("_")) != exists)
+    if ((translated.right(1) == '_'_L1) != exists)
     {
         const QString message =
-            QString("String '%1' doesn't contain underline. Original string is '%2'").arg(translated, name);
+            u"String '%1' doesn't contain underline. Original string is '%2'"_s.arg(translated, name);
         QFAIL(qUtf8Printable(message));
     }
 }
@@ -210,7 +216,7 @@ void TST_BuitInRegExp::TestCheckInternalVaribleRegExp_data()
 
     for (const auto &var : BuilInVariables())
     {
-        const QString tag = QString("Locale: '%1'. Var '%2'").arg(m_locale, var);
+        const QString tag = u"Locale: '%1'. Var '%2'"_s.arg(m_locale, var);
         const QStringList originalNames = AllNames();
         for (const auto &str : originalNames)
         {
@@ -227,11 +233,11 @@ void TST_BuitInRegExp::TestCheckInternalVaribleRegExp()
 
     static const QString regex = QStringLiteral("(.){1,}_(.){1,}$");
 
-    const QString sourceRegex = QChar('^') + var + regex;
+    const QString sourceRegex = '^'_L1 + var + regex;
     const QRegularExpression sourceRe(sourceRegex);
 
     const QString translated = m_trMs->InternalVarToUser(var);
-    const QString translationRegex = QChar('^') + translated + regex;
+    const QString translationRegex = '^'_L1 + translated + regex;
     const QRegularExpression translationRe(translationRegex);
 
     {
@@ -277,7 +283,7 @@ void TST_BuitInRegExp::PrepareData()
 
     for (const auto &str : originalNames)
     {
-        const QString tag = QString("Locale: '%1'. Name '%2'").arg(m_locale, str);
+        const QString tag = u"Locale: '%1'. Name '%2'"_s.arg(m_locale, str);
         QTest::newRow(qUtf8Printable(tag)) << str;
     }
 }

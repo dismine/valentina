@@ -32,6 +32,12 @@
 
 #include <QtTest>
 
+#if QT_VERSION < QT_VERSION_CHECK(6, 4, 0)
+#include "../vmisc/compatibility.h"
+#endif
+
+using namespace Qt::Literals::StringLiterals;
+
 //---------------------------------------------------------------------------------------------------------------------
 TST_QmuTokenParser::TST_QmuTokenParser(QObject *parent)
   : QObject(parent),
@@ -118,19 +124,19 @@ void TST_QmuTokenParser::PrepareVal(qreal val, const QLocale &locale)
 {
     const QString formula = locale.toString(val);
     QString string = formula;
-    QString tag = QString("%1. String '%2'").arg(locale.name(), string);
+    QString tag = u"%1. String '%2'"_s.arg(locale.name(), string);
     QTest::newRow(qUtf8Printable(tag)) << string << true << locale;
 
-    string = formula + QLatin1String("+");
-    tag = QString("%1. String '%2'").arg(locale.name(), string);
+    string = formula + '+'_L1;
+    tag = u"%1. String '%2'"_s.arg(locale.name(), string);
     QTest::newRow(qUtf8Printable(tag)) << string << false << locale;
 
-    string = formula + QLatin1String("+") + formula;
-    tag = QString("%1. String '%2'").arg(locale.name(), string);
+    string = formula + '+'_L1 + formula;
+    tag = u"%1. String '%2'"_s.arg(locale.name(), string);
     QTest::newRow(qUtf8Printable(tag)) << string << false << locale;
 
-    string = formula + QString("+б");
-    tag = QString("%1. String '%2'").arg(locale.name(), string);
+    string = formula + u"+б"_s;
+    tag = u"%1. String '%2'"_s.arg(locale.name(), string);
     QTest::newRow(qUtf8Printable(tag)) << string << false << locale;
 }
 

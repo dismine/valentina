@@ -31,6 +31,12 @@
 #include <QString>
 #include <QStringList>
 
+#if QT_VERSION < QT_VERSION_CHECK(6, 4, 0)
+#include "../vmisc/compatibility.h"
+#endif
+
+using namespace Qt::Literals::StringLiterals;
+
 //---------------------------------------------------------------------------------------------------------------------
 auto GrainlineTypeToStr(GrainlineType type) -> QString
 {
@@ -38,14 +44,14 @@ auto GrainlineTypeToStr(GrainlineType type) -> QString
     switch (type)
     {
         case GrainlineType::Horizontal:
-            result = QStringLiteral("horizontal");
+            result = "horizontal"_L1;
             break;
         case GrainlineType::Vertical:
-            result = QStringLiteral("vertical");
+            result = "vertical"_L1;
             break;
         case GrainlineType::NotFixed:
         default:
-            result = QStringLiteral("notFixed");
+            result = "notFixed"_L1;
             break;
     }
     return result;
@@ -54,8 +60,7 @@ auto GrainlineTypeToStr(GrainlineType type) -> QString
 //---------------------------------------------------------------------------------------------------------------------
 auto StrToGrainlineType(const QString &string) -> GrainlineType
 {
-    const QStringList types
-    {
+    const QStringList types{
         QStringLiteral("horizontal"), // 0
         QStringLiteral("vertical"),   // 1
         QStringLiteral("notFixed")    // 2
@@ -64,20 +69,19 @@ auto StrToGrainlineType(const QString &string) -> GrainlineType
     GrainlineType type = GrainlineType::NotFixed;
     switch (types.indexOf(string))
     {
-        case 0:// horizontal
+        case 0: // horizontal
             type = GrainlineType::Horizontal;
             break;
-        case 2:// vertical
+        case 2: // vertical
             type = GrainlineType::Vertical;
             break;
-        case 3:// notFixed
+        case 3: // notFixed
         default:
             type = GrainlineType::NotFixed;
             break;
     }
     return type;
 }
-
 
 //---------------------------------------------------------------------------------------------------------------------
 auto VPTransformationOrigon::operator==(const VPTransformationOrigon &origin) const -> bool

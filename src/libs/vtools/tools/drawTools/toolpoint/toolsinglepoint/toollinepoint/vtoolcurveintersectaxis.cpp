@@ -28,55 +28,53 @@
 
 #include "vtoolcurveintersectaxis.h"
 
-#include <climits>
 #include <QLineF>
 #include <QMap>
 #include <QRectF>
 #include <QSharedPointer>
 #include <QVector>
+#include <climits>
 #include <new>
 
-#include "../../../../../dialogs/tools/dialogtool.h"
 #include "../../../../../dialogs/tools/dialogcurveintersectaxis.h"
-#include "../ifc/ifcdef.h"
+#include "../../../../../dialogs/tools/dialogtool.h"
+#include "../../../../vabstracttool.h"
+#include "../../../vdrawtool.h"
 #include "../ifc/exception/vexception.h"
 #include "../ifc/exception/vexceptionobjecterror.h"
-#include "../qmuparser/qmudef.h"
+#include "../ifc/ifcdef.h"
 #include "../toolcut/vtoolcutsplinepath.h"
-#include "../vgeometry/vabstractcubicbezier.h"
-#include "../vgeometry/vabstractcubicbezierpath.h"
 #include "../vgeometry/vabstractcurve.h"
-#include "../vgeometry/varc.h"
-#include "../vgeometry/vellipticalarc.h"
 #include "../vgeometry/vgobject.h"
 #include "../vgeometry/vpointf.h"
-#include "../vgeometry/vspline.h"
-#include "../vgeometry/vsplinepath.h"
 #include "../vmisc/vabstractapplication.h"
 #include "../vmisc/vcommonsettings.h"
 #include "../vpatterndb/vcontainer.h"
 #include "../vpatterndb/vtranslatevars.h"
-#include "../vtools/visualization/visualization.h"
 #include "../vtools/visualization/line/vistoolcurveintersectaxis.h"
+#include "../vtools/visualization/visualization.h"
 #include "../vwidgets/vmaingraphicsscene.h"
-#include "../../../../vabstracttool.h"
-#include "../../../vdrawtool.h"
 #include "vtoollinepoint.h"
+
+#if QT_VERSION < QT_VERSION_CHECK(6, 4, 0)
+#include "../vmisc/compatibility.h"
+#endif
+
+using namespace Qt::Literals::StringLiterals;
 
 template <class T> class QSharedPointer;
 
 const QString VToolCurveIntersectAxis::ToolType = QStringLiteral("curveIntersectAxis");
 
 //---------------------------------------------------------------------------------------------------------------------
-VToolCurveIntersectAxis::VToolCurveIntersectAxis(const VToolCurveIntersectAxisInitData &initData,
-                                                 QGraphicsItem *parent)
-    :VToolLinePoint(initData.doc, initData.data, initData.id, initData.typeLine, initData.lineColor, QString(),
-                    initData.basePointId, 0, initData.notes, parent),
-      formulaAngle(initData.formulaAngle),
-      curveId(initData.curveId),
-      m_segments(initData.segments),
-      m_aliasSuffix1(initData.aliasSuffix1),
-      m_aliasSuffix2(initData.aliasSuffix2)
+VToolCurveIntersectAxis::VToolCurveIntersectAxis(const VToolCurveIntersectAxisInitData &initData, QGraphicsItem *parent)
+  : VToolLinePoint(initData.doc, initData.data, initData.id, initData.typeLine, initData.lineColor, QString(),
+                   initData.basePointId, 0, initData.notes, parent),
+    formulaAngle(initData.formulaAngle),
+    curveId(initData.curveId),
+    m_segments(initData.segments),
+    m_aliasSuffix1(initData.aliasSuffix1),
+    m_aliasSuffix2(initData.aliasSuffix2)
 {
     ToolCreation(initData.typeCreation);
 }
@@ -152,9 +150,11 @@ auto VToolCurveIntersectAxis::Create(VToolCurveIntersectAxisInitData &initData) 
     {
         const QString errorMsg = tr("Error calculating point '%1'. There is no intersection with curve '%2' and axis"
                                     " through point '%3' with angle %4°")
-                .arg(initData.name, curve->ObjectName(), basePoint->name()).arg(angle);
-        VAbstractApplication::VApp()->IsPedantic() ? throw VExceptionObjectError(errorMsg) :
-                                              qWarning() << VAbstractValApplication::warningMessageSignature + errorMsg;
+                                     .arg(initData.name, curve->ObjectName(), basePoint->name())
+                                     .arg(angle);
+        VAbstractApplication::VApp()->IsPedantic()
+            ? throw VExceptionObjectError(errorMsg)
+            : qWarning() << VAbstractValApplication::warningMessageSignature + errorMsg;
     }
 
     const qreal segLength = curve->GetLengthByPoint(fPoint);
@@ -253,10 +253,10 @@ void VToolCurveIntersectAxis::ShowContextMenu(QGraphicsSceneContextMenuEvent *ev
     {
         ContextMenu<DialogCurveIntersectAxis>(event, id);
     }
-    catch(const VExceptionToolWasDeleted &e)
+    catch (const VExceptionToolWasDeleted &e)
     {
         Q_UNUSED(e)
-        return;//Leave this method immediately!!!
+        return; // Leave this method immediately!!!
     }
 }
 
@@ -280,11 +280,11 @@ void VToolCurveIntersectAxis::SaveDialog(QDomElement &domElement, QList<quint32>
     doc->SetAttribute(domElement, AttrBasePoint, QString().setNum(dialogTool->GetBasePointId()));
     doc->SetAttribute(domElement, AttrCurve, QString().setNum(dialogTool->getCurveId()));
     doc->SetAttributeOrRemoveIf<QString>(domElement, AttrAlias1, dialogTool->GetAliasSuffix1(),
-                                         [](const QString &suffix) noexcept {return suffix.isEmpty();});
+                                         [](const QString &suffix) noexcept { return suffix.isEmpty(); });
     doc->SetAttributeOrRemoveIf<QString>(domElement, AttrAlias2, dialogTool->GetAliasSuffix2(),
-                                         [](const QString &suffix) noexcept {return suffix.isEmpty();});
+                                         [](const QString &suffix) noexcept { return suffix.isEmpty(); });
     doc->SetAttributeOrRemoveIf<QString>(domElement, AttrNotes, dialogTool->GetNotes(),
-                                         [](const QString &notes) noexcept {return notes.isEmpty();});
+                                         [](const QString &notes) noexcept { return notes.isEmpty(); });
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -297,9 +297,9 @@ void VToolCurveIntersectAxis::SaveOptions(QDomElement &tag, QSharedPointer<VGObj
     doc->SetAttribute(tag, AttrBasePoint, basePointId);
     doc->SetAttribute(tag, AttrCurve, curveId);
     doc->SetAttributeOrRemoveIf<QString>(tag, AttrAlias1, m_aliasSuffix1,
-                                         [](const QString &suffix) noexcept {return suffix.isEmpty();});
+                                         [](const QString &suffix) noexcept { return suffix.isEmpty(); });
     doc->SetAttributeOrRemoveIf<QString>(tag, AttrAlias2, m_aliasSuffix2,
-                                         [](const QString &suffix) noexcept {return suffix.isEmpty();});
+                                         [](const QString &suffix) noexcept { return suffix.isEmpty(); });
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -326,8 +326,8 @@ void VToolCurveIntersectAxis::SetVisualization()
 
         visual->SetCurveId(curveId);
         visual->setAxisPointId(basePointId);
-        visual->SetAngle(VAbstractApplication::VApp()->TrVars()
-                         ->FormulaToUser(formulaAngle, VAbstractApplication::VApp()->Settings()->GetOsSeparator()));
+        visual->SetAngle(VAbstractApplication::VApp()->TrVars()->FormulaToUser(
+            formulaAngle, VAbstractApplication::VApp()->Settings()->GetOsSeparator()));
         visual->SetLineStyle(LineStyleToPenStyle(m_lineType));
         visual->SetMode(Mode::Show);
         visual->RefreshGeometry();
@@ -342,20 +342,21 @@ auto VToolCurveIntersectAxis::MakeToolTip() const -> QString
 
     const QLineF line(static_cast<QPointF>(*first), static_cast<QPointF>(*second));
 
-    const QString toolTip = QString("<table>"
-                                    "<tr> <td><b>%6:</b> %7</td> </tr>"
-                                    "<tr> <td><b>%1:</b> %2 %3</td> </tr>"
-                                    "<tr> <td><b>%4:</b> %5°</td> </tr>"
-                                    "<tr> <td><b>%8:</b> %9</td> </tr>"
-                                    "<tr> <td><b>%10:</b> %11</td> </tr>"
-                                    "</table>")
-            .arg(tr("Length")) // 1
-            .arg(VAbstractValApplication::VApp()->fromPixel(line.length())) // 2
+    const QString toolTip =
+        u"<table>"
+        "<tr> <td><b>%6:</b> %7</td> </tr>"
+        "<tr> <td><b>%1:</b> %2 %3</td> </tr>"
+        "<tr> <td><b>%4:</b> %5°</td> </tr>"
+        "<tr> <td><b>%8:</b> %9</td> </tr>"
+        "<tr> <td><b>%10:</b> %11</td> </tr>"
+        "</table>"_s
+            .arg(tr("Length"))                                                                   // 1
+            .arg(VAbstractValApplication::VApp()->fromPixel(line.length()))                      // 2
             .arg(UnitsToStr(VAbstractValApplication::VApp()->patternUnits(), true), tr("Angle")) // 3, 4
-            .arg(line.angle()) // 5
-            .arg(tr("Label"), second->name(), /* 6, 7 */
-                 tr("Segment 1"), m_segments.first, /* 8, 9 */
-                 tr("Segment 2"), m_segments.second); /* 10, 11 */
+            .arg(line.angle())                                                                   // 5
+            .arg(tr("Label"), second->name(),                                                    /* 6, 7 */
+                 tr("Segment 1"), m_segments.first,                                              /* 8, 9 */
+                 tr("Segment 2"), m_segments.second);                                            /* 10, 11 */
     return toolTip;
 }
 

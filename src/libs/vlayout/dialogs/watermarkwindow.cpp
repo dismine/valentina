@@ -49,6 +49,12 @@
 #include "../vmisc/vabstractapplication.h"
 #include "../vpropertyexplorer/checkablemessagebox.h"
 
+#if QT_VERSION < QT_VERSION_CHECK(6, 4, 0)
+#include "../vmisc/compatibility.h"
+#endif
+
+using namespace Qt::Literals::StringLiterals;
+
 //---------------------------------------------------------------------------------------------------------------------
 WatermarkWindow::WatermarkWindow(const QString &patternPath, QWidget *parent)
   : QMainWindow(parent),
@@ -97,7 +103,7 @@ WatermarkWindow::WatermarkWindow(const QString &patternPath, QWidget *parent)
     connect(ui->pushButtonBrowse, &QPushButton::clicked, this,
             [this]()
             {
-                const QString filter = tr("Images") + QLatin1String(" (*.png *.jpg *.jpeg *.bmp)");
+                const QString filter = tr("Images") + " (*.png *.jpg *.jpeg *.bmp)"_L1;
                 const QString fileName =
                     QFileDialog::getOpenFileName(this, tr("Watermark image"), QString(), filter, nullptr,
                                                  VAbstractApplication::VApp()->NativeFileDialog());
@@ -305,7 +311,7 @@ void WatermarkWindow::on_actionNew_triggered()
 //---------------------------------------------------------------------------------------------------------------------
 auto WatermarkWindow::on_actionSaveAs_triggered() -> bool
 {
-    QString filters(tr("Watermark files") + QLatin1String("(*.vwm)"));
+    QString filters(tr("Watermark files") + "(*.vwm)"_L1);
     QString dir;
     if (m_curFile.isEmpty())
     {
@@ -316,8 +322,7 @@ auto WatermarkWindow::on_actionSaveAs_triggered() -> bool
         dir = QFileInfo(m_curFile).absolutePath();
     }
 
-    QString fileName = QFileDialog::getSaveFileName(this, tr("Save as"),
-                                                    dir + QLatin1String("/") + tr("watermark") + QLatin1String(".vwm"),
+    QString fileName = QFileDialog::getSaveFileName(this, tr("Save as"), dir + '/'_L1 + tr("watermark") + ".vwm"_L1,
                                                     filters, nullptr, VAbstractApplication::VApp()->NativeFileDialog());
 
     if (fileName.isEmpty())
@@ -326,9 +331,9 @@ auto WatermarkWindow::on_actionSaveAs_triggered() -> bool
     }
 
     QFileInfo f(fileName);
-    if (f.suffix().isEmpty() && f.suffix() != QLatin1String("vwm"))
+    if (f.suffix().isEmpty() && f.suffix() != "vwm"_L1)
     {
-        fileName += QLatin1String(".vwm");
+        fileName += ".vwm"_L1;
     }
 
     if (f.exists() && m_curFile != fileName)
@@ -461,7 +466,7 @@ auto WatermarkWindow::on_actionSave_triggered() -> bool
 void WatermarkWindow::on_actionOpen_triggered()
 {
     qDebug("Openning new watermark file.");
-    const QString filter(tr("Watermark files") + QLatin1String(" (*.vwm)"));
+    const QString filter(tr("Watermark files") + " (*.vwm)"_L1);
     QString dir = QDir::homePath();
     qDebug("Run QFileDialog::getOpenFileName: dir = %s.", qUtf8Printable(dir));
     const QString filePath = QFileDialog::getOpenFileName(this, tr("Open file"), dir, filter, nullptr,
@@ -540,13 +545,12 @@ void WatermarkWindow::UpdateWindowTitle()
     }
     else
     {
-        setWindowTitle(GetWatermarkFileName() + QLatin1String(" (") + tr("read only") + QLatin1String(")"));
+        setWindowTitle(GetWatermarkFileName() + " ("_L1 + tr("read only") + ')'_L1);
     }
     setWindowFilePath(m_curFile);
 
 #if defined(Q_OS_MAC)
-    static QIcon fileIcon =
-        QIcon(QCoreApplication::applicationDirPath() + QLatin1String("/../Resources/Valentina.icns"));
+    static QIcon fileIcon = QIcon(QCoreApplication::applicationDirPath() + "/../Resources/Valentina.icns"_L1);
     QIcon icon;
     if (not m_curFile.isEmpty())
     {
@@ -577,7 +581,7 @@ auto WatermarkWindow::GetWatermarkFileName() -> QString
     {
         shownName = StrippedName(m_curFile);
     }
-    shownName += QLatin1String("[*]");
+    shownName += "[*]"_L1;
     return shownName;
 }
 

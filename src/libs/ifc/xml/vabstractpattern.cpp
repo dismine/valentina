@@ -59,6 +59,8 @@
 #include "vtoolrecord.h"
 #include "vvalentinasettings.h"
 
+using namespace Qt::Literals::StringLiterals;
+
 class QDomElement;
 
 const QString VAbstractPattern::TagPattern = QStringLiteral("pattern");
@@ -176,7 +178,7 @@ namespace
 QT_WARNING_PUSH
 QT_WARNING_DISABLE_CLANG("-Wunused-member-function")
 
-Q_GLOBAL_STATIC_WITH_ARGS(const QString, dimensionDefValue, (QLatin1String("-1"))) // NOLINT
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, dimensionDefValue, ("-1"_L1)) // NOLINT
 
 QT_WARNING_POP
 
@@ -256,13 +258,13 @@ auto PrepareGroupTags(QStringList tags) -> QString
         tag = tag.simplified();
     }
 
-    return ConvertToStringList(ConvertToSet<QString>(tags)).join(',');
+    return ConvertToStringList(ConvertToSet<QString>(tags)).join(','_L1);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 auto StringToTransfrom(const QString &matrix) -> QTransform
 {
-    QStringList elements = matrix.split(QChar(';'));
+    QStringList elements = matrix.split(';'_L1);
     if (elements.count() == 9)
     {
         qreal m11 = elements.at(0).toDouble();
@@ -293,7 +295,7 @@ auto TransformToString(const QTransform &m) -> QString
     QStringList matrix{NumberToString(m.m11()), NumberToString(m.m12()), NumberToString(m.m13()),
                        NumberToString(m.m21()), NumberToString(m.m22()), NumberToString(m.m23()),
                        NumberToString(m.m31()), NumberToString(m.m32()), NumberToString(m.m33())};
-    return matrix.join(QChar(';'));
+    return matrix.join(';'_L1);
 }
 } // namespace
 
@@ -334,7 +336,7 @@ auto VAbstractPattern::ListMeasurements() const -> QStringList
 
     for (const auto &token : tokens)
     {
-        if (token == QChar('-') || measurements.contains(token) || others.contains(token))
+        if (token == '-'_L1 || measurements.contains(token) || others.contains(token))
         {
             continue;
         }
@@ -342,7 +344,7 @@ auto VAbstractPattern::ListMeasurements() const -> QStringList
         IsVariable(token) || IsFunction(token) ? others.insert(token) : measurements.insert(token);
     }
 
-    return QStringList(measurements.values());
+    return {measurements.values()};
 }
 
 //---------------------------------------------------------------------------------------------------------------------

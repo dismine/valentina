@@ -12,6 +12,8 @@
 #include "layout/vpsheet.h"
 #include "theme/vtheme.h"
 
+using namespace Qt::Literals::StringLiterals;
+
 namespace
 {
 QT_WARNING_PUSH
@@ -610,12 +612,11 @@ void VPTileFactory::DrawTextInformation(QPainter *painter, int row, int col, int
     const QString tileColorStr =
         QStringLiteral("%1,%2,%3").arg(tileColor->red()).arg(tileColor->green()).arg(tileColor->blue());
 
-    td.setHtml(QString("<table width='100%' style='color:rgb(%1);'>"
-                       "<tr>"
-                       "<td align='center'>%2</td>"
-                       "</tr>"
-                       "</table>")
-                   .arg(tileColorStr, grid));
+    td.setHtml(u"<table width='100%' style='color:rgb(%1);'>"
+               "<tr>"
+               "<td align='center'>%2</td>"
+               "</tr>"
+               "</table>"_s.arg(tileColorStr, grid));
     painter->setPen(PenTileInfos());
     painter->save();
     painter->translate(QPointF(UnitConvertor(1, Unit::Cm, Unit::Px), m_drawingAreaHeight - tileStripeWidth / 1.3));
@@ -780,8 +781,7 @@ void VPTileFactory::PaintWatermarkImage(QPainter *painter, const QRectF &img, co
     }
 
     QPixmap watermark;
-    if (f.suffix() == QLatin1String("png") || f.suffix() == QLatin1String("jpg") ||
-        f.suffix() == QLatin1String("jpeg") || f.suffix() == QLatin1String("bmp"))
+    if (f.suffix() == "png"_L1 || f.suffix() == "jpg"_L1 || f.suffix() == "jpeg"_L1 || f.suffix() == "bmp"_L1)
     {
         QString error;
         watermark = WatermarkImageFromCache(watermarkData, watermarkPath, xScale, yScale, error);

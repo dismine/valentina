@@ -53,6 +53,12 @@
 #include "../ifc/xml/vpatternimage.h"
 #include "../qmuparser/qmudef.h"
 
+#if QT_VERSION < QT_VERSION_CHECK(6, 4, 0)
+#include "../vmisc/compatibility.h"
+#endif
+
+using namespace Qt::Literals::StringLiterals;
+
 //---------------------------------------------------------------------------------------------------------------------
 DialogPatternProperties::DialogPatternProperties(VPattern *doc, VContainer *pattern, QWidget *parent)
   : QDialog(parent),
@@ -514,7 +520,7 @@ void DialogPatternProperties::BrowseLabelPath()
         path = settings->GetPathLabelTemplate();
     }
 
-    QString filters(tr("Label template") + QLatin1String("(*.xml)"));
+    QString filters(tr("Label template") + "(*.xml)"_L1);
 
     const QString filePath = QFileDialog::getOpenFileName(this, tr("Label template"), path, filters, nullptr,
                                                           VAbstractApplication::VApp()->NativeFileDialog());

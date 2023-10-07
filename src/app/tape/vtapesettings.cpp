@@ -32,27 +32,31 @@
 #include <QGlobalStatic>
 #include <QVariant>
 
+#if QT_VERSION < QT_VERSION_CHECK(6, 4, 0)
+#include "../vmisc/compatibility.h"
+#endif
+
+using namespace Qt::Literals::StringLiterals;
+
 namespace
 {
 QT_WARNING_PUSH
 QT_WARNING_DISABLE_CLANG("-Wunused-member-function")
 
-Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingPathsTemplates, (QLatin1String("paths/templates"))) // NOLINT
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingPathsTemplates, ("paths/templates"_L1)) // NOLINT
 
-Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingDataBaseGeometry, (QLatin1String("database/geometry")))   // NOLINT
-Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingSearchHistoryTape, (QLatin1String("searchHistory/tape"))) // NOLINT
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingDataBaseGeometry, ("database/geometry"_L1))   // NOLINT
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingSearchHistoryTape, ("searchHistory/tape"_L1)) // NOLINT
 
 // NOLINTNEXTLINE
 Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingSearchOptionsTapeUseUnicodeProperties,
-                          (QLatin1String("searchOptions/tapeUseUnicodeProperties")))
+                          ("searchOptions/tapeUseUnicodeProperties"_L1))
 // NOLINTNEXTLINE
-Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingSearchOptionsTapeWholeWord,
-                          (QLatin1String("searchOptions/tapeWholeWord")))
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingSearchOptionsTapeWholeWord, ("searchOptions/tapeWholeWord"_L1))
 // NOLINTNEXTLINE
-Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingSearchOptionsTapeRegexp, (QLatin1String("searchOptions/tapeRegexp")))
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingSearchOptionsTapeRegexp, ("searchOptions/tapeRegexp"_L1))
 // NOLINTNEXTLINE
-Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingSearchOptionsTapeMatchCase,
-                          (QLatin1String("searchOptions/tapeMatchCase")))
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingSearchOptionsTapeMatchCase, ("searchOptions/tapeMatchCase"_L1))
 QT_WARNING_POP
 } // namespace
 

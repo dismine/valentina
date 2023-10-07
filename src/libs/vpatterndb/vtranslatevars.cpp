@@ -48,6 +48,8 @@
 #include "pmsystems.h"
 #include "vtranslatemeasurements.h"
 
+using namespace Qt::Literals::StringLiterals;
+
 //---------------------------------------------------------------------------------------------------------------------
 VTranslateVars::VTranslateVars()
 {
@@ -789,7 +791,7 @@ void VTranslateVars::TranslateVarsToUser(QString &newFormula, QMap<vsizetype, QS
             continue;
         }
 
-        if (tValues.at(i) == QChar('-'))
+        if (tValues.at(i) == '-'_L1)
         { // unary minus
             newFormula.replace(tKeys.at(i), 1, LocaleNegativeSign(QLocale()));
         }

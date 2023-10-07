@@ -36,6 +36,12 @@
 #include <ciso646> // and, not, or
 #endif
 
+#if QT_VERSION < QT_VERSION_CHECK(6, 4, 0)
+#include "../vmisc/compatibility.h"
+#endif
+
+using namespace Qt::Literals::StringLiterals;
+
 //---------------------------------------------------------------------------------------------------------------------
 TST_VCommandLine::TST_VCommandLine(QObject *parent)
   : QObject(parent)
@@ -52,7 +58,7 @@ void TST_VCommandLine::UniqueKeys()
     for (const auto &str : options)
     {
         // cppcheck-suppress unreadVariable
-        const QString message = QString("Options '%1' is not unique!").arg(str);
+        const QString message = u"Options '%1' is not unique!"_s.arg(str);
         QVERIFY2(not unique.contains(str), qUtf8Printable(message));
         unique.insert(str);
     }

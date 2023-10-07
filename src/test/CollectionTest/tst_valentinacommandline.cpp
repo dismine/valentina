@@ -32,14 +32,20 @@
 #include <QGlobalStatic>
 #include <QtTest>
 
+#if QT_VERSION < QT_VERSION_CHECK(6, 4, 0)
+#include "../vmisc/compatibility.h"
+#endif
+
+using namespace Qt::Literals::StringLiterals;
+
 namespace
 {
 QT_WARNING_PUSH
 QT_WARNING_DISABLE_CLANG("-Wunused-member-function")
 
-Q_GLOBAL_STATIC_WITH_ARGS(const QString, tmpTestFolder, (QLatin1String("tst_valentina_tmp"))) // NOLINT
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, tmpTestFolder, ("tst_valentina_tmp"_L1)) // NOLINT
 // NOLINTNEXTLINE
-Q_GLOBAL_STATIC_WITH_ARGS(const QString, tmpTestCollectionFolder, (QLatin1String("tst_valentina_collection_tmp")))
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, tmpTestCollectionFolder, ("tst_valentina_collection_tmp"_L1))
 
 QT_WARNING_POP
 } // namespace
@@ -60,8 +66,7 @@ void TST_ValentinaCommandLine::initTestCase()
             QFAIL("Fail to remove test temp directory.");
         }
 
-        if (not CopyRecursively(QCoreApplication::applicationDirPath() + QDir::separator() +
-                                    QLatin1String("tst_valentina"),
+        if (not CopyRecursively(QCoreApplication::applicationDirPath() + QDir::separator() + "tst_valentina"_L1,
                                 QCoreApplication::applicationDirPath() + QDir::separator() + *tmpTestFolder))
         {
             QFAIL("Fail to prepare test files for testing.");
@@ -76,7 +81,7 @@ void TST_ValentinaCommandLine::initTestCase()
         }
 
         if (not CopyRecursively(QCoreApplication::applicationDirPath() + QDir::separator() +
-                                    QLatin1String("tst_valentina_collection"),
+                                    "tst_valentina_collection"_L1,
                                 QCoreApplication::applicationDirPath() + QDir::separator() + *tmpTestCollectionFolder))
         {
             QFAIL("Fail to prepare collection files for testing.");
@@ -135,7 +140,7 @@ void TST_ValentinaCommandLine::ExportMode_data() const
 
     const QString tmp = QCoreApplication::applicationDirPath() + QDir::separator() + *tmpTestFolder;
 
-    QTest::newRow("Issue #372") << "issue_372.val" << QString("-p;;0;;-d;;%1;;-b;;output;;--coefficient;;1").arg(tmp)
+    QTest::newRow("Issue #372") << "issue_372.val" << u"-p;;0;;-d;;%1;;-b;;output;;--coefficient;;1"_s.arg(tmp)
                                 << V_EX_OK;
 }
 
@@ -164,29 +169,25 @@ void TST_ValentinaCommandLine::TestMode_data() const
 
     const QString tmp = QCoreApplication::applicationDirPath() + QDir::separator() + *tmpTestFolder;
 
-    QTest::newRow("Issue #256. Correct path.") << "issue_256.val" << QString("--test") << V_EX_OK;
+    QTest::newRow("Issue #256. Correct path.") << "issue_256.val" << u"--test"_s << V_EX_OK;
 
-    QTest::newRow("Issue #256. Wrong path.") << "issue_256_wrong_path.vit" << QString("--test") << V_EX_NOINPUT;
+    QTest::newRow("Issue #256. Wrong path.") << "issue_256_wrong_path.vit" << u"--test"_s << V_EX_NOINPUT;
 
     QTest::newRow("Issue #256. Correct individual measurements.")
-        << "issue_256.val"
-        << QString("--test;;-m;;%1").arg(tmp + QDir::separator() + QLatin1String("issue_256_correct.vit")) << V_EX_OK;
+        << "issue_256.val" << u"--test;;-m;;%1"_s.arg(tmp + QDir::separator() + "issue_256_correct.vit"_L1) << V_EX_OK;
 
     QTest::newRow("Issue #256. Wrong individual measurements.")
-        << "issue_256.val"
-        << QString("--test;;-m;;%1").arg(tmp + QDir::separator() + QLatin1String("issue_256_wrong.vit"))
+        << "issue_256.val" << u"--test;;-m;;%1"_s.arg(tmp + QDir::separator() + "issue_256_wrong.vit"_L1)
         << V_EX_NOINPUT;
 
     QTest::newRow("Issue #256. Correct multisize measurements.")
-        << "issue_256.val"
-        << QString("--test;;-m;;%1").arg(tmp + QDir::separator() + QLatin1String("issue_256_correct.vst")) << V_EX_OK;
+        << "issue_256.val" << u"--test;;-m;;%1"_s.arg(tmp + QDir::separator() + "issue_256_correct.vst"_L1) << V_EX_OK;
 
     QTest::newRow("Issue #256. Wrong multisize measurements.")
-        << "issue_256.val"
-        << QString("--test;;-m;;%1").arg(tmp + QDir::separator() + QLatin1String("issue_256_wrong.vst"))
+        << "issue_256.val" << u"--test;;-m;;%1"_s.arg(tmp + QDir::separator() + "issue_256_wrong.vst"_L1)
         << V_EX_NOINPUT;
 
-    QTest::newRow("Wrong formula.") << "wrong_formula.val" << QString("--test") << V_EX_DATAERR;
+    QTest::newRow("Wrong formula.") << "wrong_formula.val" << u"--test"_s << V_EX_DATAERR;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -198,7 +199,7 @@ void TST_ValentinaCommandLine::TestMode()
 
     QString error;
     const QString tmp = QCoreApplication::applicationDirPath() + QDir::separator() + *tmpTestFolder;
-    const QStringList arg = QStringList() << tmp + QDir::separator() + file << arguments.split(";;");
+    const QStringList arg = QStringList() << tmp + QDir::separator() + file << arguments.split(";;"_L1);
     const int exit = Run(exitCode, ValentinaPath(), arg, error);
 
     QVERIFY2(exit == exitCode, qUtf8Printable(error.right(350)));
@@ -212,7 +213,7 @@ void TST_ValentinaCommandLine::TestOpenCollection_data() const
     QTest::addColumn<int>("exitCode");
 
     const QString tmp = QCoreApplication::applicationDirPath() + QDir::separator() + *tmpTestCollectionFolder;
-    const QString testGOST = QString("--test;;-m;;%1").arg(tmp + QDir::separator() + QLatin1String("GOST_man_ru.vst"));
+    const QString testGOST = u"--test;;-m;;%1"_s.arg(tmp + QDir::separator() + "GOST_man_ru.vst"_L1);
     const QString keyTest = QStringLiteral("--test");
 
     QTest::newRow("bra") << "bra.val" << keyTest << V_EX_OK;

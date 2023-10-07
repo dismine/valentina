@@ -66,6 +66,12 @@
 #include "../vmisc/backport/qoverload.h"
 #endif // QT_VERSION < QT_VERSION_CHECK(5, 7, 0)
 
+#if QT_VERSION < QT_VERSION_CHECK(6, 4, 0)
+#include "../vmisc/compatibility.h"
+#endif
+
+using namespace Qt::Literals::StringLiterals;
+
 //---------------------------------------------------------------------------------------------------------------------
 /**
  * @brief DialogSplinePath create dialog
@@ -816,7 +822,7 @@ void DialogSplinePath::DataPoint(const VSplinePoint &p)
 
     int row = ui->listWidget->currentRow();
     const QString field = tr("Not used");
-    const QString emptyRes = QString("_");
+    const QString emptyRes = QChar('_');
 
     if (row == 0)
     {
@@ -993,7 +999,7 @@ void DialogSplinePath::ShowPointIssue(const QString &pName)
     }
     else
     {
-        item->setText(pName + QLatin1String("(!)"));
+        item->setText(pName + "(!)"_L1);
     }
 }
 

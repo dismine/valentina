@@ -32,26 +32,32 @@
 #include <QSharedPointer>
 #include <new>
 
-#include "../ifc/xml/vdomdocument.h"
+#include "../../../../vabstracttool.h"
+#include "../../../vdrawtool.h"
 #include "../ifc/ifcdef.h"
+#include "../ifc/xml/vdomdocument.h"
+#include "../qmuparser/qmudef.h"
 #include "../vgeometry/vgobject.h"
 #include "../vgeometry/vpointf.h"
 #include "../vmisc/vabstractapplication.h"
 #include "../vpatterndb/vcontainer.h"
 #include "../vpatterndb/vformula.h"
-#include "../../../../vabstracttool.h"
-#include "../../../vdrawtool.h"
 #include "../vtoolsinglepoint.h"
-#include "../qmuparser/qmudef.h"
+
+#if QT_VERSION < QT_VERSION_CHECK(6, 4, 0)
+#include "../vmisc/compatibility.h"
+#endif
+
+using namespace Qt::Literals::StringLiterals;
 
 //---------------------------------------------------------------------------------------------------------------------
 VToolCut::VToolCut(const VToolCutInitData &initData, QGraphicsItem *parent)
-    : VToolSinglePoint(initData.doc, initData.data, initData.id, initData.notes, parent),
-      formula(initData.formula),
-      baseCurveId(initData.baseCurveId),
-      detailsMode(VAbstractApplication::VApp()->Settings()->IsShowCurveDetails()),
-      m_aliasSuffix1(initData.aliasSuffix1),
-      m_aliasSuffix2(initData.aliasSuffix2)
+  : VToolSinglePoint(initData.doc, initData.data, initData.id, initData.notes, parent),
+    formula(initData.formula),
+    baseCurveId(initData.baseCurveId),
+    detailsMode(VAbstractApplication::VApp()->Settings()->IsShowCurveDetails()),
+    m_aliasSuffix1(initData.aliasSuffix1),
+    m_aliasSuffix2(initData.aliasSuffix2)
 {
     Q_ASSERT_X(initData.baseCurveId != 0, Q_FUNC_INFO, "curveCutId == 0"); //-V654 //-V712
 }
@@ -114,7 +120,7 @@ void VToolCut::SetAliasSuffix1(QString alias)
     QSharedPointer<VAbstractCurve> curve = VAbstractTool::data.GeometricObject<VAbstractCurve>(baseCurveId);
 
     const QString oldAliasSuffix = curve->GetAliasSuffix();
-    alias = alias.simplified().replace(QChar(QChar::Space), QChar('_'));
+    alias = alias.simplified().replace(QChar(QChar::Space), '_'_L1);
     curve->SetAliasSuffix(alias);
 
     QRegularExpression rx(NameRegExp());
@@ -143,7 +149,7 @@ void VToolCut::SetAliasSuffix2(QString alias)
     QSharedPointer<VAbstractCurve> curve = VAbstractTool::data.GeometricObject<VAbstractCurve>(baseCurveId);
 
     const QString oldAliasSuffix = curve->GetAliasSuffix();
-    alias = alias.simplified().replace(QChar(QChar::Space), QChar('_'));
+    alias = alias.simplified().replace(QChar(QChar::Space), '_'_L1);
     curve->SetAliasSuffix(alias);
 
     QRegularExpression rx(NameRegExp());
@@ -192,9 +198,9 @@ void VToolCut::SaveOptions(QDomElement &tag, QSharedPointer<VGObject> &obj)
     VToolSinglePoint::SaveOptions(tag, obj);
 
     doc->SetAttributeOrRemoveIf<QString>(tag, AttrAlias1, m_aliasSuffix1,
-                                         [](const QString &suffix) noexcept {return suffix.isEmpty();});
+                                         [](const QString &suffix) noexcept { return suffix.isEmpty(); });
     doc->SetAttributeOrRemoveIf<QString>(tag, AttrAlias2, m_aliasSuffix2,
-                                         [](const QString &suffix) noexcept {return suffix.isEmpty();});
+                                         [](const QString &suffix) noexcept { return suffix.isEmpty(); });
 }
 
 //---------------------------------------------------------------------------------------------------------------------

@@ -102,6 +102,12 @@ using namespace bpstd::literals::chrono_literals;
 #endif // __cplusplus >= 201402L
 #endif //(defined(Q_CC_GNU) && Q_CC_GNU < 409) && !defined(Q_CC_CLANG)
 
+#if QT_VERSION < QT_VERSION_CHECK(6, 4, 0)
+#include "../vmisc/compatibility.h"
+#endif
+
+using namespace Qt::Literals::StringLiterals;
+
 namespace
 {
 //---------------------------------------------------------------------------------------------------------------------
@@ -1649,18 +1655,18 @@ void VPMainWindow::UpdateWindowTitle()
         }
     }
 
-    showName += QLatin1String("[*]");
+    showName += "[*]"_L1;
 
     if (IsLayoutReadOnly())
     {
-        showName += QStringLiteral(" (") + tr("read only") + QChar(')');
+        showName += " ("_L1 + tr("read only") + ')'_L1;
     }
 
     setWindowTitle(showName);
     setWindowFilePath(curFile);
 
 #if defined(Q_OS_MAC)
-    static QIcon fileIcon = QIcon(QCoreApplication::applicationDirPath() + QLatin1String("/../Resources/layout.icns"));
+    static QIcon fileIcon = QIcon(QCoreApplication::applicationDirPath() + "/../Resources/layout.icns"_L1);
     QIcon icon;
     if (not curFile.isEmpty())
     {
@@ -1783,10 +1789,10 @@ void VPMainWindow::CreateWindowMenu(QMenu *menu)
         VPMainWindow *window = windows.at(i);
 
         QString title = QStringLiteral("%1. %2").arg(i + 1).arg(window->windowTitle());
-        const vsizetype index = title.lastIndexOf(QLatin1String("[*]"));
+        const vsizetype index = title.lastIndexOf("[*]"_L1);
         if (index != -1)
         {
-            window->isWindowModified() ? title.replace(index, 3, QChar('*')) : title.replace(index, 3, QString());
+            window->isWindowModified() ? title.replace(index, 3, '*'_L1) : title.replace(index, 3, QString());
         }
 
         QAction *action = menu->addAction(title, this, &VPMainWindow::ShowWindow);
@@ -3510,7 +3516,7 @@ auto VPMainWindow::on_actionSaveAs_triggered() -> bool
 {
     QString filters = tr("Layout files") + QStringLiteral(" (*.vlt)");
     QString suffix = QStringLiteral("vlt");
-    QString fName = tr("layout") + QChar('.') + suffix;
+    QString fName = tr("layout") + '.'_L1 + suffix;
 
     QString dir;
     if (curFile.isEmpty())
@@ -3522,7 +3528,7 @@ auto VPMainWindow::on_actionSaveAs_triggered() -> bool
         dir = QFileInfo(curFile).absolutePath();
     }
 
-    QString fileName = QFileDialog::getSaveFileName(this, tr("Save as"), dir + QChar('/') + fName, filters, nullptr,
+    QString fileName = QFileDialog::getSaveFileName(this, tr("Save as"), dir + '/'_L1 + fName, filters, nullptr,
                                                     VAbstractApplication::VApp()->NativeFileDialog());
 
     if (fileName.isEmpty())
@@ -3533,7 +3539,7 @@ auto VPMainWindow::on_actionSaveAs_triggered() -> bool
     QFileInfo f(fileName);
     if (f.suffix().isEmpty() && f.suffix() != suffix)
     {
-        fileName += QChar('.') + suffix;
+        fileName += '.'_L1 + suffix;
     }
 
     if (curFile.isEmpty())

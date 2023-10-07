@@ -30,14 +30,20 @@
 
 #include <QJsonObject>
 
+#if QT_VERSION < QT_VERSION_CHECK(6, 4, 0)
+#include "../vmisc/compatibility.h"
+#endif
+
+using namespace Qt::Literals::StringLiterals;
+
 //---------------------------------------------------------------------------------------------------------------------
 auto VRawSAPoint::toJson() const -> QJsonObject
 {
     QJsonObject pointObject = VLayoutPoint::toJson();
 
-    pointObject[QLatin1String("type")] = "VRawSAPoint";
-    pointObject[QLatin1String("loopPoint")] = m_loopPoint;
-    pointObject[QLatin1String("primary")] = m_primary;
+    pointObject["type"_L1] = "VRawSAPoint";
+    pointObject["loopPoint"_L1] = m_loopPoint;
+    pointObject["primary"_L1] = m_primary;
 
     return pointObject;
 }

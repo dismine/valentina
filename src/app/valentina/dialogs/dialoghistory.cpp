@@ -45,6 +45,12 @@
 #include <QtConcurrent>
 #include <functional>
 
+#if QT_VERSION < QT_VERSION_CHECK(6, 4, 0)
+#include "../vmisc/compatibility.h"
+#endif
+
+using namespace Qt::Literals::StringLiterals;
+
 namespace
 {
 //---------------------------------------------------------------------------------------------------------------------
@@ -780,7 +786,7 @@ void DialogHistory::UpdateSearchControlsTooltips()
 {
     auto UpdateToolTip = [](QAbstractButton *button)
     {
-        if (button->toolTip().contains(QLatin1String("%1")))
+        if (button->toolTip().contains("%1"_L1))
         {
             button->setToolTip(button->toolTip().arg(button->shortcut().toString(QKeySequence::NativeText)));
         }

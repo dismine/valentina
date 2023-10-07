@@ -31,11 +31,16 @@
 #include "../vpatterndb/measurements.h"
 #include "ui_dialogmdatabase.h"
 
-
 #include <QKeyEvent>
 #include <QMenu>
 #include <QSvgRenderer>
 #include <QtSvg>
+
+#if QT_VERSION < QT_VERSION_CHECK(6, 4, 0)
+#include "../vmisc/compatibility.h"
+#endif
+
+using namespace Qt::Literals::StringLiterals;
 
 //---------------------------------------------------------------------------------------------------------------------
 DialogMDataBase::DialogMDataBase(const QStringList &list, QWidget *parent)
@@ -513,12 +518,11 @@ auto DialogMDataBase::ItemFullDescription(QTreeWidgetItem *item, bool showImage)
         imgTag = ImgTag(number);
     }
 
-    const QString text = QString("<p align=\"center\" style=\"font-variant: normal; font-style: normal; font-weight: "
-                                 "normal\"> %1 <br clear=\"left\"><b>%2</b>. <i>%3</i></p>"
-                                 "<p align=\"left\" style=\"font-variant: normal; font-style: normal; font-weight: "
-                                 "normal\">%4</p>")
-                             .arg(imgTag, number, VAbstractApplication::VApp()->TrVars()->GuiText(name),
-                                  VAbstractApplication::VApp()->TrVars()->Description(name));
+    const QString text = u"<p align=\"center\" style=\"font-variant: normal; font-style: normal; font-weight: "
+                         "normal\"> %1 <br clear=\"left\"><b>%2</b>. <i>%3</i></p>"
+                         "<p align=\"left\" style=\"font-variant: normal; font-style: normal; font-weight: "
+                         "normal\">%4</p>"_s.arg(imgTag, number, VAbstractApplication::VApp()->TrVars()->GuiText(name),
+                                                 VAbstractApplication::VApp()->TrVars()->Description(name));
 
     return text;
 }

@@ -34,21 +34,23 @@
 
 #include "../../../../../dialogs/tools/dialoglineintersectaxis.h"
 #include "../../../../../dialogs/tools/dialogtool.h"
-#include "../../../../../visualization/visualization.h"
 #include "../../../../../visualization/line/vistoollineintersectaxis.h"
+#include "../../../../../visualization/visualization.h"
+#include "../../../../vabstracttool.h"
+#include "../../../vdrawtool.h"
 #include "../ifc/exception/vexception.h"
 #include "../ifc/exception/vexceptionobjecterror.h"
 #include "../ifc/ifcdef.h"
 #include "../vgeometry/vpointf.h"
+#include "../vmisc/compatibility.h"
 #include "../vmisc/vabstractapplication.h"
 #include "../vmisc/vcommonsettings.h"
 #include "../vpatterndb/vcontainer.h"
 #include "../vpatterndb/vtranslatevars.h"
 #include "../vwidgets/vmaingraphicsscene.h"
-#include "../../../../vabstracttool.h"
-#include "../../../vdrawtool.h"
 #include "vtoollinepoint.h"
-#include "../vmisc/compatibility.h"
+
+using namespace Qt::Literals::StringLiterals;
 
 template <class T> class QSharedPointer;
 
@@ -56,11 +58,11 @@ const QString VToolLineIntersectAxis::ToolType = QStringLiteral("lineIntersectAx
 
 //---------------------------------------------------------------------------------------------------------------------
 VToolLineIntersectAxis::VToolLineIntersectAxis(const VToolLineIntersectAxisInitData &initData, QGraphicsItem *parent)
-    :VToolLinePoint(initData.doc, initData.data, initData.id, initData.typeLine, initData.lineColor, QString(),
-                    initData.basePointId, 0, initData.notes, parent),
-      formulaAngle(initData.formulaAngle),
-      firstPointId(initData.firstPointId),
-      secondPointId(initData.secondPointId)
+  : VToolLinePoint(initData.doc, initData.data, initData.id, initData.typeLine, initData.lineColor, QString(),
+                   initData.basePointId, 0, initData.notes, parent),
+    formulaAngle(initData.formulaAngle),
+    firstPointId(initData.firstPointId),
+    secondPointId(initData.secondPointId)
 {
     ToolCreation(initData.typeCreation);
 }
@@ -118,7 +120,7 @@ auto VToolLineIntersectAxis::Create(const QPointer<DialogTool> &dialog, VMainGra
 auto VToolLineIntersectAxis::Create(VToolLineIntersectAxisInitData &initData) -> VToolLineIntersectAxis *
 {
     const QSharedPointer<VPointF> basePoint = initData.data->GeometricObject<VPointF>(initData.basePointId);
-    QLineF axis = QLineF(static_cast<QPointF>(*basePoint), QPointF(basePoint->x()+100, basePoint->y()));
+    QLineF axis = QLineF(static_cast<QPointF>(*basePoint), QPointF(basePoint->x() + 100, basePoint->y()));
     axis.setAngle(CheckFormula(initData.id, initData.formulaAngle, initData.data));
 
     const QSharedPointer<VPointF> firstPoint = initData.data->GeometricObject<VPointF>(initData.firstPointId);
@@ -132,9 +134,11 @@ auto VToolLineIntersectAxis::Create(VToolLineIntersectAxisInitData &initData) ->
     {
         const QString errorMsg = tr("Error calculating point '%1'. Line (%2;%3) doesn't have intersection with axis "
                                     "through point '%4' and angle %5°")
-                      .arg(initData.name, firstPoint->name(), secondPoint->name(), basePoint->name()).arg(axis.angle());
-        VAbstractApplication::VApp()->IsPedantic() ? throw VExceptionObjectError(errorMsg) :
-                                              qWarning() << VAbstractValApplication::warningMessageSignature + errorMsg;
+                                     .arg(initData.name, firstPoint->name(), secondPoint->name(), basePoint->name())
+                                     .arg(axis.angle());
+        VAbstractApplication::VApp()->IsPedantic()
+            ? throw VExceptionObjectError(errorMsg)
+            : qWarning() << VAbstractValApplication::warningMessageSignature + errorMsg;
     }
 
     VPointF *p = new VPointF(fPoint, initData.name, initData.mx, initData.my);
@@ -184,8 +188,8 @@ auto VToolLineIntersectAxis::FindPoint(const QLineF &axis, const QLineF &line, Q
 
     if (intersect == QLineF::UnboundedIntersection || intersect == QLineF::BoundedIntersection)
     {
-        if(VFuzzyComparePossibleNulls(axis.angle(), line.angle())
-           || VFuzzyComparePossibleNulls(qAbs(axis.angle() - line.angle()), 180))
+        if (VFuzzyComparePossibleNulls(axis.angle(), line.angle()) ||
+            VFuzzyComparePossibleNulls(qAbs(axis.angle() - line.angle()), 180))
         {
             return false;
         }
@@ -249,10 +253,10 @@ void VToolLineIntersectAxis::ShowContextMenu(QGraphicsSceneContextMenuEvent *eve
     {
         ContextMenu<DialogLineIntersectAxis>(event, id);
     }
-    catch(const VExceptionToolWasDeleted &e)
+    catch (const VExceptionToolWasDeleted &e)
     {
         Q_UNUSED(e)
-        return;//Leave this method immediately!!!
+        return; // Leave this method immediately!!!
     }
 }
 
@@ -279,7 +283,7 @@ void VToolLineIntersectAxis::SaveDialog(QDomElement &domElement, QList<quint32> 
     doc->SetAttribute(domElement, AttrP1Line, QString().setNum(dialogTool->GetFirstPointId()));
     doc->SetAttribute(domElement, AttrP2Line, QString().setNum(dialogTool->GetSecondPointId()));
     doc->SetAttributeOrRemoveIf<QString>(domElement, AttrNotes, dialogTool->GetNotes(),
-                                         [](const QString &notes) noexcept {return notes.isEmpty();});
+                                         [](const QString &notes) noexcept { return notes.isEmpty(); });
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -318,8 +322,8 @@ void VToolLineIntersectAxis::SetVisualization()
         visual->SetPoint1Id(firstPointId);
         visual->SetPoint2Id(secondPointId);
         visual->SetAxisPointId(basePointId);
-        visual->SetAngle(VAbstractApplication::VApp()->TrVars()
-                         ->FormulaToUser(formulaAngle, VAbstractApplication::VApp()->Settings()->GetOsSeparator()));
+        visual->SetAngle(VAbstractApplication::VApp()->TrVars()->FormulaToUser(
+            formulaAngle, VAbstractApplication::VApp()->Settings()->GetOsSeparator()));
         visual->SetLineStyle(LineStyleToPenStyle(m_lineType));
         visual->SetMode(Mode::Show);
         visual->RefreshGeometry();
@@ -338,22 +342,21 @@ auto VToolLineIntersectAxis::MakeToolTip() const -> QString
     const QLineF firstToCur(static_cast<QPointF>(*firstPoint), static_cast<QPointF>(*current));
     const QLineF curToSecond(static_cast<QPointF>(*current), static_cast<QPointF>(*secondPoint));
 
-    const QString toolTip = QString("<table>"
-                                    "<tr> <td><b>%10:</b> %11</td> </tr>"
-                                    "<tr> <td><b>%1:</b> %2 %3</td> </tr>"
-                                    "<tr> <td><b>%4:</b> %5°</td> </tr>"
-                                    "<tr> <td><b>%6:</b> %7 %3</td> </tr>"
-                                    "<tr> <td><b>%8:</b> %9 %3</td> </tr>"
-                                    "</table>")
-            .arg(tr("Length"))
-            .arg(VAbstractValApplication::VApp()->fromPixel(curLine.length()))
-            .arg(UnitsToStr(VAbstractValApplication::VApp()->patternUnits(), true), tr("Angle"))
-            .arg(curLine.angle())
-            .arg(QString("%1->%2").arg(firstPoint->name(), current->name()))
-            .arg(VAbstractValApplication::VApp()->fromPixel(firstToCur.length()))
-            .arg(QString("%1->%2").arg(current->name(), secondPoint->name()))
-            .arg(VAbstractValApplication::VApp()->fromPixel(curToSecond.length()))
-            .arg(tr("Label"), current->name());
+    const QString toolTip = u"<table>"
+                            "<tr> <td><b>%10:</b> %11</td> </tr>"
+                            "<tr> <td><b>%1:</b> %2 %3</td> </tr>"
+                            "<tr> <td><b>%4:</b> %5°</td> </tr>"
+                            "<tr> <td><b>%6:</b> %7 %3</td> </tr>"
+                            "<tr> <td><b>%8:</b> %9 %3</td> </tr>"
+                            "</table>"_s.arg(tr("Length"))
+                                .arg(VAbstractValApplication::VApp()->fromPixel(curLine.length()))
+                                .arg(UnitsToStr(VAbstractValApplication::VApp()->patternUnits(), true), tr("Angle"))
+                                .arg(curLine.angle())
+                                .arg(u"%1->%2"_s.arg(firstPoint->name(), current->name()))
+                                .arg(VAbstractValApplication::VApp()->fromPixel(firstToCur.length()))
+                                .arg(u"%1->%2"_s.arg(current->name(), secondPoint->name()))
+                                .arg(VAbstractValApplication::VApp()->fromPixel(curToSecond.length()))
+                                .arg(tr("Label"), current->name());
     return toolTip;
 }
 

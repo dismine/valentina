@@ -39,6 +39,12 @@
 #include <QPixmapCache>
 #include <QUndoStack>
 
+#if QT_VERSION < QT_VERSION_CHECK(6, 4, 0)
+#include "../vmisc/compatibility.h"
+#endif
+
+using namespace Qt::Literals::StringLiterals;
+
 QT_WARNING_PUSH
 QT_WARNING_DISABLE_CLANG("-Wmissing-prototypes")
 QT_WARNING_DISABLE_INTEL(1418)
@@ -179,7 +185,7 @@ auto VPLayout::WatermarkData() const -> VWatermarkData
             data.invalidFile = true;
             data.opacity = 20;
             data.showImage = true;
-            data.path = QStringLiteral("fake.png");
+            data.path = "fake.png"_L1;
             data.showText = false;
             return data;
         }

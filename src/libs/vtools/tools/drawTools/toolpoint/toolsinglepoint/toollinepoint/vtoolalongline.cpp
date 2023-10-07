@@ -35,21 +35,27 @@
 
 #include "../../../../../dialogs/tools/dialogalongline.h"
 #include "../../../../../dialogs/tools/dialogtool.h"
-#include "../../../../../visualization/visualization.h"
 #include "../../../../../visualization/line/vistoolalongline.h"
+#include "../../../../../visualization/visualization.h"
+#include "../../../../vabstracttool.h"
+#include "../../../vdrawtool.h"
 #include "../ifc/exception/vexception.h"
 #include "../ifc/ifcdef.h"
 #include "../vgeometry/vgobject.h"
 #include "../vgeometry/vpointf.h"
 #include "../vmisc/vabstractapplication.h"
 #include "../vmisc/vcommonsettings.h"
+#include "../vpatterndb/variables/vlinelength.h"
 #include "../vpatterndb/vcontainer.h"
 #include "../vpatterndb/vtranslatevars.h"
-#include "../vpatterndb/variables/vlinelength.h"
 #include "../vwidgets/vmaingraphicsscene.h"
-#include "../../../../vabstracttool.h"
-#include "../../../vdrawtool.h"
 #include "vtoollinepoint.h"
+
+#if QT_VERSION < QT_VERSION_CHECK(6, 4, 0)
+#include "../vmisc/compatibility.h"
+#endif
+
+using namespace Qt::Literals::StringLiterals;
 
 template <class T> class QSharedPointer;
 
@@ -62,9 +68,9 @@ const QString VToolAlongLine::ToolType = QStringLiteral("alongLine"); // NOLINT(
  * @param parent parent object.
  */
 VToolAlongLine::VToolAlongLine(const VToolAlongLineInitData &initData, QGraphicsItem *parent)
-    :VToolLinePoint(initData.doc, initData.data, initData.id, initData.typeLine, initData.lineColor, initData.formula,
-                    initData.firstPointId, 0, initData.notes, parent),
-      m_secondPointId(initData.secondPointId)
+  : VToolLinePoint(initData.doc, initData.data, initData.id, initData.typeLine, initData.lineColor, initData.formula,
+                   initData.firstPointId, 0, initData.notes, parent),
+    m_secondPointId(initData.secondPointId)
 {
     ToolCreation(initData.typeCreation);
 }
@@ -105,7 +111,7 @@ void VToolAlongLine::SaveDialog(QDomElement &domElement, QList<quint32> &oldDepe
 
     const QString notes = dialogTool->GetNotes();
     doc->SetAttributeOrRemoveIf<QString>(domElement, AttrNotes, notes,
-                                         [](const QString &notes) noexcept {return notes.isEmpty();});
+                                         [](const QString &notes) noexcept { return notes.isEmpty(); });
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -140,8 +146,8 @@ void VToolAlongLine::SetVisualization()
         SCASSERT(visual != nullptr)
         visual->SetPoint1Id(basePointId);
         visual->SetPoint2Id(m_secondPointId);
-        visual->SetLength(VAbstractApplication::VApp()->TrVars()
-                          ->FormulaToUser(formulaLength, VAbstractApplication::VApp()->Settings()->GetOsSeparator()));
+        visual->SetLength(VAbstractApplication::VApp()->TrVars()->FormulaToUser(
+            formulaLength, VAbstractApplication::VApp()->Settings()->GetOsSeparator()));
         visual->SetLineStyle(LineStyleToPenStyle(m_lineType));
         visual->SetMode(Mode::Show);
         visual->RefreshGeometry();
@@ -158,21 +164,20 @@ auto VToolAlongLine::MakeToolTip() const -> QString
     const QLineF curLine(static_cast<QPointF>(*basePoint), static_cast<QPointF>(*current));
     const QLineF curToSecond(static_cast<QPointF>(*current), static_cast<QPointF>(*secondPoint));
 
-    const QString toolTip = QString("<table>"
-                                    "<tr> <td><b>%9:</b> %10</td> </tr>"
-                                    "<tr> <td><b>%1:</b> %2 %3</td> </tr>"
-                                    "<tr> <td><b>%4:</b> %5°</td> </tr>"
-                                    "<tr> <td><b>%6:</b> %2 %3</td> </tr>"
-                                    "<tr> <td><b>%7:</b> %8 %3</td> </tr>"
-                                    "</table>")
-            .arg(tr("Length"))
-            .arg(VAbstractValApplication::VApp()->fromPixel(curLine.length()))
-            .arg(UnitsToStr(VAbstractValApplication::VApp()->patternUnits(), true), tr("Angle"))
-            .arg(curLine.angle())
-            .arg(QStringLiteral("%1->%2").arg(basePoint->name(), current->name()),
-                 QStringLiteral("%1->%2").arg(current->name(), secondPoint->name()))
-            .arg(VAbstractValApplication::VApp()->fromPixel(curToSecond.length()))
-            .arg(tr("Label"), current->name());
+    const QString toolTip = u"<table>"
+                            "<tr> <td><b>%9:</b> %10</td> </tr>"
+                            "<tr> <td><b>%1:</b> %2 %3</td> </tr>"
+                            "<tr> <td><b>%4:</b> %5°</td> </tr>"
+                            "<tr> <td><b>%6:</b> %2 %3</td> </tr>"
+                            "<tr> <td><b>%7:</b> %8 %3</td> </tr>"
+                            "</table>"_s.arg(tr("Length"))
+                                .arg(VAbstractValApplication::VApp()->fromPixel(curLine.length()))
+                                .arg(UnitsToStr(VAbstractValApplication::VApp()->patternUnits(), true), tr("Angle"))
+                                .arg(curLine.angle())
+                                .arg(QStringLiteral("%1->%2").arg(basePoint->name(), current->name()),
+                                     QStringLiteral("%1->%2").arg(current->name(), secondPoint->name()))
+                                .arg(VAbstractValApplication::VApp()->fromPixel(curToSecond.length()))
+                                .arg(tr("Label"), current->name());
     return toolTip;
 }
 
@@ -189,10 +194,10 @@ void VToolAlongLine::ShowContextMenu(QGraphicsSceneContextMenuEvent *event, quin
     {
         ContextMenu<DialogAlongLine>(event, id);
     }
-    catch(const VExceptionToolWasDeleted &e)
+    catch (const VExceptionToolWasDeleted &e)
     {
         Q_UNUSED(e)
-        return;//Leave this method immediately!!!
+        return; // Leave this method immediately!!!
     }
 }
 
@@ -224,7 +229,7 @@ void VToolAlongLine::SetDialog()
  * @param data container with variables.
  */
 auto VToolAlongLine::Create(const QPointer<DialogTool> &dialog, VMainGraphicsScene *scene, VAbstractPattern *doc,
-                            VContainer *data) -> VToolAlongLine*
+                            VContainer *data) -> VToolAlongLine *
 {
     SCASSERT(not dialog.isNull())
     const QPointer<DialogAlongLine> dialogTool = qobject_cast<DialogAlongLine *>(dialog);
@@ -263,20 +268,20 @@ auto VToolAlongLine::Create(const QPointer<DialogTool> &dialog, VMainGraphicsSce
  * @brief Create help create tool.
  * @param initData init data.
  */
-auto VToolAlongLine::Create(VToolAlongLineInitData &initData) -> VToolAlongLine*
+auto VToolAlongLine::Create(VToolAlongLineInitData &initData) -> VToolAlongLine *
 {
     const QSharedPointer<VPointF> firstPoint = initData.data->GeometricObject<VPointF>(initData.firstPointId);
     const QSharedPointer<VPointF> secondPoint = initData.data->GeometricObject<VPointF>(initData.secondPointId);
     QLineF line = QLineF(static_cast<QPointF>(*firstPoint), static_cast<QPointF>(*secondPoint));
 
-    //Declare special variable "CurrentLength"
-    auto *length = new VLengthLine(firstPoint.data(), initData.firstPointId, secondPoint.data(),
-                                   initData.secondPointId, *initData.data->GetPatternUnit());
+    // Declare special variable "CurrentLength"
+    auto *length = new VLengthLine(firstPoint.data(), initData.firstPointId, secondPoint.data(), initData.secondPointId,
+                                   *initData.data->GetPatternUnit());
     length->SetName(currentLength);
     initData.data->AddVariable(length);
 
-    line.setLength(VAbstractValApplication::VApp()->toPixel(
-                       CheckFormula(initData.id, initData.formula, initData.data)));
+    line.setLength(
+        VAbstractValApplication::VApp()->toPixel(CheckFormula(initData.id, initData.formula, initData.data)));
 
     auto *p = new VPointF(line.p2(), initData.name, initData.mx, initData.my);
     p->SetShowLabel(initData.showLabel);
@@ -309,7 +314,7 @@ auto VToolAlongLine::Create(VToolAlongLineInitData &initData) -> VToolAlongLine*
         initData.doc->IncrementReferens(firstPoint->getIdTool());
         initData.doc->IncrementReferens(secondPoint->getIdTool());
     }
-    //Very important to delete it. Only this tool need this special variable.
+    // Very important to delete it. Only this tool need this special variable.
     initData.data->RemoveVariable(currentLength);
     return point;
 }

@@ -55,6 +55,8 @@
 #include "../vpatterndb/vcontainer.h"
 #include "vtextmanager.h"
 
+using namespace Qt::Literals::StringLiterals;
+
 namespace
 {
 QT_WARNING_PUSH
@@ -179,8 +181,8 @@ auto operator>>(QDataStream &dataStream, TextLine &data) -> QDataStream &
     {
         QString message = QCoreApplication::tr("TextLine prefix mismatch error: actualStreamHeader = 0x%1 and "
                                                "streamHeader = 0x%2")
-                              .arg(actualStreamHeader, 8, 0x10, QChar('0'))
-                              .arg(TextLine::streamHeader, 8, 0x10, QChar('0'));
+                              .arg(actualStreamHeader, 8, 0x10, '0'_L1)
+                              .arg(TextLine::streamHeader, 8, 0x10, '0'_L1);
         throw VException(message);
     }
 
@@ -240,8 +242,8 @@ auto operator>>(QDataStream &dataStream, VTextManager &data) -> QDataStream &
     {
         QString message = QCoreApplication::tr("VTextManager prefix mismatch error: actualStreamHeader = 0x%1 and "
                                                "streamHeader = 0x%2")
-                              .arg(actualStreamHeader, 8, 0x10, QChar('0'))
-                              .arg(VTextManager::streamHeader, 8, 0x10, QChar('0'));
+                              .arg(actualStreamHeader, 8, 0x10, '0'_L1)
+                              .arg(VTextManager::streamHeader, 8, 0x10, '0'_L1);
         throw VException(message);
     }
 
@@ -495,7 +497,7 @@ auto ReplacePlaceholders(const QMap<QString, QString> &placeholders, QString lin
 
     auto TestDimension = [per, placeholders, line](const QString &placeholder, const QString &errorMsg)
     {
-        if (line.contains(per + placeholder + per) && placeholders.value(placeholder) == QChar('0'))
+        if (line.contains(per + placeholder + per) && placeholders.value(placeholder) == '0'_L1)
         {
             VAbstractApplication::VApp()->IsPedantic()
                 ? throw VException(errorMsg)
@@ -866,7 +868,7 @@ auto VTextManager::BreakTextIntoLines(const QString &text, const QFont &font, in
     {
         if (!currentLine.isEmpty())
         {
-            currentLine += QChar(' ');
+            currentLine += ' '_L1;
         }
         currentLine += word;
         currentLineWidth = totalWidth;
@@ -966,7 +968,7 @@ auto VTextManager::BreakTextIntoLines(const QString &text, const VSvgFont &font,
     {
         if (!currentLine.isEmpty())
         {
-            currentLine += QChar(' ');
+            currentLine += ' '_L1;
         }
         currentLine += word;
         currentLineWidth = totalWidth;

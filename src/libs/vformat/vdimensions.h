@@ -39,7 +39,7 @@
 #include "../vmisc/defglobal.h"
 #endif // QT_VERSION < QT_VERSION_CHECK(5, 13, 0)
 
-enum class MeasurementDimension: qint8
+enum class MeasurementDimension : qint8
 {
     X = 0, // height
     Y = 1, // size (chest half circumference)
@@ -112,13 +112,14 @@ template <typename T> inline auto VFuzzyValue(const QMap<qreal, T> &c, qreal val
 class VAbstartMeasurementDimension
 {
     Q_DECLARE_TR_FUNCTIONS(VAbstartMeasurementDimension) // NOLINT
+
 public:
-    VAbstartMeasurementDimension() =default;
+    VAbstartMeasurementDimension() = default;
     explicit VAbstartMeasurementDimension(Unit units);
     VAbstartMeasurementDimension(Unit units, qreal min, qreal max, qreal step);
-    virtual ~VAbstartMeasurementDimension() =default;
+    virtual ~VAbstartMeasurementDimension() = default;
 
-    virtual auto Type() const -> MeasurementDimension =0;
+    virtual auto Type() const -> MeasurementDimension = 0;
 
     auto IsValid() -> bool;
 
@@ -144,7 +145,7 @@ public:
     auto RangeMin() const -> int;
     auto RangeMax() const -> int;
 
-    virtual auto Axis() const -> QChar =0;
+    virtual auto Axis() const -> QChar = 0;
 
     auto Name() const -> QString;
 
@@ -171,15 +172,15 @@ protected:
 private:
     Q_DISABLE_COPY_MOVE(VAbstartMeasurementDimension) // NOLINT
 
-    Unit            m_units{Unit::Cm};
-    qreal           m_minValue{0};
-    qreal           m_maxValue{0};
-    qreal           m_step{-1};
-    qreal           m_baseValue{0};
+    Unit m_units{Unit::Cm};
+    qreal m_minValue{0};
+    qreal m_maxValue{0};
+    qreal m_step{-1};
+    qreal m_baseValue{0};
     mutable QString m_error{};
-    DimesionLabels  m_labels{};
-    bool            m_measurement{true};
-    QString         m_customName{};
+    DimesionLabels m_labels{};
+    bool m_measurement{true};
+    QString m_customName{};
 };
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -283,10 +284,10 @@ inline void VAbstartMeasurementDimension::SetCustomName(const QString &newCustom
 class VXMeasurementDimension : public VAbstartMeasurementDimension
 {
 public:
-    VXMeasurementDimension() =default;
+    VXMeasurementDimension() = default;
     explicit VXMeasurementDimension(Unit units);
     VXMeasurementDimension(Unit units, qreal min, qreal max, qreal step);
-    ~VXMeasurementDimension() override =default;
+    ~VXMeasurementDimension() override = default;
 
     auto Type() const -> MeasurementDimension override;
 
@@ -305,7 +306,7 @@ inline auto VXMeasurementDimension::Type() const -> MeasurementDimension
 //---------------------------------------------------------------------------------------------------------------------
 inline auto VXMeasurementDimension::Axis() const -> QChar
 {
-    return QChar('X');
+    return QLatin1Char('X');
 }
 
 // VYMeasurementDimension
@@ -313,10 +314,10 @@ inline auto VXMeasurementDimension::Axis() const -> QChar
 class VYMeasurementDimension : public VAbstartMeasurementDimension
 {
 public:
-    VYMeasurementDimension() =default;
+    VYMeasurementDimension() = default;
     explicit VYMeasurementDimension(Unit units);
     VYMeasurementDimension(Unit units, qreal min, qreal max, qreal step);
-    ~VYMeasurementDimension() override =default;
+    ~VYMeasurementDimension() override = default;
 
     auto Type() const -> MeasurementDimension override;
 
@@ -335,7 +336,7 @@ inline auto VYMeasurementDimension::Type() const -> MeasurementDimension
 //---------------------------------------------------------------------------------------------------------------------
 inline auto VYMeasurementDimension::Axis() const -> QChar
 {
-    return QChar('Y');
+    return QLatin1Char('Y');
 }
 
 // VWMeasurementDimension
@@ -343,10 +344,10 @@ inline auto VYMeasurementDimension::Axis() const -> QChar
 class VWMeasurementDimension : public VAbstartMeasurementDimension
 {
 public:
-    VWMeasurementDimension() =default;
+    VWMeasurementDimension() = default;
     explicit VWMeasurementDimension(Unit units);
     VWMeasurementDimension(Unit units, qreal min, qreal max, qreal step);
-    ~VWMeasurementDimension() override =default;
+    ~VWMeasurementDimension() override = default;
 
     auto Type() const -> MeasurementDimension override;
 
@@ -365,7 +366,7 @@ inline auto VWMeasurementDimension::Type() const -> MeasurementDimension
 //---------------------------------------------------------------------------------------------------------------------
 inline auto VWMeasurementDimension::Axis() const -> QChar
 {
-    return QChar('W');
+    return QLatin1Char('W');
 }
 
 // VZMeasurementDimension
@@ -373,10 +374,10 @@ inline auto VWMeasurementDimension::Axis() const -> QChar
 class VZMeasurementDimension : public VAbstartMeasurementDimension
 {
 public:
-    VZMeasurementDimension() =default;
+    VZMeasurementDimension() = default;
     explicit VZMeasurementDimension(Unit units);
     VZMeasurementDimension(Unit units, qreal min, qreal max, qreal step);
-    ~VZMeasurementDimension() override =default;
+    ~VZMeasurementDimension() override = default;
 
     auto Type() const -> MeasurementDimension override;
 
@@ -395,7 +396,7 @@ inline auto VZMeasurementDimension::Type() const -> MeasurementDimension
 //---------------------------------------------------------------------------------------------------------------------
 inline auto VZMeasurementDimension::Axis() const -> QChar
 {
-    return QChar('Z');
+    return QLatin1Char('Z');
 }
 
 class VDimensionRestriction
@@ -415,6 +416,7 @@ public:
 
     void SetExcludeValues(const QSet<qreal> &exclude);
     auto GetExcludeValues() const -> QSet<qreal>;
+
 private:
     qreal m_min{0};
     qreal m_max{0};

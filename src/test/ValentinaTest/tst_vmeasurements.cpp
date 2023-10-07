@@ -27,17 +27,23 @@
  *************************************************************************/
 
 #include "tst_vmeasurements.h"
-#include "../vformat/vmeasurements.h"
-#include "../ifc/xml/vvstconverter.h"
 #include "../ifc/xml/vvitconverter.h"
-#include "../vpatterndb/vcontainer.h"
+#include "../ifc/xml/vvstconverter.h"
+#include "../vformat/vmeasurements.h"
 #include "../vpatterndb/pmsystems.h"
+#include "../vpatterndb/vcontainer.h"
 
 #include <QtTest>
 
+#if QT_VERSION < QT_VERSION_CHECK(6, 4, 0)
+#include "../vmisc/compatibility.h"
+#endif
+
+using namespace Qt::Literals::StringLiterals;
+
 //---------------------------------------------------------------------------------------------------------------------
-TST_VMeasurements::TST_VMeasurements(QObject *parent) :
-    QObject(parent)
+TST_VMeasurements::TST_VMeasurements(QObject *parent)
+  : QObject(parent)
 {
 }
 
@@ -49,8 +55,8 @@ void TST_VMeasurements::CreateEmptyMultisizeFile()
 {
     Unit mUnit = Unit::Cm;
 
-    QSharedPointer<VContainer> data = QSharedPointer<VContainer>(new VContainer(nullptr, &mUnit,
-                                                                                VContainer::UniqueNamespace()));
+    QSharedPointer<VContainer> data =
+        QSharedPointer<VContainer>(new VContainer(nullptr, &mUnit, VContainer::UniqueNamespace()));
     auto m_xDimension = QSharedPointer<VXMeasurementDimension>::create(mUnit, 50, 200, 6);
     m_xDimension->SetBaseValue(176);
 
@@ -58,10 +64,9 @@ void TST_VMeasurements::CreateEmptyMultisizeFile()
     m_yDimension->SetBaseValue(50);
     m_yDimension->SetBodyMeasurement(true);
 
-    QVector<MeasurementDimension_p > dimensions{m_xDimension, m_yDimension};
+    QVector<MeasurementDimension_p> dimensions{m_xDimension, m_yDimension};
 
-    QSharedPointer<VMeasurements> m =
-            QSharedPointer<VMeasurements>(new VMeasurements(mUnit, dimensions, data.data()));
+    QSharedPointer<VMeasurements> m = QSharedPointer<VMeasurements>(new VMeasurements(mUnit, dimensions, data.data()));
 
     QTemporaryFile file;
     QString fileName;
@@ -101,11 +106,10 @@ void TST_VMeasurements::CreateEmptyIndividualFile()
 {
     Unit mUnit = Unit::Cm;
 
-    QSharedPointer<VContainer> data = QSharedPointer<VContainer>(new VContainer(nullptr, &mUnit,
-                                                                                VContainer::UniqueNamespace()));
+    QSharedPointer<VContainer> data =
+        QSharedPointer<VContainer>(new VContainer(nullptr, &mUnit, VContainer::UniqueNamespace()));
 
-    QSharedPointer<VMeasurements> m =
-            QSharedPointer<VMeasurements>(new VMeasurements(mUnit, data.data()));
+    QSharedPointer<VMeasurements> m = QSharedPointer<VMeasurements>(new VMeasurements(mUnit, data.data()));
 
     QTemporaryFile file;
     QString fileName;
@@ -143,8 +147,8 @@ void TST_VMeasurements::ValidPMCodesMultisizeFile()
 {
     Unit mUnit = Unit::Cm;
 
-    QSharedPointer<VContainer> data = QSharedPointer<VContainer>(new VContainer(nullptr, &mUnit,
-                                                                                VContainer::UniqueNamespace()));
+    QSharedPointer<VContainer> data =
+        QSharedPointer<VContainer>(new VContainer(nullptr, &mUnit, VContainer::UniqueNamespace()));
 
     auto m_xDimension = QSharedPointer<VXMeasurementDimension>::create(mUnit, 50, 200, 6);
     m_xDimension->SetBaseValue(176);
@@ -153,10 +157,9 @@ void TST_VMeasurements::ValidPMCodesMultisizeFile()
     m_yDimension->SetBaseValue(50);
     m_yDimension->SetBodyMeasurement(true);
 
-    QVector<MeasurementDimension_p > dimensions{m_xDimension, m_yDimension};
+    QVector<MeasurementDimension_p> dimensions{m_xDimension, m_yDimension};
 
-    QSharedPointer<VMeasurements> m =
-            QSharedPointer<VMeasurements>(new VMeasurements(mUnit, dimensions, data.data()));
+    QSharedPointer<VMeasurements> m = QSharedPointer<VMeasurements>(new VMeasurements(mUnit, dimensions, data.data()));
 
     const QStringList listSystems = ListPMSystems();
     for (int i = 0; i < listSystems.size(); ++i)
@@ -176,7 +179,7 @@ void TST_VMeasurements::ValidPMCodesMultisizeFile()
             const bool result = m->SaveDocument(fileName, error);
 
             // cppcheck-suppress unreadVariable
-            const QString message = QString("Error: %1 for code=%2").arg(error, listSystems.at(i));
+            const QString message = u"Error: %1 for code=%2"_s.arg(error, listSystems.at(i));
             QVERIFY2(result, qUtf8Printable(message));
         }
         else
@@ -190,7 +193,7 @@ void TST_VMeasurements::ValidPMCodesMultisizeFile()
         }
         catch (VException &e)
         {
-            const QString message = QString("Error: %1 for code=%2").arg(e.ErrorMessage(), listSystems.at(i));
+            const QString message = u"Error: %1 for code=%2"_s.arg(e.ErrorMessage(), listSystems.at(i));
             QFAIL(qUtf8Printable(message));
         }
     }
@@ -205,11 +208,10 @@ void TST_VMeasurements::ValidPMCodesIndividualFile()
 {
     Unit mUnit = Unit::Cm;
 
-    QSharedPointer<VContainer> data = QSharedPointer<VContainer>(new VContainer(nullptr, &mUnit,
-                                                                                VContainer::UniqueNamespace()));
+    QSharedPointer<VContainer> data =
+        QSharedPointer<VContainer>(new VContainer(nullptr, &mUnit, VContainer::UniqueNamespace()));
 
-    QSharedPointer<VMeasurements> m =
-            QSharedPointer<VMeasurements>(new VMeasurements(mUnit, data.data()));
+    QSharedPointer<VMeasurements> m = QSharedPointer<VMeasurements>(new VMeasurements(mUnit, data.data()));
 
     const QStringList listSystems = ListPMSystems();
     for (int i = 0; i < listSystems.size(); ++i)
@@ -229,7 +231,7 @@ void TST_VMeasurements::ValidPMCodesIndividualFile()
             const bool result = m->SaveDocument(fileName, error);
 
             // cppcheck-suppress unreadVariable
-            const QString message = QString("Error: %1 for code=%2").arg(error, listSystems.at(i));
+            const QString message = u"Error: %1 for code=%2"_s.arg(error, listSystems.at(i));
             QVERIFY2(result, qUtf8Printable(message));
         }
         else
@@ -243,7 +245,7 @@ void TST_VMeasurements::ValidPMCodesIndividualFile()
         }
         catch (VException &e)
         {
-            const QString message = QString("Error: %1 for code=%2").arg(e.ErrorMessage(), listSystems.at(i));
+            const QString message = u"Error: %1 for code=%2"_s.arg(e.ErrorMessage(), listSystems.at(i));
             QFAIL(qUtf8Printable(message));
         }
     }

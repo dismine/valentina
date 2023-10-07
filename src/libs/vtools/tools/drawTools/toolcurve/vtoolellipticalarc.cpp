@@ -52,6 +52,12 @@
 #include "../vwidgets/vmaingraphicsscene.h"
 #include "vabstractspline.h"
 
+#if QT_VERSION < QT_VERSION_CHECK(6, 4, 0)
+#include "../vmisc/compatibility.h"
+#endif
+
+using namespace Qt::Literals::StringLiterals;
+
 const QString VToolEllipticalArc::ToolType = QStringLiteral("simple");
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -456,21 +462,21 @@ auto VToolEllipticalArc::MakeToolTip() const -> QString
 {
     const QSharedPointer<VEllipticalArc> elArc = VAbstractTool::data.GeometricObject<VEllipticalArc>(m_id);
 
-    const QString toolTip = QString("<table>"
-                                    "<tr> <td><b>%12:</b> %13</td> </tr>"
-                                    "<tr> <td><b>%1:</b> %2 %3</td> </tr>"
-                                    "<tr> <td><b>%4:</b> %5 %3</td> </tr>"
-                                    "<tr> <td><b>%6:</b> %7 %3</td> </tr>"
-                                    "<tr> <td><b>%8:</b> %9°</td> </tr>"
-                                    "<tr> <td><b>%10:</b> %11°</td> </tr>"
-                                    "<tr> <td><b>%14:</b> %15°</td> </tr>"
-                                    "</table>")
+    const QString toolTip = u"<table>"
+                            "<tr> <td><b>%12:</b> %13</td> </tr>"
+                            "<tr> <td><b>%1:</b> %2 %3</td> </tr>"
+                            "<tr> <td><b>%4:</b> %5 %3</td> </tr>"
+                            "<tr> <td><b>%6:</b> %7 %3</td> </tr>"
+                            "<tr> <td><b>%8:</b> %9°</td> </tr>"
+                            "<tr> <td><b>%10:</b> %11°</td> </tr>"
+                            "<tr> <td><b>%14:</b> %15°</td> </tr>"
+                            "</table>"_s
                                 .arg(tr("Length"))                                                      // 1
                                 .arg(VAbstractValApplication::VApp()->fromPixel(elArc->GetLength()))    // 2
                                 .arg(UnitsToStr(VAbstractValApplication::VApp()->patternUnits(), true), // 3
-                                     tr("Radius") + QLatin1Char('1'))                                   // 4
+                                     tr("Radius") + '1'_L1)                                             // 4
                                 .arg(VAbstractValApplication::VApp()->fromPixel(elArc->GetRadius1()))   // 5
-                                .arg(tr("Radius") + QLatin1Char('2'))                                   // 6
+                                .arg(tr("Radius") + '2'_L1)                                             // 6
                                 .arg(VAbstractValApplication::VApp()->fromPixel(elArc->GetRadius2()))   // 7
                                 .arg(tr("Start angle"))                                                 // 8
                                 .arg(elArc->GetStartAngle())                                            // 9

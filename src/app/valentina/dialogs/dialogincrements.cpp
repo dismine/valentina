@@ -56,6 +56,12 @@
 #include <QTableWidgetItem>
 #include <QtNumeric>
 
+#if QT_VERSION < QT_VERSION_CHECK(6, 4, 0)
+#include "../vmisc/compatibility.h"
+#endif
+
+using namespace Qt::Literals::StringLiterals;
+
 constexpr int DIALOG_MAX_FORMULA_HEIGHT = 64;
 
 namespace
@@ -1191,7 +1197,7 @@ void DialogIncrements::UpdateSearchControlsTooltips()
 {
     auto UpdateToolTip = [](QAbstractButton *button)
     {
-        if (button->toolTip().contains(QLatin1String("%1")))
+        if (button->toolTip().contains("%1"_L1))
         {
             button->setToolTip(button->toolTip().arg(button->shortcut().toString(QKeySequence::NativeText)));
         }

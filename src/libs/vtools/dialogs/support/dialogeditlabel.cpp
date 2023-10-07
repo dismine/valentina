@@ -52,6 +52,12 @@
 #include <QMenu>
 #include <QMessageBox>
 
+#if QT_VERSION < QT_VERSION_CHECK(6, 4, 0)
+#include "../vmisc/compatibility.h"
+#endif
+
+using namespace Qt::Literals::StringLiterals;
+
 //---------------------------------------------------------------------------------------------------------------------
 DialogEditLabel::DialogEditLabel(const VAbstractPattern *doc, const VContainer *data, QWidget *parent)
   : QDialog(parent),
@@ -304,12 +310,12 @@ void DialogEditLabel::ExportTemplate()
 {
     VValentinaSettings *settings = VAbstractValApplication::VApp()->ValentinaSettings();
 
-    QString filters(tr("Label template") + QLatin1String("(*.xml)"));
+    QString filters(tr("Label template") + "(*.xml)"_L1);
     const QString path = settings->GetPathLabelTemplate();
 
-    QString fileName = QFileDialog::getSaveFileName(this, tr("Export label template"),
-                                                    path + QLatin1String("/") + tr("template") + QLatin1String(".xml"),
-                                                    filters, nullptr, VAbstractApplication::VApp()->NativeFileDialog());
+    QString fileName =
+        QFileDialog::getSaveFileName(this, tr("Export label template"), path + '/'_L1 + tr("template") + ".xml"_L1,
+                                     filters, nullptr, VAbstractApplication::VApp()->NativeFileDialog());
 
     if (fileName.isEmpty())
     {
@@ -317,9 +323,9 @@ void DialogEditLabel::ExportTemplate()
     }
 
     QFileInfo f(fileName);
-    if (f.suffix().isEmpty() && f.suffix() != QLatin1String("xml"))
+    if (f.suffix().isEmpty() && f.suffix() != "xml"_L1)
     {
-        fileName += QLatin1String(".xml");
+        fileName += ".xml"_L1;
     }
 
     settings->SetPathLabelTemplate(QFileInfo(fileName).absolutePath());
@@ -358,7 +364,7 @@ void DialogEditLabel::ImportTemplate()
         }
     }
 
-    QString filter(tr("Label template") + QLatin1String(" (*.xml)"));
+    QString filter(tr("Label template") + " (*.xml)"_L1);
     // Use standard path to label templates
     const QString path = VAbstractValApplication::VApp()->ValentinaSettings()->GetPathLabelTemplate();
     const QString fileName = QFileDialog::getOpenFileName(this, tr("Import template"), path, filter, nullptr,
@@ -702,7 +708,7 @@ auto DialogEditLabel::ReplacePlaceholders(QString line) const -> QString
 
     auto TestDimension = [per, this, line](const QString &placeholder, const QString &errorMsg)
     {
-        if (line.contains(per + placeholder + per) && m_placeholders.value(placeholder).second == QChar('0'))
+        if (line.contains(per + placeholder + per) && m_placeholders.value(placeholder).second == '0'_L1)
         {
             VAbstractApplication::VApp()->IsPedantic()
                 ? throw VException(errorMsg)

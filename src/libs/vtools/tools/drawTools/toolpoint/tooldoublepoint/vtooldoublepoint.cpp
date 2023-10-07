@@ -52,6 +52,12 @@
 #include "../vwidgets/../ifc/ifcdef.h"
 #include "../vwidgets/vsimplepoint.h"
 
+#if QT_VERSION < QT_VERSION_CHECK(6, 4, 0)
+#include "../vmisc/compatibility.h"
+#endif
+
+using namespace Qt::Literals::StringLiterals;
+
 //---------------------------------------------------------------------------------------------------------------------
 VToolDoublePoint::VToolDoublePoint(VAbstractPattern *doc, VContainer *data, quint32 id, quint32 p1id, quint32 p2id,
                                    const QString &notes, QGraphicsItem *parent)
@@ -445,10 +451,9 @@ auto VToolDoublePoint::ComplexToolTip(quint32 itemId) const -> QString
 {
     const QSharedPointer<VPointF> point = VAbstractTool::data.GeometricObject<VPointF>(itemId);
 
-    const QString toolTip = QString("<table>"
-                                    "<tr> <td><b>%1:</b> %2</td> </tr>"
-                                    "%3"
-                                    "</table>")
-                                .arg(tr("Label"), point->name(), MakeToolTip());
+    const QString toolTip = u"<table>"
+                            "<tr> <td><b>%1:</b> %2</td> </tr>"
+                            "%3"
+                            "</table>"_s.arg(tr("Label"), point->name(), MakeToolTip());
     return toolTip;
 }

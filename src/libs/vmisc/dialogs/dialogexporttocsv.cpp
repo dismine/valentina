@@ -47,6 +47,12 @@
 #include "../vmisc/backport/qoverload.h"
 #endif // QT_VERSION < QT_VERSION_CHECK(5, 7, 0)
 
+#if QT_VERSION < QT_VERSION_CHECK(6, 4, 0)
+#include "../compatibility.h"
+#endif
+
+using namespace Qt::Literals::StringLiterals;
+
 //---------------------------------------------------------------------------------------------------------------------
 DialogExportToCSV::DialogExportToCSV(QWidget *parent)
   : QDialog(parent),
@@ -149,20 +155,20 @@ auto DialogExportToCSV::GetSeparator() const -> QChar
 {
     if (ui->radioButtonTab->isChecked())
     {
-        return QChar('\t');
+        return '\t'_L1;
     }
+
     if (ui->radioButtonSemicolon->isChecked())
     {
-        return QChar(';');
+        return ';'_L1;
     }
+
     else if (ui->radioButtonSpace->isChecked())
     {
-        return QChar(' ');
+        return ' '_L1;
     }
-    else
-    {
-        return VCommonSettings::GetDefCSVSeparator();
-    }
+
+    return VCommonSettings::GetDefCSVSeparator();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -295,7 +301,7 @@ auto DialogExportToCSV::MakeHelpCodecsList() -> QString
         if (VTextCodec *codec = VTextCodec::codecForMib(list.at(i)))
         {
             out += QStringLiteral("\t* ") + codec->name();
-            out += i < list.size() - 1 ? QLatin1String(",\n") : QLatin1String(".\n");
+            out += i < list.size() - 1 ? ",\n"_L1 : ".\n"_L1;
         }
         else
         {
@@ -308,10 +314,10 @@ auto DialogExportToCSV::MakeHelpCodecsList() -> QString
 //---------------------------------------------------------------------------------------------------------------------
 auto DialogExportToCSV::MakeHelpSeparatorList() -> QString
 {
-    QString out = QStringLiteral("\n");
-    out += QLatin1String("\t* 'Tab',\n");
-    out += QLatin1String("\t* ';',\n");
-    out += QLatin1String("\t* 'Space',\n");
-    out += QLatin1String("\t* ','.\n");
+    QString out = "\n"_L1;
+    out += "\t* 'Tab',\n"_L1;
+    out += "\t* ';',\n"_L1;
+    out += "\t* 'Space',\n"_L1;
+    out += "\t* ','.\n"_L1;
     return out;
 }

@@ -50,6 +50,12 @@
 #include "backport/text.h"
 #endif
 
+#if QT_VERSION < QT_VERSION_CHECK(6, 4, 0)
+#include "compatibility.h"
+#endif
+
+using namespace Qt::Literals::StringLiterals;
+
 class QxtCsvModelPrivate : public QxtPrivate<QxtCsvModel>
 {
 public:

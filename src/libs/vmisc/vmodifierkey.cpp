@@ -29,11 +29,17 @@
 
 #include <QKeySequence>
 
+#if QT_VERSION < QT_VERSION_CHECK(6, 4, 0)
+#include "compatibility.h"
+#endif
+
+using namespace Qt::Literals::StringLiterals;
+
 //---------------------------------------------------------------------------------------------------------------------
 VModifierKey::VModifierKey(int key)
- : m_nativeText(QKeySequence(static_cast<int>(key)).toString(QKeySequence::NativeText))
+  : m_nativeText(QKeySequence(static_cast<int>(key)).toString(QKeySequence::NativeText))
 {
-    if (m_nativeText.endsWith(QLatin1Char('+')))
+    if (m_nativeText.endsWith('+'_L1))
     {
         m_nativeText.chop(1);
     }
@@ -41,14 +47,14 @@ VModifierKey::VModifierKey(int key)
 
 //---------------------------------------------------------------------------------------------------------------------
 VModifierKey::VModifierKey(Qt::KeyboardModifiers keys)
- : VModifierKey(static_cast<int>(keys))
+  : VModifierKey(static_cast<int>(keys))
 {
     // nothing else
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 VModifierKey::VModifierKey(Qt::Key key)
- : VModifierKey(static_cast<int>(key))
+  : VModifierKey(static_cast<int>(key))
 {
     // nothing else
 }

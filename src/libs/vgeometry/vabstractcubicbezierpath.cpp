@@ -32,23 +32,29 @@
 #include <QPainterPath>
 #include <QtDebug>
 
-#include "../vmisc/def.h"
-#include "../ifc/ifcdef.h"
 #include "../ifc/exception/vexception.h"
+#include "../ifc/ifcdef.h"
+#include "../vmisc/def.h"
+#include "vabstractapplication.h"
 #include "vpointf.h"
 #include "vspline.h"
-#include "vabstractapplication.h"
+
+#if QT_VERSION < QT_VERSION_CHECK(6, 4, 0)
+#include "../vmisc/compatibility.h"
+#endif
+
+using namespace Qt::Literals::StringLiterals;
 
 //---------------------------------------------------------------------------------------------------------------------
 VAbstractCubicBezierPath::VAbstractCubicBezierPath(const GOType &type, const quint32 &idObject, const Draw &mode)
-    : VAbstractBezier(type, idObject, mode)
+  : VAbstractBezier(type, idObject, mode)
 {
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 auto VAbstractCubicBezierPath::operator=(const VAbstractCubicBezierPath &curve) -> VAbstractCubicBezierPath &
 {
-    if ( &curve == this )
+    if (&curve == this)
     {
         return *this;
     }
@@ -162,15 +168,15 @@ auto VAbstractCubicBezierPath::Segment(const QPointF &p) const -> int
  * @return cutting point.
  */
 auto VAbstractCubicBezierPath::CutSplinePath(qreal length, qint32 &p1, qint32 &p2, QPointF &spl1p2, QPointF &spl1p3,
-                                             QPointF &spl2p2, QPointF &spl2p3,
-                                             const QString &pointName) const -> QPointF
+                                             QPointF &spl2p2, QPointF &spl2p3, const QString &pointName) const
+    -> QPointF
 {
     if (CountSubSpl() < 1)
     {
         throw VException(tr("Can't cut this spline"));
     }
 
-    //Always need return two spline paths, so we must correct wrong length.
+    // Always need return two spline paths, so we must correct wrong length.
     qreal fullLength = GetLength();
 
     if (fullLength <= minLength)
@@ -179,8 +185,9 @@ auto VAbstractCubicBezierPath::CutSplinePath(qreal length, qint32 &p1, qint32 &p
         spl1p2 = spl1p3 = spl2p2 = spl2p3 = QPointF();
 
         const QString errorMsg = tr("Unable to cut curve '%1'. The curve is too short.").arg(name());
-        VAbstractApplication::VApp()->IsPedantic() ? throw VException(errorMsg) :
-                                          qWarning() << VAbstractApplication::warningMessageSignature + errorMsg;
+        VAbstractApplication::VApp()->IsPedantic()
+            ? throw VException(errorMsg)
+            : qWarning() << VAbstractApplication::warningMessageSignature + errorMsg;
 
         return {};
     }
@@ -195,15 +202,16 @@ auto VAbstractCubicBezierPath::CutSplinePath(qreal length, qint32 &p1, qint32 &p
         if (not pointName.isEmpty())
         {
             errorMsg = tr("Curve '%1'. Length of a cut segment (%2) is too small. Optimize it to minimal value.")
-                    .arg(name(), pointName);
+                           .arg(name(), pointName);
         }
         else
         {
-            errorMsg = tr("Curve '%1'. Length of a cut segment is too small. Optimize it to minimal value.")
-                    .arg(name());
+            errorMsg =
+                tr("Curve '%1'. Length of a cut segment is too small. Optimize it to minimal value.").arg(name());
         }
-        VAbstractApplication::VApp()->IsPedantic() ? throw VException(errorMsg) :
-                                          qWarning() << VAbstractApplication::warningMessageSignature + errorMsg;
+        VAbstractApplication::VApp()->IsPedantic()
+            ? throw VException(errorMsg)
+            : qWarning() << VAbstractApplication::warningMessageSignature + errorMsg;
     }
     else if (length > maxLength)
     {
@@ -213,15 +221,15 @@ auto VAbstractCubicBezierPath::CutSplinePath(qreal length, qint32 &p1, qint32 &p
         if (not pointName.isEmpty())
         {
             errorMsg = tr("Curve '%1'. Length of a cut segment (%2) is too big. Optimize it to maximal value.")
-                    .arg(name(), pointName);
+                           .arg(name(), pointName);
         }
         else
         {
-            errorMsg = tr("Curve '%1'. Length of a cut segment is too big. Optimize it to maximal value.")
-                    .arg(name());
+            errorMsg = tr("Curve '%1'. Length of a cut segment is too big. Optimize it to maximal value.").arg(name());
         }
-        VAbstractApplication::VApp()->IsPedantic() ? throw VException(errorMsg) :
-                                          qWarning() << VAbstractApplication::warningMessageSignature + errorMsg;
+        VAbstractApplication::VApp()->IsPedantic()
+            ? throw VException(errorMsg)
+            : qWarning() << VAbstractApplication::warningMessageSignature + errorMsg;
     }
 
     fullLength = 0;
@@ -232,10 +240,10 @@ auto VAbstractCubicBezierPath::CutSplinePath(qreal length, qint32 &p1, qint32 &p
         fullLength += splLength;
         if (fullLength > length)
         {
-            p1 = i-1;
+            p1 = i - 1;
             p2 = i;
-            const QPointF point = spl.CutSpline(length - (fullLength - splLength), spl1p2, spl1p3, spl2p2, spl2p3,
-                                                pointName);
+            const QPointF point =
+                spl.CutSpline(length - (fullLength - splLength), spl1p2, spl1p3, spl2p2, spl2p3, pointName);
 
             const QVector<VSplinePoint> points = GetSplinePath();
 
@@ -248,7 +256,7 @@ auto VAbstractCubicBezierPath::CutSplinePath(qreal length, qint32 &p1, qint32 &p
                     spl1p2.rx() += ToPixel(0.1, Unit::Mm);
                     QLineF line(splP1.P().toQPointF(), spl1p2);
                     line.setLength(ToPixel(0.1, Unit::Mm));
-                    line.setAngle(splP1.Angle1()+180);
+                    line.setAngle(splP1.Angle1() + 180);
                     spl1p2 = line.p2();
                 }
             }
@@ -261,7 +269,7 @@ auto VAbstractCubicBezierPath::CutSplinePath(qreal length, qint32 &p1, qint32 &p
                 {
                     spl2p3.rx() += ToPixel(0.1, Unit::Mm);
                     QLineF line(splP2.P().toQPointF(), spl2p3);
-                    line.setAngle(splP2.Angle2()+180);
+                    line.setAngle(splP2.Angle2() + 180);
                     spl2p3 = line.p2();
                 }
             }
@@ -285,15 +293,15 @@ auto VAbstractCubicBezierPath::NameForHistory(const QString &toolName) const -> 
     QString name = toolName;
     if (CountPoints() > 0)
     {
-        name += QString(" %1").arg(FirstPoint().name());
+        name += u" %1"_s.arg(FirstPoint().name());
         if (CountSubSpl() >= 1)
         {
-            name += QString("_%1").arg(LastPoint().name());
+            name += u"_%1"_s.arg(LastPoint().name());
         }
 
         if (GetDuplicate() > 0)
         {
-            name += QString("_%1").arg(GetDuplicate());
+            name += u"_%1"_s.arg(GetDuplicate());
         }
     }
 
@@ -301,10 +309,10 @@ auto VAbstractCubicBezierPath::NameForHistory(const QString &toolName) const -> 
 
     if (not GetAliasSuffix().isEmpty())
     {
-        alias = QString("%1 %2").arg(toolName, GetAliasSuffix());
+        alias = u"%1 %2"_s.arg(toolName, GetAliasSuffix());
     }
 
-    return not alias.isEmpty() ? QString("%1 (%2)").arg(alias, name) : name;
+    return not alias.isEmpty() ? u"%1 (%2)"_s.arg(alias, name) : name;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -314,14 +322,14 @@ void VAbstractCubicBezierPath::CreateName()
     if (CountPoints() > 0)
     {
         name = splPath;
-        name.append(QString("_%1").arg(FirstPoint().name()));
+        name.append(u"_%1"_s.arg(FirstPoint().name()));
         if (CountSubSpl() >= 1)
         {
-            name.append(QString("_%1").arg(LastPoint().name()));
+            name.append(u"_%1"_s.arg(LastPoint().name()));
 
             if (GetDuplicate() > 0)
             {
-                name += QString("_%1").arg(GetDuplicate());
+                name += u"_%1"_s.arg(GetDuplicate());
             }
         }
     }

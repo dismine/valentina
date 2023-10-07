@@ -32,6 +32,12 @@
 
 #include <QtTest>
 
+#if QT_VERSION < QT_VERSION_CHECK(6, 4, 0)
+#include "../vmisc/compatibility.h"
+#endif
+
+using namespace Qt::Literals::StringLiterals;
+
 namespace
 {
 void PrepareTestCase(const QPointF &center, qreal startAngle, qreal endAngle)
@@ -43,16 +49,13 @@ void PrepareTestCase(const QPointF &center, qreal startAngle, qreal endAngle)
         VArc arc(VPointF(center), radius, startAngle, endAngle);
         const QVector<QPointF> points = arc.GetPoints();
 
-        const QString testStartAngle = QString("Test start angel. Arc radius %1, start angle %2, end angle %3")
-                                           .arg(radius)
+        const QString testStartAngle = u"Test start angel. Arc radius %1, start angle %2, end angle %3"_s.arg(radius)
                                            .arg(startAngle)
                                            .arg(endAngle);
         QTest::newRow(qUtf8Printable(testStartAngle)) << center << startAngle << points << points.constFirst() << true;
 
-        const QString testEndAngle = QString("Test end angel. Arc radius %1, start angle %2, end angle %3")
-                                         .arg(radius)
-                                         .arg(startAngle)
-                                         .arg(endAngle);
+        const QString testEndAngle =
+            u"Test end angel. Arc radius %1, start angle %2, end angle %3"_s.arg(radius).arg(startAngle).arg(endAngle);
         QTest::newRow(qUtf8Printable(testEndAngle)) << center << endAngle << points << points.constLast() << true;
 
         radius += UnitConvertor(5, Unit::Cm, Unit::Px);
@@ -213,9 +216,8 @@ void TST_VArc::TestGetPoints()
             QLineF rLine(static_cast<QPointF>(center), point);
             const qreal value = qAbs(rLine.length() - radius);
             // cppcheck-suppress unreadVariable
-            const QString errorMsg = QString("Broken the first rule. All points should be on the same distance from "
-                                             "the center. Error ='%1'.")
-                                         .arg(value);
+            const QString errorMsg = u"Broken the first rule. All points should be on the same distance from "
+                                     "the center. Error ='%1'."_s.arg(value);
             QVERIFY2(value <= epsRadius, qUtf8Printable(errorMsg));
         }
     }
@@ -238,7 +240,7 @@ void TST_VArc::TestGetPoints()
         const qreal value = qAbs(gSquare - cSquare);
         // cppcheck-suppress unreadVariable
         const QString errorMsg =
-            QString("Broken the second rule. Interpolation has too big computing error. Error ='%1'.").arg(value);
+            u"Broken the second rule. Interpolation has too big computing error. Error ='%1'."_s.arg(value);
         const qreal epsSquare = gSquare * 0.24 / 100; // computing error 0.24 % from origin square
         QVERIFY2(value <= epsSquare, qUtf8Printable(errorMsg));
     }
@@ -276,7 +278,7 @@ void TST_VArc::TestRotation()
     QCOMPARE(arcOrigin.AngleArc(), rotatedArc.AngleArc());
     QCOMPARE(arcOrigin.GetRadius(), rotatedArc.GetRadius());
     // cppcheck-suppress unreadVariable
-    const QString errorMsg = QString("The name doesn't contain the prefix '%1'.").arg(prefix);
+    const QString errorMsg = u"The name doesn't contain the prefix '%1'."_s.arg(prefix);
     QVERIFY2(rotatedArc.name().endsWith(prefix), qUtf8Printable(errorMsg));
 }
 
@@ -342,7 +344,7 @@ void TST_VArc::TestFlip()
     const VArc res = originArc.Flip(axis, prefix);
 
     // cppcheck-suppress unreadVariable
-    const QString errorMsg = QString("The name doesn't contain the prefix '%1'.").arg(prefix);
+    const QString errorMsg = u"The name doesn't contain the prefix '%1'."_s.arg(prefix);
     QVERIFY2(res.name().endsWith(prefix), qUtf8Printable(errorMsg));
 
     QVERIFY2(res.IsFlipped(), qUtf8Printable("The arc is not flipped"));

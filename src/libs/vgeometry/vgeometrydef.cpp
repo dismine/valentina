@@ -29,12 +29,18 @@
 #include "vgeometrydef.h"
 
 #if QT_VERSION < QT_VERSION_CHECK(5, 14, 0)
-#   include "../vmisc/vdatastreamenum.h"
+#include "../vmisc/vdatastreamenum.h"
 #endif
 
 #include "../ifc/exception/vexception.h"
 
 #include <QCoreApplication>
+
+#if QT_VERSION < QT_VERSION_CHECK(6, 4, 0)
+#include "../vmisc/compatibility.h"
+#endif
+
+using namespace Qt::Literals::StringLiterals;
 
 const quint32 VLayoutPassmark::streamHeader = 0x943E2759; // CRC-32Q string "VLayoutPassmark"
 const quint16 VLayoutPassmark::classVersion = 2;
@@ -59,8 +65,8 @@ auto operator>>(QDataStream &dataStream, VLayoutPassmark &data) -> QDataStream &
     {
         QString message = QCoreApplication::tr("VLayoutPassmark prefix mismatch error: actualStreamHeader = 0x%1 and "
                                                "streamHeader = 0x%2")
-                .arg(actualStreamHeader, 8, 0x10, QChar('0'))
-                .arg(VLayoutPassmark::streamHeader, 8, 0x10, QChar('0'));
+                              .arg(actualStreamHeader, 8, 0x10, '0'_L1)
+                              .arg(VLayoutPassmark::streamHeader, 8, 0x10, '0'_L1);
         throw VException(message);
     }
 
@@ -71,7 +77,8 @@ auto operator>>(QDataStream &dataStream, VLayoutPassmark &data) -> QDataStream &
     {
         QString message = QCoreApplication::tr("VLayoutPassmark compatibility error: actualClassVersion = %1 and "
                                                "classVersion = %2")
-                .arg(actualClassVersion).arg(VLayoutPassmark::classVersion);
+                              .arg(actualClassVersion)
+                              .arg(VLayoutPassmark::classVersion);
         throw VException(message);
     }
 

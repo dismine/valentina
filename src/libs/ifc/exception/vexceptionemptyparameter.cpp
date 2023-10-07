@@ -33,6 +33,12 @@
 
 #include "vexception.h"
 
+#if QT_VERSION < QT_VERSION_CHECK(6, 4, 0)
+#include "../vmisc/compatibility.h"
+#endif
+
+using namespace Qt::Literals::StringLiterals;
+
 //---------------------------------------------------------------------------------------------------------------------
 /**
  * @brief VExceptionEmptyParameter exception empty parameter
@@ -41,8 +47,12 @@
  * @param domElement dom element
  */
 VExceptionEmptyParameter::VExceptionEmptyParameter(const QString &what, const QString &name,
-                                                   const QDomElement &domElement) V_NOEXCEPT_EXPR (true)
-    : VException(what), name(name), tagText(QString()), tagName(QString()), lineNumber(-1)
+                                                   const QDomElement &domElement) V_NOEXCEPT_EXPR(true)
+  : VException(what),
+    name(name),
+    tagText(QString()),
+    tagName(QString()),
+    lineNumber(-1)
 {
     Q_ASSERT_X(not domElement.isNull(), Q_FUNC_INFO, "domElement is null");
     Q_ASSERT_X(not name.isEmpty(), Q_FUNC_INFO, "Parameter name is empty");
@@ -57,15 +67,20 @@ VExceptionEmptyParameter::VExceptionEmptyParameter(const QString &what, const QS
  * @brief VExceptionEmptyParameter copy constructor
  * @param e exception
  */
-VExceptionEmptyParameter::VExceptionEmptyParameter(const VExceptionEmptyParameter &e) V_NOEXCEPT_EXPR (true)
-    :VException(e), name(e.Name()), tagText(e.TagText()), tagName(e.TagName()), lineNumber(e.LineNumber())
-{}
+VExceptionEmptyParameter::VExceptionEmptyParameter(const VExceptionEmptyParameter &e) V_NOEXCEPT_EXPR(true)
+  : VException(e),
+    name(e.Name()),
+    tagText(e.TagText()),
+    tagName(e.TagName()),
+    lineNumber(e.LineNumber())
+{
+}
 
 //---------------------------------------------------------------------------------------------------------------------
 auto VExceptionEmptyParameter::operator=(const VExceptionEmptyParameter &e) V_NOEXCEPT_EXPR(true)
     -> VExceptionEmptyParameter &
 {
-    if ( &e == this )
+    if (&e == this)
     {
         return *this;
     }
@@ -84,7 +99,7 @@ auto VExceptionEmptyParameter::operator=(const VExceptionEmptyParameter &e) V_NO
  */
 auto VExceptionEmptyParameter::ErrorMessage() const -> QString
 {
-    return QString("ExceptionEmptyParameter: %1 %2").arg(error, name);
+    return u"ExceptionEmptyParameter: %1 %2"_s.arg(error, name);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -94,5 +109,5 @@ auto VExceptionEmptyParameter::ErrorMessage() const -> QString
  */
 auto VExceptionEmptyParameter::DetailedInformation() const -> QString
 {
-    return MoreInfo(QString("tag: %1 in line %2\nFull tag:\n%3").arg(tagName).arg(lineNumber).arg(tagText));
+    return MoreInfo(u"tag: %1 in line %2\nFull tag:\n%3"_s.arg(tagName).arg(lineNumber).arg(tagText));
 }

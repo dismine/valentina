@@ -125,8 +125,8 @@ inline auto operator>>(QDataStream &dataStream, VAbstractPieceData &piece) -> QD
     {
         QString message = QCoreApplication::tr("VAbstractPieceData prefix mismatch error: actualStreamHeader = 0x%1 "
                                                "and streamHeader = 0x%2")
-                              .arg(actualStreamHeader, 8, 0x10, QChar('0'))
-                              .arg(VAbstractPieceData::streamHeader, 8, 0x10, QChar('0'));
+                              .arg(actualStreamHeader, 8, 0x10, QLatin1Char('0'))
+                              .arg(VAbstractPieceData::streamHeader, 8, 0x10, QLatin1Char('0'));
         throw VException(message);
     }
 

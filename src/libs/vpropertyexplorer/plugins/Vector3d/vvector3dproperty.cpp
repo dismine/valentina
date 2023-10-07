@@ -27,12 +27,18 @@
 #include "../../vproperty_p.h"
 #include "../vnumberproperty.h"
 
-VPE::QVector3DProperty::QVector3DProperty(const QString& name)
-    : VProperty(name,
+#if QT_VERSION < QT_VERSION_CHECK(6, 4, 0)
+#include "../vmisc/compatibility.h"
+#endif
+
+using namespace Qt::Literals::StringLiterals;
+
+VPE::QVector3DProperty::QVector3DProperty(const QString &name)
+  : VProperty(name,
 #if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
-                QMetaType::QString) // todo: QVariant::Vector3D??
+              QMetaType::QString) // todo: QVariant::Vector3D??
 #else
-                QVariant::String) // todo: QVariant::Vector3D??
+              QVariant::String) // todo: QVariant::Vector3D??
 #endif
 {
     QVariant tmpFloat(0);
@@ -41,12 +47,17 @@ VPE::QVector3DProperty::QVector3DProperty(const QString& name)
 #else
     tmpFloat.convert(QVariant::Double);
 #endif
-    auto* tmpX = new VDoubleProperty("X"); addChild(tmpX); tmpX->setUpdateBehaviour(true, false);
-    auto* tmpY = new VDoubleProperty("Y"); addChild(tmpY); tmpY->setUpdateBehaviour(true, false);
-    auto* tmpZ = new VDoubleProperty("Z"); addChild(tmpZ); tmpZ->setUpdateBehaviour(true, false);
+    auto *tmpX = new VDoubleProperty("X");
+    addChild(tmpX);
+    tmpX->setUpdateBehaviour(true, false);
+    auto *tmpY = new VDoubleProperty("Y");
+    addChild(tmpY);
+    tmpY->setUpdateBehaviour(true, false);
+    auto *tmpZ = new VDoubleProperty("Z");
+    addChild(tmpZ);
+    tmpZ->setUpdateBehaviour(true, false);
     VPE::QVector3DProperty::setVector(Vector3D());
 }
-
 
 //! Get the data how it should be displayed
 auto VPE::QVector3DProperty::data(int column, int role) const -> QVariant
@@ -54,9 +65,8 @@ auto VPE::QVector3DProperty::data(int column, int role) const -> QVariant
     if (column == DPC_Data && Qt::DisplayRole == role)
     {
         Vector3D tmpVect = getVector();
-        return QString("(%1, %2, %3)").arg(QString::number(tmpVect.X),
-                                         QString::number(tmpVect.Y),
-                                         QString::number(tmpVect.Z));
+        return u"(%1, %2, %3)"_s.arg(QString::number(tmpVect.X), QString::number(tmpVect.Y),
+                                     QString::number(tmpVect.Z));
     }
     return VProperty::data(column, role);
 }
@@ -132,7 +142,7 @@ auto VPE::QVector3DProperty::clone(bool include_children, VProperty *container) 
 
         if (!include_children)
         {
-            const QList<VProperty*> &tmpChildren = container->getChildren();
+            const QList<VProperty *> &tmpChildren = container->getChildren();
             for (auto *tmpChild : tmpChildren)
             {
                 container->removeChild(tmpChild);
@@ -141,7 +151,7 @@ auto VPE::QVector3DProperty::clone(bool include_children, VProperty *container) 
         }
     }
 
-    return VProperty::clone(false, container);  // Child
+    return VProperty::clone(false, container); // Child
 }
 
 void VPE::QVector3DProperty::setValue(const QVariant &value)
@@ -151,11 +161,10 @@ void VPE::QVector3DProperty::setValue(const QVariant &value)
     {
         setVector(tmpStrings[0].toDouble(), tmpStrings[1].toDouble(), tmpStrings[2].toDouble());
     }
-
 }
 
 auto VPE::QVector3DProperty::getValue() const -> QVariant
 {
     Vector3D tmpVect = getVector();
-    return QString("%1,%2,%3").arg(QString::number(tmpVect.X), QString::number(tmpVect.Y), QString::number(tmpVect.Z));
+    return u"%1,%2,%3"_s.arg(QString::number(tmpVect.X), QString::number(tmpVect.Y), QString::number(tmpVect.Z));
 }

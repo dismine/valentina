@@ -56,6 +56,12 @@
 #include "../vpatterndb/vpiece.h"
 #include "../vpatterndb/vpiecenode.h"
 
+#if QT_VERSION < QT_VERSION_CHECK(6, 4, 0)
+#include "../vmisc/compatibility.h"
+#endif
+
+using namespace Qt::Literals::StringLiterals;
+
 namespace
 {
 auto FillPath(const QVector<QPointF> &path, qreal accuracy) -> QVector<QPointF>
@@ -234,7 +240,7 @@ void AbstractTest::PassmarkShapeFromJson(const QString &json, QVector<QLineF> &s
         QString type;
         AbstractTest::ReadStringValue(lineObject, typeKey, type);
 
-        if (type != QLatin1String("QLineF"))
+        if (type != "QLineF"_L1)
         {
             const QString error = QStringLiteral("Invalid json file '%1'. Unexpected class '%2'.")
                                       .arg(json, lineObject[typeKey].toString());
@@ -337,7 +343,7 @@ auto AbstractTest::PuzzlePath() const -> QString
 #else
     const QString path = QStringLiteral("/../../../app/puzzle/bin/puzzle");
 #ifdef Q_OS_WIN
-    return QCoreApplication::applicationDirPath() + path + QLatin1String(".exe");
+    return QCoreApplication::applicationDirPath() + path + ".exe"_L1;
 #else
     return QCoreApplication::applicationDirPath() + path;
 #endif
@@ -352,7 +358,7 @@ auto AbstractTest::ValentinaPath() const -> QString
 #else
     const QString path = QStringLiteral("/../../../app/valentina/bin/valentina");
 #ifdef Q_OS_WIN
-    return QCoreApplication::applicationDirPath() + path + QLatin1String(".exe");
+    return QCoreApplication::applicationDirPath() + path + ".exe"_L1;
 #else
     return QCoreApplication::applicationDirPath() + path;
 #endif
@@ -367,7 +373,7 @@ auto AbstractTest::TapePath() const -> QString
 #else
     const QString path = QStringLiteral("/../../../app/tape/bin/tape");
 #ifdef Q_OS_WIN
-    return QCoreApplication::applicationDirPath() + path + QLatin1String(".exe");
+    return QCoreApplication::applicationDirPath() + path + ".exe"_L1;
 #else
     return QCoreApplication::applicationDirPath() + path;
 #endif

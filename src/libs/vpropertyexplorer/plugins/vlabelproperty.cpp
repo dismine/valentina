@@ -29,20 +29,26 @@
 #include "vlabelproperty.h"
 
 #include <QKeyEvent>
-#include <QLatin1String>
 #include <QLabel>
+#include <QLatin1String>
 #include <QSizePolicy>
 
 #include "../vproperty_p.h"
 
-VPE::VLabelProperty::VLabelProperty(const QString &name, const QMap<QString, QVariant> &settings)
-    : VProperty(name,
-#if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
-                QMetaType::QString),
-#else
-                QVariant::String),
+#if QT_VERSION < QT_VERSION_CHECK(6, 4, 0)
+#include "../vmisc/compatibility.h"
 #endif
-      typeForParent(0)
+
+using namespace Qt::Literals::StringLiterals;
+
+VPE::VLabelProperty::VLabelProperty(const QString &name, const QMap<QString, QVariant> &settings)
+  : VProperty(name,
+#if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
+              QMetaType::QString),
+#else
+              QVariant::String),
+#endif
+    typeForParent(0)
 {
     VProperty::setSettings(settings);
     d_ptr->VariantValue.setValue(QString());
@@ -54,8 +60,8 @@ VPE::VLabelProperty::VLabelProperty(const QString &name, const QMap<QString, QVa
 }
 
 VPE::VLabelProperty::VLabelProperty(const QString &name)
-    : VProperty(name),
-      typeForParent(0)
+  : VProperty(name),
+    typeForParent(0)
 {
     d_ptr->VariantValue.setValue(QString());
 #if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
@@ -71,7 +77,7 @@ auto VPE::VLabelProperty::createEditor(QWidget *parent, const QStyleOptionViewIt
     Q_UNUSED(options)
     Q_UNUSED(delegate)
 
-    QLabel* tmpEditor = new QLabel(parent);
+    QLabel *tmpEditor = new QLabel(parent);
     tmpEditor->setLocale(parent->locale());
     tmpEditor->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Preferred);
     tmpEditor->setText(d_ptr->VariantValue.toString());
@@ -82,7 +88,7 @@ auto VPE::VLabelProperty::createEditor(QWidget *parent, const QStyleOptionViewIt
 
 auto VPE::VLabelProperty::setEditorData(QWidget *editor) -> bool
 {
-    if (QLabel* tmpWidget = qobject_cast<QLabel*>(editor))
+    if (QLabel *tmpWidget = qobject_cast<QLabel *>(editor))
     {
         tmpWidget->setText(d_ptr->VariantValue.toString());
         return true;
@@ -93,7 +99,7 @@ auto VPE::VLabelProperty::setEditorData(QWidget *editor) -> bool
 
 auto VPE::VLabelProperty::getEditorData(const QWidget *editor) const -> QVariant
 {
-    const QLabel* tmpEditor = qobject_cast<const QLabel*>(editor);
+    const QLabel *tmpEditor = qobject_cast<const QLabel *>(editor);
     if (tmpEditor)
     {
         return tmpEditor->text();
@@ -104,7 +110,7 @@ auto VPE::VLabelProperty::getEditorData(const QWidget *editor) const -> QVariant
 
 void VPE::VLabelProperty::setSetting(const QString &key, const QVariant &value)
 {
-    if (key == QLatin1String("TypeForParent"))
+    if (key == "TypeForParent"_L1)
     {
         setTypeForParent(value.toInt());
     }
@@ -112,7 +118,7 @@ void VPE::VLabelProperty::setSetting(const QString &key, const QVariant &value)
 
 auto VPE::VLabelProperty::getSetting(const QString &key) const -> QVariant
 {
-    if (key == QLatin1String("TypeForParent"))
+    if (key == "TypeForParent"_L1)
     {
         return typeForParent;
     }

@@ -33,14 +33,23 @@
 
 #include "vexception.h"
 
+#if QT_VERSION < QT_VERSION_CHECK(6, 4, 0)
+#include "../vmisc/compatibility.h"
+#endif
+
+using namespace Qt::Literals::StringLiterals;
+
 //---------------------------------------------------------------------------------------------------------------------
 /**
  * @brief VExceptionWrongId exception wrong parameter id
  * @param what string with error
  * @param domElement som element
  */
-VExceptionWrongId::VExceptionWrongId(const QString &what, const QDomElement &domElement) V_NOEXCEPT_EXPR (true)
-    :VException(what), tagText(QString()), tagName(QString()), lineNumber(-1)
+VExceptionWrongId::VExceptionWrongId(const QString &what, const QDomElement &domElement) V_NOEXCEPT_EXPR(true)
+  : VException(what),
+    tagText(QString()),
+    tagName(QString()),
+    lineNumber(-1)
 {
     Q_ASSERT_X(not domElement.isNull(), Q_FUNC_INFO, "domElement is null");
     QTextStream stream(&tagText);
@@ -54,14 +63,18 @@ VExceptionWrongId::VExceptionWrongId(const QString &what, const QDomElement &dom
  * @brief VExceptionWrongId copy constructor
  * @param e exception
  */
-VExceptionWrongId::VExceptionWrongId(const VExceptionWrongId &e) V_NOEXCEPT_EXPR (true)
-    :VException(e), tagText(e.TagText()), tagName(e.TagName()), lineNumber(e.LineNumber())
-{}
+VExceptionWrongId::VExceptionWrongId(const VExceptionWrongId &e) V_NOEXCEPT_EXPR(true)
+  : VException(e),
+    tagText(e.TagText()),
+    tagName(e.TagName()),
+    lineNumber(e.LineNumber())
+{
+}
 
 //---------------------------------------------------------------------------------------------------------------------
 auto VExceptionWrongId::operator=(const VExceptionWrongId &e) V_NOEXCEPT_EXPR(true) -> VExceptionWrongId &
 {
-    if ( &e == this )
+    if (&e == this)
     {
         return *this;
     }
@@ -79,7 +92,7 @@ auto VExceptionWrongId::operator=(const VExceptionWrongId &e) V_NOEXCEPT_EXPR(tr
  */
 auto VExceptionWrongId::ErrorMessage() const -> QString
 {
-    return QString("ExceptionWrongId: %1").arg(error);
+    return u"ExceptionWrongId: %1"_s.arg(error);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -89,5 +102,5 @@ auto VExceptionWrongId::ErrorMessage() const -> QString
  */
 auto VExceptionWrongId::DetailedInformation() const -> QString
 {
-    return MoreInfo(QString("tag: %1 in line %2\nFull tag:\n%3").arg(tagName).arg(lineNumber).arg(tagText));
+    return MoreInfo(u"tag: %1 in line %2\nFull tag:\n%3"_s.arg(tagName).arg(lineNumber).arg(tagText));
 }

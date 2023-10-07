@@ -39,6 +39,12 @@
 #include <QPrinterInfo>
 #include <QPushButton>
 
+#if QT_VERSION < QT_VERSION_CHECK(6, 4, 0)
+#include "../vmisc/compatibility.h"
+#endif
+
+using namespace Qt::Literals::StringLiterals;
+
 //---------------------------------------------------------------------------------------------------------------------
 DialogLayoutSettings::DialogLayoutSettings(VLayoutGenerator *generator, QWidget *parent, bool disableSettings)
   : VAbstractLayoutDialog(parent),
@@ -821,11 +827,11 @@ auto DialogLayoutSettings::MakeHelpTemplateList() -> QString
 
             if (i < VAbstractLayoutDialog::PageFormatNames().size() - 2)
             {
-                out += QLatin1String(",\n");
+                out += ",\n"_L1;
             }
             else
             {
-                out += QLatin1String(".\n");
+                out += ".\n"_L1;
             }
         }
     }
@@ -843,11 +849,11 @@ auto DialogLayoutSettings::MakeHelpTiledPdfTemplateList() -> QString
 
         if (i < static_cast<int>(PaperSizeTemplate::Tabloid))
         {
-            out += QLatin1String(",\n");
+            out += ",\n"_L1;
         }
         else
         {
-            out += QLatin1String(".\n");
+            out += ".\n"_L1;
         }
     }
     return out;

@@ -32,6 +32,12 @@
 #include <QTranslator>
 #include <QWidget>
 
+#if QT_VERSION < QT_VERSION_CHECK(6, 4, 0)
+#include "compatibility.h"
+#endif
+
+using namespace Qt::Literals::StringLiterals;
+
 //---------------------------------------------------------------------------------------------------------------------
 VAbstractValApplication::VAbstractValApplication(int &argc, char **argv)
   : VAbstractApplication(argc, argv)
@@ -95,7 +101,7 @@ auto VAbstractValApplication::GetPlaceholderTranslator() -> QSharedPointer<QTran
         pieceLabelLocale = settings->GetLocale();
     }
 
-    if (pieceLabelLocale.startsWith(QLatin1String("ru")))
+    if (pieceLabelLocale.startsWith("ru"_L1))
     {
         return QSharedPointer<QTranslator>(new QTranslator);
     }

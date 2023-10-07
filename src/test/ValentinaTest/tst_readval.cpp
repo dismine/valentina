@@ -33,10 +33,12 @@
 #include <QtTest>
 #include <limits>
 
+using namespace Qt::Literals::StringLiterals;
+
 //---------------------------------------------------------------------------------------------------------------------
 TST_ReadVal::TST_ReadVal(QObject *parent)
-    : QObject(parent),
-      m_systemLocale(QLocale::system())
+  : QObject(parent),
+    m_systemLocale(QLocale::system())
 {
 }
 
@@ -49,8 +51,8 @@ void TST_ReadVal::TestReadVal_data()
     QTest::addColumn<QLocale>("locale");
 
     const QList<QLocale> allLocales =
-            QLocale::matchingLocales(QLocale::AnyLanguage, QLocale::AnyScript, QLocale::AnyCountry);
-    for(const auto &locale : allLocales)
+        QLocale::matchingLocales(QLocale::AnyLanguage, QLocale::AnyScript, QLocale::AnyCountry);
+    for (const auto &locale : allLocales)
     {
         if (not SupportedLocale(locale))
         {
@@ -88,19 +90,19 @@ void TST_ReadVal::TestInvalidData_data()
     // Test invalid values
     const QLocale locale = QLocale::c();
     PrepareString(QString(), locale);
-    PrepareString(QString("-1.000.5"), locale);
-    PrepareString(QString("1.000.5"), locale);
-    PrepareString(QString("-1.000,5"), locale);
-    PrepareString(QString("1.000,5"), locale);
-    PrepareString(QString("-1.0.00,5"), locale);
-    PrepareString(QString("1.0.00,5"), locale);
-    PrepareString(QString("7,5"), locale);
-    PrepareString(QString("-7,5"), locale);
-    PrepareString(QString("- 7,5"), locale);
-    PrepareString(QString("- 7.5"), locale);
-    PrepareString(QString("1,0,00.5"), locale);
-    PrepareString(QString("1,,000.5"), locale);
-    PrepareString(QString(",5"), locale);
+    PrepareString(u"-1.000.5"_s, locale);
+    PrepareString(u"1.000.5"_s, locale);
+    PrepareString(u"-1.000,5"_s, locale);
+    PrepareString(u"1.000,5"_s, locale);
+    PrepareString(u"-1.0.00,5"_s, locale);
+    PrepareString(u"1.0.00,5"_s, locale);
+    PrepareString(u"7,5"_s, locale);
+    PrepareString(u"-7,5"_s, locale);
+    PrepareString(u"- 7,5"_s, locale);
+    PrepareString(u"- 7.5"_s, locale);
+    PrepareString(u"1,0,00.5"_s, locale);
+    PrepareString(u"1,,000.5"_s, locale);
+    PrepareString(u",5"_s, locale);
     PrepareString(QChar(','), locale);
     PrepareString(QChar('.'), locale);
 }

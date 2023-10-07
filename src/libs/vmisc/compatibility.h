@@ -54,6 +54,43 @@
 
 class QPointF;
 
+#if QT_VERSION < QT_VERSION_CHECK(6, 4, 0)
+namespace Qt
+{
+inline namespace Literals
+{
+inline namespace StringLiterals
+{
+
+//---------------------------------------------------------------------------------------------------------------------
+constexpr inline auto operator"" _L1(char ch) noexcept -> QLatin1Char
+{
+    return QLatin1Char(ch);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+constexpr inline auto operator"" _L1(const char *str, size_t size) noexcept -> QLatin1String
+{
+    return QLatin1String(str, static_cast<vsizetype>(size));
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+inline auto operator"" _ba(const char *str, size_t size) noexcept -> QByteArray
+{
+    return {str, static_cast<vsizetype>(size)};
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+inline auto operator"" _s(const char16_t *str, size_t size) noexcept -> QString
+{
+    return QString::fromUtf16(str, static_cast<vsizetype>(size));
+}
+
+} // namespace StringLiterals
+} // namespace Literals
+} // namespace Qt
+#endif
+
 // Contains helpful methods to hide version dependent code. It can be deprecation of method or change in API
 //---------------------------------------------------------------------------------------------------------------------
 template <typename T>
@@ -328,6 +365,8 @@ inline auto Front(const QString &str) -> QChar
 //---------------------------------------------------------------------------------------------------------------------
 inline auto FontFromString(const QString &descrip) -> QFont
 {
+    using namespace Qt::Literals::StringLiterals;
+
     QFont font;
 
     if (!descrip.isEmpty())
@@ -337,7 +376,7 @@ inline auto FontFromString(const QString &descrip) -> QFont
 // Qt 5's QFont::fromString expects a value with 11 fields, e.g.
 // Ubuntu,10,-1,5,50,0,0,0,0,0
 #if (QT_VERSION < QT_VERSION_CHECK(6, 0, 0))
-        const auto l = descrip.split(QLatin1Char(','));
+        const auto l = descrip.split(','_L1);
         // Qt5's QFont::fromString() isn't compatible with Qt6's QFont::toString().
         // If we were built with Qt5, don't try to process a font preference that
         // was created by Qt6.

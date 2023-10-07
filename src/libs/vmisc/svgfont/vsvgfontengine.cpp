@@ -40,6 +40,8 @@
 #include <QRegion>
 #include <QSet>
 
+using namespace Qt::Literals::StringLiterals;
+
 //---------------------------------------------------------------------------------------------------------------------
 VSvgFontEngine::VSvgFontEngine()
   : d(new VSvgFontEngineData())
@@ -388,7 +390,7 @@ auto VSvgFontEngine::ElidedText(const QString &text, SVGTextElideMode mode, int 
         }
         else
         {
-            ellipsis = QLatin1String("...");
+            ellipsis = "..."_L1;
         }
     }
 

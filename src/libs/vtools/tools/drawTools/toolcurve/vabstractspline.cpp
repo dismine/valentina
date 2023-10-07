@@ -53,6 +53,12 @@
 #include "../vpatterndb/vcontainer.h"
 #include "../vwidgets/global.h"
 
+#if QT_VERSION < QT_VERSION_CHECK(6, 4, 0)
+#include "../vmisc/compatibility.h"
+#endif
+
+using namespace Qt::Literals::StringLiterals;
+
 //---------------------------------------------------------------------------------------------------------------------
 VAbstractSpline::VAbstractSpline(VAbstractPattern *doc, VContainer *data, quint32 id, const QString &notes,
                                  QGraphicsItem *parent)
@@ -181,11 +187,10 @@ auto VAbstractSpline::MakeToolTip() const -> QString
     const QSharedPointer<VAbstractCurve> curve = VAbstractTool::data.GeometricObject<VAbstractCurve>(m_id);
 
     const QString toolTip =
-        QString("<table>"
-                "<tr> <td><b>%4:</b> %5</td> </tr>"
-                "<tr> <td><b>%1:</b> %2 %3</td> </tr>"
-                "</table>")
-            .arg(tr("Length"))
+        u"<table>"
+        "<tr> <td><b>%4:</b> %5</td> </tr>"
+        "<tr> <td><b>%1:</b> %2 %3</td> </tr>"
+        "</table>"_s.arg(tr("Length"))
             .arg(VAbstractValApplication::VApp()->fromPixel(curve->GetLength()))
             .arg(UnitsToStr(VAbstractValApplication::VApp()->patternUnits(), true), tr("Label"), curve->ObjectName());
     return toolTip;
@@ -468,7 +473,7 @@ void VAbstractSpline::SetAliasSuffix(QString alias)
     QSharedPointer<VAbstractCurve> curve = VAbstractTool::data.GeometricObject<VAbstractCurve>(m_id);
 
     const QString oldAliasSuffix = curve->GetAliasSuffix();
-    alias = alias.simplified().replace(QChar(QChar::Space), QChar('_'));
+    alias = alias.simplified().replace(QChar(QChar::Space), '_'_L1);
     curve->SetAliasSuffix(alias);
 
     QRegularExpression rx(NameRegExp());

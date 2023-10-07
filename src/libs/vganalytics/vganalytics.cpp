@@ -68,6 +68,12 @@ using namespace bpstd::literals::chrono_literals;
 #endif // __cplusplus >= 201402L
 #endif //(defined(Q_CC_GNU) && Q_CC_GNU < 409) && !defined(Q_CC_CLANG)
 
+#if QT_VERSION < QT_VERSION_CHECK(6, 4, 0)
+#include "../vmisc/compatibility.h"
+#endif
+
+using namespace Qt::Literals::StringLiterals;
+
 namespace
 {
 
@@ -179,7 +185,7 @@ auto VGAnalytics::RepoRevision() const -> QString
 //---------------------------------------------------------------------------------------------------------------------
 void VGAnalytics::SetGUILanguage(const QString &language)
 {
-    d->m_guiLanguage = language.toLower().replace(QChar('_'), QChar('-'));
+    d->m_guiLanguage = language.toLower().replace('_'_L1, '-'_L1);
 }
 
 //---------------------------------------------------------------------------------------------------------------------

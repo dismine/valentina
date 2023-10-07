@@ -36,6 +36,12 @@
 #include "vabstractcurve.h"
 #include "vsplinepath_p.h"
 
+#if QT_VERSION < QT_VERSION_CHECK(6, 4, 0)
+#include "../vmisc/compatibility.h"
+#endif
+
+using namespace Qt::Literals::StringLiterals;
+
 //---------------------------------------------------------------------------------------------------------------------
 /**
  * @brief VSplinePath constructor.
@@ -349,14 +355,14 @@ auto VSplinePath::at(vsizetype indx) const -> const VSplinePoint &
 auto VSplinePath::ToJson() const -> QJsonObject
 {
     QJsonObject object = VAbstractCubicBezierPath::ToJson();
-    object[QLatin1String("aScale")] = GetApproximationScale();
+    object["aScale"_L1] = GetApproximationScale();
 
     QJsonArray nodesArray;
     for (const auto &node : d->path)
     {
         nodesArray.append(node.ToJson());
     }
-    object[QLatin1String("nodes")] = nodesArray;
+    object["nodes"_L1] = nodesArray;
 
     return object;
 }

@@ -30,15 +30,21 @@
 
 #include "../vproperty_p.h"
 
+#if QT_VERSION < QT_VERSION_CHECK(6, 4, 0)
+#include "../vmisc/compatibility.h"
+#endif
+
+using namespace Qt::Literals::StringLiterals;
+
 namespace
 {
-Q_GLOBAL_STATIC_WITH_ARGS(const QString, StrMin, (QLatin1String("Min")))             // NOLINT
-Q_GLOBAL_STATIC_WITH_ARGS(const QString, StrMax, (QLatin1String("Max")))             // NOLINT
-Q_GLOBAL_STATIC_WITH_ARGS(const QString, StrInteger, (QLatin1String("integer")))     // NOLINT
-Q_GLOBAL_STATIC_WITH_ARGS(const QString, StrStep, (QLatin1String("Step")))           // NOLINT
-Q_GLOBAL_STATIC_WITH_ARGS(const QString, StrSuffix, (QLatin1String("Suffix")))       // NOLINT
-Q_GLOBAL_STATIC_WITH_ARGS(const QString, StrPrecision, (QLatin1String("Precision"))) // NOLINT
-Q_GLOBAL_STATIC_WITH_ARGS(const QString, StrDouble, (QLatin1String("double")))       // NOLINT
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, StrMin, ("Min"_L1))             // NOLINT
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, StrMax, ("Max"_L1))             // NOLINT
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, StrInteger, ("integer"_L1))     // NOLINT
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, StrStep, ("Step"_L1))           // NOLINT
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, StrSuffix, ("Suffix"_L1))       // NOLINT
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, StrPrecision, ("Precision"_L1)) // NOLINT
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, StrDouble, ("double"_L1))       // NOLINT
 } // namespace
 
 const int VPE::VIntegerProperty::StandardMin = -1000000;

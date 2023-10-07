@@ -41,6 +41,12 @@
 #include "../vmisc/def.h"
 #include "vabstractmconverter.h"
 
+#if QT_VERSION < QT_VERSION_CHECK(6, 4, 0)
+#include "../vmisc/compatibility.h"
+#endif
+
+using namespace Qt::Literals::StringLiterals;
+
 /*
  * Version rules:
  * 1. Version have three parts "major.minor.patch";
@@ -61,10 +67,10 @@ namespace
 QT_WARNING_PUSH
 QT_WARNING_DISABLE_CLANG("-Wunused-member-function")
 
-Q_GLOBAL_STATIC_WITH_ARGS(const QString, strTagRead_Only, (QLatin1String("read-only")))          // NOLINT
-Q_GLOBAL_STATIC_WITH_ARGS(const QString, strAttrCircumference, (QLatin1String("circumference"))) // NOLINT
-Q_GLOBAL_STATIC_WITH_ARGS(const QString, strAttrMeasurement, (QLatin1String("measurement")))     // NOLINT
-Q_GLOBAL_STATIC_WITH_ARGS(const QString, strTagDimension, (QLatin1String("dimension")))          // NOLINT
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, strTagRead_Only, ("read-only"_L1))          // NOLINT
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, strAttrCircumference, ("circumference"_L1)) // NOLINT
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, strAttrMeasurement, ("measurement"_L1))     // NOLINT
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, strTagDimension, ("dimension"_L1))          // NOLINT
 
 QT_WARNING_POP
 } // namespace

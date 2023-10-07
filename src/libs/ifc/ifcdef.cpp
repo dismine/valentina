@@ -35,6 +35,12 @@
 #include <QPen>
 #include <QPixmap>
 
+#if QT_VERSION < QT_VERSION_CHECK(6, 4, 0)
+#include "../vmisc/compatibility.h"
+#endif
+
+using namespace Qt::Literals::StringLiterals;
+
 const QString CustomMSign = QStringLiteral("@");
 const QString CustomIncrSign = QStringLiteral("#");
 
@@ -282,8 +288,8 @@ const QString elarc_ = QStringLiteral(ELARC_);
 const QString splPath = QStringLiteral("SplPath");
 const QString radius_V = QStringLiteral("Radius");
 const QString radiusArc_ = radius_V + arc_;
-const QString radius1ElArc_ = radius_V + QLatin1Char('1') + elarc_;
-const QString radius2ElArc_ = radius_V + QLatin1Char('2') + elarc_;
+const QString radius1ElArc_ = radius_V + '1'_L1 + elarc_;
+const QString radius2ElArc_ = radius_V + '2'_L1 + elarc_;
 const QString angle1_V = QStringLiteral("Angle1");
 const QString angle2_V = QStringLiteral("Angle2");
 const QString c1Length_V = QStringLiteral("C1Length");

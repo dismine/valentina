@@ -37,6 +37,12 @@
 #include <QPushButton>
 #include <QShowEvent>
 
+#if QT_VERSION < QT_VERSION_CHECK(6, 4, 0)
+#include "../vmisc/compatibility.h"
+#endif
+
+using namespace Qt::Literals::StringLiterals;
+
 //---------------------------------------------------------------------------------------------------------------------
 DialogPuzzlePreferences::DialogPuzzlePreferences(QWidget *parent)
   : QDialog(parent),
@@ -155,7 +161,7 @@ void DialogPuzzlePreferences::Apply()
     {
         const QString text =
             tr("Followed %n option(s) require restart to take effect: %1.", "", static_cast<int>(preferences.size()))
-                .arg(preferences.join(QStringLiteral(", ")));
+                .arg(preferences.join(", "_L1));
         QMessageBox::information(this, QCoreApplication::applicationName(), text);
     }
 

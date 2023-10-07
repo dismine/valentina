@@ -38,22 +38,28 @@
 #include <QPainterPath>
 #include <QtDebug>
 
+#if QT_VERSION < QT_VERSION_CHECK(6, 4, 0)
+#include "../compatibility.h"
+#endif
+
+using namespace Qt::Literals::StringLiterals;
+
 namespace
 {
 //---------------------------------------------------------------------------------------------------------------------
 auto ParseFontStyle(const QString &fontStyle) -> SVGFontStyle
 {
-    if (fontStyle == QLatin1String("normal"))
+    if (fontStyle == "normal"_L1)
     {
         return SVGFontStyle::Normal;
     }
 
-    if (fontStyle == QLatin1String("italic"))
+    if (fontStyle == "italic"_L1)
     {
         return SVGFontStyle::Italic;
     }
 
-    if (fontStyle == QLatin1String("oblique"))
+    if (fontStyle == "oblique"_L1)
     {
         return SVGFontStyle::Oblique;
     }
@@ -99,12 +105,12 @@ auto ParseFontWeight(const QString &fontWeight) -> SVGFontWeight
     else
     {
         QString fontWeightLower = fontWeight.toLower();
-        if (fontWeightLower == QLatin1String("normal"))
+        if (fontWeightLower == "normal"_L1)
         {
             return SVGFontWeight::Normal;
         }
 
-        if (fontWeightLower == QLatin1String("bold"))
+        if (fontWeightLower == "bold"_L1)
         {
             return SVGFontWeight::Bold;
         }
@@ -115,13 +121,13 @@ auto ParseFontWeight(const QString &fontWeight) -> SVGFontWeight
 //---------------------------------------------------------------------------------------------------------------------
 auto InitFont(const QXmlStreamAttributes &fontAttr) -> VSvgFont
 {
-    const auto hax = fontAttr.value(QLatin1String("horiz-adv-x"));
+    const auto hax = fontAttr.value("horiz-adv-x"_L1);
     qreal horizAdvX = hax.toDouble();
 
-    QString id = fontAttr.value(QLatin1String("id")).toString();
+    QString id = fontAttr.value("id"_L1).toString();
     if (id.isEmpty())
     {
-        id = fontAttr.value(QLatin1String("xml:id")).toString();
+        id = fontAttr.value("xml:id"_L1).toString();
     }
 
     VSvgFont font(horizAdvX);
@@ -141,11 +147,11 @@ auto VSvgFontReader::ReadSvgFontHeader(QFile *file) -> VSvgFont
     {
         if (readNextStartElement())
         {
-            if (name() == QLatin1String("svg"))
+            if (name() == "svg"_L1)
             {
                 while (readNextStartElement())
                 {
-                    if (name() == QLatin1String("defs"))
+                    if (name() == "defs"_L1)
                     {
                         return ReadFontHeader();
                     }
@@ -185,11 +191,11 @@ auto VSvgFontReader::ReadSvgFont(QFile *file) -> VSvgFontEngine
     {
         if (readNextStartElement())
         {
-            if (name() == QLatin1String("svg"))
+            if (name() == "svg"_L1)
             {
                 while (readNextStartElement())
                 {
-                    if (name() == QLatin1String("defs"))
+                    if (name() == "defs"_L1)
                     {
                         return ReadFontData();
                     }
@@ -221,11 +227,11 @@ auto VSvgFontReader::ReadSvgFont(QFile *file) -> VSvgFontEngine
 //---------------------------------------------------------------------------------------------------------------------
 auto VSvgFontReader::ReadFontHeader() -> VSvgFont
 {
-    AssertRootTag(QLatin1String("defs"));
+    AssertRootTag("defs"_L1);
 
     while (readNextStartElement())
     {
-        if (name() == QLatin1String("font"))
+        if (name() == "font"_L1)
         {
             return ReadFontFace();
         }
@@ -238,13 +244,13 @@ auto VSvgFontReader::ReadFontHeader() -> VSvgFont
 //---------------------------------------------------------------------------------------------------------------------
 auto VSvgFontReader::ReadFontFace() -> VSvgFont
 {
-    AssertRootTag(QLatin1String("font"));
+    AssertRootTag("font"_L1);
 
     VSvgFont font = InitFont(attributes());
 
     while (readNextStartElement())
     {
-        if (name() == QLatin1String("font-face"))
+        if (name() == "font-face"_L1)
         {
             SetFontFace(&font);
             return font;
@@ -259,11 +265,11 @@ auto VSvgFontReader::ReadFontFace() -> VSvgFont
 //---------------------------------------------------------------------------------------------------------------------
 auto VSvgFontReader::ReadFontData() -> VSvgFontEngine
 {
-    AssertRootTag(QLatin1String("defs"));
+    AssertRootTag("defs"_L1);
 
     while (readNextStartElement())
     {
-        if (name() == QLatin1String("font"))
+        if (name() == "font"_L1)
         {
             return ReadFont();
         }
@@ -279,7 +285,7 @@ auto VSvgFontReader::ReadFontData() -> VSvgFontEngine
 //---------------------------------------------------------------------------------------------------------------------
 auto VSvgFontReader::ReadFont() -> VSvgFontEngine
 {
-    AssertRootTag(QLatin1String("font"));
+    AssertRootTag("font"_L1);
 
     VSvgFont font = InitFont(attributes());
 
@@ -287,7 +293,7 @@ auto VSvgFontReader::ReadFont() -> VSvgFontEngine
 
     while (readNextStartElement())
     {
-        if (name() == QLatin1String("font-face"))
+        if (name() == "font-face"_L1)
         {
             SetFontFace(&font);
             engine = VSvgFontEngine(font);
@@ -300,7 +306,7 @@ auto VSvgFontReader::ReadFont() -> VSvgFontEngine
 
     while (readNextStartElement())
     {
-        if (name() == QLatin1String("missing-glyph") || name() == QLatin1String("glyph"))
+        if (name() == "missing-glyph"_L1 || name() == "glyph"_L1)
         {
             ParseSvgGlyph(&engine, attributes());
         }
@@ -331,8 +337,8 @@ void VSvgFontReader::AssertRootTag(const QString &tag) const
 void VSvgFontReader::SetFontFace(VSvgFont *font)
 {
     QXmlStreamAttributes fontFaceAttr = attributes();
-    QString fontFamily = fontFaceAttr.value(QLatin1String("font-family")).toString();
-    const auto unitsPerEmStr = fontFaceAttr.value(QLatin1String("units-per-em"));
+    QString fontFamily = fontFaceAttr.value("font-family"_L1).toString();
+    const auto unitsPerEmStr = fontFaceAttr.value("units-per-em"_L1);
 
     qreal unitsPerEm = unitsPerEmStr.toDouble();
     if (qFuzzyIsNull(unitsPerEm))
@@ -340,33 +346,33 @@ void VSvgFontReader::SetFontFace(VSvgFont *font)
         unitsPerEm = 1000;
     }
 
-    const auto ascentStr = fontFaceAttr.value(QLatin1String("ascent"));
+    const auto ascentStr = fontFaceAttr.value("ascent"_L1);
     qreal ascent = ascentStr.toDouble();
     if (qFuzzyIsNull(ascent))
     {
         ascent = 800;
     }
 
-    const auto descentStr = fontFaceAttr.value(QLatin1String("descent"));
+    const auto descentStr = fontFaceAttr.value("descent"_L1);
     qreal descent = descentStr.toDouble();
     if (qFuzzyIsNull(descent))
     {
         descent = -200;
     }
 
-    QString fontStyle = fontFaceAttr.value(QLatin1String("font-style")).toString();
-    QString fontWeight = fontFaceAttr.value(QLatin1String("font-weight")).toString();
+    QString fontStyle = fontFaceAttr.value("font-style"_L1).toString();
+    QString fontWeight = fontFaceAttr.value("font-weight"_L1).toString();
     QString fontName;
 
     while (readNextStartElement())
     {
-        if (name() == QLatin1String("font-face-src"))
+        if (name() == "font-face-src"_L1)
         {
             while (readNextStartElement())
             {
-                if (name() == QLatin1String("font-face-name"))
+                if (name() == "font-face-name"_L1)
                 {
-                    fontName = attributes().value(QLatin1String("name")).toString();
+                    fontName = attributes().value("name"_L1).toString();
                 }
                 else
                 {
@@ -392,9 +398,9 @@ void VSvgFontReader::SetFontFace(VSvgFont *font)
 //---------------------------------------------------------------------------------------------------------------------
 void VSvgFontReader::ParseSvgGlyph(VSvgFontEngine *engine, const QXmlStreamAttributes &glyphAttr)
 {
-    auto uncStr = glyphAttr.value(QLatin1String("unicode"));
-    auto havStr = glyphAttr.value(QLatin1String("horiz-adv-x"));
-    auto pathStr = glyphAttr.value(QLatin1String("d"));
+    auto uncStr = glyphAttr.value("unicode"_L1);
+    auto havStr = glyphAttr.value("horiz-adv-x"_L1);
+    auto pathStr = glyphAttr.value("d"_L1);
 
     QChar unicode = (uncStr.isEmpty()) ? u'\0' : uncStr.at(0);
     qreal havx = (havStr.isEmpty()) ? -1 : havStr.toDouble();

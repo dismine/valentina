@@ -51,6 +51,8 @@
 #include <QSharedPointer>
 #include <QTemporaryFile>
 
+using namespace Qt::Literals::StringLiterals;
+
 namespace
 {
 auto PieceMissingNodes(const QVector<quint32> &d1Nodes, const QVector<quint32> &d2Nodes) -> QVector<quint32>
@@ -417,7 +419,7 @@ void VPiece::SetFormulaSAWidth(const QString &formula, qreal value)
 {
     SetSAWidth(value);
     const qreal width = GetSAWidth();
-    width >= 0 ? d->m_formulaWidth = formula : d->m_formulaWidth = QLatin1Char('0');
+    width >= 0 ? d->m_formulaWidth = formula : d->m_formulaWidth = '0'_L1;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -1254,7 +1256,7 @@ auto VPiece::MainPathToJson() const -> QJsonObject
 
         nodesArray.append(nodeObject);
     }
-    pieceObject[QLatin1String("nodes")] = nodesArray;
+    pieceObject["nodes"_L1] = nodesArray;
 
     return pieceObject;
 }
@@ -1500,8 +1502,8 @@ auto VPiece::ShortNameRegExp() -> QString
             }
         }
 
-        negativeSigns.replace('-', QLatin1String("\\-"));
-        groupSeparators.remove('\'');
+        negativeSigns.replace('-'_L1, "\\-"_L1);
+        groupSeparators.remove('\''_L1);
 
         // Same regexp in pattern.xsd shema file. Don't forget to synchronize.
         //  \p{Zs} - \p{Space_Separator}

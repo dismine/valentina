@@ -32,9 +32,15 @@
 
 #include <QtTest>
 
+#if QT_VERSION < QT_VERSION_CHECK(6, 4, 0)
+#include "../vmisc/compatibility.h"
+#endif
+
+using namespace Qt::Literals::StringLiterals;
+
 //---------------------------------------------------------------------------------------------------------------------
-TST_NameRegExp::TST_NameRegExp(QObject *parent) :
-    QObject(parent)
+TST_NameRegExp::TST_NameRegExp(QObject *parent)
+  : QObject(parent)
 {
 }
 
@@ -46,9 +52,9 @@ void TST_NameRegExp::TestNameRegExp_data()
     QTest::addColumn<bool>("result");
 
     const QList<QLocale> allLocales =
-            QLocale::matchingLocales(QLocale::AnyLanguage, QLocale::AnyScript, QLocale::AnyCountry);
+        QLocale::matchingLocales(QLocale::AnyLanguage, QLocale::AnyScript, QLocale::AnyCountry);
 
-    for(const auto &locale : allLocales)
+    for (const auto &locale : allLocales)
     {
         INIT_LOCALE_VARIABLES(locale);
         Q_UNUSED(positiveSign)
@@ -57,55 +63,55 @@ void TST_NameRegExp::TestNameRegExp_data()
 
         const QString localeName = locale.name();
 
-        QString tag = localeName+QLatin1String(". First character can't be ")+sign0;
-        QTest::newRow(qUtf8Printable(tag)) << sign0+QLatin1String("a") << false;
+        QString tag = localeName + ". First character can't be "_L1 + sign0;
+        QTest::newRow(qUtf8Printable(tag)) << sign0 + 'a'_L1 << false;
 
-        tag = localeName+QLatin1String(". First character can't be ")+sign1;
-        QTest::newRow(qUtf8Printable(tag)) << sign1+QLatin1String("a") << false;
+        tag = localeName + ". First character can't be "_L1 + sign1;
+        QTest::newRow(qUtf8Printable(tag)) << sign1 + 'a'_L1 << false;
 
-        tag = localeName+QLatin1String(". First character can't be ")+sign2;
-        QTest::newRow(qUtf8Printable(tag)) << sign2+QLatin1String("a") << false;
+        tag = localeName + ". First character can't be "_L1 + sign2;
+        QTest::newRow(qUtf8Printable(tag)) << sign2 + 'a'_L1 << false;
 
-        tag = localeName+QLatin1String(". First character can't be ")+sign3;
-        QTest::newRow(qUtf8Printable(tag)) << sign3+QLatin1String("a") << false;
+        tag = localeName + ". First character can't be "_L1 + sign3;
+        QTest::newRow(qUtf8Printable(tag)) << sign3 + 'a'_L1 << false;
 
-        tag = localeName+QLatin1String(". First character can't be ")+sign4;
-        QTest::newRow(qUtf8Printable(tag)) << sign4+QLatin1String("a") << false;
+        tag = localeName + ". First character can't be "_L1 + sign4;
+        QTest::newRow(qUtf8Printable(tag)) << sign4 + 'a'_L1 << false;
 
-        tag = localeName+QLatin1String(". First character can't be ")+sign5;
-        QTest::newRow(qUtf8Printable(tag)) << sign5+QLatin1String("a") << false;
+        tag = localeName + ". First character can't be "_L1 + sign5;
+        QTest::newRow(qUtf8Printable(tag)) << sign5 + 'a'_L1 << false;
 
-        tag = localeName+QLatin1String(". First character can't be ")+sign6;
-        QTest::newRow(qUtf8Printable(tag)) << sign6+QLatin1String("a") << false;
+        tag = localeName + ". First character can't be "_L1 + sign6;
+        QTest::newRow(qUtf8Printable(tag)) << sign6 + 'a'_L1 << false;
 
-        tag = localeName+QLatin1String(". First character can't be ")+sign7;
-        QTest::newRow(qUtf8Printable(tag)) << sign7+QLatin1String("a") << false;
+        tag = localeName + ". First character can't be "_L1 + sign7;
+        QTest::newRow(qUtf8Printable(tag)) << sign7 + 'a'_L1 << false;
 
-        tag = localeName+QLatin1String(". First character can't be ")+sign8;
-        QTest::newRow(qUtf8Printable(tag)) << sign8+QLatin1String("a") << false;
+        tag = localeName + ". First character can't be "_L1 + sign8;
+        QTest::newRow(qUtf8Printable(tag)) << sign8 + 'a'_L1 << false;
 
-        tag = localeName+QLatin1String(". First character can't be ")+sign9;
-        QTest::newRow(qUtf8Printable(tag)) << sign9+QLatin1String("a") << false;
+        tag = localeName + ". First character can't be "_L1 + sign9;
+        QTest::newRow(qUtf8Printable(tag)) << sign9 + 'a'_L1 << false;
 
-        tag = localeName+QLatin1String(". First character can't be \"")+negativeSign+QLatin1String("\"");
-        QTest::newRow(qUtf8Printable(tag)) << negativeSign+QLatin1String("a") << false;
+        tag = localeName + ". First character can't be \""_L1 + negativeSign + '\"'_L1;
+        QTest::newRow(qUtf8Printable(tag)) << negativeSign + 'a'_L1 << false;
 
-        tag = localeName+QLatin1String(". First character can't be \"")+decimalPoint+QLatin1String("\"");
-        QTest::newRow(qUtf8Printable(tag)) << decimalPoint+QLatin1String("a") << false;
+        tag = localeName + ". First character can't be \""_L1 + decimalPoint + '\"'_L1;
+        QTest::newRow(qUtf8Printable(tag)) << decimalPoint + 'a'_L1 << false;
 
-        tag = localeName+QLatin1String(". First character can't be \"")+groupSeparator+QLatin1String("\"");
-        QTest::newRow(qUtf8Printable(tag)) << groupSeparator+QLatin1String("a") << false;
+        tag = localeName + ". First character can't be \""_L1 + groupSeparator + '\"'_L1;
+        QTest::newRow(qUtf8Printable(tag)) << groupSeparator + 'a'_L1 << false;
 
-        tag = localeName+QLatin1String(". Any next character can't be \"")+negativeSign+QLatin1String("\"");
-        QTest::newRow(qUtf8Printable(tag)) << QLatin1String("a")+negativeSign << false;
+        tag = localeName + ". Any next character can't be \""_L1 + negativeSign + '\"'_L1;
+        QTest::newRow(qUtf8Printable(tag)) << 'a'_L1 + negativeSign << false;
 
-        tag = localeName+QLatin1String(". Any next character can't be \"")+decimalPoint+QLatin1String("\"");
-        QTest::newRow(qUtf8Printable(tag)) << QLatin1String("a")+decimalPoint << false;
+        tag = localeName + ". Any next character can't be \""_L1 + decimalPoint + '\"'_L1;
+        QTest::newRow(qUtf8Printable(tag)) << 'a'_L1 + decimalPoint << false;
 
         if (groupSeparator != '\'')
         {
-            tag = localeName+QLatin1String(". Any next character can't be \"")+groupSeparator+QLatin1String("\"");
-            QTest::newRow(qUtf8Printable(tag)) << QLatin1String("a")+groupSeparator << false;
+            tag = localeName + ". Any next character can't be \""_L1 + groupSeparator + '\"'_L1;
+            QTest::newRow(qUtf8Printable(tag)) << 'a'_L1 + groupSeparator << false;
         }
     }
 
@@ -175,7 +181,7 @@ void TST_NameRegExp::TestOriginalMeasurementNamesRegExp_data()
     const QStringList originalNames = AllGroupNames();
     for (const auto &str : originalNames)
     {
-        const QString name = QString("Measurement '%1'").arg(str);
+        const QString name = u"Measurement '%1'"_s.arg(str);
         QTest::newRow(qUtf8Printable(name)) << str;
     }
 }
@@ -358,7 +364,7 @@ void TST_NameRegExp::TestCorrectOrderMeasurement_data()
     QTest::newRow("J07") << bustpointToShoulderTip_M << "bustpoint_to_shoulder_tip";
     QTest::newRow("J08") << bustpointToWaistFront_M << "bustpoint_to_waist_front";
     QTest::newRow("J09") << bustpointToBustpointHalter_M << "bustpoint_to_bustpoint_halter";
-    QTest::newRow("J10") << bustpointToShoulderCenter_M  << "bustpoint_to_shoulder_center";
+    QTest::newRow("J10") << bustpointToShoulderCenter_M << "bustpoint_to_shoulder_center";
     QTest::newRow("K01") << shoulderTipToWaistFront_M << "shoulder_tip_to_waist_front";
     QTest::newRow("K02") << neckFrontToWaistSide_M << "neck_front_to_waist_side";
     QTest::newRow("K03") << neckSideToWaistSideF_M << "neck_side_to_waist_side_f";

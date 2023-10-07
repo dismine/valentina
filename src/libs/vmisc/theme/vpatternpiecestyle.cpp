@@ -29,20 +29,26 @@
 
 #include <QJsonObject>
 
+#if QT_VERSION < QT_VERSION_CHECK(6, 4, 0)
+#include "../compatibility.h"
+#endif
+
+using namespace Qt::Literals::StringLiterals;
+
 namespace
 {
 QT_WARNING_PUSH
 QT_WARNING_DISABLE_CLANG("-Wunused-member-function")
 
-Q_GLOBAL_STATIC_WITH_ARGS(const QString, PatternPieceStyleNodeVar, (QLatin1String("PatternPieceStyle")))   // NOLINT
-Q_GLOBAL_STATIC_WITH_ARGS(const QString, PieceColorVar, (QLatin1String("PieceColor")))                     // NOLINT
-Q_GLOBAL_STATIC_WITH_ARGS(const QString, PointColorVar, (QLatin1String("PointColor")))                     // NOLINT
-Q_GLOBAL_STATIC_WITH_ARGS(const QString, NodeLabelColorVar, (QLatin1String("NodeLabelColor")))             // NOLINT
-Q_GLOBAL_STATIC_WITH_ARGS(const QString, NodeLabelHoverColorVar, (QLatin1String("NodeLabelHoverColor")))   // NOLINT
-Q_GLOBAL_STATIC_WITH_ARGS(const QString, NodeLabelLineColorVar, (QLatin1String("NodeLabelLineColor")))     // NOLINT
-Q_GLOBAL_STATIC_WITH_ARGS(const QString, LabelBackgroundColorVar, (QLatin1String("LabelBackgroundColor"))) // NOLINT
-Q_GLOBAL_STATIC_WITH_ARGS(const QString, LabelTextColorVar, (QLatin1String("LabelTextColor")))             // NOLINT
-Q_GLOBAL_STATIC_WITH_ARGS(const QString, LabelModeColorVar, (QLatin1String("LabelModeColor")))             // NOLINT
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, PatternPieceStyleNodeVar, ("PatternPieceStyle"_L1))   // NOLINT
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, PieceColorVar, ("PieceColor"_L1))                     // NOLINT
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, PointColorVar, ("PointColor"_L1))                     // NOLINT
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, NodeLabelColorVar, ("NodeLabelColor"_L1))             // NOLINT
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, NodeLabelHoverColorVar, ("NodeLabelHoverColor"_L1))   // NOLINT
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, NodeLabelLineColorVar, ("NodeLabelLineColor"_L1))     // NOLINT
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, LabelBackgroundColorVar, ("LabelBackgroundColor"_L1)) // NOLINT
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, LabelTextColorVar, ("LabelTextColor"_L1))             // NOLINT
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, LabelModeColorVar, ("LabelModeColor"_L1))             // NOLINT
 
 QT_WARNING_POP
 } // namespace

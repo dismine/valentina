@@ -33,6 +33,12 @@
 
 #include <QRegularExpression>
 
+#if QT_VERSION < QT_VERSION_CHECK(6, 4, 0)
+#include "../vmisc/compatibility.h"
+#endif
+
+using namespace Qt::Literals::StringLiterals;
+
 //---------------------------------------------------------------------------------------------------------------------
 VPieceArea::VPieceArea()
   : d(new VPieceAreaData)
@@ -123,7 +129,7 @@ auto VPieceArea::PieceShortName(const VPiece &piece) -> QString
     QString shortName = piece.GetShortName();
     if (shortName.isEmpty())
     {
-        shortName = piece.GetName().replace(QChar(QChar::Space), '_').left(25);
+        shortName = piece.GetName().replace(QChar(QChar::Space), '_'_L1).left(25);
         if (shortName.isEmpty() || not QRegularExpression(VPiece::ShortNameRegExp()).match(shortName).hasMatch())
         {
             shortName = QObject::tr("Unknown", "piece area");

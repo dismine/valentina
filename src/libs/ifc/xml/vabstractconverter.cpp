@@ -30,8 +30,8 @@
 #include "vparsererrorhandler.h"
 
 #if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
-#include <xercesc/parsers/XercesDOMParser.hpp>
 #include <xercesc/framework/MemBufInputSource.hpp>
+#include <xercesc/parsers/XercesDOMParser.hpp>
 #else
 #include <QXmlSchema>
 #include <QXmlSchemaValidator>
@@ -54,13 +54,19 @@
 #include "../exception/vexception.h"
 #include "vdomdocument.h"
 
+#if QT_VERSION < QT_VERSION_CHECK(6, 4, 0)
+#include "../vmisc/compatibility.h"
+#endif
+
+using namespace Qt::Literals::StringLiterals;
+
 //---------------------------------------------------------------------------------------------------------------------
 VAbstractConverter::VAbstractConverter(const QString &fileName)
-    : m_ver(0x0),
-      m_originalFileName(fileName),
-      m_convertedFileName(fileName)
+  : m_ver(0x0),
+    m_originalFileName(fileName),
+    m_convertedFileName(fileName)
 {
-    setXMLContent(m_convertedFileName);// Throw an exception on error
+    setXMLContent(m_convertedFileName); // Throw an exception on error
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -99,21 +105,21 @@ auto VAbstractConverter::GetCurrentFormatVersion() const -> unsigned
 //---------------------------------------------------------------------------------------------------------------------
 void VAbstractConverter::ReserveFile() const
 {
-    //It's not possible in all cases make conversion without lose data.
-    //For such cases we will store old version in a reserve file.
+    // It's not possible in all cases make conversion without lose data.
+    // For such cases we will store old version in a reserve file.
     QString error;
     QFileInfo info(m_convertedFileName);
-    const QString reserveFileName = QString("%1/%2(v%3).%4.bak")
-            .arg(info.absoluteDir().absolutePath(), info.baseName(), GetFormatVersionStr(), info.completeSuffix());
+    const QString reserveFileName = u"%1/%2(v%3).%4.bak"_s.arg(info.absoluteDir().absolutePath(), info.baseName(),
+                                                               GetFormatVersionStr(), info.completeSuffix());
     if (not SafeCopy(m_convertedFileName, reserveFileName, error))
     {
-//#ifdef Q_OS_WIN32
-//        qt_ntfs_permission_lookup++; // turn checking on
-//#endif /*Q_OS_WIN32*/
+        // #ifdef Q_OS_WIN32
+        //         qt_ntfs_permission_lookup++; // turn checking on
+        // #endif /*Q_OS_WIN32*/
         const bool isFileWritable = info.isWritable();
-//#ifdef Q_OS_WIN32
-//        qt_ntfs_permission_lookup--; // turn it off again
-//#endif /*Q_OS_WIN32*/
+        // #ifdef Q_OS_WIN32
+        //         qt_ntfs_permission_lookup--; // turn it off again
+        // #endif /*Q_OS_WIN32*/
         if (not IsReadOnly() && isFileWritable)
         {
             const QString errorMsg(tr("Error creating a reserv copy: %1.").arg(error));
@@ -136,7 +142,7 @@ void VAbstractConverter::CorrectionsPositions(vsizetype position, vsizetype bias
 {
     if (bias == 0)
     {
-        return;// Nothing to correct;
+        return; // Nothing to correct;
     }
 
     BiasTokens(position, bias, tokens);
@@ -149,13 +155,13 @@ void VAbstractConverter::BiasTokens(vsizetype position, vsizetype bias, QMap<vsi
     QMap<vsizetype, QString>::const_iterator i = tokens.constBegin();
     while (i != tokens.constEnd())
     {
-        if (i.key()<= position)
+        if (i.key() <= position)
         { // Tokens before position "position" did not change his positions.
             newTokens.insert(i.key(), i.value());
         }
         else
         {
-            newTokens.insert(i.key()-bias, i.value());
+            newTokens.insert(i.key() - bias, i.value());
         }
         ++i;
     }
@@ -185,15 +191,12 @@ void VAbstractConverter::ValidateXML(const QString &schema) const
     domParser.setErrorHandler(&parserErrorHandler);
 
     QByteArray data = fileSchema.readAll();
-    const char* schemaData = data.constData();
+    const char *schemaData = data.constData();
 
-    QScopedPointer<XERCES_CPP_NAMESPACE::InputSource> grammarSource(
-        new XERCES_CPP_NAMESPACE::MemBufInputSource(reinterpret_cast<const XMLByte*>(schemaData),
-                                                    strlen(schemaData), "schema"));
+    QScopedPointer<XERCES_CPP_NAMESPACE::InputSource> grammarSource(new XERCES_CPP_NAMESPACE::MemBufInputSource(
+        reinterpret_cast<const XMLByte *>(schemaData), strlen(schemaData), "schema"));
 
-    if (domParser.loadGrammar(
-            *grammarSource,
-            XERCES_CPP_NAMESPACE::Grammar::SchemaGrammarType, true) == nullptr)
+    if (domParser.loadGrammar(*grammarSource, XERCES_CPP_NAMESPACE::Grammar::SchemaGrammarType, true) == nullptr)
     {
         VException e(parserErrorHandler.StatusMessage());
         e.AddMoreInformation(tr("Could not load schema file '%1'.").arg(fileSchema.fileName()));
@@ -205,8 +208,10 @@ void VAbstractConverter::ValidateXML(const QString &schema) const
     if (parserErrorHandler.HasError())
     {
         VException e(parserErrorHandler.StatusMessage());
-        e.AddMoreInformation(tr("Schema file %3 invalid in line %1 column %2").arg(parserErrorHandler.Line())
-                                 .arg(parserErrorHandler.Column()).arg(fileSchema.fileName()));
+        e.AddMoreInformation(tr("Schema file %3 invalid in line %1 column %2")
+                                 .arg(parserErrorHandler.Line())
+                                 .arg(parserErrorHandler.Column())
+                                 .arg(fileSchema.fileName()));
         throw e;
     }
 
@@ -225,19 +230,20 @@ void VAbstractConverter::ValidateXML(const QString &schema) const
     }
 
     QByteArray patternFileData = pattern.readAll();
-    const char* patternData = patternFileData.constData();
+    const char *patternData = patternFileData.constData();
 
-    QScopedPointer<XERCES_CPP_NAMESPACE::InputSource> patternSource(
-        new XERCES_CPP_NAMESPACE::MemBufInputSource(reinterpret_cast<const XMLByte*>(patternData),
-                                                    strlen(patternData), "pattern"));
+    QScopedPointer<XERCES_CPP_NAMESPACE::InputSource> patternSource(new XERCES_CPP_NAMESPACE::MemBufInputSource(
+        reinterpret_cast<const XMLByte *>(patternData), strlen(patternData), "pattern"));
 
     domParser.parse(*patternSource);
 
     if (domParser.getErrorCount() > 0)
     {
         VException e(parserErrorHandler.StatusMessage());
-        e.AddMoreInformation(tr("Validation error file %3 in line %1 column %2").arg(parserErrorHandler.Line())
-                                 .arg(parserErrorHandler.Column()).arg(m_originalFileName));
+        e.AddMoreInformation(tr("Validation error file %3 in line %1 column %2")
+                                 .arg(parserErrorHandler.Line())
+                                 .arg(parserErrorHandler.Column())
+                                 .arg(m_originalFileName));
         throw e;
     }
 #else
@@ -250,7 +256,7 @@ void VAbstractConverter::ValidateXML(const QString &schema) const
 
     QXmlSchema sch;
     sch.setMessageHandler(&parserErrorHandler);
-    if (sch.load(&fileSchema, QUrl::fromLocalFile(fileSchema.fileName()))==false)
+    if (sch.load(&fileSchema, QUrl::fromLocalFile(fileSchema.fileName())) == false)
     {
         VException e(parserErrorHandler.StatusMessage());
         e.AddMoreInformation(tr("Could not load schema file '%1'.").arg(fileSchema.fileName()));
@@ -275,8 +281,10 @@ void VAbstractConverter::ValidateXML(const QString &schema) const
     if (errorOccurred)
     {
         VException e(parserErrorHandler.StatusMessage());
-        e.AddMoreInformation(tr("Validation error file %3 in line %1 column %2").arg(parserErrorHandler.Line())
-                             .arg(parserErrorHandler.Column()).arg(m_originalFileName));
+        e.AddMoreInformation(tr("Validation error file %3 in line %1 column %2")
+                                 .arg(parserErrorHandler.Line())
+                                 .arg(parserErrorHandler.Column())
+                                 .arg(m_originalFileName));
         throw e;
     }
 #endif // QT_VERSION < QT_VERSION_CHECK(6, 0, 0)
@@ -309,7 +317,7 @@ void VAbstractConverter::ValidateInputFile(const QString &currentSchema) const
     {
         schema = XSDSchema(m_ver);
     }
-    catch(const VException &e)
+    catch (const VException &e)
     {
         if (m_ver < MinVer())
         { // Version less than minimally supported version. Can't do anything.
@@ -322,7 +330,7 @@ void VAbstractConverter::ValidateInputFile(const QString &currentSchema) const
             { // Try to open like the current version.
                 ValidateXML(currentSchema);
             }
-            catch(const VException &exp)
+            catch (const VException &exp)
             { // Nope, we can't.
                 Q_UNUSED(exp)
                 throw e;
@@ -342,7 +350,7 @@ void VAbstractConverter::ValidateInputFile(const QString &currentSchema) const
 //---------------------------------------------------------------------------------------------------------------------
 void VAbstractConverter::Save()
 {
-    m_tmpFile.resize(0);//clear previous content
+    m_tmpFile.resize(0); // clear previous content
     const int indent = 4;
     QTextStream out(&m_tmpFile);
 #if QT_VERSION < QT_VERSION_CHECK(6, 0, 0)
@@ -371,7 +379,7 @@ void VAbstractConverter::SetVersion(const QString &version)
 //---------------------------------------------------------------------------------------------------------------------
 auto VAbstractConverter::XSDSchema(unsigned int ver) const -> QString
 {
-    const QHash <unsigned, QString> schemas = Schemas();
+    const QHash<unsigned, QString> schemas = Schemas();
     if (schemas.contains(ver))
     {
         return schemas.value(ver);

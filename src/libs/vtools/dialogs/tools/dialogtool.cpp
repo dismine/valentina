@@ -61,12 +61,17 @@
 
 #include "../../tools/vabstracttool.h"
 #include "../ifc/xml/vabstractpattern.h"
-#include "../ifc/xml/vdomdocument.h"
 #include "../vgeometry/vabstractcurve.h"
 #include "../vgeometry/vgobject.h"
 #include "../vgeometry/vpointf.h"
 #include "../vpatterndb/vcontainer.h"
 #include "../vpatterndb/vpiecenode.h"
+
+#if QT_VERSION < QT_VERSION_CHECK(6, 4, 0)
+#include "../vmisc/compatibility.h"
+#endif
+
+using namespace Qt::Literals::StringLiterals;
 
 template <class T> class QSharedPointer;
 
@@ -385,7 +390,7 @@ auto DialogTool::DNumber(const QString &baseName) const -> quint32
     do
     {
         ++num;
-        name = baseName + QString("_%1").arg(num);
+        name = baseName + u"_%1"_s.arg(num);
     } while (not data->IsUnique(name));
 
     return num;

@@ -94,14 +94,20 @@
 #include <QRegularExpression>
 #include <QScrollArea>
 
+#if QT_VERSION < QT_VERSION_CHECK(6, 4, 0)
+#include "../vmisc/compatibility.h"
+#endif
+
+using namespace Qt::Literals::StringLiterals;
+
 namespace
 {
 QT_WARNING_PUSH
 QT_WARNING_DISABLE_CLANG("-Wunused-member-function")
 
-Q_GLOBAL_STATIC_WITH_ARGS(const QString, AttrHold, (QLatin1String("hold")))       // NOLINT
-Q_GLOBAL_STATIC_WITH_ARGS(const QString, AttrVisible, (QLatin1String("visible"))) // NOLINT
-Q_GLOBAL_STATIC_WITH_ARGS(const QString, AttrOpacity, (QLatin1String("opacity"))) // NOLINT
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, AttrHold, ("hold"_L1))       // NOLINT
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, AttrVisible, ("visible"_L1)) // NOLINT
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, AttrOpacity, ("opacity"_L1)) // NOLINT
 
 QT_WARNING_POP
 } // namespace
@@ -4379,7 +4385,7 @@ auto VToolOptionsPropertyBrowser::PropertiesList() -> QStringList
 {
     static QStringList attr{
         AttrName,                           /* 0 */
-        QLatin1String("position"),          /* 1 */
+        "position"_L1,                      /* 1 */
         AttrBasePoint,                      /* 2 */
         AttrTypeLine,                       /* 3 */
         AttrLength,                         /* 4 */

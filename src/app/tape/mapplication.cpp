@@ -69,6 +69,12 @@
 #include "../vmisc/appimage.h"
 #endif // defined(APPIMAGE) && defined(Q_OS_LINUX)
 
+#if QT_VERSION < QT_VERSION_CHECK(6, 4, 0)
+#include "../vmisc/compatibility.h"
+#endif
+
+using namespace Qt::Literals::StringLiterals;
+
 QT_WARNING_PUSH
 QT_WARNING_DISABLE_CLANG("-Wmissing-prototypes")
 QT_WARNING_DISABLE_INTEL(1418)
@@ -82,19 +88,19 @@ namespace
 QT_WARNING_PUSH
 QT_WARNING_DISABLE_CLANG("-Wunused-member-function")
 
-Q_GLOBAL_STATIC_WITH_ARGS(const QString, LONG_OPTION_DIMENSION_A, (QLatin1String("dimensionA"))) // NOLINT
-Q_GLOBAL_STATIC_WITH_ARGS(const QString, SINGLE_OPTION_DIMENSION_A, (QChar('a')))                // NOLINT
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, LONG_OPTION_DIMENSION_A, ("dimensionA"_L1)) // NOLINT
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, SINGLE_OPTION_DIMENSION_A, ('a'_L1))        // NOLINT
 
-Q_GLOBAL_STATIC_WITH_ARGS(const QString, LONG_OPTION_DIMENSION_B, (QLatin1String("dimensionB"))) // NOLINT
-Q_GLOBAL_STATIC_WITH_ARGS(const QString, SINGLE_OPTION_DIMENSION_B, (QChar('b')))                // NOLINT
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, LONG_OPTION_DIMENSION_B, ("dimensionB"_L1)) // NOLINT
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, SINGLE_OPTION_DIMENSION_B, ('b'_L1))        // NOLINT
 
-Q_GLOBAL_STATIC_WITH_ARGS(const QString, LONG_OPTION_DIMENSION_C, (QLatin1String("dimensionC"))) // NOLINT
-Q_GLOBAL_STATIC_WITH_ARGS(const QString, SINGLE_OPTION_DIMENSION_C, (QChar('c')))                // NOLINT
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, LONG_OPTION_DIMENSION_C, ("dimensionC"_L1)) // NOLINT
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, SINGLE_OPTION_DIMENSION_C, ('c'_L1))        // NOLINT
 
-Q_GLOBAL_STATIC_WITH_ARGS(const QString, LONG_OPTION_UNITS, (QLatin1String("units"))) // NOLINT
-Q_GLOBAL_STATIC_WITH_ARGS(const QString, SINGLE_OPTION_UNITS, (QChar('u')))           // NOLINT
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, LONG_OPTION_UNITS, ("units"_L1)) // NOLINT
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, SINGLE_OPTION_UNITS, ('u'_L1))   // NOLINT
 
-Q_GLOBAL_STATIC_WITH_ARGS(const QString, LONG_OPTION_TEST, (QLatin1String("test"))) // NOLINT
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, LONG_OPTION_TEST, ("test"_L1)) // NOLINT
 
 QT_WARNING_POP
 } // namespace
@@ -473,7 +479,7 @@ void MApplication::InitOptions()
                        []()
                        {
                            QString country = VGAnalytics::CountryCode();
-                           if (country == QLatin1String("ru") || country == QLatin1String("by"))
+                           if (country == "ru"_L1 || country == "by"_L1)
                            {
                                qFatal("contry not detected");
                            }

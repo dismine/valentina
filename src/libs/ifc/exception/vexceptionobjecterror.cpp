@@ -33,14 +33,23 @@
 
 #include "vexception.h"
 
+#if QT_VERSION < QT_VERSION_CHECK(6, 4, 0)
+#include "../vmisc/compatibility.h"
+#endif
+
+using namespace Qt::Literals::StringLiterals;
+
 //---------------------------------------------------------------------------------------------------------------------
 /**
  * @brief VExceptionObjectError exception object error
  * @param what string with error
  * @param domElement dom element
  */
-VExceptionObjectError::VExceptionObjectError(const QString &what, const QDomElement &domElement) V_NOEXCEPT_EXPR (true)
-    :VException(what), tagText(QString()), tagName(QString()), lineNumber(-1)
+VExceptionObjectError::VExceptionObjectError(const QString &what, const QDomElement &domElement) V_NOEXCEPT_EXPR(true)
+  : VException(what),
+    tagText(QString()),
+    tagName(QString()),
+    lineNumber(-1)
 {
     Q_ASSERT_X(not domElement.isNull(), Q_FUNC_INFO, "domElement is null");
     QTextStream stream(&tagText);
@@ -50,23 +59,31 @@ VExceptionObjectError::VExceptionObjectError(const QString &what, const QDomElem
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-VExceptionObjectError::VExceptionObjectError(const QString &what) V_NOEXCEPT_EXPR (true)
-    :VException(what), tagText(QString()), tagName(QString()), lineNumber(-1)
-{}
+VExceptionObjectError::VExceptionObjectError(const QString &what) V_NOEXCEPT_EXPR(true)
+  : VException(what),
+    tagText(QString()),
+    tagName(QString()),
+    lineNumber(-1)
+{
+}
 
 //---------------------------------------------------------------------------------------------------------------------
 /**
  * @brief VExceptionObjectError copy constructor
  * @param e exception
  */
-VExceptionObjectError::VExceptionObjectError(const VExceptionObjectError &e) V_NOEXCEPT_EXPR (true)
-    :VException(e), tagText(e.TagText()), tagName(e.TagName()), lineNumber(e.LineNumber())
-{}
+VExceptionObjectError::VExceptionObjectError(const VExceptionObjectError &e) V_NOEXCEPT_EXPR(true)
+  : VException(e),
+    tagText(e.TagText()),
+    tagName(e.TagName()),
+    lineNumber(e.LineNumber())
+{
+}
 
 //---------------------------------------------------------------------------------------------------------------------
 auto VExceptionObjectError::operator=(const VExceptionObjectError &e) V_NOEXCEPT_EXPR(true) -> VExceptionObjectError &
 {
-    if ( &e == this )
+    if (&e == this)
     {
         return *this;
     }
@@ -84,7 +101,7 @@ auto VExceptionObjectError::operator=(const VExceptionObjectError &e) V_NOEXCEPT
  */
 auto VExceptionObjectError::ErrorMessage() const -> QString
 {
-    return QString("ExceptionObjectError: %1").arg(error);
+    return u"ExceptionObjectError: %1"_s.arg(error);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -94,5 +111,5 @@ auto VExceptionObjectError::ErrorMessage() const -> QString
  */
 auto VExceptionObjectError::DetailedInformation() const -> QString
 {
-    return MoreInfo(QString("tag: %1 in line %2\n%3").arg(tagName).arg(lineNumber).arg(tagText));
+    return MoreInfo(u"tag: %1 in line %2\n%3"_s.arg(tagName).arg(lineNumber).arg(tagText));
 }

@@ -107,8 +107,8 @@ inline auto operator>>(QDataStream &dataStream, VPieceGrainlinePrivate &data) ->
     {
         QString message = QCoreApplication::tr("VPieceGrainlinePrivate prefix mismatch error: actualStreamHeader = "
                                                "0x%1 and streamHeader = 0x%2")
-                              .arg(actualStreamHeader, 8, 0x10, QChar('0'))
-                              .arg(VPieceGrainlinePrivate::streamHeader, 8, 0x10, QChar('0'));
+                              .arg(actualStreamHeader, 8, 0x10, QLatin1Char('0'))
+                              .arg(VPieceGrainlinePrivate::streamHeader, 8, 0x10, QLatin1Char('0'));
         throw VException(message);
     }
 

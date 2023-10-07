@@ -42,6 +42,12 @@
 #include "vcontainer.h"
 #include "vtranslatevars.h"
 
+#if QT_VERSION < QT_VERSION_CHECK(6, 4, 0)
+#include "../vmisc/compatibility.h"
+#endif
+
+using namespace Qt::Literals::StringLiterals;
+
 // VFormula
 //---------------------------------------------------------------------------------------------------------------------
 VFormula::VFormula()
@@ -259,7 +265,7 @@ void VFormula::Eval()
         }
         else
         {
-            d->strValue = VAbstractApplication::VApp()->LocaleToString(result) + QLatin1Char(' ') + d->postfix;
+            d->strValue = VAbstractApplication::VApp()->LocaleToString(result) + ' '_L1 + d->postfix;
             d->error = false;
         }
     }

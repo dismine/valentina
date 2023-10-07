@@ -31,9 +31,15 @@
 
 #include <QtTest>
 
+#if QT_VERSION < QT_VERSION_CHECK(6, 4, 0)
+#include "../vmisc/compatibility.h"
+#endif
+
+using namespace Qt::Literals::StringLiterals;
+
 //---------------------------------------------------------------------------------------------------------------------
 TST_VPointF::TST_VPointF(QObject *parent)
-    : QObject(parent)
+  : QObject(parent)
 {
 }
 
@@ -59,10 +65,10 @@ void TST_VPointF::TestFlip_data()
     QLineF l = QLineF(QPointF(), QPointF(10, 0));
     l.setAngle(315);
     flipped = l.p2();
-    l.setLength(l.length()/2.0);
+    l.setLength(l.length() / 2.0);
 
     axis = QLineF(l.p2(), l.p1());
-    axis.setAngle(axis.angle()+90);
+    axis.setAngle(axis.angle() + 90);
 
     QTest::newRow("Diagonal axis") << originPoint << axis << flipped << "a2";
 }
@@ -78,9 +84,8 @@ void TST_VPointF::TestFlip()
     const VPointF res = originPoint.Flip(axis, prefix);
 
     // cppcheck-suppress unreadVariable
-    const QString errorMsg = QString("The name doesn't contain the prefix '%1'.").arg(prefix);
+    const QString errorMsg = u"The name doesn't contain the prefix '%1'."_s.arg(prefix);
     QVERIFY2(res.name().endsWith(prefix), qUtf8Printable(errorMsg));
 
     QCOMPARE(flipped.toPoint(), res.toQPointF().toPoint());
 }
-

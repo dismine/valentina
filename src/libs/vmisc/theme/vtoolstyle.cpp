@@ -33,28 +33,34 @@
 #include <algorithm>
 #include <vector>
 
+#if QT_VERSION < QT_VERSION_CHECK(6, 4, 0)
+#include "../compatibility.h"
+#endif
+
+using namespace Qt::Literals::StringLiterals;
+
 namespace
 {
 QT_WARNING_PUSH
 QT_WARNING_DISABLE_CLANG("-Wunused-member-function")
 
-Q_GLOBAL_STATIC_WITH_ARGS(const QString, ToolStyleNodeVar, (QLatin1String("ToolStyle")))                 // NOLINT
-Q_GLOBAL_STATIC_WITH_ARGS(const QString, PatternColorVar, (QLatin1String("PatternColor")))               // NOLINT
-Q_GLOBAL_STATIC_WITH_ARGS(const QString, DisabledColorVar, (QLatin1String("DisabledColor")))             // NOLINT
-Q_GLOBAL_STATIC_WITH_ARGS(const QString, ColorAdjustmentsVar, (QLatin1String("ColorAdjustments")))       // NOLINT
-Q_GLOBAL_STATIC_WITH_ARGS(const QString, PointColorVar, (QLatin1String("PointColor")))                   // NOLINT
-Q_GLOBAL_STATIC_WITH_ARGS(const QString, LabelColorVar, (QLatin1String("LabelColor")))                   // NOLINT
-Q_GLOBAL_STATIC_WITH_ARGS(const QString, LabelHoverColorVar, (QLatin1String("LabelHoverColor")))         // NOLINT
-Q_GLOBAL_STATIC_WITH_ARGS(const QString, LabelLineColorVar, (QLatin1String("LabelLineColor")))           // NOLINT
-Q_GLOBAL_STATIC_WITH_ARGS(const QString, AccuracyRadiusColorVar, (QLatin1String("AccuracyRadiusColor"))) // NOLINT
-Q_GLOBAL_STATIC_WITH_ARGS(const QString, ControlLineColorVar, (QLatin1String("ControlLineColor")))       // NOLINT
-Q_GLOBAL_STATIC_WITH_ARGS(const QString, ControlPointColorVar, (QLatin1String("ControlPointColor")))     // NOLINT
-Q_GLOBAL_STATIC_WITH_ARGS(const QString, VisMainColorVar, (QLatin1String("VisMainColor")))               // NOLINT
-Q_GLOBAL_STATIC_WITH_ARGS(const QString, VisSupportColorVar, (QLatin1String("VisSupportColor")))         // NOLINT
-Q_GLOBAL_STATIC_WITH_ARGS(const QString, VisSupportColor2Var, (QLatin1String("VisSupportColor2")))       // NOLINT
-Q_GLOBAL_STATIC_WITH_ARGS(const QString, VisSupportColor3Var, (QLatin1String("VisSupportColor3")))       // NOLINT
-Q_GLOBAL_STATIC_WITH_ARGS(const QString, VisSupportColor4Var, (QLatin1String("VisSupportColor4")))       // NOLINT
-Q_GLOBAL_STATIC_WITH_ARGS(const QString, BasePointColorVar, (QLatin1String("BasePointColor")))           // NOLINT
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, ToolStyleNodeVar, ("ToolStyle"_L1))                 // NOLINT
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, PatternColorVar, ("PatternColor"_L1))               // NOLINT
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, DisabledColorVar, ("DisabledColor"_L1))             // NOLINT
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, ColorAdjustmentsVar, ("ColorAdjustments"_L1))       // NOLINT
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, PointColorVar, ("PointColor"_L1))                   // NOLINT
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, LabelColorVar, ("LabelColor"_L1))                   // NOLINT
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, LabelHoverColorVar, ("LabelHoverColor"_L1))         // NOLINT
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, LabelLineColorVar, ("LabelLineColor"_L1))           // NOLINT
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, AccuracyRadiusColorVar, ("AccuracyRadiusColor"_L1)) // NOLINT
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, ControlLineColorVar, ("ControlLineColor"_L1))       // NOLINT
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, ControlPointColorVar, ("ControlPointColor"_L1))     // NOLINT
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, VisMainColorVar, ("VisMainColor"_L1))               // NOLINT
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, VisSupportColorVar, ("VisSupportColor"_L1))         // NOLINT
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, VisSupportColor2Var, ("VisSupportColor2"_L1))       // NOLINT
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, VisSupportColor3Var, ("VisSupportColor3"_L1))       // NOLINT
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, VisSupportColor4Var, ("VisSupportColor4"_L1))       // NOLINT
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, BasePointColorVar, ("BasePointColor"_L1))           // NOLINT
 
 QT_WARNING_POP
 

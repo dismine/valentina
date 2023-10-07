@@ -32,6 +32,12 @@
 
 #include <QApplication>
 
+#if QT_VERSION < QT_VERSION_CHECK(6, 4, 0)
+#include "../vmisc/compatibility.h"
+#endif
+
+using namespace Qt::Literals::StringLiterals;
+
 //---------------------------------------------------------------------------------------------------------------------
 VAbstractLayoutDialog::VAbstractLayoutDialog(QWidget *parent)
   : QDialog(parent)
@@ -42,8 +48,8 @@ VAbstractLayoutDialog::VAbstractLayoutDialog(QWidget *parent)
 void VAbstractLayoutDialog::InitTemplates(QComboBox *comboBoxTemplates)
 {
     SCASSERT(comboBoxTemplates != nullptr)
-    const QIcon icoPaper(QLatin1String("://icon/16x16/template.png"));
-    const QIcon icoRoll(QLatin1String("://icon/16x16/roll.png"));
+    const QIcon icoPaper("://icon/16x16/template.png"_L1);
+    const QIcon icoRoll("://icon/16x16/roll.png"_L1);
     const QString pdi = QStringLiteral("(%1ppi)").arg(PrintDPI);
 
     auto cntr = static_cast<VIndexType>(PaperSizeTemplate::A0);

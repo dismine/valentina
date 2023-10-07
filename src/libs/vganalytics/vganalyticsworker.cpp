@@ -39,6 +39,12 @@
 #include <QJsonDocument>
 #include <QJsonObject>
 
+#if QT_VERSION < QT_VERSION_CHECK(6, 4, 0)
+#include "../vmisc/compatibility.h"
+#endif
+
+using namespace Qt::Literals::StringLiterals;
+
 const QLatin1String VGAnalyticsWorker::dateTimeFormat("yyyy,MM,dd-hh:mm::ss:zzz");
 
 namespace
@@ -56,7 +62,7 @@ VGAnalyticsWorker::VGAnalyticsWorker(QObject *parent)
     m_request.setHeader(QNetworkRequest::ContentTypeHeader, "application/json; charset=utf-8");
     m_request.setHeader(QNetworkRequest::UserAgentHeader, GetUserAgent());
 
-    m_guiLanguage = QLocale::system().name().toLower().replace(QChar('_'), QChar('-'));
+    m_guiLanguage = QLocale::system().name().toLower().replace('_'_L1, '-'_L1);
 
     m_screensNumber = QString::number(QGuiApplication::screens().size());
 
@@ -212,7 +218,7 @@ auto VGAnalyticsWorker::PostMessage() -> QNetworkReply *
     QString connection = QStringLiteral("close");
     if (m_messageQueue.count() > 1)
     {
-        connection = QLatin1String("keep-alive");
+        connection = "keep-alive"_L1;
     }
 
     QueryBuffer buffer = m_messageQueue.head();

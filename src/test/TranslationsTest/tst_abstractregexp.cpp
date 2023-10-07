@@ -35,6 +35,8 @@
 #include <QTranslator>
 #include <QtTest>
 
+using namespace Qt::Literals::StringLiterals;
+
 namespace
 {
 auto PrepareValidNameChars() -> QString
@@ -66,12 +68,12 @@ TST_AbstractRegExp::~TST_AbstractRegExp()
 auto TST_AbstractRegExp::LoadVariables(const QString &checkedLocale) -> int
 {
     const QString path = TranslationsPath();
-    const QString file = QString("valentina_%1.qm").arg(checkedLocale);
+    const QString file = u"valentina_%1.qm"_s.arg(checkedLocale);
 
-    if (QFileInfo(path + QLatin1String("/") + file).size() <= 34)
+    if (QFileInfo(path + '/'_L1 + file).size() <= 34)
     {
-        const QString message = QString("Translation variables for locale = %1 is empty. \nFull path: %2/%3")
-                                    .arg(checkedLocale, path, file);
+        const QString message =
+            u"Translation variables for locale = %1 is empty. \nFull path: %2/%3"_s.arg(checkedLocale, path, file);
         QWARN(qUtf8Printable(message));
 
         return ErrorSize;
@@ -81,8 +83,8 @@ auto TST_AbstractRegExp::LoadVariables(const QString &checkedLocale) -> int
 
     if (not m_vTranslator->load(file, path))
     {
-        const QString message = QString("Can't load translation variables for locale = %1. \nFull path: %2/%3")
-                                    .arg(checkedLocale, path, file);
+        const QString message =
+            u"Can't load translation variables for locale = %1. \nFull path: %2/%3"_s.arg(checkedLocale, path, file);
         QWARN(qUtf8Printable(message));
 
         delete m_vTranslator;
@@ -92,8 +94,8 @@ auto TST_AbstractRegExp::LoadVariables(const QString &checkedLocale) -> int
 
     if (not QCoreApplication::installTranslator(m_vTranslator))
     {
-        const QString message = QString("Can't install translation variables for locale = %1. \nFull path: %2/%3")
-                                    .arg(checkedLocale, path, file);
+        const QString message =
+            u"Can't install translation variables for locale = %1. \nFull path: %2/%3"_s.arg(checkedLocale, path, file);
         QWARN(qUtf8Printable(message));
 
         delete m_vTranslator;
@@ -113,7 +115,7 @@ void TST_AbstractRegExp::RemoveTrVariables(const QString &checkedLocale)
 
         if (result == false)
         {
-            const QString message = QString("Can't remove translation variables for locale = %1").arg(checkedLocale);
+            const QString message = u"Can't remove translation variables for locale = %1"_s.arg(checkedLocale);
             QWARN(qUtf8Printable(message));
         }
         delete m_vTranslator;
@@ -139,9 +141,9 @@ void TST_AbstractRegExp::CallTestCheckNoEndLine()
     QFETCH(QString, originalName);
 
     const QString translated = m_trMs->VarToUser(originalName);
-    if (translated.endsWith(QLatin1String("\n")))
+    if (translated.endsWith('\n'_L1))
     {
-        const QString message = QString("Translated string '%1' shouldn't contain new line character.").arg(translated);
+        const QString message = u"Translated string '%1' shouldn't contain new line character."_s.arg(translated);
         QFAIL(qUtf8Printable(message));
     }
 }
@@ -155,7 +157,7 @@ void TST_AbstractRegExp::CallTestCheckRegExpNames()
     const QString translated = m_trMs->VarToUser(originalName);
     if (not re.match(translated).hasMatch())
     {
-        const QString message = QString("Original name:'%1', translated name:'%2'").arg(originalName, translated);
+        const QString message = u"Original name:'%1', translated name:'%2'"_s.arg(originalName, translated);
         QFAIL(qUtf8Printable(message));
     }
 }
@@ -173,9 +175,8 @@ void TST_AbstractRegExp::CallTestCheckNoOriginalNamesInTranslation()
     {
         if (originalName != translated)
         {
-            const QString message = QString("Translation repeat original name from other place. "
-                                            "Original name:'%1', translated name:'%2'")
-                                        .arg(originalName, translated);
+            const QString message = u"Translation repeat original name from other place. "
+                                    "Original name:'%1', translated name:'%2'"_s.arg(originalName, translated);
             QFAIL(qUtf8Printable(message));
         }
     }

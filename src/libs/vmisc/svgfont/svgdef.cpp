@@ -31,6 +31,12 @@
 #include <QChar>
 #include <QString>
 
+#if QT_VERSION < QT_VERSION_CHECK(6, 4, 0)
+#include "../compatibility.h"
+#endif
+
+using namespace Qt::Literals::StringLiterals;
+
 //---------------------------------------------------------------------------------------------------------------------
 auto LatinWritingSystem(QChar c) -> bool
 {
@@ -1569,13 +1575,13 @@ auto WritingSystemSample(SVGFontWritingSystem writingSystem) -> QString
     {
         case SVGFontWritingSystem::Any:
         case SVGFontWritingSystem::Symbol:
-            sample += QLatin1String("AaBbzZ");
+            sample += "AaBbzZ"_L1;
             break;
         case SVGFontWritingSystem::Latin:
-            sample = QLatin1String("Aa");
+            sample = "Aa"_L1;
             sample += QChar(0x00C3);
             sample += QChar(0x00E1);
-            sample += QLatin1String("Zz");
+            sample += "Zz"_L1;
             break;
         case SVGFontWritingSystem::Greek:
             sample += QChar(0x0393);

@@ -27,20 +27,25 @@
  *************************************************************************/
 #include "testpath.h"
 
-#include <QVector>
-#include <QTemporaryFile>
-#include <QJsonObject>
-#include <QTextStream>
 #include <QJsonDocument>
+#include <QJsonObject>
 #include <QPointF>
+#include <QTemporaryFile>
+#include <QTextStream>
+#include <QVector>
+
+#if QT_VERSION < QT_VERSION_CHECK(6, 4, 0)
+#include "compatibility.h"
+#endif
+
+using namespace Qt::Literals::StringLiterals;
 
 //---------------------------------------------------------------------------------------------------------------------
 #if !defined(V_NO_ASSERT)
 // Use for writing tests
 auto PointToJson(const QPointF &point) -> QJsonObject
 {
-    QJsonObject pointObject
-    {
+    QJsonObject pointObject{
         {"type", "QPointF"},
         {"x", point.x()},
         {"y", point.y()},
@@ -52,11 +57,11 @@ auto PointToJson(const QPointF &point) -> QJsonObject
 void VectorToJson(const QVector<QPointF> &points, QJsonObject &json)
 {
     QJsonArray pointsArray;
-    for (auto point: points)
+    for (auto point : points)
     {
         pointsArray.append(PointToJson(point));
     }
-    json[QLatin1String("vector")] = pointsArray;
+    json["vector"_L1] = pointsArray;
 }
 
 #endif // !defined(V_NO_ASSERT)

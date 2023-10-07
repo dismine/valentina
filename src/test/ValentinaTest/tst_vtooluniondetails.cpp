@@ -27,11 +27,17 @@
  *************************************************************************/
 
 #include "tst_vtooluniondetails.h"
-#include "../vpatterndb/vpiecepath.h"
 #include "../vpatterndb/vpiecenode.h"
+#include "../vpatterndb/vpiecepath.h"
 #include "../vtools/tools/vtooluniondetails.h"
 
 #include <QtTest>
+
+#if QT_VERSION < QT_VERSION_CHECK(6, 4, 0)
+#include "../vmisc/compatibility.h"
+#endif
+
+using namespace Qt::Literals::StringLiterals;
 
 typedef QPair<bool, VPieceNode> UnitedPathNode;
 
@@ -39,7 +45,7 @@ Q_DECLARE_METATYPE(UnitedPathNode)
 
 //---------------------------------------------------------------------------------------------------------------------
 TST_VToolUnionDetails::TST_VToolUnionDetails(QObject *parent)
-    : QObject (parent)
+  : QObject(parent)
 {
 }
 
@@ -156,19 +162,21 @@ void TST_VToolUnionDetails::TestUnitingMainPaths()
 
     QVERIFY(result.size() == out.size());
 
-    for (int i=0; i < out.size(); ++i)
+    for (int i = 0; i < out.size(); ++i)
     {
         const VPieceNode resP = result.at(i).second;
         const VPieceNode outP = out.at(i).second;
 
         // cppcheck-suppress unreadVariable
-        const QString msg = QString("Index: %1. Got item with id = %2, type = %3; Expected item with id = %4, "
-                                    "type = %5.")
-                .arg(i).arg(outP.GetId()).arg(static_cast<ToolVisHolderType>(outP.GetTypeTool()))
-                .arg(resP.GetId()).arg(static_cast<ToolVisHolderType>(resP.GetTypeTool()));
+        const QString msg = u"Index: %1. Got item with id = %2, type = %3; Expected item with id = %4, "
+                            "type = %5."_s.arg(i)
+                                .arg(outP.GetId())
+                                .arg(static_cast<ToolVisHolderType>(outP.GetTypeTool()))
+                                .arg(resP.GetId())
+                                .arg(static_cast<ToolVisHolderType>(resP.GetTypeTool()));
 
-        QVERIFY2(out.at(i).first == result.at(i).first
-                 && outP.GetId() == resP.GetId()
-                 && outP.GetTypeTool() == resP.GetTypeTool(), qUtf8Printable(msg));
+        QVERIFY2(out.at(i).first == result.at(i).first && outP.GetId() == resP.GetId() &&
+                     outP.GetTypeTool() == resP.GetTypeTool(),
+                 qUtf8Printable(msg));
     }
 }

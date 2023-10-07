@@ -31,6 +31,8 @@
 #include "../vmisc/compatibility.h"
 #include "../vmisc/projectversion.h"
 
+using namespace Qt::Literals::StringLiterals;
+
 const QString VWatermark::TagWatermark = QStringLiteral("watermark");
 const QString VWatermark::TagText = QStringLiteral("text");
 const QString VWatermark::TagImage = QStringLiteral("image");
@@ -47,7 +49,7 @@ namespace
 //---------------------------------------------------------------------------------------------------------------------
 auto FileComment() -> QString
 {
-    return QString("Watermark created with Valentina v%1 (https://smart-pattern.com.ua/).").arg(AppVersionStr());
+    return u"Watermark created with Valentina v%1 (https://smart-pattern.com.ua/)."_s.arg(AppVersionStr());
 }
 } // namespace
 

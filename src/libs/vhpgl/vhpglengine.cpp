@@ -49,6 +49,12 @@
 #include <QLine>
 #include <QtMath>
 
+#if QT_VERSION < QT_VERSION_CHECK(6, 4, 0)
+#include "../vmisc/compatibility.h"
+#endif
+
+using namespace Qt::Literals::StringLiterals;
+
 namespace
 {
 const qreal accuracyPointOnLine{0.99};
@@ -57,15 +63,15 @@ QT_WARNING_PUSH
 QT_WARNING_DISABLE_CLANG("-Wunused-member-function")
 
 // mnemonics
-Q_GLOBAL_STATIC_WITH_ARGS(const QString, mIN, (QLatin1String("IN"))) // NOLINT initialize set instruction
-Q_GLOBAL_STATIC_WITH_ARGS(const QString, mPU, (QLatin1String("PU"))) // NOLINT pen up
-Q_GLOBAL_STATIC_WITH_ARGS(const QString, mPD, (QLatin1String("PD"))) // NOLINT pen down
-Q_GLOBAL_STATIC_WITH_ARGS(const QString, mLT, (QLatin1String("LT"))) // NOLINT line type
-Q_GLOBAL_STATIC_WITH_ARGS(const QString, mSP, (QLatin1String("SP"))) // NOLINT select pen
-Q_GLOBAL_STATIC_WITH_ARGS(const QString, mPG, (QLatin1String("PG"))) // NOLINT page feed
-Q_GLOBAL_STATIC_WITH_ARGS(const QString, mPA, (QLatin1String("PA"))) // NOLINT plot absolute
-Q_GLOBAL_STATIC_WITH_ARGS(const QString, mPW, (QLatin1String("PW"))) // NOLINT pen width
-Q_GLOBAL_STATIC_WITH_ARGS(const QString, mLA, (QLatin1String("LA"))) // NOLINT line attributes
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, mIN, ("IN"_L1)) // NOLINT initialize set instruction
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, mPU, ("PU"_L1)) // NOLINT pen up
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, mPD, ("PD"_L1)) // NOLINT pen down
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, mLT, ("LT"_L1)) // NOLINT line type
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, mSP, ("SP"_L1)) // NOLINT select pen
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, mPG, ("PG"_L1)) // NOLINT page feed
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, mPA, ("PA"_L1)) // NOLINT plot absolute
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, mPW, ("PW"_L1)) // NOLINT pen width
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, mLA, ("LA"_L1)) // NOLINT line attributes
 
 QT_WARNING_POP
 

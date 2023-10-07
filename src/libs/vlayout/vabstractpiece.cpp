@@ -52,6 +52,8 @@
 #include <QVector>
 #include <QtMath>
 
+using namespace Qt::Literals::StringLiterals;
+
 const qreal maxL = 3.5;
 
 namespace
@@ -1536,43 +1538,43 @@ auto VAbstractPiece::GetUniqueID() const -> QString
 auto VSAPoint::toJson() const -> QJsonObject
 {
     QJsonObject pointObject = VLayoutPoint::toJson();
-    pointObject[QLatin1String("type")] = "VSAPoint";
+    pointObject["type"_L1] = "VSAPoint";
 
     if (not VFuzzyComparePossibleNulls(m_before, -1))
     {
-        pointObject[QLatin1String("saBefore")] = m_before;
+        pointObject["saBefore"_L1] = m_before;
     }
 
     if (not VFuzzyComparePossibleNulls(m_after, -1))
     {
-        pointObject[QLatin1String("saAfter")] = m_after;
+        pointObject["saAfter"_L1] = m_after;
     }
 
     if (m_angle != PieceNodeAngle::ByLength)
     {
-        pointObject[QLatin1String("angle")] = static_cast<int>(m_angle);
+        pointObject["angle"_L1] = static_cast<int>(m_angle);
     }
 
     if (m_manualPassmarkLength)
     {
-        pointObject[QLatin1String("manualPassmarkLength")] = m_manualPassmarkLength;
-        pointObject[QLatin1String("passmarkLength")] = m_passmarkLength;
+        pointObject["manualPassmarkLength"_L1] = m_manualPassmarkLength;
+        pointObject["passmarkLength"_L1] = m_passmarkLength;
     }
 
     if (m_manualPassmarkWidth)
     {
-        pointObject[QLatin1String("manualPassmarkWidth")] = m_manualPassmarkWidth;
-        pointObject[QLatin1String("passmarkWidth")] = m_passmarkWidth;
+        pointObject["manualPassmarkWidth"_L1] = m_manualPassmarkWidth;
+        pointObject["passmarkWidth"_L1] = m_passmarkWidth;
     }
     else
     {
-        pointObject[QLatin1String("passmarkClockwiseOpening")] = m_passmarkClockwiseOpening;
+        pointObject["passmarkClockwiseOpening"_L1] = m_passmarkClockwiseOpening;
     }
 
     if (m_manualPassmarkAngle)
     {
-        pointObject[QLatin1String("manualPassmarkAngle")] = m_manualPassmarkAngle;
-        pointObject[QLatin1String("passmarkAngle")] = m_passmarkAngle;
+        pointObject["manualPassmarkAngle"_L1] = m_manualPassmarkAngle;
+        pointObject["passmarkAngle"_L1] = m_passmarkAngle;
     }
 
     return pointObject;

@@ -49,6 +49,8 @@
 #include <ciso646> // and, not, or
 #endif
 
+using namespace Qt::Literals::StringLiterals;
+
 QT_WARNING_PUSH
 QT_WARNING_DISABLE_CLANG("-Wmissing-prototypes")
 QT_WARNING_DISABLE_INTEL(1418)
@@ -1061,7 +1063,7 @@ auto VPLayoutFileReader::ReadAttributeDouble(const QXmlStreamAttributes &attribs
     try
     {
         QString parametr = ReadAttributeString(attribs, name, defValue);
-        param = parametr.replace(QChar(','), QChar('.')).toDouble(&ok);
+        param = parametr.replace(','_L1, '.'_L1).toDouble(&ok);
         if (not ok)
         {
             throw VExceptionConversionError(message, name);
@@ -1087,7 +1089,7 @@ auto VPLayoutFileReader::ReadAttributeUInt(const QXmlStreamAttributes &attribs, 
     try
     {
         QString parametr = ReadAttributeString(attribs, name, defValue);
-        param = parametr.replace(QChar(','), QChar('.')).toUInt(&ok);
+        param = parametr.replace(','_L1, '.'_L1).toUInt(&ok);
         if (not ok)
         {
             throw VExceptionConversionError(message, name);
@@ -1113,7 +1115,7 @@ auto VPLayoutFileReader::ReadAttributeInt(const QXmlStreamAttributes &attribs, c
     try
     {
         QString parametr = ReadAttributeString(attribs, name, defValue);
-        param = parametr.replace(QChar(','), QChar('.')).toInt(&ok);
+        param = parametr.replace(','_L1, '.'_L1).toInt(&ok);
         if (not ok)
         {
             throw VExceptionConversionError(message, name);

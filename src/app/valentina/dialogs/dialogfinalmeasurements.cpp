@@ -38,6 +38,12 @@
 
 #include <QMenu>
 
+#if QT_VERSION < QT_VERSION_CHECK(6, 4, 0)
+#include "../vmisc/compatibility.h"
+#endif
+
+using namespace Qt::Literals::StringLiterals;
+
 constexpr int DIALOG_MAX_FORMULA_HEIGHT = 64;
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -251,7 +257,7 @@ void DialogFinalMeasurements::Add()
 
     VFinalMeasurement m;
     m.name = tr("measurement");
-    m.formula = QLatin1Char('0');
+    m.formula = '0'_L1;
 
     m_measurements.append(m);
 
@@ -902,7 +908,7 @@ void DialogFinalMeasurements::UpdateSearchControlsTooltips()
 {
     auto UpdateToolTip = [](QAbstractButton *button)
     {
-        if (button->toolTip().contains(QLatin1String("%1")))
+        if (button->toolTip().contains("%1"_L1))
         {
             button->setToolTip(button->toolTip().arg(button->shortcut().toString(QKeySequence::NativeText)));
         }

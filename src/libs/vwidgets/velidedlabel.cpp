@@ -35,6 +35,12 @@
 #include <ciso646> // and, not, or
 #endif
 
+#if QT_VERSION < QT_VERSION_CHECK(6, 4, 0)
+#include "../vmisc/compatibility.h"
+#endif
+
+using namespace Qt::Literals::StringLiterals;
+
 //---------------------------------------------------------------------------------------------------------------------
 VElidedLabel::VElidedLabel(QWidget *parent)
   : QFrame(parent)
@@ -98,9 +104,9 @@ void VElidedLabel::paintEvent(QPaintEvent *event)
                 {
                     if (i != 0)
                     {
-                        toolTip.append(QString("<br>"));
+                        toolTip.append("<br>"_L1);
                     }
-                    toolTip.append(QString("<font>%1</font>").arg(paragraphs.at(i)));
+                    toolTip.append(u"<font>%1</font>"_s.arg(paragraphs.at(i)));
                 }
                 setToolTip(toolTip);
             }

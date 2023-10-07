@@ -31,30 +31,36 @@
 #include <QLatin1String>
 #include <QMessageLogger>
 
-#include "../vmisc/def.h"
 #include "../ifc/ifcdef.h"
 #include "../vgeometry/vabstractcurve.h"
-#include "../vgeometry/vspline.h"
 #include "../vgeometry/vellipticalarc.h"
+#include "../vgeometry/vspline.h"
+#include "../vmisc/def.h"
 #include "vcurvevariable.h"
+
+#if QT_VERSION < QT_VERSION_CHECK(6, 4, 0)
+#include "../vmisc/compatibility.h"
+#endif
+
+using namespace Qt::Literals::StringLiterals;
 
 //---------------------------------------------------------------------------------------------------------------------
 VCurveAngle::VCurveAngle()
-    :VCurveVariable()
+  : VCurveVariable()
 {
     SetType(VarType::CurveAngle);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 VCurveAngle::VCurveAngle(const quint32 &id, const quint32 &parentId)
-    :VCurveVariable(id, parentId)
+  : VCurveVariable(id, parentId)
 {
     SetType(VarType::CurveAngle);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 VCurveAngle::VCurveAngle(const quint32 &id, const quint32 &parentId, const VAbstractCurve *curve, CurveAngle angle)
-    :VCurveVariable(id, parentId)
+  : VCurveVariable(id, parentId)
 {
     SetType(VarType::CurveAngle);
     SCASSERT(curve != nullptr)
@@ -83,7 +89,7 @@ VCurveAngle::VCurveAngle(const quint32 &id, const quint32 &parentId, const VAbst
 //---------------------------------------------------------------------------------------------------------------------
 VCurveAngle::VCurveAngle(const quint32 &id, const quint32 &parentId, const VAbstractCurve *baseCurve,
                          const VSpline &spl, CurveAngle angle, qint32 segment)
-    :VCurveVariable(id, parentId)
+  : VCurveVariable(id, parentId)
 {
     // cppcheck-suppress unknownMacro
     SCASSERT(baseCurve != nullptr)
@@ -92,35 +98,35 @@ VCurveAngle::VCurveAngle(const quint32 &id, const quint32 &parentId, const VAbst
     if (angle == CurveAngle::StartAngle)
     {
         SetValue(spl.GetStartAngle());
-        SetName(angle1_V + baseCurve->name() + QLatin1String("_") + seg_ + QString().setNum(segment));
+        SetName(angle1_V + baseCurve->name() + '_'_L1 + seg_ + QString().setNum(segment));
 
         if (not baseCurve->GetAlias().isEmpty())
         {
-            SetAlias(angle1_V + baseCurve->GetAlias() + QLatin1String("_") + seg_ + QString().setNum(segment));
+            SetAlias(angle1_V + baseCurve->GetAlias() + '_'_L1 + seg_ + QString().setNum(segment));
         }
     }
     else
     {
         SetValue(spl.GetEndAngle());
-        SetName(angle2_V + baseCurve->name() + QLatin1String("_") + seg_ + QString().setNum(segment));
+        SetName(angle2_V + baseCurve->name() + '_'_L1 + seg_ + QString().setNum(segment));
 
         if (not baseCurve->GetAlias().isEmpty())
         {
-            SetAlias(angle2_V + baseCurve->GetAlias() + QLatin1String("_") + seg_ + QString().setNum(segment));
+            SetAlias(angle2_V + baseCurve->GetAlias() + '_'_L1 + seg_ + QString().setNum(segment));
         }
     }
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 VEllipticalArcRotation::VEllipticalArcRotation()
-    : VCurveAngle()
+  : VCurveAngle()
 {
     SetType(VarType::CurveAngle);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 VEllipticalArcRotation::VEllipticalArcRotation(const quint32 &id, const quint32 &parentId, const VEllipticalArc *elArc)
-    : VCurveAngle(id, parentId)
+  : VCurveAngle(id, parentId)
 {
     SetType(VarType::CurveAngle);
     SCASSERT(elArc != nullptr)

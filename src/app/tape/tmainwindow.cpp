@@ -102,6 +102,8 @@ using namespace bpstd::literals::chrono_literals;
 #include <QMimeData>
 #endif // defined(Q_OS_MAC)
 
+using namespace Qt::Literals::StringLiterals;
+
 constexpr int DIALOG_MAX_FORMULA_HEIGHT = 64;
 
 QT_WARNING_PUSH
@@ -1021,7 +1023,7 @@ auto TMainWindow::FileSaveAs() -> bool
         suffix = QStringLiteral("vst");
     }
 
-    fName += QChar('.') + suffix;
+    fName += '.'_L1 + suffix;
 
     const QString dir = SaveDirPath(m_curFile, m_mType);
 
@@ -1030,7 +1032,7 @@ auto TMainWindow::FileSaveAs() -> bool
         fName = StrippedName(m_curFile);
     }
 
-    QString fileName = QFileDialog::getSaveFileName(this, tr("Save as"), dir + QChar('/') + fName, filters, nullptr,
+    QString fileName = QFileDialog::getSaveFileName(this, tr("Save as"), dir + '/'_L1 + fName, filters, nullptr,
                                                     VAbstractApplication::VApp()->NativeFileDialog());
 
     if (fileName.isEmpty())
@@ -1041,7 +1043,7 @@ auto TMainWindow::FileSaveAs() -> bool
     QFileInfo f(fileName);
     if (f.suffix().isEmpty() && f.suffix() != suffix)
     {
-        fileName += QChar('.') + suffix;
+        fileName += '.'_L1 + suffix;
     }
 
     if (m_curFile.isEmpty())
@@ -1162,7 +1164,7 @@ void TMainWindow::ImportDataFromCSV()
     QFileInfo f(fileName);
     if (f.suffix().isEmpty() && f.suffix() != suffix)
     {
-        fileName += QChar('.') + suffix;
+        fileName += '.'_L1 + suffix;
     }
 
     DialogExportToCSV dialog(this);
@@ -1973,9 +1975,9 @@ void TMainWindow::ShowMDiagram(const QString &name)
     }
     else
     {
-        ui->labelDiagram->setText(QString("<html><head/><body><p align=\"center\">%1</p>"
-                                          "<p align=\"center\"><b>%2</b>. <i>%3</i></p></body></html>")
-                                      .arg(DialogMDataBase::ImgTag(number), number, trv->GuiText(name)));
+        ui->labelDiagram->setText(u"<html><head/><body><p align=\"center\">%1</p>"
+                                  "<p align=\"center\"><b>%2</b>. <i>%3</i></p></body></html>"_s.arg(
+                                      DialogMDataBase::ImgTag(number), number, trv->GuiText(name)));
     }
 }
 
@@ -2049,7 +2051,7 @@ void TMainWindow::SaveMName(const QString &text)
             QString name = newName;
             do
             {
-                name = name + QChar('_') + QString::number(num);
+                name = name + '_'_L1 + QString::number(num);
                 num++;
             } while (not m_data->IsUnique(name));
             newName = name;
@@ -2418,7 +2420,7 @@ void TMainWindow::ExportToIndividual()
 
     QString filters = tr("Individual measurements") + QStringLiteral(" (*.vit)");
     QString fName = tr("measurements.vit");
-    QString fileName = QFileDialog::getSaveFileName(this, tr("Export to individual"), dir + QChar('/') + fName, filters,
+    QString fileName = QFileDialog::getSaveFileName(this, tr("Export to individual"), dir + '/'_L1 + fName, filters,
                                                     nullptr, VAbstractApplication::VApp()->NativeFileDialog());
 
     if (fileName.isEmpty())
@@ -2430,7 +2432,7 @@ void TMainWindow::ExportToIndividual()
     QFileInfo f(fileName);
     if (f.suffix().isEmpty() && f.suffix() != suffix)
     {
-        fileName += QChar('.') + suffix;
+        fileName += '.'_L1 + suffix;
     }
 
     if (m_curFile.isEmpty())
@@ -2834,7 +2836,7 @@ void TMainWindow::InitWindow()
     ui->comboBoxPMSystem->setEnabled(true);
     ui->comboBoxPMSystem->clear();
     InitPMSystems(ui->comboBoxPMSystem);
-    const qint32 index = ui->comboBoxPMSystem->findData(QLatin1Char('p') + m_m->PMSystem());
+    const qint32 index = ui->comboBoxPMSystem->findData('p'_L1 + m_m->PMSystem());
     ui->comboBoxPMSystem->setCurrentIndex(index);
     connect(ui->comboBoxPMSystem, QOverload<int>::of(&QComboBox::currentIndexChanged), this,
             &TMainWindow::SavePMSystem);
@@ -2946,7 +2948,7 @@ void TMainWindow::InitDimensionsBaseValue()
         if (dimensions.size() > index)
         {
             const MeasurementDimension_p &dimension = dimensions.at(index);
-            name->setText(dimension->Name() + QChar(':'));
+            name->setText(dimension->Name() + ':'_L1);
             name->setToolTip(VAbstartMeasurementDimension::DimensionToolTip(dimension, m_m->IsFullCircumference()));
 
             DimesionLabels labels = dimension->Labels();
@@ -3057,11 +3059,11 @@ void TMainWindow::InitDimensionControls()
 
             if (name == nullptr)
             {
-                name = new QLabel(dimension->Name() + QChar(':'));
+                name = new QLabel(dimension->Name() + ':'_L1);
             }
             else
             {
-                name->setText(dimension->Name() + QChar(':'));
+                name->setText(dimension->Name() + ':'_L1);
             }
             name->setToolTip(VAbstartMeasurementDimension::DimensionToolTip(dimension, m_m->IsFullCircumference()));
 
@@ -3148,7 +3150,7 @@ void TMainWindow::ShowHeaderUnits(QTableWidget *table, int column, const QString
     SCASSERT(table != nullptr)
 
     QString header = table->horizontalHeaderItem(column)->text();
-    const auto index = header.indexOf(QLatin1String("("));
+    const auto index = header.indexOf('('_L1);
     if (index != -1)
     {
         header.remove(index - 1, 100);
@@ -3170,7 +3172,7 @@ void TMainWindow::SetCurrentFile(const QString &fileName)
     m_curFile = fileName;
     if (m_curFile.isEmpty())
     {
-        ui->lineEditPathToFile->setText(QChar('<') + tr("Empty") + QChar('>'));
+        ui->lineEditPathToFile->setText('<'_L1 + tr("Empty") + '>'_L1);
         ui->lineEditPathToFile->setToolTip(tr("File was not saved yet."));
         ui->lineEditPathToFile->setCursorPosition(0);
         ui->pushButtonShowInExplorer->setEnabled(false);
@@ -3563,22 +3565,21 @@ void TMainWindow::UpdateWindowTitle()
         {
             showName = tr("untitled");
         }
-        m_mType == MeasurementsType::Multisize ? showName += QLatin1String(".vst") : showName += QLatin1String(".vit");
+        m_mType == MeasurementsType::Multisize ? showName += ".vst"_L1 : showName += ".vit"_L1;
     }
 
-    showName += QLatin1String("[*]");
+    showName += "[*]"_L1;
 
     if (m_mIsReadOnly || not isFileWritable)
     {
-        showName += QStringLiteral(" (") + tr("read only") + QChar(')');
+        showName += QStringLiteral(" (") + tr("read only") + ')'_L1;
     }
 
     setWindowTitle(showName);
     setWindowFilePath(m_curFile);
 
 #if defined(Q_OS_MAC)
-    static QIcon fileIcon =
-        QIcon(QCoreApplication::applicationDirPath() + QLatin1String("/../Resources/measurements.icns"));
+    static QIcon fileIcon = QIcon(QCoreApplication::applicationDirPath() + "/../Resources/measurements.icns"_L1);
     QIcon icon;
     if (not m_curFile.isEmpty())
     {
@@ -3910,10 +3911,10 @@ void TMainWindow::CreateWindowMenu(QMenu *menu)
         TMainWindow *window = windows.at(i);
 
         QString title = QStringLiteral("%1. %2").arg(i + 1).arg(window->windowTitle());
-        const auto index = title.lastIndexOf(QLatin1String("[*]"));
+        const auto index = title.lastIndexOf("[*]"_L1);
         if (index != -1)
         {
-            window->isWindowModified() ? title.replace(index, 3, QChar('*')) : title.replace(index, 3, QString());
+            window->isWindowModified() ? title.replace(index, 3, '*'_L1) : title.replace(index, 3, QString());
         }
 
         QAction *action = menu->addAction(title, this, &TMainWindow::ShowWindow);
@@ -4760,7 +4761,7 @@ void TMainWindow::UpdateSearchControlsTooltips()
 {
     auto UpdateToolTip = [](QAbstractButton *button)
     {
-        if (button->toolTip().contains(QLatin1String("%1")))
+        if (button->toolTip().contains("%1"_L1))
         {
             button->setToolTip(button->toolTip().arg(button->shortcut().toString(QKeySequence::NativeText)));
         }

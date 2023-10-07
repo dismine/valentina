@@ -44,6 +44,12 @@
 #define BUILD_REVISION VCS_REPO_STATE_REVISION
 #endif
 
+#if QT_VERSION < QT_VERSION_CHECK(6, 4, 0)
+#include "../vmisc/compatibility.h"
+#endif
+
+using namespace Qt::Literals::StringLiterals;
+
 //---------------------------------------------------------------------------------------------------------------------
 VPDialogAbout::VPDialogAbout(QWidget *parent)
   : QDialog(parent),
@@ -136,7 +142,7 @@ void VPDialogAbout::RetranslateUi()
     ui->labelBuildRevision->setText(tr("Build revision: %1").arg(QStringLiteral(BUILD_REVISION)));
     ui->label_QT_Version->setText(buildCompatibilityString());
 
-    const QDate date = QLocale::c().toDate(QStringLiteral(__DATE__).simplified(), QStringLiteral("MMM d yyyy"));
+    const QDate date = QLocale::c().toDate(QStringLiteral(__DATE__).simplified(), "MMM d yyyy"_L1);
     ui->label_Puzzle_Built->setText(tr("Built on %1 at %2").arg(date.toString(), QStringLiteral(__TIME__)));
 
     ui->label_Legal_Stuff->setText(QApplication::translate("InternalStrings",

@@ -34,21 +34,27 @@
 
 #include "../../../../../dialogs/tools/dialogcutarc.h"
 #include "../../../../../dialogs/tools/dialogtool.h"
-#include "../../../../../visualization/visualization.h"
 #include "../../../../../visualization/path/vistoolcutarc.h"
+#include "../../../../../visualization/visualization.h"
+#include "../../../../vabstracttool.h"
+#include "../../../vdrawtool.h"
 #include "../ifc/exception/vexception.h"
 #include "../ifc/ifcdef.h"
 #include "../vgeometry/varc.h"
 #include "../vgeometry/vpointf.h"
 #include "../vmisc/vabstractapplication.h"
 #include "../vmisc/vcommonsettings.h"
+#include "../vpatterndb/variables/vcurvelength.h"
 #include "../vpatterndb/vcontainer.h"
 #include "../vpatterndb/vtranslatevars.h"
-#include "../vpatterndb/variables/vcurvelength.h"
 #include "../vwidgets/vmaingraphicsscene.h"
-#include "../../../../vabstracttool.h"
-#include "../../../vdrawtool.h"
 #include "vtoolcut.h"
+
+#if QT_VERSION < QT_VERSION_CHECK(6, 4, 0)
+#include "../vmisc/compatibility.h"
+#endif
+
+using namespace Qt::Literals::StringLiterals;
 
 template <class T> class QSharedPointer;
 
@@ -60,8 +66,8 @@ const QString VToolCutArc::ToolType = QStringLiteral("cutArc");
  * @param initData init data.
  * @param parent parent object.
  */
-VToolCutArc::VToolCutArc(const VToolCutInitData &initData, QGraphicsItem * parent)
-    :VToolCut(initData, parent)
+VToolCutArc::VToolCutArc(const VToolCutInitData &initData, QGraphicsItem *parent)
+  : VToolCut(initData, parent)
 {
     ToolCreation(initData.typeCreation);
 }
@@ -112,7 +118,7 @@ auto VToolCutArc::Create(const QPointer<DialogTool> &dialog, VMainGraphicsScene 
     initData.aliasSuffix1 = dialogTool->GetAliasSuffix1();
     initData.aliasSuffix2 = dialogTool->GetAliasSuffix2();
 
-    VToolCutArc* point = Create(initData);
+    VToolCutArc *point = Create(initData);
     if (point != nullptr)
     {
         point->m_dialog = dialog;
@@ -125,13 +131,13 @@ auto VToolCutArc::Create(const QPointer<DialogTool> &dialog, VMainGraphicsScene 
  * @brief Create help create tool.
  * @param initData init data.
  */
-auto VToolCutArc::Create(VToolCutInitData &initData) -> VToolCutArc*
+auto VToolCutArc::Create(VToolCutInitData &initData) -> VToolCutArc *
 {
     const QSharedPointer<VArc> arc = initData.data->GeometricObject<VArc>(initData.baseCurveId);
 
-    //Declare special variable "CurrentLength"
-    auto *length = new VCurveLength(initData.baseCurveId, initData.baseCurveId, arc.data(),
-                                    *initData.data->GetPatternUnit());
+    // Declare special variable "CurrentLength"
+    auto *length =
+        new VCurveLength(initData.baseCurveId, initData.baseCurveId, arc.data(), *initData.data->GetPatternUnit());
     length->SetName(currentLength);
     initData.data->AddVariable(length);
 
@@ -189,7 +195,7 @@ auto VToolCutArc::Create(VToolCutInitData &initData) -> VToolCutArc*
         VAbstractPattern::AddTool(initData.id, tool);
         initData.doc->IncrementReferens(arc->getIdTool());
     }
-    //Very important to delete it. Only this tool need this special variable.
+    // Very important to delete it. Only this tool need this special variable.
     initData.data->RemoveVariable(currentLength);
     return tool;
 }
@@ -207,10 +213,10 @@ void VToolCutArc::ShowContextMenu(QGraphicsSceneContextMenuEvent *event, quint32
     {
         ContextMenu<DialogCutArc>(event, id);
     }
-    catch(const VExceptionToolWasDeleted &e)
+    catch (const VExceptionToolWasDeleted &e)
     {
         Q_UNUSED(e)
-        return;//Leave this method immediately!!!
+        return; // Leave this method immediately!!!
     }
 }
 
@@ -218,8 +224,7 @@ void VToolCutArc::ShowContextMenu(QGraphicsSceneContextMenuEvent *event, quint32
 /**
  * @brief SaveDialog save options into file after change in dialog.
  */
-void VToolCutArc::SaveDialog(QDomElement &domElement, QList<quint32> &oldDependencies,
-                             QList<quint32> &newDependencies)
+void VToolCutArc::SaveDialog(QDomElement &domElement, QList<quint32> &oldDependencies, QList<quint32> &newDependencies)
 {
     SCASSERT(not m_dialog.isNull())
     const QPointer<DialogCutArc> dialogTool = qobject_cast<DialogCutArc *>(m_dialog);
@@ -232,13 +237,13 @@ void VToolCutArc::SaveDialog(QDomElement &domElement, QList<quint32> &oldDepende
     doc->SetAttribute(domElement, AttrLength, dialogTool->GetFormula());
     doc->SetAttribute(domElement, AttrArc, QString().setNum(dialogTool->getArcId()));
     doc->SetAttributeOrRemoveIf<QString>(domElement, AttrAlias1, dialogTool->GetAliasSuffix1(),
-                                         [](const QString &suffix) noexcept {return suffix.isEmpty();});
+                                         [](const QString &suffix) noexcept { return suffix.isEmpty(); });
     doc->SetAttributeOrRemoveIf<QString>(domElement, AttrAlias2, dialogTool->GetAliasSuffix2(),
-                                         [](const QString &suffix) noexcept {return suffix.isEmpty();});
+                                         [](const QString &suffix) noexcept { return suffix.isEmpty(); });
 
     const QString notes = dialogTool->GetNotes();
     doc->SetAttributeOrRemoveIf<QString>(domElement, AttrNotes, notes,
-                                         [](const QString &notes) noexcept {return notes.isEmpty();});
+                                         [](const QString &notes) noexcept { return notes.isEmpty(); });
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -269,8 +274,8 @@ void VToolCutArc::SetVisualization()
         SCASSERT(visual != nullptr)
 
         visual->SetArcId(baseCurveId);
-        visual->SetLength(VAbstractApplication::VApp()->TrVars()
-                          ->FormulaToUser(formula, VAbstractApplication::VApp()->Settings()->GetOsSeparator()));
+        visual->SetLength(VAbstractApplication::VApp()->TrVars()->FormulaToUser(
+            formula, VAbstractApplication::VApp()->Settings()->GetOsSeparator()));
 
         const QSharedPointer<VAbstractCurve> curve = VAbstractTool::data.GeometricObject<VAbstractCurve>(baseCurveId);
         visual->SetLineStyle(LineStyleToPenStyle(curve->GetPenStyle()));
@@ -284,8 +289,8 @@ auto VToolCutArc::MakeToolTip() const -> QString
 {
     const QSharedPointer<VArc> arc = VAbstractTool::data.GeometricObject<VArc>(baseCurveId);
 
-    const QString expression = VAbstractApplication::VApp()->TrVars()
-            ->FormulaToUser(formula, VAbstractApplication::VApp()->Settings()->GetOsSeparator());
+    const QString expression = VAbstractApplication::VApp()->TrVars()->FormulaToUser(
+        formula, VAbstractApplication::VApp()->Settings()->GetOsSeparator());
     const qreal length = Visualization::FindValFromUser(expression, VAbstractTool::data.DataVariables());
 
     const QString arcStr = QCoreApplication::translate("VToolCutArc", "Arc");
@@ -307,28 +312,27 @@ auto VToolCutArc::MakeToolTip() const -> QString
     ar2.SetAliasSuffix(m_aliasSuffix2);
 
     auto ArcToolTip = [arcStr, lengthStr, startAngleStr, endAngleStr, radiusStr](QString toolTip, const VArc &arc,
-            const QString &arcNumber)
+                                                                                 const QString &arcNumber)
     {
-        toolTip += QString("<tr> <td><b>%10:</b> %11</td> </tr>"
-                           "<tr> <td><b>%1:</b> %2 %3</td> </tr>"
-                           "<tr> <td><b>%4:</b> %5 %3</td> </tr>"
-                           "<tr> <td><b>%6:</b> %7°</td> </tr>"
-                           "<tr> <td><b>%8:</b> %9°</td> </tr>")
-                    .arg(arcStr + arcNumber + QChar(QChar::Space) + lengthStr)
-                    .arg(VAbstractValApplication::VApp()->fromPixel(arc.GetLength()))
-                    .arg(UnitsToStr(VAbstractValApplication::VApp()->patternUnits(), true),
-                         arcStr + arcNumber + QChar(QChar::Space) + radiusStr)
-                    .arg(VAbstractValApplication::VApp()->fromPixel(arc.GetRadius()))
-                    .arg(arcStr + arcNumber + QChar(QChar::Space) + startAngleStr)
-                    .arg(arc.GetStartAngle())
-                    .arg(arcStr + arcNumber + QChar(QChar::Space) + endAngleStr)
-                    .arg(arc.GetEndAngle())
-                    .arg(arcStr + arcNumber +
-                                QChar(QChar::Space) + QCoreApplication::translate("VToolCutArc", "label"),
-                            arc.ObjectName());
+        toolTip +=
+            u"<tr> <td><b>%10:</b> %11</td> </tr>"
+            "<tr> <td><b>%1:</b> %2 %3</td> </tr>"
+            "<tr> <td><b>%4:</b> %5 %3</td> </tr>"
+            "<tr> <td><b>%6:</b> %7°</td> </tr>"
+            "<tr> <td><b>%8:</b> %9°</td> </tr>"_s.arg(arcStr + arcNumber + QChar(QChar::Space) + lengthStr)
+                .arg(VAbstractValApplication::VApp()->fromPixel(arc.GetLength()))
+                .arg(UnitsToStr(VAbstractValApplication::VApp()->patternUnits(), true),
+                     arcStr + arcNumber + QChar(QChar::Space) + radiusStr)
+                .arg(VAbstractValApplication::VApp()->fromPixel(arc.GetRadius()))
+                .arg(arcStr + arcNumber + QChar(QChar::Space) + startAngleStr)
+                .arg(arc.GetStartAngle())
+                .arg(arcStr + arcNumber + QChar(QChar::Space) + endAngleStr)
+                .arg(arc.GetEndAngle())
+                .arg(arcStr + arcNumber + QChar(QChar::Space) + QCoreApplication::translate("VToolCutArc", "label"),
+                     arc.ObjectName());
         return toolTip;
     };
 
     return ArcToolTip(ArcToolTip(QStringLiteral("<table>"), ar1, QChar('1')), ar2, QChar('2')) +
-            QStringLiteral("</table>");
+           QStringLiteral("</table>");
 }

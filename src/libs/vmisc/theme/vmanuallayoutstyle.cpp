@@ -30,31 +30,35 @@
 #include <QJsonObject>
 #include <QJsonValue>
 
+#if QT_VERSION < QT_VERSION_CHECK(6, 4, 0)
+#include "../compatibility.h"
+#endif
+
+using namespace Qt::Literals::StringLiterals;
+
 namespace
 {
 QT_WARNING_PUSH
 QT_WARNING_DISABLE_CLANG("-Wunused-member-function")
 
-Q_GLOBAL_STATIC_WITH_ARGS(const QString, ManualLayoutStyleNodeVar, (QLatin1String("ManualLayoutStyle")))     // NOLINT
-Q_GLOBAL_STATIC_WITH_ARGS(const QString, SheetBorderColorVar, (QLatin1String("SheetBorderColor")))           // NOLINT
-Q_GLOBAL_STATIC_WITH_ARGS(const QString, SheetMarginColorVar, (QLatin1String("SheetMarginColor")))           // NOLINT
-Q_GLOBAL_STATIC_WITH_ARGS(const QString, SheetGridColorVar, (QLatin1String("SheetGridColor")))               // NOLINT
-Q_GLOBAL_STATIC_WITH_ARGS(const QString, SheetTileGridColorVar, (QLatin1String("SheetTileGridColor")))       // NOLINT
-Q_GLOBAL_STATIC_WITH_ARGS(const QString, SheetTileNumberColorVar, (QLatin1String("SheetTileNumberColor")))   // NOLINT
-Q_GLOBAL_STATIC_WITH_ARGS(const QString, PieceOkColorVar, (QLatin1String("PieceOkColor")))                   // NOLINT
-Q_GLOBAL_STATIC_WITH_ARGS(const QString, PieceErrorColorVar, (QLatin1String("PieceErrorColor")))             // NOLINT
-Q_GLOBAL_STATIC_WITH_ARGS(const QString, PieceHoverColorVar, (QLatin1String("PieceHoverColor")))             // NOLINT
-Q_GLOBAL_STATIC_WITH_ARGS(const QString, PieceHandleColorVar, (QLatin1String("PieceHandleColor")))           // NOLINT
-Q_GLOBAL_STATIC_WITH_ARGS(const QString, PieceHandleHoverColorVar, (QLatin1String("PieceHandleHoverColor"))) // NOLINT
-Q_GLOBAL_STATIC_WITH_ARGS(const QString, CarrouselPieceColorVar, (QLatin1String("CarrouselPieceColor")))     // NOLINT
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, ManualLayoutStyleNodeVar, ("ManualLayoutStyle"_L1))     // NOLINT
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, SheetBorderColorVar, ("SheetBorderColor"_L1))           // NOLINT
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, SheetMarginColorVar, ("SheetMarginColor"_L1))           // NOLINT
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, SheetGridColorVar, ("SheetGridColor"_L1))               // NOLINT
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, SheetTileGridColorVar, ("SheetTileGridColor"_L1))       // NOLINT
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, SheetTileNumberColorVar, ("SheetTileNumberColor"_L1))   // NOLINT
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, PieceOkColorVar, ("PieceOkColor"_L1))                   // NOLINT
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, PieceErrorColorVar, ("PieceErrorColor"_L1))             // NOLINT
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, PieceHoverColorVar, ("PieceHoverColor"_L1))             // NOLINT
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, PieceHandleColorVar, ("PieceHandleColor"_L1))           // NOLINT
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, PieceHandleHoverColorVar, ("PieceHandleHoverColor"_L1)) // NOLINT
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, CarrouselPieceColorVar, ("CarrouselPieceColor"_L1))     // NOLINT
 // NOLINTNEXTLINE
-Q_GLOBAL_STATIC_WITH_ARGS(const QString, CarrouselPieceSelectedColorVar, (QLatin1String("CarrouselPieceSelectedColor")))
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, CarrouselPieceSelectedColorVar, ("CarrouselPieceSelectedColor"_L1))
 // NOLINTNEXTLINE
-Q_GLOBAL_STATIC_WITH_ARGS(const QString, CarrouselPieceBackgroundColorVar,
-                          (QLatin1String("CarrouselPieceBackgroundColor")))
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, CarrouselPieceBackgroundColorVar, ("CarrouselPieceBackgroundColor"_L1))
 // NOLINTNEXTLINE
-Q_GLOBAL_STATIC_WITH_ARGS(const QString, CarrouselPieceForegroundColorVar,
-                          (QLatin1String("CarrouselPieceForegroundColor")))
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, CarrouselPieceForegroundColorVar, ("CarrouselPieceForegroundColor"_L1))
 
 QT_WARNING_POP
 } // namespace

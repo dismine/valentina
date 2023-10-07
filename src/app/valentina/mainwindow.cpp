@@ -236,6 +236,12 @@ using namespace bpstd::literals::chrono_literals;
 #endif // __cplusplus >= 201402L
 #endif //(defined(Q_CC_GNU) && Q_CC_GNU < 409) && !defined(Q_CC_CLANG)
 
+#if QT_VERSION < QT_VERSION_CHECK(6, 4, 0)
+#include "../vmisc/compatibility.h"
+#endif
+
+using namespace Qt::Literals::StringLiterals;
+
 QT_WARNING_PUSH
 QT_WARNING_DISABLE_CLANG("-Wmissing-prototypes")
 QT_WARNING_DISABLE_INTEL(1418)
@@ -249,7 +255,7 @@ namespace
 QT_WARNING_PUSH
 QT_WARNING_DISABLE_CLANG("-Wunused-member-function")
 
-Q_GLOBAL_STATIC_WITH_ARGS(const QString, autosavePrefix, (QLatin1String(".autosave"))) // NOLINT
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, autosavePrefix, (".autosave"_L1)) // NOLINT
 
 QT_WARNING_POP
 
@@ -779,11 +785,11 @@ void MainWindow::ReadMeasurements(qreal baseA, qreal baseB, qreal baseC)
 
             if (name == nullptr)
             {
-                name = new QLabel(dimension->Name() + QChar(':'));
+                name = new QLabel(dimension->Name() + ':'_L1);
             }
             else
             {
-                name->setText(dimension->Name() + QChar(':'));
+                name->setText(dimension->Name() + ':'_L1);
             }
             name->setToolTip(VAbstartMeasurementDimension::DimensionToolTip(dimension, m_m->IsFullCircumference()));
 
@@ -850,7 +856,7 @@ void MainWindow::SetToolButton(bool checked, Tool t, const QString &cursor, cons
             if (qApp->devicePixelRatio() >= 2) // NOLINT(cppcoreguidelines-pro-type-static-cast-downcast)
             {
                 // Try to load HiDPI versions of the cursors if availible
-                auto hiDPICursor = QString(cursor).replace(QLatin1String(".png"), QLatin1String("@2x.png"));
+                auto hiDPICursor = QString(cursor).replace(".png"_L1, "@2x.png"_L1);
                 auto cursorHiDPIResource = VTheme::GetResourceName(resource, hiDPICursor);
                 if (QFileInfo::exists(cursorHiDPIResource))
                 {
@@ -2324,7 +2330,7 @@ void MainWindow::StoreMultisizeMDimensions()
     {
         if (not m_dimensionALabel.isNull())
         {
-            m_dimensionALabel->setText(dimensions.at(0)->Name() + QChar(':'));
+            m_dimensionALabel->setText(dimensions.at(0)->Name() + ':'_L1);
         }
     }
 
@@ -2332,7 +2338,7 @@ void MainWindow::StoreMultisizeMDimensions()
     {
         if (not m_dimensionBLabel.isNull())
         {
-            m_dimensionBLabel->setText(dimensions.at(1)->Name() + QChar(':'));
+            m_dimensionBLabel->setText(dimensions.at(1)->Name() + ':'_L1);
         }
     }
 
@@ -2340,7 +2346,7 @@ void MainWindow::StoreMultisizeMDimensions()
     {
         if (not m_dimensionCLabel.isNull())
         {
-            m_dimensionCLabel->setText(dimensions.at(2)->Name() + QChar(':'));
+            m_dimensionCLabel->setText(dimensions.at(2)->Name() + ':'_L1);
         }
     }
 
@@ -4087,8 +4093,8 @@ auto MainWindow::on_actionSaveAs_triggered() -> bool
     }
 
     QString filters(tr("Pattern files") + QStringLiteral("(*.val)"));
-    QString fileName = QFileDialog::getSaveFileName(this, tr("Save as"), dir + QChar('/') + newFileName, filters,
-                                                    nullptr, VAbstractApplication::VApp()->NativeFileDialog());
+    QString fileName = QFileDialog::getSaveFileName(this, tr("Save as"), dir + '/'_L1 + newFileName, filters, nullptr,
+                                                    VAbstractApplication::VApp()->NativeFileDialog());
 
     if (fileName.isEmpty())
     {
@@ -4096,9 +4102,9 @@ auto MainWindow::on_actionSaveAs_triggered() -> bool
     }
 
     QFileInfo f(fileName);
-    if (f.suffix().isEmpty() && f.suffix() != QLatin1String("val"))
+    if (f.suffix().isEmpty() && f.suffix() != "val"_L1)
     {
-        fileName += QLatin1String(".val");
+        fileName += ".val"_L1;
     }
 
     if (patternPath.isEmpty())
@@ -5240,11 +5246,11 @@ void MainWindow::InitDimensionControls()
 
                 if (name.isNull())
                 {
-                    name = new QLabel(dimension->Name() + QChar(':'));
+                    name = new QLabel(dimension->Name() + ':'_L1);
                 }
                 else
                 {
-                    name->setText(dimension->Name() + QChar(':'));
+                    name->setText(dimension->Name() + ':'_L1);
                 }
                 name->setToolTip(VAbstartMeasurementDimension::DimensionToolTip(dimension, m_m->IsFullCircumference()));
 
@@ -5527,7 +5533,7 @@ auto MainWindow::SavePattern(const QString &fileName, QString &error) -> bool
     const bool result = doc->SaveDocument(fileName, error);
     if (result)
     {
-        if (tempInfo.suffix() != QLatin1String("autosave"))
+        if (tempInfo.suffix() != "autosave"_L1)
         {
             setCurrentFile(fileName);
             statusBar()->showMessage(tr("File saved"), 5000);
@@ -6243,7 +6249,7 @@ auto MainWindow::LoadPattern(QString fileName, const QString &customMeasureFile)
         QFileInfo info(fileName);
         if (info.exists() && info.isRelative())
         {
-            fileName = QFileInfo(QDir::currentPath() + QLatin1Char('/') + fileName).canonicalFilePath();
+            fileName = QFileInfo(QDir::currentPath() + '/'_L1 + fileName).canonicalFilePath();
         }
     }
 
@@ -6646,7 +6652,7 @@ void MainWindow::CreateMeasurements()
     QStringList arguments;
     if (isNoScaling)
     {
-        arguments.append(QLatin1String("--") + LONG_OPTION_NO_HDPI_SCALING);
+        arguments.append("--"_L1 + LONG_OPTION_NO_HDPI_SCALING);
     }
 
     QProcess::startDetached(tape, arguments, workingDirectory);
@@ -6659,7 +6665,7 @@ void MainWindow::ExportDrawAs()
     auto Uncheck = qScopeGuard([this] { ui->actionExportDraw->setChecked(false); });
 
     QString filters(tr("Scalable Vector Graphics files") + QStringLiteral("(*.svg)"));
-    QString dir = QDir::homePath() + QChar('/') + FileName() + QStringLiteral(".svg");
+    QString dir = QDir::homePath() + '/'_L1 + FileName() + QStringLiteral(".svg");
     QString fileName = QFileDialog::getSaveFileName(this, tr("Save draw"), dir, filters, nullptr,
                                                     VAbstractApplication::VApp()->NativeFileDialog());
 
@@ -6669,9 +6675,9 @@ void MainWindow::ExportDrawAs()
     }
 
     QFileInfo f(fileName);
-    if (f.suffix().isEmpty() || f.suffix() != QLatin1String("svg"))
+    if (f.suffix().isEmpty() || f.suffix() != "svg"_L1)
     {
-        fileName += QLatin1String(".svg");
+        fileName += ".svg"_L1;
     }
 
     ExportDraw(fileName);
@@ -6867,7 +6873,7 @@ auto MainWindow::CheckPathToMeasurements(const QString &patternPath, const QStri
     }
 
     MeasurementsType patternType;
-    if (table.suffix() == QLatin1String("vst"))
+    if (table.suffix() == "vst"_L1)
     {
         patternType = MeasurementsType::Multisize;
     }
@@ -7194,7 +7200,7 @@ auto MainWindow::DoFMExport(const VCommandLinePtr &expParams) -> bool
     QFileInfo info(filePath);
     if (info.isRelative())
     {
-        filePath = QDir::currentPath() + QLatin1Char('/') + filePath;
+        filePath = QDir::currentPath() + '/'_L1 + filePath;
     }
 
     const QString codecName = expParams->OptCSVCodecName();
@@ -7429,7 +7435,7 @@ auto MainWindow::GetPatternFileName() -> QString
     {
         shownName = StrippedName(VAbstractValApplication::VApp()->GetPatternPath());
     }
-    shownName += QLatin1String("[*]");
+    shownName += "[*]"_L1;
     return shownName;
 }
 
@@ -7446,10 +7452,10 @@ auto MainWindow::GetMeasurementFileName() -> QString
 
     if (m_mChanges)
     {
-        shownName += QChar('*');
+        shownName += '*'_L1;
     }
 
-    shownName += QChar(']');
+    shownName += ']'_L1;
     return shownName;
 }
 
@@ -7474,14 +7480,12 @@ void MainWindow::UpdateWindowTitle()
     }
     else
     {
-        setWindowTitle(GetPatternFileName() + GetMeasurementFileName() + QStringLiteral(" (") + tr("read only") +
-                       QChar(')'));
+        setWindowTitle(GetPatternFileName() + GetMeasurementFileName() + " ("_L1 + tr("read only") + ')'_L1);
     }
     setWindowFilePath(VAbstractValApplication::VApp()->GetPatternPath());
 
 #if defined(Q_OS_MAC)
-    static QIcon fileIcon =
-        QIcon(QCoreApplication::applicationDirPath() + QLatin1String("/../Resources/Valentina.icns"));
+    static QIcon fileIcon = QIcon(QCoreApplication::applicationDirPath() + "/../Resources/Valentina.icns"_L1);
     QIcon icon;
     if (not VAbstractValApplication::VApp()->GetPatternPath().isEmpty())
     {

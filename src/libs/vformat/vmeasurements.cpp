@@ -54,6 +54,12 @@
 #include "../vpatterndb/vcontainer.h"
 #include "def.h"
 
+#if QT_VERSION < QT_VERSION_CHECK(6, 4, 0)
+#include "../vmisc/compatibility.h"
+#endif
+
+using namespace Qt::Literals::StringLiterals;
+
 const QString VMeasurements::TagVST = QStringLiteral("vst");
 const QString VMeasurements::TagVIT = QStringLiteral("vit");
 const QString VMeasurements::TagBodyMeasurements = QStringLiteral("body-measurements");
@@ -111,14 +117,14 @@ namespace
 QT_WARNING_PUSH
 QT_WARNING_DISABLE_CLANG("-Wunused-member-function")
 
-Q_GLOBAL_STATIC_WITH_ARGS(const QString, defBirthDate, (QLatin1String("1800-01-01"))) // NOLINT
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, defBirthDate, ("1800-01-01"_L1)) // NOLINT
 
 QT_WARNING_POP
 
 //---------------------------------------------------------------------------------------------------------------------
 auto FileComment() -> QString
 {
-    return QString("Measurements created with Valentina v%1 (https://smart-pattern.com.ua/).").arg(AppVersionStr());
+    return u"Measurements created with Valentina v%1 (https://smart-pattern.com.ua/)."_s.arg(AppVersionStr());
 }
 } // namespace
 
@@ -1295,7 +1301,7 @@ auto VMeasurements::UniqueTagAttr(const QString &tag, const QString &attr, qreal
             const QDomElement domElement = domNode.toElement();
             if (domElement.isNull() == false)
             {
-                return GetParametrDouble(domElement, attr, QString("%1").arg(defVal));
+                return GetParametrDouble(domElement, attr, u"%1"_s.arg(defVal));
             }
         }
     }
@@ -1476,7 +1482,7 @@ auto VMeasurements::EvalFormula(VContainer *data, const QString &formula, bool *
 auto VMeasurements::ClearPMCode(const QString &code) const -> QString
 {
     QString clear = code;
-    const vsizetype index = clear.indexOf(QLatin1Char('p'));
+    const vsizetype index = clear.indexOf('p'_L1);
     if (index == 0)
     {
         clear.remove(0, 1);

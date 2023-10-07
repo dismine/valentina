@@ -59,6 +59,12 @@
 #include <QTimer>
 #include <qnumeric.h>
 
+#if QT_VERSION < QT_VERSION_CHECK(6, 4, 0)
+#include "../vmisc/compatibility.h"
+#endif
+
+using namespace Qt::Literals::StringLiterals;
+
 const QColor errorColor = Qt::red;
 
 namespace
@@ -640,31 +646,31 @@ auto GetNodeName(const VContainer *data, const VPieceNode &node, bool showPassma
             switch (node.GetPassmarkLineType())
             {
                 case PassmarkLineType::OneLine:
-                    name += QLatin1Char('|');
+                    name += '|'_L1;
                     break;
                 case PassmarkLineType::TwoLines:
-                    name += QLatin1String("||");
+                    name += "||"_L1;
                     break;
                 case PassmarkLineType::ThreeLines:
-                    name += QLatin1String("|||");
+                    name += "|||"_L1;
                     break;
                 case PassmarkLineType::TMark:
-                    name += QStringLiteral("┴");
+                    name += "┴"_L1;
                     break;
                 case PassmarkLineType::ExternalVMark:
-                    name += QStringLiteral("⊼");
+                    name += "⊼"_L1;
                     break;
                 case PassmarkLineType::InternalVMark:
-                    name += QStringLiteral("⊽");
+                    name += "⊽"_L1;
                     break;
                 case PassmarkLineType::UMark:
-                    name += QStringLiteral("⋃");
+                    name += "⋃"_L1;
                     break;
                 case PassmarkLineType::BoxMark:
-                    name += QStringLiteral("⎕");
+                    name += "⎕"_L1;
                     break;
                 case PassmarkLineType::CheckMark:
-                    name += QStringLiteral("✓");
+                    name += "✓"_L1;
                     break;
                 default:
                     break;
@@ -673,12 +679,12 @@ auto GetNodeName(const VContainer *data, const VPieceNode &node, bool showPassma
 
         if (not node.IsCheckUniqueness())
         {
-            name = QLatin1Char('[') + name + QLatin1Char(']');
+            name = '['_L1 + name + ']'_L1;
         }
 
         if (not node.IsTurnPoint())
         {
-            name += QStringLiteral(" ⦿");
+            name += " ⦿"_L1;
         }
     }
 

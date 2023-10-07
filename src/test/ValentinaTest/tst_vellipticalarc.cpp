@@ -33,6 +33,12 @@
 #include <QtGlobal>
 #include <QtTest>
 
+#if QT_VERSION < QT_VERSION_CHECK(6, 4, 0)
+#include "../vmisc/compatibility.h"
+#endif
+
+using namespace Qt::Literals::StringLiterals;
+
 //---------------------------------------------------------------------------------------------------------------------
 TST_VEllipticalArc::TST_VEllipticalArc(QObject *parent)
   : AbstractTest(parent)
@@ -88,8 +94,7 @@ void TST_VEllipticalArc::CompareTwoWays()
     const qreal lengthEps = ToPixel(0.45, Unit::Mm); // computing error
 
     // cppcheck-suppress unreadVariable
-    QString errorLengthMsg =
-        QString("Difference between real and computing lengthes bigger than eps = %1. l1 = %2; l2 = %3");
+    QString errorLengthMsg = u"Difference between real and computing lengthes bigger than eps = %1. l1 = %2; l2 = %3"_s;
     QVERIFY2(qAbs(arc2.GetLength() - length) <= lengthEps,
              qUtf8Printable(errorLengthMsg.arg(lengthEps).arg(arc2.GetLength()).arg(length)));
     QVERIFY2(qAbs(arc1.GetLength() - arc2.GetLength()) <= lengthEps,
@@ -98,7 +103,7 @@ void TST_VEllipticalArc::CompareTwoWays()
     const qreal angleEps = 0.4;
     // cppcheck-suppress unreadVariable
     const QString errorAngleMsg =
-        QString("Difference between real and computing angles bigger than eps = %1. f1 = %2; f2 = %3");
+        u"Difference between real and computing angles bigger than eps = %1. f1 = %2; f2 = %3"_s;
     // compare angles
     const qreal diff = qAbs(arc1.GetEndAngle() - arc2.GetEndAngle());
     QVERIFY2(qAbs(diff - 360.0 * (diff / 360.0)) <= angleEps,
@@ -124,7 +129,7 @@ void TST_VEllipticalArc::NegativeArc()
     const qreal eps = ToPixel(0.45, Unit::Mm); // computing error
     // cppcheck-suppress unreadVariable
     const QString errorMsg =
-        QString("Difference between real and computing lengthes bigger than eps = %1.  v1 = %2; v2 = %3");
+        u"Difference between real and computing lengthes bigger than eps = %1.  v1 = %2; v2 = %3"_s;
 
     QVERIFY2(qAbs(arc.GetLength() + length) <= eps, qUtf8Printable(errorMsg.arg(eps).arg(arc.GetLength()).arg(length)));
 
@@ -294,9 +299,8 @@ void TST_VEllipticalArc::TestGetPoints1()
             const qreal equationRes = p.rx() * p.rx() / (radius1 * radius1) + p.ry() * p.ry() / (radius2 * radius2);
             const qreal diff = qAbs(equationRes - 1);
             // cppcheck-suppress unreadVariable
-            const QString errorMsg = QString("Broken the first rule. Any point must satisfy the equation of ellipse."
-                                             "diff = '%1' > eps = '%2'")
-                                         .number(diff)
+            const QString errorMsg = u"Broken the first rule. Any point must satisfy the equation of ellipse."
+                                     "diff = '%1' > eps = '%2'"_s.number(diff)
                                          .number(eps);
             QVERIFY2(diff <= eps, qUtf8Printable(errorMsg));
         }
@@ -367,11 +371,10 @@ void TST_VEllipticalArc::TestGetPoints2()
         const qreal resultingDistance = rLine1.length() + rLine2.length();
         const qreal diff = qAbs(resultingDistance - distance);
         // cppcheck-suppress unreadVariable
-        const QString errorMsg = QString("Broken the first rule, part 2. Distance from the any point to the focus1"
-                                         " plus distance from this point to the focus2 should be the same. Problem"
-                                         " with point '%1'. The disired distance is '%2', but resulting distance"
-                                         " is '%3'. Difference is '%4' and it biggest than eps '%5')")
-                                     .number(i)
+        const QString errorMsg = u"Broken the first rule, part 2. Distance from the any point to the focus1"
+                                 " plus distance from this point to the focus2 should be the same. Problem"
+                                 " with point '%1'. The disired distance is '%2', but resulting distance"
+                                 " is '%3'. Difference is '%4' and it biggest than eps '%5')"_s.number(i)
                                      .number(distance)
                                      .number(resultingDistance)
                                      .number(diff)
@@ -403,9 +406,8 @@ void TST_VEllipticalArc::TestGetPoints3()
         const qreal arcSquare = qAbs(VAbstractPiece::SumTrapezoids(points) / 2.0);
         const qreal diffSquare = qAbs(ellipseSquare - arcSquare);
         // cppcheck-suppress unreadVariable
-        const QString errorMsg1 = QString("Broken the second rule. Interpolation has too big computing error. "
-                                          "Difference ='%1' bigger than eps = '%2'.")
-                                      .arg(diffSquare)
+        const QString errorMsg1 = u"Broken the second rule. Interpolation has too big computing error. "
+                                  "Difference ='%1' bigger than eps = '%2'."_s.arg(diffSquare)
                                       .arg(epsSquare);
         QVERIFY2(diffSquare <= epsSquare, qUtf8Printable(errorMsg1));
     }
@@ -434,9 +436,8 @@ void TST_VEllipticalArc::TestGetPoints4()
         const qreal arcLength = VEllipticalArc(center, radius1, radius2, 0, 360, 0).GetLength();
         const qreal diffLength = qAbs(arcLength - ellipseLength);
         // cppcheck-suppress unreadVariable
-        const QString errorMsg2 = QString("Difference between real and computing lengthes "
-                                          "(diff = '%1') bigger than eps = '%2'.")
-                                      .arg(diffLength)
+        const QString errorMsg2 = u"Difference between real and computing lengthes "
+                                  "(diff = '%1') bigger than eps = '%2'."_s.arg(diffLength)
                                       .arg(epsLength);
         QVERIFY2(diffLength <= epsLength, qUtf8Printable(errorMsg2));
     }
@@ -543,11 +544,10 @@ void TST_VEllipticalArc::TestRotation()
     const VEllipticalArc rotatedArc = arcOrigin.Rotate(rotatePoint, degrees, prefix);
 
     QVERIFY2(qAbs(arcOrigin.AngleArc() - rotatedArc.AngleArc()) <= 1.6,
-             qUtf8Printable(QString("a1 = %1, a2 - %2").arg(arcOrigin.AngleArc()).arg(rotatedArc.AngleArc())));
+             qUtf8Printable(u"a1 = %1, a2 - %2"_s.arg(arcOrigin.AngleArc()).arg(rotatedArc.AngleArc())));
 
     // cppcheck-suppress unreadVariable
-    QString errorLengthMsg =
-        QString("Difference between real and computing lengthes bigger than eps = %1. l1 = %2; l2 = %3");
+    QString errorLengthMsg = u"Difference between real and computing lengthes bigger than eps = %1. l1 = %2; l2 = %3"_s;
     QVERIFY2(qAbs(arcOrigin.GetLength() - rotatedArc.GetLength()) <= ToPixel(1, Unit::Mm),
              qUtf8Printable(
                  errorLengthMsg.arg(ToPixel(1, Unit::Mm)).arg(arcOrigin.GetLength()).arg(rotatedArc.GetLength())));
@@ -556,7 +556,7 @@ void TST_VEllipticalArc::TestRotation()
     QCOMPARE(arcOrigin.GetRadius2(), rotatedArc.GetRadius2());
     QCOMPARE(arcOrigin.GetRotationAngle(), rotatedArc.GetRotationAngle());
     // cppcheck-suppress unreadVariable
-    const QString errorMsg = QString("The name doesn't contain the prefix '%1'.").arg(prefix);
+    const QString errorMsg = u"The name doesn't contain the prefix '%1'."_s.arg(prefix);
     QVERIFY2(rotatedArc.name().endsWith(prefix), qUtf8Printable(errorMsg));
 }
 

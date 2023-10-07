@@ -34,6 +34,12 @@
 
 #include "vtheme.h"
 
+#if QT_VERSION < QT_VERSION_CHECK(6, 4, 0)
+#include "../compatibility.h"
+#endif
+
+using namespace Qt::Literals::StringLiterals;
+
 namespace
 {
 auto StandardIconPaths() -> QHash<QStyle::StandardPixmap, QString>
@@ -239,7 +245,7 @@ auto VApplicationStyle::layoutSpacing(QSizePolicy::ControlType control1, QSizePo
 auto VApplicationStyle::StyleIcon(StandardPixmap standardIcon, const QStyleOption *option, const QWidget *widget) const
     -> QIcon
 {
-    if (VTheme::ThemeStylesheet() == QLatin1String("native"))
+    if (VTheme::ThemeStylesheet() == "native"_L1)
     {
         return m_style->standardIcon(standardIcon, option, widget);
     }

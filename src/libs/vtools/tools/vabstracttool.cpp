@@ -35,6 +35,7 @@
 #include <QGraphicsLineItem>
 #include <QHash>
 #include <QLineF>
+#include <QMessageBox>
 #include <QPen>
 #include <QPixmap>
 #include <QPoint>
@@ -45,34 +46,39 @@
 #include <QVector>
 #include <new>
 #include <qnumeric.h>
-#include <QMessageBox>
 
-#include "../vgeometry/vpointf.h"
-#include "../vwidgets/vmaingraphicsview.h"
+#include "../dialogs/support/dialogeditwrongformula.h"
+#include "../dialogs/support/dialogundo.h"
 #include "../ifc/exception/vexception.h"
 #include "../ifc/exception/vexceptionundo.h"
 #include "../ifc/xml/vtoolrecord.h"
 #include "../undocommands/deltool.h"
 #include "../vgeometry/../ifc/ifcdef.h"
-#include "../vgeometry/vgeometrydef.h"
-#include "../vgeometry/vgobject.h"
+#include "../vgeometry/varc.h"
 #include "../vgeometry/vcubicbezier.h"
 #include "../vgeometry/vcubicbezierpath.h"
-#include "../vgeometry/vsplinepath.h"
-#include "../vgeometry/varc.h"
 #include "../vgeometry/vellipticalarc.h"
+#include "../vgeometry/vgeometrydef.h"
+#include "../vgeometry/vgobject.h"
+#include "../vgeometry/vpointf.h"
+#include "../vgeometry/vsplinepath.h"
+#include "../vpatterndb/calculator.h"
 #include "../vpatterndb/vcontainer.h"
 #include "../vpatterndb/vpiecenode.h"
-#include "../vpatterndb/calculator.h"
-#include "../dialogs/support/dialogundo.h"
-#include "../dialogs/support/dialogeditwrongformula.h"
-#include "toolsdef.h"
+#include "../vwidgets/vmaingraphicsview.h"
 #include "nodeDetails/vabstractnode.h"
-#include "nodeDetails/vnodepoint.h"
 #include "nodeDetails/vnodearc.h"
 #include "nodeDetails/vnodeellipticalarc.h"
+#include "nodeDetails/vnodepoint.h"
 #include "nodeDetails/vnodespline.h"
 #include "nodeDetails/vnodesplinepath.h"
+#include "toolsdef.h"
+
+#if QT_VERSION < QT_VERSION_CHECK(6, 4, 0)
+#include "../vmisc/compatibility.h"
+#endif
+
+using namespace Qt::Literals::StringLiterals;
 
 template <class T> class QSharedPointer;
 
@@ -88,11 +94,11 @@ const QString VAbstractTool::AttrInUse = QStringLiteral("inUse");
  * @param parent parent object.
  */
 VAbstractTool::VAbstractTool(VAbstractPattern *doc, VContainer *data, quint32 id, QObject *parent)
-    :VDataTool(data, parent),
-      doc(doc),
-      m_id(id),
-      vis(),
-      selectionType(SelectionType::ByMouseRelease)
+  : VDataTool(data, parent),
+    doc(doc),
+    m_id(id),
+    vis(),
+    selectionType(SelectionType::ByMouseRelease)
 {
     SCASSERT(doc != nullptr)
     connect(this, &VAbstractTool::toolhaveChange, this->doc, &VAbstractPattern::haveLiteChange);
@@ -141,7 +147,7 @@ auto VAbstractTool::CheckFormula(const quint32 &toolId, QString &formula, VConta
     {
         qDebug() << "\nMath parser error:\n"
                  << "--------------------------------------\n"
-                 << "Message:     " << e.GetMsg()  << "\n"
+                 << "Message:     " << e.GetMsg() << "\n"
                  << "Expression:  " << e.GetExpr() << "\n"
                  << "--------------------------------------";
 
@@ -155,8 +161,8 @@ auto VAbstractTool::CheckFormula(const quint32 &toolId, QString &formula, VConta
                     const UndoButton resultUndo = dialogUndo->Result();
                     if (resultUndo == UndoButton::Fix)
                     {
-                        auto *dialog = new DialogEditWrongFormula(data, toolId,
-                                                                  VAbstractValApplication::VApp()->getMainWindow());
+                        auto *dialog =
+                            new DialogEditWrongFormula(data, toolId, VAbstractValApplication::VApp()->getMainWindow());
                         dialog->setWindowTitle(tr("Edit wrong formula"));
                         dialog->SetFormula(formula);
                         if (dialog->exec() == QDialog::Accepted)
@@ -183,7 +189,7 @@ auto VAbstractTool::CheckFormula(const quint32 &toolId, QString &formula, VConta
                     }
                     else
                     {
-                        throw VExceptionUndo(QString("Undo wrong formula %1").arg(formula));
+                        throw VExceptionUndo(u"Undo wrong formula %1"_s.arg(formula));
                     }
                 }
                 else
@@ -245,25 +251,10 @@ void VAbstractTool::PerformDelete()
 //---------------------------------------------------------------------------------------------------------------------
 auto VAbstractTool::Colors() -> const QStringList
 {
-    return QStringList {
-        ColorBlack,
-        ColorGreen,
-        ColorBlue,
-        ColorDarkRed,
-        ColorDarkGreen,
-        ColorDarkBlue,
-        ColorYellow,
-        ColorLightSalmon,
-        ColorGoldenRod,
-        ColorOrange,
-        ColorDeepPink,
-        ColorViolet,
-        ColorDarkViolet,
-        ColorMediumSeaGreen,
-        ColorLime,
-        ColorDeepSkyBlue,
-        ColorCornFlowerBlue
-    };
+    return QStringList{ColorBlack,       ColorGreen,         ColorBlue,        ColorDarkRed,        ColorDarkGreen,
+                       ColorDarkBlue,    ColorYellow,        ColorLightSalmon, ColorGoldenRod,      ColorOrange,
+                       ColorDeepPink,    ColorViolet,        ColorDarkViolet,  ColorMediumSeaGreen, ColorLime,
+                       ColorDeepSkyBlue, ColorCornFlowerBlue};
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -340,9 +331,9 @@ auto VAbstractTool::ColorsList() -> QMap<QString, QString>
 // cppcheck-suppress unusedFunction
 auto VAbstractTool::PointsList() const -> QMap<QString, quint32>
 {
-    const QHash<quint32, QSharedPointer<VGObject> > *objs = data.CalculationGObjects();
+    const QHash<quint32, QSharedPointer<VGObject>> *objs = data.CalculationGObjects();
     QMap<QString, quint32> list;
-    QHash<quint32, QSharedPointer<VGObject> >::const_iterator i;
+    QHash<quint32, QSharedPointer<VGObject>>::const_iterator i;
     for (i = objs->constBegin(); i != objs->constEnd(); ++i)
     {
         if (i.key() != m_id)
@@ -415,7 +406,7 @@ auto VAbstractTool::GetRecord(const quint32 id, const Tool &toolType, VAbstractP
 void VAbstractTool::RemoveRecord(const VToolRecord &record, VAbstractPattern *doc)
 {
     QVector<VToolRecord> *history = doc->getHistory();
-    for(int i = 0; i < history->size(); ++i)
+    for (int i = 0; i < history->size(); ++i)
     {
         if (history->at(i) == record)
         {
@@ -442,7 +433,7 @@ void VAbstractTool::AddRecord(const VToolRecord &record, VAbstractPattern *doc)
     else
     {
         qint32 index = 0;
-        for (qint32 i = 0; i<history->size(); ++i)
+        for (qint32 i = 0; i < history->size(); ++i)
         {
             VToolRecord rec = history->at(i);
             if (rec.getId() == cursor)
@@ -451,7 +442,7 @@ void VAbstractTool::AddRecord(const VToolRecord &record, VAbstractPattern *doc)
                 break;
             }
         }
-        history->insert(index+1, record);
+        history->insert(index + 1, record);
     }
 }
 
@@ -513,9 +504,9 @@ auto VAbstractTool::AddSANode(VAbstractPattern *doc, const QString &tagName, con
     }
 
     doc->SetAttributeOrRemoveIf<bool>(nod, VAbstractPattern::AttrNodeExcluded, node.IsExcluded(),
-                                      [](bool exclude) noexcept {return not exclude;});
+                                      [](bool exclude) noexcept { return not exclude; });
     doc->SetAttributeOrRemoveIf<bool>(nod, VAbstractPattern::AttrCheckUniqueness, node.IsCheckUniqueness(),
-                                      [](bool uniqueness) noexcept {return uniqueness;});
+                                      [](bool uniqueness) noexcept { return uniqueness; });
 
     switch (type)
     {
@@ -535,7 +526,7 @@ auto VAbstractTool::AddSANode(VAbstractPattern *doc, const QString &tagName, con
             doc->SetAttribute(nod, AttrType, VAbstractPattern::NodeSplinePath);
             break;
         default:
-            qDebug()<<"May be wrong tool type!!! Ignoring."<<Q_FUNC_INFO;
+            qDebug() << "May be wrong tool type!!! Ignoring." << Q_FUNC_INFO;
             break;
     }
 
@@ -632,7 +623,7 @@ auto VAbstractTool::PrepareNodes(const VPiecePath &path, VMainGraphicsScene *sce
                                  VContainer *data) -> QVector<VPieceNode>
 {
     QVector<VPieceNode> nodes;
-    for (int i = 0; i< path.CountNodes(); ++i)
+    for (int i = 0; i < path.CountNodes(); ++i)
     {
         VPieceNode nodeD = path.at(i);
         const quint32 id = PrepareNode(nodeD, scene, doc, data);
@@ -684,7 +675,7 @@ auto VAbstractTool::PrepareNode(const VPieceNode &node, VMainGraphicsScene *scen
             VNodeSplinePath::Create(initData);
             break;
         default:
-            qDebug()<<"May be wrong tool type!!! Ignoring."<<Q_FUNC_INFO;
+            qDebug() << "May be wrong tool type!!! Ignoring." << Q_FUNC_INFO;
             break;
     }
     return initData.id;

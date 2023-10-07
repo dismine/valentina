@@ -64,6 +64,12 @@
 #include "../vwidgets/vmaingraphicsview.h"
 #include "vtoolsinglepoint.h"
 
+#if QT_VERSION < QT_VERSION_CHECK(6, 4, 0)
+#include "../vmisc/compatibility.h"
+#endif
+
+using namespace Qt::Literals::StringLiterals;
+
 const QString VToolBasePoint::ToolType = QStringLiteral("single");
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -331,10 +337,9 @@ auto VToolBasePoint::MakeToolTip() const -> QString
 {
     const QSharedPointer<VPointF> point = VAbstractTool::data.GeometricObject<VPointF>(m_id);
 
-    const QString toolTip = QString("<table>"
-                                    "<tr> <td><b>%1:</b> %2</td> </tr>"
-                                    "</table>")
-                                .arg(tr("Label"), point->name());
+    const QString toolTip = u"<table>"
+                            "<tr> <td><b>%1:</b> %2</td> </tr>"
+                            "</table>"_s.arg(tr("Label"), point->name());
     return toolTip;
 }
 

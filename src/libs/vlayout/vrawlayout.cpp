@@ -28,9 +28,9 @@
 #include "vrawlayout.h"
 
 #include <QDataStream>
-#include <QIODevice>
 #include <QDebug>
 #include <QFile>
+#include <QIODevice>
 
 #if QT_VERSION < QT_VERSION_CHECK(5, 12, 0)
 #include "../vmisc/backport/qscopeguard.h"
@@ -38,10 +38,16 @@
 #include <QScopeGuard>
 #endif
 
-#include "../vmisc/def.h"
 #include "../ifc/exception/vexception.h"
+#include "../vmisc/def.h"
 
-const QByteArray VRawLayout::fileHeaderByteArray = QByteArray("RLD!...");
+#if QT_VERSION < QT_VERSION_CHECK(6, 4, 0)
+#include "../vmisc/compatibility.h"
+#endif
+
+using namespace Qt::Literals::StringLiterals;
+
+const QByteArray VRawLayout::fileHeaderByteArray = "RLD!..."_ba;
 const quint16 VRawLayout::fileVersion = 1;
 
 const quint32 VRawLayoutData::streamHeader = 0x8B0E8A27; // CRC-32Q string "VRawLayoutData"
@@ -70,8 +76,8 @@ auto operator>>(QDataStream &dataStream, VRawLayoutData &data) -> QDataStream &
     {
         QString message = QCoreApplication::tr("VRawLayoutData prefix mismatch error: actualStreamHeader = 0x%1 and "
                                                "streamHeader = 0x%2")
-                              .arg(actualStreamHeader, 8, 0x10, QChar('0'))
-                              .arg(VRawLayoutData::streamHeader, 8, 0x10, QChar('0'));
+                              .arg(actualStreamHeader, 8, 0x10, '0'_L1)
+                              .arg(VRawLayoutData::streamHeader, 8, 0x10, '0'_L1);
         throw VException(message);
     }
 
@@ -82,23 +88,25 @@ auto operator>>(QDataStream &dataStream, VRawLayoutData &data) -> QDataStream &
     {
         QString message = QCoreApplication::tr("VRawLayoutData compatibility error: actualClassVersion = %1 and "
                                                "classVersion = %2")
-                              .arg( actualClassVersion ).arg(VRawLayoutData::classVersion);
+                              .arg(actualClassVersion)
+                              .arg(VRawLayoutData::classVersion);
         throw VException(message);
     }
 
     dataStream >> data.pieces;
 
-//    if (actualClassVersion >= 2)
-//    {
-//        // read value in version 2
-//    }
+    //    if (actualClassVersion >= 2)
+    //    {
+    //        // read value in version 2
+    //    }
 
     return dataStream;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 VRawLayout::VRawLayout()
-{}
+{
+}
 
 //---------------------------------------------------------------------------------------------------------------------
 auto VRawLayout::WriteFile(QIODevice *ioDevice, const VRawLayoutData &data) -> bool
@@ -141,13 +149,14 @@ auto VRawLayout::ReadFile(QIODevice *ioDevice, VRawLayoutData &data) -> bool
 
     if (wasOpen || ioDevice->open(QIODevice::ReadOnly))
     {
-        auto CloseFile = qScopeGuard([wasOpen, ioDevice]()
-                                     {
-                                         if (not wasOpen) // Only close this if it was opened by this function.
-                                         {
-                                             ioDevice->close();
-                                         }
-                                     });
+        auto CloseFile = qScopeGuard(
+            [wasOpen, ioDevice]()
+            {
+                if (not wasOpen) // Only close this if it was opened by this function.
+                {
+                    ioDevice->close();
+                }
+            });
 
         QDataStream dataStream(ioDevice);
         dataStream.setVersion(QDataStream::Qt_5_4);
@@ -157,8 +166,8 @@ auto VRawLayout::ReadFile(QIODevice *ioDevice, VRawLayoutData &data) -> bool
         // a large amount of memory if the wrong file type was read. Instead, we'll just read the
         // same number of bytes that are in the array we are comparing it to. No size was written.
         const int len = static_cast<int>(fileHeaderByteArray.size());
-        QByteArray actualFileHeaderByteArray( len, '\0' );
-        dataStream.readRawData( actualFileHeaderByteArray.data(), len );
+        QByteArray actualFileHeaderByteArray(len, '\0');
+        dataStream.readRawData(actualFileHeaderByteArray.data(), len);
 
         if (actualFileHeaderByteArray != fileHeaderByteArray)
         {
@@ -174,8 +183,9 @@ auto VRawLayout::ReadFile(QIODevice *ioDevice, VRawLayoutData &data) -> bool
         {
             // file is from a future version that we don't know how to load
             m_errorString = tr("VRawLayout::ReadFile() failed.\n"
-                               "Raw layout format compatibility error: actualFileVersion = %1 and fileVersion = %2" )
-                                .arg(actualFileVersion).arg(fileVersion);
+                               "Raw layout format compatibility error: actualFileVersion = %1 and fileVersion = %2")
+                                .arg(actualFileVersion)
+                                .arg(fileVersion);
             return false;
         }
 
@@ -185,7 +195,7 @@ auto VRawLayout::ReadFile(QIODevice *ioDevice, VRawLayoutData &data) -> bool
             // For example, if this file is from a future version of this code.
             dataStream >> data;
         }
-        catch (const VException& e)
+        catch (const VException &e)
         {
             qCritical() << e.ErrorMessage();
 
@@ -208,11 +218,12 @@ auto VRawLayout::WriteFile(const QString &filePath, const VRawLayoutData &data) 
     QFile file(filePath);
     if (file.open(QIODevice::WriteOnly | QIODevice::Truncate))
     {
-        auto CloseFile = qScopeGuard([&file]()
-                                     {
-                                         file.flush();
-                                         file.close();
-                                     });
+        auto CloseFile = qScopeGuard(
+            [&file]()
+            {
+                file.flush();
+                file.close();
+            });
         return WriteFile(&file, data);
     }
 
@@ -226,15 +237,15 @@ auto VRawLayout::ReadFile(const QString &filePath, VRawLayoutData &data) -> bool
     QFile file(filePath);
     if (file.open(QIODevice::ReadOnly))
     {
-        auto CloseFile = qScopeGuard([&file]()
-                                     {
-                                         file.flush();
-                                         file.close();
-                                     });
+        auto CloseFile = qScopeGuard(
+            [&file]()
+            {
+                file.flush();
+                file.close();
+            });
         return ReadFile(&file, data);
     }
 
     m_errorString = file.errorString();
     return false;
-   
 }

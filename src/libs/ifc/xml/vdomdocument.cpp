@@ -70,6 +70,12 @@
 #include <unistd.h>
 #endif
 
+#if QT_VERSION < QT_VERSION_CHECK(6, 4, 0)
+#include "../vmisc/compatibility.h"
+#endif
+
+using namespace Qt::Literals::StringLiterals;
+
 namespace
 {
 //---------------------------------------------------------------------------------------------------------------------
@@ -606,7 +612,7 @@ auto VDomDocument::GetParametrDouble(const QDomElement &domElement, const QStrin
     try
     {
         QString parametr = GetParametrString(domElement, name, defValue);
-        param = parametr.replace(QChar(','), QChar('.')).toDouble(&ok);
+        param = parametr.replace(','_L1, '.'_L1).toDouble(&ok);
         if (ok == false)
         {
             throw VExceptionConversionError(QObject::tr("Can't convert toDouble parameter"), name);
@@ -827,7 +833,7 @@ auto VDomDocument::SaveDocument(const QString &fileName, QString &error) -> bool
 auto VDomDocument::Major() const -> QString
 {
     QString version = UniqueTagText(TagVersion, "0.0.0");
-    QStringList v = version.split(QChar('.'));
+    QStringList v = version.split('.'_L1);
     return v.at(0);
 }
 
@@ -836,7 +842,7 @@ auto VDomDocument::Major() const -> QString
 auto VDomDocument::Minor() const -> QString
 {
     QString version = UniqueTagText(TagVersion, "0.0.0");
-    QStringList v = version.split(QChar('.'));
+    QStringList v = version.split('.'_L1);
     return v.at(1);
 }
 
@@ -845,7 +851,7 @@ auto VDomDocument::Minor() const -> QString
 auto VDomDocument::Patch() const -> QString
 {
     QString version = UniqueTagText(TagVersion, "0.0.0");
-    QStringList v = version.split(QChar('.'));
+    QStringList v = version.split('.'_L1);
     return v.at(2);
 }
 
@@ -882,7 +888,7 @@ auto VDomDocument::GetFormatVersion(const QString &version) -> unsigned
 {
     ValidateVersion(version);
 
-    const QStringList ver = version.split(QChar('.'));
+    const QStringList ver = version.split('.'_L1);
 
     bool ok = false;
     const unsigned major = ver.at(0).toUInt(&ok);
@@ -1029,7 +1035,7 @@ auto VDomDocument::SafeCopy(const QString &source, const QString &destination, Q
     //     qt_ntfs_permission_lookup++; // turn checking on
     // #endif /*Q_OS_WIN32*/
 
-    QTemporaryFile destFile(destination + QLatin1String(".XXXXXX"));
+    QTemporaryFile destFile(destination + ".XXXXXX"_L1);
     destFile.setAutoRemove(false); // Will be renamed to be destination file
     if (not destFile.open())
     {
@@ -1151,7 +1157,7 @@ void VDomDocument::ValidateVersion(const QString &version)
         throw VException(errorMsg);
     }
 
-    if (version == QLatin1String("0.0.0"))
+    if (version == "0.0.0"_L1)
     {
         const QString errorMsg(tr("Version \"0.0.0\" invalid."));
         throw VException(errorMsg);

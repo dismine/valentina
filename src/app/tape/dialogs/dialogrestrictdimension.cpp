@@ -37,6 +37,12 @@
 #include "../vmisc/backport/qoverload.h"
 #endif // QT_VERSION < QT_VERSION_CHECK(5, 7, 0)
 
+#if QT_VERSION < QT_VERSION_CHECK(6, 4, 0)
+#include "../vmisc/compatibility.h"
+#endif
+
+using namespace Qt::Literals::StringLiterals;
+
 namespace
 {
 //---------------------------------------------------------------------------------------------------------------------
@@ -187,7 +193,7 @@ void DialogRestrictDimension::changeEvent(QEvent *event)
             {
                 MeasurementDimension_p dimension = m_dimensions.at(index);
 
-                name->setText(dimension->Name() + QChar(':'));
+                name->setText(dimension->Name() + ':'_L1);
                 name->setToolTip(VAbstartMeasurementDimension::DimensionToolTip(dimension, m_fullCircumference));
 
                 InitDimensionGradation(dimension, control);
@@ -366,7 +372,7 @@ void DialogRestrictDimension::CellContextMenu(QPoint pos)
         }
 
         columnValue = m_dimensions.at(0)->ValidBases().at(item->column());
-        coordinates = QChar('0');
+        coordinates = '0'_L1;
     }
     else if (m_restrictionType == RestrictDimension::Second)
     {
@@ -451,7 +457,7 @@ void DialogRestrictDimension::InitDimensionsBaseValues()
         if (m_dimensions.size() > index)
         {
             MeasurementDimension_p dimension = m_dimensions.at(index);
-            name->setText(dimension->Name() + QChar(':'));
+            name->setText(dimension->Name() + ':'_L1);
             name->setToolTip(VAbstartMeasurementDimension::DimensionToolTip(dimension, m_fullCircumference));
 
             InitDimensionGradation(dimension, control);

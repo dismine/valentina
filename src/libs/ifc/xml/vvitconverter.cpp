@@ -40,6 +40,12 @@
 
 #include "vabstractmconverter.h"
 
+#if QT_VERSION < QT_VERSION_CHECK(6, 4, 0)
+#include "../vmisc/compatibility.h"
+#endif
+
+using namespace Qt::Literals::StringLiterals;
+
 /*
  * Version rules:
  * 1. Version have three parts "major.minor.patch";
@@ -62,11 +68,11 @@ QT_WARNING_DISABLE_CLANG("-Wunused-member-function")
 
 // The list of all string we use for conversion
 // Better to use global variables because repeating QStringLiteral blows up code size
-Q_GLOBAL_STATIC_WITH_ARGS(const QString, strTagRead_Only, (QLatin1String("read-only"))) // NOLINT
-Q_GLOBAL_STATIC_WITH_ARGS(const QString, strGivenName, (QLatin1String("given-name")))   // NOLINT
-Q_GLOBAL_STATIC_WITH_ARGS(const QString, strFamilyName, (QLatin1String("family-name"))) // NOLINT
-Q_GLOBAL_STATIC_WITH_ARGS(const QString, strCustomer, (QLatin1String("customer")))      // NOLINT
-Q_GLOBAL_STATIC_WITH_ARGS(const QString, strPersonal, (QLatin1String("personal")))      // NOLINT
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, strTagRead_Only, ("read-only"_L1)) // NOLINT
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, strGivenName, ("given-name"_L1))   // NOLINT
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, strFamilyName, ("family-name"_L1)) // NOLINT
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, strCustomer, ("customer"_L1))      // NOLINT
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, strPersonal, ("personal"_L1))      // NOLINT
 
 QT_WARNING_POP
 } // namespace
@@ -330,7 +336,7 @@ void VVITConverter::ConverCustomerNameToV0_4_0()
     QString customerName;
     if (not givenName.isEmpty() && not familyName.isEmpty())
     {
-        customerName = givenName + QLatin1Char(' ') + familyName;
+        customerName = givenName + ' '_L1 + familyName;
     }
     else if (not givenName.isEmpty() && familyName.isEmpty())
     {

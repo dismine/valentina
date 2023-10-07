@@ -54,6 +54,12 @@
 #include <ciso646> // and, not, or
 #endif
 
+#if QT_VERSION < QT_VERSION_CHECK(6, 4, 0)
+#include "../vmisc/compatibility.h"
+#endif
+
+using namespace Qt::Literals::StringLiterals;
+
 class QPaintDevice;
 class QPixmap;
 class QPoint;
@@ -170,7 +176,7 @@ void VObjEngine::drawPath(const QPainterPath &path)
     qint64 sq = Square(polygon);
 
     ++planeCount;
-    *stream << "o Plane." << QString("%1").arg(planeCount, 3, 10, QLatin1Char('0')) << Qt::endl;
+    *stream << "o Plane." << u"%1"_s.arg(planeCount, 3, 10, '0'_L1) << Qt::endl;
 
     quint32 num_points = 0;
 
@@ -239,7 +245,7 @@ void VObjEngine::drawPolygon(const QPointF *points, int pointCount, PolygonDrawM
 
     for (int i = 0; i < pointCount; ++i)
     {
-        *stream << QString(" %1").arg(static_cast<int>(globalPointsCount) - pointCount + i + 1);
+        *stream << u" %1"_s.arg(static_cast<int>(globalPointsCount) - pointCount + i + 1);
     }
     *stream << Qt::endl;
 }

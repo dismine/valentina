@@ -52,15 +52,21 @@
 #include "vprintlayout.h"
 #include "vrawlayout.h"
 
+#if QT_VERSION < QT_VERSION_CHECK(6, 4, 0)
+#include "../vmisc/compatibility.h"
+#endif
+
+using namespace Qt::Literals::StringLiterals;
+
 namespace
 {
 QT_WARNING_PUSH
 QT_WARNING_DISABLE_CLANG("-Wunused-member-function")
 
 #ifdef Q_OS_WIN
-Q_GLOBAL_STATIC_WITH_ARGS(const QString, PDFTOPS, (QLatin1String("pdftops.exe"))) // NOLINT
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, PDFTOPS, ("pdftops.exe"_L1)) // NOLINT
 #else
-Q_GLOBAL_STATIC_WITH_ARGS(const QString, PDFTOPS, (QLatin1String("pdftops"))) // NOLINT
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, PDFTOPS, ("pdftops"_L1)) // NOLINT
 #endif
 
 QT_WARNING_POP
@@ -425,14 +431,14 @@ auto VLayoutExporter::SupportPDFConversion() -> bool
 
 #if defined(Q_OS_OSX)
     // Seek pdftops in app bundle
-    bool found = Test(qApp->applicationDirPath() + QLatin1String("/") + *PDFTOPS);
+    bool found = Test(qApp->applicationDirPath() + '/'_L1 + *PDFTOPS);
     if (not found)
     {
         found = Test(*PDFTOPS);
     }
     return found;
 #elif defined(Q_OS_WIN)
-    return Test(qApp->applicationDirPath() + QLatin1String("/") + *PDFTOPS);
+    return Test(qApp->applicationDirPath() + '/'_L1 + *PDFTOPS);
 #else
     return Test(*PDFTOPS);
 #endif
@@ -452,9 +458,9 @@ void VLayoutExporter::PdfToPs(const QStringList &params)
 
     QProcess proc;
 #if defined(Q_OS_MAC)
-    if (QFileInfo::exists(qApp->applicationDirPath() + QLatin1String("/") + *PDFTOPS))
+    if (QFileInfo::exists(qApp->applicationDirPath() + '/'_L1 + *PDFTOPS))
     {
-        proc.start(qApp->applicationDirPath() + QLatin1String("/") + *PDFTOPS, params);
+        proc.start(qApp->applicationDirPath() + '/'_L1 + *PDFTOPS, params);
     }
     else
     {

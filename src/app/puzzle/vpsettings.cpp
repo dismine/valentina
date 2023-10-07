@@ -30,46 +30,47 @@
 
 #include <QMarginsF>
 
+using namespace Qt::Literals::StringLiterals;
+
 namespace
 {
 QT_WARNING_PUSH
 QT_WARNING_DISABLE_CLANG("-Wunused-member-function")
 
 // NOLINTNEXTLINE
-Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingDockWidgetPropertiesActive, (QLatin1String("dockWidget/properties")))
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingDockWidgetPropertiesActive, ("dockWidget/properties"_L1))
 // NOLINTNEXTLINE
-Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingDockPropertiesContentsActive, (QLatin1String("dockWidget/contents")))
-Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingLayoutUnit, (QLatin1String("layout/unit"))) // NOLINT
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingDockPropertiesContentsActive, ("dockWidget/contents"_L1))
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingLayoutUnit, ("layout/unit"_L1)) // NOLINT
 // NOLINTNEXTLINE
-Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingLayoutSheetPaperWidth, (QLatin1String("layout/sheetPaperWidth")))
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingLayoutSheetPaperWidth, ("layout/sheetPaperWidth"_L1))
 // NOLINTNEXTLINE
-Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingLayoutSheetPaperHeight, (QLatin1String("layout/sheetPaperHeight")))
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingLayoutSheetPaperHeight, ("layout/sheetPaperHeight"_L1))
 // NOLINTNEXTLINE
-Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingLayoutTilePaperWidth, (QLatin1String("layout/tilePaperWidth")))
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingLayoutTilePaperWidth, ("layout/tilePaperWidth"_L1))
 // NOLINTNEXTLINE
-Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingLayoutTilePaperHeight, (QLatin1String("layout/tilePaperHeight")))
-Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingLayoutSheetMargins, (QLatin1String("layout/sheetMargins"))) // NOLINT
-Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingLayoutTileMargins, (QLatin1String("layout/tileMargins")))   // NOLINT
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingLayoutTilePaperHeight, ("layout/tilePaperHeight"_L1))
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingLayoutSheetMargins, ("layout/sheetMargins"_L1)) // NOLINT
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingLayoutTileMargins, ("layout/tileMargins"_L1))   // NOLINT
 // NOLINTNEXTLINE
-Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingLayoutSheetIgnoreMargins, (QLatin1String("layout/sheetIgnoreMargins")))
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingLayoutSheetIgnoreMargins, ("layout/sheetIgnoreMargins"_L1))
 // NOLINTNEXTLINE
-Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingLayoutTileIgnoreMargins, (QLatin1String("layout/tileIgnoreMargins")))
-Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingLayoutTileShowTiles, (QLatin1String("layout/tileShowTiles"))) // NOLINT
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingLayoutTileIgnoreMargins, ("layout/tileIgnoreMargins"_L1))
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingLayoutTileShowTiles, ("layout/tileShowTiles"_L1)) // NOLINT
 // NOLINTNEXTLINE
-Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingLayoutTileShowWatermark, (QLatin1String("layout/tileShowWatermark")))
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingLayoutTileShowWatermark, ("layout/tileShowWatermark"_L1))
 // NOLINTNEXTLINE
 Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingLayoutWarningPiecesSuperposition,
-                          (QLatin1String("layout/warningPiecesSuperposition")))
-Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingLayoutStickyEdges, (QLatin1String("layout/stickyEdges"))) // NOLINT
+                          ("layout/warningPiecesSuperposition"_L1))
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingLayoutStickyEdges, ("layout/stickyEdges"_L1)) // NOLINT
 // NOLINTNEXTLINE
-Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingLayoutWarningPiecesOutOfBound,
-                          (QLatin1String("layout/warningPiecesOutOfBound")))
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingLayoutWarningPiecesOutOfBound, ("layout/warningPiecesOutOfBound"_L1))
 // NOLINTNEXTLINE
-Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingLayoutFollowGrainline, (QLatin1String("layout/followGrainline")))
-Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingLayoutPieceGap, (QLatin1String("layout/pieceGap")))           // NOLINT
-Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingLayoutExportFormat, (QLatin1String("layout/exportFormat")))   // NOLINT
-Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingLayoutLineWidth, (QLatin1String("layout/lineWidth")))         // NOLINT
-Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingLayoutShowGrainline, (QLatin1String("layout/showGrainline"))) // NOLINT
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingLayoutFollowGrainline, ("layout/followGrainline"_L1))
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingLayoutPieceGap, ("layout/pieceGap"_L1))           // NOLINT
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingLayoutExportFormat, ("layout/exportFormat"_L1))   // NOLINT
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingLayoutLineWidth, ("layout/lineWidth"_L1))         // NOLINT
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingLayoutShowGrainline, ("layout/showGrainline"_L1)) // NOLINT
 
 QT_WARNING_POP
 

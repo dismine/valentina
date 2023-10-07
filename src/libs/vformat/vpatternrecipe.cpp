@@ -75,6 +75,12 @@
 #include "../vtools/tools/drawTools/toolpoint/toolsinglepoint/vtooltriangle.h"
 #include "../vtools/tools/drawTools/vtoolline.h"
 
+#if QT_VERSION < QT_VERSION_CHECK(6, 4, 0)
+#include "../vmisc/compatibility.h"
+#endif
+
+using namespace Qt::Literals::StringLiterals;
+
 namespace
 {
 #define TagStep QStringLiteral("step")
@@ -496,11 +502,10 @@ auto VPatternRecipe::FinalMeasurement(const VFinalMeasurement &fm, const VContai
         const qreal result = cal->EvalFormula(data.DataVariables(), fm.formula);
         if (qIsInf(result) || qIsNaN(result))
         {
-            const QString errorMsg = QString("%1\n\n%1")
-                                         .arg(tr("Reading final measurements error."),
-                                              tr("Value for final measurtement '%1' is infinite or NaN. "
-                                                 "Please, check your calculations.")
-                                                  .arg(fm.name));
+            const QString errorMsg = u"%1\n\n%1"_s.arg(tr("Reading final measurements error."),
+                                                       tr("Value for final measurtement '%1' is infinite or NaN. "
+                                                          "Please, check your calculations.")
+                                                           .arg(fm.name));
             VAbstractApplication::VApp()->IsPedantic()
                 ? throw VException(errorMsg)
                 : qWarning() << VAbstractValApplication::warningMessageSignature + errorMsg;

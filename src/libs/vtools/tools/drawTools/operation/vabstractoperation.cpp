@@ -34,6 +34,12 @@
 #include "../../../undocommands/undogroup.h"
 #include "../vgeometry/vpointf.h"
 
+#if QT_VERSION < QT_VERSION_CHECK(6, 4, 0)
+#include "../vmisc/compatibility.h"
+#endif
+
+using namespace Qt::Literals::StringLiterals;
+
 const QString VAbstractOperation::TagItem = QStringLiteral("item");
 const QString VAbstractOperation::TagSource = QStringLiteral("source");
 const QString VAbstractOperation::TagDestination = QStringLiteral("destination");
@@ -939,12 +945,11 @@ auto VAbstractOperation::ComplexCurveToolTip(quint32 itemId) const -> QString
 {
     const QSharedPointer<VAbstractCurve> curve = VAbstractTool::data.GeometricObject<VAbstractCurve>(itemId);
 
-    const QString toolTip = QString("<table>"
-                                    "<tr> <td><b>%1:</b> %2</td> </tr>"
-                                    "<tr> <td><b>%3:</b> %4 %5</td> </tr>"
-                                    "%6"
-                                    "</table>")
-                                .arg(tr("Label"), curve->ObjectName(), tr("Length"))
+    const QString toolTip = u"<table>"
+                            "<tr> <td><b>%1:</b> %2</td> </tr>"
+                            "<tr> <td><b>%3:</b> %4 %5</td> </tr>"
+                            "%6"
+                            "</table>"_s.arg(tr("Label"), curve->ObjectName(), tr("Length"))
                                 .arg(VAbstractValApplication::VApp()->fromPixel(curve->GetLength()))
                                 .arg(UnitsToStr(VAbstractValApplication::VApp()->patternUnits(), true), MakeToolTip());
     return toolTip;

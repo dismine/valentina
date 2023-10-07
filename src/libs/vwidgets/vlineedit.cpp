@@ -48,6 +48,12 @@ using namespace bpstd::literals::chrono_literals;
 #endif // __cplusplus >= 201402L
 #endif //(defined(Q_CC_GNU) && Q_CC_GNU < 409) && !defined(Q_CC_CLANG)
 
+#if QT_VERSION < QT_VERSION_CHECK(6, 4, 0)
+#include "../vmisc/compatibility.h"
+#endif
+
+using namespace Qt::Literals::StringLiterals;
+
 namespace
 {
 class MultiSelectCompleter : public QCompleter
@@ -92,7 +98,7 @@ auto MultiSelectCompleter::splitPath(const QString &path) const -> QStringList
 {
     vsizetype pos = path.lastIndexOf(',') + 1;
 
-    while (pos < path.length() && path.at(pos) == QLatin1Char(' '))
+    while (pos < path.length() && path.at(pos) == ' '_L1)
     {
         pos++;
     }
