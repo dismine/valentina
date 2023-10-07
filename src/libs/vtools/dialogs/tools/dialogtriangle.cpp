@@ -35,8 +35,8 @@
 #include <QPointer>
 #include <QSet>
 
-#include "../../visualization/visualization.h"
 #include "../../visualization/line/vistooltriangle.h"
+#include "../../visualization/visualization.h"
 #include "../ifc/xml/vabstractpattern.h"
 #include "dialogtool.h"
 #include "ui_dialogtriangle.h"
@@ -47,19 +47,19 @@
  * @param data container with data
  * @param parent parent widget
  */
-DialogTriangle::DialogTriangle(const VContainer *data, quint32 toolId, QWidget *parent)
-    : DialogTool(data, toolId, parent),
-      ui(new Ui::DialogTriangle),
-      pointName(),
-      flagName(false),
-      flagError(false)
+DialogTriangle::DialogTriangle(const VContainer *data, VAbstractPattern *doc, quint32 toolId, QWidget *parent)
+  : DialogTool(data, doc, toolId, parent),
+    ui(new Ui::DialogTriangle),
+    pointName(),
+    flagName(false),
+    flagError(false)
 {
     ui->setupUi(this);
 
     ui->lineEditNamePoint->setClearButtonEnabled(true);
 
     ui->lineEditNamePoint->setText(
-                VAbstractValApplication::VApp()->getCurrentDocument()->GenerateLabel(LabelType::NewLabel));
+        VAbstractValApplication::VApp()->getCurrentDocument()->GenerateLabel(LabelType::NewLabel));
 
     InitOkCancelApply(ui);
 
@@ -68,19 +68,16 @@ DialogTriangle::DialogTriangle(const VContainer *data, quint32 toolId, QWidget *
     FillComboBoxPoints(ui->comboBoxFirstPoint);
     FillComboBoxPoints(ui->comboBoxSecondPoint);
 
-    connect(ui->lineEditNamePoint, &QLineEdit::textChanged, this, [this]()
-    {
-        CheckPointLabel(this, ui->lineEditNamePoint, ui->labelEditNamePoint, pointName, this->data, flagName);
-        CheckState();
-    });
-    connect(ui->comboBoxFirstPoint, &QComboBox::currentTextChanged,
-            this, &DialogTriangle::PointNameChanged);
-    connect(ui->comboBoxSecondPoint, &QComboBox::currentTextChanged,
-            this, &DialogTriangle::PointNameChanged);
-    connect(ui->comboBoxAxisP1, &QComboBox::currentTextChanged,
-            this, &DialogTriangle::PointNameChanged);
-    connect(ui->comboBoxAxisP2, &QComboBox::currentTextChanged,
-            this, &DialogTriangle::PointNameChanged);
+    connect(ui->lineEditNamePoint, &QLineEdit::textChanged, this,
+            [this]()
+            {
+                CheckPointLabel(this, ui->lineEditNamePoint, ui->labelEditNamePoint, pointName, this->data, flagName);
+                CheckState();
+            });
+    connect(ui->comboBoxFirstPoint, &QComboBox::currentTextChanged, this, &DialogTriangle::PointNameChanged);
+    connect(ui->comboBoxSecondPoint, &QComboBox::currentTextChanged, this, &DialogTriangle::PointNameChanged);
+    connect(ui->comboBoxAxisP1, &QComboBox::currentTextChanged, this, &DialogTriangle::PointNameChanged);
+    connect(ui->comboBoxAxisP2, &QComboBox::currentTextChanged, this, &DialogTriangle::PointNameChanged);
 
     vis = new VisToolTriangle(data);
 
@@ -102,7 +99,7 @@ DialogTriangle::~DialogTriangle()
  */
 void DialogTriangle::ChosenObject(quint32 id, const SceneObject &type)
 {
-    if (prepare == false)// After first choose we ignore all objects
+    if (prepare == false) // After first choose we ignore all objects
     {
         if (type == SceneObject::Point)
         {
@@ -146,7 +143,7 @@ void DialogTriangle::ChosenObject(quint32 id, const SceneObject &type)
                         }
                     }
                 }
-                    break;
+                break;
                 case (3):
                 {
                     QSet<quint32> set;
@@ -166,7 +163,7 @@ void DialogTriangle::ChosenObject(quint32 id, const SceneObject &type)
                         }
                     }
                 }
-                    break;
+                break;
                 default:
                     break;
             }
@@ -199,7 +196,7 @@ void DialogTriangle::PointNameChanged()
     set.insert(getCurrentObjectId(ui->comboBoxAxisP2));
 
     QColor color;
-    if (set.size() < 3)//Need tree or more unique points for creation triangle
+    if (set.size() < 3) // Need tree or more unique points for creation triangle
     {
         flagError = false;
         color = errorColor;

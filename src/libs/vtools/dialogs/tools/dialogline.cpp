@@ -48,8 +48,8 @@
  * @param data container with data
  * @param parent parent widget
  */
-DialogLine::DialogLine(const VContainer *data, quint32 toolId, QWidget *parent)
-  : DialogTool(data, toolId, parent),
+DialogLine::DialogLine(const VContainer *data, VAbstractPattern *doc, quint32 toolId, QWidget *parent)
+  : DialogTool(data, doc, toolId, parent),
     ui(new Ui::DialogLine),
     flagError(true)
 {

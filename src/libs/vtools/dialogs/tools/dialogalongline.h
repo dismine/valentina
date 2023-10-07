@@ -50,7 +50,7 @@ class DialogAlongLine final : public DialogTool
     Q_OBJECT // NOLINT
 
 public:
-    DialogAlongLine(const VContainer *data, quint32 toolId, QWidget *parent = nullptr);
+    DialogAlongLine(const VContainer *data, VAbstractPattern *doc, quint32 toolId, QWidget *parent = nullptr);
     ~DialogAlongLine() override;
 
     auto GetPointName() const -> QString;

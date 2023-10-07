@@ -50,7 +50,7 @@ class DialogPointOfIntersection : public DialogTool
     Q_OBJECT // NOLINT
 
 public:
-    DialogPointOfIntersection(const VContainer *data, quint32 toolId, QWidget *parent = nullptr);
+    DialogPointOfIntersection(const VContainer *data, VAbstractPattern *doc, quint32 toolId, QWidget *parent = nullptr);
     ~DialogPointOfIntersection() override;
 
     auto GetPointName() const -> QString;

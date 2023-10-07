@@ -167,7 +167,7 @@ void VWidgetGroups::ActionPreferences(quint32 id)
     QScopedPointer<VContainer> fackeContainer(new VContainer(VAbstractApplication::VApp()->TrVars(),
                                                              VAbstractValApplication::VApp()->patternUnitsP(),
                                                              VContainer::UniqueNamespace()));
-    QScopedPointer<DialogGroup> dialog(new DialogGroup(fackeContainer.data(), NULL_ID, this));
+    QScopedPointer<DialogGroup> dialog(new DialogGroup(fackeContainer.data(), m_doc, NULL_ID, this));
     dialog->SetName(m_doc->GetGroupName(id));
     dialog->SetTags(m_doc->GetGroupTags(id));
     dialog->SetGroupCategories(m_doc->GetGroupCategories());

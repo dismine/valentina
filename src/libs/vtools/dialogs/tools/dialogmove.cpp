@@ -68,8 +68,8 @@
 #endif // QT_VERSION < QT_VERSION_CHECK(5, 7, 0)
 
 //---------------------------------------------------------------------------------------------------------------------
-DialogMove::DialogMove(const VContainer *data, quint32 toolId, QWidget *parent)
-  : DialogTool(data, toolId, parent),
+DialogMove::DialogMove(const VContainer *data, VAbstractPattern *doc, quint32 toolId, QWidget *parent)
+  : DialogTool(data, doc, toolId, parent),
     ui(new Ui::DialogMove),
     timerAngle(new QTimer(this)),
     timerRotationAngle(new QTimer(this)),

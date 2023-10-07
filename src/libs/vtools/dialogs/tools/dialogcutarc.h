@@ -50,7 +50,7 @@ class DialogCutArc final : public DialogTool
     Q_OBJECT // NOLINT
 
 public:
-    DialogCutArc(const VContainer *data, quint32 toolId, QWidget *parent = nullptr);
+    DialogCutArc(const VContainer *data, VAbstractPattern *doc, quint32 toolId, QWidget *parent = nullptr);
     ~DialogCutArc() override;
 
     auto GetPointName() const -> QString;

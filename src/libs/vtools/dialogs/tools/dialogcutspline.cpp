@@ -56,8 +56,8 @@
  * @param data container with data
  * @param parent parent widget
  */
-DialogCutSpline::DialogCutSpline(const VContainer *data, quint32 toolId, QWidget *parent)
-  : DialogTool(data, toolId, parent),
+DialogCutSpline::DialogCutSpline(const VContainer *data, VAbstractPattern *doc, quint32 toolId, QWidget *parent)
+  : DialogTool(data, doc, toolId, parent),
     ui(new Ui::DialogCutSpline),
     m_timerFormula(new QTimer(this))
 {

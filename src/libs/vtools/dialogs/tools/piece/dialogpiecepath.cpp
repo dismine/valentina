@@ -86,8 +86,8 @@ auto CuttingPath(quint32 id, const VContainer *data) -> QVector<QPointF>
 } // namespace
 
 //---------------------------------------------------------------------------------------------------------------------
-DialogPiecePath::DialogPiecePath(const VContainer *data, quint32 toolId, QWidget *parent)
-  : DialogTool(data, toolId, parent),
+DialogPiecePath::DialogPiecePath(const VContainer *data, VAbstractPattern *doc, quint32 toolId, QWidget *parent)
+  : DialogTool(data, doc, toolId, parent),
     ui(new Ui::DialogPiecePath),
     m_timerWidth(new QTimer(this)),
     m_timerWidthBefore(new QTimer(this)),

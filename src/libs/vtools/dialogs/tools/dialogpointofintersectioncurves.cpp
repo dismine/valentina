@@ -37,26 +37,26 @@
 
 #include "../../visualization/path/vistoolpointofintersectioncurves.h"
 #include "../../visualization/visualization.h"
-#include "../vmisc/vabstractapplication.h"
-#include "../qmuparser/qmudef.h"
 #include "../dialogtoolbox.h"
+#include "../qmuparser/qmudef.h"
 #include "../vpatterndb/vcontainer.h"
 #include "ui_dialogpointofintersectioncurves.h"
 
 //---------------------------------------------------------------------------------------------------------------------
-DialogPointOfIntersectionCurves::DialogPointOfIntersectionCurves(const VContainer *data, quint32 toolId,
-                                                                 QWidget *parent)
-    : DialogTool(data, toolId, parent),
-      ui(new Ui::DialogPointOfIntersectionCurves),
-      pointName(),
-      flagName(false),
-      flagError(false)
+DialogPointOfIntersectionCurves::DialogPointOfIntersectionCurves(const VContainer *data, VAbstractPattern *doc,
+                                                                 quint32 toolId, QWidget *parent)
+  : DialogTool(data, doc, toolId, parent),
+    ui(new Ui::DialogPointOfIntersectionCurves),
+    pointName(),
+    flagName(false),
+    flagError(false)
 {
     ui->setupUi(this);
 
     ui->lineEditNamePoint->setClearButtonEnabled(true);
 
-    ui->lineEditNamePoint->setText(VAbstractValApplication::VApp()->getCurrentDocument()->GenerateLabel(LabelType::NewLabel));
+    ui->lineEditNamePoint->setText(
+        VAbstractValApplication::VApp()->getCurrentDocument()->GenerateLabel(LabelType::NewLabel));
 
     InitOkCancelApply(ui);
 
@@ -65,15 +65,14 @@ DialogPointOfIntersectionCurves::DialogPointOfIntersectionCurves(const VContaine
     FillComboBoxVCrossCurvesPoint(ui->comboBoxVCorrection);
     FillComboBoxHCrossCurvesPoint(ui->comboBoxHCorrection);
 
-    connect(ui->lineEditNamePoint, &QLineEdit::textChanged, this, [this]()
-    {
-        CheckPointLabel(this, ui->lineEditNamePoint, ui->labelEditNamePoint, pointName, this->data, flagName);
-        CheckState();
-    });
-    connect(ui->comboBoxCurve1, &QComboBox::currentTextChanged,
-            this, &DialogPointOfIntersectionCurves::CurveChanged);
-    connect(ui->comboBoxCurve2, &QComboBox::currentTextChanged,
-            this, &DialogPointOfIntersectionCurves::CurveChanged);
+    connect(ui->lineEditNamePoint, &QLineEdit::textChanged, this,
+            [this]()
+            {
+                CheckPointLabel(this, ui->lineEditNamePoint, ui->labelEditNamePoint, pointName, this->data, flagName);
+                CheckState();
+            });
+    connect(ui->comboBoxCurve1, &QComboBox::currentTextChanged, this, &DialogPointOfIntersectionCurves::CurveChanged);
+    connect(ui->comboBoxCurve2, &QComboBox::currentTextChanged, this, &DialogPointOfIntersectionCurves::CurveChanged);
     connect(ui->lineEditCurve1Alias1, &QLineEdit::textEdited, this, &DialogPointOfIntersectionCurves::ValidateAlias);
     connect(ui->lineEditCurve1Alias2, &QLineEdit::textEdited, this, &DialogPointOfIntersectionCurves::ValidateAlias);
     connect(ui->lineEditCurve2Alias1, &QLineEdit::textEdited, this, &DialogPointOfIntersectionCurves::ValidateAlias);
@@ -179,12 +178,10 @@ void DialogPointOfIntersectionCurves::SetHCrossPoint(HCrossCurvesPoint hP)
 //---------------------------------------------------------------------------------------------------------------------
 void DialogPointOfIntersectionCurves::ChosenObject(quint32 id, const SceneObject &type)
 {
-    if (prepare == false)// After first choose we ignore all objects
+    if (prepare == false) // After first choose we ignore all objects
     {
-        if (type == SceneObject::Spline
-                || type == SceneObject::Arc
-                || type == SceneObject::ElArc
-                || type == SceneObject::SplinePath)
+        if (type == SceneObject::Spline || type == SceneObject::Arc || type == SceneObject::ElArc ||
+            type == SceneObject::SplinePath)
         {
             auto *point = qobject_cast<VisToolPointOfIntersectionCurves *>(vis);
             SCASSERT(point != nullptr)
@@ -264,12 +261,12 @@ void DialogPointOfIntersectionCurves::ValidateAlias()
     QRegularExpression rx(NameRegExp());
 
     const QSharedPointer<VAbstractCurve> curve1 = data->GeometricObject<VAbstractCurve>(GetFirstCurveId());
-    QPair<QString, QString> curve1Alias = SegmentAliases(curve1->getType(), GetCurve1AliasSuffix1(),
-                                                         GetCurve1AliasSuffix2());
+    QPair<QString, QString> curve1Alias =
+        SegmentAliases(curve1->getType(), GetCurve1AliasSuffix1(), GetCurve1AliasSuffix2());
 
     const QSharedPointer<VAbstractCurve> curve2 = data->GeometricObject<VAbstractCurve>(GetSecondCurveId());
-    QPair<QString, QString> curve2Alias = SegmentAliases(curve2->getType(), GetCurve2AliasSuffix1(),
-                                                         GetCurve2AliasSuffix2());
+    QPair<QString, QString> curve2Alias =
+        SegmentAliases(curve2->getType(), GetCurve2AliasSuffix1(), GetCurve2AliasSuffix2());
 
     QSet<QString> uniqueAliases;
     int countAliases = 0;
@@ -289,7 +286,7 @@ void DialogPointOfIntersectionCurves::ValidateAlias()
     CountUniqueAliases(curve2Alias.second);
 
     auto Validate = [countAliases, uniqueAliases, rx, this](const QString &originalSuffix, const QString &suffix,
-            const QString &alias, bool &flagAlias, QLabel *label)
+                                                            const QString &alias, bool &flagAlias, QLabel *label)
     {
         if (not suffix.isEmpty() &&
             (not rx.match(alias).hasMatch() || (originalSuffix != suffix && not data->IsUnique(alias)) ||

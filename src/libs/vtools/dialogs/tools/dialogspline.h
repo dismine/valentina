@@ -52,7 +52,7 @@ class DialogSpline : public DialogTool
     Q_OBJECT // NOLINT
 
 public:
-    DialogSpline(const VContainer *data, quint32 toolId, QWidget *parent = nullptr);
+    DialogSpline(const VContainer *data, VAbstractPattern *doc, quint32 toolId, QWidget *parent = nullptr);
     ~DialogSpline() override;
 
     auto GetSpline() const -> VSpline;

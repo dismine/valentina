@@ -27,8 +27,8 @@
  *************************************************************************/
 
 #include "dialoginsertnode.h"
-#include "ui_dialoginsertnode.h"
 #include "../vpatterndb/vcontainer.h"
+#include "ui_dialoginsertnode.h"
 #if QT_VERSION < QT_VERSION_CHECK(5, 7, 0)
 #include "../vmisc/backport/qoverload.h"
 #endif // QT_VERSION < QT_VERSION_CHECK(5, 7, 0)
@@ -36,19 +36,16 @@
 #include <QMenu>
 
 //---------------------------------------------------------------------------------------------------------------------
-DialogInsertNode::DialogInsertNode(const VContainer *data, quint32 toolId, QWidget *parent)
-    : DialogTool(data, toolId, parent),
-      ui(new Ui::DialogInsertNode)
+DialogInsertNode::DialogInsertNode(const VContainer *data, VAbstractPattern *doc, quint32 toolId, QWidget *parent)
+  : DialogTool(data, doc, toolId, parent),
+    ui(new Ui::DialogInsertNode)
 {
     ui->setupUi(this);
     InitOkCancel(ui);
 
     CheckPieces();
 
-    connect(ui->comboBoxPiece, QOverload<int>::of(&QComboBox::currentIndexChanged), this, [this]()
-    {
-        CheckPieces();
-    });
+    connect(ui->comboBoxPiece, QOverload<int>::of(&QComboBox::currentIndexChanged), this, [this]() { CheckPieces(); });
 
     connect(ui->listWidget, &QListWidget::customContextMenuRequested, this, &DialogInsertNode::ShowContextMenu);
     connect(ui->listWidget, &QListWidget::itemSelectionChanged, this, &DialogInsertNode::NodeSelected);
@@ -108,7 +105,7 @@ auto DialogInsertNode::GetNodes() const -> QVector<VPieceNode>
     for (qint32 i = 0; i < ui->listWidget->count(); ++i)
     {
         VPieceNode node = qvariant_cast<VPieceNode>(ui->listWidget->item(i)->data(Qt::UserRole));
-        for(int n = 1; n <= nodeNumbers.value(node.GetId(), 1); ++n)
+        for (int n = 1; n <= nodeNumbers.value(node.GetId(), 1); ++n)
         {
             nodes.append(node);
         }

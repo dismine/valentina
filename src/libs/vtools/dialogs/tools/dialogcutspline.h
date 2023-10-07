@@ -50,7 +50,7 @@ class DialogCutSpline final : public DialogTool
     Q_OBJECT // NOLINT
 
 public:
-    DialogCutSpline(const VContainer *data, quint32 toolId, QWidget *parent = nullptr);
+    DialogCutSpline(const VContainer *data, VAbstractPattern *doc, quint32 toolId, QWidget *parent = nullptr);
     ~DialogCutSpline() override;
 
     auto GetPointName() const -> QString;

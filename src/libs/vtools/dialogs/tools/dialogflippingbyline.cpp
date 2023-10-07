@@ -58,8 +58,9 @@
 #include "ui_dialogflippingbyline.h"
 
 //---------------------------------------------------------------------------------------------------------------------
-DialogFlippingByLine::DialogFlippingByLine(const VContainer *data, quint32 toolId, QWidget *parent)
-  : DialogTool(data, toolId, parent),
+DialogFlippingByLine::DialogFlippingByLine(const VContainer *data, VAbstractPattern *doc, quint32 toolId,
+                                           QWidget *parent)
+  : DialogTool(data, doc, toolId, parent),
     ui(new Ui::DialogFlippingByLine),
     stage1(true),
     m_suffix(),

@@ -84,19 +84,24 @@ QT_WARNING_POP
  * @param data container with data
  * @param parent parent widget
  */
-DialogTool::DialogTool(const VContainer *data, quint32 toolId, QWidget *parent)
+DialogTool::DialogTool(const VContainer *data, VAbstractPattern *doc, quint32 toolId, QWidget *parent)
   : QDialog(parent),
     data(data),
+    m_doc(doc),
     isInitialized(false),
     bOk(nullptr),
     bApply(nullptr),
     associatedTool(nullptr),
     toolId(toolId),
     prepare(false),
-    vis(nullptr){SCASSERT(data != nullptr)}
+    vis(nullptr)
+{
+    SCASSERT(data != nullptr);
+    SCASSERT(doc != nullptr);
+}
 
-    //---------------------------------------------------------------------------------------------------------------------
-    DialogTool::~DialogTool()
+//---------------------------------------------------------------------------------------------------------------------
+DialogTool::~DialogTool()
 {
     emit ToolTip(QString());
 

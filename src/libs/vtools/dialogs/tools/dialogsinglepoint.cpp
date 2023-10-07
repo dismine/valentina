@@ -32,7 +32,6 @@
 #include <QLineEdit>
 
 #include "../vmisc/def.h"
-#include "../vmisc/vabstractapplication.h"
 #include "dialogtool.h"
 #include "ui_dialogsinglepoint.h"
 
@@ -42,12 +41,12 @@
  * @param data container with data
  * @param parent parent widget
  */
-DialogSinglePoint::DialogSinglePoint(const VContainer *data, quint32 toolId, QWidget *parent)
-    : DialogTool(data, toolId, parent),
-      ui(new Ui::DialogSinglePoint),
-      point(),
-      pointName(),
-      flagName(true)
+DialogSinglePoint::DialogSinglePoint(const VContainer *data, VAbstractPattern *doc, quint32 toolId, QWidget *parent)
+  : DialogTool(data, doc, toolId, parent),
+    ui(new Ui::DialogSinglePoint),
+    point(),
+    pointName(),
+    flagName(true)
 {
     ui->setupUi(this);
 
@@ -57,11 +56,12 @@ DialogSinglePoint::DialogSinglePoint(const VContainer *data, quint32 toolId, QWi
     ui->doubleSpinBoxY->setRange(0, VAbstractValApplication::VApp()->fromPixel(maxSceneSize));
     InitOkCancel(ui);
 
-    connect(ui->lineEditName, &QLineEdit::textChanged, this, [this]()
-    {
-        CheckPointLabel(this, ui->lineEditName, ui->labelEditName, pointName, this->data, flagName);
-        CheckState();
-    });
+    connect(ui->lineEditName, &QLineEdit::textChanged, this,
+            [this]()
+            {
+                CheckPointLabel(this, ui->lineEditName, ui->labelEditName, pointName, this->data, flagName);
+                CheckState();
+            });
 
     ui->tabWidget->setCurrentIndex(0);
     SetTabStopDistance(ui->plainTextEditToolNotes);

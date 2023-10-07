@@ -57,8 +57,8 @@
  * @param data container with data
  * @param parent parent widget
  */
-DialogEllipticalArc::DialogEllipticalArc(const VContainer *data, quint32 toolId, QWidget *parent)
-  : DialogTool(data, toolId, parent),
+DialogEllipticalArc::DialogEllipticalArc(const VContainer *data, VAbstractPattern *doc, quint32 toolId, QWidget *parent)
+  : DialogTool(data, doc, toolId, parent),
     ui(new Ui::DialogEllipticalArc),
     m_timerRadius1(new QTimer(this)),
     m_timerRadius2(new QTimer(this)),

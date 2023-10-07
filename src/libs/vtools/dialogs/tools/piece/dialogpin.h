@@ -40,7 +40,7 @@ class DialogPin : public DialogTool
 {
     Q_OBJECT // NOLINT
 public:
-    explicit DialogPin(const VContainer *data, quint32 toolId, QWidget *parent = nullptr);
+    explicit DialogPin(const VContainer *data, VAbstractPattern *doc, quint32 toolId, QWidget *parent = nullptr);
     virtual ~DialogPin();
 
     void EnbleShowMode(bool disable);

@@ -50,7 +50,7 @@ class DialogUnionDetails : public DialogTool
     Q_OBJECT // NOLINT
 
 public:
-    DialogUnionDetails(const VContainer *data, quint32 toolId, QWidget *parent = nullptr);
+    DialogUnionDetails(const VContainer *data, VAbstractPattern *doc, quint32 toolId, QWidget *parent = nullptr);
     ~DialogUnionDetails() override;
 
     auto getD1() const -> quint32;

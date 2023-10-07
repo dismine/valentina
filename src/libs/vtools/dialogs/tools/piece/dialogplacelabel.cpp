@@ -40,8 +40,8 @@
 #include <QTimer>
 
 //---------------------------------------------------------------------------------------------------------------------
-DialogPlaceLabel::DialogPlaceLabel(const VContainer *data, quint32 toolId, QWidget *parent)
-  : DialogTool(data, toolId, parent),
+DialogPlaceLabel::DialogPlaceLabel(const VContainer *data, VAbstractPattern *doc, quint32 toolId, QWidget *parent)
+  : DialogTool(data, doc, toolId, parent),
     ui(new Ui::DialogPlaceLabel),
     m_showMode(false),
     m_formulaBaseHeightWidth(0),

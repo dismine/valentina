@@ -56,8 +56,8 @@
  * @param data container with data
  * @param parent parent widget
  */
-DialogHeight::DialogHeight(const VContainer *data, quint32 toolId, QWidget *parent)
-  : DialogTool(data, toolId, parent),
+DialogHeight::DialogHeight(const VContainer *data, VAbstractPattern *doc, quint32 toolId, QWidget *parent)
+  : DialogTool(data, doc, toolId, parent),
     ui(new Ui::DialogHeight)
 {
     ui->setupUi(this);

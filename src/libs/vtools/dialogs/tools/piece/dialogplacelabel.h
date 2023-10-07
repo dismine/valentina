@@ -42,7 +42,7 @@ class DialogPlaceLabel : public DialogTool
     Q_OBJECT // NOLINT
 
 public:
-    explicit DialogPlaceLabel(const VContainer *data, quint32 toolId, QWidget *parent = nullptr);
+    explicit DialogPlaceLabel(const VContainer *data, VAbstractPattern *doc, quint32 toolId, QWidget *parent = nullptr);
     ~DialogPlaceLabel() override;
 
     void EnbleShowMode(bool disable);

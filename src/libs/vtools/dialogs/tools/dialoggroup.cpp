@@ -34,11 +34,11 @@
 #include "ui_dialoggroup.h"
 
 //---------------------------------------------------------------------------------------------------------------------
-DialogGroup::DialogGroup(const VContainer *data, quint32 toolId, QWidget *parent)
-    : DialogTool(data, toolId, parent),
-      ui(new Ui::DialogGroup),
-      group(),
-      flagName(false)
+DialogGroup::DialogGroup(const VContainer *data, VAbstractPattern *doc, quint32 toolId, QWidget *parent)
+  : DialogTool(data, doc, toolId, parent),
+    ui(new Ui::DialogGroup),
+    group(),
+    flagName(false)
 {
     ui->setupUi(this);
     InitOkCancel(ui);

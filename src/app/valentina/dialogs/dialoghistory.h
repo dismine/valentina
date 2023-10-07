@@ -44,7 +44,7 @@ struct HistoryRecord
 
 namespace Ui
 {
-    class DialogHistory;
+class DialogHistory;
 }
 
 /**
@@ -53,14 +53,15 @@ namespace Ui
 class DialogHistory : public DialogTool
 {
     Q_OBJECT // NOLINT
+
 public:
     DialogHistory(VContainer *data, VPattern *doc, QWidget *parent = nullptr);
     ~DialogHistory() override;
 public slots:
     void DialogAccepted() override;
     /** TODO ISSUE 79 : create real function
-    * @brief DialogApply apply data and emit signal about applied dialog.
-    */
+     * @brief DialogApply apply data and emit signal about applied dialog.
+     */
     void DialogApply() override {}
     void cellClicked(int row, int column);
     void ChangedCursor(quint32 id);
@@ -71,21 +72,20 @@ signals:
      * @param id id of tool
      * @param enable true enable selection, false disable selection
      */
-    void              ShowHistoryTool(quint32 id, bool enable);
+    void ShowHistoryTool(quint32 id, bool enable);
+
 protected:
-    void closeEvent ( QCloseEvent * event ) override;
-    void changeEvent(QEvent* event) override;
-    auto IsValid() const -> bool final {return true;}
-    void showEvent( QShowEvent *event ) override;
+    void closeEvent(QCloseEvent *event) override;
+    void changeEvent(QEvent *event) override;
+    auto IsValid() const -> bool final { return true; }
+    void showEvent(QShowEvent *event) override;
+
 private:
     // cppcheck-suppress unknownMacro
     Q_DISABLE_COPY_MOVE(DialogHistory) // NOLINT
 
     /** @brief ui keeps information about user interface */
     Ui::DialogHistory *ui;
-
-    /** @brief doc dom document container */
-    VPattern *m_doc;
 
     /** @brief cursorRow save number of row where is cursor */
     qint32 m_cursorRow{0};
@@ -98,8 +98,8 @@ private:
 
     void FillTable();
     auto Record(const VToolRecord &tool) const -> HistoryRecord;
-    auto RecordDescription(const VToolRecord &tool, HistoryRecord record,
-                           const QDomElement &domElem) const -> HistoryRecord;
+    auto RecordDescription(const VToolRecord &tool, HistoryRecord record, const QDomElement &domElem) const
+        -> HistoryRecord;
     void InitialTable();
     void ShowPoint();
     auto PointName(quint32 pointId) const -> QString;

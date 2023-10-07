@@ -34,26 +34,26 @@
 #include <QLineEdit>
 #include <QPointer>
 
-#include "../../visualization/visualization.h"
 #include "../../visualization/line/vistoolpointofintersectionarcs.h"
-#include "../vmisc/vabstractapplication.h"
+#include "../../visualization/visualization.h"
 #include "dialogtool.h"
 #include "ui_dialogpointofintersectionarcs.h"
 
 //---------------------------------------------------------------------------------------------------------------------
-DialogPointOfIntersectionArcs::DialogPointOfIntersectionArcs(const VContainer *data, quint32 toolId, QWidget *parent)
-    : DialogTool(data, toolId, parent),
-      ui(new Ui::DialogPointOfIntersectionArcs),
-      pointName(),
-      flagName(true),
-      flagError(true)
+DialogPointOfIntersectionArcs::DialogPointOfIntersectionArcs(const VContainer *data, VAbstractPattern *doc,
+                                                             quint32 toolId, QWidget *parent)
+  : DialogTool(data, doc, toolId, parent),
+    ui(new Ui::DialogPointOfIntersectionArcs),
+    pointName(),
+    flagName(true),
+    flagError(true)
 {
     ui->setupUi(this);
 
     ui->lineEditNamePoint->setClearButtonEnabled(true);
 
     ui->lineEditNamePoint->setText(
-                VAbstractValApplication::VApp()->getCurrentDocument()->GenerateLabel(LabelType::NewLabel));
+        VAbstractValApplication::VApp()->getCurrentDocument()->GenerateLabel(LabelType::NewLabel));
 
     InitOkCancelApply(ui);
 
@@ -61,15 +61,14 @@ DialogPointOfIntersectionArcs::DialogPointOfIntersectionArcs(const VContainer *d
     FillComboBoxArcs(ui->comboBoxArc2);
     FillComboBoxCrossCirclesPoints(ui->comboBoxResult);
 
-    connect(ui->lineEditNamePoint, &QLineEdit::textChanged, this, [this]()
-    {
-        CheckPointLabel(this, ui->lineEditNamePoint, ui->labelEditNamePoint, pointName, this->data, flagName);
-        CheckState();
-    });
-    connect(ui->comboBoxArc1, &QComboBox::currentTextChanged,
-            this, &DialogPointOfIntersectionArcs::ArcChanged);
-    connect(ui->comboBoxArc1, &QComboBox::currentTextChanged,
-            this, &DialogPointOfIntersectionArcs::ArcChanged);
+    connect(ui->lineEditNamePoint, &QLineEdit::textChanged, this,
+            [this]()
+            {
+                CheckPointLabel(this, ui->lineEditNamePoint, ui->labelEditNamePoint, pointName, this->data, flagName);
+                CheckState();
+            });
+    connect(ui->comboBoxArc1, &QComboBox::currentTextChanged, this, &DialogPointOfIntersectionArcs::ArcChanged);
+    connect(ui->comboBoxArc1, &QComboBox::currentTextChanged, this, &DialogPointOfIntersectionArcs::ArcChanged);
 
     vis = new VisToolPointOfIntersectionArcs(data);
 
@@ -151,7 +150,7 @@ void DialogPointOfIntersectionArcs::SetCrossArcPoint(CrossCirclesPoint p)
 //---------------------------------------------------------------------------------------------------------------------
 void DialogPointOfIntersectionArcs::ChosenObject(quint32 id, const SceneObject &type)
 {
-    if (prepare == false)// After first choose we ignore all objects
+    if (prepare == false) // After first choose we ignore all objects
     {
         if (type == SceneObject::Arc)
         {

@@ -59,8 +59,9 @@
  * @param data container with data
  * @param parent parent widget
  */
-DialogPointOfContact::DialogPointOfContact(const VContainer *data, quint32 toolId, QWidget *parent)
-  : DialogTool(data, toolId, parent),
+DialogPointOfContact::DialogPointOfContact(const VContainer *data, VAbstractPattern *doc, quint32 toolId,
+                                           QWidget *parent)
+  : DialogTool(data, doc, toolId, parent),
     ui(new Ui::DialogPointOfContact),
     m_timerFormula(new QTimer(this))
 {

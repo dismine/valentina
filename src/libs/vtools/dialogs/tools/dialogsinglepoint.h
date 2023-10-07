@@ -50,7 +50,7 @@ class DialogSinglePoint : public DialogTool
     Q_OBJECT // NOLINT
 
 public:
-    DialogSinglePoint(const VContainer *data, quint32 toolId, QWidget *parent = nullptr);
+    DialogSinglePoint(const VContainer *data, VAbstractPattern *doc, quint32 toolId, QWidget *parent = nullptr);
     ~DialogSinglePoint() override;
 
     void SetData(const QString &name, const QPointF &point);

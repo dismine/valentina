@@ -58,8 +58,9 @@
 #include "ui_dialogcurveintersectaxis.h"
 
 //---------------------------------------------------------------------------------------------------------------------
-DialogCurveIntersectAxis::DialogCurveIntersectAxis(const VContainer *data, quint32 toolId, QWidget *parent)
-  : DialogTool(data, toolId, parent),
+DialogCurveIntersectAxis::DialogCurveIntersectAxis(const VContainer *data, VAbstractPattern *doc, quint32 toolId,
+                                                   QWidget *parent)
+  : DialogTool(data, doc, toolId, parent),
     ui(new Ui::DialogCurveIntersectAxis),
     formulaAngle(),
     formulaBaseHeightAngle(0),

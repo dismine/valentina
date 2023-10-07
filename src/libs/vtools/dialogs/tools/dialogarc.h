@@ -50,7 +50,7 @@ class DialogArc final : public DialogTool
     Q_OBJECT // NOLINT
 
 public:
-    DialogArc(const VContainer *data, quint32 toolId, QWidget *parent = nullptr);
+    DialogArc(const VContainer *data, VAbstractPattern *doc, quint32 toolId, QWidget *parent = nullptr);
     ~DialogArc() override;
 
     auto GetCenter() const -> quint32;

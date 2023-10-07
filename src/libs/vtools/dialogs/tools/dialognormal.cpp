@@ -60,8 +60,8 @@
  * @param data container with data
  * @param parent parent widget
  */
-DialogNormal::DialogNormal(const VContainer *data, quint32 toolId, QWidget *parent)
-  : DialogTool(data, toolId, parent),
+DialogNormal::DialogNormal(const VContainer *data, VAbstractPattern *doc, quint32 toolId, QWidget *parent)
+  : DialogTool(data, doc, toolId, parent),
     ui(new Ui::DialogNormal),
     m_timerFormula(new QTimer(this))
 {

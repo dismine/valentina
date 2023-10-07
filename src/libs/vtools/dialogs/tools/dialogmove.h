@@ -50,7 +50,7 @@ class DialogMove : public DialogTool
     Q_OBJECT // NOLINT
 
 public:
-    explicit DialogMove(const VContainer *data, quint32 toolId, QWidget *parent = nullptr);
+    explicit DialogMove(const VContainer *data, VAbstractPattern *doc, quint32 toolId, QWidget *parent = nullptr);
     ~DialogMove() override;
 
     auto GetAngle() const -> QString;

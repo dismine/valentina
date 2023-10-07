@@ -75,7 +75,7 @@ enum class IncrUnits : qint8
  * @param parent parent widget
  */
 DialogIncrements::DialogIncrements(VContainer *data, VPattern *doc, QWidget *parent)
-  : DialogTool(data, NULL_ID, parent),
+  : DialogTool(data, doc, NULL_ID, parent),
     ui(new Ui::DialogIncrements),
     m_data(data),
     m_doc(doc),

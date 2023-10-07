@@ -44,8 +44,8 @@
 #include "ui_dialogcubicbezier.h"
 
 //---------------------------------------------------------------------------------------------------------------------
-DialogCubicBezier::DialogCubicBezier(const VContainer *data, quint32 toolId, QWidget *parent)
-  : DialogTool(data, toolId, parent),
+DialogCubicBezier::DialogCubicBezier(const VContainer *data, VAbstractPattern *doc, quint32 toolId, QWidget *parent)
+  : DialogTool(data, doc, toolId, parent),
     ui(new Ui::DialogCubicBezier),
     spl(),
     newDuplicate(-1),

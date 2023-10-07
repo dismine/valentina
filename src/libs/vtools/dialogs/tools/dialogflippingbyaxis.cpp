@@ -59,8 +59,9 @@
 #include "ui_dialogflippingbyaxis.h"
 
 //---------------------------------------------------------------------------------------------------------------------
-DialogFlippingByAxis::DialogFlippingByAxis(const VContainer *data, quint32 toolId, QWidget *parent)
-  : DialogTool(data, toolId, parent),
+DialogFlippingByAxis::DialogFlippingByAxis(const VContainer *data, VAbstractPattern *doc, quint32 toolId,
+                                           QWidget *parent)
+  : DialogTool(data, doc, toolId, parent),
     ui(new Ui::DialogFlippingByAxis),
     stage1(true),
     m_suffix(),

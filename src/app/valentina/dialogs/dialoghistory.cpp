@@ -27,19 +27,19 @@
  *************************************************************************/
 
 #include "dialoghistory.h"
-#include "ui_dialoghistory.h"
 #include "../vgeometry/varc.h"
-#include "../vgeometry/vellipticalarc.h"
 #include "../vgeometry/vcubicbezier.h"
-#include "../vgeometry/vsplinepath.h"
 #include "../vgeometry/vcubicbezierpath.h"
+#include "../vgeometry/vellipticalarc.h"
 #include "../vgeometry/vpointf.h"
-#include "../vtools/tools/drawTools/toolpoint/toolsinglepoint/toolcut/vtoolcutspline.h"
-#include "../vtools/tools/drawTools/toolpoint/toolsinglepoint/toolcut/vtoolcutsplinepath.h"
-#include "../vtools/tools/drawTools/toolpoint/toolsinglepoint/toolcut/vtoolcutarc.h"
-#include "../xml/vpattern.h"
+#include "../vgeometry/vsplinepath.h"
 #include "../vmisc/vtablesearch.h"
 #include "../vmisc/vvalentinasettings.h"
+#include "../vtools/tools/drawTools/toolpoint/toolsinglepoint/toolcut/vtoolcutarc.h"
+#include "../vtools/tools/drawTools/toolpoint/toolsinglepoint/toolcut/vtoolcutspline.h"
+#include "../vtools/tools/drawTools/toolpoint/toolsinglepoint/toolcut/vtoolcutsplinepath.h"
+#include "../xml/vpattern.h"
+#include "ui_dialoghistory.h"
 
 #include <QDebug>
 #include <QtConcurrent>
@@ -62,10 +62,9 @@ auto AttrUInt(const QDomElement &domElement, const QString &name) -> quint32
  * @param parent parent widget
  */
 DialogHistory::DialogHistory(VContainer *data, VPattern *doc, QWidget *parent)
-    :DialogTool(data, 0, parent),
-      ui(new Ui::DialogHistory),
-      m_doc(doc),
-      m_searchHistory(new QMenu(this))
+  : DialogTool(data, doc, NULL_ID, parent),
+    ui(new Ui::DialogHistory),
+    m_searchHistory(new QMenu(this))
 {
     ui->setupUi(this);
 
@@ -76,10 +75,8 @@ DialogHistory::DialogHistory(VContainer *data, VPattern *doc, QWidget *parent)
     FillTable();
     InitialTable();
     connect(ui->tableWidget, &QTableWidget::cellClicked, this, &DialogHistory::cellClicked);
-    connect(this, &DialogHistory::ShowHistoryTool, doc, [doc](quint32 id, bool enable)
-    {
-        emit doc->ShowTool(id, enable);
-    });
+    connect(this, &DialogHistory::ShowHistoryTool, doc,
+            [doc](quint32 id, bool enable) { emit doc->ShowTool(id, enable); });
     connect(doc, &VPattern::ChangedCursor, this, &DialogHistory::ChangedCursor);
     connect(doc, &VPattern::patternChanged, this, &DialogHistory::UpdateHistory);
     ShowPoint();
@@ -127,7 +124,7 @@ void DialogHistory::cellClicked(int row, int column)
         item->setIcon(QIcon("://icon/32x32/put_after.png"));
         const auto id = qvariant_cast<quint32>(item->data(Qt::UserRole));
         m_doc->blockSignals(true);
-        row == ui->tableWidget->rowCount()-1 ? m_doc->setCursor(0) : m_doc->setCursor(id);
+        row == ui->tableWidget->rowCount() - 1 ? m_doc->setCursor(0) : m_doc->setCursor(id);
         m_doc->blockSignals(false);
     }
     else
@@ -150,7 +147,7 @@ void DialogHistory::cellClicked(int row, int column)
  */
 void DialogHistory::ChangedCursor(quint32 id)
 {
-    for (qint32 i = 0; i< ui->tableWidget->rowCount(); ++i)
+    for (qint32 i = 0; i < ui->tableWidget->rowCount(); ++i)
     {
         QTableWidgetItem *item = ui->tableWidget->item(i, 0);
         auto rId = qvariant_cast<quint32>(item->data(Qt::UserRole));
@@ -186,12 +183,10 @@ void DialogHistory::FillTable()
     QVector<VToolRecord> history = m_doc->getLocalHistory();
     qint32 currentRow = -1;
     qint32 count = 0;
-    ui->tableWidget->setRowCount(static_cast<int>(history.size()));//Make row count max possible number
+    ui->tableWidget->setRowCount(static_cast<int>(history.size())); // Make row count max possible number
 
-    std::function<HistoryRecord (const VToolRecord &tool)> CreateRecord = [this](const VToolRecord &tool)
-    {
-        return Record(tool);
-    };
+    std::function<HistoryRecord(const VToolRecord &tool)> CreateRecord = [this](const VToolRecord &tool)
+    { return Record(tool); };
 
     QVector<HistoryRecord> historyRecords = QtConcurrent::blockingMapped(history, CreateRecord);
 
@@ -216,8 +211,8 @@ void DialogHistory::FillTable()
             ++count;
         }
     }
-    ui->tableWidget->setRowCount(count);//Real row count
-    if (count>0)
+    ui->tableWidget->setRowCount(count); // Real row count
+    if (count > 0)
     {
         m_cursorRow = CursorRow();
         QTableWidgetItem *item = ui->tableWidget->item(m_cursorRow, 0);
@@ -247,7 +242,7 @@ auto DialogHistory::Record(const VToolRecord &tool) const -> HistoryRecord
     const QDomElement domElem = m_doc->elementById(tool.getId(), QString(), updateCache);
     if (not domElem.isElement())
     {
-        qDebug()<<"Can't find element by id" << record.id << Q_FUNC_INFO;
+        qDebug() << "Can't find element by id" << record.id << Q_FUNC_INFO;
         return record;
     }
 
@@ -257,21 +252,21 @@ auto DialogHistory::Record(const VToolRecord &tool) const -> HistoryRecord
     }
     catch (const VExceptionBadId &e)
     {
-        qDebug()<<e.ErrorMessage()<<Q_FUNC_INFO;
+        qDebug() << e.ErrorMessage() << Q_FUNC_INFO;
         return record;
     }
-    qDebug()<<"Can't create history record for the tool" << record.id;
+    qDebug() << "Can't create history record for the tool" << record.id;
     return record;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-auto DialogHistory::RecordDescription(const VToolRecord &tool, HistoryRecord record,
-                                      const QDomElement &domElem) const -> HistoryRecord
+auto DialogHistory::RecordDescription(const VToolRecord &tool, HistoryRecord record, const QDomElement &domElem) const
+    -> HistoryRecord
 {
     // This check helps to find missed tools in the switch
     Q_STATIC_ASSERT_X(static_cast<int>(Tool::LAST_ONE_DO_NOT_USE) == 59, "Not all tools were used in history.");
 
-    switch ( tool.getTypeTool() )
+    switch (tool.getTypeTool())
     {
         case Tool::Arrow:
         case Tool::SinglePoint:
@@ -279,8 +274,8 @@ auto DialogHistory::RecordDescription(const VToolRecord &tool, HistoryRecord rec
         case Tool::LinePoint:
         case Tool::AbstractSpline:
         case Tool::Cut:
-        case Tool::Midpoint:// Same as Tool::AlongLine, but tool will never has such type
-        case Tool::ArcIntersectAxis:// Same as Tool::CurveIntersectAxis, but tool will never has such type
+        case Tool::Midpoint:         // Same as Tool::AlongLine, but tool will never has such type
+        case Tool::ArcIntersectAxis: // Same as Tool::CurveIntersectAxis, but tool will never has such type
         case Tool::BackgroundImage:
         case Tool::BackgroundImageControls:
         case Tool::BackgroundPixmapImage:
@@ -296,9 +291,9 @@ auto DialogHistory::RecordDescription(const VToolRecord &tool, HistoryRecord rec
                                      .arg(PointName(AttrUInt(domElem, AttrBasePoint)), PointName(tool.getId()));
             return record;
         case Tool::Line:
-            record.description = tr("%1_%2 - Line from point %1 to point %2")
-                                     .arg(PointName(AttrUInt(domElem, AttrFirstPoint)),
-                                          PointName(AttrUInt(domElem, AttrSecondPoint)));
+            record.description =
+                tr("%1_%2 - Line from point %1 to point %2")
+                    .arg(PointName(AttrUInt(domElem, AttrFirstPoint)), PointName(AttrUInt(domElem, AttrSecondPoint)));
             return record;
         case Tool::AlongLine:
             record.description = tr("%3 - Point along line %1_%2")
@@ -314,18 +309,17 @@ auto DialogHistory::RecordDescription(const VToolRecord &tool, HistoryRecord rec
                                           PointName(AttrUInt(domElem, AttrSecondPoint)), PointName(tool.getId()));
             return record;
         case Tool::Bisector:
-            record.description = tr("%4 - bisector of angle %1_%2_%3")
-                                     .arg(PointName(AttrUInt(domElem, AttrFirstPoint)),
-                                          PointName(AttrUInt(domElem, AttrSecondPoint)),
-                                          PointName(AttrUInt(domElem, AttrThirdPoint)), PointName(tool.getId()));
+            record.description =
+                tr("%4 - bisector of angle %1_%2_%3")
+                    .arg(PointName(AttrUInt(domElem, AttrFirstPoint)), PointName(AttrUInt(domElem, AttrSecondPoint)),
+                         PointName(AttrUInt(domElem, AttrThirdPoint)), PointName(tool.getId()));
             return record;
         case Tool::LineIntersect:
-            record.description = tr("%5 - intersection of lines %1_%2 and %3_%4")
-                                     .arg(PointName(AttrUInt(domElem, AttrP1Line1)),
-                                          PointName(AttrUInt(domElem, AttrP2Line1)),
-                                          PointName(AttrUInt(domElem, AttrP1Line2)),
-                                          PointName(AttrUInt(domElem, AttrP2Line2)),
-                                          PointName(tool.getId()));
+            record.description =
+                tr("%5 - intersection of lines %1_%2 and %3_%4")
+                    .arg(PointName(AttrUInt(domElem, AttrP1Line1)), PointName(AttrUInt(domElem, AttrP2Line1)),
+                         PointName(AttrUInt(domElem, AttrP1Line2)), PointName(AttrUInt(domElem, AttrP2Line2)),
+                         PointName(tool.getId()));
             return record;
         case Tool::Spline:
         {
@@ -348,9 +342,7 @@ auto DialogHistory::RecordDescription(const VToolRecord &tool, HistoryRecord rec
         case Tool::ArcWithLength:
         {
             const QSharedPointer<VArc> arc = data->GeometricObject<VArc>(tool.getId());
-            record.description = tr("%1 with length %2")
-                                     .arg(arc->NameForHistory(tr("Arc")))
-                                     .arg(arc->GetLength());
+            record.description = tr("%1 with length %2").arg(arc->NameForHistory(tr("Arc"))).arg(arc->GetLength());
             return record;
         }
         case Tool::SplinePath:
@@ -366,44 +358,39 @@ auto DialogHistory::RecordDescription(const VToolRecord &tool, HistoryRecord rec
             return record;
         }
         case Tool::PointOfContact:
-            record.description = tr("%4 - point of contact of arc with the center in point %1 and line %2_%3")
-                                     .arg(PointName(AttrUInt(domElem, AttrCenter)),
-                                          PointName(AttrUInt(domElem, AttrFirstPoint)),
-                                          PointName(AttrUInt(domElem, AttrSecondPoint)),
-                                          PointName(tool.getId()));
+            record.description =
+                tr("%4 - point of contact of arc with the center in point %1 and line %2_%3")
+                    .arg(PointName(AttrUInt(domElem, AttrCenter)), PointName(AttrUInt(domElem, AttrFirstPoint)),
+                         PointName(AttrUInt(domElem, AttrSecondPoint)), PointName(tool.getId()));
             return record;
         case Tool::Height:
-            record.description = tr("Point of perpendicular from point %1 to line %2_%3")
-                                     .arg(PointName(AttrUInt(domElem, AttrBasePoint)),
-                                          PointName(AttrUInt(domElem, AttrP1Line)),
-                                          PointName(AttrUInt(domElem, AttrP2Line)));
+            record.description =
+                tr("Point of perpendicular from point %1 to line %2_%3")
+                    .arg(PointName(AttrUInt(domElem, AttrBasePoint)), PointName(AttrUInt(domElem, AttrP1Line)),
+                         PointName(AttrUInt(domElem, AttrP2Line)));
             return record;
         case Tool::Triangle:
-            record.description = tr("Triangle: axis %1_%2, points %3 and %4")
-                                     .arg(PointName(AttrUInt(domElem, AttrAxisP1)),
-                                          PointName(AttrUInt(domElem, AttrAxisP2)),
-                                          PointName(AttrUInt(domElem, AttrFirstPoint)),
-                                          PointName(AttrUInt(domElem, AttrSecondPoint)));
+            record.description =
+                tr("Triangle: axis %1_%2, points %3 and %4")
+                    .arg(PointName(AttrUInt(domElem, AttrAxisP1)), PointName(AttrUInt(domElem, AttrAxisP2)),
+                         PointName(AttrUInt(domElem, AttrFirstPoint)), PointName(AttrUInt(domElem, AttrSecondPoint)));
             return record;
         case Tool::PointOfIntersection:
             record.description = tr("%1 - point of intersection %2 and %3")
-                                     .arg(PointName(tool.getId()),
-                                          PointName(AttrUInt(domElem, AttrFirstPoint)),
+                                     .arg(PointName(tool.getId()), PointName(AttrUInt(domElem, AttrFirstPoint)),
                                           PointName(AttrUInt(domElem, AttrSecondPoint)));
             return record;
         case Tool::CutArc:
         {
             const QSharedPointer<VArc> arc = data->GeometricObject<VArc>(AttrUInt(domElem, AttrArc));
-            record.description = tr("%1 - cut %2")
-                                     .arg(PointName(tool.getId()), arc->NameForHistory(tr("arc")));
+            record.description = tr("%1 - cut %2").arg(PointName(tool.getId()), arc->NameForHistory(tr("arc")));
             return record;
         }
         case Tool::CutSpline:
         {
             const quint32 splineId = AttrUInt(domElem, VToolCutSpline::AttrSpline);
             const QSharedPointer<VAbstractCubicBezier> spl = data->GeometricObject<VAbstractCubicBezier>(splineId);
-            record.description = tr("%1 - cut %2")
-                                     .arg(PointName(tool.getId()), spl->NameForHistory(tr("curve")));
+            record.description = tr("%1 - cut %2").arg(PointName(tool.getId()), spl->NameForHistory(tr("curve")));
             return record;
         }
         case Tool::CutSplinePath:
@@ -411,16 +398,15 @@ auto DialogHistory::RecordDescription(const VToolRecord &tool, HistoryRecord rec
             const quint32 splinePathId = AttrUInt(domElem, VToolCutSplinePath::AttrSplinePath);
             const QSharedPointer<VAbstractCubicBezierPath> splPath =
                 data->GeometricObject<VAbstractCubicBezierPath>(splinePathId);
-            record.description = tr("%1 - cut %2")
-                                     .arg(PointName(tool.getId()), splPath->NameForHistory(tr("curve path")));
+            record.description =
+                tr("%1 - cut %2").arg(PointName(tool.getId()), splPath->NameForHistory(tr("curve path")));
             return record;
         }
         case Tool::LineIntersectAxis:
-            record.description = tr("%1 - point of intersection line %2_%3 and axis through point %4")
-                                     .arg(PointName(tool.getId()),
-                                          PointName(AttrUInt(domElem, AttrP1Line)),
-                                          PointName(AttrUInt(domElem, AttrP2Line)),
-                                          PointName(AttrUInt(domElem, AttrBasePoint)));
+            record.description =
+                tr("%1 - point of intersection line %2_%3 and axis through point %4")
+                    .arg(PointName(tool.getId()), PointName(AttrUInt(domElem, AttrP1Line)),
+                         PointName(AttrUInt(domElem, AttrP2Line)), PointName(AttrUInt(domElem, AttrBasePoint)));
             return record;
         case Tool::CurveIntersectAxis:
             record.description = tr("%1 - point of intersection curve and axis through point %2")
@@ -442,17 +428,16 @@ auto DialogHistory::RecordDescription(const VToolRecord &tool, HistoryRecord rec
             record.description = tr("%1 - point from arc and tangent").arg(PointName(tool.getId()));
             return record;
         case Tool::TrueDarts:
-            record.description = tr("Correction the dart %1_%2_%3")
-                                     .arg(PointName(AttrUInt(domElem, AttrDartP1)),
-                                          PointName(AttrUInt(domElem, AttrDartP2)),
-                                          PointName(AttrUInt(domElem, AttrDartP2)));
+            record.description =
+                tr("Correction the dart %1_%2_%3")
+                    .arg(PointName(AttrUInt(domElem, AttrDartP1)), PointName(AttrUInt(domElem, AttrDartP2)),
+                         PointName(AttrUInt(domElem, AttrDartP2)));
             return record;
         case Tool::EllipticalArc:
         {
             const QSharedPointer<VEllipticalArc> elArc = data->GeometricObject<VEllipticalArc>(tool.getId());
-            record.description = tr("%1 with length %2")
-                                     .arg(elArc->NameForHistory(tr("Elliptical arc")))
-                                     .arg(elArc->GetLength());
+            record.description =
+                tr("%1 with length %2").arg(elArc->NameForHistory(tr("Elliptical arc"))).arg(elArc->GetLength());
             return record;
         }
         case Tool::Rotation:
@@ -461,10 +446,10 @@ auto DialogHistory::RecordDescription(const VToolRecord &tool, HistoryRecord rec
                                           VDomDocument::GetParametrString(domElem, AttrSuffix, QString()));
             return record;
         case Tool::FlippingByLine:
-            record.description = tr("Flipping by line %1_%2. Suffix '%3'")
-                                     .arg(PointName(AttrUInt(domElem, AttrP1Line)),
-                                          PointName(AttrUInt(domElem, AttrP2Line)),
-                                          VDomDocument::GetParametrString(domElem, AttrSuffix, QString()));
+            record.description =
+                tr("Flipping by line %1_%2. Suffix '%3'")
+                    .arg(PointName(AttrUInt(domElem, AttrP1Line)), PointName(AttrUInt(domElem, AttrP2Line)),
+                         VDomDocument::GetParametrString(domElem, AttrSuffix, QString()));
             return record;
         case Tool::FlippingByAxis:
             record.description = tr("Flipping by axis through %1 point. Suffix '%2'")
@@ -472,11 +457,11 @@ auto DialogHistory::RecordDescription(const VToolRecord &tool, HistoryRecord rec
                                           VDomDocument::GetParametrString(domElem, AttrSuffix, QString()));
             return record;
         case Tool::Move:
-            record.description = tr("Move objects. Suffix '%1'")
-                                     .arg(VDomDocument::GetParametrString(domElem, AttrSuffix, QString()));
+            record.description =
+                tr("Move objects. Suffix '%1'").arg(VDomDocument::GetParametrString(domElem, AttrSuffix, QString()));
             return record;
-        //Because "history" not only show history of pattern, but help restore current data for each pattern's
-        //piece, we need add record about details and nodes, but don't show them.
+        // Because "history" not only show history of pattern, but help restore current data for each pattern's
+        // piece, we need add record about details and nodes, but don't show them.
         case Tool::Piece:
         case Tool::UnionDetails:
         case Tool::NodeArc:
@@ -577,7 +562,7 @@ void DialogHistory::changeEvent(QEvent *event)
 //---------------------------------------------------------------------------------------------------------------------
 void DialogHistory::showEvent(QShowEvent *event)
 {
-    QDialog::showEvent( event ); // return default behavior NOLINT(bugprone-parent-virtual-call)
+    QDialog::showEvent(event); // return default behavior NOLINT(bugprone-parent-virtual-call)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -602,7 +587,7 @@ auto DialogHistory::CursorRow() const -> int
     const quint32 cursor = m_doc->getCursor();
     if (cursor == 0)
     {
-        return ui->tableWidget->rowCount()-1;
+        return ui->tableWidget->rowCount() - 1;
     }
 
     for (int i = 0; i < ui->tableWidget->rowCount(); ++i)
@@ -614,7 +599,7 @@ auto DialogHistory::CursorRow() const -> int
             return i;
         }
     }
-    return ui->tableWidget->rowCount()-1;
+    return ui->tableWidget->rowCount() - 1;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -632,105 +617,115 @@ void DialogHistory::InitSearch()
 
     UpdateSearchControlsTooltips();
 
-    connect(ui->lineEditFind, &QLineEdit::textEdited, this, [this](const QString &term){m_search->Find(term);});
-    connect(ui->lineEditFind, &QLineEdit::editingFinished, this, [this]()
-    {
-        SaveSearchRequest();
-        InitSearchHistory();
-        m_search->Find(ui->lineEditFind->text());
-    });
-    connect(ui->toolButtonFindPrevious, &QToolButton::clicked, this, [this]()
-    {
-        SaveSearchRequest();
-        InitSearchHistory();
-        m_search->FindPrevious();
-        ui->labelResults->setText(QStringLiteral("%1/%2").arg(m_search->MatchIndex()+1).arg(m_search->MatchCount()));
-    });
-    connect(ui->toolButtonFindNext, &QToolButton::clicked, this, [this]()
-    {
-        SaveSearchRequest();
-        InitSearchHistory();
-        m_search->FindNext();
-        ui->labelResults->setText(QStringLiteral("%1/%2").arg(m_search->MatchIndex()+1).arg(m_search->MatchCount()));
-    });
+    connect(ui->lineEditFind, &QLineEdit::textEdited, this, [this](const QString &term) { m_search->Find(term); });
+    connect(ui->lineEditFind, &QLineEdit::editingFinished, this,
+            [this]()
+            {
+                SaveSearchRequest();
+                InitSearchHistory();
+                m_search->Find(ui->lineEditFind->text());
+            });
+    connect(ui->toolButtonFindPrevious, &QToolButton::clicked, this,
+            [this]()
+            {
+                SaveSearchRequest();
+                InitSearchHistory();
+                m_search->FindPrevious();
+                ui->labelResults->setText(
+                    QStringLiteral("%1/%2").arg(m_search->MatchIndex() + 1).arg(m_search->MatchCount()));
+            });
+    connect(ui->toolButtonFindNext, &QToolButton::clicked, this,
+            [this]()
+            {
+                SaveSearchRequest();
+                InitSearchHistory();
+                m_search->FindNext();
+                ui->labelResults->setText(
+                    QStringLiteral("%1/%2").arg(m_search->MatchIndex() + 1).arg(m_search->MatchCount()));
+            });
 
-    connect(m_search.data(), &VTableSearch::HasResult, this, [this] (bool state)
-    {
-        ui->toolButtonFindPrevious->setEnabled(state);
-        ui->toolButtonFindNext->setEnabled(state);
+    connect(m_search.data(), &VTableSearch::HasResult, this,
+            [this](bool state)
+            {
+                ui->toolButtonFindPrevious->setEnabled(state);
+                ui->toolButtonFindNext->setEnabled(state);
 
-        if (state)
-        {
-            ui->labelResults->setText(
-                QStringLiteral("%1/%2").arg(m_search->MatchIndex()+1).arg(m_search->MatchCount()));
-        }
-        else
-        {
-            ui->labelResults->setText(tr("0 results"));
-        }
+                if (state)
+                {
+                    ui->labelResults->setText(
+                        QStringLiteral("%1/%2").arg(m_search->MatchIndex() + 1).arg(m_search->MatchCount()));
+                }
+                else
+                {
+                    ui->labelResults->setText(tr("0 results"));
+                }
 
-        QPalette palette;
+                QPalette palette;
 
-        if (not state && not ui->lineEditFind->text().isEmpty())
-        {
-            palette.setColor(QPalette::Text, Qt::red);
-            ui->lineEditFind->setPalette(palette);
+                if (not state && not ui->lineEditFind->text().isEmpty())
+                {
+                    palette.setColor(QPalette::Text, Qt::red);
+                    ui->lineEditFind->setPalette(palette);
 
-            palette.setColor(QPalette::Active, ui->labelResults->foregroundRole(), Qt::red);
-            palette.setColor(QPalette::Inactive, ui->labelResults->foregroundRole(), Qt::red);
-            ui->labelResults->setPalette(palette);
-        }
-        else
-        {
-            ui->lineEditFind->setPalette(palette);
-            ui->labelResults->setPalette(palette);
-        }
-    });
+                    palette.setColor(QPalette::Active, ui->labelResults->foregroundRole(), Qt::red);
+                    palette.setColor(QPalette::Inactive, ui->labelResults->foregroundRole(), Qt::red);
+                    ui->labelResults->setPalette(palette);
+                }
+                else
+                {
+                    ui->lineEditFind->setPalette(palette);
+                    ui->labelResults->setPalette(palette);
+                }
+            });
 
-    connect(ui->toolButtonCaseSensitive, &QToolButton::toggled, this, [this](bool checked)
-    {
-        m_search->SetMatchCase(checked);
-        m_search->Find(ui->lineEditFind->text());
-        ui->lineEditFind->setPlaceholderText(m_search->SearchPlaceholder());
-    });
+    connect(ui->toolButtonCaseSensitive, &QToolButton::toggled, this,
+            [this](bool checked)
+            {
+                m_search->SetMatchCase(checked);
+                m_search->Find(ui->lineEditFind->text());
+                ui->lineEditFind->setPlaceholderText(m_search->SearchPlaceholder());
+            });
 
-    connect(ui->toolButtonWholeWord, &QToolButton::toggled, this, [this](bool checked)
-    {
-        m_search->SetMatchWord(checked);
-        m_search->Find(ui->lineEditFind->text());
-        ui->lineEditFind->setPlaceholderText(m_search->SearchPlaceholder());
-    });
+    connect(ui->toolButtonWholeWord, &QToolButton::toggled, this,
+            [this](bool checked)
+            {
+                m_search->SetMatchWord(checked);
+                m_search->Find(ui->lineEditFind->text());
+                ui->lineEditFind->setPlaceholderText(m_search->SearchPlaceholder());
+            });
 
-    connect(ui->toolButtonRegexp, &QToolButton::toggled, this, [this](bool checked)
-    {
-        m_search->SetMatchRegexp(checked);
+    connect(ui->toolButtonRegexp, &QToolButton::toggled, this,
+            [this](bool checked)
+            {
+                m_search->SetMatchRegexp(checked);
 
-        if (checked)
-        {
-            ui->toolButtonWholeWord->blockSignals(true);
-            ui->toolButtonWholeWord->setChecked(false);
-            ui->toolButtonWholeWord->blockSignals(false);
-            ui->toolButtonWholeWord->setEnabled(false);
+                if (checked)
+                {
+                    ui->toolButtonWholeWord->blockSignals(true);
+                    ui->toolButtonWholeWord->setChecked(false);
+                    ui->toolButtonWholeWord->blockSignals(false);
+                    ui->toolButtonWholeWord->setEnabled(false);
 
-            ui->toolButtonUseUnicodeProperties->setEnabled(true);
-        }
-        else
-        {
-            ui->toolButtonWholeWord->setEnabled(true);
-            ui->toolButtonUseUnicodeProperties->blockSignals(true);
-            ui->toolButtonUseUnicodeProperties->setChecked(false);
-            ui->toolButtonUseUnicodeProperties->blockSignals(false);
-            ui->toolButtonUseUnicodeProperties->setEnabled(false);
-        }
-        m_search->Find(ui->lineEditFind->text());
-        ui->lineEditFind->setPlaceholderText(m_search->SearchPlaceholder());
-    });
+                    ui->toolButtonUseUnicodeProperties->setEnabled(true);
+                }
+                else
+                {
+                    ui->toolButtonWholeWord->setEnabled(true);
+                    ui->toolButtonUseUnicodeProperties->blockSignals(true);
+                    ui->toolButtonUseUnicodeProperties->setChecked(false);
+                    ui->toolButtonUseUnicodeProperties->blockSignals(false);
+                    ui->toolButtonUseUnicodeProperties->setEnabled(false);
+                }
+                m_search->Find(ui->lineEditFind->text());
+                ui->lineEditFind->setPlaceholderText(m_search->SearchPlaceholder());
+            });
 
-    connect(ui->toolButtonUseUnicodeProperties, &QToolButton::toggled, this, [this](bool checked)
-    {
-        m_search->SetUseUnicodePreperties(checked);
-        m_search->Find(ui->lineEditFind->text());
-    });
+    connect(ui->toolButtonUseUnicodeProperties, &QToolButton::toggled, this,
+            [this](bool checked)
+            {
+                m_search->SetUseUnicodePreperties(checked);
+                m_search->Find(ui->lineEditFind->text());
+            });
 
     m_searchHistory->setStyleSheet(QStringLiteral("QMenu { menu-scrollable: 1; }"));
     InitSearchHistory();
@@ -742,21 +737,22 @@ void DialogHistory::InitSearchHistory()
 {
     QStringList searchHistory = VAbstractValApplication::VApp()->ValentinaSettings()->GetHistorySearchHistory();
     m_searchHistory->clear();
-    for (const auto& term : searchHistory)
+    for (const auto &term : searchHistory)
     {
         QAction *action = m_searchHistory->addAction(term);
         action->setData(term);
-        connect(action, &QAction::triggered, this, [this]()
-        {
-            auto *action = qobject_cast<QAction *>(sender());
-            if (action != nullptr)
-            {
-                QString term = action->data().toString();
-                ui->lineEditFind->setText(term);
-                m_search->Find(term);
-                ui->lineEditFind->setFocus();
-            }
-        });
+        connect(action, &QAction::triggered, this,
+                [this]()
+                {
+                    auto *action = qobject_cast<QAction *>(sender());
+                    if (action != nullptr)
+                    {
+                        QString term = action->data().toString();
+                        ui->lineEditFind->setText(term);
+                        m_search->Find(term);
+                        ui->lineEditFind->setFocus();
+                    }
+                });
     }
 }
 

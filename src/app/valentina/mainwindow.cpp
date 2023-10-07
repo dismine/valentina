@@ -865,7 +865,7 @@ void MainWindow::SetToolButton(bool checked, Tool t, const QString &cursor, cons
 
         m_statusLabel->setText(toolTip);
         ui->view->setShowToolOptions(false);
-        m_dialogTool = new Dialog(pattern, 0, this);
+        m_dialogTool = new Dialog(pattern, doc, 0, this);
 
         // This check helps to find missed tools in the switch
         Q_STATIC_ASSERT_X(static_cast<int>(Tool::LAST_ONE_DO_NOT_USE) == 59, "Check if need to extend.");

@@ -51,7 +51,7 @@ class DialogFlippingByLine : public DialogTool
     Q_OBJECT // NOLINT
 
 public:
-    explicit DialogFlippingByLine(const VContainer *data, quint32 toolId, QWidget *parent = nullptr);
+    explicit DialogFlippingByLine(const VContainer *data, VAbstractPattern *doc, quint32 toolId, QWidget *parent = nullptr);
     ~DialogFlippingByLine() override;
 
     auto GetFirstLinePointId() const -> quint32;

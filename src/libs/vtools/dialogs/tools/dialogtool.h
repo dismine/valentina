@@ -85,7 +85,7 @@ class DialogTool : public QDialog
     Q_OBJECT // NOLINT
 
 public:
-    DialogTool(const VContainer *data, quint32 toolId, QWidget *parent = nullptr);
+    DialogTool(const VContainer *data, VAbstractPattern *doc, quint32 toolId, QWidget *parent = nullptr);
     ~DialogTool() override;
 
     auto GetAssociatedTool() -> VAbstractTool *;
@@ -134,6 +134,8 @@ public slots:
 protected:
     /** @brief data container with data */
     const VContainer *data;
+
+    VAbstractPattern *m_doc;
 
     /** @brief isInitialized true if window is initialized */
     bool isInitialized;

@@ -34,8 +34,8 @@
 #include <QLineEdit>
 #include <QPointer>
 
-#include "../../visualization/visualization.h"
 #include "../../visualization/line/vistoolpointofintersection.h"
+#include "../../visualization/visualization.h"
 #include "../ifc/xml/vabstractpattern.h"
 #include "dialogtool.h"
 #include "ui_dialogpointofintersection.h"
@@ -46,37 +46,38 @@
  * @param data container with data
  * @param parent parent widget
  */
-DialogPointOfIntersection::DialogPointOfIntersection(const VContainer *data, quint32 toolId, QWidget *parent)
-    : DialogTool(data, toolId, parent),
-      ui(new Ui::DialogPointOfIntersection),
-      pointName(),
-      flagName(true),
-      flagError(true)
+DialogPointOfIntersection::DialogPointOfIntersection(const VContainer *data, VAbstractPattern *doc, quint32 toolId,
+                                                     QWidget *parent)
+  : DialogTool(data, doc, toolId, parent),
+    ui(new Ui::DialogPointOfIntersection),
+    pointName(),
+    flagName(true),
+    flagError(true)
 {
     ui->setupUi(this);
 
     ui->lineEditNamePoint->setClearButtonEnabled(true);
 
     ui->lineEditNamePoint->setText(
-                VAbstractValApplication::VApp()->getCurrentDocument()->GenerateLabel(LabelType::NewLabel));
+        VAbstractValApplication::VApp()->getCurrentDocument()->GenerateLabel(LabelType::NewLabel));
 
     InitOkCancelApply(ui);
 
     FillComboBoxPoints(ui->comboBoxFirstPoint);
     FillComboBoxPoints(ui->comboBoxSecondPoint);
 
-    connect(ui->lineEditNamePoint, &QLineEdit::textChanged, this, [this]()
-    {
-        CheckPointLabel(this, ui->lineEditNamePoint, ui->labelEditNamePoint, pointName, this->data, flagName);
-        CheckState();
-    });
-    connect(ui->comboBoxFirstPoint, &QComboBox::currentTextChanged,
-            this, &DialogPointOfIntersection::PointNameChanged);
-    connect(ui->comboBoxSecondPoint, &QComboBox::currentTextChanged,
-            this, &DialogPointOfIntersection::PointNameChanged);
+    connect(ui->lineEditNamePoint, &QLineEdit::textChanged, this,
+            [this]()
+            {
+                CheckPointLabel(this, ui->lineEditNamePoint, ui->labelEditNamePoint, pointName, this->data, flagName);
+                CheckState();
+            });
+    connect(ui->comboBoxFirstPoint, &QComboBox::currentTextChanged, this, &DialogPointOfIntersection::PointNameChanged);
+    connect(ui->comboBoxSecondPoint, &QComboBox::currentTextChanged, this,
+            &DialogPointOfIntersection::PointNameChanged);
 
     vis = new VisToolPointOfIntersection(data);
-    vis->VisualMode(NULL_ID);//Show vertical axis
+    vis->VisualMode(NULL_ID); // Show vertical axis
 
     ui->tabWidget->setCurrentIndex(0);
     SetTabStopDistance(ui->plainTextEditToolNotes);
@@ -116,7 +117,7 @@ void DialogPointOfIntersection::SetSecondPointId(quint32 value)
  */
 void DialogPointOfIntersection::ChosenObject(quint32 id, const SceneObject &type)
 {
-    if (prepare == false)// After first choose we ignore all objects
+    if (prepare == false) // After first choose we ignore all objects
     {
         if (type == SceneObject::Point)
         {

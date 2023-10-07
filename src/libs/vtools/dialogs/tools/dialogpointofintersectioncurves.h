@@ -48,7 +48,8 @@ class DialogPointOfIntersectionCurves : public DialogTool
     Q_OBJECT // NOLINT
 
 public:
-    explicit DialogPointOfIntersectionCurves(const VContainer *data, quint32 toolId, QWidget *parent = nullptr);
+    explicit DialogPointOfIntersectionCurves(const VContainer *data, VAbstractPattern *doc, quint32 toolId,
+                                             QWidget *parent = nullptr);
     ~DialogPointOfIntersectionCurves() override;
 
     auto GetPointName() const -> QString;

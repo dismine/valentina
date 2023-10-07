@@ -55,7 +55,6 @@ class DialogSeamAllowance : public DialogTool
 
 public:
     DialogSeamAllowance(const VContainer *data, VAbstractPattern *doc, quint32 toolId, QWidget *parent = nullptr);
-    DialogSeamAllowance(const VContainer *data, quint32 toolId, QWidget *parent = nullptr);
     ~DialogSeamAllowance() override;
 
     void EnableApply(bool enable);
@@ -252,8 +251,6 @@ private:
     QVector<QPointer<VUndoCommand>> m_undoStack{};
     QHash<quint32, VPlaceLabelItem> m_newPlaceLabels{};
     QHash<quint32, VPiecePath> m_newPaths{};
-
-    VAbstractPattern *m_doc{nullptr};
 
     QString m_defLabelValue{};
 

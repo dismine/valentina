@@ -47,7 +47,7 @@ class DialogCurveIntersectAxis final : public DialogTool
     Q_OBJECT // NOLINT
 
 public:
-    DialogCurveIntersectAxis(const VContainer *data, quint32 toolId, QWidget *parent = nullptr);
+    DialogCurveIntersectAxis(const VContainer *data, VAbstractPattern *doc, quint32 toolId, QWidget *parent = nullptr);
     ~DialogCurveIntersectAxis() override;
 
     auto GetPointName() const -> QString;

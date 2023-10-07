@@ -41,8 +41,8 @@
 #include <QSharedPointer>
 #include <new>
 
-#include "../../visualization/visualization.h"
 #include "../../visualization/line/vistoollineintersect.h"
+#include "../../visualization/visualization.h"
 #include "../ifc/xml/vabstractpattern.h"
 #include "../vgeometry/vpointf.h"
 #include "../vmisc/compatibility.h"
@@ -59,13 +59,13 @@
  * @param data container with data
  * @param parent parent widget
  */
-DialogLineIntersect::DialogLineIntersect(const VContainer *data, quint32 toolId, QWidget *parent)
-    : DialogTool(data, toolId, parent),
-      ui(new Ui::DialogLineIntersect),
-      pointName(),
-      flagError(true),
-      flagPoint(true),
-      flagName(true)
+DialogLineIntersect::DialogLineIntersect(const VContainer *data, VAbstractPattern *doc, quint32 toolId, QWidget *parent)
+  : DialogTool(data, doc, toolId, parent),
+    ui(new Ui::DialogLineIntersect),
+    pointName(),
+    flagError(true),
+    flagPoint(true),
+    flagName(true)
 {
     ui->setupUi(this);
 
@@ -74,26 +74,23 @@ DialogLineIntersect::DialogLineIntersect(const VContainer *data, quint32 toolId,
     number = 0;
     InitOkCancelApply(ui);
     ui->lineEditNamePoint->setText(
-                VAbstractValApplication::VApp()->getCurrentDocument()->GenerateLabel(LabelType::NewLabel));
+        VAbstractValApplication::VApp()->getCurrentDocument()->GenerateLabel(LabelType::NewLabel));
 
     FillComboBoxPoints(ui->comboBoxP1Line1);
     FillComboBoxPoints(ui->comboBoxP2Line1);
     FillComboBoxPoints(ui->comboBoxP1Line2);
     FillComboBoxPoints(ui->comboBoxP2Line2);
 
-    connect(ui->lineEditNamePoint, &QLineEdit::textChanged, this, [this]()
-    {
-        CheckPointLabel(this, ui->lineEditNamePoint, ui->labelEditNamePoint, pointName, this->data, flagName);
-        CheckState();
-    });
-    connect(ui->comboBoxP1Line1, &QComboBox::currentTextChanged,
-            this, &DialogLineIntersect::PointNameChanged);
-    connect(ui->comboBoxP2Line1, &QComboBox::currentTextChanged,
-            this, &DialogLineIntersect::PointNameChanged);
-    connect(ui->comboBoxP1Line2, &QComboBox::currentTextChanged,
-            this, &DialogLineIntersect::PointNameChanged);
-    connect(ui->comboBoxP2Line2, &QComboBox::currentTextChanged,
-            this, &DialogLineIntersect::PointNameChanged);
+    connect(ui->lineEditNamePoint, &QLineEdit::textChanged, this,
+            [this]()
+            {
+                CheckPointLabel(this, ui->lineEditNamePoint, ui->labelEditNamePoint, pointName, this->data, flagName);
+                CheckState();
+            });
+    connect(ui->comboBoxP1Line1, &QComboBox::currentTextChanged, this, &DialogLineIntersect::PointNameChanged);
+    connect(ui->comboBoxP2Line1, &QComboBox::currentTextChanged, this, &DialogLineIntersect::PointNameChanged);
+    connect(ui->comboBoxP1Line2, &QComboBox::currentTextChanged, this, &DialogLineIntersect::PointNameChanged);
+    connect(ui->comboBoxP2Line2, &QComboBox::currentTextChanged, this, &DialogLineIntersect::PointNameChanged);
 
     vis = new VisToolLineIntersect(data);
 
@@ -115,7 +112,7 @@ DialogLineIntersect::~DialogLineIntersect()
  */
 void DialogLineIntersect::ChosenObject(quint32 id, const SceneObject &type)
 {
-    if (prepare == false)// After first choose we ignore all objects
+    if (prepare == false) // After first choose we ignore all objects
     {
         if (type == SceneObject::Point)
         {
@@ -187,7 +184,7 @@ void DialogLineIntersect::ChosenObject(quint32 id, const SceneObject &type)
                         }
                     }
                 }
-                    break;
+                break;
                 default:
                     break;
             }
@@ -248,8 +245,7 @@ void DialogLineIntersect::PointNameChanged()
         QPointF fPoint;
         QLineF::IntersectType intersect = Intersects(line1, line2, &fPoint);
 
-
-        flagError = not (set.size() < 3 || intersect == QLineF::NoIntersection);
+        flagError = not(set.size() < 3 || intersect == QLineF::NoIntersection);
         color = flagError ? OkColor(this) : errorColor;
     }
     catch (const VExceptionBadId &)
@@ -308,7 +304,7 @@ void DialogLineIntersect::SetP2Line2(quint32 value)
 
     VisToolLineIntersect *line = qobject_cast<VisToolLineIntersect *>(vis);
     SCASSERT(line != nullptr)
-            line->SetLine2P2Id(value);
+    line->SetLine2P2Id(value);
 }
 
 //---------------------------------------------------------------------------------------------------------------------

@@ -48,7 +48,8 @@ class DialogPointOfIntersectionArcs : public DialogTool
     Q_OBJECT // NOLINT
 
 public:
-    DialogPointOfIntersectionArcs(const VContainer *data, quint32 toolId, QWidget *parent = nullptr);
+    DialogPointOfIntersectionArcs(const VContainer *data, VAbstractPattern *doc, quint32 toolId,
+                                  QWidget *parent = nullptr);
     ~DialogPointOfIntersectionArcs() override;
 
     auto GetPointName() const -> QString;

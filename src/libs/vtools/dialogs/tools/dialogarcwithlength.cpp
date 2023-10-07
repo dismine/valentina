@@ -52,8 +52,8 @@
 #include "ui_dialogarcwithlength.h"
 
 //---------------------------------------------------------------------------------------------------------------------
-DialogArcWithLength::DialogArcWithLength(const VContainer *data, quint32 toolId, QWidget *parent)
-  : DialogTool(data, toolId, parent),
+DialogArcWithLength::DialogArcWithLength(const VContainer *data, VAbstractPattern *doc, quint32 toolId, QWidget *parent)
+  : DialogTool(data, doc, toolId, parent),
     ui(new Ui::DialogArcWithLength),
     m_timerRadius(new QTimer(this)),
     m_timerF1(new QTimer(this)),

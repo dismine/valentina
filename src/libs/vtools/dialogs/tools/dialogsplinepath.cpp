@@ -72,8 +72,8 @@
  * @param data container with data
  * @param parent parent widget
  */
-DialogSplinePath::DialogSplinePath(const VContainer *data, quint32 toolId, QWidget *parent)
-  : DialogTool(data, toolId, parent),
+DialogSplinePath::DialogSplinePath(const VContainer *data, VAbstractPattern *doc, quint32 toolId, QWidget *parent)
+  : DialogTool(data, doc, toolId, parent),
     ui(new Ui::DialogSplinePath),
     path(),
     newDuplicate(-1),

@@ -50,7 +50,7 @@ class DialogBisector final : public DialogTool
     Q_OBJECT // NOLINT
 
 public:
-    DialogBisector(const VContainer *data, quint32 toolId, QWidget *parent = nullptr);
+    DialogBisector(const VContainer *data, VAbstractPattern *doc, quint32 toolId, QWidget *parent = nullptr);
     ~DialogBisector() override;
 
     auto GetPointName() const -> QString;

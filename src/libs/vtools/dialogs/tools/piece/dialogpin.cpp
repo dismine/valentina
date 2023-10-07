@@ -27,30 +27,27 @@
  *************************************************************************/
 
 #include "dialogpin.h"
-#include "ui_dialogpin.h"
 #include "../../../visualization/line/vistoolspecialpoint.h"
+#include "ui_dialogpin.h"
 #if QT_VERSION < QT_VERSION_CHECK(5, 7, 0)
 #include "../vmisc/backport/qoverload.h"
 #endif // QT_VERSION < QT_VERSION_CHECK(5, 7, 0)
 #include "../vpatterndb/vcontainer.h"
 
 //---------------------------------------------------------------------------------------------------------------------
-DialogPin::DialogPin(const VContainer *data, quint32 toolId, QWidget *parent)
-    : DialogTool(data, toolId, parent),
-      ui(new Ui::DialogPin),
-      m_showMode(false),
-      m_flagPoint(false),
-      m_flagError(false)
+DialogPin::DialogPin(const VContainer *data, VAbstractPattern *doc, quint32 toolId, QWidget *parent)
+  : DialogTool(data, doc, toolId, parent),
+    ui(new Ui::DialogPin),
+    m_showMode(false),
+    m_flagPoint(false),
+    m_flagError(false)
 {
     ui->setupUi(this);
     InitOkCancel(ui);
 
     FillComboBoxPoints(ui->comboBoxPoint);
 
-    connect(ui->comboBoxPiece, QOverload<int>::of(&QComboBox::currentIndexChanged), this, [this]()
-    {
-        CheckPieces();
-    });
+    connect(ui->comboBoxPiece, QOverload<int>::of(&QComboBox::currentIndexChanged), this, [this]() { CheckPieces(); });
 
     vis = new VisToolSpecialPoint(data);
 }

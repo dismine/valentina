@@ -50,7 +50,7 @@ class DialogLineIntersect : public DialogTool
     Q_OBJECT // NOLINT
 
 public:
-    DialogLineIntersect(const VContainer *data, quint32 toolId, QWidget *parent = nullptr);
+    DialogLineIntersect(const VContainer *data, VAbstractPattern *doc, quint32 toolId, QWidget *parent = nullptr);
     ~DialogLineIntersect() override;
 
     auto GetP1Line1() const -> quint32;

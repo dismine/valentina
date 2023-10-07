@@ -59,8 +59,8 @@
  * @param data container with data
  * @param parent parent widget
  */
-DialogShoulderPoint::DialogShoulderPoint(const VContainer *data, quint32 toolId, QWidget *parent)
-  : DialogTool(data, toolId, parent),
+DialogShoulderPoint::DialogShoulderPoint(const VContainer *data, VAbstractPattern *doc, quint32 toolId, QWidget *parent)
+  : DialogTool(data, doc, toolId, parent),
     ui(new Ui::DialogShoulderPoint),
     m_timerFormula(new QTimer(this))
 {

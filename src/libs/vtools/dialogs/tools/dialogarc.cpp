@@ -57,8 +57,8 @@
  * @param data container with data
  * @param parent parent widget
  */
-DialogArc::DialogArc(const VContainer *data, quint32 toolId, QWidget *parent)
-  : DialogTool(data, toolId, parent),
+DialogArc::DialogArc(const VContainer *data, VAbstractPattern *doc, quint32 toolId, QWidget *parent)
+  : DialogTool(data, doc, toolId, parent),
     ui(new Ui::DialogArc),
     m_timerRadius(new QTimer(this)),
     m_timerF1(new QTimer(this)),

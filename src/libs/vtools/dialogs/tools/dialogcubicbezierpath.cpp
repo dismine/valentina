@@ -59,8 +59,9 @@
 class QWidget;
 
 //---------------------------------------------------------------------------------------------------------------------
-DialogCubicBezierPath::DialogCubicBezierPath(const VContainer *data, quint32 toolId, QWidget *parent)
-  : DialogTool(data, toolId, parent),
+DialogCubicBezierPath::DialogCubicBezierPath(const VContainer *data, VAbstractPattern *doc, quint32 toolId,
+                                             QWidget *parent)
+  : DialogTool(data, doc, toolId, parent),
     ui(new Ui::DialogCubicBezierPath),
     path(),
     newDuplicate(-1),

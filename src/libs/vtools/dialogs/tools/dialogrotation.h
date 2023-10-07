@@ -50,7 +50,7 @@ class DialogRotation : public DialogTool
     Q_OBJECT // NOLINT
 
 public:
-    explicit DialogRotation(const VContainer *data, quint32 toolId, QWidget *parent = nullptr);
+    explicit DialogRotation(const VContainer *data, VAbstractPattern *doc, quint32 toolId, QWidget *parent = nullptr);
     ~DialogRotation() override;
 
     auto GetOrigPointId() const -> quint32;

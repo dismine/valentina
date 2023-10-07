@@ -62,8 +62,8 @@
  * @param data container with data
  * @param parent parent widget
  */
-DialogSpline::DialogSpline(const VContainer *data, quint32 toolId, QWidget *parent)
-  : DialogTool(data, toolId, parent),
+DialogSpline::DialogSpline(const VContainer *data, VAbstractPattern *doc, quint32 toolId, QWidget *parent)
+  : DialogTool(data, doc, toolId, parent),
     ui(new Ui::DialogSpline),
     timerAngle1(new QTimer(this)),
     timerAngle2(new QTimer(this)),

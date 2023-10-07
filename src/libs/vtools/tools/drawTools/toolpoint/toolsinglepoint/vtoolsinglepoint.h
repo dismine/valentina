@@ -38,6 +38,7 @@
 #include <QtGlobal>
 
 #include "../vabstractpoint.h"
+#include "../vgeometry/vpointf.h"
 #include "../vmisc/def.h"
 #include "../vwidgets/vscenepoint.h"
 

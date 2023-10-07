@@ -50,7 +50,7 @@ class DialogPointOfContact : public DialogTool
     Q_OBJECT // NOLINT
 
 public:
-    DialogPointOfContact(const VContainer *data, quint32 toolId, QWidget *parent = nullptr);
+    DialogPointOfContact(const VContainer *data, VAbstractPattern *doc, quint32 toolId, QWidget *parent = nullptr);
     ~DialogPointOfContact() override;
 
     auto GetPointName() const -> QString;

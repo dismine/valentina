@@ -63,8 +63,8 @@
  * @param data container with data
  * @param parent parent widget
  */
-DialogAlongLine::DialogAlongLine(const VContainer *data, quint32 toolId, QWidget *parent)
-  : DialogTool(data, toolId, parent),
+DialogAlongLine::DialogAlongLine(const VContainer *data, VAbstractPattern *doc, quint32 toolId, QWidget *parent)
+  : DialogTool(data, doc, toolId, parent),
     ui(new Ui::DialogAlongLine),
     m_timerFormula(new QTimer(this))
 {

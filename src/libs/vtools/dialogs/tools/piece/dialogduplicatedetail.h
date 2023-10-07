@@ -40,7 +40,7 @@ class DialogDuplicateDetail : public DialogTool
     Q_OBJECT // NOLINT
 
 public:
-    explicit DialogDuplicateDetail(const VContainer *data, quint32 toolId, QWidget *parent = nullptr);
+    explicit DialogDuplicateDetail(const VContainer *data, VAbstractPattern *doc, quint32 toolId, QWidget *parent = nullptr);
     virtual ~DialogDuplicateDetail();
 
     auto Duplicate() const -> quint32;

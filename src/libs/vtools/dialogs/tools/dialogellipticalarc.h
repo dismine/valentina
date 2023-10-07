@@ -47,7 +47,7 @@ class DialogEllipticalArc : public DialogTool
     Q_OBJECT // NOLINT
 
 public:
-    DialogEllipticalArc(const VContainer *data, quint32 toolId, QWidget *parent = nullptr);
+    DialogEllipticalArc(const VContainer *data, VAbstractPattern *doc, quint32 toolId, QWidget *parent = nullptr);
     ~DialogEllipticalArc() override;
 
     auto GetCenter() const -> quint32;

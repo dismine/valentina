@@ -50,7 +50,7 @@ class DialogLine : public DialogTool
     Q_OBJECT // NOLINT
 
 public:
-    DialogLine(const VContainer *data, quint32 toolId, QWidget *parent = nullptr);
+    DialogLine(const VContainer *data, VAbstractPattern *doc, quint32 toolId, QWidget *parent = nullptr);
     ~DialogLine() override;
 
     auto GetFirstPoint() const -> quint32;

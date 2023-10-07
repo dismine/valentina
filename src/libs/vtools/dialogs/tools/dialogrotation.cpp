@@ -70,8 +70,8 @@
 #endif // QT_VERSION < QT_VERSION_CHECK(5, 7, 0)
 
 //---------------------------------------------------------------------------------------------------------------------
-DialogRotation::DialogRotation(const VContainer *data, quint32 toolId, QWidget *parent)
-  : DialogTool(data, toolId, parent),
+DialogRotation::DialogRotation(const VContainer *data, VAbstractPattern *doc, quint32 toolId, QWidget *parent)
+  : DialogTool(data, doc, toolId, parent),
     ui(new Ui::DialogRotation),
     timerAngle(new QTimer(this)),
     formulaAngle(),

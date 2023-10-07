@@ -50,7 +50,7 @@ class DialogShoulderPoint : public DialogTool
     Q_OBJECT // NOLINT
 
 public:
-    DialogShoulderPoint(const VContainer *data, quint32 toolId, QWidget *parent = nullptr);
+    DialogShoulderPoint(const VContainer *data, VAbstractPattern *doc, quint32 toolId, QWidget *parent = nullptr);
     ~DialogShoulderPoint() override;
 
     auto GetPointName() const -> QString;

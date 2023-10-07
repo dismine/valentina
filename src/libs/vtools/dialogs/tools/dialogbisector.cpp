@@ -60,8 +60,8 @@
  * @param data container with data
  * @param parent parent widget
  */
-DialogBisector::DialogBisector(const VContainer *data, quint32 toolId, QWidget *parent)
-  : DialogTool(data, toolId, parent),
+DialogBisector::DialogBisector(const VContainer *data, VAbstractPattern *doc, quint32 toolId, QWidget *parent)
+  : DialogTool(data, doc, toolId, parent),
     ui(new Ui::DialogBisector),
     m_timerFormula(new QTimer(this))
 {

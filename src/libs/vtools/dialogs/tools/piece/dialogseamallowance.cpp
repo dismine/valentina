@@ -152,17 +152,7 @@ void InitComboBoxFormats(QComboBox *box, const QStringList &items, const QString
 
 //---------------------------------------------------------------------------------------------------------------------
 DialogSeamAllowance::DialogSeamAllowance(const VContainer *data, VAbstractPattern *doc, quint32 toolId, QWidget *parent)
-  : DialogSeamAllowance(data, toolId, parent)
-{
-    SCASSERT(doc != nullptr)
-    m_doc = doc;
-
-    uiTabLabels->groupBoxPatternLabel->setEnabled(not m_doc->GetPatternLabelTemplate().isEmpty());
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-DialogSeamAllowance::DialogSeamAllowance(const VContainer *data, quint32 toolId, QWidget *parent)
-  : DialogTool(data, toolId, parent),
+  : DialogTool(data, doc, toolId, parent),
     ui(new Ui::DialogSeamAllowance),
     uiTabPaths(new Ui::TabPaths),
     uiTabLabels(new Ui::TabLabels),
@@ -210,6 +200,8 @@ DialogSeamAllowance::DialogSeamAllowance(const VContainer *data, quint32 toolId,
     flagMainPathIsValid = MainPathIsValid();
 
     m_ftb->SetCurrentIndex(TabOrder::Paths); // Show always first tab active on start.
+
+    uiTabLabels->groupBoxPatternLabel->setEnabled(not m_doc->GetPatternLabelTemplate().isEmpty());
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -924,7 +916,7 @@ void DialogSeamAllowance::ShowCustomSAContextMenu(const QPoint &pos)
     }
     else if (selectedAction == actionOption)
     {
-        auto *dialog = new DialogPiecePath(data, record.path, this);
+        auto *dialog = new DialogPiecePath(data, m_doc, record.path, this);
         dialog->SetPiecePath(CurrentPath(record.path));
         dialog->SetPieceId(toolId);
         if (record.includeType == PiecePathIncludeType::AsMainPath)
@@ -965,7 +957,7 @@ void DialogSeamAllowance::ShowInternalPathsContextMenu(const QPoint &pos)
         SCASSERT(rowItem != nullptr);
         const auto pathId = qvariant_cast<quint32>(rowItem->data(Qt::UserRole));
 
-        auto *dialog = new DialogPiecePath(data, pathId, this);
+        auto *dialog = new DialogPiecePath(data, m_doc, pathId, this);
         dialog->SetPiecePath(CurrentPath(pathId));
         dialog->SetPieceId(toolId);
         dialog->EnbleShowMode(true);
@@ -1058,7 +1050,7 @@ void DialogSeamAllowance::ShowPlaceLabelsContextMenu(const QPoint &pos)
     }
     else if (selectedAction == actionOption)
     {
-        auto *dialog = new DialogPlaceLabel(data, labelId, this);
+        auto *dialog = new DialogPlaceLabel(data, m_doc, labelId, this);
         dialog->EnbleShowMode(true);
         dialog->SetLabelType(currentLabel.GetLabelType());
         dialog->SetWidth(currentLabel.GetWidthFormula());
@@ -3517,20 +3509,25 @@ void DialogSeamAllowance::InitLabelsTab()
     // Pattern label data
     uiTabLabels->lineEditCustomerEmail->setClearButtonEnabled(true);
 
-    uiTabLabels->lineEditCustomerName->setText(VAbstractValApplication::VApp()->GetCustomerName());
-    uiTabLabels->lineEditCustomerEmail->setText(VAbstractValApplication::VApp()->CustomerEmail());
-    uiTabLabels->dateEditCustomerBirthDate->setDate(VAbstractValApplication::VApp()->GetCustomerBirthDate());
-
     if (VAbstractValApplication::VApp()->GetMeasurementsType() == MeasurementsType::Individual)
     {
+        uiTabLabels->lineEditCustomerName->setText(VAbstractValApplication::VApp()->GetCustomerName());
         uiTabLabels->lineEditCustomerName->setDisabled(true);
         uiTabLabels->lineEditCustomerName->setToolTip(tr("The customer name from individual measurements"));
 
+        uiTabLabels->lineEditCustomerEmail->setText(VAbstractValApplication::VApp()->CustomerEmail());
         uiTabLabels->lineEditCustomerEmail->setDisabled(true);
         uiTabLabels->lineEditCustomerEmail->setToolTip(tr("The customer email from individual measurements"));
 
+        uiTabLabels->dateEditCustomerBirthDate->setDate(VAbstractValApplication::VApp()->GetCustomerBirthDate());
         uiTabLabels->dateEditCustomerBirthDate->setDisabled(true);
         uiTabLabels->dateEditCustomerBirthDate->setToolTip(tr("The customer birth date from individual measurements"));
+    }
+    else
+    {
+        uiTabLabels->lineEditCustomerName->setText(m_doc->GetCustomerName());
+        uiTabLabels->lineEditCustomerEmail->setText(m_doc->GetCustomerEmail());
+        uiTabLabels->dateEditCustomerBirthDate->setDate(m_doc->GetCustomerBirthDate());
     }
 
     connect(uiTabLabels->lineEditPatternName, &QLineEdit::editingFinished, this,

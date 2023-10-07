@@ -53,9 +53,9 @@
 #include "ui_dialogpointofintersectioncircles.h"
 
 //---------------------------------------------------------------------------------------------------------------------
-DialogPointOfIntersectionCircles::DialogPointOfIntersectionCircles(const VContainer *data, quint32 toolId,
-                                                                   QWidget *parent)
-  : DialogTool(data, toolId, parent),
+DialogPointOfIntersectionCircles::DialogPointOfIntersectionCircles(const VContainer *data, VAbstractPattern *doc,
+                                                                   quint32 toolId, QWidget *parent)
+  : DialogTool(data, doc, toolId, parent),
     ui(new Ui::DialogPointOfIntersectionCircles),
     m_timerCircle1Radius(new QTimer(this)),
     m_timerCircle2Radius(new QTimer(this))

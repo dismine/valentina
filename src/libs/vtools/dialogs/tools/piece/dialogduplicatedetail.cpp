@@ -26,18 +26,19 @@
  **
  *************************************************************************/
 #include "dialogduplicatedetail.h"
-#include "ui_dialogduplicatedetail.h"
-#include "../../../visualization/path/vistoolduplicatedetail.h"
 #include "../../../tools/vabstracttool.h"
+#include "../../../visualization/path/vistoolduplicatedetail.h"
+#include "ui_dialogduplicatedetail.h"
 
 //---------------------------------------------------------------------------------------------------------------------
-DialogDuplicateDetail::DialogDuplicateDetail(const VContainer *data, quint32 toolId, QWidget *parent)
-    : DialogTool(data, toolId, parent),
-      ui(new Ui::DialogDuplicateDetail),
-      m_idDetail(NULL_ID),
-      m_mx(0),
-      m_my(0),
-      m_firstRelease(false)
+DialogDuplicateDetail::DialogDuplicateDetail(const VContainer *data, VAbstractPattern *doc, quint32 toolId,
+                                             QWidget *parent)
+  : DialogTool(data, doc, toolId, parent),
+    ui(new Ui::DialogDuplicateDetail),
+    m_idDetail(NULL_ID),
+    m_mx(0),
+    m_my(0),
+    m_firstRelease(false)
 {
     ui->setupUi(this);
     InitOkCancel(ui);
@@ -80,7 +81,7 @@ void DialogDuplicateDetail::ShowDialog(bool click)
 //---------------------------------------------------------------------------------------------------------------------
 void DialogDuplicateDetail::ChosenObject(quint32 id, const SceneObject &type)
 {
-    if (prepare == false)// After first choose we ignore all objects
+    if (prepare == false) // After first choose we ignore all objects
     {
         if (type == SceneObject::Detail && id > NULL_ID)
         {

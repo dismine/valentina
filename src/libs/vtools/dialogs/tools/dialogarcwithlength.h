@@ -47,7 +47,7 @@ class DialogArcWithLength final : public DialogTool
     Q_OBJECT // NOLINT
 
 public:
-    DialogArcWithLength(const VContainer *data, quint32 toolId, QWidget *parent = nullptr);
+    DialogArcWithLength(const VContainer *data, VAbstractPattern *doc, quint32 toolId, QWidget *parent = nullptr);
     ~DialogArcWithLength() override;
 
     auto GetCenter() const -> quint32;

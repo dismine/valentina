@@ -48,7 +48,8 @@ class DialogPointFromArcAndTangent : public DialogTool
     Q_OBJECT // NOLINT
 
 public:
-    DialogPointFromArcAndTangent(const VContainer *data, quint32 toolId, QWidget *parent = nullptr);
+    DialogPointFromArcAndTangent(const VContainer *data, VAbstractPattern *doc, quint32 toolId,
+                                 QWidget *parent = nullptr);
     ~DialogPointFromArcAndTangent() override;
 
     auto GetPointName() const -> QString;

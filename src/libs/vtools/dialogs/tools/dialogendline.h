@@ -50,7 +50,7 @@ class DialogEndLine : public DialogTool
     Q_OBJECT // NOLINT
 
 public:
-    DialogEndLine(const VContainer *data, quint32 toolId, QWidget *parent = nullptr);
+    DialogEndLine(const VContainer *data, VAbstractPattern *doc, quint32 toolId, QWidget *parent = nullptr);
     ~DialogEndLine() override;
 
     auto GetPointName() const -> QString;

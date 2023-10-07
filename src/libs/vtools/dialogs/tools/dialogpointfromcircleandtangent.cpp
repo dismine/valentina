@@ -53,9 +53,9 @@
 #include "ui_dialogpointfromcircleandtangent.h"
 
 //---------------------------------------------------------------------------------------------------------------------
-DialogPointFromCircleAndTangent::DialogPointFromCircleAndTangent(const VContainer *data, quint32 toolId,
-                                                                 QWidget *parent)
-  : DialogTool(data, toolId, parent),
+DialogPointFromCircleAndTangent::DialogPointFromCircleAndTangent(const VContainer *data, VAbstractPattern *doc,
+                                                                 quint32 toolId, QWidget *parent)
+  : DialogTool(data, doc, toolId, parent),
     ui(new Ui::DialogPointFromCircleAndTangent)
 {
     ui->setupUi(this);

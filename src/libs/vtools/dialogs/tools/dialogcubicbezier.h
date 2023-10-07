@@ -49,7 +49,7 @@ class DialogCubicBezier : public DialogTool
     Q_OBJECT // NOLINT
 
 public:
-    explicit DialogCubicBezier(const VContainer *data, quint32 toolId, QWidget *parent = nullptr);
+    explicit DialogCubicBezier(const VContainer *data, VAbstractPattern *doc, quint32 toolId, QWidget *parent = nullptr);
     ~DialogCubicBezier() override;
 
     auto GetSpline() const -> VCubicBezier;

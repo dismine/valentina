@@ -48,7 +48,7 @@ class DialogPointFromCircleAndTangent : public DialogTool
     Q_OBJECT // NOLINT
 
 public:
-    DialogPointFromCircleAndTangent(const VContainer *data, quint32 toolId, QWidget *parent = nullptr);
+    DialogPointFromCircleAndTangent(const VContainer *data, VAbstractPattern *doc, quint32 toolId, QWidget *parent = nullptr);
     ~DialogPointFromCircleAndTangent() override;
 
     auto GetPointName() const -> QString;

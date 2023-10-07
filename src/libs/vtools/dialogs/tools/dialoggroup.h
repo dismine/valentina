@@ -47,7 +47,7 @@ class DialogGroup : public DialogTool
     Q_OBJECT // NOLINT
 
 public:
-    explicit DialogGroup(const VContainer *data, quint32 toolId, QWidget *parent = nullptr);
+    explicit DialogGroup(const VContainer *data, VAbstractPattern *doc, quint32 toolId, QWidget *parent = nullptr);
     ~DialogGroup() override;
 
     void SetName(const QString &name);

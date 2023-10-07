@@ -60,8 +60,9 @@
 #include "ui_dialoglineintersectaxis.h"
 
 //---------------------------------------------------------------------------------------------------------------------
-DialogLineIntersectAxis::DialogLineIntersectAxis(const VContainer *data, quint32 toolId, QWidget *parent)
-  : DialogTool(data, toolId, parent),
+DialogLineIntersectAxis::DialogLineIntersectAxis(const VContainer *data, VAbstractPattern *doc, quint32 toolId,
+                                                 QWidget *parent)
+  : DialogTool(data, doc, toolId, parent),
     ui(new Ui::DialogLineIntersectAxis),
     formulaAngle(),
     formulaBaseHeightAngle(0),
