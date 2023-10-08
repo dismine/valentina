@@ -334,7 +334,14 @@ void VTextGraphicsItem::SetPieceName(const QString &name)
  */
 auto VTextGraphicsItem::GetFontSize() const -> int
 {
-    return m_tm.GetFont().pixelSize();
+    int size = m_tm.GetFont().pixelSize();
+    if (size == -1)
+    {
+        QFontMetrics fontMetrics(m_tm.GetFont());
+        size = fontMetrics.height();
+    }
+
+    return size;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
