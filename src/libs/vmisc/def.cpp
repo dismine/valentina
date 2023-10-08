@@ -506,8 +506,7 @@ auto UnitsToStr(const Unit &unit, const bool translate) -> QString
         case Unit::Px:
             return translate ? QObject::tr("px") : unitPX;
         case Unit::LAST_UNIT_DO_NOT_USE:
-            Q_UNREACHABLE();
-            break;
+            return {};
         case Unit::Cm:
         default:
             return translate ? QObject::tr("cm") : unitCM;
