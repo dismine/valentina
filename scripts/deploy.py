@@ -136,7 +136,9 @@ def run_clean(refresh_token):
                         r'^valentina-Windows7\+-mingw-x86-Qt.*-develop-[a-f0-9]{40}\.tar\.xz$',
                         r'^valentina-WindowsXP\+-mingw-x86-Qt.*-develop-[a-f0-9]{40}\.tar\.xz$',
                         r'^valentina-macOS_11\+-Qt.*-x64-develop-[a-f0-9]{40}\.dmg$',
+                        r'^valentina-macOS_11\+-Qt.*-x64-develop-multibundle-[a-f0-9]{40}\.dmg$',
                         r'^valentina-macOS_10.13\+-Qt.*-x64-develop-[a-f0-9]{40}\.dmg$',
+                        r'^valentina-macOS_10.13\+-Qt.*-x64-develop-multibundle-[a-f0-9]{40}\.dmg$',
                         r'^valentina-macOS.*\+-Qt.*-arm.*-develop-[a-f0-9]{40}\.dmg$',
                         r'^valentina-macOS.*\+-Qt.*-arm.*-develop-multibundle-[a-f0-9]{40}\.dmg$']
 
