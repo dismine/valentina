@@ -452,8 +452,8 @@ auto VToolDoublePoint::ComplexToolTip(quint32 itemId) const -> QString
     const QSharedPointer<VPointF> point = VAbstractTool::data.GeometricObject<VPointF>(itemId);
 
     const QString toolTip = u"<table>"
-                            "<tr> <td><b>%1:</b> %2</td> </tr>"
-                            "%3"
-                            "</table>"_s.arg(tr("Label"), point->name(), MakeToolTip());
+                            u"<tr> <td><b>%1:</b> %2</td> </tr>"
+                            u"%3"
+                            u"</table>"_s.arg(tr("Label"), point->name(), MakeToolTip());
     return toolTip;
 }

@@ -519,10 +519,10 @@ auto DialogMDataBase::ItemFullDescription(QTreeWidgetItem *item, bool showImage)
     }
 
     const QString text = u"<p align=\"center\" style=\"font-variant: normal; font-style: normal; font-weight: "
-                         "normal\"> %1 <br clear=\"left\"><b>%2</b>. <i>%3</i></p>"
-                         "<p align=\"left\" style=\"font-variant: normal; font-style: normal; font-weight: "
-                         "normal\">%4</p>"_s.arg(imgTag, number, VAbstractApplication::VApp()->TrVars()->GuiText(name),
-                                                 VAbstractApplication::VApp()->TrVars()->Description(name));
+                         u"normal\"> %1 <br clear=\"left\"><b>%2</b>. <i>%3</i></p>"
+                         u"<p align=\"left\" style=\"font-variant: normal; font-style: normal; font-weight: "
+                         u"normal\">%4</p>"_s.arg(imgTag, number, VAbstractApplication::VApp()->TrVars()->GuiText(name),
+                                                  VAbstractApplication::VApp()->TrVars()->Description(name));
 
     return text;
 }

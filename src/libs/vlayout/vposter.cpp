@@ -257,10 +257,10 @@ auto VPoster::Borders(QGraphicsItem *parent, const PosterData &img, vsizetype sh
     }
 
     labels->setHtml(u"<table width='100%'>"
-                    "<tr>"
-                    "<td>%1</td><td align='center'>%2</td><td align='right'>%3</td>"
-                    "</tr>"
-                    "</table>"_s.arg(grid, page, sheet));
+                    u"<tr>"
+                    u"<td>%1</td><td align='center'>%2</td><td align='right'>%3</td>"
+                    u"</tr>"
+                    u"</table>"_s.arg(grid, page, sheet));
 
     data.append(labels);
 

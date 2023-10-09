@@ -946,10 +946,10 @@ auto VAbstractOperation::ComplexCurveToolTip(quint32 itemId) const -> QString
     const QSharedPointer<VAbstractCurve> curve = VAbstractTool::data.GeometricObject<VAbstractCurve>(itemId);
 
     const QString toolTip = u"<table>"
-                            "<tr> <td><b>%1:</b> %2</td> </tr>"
-                            "<tr> <td><b>%3:</b> %4 %5</td> </tr>"
-                            "%6"
-                            "</table>"_s.arg(tr("Label"), curve->ObjectName(), tr("Length"))
+                            u"<tr> <td><b>%1:</b> %2</td> </tr>"
+                            u"<tr> <td><b>%3:</b> %4 %5</td> </tr>"
+                            u"%6"
+                            u"</table>"_s.arg(tr("Label"), curve->ObjectName(), tr("Length"))
                                 .arg(VAbstractValApplication::VApp()->fromPixel(curve->GetLength()))
                                 .arg(UnitsToStr(VAbstractValApplication::VApp()->patternUnits(), true), MakeToolTip());
     return toolTip;

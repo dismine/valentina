@@ -250,7 +250,7 @@ void TST_TSLocaleTranslation::TestPunctuation()
     if (testFail)
     {
         const QString message = u"Translation string does not end with the same punctuation character '%1' or "
-                                "vice versa. "_s.arg(cPunctuation) +
+                                u"vice versa. "_s.arg(cPunctuation) +
                                 u"Original name:'%1'"_s.arg(source) + u", translated name:'%1'"_s.arg(translation);
         QFAIL(qUtf8Printable(message));
     }

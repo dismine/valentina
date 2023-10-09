@@ -220,7 +220,7 @@ void TST_TSTranslation::CheckInvalidCharacter()
 
         const QString contextName = context.firstChildElement(TagName).text();
         const QString error = u"String contains invalid character '%1' in context '%2'. It should not be "
-                              "marked for translation."_s.arg(source, contextName);
+                              u"marked for translation."_s.arg(source, contextName);
         QFAIL(qUtf8Printable(error));
     }
 }

@@ -316,10 +316,10 @@ auto VToolCutArc::MakeToolTip() const -> QString
     {
         toolTip +=
             u"<tr> <td><b>%10:</b> %11</td> </tr>"
-            "<tr> <td><b>%1:</b> %2 %3</td> </tr>"
-            "<tr> <td><b>%4:</b> %5 %3</td> </tr>"
-            "<tr> <td><b>%6:</b> %7°</td> </tr>"
-            "<tr> <td><b>%8:</b> %9°</td> </tr>"_s.arg(arcStr + arcNumber + QChar(QChar::Space) + lengthStr)
+            u"<tr> <td><b>%1:</b> %2 %3</td> </tr>"
+            u"<tr> <td><b>%4:</b> %5 %3</td> </tr>"
+            u"<tr> <td><b>%6:</b> %7°</td> </tr>"
+            u"<tr> <td><b>%8:</b> %9°</td> </tr>"_s.arg(arcStr + arcNumber + QChar(QChar::Space) + lengthStr)
                 .arg(VAbstractValApplication::VApp()->fromPixel(arc.GetLength()))
                 .arg(UnitsToStr(VAbstractValApplication::VApp()->patternUnits(), true),
                      arcStr + arcNumber + QChar(QChar::Space) + radiusStr)

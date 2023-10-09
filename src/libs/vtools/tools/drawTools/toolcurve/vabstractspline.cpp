@@ -188,9 +188,9 @@ auto VAbstractSpline::MakeToolTip() const -> QString
 
     const QString toolTip =
         u"<table>"
-        "<tr> <td><b>%4:</b> %5</td> </tr>"
-        "<tr> <td><b>%1:</b> %2 %3</td> </tr>"
-        "</table>"_s.arg(tr("Length"))
+        u"<tr> <td><b>%4:</b> %5</td> </tr>"
+        u"<tr> <td><b>%1:</b> %2 %3</td> </tr>"
+        u"</table>"_s.arg(tr("Length"))
             .arg(VAbstractValApplication::VApp()->fromPixel(curve->GetLength()))
             .arg(UnitsToStr(VAbstractValApplication::VApp()->patternUnits(), true), tr("Label"), curve->ObjectName());
     return toolTip;

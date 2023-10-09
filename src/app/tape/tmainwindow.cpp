@@ -1976,7 +1976,7 @@ void TMainWindow::ShowMDiagram(const QString &name)
     else
     {
         ui->labelDiagram->setText(u"<html><head/><body><p align=\"center\">%1</p>"
-                                  "<p align=\"center\"><b>%2</b>. <i>%3</i></p></body></html>"_s.arg(
+                                  u"<p align=\"center\"><b>%2</b>. <i>%3</i></p></body></html>"_s.arg(
                                       DialogMDataBase::ImgTag(number), number, trv->GuiText(name)));
     }
 }

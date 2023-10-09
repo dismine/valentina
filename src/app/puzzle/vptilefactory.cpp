@@ -613,10 +613,10 @@ void VPTileFactory::DrawTextInformation(QPainter *painter, int row, int col, int
         QStringLiteral("%1,%2,%3").arg(tileColor->red()).arg(tileColor->green()).arg(tileColor->blue());
 
     td.setHtml(u"<table width='100%' style='color:rgb(%1);'>"
-               "<tr>"
-               "<td align='center'>%2</td>"
-               "</tr>"
-               "</table>"_s.arg(tileColorStr, grid));
+               u"<tr>"
+               u"<td align='center'>%2</td>"
+               u"</tr>"
+               u"</table>"_s.arg(tileColorStr, grid));
     painter->setPen(PenTileInfos());
     painter->save();
     painter->translate(QPointF(UnitConvertor(1, Unit::Cm, Unit::Px), m_drawingAreaHeight - tileStripeWidth / 1.3));

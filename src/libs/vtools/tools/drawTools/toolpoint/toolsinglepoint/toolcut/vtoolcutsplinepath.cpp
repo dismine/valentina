@@ -401,11 +401,11 @@ auto VToolCutSplinePath::MakeToolTip() const -> QString
 
     const QString toolTip =
         u"<table>"
-        "<tr> <td><b>%6:</b> %7</td> </tr>"
-        "<tr> <td><b>%1:</b> %2 %3</td> </tr>"
-        "<tr> <td><b>%8:</b> %9</td> </tr>"
-        "<tr> <td><b>%4:</b> %5 %3</td> </tr>"
-        "</table>"_s.arg(curveStr + "1 "_L1 + lengthStr)
+        u"<tr> <td><b>%6:</b> %7</td> </tr>"
+        u"<tr> <td><b>%1:</b> %2 %3</td> </tr>"
+        u"<tr> <td><b>%8:</b> %9</td> </tr>"
+        u"<tr> <td><b>%4:</b> %5 %3</td> </tr>"
+        u"</table>"_s.arg(curveStr + "1 "_L1 + lengthStr)
             .arg(VAbstractValApplication::VApp()->fromPixel(splPath1->GetLength()))
             .arg(UnitsToStr(VAbstractValApplication::VApp()->patternUnits(), true), curveStr + "2 "_L1 + lengthStr)
             .arg(VAbstractValApplication::VApp()->fromPixel(splPath2->GetLength()))

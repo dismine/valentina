@@ -165,12 +165,12 @@ auto VToolAlongLine::MakeToolTip() const -> QString
     const QLineF curToSecond(static_cast<QPointF>(*current), static_cast<QPointF>(*secondPoint));
 
     const QString toolTip = u"<table>"
-                            "<tr> <td><b>%9:</b> %10</td> </tr>"
-                            "<tr> <td><b>%1:</b> %2 %3</td> </tr>"
-                            "<tr> <td><b>%4:</b> %5°</td> </tr>"
-                            "<tr> <td><b>%6:</b> %2 %3</td> </tr>"
-                            "<tr> <td><b>%7:</b> %8 %3</td> </tr>"
-                            "</table>"_s.arg(tr("Length"))
+                            u"<tr> <td><b>%9:</b> %10</td> </tr>"
+                            u"<tr> <td><b>%1:</b> %2 %3</td> </tr>"
+                            u"<tr> <td><b>%4:</b> %5°</td> </tr>"
+                            u"<tr> <td><b>%6:</b> %2 %3</td> </tr>"
+                            u"<tr> <td><b>%7:</b> %8 %3</td> </tr>"
+                            u"</table>"_s.arg(tr("Length"))
                                 .arg(VAbstractValApplication::VApp()->fromPixel(curLine.length()))
                                 .arg(UnitsToStr(VAbstractValApplication::VApp()->patternUnits(), true), tr("Angle"))
                                 .arg(curLine.angle())

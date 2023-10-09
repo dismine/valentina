@@ -169,7 +169,7 @@ void TST_VToolUnionDetails::TestUnitingMainPaths()
 
         // cppcheck-suppress unreadVariable
         const QString msg = u"Index: %1. Got item with id = %2, type = %3; Expected item with id = %4, "
-                            "type = %5."_s.arg(i)
+                            u"type = %5."_s.arg(i)
                                 .arg(outP.GetId())
                                 .arg(static_cast<ToolVisHolderType>(outP.GetTypeTool()))
                                 .arg(resP.GetId())

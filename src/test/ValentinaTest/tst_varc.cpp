@@ -217,7 +217,7 @@ void TST_VArc::TestGetPoints()
             const qreal value = qAbs(rLine.length() - radius);
             // cppcheck-suppress unreadVariable
             const QString errorMsg = u"Broken the first rule. All points should be on the same distance from "
-                                     "the center. Error ='%1'."_s.arg(value);
+                                     u"the center. Error ='%1'."_s.arg(value);
             QVERIFY2(value <= epsRadius, qUtf8Printable(errorMsg));
         }
     }

@@ -300,7 +300,7 @@ void TST_VEllipticalArc::TestGetPoints1()
             const qreal diff = qAbs(equationRes - 1);
             // cppcheck-suppress unreadVariable
             const QString errorMsg = u"Broken the first rule. Any point must satisfy the equation of ellipse."
-                                     "diff = '%1' > eps = '%2'"_s.number(diff)
+                                     u"diff = '%1' > eps = '%2'"_s.number(diff)
                                          .number(eps);
             QVERIFY2(diff <= eps, qUtf8Printable(errorMsg));
         }
@@ -372,9 +372,9 @@ void TST_VEllipticalArc::TestGetPoints2()
         const qreal diff = qAbs(resultingDistance - distance);
         // cppcheck-suppress unreadVariable
         const QString errorMsg = u"Broken the first rule, part 2. Distance from the any point to the focus1"
-                                 " plus distance from this point to the focus2 should be the same. Problem"
-                                 " with point '%1'. The disired distance is '%2', but resulting distance"
-                                 " is '%3'. Difference is '%4' and it biggest than eps '%5')"_s.number(i)
+                                 u" plus distance from this point to the focus2 should be the same. Problem"
+                                 u" with point '%1'. The disired distance is '%2', but resulting distance"
+                                 u" is '%3'. Difference is '%4' and it biggest than eps '%5')"_s.number(i)
                                      .number(distance)
                                      .number(resultingDistance)
                                      .number(diff)
@@ -407,7 +407,7 @@ void TST_VEllipticalArc::TestGetPoints3()
         const qreal diffSquare = qAbs(ellipseSquare - arcSquare);
         // cppcheck-suppress unreadVariable
         const QString errorMsg1 = u"Broken the second rule. Interpolation has too big computing error. "
-                                  "Difference ='%1' bigger than eps = '%2'."_s.arg(diffSquare)
+                                  u"Difference ='%1' bigger than eps = '%2'."_s.arg(diffSquare)
                                       .arg(epsSquare);
         QVERIFY2(diffSquare <= epsSquare, qUtf8Printable(errorMsg1));
     }
@@ -437,7 +437,7 @@ void TST_VEllipticalArc::TestGetPoints4()
         const qreal diffLength = qAbs(arcLength - ellipseLength);
         // cppcheck-suppress unreadVariable
         const QString errorMsg2 = u"Difference between real and computing lengthes "
-                                  "(diff = '%1') bigger than eps = '%2'."_s.arg(diffLength)
+                                  u"(diff = '%1') bigger than eps = '%2'."_s.arg(diffLength)
                                       .arg(epsLength);
         QVERIFY2(diffLength <= epsLength, qUtf8Printable(errorMsg2));
     }

@@ -338,8 +338,8 @@ auto VToolBasePoint::MakeToolTip() const -> QString
     const QSharedPointer<VPointF> point = VAbstractTool::data.GeometricObject<VPointF>(m_id);
 
     const QString toolTip = u"<table>"
-                            "<tr> <td><b>%1:</b> %2</td> </tr>"
-                            "</table>"_s.arg(tr("Label"), point->name());
+                            u"<tr> <td><b>%1:</b> %2</td> </tr>"
+                            u"</table>"_s.arg(tr("Label"), point->name());
     return toolTip;
 }
 

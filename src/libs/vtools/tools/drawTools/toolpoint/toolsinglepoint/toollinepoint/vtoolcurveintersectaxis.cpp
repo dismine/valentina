@@ -344,12 +344,12 @@ auto VToolCurveIntersectAxis::MakeToolTip() const -> QString
 
     const QString toolTip =
         u"<table>"
-        "<tr> <td><b>%6:</b> %7</td> </tr>"
-        "<tr> <td><b>%1:</b> %2 %3</td> </tr>"
-        "<tr> <td><b>%4:</b> %5°</td> </tr>"
-        "<tr> <td><b>%8:</b> %9</td> </tr>"
-        "<tr> <td><b>%10:</b> %11</td> </tr>"
-        "</table>"_s
+        u"<tr> <td><b>%6:</b> %7</td> </tr>"
+        u"<tr> <td><b>%1:</b> %2 %3</td> </tr>"
+        u"<tr> <td><b>%4:</b> %5°</td> </tr>"
+        u"<tr> <td><b>%8:</b> %9</td> </tr>"
+        u"<tr> <td><b>%10:</b> %11</td> </tr>"
+        u"</table>"_s
             .arg(tr("Length"))                                                                   // 1
             .arg(VAbstractValApplication::VApp()->fromPixel(line.length()))                      // 2
             .arg(UnitsToStr(VAbstractValApplication::VApp()->patternUnits(), true), tr("Angle")) // 3, 4
