@@ -182,10 +182,7 @@ auto VAbstractTool::CheckFormula(const quint32 &toolId, QString &formula, VConta
 
                             break;
                         }
-                        else
-                        {
-                            delete dialog;
-                        }
+                        delete dialog;
                     }
                     else
                     {

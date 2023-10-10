@@ -453,7 +453,7 @@ auto VDomDocument::GetParametrUInt(const QDomElement &domElement, const QString 
     {
         parametr = GetParametrString(domElement, name, defValue);
         id = parametr.toUInt(&ok);
-        if (ok == false)
+        if (!ok)
         {
             throw VExceptionConversionError(QObject::tr("Can't convert toUInt parameter"), name);
         }
