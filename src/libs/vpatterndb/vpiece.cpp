@@ -693,11 +693,11 @@ auto VPiece::SeamAllowancePointsWithRotation(const VContainer *data, vsizetype m
                         const VPiecePath path = data->GetPiecePath(records.at(recordIndex).path);
                         QVector<VSAPoint> r = path.SeamAllowancePoints(data, width, records.at(recordIndex).reverse);
 
-                        for (int j = 0; j < r.size(); ++j)
+                        for (auto & j : r)
                         {
-                            r[j].SetAngleType(PieceNodeAngle::ByLengthCurve);
-                            r[j].SetSABefore(0);
-                            r[j].SetSAAfter(0);
+                            j.SetAngleType(PieceNodeAngle::ByLengthCurve);
+                            j.SetSABefore(0);
+                            j.SetSAAfter(0);
                         }
 
                         pointsEkv += r;
