@@ -90,7 +90,7 @@
                 <item>
                  <widget class="QToolButton" name="toolButtonPortrait">
                   <property name="text">
-                   <string notr="true"></string>
+                   <string notr="true"/>
                   </property>
                   <property name="icon">
                    <iconset resource="../../../libs/vmisc/share/resources/icon.qrc">
@@ -113,7 +113,7 @@
                 <item>
                  <widget class="QToolButton" name="toolButtonLandscape">
                   <property name="text">
-                   <string notr="true"></string>
+                   <string notr="true"/>
                   </property>
                   <property name="icon">
                    <iconset resource="../../../libs/vmisc/share/resources/icon.qrc">
@@ -435,13 +435,13 @@
             <item row="2" column="1">
              <widget class="QDoubleSpinBox" name="doubleSpinBoxEfficiency">
               <property name="toolTip">
-               <string>Set layout efficiency coefficient. Layout efficiency coefficientt is the ratio of the area occupied by the pieces to the bounding rect of all pieces. If nesting reaches required level the process stops. If value is 0 no check will be made.</string>
+               <string>Set layout efficiency coefficient. Layout efficiency coefficient is the ratio of the area occupied by the pieces to the bounding rect of all pieces. If nesting reaches required level the process stops. If value is 0 no check will be made.</string>
               </property>
               <property name="suffix">
                <string notr="true">%</string>
               </property>
               <property name="decimals">
-               <number>1</number>
+               <number>2</number>
               </property>
               <property name="singleStep">
                <double>0.100000000000000</double>
@@ -700,7 +700,7 @@
   </connection>
  </connections>
  <buttongroups>
-  <buttongroup name="buttonGroupPrinciple"/>
   <buttongroup name="buttonGroup"/>
+  <buttongroup name="buttonGroupPrinciple"/>
  </buttongroups>
 </ui>
