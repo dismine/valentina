@@ -26,8 +26,8 @@
  **
  *************************************************************************/
 #include "vpundopiecerotate.h"
-#include "../layout/vppiece.h"
 #include "../layout/vplayout.h"
+#include "../layout/vppiece.h"
 
 namespace
 {
@@ -37,16 +37,16 @@ auto RoundAngle(qreal angle) -> qreal
     l.setAngle(angle);
     return l.angle();
 }
-}
+} // namespace
 
 //---------------------------------------------------------------------------------------------------------------------
 VPUndoPieceRotate::VPUndoPieceRotate(const VPPiecePtr &piece, const VPTransformationOrigon &origin, qreal angle,
                                      qreal angleSum, bool allowMerge, QUndoCommand *parent)
-    : VPUndoCommand(allowMerge, parent),
-      m_piece(piece),
-      m_origin(origin),
-      m_angle(angle),
-      m_angleSum(angleSum)
+  : VPUndoCommand(allowMerge, parent),
+    m_piece(piece),
+    m_origin(origin),
+    m_angle(angle),
+    m_angleSum(angleSum)
 {
     SCASSERT(not piece.isNull())
 
@@ -107,7 +107,7 @@ void VPUndoPieceRotate::redo()
 
     if (m_firstCall)
     {
-        if (m_followGrainline && piece->IsGrainlineEnabled())
+        if ((m_followGrainline || piece->IsFollowGrainline()) && piece->IsGrainlineEnabled())
         {
             piece->Rotate(m_origin.origin, m_angleSum);
         }
@@ -121,7 +121,7 @@ void VPUndoPieceRotate::redo()
         piece->Rotate(m_origin.origin, m_angle);
     }
 
-    if (m_followGrainline)
+    if (m_followGrainline || piece->IsFollowGrainline())
     {
         piece->RotateToGrainline(m_origin);
     }
@@ -149,8 +149,8 @@ auto VPUndoPieceRotate::mergeWith(const QUndoCommand *command) -> bool
 
     VPPiecePtr piece = Piece();
     if (not moveCommand->AllowMerge() || (moveCommand->Piece().isNull() || piece.isNull()) ||
-            moveCommand->Piece() != piece || moveCommand->Origin() != m_origin ||
-            moveCommand->FollowGrainline() != m_followGrainline)
+        moveCommand->Piece() != piece || moveCommand->Origin() != m_origin ||
+        moveCommand->FollowGrainline() != m_followGrainline)
     {
         return false;
     }
@@ -170,14 +170,14 @@ auto VPUndoPieceRotate::id() const -> int
 //---------------------------------------------------------------------------------------------------------------------
 VPUndoPiecesRotate::VPUndoPiecesRotate(const QList<VPPiecePtr> &pieces, const VPTransformationOrigon &origin,
                                        qreal angle, qreal angleSum, bool allowMerge, QUndoCommand *parent)
-    : VPUndoCommand(allowMerge, parent),
-      m_origin(origin),
-      m_angle(angle),
-      m_angleSum(angleSum)
+  : VPUndoCommand(allowMerge, parent),
+    m_origin(origin),
+    m_angle(angle),
+    m_angleSum(angleSum)
 {
     setText(QObject::tr("rotate pieces"));
 
-    for (const auto& piece : pieces)
+    for (const auto &piece : pieces)
     {
         if (not piece.isNull())
         {
@@ -213,7 +213,7 @@ void VPUndoPiecesRotate::undo()
         layout->SetFocusedSheet(sheet);
     }
 
-    for (const auto& piece : qAsConst(m_pieces))
+    for (const auto &piece : qAsConst(m_pieces))
     {
         VPPiecePtr p = piece.toStrongRef();
         if (not p.isNull())
@@ -247,14 +247,14 @@ void VPUndoPiecesRotate::redo()
         layout->SetFocusedSheet(sheet);
     }
 
-    for (const auto& piece : qAsConst(m_pieces))
+    for (const auto &piece : qAsConst(m_pieces))
     {
         VPPiecePtr p = piece.toStrongRef();
         if (not p.isNull())
         {
             if (m_firstCall)
             {
-                if (m_followGrainline && p->IsGrainlineEnabled())
+                if ((m_followGrainline || p->IsFollowGrainline()) && p->IsGrainlineEnabled())
                 {
                     p->Rotate(m_origin.origin, m_angleSum);
                 }
@@ -268,7 +268,7 @@ void VPUndoPiecesRotate::redo()
                 p->Rotate(m_origin.origin, m_angle);
             }
 
-            if (m_followGrainline)
+            if (m_followGrainline || p->IsFollowGrainline())
             {
                 p->RotateToGrainline(m_origin);
             }
@@ -297,7 +297,7 @@ auto VPUndoPiecesRotate::mergeWith(const QUndoCommand *command) -> bool
     SCASSERT(moveCommand != nullptr)
 
     if (not moveCommand->AllowMerge() || moveCommand->PieceIds() != PieceIds() || moveCommand->Origin() != m_origin ||
-            moveCommand->FollowGrainline() != m_followGrainline)
+        moveCommand->FollowGrainline() != m_followGrainline)
     {
         return false;
     }
@@ -317,7 +317,7 @@ auto VPUndoPiecesRotate::id() const -> int
 auto VPUndoPiecesRotate::PieceIds() const -> QSet<QString>
 {
     QSet<QString> ids;
-    for (const auto& piece : m_pieces)
+    for (const auto &piece : m_pieces)
     {
         VPPiecePtr p = piece.toStrongRef();
         if (not p.isNull())
@@ -332,7 +332,7 @@ auto VPUndoPiecesRotate::PieceIds() const -> QSet<QString>
 //---------------------------------------------------------------------------------------------------------------------
 auto VPUndoPiecesRotate::Layout() const -> VPLayoutPtr
 {
-    for (const auto& piece : m_pieces)
+    for (const auto &piece : m_pieces)
     {
         VPPiecePtr p = piece.toStrongRef();
         if (not p.isNull())
@@ -347,7 +347,7 @@ auto VPUndoPiecesRotate::Layout() const -> VPLayoutPtr
 //---------------------------------------------------------------------------------------------------------------------
 auto VPUndoPiecesRotate::Sheet() const -> VPSheetPtr
 {
-    for (const auto& piece : m_pieces)
+    for (const auto &piece : m_pieces)
     {
         VPPiecePtr p = piece.toStrongRef();
         if (not p.isNull())

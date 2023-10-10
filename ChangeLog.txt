@@ -43,6 +43,7 @@
 - Redesign standard path system.
 - New option: Translate formula.
 - Fix filling piece label data.
+- New piece option Follow grainline.
 
 # Valentina 0.7.52 September 12, 2022
 - Fix crash when default locale is ru.

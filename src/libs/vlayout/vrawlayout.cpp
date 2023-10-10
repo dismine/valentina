@@ -104,11 +104,6 @@ auto operator>>(QDataStream &dataStream, VRawLayoutData &data) -> QDataStream &
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-VRawLayout::VRawLayout()
-{
-}
-
-//---------------------------------------------------------------------------------------------------------------------
 auto VRawLayout::WriteFile(QIODevice *ioDevice, const VRawLayoutData &data) -> bool
 {
     SCASSERT(ioDevice != nullptr)
@@ -119,7 +114,7 @@ auto VRawLayout::WriteFile(QIODevice *ioDevice, const VRawLayoutData &data) -> b
     if (wasOpen || ioDevice->open(QIODevice::WriteOnly))
     {
         QDataStream dataStream(ioDevice);
-        dataStream.setVersion(QDataStream::Qt_5_4);
+        dataStream.setVersion(QDataStream::Qt_5_6);
 
         // Don't use the << operator for QByteArray. See the note in ReadFile() below.
         dataStream.writeRawData(fileHeaderByteArray.constData(), static_cast<int>(fileHeaderByteArray.size()));
@@ -159,7 +154,7 @@ auto VRawLayout::ReadFile(QIODevice *ioDevice, VRawLayoutData &data) -> bool
             });
 
         QDataStream dataStream(ioDevice);
-        dataStream.setVersion(QDataStream::Qt_5_4);
+        dataStream.setVersion(QDataStream::Qt_5_6);
 
         // Note: we could have used the QDataStream << and >> operators on QByteArray but since the first
         // bytes of the stream will be the size of the array, we might end up attempting to allocate

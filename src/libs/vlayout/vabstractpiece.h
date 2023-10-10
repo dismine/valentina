@@ -74,6 +74,9 @@ public:
     auto IsForceFlipping() const -> bool;
     void SetForceFlipping(bool value);
 
+    auto IsFollowGrainline() const -> bool;
+    void SetFollowGrainline(bool value);
+
     auto IsSeamAllowance() const -> bool;
     void SetSeamAllowance(bool value);
 

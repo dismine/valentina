@@ -111,7 +111,7 @@
                 <string>Move on top</string>
                </property>
                <property name="text">
-                <string notr="true"></string>
+                <string notr="true"/>
                </property>
                <property name="icon">
                 <iconset theme="go-top">
@@ -128,7 +128,7 @@
                 <string>Move up</string>
                </property>
                <property name="text">
-                <string notr="true"></string>
+                <string notr="true"/>
                </property>
                <property name="icon">
                 <iconset theme="go-up">
@@ -145,7 +145,7 @@
                 <string>Move down</string>
                </property>
                <property name="text">
-                <string notr="true"></string>
+                <string notr="true"/>
                </property>
                <property name="icon">
                 <iconset theme="go-down">
@@ -162,7 +162,7 @@
                 <string>Move on bottom</string>
                </property>
                <property name="text">
-                <string notr="true"></string>
+                <string notr="true"/>
                </property>
                <property name="icon">
                 <iconset theme="go-bottom">
@@ -326,6 +326,16 @@
             </widget>
            </item>
            <item>
+            <widget class="QCheckBox" name="checkBoxFollowGrainline">
+             <property name="toolTip">
+              <string>Force piece to always follow grainline direction regardless of layout settings.</string>
+             </property>
+             <property name="text">
+              <string>Follow grainline</string>
+             </property>
+            </widget>
+           </item>
+           <item>
             <spacer name="verticalSpacer">
              <property name="orientation">
               <enum>Qt::Vertical</enum>
@@ -457,7 +467,7 @@
                    <string>Formula wizard</string>
                   </property>
                   <property name="text">
-                   <string notr="true"></string>
+                   <string notr="true"/>
                   </property>
                   <property name="icon">
                    <iconset resource="../../../../../vmisc/share/resources/icon.qrc">
@@ -696,7 +706,7 @@
                       <string>Formula wizard</string>
                      </property>
                      <property name="text">
-                      <string notr="true"></string>
+                      <string notr="true"/>
                      </property>
                      <property name="icon">
                       <iconset resource="../../../../../vmisc/share/resources/icon.qrc">
@@ -886,7 +896,7 @@
                       <string>Formula wizard</string>
                      </property>
                      <property name="text">
-                      <string notr="true"></string>
+                      <string notr="true"/>
                      </property>
                      <property name="icon">
                       <iconset resource="../../../../../vmisc/share/resources/icon.qrc">

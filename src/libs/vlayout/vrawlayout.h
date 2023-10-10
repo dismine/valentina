@@ -42,12 +42,12 @@ private:
     static const quint16 classVersion;
 };
 
-
 class VRawLayout
 {
     Q_DECLARE_TR_FUNCTIONS(VRawLayout) // NOLINT
+
 public:
-    VRawLayout();
+    VRawLayout() = default;
 
     auto WriteFile(QIODevice *ioDevice, const VRawLayoutData &data) -> bool;
     auto ReadFile(QIODevice *ioDevice, VRawLayoutData &data) -> bool;

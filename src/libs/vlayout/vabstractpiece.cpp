@@ -993,6 +993,18 @@ void VAbstractPiece::SetForceFlipping(bool value)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+auto VAbstractPiece::IsFollowGrainline() const -> bool
+{
+    return d->m_followGrainline;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VAbstractPiece::SetFollowGrainline(bool value)
+{
+    d->m_followGrainline = value;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 auto VAbstractPiece::IsSeamAllowance() const -> bool
 {
     return d->m_seamAllowance;

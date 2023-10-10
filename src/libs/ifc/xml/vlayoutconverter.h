@@ -28,8 +28,8 @@
 #ifndef VLAYOUTCONVERTER_H
 #define VLAYOUTCONVERTER_H
 
-#include "vabstractconverter.h"
 #include "../vmisc/projectversion.h"
+#include "vabstractconverter.h"
 
 class QDomElement;
 class QString;
@@ -37,18 +37,19 @@ class QString;
 class VLayoutConverter : public VAbstractConverter
 {
     Q_OBJECT // NOLINT
+
 public:
     explicit VLayoutConverter(const QString &fileName);
-    ~VLayoutConverter() override =default;
+    ~VLayoutConverter() override = default;
 
     auto GetFormatVersionStr() const -> QString override;
 
     static const QString LayoutMaxVerStr;
     static const QString CurrentSchema;
     static Q_DECL_CONSTEXPR const unsigned LayoutMinVer = FormatVersion(0, 1, 0);
-    static Q_DECL_CONSTEXPR const unsigned LayoutMaxVer = FormatVersion(0, 1, 5);
+    static Q_DECL_CONSTEXPR const unsigned LayoutMaxVer = FormatVersion(0, 1, 6);
 
-    static auto XSDSchemas() -> QHash <unsigned, QString>;
+    static auto XSDSchemas() -> QHash<unsigned, QString>;
 
 protected:
     void SetVersion(const QString &version) override;
@@ -64,7 +65,7 @@ protected:
 
     auto IsReadOnly() const -> bool override;
 
-    auto Schemas() const -> QHash <unsigned, QString> override;
+    auto Schemas() const -> QHash<unsigned, QString> override;
 
     void ConvertPiecesToV0_1_3();
     void ConvertPathToV0_1_3(QDomElement &node);
@@ -73,6 +74,7 @@ protected:
 
     void ToV0_1_3();
     void ToV0_1_5();
+    void ToV0_1_6();
 
 private:
     Q_DISABLE_COPY_MOVE(VLayoutConverter) // NOLINT

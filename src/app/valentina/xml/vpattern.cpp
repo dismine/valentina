@@ -964,6 +964,7 @@ void VPattern::ParseDetailElement(QDomElement &domElement, const Document &parse
         initData.detail.SetForceFlipping(GetParametrBool(
             domElement, AttrForceFlipping,
             QString().setNum(VAbstractValApplication::VApp()->ValentinaSettings()->GetForceWorkpieceFlipping())));
+        initData.detail.SetFollowGrainline(GetParametrBool(domElement, AttrFollowGrainline, falseStr));
         initData.detail.SetSewLineOnDrawing(GetParametrBool(
             domElement, AttrSewLineOnDrawing,
             QString().setNum(VAbstractValApplication::VApp()->ValentinaSettings()->GetSewLineOnDrawing())));

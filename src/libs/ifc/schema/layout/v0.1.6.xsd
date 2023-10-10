@@ -1,0 +1,589 @@
+<xs:schema attributeFormDefault="unqualified" elementFormDefault="qualified" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:element name="layout">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="properties">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element type="units" name="unit"/>
+              <xs:element type="xs:string" name="title"/>    
+              <xs:element type="xs:string" name="description"/>
+              <xs:element name="control">
+                <xs:complexType>
+                  <xs:attribute type="xs:boolean" name="warningSuperposition"/>
+                  <xs:attribute type="xs:boolean" name="warningOutOfBound"/>
+                  <xs:attribute type="xs:boolean" name="stickyEdges"/>
+                  <xs:attribute type="xs:boolean" name="followGrainline"/>
+                  <xs:attribute type="xs:float" name="piecesGap"/>
+                </xs:complexType>
+              </xs:element>
+              <xs:element name="tiles">
+                <xs:complexType>
+                  <xs:sequence>
+                    <xs:element name="size">
+                      <xs:complexType>
+                        <xs:attribute type="xs:float" name="width" use="required"/>
+                        <xs:attribute type="xs:float" name="length" use="required"/>
+                      </xs:complexType>
+                    </xs:element>
+                    <xs:element name="margin">
+                      <xs:complexType>
+                        <xs:attribute type="xs:float" name="top"/>
+                        <xs:attribute type="xs:float" name="right"/>
+                        <xs:attribute type="xs:float" name="bottom"/>
+                        <xs:attribute type="xs:float" name="left"/>
+                        <xs:attribute type="xs:boolean" name="ignoreMargins"/>
+                      </xs:complexType>
+                    </xs:element>
+                  </xs:sequence>
+                  <xs:attribute type="xs:boolean" name="visible"/>
+                  <xs:attribute type="xs:string" name="matchingMarks"/>
+                  <xs:attribute type="xs:boolean" name="printScheme"/>
+                  <xs:attribute type="xs:boolean" name="tileNumber"/>
+                </xs:complexType>
+              </xs:element>
+              <xs:element name="scale">
+                <xs:complexType>
+                  <xs:attribute type="LayoutScale" name="xScale"/>
+                  <xs:attribute type="LayoutScale" name="yScale"/>
+                </xs:complexType>
+              </xs:element>
+              <xs:element name="watermark">
+                <xs:complexType>
+                  <xs:simpleContent>
+                    <xs:extension base="xs:string">
+                      <xs:attribute type="xs:boolean" name="showPreview" use="optional"/>
+                    </xs:extension>
+                  </xs:simpleContent>
+                </xs:complexType>
+              </xs:element>
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="unplacedPieces">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="piece" minOccurs="0" maxOccurs="unbounded">
+                <xs:complexType>
+                  <xs:sequence>
+                    <xs:element name="seamLine">
+                      <xs:complexType>
+                        <xs:sequence>
+                          <xs:element name="point" minOccurs="3" maxOccurs="unbounded">
+                            <xs:complexType>
+                              <xs:attribute type="xs:double" name="x" use="required"/>
+                              <xs:attribute type="xs:double" name="y" use="required"/>
+                              <xs:attribute type="xs:boolean" name="turnPoint" use="optional"/>
+                              <xs:attribute type="xs:boolean" name="curvePoint" use="optional"/>
+                            </xs:complexType>
+                          </xs:element>
+                        </xs:sequence>
+                      </xs:complexType>
+                    </xs:element>
+                    <xs:element name="seamAllowance">
+                      <xs:complexType>
+                        <xs:sequence>
+                          <xs:element name="point" minOccurs="0" maxOccurs="unbounded">
+                            <xs:complexType>
+                              <xs:attribute type="xs:double" name="x" use="required"/>
+                              <xs:attribute type="xs:double" name="y" use="required"/>
+                              <xs:attribute type="xs:boolean" name="turnPoint" use="optional"/>
+                              <xs:attribute type="xs:boolean" name="curvePoint" use="optional"/>
+                            </xs:complexType>
+                          </xs:element>
+                        </xs:sequence>
+                        <xs:attribute type="xs:boolean" name="enabled" use="optional"/>
+                        <xs:attribute type="xs:boolean" name="builtIn" use="optional"/>
+                      </xs:complexType>
+                    </xs:element>
+                    <xs:element name="grainline">
+                      <xs:complexType>
+                        <xs:simpleContent>
+                          <xs:extension base="LinePathOrEmpty">
+                            <xs:attribute type="xs:boolean" name="enabled" use="optional"/>
+                            <xs:attribute type="ArrowDirection" name="arrowDirection" use="optional"/>
+                          </xs:extension>
+                        </xs:simpleContent>
+                      </xs:complexType>
+                    </xs:element>
+                    <xs:element name="notches">
+                      <xs:complexType>
+                        <xs:sequence>
+                          <xs:element name="notch" minOccurs="0" maxOccurs="unbounded">
+                            <xs:complexType>
+                              <xs:attribute type="xs:boolean" name="builtIn" use="optional"/>
+                              <xs:attribute type="NotchType" name="type" use="optional"/>
+                              <xs:attribute type="LinePath" name="baseLine" use="optional"/>
+                              <xs:attribute type="LinesPath" name="path" use="optional"/>
+                              <xs:attribute type="xs:boolean" name="clockwiseOpening" use="optional"/>
+                            </xs:complexType>
+                          </xs:element>
+                        </xs:sequence>
+                      </xs:complexType>
+                    </xs:element>
+                    <xs:element name="internalPaths">
+                      <xs:complexType>
+                        <xs:sequence>
+                          <xs:element name="internalPath" minOccurs="0" maxOccurs="unbounded">
+                            <xs:complexType>
+                              <xs:sequence>
+                                <xs:element name="point" minOccurs="2" maxOccurs="unbounded">
+                                  <xs:complexType>
+                                    <xs:attribute type="xs:double" name="x" use="required"/>
+                                    <xs:attribute type="xs:double" name="y" use="required"/>
+                                    <xs:attribute type="xs:boolean" name="turnPoint" use="optional"/>
+                                    <xs:attribute type="xs:boolean" name="curvePoint" use="optional"/>
+                                  </xs:complexType>
+                                </xs:element>
+                              </xs:sequence>
+                              <xs:attribute type="xs:boolean" name="cut" use="optional"/>
+                              <xs:attribute type="CurvePenStyle" name="penStyle" use="optional"/>    
+                            </xs:complexType>
+                          </xs:element>
+                        </xs:sequence>
+                      </xs:complexType>
+                    </xs:element>
+                    <xs:element name="markers">
+                      <xs:complexType mixed="true">
+                        <xs:sequence>
+                          <xs:element name="marker" maxOccurs="unbounded" minOccurs="0">
+                            <xs:complexType>
+                              <xs:attribute type="Transformation" name="transform" use="required"/>
+                              <xs:attribute type="MarkerType" name="type" use="required"/>
+                              <xs:attribute type="PointPath" name="center" use="required"/>
+                              <xs:attribute type="RectPath" name="box" use="required"/>
+                            </xs:complexType>
+                          </xs:element>
+                        </xs:sequence>
+                      </xs:complexType>
+                    </xs:element>
+                    <xs:element name="labels">
+                      <xs:complexType>
+                        <xs:sequence>
+                          <xs:element name="pieceLabel" minOccurs="0" maxOccurs="1">
+                            <xs:complexType>
+                              <xs:sequence>
+                                <xs:element name="lines">
+                                  <xs:complexType>
+                                    <xs:sequence>
+                                      <xs:element name="line" minOccurs="0" maxOccurs="unbounded">
+                                        <xs:complexType>
+                                          <xs:simpleContent>
+                                            <xs:extension base="xs:string">
+                                              <xs:attribute type="xs:boolean" name="bold" use="optional"/>
+                                              <xs:attribute type="xs:boolean" name="italic" use="optional"/>
+                                              <xs:attribute type="xs:unsignedInt" name="alignment" use="optional"/>
+                                              <xs:attribute type="xs:unsignedInt" name="fontSize" use="optional"/>
+                                            </xs:extension>
+                                          </xs:simpleContent>
+                                        </xs:complexType>
+                                      </xs:element>
+                                    </xs:sequence>
+                                    <xs:attribute type="xs:string" name="font"/>
+                                    <xs:attribute type="xs:string" name="svgFont"/>
+                                  </xs:complexType>
+                                </xs:element>
+                              </xs:sequence>
+                              <xs:attribute type="xs:string" name="shape" use="required"/>
+                            </xs:complexType>
+                          </xs:element>
+                          <xs:element name="patternLabel" minOccurs="0" maxOccurs="1">
+                            <xs:complexType>
+                              <xs:sequence>
+                                <xs:element name="lines">
+                                  <xs:complexType>
+                                    <xs:sequence>
+                                      <xs:element name="line" minOccurs="0" maxOccurs="unbounded">
+                                        <xs:complexType>
+                                          <xs:simpleContent>
+                                            <xs:extension base="xs:string">
+                                              <xs:attribute type="xs:boolean" name="bold" use="optional"/>
+                                              <xs:attribute type="xs:boolean" name="italic" use="optional"/>
+                                              <xs:attribute type="xs:unsignedInt" name="alignment" use="optional"/>
+                                              <xs:attribute type="xs:unsignedInt" name="fontSize" use="optional"/>
+                                            </xs:extension>
+                                          </xs:simpleContent>
+                                        </xs:complexType>
+                                      </xs:element>
+                                    </xs:sequence>
+                                    <xs:attribute type="xs:string" name="font"/>
+                                    <xs:attribute type="xs:string" name="svgFont"/>
+                                  </xs:complexType>
+                                </xs:element>
+                              </xs:sequence>
+                              <xs:attribute type="xs:string" name="shape" use="required"/>
+                            </xs:complexType>
+                          </xs:element>
+                        </xs:sequence>
+                      </xs:complexType>
+                    </xs:element>
+                  </xs:sequence>
+                  <xs:attribute name="uid" type="uuid" use="required"/>
+                  <xs:attribute type="xs:string" name="name"/>
+                  <xs:attribute type="xs:boolean" name="mirrored"/>
+                  <xs:attribute type="xs:boolean" name="forbidFlipping"/>
+                  <xs:attribute type="xs:boolean" name="forceFlipping"/>
+                  <xs:attribute type="xs:boolean" name="followGrainline"/>
+                  <xs:attribute type="xs:boolean" name="sewLineOnDrawing"/>
+                  <xs:attribute type="Transformation" name="transform"/>
+                  <xs:attribute type="xs:string" name="gradationLabel"/>
+                  <xs:attribute type="xs:unsignedInt" name="copyNumber"/>
+                  <xs:attribute type="xs:boolean" name="showSeamline"/>
+                  <xs:attribute type="xs:float" name="xScale"/>  
+                  <xs:attribute type="xs:float" name="yScale"/> 
+                </xs:complexType>
+              </xs:element>
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="sheets">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="sheet" minOccurs="0" maxOccurs="unbounded">
+                <xs:complexType>
+                  <xs:sequence>
+                    <xs:element type="xs:string" name="name"/>
+                    <xs:element name="size">
+                      <xs:complexType>
+                        <xs:attribute type="xs:float" name="width" use="required"/>
+                        <xs:attribute type="xs:float" name="length" use="required"/>
+                      </xs:complexType>
+                    </xs:element>
+                    <xs:element name="margin">
+                      <xs:complexType>
+                        <xs:attribute type="xs:float" name="top"/>
+                        <xs:attribute type="xs:float" name="right"/>
+                        <xs:attribute type="xs:float" name="bottom"/>
+                        <xs:attribute type="xs:float" name="left"/>
+                        <xs:attribute type="xs:boolean" name="ignoreMargins"/>
+                      </xs:complexType>
+                    </xs:element>
+                    <xs:element name="pieces">
+                      <xs:complexType>
+                        <xs:sequence>
+                          <xs:element name="piece" minOccurs="0" maxOccurs="unbounded">
+                            <xs:complexType>
+                              <xs:sequence>
+                                <xs:element name="seamLine">
+                                  <xs:complexType>
+                                    <xs:sequence>
+                                      <xs:element name="point" minOccurs="3" maxOccurs="unbounded">
+                                        <xs:complexType>
+                                          <xs:attribute type="xs:double" name="x" use="required"/>
+                                          <xs:attribute type="xs:double" name="y" use="required"/>
+                                          <xs:attribute type="xs:boolean" name="turnPoint" use="optional"/>
+                                          <xs:attribute type="xs:boolean" name="curvePoint" use="optional"/>
+                                        </xs:complexType>
+                                      </xs:element>
+                                    </xs:sequence>
+                                  </xs:complexType>
+                                </xs:element>
+                                <xs:element name="seamAllowance">
+                                  <xs:complexType>
+                                    <xs:sequence>
+                                      <xs:element name="point" minOccurs="0" maxOccurs="unbounded">
+                                        <xs:complexType>
+                                          <xs:attribute type="xs:double" name="x" use="required"/>
+                                          <xs:attribute type="xs:double" name="y" use="required"/>
+                                          <xs:attribute type="xs:boolean" name="turnPoint" use="optional"/>
+                                          <xs:attribute type="xs:boolean" name="curvePoint" use="optional"/>
+                                        </xs:complexType>
+                                      </xs:element>
+                                    </xs:sequence>
+                                    <xs:attribute type="xs:boolean" name="enabled" use="optional"/>
+                                    <xs:attribute type="xs:boolean" name="builtIn" use="optional"/>
+                                  </xs:complexType>
+                                </xs:element>
+                                <xs:element name="grainline">
+                                  <xs:complexType>
+                                    <xs:simpleContent>
+                                      <xs:extension base="LinePathOrEmpty">
+                                        <xs:attribute type="xs:boolean" name="enabled" use="optional"/>
+                                        <xs:attribute type="ArrowDirection" name="arrowDirection" use="optional"/>
+                                      </xs:extension>
+                                    </xs:simpleContent>
+                                  </xs:complexType>
+                                </xs:element>
+                                <xs:element name="notches">
+                                  <xs:complexType>
+                                    <xs:sequence>
+                                      <xs:element name="notch" minOccurs="0" maxOccurs="unbounded">
+                                        <xs:complexType>
+                                          <xs:attribute type="xs:boolean" name="builtIn" use="optional"/>
+                                          <xs:attribute type="NotchType" name="type" use="optional"/>
+                                          <xs:attribute type="LinePath" name="baseLine" use="optional"/>
+                                          <xs:attribute type="LinesPath" name="path" use="optional"/>
+                                          <xs:attribute type="xs:boolean" name="clockwiseOpening" use="optional"/>
+                                        </xs:complexType>
+                                      </xs:element>
+                                    </xs:sequence>
+                                  </xs:complexType>
+                                </xs:element>
+                                <xs:element name="internalPaths">
+                                  <xs:complexType>
+                                    <xs:sequence>
+                                      <xs:element name="internalPath" minOccurs="0" maxOccurs="unbounded">
+                                        <xs:complexType>
+                                          <xs:sequence>
+                                            <xs:element name="point" minOccurs="2" maxOccurs="unbounded">
+                                              <xs:complexType>
+                                                <xs:attribute type="xs:double" name="x" use="required"/>
+                                                <xs:attribute type="xs:double" name="y" use="required"/>
+                                                <xs:attribute type="xs:boolean" name="turnPoint" use="optional"/>
+                                                <xs:attribute type="xs:boolean" name="curvePoint" use="optional"/>
+                                              </xs:complexType>
+                                            </xs:element>
+                                          </xs:sequence>
+                                          <xs:attribute type="xs:boolean" name="cut" use="optional"/>
+                                          <xs:attribute type="CurvePenStyle" name="penStyle" use="optional"/>    
+                                        </xs:complexType>
+                                      </xs:element>
+                                    </xs:sequence>
+                                  </xs:complexType>
+                                </xs:element>
+                                <xs:element name="markers">
+                                  <xs:complexType mixed="true">
+                                    <xs:sequence>
+                                      <xs:element name="marker" maxOccurs="unbounded" minOccurs="0">
+                                        <xs:complexType>
+                                          <xs:attribute type="Transformation" name="transform" use="required"/>
+                                          <xs:attribute type="MarkerType" name="type" use="required"/>
+                                          <xs:attribute type="PointPath" name="center" use="required"/>
+                                          <xs:attribute type="RectPath" name="box" use="required"/>
+                                        </xs:complexType>
+                                      </xs:element>
+                                    </xs:sequence>
+                                  </xs:complexType>
+                                </xs:element>
+                                <xs:element name="labels">
+                                  <xs:complexType>
+                                    <xs:sequence>
+                                      <xs:element name="pieceLabel" minOccurs="0" maxOccurs="1">
+                                        <xs:complexType>
+                                          <xs:sequence>
+                                            <xs:element name="lines">
+                                              <xs:complexType>
+                                                <xs:sequence>
+                                                  <xs:element name="line" minOccurs="0" maxOccurs="unbounded">
+                                                    <xs:complexType>
+                                                      <xs:simpleContent>
+                                                        <xs:extension base="xs:string">
+                                                          <xs:attribute type="xs:boolean" name="bold" use="optional"/>
+                                                          <xs:attribute type="xs:boolean" name="italic" use="optional"/>
+                                                          <xs:attribute type="AlignmentType" name="alignment" use="optional"/>
+                                                          <xs:attribute type="xs:unsignedInt" name="fontSize" use="optional"/>
+                                                        </xs:extension>
+                                                      </xs:simpleContent>
+                                                    </xs:complexType>
+                                                  </xs:element>
+                                                </xs:sequence>
+                                                <xs:attribute type="xs:string" name="font"/>
+                                                <xs:attribute type="xs:string" name="svgFont"/>
+                                              </xs:complexType>
+                                            </xs:element>
+                                          </xs:sequence>
+                                          <xs:attribute type="PathNotEmpty" name="shape" use="required"/>
+                                        </xs:complexType>
+                                      </xs:element>
+                                      <xs:element name="patternLabel" minOccurs="0" maxOccurs="1">
+                                        <xs:complexType>
+                                          <xs:sequence>
+                                            <xs:element name="lines">
+                                              <xs:complexType>
+                                                <xs:sequence>
+                                                  <xs:element name="line" minOccurs="0" maxOccurs="unbounded">
+                                                    <xs:complexType>
+                                                      <xs:simpleContent>
+                                                        <xs:extension base="xs:string">
+                                                          <xs:attribute type="xs:boolean" name="bold" use="optional"/>
+                                                          <xs:attribute type="xs:boolean" name="italic" use="optional"/>
+                                                          <xs:attribute type="AlignmentType" name="alignment" use="optional"/>
+                                                          <xs:attribute type="xs:unsignedInt" name="fontSize" use="optional"/>
+                                                        </xs:extension>
+                                                      </xs:simpleContent>
+                                                    </xs:complexType>
+                                                  </xs:element>
+                                                </xs:sequence>
+                                                <xs:attribute type="xs:string" name="font"/>
+                                                <xs:attribute type="xs:string" name="svgFont"/>
+                                              </xs:complexType>
+                                            </xs:element>
+                                          </xs:sequence>
+                                          <xs:attribute type="PathNotEmpty" name="shape" use="required"/>
+                                        </xs:complexType>
+                                      </xs:element>
+                                    </xs:sequence>
+                                  </xs:complexType>
+                                </xs:element>
+                              </xs:sequence>
+                              <xs:attribute name="uid" type="uuid" use="required"/>
+                              <xs:attribute type="xs:string" name="name"/>
+                              <xs:attribute type="xs:boolean" name="mirrored"/>
+                              <xs:attribute type="xs:boolean" name="forbidFlipping"/>
+                              <xs:attribute type="xs:boolean" name="forceFlipping"/>
+                              <xs:attribute type="xs:boolean" name="followGrainline"/>
+                              <xs:attribute type="xs:boolean" name="sewLineOnDrawing"/>
+                              <xs:attribute type="Transformation" name="transform"/>
+                              <xs:attribute type="xs:string" name="gradationLabel"/>
+                              <xs:attribute type="xs:unsignedInt" name="copyNumber"/>
+                              <xs:attribute type="xs:boolean" name="showSeamline"/>
+                              <xs:attribute type="xs:float" name="xScale"/>  
+                              <xs:attribute type="xs:float" name="yScale"/>
+                              <xs:attribute type="xs:float" name="zValue"/>    
+                            </xs:complexType>
+                          </xs:element>
+                        </xs:sequence>
+                      </xs:complexType>
+                    </xs:element>  
+                  </xs:sequence>
+                  <xs:attribute type="GrainlineType" name="grainlineType"/>
+                </xs:complexType>
+              </xs:element>
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+      </xs:sequence>
+      <xs:attribute type="formatVersion" name="version" use="required"/>
+    </xs:complexType>
+  </xs:element>
+  <!--Types-->
+  <xs:simpleType name="formatVersion">
+    <xs:restriction base="xs:string">
+      <xs:pattern value="[0-9]{1,}\.[0-9]{1,}\.[0-9]{1,}"/>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="units">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="mm"/>
+      <xs:enumeration value="cm"/>
+      <xs:enumeration value="inch"/>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="uuid">
+    <xs:restriction base="xs:string">
+      <xs:pattern value="|\{[0-9a-fA-F]{8}\-[0-9a-fA-F]{4}\-[0-9a-fA-F]{4}\-[0-9a-fA-F]{4}\-[0-9a-fA-F]{12}\}"/>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="ArrowDirection">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="oneWayUp"/>
+      <xs:enumeration value="oneWayDown"/>
+      <xs:enumeration value="twoWaysUpDown"/>
+      <xs:enumeration value="fourWays"/>
+      <xs:enumeration value="twoWaysUpLeft"/>
+      <xs:enumeration value="twoWaysUpRight"/>
+      <xs:enumeration value="twoWaysDownLeft"/>
+      <xs:enumeration value="twoWaysDownRight"/>
+      <xs:enumeration value="threeWaysUpDownLeft"/>
+      <xs:enumeration value="threeWaysUpDownRight"/>
+      <xs:enumeration value="threeWaysUpLeftRight"/>
+      <xs:enumeration value="threeWaysDownLeftRight"/>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="NotchType">
+    <xs:restriction base="xs:unsignedInt">
+      <!--OneLine-->
+      <xs:enumeration value="0"/>
+      <!--TwoLines-->
+      <xs:enumeration value="1"/>
+      <!--ThreeLines-->
+      <xs:enumeration value="2"/>
+      <!--TMark-->
+      <xs:enumeration value="3"/>
+      <!--VMark-->
+      <xs:enumeration value="4"/>
+      <!--VMark2-->
+      <xs:enumeration value="5"/>
+      <!--UMark-->
+      <xs:enumeration value="6"/>
+      <!--BoxMark-->
+      <xs:enumeration value="7"/>
+      <!--CheckMark-->
+      <xs:enumeration value="8"/>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="CurvePenStyle">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="hair"/>
+      <xs:enumeration value="dashLine"/>
+      <xs:enumeration value="dotLine"/>
+      <xs:enumeration value="dashDotLine"/>
+      <xs:enumeration value="dashDotDotLine"/>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="MarkerType">
+    <xs:restriction base="xs:unsignedInt">
+      <xs:enumeration value="0"/><!--Segment-->
+      <xs:enumeration value="1"/><!--Rectangle-->
+      <xs:enumeration value="2"/><!--Cross-->
+      <xs:enumeration value="3"/><!--Tshaped-->
+      <xs:enumeration value="4"/><!--Doubletree-->
+      <xs:enumeration value="5"/><!--Corner-->
+      <xs:enumeration value="6"/><!--Triangle-->
+      <xs:enumeration value="7"/><!--Hshaped-->
+      <xs:enumeration value="8"/><!--Button-->
+      <xs:enumeration value="9"/><!--Circle-->
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="AlignmentType">
+    <xs:restriction base="xs:unsignedInt">
+      <xs:enumeration value="0"/><!--default (no aligns)-->
+      <xs:enumeration value="1"/><!--aligns with the left edge-->
+      <xs:enumeration value="2"/><!--aligns with the right edge-->
+      <xs:enumeration value="4"/><!--Centers horizontally in the available space-->
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="Transformation">
+    <xs:restriction base="xs:string">
+      <xs:pattern value="([-+]?\d+\.?\d*([eE][-+]?\d+)?;){8,}[-+]?\d+\.?\d*([eE][-+]?\d+)?"/>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="PathNotEmpty">
+    <xs:restriction base="xs:string">
+      <xs:pattern value="([-+]?\d+\.?\d*([eE][-+]?\d+)?,[-+]?\d+\.?\d*([eE][-+]?\d+)?\s){0,}[-+]?\d+\.?\d*([eE][-+]?\d+)?,[-+]?\d+\.?\d*([eE][-+]?\d+)?"/>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="PathOrEmpty">
+    <xs:restriction base="xs:string">
+      <xs:pattern value="|([-+]?\d+\.?\d*([eE][-+]?\d+)?,[-+]?\d+\.?\d*([eE][-+]?\d+)?\s){0,}[-+]?\d+\.?\d*([eE][-+]?\d+)?,[-+]?\d+\.?\d*([eE][-+]?\d+)?"/>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="LinePathOrEmpty">
+    <xs:restriction base="xs:string">
+      <xs:pattern value="|[-+]?\d+\.?\d*([eE][-+]?\d+)?,[-+]?\d+\.?\d*([eE][-+]?\d+)?;[-+]?\d+\.?\d*([eE][-+]?\d+)?,[-+]?\d+\.?\d*([eE][-+]?\d+)?"/>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="LinePath">
+    <xs:restriction base="xs:string">
+      <xs:pattern value="[-+]?\d+\.?\d*([eE][-+]?\d+)?,[-+]?\d+\.?\d*([eE][-+]?\d+)?;[-+]?\d+\.?\d*([eE][-+]?\d+)?,[-+]?\d+\.?\d*([eE][-+]?\d+)?"/>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="LinesPath">
+    <xs:restriction base="xs:string">
+      <xs:pattern value="([-+]?\d+\.?\d*([eE][-+]?\d+)?,[-+]?\d+\.?\d*([eE][-+]?\d+)?;[-+]?\d+\.?\d*([eE][-+]?\d+)?,[-+]?\d+\.?\d*([eE][-+]?\d+)?\*){0,}[-+]?\d+\.?\d*([eE][-+]?\d+)?,[-+]?\d+\.?\d*([eE][-+]?\d+)?;[-+]?\d+\.?\d*([eE][-+]?\d+)?,[-+]?\d+\.?\d*([eE][-+]?\d+)?"/>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="PointPath">
+    <xs:restriction base="xs:string">
+      <xs:pattern value="[-+]?\d+\.?\d*([eE][-+]?\d+)?,[-+]?\d+\.?\d*([eE][-+]?\d+)?"/>
+    </xs:restriction>
+  </xs:simpleType>   
+  <xs:simpleType name="RectPath">
+    <xs:restriction base="xs:string">
+      <xs:pattern value="([-+]?\d+\.?\d*([eE][-+]?\d+)?;){3,}[-+]?\d+\.?\d*([eE][-+]?\d+)?"/>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="GrainlineType">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="horizontal"/>
+      <xs:enumeration value="vertical"/>
+      <xs:enumeration value="notFixed"/>
+    </xs:restriction>
+  </xs:simpleType>  
+  <xs:simpleType name="LayoutScale">
+    <xs:restriction base="xs:float">
+      <xs:minInclusive value="0.01"/>
+      <xs:maxInclusive value="3"/>
+    </xs:restriction>
+  </xs:simpleType>
+</xs:schema>

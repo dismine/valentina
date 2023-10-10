@@ -144,6 +144,7 @@ extern const QString AttrIdObject;
 extern const QString AttrInLayout;
 extern const QString AttrForbidFlipping;
 extern const QString AttrForceFlipping;
+extern const QString AttrFollowGrainline;
 extern const QString AttrSewLineOnDrawing;
 extern const QString AttrClosed;
 extern const QString AttrShowLabel;

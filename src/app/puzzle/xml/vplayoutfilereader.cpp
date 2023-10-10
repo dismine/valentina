@@ -512,6 +512,7 @@ void VPLayoutFileReader::ReadPiece(const VPPiecePtr &piece)
     piece->SetMirror(ReadAttributeBool(attribs, ML::AttrMirrored, falseStr));
     piece->SetForbidFlipping(ReadAttributeBool(attribs, ML::AttrForbidFlipping, falseStr));
     piece->SetForceFlipping(ReadAttributeBool(attribs, ML::AttrForceFlipping, falseStr));
+    piece->SetFollowGrainline(ReadAttributeBool(attribs, ML::AttrFollowGrainline, falseStr));
     piece->SetSewLineOnDrawing(ReadAttributeBool(attribs, ML::AttrSewLineOnDrawing, falseStr));
     piece->SetMatrix(StringToTransfrom(ReadAttributeEmptyString(attribs, ML::AttrTransform)));
 

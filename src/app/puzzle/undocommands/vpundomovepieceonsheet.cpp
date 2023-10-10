@@ -26,16 +26,16 @@
  **
  *************************************************************************/
 #include "vpundomovepieceonsheet.h"
-#include "../vmisc/def.h"
-#include "../layout/vpsheet.h"
 #include "../layout/vplayout.h"
 #include "../layout/vppiece.h"
+#include "../layout/vpsheet.h"
+#include "../vmisc/def.h"
 
 //---------------------------------------------------------------------------------------------------------------------
 VPUndoMovePieceOnSheet::VPUndoMovePieceOnSheet(const VPSheetPtr &sheet, const VPPiecePtr &piece, QUndoCommand *parent)
-    : VPUndoCommand(false, parent),
-      m_sheet(sheet),
-      m_piece(piece)
+  : VPUndoCommand(false, parent),
+    m_sheet(sheet),
+    m_piece(piece)
 {
     SCASSERT(not piece.isNull())
 
@@ -116,7 +116,7 @@ void VPUndoMovePieceOnSheet::redo()
             piece->SetSelected(false);
         }
 
-        if (m_followGrainline)
+        if (m_followGrainline || piece->IsFollowGrainline())
         {
             QT_WARNING_PUSH
             QT_WARNING_DISABLE_GCC("-Wnoexcept")
