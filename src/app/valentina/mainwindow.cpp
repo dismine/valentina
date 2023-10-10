@@ -6892,9 +6892,9 @@ auto MainWindow::CheckPathToMeasurements(const QString &patternPath, const QStri
             selectedName = measurements;
             dirPath = patternDir.absolutePath();
         }
-        else if (patternDir.exists(measurements.replace(' ', '_')))
+        else if (patternDir.exists(measurements.replace(' '_L1, '_'_L1)))
         {
-            selectedName = measurements.replace(' ', '_');
+            selectedName = measurements.replace(' '_L1, '_'_L1);
             dirPath = patternDir.absolutePath();
         }
         else
@@ -6907,23 +6907,31 @@ auto MainWindow::CheckPathToMeasurements(const QString &patternPath, const QStri
     QString mPath;
     if (patternType == MeasurementsType::Multisize)
     {
-        const QString filter = tr("Multisize measurements") + QStringLiteral(" (*.vst);;") +
-                               tr("Individual measurements") + QStringLiteral(" (*.vit)");
+        const QString filter =
+            tr("Multisize measurements") + " (*.vst);;"_L1 + tr("Individual measurements") + " (*.vit)"_L1;
         // Use standard path to multisize measurements
         QString selectedName;
         const QString dirPath =
             DirPath(VAbstractValApplication::VApp()->ValentinaSettings()->GetPathMultisizeMeasurements(), selectedName);
         mPath = FindLocation(filter, dirPath, selectedName);
+        if (!mPath.isEmpty())
+        {
+            VAbstractValApplication::VApp()->ValentinaSettings()->SetPathMultisizeMeasurements(mPath);
+        }
     }
     else
     {
-        const QString filter = tr("Individual measurements") + QStringLiteral(" (*.vit);;") +
-                               tr("Multisize measurements") + QStringLiteral(" (*.vst)");
+        const QString filter =
+            tr("Individual measurements") + " (*.vit);;"_L1 + tr("Multisize measurements") + " (*.vst)"_L1;
         // Use standard path to individual measurements
         QString selectedName;
         const QString dirPath = DirPath(
             VAbstractValApplication::VApp()->ValentinaSettings()->GetPathIndividualMeasurements(), selectedName);
         mPath = FindLocation(filter, dirPath, selectedName);
+        if (!mPath.isEmpty())
+        {
+            VAbstractValApplication::VApp()->ValentinaSettings()->SetPathIndividualMeasurements(mPath);
+        }
     }
 
     if (mPath.isEmpty())
