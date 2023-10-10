@@ -286,6 +286,169 @@ QT_WARNING_POP
 const qint64 placeholdersExpirationTimeout = 15; // seconds
 
 //---------------------------------------------------------------------------------------------------------------------
+void PrepareMeasurementsPlaceholders(const VContainer *data, QMap<QString, QString> &placeholders)
+{
+    SCASSERT(data != nullptr)
+
+    const QMap<QString, QSharedPointer<VMeasurement>> measurements = data->DataMeasurements();
+    auto i = measurements.constBegin();
+    while (i != measurements.constEnd())
+    {
+        placeholders.insert(pl_measurement + i.key(), QString::number(*i.value()->GetValue()));
+        ++i;
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void PrepareCustomerPlaceholders(const VAbstractPattern *doc, QMap<QString, QString> &placeholders)
+{
+    QLocale locale(VAbstractApplication::VApp()->Settings()->GetLocale());
+
+    if (VAbstractValApplication::VApp()->GetMeasurementsType() == MeasurementsType::Individual)
+    {
+        placeholders.insert(pl_customer, VAbstractValApplication::VApp()->GetCustomerName());
+
+        const QString birthDate =
+            locale.toString(VAbstractValApplication::VApp()->GetCustomerBirthDate(), doc->GetLabelDateFormat());
+        placeholders.insert(pl_birthDate, birthDate);
+
+        placeholders.insert(pl_email, VAbstractValApplication::VApp()->CustomerEmail());
+    }
+    else
+    {
+        placeholders.insert(pl_customer, doc->GetCustomerName());
+
+        const QString birthDate = locale.toString(doc->GetCustomerBirthDate(), doc->GetLabelDateFormat());
+        placeholders.insert(pl_birthDate, birthDate);
+
+        placeholders.insert(pl_email, doc->GetCustomerEmail());
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void PrepareDimensionPlaceholders(QMap<QString, QString> &placeholders)
+{
+    QString heightValue = QString::number(VAbstractValApplication::VApp()->GetDimensionHeight());
+    placeholders.insert(pl_height, heightValue);
+    placeholders.insert(pl_dimensionX, heightValue);
+
+    QString sizeValue = QString::number(VAbstractValApplication::VApp()->GetDimensionSize());
+    placeholders.insert(pl_size, sizeValue);
+    placeholders.insert(pl_dimensionY, sizeValue);
+
+    QString hipValue = QString::number(VAbstractValApplication::VApp()->GetDimensionHip());
+    placeholders.insert(pl_hip, hipValue);
+    placeholders.insert(pl_dimensionZ, hipValue);
+
+    QString waistValue = QString::number(VAbstractValApplication::VApp()->GetDimensionWaist());
+    placeholders.insert(pl_waist, waistValue);
+    placeholders.insert(pl_dimensionW, waistValue);
+
+    {
+        QString label = VAbstractValApplication::VApp()->GetDimensionHeightLabel();
+        placeholders.insert(pl_heightLabel, not label.isEmpty() ? label : heightValue);
+
+        label = VAbstractValApplication::VApp()->GetDimensionSizeLabel();
+        placeholders.insert(pl_sizeLabel, not label.isEmpty() ? label : sizeValue);
+
+        label = VAbstractValApplication::VApp()->GetDimensionHipLabel();
+        placeholders.insert(pl_hipLabel, not label.isEmpty() ? label : hipValue);
+
+        label = VAbstractValApplication::VApp()->GetDimensionWaistLabel();
+        placeholders.insert(pl_waistLabel, not label.isEmpty() ? label : waistValue);
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void PrepareUserMaterialsPlaceholders(const VAbstractPattern *doc, QMap<QString, QString> &placeholders)
+{
+    const QMap<int, QString> materials = doc->GetPatternMaterials();
+    for (int i = 0; i < userMaterialPlaceholdersQuantity; ++i)
+    {
+        const QString number = QString::number(i + 1);
+
+        QString value;
+        if (materials.contains(i + 1))
+        {
+            value = materials.value(i + 1);
+        }
+
+        placeholders.insert(pl_userMaterial + number, value);
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void PrepareFinalMeasurementsPlaceholders(const VAbstractPattern *doc, bool pieceLabel,
+                                          const QString &pieceAreaShortName, QMap<QString, QString> &placeholders)
+{
+    VContainer completeData = doc->GetCompleteData();
+    completeData.FillPiecesAreas(VAbstractValApplication::VApp()->patternUnits());
+
+    if (pieceLabel)
+    {
+        QScopedPointer<Calculator> cal(new Calculator());
+
+        try
+        {
+            const QString formula = pieceArea_ + pieceAreaShortName;
+            const qreal result = cal->EvalFormula(completeData.DataVariables(), formula);
+            placeholders[pl_currentArea] = QString::number(result);
+        }
+        catch (qmu::QmuParserError &e)
+        {
+            const QString errorMsg = QObject::tr("Failed to prepare full piece area placeholder. %1.").arg(e.GetMsg());
+            VAbstractApplication::VApp()->IsPedantic()
+                ? throw VException(errorMsg)
+                : qWarning() << VAbstractValApplication::warningMessageSignature + errorMsg;
+        }
+
+        try
+        {
+            const QString formula = pieceSeamLineArea_ + pieceAreaShortName;
+            const qreal result = cal->EvalFormula(completeData.DataVariables(), formula);
+            placeholders[pl_currentSeamLineArea] = QString::number(result);
+        }
+        catch (qmu::QmuParserError &e)
+        {
+            const QString errorMsg =
+                QObject::tr("Failed to prepare piece seam line area placeholder. %1.").arg(e.GetMsg());
+            VAbstractApplication::VApp()->IsPedantic()
+                ? throw VException(errorMsg)
+                : qWarning() << VAbstractValApplication::warningMessageSignature + errorMsg;
+        }
+    }
+    else
+    {
+        placeholders.insert(pl_currentArea, QString());
+        placeholders.insert(pl_currentSeamLineArea, QString());
+    }
+
+    const QVector<VFinalMeasurement> measurements = doc->GetFinalMeasurements();
+    for (int i = 0; i < measurements.size(); ++i)
+    {
+        const VFinalMeasurement &m = measurements.at(i);
+
+        try
+        {
+            QScopedPointer<Calculator> cal(new Calculator());
+            const qreal result = cal->EvalFormula(completeData.DataVariables(), m.formula);
+
+            placeholders.insert(pl_finalMeasurement + m.name, QString::number(result));
+        }
+        catch (qmu::QmuParserError &e)
+        {
+            const QString errorMsg = QObject::tr("Failed to prepare final measurement placeholder. Parser error at "
+                                                 "line %1: %2.")
+                                         .arg(i + 1)
+                                         .arg(e.GetMsg());
+            VAbstractApplication::VApp()->IsPedantic()
+                ? throw VException(errorMsg)
+                : qWarning() << VAbstractValApplication::warningMessageSignature + errorMsg;
+        }
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 auto PreparePlaceholders(const VAbstractPattern *doc, const VContainer *data, bool pieceLabel = false,
                          const QString &pieceAreaShortName = QString()) -> QMap<QString, QString>
 {
@@ -319,156 +482,21 @@ auto PreparePlaceholders(const VAbstractPattern *doc, const VContainer *data, bo
     placeholders.insert(pl_mSizeUnits, UnitsToStr(VAbstractValApplication::VApp()->DimensionSizeUnits(), true));
     placeholders.insert(pl_areaUnits, pUnits + QStringLiteral("²"));
 
-    if (VAbstractValApplication::VApp()->GetMeasurementsType() == MeasurementsType::Individual)
-    {
-        placeholders.insert(pl_customer, VAbstractValApplication::VApp()->GetCustomerName());
-
-        const QString birthDate =
-            locale.toString(VAbstractValApplication::VApp()->GetCustomerBirthDate(), doc->GetLabelDateFormat());
-        placeholders.insert(pl_birthDate, birthDate);
-
-        placeholders.insert(pl_email, VAbstractValApplication::VApp()->CustomerEmail());
-    }
-    else
-    {
-        placeholders.insert(pl_customer, doc->GetCustomerName());
-
-        const QString birthDate = locale.toString(doc->GetCustomerBirthDate(), doc->GetLabelDateFormat());
-        placeholders.insert(pl_birthDate, birthDate);
-
-        placeholders.insert(pl_email, doc->GetCustomerEmail());
-    }
+    PrepareCustomerPlaceholders(doc, placeholders);
 
     placeholders.insert(pl_pExt, QStringLiteral("val"));
     placeholders.insert(pl_pFileName, QFileInfo(VAbstractValApplication::VApp()->GetPatternPath()).baseName());
     placeholders.insert(pl_mFileName, QFileInfo(doc->MPath()).baseName());
 
-    QString heightValue = QString::number(VAbstractValApplication::VApp()->GetDimensionHeight());
-    placeholders.insert(pl_height, heightValue);
-    placeholders.insert(pl_dimensionX, heightValue);
-
-    QString sizeValue = QString::number(VAbstractValApplication::VApp()->GetDimensionSize());
-    placeholders.insert(pl_size, sizeValue);
-    placeholders.insert(pl_dimensionY, sizeValue);
-
-    QString hipValue = QString::number(VAbstractValApplication::VApp()->GetDimensionHip());
-    placeholders.insert(pl_hip, hipValue);
-    placeholders.insert(pl_dimensionZ, hipValue);
-
-    QString waistValue = QString::number(VAbstractValApplication::VApp()->GetDimensionWaist());
-    placeholders.insert(pl_waist, waistValue);
-    placeholders.insert(pl_dimensionW, waistValue);
-
-    {
-        QString label = VAbstractValApplication::VApp()->GetDimensionHeightLabel();
-        placeholders.insert(pl_heightLabel, not label.isEmpty() ? label : heightValue);
-
-        label = VAbstractValApplication::VApp()->GetDimensionSizeLabel();
-        placeholders.insert(pl_sizeLabel, not label.isEmpty() ? label : sizeValue);
-
-        label = VAbstractValApplication::VApp()->GetDimensionHipLabel();
-        placeholders.insert(pl_hipLabel, not label.isEmpty() ? label : hipValue);
-
-        label = VAbstractValApplication::VApp()->GetDimensionWaistLabel();
-        placeholders.insert(pl_waistLabel, not label.isEmpty() ? label : waistValue);
-    }
+    PrepareDimensionPlaceholders(placeholders);
 
     placeholders.insert(pl_mExt, VAbstractValApplication::VApp()->GetMeasurementsType() == MeasurementsType::Multisize
                                      ? QStringLiteral("vst")
                                      : QStringLiteral("vit"));
 
-    const QMap<int, QString> materials = doc->GetPatternMaterials();
-    for (int i = 0; i < userMaterialPlaceholdersQuantity; ++i)
-    {
-        const QString number = QString::number(i + 1);
-
-        QString value;
-        if (materials.contains(i + 1))
-        {
-            value = materials.value(i + 1);
-        }
-
-        placeholders.insert(pl_userMaterial + number, value);
-    }
-
-    {
-        const QMap<QString, QSharedPointer<VMeasurement>> measurements = data->DataMeasurements();
-        auto i = measurements.constBegin();
-        while (i != measurements.constEnd())
-        {
-            placeholders.insert(pl_measurement + i.key(), QString::number(*i.value()->GetValue()));
-            ++i;
-        }
-    }
-
-    {
-        VContainer completeData = doc->GetCompleteData();
-        completeData.FillPiecesAreas(VAbstractValApplication::VApp()->patternUnits());
-
-        if (pieceLabel)
-        {
-            QScopedPointer<Calculator> cal(new Calculator());
-
-            try
-            {
-                const QString formula = pieceArea_ + pieceAreaShortName;
-                const qreal result = cal->EvalFormula(completeData.DataVariables(), formula);
-                placeholders[pl_currentArea] = QString::number(result);
-            }
-            catch (qmu::QmuParserError &e)
-            {
-                const QString errorMsg =
-                    QObject::tr("Failed to prepare full piece area placeholder. %1.").arg(e.GetMsg());
-                VAbstractApplication::VApp()->IsPedantic()
-                    ? throw VException(errorMsg)
-                    : qWarning() << VAbstractValApplication::warningMessageSignature + errorMsg;
-            }
-
-            try
-            {
-                const QString formula = pieceSeamLineArea_ + pieceAreaShortName;
-                const qreal result = cal->EvalFormula(completeData.DataVariables(), formula);
-                placeholders[pl_currentSeamLineArea] = QString::number(result);
-            }
-            catch (qmu::QmuParserError &e)
-            {
-                const QString errorMsg =
-                    QObject::tr("Failed to prepare piece seam line area placeholder. %1.").arg(e.GetMsg());
-                VAbstractApplication::VApp()->IsPedantic()
-                    ? throw VException(errorMsg)
-                    : qWarning() << VAbstractValApplication::warningMessageSignature + errorMsg;
-            }
-        }
-        else
-        {
-            placeholders.insert(pl_currentArea, QString());
-            placeholders.insert(pl_currentSeamLineArea, QString());
-        }
-
-        const QVector<VFinalMeasurement> measurements = doc->GetFinalMeasurements();
-        for (int i = 0; i < measurements.size(); ++i)
-        {
-            const VFinalMeasurement &m = measurements.at(i);
-
-            try
-            {
-                QScopedPointer<Calculator> cal(new Calculator());
-                const qreal result = cal->EvalFormula(completeData.DataVariables(), m.formula);
-
-                placeholders.insert(pl_finalMeasurement + m.name, QString::number(result));
-            }
-            catch (qmu::QmuParserError &e)
-            {
-                const QString errorMsg = QObject::tr("Failed to prepare final measurement placeholder. Parser error at "
-                                                     "line %1: %2.")
-                                             .arg(i + 1)
-                                             .arg(e.GetMsg());
-                VAbstractApplication::VApp()->IsPedantic()
-                    ? throw VException(errorMsg)
-                    : qWarning() << VAbstractValApplication::warningMessageSignature + errorMsg;
-            }
-        }
-    }
+    PrepareUserMaterialsPlaceholders(doc, placeholders);
+    PrepareMeasurementsPlaceholders(data, placeholders);
+    PrepareFinalMeasurementsPlaceholders(doc, pieceLabel, pieceAreaShortName, placeholders);
 
     // Piece tags
     placeholders.insert(pl_pLetter, QString());
@@ -828,8 +856,8 @@ void VTextManager::Update(const QString &qsName, const VPieceLabelData &data, co
 {
     m_liLines.clear();
 
-    QMap<QString, QString> placeholders =
-        PreparePlaceholders(VAbstractValApplication::VApp()->getCurrentDocument(), pattern, true, data.GetAreaShortName());
+    QMap<QString, QString> placeholders = PreparePlaceholders(VAbstractValApplication::VApp()->getCurrentDocument(),
+                                                              pattern, true, data.GetAreaShortName());
     InitPiecePlaceholders(placeholders, qsName, data);
 
     QVector<VLabelTemplateLine> lines = data.GetLabelTemplate();
