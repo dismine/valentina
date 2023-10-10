@@ -2455,8 +2455,8 @@ void VPattern::ParseToolPointOfIntersectionCircles(VMainGraphicsScene *scene, QD
         // Rewrite attribute formula. Need for situation when we have wrong formula.
         if (c1R != initData.firstCircleRadius || c2R != initData.secondCircleRadius)
         {
-            SetAttribute(domElement, AttrC1Center, initData.firstCircleRadius);
-            SetAttribute(domElement, AttrC2Center, initData.secondCircleRadius);
+            SetAttribute(domElement, AttrC1Radius, initData.firstCircleRadius);
+            SetAttribute(domElement, AttrC2Radius, initData.secondCircleRadius);
             modified = true;
             haveLiteChange();
         }
@@ -2538,7 +2538,7 @@ void VPattern::ParseToolPointFromCircleAndTangent(VMainGraphicsScene *scene, QDo
         // Rewrite attribute formula. Need for situation when we have wrong formula.
         if (cR != initData.circleRadius)
         {
-            SetAttribute(domElement, AttrCCenter, initData.circleRadius);
+            SetAttribute(domElement, AttrCRadius, initData.circleRadius);
             modified = true;
             haveLiteChange();
         }
