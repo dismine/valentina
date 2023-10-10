@@ -1160,7 +1160,7 @@ auto VPiecePath::CurveSeamAllowanceSegment(const VContainer *data, const QVector
     const VSAPoint end = EndSegment(data, nodes, i);
 
     const QVector<QPointF> points = curve->GetSegmentPoints(begin, end, reverse, piece);
-    if (points.isEmpty())
+    if (points.size() < 2)
     {
         return {};
     }

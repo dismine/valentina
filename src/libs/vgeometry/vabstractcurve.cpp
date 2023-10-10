@@ -269,10 +269,8 @@ auto VAbstractCurve::ClosestPoint(QPointF scenePoint) const -> QPointF
     {
         return candidatePoint;
     }
-    else
-    {
-        return {};
-    }
+
+    return {};
 }
 
 //---------------------------------------------------------------------------------------------------------------------
