@@ -16852,7 +16852,7 @@ Deseja salvar suas mudanças?</translation>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabpaths.ui" line="334"/>
         <source>Follow grainline</source>
-        <translation type="unfinished">Seguir sentido do fio</translation>
+        <translation>Seguir sentido do fio</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabpaths.ui" line="355"/>

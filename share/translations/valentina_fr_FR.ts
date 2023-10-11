@@ -1003,17 +1003,17 @@
     <message>
         <location filename="../../src/libs/vmisc/dialogs/dialogaskcollectstatistic.ui" line="14"/>
         <source>Privacy</source>
-        <translation type="unfinished"></translation>
+        <translation>Confidentialité</translation>
     </message>
     <message>
         <location filename="../../src/libs/vmisc/dialogs/dialogaskcollectstatistic.ui" line="24"/>
         <source>Send usage statistics</source>
-        <translation type="unfinished"></translation>
+        <translation>Collecter les statistiques relatives à l&apos;utilisation du logiciel</translation>
     </message>
     <message>
         <location filename="../../src/libs/vmisc/dialogs/dialogaskcollectstatistic.ui" line="34"/>
         <source>Please help to improve Valentina&apos;s quality by automatically sending usage statistics. Sent data contains &lt;span style=&quot; font-weight:700;&quot;&gt;no potentially sensitive information&lt;/span&gt; like user names, email addresses, file contents or file paths.</source>
-        <translation type="unfinished"></translation>
+        <translation>Contribuez à nous aider à améliorer Valentina en autorisant la collecte des statistiques de votre utilisation du logiciel.. Les données collectées ne contiennent &lt;span style=&quot; font-weight:700;&quot;&gt;aucune donnée sensible&lt;/span&gt; telle que nom de l&apos;utilisateur, adresses email, contenus des fichiers ni leurs chemins d&apos;accès.</translation>
     </message>
 </context>
 <context>
@@ -4931,10 +4931,6 @@ Appliquer quand même les réglages ?</translation>
         <location filename="../../src/app/valentina/dialogs/dialoglayoutsettings.ui" line="463"/>
         <source>Enable this option to prefer getting one sheet solutions.</source>
         <translation>Cocher cette option si l&apos;on préfère un plan sur page unique (si possible).</translation>
-    </message>
-    <message>
-        <source>Set layout efficiency coefficient. Layout efficiency coefficientt is the ratio of the area occupied by the pieces to the bounding rect of all pieces. If nesting reaches required level the process stops. If value is 0 no check will be made.</source>
-        <translation type="vanished">Configurez le coefficient d&apos;efficacité de création du plan de coupe. Ce coefficient constitue le ratio de l&apos;espace occupé par les pièces par rapport au rectangle englobant toutes les pièces. Quand le ratio configuré est atteint, la création est automatiquement validée même si la durée minimale de création configurée n&apos;est pas écoulée. Si le ratio est configuré à 0, le programme ne cherchera pas à disposer les pièces en fonction de ce critère.</translation>
     </message>
 </context>
 <context>
@@ -13167,17 +13163,17 @@ Voulez-vous sauvegarder vos modifications ?</translation>
     <message>
         <location filename="../../src/app/valentina/dialogs/configpages/preferencesconfigurationpage.ui" line="631"/>
         <source>Privacy</source>
-        <translation type="unfinished"></translation>
+        <translation>Confidentialité</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/configpages/preferencesconfigurationpage.ui" line="637"/>
         <source>Send usage statistics</source>
-        <translation type="unfinished"></translation>
+        <translation>Collecter les statistiques relatives à l&apos;utilisation du logiciel</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/configpages/preferencesconfigurationpage.ui" line="644"/>
         <source>Please help to improve Valentina&apos;s quality by automatically sending usage statistics. Sent data contains &lt;span style=&quot; font-weight:700;&quot;&gt;no potentially sensitive information&lt;/span&gt; like user names, email addresses, file contents or file paths.</source>
-        <translation type="unfinished"></translation>
+        <translation>Contribuez à nous aider à améliorer Valentina en autorisant la collecte des statistiques de votre utilisation du logiciel.. Les données collectées ne contiennent &lt;span style=&quot; font-weight:700;&quot;&gt;aucune donnée sensible&lt;/span&gt; telle que Nom de l&apos;utilisateur, adresses email, contenus des fichiers ni leurs chemins d&apos;accès.</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/configpages/preferencesconfigurationpage.ui" line="353"/>
@@ -13667,17 +13663,17 @@ This option will take an affect after restart.</source>
     <message>
         <location filename="../../src/app/puzzle/dialogs/configpages/puzzlepreferencesconfigurationpage.ui" line="442"/>
         <source>Privacy</source>
-        <translation type="unfinished"></translation>
+        <translation>Confidentialité</translation>
     </message>
     <message>
         <location filename="../../src/app/puzzle/dialogs/configpages/puzzlepreferencesconfigurationpage.ui" line="448"/>
         <source>Send usage statistics</source>
-        <translation type="unfinished"></translation>
+        <translation>Collecter les statistiques relatives à l&apos;utilisation du logiciel</translation>
     </message>
     <message>
         <location filename="../../src/app/puzzle/dialogs/configpages/puzzlepreferencesconfigurationpage.ui" line="455"/>
         <source>Please help to improve Valentina&apos;s quality by automatically sending usage statistics. Sent data contains &lt;span style=&quot; font-weight:700;&quot;&gt;no potentially sensitive information&lt;/span&gt; like user names, email addresses, file contents or file paths.</source>
-        <translation type="unfinished"></translation>
+        <translation>Contribuez à nous aider à améliorer Valentina en autorisant la collecte des statistiques de votre utilisation du logiciel.. Les données collectées ne contiennent &lt;span style=&quot; font-weight:700;&quot;&gt;aucune donnée sensible&lt;/span&gt; telle que Nom de l&apos;utilisateur, adresses email, contenus des fichiers ni leurs chemins d&apos;accès.</translation>
     </message>
     <message>
         <location filename="../../src/app/puzzle/dialogs/configpages/puzzlepreferencesconfigurationpage.cpp" line="168"/>
@@ -16858,7 +16854,7 @@ Voulez-vous enregistrer vos changements ?</translation>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabpaths.ui" line="334"/>
         <source>Follow grainline</source>
-        <translation type="unfinished"></translation>
+        <translation>Respecter le droit-fil</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabpaths.ui" line="355"/>
@@ -17293,17 +17289,17 @@ Voulez-vous enregistrer vos changements ?</translation>
     <message>
         <location filename="../../src/app/tape/dialogs/configpages/tapepreferencesconfigurationpage.ui" line="254"/>
         <source>Privacy</source>
-        <translation type="unfinished"></translation>
+        <translation>Confidentialité</translation>
     </message>
     <message>
         <location filename="../../src/app/tape/dialogs/configpages/tapepreferencesconfigurationpage.ui" line="260"/>
         <source>Send usage statistics</source>
-        <translation type="unfinished"></translation>
+        <translation>Collecter les statistiques relatives à l&apos;utilisation du logiciel</translation>
     </message>
     <message>
         <location filename="../../src/app/tape/dialogs/configpages/tapepreferencesconfigurationpage.ui" line="267"/>
         <source>Please help to improve Valentina&apos;s quality by automatically sending usage statistics. Sent data contains &lt;span style=&quot; font-weight:700;&quot;&gt;no potentially sensitive information&lt;/span&gt; like user names, email addresses, file contents or file paths.</source>
-        <translation type="unfinished"></translation>
+        <translation>Contribuez à nous aider à améliorer Valentina en autorisant la collecte des statistiques de votre utilisation du logiciel.. Les données collectées ne contiennent &lt;span style=&quot; font-weight:700;&quot;&gt;aucune donnée sensible&lt;/span&gt; telle que Nom de l&apos;utilisateur, adresses email, contenus des fichiers ni leurs chemins d&apos;accès.</translation>
     </message>
     <message>
         <location filename="../../src/app/tape/dialogs/configpages/tapepreferencesconfigurationpage.cpp" line="207"/>

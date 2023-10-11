@@ -16855,7 +16855,7 @@ Wil je deze veranderingen opslaan?</translation>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabpaths.ui" line="334"/>
         <source>Follow grainline</source>
-        <translation type="unfinished">Langs de recht-van-draad</translation>
+        <translation>Langs de recht-van-draad</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabpaths.ui" line="355"/>

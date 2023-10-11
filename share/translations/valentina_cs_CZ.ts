@@ -4932,10 +4932,6 @@ Přesto použít nastavení?</translation>
         <source>Enable this option to prefer getting one sheet solutions.</source>
         <translation>Povolit tuto volbu, aby se upřednostňovalo získání jednolistového řešení.</translation>
     </message>
-    <message>
-        <source>Set layout efficiency coefficient. Layout efficiency coefficientt is the ratio of the area occupied by the pieces to the bounding rect of all pieces. If nesting reaches required level the process stops. If value is 0 no check will be made.</source>
-        <translation type="vanished">Nastavte koeficient účinnosti rozvržení. Koeficient účinnosti rozvržení je poměr plochy, kterou zabírají kusy, k ohraničujícímu obdélníku všech kusů. Pokud vnoření dosáhne požadované úrovně, proces se zastaví. Pokud je hodnota 0, nebude provedena žádná kontrola.</translation>
-    </message>
 </context>
 <context>
     <name>DialogLine</name>
@@ -16863,7 +16859,7 @@ Chcete uložit změny?</translation>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabpaths.ui" line="334"/>
         <source>Follow grainline</source>
-        <translation type="unfinished">Následovat dráhu nitě</translation>
+        <translation>Následovat dráhu nitě</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabpaths.ui" line="355"/>

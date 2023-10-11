@@ -4931,10 +4931,6 @@ Einstellungen trotzdem anwenden?</translation>
         <source>Enable this option to prefer getting one sheet solutions.</source>
         <translation>Aktiviere diese Option, um bevorzugt Einblattlösungen zu erhalten.</translation>
     </message>
-    <message>
-        <source>Set layout efficiency coefficient. Layout efficiency coefficientt is the ratio of the area occupied by the pieces to the bounding rect of all pieces. If nesting reaches required level the process stops. If value is 0 no check will be made.</source>
-        <translation type="vanished">Layout-Effizienz-Koeffizient festlegen. Der Layout-Effizienzkoeffizient ist das Verhältnis zwischen der von den Teilen belegten Fläche und dem Begrenzungsrechteck aller Teile. Wenn die Verschachtelung den erforderlichen Wert erreicht, wird der Prozess angehalten. Wenn der Wert 0 ist, wird keine Prüfung durchgeführt.</translation>
-    </message>
 </context>
 <context>
     <name>DialogLine</name>
@@ -16858,7 +16854,7 @@ Do you want to save your changes?</source>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabpaths.ui" line="334"/>
         <source>Follow grainline</source>
-        <translation type="unfinished">Folge der Fadenlauf-Linie</translation>
+        <translation>Folge der Fadenlauf-Linie</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabpaths.ui" line="355"/>

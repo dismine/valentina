@@ -4931,10 +4931,6 @@ Aplicar características de todos modos?</translation>
         <source>Enable this option to prefer getting one sheet solutions.</source>
         <translation>Habilite esta opción para preferir obtener soluciones de una hoja.</translation>
     </message>
-    <message>
-        <source>Set layout efficiency coefficient. Layout efficiency coefficientt is the ratio of the area occupied by the pieces to the bounding rect of all pieces. If nesting reaches required level the process stops. If value is 0 no check will be made.</source>
-        <translation type="vanished">Establezca el coeficiente de eficiencia del diseño. El coeficiente de eficiencia de diseño es la relación entre el área ocupada por las piezas y el límite de todas las piezas. Si el anidamiento alcanza el nivel requerido, el proceso se detiene. Si el valor es 0 no se realizará ninguna comprobación.</translation>
-    </message>
 </context>
 <context>
     <name>DialogLine</name>
@@ -16860,7 +16856,7 @@ Quieres guardar los cambios?</translation>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabpaths.ui" line="334"/>
         <source>Follow grainline</source>
-        <translation type="unfinished">Seguir hilo de la tela</translation>
+        <translation>Seguir hilo de la tela</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabpaths.ui" line="355"/>

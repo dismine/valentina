@@ -4932,10 +4932,6 @@ Apply settings anyway?</source>
         <source>Enable this option to prefer getting one sheet solutions.</source>
         <translation>Увімкніть цю опцію, щоб надати перевагу отриманню рішень на одному аркуші.</translation>
     </message>
-    <message>
-        <source>Set layout efficiency coefficient. Layout efficiency coefficientt is the ratio of the area occupied by the pieces to the bounding rect of all pieces. If nesting reaches required level the process stops. If value is 0 no check will be made.</source>
-        <translation type="vanished">Налаштувати коефіцієнт ефективності компонування. Коефіцієнт ефективності компонування — це відношення площі, яку займають фрагменти, до описаного прямокутника всіх деталей. Якщо вкладення досягає необхідного рівня, процес зупиняється. Якщо значення дорівнює 0, перевірка не проводиться.</translation>
-    </message>
 </context>
 <context>
     <name>DialogLine</name>
@@ -16864,7 +16860,7 @@ Do you want to save your changes?</source>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabpaths.ui" line="334"/>
         <source>Follow grainline</source>
-        <translation type="unfinished">Дотримуватися нитки основи</translation>
+        <translation>Дотримуватися нитки основи</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabpaths.ui" line="355"/>
