@@ -234,7 +234,7 @@
     </message>
     <message>
         <source>min</source>
-        <translation type="vanished">minimum</translation>
+        <translation type="vanished">minutes</translation>
     </message>
     <message>
         <source>Interval:</source>
@@ -10698,12 +10698,12 @@ Appliquer quand même les réglages ?</translation>
     <message>
         <location filename="../../src/app/valentina/mainwindow.ui" line="854"/>
         <source>New pattern piece</source>
-        <translation>Nouveau élément de patron</translation>
+        <translation>Nouvel élément de patron</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.ui" line="857"/>
         <source>Add new pattern piece</source>
-        <translation>Ajouter un nouveau élément de patron</translation>
+        <translation>Ajouter un nouvel élément de patron</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.ui" line="878"/>
@@ -11970,7 +11970,7 @@ Voulez-vous sauvegarder vos modifications ?</translation>
     <message>
         <location filename="../../src/app/valentina/mainwindow.ui" line="1412"/>
         <source>Label template editor</source>
-        <translation>Configurer le modèle d&apos;étiquette des mentions sur les pièces</translation>
+        <translation>Éditer le modèle d&apos;étiquette</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.ui" line="2446"/>
