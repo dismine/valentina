@@ -74,6 +74,32 @@ inline bool operator==(const QString &lhs, QChar rhs) Q_DECL_NOEXCEPT
 }
 #endif
 
+#if QT_VERSION < QT_VERSION_CHECK(5, 10, 0)
+//---------------------------------------------------------------------------------------------------------------------
+Q_DECL_CONSTEXPR inline bool operator==(QChar c1, char16_t c2) Q_DECL_NOEXCEPT
+{
+    return c1 == QChar(static_cast<ushort>(c2));
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+Q_DECL_CONSTEXPR inline bool operator!=(QChar c1, char16_t c2) Q_DECL_NOEXCEPT
+{
+    return !(c1 == QChar(static_cast<ushort>(c2)));
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+Q_DECL_CONSTEXPR inline bool operator==(char16_t c1, QChar c2) Q_DECL_NOEXCEPT
+{
+    return c2 == c1;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+Q_DECL_CONSTEXPR inline bool operator!=(char16_t c1, QChar c2) Q_DECL_NOEXCEPT
+{
+    return c2 != c1;
+}
+#endif
+
 #if QT_VERSION < QT_VERSION_CHECK(6, 4, 0)
 namespace Qt
 {
