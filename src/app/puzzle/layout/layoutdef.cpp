@@ -72,10 +72,10 @@ auto StrToGrainlineType(const QString &string) -> GrainlineType
         case 0: // horizontal
             type = GrainlineType::Horizontal;
             break;
-        case 2: // vertical
+        case 1: // vertical
             type = GrainlineType::Vertical;
             break;
-        case 3: // notFixed
+        case 2: // notFixed
         default:
             type = GrainlineType::NotFixed;
             break;
