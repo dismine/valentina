@@ -2288,6 +2288,7 @@ auto DialogPiecePath::InitContextMenu(QMenu *menu, const VPieceNode &rowNode) ->
         QAction *actionReverse = menu->addAction(tr("Reverse"));
         actionReverse->setCheckable(true);
         actionReverse->setChecked(rowNode.GetReverse());
+        contextMenu.insert(static_cast<int>(ContextMenuOption::Reverse), actionReverse);
     }
     else
     {
