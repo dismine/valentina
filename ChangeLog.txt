@@ -44,6 +44,7 @@
 - New option: Translate formula.
 - Fix filling piece label data.
 - New piece option Follow grainline.
+- Validate sheet and layout names before proposing file name.
 
 # Valentina 0.7.52 September 12, 2022
 - Fix crash when default locale is ru.

@@ -287,6 +287,38 @@ void SetPrinterTiledPageSettings(const QSharedPointer<QPrinter> &printer, const 
         }
     }
 }
+
+//---------------------------------------------------------------------------------------------------------------------
+auto IsValidFileName(const QString &fileName) -> bool
+{
+    if (fileName.isNull() || fileName.isEmpty())
+    {
+        return false;
+    }
+
+    static QRegularExpression regex(QStringLiteral("[<>:\"/\\\\|?*]"));
+    QRegularExpressionMatch match = regex.match(fileName);
+    if (match.hasMatch())
+    {
+        return false;
+    }
+
+    static QRegularExpression regexReservedNames(QStringLiteral("^(CON|AUX|PRN|NUL|COM[1-9]|LPT[1-9])(\\..*)?$"),
+                                                 QRegularExpression::CaseInsensitiveOption);
+    match = regexReservedNames.match(fileName);
+    if (match.hasMatch())
+    {
+        return false;
+    }
+
+    // Check the length of the file name (adjust the limit as needed)
+    if (fileName.length() > 255)
+    {
+        return false;
+    }
+
+    return true;
+}
 } // namespace
 
 struct VPExportData
@@ -4088,7 +4120,7 @@ void VPMainWindow::on_ExportLayout()
     }
 
     const QString layoutTitle = m_layout->LayoutSettings().GetTitle();
-    const QString fileName = layoutTitle.isEmpty() ? QFileInfo(curFile).baseName() : layoutTitle;
+    const QString fileName = !IsValidFileName(layoutTitle) ? QFileInfo(curFile).baseName() : layoutTitle;
 
     DialogSaveManualLayout dialog(sheets.size(), false, fileName, this);
 
@@ -4139,7 +4171,7 @@ void VPMainWindow::on_ExportSheet()
 
     const QString sheetTitle = sheet->GetName();
     const QString defaultName = not curFile.isEmpty() ? QFileInfo(curFile).baseName() : tr("sheet");
-    const QString fileName = sheetTitle.isEmpty() ? defaultName : sheetTitle;
+    const QString fileName = !IsValidFileName(sheetTitle) ? defaultName : sheetTitle;
 
     DialogSaveManualLayout dialog(1, false, fileName, this);
 
