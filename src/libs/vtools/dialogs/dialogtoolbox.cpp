@@ -636,7 +636,7 @@ auto GetNodeName(const VContainer *data, const VPieceNode &node, bool showPassma
     {
         if (node.GetReverse())
         {
-            name = QStringLiteral("- ") + name;
+            name = "- "_L1 + name;
         }
     }
     else
@@ -655,22 +655,22 @@ auto GetNodeName(const VContainer *data, const VPieceNode &node, bool showPassma
                     name += "|||"_L1;
                     break;
                 case PassmarkLineType::TMark:
-                    name += "┴"_L1;
+                    name += u'┴';
                     break;
                 case PassmarkLineType::ExternalVMark:
-                    name += "⊼"_L1;
+                    name += u'⊼';
                     break;
                 case PassmarkLineType::InternalVMark:
-                    name += "⊽"_L1;
+                    name += u'⊽';
                     break;
                 case PassmarkLineType::UMark:
-                    name += "⋃"_L1;
+                    name += u'⋃';
                     break;
                 case PassmarkLineType::BoxMark:
-                    name += "⎕"_L1;
+                    name += u'⎕';
                     break;
                 case PassmarkLineType::CheckMark:
-                    name += "✓"_L1;
+                    name += u'✓';
                     break;
                 default:
                     break;
@@ -684,7 +684,7 @@ auto GetNodeName(const VContainer *data, const VPieceNode &node, bool showPassma
 
         if (not node.IsTurnPoint())
         {
-            name += " ⦿"_L1;
+            name += QStringLiteral(" ⦿");
         }
     }
 
