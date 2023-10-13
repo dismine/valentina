@@ -2285,7 +2285,7 @@ auto DialogPiecePath::InitContextMenu(QMenu *menu, const VPieceNode &rowNode) ->
 
     if (rowNode.GetTypeTool() != Tool::NodePoint)
     {
-        QAction *actionReverse = menu->addAction(tr("Reverse"));
+        QAction *actionReverse = menu->addAction(QApplication::translate("DialogSeamAllowance", "Reverse"));
         actionReverse->setCheckable(true);
         actionReverse->setChecked(rowNode.GetReverse());
         contextMenu.insert(static_cast<int>(ContextMenuOption::Reverse), actionReverse);
@@ -2295,9 +2295,10 @@ auto DialogPiecePath::InitContextMenu(QMenu *menu, const VPieceNode &rowNode) ->
         if (m_showMode && GetType() == PiecePathType::CustomSeamAllowance &&
             ui->tabWidget->indexOf(ui->tabPassmarks) != -1)
         {
-            QMenu *passmarkSubmenu = menu->addMenu(tr("Passmark"));
+            QMenu *passmarkSubmenu = menu->addMenu(QApplication::translate("DialogSeamAllowance", "Passmark"));
 
-            QAction *actionNonePassmark = passmarkSubmenu->addAction(tr("None"));
+            QAction *actionNonePassmark =
+                passmarkSubmenu->addAction(QApplication::translate("DialogSeamAllowance", "None"));
             actionNonePassmark->setCheckable(true);
             actionNonePassmark->setChecked(!rowNode.IsPassmark());
             contextMenu.insert(static_cast<int>(ContextMenuOption::NonePassmark), actionNonePassmark);
@@ -2314,42 +2315,54 @@ auto DialogPiecePath::InitContextMenu(QMenu *menu, const VPieceNode &rowNode) ->
             };
 
             contextMenu.insert(static_cast<int>(ContextMenuOption::OneLine),
-                               InitPassmarkLineTypeAction(tr("One line"), PassmarkLineType::OneLine));
+                               InitPassmarkLineTypeAction(QApplication::translate("DialogSeamAllowance", "One line"),
+                                                          PassmarkLineType::OneLine));
             contextMenu.insert(static_cast<int>(ContextMenuOption::TwoLines),
-                               InitPassmarkLineTypeAction(tr("Two lines"), PassmarkLineType::TwoLines));
+                               InitPassmarkLineTypeAction(QApplication::translate("DialogSeamAllowance", "Two lines"),
+                                                          PassmarkLineType::TwoLines));
             contextMenu.insert(static_cast<int>(ContextMenuOption::ThreeLines),
-                               InitPassmarkLineTypeAction(tr("Three lines"), PassmarkLineType::ThreeLines));
+                               InitPassmarkLineTypeAction(QApplication::translate("DialogSeamAllowance", "Three lines"),
+                                                          PassmarkLineType::ThreeLines));
             contextMenu.insert(static_cast<int>(ContextMenuOption::TMark),
-                               InitPassmarkLineTypeAction(tr("T mark"), PassmarkLineType::TMark));
-            contextMenu.insert(static_cast<int>(ContextMenuOption::ExternalVMark),
-                               InitPassmarkLineTypeAction(tr("External V mark"), PassmarkLineType::ExternalVMark));
-            contextMenu.insert(static_cast<int>(ContextMenuOption::InternalVMark),
-                               InitPassmarkLineTypeAction(tr("Internal V mark"), PassmarkLineType::InternalVMark));
+                               InitPassmarkLineTypeAction(QApplication::translate("DialogSeamAllowance", "T mark"),
+                                                          PassmarkLineType::TMark));
+            contextMenu.insert(
+                static_cast<int>(ContextMenuOption::ExternalVMark),
+                InitPassmarkLineTypeAction(QApplication::translate("DialogSeamAllowance", "External V mark"),
+                                           PassmarkLineType::ExternalVMark));
+            contextMenu.insert(
+                static_cast<int>(ContextMenuOption::InternalVMark),
+                InitPassmarkLineTypeAction(QApplication::translate("DialogSeamAllowance", "Internal V mark"),
+                                           PassmarkLineType::InternalVMark));
             contextMenu.insert(static_cast<int>(ContextMenuOption::UMark),
-                               InitPassmarkLineTypeAction(tr("U mark"), PassmarkLineType::UMark));
+                               InitPassmarkLineTypeAction(QApplication::translate("DialogSeamAllowance", "U mark"),
+                                                          PassmarkLineType::UMark));
             contextMenu.insert(static_cast<int>(ContextMenuOption::BoxMark),
-                               InitPassmarkLineTypeAction(tr("Box mark"), PassmarkLineType::BoxMark));
+                               InitPassmarkLineTypeAction(QApplication::translate("DialogSeamAllowance", "Box mark"),
+                                                          PassmarkLineType::BoxMark));
             contextMenu.insert(static_cast<int>(ContextMenuOption::CheckMark),
-                               InitPassmarkLineTypeAction(tr("Check mark"), PassmarkLineType::CheckMark));
+                               InitPassmarkLineTypeAction(QApplication::translate("DialogSeamAllowance", "Check mark"),
+                                                          PassmarkLineType::CheckMark));
         }
 
-        QAction *actionUniqueness = menu->addAction(tr("Check uniqueness"));
+        QAction *actionUniqueness = menu->addAction(QApplication::translate("DialogSeamAllowance", "Check uniqueness"));
         actionUniqueness->setCheckable(true);
         actionUniqueness->setChecked(rowNode.IsCheckUniqueness());
         contextMenu.insert(static_cast<int>(ContextMenuOption::Uniqueness), actionUniqueness);
 
-        QAction *actionTurnPoint = menu->addAction(tr("Turn point"));
+        QAction *actionTurnPoint = menu->addAction(QApplication::translate("DialogSeamAllowance", "Turn point"));
         actionTurnPoint->setCheckable(true);
         actionTurnPoint->setChecked(rowNode.IsTurnPoint());
         contextMenu.insert(static_cast<int>(ContextMenuOption::TurnPoint), actionTurnPoint);
     }
 
-    QAction *actionExcluded = menu->addAction(tr("Excluded"));
+    QAction *actionExcluded = menu->addAction(QApplication::translate("DialogSeamAllowance", "Excluded"));
     actionExcluded->setCheckable(true);
     actionExcluded->setChecked(rowNode.IsExcluded());
     contextMenu.insert(static_cast<int>(ContextMenuOption::Excluded), actionExcluded);
 
-    QAction *actionDelete = menu->addAction(QIcon::fromTheme(QStringLiteral("edit-delete")), tr("Delete"));
+    QAction *actionDelete = menu->addAction(QIcon::fromTheme(QStringLiteral("edit-delete")),
+                                            QApplication::translate("DialogSeamAllowance", "Delete"));
     contextMenu.insert(static_cast<int>(ContextMenuOption::Delete), actionDelete);
 
     return contextMenu;
