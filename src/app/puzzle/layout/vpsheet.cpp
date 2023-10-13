@@ -102,21 +102,32 @@ void VPSheetSceneData::RefreshPieces()
     }
 
     VPSheetPtr sheet = layout->GetSheet(m_sheetUuid);
-    if (not sheet.isNull())
+    if (sheet.isNull())
     {
-        QList<VPPiecePtr> pieces = sheet->GetPieces();
-        m_graphicsPieces.reserve(pieces.size());
+        return;
+    }
 
-        for (const auto &piece : pieces)
+    QList<VPPiecePtr> pieces = sheet->GetPieces();
+    m_graphicsPieces.reserve(pieces.size());
+
+    for (const auto &piece : pieces)
+    {
+        if (piece.isNull())
         {
-            if (not piece.isNull())
-            {
-                auto *graphicsPiece = new VPGraphicsPiece(piece);
-                m_graphicsPieces.append(graphicsPiece);
-                m_scene->addItem(graphicsPiece);
-                ConnectPiece(graphicsPiece);
-            }
+            continue;
         }
+
+        auto *graphicsPiece = new VPGraphicsPiece(piece);
+        m_graphicsPieces.append(graphicsPiece);
+        m_scene->addItem(graphicsPiece);
+
+        // Restore selection state
+        if (piece->IsSelected())
+        {
+            graphicsPiece->setSelected(piece->IsSelected());
+        }
+
+        ConnectPiece(graphicsPiece);
     }
 }
 
@@ -315,7 +326,7 @@ void VPSheetSceneData::ConnectPiece(VPGraphicsPiece *piece)
     QObject::connect(layout.data(), &VPLayout::PieceTransformationChanged, piece, &VPGraphicsPiece::on_RefreshPiece);
     QObject::connect(layout.data(), &VPLayout::PieceZValueChanged, piece, &VPGraphicsPiece::PieceZValueChanged);
     QObject::connect(layout.data(), &VPLayout::PieceSelectionChanged, m_rotationControls,
-                     &VPGraphicsPieceControls::on_UpdateControls);
+                     &VPGraphicsPieceControls::on_UpdateControls, Qt::UniqueConnection);
     QObject::connect(layout.data(), &VPLayout::PiecePositionValidityChanged, piece, &VPGraphicsPiece::on_RefreshPiece);
     QObject::connect(piece, &VPGraphicsPiece::PieceTransformationChanged, m_rotationControls,
                      &VPGraphicsPieceControls::on_UpdateControls);

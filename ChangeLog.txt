@@ -46,6 +46,7 @@
 - New piece option Follow grainline.
 - Validate sheet and layout names before proposing file name.
 - Puzzle app. Fix piece position move when update layout data.
+- Puzzle app. Fix losing selection by piece.
 
 # Valentina 0.7.52 September 12, 2022
 - Fix crash when default locale is ru.
