@@ -1816,11 +1816,11 @@ auto VAbstractPiece::GrainlineMainLine(const VGrainlineData &geom, const VContai
     qreal dY = 0;
     if (not IsItemContained(boundingRect, v, dX, dY))
     {
-        pt1.rx() = +dX;
-        pt1.ry() = +dY;
+        pt1.rx() += dX;
+        pt1.ry() += dY;
 
-        pt2.rx() = +dX;
-        pt2.ry() = +dY;
+        pt2.rx() += dX;
+        pt2.ry() += dY;
     }
 
     return {pt1, pt2};
