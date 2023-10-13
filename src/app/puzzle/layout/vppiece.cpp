@@ -447,3 +447,65 @@ void VPPiece::SetCopyNumber(quint16 newCopyNumber)
 {
     m_copyNumber = qMax(static_cast<quint16>(1), newCopyNumber);
 }
+
+//---------------------------------------------------------------------------------------------------------------------
+void VPPiece::CleanPosition(const VPPiecePtr &piece)
+{
+    QVector<QPointF> points;
+    CastTo(piece->GetExternalContourPoints(), points);
+    if (points.isEmpty())
+    {
+        return;
+    }
+
+    const QPointF offset = BoundingRect(points).topLeft();
+    if (qFuzzyIsNull(offset.x()) && qFuzzyIsNull(offset.y()))
+    {
+        return;
+    }
+
+    QTransform matrix;
+    matrix.translate(-offset.x(), -offset.y());
+
+    piece->SetContourPoints(MapVector(piece->GetContourPoints(), matrix), piece->IsHideMainPath());
+    piece->SetSeamAllowancePoints(MapVector(piece->GetSeamAllowancePoints(), matrix), piece->IsSeamAllowance(),
+                                  piece->IsSeamAllowanceBuiltIn());
+
+    {
+        QVector<VLayoutPiecePath> internalPaths = piece->GetInternalPaths();
+        for (auto &path : internalPaths)
+        {
+            path.SetPoints(MapVector(path.Points(), matrix));
+        }
+        piece->SetInternalPaths(internalPaths);
+    }
+
+    {
+        QVector<VLayoutPassmark> passmarks = piece->GetPassmarks();
+        for (auto &passmark : passmarks)
+        {
+            passmark.lines = MapVector(passmark.lines, matrix);
+            passmark.baseLine = matrix.map(passmark.baseLine);
+        }
+        piece->SetPassmarks(passmarks);
+    }
+
+    {
+        QVector<VLayoutPlaceLabel> placeLabels = piece->GetPlaceLabels();
+        for (auto &label : placeLabels)
+        {
+            label.SetCenter(matrix.map(label.Center()));
+            label.SetBox(label.Box().translated(-offset.x(), -offset.y()));
+        }
+        piece->SetPlaceLabels(placeLabels);
+    }
+
+    {
+        VPieceGrainline grainline = piece->GetGrainline();
+        grainline.SetMainLine(matrix.map(grainline.GetMainLine()));
+        piece->SetGrainline(grainline);
+    }
+
+    piece->SetPieceLabelRect(MapVector(piece->GetPieceLabelRect(), matrix));
+    piece->SetPatternLabelRect(MapVector(piece->GetPatternLabelRect(), matrix));
+}

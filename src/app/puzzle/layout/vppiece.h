@@ -110,6 +110,7 @@ public:
     auto StickyPosition(qreal &dx, qreal &dy) const -> bool;
 
     static auto PathsSuperposition(const QVector<QPointF> &path1, const QVector<QPointF> &path2) -> bool;
+    static void CleanPosition(const VPPiecePtr &piece);
 
     auto IsValid(QString &error) const -> bool;
 

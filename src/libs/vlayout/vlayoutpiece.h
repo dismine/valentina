@@ -221,7 +221,8 @@ public:
 
     auto MapPlaceLabelShape(PlaceLabelImg shape) const -> PlaceLabelImg;
 
-    template <class T> static auto MapVector(QVector<T> points, const QTransform &matrix, bool mirror) -> QVector<T>;
+    template <class T>
+    static auto MapVector(QVector<T> points, const QTransform &matrix, bool mirror = false) -> QVector<T>;
 
     template <class T>
     static auto MapPoint(T obj, const QTransform &matrix) -> typename std::enable_if<!IsLayoutPoint<T>::value, T>::type;

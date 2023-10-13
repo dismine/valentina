@@ -118,19 +118,27 @@ void VPLayout::AddPiece(const VPLayoutPtr &layout, const VPPiecePtr &piece)
 //---------------------------------------------------------------------------------------------------------------------
 void VPLayout::AddPiece(const VPPiecePtr &piece)
 {
-    if (not piece.isNull())
+    if (piece.isNull())
     {
-        if (not m_pieces.contains(piece->GetUniqueID()))
+        return;
+    }
+
+    VPPiece::CleanPosition(piece);
+
+    if (not m_pieces.contains(piece->GetUniqueID()))
+    {
+        m_pieces.insert(piece->GetUniqueID(), piece);
+    }
+    else
+    {
+        VPPiecePtr oldPiece = m_pieces.value(piece->GetUniqueID());
+        if (not oldPiece.isNull())
         {
-            m_pieces.insert(piece->GetUniqueID(), piece);
+            oldPiece->Update(piece);
         }
         else
         {
-            VPPiecePtr oldPiece = m_pieces.value(piece->GetUniqueID());
-            if (not oldPiece.isNull())
-            {
-                oldPiece->Update(piece);
-            }
+            m_pieces.insert(piece->GetUniqueID(), piece);
         }
     }
 }
