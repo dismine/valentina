@@ -28,6 +28,7 @@
 #include "vpsettings.h"
 #include "../vmisc/compatibility.h"
 
+#include <QDir>
 #include <QMarginsF>
 
 using namespace Qt::Literals::StringLiterals;
@@ -71,6 +72,7 @@ Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingLayoutPieceGap, ("layout/pieceGa
 Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingLayoutExportFormat, ("layout/exportFormat"_L1))   // NOLINT
 Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingLayoutLineWidth, ("layout/lineWidth"_L1))         // NOLINT
 Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingLayoutShowGrainline, ("layout/showGrainline"_L1)) // NOLINT
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingPathsRawLayoutData, ("paths/rawLatoutData"_L1))   // NOLINT
 
 QT_WARNING_POP
 
@@ -127,6 +129,18 @@ auto VPSettings::GetDefDockWidgetPropertiesContentsActive() -> bool
 void VPSettings::SetDockWidgetPropertiesContentsActive(bool value)
 {
     setValue(*settingDockPropertiesContentsActive, value);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+auto VPSettings::GetPathRawLayoutData() const -> QString
+{
+    return value(*settingPathsRawLayoutData, QDir::homePath()).toString();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VPSettings::SetPathRawLayoutData(const QString &value)
+{
+    setValue(*settingPathsRawLayoutData, value);
 }
 
 //---------------------------------------------------------------------------------------------------------------------

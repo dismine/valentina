@@ -3635,11 +3635,15 @@ void VPMainWindow::on_actionImportRawLayout_triggered()
 {
     const QString filter(tr("Raw Layout files") + QStringLiteral(" (*.rld)"));
 
-    const QString filePath = QFileDialog::getOpenFileName(this, tr("Open file"), QDir::homePath(), filter, nullptr,
-                                                          VAbstractApplication::VApp()->NativeFileDialog());
+    auto *settings = VPApplication::VApp()->PuzzleSettings();
+
+    const QString filePath =
+        QFileDialog::getOpenFileName(this, tr("Open file"), settings->GetPathRawLayoutData(), filter, nullptr,
+                                     VAbstractApplication::VApp()->NativeFileDialog());
 
     if (not filePath.isEmpty())
     {
+        settings->SetPathRawLayoutData(QFileInfo(filePath).absolutePath());
         ImportRawLayouts({filePath});
     }
 }

@@ -50,6 +50,9 @@ public:
     static auto GetDefDockWidgetPropertiesContentsActive() -> bool;
     void SetDockWidgetPropertiesContentsActive(bool value);
 
+    auto GetPathRawLayoutData() const -> QString;
+    void SetPathRawLayoutData(const QString &value);
+
     void SetLayoutUnit(Unit unit);
     auto LayoutUnit() const -> Unit;
 
