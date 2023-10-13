@@ -47,6 +47,7 @@
 - Validate sheet and layout names before proposing file name.
 - Puzzle app. Fix piece position move when update layout data.
 - Puzzle app. Fix losing selection by piece.
+- Puzzle app. Fix updating layout when file already opened.
 
 # Valentina 0.7.52 September 12, 2022
 - Fix crash when default locale is ru.

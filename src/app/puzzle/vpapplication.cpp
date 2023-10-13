@@ -697,9 +697,23 @@ auto VPApplication::StartWithFiles(const VPCommandLinePtr &cmd, const QStringLis
         {
             if (not cmd->IsGuiEnabled())
             {
+                delete MainWindow();
                 return false; // process only one input file
             }
             delete MainWindow();
+
+            if (not rawLayouts.isEmpty())
+            {
+                // Maybe already opened
+                QList<VPMainWindow *> list = VPApplication::VApp()->MainWindows();
+                auto w = std::find_if(list.begin(), list.end(),
+                                      [arg](VPMainWindow *window) { return window->CurrentFile() == arg; });
+                if (w != list.end())
+                {
+                    (*w)->activateWindow();
+                    (*w)->ImportRawLayouts(rawLayouts);
+                }
+            }
             continue;
         }
 

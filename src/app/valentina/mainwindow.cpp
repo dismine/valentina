@@ -4217,7 +4217,7 @@ void MainWindow::on_actionOpenPuzzle_triggered()
 //---------------------------------------------------------------------------------------------------------------------
 void MainWindow::on_actionCreateManualLayout_triggered()
 {
-    QTemporaryFile rldFile(QDir::tempPath() + "/puzzle.rld.XXXXXX");
+    QTemporaryFile rldFile(QDir::tempPath() + "/puzzle.rld.XXXXXX"_L1);
     if (rldFile.open())
     {
         QVector<DetailForLayout> detailsInLayout = SortDetailsForLayout(pattern->DataPieces());
@@ -4238,8 +4238,7 @@ void MainWindow::on_actionCreateManualLayout_triggered()
         }
         catch (VException &e)
         {
-            QMessageBox::warning(this, tr("Export details"),
-                                 tr("Can't export details.") + QStringLiteral(" \n") + e.ErrorMessage(),
+            QMessageBox::warning(this, tr("Export details"), tr("Can't export details.") + " \n"_L1 + e.ErrorMessage(),
                                  QMessageBox::Ok, QMessageBox::Ok);
             return;
         }
@@ -4274,7 +4273,7 @@ void MainWindow::on_actionCreateManualLayout_triggered()
 //---------------------------------------------------------------------------------------------------------------------
 void MainWindow::on_actionUpdateManualLayout_triggered()
 {
-    const QString filter(tr("Manual layout files") + QStringLiteral(" (*.vlt)"));
+    const QString filter(tr("Manual layout files") + " (*.vlt)"_L1);
 
     VValentinaSettings *settings = VAbstractValApplication::VApp()->ValentinaSettings();
 
@@ -4290,7 +4289,7 @@ void MainWindow::on_actionUpdateManualLayout_triggered()
 
     settings->SetPathManualLayouts(QFileInfo(filePath).absolutePath());
 
-    QTemporaryFile rldFile(QDir::tempPath() + "/puzzle.rld.XXXXXX");
+    QTemporaryFile rldFile(QDir::tempPath() + "/puzzle.rld.XXXXXX"_L1);
     rldFile.setAutoRemove(false);
     if (rldFile.open())
     {
@@ -4312,8 +4311,7 @@ void MainWindow::on_actionUpdateManualLayout_triggered()
         }
         catch (VException &e)
         {
-            QMessageBox::warning(this, tr("Export details"),
-                                 tr("Can't export details.") + QStringLiteral(" \n") + e.ErrorMessage(),
+            QMessageBox::warning(this, tr("Export details"), tr("Can't export details.") + " \n"_L1 + e.ErrorMessage(),
                                  QMessageBox::Ok, QMessageBox::Ok);
             return;
         }
@@ -4332,7 +4330,7 @@ void MainWindow::on_actionUpdateManualLayout_triggered()
         QStringList arguments{filePath, "-r", rldFile.fileName()};
         if (isNoScaling)
         {
-            arguments.append(QStringLiteral("--") + LONG_OPTION_NO_HDPI_SCALING);
+            arguments.append("--"_L1 + LONG_OPTION_NO_HDPI_SCALING);
         }
 
         rldFile.setAutoRemove(false);
