@@ -131,7 +131,7 @@ auto GetSystemMemorySizeGB() -> double
 //---------------------------------------------------------------------------------------------------------------------
 auto TotalMemory() -> QString
 {
-    double size = GetSystemMemorySizeGB();
+    double size = qRound(GetSystemMemorySizeGB() * 10.0) / 10.0;
     return !qFuzzyCompare(size, -1.0) ? QStringLiteral("%1 GB").arg(size) : QStringLiteral("Unknown RAM");
 }
 } // namespace
