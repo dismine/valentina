@@ -328,7 +328,7 @@ void VAbstractApplication::LoadTranslation(QString locale)
     installTranslator(appTranslator);
 
     pmsTranslator = new QTranslator(this);
-    LoadQM(pmsTranslator, QStringLiteral("measurements_") + Settings()->GetPMSystemCode() + '_', locale, appQmDir);
+    LoadQM(pmsTranslator, QStringLiteral("measurements_") + Settings()->GetPMSystemCode() + '_'_L1, locale, appQmDir);
     installTranslator(pmsTranslator);
 
     InitTrVars(); // Very important do it after load QM files.

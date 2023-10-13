@@ -103,8 +103,8 @@ void InitLanguageList(QComboBox *combobox)
     for (auto locale : fileNames)
     {
         // get locale extracted by filename           "valentina_de_De.qm"
-        locale.truncate(locale.lastIndexOf('.'));  // "valentina_de_De"
-        locale.remove(0, locale.indexOf('_') + 1); // "de_De"
+        locale.truncate(locale.lastIndexOf('.'_L1));  // "valentina_de_De"
+        locale.remove(0, locale.indexOf('_'_L1) + 1); // "de_De"
 
         if (locale.startsWith("ru"_L1))
         {

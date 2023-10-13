@@ -92,7 +92,7 @@ DialogSaveLayout::DialogSaveLayout(int count, Draw mode, const QString &fileName
 
     ui->lineEditFileName->setValidator(new QRegularExpressionValidator(QRegularExpression(*baseFilenameRegExp), this));
 
-    const QString mask = fileName + '_';
+    const QString mask = fileName + '_'_L1;
     if (VApplication::IsGUIMode())
     {
         ui->lineEditFileName->setText(mask);

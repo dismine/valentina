@@ -60,6 +60,12 @@
 #include "../vmisc/def.h"
 #include "dxiface.h"
 
+#if QT_VERSION < QT_VERSION_CHECK(6, 4, 0)
+#include "../vmisc/compatibility.h"
+#endif
+
+using namespace Qt::Literals::StringLiterals;
+
 namespace
 {
 const qreal AAMATextHeight = 2.5;
@@ -726,7 +732,7 @@ auto VDxfEngine::ExportToAAMA(const QVector<VLayoutPiece> &details) -> bool
         QString blockName = detail.GetName();
         if (m_version <= DRW::AC1009)
         {
-            blockName.replace(' ', '_');
+            blockName.replace(' '_L1, '_'_L1);
         }
 
         detailBlock->name = blockName.toStdString();
@@ -958,7 +964,7 @@ auto VDxfEngine::ExportToASTM(const QVector<VLayoutPiece> &details) -> bool
         QString blockName = detail.GetName();
         if (m_version <= DRW::AC1009)
         {
-            blockName.replace(' ', '_');
+            blockName.replace(' '_L1, '_'_L1);
         }
 
         detailBlock->name = blockName.toStdString();

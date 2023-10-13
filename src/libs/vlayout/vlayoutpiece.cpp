@@ -711,7 +711,7 @@ auto VLayoutPiece::GetUniqueID() const -> QString
 
     if (not d->m_gradationId.isEmpty())
     {
-        id = id + '_' + d->m_gradationId;
+        id = id + '_'_L1 + d->m_gradationId;
     }
 
     return id;

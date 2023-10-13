@@ -87,7 +87,7 @@ DialogSaveManualLayout::DialogSaveManualLayout(vsizetype count, bool consoleExpo
 
     ui->lineEditFileName->setValidator(new QRegularExpressionValidator(QRegularExpression(*baseFilenameRegExp), this));
 
-    const QString mask = m_count > 1 ? fileName + '_' : fileName;
+    const QString mask = m_count > 1 ? fileName + '_'_L1 : fileName;
     if (not m_consoleExport)
     {
         ui->lineEditFileName->setText(mask);

@@ -42,6 +42,12 @@
 #include <QPainter>
 #include <QPainterPath>
 
+#if QT_VERSION < QT_VERSION_CHECK(6, 4, 0)
+#include "../vmisc/compatibility.h"
+#endif
+
+using namespace Qt::Literals::StringLiterals;
+
 QT_WARNING_PUSH
 QT_WARNING_DISABLE_CLANG("-Wmissing-prototypes")
 QT_WARNING_DISABLE_INTEL(1418)
@@ -170,7 +176,7 @@ auto VPPiece::GetUniqueID() const -> QString
 
     if (m_copyNumber > 1)
     {
-        id = id + '_' + QString::number(m_copyNumber);
+        id = id + '_'_L1 + QString::number(m_copyNumber);
     }
 
     return id;

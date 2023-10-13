@@ -346,5 +346,5 @@ void VAbstractCubicBezierPath::CreateAlias()
         return;
     }
 
-    SetAlias(splPath + '_' + aliasSuffix);
+    SetAlias(splPath + '_'_L1 + aliasSuffix);
 }

@@ -1593,7 +1593,7 @@ void DialogIncrements::SaveIncrName(const QString &text)
         QString name = newName;
         do
         {
-            name = name + '_' + QString::number(num);
+            name = name + '_'_L1 + QString::number(num);
             num++;
         } while (not m_data->IsUnique(name));
         newName = name;
