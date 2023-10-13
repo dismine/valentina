@@ -8444,12 +8444,6 @@ Appliquer quand même les réglages ?</translation>
         <translation type="unfinished">Cran d&apos;assemblage</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.cpp" line="2301"/>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="4547"/>
-        <source>None</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.cpp" line="2318"/>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="4564"/>
         <source>One line</source>
@@ -8629,6 +8623,12 @@ Appliquer quand même les réglages ?</translation>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="3413"/>
         <source>custom seam allowance</source>
         <translation>Personnaliser la marge de couture</translation>
+    </message>
+    <message>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.cpp" line="2301"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="4547"/>
+        <source>None</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="3137"/>
@@ -10685,7 +10685,7 @@ Appliquer quand même les réglages ?</translation>
     <message>
         <location filename="../../src/app/valentina/mainwindow.ui" line="649"/>
         <source>Tools for creating detail</source>
-        <translation>Des outils pour créer des pièces de patron.</translation>
+        <translation>Des outils pour créer des pièces de patron</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.ui" line="666"/>
@@ -13151,7 +13151,7 @@ Voulez-vous sauvegarder vos modifications ?</translation>
     <message>
         <location filename="../../src/app/valentina/dialogs/configpages/preferencesconfigurationpage.ui" line="305"/>
         <source>Toolbox icon size:</source>
-        <translation>Taille des icônes de la barre d&apos;outils </translation>
+        <translation>Taille des icônes de la barre d&apos;outils:</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/configpages/preferencesconfigurationpage.ui" line="312"/>
@@ -13291,7 +13291,7 @@ Voulez-vous sauvegarder vos modifications ?</translation>
     <message>
         <location filename="../../src/app/valentina/dialogs/configpages/preferencesconfigurationpage.ui" line="258"/>
         <source>Disable if you want to skip interactive part of creating tools. And go straight to editing formulas instead.</source>
-        <translation>A désactiver si vous préférez passer l&apos;étape interactive lors de l&apos;utilisation des outils, et passer directement à l&apos;édition de formule. </translation>
+        <translation>A désactiver si vous préférez passer l&apos;étape interactive lors de l&apos;utilisation des outils, et passer directement à l&apos;édition de formule.</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/configpages/preferencesconfigurationpage.ui" line="261"/>
@@ -13436,7 +13436,7 @@ Voulez-vous sauvegarder vos modifications ?</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/configpages/preferencespatternpage.ui" line="347"/>
-        <source>When this option is activated, the application will utilize SVG Fonts present in your system to render piece label text, instead of using outline fonts. </source>
+        <source>When this option is activated, the application will utilize SVG Fonts present in your system to render piece label text, instead of using outline fonts.</source>
         <translation>Lorsque cette option est activée, l&apos;application utilise les polices SVG présentes sur le système d&apos;exploitation de votre ordinateur pour afficher les étiquettes des éléments de patron, à la place des polices vectorielles.</translation>
     </message>
     <message>
@@ -13564,7 +13564,7 @@ This option will take an affect after restart.</source>
     <message>
         <location filename="../../src/app/valentina/dialogs/configpages/preferencespatternpage.ui" line="188"/>
         <source>By default export to DXF-AAMA sew line on Draw layer for all new created workpieces</source>
-        <translation>Par défaut, quand export vers le format DXF-AAMA, la ligne de couture est incluse dans le dessin de toutes les pièces nouvellement créées. </translation>
+        <translation>Par défaut, quand export vers le format DXF-AAMA, la ligne de couture est incluse dans le dessin de toutes les pièces nouvellement créées</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/configpages/preferencespatternpage.ui" line="191"/>
@@ -13660,7 +13660,7 @@ This option will take an affect after restart.</source>
     </message>
     <message>
         <location filename="../../src/app/puzzle/dialogs/configpages/puzzlepreferencesconfigurationpage.ui" line="165"/>
-        <source>When this option is activated, the application will utilize SVG Fonts present in your system to render piece label text, instead of using outline fonts. </source>
+        <source>When this option is activated, the application will utilize SVG Fonts present in your system to render piece label text, instead of using outline fonts.</source>
         <translation>Lorsque cette option est activée, l&apos;application utilise les polices SVG présentes sur le système d&apos;exploitation de votre ordinateur pour afficher les étiquettes des éléments de patron, à la place des polices vectorielles.</translation>
     </message>
     <message>
@@ -18831,7 +18831,7 @@ Voulez-vous enregistrer vos changements ?</translation>
     <message>
         <location filename="../../src/app/valentina/core/vcmdexport.cpp" line="712"/>
         <source>Nest quantity copies of each piece (export mode).</source>
-        <translation>Imbriquer les exemplaires de chaque pièce (mode export)</translation>
+        <translation>Imbriquer les exemplaires de chaque pièce (mode export).</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/core/vcmdexport.cpp" line="619"/>
@@ -19434,7 +19434,7 @@ Voulez-vous enregistrer vos changements ?</translation>
     <message>
         <location filename="../../src/libs/vformat/vmeasurements.cpp" line="1445"/>
         <source>Dimension is not valid</source>
-        <translation>La dimension est invalide.</translation>
+        <translation>La dimension est invalide</translation>
     </message>
     <message>
         <location filename="../../src/libs/vformat/vmeasurements.cpp" line="1131"/>
@@ -20680,7 +20680,7 @@ Voulez-vous enregistrer vos changements ?</translation>
     <message>
         <location filename="../../src/app/puzzle/vpmainwindow.ui" line="1550"/>
         <source>Has effect only when print in application. To export with tiles scheme use separate setting</source>
-        <translation>N&apos;a d&apos;effet que lors d&apos;une impression depuis l&apos;application. Pour exporter en incluant le tuilage, veuillez utiliser le réglage dédié.</translation>
+        <translation>N&apos;a d&apos;effet que lors d&apos;une impression depuis l&apos;application. Pour exporter en incluant le tuilage, veuillez utiliser le réglage dédié</translation>
     </message>
     <message>
         <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="4177"/>

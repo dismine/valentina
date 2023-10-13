@@ -23,7 +23,7 @@
       <property name="geometry">
        <rect>
         <x>0</x>
-        <y>-62</y>
+        <y>0</y>
         <width>519</width>
         <height>1021</height>
        </rect>
@@ -344,7 +344,7 @@ This option will take an affect after restart.</string>
           <item>
            <widget class="QCheckBox" name="checkBoxSingleLineFonts">
             <property name="toolTip">
-             <string>When this option is activated, the application will utilize SVG Fonts present in your system to render piece label text, instead of using outline fonts. </string>
+             <string>When this option is activated, the application will utilize SVG Fonts present in your system to render piece label text, instead of using outline fonts.</string>
             </property>
             <property name="text">
              <string>Use single-line fonts</string>
