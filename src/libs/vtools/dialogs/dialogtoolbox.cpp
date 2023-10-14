@@ -655,22 +655,22 @@ auto GetNodeName(const VContainer *data, const VPieceNode &node, bool showPassma
                     name += "|||"_L1;
                     break;
                 case PassmarkLineType::TMark:
-                    name += QChar(u'┴');
+                    name += QStringLiteral("┴");
                     break;
                 case PassmarkLineType::ExternalVMark:
-                    name += QChar(u'⊼');
+                    name += QStringLiteral("⊼");
                     break;
                 case PassmarkLineType::InternalVMark:
-                    name += QChar(u'⊽');
+                    name += QStringLiteral("⊽");
                     break;
                 case PassmarkLineType::UMark:
-                    name += QChar(u'⋃');
+                    name += QStringLiteral("⋃");
                     break;
                 case PassmarkLineType::BoxMark:
-                    name += QChar(u'⎕');
+                    name += QStringLiteral("⎕");
                     break;
                 case PassmarkLineType::CheckMark:
-                    name += QChar(u'✓');
+                    name += QStringLiteral("✓");
                     break;
                 default:
                     break;
