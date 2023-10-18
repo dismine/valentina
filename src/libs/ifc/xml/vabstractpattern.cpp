@@ -2476,7 +2476,7 @@ void VAbstractPattern::SetGroupTags(quint32 id, const QStringList &tags)
     QDomElement group = elementById(id, TagGroup);
     if (group.isElement())
     {
-        SetAttributeOrRemoveIf<QString>(group, AttrTags, tags.join(','),
+        SetAttributeOrRemoveIf<QString>(group, AttrTags, tags.join(','_L1),
                                         [](const QString &rawTags) noexcept { return rawTags.isEmpty(); });
         modified = true;
         emit patternChanged(false);

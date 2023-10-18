@@ -42,6 +42,8 @@
 
 #include "../vmisc/compatibility.h"
 
+using namespace Qt::Literals::StringLiterals;
+
 //---------------------------------------------------------------------------------------------------------------------
 auto IsMimeTypeImage(const QMimeType &mime) -> bool
 {
@@ -108,10 +110,10 @@ auto PrepareImageFilters() -> QString
 
     if (not sufixes.isEmpty())
     {
-        filters.append(QObject::tr("Images") + QStringLiteral(" (%1)").arg(sufixes.join(' ')));
+        filters.append(QObject::tr("Images") + " (%1)"_L1.arg(sufixes.join(' '_L1)));
     }
 
-    filters.append(QObject::tr("All files") + QStringLiteral(" (*.*)"));
+    filters.append(QObject::tr("All files") + " (*.*)"_L1);
 
-    return filters.join(QStringLiteral(";;"));
+    return filters.join(";;"_L1);
 }

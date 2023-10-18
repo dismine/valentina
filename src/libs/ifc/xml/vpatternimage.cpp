@@ -47,6 +47,8 @@
 #include "../vmisc/compatibility.h"
 #include "utils.h"
 
+using namespace Qt::Literals::StringLiterals;
+
 //---------------------------------------------------------------------------------------------------------------------
 auto VPatternImage::FromFile(const QString &fileName) -> VPatternImage
 {
@@ -66,7 +68,7 @@ auto VPatternImage::FromFile(const QString &fileName) -> VPatternImage
         return {};
     }
 
-    QString base64 = SplitString(QString::fromLatin1(file.readAll().toBase64().data())).join('\n');
+    QString base64 = SplitString(QString::fromLatin1(file.readAll().toBase64().data())).join('\n'_L1);
 
     image.SetContentData(base64.toLatin1(), mime.name());
     return image;

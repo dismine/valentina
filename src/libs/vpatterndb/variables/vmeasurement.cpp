@@ -36,6 +36,12 @@
 #include "vmeasurement_p.h"
 #include "vvariable.h"
 
+#if QT_VERSION < QT_VERSION_CHECK(6, 4, 0)
+#include "../vmisc/compatibility.h"
+#endif
+
+using namespace Qt::Literals::StringLiterals;
+
 //---------------------------------------------------------------------------------------------------------------------
 VMeasurement::VMeasurement(quint32 index, const QString &name)
   : VVariable(name),
@@ -123,7 +129,7 @@ auto VMeasurement::CorrectionHash(qreal baseA, qreal baseB, qreal baseC) -> QStr
     {
         hashBlocks.append(QString::number(baseC));
     }
-    return hashBlocks.join(';');
+    return hashBlocks.join(';'_L1);
 }
 
 //---------------------------------------------------------------------------------------------------------------------

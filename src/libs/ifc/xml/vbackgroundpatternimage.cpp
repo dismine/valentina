@@ -45,6 +45,8 @@
 #include <ciso646> // and, not, or
 #endif
 
+using namespace Qt::Literals::StringLiterals;
+
 const QString VBackgroundPatternImage::brokenImage = QStringLiteral("://icon/svg/broken_path.svg");
 
 namespace
@@ -100,7 +102,7 @@ auto VBackgroundPatternImage::FromFile(const QString &fileName, bool builtIn) ->
             return {};
         }
 
-        QString base64 = SplitString(QString::fromLatin1(file.readAll().toBase64().data())).join('\n');
+        QString base64 = SplitString(QString::fromLatin1(file.readAll().toBase64().data())).join('\n'_L1);
         image.SetContentData(base64.toLatin1(), mime.name());
     }
     else

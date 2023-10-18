@@ -30,7 +30,6 @@
 #define VPATTERN_H
 
 #include "../ifc/xml/vabstractpattern.h"
-#include "../ifc/xml/vtoolrecord.h"
 #include "../vpatterndb/vcontainer.h"
 #include "../ifc/xml/vpatternconverter.h"
 
