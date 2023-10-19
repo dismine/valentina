@@ -148,8 +148,8 @@ private:
 
     void InitVariables();
 
-    template <class key, class val> void ShowVariable(const QMap<key, val> &var);
-    void ShowMeasurements(const QMap<QString, QSharedPointer<VMeasurement>> &var);
+    template <class T> void ShowVariable(const QList<T> &vars);
+    void ShowMeasurements(const QList<QSharedPointer<VMeasurement>> &vars);
     void ShowFunctions();
     void ShowIncrementsInPreviewCalculation(bool show);
 

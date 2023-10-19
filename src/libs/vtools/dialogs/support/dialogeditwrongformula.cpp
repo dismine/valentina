@@ -322,7 +322,13 @@ void DialogEditWrongFormula::PutVal(QTableWidgetItem *item)
 void DialogEditWrongFormula::Measurements()
 {
     ui->checkBoxHideEmpty->setEnabled(true);
-    ShowMeasurements(m_data->DataMeasurements());
+
+    QList<QSharedPointer<VMeasurement>> vars = m_data->DataMeasurements().values();
+    std::stable_sort(vars.begin(), vars.end(),
+                     [](const QSharedPointer<VMeasurement> &obj1, const QSharedPointer<VMeasurement> &obj2)
+                     { return obj1->Index() < obj2->Index(); });
+
+    ShowMeasurements(vars);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -332,21 +338,21 @@ void DialogEditWrongFormula::Measurements()
 void DialogEditWrongFormula::LengthLines()
 {
     ui->checkBoxHideEmpty->setEnabled(false);
-    ShowVariable(m_data->DataLengthLines());
+    ShowVariable(m_data->DataLengthLines().values());
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 void DialogEditWrongFormula::RadiusArcs()
 {
     ui->checkBoxHideEmpty->setEnabled(false);
-    ShowVariable(m_data->DataRadiusesArcs());
+    ShowVariable(m_data->DataRadiusesArcs().values());
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 void DialogEditWrongFormula::AnglesCurves()
 {
     ui->checkBoxHideEmpty->setEnabled(false);
-    ShowVariable(m_data->DataAnglesCurves());
+    ShowVariable(m_data->DataAnglesCurves().values());
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -356,21 +362,21 @@ void DialogEditWrongFormula::AnglesCurves()
 void DialogEditWrongFormula::LengthCurves()
 {
     ui->checkBoxHideEmpty->setEnabled(false);
-    ShowVariable(m_data->DataLengthCurves());
+    ShowVariable(m_data->DataLengthCurves().values());
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 void DialogEditWrongFormula::CurvesCLength()
 {
     ui->checkBoxHideEmpty->setEnabled(false);
-    ShowVariable(m_data->DataCurvesCLength());
+    ShowVariable(m_data->DataCurvesCLength().values());
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 void DialogEditWrongFormula::AngleLines()
 {
     ui->checkBoxHideEmpty->setEnabled(false);
-    ShowVariable(m_data->DataAngleLines());
+    ShowVariable(m_data->DataAngleLines().values());
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -392,7 +398,7 @@ void DialogEditWrongFormula::PreviewCalculations()
 void DialogEditWrongFormula::PieceArea()
 {
     ui->checkBoxHideEmpty->setEnabled(false);
-    ShowVariable(m_data->DataPieceArea());
+    ShowVariable(m_data->DataPieceArea().values());
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -629,9 +635,9 @@ void DialogEditWrongFormula::InitIcons()
 //---------------------------------------------------------------------------------------------------------------------
 /**
  * @brief ShowVariable show variables in list
- * @param var container with variables
+ * @param vars container with variables
  */
-template <class key, class val> void DialogEditWrongFormula::ShowVariable(const QMap<key, val> &var)
+template <class T> void DialogEditWrongFormula::ShowVariable(const QList<T> &vars)
 {
     ui->tableWidget->blockSignals(true);
     ui->tableWidget->clearContents();
@@ -639,24 +645,24 @@ template <class key, class val> void DialogEditWrongFormula::ShowVariable(const 
     ui->tableWidget->setColumnHidden(ColumnFullName, true);
     ui->labelDescription->setText(QString());
 
-    QMapIterator<key, val> iMap(var);
-    while (iMap.hasNext())
+    for (const auto &var : vars)
     {
-        iMap.next();
-        if (ui->checkBoxHideEmpty->isEnabled() && ui->checkBoxHideEmpty->isChecked() && iMap.value()->IsNotUsed())
+        if (ui->checkBoxHideEmpty->isEnabled() && ui->checkBoxHideEmpty->isChecked() && var->IsNotUsed())
         {
             continue; // skip this measurement
         }
-        if (iMap.value()->Filter(m_toolId) == false)
+
+        if (!var->Filter(m_toolId))
         { // If we create this variable don't show
             ui->tableWidget->setRowCount(ui->tableWidget->rowCount() + 1);
-            auto *item = new QTableWidgetItem(iMap.key());
+            auto *item = new QTableWidgetItem(var->GetName());
             QFont font = item->font();
             font.setBold(true);
             item->setFont(font);
             ui->tableWidget->setItem(ui->tableWidget->rowCount() - 1, ColumnName, item);
         }
     }
+
     ui->tableWidget->blockSignals(false);
     ui->tableWidget->selectRow(0);
     ui->tableWidget->horizontalHeader()->setSectionResizeMode(QHeaderView::Stretch);
@@ -665,9 +671,9 @@ template <class key, class val> void DialogEditWrongFormula::ShowVariable(const 
 //---------------------------------------------------------------------------------------------------------------------
 /**
  * @brief ShowMeasurements show measurements in table
- * @param var container with measurements
+ * @param vars container with measurements
  */
-void DialogEditWrongFormula::ShowMeasurements(const QMap<QString, QSharedPointer<VMeasurement>> &var)
+void DialogEditWrongFormula::ShowMeasurements(const QList<QSharedPointer<VMeasurement>> &vars)
 {
     ui->tableWidget->blockSignals(true);
     ui->tableWidget->clearContents();
@@ -675,18 +681,17 @@ void DialogEditWrongFormula::ShowMeasurements(const QMap<QString, QSharedPointer
     ui->tableWidget->setColumnHidden(ColumnFullName, false);
     ui->labelDescription->setText(QString());
 
-    QMapIterator<QString, QSharedPointer<VMeasurement>> iMap(var);
-    while (iMap.hasNext())
+    for (const auto &var : vars)
     {
-        iMap.next();
-        if (ui->checkBoxHideEmpty->isEnabled() && ui->checkBoxHideEmpty->isChecked() && iMap.value()->IsNotUsed())
+        if (ui->checkBoxHideEmpty->isEnabled() && ui->checkBoxHideEmpty->isChecked() && var->IsNotUsed())
         {
             continue; // skip this measurement
         }
-        if (not iMap.value()->Filter(m_toolId))
+
+        if (not var->Filter(m_toolId))
         { // If we create this variable don't show
             ui->tableWidget->setRowCount(ui->tableWidget->rowCount() + 1);
-            auto *itemName = new QTableWidgetItem(iMap.key());
+            auto *itemName = new QTableWidgetItem(var->GetName());
             QFont fontName = itemName->font();
             fontName.setBold(true);
             itemName->setFont(fontName);
@@ -696,13 +701,13 @@ void DialogEditWrongFormula::ShowMeasurements(const QMap<QString, QSharedPointer
             QFont fontFullName = itemName->font();
             fontFullName.setBold(true);
             itemFullName->setFont(fontFullName);
-            if (iMap.value()->IsCustom())
+            if (var->IsCustom())
             {
-                itemFullName->setText(iMap.value()->GetGuiText());
+                itemFullName->setText(var->GetGuiText());
             }
             else
             {
-                itemFullName->setText(VAbstractApplication::VApp()->TrVars()->GuiText(iMap.value()->GetName()));
+                itemFullName->setText(VAbstractApplication::VApp()->TrVars()->GuiText(var->GetName()));
             }
 
             itemFullName->setToolTip(itemFullName->text());
@@ -710,6 +715,7 @@ void DialogEditWrongFormula::ShowMeasurements(const QMap<QString, QSharedPointer
             ui->tableWidget->setItem(ui->tableWidget->rowCount() - 1, ColumnFullName, itemFullName);
         }
     }
+
     ui->tableWidget->blockSignals(false);
     ui->tableWidget->selectRow(0);
     ui->tableWidget->horizontalHeader()->setSectionResizeMode(QHeaderView::Stretch);
@@ -785,7 +791,12 @@ void DialogEditWrongFormula::ShowIncrementsInPreviewCalculation(bool show)
         ++i;
     }
 
-    ShowVariable(increments);
+    QList<QSharedPointer<VIncrement>> vars = increments.values();
+    std::stable_sort(vars.begin(), vars.end(),
+                     [](const QSharedPointer<VIncrement> &obj1, const QSharedPointer<VIncrement> &obj2)
+                     { return obj1->GetIndex() < obj2->GetIndex(); });
+
+    ShowVariable(vars);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
