@@ -42,6 +42,7 @@
 
 #include "../ifc/exception/vexceptionobjecterror.h"
 #include "../ifc/ifcdef.h"
+#include "../ifc/xml/vpatternimage.h"
 #include "../ifc/xml/vvitconverter.h"
 #include "../ifc/xml/vvstconverter.h"
 #include "../qmuparser/qmuparsererror.h"
@@ -80,6 +81,7 @@ const QString VMeasurements::TagCorrections = QStringLiteral("corrections");
 const QString VMeasurements::TagCorrection = QStringLiteral("correction");
 const QString VMeasurements::TagLabels = QStringLiteral("labels");
 const QString VMeasurements::TagLabel = QStringLiteral("label");
+const QString VMeasurements::TagImage = QStringLiteral("image");
 
 const QString VMeasurements::AttrBase = QStringLiteral("base");
 const QString VMeasurements::AttrValue = QStringLiteral("value");
@@ -101,6 +103,7 @@ const QString VMeasurements::AttrFullCircumference = QStringLiteral("fullCircumf
 const QString VMeasurements::AttrLabel = QStringLiteral("label");
 const QString VMeasurements::AttrDimension = QStringLiteral("dimension");
 const QString VMeasurements::AttrCustomName = QStringLiteral("customName");
+const QString VMeasurements::AttrContentType = QStringLiteral("contentType");
 
 const QString VMeasurements::GenderMale = QStringLiteral("male");
 const QString VMeasurements::GenderFemale = QStringLiteral("female");
@@ -351,88 +354,7 @@ void VMeasurements::ReadMeasurements(qreal baseA, qreal baseB, qreal baseC) cons
 
         if (varType != MeasurementType::Separator)
         {
-            const QString fullName = GetParametrEmptyString(dom, AttrFullName);
-            const bool specialUnits = GetParametrBool(dom, AttrSpecialUnits, falseStr);
-
-            if (type == MeasurementsType::Multisize)
-            {
-                qreal base = GetParametrDouble(dom, AttrBase, QChar('0'));
-                qreal shiftA = GetParametrDouble(dom, AttrShiftA, QChar('0'));
-                qreal shiftB = GetParametrDouble(dom, AttrShiftB, QChar('0'));
-                qreal shiftC = GetParametrDouble(dom, AttrShiftC, QChar('0'));
-                QMap<QString, qreal> corrections = ReadCorrections(dom);
-
-                qreal convertedBaseA = DimensionABase();
-                qreal convertedBaseB = DimensionBBase();
-                qreal convertedBaseC = DimensionCBase();
-                qreal convertedStepA = DimensionAStep();
-                qreal convertedStepB = DimensionBStep();
-                qreal convertedStepC = DimensionCStep();
-
-                if (not specialUnits)
-                {
-                    base = UnitConvertor(base, Units(), *data->GetPatternUnit());
-                    shiftA = UnitConvertor(shiftA, Units(), *data->GetPatternUnit());
-                    shiftB = UnitConvertor(shiftB, Units(), *data->GetPatternUnit());
-                    shiftC = UnitConvertor(shiftC, Units(), *data->GetPatternUnit());
-
-                    QMutableMapIterator<QString, qreal> iterator(corrections);
-                    while (iterator.hasNext())
-                    {
-                        iterator.next();
-                        iterator.setValue(UnitConvertor(iterator.value(), Units(), *data->GetPatternUnit()));
-                    }
-
-                    convertedBaseA = UnitConvertor(convertedBaseA, Units(), *data->GetPatternUnit());
-                    convertedBaseB = UnitConvertor(convertedBaseB, Units(), *data->GetPatternUnit());
-                    convertedBaseC = UnitConvertor(convertedBaseC, Units(), *data->GetPatternUnit());
-
-                    convertedStepA = UnitConvertor(convertedStepA, Units(), *data->GetPatternUnit());
-                    convertedStepB = UnitConvertor(convertedStepB, Units(), *data->GetPatternUnit());
-                    convertedStepC = UnitConvertor(convertedStepC, Units(), *data->GetPatternUnit());
-                }
-
-                meash = QSharedPointer<VMeasurement>::create(static_cast<quint32>(i), name, convertedBaseA,
-                                                             convertedBaseB, convertedBaseC, base);
-                meash->SetBaseA(baseA);
-                meash->SetBaseB(baseB);
-                meash->SetBaseC(baseC);
-
-                meash->SetShiftA(shiftA);
-                meash->SetShiftB(shiftB);
-                meash->SetShiftC(shiftC);
-
-                meash->SetStepA(convertedStepA);
-                meash->SetStepB(convertedStepB);
-                meash->SetStepC(convertedStepC);
-
-                meash->SetSpecialUnits(specialUnits);
-                meash->SetCorrections(corrections);
-                meash->SetGuiText(fullName);
-                meash->SetDescription(description);
-            }
-            else
-            {
-                const IMD dimension =
-                    VMeasurements::StrToIMD(GetParametrString(dom, AttrDimension, VMeasurements::IMDToStr(IMD::N)));
-                const QString formula = GetParametrString(dom, AttrValue, QChar('0'));
-                bool ok = false;
-                qreal value = EvalFormula(tempData.data(), formula, &ok);
-
-                tempMeash = QSharedPointer<VMeasurement>::create(tempData.data(), static_cast<quint32>(i), name, value,
-                                                                 formula, ok);
-
-                if (not specialUnits)
-                {
-                    value = UnitConvertor(value, Units(), *data->GetPatternUnit());
-                }
-
-                meash = QSharedPointer<VMeasurement>::create(data, static_cast<quint32>(i), name, value, formula, ok);
-                meash->SetGuiText(fullName);
-                meash->SetDescription(description);
-                meash->SetSpecialUnits(specialUnits);
-                meash->SetDimension(dimension);
-            }
+            ReadMeasurement(dom, tempData, meash, tempMeash, i, baseA, baseB, baseC);
         }
         else
         {
@@ -881,6 +803,20 @@ void VMeasurements::SetMDimension(const QString &name, IMD type)
         SetAttributeOrRemoveIf<QString>(node, AttrDimension, VMeasurements::IMDToStr(type),
                                         [](const QString &type) noexcept
                                         { return type == VMeasurements::IMDToStr(IMD::N); });
+    }
+    else
+    {
+        qWarning() << tr("Can't find measurement '%1'").arg(name);
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VMeasurements::SetMImage(const QString &name, const VPatternImage &image)
+{
+    QDomElement mElement = FindM(name);
+    if (not mElement.isNull())
+    {
+        WriteImage(mElement, image);
     }
     else
     {
@@ -1561,6 +1497,51 @@ void VMeasurements::WriteCorrections(QDomElement &mElement, const QMap<QString, 
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+auto VMeasurements::ReadImage(const QDomElement &mElement) -> VPatternImage
+{
+    QDomElement imageTag = mElement.firstChildElement(TagImage);
+    if (imageTag.isNull())
+    {
+        return {};
+    }
+
+    VPatternImage image;
+    if (not imageTag.isNull())
+    {
+        image.SetContentData(imageTag.text().toLatin1(), imageTag.attribute(AttrContentType));
+    }
+    return image;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VMeasurements::WriteImage(QDomElement &mElement, const VPatternImage &image)
+{
+    QDomElement imageElement = mElement.firstChildElement(TagImage);
+    if (not image.IsNull())
+    {
+        if (not imageElement.isNull())
+        {
+            setTagText(imageElement, image.ContentData());
+            imageElement.setAttribute(AttrContentType, image.ContentType());
+        }
+        else
+        {
+            imageElement = createElement(TagImage);
+            setTagText(imageElement, image.ContentData());
+            imageElement.setAttribute(AttrContentType, image.ContentType());
+            mElement.appendChild(imageElement);
+        }
+    }
+    else
+    {
+        if (not imageElement.isNull())
+        {
+            mElement.removeChild(imageElement);
+        }
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 void VMeasurements::SaveDimesionLabels(QDomElement &dElement, const DimesionLabels &labels)
 {
     if (dElement.isNull())
@@ -1650,12 +1631,113 @@ void VMeasurements::ClearDimension(IMD type)
     for (int i = 0; i < list.size(); ++i)
     {
         QDomElement domElement = list.at(i).toElement();
-        if (domElement.isNull() == false)
+        if (!domElement.isNull())
         {
             if (domElement.attribute(AttrDimension) == d)
             {
                 domElement.removeAttribute(AttrDimension);
             }
+        }
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VMeasurements::ReadMeasurement(const QDomElement &dom, QSharedPointer<VContainer> &tempData,
+                                    QSharedPointer<VMeasurement> &meash, QSharedPointer<VMeasurement> &tempMeash, int i,
+                                    qreal baseA, qreal baseB, qreal baseC) const
+{
+    const QString fullName = GetParametrEmptyString(dom, AttrFullName);
+    const bool specialUnits = GetParametrBool(dom, AttrSpecialUnits, falseStr);
+    const QString name = GetParametrString(dom, AttrName).simplified();
+    const QString description = GetParametrEmptyString(dom, AttrDescription);
+
+    if (type == MeasurementsType::Multisize)
+    {
+        qreal base = GetParametrDouble(dom, AttrBase, QChar('0'));
+        qreal shiftA = GetParametrDouble(dom, AttrShiftA, QChar('0'));
+        qreal shiftB = GetParametrDouble(dom, AttrShiftB, QChar('0'));
+        qreal shiftC = GetParametrDouble(dom, AttrShiftC, QChar('0'));
+        QMap<QString, qreal> corrections = ReadCorrections(dom);
+
+        qreal convertedBaseA = DimensionABase();
+        qreal convertedBaseB = DimensionBBase();
+        qreal convertedBaseC = DimensionCBase();
+        qreal convertedStepA = DimensionAStep();
+        qreal convertedStepB = DimensionBStep();
+        qreal convertedStepC = DimensionCStep();
+
+        if (not specialUnits)
+        {
+            base = UnitConvertor(base, Units(), *data->GetPatternUnit());
+            shiftA = UnitConvertor(shiftA, Units(), *data->GetPatternUnit());
+            shiftB = UnitConvertor(shiftB, Units(), *data->GetPatternUnit());
+            shiftC = UnitConvertor(shiftC, Units(), *data->GetPatternUnit());
+
+            QMutableMapIterator<QString, qreal> iterator(corrections);
+            while (iterator.hasNext())
+            {
+                iterator.next();
+                iterator.setValue(UnitConvertor(iterator.value(), Units(), *data->GetPatternUnit()));
+            }
+
+            convertedBaseA = UnitConvertor(convertedBaseA, Units(), *data->GetPatternUnit());
+            convertedBaseB = UnitConvertor(convertedBaseB, Units(), *data->GetPatternUnit());
+            convertedBaseC = UnitConvertor(convertedBaseC, Units(), *data->GetPatternUnit());
+
+            convertedStepA = UnitConvertor(convertedStepA, Units(), *data->GetPatternUnit());
+            convertedStepB = UnitConvertor(convertedStepB, Units(), *data->GetPatternUnit());
+            convertedStepC = UnitConvertor(convertedStepC, Units(), *data->GetPatternUnit());
+        }
+
+        meash = QSharedPointer<VMeasurement>::create(static_cast<quint32>(i), name, convertedBaseA, convertedBaseB,
+                                                     convertedBaseC, base);
+        meash->SetBaseA(baseA);
+        meash->SetBaseB(baseB);
+        meash->SetBaseC(baseC);
+
+        meash->SetShiftA(shiftA);
+        meash->SetShiftB(shiftB);
+        meash->SetShiftC(shiftC);
+
+        meash->SetStepA(convertedStepA);
+        meash->SetStepB(convertedStepB);
+        meash->SetStepC(convertedStepC);
+
+        meash->SetSpecialUnits(specialUnits);
+        meash->SetCorrections(corrections);
+        meash->SetGuiText(fullName);
+        meash->SetDescription(description);
+
+        if (meash->IsCustom())
+        {
+            meash->SetImage(ReadImage(dom));
+        }
+    }
+    else
+    {
+        const IMD dimension =
+            VMeasurements::StrToIMD(GetParametrString(dom, AttrDimension, VMeasurements::IMDToStr(IMD::N)));
+        const QString formula = GetParametrString(dom, AttrValue, QChar('0'));
+        bool ok = false;
+        qreal value = EvalFormula(tempData.data(), formula, &ok);
+
+        tempMeash =
+            QSharedPointer<VMeasurement>::create(tempData.data(), static_cast<quint32>(i), name, value, formula, ok);
+
+        if (not specialUnits)
+        {
+            value = UnitConvertor(value, Units(), *data->GetPatternUnit());
+        }
+
+        meash = QSharedPointer<VMeasurement>::create(data, static_cast<quint32>(i), name, value, formula, ok);
+        meash->SetGuiText(fullName);
+        meash->SetDescription(description);
+        meash->SetSpecialUnits(specialUnits);
+        meash->SetDimension(dimension);
+
+        if (meash->IsCustom())
+        {
+            meash->SetImage(ReadImage(dom));
         }
     }
 }

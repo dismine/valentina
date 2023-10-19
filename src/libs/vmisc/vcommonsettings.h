@@ -74,6 +74,9 @@ public:
     auto GetPathManualLayouts() const -> QString;
     void SetPathManualLayouts(const QString &value);
 
+    auto GetPathCustomImage() const -> QString;
+    void SetPathCustomImage(const QString &value);
+
     static auto GetDefPathSVGFonts() -> QString;
     auto GetPathSVGFonts() const -> QString;
     void SetPathSVGFonts(const QString &value);

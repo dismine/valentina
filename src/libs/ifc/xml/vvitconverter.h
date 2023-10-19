@@ -29,19 +29,19 @@
 #ifndef VVITCONVERTER_H
 #define VVITCONVERTER_H
 
-
 #include <QCoreApplication>
 #include <QString>
 #include <QtGlobal>
 
-#include "vabstractmconverter.h"
 #include "../vmisc/projectversion.h"
+#include "vabstractmconverter.h"
 
 class QDomElement;
 
 class VVITConverter final : public VAbstractMConverter
 {
     Q_DECLARE_TR_FUNCTIONS(VVITConverter) // NOLINT
+
 public:
     explicit VVITConverter(const QString &fileName);
     virtual ~VVITConverter() = default;
@@ -49,9 +49,9 @@ public:
     static const QString MeasurementMaxVerStr;
     static const QString CurrentSchema;
     static Q_DECL_CONSTEXPR const unsigned MeasurementMinVer = FormatVersion(0, 2, 0);
-    static Q_DECL_CONSTEXPR const unsigned MeasurementMaxVer = FormatVersion(0, 5, 2);
+    static Q_DECL_CONSTEXPR const unsigned MeasurementMaxVer = FormatVersion(0, 6, 0);
 
-    static auto XSDSchemas() -> QHash <unsigned, QString>;
+    static auto XSDSchemas() -> QHash<unsigned, QString>;
 
 protected:
     virtual auto MinVer() const -> unsigned override;
@@ -64,7 +64,7 @@ protected:
     virtual void DowngradeToCurrentMaxVersion() override;
     virtual auto IsReadOnly() const -> bool override;
 
-    auto Schemas() const -> QHash <unsigned, QString> override;
+    auto Schemas() const -> QHash<unsigned, QString> override;
 
 private:
     Q_DISABLE_COPY_MOVE(VVITConverter) // NOLINT
@@ -84,7 +84,7 @@ private:
     void ToV0_3_2();
     void ToV0_3_3();
     void ToV0_4_0();
-    void ToV0_5_2();
+    void ToV0_6_0();
 };
 
 //---------------------------------------------------------------------------------------------------------------------

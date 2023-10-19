@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>1463</width>
+    <width>1102</width>
     <height>899</height>
    </rect>
   </property>
@@ -1142,7 +1142,7 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>1463</width>
+     <width>1102</width>
      <height>22</height>
     </rect>
    </property>
@@ -1258,12 +1258,6 @@
      <verstretch>0</verstretch>
     </sizepolicy>
    </property>
-   <property name="features">
-    <set>QDockWidget::DockWidgetClosable|QDockWidget::DockWidgetMovable</set>
-   </property>
-   <property name="allowedAreas">
-    <set>Qt::LeftDockWidgetArea|Qt::RightDockWidgetArea</set>
-   </property>
    <property name="windowTitle">
     <string>Measurement diagram</string>
    </property>
@@ -1278,8 +1272,75 @@
      </sizepolicy>
     </property>
     <layout class="QVBoxLayout" name="verticalLayout_4">
-     <item alignment="Qt::AlignHCenter|Qt::AlignVCenter">
-      <widget class="QLabel" name="labelDiagram">
+     <item>
+      <layout class="QHBoxLayout" name="horizontalLayout_3">
+       <item>
+        <widget class="QToolButton" name="toolButtonAddImage">
+         <property name="enabled">
+          <bool>false</bool>
+         </property>
+         <property name="toolTip">
+          <string>Add image</string>
+         </property>
+         <property name="text">
+          <string notr="true">...</string>
+         </property>
+         <property name="icon">
+          <iconset resource="../../libs/vmisc/share/resources/icon.qrc">
+           <normaloff>:/icon/light/16x16/insert-image.png</normaloff>:/icon/light/16x16/insert-image.png</iconset>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QToolButton" name="toolButtonRemoveImage">
+         <property name="enabled">
+          <bool>false</bool>
+         </property>
+         <property name="toolTip">
+          <string>Remove image</string>
+         </property>
+         <property name="text">
+          <string notr="true">...</string>
+         </property>
+         <property name="icon">
+          <iconset resource="../../libs/vmisc/share/resources/icon.qrc">
+           <normaloff>:/icon/light/16x16/remove-image.png</normaloff>:/icon/light/16x16/remove-image.png</iconset>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QToolButton" name="toolButtonSaveImage">
+         <property name="enabled">
+          <bool>false</bool>
+         </property>
+         <property name="toolTip">
+          <string>Save image</string>
+         </property>
+         <property name="text">
+          <string notr="true">...</string>
+         </property>
+         <property name="icon">
+          <iconset theme="document-save-as"/>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <spacer name="horizontalSpacer_2">
+         <property name="orientation">
+          <enum>Qt::Horizontal</enum>
+         </property>
+         <property name="sizeHint" stdset="0">
+          <size>
+           <width>40</width>
+           <height>20</height>
+          </size>
+         </property>
+        </spacer>
+       </item>
+      </layout>
+     </item>
+     <item alignment="Qt::AlignHCenter">
+      <widget class="VAspectRatioPixmapLabel" name="labelDiagram">
        <property name="sizePolicy">
         <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
          <horstretch>0</horstretch>
@@ -1287,7 +1348,7 @@
         </sizepolicy>
        </property>
        <property name="text">
-        <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:340pt;&quot;&gt;?&lt;/span&gt;&lt;/p&gt;&lt;p align=\&quot;center\&quot;&gt;Unknown measurement&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+        <string notr="true">&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:340pt;&quot;&gt;?&lt;/span&gt;&lt;/p&gt;&lt;p align=\&quot;center\&quot;&gt;Unknown measurement&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
        </property>
        <property name="scaledContents">
         <bool>false</bool>
@@ -1657,6 +1718,11 @@
    <extends>QPlainTextEdit</extends>
    <header>../vwidgets/vplaintextedit.h</header>
   </customwidget>
+  <customwidget>
+   <class>VAspectRatioPixmapLabel</class>
+   <extends>QLabel</extends>
+   <header>../vwidgets/vaspectratiopixmaplabel.h</header>
+  </customwidget>
  </customwidgets>
  <resources>
   <include location="share/resources/tapeicon.qrc"/>
@@ -1665,7 +1731,7 @@
  <connections>
   <connection>
    <sender>actionMeasurementDiagram</sender>
-   <signal>toggled(bool)</signal>
+   <signal>triggered(bool)</signal>
    <receiver>dockWidgetDiagram</receiver>
    <slot>setVisible(bool)</slot>
    <hints>

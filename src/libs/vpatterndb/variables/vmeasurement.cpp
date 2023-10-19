@@ -33,6 +33,7 @@
 #include <QtDebug>
 
 #include "../ifc/ifcdef.h"
+#include "../ifc/xml/vpatternimage.h"
 #include "vmeasurement_p.h"
 #include "vvariable.h"
 
@@ -387,4 +388,16 @@ auto VMeasurement::GetCorrections() const -> QMap<QString, qreal>
 void VMeasurement::SetCorrections(const QMap<QString, qreal> &corrections)
 {
     d->corrections = corrections;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+auto VMeasurement::GetImage() const -> VPatternImage
+{
+    return d->image;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VMeasurement::SetImage(const VPatternImage &image)
+{
+    d->image = image;
 }

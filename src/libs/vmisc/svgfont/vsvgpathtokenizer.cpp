@@ -58,22 +58,22 @@ auto IsCommand(const QChar &ch) -> bool
 //---------------------------------------------------------------------------------------------------------------------
 auto IsSeparator(const QString &currentToken, const QChar &ch) -> bool
 {
-    if (ch.isSpace() || ch == ',')
+    if (ch.isSpace() || ch == ','_L1)
     {
         return true;
     }
 
-    if (ch == '.' && currentToken.contains(ch))
+    if (ch == '.'_L1 && currentToken.contains(ch))
     {
         return true;
     }
 
-    if (ch == '-' && !currentToken.isEmpty() && Back(currentToken) != 'e' && Back(currentToken) != 'E')
+    if (ch == '-'_L1 && !currentToken.isEmpty() && Back(currentToken) != 'e'_L1 && Back(currentToken) != 'E'_L1)
     {
         return true;
     }
 
-    if (ch == '+' && !currentToken.isEmpty() && Back(currentToken) != 'e' && Back(currentToken) != 'E')
+    if (ch == '+'_L1 && !currentToken.isEmpty() && Back(currentToken) != 'e'_L1 && Back(currentToken) != 'E'_L1)
     {
         return true;
     }

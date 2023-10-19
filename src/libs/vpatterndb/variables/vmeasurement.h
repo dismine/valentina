@@ -41,6 +41,7 @@
 
 class VContainer;
 class VMeasurementData;
+class VPatternImage;
 
 /**
  * @brief The VMeasurement class keep data row of multisize table
@@ -116,6 +117,9 @@ public:
 
     auto GetCorrections() const -> QMap<QString, qreal>;
     void SetCorrections(const QMap<QString, qreal> &corrections);
+
+    auto GetImage() const -> VPatternImage;
+    void SetImage(const VPatternImage &image);
 
     static auto CorrectionHash(qreal baseA, qreal baseB = 0, qreal baseC = 0) -> QString;
 

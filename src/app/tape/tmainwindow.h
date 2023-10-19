@@ -29,7 +29,9 @@
 #ifndef TMAINWINDOW_H
 #define TMAINWINDOW_H
 
+#include <QPointer>
 #include <QTableWidget>
+#include <QTemporaryFile>
 
 #include "../vformat/vmeasurements.h"
 #include "../vmisc/def.h"
@@ -108,6 +110,11 @@ private slots:
     void MoveBottom();
     void Fx();
 
+    void AddImage();
+    void RemoveImage();
+    void SaveImage();
+    void ShowImage();
+
     void AddCustom();
     void AddKnown();
     void AddSeparator();
@@ -179,6 +186,8 @@ private:
 
     QVector<QObject *> m_hackedWidgets{};
 
+    QPointer<QTemporaryFile> m_tmpImage{};
+
     struct MultisizeMeasurement
     {
         MultisizeMeasurement() = default;
@@ -235,7 +244,7 @@ private:
     static auto ClearCustomName(const QString &name) -> QString;
 
     auto EvalFormula(const QString &formula, bool fromUser, VContainer *data, QLabel *label, bool specialUnits) -> bool;
-    void ShowMDiagram(const QString &name);
+    void ShowMDiagram(const QSharedPointer<VMeasurement> &m);
 
     auto Open(const QString &pathTo, const QString &filter) -> QString;
     void UpdatePadlock(bool ro);
@@ -278,6 +287,10 @@ private:
     auto OrderedMeasurments() const -> QMap<int, QSharedPointer<VMeasurement>>;
 
     void InitIcons();
+
+    static auto UnknownMeasurementImage() -> QString;
+
+    void RetranslateMDiagram();
 };
 
 #endif // TMAINWINDOW_H

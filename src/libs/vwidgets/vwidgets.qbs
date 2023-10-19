@@ -14,6 +14,8 @@ VLib {
     name: "VWidgetsLib"
     files: [
         "qtcolorpicker.cpp",
+        "vaspectratiopixmaplabel.cpp",
+        "vaspectratiopixmaplabel.h",
         "vcomboboxdelegate.cpp",
         "vdecorationaligningdelegate.cpp",
         "velidedlabel.cpp",

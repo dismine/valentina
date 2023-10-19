@@ -201,5 +201,13 @@
         <file>icon/light/32x32/put_after.png</file>
         <file>icon/dark/32x32/put_after@2x.png</file>
         <file>icon/dark/32x32/put_after.png</file>
+        <file>icon/light/16x16/remove-image@2x.png</file>
+        <file>icon/light/16x16/remove-image.png</file>
+        <file>icon/light/16x16/insert-image@2x.png</file>
+        <file>icon/light/16x16/insert-image.png</file>
+        <file>icon/dark/16x16/remove-image@2x.png</file>
+        <file>icon/dark/16x16/remove-image.png</file>
+        <file>icon/dark/16x16/insert-image@2x.png</file>
+        <file>icon/dark/16x16/insert-image.png</file>
     </qresource>
 </RCC>

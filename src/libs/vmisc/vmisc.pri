@@ -30,7 +30,8 @@ SOURCES += \
     $$PWD/dialogs/dialogexporttocsv.cpp \
     $$PWD/literals.cpp \
     $$PWD/vmodifierkey.cpp \
-    $$PWD/dialogs/dialogselectlanguage.cpp
+    $$PWD/dialogs/dialogselectlanguage.cpp \
+    $$PWD/vaspectratiopixmaplabel.cpp
 
 *msvc*:SOURCES += $$PWD/stable.cpp
 
@@ -123,7 +124,8 @@ HEADERS += \
     $$PWD/backport/text.h \
     $$PWD/dialogs/dialogselectlanguage.h \
     $$PWD/fpm/fixed.hpp \
-    $$PWD/fpm/math.hpp
+    $$PWD/fpm/math.hpp \
+    $$PWD/vaspectratiopixmaplabel.h
 
 contains(DEFINES, APPIMAGE) {
     SOURCES += \

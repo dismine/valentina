@@ -31,6 +31,7 @@
 
 #include <QSharedData>
 
+#include "../ifc/xml/vpatternimage.h"
 #include "../vcontainer.h"
 
 QT_WARNING_PUSH
@@ -77,6 +78,8 @@ public:
     IMD dimension{IMD::N}; // NOLINT(misc-non-private-member-variables-in-classes)
 
     MeasurementType varType{MeasurementType::Measurement}; // NOLINT(misc-non-private-member-variables-in-classes)
+
+    VPatternImage image{}; // NOLINT(misc-non-private-member-variables-in-classes)
 
 private:
     Q_DISABLE_ASSIGN_MOVE(VMeasurementData) // NOLINT

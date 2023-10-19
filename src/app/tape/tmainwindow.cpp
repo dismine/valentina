@@ -28,7 +28,9 @@
 
 #include "tmainwindow.h"
 #include "../ifc/ifcdef.h"
+#include "../ifc/xml/utils.h"
 #include "../ifc/xml/vpatternconverter.h"
+#include "../ifc/xml/vpatternimage.h"
 #include "../ifc/xml/vvitconverter.h"
 #include "../ifc/xml/vvstconverter.h"
 #include "../qmuparser/qmudef.h"
@@ -46,6 +48,7 @@
 #include "../vpatterndb/variables/vmeasurement.h"
 #include "../vpatterndb/vcontainer.h"
 #include "../vtools/dialogs/support/dialogeditwrongformula.h"
+#include "../vwidgets/vaspectratiopixmaplabel.h"
 #include "def.h"
 #include "dialogs/dialogabouttape.h"
 #include "dialogs/dialogdimensioncustomnames.h"
@@ -78,9 +81,12 @@
 #endif
 
 #include <QComboBox>
+#include <QDesktopServices>
 #include <QFileDialog>
 #include <QFileInfo>
 #include <QMessageBox>
+#include <QMimeType>
+#include <QPixmap>
 #include <QProcess>
 #include <QTimer>
 #include <QtNumeric>
@@ -268,6 +274,8 @@ TMainWindow::TMainWindow(QWidget *parent)
     InitIcons();
 
     VAbstractApplication::VApp()->Settings()->GetOsSeparator() ? setLocale(QLocale()) : setLocale(QLocale::c());
+
+    ui->labelDiagram->setText(UnknownMeasurementImage());
 
     ui->lineEditName->setClearButtonEnabled(true);
     ui->lineEditFullName->setClearButtonEnabled(true);
@@ -784,6 +792,8 @@ void TMainWindow::changeEvent(QEvent *event)
         UpdateWindowTitle();
 
         InitMeasurementUnits();
+
+        RetranslateMDiagram();
 
         if (m_mType == MeasurementsType::Multisize)
         {
@@ -1315,7 +1325,7 @@ void TMainWindow::SavePMSystem(int index)
 //---------------------------------------------------------------------------------------------------------------------
 void TMainWindow::Remove()
 {
-    ShowMDiagram(QString());
+    ShowMDiagram(QSharedPointer<VMeasurement>());
     const int row = ui->tableWidget->currentRow();
 
     if (row == -1)
@@ -1522,6 +1532,206 @@ void TMainWindow::Fx()
         ui->tableWidget->selectRow(row);
     }
     delete dialog;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void TMainWindow::AddImage()
+{
+    const int row = ui->tableWidget->currentRow();
+
+    if (row == -1)
+    {
+        ui->toolButtonAddImage->setDisabled(true);
+        return;
+    }
+
+    VTapeSettings *settings = MApplication::VApp()->TapeSettings();
+
+    const QString filePath =
+        QFileDialog::getOpenFileName(this, tr("Measurement image"), settings->GetPathCustomImage(),
+                                     PrepareImageFilters(), nullptr, VAbstractApplication::VApp()->NativeFileDialog());
+
+    if (!filePath.isEmpty())
+    {
+        if (QFileInfo::exists(filePath))
+        {
+            settings->SetPathCustomImage(QFileInfo(filePath).absolutePath());
+        }
+
+        VPatternImage image = VPatternImage::FromFile(filePath);
+
+        if (not image.IsValid())
+        {
+            qCritical() << tr("Invalid image. Error: %1").arg(image.ErrorString());
+            return;
+        }
+
+        const QTableWidgetItem *nameField = ui->tableWidget->item(ui->tableWidget->currentRow(), ColumnName);
+        m_m->SetMImage(nameField->data(Qt::UserRole).toString(), image);
+
+        MeasurementsWereSaved(false);
+
+        RefreshData();
+        m_search->RefreshList(ui->lineEditFind->text());
+
+        ui->tableWidget->blockSignals(true);
+        ui->tableWidget->selectRow(row);
+        ui->tableWidget->blockSignals(false);
+
+        ShowNewMData(false);
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void TMainWindow::RemoveImage()
+{
+    const int row = ui->tableWidget->currentRow();
+
+    if (row == -1)
+    {
+        ui->toolButtonRemoveImage->setDisabled(true);
+        return;
+    }
+
+    const QTableWidgetItem *nameField = ui->tableWidget->item(ui->tableWidget->currentRow(), ColumnName);
+    m_m->SetMImage(nameField->data(Qt::UserRole).toString(), VPatternImage());
+
+    MeasurementsWereSaved(false);
+
+    RefreshData();
+    m_search->RefreshList(ui->lineEditFind->text());
+
+    ui->tableWidget->blockSignals(true);
+    ui->tableWidget->selectRow(row);
+    ui->tableWidget->blockSignals(false);
+
+    ShowNewMData(false);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void TMainWindow::SaveImage()
+{
+    const int row = ui->tableWidget->currentRow();
+
+    if (row == -1)
+    {
+        ui->toolButtonSaveImage->setDisabled(true);
+        return;
+    }
+
+    const QTableWidgetItem *nameField = ui->tableWidget->item(ui->tableWidget->currentRow(), ColumnName); // name
+    SCASSERT(nameField != nullptr)
+    QSharedPointer<VMeasurement> meash;
+
+    try
+    {
+        // Translate to internal look.
+        meash = m_data->GetVariable<VMeasurement>(nameField->data(Qt::UserRole).toString());
+    }
+    catch (const VExceptionBadId &e)
+    {
+        Q_UNUSED(e)
+        qCritical() << "Unable to get measurement";
+        return;
+    }
+
+    const VPatternImage image = meash->GetImage();
+
+    if (not image.IsValid())
+    {
+        qCritical() << tr("Unable to save image. Error: %1").arg(image.ErrorString());
+        return;
+    }
+
+    VTapeSettings *settings = MApplication::VApp()->TapeSettings();
+
+    QMimeType mime = image.MimeTypeFromData();
+    QString path = settings->GetPathCustomImage() + QDir::separator() + tr("untitled");
+
+    QStringList suffixes = mime.suffixes();
+    if (not suffixes.isEmpty())
+    {
+        path += '.'_L1 + suffixes.at(0);
+    }
+
+    QString filter = mime.filterString();
+    QString filename = QFileDialog::getSaveFileName(this, tr("Save Image"), path, filter, nullptr,
+                                                    VAbstractApplication::VApp()->NativeFileDialog());
+    if (not filename.isEmpty())
+    {
+        if (QFileInfo::exists(filename))
+        {
+            settings->SetPathCustomImage(QFileInfo(filename).absolutePath());
+        }
+
+        QFile file(filename);
+        if (file.open(QIODevice::WriteOnly))
+        {
+            file.write(QByteArray::fromBase64(image.ContentData()));
+        }
+        else
+        {
+            qCritical() << tr("Unable to save image. Error: %1").arg(file.errorString());
+        }
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void TMainWindow::ShowImage()
+{
+    const int row = ui->tableWidget->currentRow();
+
+    if (row == -1)
+    {
+        ui->toolButtonSaveImage->setDisabled(true);
+        return;
+    }
+
+    const QTableWidgetItem *nameField = ui->tableWidget->item(ui->tableWidget->currentRow(), ColumnName); // name
+    SCASSERT(nameField != nullptr)
+    QSharedPointer<VMeasurement> meash;
+
+    try
+    {
+        // Translate to internal look.
+        meash = m_data->GetVariable<VMeasurement>(nameField->data(Qt::UserRole).toString());
+    }
+    catch (const VExceptionBadId &e)
+    {
+        Q_UNUSED(e)
+        qCritical() << "Unable to get measurement";
+        return;
+    }
+
+    const VPatternImage image = meash->GetImage();
+
+    if (not image.IsValid())
+    {
+        qCritical() << tr("Unable to show image. Error: %1").arg(image.ErrorString());
+        return;
+    }
+
+    QMimeType mime = image.MimeTypeFromData();
+    QString name = QDir::tempPath() + QDir::separator() + QStringLiteral("image.XXXXXX");
+
+    QStringList suffixes = mime.suffixes();
+    if (not suffixes.isEmpty())
+    {
+        name += '.'_L1 + suffixes.at(0);
+    }
+
+    delete m_tmpImage;
+    m_tmpImage = new QTemporaryFile(name, this);
+    if (m_tmpImage->open())
+    {
+        m_tmpImage->write(QByteArray::fromBase64(image.ContentData()));
+        m_tmpImage->flush();
+        QDesktopServices::openUrl(QUrl::fromLocalFile(m_tmpImage->fileName()));
+    }
+    else
+    {
+        qCritical() << "Unable to open temp file";
+    }
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -1829,7 +2039,11 @@ void TMainWindow::ShowNewMData(bool fresh)
         return;
     }
 
-    ShowMDiagram(meash->GetName());
+    ShowMDiagram(meash);
+
+    ui->toolButtonAddImage->setEnabled(meash->IsCustom());
+    ui->toolButtonRemoveImage->setEnabled(meash->IsCustom() && !meash->GetImage().IsNull());
+    ui->toolButtonSaveImage->setEnabled(meash->IsCustom() && !meash->GetImage().IsNull());
 
     ui->labelFullName->setVisible(meash->GetType() == VarType::Measurement);
     ui->lineEditFullName->setVisible(meash->GetType() == VarType::Measurement);
@@ -1963,21 +2177,48 @@ void TMainWindow::ShowNewMData(bool fresh)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void TMainWindow::ShowMDiagram(const QString &name)
+void TMainWindow::ShowMDiagram(const QSharedPointer<VMeasurement> &m)
 {
-    const VTranslateVars *trv = VAbstractApplication::VApp()->TrVars();
-    const QString number = trv->MNumber(name);
+    ui->labelDiagram->setPixmap(QPixmap());
+    ui->labelDiagram->setCursor(QCursor());
+    ui->labelDiagram->disconnect();
 
-    if (number.isEmpty())
+    if (m.isNull())
     {
-        ui->labelDiagram->setText(tr("<html><head/><body><p><span style=\" font-size:340pt;\">?</span></p>"
-                                     "<p align=\"center\">Unknown measurement</p></body></html>"));
+        ui->labelDiagram->setText(UnknownMeasurementImage());
+        return;
+    }
+
+    if (m->IsCustom())
+    {
+        VPatternImage image = m->GetImage();
+        if (image.IsValid())
+        {
+            ui->labelDiagram->setCursor(Qt::PointingHandCursor);
+            ui->labelDiagram->setPixmap(image.GetPixmap());
+            connect(ui->labelDiagram, &VAspectRatioPixmapLabel::clicked, this, &TMainWindow::ShowImage,
+                    Qt::UniqueConnection);
+        }
+        else
+        {
+            ui->labelDiagram->setText(UnknownMeasurementImage());
+        }
     }
     else
     {
-        ui->labelDiagram->setText(u"<html><head/><body><p align=\"center\">%1</p>"
-                                  u"<p align=\"center\"><b>%2</b>. <i>%3</i></p></body></html>"_s.arg(
-                                      DialogMDataBase::ImgTag(number), number, trv->GuiText(name)));
+        const VTranslateVars *trv = VAbstractApplication::VApp()->TrVars();
+        const QString number = trv->MNumber(m->GetName());
+
+        if (number.isEmpty())
+        {
+            ui->labelDiagram->setText(UnknownMeasurementImage());
+        }
+        else
+        {
+            ui->labelDiagram->setText(u"<html><head/><body><p align=\"center\">%1</p>"
+                                      u"<p align=\"center\"><b>%2</b>. <i>%3</i></p></body></html>"_s.arg(
+                                          DialogMDataBase::ImgTag(number), number, trv->GuiText(m->GetName())));
+        }
     }
 }
 
@@ -2860,6 +3101,14 @@ void TMainWindow::InitWindow()
     connect(ui->toolButtonUp, &QToolButton::clicked, this, &TMainWindow::MoveUp);
     connect(ui->toolButtonDown, &QToolButton::clicked, this, &TMainWindow::MoveDown);
     connect(ui->toolButtonBottom, &QToolButton::clicked, this, &TMainWindow::MoveBottom);
+
+    ui->toolButtonAddImage->setDisabled(true);
+    ui->toolButtonRemoveImage->setDisabled(true);
+    ui->toolButtonSaveImage->setDisabled(true);
+
+    connect(ui->toolButtonAddImage, &QToolButton::clicked, this, &TMainWindow::AddImage);
+    connect(ui->toolButtonRemoveImage, &QToolButton::clicked, this, &TMainWindow::RemoveImage);
+    connect(ui->toolButtonSaveImage, &QToolButton::clicked, this, &TMainWindow::SaveImage);
 
     connect(ui->lineEditName, &QLineEdit::textEdited, this, &TMainWindow::SaveMName);
     connect(ui->plainTextEditDescription, &QPlainTextEdit::textChanged, this, &TMainWindow::SaveMDescription);
@@ -4408,10 +4657,45 @@ void TMainWindow::InitIcons()
 {
     QString iconResource = QStringLiteral("icon");
     ui->toolButtonExpr->setIcon(VTheme::GetIconResource(iconResource, QStringLiteral("24x24/fx.png")));
+    ui->toolButtonAddImage->setIcon(VTheme::GetIconResource(iconResource, QStringLiteral("16x16/insert-image.png")));
+    ui->toolButtonRemoveImage->setIcon(VTheme::GetIconResource(iconResource, QStringLiteral("16x16/remove-image.png")));
 
     QString tapeIconResource = QStringLiteral("tapeicon");
     ui->actionMeasurementDiagram->setIcon(
         VTheme::GetIconResource(tapeIconResource, QStringLiteral("24x24/mannequin.png")));
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+auto TMainWindow::UnknownMeasurementImage() -> QString
+{
+    return u"<html><head/><body><p><span style=\" font-size:340pt;\">?</span></p>"
+           u"<p align=\"center\">%1</p></body></html>"_s.arg(tr("Unknown measurement"));
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void TMainWindow::RetranslateMDiagram()
+{
+    if (ui->tableWidget->rowCount() <= 0 || ui->tableWidget->currentRow() == -1)
+    {
+        return;
+    }
+
+    const QTableWidgetItem *nameField = ui->tableWidget->item(ui->tableWidget->currentRow(), ColumnName); // name
+    SCASSERT(nameField != nullptr)
+    QSharedPointer<VMeasurement> meash;
+
+    try
+    {
+        // Translate to internal look.
+        meash = m_data->GetVariable<VMeasurement>(nameField->data(Qt::UserRole).toString());
+    }
+    catch (const VExceptionBadId &e)
+    {
+        Q_UNUSED(e)
+        return;
+    }
+
+    ShowMDiagram(meash);
 }
 
 //---------------------------------------------------------------------------------------------------------------------

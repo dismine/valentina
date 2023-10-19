@@ -29,19 +29,19 @@
 #ifndef VMEASUREMENTCONVERTER_H
 #define VMEASUREMENTCONVERTER_H
 
-
 #include <QCoreApplication>
 #include <QString>
 #include <QtGlobal>
 
-#include "vabstractmconverter.h"
 #include "../vmisc/projectversion.h"
+#include "vabstractmconverter.h"
 
 class QDomElement;
 
 class VVSTConverter final : public VAbstractMConverter
 {
     Q_DECLARE_TR_FUNCTIONS(VVSTConverter) // NOLINT
+
 public:
     explicit VVSTConverter(const QString &fileName);
     virtual ~VVSTConverter() = default;
@@ -49,9 +49,9 @@ public:
     static const QString MeasurementMaxVerStr;
     static const QString CurrentSchema;
     static Q_DECL_CONSTEXPR const unsigned MeasurementMinVer = FormatVersion(0, 3, 0);
-    static Q_DECL_CONSTEXPR const unsigned MeasurementMaxVer = FormatVersion(0, 5, 4);
+    static Q_DECL_CONSTEXPR const unsigned MeasurementMaxVer = FormatVersion(0, 6, 0);
 
-    static auto XSDSchemas() -> QHash <unsigned, QString>;
+    static auto XSDSchemas() -> QHash<unsigned, QString>;
 
 protected:
     virtual auto MinVer() const -> unsigned override;
@@ -64,7 +64,7 @@ protected:
     virtual void DowngradeToCurrentMaxVersion() override;
     virtual auto IsReadOnly() const -> bool override;
 
-    auto Schemas() const -> QHash <unsigned, QString> override;
+    auto Schemas() const -> QHash<unsigned, QString> override;
 
 private:
     Q_DISABLE_COPY_MOVE(VVSTConverter) // NOLINT
@@ -88,6 +88,7 @@ private:
     void ToV0_4_2();
     void ToV0_5_0();
     void ToV0_5_4();
+    void ToV0_6_0();
 };
 
 //---------------------------------------------------------------------------------------------------------------------

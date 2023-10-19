@@ -43,6 +43,7 @@
 #include <QUrl>
 
 #include "../core/vapplication.h"
+#include "../vmisc/vabstractvalapplication.h"
 #include "../vmisc/vvalentinasettings.h"
 #include "../vpatterndb/vcontainer.h"
 #include "../xml/vpattern.h"
@@ -418,11 +419,18 @@ void DialogPatternProperties::InitImage()
 //---------------------------------------------------------------------------------------------------------------------
 void DialogPatternProperties::ChangeImage()
 {
+    VValentinaSettings *settings = VAbstractValApplication::VApp()->ValentinaSettings();
+
     const QString fileName =
-        QFileDialog::getOpenFileName(this, tr("Image for pattern"), QString(), PrepareImageFilters(), nullptr,
-                                     VAbstractApplication::VApp()->NativeFileDialog());
+        QFileDialog::getOpenFileName(this, tr("Image for pattern"), settings->GetPathCustomImage(),
+                                     PrepareImageFilters(), nullptr, VAbstractApplication::VApp()->NativeFileDialog());
     if (not fileName.isEmpty())
     {
+        if (QFileInfo::exists(fileName))
+        {
+            settings->SetPathCustomImage(QFileInfo(fileName).absolutePath());
+        }
+
         VPatternImage image = VPatternImage::FromFile(fileName);
 
         if (not image.IsValid())
@@ -454,13 +462,15 @@ void DialogPatternProperties::SaveImage()
         return;
     }
 
+    VValentinaSettings *settings = VAbstractValApplication::VApp()->ValentinaSettings();
+
     QMimeType mime = image.MimeTypeFromData();
-    QString path = QDir::homePath() + QDir::separator() + tr("untitled");
+    QString path = settings->GetPathCustomImage() + QDir::separator() + tr("untitled");
 
     QStringList suffixes = mime.suffixes();
     if (not suffixes.isEmpty())
     {
-        path += '.' + suffixes.at(0);
+        path += '.'_L1 + suffixes.at(0);
     }
 
     QString filter = mime.filterString();
@@ -468,6 +478,11 @@ void DialogPatternProperties::SaveImage()
                                                     VAbstractApplication::VApp()->NativeFileDialog());
     if (not filename.isEmpty())
     {
+        if (QFileInfo::exists(filename))
+        {
+            settings->SetPathCustomImage(QFileInfo(filename).absolutePath());
+        }
+
         QFile file(filename);
         if (file.open(QIODevice::WriteOnly))
         {
@@ -497,7 +512,7 @@ void DialogPatternProperties::ShowImage()
     QStringList suffixes = mime.suffixes();
     if (not suffixes.isEmpty())
     {
-        name += '.' + suffixes.at(0);
+        name += '.'_L1 + suffixes.at(0);
     }
 
     delete m_tmpImage;
@@ -510,7 +525,7 @@ void DialogPatternProperties::ShowImage()
     }
     else
     {
-        qCritical() << tr("Unable to open temp file");
+        qCritical() << "Unable to open temp file";
     }
 }
 

@@ -80,6 +80,7 @@
         <file>schema/multisize_measurements/v0.5.2.xsd</file>
         <file>schema/multisize_measurements/v0.5.3.xsd</file>
         <file>schema/multisize_measurements/v0.5.4.xsd</file>
+        <file>schema/multisize_measurements/v0.6.0.xsd</file>
         <file>schema/individual_measurements/v0.2.0.xsd</file>
         <file>schema/individual_measurements/v0.3.0.xsd</file>
         <file>schema/individual_measurements/v0.3.1.xsd</file>
@@ -89,6 +90,7 @@
         <file>schema/individual_measurements/v0.5.0.xsd</file>
         <file>schema/individual_measurements/v0.5.1.xsd</file>
         <file>schema/individual_measurements/v0.5.2.xsd</file>
+        <file>schema/individual_measurements/v0.6.0.xsd</file>
         <file>schema/label_template/v1.0.0.xsd</file>
         <file>schema/watermark/v1.0.0.xsd</file>
         <file>schema/watermark/v1.1.0.xsd</file>

@@ -55,8 +55,8 @@ using namespace Qt::Literals::StringLiterals;
  */
 
 const QString VVITConverter::MeasurementMinVerStr = QStringLiteral("0.2.0");
-const QString VVITConverter::MeasurementMaxVerStr = QStringLiteral("0.5.2");
-const QString VVITConverter::CurrentSchema = QStringLiteral("://schema/individual_measurements/v0.5.2.xsd");
+const QString VVITConverter::MeasurementMaxVerStr = QStringLiteral("0.6.0");
+const QString VVITConverter::CurrentSchema = QStringLiteral("://schema/individual_measurements/v0.6.0.xsd");
 
 // VVITConverter::MeasurementMinVer; // <== DON'T FORGET TO UPDATE TOO!!!!
 // VVITConverter::MeasurementMaxVer; // <== DON'T FORGET TO UPDATE TOO!!!!
@@ -96,7 +96,8 @@ auto VVITConverter::XSDSchemas() -> QHash<unsigned int, QString>
         std::make_pair(FormatVersion(0, 4, 0), QStringLiteral("://schema/individual_measurements/v0.4.0.xsd")),
         std::make_pair(FormatVersion(0, 5, 0), QStringLiteral("://schema/individual_measurements/v0.5.0.xsd")),
         std::make_pair(FormatVersion(0, 5, 1), QStringLiteral("://schema/individual_measurements/v0.5.1.xsd")),
-        std::make_pair(FormatVersion(0, 5, 2), CurrentSchema),
+        std::make_pair(FormatVersion(0, 5, 2), QStringLiteral("://schema/individual_measurements/v0.5.2.xsd")),
+        std::make_pair(FormatVersion(0, 6, 0), CurrentSchema),
     };
 
     return schemas;
@@ -125,10 +126,11 @@ void VVITConverter::ApplyPatches()
         case (FormatVersion(0, 4, 0)):
         case (FormatVersion(0, 5, 0)):
         case (FormatVersion(0, 5, 1)):
-            ToV0_5_2();
+        case (FormatVersion(0, 5, 2)):
+            ToV0_6_0();
             ValidateXML(CurrentSchema);
             Q_FALLTHROUGH();
-        case (FormatVersion(0, 5, 2)):
+        case (FormatVersion(0, 6, 0)):
             break;
         default:
             InvalidVersion(m_ver);
@@ -147,7 +149,7 @@ void VVITConverter::DowngradeToCurrentMaxVersion()
 auto VVITConverter::IsReadOnly() const -> bool
 {
     // Check if attribute read-only was not changed in file format
-    Q_STATIC_ASSERT_X(VVITConverter::MeasurementMaxVer == FormatVersion(0, 5, 2), "Check attribute read-only.");
+    Q_STATIC_ASSERT_X(VVITConverter::MeasurementMaxVer == FormatVersion(0, 6, 0), "Check attribute read-only.");
 
     // Possibly in future attribute read-only will change position etc.
     // For now position is the same for all supported format versions.
@@ -409,11 +411,11 @@ void VVITConverter::ToV0_4_0()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VVITConverter::ToV0_5_2()
+void VVITConverter::ToV0_6_0()
 {
-    // TODO. Delete if minimal supported version is 0.5.2
-    Q_STATIC_ASSERT_X(VVITConverter::MeasurementMinVer < FormatVersion(0, 5, 2), "Time to refactor the code.");
+    // TODO. Delete if minimal supported version is 0.6.0
+    Q_STATIC_ASSERT_X(VVITConverter::MeasurementMinVer < FormatVersion(0, 6, 0), "Time to refactor the code.");
 
-    SetVersion(QStringLiteral("0.5.2"));
+    SetVersion(QStringLiteral("0.6.0"));
     Save();
 }

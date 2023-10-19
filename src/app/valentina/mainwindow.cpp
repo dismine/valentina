@@ -5011,13 +5011,13 @@ void MainWindow::SaveBackgroundImage(const QUuid &id)
         QStringList suffixes = mime.suffixes();
         if (not suffixes.isEmpty())
         {
-            path += '.' + suffixes.at(0);
+            path += '.'_L1 + suffixes.at(0);
         }
 
         filters.append(mime.filterString());
     }
 
-    filters.append(tr("All files") + QStringLiteral(" (*.*)"));
+    filters.append(tr("All files") + " (*.*)"_L1);
 
     QString filter = filters.join(QStringLiteral(";;"));
 
