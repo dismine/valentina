@@ -2743,12 +2743,12 @@
         <translation>Berekening</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/support/dialogeditwrongformula.ui" line="368"/>
+        <location filename="../../src/libs/vtools/dialogs/support/dialogeditwrongformula.ui" line="371"/>
         <source>Name</source>
         <translation>Naam</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/support/dialogeditwrongformula.ui" line="373"/>
+        <location filename="../../src/libs/vtools/dialogs/support/dialogeditwrongformula.ui" line="376"/>
         <source>Full name</source>
         <translation>Volledige naam</translation>
     </message>
@@ -6089,34 +6089,34 @@ Toch de instellingen aanpassen?</translation>
         <translation>Geen afbeelding</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/dialogs/dialogpatternproperties.cpp" line="384"/>
+        <location filename="../../src/app/valentina/dialogs/dialogpatternproperties.cpp" line="385"/>
         <source>Delete image</source>
         <translation>Verwijder afbeelding</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/dialogs/dialogpatternproperties.cpp" line="385"/>
-        <location filename="../../src/app/valentina/dialogs/dialogpatternproperties.cpp" line="393"/>
+        <location filename="../../src/app/valentina/dialogs/dialogpatternproperties.cpp" line="386"/>
+        <location filename="../../src/app/valentina/dialogs/dialogpatternproperties.cpp" line="394"/>
         <source>Change image</source>
         <translation>Verander afbeelding</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/dialogs/dialogpatternproperties.cpp" line="386"/>
+        <location filename="../../src/app/valentina/dialogs/dialogpatternproperties.cpp" line="387"/>
         <source>Save image to file</source>
         <translation>Sla afbeelding op in bestand</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/dialogs/dialogpatternproperties.cpp" line="387"/>
+        <location filename="../../src/app/valentina/dialogs/dialogpatternproperties.cpp" line="388"/>
         <source>Show image</source>
         <translation>Toon afbeelding</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/dialogs/dialogpatternproperties.cpp" line="420"/>
+        <location filename="../../src/app/valentina/dialogs/dialogpatternproperties.cpp" line="425"/>
         <source>Image for pattern</source>
         <translation>Afbeelding voor patroon</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/dialogs/dialogpatternproperties.cpp" line="523"/>
-        <location filename="../../src/app/valentina/dialogs/dialogpatternproperties.cpp" line="525"/>
+        <location filename="../../src/app/valentina/dialogs/dialogpatternproperties.cpp" line="543"/>
+        <location filename="../../src/app/valentina/dialogs/dialogpatternproperties.cpp" line="545"/>
         <source>Label template</source>
         <translation>Label sjabloon</translation>
     </message>
@@ -6133,7 +6133,7 @@ Toch de instellingen aanpassen?</translation>
         <translation type="vanished">Sla bestand op</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/dialogs/dialogpatternproperties.cpp" line="453"/>
+        <location filename="../../src/app/valentina/dialogs/dialogpatternproperties.cpp" line="468"/>
         <source>untitled</source>
         <translation>naamloos</translation>
     </message>
@@ -6149,17 +6149,17 @@ Toch de instellingen aanpassen?</translation>
         <translation>Toon in Explorer</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/dialogs/dialogpatternproperties.cpp" line="82"/>
+        <location filename="../../src/app/valentina/dialogs/dialogpatternproperties.cpp" line="83"/>
         <source>&lt;Empty&gt;</source>
         <translation>&lt;Leeg&gt;</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/dialogs/dialogpatternproperties.cpp" line="83"/>
+        <location filename="../../src/app/valentina/dialogs/dialogpatternproperties.cpp" line="84"/>
         <source>File was not saved yet.</source>
         <translation>Bestand was nog niet opgeslagen.</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/dialogs/dialogpatternproperties.cpp" line="97"/>
+        <location filename="../../src/app/valentina/dialogs/dialogpatternproperties.cpp" line="98"/>
         <source>Show in Finder</source>
         <translation>Toon in Finder</translation>
     </message>
@@ -6232,29 +6232,24 @@ Toch de instellingen aanpassen?</translation>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/dialogs/dialogpatternproperties.cpp" line="428"/>
+        <location filename="../../src/app/valentina/dialogs/dialogpatternproperties.cpp" line="438"/>
         <source>Invalid image. Error: %1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/dialogs/dialogpatternproperties.cpp" line="448"/>
-        <location filename="../../src/app/valentina/dialogs/dialogpatternproperties.cpp" line="473"/>
+        <location filename="../../src/app/valentina/dialogs/dialogpatternproperties.cpp" line="461"/>
+        <location filename="../../src/app/valentina/dialogs/dialogpatternproperties.cpp" line="493"/>
         <source>Unable to save image. Error: %1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/dialogs/dialogpatternproperties.cpp" line="462"/>
+        <location filename="../../src/app/valentina/dialogs/dialogpatternproperties.cpp" line="477"/>
         <source>Save Image</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/dialogs/dialogpatternproperties.cpp" line="485"/>
+        <location filename="../../src/app/valentina/dialogs/dialogpatternproperties.cpp" line="505"/>
         <source>Unable to show image. Error: %1</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../../src/app/valentina/dialogs/dialogpatternproperties.cpp" line="508"/>
-        <source>Unable to open temp file</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -8441,31 +8436,31 @@ Toch de instellingen aanpassen?</translation>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.cpp" line="2298"/>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="4544"/>
         <source>Passmark</source>
-        <translation type="unfinished">Pasmarkering</translation>
+        <translation>Pasmarkering</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.cpp" line="2318"/>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="4564"/>
         <source>One line</source>
-        <translation type="unfinished">Een lijn</translation>
+        <translation>Een lijn</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.cpp" line="2321"/>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="4567"/>
         <source>Two lines</source>
-        <translation type="unfinished">Twee lijnen</translation>
+        <translation>Twee lijnen</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.cpp" line="2324"/>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="4570"/>
         <source>Three lines</source>
-        <translation type="unfinished">Drie lijnen</translation>
+        <translation>Drie lijnen</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.cpp" line="2327"/>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="4573"/>
         <source>T mark</source>
-        <translation type="unfinished">T markering</translation>
+        <translation>T markering</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.cpp" line="2331"/>
@@ -8483,13 +8478,13 @@ Toch de instellingen aanpassen?</translation>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.cpp" line="2338"/>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="4584"/>
         <source>U mark</source>
-        <translation type="unfinished">U markering</translation>
+        <translation>U markering</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.cpp" line="2341"/>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="4587"/>
         <source>Box mark</source>
-        <translation type="unfinished"></translation>
+        <translation>Vierkante markering</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.cpp" line="2344"/>
@@ -8501,7 +8496,7 @@ Toch de instellingen aanpassen?</translation>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.cpp" line="2348"/>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="4594"/>
         <source>Check uniqueness</source>
-        <translation type="unfinished"></translation>
+        <translation>Controller op uniek zijn</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.cpp" line="2353"/>
@@ -8513,7 +8508,7 @@ Toch de instellingen aanpassen?</translation>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.cpp" line="2359"/>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="4605"/>
         <source>Excluded</source>
-        <translation type="unfinished"></translation>
+        <translation>Uitgezonderd</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.cpp" line="2365"/>
@@ -8628,7 +8623,7 @@ Toch de instellingen aanpassen?</translation>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.cpp" line="2301"/>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="4547"/>
         <source>None</source>
-        <translation type="unfinished">Geen</translation>
+        <translation>Geen</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="3137"/>
@@ -14606,12 +14601,12 @@ Deze optie wordt actief na een herstart..</translation>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/libs/ifc/xml/utils.cpp" line="111"/>
+        <location filename="../../src/libs/ifc/xml/utils.cpp" line="113"/>
         <source>Images</source>
         <translation>Afbeeldingen</translation>
     </message>
     <message>
-        <location filename="../../src/libs/ifc/xml/utils.cpp" line="114"/>
+        <location filename="../../src/libs/ifc/xml/utils.cpp" line="116"/>
         <source>All files</source>
         <translation>Alle bestanden</translation>
     </message>
@@ -15369,8 +15364,8 @@ Deze optie wordt actief na een herstart..</translation>
     </message>
     <message>
         <location filename="../../src/app/tape/tmainwindow.ui" line="64"/>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="681"/>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="702"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="689"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="710"/>
         <source>Measurements</source>
         <translation>Maten</translation>
     </message>
@@ -15389,7 +15384,7 @@ Deze optie wordt actief na een herstart..</translation>
         <translation type="vanished">Open individueel ...</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="3230"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="3479"/>
         <source>Save</source>
         <translation>Opslaan</translation>
     </message>
@@ -15402,7 +15397,7 @@ Deze optie wordt actief na een herstart..</translation>
         <translation type="vanished">Afsluiten</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.ui" line="1356"/>
+        <location filename="../../src/app/tape/tmainwindow.ui" line="1417"/>
         <source>About &amp;Qt</source>
         <translation>Over &amp;Qt</translation>
     </message>
@@ -15415,17 +15410,17 @@ Deze optie wordt actief na een herstart..</translation>
         <translation type="vanished">Nieuw</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.ui" line="1395"/>
+        <location filename="../../src/app/tape/tmainwindow.ui" line="1456"/>
         <source>Add known</source>
         <translation>Voeg bekend toe</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.ui" line="1410"/>
+        <location filename="../../src/app/tape/tmainwindow.ui" line="1471"/>
         <source>Add custom</source>
         <translation>Voeg op maat toe</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.ui" line="1428"/>
+        <location filename="../../src/app/tape/tmainwindow.ui" line="1489"/>
         <source>Read only</source>
         <translation>Alleen lezen</translation>
     </message>
@@ -15434,50 +15429,50 @@ Deze optie wordt actief na een herstart..</translation>
         <translation type="vanished">Open standaard ...</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.ui" line="1452"/>
+        <location filename="../../src/app/tape/tmainwindow.ui" line="1513"/>
         <source>Open template</source>
         <translation>Open sjabloon</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.ui" line="1460"/>
+        <location filename="../../src/app/tape/tmainwindow.ui" line="1521"/>
         <source>Database</source>
         <translation>Archief</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.ui" line="1463"/>
+        <location filename="../../src/app/tape/tmainwindow.ui" line="1524"/>
         <source>Show information about all known measurement</source>
         <translation>Toon informatie over alle bekende maten</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.ui" line="1471"/>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="1231"/>
+        <location filename="../../src/app/tape/tmainwindow.ui" line="1532"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="1241"/>
         <source>Preferences</source>
         <translation>Voorkeuren</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="3562"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="3811"/>
         <source>untitled %1</source>
         <translation>naamloos %1</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="1667"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="1877"/>
         <source>This file already opened in another window.</source>
         <translation>Dit bestand is al geopend in een ander venster.</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="563"/>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="1700"/>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="3878"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="571"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="1910"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="4127"/>
         <source>File error.</source>
         <translation>Bestandsfout.</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="1081"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="1091"/>
         <source>Could not save file</source>
         <translation>Kon bestand niet opslaan</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="1013"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="1023"/>
         <source>measurements</source>
         <translation>Maten</translation>
     </message>
@@ -15490,17 +15485,17 @@ Deze optie wordt actief na een herstart..</translation>
         <translation type="vanished">Standaard maten(*.vst)</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="1035"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="1045"/>
         <source>Save as</source>
         <translation>Opslaan als</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="3903"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="4152"/>
         <source>&amp;New Window</source>
         <translation>&amp;Nieuw Venster</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="1503"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="1513"/>
         <source>Edit measurement</source>
         <translation>Verander maten</translation>
     </message>
@@ -15509,22 +15504,22 @@ Deze optie wordt actief na een herstart..</translation>
         <translation type="vanished">M_%1</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="2101"/>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="3625"/>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="3648"/>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="3664"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="2342"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="3874"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="3897"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="3913"/>
         <source>Error</source>
         <translation>Fout</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="2101"/>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="3625"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="2342"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="3874"/>
         <source>Empty field.</source>
         <translation>Leeg veld.</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="3664"/>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="3665"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="3913"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="3914"/>
         <source>Parser error: %1</source>
         <translation>Fout bij opsplitsen: %1</translation>
     </message>
@@ -15541,17 +15536,18 @@ Deze optie wordt actief na een herstart..</translation>
         <translation type="vanished">Maat:</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="648"/>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="664"/>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="799"/>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="1017"/>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="2421"/>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="2783"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="656"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="672"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="809"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="1027"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="2662"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="3024"/>
         <source>Individual measurements</source>
         <translation>Individuele maten</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="3566"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="1649"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="3815"/>
         <source>untitled</source>
         <translation>naamloos</translation>
     </message>
@@ -15560,7 +15556,7 @@ Deze optie wordt actief na een herstart..</translation>
         <translation type="vanished">&lt;Leeg&gt;</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="3224"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="3473"/>
         <source>Unsaved changes</source>
         <translation>Niet opgeslagen veranderingen</translation>
     </message>
@@ -15571,34 +15567,34 @@ Do you want to save your changes?</source>
 Wil je deze veranderingen opslaan?</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="3626"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="3875"/>
         <source>Empty field</source>
         <translation>Leeg veld</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="3659"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="3908"/>
         <source>Value</source>
         <translation>Waarde</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="3673"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="3922"/>
         <source>Open file</source>
         <translation>Open bestand</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.ui" line="1482"/>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="1657"/>
+        <location filename="../../src/app/tape/tmainwindow.ui" line="1543"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="1867"/>
         <source>Import from a pattern</source>
         <translation>Invoeren van een patroon</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="1653"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="1863"/>
         <source>Pattern files (*.val)</source>
         <translation>Patroon bestanden (*.val)</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="823"/>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="4478"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="833"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="4762"/>
         <source>Pattern unit:</source>
         <translation>De patroon eenheid:</translation>
     </message>
@@ -15635,24 +15631,24 @@ Wil je deze veranderingen opslaan?</translation>
         <translation type="vanished">Maten(*.vst *.vit);;Alle bestanden(*.*)</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="1064"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="1074"/>
         <source>Failed to lock. This file already opened in another window.</source>
         <translation>Afsluiten is mislukt. Dit bestand is al geopend in een ander venster.</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="1115"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="1125"/>
         <source>Failed to lock. This file already opened in another window. Expect collissions when run 2 copies of the program.</source>
         <translation>Afsluiten is mislukt. Dit bestand is al geopend in een ander venster. Verwacht een conflict als 2 kopieën van het programma gaan lopen.</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="529"/>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="3846"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="537"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="4095"/>
         <source>File contains invalid known measurement(s).</source>
         <translation>Bestand bevat ongeldige bekende ma(a)t(en).</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="471"/>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="3833"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="479"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="4082"/>
         <source>File has unknown format.</source>
         <translation>Bestand heeft een onbekende indeling.</translation>
     </message>
@@ -15661,21 +15657,21 @@ Wil je deze veranderingen opslaan?</translation>
         <translation type="vanished">Volledige naam</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="431"/>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="3793"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="439"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="4042"/>
         <source>File &apos;%1&apos; doesn&apos;t exist!</source>
         <translation>Bestand &apos;%1&apos; bestaat niet!</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="2071"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="2312"/>
         <source>The name of known measurement forbidden to change.</source>
         <translation>De naam van bekende maten is verboden om te veranderen.</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="1497"/>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="2037"/>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="2114"/>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="2324"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="1507"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="2278"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="2355"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="2565"/>
         <source>Can&apos;t find measurement &apos;%1&apos;.</source>
         <translation>Kan maten &apos;%1&apos; niet vinden.</translation>
     </message>
@@ -15692,7 +15688,7 @@ Wil je deze veranderingen opslaan?</translation>
         <translation type="vanished">De hoogte van groter wordende waardes van bekende maten is verboden om te veranderen.</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="2343"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="2584"/>
         <source>The full name of known measurement forbidden to change.</source>
         <translation>De volledige naam van de bekende maten is verboden te veranderen.</translation>
     </message>
@@ -15721,19 +15717,19 @@ Wil je deze veranderingen opslaan?</translation>
         <translation>Verwijder maten</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="4555"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="4839"/>
         <source>unknown</source>
         <comment>gender</comment>
         <translation>onbekend</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="4556"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="4840"/>
         <source>male</source>
         <comment>gender</comment>
         <translation>mannelijk</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="4557"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="4841"/>
         <source>female</source>
         <comment>gender</comment>
         <translation>vrouwelijk</translation>
@@ -15753,12 +15749,12 @@ Wil je deze veranderingen opslaan?</translation>
         <translation type="vanished">Creëer vanuit bestaande ...</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.ui" line="1493"/>
+        <location filename="../../src/app/tape/tmainwindow.ui" line="1554"/>
         <source>Create from existing file</source>
         <translation>Creëer vanuit bestaand bestand</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="704"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="712"/>
         <source>Select file</source>
         <translation>Selecteer bestand</translation>
     </message>
@@ -15767,28 +15763,26 @@ Wil je deze veranderingen opslaan?</translation>
         <translation type="vanished">Exporteer niet ondersteunde maten.</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.ui" line="1268"/>
-        <location filename="../../src/app/tape/tmainwindow.ui" line="1539"/>
+        <location filename="../../src/app/tape/tmainwindow.ui" line="1262"/>
+        <location filename="../../src/app/tape/tmainwindow.ui" line="1600"/>
         <source>Measurement diagram</source>
         <translation>Maten diagram</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.ui" line="1290"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:340pt;&quot;&gt;?&lt;/span&gt;&lt;/p&gt;&lt;p align=\&quot;center\&quot;&gt;Unknown measurement&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:340pt;&quot;&gt;?&lt;/span&gt;&lt;/p&gt;&lt;p align=\&quot;center\&quot;&gt;Onbekende meting&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+        <translation type="vanished">&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:340pt;&quot;&gt;?&lt;/span&gt;&lt;/p&gt;&lt;p align=\&quot;center\&quot;&gt;Onbekende meting&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="1973"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:340pt;&quot;&gt;?&lt;/span&gt;&lt;/p&gt;&lt;p align=&quot;center&quot;&gt;Unknown measurement&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:340pt;&quot;&gt;?&lt;/span&gt;&lt;/p&gt;&lt;p align=\&quot;center\&quot;&gt;Onbekende meting&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+        <translation type="vanished">&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:340pt;&quot;&gt;?&lt;/span&gt;&lt;/p&gt;&lt;p align=\&quot;center\&quot;&gt;Onbekende meting&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="2706"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="2947"/>
         <source>About Qt</source>
         <translation>Over Qt</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="3176"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="3425"/>
         <source>File was not saved yet.</source>
         <translation>Bestand was nog niet opgeslagen.</translation>
     </message>
@@ -15829,7 +15823,7 @@ Wil je deze veranderingen opslaan?</translation>
         <translation type="vanished">Sla op...</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="3231"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="3480"/>
         <source>Don&apos;t Save</source>
         <translation>Niet opslaan</translation>
     </message>
@@ -15858,7 +15852,7 @@ Wil je deze veranderingen opslaan?</translation>
         <translation type="vanished">Onbekende fout gebeurd, bijvoorbeeld een volledige partitie voorkomt het schrijven uit het vergrendelingsbestand.</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.ui" line="1507"/>
+        <location filename="../../src/app/tape/tmainwindow.ui" line="1568"/>
         <source>Export to CSV</source>
         <translation>Exporteer naar CSV</translation>
     </message>
@@ -15871,12 +15865,12 @@ Wil je deze veranderingen opslaan?</translation>
         <translation type="vanished">Ongeldige waarde</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="298"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="306"/>
         <source>Show in Finder</source>
         <translation>Toon in Finder</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="1153"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="1163"/>
         <source>Comma-Separated Values</source>
         <translation>Komma-scheidingsteken waardes</translation>
     </message>
@@ -15903,40 +15897,40 @@ Wil je deze veranderingen opslaan?</translation>
         <translation type="vanished">Maat:</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="649"/>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="665"/>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="681"/>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="702"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="657"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="673"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="689"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="710"/>
         <source>All files</source>
         <translation>Alle bestanden</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="987"/>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="2469"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="997"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="2710"/>
         <source>Could not save the file</source>
         <translation>Het bestand is niet bewaard</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="3575"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="3824"/>
         <source>read only</source>
         <translation>alleen lezen</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="648"/>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="664"/>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="790"/>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="1022"/>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="2733"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="656"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="672"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="800"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="1032"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="2974"/>
         <source>Multisize measurements</source>
         <translation>Multimaten maten</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="3649"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="3898"/>
         <source>Invalid result. Value is infinite or NaN. Please, check your calculations.</source>
         <translation>Ongeldig resultaat. Waarde is oneindig of NaN. Controleer uw berekeningen.</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="3175"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="3424"/>
         <source>Empty</source>
         <translation>Leeg</translation>
     </message>
@@ -15946,44 +15940,44 @@ Wil je deze veranderingen opslaan?</translation>
         <translation>Klant naam:</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.ui" line="1440"/>
+        <location filename="../../src/app/tape/tmainwindow.ui" line="1501"/>
         <source>Open multisize …</source>
         <translation>Open multimaten …</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.ui" line="1490"/>
+        <location filename="../../src/app/tape/tmainwindow.ui" line="1551"/>
         <source>Create from existing …</source>
         <translation>Creer van bestaande …</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="3230"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="3479"/>
         <source>Save…</source>
         <translation>Opslaan…</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.ui" line="1518"/>
-        <location filename="../../src/app/tape/tmainwindow.ui" line="1521"/>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="1156"/>
+        <location filename="../../src/app/tape/tmainwindow.ui" line="1579"/>
+        <location filename="../../src/app/tape/tmainwindow.ui" line="1582"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="1166"/>
         <source>Import from CSV</source>
         <translation>Importeer van CSV</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="4049"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="4298"/>
         <source>Individual measurements require at least 2 columns.</source>
         <translation>Individuele maten vereisen ten minste 2 kolommen.</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="4119"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="4368"/>
         <source>Multisize measurements require at least 4 columns.</source>
         <translation>Multimaten maten vereisen tenminste 4 kolommen.</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="3985"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="4234"/>
         <source>Imported file must not contain the same name twice.</source>
         <translation>Geïmporteerd bestand mag geen tweemaal dezelfde naam bevatten.</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="3756"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="4005"/>
         <source>Cannot save settings. Access denied.</source>
         <translation>Kan instellingen niet opslaan. Toegang geweigerd.</translation>
     </message>
@@ -16008,37 +16002,37 @@ Wil je deze veranderingen opslaan?</translation>
         <translation>&amp;Maten</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.ui" line="1306"/>
+        <location filename="../../src/app/tape/tmainwindow.ui" line="1367"/>
         <source>&amp;Open individual …</source>
         <translation>&amp;Open individueel …</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.ui" line="1321"/>
+        <location filename="../../src/app/tape/tmainwindow.ui" line="1382"/>
         <source>&amp;Save</source>
         <translation>&amp;Opslaan</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.ui" line="1336"/>
+        <location filename="../../src/app/tape/tmainwindow.ui" line="1397"/>
         <source>Save &amp;As …</source>
         <translation>Sla op &amp;als…</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.ui" line="1348"/>
+        <location filename="../../src/app/tape/tmainwindow.ui" line="1409"/>
         <source>&amp;Quit</source>
         <translation>&amp;Afsluiten</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.ui" line="1368"/>
+        <location filename="../../src/app/tape/tmainwindow.ui" line="1429"/>
         <source>&amp;About Tape</source>
         <translation>&amp;Over Tape</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.ui" line="1380"/>
+        <location filename="../../src/app/tape/tmainwindow.ui" line="1441"/>
         <source>&amp;New</source>
         <translation>&amp;Nieuw</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="3737"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="3986"/>
         <source>Cannot read settings from a malformed .INI file.</source>
         <translation>Kan instellingen niet inlezen wegens een niet-conform .INI-bestand.</translation>
     </message>
@@ -16114,122 +16108,168 @@ Wil je deze veranderingen opslaan?</translation>
         <translation>Basis waarden:</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.ui" line="1553"/>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="2423"/>
+        <location filename="../../src/app/tape/tmainwindow.ui" line="1283"/>
+        <source>Add image</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/app/tape/tmainwindow.ui" line="1300"/>
+        <source>Remove image</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/app/tape/tmainwindow.ui" line="1317"/>
+        <source>Save image</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/app/tape/tmainwindow.ui" line="1614"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="2664"/>
         <source>Export to individual</source>
         <translation>Exporteer naar individueel</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.ui" line="1556"/>
+        <location filename="../../src/app/tape/tmainwindow.ui" line="1617"/>
         <source>Export to individual measurements</source>
         <translation>Exporteer naar individuele maten</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.ui" line="1570"/>
+        <location filename="../../src/app/tape/tmainwindow.ui" line="1631"/>
         <source>Use full circumference</source>
         <translation>Gebruik volledige omtrek</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.ui" line="1581"/>
+        <location filename="../../src/app/tape/tmainwindow.ui" line="1642"/>
         <source>Restrict second dimension</source>
         <translation>Beperk tweede dimensie</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.ui" line="1595"/>
+        <location filename="../../src/app/tape/tmainwindow.ui" line="1656"/>
         <source>Restrict third dimension</source>
         <translation>Beperk derde dimensie</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.ui" line="1609"/>
+        <location filename="../../src/app/tape/tmainwindow.ui" line="1670"/>
         <source>Dimension labels</source>
         <translation>Dimensie labels</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="348"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="356"/>
         <source>The table doesn&apos;t provide dimensions</source>
         <translation>De tabel toont geen dimensies</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="360"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="368"/>
         <source>Invalid base value for dimension A</source>
         <translation>Ongeldige basiswaarde voor dimensie A</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="372"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="380"/>
         <source>The table doesn&apos;t support dimension B</source>
         <translation>Tabel ondersteunt dimensie B niet</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="384"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="392"/>
         <source>Invalid base value for dimension B</source>
         <translation>Ongeldige basiswaarde voor dimensie B</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="396"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="404"/>
         <source>The table doesn&apos;t support dimension C</source>
         <translation>Tabel ondersteunt dimensie C niet</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="408"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="416"/>
         <source>Invalid base value for dimension C</source>
         <translation>Ongeldige basiswaarde voor dimensie C</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="2422"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="1551"/>
+        <source>Measurement image</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="1565"/>
+        <source>Invalid image. Error: %1</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="1642"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="1674"/>
+        <source>Unable to save image. Error: %1</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="1658"/>
+        <source>Save Image</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="1710"/>
+        <source>Unable to show image. Error: %1</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="2663"/>
         <source>measurements.vit</source>
         <translation>measurements.vit</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="3096"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="3345"/>
         <source>Shift (%1):</source>
         <translation>Shift (%1):</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="3224"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="3473"/>
         <source>Measurements have been modified. Do you want to save your changes?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="4789"/>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="4799"/>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="4809"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="4672"/>
+        <source>Unknown measurement</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="5073"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="5083"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="5093"/>
         <source>%1 shift</source>
         <translation>%1 shift</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="4197"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="4446"/>
         <source>Cannot convert base value to double in column 2.</source>
         <translation>Kan de basiswaarde niet naar het dubbele omzetten in kolom 2.</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="4201"/>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="4207"/>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="4214"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="4450"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="4456"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="4463"/>
         <source>Cannot convert shift value to double in column %1.</source>
         <translation>Kan de basiswaarde niet naar het dubbele omzetten in kolom %1.</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="4525"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="4809"/>
         <source>Millimeters</source>
         <translation>Millimeters</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="4528"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="4812"/>
         <source>Inches</source>
         <translation>Inches</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="4531"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="4815"/>
         <source>Centimeters</source>
         <translation>Centimeters</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="4540"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="4824"/>
         <source>Degrees</source>
         <translation>Graden</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.ui" line="1620"/>
+        <location filename="../../src/app/tape/tmainwindow.ui" line="1681"/>
         <source>Restrict first dimension</source>
         <translation>Beperk eerste meting</translation>
     </message>
@@ -16250,7 +16290,7 @@ Wil je deze veranderingen opslaan?</translation>
     </message>
     <message>
         <location filename="../../src/app/tape/tmainwindow.ui" line="115"/>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="4641"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="4925"/>
         <source>0 results</source>
         <translation type="unfinished"></translation>
     </message>
@@ -16300,53 +16340,53 @@ Wil je deze veranderingen opslaan?</translation>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.ui" line="1638"/>
+        <location filename="../../src/app/tape/tmainwindow.ui" line="1699"/>
         <source>Add separator</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.ui" line="1646"/>
+        <location filename="../../src/app/tape/tmainwindow.ui" line="1707"/>
         <source>Dimension custom names</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="3980"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="4229"/>
         <source>Measurement name is empty.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="3993"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="4242"/>
         <source>Measurement &apos;%1&apos; doesn&apos;t match regex pattern.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="3998"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="4247"/>
         <source>Measurement &apos;%1&apos; already used in the file.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="4005"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="4254"/>
         <source>Measurement &apos;%1&apos; is not one of the known measurements.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="4010"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="4259"/>
         <source>Measurement &apos;%1&apos; already used in file.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="4064"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="4313"/>
         <source>Error in row %1. The measurement name is empty.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="4186"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="4435"/>
         <source>The measurement name is empty.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="4089"/>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="4142"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="4338"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="4391"/>
         <source>Error in row %1. %2</source>
         <translation type="unfinished"></translation>
     </message>
@@ -18197,38 +18237,38 @@ Wil je deze veranderingen opslaan?</translation>
 <context>
     <name>VBackgroundPatternImage</name>
     <message>
-        <location filename="../../src/libs/ifc/xml/vbackgroundpatternimage.cpp" line="90"/>
-        <location filename="../../src/libs/ifc/xml/vbackgroundpatternimage.cpp" line="164"/>
+        <location filename="../../src/libs/ifc/xml/vbackgroundpatternimage.cpp" line="92"/>
+        <location filename="../../src/libs/ifc/xml/vbackgroundpatternimage.cpp" line="166"/>
         <source>Unexpected mime type: %1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/libs/ifc/xml/vbackgroundpatternimage.cpp" line="99"/>
+        <location filename="../../src/libs/ifc/xml/vbackgroundpatternimage.cpp" line="101"/>
         <source>Couldn&apos;t read the image. Error: %1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/libs/ifc/xml/vbackgroundpatternimage.cpp" line="148"/>
+        <location filename="../../src/libs/ifc/xml/vbackgroundpatternimage.cpp" line="150"/>
         <source>No data.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/libs/ifc/xml/vbackgroundpatternimage.cpp" line="154"/>
+        <location filename="../../src/libs/ifc/xml/vbackgroundpatternimage.cpp" line="156"/>
         <source>Invalid id.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/libs/ifc/xml/vbackgroundpatternimage.cpp" line="172"/>
+        <location filename="../../src/libs/ifc/xml/vbackgroundpatternimage.cpp" line="174"/>
         <source>Content type is empty.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/libs/ifc/xml/vbackgroundpatternimage.cpp" line="188"/>
+        <location filename="../../src/libs/ifc/xml/vbackgroundpatternimage.cpp" line="190"/>
         <source>Not image.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/libs/ifc/xml/vbackgroundpatternimage.cpp" line="182"/>
+        <location filename="../../src/libs/ifc/xml/vbackgroundpatternimage.cpp" line="184"/>
         <source>Content type mismatch.</source>
         <translation type="unfinished"></translation>
     </message>
@@ -19393,52 +19433,53 @@ Wil je deze veranderingen opslaan?</translation>
 <context>
     <name>VMeasurements</name>
     <message>
-        <location filename="../../src/libs/vformat/vmeasurements.cpp" line="728"/>
-        <location filename="../../src/libs/vformat/vmeasurements.cpp" line="742"/>
-        <location filename="../../src/libs/vformat/vmeasurements.cpp" line="756"/>
-        <location filename="../../src/libs/vformat/vmeasurements.cpp" line="770"/>
-        <location filename="../../src/libs/vformat/vmeasurements.cpp" line="784"/>
-        <location filename="../../src/libs/vformat/vmeasurements.cpp" line="798"/>
-        <location filename="../../src/libs/vformat/vmeasurements.cpp" line="813"/>
-        <location filename="../../src/libs/vformat/vmeasurements.cpp" line="842"/>
-        <location filename="../../src/libs/vformat/vmeasurements.cpp" line="856"/>
-        <location filename="../../src/libs/vformat/vmeasurements.cpp" line="870"/>
-        <location filename="../../src/libs/vformat/vmeasurements.cpp" line="887"/>
+        <location filename="../../src/libs/vformat/vmeasurements.cpp" line="650"/>
+        <location filename="../../src/libs/vformat/vmeasurements.cpp" line="664"/>
+        <location filename="../../src/libs/vformat/vmeasurements.cpp" line="678"/>
+        <location filename="../../src/libs/vformat/vmeasurements.cpp" line="692"/>
+        <location filename="../../src/libs/vformat/vmeasurements.cpp" line="706"/>
+        <location filename="../../src/libs/vformat/vmeasurements.cpp" line="720"/>
+        <location filename="../../src/libs/vformat/vmeasurements.cpp" line="735"/>
+        <location filename="../../src/libs/vformat/vmeasurements.cpp" line="764"/>
+        <location filename="../../src/libs/vformat/vmeasurements.cpp" line="778"/>
+        <location filename="../../src/libs/vformat/vmeasurements.cpp" line="792"/>
+        <location filename="../../src/libs/vformat/vmeasurements.cpp" line="809"/>
+        <location filename="../../src/libs/vformat/vmeasurements.cpp" line="823"/>
         <source>Can&apos;t find measurement &apos;%1&apos;</source>
         <translation>Kan maten &apos;%1&apos; niet vinden</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vformat/vmeasurements.cpp" line="1342"/>
+        <location filename="../../src/libs/vformat/vmeasurements.cpp" line="1278"/>
         <source>The measurement name is empty!</source>
         <translation>De maten naam is leeg!</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vformat/vmeasurements.cpp" line="1125"/>
+        <location filename="../../src/libs/vformat/vmeasurements.cpp" line="1061"/>
         <source>None</source>
         <translation>Geen</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vformat/vmeasurements.cpp" line="1127"/>
+        <location filename="../../src/libs/vformat/vmeasurements.cpp" line="1063"/>
         <source>Height</source>
         <translation>Hoogte</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vformat/vmeasurements.cpp" line="1129"/>
+        <location filename="../../src/libs/vformat/vmeasurements.cpp" line="1065"/>
         <source>Size</source>
         <translation>Maat</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vformat/vmeasurements.cpp" line="1133"/>
+        <location filename="../../src/libs/vformat/vmeasurements.cpp" line="1069"/>
         <source>Hip</source>
         <translation>Heup</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vformat/vmeasurements.cpp" line="1445"/>
+        <location filename="../../src/libs/vformat/vmeasurements.cpp" line="1381"/>
         <source>Dimension is not valid</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/libs/vformat/vmeasurements.cpp" line="1131"/>
+        <location filename="../../src/libs/vformat/vmeasurements.cpp" line="1067"/>
         <source>Waist</source>
         <translation>Taille</translation>
     </message>
@@ -21156,33 +21197,34 @@ Wil je deze veranderingen opslaan?</translation>
 <context>
     <name>VPatternImage</name>
     <message>
-        <location filename="../../src/libs/ifc/xml/vpatternimage.cpp" line="58"/>
+        <location filename="../../src/libs/ifc/xml/vpatternimage.cpp" line="60"/>
         <source>Unexpected mime type: %1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/libs/ifc/xml/vpatternimage.cpp" line="65"/>
+        <location filename="../../src/libs/ifc/xml/vpatternimage.cpp" line="67"/>
         <location filename="../../src/libs/ifc/xml/vpatternimage.cpp" line="154"/>
+        <location filename="../../src/libs/ifc/xml/vpatternimage.cpp" line="179"/>
         <source>Couldn&apos;t read the image. Error: %1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/libs/ifc/xml/vpatternimage.cpp" line="107"/>
+        <location filename="../../src/libs/ifc/xml/vpatternimage.cpp" line="109"/>
         <source>No data.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/libs/ifc/xml/vpatternimage.cpp" line="113"/>
+        <location filename="../../src/libs/ifc/xml/vpatternimage.cpp" line="115"/>
         <source>Content type is empty.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/libs/ifc/xml/vpatternimage.cpp" line="129"/>
+        <location filename="../../src/libs/ifc/xml/vpatternimage.cpp" line="131"/>
         <source>Not image.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/libs/ifc/xml/vpatternimage.cpp" line="123"/>
+        <location filename="../../src/libs/ifc/xml/vpatternimage.cpp" line="125"/>
         <source>Content type mismatch.</source>
         <translation type="unfinished"></translation>
     </message>
