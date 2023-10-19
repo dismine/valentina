@@ -28,8 +28,8 @@
 #ifndef VPATTERNIMAGE_H
 #define VPATTERNIMAGE_H
 
-#include <QString>
 #include <QCoreApplication>
+#include <QString>
 
 class QPixmap;
 class QMimeType;
@@ -37,6 +37,7 @@ class QMimeType;
 class VPatternImage
 {
     Q_DECLARE_TR_FUNCTIONS(VPatternImage) // NOLINT
+
 public:
     VPatternImage() = default;
 
@@ -45,7 +46,7 @@ public:
     auto ContentType() const -> const QString &;
 
     auto ContentData() const -> const QByteArray &;
-    void SetContentData(const QByteArray &newContentData, const QString & newContentType);
+    void SetContentData(const QByteArray &newContentData, const QString &newContentType);
 
     auto IsNull() const -> bool;
     auto IsValid() const -> bool;
@@ -60,8 +61,8 @@ public:
     auto Size() const -> QSize;
 
 private:
-    QString         m_contentType{};
-    QByteArray      m_contentData{};
+    QString m_contentType{};
+    QByteArray m_contentData{};
     mutable QString m_errorString{};
 };
 
