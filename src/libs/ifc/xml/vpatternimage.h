@@ -50,6 +50,7 @@ public:
     auto IsNull() const -> bool;
     auto IsValid() const -> bool;
 
+    auto GetPixmap() const -> QPixmap;
     auto GetPixmap(int width, int height) const -> QPixmap;
 
     auto ErrorString() const -> const QString &;

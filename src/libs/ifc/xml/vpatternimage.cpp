@@ -136,6 +136,29 @@ auto VPatternImage::IsValid() const -> bool
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+auto VPatternImage::GetPixmap() const -> QPixmap
+{
+    if (not IsValid())
+    {
+        return {};
+    }
+
+    QByteArray array = QByteArray::fromBase64(m_contentData);
+    QBuffer buffer(&array);
+    buffer.open(QIODevice::ReadOnly);
+
+    QImageReader imageReader(&buffer);
+    QImage image = imageReader.read();
+    if (image.isNull())
+    {
+        qCritical() << tr("Couldn't read the image. Error: %1").arg(imageReader.errorString());
+        return {};
+    }
+
+    return QPixmap::fromImage(image);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 auto VPatternImage::GetPixmap(int width, int height) const -> QPixmap
 {
     if (not IsValid())

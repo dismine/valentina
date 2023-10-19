@@ -368,7 +368,7 @@ void DialogPatternProperties::ValidatePassmarkWidth() const
 void DialogPatternProperties::InitImage()
 {
     ui->imageLabel->setContextMenuPolicy(Qt::CustomContextMenu);
-    ui->imageLabel->setScaledContents(true);
+    ui->imageLabel->setAlignment(Qt::AlignHCenter | Qt::AlignVCenter);
     connect(ui->imageLabel, &QWidget::customContextMenuRequested, this,
             [this]()
             {
@@ -403,7 +403,9 @@ void DialogPatternProperties::InitImage()
     const VPatternImage image = m_doc->GetImage();
     if (image.IsValid())
     {
-        ui->imageLabel->setPixmap(image.GetPixmap(ui->imageLabel->width(), ui->imageLabel->height()));
+        QPixmap pixImage = image.GetPixmap();
+        ui->imageLabel->setPixmap(
+            pixImage.scaled(ui->imageLabel->width(), ui->imageLabel->height(), Qt::KeepAspectRatio));
     }
     else
     {
@@ -430,7 +432,10 @@ void DialogPatternProperties::ChangeImage()
         }
 
         m_doc->SetImage(image);
-        ui->imageLabel->setPixmap(image.GetPixmap(ui->imageLabel->width(), ui->imageLabel->height()));
+
+        QPixmap pixImage = image.GetPixmap();
+        ui->imageLabel->setPixmap(
+            pixImage.scaled(ui->imageLabel->width(), ui->imageLabel->height(), Qt::KeepAspectRatio));
 
         m_deleteAction->setEnabled(true);
         m_saveImageAction->setEnabled(true);
