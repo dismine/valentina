@@ -57,7 +57,7 @@ protected:
 
 private:
     Q_DISABLE_COPY_MOVE(VAspectRatioPixmapLabel) // NOLINT
-    QPixmap m_pix;
+    QPixmap m_pix{};
 };
 
 #endif // VASPECTRATIOPIXMAPLABEL_H
