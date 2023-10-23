@@ -4,6 +4,7 @@
 SOURCES += \
     $$PWD/def.cpp \
     $$PWD/dialogs/dialogaskcollectstatistic.cpp \
+    $$PWD/dialogs/vshortcutdialog.cpp \
     $$PWD/svgfont/svgdef.cpp \
     $$PWD/svgfont/vsvgfont.cpp \
     $$PWD/svgfont/vsvgfontdatabase.cpp \
@@ -76,6 +77,7 @@ HEADERS += \
     $$PWD/bpstd/variant.hpp \
     $$PWD/compatibility.h \
     $$PWD/dialogs/dialogaskcollectstatistic.h \
+    $$PWD/dialogs/vshortcutdialog.h \
     $$PWD/lambdaconstants.h \
     $$PWD/stable.h \
     $$PWD/def.h \
@@ -125,7 +127,7 @@ HEADERS += \
     $$PWD/dialogs/dialogselectlanguage.h \
     $$PWD/fpm/fixed.hpp \
     $$PWD/fpm/math.hpp \
-    $$PWD/vabstractshortcutmanager.cpp
+    $$PWD/vabstractshortcutmanager.h
 
 contains(DEFINES, APPIMAGE) {
     SOURCES += \
@@ -147,4 +149,5 @@ contains(QT_VERSION, ^5\\.[0-2]\\.[0-2]$) { # Since Qt 5.3.0
 FORMS    += \
     $$PWD/dialogs/dialogaskcollectstatistic.ui \
     $$PWD/dialogs/dialogexporttocsv.ui \
-    $$PWD/dialogs/dialogselectlanguage.ui
+    $$PWD/dialogs/dialogselectlanguage.ui \
+    $$PWD/dialogs/vshortcutdialog.ui

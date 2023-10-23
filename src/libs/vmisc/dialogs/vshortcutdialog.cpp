@@ -29,6 +29,7 @@
 #include "../vabstractapplication.h"
 #include "ui_vshortcutdialog.h"
 
+#include <QAbstractButton>
 #include <QMessageBox>
 
 #if QT_VERSION < QT_VERSION_CHECK(6, 4, 0)

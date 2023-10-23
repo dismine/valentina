@@ -10,8 +10,7 @@ include(core/core.pri)
 SOURCES += \
         $$PWD/main.cpp \
         $$PWD/mainwindow.cpp \
-        $$PWD/mainwindowsnogui.cpp \
-        $$PWD/vvalentinashortcutmanager.cpp
+        $$PWD/mainwindowsnogui.cpp
 
 *msvc*:SOURCES += $$PWD/stable.cpp
 
@@ -20,8 +19,7 @@ HEADERS  += \
         $$PWD/mainwindow.h \
         $$PWD/stable.h \
         $$PWD/version.h \
-        $$PWD/mainwindowsnogui.h \
-        $$PWD/vvalentinashortcutmanager.h
+        $$PWD/mainwindowsnogui.h
 
 # Main forms
 FORMS    += \
