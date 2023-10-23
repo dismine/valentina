@@ -52,13 +52,20 @@ public:
 protected:
     void changeEvent(QEvent *event) override;
 
+private slots:
+    void ShortcutCellDoubleClicked(int row, int column);
+
 private:
     // cppcheck-suppress unknownMacro
     Q_DISABLE_COPY_MOVE(PuzzlePreferencesConfigurationPage) // NOLINT
     Ui::PuzzlePreferencesConfigurationPage *ui;
     bool m_langChanged{false};
+    QList<QStringList> m_transientShortcuts{};
 
     void SetThemeModeComboBox();
+    void InitShortcuts(bool defaults = false);
+    void UpdateShortcutsTable();
+    void RetranslateShortcutsTable();
 };
 
 #endif // PUZZLEPREFERENCESCONFIGURATIONPAGE_H

@@ -50,6 +50,7 @@ class VAbstractApplication; // use in define
 class VCommonSettings;
 class VSvgFontDatabase;
 class QFileSystemWatcher;
+class VAbstractShortcutManager;
 
 #if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
 class VTextCodec;
@@ -106,6 +107,8 @@ public:
 
     auto AppUptime() const -> qint64;
 
+    auto GetShortcutManager() const -> VAbstractShortcutManager *;
+
     // NOLINTNEXTLINE(cppcoreguidelines-avoid-c-arrays, hicpp-avoid-c-arrays, modernize-avoid-c-arrays)
     static auto IsOptionSet(int argc, char *argv[], const char *option) -> bool;
     // NOLINTNEXTLINE(cppcoreguidelines-avoid-c-arrays, hicpp-avoid-c-arrays, modernize-avoid-c-arrays)
@@ -128,6 +131,8 @@ protected:
     QPointer<QTranslator> pmsTranslator{nullptr};
 
     QElapsedTimer m_uptimeTimer{};
+
+    VAbstractShortcutManager *m_shortcutManager{nullptr};
 
     virtual void InitTrVars() = 0;
 

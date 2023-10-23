@@ -36,6 +36,7 @@
 #include "../vlayout/dialogs/vabstractlayoutdialog.h"
 #include "../vlayout/vlayoutpiece.h"
 #include "../vmisc/def.h"
+#include "../vmisc/vabstractshortcutmanager.h"
 #include "../vmisc/vlockguard.h"
 #include "../vwidgets/vabstractmainwindow.h"
 #include "carousel/vpcarrousel.h"
@@ -294,6 +295,8 @@ private slots:
     void LayoutWarningPiecesSuperposition_toggled(bool checked);
     void LayoutWarningPiecesOutOfBound_toggled(bool checked);
 
+    void UpdateShortcuts();
+
 private:
     Q_DISABLE_COPY_MOVE(VPMainWindow) // NOLINT
     Ui::VPMainWindow *ui;
@@ -338,6 +341,8 @@ private:
     QList<QPointer<WatermarkWindow>> m_watermarkEditors{};
 
     QFileSystemWatcher *m_watermarkWatcher{nullptr};
+
+    QMultiHash<VShortcutAction, QAction *> m_actionShortcuts{};
 
     struct VPLayoutPrinterPage
     {

@@ -39,7 +39,8 @@ SOURCES += \
     $$PWD/xml/vplayoutfilereader.cpp \
     $$PWD/xml/vplayoutfilewriter.cpp \
     $$PWD/xml/vplayoutliterals.cpp \
-    $$PWD/dialogs/dialogsavemanuallayout.cpp
+    $$PWD/dialogs/dialogsavemanuallayout.cpp \
+    $$PWD/vpuzzleshortcutmanager.cpp
 
 *msvc*:SOURCES += $$PWD/stable.cpp
 
@@ -82,7 +83,8 @@ HEADERS += \
     $$PWD/xml/vplayoutfilereader.h \
     $$PWD/xml/vplayoutfilewriter.h \
     $$PWD/xml/vplayoutliterals.h \
-    $$PWD/dialogs/dialogsavemanuallayout.h
+    $$PWD/dialogs/dialogsavemanuallayout.h \
+    $$PWD/vpuzzleshortcutmanager.h
 
 FORMS += \
     $$PWD/dialogs/configpages/puzzlepreferencesconfigurationpage.ui \

@@ -432,6 +432,12 @@ VPMainWindow::VPMainWindow(const VPCommandLinePtr &cmd, QWidget *parent)
     {
         QTimer::singleShot(V_SECONDS(1), this, &VPMainWindow::AskDefaultSettings);
     }
+
+    if (VAbstractShortcutManager *manager = VAbstractApplication::VApp()->GetShortcutManager())
+    {
+        connect(manager, &VAbstractShortcutManager::shortcutsUpdated, this, &VPMainWindow::UpdateShortcuts);
+        UpdateShortcuts();
+    }
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -655,9 +661,10 @@ void VPMainWindow::SetupMenu()
     // most of the actions are connected through name convention (auto-connection)
     // File
     // -------------------- connects the actions for the file menu
-    ui->actionNew->setShortcuts(QKeySequence::New);
-    ui->actionSave->setShortcuts(QKeySequence::Save);
-    ui->actionSaveAs->setShortcuts(QKeySequence::SaveAs);
+    m_actionShortcuts.insert(VShortcutAction::New, ui->actionNew);
+    m_actionShortcuts.insert(VShortcutAction::Open, ui->actionOpen);
+    m_actionShortcuts.insert(VShortcutAction::Save, ui->actionSave);
+    m_actionShortcuts.insert(VShortcutAction::SaveAs, ui->actionSaveAs);
 
     m_recentFileActs.fill(nullptr);
     for (auto &recentFileAct : m_recentFileActs)
@@ -689,7 +696,7 @@ void VPMainWindow::SetupMenu()
     UpdateRecentFileActions();
 
     connect(ui->actionExit, &QAction::triggered, this, &VPMainWindow::close);
-    ui->actionExit->setShortcuts(QKeySequence::Quit);
+    m_actionShortcuts.insert(VShortcutAction::Quit, ui->actionExit);
 
     // Layout
     connect(ui->actionExportLayout, &QAction::triggered, this, &VPMainWindow::on_ExportLayout);
@@ -705,13 +712,13 @@ void VPMainWindow::SetupMenu()
 
     // Add Undo/Redo actions.
     undoAction = m_layout->UndoStack()->createUndoAction(this, tr("&Undo"));
-    undoAction->setShortcuts(QKeySequence::Undo);
+    m_actionShortcuts.insert(VShortcutAction::Undo, undoAction);
     undoAction->setIcon(QIcon::fromTheme(QStringLiteral("edit-undo")));
     ui->menuSheet->addAction(undoAction);
     ui->toolBarUndoCommands->addAction(undoAction);
 
     redoAction = m_layout->UndoStack()->createRedoAction(this, tr("&Redo"));
-    redoAction->setShortcuts(QKeySequence::Redo);
+    m_actionShortcuts.insert(VShortcutAction::Redo, redoAction);
     redoAction->setIcon(QIcon::fromTheme(QStringLiteral("edit-redo")));
     ui->menuSheet->addAction(redoAction);
     ui->toolBarUndoCommands->addAction(redoAction);
@@ -1586,61 +1593,18 @@ void VPMainWindow::InitZoomToolBar()
 
     delete m_mouseCoordinate;
 
-    QT_WARNING_PUSH
-#if !defined(Q_OS_MACOS) && defined(Q_CC_CLANG)
-    QT_WARNING_DISABLE_CLANG("-Wenum-enum-conversion")
-#endif
-
     // connect the zoom buttons and shortcuts to the slots
-    QList<QKeySequence> zoomInShortcuts;
-    zoomInShortcuts.append(QKeySequence(QKeySequence::ZoomIn));
-    zoomInShortcuts.append(
-#if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
-        QKeySequence(QKeyCombination(Qt::ControlModifier), Qt::Key_Plus | Qt::KeypadModifier));
-#else
-        QKeySequence(Qt::ControlModifier + Qt::Key_Plus + Qt::KeypadModifier));
-#endif
-    ui->actionZoomIn->setShortcuts(zoomInShortcuts);
+    m_actionShortcuts.insert(VShortcutAction::ZoomIn, ui->actionZoomIn);
     connect(ui->actionZoomIn, &QAction::triggered, m_graphicsView, &VPMainGraphicsView::ZoomIn);
 
-    QList<QKeySequence> zoomOutShortcuts;
-    zoomOutShortcuts.append(QKeySequence(QKeySequence::ZoomOut));
-    zoomOutShortcuts.append(
-#if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
-        QKeySequence(QKeyCombination(Qt::ControlModifier), Qt::Key_Minus | Qt::KeypadModifier));
-#else
-        QKeySequence(Qt::ControlModifier + Qt::Key_Minus + Qt::KeypadModifier));
-#endif
-    ui->actionZoomOut->setShortcuts(zoomOutShortcuts);
+    m_actionShortcuts.insert(VShortcutAction::ZoomOut, ui->actionZoomOut);
     connect(ui->actionZoomOut, &QAction::triggered, m_graphicsView, &VPMainGraphicsView::ZoomOut);
 
-    QList<QKeySequence> zoomOriginalShortcuts;
-    zoomOriginalShortcuts.append(
-#if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
-        QKeySequence(Qt::ControlModifier | Qt::Key_0));
-#else
-        QKeySequence(Qt::ControlModifier + Qt::Key_0));
-#endif
-    zoomOriginalShortcuts.append(
-#if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
-        QKeySequence(QKeyCombination(Qt::ControlModifier), Qt::Key_0 | Qt::KeypadModifier));
-#else
-        QKeySequence(Qt::ControlModifier + Qt::Key_0 + Qt::KeypadModifier));
-#endif
-    ui->actionZoomOriginal->setShortcuts(zoomOriginalShortcuts);
+    m_actionShortcuts.insert(VShortcutAction::ZoomOriginal, ui->actionZoomOriginal);
     connect(ui->actionZoomOriginal, &QAction::triggered, m_graphicsView, &VPMainGraphicsView::ZoomOriginal);
 
-    QList<QKeySequence> zoomFitBestShortcuts;
-    zoomFitBestShortcuts.append(
-#if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
-        QKeySequence(Qt::ControlModifier | Qt::Key_Equal));
-#else
-        QKeySequence(Qt::ControlModifier + Qt::Key_Equal));
-#endif
-    ui->actionZoomFitBest->setShortcuts(zoomFitBestShortcuts);
+    m_actionShortcuts.insert(VShortcutAction::ZoomFitBest, ui->actionZoomFitBest);
     connect(ui->actionZoomFitBest, &QAction::triggered, m_graphicsView, &VPMainGraphicsView::ZoomFitBest);
-
-    QT_WARNING_POP
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -4759,6 +4723,15 @@ void VPMainWindow::LayoutWarningPiecesOutOfBound_toggled(bool checked)
             }
         }
         m_graphicsView->RefreshPieces();
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VPMainWindow::UpdateShortcuts()
+{
+    if (VAbstractShortcutManager *manager = VAbstractApplication::VApp()->GetShortcutManager())
+    {
+        manager->UpdateActionShortcuts(m_actionShortcuts);
     }
 }
 

@@ -42,6 +42,7 @@
 #include "../vmisc/theme/vtheme.h"
 #include "../vmisc/vsysexits.h"
 #include "../vmisc/vvalentinasettings.h"
+#include "vvalentinashortcutmanager.h"
 
 #if QT_VERSION < QT_VERSION_CHECK(5, 14, 0)
 #include "../vmisc/backport/text.h"
@@ -53,6 +54,7 @@
 #include <QIcon>
 #include <QLoggingCategory>
 #include <QMessageBox>
+#include <QObject>
 #include <QProcess>
 #include <QStandardPaths>
 #include <QStyleFactory>
@@ -704,6 +706,8 @@ void VApplication::InitOptions()
         VTheme::InitApplicationStyle();
         VTheme::SetIconTheme();
         VTheme::InitThemeMode();
+
+        m_shortcutManager = new VValentinaShortcutManager(this);
     }
 
     auto *statistic = VGAnalytics::Instance();

@@ -56,6 +56,8 @@ VToolApp {
         "vpsettings.h",
         "vptilefactory.h",
         "vpmainwindow.ui",
+        "vpuzzleshortcutmanager.cpp",
+        "vpuzzleshortcutmanager.h",
     ]
 
     Group {

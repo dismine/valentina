@@ -122,7 +122,7 @@ public:
     auto GetDimensionWaistLabel() const -> QString;
     void SetDimensionWaistLabel(const QString &label);
 
-    virtual void OpenSettings() override;
+    void OpenSettings() override;
     auto ValentinaSettings() -> VValentinaSettings *;
 
     static auto VApp() -> VAbstractValApplication *;

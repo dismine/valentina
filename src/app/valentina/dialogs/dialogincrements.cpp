@@ -185,6 +185,29 @@ DialogIncrements::DialogIncrements(VContainer *data, VPattern *doc, QWidget *par
     {
         ui->tableWidgetPC->selectRow(0);
     }
+
+    m_shortcuts.insert(VShortcutAction::CaseSensitiveMatch, ui->toolButtonCaseSensitive);
+    m_shortcuts.insert(VShortcutAction::WholeWordMatch, ui->toolButtonWholeWord);
+    m_shortcuts.insert(VShortcutAction::RegexMatch, ui->toolButtonRegexp);
+    m_shortcuts.insert(VShortcutAction::SearchHistory, ui->pushButtonSearch);
+    m_shortcuts.insert(VShortcutAction::RegexMatchUnicodeProperties, ui->toolButtonUseUnicodeProperties);
+    m_shortcuts.insert(VShortcutAction::FindNext, ui->toolButtonFindNext);
+    m_shortcuts.insert(VShortcutAction::FindPrevious, ui->toolButtonFindNext);
+
+    m_shortcuts.insert(VShortcutAction::CaseSensitiveMatch, ui->toolButtonCaseSensitivePC);
+    m_shortcuts.insert(VShortcutAction::WholeWordMatch, ui->toolButtonWholeWordPC);
+    m_shortcuts.insert(VShortcutAction::RegexMatch, ui->toolButtonRegexpPC);
+    m_shortcuts.insert(VShortcutAction::SearchHistory, ui->pushButtonSearchPC);
+    m_shortcuts.insert(VShortcutAction::RegexMatchUnicodeProperties, ui->toolButtonUseUnicodePropertiesPC);
+    m_shortcuts.insert(VShortcutAction::FindNext, ui->toolButtonFindNextPC);
+    m_shortcuts.insert(VShortcutAction::FindPrevious, ui->toolButtonFindNextPC);
+
+    if (VAbstractShortcutManager *manager = VAbstractApplication::VApp()->GetShortcutManager())
+    {
+        connect(VAbstractValApplication::VApp()->GetShortcutManager(), &VAbstractShortcutManager::shortcutsUpdated,
+                this, &DialogIncrements::UpdateShortcuts);
+        UpdateShortcuts();
+    }
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -1195,11 +1218,17 @@ void DialogIncrements::SavePreviewCalculationsSearchRequest()
 //---------------------------------------------------------------------------------------------------------------------
 void DialogIncrements::UpdateSearchControlsTooltips()
 {
-    auto UpdateToolTip = [](QAbstractButton *button)
+    auto UpdateToolTip = [this](QAbstractButton *button)
     {
         if (button->toolTip().contains("%1"_L1))
         {
+            m_serachButtonTooltips.insert(button, button->toolTip());
             button->setToolTip(button->toolTip().arg(button->shortcut().toString(QKeySequence::NativeText)));
+        }
+        else if (m_serachButtonTooltips.contains(button))
+        {
+            QString tooltip = m_serachButtonTooltips.value(button);
+            button->setToolTip(tooltip.arg(button->shortcut().toString(QKeySequence::NativeText)));
         }
     };
 
@@ -1334,6 +1363,16 @@ void DialogIncrements::RefreshPattern()
         ui->tableWidgetPC->blockSignals(false);
 
         m_hasChanges = false;
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void DialogIncrements::UpdateShortcuts()
+{
+    if (VAbstractShortcutManager *manager = VAbstractApplication::VApp()->GetShortcutManager())
+    {
+        manager->UpdateButtonShortcut(m_shortcuts);
+        UpdateSearchControlsTooltips();
     }
 }
 

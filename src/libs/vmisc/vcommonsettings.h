@@ -335,6 +335,9 @@ public:
     auto IsTranslateFormula() const -> bool;
     void SetTranslateFormula(bool value);
 
+    auto GetActionShortcuts(const QString &name, const QStringList &defaultShortcuts) -> QStringList;
+    void SetActionShortcuts(const QString &name, const QStringList &shortcuts);
+
 signals:
     void SVGFontsPathChanged(const QString &oldPath, const QString &newPath);
 

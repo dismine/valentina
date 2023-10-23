@@ -104,6 +104,21 @@ DialogFinalMeasurements::DialogFinalMeasurements(VPattern *doc, QWidget *parent)
     {
         ui->tableWidget->selectRow(0);
     }
+
+    m_shortcuts.insert(VShortcutAction::CaseSensitiveMatch, ui->toolButtonCaseSensitive);
+    m_shortcuts.insert(VShortcutAction::WholeWordMatch, ui->toolButtonWholeWord);
+    m_shortcuts.insert(VShortcutAction::RegexMatch, ui->toolButtonRegexp);
+    m_shortcuts.insert(VShortcutAction::SearchHistory, ui->pushButtonSearch);
+    m_shortcuts.insert(VShortcutAction::RegexMatchUnicodeProperties, ui->toolButtonUseUnicodeProperties);
+    m_shortcuts.insert(VShortcutAction::FindNext, ui->toolButtonFindNext);
+    m_shortcuts.insert(VShortcutAction::FindPrevious, ui->toolButtonFindNext);
+
+    if (VAbstractShortcutManager *manager = VAbstractApplication::VApp()->GetShortcutManager())
+    {
+        connect(VAbstractValApplication::VApp()->GetShortcutManager(), &VAbstractShortcutManager::shortcutsUpdated,
+                this, &DialogFinalMeasurements::UpdateShortcuts);
+        UpdateShortcuts();
+    }
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -489,6 +504,16 @@ void DialogFinalMeasurements::FullUpdateFromFile()
     FillFinalMeasurements();
 
     m_search->RefreshList(ui->lineEditFind->text());
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void DialogFinalMeasurements::UpdateShortcuts()
+{
+    if (VAbstractShortcutManager *manager = VAbstractApplication::VApp()->GetShortcutManager())
+    {
+        manager->UpdateButtonShortcut(m_shortcuts);
+        UpdateSearchControlsTooltips();
+    }
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -906,11 +931,17 @@ void DialogFinalMeasurements::SaveSearchRequest()
 //---------------------------------------------------------------------------------------------------------------------
 void DialogFinalMeasurements::UpdateSearchControlsTooltips()
 {
-    auto UpdateToolTip = [](QAbstractButton *button)
+    auto UpdateToolTip = [this](QAbstractButton *button)
     {
         if (button->toolTip().contains("%1"_L1))
         {
+            m_serachButtonTooltips.insert(button, button->toolTip());
             button->setToolTip(button->toolTip().arg(button->shortcut().toString(QKeySequence::NativeText)));
+        }
+        else if (m_serachButtonTooltips.contains(button))
+        {
+            QString tooltip = m_serachButtonTooltips.value(button);
+            button->setToolTip(tooltip.arg(button->shortcut().toString(QKeySequence::NativeText)));
         }
     };
 

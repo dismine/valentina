@@ -40,6 +40,7 @@
 #include "../vmisc/vsysexits.h"
 #include "version.h"
 #include "vpmainwindow.h"
+#include "vpuzzleshortcutmanager.h"
 
 #include <QCommandLineParser>
 #include <QFileOpenEvent>
@@ -459,6 +460,8 @@ void VPApplication::InitOptions()
     statistic->SetApiSecret(GA_API_SECRET);
     statistic->SetRepoRevision(QLatin1String(BUILD_REVISION));
     statistic->Enable(settings->IsCollectStatistic());
+
+    m_shortcutManager = new VPuzzleShortcutManager(this);
 }
 
 //---------------------------------------------------------------------------------------------------------------------

@@ -1,14 +1,14 @@
 /************************************************************************
  **
- **  @file   tapepreferencesconfigurationpage.h
+ **  @file   vshortcutdialog.h
  **  @author Roman Telezhynskyi <dismine(at)gmail.com>
- **  @date   12 4, 2017
+ **  @date   21 10, 2023
  **
  **  @brief
  **  @copyright
  **  This source code is part of the Valentina project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
- **  Copyright (C) 2017 Valentina project
+ **  Copyright (C) 2023 Valentina project
  **  <https://gitlab.com/smart-pattern/valentina> All Rights Reserved.
  **
  **  Valentina is free software: you can redistribute it and/or modify
@@ -25,50 +25,43 @@
  **  along with Valentina.  If not, see <http://www.gnu.org/licenses/>.
  **
  *************************************************************************/
+#ifndef VSHORTCUTDIALOG_H
+#define VSHORTCUTDIALOG_H
 
-#ifndef TAPEPREFERENCESCONFIGURATIONPAGE_H
-#define TAPEPREFERENCESCONFIGURATIONPAGE_H
+#include <QDialog>
 
-#include <QWidget>
-
-#if QT_VERSION < QT_VERSION_CHECK(5, 13, 0)
-#include "../vmisc/defglobal.h"
-#endif
+#include "../vabstractshortcutmanager.h"
 
 namespace Ui
 {
-class TapePreferencesConfigurationPage;
+class VShortcutDialog;
 }
 
-class TapePreferencesConfigurationPage : public QWidget
+class QAbstractButton;
+
+class VShortcutDialog : public QDialog
 {
     Q_OBJECT // NOLINT
 
 public:
-    explicit TapePreferencesConfigurationPage(QWidget *parent = nullptr);
-    ~TapePreferencesConfigurationPage() override;
+    explicit VShortcutDialog(int index, QWidget *parent = nullptr);
+    ~VShortcutDialog() override;
 
-    auto Apply() -> QStringList;
-
-protected:
-    void changeEvent(QEvent *event) override;
+signals:
+    void ShortcutsListChanged(int index, QStringList shortcutsStringList);
 
 private slots:
-    void ShortcutCellDoubleClicked(int row, int column);
+    void ButtonBoxClicked(QAbstractButton *button);
 
 private:
-    // cppcheck-suppress unknownMacro
-    Q_DISABLE_COPY_MOVE(TapePreferencesConfigurationPage) // NOLINT
-    Ui::TapePreferencesConfigurationPage *ui;
-    bool m_langChanged;
-    bool m_systemChanged;
-    QList<QStringList> m_transientShortcuts{};
+    Q_DISABLE_COPY_MOVE(VShortcutDialog) // NOLINT
 
-    void RetranslateUi();
-    void SetThemeModeComboBox();
-    void InitShortcuts(bool defaults = false);
-    void UpdateShortcutsTable();
-    void RetranslateShortcutsTable();
+    Ui::VShortcutDialog *ui;
+    VAbstractShortcutManager::VSShortcut m_shortcutObject{};
+    int m_index;
+
+    void AcceptValidated();
+    void done(int r) override;
 };
 
-#endif // TAPEPREFERENCESCONFIGURATIONPAGE_H
+#endif // VSHORTCUTDIALOG_H

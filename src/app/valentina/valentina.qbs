@@ -161,12 +161,13 @@ VToolApp {
             "vformulapropertyeditor.h",
             "vtooloptionspropertybrowser.h",
             "vcmdexport.h",
-
             "vapplication.cpp",
             "vformulaproperty.cpp",
             "vformulapropertyeditor.cpp",
             "vtooloptionspropertybrowser.cpp",
-            "vcmdexport.cpp"
+            "vcmdexport.cpp",
+            "vvalentinashortcutmanager.cpp",
+            "vvalentinashortcutmanager.h",
         ]
     }
 

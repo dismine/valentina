@@ -443,6 +443,12 @@ auto VAbstractApplication::AppUptime() const -> qint64
     return m_uptimeTimer.elapsed();
 }
 
+//---------------------------------------------------------------------------------------------------------------------
+auto VAbstractApplication::GetShortcutManager() const -> VAbstractShortcutManager *
+{
+    return m_shortcutManager;
+}
+
 #if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
 //---------------------------------------------------------------------------------------------------------------------
 auto VAbstractApplication::TextCodecCache(QStringConverter::Encoding encoding) const -> VTextCodec *

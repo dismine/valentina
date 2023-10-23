@@ -29,6 +29,7 @@
 #ifndef DIALOGHISTORY_H
 #define DIALOGHISTORY_H
 
+#include "../vmisc/vabstractshortcutmanager.h"
 #include "../vtools/dialogs/tools/dialogtool.h"
 
 #include <QDomElement>
@@ -80,6 +81,9 @@ protected:
     auto IsValid() const -> bool final { return true; }
     void showEvent(QShowEvent *event) override;
 
+private slots:
+    void UpdateShortcuts();
+
 private:
     // cppcheck-suppress unknownMacro
     Q_DISABLE_COPY_MOVE(DialogHistory) // NOLINT
@@ -95,6 +99,9 @@ private:
     QSharedPointer<VTableSearch> m_search{};
 
     QMenu *m_searchHistory;
+
+    QMultiHash<VShortcutAction, QAbstractButton *> m_shortcuts{};
+    QHash<QAbstractButton *, QString> m_serachButtonTooltips{};
 
     void FillTable();
     auto Record(const VToolRecord &tool) const -> HistoryRecord;

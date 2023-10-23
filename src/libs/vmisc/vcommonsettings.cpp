@@ -1650,3 +1650,20 @@ void VCommonSettings::SetTranslateFormula(bool value)
     settings.setValue(*settingsPatternTranslateFormula, value);
     settings.sync();
 }
+
+//---------------------------------------------------------------------------------------------------------------------
+auto VCommonSettings::GetActionShortcuts(const QString &name, const QStringList &defaultShortcuts) -> QStringList
+{
+    QSettings settings(this->format(), this->scope(), this->organizationName(), *commonIniFilename);
+    settings.beginGroup("shortcuts"_L1);
+    return settings.value(name, defaultShortcuts).toStringList();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VCommonSettings::SetActionShortcuts(const QString &name, const QStringList &shortcuts)
+{
+    QSettings settings(this->format(), this->scope(), this->organizationName(), *commonIniFilename);
+    settings.beginGroup("shortcuts"_L1);
+    settings.setValue(name, shortcuts);
+    settings.sync();
+}

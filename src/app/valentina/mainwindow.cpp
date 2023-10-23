@@ -193,6 +193,7 @@
 #include "dialogs/vwidgetgroups.h"
 #include "ui_mainwindow.h"
 #include "vabstractapplication.h"
+#include "vabstractshortcutmanager.h"
 #include "vsinglelineoutlinechar.h"
 
 #if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
@@ -396,6 +397,7 @@ MainWindow::MainWindow(QWidget *parent)
     ToolBarStages();
     ToolBarDrawTools();
     InitToolButtons();
+    InitActionShortcuts();
 
     connect(ui->actionAddBackgroundImage, &QAction::triggered, this, &MainWindow::ActionAddBackgroundImage);
     connect(ui->actionExportFontCorrections, &QAction::triggered, this, &MainWindow::ActionExportFontCorrections);
@@ -533,6 +535,12 @@ MainWindow::MainWindow(QWidget *parent)
     }
 
     ui->actionExportFontCorrections->setEnabled(settings->GetSingleStrokeOutlineFont());
+
+    if (VAbstractShortcutManager *manager = VAbstractValApplication::VApp()->GetShortcutManager())
+    {
+        connect(manager, &VAbstractShortcutManager::shortcutsUpdated, this, &MainWindow::UpdateShortcuts);
+        UpdateShortcuts();
+    }
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -2943,83 +2951,25 @@ void MainWindow::ToolBarDraws()
 //---------------------------------------------------------------------------------------------------------------------
 void MainWindow::ToolBarTools()
 {
-    /*First we will try use Standard Shortcuts from Qt, but because keypad "-" and "+" not the same keys like in main
-    keypad, shortcut Ctrl+"-" or "+" from keypad will not working with standard shortcut (QKeySequence::ZoomIn or
-    QKeySequence::ZoomOut). For examle "+" is Qt::Key_Plus + Qt::KeypadModifier for keypad.
-    Also for me don't work Qt:CTRL and work Qt::ControlModifier.*/
-
-    QT_WARNING_PUSH
-#if !defined(Q_OS_MACOS) && defined(Q_CC_CLANG)
-    QT_WARNING_DISABLE_CLANG("-Wenum-enum-conversion")
-#endif
-
-    QList<QKeySequence> zoomInShortcuts;
-    zoomInShortcuts.append(QKeySequence(QKeySequence::ZoomIn));
-    zoomInShortcuts.append(
-#if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
-        QKeySequence(QKeyCombination(Qt::ControlModifier), Qt::Key_Plus | Qt::KeypadModifier));
-#else
-        QKeySequence(Qt::ControlModifier + Qt::Key_Plus + Qt::KeypadModifier));
-#endif
-    ui->actionZoomIn->setShortcuts(zoomInShortcuts);
+    m_shortcutActions.insert(VShortcutAction::ZoomIn, ui->actionZoomIn);
     connect(ui->actionZoomIn, &QAction::triggered, ui->view, &VMainGraphicsView::ZoomIn);
 
-    QList<QKeySequence> zoomOutShortcuts;
-    zoomOutShortcuts.append(QKeySequence(QKeySequence::ZoomOut));
-    zoomOutShortcuts.append(
-#if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
-        QKeySequence(QKeyCombination(Qt::ControlModifier), Qt::Key_Minus | Qt::KeypadModifier));
-#else
-        QKeySequence(Qt::ControlModifier + Qt::Key_Minus + Qt::KeypadModifier));
-#endif
-    ui->actionZoomOut->setShortcuts(zoomOutShortcuts);
+    m_shortcutActions.insert(VShortcutAction::ZoomOut, ui->actionZoomOut);
     connect(ui->actionZoomOut, &QAction::triggered, ui->view, &VMainGraphicsView::ZoomOut);
 
-    QList<QKeySequence> zoomOriginalShortcuts;
-    zoomOriginalShortcuts.append(
-#if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
-        QKeySequence(Qt::ControlModifier | Qt::Key_0));
-#else
-        QKeySequence(Qt::ControlModifier + Qt::Key_0));
-#endif
-    zoomOriginalShortcuts.append(
-#if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
-        QKeySequence(QKeyCombination(Qt::ControlModifier), Qt::Key_0 | Qt::KeypadModifier));
-#else
-        QKeySequence(Qt::ControlModifier + Qt::Key_0 + Qt::KeypadModifier));
-#endif
-    ui->actionZoomOriginal->setShortcuts(zoomOriginalShortcuts);
+    m_shortcutActions.insert(VShortcutAction::ZoomOriginal, ui->actionZoomOriginal);
     connect(ui->actionZoomOriginal, &QAction::triggered, ui->view, &VMainGraphicsView::ZoomOriginal);
 
-    QList<QKeySequence> zoomFitBestShortcuts;
-    zoomFitBestShortcuts.append(
-#if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
-        QKeySequence(Qt::ControlModifier | Qt::Key_Equal));
-#else
-        QKeySequence(Qt::ControlModifier + Qt::Key_Equal));
-#endif
-    ui->actionZoomFitBest->setShortcuts(zoomFitBestShortcuts);
+    m_shortcutActions.insert(VShortcutAction::ZoomFitBest, ui->actionZoomFitBest);
     connect(ui->actionZoomFitBest, &QAction::triggered, ui->view, &VMainGraphicsView::ZoomFitBest);
 
-    QList<QKeySequence> zoomFitBestCurrentShortcuts;
-    zoomFitBestCurrentShortcuts.append(
-#if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
-        QKeySequence(Qt::ControlModifier | Qt::Key_M));
-#else
-        QKeySequence(Qt::ControlModifier + Qt::Key_M));
-#endif
-    ui->actionZoomFitBestCurrent->setShortcuts(zoomFitBestCurrentShortcuts);
+    m_shortcutActions.insert(VShortcutAction::ZoomFitBestCurrent, ui->actionZoomFitBestCurrent);
     connect(ui->actionZoomFitBestCurrent, &QAction::triggered, this, &MainWindow::ZoomFitBestCurrent);
 
     connect(ui->actionPreviousPatternPiece, &QAction::triggered, this, &MainWindow::PreviousPatternPiece);
     connect(ui->actionNextPatternPiece, &QAction::triggered, this, &MainWindow::NextPatternPiece);
 
-    ui->actionIncreaseLabelFont->setShortcut(
-#if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
-        QKeySequence(Qt::ShiftModifier | Qt::Key_Plus));
-#else
-        QKeySequence(Qt::ShiftModifier + Qt::Key_Plus));
-#endif
+    m_shortcutActions.insert(VShortcutAction::IncreaseLabelFont, ui->actionIncreaseLabelFont);
     connect(ui->actionIncreaseLabelFont, &QAction::triggered, this,
             [this]()
             {
@@ -3036,12 +2986,7 @@ void MainWindow::ToolBarTools()
                 }
             });
 
-    ui->actionDecreaseLabelFont->setShortcut(
-#if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
-        QKeySequence(Qt::ShiftModifier | Qt::Key_Minus));
-#else
-        QKeySequence(Qt::ShiftModifier + Qt::Key_Minus));
-#endif
+    m_shortcutActions.insert(VShortcutAction::DecreaseLabelFont, ui->actionDecreaseLabelFont);
     connect(ui->actionDecreaseLabelFont, &QAction::triggered, this,
             [this]()
             {
@@ -3058,12 +3003,7 @@ void MainWindow::ToolBarTools()
                 }
             });
 
-    ui->actionOriginalLabelFont->setShortcut(
-#if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
-        QKeySequence(Qt::ShiftModifier | Qt::Key_0));
-#else
-        QKeySequence(Qt::ShiftModifier + Qt::Key_0));
-#endif
+    m_shortcutActions.insert(VShortcutAction::OriginalLabelFont, ui->actionOriginalLabelFont);
     connect(ui->actionOriginalLabelFont, &QAction::triggered, this,
             [this]()
             {
@@ -3080,12 +3020,7 @@ void MainWindow::ToolBarTools()
                 }
             });
 
-    ui->actionHideLabels->setShortcut(
-#if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
-        QKeySequence(Qt::AltModifier | Qt::Key_L));
-#else
-        QKeySequence(Qt::AltModifier + Qt::Key_L));
-#endif
+    m_shortcutActions.insert(VShortcutAction::HideLabels, ui->actionHideLabels);
     ui->actionHideLabels->setChecked(VAbstractValApplication::VApp()->ValentinaSettings()->GetHideLabels());
     connect(ui->actionHideLabels, &QAction::triggered, this,
             [this](bool checked)
@@ -3101,8 +3036,6 @@ void MainWindow::ToolBarTools()
                     m_sceneDetails->update();
                 }
             });
-
-    QT_WARNING_POP
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -3436,6 +3369,28 @@ void MainWindow::InitToolButtons()
     connect(ui->actionPinTool, &QAction::triggered, this, &MainWindow::ToolPin);
     connect(ui->actionInsertNodeTool, &QAction::triggered, this, &MainWindow::ToolInsertNode);
     connect(ui->actionPlaceLabelTool, &QAction::triggered, this, &MainWindow::ToolPlaceLabel);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void MainWindow::InitActionShortcuts()
+{
+    m_shortcutActions.insert(VShortcutAction::New, ui->actionNew);
+    m_shortcutActions.insert(VShortcutAction::Open, ui->actionOpen);
+    m_shortcutActions.insert(VShortcutAction::Save, ui->actionSave);
+    m_shortcutActions.insert(VShortcutAction::SaveAs, ui->actionSaveAs);
+    m_shortcutActions.insert(VShortcutAction::DrawMode, ui->actionDraw);
+    m_shortcutActions.insert(VShortcutAction::DetailsMode, ui->actionDetails);
+    m_shortcutActions.insert(VShortcutAction::LayoutMode, ui->actionLayout);
+    m_shortcutActions.insert(VShortcutAction::NewPatternPiece, ui->actionNewDraw);
+    m_shortcutActions.insert(VShortcutAction::NextPatternPiece, ui->actionNextPatternPiece);
+    m_shortcutActions.insert(VShortcutAction::PreviusPatternPiece, ui->actionPreviousPatternPiece);
+    m_shortcutActions.insert(VShortcutAction::InteractiveTools, ui->actionInteractiveTools);
+    m_shortcutActions.insert(VShortcutAction::TableOfVariables, ui->actionTable);
+    m_shortcutActions.insert(VShortcutAction::PatternHistory, ui->actionHistory);
+    m_shortcutActions.insert(VShortcutAction::Quit, ui->actionExit);
+    m_shortcutActions.insert(VShortcutAction::LastTool, ui->actionLast_tool);
+    m_shortcutActions.insert(VShortcutAction::CurveDetails, ui->actionShowCurveDetails);
+    m_shortcutActions.insert(VShortcutAction::FinalMeasurements, ui->actionFinalMeasurements);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -5203,6 +5158,15 @@ void MainWindow::ActionOpenTape_triggered()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+void MainWindow::UpdateShortcuts()
+{
+    if (VAbstractShortcutManager *manager = VAbstractValApplication::VApp()->GetShortcutManager())
+    {
+        manager->UpdateActionShortcuts(m_shortcutActions);
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 void MainWindow::InitDimensionControls()
 {
     if (not m_dimensionA.isNull())
@@ -5643,6 +5607,11 @@ void MainWindow::ReadSettings()
         QFont f = ui->plainTextEditPatternMessages->font();
         f.setPointSize(qMax(settings->GetPatternMessageFontSize(f.pointSize()), 1));
         ui->plainTextEditPatternMessages->setFont(f);
+
+        if (VAbstractShortcutManager *manager = VAbstractValApplication::VApp()->GetShortcutManager())
+        {
+            manager->UpdateShortcuts();
+        }
     }
     else
     {
@@ -5736,14 +5705,14 @@ void MainWindow::CreateMenus()
     // Add Undo/Redo actions.
     undoAction = VAbstractApplication::VApp()->getUndoStack()->createUndoAction(this, tr("&Undo"));
     connect(undoAction, &QAction::triggered, m_toolOptions, &VToolOptionsPropertyBrowser::RefreshOptions);
-    undoAction->setShortcuts(QKeySequence::Undo);
+    m_shortcutActions.insert(VShortcutAction::Undo, undoAction);
     undoAction->setIcon(QIcon::fromTheme(QStringLiteral("edit-undo")));
     ui->menuPatternPiece->insertAction(ui->actionLast_tool, undoAction);
     ui->toolBarTools->addAction(undoAction);
 
     redoAction = VAbstractApplication::VApp()->getUndoStack()->createRedoAction(this, tr("&Redo"));
     connect(redoAction, &QAction::triggered, m_toolOptions, &VToolOptionsPropertyBrowser::RefreshOptions);
-    redoAction->setShortcuts(QKeySequence::Redo);
+    m_shortcutActions.insert(VShortcutAction::Redo, redoAction);
     redoAction->setIcon(QIcon::fromTheme(QStringLiteral("edit-redo")));
     ui->menuPatternPiece->insertAction(ui->actionLast_tool, redoAction);
     ui->toolBarTools->addAction(redoAction);

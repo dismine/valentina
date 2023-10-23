@@ -42,6 +42,7 @@
 #include "../vmisc/vsysexits.h"
 #include "tmainwindow.h"
 #include "version.h"
+#include "vtapeshortcutmanager.h"
 
 #include <QCommandLineParser>
 #include <QDir>
@@ -504,6 +505,8 @@ void MApplication::InitOptions()
     statistic->SetApiSecret(GA_API_SECRET);
     statistic->SetRepoRevision(QLatin1String(BUILD_REVISION));
     statistic->Enable(settings->IsCollectStatistic());
+
+    m_shortcutManager = new VTapeShortcutManager(this);
 }
 
 //---------------------------------------------------------------------------------------------------------------------

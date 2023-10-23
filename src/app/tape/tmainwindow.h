@@ -35,6 +35,7 @@
 
 #include "../vformat/vmeasurements.h"
 #include "../vmisc/def.h"
+#include "../vmisc/vabstractshortcutmanager.h"
 #include "../vmisc/vlockguard.h"
 #include "../vmisc/vtablesearch.h"
 #include "../vwidgets/vabstractmainwindow.h"
@@ -47,6 +48,7 @@ class TMainWindow;
 class QLabel;
 class QxtCsvModel;
 class VMeasurement;
+class QAbstractButton;
 
 class TMainWindow : public VAbstractMainWindow
 {
@@ -155,6 +157,8 @@ private slots:
 
     void AskDefaultSettings();
 
+    void UpdateShortcuts();
+
 private:
     // cppcheck-suppress unknownMacro
     Q_DISABLE_COPY_MOVE(TMainWindow) // NOLINT
@@ -200,6 +204,10 @@ private:
         QString fullName{};    // NOLINT(misc-non-private-member-variables-in-classes)
         QString description{}; // NOLINT(misc-non-private-member-variables-in-classes)
     };
+
+    QMultiHash<VShortcutAction, QAction *> m_actionShortcuts{};
+    QMultiHash<VShortcutAction, QAbstractButton *> m_buttonShortcuts{};
+    QHash<QAbstractButton *, QString> m_serachButtonTooltips{};
 
     void SetupMenu();
     void InitWindow();

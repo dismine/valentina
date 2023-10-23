@@ -316,6 +316,20 @@ TMainWindow::TMainWindow(QWidget *parent)
     {
         QTimer::singleShot(V_SECONDS(1), this, &TMainWindow::AskDefaultSettings);
     }
+
+    m_buttonShortcuts.insert(VShortcutAction::CaseSensitiveMatch, ui->toolButtonCaseSensitive);
+    m_buttonShortcuts.insert(VShortcutAction::WholeWordMatch, ui->toolButtonWholeWord);
+    m_buttonShortcuts.insert(VShortcutAction::RegexMatch, ui->toolButtonRegexp);
+    m_buttonShortcuts.insert(VShortcutAction::SearchHistory, ui->pushButtonSearch);
+    m_buttonShortcuts.insert(VShortcutAction::RegexMatchUnicodeProperties, ui->toolButtonUseUnicodeProperties);
+    m_buttonShortcuts.insert(VShortcutAction::FindNext, ui->toolButtonFindNext);
+    m_buttonShortcuts.insert(VShortcutAction::FindPrevious, ui->toolButtonFindNext);
+
+    if (VAbstractShortcutManager *manager = VAbstractApplication::VApp()->GetShortcutManager())
+    {
+        connect(manager, &VAbstractShortcutManager::shortcutsUpdated, this, &TMainWindow::UpdateShortcuts);
+        UpdateShortcuts();
+    }
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -2865,11 +2879,22 @@ void TMainWindow::AskDefaultSettings()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+void TMainWindow::UpdateShortcuts()
+{
+    if (VAbstractShortcutManager *manager = VAbstractApplication::VApp()->GetShortcutManager())
+    {
+        manager->UpdateButtonShortcut(m_buttonShortcuts);
+        manager->UpdateActionShortcuts(m_actionShortcuts);
+        UpdateSearchControlsTooltips();
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 void TMainWindow::SetupMenu()
 {
     // File
     connect(ui->actionNew, &QAction::triggered, this, &TMainWindow::FileNew);
-    ui->actionNew->setShortcuts(QKeySequence::New);
+    m_actionShortcuts.insert(VShortcutAction::New, ui->actionNew);
 
     connect(ui->actionOpenIndividual, &QAction::triggered, this, &TMainWindow::OpenIndividual);
     connect(ui->actionOpenMultisize, &QAction::triggered, this, &TMainWindow::OpenMultisize);
@@ -2877,10 +2902,10 @@ void TMainWindow::SetupMenu()
     connect(ui->actionCreateFromExisting, &QAction::triggered, this, &TMainWindow::CreateFromExisting);
 
     connect(ui->actionSave, &QAction::triggered, this, &TMainWindow::FileSave);
-    ui->actionSave->setShortcuts(QKeySequence::Save);
+    m_actionShortcuts.insert(VShortcutAction::Save, ui->actionSave);
 
     connect(ui->actionSaveAs, &QAction::triggered, this, &TMainWindow::FileSaveAs);
-    ui->actionSaveAs->setShortcuts(QKeySequence::SaveAs);
+    m_actionShortcuts.insert(VShortcutAction::SaveAs, ui->actionSaveAs);
 
     connect(ui->actionExportToCSV, &QAction::triggered, this, &TMainWindow::ExportDataToCSV);
     connect(ui->actionImportFromCSV, &QAction::triggered, this, &TMainWindow::ImportDataFromCSV);
@@ -2930,7 +2955,7 @@ void TMainWindow::SetupMenu()
     ui->menuFile->insertAction(ui->actionPreferences, m_separatorAct);
 
     connect(ui->actionQuit, &QAction::triggered, this, &TMainWindow::close);
-    ui->actionQuit->setShortcuts(QKeySequence::Quit);
+    m_actionShortcuts.insert(VShortcutAction::Quit, ui->actionQuit);
 
     // Measurements
     connect(ui->actionAddCustom, &QAction::triggered, this, &TMainWindow::AddCustom);
@@ -5043,11 +5068,17 @@ void TMainWindow::SaveSearchRequest()
 //---------------------------------------------------------------------------------------------------------------------
 void TMainWindow::UpdateSearchControlsTooltips()
 {
-    auto UpdateToolTip = [](QAbstractButton *button)
+    auto UpdateToolTip = [this](QAbstractButton *button)
     {
         if (button->toolTip().contains("%1"_L1))
         {
+            m_serachButtonTooltips.insert(button, button->toolTip());
             button->setToolTip(button->toolTip().arg(button->shortcut().toString(QKeySequence::NativeText)));
+        }
+        else if (m_serachButtonTooltips.contains(button))
+        {
+            QString tooltip = m_serachButtonTooltips.value(button);
+            button->setToolTip(tooltip.arg(button->shortcut().toString(QKeySequence::NativeText)));
         }
     };
 

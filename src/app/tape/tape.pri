@@ -16,7 +16,8 @@ SOURCES  += \
     $$PWD/dialogs/dialogtapepreferences.cpp \
     $$PWD/dialogs/configpages/tapepreferencesconfigurationpage.cpp \
     $$PWD/vtapesettings.cpp \
-    $$PWD/dialogs/dialogsetupmultisize.cpp
+    $$PWD/dialogs/dialogsetupmultisize.cpp \
+    $$PWD/vtapeshortcutmanager.cpp
 
 *msvc*:SOURCES += $$PWD/stable.cpp
 
@@ -36,7 +37,8 @@ HEADERS  += \
     $$PWD/dialogs/dialogtapepreferences.h \
     $$PWD/dialogs/configpages/tapepreferencesconfigurationpage.h \
     $$PWD/vtapesettings.h \
-    $$PWD/dialogs/dialogsetupmultisize.h
+    $$PWD/dialogs/dialogsetupmultisize.h \
+    $$PWD/vtapeshortcutmanager.h
 
 FORMS    += \
     $$PWD/dialogs/dialogdimensioncustomnames.ui \

@@ -30,6 +30,7 @@
 #define MAINWINDOW_H
 
 #include "../vformat/vdimensions.h"
+#include "../vmisc/vabstractshortcutmanager.h"
 #include "../vmisc/vlockguard.h"
 #include "core/vcmdexport.h"
 #include "mainwindowsnogui.h"
@@ -254,6 +255,8 @@ private slots:
     void ActionShowMainPath_triggered(bool checked);
     void ActionOpenTape_triggered();
 
+    void UpdateShortcuts();
+
 private:
     // cppcheck-suppress unknownMacro
     Q_DISABLE_COPY_MOVE(MainWindow) // NOLINT
@@ -338,6 +341,8 @@ private:
     bool m_patternMessagesActive{false};
     bool m_backgroundImagesActive{false};
 
+    QMultiHash<VShortcutAction, QAction *> m_shortcutActions{};
+
     void InitDimensionControls();
     void InitDimensionGradation(int index, const MeasurementDimension_p &dimension, const QPointer<QComboBox> &control);
     static void InitDimensionXGradation(const QVector<qreal> &bases, const DimesionLabels &labels,
@@ -351,6 +356,7 @@ private:
     void ToolBarTools();
     void ToolBarDrawTools();
     void InitToolButtons();
+    void InitActionShortcuts();
     void CancelTool();
 
     void SetupDrawToolsIcons();

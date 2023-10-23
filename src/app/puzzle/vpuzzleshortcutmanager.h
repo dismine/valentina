@@ -1,14 +1,14 @@
 /************************************************************************
  **
- **  @file   tapepreferencesconfigurationpage.h
+ **  @file   vpuzzleshortcutmanager.h
  **  @author Roman Telezhynskyi <dismine(at)gmail.com>
- **  @date   12 4, 2017
+ **  @date   23 10, 2023
  **
  **  @brief
  **  @copyright
  **  This source code is part of the Valentina project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
- **  Copyright (C) 2017 Valentina project
+ **  Copyright (C) 2023 Valentina project
  **  <https://gitlab.com/smart-pattern/valentina> All Rights Reserved.
  **
  **  Valentina is free software: you can redistribute it and/or modify
@@ -25,50 +25,25 @@
  **  along with Valentina.  If not, see <http://www.gnu.org/licenses/>.
  **
  *************************************************************************/
+#ifndef VPUZZLESHORTCUTMANAGER_H
+#define VPUZZLESHORTCUTMANAGER_H
 
-#ifndef TAPEPREFERENCESCONFIGURATIONPAGE_H
-#define TAPEPREFERENCESCONFIGURATIONPAGE_H
-
-#include <QWidget>
+#include "../vmisc/vabstractshortcutmanager.h"
 
 #if QT_VERSION < QT_VERSION_CHECK(5, 13, 0)
 #include "../vmisc/defglobal.h"
 #endif
 
-namespace Ui
-{
-class TapePreferencesConfigurationPage;
-}
-
-class TapePreferencesConfigurationPage : public QWidget
+class VPuzzleShortcutManager : public VAbstractShortcutManager
 {
     Q_OBJECT // NOLINT
 
 public:
-    explicit TapePreferencesConfigurationPage(QWidget *parent = nullptr);
-    ~TapePreferencesConfigurationPage() override;
-
-    auto Apply() -> QStringList;
-
-protected:
-    void changeEvent(QEvent *event) override;
-
-private slots:
-    void ShortcutCellDoubleClicked(int row, int column);
+    explicit VPuzzleShortcutManager(QObject *parent = nullptr);
+    ~VPuzzleShortcutManager() override = default;
 
 private:
-    // cppcheck-suppress unknownMacro
-    Q_DISABLE_COPY_MOVE(TapePreferencesConfigurationPage) // NOLINT
-    Ui::TapePreferencesConfigurationPage *ui;
-    bool m_langChanged;
-    bool m_systemChanged;
-    QList<QStringList> m_transientShortcuts{};
-
-    void RetranslateUi();
-    void SetThemeModeComboBox();
-    void InitShortcuts(bool defaults = false);
-    void UpdateShortcutsTable();
-    void RetranslateShortcutsTable();
+    Q_DISABLE_COPY_MOVE(VPuzzleShortcutManager) // NOLINT
 };
 
-#endif // TAPEPREFERENCESCONFIGURATIONPAGE_H
+#endif // VPUZZLESHORTCUTMANAGER_H

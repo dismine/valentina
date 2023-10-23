@@ -29,7 +29,9 @@
 #include "puzzlepreferencesconfigurationpage.h"
 #include "../../vpapplication.h"
 #include "../vganalytics/vganalytics.h"
+#include "../vmisc/dialogs/vshortcutdialog.h"
 #include "../vmisc/theme/vtheme.h"
+#include "../vmisc/vabstractshortcutmanager.h"
 #include "ui_puzzlepreferencesconfigurationpage.h"
 
 #if QT_VERSION < QT_VERSION_CHECK(5, 7, 0)
@@ -78,6 +80,12 @@ PuzzlePreferencesConfigurationPage::PuzzlePreferencesConfigurationPage(QWidget *
 
     //----------------------- Update
     ui->checkBoxAutomaticallyCheckUpdates->setChecked(settings->IsAutomaticallyCheckUpdates());
+
+    // Tab Shortcuts
+    InitShortcuts();
+    connect(ui->pushButtonRestoreDefaults, &QPushButton::clicked, this, [this]() { InitShortcuts(true); });
+    connect(ui->shortcutsTable, &QTableWidget::cellDoubleClicked, this,
+            &PuzzlePreferencesConfigurationPage::ShortcutCellDoubleClicked);
 
     // Tab Scrolling
     ui->spinBoxDuration->setMinimum(VCommonSettings::scrollingDurationMin);
@@ -193,6 +201,19 @@ auto PuzzlePreferencesConfigurationPage::Apply() -> QStringList
     }
     settings->SetSingleLineFonts(ui->checkBoxSingleLineFonts->isChecked());
 
+    // Tab Shortcuts
+    if (VAbstractShortcutManager *manager = VAbstractApplication::VApp()->GetShortcutManager())
+    {
+        const auto &shortcutsList = manager->GetShortcutsList();
+        for (int i = 0; i < m_transientShortcuts.length(); i++)
+        {
+            settings->SetActionShortcuts(VAbstractShortcutManager::ShortcutActionToString(shortcutsList.value(i).type),
+                                         m_transientShortcuts.value(i));
+        }
+
+        manager->UpdateShortcuts();
+    }
+
     // Tab Scrolling
     settings->SetScrollingDuration(ui->spinBoxDuration->value());
     settings->SetScrollingUpdateInterval(ui->spinBoxUpdateInterval->value());
@@ -213,10 +234,25 @@ void PuzzlePreferencesConfigurationPage::changeEvent(QEvent *event)
     if (event->type() == QEvent::LanguageChange)
     {
         // retranslate designer form (single inheritance approach)
+        RetranslateShortcutsTable();
         ui->retranslateUi(this);
     }
     // remember to call base class implementation
     QWidget::changeEvent(event);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void PuzzlePreferencesConfigurationPage::ShortcutCellDoubleClicked(int row, int column)
+{
+    Q_UNUSED(column)
+    auto *shortcutDialog = new VShortcutDialog(row, this);
+    connect(shortcutDialog, &VShortcutDialog::ShortcutsListChanged, this,
+            [this](int index, const QStringList &stringListShortcuts)
+            {
+                m_transientShortcuts.replace(index, stringListShortcuts);
+                UpdateShortcutsTable();
+            });
+    shortcutDialog->open();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -226,4 +262,76 @@ void PuzzlePreferencesConfigurationPage::SetThemeModeComboBox()
     ui->comboBoxThemeMode->addItem(tr("System", "theme"), static_cast<int>(VThemeMode::System));
     ui->comboBoxThemeMode->addItem(tr("Dark", "theme"), static_cast<int>(VThemeMode::Dark));
     ui->comboBoxThemeMode->addItem(tr("Light", "theme"), static_cast<int>(VThemeMode::Light));
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void PuzzlePreferencesConfigurationPage::InitShortcuts(bool defaults)
+{
+    VAbstractShortcutManager *manager = VAbstractApplication::VApp()->GetShortcutManager();
+    if (manager == nullptr)
+    {
+        return;
+    }
+
+    manager->UpdateShortcuts();
+    m_transientShortcuts.clear();
+    ui->shortcutsTable->clearContents();
+    const auto &shortcutsList = manager->GetShortcutsList();
+    ui->shortcutsTable->setRowCount(static_cast<int>(shortcutsList.length()));
+
+    for (int i = 0; i < shortcutsList.length(); i++)
+    {
+        const VAbstractShortcutManager::VSShortcut &shortcut = shortcutsList.value(i);
+
+        // Add shortcut to transient shortcut list
+        if (defaults)
+        {
+            m_transientShortcuts.append(shortcut.defaultShortcuts);
+        }
+        else
+        {
+            m_transientShortcuts.append(shortcut.shortcuts);
+        }
+
+        // Add shortcut to table widget
+        auto *nameItem = new QTableWidgetItem();
+        nameItem->setText(VAbstractShortcutManager::ReadableName(shortcut.type));
+        ui->shortcutsTable->setItem(i, 0, nameItem);
+
+        auto *shortcutsItem = new QTableWidgetItem();
+        shortcutsItem->setText(VAbstractShortcutManager::StringListToReadableString(m_transientShortcuts.value(i)));
+        ui->shortcutsTable->setItem(i, 1, shortcutsItem);
+    }
+    UpdateShortcutsTable();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void PuzzlePreferencesConfigurationPage::UpdateShortcutsTable()
+{
+    for (int i = 0; i < m_transientShortcuts.length(); i++)
+    {
+        const QStringList &shortcuts = m_transientShortcuts.value(i);
+        ui->shortcutsTable->item(i, 1)->setText(VAbstractShortcutManager::StringListToReadableString(shortcuts));
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void PuzzlePreferencesConfigurationPage::RetranslateShortcutsTable()
+{
+    VAbstractShortcutManager *manager = VAbstractApplication::VApp()->GetShortcutManager();
+    if (manager == nullptr)
+    {
+        return;
+    }
+
+    const auto &shortcutsList = manager->GetShortcutsList();
+    for (int i = 0; i < shortcutsList.length(); i++)
+    {
+        const VAbstractShortcutManager::VSShortcut &shortcut = shortcutsList.value(i);
+
+        if (QTableWidgetItem *it = ui->shortcutsTable->item(i, 0))
+        {
+            it->setText(VAbstractShortcutManager::ReadableName(shortcut.type));
+        }
+    }
 }

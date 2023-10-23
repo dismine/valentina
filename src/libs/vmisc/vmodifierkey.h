@@ -69,7 +69,7 @@ public:
     /** Returns a string representation for user interface purposes.
      *
      * This operator is intented to be used for implicit type casts. */
-    operator QString() const;
+    operator QString() const; // NOLINT(google-explicit-constructor)
 
     /** Returns a shared Alt modifier key. */
     static auto Alt() -> const VModifierKey &;

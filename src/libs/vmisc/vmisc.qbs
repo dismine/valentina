@@ -42,6 +42,8 @@ VLib {
             "vdatastreamenum.h",
             "vmodifierkey.h",
             "typedef.h",
+            "vabstractshortcutmanager.h",
+            "vabstractshortcutmanager.cpp",
         ]
 
         if (Utilities.versionCompare(Qt.core.version, "6") >= 0) {
@@ -75,6 +77,9 @@ VLib {
             "dialogselectlanguage.h",
             "dialogexporttocsv.ui",
             "dialogselectlanguage.ui",
+            "vshortcutdialog.cpp",
+            "vshortcutdialog.h",
+            "vshortcutdialog.ui",
         ]
     }
 

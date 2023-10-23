@@ -53,6 +53,9 @@ public:
 protected:
     void changeEvent(QEvent *event) override;
 
+private slots:
+    void ShortcutCellDoubleClicked(int row, int column);
+
 private:
     // cppcheck-suppress unknownMacro
     Q_DISABLE_COPY_MOVE(PreferencesConfigurationPage) // NOLINT
@@ -62,12 +65,16 @@ private:
     bool m_systemChanged{false};
     bool m_unitChanged{false};
     bool m_labelLangChanged{false};
+    QList<QStringList> m_transientShortcuts{};
 
     void SetLabelComboBox(const QStringList &list);
     void SetThemeModeComboBox();
     void SetPointerModeComboBox();
     void InitUnits();
     void RetranslateUi();
+    void InitShortcuts(bool defaults = false);
+    void UpdateShortcutsTable();
+    void RetranslateShortcutsTable();
 };
 
 #endif // PREFERENCESCONFIGURATIONPAGE_H

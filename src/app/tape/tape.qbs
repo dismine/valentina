@@ -62,6 +62,8 @@ VToolApp {
         "vlitepattern.h",
         "vtapesettings.h",
         "tmainwindow.ui",
+        "vtapeshortcutmanager.cpp",
+        "vtapeshortcutmanager.h",
     ]
 
     Group {

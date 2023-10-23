@@ -31,7 +31,9 @@
 #include "../../vtapesettings.h"
 #include "../qmuparser/qmudef.h"
 #include "../vganalytics/vganalytics.h"
+#include "../vmisc/dialogs/vshortcutdialog.h"
 #include "../vmisc/theme/vtheme.h"
+#include "../vmisc/vabstractshortcutmanager.h"
 #include "../vpatterndb/pmsystems.h"
 #include "ui_tapepreferencesconfigurationpage.h"
 
@@ -104,6 +106,12 @@ TapePreferencesConfigurationPage::TapePreferencesConfigurationPage(QWidget *pare
 
     //----------------------- Update
     ui->checkBoxAutomaticallyCheckUpdates->setChecked(settings->IsAutomaticallyCheckUpdates());
+
+    // Tab Shortcuts
+    InitShortcuts();
+    connect(ui->pushButtonRestoreDefaults, &QPushButton::clicked, this, [this]() { InitShortcuts(true); });
+    connect(ui->shortcutsTable, &QTableWidget::cellDoubleClicked, this,
+            &TapePreferencesConfigurationPage::ShortcutCellDoubleClicked);
 
     // Tab Privacy
     ui->checkBoxSendUsageStatistics->setChecked(settings->IsCollectStatistic());
@@ -181,6 +189,19 @@ auto TapePreferencesConfigurationPage::Apply() -> QStringList
         settings->SetAutomaticallyCheckUpdates(ui->checkBoxAutomaticallyCheckUpdates->isChecked());
     }
 
+    // Tab Shortcuts
+    if (VAbstractShortcutManager *manager = VAbstractApplication::VApp()->GetShortcutManager())
+    {
+        const auto &shortcutsList = manager->GetShortcutsList();
+        for (int i = 0; i < m_transientShortcuts.length(); i++)
+        {
+            settings->SetActionShortcuts(VAbstractShortcutManager::ShortcutActionToString(shortcutsList.value(i).type),
+                                         m_transientShortcuts.value(i));
+        }
+
+        manager->UpdateShortcuts();
+    }
+
     // Tab Privacy
     settings->SetCollectStatistic(ui->checkBoxSendUsageStatistics->isChecked());
     VGAnalytics::Instance()->Enable(ui->checkBoxSendUsageStatistics->isChecked());
@@ -202,6 +223,20 @@ void TapePreferencesConfigurationPage::changeEvent(QEvent *event)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+void TapePreferencesConfigurationPage::ShortcutCellDoubleClicked(int row, int column)
+{
+    Q_UNUSED(column)
+    auto *shortcutDialog = new VShortcutDialog(row, this);
+    connect(shortcutDialog, &VShortcutDialog::ShortcutsListChanged, this,
+            [this](int index, const QStringList &stringListShortcuts)
+            {
+                m_transientShortcuts.replace(index, stringListShortcuts);
+                UpdateShortcutsTable();
+            });
+    shortcutDialog->open();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 void TapePreferencesConfigurationPage::RetranslateUi()
 {
     ui->osOptionCheck->setText(tr("With OS options") + QStringLiteral(" (%1)").arg(LocaleDecimalPoint(QLocale())));
@@ -215,6 +250,8 @@ void TapePreferencesConfigurationPage::RetranslateUi()
         ui->systemCombo->blockSignals(false);
         ui->systemCombo->setCurrentIndex(ui->systemCombo->findData(code));
     }
+
+    RetranslateShortcutsTable();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -224,4 +261,76 @@ void TapePreferencesConfigurationPage::SetThemeModeComboBox()
     ui->comboBoxThemeMode->addItem(tr("System", "theme"), static_cast<int>(VThemeMode::System));
     ui->comboBoxThemeMode->addItem(tr("Dark", "theme"), static_cast<int>(VThemeMode::Dark));
     ui->comboBoxThemeMode->addItem(tr("Light", "theme"), static_cast<int>(VThemeMode::Light));
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void TapePreferencesConfigurationPage::InitShortcuts(bool defaults)
+{
+    VAbstractShortcutManager *manager = VAbstractApplication::VApp()->GetShortcutManager();
+    if (manager == nullptr)
+    {
+        return;
+    }
+
+    manager->UpdateShortcuts();
+    m_transientShortcuts.clear();
+    ui->shortcutsTable->clearContents();
+    const auto &shortcutsList = manager->GetShortcutsList();
+    ui->shortcutsTable->setRowCount(static_cast<int>(shortcutsList.length()));
+
+    for (int i = 0; i < shortcutsList.length(); i++)
+    {
+        const VAbstractShortcutManager::VSShortcut &shortcut = shortcutsList.value(i);
+
+        // Add shortcut to transient shortcut list
+        if (defaults)
+        {
+            m_transientShortcuts.append(shortcut.defaultShortcuts);
+        }
+        else
+        {
+            m_transientShortcuts.append(shortcut.shortcuts);
+        }
+
+        // Add shortcut to table widget
+        auto *nameItem = new QTableWidgetItem();
+        nameItem->setText(VAbstractShortcutManager::ReadableName(shortcut.type));
+        ui->shortcutsTable->setItem(i, 0, nameItem);
+
+        auto *shortcutsItem = new QTableWidgetItem();
+        shortcutsItem->setText(VAbstractShortcutManager::StringListToReadableString(m_transientShortcuts.value(i)));
+        ui->shortcutsTable->setItem(i, 1, shortcutsItem);
+    }
+    UpdateShortcutsTable();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void TapePreferencesConfigurationPage::UpdateShortcutsTable()
+{
+    for (int i = 0; i < m_transientShortcuts.length(); i++)
+    {
+        const QStringList &shortcuts = m_transientShortcuts.value(i);
+        ui->shortcutsTable->item(i, 1)->setText(VAbstractShortcutManager::StringListToReadableString(shortcuts));
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void TapePreferencesConfigurationPage::RetranslateShortcutsTable()
+{
+    VAbstractShortcutManager *manager = VAbstractApplication::VApp()->GetShortcutManager();
+    if (manager == nullptr)
+    {
+        return;
+    }
+
+    const auto &shortcutsList = manager->GetShortcutsList();
+    for (int i = 0; i < shortcutsList.length(); i++)
+    {
+        const VAbstractShortcutManager::VSShortcut &shortcut = shortcutsList.value(i);
+
+        if (QTableWidgetItem *it = ui->shortcutsTable->item(i, 0))
+        {
+            it->setText(VAbstractShortcutManager::ReadableName(shortcut.type));
+        }
+    }
 }

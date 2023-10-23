@@ -29,6 +29,7 @@
 #ifndef DIALOGINCREMENTS_H
 #define DIALOGINCREMENTS_H
 
+#include "../vmisc/vabstractshortcutmanager.h"
 #include "../vmisc/vtablesearch.h"
 #include "../vtools/dialogs/tools/dialogtool.h"
 #include "../xml/vpattern.h"
@@ -82,6 +83,7 @@ private slots:
     void DeployFormula();
     void Fx();
     void RefreshPattern();
+    void UpdateShortcuts();
 
 private:
     // cppcheck-suppress unknownMacro
@@ -111,6 +113,9 @@ private:
 
     QMenu *m_searchHistory;
     QMenu *m_searchHistoryPC;
+
+    QMultiHash<VShortcutAction, QAbstractButton *> m_shortcuts{};
+    QHash<QAbstractButton *, QString> m_serachButtonTooltips{};
 
     template <typename T> void FillTable(const QMap<QString, T> &varTable, QTableWidget *table);
 
