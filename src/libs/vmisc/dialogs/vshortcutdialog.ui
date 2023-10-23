@@ -15,11 +15,7 @@
   </property>
   <layout class="QVBoxLayout" name="verticalLayout">
    <item>
-    <widget class="QKeySequenceEdit" name="keySequenceEdit">
-     <property name="clearButtonEnabled">
-      <bool>true</bool>
-     </property>
-    </widget>
+    <widget class="QKeySequenceEdit" name="keySequenceEdit"/>
    </item>
    <item>
     <widget class="QDialogButtonBox" name="buttonBox">
