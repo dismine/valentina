@@ -57,7 +57,7 @@ void VAbstractShortcutManager::UpdateShortcuts()
             settings->GetActionShortcuts(ShortcutActionToString(shortcut.type), shortcut.defaultShortcuts);
     }
 
-    emit shortcutsUpdated();
+    emit ShortcutsUpdated();
 }
 
 //---------------------------------------------------------------------------------------------------------------------

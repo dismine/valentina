@@ -538,7 +538,7 @@ MainWindow::MainWindow(QWidget *parent)
 
     if (VAbstractShortcutManager *manager = VAbstractValApplication::VApp()->GetShortcutManager())
     {
-        connect(manager, &VAbstractShortcutManager::shortcutsUpdated, this, &MainWindow::UpdateShortcuts);
+        connect(manager, &VAbstractShortcutManager::ShortcutsUpdated, this, &MainWindow::UpdateShortcuts);
         UpdateShortcuts();
     }
 }

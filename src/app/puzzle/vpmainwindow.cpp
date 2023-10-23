@@ -435,7 +435,7 @@ VPMainWindow::VPMainWindow(const VPCommandLinePtr &cmd, QWidget *parent)
 
     if (VAbstractShortcutManager *manager = VAbstractApplication::VApp()->GetShortcutManager())
     {
-        connect(manager, &VAbstractShortcutManager::shortcutsUpdated, this, &VPMainWindow::UpdateShortcuts);
+        connect(manager, &VAbstractShortcutManager::ShortcutsUpdated, this, &VPMainWindow::UpdateShortcuts);
         UpdateShortcuts();
     }
 }

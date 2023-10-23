@@ -123,7 +123,7 @@ public:
     static auto StringListToKeySequenceList(const QStringList &stringList) -> QList<QKeySequence>;
 
 signals:
-    void shortcutsUpdated();
+    void ShortcutsUpdated();
 
 protected:
     void AddShortcut(const VSShortcut &shortcut);

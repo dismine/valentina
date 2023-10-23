@@ -204,7 +204,7 @@ DialogIncrements::DialogIncrements(VContainer *data, VPattern *doc, QWidget *par
 
     if (VAbstractShortcutManager *manager = VAbstractApplication::VApp()->GetShortcutManager())
     {
-        connect(VAbstractValApplication::VApp()->GetShortcutManager(), &VAbstractShortcutManager::shortcutsUpdated,
+        connect(VAbstractValApplication::VApp()->GetShortcutManager(), &VAbstractShortcutManager::ShortcutsUpdated,
                 this, &DialogIncrements::UpdateShortcuts);
         UpdateShortcuts();
     }
