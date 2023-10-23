@@ -37,6 +37,12 @@
 #include "../vmisc/def.h"
 #include "../vmisc/testvapplication.h"
 
+#if QT_VERSION < QT_VERSION_CHECK(6, 4, 0)
+#include "../vmisc/compatibility.h"
+#endif
+
+using namespace Qt::Literals::StringLiterals;
+
 auto main(int argc, char **argv) -> int
 {
     TestVApplication app(argc, argv); // For QPrinter
@@ -55,7 +61,7 @@ auto main(int argc, char **argv) -> int
     {
         for (const auto &s : TST_MeasurementRegExp::pmSystems)
         {
-            if (locale != QStringLiteral("zh_CN") && locale != QStringLiteral("he_IL"))
+            if (locale != "zh_CN"_L1 && locale != "he_IL"_L1)
             {
                 ASSERT_TEST(new TST_MeasurementRegExp(s, locale));
             }
