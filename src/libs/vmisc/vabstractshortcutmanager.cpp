@@ -184,6 +184,8 @@ auto VAbstractShortcutManager::ShortcutActionToString(VShortcutAction type) -> Q
         case VShortcutAction::LAST_ONE_DO_NOT_USE:
             Q_UNREACHABLE();
             break;
+        default:
+            break;
     };
     return {};
 }
@@ -267,6 +269,8 @@ auto VAbstractShortcutManager::ReadableName(VShortcutAction type) -> QString
             return tr("Find previus match", "shortcut for action");
         case VShortcutAction::LAST_ONE_DO_NOT_USE:
             Q_UNREACHABLE(); //-V501
+            break;
+        default:
             break;
     };
     return {};
