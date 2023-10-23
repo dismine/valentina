@@ -31,8 +31,6 @@
 #include <QAction>
 #include <QMultiHash>
 
-#include "qassert.h"
-#include "qtpreprocessorsupport.h"
 #include "vabstractapplication.h"
 #include "vcommonsettings.h"
 
