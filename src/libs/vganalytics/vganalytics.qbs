@@ -8,6 +8,7 @@ VLib {
         "vganalyticsworker.h",
     ]
     Depends { name: "Qt"; submodules: ["core", "network", "gui"] }
+    Depends { name: "VMiscLib"; }
 
     Export {
         Depends { name: "cpp" }

@@ -7,8 +7,10 @@
 # File with common stuff for whole project
 include(../../../common.pri)
 
+QT += widgets
+
 # Name of library
-TARGET = vobj widgets
+TARGET = vobj
 
 # We want create a library
 TEMPLATE = lib
