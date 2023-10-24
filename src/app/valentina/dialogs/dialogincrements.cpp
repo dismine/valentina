@@ -1131,6 +1131,14 @@ void DialogIncrements::InitIncrementsSearchHistory()
 {
     QStringList searchHistory = VAbstractValApplication::VApp()->ValentinaSettings()->GetIncrementsSearchHistory();
     m_searchHistory->clear();
+
+    if (searchHistory.isEmpty())
+    {
+        QAction *action = m_searchHistory->addAction('<'_L1 + tr("Empty", "list") + '>'_L1);
+        action->setDisabled(true);
+        return;
+    }
+
     for (const auto &term : searchHistory)
     {
         QAction *action = m_searchHistory->addAction(term);
@@ -1156,6 +1164,14 @@ void DialogIncrements::InitPreviewCalculationsSearchHistory()
     QStringList searchHistory =
         VAbstractValApplication::VApp()->ValentinaSettings()->GetPreviewCalculationsSearchHistory();
     m_searchHistoryPC->clear();
+
+    if (searchHistory.isEmpty())
+    {
+        QAction *action = m_searchHistoryPC->addAction('<'_L1 + tr("Empty", "list") + '>'_L1);
+        action->setDisabled(true);
+        return;
+    }
+
     for (const auto &term : searchHistory)
     {
         QAction *action = m_searchHistoryPC->addAction(term);
