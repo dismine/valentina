@@ -115,8 +115,7 @@ DialogFinalMeasurements::DialogFinalMeasurements(VPattern *doc, QWidget *parent)
 
     if (VAbstractShortcutManager *manager = VAbstractApplication::VApp()->GetShortcutManager())
     {
-        connect(VAbstractValApplication::VApp()->GetShortcutManager(), &VAbstractShortcutManager::ShortcutsUpdated,
-                this, &DialogFinalMeasurements::UpdateShortcuts);
+        connect(manager, &VAbstractShortcutManager::ShortcutsUpdated, this, &DialogFinalMeasurements::UpdateShortcuts);
         UpdateShortcuts();
     }
 }

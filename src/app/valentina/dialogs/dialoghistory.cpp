@@ -99,8 +99,7 @@ DialogHistory::DialogHistory(VContainer *data, VPattern *doc, QWidget *parent)
 
     if (VAbstractShortcutManager *manager = VAbstractApplication::VApp()->GetShortcutManager())
     {
-        connect(VAbstractValApplication::VApp()->GetShortcutManager(), &VAbstractShortcutManager::ShortcutsUpdated,
-                this, &DialogHistory::UpdateShortcuts);
+        connect(manager, &VAbstractShortcutManager::ShortcutsUpdated, this, &DialogHistory::UpdateShortcuts);
         UpdateShortcuts();
     }
 }
