@@ -1,5 +1,5 @@
 VLib {
-    Depends { name: "Qt"; submodules: ["gui", "widgets"] }
+    Depends { name: "Qt"; submodules: ["gui"] }
 
     name: "VObjLib"
     files: [

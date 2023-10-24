@@ -225,7 +225,7 @@ VLib {
 
     Export {
         Depends { name: "cpp" }
-        Depends { name: "Qt"; submodules: ["printsupport"] }
+        Depends { name: "Qt"; submodules: ["printsupport", "widgets"] }
         cpp.includePaths: [exportingProduct.sourceDirectory]
     }
 }

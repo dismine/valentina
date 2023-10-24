@@ -1,7 +1,7 @@
 # File with common stuff for whole project
 include(../../../common.pri)
 
-QT += network gui
+QT += network gui widgets
 
 # Name of library
 TARGET = vganalytics
