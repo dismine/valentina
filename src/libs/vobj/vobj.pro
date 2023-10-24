@@ -8,7 +8,7 @@
 include(../../../common.pri)
 
 # Name of library
-TARGET = vobj
+TARGET = vobj widgets
 
 # We want create a library
 TEMPLATE = lib

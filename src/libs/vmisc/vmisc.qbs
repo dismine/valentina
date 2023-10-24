@@ -1,7 +1,7 @@
 import qbs.Utilities
 
 VLib {
-    Depends { name: "Qt"; submodules: ["core", "printsupport", "gui"] }
+    Depends { name: "Qt"; submodules: ["core", "printsupport", "gui", "widgets"] }
 
     name: "VMiscLib"
     files: {

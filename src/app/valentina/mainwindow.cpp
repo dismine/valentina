@@ -191,7 +191,6 @@
 #include "dialogs/vwidgetbackgroundimages.h"
 #include "dialogs/vwidgetdetails.h"
 #include "dialogs/vwidgetgroups.h"
-#include "qtpreprocessorsupport.h"
 #include "ui_mainwindow.h"
 #include "vabstractapplication.h"
 #include "vabstractshortcutmanager.h"
