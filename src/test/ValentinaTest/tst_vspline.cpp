@@ -34,7 +34,7 @@
 
 //---------------------------------------------------------------------------------------------------------------------
 TST_VSpline::TST_VSpline(QObject *parent)
-    :AbstractTest(parent)
+  : AbstractTest(parent)
 {
 }
 
@@ -386,8 +386,8 @@ void TST_VSpline::GetSegmentPoints_NullSegment()
     VSpline spl(p1, p2, p3, p4, 1);
     spl.SetApproximationScale(10);
 
-    const QPointF begin	(146.3718263928647, 6.419281580065625);
-    const QPointF end	(146.3718263928647, 6.419281580065625);
+    const QPointF begin(146.3718263928647, 6.419281580065625);
+    const QPointF end(146.3718263928647, 6.419281580065625);
 
     QVector<QPointF> points;
     points << spl.GetSegmentPoints(begin, end, true);
@@ -543,7 +543,7 @@ void TST_VSpline::GetSegmentPoints_RotateTool()
     spl.SetApproximationScale(10);
 
     const QPointF begin(237.32422843061005, 485.80074940371367);
-    const QPointF end  (46.623829088412336, 167.78988631718659);
+    const QPointF end(46.623829088412336, 167.78988631718659);
 
     QVector<QPointF> points;
     points << spl.GetSegmentPoints(begin, end, true);
@@ -638,7 +638,7 @@ void TST_VSpline::GetSegmentPoints_issue767()
     // Test issue with method IsPointOnLineSegment.
 
     const QPointF begin(3964.650771379471, 3212.2173150777817);
-    const QPointF end  (4200.023629188538, 2559.9039118110236);
+    const QPointF end(4200.023629188538, 2559.9039118110236);
 
     QVector<QPointF> points;
     points.append(QPointF(3964.650771379471, 3212.2173150777817));
@@ -704,17 +704,17 @@ void TST_VSpline::CompareThreeWays()
     VSpline spl2(spl1.GetP1(), static_cast<QPointF>(spl1.GetP2()), static_cast<QPointF>(spl1.GetP3()), spl1.GetP4(), 1);
     spl2.SetApproximationScale(10);
 
-    VSpline spl3(spl1.GetP1(), spl1.GetP4(), spl1.GetStartAngle(), QString(), spl2.GetEndAngle(), QString(), spl2.GetC1Length(), QString(),
-                 spl2.GetC2Length(), QString(), 1);
+    VSpline spl3(spl1.GetP1(), spl1.GetP4(), spl1.GetStartAngle(), QString(), spl2.GetEndAngle(), QString(),
+                 spl2.GetC1Length(), QString(), spl2.GetC2Length(), QString(), 1);
     spl3.SetApproximationScale(10);
 
-    QWARN("Comparing first and second splines.");
+    qWarning("Comparing first and second splines.");
     CompareSplines(spl1, spl2);
 
-    QWARN("Comparing second and third splines.");
+    qWarning("Comparing second and third splines.");
     CompareSplines(spl2, spl3);
 
-    QWARN("Comparing third and first splines.");
+    qWarning("Comparing third and first splines.");
     CompareSplines(spl3, spl1);
 }
 
@@ -737,8 +737,7 @@ void TST_VSpline::TestParametrT_data()
     {
         QTest::newRow(qUtf8Printable(QStringLiteral("Curve 1. Step = %1").arg(step))) << spl << base * step;
         step += 0.001;
-    }
-    while(step <= 1);
+    } while (step <= 1);
 
     p1 = VPointF(3476.6410658375944, 334.08136371135333, QStringLiteral("p1"), -141.34148031496062, 109.00951181102363);
     p4 = VPointF(3483.5141183177025, 333.72231804361377, QStringLiteral("p4"), 48, 102.99930708661418);
@@ -753,8 +752,7 @@ void TST_VSpline::TestParametrT_data()
     {
         QTest::newRow(qUtf8Printable(QStringLiteral("Curve 2. Step = %1").arg(step))) << spl << base * step;
         step += 0.001;
-    }
-    while(step <= 1);
+    } while (step <= 1);
 
     QTest::newRow(qUtf8Printable(QStringLiteral("Curve 2. Bug.").arg(step))) << spl << 4.7813492845686536;
 }
@@ -783,7 +781,7 @@ void TST_VSpline::TestLengthByPoint_data()
     QTest::addColumn<qreal>("length");
 
     const qreal length = spl.GetLength();
-    const qreal testLength = length*(2.0/3.0);
+    const qreal testLength = length * (2.0 / 3.0);
     VSpline spl1, spl2;
     const QPointF p = spl.CutSpline(testLength, spl1, spl2, QString());
 
@@ -857,33 +855,33 @@ void TST_VSpline::TestCutSpline_data()
     QTest::addColumn<QString>("name");
 
     {
-    VPointF p1(187.31716535433043, 51.31464566929152, QStringLiteral("p1"), 140.42872440944885, -22.62372283464567);
-    VPointF p4(-991.8954330708666, 9.739842519685212, QStringLiteral("p4"), 9.999987401574804, 15.0);
+        VPointF p1(187.31716535433043, 51.31464566929152, QStringLiteral("p1"), 140.42872440944885, -22.62372283464567);
+        VPointF p4(-991.8954330708666, 9.739842519685212, QStringLiteral("p4"), 9.999987401574804, 15.0);
 
-    VSpline spl(p1, p4, 181.0, QStringLiteral("181"), 356.0, QStringLiteral("356"), 548.7874015748031,
-                QStringLiteral("Line_Г3_Г6*1.1"), 226.7716535433071, QStringLiteral("6"));
-    spl.SetApproximationScale(0.5);
+        VSpline spl(p1, p4, 181.0, QStringLiteral("181"), 356.0, QStringLiteral("356"), 548.7874015748031,
+                    QStringLiteral("Line_Г3_Г6*1.1"), 226.7716535433071, QStringLiteral("6"));
+        spl.SetApproximationScale(0.5);
 
-    QString name(QStringLiteral("з"));
-    qreal result = 1.35; // Correct distance in cm.
+        QString name(QStringLiteral("з"));
+        qreal result = 1.35; // Correct distance in cm.
 
-    // See file valentina_private_collection/bugs/men_jacket/issue_cut_spline.val (private collection)
-    // Size 54 produces incorrect spline segment distance
-    QTest::newRow("Size 54") << spl << result << name;
+        // See file valentina_private_collection/bugs/men_jacket/issue_cut_spline.val (private collection)
+        // Size 54 produces incorrect spline segment distance
+        QTest::newRow("Size 54") << spl << result << name;
     }
 
     {
-    VPointF p1(1898.0384322000489, -143.17624447113994, QStringLiteral("p1"), 9.999987401574804, -105.35848818897638);
-    VPointF p4(1557.8809518850883, -143.17624447113994, QStringLiteral("p4"), 9.999987401574804, 15.0);
+        VPointF p1(1898.0384322000489, -143.17624447113994, QStringLiteral("p1"), 9.999987401574804,
+                   -105.35848818897638);
+        VPointF p4(1557.8809518850883, -143.17624447113994, QStringLiteral("p4"), 9.999987401574804, 15.0);
 
-    VSpline spl(p1, p4, 175.0, QStringLiteral("175"), 5.0, QStringLiteral("5"), 151.18110236220474,
-                QStringLiteral("4"), 151.18110236220474, QStringLiteral("4"));
+        VSpline spl(p1, p4, 175.0, QStringLiteral("175"), 5.0, QStringLiteral("5"), 151.18110236220474,
+                    QStringLiteral("4"), 151.18110236220474, QStringLiteral("4"));
 
-
-    QString name(QStringLiteral("А193"));
-    const qreal result = 4.5090698038574057; // Correct distance in cm.
-    // See file valentina_private_collection/bugs/coat/coat.val (private collection)
-    QTest::newRow("Half of a curve") << spl << result << name;
+        QString name(QStringLiteral("А193"));
+        const qreal result = 4.5090698038574057; // Correct distance in cm.
+        // See file valentina_private_collection/bugs/coat/coat.val (private collection)
+        QTest::newRow("Half of a curve") << spl << result << name;
     }
 }
 

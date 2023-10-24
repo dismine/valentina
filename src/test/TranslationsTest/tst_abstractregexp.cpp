@@ -72,10 +72,8 @@ auto TST_AbstractRegExp::LoadVariables(const QString &checkedLocale) -> int
 
     if (QFileInfo(path + '/'_L1 + file).size() <= 34)
     {
-        const QString message =
-            u"Translation variables for locale = %1 is empty. \nFull path: %2/%3"_s.arg(checkedLocale, path, file);
-        QWARN(qUtf8Printable(message));
-
+        qWarning("Translation variables for locale = %s is empty. \nFull path: %s/%s", qUtf8Printable(checkedLocale),
+                 qUtf8Printable(path), qUtf8Printable(file));
         return ErrorSize;
     }
 
@@ -83,23 +81,17 @@ auto TST_AbstractRegExp::LoadVariables(const QString &checkedLocale) -> int
 
     if (not m_vTranslator->load(file, path))
     {
-        const QString message =
-            u"Can't load translation variables for locale = %1. \nFull path: %2/%3"_s.arg(checkedLocale, path, file);
-        QWARN(qUtf8Printable(message));
-
+        qWarning("Can't load translation variables for locale = %s. \nFull path: %s/%s", qUtf8Printable(checkedLocale),
+                 qUtf8Printable(path), qUtf8Printable(file));
         delete m_vTranslator;
-
         return ErrorLoad;
     }
 
     if (not QCoreApplication::installTranslator(m_vTranslator))
     {
-        const QString message =
-            u"Can't install translation variables for locale = %1. \nFull path: %2/%3"_s.arg(checkedLocale, path, file);
-        QWARN(qUtf8Printable(message));
-
+        qWarning("Can't install translation variables for locale = %s. \nFull path: %s/%s",
+                 qUtf8Printable(checkedLocale), qUtf8Printable(path), qUtf8Printable(file));
         delete m_vTranslator;
-
         return ErrorInstall;
     }
 
@@ -115,8 +107,7 @@ void TST_AbstractRegExp::RemoveTrVariables(const QString &checkedLocale)
 
         if (result == false)
         {
-            const QString message = u"Can't remove translation variables for locale = %1"_s.arg(checkedLocale);
-            QWARN(qUtf8Printable(message));
+            qWarning("Can't remove translation variables for locale = %s", qUtf8Printable(checkedLocale));
         }
         delete m_vTranslator;
     }

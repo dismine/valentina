@@ -5652,18 +5652,25 @@ auto MainWindow::MaybeSave() -> bool
 {
     if (this->isWindowModified() && m_guiEnabled)
     {
-        QScopedPointer<QMessageBox> messageBox(new QMessageBox(
-            tr("Unsaved changes"), tr("The pattern has been modified. Do you want to save your changes?"),
-            QMessageBox::Warning, QMessageBox::Yes, QMessageBox::No, QMessageBox::Cancel, this, Qt::Sheet));
+        QScopedPointer<QMessageBox> messageBox(
+            new QMessageBox(QMessageBox::Warning, tr("Unsaved changes"),
+                            tr("The pattern has been modified. Do you want to save your changes?"),
+                            QMessageBox::Yes | QMessageBox::No | QMessageBox::Cancel, this, Qt::Sheet));
 
         messageBox->setDefaultButton(QMessageBox::Yes);
         messageBox->setEscapeButton(QMessageBox::Cancel);
 
-        messageBox->setButtonText(QMessageBox::Yes,
-                                  VAbstractValApplication::VApp()->GetPatternPath().isEmpty() || m_patternReadOnly
-                                      ? tr("Save…")
-                                      : tr("Save"));
-        messageBox->setButtonText(QMessageBox::No, tr("Don't Save"));
+        if (QAbstractButton *button = messageBox->button(QMessageBox::Yes))
+        {
+            button->setText(VAbstractValApplication::VApp()->GetPatternPath().isEmpty() || m_patternReadOnly
+                                ? tr("Save…")
+                                : tr("Save"));
+        }
+
+        if (QAbstractButton *button = messageBox->button(QMessageBox::No))
+        {
+            button->setText(tr("Don't Save"));
+        }
 
         messageBox->setWindowModality(Qt::ApplicationModal);
         const auto ret = static_cast<QMessageBox::StandardButton>(messageBox->exec());

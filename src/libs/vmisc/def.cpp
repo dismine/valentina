@@ -59,11 +59,8 @@
 #include "vdatastreamenum.h"
 #endif
 #include "../ifc/exception/vexception.h"
-#include "literals.h"
-
-#if QT_VERSION < QT_VERSION_CHECK(6, 4, 0)
 #include "compatibility.h"
-#endif
+#include "literals.h"
 
 using namespace Qt::Literals::StringLiterals;
 
@@ -118,8 +115,7 @@ void InitLanguageList(QComboBox *combobox)
 
         QLocale loc = QLocale(locale);
         QString lang = loc.nativeLanguageName();
-        // Since Qt 5.12 country names have spaces
-        QString country = QLocale::countryToString(loc.country()).remove(' ');
+        QString country = TerritoryToString(loc);
         if (country == "Czechia"_L1)
         {
             country = "CzechRepublic"_L1;
@@ -133,7 +129,9 @@ void InitLanguageList(QComboBox *combobox)
     {
         // English language is internal and doens't have own *.qm file.
         // Since Qt 5.12 country names have spaces
-        QIcon ico(u"://flags/%1.png"_s.arg(QLocale::countryToString(QLocale::UnitedStates).remove(' ')));
+        QIcon ico(u"://flags/%1.png"_s.arg(TerritoryToString(QLocale::UnitedStates))
+
+        );
         QString lang = QLocale(en_US).nativeLanguageName();
         combobox->addItem(ico, lang, en_US);
     }

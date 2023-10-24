@@ -130,6 +130,6 @@ void TST_TapeCommandLine::cleanupTestCase()
     QDir tmpDir(*tmpTestFolder);
     if (not tmpDir.removeRecursively())
     {
-        QWARN("Fail to remove temp directory.");
+        qWarning("Fail to remove temp directory.");
     }
 }

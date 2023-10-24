@@ -39,6 +39,7 @@
 #include "../ifc/xml/vlabeltemplateconverter.h"
 #include "../tools/dialogtool.h"
 #include "../vformat/vlabeltemplate.h"
+#include "../vmisc/compatibility.h"
 #include "../vpatterndb/calculator.h"
 #include "../vpatterndb/floatItemData/vpiecelabeldata.h"
 #include "../vpatterndb/variables/vmeasurement.h"
@@ -51,10 +52,6 @@
 #include <QFileDialog>
 #include <QMenu>
 #include <QMessageBox>
-
-#if QT_VERSION < QT_VERSION_CHECK(6, 4, 0)
-#include "../vmisc/compatibility.h"
-#endif
 
 using namespace Qt::Literals::StringLiterals;
 
@@ -773,7 +770,7 @@ void DialogEditLabel::SetTemplate(const QVector<VLabelTemplateLine> &lines)
     for (const auto &line : lines)
     {
         auto *item = new QListWidgetItem(line.line);
-        item->setTextAlignment(line.alignment);
+        SetTextAlignment(item, static_cast<Qt::Alignment>(line.alignment));
         item->setData(Qt::UserRole, line.fontSizeIncrement);
 
         QFont font = item->font();
@@ -855,7 +852,7 @@ void DialogEditLabel::InitPreviewLines(const QVector<VLabelTemplateLine> &lines)
     for (const auto &line : lines)
     {
         auto *item = new QListWidgetItem(ReplacePlaceholders(line.line));
-        item->setTextAlignment(line.alignment);
+        SetTextAlignment(item, static_cast<Qt::Alignment>(line.alignment));
         item->setData(Qt::UserRole, line.fontSizeIncrement);
 
         QFont font = item->font();

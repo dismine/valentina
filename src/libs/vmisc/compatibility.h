@@ -31,6 +31,7 @@
 #include <QFontMetrics>
 #include <QLibraryInfo>
 #include <QLineF>
+#include <QListWidgetItem>
 #include <QSet>
 #include <QStringList>
 #include <QVector>
@@ -435,6 +436,43 @@ inline auto FontFromString(const QString &descrip) -> QFont
 #endif
     }
     return font;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+template <typename T> inline auto TerritoryToString(const T &territory) -> QString
+{
+    using namespace Qt::Literals::StringLiterals;
+
+// Since Qt 5.12 country names have spaces
+#if QT_VERSION < QT_VERSION_CHECK(6, 2, 0)
+    return QLocale::countryToString(territory).remove(' '_L1);
+#else
+    return QLocale::territoryToString(territory).remove(' '_L1);
+#endif
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+// NOLINTNEXTLINE(readability-inconsistent-declaration-parameter-name)
+template <> inline auto TerritoryToString<QLocale>(const QLocale &loc) -> QString
+{
+    using namespace Qt::Literals::StringLiterals;
+
+// Since Qt 5.12 country names have spaces
+#if QT_VERSION < QT_VERSION_CHECK(6, 2, 0)
+    return QLocale::countryToString(loc.country()).remove(' '_L1);
+#else
+    return QLocale::territoryToString(loc.territory()).remove(' '_L1);
+#endif
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+template <typename T> inline void SetTextAlignment(T *item, Qt::Alignment alignment)
+{
+#if QT_VERSION >= QT_VERSION_CHECK(6, 4, 0)
+    item->setTextAlignment(alignment);
+#else
+    item->setTextAlignment(static_cast<int>(alignment));
+#endif
 }
 
 #endif // COMPATIBILITY_H

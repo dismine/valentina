@@ -471,8 +471,7 @@ auto AbstractTest::CopyRecursively(const QString &srcFilePath, const QString &tg
         const QString dirName = QFileInfo(tgtFilePath).fileName();
         if (not targetDir.mkdir(dirName))
         {
-            const QString msg = QStringLiteral("Can't create dir '%1'.").arg(dirName);
-            QWARN(qUtf8Printable(msg));
+            qWarning("Can't create dir '%s'.", qUtf8Printable(dirName));
             return false;
         }
         QDir sourceDir(srcFilePath);
@@ -492,16 +491,15 @@ auto AbstractTest::CopyRecursively(const QString &srcFilePath, const QString &tg
     {
         if (QFileInfo::exists(tgtFilePath))
         {
-            const QString msg = QStringLiteral("File '%1' exists.").arg(srcFilePath);
-            QWARN(qUtf8Printable(msg));
+            qWarning("File '%s' exists.", qUtf8Printable(srcFilePath));
 
             if (QFile::remove(tgtFilePath))
             {
-                QWARN("File successfully removed.");
+                qWarning("File successfully removed.");
             }
             else
             {
-                QWARN("Can't remove file.");
+                qWarning("Can't remove file.");
                 return false;
             }
         }
@@ -510,18 +508,16 @@ auto AbstractTest::CopyRecursively(const QString &srcFilePath, const QString &tg
         QFile srcFile(srcFilePath);
         if (not srcFile.open(QFile::ReadOnly))
         {
-            const QString msg =
-                QStringLiteral("Can't copy file '%1'. Error: %2").arg(srcFilePath, srcFile.errorString());
-            QWARN(qUtf8Printable(msg));
+            qWarning("Can't copy file '%s'. Error: %s", qUtf8Printable(srcFilePath),
+                     qUtf8Printable(srcFile.errorString()));
             return false;
         }
         srcFile.close();
 
         if (not srcFile.copy(tgtFilePath))
         {
-            const QString msg = QStringLiteral("Can't copy file '%1' to '%2'. Error: %3")
-                                    .arg(srcFilePath, tgtFilePath, srcFile.errorString());
-            QWARN(qUtf8Printable(msg));
+            qWarning("Can't copy file '%s' to '%s'. Error: %s", qUtf8Printable(srcFilePath),
+                     qUtf8Printable(tgtFilePath), qUtf8Printable(srcFile.errorString()));
             return false;
         }
     }

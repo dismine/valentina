@@ -331,7 +331,7 @@ auto DialogIncrements::AddCell(QTableWidget *table, const QString &text, int row
     SCASSERT(table != nullptr)
 
     auto *item = new QTableWidgetItem(text);
-    item->setTextAlignment(aligment);
+    SetTextAlignment(item, static_cast<Qt::Alignment>(aligment));
     item->setToolTip(text);
 
     // set the item non-editable (view only), and non-selectable

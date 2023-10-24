@@ -28,6 +28,7 @@
 #include <QSize>
 #include <QSizePolicy>
 #include <QSpacerItem>
+#include <QStyle>
 #include <QVBoxLayout>
 #include <QVariant>
 
@@ -166,8 +167,10 @@ auto CheckableMessageBox::iconPixmap() const -> QPixmap
         return QPixmap(*p);
     }
     return QPixmap();
-#else
+#elif QT_VERSION < QT_VERSION_CHECK(6, 0, 0)
     return d->pixmapLabel->pixmap(Qt::ReturnByValue);
+#else
+    return d->pixmapLabel->pixmap();
 #endif
 }
 
@@ -260,7 +263,7 @@ auto CheckableMessageBox::question(QWidget *parent, const QString &title, const 
 {
     CheckableMessageBox mb(parent);
     mb.setWindowTitle(title);
-    mb.setIconPixmap(QMessageBox::standardIcon(QMessageBox::Question));
+    mb.setIconPixmap(QApplication::style()->standardIcon(QStyle::SP_MessageBoxQuestion).pixmap(32, 32));
     mb.setText(question);
     mb.setCheckBoxText(checkBoxText);
     mb.setChecked(*checkBoxSetting);
@@ -279,7 +282,7 @@ auto CheckableMessageBox::information(QWidget *parent, const QString &title, con
 {
     CheckableMessageBox mb(parent);
     mb.setWindowTitle(title);
-    mb.setIconPixmap(QMessageBox::standardIcon(QMessageBox::Information));
+    mb.setIconPixmap(QApplication::style()->standardIcon(QStyle::SP_MessageBoxInformation).pixmap(32, 32));
     mb.setText(text);
     mb.setCheckBoxText(checkBoxText);
     mb.setChecked(*checkBoxSetting);
@@ -320,7 +323,9 @@ void CheckableMessageBox::initDoNotAskAgainMessageBox(CheckableMessageBox &messa
 {
     messageBox.setWindowTitle(title);
     messageBox.setIconPixmap(
-        QMessageBox::standardIcon(type == Information ? QMessageBox::Information : QMessageBox::Question));
+        QApplication::style()
+            ->standardIcon(type == Information ? QStyle::SP_MessageBoxInformation : QStyle::SP_MessageBoxQuestion)
+            .pixmap(32, 32));
     messageBox.setText(text);
     messageBox.setCheckBoxVisible(true);
     messageBox.setCheckBoxText(type == Information ? CheckableMessageBox::msgDoNotShowAgain()

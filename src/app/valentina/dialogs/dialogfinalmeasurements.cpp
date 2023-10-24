@@ -28,6 +28,7 @@
 
 #include "dialogfinalmeasurements.h"
 #include "../qmuparser/qmudef.h"
+#include "../vmisc/compatibility.h"
 #include "../vmisc/theme/vtheme.h"
 #include "../vmisc/vabstractvalapplication.h"
 #include "../vmisc/vvalentinasettings.h"
@@ -37,10 +38,6 @@
 #include "ui_dialogfinalmeasurements.h"
 
 #include <QMenu>
-
-#if QT_VERSION < QT_VERSION_CHECK(6, 4, 0)
-#include "../vmisc/compatibility.h"
-#endif
 
 using namespace Qt::Literals::StringLiterals;
 
@@ -571,7 +568,7 @@ void DialogFinalMeasurements::ShowUnits()
 void DialogFinalMeasurements::AddCell(const QString &text, int row, int column, int aligment, bool ok)
 {
     auto *item = new QTableWidgetItem(text);
-    item->setTextAlignment(aligment);
+    SetTextAlignment(item, static_cast<Qt::Alignment>(aligment));
 
     // set the item non-editable (view only), and non-selectable
     Qt::ItemFlags flags = item->flags();

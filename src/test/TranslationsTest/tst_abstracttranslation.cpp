@@ -60,15 +60,13 @@ auto TST_AbstractTranslation::LoadTSFile(const QString &filename) -> QDomNodeLis
     tsFile = QSharedPointer<QFile>(new QFile(u"%1/%2"_s.arg(TS_DIR, filename)));
     if (not tsFile->exists())
     {
-        const QString message = u"Can't find '%1'.\n%2."_s.arg(filename, tsFile->errorString());
-        QWARN(qUtf8Printable(message));
+        qWarning("Can't find '%s'.\n%s.", qUtf8Printable(filename), qUtf8Printable(tsFile->errorString()));
         return QDomNodeList();
     }
 
     if (tsFile->open(QIODevice::ReadOnly) == false)
     {
-        const QString message = u"Can't open file '%1'.\n%2."_s.arg(filename, tsFile->errorString());
-        QWARN(qUtf8Printable(message));
+        qWarning("Can't open file '%s'.\n%s.", qUtf8Printable(filename), qUtf8Printable(tsFile->errorString()));
         return QDomNodeList();
     }
 
@@ -79,16 +77,14 @@ auto TST_AbstractTranslation::LoadTSFile(const QString &filename) -> QDomNodeLis
     tsXML = QSharedPointer<QDomDocument>(new QDomDocument());
     if (tsXML->setContent(tsFile.data(), &errorMsg, &errorLine, &errorColumn) == false)
     {
-        const QString message =
-            u"Parsing error file %1 in line %2 column %3."_s.arg(filename).arg(errorLine).arg(errorColumn);
-        QWARN(qUtf8Printable(message));
+        qWarning("Parsing error file %s in line %d column %d.", qUtf8Printable(filename), errorLine, errorColumn);
         return QDomNodeList();
     }
 
     const QDomNodeList messages = tsXML->elementsByTagName(TagMessage);
     if (messages.isEmpty())
     {
-        QWARN("File doesn't contain any messages.");
+        qWarning("File doesn't contain any messages.");
         return QDomNodeList();
     }
 

@@ -273,7 +273,7 @@ void TST_ValentinaCommandLine::cleanupTestCase()
         QDir tmpDir(*tmpTestFolder);
         if (not tmpDir.removeRecursively())
         {
-            QWARN("Fail to remove test temp directory.");
+            qWarning("Fail to remove test temp directory.");
         }
     }
 
@@ -281,7 +281,7 @@ void TST_ValentinaCommandLine::cleanupTestCase()
         QDir tmpDir(*tmpTestCollectionFolder);
         if (not tmpDir.removeRecursively())
         {
-            QWARN("Fail to remove collection temp directory.");
+            qWarning("Fail to remove collection temp directory.");
         }
     }
 }

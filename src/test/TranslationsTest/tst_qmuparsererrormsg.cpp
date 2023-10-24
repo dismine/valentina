@@ -160,10 +160,8 @@ auto TST_QmuParserErrorMsg::LoadTranslation(const QString &checkedLocale) -> int
 
     if (QFileInfo(path + '/'_L1 + file).size() <= 34)
     {
-        const QString message =
-            u"Translation for locale = %1 is empty. \nFull path: %2/%3"_s.arg(checkedLocale, path, file);
-        QWARN(qUtf8Printable(message));
-
+        qWarning("Translation for locale = %s is empty. \nFull path: %s/%s", qUtf8Printable(checkedLocale),
+                 qUtf8Printable(path), qUtf8Printable(file));
         return ErrorSize;
     }
 
@@ -171,23 +169,17 @@ auto TST_QmuParserErrorMsg::LoadTranslation(const QString &checkedLocale) -> int
 
     if (not appTranslator->load(file, path))
     {
-        const QString message =
-            u"Can't load translation for locale = %1. \nFull path: %2/%3"_s.arg(checkedLocale, path, file);
-        QWARN(qUtf8Printable(message));
-
+        qWarning("Can't load translation for locale = %s. \nFull path: %s/%s", qUtf8Printable(checkedLocale),
+                 qUtf8Printable(path), qUtf8Printable(file));
         delete appTranslator;
-
         return ErrorLoad;
     }
 
     if (not QCoreApplication::installTranslator(appTranslator))
     {
-        const QString message =
-            u"Can't install translation for locale = %1. \nFull path: %2/%3"_s.arg(checkedLocale, path, file);
-        QWARN(qUtf8Printable(message));
-
+        qWarning("Can't install translation for locale = %s. \nFull path: %s/%s", qUtf8Printable(checkedLocale),
+                 qUtf8Printable(path), qUtf8Printable(file));
         delete appTranslator;
-
         return ErrorInstall;
     }
 
@@ -206,8 +198,7 @@ void TST_QmuParserErrorMsg::RemoveTranslation()
 
         if (result == false)
         {
-            const QString message = u"Can't remove translation for locale = %1"_s.arg(m_locale);
-            QWARN(qUtf8Printable(message));
+            qWarning("Can't remove translation for locale = %s", qUtf8Printable(m_locale));
         }
         delete appTranslator;
     }

@@ -240,19 +240,17 @@ auto TST_MeasurementRegExp::LoadMeasurements(const QString &checkedSystem, const
 
     if (not info.exists())
     {
-        const QString message =
-            u"File for translation for system = %1 and locale = %2 doesn't exists. \nFull path: %3/%4"_s.arg(
-                checkedSystem, checkedLocale, path, file);
-        QWARN(qUtf8Printable(message));
-
+        qWarning("File for translation for system = %s and locale = %s doesn't exists. \nFull path: %s/%s",
+                 qUtf8Printable(checkedSystem), qUtf8Printable(checkedLocale), qUtf8Printable(path),
+                 qUtf8Printable(file));
         return ErrorMissing;
     }
 
     if (QFileInfo(path + '/'_L1 + file).size() <= 34)
     {
-        const QString message = u"Translation for system = %1 and locale = %2 is empty. \nFull path: %3/%4"_s.arg(
-            checkedSystem, checkedLocale, path, file);
-        QWARN(qUtf8Printable(message));
+        qWarning("Translation for system = %s and locale = %s is empty. \nFull path: %s/%s",
+                 qUtf8Printable(checkedSystem), qUtf8Printable(checkedLocale), qUtf8Printable(path),
+                 qUtf8Printable(file));
 
         return ErrorSize;
     }
@@ -262,9 +260,9 @@ auto TST_MeasurementRegExp::LoadMeasurements(const QString &checkedSystem, const
 
     if (not m_pmsTranslator->load(file, path))
     {
-        const QString message = u"Can't load translation for system = %1 and locale = %2. \nFull path: %3/%4"_s.arg(
-            checkedSystem, checkedLocale, path, file);
-        QWARN(qUtf8Printable(message));
+        qWarning("Can't load translation for system = %s and locale = %s. \nFull path: %s/%s",
+                 qUtf8Printable(checkedSystem), qUtf8Printable(checkedLocale), qUtf8Printable(path),
+                 qUtf8Printable(file));
 
         delete m_pmsTranslator;
 
@@ -273,9 +271,9 @@ auto TST_MeasurementRegExp::LoadMeasurements(const QString &checkedSystem, const
 
     if (not QCoreApplication::installTranslator(m_pmsTranslator))
     {
-        const QString message = u"Can't install translation for system = %1 and locale = %2. \nFull path: %3/%4"_s.arg(
-            checkedSystem, checkedLocale, path, file);
-        QWARN(qUtf8Printable(message));
+        qWarning("Can't install translation for system = %s and locale = %s. \nFull path: %s/%s",
+                 qUtf8Printable(checkedSystem), qUtf8Printable(checkedLocale), qUtf8Printable(path),
+                 qUtf8Printable(file));
 
         delete m_pmsTranslator;
 
@@ -294,9 +292,8 @@ void TST_MeasurementRegExp::RemoveTrMeasurements(const QString &checkedSystem, c
 
         if (result == false)
         {
-            const QString message =
-                u"Can't remove translation for system = %1 and locale = %2"_s.arg(checkedSystem, checkedLocale);
-            QWARN(qUtf8Printable(message));
+            qWarning("Can't remove translation for system = %s and locale = %s", qUtf8Printable(checkedSystem),
+                     qUtf8Printable(checkedLocale));
         }
         delete m_pmsTranslator;
     }
