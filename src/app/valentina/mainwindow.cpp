@@ -191,6 +191,7 @@
 #include "dialogs/vwidgetbackgroundimages.h"
 #include "dialogs/vwidgetdetails.h"
 #include "dialogs/vwidgetgroups.h"
+#include "qtpreprocessorsupport.h"
 #include "ui_mainwindow.h"
 #include "vabstractapplication.h"
 #include "vabstractshortcutmanager.h"
@@ -3320,55 +3321,71 @@ void MainWindow::InitToolButtons()
     // This check helps to find missed tools
     Q_STATIC_ASSERT_X(static_cast<int>(Tool::LAST_ONE_DO_NOT_USE) == 59, "Check if all tools were connected.");
 
-    connect(ui->actionEndLineTool, &QAction::triggered, this, &MainWindow::ToolEndLine);
-    connect(ui->actionLineTool, &QAction::triggered, this, &MainWindow::ToolLine);
-    connect(ui->actionAlongLineTool, &QAction::triggered, this, &MainWindow::ToolAlongLine);
-    connect(ui->actionShoulderPointTool, &QAction::triggered, this, &MainWindow::ToolShoulderPoint);
-    connect(ui->actionNormalTool, &QAction::triggered, this, &MainWindow::ToolNormal);
-    connect(ui->actionBisectorTool, &QAction::triggered, this, &MainWindow::ToolBisector);
-    connect(ui->actionLineIntersectTool, &QAction::triggered, this, &MainWindow::ToolLineIntersect);
-    connect(ui->actionSplineTool, &QAction::triggered, this, &MainWindow::ToolSpline);
-    connect(ui->actionCubicBezierTool, &QAction::triggered, this, &MainWindow::ToolCubicBezier);
-    connect(ui->actionArcTool, &QAction::triggered, this, &MainWindow::ToolArc);
-    connect(ui->actionSplinePathTool, &QAction::triggered, this, &MainWindow::ToolSplinePath);
-    connect(ui->actionCubicBezierPathTool, &QAction::triggered, this, &MainWindow::ToolCubicBezierPath);
-    connect(ui->actionPointOfContactTool, &QAction::triggered, this, &MainWindow::ToolPointOfContact);
-    connect(ui->actionNewDetailTool, &QAction::triggered, this, &MainWindow::ToolDetail);
-    connect(ui->actionInternalPathTool, &QAction::triggered, this, &MainWindow::ToolPiecePath);
-    connect(ui->actionHeightTool, &QAction::triggered, this, &MainWindow::ToolHeight);
-    connect(ui->actionTriangleTool, &QAction::triggered, this, &MainWindow::ToolTriangle);
-    connect(ui->actionPointOfIntersectionTool, &QAction::triggered, this, &MainWindow::ToolPointOfIntersection);
-    connect(ui->actionSplineCutPointTool, &QAction::triggered, this, &MainWindow::ToolCutSpline);
-    connect(ui->actionSplinePathCutPointTool, &QAction::triggered, this, &MainWindow::ToolCutSplinePath);
-    connect(ui->actionUnionDetailsTool, &QAction::triggered, this, &MainWindow::ToolUnionDetails);
-    connect(ui->actionDuplicateDetailTool, &QAction::triggered, this, &MainWindow::ToolDuplicateDetail);
-    connect(ui->actionArcCutPointTool, &QAction::triggered, this, &MainWindow::ToolCutArc);
-    connect(ui->actionLineIntersectAxisTool, &QAction::triggered, this, &MainWindow::ToolLineIntersectAxis);
-    connect(ui->actionCurveIntersectAxisTool, &QAction::triggered, this, &MainWindow::ToolCurveIntersectAxis);
-    connect(ui->actionArcIntersectAxisTool, &QAction::triggered, this, &MainWindow::ToolArcIntersectAxis);
-    connect(ui->actionLayoutSettings, &QAction::triggered, this, &MainWindow::ToolLayoutSettings);
-    connect(ui->actionPointOfIntersectionArcsTool, &QAction::triggered, this, &MainWindow::ToolPointOfIntersectionArcs);
-    connect(ui->actionPointOfIntersectionCirclesTool, &QAction::triggered, this,
-            &MainWindow::ToolPointOfIntersectionCircles);
-    connect(ui->actionIntersectionCurvesTool, &QAction::triggered, this, &MainWindow::ToolPointOfIntersectionCurves);
-    connect(ui->actionPointFromCircleAndTangentTool, &QAction::triggered, this,
-            &MainWindow::ToolPointFromCircleAndTangent);
-    connect(ui->actionPointFromArcAndTangentTool, &QAction::triggered, this, &MainWindow::ToolPointFromArcAndTangent);
-    connect(ui->actionArcWithLengthTool, &QAction::triggered, this, &MainWindow::ToolArcWithLength);
-    connect(ui->actionTrueDartsTool, &QAction::triggered, this, &MainWindow::ToolTrueDarts);
-    connect(ui->actionGroupTool, &QAction::triggered, this, &MainWindow::ToolGroup);
-    connect(ui->actionRotationTool, &QAction::triggered, this, &MainWindow::ToolRotation);
-    connect(ui->actionFlippingByLineTool, &QAction::triggered, this, &MainWindow::ToolFlippingByLine);
-    connect(ui->actionFlippingByAxisTool, &QAction::triggered, this, &MainWindow::ToolFlippingByAxis);
-    connect(ui->actionMoveTool, &QAction::triggered, this, &MainWindow::ToolMove);
-    connect(ui->actionMidpointTool, &QAction::triggered, this, &MainWindow::ToolMidpoint);
-    connect(ui->actionExportDraw, &QAction::triggered, this, &MainWindow::ExportDrawAs);
-    connect(ui->actionLayoutExportAs, &QAction::triggered, this, &MainWindow::ExportLayoutAs);
-    connect(ui->actionDetailExportAs, &QAction::triggered, this, &MainWindow::ExportDetailsAs);
-    connect(ui->actionEllipticalArcTool, &QAction::triggered, this, &MainWindow::ToolEllipticalArc);
-    connect(ui->actionPinTool, &QAction::triggered, this, &MainWindow::ToolPin);
-    connect(ui->actionInsertNodeTool, &QAction::triggered, this, &MainWindow::ToolInsertNode);
-    connect(ui->actionPlaceLabelTool, &QAction::triggered, this, &MainWindow::ToolPlaceLabel);
+    auto InitToolButton = [this](VShortcutAction type, QAction *action, void (MainWindow::*slotFunction)(bool))
+    {
+        m_shortcutActions.insert(type, action);
+        connect(action, &QAction::triggered, this, slotFunction);
+    };
+
+    InitToolButton(VShortcutAction::ToolEndLine, ui->actionEndLineTool, &MainWindow::ToolEndLine);
+    InitToolButton(VShortcutAction::ToolLine, ui->actionLineTool, &MainWindow::ToolLine);
+    InitToolButton(VShortcutAction::ToolAlongLine, ui->actionAlongLineTool, &MainWindow::ToolAlongLine);
+    InitToolButton(VShortcutAction::ToolShoulderPoint, ui->actionShoulderPointTool, &MainWindow::ToolShoulderPoint);
+    InitToolButton(VShortcutAction::ToolNormal, ui->actionNormalTool, &MainWindow::ToolNormal);
+    InitToolButton(VShortcutAction::ToolBisector, ui->actionBisectorTool, &MainWindow::ToolBisector);
+    InitToolButton(VShortcutAction::ToolLineIntersect, ui->actionLineIntersectTool, &MainWindow::ToolLineIntersect);
+    InitToolButton(VShortcutAction::ToolSpline, ui->actionSplineTool, &MainWindow::ToolSpline);
+    InitToolButton(VShortcutAction::ToolCubicBezier, ui->actionCubicBezierTool, &MainWindow::ToolCubicBezier);
+    InitToolButton(VShortcutAction::ToolArc, ui->actionArcTool, &MainWindow::ToolArc);
+    InitToolButton(VShortcutAction::ToolSplinePath, ui->actionSplinePathTool, &MainWindow::ToolSplinePath);
+    InitToolButton(VShortcutAction::ToolCubicBezierPath, ui->actionCubicBezierPathTool,
+                   &MainWindow::ToolCubicBezierPath);
+    InitToolButton(VShortcutAction::ToolPointOfContact, ui->actionPointOfContactTool, &MainWindow::ToolPointOfContact);
+    InitToolButton(VShortcutAction::ToolPiece, ui->actionNewDetailTool, &MainWindow::ToolDetail);
+    InitToolButton(VShortcutAction::ToolPiecePath, ui->actionInternalPathTool, &MainWindow::ToolPiecePath);
+    InitToolButton(VShortcutAction::ToolHeight, ui->actionHeightTool, &MainWindow::ToolHeight);
+    InitToolButton(VShortcutAction::ToolTriangle, ui->actionTriangleTool, &MainWindow::ToolTriangle);
+    InitToolButton(VShortcutAction::ToolPointOfIntersection, ui->actionPointOfIntersectionTool,
+                   &MainWindow::ToolPointOfIntersection);
+    InitToolButton(VShortcutAction::ToolCutSpline, ui->actionSplineCutPointTool, &MainWindow::ToolCutSpline);
+    InitToolButton(VShortcutAction::ToolCutSplinePath, ui->actionSplinePathCutPointTool,
+                   &MainWindow::ToolCutSplinePath);
+    InitToolButton(VShortcutAction::ToolUnionDetails, ui->actionUnionDetailsTool, &MainWindow::ToolUnionDetails);
+    InitToolButton(VShortcutAction::ToolDuplicateDetail, ui->actionDuplicateDetailTool,
+                   &MainWindow::ToolDuplicateDetail);
+    InitToolButton(VShortcutAction::ToolCutArc, ui->actionArcCutPointTool, &MainWindow::ToolCutArc);
+    InitToolButton(VShortcutAction::ToolLineIntersectAxis, ui->actionLineIntersectAxisTool,
+                   &MainWindow::ToolLineIntersectAxis);
+    InitToolButton(VShortcutAction::ToolCurveIntersectAxis, ui->actionCurveIntersectAxisTool,
+                   &MainWindow::ToolCurveIntersectAxis);
+    InitToolButton(VShortcutAction::ToolArcIntersectAxis, ui->actionArcIntersectAxisTool,
+                   &MainWindow::ToolArcIntersectAxis);
+    InitToolButton(VShortcutAction::LayoutSettings, ui->actionLayoutSettings, &MainWindow::ToolLayoutSettings);
+    InitToolButton(VShortcutAction::ToolPointOfIntersectionArcs, ui->actionPointOfIntersectionArcsTool,
+                   &MainWindow::ToolPointOfIntersectionArcs);
+    InitToolButton(VShortcutAction::ToolPointOfIntersectionCircles, ui->actionPointOfIntersectionCirclesTool,
+                   &MainWindow::ToolPointOfIntersectionCircles);
+    InitToolButton(VShortcutAction::ToolPointOfIntersectionCurves, ui->actionIntersectionCurvesTool,
+                   &MainWindow::ToolPointOfIntersectionCurves);
+    InitToolButton(VShortcutAction::ToolPointFromCircleAndTangent, ui->actionPointFromCircleAndTangentTool,
+                   &MainWindow::ToolPointFromCircleAndTangent);
+    InitToolButton(VShortcutAction::ToolPointFromArcAndTangent, ui->actionPointFromArcAndTangentTool,
+                   &MainWindow::ToolPointFromArcAndTangent);
+    InitToolButton(VShortcutAction::ToolArcWithLength, ui->actionArcWithLengthTool, &MainWindow::ToolArcWithLength);
+    InitToolButton(VShortcutAction::ToolTrueDarts, ui->actionTrueDartsTool, &MainWindow::ToolTrueDarts);
+    InitToolButton(VShortcutAction::ToolGroup, ui->actionGroupTool, &MainWindow::ToolGroup);
+    InitToolButton(VShortcutAction::ToolRotation, ui->actionRotationTool, &MainWindow::ToolRotation);
+    InitToolButton(VShortcutAction::ToolFlippingByLine, ui->actionFlippingByLineTool, &MainWindow::ToolFlippingByLine);
+    InitToolButton(VShortcutAction::ToolFlippingByAxis, ui->actionFlippingByAxisTool, &MainWindow::ToolFlippingByAxis);
+    InitToolButton(VShortcutAction::ToolMove, ui->actionMoveTool, &MainWindow::ToolMove);
+    InitToolButton(VShortcutAction::ToolMidpoint, ui->actionMidpointTool, &MainWindow::ToolMidpoint);
+    InitToolButton(VShortcutAction::ExportDrawAs, ui->actionExportDraw, &MainWindow::ExportDrawAs);
+    InitToolButton(VShortcutAction::ExportLayoutAs, ui->actionLayoutExportAs, &MainWindow::ExportLayoutAs);
+    InitToolButton(VShortcutAction::ExportDetailsAs, ui->actionDetailExportAs, &MainWindow::ExportDetailsAs);
+    InitToolButton(VShortcutAction::ToolEllipticalArc, ui->actionEllipticalArcTool, &MainWindow::ToolEllipticalArc);
+    InitToolButton(VShortcutAction::ToolPin, ui->actionPinTool, &MainWindow::ToolPin);
+    InitToolButton(VShortcutAction::ToolInsertNode, ui->actionInsertNodeTool, &MainWindow::ToolInsertNode);
+    InitToolButton(VShortcutAction::ToolPlaceLabel, ui->actionPlaceLabelTool, &MainWindow::ToolPlaceLabel);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -6634,8 +6651,10 @@ void MainWindow::CreateMeasurements()
 #endif
 
 //---------------------------------------------------------------------------------------------------------------------
-void MainWindow::ExportDrawAs()
+void MainWindow::ExportDrawAs(bool checked)
 {
+    Q_UNUSED(checked)
+
     auto Uncheck = qScopeGuard([this] { ui->actionExportDraw->setChecked(false); });
 
     QString filters(tr("Scalable Vector Graphics files") + QStringLiteral("(*.svg)"));
@@ -6658,8 +6677,10 @@ void MainWindow::ExportDrawAs()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void MainWindow::ExportLayoutAs()
+void MainWindow::ExportLayoutAs(bool checked)
 {
+    Q_UNUSED(checked)
+
     auto Uncheck = qScopeGuard([this] { ui->actionLayoutExportAs->setChecked(false); });
 
     if (m_layoutSettings->IsLayoutStale())
@@ -6694,8 +6715,10 @@ void MainWindow::ExportLayoutAs()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void MainWindow::ExportDetailsAs()
+void MainWindow::ExportDetailsAs(bool checked)
 {
+    Q_UNUSED(checked)
+
     auto Uncheck = qScopeGuard([this] { ui->actionDetailExportAs->setChecked(false); });
 
     QVector<DetailForLayout> detailsInLayout = SortDetailsForLayout(pattern->DataPieces());

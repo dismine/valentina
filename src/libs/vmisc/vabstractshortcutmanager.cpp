@@ -107,7 +107,7 @@ auto VAbstractShortcutManager::GetShortcutsList() const -> QList<VAbstractShortc
 //---------------------------------------------------------------------------------------------------------------------
 auto VAbstractShortcutManager::ShortcutActionToString(VShortcutAction type) -> QString
 {
-    Q_STATIC_ASSERT_X(static_cast<int>(VShortcutAction::LAST_ONE_DO_NOT_USE) == 35, "Convert all actions.");
+    Q_STATIC_ASSERT_X(static_cast<int>(VShortcutAction::LAST_ONE_DO_NOT_USE) == 82, "Convert all actions.");
 
     switch (type)
     {
@@ -181,6 +181,100 @@ auto VAbstractShortcutManager::ShortcutActionToString(VShortcutAction type) -> Q
             return "findnext"_L1;
         case VShortcutAction::FindPrevious:
             return "findprevious"_L1;
+        case VShortcutAction::ToolEndLine:
+            return "toolendline"_L1;
+        case VShortcutAction::ToolLine:
+            return "toolline"_L1;
+        case VShortcutAction::ToolAlongLine:
+            return "toolalongline"_L1;
+        case VShortcutAction::ToolShoulderPoint:
+            return "toolshoulderpoint"_L1;
+        case VShortcutAction::ToolNormal:
+            return "toolnormal"_L1;
+        case VShortcutAction::ToolBisector:
+            return "toolbisector"_L1;
+        case VShortcutAction::ToolLineIntersect:
+            return "toolLineintersect"_L1;
+        case VShortcutAction::ToolSpline:
+            return "toolspline"_L1;
+        case VShortcutAction::ToolCubicBezier:
+            return "toolcubicbezier"_L1;
+        case VShortcutAction::ToolArc:
+            return "toolarc"_L1;
+        case VShortcutAction::ToolSplinePath:
+            return "toolsplinepath"_L1;
+        case VShortcutAction::ToolCubicBezierPath:
+            return "toolcubicbezierpath"_L1;
+        case VShortcutAction::ToolPointOfContact:
+            return "toolpointofcontact"_L1;
+        case VShortcutAction::ToolPiece:
+            return "toolpiece"_L1;
+        case VShortcutAction::ToolPiecePath:
+            return "toolpiecepath"_L1;
+        case VShortcutAction::ToolHeight:
+            return "toolheight"_L1;
+        case VShortcutAction::ToolTriangle:
+            return "tooltriangle"_L1;
+        case VShortcutAction::ToolPointOfIntersection:
+            return "toolpointofintersection"_L1;
+        case VShortcutAction::ToolCutSpline:
+            return "toolcutspline"_L1;
+        case VShortcutAction::ToolCutSplinePath:
+            return "toolcutsplinepath"_L1;
+        case VShortcutAction::ToolUnionDetails:
+            return "tooluniondetails"_L1;
+        case VShortcutAction::ToolDuplicateDetail:
+            return "toolduplicatedetail"_L1;
+        case VShortcutAction::ToolCutArc:
+            return "toolcutarc"_L1;
+        case VShortcutAction::ToolLineIntersectAxis:
+            return "toollineintersectaxis"_L1;
+        case VShortcutAction::ToolCurveIntersectAxis:
+            return "toolcurveintersectaxis"_L1;
+        case VShortcutAction::ToolArcIntersectAxis:
+            return "toolarcintersectaxis"_L1;
+        case VShortcutAction::LayoutSettings:
+            return "layoutsettings"_L1;
+        case VShortcutAction::ToolPointOfIntersectionArcs:
+            return "toolpointofintersectionarcs"_L1;
+        case VShortcutAction::ToolPointOfIntersectionCircles:
+            return "toolpointofintersectioncircles"_L1;
+        case VShortcutAction::ToolPointOfIntersectionCurves:
+            return "toolpointofintersectioncurves"_L1;
+        case VShortcutAction::ToolPointFromCircleAndTangent:
+            return "toolpointfromcircleandtangent"_L1;
+        case VShortcutAction::ToolPointFromArcAndTangent:
+            return "toolpointfromarcandtangent"_L1;
+        case VShortcutAction::ToolArcWithLength:
+            return "toolarcwithlength"_L1;
+        case VShortcutAction::ToolTrueDarts:
+            return "tooltruedarts"_L1;
+        case VShortcutAction::ToolGroup:
+            return "toolgroup"_L1;
+        case VShortcutAction::ToolRotation:
+            return "toolrotation"_L1;
+        case VShortcutAction::ToolFlippingByLine:
+            return "toolflippingbyline"_L1;
+        case VShortcutAction::ToolFlippingByAxis:
+            return "toolflippingfyaxis"_L1;
+        case VShortcutAction::ToolMove:
+            return "toolmove"_L1;
+        case VShortcutAction::ToolMidpoint:
+            return "toolmidpoint"_L1;
+        case VShortcutAction::ExportDrawAs:
+            return "exportdrawas"_L1;
+        case VShortcutAction::ExportLayoutAs:
+            return "exportlayoutas"_L1;
+        case VShortcutAction::ExportDetailsAs:
+            return "exportdetailsas"_L1;
+        case VShortcutAction::ToolEllipticalArc:
+            return "toolellipticalarc"_L1;
+        case VShortcutAction::ToolPin:
+            return "toolpin"_L1;
+        case VShortcutAction::ToolInsertNode:
+            return "toolinsertnode"_L1;
+        case VShortcutAction::ToolPlaceLabel:
+            return "toolplacelabel"_L1;
         case VShortcutAction::LAST_ONE_DO_NOT_USE:
             Q_UNREACHABLE();
             break;
@@ -193,7 +287,7 @@ auto VAbstractShortcutManager::ShortcutActionToString(VShortcutAction type) -> Q
 //---------------------------------------------------------------------------------------------------------------------
 auto VAbstractShortcutManager::ReadableName(VShortcutAction type) -> QString
 {
-    Q_STATIC_ASSERT_X(static_cast<int>(VShortcutAction::LAST_ONE_DO_NOT_USE) == 35, "Translate all actions.");
+    Q_STATIC_ASSERT_X(static_cast<int>(VShortcutAction::LAST_ONE_DO_NOT_USE) == 82, "Translate all actions.");
 
     switch (type)
     {
@@ -267,6 +361,100 @@ auto VAbstractShortcutManager::ReadableName(VShortcutAction type) -> QString
             return tr("Find next match", "shortcut for action");
         case VShortcutAction::FindPrevious:
             return tr("Find previus match", "shortcut for action");
+        case VShortcutAction::ToolEndLine:
+            return tr("Tool 'Point at distance and angle'", "shortcut for action");
+        case VShortcutAction::ToolLine:
+            return tr("Tool 'Line between points'", "shortcut for action");
+        case VShortcutAction::ToolAlongLine:
+            return tr("Tool 'Point at distance along line'", "shortcut for action");
+        case VShortcutAction::ToolShoulderPoint:
+            return tr("Tool 'Special point on shoulder'", "shortcut for action");
+        case VShortcutAction::ToolNormal:
+            return tr("Tool 'Point along perpendicular'", "shortcut for action");
+        case VShortcutAction::ToolBisector:
+            return tr("Tool 'Point along bisector'", "shortcut for action");
+        case VShortcutAction::ToolLineIntersect:
+            return tr("Tool 'Point at line intersection'", "shortcut for action");
+        case VShortcutAction::ToolSpline:
+            return tr("Tool 'Simple curve'", "shortcut for action");
+        case VShortcutAction::ToolCubicBezier:
+            return tr("Tool 'Curve which uses point as control handle'", "shortcut for action");
+        case VShortcutAction::ToolArc:
+            return tr("Tool 'Arc'", "shortcut for action");
+        case VShortcutAction::ToolSplinePath:
+            return tr("Tool 'Curved path'", "shortcut for action");
+        case VShortcutAction::ToolCubicBezierPath:
+            return tr("Tool 'Curved path which uses point as control handle'", "shortcut for action");
+        case VShortcutAction::ToolPointOfContact:
+            return tr("Tool 'Point of intersection circle and segment'", "shortcut for action");
+        case VShortcutAction::ToolPiece:
+            return tr("Tool 'Workpiece tool'", "shortcut for action");
+        case VShortcutAction::ToolPiecePath:
+            return tr("Tool 'Internal path tool'", "shortcut for action");
+        case VShortcutAction::ToolHeight:
+            return tr("Tool 'Perpendicular point along line'", "shortcut for action");
+        case VShortcutAction::ToolTriangle:
+            return tr("Tool 'Triangle'", "shortcut for action");
+        case VShortcutAction::ToolPointOfIntersection:
+            return tr("Tool 'Point from X and Y of two other points'", "shortcut for action");
+        case VShortcutAction::ToolCutSpline:
+            return tr("Tool 'Segmenting a simple curve'", "shortcut for action");
+        case VShortcutAction::ToolCutSplinePath:
+            return tr("Tool 'Segment a curved path'", "shortcut for action");
+        case VShortcutAction::ToolUnionDetails:
+            return tr("Tool 'Piece union'", "shortcut for action");
+        case VShortcutAction::ToolDuplicateDetail:
+            return tr("Tool 'Duplicate piece'", "shortcut for action");
+        case VShortcutAction::ToolCutArc:
+            return tr("Tool 'Segment an arc'", "shortcut for action");
+        case VShortcutAction::ToolLineIntersectAxis:
+            return tr("Tool 'Point of intersection line and axis'", "shortcut for action");
+        case VShortcutAction::ToolCurveIntersectAxis:
+            return tr("Tool 'Point of intersection curve and axis'", "shortcut for action");
+        case VShortcutAction::ToolArcIntersectAxis:
+            return tr("Tool 'Point of intersection arc and axis'", "shortcut for action");
+        case VShortcutAction::LayoutSettings:
+            return tr("Layout settings", "shortcut for action");
+        case VShortcutAction::ToolPointOfIntersectionArcs:
+            return tr("Tool 'Point of intersection arcs'", "shortcut for action");
+        case VShortcutAction::ToolPointOfIntersectionCircles:
+            return tr("Tool 'Point of intersection circles'", "shortcut for action");
+        case VShortcutAction::ToolPointOfIntersectionCurves:
+            return tr("Tool 'Point intersection curves'", "shortcut for action");
+        case VShortcutAction::ToolPointFromCircleAndTangent:
+            return tr("Tool 'Point from circle and tangent'", "shortcut for action");
+        case VShortcutAction::ToolPointFromArcAndTangent:
+            return tr("Tool 'Point from arc and tangent'", "shortcut for action");
+        case VShortcutAction::ToolArcWithLength:
+            return tr("Tool 'Arc with given length'", "shortcut for action");
+        case VShortcutAction::ToolTrueDarts:
+            return tr("Tool 'True darts'", "shortcut for action");
+        case VShortcutAction::ToolGroup:
+            return tr("Tool 'Visibility group'", "shortcut for action");
+        case VShortcutAction::ToolRotation:
+            return tr("Tool 'Rotate objects'", "shortcut for action");
+        case VShortcutAction::ToolFlippingByLine:
+            return tr("Tool 'Flipping objects by line'", "shortcut for action");
+        case VShortcutAction::ToolFlippingByAxis:
+            return tr("Tool 'Flipping objects by axis'", "shortcut for action");
+        case VShortcutAction::ToolMove:
+            return tr("Tool 'Move objects'", "shortcut for action");
+        case VShortcutAction::ToolMidpoint:
+            return tr("Tool 'Midpoint between two points'", "shortcut for action");
+        case VShortcutAction::ExportDrawAs:
+            return tr("Export draw as", "shortcut for action");
+        case VShortcutAction::ExportLayoutAs:
+            return tr("Export layout as", "shortcut for action");
+        case VShortcutAction::ExportDetailsAs:
+            return tr("Export details as", "shortcut for action");
+        case VShortcutAction::ToolEllipticalArc:
+            return tr("Tool 'Elliptical Arc'", "shortcut for action");
+        case VShortcutAction::ToolPin:
+            return tr("Tool 'Pin'", "shortcut for action");
+        case VShortcutAction::ToolInsertNode:
+            return tr("Tool 'Insert node'", "shortcut for action");
+        case VShortcutAction::ToolPlaceLabel:
+            return tr("Tool 'Place label'", "shortcut for action");
         case VShortcutAction::LAST_ONE_DO_NOT_USE:
             Q_UNREACHABLE(); //-V501
             break;

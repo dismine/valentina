@@ -140,9 +140,9 @@ private slots:
 #if defined(Q_OS_MAC)
     void CreateMeasurements();
 #endif
-    void ExportDrawAs();
-    void ExportLayoutAs();
-    void ExportDetailsAs();
+    void ExportDrawAs(bool checked);
+    void ExportLayoutAs(bool checked);
+    void ExportDetailsAs(bool checked);
 
     void ArrowTool(bool checked);
     void ToolEndLine(bool checked);

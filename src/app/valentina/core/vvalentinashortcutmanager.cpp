@@ -98,7 +98,6 @@ VValentinaShortcutManager::VValentinaShortcutManager(QObject *parent)
                  {QKeySequence(Qt::ControlModifier QKEY_SEQUENCE_OP Qt::Key_H).toString()},
                  {}});
     AddShortcut({VShortcutAction::Quit, KeyBindingsToStringList(QKeySequence::Quit), {}});
-    AddShortcut({VShortcutAction::LastTool, {QKeySequence(Qt::Key_L).toString()}, {}});
     AddShortcut({VShortcutAction::CurveDetails, {QKeySequence(Qt::Key_F2).toString()}, {}});
     AddShortcut({VShortcutAction::FinalMeasurements,
                  {QKeySequence(Qt::ControlModifier QKEY_SEQUENCE_OP Qt::Key_I).toString()},
@@ -119,6 +118,54 @@ VValentinaShortcutManager::VValentinaShortcutManager(QObject *parent)
     AddShortcut({VShortcutAction::FindNext, {QKeySequence(Qt::Key_F3).toString()}, {}});
     AddShortcut(
         {VShortcutAction::FindPrevious, {QKeySequence(Qt::ShiftModifier QKEY_SEQUENCE_OP Qt::Key_F3).toString()}, {}});
+    AddShortcut({VShortcutAction::LastTool, {QKeySequence(Qt::Key_L).toString()}, {}});
+    AddShortcut({VShortcutAction::ToolEndLine, {}, {}});
+    AddShortcut({VShortcutAction::ToolLine, {}, {}});
+    AddShortcut({VShortcutAction::ToolAlongLine, {}, {}});
+    AddShortcut({VShortcutAction::ToolShoulderPoint, {}, {}});
+    AddShortcut({VShortcutAction::ToolNormal, {}, {}});
+    AddShortcut({VShortcutAction::ToolBisector, {}, {}});
+    AddShortcut({VShortcutAction::ToolLineIntersect, {}, {}});
+    AddShortcut({VShortcutAction::ToolSpline, {}, {}});
+    AddShortcut({VShortcutAction::ToolCubicBezier, {}, {}});
+    AddShortcut({VShortcutAction::ToolArc, {}, {}});
+    AddShortcut({VShortcutAction::ToolSplinePath, {}, {}});
+    AddShortcut({VShortcutAction::ToolCubicBezierPath, {}, {}});
+    AddShortcut({VShortcutAction::ToolPointOfContact, {}, {}});
+    AddShortcut({VShortcutAction::ToolPiece, {}, {}});
+    AddShortcut({VShortcutAction::ToolPiecePath, {}, {}});
+    AddShortcut({VShortcutAction::ToolHeight, {}, {}});
+    AddShortcut({VShortcutAction::ToolTriangle, {}, {}});
+    AddShortcut({VShortcutAction::ToolPointOfIntersection, {}, {}});
+    AddShortcut({VShortcutAction::ToolCutSpline, {}, {}});
+    AddShortcut({VShortcutAction::ToolCutSplinePath, {}, {}});
+    AddShortcut({VShortcutAction::ToolUnionDetails, {}, {}});
+    AddShortcut({VShortcutAction::ToolDuplicateDetail, {}, {}});
+    AddShortcut({VShortcutAction::ToolCutArc, {}, {}});
+    AddShortcut({VShortcutAction::ToolLineIntersectAxis, {}, {}});
+    AddShortcut({VShortcutAction::ToolCurveIntersectAxis, {}, {}});
+    AddShortcut({VShortcutAction::ToolArcIntersectAxis, {}, {}});
+    AddShortcut({VShortcutAction::LayoutSettings, {}, {}});
+    AddShortcut({VShortcutAction::ToolPointOfIntersectionArcs, {}, {}});
+    AddShortcut({VShortcutAction::ToolPointOfIntersectionCircles, {}, {}});
+    AddShortcut({VShortcutAction::ToolPointOfIntersectionCurves, {}, {}});
+    AddShortcut({VShortcutAction::ToolPointFromCircleAndTangent, {}, {}});
+    AddShortcut({VShortcutAction::ToolPointFromArcAndTangent, {}, {}});
+    AddShortcut({VShortcutAction::ToolArcWithLength, {}, {}});
+    AddShortcut({VShortcutAction::ToolTrueDarts, {}, {}});
+    AddShortcut({VShortcutAction::ToolGroup, {}, {}});
+    AddShortcut({VShortcutAction::ToolRotation, {}, {}});
+    AddShortcut({VShortcutAction::ToolFlippingByLine, {}, {}});
+    AddShortcut({VShortcutAction::ToolFlippingByAxis, {}, {}});
+    AddShortcut({VShortcutAction::ToolMove, {}, {}});
+    AddShortcut({VShortcutAction::ToolMidpoint, {}, {}});
+    AddShortcut({VShortcutAction::ExportDrawAs, {}, {}});
+    AddShortcut({VShortcutAction::ExportLayoutAs, {}, {}});
+    AddShortcut({VShortcutAction::ExportDetailsAs, {}, {}});
+    AddShortcut({VShortcutAction::ToolEllipticalArc, {}, {}});
+    AddShortcut({VShortcutAction::ToolPin, {}, {}});
+    AddShortcut({VShortcutAction::ToolInsertNode, {}, {}});
+    AddShortcut({VShortcutAction::ToolPlaceLabel, {}, {}});
 
     QT_WARNING_POP
 }
