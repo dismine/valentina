@@ -150,9 +150,17 @@ class VAbstractShortcutManager : public QObject
 public:
     struct VSShortcut
     {
-        VShortcutAction type{};
-        QStringList defaultShortcuts{};
-        QStringList shortcuts{};
+        VShortcutAction type{};         // NOLINT(misc-non-private-member-variables-in-classes)
+        QStringList defaultShortcuts{}; // NOLINT(misc-non-private-member-variables-in-classes)
+        QStringList shortcuts{};        // NOLINT(misc-non-private-member-variables-in-classes)
+
+        VSShortcut() = default;
+        VSShortcut(VShortcutAction type, const QStringList &defaultShortcuts, const QStringList &shortcuts)
+          : type(type),
+            defaultShortcuts(defaultShortcuts),
+            shortcuts(shortcuts)
+        {
+        }
     };
 
     explicit VAbstractShortcutManager(QObject *parent = nullptr);
