@@ -42,8 +42,25 @@ public:
     explicit VToolButtonPopup(QWidget *parent = nullptr);
     ~VToolButtonPopup() override = default;
 
+    auto GetToolGroupTooltip() const -> QString;
+    void SetToolGroupTooltip(const QString &toolGroupTooltip);
+
 private:
     Q_DISABLE_COPY_MOVE(VToolButtonPopup) // NOLINT
+
+    QString m_toolGroupTooltip{};
 };
+
+//---------------------------------------------------------------------------------------------------------------------
+inline auto VToolButtonPopup::GetToolGroupTooltip() const -> QString
+{
+    return m_toolGroupTooltip;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+inline void VToolButtonPopup::SetToolGroupTooltip(const QString &toolGroupTooltip)
+{
+    m_toolGroupTooltip = toolGroupTooltip;
+}
 
 #endif // VTOOLBUTTONPOPUP_H

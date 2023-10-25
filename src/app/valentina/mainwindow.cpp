@@ -1845,6 +1845,11 @@ void MainWindow::changeEvent(QEvent *event)
 
         ToolBarOption();
 
+        if (VApplication::VApp()->ValentinaSettings()->IsUseToolGroups())
+        {
+            ToolBarDrawTools();
+        }
+
         UpdateWindowTitle();
         emit m_sceneDetails->LanguageChanged();
     }
@@ -3058,6 +3063,7 @@ void MainWindow::ToolBarDrawTools()
             auto *linePointTool = new VToolButtonPopup(this);
             linePointTool->setMenu(linePointToolMenu);
             linePointTool->setDefaultAction(ui->actionEndLineTool);
+            linePointTool->SetToolGroupTooltip(tr("Point at a given distance tools"));
 
             ui->toolBarPointTools->addWidget(linePointTool);
         }
@@ -3071,6 +3077,7 @@ void MainWindow::ToolBarDrawTools()
             auto *angleLinePointTool = new VToolButtonPopup(this);
             angleLinePointTool->setMenu(angleLinePointToolMenu);
             angleLinePointTool->setDefaultAction(ui->actionNormalTool);
+            angleLinePointTool->SetToolGroupTooltip(tr("Perpendicular/Bisector tools"));
 
             ui->toolBarPointTools->addWidget(angleLinePointTool);
         }
@@ -3083,6 +3090,7 @@ void MainWindow::ToolBarDrawTools()
             auto *lineIntersectionPointTool = new VToolButtonPopup(this);
             lineIntersectionPointTool->setMenu(lineIntersectionPointToolMenu);
             lineIntersectionPointTool->setDefaultAction(ui->actionPointOfIntersectionTool);
+            lineIntersectionPointTool->SetToolGroupTooltip(tr("Point at the intersections of lins/axis tools"));
 
             ui->toolBarPointTools->addWidget(lineIntersectionPointTool);
         }
@@ -3095,6 +3103,7 @@ void MainWindow::ToolBarDrawTools()
             auto *specialPointTool = new VToolButtonPopup(this);
             specialPointTool->setMenu(specialPointToolMenu);
             specialPointTool->setDefaultAction(ui->actionShoulderPointTool);
+            specialPointTool->SetToolGroupTooltip(tr("Triangular tools"));
 
             ui->toolBarPointTools->addWidget(specialPointTool);
         }
@@ -3108,6 +3117,7 @@ void MainWindow::ToolBarDrawTools()
             auto *axisPointTool = new VToolButtonPopup(this);
             axisPointTool->setMenu(axisPointToolMenu);
             axisPointTool->setDefaultAction(ui->actionLineIntersectAxisTool);
+            axisPointTool->SetToolGroupTooltip(tr("Point intersecting with axis tools"));
 
             ui->toolBarPointTools->addWidget(axisPointTool);
         }
@@ -3121,6 +3131,7 @@ void MainWindow::ToolBarDrawTools()
             auto *curveSegmentPointTool = new VToolButtonPopup(this);
             curveSegmentPointTool->setMenu(curveSegmentPointToolMenu);
             curveSegmentPointTool->setDefaultAction(ui->actionSplineCutPointTool);
+            curveSegmentPointTool->SetToolGroupTooltip(tr("Point segementing curves/arcs tools"));
 
             ui->toolBarPointTools->addWidget(curveSegmentPointTool);
         }
@@ -3134,6 +3145,7 @@ void MainWindow::ToolBarDrawTools()
             auto *curveIntersectionPointTool = new VToolButtonPopup(this);
             curveIntersectionPointTool->setMenu(curveIntersectionPointToolMenu);
             curveIntersectionPointTool->setDefaultAction(ui->actionIntersectionCurvesTool);
+            curveIntersectionPointTool->SetToolGroupTooltip(tr("Points interecting with 2 curves/arcs/circles tools"));
 
             ui->toolBarPointTools->addWidget(curveIntersectionPointTool);
         }
@@ -3147,6 +3159,8 @@ void MainWindow::ToolBarDrawTools()
             auto *tangentPointTool = new VToolButtonPopup(this);
             tangentPointTool->setMenu(tangentPointToolMenu);
             tangentPointTool->setDefaultAction(ui->actionPointFromArcAndTangentTool);
+            tangentPointTool->SetToolGroupTooltip(
+                tr("Points intersecting with arcs/curves and tangents/segments tools"));
 
             ui->toolBarPointTools->addWidget(tangentPointTool);
         }
@@ -3201,6 +3215,7 @@ void MainWindow::ToolBarDrawTools()
             auto *curvePointTool = new VToolButtonPopup(this);
             curvePointTool->setMenu(curveToolMenu);
             curvePointTool->setDefaultAction(ui->actionSplineTool);
+            curvePointTool->SetToolGroupTooltip(tr("Curves and arcs tools"));
 
             ui->toolBarCurveTools->addWidget(curvePointTool);
         }
@@ -3230,6 +3245,7 @@ void MainWindow::ToolBarDrawTools()
             auto *symmetryTool = new VToolButtonPopup(this);
             symmetryTool->setMenu(symmetryToolMenu);
             symmetryTool->setDefaultAction(ui->actionFlippingByAxisTool);
+            symmetryTool->SetToolGroupTooltip(tr("Flipping objects tools"));
 
             ui->toolBarOperationTools->addWidget(symmetryTool);
         }
@@ -3242,6 +3258,7 @@ void MainWindow::ToolBarDrawTools()
             auto *transformTool = new VToolButtonPopup(this);
             transformTool->setMenu(transformToolMenu);
             transformTool->setDefaultAction(ui->actionRotationTool);
+            transformTool->SetToolGroupTooltip(tr("Rotating/moving objects tools"));
 
             ui->toolBarOperationTools->addWidget(transformTool);
         }
@@ -3276,6 +3293,7 @@ void MainWindow::ToolBarDrawTools()
             auto *detailTool = new VToolButtonPopup(this);
             detailTool->setMenu(detailToolMenu);
             detailTool->setDefaultAction(ui->actionUnionDetailsTool);
+            detailTool->SetToolGroupTooltip(tr("Merge/duplicate pieces tools"));
 
             ui->toolBarDetailTools->addWidget(detailTool);
         }
@@ -3290,6 +3308,7 @@ void MainWindow::ToolBarDrawTools()
             auto *detailTool = new VToolButtonPopup(this);
             detailTool->setMenu(internalDetailItemToolMenu);
             detailTool->setDefaultAction(ui->actionInternalPathTool);
+            detailTool->SetToolGroupTooltip(tr("Adding objects for Details mode tools"));
 
             ui->toolBarDetailTools->addWidget(detailTool);
         }

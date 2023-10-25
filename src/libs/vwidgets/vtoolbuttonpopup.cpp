@@ -34,5 +34,13 @@ VToolButtonPopup::VToolButtonPopup(QWidget *parent)
   : QToolButton(parent)
 {
     setPopupMode(QToolButton::MenuButtonPopup);
-    QObject::connect(this, &QToolButton::triggered, this, &QToolButton::setDefaultAction);
+    QObject::connect(this, &QToolButton::triggered, this,
+                     [this](QAction *action)
+                     {
+                         setDefaultAction(action);
+                         if (!m_toolGroupTooltip.isEmpty())
+                         {
+                             setToolTip(m_toolGroupTooltip);
+                         }
+                     });
 }
