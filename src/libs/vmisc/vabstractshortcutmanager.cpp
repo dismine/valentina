@@ -342,7 +342,7 @@ auto VAbstractShortcutManager::ReadableName(VShortcutAction type) -> QString
         case VShortcutAction::Quit:
             return tr("Quit app", "shortcut for action");
         case VShortcutAction::LastTool:
-            return tr("activate last used tool", "shortcut for action");
+            return tr("Activate last used tool", "shortcut for action");
         case VShortcutAction::CurveDetails:
             return tr("Show curve details", "shortcut for action");
         case VShortcutAction::FinalMeasurements:
