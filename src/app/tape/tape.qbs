@@ -70,6 +70,9 @@ VToolApp {
         name: "dialogs"
         prefix: "dialogs/"
         files: [
+            "configpages/tapepreferencespathpage.cpp",
+            "configpages/tapepreferencespathpage.h",
+            "configpages/tapepreferencespathpage.ui",
             "dialogdimensioncustomnames.cpp",
             "dialogdimensionlabels.cpp",
             "dialogmeasurementscsvcolumns.cpp",

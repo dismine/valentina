@@ -85,6 +85,10 @@ public:
     auto GetPathFontCorrections() const -> QString;
     void SetPathFontCorrections(const QString &value);
 
+    static auto GetDefPathKnownMeasurements() -> QString;
+    auto GetPathKnownMeasurements() const -> QString;
+    void SetPathKnownMeasurements(const QString &value);
+
     auto GetOsSeparator() const -> bool;
     void SetOsSeparator(const bool &value);
 

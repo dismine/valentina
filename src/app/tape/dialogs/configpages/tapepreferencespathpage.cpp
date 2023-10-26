@@ -1,14 +1,14 @@
 /************************************************************************
  **
- **  @file   preferencespathpage.cpp
+ **  @file   tapepreferencespathpage.cpp
  **  @author Roman Telezhynskyi <dismine(at)gmail.com>
- **  @date   12 4, 2017
+ **  @date   26 10, 2023
  **
  **  @brief
  **  @copyright
  **  This source code is part of the Valentina project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
- **  Copyright (C) 2017 Valentina project
+ **  Copyright (C) 2023 Valentina project
  **  <https://gitlab.com/smart-pattern/valentina> All Rights Reserved.
  **
  **  Valentina is free software: you can redistribute it and/or modify
@@ -25,19 +25,15 @@
  **  along with Valentina.  If not, see <http://www.gnu.org/licenses/>.
  **
  *************************************************************************/
-
-#include "preferencespathpage.h"
-#include "../vmisc/vabstractvalapplication.h"
-#include "../vmisc/vvalentinasettings.h"
-#include "ui_preferencespathpage.h"
-
-#include <QDir>
-#include <QFileDialog>
+#include "tapepreferencespathpage.h"
+#include "../../mapplication.h"
+#include "../../vtapesettings.h"
+#include "ui_tapepreferencespathpage.h"
 
 //---------------------------------------------------------------------------------------------------------------------
-PreferencesPathPage::PreferencesPathPage(QWidget *parent)
+TapePreferencesPathPage::TapePreferencesPathPage(QWidget *parent)
   : QWidget(parent),
-    ui(new Ui::PreferencesPathPage)
+    ui(new Ui::TapePreferencesPathPage)
 {
     ui->setupUi(this);
 
@@ -53,29 +49,27 @@ PreferencesPathPage::PreferencesPathPage(QWidget *parent)
                 ui->editButton->setDefault(true);
             });
 
-    connect(ui->defaultButton, &QPushButton::clicked, this, &PreferencesPathPage::DefaultPath);
-    connect(ui->editButton, &QPushButton::clicked, this, &PreferencesPathPage::EditPath);
+    connect(ui->defaultButton, &QPushButton::clicked, this, &TapePreferencesPathPage::DefaultPath);
+    connect(ui->editButton, &QPushButton::clicked, this, &TapePreferencesPathPage::EditPath);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-PreferencesPathPage::~PreferencesPathPage()
+TapePreferencesPathPage::~TapePreferencesPathPage()
 {
     delete ui;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-auto PreferencesPathPage::Apply() -> QStringList
+auto TapePreferencesPathPage::Apply() -> QStringList
 {
-    VValentinaSettings *settings = VAbstractValApplication::VApp()->ValentinaSettings();
-    settings->SetPathSVGFonts(ui->pathTable->item(0, 1)->text());
-    settings->SetPathFontCorrections(ui->pathTable->item(1, 1)->text());
-    settings->SetPathKnownMeasurements(ui->pathTable->item(2, 1)->text());
+    VTapeSettings *settings = MApplication::VApp()->TapeSettings();
+    settings->SetPathKnownMeasurements(ui->pathTable->item(0, 1)->text());
 
     return {}; // No changes which require restart.
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void PreferencesPathPage::changeEvent(QEvent *event)
+void TapePreferencesPathPage::changeEvent(QEvent *event)
 {
     if (event->type() == QEvent::LanguageChange)
     {
@@ -88,7 +82,7 @@ void PreferencesPathPage::changeEvent(QEvent *event)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void PreferencesPathPage::DefaultPath()
+void TapePreferencesPathPage::DefaultPath()
 {
     const int row = ui->pathTable->currentRow();
     QTableWidgetItem *item = ui->pathTable->item(row, 1);
@@ -98,13 +92,7 @@ void PreferencesPathPage::DefaultPath()
 
     switch (row)
     {
-        case 0: // svg fonts
-            path = VCommonSettings::GetDefPathSVGFonts();
-            break;
-        case 1: // font corrections
-            path = VCommonSettings::GetDefPathFontCorrections();
-            break;
-        case 2: // known measurements
+        case 0: // known measurements
             path = VCommonSettings::GetDefPathKnownMeasurements();
             break;
         default:
@@ -116,7 +104,7 @@ void PreferencesPathPage::DefaultPath()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void PreferencesPathPage::EditPath()
+void TapePreferencesPathPage::EditPath()
 {
     const int row = ui->pathTable->currentRow();
     QTableWidgetItem *item = ui->pathTable->item(row, 1);
@@ -125,14 +113,8 @@ void PreferencesPathPage::EditPath()
     QString path;
     switch (row)
     {
-        case 0: // svg fonts
-            path = VAbstractValApplication::VApp()->ValentinaSettings()->GetPathSVGFonts();
-            break;
-        case 1: // font corrections
-            path = VAbstractValApplication::VApp()->ValentinaSettings()->GetPathFontCorrections();
-            break;
-        case 2: // known measurements
-            path = VAbstractValApplication::VApp()->ValentinaSettings()->GetPathKnownMeasurements();
+        case 0: // known measurements
+            path = MApplication::VApp()->TapeSettings()->GetPathKnownMeasurements();
             break;
         default:
             break;
@@ -168,33 +150,19 @@ void PreferencesPathPage::EditPath()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void PreferencesPathPage::InitTable()
+void TapePreferencesPathPage::InitTable()
 {
     ui->pathTable->clearContents();
-    ui->pathTable->setRowCount(3);
+    ui->pathTable->setRowCount(1);
     ui->pathTable->setColumnCount(2);
 
-    const VValentinaSettings *settings = VAbstractValApplication::VApp()->ValentinaSettings();
+    const VTapeSettings *settings = MApplication::VApp()->TapeSettings();
 
     {
-        ui->pathTable->setItem(0, 0, new QTableWidgetItem(tr("My SVG Fonts")));
-        auto *item = new QTableWidgetItem(settings->GetPathSVGFonts());
-        item->setToolTip(settings->GetPathSVGFonts());
-        ui->pathTable->setItem(0, 1, item);
-    }
-
-    {
-        ui->pathTable->setItem(1, 0, new QTableWidgetItem(tr("My font corrections")));
-        auto *item = new QTableWidgetItem(settings->GetPathFontCorrections());
-        item->setToolTip(settings->GetPathFontCorrections());
-        ui->pathTable->setItem(1, 1, item);
-    }
-
-    {
-        ui->pathTable->setItem(2, 0, new QTableWidgetItem(tr("My known measurements")));
+        ui->pathTable->setItem(0, 0, new QTableWidgetItem(tr("My known measurements")));
         auto *item = new QTableWidgetItem(settings->GetPathKnownMeasurements());
         item->setToolTip(settings->GetPathKnownMeasurements());
-        ui->pathTable->setItem(2, 1, item);
+        ui->pathTable->setItem(0, 1, item);
     }
 
     ui->pathTable->verticalHeader()->setDefaultSectionSize(20);

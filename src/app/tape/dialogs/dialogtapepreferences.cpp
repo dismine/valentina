@@ -30,17 +30,25 @@
 #include "../mapplication.h"
 #include "../vtools/dialogs/dialogtoolbox.h"
 #include "configpages/tapepreferencesconfigurationpage.h"
+#include "configpages/tapepreferencespathpage.h"
 #include "ui_dialogtapepreferences.h"
 
 #include <QMessageBox>
 #include <QPushButton>
 #include <QShowEvent>
 
+#if QT_VERSION < QT_VERSION_CHECK(6, 4, 0)
+#include "../vmisc/compatibility.h"
+#endif
+
+using namespace Qt::Literals::StringLiterals;
+
 //---------------------------------------------------------------------------------------------------------------------
 DialogTapePreferences::DialogTapePreferences(QWidget *parent)
   : QDialog(parent),
     ui(new Ui::DialogTapePreferences),
-    m_configurationPage(new TapePreferencesConfigurationPage)
+    m_configurationPage(new TapePreferencesConfigurationPage),
+    m_pathPage(new TapePreferencesPathPage)
 {
     ui->setupUi(this);
 
@@ -59,6 +67,7 @@ DialogTapePreferences::DialogTapePreferences(QWidget *parent)
     connect(bApply, &QPushButton::clicked, this, &DialogTapePreferences::Apply);
 
     ui->pagesWidget->insertWidget(0, m_configurationPage);
+    ui->pagesWidget->insertWidget(1, m_pathPage);
 
     connect(ui->contentsWidget, &QListWidget::currentItemChanged, this, &DialogTapePreferences::PageChanged);
     ui->pagesWidget->setCurrentIndex(0);
@@ -131,12 +140,13 @@ void DialogTapePreferences::Apply()
     QStringList preferences;
 
     preferences += m_configurationPage->Apply();
+    preferences += m_pathPage->Apply();
 
     if (not preferences.isEmpty())
     {
         const QString text =
             tr("Followed %n option(s) require restart to take effect: %1.", "", static_cast<int>(preferences.size()))
-                .arg(preferences.join(QStringLiteral(", ")));
+                .arg(preferences.join(", "_L1));
         QMessageBox::information(this, QCoreApplication::applicationName(), text);
     }
 

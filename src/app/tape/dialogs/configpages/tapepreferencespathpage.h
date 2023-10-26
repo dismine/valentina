@@ -1,14 +1,14 @@
 /************************************************************************
  **
- **  @file   dialogtapepreferences.h
+ **  @file   tapepreferencespathpage.h
  **  @author Roman Telezhynskyi <dismine(at)gmail.com>
- **  @date   12 4, 2017
+ **  @date   26 10, 2023
  **
  **  @brief
  **  @copyright
  **  This source code is part of the Valentina project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
- **  Copyright (C) 2017 Valentina project
+ **  Copyright (C) 2023 Valentina project
  **  <https://gitlab.com/smart-pattern/valentina> All Rights Reserved.
  **
  **  Valentina is free software: you can redistribute it and/or modify
@@ -25,11 +25,10 @@
  **  along with Valentina.  If not, see <http://www.gnu.org/licenses/>.
  **
  *************************************************************************/
+#ifndef TAPEPREFERENCESPATHPAGE_H
+#define TAPEPREFERENCESPATHPAGE_H
 
-#ifndef DIALOGTAPEPREFERENCES_H
-#define DIALOGTAPEPREFERENCES_H
-
-#include <QDialog>
+#include <QWidget>
 
 #if QT_VERSION < QT_VERSION_CHECK(5, 13, 0)
 #include "../vmisc/defglobal.h"
@@ -37,39 +36,32 @@
 
 namespace Ui
 {
-class DialogTapePreferences;
+class TapePreferencesPathPage;
 }
 
-class TapePreferencesConfigurationPage;
-class TapePreferencesPathPage;
-class QListWidgetItem;
-
-class DialogTapePreferences : public QDialog
+class TapePreferencesPathPage : public QWidget
 {
     Q_OBJECT // NOLINT
 
 public:
-    explicit DialogTapePreferences(QWidget *parent = nullptr);
-    ~DialogTapePreferences() override;
-signals:
-    void UpdateProperties();
+    explicit TapePreferencesPathPage(QWidget *parent = nullptr);
+    ~TapePreferencesPathPage() override;
+
+    auto Apply() -> QStringList;
 
 protected:
-    void showEvent(QShowEvent *event) override;
-    void resizeEvent(QResizeEvent *event) override;
     void changeEvent(QEvent *event) override;
+
 private slots:
-    void Apply();
-    void Ok();
-    void PageChanged(QListWidgetItem *current, QListWidgetItem *previous);
+    void DefaultPath();
+    void EditPath();
 
 private:
     // cppcheck-suppress unknownMacro
-    Q_DISABLE_COPY_MOVE(DialogTapePreferences) // NOLINT
-    Ui::DialogTapePreferences *ui;
-    bool m_isInitialized{false};
-    TapePreferencesConfigurationPage *m_configurationPage;
-    TapePreferencesPathPage *m_pathPage;
+    Q_DISABLE_COPY_MOVE(TapePreferencesPathPage) // NOLINT
+    Ui::TapePreferencesPathPage *ui;
+
+    void InitTable();
 };
 
-#endif // DIALOGTAPEPREFERENCES_H
+#endif // TAPEPREFERENCESPATHPAGE_H
