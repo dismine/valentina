@@ -28,7 +28,7 @@
 #ifndef VKNOWNMEASUREMENTS_H
 #define VKNOWNMEASUREMENTS_H
 
-#include "xml/vpatternimage.h"
+#include "../ifc/xml/vpatternimage.h"
 #include <QSharedDataPointer>
 #include <QTypeInfo>
 

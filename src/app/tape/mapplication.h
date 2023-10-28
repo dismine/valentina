@@ -37,6 +37,7 @@
 class TMainWindow;
 class QLocalServer;
 class QCommandLineParser;
+class VKnownMeasurementsDatabase;
 
 enum class SocketConnection : bool
 {
@@ -77,6 +78,9 @@ public:
 
     static auto VApp() -> MApplication *;
 
+    auto KnownMeasurementsDatabase() -> VKnownMeasurementsDatabase *;
+    void RestartKnownMeasurementsDatabaseWatcher();
+
 public slots:
     void ProcessCMD();
 
@@ -89,6 +93,8 @@ protected slots:
 
 private slots:
     void NewLocalSocketConnection();
+    void RepopulateMeasurementsDatabase(const QString &path);
+    void KnownMeasurementsPathChanged(const QString &oldPath, const QString &newPath);
 
 private:
     // cppcheck-suppress unknownMacro
@@ -98,6 +104,8 @@ private:
     VTranslateVars *m_trVars{nullptr};
     QPointer<DialogMDataBase> m_dataBase{};
     bool m_testMode{false};
+    VKnownMeasurementsDatabase *m_knownMeasurementsDatabase{nullptr};
+    QFileSystemWatcher *m_knownMeasurementsDatabaseWatcher{nullptr};
 
     void Clean();
 

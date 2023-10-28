@@ -350,9 +350,11 @@ auto VCommonSettings::GetPathSVGFonts() const -> QString
 //---------------------------------------------------------------------------------------------------------------------
 void VCommonSettings::SetPathSVGFonts(const QString &value)
 {
-    const QString oldPath = GetDefPathSVGFonts();
+    const QString oldPath = GetPathSVGFonts();
 
-    setValue(*settingPathsSVGFonts, value);
+    QSettings settings(this->format(), this->scope(), this->organizationName(), *commonIniFilename);
+    settings.setValue(*settingPathsSVGFonts, value);
+    settings.sync();
 
     if (oldPath != value)
     {
@@ -397,9 +399,16 @@ auto VCommonSettings::GetPathKnownMeasurements() const -> QString
 //---------------------------------------------------------------------------------------------------------------------
 void VCommonSettings::SetPathKnownMeasurements(const QString &value)
 {
+    const QString oldPath = GetPathKnownMeasurements();
+
     QSettings settings(this->format(), this->scope(), this->organizationName(), *commonIniFilename);
     settings.setValue(*settingPathsKnownMeasurements, value);
     settings.sync();
+
+    if (oldPath != value)
+    {
+        emit KnownMeasurementsPathChanged(oldPath, value);
+    }
 }
 
 //---------------------------------------------------------------------------------------------------------------------

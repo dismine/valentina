@@ -344,6 +344,7 @@ public:
 
 signals:
     void SVGFontsPathChanged(const QString &oldPath, const QString &newPath);
+    void KnownMeasurementsPathChanged(const QString &oldPath, const QString &newPath);
 
 protected:
     template <typename T>

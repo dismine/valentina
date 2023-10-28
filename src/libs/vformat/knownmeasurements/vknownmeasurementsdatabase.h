@@ -28,12 +28,11 @@
 #ifndef VKNOWNMEASUREMENTSDATABASE_H
 #define VKNOWNMEASUREMENTSDATABASE_H
 
+#include "vknownmeasurements.h"
 #include <QCache>
 #include <QHash>
 #include <QString>
 #include <QUuid>
-
-class VKnownMeasurements;
 
 struct VKnownMeasurementsHeader
 {

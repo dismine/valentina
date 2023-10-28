@@ -34,19 +34,24 @@
 #include "../ifc/exception/vexceptionobjecterror.h"
 #include "../ifc/exception/vexceptionwrongid.h"
 #include "../qmuparser/qmuparsererror.h"
+#include "../vformat/knownmeasurements/vknownmeasurementsdatabase.h"
 #include "../vganalytics/def.h"
 #include "../vganalytics/vganalytics.h"
 #include "../vmisc/projectversion.h"
 #include "../vmisc/qt_dispatch/qt_dispatch.h"
 #include "../vmisc/theme/vtheme.h"
 #include "../vmisc/vsysexits.h"
+#include "qtpreprocessorsupport.h"
 #include "tmainwindow.h"
 #include "version.h"
 #include "vtapeshortcutmanager.h"
 
+#include "QtConcurrent/qtconcurrentrun.h"
 #include <QCommandLineParser>
 #include <QDir>
 #include <QFileOpenEvent>
+#include <QFileSystemWatcher>
+#include <QFuture>
 #include <QGlobalStatic>
 #include <QGridLayout>
 #include <QLocalServer>
@@ -578,6 +583,7 @@ void MApplication::OpenSettings()
     settings = new VTapeSettings(QSettings::IniFormat, QSettings::UserScope, QCoreApplication::organizationName(),
                                  QCoreApplication::applicationName(), this);
     connect(settings, &VTapeSettings::SVGFontsPathChanged, this, &MApplication::SVGFontsPathChanged);
+    connect(settings, &VTapeSettings::KnownMeasurementsPathChanged, this, &MApplication::KnownMeasurementsPathChanged);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -726,6 +732,36 @@ auto MApplication::VApp() -> MApplication *
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+auto MApplication::KnownMeasurementsDatabase() -> VKnownMeasurementsDatabase *
+{
+    if (m_knownMeasurementsDatabase == nullptr)
+    {
+        m_knownMeasurementsDatabase = new VKnownMeasurementsDatabase();
+
+        RestartKnownMeasurementsDatabaseWatcher();
+    }
+
+    if (!m_knownMeasurementsDatabase->IsPopulated())
+    {
+        m_knownMeasurementsDatabase->PopulateMeasurementsDatabase();
+    }
+
+    return m_knownMeasurementsDatabase;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void MApplication::RestartKnownMeasurementsDatabaseWatcher()
+{
+    if (m_knownMeasurementsDatabase != nullptr)
+    {
+        delete m_knownMeasurementsDatabaseWatcher;
+        m_knownMeasurementsDatabaseWatcher = new QFileSystemWatcher({settings->GetPathKnownMeasurements()}, this);
+        connect(m_knownMeasurementsDatabaseWatcher, &QFileSystemWatcher::directoryChanged, this,
+                &MApplication::RepopulateMeasurementsDatabase);
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 auto MApplication::NewMainWindow() -> TMainWindow *
 {
     auto *tape = new TMainWindow();
@@ -771,6 +807,30 @@ void MApplication::NewLocalSocketConnection()
     delete socket;
     MainWindow()->raise();
     MainWindow()->activateWindow();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void MApplication::RepopulateMeasurementsDatabase(const QString &path)
+{
+    Q_UNUSED(path)
+    if (m_knownMeasurementsDatabase != nullptr)
+    {
+        QFuture<void> future =
+            QtConcurrent::run([this]() { m_knownMeasurementsDatabase->PopulateMeasurementsDatabase(); });
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void MApplication::KnownMeasurementsPathChanged(const QString &oldPath, const QString &newPath)
+{
+    if (oldPath != newPath)
+    {
+        if (m_knownMeasurementsDatabase != nullptr)
+        {
+            RestartKnownMeasurementsDatabaseWatcher();
+            RepopulateMeasurementsDatabase(newPath);
+        }
+    }
 }
 
 //---------------------------------------------------------------------------------------------------------------------

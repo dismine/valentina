@@ -28,6 +28,9 @@
 
 #include "vabstractapplication.h"
 
+#include "QtConcurrent/qtconcurrentrun.h"
+#include "compatibility.h"
+#include "svgfont/vsvgfontdatabase.h"
 #include <QDir>
 #include <QFileSystemWatcher>
 #include <QFuture>
@@ -39,10 +42,6 @@
 #include <QUndoStack>
 #include <QWidget>
 #include <QtDebug>
-
-#include "QtConcurrent/qtconcurrentrun.h"
-#include "compatibility.h"
-#include "svgfont/vsvgfontdatabase.h"
 
 #if QT_VERSION < QT_VERSION_CHECK(6, 0, 0)
 #include "literals.h"
