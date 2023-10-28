@@ -16,7 +16,8 @@ HEADERS += \
     $$PWD//vabstractmconverter.h \
     $$PWD/vlabeltemplateconverter.h \
     $$PWD/vwatermarkconverter.h \
-    $$PWD/vparsererrorhandler.h
+    $$PWD/vparsererrorhandler.h \
+    $$PWD/vknownmeasurementsconverter.h
 
 SOURCES += \
     $$PWD/utils.cpp \
@@ -33,4 +34,6 @@ SOURCES += \
     $$PWD//vabstractmconverter.cpp \
     $$PWD/vlabeltemplateconverter.cpp \
     $$PWD/vwatermarkconverter.cpp \
-    $$PWD/vparsererrorhandler.cpp
+    $$PWD/vparsererrorhandler.cpp \
+    $$PWD/vknownmeasurementsconverter.cpp
+            

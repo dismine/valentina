@@ -132,13 +132,18 @@ auto FileComment() -> QString
 } // namespace
 
 //---------------------------------------------------------------------------------------------------------------------
-VMeasurements::VMeasurements(VContainer *data)
-  : data(data),
-    type(MeasurementsType::Unknown){SCASSERT(data != nullptr)}
+VMeasurements::VMeasurements(VContainer *data, QObject *parent)
+  : VDomDocument(parent),
+    data(data),
+    type(MeasurementsType::Unknown)
+{
+    SCASSERT(data != nullptr);
+}
 
-    //---------------------------------------------------------------------------------------------------------------------
-    VMeasurements::VMeasurements(Unit unit, VContainer * data)
-  : data(data),
+//---------------------------------------------------------------------------------------------------------------------
+VMeasurements::VMeasurements(Unit unit, VContainer *data, QObject *parent)
+  : VDomDocument(parent),
+    data(data),
     type(MeasurementsType::Individual)
 {
     SCASSERT(data != nullptr)
@@ -147,8 +152,10 @@ VMeasurements::VMeasurements(VContainer *data)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-VMeasurements::VMeasurements(Unit unit, const QVector<MeasurementDimension_p> &dimensions, VContainer *data)
-  : data(data),
+VMeasurements::VMeasurements(Unit unit, const QVector<MeasurementDimension_p> &dimensions, VContainer *data,
+                             QObject *parent)
+  : VDomDocument(parent),
+    data(data),
     type(MeasurementsType::Multisize)
 {
     SCASSERT(data != nullptr)
@@ -249,17 +256,19 @@ void VMeasurements::Remove(const QString &name)
 void VMeasurements::MoveTop(const QString &name)
 {
     const QDomElement node = FindM(name);
-    if (not node.isNull())
+    if (node.isNull())
     {
-        const QDomNodeList mList = elementsByTagName(TagMeasurement);
-        if (mList.size() >= 2)
+        return;
+    }
+
+    const QDomNodeList mList = elementsByTagName(TagMeasurement);
+    if (mList.size() >= 2)
+    {
+        const QDomNode top = mList.at(0);
+        if (not top.isNull())
         {
-            const QDomNode top = mList.at(0);
-            if (not top.isNull())
-            {
-                const QDomNodeList list = elementsByTagName(TagBodyMeasurements);
-                list.at(0).insertBefore(node, top);
-            }
+            const QDomNodeList list = elementsByTagName(TagBodyMeasurements);
+            list.at(0).insertBefore(node, top);
         }
     }
 }
@@ -268,14 +277,16 @@ void VMeasurements::MoveTop(const QString &name)
 void VMeasurements::MoveUp(const QString &name)
 {
     const QDomElement node = FindM(name);
-    if (not node.isNull())
+    if (node.isNull())
     {
-        const QDomElement prSibling = node.previousSiblingElement(TagMeasurement);
-        if (not prSibling.isNull())
-        {
-            const QDomNodeList list = elementsByTagName(TagBodyMeasurements);
-            list.at(0).insertBefore(node, prSibling);
-        }
+        return;
+    }
+
+    const QDomElement prSibling = node.previousSiblingElement(TagMeasurement);
+    if (not prSibling.isNull())
+    {
+        const QDomNodeList list = elementsByTagName(TagBodyMeasurements);
+        list.at(0).insertBefore(node, prSibling);
     }
 }
 
@@ -283,14 +294,16 @@ void VMeasurements::MoveUp(const QString &name)
 void VMeasurements::MoveDown(const QString &name)
 {
     const QDomElement node = FindM(name);
-    if (not node.isNull())
+    if (node.isNull())
     {
-        const QDomElement nextSibling = node.nextSiblingElement(TagMeasurement);
-        if (not nextSibling.isNull())
-        {
-            const QDomNodeList list = elementsByTagName(TagBodyMeasurements);
-            list.at(0).insertAfter(node, nextSibling);
-        }
+        return;
+    }
+
+    const QDomElement nextSibling = node.nextSiblingElement(TagMeasurement);
+    if (not nextSibling.isNull())
+    {
+        const QDomNodeList list = elementsByTagName(TagBodyMeasurements);
+        list.at(0).insertAfter(node, nextSibling);
     }
 }
 
@@ -298,17 +311,19 @@ void VMeasurements::MoveDown(const QString &name)
 void VMeasurements::MoveBottom(const QString &name)
 {
     const QDomElement node = FindM(name);
-    if (not node.isNull())
+    if (node.isNull())
     {
-        const QDomNodeList mList = elementsByTagName(TagMeasurement);
-        if (mList.size() >= 2)
+        return;
+    }
+
+    const QDomNodeList mList = elementsByTagName(TagMeasurement);
+    if (mList.size() >= 2)
+    {
+        const QDomNode bottom = mList.at(mList.size() - 1);
+        if (not bottom.isNull())
         {
-            const QDomNode bottom = mList.at(mList.size() - 1);
-            if (not bottom.isNull())
-            {
-                const QDomNodeList list = elementsByTagName(TagBodyMeasurements);
-                list.at(0).insertAfter(node, bottom);
-            }
+            const QDomNodeList list = elementsByTagName(TagBodyMeasurements);
+            list.at(0).insertAfter(node, bottom);
         }
     }
 }
@@ -771,7 +786,8 @@ void VMeasurements::SetMDescription(const QString &name, const QString &text)
     QDomElement node = FindM(name);
     if (not node.isNull())
     {
-        SetAttribute(node, AttrDescription, text);
+        SetAttributeOrRemoveIf<QString>(node, AttrDescription, text,
+                                        [](const QString &text) noexcept { return text.isEmpty(); });
     }
     else
     {
@@ -1276,7 +1292,7 @@ auto VMeasurements::FindM(const QString &name) const -> QDomElement
     if (name.isEmpty())
     {
         qWarning() << tr("The measurement name is empty!");
-        return QDomElement();
+        return {};
     }
 
     QDomNodeList list = elementsByTagName(TagMeasurement);
@@ -1284,17 +1300,19 @@ auto VMeasurements::FindM(const QString &name) const -> QDomElement
     for (int i = 0; i < list.size(); ++i)
     {
         const QDomElement domElement = list.at(i).toElement();
-        if (domElement.isNull() == false)
+        if (domElement.isNull())
         {
-            const QString parameter = domElement.attribute(AttrName);
-            if (parameter == name)
-            {
-                return domElement;
-            }
+            continue;
+        }
+
+        const QString parameter = domElement.attribute(AttrName);
+        if (parameter == name)
+        {
+            return domElement;
         }
     }
 
-    return QDomElement();
+    return {};
 }
 
 //---------------------------------------------------------------------------------------------------------------------

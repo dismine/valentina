@@ -832,7 +832,7 @@ auto VDomDocument::SaveDocument(const QString &fileName, QString &error) -> bool
 // cppcheck-suppress unusedFunction
 auto VDomDocument::Major() const -> QString
 {
-    QString version = UniqueTagText(TagVersion, "0.0.0");
+    QString version = UniqueTagText(TagVersion, "0.0.0"_L1);
     QStringList v = version.split('.'_L1);
     return v.at(0);
 }
@@ -841,7 +841,7 @@ auto VDomDocument::Major() const -> QString
 // cppcheck-suppress unusedFunction
 auto VDomDocument::Minor() const -> QString
 {
-    QString version = UniqueTagText(TagVersion, "0.0.0");
+    QString version = UniqueTagText(TagVersion, "0.0.0"_L1);
     QStringList v = version.split('.'_L1);
     return v.at(1);
 }
@@ -850,7 +850,7 @@ auto VDomDocument::Minor() const -> QString
 // cppcheck-suppress unusedFunction
 auto VDomDocument::Patch() const -> QString
 {
-    QString version = UniqueTagText(TagVersion, "0.0.0");
+    QString version = UniqueTagText(TagVersion, "0.0.0"_L1);
     QStringList v = version.split('.'_L1);
     return v.at(2);
 }
@@ -880,7 +880,7 @@ auto VDomDocument::GetFormatVersionStr() const -> QString
             return domElement.text();
         }
     }
-    return QString(QStringLiteral("0.0.0"));
+    return "0.0.0"_L1;
 }
 
 //---------------------------------------------------------------------------------------------------------------------

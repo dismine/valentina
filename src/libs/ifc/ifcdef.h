@@ -165,6 +165,7 @@ extern const QString AttrCurve1Alias2;
 extern const QString AttrCurve2Alias1;
 extern const QString AttrCurve2Alias2;
 extern const QString AttrLayoutVersion;
+extern const QString AttrKMVersion;
 
 extern const QString TypeLineDefault;
 extern const QString TypeLineNone;

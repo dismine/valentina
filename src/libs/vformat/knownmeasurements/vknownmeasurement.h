@@ -1,14 +1,14 @@
 /************************************************************************
  **
- **  @file   vpatternimage.h
+ **  @file   vknownmeasurement.h
  **  @author Roman Telezhynskyi <dismine(at)gmail.com>
- **  @date   11 1, 2022
+ **  @date   27 10, 2023
  **
  **  @brief
  **  @copyright
  **  This source code is part of the Valentina project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
- **  Copyright (C) 2022 Valentina project
+ **  Copyright (C) 2023 Valentina project
  **  <https://gitlab.com/smart-pattern/valentina> All Rights Reserved.
  **
  **  Valentina is free software: you can redistribute it and/or modify
@@ -25,49 +25,21 @@
  **  along with Valentina.  If not, see <http://www.gnu.org/licenses/>.
  **
  *************************************************************************/
-#ifndef VPATTERNIMAGE_H
-#define VPATTERNIMAGE_H
+#ifndef VKNOWNMEASUREMENT_H
+#define VKNOWNMEASUREMENT_H
 
-#include <QCoreApplication>
 #include <QString>
+#include <QUuid>
 
-class QPixmap;
-class QMimeType;
-
-class VPatternImage
+struct VKnownMeasurement
 {
-    Q_DECLARE_TR_FUNCTIONS(VPatternImage) // NOLINT
-
-public:
-    VPatternImage() = default;
-
-    static auto FromFile(const QString &fileName) -> VPatternImage;
-
-    auto ContentType() const -> const QString &;
-
-    auto ContentData() const -> const QByteArray &;
-    void SetContentData(const QByteArray &newContentData, const QString &newContentType);
-
-    auto IsNull() const -> bool;
-    auto IsValid() const -> bool;
-
-    auto GetPixmap() const -> QPixmap;
-    auto GetPixmap(int width, int height) const -> QPixmap;
-
-    auto ErrorString() const -> const QString &;
-
-    auto MimeTypeFromData() const -> QMimeType;
-
-    auto Size() const -> QSize;
-
-    auto Title() const -> QString;
-    void SetTitle(const QString &newTitle);
-
-private:
-    QString m_contentType{};
-    QByteArray m_contentData{};
-    mutable QString m_errorString{};
-    QString m_title{};
+    QString name{};
+    QString fullName{};
+    QString description{};
+    QString formula{};
+    bool specialUnits{false};
+    QUuid diagram{};
+    int index{0};
 };
 
-#endif // VPATTERNIMAGE_H
+#endif // VKNOWNMEASUREMENT_H

@@ -1,14 +1,14 @@
 /************************************************************************
  **
- **  @file   vpatternimage.h
+ **  @file   vknownmeasurementsdatabase.h
  **  @author Roman Telezhynskyi <dismine(at)gmail.com>
- **  @date   11 1, 2022
+ **  @date   26 10, 2023
  **
  **  @brief
  **  @copyright
  **  This source code is part of the Valentina project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
- **  Copyright (C) 2022 Valentina project
+ **  Copyright (C) 2023 Valentina project
  **  <https://gitlab.com/smart-pattern/valentina> All Rights Reserved.
  **
  **  Valentina is free software: you can redistribute it and/or modify
@@ -25,49 +25,46 @@
  **  along with Valentina.  If not, see <http://www.gnu.org/licenses/>.
  **
  *************************************************************************/
-#ifndef VPATTERNIMAGE_H
-#define VPATTERNIMAGE_H
+#ifndef VKNOWNMEASUREMENTSDATABASE_H
+#define VKNOWNMEASUREMENTSDATABASE_H
 
-#include <QCoreApplication>
+#include <QCache>
+#include <QHash>
 #include <QString>
+#include <QUuid>
 
-class QPixmap;
-class QMimeType;
+class VKnownMeasurements;
 
-class VPatternImage
+struct VKnownMeasurementsHeader
 {
-    Q_DECLARE_TR_FUNCTIONS(VPatternImage) // NOLINT
-
-public:
-    VPatternImage() = default;
-
-    static auto FromFile(const QString &fileName) -> VPatternImage;
-
-    auto ContentType() const -> const QString &;
-
-    auto ContentData() const -> const QByteArray &;
-    void SetContentData(const QByteArray &newContentData, const QString &newContentType);
-
-    auto IsNull() const -> bool;
-    auto IsValid() const -> bool;
-
-    auto GetPixmap() const -> QPixmap;
-    auto GetPixmap(int width, int height) const -> QPixmap;
-
-    auto ErrorString() const -> const QString &;
-
-    auto MimeTypeFromData() const -> QMimeType;
-
-    auto Size() const -> QSize;
-
-    auto Title() const -> QString;
-    void SetTitle(const QString &newTitle);
-
-private:
-    QString m_contentType{};
-    QByteArray m_contentData{};
-    mutable QString m_errorString{};
-    QString m_title{};
+    QUuid uid{};
+    QString name{};
+    QString description{};
+    QString path{};
 };
 
-#endif // VPATTERNIMAGE_H
+class VKnownMeasurementsDatabase
+{
+public:
+    VKnownMeasurementsDatabase() = default;
+
+    void PopulateMeasurementsDatabase();
+
+    auto IsPopulated() const -> bool;
+
+    auto AllKnownMeasurements() const -> QHash<QUuid, VKnownMeasurementsHeader>;
+
+    auto KnownMeasurements(const QUuid &id) const -> VKnownMeasurements;
+
+private:
+    bool m_populated{false};
+    QHash<QUuid, VKnownMeasurementsHeader> m_measurementsDB{};
+    QHash<QUuid, QString> m_indexMeasurementsPath{};
+    mutable QCache<QUuid, VKnownMeasurements> m_measurementsCache{15};
+
+    void UpdateIndexes();
+
+    void ParseDirectory(const QString &path);
+};
+
+#endif // VKNOWNMEASUREMENTSDATABASE_H

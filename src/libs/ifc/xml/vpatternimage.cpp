@@ -209,3 +209,15 @@ auto VPatternImage::Size() const -> QSize
 
     return QImageReader(&buffer).size();
 }
+
+//---------------------------------------------------------------------------------------------------------------------
+auto VPatternImage::Title() const -> QString
+{
+    return m_title;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VPatternImage::SetTitle(const QString &newTitle)
+{
+    m_title = newTitle;
+}

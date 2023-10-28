@@ -38,6 +38,7 @@
 #include <QLocale>
 #include <QLoggingCategory>
 #include <QString>
+#include <QUuid>
 #include <QtCore/qcontainerfwd.h>
 #include <QtGlobal>
 #include <functional>
@@ -199,6 +200,13 @@ inline void VDomDocument::SetAttribute<QLatin1String>(QDomElement &domElement, c
                                                       const QLatin1String &value) const
 {
     domElement.setAttribute(name, value);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+template <>
+inline void VDomDocument::SetAttribute<QUuid>(QDomElement &domElement, const QString &name, const QUuid &value) const
+{
+    domElement.setAttribute(name, value.toString());
 }
 
 //---------------------------------------------------------------------------------------------------------------------

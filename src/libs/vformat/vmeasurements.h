@@ -39,6 +39,10 @@
 #include "../vmisc/def.h"
 #include "vdimensions.h"
 
+#if QT_VERSION < QT_VERSION_CHECK(5, 13, 0)
+#include "../vmisc/defglobal.h"
+#endif
+
 class VContainer;
 class VPatternImage;
 class VMeasurement;
@@ -57,9 +61,10 @@ class VMeasurements : public VDomDocument
     Q_OBJECT // NOLINT
 
 public:
-    explicit VMeasurements(VContainer *data);
-    VMeasurements(Unit unit, VContainer *data);
-    VMeasurements(Unit unit, const QVector<MeasurementDimension_p> &dimensions, VContainer *data);
+    explicit VMeasurements(VContainer *data, QObject *parent = nullptr);
+    VMeasurements(Unit unit, VContainer *data, QObject *parent = nullptr);
+    VMeasurements(Unit unit, const QVector<MeasurementDimension_p> &dimensions, VContainer *data,
+                  QObject *parent = nullptr);
     ~VMeasurements() override = default;
 
     void setXMLContent(const QString &fileName) override;
