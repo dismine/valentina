@@ -144,9 +144,56 @@ auto VKnownMeasurements::OrderedMeasurments() const -> QMap<int, VKnownMeasureme
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+auto VKnownMeasurements::OrderedGroupMeasurments(const QString &group) const -> QMap<int, VKnownMeasurement>
+{
+    QMap<int, VKnownMeasurement> ordered;
+    auto i = d->m_measurements.constBegin();
+    while (i != d->m_measurements.constEnd())
+    {
+        if (group == i.value().group)
+        {
+            ordered.insert(i.value().index, i.value());
+        }
+        ++i;
+    }
+
+    return ordered;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 auto VKnownMeasurements::Images() const -> QHash<QUuid, VPatternImage>
 {
     return d->m_images;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+auto VKnownMeasurements::Groups() const -> QStringList
+{
+    QSet<QString> groups;
+
+    auto i = d->m_measurements.constBegin();
+    while (i != d->m_measurements.constEnd())
+    {
+        if (!i.value().group.isEmpty())
+        {
+            groups.insert(i.value().group);
+        }
+        ++i;
+    }
+
+    return groups.values();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+auto VKnownMeasurements::Measurement(const QString &name) const -> VKnownMeasurement
+{
+    return d->m_measurements.value(name);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+auto VKnownMeasurements::Image(const QUuid &id) const -> VPatternImage
+{
+    return d->m_images.value(id);
 }
 
 //---------------------------------------------------------------------------------------------------------------------

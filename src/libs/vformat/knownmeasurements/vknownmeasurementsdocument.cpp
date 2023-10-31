@@ -68,6 +68,7 @@ Q_GLOBAL_STATIC_WITH_ARGS(const QString, attrReadOnly, ("read-only"_L1))        
 Q_GLOBAL_STATIC_WITH_ARGS(const QString, attrDescription, ("description"_L1))             // NOLINT
 Q_GLOBAL_STATIC_WITH_ARGS(const QString, attrFullName, ("full_name"_L1))                  // NOLINT
 Q_GLOBAL_STATIC_WITH_ARGS(const QString, attrDiagram, ("diagram"_L1))                     // NOLINT
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, attrGroup, ("group"_L1))                         // NOLINT
 
 QT_WARNING_POP
 
@@ -355,6 +356,20 @@ auto VKnownMeasurementsDocument::KnownMeasurements() const -> VKnownMeasurements
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+void VKnownMeasurementsDocument::SetMGroup(const QString &name, const QString &text)
+{
+    QDomElement node = FindM(name);
+    if (not node.isNull())
+    {
+        SetAttribute(node, *attrGroup, text);
+    }
+    else
+    {
+        qWarning() << tr("Can't find measurement '%1'").arg(name);
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 void VKnownMeasurementsDocument::SetMName(const QString &name, const QString &text)
 {
     QDomElement node = FindM(name);
@@ -595,6 +610,7 @@ void VKnownMeasurementsDocument::ReadMeasurements(VKnownMeasurements &known) con
         m.specialUnits = GetParametrBool(domElement, *attrSpecialUnits, falseStr);
         m.diagram = QUuid(GetParametrEmptyString(domElement, *attrDiagram));
         m.index = i;
+        m.group = GetParametrEmptyString(domElement, *attrGroup);
 
         known.AddMeasurement(m);
     }

@@ -25,7 +25,6 @@ Project {
     references: [
         "src/src.qbs",
         "share/translations/translations.qbs",
-        "share/translations/measurements.qbs",
         "dmg.qbs"
     ]
     qbsSearchPaths: "qbs"

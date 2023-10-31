@@ -103,7 +103,8 @@ Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingConfigurationAutosaveTime, ("con
 Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingConfigurationLocale, ("configuration/locale"_L1))              // NOLINT
 // NOLINTNEXTLINE
 Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingConfigurationPieceLabelLocale, ("configuration/pieceLabelLocale"_L1))
-Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingPMSystemCode, ("configuration/pmscode"_L1))   // NOLINT
+// NOLINTNEXTLINE
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingKnownMeasurementsId, ("configuration/knownMeasurementsId"_L1))
 Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingConfigurationUnit, ("configuration/unit"_L1)) // NOLINT
 // NOLINTNEXTLINE
 Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingConfigurationConfirmItemDeletion,
@@ -494,15 +495,15 @@ void VCommonSettings::SetPieceLabelLocale(const QString &value)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-auto VCommonSettings::GetPMSystemCode() const -> QString
+auto VCommonSettings::GetKnownMeasurementsId() const -> QUuid
 {
-    return value(*settingPMSystemCode, "p998").toString();
+    return value(*settingKnownMeasurementsId, QString()).toUuid();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VCommonSettings::SetPMSystemCode(const QString &value)
+void VCommonSettings::SetKnownMeasurementsId(const QUuid &value)
 {
-    setValue(*settingPMSystemCode, value);
+    setValue(*settingKnownMeasurementsId, value);
 }
 
 //---------------------------------------------------------------------------------------------------------------------

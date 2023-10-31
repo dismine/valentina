@@ -29,25 +29,22 @@
 #ifndef VTRANSLATEVARS_H
 #define VTRANSLATEVARS_H
 
+#include <QMap>
 #include <QtGlobal>
 
+#include "../qmuparser/qmutranslation.h"
 #include "../vmisc/defglobal.h"
-#include "vtranslatemeasurements.h"
 
-class VTranslateVars : public VTranslateMeasurements
+class VTranslateVars
 {
 public:
     explicit VTranslateVars();
-    ~VTranslateVars() override = default;
+    ~VTranslateVars() = default;
 
     auto InternalVarToUser(const QString &var) const -> QString;
 
     auto VarToUser(const QString &var) const -> QString;
     auto VarFromUser(const QString &var) const -> QString;
-
-    auto PMSystemName(const QString &code) const -> QString;
-    auto PMSystemAuthor(const QString &code) const -> QString;
-    auto PMSystemBook(const QString &code) const -> QString;
 
     auto FormulaFromUser(const QString &formula, bool osSeparator) const -> QString;
     static auto TryFormulaFromUser(const QString &formula, bool osSeparator) -> QString;
@@ -55,7 +52,7 @@ public:
     auto FormulaToUser(const QString &formula, bool osSeparator) const -> QString;
     static auto TryFormulaToUser(const QString &formula, bool osSeparator) -> QString;
 
-    void Retranslate() override;
+    void Retranslate();
 
     auto GetTranslatedFunctions() const -> QMap<QString, QString>;
     auto GetFunctions() const -> QMap<QString, qmu::QmuTranslation>;
@@ -67,9 +64,6 @@ public:
 private:
     // cppcheck-suppress unknownMacro
     Q_DISABLE_COPY_MOVE(VTranslateVars) // NOLINT
-    QMap<QString, qmu::QmuTranslation> PMSystemNames{};
-    QMap<QString, qmu::QmuTranslation> PMSystemAuthors{};
-    QMap<QString, qmu::QmuTranslation> PMSystemBooks{};
     QMap<QString, qmu::QmuTranslation> variables{};
     QMap<QString, qmu::QmuTranslation> functions{};
     QMap<QString, qmu::QmuTranslation> functionsDescriptions{};
@@ -77,7 +71,6 @@ private:
     QMap<QString, qmu::QmuTranslation> stDescriptions{};
     QMap<QString, QString> translatedFunctions{};
 
-    void InitPatternMakingSystems();
     void InitVariables();
     void InitFunctions();
 
@@ -88,9 +81,6 @@ private:
     auto VariablesToUser(QString &newFormula, vsizetype position, const QString &token, vsizetype &bias) const -> bool;
 
     void PrepareFunctionTranslations();
-
-    void InitSystem(const QString &code, const qmu::QmuTranslation &name, const qmu::QmuTranslation &author,
-                    const qmu::QmuTranslation &book);
 
     static void CorrectionsPositions(vsizetype position, vsizetype bias, QMap<vsizetype, QString> &tokens,
                                      QMap<vsizetype, QString> &numbers);

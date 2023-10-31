@@ -70,16 +70,13 @@ public:
 
     static auto diagramsPath() -> QString;
 
-    void ShowDataBase();
-    void RetranslateGroups();
     void RetranslateTables();
 
     void ParseCommandLine(const SocketConnection &connection, const QStringList &arguments);
 
     static auto VApp() -> MApplication *;
 
-    auto KnownMeasurementsDatabase() -> VKnownMeasurementsDatabase *;
-    void RestartKnownMeasurementsDatabaseWatcher();
+    auto KnownMeasurementsDatabase() -> VKnownMeasurementsDatabase * override;
 
 public slots:
     void ProcessCMD();
@@ -119,6 +116,8 @@ private:
     static void ParseDimensionBOption(QCommandLineParser &parser, qreal &dimensionBValue, bool &flagDimensionB);
     static void ParseDimensionCOption(QCommandLineParser &parser, qreal &dimensionCValue, bool &flagDimensionC);
     static void ParseUnitsOption(QCommandLineParser &parser, Unit &unit, bool &flagUnits);
+
+    void RestartKnownMeasurementsDatabaseWatcher();
 };
 
 //---------------------------------------------------------------------------------------------------------------------

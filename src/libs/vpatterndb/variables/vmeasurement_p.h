@@ -33,6 +33,7 @@
 
 #include "../ifc/xml/vpatternimage.h"
 #include "../vcontainer.h"
+#include <QUuid>
 
 QT_WARNING_PUSH
 QT_WARNING_DISABLE_GCC("-Weffc++")
@@ -80,6 +81,8 @@ public:
     MeasurementType varType{MeasurementType::Measurement}; // NOLINT(misc-non-private-member-variables-in-classes)
 
     VPatternImage image{}; // NOLINT(misc-non-private-member-variables-in-classes)
+
+    QUuid dbId{}; // NOLINT(misc-non-private-member-variables-in-classes)
 
 private:
     Q_DISABLE_ASSIGN_MOVE(VMeasurementData) // NOLINT

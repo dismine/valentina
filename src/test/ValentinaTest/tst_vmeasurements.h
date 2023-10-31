@@ -34,15 +34,13 @@
 class TST_VMeasurements : public QObject
 {
     Q_OBJECT // NOLINT
+
 public:
     explicit TST_VMeasurements(QObject *parent = nullptr);
 
 private slots:
     void CreateEmptyMultisizeFile();
     void CreateEmptyIndividualFile();
-
-    void ValidPMCodesMultisizeFile();
-    void ValidPMCodesIndividualFile();
 };
 
 #endif // TST_VMEASUREMENTS_H

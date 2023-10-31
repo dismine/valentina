@@ -34,6 +34,8 @@
 #include "../ifc/xml/vvitconverter.h"
 #include "../ifc/xml/vvstconverter.h"
 #include "../qmuparser/qmudef.h"
+#include "../vformat/knownmeasurements/vknownmeasurement.h"
+#include "../vformat/knownmeasurements/vknownmeasurementsdatabase.h"
 #include "../vganalytics/vganalytics.h"
 #include "../vmisc/compatibility.h"
 #include "../vmisc/dialogs/dialogaskcollectstatistic.h"
@@ -43,8 +45,6 @@
 #include "../vmisc/theme/vtheme.h"
 #include "../vmisc/vsysexits.h"
 #include "../vpatterndb/calculator.h"
-#include "../vpatterndb/measurements.h"
-#include "../vpatterndb/pmsystems.h"
 #include "../vpatterndb/variables/vmeasurement.h"
 #include "../vpatterndb/vcontainer.h"
 #include "../vtools/dialogs/support/dialogeditwrongformula.h"
@@ -60,6 +60,8 @@
 #include "dialogs/dialogsetupmultisize.h"
 #include "dialogs/dialogtapepreferences.h"
 #include "mapplication.h" // Should be last because of definning qApp
+#include "qcursor.h"
+#include "quuid.h"
 #include "ui_tmainwindow.h"
 #include "vlitepattern.h"
 #include "vtapesettings.h"
@@ -546,11 +548,6 @@ auto TMainWindow::LoadFile(const QString &path) -> bool
             }
         }
 
-        if (not m_m->IsDefinedKnownNamesValid())
-        {
-            throw VException(tr("File contains invalid known measurement(s)."));
-        }
-
         m_mUnit = m_m->Units();
         m_pUnit = m_mUnit;
 
@@ -833,12 +830,12 @@ void TMainWindow::changeEvent(QEvent *event)
         }
 
         {
-            const qint32 index = ui->comboBoxPMSystem->currentIndex();
-            ui->comboBoxPMSystem->blockSignals(true);
-            ui->comboBoxPMSystem->clear();
-            InitPMSystems(ui->comboBoxPMSystem);
-            ui->comboBoxPMSystem->setCurrentIndex(index);
-            ui->comboBoxPMSystem->blockSignals(false);
+            const qint32 index = ui->comboBoxKnownMeasurements->currentIndex();
+            ui->comboBoxKnownMeasurements->blockSignals(true);
+            ui->comboBoxKnownMeasurements->clear();
+            InitKnownMeasurements(ui->comboBoxKnownMeasurements);
+            ui->comboBoxKnownMeasurements->setCurrentIndex(index);
+            ui->comboBoxKnownMeasurements->blockSignals(false);
         }
 
         {
@@ -1324,15 +1321,15 @@ void TMainWindow::SaveNotes()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void TMainWindow::SavePMSystem(int index)
+void TMainWindow::SaveKnownMeasurements(int index)
 {
-    QString system = ui->comboBoxPMSystem->itemData(index).toString();
-    system.remove(0, 1); // clear p
+    QUuid known = ui->comboBoxKnownMeasurements->itemData(index).toUuid();
 
-    if (m_m->PMSystem() != system)
+    if (m_m->KnownMeasurements() != known)
     {
-        m_m->SetPMSystem(system);
+        m_m->SetKnownMeasurements(known);
         MeasurementsWereSaved(false);
+        InitKnownMeasurementsDescription();
     }
 }
 
@@ -1781,58 +1778,62 @@ void TMainWindow::AddCustom()
 //---------------------------------------------------------------------------------------------------------------------
 void TMainWindow::AddKnown()
 {
-    QScopedPointer<DialogMDataBase> dialog(new DialogMDataBase(m_m->ListKnown(), this));
-    if (dialog->exec() == QDialog::Accepted)
+    QScopedPointer<DialogMDataBase> dialog(new DialogMDataBase(m_m->KnownMeasurements(), m_m->ListKnown(), this));
+    if (dialog->exec() == QDialog::Rejected)
     {
-        vsizetype currentRow;
+        return;
+    }
 
-        const QStringList list = dialog->GetNewNames();
-        if (ui->tableWidget->currentRow() == -1)
+    vsizetype currentRow;
+    const QStringList list = dialog->GetNewNames();
+    VKnownMeasurementsDatabase *db = MApplication::VApp()->KnownMeasurementsDatabase();
+    VKnownMeasurements knownDB = db->KnownMeasurements(m_m->KnownMeasurements());
+
+    auto AddMeasurement = [this, knownDB, &currentRow](const QString &name)
+    {
+        VKnownMeasurement known = knownDB.Measurement(name);
+
+        if (m_mType == MeasurementsType::Individual)
         {
-            currentRow = ui->tableWidget->rowCount() + list.size() - 1;
-            for (const auto &name : list)
-            {
-                if (m_mType == MeasurementsType::Individual)
-                {
-                    m_m->AddEmpty(name, VAbstractApplication::VApp()->TrVars()->MFormula(name));
-                }
-                else
-                {
-                    m_m->AddEmpty(name);
-                }
-
-                m_search->AddRow(currentRow);
-            }
+            m_m->AddEmpty(name, known.formula, known.specialUnits);
         }
         else
         {
-            currentRow = ui->tableWidget->currentRow() + list.size();
-            const QTableWidgetItem *nameField = ui->tableWidget->item(ui->tableWidget->currentRow(), ColumnName);
-            QString after = nameField->data(Qt::UserRole).toString();
-            for (const auto &name : list)
-            {
-                if (m_mType == MeasurementsType::Individual)
-                {
-                    m_m->AddEmptyAfter(after, name, VAbstractApplication::VApp()->TrVars()->MFormula(name));
-                }
-                else
-                {
-                    m_m->AddEmptyAfter(after, name);
-                }
-                m_search->AddRow(currentRow);
-                after = name;
-            }
+            m_m->AddEmpty(name, QString(), known.specialUnits);
         }
 
-        RefreshData();
-        m_search->RefreshList(ui->lineEditFind->text());
+        m_search->AddRow(currentRow);
+    };
 
-        ui->tableWidget->selectRow(static_cast<int>(currentRow));
-
-        ui->actionExportToCSV->setEnabled(true);
-
-        MeasurementsWereSaved(false);
+    if (ui->tableWidget->currentRow() == -1)
+    {
+        currentRow = ui->tableWidget->rowCount() + list.size() - 1;
+        for (const auto &name : list)
+        {
+            AddMeasurement(name);
+        }
     }
+    else
+    {
+        currentRow = ui->tableWidget->currentRow() + list.size();
+        const QTableWidgetItem *nameField = ui->tableWidget->item(ui->tableWidget->currentRow(), ColumnName);
+        QString after = nameField->data(Qt::UserRole).toString();
+        for (const auto &name : list)
+        {
+            AddMeasurement(name);
+            after = name;
+        }
+    }
+
+    RefreshData();
+    m_search->RefreshList(ui->lineEditFind->text());
+
+    ui->tableWidget->selectRow(static_cast<int>(currentRow));
+
+    ui->actionExportToCSV->setEnabled(true);
+
+    MeasurementsWereSaved(false);
+
     ui->tableWidget->repaint(); // Force repain to fix paint artifacts on Mac OS X
 }
 
@@ -2074,9 +2075,12 @@ void TMainWindow::ShowNewMData(bool fresh)
     else
     {
         // Show known
-        ui->plainTextEditDescription->setPlainText(
-            VAbstractApplication::VApp()->TrVars()->Description(meash->GetName()));
-        ui->lineEditFullName->setText(VAbstractApplication::VApp()->TrVars()->GuiText(meash->GetName()));
+        VKnownMeasurementsDatabase *db = MApplication::VApp()->KnownMeasurementsDatabase();
+        VKnownMeasurements knownDB = db->KnownMeasurements(m_m->KnownMeasurements());
+        VKnownMeasurement known = knownDB.Measurement(meash->GetName());
+
+        ui->plainTextEditDescription->setPlainText(known.description);
+        ui->lineEditFullName->setText(known.fullName);
         ui->lineEditName->setText(nameField->text());
     }
     connect(ui->lineEditName, &QLineEdit::textEdited, this, &TMainWindow::SaveMName);
@@ -2203,36 +2207,30 @@ void TMainWindow::ShowMDiagram(const QSharedPointer<VMeasurement> &m)
         return;
     }
 
+    VPatternImage image;
+
     if (m->IsCustom())
     {
-        VPatternImage image = m->GetImage();
-        if (image.IsValid())
-        {
-            ui->labelDiagram->setCursor(Qt::PointingHandCursor);
-            ui->labelDiagram->setPixmap(image.GetPixmap());
-            connect(ui->labelDiagram, &VAspectRatioPixmapLabel::clicked, this, &TMainWindow::ShowImage,
-                    Qt::UniqueConnection);
-        }
-        else
-        {
-            ui->labelDiagram->setText(UnknownMeasurementImage());
-        }
+        image = m->GetImage();
     }
     else
     {
-        const VTranslateVars *trv = VAbstractApplication::VApp()->TrVars();
-        const QString number = trv->MNumber(m->GetName());
+        VKnownMeasurementsDatabase *db = MApplication::VApp()->KnownMeasurementsDatabase();
+        VKnownMeasurements knownDB = db->KnownMeasurements(m_m->KnownMeasurements());
+        VKnownMeasurement known = knownDB.Measurement(m->GetName());
+        image = knownDB.Image(known.diagram);
+    }
 
-        if (number.isEmpty())
-        {
-            ui->labelDiagram->setText(UnknownMeasurementImage());
-        }
-        else
-        {
-            ui->labelDiagram->setText(u"<html><head/><body><p align=\"center\">%1</p>"
-                                      u"<p align=\"center\"><b>%2</b>. <i>%3</i></p></body></html>"_s.arg(
-                                          DialogMDataBase::ImgTag(number), number, trv->GuiText(m->GetName())));
-        }
+    if (image.IsValid())
+    {
+        ui->labelDiagram->setCursor(Qt::PointingHandCursor);
+        ui->labelDiagram->setPixmap(image.GetPixmap());
+        connect(ui->labelDiagram, &VAspectRatioPixmapLabel::clicked, this, &TMainWindow::ShowImage,
+                Qt::UniqueConnection);
+    }
+    else
+    {
+        ui->labelDiagram->setText(UnknownMeasurementImage());
     }
 }
 
@@ -2961,7 +2959,7 @@ void TMainWindow::SetupMenu()
     connect(ui->actionAddCustom, &QAction::triggered, this, &TMainWindow::AddCustom);
     connect(ui->actionAddKnown, &QAction::triggered, this, &TMainWindow::AddKnown);
     connect(ui->actionAddSeparator, &QAction::triggered, this, &TMainWindow::AddSeparator);
-    connect(ui->actionDatabase, &QAction::triggered, MApplication::VApp(), &MApplication::ShowDataBase);
+
     connect(ui->actionImportFromPattern, &QAction::triggered, this, &TMainWindow::ImportFromPattern);
 
     // Window
@@ -3099,13 +3097,14 @@ void TMainWindow::InitWindow()
                 &TMainWindow::SaveMDimension);
     }
 
-    ui->comboBoxPMSystem->setEnabled(true);
-    ui->comboBoxPMSystem->clear();
-    InitPMSystems(ui->comboBoxPMSystem);
-    const qint32 index = ui->comboBoxPMSystem->findData('p'_L1 + m_m->PMSystem());
-    ui->comboBoxPMSystem->setCurrentIndex(index);
-    connect(ui->comboBoxPMSystem, QOverload<int>::of(&QComboBox::currentIndexChanged), this,
-            &TMainWindow::SavePMSystem);
+    ui->comboBoxKnownMeasurements->setEnabled(true);
+    ui->comboBoxKnownMeasurements->clear();
+    InitKnownMeasurements(ui->comboBoxKnownMeasurements);
+    const qint32 index = ui->comboBoxKnownMeasurements->findData(m_m->KnownMeasurements());
+    ui->comboBoxKnownMeasurements->setCurrentIndex(index);
+    InitKnownMeasurementsDescription();
+    connect(ui->comboBoxKnownMeasurements, QOverload<int>::of(&QComboBox::currentIndexChanged), this,
+            &TMainWindow::SaveKnownMeasurements);
 
     InitSearch();
 
@@ -3609,8 +3608,7 @@ void TMainWindow::RefreshTable(bool freshCall)
         }
         else if (meash->GetType() == VarType::MeasurementSeparator)
         {
-            QTableWidgetItem *item = AddSeparatorCell(VAbstractApplication::VApp()->TrVars()->MToUser(meash->GetName()),
-                                                      currentRow, ColumnName,
+            QTableWidgetItem *item = AddSeparatorCell(meash->GetName(), currentRow, ColumnName,
                                                       Qt::AlignVCenter); // name
             item->setData(Qt::UserRole, meash->GetName());
             AddCell(meash->GetDescription(), currentRow, ColumnFullName, Qt::AlignVCenter); // description
@@ -3641,10 +3639,13 @@ void TMainWindow::RefreshTable(bool freshCall)
 //---------------------------------------------------------------------------------------------------------------------
 void TMainWindow::RefreshMeasurementData(const QSharedPointer<VMeasurement> &meash, qint32 currentRow)
 {
+    VKnownMeasurementsDatabase *db = MApplication::VApp()->KnownMeasurementsDatabase();
+    VKnownMeasurements knownDB = db->KnownMeasurements(m_m->KnownMeasurements());
+    VKnownMeasurement known = knownDB.Measurement(meash->GetName());
+
     if (m_mType == MeasurementsType::Individual)
     {
-        QTableWidgetItem *item = AddCell(VAbstractApplication::VApp()->TrVars()->MToUser(meash->GetName()), currentRow,
-                                         ColumnName, Qt::AlignVCenter); // name
+        QTableWidgetItem *item = AddCell(meash->GetName(), currentRow, ColumnName, Qt::AlignVCenter); // name
         item->setData(Qt::UserRole, meash->GetName());
 
         if (meash->IsCustom())
@@ -3653,8 +3654,7 @@ void TMainWindow::RefreshMeasurementData(const QSharedPointer<VMeasurement> &mea
         }
         else
         {
-            AddCell(VAbstractApplication::VApp()->TrVars()->GuiText(meash->GetName()), currentRow, ColumnFullName,
-                    Qt::AlignVCenter);
+            AddCell(known.description, currentRow, ColumnFullName, Qt::AlignVCenter);
         }
 
         QString calculatedValue;
@@ -3677,8 +3677,7 @@ void TMainWindow::RefreshMeasurementData(const QSharedPointer<VMeasurement> &mea
     }
     else
     {
-        QTableWidgetItem *item = AddCell(VAbstractApplication::VApp()->TrVars()->MToUser(meash->GetName()), currentRow,
-                                         0, Qt::AlignVCenter); // name
+        QTableWidgetItem *item = AddCell(meash->GetName(), currentRow, 0, Qt::AlignVCenter); // name
         item->setData(Qt::UserRole, meash->GetName());
 
         if (meash->IsCustom())
@@ -3687,8 +3686,7 @@ void TMainWindow::RefreshMeasurementData(const QSharedPointer<VMeasurement> &mea
         }
         else
         {
-            AddCell(VAbstractApplication::VApp()->TrVars()->GuiText(meash->GetName()), currentRow, ColumnFullName,
-                    Qt::AlignVCenter);
+            AddCell(known.description, currentRow, ColumnFullName, Qt::AlignVCenter);
         }
 
         QString calculatedValue;
@@ -4123,11 +4121,6 @@ auto TMainWindow::LoadFromExistingFile(const QString &path) -> bool
         m_curFileFormatVersionStr = converter->GetFormatVersionStr();
         m_m->setXMLContent(converter->Convert()); // Read again after conversion
 
-        if (not m_m->IsDefinedKnownNamesValid())
-        {
-            throw VException(tr("File contains invalid known measurement(s)."));
-        }
-
         m_mUnit = m_m->Units();
         m_pUnit = m_mUnit;
 
@@ -4282,11 +4275,6 @@ auto TMainWindow::CheckMName(const QString &name, const QSet<QString> &importedN
     }
     else
     {
-        if (not ConvertToSet<QString>(AllGroupNames()).contains(name))
-        {
-            throw VException(tr("Measurement '%1' is not one of the known measurements.").arg(name));
-        }
-
         if (not m_data->IsUnique(name))
         {
             throw VException(tr("Measurement '%1' already used in file.").arg(name));
@@ -4348,7 +4336,7 @@ void TMainWindow::ImportIndividualMeasurements(const QxtCsvModel &csv, const QVe
             }
 
             IndividualMeasurement measurement;
-            const QString mName = CheckMName(VAbstractApplication::VApp()->TrVars()->MFromUser(name), importedNames);
+            const QString mName = CheckMName(name, importedNames);
             importedNames.insert(mName);
             measurement.name = mName;
 
@@ -4470,7 +4458,7 @@ auto TMainWindow::ImportMultisizeMeasurement(const QxtCsvModel &csv, int i, cons
 
     MultisizeMeasurement measurement;
 
-    const QString mName = CheckMName(VAbstractApplication::VApp()->TrVars()->MFromUser(name), importedNames);
+    const QString mName = CheckMName(name, importedNames);
     importedNames.insert(mName);
     measurement.name = mName;
 
@@ -4729,6 +4717,46 @@ void TMainWindow::RetranslateMDiagram()
     }
 
     ShowMDiagram(meash);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void TMainWindow::InitKnownMeasurements(QComboBox *combo)
+{
+    VKnownMeasurementsDatabase *db = MApplication::VApp()->KnownMeasurementsDatabase();
+    QHash<QUuid, VKnownMeasurementsHeader> known = db->AllKnownMeasurements();
+
+    SCASSERT(combo != nullptr)
+    combo->addItem(tr("None"), QUuid());
+
+    int index = 1;
+    auto i = known.constBegin();
+    while (i != known.constEnd())
+    {
+        QString name = i.value().name;
+
+        if (i.value().name.isEmpty())
+        {
+            name = tr("Known measurements %1").arg(index);
+            ++index;
+        }
+
+        combo->addItem(name, i.key());
+        ++i;
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void TMainWindow::InitKnownMeasurementsDescription()
+{
+    VKnownMeasurementsDatabase *db = MApplication::VApp()->KnownMeasurementsDatabase();
+    QHash<QUuid, VKnownMeasurementsHeader> known = db->AllKnownMeasurements();
+
+    ui->labelKnownMeasurementsDescription->clear();
+    QUuid id = m_m->KnownMeasurements();
+    if (!id.isNull() && known.contains(id))
+    {
+        ui->labelKnownMeasurementsDescription->setText(known.value(id).description);
+    }
 }
 
 //---------------------------------------------------------------------------------------------------------------------

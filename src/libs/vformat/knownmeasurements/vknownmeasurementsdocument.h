@@ -73,6 +73,7 @@ public:
 
     auto KnownMeasurements() const -> VKnownMeasurements;
 
+    void SetMGroup(const QString &name, const QString &text);
     void SetMName(const QString &name, const QString &text);
     void SetMFormula(const QString &name, const QString &text);
     void SetMSpecialUnits(const QString &name, bool special);

@@ -326,10 +326,6 @@ void VAbstractApplication::LoadTranslation(QString locale)
     LoadQM(appTranslator, QStringLiteral("valentina_"), locale, appQmDir);
     installTranslator(appTranslator);
 
-    pmsTranslator = new QTranslator(this);
-    LoadQM(pmsTranslator, QStringLiteral("measurements_") + Settings()->GetPMSystemCode() + '_'_L1, locale, appQmDir);
-    installTranslator(pmsTranslator);
-
     InitTrVars(); // Very important do it after load QM files.
 }
 
@@ -361,12 +357,6 @@ void VAbstractApplication::ClearTranslation()
         removeTranslator(appTranslator);
         delete appTranslator;
     }
-
-    if (not pmsTranslator.isNull())
-    {
-        removeTranslator(pmsTranslator);
-        delete pmsTranslator;
-    }
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -377,13 +367,13 @@ void VAbstractApplication::ClearTranslation()
  */
 auto VAbstractApplication::ClearMessage(QString msg) -> QString
 {
-    if (msg.startsWith('"') && msg.endsWith('"'))
+    if (msg.startsWith('"'_L1) && msg.endsWith('"'_L1))
     {
         msg.remove(0, 1);
         msg.chop(1);
     }
 
-    msg.replace("\\\"", "\"");
+    msg.replace("\\\""_L1, "\""_L1);
 
     return msg;
 }
@@ -421,6 +411,12 @@ auto VAbstractApplication::SVGFontDatabase() -> VSvgFontDatabase *
     }
 
     return m_svgFontDatabase;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+auto VAbstractApplication::KnownMeasurementsDatabase() -> VKnownMeasurementsDatabase *
+{
+    return nullptr;
 }
 
 //---------------------------------------------------------------------------------------------------------------------

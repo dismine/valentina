@@ -40,6 +40,7 @@ struct VKnownMeasurement
     bool specialUnits{false};
     QUuid diagram{};
     int index{0};
+    QString group{};
 };
 
 #endif // VKNOWNMEASUREMENT_H

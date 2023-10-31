@@ -61,14 +61,6 @@ VApp {
                 files.push("valentina_" + locales[i] + ".ts");
             }
 
-            var pmSystems = i18nconfig.pmSystems;
-
-            for (var i = 0; i < pmSystems.length; i++) {
-                for (var j = 0; j < locales.length; j++) {
-                    files.push("measurements_" + pmSystems[i] + "_" + locales[j] + ".ts");
-                }
-            }
-
             return files;
         }
     }

@@ -70,8 +70,9 @@ public:
     void setXMLContent(const QString &fileName) override;
     auto SaveDocument(const QString &fileName, QString &error) -> bool override;
 
-    void AddEmpty(const QString &name, const QString &formula = QString());
-    void AddEmptyAfter(const QString &after, const QString &name, const QString &formula = QString());
+    void AddEmpty(const QString &name, const QString &formula = QString(), bool specialUnits = false);
+    void AddEmptyAfter(const QString &after, const QString &name, const QString &formula = QString(),
+                       bool specialUnits = false);
     void AddSeparator(const QString &name);
     void AddSeparatorAfter(const QString &after, const QString &name);
     void Remove(const QString &name);
@@ -108,8 +109,8 @@ public:
     auto Gender() const -> GenderType;
     void SetGender(const GenderType &gender);
 
-    auto PMSystem() const -> QString;
-    void SetPMSystem(const QString &system);
+    auto KnownMeasurements() const -> QUuid;
+    void SetKnownMeasurements(const QUuid &system);
 
     auto Email() const -> QString;
     void SetEmail(const QString &text);
@@ -212,8 +213,6 @@ public:
     auto ListAll() const -> QStringList;
     auto ListKnown() const -> QStringList;
 
-    auto IsDefinedKnownNamesValid() const -> bool;
-
     auto GetData() const -> VContainer *;
 
 private:
@@ -244,8 +243,6 @@ private:
     auto ReadDimensions() const -> VDimensions;
 
     auto EvalFormula(VContainer *data, const QString &formula, bool *ok) const -> qreal;
-
-    auto ClearPMCode(const QString &code) const -> QString;
 
     auto ReadCorrections(const QDomElement &mElement) const -> QMap<QString, qreal>;
     void WriteCorrections(QDomElement &mElement, const QMap<QString, qreal> &corrections);

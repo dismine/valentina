@@ -56,8 +56,8 @@ using namespace Qt::Literals::StringLiterals;
  */
 
 const QString VVSTConverter::MeasurementMinVerStr = QStringLiteral("0.3.0");
-const QString VVSTConverter::MeasurementMaxVerStr = QStringLiteral("0.6.0");
-const QString VVSTConverter::CurrentSchema = QStringLiteral("://schema/multisize_measurements/v0.6.0.xsd");
+const QString VVSTConverter::MeasurementMaxVerStr = QStringLiteral("0.6.1");
+const QString VVSTConverter::CurrentSchema = QStringLiteral("://schema/multisize_measurements/v0.6.1.xsd");
 
 // VVSTConverter::MeasurementMinVer; // <== DON'T FORGET TO UPDATE TOO!!!!
 // VVSTConverter::MeasurementMaxVer; // <== DON'T FORGET TO UPDATE TOO!!!!
@@ -97,7 +97,8 @@ auto VVSTConverter::XSDSchemas() -> QHash<unsigned int, QString>
         std::make_pair(FormatVersion(0, 5, 2), QStringLiteral("://schema/multisize_measurements/v0.5.2.xsd")),
         std::make_pair(FormatVersion(0, 5, 3), QStringLiteral("://schema/multisize_measurements/v0.5.3.xsd")),
         std::make_pair(FormatVersion(0, 5, 4), QStringLiteral("://schema/multisize_measurements/v0.5.4.xsd")),
-        std::make_pair(FormatVersion(0, 6, 0), CurrentSchema),
+        std::make_pair(FormatVersion(0, 6, 0), QStringLiteral("://schema/multisize_measurements/v0.6.0.xsd")),
+        std::make_pair(FormatVersion(0, 6, 1), CurrentSchema),
     };
 
     return schemas;
@@ -129,10 +130,11 @@ void VVSTConverter::ApplyPatches()
             ToV0_5_4();
             Q_FALLTHROUGH();
         case (FormatVersion(0, 5, 4)):
-            ToV0_6_0();
+        case (FormatVersion(0, 6, 0)):
+            ToV0_6_1();
             ValidateXML(CurrentSchema);
             Q_FALLTHROUGH();
-        case (FormatVersion(0, 6, 0)):
+        case (FormatVersion(0, 6, 1)):
             break;
         default:
             InvalidVersion(m_ver);
@@ -151,7 +153,7 @@ void VVSTConverter::DowngradeToCurrentMaxVersion()
 auto VVSTConverter::IsReadOnly() const -> bool
 {
     // Check if attribute read-only was not changed in file format
-    Q_STATIC_ASSERT_X(VVSTConverter::MeasurementMaxVer == FormatVersion(0, 6, 0), "Check attribute read-only.");
+    Q_STATIC_ASSERT_X(VVSTConverter::MeasurementMaxVer == FormatVersion(0, 6, 1), "Check attribute read-only.");
 
     // Possibly in future attribute read-only will change position etc.
     // For now position is the same for all supported format versions.
@@ -235,9 +237,10 @@ void VVSTConverter::ConvertMeasurementsToV0_4_0()
             }
 
             QDomElement m = nodeList.at(0).toElement();
-            const qreal value = GetParametrDouble(m, QStringLiteral("value"), "0.0");
-            const qreal size_increase = GetParametrDouble(m, QStringLiteral("size_increase"), "0.0");
-            const qreal height_increase = GetParametrDouble(m, QStringLiteral("height_increase"), "0.0");
+            const qreal value = GetParametrDouble(m, QStringLiteral("value"), QStringLiteral("0.0"));
+            const qreal size_increase = GetParametrDouble(m, QStringLiteral("size_increase"), QStringLiteral("0.0"));
+            const qreal height_increase =
+                GetParametrDouble(m, QStringLiteral("height_increase"), QStringLiteral("0.0"));
 
             if (not qFuzzyIsNull(value))
             {
@@ -439,6 +442,12 @@ void VVSTConverter::ConvertCircumferenceAttreibuteToV0_5_4()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+void VVSTConverter::ConvertPMSystemToV0_6_1()
+{
+    setTagText(QStringLiteral("pm_system"), QString());
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 void VVSTConverter::ToV0_4_0()
 {
     // TODO. Delete if minimal supported version is 0.4.0
@@ -499,11 +508,12 @@ void VVSTConverter::ToV0_5_4()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VVSTConverter::ToV0_6_0()
+void VVSTConverter::ToV0_6_1()
 {
-    // TODO. Delete if minimal supported version is 0.6.0
-    Q_STATIC_ASSERT_X(VVSTConverter::MeasurementMinVer < FormatVersion(0, 6, 0), "Time to refactor the code.");
+    // TODO. Delete if minimal supported version is 0.6.1
+    Q_STATIC_ASSERT_X(VVSTConverter::MeasurementMinVer < FormatVersion(0, 6, 1), "Time to refactor the code.");
 
-    SetVersion(QStringLiteral("0.6.0"));
+    SetVersion(QStringLiteral("0.6.1"));
+    ConvertPMSystemToV0_6_1();
     Save();
 }

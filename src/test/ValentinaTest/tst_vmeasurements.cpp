@@ -30,7 +30,6 @@
 #include "../ifc/xml/vvitconverter.h"
 #include "../ifc/xml/vvstconverter.h"
 #include "../vformat/vmeasurements.h"
-#include "../vpatterndb/pmsystems.h"
 #include "../vpatterndb/vcontainer.h"
 
 #include <QtTest>
@@ -135,118 +134,5 @@ void TST_VMeasurements::CreateEmptyIndividualFile()
     catch (VException &e)
     {
         QFAIL(e.ErrorMessage().toUtf8().constData());
-    }
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-/**
- * @brief ValidPMCodesMultisizeFile helps to check that all current pattern making systems match pattern inside XSD
- * scheme.
- */
-void TST_VMeasurements::ValidPMCodesMultisizeFile()
-{
-    Unit mUnit = Unit::Cm;
-
-    QSharedPointer<VContainer> data =
-        QSharedPointer<VContainer>(new VContainer(nullptr, &mUnit, VContainer::UniqueNamespace()));
-
-    auto m_xDimension = QSharedPointer<VXMeasurementDimension>::create(mUnit, 50, 200, 6);
-    m_xDimension->SetBaseValue(176);
-
-    auto m_yDimension = QSharedPointer<VYMeasurementDimension>::create(mUnit, 22, 72, 2);
-    m_yDimension->SetBaseValue(50);
-    m_yDimension->SetBodyMeasurement(true);
-
-    QVector<MeasurementDimension_p> dimensions{m_xDimension, m_yDimension};
-
-    QSharedPointer<VMeasurements> m = QSharedPointer<VMeasurements>(new VMeasurements(mUnit, dimensions, data.data()));
-
-    const QStringList listSystems = ListPMSystems();
-    for (int i = 0; i < listSystems.size(); ++i)
-    {
-        QString code = listSystems.at(i);
-        code.remove(0, 1); // remove 'p'
-        m->SetPMSystem(code);
-
-        QTemporaryFile file;
-        QString fileName;
-        if (file.open())
-        {
-            fileName = file.fileName();
-            file.close();
-            file.remove();
-            QString error;
-            const bool result = m->SaveDocument(fileName, error);
-
-            // cppcheck-suppress unreadVariable
-            const QString message = u"Error: %1 for code=%2"_s.arg(error, listSystems.at(i));
-            QVERIFY2(result, qUtf8Printable(message));
-        }
-        else
-        {
-            QFAIL("Can't open temporary file.");
-        }
-
-        try
-        {
-            VVSTConverter converter(fileName);
-        }
-        catch (VException &e)
-        {
-            const QString message = u"Error: %1 for code=%2"_s.arg(e.ErrorMessage(), listSystems.at(i));
-            QFAIL(qUtf8Printable(message));
-        }
-    }
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-/**
- * @brief ValidPMCodesIndividualFile helps to check that all current pattern making systems match pattern inside XSD
- * scheme.
- */
-void TST_VMeasurements::ValidPMCodesIndividualFile()
-{
-    Unit mUnit = Unit::Cm;
-
-    QSharedPointer<VContainer> data =
-        QSharedPointer<VContainer>(new VContainer(nullptr, &mUnit, VContainer::UniqueNamespace()));
-
-    QSharedPointer<VMeasurements> m = QSharedPointer<VMeasurements>(new VMeasurements(mUnit, data.data()));
-
-    const QStringList listSystems = ListPMSystems();
-    for (int i = 0; i < listSystems.size(); ++i)
-    {
-        QString code = listSystems.at(i);
-        code.remove(0, 1); // remove 'p'
-        m->SetPMSystem(code);
-
-        QTemporaryFile file;
-        QString fileName;
-        if (file.open())
-        {
-            fileName = file.fileName();
-            file.close();
-            file.remove();
-            QString error;
-            const bool result = m->SaveDocument(fileName, error);
-
-            // cppcheck-suppress unreadVariable
-            const QString message = u"Error: %1 for code=%2"_s.arg(error, listSystems.at(i));
-            QVERIFY2(result, qUtf8Printable(message));
-        }
-        else
-        {
-            QFAIL("Can't open temporary file.");
-        }
-
-        try
-        {
-            VVITConverter converter(fileName);
-        }
-        catch (VException &e)
-        {
-            const QString message = u"Error: %1 for code=%2"_s.arg(e.ErrorMessage(), listSystems.at(i));
-            QFAIL(qUtf8Printable(message));
-        }
     }
 }

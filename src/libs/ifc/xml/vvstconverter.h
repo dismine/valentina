@@ -44,25 +44,25 @@ class VVSTConverter final : public VAbstractMConverter
 
 public:
     explicit VVSTConverter(const QString &fileName);
-    virtual ~VVSTConverter() = default;
+    ~VVSTConverter() override = default;
 
     static const QString MeasurementMaxVerStr;
     static const QString CurrentSchema;
     static Q_DECL_CONSTEXPR const unsigned MeasurementMinVer = FormatVersion(0, 3, 0);
-    static Q_DECL_CONSTEXPR const unsigned MeasurementMaxVer = FormatVersion(0, 6, 0);
+    static Q_DECL_CONSTEXPR const unsigned MeasurementMaxVer = FormatVersion(0, 6, 1);
 
     static auto XSDSchemas() -> QHash<unsigned, QString>;
 
 protected:
-    virtual auto MinVer() const -> unsigned override;
-    virtual auto MaxVer() const -> unsigned override;
+    auto MinVer() const -> unsigned override;
+    auto MaxVer() const -> unsigned override;
 
-    virtual auto MinVerStr() const -> QString override;
-    virtual auto MaxVerStr() const -> QString override;
+    auto MinVerStr() const -> QString override;
+    auto MaxVerStr() const -> QString override;
 
-    virtual void ApplyPatches() override;
-    virtual void DowngradeToCurrentMaxVersion() override;
-    virtual auto IsReadOnly() const -> bool override;
+    void ApplyPatches() override;
+    void DowngradeToCurrentMaxVersion() override;
+    auto IsReadOnly() const -> bool override;
 
     auto Schemas() const -> QHash<unsigned, QString> override;
 
@@ -83,12 +83,14 @@ private:
 
     void ConvertCircumferenceAttreibuteToV0_5_4();
 
+    void ConvertPMSystemToV0_6_1();
+
     void ToV0_4_0();
     void ToV0_4_1();
     void ToV0_4_2();
     void ToV0_5_0();
     void ToV0_5_4();
-    void ToV0_6_0();
+    void ToV0_6_1();
 };
 
 //---------------------------------------------------------------------------------------------------------------------

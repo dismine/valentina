@@ -52,6 +52,9 @@
 #include <new>
 
 #include "../tools/dialogtool.h"
+#include "../vformat/knownmeasurements/vknownmeasurement.h"
+#include "../vformat/knownmeasurements/vknownmeasurements.h"
+#include "../vformat/knownmeasurements/vknownmeasurementsdatabase.h"
 #include "../vmisc/def.h"
 #include "../vmisc/theme/vtheme.h"
 #include "../vmisc/vabstractapplication.h"
@@ -707,7 +710,15 @@ void DialogEditWrongFormula::ShowMeasurements(const QList<QSharedPointer<VMeasur
             }
             else
             {
-                itemFullName->setText(VAbstractApplication::VApp()->TrVars()->GuiText(var->GetName()));
+                itemFullName->setText(QString());
+                if (VKnownMeasurementsDatabase *db = VAbstractApplication::VApp()->KnownMeasurementsDatabase())
+                {
+                    VKnownMeasurements known = db->KnownMeasurements(var->GetKnownMeasurementsId());
+                    if (known.IsValid())
+                    {
+                        itemFullName->setText(known.Measurement(var->GetName()).description);
+                    }
+                }
             }
 
             itemFullName->setToolTip(itemFullName->text());

@@ -642,31 +642,6 @@ auto MApplication::diagramsPath() -> QString
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void MApplication::ShowDataBase()
-{
-    if (m_dataBase.isNull())
-    {
-        m_dataBase = new DialogMDataBase();
-        m_dataBase->setAttribute(Qt::WA_DeleteOnClose, true);
-        m_dataBase->setModal(false);
-        m_dataBase->show();
-    }
-    else
-    {
-        m_dataBase->activateWindow();
-    }
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-void MApplication::RetranslateGroups()
-{
-    if (not m_dataBase.isNull())
-    {
-        m_dataBase->RetranslateGroups();
-    }
-}
-
-//---------------------------------------------------------------------------------------------------------------------
 void MApplication::RetranslateTables()
 {
     const QList<TMainWindow *> list = MainWindows();

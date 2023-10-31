@@ -15,8 +15,6 @@ VLib {
         "vpiece.cpp",
         "vpiecenode.cpp",
         "vpiecepath.cpp",
-        "measurements.cpp",
-        "pmsystems.cpp",
         "vpassmark.cpp",
         "testpassmark.h",
         "vcontainer.h",
@@ -31,12 +29,8 @@ VLib {
         "vpiecenode_p.h",
         "vpiecepath.h",
         "vpiecepath_p.h",
-        "measurements.h",
-        "pmsystems.h",
         "vformula_p.h",
         "vpassmark.h",
-        "vtranslatemeasurements.cpp",
-        "vtranslatemeasurements.h"
     ]
 
     Group {

@@ -7013,11 +7013,6 @@ auto MainWindow::CheckPathToMeasurements(const QString &patternPath, const QStri
         }
     }
 
-    if (not m->IsDefinedKnownNamesValid())
-    {
-        throw VException(tr("Measurement file contains invalid known measurement(s)."));
-    }
-
     CheckRequiredMeasurements(m.data());
 
     VAbstractValApplication::VApp()->SetMeasurementsType(patternType);

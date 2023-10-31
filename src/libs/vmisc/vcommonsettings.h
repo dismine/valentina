@@ -40,6 +40,7 @@
 
 #include "../vlayout/vlayoutdef.h"
 #include "../vmisc/def.h"
+#include "quuid.h"
 
 class QMarginsF;
 
@@ -106,8 +107,8 @@ public:
     auto GetPieceLabelLocale() const -> QString;
     void SetPieceLabelLocale(const QString &value);
 
-    auto GetPMSystemCode() const -> QString;
-    void SetPMSystemCode(const QString &value);
+    auto GetKnownMeasurementsId() const -> QUuid;
+    void SetKnownMeasurementsId(const QUuid &value);
 
     auto GetUnit() const -> QString;
     void SetUnit(const QString &value);

@@ -103,7 +103,7 @@ private slots:
     void SaveGender(int index);
     void SaveBirthDate(const QDate &date);
     void SaveNotes();
-    void SavePMSystem(int index);
+    void SaveKnownMeasurements(int index);
 
     void Remove();
     void MoveTop();
@@ -299,6 +299,9 @@ private:
     static auto UnknownMeasurementImage() -> QString;
 
     void RetranslateMDiagram();
+
+    void InitKnownMeasurements(QComboBox *combo);
+    void InitKnownMeasurementsDescription();
 };
 
 #endif // TMAINWINDOW_H

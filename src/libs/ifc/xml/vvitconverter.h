@@ -44,25 +44,25 @@ class VVITConverter final : public VAbstractMConverter
 
 public:
     explicit VVITConverter(const QString &fileName);
-    virtual ~VVITConverter() = default;
+    ~VVITConverter() override = default;
 
     static const QString MeasurementMaxVerStr;
     static const QString CurrentSchema;
     static Q_DECL_CONSTEXPR const unsigned MeasurementMinVer = FormatVersion(0, 2, 0);
-    static Q_DECL_CONSTEXPR const unsigned MeasurementMaxVer = FormatVersion(0, 6, 0);
+    static Q_DECL_CONSTEXPR const unsigned MeasurementMaxVer = FormatVersion(0, 6, 1);
 
     static auto XSDSchemas() -> QHash<unsigned, QString>;
 
 protected:
-    virtual auto MinVer() const -> unsigned override;
-    virtual auto MaxVer() const -> unsigned override;
+    auto MinVer() const -> unsigned override;
+    auto MaxVer() const -> unsigned override;
 
-    virtual auto MinVerStr() const -> QString override;
-    virtual auto MaxVerStr() const -> QString override;
+    auto MinVerStr() const -> QString override;
+    auto MaxVerStr() const -> QString override;
 
-    virtual void ApplyPatches() override;
-    virtual void DowngradeToCurrentMaxVersion() override;
-    virtual auto IsReadOnly() const -> bool override;
+    void ApplyPatches() override;
+    void DowngradeToCurrentMaxVersion() override;
+    auto IsReadOnly() const -> bool override;
 
     auto Schemas() const -> QHash<unsigned, QString> override;
 
@@ -77,14 +77,15 @@ private:
     void GenderV0_3_1();
     void PM_SystemV0_3_2();
     void ConvertMeasurementsToV0_3_3();
-    void ConverCustomerNameToV0_4_0();
+    void ConvertCustomerNameToV0_4_0();
+    void ConvertPMSystemToV0_6_1();
 
     void ToV0_3_0();
     void ToV0_3_1();
     void ToV0_3_2();
     void ToV0_3_3();
     void ToV0_4_0();
-    void ToV0_6_0();
+    void ToV0_6_1();
 };
 
 //---------------------------------------------------------------------------------------------------------------------

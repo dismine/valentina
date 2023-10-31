@@ -66,7 +66,7 @@ public:
     void StartLogging();
     auto LogFile() -> QTextStream *;
 
-    auto KnownMeasurementsDatabase() -> VKnownMeasurementsDatabase *;
+    auto KnownMeasurementsDatabase() -> VKnownMeasurementsDatabase * override;
     void RestartKnownMeasurementsDatabaseWatcher();
 
     auto TrVars() -> const VTranslateVars * override;
