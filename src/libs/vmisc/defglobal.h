@@ -42,6 +42,11 @@ template <typename T> Q_DECL_CONSTEXPR typename std::add_const<T>::type &qAsCons
 template <typename T> void qAsConst(const T &&) Q_DECL_EQ_DELETE;
 #endif
 
+#if QT_VERSION >= QT_VERSION_CHECK(6, 6, 0)
+// Since Qt 6.0 minimal requirement is C++17. There is no longer need for qAsConst.
+#define qAsConst std::as_const
+#endif
+
 #ifndef Q_DISABLE_ASSIGN
 #define Q_DISABLE_ASSIGN(Class) Class &operator=(const Class &) = delete;
 #endif

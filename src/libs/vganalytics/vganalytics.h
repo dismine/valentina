@@ -58,8 +58,6 @@ public:
         Error
     };
 
-    Q_ENUM(LogLevel) // NOLINT
-
     void SetMeasurementId(const QString &measurementId);
     void SetApiSecret(const QString &apiSecret);
     void SetClientID(const QString &clientID);
