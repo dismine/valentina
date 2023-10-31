@@ -195,27 +195,6 @@ VToolApp {
     }
 
     Group {
-        name: "Diagrams"
-        prefix: product.sourceDirectory + "/share/resources/"
-        files: "diagrams.qrc"
-        fileTags: "ebr.external_qrc"
-    }
-
-    Group {
-        fileTagsFilter: "ebr.rcc"
-        qbs.install: true
-        qbs.installDir: {
-            if (qbs.targetOS.contains("unix") && !qbs.targetOS.contains("macos"))
-                return "share/valentina/";
-
-            if (qbs.targetOS.contains("macos") && !buildconfig.enableMultiBundle)
-                return buildconfig.installAppPath + "/Valentina.app/Contents/Resources"
-
-            return buildconfig.installDataPath + "/";
-        }
-    }
-
-    Group {
         name: "Tape RC"
         condition: qbs.targetOS.contains("windows")
         prefix: product.sourceDirectory + "/share/resources/"

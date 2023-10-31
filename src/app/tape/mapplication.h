@@ -68,8 +68,6 @@ public:
     void OpenSettings() override;
     auto TapeSettings() -> VTapeSettings *;
 
-    static auto diagramsPath() -> QString;
-
     void RetranslateTables();
 
     void ParseCommandLine(const SocketConnection &connection, const QStringList &arguments);

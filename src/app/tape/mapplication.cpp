@@ -487,15 +487,13 @@ void MApplication::InitOptions()
                            QString country = VGAnalytics::CountryCode();
                            if (country == "ru"_L1 || country == "by"_L1)
                            {
-                               qFatal("contry not detected");
+                               qFatal("country not detected");
                            }
                        });
 
     VTheme::InitApplicationStyle();
     VTheme::SetIconTheme();
     VTheme::InitThemeMode();
-
-    QResource::registerResource(diagramsPath());
 
     auto *statistic = VGAnalytics::Instance();
     QString clientID = settings->GetClientID();
@@ -594,54 +592,6 @@ auto MApplication::TapeSettings() -> VTapeSettings *
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-auto MApplication::diagramsPath() -> QString
-{
-    const QString dPath = QStringLiteral("/diagrams.rcc");
-#ifdef Q_OS_WIN
-    return QCoreApplication::applicationDirPath() + dPath;
-#elif defined(Q_OS_MAC)
-    QFileInfo fileBundle(QCoreApplication::applicationDirPath() + QStringLiteral("/../Resources") + dPath);
-    if (fileBundle.exists())
-    {
-        return fileBundle.absoluteFilePath();
-    }
-    else
-    {
-        QFileInfo file(QCoreApplication::applicationDirPath() + dPath);
-        if (file.exists())
-        {
-            return file.absoluteFilePath();
-        }
-        else
-        {
-            return PKGDATADIR + dPath;
-        }
-    }
-#else // Unix
-    QFileInfo file(QCoreApplication::applicationDirPath() + dPath);
-    if (file.exists())
-    {
-        return file.absoluteFilePath();
-    }
-
-#ifdef QBS_BUILD
-    file = QFileInfo(QCoreApplication::applicationDirPath() + "/../../.." + PKGDATADIR + dPath);
-    if (file.exists())
-    {
-        return file.absoluteFilePath();
-    }
-#endif // QBS_BUILD
-
-#if defined(APPIMAGE) && defined(Q_OS_LINUX)
-    /* Fix path to diagrams when run inside AppImage. */
-    return AppImageRoot() + PKGDATADIR + dPath;
-#else
-    return PKGDATADIR + dPath;
-#endif // defined(APPIMAGE) && defined(Q_OS_LINUX)
-#endif // Unix
-}
-
-//---------------------------------------------------------------------------------------------------------------------
 void MApplication::RetranslateTables()
 {
     const QList<TMainWindow *> list = MainWindows();
@@ -674,7 +624,7 @@ void MApplication::ParseCommandLine(const SocketConnection &connection, const QS
         {
             qCDebug(mApp, "Connected to the server '%s'", qUtf8Printable(serverName));
             QTextStream stream(&socket);
-            stream << QCoreApplication::arguments().join(QStringLiteral(";;"));
+            stream << QCoreApplication::arguments().join(";;"_L1);
             stream.flush();
             socket.waitForBytesWritten();
             QCoreApplication::exit(V_EX_OK);
