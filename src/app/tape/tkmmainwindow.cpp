@@ -41,6 +41,7 @@
 #include "../vmisc/theme/vtheme.h"
 #include "../vmisc/vsysexits.h"
 #include "dialogs/dialogabouttape.h"
+#include "dialogs/dialogknownmeasurementscsvcolumns.h"
 #include "knownmeasurements/vknownmeasurements.h"
 #include "mapplication.h" // Should be last because of definning qApp
 #include "quuid.h"
@@ -468,54 +469,35 @@ auto TKMMainWindow::eventFilter(QObject *object, QEvent *event) -> bool
 void TKMMainWindow::ExportToCSVData(const QString &fileName, bool withHeader, int mib, const QChar &separator)
 {
     QxtCsvModel csv;
-    const int columns = ui->tableWidget->columnCount();
+
+    int columns = 5;
+    int colCount = 0;
+    for (int column = 0; column <= columns; ++column)
     {
-        int colCount = 0;
-        for (int column = 0; column < columns; ++column)
-        {
-            if (not ui->tableWidget->isColumnHidden(column))
-            {
-                csv.insertColumn(colCount++);
-            }
-        }
+        csv.insertColumn(colCount++);
     }
 
     if (withHeader)
     {
-        int colCount = 0;
-        for (int column = 0; column < columns; ++column)
+        for (int column = 0; column <= columns; ++column)
         {
-            if (not ui->tableWidget->isColumnHidden(column))
-            {
-                QString text;
-                if (QTableWidgetItem *header = ui->tableWidget->horizontalHeaderItem(column))
-                {
-                    text = header->text();
-                }
-                csv.setHeaderText(colCount, text);
-                ++colCount;
-            }
+            csv.setHeaderText(column, CSVColumnHeader(column));
         }
     }
 
-    const int rows = ui->tableWidget->rowCount();
-    for (int row = 0; row < rows; ++row)
+    const QMap<int, VKnownMeasurement> orderedTable = m_known.OrderedMeasurments();
+    int row = 0;
+    for (auto iMap = orderedTable.constBegin(); iMap != orderedTable.constEnd(); ++iMap)
     {
+        const VKnownMeasurement &m = iMap.value();
+
         csv.insertRow(row);
-        int colCount = 0;
-        for (int column = 0; column < columns; ++column)
-        {
-            if (not ui->tableWidget->isColumnHidden(column))
-            {
-                QString text;
-                if (QTableWidgetItem *item = ui->tableWidget->item(row, column))
-                {
-                    text = item->text();
-                }
-                csv.setText(row, colCount, text);
-                ++colCount;
-            }
-        }
+        csv.setText(row, 0, m.name);
+        csv.setText(row, 1, m.fullName);
+        csv.setText(row, 2, m.group);
+        csv.setText(row, 3, m.formula);
+        csv.setText(row, 4, m.description);
+        ++row;
     }
 
     QString error;
@@ -729,6 +711,53 @@ void TKMMainWindow::ShowWindow() const
 //---------------------------------------------------------------------------------------------------------------------
 void TKMMainWindow::ImportDataFromCSV()
 {
+    if (m_m == nullptr)
+    {
+        return;
+    }
+
+    const QString filters = tr("Comma-Separated Values") + QStringLiteral(" (*.csv)");
+    const QString suffix = QStringLiteral("csv");
+
+    QString fileName = QFileDialog::getOpenFileName(this, tr("Import from CSV"), QDir::homePath(), filters, nullptr,
+                                                    VAbstractApplication::VApp()->NativeFileDialog());
+
+    if (fileName.isEmpty())
+    {
+        return;
+    }
+
+    QFileInfo f(fileName);
+    if (f.suffix().isEmpty() && f.suffix() != suffix)
+    {
+        fileName += '.'_L1 + suffix;
+    }
+
+    DialogExportToCSV dialog(this);
+    dialog.SetWithHeader(VAbstractApplication::VApp()->Settings()->GetCSVWithHeader());
+    dialog.SetSelectedMib(VAbstractApplication::VApp()->Settings()->GetCSVCodec());
+    dialog.SetSeparator(VAbstractApplication::VApp()->Settings()->GetCSVSeparator());
+    dialog.ShowFilePreview(fileName);
+
+    if (dialog.exec() == QDialog::Accepted)
+    {
+        VAbstractApplication::VApp()->Settings()->SetCSVSeparator(dialog.GetSeparator());
+        VAbstractApplication::VApp()->Settings()->SetCSVCodec(dialog.GetSelectedMib());
+        VAbstractApplication::VApp()->Settings()->SetCSVWithHeader(dialog.IsWithHeader());
+
+        auto columns = QSharedPointer<DialogKnownMeasurementsCSVColumns>::create(fileName, this);
+        columns->SetWithHeader(dialog.IsWithHeader());
+        columns->SetSeparator(dialog.GetSeparator());
+        columns->SetCodec(VTextCodec::codecForMib(dialog.GetSelectedMib()));
+
+        if (columns->exec() == QDialog::Accepted)
+        {
+            QxtCsvModel csv(fileName, nullptr, dialog.IsWithHeader(), dialog.GetSeparator(),
+                            VTextCodec::codecForMib(dialog.GetSelectedMib()));
+            const QVector<int> map = columns->ColumnsMap();
+            ImportKnownMeasurements(csv, map, dialog.IsWithHeader());
+        }
+    }
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -2428,4 +2457,185 @@ void TKMMainWindow::InitMeasurementDiagramList()
 
         ui->comboBoxDiagram->addItem(title, i.key());
     }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void TKMMainWindow::ShowError(const QString &text)
+{
+    QMessageBox messageBox(this);
+    messageBox.setIcon(QMessageBox::Critical);
+    messageBox.setText(text);
+    messageBox.setStandardButtons(QMessageBox::Ok);
+    messageBox.setDefaultButton(QMessageBox::Ok);
+    messageBox.exec();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void TKMMainWindow::RefreshDataAfterImport()
+{
+    const int currentRow = ui->tableWidget->currentRow();
+    m_search->AddRow(currentRow);
+    m_known = VKnownMeasurements();
+    RefreshTable();
+    m_search->RefreshList(ui->lineEditFind->text());
+    ui->tableWidget->selectRow(currentRow);
+    ui->actionExportToCSV->setEnabled(ui->tableWidget->rowCount() > 0);
+    MeasurementsWereSaved(false);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+auto TKMMainWindow::CheckMName(const QString &name, const QSet<QString> &importedNames) const -> QString
+{
+    if (name.isEmpty())
+    {
+        throw VException(tr("Measurement name is empty."));
+    }
+
+    if (importedNames.contains(name))
+    {
+        throw VException(tr("Imported file must not contain the same name twice."));
+    }
+
+    QRegularExpression rx(NameRegExp(VariableRegex::KnownMeasurement));
+    if (not rx.match(name).hasMatch())
+    {
+        throw VException(tr("Measurement '%1' doesn't match regex pattern.").arg(name));
+    }
+
+    if (m_known.Measurments().contains(name))
+    {
+        throw VException(tr("Measurement '%1' already used in the file.").arg(name));
+    }
+
+    return name;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+auto TKMMainWindow::CSVColumnHeader(int column) const -> QString
+{
+    switch (column)
+    {
+        case 0: // name
+            return tr("Name", "measurement column");
+        case 1: // full name
+            return tr("Full name", "measurement column");
+        case 2: // group
+            return tr("Group", "measurement column");
+        case 3: // formula
+            return tr("Formula", "measurement column");
+        case 4: // description
+            return tr("Description", "measurement column");
+        default:
+            return {};
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+auto TKMMainWindow::ReadCSV(const QxtCsvModel &csv, const QVector<int> &map, bool withHeader)
+    -> QVector<VKnownMeasurement>
+{
+    QVector<VKnownMeasurement> measurements;
+    QSet<QString> importedNames;
+
+    const int rows = csv.rowCount();
+
+    for (int i = 0; i < rows; ++i)
+    {
+        try
+        {
+            const int nameColumn = map.at(static_cast<int>(KnownMeasurementsColumns::Name));
+            const QString name = csv.text(i, nameColumn).simplified();
+            if (name.isEmpty())
+            {
+                ShowError(tr("Error in row %1. The measurement name is empty.").arg(i));
+                continue;
+            }
+
+            VKnownMeasurement measurement;
+            const QString mName = CheckMName(name, importedNames);
+            importedNames.insert(mName);
+            measurement.name = mName;
+
+            const int nameGroup = map.at(static_cast<int>(KnownMeasurementsColumns::Group));
+            if (nameGroup >= 0)
+            {
+                measurement.group = csv.text(i, nameGroup).simplified();
+            }
+
+            const int nameFullName = map.at(static_cast<int>(KnownMeasurementsColumns::FullName));
+            if (nameFullName >= 0)
+            {
+                measurement.fullName = csv.text(i, nameFullName);
+            }
+
+            const int nameFormula = map.at(static_cast<int>(KnownMeasurementsColumns::Formula));
+            if (nameFormula >= 0)
+            {
+                measurement.formula = csv.text(i, nameFormula);
+            }
+
+            const int nameDescription = map.at(static_cast<int>(KnownMeasurementsColumns::Description));
+            if (nameDescription >= 0)
+            {
+                measurement.description = csv.text(i, nameDescription);
+            }
+
+            measurements.append(measurement);
+        }
+        catch (VException &e)
+        {
+            int rowIndex = i + 1;
+            if (withHeader)
+            {
+                ++rowIndex;
+            }
+            ShowError(tr("Error in row %1. %2").arg(rowIndex).arg(e.ErrorMessage()));
+            return {};
+        }
+    }
+
+    return measurements;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void TKMMainWindow::ImportKnownMeasurements(const QxtCsvModel &csv, const QVector<int> &map, bool withHeader)
+{
+    if (csv.columnCount() < 2)
+    {
+        ShowError(tr("Individual measurements require at least 2 columns."));
+        return;
+    }
+
+    QVector<VKnownMeasurement> measurements = ReadCSV(csv, map, withHeader);
+    if (measurements.isEmpty())
+    {
+        return;
+    }
+
+    for (const auto &im : qAsConst(measurements))
+    {
+        m_m->AddEmptyMeasurement(im.name);
+
+        if (not im.group.isEmpty())
+        {
+            m_m->SetMGroup(im.name, im.group);
+        }
+
+        if (not im.fullName.isEmpty())
+        {
+            m_m->SetMFullName(im.name, im.fullName);
+        }
+
+        if (not im.formula.isEmpty())
+        {
+            m_m->SetMFormula(im.name, im.formula);
+        }
+
+        if (not im.description.isEmpty())
+        {
+            m_m->SetMDescription(im.name, im.description);
+        }
+    }
+
+    RefreshDataAfterImport();
 }

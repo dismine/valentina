@@ -38,9 +38,12 @@
 #include "../vformat/knownmeasurements/vknownmeasurementsdatabase.h"
 #include "../vganalytics/vganalytics.h"
 #include "../vmisc/compatibility.h"
+#include "../vmisc/def.h"
+#include "../vmisc/defglobal.h"
 #include "../vmisc/dialogs/dialogaskcollectstatistic.h"
 #include "../vmisc/dialogs/dialogexporttocsv.h"
 #include "../vmisc/dialogs/dialogselectlanguage.h"
+#include "../vmisc/literals.h"
 #include "../vmisc/qxtcsvmodel.h"
 #include "../vmisc/theme/vtheme.h"
 #include "../vmisc/vsysexits.h"
@@ -49,7 +52,6 @@
 #include "../vpatterndb/vcontainer.h"
 #include "../vtools/dialogs/support/dialogeditwrongformula.h"
 #include "../vwidgets/vaspectratiopixmaplabel.h"
-#include "def.h"
 #include "dialogs/dialogabouttape.h"
 #include "dialogs/dialogdimensioncustomnames.h"
 #include "dialogs/dialogdimensionlabels.h"
@@ -134,10 +136,11 @@ struct IndividualMeasurement
 {
     IndividualMeasurement() = default;
 
-    QString name{};        // NOLINT(misc-non-private-member-variables-in-classes)
-    QString value{'0'};    // NOLINT(misc-non-private-member-variables-in-classes)
-    QString fullName{};    // NOLINT(misc-non-private-member-variables-in-classes)
-    QString description{}; // NOLINT(misc-non-private-member-variables-in-classes)
+    QString name{};           // NOLINT(misc-non-private-member-variables-in-classes)
+    QString value{'0'};       // NOLINT(misc-non-private-member-variables-in-classes)
+    QString fullName{};       // NOLINT(misc-non-private-member-variables-in-classes)
+    QString description{};    // NOLINT(misc-non-private-member-variables-in-classes)
+    bool specialUnits{false}; // NOLINT(misc-non-private-member-variables-in-classes)
 };
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -878,54 +881,46 @@ auto TMainWindow::eventFilter(QObject *object, QEvent *event) -> bool
 void TMainWindow::ExportToCSVData(const QString &fileName, bool withHeader, int mib, const QChar &separator)
 {
     QxtCsvModel csv;
-    const int columns = ui->tableWidget->columnCount();
+
+    int columns = 2;
+    if (m_mType == MeasurementsType::Individual)
     {
-        int colCount = 0;
-        for (int column = 0; column < columns; ++column)
+        columns = 5;
+    }
+    else
+    {
+        columns = 5;
+
+        const QList<MeasurementDimension_p> dimensions = m_m->Dimensions().values();
+        if (dimensions.size() > 1)
         {
-            if (not ui->tableWidget->isColumnHidden(column))
-            {
-                csv.insertColumn(colCount++);
-            }
+            columns += qMin(static_cast<int>(dimensions.size()), 2);
         }
+    }
+
+    int colCount = 0;
+    for (int column = 0; column <= columns; ++column)
+    {
+        csv.insertColumn(colCount++);
     }
 
     if (withHeader)
     {
-        int colCount = 0;
-        for (int column = 0; column < columns; ++column)
+        for (int column = 0; column <= columns; ++column)
         {
-            if (not ui->tableWidget->isColumnHidden(column))
-            {
-                QString text;
-                if (QTableWidgetItem *header = ui->tableWidget->horizontalHeaderItem(column))
-                {
-                    text = header->text();
-                }
-                csv.setHeaderText(colCount, text);
-                ++colCount;
-            }
+            csv.setHeaderText(column, CSVColumnHeader(column));
         }
     }
 
-    const int rows = ui->tableWidget->rowCount();
-    for (int row = 0; row < rows; ++row)
+    VKnownMeasurementsDatabase *db = MApplication::VApp()->KnownMeasurementsDatabase();
+    VKnownMeasurements knownDB = db->KnownMeasurements(m_m->KnownMeasurements());
+
+    const QMap<int, QSharedPointer<VMeasurement>> orderedTable = OrderedMeasurments();
+    int row = 0;
+    for (auto iMap = orderedTable.constBegin(); iMap != orderedTable.constEnd(); ++iMap)
     {
-        csv.insertRow(row);
-        int colCount = 0;
-        for (int column = 0; column < columns; ++column)
-        {
-            if (not ui->tableWidget->isColumnHidden(column))
-            {
-                QString text;
-                if (QTableWidgetItem *item = ui->tableWidget->item(row, column))
-                {
-                    text = item->text();
-                }
-                csv.setText(row, colCount, text);
-                ++colCount;
-            }
-        }
+        ExportRowToCSV(csv, row, iMap.value(), knownDB);
+        ++row;
     }
 
     QString error;
@@ -4314,25 +4309,15 @@ auto TMainWindow::CheckMName(const QString &name, const QSet<QString> &importedN
         throw VException(tr("Imported file must not contain the same name twice."));
     }
 
-    if (name.indexOf(CustomMSign) == 0)
+    QRegularExpression rx(NameRegExp());
+    if (not rx.match(name).hasMatch())
     {
-        QRegularExpression rx(NameRegExp());
-        if (not rx.match(name).hasMatch())
-        {
-            throw VException(tr("Measurement '%1' doesn't match regex pattern.").arg(name));
-        }
-
-        if (not m_data->IsUnique(name))
-        {
-            throw VException(tr("Measurement '%1' already used in the file.").arg(name));
-        }
+        throw VException(tr("Measurement '%1' doesn't match regex pattern.").arg(name));
     }
-    else
+
+    if (not m_data->IsUnique(name))
     {
-        if (not m_data->IsUnique(name))
-        {
-            throw VException(tr("Measurement '%1' already used in file.").arg(name));
-        }
+        throw VException(tr("Measurement '%1' already used in the file.").arg(name));
     }
 
     return name;
@@ -4395,8 +4380,16 @@ void TMainWindow::ImportIndividualMeasurements(const QxtCsvModel &csv, const QVe
             measurement.name = mName;
 
             const int valueColumn = map.at(static_cast<int>(IndividualMeasurementsColumns::Value));
+            QString rawValue = csv.text(i, valueColumn);
+
+            if (rawValue.endsWith(degreeSymbol))
+            {
+                measurement.specialUnits = true;
+                RemoveLast(rawValue);
+            }
+
             measurement.value = VTranslateVars::TryFormulaFromUser(
-                csv.text(i, valueColumn), VAbstractApplication::VApp()->Settings()->GetOsSeparator());
+                rawValue, VAbstractApplication::VApp()->Settings()->GetOsSeparator());
 
             SetIndividualMeasurementFullName(i, name, csv, map, measurement);
             SetIndividualMeasurementDescription(i, name, csv, map, measurement);
@@ -4422,6 +4415,11 @@ void TMainWindow::ImportIndividualMeasurements(const QxtCsvModel &csv, const QVe
         if (not im.fullName.isEmpty())
         {
             m_m->SetMFullName(im.name, im.fullName);
+        }
+
+        if (im.specialUnits)
+        {
+            m_m->SetMSpecialUnits(im.name, im.specialUnits);
         }
 
         if (not im.description.isEmpty())
@@ -4489,6 +4487,11 @@ void TMainWindow::ImportMultisizeMeasurements(const QxtCsvModel &csv, const QVec
             m_m->SetMFullName(mm.name, mm.fullName);
         }
 
+        if (mm.specialUnits)
+        {
+            m_m->SetMSpecialUnits(mm.name, mm.specialUnits);
+        }
+
         if (not mm.description.isEmpty())
         {
             m_m->SetMDescription(mm.name, mm.description);
@@ -4517,8 +4520,15 @@ auto TMainWindow::ImportMultisizeMeasurement(const QxtCsvModel &csv, int i, cons
     measurement.name = mName;
 
     const auto baseValueColumn = map.at(static_cast<int>(MultisizeMeasurementsColumns::BaseValue));
-    measurement.base =
-        ConverToDouble(csv.text(i, baseValueColumn), tr("Cannot convert base value to double in column 2."));
+    QString rawBaseValue = csv.text(i, baseValueColumn);
+
+    if (rawBaseValue.endsWith(degreeSymbol))
+    {
+        measurement.specialUnits = true;
+        RemoveLast(rawBaseValue);
+    }
+
+    measurement.base = ConverToDouble(rawBaseValue, tr("Cannot convert base value to double in column 2."));
 
     const auto shiftAColumn = map.at(static_cast<int>(MultisizeMeasurementsColumns::ShiftA));
     measurement.shiftA = ConverToDouble(csv.text(i, shiftAColumn),
@@ -4829,6 +4839,159 @@ auto TMainWindow::KnownMeasurementsRegistred(const QUuid &id) -> bool
     VKnownMeasurementsDatabase *db = MApplication::VApp()->KnownMeasurementsDatabase();
     QHash<QUuid, VKnownMeasurementsHeader> known = db->AllKnownMeasurements();
     return known.contains(id);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+auto TMainWindow::CSVColumnHeader(int column) const -> QString
+{
+    if (m_mType == MeasurementsType::Individual)
+    {
+        switch (column)
+        {
+            case 0: // name
+                return tr("Name", "measurement column");
+            case 1: // full name
+                return tr("Full name", "measurement column");
+            case 2: // calculated value
+                return tr("Calculated value", "measurement column") + " ("_L1 + UnitsToStr(m_pUnit) + ')'_L1;
+            case 3: // formula
+                return tr("Formula", "measurement column");
+            case 4: // description
+                return tr("Description", "measurement column");
+            default:
+                return {};
+        }
+    }
+
+    if (column == 0)
+    {
+        return tr("Name", "measurement column");
+    }
+
+    if (column == 1)
+    {
+        return tr("Full name", "measurement column");
+    }
+
+    if (column == 2)
+    {
+        return tr("Calculated value", "measurement column") + " ("_L1 + UnitsToStr(m_pUnit) + ')'_L1;
+    }
+
+    if (column == 3)
+    {
+        return tr("Base value", "measurement column");
+    }
+
+    const QList<MeasurementDimension_p> dimensions = m_m->Dimensions().values();
+    const QString suffix = QStringLiteral(" (%1):");
+
+    if (column == 4)
+    {
+        if (not dimensions.empty())
+        {
+            const MeasurementDimension_p &dimension = dimensions.at(0);
+            return tr("Shift", "measurement column") + suffix.arg(dimension->Name());
+        }
+
+        return QStringLiteral("Shift A");
+    }
+
+    if (column == 5 && dimensions.size() > 1)
+    {
+        const MeasurementDimension_p &dimension = dimensions.at(1);
+        return tr("Shift", "measurement column") + suffix.arg(dimension->Name());
+    }
+
+    if (column == 6 && dimensions.size() > 2)
+    {
+        const MeasurementDimension_p &dimension = dimensions.at(2);
+        return tr("Shift", "measurement column") + suffix.arg(dimension->Name());
+    }
+
+    if ((column == 5 && dimensions.size() <= 1) || (column == 6 && dimensions.size() <= 2) || column == 7)
+    {
+        return tr("Description", "measurement column");
+    }
+
+    return {};
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void TMainWindow::ExportRowToCSV(QxtCsvModel &csv, int row, const QSharedPointer<VMeasurement> &meash,
+                                 const VKnownMeasurements &knownDB) const
+{
+    csv.insertRow(row);
+
+    VKnownMeasurement known = knownDB.Measurement(meash->GetName());
+
+    csv.setText(row, 0, meash->GetName());
+
+    if (meash->IsCustom())
+    {
+        csv.setText(row, 1, meash->GetGuiText());
+    }
+    else
+    {
+        csv.setText(row, 1, known.fullName);
+    }
+
+    QString calculatedValue;
+    if (meash->IsSpecialUnits())
+    {
+        calculatedValue = locale().toString(*meash->GetValue()) + degreeSymbol;
+    }
+    else
+    {
+        calculatedValue = locale().toString(UnitConvertor(*meash->GetValue(), m_mUnit, m_pUnit));
+    }
+    csv.setText(row, 2, calculatedValue);
+
+    if (m_mType == MeasurementsType::Individual)
+    {
+        QString formula = VTranslateVars::TryFormulaToUser(meash->GetFormula(),
+                                                           VAbstractApplication::VApp()->Settings()->GetOsSeparator());
+        csv.setText(row, 3, formula);
+
+        if (meash->IsCustom())
+        {
+            csv.setText(row, 4, meash->GetDescription());
+        }
+        else
+        {
+            csv.setText(row, 4, known.description);
+        }
+    }
+    else
+    {
+        csv.setText(row, 3, locale().toString(meash->GetBase()));
+
+        const QList<MeasurementDimension_p> dimensions = m_m->Dimensions().values();
+
+        csv.setText(row, 4, locale().toString(meash->GetShiftA()));
+
+        int column = 5;
+        if (dimensions.size() > 1)
+        {
+            csv.setText(row, column, locale().toString(meash->GetShiftB()));
+            ++column;
+        }
+
+        if (dimensions.size() > 2)
+        {
+            csv.setText(row, column, locale().toString(meash->GetShiftC()));
+            ++column;
+        }
+
+        if (meash->IsCustom())
+        {
+            csv.setText(row, column, meash->GetDescription());
+        }
+        else
+        {
+            csv.setText(row, column, known.description);
+        }
+    }
 }
 
 //---------------------------------------------------------------------------------------------------------------------

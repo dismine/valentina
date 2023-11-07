@@ -19,7 +19,8 @@ SOURCES  += \
     $$PWD/vtapesettings.cpp \
     $$PWD/dialogs/dialogsetupmultisize.cpp \
     $$PWD/vtapeshortcutmanager.cpp \
-    $$PWD/tkmmainwindow.cpp
+    $$PWD/tkmmainwindow.cpp \
+    $$PWD/dialogs/dialogknownmeasurementscsvcolumns.cpp
 
 *msvc*:SOURCES += $$PWD/stable.cpp
 
@@ -42,7 +43,8 @@ HEADERS  += \
     $$PWD/vtapesettings.h \
     $$PWD/dialogs/dialogsetupmultisize.h \
     $$PWD/vtapeshortcutmanager.h \
-    $$PWD/tkmmainwindow.h
+    $$PWD/tkmmainwindow.h \
+    $$PWD/dialogs/dialogknownmeasurementscsvcolumns.h
 
 FORMS    += \
     $$PWD/dialogs/dialogdimensioncustomnames.ui \
@@ -57,5 +59,6 @@ FORMS    += \
     $$PWD/dialogs/configpages/tapepreferencesconfigurationpage.ui \
     $$PWD/dialogs/configpages/tapepreferencespathpage.ui \
     $$PWD/dialogs/dialogsetupmultisize.ui \
-    $$PWD/tkmmainwindow.ui
+    $$PWD/tkmmainwindow.ui \
+    $$PWD/dialogs/dialogknownmeasurementscsvcolumns.ui
 

@@ -50,6 +50,7 @@ class QxtCsvModel;
 class VMeasurement;
 class QAbstractButton;
 class QUuid;
+class VKnownMeasurements;
 
 class TMainWindow : public VAbstractMainWindow
 {
@@ -198,13 +199,14 @@ private:
     {
         MultisizeMeasurement() = default;
 
-        QString name{};        // NOLINT(misc-non-private-member-variables-in-classes)
-        qreal base{0};         // NOLINT(misc-non-private-member-variables-in-classes)
-        qreal shiftA{0};       // NOLINT(misc-non-private-member-variables-in-classes)
-        qreal shiftB{0};       // NOLINT(misc-non-private-member-variables-in-classes)
-        qreal shiftC{0};       // NOLINT(misc-non-private-member-variables-in-classes)
-        QString fullName{};    // NOLINT(misc-non-private-member-variables-in-classes)
-        QString description{}; // NOLINT(misc-non-private-member-variables-in-classes)
+        QString name{};           // NOLINT(misc-non-private-member-variables-in-classes)
+        qreal base{0};            // NOLINT(misc-non-private-member-variables-in-classes)
+        qreal shiftA{0};          // NOLINT(misc-non-private-member-variables-in-classes)
+        qreal shiftB{0};          // NOLINT(misc-non-private-member-variables-in-classes)
+        qreal shiftC{0};          // NOLINT(misc-non-private-member-variables-in-classes)
+        QString fullName{};       // NOLINT(misc-non-private-member-variables-in-classes)
+        QString description{};    // NOLINT(misc-non-private-member-variables-in-classes)
+        bool specialUnits{false}; // NOLINT(misc-non-private-member-variables-in-classes)
     };
 
     QMultiHash<VShortcutAction, QAction *> m_actionShortcuts{};
@@ -306,6 +308,10 @@ private:
     void InitKnownMeasurementsDescription();
 
     static auto KnownMeasurementsRegistred(const QUuid &id) -> bool;
+
+    auto CSVColumnHeader(int column) const -> QString;
+    void ExportRowToCSV(QxtCsvModel &csv, int row, const QSharedPointer<VMeasurement> &meash,
+                        const VKnownMeasurements &knownDB) const;
 };
 
 #endif // TMAINWINDOW_H

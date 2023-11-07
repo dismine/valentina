@@ -45,6 +45,7 @@ class TKMMainWindow;
 class VKnownMeasurementsDocument;
 class VPatternImage;
 class QCompleter;
+class QxtCsvModel;
 
 class TKMMainWindow : public VAbstractMainWindow
 {
@@ -181,6 +182,14 @@ private:
 
     void InitMeasurementUnits();
     void InitMeasurementDiagramList();
+
+    void ShowError(const QString &text);
+    void RefreshDataAfterImport();
+    auto CheckMName(const QString &name, const QSet<QString> &importedNames) const -> QString;
+
+    auto CSVColumnHeader(int column) const -> QString;
+    auto ReadCSV(const QxtCsvModel &csv, const QVector<int> &map, bool withHeader) -> QVector<VKnownMeasurement>;
+    void ImportKnownMeasurements(const QxtCsvModel &csv, const QVector<int> &map, bool withHeader);
 };
 
 #endif // TKMMAINWINDOW_H

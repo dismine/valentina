@@ -47,7 +47,7 @@
        <string/>
       </property>
       <property name="currentIndex">
-       <number>1</number>
+       <number>0</number>
       </property>
       <widget class="QWidget" name="tabMeasurements">
        <attribute name="icon">
@@ -947,6 +947,8 @@
     <addaction name="separator"/>
     <addaction name="actionSave"/>
     <addaction name="actionSaveAs"/>
+    <addaction name="actionExportToCSV"/>
+    <addaction name="actionImportFromCSV"/>
     <addaction name="separator"/>
     <addaction name="actionReadOnly"/>
     <addaction name="separator"/>
