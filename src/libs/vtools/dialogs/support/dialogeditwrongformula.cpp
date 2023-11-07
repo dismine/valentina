@@ -202,27 +202,7 @@ void DialogEditWrongFormula::ValChanged(int row)
     {
         if (ui->radioButtonStandardTable->isChecked())
         {
-            const QSharedPointer<VMeasurement> stable = m_data->GetVariable<VMeasurement>(name);
-
-            QString description;
-
-            if (!stable->IsCustom())
-            {
-                if (VKnownMeasurementsDatabase *db = VAbstractApplication::VApp()->KnownMeasurementsDatabase())
-                {
-                    VKnownMeasurements known = db->KnownMeasurements(stable->GetKnownMeasurementsId());
-                    if (known.IsValid())
-                    {
-                        description = known.Measurement(stable->GetName()).description;
-                    }
-                }
-            }
-            else
-            {
-                description = stable->GetDescription();
-            }
-
-            SetDescription(item->text(), *stable->GetValue(), stable->IsSpecialUnits(), description);
+            SetMeasurementDescription(item, name);
         }
         else if (ui->radioButtonIncrements->isChecked() || ui->radioButtonPC->isChecked())
         {
@@ -267,25 +247,7 @@ void DialogEditWrongFormula::ValChanged(int row)
         }
         else if (ui->radioButtonPieceArea->isChecked())
         {
-            const bool specialUnits = false;
-            const QSharedPointer<VPieceArea> var = m_data->GetVariable<VPieceArea>(name);
-            QString description = tr("Area of piece");
-
-            try
-            {
-                VPiece piece = m_data->GetPiece(var->GetPieceId());
-                QString name = piece.GetName();
-                if (not name.isEmpty())
-                {
-                    description += QStringLiteral(" '%1'").arg(piece.GetName());
-                }
-            }
-            catch (const VExceptionBadId &)
-            {
-                // do nothing
-            }
-
-            SetDescription(item->text(), *var->GetValue(), specialUnits, description, true);
+            SetPieceAreaDescription(item, name);
         }
         else if (ui->radioButtonFunctions->isChecked())
         {
@@ -827,6 +789,56 @@ void DialogEditWrongFormula::ShowIncrementsInPreviewCalculation(bool show)
                      { return obj1->GetIndex() < obj2->GetIndex(); });
 
     ShowVariable(vars);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void DialogEditWrongFormula::SetMeasurementDescription(QTableWidgetItem *item, const QString &name)
+{
+    const QSharedPointer<VMeasurement> stable = m_data->GetVariable<VMeasurement>(name);
+
+    QString description;
+
+    if (!stable->IsCustom())
+    {
+        if (VKnownMeasurementsDatabase *db = VAbstractApplication::VApp()->KnownMeasurementsDatabase())
+        {
+            VKnownMeasurements known = db->KnownMeasurements(stable->GetKnownMeasurementsId());
+            if (known.IsValid())
+            {
+                description = known.Measurement(stable->GetName()).description;
+            }
+        }
+    }
+    else
+    {
+        description = stable->GetDescription();
+    }
+
+    SetDescription(item->text(), *stable->GetValue(), stable->IsSpecialUnits(), description);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void DialogEditWrongFormula::SetPieceAreaDescription(QTableWidgetItem *item, const QString &name)
+{
+    const bool specialUnits = false;
+    const QSharedPointer<VPieceArea> var = m_data->GetVariable<VPieceArea>(name);
+    QString description = tr("Area of piece");
+
+    try
+    {
+        VPiece piece = m_data->GetPiece(var->GetPieceId());
+        QString name = piece.GetName();
+        if (not name.isEmpty())
+        {
+            description += QStringLiteral(" '%1'").arg(piece.GetName());
+        }
+    }
+    catch (const VExceptionBadId &)
+    {
+        // do nothing
+    }
+
+    SetDescription(item->text(), *var->GetValue(), specialUnits, description, true);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
