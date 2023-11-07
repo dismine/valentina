@@ -532,6 +532,9 @@
                 <property name="placeholderText">
                  <string>Measurement's name in a formula.</string>
                 </property>
+                <property name="clearButtonEnabled">
+                 <bool>true</bool>
+                </property>
                </widget>
               </item>
               <item row="3" column="0">
@@ -763,6 +766,9 @@
                 <property name="placeholderText">
                  <string>Measurement's human-readable name.</string>
                 </property>
+                <property name="clearButtonEnabled">
+                 <bool>true</bool>
+                </property>
                </widget>
               </item>
               <item row="11" column="0">
@@ -926,32 +932,7 @@
           </property>
          </widget>
         </item>
-        <item row="3" column="1">
-         <widget class="QFrame" name="frame">
-          <property name="sizePolicy">
-           <sizepolicy hsizetype="Expanding" vsizetype="Preferred">
-            <horstretch>0</horstretch>
-            <verstretch>0</verstretch>
-           </sizepolicy>
-          </property>
-          <property name="frameShape">
-           <enum>QFrame::StyledPanel</enum>
-          </property>
-          <property name="frameShadow">
-           <enum>QFrame::Raised</enum>
-          </property>
-          <layout class="QVBoxLayout" name="verticalLayout">
-           <item>
-            <widget class="QLabel" name="labelKnownMeasurementsDescription">
-             <property name="text">
-              <string/>
-             </property>
-            </widget>
-           </item>
-          </layout>
-         </widget>
-        </item>
-        <item row="4" column="0">
+        <item row="5" column="0">
          <widget class="QLabel" name="labelBaseValues">
           <property name="sizePolicy">
            <sizepolicy hsizetype="Preferred" vsizetype="Expanding">
@@ -967,7 +948,7 @@
           </property>
          </widget>
         </item>
-        <item row="4" column="1">
+        <item row="5" column="1">
          <widget class="QFrame" name="frameBaseValue">
           <property name="frameShape">
            <enum>QFrame::Box</enum>
@@ -1024,14 +1005,14 @@
           </layout>
          </widget>
         </item>
-        <item row="5" column="0">
+        <item row="6" column="0">
          <widget class="QLabel" name="labelCustomerName">
           <property name="text">
            <string>Customer name:</string>
           </property>
          </widget>
         </item>
-        <item row="5" column="1">
+        <item row="6" column="1">
          <widget class="QLineEdit" name="lineEditCustomerName">
           <property name="enabled">
            <bool>false</bool>
@@ -1045,16 +1026,19 @@
           <property name="placeholderText">
            <string>Customer's name</string>
           </property>
+          <property name="clearButtonEnabled">
+           <bool>true</bool>
+          </property>
          </widget>
         </item>
-        <item row="6" column="0">
+        <item row="7" column="0">
          <widget class="QLabel" name="labelBirthDate">
           <property name="text">
            <string>Birth date:</string>
           </property>
          </widget>
         </item>
-        <item row="6" column="1">
+        <item row="7" column="1">
          <widget class="QDateEdit" name="dateEditBirthDate">
           <property name="enabled">
            <bool>false</bool>
@@ -1089,14 +1073,14 @@
           </property>
          </widget>
         </item>
-        <item row="7" column="0">
+        <item row="8" column="0">
          <widget class="QLabel" name="labelGender">
           <property name="text">
            <string>Gender:</string>
           </property>
          </widget>
         </item>
-        <item row="7" column="1">
+        <item row="8" column="1">
          <widget class="QComboBox" name="comboBoxGender">
           <property name="enabled">
            <bool>false</bool>
@@ -1109,14 +1093,14 @@
           </property>
          </widget>
         </item>
-        <item row="8" column="0">
+        <item row="9" column="0">
          <widget class="QLabel" name="labelEmail">
           <property name="text">
            <string>Email:</string>
           </property>
          </widget>
         </item>
-        <item row="8" column="1">
+        <item row="9" column="1">
          <widget class="QLineEdit" name="lineEditEmail">
           <property name="enabled">
            <bool>false</bool>
@@ -1130,16 +1114,19 @@
           <property name="placeholderText">
            <string>Customer's email address</string>
           </property>
+          <property name="clearButtonEnabled">
+           <bool>true</bool>
+          </property>
          </widget>
         </item>
-        <item row="9" column="0">
+        <item row="10" column="0">
          <widget class="QLabel" name="labelNotes">
           <property name="text">
            <string>Notes:</string>
           </property>
          </widget>
         </item>
-        <item row="9" column="1">
+        <item row="10" column="1">
          <widget class="VPlainTextEdit" name="plainTextEditNotes">
           <property name="enabled">
            <bool>false</bool>
@@ -1151,6 +1138,9 @@
            </sizepolicy>
           </property>
          </widget>
+        </item>
+        <item row="4" column="1">
+         <widget class="QPlainTextEdit" name="plainTextEditKnownMeasurementsDescription"/>
         </item>
        </layout>
       </widget>
@@ -1217,6 +1207,9 @@
     <addaction name="actionRestrictThirdDimension"/>
     <addaction name="actionDimensionLabels"/>
     <addaction name="actionDimensionCustomNames"/>
+    <addaction name="separator"/>
+    <addaction name="actionCreateKnownMeasurements"/>
+    <addaction name="actionEditCurrentKnownMeasurements"/>
    </widget>
    <addaction name="menuFile"/>
    <addaction name="menuMeasurements"/>
@@ -1718,6 +1711,19 @@
    </property>
    <property name="visible">
     <bool>false</bool>
+   </property>
+  </action>
+  <action name="actionCreateKnownMeasurements">
+   <property name="text">
+    <string>Create Known Measurements</string>
+   </property>
+  </action>
+  <action name="actionEditCurrentKnownMeasurements">
+   <property name="enabled">
+    <bool>false</bool>
+   </property>
+   <property name="text">
+    <string>Edit current Known Measurements</string>
    </property>
   </action>
  </widget>

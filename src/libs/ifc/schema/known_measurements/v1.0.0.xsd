@@ -30,7 +30,7 @@
         <xs:element name="measurements">
           <xs:complexType>
             <xs:sequence>
-              <xs:element name="m" maxOccurs="unbounded" minOccurs="0" maxOccurs="unbounded">
+              <xs:element name="m" minOccurs="0" maxOccurs="unbounded">
                 <xs:complexType>
                   <xs:simpleContent>
                     <xs:extension base="xs:string">
@@ -38,7 +38,7 @@
                       <xs:attribute type="xs:string" name="full_name" use="optional"/>
                       <xs:attribute type="shortName" name="name" use="required"/>
                       <xs:attribute type="xs:string" name="formula" use="optional"/>
-                      <xs:attribute type="uid" name="diagram" use="optional"/>
+                      <xs:attribute type="uuid" name="diagram" use="optional"/>
                       <xs:attribute name="specialUnits" type="xs:boolean" use="optional"/>
                       <xs:attribute name="group" type="xs:string" use="optional"/>
                     </xs:extension>
@@ -71,6 +71,11 @@
   <xs:simpleType name="contentType">
     <xs:restriction base="xs:string">
       <xs:pattern value="image/[-\w]+(\.[-\w]+)*([+][-\w]+)?"/>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="uuid">
+    <xs:restriction base="xs:string">
+      <xs:pattern value="|\{[0-9a-fA-F]{8}\-[0-9a-fA-F]{4}\-[0-9a-fA-F]{4}\-[0-9a-fA-F]{4}\-[0-9a-fA-F]{12}\}"/>
     </xs:restriction>
   </xs:simpleType>
 </xs:schema>

@@ -160,7 +160,9 @@ Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingsPatternTranslateFormula, ("patt
 Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingGeneralRecentFileList, ("recentFileList"_L1))                 // NOLINT
 Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingGeneralRestoreFileList, ("restoreFileList"_L1))               // NOLINT
 Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingGeneralGeometry, ("geometry"_L1))                             // NOLINT
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingGeneralKMGeometry, ("kmGeometry"_L1))                         // NOLINT
 Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingGeneralToolbarsState, ("toolbarsState"_L1))                   // NOLINT
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingGeneralKMToolbarsState, ("kmToolbarsState"_L1))               // NOLINT
 Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingConfigurationThemeMode, ("configuration/themeMode"_L1))       // NOLINT
 Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingPreferenceDialogSize, ("preferenceDialogSize"_L1))            // NOLINT
 // NOLINTNEXTLINE
@@ -705,6 +707,18 @@ void VCommonSettings::SetGeometry(const QByteArray &value)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+auto VCommonSettings::GetKMGeometry() const -> QByteArray
+{
+    return value(*settingGeneralKMGeometry).toByteArray();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VCommonSettings::SetKMGeometry(const QByteArray &value)
+{
+    setValue(*settingGeneralKMGeometry, value);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 auto VCommonSettings::GetToolbarsState() const -> QByteArray
 {
     return value(*settingGeneralToolbarsState).toByteArray();
@@ -714,6 +728,18 @@ auto VCommonSettings::GetToolbarsState() const -> QByteArray
 void VCommonSettings::SetToolbarsState(const QByteArray &value)
 {
     setValue(*settingGeneralToolbarsState, value);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+auto VCommonSettings::GetKMToolbarsState() const -> QByteArray
+{
+    return value(*settingGeneralKMToolbarsState).toByteArray();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VCommonSettings::SetKMToolbarsState(const QByteArray &value)
+{
+    setValue(*settingGeneralKMToolbarsState, value);
 }
 
 //---------------------------------------------------------------------------------------------------------------------

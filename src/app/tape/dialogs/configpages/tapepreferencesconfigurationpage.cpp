@@ -162,22 +162,22 @@ auto TapePreferencesConfigurationPage::Apply() -> QStringList
         settings->SetDontUseNativeDialog(ui->checkBoxDontUseNativeDialog->isChecked());
     }
 
-    if (m_langChanged || m_systemChanged)
+    if (m_systemChanged)
+    {
+        const auto id = ui->comboBoxKnownMeasurements->currentData().toUuid();
+        settings->SetKnownMeasurementsId(id);
+        m_systemChanged = false;
+    }
+
+    if (m_langChanged)
     {
         const auto locale = qvariant_cast<QString>(ui->langCombo->currentData());
         settings->SetLocale(locale);
         VGAnalytics::Instance()->SetGUILanguage(settings->GetLocale());
         m_langChanged = false;
 
-        const auto id = ui->comboBoxKnownMeasurements->currentData().toUuid();
-        settings->SetKnownMeasurementsId(id);
-        m_systemChanged = false;
-
         VAbstractApplication::VApp()->LoadTranslation(locale);
         QCoreApplication::processEvents(); // force to call changeEvent
-
-        // Part about measurments will not be updated automatically
-        MApplication::VApp()->RetranslateTables();
     }
 
     if (settings->IsAutomaticallyCheckUpdates() != ui->checkBoxAutomaticallyCheckUpdates->isChecked())

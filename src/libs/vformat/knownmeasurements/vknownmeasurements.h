@@ -67,7 +67,7 @@ public:
     auto Measurments() const -> QHash<QString, VKnownMeasurement>;
     auto OrderedMeasurments() const -> QMap<int, VKnownMeasurement>;
     auto OrderedGroupMeasurments(const QString &group) const -> QMap<int, VKnownMeasurement>;
-    auto Images() const -> QHash<QUuid, VPatternImage>;
+    auto Images() const -> QMap<QUuid, VPatternImage>;
     auto Groups() const -> QStringList;
 
     auto Measurement(const QString &name) const -> VKnownMeasurement;

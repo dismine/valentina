@@ -161,7 +161,7 @@ auto VKnownMeasurements::OrderedGroupMeasurments(const QString &group) const -> 
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-auto VKnownMeasurements::Images() const -> QHash<QUuid, VPatternImage>
+auto VKnownMeasurements::Images() const -> QMap<QUuid, VPatternImage>
 {
     return d->m_images;
 }

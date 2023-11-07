@@ -54,7 +54,7 @@ Q_GLOBAL_STATIC_WITH_ARGS(const QString, tagKnownMeasurements, ("known-measureme
 Q_GLOBAL_STATIC_WITH_ARGS(const QString, tagMeasurements, ("measurements"_L1))            // NOLINT
 Q_GLOBAL_STATIC_WITH_ARGS(const QString, tagMeasurement, ("m"_L1))                        // NOLINT
 Q_GLOBAL_STATIC_WITH_ARGS(const QString, tagDiagrams, ("diagrams"_L1))                    // NOLINT
-Q_GLOBAL_STATIC_WITH_ARGS(const QString, tagImage, ("tagImage"_L1))                       // NOLINT
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, tagImage, ("image"_L1))                          // NOLINT
 Q_GLOBAL_STATIC_WITH_ARGS(const QString, tagName, ("name"_L1))                            // NOLINT
 Q_GLOBAL_STATIC_WITH_ARGS(const QString, tagDescription, ("description"_L1))              // NOLINT
 Q_GLOBAL_STATIC_WITH_ARGS(const QString, tagInfo, ("info"_L1))                            // NOLINT
@@ -169,8 +169,10 @@ void VKnownMeasurementsDocument::RemoveMeasurement(const QString &name)
 //---------------------------------------------------------------------------------------------------------------------
 void VKnownMeasurementsDocument::RemoveImage(const QUuid &id)
 {
-    const QDomNodeList list = elementsByTagName(*tagMeasurements);
+    const QDomNodeList list = elementsByTagName(*tagDiagrams);
     list.at(0).removeChild(FindImage(id));
+
+    UpdateDiagramId(id, QUuid());
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -250,7 +252,7 @@ void VKnownMeasurementsDocument::MoveBottom(const QString &name)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QUuid VKnownMeasurementsDocument::GetUId() const
+auto VKnownMeasurementsDocument::GetUId() const -> QUuid
 {
     QDomNode root = documentElement();
     if (not root.isNull() && root.isElement())
@@ -258,7 +260,7 @@ QUuid VKnownMeasurementsDocument::GetUId() const
         const QDomElement rootElement = root.toElement();
         if (not rootElement.isNull())
         {
-            return QUuid(GetParametrEmptyString(rootElement, AttrKMVersion));
+            return QUuid(GetParametrEmptyString(rootElement, *attrUId));
         }
     }
     return {};
@@ -283,7 +285,7 @@ void VKnownMeasurementsDocument::SetUId(const QUuid &id)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QString VKnownMeasurementsDocument::Name() const
+auto VKnownMeasurementsDocument::Name() const -> QString
 {
     return UniqueTagText(*tagName, QString());
 }
@@ -295,7 +297,7 @@ void VKnownMeasurementsDocument::SetName(const QString &name)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QString VKnownMeasurementsDocument::Description() const
+auto VKnownMeasurementsDocument::Description() const -> QString
 {
     return UniqueTagText(*tagDescription, QString());
 }
@@ -307,7 +309,7 @@ void VKnownMeasurementsDocument::SetDescription(const QString &desc)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-bool VKnownMeasurementsDocument::IsReadOnly() const
+auto VKnownMeasurementsDocument::IsReadOnly() const -> bool
 {
     QDomNode root = documentElement();
     if (not root.isNull() && root.isElement())
@@ -487,7 +489,23 @@ void VKnownMeasurementsDocument::SetImageTitle(const QUuid &id, const QString &t
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QDomElement VKnownMeasurementsDocument::MakeEmptyMeasurement(const QString &name)
+void VKnownMeasurementsDocument::SetImageId(const QUuid &id, const QUuid &newId)
+{
+    QDomElement node = FindImage(id);
+    if (not node.isNull())
+    {
+        SetAttribute<QUuid>(node, *attrUId, newId);
+
+        UpdateDiagramId(id, newId);
+    }
+    else
+    {
+        qWarning() << tr("Can't find image by id '%1'").arg(id.toString());
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+auto VKnownMeasurementsDocument::MakeEmptyMeasurement(const QString &name) -> QDomElement
 {
     QDomElement element = createElement(*tagMeasurement);
     SetAttribute(element, *attrName, name);
@@ -524,7 +542,7 @@ auto VKnownMeasurementsDocument::FindM(const QString &name) const -> QDomElement
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QDomElement VKnownMeasurementsDocument::MakeEmptyImage(const VPatternImage &image)
+auto VKnownMeasurementsDocument::MakeEmptyImage(const VPatternImage &image) -> QDomElement
 {
     QDomElement element = createElement(*tagImage);
 
@@ -538,7 +556,7 @@ QDomElement VKnownMeasurementsDocument::MakeEmptyImage(const VPatternImage &imag
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QDomElement VKnownMeasurementsDocument::FindImage(const QUuid &id) const
+auto VKnownMeasurementsDocument::FindImage(const QUuid &id) const -> QDomElement
 {
     if (id.isNull())
     {
@@ -613,5 +631,25 @@ void VKnownMeasurementsDocument::ReadMeasurements(VKnownMeasurements &known) con
         m.group = GetParametrEmptyString(domElement, *attrGroup);
 
         known.AddMeasurement(m);
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VKnownMeasurementsDocument::UpdateDiagramId(const QUuid &oldId, const QUuid &newId)
+{
+    QDomNodeList list = elementsByTagName(*tagMeasurement);
+
+    for (int i = 0; i < list.size(); ++i)
+    {
+        QDomElement domElement = list.at(i).toElement();
+        if (domElement.isNull())
+        {
+            continue;
+        }
+
+        if (QUuid(GetParametrEmptyString(domElement, *attrDiagram)) == oldId)
+        {
+            SetAttribute(domElement, *attrDiagram, newId);
+        }
     }
 }

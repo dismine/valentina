@@ -209,5 +209,9 @@
         <file>icon/dark/16x16/remove-image.png</file>
         <file>icon/dark/16x16/insert-image@2x.png</file>
         <file>icon/dark/16x16/insert-image.png</file>
+        <file>icon/light/16x16/viewimage@2x.png</file>
+        <file>icon/light/16x16/viewimage.png</file>
+        <file>icon/dark/16x16/viewimage.png</file>
+        <file>icon/dark/16x16/viewimage@2x.png</file>
     </qresource>
 </RCC>

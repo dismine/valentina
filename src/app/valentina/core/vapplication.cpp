@@ -736,7 +736,7 @@ void VApplication::StartDetachedProcess(const QString &program, const QStringLis
     const QString workingDirectory = QFileInfo(program).absoluteDir().absolutePath();
     QProcess::startDetached(program, arguments, workingDirectory);
 #else
-    if (not program.endsWith(".app"))
+    if (not program.endsWith(".app"_L1))
     {
         const QString workingDirectory = QFileInfo(program).absoluteDir().absolutePath();
         QProcess::startDetached(program, arguments, workingDirectory);
@@ -746,11 +746,11 @@ void VApplication::StartDetachedProcess(const QString &program, const QStringLis
         QStringList openArguments{"-n", QStringLiteral("/Applications/%1").arg(program)};
         if (not arguments.isEmpty())
         {
-            openArguments.append("--args");
+            openArguments.append("--args"_L1);
             openArguments += arguments;
         }
 
-        QProcess::startDetached("open", openArguments);
+        QProcess::startDetached("open"_L1, openArguments);
     }
 #endif
 }

@@ -50,7 +50,7 @@ public:
     QString m_description{}; // NOLINT (misc-non-private-member-variables-in-classes)
     bool m_readOnly{false};  // NOLINT (misc-non-private-member-variables-in-classes)
 
-    QHash<QUuid, VPatternImage> m_images{};             // NOLINT (misc-non-private-member-variables-in-classes)
+    QMap<QUuid, VPatternImage> m_images{};              // NOLINT (misc-non-private-member-variables-in-classes)
     QHash<QString, VKnownMeasurement> m_measurements{}; // NOLINT (misc-non-private-member-variables-in-classes)
 
 private:

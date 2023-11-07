@@ -242,7 +242,7 @@ void VAbstractMainWindow::UpdateRecentFileActions()
 
     for (int i = 0; i < numRecentFiles; ++i)
     {
-        QString recent = recentFiles.at(i);
+        const QString& recent = recentFiles.at(i);
         if (not recent.isEmpty())
         {
             const QString text = QStringLiteral("&%1. %2").arg(i + 1).arg(recentFiles.at(i));

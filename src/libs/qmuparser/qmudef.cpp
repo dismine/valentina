@@ -26,28 +26,28 @@
 
 enum State
 {
-    Init     = 0,
-    Sign     = 1,
+    Init = 0,
+    Sign = 1,
     Thousand = 2,
     Mantissa = 3,
-    Dot	     = 4,
+    Dot = 4,
     Abscissa = 5,
-    ExpMark	 = 6,
-    ExpSign	 = 7,
+    ExpMark = 6,
+    ExpSign = 7,
     Exponent = 8,
-    Done	 = 9
+    Done = 9
 };
 
 enum InputToken
 {
-    InputSign       = 1,
-    InputThousand   = 2,
-    InputDigit      = 3,
-    InputDot        = 4,
-    InputExp        = 5
+    InputSign = 1,
+    InputThousand = 2,
+    InputDigit = 3,
+    InputDot = 4,
+    InputExp = 5
 };
 
-static const QChar QmuEOF = QChar(static_cast<ushort>(0xffff)); //guaranteed not to be a character.
+static const QChar QmuEOF = QChar(static_cast<ushort>(0xffff)); // guaranteed not to be a character.
 
 //---------------------------------------------------------------------------------------------------------------------
 static auto GetChar(const QString &formula, int &index) -> QChar
@@ -67,8 +67,7 @@ static auto EatWhiteSpace(const QString &formula, int &index) -> QChar
     do
     {
         c = GetChar(formula, index);
-    }
-    while ( c != QmuEOF && c.isSpace() );
+    } while (c != QmuEOF && c.isSpace());
 
     return c;
 }
@@ -181,23 +180,8 @@ auto ReadVal(const QString &formula, qreal &val, const QLocale &locale, const QC
     Q_UNUSED(decimalPoint)
     Q_UNUSED(groupSeparator)
 
-    QSet<QChar> reserved
-    {
-                positiveSign,
-                negativeSign,
-                sign0,
-                sign1,
-                sign2,
-                sign3,
-                sign4,
-                sign5,
-                sign6,
-                sign7,
-                sign8,
-                sign9,
-                expUpper,
-                expLower
-    };
+    QSet<QChar> reserved{positiveSign, negativeSign, sign0, sign1, sign2, sign3,    sign4,
+                         sign5,        sign6,        sign7, sign8, sign9, expUpper, expLower};
 
     if (reserved.contains(decimal) || reserved.contains(thousand))
     {
@@ -206,29 +190,84 @@ auto ReadVal(const QString &formula, qreal &val, const QLocale &locale, const QC
     }
 
     // row - current state, column - new state
-    static uchar table[9][6] =
-    {
+    static uchar table[9][6] = {
         /*    None	     InputSign     InputThousand      InputDigit     InputDot      InputExp */
-        { 0,	       State::Sign,    0,               State::Mantissa, State::Dot,  0,	         }, // Init
-        { 0,	       0,	           0,               State::Mantissa, State::Dot,  0,	         }, // Sign
-        { 0,	       0,	           0,               State::Mantissa, 0,	          0,	         }, // Thousand
-        { State::Done, State::Done,    State::Thousand, State::Mantissa, State::Dot,  State::ExpMark,}, // Mantissa
-        { 0,	       0,	           0,               State::Abscissa, 0,	          0,	         }, // Dot
-        { State::Done, State::Done,    0,               State::Abscissa, 0,           State::ExpMark,}, // Abscissa
-        { 0,	       State::ExpSign, 0,               State::Exponent, 0,	          0,	         }, // ExpMark
-        { 0,	       0,	           0,               State::Exponent, 0,	          0,	         }, // ExpSign
-        { State::Done, 0,              0,               State::Exponent, 0,           State::Done	 }  // Exponent
+        {
+            0,
+            State::Sign,
+            0,
+            State::Mantissa,
+            State::Dot,
+            0,
+        }, // Init
+        {
+            0,
+            0,
+            0,
+            State::Mantissa,
+            State::Dot,
+            0,
+        }, // Sign
+        {
+            0,
+            0,
+            0,
+            State::Mantissa,
+            0,
+            0,
+        }, // Thousand
+        {
+            State::Done,
+            State::Done,
+            State::Thousand,
+            State::Mantissa,
+            State::Dot,
+            State::ExpMark,
+        }, // Mantissa
+        {
+            0,
+            0,
+            0,
+            State::Abscissa,
+            0,
+            0,
+        }, // Dot
+        {
+            State::Done,
+            State::Done,
+            0,
+            State::Abscissa,
+            0,
+            State::ExpMark,
+        }, // Abscissa
+        {
+            0,
+            State::ExpSign,
+            0,
+            State::Exponent,
+            0,
+            0,
+        }, // ExpMark
+        {
+            0,
+            0,
+            0,
+            State::Exponent,
+            0,
+            0,
+        },                                                   // ExpSign
+        {State::Done, 0, 0, State::Exponent, 0, State::Done} // Exponent
     };
 
-    int state = State::Init;	// parse state
+    int state = State::Init; // parse state
     QString buf;
 
     int index = 0; // start position
     QChar c = EatWhiteSpace(formula, index);
 
-    while ( true )
+    while (true)
     {
-        const int input = CheckChar(c, locale, decimal, thousand);// input token
+        const int input = CheckChar(c, locale, decimal, thousand); // input token
 
         state = table[state][input];
 
@@ -246,7 +285,7 @@ auto ReadVal(const QString &formula, qreal &val, const QLocale &locale, const QC
             if (locale != cLocale && (cDecimal != decimal || cThousand != thousand))
             {
                 if (decimal == cThousand)
-                {// Handle reverse to C locale case: thousand '.', decimal ','
+                { // Handle reverse to C locale case: thousand '.', decimal ','
                     const QChar tmpThousand = QLatin1Char('@');
                     buf.replace(thousand, tmpThousand);
                     buf.replace(decimal, cDecimal);
@@ -279,21 +318,21 @@ auto ReadVal(const QString &formula, qreal &val, const QLocale &locale, const QC
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-auto NameRegExp() -> QString
+auto NameRegExp(VariableRegex type) -> QString
 {
     static QString regex;
 
     if (regex.isEmpty())
     {
         const QList<QLocale> allLocales =
-                QLocale::matchingLocales(QLocale::AnyLanguage, QLocale::AnyScript, QLocale::AnyCountry);
+            QLocale::matchingLocales(QLocale::AnyLanguage, QLocale::AnyScript, QLocale::AnyCountry);
 
         QString positiveSigns;
         QString negativeSigns;
         QString decimalPoints;
         QString groupSeparators;
 
-        for(const auto &locale : allLocales)
+        for (const auto &locale : allLocales)
         {
             if (not positiveSigns.contains(LocalePositiveSign(locale)))
             {
@@ -319,15 +358,28 @@ auto NameRegExp() -> QString
         negativeSigns.replace('-', QLatin1String("\\-"));
         groupSeparators.remove('\'');
 
-        //Same regexp in pattern.xsd shema file. Don't forget to synchronize.
-        // \p{Nd} - \p{Decimal_Digit_Number}
-        // \p{Zs} - \p{Space_Separator}
-        // Here we use permanent start of string and end of string anchors \A and \z to match whole pattern as one
-        // string. In some cases, a user may pass multiline or line that ends with a new line. To cover case with a new
-        // line at the end of string use /z anchor.
-        regex = QString("\\A([^\\p{Nd}\\p{Zs}*\\/&|!<>^\\n\\()%1%2%3%4=?:;'\"]){1,1}"
-                        "([^\\p{Zs}*\\/&|!<>^\\n\\()%1%2%3%4=?:;\"]){0,}\\z")
-                .arg(negativeSigns, positiveSigns, decimalPoints, groupSeparators);
+        // Same regexp in pattern.xsd shema file. Don't forget to synchronize.
+        //  \p{Nd} - \p{Decimal_Digit_Number}
+        //  \p{Zs} - \p{Space_Separator}
+        //  Here we use permanent start of string and end of string anchors \A and \z to match whole pattern as one
+        //  string. In some cases, a user may pass multiline or line that ends with a new line. To cover case with a new
+        //  line at the end of string use /z anchor.
+
+        switch (type)
+        {
+            case VariableRegex::Variable:
+                regex = QString("\\A([^\\p{Nd}\\p{Zs}*\\/&|!<>^\\n\\()%1%2%3%4=?:;'\"]){1,1}"
+                                "([^\\p{Zs}*\\/&|!<>^\\n\\()%1%2%3%4=?:;\"]){0,}\\z")
+                            .arg(negativeSigns, positiveSigns, decimalPoints, groupSeparators);
+                break;
+            case VariableRegex::KnownMeasurement:
+                regex = QString("\\A([^@\\p{Nd}\\p{Zs}*\\/&|!<>^\\n\\()%1%2%3%4=?:;'\"]){1,1}"
+                                "([^\\p{Zs}*\\/&|!<>^\\n\\()%1%2%3%4=?:;\"]){0,}\\z")
+                            .arg(negativeSigns, positiveSigns, decimalPoints, groupSeparators);
+                break;
+            default:
+                break;
+        }
     }
 
     return regex;
@@ -356,21 +408,11 @@ auto FindFirstNotOf(const QString &string, const QString &chars, qmusizetype pos
 auto SupportedLocale(const QLocale &locale) -> bool
 {
 #if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
-    return locale.positiveSign().size() == 1 &&
-                locale.negativeSign().size() == 1 &&
-                locale.toString(0).size() == 1 &&
-                locale.toString(1).size() == 1 &&
-                locale.toString(2).size() == 1 &&
-                locale.toString(3).size() == 1 &&
-                locale.toString(4).size() == 1 &&
-                locale.toString(5).size() == 1 &&
-                locale.toString(6).size() == 1 &&
-                locale.toString(7).size() == 1 &&
-                locale.toString(8).size() == 1 &&
-                locale.toString(9).size() == 1 &&
-                locale.exponential().size() == 1 &&
-                locale.decimalPoint().size() == 1 &&
-                locale.groupSeparator().size() == 1;
+    return locale.positiveSign().size() == 1 && locale.negativeSign().size() == 1 && locale.toString(0).size() == 1 &&
+           locale.toString(1).size() == 1 && locale.toString(2).size() == 1 && locale.toString(3).size() == 1 &&
+           locale.toString(4).size() == 1 && locale.toString(5).size() == 1 && locale.toString(6).size() == 1 &&
+           locale.toString(7).size() == 1 && locale.toString(8).size() == 1 && locale.toString(9).size() == 1 &&
+           locale.exponential().size() == 1 && locale.decimalPoint().size() == 1 && locale.groupSeparator().size() == 1;
 #else
     Q_UNUSED(locale)
     return true;

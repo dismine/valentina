@@ -152,8 +152,14 @@ public:
     auto GetGeometry() const -> QByteArray;
     void SetGeometry(const QByteArray &value);
 
+    auto GetKMGeometry() const -> QByteArray;
+    void SetKMGeometry(const QByteArray &value);
+
     auto GetToolbarsState() const -> QByteArray;
     void SetToolbarsState(const QByteArray &value);
+
+    auto GetKMToolbarsState() const -> QByteArray;
+    void SetKMToolbarsState(const QByteArray &value);
 
     auto GetPreferenceDialogSize() const -> QSize;
     void SetPreferenceDialogSize(const QSize &sz);

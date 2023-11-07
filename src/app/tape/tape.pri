@@ -18,7 +18,8 @@ SOURCES  += \
     $$PWD/dialogs/configpages/tapepreferencespathpage.cpp \
     $$PWD/vtapesettings.cpp \
     $$PWD/dialogs/dialogsetupmultisize.cpp \
-    $$PWD/vtapeshortcutmanager.cpp
+    $$PWD/vtapeshortcutmanager.cpp \
+    $$PWD/tkmmainwindow.cpp
 
 *msvc*:SOURCES += $$PWD/stable.cpp
 
@@ -40,7 +41,8 @@ HEADERS  += \
     $$PWD/dialogs/configpages/tapepreferencespathpage.h \
     $$PWD/vtapesettings.h \
     $$PWD/dialogs/dialogsetupmultisize.h \
-    $$PWD/vtapeshortcutmanager.h
+    $$PWD/vtapeshortcutmanager.h \
+    $$PWD/tkmmainwindow.h
 
 FORMS    += \
     $$PWD/dialogs/dialogdimensioncustomnames.ui \
@@ -54,4 +56,6 @@ FORMS    += \
     $$PWD/dialogs/dialogtapepreferences.ui \
     $$PWD/dialogs/configpages/tapepreferencesconfigurationpage.ui \
     $$PWD/dialogs/configpages/tapepreferencespathpage.ui \
-    $$PWD/dialogs/dialogsetupmultisize.ui
+    $$PWD/dialogs/dialogsetupmultisize.ui \
+    $$PWD/tkmmainwindow.ui
+

@@ -82,6 +82,11 @@ auto VKnownMeasurementsDatabase::AllKnownMeasurements() const -> QHash<QUuid, VK
 //---------------------------------------------------------------------------------------------------------------------
 auto VKnownMeasurementsDatabase::KnownMeasurements(const QUuid &id) const -> VKnownMeasurements
 {
+    if (id.isNull())
+    {
+        return {};
+    }
+
     if (m_measurementsCache.contains(id))
     {
         return {*m_measurementsCache.object(id)};

@@ -53,6 +53,7 @@ public:
 
     auto GetPixmap() const -> QPixmap;
     auto GetPixmap(int width, int height) const -> QPixmap;
+    auto GetPixmap(const QSize &size) const -> QPixmap;
 
     auto ErrorString() const -> const QString &;
 

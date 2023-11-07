@@ -57,17 +57,35 @@ public:
     auto GetTapeSearchHistory() const -> QStringList;
     void SetTapeSearchHistory(const QStringList &history);
 
+    auto GetKMSearchHistory() const -> QStringList;
+    void SetKMSearchHistory(const QStringList &history);
+
     auto GetTapeSearchOptionUseUnicodeProperties() const -> bool;
     void SetTapeSearchOptionUseUnicodeProperties(bool value);
+
+    auto GetKMSearchOptionUseUnicodeProperties() const -> bool;
+    void SetKMSearchOptionUseUnicodeProperties(bool value);
 
     auto GetTapeSearchOptionWholeWord() const -> bool;
     void SetTapeSearchOptionWholeWord(bool value);
 
+    auto GetKMSearchOptionWholeWord() const -> bool;
+    void SetKMSearchOptionWholeWord(bool value);
+
     auto GetTapeSearchOptionRegexp() const -> bool;
     void SetTapeSearchOptionRegexp(bool value);
 
+    auto GetKMSearchOptionRegexp() const -> bool;
+    void SetKMSearchOptionRegexp(bool value);
+
     auto GetTapeSearchOptionMatchCase() const -> bool;
     void SetTapeSearchOptionMatchCase(bool value);
+
+    auto GetKMSearchOptionMatchCase() const -> bool;
+    void SetKMSearchOptionMatchCase(bool value);
+
+    auto GetRecentKMFileList() const -> QStringList;
+    void SetRecentKMFileList(const QStringList &value);
 
 private:
     Q_DISABLE_COPY_MOVE(VTapeSettings) // NOLINT

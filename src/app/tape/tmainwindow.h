@@ -49,6 +49,7 @@ class QLabel;
 class QxtCsvModel;
 class VMeasurement;
 class QAbstractButton;
+class QUuid;
 
 class TMainWindow : public VAbstractMainWindow
 {
@@ -60,8 +61,6 @@ public:
 
     auto CurrentFile() const -> QString;
 
-    void RetranslateTable();
-
     void SetDimensionABase(qreal base);
     void SetDimensionBBase(qreal base);
     void SetDimensionCBase(qreal base);
@@ -70,6 +69,11 @@ public:
     auto LoadFile(const QString &path) -> bool;
 
     void UpdateWindowTitle();
+
+    void SyncKnownMeasurements();
+
+public slots:
+    void ToolBarStyles();
 
 protected:
     void closeEvent(QCloseEvent *event) override;
@@ -84,8 +88,6 @@ private slots:
     void OpenMultisize();
     void OpenTemplate();
     void CreateFromExisting();
-    void Preferences();
-    void ToolBarStyles();
 
     bool FileSave();   // NOLINT(modernize-use-trailing-return-type)
     bool FileSaveAs(); // NOLINT(modernize-use-trailing-return-type)
@@ -176,7 +178,7 @@ private:
     QComboBox *m_gradationDimensionB{nullptr};
     QComboBox *m_gradationDimensionC{nullptr};
     QComboBox *m_comboBoxUnits{nullptr};
-    int m_formulaBaseHeight;
+    int m_formulaBaseHeight{0};
     QSharedPointer<VLockGuard<char>> m_lock{nullptr};
     QSharedPointer<VTableSearch> m_search{};
     QLabel *m_labelGradationDimensionA{nullptr};
@@ -302,6 +304,8 @@ private:
 
     void InitKnownMeasurements(QComboBox *combo);
     void InitKnownMeasurementsDescription();
+
+    static auto KnownMeasurementsRegistred(const QUuid &id) -> bool;
 };
 
 #endif // TMAINWINDOW_H

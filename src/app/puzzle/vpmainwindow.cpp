@@ -1636,7 +1636,7 @@ void VPMainWindow::UpdateWindowTitle()
     QString showName;
     if (not curFile.isEmpty())
     {
-        showName = StrippedName(curFile);
+        showName = QFileInfo(curFile).fileName();
     }
     else
     {

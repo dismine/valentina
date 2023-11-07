@@ -41,7 +41,9 @@
 #include "../vmisc/qt_dispatch/qt_dispatch.h"
 #include "../vmisc/theme/vtheme.h"
 #include "../vmisc/vsysexits.h"
-#include "qtpreprocessorsupport.h"
+#include "dialogs/dialogtapepreferences.h"
+#include "qfuturewatcher.h"
+#include "tkmmainwindow.h"
 #include "tmainwindow.h"
 #include "version.h"
 #include "vtapeshortcutmanager.h"
@@ -105,6 +107,9 @@ Q_GLOBAL_STATIC_WITH_ARGS(const QString, SINGLE_OPTION_DIMENSION_C, ('c'_L1))   
 
 Q_GLOBAL_STATIC_WITH_ARGS(const QString, LONG_OPTION_UNITS, ("units"_L1)) // NOLINT
 Q_GLOBAL_STATIC_WITH_ARGS(const QString, SINGLE_OPTION_UNITS, ('u'_L1))   // NOLINT
+
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, LONG_OPTION_KNOWN, ("known"_L1)) // NOLINT
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, SINGLE_OPTION_KNOWN, ('k'_L1))   // NOLINT
 
 Q_GLOBAL_STATIC_WITH_ARGS(const QString, LONG_OPTION_TEST, ("test"_L1)) // NOLINT
 
@@ -308,7 +313,8 @@ inline void noisyFailureMsgHandler(QtMsgType type, const QMessageLogContext &con
 
 //---------------------------------------------------------------------------------------------------------------------
 MApplication::MApplication(int &argc, char **argv)
-  : VAbstractApplication(argc, argv)
+  : VAbstractApplication(argc, argv),
+    m_knownMeasurementsRepopulateWatcher(new QFutureWatcher<void>(this))
 {
     setApplicationDisplayName(QStringLiteral(VER_PRODUCTNAME_STR));
     setApplicationName(QStringLiteral(VER_INTERNALNAME_STR));
@@ -338,6 +344,7 @@ MApplication::~MApplication()
     }
 
     qDeleteAll(m_mainWindows);
+    qDeleteAll(m_kmMainWindows);
 
     delete m_trVars;
     if (not m_dataBase.isNull())
@@ -440,20 +447,20 @@ auto MApplication::IsAppInGUIMode() const -> bool
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-auto MApplication::MainWindow() -> TMainWindow *
+auto MApplication::MainTapeWindow() -> TMainWindow *
 {
-    Clean();
+    CleanTapeWindows();
     if (m_mainWindows.isEmpty())
     {
-        NewMainWindow();
+        NewMainTapeWindow();
     }
-    return m_mainWindows[0];
+    return m_mainWindows.first();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-auto MApplication::MainWindows() -> QList<TMainWindow *>
+auto MApplication::MainTapeWindows() -> QList<TMainWindow *>
 {
-    Clean();
+    CleanTapeWindows();
     QList<TMainWindow *> list;
     list.reserve(m_mainWindows.size());
     for (auto &w : m_mainWindows)
@@ -539,7 +546,7 @@ auto MApplication::event(QEvent *e) -> bool
             const QString macFileOpen = fileOpenEvent->file();
             if (not macFileOpen.isEmpty())
             {
-                TMainWindow *mw = MainWindow();
+                TMainWindow *mw = MainTapeWindow();
                 if (mw)
                 {
                     mw->LoadFile(macFileOpen); // open file in existing window
@@ -592,16 +599,6 @@ auto MApplication::TapeSettings() -> VTapeSettings *
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void MApplication::RetranslateTables()
-{
-    const QList<TMainWindow *> list = MainWindows();
-    for (auto *w : list)
-    {
-        w->RetranslateTable();
-    }
-}
-
-//---------------------------------------------------------------------------------------------------------------------
 void MApplication::ParseCommandLine(const SocketConnection &connection, const QStringList &arguments)
 {
     QCommandLineParser parser;
@@ -614,6 +611,7 @@ void MApplication::ParseCommandLine(const SocketConnection &connection, const QS
     parser.process(arguments);
 
     m_testMode = parser.isSet(*LONG_OPTION_TEST);
+    m_knownMeasurementsMode = parser.isSet(*LONG_OPTION_KNOWN);
 
     if (not m_testMode && connection == SocketConnection::Client)
     {
@@ -675,6 +673,52 @@ auto MApplication::KnownMeasurementsDatabase() -> VKnownMeasurementsDatabase *
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+void MApplication::Preferences(QWidget *parent)
+{
+    // Calling constructor of the dialog take some time. Because of this user have time to call the dialog twice.
+    static QPointer<DialogTapePreferences> guard; // Prevent any second run
+    if (guard.isNull())
+    {
+        QGuiApplication::setOverrideCursor(QCursor(Qt::WaitCursor));
+        auto *preferences = new DialogTapePreferences(parent);
+        // QScopedPointer needs to be sure any exception will never block guard
+        QScopedPointer<DialogTapePreferences> dlg(preferences);
+        guard = preferences;
+        // Must be first
+
+        for (const auto &w : m_mainWindows)
+        {
+            if (!w.isNull())
+            {
+                connect(dlg.data(), &DialogTapePreferences::UpdateProperties, w, &TMainWindow::WindowsLocale,
+                        Qt::QueuedConnection);
+                connect(dlg.data(), &DialogTapePreferences::UpdateProperties, w, &TMainWindow::ToolBarStyles,
+                        Qt::QueuedConnection);
+            }
+        }
+
+        for (const auto &w : m_kmMainWindows)
+        {
+            if (!w.isNull())
+            {
+                connect(dlg.data(), &DialogTapePreferences::UpdateProperties, w, &TKMMainWindow::WindowsLocale,
+                        Qt::QueuedConnection);
+                connect(dlg.data(), &DialogTapePreferences::UpdateProperties, w, &TKMMainWindow::ToolBarStyles,
+                        Qt::QueuedConnection);
+            }
+        }
+
+        QGuiApplication::restoreOverrideCursor();
+        dlg->exec();
+    }
+    else
+    {
+        guard->raise();
+        guard->activateWindow();
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 void MApplication::RestartKnownMeasurementsDatabaseWatcher()
 {
     if (m_knownMeasurementsDatabase != nullptr)
@@ -687,7 +731,7 @@ void MApplication::RestartKnownMeasurementsDatabaseWatcher()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-auto MApplication::NewMainWindow() -> TMainWindow *
+auto MApplication::NewMainTapeWindow() -> TMainWindow *
 {
     auto *tape = new TMainWindow();
     m_mainWindows.prepend(tape);
@@ -697,6 +741,43 @@ auto MApplication::NewMainWindow() -> TMainWindow *
         tape->UpdateWindowTitle();
     }
     return tape;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+auto MApplication::MainKMWindow() -> TKMMainWindow *
+{
+    CleanKMWindows();
+    if (m_kmMainWindows.isEmpty())
+    {
+        NewMainKMWindow();
+    }
+    return m_kmMainWindows.first();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+auto MApplication::MainKMWindows() -> QList<TKMMainWindow *>
+{
+    CleanKMWindows();
+    QList<TKMMainWindow *> list;
+    list.reserve(m_kmMainWindows.size());
+    for (auto &w : m_kmMainWindows)
+    {
+        list.append(w);
+    }
+    return list;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+auto MApplication::NewMainKMWindow() -> TKMMainWindow *
+{
+    auto *known = new TKMMainWindow();
+    m_kmMainWindows.prepend(known);
+    if (not MApplication::VApp()->IsTestMode())
+    {
+        known->show();
+        known->UpdateWindowTitle();
+    }
+    return known;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -730,8 +811,8 @@ void MApplication::NewLocalSocketConnection()
         ParseCommandLine(SocketConnection::Server, arg.split(QStringLiteral(";;")));
     }
     delete socket;
-    MainWindow()->raise();
-    MainWindow()->activateWindow();
+    MainTapeWindow()->raise();
+    MainTapeWindow()->activateWindow();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -740,8 +821,10 @@ void MApplication::RepopulateMeasurementsDatabase(const QString &path)
     Q_UNUSED(path)
     if (m_knownMeasurementsDatabase != nullptr)
     {
-        QFuture<void> future =
-            QtConcurrent::run([this]() { m_knownMeasurementsDatabase->PopulateMeasurementsDatabase(); });
+        m_knownMeasurementsRepopulateWatcher->setFuture(
+            QtConcurrent::run([this]() { m_knownMeasurementsDatabase->PopulateMeasurementsDatabase(); }));
+        QObject::connect(m_knownMeasurementsRepopulateWatcher, &QFutureWatcher<void>::finished, this,
+                         &MApplication::SyncKnownMeasurements);
     }
 }
 
@@ -759,7 +842,19 @@ void MApplication::KnownMeasurementsPathChanged(const QString &oldPath, const QS
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void MApplication::Clean()
+void MApplication::SyncKnownMeasurements()
+{
+    for (const auto &w : m_mainWindows)
+    {
+        if (!w.isNull())
+        {
+            w->SyncKnownMeasurements();
+        }
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void MApplication::CleanTapeWindows()
 {
     // cleanup any deleted main windows first
     for (vsizetype i = m_mainWindows.count() - 1; i >= 0; --i)
@@ -767,6 +862,19 @@ void MApplication::Clean()
         if (m_mainWindows.at(i).isNull())
         {
             m_mainWindows.removeAt(i);
+        }
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void MApplication::CleanKMWindows()
+{
+    // cleanup any deleted main windows first
+    for (vsizetype i = m_kmMainWindows.count() - 1; i >= 0; --i)
+    {
+        if (m_kmMainWindows.at(i).isNull())
+        {
+            m_kmMainWindows.removeAt(i);
         }
     }
 }
@@ -792,6 +900,8 @@ void MApplication::InitParserOptions(QCommandLineParser &parser)
         {{*SINGLE_OPTION_UNITS, *LONG_OPTION_UNITS},
          tr("Set pattern file units: cm, mm, inch."),
          tr("The pattern units")},
+
+        {{*SINGLE_OPTION_KNOWN, *LONG_OPTION_KNOWN}, tr("Activate known measurements mode.")},
 
         {*LONG_OPTION_TEST,
          tr("Use for unit testing. Run the program and open a file without showing the main window.")},
@@ -840,6 +950,19 @@ auto MApplication::StartWithFiles(QCommandLineParser &parser) -> bool
         parser.showHelp(V_EX_USAGE);
     }
 
+    if (!m_knownMeasurementsMode)
+    {
+        return StartWithMeasurementFiles(parser);
+    }
+
+    return StartWithKnownMeasurementFiles(parser);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+auto MApplication::StartWithMeasurementFiles(QCommandLineParser &parser) -> bool
+{
+    const QStringList args = parser.positionalArguments();
+
     bool flagDimensionA = false;
     bool flagDimensionB = false;
     bool flagDimensionC = false;
@@ -855,41 +978,57 @@ auto MApplication::StartWithFiles(QCommandLineParser &parser) -> bool
     ParseDimensionCOption(parser, dimensionCValue, flagDimensionC);
     ParseUnitsOption(parser, unit, flagUnits);
 
-    for (const auto &arg : args)
-    {
-        NewMainWindow();
-        if (not MainWindow()->LoadFile(arg))
-        {
-            if (m_testMode)
-            {
-                return false; // process only one input file
-            }
-            delete MainWindow();
-            continue;
-        }
+    return std::all_of(args.begin(), args.end(),
+                       [&](const auto &arg)
+                       {
+                           NewMainTapeWindow();
+                           if (not MainTapeWindow()->LoadFile(arg))
+                           {
+                               delete MainTapeWindow();
+                               return !m_testMode;
+                           }
 
-        if (flagDimensionA)
-        {
-            MainWindow()->SetDimensionABase(dimensionAValue);
-        }
+                           if (flagDimensionA)
+                           {
+                               MainTapeWindow()->SetDimensionABase(dimensionAValue);
+                           }
 
-        if (flagDimensionB)
-        {
-            MainWindow()->SetDimensionBBase(dimensionBValue);
-        }
+                           if (flagDimensionB)
+                           {
+                               MainTapeWindow()->SetDimensionBBase(dimensionBValue);
+                           }
 
-        if (flagDimensionC)
-        {
-            MainWindow()->SetDimensionCBase(dimensionCValue);
-        }
+                           if (flagDimensionC)
+                           {
+                               MainTapeWindow()->SetDimensionCBase(dimensionCValue);
+                           }
 
-        if (flagUnits)
-        {
-            MainWindow()->SetPUnit(unit);
-        }
-    }
+                           if (flagUnits)
+                           {
+                               MainTapeWindow()->SetPUnit(unit);
+                           }
 
-    return true;
+                           return true;
+                       });
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+auto MApplication::StartWithKnownMeasurementFiles(QCommandLineParser &parser) -> bool
+{
+    const QStringList args = parser.positionalArguments();
+
+    return std::all_of(args.begin(), args.end(),
+                       [&](const auto &arg)
+                       {
+                           NewMainKMWindow();
+                           if (not MainKMWindow()->LoadFile(arg))
+                           {
+                               delete MainKMWindow();
+                               return !m_testMode;
+                           }
+
+                           return true;
+                       });
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -897,7 +1036,14 @@ auto MApplication::SingleStart(QCommandLineParser &parser) -> bool
 {
     if (not m_testMode)
     {
-        NewMainWindow();
+        if (!m_knownMeasurementsMode)
+        {
+            NewMainTapeWindow();
+        }
+        else
+        {
+            NewMainKMWindow();
+        }
     }
     else
     {

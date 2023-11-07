@@ -587,7 +587,7 @@ auto WatermarkWindow::GetWatermarkFileName() -> QString
     QString shownName = tr("untitled.vwm");
     if (not m_curFile.isEmpty())
     {
-        shownName = StrippedName(m_curFile);
+        shownName = QFileInfo(m_curFile).fileName();
     }
     shownName += "[*]"_L1;
     return shownName;

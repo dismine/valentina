@@ -203,7 +203,26 @@ void DialogEditWrongFormula::ValChanged(int row)
         if (ui->radioButtonStandardTable->isChecked())
         {
             const QSharedPointer<VMeasurement> stable = m_data->GetVariable<VMeasurement>(name);
-            SetDescription(item->text(), *stable->GetValue(), stable->IsSpecialUnits(), stable->GetGuiText());
+
+            QString description;
+
+            if (!stable->IsCustom())
+            {
+                if (VKnownMeasurementsDatabase *db = VAbstractApplication::VApp()->KnownMeasurementsDatabase())
+                {
+                    VKnownMeasurements known = db->KnownMeasurements(stable->GetKnownMeasurementsId());
+                    if (known.IsValid())
+                    {
+                        description = known.Measurement(stable->GetName()).description;
+                    }
+                }
+            }
+            else
+            {
+                description = stable->GetDescription();
+            }
+
+            SetDescription(item->text(), *stable->GetValue(), stable->IsSpecialUnits(), description);
         }
         else if (ui->radioButtonIncrements->isChecked() || ui->radioButtonPC->isChecked())
         {
@@ -716,7 +735,7 @@ void DialogEditWrongFormula::ShowMeasurements(const QList<QSharedPointer<VMeasur
                     VKnownMeasurements known = db->KnownMeasurements(var->GetKnownMeasurementsId());
                     if (known.IsValid())
                     {
-                        itemFullName->setText(known.Measurement(var->GetName()).description);
+                        itemFullName->setText(known.Measurement(var->GetName()).fullName);
                     }
                 }
             }

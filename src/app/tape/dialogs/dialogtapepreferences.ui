@@ -37,7 +37,7 @@
        <property name="iconSize">
         <size>
          <width>96</width>
-         <height>84</height>
+         <height>96</height>
         </size>
        </property>
        <property name="textElideMode">

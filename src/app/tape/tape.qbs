@@ -52,6 +52,9 @@ VToolApp {
 
     files: [
         "main.cpp",
+        "tkmmainwindow.cpp",
+        "tkmmainwindow.h",
+        "tkmmainwindow.ui",
         "tmainwindow.cpp",
         "mapplication.cpp",
         "vlitepattern.cpp",

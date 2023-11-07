@@ -36,6 +36,7 @@
 
 class VKnownMeasurements;
 class VPatternImage;
+class QUuid;
 
 class VKnownMeasurementsDocument : public VDomDocument
 {
@@ -83,6 +84,7 @@ public:
 
     void SetImageContent(const QUuid &id, const VPatternImage &image);
     void SetImageTitle(const QUuid &id, const QString &text);
+    void SetImageId(const QUuid &id, const QUuid &newId);
 
 private:
     Q_DISABLE_COPY_MOVE(VKnownMeasurementsDocument) // NOLINT
@@ -94,6 +96,8 @@ private:
 
     void ReadImages(VKnownMeasurements &known) const;
     void ReadMeasurements(VKnownMeasurements &known) const;
+
+    void UpdateDiagramId(const QUuid &oldId, const QUuid &newId);
 };
 
 #endif // VKNOWNMEASUREMENTSDOCUMENT_H

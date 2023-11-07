@@ -2165,33 +2165,33 @@ void MainWindow::ShowMeasurements()
 
         QStringList arguments;
         arguments.append(absoluteMPath);
-        arguments.append(QStringLiteral("-u"));
+        arguments.append("-u"_L1);
         arguments.append(UnitsToStr(VAbstractValApplication::VApp()->patternUnits()));
 
         if (VAbstractValApplication::VApp()->GetMeasurementsType() == MeasurementsType::Multisize)
         {
             if (m_currentDimensionA > 0)
             {
-                arguments.append(QStringLiteral("-a"));
+                arguments.append("-a"_L1);
                 arguments.append(QString::number(m_currentDimensionA));
             }
 
             if (m_currentDimensionB > 0)
             {
-                arguments.append(QStringLiteral("-b"));
+                arguments.append("-b"_L1);
                 arguments.append(QString::number(m_currentDimensionB));
             }
 
             if (m_currentDimensionC > 0)
             {
-                arguments.append(QStringLiteral("-c"));
+                arguments.append("-c"_L1);
                 arguments.append(QString::number(m_currentDimensionC));
             }
         }
 
         if (isNoScaling)
         {
-            arguments.append(QStringLiteral("--") + LONG_OPTION_NO_HDPI_SCALING);
+            arguments.append("--"_L1 + LONG_OPTION_NO_HDPI_SCALING);
         }
 
         VApplication::StartDetachedProcess(VApplication::TapeFilePath(), arguments);
@@ -4079,7 +4079,7 @@ auto MainWindow::on_actionSaveAs_triggered() -> bool
     QString newFileName = tr("pattern") + QStringLiteral(".val");
     if (not patternPath.isEmpty())
     {
-        newFileName = StrippedName(patternPath);
+        newFileName = QFileInfo(patternPath).fileName();
     }
 
     QString filters(tr("Pattern files") + QStringLiteral("(*.val)"));
@@ -5186,7 +5186,7 @@ void MainWindow::ActionOpenTape_triggered()
     QStringList arguments;
     if (isNoScaling)
     {
-        arguments.append(QStringLiteral("--") + LONG_OPTION_NO_HDPI_SCALING);
+        arguments.append("--"_L1 + LONG_OPTION_NO_HDPI_SCALING);
     }
 
     VApplication::StartDetachedProcess(VApplication::TapeFilePath(), arguments);
@@ -6282,7 +6282,7 @@ auto MainWindow::LoadPattern(QString fileName, const QString &customMeasureFile)
         return false;
     }
 
-    if (fileName.endsWith(QStringLiteral(".vit")) || fileName.endsWith(QStringLiteral(".vst")))
+    if (fileName.endsWith(".vit"_L1) || fileName.endsWith(".vst"_L1))
     {
         try
         {
@@ -6296,7 +6296,7 @@ auto MainWindow::LoadPattern(QString fileName, const QString &customMeasureFile)
                 QStringList arguments{fileName};
                 if (isNoScaling)
                 {
-                    arguments.append(QStringLiteral("--") + LONG_OPTION_NO_HDPI_SCALING);
+                    arguments.append("--"_L1 + LONG_OPTION_NO_HDPI_SCALING);
                 }
 
                 VApplication::StartDetachedProcess(VApplication::TapeFilePath(), arguments);
@@ -6317,14 +6317,30 @@ auto MainWindow::LoadPattern(QString fileName, const QString &customMeasureFile)
         }
     }
 
-    if (fileName.endsWith(QStringLiteral(".vlt")))
+    if (fileName.endsWith(".vkm"_L1))
     {
         // Here comes undocumented Valentina's feature.
         // Because app bundle in Mac OS X doesn't allow setup assosiation for Puzzle we must do this through Valentina
         QStringList arguments{fileName};
         if (isNoScaling)
         {
-            arguments.append(QStringLiteral("--") + LONG_OPTION_NO_HDPI_SCALING);
+            arguments.append("--"_L1 + LONG_OPTION_NO_HDPI_SCALING);
+            arguments.append("--known"_L1);
+        }
+
+        VApplication::StartDetachedProcess(VApplication::TapeFilePath(), arguments);
+        QCoreApplication::exit(V_EX_OK);
+        return false; // stop continue processing
+    }
+
+    if (fileName.endsWith(".vlt"_L1))
+    {
+        // Here comes undocumented Valentina's feature.
+        // Because app bundle in Mac OS X doesn't allow setup assosiation for Puzzle we must do this through Valentina
+        QStringList arguments{fileName};
+        if (isNoScaling)
+        {
+            arguments.append("--"_L1 + LONG_OPTION_NO_HDPI_SCALING);
         }
 
         VApplication::StartDetachedProcess(VApplication::PuzzleFilePath(), arguments);
@@ -7451,7 +7467,7 @@ auto MainWindow::GetPatternFileName() -> QString
     QString shownName = tr("untitled.val");
     if (not VAbstractValApplication::VApp()->GetPatternPath().isEmpty())
     {
-        shownName = StrippedName(VAbstractValApplication::VApp()->GetPatternPath());
+        shownName = QFileInfo(VAbstractValApplication::VApp()->GetPatternPath()).fileName();
     }
     shownName += "[*]"_L1;
     return shownName;
@@ -7466,7 +7482,7 @@ auto MainWindow::GetMeasurementFileName() -> QString
     }
 
     QString shownName = QStringLiteral(" [");
-    shownName += StrippedName(AbsoluteMPath(VAbstractValApplication::VApp()->GetPatternPath(), doc->MPath()));
+    shownName += QFileInfo(AbsoluteMPath(VAbstractValApplication::VApp()->GetPatternPath(), doc->MPath())).fileName();
 
     if (m_mChanges)
     {
