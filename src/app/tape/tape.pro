@@ -111,6 +111,7 @@ unix{
             format.path = $$RESOURCES_DIR/
             format.files += $$PWD/../../../dist/macx/i-measurements.icns
             format.files += $$PWD/../../../dist/macx/s-measurements.icns
+            format.files += $$PWD/../../../dist/macx/k-measurements.icns
 
             QMAKE_BUNDLE_DATA += \
                 templates \

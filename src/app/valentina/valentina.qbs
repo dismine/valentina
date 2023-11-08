@@ -378,7 +378,8 @@ VToolApp {
             "pattern.iconset",
             "layout.iconset",
             "i-measurements.iconset",
-            "s-measurements.iconset"
+            "s-measurements.iconset",
+            "k-measurements.iconset"
         ]
     }
 }

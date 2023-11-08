@@ -168,35 +168,40 @@ VToolApp {
     Group {
         name: "apps48x48/mimetypes"
         prefix: project.sourceDirectory + "/share/icons/48x48/mimetypes/"
-        files: ["application-x-valentina-i-measurements.png", "application-x-valentina-s-measurements.png"]
+        files: ["application-x-valentina-i-measurements.png", "application-x-valentina-s-measurements.png",
+            "application-x-valentina-k-measurements.png"]
         fileTags: "freedesktop.48x48MimetypesIcons"
     }
 
     Group {
         name: "apps64x64/mimetypes"
         prefix: project.sourceDirectory + "/share/icons/64x64/mimetypes/"
-        files: ["application-x-valentina-i-measurements.png", "application-x-valentina-s-measurements.png"]
+        files: ["application-x-valentina-i-measurements.png", "application-x-valentina-s-measurements.png",
+            "application-x-valentina-k-measurements.png"]
         fileTags: "freedesktop.64x64MimetypesIcons"
     }
 
     Group {
         name: "apps128x128/mimetypes"
         prefix: project.sourceDirectory + "/share/icons/128x128/mimetypes/"
-        files: ["application-x-valentina-i-measurements.png", "application-x-valentina-s-measurements.png"]
+        files: ["application-x-valentina-i-measurements.png", "application-x-valentina-s-measurements.png",
+            "application-x-valentina-k-measurements.png"]
         fileTags: "freedesktop.128x128MimetypesIcons"
     }
 
     Group {
         name: "apps256x256/mimetypes"
         prefix: project.sourceDirectory + "/share/icons/256x256/mimetypes/"
-        files: ["application-x-valentina-i-measurements.png", "application-x-valentina-s-measurements.png"]
+        files: ["application-x-valentina-i-measurements.png", "application-x-valentina-s-measurements.png",
+            "application-x-valentina-k-measurements.png"]
         fileTags: "freedesktop.256x256MimetypesIcons"
     }
 
     Group {
         name: "apps512x512/mimetypes"
         prefix: project.sourceDirectory + "/share/icons/512x512/mimetypes/"
-        files: ["application-x-valentina-i-measurements.png", "application-x-valentina-s-measurements.png"]
+        files: ["application-x-valentina-i-measurements.png", "application-x-valentina-s-measurements.png",
+            "application-x-valentina-k-measurements.png"]
         fileTags: "freedesktop.512x512MimetypesIcons"
     }
 
@@ -214,6 +219,7 @@ VToolApp {
         files: [
             "i-measurements.ico",
             "s-measurements.ico",
+            "k-measurements.ico",
         ]
         qbs.install: true
         qbs.installDir: buildconfig.installAppPath
@@ -235,7 +241,8 @@ VToolApp {
         prefix: project.sourceDirectory + "/dist/macx/valentina-project.xcassets/"
         files: [
             "i-measurements.iconset",
-            "s-measurements.iconset"
+            "s-measurements.iconset",
+            "k-measurements.iconset"
         ]
     }
 }
