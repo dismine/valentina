@@ -1151,7 +1151,7 @@ void VDomDocument::ValidateVersion(const QString &version)
     const QRegularExpression rx(QStringLiteral("^([0-9]|[1-9][0-9]|[1-2][0-5][0-5]).([0-9]|[1-9][0-9]|[1-2][0-5][0-5])"
                                                ".([0-9]|[1-9][0-9]|[1-2][0-5][0-5])$"));
 
-    if (rx.match(version).hasMatch() == false)
+    if (!rx.match(version).hasMatch())
     {
         const QString errorMsg(tr("Version \"%1\" invalid.").arg(version));
         throw VException(errorMsg);

@@ -42,7 +42,6 @@
 #include "../ifc/ifcdef.h"
 #include "../ifc/xml/vabstractpattern.h"
 #include "../ifc/xml/vdomdocument.h"
-#include "../qmuparser/qmuparsererror.h"
 #include "../vabstracttool.h"
 #include "../vpatterndb/vcontainer.h"
 
@@ -128,7 +127,7 @@ void VDrawTool::ApplyToolOptions(const QList<quint32> &oldDependencies, const QL
 {
     if (newDependencies != oldDependencies || not VDomDocument::Compare(newDomElement, oldDomElement))
     {
-        SaveToolOptions *saveOptions =
+        auto *saveOptions =
             new SaveToolOptions(oldDomElement, newDomElement, oldDependencies, newDependencies, doc, m_id);
         connect(saveOptions, &SaveToolOptions::NeedLiteParsing, doc, &VAbstractPattern::LiteParseTree);
         VAbstractApplication::VApp()->getUndoStack()->push(saveOptions);
@@ -158,7 +157,7 @@ void VDrawTool::SaveOption(QSharedPointer<VGObject> &obj)
 
         SaveOptions(newDomElement, obj);
 
-        SaveToolOptions *saveOptions =
+        auto *saveOptions =
             new SaveToolOptions(oldDomElement, newDomElement, QList<quint32>(), QList<quint32>(), doc, m_id);
         connect(saveOptions, &SaveToolOptions::NeedLiteParsing, doc, &VAbstractPattern::LiteParseTree);
         VAbstractApplication::VApp()->getUndoStack()->push(saveOptions);
@@ -220,7 +219,7 @@ void VDrawTool::ReadAttributes()
 //---------------------------------------------------------------------------------------------------------------------
 void VDrawTool::ReadToolAttributes(const QDomElement &domElement)
 {
-    m_notes = doc->GetParametrEmptyString(domElement, AttrNotes);
+    m_notes = VDomDocument::GetParametrEmptyString(domElement, AttrNotes);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -257,7 +256,7 @@ void VDrawTool::AddToCalculation(const QDomElement &domElement)
         throw VExceptionWrongId(tr("This id (%1) is not unique.").arg(m_id), duplicate);
     }
 
-    AddToCalc *addToCal = new AddToCalc(domElement, doc);
+    auto *addToCal = new AddToCalc(domElement, doc);
     connect(addToCal, &AddToCalc::NeedFullParsing, doc, &VAbstractPattern::NeedFullParsing);
     VAbstractApplication::VApp()->getUndoStack()->push(addToCal);
 }
