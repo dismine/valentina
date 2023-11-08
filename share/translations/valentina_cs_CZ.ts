@@ -2681,7 +2681,7 @@
         <translation type="vanished">Velikost</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/support/dialogeditwrongformula.cpp" line="214"/>
+        <location filename="../../src/libs/vtools/dialogs/support/dialogeditwrongformula.cpp" line="216"/>
         <source>Line length</source>
         <translation>Délka čáry</translation>
     </message>
@@ -2690,12 +2690,12 @@
         <translation type="vanished">Délka oblouku</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/support/dialogeditwrongformula.cpp" line="220"/>
+        <location filename="../../src/libs/vtools/dialogs/support/dialogeditwrongformula.cpp" line="222"/>
         <source>Curve length</source>
         <translation>Délka křivky</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/support/dialogeditwrongformula.cpp" line="226"/>
+        <location filename="../../src/libs/vtools/dialogs/support/dialogeditwrongformula.cpp" line="228"/>
         <source>Line Angle</source>
         <translation>Úhel čáry</translation>
     </message>
@@ -2714,7 +2714,7 @@
         <translation>Úhly křivek</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/support/dialogeditwrongformula.cpp" line="232"/>
+        <location filename="../../src/libs/vtools/dialogs/support/dialogeditwrongformula.cpp" line="234"/>
         <source>Arc radius</source>
         <translation>Poloměr oblouku</translation>
     </message>
@@ -2723,7 +2723,7 @@
         <translation type="vanished">Úhel oblouku</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/support/dialogeditwrongformula.cpp" line="238"/>
+        <location filename="../../src/libs/vtools/dialogs/support/dialogeditwrongformula.cpp" line="240"/>
         <source>Curve angle</source>
         <translation>Úhel křivky</translation>
     </message>
@@ -2778,12 +2778,12 @@
         <translation>Dílové oblasti</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/support/dialogeditwrongformula.cpp" line="244"/>
+        <location filename="../../src/libs/vtools/dialogs/support/dialogeditwrongformula.cpp" line="246"/>
         <source>Length to control point</source>
         <translation>Délka k ovládacímu bodu</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/support/dialogeditwrongformula.cpp" line="250"/>
+        <location filename="../../src/libs/vtools/dialogs/support/dialogeditwrongformula.cpp" line="825"/>
         <source>Area of piece</source>
         <translation>Oblast dílu</translation>
     </message>
@@ -3253,7 +3253,7 @@
         <location filename="../../src/app/valentina/dialogs/dialogfinalmeasurements.cpp" line="891"/>
         <source>Empty</source>
         <comment>list</comment>
-        <translation type="unfinished">Prázdný</translation>
+        <translation>Prázdný</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialogfinalmeasurements.ui" line="32"/>
@@ -3995,7 +3995,7 @@
         <location filename="../../src/app/valentina/dialogs/dialoghistory.cpp" line="773"/>
         <source>Empty</source>
         <comment>list</comment>
-        <translation type="unfinished">Prázdný</translation>
+        <translation>Prázdný</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialoghistory.ui" line="38"/>
@@ -4256,7 +4256,7 @@
         <location filename="../../src/app/valentina/dialogs/dialogincrements.cpp" line="1170"/>
         <source>Empty</source>
         <comment>list</comment>
-        <translation type="unfinished">Prázdný</translation>
+        <translation>Prázdný</translation>
     </message>
     <message>
         <source>Increment_%1</source>
@@ -4492,6 +4492,110 @@
         <location filename="../../src/app/valentina/dialogs/dialogknownmaterials.cpp" line="122"/>
         <source>User material</source>
         <translation>Uživatelský materiál</translation>
+    </message>
+</context>
+<context>
+    <name>DialogKnownMeasurementsCSVColumns</name>
+    <message>
+        <location filename="../../src/app/tape/dialogs/dialogknownmeasurementscsvcolumns.ui" line="14"/>
+        <source>Dialog</source>
+        <translation type="unfinished">Dialog</translation>
+    </message>
+    <message>
+        <location filename="../../src/app/tape/dialogs/dialogknownmeasurementscsvcolumns.ui" line="28"/>
+        <source>Preview</source>
+        <translation type="unfinished">Náhled</translation>
+    </message>
+    <message>
+        <location filename="../../src/app/tape/dialogs/dialogknownmeasurementscsvcolumns.ui" line="34"/>
+        <source>Input</source>
+        <translation type="unfinished">Vstup</translation>
+    </message>
+    <message>
+        <location filename="../../src/app/tape/dialogs/dialogknownmeasurementscsvcolumns.ui" line="50"/>
+        <source>Import</source>
+        <translation type="unfinished">Zavedení</translation>
+    </message>
+    <message>
+        <location filename="../../src/app/tape/dialogs/dialogknownmeasurementscsvcolumns.ui" line="69"/>
+        <source>Columns</source>
+        <translation type="unfinished">Sloupce</translation>
+    </message>
+    <message>
+        <location filename="../../src/app/tape/dialogs/dialogknownmeasurementscsvcolumns.ui" line="101"/>
+        <source>Full name:</source>
+        <translation type="unfinished">Plný název:</translation>
+    </message>
+    <message>
+        <location filename="../../src/app/tape/dialogs/dialogknownmeasurementscsvcolumns.ui" line="121"/>
+        <source>Description:</source>
+        <translation type="unfinished">Popis:</translation>
+    </message>
+    <message>
+        <location filename="../../src/app/tape/dialogs/dialogknownmeasurementscsvcolumns.ui" line="136"/>
+        <location filename="../../src/app/tape/dialogs/dialogknownmeasurementscsvcolumns.cpp" line="511"/>
+        <source>Ready</source>
+        <translation type="unfinished">Připraven</translation>
+    </message>
+    <message>
+        <location filename="../../src/app/tape/dialogs/dialogknownmeasurementscsvcolumns.cpp" line="162"/>
+        <source>Name</source>
+        <comment>measurement column</comment>
+        <translation type="unfinished">Název</translation>
+    </message>
+    <message>
+        <location filename="../../src/app/tape/dialogs/dialogknownmeasurementscsvcolumns.cpp" line="164"/>
+        <source>Group</source>
+        <comment>measurement column</comment>
+        <translation type="unfinished">Skupina</translation>
+    </message>
+    <message>
+        <location filename="../../src/app/tape/dialogs/dialogknownmeasurementscsvcolumns.cpp" line="166"/>
+        <source>Full name</source>
+        <comment>measurement column</comment>
+        <translation type="unfinished">Plný název</translation>
+    </message>
+    <message>
+        <location filename="../../src/app/tape/dialogs/dialogknownmeasurementscsvcolumns.cpp" line="168"/>
+        <source>Formula</source>
+        <comment>measurement column</comment>
+        <translation type="unfinished">Vzorec</translation>
+    </message>
+    <message>
+        <location filename="../../src/app/tape/dialogs/dialogknownmeasurementscsvcolumns.cpp" line="170"/>
+        <source>Description</source>
+        <comment>measurement column</comment>
+        <translation type="unfinished">Popis</translation>
+    </message>
+    <message>
+        <location filename="../../src/app/tape/dialogs/dialogknownmeasurementscsvcolumns.cpp" line="283"/>
+        <source>Skip</source>
+        <translation type="unfinished">Přeskočit</translation>
+    </message>
+    <message>
+        <location filename="../../src/app/tape/dialogs/dialogknownmeasurementscsvcolumns.cpp" line="443"/>
+        <source>Name</source>
+        <translation type="unfinished">Název</translation>
+    </message>
+    <message>
+        <location filename="../../src/app/tape/dialogs/dialogknownmeasurementscsvcolumns.cpp" line="481"/>
+        <source>File path is empty</source>
+        <translation type="unfinished">Cesta k souboru je prázdná</translation>
+    </message>
+    <message>
+        <location filename="../../src/app/tape/dialogs/dialogknownmeasurementscsvcolumns.cpp" line="491"/>
+        <source>Not enough columns</source>
+        <translation type="unfinished">Nedostatek sloupců</translation>
+    </message>
+    <message>
+        <location filename="../../src/app/tape/dialogs/dialogknownmeasurementscsvcolumns.cpp" line="499"/>
+        <source>Not enough data to import</source>
+        <translation type="unfinished">Nedostatek údajů k zavedení</translation>
+    </message>
+    <message>
+        <location filename="../../src/app/tape/dialogs/dialogknownmeasurementscsvcolumns.cpp" line="506"/>
+        <source>Please, select unique number for each column</source>
+        <translation type="unfinished">Vyberte, prosím, pro každý sloupec jedinečné číslo</translation>
     </message>
 </context>
 <context>
@@ -5260,141 +5364,114 @@ Přesto použít nastavení?</translation>
         <translation>Míry</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/dialogs/dialogmdatabase.cpp" line="127"/>
-        <location filename="../../src/app/tape/dialogs/dialogmdatabase.cpp" line="386"/>
         <source>Direct Height</source>
         <comment>Measurement section</comment>
-        <translation>Přímá výška</translation>
+        <translation type="vanished">Přímá výška</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/dialogs/dialogmdatabase.cpp" line="128"/>
-        <location filename="../../src/app/tape/dialogs/dialogmdatabase.cpp" line="387"/>
         <source>Direct Width</source>
         <comment>Measurement section</comment>
-        <translation>Přímá šířka</translation>
+        <translation type="vanished">Přímá šířka</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/dialogs/dialogmdatabase.cpp" line="129"/>
-        <location filename="../../src/app/tape/dialogs/dialogmdatabase.cpp" line="388"/>
         <source>Indentation</source>
         <comment>Measurement section</comment>
-        <translation>Odsazení</translation>
+        <translation type="vanished">Odsazení</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/dialogs/dialogmdatabase.cpp" line="133"/>
-        <location filename="../../src/app/tape/dialogs/dialogmdatabase.cpp" line="392"/>
         <source>Circumference and Arc</source>
         <comment>Measurement section</comment>
-        <translation>Obvod a oblouk</translation>
+        <translation type="vanished">Obvod a oblouk</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/dialogs/dialogmdatabase.cpp" line="134"/>
-        <location filename="../../src/app/tape/dialogs/dialogmdatabase.cpp" line="393"/>
         <source>Vertical</source>
         <comment>Measurement section</comment>
-        <translation>Svislý</translation>
+        <translation type="vanished">Svislý</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/dialogs/dialogmdatabase.cpp" line="135"/>
-        <location filename="../../src/app/tape/dialogs/dialogmdatabase.cpp" line="394"/>
         <source>Horizontal</source>
         <comment>Measurement section</comment>
-        <translation>Vodorovný</translation>
+        <translation type="vanished">Vodorovný</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/dialogs/dialogmdatabase.cpp" line="136"/>
-        <location filename="../../src/app/tape/dialogs/dialogmdatabase.cpp" line="395"/>
         <source>Bust</source>
         <comment>Measurement section</comment>
-        <translation>Prsa</translation>
+        <translation type="vanished">Prsa</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/dialogs/dialogmdatabase.cpp" line="137"/>
-        <location filename="../../src/app/tape/dialogs/dialogmdatabase.cpp" line="396"/>
         <source>Balance</source>
         <comment>Measurement section</comment>
-        <translation>Vyvážení</translation>
+        <translation type="vanished">Vyvážení</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/dialogs/dialogmdatabase.cpp" line="138"/>
-        <location filename="../../src/app/tape/dialogs/dialogmdatabase.cpp" line="397"/>
         <source>Arm</source>
         <comment>Measurement section</comment>
-        <translation>Paže</translation>
+        <translation type="vanished">Paže</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/dialogs/dialogmdatabase.cpp" line="139"/>
-        <location filename="../../src/app/tape/dialogs/dialogmdatabase.cpp" line="398"/>
         <source>Leg</source>
         <comment>Measurement section</comment>
-        <translation>Noha</translation>
+        <translation type="vanished">Noha</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/dialogs/dialogmdatabase.cpp" line="140"/>
-        <location filename="../../src/app/tape/dialogs/dialogmdatabase.cpp" line="399"/>
         <source>Crotch and Rise</source>
         <comment>Measurement section</comment>
-        <translation>Rozkrok a výška</translation>
+        <translation type="vanished">Rozkrok a výška</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/dialogs/dialogmdatabase.cpp" line="130"/>
-        <location filename="../../src/app/tape/dialogs/dialogmdatabase.cpp" line="389"/>
         <source>Hand</source>
         <comment>Measurement section</comment>
-        <translation>Ruka</translation>
+        <translation type="vanished">Ruka</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/dialogs/dialogmdatabase.cpp" line="131"/>
-        <location filename="../../src/app/tape/dialogs/dialogmdatabase.cpp" line="390"/>
         <source>Foot</source>
         <comment>Measurement section</comment>
-        <translation>Chodidlo</translation>
+        <translation type="vanished">Chodidlo</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/dialogs/dialogmdatabase.cpp" line="132"/>
-        <location filename="../../src/app/tape/dialogs/dialogmdatabase.cpp" line="391"/>
         <source>Head</source>
         <comment>Measurement section</comment>
-        <translation>Hlava</translation>
+        <translation type="vanished">Hlava</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/dialogs/dialogmdatabase.cpp" line="141"/>
-        <location filename="../../src/app/tape/dialogs/dialogmdatabase.cpp" line="400"/>
         <source>Men &amp; Tailoring</source>
         <comment>Measurement section</comment>
-        <translation>Muž a udělání na míru</translation>
+        <translation type="vanished">Muž a udělání na míru</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/dialogs/dialogmdatabase.cpp" line="142"/>
-        <location filename="../../src/app/tape/dialogs/dialogmdatabase.cpp" line="401"/>
         <source>Historical &amp; Specialty</source>
         <comment>Measurement section</comment>
-        <translation>Historické a zvláštní</translation>
+        <translation type="vanished">Historické a zvláštní</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/dialogs/dialogmdatabase.cpp" line="143"/>
-        <location filename="../../src/app/tape/dialogs/dialogmdatabase.cpp" line="402"/>
         <source>Patternmaking measurements</source>
         <comment>Measurement section</comment>
-        <translation>Měření střihových vzorů</translation>
+        <translation type="vanished">Měření střihových vzorů</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/dialogs/dialogmdatabase.cpp" line="308"/>
+        <location filename="../../src/app/tape/dialogs/dialogmdatabase.cpp" line="123"/>
+        <location filename="../../src/app/tape/dialogs/dialogmdatabase.cpp" line="299"/>
+        <source>General</source>
+        <comment>Measurement section</comment>
+        <translation type="unfinished">Obecné</translation>
+    </message>
+    <message>
+        <location filename="../../src/app/tape/dialogs/dialogmdatabase.cpp" line="234"/>
         <source>Collapse All</source>
         <translation>Sbalit vše</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/dialogs/dialogmdatabase.cpp" line="311"/>
+        <location filename="../../src/app/tape/dialogs/dialogmdatabase.cpp" line="237"/>
         <source>Expand All</source>
         <translation>Rozbalit vše</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/dialogs/dialogmdatabase.cpp" line="321"/>
+        <location filename="../../src/app/tape/dialogs/dialogmdatabase.cpp" line="247"/>
         <source>Check all</source>
         <translation>Označit vše</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/dialogs/dialogmdatabase.cpp" line="321"/>
+        <location filename="../../src/app/tape/dialogs/dialogmdatabase.cpp" line="247"/>
         <source>Uncheck all</source>
         <translation>Odznačit vše</translation>
     </message>
@@ -5453,95 +5530,100 @@ Přesto použít nastavení?</translation>
     </message>
     <message>
         <location filename="../../src/app/tape/dialogs/dialogmeasurementscsvcolumns.ui" line="151"/>
-        <location filename="../../src/app/tape/dialogs/dialogmeasurementscsvcolumns.cpp" line="844"/>
+        <location filename="../../src/app/tape/dialogs/dialogmeasurementscsvcolumns.cpp" line="852"/>
         <source>Ready</source>
         <translation>Připraven</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/dialogs/dialogmeasurementscsvcolumns.cpp" line="235"/>
-        <location filename="../../src/app/tape/dialogs/dialogmeasurementscsvcolumns.cpp" line="252"/>
+        <location filename="../../src/app/tape/dialogs/dialogmeasurementscsvcolumns.cpp" line="240"/>
+        <location filename="../../src/app/tape/dialogs/dialogmeasurementscsvcolumns.cpp" line="258"/>
+        <location filename="../../src/app/tape/dialogs/dialogmeasurementscsvcolumns.cpp" line="730"/>
         <source>Name</source>
         <comment>measurement column</comment>
         <translation>Název</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/dialogs/dialogmeasurementscsvcolumns.cpp" line="237"/>
+        <location filename="../../src/app/tape/dialogs/dialogmeasurementscsvcolumns.cpp" line="242"/>
+        <location filename="../../src/app/tape/dialogs/dialogmeasurementscsvcolumns.cpp" line="734"/>
         <source>Value</source>
         <comment>measurement column</comment>
         <translation>Hodnota</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/dialogs/dialogmeasurementscsvcolumns.cpp" line="239"/>
-        <location filename="../../src/app/tape/dialogs/dialogmeasurementscsvcolumns.cpp" line="286"/>
+        <location filename="../../src/app/tape/dialogs/dialogmeasurementscsvcolumns.cpp" line="244"/>
+        <location filename="../../src/app/tape/dialogs/dialogmeasurementscsvcolumns.cpp" line="292"/>
         <source>Full name</source>
         <comment>measurement column</comment>
         <translation>Plný název</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/dialogs/dialogmeasurementscsvcolumns.cpp" line="241"/>
-        <location filename="../../src/app/tape/dialogs/dialogmeasurementscsvcolumns.cpp" line="288"/>
+        <location filename="../../src/app/tape/dialogs/dialogmeasurementscsvcolumns.cpp" line="246"/>
+        <location filename="../../src/app/tape/dialogs/dialogmeasurementscsvcolumns.cpp" line="294"/>
         <source>Description</source>
         <comment>measurement column</comment>
         <translation>Popis</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/dialogs/dialogmeasurementscsvcolumns.cpp" line="254"/>
+        <location filename="../../src/app/tape/dialogs/dialogmeasurementscsvcolumns.cpp" line="260"/>
+        <location filename="../../src/app/tape/dialogs/dialogmeasurementscsvcolumns.cpp" line="738"/>
         <source>Base value</source>
         <comment>measurement column</comment>
         <translation>Základní hodnota</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/dialogs/dialogmeasurementscsvcolumns.cpp" line="259"/>
-        <location filename="../../src/app/tape/dialogs/dialogmeasurementscsvcolumns.cpp" line="269"/>
-        <location filename="../../src/app/tape/dialogs/dialogmeasurementscsvcolumns.cpp" line="279"/>
-        <source>Shift (%1):</source>
+        <location filename="../../src/app/tape/dialogs/dialogmeasurementscsvcolumns.cpp" line="265"/>
+        <location filename="../../src/app/tape/dialogs/dialogmeasurementscsvcolumns.cpp" line="275"/>
+        <location filename="../../src/app/tape/dialogs/dialogmeasurementscsvcolumns.cpp" line="285"/>
+        <location filename="../../src/app/tape/dialogs/dialogmeasurementscsvcolumns.cpp" line="745"/>
+        <location filename="../../src/app/tape/dialogs/dialogmeasurementscsvcolumns.cpp" line="751"/>
+        <location filename="../../src/app/tape/dialogs/dialogmeasurementscsvcolumns.cpp" line="757"/>
+        <source>Shift</source>
         <comment>measurement column</comment>
-        <translation>Shift (%1):</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/dialogs/dialogmeasurementscsvcolumns.cpp" line="498"/>
+        <source>Shift (%1):</source>
+        <comment>measurement column</comment>
+        <translation type="vanished">Shift (%1):</translation>
+    </message>
+    <message>
+        <location filename="../../src/app/tape/dialogs/dialogmeasurementscsvcolumns.cpp" line="504"/>
         <source>Skip</source>
         <translation>Přeskočit</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/dialogs/dialogmeasurementscsvcolumns.cpp" line="724"/>
         <source>Name</source>
-        <translation>Název</translation>
+        <translation type="vanished">Název</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/dialogs/dialogmeasurementscsvcolumns.cpp" line="728"/>
         <source>Value</source>
-        <translation>Hodnota</translation>
+        <translation type="vanished">Hodnota</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/dialogs/dialogmeasurementscsvcolumns.cpp" line="732"/>
         <source>Base value</source>
-        <translation>Základní hodnota</translation>
+        <translation type="vanished">Základní hodnota</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/dialogs/dialogmeasurementscsvcolumns.cpp" line="737"/>
-        <location filename="../../src/app/tape/dialogs/dialogmeasurementscsvcolumns.cpp" line="743"/>
-        <location filename="../../src/app/tape/dialogs/dialogmeasurementscsvcolumns.cpp" line="749"/>
         <source>Shift (%1)*:</source>
-        <translation>Shift (%1)*:</translation>
+        <translation type="vanished">Shift (%1)*:</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/dialogs/dialogmeasurementscsvcolumns.cpp" line="814"/>
+        <location filename="../../src/app/tape/dialogs/dialogmeasurementscsvcolumns.cpp" line="822"/>
         <source>File path is empty</source>
         <translation>Cesta k souboru je prázdná</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/dialogs/dialogmeasurementscsvcolumns.cpp" line="824"/>
+        <location filename="../../src/app/tape/dialogs/dialogmeasurementscsvcolumns.cpp" line="832"/>
         <source>Not enough columns</source>
         <translation>Nedostatek sloupců</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/dialogs/dialogmeasurementscsvcolumns.cpp" line="832"/>
+        <location filename="../../src/app/tape/dialogs/dialogmeasurementscsvcolumns.cpp" line="840"/>
         <source>Not enough data to import</source>
         <translation>Nedostatek údajů k zavedení</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/dialogs/dialogmeasurementscsvcolumns.cpp" line="839"/>
+        <location filename="../../src/app/tape/dialogs/dialogmeasurementscsvcolumns.cpp" line="847"/>
         <source>Please, select unique number for each column</source>
         <translation>Vyberte, prosím, pro každý sloupec jedinečné číslo</translation>
     </message>
@@ -9764,8 +9846,13 @@ Přesto použít nastavení?</translation>
         <source>Configuration</source>
         <translation>Nastavení</translation>
     </message>
+    <message>
+        <location filename="../../src/app/tape/dialogs/dialogtapepreferences.ui" line="75"/>
+        <source>Paths</source>
+        <translation type="unfinished">Cesty</translation>
+    </message>
     <message numerus="yes">
-        <location filename="../../src/app/tape/dialogs/dialogtapepreferences.cpp" line="138"/>
+        <location filename="../../src/app/tape/dialogs/dialogtapepreferences.cpp" line="148"/>
         <source>Followed %n option(s) require restart to take effect: %1.</source>
         <translation>
             <numerusform>Sledováno %n volba vyžaduje opětovné spuštění, aby se projevila %1.</numerusform>
@@ -10317,7 +10404,7 @@ Přesto použít nastavení?</translation>
 <context>
     <name>InitPieceLabelLanguages</name>
     <message>
-        <location filename="../../src/libs/vmisc/def.cpp" line="532"/>
+        <location filename="../../src/libs/vmisc/def.cpp" line="521"/>
         <source>Default</source>
         <translation>Výchozí</translation>
     </message>
@@ -10335,52 +10422,52 @@ Přesto použít nastavení?</translation>
 <context>
     <name>MApplication</name>
     <message>
-        <location filename="../../src/app/tape/mapplication.cpp" line="361"/>
+        <location filename="../../src/app/tape/mapplication.cpp" line="373"/>
         <source>Error parsing file. Program will be terminated.</source>
         <translation>Chyba při zpracování souboru. Program bude ukončen.</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/mapplication.cpp" line="367"/>
+        <location filename="../../src/app/tape/mapplication.cpp" line="379"/>
         <source>Error bad id. Program will be terminated.</source>
         <translation>Chyba. Špatný identifikátor. Program bude ukončen.</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/mapplication.cpp" line="373"/>
+        <location filename="../../src/app/tape/mapplication.cpp" line="385"/>
         <source>Error can&apos;t convert value. Program will be terminated.</source>
         <translation>Chyba. Nelze převést hodnotu. Program bude ukončen.</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/mapplication.cpp" line="379"/>
+        <location filename="../../src/app/tape/mapplication.cpp" line="391"/>
         <source>Error empty parameter. Program will be terminated.</source>
         <translation>Chyba. Prázdný parametr. Program bude ukončen.</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/mapplication.cpp" line="385"/>
+        <location filename="../../src/app/tape/mapplication.cpp" line="397"/>
         <source>Error wrong id. Program will be terminated.</source>
         <translation>Chyba. Špatný identifikátor. Program bude ukončen.</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/mapplication.cpp" line="398"/>
+        <location filename="../../src/app/tape/mapplication.cpp" line="410"/>
         <source>Something&apos;s wrong!!</source>
         <translation>Něco je špatně!</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/mapplication.cpp" line="411"/>
+        <location filename="../../src/app/tape/mapplication.cpp" line="423"/>
         <source>Parser error: %1. Program will be terminated.</source>
         <translation>Chyba při zpracování: %1. Program bude ukončen.</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/mapplication.cpp" line="416"/>
+        <location filename="../../src/app/tape/mapplication.cpp" line="428"/>
         <source>Exception thrown: %1. Program will be terminated.</source>
         <translation>Způsobena chyba: %1. Program bude ukončen.</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/mapplication.cpp" line="677"/>
+        <location filename="../../src/app/tape/mapplication.cpp" line="605"/>
         <source>Valentina&apos;s measurements editor.</source>
         <translation>Editor velikostí ve Valentině.</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/mapplication.cpp" line="792"/>
+        <location filename="../../src/app/tape/mapplication.cpp" line="885"/>
         <source>The measurement file.</source>
         <translation>Soubor s mírami.</translation>
     </message>
@@ -10405,12 +10492,12 @@ Přesto použít nastavení?</translation>
         <translation type="vanished">Použít ke zkoušení jednotek. Spusťte program a otevřete soubor bez zobrazení okna.</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/mapplication.cpp" line="1003"/>
+        <location filename="../../src/app/tape/mapplication.cpp" line="1134"/>
         <source>Invalid base size argument. Must be cm, mm or inch.</source>
         <translation>Neplatná základní velikost. Musí být cm, mm nebo palec.</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/mapplication.cpp" line="836"/>
+        <location filename="../../src/app/tape/mapplication.cpp" line="931"/>
         <source>Can&apos;t begin to listen for incoming connections on name &apos;%1&apos;</source>
         <translation>Nelze začít naslouchat příchozímu spojení &apos;%1&apos;</translation>
     </message>
@@ -10419,7 +10506,7 @@ Přesto použít nastavení?</translation>
         <translation type="vanished">Zkušební režim nepodporuje otevření více souborů.</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/mapplication.cpp" line="919"/>
+        <location filename="../../src/app/tape/mapplication.cpp" line="1050"/>
         <source>Please, provide one input file.</source>
         <translation>Poskytněte, prosím, jeden vstupní soubor.</translation>
     </message>
@@ -10440,77 +10527,82 @@ Přesto použít nastavení?</translation>
         <translation type="vanished">Otevřeno se základní výškou. Platné hodnoty: %1 cm.</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/mapplication.cpp" line="812"/>
+        <location filename="../../src/app/tape/mapplication.cpp" line="907"/>
         <source>Use for unit testing. Run the program and open a file without showing the main window.</source>
         <translation>Použít ke zkoušení jednotek. Spusťte program a otevřete soubor bez zobrazení okna.</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/mapplication.cpp" line="815"/>
+        <location filename="../../src/app/tape/mapplication.cpp" line="910"/>
         <source>Disable high dpi scaling. Call this option if has problem with scaling (by default scaling enabled). Alternatively you can use the %1 environment variable.</source>
         <translation>Zakázat škálování pro obrazovky s velkým rozlišením. Tuto volbu zvolte, pokud máte potíže se škálováním (ve výchozím nastavení je škálování povoleno). Jinou možností je použít proměnnou prostředí %1.</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/mapplication.cpp" line="796"/>
+        <location filename="../../src/app/tape/mapplication.cpp" line="889"/>
         <source>Set base for dimension A in the table units.</source>
         <translation>Nastavte základ pro rozměr A v jednotkách tabulky.</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/mapplication.cpp" line="797"/>
+        <location filename="../../src/app/tape/mapplication.cpp" line="890"/>
         <source>The dimension A base</source>
         <translation>Základní hodnota rozměru A</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/mapplication.cpp" line="800"/>
+        <location filename="../../src/app/tape/mapplication.cpp" line="893"/>
         <source>Set base for dimension B in the table units.</source>
         <translation>Nastavte základ pro rozměr B v jednotkách tabulky.</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/mapplication.cpp" line="801"/>
+        <location filename="../../src/app/tape/mapplication.cpp" line="894"/>
         <source>The dimension B base</source>
         <translation>Základní hodnota rozměru B</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/mapplication.cpp" line="804"/>
+        <location filename="../../src/app/tape/mapplication.cpp" line="897"/>
         <source>Set base for dimension C in the table units.</source>
         <translation>Nastavte základ pro rozměr C v jednotkách tabulky.</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/mapplication.cpp" line="805"/>
+        <location filename="../../src/app/tape/mapplication.cpp" line="898"/>
         <source>The dimension C base</source>
         <translation>Základní hodnota rozměru C</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/mapplication.cpp" line="808"/>
+        <location filename="../../src/app/tape/mapplication.cpp" line="901"/>
         <source>Set pattern file units: cm, mm, inch.</source>
         <translation>Nastavit jednotky střihu: cm, mm, palec.</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/mapplication.cpp" line="809"/>
+        <location filename="../../src/app/tape/mapplication.cpp" line="902"/>
         <source>The pattern units</source>
         <translation>Jednotky střihu</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/mapplication.cpp" line="942"/>
+        <location filename="../../src/app/tape/mapplication.cpp" line="904"/>
+        <source>Activate known measurements mode.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/app/tape/mapplication.cpp" line="1073"/>
         <source>Invalid dimension A base value.</source>
         <translation>Neplatná základní hodnota rozměru A.</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/mapplication.cpp" line="963"/>
+        <location filename="../../src/app/tape/mapplication.cpp" line="1094"/>
         <source>Invalid dimension B base value.</source>
         <translation>Neplatná základní hodnota rozměru B.</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/mapplication.cpp" line="984"/>
+        <location filename="../../src/app/tape/mapplication.cpp" line="1115"/>
         <source>Invalid dimension C base value.</source>
         <translation>Neplatná základní hodnota rozměru C.</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/mapplication.cpp" line="404"/>
+        <location filename="../../src/app/tape/mapplication.cpp" line="416"/>
         <source>Formula warning: %1. Program will be terminated.</source>
         <translation>Upozornění na vzorec: %1. Program bude ukončen.</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/mapplication.cpp" line="854"/>
+        <location filename="../../src/app/tape/mapplication.cpp" line="949"/>
         <source>Test mode doesn&apos;t support opening several files.</source>
         <translation>Zkušební režim nepodporuje otevření více souborů.</translation>
     </message>
@@ -11053,7 +11145,7 @@ Přesto použít nastavení?</translation>
         <location filename="../../src/app/valentina/mainwindow.cpp" line="2070"/>
         <location filename="../../src/app/valentina/mainwindow.cpp" line="2297"/>
         <location filename="../../src/app/valentina/mainwindow.cpp" line="4186"/>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="6854"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="6870"/>
         <source>Open file</source>
         <translation>Otevřít soubor</translation>
     </message>
@@ -11096,7 +11188,7 @@ Přesto použít nastavení?</translation>
         <translation>Soubor uložen</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="7456"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="7467"/>
         <source>untitled.val</source>
         <translation>Bez názvu.val</translation>
     </message>
@@ -11144,7 +11236,7 @@ Chcete uložit své změny?</translation>
         <location filename="../../src/app/valentina/mainwindow.cpp" line="718"/>
         <location filename="../../src/app/valentina/mainwindow.cpp" line="765"/>
         <location filename="../../src/app/valentina/mainwindow.cpp" line="6309"/>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="6481"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="6497"/>
         <source>File error.</source>
         <translation>Chyba souboru.</translation>
     </message>
@@ -11153,12 +11245,12 @@ Chcete uložit své změny?</translation>
         <translation type="vanished">Soubor nahrán</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="6816"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="6832"/>
         <source>Valentina didn&apos;t shut down correctly. Do you want reopen files (%1) you had open?</source>
         <translation>Valentina nebyla vypnuta správně. Chcete znovu otevřít soubory (%1), které jste měli otevřeny?</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="6818"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="6834"/>
         <source>Reopen files.</source>
         <translation>Znovu otevřít soubory.</translation>
     </message>
@@ -11414,7 +11506,7 @@ Chcete uložit své změny?</translation>
         <location filename="../../src/app/valentina/mainwindow.cpp" line="4028"/>
         <location filename="../../src/app/valentina/mainwindow.cpp" line="4217"/>
         <location filename="../../src/app/valentina/mainwindow.cpp" line="4290"/>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="6746"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="6762"/>
         <source>Layout mode</source>
         <translation>Režim rozvržení</translation>
     </message>
@@ -11462,7 +11554,7 @@ Chcete uložit své změny?</translation>
         <translation type="vanished">Obvyklé míry (*.vst);;Individuální míry (*.vit)</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="7104"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="7115"/>
         <source>You can&apos;t export empty scene.</source>
         <translation>Nelze vyvést prázdný soubor (prázdné rozvržení).</translation>
     </message>
@@ -11495,12 +11587,11 @@ Chcete uložit své změny?</translation>
         <translation>Nepodařilo se uzamknout. Tento soubor je již otevřen v jiném okně. Při zdvojeném vykonávání (dvě kopie programu) může dojít ke střetům.</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="7018"/>
         <source>Measurement file contains invalid known measurement(s).</source>
-        <translation>Soubor s mírami obsahuje neplatný(é) rozměr(y).</translation>
+        <translation type="vanished">Soubor s mírami obsahuje neplatný(é) rozměr(y).</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="6964"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="6980"/>
         <source>Measurement file has unknown format.</source>
         <translation>Soubor s mírami má neznámý formát.</translation>
     </message>
@@ -11532,8 +11623,8 @@ Chcete uložit své změny?</translation>
         <translation>Nepodařilo se aktualizovat míry.</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="6408"/>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="6428"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="6424"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="6444"/>
         <source>The measurements file &apos;%1&apos; could not be found.</source>
         <translation>Nepodařilo se najít soubor s mírami &apos;%1&apos;.</translation>
     </message>
@@ -11542,7 +11633,7 @@ Chcete uložit své změny?</translation>
         <translation type="vanished">Nepodařilo se najít soubor s mírami &lt;br/&gt;&lt;br/&gt; &lt;b&gt;%1&lt;/b&gt; &lt;br/&gt;&lt;br/&gt;. Chcete aktualizovat umístění souboru?</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="6883"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="6899"/>
         <source>Loading measurements file</source>
         <translation>Nahrává se soubor s mírami</translation>
     </message>
@@ -11559,9 +11650,9 @@ Chcete uložit své změny?</translation>
         <translation type="vanished">Nepodařilo se stanovit velikost. Soubor nebyl otevřen.</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="7285"/>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="7328"/>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="7371"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="7296"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="7339"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="7382"/>
         <source>The method %1 does nothing in GUI mode</source>
         <translation>Metoda %1 nepůsobí v režimu rozhraní</translation>
     </message>
@@ -11578,15 +11669,15 @@ Chcete uložit své změny?</translation>
         <translation type="vanished">Nepodařilo se stanovit výšku. Soubor nebyl otevřen.</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="6729"/>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="6783"/>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="7151"/>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="7189"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="6745"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="6799"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="7162"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="7200"/>
         <source>Export error.</source>
         <translation>Chyba při vyvádění.</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="7398"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="7409"/>
         <source>Please, provide one input file.</source>
         <translation>Poskytněte, prosím, jeden vstupní soubor.</translation>
     </message>
@@ -11826,7 +11917,7 @@ Chcete uložit své změny?</translation>
         <translation type="vanished">Velikost:</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="6880"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="6896"/>
         <source>The measurements file &lt;br/&gt;&lt;br/&gt; &lt;b&gt;%1&lt;/b&gt; &lt;br/&gt;&lt;br/&gt; could not be found. Do you want to update the file location?</source>
         <translation>Nepodařilo se najít soubor s mírami &lt;br/&gt;&lt;br/&gt; &lt;b&gt;%1&lt;/b&gt; &lt;br/&gt;&lt;br/&gt;. Chcete aktualizovat umístění souboru?</translation>
     </message>
@@ -11880,7 +11971,7 @@ Chcete uložit své změny?</translation>
         <translation>Nepodařilo se uložit soubor</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="7506"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="7517"/>
         <source>read only</source>
         <translation>Pouze pro čtení</translation>
     </message>
@@ -11953,16 +12044,16 @@ Chcete uložit své změny?</translation>
     <message>
         <location filename="../../src/app/valentina/mainwindow.cpp" line="2032"/>
         <location filename="../../src/app/valentina/mainwindow.cpp" line="2066"/>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="6926"/>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="6940"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="6942"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="6956"/>
         <source>Individual measurements</source>
         <translation>Individuální míry</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.cpp" line="2032"/>
         <location filename="../../src/app/valentina/mainwindow.cpp" line="2066"/>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="6926"/>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="6940"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="6942"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="6956"/>
         <source>Multisize measurements</source>
         <translation>Měření více velikostí</translation>
     </message>
@@ -12050,21 +12141,21 @@ Chcete uložit své změny?</translation>
     <message>
         <location filename="../../src/app/valentina/mainwindow.cpp" line="4218"/>
         <location filename="../../src/app/valentina/mainwindow.cpp" line="4291"/>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="6747"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="6763"/>
         <source>You don&apos;t have enough details to export. Please, include at least one detail in layout.</source>
         <translation>Nemáte dost jednotlivostí (dílů střihu) k vyvedení. Zahrňte, prosím, alespoň jednu jednotlivost (díl střihu) do rozvržení.</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.cpp" line="4231"/>
         <location filename="../../src/app/valentina/mainwindow.cpp" line="4304"/>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="6760"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="6776"/>
         <source>Export details</source>
         <translation>Vyvést jednotlivosti (díly střihu)</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.cpp" line="4231"/>
         <location filename="../../src/app/valentina/mainwindow.cpp" line="4304"/>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="6761"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="6777"/>
         <source>Can&apos;t export details.</source>
         <translation>Nelze vyvést jednotlivosti (díly střihu).</translation>
     </message>
@@ -12114,17 +12205,17 @@ Chcete uložit své změny?</translation>
         <translation>Vyvést konečné míry do CSV</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="7114"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="7125"/>
         <source>You can&apos;t export empty scene. Please, include at least one detail in layout.</source>
         <translation>Nemůžete vyvést prázdný výstup. Zahrňte, prosím, do rozvržení alespoň jednu jednotlivost (díl střihu).</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="7217"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="7228"/>
         <source>Export final measurements error.</source>
         <translation>Chyba při vyvádění konečných měr do CSV.</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="7218"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="7229"/>
         <source>Destination path is empty.</source>
         <translation>Cílová cesta je prázdná.</translation>
     </message>
@@ -12179,7 +12270,7 @@ Chcete uložit své změny?</translation>
         <translation>Vybrat středový bod umístění popisu</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="6439"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="6455"/>
         <source>The measurements file &apos;%1&apos; could not be found or provides not enough information.</source>
         <translation>Soubor s mírami &apos;%1&apos; se nepodařilo najít nebo neposkytuje dostatek údajů.</translation>
     </message>
@@ -12306,7 +12397,7 @@ Chcete uložit své změny?</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.ui" line="406"/>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="7834"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="7845"/>
         <source>Pattern messages</source>
         <translation>Zprávy střihu</translation>
     </message>
@@ -12321,27 +12412,27 @@ Chcete uložit své změny?</translation>
         <translation>Filtr</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="7811"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="7822"/>
         <source>DEBUG</source>
         <translation>LADĚNÍ</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="7814"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="7825"/>
         <source>WARNING</source>
         <translation>VAROVÁNÍ</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="7817"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="7828"/>
         <source>CRITICAL</source>
         <translation>ZÁSADNÍ</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="7820"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="7831"/>
         <source>FATAL</source>
         <translation>VELMI ZÁVAŽNÉ</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="7823"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="7834"/>
         <source>INFO</source>
         <translation>INFORMACE</translation>
     </message>
@@ -12447,47 +12538,47 @@ Chcete uložit své změny?</translation>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="7266"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="7277"/>
         <source>Not supported dimension A value &apos;%1&apos; for this pattern file.</source>
         <translation>Hodnota A výšky &apos;%1&apos; pro tento soubor se střihem není podporována.</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="7273"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="7284"/>
         <source>Couldn&apos;t set dimension A. Need a file with multisize measurements.</source>
         <translation>Nepodařilo se stanovit rozměr A. Soubor musí mít vícevelikostní míry.</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="7279"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="7290"/>
         <source>Couldn&apos;t set dimension A. File wasn&apos;t opened.</source>
         <translation>Nepodařilo se stanovit rozměr A. Soubor nebyl otevřen.</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="7309"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="7320"/>
         <source>Not supported dimension B value &apos;%1&apos; for this pattern file.</source>
         <translation>Hodnota B výšky &apos;%1&apos; pro tento soubor se střihem není podporována.</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="7316"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="7327"/>
         <source>Couldn&apos;t set dimension B. Need a file with multisize measurements.</source>
         <translation>Nepodařilo se stanovit rozměr B. Soubor musí mít vícevelikostní míry.</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="7322"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="7333"/>
         <source>Couldn&apos;t set dimension B. File wasn&apos;t opened.</source>
         <translation>Nepodařilo se stanovit rozměr B. Soubor nebyl otevřen.</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="7352"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="7363"/>
         <source>Not supported dimension C value &apos;%1&apos; for this pattern file.</source>
         <translation>Hodnota C výšky &apos;%1&apos; pro tento soubor se střihem není podporována.</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="7359"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="7370"/>
         <source>Couldn&apos;t set dimension C. Need a file with multisize measurements.</source>
         <translation>Nepodařilo se stanovit rozměr C. Soubor musí mít vícevelikostní míry.</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="7365"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="7376"/>
         <source>Couldn&apos;t set dimension C. File wasn&apos;t opened.</source>
         <translation>Nepodařilo se stanovit rozměr C. Soubor nebyl otevřen.</translation>
     </message>
@@ -12502,12 +12593,12 @@ Chcete uložit své změny?</translation>
         <translation>Obchod</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="6678"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="6694"/>
         <source>Scalable Vector Graphics files</source>
         <translation>Škálovatelné soubory vektorové grafiky</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="6680"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="6696"/>
         <source>Save draw</source>
         <translation>Uložit kreslení</translation>
     </message>
@@ -12799,22 +12890,21 @@ Chcete uložit své změny?</translation>
         <translation>Soubor s mírami má neznámý formát.</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindowsnogui.cpp" line="1352"/>
         <source>Measurement file contains invalid known measurement(s).</source>
-        <translation>Soubor s mírami obsahuje neplatnou(é) míru(y).</translation>
+        <translation type="vanished">Soubor s mírami obsahuje neplatnou(é) míru(y).</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindowsnogui.cpp" line="1361"/>
+        <location filename="../../src/app/valentina/mainwindowsnogui.cpp" line="1355"/>
         <source>File error.</source>
         <translation>Chyba souboru.</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindowsnogui.cpp" line="1391"/>
+        <location filename="../../src/app/valentina/mainwindowsnogui.cpp" line="1380"/>
         <source>Measurement file doesn&apos;t include all required measurements.</source>
         <translation>Soubor s mírami neobsahuje všechny požadované míry.</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindowsnogui.cpp" line="1392"/>
+        <location filename="../../src/app/valentina/mainwindowsnogui.cpp" line="1381"/>
         <source>Please, additionally provide: %1</source>
         <translation>Dodatečně, prosím, poskytněte: %1</translation>
     </message>
@@ -13103,105 +13193,101 @@ Chcete uložit své změny?</translation>
         <translation>Jazyk popisu:</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/dialogs/configpages/preferencesconfigurationpage.ui" line="166"/>
         <source>Pattern making system</source>
-        <translation>Systém na tvorbu střihů</translation>
+        <translation type="vanished">Systém na tvorbu střihů</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/dialogs/configpages/preferencesconfigurationpage.ui" line="175"/>
         <source>Pattern making system:</source>
-        <translation>Systém na tvorbu střihů:</translation>
+        <translation type="vanished">Systém na tvorbu střihů:</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/dialogs/configpages/preferencesconfigurationpage.ui" line="185"/>
         <source>Author:</source>
-        <translation>Autor:</translation>
+        <translation type="vanished">Autor:</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/dialogs/configpages/preferencesconfigurationpage.ui" line="199"/>
         <source>Book:</source>
-        <translation>Kniha:</translation>
+        <translation type="vanished">Kniha:</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/dialogs/configpages/preferencesconfigurationpage.ui" line="216"/>
+        <location filename="../../src/app/valentina/dialogs/configpages/preferencesconfigurationpage.ui" line="166"/>
         <source>Pattern editing</source>
         <translation>Upravování střihu</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/dialogs/configpages/preferencesconfigurationpage.ui" line="228"/>
+        <location filename="../../src/app/valentina/dialogs/configpages/preferencesconfigurationpage.ui" line="178"/>
         <source>Reset warnings</source>
         <translation>Vynulovat varování</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/dialogs/configpages/preferencesconfigurationpage.ui" line="287"/>
+        <location filename="../../src/app/valentina/dialogs/configpages/preferencesconfigurationpage.ui" line="237"/>
         <source>Toolbar</source>
         <translation>Nástrojový panel</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/dialogs/configpages/preferencesconfigurationpage.ui" line="293"/>
+        <location filename="../../src/app/valentina/dialogs/configpages/preferencesconfigurationpage.ui" line="243"/>
         <source>The text appears under the icon (recommended for beginners).</source>
         <translation>Text se ukáže pod symbolem (doporučeno pro začátečníky).</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/dialogs/configpages/preferencesconfigurationpage.cpp" line="397"/>
+        <location filename="../../src/app/valentina/dialogs/configpages/preferencesconfigurationpage.cpp" line="370"/>
         <source>With OS options</source>
         <translation>S volbami OS</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/dialogs/configpages/preferencesconfigurationpage.cpp" line="373"/>
+        <location filename="../../src/app/valentina/dialogs/configpages/preferencesconfigurationpage.cpp" line="346"/>
         <source>System</source>
         <comment>theme</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/dialogs/configpages/preferencesconfigurationpage.cpp" line="374"/>
+        <location filename="../../src/app/valentina/dialogs/configpages/preferencesconfigurationpage.cpp" line="347"/>
         <source>Dark</source>
         <comment>theme</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/dialogs/configpages/preferencesconfigurationpage.cpp" line="375"/>
+        <location filename="../../src/app/valentina/dialogs/configpages/preferencesconfigurationpage.cpp" line="348"/>
         <source>Light</source>
         <comment>theme</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/dialogs/configpages/preferencesconfigurationpage.cpp" line="382"/>
+        <location filename="../../src/app/valentina/dialogs/configpages/preferencesconfigurationpage.cpp" line="355"/>
         <source>Tool icon cursor</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/dialogs/configpages/preferencesconfigurationpage.cpp" line="383"/>
+        <location filename="../../src/app/valentina/dialogs/configpages/preferencesconfigurationpage.cpp" line="356"/>
         <source>Arrow cursor</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/dialogs/configpages/preferencesconfigurationpage.cpp" line="389"/>
+        <location filename="../../src/app/valentina/dialogs/configpages/preferencesconfigurationpage.cpp" line="362"/>
         <source>Centimeters</source>
         <translation>Centimetry</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/dialogs/configpages/preferencesconfigurationpage.cpp" line="390"/>
+        <location filename="../../src/app/valentina/dialogs/configpages/preferencesconfigurationpage.cpp" line="363"/>
         <source>Millimiters</source>
         <translation>Milimetry</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/dialogs/configpages/preferencesconfigurationpage.cpp" line="391"/>
+        <location filename="../../src/app/valentina/dialogs/configpages/preferencesconfigurationpage.cpp" line="364"/>
         <source>Inches</source>
         <translation>Palce</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/dialogs/configpages/preferencesconfigurationpage.ui" line="235"/>
+        <location filename="../../src/app/valentina/dialogs/configpages/preferencesconfigurationpage.ui" line="185"/>
         <source>Update a pattern only after a curve release</source>
         <translation>Aktualizovat jen střih po uvolnění křivky</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/dialogs/configpages/preferencesconfigurationpage.ui" line="238"/>
+        <location filename="../../src/app/valentina/dialogs/configpages/preferencesconfigurationpage.ui" line="188"/>
         <source>Free curve mode</source>
         <translation>Režim volné křivky</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/dialogs/configpages/preferencesconfigurationpage.cpp" line="291"/>
+        <location filename="../../src/app/valentina/dialogs/configpages/preferencesconfigurationpage.cpp" line="264"/>
         <source>default unit</source>
         <translation>Výchozí jednotka</translation>
     </message>
@@ -13216,183 +13302,183 @@ Chcete uložit své změny?</translation>
         <translation>Jazyk popisu dílu:</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/dialogs/configpages/preferencesconfigurationpage.ui" line="248"/>
+        <location filename="../../src/app/valentina/dialogs/configpages/preferencesconfigurationpage.ui" line="198"/>
         <source>Double click calls Zoom fit best for current pattern piece</source>
         <translation>Dvojité poklepání vyvolá Přizpůsobit pohled nejlépe na nynější díl střihu</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/dialogs/configpages/preferencesconfigurationpage.ui" line="271"/>
+        <location filename="../../src/app/valentina/dialogs/configpages/preferencesconfigurationpage.ui" line="221"/>
         <source>Enable to translate formula according to locale</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/dialogs/configpages/preferencesconfigurationpage.ui" line="274"/>
+        <location filename="../../src/app/valentina/dialogs/configpages/preferencesconfigurationpage.ui" line="224"/>
         <source>Translate formula</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/dialogs/configpages/preferencesconfigurationpage.ui" line="305"/>
+        <location filename="../../src/app/valentina/dialogs/configpages/preferencesconfigurationpage.ui" line="255"/>
         <source>Toolbox icon size:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/dialogs/configpages/preferencesconfigurationpage.ui" line="312"/>
+        <location filename="../../src/app/valentina/dialogs/configpages/preferencesconfigurationpage.ui" line="262"/>
         <source>Small</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/dialogs/configpages/preferencesconfigurationpage.ui" line="325"/>
+        <location filename="../../src/app/valentina/dialogs/configpages/preferencesconfigurationpage.ui" line="275"/>
         <source>Normal</source>
         <translation>Kolmice</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/dialogs/configpages/preferencesconfigurationpage.ui" line="361"/>
+        <location filename="../../src/app/valentina/dialogs/configpages/preferencesconfigurationpage.ui" line="311"/>
         <source>Theme:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/dialogs/configpages/preferencesconfigurationpage.ui" line="385"/>
+        <location filename="../../src/app/valentina/dialogs/configpages/preferencesconfigurationpage.ui" line="335"/>
         <source>Pointer mode:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/dialogs/configpages/preferencesconfigurationpage.ui" line="404"/>
+        <location filename="../../src/app/valentina/dialogs/configpages/preferencesconfigurationpage.ui" line="354"/>
         <source>Use tool groups</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/dialogs/configpages/preferencesconfigurationpage.ui" line="448"/>
-        <location filename="../../src/app/valentina/dialogs/configpages/preferencesconfigurationpage.ui" line="496"/>
+        <location filename="../../src/app/valentina/dialogs/configpages/preferencesconfigurationpage.ui" line="398"/>
+        <location filename="../../src/app/valentina/dialogs/configpages/preferencesconfigurationpage.ui" line="446"/>
         <source>Shortcuts</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/dialogs/configpages/preferencesconfigurationpage.ui" line="491"/>
+        <location filename="../../src/app/valentina/dialogs/configpages/preferencesconfigurationpage.ui" line="441"/>
         <source>Action</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/dialogs/configpages/preferencesconfigurationpage.ui" line="519"/>
+        <location filename="../../src/app/valentina/dialogs/configpages/preferencesconfigurationpage.ui" line="469"/>
         <source>Restore defaults</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/dialogs/configpages/preferencesconfigurationpage.ui" line="529"/>
-        <location filename="../../src/app/valentina/dialogs/configpages/preferencesconfigurationpage.ui" line="663"/>
+        <location filename="../../src/app/valentina/dialogs/configpages/preferencesconfigurationpage.ui" line="479"/>
+        <location filename="../../src/app/valentina/dialogs/configpages/preferencesconfigurationpage.ui" line="613"/>
         <source>Scrolling</source>
         <translation>Posunování</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/dialogs/configpages/preferencesconfigurationpage.ui" line="535"/>
+        <location filename="../../src/app/valentina/dialogs/configpages/preferencesconfigurationpage.ui" line="485"/>
         <source>Animation</source>
         <translation>Animace</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/dialogs/configpages/preferencesconfigurationpage.ui" line="544"/>
+        <location filename="../../src/app/valentina/dialogs/configpages/preferencesconfigurationpage.ui" line="494"/>
         <source>Duration:</source>
         <translation>Doba trvání:</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/dialogs/configpages/preferencesconfigurationpage.ui" line="551"/>
+        <location filename="../../src/app/valentina/dialogs/configpages/preferencesconfigurationpage.ui" line="501"/>
         <source>Scrolling animation duration</source>
         <translation>Doba trvání posunovací animace</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/dialogs/configpages/preferencesconfigurationpage.ui" line="554"/>
-        <location filename="../../src/app/valentina/dialogs/configpages/preferencesconfigurationpage.ui" line="580"/>
+        <location filename="../../src/app/valentina/dialogs/configpages/preferencesconfigurationpage.ui" line="504"/>
+        <location filename="../../src/app/valentina/dialogs/configpages/preferencesconfigurationpage.ui" line="530"/>
         <source>ms</source>
         <comment>milliseconds</comment>
         <translation>ms</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/dialogs/configpages/preferencesconfigurationpage.ui" line="570"/>
+        <location filename="../../src/app/valentina/dialogs/configpages/preferencesconfigurationpage.ui" line="520"/>
         <source>Update interval:</source>
         <translation>Interval aktualizace:</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/dialogs/configpages/preferencesconfigurationpage.ui" line="577"/>
+        <location filename="../../src/app/valentina/dialogs/configpages/preferencesconfigurationpage.ui" line="527"/>
         <source>Time in milliseconds between each animation update</source>
         <translation>Čas v milisekundách mezi každou aktualizací animace</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/dialogs/configpages/preferencesconfigurationpage.ui" line="599"/>
+        <location filename="../../src/app/valentina/dialogs/configpages/preferencesconfigurationpage.ui" line="549"/>
         <source>Mouse scale</source>
         <translation>Rozsah myši</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/dialogs/configpages/preferencesconfigurationpage.ui" line="608"/>
+        <location filename="../../src/app/valentina/dialogs/configpages/preferencesconfigurationpage.ui" line="558"/>
         <source>Sensor:</source>
         <comment>sensor mouse</comment>
         <translation>Čidlo:</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/dialogs/configpages/preferencesconfigurationpage.ui" line="615"/>
+        <location filename="../../src/app/valentina/dialogs/configpages/preferencesconfigurationpage.ui" line="565"/>
         <source>Scale scrolling sensitivity for mouse with sensor</source>
         <translation>Citlivost posunování měřítka pro myš s čidlem</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/dialogs/configpages/preferencesconfigurationpage.ui" line="634"/>
+        <location filename="../../src/app/valentina/dialogs/configpages/preferencesconfigurationpage.ui" line="584"/>
         <source>Wheel:</source>
         <comment>mouse wheel</comment>
         <translation>Kolečko:</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/dialogs/configpages/preferencesconfigurationpage.ui" line="641"/>
+        <location filename="../../src/app/valentina/dialogs/configpages/preferencesconfigurationpage.ui" line="591"/>
         <source>Scale scrolling sensitivity for mouse with wheel</source>
         <translation>Citlivost posunování měřítka pro myš s kolečkem</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/dialogs/configpages/preferencesconfigurationpage.ui" line="672"/>
+        <location filename="../../src/app/valentina/dialogs/configpages/preferencesconfigurationpage.ui" line="622"/>
         <source>Acceleration:</source>
         <translation>Zrychlení:</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/dialogs/configpages/preferencesconfigurationpage.ui" line="712"/>
+        <location filename="../../src/app/valentina/dialogs/configpages/preferencesconfigurationpage.ui" line="662"/>
         <source>Privacy</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/dialogs/configpages/preferencesconfigurationpage.ui" line="718"/>
+        <location filename="../../src/app/valentina/dialogs/configpages/preferencesconfigurationpage.ui" line="668"/>
         <source>Send usage statistics</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/dialogs/configpages/preferencesconfigurationpage.ui" line="725"/>
+        <location filename="../../src/app/valentina/dialogs/configpages/preferencesconfigurationpage.ui" line="675"/>
         <source>Please help to improve Valentina&apos;s quality by automatically sending usage statistics. Sent data contains &lt;span style=&quot; font-weight:700;&quot;&gt;no potentially sensitive information&lt;/span&gt; like user names, email addresses, file contents or file paths.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/dialogs/configpages/preferencesconfigurationpage.ui" line="353"/>
+        <location filename="../../src/app/valentina/dialogs/configpages/preferencesconfigurationpage.ui" line="303"/>
         <source>User Interface</source>
         <translation>Uživatelské rozhraní</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/dialogs/configpages/preferencesconfigurationpage.ui" line="411"/>
+        <location filename="../../src/app/valentina/dialogs/configpages/preferencesconfigurationpage.ui" line="361"/>
         <source>Don&apos;t use the native file dialog</source>
         <translation>Nepoužívat dialogové okno nativního souboru</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/dialogs/configpages/preferencesconfigurationpage.ui" line="421"/>
+        <location filename="../../src/app/valentina/dialogs/configpages/preferencesconfigurationpage.ui" line="371"/>
         <source>Update</source>
         <translation>Aktualizovat</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/dialogs/configpages/preferencesconfigurationpage.ui" line="427"/>
+        <location filename="../../src/app/valentina/dialogs/configpages/preferencesconfigurationpage.ui" line="377"/>
         <source>Automatically check for updates each time the application starts</source>
         <translation>Automaticky kontrolovat aktualizace při každém spuštění programu</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/dialogs/configpages/preferencesconfigurationpage.ui" line="430"/>
+        <location filename="../../src/app/valentina/dialogs/configpages/preferencesconfigurationpage.ui" line="380"/>
         <source>Automatically check for updates</source>
         <translation>Automaticky kontrolovat aktualizace</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/dialogs/configpages/preferencesconfigurationpage.ui" line="258"/>
+        <location filename="../../src/app/valentina/dialogs/configpages/preferencesconfigurationpage.ui" line="208"/>
         <source>Disable if you want to skip interactive part of creating tools. And go straight to editing formulas instead.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/dialogs/configpages/preferencesconfigurationpage.ui" line="261"/>
+        <location filename="../../src/app/valentina/dialogs/configpages/preferencesconfigurationpage.ui" line="211"/>
         <source>Interactive tools</source>
         <translation type="unfinished"></translation>
     </message>
@@ -13425,18 +13511,23 @@ Chcete uložit své změny?</translation>
         <translation>Upravit</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/dialogs/configpages/preferencespathpage.cpp" line="142"/>
+        <location filename="../../src/app/valentina/dialogs/configpages/preferencespathpage.cpp" line="149"/>
         <source>Open Directory</source>
         <translation>Otevřít adresář</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/dialogs/configpages/preferencespathpage.cpp" line="173"/>
+        <location filename="../../src/app/valentina/dialogs/configpages/preferencespathpage.cpp" line="180"/>
         <source>My SVG Fonts</source>
         <translation>Moje písma SVG</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/dialogs/configpages/preferencespathpage.cpp" line="180"/>
+        <location filename="../../src/app/valentina/dialogs/configpages/preferencespathpage.cpp" line="187"/>
         <source>My font corrections</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/app/valentina/dialogs/configpages/preferencespathpage.cpp" line="194"/>
+        <source>My known measurements</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -14109,18 +14200,23 @@ Tato volba se projeví po opětovném spuštění.</translation>
         <translation>Upravit</translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/dialogs/configpages/puzzlepreferencespathpage.cpp" line="134"/>
+        <location filename="../../src/app/puzzle/dialogs/configpages/puzzlepreferencespathpage.cpp" line="141"/>
         <source>Open Directory</source>
         <translation>Otevřít adresář</translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/dialogs/configpages/puzzlepreferencespathpage.cpp" line="161"/>
+        <location filename="../../src/app/puzzle/dialogs/configpages/puzzlepreferencespathpage.cpp" line="168"/>
         <source>My SVG Fonts</source>
         <translation>Moje písma SVG</translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/dialogs/configpages/puzzlepreferencespathpage.cpp" line="168"/>
+        <location filename="../../src/app/puzzle/dialogs/configpages/puzzlepreferencespathpage.cpp" line="175"/>
         <source>My font corrections</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/app/puzzle/dialogs/configpages/puzzlepreferencespathpage.cpp" line="182"/>
+        <source>My known measurements</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -14270,12 +14366,12 @@ Tato volba se projeví po opětovném spuštění.</translation>
         <translation>Chyba kompatibility VTextManager: actualClassVersion = %1 a classVersion = %2</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vmisc/def.cpp" line="571"/>
+        <location filename="../../src/libs/vmisc/def.cpp" line="560"/>
         <source>CustomSARecord prefix mismatch error: actualStreamHeader = 0x%1 and streamHeader = 0x%2</source>
         <translation>Chyba v nesouladu předpony CustomSARecord: actualStreamHeader = 0x%1 a streamHeader = 0x%2</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vmisc/def.cpp" line="583"/>
+        <location filename="../../src/libs/vmisc/def.cpp" line="572"/>
         <source>CustomSARecord compatibility error: actualClassVersion = %1 and classVersion = %2</source>
         <translation>Chyba kompatibility CustomSARecord: actualClassVersion = %1 a classVersion = %2</translation>
     </message>
@@ -14317,17 +14413,17 @@ Tato volba se projeví po opětovném spuštění.</translation>
         <translation type="vanished">Začněte vytvořením nového dílu střihu.</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vmisc/def.cpp" line="501"/>
+        <location filename="../../src/libs/vmisc/def.cpp" line="490"/>
         <source>mm</source>
         <translation>mm</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vmisc/def.cpp" line="510"/>
+        <location filename="../../src/libs/vmisc/def.cpp" line="499"/>
         <source>cm</source>
         <translation>cm</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vmisc/def.cpp" line="503"/>
+        <location filename="../../src/libs/vmisc/def.cpp" line="492"/>
         <source>inch</source>
         <translation>palec</translation>
     </message>
@@ -14345,7 +14441,7 @@ Tato volba se projeví po opětovném spuštění.</translation>
         <translation>Hodnota</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vmisc/def.cpp" line="505"/>
+        <location filename="../../src/libs/vmisc/def.cpp" line="494"/>
         <source>px</source>
         <translation>px</translation>
     </message>
@@ -15323,6 +15419,569 @@ Tato volba se projeví po opětovném spuštění.</translation>
     </message>
 </context>
 <context>
+    <name>TKMMainWindow</name>
+    <message>
+        <location filename="../../src/app/tape/tkmmainwindow.ui" line="31"/>
+        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:18pt;&quot;&gt;Select New to create a new known measurements file.&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/app/tape/tkmmainwindow.ui" line="58"/>
+        <source>Measurements</source>
+        <translation type="unfinished">Míry</translation>
+    </message>
+    <message>
+        <location filename="../../src/app/tape/tkmmainwindow.ui" line="72"/>
+        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Search history &lt;span style=&quot; color:#888a85;&quot;&gt;%1&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
+        <translation type="unfinished">&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Historie vyhledávání &lt;span style=&quot; color:#888a85;&quot;&gt;%1&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+    </message>
+    <message>
+        <location filename="../../src/app/tape/tkmmainwindow.ui" line="82"/>
+        <source>Alt+Down</source>
+        <translation type="unfinished">Alt+šipka dolů</translation>
+    </message>
+    <message>
+        <location filename="../../src/app/tape/tkmmainwindow.ui" line="92"/>
+        <source>Search</source>
+        <translation type="unfinished">Hledání</translation>
+    </message>
+    <message>
+        <location filename="../../src/app/tape/tkmmainwindow.ui" line="109"/>
+        <location filename="../../src/app/tape/tkmmainwindow.cpp" line="1773"/>
+        <source>0 results</source>
+        <translation type="unfinished">0 výsledků</translation>
+    </message>
+    <message>
+        <location filename="../../src/app/tape/tkmmainwindow.ui" line="136"/>
+        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Match Case &lt;span style=&quot; color:#888a85;&quot;&gt;%1&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
+        <translation type="unfinished">&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Odpovídá velikost písmen &lt;span style=&quot; color:#888a85;&quot;&gt;%1&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+    </message>
+    <message>
+        <location filename="../../src/app/tape/tkmmainwindow.ui" line="167"/>
+        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Match words &lt;span style=&quot; color:#888a85;&quot;&gt;%1&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
+        <translation type="unfinished">&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Odpovídají slova &lt;span style=&quot; color:#888a85;&quot;&gt;%1&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+    </message>
+    <message>
+        <location filename="../../src/app/tape/tkmmainwindow.ui" line="201"/>
+        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Match with regular expressions &lt;span style=&quot; color:#888a85;&quot;&gt;%1&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
+        <translation type="unfinished">&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Shoda s regulárními výrazy &lt;span style=&quot; color:#888a85;&quot;&gt;%1&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+    </message>
+    <message>
+        <location filename="../../src/app/tape/tkmmainwindow.ui" line="232"/>
+        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Use unicode properties &lt;span style=&quot; color:#888a85;&quot;&gt;%1&lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;br/&gt;&lt;span style=&quot; color:#888a85;&quot;&gt;The meaning of the \w, \d, etc., character classes, as well as the meaning of their counterparts (\W, \D, etc.), is changed from matching ASCII characters only to matching any character with the corresponding Unicode property. For instance, \d is changed to match any character with the Unicode Nd (decimal digit) property; \w to match any character with either the Unicode L (letter) or N (digit) property, plus underscore, and so on. This option corresponds to the /u modifier in Perl regular expressions.&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
+        <translation type="unfinished">&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Použijte vlastnosti Unicode &lt;span style=&quot; color:#888a85;&quot;&gt;%1&lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;br/&gt;&lt;span style=&quot; color:#888a85;&quot;&gt;Význam tříd znaků \w, \d atd., stejně jako význam jejich protějšků (\W, \D atd.), se mění z odpovídající pouze znakům ASCII na shodu libovolného znaku s odpovídající vlastností kódu Unicode. Například \d se změní tak, aby odpovídal libovolnému znaku s vlastností Unicode Nd (desetinná číslice); \w pro přiřazení libovolného znaku buď vlastnosti Unicode L (písmeno) nebo N (číslice), plus podtržítko atd. Tato možnost odpovídá modifikátoru /u v regulárních výrazech Perlu.&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+    </message>
+    <message>
+        <location filename="../../src/app/tape/tkmmainwindow.ui" line="238"/>
+        <source>Alt+U</source>
+        <translation type="unfinished">Alt+U</translation>
+    </message>
+    <message>
+        <location filename="../../src/app/tape/tkmmainwindow.ui" line="258"/>
+        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Find Previous &lt;span style=&quot; color:#888a85;&quot;&gt;%1&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
+        <translation type="unfinished">&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Najít předchozí &lt;span style=&quot; color:#888a85;&quot;&gt;%1&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+    </message>
+    <message>
+        <location filename="../../src/app/tape/tkmmainwindow.ui" line="268"/>
+        <source>Shift+F3</source>
+        <translation type="unfinished">Shift+F3</translation>
+    </message>
+    <message>
+        <location filename="../../src/app/tape/tkmmainwindow.ui" line="278"/>
+        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Find Next %1&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
+        <translation type="unfinished">&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Najít další %1&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+    </message>
+    <message>
+        <location filename="../../src/app/tape/tkmmainwindow.ui" line="288"/>
+        <source>F3</source>
+        <translation type="unfinished">F3</translation>
+    </message>
+    <message>
+        <location filename="../../src/app/tape/tkmmainwindow.ui" line="320"/>
+        <location filename="../../src/app/tape/tkmmainwindow.cpp" line="2519"/>
+        <source>Name</source>
+        <comment>measurement column</comment>
+        <translation type="unfinished">Název</translation>
+    </message>
+    <message>
+        <location filename="../../src/app/tape/tkmmainwindow.ui" line="325"/>
+        <location filename="../../src/app/tape/tkmmainwindow.cpp" line="2521"/>
+        <source>Full name</source>
+        <comment>measurement column</comment>
+        <translation type="unfinished">Plný název</translation>
+    </message>
+    <message>
+        <location filename="../../src/app/tape/tkmmainwindow.ui" line="330"/>
+        <location filename="../../src/app/tape/tkmmainwindow.cpp" line="2523"/>
+        <source>Group</source>
+        <comment>measurement column</comment>
+        <translation type="unfinished">Skupina</translation>
+    </message>
+    <message>
+        <location filename="../../src/app/tape/tkmmainwindow.ui" line="345"/>
+        <location filename="../../src/app/tape/tkmmainwindow.ui" line="348"/>
+        <location filename="../../src/app/tape/tkmmainwindow.ui" line="724"/>
+        <location filename="../../src/app/tape/tkmmainwindow.ui" line="727"/>
+        <source>Details</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/app/tape/tkmmainwindow.ui" line="362"/>
+        <source>Move measurement top</source>
+        <translation type="unfinished">Posunout míru úplně nahoru</translation>
+    </message>
+    <message>
+        <location filename="../../src/app/tape/tkmmainwindow.ui" line="379"/>
+        <source>Move measurement up</source>
+        <translation type="unfinished">Posunout míru nahoru</translation>
+    </message>
+    <message>
+        <location filename="../../src/app/tape/tkmmainwindow.ui" line="396"/>
+        <source>Move measurement down</source>
+        <translation type="unfinished">Posunout míru dolů</translation>
+    </message>
+    <message>
+        <location filename="../../src/app/tape/tkmmainwindow.ui" line="413"/>
+        <source>Move measurement bottom</source>
+        <translation type="unfinished">Posunout míru úplně dolů</translation>
+    </message>
+    <message>
+        <location filename="../../src/app/tape/tkmmainwindow.ui" line="443"/>
+        <location filename="../../src/app/tape/tkmmainwindow.ui" line="768"/>
+        <source>Delete measurement</source>
+        <translation type="unfinished">Smazat míru</translation>
+    </message>
+    <message>
+        <location filename="../../src/app/tape/tkmmainwindow.ui" line="459"/>
+        <source>Units:</source>
+        <translation type="unfinished">Jednotky:</translation>
+    </message>
+    <message>
+        <location filename="../../src/app/tape/tkmmainwindow.ui" line="479"/>
+        <location filename="../../src/app/tape/tkmmainwindow.ui" line="888"/>
+        <source>Name:</source>
+        <translation type="unfinished">Název:</translation>
+    </message>
+    <message>
+        <location filename="../../src/app/tape/tkmmainwindow.ui" line="489"/>
+        <location filename="../../src/app/tape/tkmmainwindow.ui" line="492"/>
+        <location filename="../../src/app/tape/tkmmainwindow.ui" line="811"/>
+        <source>Measurement&apos;s name in a formula</source>
+        <translation type="unfinished">Název míry ve vzorci</translation>
+    </message>
+    <message>
+        <location filename="../../src/app/tape/tkmmainwindow.ui" line="499"/>
+        <source>Full name:</source>
+        <translation type="unfinished">Plný název:</translation>
+    </message>
+    <message>
+        <location filename="../../src/app/tape/tkmmainwindow.ui" line="512"/>
+        <source>Measurement&apos;s human-readable name</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/app/tape/tkmmainwindow.ui" line="519"/>
+        <source>Group:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/app/tape/tkmmainwindow.ui" line="536"/>
+        <source>Formula:</source>
+        <translation type="unfinished">Vzorec:</translation>
+    </message>
+    <message>
+        <location filename="../../src/app/tape/tkmmainwindow.ui" line="582"/>
+        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Show full calculation in message box&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
+        <translation type="unfinished">&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Ukázat celý výpočet v okně se zprávami&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+    </message>
+    <message>
+        <location filename="../../src/app/tape/tkmmainwindow.ui" line="607"/>
+        <location filename="../../src/app/tape/tkmmainwindow.ui" line="908"/>
+        <source>Description:</source>
+        <translation type="unfinished">Popis:</translation>
+    </message>
+    <message>
+        <location filename="../../src/app/tape/tkmmainwindow.ui" line="633"/>
+        <source>Diagram</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/app/tape/tkmmainwindow.ui" line="652"/>
+        <source>Images</source>
+        <translation type="unfinished">Obrázky</translation>
+    </message>
+    <message>
+        <location filename="../../src/app/tape/tkmmainwindow.ui" line="754"/>
+        <source>...</source>
+        <translation type="unfinished">...</translation>
+    </message>
+    <message>
+        <location filename="../../src/app/tape/tkmmainwindow.ui" line="785"/>
+        <source>Save image</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/app/tape/tkmmainwindow.ui" line="801"/>
+        <source>Title:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/app/tape/tkmmainwindow.ui" line="827"/>
+        <source>Information</source>
+        <translation type="unfinished">Informace</translation>
+    </message>
+    <message>
+        <location filename="../../src/app/tape/tkmmainwindow.ui" line="836"/>
+        <source>Path:</source>
+        <translation type="unfinished">Cesta:</translation>
+    </message>
+    <message>
+        <location filename="../../src/app/tape/tkmmainwindow.ui" line="879"/>
+        <source>Show in Explorer</source>
+        <translation type="unfinished">Ukázat ve správci souborů</translation>
+    </message>
+    <message>
+        <location filename="../../src/app/tape/tkmmainwindow.ui" line="942"/>
+        <source>File</source>
+        <translation type="unfinished">Soubor</translation>
+    </message>
+    <message>
+        <location filename="../../src/app/tape/tkmmainwindow.ui" line="961"/>
+        <source>&amp;Help</source>
+        <translation type="unfinished">&amp;Nápověda</translation>
+    </message>
+    <message>
+        <location filename="../../src/app/tape/tkmmainwindow.ui" line="968"/>
+        <source>&amp;Measurments</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/app/tape/tkmmainwindow.ui" line="975"/>
+        <source>&amp;Window</source>
+        <translation type="unfinished">&amp;Okno</translation>
+    </message>
+    <message>
+        <location filename="../../src/app/tape/tkmmainwindow.ui" line="986"/>
+        <location filename="../../src/app/tape/tkmmainwindow.ui" line="1160"/>
+        <source>Measurement diagram</source>
+        <translation type="unfinished">Diagram míry</translation>
+    </message>
+    <message>
+        <location filename="../../src/app/tape/tkmmainwindow.ui" line="1014"/>
+        <source>toolBar</source>
+        <translation type="unfinished">Lišta nástrojů</translation>
+    </message>
+    <message>
+        <location filename="../../src/app/tape/tkmmainwindow.ui" line="1042"/>
+        <source>&amp;Save</source>
+        <translation type="unfinished">&amp;Uložit</translation>
+    </message>
+    <message>
+        <location filename="../../src/app/tape/tkmmainwindow.ui" line="1057"/>
+        <source>Save &amp;As …</source>
+        <translation type="unfinished">Uložit j&amp;ako…</translation>
+    </message>
+    <message>
+        <location filename="../../src/app/tape/tkmmainwindow.ui" line="1069"/>
+        <source>&amp;Quit</source>
+        <translation type="unfinished">&amp;Ukončit</translation>
+    </message>
+    <message>
+        <location filename="../../src/app/tape/tkmmainwindow.ui" line="1077"/>
+        <source>About &amp;Qt</source>
+        <translation type="unfinished">O &amp;Qt</translation>
+    </message>
+    <message>
+        <location filename="../../src/app/tape/tkmmainwindow.ui" line="1089"/>
+        <source>&amp;About Tape</source>
+        <translation type="unfinished">&amp;O programu Tape</translation>
+    </message>
+    <message>
+        <location filename="../../src/app/tape/tkmmainwindow.ui" line="1101"/>
+        <source>&amp;New</source>
+        <translation type="unfinished">&amp;Nový</translation>
+    </message>
+    <message>
+        <location filename="../../src/app/tape/tkmmainwindow.ui" line="1119"/>
+        <source>Read only</source>
+        <translation type="unfinished">Pouze pro čtení</translation>
+    </message>
+    <message>
+        <location filename="../../src/app/tape/tkmmainwindow.ui" line="1127"/>
+        <source>Preferences</source>
+        <translation type="unfinished">Nastavení</translation>
+    </message>
+    <message>
+        <location filename="../../src/app/tape/tkmmainwindow.ui" line="1139"/>
+        <source>&amp;Open</source>
+        <translation type="unfinished">&amp;Otevřít</translation>
+    </message>
+    <message>
+        <location filename="../../src/app/tape/tkmmainwindow.ui" line="1142"/>
+        <source>Ctrl+O</source>
+        <translation type="unfinished">Ctrl+O</translation>
+    </message>
+    <message>
+        <location filename="../../src/app/tape/tkmmainwindow.ui" line="1175"/>
+        <source>Add known</source>
+        <translation type="unfinished">Přidat známé</translation>
+    </message>
+    <message>
+        <location filename="../../src/app/tape/tkmmainwindow.ui" line="1186"/>
+        <location filename="../../src/app/tape/tkmmainwindow.ui" line="1189"/>
+        <location filename="../../src/app/tape/tkmmainwindow.cpp" line="722"/>
+        <source>Import from CSV</source>
+        <translation type="unfinished">Zavést z CSV</translation>
+    </message>
+    <message>
+        <location filename="../../src/app/tape/tkmmainwindow.ui" line="1200"/>
+        <source>Export to CSV</source>
+        <translation type="unfinished">Vyvést do CSV</translation>
+    </message>
+    <message>
+        <location filename="../../src/app/tape/tkmmainwindow.cpp" line="138"/>
+        <source>Show in Finder</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/app/tape/tkmmainwindow.cpp" line="185"/>
+        <source>File &apos;%1&apos; doesn&apos;t exist!</source>
+        <translation type="unfinished">Soubor &apos;%1&apos; není!</translation>
+    </message>
+    <message>
+        <location filename="../../src/app/tape/tkmmainwindow.cpp" line="271"/>
+        <source>File error.</source>
+        <translation type="unfinished">Chyba souboru.</translation>
+    </message>
+    <message>
+        <location filename="../../src/app/tape/tkmmainwindow.cpp" line="310"/>
+        <source>untitled %1</source>
+        <translation type="unfinished">bez názvu %1</translation>
+    </message>
+    <message>
+        <location filename="../../src/app/tape/tkmmainwindow.cpp" line="314"/>
+        <location filename="../../src/app/tape/tkmmainwindow.cpp" line="1017"/>
+        <source>untitled</source>
+        <translation type="unfinished">bez názvu</translation>
+    </message>
+    <message>
+        <location filename="../../src/app/tape/tkmmainwindow.cpp" line="323"/>
+        <source>read only</source>
+        <translation type="unfinished">Pouze pro čtení</translation>
+    </message>
+    <message>
+        <location filename="../../src/app/tape/tkmmainwindow.cpp" line="542"/>
+        <location filename="../../src/app/tape/tkmmainwindow.cpp" line="596"/>
+        <source>Known measurements</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/app/tape/tkmmainwindow.cpp" line="542"/>
+        <source>All files</source>
+        <translation type="unfinished">Všechny soubory</translation>
+    </message>
+    <message>
+        <location filename="../../src/app/tape/tkmmainwindow.cpp" line="579"/>
+        <source>Could not save the file</source>
+        <translation type="unfinished">Nepodařilo se uložit soubor</translation>
+    </message>
+    <message>
+        <location filename="../../src/app/tape/tkmmainwindow.cpp" line="598"/>
+        <source>known measurements</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/app/tape/tkmmainwindow.cpp" line="617"/>
+        <source>Save as</source>
+        <translation type="unfinished">Uložit jako</translation>
+    </message>
+    <message>
+        <location filename="../../src/app/tape/tkmmainwindow.cpp" line="638"/>
+        <source>Failed to lock. This file already opened in another window.</source>
+        <translation type="unfinished">Nepodařilo se uzamknout. Tento soubor je již otevřen v jiném okně.</translation>
+    </message>
+    <message>
+        <location filename="../../src/app/tape/tkmmainwindow.cpp" line="655"/>
+        <source>Could not save file</source>
+        <translation type="unfinished">Nepodařilo se uložit soubor</translation>
+    </message>
+    <message>
+        <location filename="../../src/app/tape/tkmmainwindow.cpp" line="681"/>
+        <source>Failed to lock. This file already opened in another window. Expect collissions when run 2 copies of the program.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/app/tape/tkmmainwindow.cpp" line="719"/>
+        <source>Comma-Separated Values</source>
+        <translation type="unfinished">Čárkou oddělené hodnoty</translation>
+    </message>
+    <message>
+        <location filename="../../src/app/tape/tkmmainwindow.cpp" line="920"/>
+        <source>Measurement image</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/app/tape/tkmmainwindow.cpp" line="934"/>
+        <source>Invalid image. Error: %1</source>
+        <translation type="unfinished">Neplatný obrázek. Chyba: %1</translation>
+    </message>
+    <message>
+        <location filename="../../src/app/tape/tkmmainwindow.cpp" line="1006"/>
+        <location filename="../../src/app/tape/tkmmainwindow.cpp" line="1044"/>
+        <source>Unable to save image. Error: %1</source>
+        <translation type="unfinished">Nepodařilo se uložit obrázek. Chyba: %1</translation>
+    </message>
+    <message>
+        <location filename="../../src/app/tape/tkmmainwindow.cpp" line="1028"/>
+        <source>Save Image</source>
+        <translation type="unfinished">Uložit obrázek</translation>
+    </message>
+    <message>
+        <location filename="../../src/app/tape/tkmmainwindow.cpp" line="1071"/>
+        <source>Unable to show image. Error: %1</source>
+        <translation type="unfinished">Nepodařilo se zobrazit obrázek. Chyba: %1</translation>
+    </message>
+    <message>
+        <location filename="../../src/app/tape/tkmmainwindow.cpp" line="1622"/>
+        <source>About Qt</source>
+        <translation type="unfinished">O Qt</translation>
+    </message>
+    <message>
+        <location filename="../../src/app/tape/tkmmainwindow.cpp" line="1861"/>
+        <source>Empty</source>
+        <translation type="unfinished">Prázdný</translation>
+    </message>
+    <message>
+        <location filename="../../src/app/tape/tkmmainwindow.cpp" line="1862"/>
+        <source>File was not saved yet.</source>
+        <translation type="unfinished">Soubor ještě nebyl uložen.</translation>
+    </message>
+    <message>
+        <location filename="../../src/app/tape/tkmmainwindow.cpp" line="1913"/>
+        <source>Unsaved changes</source>
+        <translation type="unfinished">Neuložené změny</translation>
+    </message>
+    <message>
+        <location filename="../../src/app/tape/tkmmainwindow.cpp" line="1914"/>
+        <source>Measurements have been modified. Do you want to save your changes?</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/app/tape/tkmmainwindow.cpp" line="1922"/>
+        <source>Save…</source>
+        <translation type="unfinished">Uložit…</translation>
+    </message>
+    <message>
+        <location filename="../../src/app/tape/tkmmainwindow.cpp" line="1922"/>
+        <source>Save</source>
+        <translation type="unfinished">Uložit</translation>
+    </message>
+    <message>
+        <location filename="../../src/app/tape/tkmmainwindow.cpp" line="1927"/>
+        <source>Don&apos;t Save</source>
+        <translation type="unfinished">Neukládat</translation>
+    </message>
+    <message>
+        <location filename="../../src/app/tape/tkmmainwindow.cpp" line="1999"/>
+        <source>Cannot read settings from a malformed .INI file.</source>
+        <translation type="unfinished">Nelze číst nastavení z poškozeného souboru .INI.</translation>
+    </message>
+    <message>
+        <location filename="../../src/app/tape/tkmmainwindow.cpp" line="2018"/>
+        <source>Cannot save settings. Access denied.</source>
+        <translation type="unfinished">Nelze uložit nastavení. Přístup odepřen.</translation>
+    </message>
+    <message>
+        <location filename="../../src/app/tape/tkmmainwindow.cpp" line="2048"/>
+        <source>Empty</source>
+        <comment>list</comment>
+        <translation type="unfinished">Prázdný</translation>
+    </message>
+    <message>
+        <location filename="../../src/app/tape/tkmmainwindow.cpp" line="2121"/>
+        <source>Unknown measurement</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/app/tape/tkmmainwindow.cpp" line="2129"/>
+        <source>&amp;New Window</source>
+        <translation type="unfinished">&amp;Nové okno</translation>
+    </message>
+    <message>
+        <location filename="../../src/app/tape/tkmmainwindow.cpp" line="2268"/>
+        <location filename="../../src/app/tape/tkmmainwindow.cpp" line="2454"/>
+        <source>Unnamed image %1</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/app/tape/tkmmainwindow.cpp" line="2309"/>
+        <source>Open file</source>
+        <translation type="unfinished">Otevřít soubor</translation>
+    </message>
+    <message>
+        <location filename="../../src/app/tape/tkmmainwindow.cpp" line="2427"/>
+        <source>Length units</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/app/tape/tkmmainwindow.cpp" line="2428"/>
+        <source>Degrees</source>
+        <translation type="unfinished">Stupně</translation>
+    </message>
+    <message>
+        <location filename="../../src/app/tape/tkmmainwindow.cpp" line="2446"/>
+        <source>None</source>
+        <translation type="unfinished">Žádný</translation>
+    </message>
+    <message>
+        <location filename="../../src/app/tape/tkmmainwindow.cpp" line="2491"/>
+        <source>Measurement name is empty.</source>
+        <translation type="unfinished">Název míry je prázdný.</translation>
+    </message>
+    <message>
+        <location filename="../../src/app/tape/tkmmainwindow.cpp" line="2496"/>
+        <source>Imported file must not contain the same name twice.</source>
+        <translation type="unfinished">Zavedený soubor nesmí obsahovat stejný název dvakrát.</translation>
+    </message>
+    <message>
+        <location filename="../../src/app/tape/tkmmainwindow.cpp" line="2502"/>
+        <source>Measurement &apos;%1&apos; doesn&apos;t match regex pattern.</source>
+        <translation type="unfinished">Rozměry &apos;%1&apos; neodpovídají vzoru regulárního výrazu.</translation>
+    </message>
+    <message>
+        <location filename="../../src/app/tape/tkmmainwindow.cpp" line="2507"/>
+        <source>Measurement &apos;%1&apos; already used in the file.</source>
+        <translation type="unfinished">Míra &apos;%1&apos; již použita v souboru.</translation>
+    </message>
+    <message>
+        <location filename="../../src/app/tape/tkmmainwindow.cpp" line="2525"/>
+        <source>Formula</source>
+        <comment>measurement column</comment>
+        <translation type="unfinished">Vzorec</translation>
+    </message>
+    <message>
+        <location filename="../../src/app/tape/tkmmainwindow.cpp" line="2527"/>
+        <source>Description</source>
+        <comment>measurement column</comment>
+        <translation type="unfinished">Popis</translation>
+    </message>
+    <message>
+        <location filename="../../src/app/tape/tkmmainwindow.cpp" line="2551"/>
+        <source>Error in row %1. The measurement name is empty.</source>
+        <translation type="unfinished">Chyba na řádku %1. Název míry je prázdný.</translation>
+    </message>
+    <message>
+        <location filename="../../src/app/tape/tkmmainwindow.cpp" line="2594"/>
+        <source>Error in row %1. %2</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/app/tape/tkmmainwindow.cpp" line="2607"/>
+        <source>Individual measurements require at least 2 columns.</source>
+        <translation type="unfinished">Individuální míry vyžadují alespoň 2 sloupce.</translation>
+    </message>
+</context>
+<context>
     <name>TMainWindow</name>
     <message>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:18pt;&quot;&gt;Select New for creation measurement file.&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
@@ -15333,7 +15992,7 @@ Tato volba se projeví po opětovném spuštění.</translation>
         <translation type="vanished">Název</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.ui" line="547"/>
+        <location filename="../../src/app/tape/tmainwindow.ui" line="550"/>
         <source>Calculated value</source>
         <translation>Vypočítaná hodnota</translation>
     </message>
@@ -15365,17 +16024,17 @@ Tato volba se projeví po opětovném spuštění.</translation>
         <translation>Název:</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.ui" line="557"/>
+        <location filename="../../src/app/tape/tmainwindow.ui" line="560"/>
         <source>Formula:</source>
         <translation>Vzorec:</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.ui" line="603"/>
+        <location filename="../../src/app/tape/tmainwindow.ui" line="606"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Show full calculation in message box&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
         <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Ukázat celý výpočet v okně se zprávami&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.ui" line="651"/>
+        <location filename="../../src/app/tape/tmainwindow.ui" line="654"/>
         <source>Base value:</source>
         <translation>Základní hodnota:</translation>
     </message>
@@ -15388,7 +16047,7 @@ Tato volba se projeví po opětovném spuštění.</translation>
         <translation type="vanished">Ve výškách:</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.ui" line="771"/>
+        <location filename="../../src/app/tape/tmainwindow.ui" line="777"/>
         <source>Description:</source>
         <translation>Popis:</translation>
     </message>
@@ -15403,32 +16062,32 @@ Tato volba se projeví po opětovném spuštění.</translation>
         <translation>Posunout míru dolů</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.ui" line="540"/>
+        <location filename="../../src/app/tape/tmainwindow.ui" line="543"/>
         <source>Calculated value:</source>
         <translation>Vypočítaná hodnota:</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.ui" line="751"/>
+        <location filename="../../src/app/tape/tmainwindow.ui" line="754"/>
         <source>Full name:</source>
         <translation>Plný název:</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.ui" line="831"/>
+        <location filename="../../src/app/tape/tmainwindow.ui" line="837"/>
         <source>Information</source>
         <translation>Informace</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.ui" line="842"/>
+        <location filename="../../src/app/tape/tmainwindow.ui" line="846"/>
         <source>Type:</source>
         <translation>Typ:</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.ui" line="849"/>
+        <location filename="../../src/app/tape/tmainwindow.ui" line="853"/>
         <source>Measurement type</source>
         <translation>Druh míry</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.ui" line="856"/>
+        <location filename="../../src/app/tape/tmainwindow.ui" line="860"/>
         <source>Path:</source>
         <translation>Cesta:</translation>
     </message>
@@ -15437,7 +16096,7 @@ Tato volba se projeví po opětovném spuštění.</translation>
         <translation type="vanished">Cesta k souboru</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.ui" line="899"/>
+        <location filename="../../src/app/tape/tmainwindow.ui" line="903"/>
         <source>Show in Explorer</source>
         <translation>Ukázat ve správci souborů</translation>
     </message>
@@ -15466,7 +16125,7 @@ Tato volba se projeví po opětovném spuštění.</translation>
         <translation type="vanished">Příjmení:</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.ui" line="973"/>
+        <location filename="../../src/app/tape/tmainwindow.ui" line="1037"/>
         <source>Birth date:</source>
         <translation>Datum narození:</translation>
     </message>
@@ -15475,12 +16134,12 @@ Tato volba se projeví po opětovném spuštění.</translation>
         <translation type="vanished">rrrr mm dd</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.ui" line="1035"/>
+        <location filename="../../src/app/tape/tmainwindow.ui" line="1099"/>
         <source>Email:</source>
         <translation>E-mail:</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.ui" line="1058"/>
+        <location filename="../../src/app/tape/tmainwindow.ui" line="1125"/>
         <source>Notes:</source>
         <translation>Poznámky:</translation>
     </message>
@@ -15498,18 +16157,18 @@ Tato volba se projeví po opětovném spuštění.</translation>
     </message>
     <message>
         <location filename="../../src/app/tape/tmainwindow.ui" line="64"/>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="703"/>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="724"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="686"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="707"/>
         <source>Measurements</source>
         <translation>Míry</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.ui" line="1211"/>
+        <location filename="../../src/app/tape/tmainwindow.ui" line="1224"/>
         <source>Menu</source>
         <translation>Nabídka</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.ui" line="1236"/>
+        <location filename="../../src/app/tape/tmainwindow.ui" line="1249"/>
         <source>Gradation</source>
         <translation>Odstupňování</translation>
     </message>
@@ -15518,7 +16177,7 @@ Tato volba se projeví po opětovném spuštění.</translation>
         <translation type="vanished">Otevřít individuální...</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="3507"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="3495"/>
         <source>Save</source>
         <translation>Uložit</translation>
     </message>
@@ -15531,7 +16190,7 @@ Tato volba se projeví po opětovném spuštění.</translation>
         <translation type="vanished">Ukončit</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.ui" line="1417"/>
+        <location filename="../../src/app/tape/tmainwindow.ui" line="1431"/>
         <source>About &amp;Qt</source>
         <translation>O &amp;Qt</translation>
     </message>
@@ -15544,17 +16203,17 @@ Tato volba se projeví po opětovném spuštění.</translation>
         <translation type="vanished">Nový</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.ui" line="1456"/>
+        <location filename="../../src/app/tape/tmainwindow.ui" line="1470"/>
         <source>Add known</source>
         <translation>Přidat známé</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.ui" line="1471"/>
+        <location filename="../../src/app/tape/tmainwindow.ui" line="1485"/>
         <source>Add custom</source>
         <translation>Přidat vlastní</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.ui" line="1489"/>
+        <location filename="../../src/app/tape/tmainwindow.ui" line="1503"/>
         <source>Read only</source>
         <translation>Pouze pro čtení</translation>
     </message>
@@ -15563,50 +16222,48 @@ Tato volba se projeví po opětovném spuštění.</translation>
         <translation type="vanished">Otevřít standardní...</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.ui" line="1513"/>
+        <location filename="../../src/app/tape/tmainwindow.ui" line="1527"/>
         <source>Open template</source>
         <translation>Otevřít předlohu</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.ui" line="1521"/>
         <source>Database</source>
-        <translation>Databáze</translation>
+        <translation type="vanished">Databáze</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.ui" line="1524"/>
         <source>Show information about all known measurement</source>
-        <translation>Ukázat údaje o všech známých rozměrech</translation>
+        <translation type="vanished">Ukázat údaje o všech známých rozměrech</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.ui" line="1532"/>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="1255"/>
+        <location filename="../../src/app/tape/tmainwindow.ui" line="1535"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="1210"/>
         <source>Preferences</source>
         <translation>Nastavení</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="3844"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="3831"/>
         <source>untitled %1</source>
         <translation>bez názvu %1</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="1891"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="1851"/>
         <source>This file already opened in another window.</source>
         <translation>Tento soubor je již otevřen v jiném okně.</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="585"/>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="1924"/>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="4160"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="567"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="1884"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="4202"/>
         <source>File error.</source>
         <translation>Chyba souboru.</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="1105"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="1060"/>
         <source>Could not save file</source>
         <translation>Nepodařilo se uložit soubor</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="1037"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="992"/>
         <source>measurements</source>
         <translation>Míry</translation>
     </message>
@@ -15619,17 +16276,17 @@ Tato volba se projeví po opětovném spuštění.</translation>
         <translation type="vanished">Obvyklé míry (*.vst)</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="1059"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="1014"/>
         <source>Save as</source>
         <translation>Uložit jako</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="4185"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="4227"/>
         <source>&amp;New Window</source>
         <translation>&amp;Nové okno</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="1527"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="1484"/>
         <source>Edit measurement</source>
         <translation>Upravit míru</translation>
     </message>
@@ -15638,22 +16295,22 @@ Tato volba se projeví po opětovném spuštění.</translation>
         <translation type="vanished">R_%1</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="2356"/>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="3907"/>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="3930"/>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="3946"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="2313"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="3952"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="3975"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="3991"/>
         <source>Error</source>
         <translation>Chyba</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="2356"/>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="3907"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="2313"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="3952"/>
         <source>Empty field.</source>
         <translation>Prázdné pole.</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="3946"/>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="3947"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="3991"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="3992"/>
         <source>Parser error: %1</source>
         <translation>Chyba zpracování: %1</translation>
     </message>
@@ -15670,18 +16327,18 @@ Tato volba se projeví po opětovném spuštění.</translation>
         <translation type="vanished">Velikost:</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="670"/>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="686"/>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="823"/>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="1041"/>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="2676"/>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="3049"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="653"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="669"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="786"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="996"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="2633"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="3033"/>
         <source>Individual measurements</source>
         <translation>Individuální míry</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="1663"/>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="3848"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="1620"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="3835"/>
         <source>untitled</source>
         <translation>bez názvu</translation>
     </message>
@@ -15690,7 +16347,7 @@ Tato volba se projeví po opětovném spuštění.</translation>
         <translation type="vanished">&lt;prázdné&gt;</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="3498"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="3486"/>
         <source>Unsaved changes</source>
         <translation>Neuložené změny</translation>
     </message>
@@ -15701,34 +16358,34 @@ Do you want to save your changes?</source>
 Chcete uložit změny?</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="3908"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="3953"/>
         <source>Empty field</source>
         <translation>Prázdné pole</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="3941"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="3986"/>
         <source>Value</source>
         <translation>Hodnota</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="3955"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="4000"/>
         <source>Open file</source>
         <translation>Otevřít soubor</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.ui" line="1543"/>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="1881"/>
+        <location filename="../../src/app/tape/tmainwindow.ui" line="1546"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="1841"/>
         <source>Import from a pattern</source>
         <translation>Zavést ze střihu</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="1877"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="1837"/>
         <source>Pattern files (*.val)</source>
         <translation>Soubory se střihy (*.val)</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="847"/>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="4795"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="810"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="5058"/>
         <source>Pattern unit:</source>
         <translation>Jednotka střihu:</translation>
     </message>
@@ -15765,24 +16422,22 @@ Chcete uložit změny?</translation>
         <translation type="vanished">Míry (*.vst);;Všechny soubory (*.*)</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="1088"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="1043"/>
         <source>Failed to lock. This file already opened in another window.</source>
         <translation>Nepodařilo se uzamknout. Tento soubor je již otevřen v jiném okně.</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="1139"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="1094"/>
         <source>Failed to lock. This file already opened in another window. Expect collissions when run 2 copies of the program.</source>
         <translation>Nepodařilo se uzamknout. Tento soubor je již otevřen v jiném okně. Při zdvojeném vykonávání (dvě kopie programu) může dojít ke střetům.</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="551"/>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="4128"/>
         <source>File contains invalid known measurement(s).</source>
-        <translation>Soubor obsahuje neplatnou(é) známou míru(y).</translation>
+        <translation type="vanished">Soubor obsahuje neplatnou(é) známou míru(y).</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="493"/>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="4115"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="480"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="4160"/>
         <source>File has unknown format.</source>
         <translation>Soubor má neznámý formát.</translation>
     </message>
@@ -15791,21 +16446,21 @@ Chcete uložit změny?</translation>
         <translation type="vanished">Plný název</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="453"/>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="4075"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="440"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="4120"/>
         <source>File &apos;%1&apos; doesn&apos;t exist!</source>
         <translation>Soubor &apos;%1&apos; není!</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="2326"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="2283"/>
         <source>The name of known measurement forbidden to change.</source>
         <translation>Nelze změnit název známé míry.</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="1521"/>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="2292"/>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="2369"/>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="2579"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="1478"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="2249"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="2326"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="2536"/>
         <source>Can&apos;t find measurement &apos;%1&apos;.</source>
         <translation>Nelze najít míru &apos;%1&apos;.</translation>
     </message>
@@ -15822,7 +16477,7 @@ Chcete uložit změny?</translation>
         <translation type="vanished">Nelze změnit hodnotu zvětšení výšky známé míry.</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="2598"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="2555"/>
         <source>The full name of known measurement forbidden to change.</source>
         <translation>Nelze změnit úplný název známé míry.</translation>
     </message>
@@ -15831,7 +16486,7 @@ Chcete uložit změny?</translation>
         <translation type="vanished">Název ve vzorci</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.ui" line="629"/>
+        <location filename="../../src/app/tape/tmainwindow.ui" line="632"/>
         <source>Function Wizard</source>
         <translation>Průvodce funkcí</translation>
     </message>
@@ -15851,44 +16506,43 @@ Chcete uložit změny?</translation>
         <translation>Smazat míru</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="4872"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="5135"/>
         <source>unknown</source>
         <comment>gender</comment>
         <translation>Neznámý</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="4873"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="5136"/>
         <source>male</source>
         <comment>gender</comment>
         <translation>muž</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="4874"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="5137"/>
         <source>female</source>
         <comment>gender</comment>
         <translation>žena</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.ui" line="1015"/>
+        <location filename="../../src/app/tape/tmainwindow.ui" line="1079"/>
         <source>Gender:</source>
         <translation>Pohlaví:</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.ui" line="908"/>
         <source>PM system:</source>
-        <translation>Systém střihu:</translation>
+        <translation type="vanished">Systém střihu:</translation>
     </message>
     <message>
         <source>Create from existing ...</source>
         <translation type="vanished">Vytvořit ze stávajícího...</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.ui" line="1554"/>
+        <location filename="../../src/app/tape/tmainwindow.ui" line="1557"/>
         <source>Create from existing file</source>
         <translation>Vytvořit ze stávajícího souboru</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="726"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="709"/>
         <source>Select file</source>
         <translation>Vybrat soubor</translation>
     </message>
@@ -15897,8 +16551,8 @@ Chcete uložit změny?</translation>
         <translation type="vanished">Vyvedení obvyklých měr nepodporováno.</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.ui" line="1262"/>
-        <location filename="../../src/app/tape/tmainwindow.ui" line="1600"/>
+        <location filename="../../src/app/tape/tmainwindow.ui" line="1275"/>
+        <location filename="../../src/app/tape/tmainwindow.ui" line="1603"/>
         <source>Measurement diagram</source>
         <translation>Diagram míry</translation>
     </message>
@@ -15911,12 +16565,12 @@ Chcete uložit změny?</translation>
         <translation type="vanished">&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:340pt;&quot;&gt;?&lt;/span&gt;&lt;/p&gt;&lt;p align=&quot;center&quot;&gt;Neznámá míra&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="2972"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="2956"/>
         <source>About Qt</source>
         <translation>O Qt</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="3450"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="3435"/>
         <source>File was not saved yet.</source>
         <translation>Soubor ještě nebyl uložen.</translation>
     </message>
@@ -15936,7 +16590,7 @@ Chcete uložit změny?</translation>
         <translation>Název míry ve vzorci.</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.ui" line="764"/>
+        <location filename="../../src/app/tape/tmainwindow.ui" line="767"/>
         <source>Measurement&apos;s human-readable name.</source>
         <translation>Název míry čitelný pro člověka.</translation>
     </message>
@@ -15957,7 +16611,7 @@ Chcete uložit změny?</translation>
         <translation type="vanished">Uložit...</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="3512"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="3500"/>
         <source>Don&apos;t Save</source>
         <translation>Neukládat</translation>
     </message>
@@ -15986,7 +16640,7 @@ Chcete uložit změny?</translation>
         <translation type="vanished">Vyskytla se neznámá chyba. Například plný disk zabránil tomu, aby byl soubor se zámkem zapsán.</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.ui" line="1568"/>
+        <location filename="../../src/app/tape/tmainwindow.ui" line="1571"/>
         <source>Export to CSV</source>
         <translation>Vyvést do CSV</translation>
     </message>
@@ -15999,17 +16653,17 @@ Chcete uložit změny?</translation>
         <translation type="vanished">Neplatná hodnota</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="306"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="305"/>
         <source>Show in Finder</source>
         <translation>Ukázat ve okně pro hledání</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="1177"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="1132"/>
         <source>Comma-Separated Values</source>
         <translation>Čárkou oddělené hodnoty</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.ui" line="966"/>
+        <location filename="../../src/app/tape/tmainwindow.ui" line="1027"/>
         <source>Customer&apos;s name</source>
         <translation>Jméno zákazníka</translation>
     </message>
@@ -16018,7 +16672,7 @@ Chcete uložit změny?</translation>
         <translation type="vanished">Jméno zákazníkovy rodiny</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.ui" line="1051"/>
+        <location filename="../../src/app/tape/tmainwindow.ui" line="1115"/>
         <source>Customer&apos;s email address</source>
         <translation>Adresa elektronické pošty zákazníka</translation>
     </message>
@@ -16031,171 +16685,179 @@ Chcete uložit změny?</translation>
         <translation type="vanished">Velikost:</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="671"/>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="687"/>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="703"/>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="724"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="654"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="670"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="686"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="707"/>
         <source>All files</source>
         <translation>Všechny soubory</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="1011"/>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="2724"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="966"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="2681"/>
         <source>Could not save the file</source>
         <translation>Nepodařilo se uložit soubor</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="3857"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="3844"/>
         <source>read only</source>
         <translation>Pouze pro čtení</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="670"/>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="686"/>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="814"/>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="1046"/>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="2999"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="653"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="669"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="777"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="1001"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="2983"/>
         <source>Multisize measurements</source>
         <translation>Měření více velikostí</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="3931"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="3976"/>
         <source>Invalid result. Value is infinite or NaN. Please, check your calculations.</source>
         <translation>Neplatný výsledek. Hodnota je nekonečná nebo NaN. Prověřte, prosím, své výpočty.</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="3449"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="3434"/>
         <source>Empty</source>
         <translation>Prázdný</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.ui" line="950"/>
+        <location filename="../../src/app/tape/tmainwindow.ui" line="1011"/>
         <source>Customer name:</source>
         <translation>Jméno zákazníka:</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.ui" line="1501"/>
+        <location filename="../../src/app/tape/tmainwindow.ui" line="1515"/>
         <source>Open multisize …</source>
         <translation>Otevřít více velikostí…</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.ui" line="1551"/>
+        <location filename="../../src/app/tape/tmainwindow.ui" line="1554"/>
         <source>Create from existing …</source>
         <translation>Vytvořit ze stávajícího…</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="3507"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="3495"/>
         <source>Save…</source>
         <translation>Uložit…</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.ui" line="1579"/>
         <location filename="../../src/app/tape/tmainwindow.ui" line="1582"/>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="1180"/>
+        <location filename="../../src/app/tape/tmainwindow.ui" line="1585"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="1135"/>
         <source>Import from CSV</source>
         <translation>Zavést z CSV</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="4331"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="4358"/>
         <source>Individual measurements require at least 2 columns.</source>
         <translation>Individuální míry vyžadují alespoň 2 sloupce.</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="4401"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="4441"/>
         <source>Multisize measurements require at least 4 columns.</source>
         <translation>Měření více velikostí vyžaduje alespoň 4 sloupce.</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="4267"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="4309"/>
         <source>Imported file must not contain the same name twice.</source>
         <translation>Zavedený soubor nesmí obsahovat stejný název dvakrát.</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="4038"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="4083"/>
         <source>Cannot save settings. Access denied.</source>
         <translation>Nelze uložit nastavení. Přístup odepřen.</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.ui" line="1151"/>
+        <location filename="../../src/app/tape/tmainwindow.ui" line="1162"/>
         <source>&amp;File</source>
         <translation>&amp;Soubor</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.ui" line="1174"/>
+        <location filename="../../src/app/tape/tmainwindow.ui" line="1185"/>
         <source>&amp;Window</source>
         <translation>&amp;Okno</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.ui" line="1179"/>
+        <location filename="../../src/app/tape/tmainwindow.ui" line="1190"/>
         <source>&amp;Help</source>
         <translation>&amp;Nápověda</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.ui" line="1186"/>
+        <location filename="../../src/app/tape/tmainwindow.ui" line="1197"/>
         <source>&amp;Measurements</source>
         <translation>&amp;Míry</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.ui" line="1367"/>
+        <location filename="../../src/app/tape/tmainwindow.ui" line="1381"/>
         <source>&amp;Open individual …</source>
         <translation>&amp;Otevřít individuální…</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.ui" line="1382"/>
+        <location filename="../../src/app/tape/tmainwindow.ui" line="1396"/>
         <source>&amp;Save</source>
         <translation>&amp;Uložit</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.ui" line="1397"/>
+        <location filename="../../src/app/tape/tmainwindow.ui" line="1411"/>
         <source>Save &amp;As …</source>
         <translation>Uložit j&amp;ako…</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.ui" line="1409"/>
+        <location filename="../../src/app/tape/tmainwindow.ui" line="1423"/>
         <source>&amp;Quit</source>
         <translation>&amp;Ukončit</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.ui" line="1429"/>
+        <location filename="../../src/app/tape/tmainwindow.ui" line="1443"/>
         <source>&amp;About Tape</source>
         <translation>&amp;O programu Tape</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.ui" line="1441"/>
+        <location filename="../../src/app/tape/tmainwindow.ui" line="1455"/>
         <source>&amp;New</source>
         <translation>&amp;Nový</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="4019"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="4064"/>
         <source>Cannot read settings from a malformed .INI file.</source>
         <translation>Nelze číst nastavení z poškozeného souboru .INI.</translation>
     </message>
     <message>
         <location filename="../../src/app/tape/tmainwindow.ui" line="326"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="4852"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="4868"/>
         <source>Name</source>
         <comment>measurement column</comment>
         <translation>Název</translation>
     </message>
     <message>
         <location filename="../../src/app/tape/tmainwindow.ui" line="331"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="4854"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="4873"/>
         <source>Full name</source>
         <comment>measurement column</comment>
         <translation>Plný název</translation>
     </message>
     <message>
         <location filename="../../src/app/tape/tmainwindow.ui" line="336"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="4856"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="4878"/>
         <source>Calculated value</source>
         <comment>measurement column</comment>
         <translation>Vypočítaná hodnota</translation>
     </message>
     <message>
         <location filename="../../src/app/tape/tmainwindow.ui" line="341"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="4858"/>
         <source>Formula</source>
         <comment>measurement column</comment>
         <translation>Vzorec</translation>
     </message>
     <message>
         <location filename="../../src/app/tape/tmainwindow.ui" line="346"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="4883"/>
         <source>Base value</source>
         <comment>measurement column</comment>
         <translation>Základní hodnota</translation>
@@ -16212,204 +16874,254 @@ Chcete uložit změny?</translation>
         <translation>Jednotky:</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.ui" line="691"/>
+        <location filename="../../src/app/tape/tmainwindow.ui" line="694"/>
         <source>Shift B</source>
         <translation>Shift B</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.ui" line="711"/>
+        <location filename="../../src/app/tape/tmainwindow.ui" line="714"/>
         <source>Shift C</source>
         <translation>Shift C</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.ui" line="731"/>
+        <location filename="../../src/app/tape/tmainwindow.ui" line="734"/>
         <source>Correction:</source>
         <translation>Oprava:</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.ui" line="797"/>
+        <location filename="../../src/app/tape/tmainwindow.ui" line="803"/>
         <source>Dimension:</source>
         <translation>Rozměr:</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.ui" line="813"/>
+        <location filename="../../src/app/tape/tmainwindow.ui" line="819"/>
         <source>Select one of the dimensions to later use the measurement value in piece label</source>
         <translation>Vyberte jeden z rozměrů, abyste mohli později použít naměřenou hodnotu v popisu dílu</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.ui" line="940"/>
+        <location filename="../../src/app/tape/tmainwindow.ui" line="912"/>
+        <source>Known measurements:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/app/tape/tmainwindow.ui" line="944"/>
         <source>Base Values:</source>
         <translation>Základní hodnoty:</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.ui" line="1283"/>
+        <location filename="../../src/app/tape/tmainwindow.ui" line="1296"/>
         <source>Add image</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.ui" line="1300"/>
+        <location filename="../../src/app/tape/tmainwindow.ui" line="1313"/>
         <source>Remove image</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.ui" line="1317"/>
+        <location filename="../../src/app/tape/tmainwindow.ui" line="1330"/>
         <source>Save image</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.ui" line="1614"/>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="2678"/>
+        <location filename="../../src/app/tape/tmainwindow.ui" line="1617"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="2635"/>
         <source>Export to individual</source>
         <translation>Vyvést do individuálního</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.ui" line="1617"/>
+        <location filename="../../src/app/tape/tmainwindow.ui" line="1620"/>
         <source>Export to individual measurements</source>
         <translation>Vyvést do individuálních měr</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.ui" line="1631"/>
+        <location filename="../../src/app/tape/tmainwindow.ui" line="1634"/>
         <source>Use full circumference</source>
         <translation>Použít celý obvod</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.ui" line="1642"/>
+        <location filename="../../src/app/tape/tmainwindow.ui" line="1645"/>
         <source>Restrict second dimension</source>
         <translation>Omezit druhý rozměr</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.ui" line="1656"/>
+        <location filename="../../src/app/tape/tmainwindow.ui" line="1659"/>
         <source>Restrict third dimension</source>
         <translation>Omezit třetí rozměr</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.ui" line="1670"/>
+        <location filename="../../src/app/tape/tmainwindow.ui" line="1673"/>
         <source>Dimension labels</source>
         <translation>Popisky rozměrů</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="370"/>
+        <location filename="../../src/app/tape/tmainwindow.ui" line="1718"/>
+        <source>Create Known Measurements</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/app/tape/tmainwindow.ui" line="1726"/>
+        <source>Edit current Known Measurements</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="357"/>
         <source>The table doesn&apos;t provide dimensions</source>
         <translation>Tabulka neuvádí rozměry</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="382"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="369"/>
         <source>Invalid base value for dimension A</source>
         <translation>Neplatná základní hodnota pro rozměr A</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="394"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="381"/>
         <source>The table doesn&apos;t support dimension B</source>
         <translation>Tabulka nepodporuje rozměr B</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="406"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="393"/>
         <source>Invalid base value for dimension B</source>
         <translation>Neplatná základní hodnota pro rozměr B</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="418"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="405"/>
         <source>The table doesn&apos;t support dimension C</source>
         <translation>Tabulka nepodporuje rozměr C</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="430"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="417"/>
         <source>Invalid base value for dimension C</source>
         <translation>Neplatná základní hodnota pro rozměr C</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="1565"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="1522"/>
         <source>Measurement image</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="1579"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="1536"/>
         <source>Invalid image. Error: %1</source>
         <translation>Neplatný obrázek. Chyba: %1</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="1656"/>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="1688"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="1613"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="1645"/>
         <source>Unable to save image. Error: %1</source>
         <translation>Nepodařilo se uložit obrázek. Chyba: %1</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="1672"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="1629"/>
         <source>Save Image</source>
         <translation>Uložit obrázek</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="1724"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="1680"/>
         <source>Unable to show image. Error: %1</source>
         <translation>Nepodařilo se zobrazit obrázek. Chyba: %1</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="2677"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="2634"/>
         <source>measurements.vit</source>
         <translation>míry.vit</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="3370"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="2943"/>
+        <source>Unknown known measurements: %1</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="3355"/>
         <source>Shift (%1):</source>
         <translation>Shift (%1):</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="3499"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="3487"/>
         <source>Measurements have been modified. Do you want to save your changes?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="4705"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="4757"/>
         <source>Unknown measurement</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="5041"/>
-        <source>Empty</source>
-        <comment>list</comment>
-        <translation type="unfinished">Prázdný</translation>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="4793"/>
+        <source>None</source>
+        <translation type="unfinished">Žádný</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="5120"/>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="5130"/>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="5140"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="4797"/>
+        <source>Invalid link</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="4808"/>
+        <source>Known measurements %1</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="4860"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="4914"/>
+        <source>Description</source>
+        <comment>measurement column</comment>
+        <translation type="unfinished">Popis</translation>
+    </message>
+    <message>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="4894"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="4903"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="4909"/>
+        <source>Shift</source>
+        <comment>measurement column</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="5304"/>
+        <source>Empty</source>
+        <comment>list</comment>
+        <translation>Prázdný</translation>
+    </message>
+    <message>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="5383"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="5393"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="5403"/>
         <source>%1 shift</source>
         <translation>%1 posun</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="4479"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="4531"/>
         <source>Cannot convert base value to double in column 2.</source>
         <translation>Nelze převést základní hodnotu na dvojnásobek ve sloupci 2.</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="4483"/>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="4489"/>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="4496"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="4535"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="4541"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="4548"/>
         <source>Cannot convert shift value to double in column %1.</source>
         <translation>Nelze převést hodnotu posunu na dvojnásobek ve sloupci %1.</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="4842"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="5105"/>
         <source>Millimeters</source>
         <translation>Milimetry</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="4845"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="5108"/>
         <source>Inches</source>
         <translation>Palce</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="4848"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="5111"/>
         <source>Centimeters</source>
         <translation>Centimetry</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="4857"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="5120"/>
         <source>Degrees</source>
         <translation>Stupně</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.ui" line="1681"/>
+        <location filename="../../src/app/tape/tmainwindow.ui" line="1684"/>
         <source>Restrict first dimension</source>
         <translation>Omezit první rozměr</translation>
     </message>
@@ -16430,7 +17142,7 @@ Chcete uložit změny?</translation>
     </message>
     <message>
         <location filename="../../src/app/tape/tmainwindow.ui" line="115"/>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="4958"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="5221"/>
         <source>0 results</source>
         <translation>0 výsledků</translation>
     </message>
@@ -16480,53 +17192,51 @@ Chcete uložit změny?</translation>
         <translation>F3</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.ui" line="1699"/>
+        <location filename="../../src/app/tape/tmainwindow.ui" line="1702"/>
         <source>Add separator</source>
         <translation>Přidat oddělovač</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.ui" line="1707"/>
+        <location filename="../../src/app/tape/tmainwindow.ui" line="1710"/>
         <source>Dimension custom names</source>
         <translation>Vlastní názvy rozměrů</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="4262"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="4304"/>
         <source>Measurement name is empty.</source>
         <translation>Název míry je prázdný.</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="4275"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="4315"/>
         <source>Measurement &apos;%1&apos; doesn&apos;t match regex pattern.</source>
         <translation>Rozměry &apos;%1&apos; neodpovídají vzoru regulárního výrazu.</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="4280"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="4320"/>
         <source>Measurement &apos;%1&apos; already used in the file.</source>
         <translation>Míra &apos;%1&apos; již použita v souboru.</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="4287"/>
         <source>Measurement &apos;%1&apos; is not one of the known measurements.</source>
-        <translation>Míra &apos;%1&apos; je jednou ze známých měr.</translation>
+        <translation type="vanished">Míra &apos;%1&apos; je jednou ze známých měr.</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="4292"/>
         <source>Measurement &apos;%1&apos; already used in file.</source>
-        <translation>Míra &apos;%1&apos; již použita v souboru.</translation>
+        <translation type="vanished">Míra &apos;%1&apos; již použita v souboru.</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="4346"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="4373"/>
         <source>Error in row %1. The measurement name is empty.</source>
         <translation>Chyba na řádku %1. Název míry je prázdný.</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="4468"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="4513"/>
         <source>The measurement name is empty.</source>
         <translation>Název měření je prázdný.</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="4371"/>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="4424"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="4406"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="4464"/>
         <source>Error in row %1. %2</source>
         <translation type="unfinished"></translation>
     </message>
@@ -17501,138 +18211,197 @@ Chcete uložit změny?</translation>
         <translation>Desetinné rozdělovací znaménko:</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/dialogs/configpages/tapepreferencesconfigurationpage.ui" line="84"/>
         <source>Pattern making system</source>
-        <translation>Systém na tvorbu střihů</translation>
+        <translation type="vanished">Systém na tvorbu střihů</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/dialogs/configpages/tapepreferencesconfigurationpage.ui" line="93"/>
         <source>Pattern making system:</source>
-        <translation>Systém na tvorbu střihů:</translation>
+        <translation type="vanished">Systém na tvorbu střihů:</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/dialogs/configpages/tapepreferencesconfigurationpage.ui" line="103"/>
         <source>Author:</source>
-        <translation>Autor:</translation>
+        <translation type="vanished">Autor:</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/dialogs/configpages/tapepreferencesconfigurationpage.ui" line="117"/>
         <source>Book:</source>
-        <translation>Kniha:</translation>
+        <translation type="vanished">Kniha:</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/dialogs/configpages/tapepreferencesconfigurationpage.ui" line="140"/>
+        <location filename="../../src/app/tape/dialogs/configpages/tapepreferencesconfigurationpage.ui" line="84"/>
+        <source>Default known measurements</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/app/tape/dialogs/configpages/tapepreferencesconfigurationpage.ui" line="90"/>
+        <source>Known measurements:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/app/tape/dialogs/configpages/tapepreferencesconfigurationpage.ui" line="116"/>
         <source>Measurements editing</source>
         <translation>Upravení rozměrů</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/dialogs/configpages/tapepreferencesconfigurationpage.ui" line="146"/>
+        <location filename="../../src/app/tape/dialogs/configpages/tapepreferencesconfigurationpage.ui" line="122"/>
         <source>Enable to translate formula according to locale</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/dialogs/configpages/tapepreferencesconfigurationpage.ui" line="149"/>
+        <location filename="../../src/app/tape/dialogs/configpages/tapepreferencesconfigurationpage.ui" line="125"/>
         <source>Translate formula</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/dialogs/configpages/tapepreferencesconfigurationpage.ui" line="162"/>
+        <location filename="../../src/app/tape/dialogs/configpages/tapepreferencesconfigurationpage.ui" line="138"/>
         <source>Reset warnings</source>
         <translation>Vynulovat varování</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/dialogs/configpages/tapepreferencesconfigurationpage.ui" line="172"/>
+        <location filename="../../src/app/tape/dialogs/configpages/tapepreferencesconfigurationpage.ui" line="148"/>
         <source>Toolbar</source>
         <translation>Nástrojový panel</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/dialogs/configpages/tapepreferencesconfigurationpage.ui" line="178"/>
+        <location filename="../../src/app/tape/dialogs/configpages/tapepreferencesconfigurationpage.ui" line="154"/>
         <source>The text appears under the icon (recommended for beginners).</source>
         <translation>Text se ukáže pod symbolem (doporučeno pro začátečníky).</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/dialogs/configpages/tapepreferencesconfigurationpage.ui" line="205"/>
+        <location filename="../../src/app/tape/dialogs/configpages/tapepreferencesconfigurationpage.ui" line="181"/>
         <source>Theme:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/dialogs/configpages/tapepreferencesconfigurationpage.ui" line="254"/>
-        <location filename="../../src/app/tape/dialogs/configpages/tapepreferencesconfigurationpage.ui" line="302"/>
+        <location filename="../../src/app/tape/dialogs/configpages/tapepreferencesconfigurationpage.ui" line="230"/>
+        <location filename="../../src/app/tape/dialogs/configpages/tapepreferencesconfigurationpage.ui" line="278"/>
         <source>Shortcuts</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/dialogs/configpages/tapepreferencesconfigurationpage.ui" line="297"/>
+        <location filename="../../src/app/tape/dialogs/configpages/tapepreferencesconfigurationpage.ui" line="273"/>
         <source>Action</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/dialogs/configpages/tapepreferencesconfigurationpage.ui" line="325"/>
+        <location filename="../../src/app/tape/dialogs/configpages/tapepreferencesconfigurationpage.ui" line="301"/>
         <source>Restore defaults</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/dialogs/configpages/tapepreferencesconfigurationpage.ui" line="335"/>
+        <location filename="../../src/app/tape/dialogs/configpages/tapepreferencesconfigurationpage.ui" line="311"/>
         <source>Privacy</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/dialogs/configpages/tapepreferencesconfigurationpage.ui" line="341"/>
+        <location filename="../../src/app/tape/dialogs/configpages/tapepreferencesconfigurationpage.ui" line="317"/>
         <source>Send usage statistics</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/dialogs/configpages/tapepreferencesconfigurationpage.ui" line="348"/>
+        <location filename="../../src/app/tape/dialogs/configpages/tapepreferencesconfigurationpage.ui" line="324"/>
         <source>Please help to improve Valentina&apos;s quality by automatically sending usage statistics. Sent data contains &lt;span style=&quot; font-weight:700;&quot;&gt;no potentially sensitive information&lt;/span&gt; like user names, email addresses, file contents or file paths.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/dialogs/configpages/tapepreferencesconfigurationpage.cpp" line="242"/>
+        <location filename="../../src/app/tape/dialogs/configpages/tapepreferencesconfigurationpage.cpp" line="238"/>
         <source>With OS options</source>
         <translation>S volbami OS</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/dialogs/configpages/tapepreferencesconfigurationpage.cpp" line="261"/>
+        <location filename="../../src/app/tape/dialogs/configpages/tapepreferencesconfigurationpage.cpp" line="257"/>
         <source>System</source>
         <comment>theme</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/dialogs/configpages/tapepreferencesconfigurationpage.cpp" line="262"/>
+        <location filename="../../src/app/tape/dialogs/configpages/tapepreferencesconfigurationpage.cpp" line="258"/>
         <source>Dark</source>
         <comment>theme</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/dialogs/configpages/tapepreferencesconfigurationpage.cpp" line="263"/>
+        <location filename="../../src/app/tape/dialogs/configpages/tapepreferencesconfigurationpage.cpp" line="259"/>
         <source>Light</source>
         <comment>theme</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/dialogs/configpages/tapepreferencesconfigurationpage.ui" line="191"/>
+        <location filename="../../src/app/tape/dialogs/configpages/tapepreferencesconfigurationpage.cpp" line="341"/>
+        <source>None</source>
+        <translation type="unfinished">Žádný</translation>
+    </message>
+    <message>
+        <location filename="../../src/app/tape/dialogs/configpages/tapepreferencesconfigurationpage.cpp" line="351"/>
+        <source>Known measurements %1</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/app/tape/dialogs/configpages/tapepreferencesconfigurationpage.ui" line="167"/>
         <source>User Interface</source>
         <translation>Uživatelské rozhraní</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/dialogs/configpages/tapepreferencesconfigurationpage.ui" line="217"/>
+        <location filename="../../src/app/tape/dialogs/configpages/tapepreferencesconfigurationpage.ui" line="193"/>
         <source>Don&apos;t use the native file dialog</source>
         <translation>Nepoužívat dialogové okno nativního souboru</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/dialogs/configpages/tapepreferencesconfigurationpage.ui" line="227"/>
+        <location filename="../../src/app/tape/dialogs/configpages/tapepreferencesconfigurationpage.ui" line="203"/>
         <source>Update</source>
         <translation>Aktualizovat</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/dialogs/configpages/tapepreferencesconfigurationpage.ui" line="233"/>
+        <location filename="../../src/app/tape/dialogs/configpages/tapepreferencesconfigurationpage.ui" line="209"/>
         <source>Automatically check for updates each time the application starts</source>
         <translation>Automaticky kontrolovat aktualizace při každém spuštění programu</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/dialogs/configpages/tapepreferencesconfigurationpage.ui" line="236"/>
+        <location filename="../../src/app/tape/dialogs/configpages/tapepreferencesconfigurationpage.ui" line="212"/>
         <source>Automatically check for updates</source>
         <translation>Automaticky kontrolovat aktualizace</translation>
+    </message>
+</context>
+<context>
+    <name>TapePreferencesPathPage</name>
+    <message>
+        <location filename="../../src/app/tape/dialogs/configpages/tapepreferencespathpage.ui" line="14"/>
+        <source>Form</source>
+        <translation type="unfinished">Formulář</translation>
+    </message>
+    <message>
+        <location filename="../../src/app/tape/dialogs/configpages/tapepreferencespathpage.ui" line="20"/>
+        <source>Paths that Tape uses</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/app/tape/dialogs/configpages/tapepreferencespathpage.ui" line="45"/>
+        <source>Type</source>
+        <translation type="unfinished">Typ</translation>
+    </message>
+    <message>
+        <location filename="../../src/app/tape/dialogs/configpages/tapepreferencespathpage.ui" line="50"/>
+        <source>Path</source>
+        <translation type="unfinished">Cesta</translation>
+    </message>
+    <message>
+        <location filename="../../src/app/tape/dialogs/configpages/tapepreferencespathpage.ui" line="72"/>
+        <source>Default</source>
+        <translation type="unfinished">Výchozí</translation>
+    </message>
+    <message>
+        <location filename="../../src/app/tape/dialogs/configpages/tapepreferencespathpage.ui" line="101"/>
+        <source>Edit</source>
+        <translation type="unfinished">Upravit</translation>
+    </message>
+    <message>
+        <location filename="../../src/app/tape/dialogs/configpages/tapepreferencespathpage.cpp" line="131"/>
+        <source>Open Directory</source>
+        <translation type="unfinished">Otevřít adresář</translation>
+    </message>
+    <message>
+        <location filename="../../src/app/tape/dialogs/configpages/tapepreferencespathpage.cpp" line="162"/>
+        <source>My known measurements</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -18765,52 +19534,52 @@ Chcete uložit změny?</translation>
 <context>
     <name>VApplication</name>
     <message>
-        <location filename="../../src/app/valentina/core/vapplication.cpp" line="467"/>
+        <location filename="../../src/app/valentina/core/vapplication.cpp" line="471"/>
         <source>Error parsing file. Program will be terminated.</source>
         <translation>Chyba při zpracování souboru. Program bude ukončen.</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/core/vapplication.cpp" line="473"/>
+        <location filename="../../src/app/valentina/core/vapplication.cpp" line="477"/>
         <source>Error bad id. Program will be terminated.</source>
         <translation>Chyba. Špatný identifikátor. Program bude ukončen.</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/core/vapplication.cpp" line="479"/>
+        <location filename="../../src/app/valentina/core/vapplication.cpp" line="483"/>
         <source>Error can&apos;t convert value. Program will be terminated.</source>
         <translation>Chyba. Nelze převést hodnotu. Program bude ukončen.</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/core/vapplication.cpp" line="485"/>
+        <location filename="../../src/app/valentina/core/vapplication.cpp" line="489"/>
         <source>Error empty parameter. Program will be terminated.</source>
         <translation>Chyba. Prázdný parametr. Program bude ukončen.</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/core/vapplication.cpp" line="491"/>
+        <location filename="../../src/app/valentina/core/vapplication.cpp" line="495"/>
         <source>Error wrong id. Program will be terminated.</source>
         <translation>Chyba. Špatný identifikátor. Program bude ukončen.</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/core/vapplication.cpp" line="510"/>
+        <location filename="../../src/app/valentina/core/vapplication.cpp" line="514"/>
         <source>Something&apos;s wrong!!</source>
         <translation>Něco je špatně!</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/core/vapplication.cpp" line="524"/>
+        <location filename="../../src/app/valentina/core/vapplication.cpp" line="528"/>
         <source>Parser error: %1. Program will be terminated.</source>
         <translation>Chyba při zpracování: %1. Program bude ukončen.</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/core/vapplication.cpp" line="529"/>
+        <location filename="../../src/app/valentina/core/vapplication.cpp" line="533"/>
         <source>Exception thrown: %1. Program will be terminated.</source>
         <translation>Způsobena chyba: %1. Program bude ukončen.</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/core/vapplication.cpp" line="504"/>
+        <location filename="../../src/app/valentina/core/vapplication.cpp" line="508"/>
         <source>Invalid notch.</source>
         <translation>Neplatný zářez.</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/core/vapplication.cpp" line="516"/>
+        <location filename="../../src/app/valentina/core/vapplication.cpp" line="520"/>
         <source>Formula warning: %1. Program will be terminated.</source>
         <translation>Upozornění na vzorec: %1. Program bude ukončen.</translation>
     </message>
@@ -19865,7 +20634,7 @@ Chcete uložit změny?</translation>
         <translation>Smazat</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/tools/drawTools/vdrawtool.cpp" line="257"/>
+        <location filename="../../src/libs/vtools/tools/drawTools/vdrawtool.cpp" line="256"/>
         <source>This id (%1) is not unique.</source>
         <translation>Tento identifikátor (%1) není jedinečný.</translation>
     </message>
@@ -19977,6 +20746,37 @@ Chcete uložit změny?</translation>
     </message>
 </context>
 <context>
+    <name>VKnownMeasurementsDocument</name>
+    <message>
+        <location filename="../../src/libs/vformat/knownmeasurements/vknownmeasurementsdocument.cpp" line="370"/>
+        <location filename="../../src/libs/vformat/knownmeasurements/vknownmeasurementsdocument.cpp" line="384"/>
+        <location filename="../../src/libs/vformat/knownmeasurements/vknownmeasurementsdocument.cpp" line="398"/>
+        <location filename="../../src/libs/vformat/knownmeasurements/vknownmeasurementsdocument.cpp" line="413"/>
+        <location filename="../../src/libs/vformat/knownmeasurements/vknownmeasurementsdocument.cpp" line="428"/>
+        <location filename="../../src/libs/vformat/knownmeasurements/vknownmeasurementsdocument.cpp" line="442"/>
+        <location filename="../../src/libs/vformat/knownmeasurements/vknownmeasurementsdocument.cpp" line="457"/>
+        <source>Can&apos;t find measurement &apos;%1&apos;</source>
+        <translation type="unfinished">Nelze najít míry &apos;%1&apos;</translation>
+    </message>
+    <message>
+        <location filename="../../src/libs/vformat/knownmeasurements/vknownmeasurementsdocument.cpp" line="472"/>
+        <location filename="../../src/libs/vformat/knownmeasurements/vknownmeasurementsdocument.cpp" line="487"/>
+        <location filename="../../src/libs/vformat/knownmeasurements/vknownmeasurementsdocument.cpp" line="503"/>
+        <source>Can&apos;t find image by id &apos;%1&apos;</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/libs/vformat/knownmeasurements/vknownmeasurementsdocument.cpp" line="520"/>
+        <source>The measurement name is empty!</source>
+        <translation type="unfinished">Název míry je prázdný!</translation>
+    </message>
+    <message>
+        <location filename="../../src/libs/vformat/knownmeasurements/vknownmeasurementsdocument.cpp" line="563"/>
+        <source>The image id is empty!</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>VLayoutConverter</name>
     <message>
         <location filename="../../src/libs/ifc/xml/vlayoutconverter.cpp" line="169"/>
@@ -20084,53 +20884,53 @@ Chcete uložit změny?</translation>
 <context>
     <name>VMeasurements</name>
     <message>
-        <location filename="../../src/libs/vformat/vmeasurements.cpp" line="650"/>
-        <location filename="../../src/libs/vformat/vmeasurements.cpp" line="664"/>
-        <location filename="../../src/libs/vformat/vmeasurements.cpp" line="678"/>
-        <location filename="../../src/libs/vformat/vmeasurements.cpp" line="692"/>
-        <location filename="../../src/libs/vformat/vmeasurements.cpp" line="706"/>
-        <location filename="../../src/libs/vformat/vmeasurements.cpp" line="720"/>
-        <location filename="../../src/libs/vformat/vmeasurements.cpp" line="735"/>
-        <location filename="../../src/libs/vformat/vmeasurements.cpp" line="764"/>
-        <location filename="../../src/libs/vformat/vmeasurements.cpp" line="778"/>
-        <location filename="../../src/libs/vformat/vmeasurements.cpp" line="792"/>
-        <location filename="../../src/libs/vformat/vmeasurements.cpp" line="809"/>
-        <location filename="../../src/libs/vformat/vmeasurements.cpp" line="823"/>
+        <location filename="../../src/libs/vformat/vmeasurements.cpp" line="672"/>
+        <location filename="../../src/libs/vformat/vmeasurements.cpp" line="686"/>
+        <location filename="../../src/libs/vformat/vmeasurements.cpp" line="700"/>
+        <location filename="../../src/libs/vformat/vmeasurements.cpp" line="714"/>
+        <location filename="../../src/libs/vformat/vmeasurements.cpp" line="728"/>
+        <location filename="../../src/libs/vformat/vmeasurements.cpp" line="742"/>
+        <location filename="../../src/libs/vformat/vmeasurements.cpp" line="757"/>
+        <location filename="../../src/libs/vformat/vmeasurements.cpp" line="786"/>
+        <location filename="../../src/libs/vformat/vmeasurements.cpp" line="801"/>
+        <location filename="../../src/libs/vformat/vmeasurements.cpp" line="815"/>
+        <location filename="../../src/libs/vformat/vmeasurements.cpp" line="832"/>
+        <location filename="../../src/libs/vformat/vmeasurements.cpp" line="846"/>
         <source>Can&apos;t find measurement &apos;%1&apos;</source>
         <translation>Nelze najít míry &apos;%1&apos;</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vformat/vmeasurements.cpp" line="1278"/>
+        <location filename="../../src/libs/vformat/vmeasurements.cpp" line="1279"/>
         <source>The measurement name is empty!</source>
         <translation>Název míry je prázdný!</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vformat/vmeasurements.cpp" line="1061"/>
+        <location filename="../../src/libs/vformat/vmeasurements.cpp" line="1084"/>
         <source>None</source>
         <translation>Žádný</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vformat/vmeasurements.cpp" line="1063"/>
+        <location filename="../../src/libs/vformat/vmeasurements.cpp" line="1086"/>
         <source>Height</source>
         <translation>Výška</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vformat/vmeasurements.cpp" line="1065"/>
+        <location filename="../../src/libs/vformat/vmeasurements.cpp" line="1088"/>
         <source>Size</source>
         <translation>Velikost</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vformat/vmeasurements.cpp" line="1069"/>
+        <location filename="../../src/libs/vformat/vmeasurements.cpp" line="1092"/>
         <source>Hip</source>
         <translation>Kyčel</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vformat/vmeasurements.cpp" line="1381"/>
+        <location filename="../../src/libs/vformat/vmeasurements.cpp" line="1383"/>
         <source>Dimension is not valid</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/libs/vformat/vmeasurements.cpp" line="1067"/>
+        <location filename="../../src/libs/vformat/vmeasurements.cpp" line="1090"/>
         <source>Waist</source>
         <translation>Pas</translation>
     </message>
@@ -21855,7 +22655,7 @@ Chcete uložit změny?</translation>
     <message>
         <location filename="../../src/libs/ifc/xml/vpatternimage.cpp" line="67"/>
         <location filename="../../src/libs/ifc/xml/vpatternimage.cpp" line="154"/>
-        <location filename="../../src/libs/ifc/xml/vpatternimage.cpp" line="179"/>
+        <location filename="../../src/libs/ifc/xml/vpatternimage.cpp" line="185"/>
         <source>Couldn&apos;t read the image. Error: %1</source>
         <translation>Obrázek se nepodařilo přečíst. Chyba: %1</translation>
     </message>
@@ -23756,987 +24556,819 @@ Chyba kompatibility formátu nezpracovaného rozvržení: ActualFileVersion = %1
 <context>
     <name>VTranslateVars</name>
     <message>
-        <location filename="../../src/libs/vpatterndb/vtranslatevars.cpp" line="75"/>
         <source>Bunka</source>
         <comment>System name</comment>
-        <translation>Bunka</translation>
+        <translation type="vanished">Bunka</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vpatterndb/vtranslatevars.cpp" line="76"/>
         <source>Bunka Fashion College</source>
         <comment>Author name</comment>
-        <translation>Bunka Fashion College</translation>
+        <translation type="vanished">Bunka Fashion College</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vpatterndb/vtranslatevars.cpp" line="77"/>
         <source>Fundamentals of Garment Design</source>
         <comment>Book name</comment>
-        <translation>Fundamentals of Garment Design</translation>
+        <translation type="vanished">Fundamentals of Garment Design</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vpatterndb/vtranslatevars.cpp" line="80"/>
         <source>Barnfield and Richard</source>
         <comment>System name</comment>
-        <translation>Barnfield a Richard</translation>
+        <translation type="vanished">Barnfield a Richard</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vpatterndb/vtranslatevars.cpp" line="81"/>
         <source>Jo Barnfield and Andrew Richards</source>
         <comment>Author name</comment>
-        <translation>Jo Barnfield a Andrew Richards</translation>
+        <translation type="vanished">Jo Barnfield a Andrew Richards</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vpatterndb/vtranslatevars.cpp" line="82"/>
         <source>Pattern Making Primer</source>
         <comment>Book name</comment>
-        <translation>Pattern Making Primer</translation>
+        <translation type="vanished">Pattern Making Primer</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vpatterndb/vtranslatevars.cpp" line="85"/>
         <source>Friendship/Women</source>
         <comment>System name</comment>
-        <translation>Friendship/Women</translation>
+        <translation type="vanished">Friendship/Women</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vpatterndb/vtranslatevars.cpp" line="86"/>
-        <location filename="../../src/libs/vpatterndb/vtranslatevars.cpp" line="326"/>
         <source>Elizabeth Friendship</source>
         <comment>Author name</comment>
-        <translation>Elizabeth Friendship</translation>
+        <translation type="vanished">Elizabeth Friendship</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vpatterndb/vtranslatevars.cpp" line="87"/>
         <source>Creating Historical Clothes - Pattern Cutting from the 16th to the 19th Centuries</source>
         <comment>Book name</comment>
-        <translation>Creating Historical Clothes - Pattern Cutting from the 16th to the 19th Centuries</translation>
+        <translation type="vanished">Creating Historical Clothes - Pattern Cutting from the 16th to the 19th Centuries</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vpatterndb/vtranslatevars.cpp" line="91"/>
         <source>Morris, K.</source>
         <comment>System name</comment>
-        <translation>Morris, K.</translation>
+        <translation type="vanished">Morris, K.</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vpatterndb/vtranslatevars.cpp" line="92"/>
         <source>Karen Morris</source>
         <comment>Author name</comment>
-        <translation>Karen Morris</translation>
+        <translation type="vanished">Karen Morris</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vpatterndb/vtranslatevars.cpp" line="93"/>
         <source>Sewing Lingerie that Fits</source>
         <comment>Book name</comment>
-        <translation>Šití spodního prádla, které padne</translation>
+        <translation type="vanished">Šití spodního prádla, které padne</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vpatterndb/vtranslatevars.cpp" line="96"/>
         <source>Castro</source>
         <comment>System name</comment>
-        <translation>Castro</translation>
+        <translation type="vanished">Castro</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vpatterndb/vtranslatevars.cpp" line="97"/>
         <source>Lucia Mors de Castro</source>
         <comment>Author name</comment>
-        <translation>Lucia Mors de Castro</translation>
+        <translation type="vanished">Lucia Mors de Castro</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vpatterndb/vtranslatevars.cpp" line="98"/>
         <source>Patternmaking in Practic</source>
         <comment>Book name</comment>
-        <translation>Patternmaking in Practice</translation>
+        <translation type="vanished">Patternmaking in Practice</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vpatterndb/vtranslatevars.cpp" line="101"/>
         <source>Kim &amp; Uh</source>
         <comment>System name</comment>
-        <translation>Kim &amp; Uh</translation>
+        <translation type="vanished">Kim &amp; Uh</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vpatterndb/vtranslatevars.cpp" line="102"/>
         <source>Injoo Kim and Mykyung Uh</source>
         <comment>Author name</comment>
-        <translation>Injoo Kim and Mykyung Uh</translation>
+        <translation type="vanished">Injoo Kim and Mykyung Uh</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vpatterndb/vtranslatevars.cpp" line="103"/>
         <source>Apparel Making in Fashion Design</source>
         <comment>Book name</comment>
-        <translation>Apparel Making in Fashion Design</translation>
+        <translation type="vanished">Apparel Making in Fashion Design</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vpatterndb/vtranslatevars.cpp" line="106"/>
         <source>Waugh</source>
         <comment>System name</comment>
-        <translation>Waugh</translation>
+        <translation type="vanished">Waugh</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vpatterndb/vtranslatevars.cpp" line="107"/>
         <source>Norah Waugh</source>
         <comment>Author name</comment>
-        <translation>Norah Waugh</translation>
+        <translation type="vanished">Norah Waugh</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vpatterndb/vtranslatevars.cpp" line="108"/>
         <source>Corsets and Crinolines</source>
         <comment>Book name</comment>
-        <translation>Corsets and Crinolines</translation>
+        <translation type="vanished">Corsets and Crinolines</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vpatterndb/vtranslatevars.cpp" line="111"/>
         <source>Grimble</source>
         <comment>System name</comment>
-        <translation>Grimble</translation>
+        <translation type="vanished">Grimble</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vpatterndb/vtranslatevars.cpp" line="112"/>
         <source>Frances Grimble</source>
         <comment>Author name</comment>
-        <translation>Frances Grimble</translation>
+        <translation type="vanished">Frances Grimble</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vpatterndb/vtranslatevars.cpp" line="113"/>
         <source>Fashions of the Gilded Age</source>
         <comment>Book name</comment>
-        <translation>Fashions of the Gilded Age</translation>
+        <translation type="vanished">Fashions of the Gilded Age</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vpatterndb/vtranslatevars.cpp" line="116"/>
         <source>Thornton&apos;s International System</source>
         <comment>System name</comment>
-        <translation>Thorntons internationales System</translation>
+        <translation type="vanished">Thorntons internationales System</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vpatterndb/vtranslatevars.cpp" line="117"/>
-        <location filename="../../src/libs/vpatterndb/vtranslatevars.cpp" line="362"/>
         <source>ed. R. L. Shep</source>
         <comment>Author name</comment>
-        <translation>ed. R. L. Shep</translation>
+        <translation type="vanished">ed. R. L. Shep</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vpatterndb/vtranslatevars.cpp" line="118"/>
-        <location filename="../../src/libs/vpatterndb/vtranslatevars.cpp" line="363"/>
         <source>The Great War: Styles and Patterns of the 1910s</source>
         <comment>Book name</comment>
-        <translation>The Great War: Styles and Patterns of the 1910s</translation>
+        <translation type="vanished">The Great War: Styles and Patterns of the 1910s</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vpatterndb/vtranslatevars.cpp" line="121"/>
         <source>Hillhouse &amp; Mansfield</source>
         <comment>System name</comment>
-        <translation>Hillhouse &amp; Mansfield</translation>
+        <translation type="vanished">Hillhouse &amp; Mansfield</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vpatterndb/vtranslatevars.cpp" line="122"/>
         <source>Marion S. Hillhouse and Evelyn A. Mansfield</source>
         <comment>Author name</comment>
-        <translation>Marion S. Hillhouse und Evelyn A. Mansfield</translation>
+        <translation type="vanished">Marion S. Hillhouse und Evelyn A. Mansfield</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vpatterndb/vtranslatevars.cpp" line="123"/>
         <source>Dress Design: Draping and Flat Pattern Making</source>
         <comment>Book name</comment>
-        <translation>Dress Design: Draping and Flat Pattern Making</translation>
+        <translation type="vanished">Dress Design: Draping and Flat Pattern Making</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vpatterndb/vtranslatevars.cpp" line="126"/>
         <source>Pivnick</source>
         <comment>System name</comment>
-        <translation>Pivnick</translation>
+        <translation type="vanished">Pivnick</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vpatterndb/vtranslatevars.cpp" line="127"/>
         <source>Esther Kaplan Pivnick</source>
         <comment>Author name</comment>
-        <translation>Esther Kaplan Pivnick</translation>
+        <translation type="vanished">Esther Kaplan Pivnick</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vpatterndb/vtranslatevars.cpp" line="128"/>
         <source>How to Design Beautiful Clothes: Designing and Pattern Making</source>
         <comment>Book name</comment>
-        <translation>How to Design Beautiful Clothes: Designing and Pattern Making</translation>
+        <translation type="vanished">How to Design Beautiful Clothes: Designing and Pattern Making</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vpatterndb/vtranslatevars.cpp" line="131"/>
         <source>Minister &amp; Son</source>
         <comment>System name</comment>
-        <translation>Minister &amp; Sohn</translation>
+        <translation type="vanished">Minister &amp; Sohn</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vpatterndb/vtranslatevars.cpp" line="132"/>
         <source>Edward Minister &amp; Son, ed. R. L. Shep</source>
         <comment>Author name</comment>
-        <translation>Edward Minister &amp; Sohn, ed. R. L. Shep</translation>
+        <translation type="vanished">Edward Minister &amp; Sohn, ed. R. L. Shep</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vpatterndb/vtranslatevars.cpp" line="133"/>
         <source>The Complete Guide to Practical Cutting (1853)</source>
         <comment>Book name</comment>
-        <translation>The Complete Guide to Practical Cutting (1853)</translation>
+        <translation type="vanished">The Complete Guide to Practical Cutting (1853)</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vpatterndb/vtranslatevars.cpp" line="136"/>
         <source>Strickland</source>
         <comment>System name</comment>
-        <translation>Strickland</translation>
+        <translation type="vanished">Strickland</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vpatterndb/vtranslatevars.cpp" line="137"/>
         <source>Gertrude Strickland</source>
         <comment>Author name</comment>
-        <translation>Gertrude Strickland</translation>
+        <translation type="vanished">Gertrude Strickland</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vpatterndb/vtranslatevars.cpp" line="138"/>
         <source>A Tailoring Manual</source>
         <comment>Book name</comment>
-        <translation>A Tailoring Manual</translation>
+        <translation type="vanished">A Tailoring Manual</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vpatterndb/vtranslatevars.cpp" line="141"/>
         <source>Loh &amp; Lewis</source>
         <comment>System name</comment>
-        <translation>Loh &amp; Lewis</translation>
+        <translation type="vanished">Loh &amp; Lewis</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vpatterndb/vtranslatevars.cpp" line="142"/>
         <source>May Loh and Diehl Lewis</source>
         <comment>Author name</comment>
-        <translation>May Loh und Diehl Lewis</translation>
+        <translation type="vanished">May Loh und Diehl Lewis</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vpatterndb/vtranslatevars.cpp" line="143"/>
         <source>Patternless Fashion Design</source>
         <comment>Book name</comment>
-        <translation>Patternless Fashion Design</translation>
+        <translation type="vanished">Patternless Fashion Design</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vpatterndb/vtranslatevars.cpp" line="146"/>
         <source>Morris, F. R.</source>
         <comment>System name</comment>
-        <translation>Morris, F. R.</translation>
+        <translation type="vanished">Morris, F. R.</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vpatterndb/vtranslatevars.cpp" line="147"/>
         <source>F. R. Morris</source>
         <comment>Author name</comment>
-        <translation>F. R. Morris</translation>
+        <translation type="vanished">F. R. Morris</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vpatterndb/vtranslatevars.cpp" line="148"/>
         <source>Ladies Garment Cutting and Making</source>
         <comment>Book name</comment>
-        <translation>Ladies Garment Cutting and Making</translation>
+        <translation type="vanished">Ladies Garment Cutting and Making</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vpatterndb/vtranslatevars.cpp" line="151"/>
         <source>Mason</source>
         <comment>System name</comment>
-        <translation>Mason</translation>
+        <translation type="vanished">Mason</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vpatterndb/vtranslatevars.cpp" line="152"/>
         <source>Gertrude Mason</source>
         <comment>Author name</comment>
-        <translation>Gertrude Mason</translation>
+        <translation type="vanished">Gertrude Mason</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vpatterndb/vtranslatevars.cpp" line="153"/>
         <source>Gertrude Mason&apos;s Patternmaking Book</source>
         <comment>Book name</comment>
-        <translation>Gertrude Mason&apos;s Patternmaking Book</translation>
+        <translation type="vanished">Gertrude Mason&apos;s Patternmaking Book</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vpatterndb/vtranslatevars.cpp" line="156"/>
         <source>Kimata</source>
         <comment>System name</comment>
-        <translation>Kimata</translation>
+        <translation type="vanished">Kimata</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vpatterndb/vtranslatevars.cpp" line="157"/>
         <source>K. Kimata</source>
         <comment>Author name</comment>
-        <translation>K. Kimata</translation>
+        <translation type="vanished">K. Kimata</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vpatterndb/vtranslatevars.cpp" line="158"/>
         <source>K.Kimata&apos;s Simplified Drafting Book for Dressmaking</source>
         <comment>Book name</comment>
-        <translation>K.Kimata&apos;s Simplified Drafting Book for Dressmaking</translation>
+        <translation type="vanished">K.Kimata&apos;s Simplified Drafting Book for Dressmaking</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vpatterndb/vtranslatevars.cpp" line="161"/>
         <source>Master Designer</source>
         <comment>System name</comment>
-        <translation>Master Designer</translation>
+        <translation type="vanished">Master Designer</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vpatterndb/vtranslatevars.cpp" line="162"/>
         <source>The Master Designer (Chicago, IL)</source>
         <comment>Author name</comment>
-        <translation>The Master Designer (Chicago, IL)</translation>
+        <translation type="vanished">The Master Designer (Chicago, IL)</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vpatterndb/vtranslatevars.cpp" line="163"/>
         <source>Master Designer&apos;s System of Designing, Cutting and Grading</source>
         <comment>Book name</comment>
-        <translation>Master Designer&apos;s System of Designing, Cutting and Grading</translation>
+        <translation type="vanished">Master Designer&apos;s System of Designing, Cutting and Grading</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vpatterndb/vtranslatevars.cpp" line="166"/>
         <source>Kopp</source>
         <comment>System name</comment>
-        <translation>Kopp</translation>
+        <translation type="vanished">Kopp</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vpatterndb/vtranslatevars.cpp" line="167"/>
         <source>Ernestine Kopp, Vittorina Rolfo, Beatrice Zelin, Lee Gross</source>
         <comment>Author name</comment>
-        <translation>Ernestine Kopp, Vittorina Rolfo, Beatrice Zelin, Lee Gross</translation>
+        <translation type="vanished">Ernestine Kopp, Vittorina Rolfo, Beatrice Zelin, Lee Gross</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vpatterndb/vtranslatevars.cpp" line="168"/>
         <source>How to Draft Basic Patterns</source>
         <comment>Book name</comment>
-        <translation>How to Draft Basic Patterns</translation>
+        <translation type="vanished">How to Draft Basic Patterns</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vpatterndb/vtranslatevars.cpp" line="171"/>
         <source>Ekern</source>
         <comment>System name</comment>
-        <translation>Ekern</translation>
+        <translation type="vanished">Ekern</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vpatterndb/vtranslatevars.cpp" line="172"/>
         <source>Doris Ekern</source>
         <comment>Author name</comment>
-        <translation>Doris Ekern</translation>
+        <translation type="vanished">Doris Ekern</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vpatterndb/vtranslatevars.cpp" line="173"/>
         <source>Slacks Cut-to-Fit for Your Figure</source>
         <comment>Book name</comment>
-        <translation>Slacks Cut-to-Fit for Your Figure</translation>
+        <translation type="vanished">Slacks Cut-to-Fit for Your Figure</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vpatterndb/vtranslatevars.cpp" line="176"/>
         <source>Doyle</source>
         <comment>System name</comment>
-        <translation>Doyle</translation>
+        <translation type="vanished">Doyle</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vpatterndb/vtranslatevars.cpp" line="177"/>
         <source>Sarah J. Doyle</source>
         <comment>Author name</comment>
-        <translation>Sarah J. Doyle</translation>
+        <translation type="vanished">Sarah J. Doyle</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vpatterndb/vtranslatevars.cpp" line="178"/>
         <source>Sarah&apos;s Key to Pattern Drafting</source>
         <comment>Book name</comment>
-        <translation>Sarah&apos;s Key to Pattern Drafting</translation>
+        <translation type="vanished">Sarah&apos;s Key to Pattern Drafting</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vpatterndb/vtranslatevars.cpp" line="181"/>
         <source>Shelton</source>
         <comment>System name</comment>
-        <translation>Shelton</translation>
+        <translation type="vanished">Shelton</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vpatterndb/vtranslatevars.cpp" line="182"/>
         <source>Karla J. Shelton</source>
         <comment>Author name</comment>
-        <translation>Karla J. Shelton</translation>
+        <translation type="vanished">Karla J. Shelton</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vpatterndb/vtranslatevars.cpp" line="183"/>
         <source>Design and Sew Jeans</source>
         <comment>Book name</comment>
-        <translation>Navrhování a šití džínů</translation>
+        <translation type="vanished">Navrhování a šití džínů</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vpatterndb/vtranslatevars.cpp" line="186"/>
         <source>Lady Boutique</source>
         <comment>System name</comment>
-        <translation>Lady Boutique</translation>
+        <translation type="vanished">Lady Boutique</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vpatterndb/vtranslatevars.cpp" line="187"/>
         <source>Lady Boutique</source>
         <comment>Author name</comment>
-        <translation>Lady Boutique</translation>
+        <translation type="vanished">Lady Boutique</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vpatterndb/vtranslatevars.cpp" line="188"/>
         <source>Lady Boutique magazine (Japan)</source>
         <comment>Book name</comment>
-        <translation>Lady Boutique magazine (Japan)</translation>
+        <translation type="vanished">Lady Boutique magazine (Japan)</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vpatterndb/vtranslatevars.cpp" line="191"/>
         <source>Rohr</source>
         <comment>System name</comment>
-        <translation>Rohr</translation>
+        <translation type="vanished">Rohr</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vpatterndb/vtranslatevars.cpp" line="192"/>
         <source>M. Rohr</source>
         <comment>Author name</comment>
-        <translation>M. Rohr</translation>
+        <translation type="vanished">M. Rohr</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vpatterndb/vtranslatevars.cpp" line="193"/>
         <source>Pattern Drafting and Grading: Women&apos;s nd Misses&apos; Garment Design</source>
         <comment>Book name</comment>
-        <translation>Pattern Drafting and Grading: Women&apos;s and Misses&apos; Garment Design</translation>
+        <translation type="vanished">Pattern Drafting and Grading: Women&apos;s and Misses&apos; Garment Design</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vpatterndb/vtranslatevars.cpp" line="196"/>
         <source>Moore</source>
         <comment>System name</comment>
-        <translation>Moore</translation>
+        <translation type="vanished">Moore</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vpatterndb/vtranslatevars.cpp" line="197"/>
         <source>Dorothy Moore</source>
         <comment>Author name</comment>
-        <translation>Dorothy Moore</translation>
+        <translation type="vanished">Dorothy Moore</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vpatterndb/vtranslatevars.cpp" line="198"/>
         <source>Dorothy Moore&apos;s Pattern Drafting and Dressmaking</source>
         <comment>Book name</comment>
-        <translation>Dorothy Moore&apos;s Pattern Drafting and Dressmaking</translation>
+        <translation type="vanished">Dorothy Moore&apos;s Pattern Drafting and Dressmaking</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vpatterndb/vtranslatevars.cpp" line="201"/>
         <source>Abling</source>
         <comment>System name</comment>
-        <translation>Abling</translation>
+        <translation type="vanished">Abling</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vpatterndb/vtranslatevars.cpp" line="202"/>
         <source>Bina Abling</source>
         <comment>Author name</comment>
-        <translation>Bina Abling</translation>
+        <translation type="vanished">Bina Abling</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vpatterndb/vtranslatevars.cpp" line="203"/>
         <source>Integrating Draping, Drafting and Drawing</source>
         <comment>Book name</comment>
-        <translation>Integrating Draping, Drafting and Drawing</translation>
+        <translation type="vanished">Integrating Draping, Drafting and Drawing</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vpatterndb/vtranslatevars.cpp" line="206"/>
         <source>Fukomoto</source>
         <comment>System name</comment>
-        <translation>Fukomoto</translation>
+        <translation type="vanished">Fukomoto</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vpatterndb/vtranslatevars.cpp" line="207"/>
         <source>Sue S. Fukomoto</source>
         <comment>Author name</comment>
-        <translation>Sue S. Fukomoto</translation>
+        <translation type="vanished">Sue S. Fukomoto</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vpatterndb/vtranslatevars.cpp" line="208"/>
         <source>Scientific Pattern Drafting as taught at Style Center School of Costume Design, Dressmaking and Millinery</source>
         <comment>Book name</comment>
-        <translation>Scientific Pattern Drafting as taught at Style Center School of Costume Design, Dressmaking and Millinery</translation>
+        <translation type="vanished">Scientific Pattern Drafting as taught at Style Center School of Costume Design, Dressmaking and Millinery</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vpatterndb/vtranslatevars.cpp" line="214"/>
         <source>Dressmaking International</source>
         <comment>System name</comment>
-        <translation>Dressmaking International</translation>
+        <translation type="vanished">Dressmaking International</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vpatterndb/vtranslatevars.cpp" line="215"/>
         <source>Dressmaking International</source>
         <comment>Author name</comment>
-        <translation>Dressmaking International</translation>
+        <translation type="vanished">Dressmaking International</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vpatterndb/vtranslatevars.cpp" line="216"/>
         <source>Dressmaking International magazine (Japan)</source>
         <comment>Book name</comment>
-        <translation>Dressmaking International magazine (Japan)</translation>
+        <translation type="vanished">Dressmaking International magazine (Japan)</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vpatterndb/vtranslatevars.cpp" line="219"/>
         <source>Erwin</source>
         <comment>System name</comment>
-        <translation>Erwin</translation>
+        <translation type="vanished">Erwin</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vpatterndb/vtranslatevars.cpp" line="220"/>
         <source>Mabel D. Erwin</source>
         <comment>Author name</comment>
-        <translation>Mabel D. Erwin</translation>
+        <translation type="vanished">Mabel D. Erwin</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vpatterndb/vtranslatevars.cpp" line="221"/>
         <source>Practical Dress Design</source>
         <comment>Book name</comment>
-        <translation>Practical Dress Design</translation>
+        <translation type="vanished">Practical Dress Design</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vpatterndb/vtranslatevars.cpp" line="224"/>
         <source>Gough</source>
         <comment>System name</comment>
-        <translation>Gough</translation>
+        <translation type="vanished">Gough</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vpatterndb/vtranslatevars.cpp" line="225"/>
         <source>E. L. G. Gough</source>
         <comment>Author name</comment>
-        <translation>E. L. G. Gough</translation>
+        <translation type="vanished">E. L. G. Gough</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vpatterndb/vtranslatevars.cpp" line="226"/>
         <source>Principles of Garment Cutting</source>
         <comment>Book name</comment>
-        <translation>Principles of Garment Cutting</translation>
+        <translation type="vanished">Principles of Garment Cutting</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vpatterndb/vtranslatevars.cpp" line="229"/>
         <source>Allemong</source>
         <comment>System name</comment>
-        <translation>Allemong</translation>
+        <translation type="vanished">Allemong</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vpatterndb/vtranslatevars.cpp" line="230"/>
         <source>Elizabeth M. Allemong</source>
         <comment>Author name</comment>
-        <translation>Elizabeth M. Allemong</translation>
+        <translation type="vanished">Elizabeth M. Allemong</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vpatterndb/vtranslatevars.cpp" line="231"/>
         <source>European Cut</source>
         <comment>Book name</comment>
-        <translation>Evropský střih</translation>
+        <translation type="vanished">Evropský střih</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vpatterndb/vtranslatevars.cpp" line="234"/>
         <source>McCunn</source>
         <comment>System name</comment>
-        <translation>McCunn</translation>
+        <translation type="vanished">McCunn</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vpatterndb/vtranslatevars.cpp" line="235"/>
         <source>Donald H. McCunn</source>
         <comment>Author name</comment>
-        <translation>Donald H. McCunn</translation>
+        <translation type="vanished">Donald H. McCunn</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vpatterndb/vtranslatevars.cpp" line="236"/>
         <source>How to Make Your Own Sewing Patterns</source>
         <comment>Book name</comment>
-        <translation>Jak si vytvořit vlastní šicí vzory</translation>
+        <translation type="vanished">Jak si vytvořit vlastní šicí vzory</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vpatterndb/vtranslatevars.cpp" line="239"/>
         <source>Zarapkar</source>
         <comment>System name</comment>
-        <translation>Zarapkar</translation>
+        <translation type="vanished">Zarapkar</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vpatterndb/vtranslatevars.cpp" line="240"/>
         <source>Shri K. R. Zarapkar and Shri Arvind K. Zarapkar</source>
         <comment>Author name</comment>
-        <translation>Shri K. R. Zarapkar and Shri Arvind K. Zarapkar</translation>
+        <translation type="vanished">Shri K. R. Zarapkar and Shri Arvind K. Zarapkar</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vpatterndb/vtranslatevars.cpp" line="241"/>
         <source>Zarapkar System of Cutting</source>
         <comment>Book name</comment>
-        <translation>Zarapkar System of Cutting</translation>
+        <translation type="vanished">Zarapkar System of Cutting</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vpatterndb/vtranslatevars.cpp" line="244"/>
         <source>Kunick</source>
         <comment>System name</comment>
-        <translation>Kunick</translation>
+        <translation type="vanished">Kunick</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vpatterndb/vtranslatevars.cpp" line="245"/>
         <source>Philip Kunick</source>
         <comment>Author name</comment>
-        <translation>Philip Kunick</translation>
+        <translation type="vanished">Philip Kunick</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vpatterndb/vtranslatevars.cpp" line="246"/>
         <source>Sizing, Pattern Construction and Grading for Women&apos;s and Children&apos;s Garments</source>
         <comment>Book name</comment>
-        <translation>Sizing, Pattern Construction and Grading for Women&apos;s and Children&apos;s Garments</translation>
+        <translation type="vanished">Sizing, Pattern Construction and Grading for Women&apos;s and Children&apos;s Garments</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vpatterndb/vtranslatevars.cpp" line="250"/>
         <source>Handford</source>
         <comment>System name</comment>
-        <translation>Handford</translation>
+        <translation type="vanished">Handford</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vpatterndb/vtranslatevars.cpp" line="251"/>
         <source>Jack Handford</source>
         <comment>Author name</comment>
-        <translation>Jack Handford</translation>
+        <translation type="vanished">Jack Handford</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vpatterndb/vtranslatevars.cpp" line="252"/>
         <source>Professional Patternmaking for Designers: Women&apos;s Wear, Men&apos;s Casual Wear</source>
         <comment>Book name</comment>
-        <translation>Professional Patternmaking for Designers: Women&apos;s Wear, Men&apos;s Casual Wear</translation>
+        <translation type="vanished">Professional Patternmaking for Designers: Women&apos;s Wear, Men&apos;s Casual Wear</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vpatterndb/vtranslatevars.cpp" line="256"/>
         <source>Davis</source>
         <comment>System name</comment>
-        <translation>Davis</translation>
+        <translation type="vanished">Davis</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vpatterndb/vtranslatevars.cpp" line="257"/>
         <source>R. I. Davis</source>
         <comment>Author name</comment>
-        <translation>R. I. Davis</translation>
+        <translation type="vanished">R. I. Davis</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vpatterndb/vtranslatevars.cpp" line="258"/>
         <source>Men&apos;s 17th &amp; 18th Century Costume, Cut &amp; Fashion</source>
         <comment>Book name</comment>
-        <translation>Men&apos;s 17th &amp; 18th Century Costume, Cut &amp; Fashion</translation>
+        <translation type="vanished">Men&apos;s 17th &amp; 18th Century Costume, Cut &amp; Fashion</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vpatterndb/vtranslatevars.cpp" line="261"/>
         <source>MacLochlainn</source>
         <comment>System name</comment>
-        <translation>MacLochlainn</translation>
+        <translation type="vanished">MacLochlainn</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vpatterndb/vtranslatevars.cpp" line="262"/>
         <source>Jason MacLochlainn</source>
         <comment>Author name</comment>
-        <translation>Jason MacLochlainn</translation>
+        <translation type="vanished">Jason MacLochlainn</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vpatterndb/vtranslatevars.cpp" line="263"/>
         <source>The Victorian Tailor: An Introduction to Period Tailoring</source>
         <comment>Book name</comment>
-        <translation>The Victorian Tailor: An Introduction to Period Tailoring</translation>
+        <translation type="vanished">The Victorian Tailor: An Introduction to Period Tailoring</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vpatterndb/vtranslatevars.cpp" line="266"/>
         <source>Joseph-Armstrong</source>
         <comment>System name</comment>
-        <translation>Joseph-Armstrong</translation>
+        <translation type="vanished">Joseph-Armstrong</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vpatterndb/vtranslatevars.cpp" line="267"/>
         <source>Helen Joseph-Armstrong</source>
         <comment>Author name</comment>
-        <translation>Helen Joseph-Armstrong</translation>
+        <translation type="vanished">Helen Joseph-Armstrong</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vpatterndb/vtranslatevars.cpp" line="268"/>
         <source>Patternmaking for Fashion Design</source>
         <comment>Book name</comment>
-        <translation>Patternmaking for Fashion Design</translation>
+        <translation type="vanished">Patternmaking for Fashion Design</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vpatterndb/vtranslatevars.cpp" line="271"/>
         <source>Supreme System</source>
         <comment>System name</comment>
-        <translation>Supreme System</translation>
+        <translation type="vanished">Supreme System</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vpatterndb/vtranslatevars.cpp" line="272"/>
         <source>Frederick T. Croonberg</source>
         <comment>Author name</comment>
-        <translation>Frederick T. Croonberg</translation>
+        <translation type="vanished">Frederick T. Croonberg</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vpatterndb/vtranslatevars.cpp" line="273"/>
         <source>The Blue Book of Men&apos;s Tailoring, Grand Edition of Supreme System for Producing Mens Garments (1907)</source>
         <comment>Book name</comment>
-        <translation>The Blue Book of Men&apos;s Tailoring, Grand Edition of Supreme System for Producing Mens Garments (1907)</translation>
+        <translation type="vanished">The Blue Book of Men&apos;s Tailoring, Grand Edition of Supreme System for Producing Mens Garments (1907)</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vpatterndb/vtranslatevars.cpp" line="279"/>
         <source>Sugino</source>
         <comment>System name</comment>
-        <translation>Sugino</translation>
+        <translation type="vanished">Sugino</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vpatterndb/vtranslatevars.cpp" line="280"/>
         <source>Dressmaking</source>
         <comment>Author name</comment>
-        <translation>Dressmaking</translation>
+        <translation type="vanished">Dressmaking</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vpatterndb/vtranslatevars.cpp" line="281"/>
         <source>Pattern Drafting Vols. I, II, III (Japan)</source>
         <comment>Book name</comment>
-        <translation>Pattern Drafting Vols. I, II, III (Japan)</translation>
+        <translation type="vanished">Pattern Drafting Vols. I, II, III (Japan)</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vpatterndb/vtranslatevars.cpp" line="284"/>
         <source>Centre Point System</source>
         <comment>System name</comment>
-        <translation>Centre Point System</translation>
+        <translation type="vanished">Centre Point System</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vpatterndb/vtranslatevars.cpp" line="285"/>
         <source>Louis Devere</source>
         <comment>Author name</comment>
-        <translation>Louis Devere</translation>
+        <translation type="vanished">Louis Devere</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vpatterndb/vtranslatevars.cpp" line="286"/>
         <source>The Handbook of Practical Cutting on the Centre Point System</source>
         <comment>Book name</comment>
-        <translation>The Handbook of Practical Cutting on the Centre Point System</translation>
+        <translation type="vanished">The Handbook of Practical Cutting on the Centre Point System</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vpatterndb/vtranslatevars.cpp" line="289"/>
         <source>Aldrich/Men</source>
         <comment>System name</comment>
-        <translation>Aldrich/Páni</translation>
+        <translation type="vanished">Aldrich/Páni</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vpatterndb/vtranslatevars.cpp" line="290"/>
-        <location filename="../../src/libs/vpatterndb/vtranslatevars.cpp" line="295"/>
         <source>Winifred Aldrich</source>
         <comment>Author name</comment>
-        <translation>Winifred Aldrich</translation>
+        <translation type="vanished">Winifred Aldrich</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vpatterndb/vtranslatevars.cpp" line="291"/>
         <source>Metric Pattern Cutting for Menswear</source>
         <comment>Book name</comment>
-        <translation>Metric Pattern Cutting for Menswear</translation>
+        <translation type="vanished">Metric Pattern Cutting for Menswear</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vpatterndb/vtranslatevars.cpp" line="294"/>
         <source>Aldrich/Women</source>
         <comment>System name</comment>
-        <translation>Aldrich/Ženy</translation>
+        <translation type="vanished">Aldrich/Ženy</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vpatterndb/vtranslatevars.cpp" line="296"/>
         <source>Metric Pattern Cutting for Women&apos;s Wear</source>
         <comment>Book name</comment>
-        <translation>Metric Pattern Cutting for Women&apos;s Wear</translation>
+        <translation type="vanished">Metric Pattern Cutting for Women&apos;s Wear</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vpatterndb/vtranslatevars.cpp" line="299"/>
         <source>Kershaw</source>
         <comment>System name</comment>
-        <translation>Kershaw</translation>
+        <translation type="vanished">Kershaw</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vpatterndb/vtranslatevars.cpp" line="300"/>
         <source>Gareth Kershaw</source>
         <comment>Author name</comment>
-        <translation>Gareth Kershaw</translation>
+        <translation type="vanished">Gareth Kershaw</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vpatterndb/vtranslatevars.cpp" line="301"/>
         <source>Patternmaking for Menswear</source>
         <comment>Book name</comment>
-        <translation>Patternmaking for Menswear</translation>
+        <translation type="vanished">Patternmaking for Menswear</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vpatterndb/vtranslatevars.cpp" line="304"/>
         <source>Gilewska</source>
         <comment>System name</comment>
-        <translation>Gilewska</translation>
+        <translation type="vanished">Gilewska</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vpatterndb/vtranslatevars.cpp" line="305"/>
         <source>Teresa Gilewska</source>
         <comment>Author name</comment>
-        <translation>Teresa Gilewska</translation>
+        <translation type="vanished">Teresa Gilewska</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vpatterndb/vtranslatevars.cpp" line="306"/>
         <source>Pattern-Drafting for Fashion: The Basics</source>
         <comment>Book name</comment>
-        <translation>Pattern-Drafting for Fashion: The Basics</translation>
+        <translation type="vanished">Pattern-Drafting for Fashion: The Basics</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vpatterndb/vtranslatevars.cpp" line="309"/>
         <source>Lo</source>
         <comment>System name</comment>
-        <translation>Lo</translation>
+        <translation type="vanished">Lo</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vpatterndb/vtranslatevars.cpp" line="310"/>
         <source>Dennic Chunman Lo</source>
         <comment>Author name</comment>
-        <translation>Dennic Chunman Lo</translation>
+        <translation type="vanished">Dennic Chunman Lo</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vpatterndb/vtranslatevars.cpp" line="311"/>
         <source>Pattern Cutting</source>
         <comment>Book name</comment>
-        <translation>Pattern Cutting</translation>
+        <translation type="vanished">Pattern Cutting</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vpatterndb/vtranslatevars.cpp" line="314"/>
         <source>Bray</source>
         <comment>System name</comment>
-        <translation>Bray</translation>
+        <translation type="vanished">Bray</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vpatterndb/vtranslatevars.cpp" line="315"/>
         <source>Natalie Bray</source>
         <comment>Author name</comment>
-        <translation>Natalie Bray</translation>
+        <translation type="vanished">Natalie Bray</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vpatterndb/vtranslatevars.cpp" line="316"/>
         <source>Dress Pattern Designing: The Basic Principles of Cut and Fit</source>
         <comment>Book name</comment>
-        <translation>Schnittmuster-Design: Die Grundlagen des Zuschneidens und Anpassens</translation>
+        <translation type="vanished">Schnittmuster-Design: Die Grundlagen des Zuschneidens und Anpassens</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vpatterndb/vtranslatevars.cpp" line="319"/>
         <source>Knowles/Men</source>
         <comment>System name</comment>
-        <translation>Knowles/Páni</translation>
+        <translation type="vanished">Knowles/Páni</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vpatterndb/vtranslatevars.cpp" line="320"/>
-        <location filename="../../src/libs/vpatterndb/vtranslatevars.cpp" line="354"/>
         <source>Lori A. Knowles</source>
         <comment>Author name</comment>
-        <translation>Lori A. Knowles</translation>
+        <translation type="vanished">Lori A. Knowles</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vpatterndb/vtranslatevars.cpp" line="321"/>
         <source>The Practical Guide to Patternmaking for Fashion Designers: Menswear</source>
         <comment>Book name</comment>
-        <translation>The Practical Guide to Patternmaking for Fashion Designers: Menswear</translation>
+        <translation type="vanished">The Practical Guide to Patternmaking for Fashion Designers: Menswear</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vpatterndb/vtranslatevars.cpp" line="325"/>
         <source>Friendship/Men</source>
         <comment>System name</comment>
-        <translation>Friendship/Páni</translation>
+        <translation type="vanished">Friendship/Páni</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vpatterndb/vtranslatevars.cpp" line="327"/>
         <source>Pattern Cutting for Men&apos;s Costume</source>
         <comment>Book name</comment>
-        <translation>Pattern Cutting for Men&apos;s Costume</translation>
+        <translation type="vanished">Pattern Cutting for Men&apos;s Costume</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vpatterndb/vtranslatevars.cpp" line="330"/>
         <source>Brown</source>
         <comment>System name</comment>
-        <translation>Brown</translation>
+        <translation type="vanished">Brown</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vpatterndb/vtranslatevars.cpp" line="331"/>
         <source>P. Clement Brown</source>
         <comment>Author name</comment>
-        <translation>P. Clement Brown</translation>
+        <translation type="vanished">P. Clement Brown</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vpatterndb/vtranslatevars.cpp" line="332"/>
         <source>Art in Dress</source>
         <comment>Book name</comment>
-        <translation>Art in Dress</translation>
+        <translation type="vanished">Art in Dress</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vpatterndb/vtranslatevars.cpp" line="335"/>
         <source>Mitchell</source>
         <comment>System name</comment>
-        <translation>Mitchell</translation>
+        <translation type="vanished">Mitchell</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vpatterndb/vtranslatevars.cpp" line="336"/>
         <source>Jno. J. Mitchell</source>
         <comment>Author name</comment>
-        <translation>Jno. J. Mitchell</translation>
+        <translation type="vanished">Jno. J. Mitchell</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vpatterndb/vtranslatevars.cpp" line="337"/>
         <source>&quot;Standard&quot; Work on Cutting (Men&apos;s Garments) 1886: The Art and Science of Garment Cutting</source>
         <comment>Book name</comment>
-        <translation>&quot;Standard&quot; Work on Cutting (Men&apos;s Garments) 1886: The Art and Science of Garment Cutting</translation>
+        <translation type="vanished">&quot;Standard&quot; Work on Cutting (Men&apos;s Garments) 1886: The Art and Science of Garment Cutting</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vpatterndb/vtranslatevars.cpp" line="343"/>
         <source>GOST 17917-86</source>
         <comment>System name</comment>
-        <translation>GOST 17917-86</translation>
+        <translation type="vanished">GOST 17917-86</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vpatterndb/vtranslatevars.cpp" line="344"/>
         <source>Ministry of consumer industry of the USSR</source>
         <comment>Author name</comment>
-        <translation>Ministry of consumer industry of the USSR</translation>
+        <translation type="vanished">Ministry of consumer industry of the USSR</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vpatterndb/vtranslatevars.cpp" line="345"/>
         <source>Standard figure boys</source>
         <comment>Book name</comment>
-        <translation>Standard figure boys</translation>
+        <translation type="vanished">Standard figure boys</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vpatterndb/vtranslatevars.cpp" line="348"/>
         <source>Eddy</source>
         <comment>System name</comment>
-        <translation>Eddy</translation>
+        <translation type="vanished">Eddy</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vpatterndb/vtranslatevars.cpp" line="349"/>
         <source>Josephine F. Eddy and Elizabeth C. B. Wiley</source>
         <comment>Author name</comment>
-        <translation>Josephine F. Eddy und Elizabeth C. B. Wiley</translation>
+        <translation type="vanished">Josephine F. Eddy und Elizabeth C. B. Wiley</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vpatterndb/vtranslatevars.cpp" line="350"/>
         <source>Pattern and Dress Design</source>
         <comment>Book name</comment>
-        <translation>Pattern and Dress Design</translation>
+        <translation type="vanished">Pattern and Dress Design</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vpatterndb/vtranslatevars.cpp" line="353"/>
         <source>Knowles/Women</source>
         <comment>System name</comment>
-        <translation>Knowles/Ženy</translation>
+        <translation type="vanished">Knowles/Ženy</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vpatterndb/vtranslatevars.cpp" line="355"/>
         <source>Practical Guide to Patternmaking for Fashion Designers: Juniors, Misses, and Women</source>
         <comment>Book name</comment>
-        <translation>Practical Guide to Patternmaking for Fashion Designers: Juniors, Misses, and Women</translation>
+        <translation type="vanished">Practical Guide to Patternmaking for Fashion Designers: Juniors, Misses, and Women</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vpatterndb/vtranslatevars.cpp" line="361"/>
         <source>American Garment Cutter</source>
         <comment>System name</comment>
-        <translation>American Garment Cutter</translation>
+        <translation type="vanished">American Garment Cutter</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vpatterndb/vtranslatevars.cpp" line="366"/>
         <source>None</source>
         <comment>System name</comment>
-        <translation>Žádný</translation>
+        <translation type="vanished">Žádný</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vpatterndb/vtranslatevars.cpp" line="367"/>
         <source>Valentina team</source>
         <comment>Author name</comment>
-        <translation>Valentina-Team</translation>
+        <translation type="vanished">Valentina-Team</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vpatterndb/vtranslatevars.cpp" line="368"/>
         <source>Valentina&apos;s internal standard</source>
         <comment>Book name</comment>
-        <translation>Valentina&apos;s interner Standard</translation>
+        <translation type="vanished">Valentina&apos;s interner Standard</translation>
     </message>
     <message>
         <source>Line_</source>
@@ -24829,25 +25461,25 @@ Chyba kompatibility formátu nezpracovaného rozvržení: ActualFileVersion = %1
         <translation type="vanished">atan</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vpatterndb/vtranslatevars.cpp" line="460"/>
+        <location filename="../../src/libs/vpatterndb/vtranslatevars.cpp" line="148"/>
         <source>sinh</source>
         <comment>hyperbolic sine function</comment>
         <translation>sinh</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vpatterndb/vtranslatevars.cpp" line="464"/>
+        <location filename="../../src/libs/vpatterndb/vtranslatevars.cpp" line="152"/>
         <source>cosh</source>
         <comment>hyperbolic cosine</comment>
         <translation>cosh</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vpatterndb/vtranslatevars.cpp" line="468"/>
+        <location filename="../../src/libs/vpatterndb/vtranslatevars.cpp" line="156"/>
         <source>tanh</source>
         <comment>hyperbolic tangens function</comment>
         <translation>tanh</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vpatterndb/vtranslatevars.cpp" line="472"/>
+        <location filename="../../src/libs/vpatterndb/vtranslatevars.cpp" line="160"/>
         <source>asinh</source>
         <comment>hyperbolic arcus sine function</comment>
         <translation>asinh</translation>
@@ -24858,91 +25490,91 @@ Chyba kompatibility formátu nezpracovaného rozvržení: ActualFileVersion = %1
         <translation type="vanished">acosh</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vpatterndb/vtranslatevars.cpp" line="482"/>
+        <location filename="../../src/libs/vpatterndb/vtranslatevars.cpp" line="170"/>
         <source>atanh</source>
         <comment>hyperbolic arcur tangens function</comment>
         <translation>atanh</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vpatterndb/vtranslatevars.cpp" line="517"/>
+        <location filename="../../src/libs/vpatterndb/vtranslatevars.cpp" line="205"/>
         <source>log2</source>
         <comment>logarithm to the base 2</comment>
         <translation>log2</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vpatterndb/vtranslatevars.cpp" line="521"/>
+        <location filename="../../src/libs/vpatterndb/vtranslatevars.cpp" line="209"/>
         <source>log10</source>
         <comment>logarithm to the base 10</comment>
         <translation>log10</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vpatterndb/vtranslatevars.cpp" line="525"/>
+        <location filename="../../src/libs/vpatterndb/vtranslatevars.cpp" line="213"/>
         <source>log</source>
         <comment>logarithm to the base 10</comment>
         <translation>log</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vpatterndb/vtranslatevars.cpp" line="529"/>
+        <location filename="../../src/libs/vpatterndb/vtranslatevars.cpp" line="217"/>
         <source>ln</source>
         <comment>logarithm to base e (2.71828...)</comment>
         <translation>ln</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vpatterndb/vtranslatevars.cpp" line="533"/>
+        <location filename="../../src/libs/vpatterndb/vtranslatevars.cpp" line="221"/>
         <source>exp</source>
         <comment>e raised to the power of x</comment>
         <translation>exp</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vpatterndb/vtranslatevars.cpp" line="537"/>
+        <location filename="../../src/libs/vpatterndb/vtranslatevars.cpp" line="225"/>
         <source>sqrt</source>
         <comment>square root of a value</comment>
         <translation>sqrt</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vpatterndb/vtranslatevars.cpp" line="541"/>
+        <location filename="../../src/libs/vpatterndb/vtranslatevars.cpp" line="229"/>
         <source>sign</source>
         <comment>sign function -1 if x&lt;0; 1 if x&gt;0</comment>
         <translation>sign</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vpatterndb/vtranslatevars.cpp" line="546"/>
+        <location filename="../../src/libs/vpatterndb/vtranslatevars.cpp" line="234"/>
         <source>rint</source>
         <comment>round to nearest integer</comment>
         <translation>rint</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vpatterndb/vtranslatevars.cpp" line="572"/>
+        <location filename="../../src/libs/vpatterndb/vtranslatevars.cpp" line="260"/>
         <source>abs</source>
         <comment>absolute value</comment>
         <translation>abs</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vpatterndb/vtranslatevars.cpp" line="576"/>
+        <location filename="../../src/libs/vpatterndb/vtranslatevars.cpp" line="264"/>
         <source>min</source>
         <comment>min of all arguments</comment>
         <translation>min</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vpatterndb/vtranslatevars.cpp" line="580"/>
+        <location filename="../../src/libs/vpatterndb/vtranslatevars.cpp" line="268"/>
         <source>max</source>
         <comment>max of all arguments</comment>
         <translation>max</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vpatterndb/vtranslatevars.cpp" line="584"/>
+        <location filename="../../src/libs/vpatterndb/vtranslatevars.cpp" line="272"/>
         <source>sum</source>
         <comment>sum of all arguments</comment>
         <translation>sum</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vpatterndb/vtranslatevars.cpp" line="588"/>
+        <location filename="../../src/libs/vpatterndb/vtranslatevars.cpp" line="276"/>
         <source>avg</source>
         <comment>mean value of all arguments</comment>
         <translation>avg</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vpatterndb/vtranslatevars.cpp" line="592"/>
+        <location filename="../../src/libs/vpatterndb/vtranslatevars.cpp" line="280"/>
         <source>fmod</source>
         <comment>Returns the floating-point remainder of numer/denom (rounded towards zero)</comment>
         <translation>fmod</translation>
@@ -24963,91 +25595,91 @@ Chyba kompatibility formátu nezpracovaného rozvržení: ActualFileVersion = %1
         <translation type="vanished">palce</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vpatterndb/vtranslatevars.cpp" line="378"/>
+        <location filename="../../src/libs/vpatterndb/vtranslatevars.cpp" line="66"/>
         <source>Line_</source>
         <comment>Left symbol _ in the name</comment>
         <translation>Čára_</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vpatterndb/vtranslatevars.cpp" line="379"/>
+        <location filename="../../src/libs/vpatterndb/vtranslatevars.cpp" line="67"/>
         <source>AngleLine_</source>
         <comment>Left symbol _ in the name</comment>
         <translation>ÚhelČára_</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vpatterndb/vtranslatevars.cpp" line="380"/>
+        <location filename="../../src/libs/vpatterndb/vtranslatevars.cpp" line="68"/>
         <source>Arc_</source>
         <comment>Left symbol _ in the name</comment>
         <translation>Oblouk_</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vpatterndb/vtranslatevars.cpp" line="382"/>
+        <location filename="../../src/libs/vpatterndb/vtranslatevars.cpp" line="70"/>
         <source>Spl_</source>
         <comment>Left symbol _ in the name</comment>
         <translation>KřivkaSpline_</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vpatterndb/vtranslatevars.cpp" line="383"/>
+        <location filename="../../src/libs/vpatterndb/vtranslatevars.cpp" line="71"/>
         <source>SplPath</source>
         <comment>Do not add symbol _ to the end of the name</comment>
         <translation>CestaKřivky</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vpatterndb/vtranslatevars.cpp" line="384"/>
+        <location filename="../../src/libs/vpatterndb/vtranslatevars.cpp" line="72"/>
         <source>RadiusArc_</source>
         <comment>Left symbol _ in the name</comment>
         <translation>RadiusOblouk_</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vpatterndb/vtranslatevars.cpp" line="387"/>
+        <location filename="../../src/libs/vpatterndb/vtranslatevars.cpp" line="75"/>
         <source>Angle1Arc_</source>
         <comment>Left symbol _ in the name</comment>
         <translation>Úhel1Oblouk_</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vpatterndb/vtranslatevars.cpp" line="388"/>
+        <location filename="../../src/libs/vpatterndb/vtranslatevars.cpp" line="76"/>
         <source>Angle2Arc_</source>
         <comment>Left symbol _ in the name</comment>
         <translation>Úhel2Oblouk_</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vpatterndb/vtranslatevars.cpp" line="391"/>
+        <location filename="../../src/libs/vpatterndb/vtranslatevars.cpp" line="79"/>
         <source>Angle1Spl_</source>
         <comment>Left symbol _ in the name</comment>
         <translation>Úhel1HladkáKřivka_</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vpatterndb/vtranslatevars.cpp" line="392"/>
+        <location filename="../../src/libs/vpatterndb/vtranslatevars.cpp" line="80"/>
         <source>Angle2Spl_</source>
         <comment>Left symbol _ in the name</comment>
         <translation>Úhel2HladkáKřivka_</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vpatterndb/vtranslatevars.cpp" line="394"/>
+        <location filename="../../src/libs/vpatterndb/vtranslatevars.cpp" line="82"/>
         <source>Angle1SplPath</source>
         <comment>Do not add symbol _ to the end of the name</comment>
         <translation>Úhel1CestaKřivky</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vpatterndb/vtranslatevars.cpp" line="396"/>
+        <location filename="../../src/libs/vpatterndb/vtranslatevars.cpp" line="84"/>
         <source>Angle2SplPath</source>
         <comment>Do not add symbol _ to the end of the name</comment>
         <translation>Úhel2CestaKřivky</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vpatterndb/vtranslatevars.cpp" line="397"/>
+        <location filename="../../src/libs/vpatterndb/vtranslatevars.cpp" line="85"/>
         <source>Seg_</source>
         <comment>Segment. Left symbol _ in the name</comment>
         <translation>Seg_</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vpatterndb/vtranslatevars.cpp" line="398"/>
+        <location filename="../../src/libs/vpatterndb/vtranslatevars.cpp" line="86"/>
         <source>CurrentLength</source>
         <comment>Do not add space between words</comment>
         <translation>NynějšíDélka</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vpatterndb/vtranslatevars.cpp" line="477"/>
+        <location filename="../../src/libs/vpatterndb/vtranslatevars.cpp" line="165"/>
         <source>acosh</source>
         <comment>hyperbolic arcus cosine function</comment>
         <translation>acosh</translation>
@@ -25063,427 +25695,427 @@ Chyba kompatibility formátu nezpracovaného rozvržení: ActualFileVersion = %1
         <translation type="vanished">Výška</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vpatterndb/vtranslatevars.cpp" line="401"/>
+        <location filename="../../src/libs/vpatterndb/vtranslatevars.cpp" line="89"/>
         <source>C1LengthSpl_</source>
         <comment>Left symbol _ in the name</comment>
         <translation>K1DélkaHladkáKřivka_</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vpatterndb/vtranslatevars.cpp" line="402"/>
+        <location filename="../../src/libs/vpatterndb/vtranslatevars.cpp" line="90"/>
         <source>C2LengthSpl_</source>
         <comment>Left symbol _ in the name</comment>
         <translation>K2DélkaHladkáKřivka_</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vpatterndb/vtranslatevars.cpp" line="404"/>
+        <location filename="../../src/libs/vpatterndb/vtranslatevars.cpp" line="92"/>
         <source>C1LengthSplPath</source>
         <comment>Do not add symbol _ to the end of the name</comment>
         <translation>K1DélkaCestaKřivky</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vpatterndb/vtranslatevars.cpp" line="406"/>
+        <location filename="../../src/libs/vpatterndb/vtranslatevars.cpp" line="94"/>
         <source>C2LengthSplPath</source>
         <comment>Do not add symbol _ to the end of the name</comment>
         <translation>K2DélkaCestaKřivky</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vpatterndb/vtranslatevars.cpp" line="400"/>
+        <location filename="../../src/libs/vpatterndb/vtranslatevars.cpp" line="88"/>
         <source>CurrentSeamAllowance</source>
         <comment>Do not add space between words</comment>
         <translation>NynějšíŠvováZáložka</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vpatterndb/vtranslatevars.cpp" line="420"/>
+        <location filename="../../src/libs/vpatterndb/vtranslatevars.cpp" line="108"/>
         <source>degTorad</source>
         <comment>converts degrees to radian</comment>
         <translation>StupněNaRad</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vpatterndb/vtranslatevars.cpp" line="425"/>
+        <location filename="../../src/libs/vpatterndb/vtranslatevars.cpp" line="113"/>
         <source>radTodeg</source>
         <comment>converts radian to degrees</comment>
         <translation>RadNaStupně</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vpatterndb/vtranslatevars.cpp" line="430"/>
+        <location filename="../../src/libs/vpatterndb/vtranslatevars.cpp" line="118"/>
         <source>sin</source>
         <comment>sine function working with radians</comment>
         <translation>sin</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vpatterndb/vtranslatevars.cpp" line="435"/>
+        <location filename="../../src/libs/vpatterndb/vtranslatevars.cpp" line="123"/>
         <source>cos</source>
         <comment>cosine function working with radians</comment>
         <translation>cos</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vpatterndb/vtranslatevars.cpp" line="440"/>
+        <location filename="../../src/libs/vpatterndb/vtranslatevars.cpp" line="128"/>
         <source>tan</source>
         <comment>tangens function working with radians</comment>
         <translation>tan</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vpatterndb/vtranslatevars.cpp" line="445"/>
+        <location filename="../../src/libs/vpatterndb/vtranslatevars.cpp" line="133"/>
         <source>asin</source>
         <comment>arcus sine function working with radians</comment>
         <translation>asin</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vpatterndb/vtranslatevars.cpp" line="450"/>
+        <location filename="../../src/libs/vpatterndb/vtranslatevars.cpp" line="138"/>
         <source>acos</source>
         <comment>arcus cosine function working with radians</comment>
         <translation>acos</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vpatterndb/vtranslatevars.cpp" line="455"/>
+        <location filename="../../src/libs/vpatterndb/vtranslatevars.cpp" line="143"/>
         <source>atan</source>
         <comment>arcus tangens function working with radians</comment>
         <translation>atan</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vpatterndb/vtranslatevars.cpp" line="487"/>
+        <location filename="../../src/libs/vpatterndb/vtranslatevars.cpp" line="175"/>
         <source>sinD</source>
         <comment>sine function working with degrees</comment>
         <translation>sinStupně</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vpatterndb/vtranslatevars.cpp" line="492"/>
+        <location filename="../../src/libs/vpatterndb/vtranslatevars.cpp" line="180"/>
         <source>cosD</source>
         <comment>cosine function working with degrees</comment>
         <translation>cosStupně</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vpatterndb/vtranslatevars.cpp" line="497"/>
+        <location filename="../../src/libs/vpatterndb/vtranslatevars.cpp" line="185"/>
         <source>tanD</source>
         <comment>tangens function working with degrees</comment>
         <translation>tanStupně</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vpatterndb/vtranslatevars.cpp" line="502"/>
+        <location filename="../../src/libs/vpatterndb/vtranslatevars.cpp" line="190"/>
         <source>asinD</source>
         <comment>arcus sine function working with degrees</comment>
         <translation>asinStupně</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vpatterndb/vtranslatevars.cpp" line="507"/>
+        <location filename="../../src/libs/vpatterndb/vtranslatevars.cpp" line="195"/>
         <source>acosD</source>
         <comment>arcus cosine function working with degrees</comment>
         <translation>acosStupně</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vpatterndb/vtranslatevars.cpp" line="512"/>
+        <location filename="../../src/libs/vpatterndb/vtranslatevars.cpp" line="200"/>
         <source>atanD</source>
         <comment>arcus tangens function working with degrees</comment>
         <translation>atanStupně</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vpatterndb/vtranslatevars.cpp" line="376"/>
+        <location filename="../../src/libs/vpatterndb/vtranslatevars.cpp" line="64"/>
         <source>M_</source>
         <comment>Left symbol _ in the name</comment>
         <translation>M_</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vpatterndb/vtranslatevars.cpp" line="377"/>
+        <location filename="../../src/libs/vpatterndb/vtranslatevars.cpp" line="65"/>
         <source>Increment_</source>
         <comment>Left symbol _ in the name</comment>
         <translation>Přírůstky_</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vpatterndb/vtranslatevars.cpp" line="381"/>
+        <location filename="../../src/libs/vpatterndb/vtranslatevars.cpp" line="69"/>
         <source>ElArc_</source>
         <comment>Left symbol _ in the name</comment>
         <translation>ElOblouk_</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vpatterndb/vtranslatevars.cpp" line="385"/>
+        <location filename="../../src/libs/vpatterndb/vtranslatevars.cpp" line="73"/>
         <source>Radius1ElArc_</source>
         <comment>Left symbol _ in the name</comment>
         <translation>Poloměr1ElOblouk_</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vpatterndb/vtranslatevars.cpp" line="386"/>
+        <location filename="../../src/libs/vpatterndb/vtranslatevars.cpp" line="74"/>
         <source>Radius2ElArc_</source>
         <comment>Left symbol _ in the name</comment>
         <translation>Poloměr2ElOblouk_</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vpatterndb/vtranslatevars.cpp" line="389"/>
+        <location filename="../../src/libs/vpatterndb/vtranslatevars.cpp" line="77"/>
         <source>Angle1ElArc_</source>
         <comment>Left symbol _ in the name</comment>
         <translation>Úhel1ElOblouk_</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vpatterndb/vtranslatevars.cpp" line="390"/>
+        <location filename="../../src/libs/vpatterndb/vtranslatevars.cpp" line="78"/>
         <source>Angle2ElArc_</source>
         <comment>Left symbol _ in the name</comment>
         <translation>Úhel2ElOblouk_</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vpatterndb/vtranslatevars.cpp" line="550"/>
+        <location filename="../../src/libs/vpatterndb/vtranslatevars.cpp" line="238"/>
         <source>r2cm</source>
         <comment>round to up to 1 decimal</comment>
         <translation>r2cm</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vpatterndb/vtranslatevars.cpp" line="554"/>
+        <location filename="../../src/libs/vpatterndb/vtranslatevars.cpp" line="242"/>
         <source>csrCm</source>
         <comment>cut, split and rotate modeling operation. Takes cm units.</comment>
         <translation>StřihnutíRozděleníOtočeníCm</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vpatterndb/vtranslatevars.cpp" line="563"/>
+        <location filename="../../src/libs/vpatterndb/vtranslatevars.cpp" line="251"/>
         <source>csrInch</source>
         <comment>cut, split and rotate modeling operation. Takes inch units.</comment>
         <translation>StřihnutíRozděleníOtočeníPalce</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vpatterndb/vtranslatevars.cpp" line="407"/>
+        <location filename="../../src/libs/vpatterndb/vtranslatevars.cpp" line="95"/>
         <source>RotationElArc_</source>
         <comment>Left symbol _ in the name</comment>
         <translation>OtočeníElOblouk_</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vpatterndb/vtranslatevars.cpp" line="427"/>
+        <location filename="../../src/libs/vpatterndb/vtranslatevars.cpp" line="115"/>
         <source>converts radian to degrees</source>
         <comment>function radTodeg</comment>
         <translation>Převádí radiány na stupně</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vpatterndb/vtranslatevars.cpp" line="432"/>
+        <location filename="../../src/libs/vpatterndb/vtranslatevars.cpp" line="120"/>
         <source>sine function working with radians</source>
         <comment>function sin</comment>
         <translation>Funkce sinus pracující s radiány</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vpatterndb/vtranslatevars.cpp" line="437"/>
+        <location filename="../../src/libs/vpatterndb/vtranslatevars.cpp" line="125"/>
         <source>cosine function working with radians</source>
         <comment>function cos</comment>
         <translation>Funkce kosinus pracující s radiány</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vpatterndb/vtranslatevars.cpp" line="442"/>
+        <location filename="../../src/libs/vpatterndb/vtranslatevars.cpp" line="130"/>
         <source>tangens function working with radians</source>
         <comment>function tan</comment>
         <translation>Funkce tangens pracující s radiány</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vpatterndb/vtranslatevars.cpp" line="447"/>
+        <location filename="../../src/libs/vpatterndb/vtranslatevars.cpp" line="135"/>
         <source>arcus sine function working with radians</source>
         <comment>function asin</comment>
         <translation>Funkce arkus sinus pracující s radiány</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vpatterndb/vtranslatevars.cpp" line="452"/>
+        <location filename="../../src/libs/vpatterndb/vtranslatevars.cpp" line="140"/>
         <source>arcus cosine function working with radians</source>
         <comment>function acos</comment>
         <translation>Funkce arkus kosinus pracující s radiány</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vpatterndb/vtranslatevars.cpp" line="457"/>
+        <location filename="../../src/libs/vpatterndb/vtranslatevars.cpp" line="145"/>
         <source>arcus tangens function working with radians</source>
         <comment>function atan</comment>
         <translation>Funkce arkus tangens pracující s radiány</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vpatterndb/vtranslatevars.cpp" line="461"/>
+        <location filename="../../src/libs/vpatterndb/vtranslatevars.cpp" line="149"/>
         <source>hyperbolic sine function</source>
         <comment>function sinh</comment>
         <translation>Hyperbolická funkce sinus</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vpatterndb/vtranslatevars.cpp" line="465"/>
+        <location filename="../../src/libs/vpatterndb/vtranslatevars.cpp" line="153"/>
         <source>hyperbolic cosine</source>
         <comment>function cosh</comment>
         <translation>Hyperbolická funkce kosinus</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vpatterndb/vtranslatevars.cpp" line="469"/>
+        <location filename="../../src/libs/vpatterndb/vtranslatevars.cpp" line="157"/>
         <source>hyperbolic tangens function</source>
         <comment>function tanh</comment>
         <translation>Hyperbolická funkce tangens</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vpatterndb/vtranslatevars.cpp" line="474"/>
+        <location filename="../../src/libs/vpatterndb/vtranslatevars.cpp" line="162"/>
         <source>hyperbolic arcus sine function</source>
         <comment>function asinh</comment>
         <translation>Hyperbolická funkce arkus sinus</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vpatterndb/vtranslatevars.cpp" line="479"/>
+        <location filename="../../src/libs/vpatterndb/vtranslatevars.cpp" line="167"/>
         <source>hyperbolic arcus cosine function</source>
         <comment>function acosh</comment>
         <translation>Hyperbolická funkce arkus kosinus</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vpatterndb/vtranslatevars.cpp" line="484"/>
+        <location filename="../../src/libs/vpatterndb/vtranslatevars.cpp" line="172"/>
         <source>hyperbolic arcur tangens function</source>
         <comment>function atanh</comment>
         <translation>Hyperbolická funkce arkus tangens</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vpatterndb/vtranslatevars.cpp" line="489"/>
+        <location filename="../../src/libs/vpatterndb/vtranslatevars.cpp" line="177"/>
         <source>sine function working with degrees</source>
         <comment>function sinD</comment>
         <translation>Funkce sinus pracující se stupni</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vpatterndb/vtranslatevars.cpp" line="494"/>
+        <location filename="../../src/libs/vpatterndb/vtranslatevars.cpp" line="182"/>
         <source>cosine function working with degrees</source>
         <comment>function cosD</comment>
         <translation>Funkce kosinus pracující se stupni</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vpatterndb/vtranslatevars.cpp" line="499"/>
+        <location filename="../../src/libs/vpatterndb/vtranslatevars.cpp" line="187"/>
         <source>tangens function working with degrees</source>
         <comment>function tanD</comment>
         <translation>Funkce tangens pracující se stupni</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vpatterndb/vtranslatevars.cpp" line="504"/>
+        <location filename="../../src/libs/vpatterndb/vtranslatevars.cpp" line="192"/>
         <source>arcus sine function working with degrees</source>
         <comment>function asinD</comment>
         <translation>Funkce arkus kosinus pracující se stupni</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vpatterndb/vtranslatevars.cpp" line="509"/>
+        <location filename="../../src/libs/vpatterndb/vtranslatevars.cpp" line="197"/>
         <source>arcus cosine function working with degrees</source>
         <comment>function acosD</comment>
         <translation>Funkce arkus kosinus pracující se stupni</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vpatterndb/vtranslatevars.cpp" line="514"/>
+        <location filename="../../src/libs/vpatterndb/vtranslatevars.cpp" line="202"/>
         <source>arcus tangens function working with degrees</source>
         <comment>function atanD</comment>
         <translation>Funkce arkus tangens pracující se stupni</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vpatterndb/vtranslatevars.cpp" line="518"/>
+        <location filename="../../src/libs/vpatterndb/vtranslatevars.cpp" line="206"/>
         <source>logarithm to the base 2</source>
         <comment>function log2</comment>
         <translation>Logaritmus se základem 2</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vpatterndb/vtranslatevars.cpp" line="522"/>
+        <location filename="../../src/libs/vpatterndb/vtranslatevars.cpp" line="210"/>
         <source>logarithm to the base 10</source>
         <comment>function log10</comment>
         <translation>Logaritmus se základem 10</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vpatterndb/vtranslatevars.cpp" line="526"/>
+        <location filename="../../src/libs/vpatterndb/vtranslatevars.cpp" line="214"/>
         <source>logarithm to the base 10</source>
         <comment>function log</comment>
         <translation>Logaritmus se základem 10</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vpatterndb/vtranslatevars.cpp" line="530"/>
+        <location filename="../../src/libs/vpatterndb/vtranslatevars.cpp" line="218"/>
         <source>logarithm to base e (2.71828...)</source>
         <comment>function ln</comment>
         <translation>Logaritmus se základem e (2.71828...)</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vpatterndb/vtranslatevars.cpp" line="534"/>
+        <location filename="../../src/libs/vpatterndb/vtranslatevars.cpp" line="222"/>
         <source>e raised to the power of x</source>
         <comment>function exp</comment>
         <translation>e umocněno x</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vpatterndb/vtranslatevars.cpp" line="538"/>
+        <location filename="../../src/libs/vpatterndb/vtranslatevars.cpp" line="226"/>
         <source>square root of a value</source>
         <comment>function sqrt</comment>
         <translation>Druhá odmocnina hodnoty</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vpatterndb/vtranslatevars.cpp" line="543"/>
+        <location filename="../../src/libs/vpatterndb/vtranslatevars.cpp" line="231"/>
         <source>sign function -1 if x&lt;0; 1 if x&gt;0</source>
         <comment>function sign</comment>
         <translation>funkce znaménka -1 pokud x&lt;0; 1, pokud x&gt;0</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vpatterndb/vtranslatevars.cpp" line="547"/>
+        <location filename="../../src/libs/vpatterndb/vtranslatevars.cpp" line="235"/>
         <source>round to nearest integer</source>
         <comment>function rint</comment>
         <translation>Zaokrouhlit na nejbližší celé číslo</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vpatterndb/vtranslatevars.cpp" line="551"/>
+        <location filename="../../src/libs/vpatterndb/vtranslatevars.cpp" line="239"/>
         <source>round to up to 1 decimal</source>
         <comment>function r2cm</comment>
         <translation>Zaokrouhlit na 1 desetinné místo</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vpatterndb/vtranslatevars.cpp" line="557"/>
+        <location filename="../../src/libs/vpatterndb/vtranslatevars.cpp" line="245"/>
         <source>cut, split and rotate modeling operation. Takes cm units.</source>
         <comment>function csrCm</comment>
         <translation>Operace modelování řezání, dělení a otáčení. Bere jednotky cm.</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vpatterndb/vtranslatevars.cpp" line="566"/>
+        <location filename="../../src/libs/vpatterndb/vtranslatevars.cpp" line="254"/>
         <source>cut, split and rotate modeling operation. Takes inch units.</source>
         <comment>function csrInch</comment>
         <translation>Operace modelování řezání, dělení a otáčení. Bere jednotky v palcích.</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vpatterndb/vtranslatevars.cpp" line="573"/>
+        <location filename="../../src/libs/vpatterndb/vtranslatevars.cpp" line="261"/>
         <source>absolute value</source>
         <comment>function abs</comment>
         <translation>Absolutní hodnota</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vpatterndb/vtranslatevars.cpp" line="577"/>
+        <location filename="../../src/libs/vpatterndb/vtranslatevars.cpp" line="265"/>
         <source>min of all arguments</source>
         <comment>function min</comment>
         <translation>Minimum všech argumentů</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vpatterndb/vtranslatevars.cpp" line="581"/>
+        <location filename="../../src/libs/vpatterndb/vtranslatevars.cpp" line="269"/>
         <source>max of all arguments</source>
         <comment>function max</comment>
         <translation>Maximum všech argumentů</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vpatterndb/vtranslatevars.cpp" line="585"/>
+        <location filename="../../src/libs/vpatterndb/vtranslatevars.cpp" line="273"/>
         <source>sum of all arguments</source>
         <comment>function sum</comment>
         <translation>Součet všech argumentů</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vpatterndb/vtranslatevars.cpp" line="589"/>
+        <location filename="../../src/libs/vpatterndb/vtranslatevars.cpp" line="277"/>
         <source>mean value of all arguments</source>
         <comment>function avg</comment>
         <translation>Střední hodnota, průměr všech argumentů</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vpatterndb/vtranslatevars.cpp" line="594"/>
+        <location filename="../../src/libs/vpatterndb/vtranslatevars.cpp" line="282"/>
         <source>Returns the floating-point remainder of numer/denom (rounded towards zero)</source>
         <comment>function fmod</comment>
         <translation>Vrátí zbytek čísla/denomu s plovoucí desetinnou čárkou (zaokrouhlený směrem k nule)</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vpatterndb/vtranslatevars.cpp" line="600"/>
+        <location filename="../../src/libs/vpatterndb/vtranslatevars.cpp" line="288"/>
         <source>warning</source>
         <comment>Calculation warning</comment>
         <translation>Varování</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vpatterndb/vtranslatevars.cpp" line="602"/>
+        <location filename="../../src/libs/vpatterndb/vtranslatevars.cpp" line="290"/>
         <source>Show a warning in calculations</source>
         <comment>function warning</comment>
         <translation>Zobrazit varování ve výpočtech</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vpatterndb/vtranslatevars.cpp" line="422"/>
+        <location filename="../../src/libs/vpatterndb/vtranslatevars.cpp" line="110"/>
         <source>converts degrees to radian</source>
         <comment>function degTorad</comment>
         <translation>Převádí stupně na radiány</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vpatterndb/vtranslatevars.cpp" line="408"/>
+        <location filename="../../src/libs/vpatterndb/vtranslatevars.cpp" line="96"/>
         <source>PieceArea_</source>
         <comment>Left symbol _ in the name</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/libs/vpatterndb/vtranslatevars.cpp" line="410"/>
+        <location filename="../../src/libs/vpatterndb/vtranslatevars.cpp" line="98"/>
         <source>PieceSeamLineArea_</source>
         <comment>Left symbol _ in the name</comment>
         <translation type="unfinished"></translation>
@@ -26425,31 +27057,31 @@ Chyba kompatibility formátu nezpracovaného rozvržení: ActualFileVersion = %1
     <name>mNoisyHandler</name>
     <message>
         <location filename="../../src/app/puzzle/vpapplication.cpp" line="174"/>
-        <location filename="../../src/app/tape/mapplication.cpp" line="216"/>
+        <location filename="../../src/app/tape/mapplication.cpp" line="226"/>
         <source>DEBUG:</source>
         <translation>LADĚNÍ:</translation>
     </message>
     <message>
         <location filename="../../src/app/puzzle/vpapplication.cpp" line="177"/>
-        <location filename="../../src/app/tape/mapplication.cpp" line="219"/>
+        <location filename="../../src/app/tape/mapplication.cpp" line="229"/>
         <source>WARNING:</source>
         <translation>VAROVÁNÍ:</translation>
     </message>
     <message>
         <location filename="../../src/app/puzzle/vpapplication.cpp" line="180"/>
-        <location filename="../../src/app/tape/mapplication.cpp" line="222"/>
+        <location filename="../../src/app/tape/mapplication.cpp" line="232"/>
         <source>CRITICAL:</source>
         <translation>VÁŽNÁ:</translation>
     </message>
     <message>
         <location filename="../../src/app/puzzle/vpapplication.cpp" line="183"/>
-        <location filename="../../src/app/tape/mapplication.cpp" line="225"/>
+        <location filename="../../src/app/tape/mapplication.cpp" line="235"/>
         <source>FATAL:</source>
         <translation>ZÁSADNÍ:</translation>
     </message>
     <message>
         <location filename="../../src/app/puzzle/vpapplication.cpp" line="186"/>
-        <location filename="../../src/app/tape/mapplication.cpp" line="228"/>
+        <location filename="../../src/app/tape/mapplication.cpp" line="238"/>
         <source>INFO:</source>
         <translation>INFORMACE:</translation>
     </message>
@@ -26471,25 +27103,25 @@ Chyba kompatibility formátu nezpracovaného rozvržení: ActualFileVersion = %1
     </message>
     <message>
         <location filename="../../src/app/puzzle/vpapplication.cpp" line="205"/>
-        <location filename="../../src/app/tape/mapplication.cpp" line="247"/>
+        <location filename="../../src/app/tape/mapplication.cpp" line="257"/>
         <source>Warning</source>
         <translation>Upozornění</translation>
     </message>
     <message>
         <location filename="../../src/app/puzzle/vpapplication.cpp" line="209"/>
-        <location filename="../../src/app/tape/mapplication.cpp" line="251"/>
+        <location filename="../../src/app/tape/mapplication.cpp" line="261"/>
         <source>Critical error</source>
         <translation>Vážná chyba</translation>
     </message>
     <message>
         <location filename="../../src/app/puzzle/vpapplication.cpp" line="213"/>
-        <location filename="../../src/app/tape/mapplication.cpp" line="255"/>
+        <location filename="../../src/app/tape/mapplication.cpp" line="265"/>
         <source>Fatal error</source>
         <translation>Zásadní chyba</translation>
     </message>
     <message>
         <location filename="../../src/app/puzzle/vpapplication.cpp" line="217"/>
-        <location filename="../../src/app/tape/mapplication.cpp" line="259"/>
+        <location filename="../../src/app/tape/mapplication.cpp" line="269"/>
         <source>Information</source>
         <translation>Informace</translation>
     </message>
@@ -26497,27 +27129,27 @@ Chyba kompatibility formátu nezpracovaného rozvržení: ActualFileVersion = %1
 <context>
     <name>vNoisyHandler</name>
     <message>
-        <location filename="../../src/app/valentina/core/vapplication.cpp" line="255"/>
+        <location filename="../../src/app/valentina/core/vapplication.cpp" line="259"/>
         <source>DEBUG:</source>
         <translation>LADĚNÍ:</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/core/vapplication.cpp" line="266"/>
+        <location filename="../../src/app/valentina/core/vapplication.cpp" line="270"/>
         <source>WARNING:</source>
         <translation>VAROVÁNÍ:</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/core/vapplication.cpp" line="277"/>
+        <location filename="../../src/app/valentina/core/vapplication.cpp" line="281"/>
         <source>CRITICAL:</source>
         <translation>VÁŽNÁ:</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/core/vapplication.cpp" line="284"/>
+        <location filename="../../src/app/valentina/core/vapplication.cpp" line="288"/>
         <source>FATAL:</source>
         <translation>ZÁSADNÍ:</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/core/vapplication.cpp" line="295"/>
+        <location filename="../../src/app/valentina/core/vapplication.cpp" line="299"/>
         <source>INFO:</source>
         <translation>INFORMACE:</translation>
     </message>
@@ -26538,22 +27170,22 @@ Chyba kompatibility formátu nezpracovaného rozvržení: ActualFileVersion = %1
         <translation type="vanished">Informace.</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/core/vapplication.cpp" line="323"/>
+        <location filename="../../src/app/valentina/core/vapplication.cpp" line="327"/>
         <source>Warning</source>
         <translation>Upozornění</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/core/vapplication.cpp" line="327"/>
+        <location filename="../../src/app/valentina/core/vapplication.cpp" line="331"/>
         <source>Critical error</source>
         <translation>Vážná chyba</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/core/vapplication.cpp" line="331"/>
+        <location filename="../../src/app/valentina/core/vapplication.cpp" line="335"/>
         <source>Fatal error</source>
         <translation>Zásadní chyba</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/core/vapplication.cpp" line="335"/>
+        <location filename="../../src/app/valentina/core/vapplication.cpp" line="339"/>
         <source>Information</source>
         <translation>Informace</translation>
     </message>

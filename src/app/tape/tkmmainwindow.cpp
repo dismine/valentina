@@ -2547,7 +2547,8 @@ auto TKMMainWindow::ReadCSV(const QxtCsvModel &csv, const QVector<int> &map, boo
             const QString name = csv.text(i, nameColumn).simplified();
             if (name.isEmpty())
             {
-                ShowError(tr("Error in row %1. The measurement name is empty.").arg(i));
+                ShowError(
+                    QApplication::translate("TKMMainWindow", "Error in row %1. The measurement name is empty.").arg(i));
                 continue;
             }
 
@@ -2589,7 +2590,8 @@ auto TKMMainWindow::ReadCSV(const QxtCsvModel &csv, const QVector<int> &map, boo
             {
                 ++rowIndex;
             }
-            ShowError(tr("Error in row %1. %2").arg(rowIndex).arg(e.ErrorMessage()));
+            ShowError(
+                QApplication::translate("TKMMainWindow", "Error in row %1. %2").arg(rowIndex).arg(e.ErrorMessage()));
             return {};
         }
     }
