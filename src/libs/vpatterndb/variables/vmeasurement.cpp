@@ -117,6 +117,18 @@ auto VMeasurement::operator=(VMeasurement &&m) noexcept -> VMeasurement &
 VMeasurement::~VMeasurement() = default;
 
 //---------------------------------------------------------------------------------------------------------------------
+auto VMeasurement::GetKnownMeasurementsId() const -> QUuid
+{
+    return d->dbId;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VMeasurement::SetKnownMeasurementsId(const QUuid &id)
+{
+    d->dbId = id;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 auto VMeasurement::CorrectionHash(qreal baseA, qreal baseB, qreal baseC) -> QString
 {
     QStringList hashBlocks{QString::number(baseA)};

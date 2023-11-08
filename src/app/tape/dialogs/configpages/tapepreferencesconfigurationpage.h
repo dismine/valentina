@@ -35,6 +35,8 @@
 #include "../vmisc/defglobal.h"
 #endif
 
+class QComboBox;
+
 namespace Ui
 {
 class TapePreferencesConfigurationPage;
@@ -69,6 +71,8 @@ private:
     void InitShortcuts(bool defaults = false);
     void UpdateShortcutsTable();
     void RetranslateShortcutsTable();
+    void InitKnownMeasurements(QComboBox *combo);
+    void InitKnownMeasurementsDescription();
 };
 
 #endif // TAPEPREFERENCESCONFIGURATIONPAGE_H

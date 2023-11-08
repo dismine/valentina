@@ -35,7 +35,6 @@
 #include "../vmisc/theme/vtheme.h"
 #include "../vmisc/vabstractshortcutmanager.h"
 #include "../vmisc/vvalentinasettings.h"
-#include "../vpatterndb/pmsystems.h"
 #include "qpushbutton.h"
 #include "ui_preferencesconfigurationpage.h"
 #include "vcommonsettings.h"
@@ -94,28 +93,6 @@ PreferencesConfigurationPage::PreferencesConfigurationPage(QWidget *parent)
     }
     connect(ui->labelCombo, QOverload<int>::of(&QComboBox::currentIndexChanged), this,
             [this]() { m_labelLangChanged = true; });
-
-    //---------------------- Pattern making system
-    ui->systemBookValueLabel->setFixedHeight(4 * QFontMetrics(ui->systemBookValueLabel->font()).lineSpacing());
-    connect(ui->systemCombo, QOverload<int>::of(&QComboBox::currentIndexChanged), this,
-            [this]()
-            {
-                m_systemChanged = true;
-                QString text =
-                    VAbstractApplication::VApp()->TrVars()->PMSystemAuthor(ui->systemCombo->currentData().toString());
-                ui->systemAuthorValueLabel->setText(text);
-                ui->systemAuthorValueLabel->setToolTip(text);
-
-                text = VAbstractApplication::VApp()->TrVars()->PMSystemBook(ui->systemCombo->currentData().toString());
-                ui->systemBookValueLabel->setPlainText(text);
-            });
-
-    // set default pattern making system
-    index = ui->systemCombo->findData(VAbstractValApplication::VApp()->ValentinaSettings()->GetPMSystemCode());
-    if (index != -1)
-    {
-        ui->systemCombo->setCurrentIndex(index);
-    }
 
     //----------------------------- Pattern Editing
     connect(ui->resetWarningsButton, &QPushButton::released, this,
@@ -269,16 +246,12 @@ auto PreferencesConfigurationPage::Apply() -> QStringList
         m_pieceLabelLangChanged = false;
     }
 
-    if (m_langChanged || m_systemChanged)
+    if (m_langChanged)
     {
         const auto locale = qvariant_cast<QString>(ui->langCombo->currentData());
         settings->SetLocale(locale);
         VGAnalytics::Instance()->SetGUILanguage(settings->GetLocale());
         m_langChanged = false;
-
-        const auto code = qvariant_cast<QString>(ui->systemCombo->currentData());
-        settings->SetPMSystemCode(code);
-        m_systemChanged = false;
 
         VAbstractApplication::VApp()->LoadTranslation(locale);
     }
@@ -403,16 +376,6 @@ void PreferencesConfigurationPage::RetranslateUi()
         InitUnits();
         ui->unitCombo->setCurrentIndex(ui->unitCombo->findData(unit));
         ui->unitCombo->blockSignals(false);
-    }
-
-    {
-        const auto code = qvariant_cast<QString>(ui->systemCombo->currentData());
-        ui->systemCombo->blockSignals(true);
-        ui->systemCombo->clear();
-        InitPMSystems(ui->systemCombo);
-        ui->systemCombo->setCurrentIndex(-1);
-        ui->systemCombo->blockSignals(false);
-        ui->systemCombo->setCurrentIndex(ui->systemCombo->findData(code));
     }
 
     {

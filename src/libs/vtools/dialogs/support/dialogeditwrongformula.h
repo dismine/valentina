@@ -153,6 +153,9 @@ private:
     void ShowFunctions();
     void ShowIncrementsInPreviewCalculation(bool show);
 
+    void SetMeasurementDescription(QTableWidgetItem *item, const QString &name);
+    void SetPieceAreaDescription(QTableWidgetItem *item, const QString &name);
+
     void SetDescription(const QString &name, qreal value, bool specialUnits, const QString &description,
                         bool square = false);
 

@@ -37,6 +37,7 @@
 #include <QtGlobal>
 
 #include "../vmisc/def.h"
+#include "quuid.h"
 #include "vvariable.h"
 
 class VContainer;
@@ -62,6 +63,9 @@ public:
     VMeasurement(VMeasurement &&m) noexcept;
     auto operator=(VMeasurement &&m) noexcept -> VMeasurement &;
 #endif
+
+    auto GetKnownMeasurementsId() const -> QUuid;
+    void SetKnownMeasurementsId(const QUuid &id);
 
     auto GetGuiText() const -> QString;
     void SetGuiText(const QString &guiText);

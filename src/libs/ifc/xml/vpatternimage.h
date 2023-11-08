@@ -53,6 +53,7 @@ public:
 
     auto GetPixmap() const -> QPixmap;
     auto GetPixmap(int width, int height) const -> QPixmap;
+    auto GetPixmap(const QSize &size) const -> QPixmap;
 
     auto ErrorString() const -> const QString &;
 
@@ -60,10 +61,14 @@ public:
 
     auto Size() const -> QSize;
 
+    auto Title() const -> QString;
+    void SetTitle(const QString &newTitle);
+
 private:
     QString m_contentType{};
     QByteArray m_contentData{};
     mutable QString m_errorString{};
+    QString m_title{};
 };
 
 #endif // VPATTERNIMAGE_H

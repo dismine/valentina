@@ -1347,12 +1347,6 @@ auto MainWindowsNoGUI::OpenMeasurementFile(const QString &path) const -> QShared
             }
         }
 
-        if (not m->IsDefinedKnownNamesValid())
-        {
-            throw VException(QCoreApplication::translate("MainWindowsNoGUI",
-                                                         "Measurement file contains invalid known measurement(s)."));
-        }
-
         CheckRequiredMeasurements(m.data());
     }
     catch (VException &e)
@@ -1382,14 +1376,9 @@ void MainWindowsNoGUI::CheckRequiredMeasurements(const VMeasurements *m) const
 
     if (not match.isEmpty())
     {
-        QList<QString> list = ConvertToList(match);
-        for (int i = 0; i < list.size(); ++i)
-        {
-            list[i] = VAbstractApplication::VApp()->TrVars()->MToUser(list.at(i));
-        }
-
+        QStringList list = ConvertToList(match);
         VException e(tr("Measurement file doesn't include all required measurements."));
-        e.AddMoreInformation(tr("Please, additionally provide: %1").arg(QStringList(list).join(QStringLiteral(", "))));
+        e.AddMoreInformation(tr("Please, additionally provide: %1").arg(list.join(", "_L1)));
         throw e;
     }
 }

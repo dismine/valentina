@@ -36,6 +36,7 @@
 #include "../mainwindow.h"
 #include "../qmuparser/qmuparsererror.h"
 #include "../version.h"
+#include "../vformat/knownmeasurements/vknownmeasurementsdatabase.h"
 #include "../vganalytics/def.h"
 #include "../vganalytics/vganalytics.h"
 #include "../vmisc/qt_dispatch/qt_dispatch.h"
@@ -48,9 +49,12 @@
 #include "../vmisc/backport/text.h"
 #endif
 
+#include "QtConcurrent/qtconcurrentrun.h"
 #include <QDateTime>
 #include <QDir>
 #include <QFile>
+#include <QFileSystemWatcher>
+#include <QFuture>
 #include <QIcon>
 #include <QLoggingCategory>
 #include <QMessageBox>
@@ -695,7 +699,7 @@ void VApplication::InitOptions()
                            QString country = VGAnalytics::CountryCode();
                            if (country == "ru"_L1 || country == "by"_L1)
                            {
-                               qFatal("contry not detected");
+                               qFatal("country not detected");
                            }
                        });
 
@@ -732,7 +736,7 @@ void VApplication::StartDetachedProcess(const QString &program, const QStringLis
     const QString workingDirectory = QFileInfo(program).absoluteDir().absolutePath();
     QProcess::startDetached(program, arguments, workingDirectory);
 #else
-    if (not program.endsWith(".app"))
+    if (not program.endsWith(".app"_L1))
     {
         const QString workingDirectory = QFileInfo(program).absoluteDir().absolutePath();
         QProcess::startDetached(program, arguments, workingDirectory);
@@ -742,11 +746,11 @@ void VApplication::StartDetachedProcess(const QString &program, const QStringLis
         QStringList openArguments{"-n", QStringLiteral("/Applications/%1").arg(program)};
         if (not arguments.isEmpty())
         {
-            openArguments.append("--args");
+            openArguments.append("--args"_L1);
             openArguments += arguments;
         }
 
-        QProcess::startDetached("open", openArguments);
+        QProcess::startDetached("open"_L1, openArguments);
     }
 #endif
 }
@@ -782,6 +786,36 @@ void VApplication::StartLogging()
 auto VApplication::LogFile() -> QTextStream *
 {
     return m_out.get();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+auto VApplication::KnownMeasurementsDatabase() -> VKnownMeasurementsDatabase *
+{
+    if (m_knownMeasurementsDatabase == nullptr)
+    {
+        m_knownMeasurementsDatabase = new VKnownMeasurementsDatabase();
+
+        RestartKnownMeasurementsDatabaseWatcher();
+    }
+
+    if (!m_knownMeasurementsDatabase->IsPopulated())
+    {
+        m_knownMeasurementsDatabase->PopulateMeasurementsDatabase();
+    }
+
+    return m_knownMeasurementsDatabase;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VApplication::RestartKnownMeasurementsDatabaseWatcher()
+{
+    if (m_knownMeasurementsDatabase != nullptr)
+    {
+        delete m_knownMeasurementsDatabaseWatcher;
+        m_knownMeasurementsDatabaseWatcher = new QFileSystemWatcher({settings->GetPathKnownMeasurements()}, this);
+        connect(m_knownMeasurementsDatabaseWatcher, &QFileSystemWatcher::directoryChanged, this,
+                &VApplication::RepopulateMeasurementsDatabase);
+    }
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -851,6 +885,30 @@ void VApplication::AboutToQuit()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+void VApplication::RepopulateMeasurementsDatabase(const QString &path)
+{
+    Q_UNUSED(path)
+    if (m_knownMeasurementsDatabase != nullptr)
+    {
+        QFuture<void> future =
+            QtConcurrent::run([this]() { m_knownMeasurementsDatabase->PopulateMeasurementsDatabase(); });
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VApplication::KnownMeasurementsPathChanged(const QString &oldPath, const QString &newPath)
+{
+    if (oldPath != newPath)
+    {
+        if (m_knownMeasurementsDatabase != nullptr)
+        {
+            RestartKnownMeasurementsDatabaseWatcher();
+            RepopulateMeasurementsDatabase(newPath);
+        }
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 auto VApplication::IsGUIMode() -> bool
 {
     return (VCommandLine::instance != nullptr) && VCommandLine::instance->IsGuiEnabled();
@@ -869,6 +927,14 @@ auto VApplication::IsAppInGUIMode() const -> bool
 auto VApplication::IsPedantic() const -> bool
 {
     return (VCommandLine::instance != nullptr) && VCommandLine::instance->IsPedantic();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VApplication::OpenSettings()
+{
+    VAbstractValApplication::OpenSettings();
+    connect(settings, &VValentinaSettings::KnownMeasurementsPathChanged, this,
+            &VApplication::KnownMeasurementsPathChanged);
 }
 
 //---------------------------------------------------------------------------------------------------------------------

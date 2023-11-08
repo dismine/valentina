@@ -30,11 +30,11 @@
 #include "../../mapplication.h"
 #include "../../vtapesettings.h"
 #include "../qmuparser/qmudef.h"
+#include "../vformat/knownmeasurements/vknownmeasurementsdatabase.h"
 #include "../vganalytics/vganalytics.h"
 #include "../vmisc/dialogs/vshortcutdialog.h"
 #include "../vmisc/theme/vtheme.h"
 #include "../vmisc/vabstractshortcutmanager.h"
-#include "../vpatterndb/pmsystems.h"
 #include "ui_tapepreferencesconfigurationpage.h"
 
 #if QT_VERSION < QT_VERSION_CHECK(5, 7, 0)
@@ -74,26 +74,23 @@ TapePreferencesConfigurationPage::TapePreferencesConfigurationPage(QWidget *pare
     ui->checkBoxDontUseNativeDialog->setChecked(settings->IsDontUseNativeDialog());
 
     //---------------------- Pattern making system
-    ui->systemBookValueLabel->setFixedHeight(4 * QFontMetrics(ui->systemBookValueLabel->font()).lineSpacing());
-    connect(ui->systemCombo, QOverload<int>::of(&QComboBox::currentIndexChanged), this,
+    ui->knownMeasurementsDescription->setFixedHeight(
+        4 * QFontMetrics(ui->knownMeasurementsDescription->font()).lineSpacing());
+    connect(ui->comboBoxKnownMeasurements, QOverload<int>::of(&QComboBox::currentIndexChanged), this,
             [this]()
             {
                 m_systemChanged = true;
-                QString text =
-                    VAbstractApplication::VApp()->TrVars()->PMSystemAuthor(ui->systemCombo->currentData().toString());
-                ui->systemAuthorValueLabel->setText(text);
-                ui->systemAuthorValueLabel->setToolTip(text);
-
-                text = VAbstractApplication::VApp()->TrVars()->PMSystemBook(ui->systemCombo->currentData().toString());
-                ui->systemBookValueLabel->setPlainText(text);
+                InitKnownMeasurementsDescription();
             });
 
     // set default pattern making system
-    index = ui->systemCombo->findData(settings->GetPMSystemCode());
+    InitKnownMeasurements(ui->comboBoxKnownMeasurements);
+    index = ui->comboBoxKnownMeasurements->findData(settings->GetKnownMeasurementsId());
     if (index != -1)
     {
-        ui->systemCombo->setCurrentIndex(index);
+        ui->comboBoxKnownMeasurements->setCurrentIndex(index);
     }
+    InitKnownMeasurementsDescription();
 
     //----------------------------- Measurements Editing
     connect(ui->resetWarningsButton, &QPushButton::released, this,
@@ -165,23 +162,22 @@ auto TapePreferencesConfigurationPage::Apply() -> QStringList
         settings->SetDontUseNativeDialog(ui->checkBoxDontUseNativeDialog->isChecked());
     }
 
-    if (m_langChanged || m_systemChanged)
+    if (m_systemChanged)
+    {
+        const auto id = ui->comboBoxKnownMeasurements->currentData().toUuid();
+        settings->SetKnownMeasurementsId(id);
+        m_systemChanged = false;
+    }
+
+    if (m_langChanged)
     {
         const auto locale = qvariant_cast<QString>(ui->langCombo->currentData());
         settings->SetLocale(locale);
         VGAnalytics::Instance()->SetGUILanguage(settings->GetLocale());
         m_langChanged = false;
 
-        const auto code = qvariant_cast<QString>(ui->systemCombo->currentData());
-        settings->SetPMSystemCode(code);
-        m_systemChanged = false;
-
         VAbstractApplication::VApp()->LoadTranslation(locale);
         QCoreApplication::processEvents(); // force to call changeEvent
-
-        // Part about measurments will not be updated automatically
-        MApplication::VApp()->RetranslateTables();
-        MApplication::VApp()->RetranslateGroups();
     }
 
     if (settings->IsAutomaticallyCheckUpdates() != ui->checkBoxAutomaticallyCheckUpdates->isChecked())
@@ -242,13 +238,13 @@ void TapePreferencesConfigurationPage::RetranslateUi()
     ui->osOptionCheck->setText(tr("With OS options") + QStringLiteral(" (%1)").arg(LocaleDecimalPoint(QLocale())));
 
     {
-        const auto code = qvariant_cast<QString>(ui->systemCombo->currentData());
-        ui->systemCombo->blockSignals(true);
-        ui->systemCombo->clear();
-        InitPMSystems(ui->systemCombo);
-        ui->systemCombo->setCurrentIndex(-1);
-        ui->systemCombo->blockSignals(false);
-        ui->systemCombo->setCurrentIndex(ui->systemCombo->findData(code));
+        const auto code = qvariant_cast<QString>(ui->comboBoxKnownMeasurements->currentData());
+        ui->comboBoxKnownMeasurements->blockSignals(true);
+        ui->comboBoxKnownMeasurements->clear();
+        InitKnownMeasurements(ui->comboBoxKnownMeasurements);
+        ui->comboBoxKnownMeasurements->setCurrentIndex(-1);
+        ui->comboBoxKnownMeasurements->blockSignals(false);
+        ui->comboBoxKnownMeasurements->setCurrentIndex(ui->comboBoxKnownMeasurements->findData(code));
     }
 
     RetranslateShortcutsTable();
@@ -332,5 +328,45 @@ void TapePreferencesConfigurationPage::RetranslateShortcutsTable()
         {
             it->setText(VAbstractShortcutManager::ReadableName(shortcut.type));
         }
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void TapePreferencesConfigurationPage::InitKnownMeasurements(QComboBox *combo)
+{
+    VKnownMeasurementsDatabase *db = MApplication::VApp()->KnownMeasurementsDatabase();
+    QHash<QUuid, VKnownMeasurementsHeader> known = db->AllKnownMeasurements();
+
+    SCASSERT(combo != nullptr)
+    combo->addItem(tr("None"), QUuid());
+
+    int index = 1;
+    auto i = known.constBegin();
+    while (i != known.constEnd())
+    {
+        QString name = i.value().name;
+
+        if (i.value().name.isEmpty())
+        {
+            name = tr("Known measurements %1").arg(index);
+            ++index;
+        }
+
+        combo->addItem(name, i.key());
+        ++i;
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void TapePreferencesConfigurationPage::InitKnownMeasurementsDescription()
+{
+    VKnownMeasurementsDatabase *db = MApplication::VApp()->KnownMeasurementsDatabase();
+    QHash<QUuid, VKnownMeasurementsHeader> known = db->AllKnownMeasurements();
+
+    ui->knownMeasurementsDescription->clear();
+    QUuid id = ui->comboBoxKnownMeasurements->currentData().toUuid();
+    if (!id.isNull() && known.contains(id))
+    {
+        ui->knownMeasurementsDescription->setPlainText(known.value(id).description);
     }
 }

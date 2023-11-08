@@ -132,10 +132,10 @@ auto VLayoutConverter::GetFormatVersionStr() const -> QString
         const QDomElement layoutElement = root.toElement();
         if (not layoutElement.isNull())
         {
-            return GetParametrString(layoutElement, AttrLayoutVersion, QStringLiteral("0.0.0"));
+            return GetParametrString(layoutElement, AttrLayoutVersion, "0.0.0"_L1);
         }
     }
-    return QStringLiteral("0.0.0");
+    return "0.0.0"_L1;
 }
 
 //---------------------------------------------------------------------------------------------------------------------

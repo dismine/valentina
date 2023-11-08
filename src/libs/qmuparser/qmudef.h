@@ -92,7 +92,13 @@ QMUPARSERSHARED_EXPORT auto LocaleGroupSeparator(const QLocale &locale) -> QChar
     const QChar decimalPoint = LocaleDecimalPoint((locale));                                                           \
     const QChar groupSeparator = LocaleGroupSeparator((locale));
 
-QMUPARSERSHARED_EXPORT auto NameRegExp() -> QString;
+enum class VariableRegex
+{
+    Variable,
+    KnownMeasurement
+};
+
+QMUPARSERSHARED_EXPORT auto NameRegExp(VariableRegex type = VariableRegex::Variable) -> QString;
 
 QT_WARNING_POP
 

@@ -13,21 +13,19 @@ VTestApp {
     autotest.workingDir: product.buildDirectory
 
     files: [
-      "qttestmainlambda.cpp",
-      "tst_measurementregexp.cpp",
-      "tst_qmuparsererrormsg.cpp",
-      "tst_tstranslation.cpp",
-      "tst_buitinregexp.cpp",
-      "tst_abstractregexp.cpp",
-      "tst_tslocaletranslation.cpp",
-      "tst_abstracttranslation.cpp",
-      "tst_measurementregexp.h",
-      "tst_qmuparsererrormsg.h",
-      "tst_tstranslation.h",
-      "tst_buitinregexp.h",
-      "tst_abstractregexp.h",
-      "tst_tslocaletranslation.h",
-      "tst_abstracttranslation.h",  
+        "qttestmainlambda.cpp",
+        "tst_qmuparsererrormsg.cpp",
+        "tst_tstranslation.cpp",
+        "tst_buitinregexp.cpp",
+        "tst_abstractregexp.cpp",
+        "tst_tslocaletranslation.cpp",
+        "tst_abstracttranslation.cpp",
+        "tst_qmuparsererrormsg.h",
+        "tst_tstranslation.h",
+        "tst_buitinregexp.h",
+        "tst_abstractregexp.h",
+        "tst_tslocaletranslation.h",
+        "tst_abstracttranslation.h",
     ]
 
     cpp.defines: 'TS_DIR="' + FileInfo.joinPaths(project.sourceDirectory, "share", "translations")  + '"'

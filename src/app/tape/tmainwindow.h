@@ -49,6 +49,8 @@ class QLabel;
 class QxtCsvModel;
 class VMeasurement;
 class QAbstractButton;
+class QUuid;
+class VKnownMeasurements;
 
 class TMainWindow : public VAbstractMainWindow
 {
@@ -60,8 +62,6 @@ public:
 
     auto CurrentFile() const -> QString;
 
-    void RetranslateTable();
-
     void SetDimensionABase(qreal base);
     void SetDimensionBBase(qreal base);
     void SetDimensionCBase(qreal base);
@@ -70,6 +70,11 @@ public:
     auto LoadFile(const QString &path) -> bool;
 
     void UpdateWindowTitle();
+
+    void SyncKnownMeasurements();
+
+public slots:
+    void ToolBarStyles();
 
 protected:
     void closeEvent(QCloseEvent *event) override;
@@ -84,8 +89,6 @@ private slots:
     void OpenMultisize();
     void OpenTemplate();
     void CreateFromExisting();
-    void Preferences();
-    void ToolBarStyles();
 
     bool FileSave();   // NOLINT(modernize-use-trailing-return-type)
     bool FileSaveAs(); // NOLINT(modernize-use-trailing-return-type)
@@ -103,7 +106,7 @@ private slots:
     void SaveGender(int index);
     void SaveBirthDate(const QDate &date);
     void SaveNotes();
-    void SavePMSystem(int index);
+    void SaveKnownMeasurements(int index);
 
     void Remove();
     void MoveTop();
@@ -176,7 +179,7 @@ private:
     QComboBox *m_gradationDimensionB{nullptr};
     QComboBox *m_gradationDimensionC{nullptr};
     QComboBox *m_comboBoxUnits{nullptr};
-    int m_formulaBaseHeight;
+    int m_formulaBaseHeight{0};
     QSharedPointer<VLockGuard<char>> m_lock{nullptr};
     QSharedPointer<VTableSearch> m_search{};
     QLabel *m_labelGradationDimensionA{nullptr};
@@ -196,13 +199,14 @@ private:
     {
         MultisizeMeasurement() = default;
 
-        QString name{};        // NOLINT(misc-non-private-member-variables-in-classes)
-        qreal base{0};         // NOLINT(misc-non-private-member-variables-in-classes)
-        qreal shiftA{0};       // NOLINT(misc-non-private-member-variables-in-classes)
-        qreal shiftB{0};       // NOLINT(misc-non-private-member-variables-in-classes)
-        qreal shiftC{0};       // NOLINT(misc-non-private-member-variables-in-classes)
-        QString fullName{};    // NOLINT(misc-non-private-member-variables-in-classes)
-        QString description{}; // NOLINT(misc-non-private-member-variables-in-classes)
+        QString name{};           // NOLINT(misc-non-private-member-variables-in-classes)
+        qreal base{0};            // NOLINT(misc-non-private-member-variables-in-classes)
+        qreal shiftA{0};          // NOLINT(misc-non-private-member-variables-in-classes)
+        qreal shiftB{0};          // NOLINT(misc-non-private-member-variables-in-classes)
+        qreal shiftC{0};          // NOLINT(misc-non-private-member-variables-in-classes)
+        QString fullName{};       // NOLINT(misc-non-private-member-variables-in-classes)
+        QString description{};    // NOLINT(misc-non-private-member-variables-in-classes)
+        bool specialUnits{false}; // NOLINT(misc-non-private-member-variables-in-classes)
     };
 
     QMultiHash<VShortcutAction, QAction *> m_actionShortcuts{};
@@ -299,6 +303,15 @@ private:
     static auto UnknownMeasurementImage() -> QString;
 
     void RetranslateMDiagram();
+
+    void InitKnownMeasurements(QComboBox *combo);
+    void InitKnownMeasurementsDescription();
+
+    static auto KnownMeasurementsRegistred(const QUuid &id) -> bool;
+
+    auto CSVColumnHeader(int column) const -> QString;
+    void ExportRowToCSV(QxtCsvModel &csv, int row, const QSharedPointer<VMeasurement> &meash,
+                        const VKnownMeasurements &knownDB) const;
 };
 
 #endif // TMAINWINDOW_H

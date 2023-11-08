@@ -210,13 +210,13 @@ auto GetTokens(const VFormulaField &formula) -> QList<QString>
     {
         qWarning() << QObject::tr("Cannot get tokens from formula '%1'. Parser error: %2.")
                           .arg(formula.expression, e.GetMsg());
-        return QList<QString>();
+        return {};
     }
     catch (const qmu::QmuParserWarning &e)
     {
         qWarning() << QObject::tr("Cannot get tokens from formula '%1'. Formula error: %2.")
                           .arg(formula.expression, e.GetMsg());
-        return QList<QString>();
+        return {};
     }
 }
 
@@ -2064,7 +2064,7 @@ auto VAbstractPattern::IsVariable(const QString &token) -> bool
         }
     }
 
-    return token.startsWith('#');
+    return token.startsWith('#'_L1);
 }
 
 //---------------------------------------------------------------------------------------------------------------------

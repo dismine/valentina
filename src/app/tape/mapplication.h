@@ -34,9 +34,13 @@
 #include "dialogs/dialogmdatabase.h"
 #include "vtapesettings.h"
 
+#include <QFutureWatcher>
+
 class TMainWindow;
+class TKMMainWindow;
 class QLocalServer;
 class QCommandLineParser;
+class VKnownMeasurementsDatabase;
 
 enum class SocketConnection : bool
 {
@@ -56,9 +60,14 @@ public:
 
     auto IsTestMode() const -> bool;
     auto IsAppInGUIMode() const -> bool override;
-    auto MainWindow() -> TMainWindow *;
-    auto MainWindows() -> QList<TMainWindow *>;
-    auto NewMainWindow() -> TMainWindow *;
+
+    auto MainTapeWindow() -> TMainWindow *;
+    auto MainTapeWindows() -> QList<TMainWindow *>;
+    auto NewMainTapeWindow() -> TMainWindow *;
+
+    auto MainKMWindow() -> TKMMainWindow *;
+    auto MainKMWindows() -> QList<TKMMainWindow *>;
+    auto NewMainKMWindow() -> TKMMainWindow *;
 
     void InitOptions();
 
@@ -67,15 +76,13 @@ public:
     void OpenSettings() override;
     auto TapeSettings() -> VTapeSettings *;
 
-    static auto diagramsPath() -> QString;
-
-    void ShowDataBase();
-    void RetranslateGroups();
-    void RetranslateTables();
-
     void ParseCommandLine(const SocketConnection &connection, const QStringList &arguments);
 
     static auto VApp() -> MApplication *;
+
+    auto KnownMeasurementsDatabase() -> VKnownMeasurementsDatabase * override;
+
+    void Preferences(QWidget *parent = nullptr);
 
 public slots:
     void ProcessCMD();
@@ -89,28 +96,41 @@ protected slots:
 
 private slots:
     void NewLocalSocketConnection();
+    void RepopulateMeasurementsDatabase(const QString &path);
+    void KnownMeasurementsPathChanged(const QString &oldPath, const QString &newPath);
+    void SyncKnownMeasurements();
 
 private:
     // cppcheck-suppress unknownMacro
     Q_DISABLE_COPY_MOVE(MApplication) // NOLINT
     QList<QPointer<TMainWindow>> m_mainWindows{};
+    QList<QPointer<TKMMainWindow>> m_kmMainWindows{};
     QLocalServer *m_localServer{nullptr};
     VTranslateVars *m_trVars{nullptr};
     QPointer<DialogMDataBase> m_dataBase{};
     bool m_testMode{false};
+    bool m_knownMeasurementsMode{false};
+    VKnownMeasurementsDatabase *m_knownMeasurementsDatabase{nullptr};
+    QFileSystemWatcher *m_knownMeasurementsDatabaseWatcher{nullptr};
+    QFutureWatcher<void> *m_knownMeasurementsRepopulateWatcher;
 
-    void Clean();
+    void CleanTapeWindows();
+    void CleanKMWindows();
 
     static void InitParserOptions(QCommandLineParser &parser);
     void StartLocalServer(const QString &serverName);
 
     auto StartWithFiles(QCommandLineParser &parser) -> bool;
+    auto StartWithMeasurementFiles(QCommandLineParser &parser) -> bool;
+    auto StartWithKnownMeasurementFiles(QCommandLineParser &parser) -> bool;
     auto SingleStart(QCommandLineParser &parser) -> bool;
 
     static void ParseDimensionAOption(QCommandLineParser &parser, qreal &dimensionAValue, bool &flagDimensionA);
     static void ParseDimensionBOption(QCommandLineParser &parser, qreal &dimensionBValue, bool &flagDimensionB);
     static void ParseDimensionCOption(QCommandLineParser &parser, qreal &dimensionCValue, bool &flagDimensionC);
     static void ParseUnitsOption(QCommandLineParser &parser, Unit &unit, bool &flagUnits);
+
+    void RestartKnownMeasurementsDatabaseWatcher();
 };
 
 //---------------------------------------------------------------------------------------------------------------------

@@ -45,15 +45,12 @@
 #include "../vmisc/literals.h"
 #include "../vmisc/vabstractapplication.h"
 #include "../vpatterndb/vtranslatevars.h"
-#include "pmsystems.h"
-#include "vtranslatemeasurements.h"
 
 using namespace Qt::Literals::StringLiterals;
 
 //---------------------------------------------------------------------------------------------------------------------
 VTranslateVars::VTranslateVars()
 {
-    InitPatternMakingSystems();
     InitVariables();
     InitFunctions();
 
@@ -61,315 +58,6 @@ VTranslateVars::VTranslateVars()
 }
 
 #define translate(context, source, disambiguation) qmu::QmuTranslation::translate((context), (source), (disambiguation))
-
-//---------------------------------------------------------------------------------------------------------------------
-void VTranslateVars::InitPatternMakingSystems()
-{
-    // Note. We can't use here function and variables because lupdate tool doesn't see string in variables and doesn't
-    // mark such string to translation.
-    qmu::QmuTranslation name;
-    qmu::QmuTranslation author;
-    qmu::QmuTranslation book;
-
-    //=================================================================================================================
-    name = translate("VTranslateVars", "Bunka", "System name");
-    author = translate("VTranslateVars", "Bunka Fashion College", "Author name");
-    book = translate("VTranslateVars", "Fundamentals of Garment Design", "Book name");
-    InitSystem(p0_S, name, author, book);
-    //=================================================================================================================
-    name = translate("VTranslateVars", "Barnfield and Richard", "System name");
-    author = translate("VTranslateVars", "Jo Barnfield and Andrew Richards", "Author name");
-    book = translate("VTranslateVars", "Pattern Making Primer", "Book name");
-    InitSystem(p1_S, name, author, book);
-    //=================================================================================================================
-    name = translate("VTranslateVars", "Friendship/Women", "System name");
-    author = translate("VTranslateVars", "Elizabeth Friendship", "Author name");
-    book = translate("VTranslateVars",
-                     "Creating Historical Clothes - Pattern Cutting from the 16th to the 19th Centuries", "Book name");
-    InitSystem(p2_S, name, author, book);
-    //=================================================================================================================
-    name = translate("VTranslateVars", "Morris, K.", "System name");
-    author = translate("VTranslateVars", "Karen Morris", "Author name");
-    book = translate("VTranslateVars", "Sewing Lingerie that Fits", "Book name");
-    InitSystem(p3_S, name, author, book);
-    //=================================================================================================================
-    name = translate("VTranslateVars", "Castro", "System name");
-    author = translate("VTranslateVars", "Lucia Mors de Castro", "Author name");
-    book = translate("VTranslateVars", "Patternmaking in Practic", "Book name");
-    InitSystem(p4_S, name, author, book);
-    //=================================================================================================================
-    name = translate("VTranslateVars", "Kim & Uh", "System name");
-    author = translate("VTranslateVars", "Injoo Kim and Mykyung Uh", "Author name");
-    book = translate("VTranslateVars", "Apparel Making in Fashion Design", "Book name");
-    InitSystem(p5_S, name, author, book);
-    //=================================================================================================================
-    name = translate("VTranslateVars", "Waugh", "System name");
-    author = translate("VTranslateVars", "Norah Waugh", "Author name");
-    book = translate("VTranslateVars", "Corsets and Crinolines", "Book name");
-    InitSystem(p6_S, name, author, book);
-    //=================================================================================================================
-    name = translate("VTranslateVars", "Grimble", "System name");
-    author = translate("VTranslateVars", "Frances Grimble", "Author name");
-    book = translate("VTranslateVars", "Fashions of the Gilded Age", "Book name");
-    InitSystem(p7_S, name, author, book);
-    //=================================================================================================================
-    name = translate("VTranslateVars", "Thornton's International System", "System name");
-    author = translate("VTranslateVars", "ed. R. L. Shep", "Author name");
-    book = translate("VTranslateVars", "The Great War: Styles and Patterns of the 1910s", "Book name");
-    InitSystem(p8_S, name, author, book);
-    //=================================================================================================================
-    name = translate("VTranslateVars", "Hillhouse & Mansfield", "System name");
-    author = translate("VTranslateVars", "Marion S. Hillhouse and Evelyn A. Mansfield", "Author name");
-    book = translate("VTranslateVars", "Dress Design: Draping and Flat Pattern Making", "Book name");
-    InitSystem(p9_S, name, author, book);
-    //=================================================================================================================
-    name = translate("VTranslateVars", "Pivnick", "System name");
-    author = translate("VTranslateVars", "Esther Kaplan Pivnick", "Author name");
-    book = translate("VTranslateVars", "How to Design Beautiful Clothes: Designing and Pattern Making", "Book name");
-    InitSystem(p10_S, name, author, book);
-    //=================================================================================================================
-    name = translate("VTranslateVars", "Minister & Son", "System name");
-    author = translate("VTranslateVars", "Edward Minister & Son, ed. R. L. Shep", "Author name");
-    book = translate("VTranslateVars", "The Complete Guide to Practical Cutting (1853)", "Book name");
-    InitSystem(p11_S, name, author, book);
-    //=================================================================================================================
-    name = translate("VTranslateVars", "Strickland", "System name");
-    author = translate("VTranslateVars", "Gertrude Strickland", "Author name");
-    book = translate("VTranslateVars", "A Tailoring Manual", "Book name");
-    InitSystem(p12_S, name, author, book);
-    //=================================================================================================================
-    name = translate("VTranslateVars", "Loh & Lewis", "System name");
-    author = translate("VTranslateVars", "May Loh and Diehl Lewis", "Author name");
-    book = translate("VTranslateVars", "Patternless Fashion Design", "Book name");
-    InitSystem(p13_S, name, author, book);
-    //=================================================================================================================
-    name = translate("VTranslateVars", "Morris, F. R.", "System name");
-    author = translate("VTranslateVars", "F. R. Morris", "Author name");
-    book = translate("VTranslateVars", "Ladies Garment Cutting and Making", "Book name");
-    InitSystem(p14_S, name, author, book);
-    //=================================================================================================================
-    name = translate("VTranslateVars", "Mason", "System name");
-    author = translate("VTranslateVars", "Gertrude Mason", "Author name");
-    book = translate("VTranslateVars", "Gertrude Mason's Patternmaking Book", "Book name");
-    InitSystem(p15_S, name, author, book);
-    //=================================================================================================================
-    name = translate("VTranslateVars", "Kimata", "System name");
-    author = translate("VTranslateVars", "K. Kimata", "Author name");
-    book = translate("VTranslateVars", "K.Kimata's Simplified Drafting Book for Dressmaking", "Book name");
-    InitSystem(p16_S, name, author, book);
-    //=================================================================================================================
-    name = translate("VTranslateVars", "Master Designer", "System name");
-    author = translate("VTranslateVars", "The Master Designer (Chicago, IL)", "Author name");
-    book = translate("VTranslateVars", "Master Designer's System of Designing, Cutting and Grading", "Book name");
-    InitSystem(p17_S, name, author, book);
-    //=================================================================================================================
-    name = translate("VTranslateVars", "Kopp", "System name");
-    author = translate("VTranslateVars", "Ernestine Kopp, Vittorina Rolfo, Beatrice Zelin, Lee Gross", "Author name");
-    book = translate("VTranslateVars", "How to Draft Basic Patterns", "Book name");
-    InitSystem(p18_S, name, author, book);
-    //=================================================================================================================
-    name = translate("VTranslateVars", "Ekern", "System name");
-    author = translate("VTranslateVars", "Doris Ekern", "Author name");
-    book = translate("VTranslateVars", "Slacks Cut-to-Fit for Your Figure", "Book name");
-    InitSystem(p19_S, name, author, book);
-    //=================================================================================================================
-    name = translate("VTranslateVars", "Doyle", "System name");
-    author = translate("VTranslateVars", "Sarah J. Doyle", "Author name");
-    book = translate("VTranslateVars", "Sarah's Key to Pattern Drafting", "Book name");
-    InitSystem(p20_S, name, author, book);
-    //=================================================================================================================
-    name = translate("VTranslateVars", "Shelton", "System name");
-    author = translate("VTranslateVars", "Karla J. Shelton", "Author name");
-    book = translate("VTranslateVars", "Design and Sew Jeans", "Book name");
-    InitSystem(p21_S, name, author, book);
-    //=================================================================================================================
-    name = translate("VTranslateVars", "Lady Boutique", "System name");
-    author = translate("VTranslateVars", "Lady Boutique", "Author name");
-    book = translate("VTranslateVars", "Lady Boutique magazine (Japan)", "Book name");
-    InitSystem(p22_S, name, author, book);
-    //=================================================================================================================
-    name = translate("VTranslateVars", "Rohr", "System name");
-    author = translate("VTranslateVars", "M. Rohr", "Author name");
-    book = translate("VTranslateVars", "Pattern Drafting and Grading: Women's nd Misses' Garment Design", "Book name");
-    InitSystem(p23_S, name, author, book);
-    //=================================================================================================================
-    name = translate("VTranslateVars", "Moore", "System name");
-    author = translate("VTranslateVars", "Dorothy Moore", "Author name");
-    book = translate("VTranslateVars", "Dorothy Moore's Pattern Drafting and Dressmaking", "Book name");
-    InitSystem(p24_S, name, author, book);
-    //=================================================================================================================
-    name = translate("VTranslateVars", "Abling", "System name");
-    author = translate("VTranslateVars", "Bina Abling", "Author name");
-    book = translate("VTranslateVars", "Integrating Draping, Drafting and Drawing", "Book name");
-    InitSystem(p25_S, name, author, book);
-    //=================================================================================================================
-    name = translate("VTranslateVars", "Fukomoto", "System name");
-    author = translate("VTranslateVars", "Sue S. Fukomoto", "Author name");
-    book = translate("VTranslateVars",
-                     "Scientific Pattern Drafting as taught at Style Center School of Costume "
-                     "Design, Dressmaking and Millinery",
-                     "Book name");
-    InitSystem(p26_S, name, author, book);
-    //=================================================================================================================
-    name = translate("VTranslateVars", "Dressmaking International", "System name");
-    author = translate("VTranslateVars", "Dressmaking International", "Author name");
-    book = translate("VTranslateVars", "Dressmaking International magazine (Japan)", "Book name");
-    InitSystem(p27_S, name, author, book);
-    //=================================================================================================================
-    name = translate("VTranslateVars", "Erwin", "System name");
-    author = translate("VTranslateVars", "Mabel D. Erwin", "Author name");
-    book = translate("VTranslateVars", "Practical Dress Design", "Book name");
-    InitSystem(p28_S, name, author, book);
-    //=================================================================================================================
-    name = translate("VTranslateVars", "Gough", "System name");
-    author = translate("VTranslateVars", "E. L. G. Gough", "Author name");
-    book = translate("VTranslateVars", "Principles of Garment Cutting", "Book name");
-    InitSystem(p29_S, name, author, book);
-    //=================================================================================================================
-    name = translate("VTranslateVars", "Allemong", "System name");
-    author = translate("VTranslateVars", "Elizabeth M. Allemong", "Author name");
-    book = translate("VTranslateVars", "European Cut", "Book name");
-    InitSystem(p30_S, name, author, book);
-    //=================================================================================================================
-    name = translate("VTranslateVars", "McCunn", "System name");
-    author = translate("VTranslateVars", "Donald H. McCunn", "Author name");
-    book = translate("VTranslateVars", "How to Make Your Own Sewing Patterns", "Book name");
-    InitSystem(p31_S, name, author, book);
-    //=================================================================================================================
-    name = translate("VTranslateVars", "Zarapkar", "System name");
-    author = translate("VTranslateVars", "Shri K. R. Zarapkar and Shri Arvind K. Zarapkar", "Author name");
-    book = translate("VTranslateVars", "Zarapkar System of Cutting", "Book name");
-    InitSystem(p32_S, name, author, book);
-    //=================================================================================================================
-    name = translate("VTranslateVars", "Kunick", "System name");
-    author = translate("VTranslateVars", "Philip Kunick", "Author name");
-    book = translate("VTranslateVars", "Sizing, Pattern Construction and Grading for Women's and Children's Garments",
-                     "Book name");
-    InitSystem(p33_S, name, author, book);
-    //=================================================================================================================
-    name = translate("VTranslateVars", "Handford", "System name");
-    author = translate("VTranslateVars", "Jack Handford", "Author name");
-    book = translate("VTranslateVars", "Professional Patternmaking for Designers: Women's Wear, Men's Casual Wear",
-                     "Book name");
-    InitSystem(p34_S, name, author, book);
-    //=================================================================================================================
-    name = translate("VTranslateVars", "Davis", "System name");
-    author = translate("VTranslateVars", "R. I. Davis", "Author name");
-    book = translate("VTranslateVars", "Men's 17th & 18th Century Costume, Cut & Fashion", "Book name");
-    InitSystem(p35_S, name, author, book);
-    //=================================================================================================================
-    name = translate("VTranslateVars", "MacLochlainn", "System name");
-    author = translate("VTranslateVars", "Jason MacLochlainn", "Author name");
-    book = translate("VTranslateVars", "The Victorian Tailor: An Introduction to Period Tailoring", "Book name");
-    InitSystem(p36_S, name, author, book);
-    //=================================================================================================================
-    name = translate("VTranslateVars", "Joseph-Armstrong", "System name");
-    author = translate("VTranslateVars", "Helen Joseph-Armstrong", "Author name");
-    book = translate("VTranslateVars", "Patternmaking for Fashion Design", "Book name");
-    InitSystem(p37_S, name, author, book);
-    //=================================================================================================================
-    name = translate("VTranslateVars", "Supreme System", "System name");
-    author = translate("VTranslateVars", "Frederick T. Croonberg", "Author name");
-    book = translate("VTranslateVars",
-                     "The Blue Book of Men's Tailoring, Grand Edition of Supreme System for "
-                     "Producing Mens Garments (1907)",
-                     "Book name");
-    InitSystem(p38_S, name, author, book);
-    //=================================================================================================================
-    name = translate("VTranslateVars", "Sugino", "System name");
-    author = translate("VTranslateVars", "Dressmaking", "Author name");
-    book = translate("VTranslateVars", "Pattern Drafting Vols. I, II, III (Japan)", "Book name");
-    InitSystem(p39_S, name, author, book);
-    //=================================================================================================================
-    name = translate("VTranslateVars", "Centre Point System", "System name");
-    author = translate("VTranslateVars", "Louis Devere", "Author name");
-    book = translate("VTranslateVars", "The Handbook of Practical Cutting on the Centre Point System", "Book name");
-    InitSystem(p40_S, name, author, book);
-    //=================================================================================================================
-    name = translate("VTranslateVars", "Aldrich/Men", "System name");
-    author = translate("VTranslateVars", "Winifred Aldrich", "Author name");
-    book = translate("VTranslateVars", "Metric Pattern Cutting for Menswear", "Book name");
-    InitSystem(p41_S, name, author, book);
-    //=================================================================================================================
-    name = translate("VTranslateVars", "Aldrich/Women", "System name");
-    author = translate("VTranslateVars", "Winifred Aldrich", "Author name");
-    book = translate("VTranslateVars", "Metric Pattern Cutting for Women's Wear", "Book name");
-    InitSystem(p42_S, name, author, book);
-    //=================================================================================================================
-    name = translate("VTranslateVars", "Kershaw", "System name");
-    author = translate("VTranslateVars", "Gareth Kershaw", "Author name");
-    book = translate("VTranslateVars", "Patternmaking for Menswear", "Book name");
-    InitSystem(p43_S, name, author, book);
-    //=================================================================================================================
-    name = translate("VTranslateVars", "Gilewska", "System name");
-    author = translate("VTranslateVars", "Teresa Gilewska", "Author name");
-    book = translate("VTranslateVars", "Pattern-Drafting for Fashion: The Basics", "Book name");
-    InitSystem(p44_S, name, author, book);
-    //=================================================================================================================
-    name = translate("VTranslateVars", "Lo", "System name");
-    author = translate("VTranslateVars", "Dennic Chunman Lo", "Author name");
-    book = translate("VTranslateVars", "Pattern Cutting", "Book name");
-    InitSystem(p45_S, name, author, book);
-    //=================================================================================================================
-    name = translate("VTranslateVars", "Bray", "System name");
-    author = translate("VTranslateVars", "Natalie Bray", "Author name");
-    book = translate("VTranslateVars", "Dress Pattern Designing: The Basic Principles of Cut and Fit", "Book name");
-    InitSystem(p46_S, name, author, book);
-    //=================================================================================================================
-    name = translate("VTranslateVars", "Knowles/Men", "System name");
-    author = translate("VTranslateVars", "Lori A. Knowles", "Author name");
-    book = translate("VTranslateVars", "The Practical Guide to Patternmaking for Fashion Designers: Menswear",
-                     "Book name");
-    InitSystem(p47_S, name, author, book);
-    //=================================================================================================================
-    name = translate("VTranslateVars", "Friendship/Men", "System name");
-    author = translate("VTranslateVars", "Elizabeth Friendship", "Author name");
-    book = translate("VTranslateVars", "Pattern Cutting for Men's Costume", "Book name");
-    InitSystem(p48_S, name, author, book);
-    //=================================================================================================================
-    name = translate("VTranslateVars", "Brown", "System name");
-    author = translate("VTranslateVars", "P. Clement Brown", "Author name");
-    book = translate("VTranslateVars", "Art in Dress", "Book name");
-    InitSystem(p49_S, name, author, book);
-    //=================================================================================================================
-    name = translate("VTranslateVars", "Mitchell", "System name");
-    author = translate("VTranslateVars", "Jno. J. Mitchell", "Author name");
-    book = translate("VTranslateVars",
-                     "\"Standard\" Work on Cutting (Men's Garments) 1886: The Art and Science of "
-                     "Garment Cutting",
-                     "Book name");
-    InitSystem(p50_S, name, author, book);
-    //=================================================================================================================
-    name = translate("VTranslateVars", "GOST 17917-86", "System name");
-    author = translate("VTranslateVars", "Ministry of consumer industry of the USSR", "Author name");
-    book = translate("VTranslateVars", "Standard figure boys", "Book name");
-    InitSystem(p51_S, name, author, book);
-    //=================================================================================================================
-    name = translate("VTranslateVars", "Eddy", "System name");
-    author = translate("VTranslateVars", "Josephine F. Eddy and Elizabeth C. B. Wiley", "Author name");
-    book = translate("VTranslateVars", "Pattern and Dress Design", "Book name");
-    InitSystem(p52_S, name, author, book);
-    //=================================================================================================================
-    name = translate("VTranslateVars", "Knowles/Women", "System name");
-    author = translate("VTranslateVars", "Lori A. Knowles", "Author name");
-    book = translate("VTranslateVars",
-                     "Practical Guide to Patternmaking for Fashion Designers: Juniors, Misses, and "
-                     "Women",
-                     "Book name");
-    InitSystem(p53_S, name, author, book);
-    //=================================================================================================================
-    name = translate("VTranslateVars", "American Garment Cutter", "System name");
-    author = translate("VTranslateVars", "ed. R. L. Shep", "Author name");
-    book = translate("VTranslateVars", "The Great War: Styles and Patterns of the 1910s", "Book name");
-    InitSystem(p54_S, name, author, book);
-    //=================================================================================================================
-    name = translate("VTranslateVars", "None", "System name");
-    author = translate("VTranslateVars", "Valentina team", "Author name");
-    book = translate("VTranslateVars", "Valentina's internal standard", "Book name");
-    InitSystem(p998_S, name, author, book);
-    //=================================================================================================================
-}
-
 //---------------------------------------------------------------------------------------------------------------------
 void VTranslateVars::InitVariables()
 {
@@ -622,15 +310,6 @@ void VTranslateVars::PrepareFunctionTranslations()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VTranslateVars::InitSystem(const QString &code, const qmu::QmuTranslation &name, const qmu::QmuTranslation &author,
-                                const qmu::QmuTranslation &book)
-{
-    PMSystemNames.insert(code, name);
-    PMSystemAuthors.insert(code, author);
-    PMSystemBooks.insert(code, book);
-}
-
-//---------------------------------------------------------------------------------------------------------------------
 /**
  * @brief CorrectionsPositions correct position tokens in expression after token translation.
  *
@@ -663,17 +342,6 @@ void VTranslateVars::TranslateVarsFromUser(QString &newFormula, QMap<vsizetype, 
     for (vsizetype i = 0; i < tKeys.size(); ++i)
     {
         vsizetype bias = 0;
-        if (MeasurementsFromUser(newFormula, tKeys.at(i), tValues.at(i), bias))
-        {
-            if (bias != 0)
-            { // Translated token has different length than original. Position of next tokens need to be corrected.
-                CorrectionsPositions(tKeys.at(i), bias, tokens, numbers);
-                tKeys = tokens.keys();
-                tValues = tokens.values();
-            }
-            continue;
-        }
-
         if (VariablesFromUser(newFormula, tKeys.at(i), tValues.at(i), bias))
         {
             if (bias != 0)
@@ -745,23 +413,6 @@ void VTranslateVars::TranslateVarsToUser(QString &newFormula, QMap<vsizetype, QS
     QList<QString> tValues = tokens.values();
     for (vsizetype i = 0; i < tKeys.size(); ++i)
     {
-        if (measurements.contains(tValues.at(i)))
-        {
-            newFormula.replace(
-                tKeys.at(i), tValues.at(i).length(),
-                measurements.value(tValues.at(i)).translate(VAbstractApplication::VApp()->Settings()->GetLocale()));
-            auto bias = tValues.at(i).length() - measurements.value(tValues.at(i))
-                                                     .translate(VAbstractApplication::VApp()->Settings()->GetLocale())
-                                                     .length();
-            if (bias != 0)
-            { // Translated token has different length than original. Position next tokens need to be corrected.
-                CorrectionsPositions(tKeys.at(i), bias, tokens, numbers);
-                tKeys = tokens.keys();
-                tValues = tokens.values();
-            }
-            continue;
-        }
-
         if (functions.contains(tValues.at(i)))
         {
             newFormula.replace(
@@ -1001,11 +652,6 @@ auto VTranslateVars::VarToUser(const QString &var) const -> QString
         return var;
     }
 
-    if (measurements.contains(var))
-    {
-        return measurements.value(var).translate(VAbstractApplication::VApp()->Settings()->GetLocale());
-    }
-
     if (functions.contains(var))
     {
         return functions.value(var).translate(VAbstractApplication::VApp()->Settings()->GetLocale());
@@ -1031,11 +677,6 @@ auto VTranslateVars::VarFromUser(const QString &var) const -> QString
 
     QString newVar = var;
     vsizetype bias = 0;
-    if (MeasurementsFromUser(newVar, 0, var, bias))
-    {
-        return newVar;
-    }
-
     if (VariablesFromUser(newVar, 0, var, bias))
     {
         return newVar;
@@ -1046,24 +687,6 @@ auto VTranslateVars::VarFromUser(const QString &var) const -> QString
         return newVar;
     }
     return newVar;
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-auto VTranslateVars::PMSystemName(const QString &code) const -> QString
-{
-    return PMSystemNames.value(code).translate(VAbstractApplication::VApp()->Settings()->GetLocale());
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-auto VTranslateVars::PMSystemAuthor(const QString &code) const -> QString
-{
-    return PMSystemAuthors.value(code).translate(VAbstractApplication::VApp()->Settings()->GetLocale());
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-auto VTranslateVars::PMSystemBook(const QString &code) const -> QString
-{
-    return PMSystemBooks.value(code).translate(VAbstractApplication::VApp()->Settings()->GetLocale());
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -1180,17 +803,11 @@ auto VTranslateVars::TryFormulaToUser(const QString &formula, bool osSeparator) 
 //---------------------------------------------------------------------------------------------------------------------
 void VTranslateVars::Retranslate()
 {
-    VTranslateMeasurements::Retranslate();
-
-    PMSystemNames.clear();
-    PMSystemAuthors.clear();
-    PMSystemBooks.clear();
     variables.clear();
     functions.clear();
     functionsDescriptions.clear();
     stDescriptions.clear();
 
-    InitPatternMakingSystems();
     InitVariables();
     InitFunctions();
 

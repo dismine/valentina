@@ -72,6 +72,12 @@ using namespace bpstd::literals::chrono_literals;
 #include "vapplicationstyle.h"
 #include "vscenestylesheet.h"
 
+#if QT_VERSION < QT_VERSION_CHECK(6, 4, 0)
+#include "../vmisc/compatibility.h"
+#endif
+
+using namespace Qt::Literals::StringLiterals;
+
 namespace
 {
 #if QT_VERSION < QT_VERSION_CHECK(5, 9, 0)
@@ -282,7 +288,7 @@ void ActivateDefaultTheme()
 //---------------------------------------------------------------------------------------------------------------------
 auto GetResourceName(const QString &root, const QString &iconName, bool dark) -> QString
 {
-    return QStringLiteral(":/%1/%2/%3").arg(root, dark ? "dark" : "light", iconName);
+    return QStringLiteral(":/%1/%2/%3").arg(root, dark ? "dark"_L1 : "light"_L1, iconName);
 }
 
 //---------------------------------------------------------------------------------------------------------------------

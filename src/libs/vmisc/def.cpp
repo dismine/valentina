@@ -173,17 +173,6 @@ auto SupportedLocales() -> QStringList
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-/**
- * @brief strippedName the function call around curFile to exclude the path to the file.
- * @param fullFileName full path to the file.
- * @return file name.
- */
-auto StrippedName(const QString &fullFileName) -> QString
-{
-    return QFileInfo(fullFileName).fileName();
-}
-
-//---------------------------------------------------------------------------------------------------------------------
 auto RelativeMPath(const QString &patternPath, const QString &absoluteMPath) -> QString
 {
     if (patternPath.isEmpty() || absoluteMPath.isEmpty())

@@ -29,7 +29,6 @@
 #include <QtTest>
 
 #include "tst_buitinregexp.h"
-#include "tst_measurementregexp.h"
 #include "tst_qmuparsererrormsg.h"
 #include "tst_tslocaletranslation.h"
 #include "tst_tstranslation.h"
@@ -59,14 +58,6 @@ auto main(int argc, char **argv) -> int
     const QStringList locales = SupportedLocales();
     for (const auto &locale : locales)
     {
-        for (const auto &s : TST_MeasurementRegExp::pmSystems)
-        {
-            if (locale != "zh_CN"_L1 && locale != "he_IL"_L1)
-            {
-                ASSERT_TEST(new TST_MeasurementRegExp(s, locale));
-            }
-        }
-
         ASSERT_TEST(new TST_TSLocaleTranslation(locale));
         ASSERT_TEST(new TST_BuitInRegExp(locale));
         ASSERT_TEST(new TST_QmuParserErrorMsg(locale));

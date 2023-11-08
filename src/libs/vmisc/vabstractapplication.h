@@ -51,6 +51,7 @@ class VCommonSettings;
 class VSvgFontDatabase;
 class QFileSystemWatcher;
 class VAbstractShortcutManager;
+class VKnownMeasurementsDatabase;
 
 #if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
 class VTextCodec;
@@ -103,7 +104,8 @@ public:
     static auto VApp() -> VAbstractApplication *;
 
     auto SVGFontDatabase() -> VSvgFontDatabase *;
-    void RestartSVGFontDatabaseWatcher();
+
+    virtual auto KnownMeasurementsDatabase() -> VKnownMeasurementsDatabase *;
 
     auto AppUptime() const -> qint64;
 
@@ -128,7 +130,6 @@ protected:
     QPointer<QTranslator> qtBaseTranslator{nullptr};
 #endif // defined(Q_OS_WIN) && !defined(QBS_BUILD)
     QPointer<QTranslator> appTranslator{nullptr};
-    QPointer<QTranslator> pmsTranslator{nullptr};
 
     QElapsedTimer m_uptimeTimer{};
 
@@ -156,6 +157,8 @@ private:
     QFileSystemWatcher *m_svgFontDatabaseWatcher{nullptr};
 
     void ClearTranslation();
+
+    void RestartSVGFontDatabaseWatcher();
 };
 
 QT_WARNING_POP

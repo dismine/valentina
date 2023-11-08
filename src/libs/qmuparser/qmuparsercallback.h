@@ -108,7 +108,7 @@ private:
 /**
  * @brief Container for Callback objects.
  */
-typedef std::map<QString, QmuParserCallback> funmap_type;
+using funmap_type = std::map<QString, QmuParserCallback>;
 
 //---------------------------------------------------------------------------------------------------------------------
 /**

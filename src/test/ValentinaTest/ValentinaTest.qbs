@@ -11,6 +11,7 @@ VTestApp {
     Depends { name: "VFormatLib" }
     Depends { name: "ebr" }
     Depends { name: "autotest" }
+    Depends { name: "QMUParserLib" }
 
     Depends {
         name: "Qt.xmlpatterns"

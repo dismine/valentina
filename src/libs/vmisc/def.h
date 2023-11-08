@@ -739,7 +739,6 @@ void InitLanguages(QComboBox *combobox);
 void InitPieceLabelLanguages(QComboBox *combobox);
 Q_REQUIRED_RESULT auto SupportedLocales() -> QStringList;
 
-Q_REQUIRED_RESULT auto StrippedName(const QString &fullFileName) -> QString;
 Q_REQUIRED_RESULT auto RelativeMPath(const QString &patternPath, const QString &absoluteMPath) -> QString;
 Q_REQUIRED_RESULT auto AbsoluteMPath(const QString &patternPath, const QString &relativeMPath) -> QString;
 

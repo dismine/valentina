@@ -49,11 +49,11 @@
 #include "../qmuparser/qmutokenparser.h"
 #include "../vmisc/projectversion.h"
 #include "../vpatterndb/calculator.h"
-#include "../vpatterndb/measurements.h"
-#include "../vpatterndb/pmsystems.h"
 #include "../vpatterndb/variables/vmeasurement.h"
 #include "../vpatterndb/vcontainer.h"
 #include "def.h"
+#include "qstringliteral.h"
+#include "quuid.h"
 
 #if QT_VERSION < QT_VERSION_CHECK(6, 4, 0)
 #include "../vmisc/compatibility.h"
@@ -132,13 +132,18 @@ auto FileComment() -> QString
 } // namespace
 
 //---------------------------------------------------------------------------------------------------------------------
-VMeasurements::VMeasurements(VContainer *data)
-  : data(data),
-    type(MeasurementsType::Unknown){SCASSERT(data != nullptr)}
+VMeasurements::VMeasurements(VContainer *data, QObject *parent)
+  : VDomDocument(parent),
+    data(data),
+    type(MeasurementsType::Unknown)
+{
+    SCASSERT(data != nullptr);
+}
 
-    //---------------------------------------------------------------------------------------------------------------------
-    VMeasurements::VMeasurements(Unit unit, VContainer * data)
-  : data(data),
+//---------------------------------------------------------------------------------------------------------------------
+VMeasurements::VMeasurements(Unit unit, VContainer *data, QObject *parent)
+  : VDomDocument(parent),
+    data(data),
     type(MeasurementsType::Individual)
 {
     SCASSERT(data != nullptr)
@@ -147,8 +152,10 @@ VMeasurements::VMeasurements(VContainer *data)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-VMeasurements::VMeasurements(Unit unit, const QVector<MeasurementDimension_p> &dimensions, VContainer *data)
-  : data(data),
+VMeasurements::VMeasurements(Unit unit, const QVector<MeasurementDimension_p> &dimensions, VContainer *data,
+                             QObject *parent)
+  : VDomDocument(parent),
+    data(data),
     type(MeasurementsType::Multisize)
 {
     SCASSERT(data != nullptr)
@@ -185,18 +192,25 @@ auto VMeasurements::SaveDocument(const QString &fileName, QString &error) -> boo
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VMeasurements::AddEmpty(const QString &name, const QString &formula)
+void VMeasurements::AddEmpty(const QString &name, const QString &formula, bool specialUnits)
 {
-    const QDomElement element = MakeEmpty(name, formula, MeasurementType::Measurement);
+    QDomElement element = MakeEmpty(name, formula, MeasurementType::Measurement);
+
+    SetAttributeOrRemoveIf<bool>(element, AttrSpecialUnits, specialUnits,
+                                 [](bool special) noexcept { return not special; });
 
     const QDomNodeList list = elementsByTagName(TagBodyMeasurements);
     list.at(0).appendChild(element);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VMeasurements::AddEmptyAfter(const QString &after, const QString &name, const QString &formula)
+void VMeasurements::AddEmptyAfter(const QString &after, const QString &name, const QString &formula, bool specialUnits)
 {
-    const QDomElement element = MakeEmpty(name, formula, MeasurementType::Measurement);
+    QDomElement element = MakeEmpty(name, formula, MeasurementType::Measurement);
+
+    SetAttributeOrRemoveIf<bool>(element, AttrSpecialUnits, specialUnits,
+                                 [](bool special) noexcept { return not special; });
+
     const QDomElement sibling = FindM(after);
 
     const QDomNodeList list = elementsByTagName(TagBodyMeasurements);
@@ -249,17 +263,19 @@ void VMeasurements::Remove(const QString &name)
 void VMeasurements::MoveTop(const QString &name)
 {
     const QDomElement node = FindM(name);
-    if (not node.isNull())
+    if (node.isNull())
     {
-        const QDomNodeList mList = elementsByTagName(TagMeasurement);
-        if (mList.size() >= 2)
+        return;
+    }
+
+    const QDomNodeList mList = elementsByTagName(TagMeasurement);
+    if (mList.size() >= 2)
+    {
+        const QDomNode top = mList.at(0);
+        if (not top.isNull())
         {
-            const QDomNode top = mList.at(0);
-            if (not top.isNull())
-            {
-                const QDomNodeList list = elementsByTagName(TagBodyMeasurements);
-                list.at(0).insertBefore(node, top);
-            }
+            const QDomNodeList list = elementsByTagName(TagBodyMeasurements);
+            list.at(0).insertBefore(node, top);
         }
     }
 }
@@ -268,14 +284,16 @@ void VMeasurements::MoveTop(const QString &name)
 void VMeasurements::MoveUp(const QString &name)
 {
     const QDomElement node = FindM(name);
-    if (not node.isNull())
+    if (node.isNull())
     {
-        const QDomElement prSibling = node.previousSiblingElement(TagMeasurement);
-        if (not prSibling.isNull())
-        {
-            const QDomNodeList list = elementsByTagName(TagBodyMeasurements);
-            list.at(0).insertBefore(node, prSibling);
-        }
+        return;
+    }
+
+    const QDomElement prSibling = node.previousSiblingElement(TagMeasurement);
+    if (not prSibling.isNull())
+    {
+        const QDomNodeList list = elementsByTagName(TagBodyMeasurements);
+        list.at(0).insertBefore(node, prSibling);
     }
 }
 
@@ -283,14 +301,16 @@ void VMeasurements::MoveUp(const QString &name)
 void VMeasurements::MoveDown(const QString &name)
 {
     const QDomElement node = FindM(name);
-    if (not node.isNull())
+    if (node.isNull())
     {
-        const QDomElement nextSibling = node.nextSiblingElement(TagMeasurement);
-        if (not nextSibling.isNull())
-        {
-            const QDomNodeList list = elementsByTagName(TagBodyMeasurements);
-            list.at(0).insertAfter(node, nextSibling);
-        }
+        return;
+    }
+
+    const QDomElement nextSibling = node.nextSiblingElement(TagMeasurement);
+    if (not nextSibling.isNull())
+    {
+        const QDomNodeList list = elementsByTagName(TagBodyMeasurements);
+        list.at(0).insertAfter(node, nextSibling);
     }
 }
 
@@ -298,17 +318,19 @@ void VMeasurements::MoveDown(const QString &name)
 void VMeasurements::MoveBottom(const QString &name)
 {
     const QDomElement node = FindM(name);
-    if (not node.isNull())
+    if (node.isNull())
     {
-        const QDomNodeList mList = elementsByTagName(TagMeasurement);
-        if (mList.size() >= 2)
+        return;
+    }
+
+    const QDomNodeList mList = elementsByTagName(TagMeasurement);
+    if (mList.size() >= 2)
+    {
+        const QDomNode bottom = mList.at(mList.size() - 1);
+        if (not bottom.isNull())
         {
-            const QDomNode bottom = mList.at(mList.size() - 1);
-            if (not bottom.isNull())
-            {
-                const QDomNodeList list = elementsByTagName(TagBodyMeasurements);
-                list.at(0).insertAfter(node, bottom);
-            }
+            const QDomNodeList list = elementsByTagName(TagBodyMeasurements);
+            list.at(0).insertAfter(node, bottom);
         }
     }
 }
@@ -539,7 +561,7 @@ void VMeasurements::SetCustomer(const QString &text)
 //---------------------------------------------------------------------------------------------------------------------
 auto VMeasurements::BirthDate() const -> QDate
 {
-    return QDate::fromString(UniqueTagText(TagBirthDate, *defBirthDate), "yyyy-MM-dd");
+    return QDate::fromString(UniqueTagText(TagBirthDate, *defBirthDate), QStringLiteral("yyyy-MM-dd"));
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -547,7 +569,7 @@ void VMeasurements::SetBirthDate(const QDate &date)
 {
     if (not IsReadOnly())
     {
-        setTagText(TagBirthDate, date.toString("yyyy-MM-dd"));
+        setTagText(TagBirthDate, date.toString("yyyy-MM-dd"_L1));
     }
 }
 
@@ -567,17 +589,17 @@ void VMeasurements::SetGender(const GenderType &gender)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-auto VMeasurements::PMSystem() const -> QString
+auto VMeasurements::KnownMeasurements() const -> QUuid
 {
-    return UniqueTagText(TagPMSystem, ClearPMCode(p998_S));
+    return QUuid(UniqueTagText(TagPMSystem, QString()));
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VMeasurements::SetPMSystem(const QString &system)
+void VMeasurements::SetKnownMeasurements(const QUuid &system)
 {
     if (not IsReadOnly())
     {
-        setTagText(TagPMSystem, ClearPMCode(system));
+        setTagText(TagPMSystem, system.toString());
     }
 }
 
@@ -771,7 +793,8 @@ void VMeasurements::SetMDescription(const QString &name, const QString &text)
     QDomElement node = FindM(name);
     if (not node.isNull())
     {
-        SetAttribute(node, AttrDescription, text);
+        SetAttributeOrRemoveIf<QString>(node, AttrDescription, text,
+                                        [](const QString &text) noexcept { return text.isEmpty(); });
     }
     else
     {
@@ -833,7 +856,7 @@ auto VMeasurements::MeasurementForDimension(IMD type) const -> QString
     for (int i = 0; i < list.size(); ++i)
     {
         const QDomElement domElement = list.at(i).toElement();
-        if (domElement.isNull() == false)
+        if (!domElement.isNull())
         {
             if (domElement.attribute(AttrDimension) == d)
             {
@@ -1060,13 +1083,13 @@ auto VMeasurements::IMDName(IMD type) -> QString
         case IMD::N:
             return tr("None");
         case IMD::X:
-            return tr("Height") + " (X)";
+            return tr("Height") + " (X)"_L1;
         case IMD::Y:
-            return tr("Size") + " (Y)";
+            return tr("Size") + " (Y)"_L1;
         case IMD::W:
-            return tr("Waist") + " (W)";
+            return tr("Waist") + " (W)"_L1;
         case IMD::Z:
-            return tr("Hip") + " (Z)";
+            return tr("Hip") + " (Z)"_L1;
         default:
             return {};
     }
@@ -1077,11 +1100,12 @@ auto VMeasurements::ListAll() const -> QStringList
 {
     QStringList listNames;
     const QDomNodeList list = elementsByTagName(TagMeasurement);
+    listNames.reserve(list.size());
 
     for (int i = 0; i < list.size(); ++i)
     {
         const QDomElement domElement = list.at(i).toElement();
-        if (domElement.isNull() == false)
+        if (!domElement.isNull())
         {
             listNames.append(domElement.attribute(AttrName));
         }
@@ -1095,6 +1119,7 @@ auto VMeasurements::ListKnown() const -> QStringList
 {
     QStringList listNames;
     const QStringList list = ListAll();
+    listNames.reserve(list.size());
     for (int i = 0; i < list.size(); ++i)
     {
         if (list.at(i).indexOf(CustomMSign) != 0)
@@ -1104,29 +1129,6 @@ auto VMeasurements::ListKnown() const -> QStringList
     }
 
     return listNames;
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-auto VMeasurements::IsDefinedKnownNamesValid() const -> bool
-{
-    QStringList names = AllGroupNames();
-
-    QSet<QString> set;
-    for (const auto &var : names)
-    {
-        set.insert(var);
-    }
-
-    names = ListKnown();
-    for (const auto &var : qAsConst(names))
-    {
-        if (not set.contains(var))
-        {
-            return false;
-        }
-    }
-
-    return true;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -1146,7 +1148,7 @@ void VMeasurements::CreateEmptyMultisizeFile(Unit unit, const QVector<Measuremen
     mElement.appendChild(CreateElementWithText(TagReadOnly, falseStr));
     mElement.appendChild(createElement(TagNotes));
     mElement.appendChild(CreateElementWithText(TagUnit, UnitsToStr(unit)));
-    mElement.appendChild(CreateElementWithText(TagPMSystem, ClearPMCode(p998_S)));
+    mElement.appendChild(createElement(TagPMSystem));
     mElement.appendChild(CreateDimensions(dimensions));
     mElement.appendChild(createElement(TagRestrictions));
     mElement.appendChild(createElement(TagBodyMeasurements));
@@ -1172,7 +1174,7 @@ void VMeasurements::CreateEmptyIndividualFile(Unit unit)
     mElement.appendChild(CreateElementWithText(TagReadOnly, falseStr));
     mElement.appendChild(createElement(TagNotes));
     mElement.appendChild(CreateElementWithText(TagUnit, UnitsToStr(unit)));
-    mElement.appendChild(CreateElementWithText(TagPMSystem, ClearPMCode(p998_S)));
+    mElement.appendChild(createElement(TagPMSystem));
 
     QDomElement personal = createElement(TagPersonal);
     personal.appendChild(createElement(TagCustomer));
@@ -1229,18 +1231,17 @@ auto VMeasurements::UniqueTagAttr(const QString &tag, const QString &attr, qreal
     {
         return defVal;
     }
-    else
+
+    const QDomNode domNode = nodeList.at(0);
+    if (!domNode.isNull() && domNode.isElement())
     {
-        const QDomNode domNode = nodeList.at(0);
-        if (domNode.isNull() == false && domNode.isElement())
+        const QDomElement domElement = domNode.toElement();
+        if (!domElement.isNull())
         {
-            const QDomElement domElement = domNode.toElement();
-            if (domElement.isNull() == false)
-            {
-                return GetParametrDouble(domElement, attr, u"%1"_s.arg(defVal));
-            }
+            return GetParametrDouble(domElement, attr, u"%1"_s.arg(defVal));
         }
     }
+
     return defVal;
 }
 
@@ -1276,7 +1277,7 @@ auto VMeasurements::FindM(const QString &name) const -> QDomElement
     if (name.isEmpty())
     {
         qWarning() << tr("The measurement name is empty!");
-        return QDomElement();
+        return {};
     }
 
     QDomNodeList list = elementsByTagName(TagMeasurement);
@@ -1284,17 +1285,19 @@ auto VMeasurements::FindM(const QString &name) const -> QDomElement
     for (int i = 0; i < list.size(); ++i)
     {
         const QDomElement domElement = list.at(i).toElement();
-        if (domElement.isNull() == false)
+        if (domElement.isNull())
         {
-            const QString parameter = domElement.attribute(AttrName);
-            if (parameter == name)
-            {
-                return domElement;
-            }
+            continue;
+        }
+
+        const QString parameter = domElement.attribute(AttrName);
+        if (parameter == name)
+        {
+            return domElement;
         }
     }
 
-    return QDomElement();
+    return {};
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -1305,14 +1308,13 @@ auto VMeasurements::ReadType() const -> MeasurementsType
     {
         return MeasurementsType::Multisize;
     }
+
     if (root.tagName() == TagVIT)
     {
         return MeasurementsType::Individual;
     }
-    else
-    {
-        return MeasurementsType::Unknown;
-    }
+
+    return MeasurementsType::Unknown;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -1412,18 +1414,6 @@ auto VMeasurements::EvalFormula(VContainer *data, const QString &formula, bool *
         *ok = false;
         return 0;
     }
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-auto VMeasurements::ClearPMCode(const QString &code) const -> QString
-{
-    QString clear = code;
-    const vsizetype index = clear.indexOf('p'_L1);
-    if (index == 0)
-    {
-        clear.remove(0, 1);
-    }
-    return clear;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -1707,6 +1697,7 @@ void VMeasurements::ReadMeasurement(const QDomElement &dom, QSharedPointer<VCont
         meash->SetCorrections(corrections);
         meash->SetGuiText(fullName);
         meash->SetDescription(description);
+        meash->SetKnownMeasurementsId(KnownMeasurements());
 
         if (meash->IsCustom())
         {
@@ -1734,6 +1725,7 @@ void VMeasurements::ReadMeasurement(const QDomElement &dom, QSharedPointer<VCont
         meash->SetDescription(description);
         meash->SetSpecialUnits(specialUnits);
         meash->SetDimension(dimension);
+        meash->SetKnownMeasurementsId(KnownMeasurements());
 
         if (meash->IsCustom())
         {

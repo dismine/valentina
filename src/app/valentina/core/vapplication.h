@@ -35,6 +35,7 @@
 #include "vcmdexport.h"
 
 class VApplication; // use in define
+class VKnownMeasurementsDatabase;
 
 /**
  * @brief The VApplication class reimplamentation QApplication class.
@@ -65,11 +66,16 @@ public:
     void StartLogging();
     auto LogFile() -> QTextStream *;
 
+    auto KnownMeasurementsDatabase() -> VKnownMeasurementsDatabase * override;
+    void RestartKnownMeasurementsDatabaseWatcher();
+
     auto TrVars() -> const VTranslateVars * override;
 
     auto static IsGUIMode() -> bool;
     auto IsAppInGUIMode() const -> bool override;
     auto IsPedantic() const -> bool override;
+
+    void OpenSettings() override;
 
     static auto VApp() -> VApplication *;
     static auto CommandLine() -> VCommandLinePtr;
@@ -80,6 +86,8 @@ protected:
 
 protected slots:
     void AboutToQuit() override;
+    void RepopulateMeasurementsDatabase(const QString &path);
+    void KnownMeasurementsPathChanged(const QString &oldPath, const QString &newPath);
 
 private:
     // cppcheck-suppress unknownMacro
@@ -89,6 +97,9 @@ private:
 
     QSharedPointer<VLockGuard<QFile>> m_lockLog{};
     std::shared_ptr<QTextStream> m_out{nullptr};
+
+    VKnownMeasurementsDatabase *m_knownMeasurementsDatabase{nullptr};
+    QFileSystemWatcher *m_knownMeasurementsDatabaseWatcher{nullptr};
 
     static auto LogDirPath() -> QString;
     static auto LogPath() -> QString;

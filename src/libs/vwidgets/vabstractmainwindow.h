@@ -57,9 +57,9 @@ public slots:
     virtual void UpdateVisibilityGroups();
     virtual void UpdateDetailsList();
     virtual void ZoomFitBestCurrent();
+    void WindowsLocale();
 
 protected slots:
-    void WindowsLocale();
     void ExportDataToCSV();
 
 protected:

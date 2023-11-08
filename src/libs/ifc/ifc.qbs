@@ -86,6 +86,8 @@ VLib {
             "vabstractmconverter.cpp",
             "vlabeltemplateconverter.cpp",
             "vwatermarkconverter.cpp",
+            "vknownmeasurementsconverter.cpp",
+            "vknownmeasurementsconverter.h",
         ]
     }
 

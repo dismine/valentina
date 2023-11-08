@@ -161,6 +161,12 @@ auto VPatternImage::GetPixmap() const -> QPixmap
 //---------------------------------------------------------------------------------------------------------------------
 auto VPatternImage::GetPixmap(int width, int height) const -> QPixmap
 {
+    return GetPixmap(QSize(width, height));
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+auto VPatternImage::GetPixmap(const QSize &size) const -> QPixmap
+{
     if (not IsValid())
     {
         return {};
@@ -171,7 +177,7 @@ auto VPatternImage::GetPixmap(int width, int height) const -> QPixmap
     buffer.open(QIODevice::ReadOnly);
 
     QImageReader imageReader(&buffer);
-    imageReader.setScaledSize(QSize(width, height));
+    imageReader.setScaledSize(size);
 
     QImage image = imageReader.read();
     if (image.isNull())
@@ -208,4 +214,16 @@ auto VPatternImage::Size() const -> QSize
     buffer.open(QIODevice::ReadOnly);
 
     return QImageReader(&buffer).size();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+auto VPatternImage::Title() const -> QString
+{
+    return m_title;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VPatternImage::SetTitle(const QString &newTitle)
+{
+    m_title = newTitle;
 }

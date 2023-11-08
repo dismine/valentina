@@ -54,7 +54,6 @@ DEFINES += SRCDIR=\\\"$$PWD/\\\"
 
 SOURCES += \
     qttestmainlambda.cpp \
-    tst_measurementregexp.cpp \
     tst_qmuparsererrormsg.cpp \
     tst_tstranslation.cpp \
     tst_buitinregexp.cpp \
@@ -66,7 +65,6 @@ SOURCES += \
 
 HEADERS += \
     stable.h \
-    tst_measurementregexp.h \
     tst_qmuparsererrormsg.h \
     tst_tstranslation.h \
     tst_buitinregexp.h \

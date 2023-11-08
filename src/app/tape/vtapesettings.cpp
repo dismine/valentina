@@ -43,20 +43,33 @@ namespace
 QT_WARNING_PUSH
 QT_WARNING_DISABLE_CLANG("-Wunused-member-function")
 
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingKnownMeasurementsRecentFileList, ("kmRecentFileList"_L1)) // NOLINT
+
 Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingPathsTemplates, ("paths/templates"_L1)) // NOLINT
 
 Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingDataBaseGeometry, ("database/geometry"_L1))   // NOLINT
 Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingSearchHistoryTape, ("searchHistory/tape"_L1)) // NOLINT
+// NOLINTNEXTLINE
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingSearchHistoryKnownMeasurments, ("searchHistory/knownMeasurements"_L1))
 
 // NOLINTNEXTLINE
 Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingSearchOptionsTapeUseUnicodeProperties,
                           ("searchOptions/tapeUseUnicodeProperties"_L1))
 // NOLINTNEXTLINE
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingSearchOptionsKMUseUnicodeProperties,
+                          ("searchOptions/kmUseUnicodeProperties"_L1))
+// NOLINTNEXTLINE
 Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingSearchOptionsTapeWholeWord, ("searchOptions/tapeWholeWord"_L1))
+// NOLINTNEXTLINE
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingSearchOptionsKMWholeWord, ("searchOptions/kmWholeWord"_L1))
 // NOLINTNEXTLINE
 Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingSearchOptionsTapeRegexp, ("searchOptions/tapeRegexp"_L1))
 // NOLINTNEXTLINE
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingSearchOptionsKMRegexp, ("searchOptions/kmRegexp"_L1))
+// NOLINTNEXTLINE
 Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingSearchOptionsTapeMatchCase, ("searchOptions/tapeMatchCase"_L1))
+// NOLINTNEXTLINE
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingSearchOptionsKMMatchCase, ("searchOptions/kmMatchCase"_L1))
 QT_WARNING_POP
 } // namespace
 
@@ -104,6 +117,18 @@ void VTapeSettings::SetTapeSearchHistory(const QStringList &history)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+auto VTapeSettings::GetKMSearchHistory() const -> QStringList
+{
+    return value(*settingSearchHistoryKnownMeasurments).toStringList();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VTapeSettings::SetKMSearchHistory(const QStringList &history)
+{
+    setValue(*settingSearchHistoryKnownMeasurments, history);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 auto VTapeSettings::GetTapeSearchOptionUseUnicodeProperties() const -> bool
 {
     return value(*settingSearchOptionsTapeUseUnicodeProperties, false).toBool();
@@ -113,6 +138,18 @@ auto VTapeSettings::GetTapeSearchOptionUseUnicodeProperties() const -> bool
 void VTapeSettings::SetTapeSearchOptionUseUnicodeProperties(bool value)
 {
     setValue(*settingSearchOptionsTapeUseUnicodeProperties, value);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+auto VTapeSettings::GetKMSearchOptionUseUnicodeProperties() const -> bool
+{
+    return value(*settingSearchOptionsKMUseUnicodeProperties, false).toBool();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VTapeSettings::SetKMSearchOptionUseUnicodeProperties(bool value)
+{
+    setValue(*settingSearchOptionsKMUseUnicodeProperties, value);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -128,6 +165,18 @@ void VTapeSettings::SetTapeSearchOptionWholeWord(bool value)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+auto VTapeSettings::GetKMSearchOptionWholeWord() const -> bool
+{
+    return value(*settingSearchOptionsKMWholeWord, false).toBool();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VTapeSettings::SetKMSearchOptionWholeWord(bool value)
+{
+    setValue(*settingSearchOptionsKMWholeWord, value);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 auto VTapeSettings::GetTapeSearchOptionRegexp() const -> bool
 {
     return value(*settingSearchOptionsTapeRegexp, false).toBool();
@@ -140,6 +189,18 @@ void VTapeSettings::SetTapeSearchOptionRegexp(bool value)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+auto VTapeSettings::GetKMSearchOptionRegexp() const -> bool
+{
+    return value(*settingSearchOptionsKMRegexp, false).toBool();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VTapeSettings::SetKMSearchOptionRegexp(bool value)
+{
+    setValue(*settingSearchOptionsKMRegexp, value);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 auto VTapeSettings::GetTapeSearchOptionMatchCase() const -> bool
 {
     return value(*settingSearchOptionsTapeMatchCase, false).toBool();
@@ -149,4 +210,39 @@ auto VTapeSettings::GetTapeSearchOptionMatchCase() const -> bool
 void VTapeSettings::SetTapeSearchOptionMatchCase(bool value)
 {
     setValue(*settingSearchOptionsTapeMatchCase, value);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+auto VTapeSettings::GetKMSearchOptionMatchCase() const -> bool
+{
+    return value(*settingSearchOptionsKMMatchCase, false).toBool();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VTapeSettings::SetKMSearchOptionMatchCase(bool value)
+{
+    setValue(*settingSearchOptionsKMMatchCase, value);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+auto VTapeSettings::GetRecentKMFileList() const -> QStringList
+{
+    const QStringList files = value(*settingKnownMeasurementsRecentFileList).toStringList();
+    QStringList cleared;
+
+    for (const auto &f : files)
+    {
+        if (QFileInfo::exists(f))
+        {
+            cleared.append(f);
+        }
+    }
+
+    return cleared;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VTapeSettings::SetRecentKMFileList(const QStringList &value)
+{
+    setValue(*settingKnownMeasurementsRecentFileList, value);
 }

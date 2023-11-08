@@ -41,6 +41,7 @@ class DialogTapePreferences;
 }
 
 class TapePreferencesConfigurationPage;
+class TapePreferencesPathPage;
 class QListWidgetItem;
 
 class DialogTapePreferences : public QDialog
@@ -68,6 +69,7 @@ private:
     Ui::DialogTapePreferences *ui;
     bool m_isInitialized{false};
     TapePreferencesConfigurationPage *m_configurationPage;
+    TapePreferencesPathPage *m_pathPage;
 };
 
 #endif // DIALOGTAPEPREFERENCES_H

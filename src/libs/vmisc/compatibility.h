@@ -475,4 +475,17 @@ template <typename T> inline void SetTextAlignment(T *item, Qt::Alignment alignm
 #endif
 }
 
+//---------------------------------------------------------------------------------------------------------------------
+inline void RemoveLast(QString &str)
+{
+#if QT_VERSION >= QT_VERSION_CHECK(6, 5, 0)
+    str.removeLast();
+#else
+    if (!str.isEmpty())
+    {
+        str.remove(str.size() - 1, 1);
+    }
+#endif
+}
+
 #endif // COMPATIBILITY_H

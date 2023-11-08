@@ -30,6 +30,7 @@
 #define DIALOGMDATABASE_H
 
 #include <QDialog>
+#include <QUuid>
 
 #if QT_VERSION < QT_VERSION_CHECK(5, 13, 0)
 #include "../vmisc/defglobal.h"
@@ -41,21 +42,20 @@ class DialogMDataBase;
 }
 
 class QTreeWidgetItem;
+struct VKnownMeasurement;
+class VPatternImage;
 
 class DialogMDataBase : public QDialog
 {
     Q_OBJECT // NOLINT
 
 public:
-    explicit DialogMDataBase(const QStringList &list, QWidget *parent = nullptr);
-    explicit DialogMDataBase(QWidget *parent = nullptr);
+    explicit DialogMDataBase(const QUuid &id, const QStringList &usedMeasurements, QWidget *parent = nullptr);
     ~DialogMDataBase() override;
 
     auto GetNewNames() const -> QStringList;
 
-    void RetranslateGroups();
-
-    static auto ImgTag(const QString &number) -> QString;
+    static auto ImgTag(const VPatternImage &image) -> QString;
 
 protected:
     void changeEvent(QEvent *event) override;
@@ -73,42 +73,25 @@ private:
     Q_DISABLE_COPY_MOVE(DialogMDataBase) // NOLINT
     Ui::DialogMDataBase *ui;
     bool m_selectMode;
-    QStringList m_list{};
+    QStringList m_usedMeasurements{};
 
-    QTreeWidgetItem *m_groupA{nullptr};
-    QTreeWidgetItem *m_groupB{nullptr};
-    QTreeWidgetItem *m_groupC{nullptr};
-    QTreeWidgetItem *m_groupD{nullptr};
-    QTreeWidgetItem *m_groupE{nullptr};
-    QTreeWidgetItem *m_groupF{nullptr};
-    QTreeWidgetItem *m_groupG{nullptr};
-    QTreeWidgetItem *m_groupH{nullptr};
-    QTreeWidgetItem *m_groupI{nullptr};
-    QTreeWidgetItem *m_groupJ{nullptr};
-    QTreeWidgetItem *m_groupK{nullptr};
-    QTreeWidgetItem *m_groupL{nullptr};
-    QTreeWidgetItem *m_groupM{nullptr};
-    QTreeWidgetItem *m_groupN{nullptr};
-    QTreeWidgetItem *m_groupO{nullptr};
-    QTreeWidgetItem *m_groupP{nullptr};
-    QTreeWidgetItem *m_groupQ{nullptr};
+    QList<QTreeWidgetItem *> m_groups{};
+    QUuid m_knownId;
+    QTreeWidgetItem *m_generalGroup{nullptr};
 
-    void InitDataBase(const QStringList &list = QStringList());
-    void InitGroup(QTreeWidgetItem **group, const QString &groupName, const QStringList &mList,
-                   const QStringList &list = QStringList());
-    static void FilterGroup(QTreeWidgetItem *group, const QString &search);
+    void InitDataBase(const QStringList &usedMeasurements = QStringList());
+    auto InitGroup(const QString &groupName, const QMap<int, VKnownMeasurement> &mlist,
+                   const QStringList &list = QStringList()) -> QTreeWidgetItem *;
+    void FilterGroup(QTreeWidgetItem *group, const QString &search) const;
 
     Q_REQUIRED_RESULT auto AddGroup(const QString &text) -> QTreeWidgetItem *;
 
-    void AddMeasurement(QTreeWidgetItem *group, const QString &name, const QStringList &list);
+    void AddMeasurement(QTreeWidgetItem *group, const VKnownMeasurement &measurement, const QStringList &list);
 
     void ReadSettings();
     void WriteSettings();
 
-    static auto ItemFullDescription(QTreeWidgetItem *item, bool showImage = true) -> QString;
-
-    static void RetranslateGroup(QTreeWidgetItem *group, const QString &groupText, const QStringList &list);
-    static void RetranslateMeasurement(QTreeWidgetItem *group, int index, const QString &name);
+    auto ItemFullDescription(QTreeWidgetItem *item, bool showImage = true) const -> QString;
 
     static void ChangeCheckState(QTreeWidgetItem *group, Qt::CheckState check);
     auto GlobalCheckState() const -> Qt::CheckState;

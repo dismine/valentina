@@ -175,6 +175,7 @@ unix{
             ../../../share/icons/48x48/mimetypes/application-x-valentina-pattern.png \
             ../../../share/icons/48x48/mimetypes/application-x-valentina-i-measurements.png \
             ../../../share/icons/48x48/mimetypes/application-x-valentina-s-measurements.png \
+            ../../../share/icons/48x48/mimetypes/application-x-valentina-k-measurements.png \
             ../../../share/icons/48x48/mimetypes/application-x-valentina-layout.png
 
         hicolor_64_apps.path = $$DATADIR/icons/hicolor/64x64/apps/
@@ -188,6 +189,7 @@ unix{
             ../../../share/icons/64x64/mimetypes/application-x-valentina-pattern.png \
             ../../../share/icons/64x64/mimetypes/application-x-valentina-i-measurements.png \
             ../../../share/icons/64x64/mimetypes/application-x-valentina-s-measurements.png \
+            ../../../share/icons/64x64/mimetypes/application-x-valentina-k-measurements.png \
             ../../../share/icons/64x64/mimetypes/application-x-valentina-layout.png
 
         hicolor_128_apps.path = $$DATADIR/icons/hicolor/128x128/apps/
@@ -201,6 +203,7 @@ unix{
             ../../../share/icons/128x128/mimetypes/application-x-valentina-pattern.png \
             ../../../share/icons/128x128/mimetypes/application-x-valentina-i-measurements.png \
             ../../../share/icons/128x128/mimetypes/application-x-valentina-s-measurements.png \
+            ../../../share/icons/128x128/mimetypes/application-x-valentina-k-measurements.png \
             ../../../share/icons/128x128/mimetypes/application-x-valentina-layout.png
 
         hicolor_256_apps.path = $$DATADIR/icons/hicolor/256x256/apps/
@@ -214,6 +217,7 @@ unix{
             ../../../share/icons/256x256/mimetypes/application-x-valentina-pattern.png \
             ../../../share/icons/256x256/mimetypes/application-x-valentina-i-measurements.png \
             ../../../share/icons/256x256/mimetypes/application-x-valentina-s-measurements.png \
+            ../../../share/icons/256x256/mimetypes/application-x-valentina-k-measurements.png \
             ../../../share/icons/256x256/mimetypes/application-x-valentina-layout.png
 
         hicolor_512_apps.path = $$DATADIR/icons/hicolor/512x512/apps/
@@ -227,6 +231,7 @@ unix{
             ../../../share/icons/512x512/mimetypes/application-x-valentina-pattern.png \
             ../../../share/icons/512x512/mimetypes/application-x-valentina-i-measurements.png \
             ../../../share/icons/512x512/mimetypes/application-x-valentina-s-measurements.png \
+            ../../../share/icons/512x512/mimetypes/application-x-valentina-k-measurements.png \
             ../../../share/icons/512x512/mimetypes/application-x-valentina-layout.png
 
         # Path to translation files after installation
@@ -310,6 +315,7 @@ unix{
             icns_resources.path = $$RESOURCES_DIR/
             icns_resources.files += $$PWD/../../../dist/macx/i-measurements.icns
             icns_resources.files += $$PWD/../../../dist/macx/s-measurements.icns
+            icns_resources.files += $$PWD/../../../dist/macx/k-measurements.icns
             icns_resources.files += $$PWD/../../../dist/macx/pattern.icns
             icns_resources.files += $$PWD/../../../dist/macx/layout.icns
 
@@ -341,6 +347,7 @@ win32:*g++* {
         $$PWD/../../../dist/win/valentina.ico \
         $$PWD/../../../dist/win/i-measurements.ico \
         $$PWD/../../../dist/win/s-measurements.ico \
+        $$PWD/../../../dist/win/k-measurements.ico \
         $$PWD/../../../dist/win/pattern.ico \
         $$PWD/../../../dist/win/layout.ico \
         $$PWD/../../../dist/win/pdftops.exe \

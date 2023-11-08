@@ -69,6 +69,7 @@ auto PreferencesPathPage::Apply() -> QStringList
     VValentinaSettings *settings = VAbstractValApplication::VApp()->ValentinaSettings();
     settings->SetPathSVGFonts(ui->pathTable->item(0, 1)->text());
     settings->SetPathFontCorrections(ui->pathTable->item(1, 1)->text());
+    settings->SetPathKnownMeasurements(ui->pathTable->item(2, 1)->text());
 
     return {}; // No changes which require restart.
 }
@@ -103,6 +104,9 @@ void PreferencesPathPage::DefaultPath()
         case 1: // font corrections
             path = VCommonSettings::GetDefPathFontCorrections();
             break;
+        case 2: // known measurements
+            path = VCommonSettings::GetDefPathKnownMeasurements();
+            break;
         default:
             break;
     }
@@ -126,6 +130,9 @@ void PreferencesPathPage::EditPath()
             break;
         case 1: // font corrections
             path = VAbstractValApplication::VApp()->ValentinaSettings()->GetPathFontCorrections();
+            break;
+        case 2: // known measurements
+            path = VAbstractValApplication::VApp()->ValentinaSettings()->GetPathKnownMeasurements();
             break;
         default:
             break;
@@ -164,7 +171,7 @@ void PreferencesPathPage::EditPath()
 void PreferencesPathPage::InitTable()
 {
     ui->pathTable->clearContents();
-    ui->pathTable->setRowCount(2);
+    ui->pathTable->setRowCount(3);
     ui->pathTable->setColumnCount(2);
 
     const VValentinaSettings *settings = VAbstractValApplication::VApp()->ValentinaSettings();
@@ -181,6 +188,13 @@ void PreferencesPathPage::InitTable()
         auto *item = new QTableWidgetItem(settings->GetPathFontCorrections());
         item->setToolTip(settings->GetPathFontCorrections());
         ui->pathTable->setItem(1, 1, item);
+    }
+
+    {
+        ui->pathTable->setItem(2, 0, new QTableWidgetItem(tr("My known measurements")));
+        auto *item = new QTableWidgetItem(settings->GetPathKnownMeasurements());
+        item->setToolTip(settings->GetPathKnownMeasurements());
+        ui->pathTable->setItem(2, 1, item);
     }
 
     ui->pathTable->verticalHeader()->setDefaultSectionSize(20);

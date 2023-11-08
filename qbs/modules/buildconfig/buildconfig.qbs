@@ -560,12 +560,10 @@ Module {
                     "-Qunused-arguments",
                     "-fcolor-diagnostics",
                     "-Wno-gnu-zero-variadic-macro-arguments",
-                    "-fms-extensions" // Need for pragma message
+                    "-fms-extensions", // Need for pragma message
+                    "-Wcompletion-handler",
+                    "-Wno-pre-c++17-compat-pedantic"
                 )
-
-                if (Utilities.versionCompare(cpp.compilerVersion, "14") < 0) {
-                    debugFlags.push("-Wweak-template-vtables")
-                }
 
                 if (Utilities.versionCompare(cpp.compilerVersion, "13") >= 0) {
                     debugFlags.push(
@@ -573,6 +571,16 @@ Module {
                         "-Wno-error=reserved-identifier",
                         "-Wunused-but-set-parameter",
                         "-Wunused-but-set-variable"
+                    )
+                }
+
+                if (Utilities.versionCompare(cpp.compilerVersion, "14") < 0) {
+                    debugFlags.push("-Wweak-template-vtables")
+                }
+
+                if (Utilities.versionCompare(cpp.compilerVersion, "14") >= 0) {
+                    debugFlags.push(
+                        "-Wbitwise-instead-of-logical"
                     )
                 }
 

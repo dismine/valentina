@@ -34,6 +34,7 @@
 class TST_NameRegExp : public QObject
 {
     Q_OBJECT // NOLINT
+
 public:
     explicit TST_NameRegExp(QObject *parent = nullptr);
 
@@ -42,10 +43,6 @@ signals:
 private slots:
     void TestNameRegExp_data();
     void TestNameRegExp();
-    void TestOriginalMeasurementNamesRegExp_data();
-    void TestOriginalMeasurementNamesRegExp();
-    void TestCorrectOrderMeasurement_data();
-    void TestCorrectOrderMeasurement();
 };
 
 #endif // TST_NAMEREGEXP_H

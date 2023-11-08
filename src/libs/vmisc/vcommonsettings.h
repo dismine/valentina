@@ -40,6 +40,7 @@
 
 #include "../vlayout/vlayoutdef.h"
 #include "../vmisc/def.h"
+#include "quuid.h"
 
 class QMarginsF;
 
@@ -85,6 +86,10 @@ public:
     auto GetPathFontCorrections() const -> QString;
     void SetPathFontCorrections(const QString &value);
 
+    static auto GetDefPathKnownMeasurements() -> QString;
+    auto GetPathKnownMeasurements() const -> QString;
+    void SetPathKnownMeasurements(const QString &value);
+
     auto GetOsSeparator() const -> bool;
     void SetOsSeparator(const bool &value);
 
@@ -102,8 +107,8 @@ public:
     auto GetPieceLabelLocale() const -> QString;
     void SetPieceLabelLocale(const QString &value);
 
-    auto GetPMSystemCode() const -> QString;
-    void SetPMSystemCode(const QString &value);
+    auto GetKnownMeasurementsId() const -> QUuid;
+    void SetKnownMeasurementsId(const QUuid &value);
 
     auto GetUnit() const -> QString;
     void SetUnit(const QString &value);
@@ -147,8 +152,14 @@ public:
     auto GetGeometry() const -> QByteArray;
     void SetGeometry(const QByteArray &value);
 
+    auto GetKMGeometry() const -> QByteArray;
+    void SetKMGeometry(const QByteArray &value);
+
     auto GetToolbarsState() const -> QByteArray;
     void SetToolbarsState(const QByteArray &value);
+
+    auto GetKMToolbarsState() const -> QByteArray;
+    void SetKMToolbarsState(const QByteArray &value);
 
     auto GetPreferenceDialogSize() const -> QSize;
     void SetPreferenceDialogSize(const QSize &sz);
@@ -340,6 +351,7 @@ public:
 
 signals:
     void SVGFontsPathChanged(const QString &oldPath, const QString &newPath);
+    void KnownMeasurementsPathChanged(const QString &oldPath, const QString &newPath);
 
 protected:
     template <typename T>

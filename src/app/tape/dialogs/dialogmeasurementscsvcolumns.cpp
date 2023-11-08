@@ -37,10 +37,16 @@
 #include <QPushButton>
 #include <QShowEvent>
 
+#if QT_VERSION < QT_VERSION_CHECK(6, 4, 0)
+#include "../vmisc/compatibility.h"
+#endif
+
+using namespace Qt::Literals::StringLiterals;
+
 //---------------------------------------------------------------------------------------------------------------------
 DialogMeasurementsCSVColumns::DialogMeasurementsCSVColumns(const QString &filename, MeasurementsType type,
-                                                           QWidget *parent) :
-    QDialog(parent),
+                                                           QWidget *parent)
+  : QDialog(parent),
     ui(new Ui::DialogMeasurementsCSVColumns),
     m_fileName{filename},
     m_type(type)
@@ -53,8 +59,8 @@ DialogMeasurementsCSVColumns::DialogMeasurementsCSVColumns(const QString &filena
 //---------------------------------------------------------------------------------------------------------------------
 DialogMeasurementsCSVColumns::DialogMeasurementsCSVColumns(const QString &filename, MeasurementsType type,
                                                            const QList<MeasurementDimension_p> &dimensions,
-                                                           QWidget *parent) :
-    QDialog(parent),
+                                                           QWidget *parent)
+  : QDialog(parent),
     ui(new Ui::DialogMeasurementsCSVColumns),
     m_fileName{filename},
     m_type(type),
@@ -94,8 +100,8 @@ void DialogMeasurementsCSVColumns::changeEvent(QEvent *event)
 //---------------------------------------------------------------------------------------------------------------------
 void DialogMeasurementsCSVColumns::showEvent(QShowEvent *event)
 {
-    QDialog::showEvent( event );
-    if ( event->spontaneous() )
+    QDialog::showEvent(event);
+    if (event->spontaneous())
     {
         return;
     }
@@ -116,48 +122,47 @@ void DialogMeasurementsCSVColumns::showEvent(QShowEvent *event)
         InitImportHeaders();
         ShowImportPreview();
 
-        connect(ui->comboBoxName, QOverload<int>::of(&QComboBox::currentIndexChanged),
-                this, &DialogMeasurementsCSVColumns::ColumnChanged);
-        connect(ui->comboBoxValue, QOverload<int>::of(&QComboBox::currentIndexChanged),
-                this, &DialogMeasurementsCSVColumns::ColumnChanged);
+        connect(ui->comboBoxName, QOverload<int>::of(&QComboBox::currentIndexChanged), this,
+                &DialogMeasurementsCSVColumns::ColumnChanged);
+        connect(ui->comboBoxValue, QOverload<int>::of(&QComboBox::currentIndexChanged), this,
+                &DialogMeasurementsCSVColumns::ColumnChanged);
 
         if (m_type == MeasurementsType::Multisize)
         {
             if (not m_dimensions.empty())
             {
-                connect(ui->comboBoxShiftA, QOverload<int>::of(&QComboBox::currentIndexChanged),
-                        this, &DialogMeasurementsCSVColumns::ColumnChanged);
+                connect(ui->comboBoxShiftA, QOverload<int>::of(&QComboBox::currentIndexChanged), this,
+                        &DialogMeasurementsCSVColumns::ColumnChanged);
             }
 
             if (m_dimensions.size() > 1)
             {
-                connect(ui->comboBoxShiftB, QOverload<int>::of(&QComboBox::currentIndexChanged),
-                        this, &DialogMeasurementsCSVColumns::ColumnChanged);
+                connect(ui->comboBoxShiftB, QOverload<int>::of(&QComboBox::currentIndexChanged), this,
+                        &DialogMeasurementsCSVColumns::ColumnChanged);
             }
 
             if (m_dimensions.size() > 2)
             {
-                connect(ui->comboBoxShiftC, QOverload<int>::of(&QComboBox::currentIndexChanged),
-                        this, &DialogMeasurementsCSVColumns::ColumnChanged);
+                connect(ui->comboBoxShiftC, QOverload<int>::of(&QComboBox::currentIndexChanged), this,
+                        &DialogMeasurementsCSVColumns::ColumnChanged);
             }
         }
 
-
-        connect(ui->comboBoxFullName, QOverload<int>::of(&QComboBox::currentIndexChanged),
-                this, &DialogMeasurementsCSVColumns::ColumnChanged);
-        connect(ui->comboBoxDescription, QOverload<int>::of(&QComboBox::currentIndexChanged),
-                this, &DialogMeasurementsCSVColumns::ColumnChanged);
+        connect(ui->comboBoxFullName, QOverload<int>::of(&QComboBox::currentIndexChanged), this,
+                &DialogMeasurementsCSVColumns::ColumnChanged);
+        connect(ui->comboBoxDescription, QOverload<int>::of(&QComboBox::currentIndexChanged), this,
+                &DialogMeasurementsCSVColumns::ColumnChanged);
 
         CheckStatus();
     }
 
-    m_isInitialized = true;//first show windows are held
+    m_isInitialized = true; // first show windows are held
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 void DialogMeasurementsCSVColumns::ColumnChanged()
 {
-    auto *control = qobject_cast<QComboBox*>(sender());
+    auto *control = qobject_cast<QComboBox *>(sender());
 
     if (control == ui->comboBoxName)
     {
@@ -229,7 +234,7 @@ auto DialogMeasurementsCSVColumns::ColumnHeader(int column) const -> QString
     if (m_type == MeasurementsType::Individual)
     {
         const auto individualColumn = static_cast<IndividualMeasurementsColumns>(column);
-        switch(individualColumn)
+        switch (individualColumn)
         {
             case IndividualMeasurementsColumns::Name:
                 return tr("Name", "measurement column");
@@ -245,8 +250,9 @@ auto DialogMeasurementsCSVColumns::ColumnHeader(int column) const -> QString
     }
     else
     {
+        const QString suffix = QStringLiteral(" (%1):");
         const auto multisizeColumn = static_cast<MultisizeMeasurementsColumns>(column);
-        switch(multisizeColumn)
+        switch (multisizeColumn)
         {
             case MultisizeMeasurementsColumns::Name:
                 return tr("Name", "measurement column");
@@ -256,7 +262,7 @@ auto DialogMeasurementsCSVColumns::ColumnHeader(int column) const -> QString
                 if (not m_dimensions.empty())
                 {
                     MeasurementDimension_p dimension = m_dimensions.at(0);
-                    return tr("Shift (%1):", "measurement column").arg(dimension->Name());
+                    return tr("Shift", "measurement column") + suffix.arg(dimension->Name());
                 }
                 else
                 {
@@ -266,7 +272,7 @@ auto DialogMeasurementsCSVColumns::ColumnHeader(int column) const -> QString
                 if (m_dimensions.size() > 1)
                 {
                     MeasurementDimension_p dimension = m_dimensions.at(1);
-                    return tr("Shift (%1):", "measurement column").arg(dimension->Name());
+                    return tr("Shift", "measurement column") + suffix.arg(dimension->Name());
                 }
                 else
                 {
@@ -276,7 +282,7 @@ auto DialogMeasurementsCSVColumns::ColumnHeader(int column) const -> QString
                 if (m_dimensions.size() > 2)
                 {
                     MeasurementDimension_p dimension = m_dimensions.at(2);
-                    return tr("Shift (%1):", "measurement column").arg(dimension->Name());
+                    return tr("Shift", "measurement column") + suffix.arg(dimension->Name());
                 }
                 else
                 {
@@ -287,7 +293,7 @@ auto DialogMeasurementsCSVColumns::ColumnHeader(int column) const -> QString
             case MultisizeMeasurementsColumns::Description:
                 return tr("Description", "measurement column");
             default:
-            return {};
+                return {};
         }
     }
 }
@@ -336,9 +342,9 @@ auto DialogMeasurementsCSVColumns::ColumnsValid() -> bool
 
     const QColor errorColor = Qt::red;
 
-    auto ChangeColumnColor = [this, errorColor]
-        (QLabel *label, bool &columnFlag, MultisizeMeasurementsColumns multisizeColumn,
-         IndividualMeasurementsColumns individualColumn)
+    auto ChangeColumnColor = [this, errorColor](QLabel *label, bool &columnFlag,
+                                                MultisizeMeasurementsColumns multisizeColumn,
+                                                IndividualMeasurementsColumns individualColumn)
     {
         if (m_type == MeasurementsType::Multisize ? not ColumnValid(multisizeColumn)
                                                   : not ColumnValid(individualColumn))
@@ -424,7 +430,7 @@ void DialogMeasurementsCSVColumns::InitColumnsMap()
     QSharedPointer<QxtCsvModel> csv = DialogMeasurementsCSVColumns::CSVModel();
     m_columnsMap.clear();
 
-    auto InitColumn = [this, csv](int column, int &index, bool forceSkip=false)
+    auto InitColumn = [this, csv](int column, int &index, bool forceSkip = false)
     {
         if (forceSkip)
         {
@@ -449,7 +455,7 @@ void DialogMeasurementsCSVColumns::InitColumnsMap()
         m_columnsMap.resize(static_cast<int>(IndividualMeasurementsColumns::LAST_DO_NOT_USE));
         int index = -1;
 
-        for(int column = 0; column < static_cast<int>(IndividualMeasurementsColumns::LAST_DO_NOT_USE); ++column)
+        for (int column = 0; column < static_cast<int>(IndividualMeasurementsColumns::LAST_DO_NOT_USE); ++column)
         {
             InitColumn(column, index);
         }
@@ -488,9 +494,9 @@ void DialogMeasurementsCSVColumns::InitColumnsControls()
         control->blockSignals(true);
         control->clear();
 
-        for(int i=0; i < inputColumnCount; ++i)
+        for (int i = 0; i < inputColumnCount; ++i)
         {
-            control->addItem(QString::number(i+1), i);
+            control->addItem(QString::number(i + 1), i);
         }
 
         if (not ColumnMandatory(column))
@@ -566,7 +572,7 @@ void DialogMeasurementsCSVColumns::InitImportHeaders()
     ui->tableWidgetImport->clear();
     ui->tableWidgetImport->setColumnCount(columns);
 
-    auto AddHeader = [this](int column, bool visible=true)
+    auto AddHeader = [this](int column, bool visible = true)
     {
         auto *header = new QTableWidgetItem(ColumnHeader(column));
         ui->tableWidgetImport->setHorizontalHeaderItem(column, header);
@@ -618,17 +624,17 @@ void DialogMeasurementsCSVColumns::ShowInputPreview()
     ui->tableWidgetInput->horizontalHeader()->setVisible(m_withHeader);
     if (m_withHeader)
     {
-        for(int column=0; column<columns; ++column)
+        for (int column = 0; column < columns; ++column)
         {
             auto *header = new QTableWidgetItem(csv->headerText(column));
-            header->setToolTip(QString::number(column+1));
+            header->setToolTip(QString::number(column + 1));
             ui->tableWidgetInput->setHorizontalHeaderItem(column, header);
         }
     }
 
-    for (int row=0; row < rows; ++row)
+    for (int row = 0; row < rows; ++row)
     {
-        for(int column=0; column<columns; ++column)
+        for (int column = 0; column < columns; ++column)
         {
             const QString text = csv->text(row, column);
             auto *item = new QTableWidgetItem(text);
@@ -664,9 +670,9 @@ void DialogMeasurementsCSVColumns::ShowImportPreview()
     ui->tableWidgetImport->clearContents();
     ui->tableWidgetImport->setRowCount(rows);
 
-    for (int row=0; row < rows; ++row)
+    for (int row = 0; row < rows; ++row)
     {
-        for(int column=0; column < importColumns; ++column)
+        for (int column = 0; column < importColumns; ++column)
         {
             const int tableColumn = m_columnsMap.at(column);
             if (tableColumn >= 0 && tableColumn < columns)
@@ -721,32 +727,34 @@ void DialogMeasurementsCSVColumns::HackColumnControls()
 //---------------------------------------------------------------------------------------------------------------------
 void DialogMeasurementsCSVColumns::RetranslateLabels()
 {
-    ui->labelName->setText(tr("Name") + "*:");
+    ui->labelName->setText(tr("Name", "measurement column") + "*:"_L1);
 
     if (m_type == MeasurementsType::Individual)
     {
-        ui->labelValue->setText(tr("Value") + "*:");
+        ui->labelValue->setText(tr("Value", "measurement column") + "*:"_L1);
     }
     else
     {
-        ui->labelValue->setText(tr("Base value") + "*:");
+        ui->labelValue->setText(tr("Base value", "measurement column") + "*:"_L1);
+
+        const QString suffix = QStringLiteral(" (%1)");
 
         if (not m_dimensions.empty())
         {
             MeasurementDimension_p dimension = m_dimensions.at(0);
-            ui->labelShiftA->setText(tr("Shift (%1)*:").arg(dimension->Name()));
+            ui->labelShiftA->setText(tr("Shift", "measurement column") + suffix.arg(dimension->Name()));
         }
 
         if (m_dimensions.size() > 1)
         {
             MeasurementDimension_p dimension = m_dimensions.at(1);
-            ui->labelShiftB->setText(tr("Shift (%1)*:").arg(dimension->Name()));
+            ui->labelShiftB->setText(tr("Shift", "measurement column") + suffix.arg(dimension->Name()));
         }
 
         if (m_dimensions.size() > 2)
         {
             MeasurementDimension_p dimension = m_dimensions.at(2);
-            ui->labelShiftC->setText(tr("Shift (%1)*:").arg(dimension->Name()));
+            ui->labelShiftC->setText(tr("Shift", "measurement column") + suffix.arg(dimension->Name()));
         }
     }
 }
@@ -845,8 +853,7 @@ void DialogMeasurementsCSVColumns::CheckStatus()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-template<class T>
-void DialogMeasurementsCSVColumns::HackWidget(T **widget)
+template <class T> void DialogMeasurementsCSVColumns::HackWidget(T **widget)
 {
     delete *widget;
     *widget = new T();
@@ -854,8 +861,7 @@ void DialogMeasurementsCSVColumns::HackWidget(T **widget)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-template<class T>
-auto DialogMeasurementsCSVColumns::ColumnValid(T column) const -> bool
+template <class T> auto DialogMeasurementsCSVColumns::ColumnValid(T column) const -> bool
 {
     const int columnNumber = static_cast<int>(column);
     int value = m_columnsMap.at(columnNumber);
@@ -865,7 +871,7 @@ auto DialogMeasurementsCSVColumns::ColumnValid(T column) const -> bool
         return true;
     }
 
-    for (int c=0; c < m_columnsMap.size(); ++c)
+    for (int c = 0; c < m_columnsMap.size(); ++c)
     {
         if (c == columnNumber)
         {
@@ -882,8 +888,7 @@ auto DialogMeasurementsCSVColumns::ColumnValid(T column) const -> bool
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-template<class T>
-void DialogMeasurementsCSVColumns::SaveColum(QComboBox *control, T column)
+template <class T> void DialogMeasurementsCSVColumns::SaveColum(QComboBox *control, T column)
 {
     SCASSERT(control != nullptr)
 
