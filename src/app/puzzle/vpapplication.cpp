@@ -43,6 +43,7 @@
 #include "vpuzzleshortcutmanager.h"
 
 #include <QCommandLineParser>
+#include <QEvent>
 #include <QFileOpenEvent>
 #include <QLocalServer>
 #include <QLocalSocket>
@@ -557,8 +558,8 @@ auto VPApplication::event(QEvent *e) -> bool
         // Mac specific).
         case QEvent::FileOpen:
         {
-            auto *fileOpenEvent =
-                static_cast<QFileOpenEvent *>(e); // NOLINT(cppcoreguidelines-pro-type-static-cast-downcast)
+            // NOLINTNEXTLINE(cppcoreguidelines-pro-type-static-cast-downcast)
+            auto *fileOpenEvent = static_cast<QFileOpenEvent *>(e);
             const QString macFileOpen = fileOpenEvent->file();
             if (not macFileOpen.isEmpty())
             {
@@ -572,16 +573,18 @@ auto VPApplication::event(QEvent *e) -> bool
             break;
         }
 #if defined(Q_OS_MAC)
-        case QEvent::ApplicationActivate:
-        {
-            Clean();
-            VPMainWindow *mw = MainWindow();
-            if (mw && not mw->isMinimized())
+        case QEvent::ApplicationStateChange:
+            // NOLINTNEXTLINE(cppcoreguidelines-pro-type-static-cast-downcast)
+            if (static_cast<QApplicationStateChangeEvent *>(e)->applicationState() == Qt::ApplicationActive)
             {
-                mw->show();
+                Clean();
+                VPMainWindow *mw = MainWindow();
+                if (mw && not mw->isMinimized())
+                {
+                    mw->show();
+                }
             }
             return true;
-        }
 #endif // defined(Q_OS_MAC)
         default:
             return VAbstractApplication::event(e);

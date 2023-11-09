@@ -80,6 +80,7 @@
 #if QT_VERSION < QT_VERSION_CHECK(5, 12, 0)
 #include "../vmisc/backport/qscopeguard.h"
 #else
+#include <QEvent>
 #include <QScopeGuard>
 #endif
 
@@ -860,14 +861,16 @@ auto VApplication::event(QEvent *e) -> bool
             break;
         }
 #if defined(Q_OS_MAC)
-        case QEvent::ApplicationActivate:
-        {
-            if (mainWindow && not mainWindow->isMinimized())
+        case QEvent::ApplicationStateChange:
+            // NOLINTNEXTLINE(cppcoreguidelines-pro-type-static-cast-downcast)
+            if (static_cast<QApplicationStateChangeEvent *>(e)->applicationState() == Qt::ApplicationActive)
             {
-                mainWindow->show();
+                if (mainWindow && not mainWindow->isMinimized())
+                {
+                    mainWindow->show();
+                }
+                return true;
             }
-            return true;
-        }
 #endif // defined(Q_OS_MAC)
         default:
             return VAbstractApplication::event(e);

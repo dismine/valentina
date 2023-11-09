@@ -69,6 +69,7 @@
 #include <iostream>
 
 #if !defined(BUILD_REVISION) && defined(QBS_BUILD)
+#include <QEvent>
 #include <vcsRepoState.h>
 #define BUILD_REVISION VCS_REPO_STATE_REVISION
 #endif
@@ -551,6 +552,7 @@ auto MApplication::event(QEvent *e) -> bool
                     TKMMainWindow *mw = MainKMWindow();
                     if (mw)
                     {
+                        m_knownMeasurementsMode = true;
                         mw->LoadFile(macFileOpen); // open file in existing window
                     }
                 }
@@ -567,28 +569,30 @@ auto MApplication::event(QEvent *e) -> bool
             break;
         }
 #if defined(Q_OS_MAC)
-        case QEvent::ApplicationActivate:
-        {
-            if (m_knownMeasurementsMode)
+        case QEvent::ApplicationStateChange:
+            // NOLINTNEXTLINE(cppcoreguidelines-pro-type-static-cast-downcast)
+            if (static_cast<QApplicationStateChangeEvent *>(e)->applicationState() == Qt::ApplicationActive)
             {
-                CleanKMWindows();
-                TKMMainWindow *mw = MainKMWindow();
-                if (mw && not mw->isMinimized())
+                if (m_knownMeasurementsMode)
                 {
-                    mw->show();
+                    CleanKMWindows();
+                    TKMMainWindow *mw = MainKMWindow();
+                    if (mw && not mw->isMinimized())
+                    {
+                        mw->show();
+                    }
                 }
-            }
-            else
-            {
-                CleanTapeWindows();
-                TMainWindow *mw = MainTapeWindow();
-                if (mw && not mw->isMinimized())
+                else
                 {
-                    mw->show();
+                    CleanTapeWindows();
+                    TMainWindow *mw = MainTapeWindow();
+                    if (mw && not mw->isMinimized())
+                    {
+                        mw->show();
+                    }
                 }
+                return true;
             }
-            return true;
-        }
 #endif // defined(Q_OS_MAC)
         default:
             return VAbstractApplication::event(e);
