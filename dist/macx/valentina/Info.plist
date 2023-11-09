@@ -11,7 +11,7 @@
 	<key>LSMinimumSystemVersion</key>
 	<string>${MACOSX_DEPLOYMENT_TARGET}</string>
 	<key>NSHumanReadableCopyright</key>
-        <string>© 2013-2023, Valentina project</string>
+    <string>© 2013-2023, Valentina project</string>
 	<key>CFBundleSignature</key>
 	<string>@TYPEINFO@</string>
 	<key>CFBundleExecutable</key>
@@ -19,9 +19,9 @@
 	<key>CFBundleIdentifier</key>
 	<string>ua.com.smart-pattern.@EXECUTABLE@</string>
 	<key>CFBundleShortVersionString</key>
-        <string>@SHORT_VERSION@</string>
+	<string>@SHORT_VERSION@</string>
 	<key>CFBundleVersion</key>
-        <string>@FULL_VERSION@</string>
+	<string>@FULL_VERSION@</string>
 	<key>CFBundleInfoDictionaryVersion</key>
 	<string>6.0</string>
 	<key>CFBundleDocumentTypes</key>
@@ -33,7 +33,7 @@
 			<string>pattern.icns</string>
 			<key>LSItemContentTypes</key>
 			<array>
-                                <string>ua.com.smart-pattern.val</string>
+				<string>ua.com.smart-pattern.val</string>
 			</array>
 			<key>CFBundleTypeName</key>
 			<string>Valentina pattern file</string>
@@ -47,7 +47,7 @@
 			<string>i-measurements.icns</string>
 			<key>LSItemContentTypes</key>
 			<array>
-                                <string>ua.com.smart-pattern.vit</string>
+				<string>ua.com.smart-pattern.vit</string>
 			</array>
 			<key>CFBundleTypeName</key>
 			<string>Valentina individual measurements</string>
@@ -61,10 +61,10 @@
 			<string>s-measurements.icns</string>
 			<key>LSItemContentTypes</key>
 			<array>
-                                <string>ua.com.smart-pattern.vst</string>
+				<string>ua.com.smart-pattern.vst</string>
 			</array>
 			<key>CFBundleTypeName</key>
-                        <string>Valentina multisize measurements</string>
+			<string>Valentina multisize measurements</string>
 			<key>LSHandlerRank</key>
 			<string>Alternate</string>
 		</dict>
@@ -75,10 +75,10 @@
 			<string>k-measurements.icns</string>
 			<key>LSItemContentTypes</key>
 			<array>
-                                <string>ua.com.smart-pattern.vkm</string>
+				<string>ua.com.smart-pattern.vkm</string>
 			</array>
 			<key>CFBundleTypeName</key>
-                        <string>Valentina known measurements</string>
+			<string>Valentina known measurements</string>
 			<key>LSHandlerRank</key>
 			<string>Alternate</string>
 		</dict>
@@ -94,9 +94,9 @@
 			<key>UTTypeDescription</key>
 			<string>Valentina pattern file</string>
 			<key>UTTypeIconFile</key>
-                        <string>pattern.icns</string>
+			<string>pattern.icns</string>
 			<key>UTTypeIdentifier</key>
-                        <string>ua.com.smart-pattern.val</string>
+			<string>ua.com.smart-pattern.val</string>
 			<key>UTTypeTagSpecification</key>
 			<dict>
 				<key>public.filename-extension</key>
@@ -104,7 +104,7 @@
 					<string>val</string>
 				</array>
 				<key>public.mime-type</key>
-            	<string>text/xml</string>
+				<string>text/xml</string>
 			</dict>
 		</dict>
 		<dict>
@@ -118,7 +118,7 @@
 			<key>UTTypeIconFile</key>
 			<string>i-measurements.icns</string>
 			<key>UTTypeIdentifier</key>
-                        <string>ua.com.smart-pattern.vit</string>
+			<string>ua.com.smart-pattern.vit</string>
 			<key>UTTypeTagSpecification</key>
 			<dict>
 				<key>public.filename-extension</key>
@@ -126,7 +126,7 @@
 					<string>vit</string>
 				</array>
 				<key>public.mime-type</key>
-            	<string>text/xml</string>
+				<string>text/xml</string>
 			</dict>
 		</dict>
 		<dict>
@@ -136,11 +136,11 @@
 				<string>public.xml</string>
 			</array>
 			<key>UTTypeDescription</key>
-            <string>Valentina multisize measurements</string>
+			<string>Valentina multisize measurements</string>
 			<key>UTTypeIconFile</key>
 			<string>s-measurements.icns</string>
 			<key>UTTypeIdentifier</key>
-                        <string>ua.com.smart-pattern.vst</string>
+			<string>ua.com.smart-pattern.vst</string>
 			<key>UTTypeTagSpecification</key>
 			<dict>
 				<key>public.filename-extension</key>
@@ -148,20 +148,21 @@
 					<string>vst</string>
 				</array>
 				<key>public.mime-type</key>
-        <string>text/xml</string>
+				<string>text/xml</string>
 			</dict>
-      <dict>
+		</dict>	
+		<dict>
 			<key>UTTypeConformsTo</key>
 			<array>
 				<string>public.text</string>
 				<string>public.xml</string>
 			</array>
 			<key>UTTypeDescription</key>
-            <string>Valentina known measurements</string>
+			<string>Valentina known measurements</string>
 			<key>UTTypeIconFile</key>
 			<string>k-measurements.icns</string>
 			<key>UTTypeIdentifier</key>
-                        <string>ua.com.smart-pattern.vkm</string>
+			<string>ua.com.smart-pattern.vkm</string>
 			<key>UTTypeTagSpecification</key>
 			<dict>
 				<key>public.filename-extension</key>
@@ -169,10 +170,10 @@
 					<string>vkm</string>
 				</array>
 				<key>public.mime-type</key>
-        <string>text/xml</string>
+				<string>text/xml</string>
 			</dict>
 		</dict>
-    <dict>
+		<dict>
 			<key>UTTypeConformsTo</key>
 			<array>
 				<string>public.text</string>
@@ -183,7 +184,7 @@
 			<key>UTTypeIconFile</key>
 			<string>layout.icns</string>
 			<key>UTTypeIdentifier</key>
-                        <string>ua.com.smart-pattern.vlt</string>
+			<string>ua.com.smart-pattern.vlt</string>
 			<key>UTTypeTagSpecification</key>
 			<dict>
 				<key>public.filename-extension</key>
@@ -191,7 +192,7 @@
 					<string>vlt</string>
 				</array>
 				<key>public.mime-type</key>
-        <string>text/xml</string>
+				<string>text/xml</string>
 			</dict>
 		</dict>
 	</array>

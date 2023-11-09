@@ -32,7 +32,13 @@
 
 class QxtCsvModel;
 class QComboBox;
+
+#if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
 class VTextCodec;
+#else
+class QTextCodec;
+using VTextCodec = QTextCodec;
+#endif
 
 enum class KnownMeasurementsColumns : qint8
 {

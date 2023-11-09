@@ -29,6 +29,10 @@
 #include "../vmisc/def.h"
 #include "vknownmeasurements_p.h"
 
+#include <QMap>
+#include <QSet>
+#include <QString>
+
 //---------------------------------------------------------------------------------------------------------------------
 VKnownMeasurements::VKnownMeasurements()
   : d(new VKnownMeasurementsData)
@@ -36,7 +40,7 @@ VKnownMeasurements::VKnownMeasurements()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-VKnownMeasurements::~VKnownMeasurements()
+VKnownMeasurements::~VKnownMeasurements() // NOLINT(modernize-use-equals-default)
 {
 }
 

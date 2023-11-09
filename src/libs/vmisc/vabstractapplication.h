@@ -55,6 +55,9 @@ class VKnownMeasurementsDatabase;
 
 #if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
 class VTextCodec;
+#else
+class QTextCodec;
+using VTextCodec = QTextCodec;
 #endif
 
 QT_WARNING_PUSH

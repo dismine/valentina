@@ -26,13 +26,12 @@
  **
  *************************************************************************/
 #include "vknownmeasurementsdocument.h"
+#include "../ifc/ifcdef.h"
 #include "../ifc/xml/vknownmeasurementsconverter.h"
 #include "../ifc/xml/vpatternimage.h"
+#include "../vmisc/literals.h"
 #include "../vmisc/projectversion.h"
-#include "ifcdef.h"
-#include "literals.h"
-#include "quuid.h"
-#include "vformat/knownmeasurements/vknownmeasurement.h"
+#include "vknownmeasurement.h"
 #include "vknownmeasurements.h"
 
 #include <QUuid>

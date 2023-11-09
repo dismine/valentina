@@ -332,7 +332,7 @@ MApplication::MApplication(int &argc, char **argv)
 //---------------------------------------------------------------------------------------------------------------------
 MApplication::~MApplication()
 {
-    if (IsAppInGUIMode() && settings->IsCollectStatistic())
+    if (MApplication::IsAppInGUIMode() && settings->IsCollectStatistic())
     {
         auto *statistic = VGAnalytics::Instance();
 
@@ -541,15 +541,26 @@ auto MApplication::event(QEvent *e) -> bool
         // Mac specific).
         case QEvent::FileOpen:
         {
-            auto *fileOpenEvent =
-                static_cast<QFileOpenEvent *>(e); // NOLINT(cppcoreguidelines-pro-type-static-cast-downcast)
+            // NOLINTNEXTLINE(cppcoreguidelines-pro-type-static-cast-downcast)
+            auto *fileOpenEvent = static_cast<QFileOpenEvent *>(e);
             const QString macFileOpen = fileOpenEvent->file();
             if (not macFileOpen.isEmpty())
             {
-                TMainWindow *mw = MainTapeWindow();
-                if (mw)
+                if (macFileOpen.endsWith(".vkm"_L1))
                 {
-                    mw->LoadFile(macFileOpen); // open file in existing window
+                    TKMMainWindow *mw = MainKMWindow();
+                    if (mw)
+                    {
+                        mw->LoadFile(macFileOpen); // open file in existing window
+                    }
+                }
+                else
+                {
+                    TMainWindow *mw = MainTapeWindow();
+                    if (mw)
+                    {
+                        mw->LoadFile(macFileOpen); // open file in existing window
+                    }
                 }
                 return true;
             }
@@ -558,11 +569,23 @@ auto MApplication::event(QEvent *e) -> bool
 #if defined(Q_OS_MAC)
         case QEvent::ApplicationActivate:
         {
-            Clean();
-            TMainWindow *mw = MainWindow();
-            if (mw && not mw->isMinimized())
+            if (m_knownMeasurementsMode)
             {
-                mw->show();
+                CleanKMWindows();
+                TKMMainWindow *mw = MainKMWindow();
+                if (mw && not mw->isMinimized())
+                {
+                    mw->show();
+                }
+            }
+            else
+            {
+                CleanTapeWindows();
+                TMainWindow *mw = MainTapeWindow();
+                if (mw && not mw->isMinimized())
+                {
+                    mw->show();
+                }
             }
             return true;
         }
@@ -686,7 +709,7 @@ void MApplication::Preferences(QWidget *parent)
         guard = preferences;
         // Must be first
 
-        for (const auto &w : m_mainWindows)
+        for (const auto &w : qAsConst(m_mainWindows))
         {
             if (!w.isNull())
             {
@@ -697,7 +720,7 @@ void MApplication::Preferences(QWidget *parent)
             }
         }
 
-        for (const auto &w : m_kmMainWindows)
+        for (const auto &w : qAsConst(m_kmMainWindows))
         {
             if (!w.isNull())
             {
@@ -844,7 +867,7 @@ void MApplication::KnownMeasurementsPathChanged(const QString &oldPath, const QS
 //---------------------------------------------------------------------------------------------------------------------
 void MApplication::SyncKnownMeasurements()
 {
-    for (const auto &w : m_mainWindows)
+    for (const auto &w : qAsConst(m_mainWindows))
     {
         if (!w.isNull())
         {

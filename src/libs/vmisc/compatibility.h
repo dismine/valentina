@@ -109,6 +109,9 @@ inline namespace Literals
 inline namespace StringLiterals
 {
 
+QT_WARNING_PUSH
+QT_WARNING_DISABLE_CLANG("-Wreserved-identifier")
+
 //---------------------------------------------------------------------------------------------------------------------
 Q_DECL_CONSTEXPR inline auto operator"" _L1(char ch) Q_DECL_NOEXCEPT->QLatin1Char
 {
@@ -120,6 +123,8 @@ Q_DECL_CONSTEXPR inline auto operator"" _L1(const char *str, size_t size) Q_DECL
 {
     return QLatin1String(str, static_cast<vsizetype>(size));
 }
+
+QT_WARNING_POP
 
 //---------------------------------------------------------------------------------------------------------------------
 inline auto operator"" _ba(const char *str, size_t size) Q_DECL_NOEXCEPT->QByteArray

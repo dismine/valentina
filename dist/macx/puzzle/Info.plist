@@ -11,7 +11,7 @@
 	<key>LSMinimumSystemVersion</key>
 	<string>${MACOSX_DEPLOYMENT_TARGET}</string>
 	<key>NSHumanReadableCopyright</key>
-        <string>© 2013-2023, Valentina project</string>
+    <string>© 2013-2023, Valentina project</string>
 	<key>CFBundleSignature</key>
 	<string>@TYPEINFO@</string>
 	<key>CFBundleExecutable</key>
@@ -19,12 +19,12 @@
 	<key>CFBundleIdentifier</key>
 	<string>ua.com.smart-pattern.@EXECUTABLE@</string>
 	<key>CFBundleShortVersionString</key>
-        <string>@SHORT_VERSION@</string>
+	<string>@SHORT_VERSION@</string>
 	<key>CFBundleVersion</key>
-        <string>@FULL_VERSION@</string>
+	<string>@FULL_VERSION@</string>
 	<key>CFBundleInfoDictionaryVersion</key>
 	<string>6.0</string>
-        <key>CFBundleDocumentTypes</key>
+	<key>CFBundleDocumentTypes</key>
 	<array>
 		<dict>
 			<key>CFBundleTypeRole</key>
@@ -33,7 +33,7 @@
 			<string>layout.incs</string>
 			<key>LSItemContentTypes</key>
 			<array>
-                                <string>ua.com.smart-pattern.vlt</string>
+				<string>ua.com.smart-pattern.vlt</string>
 			</array>
 			<key>CFBundleTypeName</key>
 			<string>Valentina layout</string>
@@ -54,7 +54,7 @@
 			<key>UTTypeIconFile</key>
 			<string>layout.icns</string>
 			<key>UTTypeIdentifier</key>
-                        <string>ua.com.smart-pattern.vlt</string>
+			<string>ua.com.smart-pattern.vlt</string>
 			<key>UTTypeTagSpecification</key>
 			<dict>
 				<key>public.filename-extension</key>
@@ -62,7 +62,7 @@
 					<string>vlt</string>
 				</array>
 				<key>public.mime-type</key>
-        <string>text/xml</string>
+				<string>text/xml</string>
 			</dict>
 		</dict>
 	</array>

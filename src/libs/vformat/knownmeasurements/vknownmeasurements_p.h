@@ -31,7 +31,11 @@
 #include "../ifc/xml/vpatternimage.h"
 #include "../vmisc/defglobal.h"
 #include "vknownmeasurement.h"
+
+#include <QHash>
+#include <QMap>
 #include <QSharedData>
+#include <QString>
 #include <QUuid>
 
 QT_WARNING_PUSH
