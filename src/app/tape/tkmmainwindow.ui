@@ -751,7 +751,7 @@
                  <bool>true</bool>
                 </property>
                 <property name="text">
-                 <string>...</string>
+                 <string notr="true">...</string>
                 </property>
                 <property name="icon">
                  <iconset resource="../../libs/vmisc/share/resources/icon.qrc">
