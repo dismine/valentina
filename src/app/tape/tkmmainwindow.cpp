@@ -1465,7 +1465,7 @@ void TKMMainWindow::SaveImageTitle()
 //---------------------------------------------------------------------------------------------------------------------
 #if defined(Q_OS_MAC)
 //---------------------------------------------------------------------------------------------------------------------
-void TMainWindow::OpenAt(QAction *where)
+void TKMainWindow::OpenAt(QAction *where)
 {
     const QString path = m_curFile.left(m_curFile.indexOf(where->text())) + where->text();
     if (path == m_curFile)

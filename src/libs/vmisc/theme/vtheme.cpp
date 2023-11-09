@@ -73,7 +73,7 @@ using namespace bpstd::literals::chrono_literals;
 #include "vscenestylesheet.h"
 
 #if QT_VERSION < QT_VERSION_CHECK(6, 4, 0)
-#include "../vmisc/compatibility.h"
+#include "../compatibility.h"
 #endif
 
 using namespace Qt::Literals::StringLiterals;

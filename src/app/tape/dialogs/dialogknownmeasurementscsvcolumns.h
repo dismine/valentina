@@ -32,10 +32,7 @@
 
 class QxtCsvModel;
 class QComboBox;
-
-#if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
 class VTextCodec;
-#endif
 
 enum class KnownMeasurementsColumns : qint8
 {
@@ -127,12 +124,6 @@ inline void DialogKnownMeasurementsCSVColumns::SetWithHeader(bool withHeader)
 inline void DialogKnownMeasurementsCSVColumns::SetSeparator(const QChar &separator)
 {
     m_separator = separator;
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-inline void DialogKnownMeasurementsCSVColumns::SetCodec(VTextCodec *codec)
-{
-    m_codec = codec;
 }
 
 #endif // DIALOGKNOWNMEASUREMENTSCSVCOLUMNS_H

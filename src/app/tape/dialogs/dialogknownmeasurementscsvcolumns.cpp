@@ -34,6 +34,13 @@
 #endif // QT_VERSION < QT_VERSION_CHECK(5, 7, 0)
 #include "../vtools/dialogs/dialogtoolbox.h"
 
+#if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
+#include "../vmisc/vtextcodec.h"
+#else
+#include <QTextCodec>
+using VTextCodec = QTextCodec;
+#endif
+
 #include <QPushButton>
 #include <QShowEvent>
 
@@ -547,4 +554,10 @@ template <class T> void DialogKnownMeasurementsCSVColumns::SaveColum(QComboBox *
     m_columnsMap[columnNumber] = control->currentData().toInt();
     ShowImportPreview();
     CheckStatus();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void DialogKnownMeasurementsCSVColumns::SetCodec(VTextCodec *codec)
+{
+    m_codec = codec;
 }

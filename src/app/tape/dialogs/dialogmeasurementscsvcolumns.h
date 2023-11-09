@@ -33,21 +33,18 @@
 #include "../vformat/vdimensions.h"
 
 class QxtCsvModel;
-
-#if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
 class VTextCodec;
-#endif
 
-enum class IndividualMeasurementsColumns: qint8
+enum class IndividualMeasurementsColumns : qint8
 {
     Name = 0,
     Value = 1,
-    FullName = 2,   // optional
+    FullName = 2,    // optional
     Description = 3, // optional
     LAST_DO_NOT_USE = 4
 };
 
-enum class MultisizeMeasurementsColumns: qint8
+enum class MultisizeMeasurementsColumns : qint8
 {
     Name = 0,
     BaseValue = 1,
@@ -59,8 +56,8 @@ enum class MultisizeMeasurementsColumns: qint8
     LAST_DO_NOT_USE = 7
 };
 
-
-namespace Ui {
+namespace Ui
+{
 class DialogMeasurementsCSVColumns;
 }
 
@@ -81,7 +78,7 @@ public:
     void SetCodec(VTextCodec *codec);
 
 protected:
-    void changeEvent(QEvent* event) override;
+    void changeEvent(QEvent *event) override;
     void showEvent(QShowEvent *event) override;
 
 private slots:
@@ -117,8 +114,7 @@ private:
     void ShowInputPreview();
     void ShowImportPreview();
 
-    template <class T>
-    void HackWidget(T **widget);
+    template <class T> void HackWidget(T **widget);
     void HackColumnControls();
 
     void RetranslateLabels();
@@ -127,11 +123,9 @@ private:
 
     void CheckStatus();
 
-    template <class T>
-    auto ColumnValid(T column) const -> bool;
+    template <class T> auto ColumnValid(T column) const -> bool;
 
-    template <class T>
-    void SaveColum(QComboBox *control, T column);
+    template <class T> void SaveColum(QComboBox *control, T column);
 };
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -150,12 +144,6 @@ inline void DialogMeasurementsCSVColumns::SetWithHeader(bool withHeader)
 inline void DialogMeasurementsCSVColumns::SetSeparator(const QChar &separator)
 {
     m_separator = separator;
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-inline void DialogMeasurementsCSVColumns::SetCodec(VTextCodec *codec)
-{
-    m_codec = codec;
 }
 
 #endif // DIALOGMEASUREMENTSCSVCOLUMNS_H
