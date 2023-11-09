@@ -871,6 +871,7 @@ auto VApplication::event(QEvent *e) -> bool
                 }
                 return true;
             }
+            break;
 #endif // defined(Q_OS_MAC)
         default:
             return VAbstractApplication::event(e);

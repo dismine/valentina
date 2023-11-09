@@ -583,8 +583,9 @@ auto VPApplication::event(QEvent *e) -> bool
                 {
                     mw->show();
                 }
+                return true;
             }
-            return true;
+            break;
 #endif // defined(Q_OS_MAC)
         default:
             return VAbstractApplication::event(e);
