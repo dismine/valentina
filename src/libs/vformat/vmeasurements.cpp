@@ -37,6 +37,7 @@
 #include <QMessageLogger>
 #include <QScopedPointer>
 #include <QSet>
+#include <QUuid>
 #include <QtDebug>
 #include <qnumeric.h>
 
@@ -47,13 +48,11 @@
 #include "../ifc/xml/vvstconverter.h"
 #include "../qmuparser/qmuparsererror.h"
 #include "../qmuparser/qmutokenparser.h"
+#include "../vmisc/def.h"
 #include "../vmisc/projectversion.h"
 #include "../vpatterndb/calculator.h"
 #include "../vpatterndb/variables/vmeasurement.h"
 #include "../vpatterndb/vcontainer.h"
-#include "def.h"
-#include "qstringliteral.h"
-#include "quuid.h"
 
 #if QT_VERSION < QT_VERSION_CHECK(6, 4, 0)
 #include "../vmisc/compatibility.h"

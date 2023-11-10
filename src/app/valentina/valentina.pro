@@ -319,10 +319,6 @@ unix{
             icns_resources.files += $$PWD/../../../dist/macx/pattern.icns
             icns_resources.files += $$PWD/../../../dist/macx/layout.icns
 
-            # Copy to bundle multisize measurements files
-            # We cannot add none exist files to bundle through QMAKE_BUNDLE_DATA. That's why we must do this manually.
-            QMAKE_POST_LINK += $$VCOPY $$quote($${OUT_PWD}/../tape/$${DESTDIR}/tape.app/$$RESOURCES_DIR/diagrams.rcc) $$quote($$shell_path($${OUT_PWD}/$$DESTDIR/$${TARGET}.app/$$RESOURCES_DIR/)) $$escape_expand(\\n\\t)
-
             QMAKE_BUNDLE_DATA += \
                 templates \
                 svgfonts \
@@ -343,7 +339,6 @@ win32:*g++* {
         $${OUT_PWD}/$${DESTDIR}/valentina.exe \
         $${OUT_PWD}/../tape/$${DESTDIR}/tape.exe \
         $${OUT_PWD}/../puzzle/$${DESTDIR}/puzzle.exe \
-        $${OUT_PWD}/../tape/$${DESTDIR}/diagrams.rcc \
         $$PWD/../../../dist/win/valentina.ico \
         $$PWD/../../../dist/win/i-measurements.ico \
         $$PWD/../../../dist/win/s-measurements.ico \

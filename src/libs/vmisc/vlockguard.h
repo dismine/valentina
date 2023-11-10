@@ -142,7 +142,7 @@ template <typename Guarded> inline auto VLockGuard<Guarded>::GetLockError() cons
 //---------------------------------------------------------------------------------------------------------------------
 template <typename Guarded> inline auto VLockGuard<Guarded>::IsLocked() const -> bool
 {
-    return not holder.isNull();
+    return !holder.isNull();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
