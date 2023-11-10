@@ -2303,14 +2303,12 @@
         <translation>Назва файлу лекала</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/support/dialogeditlabel.cpp" line="564"/>
         <source>Measurments file name</source>
-        <translation>Назва файлу вимірювань</translation>
+        <translation type="vanished">Назва файлу вимірювань</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/support/dialogeditlabel.cpp" line="609"/>
         <source>Measurments extension</source>
-        <translation>Розширення вимірювань</translation>
+        <translation type="vanished">Розширення вимірювань</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/support/dialogeditlabel.cpp" line="683"/>
@@ -2524,6 +2522,11 @@
         <translation>Вимір X</translation>
     </message>
     <message>
+        <location filename="../../src/libs/vtools/dialogs/support/dialogeditlabel.cpp" line="564"/>
+        <source>Measurements file name</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <location filename="../../src/libs/vtools/dialogs/support/dialogeditlabel.cpp" line="572"/>
         <source>Dimension Y</source>
         <comment>dimension</comment>
@@ -2564,6 +2567,11 @@
         <source>Dimension W label</source>
         <comment>dimension</comment>
         <translation>Мітка виміру W</translation>
+    </message>
+    <message>
+        <location filename="../../src/libs/vtools/dialogs/support/dialogeditlabel.cpp" line="609"/>
+        <source>Measurements extension</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/support/dialogeditlabel.cpp" line="721"/>
@@ -13522,10 +13530,6 @@ Do you want to save your changes?</source>
         <translation>Заборонити віддзеркалення</translation>
     </message>
     <message>
-        <source>Show a passmark both in the seam allowance and on the seam line.</source>
-        <translation type="vanished">Показувати надсічки двічі, на прибавці на шви і на лінії шва.</translation>
-    </message>
-    <message>
         <location filename="../../src/app/valentina/dialogs/configpages/preferencespatternpage.ui" line="201"/>
         <source>Show second passmark on seam line</source>
         <translation>Показати другу надсічку на лінії шва</translation>
@@ -15575,6 +15579,11 @@ This option will take an affect after restart.</source>
         <translation>Зображення</translation>
     </message>
     <message>
+        <location filename="../../src/app/tape/tkmmainwindow.ui" line="968"/>
+        <source>&amp;Measurements</source>
+        <translation type="unfinished">&amp;Мірки</translation>
+    </message>
+    <message>
         <location filename="../../src/app/tape/tkmmainwindow.ui" line="785"/>
         <source>Save image</source>
         <translation>Зберегти зображення</translation>
@@ -15608,11 +15617,6 @@ This option will take an affect after restart.</source>
         <location filename="../../src/app/tape/tkmmainwindow.ui" line="961"/>
         <source>&amp;Help</source>
         <translation>&amp;Довідка</translation>
-    </message>
-    <message>
-        <location filename="../../src/app/tape/tkmmainwindow.ui" line="968"/>
-        <source>&amp;Measurments</source>
-        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/app/tape/tkmmainwindow.ui" line="975"/>
@@ -21123,22 +21127,22 @@ Do you want to save your changes?</source>
 <context>
     <name>VPCarrouselPieceList</name>
     <message>
-        <location filename="../../src/app/puzzle/carousel/vpcarrouselpiecelist.cpp" line="257"/>
+        <location filename="../../src/app/puzzle/carousel/vpcarrouselpiecelist.cpp" line="262"/>
         <source>Move to Sheet</source>
         <translation>Перейти до аркуша</translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/carousel/vpcarrouselpiecelist.cpp" line="260"/>
+        <location filename="../../src/app/puzzle/carousel/vpcarrouselpiecelist.cpp" line="265"/>
         <source>Delete</source>
         <translation>Видалити</translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/carousel/vpcarrouselpiecelist.cpp" line="263"/>
+        <location filename="../../src/app/puzzle/carousel/vpcarrouselpiecelist.cpp" line="268"/>
         <source>Remove from Sheet</source>
         <translation>Видалити з аркуша</translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/carousel/vpcarrouselpiecelist.cpp" line="243"/>
+        <location filename="../../src/app/puzzle/carousel/vpcarrouselpiecelist.cpp" line="248"/>
         <source>Move to</source>
         <translation>Перемістити до</translation>
     </message>

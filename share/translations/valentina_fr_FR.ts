@@ -2303,14 +2303,12 @@
         <translation>Nom du fichier du patron</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/support/dialogeditlabel.cpp" line="564"/>
         <source>Measurments file name</source>
-        <translation>Nom du fichier de mesures</translation>
+        <translation type="vanished">Nom du fichier de mesures</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/support/dialogeditlabel.cpp" line="609"/>
         <source>Measurments extension</source>
-        <translation>Extension du fichier de mesures</translation>
+        <translation type="vanished">Extension du fichier de mesures</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/support/dialogeditlabel.cpp" line="683"/>
@@ -2524,6 +2522,11 @@
         <translation>Mesure X (stature)</translation>
     </message>
     <message>
+        <location filename="../../src/libs/vtools/dialogs/support/dialogeditlabel.cpp" line="564"/>
+        <source>Measurements file name</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <location filename="../../src/libs/vtools/dialogs/support/dialogeditlabel.cpp" line="572"/>
         <source>Dimension Y</source>
         <comment>dimension</comment>
@@ -2564,6 +2567,11 @@
         <source>Dimension W label</source>
         <comment>dimension</comment>
         <translation>Libellé de la valeur W</translation>
+    </message>
+    <message>
+        <location filename="../../src/libs/vtools/dialogs/support/dialogeditlabel.cpp" line="609"/>
+        <source>Measurements extension</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/support/dialogeditlabel.cpp" line="721"/>
@@ -5579,7 +5587,7 @@ Appliquer quand même les réglages ?</translation>
         <location filename="../../src/app/tape/dialogs/dialogmeasurementscsvcolumns.cpp" line="764"/>
         <source>Shift</source>
         <comment>measurement column</comment>
-        <translation type="unfinished"></translation>
+        <translation>⇧</translation>
     </message>
     <message>
         <location filename="../../src/app/tape/dialogs/dialogmeasurementscsvcolumns.cpp" line="511"/>
@@ -10555,7 +10563,7 @@ Appliquer quand même les réglages ?</translation>
     <message>
         <location filename="../../src/app/tape/mapplication.cpp" line="932"/>
         <source>Activate known measurements mode.</source>
-        <translation type="unfinished"></translation>
+        <translation>Activer le mode mesures connues.</translation>
     </message>
     <message>
         <location filename="../../src/app/tape/mapplication.cpp" line="1101"/>
@@ -13483,7 +13491,7 @@ Do you want to save your changes?</source>
     <message>
         <location filename="../../src/app/valentina/dialogs/configpages/preferencespathpage.cpp" line="194"/>
         <source>My known measurements</source>
-        <translation type="unfinished"></translation>
+        <translation>Mes mesures connues</translation>
     </message>
 </context>
 <context>
@@ -13517,10 +13525,6 @@ Do you want to save your changes?</source>
         <location filename="../../src/app/valentina/dialogs/configpages/preferencespatternpage.ui" line="181"/>
         <source>Forbid flipping</source>
         <translation>Interdire le placement en miroir</translation>
-    </message>
-    <message>
-        <source>Show a passmark both in the seam allowance and on the seam line.</source>
-        <translation type="vanished">Afficher un cran d&apos;assemblage à la fois sur la marge de couture et sur la ligne de couture.</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/configpages/preferencespatternpage.ui" line="201"/>
@@ -14174,7 +14178,7 @@ This option will take an affect after restart.</source>
     <message>
         <location filename="../../src/app/puzzle/dialogs/configpages/puzzlepreferencespathpage.cpp" line="182"/>
         <source>My known measurements</source>
-        <translation type="unfinished"></translation>
+        <translation>Mes mesures connues</translation>
     </message>
 </context>
 <context>
@@ -15382,7 +15386,7 @@ This option will take an affect after restart.</source>
     <message>
         <location filename="../../src/app/tape/tkmmainwindow.ui" line="31"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:18pt;&quot;&gt;Select New to create a new known measurements file.&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:18pt;&quot;&gt;Sélectionner Nouveau pour créer un nouveau fichier de mesures connues.&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <location filename="../../src/app/tape/tkmmainwindow.ui" line="58"/>
@@ -15536,12 +15540,12 @@ This option will take an affect after restart.</source>
     <message>
         <location filename="../../src/app/tape/tkmmainwindow.ui" line="512"/>
         <source>Measurement&apos;s human-readable name</source>
-        <translation type="unfinished"></translation>
+        <translation>Nom en clair de la mesure</translation>
     </message>
     <message>
         <location filename="../../src/app/tape/tkmmainwindow.ui" line="519"/>
         <source>Group:</source>
-        <translation type="unfinished"></translation>
+        <translation>Groupe :</translation>
     </message>
     <message>
         <location filename="../../src/app/tape/tkmmainwindow.ui" line="536"/>
@@ -15562,12 +15566,17 @@ This option will take an affect after restart.</source>
     <message>
         <location filename="../../src/app/tape/tkmmainwindow.ui" line="633"/>
         <source>Diagram</source>
-        <translation type="unfinished"></translation>
+        <translation>Diagramme</translation>
     </message>
     <message>
         <location filename="../../src/app/tape/tkmmainwindow.ui" line="652"/>
         <source>Images</source>
         <translation>Images</translation>
+    </message>
+    <message>
+        <location filename="../../src/app/tape/tkmmainwindow.ui" line="968"/>
+        <source>&amp;Measurements</source>
+        <translation type="unfinished">&amp;Mesures</translation>
     </message>
     <message>
         <location filename="../../src/app/tape/tkmmainwindow.ui" line="785"/>
@@ -15577,7 +15586,7 @@ This option will take an affect after restart.</source>
     <message>
         <location filename="../../src/app/tape/tkmmainwindow.ui" line="801"/>
         <source>Title:</source>
-        <translation type="unfinished"></translation>
+        <translation>Titre :</translation>
     </message>
     <message>
         <location filename="../../src/app/tape/tkmmainwindow.ui" line="827"/>
@@ -15603,11 +15612,6 @@ This option will take an affect after restart.</source>
         <location filename="../../src/app/tape/tkmmainwindow.ui" line="961"/>
         <source>&amp;Help</source>
         <translation>Aid&amp;e</translation>
-    </message>
-    <message>
-        <location filename="../../src/app/tape/tkmmainwindow.ui" line="968"/>
-        <source>&amp;Measurments</source>
-        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/app/tape/tkmmainwindow.ui" line="975"/>
@@ -17027,7 +17031,7 @@ Voulez-vous enregistrer vos changements ?</translation>
         <location filename="../../src/app/tape/tmainwindow.cpp" line="4909"/>
         <source>Shift</source>
         <comment>measurement column</comment>
-        <translation type="unfinished"></translation>
+        <translation>⇧</translation>
     </message>
     <message>
         <location filename="../../src/app/tape/tmainwindow.cpp" line="5304"/>
@@ -18331,7 +18335,7 @@ Voulez-vous enregistrer vos changements ?</translation>
     <message>
         <location filename="../../src/app/tape/dialogs/configpages/tapepreferencespathpage.cpp" line="162"/>
         <source>My known measurements</source>
-        <translation type="unfinished"></translation>
+        <translation>Mes mesures connues</translation>
     </message>
 </context>
 <context>
@@ -21119,22 +21123,22 @@ Voulez-vous enregistrer vos changements ?</translation>
 <context>
     <name>VPCarrouselPieceList</name>
     <message>
-        <location filename="../../src/app/puzzle/carousel/vpcarrouselpiecelist.cpp" line="257"/>
+        <location filename="../../src/app/puzzle/carousel/vpcarrouselpiecelist.cpp" line="262"/>
         <source>Move to Sheet</source>
         <translation>Aller à la feuille</translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/carousel/vpcarrouselpiecelist.cpp" line="260"/>
+        <location filename="../../src/app/puzzle/carousel/vpcarrouselpiecelist.cpp" line="265"/>
         <source>Delete</source>
         <translation>Supprimer</translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/carousel/vpcarrouselpiecelist.cpp" line="263"/>
+        <location filename="../../src/app/puzzle/carousel/vpcarrouselpiecelist.cpp" line="268"/>
         <source>Remove from Sheet</source>
         <translation>Supprimer de la feuille</translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/carousel/vpcarrouselpiecelist.cpp" line="243"/>
+        <location filename="../../src/app/puzzle/carousel/vpcarrouselpiecelist.cpp" line="248"/>
         <source>Move to</source>
         <translation>Déplacer vers</translation>
     </message>

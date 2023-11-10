@@ -2303,14 +2303,12 @@
         <translation>Nome do arquivo de molde</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/support/dialogeditlabel.cpp" line="564"/>
         <source>Measurments file name</source>
-        <translation>Nome do arquivo de medidas</translation>
+        <translation type="vanished">Nome do arquivo de medidas</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/support/dialogeditlabel.cpp" line="609"/>
         <source>Measurments extension</source>
-        <translation>Extensão de medidas</translation>
+        <translation type="vanished">Extensão de medidas</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/support/dialogeditlabel.cpp" line="683"/>
@@ -2524,6 +2522,11 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../../src/libs/vtools/dialogs/support/dialogeditlabel.cpp" line="564"/>
+        <source>Measurements file name</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <location filename="../../src/libs/vtools/dialogs/support/dialogeditlabel.cpp" line="572"/>
         <source>Dimension Y</source>
         <comment>dimension</comment>
@@ -2563,6 +2566,11 @@
         <location filename="../../src/libs/vtools/dialogs/support/dialogeditlabel.cpp" line="605"/>
         <source>Dimension W label</source>
         <comment>dimension</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/libs/vtools/dialogs/support/dialogeditlabel.cpp" line="609"/>
+        <source>Measurements extension</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -13516,10 +13524,6 @@ Você quer salvar suas mudanças?</translation>
         <translation>Proibido girar</translation>
     </message>
     <message>
-        <source>Show a passmark both in the seam allowance and on the seam line.</source>
-        <translation type="vanished">Mostrar o pique tanto na margem de costura quanto na linha de costura.</translation>
-    </message>
-    <message>
         <location filename="../../src/app/valentina/dialogs/configpages/preferencespatternpage.ui" line="201"/>
         <source>Show second passmark on seam line</source>
         <translation>Mostrar segundo pique na linha de costura</translation>
@@ -15567,6 +15571,11 @@ Esta opção terá um efeito após o reinício.</translation>
         <translation>Imagens</translation>
     </message>
     <message>
+        <location filename="../../src/app/tape/tkmmainwindow.ui" line="968"/>
+        <source>&amp;Measurements</source>
+        <translation type="unfinished">&amp;Medidas</translation>
+    </message>
+    <message>
         <location filename="../../src/app/tape/tkmmainwindow.ui" line="785"/>
         <source>Save image</source>
         <translation type="unfinished"></translation>
@@ -15600,11 +15609,6 @@ Esta opção terá um efeito após o reinício.</translation>
         <location filename="../../src/app/tape/tkmmainwindow.ui" line="961"/>
         <source>&amp;Help</source>
         <translation>&amp;Ajuda</translation>
-    </message>
-    <message>
-        <location filename="../../src/app/tape/tkmmainwindow.ui" line="968"/>
-        <source>&amp;Measurments</source>
-        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/app/tape/tkmmainwindow.ui" line="975"/>
@@ -21068,22 +21072,22 @@ Deseja salvar suas mudanças?</translation>
 <context>
     <name>VPCarrouselPieceList</name>
     <message>
-        <location filename="../../src/app/puzzle/carousel/vpcarrouselpiecelist.cpp" line="257"/>
+        <location filename="../../src/app/puzzle/carousel/vpcarrouselpiecelist.cpp" line="262"/>
         <source>Move to Sheet</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/carousel/vpcarrouselpiecelist.cpp" line="260"/>
+        <location filename="../../src/app/puzzle/carousel/vpcarrouselpiecelist.cpp" line="265"/>
         <source>Delete</source>
         <translation>Excluir</translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/carousel/vpcarrouselpiecelist.cpp" line="263"/>
+        <location filename="../../src/app/puzzle/carousel/vpcarrouselpiecelist.cpp" line="268"/>
         <source>Remove from Sheet</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/carousel/vpcarrouselpiecelist.cpp" line="243"/>
+        <location filename="../../src/app/puzzle/carousel/vpcarrouselpiecelist.cpp" line="248"/>
         <source>Move to</source>
         <translation type="unfinished"></translation>
     </message>

@@ -1839,16 +1839,6 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/support/dialogeditlabel.cpp" line="564"/>
-        <source>Measurments file name</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../../src/libs/vtools/dialogs/support/dialogeditlabel.cpp" line="609"/>
-        <source>Measurments extension</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <location filename="../../src/libs/vtools/dialogs/support/dialogeditlabel.cpp" line="683"/>
         <source>Piece letter</source>
         <translation type="unfinished"></translation>
@@ -2060,6 +2050,11 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../../src/libs/vtools/dialogs/support/dialogeditlabel.cpp" line="564"/>
+        <source>Measurements file name</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <location filename="../../src/libs/vtools/dialogs/support/dialogeditlabel.cpp" line="572"/>
         <source>Dimension Y</source>
         <comment>dimension</comment>
@@ -2099,6 +2094,11 @@
         <location filename="../../src/libs/vtools/dialogs/support/dialogeditlabel.cpp" line="605"/>
         <source>Dimension W label</source>
         <comment>dimension</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/libs/vtools/dialogs/support/dialogeditlabel.cpp" line="609"/>
+        <source>Measurements extension</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -13518,7 +13518,7 @@ This option will take an affect after restart.</source>
     </message>
     <message>
         <location filename="../../src/app/tape/tkmmainwindow.ui" line="968"/>
-        <source>&amp;Measurments</source>
+        <source>&amp;Measurements</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -18426,22 +18426,22 @@ This option will take an affect after restart.</source>
 <context>
     <name>VPCarrouselPieceList</name>
     <message>
-        <location filename="../../src/app/puzzle/carousel/vpcarrouselpiecelist.cpp" line="257"/>
+        <location filename="../../src/app/puzzle/carousel/vpcarrouselpiecelist.cpp" line="262"/>
         <source>Move to Sheet</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/carousel/vpcarrouselpiecelist.cpp" line="260"/>
+        <location filename="../../src/app/puzzle/carousel/vpcarrouselpiecelist.cpp" line="265"/>
         <source>Delete</source>
         <translation type="unfinished">hapus</translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/carousel/vpcarrouselpiecelist.cpp" line="263"/>
+        <location filename="../../src/app/puzzle/carousel/vpcarrouselpiecelist.cpp" line="268"/>
         <source>Remove from Sheet</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/carousel/vpcarrouselpiecelist.cpp" line="243"/>
+        <location filename="../../src/app/puzzle/carousel/vpcarrouselpiecelist.cpp" line="248"/>
         <source>Move to</source>
         <translation type="unfinished"></translation>
     </message>

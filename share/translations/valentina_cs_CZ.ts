@@ -2303,14 +2303,12 @@
         <translation>Název souboru střihu</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/support/dialogeditlabel.cpp" line="564"/>
         <source>Measurments file name</source>
-        <translation>Název souboru měření</translation>
+        <translation type="vanished">Název souboru měření</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/support/dialogeditlabel.cpp" line="609"/>
         <source>Measurments extension</source>
-        <translation>Rozšíření měření</translation>
+        <translation type="vanished">Rozšíření měření</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/support/dialogeditlabel.cpp" line="683"/>
@@ -2524,6 +2522,11 @@
         <translation>Rozměr X</translation>
     </message>
     <message>
+        <location filename="../../src/libs/vtools/dialogs/support/dialogeditlabel.cpp" line="564"/>
+        <source>Measurements file name</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <location filename="../../src/libs/vtools/dialogs/support/dialogeditlabel.cpp" line="572"/>
         <source>Dimension Y</source>
         <comment>dimension</comment>
@@ -2564,6 +2567,11 @@
         <source>Dimension W label</source>
         <comment>dimension</comment>
         <translation>Popisek rozměru W</translation>
+    </message>
+    <message>
+        <location filename="../../src/libs/vtools/dialogs/support/dialogeditlabel.cpp" line="609"/>
+        <source>Measurements extension</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/support/dialogeditlabel.cpp" line="721"/>
@@ -13523,10 +13531,6 @@ Chcete uložit své změny?</translation>
         <translation>Zakázat přetočení</translation>
     </message>
     <message>
-        <source>Show a passmark both in the seam allowance and on the seam line.</source>
-        <translation type="vanished">Ukázat značku sestavení jak na švové záložce, tak na čáře švu.</translation>
-    </message>
-    <message>
         <location filename="../../src/app/valentina/dialogs/configpages/preferencespatternpage.ui" line="201"/>
         <source>Show second passmark on seam line</source>
         <translation>Ukázat druhou značku sestavení na čáře švu</translation>
@@ -15574,6 +15578,11 @@ Tato volba se projeví po opětovném spuštění.</translation>
         <translation>Obrázky</translation>
     </message>
     <message>
+        <location filename="../../src/app/tape/tkmmainwindow.ui" line="968"/>
+        <source>&amp;Measurements</source>
+        <translation type="unfinished">&amp;Míry</translation>
+    </message>
+    <message>
         <location filename="../../src/app/tape/tkmmainwindow.ui" line="785"/>
         <source>Save image</source>
         <translation type="unfinished"></translation>
@@ -15607,11 +15616,6 @@ Tato volba se projeví po opětovném spuštění.</translation>
         <location filename="../../src/app/tape/tkmmainwindow.ui" line="961"/>
         <source>&amp;Help</source>
         <translation>&amp;Nápověda</translation>
-    </message>
-    <message>
-        <location filename="../../src/app/tape/tkmmainwindow.ui" line="968"/>
-        <source>&amp;Measurments</source>
-        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/app/tape/tkmmainwindow.ui" line="975"/>
@@ -21123,22 +21127,22 @@ Chcete uložit změny?</translation>
 <context>
     <name>VPCarrouselPieceList</name>
     <message>
-        <location filename="../../src/app/puzzle/carousel/vpcarrouselpiecelist.cpp" line="257"/>
+        <location filename="../../src/app/puzzle/carousel/vpcarrouselpiecelist.cpp" line="262"/>
         <source>Move to Sheet</source>
         <translation>Přesunout do listu</translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/carousel/vpcarrouselpiecelist.cpp" line="260"/>
+        <location filename="../../src/app/puzzle/carousel/vpcarrouselpiecelist.cpp" line="265"/>
         <source>Delete</source>
         <translation>Smazat</translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/carousel/vpcarrouselpiecelist.cpp" line="263"/>
+        <location filename="../../src/app/puzzle/carousel/vpcarrouselpiecelist.cpp" line="268"/>
         <source>Remove from Sheet</source>
         <translation>Odstranit z listu</translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/carousel/vpcarrouselpiecelist.cpp" line="243"/>
+        <location filename="../../src/app/puzzle/carousel/vpcarrouselpiecelist.cpp" line="248"/>
         <source>Move to</source>
         <translation>Přesunout do</translation>
     </message>
