@@ -10437,12 +10437,12 @@ Einstellungen trotzdem anwenden?</translation>
         <translation>Ausnahme ausgelöst: %1. Programm wird beendet.</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/mapplication.cpp" line="632"/>
+        <location filename="../../src/app/tape/mapplication.cpp" line="633"/>
         <source>Valentina&apos;s measurements editor.</source>
         <translation>Valentinas Maßsatzeditor.</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/mapplication.cpp" line="912"/>
+        <location filename="../../src/app/tape/mapplication.cpp" line="913"/>
         <source>The measurement file.</source>
         <translation>Die Maßsatzdatei.</translation>
     </message>
@@ -10467,12 +10467,12 @@ Einstellungen trotzdem anwenden?</translation>
         <translation type="vanished">Zum Testen der Einheiten verwenden. Führen Sie das Programm aus und öffnen Sie eine Datei ohne Fensteranzeige.</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/mapplication.cpp" line="1161"/>
+        <location filename="../../src/app/tape/mapplication.cpp" line="1162"/>
         <source>Invalid base size argument. Must be cm, mm or inch.</source>
         <translation>Ungültige Basisgröße. Muss cm, mm oder Zoll sein .</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/mapplication.cpp" line="958"/>
+        <location filename="../../src/app/tape/mapplication.cpp" line="959"/>
         <source>Can&apos;t begin to listen for incoming connections on name &apos;%1&apos;</source>
         <translation>Eingehende Verbindung &apos;%1&apos; kann nicht aufgefangen werden</translation>
     </message>
@@ -10481,7 +10481,7 @@ Einstellungen trotzdem anwenden?</translation>
         <translation type="vanished">Der Test-Modus unterstützt das Öffnen mehrerer Dateien nicht.</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/mapplication.cpp" line="1077"/>
+        <location filename="../../src/app/tape/mapplication.cpp" line="1078"/>
         <source>Please, provide one input file.</source>
         <translation>Bitte stellen Sie eine Eingabedatei zur Verfügung.</translation>
     </message>
@@ -10502,72 +10502,72 @@ Einstellungen trotzdem anwenden?</translation>
         <translation type="vanished">Geöffnet mit der Basishöhe. Gültige Werte: %1cm.</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/mapplication.cpp" line="934"/>
+        <location filename="../../src/app/tape/mapplication.cpp" line="935"/>
         <source>Use for unit testing. Run the program and open a file without showing the main window.</source>
         <translation>Verwenden zum Einheiten testen. Ausführung des Programms und öffnen einer Datei ohne Fensteranzeige.</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/mapplication.cpp" line="937"/>
+        <location filename="../../src/app/tape/mapplication.cpp" line="938"/>
         <source>Disable high dpi scaling. Call this option if has problem with scaling (by default scaling enabled). Alternatively you can use the %1 environment variable.</source>
         <translation>Skalierung für hochauflösende Bildschirme ausschalten. Wählen Sie diese Option wenn Sie Probleme mit der Skalierung haben (standardmäßig ist die Skalierung eingeschaltet). Alternativ können Sie die Umgebungsvariable %1 nutzen.</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/mapplication.cpp" line="916"/>
+        <location filename="../../src/app/tape/mapplication.cpp" line="917"/>
         <source>Set base for dimension A in the table units.</source>
         <translation>Stelle die Basis für das Maß A in den Tabelleneinheiten ein.</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/mapplication.cpp" line="917"/>
+        <location filename="../../src/app/tape/mapplication.cpp" line="918"/>
         <source>The dimension A base</source>
         <translation>Die Dimension A Basis</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/mapplication.cpp" line="920"/>
+        <location filename="../../src/app/tape/mapplication.cpp" line="921"/>
         <source>Set base for dimension B in the table units.</source>
         <translation>Stellen Sie die Basis für das Maß B in den Tabelleneinheiten ein.</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/mapplication.cpp" line="921"/>
+        <location filename="../../src/app/tape/mapplication.cpp" line="922"/>
         <source>The dimension B base</source>
         <translation>Die Dimension B Basis</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/mapplication.cpp" line="924"/>
+        <location filename="../../src/app/tape/mapplication.cpp" line="925"/>
         <source>Set base for dimension C in the table units.</source>
         <translation>Stellen Sie die Basis für das Maß C in den Tabelleneinheiten ein.</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/mapplication.cpp" line="925"/>
+        <location filename="../../src/app/tape/mapplication.cpp" line="926"/>
         <source>The dimension C base</source>
         <translation>Die Dimension C Basis</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/mapplication.cpp" line="928"/>
+        <location filename="../../src/app/tape/mapplication.cpp" line="929"/>
         <source>Set pattern file units: cm, mm, inch.</source>
         <translation>Lege die Einheiten des Schnittmusters fest: cm, mm, Zoll.</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/mapplication.cpp" line="929"/>
+        <location filename="../../src/app/tape/mapplication.cpp" line="930"/>
         <source>The pattern units</source>
         <translation>Die Schnittmuster Einheiten</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/mapplication.cpp" line="931"/>
+        <location filename="../../src/app/tape/mapplication.cpp" line="932"/>
         <source>Activate known measurements mode.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/mapplication.cpp" line="1100"/>
+        <location filename="../../src/app/tape/mapplication.cpp" line="1101"/>
         <source>Invalid dimension A base value.</source>
         <translation>Ungültiger Basiswert der Dimension A.</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/mapplication.cpp" line="1121"/>
+        <location filename="../../src/app/tape/mapplication.cpp" line="1122"/>
         <source>Invalid dimension B base value.</source>
         <translation>Ungültiger Basiswert der Dimension B.</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/mapplication.cpp" line="1142"/>
+        <location filename="../../src/app/tape/mapplication.cpp" line="1143"/>
         <source>Invalid dimension C base value.</source>
         <translation>Ungültiger Basiswert der Dimension C.</translation>
     </message>
@@ -10577,7 +10577,7 @@ Einstellungen trotzdem anwenden?</translation>
         <translation>Formel-Warnung: %1. Programm wird abgebrochen.</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/mapplication.cpp" line="976"/>
+        <location filename="../../src/app/tape/mapplication.cpp" line="977"/>
         <source>Test mode doesn&apos;t support opening several files.</source>
         <translation>Im Testmodus können nicht mehrere Dateien geöffnet werden.</translation>
     </message>
@@ -13519,9 +13519,8 @@ Sollen die Änderungen gespeichert werden?</translation>
         <translation>Umdrehen verhindern</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/dialogs/configpages/preferencespatternpage.ui" line="198"/>
         <source>Show a passmark both in the seam allowance and on the seam line.</source>
-        <translation>Passmarke anzeigen, sowohl auf der Nahtzugabe als auch auf der Naht.</translation>
+        <translation type="vanished">Passmarke anzeigen, sowohl auf der Nahtzugabe als auch auf der Naht.</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/configpages/preferencespatternpage.ui" line="201"/>
@@ -13552,6 +13551,11 @@ Sollen die Änderungen gespeichert werden?</translation>
         <location filename="../../src/app/valentina/dialogs/configpages/preferencespatternpage.ui" line="238"/>
         <source>Seam allowance</source>
         <translation>Schnittzugabe</translation>
+    </message>
+    <message>
+        <location filename="../../src/app/valentina/dialogs/configpages/preferencespatternpage.ui" line="198"/>
+        <source>Show a notch both in the seam allowance and on the seam line. If you want to see a notch on a piece without seam allowance, enable built-in seam allowance and set the length of a notch manually.</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/configpages/preferencespatternpage.ui" line="244"/>
@@ -14449,7 +14453,7 @@ Diese Option wird nach einem Neustart aktiv.</translation>
         <translation>Vereinigungs Detail</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vgeometry/vplacelabelitem.cpp" line="145"/>
+        <location filename="../../src/libs/vgeometry/vplacelabelitem.cpp" line="146"/>
         <location filename="../../src/libs/vpatterndb/vpiecepath.cpp" line="1029"/>
         <location filename="../../src/libs/vpatterndb/vpiecepath.cpp" line="1040"/>
         <source>Visibility trigger contains error and will be ignored</source>
@@ -15564,10 +15568,6 @@ Diese Option wird nach einem Neustart aktiv.</translation>
         <location filename="../../src/app/tape/tkmmainwindow.ui" line="652"/>
         <source>Images</source>
         <translation>Bilder</translation>
-    </message>
-    <message>
-        <source>...</source>
-        <translation type="vanished">...</translation>
     </message>
     <message>
         <location filename="../../src/app/tape/tkmmainwindow.ui" line="785"/>
@@ -20811,53 +20811,53 @@ Do you want to save your changes?</source>
 <context>
     <name>VMeasurements</name>
     <message>
-        <location filename="../../src/libs/vformat/vmeasurements.cpp" line="672"/>
-        <location filename="../../src/libs/vformat/vmeasurements.cpp" line="686"/>
-        <location filename="../../src/libs/vformat/vmeasurements.cpp" line="700"/>
-        <location filename="../../src/libs/vformat/vmeasurements.cpp" line="714"/>
-        <location filename="../../src/libs/vformat/vmeasurements.cpp" line="728"/>
-        <location filename="../../src/libs/vformat/vmeasurements.cpp" line="742"/>
-        <location filename="../../src/libs/vformat/vmeasurements.cpp" line="757"/>
-        <location filename="../../src/libs/vformat/vmeasurements.cpp" line="786"/>
-        <location filename="../../src/libs/vformat/vmeasurements.cpp" line="801"/>
-        <location filename="../../src/libs/vformat/vmeasurements.cpp" line="815"/>
-        <location filename="../../src/libs/vformat/vmeasurements.cpp" line="832"/>
-        <location filename="../../src/libs/vformat/vmeasurements.cpp" line="846"/>
+        <location filename="../../src/libs/vformat/vmeasurements.cpp" line="671"/>
+        <location filename="../../src/libs/vformat/vmeasurements.cpp" line="685"/>
+        <location filename="../../src/libs/vformat/vmeasurements.cpp" line="699"/>
+        <location filename="../../src/libs/vformat/vmeasurements.cpp" line="713"/>
+        <location filename="../../src/libs/vformat/vmeasurements.cpp" line="727"/>
+        <location filename="../../src/libs/vformat/vmeasurements.cpp" line="741"/>
+        <location filename="../../src/libs/vformat/vmeasurements.cpp" line="756"/>
+        <location filename="../../src/libs/vformat/vmeasurements.cpp" line="785"/>
+        <location filename="../../src/libs/vformat/vmeasurements.cpp" line="800"/>
+        <location filename="../../src/libs/vformat/vmeasurements.cpp" line="814"/>
+        <location filename="../../src/libs/vformat/vmeasurements.cpp" line="831"/>
+        <location filename="../../src/libs/vformat/vmeasurements.cpp" line="845"/>
         <source>Can&apos;t find measurement &apos;%1&apos;</source>
         <translation>Maß &apos;%1&apos; kann nicht gefunden werden</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vformat/vmeasurements.cpp" line="1279"/>
+        <location filename="../../src/libs/vformat/vmeasurements.cpp" line="1278"/>
         <source>The measurement name is empty!</source>
         <translation>Name des Maßes ist leer!</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vformat/vmeasurements.cpp" line="1084"/>
+        <location filename="../../src/libs/vformat/vmeasurements.cpp" line="1083"/>
         <source>None</source>
         <translation>Keine</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vformat/vmeasurements.cpp" line="1086"/>
+        <location filename="../../src/libs/vformat/vmeasurements.cpp" line="1085"/>
         <source>Height</source>
         <translation>Höhe</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vformat/vmeasurements.cpp" line="1088"/>
+        <location filename="../../src/libs/vformat/vmeasurements.cpp" line="1087"/>
         <source>Size</source>
         <translation>Größe</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vformat/vmeasurements.cpp" line="1092"/>
+        <location filename="../../src/libs/vformat/vmeasurements.cpp" line="1091"/>
         <source>Hip</source>
         <translation>Hüfte</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vformat/vmeasurements.cpp" line="1383"/>
+        <location filename="../../src/libs/vformat/vmeasurements.cpp" line="1382"/>
         <source>Dimension is not valid</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/libs/vformat/vmeasurements.cpp" line="1090"/>
+        <location filename="../../src/libs/vformat/vmeasurements.cpp" line="1089"/>
         <source>Waist</source>
         <translation>Taille</translation>
     </message>
@@ -21083,17 +21083,17 @@ Do you want to save your changes?</source>
         <translation>Ausnahme ausgelöst: %1. Programm wird beendet.</translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/vpapplication.cpp" line="669"/>
+        <location filename="../../src/app/puzzle/vpapplication.cpp" line="670"/>
         <source>Can&apos;t begin to listen for incoming connections on name &apos;%1&apos;</source>
         <translation>Eingehende Verbindung &apos;%1&apos; kann nicht aufgefangen werden</translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/vpapplication.cpp" line="688"/>
+        <location filename="../../src/app/puzzle/vpapplication.cpp" line="689"/>
         <source>Export mode doesn&apos;t support opening several files.</source>
         <translation>Der Exportmodus unterstützt nicht das Öffnen mehrerer Dateien.</translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/vpapplication.cpp" line="695"/>
+        <location filename="../../src/app/puzzle/vpapplication.cpp" line="696"/>
         <source>Import raw layout data does not support opening several layout files.</source>
         <translation>Der Import von Layout-Rohdaten unterstützt nicht das Öffnen mehrerer Layoutdateien.</translation>
     </message>

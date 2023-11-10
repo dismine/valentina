@@ -195,7 +195,7 @@ This option will take an affect after restart.</string>
           <item>
            <widget class="QCheckBox" name="doublePassmarkCheck">
             <property name="toolTip">
-             <string>Show a passmark both in the seam allowance and on the seam line.</string>
+             <string>Show a notch both in the seam allowance and on the seam line. If you want to see a notch on a piece without seam allowance, enable built-in seam allowance and set the length of a notch manually.</string>
             </property>
             <property name="text">
              <string>Show second passmark on seam line</string>

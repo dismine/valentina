@@ -10441,12 +10441,12 @@ Apply settings anyway?</source>
         <translation>Винятки: %1. Програма буде закрита.</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/mapplication.cpp" line="632"/>
+        <location filename="../../src/app/tape/mapplication.cpp" line="633"/>
         <source>Valentina&apos;s measurements editor.</source>
         <translation>Редактор мірок.</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/mapplication.cpp" line="912"/>
+        <location filename="../../src/app/tape/mapplication.cpp" line="913"/>
         <source>The measurement file.</source>
         <translation>Файл мірок.</translation>
     </message>
@@ -10471,12 +10471,12 @@ Apply settings anyway?</source>
         <translation type="vanished">Використовується для тестування. Запускає програму і відкриває файл без показу основного вікна.</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/mapplication.cpp" line="1161"/>
+        <location filename="../../src/app/tape/mapplication.cpp" line="1162"/>
         <source>Invalid base size argument. Must be cm, mm or inch.</source>
         <translation>Недійсний аргумент базового розміру. Має бути cm, mm, inch.</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/mapplication.cpp" line="958"/>
+        <location filename="../../src/app/tape/mapplication.cpp" line="959"/>
         <source>Can&apos;t begin to listen for incoming connections on name &apos;%1&apos;</source>
         <translation>Не вдається почати слухати вхідні з&apos;єднання за іменем &apos;%1&apos;</translation>
     </message>
@@ -10485,7 +10485,7 @@ Apply settings anyway?</source>
         <translation type="vanished">Тестовий режим не підтримує одночасного відкриття кількох файлів.</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/mapplication.cpp" line="1077"/>
+        <location filename="../../src/app/tape/mapplication.cpp" line="1078"/>
         <source>Please, provide one input file.</source>
         <translation>Будь ласка, надайте один вхідний файл.</translation>
     </message>
@@ -10506,72 +10506,72 @@ Apply settings anyway?</source>
         <translation type="vanished">Відкрити з базовим розміром. Дійсні значення: %1 см.</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/mapplication.cpp" line="934"/>
+        <location filename="../../src/app/tape/mapplication.cpp" line="935"/>
         <source>Use for unit testing. Run the program and open a file without showing the main window.</source>
         <translation>Використовується для тестування. Запускає програму і відкриває файл без показу головного вікна.</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/mapplication.cpp" line="937"/>
+        <location filename="../../src/app/tape/mapplication.cpp" line="938"/>
         <source>Disable high dpi scaling. Call this option if has problem with scaling (by default scaling enabled). Alternatively you can use the %1 environment variable.</source>
         <translation>Вимкнути масштабування з високим розширенням. Викличте цю функцію якщо маєте проблему з масштабуванням (за замовчуванням масштабування увімкнено). Альтернативно ви можете використовувати змінну середовища %1.</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/mapplication.cpp" line="916"/>
+        <location filename="../../src/app/tape/mapplication.cpp" line="917"/>
         <source>Set base for dimension A in the table units.</source>
         <translation>Установіть базу для виміру А в одиницях вимірювання таблиці.</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/mapplication.cpp" line="917"/>
+        <location filename="../../src/app/tape/mapplication.cpp" line="918"/>
         <source>The dimension A base</source>
         <translation>База виміру А</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/mapplication.cpp" line="920"/>
+        <location filename="../../src/app/tape/mapplication.cpp" line="921"/>
         <source>Set base for dimension B in the table units.</source>
         <translation>Установіть базу для виміру B в одиницях вимірювання таблиці.</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/mapplication.cpp" line="921"/>
+        <location filename="../../src/app/tape/mapplication.cpp" line="922"/>
         <source>The dimension B base</source>
         <translation>База виміру B</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/mapplication.cpp" line="924"/>
+        <location filename="../../src/app/tape/mapplication.cpp" line="925"/>
         <source>Set base for dimension C in the table units.</source>
         <translation>Установіть базу для виміру C в одиницях вимірювання таблиці.</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/mapplication.cpp" line="925"/>
+        <location filename="../../src/app/tape/mapplication.cpp" line="926"/>
         <source>The dimension C base</source>
         <translation>База виміру C</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/mapplication.cpp" line="928"/>
+        <location filename="../../src/app/tape/mapplication.cpp" line="929"/>
         <source>Set pattern file units: cm, mm, inch.</source>
         <translation>Встановити одиниці виміру файлу лекала: см, мм, дюйми.</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/mapplication.cpp" line="929"/>
+        <location filename="../../src/app/tape/mapplication.cpp" line="930"/>
         <source>The pattern units</source>
         <translation>Одиниці виміру лекала</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/mapplication.cpp" line="931"/>
+        <location filename="../../src/app/tape/mapplication.cpp" line="932"/>
         <source>Activate known measurements mode.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/mapplication.cpp" line="1100"/>
+        <location filename="../../src/app/tape/mapplication.cpp" line="1101"/>
         <source>Invalid dimension A base value.</source>
         <translation>Недійсне базове значення виміру A.</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/mapplication.cpp" line="1121"/>
+        <location filename="../../src/app/tape/mapplication.cpp" line="1122"/>
         <source>Invalid dimension B base value.</source>
         <translation>Недійсне базове значення виміру B.</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/mapplication.cpp" line="1142"/>
+        <location filename="../../src/app/tape/mapplication.cpp" line="1143"/>
         <source>Invalid dimension C base value.</source>
         <translation>Недійсне базове значення виміру C.</translation>
     </message>
@@ -10581,7 +10581,7 @@ Apply settings anyway?</source>
         <translation>Попередження у формулі: %1. Програму буде завершено.</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/mapplication.cpp" line="976"/>
+        <location filename="../../src/app/tape/mapplication.cpp" line="977"/>
         <source>Test mode doesn&apos;t support opening several files.</source>
         <translation>Тестовий режим не підтримує одночасного відкриття кількох файлів.</translation>
     </message>
@@ -13522,9 +13522,8 @@ Do you want to save your changes?</source>
         <translation>Заборонити віддзеркалення</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/dialogs/configpages/preferencespatternpage.ui" line="198"/>
         <source>Show a passmark both in the seam allowance and on the seam line.</source>
-        <translation>Показувати надсічки двічі, на прибавці на шви і на лінії шва.</translation>
+        <translation type="vanished">Показувати надсічки двічі, на прибавці на шви і на лінії шва.</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/configpages/preferencespatternpage.ui" line="201"/>
@@ -13555,6 +13554,11 @@ Do you want to save your changes?</source>
         <location filename="../../src/app/valentina/dialogs/configpages/preferencespatternpage.ui" line="238"/>
         <source>Seam allowance</source>
         <translation>Прибавка на шви</translation>
+    </message>
+    <message>
+        <location filename="../../src/app/valentina/dialogs/configpages/preferencespatternpage.ui" line="198"/>
+        <source>Show a notch both in the seam allowance and on the seam line. If you want to see a notch on a piece without seam allowance, enable built-in seam allowance and set the length of a notch manually.</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/configpages/preferencespatternpage.ui" line="244"/>
@@ -14452,7 +14456,7 @@ This option will take an affect after restart.</source>
         <translation>Об&apos;єднана деталь</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vgeometry/vplacelabelitem.cpp" line="145"/>
+        <location filename="../../src/libs/vgeometry/vplacelabelitem.cpp" line="146"/>
         <location filename="../../src/libs/vpatterndb/vpiecepath.cpp" line="1029"/>
         <location filename="../../src/libs/vpatterndb/vpiecepath.cpp" line="1040"/>
         <source>Visibility trigger contains error and will be ignored</source>
@@ -15569,10 +15573,6 @@ This option will take an affect after restart.</source>
         <location filename="../../src/app/tape/tkmmainwindow.ui" line="652"/>
         <source>Images</source>
         <translation>Зображення</translation>
-    </message>
-    <message>
-        <source>...</source>
-        <translation type="vanished">...</translation>
     </message>
     <message>
         <location filename="../../src/app/tape/tkmmainwindow.ui" line="785"/>
@@ -20818,53 +20818,53 @@ Do you want to save your changes?</source>
 <context>
     <name>VMeasurements</name>
     <message>
-        <location filename="../../src/libs/vformat/vmeasurements.cpp" line="672"/>
-        <location filename="../../src/libs/vformat/vmeasurements.cpp" line="686"/>
-        <location filename="../../src/libs/vformat/vmeasurements.cpp" line="700"/>
-        <location filename="../../src/libs/vformat/vmeasurements.cpp" line="714"/>
-        <location filename="../../src/libs/vformat/vmeasurements.cpp" line="728"/>
-        <location filename="../../src/libs/vformat/vmeasurements.cpp" line="742"/>
-        <location filename="../../src/libs/vformat/vmeasurements.cpp" line="757"/>
-        <location filename="../../src/libs/vformat/vmeasurements.cpp" line="786"/>
-        <location filename="../../src/libs/vformat/vmeasurements.cpp" line="801"/>
-        <location filename="../../src/libs/vformat/vmeasurements.cpp" line="815"/>
-        <location filename="../../src/libs/vformat/vmeasurements.cpp" line="832"/>
-        <location filename="../../src/libs/vformat/vmeasurements.cpp" line="846"/>
+        <location filename="../../src/libs/vformat/vmeasurements.cpp" line="671"/>
+        <location filename="../../src/libs/vformat/vmeasurements.cpp" line="685"/>
+        <location filename="../../src/libs/vformat/vmeasurements.cpp" line="699"/>
+        <location filename="../../src/libs/vformat/vmeasurements.cpp" line="713"/>
+        <location filename="../../src/libs/vformat/vmeasurements.cpp" line="727"/>
+        <location filename="../../src/libs/vformat/vmeasurements.cpp" line="741"/>
+        <location filename="../../src/libs/vformat/vmeasurements.cpp" line="756"/>
+        <location filename="../../src/libs/vformat/vmeasurements.cpp" line="785"/>
+        <location filename="../../src/libs/vformat/vmeasurements.cpp" line="800"/>
+        <location filename="../../src/libs/vformat/vmeasurements.cpp" line="814"/>
+        <location filename="../../src/libs/vformat/vmeasurements.cpp" line="831"/>
+        <location filename="../../src/libs/vformat/vmeasurements.cpp" line="845"/>
         <source>Can&apos;t find measurement &apos;%1&apos;</source>
         <translation>Не вдалося знайти мірку &apos;%1&apos;</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vformat/vmeasurements.cpp" line="1279"/>
+        <location filename="../../src/libs/vformat/vmeasurements.cpp" line="1278"/>
         <source>The measurement name is empty!</source>
         <translation>Назва мірки порожня!</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vformat/vmeasurements.cpp" line="1084"/>
+        <location filename="../../src/libs/vformat/vmeasurements.cpp" line="1083"/>
         <source>None</source>
         <translation>Жодного</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vformat/vmeasurements.cpp" line="1086"/>
+        <location filename="../../src/libs/vformat/vmeasurements.cpp" line="1085"/>
         <source>Height</source>
         <translation>Зріст</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vformat/vmeasurements.cpp" line="1088"/>
+        <location filename="../../src/libs/vformat/vmeasurements.cpp" line="1087"/>
         <source>Size</source>
         <translation>Розмір</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vformat/vmeasurements.cpp" line="1092"/>
+        <location filename="../../src/libs/vformat/vmeasurements.cpp" line="1091"/>
         <source>Hip</source>
         <translation>Стегна</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vformat/vmeasurements.cpp" line="1383"/>
+        <location filename="../../src/libs/vformat/vmeasurements.cpp" line="1382"/>
         <source>Dimension is not valid</source>
         <translation>Недійсний вимір</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vformat/vmeasurements.cpp" line="1090"/>
+        <location filename="../../src/libs/vformat/vmeasurements.cpp" line="1089"/>
         <source>Waist</source>
         <translation>Талія</translation>
     </message>
@@ -21090,17 +21090,17 @@ Do you want to save your changes?</source>
         <translation>Програмне виключення: %1. Програма буде закрита.</translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/vpapplication.cpp" line="669"/>
+        <location filename="../../src/app/puzzle/vpapplication.cpp" line="670"/>
         <source>Can&apos;t begin to listen for incoming connections on name &apos;%1&apos;</source>
         <translation>Не вдається почати слухати вхідні з&apos;єднання за іменем &apos;%1&apos;</translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/vpapplication.cpp" line="688"/>
+        <location filename="../../src/app/puzzle/vpapplication.cpp" line="689"/>
         <source>Export mode doesn&apos;t support opening several files.</source>
         <translation>Режим експорту не підтримує відкриття кількох файлів.</translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/vpapplication.cpp" line="695"/>
+        <location filename="../../src/app/puzzle/vpapplication.cpp" line="696"/>
         <source>Import raw layout data does not support opening several layout files.</source>
         <translation>Імпорт необроблених даних розкладки не підтримує відкриття кількох файлів розкладки.</translation>
     </message>

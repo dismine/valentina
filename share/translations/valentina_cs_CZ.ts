@@ -10441,12 +10441,12 @@ Přesto použít nastavení?</translation>
         <translation>Způsobena chyba: %1. Program bude ukončen.</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/mapplication.cpp" line="632"/>
+        <location filename="../../src/app/tape/mapplication.cpp" line="633"/>
         <source>Valentina&apos;s measurements editor.</source>
         <translation>Editor velikostí ve Valentině.</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/mapplication.cpp" line="912"/>
+        <location filename="../../src/app/tape/mapplication.cpp" line="913"/>
         <source>The measurement file.</source>
         <translation>Soubor s mírami.</translation>
     </message>
@@ -10471,12 +10471,12 @@ Přesto použít nastavení?</translation>
         <translation type="vanished">Použít ke zkoušení jednotek. Spusťte program a otevřete soubor bez zobrazení okna.</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/mapplication.cpp" line="1161"/>
+        <location filename="../../src/app/tape/mapplication.cpp" line="1162"/>
         <source>Invalid base size argument. Must be cm, mm or inch.</source>
         <translation>Neplatná základní velikost. Musí být cm, mm nebo palec.</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/mapplication.cpp" line="958"/>
+        <location filename="../../src/app/tape/mapplication.cpp" line="959"/>
         <source>Can&apos;t begin to listen for incoming connections on name &apos;%1&apos;</source>
         <translation>Nelze začít naslouchat příchozímu spojení &apos;%1&apos;</translation>
     </message>
@@ -10485,7 +10485,7 @@ Přesto použít nastavení?</translation>
         <translation type="vanished">Zkušební režim nepodporuje otevření více souborů.</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/mapplication.cpp" line="1077"/>
+        <location filename="../../src/app/tape/mapplication.cpp" line="1078"/>
         <source>Please, provide one input file.</source>
         <translation>Poskytněte, prosím, jeden vstupní soubor.</translation>
     </message>
@@ -10506,72 +10506,72 @@ Přesto použít nastavení?</translation>
         <translation type="vanished">Otevřeno se základní výškou. Platné hodnoty: %1 cm.</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/mapplication.cpp" line="934"/>
+        <location filename="../../src/app/tape/mapplication.cpp" line="935"/>
         <source>Use for unit testing. Run the program and open a file without showing the main window.</source>
         <translation>Použít ke zkoušení jednotek. Spusťte program a otevřete soubor bez zobrazení okna.</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/mapplication.cpp" line="937"/>
+        <location filename="../../src/app/tape/mapplication.cpp" line="938"/>
         <source>Disable high dpi scaling. Call this option if has problem with scaling (by default scaling enabled). Alternatively you can use the %1 environment variable.</source>
         <translation>Zakázat škálování pro obrazovky s velkým rozlišením. Tuto volbu zvolte, pokud máte potíže se škálováním (ve výchozím nastavení je škálování povoleno). Jinou možností je použít proměnnou prostředí %1.</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/mapplication.cpp" line="916"/>
+        <location filename="../../src/app/tape/mapplication.cpp" line="917"/>
         <source>Set base for dimension A in the table units.</source>
         <translation>Nastavte základ pro rozměr A v jednotkách tabulky.</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/mapplication.cpp" line="917"/>
+        <location filename="../../src/app/tape/mapplication.cpp" line="918"/>
         <source>The dimension A base</source>
         <translation>Základní hodnota rozměru A</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/mapplication.cpp" line="920"/>
+        <location filename="../../src/app/tape/mapplication.cpp" line="921"/>
         <source>Set base for dimension B in the table units.</source>
         <translation>Nastavte základ pro rozměr B v jednotkách tabulky.</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/mapplication.cpp" line="921"/>
+        <location filename="../../src/app/tape/mapplication.cpp" line="922"/>
         <source>The dimension B base</source>
         <translation>Základní hodnota rozměru B</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/mapplication.cpp" line="924"/>
+        <location filename="../../src/app/tape/mapplication.cpp" line="925"/>
         <source>Set base for dimension C in the table units.</source>
         <translation>Nastavte základ pro rozměr C v jednotkách tabulky.</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/mapplication.cpp" line="925"/>
+        <location filename="../../src/app/tape/mapplication.cpp" line="926"/>
         <source>The dimension C base</source>
         <translation>Základní hodnota rozměru C</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/mapplication.cpp" line="928"/>
+        <location filename="../../src/app/tape/mapplication.cpp" line="929"/>
         <source>Set pattern file units: cm, mm, inch.</source>
         <translation>Nastavit jednotky střihu: cm, mm, palec.</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/mapplication.cpp" line="929"/>
+        <location filename="../../src/app/tape/mapplication.cpp" line="930"/>
         <source>The pattern units</source>
         <translation>Jednotky střihu</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/mapplication.cpp" line="931"/>
+        <location filename="../../src/app/tape/mapplication.cpp" line="932"/>
         <source>Activate known measurements mode.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/mapplication.cpp" line="1100"/>
+        <location filename="../../src/app/tape/mapplication.cpp" line="1101"/>
         <source>Invalid dimension A base value.</source>
         <translation>Neplatná základní hodnota rozměru A.</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/mapplication.cpp" line="1121"/>
+        <location filename="../../src/app/tape/mapplication.cpp" line="1122"/>
         <source>Invalid dimension B base value.</source>
         <translation>Neplatná základní hodnota rozměru B.</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/mapplication.cpp" line="1142"/>
+        <location filename="../../src/app/tape/mapplication.cpp" line="1143"/>
         <source>Invalid dimension C base value.</source>
         <translation>Neplatná základní hodnota rozměru C.</translation>
     </message>
@@ -10581,7 +10581,7 @@ Přesto použít nastavení?</translation>
         <translation>Upozornění na vzorec: %1. Program bude ukončen.</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/mapplication.cpp" line="976"/>
+        <location filename="../../src/app/tape/mapplication.cpp" line="977"/>
         <source>Test mode doesn&apos;t support opening several files.</source>
         <translation>Zkušební režim nepodporuje otevření více souborů.</translation>
     </message>
@@ -13523,9 +13523,8 @@ Chcete uložit své změny?</translation>
         <translation>Zakázat přetočení</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/dialogs/configpages/preferencespatternpage.ui" line="198"/>
         <source>Show a passmark both in the seam allowance and on the seam line.</source>
-        <translation>Ukázat značku sestavení jak na švové záložce, tak na čáře švu.</translation>
+        <translation type="vanished">Ukázat značku sestavení jak na švové záložce, tak na čáře švu.</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/configpages/preferencespatternpage.ui" line="201"/>
@@ -13556,6 +13555,11 @@ Chcete uložit své změny?</translation>
         <location filename="../../src/app/valentina/dialogs/configpages/preferencespatternpage.ui" line="238"/>
         <source>Seam allowance</source>
         <translation>Švová záložka</translation>
+    </message>
+    <message>
+        <location filename="../../src/app/valentina/dialogs/configpages/preferencespatternpage.ui" line="198"/>
+        <source>Show a notch both in the seam allowance and on the seam line. If you want to see a notch on a piece without seam allowance, enable built-in seam allowance and set the length of a notch manually.</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/configpages/preferencespatternpage.ui" line="244"/>
@@ -14453,7 +14457,7 @@ Tato volba se projeví po opětovném spuštění.</translation>
         <translation>Spojená jednotlivost (díl střihu)</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vgeometry/vplacelabelitem.cpp" line="145"/>
+        <location filename="../../src/libs/vgeometry/vplacelabelitem.cpp" line="146"/>
         <location filename="../../src/libs/vpatterndb/vpiecepath.cpp" line="1029"/>
         <location filename="../../src/libs/vpatterndb/vpiecepath.cpp" line="1040"/>
         <source>Visibility trigger contains error and will be ignored</source>
@@ -15568,10 +15572,6 @@ Tato volba se projeví po opětovném spuštění.</translation>
         <location filename="../../src/app/tape/tkmmainwindow.ui" line="652"/>
         <source>Images</source>
         <translation>Obrázky</translation>
-    </message>
-    <message>
-        <source>...</source>
-        <translation type="vanished">...</translation>
     </message>
     <message>
         <location filename="../../src/app/tape/tkmmainwindow.ui" line="785"/>
@@ -20818,53 +20818,53 @@ Chcete uložit změny?</translation>
 <context>
     <name>VMeasurements</name>
     <message>
-        <location filename="../../src/libs/vformat/vmeasurements.cpp" line="672"/>
-        <location filename="../../src/libs/vformat/vmeasurements.cpp" line="686"/>
-        <location filename="../../src/libs/vformat/vmeasurements.cpp" line="700"/>
-        <location filename="../../src/libs/vformat/vmeasurements.cpp" line="714"/>
-        <location filename="../../src/libs/vformat/vmeasurements.cpp" line="728"/>
-        <location filename="../../src/libs/vformat/vmeasurements.cpp" line="742"/>
-        <location filename="../../src/libs/vformat/vmeasurements.cpp" line="757"/>
-        <location filename="../../src/libs/vformat/vmeasurements.cpp" line="786"/>
-        <location filename="../../src/libs/vformat/vmeasurements.cpp" line="801"/>
-        <location filename="../../src/libs/vformat/vmeasurements.cpp" line="815"/>
-        <location filename="../../src/libs/vformat/vmeasurements.cpp" line="832"/>
-        <location filename="../../src/libs/vformat/vmeasurements.cpp" line="846"/>
+        <location filename="../../src/libs/vformat/vmeasurements.cpp" line="671"/>
+        <location filename="../../src/libs/vformat/vmeasurements.cpp" line="685"/>
+        <location filename="../../src/libs/vformat/vmeasurements.cpp" line="699"/>
+        <location filename="../../src/libs/vformat/vmeasurements.cpp" line="713"/>
+        <location filename="../../src/libs/vformat/vmeasurements.cpp" line="727"/>
+        <location filename="../../src/libs/vformat/vmeasurements.cpp" line="741"/>
+        <location filename="../../src/libs/vformat/vmeasurements.cpp" line="756"/>
+        <location filename="../../src/libs/vformat/vmeasurements.cpp" line="785"/>
+        <location filename="../../src/libs/vformat/vmeasurements.cpp" line="800"/>
+        <location filename="../../src/libs/vformat/vmeasurements.cpp" line="814"/>
+        <location filename="../../src/libs/vformat/vmeasurements.cpp" line="831"/>
+        <location filename="../../src/libs/vformat/vmeasurements.cpp" line="845"/>
         <source>Can&apos;t find measurement &apos;%1&apos;</source>
         <translation>Nelze najít míry &apos;%1&apos;</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vformat/vmeasurements.cpp" line="1279"/>
+        <location filename="../../src/libs/vformat/vmeasurements.cpp" line="1278"/>
         <source>The measurement name is empty!</source>
         <translation>Název míry je prázdný!</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vformat/vmeasurements.cpp" line="1084"/>
+        <location filename="../../src/libs/vformat/vmeasurements.cpp" line="1083"/>
         <source>None</source>
         <translation>Žádný</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vformat/vmeasurements.cpp" line="1086"/>
+        <location filename="../../src/libs/vformat/vmeasurements.cpp" line="1085"/>
         <source>Height</source>
         <translation>Výška</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vformat/vmeasurements.cpp" line="1088"/>
+        <location filename="../../src/libs/vformat/vmeasurements.cpp" line="1087"/>
         <source>Size</source>
         <translation>Velikost</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vformat/vmeasurements.cpp" line="1092"/>
+        <location filename="../../src/libs/vformat/vmeasurements.cpp" line="1091"/>
         <source>Hip</source>
         <translation>Kyčel</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vformat/vmeasurements.cpp" line="1383"/>
+        <location filename="../../src/libs/vformat/vmeasurements.cpp" line="1382"/>
         <source>Dimension is not valid</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/libs/vformat/vmeasurements.cpp" line="1090"/>
+        <location filename="../../src/libs/vformat/vmeasurements.cpp" line="1089"/>
         <source>Waist</source>
         <translation>Pas</translation>
     </message>
@@ -21090,17 +21090,17 @@ Chcete uložit změny?</translation>
         <translation>Způsobena chyba: %1. Program bude ukončen.</translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/vpapplication.cpp" line="669"/>
+        <location filename="../../src/app/puzzle/vpapplication.cpp" line="670"/>
         <source>Can&apos;t begin to listen for incoming connections on name &apos;%1&apos;</source>
         <translation>Nelze začít naslouchat příchozímu spojení &apos;%1&apos;</translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/vpapplication.cpp" line="688"/>
+        <location filename="../../src/app/puzzle/vpapplication.cpp" line="689"/>
         <source>Export mode doesn&apos;t support opening several files.</source>
         <translation>Režim vyvedení nepodporuje otevření více souborů.</translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/vpapplication.cpp" line="695"/>
+        <location filename="../../src/app/puzzle/vpapplication.cpp" line="696"/>
         <source>Import raw layout data does not support opening several layout files.</source>
         <translation>Zavedení nezpracovaných dat rozvržení nepodporuje otevření více souborů rozvržení.</translation>
     </message>
