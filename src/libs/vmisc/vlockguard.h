@@ -36,7 +36,7 @@
 #endif /*Q_OS_WIN*/
 
 #include <QString>
-#include <stdint.h>
+#include <cstdint>
 
 #if QT_VERSION < QT_VERSION_CHECK(5, 13, 0)
 #include "../vmisc/defglobal.h"
@@ -57,6 +57,7 @@ template <typename Guarded> class VLockGuard
 {
 public:
     explicit VLockGuard(const QString &lockName, int stale = 0, int timeout = 0);
+    ~VLockGuard() = default;
 
     template <typename Alloc> VLockGuard(const QString &lockName, Alloc a, int stale = 0, int timeout = 0);
 
@@ -73,21 +74,16 @@ private:
     // cppcheck-suppress unknownMacro
     Q_DISABLE_COPY_MOVE(VLockGuard) // NOLINT
 
-    QSharedPointer<Guarded> holder;
-    int lockError;
-    QString lockFile;
-    QSharedPointer<QLockFile> lock;
+    QSharedPointer<Guarded> holder{};
+    int lockError{0};
+    QString lockFile{};
+    QSharedPointer<QLockFile> lock{};
 
     auto TryLock(const QString &lockName, int stale, int timeout) -> bool;
 };
 
 //---------------------------------------------------------------------------------------------------------------------
-template <typename Guarded>
-VLockGuard<Guarded>::VLockGuard(const QString &lockName, int stale, int timeout)
-  : holder(nullptr),
-    lockError(0),
-    lockFile(),
-    lock(nullptr)
+template <typename Guarded> VLockGuard<Guarded>::VLockGuard(const QString &lockName, int stale, int timeout)
 {
     if (TryLock(lockName, stale, timeout))
     {
@@ -101,10 +97,6 @@ VLockGuard<Guarded>::VLockGuard(const QString &lockName, int stale, int timeout)
 template <typename Guarded>
 template <typename Alloc>
 VLockGuard<Guarded>::VLockGuard(const QString &lockName, Alloc a, int stale, int timeout)
-  : holder(nullptr),
-    lockError(0),
-    lockFile(),
-    lock(nullptr)
 {
     if (TryLock(lockName, stale, timeout))
     {
@@ -116,10 +108,6 @@ VLockGuard<Guarded>::VLockGuard(const QString &lockName, Alloc a, int stale, int
 template <typename Guarded>
 template <typename Alloc, typename Delete>
 VLockGuard<Guarded>::VLockGuard(const QString &lockName, Alloc a, Delete d, int stale, int timeout)
-  : holder(nullptr),
-    lockError(0),
-    lockFile(),
-    lock(nullptr)
 {
     if (TryLock(lockName, stale, timeout))
     {
