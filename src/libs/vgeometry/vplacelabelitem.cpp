@@ -26,12 +26,13 @@
  **
  *************************************************************************/
 #include "vplacelabelitem.h"
-#include "../vpatterndb/vcontainer.h"
 #include "vplacelabelitem_p.h"
 
+#include <QObject>
 #include <QPainterPath>
 #include <QPolygonF>
 #include <QTransform>
+#include <QtDebug>
 #include <qnumeric.h>
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -207,7 +208,7 @@ auto VPlaceLabelItem::RotationMatrix() const -> QTransform
 //---------------------------------------------------------------------------------------------------------------------
 auto VPlaceLabelItem::Box() const -> QRectF
 {
-    return QRectF(0, 0, d->wValue, d->hValue);
+    return {0, 0, d->wValue, d->hValue};
 }
 
 //---------------------------------------------------------------------------------------------------------------------
