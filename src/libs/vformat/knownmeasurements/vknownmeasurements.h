@@ -63,10 +63,10 @@ public:
 
     auto IsReadOnly() const -> bool;
     void SetReadOnly(bool ro);
-
-    auto Measurments() const -> QHash<QString, VKnownMeasurement>;
-    auto OrderedMeasurments() const -> QMap<int, VKnownMeasurement>;
-    auto OrderedGroupMeasurments(const QString &group) const -> QMap<int, VKnownMeasurement>;
+    
+    auto Measurements() const -> QHash<QString, VKnownMeasurement>;
+    auto OrderedMeasurements() const -> QMap<int, VKnownMeasurement>;
+    auto OrderedGroupMeasurements(const QString &group) const -> QMap<int, VKnownMeasurement>;
     auto Images() const -> QMap<QUuid, VPatternImage>;
     auto Groups() const -> QStringList;
 

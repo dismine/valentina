@@ -50,7 +50,7 @@ Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingPathsTemplates, ("paths/template
 Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingDataBaseGeometry, ("database/geometry"_L1))   // NOLINT
 Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingSearchHistoryTape, ("searchHistory/tape"_L1)) // NOLINT
 // NOLINTNEXTLINE
-Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingSearchHistoryKnownMeasurments, ("searchHistory/knownMeasurements"_L1))
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingSearchHistoryKnownMeasurements, ("searchHistory/knownMeasurements"_L1))
 
 // NOLINTNEXTLINE
 Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingSearchOptionsTapeUseUnicodeProperties,
@@ -119,13 +119,13 @@ void VTapeSettings::SetTapeSearchHistory(const QStringList &history)
 //---------------------------------------------------------------------------------------------------------------------
 auto VTapeSettings::GetKMSearchHistory() const -> QStringList
 {
-    return value(*settingSearchHistoryKnownMeasurments).toStringList();
+    return value(*settingSearchHistoryKnownMeasurements).toStringList();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 void VTapeSettings::SetKMSearchHistory(const QStringList &history)
 {
-    setValue(*settingSearchHistoryKnownMeasurments, history);
+    setValue(*settingSearchHistoryKnownMeasurements, history);
 }
 
 //---------------------------------------------------------------------------------------------------------------------

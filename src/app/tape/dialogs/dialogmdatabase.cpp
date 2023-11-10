@@ -293,7 +293,7 @@ void DialogMDataBase::InitDataBase(const QStringList &usedMeasurements)
     VKnownMeasurementsDatabase *db = MApplication::VApp()->KnownMeasurementsDatabase();
     VKnownMeasurements knownDB = db->KnownMeasurements(m_knownId);
 
-    QMap<int, VKnownMeasurement> measurements = knownDB.OrderedGroupMeasurments(QString());
+    QMap<int, VKnownMeasurement> measurements = knownDB.OrderedGroupMeasurements(QString());
     if (!measurements.isEmpty())
     {
         m_generalGroup = InitGroup(tr("General", "Measurement section"), measurements, usedMeasurements);
@@ -303,7 +303,7 @@ void DialogMDataBase::InitDataBase(const QStringList &usedMeasurements)
     QStringList groups = knownDB.Groups();
     for (auto &group : groups)
     {
-        QMap<int, VKnownMeasurement> groupMeasurements = knownDB.OrderedGroupMeasurments(group);
+        QMap<int, VKnownMeasurement> groupMeasurements = knownDB.OrderedGroupMeasurements(group);
         m_groups.append(InitGroup(group, groupMeasurements, usedMeasurements));
     }
 }

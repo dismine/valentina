@@ -295,8 +295,8 @@ private:
     void SetCurrentDimensionValues();
 
     auto DimensionRestrictedValues(int index, const MeasurementDimension_p &dimension) -> QVector<double>;
-
-    auto OrderedMeasurments() const -> QMap<int, QSharedPointer<VMeasurement>>;
+    
+    auto OrderedMeasurements() const -> QMap<int, QSharedPointer<VMeasurement>>;
 
     void InitIcons();
 

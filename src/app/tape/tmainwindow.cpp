@@ -915,7 +915,7 @@ void TMainWindow::ExportToCSVData(const QString &fileName, bool withHeader, int 
     VKnownMeasurementsDatabase *db = MApplication::VApp()->KnownMeasurementsDatabase();
     VKnownMeasurements knownDB = db->KnownMeasurements(m_m->KnownMeasurements());
 
-    const QMap<int, QSharedPointer<VMeasurement>> orderedTable = OrderedMeasurments();
+    const QMap<int, QSharedPointer<VMeasurement>> orderedTable = OrderedMeasurements();
     int row = 0;
     for (auto iMap = orderedTable.constBegin(); iMap != orderedTable.constEnd(); ++iMap)
     {
@@ -2657,7 +2657,7 @@ void TMainWindow::ExportToIndividual()
 
     VMeasurements individualMeasurements(m_mUnit, tmpData.data());
 
-    const QMap<int, QSharedPointer<VMeasurement>> orderedTable = OrderedMeasurments();
+    const QMap<int, QSharedPointer<VMeasurement>> orderedTable = OrderedMeasurements();
     QMap<int, QSharedPointer<VMeasurement>>::const_iterator iMap;
     for (iMap = orderedTable.constBegin(); iMap != orderedTable.constEnd(); ++iMap)
     {
@@ -3583,7 +3583,7 @@ void TMainWindow::RefreshTable(bool freshCall)
 
     ShowUnits();
 
-    const QMap<int, QSharedPointer<VMeasurement>> orderedTable = OrderedMeasurments();
+    const QMap<int, QSharedPointer<VMeasurement>> orderedTable = OrderedMeasurements();
     qint32 currentRow = -1;
     ui->tableWidget->setRowCount(static_cast<int>(orderedTable.size()));
     for (auto iMap = orderedTable.constBegin(); iMap != orderedTable.constEnd(); ++iMap)
@@ -4723,7 +4723,7 @@ auto TMainWindow::DimensionRestrictedValues(int index, const MeasurementDimensio
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-auto TMainWindow::OrderedMeasurments() const -> QMap<int, QSharedPointer<VMeasurement>>
+auto TMainWindow::OrderedMeasurements() const -> QMap<int, QSharedPointer<VMeasurement>>
 {
     const QMap<QString, QSharedPointer<VMeasurement>> table = m_data->DataMeasurementsWithSeparators();
     QMap<int, QSharedPointer<VMeasurement>> orderedTable;

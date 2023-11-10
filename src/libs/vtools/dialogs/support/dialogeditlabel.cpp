@@ -561,7 +561,7 @@ void DialogEditLabel::InitPlaceholders()
     m_placeholders.insert(pl_pFileName, qMakePair(tr("Pattern file name"), patternFilePath));
 
     const QString measurementsFilePath = QFileInfo(m_doc->MPath()).baseName();
-    m_placeholders.insert(pl_mFileName, qMakePair(tr("Measurments file name"), measurementsFilePath));
+    m_placeholders.insert(pl_mFileName, qMakePair(tr("Measurements file name"), measurementsFilePath));
 
     QString heightValue = QString::number(VAbstractValApplication::VApp()->GetDimensionHeight());
     m_placeholders.insert(pl_height, qMakePair(tr("Height", "dimension"), heightValue));
@@ -606,7 +606,7 @@ void DialogEditLabel::InitPlaceholders()
     }
 
     m_placeholders.insert(
-        pl_mExt, qMakePair(tr("Measurments extension"),
+        pl_mExt, qMakePair(tr("Measurements extension"),
                            VAbstractValApplication::VApp()->GetMeasurementsType() == MeasurementsType::Multisize
                                ? QStringLiteral("vst")
                                : QStringLiteral("vit")));

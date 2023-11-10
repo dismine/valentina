@@ -485,7 +485,7 @@ void TKMMainWindow::ExportToCSVData(const QString &fileName, bool withHeader, in
         }
     }
 
-    const QMap<int, VKnownMeasurement> orderedTable = m_known.OrderedMeasurments();
+    const QMap<int, VKnownMeasurement> orderedTable = m_known.OrderedMeasurements();
     int row = 0;
     for (auto iMap = orderedTable.constBegin(); iMap != orderedTable.constEnd(); ++iMap)
     {
@@ -1256,7 +1256,7 @@ void TKMMainWindow::SaveMName()
 
     QString newName = ui->lineEditName->text().isEmpty() ? GenerateMeasurementName() : ui->lineEditName->text();
 
-    QHash<QString, VKnownMeasurement> m = m_known.Measurments();
+    QHash<QString, VKnownMeasurement> m = m_known.Measurements();
     if (m.contains(newName))
     {
         qint32 num = 2;
@@ -2167,7 +2167,7 @@ void TKMMainWindow::RefreshTable()
         m_known = m_m->KnownMeasurements();
     }
 
-    const QMap<int, VKnownMeasurement> orderedTable = m_known.OrderedMeasurments();
+    const QMap<int, VKnownMeasurement> orderedTable = m_known.OrderedMeasurements();
     qint32 currentRow = -1;
     ui->tableWidget->setRowCount(static_cast<int>(orderedTable.size()));
     for (auto iMap = orderedTable.constBegin(); iMap != orderedTable.constEnd(); ++iMap)
@@ -2400,7 +2400,7 @@ void TKMMainWindow::ImageFields(bool enabled)
 //---------------------------------------------------------------------------------------------------------------------
 auto TKMMainWindow::GenerateMeasurementName() const -> QString
 {
-    QHash<QString, VKnownMeasurement> m = m_known.Measurments();
+    QHash<QString, VKnownMeasurement> m = m_known.Measurements();
     qint32 num = 1;
     QString name;
     do
@@ -2502,7 +2502,7 @@ auto TKMMainWindow::CheckMName(const QString &name, const QSet<QString> &importe
         throw VException(tr("Measurement '%1' doesn't match regex pattern.").arg(name));
     }
 
-    if (m_known.Measurments().contains(name))
+    if (m_known.Measurements().contains(name))
     {
         throw VException(tr("Measurement '%1' already used in the file.").arg(name));
     }

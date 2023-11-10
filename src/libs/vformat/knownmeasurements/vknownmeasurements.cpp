@@ -128,13 +128,13 @@ void VKnownMeasurements::SetReadOnly(bool ro)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-auto VKnownMeasurements::Measurments() const -> QHash<QString, VKnownMeasurement>
+auto VKnownMeasurements::Measurements() const -> QHash<QString, VKnownMeasurement>
 {
     return d->m_measurements;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-auto VKnownMeasurements::OrderedMeasurments() const -> QMap<int, VKnownMeasurement>
+auto VKnownMeasurements::OrderedMeasurements() const -> QMap<int, VKnownMeasurement>
 {
     QMap<int, VKnownMeasurement> ordered;
     auto i = d->m_measurements.constBegin();
@@ -148,7 +148,7 @@ auto VKnownMeasurements::OrderedMeasurments() const -> QMap<int, VKnownMeasureme
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-auto VKnownMeasurements::OrderedGroupMeasurments(const QString &group) const -> QMap<int, VKnownMeasurement>
+auto VKnownMeasurements::OrderedGroupMeasurements(const QString &group) const -> QMap<int, VKnownMeasurement>
 {
     QMap<int, VKnownMeasurement> ordered;
     auto i = d->m_measurements.constBegin();

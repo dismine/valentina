@@ -963,9 +963,9 @@
     <addaction name="actionAboutQt"/>
     <addaction name="actionAboutTape"/>
    </widget>
-   <widget class="QMenu" name="menuMeasurments">
+   <widget class="QMenu" name="menuMeasurements">
     <property name="title">
-     <string>&amp;Measurments</string>
+     <string>&amp;Measurements</string>
     </property>
     <addaction name="actionAddKnown"/>
     <addaction name="actionMeasurementDiagram"/>
@@ -976,7 +976,7 @@
     </property>
    </widget>
    <addaction name="menuFile"/>
-   <addaction name="menuMeasurments"/>
+   <addaction name="menuMeasurements"/>
    <addaction name="menuWindow"/>
    <addaction name="menuHelp"/>
   </widget>
