@@ -500,8 +500,7 @@ void VPPiece::CleanPosition(const VPPiecePtr &piece)
         QVector<VLayoutPlaceLabel> placeLabels = piece->GetPlaceLabels();
         for (auto &label : placeLabels)
         {
-            label.SetCenter(matrix.map(label.Center()));
-            label.SetBox(label.Box().translated(-offset.x(), -offset.y()));
+            label.SetRotationMatrix(label.RotationMatrix() * matrix);
         }
         piece->SetPlaceLabels(placeLabels);
     }
