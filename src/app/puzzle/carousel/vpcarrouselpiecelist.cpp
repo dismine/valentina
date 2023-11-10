@@ -184,7 +184,12 @@ void VPCarrouselPieceList::startDrag(Qt::DropActions supportedActions)
         VPPiecePtr piece = pieceItem->GetPiece();
         mimeData->SetPiecePtr(piece);
 
-        QPixmap pixmap = pieceItem->CreatePieceIcon(QSize(120, 120), true).pixmap(QSize(120, 120));
+        QIcon pieceIcon = pieceItem->CreatePieceIcon(QSize(120, 120), true);
+        QPixmap pixmap;
+        if (!pieceIcon.isNull())
+        {
+            pieceIcon.pixmap(QSize(120, 120));
+        }
 
         drag->setDragCursor(VPMimeDataPiece::DragCursor(pixmap), Qt::MoveAction);
         drag->setMimeData(mimeData);

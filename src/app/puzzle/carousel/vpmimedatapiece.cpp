@@ -63,15 +63,22 @@ void VPMimeDataPiece::SetPiecePtr(const VPPiecePtr &piece)
 //---------------------------------------------------------------------------------------------------------------------
 auto VPMimeDataPiece::DragCursor(const QPixmap &piecePixmap) -> QPixmap
 {
-    QPixmap dragCursor(piecePixmap.width() * 2, piecePixmap.height() * 2);
-    dragCursor.fill(Qt::transparent);
-    QPainter painter(&dragCursor);
-    painter.drawPixmap(dragCursor.width() / 2, dragCursor.height() / 2, piecePixmap);
     QPixmap cursor(QStringLiteral("://puzzlecursor/collect.png"));
-    painter.drawPixmap(dragCursor.width() / 2 - cursor.width() / 2, dragCursor.height() / 2 - cursor.height() / 2,
-                       cursor);
-    painter.end();
-    return dragCursor;
+
+    if (!piecePixmap.isNull())
+    {
+        QPixmap dragCursor(piecePixmap.width() * 2, piecePixmap.height() * 2);
+        dragCursor.fill(Qt::transparent);
+        QPainter painter(&dragCursor);
+        painter.drawPixmap(dragCursor.width() / 2, dragCursor.height() / 2, piecePixmap);
+
+        painter.drawPixmap(dragCursor.width() / 2 - cursor.width() / 2, dragCursor.height() / 2 - cursor.height() / 2,
+                           cursor);
+        painter.end();
+        return dragCursor;
+    }
+
+    return cursor;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
