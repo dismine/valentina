@@ -935,6 +935,7 @@ auto VAbstractOperation::ComplexPointToolTip(quint32 itemId) const -> QString
 {
     return QStringLiteral("<table>"
                           "<tr> <td><b>%1:</b> %2</td> </tr>"
+                          "<tr> <td colspan=\"100%\"><hr/></td> </tr>"
                           "%3"
                           "</table>")
         .arg(tr("Label"), VAbstractTool::data.GetGObject(itemId)->name(), MakeToolTip());
@@ -948,6 +949,7 @@ auto VAbstractOperation::ComplexCurveToolTip(quint32 itemId) const -> QString
     const QString toolTip = u"<table>"
                             u"<tr> <td><b>%1:</b> %2</td> </tr>"
                             u"<tr> <td><b>%3:</b> %4 %5</td> </tr>"
+                            u"<tr> <td colspan=\"100%\"><hr/></td> </tr>"
                             u"%6"
                             u"</table>"_s.arg(tr("Label"), curve->ObjectName(), tr("Length"))
                                 .arg(VAbstractValApplication::VApp()->fromPixel(curve->GetLength()))
