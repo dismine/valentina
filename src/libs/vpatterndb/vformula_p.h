@@ -53,7 +53,7 @@ public:
 
     QString formula{};                                     // NOLINT(misc-non-private-member-variables-in-classes)
     QString strValue{tr("Error")};                         // NOLINT(misc-non-private-member-variables-in-classes)
-    bool checkZero{true};                                  // NOLINT(misc-non-private-member-variables-in-classes)
+    bool checkZero{false};                                 // NOLINT(misc-non-private-member-variables-in-classes)
     bool checkLessThanZero{false};                         // NOLINT(misc-non-private-member-variables-in-classes)
     const VContainer *data{nullptr};                       // NOLINT(misc-non-private-member-variables-in-classes)
     quint32 toolId{NULL_ID};                               // NOLINT(misc-non-private-member-variables-in-classes)

@@ -35,8 +35,10 @@
 
 #include "../../../../../dialogs/tools/dialogendline.h"
 #include "../../../../../dialogs/tools/dialogtool.h"
-#include "../../../../../visualization/visualization.h"
 #include "../../../../../visualization/line/vistoolendline.h"
+#include "../../../../../visualization/visualization.h"
+#include "../../../../vabstracttool.h"
+#include "../../../vdrawtool.h"
 #include "../ifc/exception/vexception.h"
 #include "../ifc/ifcdef.h"
 #include "../vgeometry/vpointf.h"
@@ -45,8 +47,6 @@
 #include "../vpatterndb/vcontainer.h"
 #include "../vpatterndb/vtranslatevars.h"
 #include "../vwidgets/vmaingraphicsscene.h"
-#include "../../../../vabstracttool.h"
-#include "../../../vdrawtool.h"
 #include "vtoollinepoint.h"
 
 template <class T> class QSharedPointer;
@@ -60,9 +60,9 @@ const QString VToolEndLine::ToolType = QStringLiteral("endLine");
  * @param parent parent object.
  */
 VToolEndLine::VToolEndLine(const VToolEndLineInitData &initData, QGraphicsItem *parent)
-    :VToolLinePoint(initData.doc, initData.data, initData.id, initData.typeLine, initData.lineColor,
-                    initData.formulaLength, initData.basePointId, 0, initData.notes, parent),
-      formulaAngle(initData.formulaAngle)
+  : VToolLinePoint(initData.doc, initData.data, initData.id, initData.typeLine, initData.lineColor,
+                   initData.formulaLength, initData.basePointId, 0, initData.notes, parent),
+    formulaAngle(initData.formulaAngle)
 {
     ToolCreation(initData.typeCreation);
 }
@@ -133,11 +133,11 @@ auto VToolEndLine::Create(const QPointer<DialogTool> &dialog, VMainGraphicsScene
 auto VToolEndLine::Create(VToolEndLineInitData &initData) -> VToolEndLine *
 {
     const QSharedPointer<VPointF> basePoint = initData.data->GeometricObject<VPointF>(initData.basePointId);
-    QLineF line = QLineF(static_cast<QPointF>(*basePoint), QPointF(basePoint->x()+100, basePoint->y()));
+    QLineF line = QLineF(static_cast<QPointF>(*basePoint), QPointF(basePoint->x() + 100, basePoint->y()));
 
-    line.setAngle(CheckFormula(initData.id, initData.formulaAngle, initData.data)); //First set angle.
-    line.setLength(VAbstractValApplication::VApp()
-                   ->toPixel(CheckFormula(initData.id, initData.formulaLength, initData.data)));
+    line.setAngle(CheckFormula(initData.id, initData.formulaAngle, initData.data)); // First set angle.
+    line.setLength(
+        VAbstractValApplication::VApp()->toPixel(CheckFormula(initData.id, initData.formulaLength, initData.data)));
 
     VPointF *p = new VPointF(line.p2(), initData.name, initData.mx, initData.my);
     p->SetShowLabel(initData.showLabel);
@@ -174,8 +174,7 @@ auto VToolEndLine::Create(VToolEndLineInitData &initData) -> VToolEndLine *
 /**
  * @brief SaveDialog save options into file after change in dialog.
  */
-void VToolEndLine::SaveDialog(QDomElement &domElement, QList<quint32> &oldDependencies,
-                              QList<quint32> &newDependencies)
+void VToolEndLine::SaveDialog(QDomElement &domElement, QList<quint32> &oldDependencies, QList<quint32> &newDependencies)
 {
     SCASSERT(not m_dialog.isNull())
     const QPointer<DialogEndLine> dialogTool = qobject_cast<DialogEndLine *>(m_dialog);
@@ -191,7 +190,7 @@ void VToolEndLine::SaveDialog(QDomElement &domElement, QList<quint32> &oldDepend
     doc->SetAttribute(domElement, AttrAngle, dialogTool->GetAngle());
     doc->SetAttribute(domElement, AttrBasePoint, QString().setNum(dialogTool->GetBasePointId()));
     doc->SetAttributeOrRemoveIf<QString>(domElement, AttrNotes, dialogTool->GetNotes(),
-                                         [](const QString &notes) noexcept {return notes.isEmpty();});
+                                         [](const QString &notes) noexcept { return notes.isEmpty(); });
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -241,7 +240,6 @@ void VToolEndLine::SetVisualization()
 auto VToolEndLine::GetFormulaAngle() const -> VFormula
 {
     VFormula fAngle(formulaAngle, getData());
-    fAngle.setCheckZero(false);
     fAngle.setToolId(m_id);
     fAngle.setPostfix(degreeSymbol);
     fAngle.Eval();
@@ -273,9 +271,9 @@ void VToolEndLine::ShowContextMenu(QGraphicsSceneContextMenuEvent *event, quint3
     {
         ContextMenu<DialogEndLine>(event, id);
     }
-    catch(const VExceptionToolWasDeleted &e)
+    catch (const VExceptionToolWasDeleted &e)
     {
         Q_UNUSED(e)
-        return;//Leave this method immediately!!!
+        return; // Leave this method immediately!!!
     }
 }

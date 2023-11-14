@@ -142,7 +142,6 @@ auto VPieceNode::GetSABefore(const VContainer *data) const -> qreal
     }
 
     VFormula formula(d->m_formulaWidthBefore, data);
-    formula.setCheckZero(false);
     formula.Eval();
 
     if (formula.error())
@@ -175,7 +174,6 @@ auto VPieceNode::GetSABefore(const VContainer *data, Unit unit) const -> qreal
     }
 
     VFormula formula(d->m_formulaWidthBefore, data);
-    formula.setCheckZero(false);
     formula.Eval();
 
     if (formula.error())
@@ -229,7 +227,6 @@ auto VPieceNode::GetSAAfter(const VContainer *data) const -> qreal
     }
 
     VFormula formula(d->m_formulaWidthAfter, data);
-    formula.setCheckZero(false);
     formula.Eval();
 
     if (formula.error())
@@ -263,7 +260,6 @@ auto VPieceNode::GetSAAfter(const VContainer *data, Unit unit) const -> qreal
     }
 
     VFormula formula(d->m_formulaWidthAfter, data);
-    formula.setCheckZero(false);
     formula.Eval();
 
     if (formula.error())
@@ -395,7 +391,6 @@ auto VPieceNode::GetPassmarkWidth(const VContainer *data, Unit unit) const -> qr
     {
         VFormula formula(d->m_formulaPassmarkWidth, data);
         formula.setCheckZero(true);
-        formula.setCheckLessThanZero(false);
         formula.Eval();
 
         if (formula.error())
@@ -428,8 +423,6 @@ auto VPieceNode::GetPassmarkAngle(const VContainer *data) const -> qreal
     if (d->m_manualPassmarkAngle)
     {
         VFormula formula(d->m_formulaPassmarkAngle, data);
-        formula.setCheckZero(false);
-        formula.setCheckLessThanZero(false);
         formula.Eval();
 
         if (formula.error())

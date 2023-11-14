@@ -52,6 +52,7 @@
 - Tape app. Show variables in order they were added.
 - Shortcuts manager.
 - Support for custom known measurements.
+- Allow negative values.
 
 # Valentina 0.7.52 September 12, 2022
 - Fix crash when default locale is ru.

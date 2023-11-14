@@ -349,7 +349,6 @@ void DialogLineIntersectAxis::EvalAngle()
     formulaData.labelEditFormula = ui->labelEditFormula;
     formulaData.labelResult = ui->labelResultCalculation;
     formulaData.postfix = degreeSymbol;
-    formulaData.checkZero = false;
 
     Eval(formulaData, flagFormula);
 }
@@ -388,7 +387,7 @@ void DialogLineIntersectAxis::PointNameChanged()
 //---------------------------------------------------------------------------------------------------------------------
 void DialogLineIntersectAxis::FXAngle()
 {
-    DialogEditWrongFormula *dialog = new DialogEditWrongFormula(data, toolId, this);
+    auto *dialog = new DialogEditWrongFormula(data, toolId, this);
     dialog->setWindowTitle(tr("Edit angle"));
     dialog->SetFormula(GetAngle());
     dialog->setPostfix(degreeSymbol);

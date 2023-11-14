@@ -370,7 +370,6 @@ void DialogPlaceLabel::EvalAngle()
     formulaData.labelEditFormula = ui->labelEditFormulaAngle;
     formulaData.labelResult = ui->labelResultCalculationAngle;
     formulaData.postfix = degreeSymbol;
-    formulaData.checkZero = false;
 
     Eval(formulaData, m_flagAngle);
 }
@@ -384,7 +383,6 @@ void DialogPlaceLabel::EvalVisible()
     formulaData.labelEditFormula = ui->labelEditVisible;
     formulaData.labelResult = ui->labelResultVisible;
     formulaData.postfix = QString();
-    formulaData.checkZero = false;
     formulaData.checkLessThanZero = true;
 
     Eval(formulaData, m_flagFormulaVisible);
@@ -396,6 +394,7 @@ void DialogPlaceLabel::FXWidth()
     QScopedPointer<DialogEditWrongFormula> dialog(new DialogEditWrongFormula(data, toolId, this));
     dialog->setWindowTitle(tr("Edit rectangle width"));
     dialog->SetFormula(GetWidth());
+    dialog->setCheckLessThanZero(true);
     dialog->setPostfix(UnitsToStr(VAbstractValApplication::VApp()->patternUnits(), true));
     if (dialog->exec() == QDialog::Accepted)
     {
@@ -409,6 +408,7 @@ void DialogPlaceLabel::FXHeight()
     QScopedPointer<DialogEditWrongFormula> dialog(new DialogEditWrongFormula(data, toolId, this));
     dialog->setWindowTitle(tr("Edit rectangle width"));
     dialog->SetFormula(GetHeight());
+    dialog->setCheckLessThanZero(true);
     dialog->setPostfix(UnitsToStr(VAbstractValApplication::VApp()->patternUnits(), true));
     if (dialog->exec() == QDialog::Accepted)
     {

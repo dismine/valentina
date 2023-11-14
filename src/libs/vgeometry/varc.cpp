@@ -66,6 +66,7 @@ VArc::VArc(const VPointF &center, qreal radius, const QString &formulaRadius, qr
     d(new VArcData(radius, formulaRadius))
 {
     CreateName();
+    SetFlipped(radius < 0);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -74,6 +75,7 @@ VArc::VArc(const VPointF &center, qreal radius, qreal f1, qreal f2)
     d(new VArcData(radius))
 {
     CreateName();
+    SetFlipped(radius < 0);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -143,7 +145,7 @@ auto VArc::Rotate(const QPointF &originPoint, qreal degrees, const QString &pref
     const qreal f1 = QLineF(static_cast<QPointF>(center), p1).angle();
     const qreal f2 = QLineF(static_cast<QPointF>(center), p2).angle();
 
-    VArc arc(center, GetRadius(), f1, f2);
+    VArc arc(center, d->radius, f1, f2);
     arc.setName(name() + prefix);
 
     if (not GetAliasSuffix().isEmpty())
@@ -169,7 +171,7 @@ auto VArc::Flip(const QLineF &axis, const QString &prefix) const -> VArc
     const qreal f1 = QLineF(static_cast<QPointF>(center), p1).angle();
     const qreal f2 = QLineF(static_cast<QPointF>(center), p2).angle();
 
-    VArc arc(center, GetRadius(), f1, f2);
+    VArc arc(center, d->radius, f1, f2);
     arc.setName(name() + prefix);
 
     if (not GetAliasSuffix().isEmpty())
@@ -195,7 +197,7 @@ auto VArc::Move(qreal length, qreal angle, const QString &prefix) const -> VArc
     const qreal f1 = QLineF(static_cast<QPointF>(center), p1).angle();
     const qreal f2 = QLineF(static_cast<QPointF>(center), p2).angle();
 
-    VArc arc(center, GetRadius(), f1, f2);
+    VArc arc(center, d->radius, f1, f2);
     arc.setName(name() + prefix);
 
     if (not GetAliasSuffix().isEmpty())
@@ -220,7 +222,7 @@ VArc::~VArc() = default;
  */
 auto VArc::GetLength() const -> qreal
 {
-    qreal length = d->radius * qDegreesToRadians(AngleArc());
+    qreal length = qAbs(d->radius) * qDegreesToRadians(AngleArc());
     if (IsFlipped())
     {
         length *= -1;
@@ -236,7 +238,7 @@ auto VArc::GetLength() const -> qreal
  */
 auto VArc::GetP1() const -> QPointF
 {
-    QPointF p1(GetCenter().x() + d->radius, GetCenter().y());
+    QPointF p1(GetCenter().x() + qAbs(d->radius), GetCenter().y());
     QLineF centerP1(static_cast<QPointF>(GetCenter()), p1);
     centerP1.setAngle(GetStartAngle());
     return centerP1.p2();
@@ -249,7 +251,7 @@ auto VArc::GetP1() const -> QPointF
  */
 auto VArc::GetP2() const -> QPointF
 {
-    QPointF p2(GetCenter().x() + d->radius, GetCenter().y());
+    QPointF p2(GetCenter().x() + qAbs(d->radius), GetCenter().y());
     QLineF centerP2(static_cast<QPointF>(GetCenter()), p2);
     centerP2.setAngle(GetEndAngle());
     return centerP2.p2();
@@ -262,7 +264,7 @@ auto VArc::GetP2() const -> QPointF
  */
 auto VArc::GetPoints() const -> QVector<QPointF>
 {
-    if (qFuzzyIsNull(GetRadius()))
+    if (qFuzzyIsNull(d->radius))
     {
         return {GetCenter().toQPointF()};
     }
@@ -305,7 +307,7 @@ auto VArc::GetPoints() const -> QVector<QPointF>
 
     for (int i = 0; i < sectionAngle.size(); ++i)
     {
-        const qreal lDistance = GetRadius() * 4.0 / 3.0 * qTan(qDegreesToRadians(sectionAngle.at(i)) * 0.25);
+        const qreal lDistance = qAbs(d->radius) * 4.0 / 3.0 * qTan(qDegreesToRadians(sectionAngle.at(i)) * 0.25);
 
         const QPointF center = static_cast<QPointF>(GetCenter());
 
@@ -315,7 +317,7 @@ auto VArc::GetPoints() const -> QVector<QPointF>
 
         QLineF lineP4P3(center, pStart);
         lineP4P3.setAngle(lineP4P3.angle() + sectionAngle.at(i));
-        lineP4P3.setLength(GetRadius()); // in case of computing error
+        lineP4P3.setLength(qAbs(d->radius)); // in case of computing error
         lineP4P3 = QLineF(lineP4P3.p2(), center);
         lineP4P3.setAngle(lineP4P3.angle() + 90.0);
         lineP4P3.setLength(lDistance);
@@ -345,20 +347,39 @@ auto VArc::GetPoints() const -> QVector<QPointF>
  */
 auto VArc::CutArc(qreal length, VArc &arc1, VArc &arc2, const QString &pointName) const -> QPointF
 {
-    // Always need return two arcs, so we must correct wrong length.
     const qreal fullLength = GetLength();
 
-    if (qAbs(fullLength) < ToPixel(2, Unit::Mm))
+    if (qFuzzyIsNull(fullLength) || qFuzzyIsNull(d->radius))
     {
-        arc1 = VArc();
-        arc2 = VArc();
+        arc1 = *this;
+        arc2 = *this;
+        return GetCenter().toQPointF();
+    }
 
-        const QString errorMsg = tr("Unable to cut curve '%1'. The curve is too short.").arg(name());
-        VAbstractApplication::VApp()->IsPedantic()
-            ? throw VException(errorMsg)
-            : qWarning() << VAbstractApplication::warningMessageSignature + errorMsg;
+    if (qFuzzyIsNull(length) || qFuzzyIsNull(length + fullLength))
+    {
+        arc1 = VArc(GetCenter(), d->radius, d->formulaRadius, GetStartAngle(), GetFormulaF1(), GetStartAngle(),
+                    GetFormulaF1(), getIdObject(), getMode());
+        arc1.SetApproximationScale(GetApproximationScale());
+        arc1.SetFlipped(IsFlipped());
+        arc1.SetAllowEmpty(true);
 
-        return {};
+        arc2 = *this;
+
+        return GetP1();
+    }
+
+    if (VFuzzyComparePossibleNulls(length, fullLength))
+    {
+        arc1 = *this;
+
+        arc2 = VArc(GetCenter(), d->radius, d->formulaRadius, GetEndAngle(), GetFormulaF2(), GetEndAngle(),
+                    GetFormulaF2(), getIdObject(), getMode());
+        arc2.SetApproximationScale(GetApproximationScale());
+        arc2.SetFlipped(IsFlipped());
+        arc2.SetAllowEmpty(true);
+
+        return GetP2();
     }
 
     QLineF line =
@@ -381,7 +402,7 @@ auto VArc::CutArc(qreal length, const QString &pointName) const -> QPointF
 {
     VArc arc1;
     VArc arc2;
-    return this->CutArc(length, arc1, arc2, pointName);
+    return CutArc(length, arc1, arc2, pointName);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -423,14 +444,14 @@ void VArc::CreateAlias()
 //---------------------------------------------------------------------------------------------------------------------
 void VArc::FindF2(qreal length)
 {
-    SetFlipped(length < 0);
+    SetFlipped(length < 0 || d->radius < 0);
 
-    if (length >= MaxLength())
+    if (qAbs(length) >= qAbs(MaxLength()))
     {
         length = MaxLength();
     }
 
-    qreal arcAngle = qAbs(qRadiansToDegrees(length / d->radius));
+    qreal arcAngle = qAbs(qRadiansToDegrees(qAbs(length) / qAbs(d->radius)));
 
     if (IsFlipped())
     {
@@ -438,7 +459,7 @@ void VArc::FindF2(qreal length)
     }
 
     QLineF startAngle(0, 0, 100, 0);
-    startAngle.setAngle(GetStartAngle() + arcAngle); // We use QLineF just because it is easy way correct angle value
+    startAngle.setAngle(GetStartAngle() + arcAngle); // We use QLineF just because it is easy way to correct angle value
 
     SetFormulaF2(QString::number(startAngle.angle()), startAngle.angle());
 }
@@ -457,9 +478,7 @@ auto VArc::CutPoint(qreal length, qreal fullLength, const QString &pointName) co
         length = fullLength + length;
     }
 
-    const qreal maxLength = fullLength - minLength;
-
-    if (length < minLength)
+    if (length < 0)
     {
         QString errorMsg;
         if (not pointName.isEmpty())
@@ -476,7 +495,7 @@ auto VArc::CutPoint(qreal length, qreal fullLength, const QString &pointName) co
             ? throw VException(errorMsg)
             : qWarning() << VAbstractApplication::warningMessageSignature + errorMsg;
     }
-    else if (length > maxLength)
+    else if (length > fullLength)
     {
         QString errorMsg;
         if (not pointName.isEmpty())
@@ -486,7 +505,6 @@ auto VArc::CutPoint(qreal length, qreal fullLength, const QString &pointName) co
         }
         else
         {
-
             errorMsg = tr("Curve '%1'. Length of a cut segment is too big. Optimize it to maximal value.").arg(name());
         }
         VAbstractApplication::VApp()->IsPedantic()
@@ -494,7 +512,12 @@ auto VArc::CutPoint(qreal length, qreal fullLength, const QString &pointName) co
             : qWarning() << VAbstractApplication::warningMessageSignature + errorMsg;
     }
 
-    length = qBound(minLength, length, maxLength);
+    if (qFuzzyIsNull(d->radius))
+    {
+        return {static_cast<QPointF>(GetCenter()), static_cast<QPointF>(GetCenter())};
+    }
+
+    length = qBound(0.0, length, fullLength);
 
     QLineF line(static_cast<QPointF>(GetCenter()), GetP1());
     line.setAngle(line.angle() + qRadiansToDegrees(length / d->radius));
@@ -509,10 +532,7 @@ auto VArc::CutPointFlipped(qreal length, qreal fullLength, const QString &pointN
         length = fullLength + length;
     }
 
-    const qreal minLengthFlipped = fullLength + minLength;
-    const qreal maxLengthFlipped = -minLength;
-
-    if (length < minLengthFlipped)
+    if (length < fullLength)
     {
         QString errorMsg;
         if (not pointName.isEmpty())
@@ -529,7 +549,7 @@ auto VArc::CutPointFlipped(qreal length, qreal fullLength, const QString &pointN
             ? throw VException(errorMsg)
             : qWarning() << VAbstractApplication::warningMessageSignature + errorMsg;
     }
-    else if (length > maxLengthFlipped)
+    else if (length > 0)
     {
         QString errorMsg;
         if (not pointName.isEmpty())
@@ -546,7 +566,12 @@ auto VArc::CutPointFlipped(qreal length, qreal fullLength, const QString &pointN
             : qWarning() << VAbstractApplication::warningMessageSignature + errorMsg;
     }
 
-    length = qBound(minLengthFlipped, length, maxLengthFlipped);
+    if (qFuzzyIsNull(d->radius))
+    {
+        return {static_cast<QPointF>(GetCenter()), static_cast<QPointF>(GetCenter())};
+    }
+
+    length = qBound(fullLength, length, 0.0);
 
     QLineF line(static_cast<QPointF>(GetCenter()), GetP1());
     line.setAngle(line.angle() - qRadiansToDegrees(qAbs(length) / d->radius));

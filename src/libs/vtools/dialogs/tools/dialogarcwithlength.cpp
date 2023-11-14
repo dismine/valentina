@@ -550,7 +550,6 @@ void DialogArcWithLength::EvalF()
     formulaData.labelEditFormula = ui->labelEditF1;
     formulaData.labelResult = ui->labelResultF1;
     formulaData.postfix = degreeSymbol;
-    formulaData.checkZero = false;
 
     Eval(formulaData, m_flagF1);
 }

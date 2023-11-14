@@ -37,6 +37,7 @@
 #include <QString>
 #include <QVector>
 #include <QtGlobal>
+#include <limits>
 
 #include "../vmisc/def.h"
 #include "visoperation.h"
@@ -74,7 +75,7 @@ private:
     Q_DISABLE_COPY_MOVE(VisToolMove) // NOLINT
     qreal m_angle{0};
     qreal m_rotationAngle{INT_MIN};
-    qreal m_length{0};
+    qreal m_length{std::numeric_limits<qreal>::infinity()};
     VScaledEllipse *m_pointOrigin{nullptr};
     VScaledEllipse *m_pointRotationOrigin{nullptr};
     VScaledEllipse *m_pointFinish{nullptr};

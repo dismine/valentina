@@ -208,13 +208,10 @@ void VToolArc::SetFormulaRadius(const VFormula &value)
 {
     if (!value.error())
     {
-        if (value.getDoubleValue() > 0) // Formula don't check this, but radius can't be 0 or negative
-        {
-            QSharedPointer<VGObject> obj = VAbstractTool::data.GetGObject(m_id);
-            QSharedPointer<VArc> arc = qSharedPointerDynamicCast<VArc>(obj);
-            arc->SetFormulaRadius(value.GetFormula(FormulaType::FromUser), value.getDoubleValue());
-            SaveOption(obj);
-        }
+        QSharedPointer<VGObject> obj = VAbstractTool::data.GetGObject(m_id);
+        QSharedPointer<VArc> arc = qSharedPointerDynamicCast<VArc>(obj);
+        arc->SetFormulaRadius(value.GetFormula(FormulaType::FromUser), value.getDoubleValue());
+        SaveOption(obj);
     }
 }
 
@@ -225,7 +222,6 @@ auto VToolArc::GetFormulaF1() const -> VFormula
     SCASSERT(arc.isNull() == false)
 
     VFormula f1(arc->GetFormulaF1(), getData());
-    f1.setCheckZero(false);
     f1.setToolId(m_id);
     f1.setPostfix(degreeSymbol);
     f1.Eval();
@@ -252,7 +248,6 @@ auto VToolArc::GetFormulaF2() const -> VFormula
     SCASSERT(arc.isNull() == false)
 
     VFormula f2(arc->GetFormulaF2(), getData());
-    f2.setCheckZero(false);
     f2.setToolId(m_id);
     f2.setPostfix(degreeSymbol);
     f2.Eval();

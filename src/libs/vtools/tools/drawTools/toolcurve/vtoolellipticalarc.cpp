@@ -206,7 +206,6 @@ auto VToolEllipticalArc::GetFormulaRadius1() const -> VFormula
     SCASSERT(elArc.isNull() == false)
 
     VFormula radius1(elArc->GetFormulaRadius1(), getData());
-    radius1.setCheckZero(true);
     radius1.setToolId(m_id);
     radius1.setPostfix(UnitsToStr(VAbstractValApplication::VApp()->patternUnits()));
     radius1.Eval();
@@ -218,13 +217,10 @@ void VToolEllipticalArc::SetFormulaRadius1(const VFormula &value)
 {
     if (!value.error())
     {
-        if (value.getDoubleValue() > 0) // Formula don't check this, but radius1 can't be 0 or negative
-        {
-            QSharedPointer<VGObject> obj = VAbstractTool::data.GetGObject(m_id);
-            QSharedPointer<VEllipticalArc> elArc = qSharedPointerDynamicCast<VEllipticalArc>(obj);
-            elArc->SetFormulaRadius1(value.GetFormula(FormulaType::FromUser), value.getDoubleValue());
-            SaveOption(obj);
-        }
+        QSharedPointer<VGObject> obj = VAbstractTool::data.GetGObject(m_id);
+        QSharedPointer<VEllipticalArc> elArc = qSharedPointerDynamicCast<VEllipticalArc>(obj);
+        elArc->SetFormulaRadius1(value.GetFormula(FormulaType::FromUser), value.getDoubleValue());
+        SaveOption(obj);
     }
 }
 
@@ -235,7 +231,6 @@ auto VToolEllipticalArc::GetFormulaRadius2() const -> VFormula
     SCASSERT(elArc.isNull() == false)
 
     VFormula radius2(elArc->GetFormulaRadius2(), getData());
-    radius2.setCheckZero(true);
     radius2.setToolId(m_id);
     radius2.setPostfix(UnitsToStr(VAbstractValApplication::VApp()->patternUnits()));
     radius2.Eval();
@@ -247,13 +242,10 @@ void VToolEllipticalArc::SetFormulaRadius2(const VFormula &value)
 {
     if (!value.error())
     {
-        if (value.getDoubleValue() > 0) // Formula don't check this, but radius2 can't be 0 or negative
-        {
-            QSharedPointer<VGObject> obj = VAbstractTool::data.GetGObject(m_id);
-            QSharedPointer<VEllipticalArc> elArc = qSharedPointerDynamicCast<VEllipticalArc>(obj);
-            elArc->SetFormulaRadius2(value.GetFormula(FormulaType::FromUser), value.getDoubleValue());
-            SaveOption(obj);
-        }
+        QSharedPointer<VGObject> obj = VAbstractTool::data.GetGObject(m_id);
+        QSharedPointer<VEllipticalArc> elArc = qSharedPointerDynamicCast<VEllipticalArc>(obj);
+        elArc->SetFormulaRadius2(value.GetFormula(FormulaType::FromUser), value.getDoubleValue());
+        SaveOption(obj);
     }
 }
 
@@ -264,7 +256,6 @@ auto VToolEllipticalArc::GetFormulaF1() const -> VFormula
     SCASSERT(elArc.isNull() == false)
 
     VFormula f1(elArc->GetFormulaF1(), getData());
-    f1.setCheckZero(false);
     f1.setToolId(m_id);
     f1.setPostfix(degreeSymbol);
     f1.Eval();
@@ -290,7 +281,6 @@ auto VToolEllipticalArc::GetFormulaF2() const -> VFormula
     SCASSERT(elArc.isNull() == false)
 
     VFormula f2(elArc->GetFormulaF2(), getData());
-    f2.setCheckZero(false);
     f2.setToolId(m_id);
     f2.setPostfix(degreeSymbol);
     f2.Eval();
@@ -316,7 +306,6 @@ auto VToolEllipticalArc::GetFormulaRotationAngle() const -> VFormula
     SCASSERT(elArc.isNull() == false)
 
     VFormula rotationAngle(elArc->GetFormulaRotationAngle(), getData());
-    rotationAngle.setCheckZero(false);
     rotationAngle.setToolId(m_id);
     rotationAngle.setPostfix(degreeSymbol);
     rotationAngle.Eval();

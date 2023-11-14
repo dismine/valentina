@@ -88,7 +88,7 @@ void VisToolMove::RefreshGeometry()
     qreal tempRoationAngle = 0;
 
     QLineF line;
-    if (qFuzzyIsNull(m_length))
+    if (qIsInf(m_length))
     {
         if (QGuiApplication::keyboardModifiers() == Qt::ShiftModifier)
         {
@@ -157,21 +157,30 @@ void VisToolMove::RefreshGeometry()
         DrawPath(m_angleArc, arc.GetPath(), Qt::SolidLine, Qt::RoundCap);
     }
     DrawLine(this, line, Qt::DashLine);
-    DrawPoint(m_pointFinish, line.p2());
 
-    static const QString prefix = UnitsToStr(VAbstractValApplication::VApp()->patternUnits(), true);
     if (qFuzzyIsNull(m_length))
     {
-        SetToolTip(tr("Length = %1%2, angle = %3°, <b>%4</b> - sticking angle, "
-                      "<b>Mouse click</b> - finish selecting a position")
-                       .arg(LengthToUser(tempLength), prefix, AngleToUser(tempAngle), VModifierKey::Shift()));
+        setVisible(true);
     }
-    else
+
+    DrawPoint(m_pointFinish, line.p2());
+
+    if (GetMode() == Mode::Creation)
     {
-        SetToolTip(tr("Length = %1%2, angle = %3°, rotation angle = %4°, <b>%5</b> - sticking angle, "
-                      "<b>%6</b> - change rotation origin point, <b>Mouse click</b> - finish creating")
-                       .arg(LengthToUser(tempLength), prefix, AngleToUser(tempAngle), AngleToUser(tempRoationAngle),
-                            VModifierKey::Shift(), VModifierKey::Control()));
+        static const QString prefix = UnitsToStr(VAbstractValApplication::VApp()->patternUnits(), true);
+        if (qIsInf(m_length))
+        {
+            SetToolTip(tr("Length = %1%2, angle = %3°, <b>%4</b> - sticking angle, "
+                          "<b>Mouse click</b> - finish selecting a position")
+                           .arg(LengthToUser(tempLength), prefix, AngleToUser(tempAngle), VModifierKey::Shift()));
+        }
+        else
+        {
+            SetToolTip(tr("Length = %1%2, angle = %3°, rotation angle = %4°, <b>%5</b> - sticking angle, "
+                          "<b>%6</b> - change rotation origin point, <b>Mouse click</b> - finish creating")
+                           .arg(LengthToUser(tempLength), prefix, AngleToUser(tempAngle), AngleToUser(tempRoationAngle),
+                                VModifierKey::Shift(), VModifierKey::Control()));
+        }
     }
 
     CreateMovedRotatedObjects(iPoint, iCurve, tempLength, tempAngle, tempRoationAngle, origin);

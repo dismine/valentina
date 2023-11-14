@@ -214,7 +214,7 @@ auto VAbstractArc::AngleArc() const -> qreal
         const qreal angleDiff = qAbs(GetStartAngle() - GetEndAngle());
         if (VFuzzyComparePossibleNulls(angleDiff, 0) || VFuzzyComparePossibleNulls(angleDiff, 360))
         {
-            return 360;
+            return !d->isAllowEmpty ? 360 : 0;
         }
     }
     QLineF l1(0, 0, 100, 0);
@@ -233,9 +233,36 @@ auto VAbstractArc::AngleArc() const -> qreal
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+auto VAbstractArc::GetPath() const -> QPainterPath
+{
+    QPainterPath path;
+
+    const QVector<QPointF> points = GetPoints();
+    if (points.count() >= 2)
+    {
+        path.addPolygon(QPolygonF(points));
+    }
+    else
+    {
+        QPointF center = GetCenter().toQPointF();
+        QRectF rec = QRectF(center.x(), center.y(), accuracyPointOnLine * 2, accuracyPointOnLine * 2);
+        rec.translate(-rec.center().x(), -rec.center().y());
+        path.addEllipse(rec);
+    }
+
+    return path;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 void VAbstractArc::SetFlipped(bool value)
 {
     d->isFlipped = value;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VAbstractArc::SetAllowEmpty(bool value)
+{
+    d->isAllowEmpty = value;
 }
 
 //---------------------------------------------------------------------------------------------------------------------

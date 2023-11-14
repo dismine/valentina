@@ -125,7 +125,6 @@ void DialogCutArc::EvalFormula()
     formulaData.labelEditFormula = ui->labelEditFormula;
     formulaData.labelResult = ui->labelResultCalculation;
     formulaData.postfix = UnitsToStr(VAbstractValApplication::VApp()->patternUnits(), true);
-    formulaData.checkZero = false;
 
     Eval(formulaData, m_flagFormula);
 }
@@ -427,10 +426,9 @@ void DialogCutArc::ShowDialog(bool click)
         const QSharedPointer<VArc> arc = data->GeometricObject<VArc>(getArcId());
         QPointF p = arc->ClosestPoint(scene->getScenePos());
         qreal len = arc->GetLengthByPoint(p);
-        if (len > 0)
-        {
-            SetFormula(QString::number(FromPixel(len, *data->GetPatternUnit())));
-        }
+
+        len = !arc->IsFlipped() ? qBound(0.0, len, arc->GetLength()) : qBound(arc->GetLength(), -len, 0.0);
+        SetFormula(QString::number(FromPixel(len, *data->GetPatternUnit())));
     }
 
     FinishCreating();

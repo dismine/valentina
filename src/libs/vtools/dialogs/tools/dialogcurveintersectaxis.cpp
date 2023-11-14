@@ -309,7 +309,6 @@ void DialogCurveIntersectAxis::EvalAngle()
     formulaData.labelEditFormula = ui->labelEditFormula;
     formulaData.labelResult = ui->labelResultCalculation;
     formulaData.postfix = degreeSymbol;
-    formulaData.checkZero = false;
 
     Eval(formulaData, flagFormula);
 }

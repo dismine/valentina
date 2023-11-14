@@ -101,9 +101,8 @@ public:
     auto GetStartAngle() const -> qreal override;
     auto GetEndAngle() const -> qreal override;
 
-    auto CutArc(const qreal &length, VEllipticalArc &arc1, VEllipticalArc &arc2, const QString &pointName) const
-        -> QPointF;
-    auto CutArc(const qreal &length, const QString &pointName) const -> QPointF;
+    auto CutArc(qreal length, VEllipticalArc &arc1, VEllipticalArc &arc2, const QString &pointName) const -> QPointF;
+    auto CutArc(qreal length, const QString &pointName) const -> QPointF;
 
     static auto OptimizeAngle(qreal angle) -> qreal;
 
@@ -118,6 +117,8 @@ private:
     auto MaxLength() const -> qreal;
     auto GetP(qreal angle) const -> QPointF;
     auto ArcPoints(QVector<QPointF> points) const -> QVector<QPointF>;
+
+    auto CorrectCutLength(qreal length, qreal fullLength, const QString &pointName) const -> qreal;
 };
 
 Q_DECLARE_METATYPE(VEllipticalArc)                  // NOLINT

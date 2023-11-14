@@ -791,7 +791,6 @@ void DialogMove::EvalAngle()
     formulaData.labelEditFormula = ui->labelEditAngle;
     formulaData.labelResult = ui->labelResultAngle;
     formulaData.postfix = degreeSymbol;
-    formulaData.checkZero = false;
 
     Eval(formulaData, flagAngle);
 
@@ -810,7 +809,6 @@ void DialogMove::EvalRotationAngle()
     formulaData.labelEditFormula = ui->labelEditRotationAngle;
     formulaData.labelResult = ui->labelResultRotationAngle;
     formulaData.postfix = degreeSymbol;
-    formulaData.checkZero = false;
 
     Eval(formulaData, flagRotationAngle);
 

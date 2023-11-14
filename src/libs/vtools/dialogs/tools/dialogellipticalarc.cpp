@@ -397,7 +397,6 @@ void DialogEllipticalArc::EvalRadiuses()
     formulaData.labelEditFormula = ui->labelEditRadius1;
     formulaData.labelResult = ui->labelResultRadius1;
     formulaData.postfix = UnitsToStr(VAbstractValApplication::VApp()->patternUnits(), true);
-    formulaData.checkLessThanZero = true;
 
     Eval(formulaData, m_flagRadius1);
 
@@ -420,7 +419,6 @@ void DialogEllipticalArc::EvalAngles()
     formulaData.labelEditFormula = ui->labelEditF1;
     formulaData.labelResult = ui->labelResultF1;
     formulaData.postfix = degreeSymbol;
-    formulaData.checkZero = false;
 
     m_angleF1 = Eval(formulaData, m_flagF1);
 

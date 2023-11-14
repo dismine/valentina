@@ -574,7 +574,6 @@ void DialogSplinePath::EvalAngle1()
     formulaData.labelEditFormula = ui->labelEditAngle1;
     formulaData.labelResult = ui->labelResultAngle1;
     formulaData.postfix = degreeSymbol;
-    formulaData.checkZero = false;
 
     Eval(formulaData, flagAngle1[row]);
 
@@ -600,7 +599,6 @@ void DialogSplinePath::EvalAngle2()
     formulaData.labelEditFormula = ui->labelEditAngle2;
     formulaData.labelResult = ui->labelResultAngle2;
     formulaData.postfix = degreeSymbol;
-    formulaData.checkZero = false;
 
     Eval(formulaData, flagAngle2[row]);
 
@@ -626,7 +624,6 @@ void DialogSplinePath::EvalLength1()
     formulaData.labelEditFormula = ui->labelEditLength1;
     formulaData.labelResult = ui->labelResultLength1;
     formulaData.postfix = UnitsToStr(VAbstractValApplication::VApp()->patternUnits(), true);
-    formulaData.checkZero = false;
     formulaData.checkLessThanZero = true;
 
     Eval(formulaData, flagLength1[row]);
@@ -653,7 +650,6 @@ void DialogSplinePath::EvalLength2()
     formulaData.labelEditFormula = ui->labelEditLength2;
     formulaData.labelResult = ui->labelResultLength2;
     formulaData.postfix = UnitsToStr(VAbstractValApplication::VApp()->patternUnits(), true);
-    formulaData.checkZero = false;
     formulaData.checkLessThanZero = true;
 
     Eval(formulaData, flagLength2[row]);

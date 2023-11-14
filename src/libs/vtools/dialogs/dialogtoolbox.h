@@ -64,7 +64,7 @@ struct FormulaData
     QLabel *labelEditFormula{nullptr};
     QLabel *labelResult{nullptr};
     QString postfix;
-    bool checkZero{true};
+    bool checkZero{false};
     bool checkLessThanZero{false};
 };
 

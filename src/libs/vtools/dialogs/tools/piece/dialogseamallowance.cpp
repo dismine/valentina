@@ -2340,7 +2340,6 @@ void DialogSeamAllowance::EvalWidth()
     formulaData.labelEditFormula = uiTabPaths->labelEditWidth;
     formulaData.labelResult = uiTabPaths->labelResultWidth;
     formulaData.postfix = UnitsToStr(VAbstractValApplication::VApp()->patternUnits(), true);
-    formulaData.checkZero = false;
     formulaData.checkLessThanZero = true;
 
     m_saWidth = Eval(formulaData, flagFormula);
@@ -2373,7 +2372,6 @@ void DialogSeamAllowance::EvalWidthBefore()
             formulaData.labelEditFormula = uiTabPaths->labelEditBefore;
             formulaData.labelResult = uiTabPaths->labelResultBefore;
             formulaData.postfix = UnitsToStr(VAbstractValApplication::VApp()->patternUnits(), true);
-            formulaData.checkZero = false;
             formulaData.checkLessThanZero = true;
 
             Eval(formulaData, flagFormulaBefore);
@@ -2404,7 +2402,6 @@ void DialogSeamAllowance::EvalWidthAfter()
             formulaData.labelEditFormula = uiTabPaths->labelEditAfter;
             formulaData.labelResult = uiTabPaths->labelResultAfter;
             formulaData.postfix = UnitsToStr(VAbstractValApplication::VApp()->patternUnits(), true);
-            formulaData.checkZero = false;
             formulaData.checkLessThanZero = true;
 
             Eval(formulaData, flagFormulaAfter);
@@ -2465,7 +2462,6 @@ void DialogSeamAllowance::EvalPassmarkWidth()
             formulaData.labelResult = uiTabPassmarks->labelResultPassmarkWidth;
             formulaData.postfix = UnitsToStr(VAbstractValApplication::VApp()->patternUnits(), true);
             formulaData.checkZero = true;
-            formulaData.checkLessThanZero = false;
 
             Eval(formulaData, flagFormulaPassmarkWidth);
 
@@ -2493,8 +2489,6 @@ void DialogSeamAllowance::EvalPassmarkAngle()
             formulaData.labelEditFormula = uiTabPassmarks->labelEditPassmarkAngle;
             formulaData.labelResult = uiTabPassmarks->labelResultPassmarkAngle;
             formulaData.postfix = degreeSymbol;
-            formulaData.checkZero = false;
-            formulaData.checkLessThanZero = false;
 
             Eval(formulaData, flagFormulaPassmarkAngle);
 
@@ -2557,6 +2551,8 @@ void DialogSeamAllowance::FXPassmarkLength()
     QScopedPointer<DialogEditWrongFormula> dialog(new DialogEditWrongFormula(data, toolId, this));
     dialog->setWindowTitle(tr("Edit passmark length"));
     dialog->SetFormula(GetFormulaFromUser(uiTabPassmarks->plainTextEditPassmarkLength));
+    dialog->setCheckLessThanZero(true);
+    dialog->setCheckZero(true);
     dialog->setPostfix(UnitsToStr(VAbstractValApplication::VApp()->patternUnits(), true));
     if (dialog->exec() == QDialog::Accepted)
     {
@@ -2570,6 +2566,7 @@ void DialogSeamAllowance::FXPassmarkWidth()
     QScopedPointer<DialogEditWrongFormula> dialog(new DialogEditWrongFormula(data, toolId, this));
     dialog->setWindowTitle(tr("Edit passmark width"));
     dialog->SetFormula(GetFormulaFromUser(uiTabPassmarks->plainTextEditPassmarkWidth));
+    dialog->setCheckZero(true);
     dialog->setPostfix(UnitsToStr(VAbstractValApplication::VApp()->patternUnits(), true));
     if (dialog->exec() == QDialog::Accepted)
     {

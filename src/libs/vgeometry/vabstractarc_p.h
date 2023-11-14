@@ -66,6 +66,8 @@ public:
 
     QString formulaLength{}; // NOLINT(misc-non-private-member-variables-in-classes)
 
+    bool isAllowEmpty{false}; // NOLINT(misc-non-private-member-variables-in-classes)
+
 private:
     Q_DISABLE_ASSIGN_MOVE(VAbstractArcData) // NOLINT
 };

@@ -44,14 +44,15 @@ public:
 private slots:
     void CompareTwoWays_data();
     void CompareTwoWays();
-    void NegativeArc();
+    void ArcByLength_data();
+    void ArcByLength();
     void TestGetPoints1_data();
-    void TestGetPoints2_data();
-    void TestGetPoints3_data();
-    void TestGetPoints4_data();
     void TestGetPoints1();
+    void TestGetPoints2_data();
     void TestGetPoints2();
+    void TestGetPoints3_data();
     void TestGetPoints3();
+    void TestGetPoints4_data();
     void TestGetPoints4();
     void TestGetPoints5_data();
     void TestGetPoints5();

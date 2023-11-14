@@ -226,7 +226,6 @@ void VToolLinePoint::SetLineColor(const QString &value)
 auto VToolLinePoint::GetFormulaLength() const -> VFormula
 {
     VFormula fLength(formulaLength, this->getData());
-    fLength.setCheckZero(false);
     fLength.setToolId(m_id);
     fLength.setPostfix(UnitsToStr(VAbstractValApplication::VApp()->patternUnits()));
     fLength.Eval();
@@ -237,7 +236,7 @@ auto VToolLinePoint::GetFormulaLength() const -> VFormula
 //---------------------------------------------------------------------------------------------------------------------
 void VToolLinePoint::SetFormulaLength(const VFormula &value)
 {
-    if (value.error() == false)
+    if (!value.error())
     {
         formulaLength = value.GetFormula(FormulaType::FromUser);
 

@@ -82,6 +82,7 @@ void VisToolCutArc::RefreshGeometry()
         {
             QPointF p = arc->ClosestPoint(ScenePos());
             qreal length = arc->GetLengthByPoint(p);
+            length = !arc->IsFlipped() ? qBound(0.0, length, arc->GetLength()) : qBound(arc->GetLength(), -length, 0.0);
 
             DrawPoint(m_point, p);
 

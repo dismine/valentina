@@ -93,18 +93,39 @@ void TST_VArc::CompareTwoWays()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-// cppcheck-suppress unusedFunction
-void TST_VArc::NegativeArc()
+void TST_VArc::ArcByLength_data()
 {
-    const VPointF center;
-    const qreal radius = 100;
-    const qreal f1 = 1;
-    const qreal f2 = 316;
-    const qreal length = M_PI * radius / 180 * 45;
-    VArc arc(-length, center, radius, f1);
+    QTest::addColumn<qreal>("radius");
+    QTest::addColumn<qreal>("startAngle");
+    QTest::addColumn<qreal>("endAngle");
+    QTest::addColumn<qreal>("arcAngle");
+    QTest::addColumn<bool>("flipped");
+    QTest::addColumn<int>("direction");
 
-    QCOMPARE(arc.GetLength(), -length);
-    QCOMPARE(arc.GetEndAngle(), f2);
+    QTest::newRow("Positive radius, positive length") << 100. << 1. << 316. << 315. << false << 1;
+    QTest::newRow("Positive radius, negative length") << 100. << 1. << 316. << 45. << true << -1;
+    QTest::newRow("Negative radius, negative length") << -100. << 1. << 316. << 45. << true << -1;
+    QTest::newRow("Negative radius, positive length") << -100. << 1. << 316. << 45. << true << -1;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void TST_VArc::ArcByLength()
+{
+    QFETCH(qreal, radius);
+    QFETCH(qreal, startAngle);
+    QFETCH(qreal, endAngle);
+    QFETCH(qreal, arcAngle);
+    QFETCH(bool, flipped);
+    QFETCH(int, direction);
+
+    const qreal length = (M_PI * qAbs(radius) / 180 * arcAngle) * direction;
+    VArc arc(length, VPointF(), radius, startAngle);
+
+    QCOMPARE(arc.GetLength(), length);
+    QCOMPARE(arc.GetEndAngle(), endAngle);
+    QCOMPARE(arc.IsFlipped(), flipped);
+    QCOMPARE(arc.GetRadius(), radius);
+    QCOMPARE(arc.AngleArc(), arcAngle);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -116,82 +137,147 @@ void TST_VArc::TestGetPoints_data()
     QTest::addColumn<qreal>("endAngle");
 
     QTest::newRow("Full circle: radius 10") << 10.0 << 0.0 << 360.0;
+    QTest::newRow("Full circle: radius -10") << -10.0 << 0.0 << 360.0;
     QTest::newRow("Full circle: radius 150") << 150.0 << 0.0 << 360.0;
+    QTest::newRow("Full circle: radius -150") << -150.0 << 0.0 << 360.0;
     QTest::newRow("Full circle: radius 1500") << 1500.0 << 0.0 << 360.0;
+    QTest::newRow("Full circle: radius -1500") << -1500.0 << 0.0 << 360.0;
     QTest::newRow("Full circle: radius 50000") << 50000.0 << 0.0 << 360.0;
+    QTest::newRow("Full circle: radius -50000") << -50000.0 << 0.0 << 360.0;
     QTest::newRow("Full circle: radius 90000") << 90000.0 << 0.0 << 360.0;
+    QTest::newRow("Full circle: radius -90000") << -90000.0 << 0.0 << 360.0;
 
     QTest::newRow("Arc less than 45 degree, radius 100") << 100.0 << 0.0 << 10.5;
+    QTest::newRow("Arc less than 45 degree, radius -100") << -100.0 << 0.0 << 10.5;
     QTest::newRow("Arc less than 45 degree, radius 150") << 150.0 << 0.0 << 10.5;
+    QTest::newRow("Arc less than 45 degree, radius -150") << -150.0 << 0.0 << 10.5;
     QTest::newRow("Arc less than 45 degree, radius 1500") << 1500.0 << 0.0 << 10.5;
+    QTest::newRow("Arc less than 45 degree, radius -1500") << -1500.0 << 0.0 << 10.5;
     QTest::newRow("Arc less than 45 degree, radius 50000") << 50000.0 << 0.0 << 10.5;
+    QTest::newRow("Arc less than 45 degree, radius -50000") << -50000.0 << 0.0 << 10.5;
     QTest::newRow("Arc less than 45 degree, radius 90000") << 90000.0 << 0.0 << 10.5;
+    QTest::newRow("Arc less than 45 degree, radius -90000") << -90000.0 << 0.0 << 10.5;
 
     QTest::newRow("Arc 45 degree, radius 100") << 100.0 << 0.0 << 45.0;
+    QTest::newRow("Arc 45 degree, radius -100") << -100.0 << 0.0 << 45.0;
     QTest::newRow("Arc 45 degree, radius 150") << 150.0 << 0.0 << 45.0;
+    QTest::newRow("Arc 45 degree, radius -150") << -150.0 << 0.0 << 45.0;
     QTest::newRow("Arc 45 degree, radius 1500") << 1500.0 << 0.0 << 45.0;
+    QTest::newRow("Arc 45 degree, radius -1500") << -1500.0 << 0.0 << 45.0;
     QTest::newRow("Arc 45 degree, radius 50000") << 50000.0 << 0.0 << 45.0;
+    QTest::newRow("Arc 45 degree, radius -50000") << -50000.0 << 0.0 << 45.0;
     QTest::newRow("Arc 45 degree, radius 90000") << 90000.0 << 0.0 << 45.0;
+    QTest::newRow("Arc 45 degree, radius -90000") << -90000.0 << 0.0 << 45.0;
 
     QTest::newRow("Arc less than 90 degree, radius 100") << 100.0 << 0.0 << 75.0;
+    QTest::newRow("Arc less than 90 degree, radius -100") << -100.0 << 0.0 << 75.0;
     QTest::newRow("Arc less than 90 degree, radius 150") << 150.0 << 0.0 << 75.0;
+    QTest::newRow("Arc less than 90 degree, radius -150") << -150.0 << 0.0 << 75.0;
     QTest::newRow("Arc less than 90 degree, radius 1500") << 1500.0 << 0.0 << 75.0;
+    QTest::newRow("Arc less than 90 degree, radius -1500") << -1500.0 << 0.0 << 75.0;
     QTest::newRow("Arc less than 90 degree, radius 50000") << 50000.0 << 0.0 << 75.0;
+    QTest::newRow("Arc less than 90 degree, radius -50000") << -50000.0 << 0.0 << 75.0;
     QTest::newRow("Arc less than 90 degree, radius 90000") << 90000.0 << 0.0 << 75.0;
+    QTest::newRow("Arc less than 90 degree, radius -90000") << -90000.0 << 0.0 << 75.0;
 
     QTest::newRow("Arc 90 degree, radius 100") << 100.0 << 0.0 << 90.0;
+    QTest::newRow("Arc 90 degree, radius -100") << -100.0 << 0.0 << 90.0;
     QTest::newRow("Arc 90 degree, radius 150") << 150.0 << 0.0 << 90.0;
+    QTest::newRow("Arc 90 degree, radius -150") << -150.0 << 0.0 << 90.0;
     QTest::newRow("Arc 90 degree, radius 1500") << 1500.0 << 0.0 << 90.0;
+    QTest::newRow("Arc 90 degree, radius -1500") << -1500.0 << 0.0 << 90.0;
     QTest::newRow("Arc 90 degree, radius 50000") << 50000.0 << 0.0 << 90.0;
+    QTest::newRow("Arc 90 degree, radius -50000") << -50000.0 << 0.0 << 90.0;
     QTest::newRow("Arc 90 degree, radius 90000") << 90000.0 << 0.0 << 90.0;
+    QTest::newRow("Arc 90 degree, radius -90000") << -90000.0 << 0.0 << 90.0;
 
     QTest::newRow("Arc less than 135 degree, radius 100") << 100.0 << 0.0 << 110.6;
+    QTest::newRow("Arc less than 135 degree, radius -100") << -100.0 << 0.0 << 110.6;
     QTest::newRow("Arc less than 135 degree, radius 150") << 150.0 << 0.0 << 110.6;
+    QTest::newRow("Arc less than 135 degree, radius -150") << -150.0 << 0.0 << 110.6;
     QTest::newRow("Arc less than 135 degree, radius 1500") << 1500.0 << 0.0 << 110.6;
+    QTest::newRow("Arc less than 135 degree, radius -1500") << -1500.0 << 0.0 << 110.6;
     QTest::newRow("Arc less than 135 degree, radius 50000") << 50000.0 << 0.0 << 110.6;
+    QTest::newRow("Arc less than 135 degree, radius -50000") << -50000.0 << 0.0 << 110.6;
     QTest::newRow("Arc less than 135 degree, radius 90000") << 90000.0 << 0.0 << 110.6;
+    QTest::newRow("Arc less than 135 degree, radius -90000") << -90000.0 << 0.0 << 110.6;
 
     QTest::newRow("Arc 135 degree, radius 100") << 100.0 << 0.0 << 135.0;
+    QTest::newRow("Arc 135 degree, radius -100") << -100.0 << 0.0 << 135.0;
     QTest::newRow("Arc 135 degree, radius 150") << 150.0 << 0.0 << 135.0;
+    QTest::newRow("Arc 135 degree, radius -150") << -150.0 << 0.0 << 135.0;
     QTest::newRow("Arc 135 degree, radius 1500") << 1500.0 << 0.0 << 135.0;
+    QTest::newRow("Arc 135 degree, radius -1500") << -1500.0 << 0.0 << 135.0;
     QTest::newRow("Arc 135 degree, radius 50000") << 50000.0 << 0.0 << 135.0;
+    QTest::newRow("Arc 135 degree, radius -50000") << -50000.0 << 0.0 << 135.0;
     QTest::newRow("Arc 135 degree, radius 90000") << 90000.0 << 0.0 << 135.0;
+    QTest::newRow("Arc 135 degree, radius -90000") << -90000.0 << 0.0 << 135.0;
 
     QTest::newRow("Arc less than 180 degree, radius 100") << 100.0 << 0.0 << 160.7;
+    QTest::newRow("Arc less than 180 degree, radius -100") << -100.0 << 0.0 << 160.7;
     QTest::newRow("Arc less than 180 degree, radius 150") << 150.0 << 0.0 << 160.7;
+    QTest::newRow("Arc less than 180 degree, radius -150") << -150.0 << 0.0 << 160.7;
     QTest::newRow("Arc less than 180 degree, radius 1500") << 1500.0 << 0.0 << 160.7;
+    QTest::newRow("Arc less than 180 degree, radius -1500") << -1500.0 << 0.0 << 160.7;
     QTest::newRow("Arc less than 180 degree, radius 50000") << 50000.0 << 0.0 << 160.7;
+    QTest::newRow("Arc less than 180 degree, radius -50000") << -50000.0 << 0.0 << 160.7;
     QTest::newRow("Arc less than 180 degree, radius 90000") << 90000.0 << 0.0 << 160.7;
+    QTest::newRow("Arc less than 180 degree, radius -90000") << -90000.0 << 0.0 << 160.7;
 
     QTest::newRow("Arc 180 degree, radius 100") << 100.0 << 0.0 << 180.0;
+    QTest::newRow("Arc 180 degree, radius -100") << -100.0 << 0.0 << 180.0;
     QTest::newRow("Arc 180 degree, radius 150") << 150.0 << 0.0 << 180.0;
+    QTest::newRow("Arc 180 degree, radius -150") << -150.0 << 0.0 << 180.0;
     QTest::newRow("Arc 180 degree, radius 1500") << 1500.0 << 0.0 << 180.0;
+    QTest::newRow("Arc 180 degree, radius -1500") << -1500.0 << 0.0 << 180.0;
     QTest::newRow("Arc 180 degree, radius 50000") << 50000.0 << 0.0 << 180.0;
+    QTest::newRow("Arc 180 degree, radius -50000") << -50000.0 << 0.0 << 180.0;
     QTest::newRow("Arc 180 degree, radius 90000") << 90000.0 << 0.0 << 180.0;
+    QTest::newRow("Arc 180 degree, radius -90000") << -90000.0 << 0.0 << 180.0;
 
     QTest::newRow("Arc less than 270 degree, radius 100") << 100.0 << 0.0 << 150.3;
+    QTest::newRow("Arc less than 270 degree, radius -100") << -100.0 << 0.0 << 150.3;
     QTest::newRow("Arc less than 270 degree, radius 150") << 150.0 << 0.0 << 150.3;
+    QTest::newRow("Arc less than 270 degree, radius -150") << -150.0 << 0.0 << 150.3;
     QTest::newRow("Arc less than 270 degree, radius 1500") << 1500.0 << 0.0 << 150.3;
+    QTest::newRow("Arc less than 270 degree, radius -1500") << -1500.0 << 0.0 << 150.3;
     QTest::newRow("Arc less than 270 degree, radius 50000") << 50000.0 << 0.0 << 150.3;
+    QTest::newRow("Arc less than 270 degree, radius -50000") << -50000.0 << 0.0 << 150.3;
     QTest::newRow("Arc less than 270 degree, radius 90000") << 90000.0 << 0.0 << 150.3;
+    QTest::newRow("Arc less than 270 degree, radius -90000") << -90000.0 << 0.0 << 150.3;
 
     QTest::newRow("Arc 270 degree, radius 100") << 100.0 << 0.0 << 270.0;
+    QTest::newRow("Arc 270 degree, radius -100") << -100.0 << 0.0 << 270.0;
     QTest::newRow("Arc 270 degree, radius 150") << 150.0 << 0.0 << 270.0;
+    QTest::newRow("Arc 270 degree, radius -150") << -150.0 << 0.0 << 270.0;
     QTest::newRow("Arc 270 degree, radius 1500") << 1500.0 << 0.0 << 270.0;
+    QTest::newRow("Arc 270 degree, radius -1500") << -1500.0 << 0.0 << 270.0;
     QTest::newRow("Arc 270 degree, radius 50000") << 50000.0 << 0.0 << 270.0;
+    QTest::newRow("Arc 270 degree, radius -50000") << -50000.0 << 0.0 << 270.0;
     QTest::newRow("Arc 270 degree, radius 90000") << 90000.0 << 0.0 << 270.0;
+    QTest::newRow("Arc 270 degree, radius -90000") << -90000.0 << 0.0 << 270.0;
 
     QTest::newRow("Arc less than 360 degree, radius 100") << 100.0 << 0.0 << 340.0;
+    QTest::newRow("Arc less than 360 degree, radius -100") << -100.0 << 0.0 << 340.0;
     QTest::newRow("Arc less than 360 degree, radius 150") << 150.0 << 0.0 << 340.0;
+    QTest::newRow("Arc less than 360 degree, radius -150") << -150.0 << 0.0 << 340.0;
     QTest::newRow("Arc less than 360 degree, radius 1500") << 1500.0 << 0.0 << 340.0;
+    QTest::newRow("Arc less than 360 degree, radius -1500") << -1500.0 << 0.0 << 340.0;
     QTest::newRow("Arc less than 360 degree, radius 50000") << 50000.0 << 0.0 << 340.0;
+    QTest::newRow("Arc less than 360 degree, radius -50000") << -50000.0 << 0.0 << 340.0;
     QTest::newRow("Arc less than 360 degree, radius 90000") << 90000.0 << 0.0 << 340.0;
+    QTest::newRow("Arc less than 360 degree, radius -90000") << -90000.0 << 0.0 << 340.0;
 
     QTest::newRow("Arc start 90 degree, angle 45 degree, radius 100") << 100.0 << 90.0 << 135.0;
+    QTest::newRow("Arc start 90 degree, angle 45 degree, radius -100") << -100.0 << 90.0 << 135.0;
     QTest::newRow("Arc start 90 degree, angle 45 degree, radius 150") << 150.0 << 90.0 << 135.0;
+    QTest::newRow("Arc start 90 degree, angle 45 degree, radius -150") << -150.0 << 90.0 << 135.0;
     QTest::newRow("Arc start 90 degree, angle 45 degree, radius 1500") << 1500.0 << 90.0 << 135.0;
+    QTest::newRow("Arc start 90 degree, angle 45 degree, radius -1500") << -1500.0 << 90.0 << 135.0;
     QTest::newRow("Arc start 90 degree, angle 45 degree, radius 50000") << 50000.0 << 90.0 << 135.0;
+    QTest::newRow("Arc start 90 degree, angle 45 degree, radius -50000") << -50000.0 << 90.0 << 135.0;
     QTest::newRow("Arc start 90 degree, angle 45 degree, radius 90000") << 90000.0 << 90.0 << 135.0;
+    QTest::newRow("Arc start 90 degree, angle 45 degree, radius -90000") << -90000.0 << 90.0 << 135.0;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -214,7 +300,7 @@ void TST_VArc::TestGetPoints()
         for (auto point : points)
         {
             QLineF rLine(static_cast<QPointF>(center), point);
-            const qreal value = qAbs(rLine.length() - radius);
+            const qreal value = qAbs(rLine.length() - qAbs(radius));
             // cppcheck-suppress unreadVariable
             const QString errorMsg = u"Broken the first rule. All points should be on the same distance from "
                                      u"the center. Error ='%1'."_s.arg(value);
@@ -227,11 +313,11 @@ void TST_VArc::TestGetPoints()
 
         if (VFuzzyComparePossibleNulls(arc.AngleArc(), 360.0))
         { // circle square
-            gSquare = M_PI * radius * radius;
+            gSquare = M_PI * qAbs(radius) * qAbs(radius);
         }
         else
         { // sector square
-            gSquare = (M_PI * radius * radius) / 360.0 * arc.AngleArc();
+            gSquare = (M_PI * qAbs(radius) * qAbs(radius)) / 360.0 * arc.AngleArc();
             points.append(static_cast<QPointF>(center));
         }
 
@@ -258,6 +344,7 @@ void TST_VArc::TestRotation_data()
     QTest::addColumn<QString>("prefix");
 
     QTest::newRow("Test arc 1") << QPointF(10, 10) << 10. << 0. << 90. << QPointF() << 90. << "_r";
+    QTest::newRow("Test arc 2") << QPointF(10, 10) << -10. << 0. << 90. << QPointF() << 90. << "_r";
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -277,6 +364,7 @@ void TST_VArc::TestRotation()
     QCOMPARE(arcOrigin.GetLength(), rotatedArc.GetLength());
     QCOMPARE(arcOrigin.AngleArc(), rotatedArc.AngleArc());
     QCOMPARE(arcOrigin.GetRadius(), rotatedArc.GetRadius());
+    QCOMPARE(arcOrigin.IsFlipped(), rotatedArc.IsFlipped());
     // cppcheck-suppress unreadVariable
     const QString errorMsg = u"The name doesn't contain the prefix '%1'."_s.arg(prefix);
     QVERIFY2(rotatedArc.name().endsWith(prefix), qUtf8Printable(errorMsg));
@@ -300,16 +388,20 @@ void TST_VArc::TestFlip_data()
 
     QLineF axis(QPointF(4, 6), QPointF(12, 6));
 
-    QTest::newRow("Vertical axis") << center << radius << QLineF(center, p1).angle() << QLineF(center, p2).angle()
-                                   << axis << "a2";
+    QTest::newRow("Vertical axis, positive radius")
+        << center << radius << QLineF(center, p1).angle() << QLineF(center, p2).angle() << axis << "a2";
+    QTest::newRow("Vertical axis, negative radius")
+        << center << -radius << QLineF(center, p1).angle() << QLineF(center, p2).angle() << axis << "a2";
 
     p1 = QPointF(15, 5);
     p2 = QPointF(10, 0);
 
     axis = QLineF(QPointF(9, -1), QPointF(9, 6));
 
-    QTest::newRow("Horizontal axis") << center << radius << QLineF(center, p1).angle() << QLineF(center, p2).angle()
-                                     << axis << "a2";
+    QTest::newRow("Horizontal axis, positive radius")
+        << center << radius << QLineF(center, p1).angle() << QLineF(center, p2).angle() << axis << "a2";
+    QTest::newRow("Horizontal axis, negative radius")
+        << center << -radius << QLineF(center, p1).angle() << QLineF(center, p2).angle() << axis << "a2";
 
     QLineF l(center.x(), center.y(), center.x() + radius, center.y());
 
@@ -326,8 +418,10 @@ void TST_VArc::TestFlip_data()
     axis = QLineF(p1Axis.x(), p1Axis.y(), p1Axis.x() + radius, p1Axis.y());
     axis.setAngle(45);
 
-    QTest::newRow("Diagonal axis") << center << radius << QLineF(center, p1).angle() << QLineF(center, p2).angle()
-                                   << axis << "a2";
+    QTest::newRow("Diagonal axis, positive radius")
+        << center << radius << QLineF(center, p1).angle() << QLineF(center, p2).angle() << axis << "a2";
+    QTest::newRow("Diagonal axis, negative radius")
+        << center << -radius << QLineF(center, p1).angle() << QLineF(center, p2).angle() << axis << "a2";
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -347,7 +441,7 @@ void TST_VArc::TestFlip()
     const QString errorMsg = u"The name doesn't contain the prefix '%1'."_s.arg(prefix);
     QVERIFY2(res.name().endsWith(prefix), qUtf8Printable(errorMsg));
 
-    QVERIFY2(res.IsFlipped(), qUtf8Printable("The arc is not flipped"));
+    QVERIFY2(res.IsFlipped() == radius > 0, qUtf8Printable("The arc is not flipped"));
 
     QCOMPARE(originArc.GetLength() * -1, res.GetLength());
     QCOMPARE(originArc.GetRadius(), res.GetRadius());
@@ -355,7 +449,7 @@ void TST_VArc::TestFlip()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void TST_VArc::TestCutArc_data()
+void TST_VArc::TestCutArcByLength_data()
 {
     QTest::addColumn<QPointF>("center");
     QTest::addColumn<qreal>("radius");
@@ -364,40 +458,65 @@ void TST_VArc::TestCutArc_data()
     QTest::addColumn<qreal>("cutLength");
     QTest::addColumn<QPointF>("cutPoint");
 
-    QPointF center(189.13625196850393, 344.1267401574803);
-    qreal radius = ToPixel(10, Unit::Cm);
-    qreal startAngle = 45.0;
-    qreal length = ToPixel(-10, Unit::Cm);
-    qreal cutLength = ToPixel(6, Unit::Cm);
+    const QPointF center(189.13625196850393, 344.1267401574803);
+    Q_RELAXED_CONSTEXPR qreal radius = ToPixel(10, Unit::Cm);
     QPointF cutPoint(539.3657292513009, 202.04366960088566);
+    Q_RELAXED_CONSTEXPR qreal length = ToPixel(10, Unit::Cm);
 
     // See file <root>/src/app/share/collection/bugs/Issue_#957.val
     QTest::newRow("Arc -10 cm length, cut length 6 cm")
-        << center << radius << startAngle << length << cutLength << cutPoint;
-
-    cutLength = ToPixel(-4, Unit::Cm);
+        << center << radius << 45.0 << -length << ToPixel(6, Unit::Cm) << cutPoint;
 
     // Opposite case
     QTest::newRow("Arc -10 cm length, cut length -4 cm")
-        << center << radius << startAngle << length << cutLength << cutPoint;
+        << center << radius << 45.0 << -length << ToPixel(-4, Unit::Cm) << cutPoint;
 
-    startAngle = 135;
-    length = ToPixel(10, Unit::Cm);
-    cutLength = ToPixel(-7, Unit::Cm);
     cutPoint = QPointF(-145.1588983496871, 167.78888781060192);
 
     // See file <root>/src/app/share/collection/bugs/Issue_#957.val
     QTest::newRow("Arc 10 cm length, cut length -7 cm")
-        << center << radius << startAngle << length << cutLength << cutPoint;
+        << center << radius << 135. << length << ToPixel(-7, Unit::Cm) << cutPoint;
 
     // Opposite case
-    cutLength = ToPixel(3, Unit::Cm);
     QTest::newRow("Arc 10 cm length, cut length 3 cm")
-        << center << radius << startAngle << length << cutLength << cutPoint;
+        << center << radius << 135. << length << ToPixel(3, Unit::Cm) << cutPoint;
+
+    QLineF l = QLineF(center, QPointF(center.x() + radius, center.y()));
+    l.setAngle(135);
+
+    QTest::newRow("Arc 10 cm length, cut length 0 cm") << center << radius << 135. << length << 0. << l.p2();
+
+    QTest::newRow("Arc 10 cm length (-10 cm radius), cut length 0 cm")
+        << center << -radius << 135. << length << 0. << l.p2();
+
+    QTest::newRow("Arc -10 cm length (-10 cm radius), cut length 0 cm")
+        << center << -radius << 135. << -length << 0. << l.p2();
+
+    QTest::newRow("Arc -10 cm length (10 cm radius), cut length 10 cm")
+        << center << radius << 135. << -length << length << l.p2();
+
+    QTest::newRow("Arc -10 cm length (-10 cm radius), cut length 10 cm")
+        << center << -radius << 135. << -length << length << l.p2();
+
+    const qreal arcAngle = qAbs(qRadiansToDegrees(ToPixel(10, Unit::Cm) / qAbs(radius)));
+    l = QLineF(center, QPointF(center.x() + radius, center.y()));
+    l.setAngle(135 + arcAngle);
+
+    QTest::newRow("Arc 10 cm length, cut length 10 cm")
+        << center << radius << 135. << length << ToPixel(10, Unit::Cm) << l.p2();
+
+    l = QLineF(center, QPointF(center.x() + radius, center.y()));
+    l.setAngle(135 - arcAngle);
+
+    QTest::newRow("Arc -10 cm length (10 cm radius), cut length -10 cm")
+        << center << radius << 135. << -length << -radius << l.p2();
+
+    QTest::newRow("Arc -10 cm length (-10 cm radius), cut length -10 cm")
+        << center << -radius << 135. << -length << -radius << l.p2();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void TST_VArc::TestCutArc()
+void TST_VArc::TestCutArcByLength()
 {
     QFETCH(QPointF, center);
     QFETCH(qreal, radius);

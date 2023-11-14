@@ -157,7 +157,6 @@ void DialogBisector::EvalFormula()
     formulaData.labelEditFormula = ui->labelEditFormula;
     formulaData.labelResult = ui->labelResultCalculation;
     formulaData.postfix = UnitsToStr(VAbstractValApplication::VApp()->patternUnits(), true);
-    formulaData.checkZero = false;
 
     Eval(formulaData, m_flagFormula);
 }

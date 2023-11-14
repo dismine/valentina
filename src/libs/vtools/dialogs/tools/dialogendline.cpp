@@ -141,7 +141,6 @@ void DialogEndLine::EvalAngle()
     formulaData.labelEditFormula = ui->labelEditAngle;
     formulaData.labelResult = ui->labelResultCalculationAngle;
     formulaData.postfix = degreeSymbol;
-    formulaData.checkZero = false;
 
     Eval(formulaData, flagError);
 }
@@ -155,7 +154,6 @@ void DialogEndLine::EvalLength()
     formulaData.labelEditFormula = ui->labelEditFormula;
     formulaData.labelResult = ui->labelResultCalculation;
     formulaData.postfix = UnitsToStr(VAbstractValApplication::VApp()->patternUnits(), true);
-    formulaData.checkLessThanZero = false;
 
     Eval(formulaData, flagFormula);
 }

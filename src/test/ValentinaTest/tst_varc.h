@@ -40,15 +40,16 @@ public:
 
 private slots:
     void CompareTwoWays();
-    void NegativeArc();
+    void ArcByLength_data();
+    void ArcByLength();
     void TestGetPoints_data();
     void TestGetPoints();
     void TestRotation_data();
     void TestRotation();
     void TestFlip_data();
     void TestFlip();
-    void TestCutArc_data();
-    void TestCutArc();
+    void TestCutArcByLength_data();
+    void TestCutArcByLength();
     void TestCurveIntersectAxis_data();
     void TestCurveIntersectAxis();
     void EmptyArc();

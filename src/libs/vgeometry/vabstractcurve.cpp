@@ -245,12 +245,33 @@ auto VAbstractCurve::ClosestPoint(QPointF scenePoint) const -> QPointF
         return points.constFirst();
     }
 
+    if (VFuzzyComparePoints(points.constLast(), scenePoint))
+    {
+        return points.constLast();
+    }
+
     QPointF candidatePoint;
     qreal bestDistance = INT_MAX;
     bool found = false;
 
     for (qint32 i = 0; i < points.count() - 1; ++i)
     {
+        qreal length = QLineF(points.at(i), scenePoint).length();
+        if (length < bestDistance)
+        {
+            candidatePoint = points.at(i);
+            bestDistance = length;
+            found = true;
+        }
+
+        length = QLineF(points.at(i + 1), scenePoint).length();
+        if (length < bestDistance)
+        {
+            candidatePoint = points.at(i + 1);
+            bestDistance = length;
+            found = true;
+        }
+
         const QPointF cPoint = VGObject::ClosestPoint(QLineF(points.at(i), points.at(i + 1)), scenePoint);
 
         if (IsPointOnLineSegment(cPoint, points.at(i), points.at(i + 1)))

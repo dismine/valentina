@@ -114,7 +114,7 @@ auto VToolPointOfContact::FindPoint(qreal radius, const QPointF &center, const Q
     SCASSERT(intersectionPoint != nullptr)
 
     QPointF p1, p2;
-    qint32 res = VGObject::LineIntersectCircle(center, radius, QLineF(firstPoint, secondPoint), p1, p2);
+    qint32 res = VGObject::LineIntersectCircle(center, qAbs(radius), QLineF(firstPoint, secondPoint), p1, p2);
     switch (res)
     {
         case 0:
@@ -126,8 +126,7 @@ auto VToolPointOfContact::FindPoint(qreal radius, const QPointF &center, const Q
         {
             const bool flagP1 = VGObject::IsPointOnLineSegment(p1, firstPoint, secondPoint);
             const bool flagP2 = VGObject::IsPointOnLineSegment(p2, firstPoint, secondPoint);
-            if ((flagP1 == true && flagP2 == true) ||
-                (flagP1 == false && flagP2 == false) /*In case we have something wrong*/)
+            if ((flagP1 && flagP2) || (!flagP1 && !flagP2) /*In case we have something wrong*/)
             {
                 // We don't have options for choosing correct point. Use closest to segment first point.
                 if (QLineF(firstPoint, p1).length() <= QLineF(firstPoint, p2).length())
@@ -139,17 +138,16 @@ auto VToolPointOfContact::FindPoint(qreal radius, const QPointF &center, const Q
                 *intersectionPoint = p2;
                 return true;
             }
-            else
-            { // In this case we have one real and one theoretical intersection.
-                if (flagP1)
-                {
-                    *intersectionPoint = p1;
-                    return true;
-                }
 
-                *intersectionPoint = p2;
+            // In this case we have one real and one theoretical intersection.
+            if (flagP1)
+            {
+                *intersectionPoint = p1;
                 return true;
             }
+
+            *intersectionPoint = p2;
+            return true;
         }
         default:
             qDebug() << "Unxpected value" << res;
@@ -417,7 +415,6 @@ void VToolPointOfContact::ShowContextMenu(QGraphicsSceneContextMenuEvent *event,
 auto VToolPointOfContact::getArcRadius() const -> VFormula
 {
     VFormula radius(arcRadius, this->getData());
-    radius.setCheckZero(true);
     radius.setToolId(m_id);
     radius.setPostfix(UnitsToStr(VAbstractValApplication::VApp()->patternUnits()));
     radius.Eval();

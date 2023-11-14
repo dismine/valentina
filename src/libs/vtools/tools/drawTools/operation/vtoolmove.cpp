@@ -344,7 +344,6 @@ auto VToolMove::Create(VToolMoveInitData &initData) -> VToolMove *
 auto VToolMove::GetFormulaAngle() const -> VFormula
 {
     VFormula fAngle(formulaAngle, getData());
-    fAngle.setCheckZero(false);
     fAngle.setToolId(m_id);
     fAngle.setPostfix(degreeSymbol);
     fAngle.Eval();
@@ -367,7 +366,6 @@ void VToolMove::SetFormulaAngle(const VFormula &value)
 auto VToolMove::GetFormulaRotationAngle() const -> VFormula
 {
     VFormula fAngle(formulaRotationAngle, getData());
-    fAngle.setCheckZero(false);
     fAngle.setToolId(m_id);
     fAngle.setPostfix(degreeSymbol);
     fAngle.Eval();
@@ -390,7 +388,6 @@ void VToolMove::SetFormulaRotationAngle(const VFormula &value)
 auto VToolMove::GetFormulaLength() const -> VFormula
 {
     VFormula fLength(formulaLength, getData());
-    fLength.setCheckZero(true);
     fLength.setToolId(m_id);
     fLength.setPostfix(UnitsToStr(VAbstractValApplication::VApp()->patternUnits()));
     fLength.Eval();

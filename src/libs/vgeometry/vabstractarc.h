@@ -83,8 +83,11 @@ public:
     auto IsFlipped() const -> bool;
     auto AngleArc() const -> qreal;
 
+    auto GetPath() const -> QPainterPath override;
+
 protected:
     void SetFlipped(bool value);
+    void SetAllowEmpty(bool value);
     virtual void FindF2(qreal length) = 0;
     void SetFormulaLength(const QString &formula);
 

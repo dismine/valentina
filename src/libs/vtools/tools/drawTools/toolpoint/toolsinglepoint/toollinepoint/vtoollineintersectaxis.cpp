@@ -221,7 +221,6 @@ auto VToolLineIntersectAxis::SecondLinePoint() const -> QString
 auto VToolLineIntersectAxis::GetFormulaAngle() const -> VFormula
 {
     VFormula fAngle(formulaAngle, getData());
-    fAngle.setCheckZero(false);
     fAngle.setToolId(m_id);
     fAngle.setPostfix(degreeSymbol);
     fAngle.Eval();

@@ -3114,28 +3114,24 @@ void VToolOptionsPropertyBrowser::ShowOptionsToolSpline(QGraphicsItem *item)
     AddPropertyObjectName(i, tr("Name:"), true);
 
     VFormula angle1(spl.GetStartAngleFormula(), i->getData());
-    angle1.setCheckZero(false);
     angle1.setToolId(i->getId());
     angle1.setPostfix(degreeSymbol);
     angle1.Eval();
     AddPropertyFormula(tr("C1: angle:"), angle1, AttrAngle1);
 
     VFormula length1(spl.GetC1LengthFormula(), i->getData());
-    length1.setCheckZero(false);
     length1.setToolId(i->getId());
     length1.setPostfix(UnitsToStr(VAbstractValApplication::VApp()->patternUnits()));
     length1.Eval();
     AddPropertyFormula(tr("C1: length:"), length1, AttrLength1);
 
     VFormula angle2(spl.GetEndAngleFormula(), i->getData());
-    angle2.setCheckZero(false);
     angle2.setToolId(i->getId());
     angle2.setPostfix(degreeSymbol);
     angle2.Eval();
     AddPropertyFormula(tr("C2: angle:"), angle2, AttrAngle2);
 
     VFormula length2(spl.GetC2LengthFormula(), i->getData());
-    length2.setCheckZero(false);
     length2.setToolId(i->getId());
     length2.setPostfix(UnitsToStr(VAbstractValApplication::VApp()->patternUnits()));
     length2.Eval();
@@ -3992,7 +3988,6 @@ void VToolOptionsPropertyBrowser::UpdateOptionsToolSpline()
     m_idToProperty[AttrName]->setValue(i->name());
 
     VFormula angle1F(spl.GetStartAngleFormula(), i->getData());
-    angle1F.setCheckZero(false);
     angle1F.setToolId(i->getId());
     angle1F.setPostfix(degreeSymbol);
     angle1F.Eval();
@@ -4001,7 +3996,6 @@ void VToolOptionsPropertyBrowser::UpdateOptionsToolSpline()
     m_idToProperty[AttrAngle1]->setValue(angle1);
 
     VFormula length1F(spl.GetC1LengthFormula(), i->getData());
-    length1F.setCheckZero(false);
     length1F.setToolId(i->getId());
     length1F.setPostfix(UnitsToStr(VAbstractValApplication::VApp()->patternUnits()));
     length1F.Eval();
@@ -4010,7 +4004,6 @@ void VToolOptionsPropertyBrowser::UpdateOptionsToolSpline()
     m_idToProperty[AttrLength1]->setValue(length1);
 
     VFormula angle2F(spl.GetEndAngleFormula(), i->getData());
-    angle2F.setCheckZero(false);
     angle2F.setToolId(i->getId());
     angle2F.setPostfix(degreeSymbol);
     angle2F.Eval();
@@ -4019,7 +4012,6 @@ void VToolOptionsPropertyBrowser::UpdateOptionsToolSpline()
     m_idToProperty[AttrAngle2]->setValue(angle2);
 
     VFormula length2F(spl.GetC2LengthFormula(), i->getData());
-    length2F.setCheckZero(false);
     length2F.setToolId(i->getId());
     length2F.setPostfix(UnitsToStr(VAbstractValApplication::VApp()->patternUnits()));
     length2F.Eval();

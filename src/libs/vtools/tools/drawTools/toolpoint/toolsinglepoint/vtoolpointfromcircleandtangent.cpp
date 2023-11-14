@@ -33,20 +33,20 @@
 
 #include "../../../../dialogs/tools/dialogpointfromcircleandtangent.h"
 #include "../../../../dialogs/tools/dialogtool.h"
-#include "../../../../visualization/visualization.h"
 #include "../../../../visualization/line/vistoolpointfromcircleandtangent.h"
+#include "../../../../visualization/visualization.h"
+#include "../../../vabstracttool.h"
+#include "../../vdrawtool.h"
 #include "../ifc/exception/vexception.h"
 #include "../ifc/exception/vexceptionobjecterror.h"
-#include "../ifc/xml/vdomdocument.h"
 #include "../ifc/ifcdef.h"
+#include "../ifc/xml/vdomdocument.h"
 #include "../vgeometry/vgobject.h"
 #include "../vgeometry/vpointf.h"
 #include "../vmisc/vabstractapplication.h"
 #include "../vpatterndb/vcontainer.h"
 #include "../vpatterndb/vformula.h"
 #include "../vwidgets/vmaingraphicsscene.h"
-#include "../../../vabstracttool.h"
-#include "../../vdrawtool.h"
 #include "vtoolsinglepoint.h"
 
 template <class T> class QSharedPointer;
@@ -56,11 +56,11 @@ const QString VToolPointFromCircleAndTangent::ToolType = QStringLiteral("pointFr
 //---------------------------------------------------------------------------------------------------------------------
 VToolPointFromCircleAndTangent::VToolPointFromCircleAndTangent(const VToolPointFromCircleAndTangentInitData &initData,
                                                                QGraphicsItem *parent)
-    :VToolSinglePoint(initData.doc, initData.data, initData.id, initData.notes, parent),
-      circleCenterId(initData.circleCenterId),
-      tangentPointId(initData.tangentPointId),
-      circleRadius(initData.circleRadius),
-      crossPoint(initData.crossPoint)
+  : VToolSinglePoint(initData.doc, initData.data, initData.id, initData.notes, parent),
+    circleCenterId(initData.circleCenterId),
+    tangentPointId(initData.tangentPointId),
+    circleRadius(initData.circleRadius),
+    crossPoint(initData.crossPoint)
 {
     ToolCreation(initData.typeCreation);
 }
@@ -70,7 +70,7 @@ void VToolPointFromCircleAndTangent::SetDialog()
 {
     SCASSERT(not m_dialog.isNull())
     const QPointer<DialogPointFromCircleAndTangent> dialogTool =
-            qobject_cast<DialogPointFromCircleAndTangent *>(m_dialog);
+        qobject_cast<DialogPointFromCircleAndTangent *>(m_dialog);
     SCASSERT(not dialogTool.isNull())
     const QSharedPointer<VPointF> p = VAbstractTool::data.GeometricObject<VPointF>(m_id);
     dialogTool->SetCircleCenterId(circleCenterId);
@@ -87,7 +87,7 @@ auto VToolPointFromCircleAndTangent::Create(const QPointer<DialogTool> &dialog, 
 {
     SCASSERT(not dialog.isNull())
     const QPointer<DialogPointFromCircleAndTangent> dialogTool =
-            qobject_cast<DialogPointFromCircleAndTangent *>(dialog);
+        qobject_cast<DialogPointFromCircleAndTangent *>(dialog);
     SCASSERT(not dialogTool.isNull())
 
     VToolPointFromCircleAndTangentInitData initData;
@@ -116,25 +116,27 @@ auto VToolPointFromCircleAndTangent::Create(VToolPointFromCircleAndTangentInitDa
     -> VToolPointFromCircleAndTangent *
 {
     const qreal radius =
-            VAbstractValApplication::VApp()->toPixel(CheckFormula(initData.id, initData.circleRadius, initData.data));
+        VAbstractValApplication::VApp()->toPixel(CheckFormula(initData.id, initData.circleRadius, initData.data));
     const VPointF cPoint = *initData.data->GeometricObject<VPointF>(initData.circleCenterId);
     const VPointF tPoint = *initData.data->GeometricObject<VPointF>(initData.tangentPointId);
 
     QPointF point;
-    const bool success = VToolPointFromCircleAndTangent::FindPoint(static_cast<QPointF>(tPoint),
-                                                                   static_cast<QPointF>(cPoint), radius,
-                                                                   initData.crossPoint, &point);
+    const bool success = VToolPointFromCircleAndTangent::FindPoint(
+        static_cast<QPointF>(tPoint), static_cast<QPointF>(cPoint), radius, initData.crossPoint, &point);
     if (not success)
     {
         const QString errorMsg = tr("Error calculating point '%1'. Tangent to circle with center '%2' and radius '%3' "
                                     "from point '%4' cannot be found")
-                .arg(initData.name, cPoint.name()).arg(radius).arg(tPoint.name());
+                                     .arg(initData.name, cPoint.name())
+                                     .arg(radius)
+                                     .arg(tPoint.name());
 
-        VAbstractApplication::VApp()->IsPedantic() ? throw VExceptionObjectError(errorMsg) :
-                                              qWarning() << VAbstractValApplication::warningMessageSignature + errorMsg;
+        VAbstractApplication::VApp()->IsPedantic()
+            ? throw VExceptionObjectError(errorMsg)
+            : qWarning() << VAbstractValApplication::warningMessageSignature + errorMsg;
     }
 
-    VPointF *p = new VPointF(point, initData.name, initData.mx, initData.my);
+    auto *p = new VPointF(point, initData.name, initData.mx, initData.my);
     p->SetShowLabel(initData.showLabel);
 
     if (initData.typeCreation == Source::FromGui)
@@ -153,7 +155,7 @@ auto VToolPointFromCircleAndTangent::Create(VToolPointFromCircleAndTangentInitDa
     if (initData.parse == Document::FullParse)
     {
         VAbstractTool::AddRecord(initData.id, Tool::PointFromCircleAndTangent, initData.doc);
-        VToolPointFromCircleAndTangent *point = new VToolPointFromCircleAndTangent(initData);
+        auto *point = new VToolPointFromCircleAndTangent(initData);
         initData.scene->addItem(point);
         InitToolConnections(initData.scene, point);
         VAbstractPattern::AddTool(initData.id, point);
@@ -171,9 +173,9 @@ auto VToolPointFromCircleAndTangent::FindPoint(const QPointF &p, const QPointF &
     SCASSERT(intersectionPoint != nullptr)
 
     QPointF p1, p2;
-    const int res = VGObject::ContactPoints (p, center, radius, p1, p2);
+    const int res = VGObject::ContactPoints(p, center, qAbs(radius), p1, p2);
 
-    switch(res)
+    switch (res)
     {
         case 2:
             *intersectionPoint = (crossPoint == CrossCirclesPoint::FirstPoint ? p1 : p2);
@@ -216,12 +218,9 @@ void VToolPointFromCircleAndTangent::SetCircleRadius(const VFormula &value)
 {
     if (value.error() == false)
     {
-        if (value.getDoubleValue() > 0)// Formula don't check this, but radius can't be 0 or negative
-        {
-            circleRadius = value.GetFormula(FormulaType::FromUser);
-            QSharedPointer<VGObject> obj = VAbstractTool::data.GetGObject(m_id);
-            SaveOption(obj);
-        }
+        circleRadius = value.GetFormula(FormulaType::FromUser);
+        QSharedPointer<VGObject> obj = VAbstractTool::data.GetGObject(m_id);
+        SaveOption(obj);
     }
 }
 
@@ -253,10 +252,10 @@ void VToolPointFromCircleAndTangent::ShowContextMenu(QGraphicsSceneContextMenuEv
     {
         ContextMenu<DialogPointFromCircleAndTangent>(event, id);
     }
-    catch(const VExceptionToolWasDeleted &e)
+    catch (const VExceptionToolWasDeleted &e)
     {
         Q_UNUSED(e)
-        return;//Leave this method immediately!!!
+        return; // Leave this method immediately!!!
     }
 }
 
@@ -276,7 +275,7 @@ void VToolPointFromCircleAndTangent::SaveDialog(QDomElement &domElement, QList<q
 {
     SCASSERT(not m_dialog.isNull())
     const QPointer<DialogPointFromCircleAndTangent> dialogTool =
-            qobject_cast<DialogPointFromCircleAndTangent *>(m_dialog);
+        qobject_cast<DialogPointFromCircleAndTangent *>(m_dialog);
     SCASSERT(not dialogTool.isNull())
 
     AddDependence(oldDependencies, circleCenterId);
@@ -291,7 +290,7 @@ void VToolPointFromCircleAndTangent::SaveDialog(QDomElement &domElement, QList<q
     doc->SetAttribute(domElement, AttrCrossPoint,
                       QString().setNum(static_cast<int>(dialogTool->GetCrossCirclesPoint())));
     doc->SetAttributeOrRemoveIf<QString>(domElement, AttrNotes, dialogTool->GetNotes(),
-                                         [](const QString &notes) noexcept {return notes.isEmpty();});
+                                         [](const QString &notes) noexcept { return notes.isEmpty(); });
 }
 
 //---------------------------------------------------------------------------------------------------------------------

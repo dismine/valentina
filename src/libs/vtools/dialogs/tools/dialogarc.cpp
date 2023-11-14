@@ -525,17 +525,7 @@ void DialogArc::EvalRadius()
     formulaData.labelResult = ui->labelResultRadius;
     formulaData.postfix = UnitsToStr(VAbstractValApplication::VApp()->patternUnits(), true);
 
-    const qreal radius = Eval(formulaData, m_flagRadius);
-
-    if (radius < 0)
-    {
-        m_flagRadius = false;
-        ChangeColor(ui->labelEditRadius, errorColor);
-        ui->labelResultRadius->setText(tr("Error"));
-        ui->labelResultRadius->setToolTip(tr("Radius can't be negative"));
-
-        DialogArc::CheckState();
-    }
+    Eval(formulaData, m_flagRadius);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -550,7 +540,6 @@ void DialogArc::EvalF()
     formulaData.labelEditFormula = ui->labelEditF1;
     formulaData.labelResult = ui->labelResultF1;
     formulaData.postfix = degreeSymbol;
-    formulaData.checkZero = false;
 
     m_angleF1 = Eval(formulaData, m_flagF1);
 
