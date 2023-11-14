@@ -304,7 +304,9 @@ auto VPointF::FlipPF(const QLineF &axis, const QPointF &point) -> QPointF
 //---------------------------------------------------------------------------------------------------------------------
 auto VPointF::MovePF(const QPointF &originPoint, qreal length, qreal angle) -> QPointF
 {
-    QLineF line(originPoint.x(), originPoint.y(), originPoint.x() + length, originPoint.y());
-    line.setAngle(angle);
+    QLineF line;
+    line.setP1(originPoint);
+    line.setAngle(angle); // First set angle then length. Length can have negative value.
+    line.setLength(length);
     return line.p2();
 }
