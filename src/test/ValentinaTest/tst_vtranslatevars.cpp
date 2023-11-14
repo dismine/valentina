@@ -42,6 +42,15 @@ TST_VTranslateVars::TST_VTranslateVars(QObject *parent)
     m_trMs(nullptr),
     m_systemLocale(QLocale::system())
 {
+    VCommonSettings *settings = VAbstractApplication::VApp()->Settings();
+    m_translateFomula = settings->IsTranslateFormula();
+    settings->SetTranslateFormula(true);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+TST_VTranslateVars::~TST_VTranslateVars()
+{
+    VAbstractApplication::VApp()->Settings()->SetTranslateFormula(m_translateFomula);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -158,7 +167,7 @@ void TST_VTranslateVars::PrepareVal(const QString &inputFormula, const QString &
 
     auto PREPARE_CASE = [locale](const QString &inputString, const QString &outputString)
     {
-        QString tag = u"%1. String '%2'"_s.arg(locale.name(), inputString);
+        QString tag = QStringLiteral("%1. String '%2'").arg(locale.name(), inputString);
         QTest::newRow(qUtf8Printable(tag)) << inputString << outputString << locale;
     };
 
@@ -168,7 +177,7 @@ void TST_VTranslateVars::PrepareVal(const QString &inputFormula, const QString &
     outputString = outputFormula + '+'_L1 + outputFormula;
     PREPARE_CASE(inputString, outputString);
 
-    inputString = inputFormula + u"+a"_s;
-    outputString = outputFormula + u"+a"_s;
+    inputString = inputFormula + "+a"_L1;
+    outputString = outputFormula + "+a"_L1;
     PREPARE_CASE(inputString, outputString);
 }

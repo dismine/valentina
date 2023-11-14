@@ -45,6 +45,7 @@ class TST_VTranslateVars : public QObject
 
 public:
     explicit TST_VTranslateVars(QObject *parent = nullptr);
+    ~TST_VTranslateVars() override;
 private slots:
     void initTestCase();
     void TestFormulaFromUser_data();
@@ -58,6 +59,7 @@ private:
     Q_DISABLE_COPY_MOVE(TST_VTranslateVars) // NOLINT
     VTranslateVars *m_trMs;
     QLocale m_systemLocale;
+    bool m_translateFomula{true};
 
     void PrepareValFromUser(double d, const QLocale &locale);
     void PrepareValToUser(double d, const QLocale &locale);
