@@ -288,14 +288,13 @@ auto Visualization::GetCurveItem(QVector<VCurvePathItem *> &curves, quint32 i, V
 //---------------------------------------------------------------------------------------------------------------------
 auto Visualization::LengthToUser(qreal value) -> QString
 {
-    return VAbstractApplication::VApp()->TrVars()->FormulaToUser(
-        QString::number(VAbstractValApplication::VApp()->fromPixel(value)),
-        VAbstractApplication::VApp()->Settings()->GetOsSeparator());
+    auto *app = VAbstractValApplication::VApp();
+    return app->TrVars()->FormulaToUser(QString::number(app->fromPixel(value)), app->Settings()->GetOsSeparator());
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 auto Visualization::AngleToUser(qreal value) -> QString
 {
-    return VAbstractApplication::VApp()->TrVars()->FormulaToUser(
-        QString::number(value), VAbstractApplication::VApp()->Settings()->GetOsSeparator());
+    auto *app = VAbstractApplication::VApp();
+    return app->TrVars()->FormulaToUser(QString::number(value), app->Settings()->GetOsSeparator());
 }

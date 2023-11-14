@@ -77,7 +77,7 @@ auto GetOriginPoint(const QVector<SourceItem> &objects, const VContainer *data, 
 {
     QPolygonF originObjects;
 
-    for (auto object : objects)
+    for (const auto &object : objects)
     {
         const QSharedPointer<VGObject> obj = data->GetGObject(object.id);
 
@@ -193,7 +193,7 @@ auto VToolMove::Create(VToolMoveInitData &initData) -> VToolMove *
 
         initData.id = initData.data->getNextId(); // Just reserve id for tool
 
-        for (auto object : qAsConst(initData.source))
+        for (const auto &object : qAsConst(initData.source))
         {
             const QSharedPointer<VGObject> obj = initData.data->GetGObject(object.id);
 
@@ -314,7 +314,7 @@ auto VToolMove::Create(VToolMoveInitData &initData) -> VToolMove *
         }
 
         VAbstractTool::AddRecord(initData.id, Tool::Move, initData.doc);
-        VToolMove *tool = new VToolMove(initData);
+        auto *tool = new VToolMove(initData);
         initData.scene->addItem(tool);
         InitOperationToolConnections(initData.scene, tool);
         VAbstractPattern::AddTool(initData.id, tool);
@@ -324,7 +324,7 @@ auto VToolMove::Create(VToolMoveInitData &initData) -> VToolMove *
             initData.doc->IncrementReferens(originPoint->getIdTool());
         }
 
-        for (auto object : qAsConst(initData.source))
+        for (const auto &object : qAsConst(initData.source))
         {
             initData.doc->IncrementReferens(initData.data->GetGObject(object.id)->getIdTool());
         }
@@ -354,7 +354,7 @@ auto VToolMove::GetFormulaAngle() const -> VFormula
 //---------------------------------------------------------------------------------------------------------------------
 void VToolMove::SetFormulaAngle(const VFormula &value)
 {
-    if (value.error() == false)
+    if (!value.error())
     {
         formulaAngle = value.GetFormula(FormulaType::FromUser);
 
@@ -377,7 +377,7 @@ auto VToolMove::GetFormulaRotationAngle() const -> VFormula
 //---------------------------------------------------------------------------------------------------------------------
 void VToolMove::SetFormulaRotationAngle(const VFormula &value)
 {
-    if (value.error() == false)
+    if (!value.error())
     {
         formulaRotationAngle = value.GetFormula(FormulaType::FromUser);
 
@@ -493,10 +493,10 @@ void VToolMove::ReadToolAttributes(const QDomElement &domElement)
 {
     VAbstractOperation::ReadToolAttributes(domElement);
 
-    origPointId = doc->GetParametrUInt(domElement, AttrCenter, NULL_ID_STR);
-    formulaAngle = doc->GetParametrString(domElement, AttrAngle, QChar('0'));
-    formulaRotationAngle = doc->GetParametrString(domElement, AttrRotationAngle, QChar('0'));
-    formulaLength = doc->GetParametrString(domElement, AttrLength, QChar('0'));
+    origPointId = VDomDocument::GetParametrUInt(domElement, AttrCenter, NULL_ID_STR);
+    formulaAngle = VDomDocument::GetParametrString(domElement, AttrAngle, QChar('0'));
+    formulaRotationAngle = VDomDocument::GetParametrString(domElement, AttrRotationAngle, QChar('0'));
+    formulaLength = VDomDocument::GetParametrString(domElement, AttrLength, QChar('0'));
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -527,8 +527,8 @@ auto VToolMove::MakeToolTip() const -> QString
              tr("Rotation angle"))                                              // 6
         .arg(GetFormulaRotationAngle().getDoubleValue())                        // 7
         .arg(tr("Rotation origin point"),                                       // 8
-             OriginPointName())                                                 // 9
-        .arg(VisibilityGroupToolTip());                                         // 10
+             OriginPointName(),                                                 // 9
+             VisibilityGroupToolTip());                                         // 10
 }
 
 //---------------------------------------------------------------------------------------------------------------------

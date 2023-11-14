@@ -34,6 +34,7 @@
 class TST_VArc : public AbstractTest
 {
     Q_OBJECT // NOLINT
+
 public:
     explicit TST_VArc(QObject *parent = nullptr);
 

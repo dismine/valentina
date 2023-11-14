@@ -162,7 +162,7 @@ void DialogCurveIntersectAxis::SetAngle(const QString &value)
     }
     ui->plainTextEditFormula->setPlainText(formulaAngle);
 
-    VisToolCurveIntersectAxis *line = qobject_cast<VisToolCurveIntersectAxis *>(vis);
+    auto *line = qobject_cast<VisToolCurveIntersectAxis *>(vis);
     SCASSERT(line != nullptr)
     line->SetAngle(formulaAngle);
 
@@ -180,7 +180,7 @@ void DialogCurveIntersectAxis::SetBasePointId(quint32 value)
 {
     setCurrentPointId(ui->comboBoxAxisPoint, value);
 
-    VisToolCurveIntersectAxis *line = qobject_cast<VisToolCurveIntersectAxis *>(vis);
+    auto *line = qobject_cast<VisToolCurveIntersectAxis *>(vis);
     SCASSERT(line != nullptr)
     line->setAxisPointId(value);
 }
@@ -196,7 +196,7 @@ void DialogCurveIntersectAxis::setCurveId(quint32 value)
 {
     setCurrentCurveId(ui->comboBoxCurve, value);
 
-    VisToolCurveIntersectAxis *line = qobject_cast<VisToolCurveIntersectAxis *>(vis);
+    auto *line = qobject_cast<VisToolCurveIntersectAxis *>(vis);
     SCASSERT(line != nullptr)
     line->SetCurveId(value);
 }
@@ -268,7 +268,7 @@ void DialogCurveIntersectAxis::ChosenObject(quint32 id, const SceneObject &type)
                     {
                         number++;
                         line->VisualMode(id);
-                        VAbstractMainWindow *window =
+                        auto *window =
                             qobject_cast<VAbstractMainWindow *>(VAbstractValApplication::VApp()->getMainWindow());
                         SCASSERT(window != nullptr)
                         connect(line, &VisToolCurveIntersectAxis::ToolTip, window, &VAbstractMainWindow::ShowToolTip);
@@ -323,7 +323,7 @@ void DialogCurveIntersectAxis::DeployAngleTextEdit()
 //---------------------------------------------------------------------------------------------------------------------
 void DialogCurveIntersectAxis::FXAngle()
 {
-    DialogEditWrongFormula *dialog = new DialogEditWrongFormula(data, toolId, this);
+    auto *dialog = new DialogEditWrongFormula(data, toolId, this);
     dialog->setWindowTitle(tr("Edit angle"));
     dialog->SetFormula(GetAngle());
     dialog->setPostfix(degreeSymbol);
@@ -346,7 +346,7 @@ void DialogCurveIntersectAxis::SaveData()
     pointName = ui->lineEditNamePoint->text();
     formulaAngle = ui->plainTextEditFormula->toPlainText();
 
-    VisToolCurveIntersectAxis *line = qobject_cast<VisToolCurveIntersectAxis *>(vis);
+    auto *line = qobject_cast<VisToolCurveIntersectAxis *>(vis);
     SCASSERT(line != nullptr)
 
     line->SetCurveId(getCurveId());

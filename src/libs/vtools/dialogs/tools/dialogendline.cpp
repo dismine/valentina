@@ -175,7 +175,7 @@ void DialogEndLine::DeployAngleTextEdit()
 //---------------------------------------------------------------------------------------------------------------------
 void DialogEndLine::FXAngle()
 {
-    DialogEditWrongFormula *dialog = new DialogEditWrongFormula(data, toolId, this);
+    auto *dialog = new DialogEditWrongFormula(data, toolId, this);
     dialog->setWindowTitle(tr("Edit angle"));
     dialog->SetFormula(GetAngle());
     dialog->setPostfix(degreeSymbol);
@@ -189,7 +189,7 @@ void DialogEndLine::FXAngle()
 //---------------------------------------------------------------------------------------------------------------------
 void DialogEndLine::FXLength()
 {
-    DialogEditWrongFormula *dialog = new DialogEditWrongFormula(data, toolId, this);
+    auto *dialog = new DialogEditWrongFormula(data, toolId, this);
     dialog->setWindowTitle(tr("Edit length"));
     dialog->SetFormula(GetFormula());
     dialog->setPostfix(UnitsToStr(VAbstractValApplication::VApp()->patternUnits(), true));
@@ -381,7 +381,7 @@ void DialogEndLine::SaveData()
     formulaLength = ui->plainTextEditFormula->toPlainText();
     formulaAngle = ui->plainTextEditAngle->toPlainText();
 
-    VisToolEndLine *line = qobject_cast<VisToolEndLine *>(vis);
+    auto *line = qobject_cast<VisToolEndLine *>(vis);
     SCASSERT(line != nullptr)
 
     line->SetBasePointId(GetBasePointId());

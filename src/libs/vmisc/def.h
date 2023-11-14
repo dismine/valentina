@@ -758,14 +758,13 @@ Q_DECL_RELAXED_CONSTEXPR static inline auto VFuzzyComparePossibleNulls(double p1
     {
         return qFuzzyIsNull(p2);
     }
-    else if (qFuzzyIsNull(p2))
+
+    if (qFuzzyIsNull(p2))
     {
         return false;
     }
-    else
-    {
-        return qFuzzyCompare(p1, p2);
-    }
+
+    return qFuzzyCompare(p1, p2);
 }
 
 /**

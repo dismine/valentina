@@ -636,7 +636,7 @@ void MainWindowsNoGUI::ExportDetailsAsFlatLayout(const QVector<VLayoutPiece> &li
     QList<QGraphicsScene *> scenes = CreateScenes(papers, shadows, details);
 
     const bool ignorePrinterFields = false;
-    const qreal margin = ToPixel(1, Unit::Cm);
+    Q_RELAXED_CONSTEXPR qreal margin = ToPixel(1, Unit::Cm);
     ExportFlatLayout(scenes, papers, shadows, details, ignorePrinterFields, QMarginsF(margin, margin, margin, margin));
 
     qDeleteAll(scenes); // Scene will clear all other items

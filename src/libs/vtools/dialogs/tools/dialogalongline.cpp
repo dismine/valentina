@@ -44,9 +44,9 @@
 
 #include "../../visualization/line/vistoolalongline.h"
 #include "../../visualization/visualization.h"
+#include "../ifc/ifcdef.h"
 #include "../ifc/xml/vabstractpattern.h"
 #include "../support/dialogeditwrongformula.h"
-#include "../vgeometry/../ifc/ifcdef.h"
 #include "../vgeometry/vpointf.h"
 #include "../vmisc/theme/vtheme.h"
 #include "../vmisc/vabstractapplication.h"
@@ -56,6 +56,12 @@
 #include "../vpatterndb/vtranslatevars.h"
 #include "../vwidgets/vabstractmainwindow.h"
 #include "ui_dialogalongline.h"
+
+#if QT_VERSION < QT_VERSION_CHECK(6, 4, 0)
+#include "../vmisc/compatibility.h"
+#endif
+
+using namespace Qt::Literals::StringLiterals;
 
 //---------------------------------------------------------------------------------------------------------------------
 /**
@@ -297,7 +303,7 @@ void DialogAlongLine::ChosenSecondPoint(quint32 id, const QString &toolTip)
             line->SetPoint2Id(id);
             if (m_buildMidpoint)
             {
-                SetFormula(currentLength + QStringLiteral("/2"));
+                SetFormula(currentLength + "/2"_L1);
                 line->SetMode(Mode::Show);
             }
             else

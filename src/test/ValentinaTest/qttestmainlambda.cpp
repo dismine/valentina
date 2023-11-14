@@ -76,7 +76,7 @@ auto main(int argc, char **argv) -> int
     int status = 0;
     auto ASSERT_TEST = [&status, argc, argv](QObject *obj)
     {
-        status |= QTest::qExec(obj, argc, argv);
+        status |= QTest::qExec(obj, argc, argv); // NOLINT(hicpp-signed-bitwise)
         delete obj;
     };
 

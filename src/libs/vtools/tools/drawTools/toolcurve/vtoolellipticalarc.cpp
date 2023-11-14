@@ -216,7 +216,7 @@ auto VToolEllipticalArc::GetFormulaRadius1() const -> VFormula
 //---------------------------------------------------------------------------------------------------------------------
 void VToolEllipticalArc::SetFormulaRadius1(const VFormula &value)
 {
-    if (value.error() == false)
+    if (!value.error())
     {
         if (value.getDoubleValue() > 0) // Formula don't check this, but radius1 can't be 0 or negative
         {
@@ -245,7 +245,7 @@ auto VToolEllipticalArc::GetFormulaRadius2() const -> VFormula
 //---------------------------------------------------------------------------------------------------------------------
 void VToolEllipticalArc::SetFormulaRadius2(const VFormula &value)
 {
-    if (value.error() == false)
+    if (!value.error())
     {
         if (value.getDoubleValue() > 0) // Formula don't check this, but radius2 can't be 0 or negative
         {
@@ -274,7 +274,7 @@ auto VToolEllipticalArc::GetFormulaF1() const -> VFormula
 //---------------------------------------------------------------------------------------------------------------------
 void VToolEllipticalArc::SetFormulaF1(const VFormula &value)
 {
-    if (value.error() == false)
+    if (!value.error())
     {
         QSharedPointer<VGObject> obj = VAbstractTool::data.GetGObject(m_id);
         QSharedPointer<VEllipticalArc> elArc = qSharedPointerDynamicCast<VEllipticalArc>(obj);
@@ -300,7 +300,7 @@ auto VToolEllipticalArc::GetFormulaF2() const -> VFormula
 //---------------------------------------------------------------------------------------------------------------------
 void VToolEllipticalArc::SetFormulaF2(const VFormula &value)
 {
-    if (value.error() == false)
+    if (!value.error())
     {
         QSharedPointer<VGObject> obj = VAbstractTool::data.GetGObject(m_id);
         QSharedPointer<VEllipticalArc> elArc = qSharedPointerDynamicCast<VEllipticalArc>(obj);
@@ -326,7 +326,7 @@ auto VToolEllipticalArc::GetFormulaRotationAngle() const -> VFormula
 //---------------------------------------------------------------------------------------------------------------------
 void VToolEllipticalArc::SetFormulaRotationAngle(const VFormula &value)
 {
-    if (value.error() == false)
+    if (!value.error())
     {
         QSharedPointer<VGObject> obj = VAbstractTool::data.GetGObject(m_id);
         QSharedPointer<VEllipticalArc> elArc = qSharedPointerDynamicCast<VEllipticalArc>(obj);
