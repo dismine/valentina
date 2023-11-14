@@ -299,7 +299,7 @@ void AbstractTest::ComparePathsDistance(const QVector<QPointF> &ekv, const QVect
 //---------------------------------------------------------------------------------------------------------------------
 void AbstractTest::ComparePointsDistance(const QPointF &result, const QPointF &expected, qreal testAccuracy) const
 {
-    const QString msg = QStringLiteral("Actual '%2;%3', Expected '%4;%5'. Distance between points %6 mm.")
+    const QString msg = QStringLiteral("Actual '%1;%2', Expected '%3;%4'. Distance between points %5 mm.")
                             .arg(result.x())
                             .arg(result.y())
                             .arg(expected.x())
