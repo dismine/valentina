@@ -1007,7 +1007,8 @@ auto MApplication::StartWithMeasurementFiles(QCommandLineParser &parser) -> bool
     ParseUnitsOption(parser, unit, flagUnits);
 
     return std::all_of(args.begin(), args.end(),
-                       [&](const auto &arg)
+                       [this, flagDimensionA, flagDimensionB, flagDimensionC, flagUnits, dimensionAValue,
+                        dimensionBValue, dimensionCValue, unit](const auto &arg)
                        {
                            NewMainTapeWindow();
                            if (not MainTapeWindow()->LoadFile(arg))
@@ -1046,7 +1047,7 @@ auto MApplication::StartWithKnownMeasurementFiles(QCommandLineParser &parser) ->
     const QStringList args = parser.positionalArguments();
 
     return std::all_of(args.begin(), args.end(),
-                       [&](const auto &arg)
+                       [this, args](const auto &arg)
                        {
                            NewMainKMWindow();
                            if (not MainKMWindow()->LoadFile(arg))
