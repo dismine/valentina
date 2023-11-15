@@ -183,11 +183,10 @@ auto VAbstractMainWindow::ContinueFormatRewrite(const QString &currentFormatVers
             VAbstractApplication::VApp()->Settings()->SetConfirmFormatRewriting(not msgBox.isChecked());
             return true;
         }
-        else
-        {
-            return false;
-        }
+
+        return false;
     }
+
     return true;
 }
 
@@ -242,7 +241,7 @@ void VAbstractMainWindow::UpdateRecentFileActions()
 
     for (int i = 0; i < numRecentFiles; ++i)
     {
-        const QString& recent = recentFiles.at(i);
+        const QString &recent = recentFiles.at(i);
         if (not recent.isEmpty())
         {
             const QString text = QStringLiteral("&%1. %2").arg(i + 1).arg(recentFiles.at(i));
@@ -395,18 +394,20 @@ void VAbstractMainWindow::ExportDataToCSV()
         return;
     }
 
+    VCommonSettings *settings = VAbstractApplication::VApp()->Settings();
+
     DialogExportToCSV dialog(this);
-    dialog.SetWithHeader(VAbstractApplication::VApp()->Settings()->GetCSVWithHeader());
-    dialog.SetSelectedMib(VAbstractApplication::VApp()->Settings()->GetCSVCodec());
-    dialog.SetSeparator(VAbstractApplication::VApp()->Settings()->GetCSVSeparator());
+    dialog.SetWithHeader(settings->GetCSVWithHeader());
+    dialog.SetSelectedMib(settings->GetCSVCodec());
+    dialog.SetSeparator(settings->GetCSVSeparator());
 
     if (dialog.exec() == QDialog::Accepted)
     {
         ExportToCSVData(fileName, dialog.IsWithHeader(), dialog.GetSelectedMib(), dialog.GetSeparator());
 
-        VAbstractApplication::VApp()->Settings()->SetCSVSeparator(dialog.GetSeparator());
-        VAbstractApplication::VApp()->Settings()->SetCSVCodec(dialog.GetSelectedMib());
-        VAbstractApplication::VApp()->Settings()->SetCSVWithHeader(dialog.IsWithHeader());
+        settings->SetCSVSeparator(dialog.GetSeparator());
+        settings->SetCSVCodec(dialog.GetSelectedMib());
+        settings->SetCSVWithHeader(dialog.IsWithHeader());
     }
 }
 
