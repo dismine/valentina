@@ -108,7 +108,8 @@ auto DialogMDataBase::ImgTag(const VPatternImage &image) -> QString
         return QStringLiteral("<img src=\"wrong.png\" align=\"center\"/>"); // In case of error
     }
 
-    return QString("<img src=\"data:%1;base64,%2\" align=\"center\"/>").arg(image.ContentType(), image.ContentData());
+    return QStringLiteral("<img src=\"data:%1;base64,%2\" align=\"center\"/>")
+        .arg(image.ContentType(), QString(image.ContentData()));
 }
 
 //---------------------------------------------------------------------------------------------------------------------
