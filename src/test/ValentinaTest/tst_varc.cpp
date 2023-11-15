@@ -441,7 +441,7 @@ void TST_VArc::TestFlip()
     const QString errorMsg = u"The name doesn't contain the prefix '%1'."_s.arg(prefix);
     QVERIFY2(res.name().endsWith(prefix), qUtf8Printable(errorMsg));
 
-    QVERIFY2(res.IsFlipped() == radius > 0, qUtf8Printable("The arc is not flipped"));
+    QVERIFY2(res.IsFlipped() == (radius > 0), qUtf8Printable("The arc is not flipped"));
 
     QCOMPARE(originArc.GetLength() * -1, res.GetLength());
     QCOMPARE(originArc.GetRadius(), res.GetRadius());
