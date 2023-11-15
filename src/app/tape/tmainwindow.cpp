@@ -4227,6 +4227,10 @@ void TMainWindow::CreateWindowMenu(QMenu *menu)
     QAction *action = menu->addAction(tr("&New Window"));
     connect(action, &QAction::triggered, this, []() { MApplication::VApp()->NewMainTapeWindow()->activateWindow(); });
     action->setMenuRole(QAction::NoRole);
+
+    menu->addAction(ui->actionAlwaysOnTop);
+    connect(ui->actionAlwaysOnTop, &QAction::triggered, this, &TMainWindow::AlwaysOnTop);
+
     menu->addSeparator();
 
     const QList<TMainWindow *> windows = MApplication::VApp()->MainTapeWindows();

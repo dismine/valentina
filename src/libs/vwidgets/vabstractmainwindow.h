@@ -61,6 +61,7 @@ public slots:
 
 protected slots:
     void ExportDataToCSV();
+    void AlwaysOnTop(bool state);
 
 protected:
     unsigned m_curFileFormatVersion;

@@ -2129,6 +2129,10 @@ void TKMMainWindow::CreateWindowMenu(QMenu *menu)
     QAction *action = menu->addAction(tr("&New Window"));
     connect(action, &QAction::triggered, this, []() { MApplication::VApp()->NewMainKMWindow()->activateWindow(); });
     action->setMenuRole(QAction::NoRole);
+
+    menu->addAction(ui->actionAlwaysOnTop);
+    connect(ui->actionAlwaysOnTop, &QAction::triggered, this, &TKMMainWindow::AlwaysOnTop);
+
     menu->addSeparator();
 
     const QList<TKMMainWindow *> windows = MApplication::VApp()->MainKMWindows();
