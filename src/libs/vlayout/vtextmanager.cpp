@@ -273,18 +273,6 @@ auto operator>>(QDataStream &dataStream, VTextManager &data) -> QDataStream &
 
 namespace
 {
-QT_WARNING_PUSH
-QT_WARNING_DISABLE_CLANG("-Wunused-member-function")
-
-Q_GLOBAL_STATIC(QDateTime, placeholdersExpirationTime) // NOLINT
-
-using VPlaceholdersCache = QMap<QString, QString>;
-Q_GLOBAL_STATIC(VPlaceholdersCache, placeholdersCache) // NOLINT
-
-QT_WARNING_POP
-
-const qint64 placeholdersExpirationTimeout = 15; // seconds
-
 //---------------------------------------------------------------------------------------------------------------------
 void PrepareMeasurementsPlaceholders(const VContainer *data, QMap<QString, QString> &placeholders)
 {
@@ -455,12 +443,6 @@ auto PreparePlaceholders(const VAbstractPattern *doc, const VContainer *data, bo
     SCASSERT(doc != nullptr)
     SCASSERT(data != nullptr)
 
-    if (placeholdersExpirationTime->isValid() && QDateTime::currentDateTime() <= *placeholdersExpirationTime)
-    {
-        *placeholdersExpirationTime = QDateTime::currentDateTime().addSecs(placeholdersExpirationTimeout);
-        return *placeholdersCache;
-    }
-
     QMap<QString, QString> placeholders;
 
     // Pattern tags
@@ -516,9 +498,6 @@ auto PreparePlaceholders(const VAbstractPattern *doc, const VContainer *data, bo
     placeholders.insert(pl_mInterfacing, phTr->translate("Placeholder", "Interfacing"));
     placeholders.insert(pl_mInterlining, phTr->translate("Placeholder", "Interlining"));
     placeholders.insert(pl_wCut, phTr->translate("Placeholder", "Cut"));
-
-    *placeholdersCache = placeholders;
-    *placeholdersExpirationTime = QDateTime::currentDateTime().addSecs(placeholdersExpirationTimeout);
 
     return placeholders;
 }
@@ -902,7 +881,7 @@ void VTextManager::Update(VAbstractPattern *pDoc, const VContainer *pattern)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-auto VTextManager::BreakTextIntoLines(const QString &text, const QFont &font, int maxWidth) const -> QStringList
+auto VTextManager::BreakTextIntoLines(const QString &text, const QFont &font, int maxWidth) -> QStringList
 {
     QFontMetrics fontMetrics(font);
     QStringList words = text.split(' ');

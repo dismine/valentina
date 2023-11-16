@@ -124,7 +124,7 @@ private:
     static const quint32 streamHeader;
     static const quint16 classVersion;
 
-    auto BreakTextIntoLines(const QString &text, const QFont &font, int maxWidth) const -> QStringList;
+    static auto BreakTextIntoLines(const QString &text, const QFont &font, int maxWidth) -> QStringList;
     auto BreakTextIntoLines(const QString &text, const VSvgFont &font, int maxWidth, qreal penWidth) const
         -> QStringList;
 };

@@ -926,7 +926,7 @@ void VAbstractPattern::SetMPath(const QString &path)
             RemoveDimensions();
         }
         m_MPath = path;
-        patternLabelWasChanged = true;
+        SetPatternWasChanged(true);
         modified = true;
         emit patternChanged(false);
     }
@@ -1039,7 +1039,7 @@ void VAbstractPattern::SetPatternName(const QString &qsName)
     m_patternName = qsName;
     CheckTagExists(TagPatternName);
     setTagText(TagPatternName, m_patternName);
-    patternLabelWasChanged = true;
+    SetPatternWasChanged(true);
     modified = true;
     emit patternChanged(false);
 }
@@ -1056,7 +1056,7 @@ void VAbstractPattern::SetCompanyName(const QString &qsName)
     m_companyName = qsName;
     CheckTagExists(TagCompanyName);
     setTagText(TagCompanyName, m_companyName);
-    patternLabelWasChanged = true;
+    SetPatternWasChanged(true);
     modified = true;
     emit patternChanged(false);
 }
@@ -1073,7 +1073,7 @@ void VAbstractPattern::SetPatternNumber(const QString &qsNum)
     m_patternNumber = qsNum;
     CheckTagExists(TagPatternNum);
     setTagText(TagPatternNum, m_patternNumber);
-    patternLabelWasChanged = true;
+    SetPatternWasChanged(true);
     modified = true;
     emit patternChanged(false);
 }
@@ -1089,7 +1089,7 @@ void VAbstractPattern::SetCustomerName(const QString &qsName)
 {
     CheckTagExists(TagCustomerName);
     setTagText(TagCustomerName, qsName);
-    patternLabelWasChanged = true;
+    SetPatternWasChanged(true);
     modified = true;
     emit patternChanged(false);
 }
@@ -1105,7 +1105,7 @@ void VAbstractPattern::SetCustomerBirthDate(const QDate &date)
 {
     CheckTagExists(TagCustomerBirthDate);
     setTagText(TagCustomerBirthDate, date.toString("yyyy-MM-dd"));
-    patternLabelWasChanged = true;
+    SetPatternWasChanged(true);
     modified = true;
     emit patternChanged(false);
 }
@@ -1121,7 +1121,7 @@ void VAbstractPattern::SetCustomerEmail(const QString &email)
 {
     CheckTagExists(TagCustomerEmail);
     setTagText(TagCustomerEmail, email);
-    patternLabelWasChanged = true;
+    SetPatternWasChanged(true);
     modified = true;
     emit patternChanged(false);
 }
@@ -1138,7 +1138,7 @@ void VAbstractPattern::SetLabelDateFormat(const QString &format)
     m_labelDateFormat = format;
     QDomElement tag = CheckTagExists(TagPatternLabel);
     SetAttribute(tag, AttrDateFormat, m_labelDateFormat);
-    patternLabelWasChanged = true;
+    SetPatternWasChanged(true);
     modified = true;
     emit patternChanged(false);
 }
@@ -1163,7 +1163,7 @@ void VAbstractPattern::SetLabelTimeFormat(const QString &format)
 {
     QDomElement tag = CheckTagExists(TagPatternLabel);
     SetAttribute(tag, AttrTimeFormat, format);
-    patternLabelWasChanged = true;
+    SetPatternWasChanged(true);
     modified = true;
     emit patternChanged(false);
 }
@@ -1175,7 +1175,7 @@ void VAbstractPattern::SetPatternLabelTemplate(const QVector<VLabelTemplateLine>
     RemoveAllChildren(tag);
     SetLabelTemplate(tag, lines);
     patternLabelLines = lines;
-    patternLabelWasChanged = true;
+    SetPatternWasChanged(true);
     modified = true;
     emit patternChanged(false);
 }
@@ -1208,7 +1208,7 @@ auto VAbstractPattern::SetWatermarkPath(const QString &path) -> bool
         parent.removeChild(tag);
 
         emit patternChanged(false);
-        patternLabelWasChanged = true;
+        SetPatternWasChanged(true);
         m_watermarkPath = path;
         modified = true;
         return true;
@@ -1217,7 +1217,7 @@ auto VAbstractPattern::SetWatermarkPath(const QString &path) -> bool
     if (setTagText(tag, path))
     {
         emit patternChanged(false);
-        patternLabelWasChanged = true;
+        SetPatternWasChanged(true);
         m_watermarkPath = path;
         modified = true;
         return true;
@@ -1242,7 +1242,7 @@ void VAbstractPattern::SetPatternMaterials(const QMap<int, QString> &materials)
     RemoveAllChildren(tag);
     SetMaterials(tag, materials);
     patternMaterials = materials;
-    patternLabelWasChanged = true;
+    SetPatternWasChanged(true);
     modified = true;
     emit patternChanged(false);
 }
