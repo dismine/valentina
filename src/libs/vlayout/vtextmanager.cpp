@@ -66,6 +66,31 @@ Q_GLOBAL_STATIC(QVector<TextLine>, m_patternLabelLinesCache) // NOLINT
 
 QT_WARNING_POP
 
+//---------------------------------------------------------------------------------------------------------------------
+auto FileBaseName(const QString &filePath) -> QString
+{
+    // Known suffixes to check for
+    QStringList knownSuffixes = {".val", ".vst", ".vit"};
+
+    QFileInfo fileInfo(filePath);
+
+    // Check if the file has one of the known suffixes
+    for (const QString &suffix : knownSuffixes)
+    {
+        if (fileInfo.completeSuffix().endsWith(suffix, Qt::CaseInsensitive))
+        {
+            // Remove the known suffix and return the modified file name
+            QString modifiedFileName = fileInfo.fileName();
+            modifiedFileName.chop(suffix.length());
+            return modifiedFileName;
+        }
+    }
+
+    // Fallback to QFileInfo::baseName if no known suffix is found
+    return fileInfo.baseName();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 auto SplitTextByWidth(const QString &text, const QFont &font, int maxWidth) -> QStringList
 {
     QFontMetrics fontMetrics(font);
@@ -467,8 +492,8 @@ auto PreparePlaceholders(const VAbstractPattern *doc, const VContainer *data, bo
     PrepareCustomerPlaceholders(doc, placeholders);
 
     placeholders.insert(pl_pExt, QStringLiteral("val"));
-    placeholders.insert(pl_pFileName, QFileInfo(VAbstractValApplication::VApp()->GetPatternPath()).baseName());
-    placeholders.insert(pl_mFileName, QFileInfo(doc->MPath()).baseName());
+    placeholders.insert(pl_pFileName, FileBaseName(VAbstractValApplication::VApp()->GetPatternPath()));
+    placeholders.insert(pl_mFileName, FileBaseName(doc->MPath()));
 
     PrepareDimensionPlaceholders(placeholders);
 

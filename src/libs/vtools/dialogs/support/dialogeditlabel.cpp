@@ -55,6 +55,33 @@
 
 using namespace Qt::Literals::StringLiterals;
 
+namespace
+{
+//---------------------------------------------------------------------------------------------------------------------
+auto FileBaseName(const QString &filePath) -> QString
+{
+    // Known suffixes to check for
+    QStringList knownSuffixes = {".val", ".vst", ".vit"};
+
+    QFileInfo fileInfo(filePath);
+
+    // Check if the file has one of the known suffixes
+    for (const QString &suffix : knownSuffixes)
+    {
+        if (fileInfo.completeSuffix().endsWith(suffix, Qt::CaseInsensitive))
+        {
+            // Remove the known suffix and return the modified file name
+            QString modifiedFileName = fileInfo.fileName();
+            modifiedFileName.chop(suffix.length());
+            return modifiedFileName;
+        }
+    }
+
+    // Fallback to QFileInfo::baseName if no known suffix is found
+    return fileInfo.baseName();
+}
+} // namespace
+
 //---------------------------------------------------------------------------------------------------------------------
 DialogEditLabel::DialogEditLabel(const VAbstractPattern *doc, const VContainer *data, QWidget *parent)
   : QDialog(parent),
@@ -556,12 +583,9 @@ void DialogEditLabel::InitPlaceholders()
     }
 
     m_placeholders.insert(pl_pExt, qMakePair(tr("Pattern extension"), QStringLiteral("val")));
-
-    const QString patternFilePath = QFileInfo(VAbstractValApplication::VApp()->GetPatternPath()).baseName();
-    m_placeholders.insert(pl_pFileName, qMakePair(tr("Pattern file name"), patternFilePath));
-
-    const QString measurementsFilePath = QFileInfo(m_doc->MPath()).baseName();
-    m_placeholders.insert(pl_mFileName, qMakePair(tr("Measurements file name"), measurementsFilePath));
+    m_placeholders.insert(pl_pFileName, qMakePair(tr("Pattern file name"),
+                                                  FileBaseName(VAbstractValApplication::VApp()->GetPatternPath())));
+    m_placeholders.insert(pl_mFileName, qMakePair(tr("Measurements file name"), FileBaseName(m_doc->MPath())));
 
     QString heightValue = QString::number(VAbstractValApplication::VApp()->GetDimensionHeight());
     m_placeholders.insert(pl_height, qMakePair(tr("Height", "dimension"), heightValue));
