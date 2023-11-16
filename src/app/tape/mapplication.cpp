@@ -1047,7 +1047,7 @@ auto MApplication::StartWithKnownMeasurementFiles(QCommandLineParser &parser) ->
     const QStringList args = parser.positionalArguments();
 
     return std::all_of(args.begin(), args.end(),
-                       [this, args](const auto &arg)
+                       [this](const auto &arg)
                        {
                            NewMainKMWindow();
                            if (not MainKMWindow()->LoadFile(arg))
