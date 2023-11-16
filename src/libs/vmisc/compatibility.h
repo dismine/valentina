@@ -493,4 +493,21 @@ inline void RemoveLast(QString &str)
 #endif
 }
 
+//---------------------------------------------------------------------------------------------------------------------
+inline void SetWindowFlag(QWidget *widget, Qt::WindowType flag, bool on = true)
+{
+#if QT_VERSION >= QT_VERSION_CHECK(5, 9, 0)
+    widget->setWindowFlag(flag, on);
+#else
+    if (on)
+    {
+        widget->setWindowFlags(widget->windowFlags() | flag);
+    }
+    else
+    {
+        widget->setWindowFlags(widget->windowFlags() & ~flag);
+    }
+#endif
+}
+
 #endif // COMPATIBILITY_H

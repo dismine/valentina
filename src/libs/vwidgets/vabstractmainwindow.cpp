@@ -414,7 +414,7 @@ void VAbstractMainWindow::ExportDataToCSV()
 //---------------------------------------------------------------------------------------------------------------------
 void VAbstractMainWindow::AlwaysOnTop(bool state)
 {
-    setWindowFlag(Qt::WindowStaysOnTopHint, state);
+    SetWindowFlag(this, Qt::WindowStaysOnTopHint, state);
     destroy();
     create();
     setVisible(true);
