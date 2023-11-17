@@ -539,7 +539,7 @@ void TKMMainWindow::FileNew()
 //---------------------------------------------------------------------------------------------------------------------
 void TKMMainWindow::OpenKnownMeasurements()
 {
-    const QString filter = tr("Known measurements") + " (*.vit);;"_L1 + tr("All files") + " (*.*)"_L1;
+    const QString filter = tr("Known measurements") + " (*.vkm);;"_L1 + tr("All files") + " (*.*)"_L1;
     // Use standard path to known measurements
     QString pathTo = MApplication::VApp()->TapeSettings()->GetPathKnownMeasurements();
 
