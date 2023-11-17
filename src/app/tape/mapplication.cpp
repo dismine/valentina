@@ -1049,10 +1049,10 @@ auto MApplication::StartWithKnownMeasurementFiles(QCommandLineParser &parser) ->
     return std::all_of(args.begin(), args.end(),
                        [this](const auto &arg)
                        {
-                           NewMainKMWindow();
-                           if (not MainKMWindow()->LoadFile(arg))
+                           this->NewMainKMWindow();
+                           if (not this->MainKMWindow()->LoadFile(arg))
                            {
-                               delete MainKMWindow();
+                               delete this->MainKMWindow();
                                return !m_testMode;
                            }
 
