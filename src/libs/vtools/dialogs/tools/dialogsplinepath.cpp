@@ -80,18 +80,7 @@ using namespace Qt::Literals::StringLiterals;
  */
 DialogSplinePath::DialogSplinePath(const VContainer *data, VAbstractPattern *doc, quint32 toolId, QWidget *parent)
   : DialogTool(data, doc, toolId, parent),
-    ui(new Ui::DialogSplinePath),
-    path(),
-    newDuplicate(-1),
-    formulaBaseHeightAngle1(0),
-    formulaBaseHeightAngle2(0),
-    formulaBaseHeightLength1(0),
-    formulaBaseHeightLength2(0),
-    flagAngle1(),
-    flagAngle2(),
-    flagLength1(),
-    flagLength2(),
-    flagError(false)
+    ui(new Ui::DialogSplinePath)
 {
     ui->setupUi(this);
 
@@ -110,6 +99,7 @@ DialogSplinePath::DialogSplinePath(const VContainer *data, VAbstractPattern *doc
     InitOkCancelApply(ui);
     bOk->setEnabled(false);
 
+    FillComboBoxPoints(ui->comboBoxNewPoint);
     FillComboBoxPoints(ui->comboBoxPoint);
     FillComboBoxLineColors(ui->comboBoxColor);
     FillComboBoxTypeLine(ui->comboBoxPenStyle,
@@ -121,6 +111,16 @@ DialogSplinePath::DialogSplinePath(const VContainer *data, VAbstractPattern *doc
     connect(ui->listWidget, &QListWidget::currentRowChanged, this, &DialogSplinePath::PointChanged);
     connect(ui->comboBoxPoint, QOverload<int>::of(&QComboBox::currentIndexChanged), this,
             &DialogSplinePath::currentPointChanged);
+    connect(ui->comboBoxNewPoint, QOverload<int>::of(&QComboBox::currentIndexChanged), this,
+            &DialogSplinePath::NewPointChanged);
+
+    connect(ui->toolButtonAddPoint, &QToolButton::clicked, this, &DialogSplinePath::AddPoint);
+    connect(ui->toolButtonRemovePoint, &QToolButton::clicked, this, &DialogSplinePath::RemovePoint);
+
+    connect(ui->toolButtonTop, &QToolButton::clicked, this, &DialogSplinePath::MoveTop);
+    connect(ui->toolButtonUp, &QToolButton::clicked, this, &DialogSplinePath::MoveUp);
+    connect(ui->toolButtonDown, &QToolButton::clicked, this, &DialogSplinePath::MoveDown);
+    connect(ui->toolButtonBottom, &QToolButton::clicked, this, &DialogSplinePath::MoveBottom);
 
     connect(ui->toolButtonExprAngle1, &QPushButton::clicked, this, &DialogSplinePath::FXAngle1);
     connect(ui->toolButtonExprAngle2, &QPushButton::clicked, this, &DialogSplinePath::FXAngle2);
@@ -194,6 +194,9 @@ void DialogSplinePath::SetPath(const VSplinePath &value)
     ui->listWidget->blockSignals(false);
 
     flagError = IsPathValid();
+
+    ui->toolButtonRemovePoint->setEnabled(ui->listWidget->count() > 3);
+    MoveControls();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -226,8 +229,7 @@ void DialogSplinePath::ChosenObject(quint32 id, const SceneObject &type)
         if (path.CountPoints() == 1)
         {
             visPath->VisualMode(NULL_ID);
-            VAbstractMainWindow *window =
-                qobject_cast<VAbstractMainWindow *>(VAbstractValApplication::VApp()->getMainWindow());
+            auto *window = qobject_cast<VAbstractMainWindow *>(VAbstractValApplication::VApp()->getMainWindow());
             SCASSERT(window != nullptr)
             connect(visPath, &VisToolSplinePath::ToolTip, window, &VAbstractMainWindow::ShowToolTip);
 
@@ -322,7 +324,7 @@ void DialogSplinePath::Angle1Changed()
     {
         QListWidgetItem *item = ui->listWidget->item(row);
         SCASSERT(item != nullptr)
-        VSplinePoint p = qvariant_cast<VSplinePoint>(item->data(Qt::UserRole));
+        auto p = qvariant_cast<VSplinePoint>(item->data(Qt::UserRole));
 
         const QString angle1F = ui->plainTextEditAngle1F->toPlainText();
         const qreal angle1 = Visualization::FindValFromUser(angle1F, data->DataVariables());
@@ -357,7 +359,7 @@ void DialogSplinePath::Angle2Changed()
     {
         QListWidgetItem *item = ui->listWidget->item(row);
         SCASSERT(item != nullptr)
-        VSplinePoint p = qvariant_cast<VSplinePoint>(item->data(Qt::UserRole));
+        auto p = qvariant_cast<VSplinePoint>(item->data(Qt::UserRole));
 
         const QString angle2F = ui->plainTextEditAngle2F->toPlainText();
         const qreal angle2 = Visualization::FindValFromUser(angle2F, data->DataVariables());
@@ -392,7 +394,7 @@ void DialogSplinePath::Length1Changed()
     {
         QListWidgetItem *item = ui->listWidget->item(row);
         SCASSERT(item != nullptr)
-        VSplinePoint p = qvariant_cast<VSplinePoint>(item->data(Qt::UserRole));
+        auto p = qvariant_cast<VSplinePoint>(item->data(Qt::UserRole));
 
         const QString length1F = ui->plainTextEditLength1F->toPlainText();
         const qreal length1 = Visualization::FindLengthFromUser(length1F, data->DataVariables());
@@ -418,7 +420,7 @@ void DialogSplinePath::Length2Changed()
     {
         QListWidgetItem *item = ui->listWidget->item(row);
         SCASSERT(item != nullptr)
-        VSplinePoint p = qvariant_cast<VSplinePoint>(item->data(Qt::UserRole));
+        auto p = qvariant_cast<VSplinePoint>(item->data(Qt::UserRole));
 
         const QString length2F = ui->plainTextEditLength2F->toPlainText();
         const qreal length2 = Visualization::FindLengthFromUser(length2F, data->DataVariables());
@@ -579,7 +581,7 @@ void DialogSplinePath::EvalAngle1()
 
     QListWidgetItem *item = ui->listWidget->item(row);
     SCASSERT(item != nullptr)
-    VSplinePoint p = qvariant_cast<VSplinePoint>(item->data(Qt::UserRole));
+    auto p = qvariant_cast<VSplinePoint>(item->data(Qt::UserRole));
 
     ShowPointIssue(p.P().name());
 }
@@ -604,7 +606,7 @@ void DialogSplinePath::EvalAngle2()
 
     QListWidgetItem *item = ui->listWidget->item(row);
     SCASSERT(item != nullptr)
-    VSplinePoint p = qvariant_cast<VSplinePoint>(item->data(Qt::UserRole));
+    auto p = qvariant_cast<VSplinePoint>(item->data(Qt::UserRole));
 
     ShowPointIssue(p.P().name());
 }
@@ -630,7 +632,7 @@ void DialogSplinePath::EvalLength1()
 
     QListWidgetItem *item = ui->listWidget->item(row);
     SCASSERT(item != nullptr)
-    VSplinePoint p = qvariant_cast<VSplinePoint>(item->data(Qt::UserRole));
+    auto p = qvariant_cast<VSplinePoint>(item->data(Qt::UserRole));
 
     ShowPointIssue(p.P().name());
 }
@@ -656,7 +658,7 @@ void DialogSplinePath::EvalLength2()
 
     QListWidgetItem *item = ui->listWidget->item(row);
     SCASSERT(item != nullptr)
-    VSplinePoint p = qvariant_cast<VSplinePoint>(item->data(Qt::UserRole));
+    auto p = qvariant_cast<VSplinePoint>(item->data(Qt::UserRole));
 
     ShowPointIssue(p.P().name());
 }
@@ -670,8 +672,14 @@ void DialogSplinePath::PointChanged(int row)
 {
     if (ui->listWidget->count() == 0)
     {
+        ui->toolButtonTop->setEnabled(false);
+        ui->toolButtonUp->setEnabled(false);
+        ui->toolButtonDown->setEnabled(false);
+        ui->toolButtonBottom->setEnabled(false);
         return;
     }
+
+    MoveControls();
 
     const auto p = qvariant_cast<VSplinePoint>(ui->listWidget->item(row)->data(Qt::UserRole));
     DataPoint(p);
@@ -684,13 +692,13 @@ void DialogSplinePath::PointChanged(int row)
  */
 void DialogSplinePath::currentPointChanged(int index)
 {
-    const quint32 id = qvariant_cast<quint32>(ui->comboBoxPoint->itemData(index));
+    const auto id = qvariant_cast<quint32>(ui->comboBoxPoint->itemData(index));
     QColor color;
 
     try
     {
         QListWidgetItem *item = ui->listWidget->item(ui->listWidget->currentRow());
-        VSplinePoint p = qvariant_cast<VSplinePoint>(item->data(Qt::UserRole));
+        auto p = qvariant_cast<VSplinePoint>(item->data(Qt::UserRole));
 
         const auto point = data->GeometricObject<VPointF>(id);
         p.SetP(*point);
@@ -748,21 +756,107 @@ void DialogSplinePath::currentPointChanged(int index)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+void DialogSplinePath::NewPointChanged()
+{
+    ui->toolButtonAddPoint->setEnabled(ui->comboBoxNewPoint->currentIndex() != -1);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void DialogSplinePath::AddPoint()
+{
+    const auto id = qvariant_cast<quint32>(ui->comboBoxNewPoint->currentData());
+    const auto point = data->GeometricObject<VPointF>(id);
+    VSplinePoint p;
+    p.SetP(*point);
+    NewItem(p);
+    SavePath();
+
+    flagError = IsPathValid();
+    CheckState(); // Disable Ok and Apply buttons if something wrong.
+
+    ui->comboBoxNewPoint->blockSignals(true);
+    ui->comboBoxNewPoint->setCurrentIndex(-1);
+    ui->comboBoxNewPoint->blockSignals(false);
+    ui->toolButtonAddPoint->setDisabled(true);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void DialogSplinePath::RemovePoint()
+{
+    if (ui->listWidget->count() <= 3)
+    {
+        ui->toolButtonRemovePoint->setDisabled(true);
+        return;
+    }
+
+    QListWidgetItem *selectedItem = ui->listWidget->currentItem();
+    if (selectedItem)
+    {
+        delete ui->listWidget->takeItem(ui->listWidget->row(selectedItem));
+        ui->listWidget->setCurrentRow(0);
+        ui->toolButtonRemovePoint->setDisabled(ui->listWidget->count() <= 3);
+    }
+
+    SavePath();
+
+    flagError = IsPathValid();
+    CheckState(); // Disable Ok and Apply buttons if something wrong.
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void DialogSplinePath::MoveTop()
+{
+    MoveListRowTop(ui->listWidget);
+    SavePath();
+    flagError = IsPathValid();
+    CheckState(); // Disable Ok and Apply buttons if something wrong.
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void DialogSplinePath::MoveUp()
+{
+    MoveListRowUp(ui->listWidget);
+    SavePath();
+    flagError = IsPathValid();
+    CheckState(); // Disable Ok and Apply buttons if something wrong.
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void DialogSplinePath::MoveDown()
+{
+    MoveListRowDown(ui->listWidget);
+    SavePath();
+    flagError = IsPathValid();
+    CheckState(); // Disable Ok and Apply buttons if something wrong.
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void DialogSplinePath::MoveBottom()
+{
+    MoveListRowBottom(ui->listWidget);
+    SavePath();
+    flagError = IsPathValid();
+    CheckState(); // Disable Ok and Apply buttons if something wrong.
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 void DialogSplinePath::ShowDialog(bool click)
 {
-    if (click == false)
+    if (click)
     {
-        if (path.CountPoints() >= 3)
+        return;
+    }
+
+    if (path.CountPoints() >= 3)
+    {
+        emit ToolTip(QString());
+
+        if (not data->IsUnique(path.name()))
         {
-            emit ToolTip(QString());
-
-            if (not data->IsUnique(path.name()))
-            {
-                path.SetDuplicate(DNumber(path.name()));
-            }
-
-            DialogAccepted();
+            path.SetDuplicate(DNumber(path.name()));
         }
+
+        DialogAccepted();
     }
 }
 
@@ -800,6 +894,7 @@ void DialogSplinePath::NewItem(const VSplinePoint &point)
     {
         bOk = ui->buttonBox->button(QDialogButtonBox::Ok);
         bOk->setEnabled(true);
+        ui->toolButtonRemovePoint->setEnabled(true);
     }
 
     DataPoint(point);
@@ -970,6 +1065,7 @@ auto DialogSplinePath::IsPathValid() const -> bool
 auto DialogSplinePath::ExtractPath() const -> VSplinePath
 {
     QVector<VSplinePoint> points;
+    points.reserve(ui->listWidget->count());
     for (qint32 i = 0; i < ui->listWidget->count(); ++i)
     {
         points.append(qvariant_cast<VSplinePoint>(ui->listWidget->item(i)->data(Qt::UserRole)));
@@ -1015,6 +1111,17 @@ void DialogSplinePath::InitIcons()
     ui->label_9->setPixmap(VTheme::GetPixmapResource(resource, equalIcon));
     ui->label_10->setPixmap(VTheme::GetPixmapResource(resource, equalIcon));
     ui->label_11->setPixmap(VTheme::GetPixmapResource(resource, equalIcon));
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void DialogSplinePath::MoveControls()
+{
+    const int index = ui->listWidget->currentRow();
+
+    ui->toolButtonTop->setEnabled(index > 0);
+    ui->toolButtonUp->setEnabled(index > 0);
+    ui->toolButtonDown->setEnabled(index != -1 && index < ui->listWidget->count() - 1);
+    ui->toolButtonBottom->setEnabled(index != -1 && index < ui->listWidget->count() - 1);
 }
 
 //---------------------------------------------------------------------------------------------------------------------

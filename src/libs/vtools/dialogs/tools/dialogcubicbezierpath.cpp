@@ -72,6 +72,7 @@ DialogCubicBezierPath::DialogCubicBezierPath(const VContainer *data, VAbstractPa
     InitOkCancelApply(ui);
     bOk->setEnabled(false);
 
+    FillComboBoxPoints(ui->comboBoxNewPoint);
     FillComboBoxPoints(ui->comboBoxPoint);
     FillComboBoxLineColors(ui->comboBoxColor);
     FillComboBoxTypeLine(ui->comboBoxPenStyle,
@@ -83,6 +84,16 @@ DialogCubicBezierPath::DialogCubicBezierPath(const VContainer *data, VAbstractPa
     connect(ui->listWidget, &QListWidget::currentRowChanged, this, &DialogCubicBezierPath::PointChanged);
     connect(ui->comboBoxPoint, QOverload<int>::of(&QComboBox::currentIndexChanged), this,
             &DialogCubicBezierPath::currentPointChanged);
+    connect(ui->comboBoxNewPoint, QOverload<int>::of(&QComboBox::currentIndexChanged), this,
+            &DialogCubicBezierPath::NewPointChanged);
+
+    connect(ui->toolButtonAddPoint, &QToolButton::clicked, this, &DialogCubicBezierPath::AddPoint);
+    connect(ui->toolButtonRemovePoint, &QToolButton::clicked, this, &DialogCubicBezierPath::RemovePoint);
+
+    connect(ui->toolButtonTop, &QToolButton::clicked, this, &DialogCubicBezierPath::MoveTop);
+    connect(ui->toolButtonUp, &QToolButton::clicked, this, &DialogCubicBezierPath::MoveUp);
+    connect(ui->toolButtonDown, &QToolButton::clicked, this, &DialogCubicBezierPath::MoveDown);
+    connect(ui->toolButtonBottom, &QToolButton::clicked, this, &DialogCubicBezierPath::MoveBottom);
 
     connect(ui->lineEditAlias, &QLineEdit::textEdited, this, &DialogCubicBezierPath::ValidateAlias);
 
@@ -136,6 +147,9 @@ void DialogCubicBezierPath::SetPath(const VCubicBezierPath &value)
     }
 
     ValidatePath();
+
+    ui->toolButtonRemovePoint->setEnabled(ui->listWidget->count() > 7);
+    MoveControls();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -175,22 +189,24 @@ void DialogCubicBezierPath::ChosenObject(quint32 id, const SceneObject &type)
 //---------------------------------------------------------------------------------------------------------------------
 void DialogCubicBezierPath::ShowDialog(bool click)
 {
-    if (click == false)
+    if (click)
     {
-        const auto size = path.CountPoints();
-        if (size >= 7)
-        {
-            if (size - VCubicBezierPath::SubSplPointsCount(path.CountSubSpl()) == 0)
-            { // Accept only if all subpaths are completed
-                emit ToolTip(QString());
+        return;
+    }
 
-                if (not data->IsUnique(path.name()))
-                {
-                    path.SetDuplicate(DNumber(path.name()));
-                }
+    const auto size = path.CountPoints();
+    if (size >= 7)
+    {
+        if (size - VCubicBezierPath::SubSplPointsCount(path.CountSubSpl()) == 0)
+        { // Accept only if all subpaths are completed
+            emit ToolTip(QString());
 
-                DialogAccepted();
+            if (not data->IsUnique(path.name()))
+            {
+                path.SetDuplicate(DNumber(path.name()));
             }
+
+            DialogAccepted();
         }
     }
 }
@@ -225,8 +241,14 @@ void DialogCubicBezierPath::PointChanged(int row)
 {
     if (ui->listWidget->count() == 0)
     {
+        ui->toolButtonTop->setEnabled(false);
+        ui->toolButtonUp->setEnabled(false);
+        ui->toolButtonDown->setEnabled(false);
+        ui->toolButtonBottom->setEnabled(false);
         return;
     }
+
+    MoveControls();
 
     const auto p = qvariant_cast<VPointF>(ui->listWidget->item(row)->data(Qt::UserRole));
     DataPoint(p);
@@ -280,6 +302,88 @@ void DialogCubicBezierPath::ValidateAlias()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+void DialogCubicBezierPath::NewPointChanged()
+{
+    ui->toolButtonAddPoint->setEnabled(ui->comboBoxNewPoint->currentIndex() != -1);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void DialogCubicBezierPath::AddPoint()
+{
+    const auto id = qvariant_cast<quint32>(ui->comboBoxNewPoint->currentData());
+    const auto point = data->GeometricObject<VPointF>(id);
+    NewItem(*point);
+    SavePath();
+
+    flagError = IsPathValid();
+    CheckState(); // Disable Ok and Apply buttons if something wrong.
+
+    ui->comboBoxNewPoint->blockSignals(true);
+    ui->comboBoxNewPoint->setCurrentIndex(-1);
+    ui->comboBoxNewPoint->blockSignals(false);
+    ui->toolButtonAddPoint->setDisabled(true);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void DialogCubicBezierPath::RemovePoint()
+{
+    if (ui->listWidget->count() <= 7)
+    {
+        ui->toolButtonRemovePoint->setDisabled(true);
+        return;
+    }
+
+    QListWidgetItem *selectedItem = ui->listWidget->currentItem();
+    if (selectedItem)
+    {
+        delete ui->listWidget->takeItem(ui->listWidget->row(selectedItem));
+        ui->listWidget->setCurrentRow(0);
+        ui->toolButtonRemovePoint->setDisabled(ui->listWidget->count() <= 7);
+    }
+
+    SavePath();
+
+    flagError = IsPathValid();
+    CheckState(); // Disable Ok and Apply buttons if something wrong.
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void DialogCubicBezierPath::MoveTop()
+{
+    MoveListRowTop(ui->listWidget);
+    SavePath();
+    flagError = IsPathValid();
+    CheckState(); // Disable Ok and Apply buttons if something wrong.
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void DialogCubicBezierPath::MoveUp()
+{
+    MoveListRowUp(ui->listWidget);
+    SavePath();
+    flagError = IsPathValid();
+    CheckState(); // Disable Ok and Apply buttons if something wrong.
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void DialogCubicBezierPath::MoveDown()
+{
+    MoveListRowDown(ui->listWidget);
+    SavePath();
+    flagError = IsPathValid();
+    CheckState(); // Disable Ok and Apply buttons if something wrong.
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void DialogCubicBezierPath::MoveBottom()
+{
+    MoveListRowBottom(ui->listWidget);
+    SavePath();
+    flagError = IsPathValid();
+    CheckState(); // Disable Ok and Apply buttons if something wrong.
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 void DialogCubicBezierPath::NewItem(const VPointF &point)
 {
     auto *item = new QListWidgetItem(point.name());
@@ -316,6 +420,7 @@ void DialogCubicBezierPath::SavePath()
 auto DialogCubicBezierPath::AllPathBackboneIds() const -> QSet<quint32>
 {
     QVector<quint32> points;
+    points.reserve(ui->listWidget->count());
     for (qint32 i = 0; i < ui->listWidget->count(); ++i)
     {
         points.append(qvariant_cast<VPointF>(ui->listWidget->item(i)->data(Qt::UserRole)).id());
@@ -348,6 +453,7 @@ auto DialogCubicBezierPath::IsPathValid() const -> bool
 auto DialogCubicBezierPath::ExtractPath() const -> VCubicBezierPath
 {
     QVector<VPointF> points;
+    points.reserve(ui->listWidget->count());
     for (qint32 i = 0; i < ui->listWidget->count(); ++i)
     {
         points.append(qvariant_cast<VPointF>(ui->listWidget->item(i)->data(Qt::UserRole)));
@@ -396,6 +502,17 @@ void DialogCubicBezierPath::ValidatePath()
 
     ChangeColor(ui->labelName, color);
     ChangeColor(ui->labelPoint, color);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void DialogCubicBezierPath::MoveControls()
+{
+    const int index = ui->listWidget->currentRow();
+
+    ui->toolButtonTop->setEnabled(index > 0);
+    ui->toolButtonUp->setEnabled(index > 0);
+    ui->toolButtonDown->setEnabled(index != -1 && index < ui->listWidget->count() - 1);
+    ui->toolButtonBottom->setEnabled(index != -1 && index < ui->listWidget->count() - 1);
 }
 
 //---------------------------------------------------------------------------------------------------------------------

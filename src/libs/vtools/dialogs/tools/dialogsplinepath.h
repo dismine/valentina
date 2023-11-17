@@ -79,6 +79,15 @@ protected:
 private slots:
     void PointChanged(int row);
     void currentPointChanged(int index);
+    void NewPointChanged();
+
+    void AddPoint();
+    void RemovePoint();
+
+    void MoveTop();
+    void MoveUp();
+    void MoveDown();
+    void MoveBottom();
 
     void DeployAngle1TextEdit();
     void DeployAngle2TextEdit();
@@ -104,22 +113,22 @@ private:
     Ui::DialogSplinePath *ui;
 
     /** @brief path spline path */
-    VSplinePath path;
+    VSplinePath path{};
 
-    qint32 newDuplicate;
+    qint32 newDuplicate{-1};
 
     /** @brief formulaBaseHeight base height defined by dialogui */
-    int formulaBaseHeightAngle1;
-    int formulaBaseHeightAngle2;
-    int formulaBaseHeightLength1;
-    int formulaBaseHeightLength2;
+    int formulaBaseHeightAngle1{0};
+    int formulaBaseHeightAngle2{0};
+    int formulaBaseHeightLength1{0};
+    int formulaBaseHeightLength2{0};
 
     /** @brief flagAngle1 true if value of first angle is correct */
-    QVector<bool> flagAngle1;
-    QVector<bool> flagAngle2;
-    QVector<bool> flagLength1;
-    QVector<bool> flagLength2;
-    bool flagError;
+    QVector<bool> flagAngle1{};
+    QVector<bool> flagAngle2{};
+    QVector<bool> flagLength1{};
+    QVector<bool> flagLength2{};
+    bool flagError{false};
     bool flagAlias{true};
 
     QString originAliasSuffix{};
@@ -138,6 +147,8 @@ private:
     void ShowPointIssue(const QString &pName);
 
     void InitIcons();
+
+    void MoveControls();
 };
 
 //---------------------------------------------------------------------------------------------------------------------

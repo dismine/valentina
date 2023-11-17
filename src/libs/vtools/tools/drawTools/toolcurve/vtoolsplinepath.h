@@ -142,6 +142,8 @@ private:
     void SetSplinePathAttributes(QDomElement &domElement, const VSplinePath &path);
 
     void UndoCommandMove(const VSplinePath &oldPath, const VSplinePath &newPath);
+
+    void InitControlPoints(const VSplinePath *splPath);
 };
 
 #endif // VTOOLSPLINEPATH_H

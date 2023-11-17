@@ -245,20 +245,13 @@ void VControlPointSpline::SetCtrlLine(const QPointF &controlPoint, const QPointF
     QLineF circleLine(QPointF(), splinePoint - controlPoint);
     const qreal radius = ScaledRadius(SceneScale(scene()));
 
-    if (circleLine.length() > radius)
-    {
-        QPointF p1, p2;
-        VGObject::LineIntersectCircle(QPointF(), radius, circleLine, p1, p2);
-        QLineF line(splinePoint - controlPoint, p1);
-        controlLine->setFlag(QGraphicsItem::ItemSendsGeometryChanges, false);
-        controlLine->setLine(line);
-        controlLine->setVisible(not line.isNull());
-        controlLine->setFlag(QGraphicsItem::ItemSendsGeometryChanges, true);
-    }
-    else
-    {
-        controlLine->setVisible(false);
-    }
+    QPointF p1, p2;
+    VGObject::LineIntersectCircle(QPointF(), radius, circleLine, p1, p2);
+    QLineF line(splinePoint - controlPoint, p1);
+    controlLine->setFlag(QGraphicsItem::ItemSendsGeometryChanges, false);
+    controlLine->setLine(line);
+    controlLine->setVisible(not line.isNull());
+    controlLine->setFlag(QGraphicsItem::ItemSendsGeometryChanges, true);
 }
 
 //---------------------------------------------------------------------------------------------------------------------

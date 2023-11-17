@@ -86,65 +86,8 @@ VToolSplinePath::VToolSplinePath(const VToolSplinePathInitData &initData, QGraph
     this->setFlag(QGraphicsItem::ItemIsMovable, true);
     this->setFlag(QGraphicsItem::ItemIsFocusable, true); // For keyboard input focus
 
-    auto InitControlPoint = [this](VControlPointSpline *cPoint)
-    {
-        connect(cPoint, &VControlPointSpline::ControlPointChangePosition, this,
-                &VToolSplinePath::ControlPointChangePosition);
-        connect(this, &VToolSplinePath::setEnabledPoint, cPoint, &VControlPointSpline::setEnabledPoint);
-        connect(cPoint, &VControlPointSpline::ShowContextMenu, this, &VToolSplinePath::contextMenuEvent);
-        connect(cPoint, &VControlPointSpline::Released, this, &VToolSplinePath::CurveReleased);
-        connect(cPoint, &VControlPointSpline::Selected, this, &VToolSplinePath::CurveSelected);
-        controlPoints.append(cPoint);
-    };
-
     const QSharedPointer<VSplinePath> splPath = initData.data->GeometricObject<VSplinePath>(initData.id);
-    for (qint32 i = 1; i <= splPath->CountSubSpl(); ++i)
-    {
-        const VSpline spl = splPath->GetSpline(i);
-
-        bool freeAngle1 = true;
-
-        if (i > 1)
-        {
-            const VSpline prevSpl = splPath->GetSpline(i - 1);
-            freeAngle1 = qmu::QmuTokenParser::IsSingle(spl.GetStartAngleFormula()) &&
-                         qmu::QmuTokenParser::IsSingle(prevSpl.GetEndAngleFormula());
-        }
-        else
-        {
-            freeAngle1 = qmu::QmuTokenParser::IsSingle(spl.GetStartAngleFormula());
-        }
-
-        const bool freeLength1 = qmu::QmuTokenParser::IsSingle(spl.GetC1LengthFormula());
-
-        auto *controlPoint = new VControlPointSpline(i, SplinePointPosition::FirstPoint,
-                                                     static_cast<QPointF>(spl.GetP2()), freeAngle1, freeLength1, this);
-        InitControlPoint(controlPoint);
-
-        bool freeAngle2 = true;
-
-        if (i < splPath->CountSubSpl())
-        {
-            const VSpline nextSpl = splPath->GetSpline(i + 1);
-            freeAngle2 = qmu::QmuTokenParser::IsSingle(nextSpl.GetStartAngleFormula()) &&
-                         qmu::QmuTokenParser::IsSingle(spl.GetEndAngleFormula());
-        }
-        else
-        {
-            freeAngle2 = qmu::QmuTokenParser::IsSingle(spl.GetEndAngleFormula());
-        }
-
-        const bool freeLength2 = qmu::QmuTokenParser::IsSingle(spl.GetC2LengthFormula());
-
-        controlPoint = new VControlPointSpline(i, SplinePointPosition::LastPoint, static_cast<QPointF>(spl.GetP3()),
-                                               freeAngle2, freeLength2, this);
-        InitControlPoint(controlPoint);
-    }
-
-    VToolSplinePath::RefreshCtrlPoints();
-
-    ShowHandles(IsDetailsMode());
-
+    InitControlPoints(splPath.data());
     ToolCreation(initData.typeCreation);
 }
 
@@ -442,9 +385,70 @@ void VToolSplinePath::SetSplinePathAttributes(QDomElement &domElement, const VSp
 //---------------------------------------------------------------------------------------------------------------------
 void VToolSplinePath::UndoCommandMove(const VSplinePath &oldPath, const VSplinePath &newPath)
 {
-    MoveSplinePath *moveSplPath = new MoveSplinePath(doc, oldPath, newPath, m_id);
+    auto *moveSplPath = new MoveSplinePath(doc, oldPath, newPath, m_id);
     connect(moveSplPath, &VUndoCommand::NeedLiteParsing, doc, &VAbstractPattern::LiteParseTree);
     VAbstractApplication::VApp()->getUndoStack()->push(moveSplPath);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VToolSplinePath::InitControlPoints(const VSplinePath *splPath)
+{
+    auto InitControlPoint = [this](VControlPointSpline *cPoint)
+    {
+        connect(cPoint, &VControlPointSpline::ControlPointChangePosition, this,
+                &VToolSplinePath::ControlPointChangePosition);
+        connect(this, &VToolSplinePath::setEnabledPoint, cPoint, &VControlPointSpline::setEnabledPoint);
+        connect(cPoint, &VControlPointSpline::ShowContextMenu, this, &VToolSplinePath::contextMenuEvent);
+        connect(cPoint, &VControlPointSpline::Released, this, &VToolSplinePath::CurveReleased);
+        connect(cPoint, &VControlPointSpline::Selected, this, &VToolSplinePath::CurveSelected);
+        controlPoints.append(cPoint);
+    };
+
+    for (qint32 i = 1; i <= splPath->CountSubSpl(); ++i)
+    {
+        const VSpline spl = splPath->GetSpline(i);
+
+        bool freeAngle1 = true;
+
+        if (i > 1)
+        {
+            const VSpline prevSpl = splPath->GetSpline(i - 1);
+            freeAngle1 = qmu::QmuTokenParser::IsSingle(spl.GetStartAngleFormula()) &&
+                         qmu::QmuTokenParser::IsSingle(prevSpl.GetEndAngleFormula());
+        }
+        else
+        {
+            freeAngle1 = qmu::QmuTokenParser::IsSingle(spl.GetStartAngleFormula());
+        }
+
+        const bool freeLength1 = qmu::QmuTokenParser::IsSingle(spl.GetC1LengthFormula());
+
+        auto *controlPoint = new VControlPointSpline(i, SplinePointPosition::FirstPoint,
+                                                     static_cast<QPointF>(spl.GetP2()), freeAngle1, freeLength1, this);
+        InitControlPoint(controlPoint);
+
+        bool freeAngle2 = true;
+
+        if (i < splPath->CountSubSpl())
+        {
+            const VSpline nextSpl = splPath->GetSpline(i + 1);
+            freeAngle2 = qmu::QmuTokenParser::IsSingle(nextSpl.GetStartAngleFormula()) &&
+                         qmu::QmuTokenParser::IsSingle(spl.GetEndAngleFormula());
+        }
+        else
+        {
+            freeAngle2 = qmu::QmuTokenParser::IsSingle(spl.GetEndAngleFormula());
+        }
+
+        const bool freeLength2 = qmu::QmuTokenParser::IsSingle(spl.GetC2LengthFormula());
+
+        controlPoint = new VControlPointSpline(i, SplinePointPosition::LastPoint, static_cast<QPointF>(spl.GetP3()),
+                                               freeAngle2, freeLength2, this);
+        InitControlPoint(controlPoint);
+    }
+
+    VToolSplinePath::RefreshCtrlPoints();
+    VToolSplinePath::ShowHandles(IsDetailsMode());
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -566,20 +570,9 @@ void VToolSplinePath::SaveDialog(QDomElement &domElement, QList<quint32> &oldDep
         AddDependence(newDependencies, splPath.at(i).P().id());
     }
 
-    for (qint32 i = 1; i <= splPath.CountSubSpl(); ++i)
-    {
-        VSpline spl = splPath.GetSpline(i);
-        qint32 j = i * 2;
-
-        controlPoints[j - 2]->blockSignals(true);
-        controlPoints[j - 1]->blockSignals(true);
-
-        controlPoints[j - 2]->setPos(static_cast<QPointF>(spl.GetP2()));
-        controlPoints[j - 1]->setPos(static_cast<QPointF>(spl.GetP3()));
-
-        controlPoints[j - 2]->blockSignals(false);
-        controlPoints[j - 1]->blockSignals(false);
-    }
+    qDeleteAll(controlPoints);
+    controlPoints.clear();
+    InitControlPoints(&splPath);
 
     doc->SetAttributeOrRemoveIf<QString>(domElement, AttrNotes, dialogTool->GetNotes(),
                                          [](const QString &notes) noexcept { return notes.isEmpty(); });
@@ -721,9 +714,9 @@ void VToolSplinePath::mouseMoveEvent(QGraphicsSceneMouseEvent *event)
             const QList<QGraphicsView *> viewList = scene()->views();
             if (not viewList.isEmpty())
             {
-                if (VMainGraphicsView *view = qobject_cast<VMainGraphicsView *>(viewList.at(0)))
+                if (auto *view = qobject_cast<VMainGraphicsView *>(viewList.at(0)))
                 {
-                    VMainGraphicsScene *currentScene = qobject_cast<VMainGraphicsScene *>(scene());
+                    auto *currentScene = qobject_cast<VMainGraphicsScene *>(scene());
                     SCASSERT(currentScene)
                     const QPointF cursorPosition = currentScene->getScenePos();
                     const qreal scale = SceneScale(scene());
@@ -824,6 +817,11 @@ void VToolSplinePath::RefreshCtrlPoints()
     for (qint32 i = 1; i <= splPath->CountSubSpl(); ++i)
     {
         const qint32 j = i * 2;
+
+        if (j - 2 >= controlPoints.size())
+        {
+            break;
+        }
 
         controlPoints[j - 2]->blockSignals(true);
         controlPoints[j - 1]->blockSignals(true);

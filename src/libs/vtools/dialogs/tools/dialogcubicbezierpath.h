@@ -50,7 +50,8 @@ class DialogCubicBezierPath : public DialogTool
     Q_OBJECT // NOLINT
 
 public:
-    explicit DialogCubicBezierPath(const VContainer *data, VAbstractPattern *doc, quint32 toolId, QWidget *parent = nullptr);
+    explicit DialogCubicBezierPath(const VContainer *data, VAbstractPattern *doc, quint32 toolId,
+                                   QWidget *parent = nullptr);
     ~DialogCubicBezierPath() override;
 
     auto GetPath() const -> VCubicBezierPath;
@@ -72,6 +73,15 @@ private slots:
     void PointChanged(int row);
     void currentPointChanged(int index);
     void ValidateAlias();
+    void NewPointChanged();
+
+    void AddPoint();
+    void RemovePoint();
+
+    void MoveTop();
+    void MoveUp();
+    void MoveDown();
+    void MoveBottom();
 
 private:
     Q_DISABLE_COPY_MOVE(DialogCubicBezierPath) // NOLINT
@@ -94,6 +104,7 @@ private:
     auto IsPathValid() const -> bool;
     auto ExtractPath() const -> VCubicBezierPath;
     void ValidatePath();
+    void MoveControls();
 };
 
 //---------------------------------------------------------------------------------------------------------------------
