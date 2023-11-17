@@ -121,6 +121,20 @@ void VScenePoint::RefreshPointGeometry(const VPointF &point)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+auto VScenePoint::boundingRect() const -> QRectF
+{
+    QRectF rect = QGraphicsEllipseItem::boundingRect();
+
+    VCommonSettings *settings = VAbstractApplication::VApp()->Settings();
+    if (settings->GetShowAccuracyRadius())
+    {
+        rect = rect.united(PointRect(accuracyPointOnLine));
+    }
+
+    return rect;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 void VScenePoint::SetOnlyPoint(bool value)
 {
     m_onlyPoint = value;

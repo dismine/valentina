@@ -53,6 +53,7 @@ public:
 
     void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget = nullptr) override;
     virtual void RefreshPointGeometry(const VPointF &point);
+    auto boundingRect() const -> QRectF override;
 
     void RefreshLine();
 
