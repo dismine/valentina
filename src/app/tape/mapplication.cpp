@@ -1010,31 +1010,31 @@ auto MApplication::StartWithMeasurementFiles(QCommandLineParser &parser) -> bool
                        [this, flagDimensionA, flagDimensionB, flagDimensionC, flagUnits, dimensionAValue,
                         dimensionBValue, dimensionCValue, unit](const auto &arg)
                        {
-                           NewMainTapeWindow();
-                           if (not MainTapeWindow()->LoadFile(arg))
+                           this->NewMainTapeWindow();
+                           if (not this->MainTapeWindow()->LoadFile(arg))
                            {
-                               delete MainTapeWindow();
+                               delete this->MainTapeWindow();
                                return !m_testMode;
                            }
 
                            if (flagDimensionA)
                            {
-                               MainTapeWindow()->SetDimensionABase(dimensionAValue);
+                               this->MainTapeWindow()->SetDimensionABase(dimensionAValue);
                            }
 
                            if (flagDimensionB)
                            {
-                               MainTapeWindow()->SetDimensionBBase(dimensionBValue);
+                               this->MainTapeWindow()->SetDimensionBBase(dimensionBValue);
                            }
 
                            if (flagDimensionC)
                            {
-                               MainTapeWindow()->SetDimensionCBase(dimensionCValue);
+                               this->MainTapeWindow()->SetDimensionCBase(dimensionCValue);
                            }
 
                            if (flagUnits)
                            {
-                               MainTapeWindow()->SetPUnit(unit);
+                               this->MainTapeWindow()->SetPUnit(unit);
                            }
 
                            return true;
