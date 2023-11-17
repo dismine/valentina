@@ -172,5 +172,13 @@
         <file>toolicon/dark/point_of_intersection_circles.png</file>
         <file>toolicon/dark/point_of_intersection_circles@2x.png</file>
         <file>toolicon/dark/pin@2x.png</file>
+        <file>toolicon/light/arc_end@2x.png</file>
+        <file>toolicon/light/arc_end.png</file>
+        <file>toolicon/light/arc_start@2x.png</file>
+        <file>toolicon/light/arc_start.png</file>
+        <file>toolicon/dark/arc_end@2x.png</file>
+        <file>toolicon/dark/arc_end.png</file>
+        <file>toolicon/dark/arc_start@2x.png</file>
+        <file>toolicon/dark/arc_start.png</file>
     </qresource>
 </RCC>

@@ -129,6 +129,8 @@ enum class VShortcutAction
     ToolPin,
     ToolInsertNode,
     ToolPlaceLabel,
+    ToolArcStart,
+    ToolArcEnd,
     LAST_ONE_DO_NOT_USE
 };
 

@@ -284,7 +284,7 @@ auto DialogHistory::RecordDescription(const VToolRecord &tool, HistoryRecord rec
     -> HistoryRecord
 {
     // This check helps to find missed tools in the switch
-    Q_STATIC_ASSERT_X(static_cast<int>(Tool::LAST_ONE_DO_NOT_USE) == 59, "Not all tools were used in history.");
+    Q_STATIC_ASSERT_X(static_cast<int>(Tool::LAST_ONE_DO_NOT_USE) == 61, "Not all tools were used in history.");
 
     switch (tool.getTypeTool())
     {
@@ -300,6 +300,8 @@ auto DialogHistory::RecordDescription(const VToolRecord &tool, HistoryRecord rec
         case Tool::BackgroundImageControls:
         case Tool::BackgroundPixmapImage:
         case Tool::BackgroundSVGImage:
+        case Tool::ArcStart: // Same as Tool::CutArc, but tool will never has such type
+        case Tool::ArcEnd:   // Same as Tool::CutArc, but tool will never has such type
         case Tool::LAST_ONE_DO_NOT_USE:
             Q_UNREACHABLE(); //-V501
             break;

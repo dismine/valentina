@@ -166,6 +166,8 @@ VValentinaShortcutManager::VValentinaShortcutManager(QObject *parent)
     AddShortcut({VShortcutAction::ToolPin, {}, {}});
     AddShortcut({VShortcutAction::ToolInsertNode, {}, {}});
     AddShortcut({VShortcutAction::ToolPlaceLabel, {}, {}});
+    AddShortcut({VShortcutAction::ToolArcStart, {}, {}});
+    AddShortcut({VShortcutAction::ToolArcEnd, {}, {}});
 
     QT_WARNING_POP
 }

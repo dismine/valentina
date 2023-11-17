@@ -50,6 +50,12 @@
 #include "../vwidgets/vabstractmainwindow.h"
 #include "ui_dialogcutarc.h"
 
+#if QT_VERSION < QT_VERSION_CHECK(6, 4, 0)
+#include "../vmisc/compatibility.h"
+#endif
+
+using namespace Qt::Literals::StringLiterals;
+
 //---------------------------------------------------------------------------------------------------------------------
 /**
  * @brief DialogCutArc create dialog.
@@ -179,6 +185,20 @@ void DialogCutArc::ChosenObject(quint32 id, const SceneObject &type)
             auto *window = qobject_cast<VAbstractMainWindow *>(VAbstractValApplication::VApp()->getMainWindow());
             SCASSERT(window != nullptr)
             connect(vis.data(), &Visualization::ToolTip, window, &VAbstractMainWindow::ShowToolTip);
+
+            if (m_buildStartPoint)
+            {
+                SetFormula("0"_L1);
+                FinishCreating();
+                return;
+            }
+
+            if (m_buildEndPoint)
+            {
+                SetFormula(currentLength);
+                FinishCreating();
+                return;
+            }
 
             if (not VAbstractValApplication::VApp()->Settings()->IsInteractiveTools())
             {
@@ -400,6 +420,20 @@ void DialogCutArc::SetAliasSuffix2(const QString &alias)
 auto DialogCutArc::GetAliasSuffix2() const -> QString
 {
     return ui->lineEditAlias2->text();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void DialogCutArc::Build(const Tool &type)
+{
+    if (type == Tool::ArcStart)
+    {
+        m_buildStartPoint = true;
+    }
+
+    if (type == Tool::ArcEnd)
+    {
+        m_buildEndPoint = true;
+    }
 }
 
 //---------------------------------------------------------------------------------------------------------------------

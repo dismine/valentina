@@ -71,6 +71,7 @@ public:
     void SetAliasSuffix2(const QString &alias);
     auto GetAliasSuffix2() const -> QString;
 
+    void Build(const Tool &type) override;
     void ShowDialog(bool click) override;
 
 public slots:
@@ -120,6 +121,9 @@ private:
     QString m_originAliasSuffix2{};
 
     bool m_firstRelease{false};
+
+    bool m_buildStartPoint{false};
+    bool m_buildEndPoint{false};
 
     void FinishCreating();
 

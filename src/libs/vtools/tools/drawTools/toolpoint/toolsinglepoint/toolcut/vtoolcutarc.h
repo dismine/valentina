@@ -29,7 +29,6 @@
 #ifndef VTOOLCUTARC_H
 #define VTOOLCUTARC_H
 
-
 #include <QDomElement>
 #include <QGraphicsItem>
 #include <QMetaObject>
@@ -49,6 +48,7 @@ template <class T> class QSharedPointer;
 class VToolCutArc : public VToolCut
 {
     Q_OBJECT // NOLINT
+
 public:
     virtual void SetDialog() override;
     static auto Create(const QPointer<DialogTool> &dialog, VMainGraphicsScene *scene, VAbstractPattern *doc,
@@ -56,16 +56,20 @@ public:
     static auto Create(VToolCutInitData &initData) -> VToolCutArc *;
     static const QString ToolType;
     virtual auto type() const -> int override { return Type; }
-    enum { Type = UserType + static_cast<int>(Tool::CutArc)};
+    enum
+    {
+        Type = UserType + static_cast<int>(Tool::CutArc)
+    };
     virtual void ShowVisualization(bool show) override;
 protected slots:
-    virtual void ShowContextMenu(QGraphicsSceneContextMenuEvent *event, quint32 id=NULL_ID) override;
+    virtual void ShowContextMenu(QGraphicsSceneContextMenuEvent *event, quint32 id = NULL_ID) override;
+
 protected:
-    virtual void    SaveDialog(QDomElement &domElement, QList<quint32> &oldDependencies,
-                               QList<quint32> &newDependencies) override;
-    virtual void    SaveOptions(QDomElement &tag, QSharedPointer<VGObject> &obj) override;
-    virtual void    ReadToolAttributes(const QDomElement &domElement) override;
-    virtual void    SetVisualization() override;
+    virtual void SaveDialog(QDomElement &domElement, QList<quint32> &oldDependencies,
+                            QList<quint32> &newDependencies) override;
+    virtual void SaveOptions(QDomElement &tag, QSharedPointer<VGObject> &obj) override;
+    virtual void ReadToolAttributes(const QDomElement &domElement) override;
+    virtual void SetVisualization() override;
     virtual auto MakeToolTip() const -> QString override;
 
 private:

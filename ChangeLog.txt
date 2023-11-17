@@ -56,6 +56,7 @@
 - Tape app. New feature: Always keep on top.
 - [smart-pattern/valentina#188] Label %mFileName% file name punctuation.
 - Adding removing nodes of curved path.
+- New tools: Arc start point, Arc end point.
 
 # Valentina 0.7.52 September 12, 2022
 - Fix crash when default locale is ru.

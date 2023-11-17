@@ -68,7 +68,7 @@ void VisToolCutArc::RefreshGeometry()
         const QSharedPointer<VArc> arc = GetData()->GeometricObject<VArc>(m_arcId);
         DrawPath(this, arc->GetPath(), arc->DirectionArrows(), LineStyle(), Qt::RoundCap);
 
-        if (not qFuzzyIsNull(m_length))
+        if (!qIsInf(m_length))
         {
             VArc ar1;
             VArc ar2;

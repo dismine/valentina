@@ -4518,7 +4518,7 @@ QT_WARNING_DISABLE_GCC("-Wswitch-default")
 auto VPattern::ActiveDrawBoundingRect() const -> QRectF
 {
     // This check helps to find missed tools in the switch
-    Q_STATIC_ASSERT_X(static_cast<int>(Tool::LAST_ONE_DO_NOT_USE) == 59, "Not all tools were used.");
+    Q_STATIC_ASSERT_X(static_cast<int>(Tool::LAST_ONE_DO_NOT_USE) == 61, "Not all tools were used.");
 
     QRectF rec;
 
@@ -4541,6 +4541,8 @@ auto VPattern::ActiveDrawBoundingRect() const -> QRectF
                 case Tool::BackgroundImageControls: // Not part of active draw
                 case Tool::BackgroundPixmapImage:   // Not part of active draw
                 case Tool::BackgroundSVGImage:      // Not part of active draw
+                case Tool::ArcStart:                // Same as Tool::CutArc, but tool will never has such type
+                case Tool::ArcEnd:                  // Same as Tool::CutArc, but tool will never has such type
                 case Tool::LAST_ONE_DO_NOT_USE:
                     Q_UNREACHABLE();
                     break;

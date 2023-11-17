@@ -86,6 +86,10 @@
         <file>toolcursor/light/place_label_cursor.png</file>
         <file>toolcursor/light/duplicate_detail_cursor.png</file>
         <file>toolcursor/light/duplicate_detail_cursor@2x.png</file>
+        <file>toolcursor/light/arc_end_cursor.png</file>
+        <file>toolcursor/light/arc_end_cursor@2x.png</file>
+        <file>toolcursor/light/arc_start_cursor.png</file>
+        <file>toolcursor/light/arc_start_cursor@2x.png</file>
         <file>toolcursor/dark/union_cursor.png</file>
         <file>toolcursor/dark/union_cursor@2x.png</file>
         <file>toolcursor/dark/true_darts_cursor.png</file>
@@ -172,5 +176,9 @@
         <file>toolcursor/dark/arc_cursor@2x.png</file>
         <file>toolcursor/dark/along_line_cursor.png</file>
         <file>toolcursor/dark/along_line_cursor@2x.png</file>
+        <file>toolcursor/dark/arc_start_cursor@2x.png</file>
+        <file>toolcursor/dark/arc_end_cursor.png</file>
+        <file>toolcursor/dark/arc_end_cursor@2x.png</file>
+        <file>toolcursor/dark/arc_start_cursor.png</file>
     </qresource>
 </RCC>

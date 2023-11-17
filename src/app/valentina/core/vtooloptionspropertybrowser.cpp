@@ -143,7 +143,7 @@ void VToolOptionsPropertyBrowser::ClearPropertyBrowser()
 void VToolOptionsPropertyBrowser::ShowItemOptions(QGraphicsItem *item)
 {
     // This check helps to find missed tools in the switch
-    Q_STATIC_ASSERT_X(static_cast<int>(Tool::LAST_ONE_DO_NOT_USE) == 59, "Not all tools were used in switch.");
+    Q_STATIC_ASSERT_X(static_cast<int>(Tool::LAST_ONE_DO_NOT_USE) == 61, "Not all tools were used in switch.");
 
     switch (item->type())
     {
@@ -276,7 +276,7 @@ void VToolOptionsPropertyBrowser::UpdateOptions()
     }
 
     // This check helps to find missed tools in the switch
-    Q_STATIC_ASSERT_X(static_cast<int>(Tool::LAST_ONE_DO_NOT_USE) == 59, "Not all tools were used in switch.");
+    Q_STATIC_ASSERT_X(static_cast<int>(Tool::LAST_ONE_DO_NOT_USE) == 61, "Not all tools were used in switch.");
 
     switch (m_currentItem->type())
     {
@@ -425,7 +425,7 @@ void VToolOptionsPropertyBrowser::userChangedData(VPE::VProperty *property)
     }
 
     // This check helps to find missed tools in the switch
-    Q_STATIC_ASSERT_X(static_cast<int>(Tool::LAST_ONE_DO_NOT_USE) == 59, "Not all tools were used in switch.");
+    Q_STATIC_ASSERT_X(static_cast<int>(Tool::LAST_ONE_DO_NOT_USE) == 61, "Not all tools were used in switch.");
 
     switch (m_currentItem->type())
     {

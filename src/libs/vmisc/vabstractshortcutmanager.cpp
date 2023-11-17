@@ -107,7 +107,7 @@ auto VAbstractShortcutManager::GetShortcutsList() const -> QList<VAbstractShortc
 //---------------------------------------------------------------------------------------------------------------------
 auto VAbstractShortcutManager::ShortcutActionToString(VShortcutAction type) -> QString
 {
-    Q_STATIC_ASSERT_X(static_cast<int>(VShortcutAction::LAST_ONE_DO_NOT_USE) == 82, "Convert all actions.");
+    Q_STATIC_ASSERT_X(static_cast<int>(VShortcutAction::LAST_ONE_DO_NOT_USE) == 84, "Convert all actions.");
 
     switch (type)
     {
@@ -275,6 +275,10 @@ auto VAbstractShortcutManager::ShortcutActionToString(VShortcutAction type) -> Q
             return "toolinsertnode"_L1;
         case VShortcutAction::ToolPlaceLabel:
             return "toolplacelabel"_L1;
+        case VShortcutAction::ToolArcStart:
+            return "toolarcstart"_L1;
+        case VShortcutAction::ToolArcEnd:
+            return "toolarcend"_L1;
         case VShortcutAction::LAST_ONE_DO_NOT_USE:
             Q_UNREACHABLE();
             break;
@@ -287,7 +291,7 @@ auto VAbstractShortcutManager::ShortcutActionToString(VShortcutAction type) -> Q
 //---------------------------------------------------------------------------------------------------------------------
 auto VAbstractShortcutManager::ReadableName(VShortcutAction type) -> QString
 {
-    Q_STATIC_ASSERT_X(static_cast<int>(VShortcutAction::LAST_ONE_DO_NOT_USE) == 82, "Translate all actions.");
+    Q_STATIC_ASSERT_X(static_cast<int>(VShortcutAction::LAST_ONE_DO_NOT_USE) == 84, "Translate all actions.");
 
     switch (type)
     {
@@ -455,6 +459,10 @@ auto VAbstractShortcutManager::ReadableName(VShortcutAction type) -> QString
             return tr("Tool 'Insert node'", "shortcut for action");
         case VShortcutAction::ToolPlaceLabel:
             return tr("Tool 'Place label'", "shortcut for action");
+        case VShortcutAction::ToolArcStart:
+            return tr("Tool 'Arc start'", "shortcut for action");
+        case VShortcutAction::ToolArcEnd:
+            return tr("Tool 'Arc end'", "shortcut for action");
         case VShortcutAction::LAST_ONE_DO_NOT_USE:
             Q_UNREACHABLE(); //-V501
             break;

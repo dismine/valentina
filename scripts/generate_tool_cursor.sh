@@ -16,7 +16,7 @@
 
 PATTERN=*@2x.png
 TOOLICONPATH=../src/app/valentina/share/resources/toolicon/ # PNG tool icon should be here
-OUTPATH=../src/app/valentina/share/resources/cursor
+OUTPATH=../src/app/valentina/share/resources/toolcursor
 
 COLOR_SCHEMES=("light" "dark")
 

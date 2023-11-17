@@ -882,10 +882,12 @@ void MainWindow::SetToolButton(bool checked, Tool t, const QString &cursor, cons
         m_dialogTool = new Dialog(pattern, doc, 0, this);
 
         // This check helps to find missed tools in the switch
-        Q_STATIC_ASSERT_X(static_cast<int>(Tool::LAST_ONE_DO_NOT_USE) == 59, "Check if need to extend.");
+        Q_STATIC_ASSERT_X(static_cast<int>(Tool::LAST_ONE_DO_NOT_USE) == 61, "Check if need to extend.");
 
         switch (t)
         {
+            case Tool::ArcStart:
+            case Tool::ArcEnd:
             case Tool::Midpoint:
                 m_dialogTool->Build(t);
                 break;
@@ -1762,6 +1764,28 @@ void MainWindow::ToolInsertNode(bool checked)
     SetToolButton<DialogInsertNode>(checked, Tool::InsertNode, QStringLiteral("insert_node_cursor.png"), tooltip,
                                     &MainWindow::ClosedDialogInsertNode);
     LogPatternToolUsed(checked, QStringLiteral("Insert node tool"));
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void MainWindow::ToolArcStart(bool checked)
+{
+    ToolSelectArc();
+    // Reuse DialogCutArc and VToolCutArc but with different cursor
+    SetToolButtonWithApply<DialogCutArc>(checked, Tool::ArcStart, QStringLiteral("arc_start_cursor.png"),
+                                         tr("Select arc"), &MainWindow::ClosedDrawDialogWithApply<VToolCutArc>,
+                                         &MainWindow::ApplyDrawDialog<VToolCutArc>);
+    LogPatternToolUsed(checked, QStringLiteral("Arc start tool"));
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void MainWindow::ToolArcEnd(bool checked)
+{
+    ToolSelectArc();
+    // Reuse DialogCutArc and VToolCutArc but with different cursor
+    SetToolButtonWithApply<DialogCutArc>(checked, Tool::ArcEnd, QStringLiteral("arc_end_cursor.png"), tr("Select arc"),
+                                         &MainWindow::ClosedDrawDialogWithApply<VToolCutArc>,
+                                         &MainWindow::ApplyDrawDialog<VToolCutArc>);
+    LogPatternToolUsed(checked, QStringLiteral("Arc end tool"));
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -3127,6 +3151,8 @@ void MainWindow::ToolBarDrawTools()
             curveSegmentPointToolMenu->addAction(ui->actionSplineCutPointTool);
             curveSegmentPointToolMenu->addAction(ui->actionSplinePathCutPointTool);
             curveSegmentPointToolMenu->addAction(ui->actionArcCutPointTool);
+            curveSegmentPointToolMenu->addAction(ui->actionArcStartPointTool);
+            curveSegmentPointToolMenu->addAction(ui->actionArcEndPointTool);
 
             auto *curveSegmentPointTool = new VToolButtonPopup(this);
             curveSegmentPointTool->setMenu(curveSegmentPointToolMenu);
@@ -3188,6 +3214,8 @@ void MainWindow::ToolBarDrawTools()
         ui->toolBarPointTools->addAction(ui->actionSplineCutPointTool);
         ui->toolBarPointTools->addAction(ui->actionSplinePathCutPointTool);
         ui->toolBarPointTools->addAction(ui->actionArcCutPointTool);
+        ui->toolBarPointTools->addAction(ui->actionArcStartPointTool);
+        ui->toolBarPointTools->addAction(ui->actionArcEndPointTool);
 
         ui->toolBarPointTools->addAction(ui->actionIntersectionCurvesTool);
         ui->toolBarPointTools->addAction(ui->actionPointOfIntersectionArcsTool);
@@ -3337,7 +3365,7 @@ void MainWindow::InitToolButtons()
     connect(ui->actionToolSelect, &QAction::triggered, this, &MainWindow::ArrowTool);
 
     // This check helps to find missed tools
-    Q_STATIC_ASSERT_X(static_cast<int>(Tool::LAST_ONE_DO_NOT_USE) == 59, "Check if all tools were connected.");
+    Q_STATIC_ASSERT_X(static_cast<int>(Tool::LAST_ONE_DO_NOT_USE) == 61, "Check if all tools were connected.");
 
     auto InitToolButton = [this](VShortcutAction type, QAction *action, void (MainWindow::*slotFunction)(bool))
     {
@@ -3404,6 +3432,8 @@ void MainWindow::InitToolButtons()
     InitToolButton(VShortcutAction::ToolPin, ui->actionPinTool, &MainWindow::ToolPin);
     InitToolButton(VShortcutAction::ToolInsertNode, ui->actionInsertNodeTool, &MainWindow::ToolInsertNode);
     InitToolButton(VShortcutAction::ToolPlaceLabel, ui->actionPlaceLabelTool, &MainWindow::ToolPlaceLabel);
+    InitToolButton(VShortcutAction::ToolArcStart, ui->actionArcStartPointTool, &MainWindow::ToolArcStart);
+    InitToolButton(VShortcutAction::ToolArcEnd, ui->actionArcEndPointTool, &MainWindow::ToolArcEnd);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -3454,7 +3484,7 @@ QT_WARNING_DISABLE_GCC("-Wswitch-default")
 void MainWindow::CancelTool()
 {
     // This check helps to find missed tools in the switch
-    Q_STATIC_ASSERT_X(static_cast<int>(Tool::LAST_ONE_DO_NOT_USE) == 59, "Not all tools were handled.");
+    Q_STATIC_ASSERT_X(static_cast<int>(Tool::LAST_ONE_DO_NOT_USE) == 61, "Not all tools were handled.");
 
     qCDebug(vMainWindow, "Canceling tool.");
     if (not m_dialogTool.isNull())
@@ -3629,6 +3659,12 @@ void MainWindow::CancelTool()
         case Tool::PlaceLabel:
             ui->actionPlaceLabelTool->setChecked(false);
             break;
+        case Tool::ArcStart:
+            ui->actionArcStartPointTool->setChecked(false);
+            break;
+        case Tool::ArcEnd:
+            ui->actionArcEndPointTool->setChecked(false);
+            break;
     }
 
     // Crash: using CRTL+Z while using line tool.
@@ -3644,7 +3680,7 @@ void MainWindow::SetupDrawToolsIcons()
     const QString resource = QStringLiteral("toolicon");
 
     // This check helps to find missed tools
-    Q_STATIC_ASSERT_X(static_cast<int>(Tool::LAST_ONE_DO_NOT_USE) == 59, "Not all tools were handled.");
+    Q_STATIC_ASSERT_X(static_cast<int>(Tool::LAST_ONE_DO_NOT_USE) == 61, "Not all tools were handled.");
 
     ui->actionLineTool->setIcon(VTheme::GetIconResource(resource, QStringLiteral("line.png")));
     ui->actionEndLineTool->setIcon(VTheme::GetIconResource(resource, QStringLiteral("segment.png")));
@@ -3699,6 +3735,8 @@ void MainWindow::SetupDrawToolsIcons()
     ui->actionPinTool->setIcon(VTheme::GetIconResource(resource, QStringLiteral("pin.png")));
     ui->actionInsertNodeTool->setIcon(VTheme::GetIconResource(resource, QStringLiteral("insert_node.png")));
     ui->actionPlaceLabelTool->setIcon(VTheme::GetIconResource(resource, QStringLiteral("place_label.png")));
+    ui->actionArcStartPointTool->setIcon(VTheme::GetIconResource(resource, QStringLiteral("arc_start.png")));
+    ui->actionArcEndPointTool->setIcon(VTheme::GetIconResource(resource, QStringLiteral("arc_end.png")));
 }
 
 QT_WARNING_POP
@@ -5424,7 +5462,7 @@ void MainWindow::SetEnableTool(bool enable)
     QT_WARNING_POP
 
     // This check helps to find missed tools
-    Q_STATIC_ASSERT_X(static_cast<int>(Tool::LAST_ONE_DO_NOT_USE) == 59, "Not all tools were handled.");
+    Q_STATIC_ASSERT_X(static_cast<int>(Tool::LAST_ONE_DO_NOT_USE) == 61, "Not all tools were handled.");
 
     // Drawing Tools
     ui->actionEndLineTool->setEnabled(drawTools);
@@ -5469,6 +5507,8 @@ void MainWindow::SetEnableTool(bool enable)
     ui->actionInsertNodeTool->setEnabled(drawTools);
     ui->actionPlaceLabelTool->setEnabled(drawTools);
     ui->actionExportDraw->setEnabled(drawTools);
+    ui->actionArcStartPointTool->setEnabled(drawTools);
+    ui->actionArcEndPointTool->setEnabled(drawTools);
 
     ui->actionLast_tool->setEnabled(drawTools);
 
@@ -5772,7 +5812,7 @@ QT_WARNING_DISABLE_GCC("-Wswitch-default")
 void MainWindow::LastUsedTool()
 {
     // This check helps to find missed tools in the switch
-    Q_STATIC_ASSERT_X(static_cast<int>(Tool::LAST_ONE_DO_NOT_USE) == 59, "Not all tools were handled.");
+    Q_STATIC_ASSERT_X(static_cast<int>(Tool::LAST_ONE_DO_NOT_USE) == 61, "Not all tools were handled.");
 
     if (m_currentTool == m_lastUsedTool)
     {
@@ -5975,6 +6015,14 @@ void MainWindow::LastUsedTool()
         case Tool::PlaceLabel:
             ui->actionPlaceLabelTool->setChecked(true);
             ToolPlaceLabel(true);
+            break;
+        case Tool::ArcStart:
+            ui->actionArcStartPointTool->setChecked(true);
+            ToolArcStart(true);
+            break;
+        case Tool::ArcEnd:
+            ui->actionArcEndPointTool->setChecked(true);
+            ToolArcEnd(true);
             break;
     }
 }

@@ -2575,6 +2575,42 @@
     <enum>QAction::NoRole</enum>
    </property>
   </action>
+  <action name="actionArcStartPointTool">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="enabled">
+    <bool>false</bool>
+   </property>
+   <property name="icon">
+    <iconset resource="share/resources/toolicon.qrc">
+     <normaloff>:/toolicon/light/arc_start.png</normaloff>:/toolicon/light/arc_start.png</iconset>
+   </property>
+   <property name="text">
+    <string>Arc start point</string>
+   </property>
+   <property name="menuRole">
+    <enum>QAction::NoRole</enum>
+   </property>
+  </action>
+  <action name="actionArcEndPointTool">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="enabled">
+    <bool>false</bool>
+   </property>
+   <property name="icon">
+    <iconset resource="share/resources/toolicon.qrc">
+     <normaloff>:/toolicon/light/arc_end.png</normaloff>:/toolicon/light/arc_end.png</iconset>
+   </property>
+   <property name="text">
+    <string>Arc end point</string>
+   </property>
+   <property name="menuRole">
+    <enum>QAction::NoRole</enum>
+   </property>
+  </action>
  </widget>
  <layoutdefault spacing="6" margin="11"/>
  <customwidgets>

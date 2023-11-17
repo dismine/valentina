@@ -35,7 +35,6 @@
 #include <QString>
 #include <QtGlobal>
 
-
 #include "../../../../../visualization/visualization.h"
 #include "../../../../vdatatool.h"
 #include "../../../toolcurve/vabstractspline.h"
@@ -52,10 +51,10 @@ struct VToolCutInitData : VToolSinglePointInitData
     {
     }
 
-    quint32 baseCurveId{NULL_ID};
-    QString formula{};
-    QString aliasSuffix1{};
-    QString aliasSuffix2{};
+    quint32 baseCurveId{NULL_ID}; // NOLINT(misc-non-private-member-variables-in-classes)
+    QString formula{};            // NOLINT(misc-non-private-member-variables-in-classes)
+    QString aliasSuffix1{};       // NOLINT(misc-non-private-member-variables-in-classes)
+    QString aliasSuffix2{};       // NOLINT(misc-non-private-member-variables-in-classes)
 };
 
 class VToolCut : public VToolSinglePoint
@@ -64,7 +63,8 @@ class VToolCut : public VToolSinglePoint
 
 public:
     explicit VToolCut(const VToolCutInitData &initData, QGraphicsItem *parent = nullptr);
-    virtual auto type() const -> int override { return Type; }
+    ~VToolCut() override = default;
+    auto type() const -> int override { return Type; }
     enum
     {
         Type = UserType + static_cast<int>(Tool::Cut)
@@ -82,9 +82,9 @@ public:
     auto CurveName() const -> QString;
 
 public slots:
-    virtual void Disable(bool disable, const QString &namePP) override;
-    virtual void SetDetailsMode(bool mode) override;
-    virtual void FullUpdateFromFile() override;
+    void Disable(bool disable, const QString &namePP) override;
+    void SetDetailsMode(bool mode) override;
+    void FullUpdateFromFile() override;
 
 protected:
     /** @brief formula keep formula of length */
@@ -97,9 +97,9 @@ protected:
     QString m_aliasSuffix2{};
 
     void RefreshGeometry();
-    virtual void RemoveReferens() override;
-    virtual void SaveOptions(QDomElement &tag, QSharedPointer<VGObject> &obj) override;
-    virtual void ReadToolAttributes(const QDomElement &domElement) override;
+    void RemoveReferens() override;
+    void SaveOptions(QDomElement &tag, QSharedPointer<VGObject> &obj) override;
+    void ReadToolAttributes(const QDomElement &domElement) override;
 
     template <typename T> void ShowToolVisualization(bool show);
 

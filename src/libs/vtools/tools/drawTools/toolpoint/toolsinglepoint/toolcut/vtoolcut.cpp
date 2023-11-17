@@ -89,7 +89,6 @@ void VToolCut::FullUpdateFromFile()
 auto VToolCut::GetFormulaLength() const -> VFormula
 {
     VFormula val(formula, getData());
-    val.setCheckZero(true);
     val.setToolId(m_id);
     val.setPostfix(UnitsToStr(VAbstractValApplication::VApp()->patternUnits()));
     val.Eval();
@@ -99,7 +98,7 @@ auto VToolCut::GetFormulaLength() const -> VFormula
 //---------------------------------------------------------------------------------------------------------------------
 void VToolCut::SetFormulaLength(const VFormula &value)
 {
-    if (value.error() == false)
+    if (!value.error())
     {
         formula = value.GetFormula(FormulaType::FromUser);
 

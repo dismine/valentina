@@ -55,14 +55,6 @@
      inkscape:label="Layer 1"
      inkscape:groupmode="layer"
      id="layer1">
-    <image
-       xlink:href="../../../toolicon/light/line@2x.png"
-       width="15"
-       height="15"
-       preserveAspectRatio="none"
-       id="image4213"
-       x="16.5"
-       y="17" />
     <path
        style="fill:#000000;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:round;stroke-opacity:1"
        d="m 2.4999987,2.5 0.063,24 6.937,-6 11,0 z"
@@ -71,5 +63,13 @@
        sodipodi:nodetypes="ccccc"
        inkscape:export-xdpi="90"
        inkscape:export-ydpi="90" />
+    <image
+       xlink:href="../../../toolicon/light/line@2x.png"
+       width="15"
+       height="15"
+       preserveAspectRatio="none"
+       id="image4213"
+       x="16.5"
+       y="17" />
   </g>
 </svg>

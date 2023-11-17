@@ -188,6 +188,8 @@ private slots:
     void ToolArcWithLength(bool checked);
     void ToolTrueDarts(bool checked);
     void ToolInsertNode(bool checked);
+    void ToolArcStart(bool checked);
+    void ToolArcEnd(bool checked);
 
     void ActionDraw(bool checked);
     void ActionDetails(bool checked);
