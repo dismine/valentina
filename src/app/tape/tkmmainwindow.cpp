@@ -44,7 +44,6 @@
 #include "dialogs/dialogknownmeasurementscsvcolumns.h"
 #include "knownmeasurements/vknownmeasurements.h"
 #include "mapplication.h" // Should be last because of definning qApp
-#include "quuid.h"
 #include "ui_tkmmainwindow.h"
 
 #include <QAbstractButton>
@@ -61,12 +60,17 @@
 #include <QPlainTextEdit>
 #include <QStringListModel>
 #include <QTimer>
+#include <QUuid>
 
 #if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
 #include "../vmisc/vtextcodec.h"
 #else
 #include <QTextCodec>
 #endif
+
+#if QT_VERSION < QT_VERSION_CHECK(5, 7, 0)
+#include "../vmisc/backport/qoverload.h"
+#endif // QT_VERSION < QT_VERSION_CHECK(5, 7, 0)
 
 #if (defined(Q_CC_GNU) && Q_CC_GNU < 409) && !defined(Q_CC_CLANG)
 // DO NOT WORK WITH GCC 4.8
