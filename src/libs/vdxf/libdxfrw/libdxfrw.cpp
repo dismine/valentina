@@ -732,6 +732,45 @@ auto dxfRW::writeASTMNotch(DRW_ASTMNotch *ent) -> bool
     return true;
 }
 
+auto dxfRW::writeATTDEF(DRW_ATTDEF *ent) -> bool
+{
+    writer->writeString(0, "ATTDEF");
+
+    writeEntity(ent);
+
+    if (version > DRW::AC1009)
+    {
+        writer->writeString(100, "AcDbText");
+    }
+
+    writer->writeDouble(10, ent->basePoint.x);
+    writer->writeDouble(20, ent->basePoint.y);
+    if (not qFuzzyIsNull(ent->basePoint.z))
+    {
+        writer->writeDouble(30, ent->basePoint.z);
+    }
+
+    writer->writeDouble(11, ent->adjustmentPoint.x);
+    writer->writeDouble(21, ent->adjustmentPoint.y);
+    if (not qFuzzyIsNull(ent->adjustmentPoint.z))
+    {
+        writer->writeDouble(31, ent->adjustmentPoint.z);
+    }
+
+    writer->writeDouble(40, ent->height);
+    writer->writeString(1, ent->text);
+
+    UTF8STRING name = ent->name;
+    std::replace(name.begin(), name.end(), ' ', '_');
+    writer->writeString(2, name);
+
+    writer->writeString(3, ent->promptString);
+    writer->writeInt16(70, ent->flags);
+    writer->writeInt16(73, ent->horizontalAdjustment);
+
+    return true;
+}
+
 auto dxfRW::writeLine(DRW_Line *ent) -> bool
 {
     writer->writeString(0, "LINE");

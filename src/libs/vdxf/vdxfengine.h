@@ -50,6 +50,9 @@ class DRW_Entity;
 class dx_ifaceBlock;
 class VLayoutPoint;
 class DRW_Point;
+class DRW_ASTMNotch;
+struct VLayoutPassmark;
+class DRW_ATTDEF;
 
 #if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
 class VTextCodec;
@@ -148,7 +151,11 @@ private:
     void ExportASTMInternalCutout(const QSharedPointer<dx_ifaceBlock> &detailBlock, const VLayoutPiece &detail);
     void ExportASTMAnnotationText(const QSharedPointer<dx_ifaceBlock> &detailBlock, const VLayoutPiece &detail);
     void ExportASTMDrill(const QSharedPointer<dx_ifaceBlock> &detailBlock, const VLayoutPiece &detail);
-    void ExportASTMNotch(const QSharedPointer<dx_ifaceBlock> &detailBlock, const VLayoutPiece &detail);
+    void ExportASTMNotches(const QSharedPointer<dx_ifaceBlock> &detailBlock, const VLayoutPiece &detail);
+
+    Q_REQUIRED_RESULT auto ExportASTMNotch(const VLayoutPassmark &passmark) -> DRW_ASTMNotch *;
+    Q_REQUIRED_RESULT auto ExportASTMNotchDataDependecy(const VLayoutPassmark &passmark, const UTF8STRING &notchLayer,
+                                                        const VLayoutPiece &detail) -> DRW_ATTDEF *;
 
     void ExportTurnPoints(const QSharedPointer<dx_ifaceBlock> &detailBlock, const QVector<VLayoutPoint> &points) const;
     void ExportCurvePoints(const QSharedPointer<dx_ifaceBlock> &detailBlock, const QVector<VLayoutPoint> &points) const;
@@ -165,6 +172,8 @@ private:
 
     static auto FromUnicodeToCodec(const QString &str, VTextCodec *codec) -> std::string;
     auto GetFileNameForLocale() const -> std::string;
+
+    static auto NotchPrecedingPoint(const QVector<VLayoutPoint> &boundary, QPointF notchBase, QPointF &point) -> bool;
 };
 
 #endif // VDXFENGINE_H

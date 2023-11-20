@@ -35,7 +35,7 @@ enum ETYPE
     //        E3DSOLID, //encripted propietry data
     //        ACAD_PROXY_ENTITY,
     ARC,
-    //        ATTDEF,
+    ATTDEF,
     //        ATTRIB,
     BLOCK, // and ENDBLK
            //        BODY, //encripted propietry data
@@ -272,6 +272,26 @@ protected:
 
 public:
     double angle{0}; /*!< angle, code 50 */
+};
+
+class DRW_ATTDEF : public DRW_Point
+{
+    SETENTFRIENDS
+
+public:
+    DRW_ATTDEF() { eType = DRW::ATTDEF; }
+
+protected:
+    auto parseCode(int code, const std::unique_ptr<dxfReader> &reader) -> bool override;
+
+public:
+    DRW_Coord adjustmentPoint{}; /*!< alignment point, code 11, 21 & 31 */
+    double height{0};            /*!< height text, code 40 */
+    UTF8STRING text{};           /*!< text string, code 1 */
+    UTF8STRING name{};           /*!< name, code 2 */
+    UTF8STRING promptString{};   /*!< prompt string, code 3 */
+    int flags{0};                /*!< flags, code 70 */
+    int horizontalAdjustment{0}; /*!< Horizontal text justification, code 72, default 0 */
 };
 
 //! Class to handle line entity

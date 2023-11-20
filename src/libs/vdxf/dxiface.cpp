@@ -52,6 +52,9 @@ void dx_iface::writeEntity(DRW_Entity *e)
         case DRW::ASTMNOTCH:
             dxfW->writeASTMNotch(static_cast<DRW_ASTMNotch *>(e));
             break;
+        case DRW::ATTDEF:
+            dxfW->writeATTDEF(static_cast<DRW_ATTDEF *>(e));
+            break;
         case DRW::LINE:
             dxfW->writeLine(static_cast<DRW_Line *>(e));
             break;

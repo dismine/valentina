@@ -27,7 +27,6 @@
 *************************************************************************/
 
 #include "vdxfengine.h"
-#include <QLineF>
 
 #include <QByteArray>
 #include <QColor>
@@ -59,6 +58,7 @@
 #include "../vlayout/vlayoutpoint.h"
 #include "../vmisc/def.h"
 #include "dxiface.h"
+#include "libdxfrw/drw_entities.h"
 
 #if QT_VERSION < QT_VERSION_CHECK(6, 4, 0)
 #include "../vmisc/compatibility.h"
@@ -976,7 +976,7 @@ auto VDxfEngine::ExportToASTM(const QVector<VLayoutPiece> &details) -> bool
         ExportASTMSewLine(detailBlock, detail);
         ExportASTMInternalLine(detailBlock, detail);
         ExportASTMInternalCutout(detailBlock, detail);
-        ExportASTMNotch(detailBlock, detail);
+        ExportASTMNotches(detailBlock, detail);
         ExportAAMAGrainline(detailBlock, detail);
         ExportPieceText(detailBlock, detail);
         ExportASTMDrill(detailBlock, detail);
@@ -1152,88 +1152,133 @@ void VDxfEngine::ExportASTMDrill(const QSharedPointer<dx_ifaceBlock> &detailBloc
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VDxfEngine::ExportASTMNotch(const QSharedPointer<dx_ifaceBlock> &detailBlock, const VLayoutPiece &detail)
+void VDxfEngine::ExportASTMNotches(const QSharedPointer<dx_ifaceBlock> &detailBlock, const VLayoutPiece &detail)
 {
-    if (detail.IsSeamAllowance())
+    if (!detail.IsSeamAllowance())
     {
-        const QVector<VLayoutPassmark> passmarks = detail.GetMappedPassmarks();
-        for (const auto &passmark : passmarks)
+        return;
+    }
+
+    const QVector<VLayoutPassmark> passmarks = detail.GetMappedPassmarks();
+    for (const auto &passmark : passmarks)
+    {
+        DRW_ASTMNotch *notch = ExportASTMNotch(passmark);
+        DRW_ATTDEF *attdef = ExportASTMNotchDataDependecy(passmark, notch->layer, detail);
+        detailBlock->ent.push_back(notch);
+
+        if (attdef)
         {
-            auto *notch = new DRW_ASTMNotch();
-            const QPointF center = passmark.baseLine.p1();
-
-            notch->basePoint = DRW_Coord(FromPixel(center.x(), m_varInsunits),
-                                         FromPixel(GetSize().height() - center.y(), m_varInsunits),
-                                         FromPixel(passmark.baseLine.length(), m_varInsunits));
-
-            notch->angle = passmark.baseLine.angle();
-
-            switch (passmark.type)
-            {
-                case PassmarkLineType::OneLine:
-                case PassmarkLineType::TwoLines:
-                case PassmarkLineType::ThreeLines:
-                    // Slit notch
-                    notch->layer = *layer4;
-                    break;
-                case PassmarkLineType::ExternalVMark:
-                case PassmarkLineType::InternalVMark:
-                { // V-Notch
-                    QLineF boundaryLine(passmark.lines.constFirst().p1(), passmark.lines.constLast().p2());
-                    notch->thickness = FromPixel(boundaryLine.length(), m_varInsunits); // width
-                    notch->layer = *layer4;
-                    break;
-                }
-                case PassmarkLineType::TMark:
-                    // T-Notch
-                    notch->thickness = FromPixel(passmark.lines.constLast().length(), m_varInsunits); // width
-                    notch->layer = *layer80;
-                    break;
-                case PassmarkLineType::BoxMark:
-                { // Castle Notch
-                    QPointF start = passmark.lines.constFirst().p1();
-                    QPointF end = passmark.lines.constLast().p2();
-
-                    notch->layer = *layer81;
-                    notch->thickness = FromPixel(QLineF(start, end).length(), m_varInsunits); // width
-                    break;
-                }
-                case PassmarkLineType::UMark:
-                { // U-Notch
-                    QPointF start = passmark.lines.constFirst().p1();
-                    QPointF end = passmark.lines.constLast().p2();
-
-                    notch->thickness = FromPixel(QLineF(start, end).length(), m_varInsunits); // width
-
-                    notch->layer = *layer83;
-                    break;
-                }
-                case PassmarkLineType::CheckMark:
-                { // Check Notch
-                    const QLineF &line1 = passmark.lines.constFirst();
-                    const QLineF &line2 = passmark.lines.constLast();
-
-                    qreal width = QLineF(line1.p1(), line2.p2()).length();
-
-                    if (not passmark.isClockwiseOpening)
-                    { // a counter clockwise opening
-                        width *= -1;
-                    }
-
-                    notch->thickness = FromPixel(width, m_varInsunits); // width
-                    notch->layer = *layer82;
-                    break;
-                }
-                case PassmarkLineType::LAST_ONE_DO_NOT_USE:
-                    Q_UNREACHABLE();
-                    break;
-                default:
-                    break;
-            };
-
-            detailBlock->ent.push_back(notch);
+            detailBlock->ent.push_back(attdef);
         }
     }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+auto VDxfEngine::ExportASTMNotch(const VLayoutPassmark &passmark) -> DRW_ASTMNotch *
+{
+    auto *notch = new DRW_ASTMNotch();
+    const QPointF center = passmark.baseLine.p1();
+
+    notch->basePoint =
+        DRW_Coord(FromPixel(center.x(), m_varInsunits), FromPixel(GetSize().height() - center.y(), m_varInsunits),
+                  FromPixel(passmark.baseLine.length(), m_varInsunits));
+
+    notch->angle = passmark.baseLine.angle();
+
+    switch (passmark.type)
+    {
+        case PassmarkLineType::OneLine:
+        case PassmarkLineType::TwoLines:
+        case PassmarkLineType::ThreeLines:
+            // Slit notch
+            notch->layer = *layer4;
+            break;
+        case PassmarkLineType::ExternalVMark:
+        case PassmarkLineType::InternalVMark:
+        { // V-Notch
+            QLineF boundaryLine(passmark.lines.constFirst().p1(), passmark.lines.constLast().p2());
+            notch->thickness = FromPixel(boundaryLine.length(), m_varInsunits); // width
+            notch->layer = *layer4;
+            break;
+        }
+        case PassmarkLineType::TMark:
+            // T-Notch
+            notch->thickness = FromPixel(passmark.lines.constLast().length(), m_varInsunits); // width
+            notch->layer = *layer80;
+            break;
+        case PassmarkLineType::BoxMark:
+        { // Castle Notch
+            QPointF start = passmark.lines.constFirst().p1();
+            QPointF end = passmark.lines.constLast().p2();
+
+            notch->layer = *layer81;
+            notch->thickness = FromPixel(QLineF(start, end).length(), m_varInsunits); // width
+            break;
+        }
+        case PassmarkLineType::UMark:
+        { // U-Notch
+            QPointF start = passmark.lines.constFirst().p1();
+            QPointF end = passmark.lines.constLast().p2();
+
+            notch->thickness = FromPixel(QLineF(start, end).length(), m_varInsunits); // width
+
+            notch->layer = *layer83;
+            break;
+        }
+        case PassmarkLineType::CheckMark:
+        { // Check Notch
+            const QLineF &line1 = passmark.lines.constFirst();
+            const QLineF &line2 = passmark.lines.constLast();
+
+            qreal width = QLineF(line1.p1(), line2.p2()).length();
+
+            if (not passmark.isClockwiseOpening)
+            { // a counter clockwise opening
+                width *= -1;
+            }
+
+            notch->thickness = FromPixel(width, m_varInsunits); // width
+            notch->layer = *layer82;
+            break;
+        }
+        case PassmarkLineType::LAST_ONE_DO_NOT_USE:
+            Q_UNREACHABLE();
+            break;
+        default:
+            break;
+    };
+
+    return notch;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+auto VDxfEngine::ExportASTMNotchDataDependecy(const VLayoutPassmark &passmark, const UTF8STRING &notchLayer,
+                                              const VLayoutPiece &detail) -> DRW_ATTDEF *
+{
+    QVector<VLayoutPoint> boundary = not detail.IsSeamAllowanceBuiltIn() && !passmark.isBuiltIn
+                                         ? detail.GetMappedSeamAllowancePoints()
+                                         : detail.GetMappedContourPoints();
+
+    const QPointF center = passmark.baseLine.p1();
+    QPointF referencePoint;
+    if (not NotchPrecedingPoint(boundary, center, referencePoint))
+    {
+        return nullptr;
+    }
+
+    auto *attdef = new DRW_ATTDEF();
+    attdef->layer = not detail.IsSeamAllowanceBuiltIn() && !passmark.isBuiltIn ? *layer1 : *layer14;
+    attdef->basePoint = DRW_Coord(FromPixel(referencePoint.x(), m_varInsunits),
+                                  FromPixel(GetSize().height() - referencePoint.y(), m_varInsunits), 0);
+    attdef->adjustmentPoint =
+        DRW_Coord(FromPixel(center.x(), m_varInsunits), FromPixel(GetSize().height() - center.y(), m_varInsunits), 0);
+    attdef->height = 3.0;
+    attdef->text = "Link:" + notchLayer;
+    attdef->name = "Dependency";
+    attdef->flags = 2;                // this is a constant attribute
+    attdef->horizontalAdjustment = 3; // aligned (if vertical alignment = 0)
+
+    return attdef;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -1333,6 +1378,55 @@ auto VDxfEngine::GetFileNameForLocale() const -> std::string
 #else
     return m_fileName.toStdString();
 #endif
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+auto VDxfEngine::NotchPrecedingPoint(const QVector<VLayoutPoint> &boundary, QPointF notchBase, QPointF &point) -> bool
+{
+    if (boundary.count() < 2)
+    {
+        return false;
+    }
+
+    if (VFuzzyComparePoints(boundary.constFirst(), notchBase))
+    {
+        point = boundary.constFirst();
+        return true;
+    }
+
+    if (VFuzzyComparePoints(boundary.constLast(), notchBase))
+    {
+        point = boundary.constLast();
+        return true;
+    }
+
+    QPointF candidatePoint;
+    qreal bestDistance = INT_MAX;
+    bool found = false;
+
+    for (qint32 i = 0; i < boundary.count() - 1; ++i)
+    {
+        const QPointF cPoint = VGObject::ClosestPoint(QLineF(boundary.at(i), boundary.at(i + 1)), notchBase);
+
+        if (VGObject::IsPointOnLineSegment(cPoint, boundary.at(i), boundary.at(i + 1)))
+        {
+            const qreal length = QLineF(notchBase, cPoint).length();
+            if (length < bestDistance)
+            {
+                candidatePoint = boundary.at(i);
+                bestDistance = length;
+                found = true;
+            }
+        }
+    }
+
+    if (found)
+    {
+        point = candidatePoint;
+        return true;
+    }
+
+    return found;
 }
 
 //---------------------------------------------------------------------------------------------------------------------

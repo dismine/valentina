@@ -1359,3 +1359,31 @@ auto DRW_Viewport::parseCode(int code, const std::unique_ptr<dxfReader> &reader)
 
     return true;
 }
+
+auto DRW_ATTDEF::parseCode(int code, const std::unique_ptr<dxfReader> &reader) -> bool
+{
+    switch (code)
+    {
+        case 40:
+            height = reader->getDouble();
+            break;
+        case 1:
+            text = reader->getString();
+            break;
+        case 2:
+            name = reader->getString();
+            break;
+        case 3:
+            promptString = reader->getString();
+            break;
+        case 70:
+            flags = reader->getInt32();
+            break;
+        case 73:
+            horizontalAdjustment = reader->getInt32();
+            break;
+        default:
+            return DRW_Point::parseCode(code, reader);
+    }
+    return true;
+}

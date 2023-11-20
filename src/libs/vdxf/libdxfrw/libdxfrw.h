@@ -56,6 +56,7 @@ public:
     auto writeAppId(DRW_AppId *ent) -> bool;
     auto writePoint(DRW_Point *ent) -> bool;
     auto writeASTMNotch(DRW_ASTMNotch *ent) -> bool;
+    auto writeATTDEF(DRW_ATTDEF *ent) -> bool;
     auto writeLine(DRW_Line *ent) -> bool;
     auto writeRay(DRW_Ray *ent) -> bool;
     auto writeXline(DRW_Xline *ent) -> bool;
