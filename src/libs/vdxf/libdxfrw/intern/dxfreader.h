@@ -55,7 +55,7 @@ public:
     auto getDouble() const -> double { return doubleData; }
     auto getInt32() const -> int { return intData; }
     auto getInt64() const -> unsigned long long int { return int64; }
-    auto getBool() const -> bool { return (intData == 0) ? false : true; }
+    auto getBool() const -> bool { return intData != 0; }
     auto getVersion() const -> int { return decoder.getVersion(); }
     void setVersion(const std::string &v, bool dxfFormat) { decoder.setVersion(v, dxfFormat); }
     void setCodePage(const std::string &c) { decoder.setCodePage(c, true); }

@@ -1348,10 +1348,8 @@ auto DRW_Viewport::parseCode(int code, const std::unique_ptr<dxfReader> &reader)
             vpID = reader->getInt32();
             break;
         case 12:
-        {
             centerPX = reader->getDouble();
             break;
-        }
         case 22:
             centerPY = reader->getDouble();
             break;
