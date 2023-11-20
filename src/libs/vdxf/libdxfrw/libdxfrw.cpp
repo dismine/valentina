@@ -40,8 +40,6 @@ dxfRW::dxfRW(const char *name)
 
 dxfRW::~dxfRW()
 {
-    delete reader;
-    delete writer;
     for (auto &it : imageDef)
     {
         delete it;
@@ -92,19 +90,19 @@ auto dxfRW::read(DRW_Interface *interface_, bool ext) -> bool
         binFile = true;
         // skip sentinel
         filestr.seekg(22, std::ios::beg);
-        reader = new dxfReaderBinary(&filestr);
+        reader = std::make_unique<dxfReaderBinary>(&filestr);
         DRW_DBG("dxfRW::read binary file\n");
     }
     else
     {
         binFile = false;
         filestr.open(fileName.c_str(), std::ios_base::in);
-        reader = new dxfReaderAscii(&filestr);
+        reader = std::make_unique<dxfReaderAscii>(&filestr);
     }
 
     bool isOk = processDxf();
     filestr.close();
-    delete reader;
+    reader.reset();
     reader = nullptr;
     return isOk;
 }
@@ -124,13 +122,13 @@ auto dxfRW::write(DRW_Interface *interface_, DRW::Version ver, bool bin) -> bool
             filestr.open(fileName.c_str(), std::ios_base::out | std::ios::binary | std::ios::trunc);
             // write sentinel
             filestr << "AutoCAD Binary DXF\r\n" << static_cast<char>(26) << '\0';
-            writer = new dxfWriterBinary(&filestr);
+            writer = std::make_unique<dxfWriterBinary>(&filestr);
             DRW_DBG("dxfRW::read binary file\n");
         }
         else
         {
             filestr.open(fileName.c_str(), std::ios_base::out | std::ios::trunc);
-            writer = new dxfWriterAscii(&filestr);
+            writer = std::make_unique<dxfWriterAscii>(&filestr);
             std::string comm = std::string("dxfrw ") + std::string(DRW_VERSION);
             writer->writeString(999, comm);
         }
@@ -174,13 +172,11 @@ auto dxfRW::write(DRW_Interface *interface_, DRW::Version ver, bool bin) -> bool
     catch (std::ofstream::failure &writeErr)
     {
         errorString = writeErr.what();
-        delete writer;
-        writer = nullptr;
+        writer.reset();
         return isOk;
     }
     isOk = true;
-    delete writer;
-    writer = nullptr;
+    writer.reset();
     return isOk;
 }
 

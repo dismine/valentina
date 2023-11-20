@@ -16,6 +16,7 @@
 
 
 #include <map>
+#include <memory>
 #include "drw_base.h"
 
 class dxfReader;
@@ -111,11 +112,11 @@ public:
     void addStr(std::string key, const std::string &value, int code);
     void addCoord(std::string key, const DRW_Coord &value, int code);
     auto getComments() const -> std::string { return comments; }
-    void write(dxfWriter *writer, DRW::Version ver);
+    void write(const std::unique_ptr<dxfWriter>& writer, DRW::Version ver);
     void addComment(const std::string &c);
 
 protected:
-    auto parseCode(int code, dxfReader *reader) -> bool;
+    auto parseCode(int code, const std::unique_ptr<dxfReader>& reader) -> bool;
 
 private:
     auto getDouble(const std::string &key, double *varDouble) const -> bool;

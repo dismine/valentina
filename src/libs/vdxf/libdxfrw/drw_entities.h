@@ -18,6 +18,7 @@
 #include <QtGlobal>
 #include <algorithm>
 #include <list>
+#include <memory>
 #include <string>
 #include <vector>
 
@@ -195,14 +196,14 @@ public:
 
 protected:
     // parses dxf pair to read entity
-    virtual auto parseCode(int code, dxfReader *reader) -> bool;
+    virtual auto parseCode(int code, const std::unique_ptr<dxfReader> &reader) -> bool;
     // calculates extrusion axis (normal vector)
     void calculateAxis(DRW_Coord extPoint);
     // apply extrusion to @extPoint and return data in @point
     void extrudePoint(DRW_Coord extPoint, DRW_Coord *point) const;
 
     // parses dxf 102 groups to read entity
-    auto parseDxfGroups(int code, dxfReader *reader) -> bool;
+    auto parseDxfGroups(int code, const std::unique_ptr<dxfReader> &reader) -> bool;
 
 public:
     DRW::ETYPE eType;                          /*!< enum: entity type, code 0 */
@@ -249,7 +250,7 @@ public:
     void applyExtrusion() override {}
 
 protected:
-    auto parseCode(int code, dxfReader *reader) -> bool override;
+    auto parseCode(int code, const std::unique_ptr<dxfReader> &reader) -> bool override;
 
 public:
     DRW_Coord basePoint{};                  /*!<  base point, code 10, 20 & 30 */
@@ -267,7 +268,7 @@ public:
     DRW_ASTMNotch() { eType = DRW::ASTMNOTCH; }
 
 protected:
-    auto parseCode(int code, dxfReader *reader) -> bool override;
+    auto parseCode(int code, const std::unique_ptr<dxfReader> &reader) -> bool override;
 
 public:
     double angle{0}; /*!< angle, code 50 */
@@ -292,7 +293,7 @@ public:
     void applyExtrusion() override {}
 
 protected:
-    auto parseCode(int code, dxfReader *reader) -> bool override;
+    auto parseCode(int code, const std::unique_ptr<dxfReader> &reader) -> bool override;
 
 public:
     DRW_Coord secPoint; /*!< second point, code 11, 21 & 31 */
@@ -341,7 +342,7 @@ public:
     void applyExtrusion() override;
 
 protected:
-    auto parseCode(int code, dxfReader *reader) -> bool override;
+    auto parseCode(int code, const std::unique_ptr<dxfReader> &reader) -> bool override;
 
 public:
     double radious; /*!< radius, code 40 */
@@ -382,7 +383,7 @@ public:
 
 protected:
     //! interpret code in dxf reading process or dispatch to inherited class
-    auto parseCode(int code, dxfReader *reader) -> bool override;
+    auto parseCode(int code, const std::unique_ptr<dxfReader> &reader) -> bool override;
 
 public:
     double staangle; /*!< start angle, code 50 in radians*/
@@ -416,7 +417,7 @@ public:
 
 protected:
     //! interpret code in dxf reading process or dispatch to inherited class
-    auto parseCode(int code, dxfReader *reader) -> bool override;
+    auto parseCode(int code, const std::unique_ptr<dxfReader> &reader) -> bool override;
 
 private:
     void correctAxis();
@@ -448,7 +449,7 @@ public:
     void applyExtrusion() override;
 
 protected:
-    auto parseCode(int code, dxfReader *reader) -> bool override;
+    auto parseCode(int code, const std::unique_ptr<dxfReader> &reader) -> bool override;
 
 public:
     DRW_Coord thirdPoint; /*!< third point, code 12, 22 & 32 */
@@ -525,7 +526,7 @@ public:
 
 protected:
     //! interpret code in dxf reading process or dispatch to inherited class
-    auto parseCode(int code, dxfReader *reader) -> bool override;
+    auto parseCode(int code, const std::unique_ptr<dxfReader> &reader) -> bool override;
 
 public:
     int invisibleflag; /*!< invisible edge flag, code 70 */
@@ -552,7 +553,7 @@ public:
     void applyExtrusion() override {}
 
 protected:
-    auto parseCode(int code, dxfReader *reader) -> bool override;
+    auto parseCode(int code, const std::unique_ptr<dxfReader> &reader) -> bool override;
 
 public:
     UTF8STRING name; /*!< block name, code 2 */
@@ -584,7 +585,7 @@ public:
     }
 
 protected:
-    auto parseCode(int code, dxfReader *reader) -> bool override;
+    auto parseCode(int code, const std::unique_ptr<dxfReader> &reader) -> bool override;
 
 public:
     UTF8STRING name; /*!< block name, code 2 */
@@ -664,7 +665,7 @@ public:
     }
 
 protected:
-    auto parseCode(int code, dxfReader *reader) -> bool override;
+    auto parseCode(int code, const std::unique_ptr<dxfReader> &reader) -> bool override;
 
 public:
     int vertexnum;                        /*!< number of vertex, code 90 */
@@ -727,7 +728,7 @@ public:
     void applyExtrusion() override {} // RLZ TODO
 
 protected:
-    auto parseCode(int code, dxfReader *reader) -> bool override;
+    auto parseCode(int code, const std::unique_ptr<dxfReader> &reader) -> bool override;
 
 public:
     double height;     /*!< height text, code 40 */
@@ -775,7 +776,7 @@ public:
     }
 
 protected:
-    auto parseCode(int code, dxfReader *reader) -> bool override;
+    auto parseCode(int code, const std::unique_ptr<dxfReader> &reader) -> bool override;
     void updateAngle(); // recalculate angle if 'haveXAxis' is true
 
 public:
@@ -828,7 +829,7 @@ public:
     }
 
 protected:
-    auto parseCode(int code, dxfReader *reader) -> bool override;
+    auto parseCode(int code, const std::unique_ptr<dxfReader> &reader) -> bool override;
 
 public:
     double stawidth; /*!< Start width, code 40 */
@@ -910,7 +911,7 @@ public:
     void appendVertex(DRW_Vertex *v) { vertlist.push_back(v); }
 
 protected:
-    auto parseCode(int code, dxfReader *reader) -> bool override;
+    auto parseCode(int code, const std::unique_ptr<dxfReader> &reader) -> bool override;
 
 public:
     int flags;          /*!< polyline flag, code 70, default 0 */
@@ -1003,7 +1004,7 @@ public:
     void applyExtrusion() override {}
 
 protected:
-    auto parseCode(int code, dxfReader *reader) -> bool override;
+    auto parseCode(int code, const std::unique_ptr<dxfReader> &reader) -> bool override;
 
 public:
     //    double ex;                /*!< normal vector x coordinate, code 210 */
@@ -1119,7 +1120,7 @@ public:
     void applyExtrusion() override {}
 
 protected:
-    auto parseCode(int code, dxfReader *reader) -> bool override;
+    auto parseCode(int code, const std::unique_ptr<dxfReader> &reader) -> bool override;
 
 public:
     UTF8STRING name; /*!< hatch pattern name, code 2 */
@@ -1225,7 +1226,7 @@ public:
     }
 
 protected:
-    auto parseCode(int code, dxfReader *reader) -> bool override;
+    auto parseCode(int code, const std::unique_ptr<dxfReader> &reader) -> bool override;
 
 public:
     duint32 ref;       /*!< Hard reference to imagedef object, code 340 */
@@ -1307,12 +1308,12 @@ public:
         eType = DRW::DIMENSION;
         // RLZ needed a def value for this: hdir = ???
     }
-    virtual ~DRW_Dimension() = default;
+    ~DRW_Dimension() override = default;
 
     void applyExtrusion() override {}
 
 protected:
-    auto parseCode(int code, dxfReader *reader) -> bool override;
+    auto parseCode(int code, const std::unique_ptr<dxfReader> &reader) -> bool override;
 
 public:
     auto getDefPoint() const -> DRW_Coord { return defPoint; } /*!< Definition point, code 10, 20 & 30 */
@@ -1671,7 +1672,7 @@ public:
     void applyExtrusion() override {}
 
 protected:
-    auto parseCode(int code, dxfReader *reader) -> bool override;
+    auto parseCode(int code, const std::unique_ptr<dxfReader> &reader) -> bool override;
 
 public:
     UTF8STRING style;         /*!< Dimension style name, code 3 */
@@ -1734,7 +1735,7 @@ public:
     void applyExtrusion() override {}
 
 protected:
-    auto parseCode(int code, dxfReader *reader) -> bool override;
+    auto parseCode(int code, const std::unique_ptr<dxfReader> &reader) -> bool override;
 
 public:
     double pswidth;  /*!< Width in paper space units, code 40 */

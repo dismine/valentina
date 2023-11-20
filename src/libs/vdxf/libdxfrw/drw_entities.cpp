@@ -71,7 +71,7 @@ void DRW_Entity::extrudePoint(DRW_Coord extPoint, DRW_Coord *point) const
     point->z = pz;
 }
 
-auto DRW_Entity::parseCode(int code, dxfReader *reader) -> bool
+auto DRW_Entity::parseCode(int code, const std::unique_ptr<dxfReader> &reader) -> bool
 {
     switch (code)
     {
@@ -160,7 +160,7 @@ auto DRW_Entity::parseCode(int code, dxfReader *reader) -> bool
 }
 
 // parses dxf 102 groups to read entity
-auto DRW_Entity::parseDxfGroups(int code, dxfReader *reader) -> bool
+auto DRW_Entity::parseDxfGroups(int code, const std::unique_ptr<dxfReader> &reader) -> bool
 {
     std::list<DRW_Variant> ls;
     DRW_Variant c;
@@ -206,7 +206,7 @@ auto DRW_Entity::parseDxfGroups(int code, dxfReader *reader) -> bool
     return true;
 }
 
-auto DRW_Point::parseCode(int code, dxfReader *reader) -> bool
+auto DRW_Point::parseCode(int code, const std::unique_ptr<dxfReader> &reader) -> bool
 {
     switch (code)
     {
@@ -239,7 +239,7 @@ auto DRW_Point::parseCode(int code, dxfReader *reader) -> bool
     return true;
 }
 
-auto DRW_ASTMNotch::parseCode(int code, dxfReader *reader) -> bool
+auto DRW_ASTMNotch::parseCode(int code, const std::unique_ptr<dxfReader> &reader) -> bool
 {
     switch (code)
     {
@@ -253,7 +253,7 @@ auto DRW_ASTMNotch::parseCode(int code, dxfReader *reader) -> bool
     return true;
 }
 
-auto DRW_Line::parseCode(int code, dxfReader *reader) -> bool
+auto DRW_Line::parseCode(int code, const std::unique_ptr<dxfReader> &reader) -> bool
 {
     switch (code)
     {
@@ -284,7 +284,7 @@ void DRW_Circle::applyExtrusion()
     }
 }
 
-auto DRW_Circle::parseCode(int code, dxfReader *reader) -> bool
+auto DRW_Circle::parseCode(int code, const std::unique_ptr<dxfReader> &reader) -> bool
 {
     switch (code)
     {
@@ -321,7 +321,7 @@ void DRW_Arc::applyExtrusion()
     }
 }
 
-auto DRW_Arc::parseCode(int code, dxfReader *reader) -> bool
+auto DRW_Arc::parseCode(int code, const std::unique_ptr<dxfReader> &reader) -> bool
 {
     switch (code)
     {
@@ -338,7 +338,7 @@ auto DRW_Arc::parseCode(int code, dxfReader *reader) -> bool
     return true;
 }
 
-auto DRW_Ellipse::parseCode(int code, dxfReader *reader) -> bool
+auto DRW_Ellipse::parseCode(int code, const std::unique_ptr<dxfReader> &reader) -> bool
 {
     switch (code)
     {
@@ -453,7 +453,7 @@ void DRW_Trace::applyExtrusion()
     }
 }
 
-auto DRW_Trace::parseCode(int code, dxfReader *reader) -> bool
+auto DRW_Trace::parseCode(int code, const std::unique_ptr<dxfReader> &reader) -> bool
 {
     switch (code)
     {
@@ -482,7 +482,7 @@ auto DRW_Trace::parseCode(int code, dxfReader *reader) -> bool
     return true;
 }
 
-auto DRW_3Dface::parseCode(int code, dxfReader *reader) -> bool
+auto DRW_3Dface::parseCode(int code, const std::unique_ptr<dxfReader> &reader) -> bool
 {
     switch (code)
     {
@@ -496,7 +496,7 @@ auto DRW_3Dface::parseCode(int code, dxfReader *reader) -> bool
     return true;
 }
 
-auto DRW_Block::parseCode(int code, dxfReader *reader) -> bool
+auto DRW_Block::parseCode(int code, const std::unique_ptr<dxfReader> &reader) -> bool
 {
     switch (code)
     {
@@ -513,7 +513,7 @@ auto DRW_Block::parseCode(int code, dxfReader *reader) -> bool
     return true;
 }
 
-auto DRW_Insert::parseCode(int code, dxfReader *reader) -> bool
+auto DRW_Insert::parseCode(int code, const std::unique_ptr<dxfReader> &reader) -> bool
 {
     switch (code)
     {
@@ -568,7 +568,7 @@ void DRW_LWPolyline::applyExtrusion()
     }
 }
 
-auto DRW_LWPolyline::parseCode(int code, dxfReader *reader) -> bool
+auto DRW_LWPolyline::parseCode(int code, const std::unique_ptr<dxfReader> &reader) -> bool
 {
     switch (code)
     {
@@ -627,7 +627,7 @@ auto DRW_LWPolyline::parseCode(int code, dxfReader *reader) -> bool
     return true;
 }
 
-auto DRW_Text::parseCode(int code, dxfReader *reader) -> bool
+auto DRW_Text::parseCode(int code, const std::unique_ptr<dxfReader> &reader) -> bool
 {
     switch (code)
     {
@@ -665,7 +665,7 @@ auto DRW_Text::parseCode(int code, dxfReader *reader) -> bool
     return true;
 }
 
-auto DRW_MText::parseCode(int code, dxfReader *reader) -> bool
+auto DRW_MText::parseCode(int code, const std::unique_ptr<dxfReader> &reader) -> bool
 {
     switch (code)
     {
@@ -758,7 +758,7 @@ void DRW_MText::updateAngle()
     }
 }
 
-auto DRW_Polyline::parseCode(int code, dxfReader *reader) -> bool
+auto DRW_Polyline::parseCode(int code, const std::unique_ptr<dxfReader> &reader) -> bool
 {
     switch (code)
     {
@@ -793,7 +793,7 @@ auto DRW_Polyline::parseCode(int code, dxfReader *reader) -> bool
     return true;
 }
 
-auto DRW_Vertex::parseCode(int code, dxfReader *reader) -> bool
+auto DRW_Vertex::parseCode(int code, const std::unique_ptr<dxfReader> &reader) -> bool
 {
     switch (code)
     {
@@ -834,7 +834,7 @@ auto DRW_Vertex::parseCode(int code, dxfReader *reader) -> bool
     return true;
 }
 
-auto DRW_Hatch::parseCode(int code, dxfReader *reader) -> bool
+auto DRW_Hatch::parseCode(int code, const std::unique_ptr<dxfReader> &reader) -> bool
 {
     switch (code)
     {
@@ -974,7 +974,7 @@ auto DRW_Hatch::parseCode(int code, dxfReader *reader) -> bool
     return true;
 }
 
-auto DRW_Spline::parseCode(int code, dxfReader *reader) -> bool
+auto DRW_Spline::parseCode(int code, const std::unique_ptr<dxfReader> &reader) -> bool
 {
     switch (code)
     {
@@ -1072,7 +1072,7 @@ auto DRW_Spline::parseCode(int code, dxfReader *reader) -> bool
     return true;
 }
 
-auto DRW_Image::parseCode(int code, dxfReader *reader) -> bool
+auto DRW_Image::parseCode(int code, const std::unique_ptr<dxfReader> &reader) -> bool
 {
     switch (code)
     {
@@ -1113,7 +1113,7 @@ auto DRW_Image::parseCode(int code, dxfReader *reader) -> bool
     return true;
 }
 
-auto DRW_Dimension::parseCode(int code, dxfReader *reader) -> bool
+auto DRW_Dimension::parseCode(int code, const std::unique_ptr<dxfReader> &reader) -> bool
 {
     switch (code)
     {
@@ -1236,7 +1236,7 @@ auto DRW_Dimension::parseCode(int code, dxfReader *reader) -> bool
     return true;
 }
 
-auto DRW_Leader::parseCode(int code, dxfReader *reader) -> bool
+auto DRW_Leader::parseCode(int code, const std::unique_ptr<dxfReader> &reader) -> bool
 {
     switch (code)
     {
@@ -1331,7 +1331,7 @@ auto DRW_Leader::parseCode(int code, dxfReader *reader) -> bool
     return true;
 }
 
-auto DRW_Viewport::parseCode(int code, dxfReader *reader) -> bool
+auto DRW_Viewport::parseCode(int code, const std::unique_ptr<dxfReader> &reader) -> bool
 {
     switch (code)
     {

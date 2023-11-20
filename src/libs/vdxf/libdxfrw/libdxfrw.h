@@ -146,8 +146,8 @@ private:
     std::string codePage{};
     bool binFile{false};
     bool m_xSpaceBlock{true};
-    dxfReader *reader{nullptr};
-    dxfWriter *writer{nullptr};
+    std::unique_ptr<dxfReader> reader{};
+    std::unique_ptr<dxfWriter> writer{};
     DRW_Interface *iface{nullptr};
     DRW_Header header{};
     //    int section;
