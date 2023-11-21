@@ -337,6 +337,9 @@ void TapePreferencesConfigurationPage::InitKnownMeasurements(QComboBox *combo)
     VKnownMeasurementsDatabase *db = MApplication::VApp()->KnownMeasurementsDatabase();
     QHash<QUuid, VKnownMeasurementsHeader> known = db->AllKnownMeasurements();
 
+    combo->blockSignals(true);
+    combo->clear();
+
     SCASSERT(combo != nullptr)
     combo->addItem(tr("None"), QUuid());
 
@@ -355,6 +358,8 @@ void TapePreferencesConfigurationPage::InitKnownMeasurements(QComboBox *combo)
         combo->addItem(name, i.key());
         ++i;
     }
+
+    combo->blockSignals(false);
 }
 
 //---------------------------------------------------------------------------------------------------------------------

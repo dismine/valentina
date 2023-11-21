@@ -4796,9 +4796,10 @@ void TMainWindow::InitKnownMeasurements(QComboBox *combo)
     SCASSERT(combo != nullptr)
     combo->addItem(tr("None"), QUuid());
 
-    if (!known.contains(m_m->KnownMeasurements()))
+    QUuid kmId = m_m->KnownMeasurements();
+    if (!kmId.isNull() && !known.contains(kmId))
     {
-        combo->addItem(tr("Invalid link"), m_m->KnownMeasurements());
+        combo->addItem(tr("Invalid link"), kmId);
     }
 
     int index = 1;

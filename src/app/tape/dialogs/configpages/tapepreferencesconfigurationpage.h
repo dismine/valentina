@@ -71,7 +71,7 @@ private:
     void InitShortcuts(bool defaults = false);
     void UpdateShortcutsTable();
     void RetranslateShortcutsTable();
-    void InitKnownMeasurements(QComboBox *combo);
+    static void InitKnownMeasurements(QComboBox *combo);
     void InitKnownMeasurementsDescription();
 };
 
