@@ -83,6 +83,8 @@ public:
     auto CutArc(qreal length, VArc &arc1, VArc &arc2, const QString &pointName) const -> QPointF;
     auto CutArc(qreal length, const QString &pointName) const -> QPointF;
 
+    static auto OptimalApproximationScale(qreal radius, qreal f1, qreal f2, qreal tolerance) -> qreal;
+
 protected:
     void CreateName() override;
     void CreateAlias() override;

@@ -458,9 +458,10 @@ auto CreateUMarkPassmark(const VPiecePassmarkData &passmarkData, const QLineF &l
         points.append(seg.p1());
         points.append(seg.p2());
 
-        VArc arc(VPointF(baseLine.p2()), radius, QLineF(baseLine.p2(), l1p2).angle(),
-                 QLineF(baseLine.p2(), l2p2).angle());
-        arc.SetApproximationScale(10);
+        const qreal f1 = QLineF(baseLine.p2(), l1p2).angle();
+        const qreal f2 = QLineF(baseLine.p2(), l2p2).angle();
+        VArc arc(VPointF(baseLine.p2()), radius, f1, f2);
+        arc.SetApproximationScale(VArc::OptimalApproximationScale(radius, f1, f2, 0.3));
         points += arc.GetPoints();
 
         seg = VPassmark::FindIntersection(QLineF(l2p2, l2p1), seamAllowance);
@@ -469,9 +470,10 @@ auto CreateUMarkPassmark(const VPiecePassmarkData &passmarkData, const QLineF &l
     }
     else
     {
-        VArc arc(VPointF(baseLine.p1()), radius, QLineF(baseLine.p1(), l1p1).angle(),
-                 QLineF(baseLine.p1(), l2p1).angle());
-        arc.SetApproximationScale(10);
+        const qreal f1 = QLineF(baseLine.p1(), l1p1).angle();
+        const qreal f2 = QLineF(baseLine.p1(), l2p1).angle();
+        VArc arc(VPointF(baseLine.p1()), radius, f1, f2);
+        arc.SetApproximationScale(VArc::OptimalApproximationScale(radius, f1, f2, 0.3));
         points += arc.GetPoints();
     }
 

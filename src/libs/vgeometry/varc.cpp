@@ -36,6 +36,7 @@
 #include "../ifc/ifcdef.h"
 #include "../vmisc/compatibility.h"
 #include "../vmisc/def.h"
+#include "../vmisc/defglobal.h"
 #include "../vmisc/vabstractapplication.h"
 #include "../vmisc/vmath.h"
 #include "vabstractcurve.h"
@@ -403,6 +404,33 @@ auto VArc::CutArc(qreal length, const QString &pointName) const -> QPointF
     VArc arc1;
     VArc arc2;
     return CutArc(length, arc1, arc2, pointName);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+auto VArc::OptimalApproximationScale(qreal radius, qreal f1, qreal f2, qreal tolerance) -> qreal
+{
+    if (qFuzzyIsNull(radius))
+    {
+        return maxCurveApproximationScale;
+    }
+
+    const qreal expectedCurvature = 1 / qAbs(radius);
+    qreal scale = minCurveApproximationScale;
+
+    do
+    {
+        VArc arc(VPointF(), radius, f1, f2);
+        arc.SetApproximationScale(scale);
+        qreal curvature = Curvature(arc.GetPoints());
+
+        if (expectedCurvature - curvature <= expectedCurvature * tolerance)
+        {
+            return scale;
+        }
+        scale += 0.1;
+    } while (scale <= maxCurveApproximationScale);
+
+    return maxCurveApproximationScale;
 }
 
 //---------------------------------------------------------------------------------------------------------------------

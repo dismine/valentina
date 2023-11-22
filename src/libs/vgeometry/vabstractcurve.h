@@ -114,6 +114,8 @@ public:
 
     static constexpr qreal minLength = MmToPixel(1.);
 
+    static auto Curvature(const QVector<QPointF> &vertices) -> double;
+
 protected:
     virtual void CreateName() = 0;
     virtual void CreateAlias() = 0;
