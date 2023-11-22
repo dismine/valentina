@@ -68,7 +68,7 @@ void VisToolCutSplinePath::RefreshGeometry()
         const auto splPath = GetData()->GeometricObject<VAbstractCubicBezierPath>(m_splinePathId);
         DrawPath(this, splPath->GetPath(), splPath->DirectionArrows(), LineStyle(), Qt::RoundCap);
 
-        if (not qFuzzyIsNull(m_length))
+        if (!qIsInf(m_length))
         {
             VSplinePath *spPath1 = nullptr;
             VSplinePath *spPath2 = nullptr;

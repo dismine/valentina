@@ -426,10 +426,7 @@ void DialogCutSpline::ShowDialog(bool click)
         const QSharedPointer<VAbstractCubicBezier> spl = data->GeometricObject<VAbstractCubicBezier>(getSplineId());
         QPointF p = spl->ClosestPoint(scene->getScenePos());
         qreal len = spl->GetLengthByPoint(p);
-        if (len > 0)
-        {
-            SetFormula(QString::number(FromPixel(len, *data->GetPatternUnit())));
-        }
+        SetFormula(QString::number(FromPixel(len, *data->GetPatternUnit())));
     }
 
     FinishCreating();

@@ -179,25 +179,20 @@ auto VAbstractCubicBezierPath::CutSplinePath(qreal length, qint32 &p1, qint32 &p
     // Always need return two spline paths, so we must correct wrong length.
     qreal fullLength = GetLength();
 
-    if (fullLength <= minLength)
+    if (qFuzzyIsNull(fullLength))
     {
-        p1 = p2 = -1;
         spl1p2 = spl1p3 = spl2p2 = spl2p3 = QPointF();
-
-        const QString errorMsg = tr("Unable to cut curve '%1'. The curve is too short.").arg(name());
-        VAbstractApplication::VApp()->IsPedantic()
-            ? throw VException(errorMsg)
-            : qWarning() << VAbstractApplication::warningMessageSignature + errorMsg;
 
         return {};
     }
 
-    const qreal maxLength = fullLength - minLength;
-
-    if (length < minLength)
+    if (length < 0)
     {
-        length = minLength;
+        length = fullLength + length;
+    }
 
+    if (length < 0)
+    {
         QString errorMsg;
         if (not pointName.isEmpty())
         {
@@ -213,10 +208,8 @@ auto VAbstractCubicBezierPath::CutSplinePath(qreal length, qint32 &p1, qint32 &p
             ? throw VException(errorMsg)
             : qWarning() << VAbstractApplication::warningMessageSignature + errorMsg;
     }
-    else if (length > maxLength)
+    else if (length > fullLength)
     {
-        length = maxLength;
-
         QString errorMsg;
         if (not pointName.isEmpty())
         {
@@ -232,13 +225,15 @@ auto VAbstractCubicBezierPath::CutSplinePath(qreal length, qint32 &p1, qint32 &p
             : qWarning() << VAbstractApplication::warningMessageSignature + errorMsg;
     }
 
+    length = qBound(0.0, length, fullLength);
+
     fullLength = 0;
     for (qint32 i = 1; i <= CountSubSpl(); ++i)
     {
         const VSpline spl = GetSpline(i);
         const qreal splLength = spl.GetLength();
         fullLength += splLength;
-        if (fullLength > length)
+        if (fullLength >= length)
         {
             p1 = i - 1;
             p2 = i;

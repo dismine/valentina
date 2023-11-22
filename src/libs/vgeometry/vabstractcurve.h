@@ -112,8 +112,6 @@ public:
 
     void SetAliasSuffix(const QString &aliasSuffix) override;
 
-    static constexpr qreal minLength = MmToPixel(1.);
-
     static auto Curvature(const QVector<QPointF> &vertices) -> double;
 
 protected:

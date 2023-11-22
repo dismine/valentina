@@ -32,14 +32,14 @@
 #include <QLineF>
 #include <QMessageLogger>
 #include <QPoint>
-#include <QtDebug>
 #include <QtConcurrent>
+#include <QtDebug>
 
-#include "../vmisc/def.h"
-#include "../vmisc/vmath.h"
-#include "../vgeometry/vpointf.h"
-#include "../vmisc/vabstractapplication.h"
 #include "../ifc/exception/vexception.h"
+#include "../vgeometry/vpointf.h"
+#include "../vmisc/def.h"
+#include "../vmisc/vabstractapplication.h"
+#include "../vmisc/vmath.h"
 
 namespace
 {
@@ -74,28 +74,31 @@ inline auto CalcSqDistance(qreal x1, qreal y1, qreal x2, qreal y2) -> qreal
  * @param points spline points coordinates.
  * @param approximationScale curve approximation scale.
  */
-auto PointBezier_r(qreal x1, qreal y1, qreal x2, qreal y2, qreal x3, qreal y3, qreal x4, qreal y4,
-                   qint16 level, QVector<QPointF> points, qreal approximationScale) -> QVector<QPointF>
+auto PointBezier_r(qreal x1, qreal y1, qreal x2, qreal y2, qreal x3, qreal y3, qreal x4, qreal y4, qint16 level,
+                   QVector<QPointF> points, qreal approximationScale) -> QVector<QPointF>
 {
     if (points.size() >= 2)
     {
-        for (int i=1; i < points.size(); ++i)
+        for (int i = 1; i < points.size(); ++i)
         {
-            if (points.at(i-1) == points.at(i))
+            if (points.at(i - 1) == points.at(i))
             {
                 qDebug("All neighbors points in path must be unique.");
             }
         }
     }
 
-    const double curve_collinearity_epsilon                 = 1e-30;
-    const double curve_angle_tolerance_epsilon              = 0.01;
+    const double curve_collinearity_epsilon = 1e-30;
+    const double curve_angle_tolerance_epsilon = 0.01;
     const double m_angle_tolerance = 0.0;
-    enum curve_recursion_limit_e { curve_recursion_limit = 32 };
+    enum curve_recursion_limit_e
+    {
+        curve_recursion_limit = 32
+    };
     const double m_cusp_limit = 0.0;
 
     double m_approximation_scale = approximationScale;
-    if(m_approximation_scale < minCurveApproximationScale || m_approximation_scale > maxCurveApproximationScale)
+    if (m_approximation_scale < minCurveApproximationScale || m_approximation_scale > maxCurveApproximationScale)
     {
         m_approximation_scale = VAbstractApplication::VApp()->Settings()->GetCurveApproximationScale();
     }
@@ -112,35 +115,35 @@ auto PointBezier_r(qreal x1, qreal y1, qreal x2, qreal y2, qreal x3, qreal y3, q
 
     // Calculate all the mid-points of the line segments
     //----------------------
-    const double x12   = (x1 + x2) / 2;
-    const double y12   = (y1 + y2) / 2;
-    const double x23   = (x2 + x3) / 2;
-    const double y23   = (y2 + y3) / 2;
-    const double x34   = (x3 + x4) / 2;
-    const double y34   = (y3 + y4) / 2;
-    const double x123  = (x12 + x23) / 2;
-    const double y123  = (y12 + y23) / 2;
-    const double x234  = (x23 + x34) / 2;
-    const double y234  = (y23 + y34) / 2;
+    const double x12 = (x1 + x2) / 2;
+    const double y12 = (y1 + y2) / 2;
+    const double x23 = (x2 + x3) / 2;
+    const double y23 = (y2 + y3) / 2;
+    const double x34 = (x3 + x4) / 2;
+    const double y34 = (y3 + y4) / 2;
+    const double x123 = (x12 + x23) / 2;
+    const double y123 = (y12 + y23) / 2;
+    const double x234 = (x23 + x34) / 2;
+    const double y234 = (y23 + y34) / 2;
     const double x1234 = (x123 + x234) / 2;
     const double y1234 = (y123 + y234) / 2;
 
     // Try to approximate the full cubic curve by a single straight line
     //------------------
-    const double dx = x4-x1;
-    const double dy = y4-y1;
+    const double dx = x4 - x1;
+    const double dy = y4 - y1;
 
     double d2 = fabs((x2 - x4) * dy - (y2 - y4) * dx);
     double d3 = fabs((x3 - x4) * dy - (y3 - y4) * dx);
 
     switch ((static_cast<int>(d2 > curve_collinearity_epsilon) << 1) +
-             static_cast<int>(d3 > curve_collinearity_epsilon))
+            static_cast<int>(d3 > curve_collinearity_epsilon))
     {
         case 0:
         {
             // All collinear OR p1==p4
             //----------------------
-            double k = dx*dx + dy*dy;
+            double k = dx * dx + dy * dy;
             if (k < 0.000000001)
             {
                 d2 = CalcSqDistance(x1, y1, x2, y2);
@@ -148,16 +151,16 @@ auto PointBezier_r(qreal x1, qreal y1, qreal x2, qreal y2, qreal x3, qreal y3, q
             }
             else
             {
-                k   = 1 / k;
+                k = 1 / k;
                 {
                     const double da1 = x2 - x1;
                     const double da2 = y2 - y1;
-                    d2  = k * (da1*dx + da2*dy);
+                    d2 = k * (da1 * dx + da2 * dy);
                 }
                 {
                     const double da1 = x3 - x1;
                     const double da2 = y3 - y1;
-                    d3  = k * (da1*dx + da2*dy);
+                    d3 = k * (da1 * dx + da2 * dy);
                 }
                 if (d2 > 0 && d2 < 1 && d3 > 0 && d3 < 1)
                 {
@@ -175,7 +178,7 @@ auto PointBezier_r(qreal x1, qreal y1, qreal x2, qreal y2, qreal x3, qreal y3, q
                 }
                 else
                 {
-                    d2 = CalcSqDistance(x2, y2, x1 + d2*dx, y1 + d2*dy);
+                    d2 = CalcSqDistance(x2, y2, x1 + d2 * dx, y1 + d2 * dy);
                 }
 
                 if (d3 <= 0)
@@ -188,7 +191,7 @@ auto PointBezier_r(qreal x1, qreal y1, qreal x2, qreal y2, qreal x3, qreal y3, q
                 }
                 else
                 {
-                    d3 = CalcSqDistance(x3, y3, x1 + d3*dx, y1 + d3*dy);
+                    d3 = CalcSqDistance(x3, y3, x1 + d3 * dx, y1 + d3 * dy);
                 }
             }
             if (d2 > d3)
@@ -213,7 +216,7 @@ auto PointBezier_r(qreal x1, qreal y1, qreal x2, qreal y2, qreal x3, qreal y3, q
         {
             // p1,p2,p4 are collinear, p3 is significant
             //----------------------
-            if (d3 * d3 <= m_distance_tolerance_square * (dx*dx + dy*dy))
+            if (d3 * d3 <= m_distance_tolerance_square * (dx * dx + dy * dy))
             {
                 if (m_angle_tolerance < curve_angle_tolerance_epsilon)
                 {
@@ -251,7 +254,7 @@ auto PointBezier_r(qreal x1, qreal y1, qreal x2, qreal y2, qreal x3, qreal y3, q
         {
             // p1,p3,p4 are collinear, p2 is significant
             //----------------------
-            if (d2 * d2 <= m_distance_tolerance_square * (dx*dx + dy*dy))
+            if (d2 * d2 <= m_distance_tolerance_square * (dx * dx + dy * dy))
             {
                 if (m_angle_tolerance < curve_angle_tolerance_epsilon)
                 {
@@ -290,7 +293,7 @@ auto PointBezier_r(qreal x1, qreal y1, qreal x2, qreal y2, qreal x3, qreal y3, q
         {
             // Regular case
             //-----------------
-            if ((d2 + d3)*(d2 + d3) <= m_distance_tolerance_square * (dx*dx + dy*dy))
+            if ((d2 + d3) * (d2 + d3) <= m_distance_tolerance_square * (dx * dx + dy * dy))
             {
                 // If the curvature doesn't exceed the distance_tolerance value
                 // we tend to finish subdivisions.
@@ -303,7 +306,7 @@ auto PointBezier_r(qreal x1, qreal y1, qreal x2, qreal y2, qreal x3, qreal y3, q
 
                 // Angle & Cusp Condition
                 //----------------------
-                const double k   = atan2(y3 - y2, x3 - x2);
+                const double k = atan2(y3 - y2, x3 - x2);
                 double da1 = fabs(k - atan2(y2 - y1, x2 - x1));
                 double da2 = fabs(atan2(y4 - y3, x4 - x3) - k);
                 if (da1 >= M_PI)
@@ -368,17 +371,18 @@ auto PointBezier_r(qreal x1, qreal y1, qreal x2, qreal y2, qreal x3, qreal y3, q
     }
     return BezierPoints() + BezierTailPoints();
 }
-}  // namespace
+} // namespace
 
 //---------------------------------------------------------------------------------------------------------------------
 VAbstractCubicBezier::VAbstractCubicBezier(const GOType &type, const quint32 &idObject, const Draw &mode)
-    : VAbstractBezier(type, idObject, mode)
-{}
+  : VAbstractBezier(type, idObject, mode)
+{
+}
 
 //---------------------------------------------------------------------------------------------------------------------
 auto VAbstractCubicBezier::operator=(const VAbstractCubicBezier &curve) -> VAbstractCubicBezier &
 {
-    if ( &curve == this )
+    if (&curve == this)
     {
         return *this;
     }
@@ -397,86 +401,86 @@ auto VAbstractCubicBezier::operator=(const VAbstractCubicBezier &curve) -> VAbst
  * @param pointName cutting point name.
  * @return point of cutting. This point is forth point of first spline and first point of second spline.
  */
-auto VAbstractCubicBezier::CutSpline(qreal length, QPointF &spl1p2, QPointF &spl1p3, QPointF &spl2p2,
-                                     QPointF &spl2p3, const QString &pointName) const -> QPointF
+auto VAbstractCubicBezier::CutSpline(qreal length, QPointF &spl1p2, QPointF &spl1p3, QPointF &spl2p2, QPointF &spl2p3,
+                                     const QString &pointName) const -> QPointF
 {
-    //Always need return two splines, so we must correct wrong length.
+    // Always need return two splines, so we must correct wrong length.
     const qreal fullLength = GetLength();
 
-    if (fullLength <= minLength)
+    if (qFuzzyIsNull(fullLength))
     {
-        spl1p2 = spl1p3 = spl2p2 = spl2p3 = QPointF();
+        spl1p2 = spl1p3 = spl2p2 = spl2p3 = static_cast<QPointF>(GetP1());
 
-        const QString errorMsg = QObject::tr("Unable to cut curve '%1'. The curve is too short.").arg(name());
-        VAbstractApplication::VApp()->IsPedantic() ? throw VException(errorMsg) :
-                                          qWarning() << VAbstractApplication::warningMessageSignature + errorMsg;
-
-        return {};
+        return static_cast<QPointF>(GetP1());
     }
 
-    const qreal maxLength = fullLength - minLength;
-
-    if (length < minLength)
+    if (length < 0)
     {
-        length = minLength;
+        length = fullLength + length;
+    }
 
+    if (length < 0)
+    {
         QString errorMsg;
         if (not pointName.isEmpty())
         {
             errorMsg = QObject::tr("Curve '%1'. Length of a cut segment (%2) is too small. Optimize it to minimal "
-                                   "value.").arg(name(), pointName);
+                                   "value.")
+                           .arg(name(), pointName);
         }
         else
         {
             errorMsg = QObject::tr("Curve '%1'. Length of a cut segment is too small. Optimize it to minimal value.")
-                    .arg(name());
+                           .arg(name());
         }
-        VAbstractApplication::VApp()->IsPedantic() ? throw VException(errorMsg) :
-                                          qWarning() << VAbstractApplication::warningMessageSignature + errorMsg;
+        VAbstractApplication::VApp()->IsPedantic()
+            ? throw VException(errorMsg)
+            : qWarning() << VAbstractApplication::warningMessageSignature + errorMsg;
     }
-    else if (length > maxLength)
+    else if (length > fullLength)
     {
-        length = maxLength;
-
         QString errorMsg;
         if (not pointName.isEmpty())
         {
             errorMsg = QObject::tr("Curve '%1'. Length of a cut segment (%2) is too big. Optimize it to maximal value.")
-                    .arg(name(), pointName);
+                           .arg(name(), pointName);
         }
         else
         {
             errorMsg = QObject::tr("Curve '%1'. Length of a cut segment is too big. Optimize it to maximal value.")
-                    .arg(name());
+                           .arg(name());
         }
-        VAbstractApplication::VApp()->IsPedantic() ? throw VException(errorMsg) :
-                                          qWarning() << VAbstractApplication::warningMessageSignature + errorMsg;
+        VAbstractApplication::VApp()->IsPedantic()
+            ? throw VException(errorMsg)
+            : qWarning() << VAbstractApplication::warningMessageSignature + errorMsg;
     }
+
+    length = qBound(0.0, length, fullLength);
 
     const qreal parT = GetParmT(length);
 
-    QLineF seg1_2 ( static_cast<QPointF>(GetP1 ()), GetControlPoint1 () );
-    seg1_2.setLength(seg1_2.length () * parT);
+    QLineF seg1_2(static_cast<QPointF>(GetP1()), GetControlPoint1());
+    seg1_2.setLength(seg1_2.length() * parT);
     const QPointF p12 = seg1_2.p2();
 
-    QLineF seg2_3 ( GetControlPoint1(), GetControlPoint2 () );
-    seg2_3.setLength(seg2_3.length () * parT);
+    QLineF seg2_3(GetControlPoint1(), GetControlPoint2());
+    seg2_3.setLength(seg2_3.length() * parT);
     const QPointF p23 = seg2_3.p2();
 
-    QLineF seg12_23 ( p12, p23 );
-    seg12_23.setLength(seg12_23.length () * parT);
+    QLineF seg12_23(p12, p23);
+    seg12_23.setLength(seg12_23.length() * parT);
     const QPointF p123 = seg12_23.p2();
 
-    QLineF seg3_4 ( GetControlPoint2 (), static_cast<QPointF>(GetP4 ()) );
-    seg3_4.setLength(seg3_4.length () * parT);
+    QLineF seg3_4(GetControlPoint2(), static_cast<QPointF>(GetP4()));
+    seg3_4.setLength(seg3_4.length() * parT);
     const QPointF p34 = seg3_4.p2();
 
-    QLineF seg23_34 ( p23, p34 );
-    seg23_34.setLength(seg23_34.length () * parT);
+    QLineF seg23_34(p23, p34);
+    seg23_34.setLength(seg23_34.length() * parT);
     const QPointF p234 = seg23_34.p2();
 
-    QLineF seg123_234 ( p123, p234 );
-    seg123_234.setLength(seg123_234.length () * parT);
+    QLineF seg123_234(p123, p234);
+    seg123_234.setLength(seg123_234.length() * parT);
     const QPointF p1234 = seg123_234.p2();
 
     spl1p2 = p12;
@@ -535,8 +539,7 @@ auto VAbstractCubicBezier::GetParmT(qreal length) const -> qreal
         }
 
         splLength > length ? parT -= step : parT += step;
-    }
-    while (qAbs(splLength - length) > eps);
+    } while (qAbs(splLength - length) > eps);
 
     return parT;
 }
@@ -581,8 +584,8 @@ auto VAbstractCubicBezier::GetCubicBezierPoints(const QPointF &p1, const QPointF
 {
     QVector<QPointF> pvector;
     pvector.append(p1);
-    pvector = PointBezier_r(p1.x(), p1.y(), p2.x(), p2.y(), p3.x(), p3.y(), p4.x(), p4.y(), 0, pvector,
-                            approximationScale);
+    pvector =
+        PointBezier_r(p1.x(), p1.y(), p2.x(), p2.y(), p3.x(), p3.y(), p4.x(), p4.y(), 0, pvector, approximationScale);
     pvector.append(p4);
     return pvector;
 }
@@ -608,32 +611,32 @@ auto VAbstractCubicBezier::RealLengthByT(qreal t) const -> qreal
 {
     if (t < 0 || t > 1)
     {
-        qDebug()<<"Wrong value t.";
+        qDebug() << "Wrong value t.";
         return 0;
     }
-    QLineF seg1_2 ( static_cast<QPointF>(GetP1 ()), GetControlPoint1 () );
-    seg1_2.setLength(seg1_2.length () * t);
+    QLineF seg1_2(static_cast<QPointF>(GetP1()), GetControlPoint1());
+    seg1_2.setLength(seg1_2.length() * t);
     const QPointF p12 = seg1_2.p2();
 
-    QLineF seg2_3 ( GetControlPoint1 (), GetControlPoint2 () );
-    seg2_3.setLength(seg2_3.length () * t);
+    QLineF seg2_3(GetControlPoint1(), GetControlPoint2());
+    seg2_3.setLength(seg2_3.length() * t);
     const QPointF p23 = seg2_3.p2();
 
-    QLineF seg12_23 ( p12, p23 );
-    seg12_23.setLength(seg12_23.length () * t);
+    QLineF seg12_23(p12, p23);
+    seg12_23.setLength(seg12_23.length() * t);
     const QPointF p123 = seg12_23.p2();
 
-    QLineF seg3_4 ( GetControlPoint2 (), static_cast<QPointF>(GetP4 ()) );
-    seg3_4.setLength(seg3_4.length () * t);
+    QLineF seg3_4(GetControlPoint2(), static_cast<QPointF>(GetP4()));
+    seg3_4.setLength(seg3_4.length() * t);
     const QPointF p34 = seg3_4.p2();
 
-    QLineF seg23_34 ( p23, p34 );
-    seg23_34.setLength(seg23_34.length () * t);
+    QLineF seg23_34(p23, p34);
+    seg23_34.setLength(seg23_34.length() * t);
     const QPointF p234 = seg23_34.p2();
 
-    QLineF seg123_234 ( p123, p234 );
-    seg123_234.setLength(seg123_234.length () * t);
+    QLineF seg123_234(p123, p234);
+    seg123_234.setLength(seg123_234.length() * t);
     const QPointF p1234 = seg123_234.p2();
 
-    return LengthBezier ( static_cast<QPointF>(GetP1()), p12, p123, p1234, maxCurveApproximationScale);
+    return LengthBezier(static_cast<QPointF>(GetP1()), p12, p123, p1234, maxCurveApproximationScale);
 }

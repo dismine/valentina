@@ -29,12 +29,12 @@
 #ifndef VISTOOLCUTSPLINE_H
 #define VISTOOLCUTSPLINE_H
 
-
 #include <QGraphicsItem>
 #include <QMetaObject>
 #include <QObject>
 #include <QString>
 #include <QtGlobal>
+#include <limits>
 
 #include "../vmisc/def.h"
 #include "vispath.h"
@@ -42,6 +42,7 @@
 class VisToolCutSpline final : public VisPath
 {
     Q_OBJECT // NOLINT
+
 public:
     explicit VisToolCutSpline(const VContainer *data, QGraphicsItem *parent = nullptr);
     ~VisToolCutSpline() override = default;
@@ -52,15 +53,19 @@ public:
     void SetSplineId(quint32 id);
     void SetLength(const QString &expression);
 
-    auto type() const -> int override {return Type;}
-    enum {Type = UserType + static_cast<int>(Vis::ToolCutSpline)};
+    auto type() const -> int override { return Type; }
+    enum
+    {
+        Type = UserType + static_cast<int>(Vis::ToolCutSpline)
+    };
+
 private:
     Q_DISABLE_COPY_MOVE(VisToolCutSpline) // NOLINT
     VScaledEllipse *m_point{nullptr};
     VCurvePathItem *m_spl1{nullptr};
     VCurvePathItem *m_spl2{nullptr};
-    qreal           m_length{0};
-    quint32         m_splineId{NULL_ID};
+    qreal m_length{std::numeric_limits<qreal>::infinity()};
+    quint32 m_splineId{NULL_ID};
 };
 
 //---------------------------------------------------------------------------------------------------------------------

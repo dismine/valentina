@@ -69,7 +69,7 @@ void VisToolCutSpline::RefreshGeometry()
         const auto spl = GetData()->GeometricObject<VAbstractCubicBezier>(m_splineId);
         DrawPath(this, spl->GetPath(), spl->DirectionArrows(), LineStyle(), Qt::RoundCap);
 
-        if (not qFuzzyIsNull(m_length))
+        if (!qIsInf(m_length))
         {
             QPointF spl1p2;
             QPointF spl1p3;
