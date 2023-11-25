@@ -1945,6 +1945,8 @@ void VPattern::ParseNodePoint(const QDomElement &domElement, const Document &par
         p->setIdObject(initData.idObject);
         p->setMode(Draw::Modeling);
         p->SetShowLabel(GetParametrBool(domElement, AttrShowLabel, trueStr));
+        p->setMx(mx);
+        p->setMy(my);
 
         initData.data->UpdateGObject(initData.id, p);
         VNodePoint::Create(initData);
