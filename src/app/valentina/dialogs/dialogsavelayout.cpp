@@ -440,22 +440,26 @@ void DialogSaveLayout::ShowExample()
     ui->checkBoxBinaryDXF->setVisible(false);
     ui->checkBoxTextAsPaths->setVisible(false);
     ui->checkBoxShowGrainline->setVisible(false);
+    ui->checkBoxTogetherWithNotches->setVisible(false);
 
     switch (currentFormat)
     {
         case LayoutExportFormats::DXF_AAMA:
         case LayoutExportFormats::DXF_ASTM:
             ui->checkBoxBinaryDXF->setVisible(true);
+            ui->checkBoxTogetherWithNotches->setVisible(m_mode != Draw::Layout);
             break;
         case LayoutExportFormats::PDFTiled:
             ui->groupBoxPaperFormat->setEnabled(true);
             ui->groupBoxMargins->setEnabled(true);
             ui->checkBoxTextAsPaths->setVisible(m_mode != Draw::Layout);
             ui->checkBoxShowGrainline->setVisible(true);
+            ui->checkBoxTogetherWithNotches->setVisible(m_mode != Draw::Layout);
             break;
         case LayoutExportFormats::HPGL:
         case LayoutExportFormats::HPGL2:
             ui->checkBoxShowGrainline->setVisible(true);
+            ui->checkBoxTogetherWithNotches->setVisible(true);
             break;
         case LayoutExportFormats::SVG:
         case LayoutExportFormats::PDF:
@@ -465,6 +469,7 @@ void DialogSaveLayout::ShowExample()
         case LayoutExportFormats::TIF:
             ui->checkBoxTextAsPaths->setVisible(m_mode != Draw::Layout);
             ui->checkBoxShowGrainline->setVisible(true);
+            ui->checkBoxTogetherWithNotches->setVisible(m_mode != Draw::Layout);
             break;
         case LayoutExportFormats::DXF_AC1006_Flat:
         case LayoutExportFormats::DXF_AC1009_Flat:
@@ -478,6 +483,7 @@ void DialogSaveLayout::ShowExample()
             ui->checkBoxBinaryDXF->setVisible(true);
             ui->checkBoxTextAsPaths->setVisible(m_mode != Draw::Layout);
             ui->checkBoxShowGrainline->setVisible(true);
+            ui->checkBoxTogetherWithNotches->setVisible(m_mode != Draw::Layout);
             break;
         default:
             ui->labelOptionsNotAvailable->setVisible(true);
@@ -630,6 +636,18 @@ void DialogSaveLayout::SetYScale(qreal scale)
 auto DialogSaveLayout::GetYScale() const -> qreal
 {
     return ui->doubleSpinBoxVerticalScale->value() / 100.;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void DialogSaveLayout::SetBoundaryTogetherWithNotches(bool value)
+{
+    ui->checkBoxTogetherWithNotches->setChecked(value);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+auto DialogSaveLayout::IsBoundaryTogetherWithNotches() const -> bool
+{
+    return ui->checkBoxTogetherWithNotches->isChecked();
 }
 
 //---------------------------------------------------------------------------------------------------------------------

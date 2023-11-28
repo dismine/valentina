@@ -42,32 +42,7 @@
 
 //---------------------------------------------------------------------------------------------------------------------
 VLayoutGenerator::VLayoutGenerator(QObject *parent)
-  : QObject(parent),
-    papers(),
-    bank(new VBank()),
-    paperHeight(0),
-    paperWidth(0),
-    margins(),
-    usePrinterFields(true),
-#ifdef Q_CC_MSVC
-    // See https://stackoverflow.com/questions/15750917/initializing-stdatomic-bool
-    stopGeneration(ATOMIC_VAR_INIT(false)),
-#else
-    stopGeneration(false),
-#endif
-    state(LayoutErrors::NoError),
-    shift(0),
-    rotate(true),
-    followGrainline(false),
-    rotationNumber(2),
-    autoCropLength(false),
-    autoCropWidth(false),
-    saveLength(false),
-    unitePages(false),
-    stripOptimizationEnabled(false),
-    multiplier(1),
-    stripOptimization(false),
-    textAsPaths(false)
+  : QObject(parent)
 {
 }
 
@@ -134,7 +109,7 @@ void VLayoutGenerator::Generate(const QElapsedTimer &timer, qint64 timeout, Layo
 
     if (VFuzzyComparePossibleNulls(shift, -1))
     {
-        if (bank->PrepareDetails())
+        if (bank->PrepareDetails(togetherWithNotches))
         {
             SetShift(ToPixel(1, Unit::Cm));
         }
@@ -308,7 +283,8 @@ auto VLayoutGenerator::GetPapersItems() const -> QList<QGraphicsItem *>
     list.reserve(papers.count());
     for (const auto &paper : papers)
     {
-        list.append(paper.GetPaperItem(autoCropLength, autoCropWidth, IsTestAsPaths()));
+        list.append(
+            paper.GetPaperItem(autoCropLength, autoCropWidth, textAsPaths, togetherWithNotches, showLayoutAllowance));
     }
     return list;
 }
@@ -332,7 +308,7 @@ auto VLayoutGenerator::GetAllDetailsItems() const -> QList<QList<QGraphicsItem *
     list.reserve(papers.count());
     for (const auto &paper : papers)
     {
-        list.append(paper.GetItemDetails(IsTestAsPaths()));
+        list.append(paper.GetItemDetails(textAsPaths, togetherWithNotches, showLayoutAllowance));
     }
     return list;
 }
@@ -391,16 +367,38 @@ void VLayoutGenerator::SetTextAsPaths(bool value)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+auto VLayoutGenerator::IsBoundaryTogetherWithNotches() const -> bool
+{
+    return togetherWithNotches;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VLayoutGenerator::SetBoundaryTogetherWithNotches(bool value)
+{
+    togetherWithNotches = value;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+auto VLayoutGenerator::IsShowLayoutAllowance() const -> bool
+{
+    return showLayoutAllowance;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VLayoutGenerator::SetShowLayoutAllowance(bool value)
+{
+    showLayoutAllowance = value;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 auto VLayoutGenerator::IsRotationNeeded() const -> bool
 {
     if (followGrainline)
     {
         return bank->IsRotationNeeded();
     }
-    else
-    {
-        return true;
-    }
+
+    return true;
 }
 
 //---------------------------------------------------------------------------------------------------------------------

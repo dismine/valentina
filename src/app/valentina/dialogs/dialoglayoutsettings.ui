@@ -341,6 +341,29 @@
           </widget>
          </item>
          <item>
+          <widget class="QCheckBox" name="checkBoxTogetherWithNotches">
+           <property name="text">
+            <string>Boundary together with notches</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QGroupBox" name="groupBox">
+           <property name="title">
+            <string>Debug</string>
+           </property>
+           <layout class="QVBoxLayout" name="verticalLayout_7">
+            <item>
+             <widget class="QCheckBox" name="checkBoxShowLayoutAllowance">
+              <property name="text">
+               <string>Show layout allowance</string>
+              </property>
+             </widget>
+            </item>
+           </layout>
+          </widget>
+         </item>
+         <item>
           <spacer name="verticalSpacer">
            <property name="orientation">
             <enum>Qt::Vertical</enum>

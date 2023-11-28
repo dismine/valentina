@@ -321,7 +321,8 @@ auto VLayoutPaper::SaveResult(const VBestSquare &bestResult, const VLayoutPiece 
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-auto VLayoutPaper::GetPaperItem(bool autoCropLength, bool autoCropWidth, bool textAsPaths) const -> QGraphicsRectItem *
+auto VLayoutPaper::GetPaperItem(bool autoCropLength, bool autoCropWidth, bool textAsPaths, bool togetherWithNotches,
+                                bool showLayoutAllowance) const -> QGraphicsRectItem *
 {
     int height = d->globalContour.GetHeight();
     int width = d->globalContour.GetWidth();
@@ -329,7 +330,7 @@ auto VLayoutPaper::GetPaperItem(bool autoCropLength, bool autoCropWidth, bool te
     if (autoCropLength || autoCropWidth)
     {
         QScopedPointer<QGraphicsScene> scene(new QGraphicsScene());
-        QList<QGraphicsItem *> list = GetItemDetails(textAsPaths);
+        QList<QGraphicsItem *> list = GetItemDetails(textAsPaths, togetherWithNotches, showLayoutAllowance);
         for (auto *item : list)
         {
             scene->addItem(item);
@@ -417,13 +418,14 @@ auto VLayoutPaper::GetGlobalContour() const -> QGraphicsPathItem *
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-auto VLayoutPaper::GetItemDetails(bool textAsPaths) const -> QList<QGraphicsItem *>
+auto VLayoutPaper::GetItemDetails(bool textAsPaths, bool togetherWithNotches, bool showLayoutAllowance) const
+    -> QList<QGraphicsItem *>
 {
     QList<QGraphicsItem *> list;
     list.reserve(d->details.count());
     for (const auto &detail : d->details)
     {
-        list.append(detail.GetItem(textAsPaths));
+        list.append(detail.GetItem(textAsPaths, togetherWithNotches, showLayoutAllowance));
     }
     return list;
 }

@@ -247,7 +247,7 @@ auto VPiece::Passmarks(const VContainer *data) const -> QVector<VPassmark>
     const QVector<VPieceNode> unitedPath = GetUnitedPath(data);
     if (not IsSeamAllowance() || not IsPassmarksPossible(unitedPath))
     {
-        return QVector<VPassmark>();
+        return {};
     }
 
     QVector<VPassmark> passmarks;
@@ -693,7 +693,7 @@ auto VPiece::SeamAllowancePointsWithRotation(const VContainer *data, vsizetype m
                         const VPiecePath path = data->GetPiecePath(records.at(recordIndex).path);
                         QVector<VSAPoint> r = path.SeamAllowancePoints(data, width, records.at(recordIndex).reverse);
 
-                        for (auto & j : r)
+                        for (auto &j : r)
                         {
                             j.SetAngleType(PieceNodeAngle::ByLengthCurve);
                             j.SetSABefore(0);

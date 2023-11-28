@@ -28,13 +28,13 @@
 
 #include "vbank.h"
 
-#include <climits>
 #include <QLoggingCategory>
+#include <climits>
 
-#include "../vmisc/vabstractvalapplication.h"
-#include "../vmisc/compatibility.h"
-#include "vlayoutdef.h"
 #include "../ifc/exception/vexception.h"
+#include "../vmisc/compatibility.h"
+#include "../vmisc/vabstractvalapplication.h"
+#include "vlayoutdef.h"
 
 QT_WARNING_PUSH
 QT_WARNING_DISABLE_CLANG("-Wmissing-prototypes")
@@ -47,7 +47,7 @@ QT_WARNING_POP
 // An annoying char define, from the Windows team in <rpcndr.h>
 // #define small char
 // http://stuartjames.info/Journal/c--visual-studio-2012-vs2012--win8--converting-projects-up-some-conflicts-i-found.aspx
-#if defined (Q_OS_WIN) && defined (Q_CC_MSVC)
+#if defined(Q_OS_WIN) && defined(Q_CC_MSVC)
 #pragma push_macro("small")
 #undef small
 #endif
@@ -160,11 +160,12 @@ auto TakeFirstForPriority(const QMap<uint, QHash<int, qint64>> &container, uint 
 
     return -1;
 }
-}
+} // namespace
 
 //---------------------------------------------------------------------------------------------------------------------
 VBank::VBank()
-{}
+{
+}
 
 //---------------------------------------------------------------------------------------------------------------------
 auto VBank::GetLayoutWidth() const -> qreal
@@ -245,7 +246,7 @@ auto VBank::GetNext() -> int
         }
     };
 
-    for (auto &group: groups)
+    for (auto &group : groups)
     {
         int next = -1;
         if (group != 0) // Group 0 must go last
@@ -327,14 +328,14 @@ auto VBank::PrepareUnsorted() -> bool
 {
     QSet<uint> uniqueGroup;
 
-    for (int i=0; i < details.size(); ++i)
+    for (int i = 0; i < details.size(); ++i)
     {
         const qint64 square = details.at(i).Square();
         if (square <= 0)
         {
-            qCCritical(lBank) << VAbstractValApplication::warningMessageSignature +
-                                     tr("Error of preparing data for layout: Detail '%1' square <= 0")
-                                         .arg(details.at(i).GetName());
+            qCCritical(lBank)
+                << VAbstractValApplication::warningMessageSignature +
+                       tr("Error of preparing data for layout: Detail '%1' square <= 0").arg(details.at(i).GetName());
             prepare = false;
             return prepare;
         }
@@ -353,7 +354,7 @@ auto VBank::PrepareUnsorted() -> bool
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-auto VBank::PrepareDetails() -> bool
+auto VBank::PrepareDetails(bool togetherWithNotches) -> bool
 {
     if (layoutWidth <= 0)
     {
@@ -378,20 +379,22 @@ auto VBank::PrepareDetails() -> bool
 
     diagonal = 0;
 
-    for (int i=0; i < details.size(); ++i)
+    for (auto &detail : details)
     {
-        details[i].SetLayoutWidth(layoutWidth);
-        details[i].SetLayoutAllowancePoints();
+        detail.SetLayoutWidth(layoutWidth);
+        detail.SetLayoutAllowancePoints(togetherWithNotches);
 
-        if (not details.at(i).IsLayoutAllowanceValid())
+        if (not detail.IsLayoutAllowanceValid(togetherWithNotches))
         {
             const QString errorMsg = QObject::tr("Piece '%1' has invalid layout allowance. Please, check seam allowance"
-                                                 " to check how seam allowance behave.").arg(details.at(i).GetName());
-            VAbstractApplication::VApp()->IsPedantic() ? throw VException(errorMsg) :
-                                              qWarning() << VAbstractValApplication::warningMessageSignature + errorMsg;
+                                                 " to check how seam allowance behave.")
+                                         .arg(detail.GetName());
+            VAbstractApplication::VApp()->IsPedantic()
+                ? throw VException(errorMsg)
+                : qWarning() << VAbstractValApplication::warningMessageSignature + errorMsg;
         }
 
-        const qreal d = details.at(i).Diagonal();
+        const qreal d = detail.Diagonal();
         if (d > diagonal)
         {
             diagonal = d;
@@ -478,8 +481,8 @@ void VBank::PrepareThreeGroups(uint priority)
 
     SqMaxMin(sMax, sMin, priority);
 
-    const qint64 s1 = sMax - (sMax - sMin)/3;
-    const qint64 s2 = sMin + (sMax - sMin)/3;
+    const qint64 s1 = sMax - (sMax - sMin) / 3;
+    const qint64 s2 = sMin + (sMax - sMin) / 3;
 
     const QHash<int, qint64> usortedGroup = unsorted.value(priority);
     QHash<int, qint64>::const_iterator i = usortedGroup.constBegin();
@@ -510,7 +513,7 @@ void VBank::PrepareTwoGroups(uint priority)
 
     SqMaxMin(sMax, sMin, priority);
 
-    const qint64 s = (sMax + sMin)/2;
+    const qint64 s = (sMax + sMin) / 2;
     const QHash<int, qint64> usortedGroup = unsorted.value(priority);
     QHash<int, qint64>::const_iterator i = usortedGroup.constBegin();
     while (i != usortedGroup.constEnd())
@@ -683,7 +686,6 @@ auto VBank::IsRotationNeeded() const -> bool
     return false;
 }
 
-
-#if defined (Q_OS_WIN) && defined (Q_CC_MSVC)
+#if defined(Q_OS_WIN) && defined(Q_CC_MSVC)
 #pragma pop_macro("small")
 #endif

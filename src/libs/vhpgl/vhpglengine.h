@@ -80,6 +80,9 @@ public:
     auto GetYScale() const -> qreal;
     void SetYScale(const qreal &yscale);
 
+    void SetBoundaryTogetherWithNotches(bool value);
+    auto IsBoundaryTogetherWithNotches() const -> bool;
+
     void SetIsertNewLine(bool insert);
 
     static auto SortDetails(const QVector<VLayoutPiece> &details) -> QList<VLayoutPiece>;
@@ -101,6 +104,7 @@ private:
     qreal m_xscale{1};
     qreal m_yscale{1};
     bool m_showGrainline{true};
+    bool m_togetherWithNotches{false};
 
     auto GenerateHPGL(const QVector<VLayoutPiece> &details) -> bool;
     auto GenerateHPGL2(const QVector<VLayoutPiece> &details) -> bool;
@@ -110,7 +114,7 @@ private:
     void ExportDetails(QTextStream &out, const QList<VLayoutPiece> &details);
     void GenerateHPGLFooter(QTextStream &out);
 
-    void PlotMainPath(QTextStream &out, const VLayoutPiece &detail);
+    void PlotSewLine(QTextStream &out, const VLayoutPiece &detail);
     void PlotSeamAllowance(QTextStream &out, const VLayoutPiece &detail);
     void PlotInternalPaths(QTextStream &out, const VLayoutPiece &detail);
     void PlotPlaceLabels(QTextStream &out, const VLayoutPiece &detail);
@@ -261,6 +265,19 @@ inline void VHPGLEngine::SetShowGrainline(bool newShowGrainline)
 {
     Q_ASSERT(not isActive());
     m_showGrainline = newShowGrainline;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+inline void VHPGLEngine::SetBoundaryTogetherWithNotches(bool value)
+{
+    Q_ASSERT(not isActive());
+    m_togetherWithNotches = value;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+inline auto VHPGLEngine::IsBoundaryTogetherWithNotches() const -> bool
+{
+    return m_togetherWithNotches;
 }
 
 #endif // VHPGLENGINE_H

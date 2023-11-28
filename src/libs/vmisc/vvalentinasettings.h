@@ -115,6 +115,10 @@ public:
     static auto GetDefLayoutPreferOneSheetSolution() -> bool;
     void SetLayoutPreferOneSheetSolution(bool value);
 
+    auto GetLayoutBoundaryTogetherWithNotches() const -> bool;
+    static auto GetDefLayoutBoundaryTogetherWithNotches() -> bool;
+    void SetLayoutBoundaryTogetherWithNotches(bool value);
+
     auto GetLayoutUnitePages() const -> bool;
     static auto GetDefLayoutUnitePages() -> bool;
     void SetLayoutUnitePages(bool value);
@@ -249,6 +253,9 @@ public:
 
     auto IsUseToolGroups() const -> bool;
     void SetUseToolGroups(bool value);
+
+    auto IsBoundaryTogetherWithNotches() const -> bool;
+    void SetBoundaryTogetherWithNotches(bool value);
 
 private:
     Q_DISABLE_COPY_MOVE(VValentinaSettings) // NOLINT

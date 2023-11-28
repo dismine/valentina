@@ -37,7 +37,7 @@
 
 namespace Ui
 {
-    class DialogLayoutSettings;
+class DialogLayoutSettings;
 }
 
 class VLayoutGenerator;
@@ -45,6 +45,7 @@ class VLayoutGenerator;
 class DialogLayoutSettings : public VAbstractLayoutDialog
 {
     Q_OBJECT // NOLINT
+
 public:
     explicit DialogLayoutSettings(VLayoutGenerator *generator, QWidget *parent = nullptr, bool disableSettings = false);
     ~DialogLayoutSettings() override;
@@ -106,19 +107,26 @@ public:
     auto IsNestQuantity() const -> bool;
     void SetNestQuantity(bool state);
 
+    void SetBoundaryTogetherWithNotches(bool value);
+    auto IsBoundaryTogetherWithNotches() const -> bool;
+
+    void SetShowLayoutAllowance(bool value);
+    auto IsShowLayoutAllowance() const -> bool;
+
     auto SelectedPrinter() const -> QString;
 
     void EnableLandscapeOrientation();
 
-    //support functions for the command line parser which uses invisible dialog to properly build layout generator
-    auto SelectTemplate(const PaperSizeTemplate& id) -> bool;
+    // support functions for the command line parser which uses invisible dialog to properly build layout generator
+    auto SelectTemplate(const PaperSizeTemplate &id) -> bool;
     static auto MakeHelpTemplateList() -> QString;
     static auto MakeHelpTiledPdfTemplateList() -> QString;
-    auto SelectPaperUnit(const QString& units) -> bool;
-    auto SelectLayoutUnit(const QString& units) -> bool;
+    auto SelectPaperUnit(const QString &units) -> bool;
+    auto SelectLayoutUnit(const QString &units) -> bool;
     auto LayoutToPixels(qreal value) const -> qreal;
     auto PageToPixels(qreal value) const -> qreal;
     static auto MakeGroupsHelp() -> QString;
+
 protected:
     void showEvent(QShowEvent *event) override;
     void resizeEvent(QResizeEvent *event) override;
@@ -138,6 +146,7 @@ private slots:
 
     void CorrectMaxFileds();
     void IgnoreAllFields(int state);
+
 private:
     // cppcheck-suppress unknownMacro
     Q_DISABLE_COPY_MOVE(DialogLayoutSettings) // NOLINT

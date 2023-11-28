@@ -139,9 +139,10 @@ public:
     static auto LabelShapePath(const VLayoutPlaceLabel &label) -> QPainterPath;
     static auto LabelShapePath(const PlaceLabelImg &shape) -> QPainterPath;
 
-protected:
     template <class T>
     static auto RemoveDublicates(const QVector<T> &points, bool removeFirstAndLast = true) -> QVector<T>;
+
+protected:
     static auto IsEkvPointOnLine(const QPointF &iPoint, const QPointF &prevPoint, const QPointF &nextPoint) -> bool;
     static auto IsEkvPointOnLine(const VSAPoint &iPoint, const VSAPoint &prevPoint, const VSAPoint &nextPoint) -> bool;
     template <class T>

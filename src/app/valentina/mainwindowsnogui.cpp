@@ -338,6 +338,7 @@ auto MainWindowsNoGUI::GenerateLayout(VLayoutGenerator &lGenerator) -> bool
                         m_layoutSettings->SetAutoCropWidth(lGenerator.GetAutoCropWidth());
                         m_layoutSettings->SetUnitePages(lGenerator.IsUnitePages());
                         m_layoutSettings->SetLayoutStale(false);
+                        m_layoutSettings->SetBoundaryTogetherWithNotches(lGenerator.IsBoundaryTogetherWithNotches());
                         papersCount = lGenerator.PapersCount();
                         hasResult = true;
                         qDebug() << "Layout efficiency: " << efficiency;
@@ -508,7 +509,7 @@ void MainWindowsNoGUI::ExportData(const QVector<VLayoutPiece> &listDetails)
         {
             for (int i = 0; i < detailsOnLayout.size(); ++i)
             {
-                const QString name = m_dialogSaveLayout->Path() + '/' + m_dialogSaveLayout->FileName() +
+                const QString name = m_dialogSaveLayout->Path() + '/'_L1 + m_dialogSaveLayout->FileName() +
                                      QString::number(i + 1) +
                                      VLayoutExporter::ExportFormatSuffix(m_dialogSaveLayout->Format());
 
@@ -582,13 +583,15 @@ void MainWindowsNoGUI::ExportDetailsAsFlatLayout(const QVector<VLayoutPiece> &li
     list.reserve(listDetails.count());
     for (auto piece : listDetails)
     {
-        QGraphicsItem *item = piece.GetItem(m_dialogSaveLayout->IsTextAsPaths());
+        QGraphicsItem *item = piece.GetItem(m_dialogSaveLayout->IsTextAsPaths(),
+                                            m_dialogSaveLayout->IsBoundaryTogetherWithNotches(), false);
         qreal diff = 0;
         if (piece.IsForceFlipping())
         {
             const qreal x = item->boundingRect().x();
             piece.Mirror();
-            item = piece.GetItem(m_dialogSaveLayout->IsTextAsPaths());
+            item = piece.GetItem(m_dialogSaveLayout->IsTextAsPaths(),
+                                 m_dialogSaveLayout->IsBoundaryTogetherWithNotches(), false);
             diff = item->boundingRect().x() - x;
         }
 
@@ -624,7 +627,7 @@ void MainWindowsNoGUI::ExportDetailsAsFlatLayout(const QVector<VLayoutPiece> &li
 
     rect = scene->itemsBoundingRect().toRect();
 
-    QGraphicsRectItem *paper = new QGraphicsRectItem(rect);
+    auto *paper = new QGraphicsRectItem(rect);
     paper->setPen(QPen(Qt::black, 1));
     paper->setBrush(QBrush(Qt::white));
     papers.append(paper);
@@ -671,6 +674,7 @@ void MainWindowsNoGUI::ExportApparelLayout(const QVector<VLayoutPiece> &details,
     exporter.SetYScale(m_dialogSaveLayout->GetYScale());
     exporter.SetBinaryDxfFormat(m_dialogSaveLayout->IsBinaryDXFFormat());
     exporter.SetShowGrainline(m_dialogSaveLayout->IsShowGrainline());
+    exporter.SetBoundaryTogetherWithNotches(m_dialogSaveLayout->IsBoundaryTogetherWithNotches());
 
     switch (format)
     {
@@ -720,14 +724,16 @@ void MainWindowsNoGUI::ExportDetailsAsApparelLayout(QVector<VLayoutPiece> listDe
     for (int i = 0; i < listDetails.count(); ++i)
     {
         VLayoutPiece piece = listDetails.at(i);
-        QGraphicsItem *item = piece.GetItem(m_dialogSaveLayout->IsTextAsPaths());
+        QGraphicsItem *item = piece.GetItem(m_dialogSaveLayout->IsTextAsPaths(),
+                                            m_dialogSaveLayout->IsBoundaryTogetherWithNotches(), false);
         qreal diff = 0;
         if (piece.IsForceFlipping())
         {
             const qreal x = item->boundingRect().x();
             piece.Mirror();
             delete item;
-            item = piece.GetItem(m_dialogSaveLayout->IsTextAsPaths());
+            item = piece.GetItem(m_dialogSaveLayout->IsTextAsPaths(),
+                                 m_dialogSaveLayout->IsBoundaryTogetherWithNotches(), false);
             diff = item->boundingRect().x() - x;
         }
 
@@ -1064,6 +1070,7 @@ void MainWindowsNoGUI::ExportScene(const QList<QGraphicsScene *> &scenes, const 
     exporter.SetIgnorePrinterMargins(ignorePrinterFields);
     exporter.SetBinaryDxfFormat(m_dialogSaveLayout->IsBinaryDXFFormat());
     exporter.SetShowGrainline(m_dialogSaveLayout->IsShowGrainline());
+    exporter.SetBoundaryTogetherWithNotches(m_dialogSaveLayout->IsBoundaryTogetherWithNotches());
 
     for (int i = 0; i < scenes.size(); ++i)
     {

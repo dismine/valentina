@@ -173,6 +173,7 @@ void VPLayoutFileWriter::WriteLayoutProperties(const VPLayoutPtr &layout)
     SetAttribute(ML::AttrStickyEdges, layout->LayoutSettings().GetStickyEdges());
     SetAttribute(ML::AttrPiecesGap, layout->LayoutSettings().GetPiecesGap());
     SetAttribute(ML::AttrFollowGrainline, layout->LayoutSettings().GetFollowGrainline());
+    SetAttribute(ML::AttrBoundaryTogetherWithNotches, layout->LayoutSettings().IsBoundaryTogetherWithNotches());
     writeEndElement(); // control
 
     WriteTiles(layout);

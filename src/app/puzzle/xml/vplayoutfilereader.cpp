@@ -341,6 +341,8 @@ void VPLayoutFileReader::ReadControl(const VPLayoutPtr &layout)
     layout->LayoutSettings().SetStickyEdges(ReadAttributeBool(attribs, ML::AttrStickyEdges, trueStr));
     layout->LayoutSettings().SetPiecesGap(qMax(ReadAttributeDouble(attribs, ML::AttrPiecesGap, QChar('0')), 0.0));
     layout->LayoutSettings().SetFollowGrainline(ReadAttributeBool(attribs, ML::AttrFollowGrainline, falseStr));
+    layout->LayoutSettings().SetBoundaryTogetherWithNotches(
+        ReadAttributeBool(attribs, ML::AttrBoundaryTogetherWithNotches, falseStr));
 
     readElementText();
 }

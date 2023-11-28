@@ -334,6 +334,8 @@ void VPSheetSceneData::ConnectPiece(VPGraphicsPiece *piece)
                      &VPGraphicsPieceControls::on_HideHandles);
     QObject::connect(piece, &VPGraphicsPiece::HideTransformationHandles, m_rotationOrigin,
                      &VPGraphicsTransformationOrigin::on_HideHandles);
+    QObject::connect(layout.data(), &VPLayout::BoundaryTogetherWithNotchesChanged, piece,
+                     &VPGraphicsPiece::on_RefreshPiece);
 }
 
 // VPSheet

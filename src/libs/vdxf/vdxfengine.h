@@ -113,6 +113,9 @@ public:
     auto GetYScale() const -> qreal;
     void SetYScale(const qreal &yscale);
 
+    void SetBoundaryTogetherWithNotches(bool value);
+    auto IsBoundaryTogetherWithNotches() const -> bool;
+
     auto ErrorString() const -> QString;
 
 private:
@@ -130,6 +133,7 @@ private:
     DRW_Text *m_textBuffer{nullptr};
     qreal m_xscale{1};
     qreal m_yscale{1};
+    bool m_togetherWithNotches{false};
 
     Q_REQUIRED_RESULT auto FromPixel(double pix, const VarInsunits &unit) const -> double;
     Q_REQUIRED_RESULT auto ToPixel(double val, const VarInsunits &unit) const -> double;
@@ -137,6 +141,7 @@ private:
     auto ExportToAAMA(const QVector<VLayoutPiece> &details) -> bool;
     void ExportAAMAOutline(const QSharedPointer<dx_ifaceBlock> &detailBlock, const VLayoutPiece &detail);
     void ExportAAMADraw(const QSharedPointer<dx_ifaceBlock> &detailBlock, const VLayoutPiece &detail);
+    void ExportAAMADrawSewLine(const QSharedPointer<dx_ifaceBlock> &detailBlock, const VLayoutPiece &detail);
     void ExportAAMAIntcut(const QSharedPointer<dx_ifaceBlock> &detailBlock, const VLayoutPiece &detail);
     void ExportAAMANotch(const QSharedPointer<dx_ifaceBlock> &detailBlock, const VLayoutPiece &detail);
     void ExportAAMAGrainline(const QSharedPointer<dx_ifaceBlock> &detailBlock, const VLayoutPiece &detail);

@@ -1205,6 +1205,8 @@ void VPMainWindow::InitPropertyTabLayout()
                 }
             });
 
+    connect(ui->checkBoxTogetherWithNotches, &QCheckBox::toggled, this, &VPMainWindow::TogetherWithNotchesChanged);
+
     VPSettings *settings = VPApplication::VApp()->PuzzleSettings();
     ui->doubleSpinBoxSheetPiecesGap->setMaximum(
         UnitConvertor(VPSettings::GetMaxLayoutPieceGap(), Unit::Px, settings->LayoutUnit()));
@@ -1523,6 +1525,7 @@ void VPMainWindow::SetPropertyTabLayoutData()
                          m_layout->LayoutSettings().GetWarningSuperpositionOfPieces());
         SetCheckBoxValue(ui->checkBoxSheetStickyEdges, m_layout->LayoutSettings().GetStickyEdges());
         SetCheckBoxValue(ui->checkBoxFollowGainline, m_layout->LayoutSettings().GetFollowGrainline());
+        SetCheckBoxValue(ui->checkBoxTogetherWithNotches, m_layout->LayoutSettings().IsBoundaryTogetherWithNotches());
 
         // set pieces gap
         SetDoubleSpinBoxValue(ui->doubleSpinBoxSheetPiecesGap, m_layout->LayoutSettings().GetPiecesGapConverted());
@@ -1559,6 +1562,7 @@ void VPMainWindow::SetPropertyTabLayoutData()
         SetCheckBoxValue(ui->checkBoxLayoutWarningPiecesSuperposition, false);
         SetCheckBoxValue(ui->checkBoxSheetStickyEdges, false);
         SetCheckBoxValue(ui->checkBoxFollowGainline, false);
+        SetCheckBoxValue(ui->checkBoxTogetherWithNotches, false);
 
         SetDoubleSpinBoxValue(ui->doubleSpinBoxSheetPiecesGap, 0);
 
@@ -4741,6 +4745,38 @@ void VPMainWindow::UpdateShortcuts()
     {
         manager->UpdateActionShortcuts(m_actionShortcuts);
     }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VPMainWindow::TogetherWithNotchesChanged(bool checked)
+{
+    if (m_layout.isNull())
+    {
+        return;
+    }
+
+    m_layout->LayoutSettings().SetBoundaryTogetherWithNotches(checked);
+    m_carrousel->RefreshPieceMiniature();
+
+    QList<VPSheetPtr> sheets = m_layout->GetAllSheets();
+    for (const auto &sheet : sheets)
+    {
+        if (sheet.isNull())
+        {
+            continue;
+        }
+
+        QList<VPPiecePtr> pieces = sheet->GetPieces();
+        for (const auto &piece : pieces)
+        {
+            if (not piece.isNull())
+            {
+                emit m_layout->BoundaryTogetherWithNotchesChanged(piece);
+            }
+        }
+    }
+
+    LayoutWasSaved(false);
 }
 
 //---------------------------------------------------------------------------------------------------------------------

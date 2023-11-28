@@ -103,6 +103,7 @@
         <file>schema/layout/v0.1.4.xsd</file>
         <file>schema/layout/v0.1.5.xsd</file>
         <file>schema/layout/v0.1.6.xsd</file>
+        <file>schema/layout/v0.1.7.xsd</file>
         <file>schema/known_measurements/v1.0.0.xsd</file>
     </qresource>
 </RCC>

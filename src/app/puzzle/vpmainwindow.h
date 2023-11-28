@@ -297,6 +297,8 @@ private slots:
 
     void UpdateShortcuts();
 
+    void TogetherWithNotchesChanged(bool checked);
+
 private:
     Q_DISABLE_COPY_MOVE(VPMainWindow) // NOLINT
     Ui::VPMainWindow *ui;

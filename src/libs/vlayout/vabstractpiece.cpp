@@ -37,14 +37,14 @@
 #include "../vpatterndb/floatItemData/vgrainlinedata.h"
 #include "../vpatterndb/vcontainer.h"
 #include "../vwidgets/vpiecegrainline.h"
-#include "qline.h"
-#include "qmath.h"
 #include "vabstractpiece_p.h"
+#include "vlayoutpiecepath.h"
 #include "vrawsapoint.h"
 
 #include <QJsonArray>
 #include <QJsonDocument>
 #include <QJsonObject>
+#include <QLine>
 #include <QLineF>
 #include <QPainterPath>
 #include <QSet>

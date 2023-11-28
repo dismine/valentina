@@ -28,15 +28,15 @@
 #ifndef VPASSMARK_H
 #define VPASSMARK_H
 
-#include <QtGlobal>
 #include <QMetaType>
+#include <QtGlobal>
 
-#include "vpiece.h"
 #include "../vmisc/typedef.h"
+#include "vpiece.h"
 
 class QPainterPath;
 
-enum class PassmarkStatus: qint8
+enum class PassmarkStatus : qint8
 {
     Error = 0,
     Common = 1,
@@ -48,22 +48,22 @@ QT_WARNING_DISABLE_GCC("-Weffc++")
 
 struct VPiecePassmarkData
 {
-    VSAPoint previousSAPoint{};       // NOLINT(misc-non-private-member-variables-in-classes)
-    VSAPoint passmarkSAPoint{};       // NOLINT(misc-non-private-member-variables-in-classes)
-    VSAPoint nextSAPoint{};           // NOLINT(misc-non-private-member-variables-in-classes)
-    qreal saWidth{0};                 // NOLINT(misc-non-private-member-variables-in-classes)
-    QString nodeName{};               // NOLINT(misc-non-private-member-variables-in-classes)
-    QString pieceName{};              // NOLINT(misc-non-private-member-variables-in-classes)
-    PassmarkLineType passmarkLineType{// NOLINT(misc-non-private-member-variables-in-classes)
-                                      PassmarkLineType::OneLine};
-    PassmarkAngleType passmarkAngleType{// NOLINT(misc-non-private-member-variables-in-classes)
-                                        PassmarkAngleType::Straightforward};
-    bool isMainPathNode{true};              // NOLINT(misc-non-private-member-variables-in-classes)
-    bool isShowSecondPassmark{true};        // NOLINT(misc-non-private-member-variables-in-classes)
-    vsizetype passmarkIndex{-1};            // NOLINT(misc-non-private-member-variables-in-classes)
-    vidtype id{NULL_ID};                    // NOLINT(misc-non-private-member-variables-in-classes)
-    qreal globalPassmarkLength{0};          // NOLINT(misc-non-private-member-variables-in-classes)
-    qreal globalPassmarkWidth{0};           // NOLINT(misc-non-private-member-variables-in-classes)
+    VSAPoint previousSAPoint{}; // NOLINT(misc-non-private-member-variables-in-classes)
+    VSAPoint passmarkSAPoint{}; // NOLINT(misc-non-private-member-variables-in-classes)
+    VSAPoint nextSAPoint{};     // NOLINT(misc-non-private-member-variables-in-classes)
+    qreal saWidth{0};           // NOLINT(misc-non-private-member-variables-in-classes)
+    QString nodeName{};         // NOLINT(misc-non-private-member-variables-in-classes)
+    QString pieceName{};        // NOLINT(misc-non-private-member-variables-in-classes)
+    // NOLINTNEXTLINE(misc-non-private-member-variables-in-classes)
+    PassmarkLineType passmarkLineType{PassmarkLineType::OneLine};
+    // NOLINTNEXTLINE(misc-non-private-member-variables-in-classes)
+    PassmarkAngleType passmarkAngleType{PassmarkAngleType::Straightforward};
+    bool isMainPathNode{true};       // NOLINT(misc-non-private-member-variables-in-classes)
+    bool isShowSecondPassmark{true}; // NOLINT(misc-non-private-member-variables-in-classes)
+    vsizetype passmarkIndex{-1};     // NOLINT(misc-non-private-member-variables-in-classes)
+    vidtype id{NULL_ID};             // NOLINT(misc-non-private-member-variables-in-classes)
+    qreal globalPassmarkLength{0};   // NOLINT(misc-non-private-member-variables-in-classes)
+    qreal globalPassmarkWidth{0};    // NOLINT(misc-non-private-member-variables-in-classes)
 
     auto toJson() const -> QJsonObject;
 };
@@ -73,7 +73,12 @@ Q_DECLARE_TYPEINFO(VPiecePassmarkData, Q_MOVABLE_TYPE); // NOLINT
 
 QT_WARNING_POP
 
-enum class PassmarkSide : qint8 { All=0, Left=1, Right=2 };
+enum class PassmarkSide : qint8
+{
+    All = 0,
+    Left = 1,
+    Right = 2
+};
 
 class VPassmark
 {
@@ -102,6 +107,7 @@ public:
     static auto FindIntersection(const QLineF &line, const QVector<QPointF> &seamAllowance) -> QLineF;
 
     static const qreal passmarkRadiusFactor;
+
 private:
     VPiecePassmarkData m_data{};
     bool m_null{true};

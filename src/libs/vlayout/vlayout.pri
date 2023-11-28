@@ -30,7 +30,8 @@ HEADERS += \
     $$PWD/vlayoutpiecepath.h \
     $$PWD/vlayoutpiecepath_p.h \
     $$PWD/vbestsquare_p.h \
-    $$PWD/vrawsapoint.h
+    $$PWD/vrawsapoint.h \
+    $$PWD/vboundary.h
 
 SOURCES += \
     $$PWD/vlayoutexporter.cpp \
@@ -50,6 +51,7 @@ SOURCES += \
     $$PWD/vabstractpiece.cpp \
     $$PWD/vlayoutpiece.cpp \
     $$PWD/vlayoutpiecepath.cpp \
-    $$PWD/vrawsapoint.cpp
+    $$PWD/vrawsapoint.cpp \
+    $$PWD/vboundary.cpp
 
 *msvc*:SOURCES += $$PWD/stable.cpp

@@ -4470,6 +4470,7 @@ void MainWindow::Clear()
     ui->actionShowCurveDetails->setEnabled(false);
     ui->actionShowAccuracyRadius->setEnabled(false);
     ui->actionShowMainPath->setEnabled(false);
+    ui->actionBoundaryTogetherWithNotches->setEnabled(false);
     ui->actionLoadIndividual->setEnabled(false);
     ui->actionLoadMultisize->setEnabled(false);
     ui->actionUnloadMeasurements->setEnabled(false);
@@ -4722,6 +4723,7 @@ void MainWindow::SetEnableWidgets(bool enable)
     ui->actionShowCurveDetails->setEnabled(enableOnDrawStage);
     ui->actionShowAccuracyRadius->setEnabled(enableOnDesignStage);
     ui->actionShowMainPath->setEnabled(enableOnDetailsStage);
+    ui->actionBoundaryTogetherWithNotches->setEnabled(enableOnDetailsStage);
     ui->actionLoadIndividual->setEnabled(enableOnDesignStage);
     ui->actionLoadMultisize->setEnabled(enableOnDesignStage);
     ui->actionUnloadMeasurements->setEnabled(enableOnDesignStage);
@@ -5199,6 +5201,29 @@ void MainWindow::ActionFinalMeasurements_triggered()
 void MainWindow::ActionShowMainPath_triggered(bool checked)
 {
     VAbstractValApplication::VApp()->ValentinaSettings()->SetPieceShowMainPath(checked);
+    const QList<quint32> ids = pattern->DataPieces()->keys();
+    const bool updateChildren = false;
+    QGuiApplication::setOverrideCursor(QCursor(Qt::WaitCursor));
+    for (const auto &id : ids)
+    {
+        try
+        {
+            if (auto *tool = qobject_cast<VToolSeamAllowance *>(VAbstractPattern::getTool(id)))
+            {
+                tool->RefreshGeometry(updateChildren);
+            }
+        }
+        catch (VExceptionBadId &)
+        {
+        }
+    }
+    QGuiApplication::restoreOverrideCursor();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void MainWindow::ActionBoundaryTogetherWithNotches_triggered(bool checked)
+{
+    VAbstractValApplication::VApp()->ValentinaSettings()->SetBoundaryTogetherWithNotches(checked);
     const QList<quint32> ids = pattern->DataPieces()->keys();
     const bool updateChildren = false;
     QGuiApplication::setOverrideCursor(QCursor(Qt::WaitCursor));
@@ -6183,6 +6208,11 @@ void MainWindow::CreateActions()
     ui->actionShowMainPath->setChecked(VAbstractValApplication::VApp()->ValentinaSettings()->IsPieceShowMainPath());
     connect(ui->actionShowMainPath, &QAction::triggered, this, &MainWindow::ActionShowMainPath_triggered);
 
+    ui->actionBoundaryTogetherWithNotches->setChecked(
+        VAbstractValApplication::VApp()->ValentinaSettings()->IsBoundaryTogetherWithNotches());
+    connect(ui->actionBoundaryTogetherWithNotches, &QAction::triggered, this,
+            &MainWindow::ActionBoundaryTogetherWithNotches_triggered);
+
     connect(ui->actionLoadIndividual, &QAction::triggered, this, &MainWindow::LoadIndividual);
     connect(ui->actionLoadMultisize, &QAction::triggered, this, &MainWindow::LoadMultisize);
     connect(ui->actionOpenTape, &QAction::triggered, this, &MainWindow::ActionOpenTape_triggered);
@@ -6777,6 +6807,7 @@ void MainWindow::ExportLayoutAs(bool checked)
     {
         m_dialogSaveLayout = QSharedPointer<DialogSaveLayout>(new DialogSaveLayout(
             static_cast<int>(m_layoutSettings->LayoutScenes().size()), Draw::Layout, FileName(), this));
+        m_dialogSaveLayout->SetBoundaryTogetherWithNotches(m_layoutSettings->IsBoundaryTogetherWithNotches());
 
         if (m_dialogSaveLayout->exec() == QDialog::Rejected)
         {
@@ -6821,9 +6852,8 @@ void MainWindow::ExportDetailsAs(bool checked)
     }
     catch (VException &e)
     {
-        QMessageBox::warning(this, tr("Export details"),
-                             tr("Can't export details.") + QStringLiteral(" \n") + e.ErrorMessage(), QMessageBox::Ok,
-                             QMessageBox::Ok);
+        QMessageBox::warning(this, tr("Export details"), tr("Can't export details.") + " \n"_L1 + e.ErrorMessage(),
+                             QMessageBox::Ok, QMessageBox::Ok);
         return;
     }
 
@@ -6831,6 +6861,9 @@ void MainWindow::ExportDetailsAs(bool checked)
     {
         m_dialogSaveLayout =
             QSharedPointer<DialogSaveLayout>(new DialogSaveLayout(1, Draw::Modeling, FileName(), this));
+
+        VValentinaSettings *settings = VAbstractValApplication::VApp()->ValentinaSettings();
+        m_dialogSaveLayout->SetBoundaryTogetherWithNotches(settings->IsBoundaryTogetherWithNotches());
 
         if (m_dialogSaveLayout->exec() == QDialog::Rejected)
         {

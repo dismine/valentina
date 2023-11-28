@@ -33,16 +33,15 @@
 #include "../ifc/ifcdef.h"
 #include "../ifc/xml/vabstractpattern.h"
 #include "../vmisc/def.h"
-#include "../vmisc/vabstractapplication.h"
+#include "../vmisc/vabstractvalapplication.h"
+#include "../vtools/tools/vabstracttool.h"
 #include "../vundocommand.h"
 #include "moveabstractlabel.h"
-#include "../vtools/tools/vabstracttool.h"
-#include "../vwidgets/vmaingraphicsview.h"
 
 //---------------------------------------------------------------------------------------------------------------------
 MoveLabel::MoveLabel(VAbstractPattern *doc, const QPointF &pos, const quint32 &id, QUndoCommand *parent)
-    : MoveAbstractLabel(doc, id, pos, parent),
-      m_scene(VAbstractValApplication::VApp()->getCurrentScene())
+  : MoveAbstractLabel(doc, id, pos, parent),
+    m_scene(VAbstractValApplication::VApp()->getCurrentScene())
 {
     setText(tr("move point label"));
 
@@ -64,7 +63,7 @@ MoveLabel::MoveLabel(VAbstractPattern *doc, const QPointF &pos, const quint32 &i
 //---------------------------------------------------------------------------------------------------------------------
 auto MoveLabel::mergeWith(const QUndoCommand *command) -> bool
 {
-    const MoveLabel *moveCommand = static_cast<const MoveLabel *>(command);
+    const auto *moveCommand = static_cast<const MoveLabel *>(command);
     SCASSERT(moveCommand != nullptr)
 
     if (moveCommand->GetPointId() != nodeId)
@@ -97,7 +96,7 @@ void MoveLabel::Do(const QPointF &pos)
         doc->SetAttribute(domElement, AttrMx, QString().setNum(VAbstractValApplication::VApp()->fromPixel(pos.x())));
         doc->SetAttribute(domElement, AttrMy, QString().setNum(VAbstractValApplication::VApp()->fromPixel(pos.y())));
 
-        if (VAbstractTool *tool = qobject_cast<VAbstractTool *>(VAbstractPattern::getTool(nodeId)))
+        if (auto *tool = qobject_cast<VAbstractTool *>(VAbstractPattern::getTool(nodeId)))
         {
             tool->ChangeLabelPosition(nodeId, pos);
         }

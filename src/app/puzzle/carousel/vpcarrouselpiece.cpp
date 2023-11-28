@@ -32,6 +32,7 @@
 #include <QMenu>
 #include <QPainter>
 
+#include "../layout/vplayout.h"
 #include "../layout/vppiece.h"
 #include "../vmisc/theme/vscenestylesheet.h"
 
@@ -139,7 +140,14 @@ auto VPCarrouselPiece::CreatePieceIcon(const QSize &size, bool isDragIcon) const
         painter.setBrush(QBrush(iconMode == QIcon::Selected ? style.CarrouselPieceSelectedColor()
                                                             : style.CarrouselPieceForegroundColor()));
 
-        piece->DrawMiniature(painter);
+        bool togetherWithNotches = false;
+        VPLayoutPtr pieceLayout = piece->Layout();
+        if (not pieceLayout.isNull())
+        {
+            togetherWithNotches = pieceLayout->LayoutSettings().IsBoundaryTogetherWithNotches();
+        }
+
+        piece->DrawMiniature(painter, togetherWithNotches);
 
         painter.end();
 

@@ -83,6 +83,9 @@ public:
     auto DxfVersion() const -> int;
     void SetDxfVersion(int dxfVersion);
 
+    void SetBoundaryTogetherWithNotches(bool value);
+    auto IsBoundaryTogetherWithNotches() const -> bool;
+
     void ExportToSVG(QGraphicsScene *scene, const QList<QGraphicsItem *> &details) const;
     void ExportToPNG(QGraphicsScene *scene, const QList<QGraphicsItem *> &details) const;
     void ExportToTIF(QGraphicsScene *scene, const QList<QGraphicsItem *> &details) const;
@@ -134,6 +137,7 @@ private:
     bool m_singleLineFont{false};
     bool m_singleStrokeOutlineFont{false};
     int m_penWidth{1};
+    bool m_togetherWithNotches{false};
 
     void ExportToPDF(QGraphicsScene *scene, const QList<QGraphicsItem *> &details, const QString &filename) const;
 };
@@ -268,6 +272,18 @@ inline auto VLayoutExporter::DxfVersion() const -> int
 inline void VLayoutExporter::SetDxfVersion(int dxfVersion)
 {
     m_dxfVersion = dxfVersion;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+inline void VLayoutExporter::SetBoundaryTogetherWithNotches(bool value)
+{
+    m_togetherWithNotches = value;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+inline auto VLayoutExporter::IsBoundaryTogetherWithNotches() const -> bool
+{
+    return m_togetherWithNotches;
 }
 
 //---------------------------------------------------------------------------------------------------------------------

@@ -30,31 +30,33 @@
 #define VBANK_H
 
 #include <QHash>
+#include <QLoggingCategory>
 #include <QMap>
 #include <QRectF>
 #include <QVector>
 #include <QtGlobal>
-#include <QLoggingCategory>
 
 #include "../vmisc/typedef.h"
-#include "vlayoutpiece.h"
 #include "vlayoutdef.h"
+#include "vlayoutpiece.h"
 
 // An annoying char define, from the Windows team in <rpcndr.h>
 // #define small char
 // http://stuartjames.info/Journal/c--visual-studio-2012-vs2012--win8--converting-projects-up-some-conflicts-i-found.aspx
-#if defined (Q_OS_WIN) && defined (Q_CC_MSVC)
+#if defined(Q_OS_WIN) && defined(Q_CC_MSVC)
 #pragma push_macro("small")
 #undef small
 #endif
 
-Q_DECLARE_LOGGING_CATEGORY(lBank)
+Q_DECLARE_LOGGING_CATEGORY(lBank) // NOLINT
 
 class VBank
 {
     Q_DECLARE_TR_FUNCTIONS(VBank) // NOLINT
+
 public:
     VBank();
+    ~VBank() = default;
 
     auto GetLayoutWidth() const -> qreal;
     void SetLayoutWidth(qreal value);
@@ -73,7 +75,7 @@ public:
     void NotArranged(int i);
 
     auto PrepareUnsorted() -> bool;
-    auto PrepareDetails() -> bool;
+    auto PrepareDetails(bool togetherWithNotches) -> bool;
     void Reset();
     void SetCaseType(Cases caseType);
 
@@ -122,7 +124,7 @@ private:
     auto ArrangedDetail(QMap<uint, QMultiMap<qint64, int>> &container, int i) -> bool;
 };
 
-#if defined (Q_OS_WIN) && defined (Q_CC_MSVC)
+#if defined(Q_OS_WIN) && defined(Q_CC_MSVC)
 #pragma pop_macro("small")
 #endif
 

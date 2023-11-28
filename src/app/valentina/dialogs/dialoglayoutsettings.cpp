@@ -384,6 +384,30 @@ void DialogLayoutSettings::SetNestQuantity(bool state)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+void DialogLayoutSettings::SetBoundaryTogetherWithNotches(bool value)
+{
+    ui->checkBoxTogetherWithNotches->setChecked(value);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+auto DialogLayoutSettings::IsBoundaryTogetherWithNotches() const -> bool
+{
+    return ui->checkBoxTogetherWithNotches->isChecked();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void DialogLayoutSettings::SetShowLayoutAllowance(bool value)
+{
+    ui->checkBoxShowLayoutAllowance->setChecked(value);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+auto DialogLayoutSettings::IsShowLayoutAllowance() const -> bool
+{
+    return ui->checkBoxShowLayoutAllowance->isChecked();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 auto DialogLayoutSettings::SelectedPrinter() const -> QString
 {
     return ui->comboBoxPrinter->currentText();
@@ -641,6 +665,8 @@ void DialogLayoutSettings::DialogAccepted()
     m_generator->SetMultiplier(GetMultiplier());
     m_generator->SetTextAsPaths(IsTextAsPaths());
     m_generator->SetNestQuantity(IsNestQuantity());
+    m_generator->SetBoundaryTogetherWithNotches(IsBoundaryTogetherWithNotches());
+    m_generator->SetShowLayoutAllowance(IsShowLayoutAllowance());
 
     if (IsIgnoreAllFields())
     {
@@ -712,6 +738,7 @@ void DialogLayoutSettings::RestoreDefaults()
     SetEfficiencyCoefficient(VValentinaSettings::GetDefEfficiencyCoefficient());
     SetNestQuantity(VValentinaSettings::GetDefLayoutNestQuantity());
     SetPreferOneSheetSolution(VValentinaSettings::GetDefLayoutPreferOneSheetSolution());
+    SetBoundaryTogetherWithNotches(VValentinaSettings::GetDefLayoutBoundaryTogetherWithNotches());
 
     CorrectMaxFileds();
     IgnoreAllFields(ui->checkBoxIgnoreFileds->isChecked());
@@ -1037,6 +1064,7 @@ void DialogLayoutSettings::ReadSettings()
     SetMultiplier(settings->GetMultiplier());
     SetTextAsPaths(settings->GetTextAsPaths());
     SetNestQuantity(settings->GetLayoutNestQuantity());
+    SetBoundaryTogetherWithNotches(settings->GetLayoutBoundaryTogetherWithNotches());
 
     FindTemplate();
 
@@ -1067,6 +1095,7 @@ void DialogLayoutSettings::WriteSettings() const
     settings->SetNestingTime(GetNestingTime());
     settings->SetEfficiencyCoefficient(GetEfficiencyCoefficient());
     settings->SetLayoutNestQuantity(IsNestQuantity());
+    settings->SetLayoutBoundaryTogetherWithNotches(IsBoundaryTogetherWithNotches());
 }
 
 //---------------------------------------------------------------------------------------------------------------------

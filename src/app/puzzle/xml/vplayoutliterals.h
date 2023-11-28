@@ -81,6 +81,7 @@ extern const QString AttrBottom;
 extern const QString AttrWidth;
 extern const QString AttrLength;
 extern const QString AttrFollowGrainline;
+extern const QString AttrBoundaryTogetherWithNotches;
 extern const QString AttrUID;
 extern const QString AttrMirrored;
 extern const QString AttrForbidFlipping;

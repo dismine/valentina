@@ -199,3 +199,21 @@ void VHPGLPaintDevice::SetShowGrainline(bool newShowGrainline)
     }
     m_engine->SetShowGrainline(newShowGrainline);
 }
+
+//---------------------------------------------------------------------------------------------------------------------
+void VHPGLPaintDevice::SetBoundaryTogetherWithNotches(bool value)
+{
+    if (m_engine->isActive())
+    {
+        qWarning("VHPGLPaintDevice::SetBoundaryTogetherWithNotches(), cannot set boundary together with notches while "
+                 "HPGL is being generated");
+        return;
+    }
+    m_engine->SetBoundaryTogetherWithNotches(value);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+auto VHPGLPaintDevice::IsBoundaryTogetherWithNotches() const -> bool
+{
+    return m_engine->IsBoundaryTogetherWithNotches();
+}

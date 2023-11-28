@@ -39,6 +39,7 @@
 #include <QMessageLogger>
 #include <QPainterPath>
 #include <QPoint>
+#include <QPolygon>
 #include <QPolygonF>
 #include <QTransform>
 #include <QUuid>
@@ -51,6 +52,7 @@
 #include "../vgeometry/vlayoutplacelabel.h"
 #include "../vgeometry/vplacelabelitem.h"
 #include "../vgeometry/vpointf.h"
+#include "../vlayout/vabstractpiece.h"
 #include "../vmisc/compatibility.h"
 #include "../vmisc/literals.h"
 #include "../vmisc/svgfont/vsvgfontdatabase.h"
@@ -65,6 +67,7 @@
 #include "../vpatterndb/vpassmark.h"
 #include "../vpatterndb/vpiecenode.h"
 #include "../vwidgets/vpiecegrainline.h"
+#include "vboundary.h"
 #include "vgraphicsfillitem.h"
 #include "vlayoutpiece_p.h"
 #include "vtextmanager.h"
@@ -241,14 +244,6 @@ auto ConvertPlaceLabels(const VPiece &piece, const VContainer *pattern) -> QVect
 auto PrepareSAPassmark(const VPiece &piece, const VContainer *pattern, const VPassmark &passmark, PassmarkSide side,
                        bool &ok) -> VLayoutPassmark
 {
-    QT_WARNING_PUSH
-    QT_WARNING_DISABLE_GCC("-Wnoexcept")
-    // noexcept-expression evaluates to 'false' because of a call to 'constexpr QPointF::QPointF()'
-
-    VLayoutPassmark layoutPassmark;
-
-    QT_WARNING_POP
-
     VPiecePassmarkData pData = passmark.Data();
     const QVector<VPieceNode> path = piece.GetUnitedPath(pattern);
     const int nodeIndex = VPiecePath::indexOfNode(path, pData.id);
@@ -276,7 +271,15 @@ auto PrepareSAPassmark(const VPiece &piece, const VContainer *pattern, const VPa
         return {};
     }
 
-    if (side == PassmarkSide::All || side == PassmarkSide::Right)
+    QT_WARNING_PUSH
+    QT_WARNING_DISABLE_GCC("-Wnoexcept")
+    // noexcept-expression evaluates to 'false' because of a call to 'constexpr QPointF::QPointF()'
+
+    VLayoutPassmark layoutPassmark;
+
+    QT_WARNING_POP
+
+    if (side == PassmarkSide::All || side == PassmarkSide::Left)
     {
         layoutPassmark.baseLine = baseLines.constFirst();
     }
@@ -301,6 +304,7 @@ auto PrepareSAPassmark(const VPiece &piece, const VContainer *pattern, const VPa
     layoutPassmark.type = pData.passmarkLineType;
     layoutPassmark.isBuiltIn = false;
     layoutPassmark.isClockwiseOpening = pData.passmarkSAPoint.IsPassmarkClockwiseOpening();
+    layoutPassmark.label = pData.nodeName;
 
     ok = true;
     return layoutPassmark;
@@ -364,90 +368,10 @@ auto PreapreBuiltInSAPassmark(const VPiece &piece, const VContainer *pattern, co
     layoutPassmark.type = pData.passmarkLineType;
     layoutPassmark.isBuiltIn = true;
     layoutPassmark.isClockwiseOpening = pData.passmarkSAPoint.IsPassmarkClockwiseOpening();
+    layoutPassmark.label = pData.nodeName;
 
     ok = true;
     return layoutPassmark;
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-auto ConvertPassmarks(const VPiece &piece, const VContainer *pattern) -> QVector<VLayoutPassmark>
-{
-    const QVector<VPassmark> passmarks = piece.Passmarks(pattern);
-    QVector<VLayoutPassmark> layoutPassmarks;
-    layoutPassmarks.reserve(passmarks.size());
-
-    for (const auto &passmark : passmarks)
-    {
-        if (passmark.IsNull())
-        {
-            continue;
-        }
-
-        auto AddPassmark = [passmark, piece, pattern, &layoutPassmarks](PassmarkSide side)
-        {
-            bool ok = false;
-            VLayoutPassmark layoutPassmark = PrepareSAPassmark(piece, pattern, passmark, side, ok);
-            if (ok)
-            {
-                layoutPassmarks.append(layoutPassmark);
-            }
-        };
-
-        auto AddBuiltInPassmark = [passmark, piece, pattern, &layoutPassmarks]()
-        {
-            bool ok = false;
-            VLayoutPassmark layoutPassmark = PreapreBuiltInSAPassmark(piece, pattern, passmark, ok);
-            if (ok)
-            {
-                layoutPassmarks.append(layoutPassmark);
-            }
-        };
-
-        if (piece.IsSeamAllowanceBuiltIn())
-        {
-            AddBuiltInPassmark();
-            continue;
-        }
-
-        VPiecePassmarkData pData = passmark.Data();
-
-        switch (pData.passmarkAngleType)
-        {
-            case PassmarkAngleType::Straightforward:
-            case PassmarkAngleType::Bisector:
-                AddPassmark(PassmarkSide::All);
-                break;
-            case PassmarkAngleType::Intersection:
-            case PassmarkAngleType::Intersection2:
-                AddPassmark(PassmarkSide::Left);
-                AddPassmark(PassmarkSide::Right);
-                break;
-            case PassmarkAngleType::IntersectionOnlyLeft:
-            case PassmarkAngleType::Intersection2OnlyLeft:
-                AddPassmark(PassmarkSide::Left);
-                break;
-            case PassmarkAngleType::IntersectionOnlyRight:
-            case PassmarkAngleType::Intersection2OnlyRight:
-                AddPassmark(PassmarkSide::Right);
-                break;
-            default:
-                break;
-        }
-
-        if (VAbstractApplication::VApp()->Settings()->IsDoublePassmark() &&
-            (VAbstractApplication::VApp()->Settings()->IsPieceShowMainPath() || not piece.IsHideMainPath()) &&
-            pData.isMainPathNode && pData.passmarkAngleType != PassmarkAngleType::Intersection &&
-            pData.passmarkAngleType != PassmarkAngleType::IntersectionOnlyLeft &&
-            pData.passmarkAngleType != PassmarkAngleType::IntersectionOnlyRight &&
-            pData.passmarkAngleType != PassmarkAngleType::Intersection2 &&
-            pData.passmarkAngleType != PassmarkAngleType::Intersection2OnlyLeft &&
-            pData.passmarkAngleType != PassmarkAngleType::Intersection2OnlyRight && pData.isShowSecondPassmark)
-        {
-            AddBuiltInPassmark();
-        }
-    }
-
-    return layoutPassmarks;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -640,7 +564,8 @@ auto VLayoutPiece::Create(const VPiece &piece, vidtype id, const VContainer *pat
     QFuture<QVector<VLayoutPoint>> futureMainPath =
         QtConcurrent::run([piece, pattern]() { return piece.MainPathPoints(pattern); });
     QFuture<QVector<VLayoutPiecePath>> futureInternalPaths = QtConcurrent::run(ConvertInternalPaths, piece, pattern);
-    QFuture<QVector<VLayoutPassmark>> futurePassmarks = QtConcurrent::run(ConvertPassmarks, piece, pattern);
+    QFuture<QVector<VLayoutPassmark>> futurePassmarks =
+        QtConcurrent::run(VLayoutPiece::ConvertPassmarks, piece, pattern);
     QFuture<QVector<VLayoutPlaceLabel>> futurePlaceLabels = QtConcurrent::run(ConvertPlaceLabels, piece, pattern);
 
     VLayoutPiece det;
@@ -676,7 +601,7 @@ auto VLayoutPiece::Create(const VPiece &piece, vidtype id, const VContainer *pat
     det.SetPriority(piece.GetPriority());
 
     // Very important to set main path first!
-    if (det.MappedContourPath().isEmpty())
+    if (det.MappedContourPath(false, false).isEmpty())
     {
         throw VException(tr("Piece %1 doesn't have shape.").arg(piece.GetName()));
     }
@@ -1233,7 +1158,7 @@ auto VLayoutPiece::isNull() const -> bool
 {
     if (not d->m_contour.isEmpty() && d->m_layoutWidth > 0)
     {
-        return not(IsSeamAllowance() && not IsSeamAllowanceBuiltIn() && not d->m_seamAllowance.isEmpty());
+        return !IsSeamAllowance() || IsSeamAllowanceBuiltIn() || d->m_seamAllowance.isEmpty();
     }
     return true;
 }
@@ -1245,40 +1170,46 @@ auto VLayoutPiece::Square() const -> qint64
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VLayoutPiece::SetLayoutAllowancePoints()
+void VLayoutPiece::SetLayoutAllowancePoints(bool togetherWithNotches)
 {
     d->m_square = 0;
 
     if (d->m_layoutWidth > 0)
     {
-        if (IsSeamAllowance() && not IsSeamAllowanceBuiltIn())
-        {
-            QVector<VSAPoint> seamAllowancePoints;
-            CastTo(GetMappedSeamAllowancePoints(), seamAllowancePoints);
-            CastTo(Equidistant(seamAllowancePoints, d->m_layoutWidth, GetName()), d->m_layoutAllowance);
-            if (not d->m_layoutAllowance.isEmpty())
-            {
-                d->m_layoutAllowance.removeLast();
+        QVector<VLayoutPoint> pieceBoundary = IsSeamAllowance() && not IsSeamAllowanceBuiltIn()
+                                                  ? GetMappedSeamAllowancePoints()
+                                                  : GetMappedContourPoints();
 
-                QVector<QPointF> points;
-                CastTo(GetSeamAllowancePoints(), points);
-                d->m_square = qFloor(qAbs(SumTrapezoids(points) / 2.0));
+        if (togetherWithNotches)
+        {
+            const QVector<VLayoutPassmark> passmarks = GetMappedPassmarks();
+            bool seamAllowance = IsSeamAllowance() && !IsSeamAllowanceBuiltIn();
+            bool builtInSeamAllowance = IsSeamAllowance() && IsSeamAllowanceBuiltIn();
+
+            VBoundary boundary(pieceBoundary, seamAllowance, builtInSeamAllowance);
+            boundary.SetPieceName(GetName());
+            const QList<VBoundarySequenceItemData> sequence = boundary.Combine(passmarks, false, true);
+
+            pieceBoundary.clear();
+
+            for (const auto &item : sequence)
+            {
+                pieceBoundary += item.item.value<VLayoutPiecePath>().Points();
             }
         }
-        else
-        {
-            QVector<VSAPoint> seamLinePoints;
-            CastTo(GetMappedContourPoints(), seamLinePoints);
-            CastTo(Equidistant(seamLinePoints, d->m_layoutWidth, GetName()), d->m_layoutAllowance);
-            if (not d->m_layoutAllowance.isEmpty())
-            {
-                d->m_layoutAllowance.removeLast();
 
-                QVector<QPointF> points;
-                CastTo(GetContourPoints(), points);
-                d->m_square = qFloor(qAbs(SumTrapezoids(points) / 2.0));
-            }
+        QVector<VSAPoint> pieceBoundaryPoints;
+        CastTo(pieceBoundary, pieceBoundaryPoints);
+        CastTo(Equidistant(pieceBoundaryPoints, d->m_layoutWidth, GetName()), d->m_layoutAllowance);
+        if (not d->m_layoutAllowance.isEmpty())
+        {
+            d->m_layoutAllowance.removeLast();
         }
+
+        QVector<QPointF> points;
+        CastTo(IsSeamAllowance() && not IsSeamAllowanceBuiltIn() ? GetSeamAllowancePoints() : GetContourPoints(),
+               points);
+        d->m_square = qFloor(qAbs(SumTrapezoids(points) / 2.0));
     }
     else
     {
@@ -1362,20 +1293,40 @@ void VLayoutPiece::SetInternalPaths(const QVector<VLayoutPiecePath> &internalPat
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-auto VLayoutPiece::MappedContourPath() const -> QPainterPath
+auto VLayoutPiece::MappedContourPath(bool togetherWithNotches, bool showLayoutAllowance) const -> QPainterPath
 {
-    return d->m_matrix.map(ContourPath());
+    return d->m_matrix.map(ContourPath(togetherWithNotches, showLayoutAllowance));
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-auto VLayoutPiece::ContourPath() const -> QPainterPath
+auto VLayoutPiece::ContourPath(bool togetherWithNotches, bool showLayoutAllowance) const -> QPainterPath
 {
     QPainterPath path;
 
-    // contour
+    // sew line
     if (not IsHideMainPath() || not IsSeamAllowance() || IsSeamAllowanceBuiltIn())
     {
-        path = VGObject::PainterPath(GetContourPoints());
+        if (togetherWithNotches)
+        {
+            bool seamAllowance = IsSeamAllowance() && IsSeamAllowanceBuiltIn();
+            bool builtInSeamAllowance = IsSeamAllowance() && IsSeamAllowanceBuiltIn();
+
+            VBoundary boundary(d->m_contour, seamAllowance, builtInSeamAllowance);
+            boundary.SetPieceName(GetName());
+            const QList<VBoundarySequenceItemData> sequence = boundary.Combine(d->m_passmarks, true, false);
+
+            for (const auto &item : sequence)
+            {
+                const auto itemPath = item.item.value<VLayoutPiecePath>().Points();
+                QVector<QPointF> convertedPoints;
+                CastTo(itemPath, convertedPoints);
+                path.addPolygon(QPolygonF(convertedPoints));
+            }
+        }
+        else
+        {
+            path = VGObject::PainterPath(GetContourPoints());
+        }
     }
 
     // seam allowance
@@ -1384,37 +1335,53 @@ auto VLayoutPiece::ContourPath() const -> QPainterPath
         if (not IsSeamAllowanceBuiltIn())
         {
             // Draw seam allowance
-            QVector<VLayoutPoint> points = GetSeamAllowancePoints();
-
-            if (points.constLast().toPoint() != points.constFirst().toPoint())
+            if (togetherWithNotches)
             {
-                points.append(points.at(0)); // Should be always closed
-            }
+                VBoundary boundary(d->m_seamAllowance, true);
+                boundary.SetPieceName(GetName());
+                const QList<VBoundarySequenceItemData> sequence = boundary.Combine(d->m_passmarks, true, false);
 
-            QPainterPath ekv;
-            ekv.moveTo(points.at(0));
-            for (qint32 i = 1; i < points.count(); ++i)
+                for (const auto &item : sequence)
+                {
+                    const auto itemPath = item.item.value<VLayoutPiecePath>().Points();
+                    QVector<QPointF> convertedPoints;
+                    CastTo(itemPath, convertedPoints);
+                    path.addPolygon(QPolygonF(convertedPoints));
+                }
+            }
+            else
             {
-                ekv.lineTo(points.at(i));
-            }
+                QVector<VLayoutPoint> points = d->m_seamAllowance;
+                if (points.constLast().toPoint() != points.constFirst().toPoint())
+                {
+                    points.append(points.at(0)); // Should be always closed
+                }
 
-            path.addPath(ekv);
+                path.addPath(VGObject::PainterPath(points));
+            }
         }
 
-        // Draw passmarks
-        QPainterPath passmaksPath;
-        const QVector<VLayoutPassmark> passmarks = GetPassmarks();
-        for (const auto &passmark : passmarks)
+        if (!togetherWithNotches)
         {
-            for (const auto &line : passmark.lines)
+            // Draw passmarks
+            QPainterPath passmaksPath;
+            for (const auto &passmark : d->m_passmarks)
             {
-                passmaksPath.moveTo(line.p1());
-                passmaksPath.lineTo(line.p2());
+                for (const auto &line : passmark.lines)
+                {
+                    passmaksPath.moveTo(line.p1());
+                    passmaksPath.lineTo(line.p2());
+                }
             }
+            path.addPath(passmaksPath);
         }
 
-        path.addPath(passmaksPath);
         path.setFillRule(Qt::WindingFill);
+    }
+
+    if (showLayoutAllowance)
+    {
+        path.addPath(VGObject::PainterPath(d->m_layoutAllowance));
     }
 
     return path;
@@ -1427,9 +1394,9 @@ auto VLayoutPiece::MappedLayoutAllowancePath() const -> QPainterPath
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VLayoutPiece::DrawMiniature(QPainter &painter) const
+void VLayoutPiece::DrawMiniature(QPainter &painter, bool togetherWithNotches) const
 {
-    painter.drawPath(ContourPath());
+    painter.drawPath(ContourPath(togetherWithNotches, false));
 
     for (const auto &path : d->m_internalPaths)
     {
@@ -1453,9 +1420,10 @@ void VLayoutPiece::DrawMiniature(QPainter &painter) const
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-auto VLayoutPiece::GetItem(bool textAsPaths) const -> QGraphicsItem *
+auto VLayoutPiece::GetItem(bool textAsPaths, bool togetherWithNotches, bool showLayoutAllowance) const
+    -> QGraphicsItem *
 {
-    QGraphicsPathItem *item = GetMainItem();
+    QGraphicsPathItem *item = GetMainItem(togetherWithNotches, showLayoutAllowance);
 
     for (const auto &path : d->m_internalPaths)
     {
@@ -1485,10 +1453,31 @@ auto VLayoutPiece::GetItem(bool textAsPaths) const -> QGraphicsItem *
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-auto VLayoutPiece::IsLayoutAllowanceValid() const -> bool
+auto VLayoutPiece::IsLayoutAllowanceValid(bool togetherWithNotches) const -> bool
 {
     QVector<VLayoutPoint> base =
         (IsSeamAllowance() && not IsSeamAllowanceBuiltIn()) ? d->m_seamAllowance : d->m_contour;
+
+    if (togetherWithNotches)
+    {
+        const QVector<VLayoutPassmark> passmarks = GetMappedPassmarks();
+        bool seamAllowance = IsSeamAllowance() && !IsSeamAllowanceBuiltIn();
+        bool builtInSeamAllowance = IsSeamAllowance() && IsSeamAllowanceBuiltIn();
+
+        VBoundary boundary(base, seamAllowance, builtInSeamAllowance);
+        boundary.SetPieceName(GetName());
+        const QList<VBoundarySequenceItemData> sequence = boundary.Combine(passmarks, false, true);
+
+        base.clear();
+
+        for (const auto &item : sequence)
+        {
+            base += item.item.value<VLayoutPiecePath>().Points();
+        }
+
+        base = VAbstractPiece::RemoveDublicates(base, false);
+    }
+
     QVector<QPointF> points;
     CastTo(base, points);
     return VAbstractPiece::IsAllowanceValid(points, d->m_layoutAllowance);
@@ -1820,13 +1809,13 @@ auto VLayoutPiece::DetailPath() const -> QVector<VLayoutPoint>
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-auto VLayoutPiece::GetMainItem() const -> QGraphicsPathItem *
+auto VLayoutPiece::GetMainItem(bool togetherWithNotches, bool showLayoutAllowance) const -> QGraphicsPathItem *
 {
     auto *item = new QGraphicsPathItem();
     QPen pen = item->pen();
     pen.setWidthF(VAbstractApplication::VApp()->Settings()->WidthHairLine());
     item->setPen(pen);
-    item->setPath(MappedContourPath());
+    item->setPath(MappedContourPath(togetherWithNotches, showLayoutAllowance));
     return item;
 }
 
@@ -1952,4 +1941,85 @@ auto VLayoutPiece::EdgeByPoint(const QVector<QPointF> &path, const QPointF &p1) 
 template <class T> auto VLayoutPiece::Map(QVector<T> points) const -> QVector<T>
 {
     return MapVector(points, d->m_matrix, d->m_mirror);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+auto VLayoutPiece::ConvertPassmarks(const VPiece &piece, const VContainer *pattern) -> QVector<VLayoutPassmark>
+{
+    const QVector<VPassmark> passmarks = piece.Passmarks(pattern);
+    QVector<VLayoutPassmark> layoutPassmarks;
+    layoutPassmarks.reserve(passmarks.size());
+
+    for (const auto &passmark : passmarks)
+    {
+        if (passmark.IsNull())
+        {
+            continue;
+        }
+
+        auto AddPassmark = [passmark, piece, pattern, &layoutPassmarks](PassmarkSide side)
+        {
+            bool ok = false;
+            VLayoutPassmark layoutPassmark = PrepareSAPassmark(piece, pattern, passmark, side, ok);
+            if (ok)
+            {
+                layoutPassmarks.append(layoutPassmark);
+            }
+        };
+
+        auto AddBuiltInPassmark = [passmark, piece, pattern, &layoutPassmarks]()
+        {
+            bool ok = false;
+            VLayoutPassmark layoutPassmark = PreapreBuiltInSAPassmark(piece, pattern, passmark, ok);
+            if (ok)
+            {
+                layoutPassmarks.append(layoutPassmark);
+            }
+        };
+
+        if (piece.IsSeamAllowanceBuiltIn())
+        {
+            AddBuiltInPassmark();
+            continue;
+        }
+
+        VPiecePassmarkData pData = passmark.Data();
+
+        switch (pData.passmarkAngleType)
+        {
+            case PassmarkAngleType::Straightforward:
+            case PassmarkAngleType::Bisector:
+                AddPassmark(PassmarkSide::All);
+                break;
+            case PassmarkAngleType::Intersection:
+            case PassmarkAngleType::Intersection2:
+                AddPassmark(PassmarkSide::Left);
+                AddPassmark(PassmarkSide::Right);
+                break;
+            case PassmarkAngleType::IntersectionOnlyLeft:
+            case PassmarkAngleType::Intersection2OnlyLeft:
+                AddPassmark(PassmarkSide::Left);
+                break;
+            case PassmarkAngleType::IntersectionOnlyRight:
+            case PassmarkAngleType::Intersection2OnlyRight:
+                AddPassmark(PassmarkSide::Right);
+                break;
+            default:
+                break;
+        }
+
+        if (VAbstractApplication::VApp()->Settings()->IsDoublePassmark() &&
+            (VAbstractApplication::VApp()->Settings()->IsPieceShowMainPath() || not piece.IsHideMainPath()) &&
+            pData.isMainPathNode && pData.passmarkAngleType != PassmarkAngleType::Intersection &&
+            pData.passmarkAngleType != PassmarkAngleType::IntersectionOnlyLeft &&
+            pData.passmarkAngleType != PassmarkAngleType::IntersectionOnlyRight &&
+            pData.passmarkAngleType != PassmarkAngleType::Intersection2 &&
+            pData.passmarkAngleType != PassmarkAngleType::Intersection2OnlyLeft &&
+            pData.passmarkAngleType != PassmarkAngleType::Intersection2OnlyRight && pData.isShowSecondPassmark)
+        {
+            AddBuiltInPassmark();
+        }
+    }
+
+    return layoutPassmarks;
 }

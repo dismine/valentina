@@ -165,6 +165,7 @@ auto VCommandLine::DefaultGenerator() const -> VLayoutGeneratorPtr
     diag.SetUnitePages(IsOptionSet(LONG_OPTION_UNITE));
     diag.SetSaveLength(IsOptionSet(LONG_OPTION_SAVELENGTH));
     diag.SetPreferOneSheetSolution(IsOptionSet(LONG_OPTION_PREFER_ONE_SHEET_SOLUTION));
+    diag.SetBoundaryTogetherWithNotches(IsOptionSet(LONG_OPTION_BOUNDARY_TOGETHER_WITH_NOTCHES));
     diag.SetGroup(OptGroup());
 
     if (IsOptionSet(LONG_OPTION_IGNORE_MARGINS))
@@ -718,6 +719,8 @@ void VCommandLine::InitCommandLineOptions()
                                    "supports only a maximum of 32768x32768 px images.")},
         {LONG_OPTION_PREFER_ONE_SHEET_SOLUTION,
          translate("VCommandLine", "Prefer one sheet layout solution (export mode).")},
+        {LONG_OPTION_BOUNDARY_TOGETHER_WITH_NOTCHES,
+         translate("VCommandLine", "Export boundary together with notches (export mode).")},
         //==============================================================================================================
         {{SINGLE_OPTION_SAVELENGTH, LONG_OPTION_SAVELENGTH},
          translate("VCommandLine", "Save length of the sheet if set (export mode). The option tells the program to use "

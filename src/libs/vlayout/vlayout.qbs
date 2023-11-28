@@ -55,7 +55,9 @@ VLib {
             "vabstractpiece.cpp",
             "vlayoutpiece.cpp",
             "vlayoutpiecepath.cpp",
-            "vrawsapoint.cpp"
+            "vrawsapoint.cpp",
+            "vboundary.h",
+            "vboundary.cpp"
         ];
 
         if (Qt.core.versionMajor >= 5 && Qt.core.versionMinor < 12) {

@@ -1435,8 +1435,7 @@ void VPattern::ParsePointElement(VMainGraphicsScene *scene, QDomElement &domElem
             ParsePlaceLabel(domElement, parse);
             break;
         default:
-            VException e(tr("Unknown point type '%1'.").arg(type));
-            throw e;
+            throw VException(tr("Unknown point type '%1'.").arg(type));
     }
 }
 

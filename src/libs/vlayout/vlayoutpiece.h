@@ -95,6 +95,7 @@ public:
 #endif
 
     static auto Create(const VPiece &piece, vidtype id, const VContainer *pattern) -> VLayoutPiece;
+    static auto ConvertPassmarks(const VPiece &piece, const VContainer *pattern) -> QVector<VLayoutPassmark>;
 
     auto GetUniqueID() const -> QString override;
 
@@ -109,7 +110,7 @@ public:
 
     auto GetMappedLayoutAllowancePoints() const -> QVector<QPointF>;
     auto GetLayoutAllowancePoints() const -> QVector<QPointF>;
-    void SetLayoutAllowancePoints();
+    void SetLayoutAllowancePoints(bool togetherWithNotches);
 
     auto GetMappedExternalContourPoints() const -> QVector<VLayoutPoint>;
     auto GetExternalContourPoints() const -> QVector<VLayoutPoint>;
@@ -204,15 +205,16 @@ public:
     auto isNull() const -> bool;
     auto Square() const -> qint64;
 
-    auto MappedContourPath() const -> QPainterPath;
-    auto ContourPath() const -> QPainterPath;
+    auto MappedContourPath(bool togetherWithNotches, bool showLayoutAllowance) const -> QPainterPath;
+    auto ContourPath(bool togetherWithNotches, bool showLayoutAllowance) const -> QPainterPath;
     auto MappedLayoutAllowancePath() const -> QPainterPath;
 
-    void DrawMiniature(QPainter &painter) const;
+    void DrawMiniature(QPainter &painter, bool togetherWithNotches) const;
 
-    Q_REQUIRED_RESULT auto GetItem(bool textAsPaths) const -> QGraphicsItem *;
+    Q_REQUIRED_RESULT auto GetItem(bool textAsPaths, bool togetherWithNotches, bool showLayoutAllowance) const
+        -> QGraphicsItem *;
 
-    auto IsLayoutAllowanceValid() const -> bool;
+    auto IsLayoutAllowanceValid(bool togetherWithNotches) const -> bool;
 
     auto BiggestEdge() const -> qreal;
 
@@ -238,7 +240,7 @@ private:
 
     auto DetailPath() const -> QVector<VLayoutPoint>;
 
-    Q_REQUIRED_RESULT auto GetMainItem() const -> QGraphicsPathItem *;
+    Q_REQUIRED_RESULT auto GetMainItem(bool togetherWithNotches, bool showLayoutAllowance) const -> QGraphicsPathItem *;
     Q_REQUIRED_RESULT auto GetMainPathItem() const -> QGraphicsPathItem *;
 
     void LabelStringsSVGFont(QGraphicsItem *parent, const QVector<QPointF> &labelShape, const VTextManager &tm,

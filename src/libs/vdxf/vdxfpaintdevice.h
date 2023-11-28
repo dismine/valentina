@@ -72,6 +72,9 @@ public:
     auto GetYScale() const -> qreal;
     void SetYScale(const qreal &yscale);
 
+    void SetBoundaryTogetherWithNotches(bool value);
+    auto IsBoundaryTogetherWithNotches() const -> bool;
+
     auto ExportToAAMA(const QVector<VLayoutPiece> &details) const -> bool;
     auto ExportToASTM(const QVector<VLayoutPiece> &details) const -> bool;
 

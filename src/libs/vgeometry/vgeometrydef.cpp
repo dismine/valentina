@@ -43,7 +43,7 @@
 using namespace Qt::Literals::StringLiterals;
 
 const quint32 VLayoutPassmark::streamHeader = 0x943E2759; // CRC-32Q string "VLayoutPassmark"
-const quint16 VLayoutPassmark::classVersion = 2;
+const quint16 VLayoutPassmark::classVersion = 3;
 
 // Friend functions
 //---------------------------------------------------------------------------------------------------------------------
@@ -51,7 +51,7 @@ auto operator<<(QDataStream &dataStream, const VLayoutPassmark &data) -> QDataSt
 {
     dataStream << VLayoutPassmark::streamHeader << VLayoutPassmark::classVersion;
 
-    dataStream << data.lines << data.type << data.baseLine << data.isBuiltIn << data.isClockwiseOpening;
+    dataStream << data.lines << data.type << data.baseLine << data.isBuiltIn << data.isClockwiseOpening << data.label;
     return dataStream;
 }
 
@@ -87,6 +87,11 @@ auto operator>>(QDataStream &dataStream, VLayoutPassmark &data) -> QDataStream &
     if (actualClassVersion >= 2)
     {
         dataStream >> data.isClockwiseOpening;
+    }
+
+    if (actualClassVersion >= 3)
+    {
+        dataStream >> data.label;
     }
 
     return dataStream;

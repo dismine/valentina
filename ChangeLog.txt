@@ -58,6 +58,7 @@
 - Adding removing nodes of curved path.
 - New tools: Arc start point, Arc end point.
 - Optimize U-notch shape.
+- New feature. Boundary together with notches.
 
 # Valentina 0.7.52 September 12, 2022
 - Fix crash when default locale is ru.

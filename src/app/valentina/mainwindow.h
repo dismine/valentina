@@ -255,6 +255,7 @@ private slots:
     void ActionTable_triggered();
     void ActionFinalMeasurements_triggered();
     void ActionShowMainPath_triggered(bool checked);
+    void ActionBoundaryTogetherWithNotches_triggered(bool checked);
     void ActionOpenTape_triggered();
 
     void UpdateShortcuts();

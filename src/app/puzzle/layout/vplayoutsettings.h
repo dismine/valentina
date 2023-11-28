@@ -28,16 +28,17 @@
 #ifndef VPLAYOUTSETTINGS_H
 #define VPLAYOUTSETTINGS_H
 
+#include <QCoreApplication>
 #include <QMarginsF>
 #include <QSizeF>
 #include <QString>
-#include <QCoreApplication>
 
 #include "../vmisc/def.h"
 
 class VPLayoutSettings
 {
     Q_DECLARE_TR_FUNCTIONS(VPLayoutSettings) // NOLINT
+
 public:
     VPLayoutSettings() = default;
 
@@ -248,15 +249,15 @@ public:
     void SetShowGrid(bool value);
 
     /**
-    * @brief GetGridColWidth returns the placement grid column width in Unit::Px
-    * @return the placement grid column width in Unit::Px
-    */
+     * @brief GetGridColWidth returns the placement grid column width in Unit::Px
+     * @return the placement grid column width in Unit::Px
+     */
     auto GetGridColWidth() const -> qreal;
 
     /**
-    * @brief GetGridColWidth returns the placement grid column width in the layout's unit
-    * @return the placement grid column width in the layout's unit
-    */
+     * @brief GetGridColWidth returns the placement grid column width in the layout's unit
+     * @return the placement grid column width in the layout's unit
+     */
     auto GetGridColWidthConverted() const -> qreal;
 
     /**
@@ -273,15 +274,15 @@ public:
     void SetGridColWidthConverted(qreal value);
 
     /**
-    * @brief GetGridRowHeight returns the placement grid row height in Unit::Px
-    * @return the placement grid row height in Unit::Px
-    */
+     * @brief GetGridRowHeight returns the placement grid row height in Unit::Px
+     * @return the placement grid row height in Unit::Px
+     */
     auto GetGridRowHeight() const -> qreal;
 
     /**
-    * @brief GetGridRowHeightConverted returns the placement grid row height in the layout's unit
-    * @return the placement grid row height in the layout's unit
-    */
+     * @brief GetGridRowHeightConverted returns the placement grid row height in the layout's unit
+     * @return the placement grid row height in the layout's unit
+     */
     auto GetGridRowHeightConverted() const -> qreal;
 
     /**
@@ -317,6 +318,9 @@ public:
 
     auto GetShowTileNumber() const -> bool;
     void SetShowTileNumber(bool newTileNumbers);
+
+    void SetBoundaryTogetherWithNotches(bool value);
+    auto IsBoundaryTogetherWithNotches() const -> bool;
 
 private:
     Unit m_unit{Unit::Cm};
@@ -376,6 +380,8 @@ private:
     bool m_printTilesScheme{false};
 
     bool m_showTileNumbers{false};
+
+    bool m_togetherWithNotches{false};
 };
 
 #endif // VPLAYOUTSETTINGS_H

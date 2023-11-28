@@ -133,6 +133,7 @@ const QString LONG_OPTION_LANDSCAPE_ORIENTATION = QStringLiteral("landscapeOrien
 
 const QString LONG_OPTION_NEST_QUANTITY = QStringLiteral("nestQuantity");
 const QString LONG_OPTION_PREFER_ONE_SHEET_SOLUTION = QStringLiteral("preferOneSheetSolution");
+const QString LONG_OPTION_BOUNDARY_TOGETHER_WITH_NOTCHES = QStringLiteral("boundaryTogetherWithNotches");
 
 //---------------------------------------------------------------------------------------------------------------------
 /**
@@ -212,5 +213,6 @@ auto AllKeys() -> QStringList
                        LONG_OPTION_MANUAL_PRIORITY,
                        LONG_OPTION_LANDSCAPE_ORIENTATION,
                        LONG_OPTION_NEST_QUANTITY,
-                       LONG_OPTION_PREFER_ONE_SHEET_SOLUTION};
+                       LONG_OPTION_PREFER_ONE_SHEET_SOLUTION,
+                       LONG_OPTION_BOUNDARY_TOGETHER_WITH_NOTCHES};
 }

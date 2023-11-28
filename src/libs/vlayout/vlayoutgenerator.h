@@ -29,30 +29,30 @@
 #ifndef VLAYOUTGENERATOR_H
 #define VLAYOUTGENERATOR_H
 
-
 #include <QList>
+#include <QMargins>
 #include <QMetaObject>
 #include <QObject>
 #include <QString>
 #include <QVector>
 #include <QtGlobal>
-#include <memory>
 #include <atomic>
-#include <QMargins>
+#include <memory>
 
 #include "vbank.h"
 #include "vlayoutdef.h"
+#include "vlayoutpaper.h"
 
 class QGraphicsItem;
-class VLayoutPaper;
 class QElapsedTimer;
 
-class VLayoutGenerator :public QObject
+class VLayoutGenerator : public QObject
 {
     Q_OBJECT // NOLINT
+
 public:
     explicit VLayoutGenerator(QObject *parent = nullptr);
-    virtual ~VLayoutGenerator() override;
+    ~VLayoutGenerator() override;
 
     void SetDetails(const QVector<VLayoutPiece> &details);
     void SetLayoutWidth(qreal width);
@@ -70,14 +70,14 @@ public:
     void SetNestingTime(int value);
 
     auto GetEfficiencyCoefficient() const -> qreal;
-    void  SetEfficiencyCoefficient(qreal coefficient);
+    void SetEfficiencyCoefficient(qreal coefficient);
 
     auto IsUsePrinterFields() const -> bool;
     auto GetPrinterFields() const -> QMarginsF;
     void SetPrinterFields(bool usePrinterFields, const QMarginsF &value);
 
     auto GetShift() const -> qreal;
-    void  SetShift(qreal shift);
+    void SetShift(qreal shift);
 
     void Generate(const QElapsedTimer &timer, qint64 timeout, LayoutErrors previousState = LayoutErrors::NoError);
 
@@ -124,13 +124,19 @@ public:
     void SetUnitePages(bool value);
 
     auto GetMultiplier() const -> quint8;
-    void   SetMultiplier(quint8 value);
+    void SetMultiplier(quint8 value);
 
     auto IsStripOptimization() const -> bool;
     void SetStripOptimization(bool value);
 
     auto IsTestAsPaths() const -> bool;
     void SetTextAsPaths(bool value);
+
+    auto IsBoundaryTogetherWithNotches() const -> bool;
+    void SetBoundaryTogetherWithNotches(bool value);
+
+    auto IsShowLayoutAllowance() const -> bool;
+    void SetShowLayoutAllowance(bool value);
 
     auto IsRotationNeeded() const -> bool;
 
@@ -142,29 +148,37 @@ public slots:
 
 private:
     Q_DISABLE_COPY_MOVE(VLayoutGenerator) // NOLINT
-    QVector<VLayoutPaper> papers;
-    VBank *bank;
-    qreal paperHeight;
-    qreal paperWidth;
-    QMarginsF margins;
-    bool usePrinterFields;
-    std::atomic_bool stopGeneration;
-    LayoutErrors state;
-    qreal shift;
-    bool rotate;
-    bool followGrainline;
-    int rotationNumber;
-    bool autoCropLength;
-    bool autoCropWidth;
-    bool saveLength;
+    QVector<VLayoutPaper> papers{};
+    VBank *bank{new VBank()};
+    qreal paperHeight{0};
+    qreal paperWidth{0};
+    QMarginsF margins{};
+    bool usePrinterFields{true};
+    std::atomic_bool stopGeneration{
+#ifdef Q_CC_MSVC
+        ATOMIC_VAR_INIT(false)
+#else
+        false
+#endif
+    };
+    LayoutErrors state{LayoutErrors::NoError};
+    qreal shift{0};
+    bool rotate{true};
+    bool followGrainline{false};
+    int rotationNumber{2};
+    bool autoCropLength{false};
+    bool autoCropWidth{false};
+    bool saveLength{false};
     bool preferOneSheetSolution{false};
-    bool unitePages;
-    bool stripOptimizationEnabled;
-    quint8 multiplier;
-    bool stripOptimization;
-    bool textAsPaths;
+    bool unitePages{false};
+    bool stripOptimizationEnabled{false};
+    quint8 multiplier{1};
+    bool stripOptimization{false};
+    bool textAsPaths{false};
+    bool togetherWithNotches{false};
     int nestingTime{1};
     qreal efficiencyCoefficient{0.0};
+    bool showLayoutAllowance{false};
 
     auto PageHeight() const -> int;
     auto PageWidth() const -> int;
@@ -172,7 +186,7 @@ private:
     void OptimizeWidth();
     void GatherPages();
     void UnitePages();
-    void UniteDetails(int j, QList<QList<VLayoutPiece> > &nDetails, qreal length, int i) const;
+    void UniteDetails(int j, QList<QList<VLayoutPiece>> &nDetails, qreal length, int i) const;
     void UnitePapers(int j, QList<qreal> &papersLength, qreal length);
     auto MoveDetails(qreal length, const QVector<VLayoutPiece> &details) const -> QList<VLayoutPiece>;
     auto MasterPage() const -> VLayoutPaper;

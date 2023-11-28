@@ -44,6 +44,7 @@
 #include "../layout/vpsheet.h"
 #include "../vformat/vsinglelineoutlinechar.h"
 #include "../vgeometry/vlayoutplacelabel.h"
+#include "../vlayout/vboundary.h"
 #include "../vlayout/vgraphicsfillitem.h"
 #include "../vlayout/vlayoutpiecepath.h"
 #include "../vlayout/vtextmanager.h"
@@ -650,24 +651,59 @@ void VPGraphicsPiece::PaintPiece(QPainter *painter)
 //---------------------------------------------------------------------------------------------------------------------
 void VPGraphicsPiece::PaintSeamLine(QPainter *painter, const VPPiecePtr &piece)
 {
-    if (not piece->IsHideMainPath() || not piece->IsSeamAllowance())
+    if (piece->IsSeamAllowance() && not piece->IsHideMainPath() && not piece->IsSeamAllowanceBuiltIn())
     {
         QVector<VLayoutPoint> seamLinePoints = piece->GetMappedContourPoints();
-        if (!seamLinePoints.isEmpty())
+
+        if (seamLinePoints.isEmpty())
         {
-            m_seamLine.moveTo(seamLinePoints.constFirst());
-            for (int i = 1; i < seamLinePoints.size(); i++)
+            return;
+        }
+
+        VPLayoutPtr layout = piece->Layout();
+        if (layout.isNull())
+        {
+            return;
+        }
+
+        if (layout->LayoutSettings().IsBoundaryTogetherWithNotches())
+        {
+            QVector<VLayoutPassmark> passmarks = piece->GetMappedPassmarks();
+
+            bool seamAllowance = piece->IsSeamAllowance() && piece->IsSeamAllowanceBuiltIn();
+            bool builtInSeamAllowance = piece->IsSeamAllowance() && piece->IsSeamAllowanceBuiltIn();
+
+            VBoundary boundary(seamLinePoints, seamAllowance, builtInSeamAllowance);
+            boundary.SetPieceName(piece->GetName());
+            const QList<VBoundarySequenceItemData> sequence = boundary.Combine(passmarks, false, false);
+
+            QVector<QPointF> combinedBoundary;
+            for (const auto &item : sequence)
             {
-                m_seamLine.lineTo(seamLinePoints.at(i));
+                const auto path = item.item.value<VLayoutPiecePath>().Points();
+                QVector<QPointF> convertedPoints;
+                CastTo(path, convertedPoints);
+                combinedBoundary += convertedPoints;
             }
 
-            if (painter != nullptr)
-            {
-                painter->save();
-                painter->setBrush(piece->IsSelected() ? SelectionBrush() : NoBrush());
-                painter->drawPath(m_seamLine);
-                painter->restore();
-            }
+            m_seamLine.addPolygon(QPolygonF(combinedBoundary));
+            m_seamLine.closeSubpath();
+        }
+        else
+        {
+            QVector<QPointF> convertedPoints;
+            CastTo(seamLinePoints, convertedPoints);
+
+            m_seamLine.addPolygon(QPolygonF(convertedPoints));
+            m_seamLine.closeSubpath();
+        }
+
+        if (painter != nullptr)
+        {
+            painter->save();
+            painter->setBrush(piece->IsSelected() ? SelectionBrush() : NoBrush());
+            painter->drawPath(m_seamLine);
+            painter->restore();
         }
     }
 }
@@ -678,21 +714,55 @@ void VPGraphicsPiece::PaintCuttingLine(QPainter *painter, const VPPiecePtr &piec
     if (piece->IsSeamAllowance() && not piece->IsSeamAllowanceBuiltIn())
     {
         QVector<VLayoutPoint> cuttingLinepoints = piece->GetMappedSeamAllowancePoints();
-        if (!cuttingLinepoints.isEmpty())
+        if (cuttingLinepoints.isEmpty())
         {
-            m_cuttingLine.moveTo(cuttingLinepoints.constFirst());
-            for (int i = 1; i < cuttingLinepoints.size(); i++)
+            return;
+        }
+
+        VPLayoutPtr layout = piece->Layout();
+        if (layout.isNull())
+        {
+            return;
+        }
+
+        if (layout->LayoutSettings().IsBoundaryTogetherWithNotches())
+        {
+            const QVector<VLayoutPassmark> passmarks = piece->GetMappedPassmarks();
+
+            bool seamAllowance = piece->IsSeamAllowance() && !piece->IsSeamAllowanceBuiltIn();
+            bool builtInSeamAllowance = piece->IsSeamAllowance() && piece->IsSeamAllowanceBuiltIn();
+
+            VBoundary boundary(cuttingLinepoints, seamAllowance, builtInSeamAllowance);
+            boundary.SetPieceName(piece->GetName());
+            const QList<VBoundarySequenceItemData> sequence = boundary.Combine(passmarks, false, false);
+
+            QVector<QPointF> combinedBoundary;
+            for (const auto &item : sequence)
             {
-                m_cuttingLine.lineTo(cuttingLinepoints.at(i));
+                const auto path = item.item.value<VLayoutPiecePath>().Points();
+                QVector<QPointF> convertedPoints;
+                CastTo(path, convertedPoints);
+                combinedBoundary += convertedPoints;
             }
 
-            if (painter != nullptr)
-            {
-                painter->save();
-                painter->setBrush(piece->IsSelected() ? SelectionBrush() : NoBrush());
-                painter->drawPath(m_cuttingLine);
-                painter->restore();
-            }
+            m_cuttingLine.addPolygon(QPolygonF(combinedBoundary));
+            m_cuttingLine.closeSubpath();
+        }
+        else
+        {
+            QVector<QPointF> convertedPoints;
+            CastTo(cuttingLinepoints, convertedPoints);
+
+            m_cuttingLine.addPolygon(QPolygonF(convertedPoints));
+            m_cuttingLine.closeSubpath();
+        }
+
+        if (painter != nullptr)
+        {
+            painter->save();
+            painter->setBrush(piece->IsSelected() ? SelectionBrush() : NoBrush());
+            painter->drawPath(m_cuttingLine);
+            painter->restore();
         }
     }
 }
@@ -721,6 +791,17 @@ void VPGraphicsPiece::PaintInternalPaths(QPainter *painter, const VPPiecePtr &pi
 //---------------------------------------------------------------------------------------------------------------------
 void VPGraphicsPiece::PaintPassmarks(QPainter *painter, const VPPiecePtr &piece)
 {
+    VPLayoutPtr layout = piece->Layout();
+    if (layout.isNull())
+    {
+        return;
+    }
+
+    if (layout->LayoutSettings().IsBoundaryTogetherWithNotches())
+    {
+        return;
+    }
+
     QVector<VLayoutPassmark> passmarks = piece->GetMappedPassmarks();
     for (auto &passmark : passmarks)
     {

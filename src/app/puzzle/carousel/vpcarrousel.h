@@ -68,6 +68,8 @@ public:
      */
     void SetOrientation(Qt::Orientation orientation);
 
+    void RefreshPieceMiniature();
+
     /**
      * @brief RefreshOrientation Refreshes the orientation of the carrousel with the
      * m_orientation value;

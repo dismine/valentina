@@ -35,10 +35,10 @@
 
 namespace Ui
 {
-    class DialogSaveLAyout;
+class DialogSaveLAyout;
 }
 
-class DialogSaveLayout : public  VAbstractLayoutDialog
+class DialogSaveLayout : public VAbstractLayoutDialog
 {
     Q_OBJECT // NOLINT
 
@@ -60,7 +60,7 @@ public:
     auto IsShowGrainline() const -> bool;
 
     static auto MakeHelpFormatList() -> QString;
-    void SetDestinationPath(const QString& cmdDestinationPath);
+    void SetDestinationPath(const QString &cmdDestinationPath);
 
     auto Mode() const -> Draw;
 
@@ -84,6 +84,9 @@ public:
     void SetYScale(qreal scale);
     auto GetYScale() const -> qreal;
 
+    void SetBoundaryTogetherWithNotches(bool value);
+    auto IsBoundaryTogetherWithNotches() const -> bool;
+
 protected:
     void showEvent(QShowEvent *event) override;
 
@@ -94,6 +97,7 @@ private slots:
     void ToggleScaleConnection();
     void HorizontalScaleChanged(double d);
     void VerticalScaleChanged(double d);
+
 private:
     // cppcheck-suppress unknownMacro
     Q_DISABLE_COPY_MOVE(DialogSaveLayout) // NOLINT
@@ -105,9 +109,9 @@ private:
     bool m_scaleConnected{true};
 
     static bool havePdf; // NOLINT(cppcoreguidelines-avoid-non-const-global-variables)
-    static bool tested; // NOLINT(cppcoreguidelines-avoid-non-const-global-variables)
+    static bool tested;  // NOLINT(cppcoreguidelines-avoid-non-const-global-variables)
     static auto SupportPSTest() -> bool;
-    static auto InitFormats() -> QVector<std::pair<QString, LayoutExportFormats> >;
+    static auto InitFormats() -> QVector<std::pair<QString, LayoutExportFormats>>;
 
     void RemoveFormatFromList(LayoutExportFormats format);
 

@@ -1716,6 +1716,13 @@
                  </widget>
                 </item>
                 <item>
+                 <widget class="QCheckBox" name="checkBoxTogetherWithNotches">
+                  <property name="text">
+                   <string>Boundary together with notches</string>
+                  </property>
+                 </widget>
+                </item>
+                <item>
                  <layout class="QHBoxLayout" name="horizontalLayout_2">
                   <item>
                    <widget class="QLabel" name="labelSheetPiecesGap">
@@ -2427,8 +2434,8 @@
  </resources>
  <connections/>
  <buttongroups>
-  <buttongroup name="buttonGroupRotationDirection"/>
-  <buttongroup name="buttonGroupSheetOrientation"/>
   <buttongroup name="buttonGroupTileOrientation"/>
+  <buttongroup name="buttonGroupSheetOrientation"/>
+  <buttongroup name="buttonGroupRotationDirection"/>
  </buttongroups>
 </ui>

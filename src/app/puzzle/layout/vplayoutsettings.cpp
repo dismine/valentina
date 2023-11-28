@@ -113,10 +113,8 @@ void VPLayoutSettings::SetTilesSize(const QSizeF &size)
 //---------------------------------------------------------------------------------------------------------------------
 void VPLayoutSettings::SetTilesSizeConverted(const QSizeF &size)
 {
-    m_tilesSize = QSizeF(
-                UnitConvertor(size.width(), GetUnit(), Unit::Px),
-                UnitConvertor(size.height(), GetUnit(), Unit::Px)
-                );
+    m_tilesSize =
+        QSizeF(UnitConvertor(size.width(), GetUnit(), Unit::Px), UnitConvertor(size.height(), GetUnit(), Unit::Px));
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -134,8 +132,7 @@ auto VPLayoutSettings::GetTilesSize() const -> QSizeF
 //---------------------------------------------------------------------------------------------------------------------
 auto VPLayoutSettings::GetTilesSize(Unit unit) const -> QSizeF
 {
-    return {UnitConvertor(m_tilesSize.width(), Unit::Px, unit),
-            UnitConvertor(m_tilesSize.height(), Unit::Px, unit)};
+    return {UnitConvertor(m_tilesSize.width(), Unit::Px, unit), UnitConvertor(m_tilesSize.height(), Unit::Px, unit)};
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -239,7 +236,6 @@ auto VPLayoutSettings::GetPiecesGapConverted() const -> qreal
 {
     return UnitConvertor(m_piecesGap, Unit::Px, m_unit);
 }
-
 
 //---------------------------------------------------------------------------------------------------------------------
 void VPLayoutSettings::SetStickyEdges(bool state)
@@ -395,4 +391,16 @@ auto VPLayoutSettings::GetShowTileNumber() const -> bool
 void VPLayoutSettings::SetShowTileNumber(bool newTileNumbers)
 {
     m_showTileNumbers = newTileNumbers;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VPLayoutSettings::SetBoundaryTogetherWithNotches(bool value)
+{
+    m_togetherWithNotches = value;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+auto VPLayoutSettings::IsBoundaryTogetherWithNotches() const -> bool
+{
+    return m_togetherWithNotches;
 }

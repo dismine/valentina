@@ -68,6 +68,9 @@ public:
     auto GetShowGrainline() const -> bool;
     void SetShowGrainline(bool newShowGrainline);
 
+    void SetBoundaryTogetherWithNotches(bool value);
+    auto IsBoundaryTogetherWithNotches() const -> bool;
+
     auto ExportToHPGL(const QVector<VLayoutPiece> &details) const -> bool;
     auto ExportToHPGL2(const QVector<VLayoutPiece> &details) const -> bool;
 

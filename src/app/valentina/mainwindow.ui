@@ -115,6 +115,7 @@
     <addaction name="actionInteractiveTools"/>
     <addaction name="actionShowCurveDetails"/>
     <addaction name="actionShowMainPath"/>
+    <addaction name="actionBoundaryTogetherWithNotches"/>
     <addaction name="actionShowAccuracyRadius"/>
     <addaction name="separator"/>
     <addaction name="actionAddBackgroundImage"/>
@@ -2609,6 +2610,17 @@
    </property>
    <property name="menuRole">
     <enum>QAction::NoRole</enum>
+   </property>
+  </action>
+  <action name="actionBoundaryTogetherWithNotches">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="enabled">
+    <bool>false</bool>
+   </property>
+   <property name="text">
+    <string>Boundary together with notches</string>
    </property>
   </action>
  </widget>

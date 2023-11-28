@@ -197,6 +197,24 @@ void VDxfPaintDevice::SetYScale(const qreal &yscale)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+void VDxfPaintDevice::SetBoundaryTogetherWithNotches(bool value)
+{
+    if (m_engine->isActive())
+    {
+        qWarning("VDxfPaintDevice::SetBoundaryTogetherWithNotches(), cannot set boundary together with notches while "
+                 "Dxf is being generated");
+        return;
+    }
+    m_engine->SetBoundaryTogetherWithNotches(value);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+auto VDxfPaintDevice::IsBoundaryTogetherWithNotches() const -> bool
+{
+    return m_engine->IsBoundaryTogetherWithNotches();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 auto VDxfPaintDevice::ExportToAAMA(const QVector<VLayoutPiece> &details) const -> bool
 {
     m_engine->setActive(true);

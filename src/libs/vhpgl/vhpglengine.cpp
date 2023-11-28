@@ -29,6 +29,7 @@
 
 #include "../vformat/vsinglelineoutlinechar.h"
 #include "../vgeometry/vlayoutplacelabel.h"
+#include "../vlayout/vboundary.h"
 #include "../vlayout/vlayoutpiece.h"
 #include "../vlayout/vlayoutpiecepath.h"
 #include "../vlayout/vlayoutpoint.h"
@@ -39,7 +40,6 @@
 #include "../vmisc/svgfont/vsvgfontdatabase.h"
 #include "../vmisc/svgfont/vsvgfontengine.h"
 #include "../vmisc/vabstractapplication.h"
-#include "qmath.h"
 
 #if QT_VERSION < QT_VERSION_CHECK(5, 14, 0)
 #include "../vmisc/backport/text.h"
@@ -57,8 +57,6 @@ using namespace Qt::Literals::StringLiterals;
 
 namespace
 {
-const qreal accuracyPointOnLine{0.99};
-
 QT_WARNING_PUSH
 QT_WARNING_DISABLE_CLANG("-Wunused-member-function")
 
@@ -81,92 +79,6 @@ Q_DECL_RELAXED_CONSTEXPR inline auto ConvertPixels(qreal pix) -> qreal
     // Default plating measurement in the HP-GL(HP-GL/2) graphics mode is 1/1016"(0.025mm).
     // 40 plotter units = 1 mm
     return FromPixel(pix, Unit::Mm) * 40.;
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-auto RemoveDublicates(QVector<QPoint> points) -> QVector<QPoint>
-{
-    if (points.size() < 3)
-    {
-        return points;
-    }
-
-    for (int i = 0; i < points.size() - 1; ++i)
-    {
-        if (points.at(i) == points.at(i + 1))
-        {
-#if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
-            points.erase(points.cbegin() + i + 1);
-#else
-            points.erase(points.begin() + i + 1);
-#endif
-            --i;
-        }
-    }
-
-    return points;
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-auto OptimizePath(QVector<QPoint> path) -> QVector<QPoint>
-{
-    if (path.size() < 3)
-    {
-        return path;
-    }
-
-    path = RemoveDublicates(path);
-
-    if (path.size() < 3)
-    {
-        return path;
-    }
-
-    vsizetype prev = -1;
-    const bool closedPath = (path.first() == path.last());
-    const vsizetype startIndex = closedPath ? 0 : 1;
-    const vsizetype endIndex = closedPath ? path.size() : path.size() - 1;
-
-    QVector<QPoint> cleared;
-    cleared.reserve(path.size());
-
-    if (!closedPath)
-    {
-        cleared.append(path.first());
-    }
-
-    // Remove point on line
-    for (vsizetype i = startIndex; i < endIndex; ++i)
-    {
-        if (prev == -1)
-        {
-            prev = (i == 0) ? path.size() - 1 : i - 1;
-        }
-
-        const vsizetype next = (i == path.size() - 1) ? 0 : i + 1;
-
-        const QPoint &iPoint = path.at(i);
-        const QPoint &prevPoint = path.at(prev);
-        const QPoint &nextPoint = path.at(next);
-
-        // If RemoveDublicates does not remove these points it is a valid case.
-        // Case where last point equal first point
-        if (((i == 0 || i == path.size() - 1) && (iPoint == prevPoint || iPoint == nextPoint)) ||
-            not VGObject::IsPointOnLineviaPDP(iPoint, prevPoint, nextPoint, accuracyPointOnLine))
-        {
-            cleared.append(iPoint);
-            prev = -1;
-        }
-    }
-
-    if (!closedPath)
-    {
-        cleared.append(path.last());
-    }
-
-    cleared = RemoveDublicates(cleared);
-
-    return cleared;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -464,7 +376,7 @@ void VHPGLEngine::ExportDetails(QTextStream &out, const QList<VLayoutPiece> &det
         detail.Scale(m_xscale, m_yscale);
 
         PlotSeamAllowance(out, detail);
-        PlotMainPath(out, detail);
+        PlotSewLine(out, detail);
         PlotInternalPaths(out, detail);
         PlotGrainline(out, detail);
         PlotPlaceLabels(out, detail);
@@ -482,13 +394,72 @@ void VHPGLEngine::GenerateHPGLFooter(QTextStream &out)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VHPGLEngine::PlotMainPath(QTextStream &out, const VLayoutPiece &detail)
+void VHPGLEngine::PlotSewLine(QTextStream &out, const VLayoutPiece &detail)
 {
-    if (not detail.IsSeamAllowance() ||
-        (detail.IsSeamAllowance() && not detail.IsSeamAllowanceBuiltIn() && not detail.IsHideMainPath()))
+    if (detail.IsSeamAllowance() && not detail.IsHideMainPath() && not detail.IsSeamAllowanceBuiltIn())
     {
-        QVector<QPoint> points = CastToPoint(ConvertPath(detail.GetMappedContourPoints()));
+        QVector<VLayoutPoint> sewLine = detail.GetMappedContourPoints();
 
+        if (m_togetherWithNotches)
+        {
+            const QVector<VLayoutPassmark> passmarks = detail.GetMappedPassmarks();
+
+            bool seamAllowance = detail.IsSeamAllowance() && detail.IsSeamAllowanceBuiltIn();
+            bool builtInSeamAllowance = detail.IsSeamAllowance() && detail.IsSeamAllowanceBuiltIn();
+
+            VBoundary boundary(sewLine, seamAllowance, builtInSeamAllowance);
+            boundary.SetPieceName(detail.GetName());
+            const QList<VBoundarySequenceItemData> sequence = boundary.Combine(passmarks, true, false);
+
+            for (const auto &item : sequence)
+            {
+                const auto path = CastToPoint(ConvertPath(item.item.value<VLayoutPiecePath>().Points()));
+                PlotPath(out, path, Qt::SolidLine);
+            }
+        }
+        else
+        {
+            QVector<QPoint> points = CastToPoint(ConvertPath(sewLine));
+
+            if (points.size() > 1 && points.first() != points.last())
+            {
+                points.append(points.first()); // must be closed
+            }
+
+            PlotPath(out, points, Qt::SolidLine);
+        }
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VHPGLEngine::PlotSeamAllowance(QTextStream &out, const VLayoutPiece &detail)
+{
+    QVector<VLayoutPoint> pieceBoundary = detail.IsSeamAllowance() && not detail.IsSeamAllowanceBuiltIn()
+                                              ? detail.GetMappedSeamAllowancePoints()
+                                              : detail.GetMappedContourPoints();
+
+    if (m_togetherWithNotches)
+    {
+        const QVector<VLayoutPassmark> passmarks = detail.GetMappedPassmarks();
+
+        bool seamAllowance = detail.IsSeamAllowance() && !detail.IsSeamAllowanceBuiltIn();
+        bool builtInSeamAllowance = detail.IsSeamAllowance() && detail.IsSeamAllowanceBuiltIn();
+
+        VBoundary boundary(pieceBoundary, seamAllowance, builtInSeamAllowance);
+        boundary.SetPieceName(detail.GetName());
+        const QList<VBoundarySequenceItemData> sequence = boundary.Combine(passmarks, false, false);
+
+        pieceBoundary.clear();
+
+        for (const auto &item : sequence)
+        {
+            const auto path = CastToPoint(ConvertPath(item.item.value<VLayoutPiecePath>().Points()));
+            PlotPath(out, path, Qt::SolidLine);
+        }
+    }
+    else
+    {
+        QVector<QPoint> points = CastToPoint(ConvertPath(pieceBoundary));
         if (points.size() > 1 && points.first() != points.last())
         {
             points.append(points.first()); // must be closed
@@ -496,21 +467,6 @@ void VHPGLEngine::PlotMainPath(QTextStream &out, const VLayoutPiece &detail)
 
         PlotPath(out, points, Qt::SolidLine);
     }
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-void VHPGLEngine::PlotSeamAllowance(QTextStream &out, const VLayoutPiece &detail)
-{
-    QVector<QPoint> points = detail.IsSeamAllowance() && not detail.IsSeamAllowanceBuiltIn()
-                                 ? CastToPoint(ConvertPath(detail.GetMappedSeamAllowancePoints()))
-                                 : CastToPoint(ConvertPath(detail.GetMappedContourPoints()));
-
-    if (points.size() > 1 && points.first() != points.last())
-    {
-        points.append(points.first()); // must be closed
-    }
-
-    PlotPath(out, points, Qt::SolidLine);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -541,6 +497,11 @@ void VHPGLEngine::PlotPlaceLabels(QTextStream &out, const VLayoutPiece &detail)
 //---------------------------------------------------------------------------------------------------------------------
 void VHPGLEngine::PlotPassmarks(QTextStream &out, const VLayoutPiece &detail)
 {
+    if (m_togetherWithNotches)
+    {
+        return;
+    }
+
     const QVector<VLayoutPassmark> passmarks = detail.GetMappedPassmarks();
     for (const auto &passmark : passmarks)
     {
@@ -710,7 +671,6 @@ void VHPGLEngine::PlotLabelOutlineFont(QTextStream &out, const VLayoutPiece &det
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-
 template <class T> auto VHPGLEngine::ConvertPath(const QVector<T> &path) const -> QVector<T>
 {
     QVector<T> convertedPath;
@@ -739,8 +699,6 @@ void VHPGLEngine::PlotPath(QTextStream &out, QVector<QPoint> path, Qt::PenStyle 
     {
         return;
     }
-
-    path = OptimizePath(path);
 
     if (penStyle != Qt::SolidLine && penStyle != Qt::DashLine && penStyle != Qt::DotLine &&
         penStyle != Qt::DashDotLine && penStyle != Qt::DashDotDotLine)

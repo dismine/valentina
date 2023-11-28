@@ -92,10 +92,12 @@ public:
 
     auto ArrangeDetail(const VLayoutPiece &detail, std::atomic_bool &stop) -> bool;
     auto Count() const -> vsizetype;
-    Q_REQUIRED_RESULT auto GetPaperItem(bool autoCropLength, bool autoCropWidth, bool textAsPaths) const
+    Q_REQUIRED_RESULT auto GetPaperItem(bool autoCropLength, bool autoCropWidth, bool textAsPaths,
+                                        bool togetherWithNotches, bool showLayoutAllowance) const
         -> QGraphicsRectItem *;
     Q_REQUIRED_RESULT auto GetGlobalContour() const -> QGraphicsPathItem *;
-    Q_REQUIRED_RESULT auto GetItemDetails(bool textAsPaths) const -> QList<QGraphicsItem *>;
+    Q_REQUIRED_RESULT auto GetItemDetails(bool textAsPaths, bool togetherWithNotches, bool showLayoutAllowance) const
+        -> QList<QGraphicsItem *>;
 
     auto GetDetails() const -> QVector<VLayoutPiece>;
     void SetDetails(const QVector<VLayoutPiece> &details);

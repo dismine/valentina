@@ -550,14 +550,14 @@ auto CreateCheckMarkPassmark(const VPiecePassmarkData &passmarkData, const QLine
     if (width > 0)
     { // clockwise
         QLineF l1(line.p2(), line.p1());
-        l1.setAngle(l1.angle() - angle);
+        l1.setAngle(l1.angle() + angle);
         l1 = VPassmark::FindIntersection(l1, seamAllowance);
 
         return {{l1.p2(), l1.p1()}, {line.p2(), line.p1()}};
     }
 
     QLineF l2(line.p2(), line.p1());
-    l2.setAngle(l2.angle() + angle);
+    l2.setAngle(l2.angle() - angle);
     l2 = VPassmark::FindIntersection(l2, seamAllowance);
 
     return {line, l2};

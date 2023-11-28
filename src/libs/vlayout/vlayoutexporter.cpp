@@ -324,6 +324,7 @@ void VLayoutExporter::ExportToAAMADXF(const QVector<VLayoutPiece> &details) cons
     generator.SetInsunits(VarInsunits::Millimeters); // Decided to always use mm. See issue #745
     generator.SetXScale(m_xScale);
     generator.SetYScale(m_yScale);
+    generator.SetBoundaryTogetherWithNotches(m_togetherWithNotches);
     if (not generator.ExportToAAMA(details))
     {
         qCritical() << tr("Can't create an AAMA dxf file.") << generator.ErrorString();
@@ -342,6 +343,7 @@ void VLayoutExporter::ExportToASTMDXF(const QVector<VLayoutPiece> &details) cons
     generator.SetInsunits(VarInsunits::Millimeters); // Decided to always use mm. See issue #745
     generator.SetXScale(m_xScale);
     generator.SetYScale(m_yScale);
+    generator.SetBoundaryTogetherWithNotches(m_togetherWithNotches);
     if (not generator.ExportToASTM(details))
     {
         qCritical() << tr("Can't create an ASTM dxf file.") << generator.ErrorString();
@@ -383,6 +385,7 @@ void VLayoutExporter::ExportToHPGL(const QVector<VLayoutPiece> &details) const
     generator.SetSingleLineFont(m_singleLineFont);
     generator.SetSingleStrokeOutlineFont(m_singleStrokeOutlineFont);
     generator.SetPenWidth(m_penWidth);
+    generator.SetBoundaryTogetherWithNotches(m_togetherWithNotches);
     if (not generator.ExportToHPGL(details))
     {
         qCritical() << tr("Can't create an HP-GL file.");
@@ -401,6 +404,7 @@ void VLayoutExporter::ExportToHPGL2(const QVector<VLayoutPiece> &details) const
     generator.SetSingleLineFont(m_singleLineFont);
     generator.SetSingleStrokeOutlineFont(m_singleStrokeOutlineFont);
     generator.SetPenWidth(m_penWidth);
+    generator.SetBoundaryTogetherWithNotches(m_togetherWithNotches);
     if (not generator.ExportToHPGL2(details))
     {
         qCritical() << tr("Can't create an HP-GL file.");

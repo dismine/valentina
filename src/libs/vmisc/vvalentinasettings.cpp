@@ -74,6 +74,9 @@ Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingPatternRememberMaterials, ("patt
 // NOLINTNEXTLINE
 Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingPatternBackgroundImageDefOpacity,
                           ("pattern/backgroundImageDefOpacity"_L1))
+// NOLINTNEXTLINE
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingPatternBoundaryTogetherWithNotches,
+                          ("pattern/boundaryTogetherWithNotches"_L1))
 
 Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingLayoutWidth, ("layout/width"_L1))             // NOLINT
 Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingLayoutSorting, ("layout/sorting"_L1))         // NOLINT
@@ -90,6 +93,9 @@ Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingLayoutAutoCropWidth, ("layout/au
 Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingLayoutSaveLength, ("layout/saveLength"_L1))       // NOLINT
 // NOLINTNEXTLINE
 Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingLayoutPreferOneSheetSolution, ("layout/preferOneSheetSolution"_L1))
+// NOLINTNEXTLINE
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingLayoutBoundaryTogetherWithNotches,
+                          ("layout/boundaryTogetherWithNotches"_L1))
 Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingLayoutUnitePages, ("layout/unitePages"_L1))       // NOLINT
 Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingLayoutShowGrainline, ("layout/showGrainline"_L1)) // NOLINT
 Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingFields, ("layout/fields"_L1))                     // NOLINT
@@ -452,6 +458,24 @@ auto VValentinaSettings::GetDefLayoutPreferOneSheetSolution() -> bool
 void VValentinaSettings::SetLayoutPreferOneSheetSolution(bool value)
 {
     setValue(*settingLayoutPreferOneSheetSolution, value);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+auto VValentinaSettings::GetLayoutBoundaryTogetherWithNotches() const -> bool
+{
+    return value(*settingLayoutBoundaryTogetherWithNotches, GetDefLayoutBoundaryTogetherWithNotches()).toBool();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+auto VValentinaSettings::GetDefLayoutBoundaryTogetherWithNotches() -> bool
+{
+    return false;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VValentinaSettings::SetLayoutBoundaryTogetherWithNotches(bool value)
+{
+    setValue(*settingLayoutBoundaryTogetherWithNotches, value);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -1043,6 +1067,18 @@ auto VValentinaSettings::IsUseToolGroups() const -> bool
 void VValentinaSettings::SetUseToolGroups(bool value)
 {
     setValue(*settingConfigurationUseToolGroups, value);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+auto VValentinaSettings::IsBoundaryTogetherWithNotches() const -> bool
+{
+    return value(*settingPatternBoundaryTogetherWithNotches, false).toBool();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VValentinaSettings::SetBoundaryTogetherWithNotches(bool value)
+{
+    setValue(*settingPatternBoundaryTogetherWithNotches, value);
 }
 
 //---------------------------------------------------------------------------------------------------------------------

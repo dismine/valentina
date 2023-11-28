@@ -260,6 +260,12 @@ void VPCarrousel::SetOrientation(Qt::Orientation orientation)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+void VPCarrousel::RefreshPieceMiniature()
+{
+    ui->listWidget->Refresh();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 void VPCarrousel::RefreshOrientation()
 {
     // then update the scrollarea min height / width and scrollbar behaviour

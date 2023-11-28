@@ -38,12 +38,19 @@
 #include "../undocommands/movepiece.h"
 #include "../undocommands/savepieceoptions.h"
 #include "../undocommands/togglepiecestate.h"
+#include "../vformat/vlabeltemplate.h"
 #include "../vgeometry/varc.h"
 #include "../vgeometry/vellipticalarc.h"
 #include "../vgeometry/vplacelabelitem.h"
 #include "../vgeometry/vpointf.h"
+#include "../vlayout/vboundary.h"
+#include "../vlayout/vlayoutpiece.h"
+#include "../vlayout/vlayoutpiecepath.h"
+#include "../vmisc/theme/themeDef.h"
 #include "../vmisc/theme/vscenestylesheet.h"
+#include "../vmisc/vvalentinasettings.h"
 #include "../vpatterndb/calculator.h"
+#include "../vpatterndb/floatItemData/vgrainlinedata.h"
 #include "../vpatterndb/floatItemData/vpatternlabeldata.h"
 #include "../vpatterndb/floatItemData/vpiecelabeldata.h"
 #include "../vpatterndb/variables/vincrement.h"
@@ -54,14 +61,6 @@
 #include "../vwidgets/vmaingraphicsview.h"
 #include "../vwidgets/vnobrushscalepathitem.h"
 #include "../vwidgets/vpiecegrainline.h"
-#include "theme/themeDef.h"
-#include "toolsdef.h"
-#if QT_VERSION < QT_VERSION_CHECK(5, 7, 0)
-#include "../vmisc/backport/qoverload.h"
-#endif // QT_VERSION < QT_VERSION_CHECK(5, 7, 0)
-#include "../vformat/vlabeltemplate.h"
-#include "../vpatterndb/floatItemData/vgrainlinedata.h"
-#include "../vpatterndb/floatItemData/vpiecelabeldata.h"
 #include "nodeDetails/vnodearc.h"
 #include "nodeDetails/vnodeellipticalarc.h"
 #include "nodeDetails/vnodepoint.h"
@@ -70,6 +69,11 @@
 #include "nodeDetails/vtoolpiecepath.h"
 #include "nodeDetails/vtoolpin.h"
 #include "nodeDetails/vtoolplacelabel.h"
+#include "toolsdef.h"
+
+#if QT_VERSION < QT_VERSION_CHECK(5, 7, 0)
+#include "../vmisc/backport/qoverload.h"
+#endif // QT_VERSION < QT_VERSION_CHECK(5, 7, 0)
 
 #include <QFuture>
 #include <QGraphicsSceneMouseEvent>
@@ -77,6 +81,7 @@
 #include <QKeyEvent>
 #include <QMenu>
 #include <QMessageBox>
+#include <QPainterPath>
 #include <QTimer>
 #include <QUuid>
 #include <QtConcurrent/QtConcurrentRun>
@@ -1460,16 +1465,86 @@ void VToolSeamAllowance::RefreshGeometry(bool updateChildren)
 
     const VPiece detail = VAbstractTool::data.GetPiece(m_id);
 
-    QFuture<QPainterPath> futurePath = QtConcurrent::run([this, detail]() { return detail.MainPathPath(getData()); });
-    QFuture<QPainterPath> futurePassmarks =
-        QtConcurrent::run([this, detail]() { return detail.PassmarksPath(getData()); });
+    VValentinaSettings *settings = VAbstractValApplication::VApp()->ValentinaSettings();
+    const bool combineTogether = settings->IsBoundaryTogetherWithNotches();
 
-    QFuture<QVector<VLayoutPoint>> futureSeamAllowance;
+    QFuture<QPainterPath> futurePath = QtConcurrent::run(
+        [this, detail, combineTogether]()
+        {
+            if (combineTogether)
+            {
+                const QVector<VLayoutPassmark> passmarks = VLayoutPiece::ConvertPassmarks(detail, getData());
+                const QVector<VLayoutPoint> points = detail.MainPathPoints(getData());
+
+                bool seamAllowance = detail.IsSeamAllowance() && detail.IsSeamAllowanceBuiltIn();
+                bool builtInSeamAllowance = detail.IsSeamAllowance() && detail.IsSeamAllowanceBuiltIn();
+
+                VBoundary boundary(points, seamAllowance, builtInSeamAllowance);
+                boundary.SetPieceName(detail.GetName());
+                const QList<VBoundarySequenceItemData> sequence = boundary.Combine(passmarks, false, false);
+
+                QVector<QPointF> combinedBoundary;
+                for (const auto &item : sequence)
+                {
+                    const auto path = item.item.value<VLayoutPiecePath>().Points();
+                    QVector<QPointF> convertedPoints;
+                    CastTo(path, convertedPoints);
+                    combinedBoundary += convertedPoints;
+                }
+
+                QPainterPath combinedPath;
+                combinedPath.addPolygon(QPolygonF(combinedBoundary));
+                combinedPath.closeSubpath();
+                combinedPath.setFillRule(Qt::OddEvenFill);
+
+                return combinedPath;
+            }
+
+            return detail.MainPathPath(getData());
+        });
+
+    QFuture<QPainterPath> futurePassmarks;
+    if (!combineTogether)
+    {
+        futurePassmarks = QtConcurrent::run([this, detail]() { return detail.PassmarksPath(getData()); });
+    }
+
+    QFuture<QPainterPath> futureSeamAllowance;
     QFuture<bool> futureSeamAllowanceValid;
 
-    if (detail.IsSeamAllowance())
+    if (detail.IsSeamAllowance() && not detail.IsSeamAllowanceBuiltIn())
     {
-        futureSeamAllowance = QtConcurrent::run([this, detail]() { return detail.SeamAllowancePoints(getData()); });
+        futureSeamAllowance = QtConcurrent::run(
+            [this, detail, combineTogether]()
+            {
+                if (combineTogether)
+                {
+                    const QVector<VLayoutPassmark> passmarks = VLayoutPiece::ConvertPassmarks(detail, getData());
+                    const QVector<VLayoutPoint> points = detail.SeamAllowancePoints(getData());
+
+                    VBoundary boundary(points, true);
+                    boundary.SetPieceName(detail.GetName());
+                    const QList<VBoundarySequenceItemData> sequence = boundary.Combine(passmarks, false, false);
+
+                    QVector<QPointF> combinedBoundary;
+                    for (const auto &item : sequence)
+                    {
+                        const auto path = item.item.value<VLayoutPiecePath>().Points();
+                        QVector<QPointF> convertedPoints;
+                        CastTo(path, convertedPoints);
+                        combinedBoundary += convertedPoints;
+                    }
+
+                    QPainterPath combinedPath;
+                    combinedPath.addPolygon(QPolygonF(combinedBoundary));
+                    combinedPath.closeSubpath();
+                    combinedPath.setFillRule(Qt::OddEvenFill);
+
+                    return combinedPath;
+                }
+
+                return detail.SeamAllowancePath(getData());
+            });
         futureSeamAllowanceValid =
             QtConcurrent::run([this, detail]() { return detail.IsSeamAllowanceValid(getData()); });
     }
@@ -1506,7 +1581,7 @@ void VToolSeamAllowance::RefreshGeometry(bool updateChildren)
                 ? throw VException(errorMsg)
                 : qWarning() << VAbstractValApplication::warningMessageSignature + errorMsg;
         }
-        path.addPath(detail.SeamAllowancePath(futureSeamAllowance.result()));
+        path.addPath(futureSeamAllowance.result());
         path.setFillRule(Qt::OddEvenFill);
         m_seamAllowance->setPath(path);
 
@@ -1548,7 +1623,7 @@ void VToolSeamAllowance::RefreshGeometry(bool updateChildren)
         }
     }
 
-    m_passmarks->setPath(futurePassmarks.result());
+    m_passmarks->setPath(!combineTogether ? futurePassmarks.result() : QPainterPath());
 
     this->setFlag(QGraphicsItem::ItemSendsGeometryChanges, true);
 

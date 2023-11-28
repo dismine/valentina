@@ -34,7 +34,12 @@
 
 #include "../vmisc/def.h"
 
-enum class PrintType : qint8 {PrintPDF, PrintPreview, PrintNative};
+enum class PrintType : qint8
+{
+    PrintPDF,
+    PrintPreview,
+    PrintNative
+};
 
 class QPrinter;
 class QGraphicsScene;
@@ -43,9 +48,10 @@ struct VWatermarkData;
 class VPrintLayout : public QObject
 {
     Q_OBJECT // NOLINT
+
 public:
     explicit VPrintLayout(QObject *parent = nullptr);
-    virtual ~VPrintLayout();
+    ~VPrintLayout() override;
 
     auto FileName() const -> QString;
     void SetFileName(const QString &fileName);
@@ -107,8 +113,11 @@ public:
     auto LayoutShadows() const -> QList<QGraphicsItem *>;
     void SetLayoutShadows(const QList<QGraphicsItem *> &layoutShadows);
 
-    auto LayoutDetails() const -> QList<QList<QGraphicsItem *> >;
-    void SetLayoutDetails(const QList<QList<QGraphicsItem *> > &layoutDetails);
+    auto LayoutDetails() const -> QList<QList<QGraphicsItem *>>;
+    void SetLayoutDetails(const QList<QList<QGraphicsItem *>> &layoutDetails);
+
+    void SetBoundaryTogetherWithNotches(bool value);
+    auto IsBoundaryTogetherWithNotches() const -> bool;
 
     void PrintTiled();
     void PrintOrigin();
@@ -125,34 +134,34 @@ public:
     static auto PrinterScaleDiff(QPrinter *printer) -> QPair<qreal, qreal>;
 
 private slots:
-    void PrintPages (QPrinter *printer);
+    void PrintPages(QPrinter *printer);
 
 private:
     Q_DISABLE_COPY_MOVE(VPrintLayout) // NOLINT
 
-    QString         m_fileName{};
-    QSizeF          m_layoutPaperSize{};
-    QMarginsF       m_layoutMargins{};
-    QWidget        *m_parentWidget{nullptr};
-    bool            m_isLayoutPortrait{true};
-    bool            m_ignorePrinterMargins{false};
-    bool            m_isAutoCropLength{false};
-    bool            m_isAutoCropWidth{false};
-    bool            m_isUnitePages{false};
-    QString         m_layoutPrinterName{};
-    bool            m_isLayoutStale{false};
-    QMarginsF       m_tiledMargins{};
+    QString m_fileName{};
+    QSizeF m_layoutPaperSize{};
+    QMarginsF m_layoutMargins{};
+    QWidget *m_parentWidget{nullptr};
+    bool m_isLayoutPortrait{true};
+    bool m_ignorePrinterMargins{false};
+    bool m_isAutoCropLength{false};
+    bool m_isAutoCropWidth{false};
+    bool m_isUnitePages{false};
+    QString m_layoutPrinterName{};
+    bool m_isLayoutStale{false};
+    QMarginsF m_tiledMargins{};
     PageOrientation m_tiledPDFOrientation{PageOrientation::Portrait};
-    QSizeF          m_tiledPDFPaperSize{};
-    QString         m_watermarkPath{};
+    QSizeF m_tiledPDFPaperSize{};
+    QString m_watermarkPath{};
+    bool m_togetherWithNotches{false};
 
+    QList<QGraphicsItem *> m_layoutPapers{};
+    QList<QGraphicsScene *> m_layoutScenes{};
+    QList<QGraphicsItem *> m_layoutShadows{};
+    QList<QList<QGraphicsItem *>> m_layoutDetails{};
 
-    QList<QGraphicsItem *>         m_layoutPapers{};
-    QList<QGraphicsScene *>        m_layoutScenes{};
-    QList<QGraphicsItem *>         m_layoutShadows{};
-    QList<QList<QGraphicsItem *> > m_layoutDetails{};
-
-    bool  m_isTiled{false};
+    bool m_isTiled{false};
     qreal m_xscale{1};
     qreal m_yscale{1};
 
@@ -380,13 +389,13 @@ inline void VPrintLayout::SetLayoutShadows(const QList<QGraphicsItem *> &layoutS
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-inline auto VPrintLayout::LayoutDetails() const -> QList<QList<QGraphicsItem *> >
+inline auto VPrintLayout::LayoutDetails() const -> QList<QList<QGraphicsItem *>>
 {
     return m_layoutDetails;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-inline void VPrintLayout::SetLayoutDetails(const QList<QList<QGraphicsItem *> > &layoutDetails)
+inline void VPrintLayout::SetLayoutDetails(const QList<QList<QGraphicsItem *>> &layoutDetails)
 {
     m_layoutDetails = layoutDetails;
 }
@@ -426,4 +435,17 @@ inline void VPrintLayout::SetWatermarkPath(const QString &watermarkPath)
 {
     m_watermarkPath = watermarkPath;
 }
+
+//---------------------------------------------------------------------------------------------------------------------
+inline void VPrintLayout::SetBoundaryTogetherWithNotches(bool value)
+{
+    m_togetherWithNotches = value;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+inline auto VPrintLayout::IsBoundaryTogetherWithNotches() const -> bool
+{
+    return m_togetherWithNotches;
+}
+
 #endif // VPRINTLAYOUT_H

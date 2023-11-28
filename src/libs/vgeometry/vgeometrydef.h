@@ -29,9 +29,9 @@
 #ifndef VGEOMETRYDEF_H
 #define VGEOMETRYDEF_H
 
-#include <QVector>
 #include <QPolygonF>
 #include <QTransform>
+#include <QVector>
 
 #include "../vmisc/def.h"
 
@@ -47,12 +47,16 @@ enum class GOType : qint8
     PlaceLabel,
     Unknown
 };
-enum class SplinePointPosition : qint8 { FirstPoint, LastPoint };
+enum class SplinePointPosition : qint8
+{
+    FirstPoint,
+    LastPoint
+};
 
 // Keep synchronized with XSD schema
-enum class PlaceLabelType :  quint8
+enum class PlaceLabelType : quint8
 {
-    Segment= 0,
+    Segment = 0,
     Rectangle = 1,
     Cross = 2,
     Tshaped = 3,
@@ -71,9 +75,11 @@ struct VLayoutPassmark
     QLineF baseLine{};
     bool isBuiltIn{false};
     bool isClockwiseOpening{false};
+    QString label{};
 
-    friend auto operator<<(QDataStream& dataStream, const VLayoutPassmark& data) -> QDataStream&;
-    friend auto operator>>(QDataStream& dataStream, VLayoutPassmark& data) -> QDataStream&;
+    friend auto operator<<(QDataStream &dataStream, const VLayoutPassmark &data) -> QDataStream &;
+    friend auto operator>>(QDataStream &dataStream, VLayoutPassmark &data) -> QDataStream &;
+
 private:
     static const quint32 streamHeader;
     static const quint16 classVersion;

@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>544</width>
-    <height>401</height>
+    <height>439</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -138,7 +138,14 @@
            <string>Show grainline</string>
           </property>
           <property name="checked">
-           <bool>true</bool>
+           <bool>false</bool>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QCheckBox" name="checkBoxTogetherWithNotches">
+          <property name="text">
+           <string>Boundary together with notches</string>
           </property>
          </widget>
         </item>
@@ -275,7 +282,7 @@
              </size>
             </property>
             <property name="text">
-             <string notr="true"></string>
+             <string notr="true"/>
             </property>
             <property name="icon">
              <iconset resource="../../../libs/vmisc/share/resources/icon.qrc">
@@ -482,7 +489,7 @@
           <item>
            <widget class="QToolButton" name="toolButtonPortrait">
             <property name="text">
-             <string notr="true"></string>
+             <string notr="true"/>
             </property>
             <property name="icon">
              <iconset resource="../../../libs/vmisc/share/resources/icon.qrc">
@@ -502,7 +509,7 @@
           <item>
            <widget class="QToolButton" name="toolButtonLandscape">
             <property name="text">
-             <string notr="true"></string>
+             <string notr="true"/>
             </property>
             <property name="icon">
              <iconset resource="../../../libs/vmisc/share/resources/icon.qrc">

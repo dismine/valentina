@@ -78,9 +78,6 @@ public:
     static auto IsPointOnCurve(const QVector<QPointF> &points, const QPointF &p) -> bool;
     auto IsPointOnCurve(const QPointF &p) const -> bool;
 
-    static auto SubdividePath(const QVector<QPointF> &points, QPointF p, QVector<QPointF> &sub1, QVector<QPointF> &sub2)
-        -> bool;
-
     auto ClosestPoint(QPointF scenePoint) const -> QPointF;
 
     virtual auto GetStartAngle() const -> qreal = 0;
