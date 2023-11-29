@@ -34,6 +34,7 @@
 #include <QPainterPath>
 #include <QPoint>
 #include <QtDebug>
+#include <QtMath>
 
 #include "../ifc/exception/vexceptionobjecterror.h"
 #include "../vmisc/compatibility.h"
@@ -48,7 +49,7 @@ constexpr qreal VAbstractCurve::minLength; // NOLINT(readability-redundant-decla
 namespace
 {
 //---------------------------------------------------------------------------------------------------------------------
-double NodeCurvature(const QPointF &p1, const QPointF &p2, const QPointF &p3, double length)
+auto NodeCurvature(const QPointF &p1, const QPointF &p2, const QPointF &p3, double length) -> double
 {
     QLineF l1(p2, p1);
     l1.setAngle(l1.angle() + 180);
@@ -56,7 +57,7 @@ double NodeCurvature(const QPointF &p1, const QPointF &p2, const QPointF &p3, do
     QLineF l2(p2, p3);
     double angle = qDegreesToRadians(l2.angleTo(l1));
 
-    return std::sin(angle / 2.0) / length;
+    return qSin(angle / 2.0) / length;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
