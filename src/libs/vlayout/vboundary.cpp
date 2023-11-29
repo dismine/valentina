@@ -33,6 +33,7 @@
 #include "vlayoutpiecepath.h"
 
 #include <QPoint>
+#include <QtDebug>
 
 #if QT_VERSION < QT_VERSION_CHECK(6, 4, 0)
 #include "../vmisc/compatibility.h"

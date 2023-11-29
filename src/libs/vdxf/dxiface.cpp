@@ -11,8 +11,8 @@
 
 #include "dxiface.h"
 #include "../vmisc/vabstractapplication.h"
+#include "libdxfrw/drw_entities.h"
 #include "libdxfrw/libdxfrw.h"
-#include "vdxf/libdxfrw/drw_entities.h"
 
 #include <QDateTime>
 #include <QFont>
