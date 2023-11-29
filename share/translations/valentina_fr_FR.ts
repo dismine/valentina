@@ -14424,12 +14424,12 @@ This option will take an affect after restart.</source>
         <translation>Erreur de compatibilité VPieceNodeData : actualClassVersion = %1 et classVersion = %2</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vlayout/vlayoutpiece_p.h" line="170"/>
+        <location filename="../../src/libs/vlayout/vlayoutpiece_p.h" line="172"/>
         <source>VLayoutPieceData prefix mismatch error: actualStreamHeader = 0x%1 and streamHeader = 0x%2</source>
         <translation>Erreur de correspondance de préfixe VLayoutPiecePathData : actualStreamHeader = 0x%1 et streamHeader = 0x%2</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vlayout/vlayoutpiece_p.h" line="182"/>
+        <location filename="../../src/libs/vlayout/vlayoutpiece_p.h" line="184"/>
         <source>VLayoutPieceData compatibility error: actualClassVersion = %1 and classVersion = %2</source>
         <translation>Erreur de compatibilité VLayoutPieceData : actualClassVersion = %1 et classVersion = %2</translation>
     </message>
@@ -14497,14 +14497,14 @@ This option will take an affect after restart.</source>
         <translation type="vanished">Modifications appliquées.</translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/xml/vplayoutfilereader.cpp" line="1091"/>
+        <location filename="../../src/app/puzzle/xml/vplayoutfilereader.cpp" line="1092"/>
         <location filename="../../src/libs/ifc/xml/vdomdocument.cpp" line="458"/>
         <location filename="../../src/libs/ifc/xml/vdomdocument.cpp" line="463"/>
         <source>Can&apos;t convert toUInt parameter</source>
         <translation>Impossible de convertir vers un paramètre de type entier</translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/xml/vplayoutfilereader.cpp" line="1028"/>
+        <location filename="../../src/app/puzzle/xml/vplayoutfilereader.cpp" line="1029"/>
         <location filename="../../src/libs/ifc/xml/vdomdocument.cpp" line="509"/>
         <source>Can&apos;t convert toBool parameter</source>
         <translation>Impossible de convertir vers un paramètre de type Booléen</translation>
@@ -14515,7 +14515,7 @@ This option will take an affect after restart.</source>
         <translation>Paramètre vide</translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/xml/vplayoutfilereader.cpp" line="1065"/>
+        <location filename="../../src/app/puzzle/xml/vplayoutfilereader.cpp" line="1066"/>
         <location filename="../../src/libs/ifc/xml/vdomdocument.cpp" line="618"/>
         <location filename="../../src/libs/ifc/xml/vdomdocument.cpp" line="623"/>
         <source>Can&apos;t convert toDouble parameter</source>
@@ -14684,7 +14684,7 @@ This option will take an affect after restart.</source>
         <translation>Formule invalide &apos;%1&apos; pour cet outil avec l&apos;identifiant &apos;%2&apos;. %3.</translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/xml/vplayoutfilereader.cpp" line="1117"/>
+        <location filename="../../src/app/puzzle/xml/vplayoutfilereader.cpp" line="1118"/>
         <location filename="../../src/libs/ifc/xml/vdomdocument.cpp" line="487"/>
         <location filename="../../src/libs/ifc/xml/vdomdocument.cpp" line="492"/>
         <source>Can&apos;t convert toInt parameter</source>
@@ -14696,27 +14696,27 @@ This option will take an affect after restart.</source>
         <translation>La pièce nommée &apos;%1&apos; n&apos;est pas unique.</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vgeometry/vabstractcurve.cpp" line="147"/>
+        <location filename="../../src/libs/vgeometry/vabstractcurve.cpp" line="148"/>
         <source>Could not find the segment start.</source>
         <translation>Impossible de trouver le début du segment.</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vgeometry/vabstractcurve.cpp" line="156"/>
+        <location filename="../../src/libs/vgeometry/vabstractcurve.cpp" line="157"/>
         <source>Could not find the segment end.</source>
         <translation>Impossible de trouver la fin du segment.</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vgeometry/vabstractcurve.cpp" line="162"/>
+        <location filename="../../src/libs/vgeometry/vabstractcurve.cpp" line="163"/>
         <source>Segment is too short.</source>
         <translation>Le segment est trop court.</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vgeometry/vabstractcurve.cpp" line="180"/>
+        <location filename="../../src/libs/vgeometry/vabstractcurve.cpp" line="181"/>
         <source>Error calculating segment for curve &apos;%1&apos;. %2</source>
         <translation>Erreur de calcul du segment pour la courbe &apos;%1&apos;. %2</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vgeometry/vabstractcurve.cpp" line="184"/>
+        <location filename="../../src/libs/vgeometry/vabstractcurve.cpp" line="185"/>
         <source>Error in path &apos;%1&apos;. Calculating segment for curve &apos;%2&apos; has failed. %3</source>
         <translation>Erreur dans le chemin &apos;%1&apos;. Le calcul du segment pour la courbe &apos;%2&apos; a échoué. %3</translation>
     </message>
@@ -14826,13 +14826,9 @@ This option will take an affect after restart.</source>
     <message>
         <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="236"/>
         <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="286"/>
-        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="2972"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="2992"/>
         <source>Cannot set printer margins</source>
         <translation>Impossible de définir les marges d&apos;impression de l&apos;imprimante</translation>
-    </message>
-    <message>
-        <source>Unable to cut curve &apos;%1&apos;. The curve is too short.</source>
-        <translation type="vanished">Impossible de segmenter la courbe &apos;%1&apos;. La longueur de la courbe est insuffisante.</translation>
     </message>
     <message>
         <location filename="../../src/libs/vgeometry/vabstractcubicbezier.cpp" line="433"/>
@@ -18674,10 +18670,6 @@ Voulez-vous enregistrer vos changements ?</translation>
         <translation>Impossible de segmenter la courbe</translation>
     </message>
     <message>
-        <source>Unable to cut curve &apos;%1&apos;. The curve is too short.</source>
-        <translation type="vanished">Impossible de segmenter la courbe &apos;%1&apos;. La longueur de la courbe est insuffisante.</translation>
-    </message>
-    <message>
         <location filename="../../src/libs/vgeometry/vabstractcubicbezierpath.cpp" line="199"/>
         <source>Curve &apos;%1&apos;. Length of a cut segment (%2) is too small. Optimize it to minimal value.</source>
         <translation>Courbe &apos;%1&apos;. La partie segmentée (%2) est de longueur insuffisante. Paramétrez une valeur au moins égale au minimum requis.</translation>
@@ -19749,17 +19741,17 @@ Voulez-vous enregistrer vos changements ?</translation>
 <context>
     <name>VBoundary</name>
     <message>
-        <location filename="../../src/libs/vlayout/vboundary.cpp" line="627"/>
+        <location filename="../../src/libs/vlayout/vboundary.cpp" line="628"/>
         <source>Piece &apos;%1&apos;.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/libs/vlayout/vboundary.cpp" line="633"/>
+        <location filename="../../src/libs/vlayout/vboundary.cpp" line="634"/>
         <source>Unable to insert notch for point &apos;%1&apos;.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/libs/vlayout/vboundary.cpp" line="637"/>
+        <location filename="../../src/libs/vlayout/vboundary.cpp" line="638"/>
         <source>Unable to insert notch.</source>
         <translation type="unfinished"></translation>
     </message>
@@ -20837,7 +20829,7 @@ Voulez-vous enregistrer vos changements ?</translation>
 <context>
     <name>VLayoutConverter</name>
     <message>
-        <location filename="../../src/libs/ifc/xml/vlayoutconverter.cpp" line="170"/>
+        <location filename="../../src/libs/ifc/xml/vlayoutconverter.cpp" line="172"/>
         <source>Could not change version.</source>
         <translation>Impossible de modifier la version.</translation>
     </message>
@@ -21342,12 +21334,12 @@ Voulez-vous enregistrer vos changements ?</translation>
 <context>
     <name>VPGraphicsPiece</name>
     <message>
-        <location filename="../../src/app/puzzle/scene/vpgraphicspiece.cpp" line="340"/>
+        <location filename="../../src/app/puzzle/scene/vpgraphicspiece.cpp" line="416"/>
         <source>Move to</source>
         <translation>Déplacer vers</translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/scene/vpgraphicspiece.cpp" line="354"/>
+        <location filename="../../src/app/puzzle/scene/vpgraphicspiece.cpp" line="430"/>
         <source>Remove from Sheet</source>
         <translation>Supprimer de la feuille</translation>
     </message>
@@ -21368,27 +21360,27 @@ Voulez-vous enregistrer vos changements ?</translation>
         <translation>Pièce</translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/xml/vplayoutfilereader.cpp" line="653"/>
+        <location filename="../../src/app/puzzle/xml/vplayoutfilereader.cpp" line="654"/>
         <source>Error in line %1. Grainline main line is empty.</source>
         <translation>Erreur à la ligne %1. Le tracé principal du droit-fil est vide.</translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/xml/vplayoutfilereader.cpp" line="1008"/>
+        <location filename="../../src/app/puzzle/xml/vplayoutfilereader.cpp" line="1009"/>
         <source>Got empty attribute &apos;%1&apos;</source>
         <translation>Attribut &apos;%1&apos; manquant</translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/xml/vplayoutfilereader.cpp" line="628"/>
+        <location filename="../../src/app/puzzle/xml/vplayoutfilereader.cpp" line="629"/>
         <source>Error in line %1. Seam allowance is empty.</source>
         <translation>Erreur ligne %1. La marge de couture est manquante.</translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/xml/vplayoutfilereader.cpp" line="747"/>
+        <location filename="../../src/app/puzzle/xml/vplayoutfilereader.cpp" line="748"/>
         <source>Error in line %1. Internal path shape is empty.</source>
         <translation>Erreur dans la ligne %1. Le chemin interne est vide.</translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/xml/vplayoutfilereader.cpp" line="995"/>
+        <location filename="../../src/app/puzzle/xml/vplayoutfilereader.cpp" line="996"/>
         <source>Unexpected tag %1 in line %2</source>
         <translation>Tag %1 inattendu à ligne %2</translation>
     </message>
@@ -21445,7 +21437,7 @@ Voulez-vous enregistrer vos changements ?</translation>
     </message>
     <message>
         <location filename="../../src/app/puzzle/vpmainwindow.ui" line="197"/>
-        <location filename="../../src/app/puzzle/vpmainwindow.ui" line="2133"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.ui" line="2140"/>
         <source>Properties</source>
         <translation>Propriétés</translation>
     </message>
@@ -21461,15 +21453,15 @@ Voulez-vous enregistrer vos changements ?</translation>
     </message>
     <message>
         <location filename="../../src/app/puzzle/vpmainwindow.ui" line="321"/>
-        <location filename="../../src/app/puzzle/vpmainwindow.ui" line="743"/>
-        <location filename="../../src/app/puzzle/vpmainwindow.ui" line="1650"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.ui" line="750"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.ui" line="1657"/>
         <source>Infos</source>
         <translation>Infos</translation>
     </message>
     <message>
         <location filename="../../src/app/puzzle/vpmainwindow.ui" line="327"/>
-        <location filename="../../src/app/puzzle/vpmainwindow.ui" line="751"/>
-        <location filename="../../src/app/puzzle/vpmainwindow.ui" line="1658"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.ui" line="758"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.ui" line="1665"/>
         <source>Name:</source>
         <translation>Nom :</translation>
     </message>
@@ -21489,9 +21481,8 @@ Voulez-vous enregistrer vos changements ?</translation>
         <translation>Géométrie</translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/vpmainwindow.ui" line="629"/>
         <source>Mirror piece</source>
-        <translation>Pièce en miroir</translation>
+        <translation type="vanished">Pièce en miroir</translation>
     </message>
     <message>
         <location filename="../../src/app/puzzle/vpmainwindow.ui" line="482"/>
@@ -21509,229 +21500,229 @@ Voulez-vous enregistrer vos changements ?</translation>
         <translation>Placement</translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/vpmainwindow.ui" line="653"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.ui" line="660"/>
         <source>No piece selected</source>
         <translation>Aucune pièce sélectionnée</translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/vpmainwindow.ui" line="688"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.ui" line="695"/>
         <source>Sheet properties</source>
         <translation>Propriétés de la feuille</translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/vpmainwindow.ui" line="733"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.ui" line="740"/>
         <source>Current sheet</source>
         <translation>Feuille en cours</translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/vpmainwindow.ui" line="769"/>
-        <location filename="../../src/app/puzzle/vpmainwindow.ui" line="1270"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.ui" line="776"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.ui" line="1277"/>
         <source>Format</source>
         <translation>Format</translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/vpmainwindow.ui" line="1013"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.ui" line="1020"/>
         <source>Remove unused length</source>
         <translation>Rogner la longueur non utilisée</translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/vpmainwindow.ui" line="1023"/>
-        <location filename="../../src/app/puzzle/vpmainwindow.ui" line="1430"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.ui" line="1030"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.ui" line="1437"/>
         <source>Margins</source>
         <translation>Marges</translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/vpmainwindow.ui" line="1031"/>
-        <location filename="../../src/app/puzzle/vpmainwindow.ui" line="1438"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.ui" line="1038"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.ui" line="1445"/>
         <source>Right:</source>
         <translation>Droite :</translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/vpmainwindow.ui" line="1051"/>
-        <location filename="../../src/app/puzzle/vpmainwindow.ui" line="1458"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.ui" line="1058"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.ui" line="1465"/>
         <source>Top:</source>
         <translation>Haut :</translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/vpmainwindow.ui" line="1075"/>
-        <location filename="../../src/app/puzzle/vpmainwindow.ui" line="1482"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.ui" line="1082"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.ui" line="1489"/>
         <source>Left:</source>
         <translation>Gauche :</translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/vpmainwindow.ui" line="1085"/>
-        <location filename="../../src/app/puzzle/vpmainwindow.ui" line="1492"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.ui" line="1092"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.ui" line="1499"/>
         <source>Bottom:</source>
         <translation>Bas :</translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/vpmainwindow.ui" line="1120"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.ui" line="1127"/>
         <source>Placement Grid</source>
         <translation>Grille de placement</translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/vpmainwindow.ui" line="1131"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.ui" line="1138"/>
         <source>Show Grid</source>
         <translation>Afficher la grille</translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/vpmainwindow.ui" line="1138"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.ui" line="1145"/>
         <source>Column width</source>
         <translation>Largeur de colonne</translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/vpmainwindow.ui" line="1152"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.ui" line="1159"/>
         <source>Row height</source>
         <translation>Hauteur de rangée</translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/vpmainwindow.ui" line="1527"/>
-        <location filename="../../src/app/puzzle/vpmainwindow.ui" line="1687"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.ui" line="1534"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.ui" line="1694"/>
         <source>Control</source>
         <translation>Contrôles</translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/vpmainwindow.ui" line="1714"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.ui" line="1721"/>
         <source>Follow grainline</source>
         <translation>Respecter le droit-fil</translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/vpmainwindow.ui" line="1707"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.ui" line="1714"/>
         <source>Sticky edges</source>
         <translation>Forcer l&apos;espacement minimum entre pièces</translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/vpmainwindow.ui" line="1171"/>
-        <location filename="../../src/app/puzzle/vpmainwindow.ui" line="1918"/>
-        <location filename="../../src/app/puzzle/vpmainwindow.ui" line="2256"/>
-        <location filename="../../src/app/puzzle/vpmainwindow.ui" line="2312"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.ui" line="1178"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.ui" line="1925"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.ui" line="2263"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.ui" line="2319"/>
         <source>Export</source>
         <translation>Exporter</translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/vpmainwindow.ui" line="1177"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.ui" line="1184"/>
         <source>Export Sheet</source>
         <translation>Exporter la feuille</translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/vpmainwindow.ui" line="1212"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.ui" line="1219"/>
         <source>Tiles properties</source>
         <translation>Réglages de l&apos;empilement</translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/vpmainwindow.ui" line="1257"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.ui" line="1264"/>
         <source>Tiled Pdf Export</source>
         <translation>Export au format PDF empilé</translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/vpmainwindow.ui" line="1533"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.ui" line="1540"/>
         <source>Show Tiles on sheet</source>
         <translation>Afficher la vue empilée sur la feuille</translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/vpmainwindow.ui" line="1595"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.ui" line="1602"/>
         <source>Layout properties</source>
         <translation>Réglages du plan de coupe</translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/vpmainwindow.ui" line="1640"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.ui" line="1647"/>
         <source>Layout</source>
         <translation>Plan de coupe</translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/vpmainwindow.ui" line="1674"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.ui" line="1681"/>
         <source>Description</source>
         <translation>Description</translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/vpmainwindow.ui" line="1693"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.ui" line="1700"/>
         <source>Warning superposition of pieces</source>
         <translation>Avertir de la superposition des pièces</translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/vpmainwindow.ui" line="1700"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.ui" line="1707"/>
         <source>Warning pieces out of bound</source>
         <translation>Avertir quand le plan excède la zone imprimable de la feuille</translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/vpmainwindow.ui" line="1944"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.ui" line="1951"/>
         <source>zoom</source>
         <translation>zoom</translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/vpmainwindow.ui" line="1745"/>
-        <location filename="../../src/app/puzzle/vpmainwindow.ui" line="1963"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.ui" line="1752"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.ui" line="1970"/>
         <source>Scale</source>
         <translation>Echelle</translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/vpmainwindow.ui" line="2013"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.ui" line="2020"/>
         <source>&amp;Open</source>
         <translation>&amp;Ouvrir</translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/vpmainwindow.ui" line="2031"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.ui" line="2038"/>
         <source>&amp;Save</source>
         <translation>&amp;Sauvegarder</translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/vpmainwindow.ui" line="2049"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.ui" line="2056"/>
         <source>Save &amp;As</source>
         <translation>S&amp;auvegarder sous</translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/vpmainwindow.ui" line="2063"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.ui" line="2070"/>
         <source>&amp;Import Raw Layout Data</source>
         <translation>Importer données brutes de plan de coupe (*rld)</translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/vpmainwindow.ui" line="2078"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.ui" line="2085"/>
         <source>E&amp;xit</source>
         <translation>&amp;Quitter</translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/vpmainwindow.ui" line="2093"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.ui" line="2100"/>
         <source>&amp;New</source>
         <translation>&amp;Nouveau</translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/vpmainwindow.ui" line="2104"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.ui" line="2111"/>
         <source>About &amp;Qt</source>
         <translation>À propos de &amp;Qt</translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/vpmainwindow.ui" line="2116"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.ui" line="2123"/>
         <source>About &amp;Puzzle</source>
         <translation>A propos de &amp;Puzzle</translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/vpmainwindow.ui" line="2148"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.ui" line="2155"/>
         <source>Zoom in</source>
         <translation>Zoom avant</translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/vpmainwindow.ui" line="2160"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.ui" line="2167"/>
         <source>Zoom out</source>
         <translation>Zoom arrière</translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/vpmainwindow.ui" line="2172"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.ui" line="2179"/>
         <source>Zoom 1:1</source>
         <translation>Zoom 1:1</translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/vpmainwindow.ui" line="2184"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.ui" line="2191"/>
         <source>Zoom fit best</source>
         <translation>Zoom optimal</translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/vpmainwindow.ui" line="2187"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.ui" line="2194"/>
         <source>Zoom sheet</source>
         <translation>Zoomer sur la feuille</translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/vpmainwindow.ui" line="2192"/>
-        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="4793"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.ui" line="2199"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="4813"/>
         <source>Preferences</source>
         <translation>Préférences</translation>
     </message>
@@ -21752,125 +21743,125 @@ Voulez-vous enregistrer vos changements ?</translation>
         <translation>Impossible de créer le plan de coupe.</translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="3190"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="3210"/>
         <source>Could not extract data from file &apos;%1&apos;. %2</source>
         <translation>Impossible d&apos;extraire les données du fichier &apos;%1&apos;. %2</translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="806"/>
-        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="893"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="825"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="912"/>
         <source>Centimeters</source>
         <translation>Centimètres</translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="805"/>
-        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="892"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="824"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="911"/>
         <source>Millimiters</source>
         <translation>Millimètres</translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="807"/>
-        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="894"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="826"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="913"/>
         <source>Inches</source>
         <translation>Pouces</translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="1617"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="1637"/>
         <source>Scale:</source>
         <translation>Echelle :</translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="1650"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="1670"/>
         <source>untitled %1.vlt</source>
         <translation>sans nom %1.vlt</translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="1654"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="1674"/>
         <source>untitled.vlt</source>
         <translation>sans-nom.vlt</translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="1662"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="1682"/>
         <source>read only</source>
         <translation>Lecture seule</translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="1717"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="1737"/>
         <source>Cannot read settings from a malformed .INI file.</source>
         <translation>Lecture des réglages impossible, fichier .INI invalide.</translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="1734"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="1754"/>
         <source>Cannot save settings. Access denied.</source>
         <translation>Impossible d&apos;enregistrer les réglages. Accès refusé.</translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="2631"/>
-        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="2928"/>
-        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="3109"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="2651"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="2948"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="3129"/>
         <source>Failed to open file, is it writable?</source>
         <translation>Impossible d&apos;ouvrir le fichier, avez-vous les droits d&apos;écriture ?</translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="1789"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="1809"/>
         <source>&amp;New Window</source>
         <translation>&amp;Nouvelle Fenêtre</translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="1746"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="1766"/>
         <source>Layout has been modified. Do you want to save your changes?</source>
         <translation>Le plan de coupe a été modifié. Souhaitez-vous sauvegarder les modifications que vous avez apportées ?</translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="3470"/>
-        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="3525"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="3490"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="3545"/>
         <source>Layout files</source>
         <translation>Fichiers du plan de coupe</translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="3474"/>
-        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="3617"/>
-        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="4560"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="3494"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="3637"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="4580"/>
         <source>Open file</source>
         <translation>Ouvrir fichier</translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="3508"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="3528"/>
         <source>Could not save the file</source>
         <translation>Impossible de sauvegarder le fichier</translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="3527"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="3547"/>
         <source>layout</source>
         <translation>plan de coupe</translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="3539"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="3559"/>
         <source>Save as</source>
         <translation>Enregistrer sous</translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="3570"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="3590"/>
         <source>Failed to lock. This file already opened in another window.</source>
         <translation>Verrouillage impossible. Le fichier est déjà ouvert dans une autre fenêtre.</translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="3581"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="3601"/>
         <source>Could not save file</source>
         <translation>Impossible de sauvegarder le fichier</translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="3602"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="3622"/>
         <source>Failed to lock. This file already opened in another window. Expect collissions when run 2 copies of the program.</source>
         <translation>Verrouillage impossible car le fichier est déjà ouvert dans une autre fenêtre. Ceci se produit généralement quand 2 copies du programme sont ouvertes en même temps.</translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="3612"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="3632"/>
         <source>Raw Layout files</source>
         <translation>Fichiers de données brutes de plan de coupe</translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="3630"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="3650"/>
         <source>About Qt</source>
         <translation>À propos de Qt</translation>
     </message>
@@ -21907,13 +21898,13 @@ Voulez-vous enregistrer vos changements ?</translation>
     </message>
     <message>
         <location filename="../../src/app/puzzle/vpmainwindow.ui" line="417"/>
-        <location filename="../../src/app/puzzle/vpmainwindow.ui" line="1759"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.ui" line="1766"/>
         <source>Horizontal:</source>
         <translation>Horizontal :</translation>
     </message>
     <message>
         <location filename="../../src/app/puzzle/vpmainwindow.ui" line="440"/>
-        <location filename="../../src/app/puzzle/vpmainwindow.ui" line="1772"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.ui" line="1779"/>
         <source>Vertical:</source>
         <translation>Vertical :</translation>
     </message>
@@ -21933,139 +21924,149 @@ Voulez-vous enregistrer vos changements ?</translation>
         <translation>Appliquer séparément à chaque pièce</translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/vpmainwindow.ui" line="789"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.ui" line="629"/>
+        <source>Vertically flipped</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/app/puzzle/vpmainwindow.ui" line="636"/>
+        <source>Horizontally flipped</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/app/puzzle/vpmainwindow.ui" line="796"/>
         <source>Unit:</source>
         <translation>Unité :</translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/vpmainwindow.ui" line="805"/>
-        <location filename="../../src/app/puzzle/vpmainwindow.ui" line="1296"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.ui" line="812"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.ui" line="1303"/>
         <source>Templates:</source>
         <translation>Modèles :</translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/vpmainwindow.ui" line="864"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.ui" line="871"/>
         <source>Length:</source>
         <translation>Longueur :</translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/vpmainwindow.ui" line="927"/>
-        <location filename="../../src/app/puzzle/vpmainwindow.ui" line="1373"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.ui" line="934"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.ui" line="1380"/>
         <source>Width:</source>
         <translation>Largeur :</translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/vpmainwindow.ui" line="938"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.ui" line="945"/>
         <source>Grainline orientation:</source>
         <translation>Sens du droit-fil :</translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/vpmainwindow.ui" line="950"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.ui" line="957"/>
         <source>Force the grainline orientation to always be horizontal</source>
         <translation>Forcer droit-fil toujours horizontal</translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/vpmainwindow.ui" line="973"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.ui" line="980"/>
         <source>Force the grainline orientation to always be vertical</source>
         <translation>Forcer droit-fil toujours vertical</translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/vpmainwindow.ui" line="1110"/>
-        <location filename="../../src/app/puzzle/vpmainwindow.ui" line="1517"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.ui" line="1117"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.ui" line="1524"/>
         <source>Ignore margins</source>
         <translation>Ignorer les marges</translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/vpmainwindow.ui" line="1386"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.ui" line="1393"/>
         <source>Height:</source>
         <translation>Hauteur :</translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/vpmainwindow.ui" line="1540"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.ui" line="1547"/>
         <source>Show watermark preview</source>
         <translation>Afficher aperçu du filigrane</translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/vpmainwindow.ui" line="1543"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.ui" line="1550"/>
         <source>Show watermark</source>
         <translation>Afficher le filigrane</translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/vpmainwindow.ui" line="1553"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.ui" line="1560"/>
         <source>Print tiles scheme</source>
         <translation>Imprimer aussi le plan général de l&apos;empilement</translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/vpmainwindow.ui" line="1721"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.ui" line="1728"/>
         <source>Boundary together with notches</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/vpmainwindow.ui" line="1730"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.ui" line="1737"/>
         <source>Pieces gap:</source>
         <translation>Espacement entre pièces :</translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/vpmainwindow.ui" line="1924"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.ui" line="1931"/>
         <source>Export Layout</source>
         <translation>Exporter le plan de coupe</translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/vpmainwindow.ui" line="1977"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.ui" line="1984"/>
         <source>Undo commands</source>
         <translation>Annuler</translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/vpmainwindow.ui" line="2200"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.ui" line="2207"/>
         <source>Add Sheet</source>
         <translation>Ajouter une feuille</translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/vpmainwindow.ui" line="2212"/>
-        <location filename="../../src/app/puzzle/vpmainwindow.ui" line="2268"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.ui" line="2219"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.ui" line="2275"/>
         <source>Print</source>
         <translation>Imprimer</translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/vpmainwindow.ui" line="2224"/>
-        <location filename="../../src/app/puzzle/vpmainwindow.ui" line="2280"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.ui" line="2231"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.ui" line="2287"/>
         <source>Print preview</source>
         <translation>Aperçu avant impression</translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/vpmainwindow.ui" line="2236"/>
-        <location filename="../../src/app/puzzle/vpmainwindow.ui" line="2292"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.ui" line="2243"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.ui" line="2299"/>
         <source>Print tiled</source>
         <translation>Impression empilée</translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/vpmainwindow.ui" line="2248"/>
-        <location filename="../../src/app/puzzle/vpmainwindow.ui" line="2304"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.ui" line="2255"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.ui" line="2311"/>
         <source>Print preview tiled</source>
         <translation>Imprimer l&apos;aperçu empilé</translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/vpmainwindow.ui" line="2324"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.ui" line="2331"/>
         <source>Editor</source>
         <translation>Editeur</translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/vpmainwindow.ui" line="2327"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.ui" line="2334"/>
         <source>Create or edit a watermark</source>
         <translation>Créer ou éditer un filigrane</translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/vpmainwindow.ui" line="2338"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.ui" line="2345"/>
         <source>Edit current</source>
         <translation>Editer le filigrane chargé</translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/vpmainwindow.ui" line="2353"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.ui" line="2360"/>
         <source>Load</source>
         <translation>Charger</translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/vpmainwindow.ui" line="2368"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.ui" line="2375"/>
         <source>Remove</source>
         <translation>Retirer</translation>
     </message>
@@ -22076,175 +22077,175 @@ Voulez-vous enregistrer vos changements ?</translation>
     </message>
     <message>
         <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="714"/>
-        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="3443"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="3463"/>
         <source>&amp;Undo</source>
         <translation>&amp;Annuler</translation>
     </message>
     <message>
         <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="720"/>
-        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="3444"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="3464"/>
         <source>&amp;Redo</source>
         <translation>&amp;Rétablir</translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="808"/>
-        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="895"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="827"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="914"/>
         <source>Pixels</source>
         <translation>Pixels</translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="1745"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="1765"/>
         <source>Unsaved changes</source>
         <translation>Changements non enregistrés</translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="1754"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="1774"/>
         <source>Save…</source>
         <translation>Enregistrer …</translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="1754"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="1774"/>
         <source>Save</source>
         <translation>Enregistrer</translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="1759"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="1779"/>
         <source>Don&apos;t Save</source>
         <translation>Ne pas sauvegarder</translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="2242"/>
-        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="2303"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="2262"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="2323"/>
         <source>Can&apos;t create a path</source>
         <translation>Impossible de créer ce chemin d&apos;accès</translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="2514"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="2534"/>
         <source>Can&apos;t open file &apos;%1&apos;</source>
         <translation>Impossible d&apos;ouvrir le fichier &apos;%1&apos;</translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="2528"/>
-        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="2978"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="2548"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="2998"/>
         <source>Failed in flushing page to disk, disk full?</source>
         <translation>Echec d&apos;envoi de la page sur le disque, disque plein ?</translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="2844"/>
-        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="2873"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="2864"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="2893"/>
         <source>The layout is invalid.</source>
         <translation>Plan de coupe non valide.</translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="2845"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="2865"/>
         <source>The layout is invalid. Piece out of bound. Do you want to continue export?</source>
         <translation>Le plan de coupe est non valide. Zone imprimable excédée. Voulez-vous poursuivre quand même ?</translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="2874"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="2894"/>
         <source>The layout is invalid. Pieces superposition. Do you want to continue export?</source>
         <translation>Le plan de coupe est non valide, les pièces se superposent. Voulez-vous poursuivre quand même ?</translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="3903"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="3923"/>
         <source>Sheet %1</source>
         <translation>Feuille %1</translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="3252"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="3272"/>
         <source>translate pieces</source>
         <translation>Déplacement des pièces</translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="3346"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="3366"/>
         <source>rotate pieces</source>
         <translation>Rotation des pièces</translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="4189"/>
-        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="4240"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="4209"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="4260"/>
         <source>For printing multipages document all sheet should have the same size.</source>
         <translation>Pour imprimer un document multipages, toutes les feuilles doivent être de la même taille.</translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="4201"/>
-        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="4252"/>
-        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="4287"/>
-        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="4325"/>
-        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="4380"/>
-        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="4424"/>
-        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="4457"/>
-        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="4493"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="4221"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="4272"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="4307"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="4345"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="4400"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="4444"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="4477"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="4513"/>
         <source>Print error</source>
         <translation>Erreur d&apos;impression</translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="4202"/>
-        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="4253"/>
-        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="4288"/>
-        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="4326"/>
-        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="4381"/>
-        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="4425"/>
-        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="4458"/>
-        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="4494"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="4222"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="4273"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="4308"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="4346"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="4401"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="4445"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="4478"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="4514"/>
         <source>Cannot proceed because there are no available printers in your system.</source>
         <translation>Impossible de poursuivre, aucune imprimante système détectée.</translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="4557"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="4577"/>
         <source>Watermark files</source>
         <translation>Fichiers filigranes</translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="4213"/>
-        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="4264"/>
-        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="4299"/>
-        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="4337"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="4233"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="4284"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="4319"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="4357"/>
         <source>Unable to get sheet page settings</source>
         <translation>Impossible d&apos;analyser les réglages de la feuille</translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/vpmainwindow.ui" line="1560"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.ui" line="1567"/>
         <source>Show tile number</source>
         <translation>Afficher les numéros des pages</translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/vpmainwindow.ui" line="1991"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.ui" line="1998"/>
         <source>Z value</source>
         <translation>Valeur Z</translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/vpmainwindow.ui" line="2380"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.ui" line="2387"/>
         <source>Bottom</source>
         <translation>En arrière-plan</translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/vpmainwindow.ui" line="2389"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.ui" line="2396"/>
         <source>Down</source>
         <translation>Arrière +</translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/vpmainwindow.ui" line="2398"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.ui" line="2405"/>
         <source>Up</source>
         <translation>Avant +</translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/vpmainwindow.ui" line="2407"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.ui" line="2414"/>
         <source>Top</source>
         <translation>En avant-plan</translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/vpmainwindow.ui" line="1550"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.ui" line="1557"/>
         <source>Has effect only when print in application. To export with tiles scheme use separate setting</source>
         <translation>N&apos;a d&apos;effet que lors d&apos;une impression depuis l&apos;application. Pour exporter en incluant le tuilage, veuillez utiliser le réglage dédié</translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="4153"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="4173"/>
         <source>sheet</source>
         <translation>feuille</translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="3213"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="3233"/>
         <source>Piece %1 invalid. %2</source>
         <translation>Pièce %1 invalide. %2</translation>
     </message>
@@ -22252,18 +22253,18 @@ Voulez-vous enregistrer vos changements ?</translation>
 <context>
     <name>VPPiece</name>
     <message>
-        <location filename="../../src/app/puzzle/layout/vppiece.cpp" line="420"/>
-        <location filename="../../src/app/puzzle/layout/vppiece.cpp" line="426"/>
+        <location filename="../../src/app/puzzle/layout/vppiece.cpp" line="437"/>
+        <location filename="../../src/app/puzzle/layout/vppiece.cpp" line="443"/>
         <source>Seam line is empty</source>
         <translation>La ligne de couture n&apos;est pas définie</translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/layout/vppiece.cpp" line="432"/>
+        <location filename="../../src/app/puzzle/layout/vppiece.cpp" line="449"/>
         <source>Seam allowance line is empty</source>
         <translation>La ligne de la marge de couture n&apos;est pas définie</translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/layout/vppiece.cpp" line="438"/>
+        <location filename="../../src/app/puzzle/layout/vppiece.cpp" line="455"/>
         <source>Grainline is empty</source>
         <translation>Le droit-fil n&apos;est pas défini</translation>
     </message>
