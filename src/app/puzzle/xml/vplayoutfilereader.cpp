@@ -511,7 +511,8 @@ void VPLayoutFileReader::ReadPiece(const VPPiecePtr &piece)
     piece->SetXScale(ReadAttributeDouble(attribs, ML::AttrXScale, QChar('1')));
     piece->SetYScale(ReadAttributeDouble(attribs, ML::AttrYScale, QChar('1')));
     piece->SetZValue(ReadAttributeDouble(attribs, ML::AttrZValue, QChar('1')));
-    piece->SetMirror(ReadAttributeBool(attribs, ML::AttrMirrored, falseStr));
+    piece->SetVerticallyFlipped(ReadAttributeBool(attribs, ML::AttrVerticallyFlipped, falseStr));
+    piece->SetHorizontallyFlipped(ReadAttributeBool(attribs, ML::AttrHorizontallyFlipped, falseStr));
     piece->SetForbidFlipping(ReadAttributeBool(attribs, ML::AttrForbidFlipping, falseStr));
     piece->SetForceFlipping(ReadAttributeBool(attribs, ML::AttrForceFlipping, falseStr));
     piece->SetFollowGrainline(ReadAttributeBool(attribs, ML::AttrFollowGrainline, falseStr));

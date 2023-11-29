@@ -284,7 +284,7 @@ auto VLayoutPaper::SaveResult(const VBestSquare &bestResult, const VLayoutPiece 
     {
         VLayoutPiece workDetail = detail;
         workDetail.SetMatrix(bestResult.Matrix()); // Don't forget set matrix
-        workDetail.SetMirror(bestResult.Mirror());
+        workDetail.SetVerticallyFlipped(bestResult.Mirror());
 
         if (d->saveLength)
         {

@@ -97,9 +97,10 @@ public:
     void SetGrainline(const VPieceGrainline &grainline);
 
     /**
-     * @brief Flip horizontally mirror around center of bounding rect
+     * @brief Flip verticvally mirror around center of bounding rect
      */
-    void Flip();
+    void FlipVertically();
+    void FlipHorizontally();
 
     auto OutOfBound() const -> bool;
     void SetOutOfBound(bool newOutOfBound);

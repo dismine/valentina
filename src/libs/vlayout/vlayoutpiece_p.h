@@ -83,7 +83,8 @@ public:
     /** @brief layoutWidth value layout allowance width in pixels. */
     qreal m_layoutWidth{0}; // NOLINT(misc-non-private-member-variables-in-classes)
 
-    bool m_mirror{false}; // NOLINT(misc-non-private-member-variables-in-classes)
+    bool m_verticallyFlipped{false};   // NOLINT(misc-non-private-member-variables-in-classes)
+    bool m_horizontallyFlipped{false}; // NOLINT(misc-non-private-member-variables-in-classes)
 
     /** @brief detailLabel detail label rectangle */
     QVector<QPointF> m_detailLabel{}; // NOLINT(misc-non-private-member-variables-in-classes)
@@ -118,7 +119,7 @@ private:
     Q_DISABLE_ASSIGN_MOVE(VLayoutPieceData) // NOLINT
 
     static constexpr quint32 streamHeader{0x80D7D009}; // CRC-32Q string "VLayoutPieceData"
-    static constexpr quint16 classVersion{5};
+    static constexpr quint16 classVersion{6};
 };
 
 QT_WARNING_POP
@@ -142,7 +143,7 @@ inline auto operator<<(QDataStream &dataStream, const VLayoutPieceData &piece) -
     dataStream << piece.m_internalPaths;
     dataStream << piece.m_matrix;
     dataStream << piece.m_layoutWidth;
-    dataStream << piece.m_mirror;
+    dataStream << piece.m_verticallyFlipped;
     dataStream << piece.m_detailLabel;
     dataStream << piece.m_patternInfo;
     dataStream << piece.m_placeLabels;
@@ -155,6 +156,7 @@ inline auto operator<<(QDataStream &dataStream, const VLayoutPieceData &piece) -
     dataStream << piece.m_xScale;
     dataStream << piece.m_yScale;
     dataStream << piece.m_grainline;
+    dataStream << piece.m_horizontallyFlipped;
 
     return dataStream;
 }
@@ -211,7 +213,7 @@ inline auto operator>>(QDataStream &dataStream, VLayoutPieceData &piece) -> QDat
     dataStream >> piece.m_internalPaths;
     dataStream >> piece.m_matrix;
     dataStream >> piece.m_layoutWidth;
-    dataStream >> piece.m_mirror;
+    dataStream >> piece.m_verticallyFlipped;
     dataStream >> piece.m_detailLabel;
     dataStream >> piece.m_patternInfo;
 
@@ -266,6 +268,11 @@ inline auto operator>>(QDataStream &dataStream, VLayoutPieceData &piece) -> QDat
             piece.m_grainline.SetArrowType(arrowType);
             piece.m_grainline.SetEnabled(grainlineEnabled);
         }
+    }
+
+    if (actualClassVersion >= 6)
+    {
+        dataStream >> piece.m_horizontallyFlipped;
     }
 
     return dataStream;

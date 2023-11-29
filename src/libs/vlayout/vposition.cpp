@@ -281,7 +281,7 @@ void VPosition::SaveCandidate(VBestSquare &bestResult, const VLayoutPiece &detai
     data.globalI = globalI;              // Edge of global contour
     data.detJ = detJ;                    // Edge of detail
     data.resMatrix = detail.GetMatrix(); // Matrix for rotation and translation detail
-    data.resMirror = detail.IsMirror();
+    data.resMirror = detail.IsVerticallyFlipped();
     data.type = type;
     data.depthPosition = depthPosition;
     data.sidePosition = sidePosition;

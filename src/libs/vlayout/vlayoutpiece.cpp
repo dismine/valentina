@@ -667,7 +667,7 @@ template <> auto VLayoutPiece::Map<VLayoutPoint>(QVector<VLayoutPoint> points) c
                        point.ry() = p.y();
                        return point;
                    });
-    if (d->m_mirror)
+    if (d->m_verticallyFlipped || d->m_horizontallyFlipped)
     {
         std::reverse(points.begin(), points.end());
     }
@@ -1087,7 +1087,7 @@ void VLayoutPiece::Mirror(const QLineF &edge)
     m.translate(-p2.x(), -p2.y());
     d->m_matrix *= m;
 
-    d->m_mirror = !d->m_mirror;
+    d->m_verticallyFlipped = !d->m_verticallyFlipped;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -1096,7 +1096,7 @@ void VLayoutPiece::Mirror()
     QTransform m;
     m.scale(-1, 1);
     d->m_matrix *= m;
-    d->m_mirror = !d->m_mirror;
+    d->m_verticallyFlipped = !d->m_verticallyFlipped;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -1607,7 +1607,7 @@ void VLayoutPiece::LabelStringsSVGFont(QGraphicsItem *parent, const QVector<QPoi
         // set up the rotation around top-left corner matrix
         QTransform labelMatrix;
         labelMatrix.translate(labelShape.at(0).x(), labelShape.at(0).y());
-        if (d->m_mirror)
+        if (d->m_verticallyFlipped)
         {
             labelMatrix.scale(-1, 1);
             labelMatrix.rotate(-angle);
@@ -1704,7 +1704,7 @@ void VLayoutPiece::LabelStringsOutlineFont(QGraphicsItem *parent, const QVector<
         // set up the rotation around top-left corner matrix
         QTransform labelMatrix;
         labelMatrix.translate(labelShape.at(0).x(), labelShape.at(0).y());
-        if (d->m_mirror)
+        if (d->m_verticallyFlipped)
         {
             labelMatrix.scale(-1, 1);
             labelMatrix.rotate(-angle);
@@ -1844,15 +1844,27 @@ auto VLayoutPiece::GetMainPathItem() const -> QGraphicsPathItem *
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-auto VLayoutPiece::IsMirror() const -> bool
+auto VLayoutPiece::IsVerticallyFlipped() const -> bool
 {
-    return d->m_mirror;
+    return d->m_verticallyFlipped;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VLayoutPiece::SetMirror(bool value)
+void VLayoutPiece::SetVerticallyFlipped(bool value)
 {
-    d->m_mirror = value;
+    d->m_verticallyFlipped = value;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+auto VLayoutPiece::IsHorizontallyFlipped() const -> bool
+{
+    return d->m_horizontallyFlipped;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VLayoutPiece::SetHorizontallyFlipped(bool value)
+{
+    d->m_horizontallyFlipped = value;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -1911,7 +1923,7 @@ auto VLayoutPiece::Edge(const QVector<QPointF> &path, int i) const -> QLineF
         i2 = 0;
     }
 
-    if (d->m_mirror)
+    if (d->m_verticallyFlipped || d->m_horizontallyFlipped)
     {
         QVector<QPointF> newPath = Map(path);
         return {newPath.at(i1), newPath.at(i2)};
@@ -1940,7 +1952,7 @@ auto VLayoutPiece::EdgeByPoint(const QVector<QPointF> &path, const QPointF &p1) 
 //---------------------------------------------------------------------------------------------------------------------
 template <class T> auto VLayoutPiece::Map(QVector<T> points) const -> QVector<T>
 {
-    return MapVector(points, d->m_matrix, d->m_mirror);
+    return MapVector(points, d->m_matrix, d->m_verticallyFlipped || d->m_horizontallyFlipped);
 }
 
 //---------------------------------------------------------------------------------------------------------------------

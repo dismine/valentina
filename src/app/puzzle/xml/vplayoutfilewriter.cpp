@@ -260,8 +260,10 @@ void VPLayoutFileWriter::WritePiece(const VPPiecePtr &piece)
     writeStartElement(ML::TagPiece);
     SetAttribute(ML::AttrUID, piece->GetUUID().toString());
     SetAttribute(ML::AttrName, piece->GetName());
-    SetAttributeOrRemoveIf<bool>(ML::AttrMirrored, piece->IsMirror(),
-                                 [](bool mirrored) noexcept { return not mirrored; });
+    SetAttributeOrRemoveIf<bool>(ML::AttrVerticallyFlipped, piece->IsVerticallyFlipped(),
+                                 [](bool flipped) noexcept { return not flipped; });
+    SetAttributeOrRemoveIf<bool>(ML::AttrHorizontallyFlipped, piece->IsHorizontallyFlipped(),
+                                 [](bool flipped) noexcept { return not flipped; });
     SetAttributeOrRemoveIf<bool>(ML::AttrForbidFlipping, piece->IsForbidFlipping(),
                                  [](bool forbid) noexcept { return not forbid; });
     SetAttributeOrRemoveIf<bool>(ML::AttrForceFlipping, piece->IsForceFlipping(),

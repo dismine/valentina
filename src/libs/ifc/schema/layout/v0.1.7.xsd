@@ -221,7 +221,8 @@
                   </xs:sequence>
                   <xs:attribute name="uid" type="uuid" use="required"/>
                   <xs:attribute type="xs:string" name="name"/>
-                  <xs:attribute type="xs:boolean" name="mirrored"/>
+                  <xs:attribute type="xs:boolean" name="verticallyFlipped"/>
+                  <xs:attribute type="xs:boolean" name="horizontallyFlipped"/>
                   <xs:attribute type="xs:boolean" name="forbidFlipping"/>
                   <xs:attribute type="xs:boolean" name="forceFlipping"/>
                   <xs:attribute type="xs:boolean" name="followGrainline"/>
@@ -419,7 +420,8 @@
                               </xs:sequence>
                               <xs:attribute name="uid" type="uuid" use="required"/>
                               <xs:attribute type="xs:string" name="name"/>
-                              <xs:attribute type="xs:boolean" name="mirrored"/>
+                              <xs:attribute type="xs:boolean" name="verticallyFlipped"/>
+                              <xs:attribute type="xs:boolean" name="horizontallyFlipped"/>
                               <xs:attribute type="xs:boolean" name="forbidFlipping"/>
                               <xs:attribute type="xs:boolean" name="forceFlipping"/>
                               <xs:attribute type="xs:boolean" name="followGrainline"/>

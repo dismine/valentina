@@ -162,16 +162,26 @@ inline auto LineAlign(const TextLine &tl, const QString &text, const QFontMetric
 
 //---------------------------------------------------------------------------------------------------------------------
 auto LineMatrix(const VLayoutPiece &piece, const QPointF &topLeft, qreal angle, const QPointF &linePos,
-                int maxLineWidth) -> QTransform
+                int maxLineWidth, qreal maxLabelHeight) -> QTransform
 {
     QTransform labelMatrix;
     labelMatrix.translate(topLeft.x(), topLeft.y());
 
-    if (piece.IsMirror())
+    if (piece.IsVerticallyFlipped() || piece.IsHorizontallyFlipped())
     {
-        labelMatrix.scale(-1, 1);
-        labelMatrix.rotate(-angle);
-        labelMatrix.translate(-maxLineWidth, 0);
+        if (piece.IsVerticallyFlipped())
+        {
+            labelMatrix.scale(-1, 1);
+            labelMatrix.rotate(-angle);
+            labelMatrix.translate(-maxLineWidth, 0);
+        }
+
+        if (piece.IsHorizontallyFlipped())
+        {
+            labelMatrix.scale(1, -1);
+            labelMatrix.rotate(-angle);
+            labelMatrix.translate(0, -maxLabelHeight);
+        }
     }
     else
     {
@@ -219,6 +229,72 @@ auto CurrentPatternDistance(qreal patternDistance, bool dashMode, const QVector<
 auto NextPattern(int patternIndex, const QVector<int> &pattern) -> int
 {
     return (patternIndex + 2) % static_cast<int>(pattern.size());
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+auto LabelHeightSVGFont(const VLayoutPiece &detail, const QVector<TextLine> &labelLines, const VSvgFont &svgFont,
+                        const VSvgFontDatabase *db, qreal penWidth, qreal dH, int spacing) -> qreal
+{
+    qreal labelHeight = 0;
+    if (detail.IsHorizontallyFlipped())
+    {
+        for (int i = 0; i < labelLines.size(); ++i)
+        {
+            const VSvgFont fnt = LineFont(labelLines.at(i), svgFont);
+            VSvgFontEngine engine = db->FontEngine(fnt);
+
+            const qreal lineHeight = engine.FontHeight() + penWidth;
+
+            if (labelHeight + lineHeight > dH)
+            {
+                break;
+            }
+
+            if (i < labelLines.size() - 1)
+            {
+                labelHeight += lineHeight + spacing;
+            }
+            else
+            {
+                labelHeight += lineHeight;
+            }
+        }
+    }
+
+    return labelHeight;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+auto LabelHeightOutlineFont(const VLayoutPiece &detail, const QVector<TextLine> &labelLines, const QFont &font,
+                            qreal penWidth, qreal dH, int spacing) -> qreal
+{
+    qreal labelHeight = 0;
+    if (detail.IsHorizontallyFlipped())
+    {
+        for (int i = 0; i < labelLines.size(); ++i)
+        {
+            const QFont fnt = LineFont(labelLines.at(i), font);
+            QFontMetrics fm(fnt);
+
+            const qreal lineHeight = fm.height() + penWidth;
+
+            if (labelHeight + lineHeight > dH)
+            {
+                break;
+            }
+
+            if (i < labelLines.size() - 1)
+            {
+                labelHeight += lineHeight + spacing;
+            }
+            else
+            {
+                labelHeight += lineHeight;
+            }
+        }
+    }
+
+    return labelHeight;
 }
 } // namespace
 
@@ -475,7 +551,8 @@ void VHPGLEngine::PlotInternalPaths(QTextStream &out, const VLayoutPiece &detail
     QVector<VLayoutPiecePath> internalPaths = detail.GetInternalPaths();
     for (const auto &path : internalPaths)
     {
-        QVector<VLayoutPoint> points = VLayoutPiece::MapVector(path.Points(), detail.GetMatrix(), detail.IsMirror());
+        QVector<VLayoutPoint> points = VLayoutPiece::MapVector(
+            path.Points(), detail.GetMatrix(), detail.IsVerticallyFlipped() || detail.IsHorizontallyFlipped());
         PlotPath(out, CastToPoint(ConvertPath(points)), path.PenStyle());
     }
 }
@@ -579,6 +656,8 @@ void VHPGLEngine::PlotLabelSVGFont(QTextStream &out, const VLayoutPiece &detail,
 
     const QVector<TextLine> labelLines = tm.GetLabelSourceLines(qFloor(dW), svgFont, m_penWidthPx);
 
+    const qreal labelHeight = LabelHeightSVGFont(detail, labelLines, svgFont, db, m_penWidthPx, dH, tm.GetSpacing());
+
     for (const auto &tl : labelLines)
     {
         const VSvgFont fnt = LineFont(tl, svgFont);
@@ -592,7 +671,8 @@ void VHPGLEngine::PlotLabelSVGFont(QTextStream &out, const VLayoutPiece &detail,
         const QString qsText = tl.m_qsText;
         const qreal dX = LineAlign(tl, qsText, engine, dW, m_penWidthPx);
         // set up the rotation around top-left corner matrix
-        const QTransform lineMatrix = LineMatrix(detail, labelShape.at(0), angle, QPointF(dX, dY), maxLineWidth);
+        const QTransform lineMatrix =
+            LineMatrix(detail, labelShape.at(0), angle, QPointF(dX, dY), maxLineWidth, labelHeight);
 
         QPainterPath path = lineMatrix.map(engine.DrawPath(QPointF(), qsText));
         PlotPainterPath(out, path, Qt::SolidLine);
@@ -626,6 +706,9 @@ void VHPGLEngine::PlotLabelOutlineFont(QTextStream &out, const VLayoutPiece &det
 
     const QVector<TextLine> labelLines = tm.GetLabelSourceLines(qFloor(dW), tm.GetFont());
 
+    const qreal labelHeight =
+        LabelHeightOutlineFont(detail, labelLines, tm.GetFont(), m_penWidthPx, dH, tm.GetSpacing());
+
     for (const auto &tl : labelLines)
     {
         const QFont fnt = LineFont(tl, tm.GetFont());
@@ -646,7 +729,8 @@ void VHPGLEngine::PlotLabelOutlineFont(QTextStream &out, const VLayoutPiece &det
         const QString qsText = tl.m_qsText;
         const qreal dX = LineAlign(tl, qsText, fm, dW);
         // set up the rotation around top-left corner matrix
-        const QTransform lineMatrix = LineMatrix(detail, labelShape.at(0), angle, QPointF(dX, dY), maxLineWidth);
+        const QTransform lineMatrix =
+            LineMatrix(detail, labelShape.at(0), angle, QPointF(dX, dY), maxLineWidth, labelHeight);
 
         QPainterPath path;
 

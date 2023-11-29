@@ -279,8 +279,8 @@
              <rect>
               <x>0</x>
               <y>0</y>
-              <width>392</width>
-              <height>700</height>
+              <width>378</width>
+              <height>707</height>
              </rect>
             </property>
             <layout class="QVBoxLayout" name="verticalLayout_23">
@@ -624,9 +624,16 @@
                   </property>
                   <layout class="QVBoxLayout" name="verticalLayout_9">
                    <item>
-                    <widget class="QCheckBox" name="checkBoxCurrentPieceMirrorPiece">
+                    <widget class="QCheckBox" name="checkBoxCurrentPieceVerticallyFlipped">
                      <property name="text">
-                      <string>Mirror piece</string>
+                      <string>Vertically flipped</string>
+                     </property>
+                    </widget>
+                   </item>
+                   <item>
+                    <widget class="QCheckBox" name="checkBoxCurrentPieceHorizontallyFlipped">
+                     <property name="text">
+                      <string>Horizontally flipped</string>
                      </property>
                     </widget>
                    </item>
@@ -2416,7 +2423,7 @@
   <tabstop>lineEditCurrentPieceName</tabstop>
   <tabstop>plainTextEditCurrentPieceUUID</tabstop>
   <tabstop>checkBoxCurrentPieceShowSeamline</tabstop>
-  <tabstop>checkBoxCurrentPieceMirrorPiece</tabstop>
+  <tabstop>checkBoxCurrentPieceVerticallyFlipped</tabstop>
   <tabstop>doubleSpinBoxCurrentPieceAngle</tabstop>
   <tabstop>doubleSpinBoxCurrentPieceBoxPositionX</tabstop>
   <tabstop>doubleSpinBoxCurrentPieceBoxPositionY</tabstop>
@@ -2434,8 +2441,8 @@
  </resources>
  <connections/>
  <buttongroups>
-  <buttongroup name="buttonGroupTileOrientation"/>
-  <buttongroup name="buttonGroupSheetOrientation"/>
   <buttongroup name="buttonGroupRotationDirection"/>
+  <buttongroup name="buttonGroupSheetOrientation"/>
+  <buttongroup name="buttonGroupTileOrientation"/>
  </buttongroups>
 </ui>

@@ -72,6 +72,8 @@ protected:
 
     void ConvertPiecesToV0_1_5();
 
+    void ConvertPiecesToV0_1_7();
+
     void ToV0_1_3();
     void ToV0_1_5();
     void ToV0_1_7();

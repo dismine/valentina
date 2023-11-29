@@ -144,7 +144,7 @@ VPPiece::VPPiece(const VLayoutPiece &layoutPiece)
 
     if (IsForceFlipping())
     {
-        Flip();
+        FlipVertically();
     }
 }
 
@@ -200,7 +200,8 @@ void VPPiece::ClearTransformations()
     const QPointF offset = MappedDetailBoundingRect().topLeft();
     Translate(-offset.x(), -offset.y());
 
-    SetMirror(false);
+    SetVerticallyFlipped(false);
+    SetHorizontallyFlipped(false);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -287,7 +288,7 @@ void VPPiece::SetGrainline(const VPieceGrainline &grainline)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VPPiece::Flip()
+void VPPiece::FlipVertically()
 {
     QTransform pieceMatrix = GetMatrix();
     QPointF center = pieceMatrix.map(DetailBoundingRect().center());
@@ -299,7 +300,23 @@ void VPPiece::Flip()
 
     pieceMatrix *= m;
     SetMatrix(pieceMatrix);
-    SetMirror(!IsMirror());
+    SetVerticallyFlipped(!IsVerticallyFlipped());
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VPPiece::FlipHorizontally()
+{
+    QTransform pieceMatrix = GetMatrix();
+    QPointF center = pieceMatrix.map(DetailBoundingRect().center());
+
+    QTransform m;
+    m.translate(0, center.y());
+    m.scale(1, -1);
+    m.translate(0, -center.y());
+
+    pieceMatrix *= m;
+    SetMatrix(pieceMatrix);
+    SetHorizontallyFlipped(!IsHorizontallyFlipped());
 }
 
 //---------------------------------------------------------------------------------------------------------------------

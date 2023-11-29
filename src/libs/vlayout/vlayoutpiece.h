@@ -156,8 +156,11 @@ public:
     auto GetId() const -> vidtype;
     void SetId(vidtype id);
 
-    auto IsMirror() const -> bool;
-    void SetMirror(bool value);
+    auto IsVerticallyFlipped() const -> bool;
+    void SetVerticallyFlipped(bool value);
+
+    auto IsHorizontallyFlipped() const -> bool;
+    void SetHorizontallyFlipped(bool value);
 
     void SetGradationId(const QString &id);
     auto GetGradationId() const -> QString;

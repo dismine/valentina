@@ -58,21 +58,23 @@ QT_WARNING_DISABLE_CLANG("-Wunused-member-function")
 
 // The list of all string we use for conversion
 // Better to use global variables because repeating QStringLiteral blows up code size
-Q_GLOBAL_STATIC_WITH_ARGS(const QString, strSeamLineTag, ("seamLine"_L1))              // NOLINT
-Q_GLOBAL_STATIC_WITH_ARGS(const QString, strSeamAllowanceTag, ("seamAllowance"_L1))    // NOLINT
-Q_GLOBAL_STATIC_WITH_ARGS(const QString, strInternalPathTag, ("internalPath"_L1))      // NOLINT
-Q_GLOBAL_STATIC_WITH_ARGS(const QString, strMarkerTag, ("marker"_L1))                  // NOLINT
-Q_GLOBAL_STATIC_WITH_ARGS(const QString, strPointTag, ("point"_L1))                    // NOLINT
-Q_GLOBAL_STATIC_WITH_ARGS(const QString, strPieceTag, ("piece"_L1))                    // NOLINT
-Q_GLOBAL_STATIC_WITH_ARGS(const QString, strGrainlineTag, ("grainline"_L1))            // NOLINT
-Q_GLOBAL_STATIC_WITH_ARGS(const QString, strAttrX, ("x"_L1))                           // NOLINT
-Q_GLOBAL_STATIC_WITH_ARGS(const QString, strAttrY, ("y"_L1))                           // NOLINT
-Q_GLOBAL_STATIC_WITH_ARGS(const QString, strAttrTurnPoint, ("turnPoint"_L1))           // NOLINT
-Q_GLOBAL_STATIC_WITH_ARGS(const QString, strAttrCurvePoint, ("curvePoint"_L1))         // NOLINT
-Q_GLOBAL_STATIC_WITH_ARGS(const QString, strAttrId, ("id"_L1))                         // NOLINT
-Q_GLOBAL_STATIC_WITH_ARGS(const QString, strAttrUId, ("uid"_L1))                       // NOLINT
-Q_GLOBAL_STATIC_WITH_ARGS(const QString, strAttrAngle, ("angle"_L1))                   // NOLINT
-Q_GLOBAL_STATIC_WITH_ARGS(const QString, strAttrArrowDirection, ("arrowDirection"_L1)) // NOLINT
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, strSeamLineTag, ("seamLine"_L1))                    // NOLINT
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, strSeamAllowanceTag, ("seamAllowance"_L1))          // NOLINT
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, strInternalPathTag, ("internalPath"_L1))            // NOLINT
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, strMarkerTag, ("marker"_L1))                        // NOLINT
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, strPointTag, ("point"_L1))                          // NOLINT
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, strPieceTag, ("piece"_L1))                          // NOLINT
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, strGrainlineTag, ("grainline"_L1))                  // NOLINT
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, strAttrX, ("x"_L1))                                 // NOLINT
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, strAttrY, ("y"_L1))                                 // NOLINT
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, strAttrTurnPoint, ("turnPoint"_L1))                 // NOLINT
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, strAttrCurvePoint, ("curvePoint"_L1))               // NOLINT
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, strAttrId, ("id"_L1))                               // NOLINT
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, strAttrUId, ("uid"_L1))                             // NOLINT
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, strAttrAngle, ("angle"_L1))                         // NOLINT
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, strAttrArrowDirection, ("arrowDirection"_L1))       // NOLINT
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, strAttrMirrored, ("mirrored"_L1))                   // NOLINT
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, strAttrVerticallyFlipped, ("verticallyFlipped"_L1)) // NOLINT
 
 QT_WARNING_POP
 
@@ -381,6 +383,24 @@ void VLayoutConverter::ConvertPiecesToV0_1_5()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+void VLayoutConverter::ConvertPiecesToV0_1_7()
+{
+    // TODO. Delete if minimal supported version is 0.1.7
+    Q_STATIC_ASSERT_X(VLayoutConverter::LayoutMinVer < FormatVersion(0, 1, 7), "Time to refactor the code.");
+
+    QDomNodeList pieceTags = elementsByTagName(*strPieceTag);
+    for (int i = 0; i < pieceTags.size(); ++i)
+    {
+        QDomElement node = pieceTags.at(i).toElement();
+        if (node.isElement() && node.hasAttribute(*strAttrMirrored))
+        {
+            node.setAttribute(*strAttrVerticallyFlipped, node.attribute(*strAttrMirrored));
+            node.removeAttribute(*strAttrMirrored);
+        }
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 void VLayoutConverter::ToV0_1_3()
 {
     // TODO. Delete if minimal supported version is 0.1.3
@@ -407,6 +427,7 @@ void VLayoutConverter::ToV0_1_7()
     // TODO. Delete if minimal supported version is 0.1.7
     Q_STATIC_ASSERT_X(VLayoutConverter::LayoutMinVer < FormatVersion(0, 1, 7), "Time to refactor the code.");
 
+    ConvertPiecesToV0_1_7();
     SetVersion(QStringLiteral("0.1.7"));
     Save();
 }

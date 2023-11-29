@@ -782,7 +782,7 @@ void VPMainWindow::InitPropertyTabCurrentPiece()
                 }
             });
 
-    connect(ui->checkBoxCurrentPieceMirrorPiece, &QCheckBox::toggled, this,
+    connect(ui->checkBoxCurrentPieceVerticallyFlipped, &QCheckBox::toggled, this,
             [this](bool checked)
             {
                 QList<VPPiecePtr> selectedPieces = SelectedPieces();
@@ -791,9 +791,28 @@ void VPMainWindow::InitPropertyTabCurrentPiece()
                     const VPPiecePtr &selectedPiece = selectedPieces.constFirst();
                     if (not selectedPiece.isNull())
                     {
-                        if (selectedPiece->IsMirror() != checked)
+                        if (selectedPiece->IsVerticallyFlipped() != checked)
                         {
-                            selectedPiece->Flip();
+                            selectedPiece->FlipVertically();
+                            LayoutWasSaved(false);
+                            emit m_layout->PieceTransformationChanged(selectedPiece);
+                        }
+                    }
+                }
+            });
+
+    connect(ui->checkBoxCurrentPieceHorizontallyFlipped, &QCheckBox::toggled, this,
+            [this](bool checked)
+            {
+                QList<VPPiecePtr> selectedPieces = SelectedPieces();
+                if (selectedPieces.size() == 1)
+                {
+                    const VPPiecePtr &selectedPiece = selectedPieces.constFirst();
+                    if (not selectedPiece.isNull())
+                    {
+                        if (selectedPiece->IsHorizontallyFlipped() != checked)
+                        {
+                            selectedPiece->FlipHorizontally();
                             LayoutWasSaved(false);
                             emit m_layout->PieceTransformationChanged(selectedPiece);
                         }
@@ -1287,10 +1306,11 @@ void VPMainWindow::SetPropertyTabCurrentPieceData()
         SetLineEditValue(ui->lineEditCurrentPieceGradationId, selectedPiece->GetGradationId());
 
         SetCheckBoxValue(ui->checkBoxCurrentPieceShowSeamline, not selectedPiece->IsHideMainPath());
-        SetCheckBoxValue(ui->checkBoxCurrentPieceMirrorPiece, selectedPiece->IsMirror());
+        SetCheckBoxValue(ui->checkBoxCurrentPieceVerticallyFlipped, selectedPiece->IsVerticallyFlipped());
+        SetCheckBoxValue(ui->checkBoxCurrentPieceHorizontallyFlipped, selectedPiece->IsHorizontallyFlipped());
 
         const bool disableFlipping = selectedPiece->IsForbidFlipping() || selectedPiece->IsForceFlipping();
-        ui->checkBoxCurrentPieceMirrorPiece->setDisabled(disableFlipping);
+        ui->checkBoxCurrentPieceVerticallyFlipped->setDisabled(disableFlipping);
 
         if (not ui->checkBoxRelativeTranslation->isChecked())
         {
