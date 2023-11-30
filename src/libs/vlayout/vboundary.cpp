@@ -87,7 +87,6 @@ auto PrepareSequenceItem(const QVector<VLayoutPoint> &path, bool drawMode, VBoun
 //---------------------------------------------------------------------------------------------------------------------
 auto PrepareTPassmarkShape(const VLayoutPassmark &passmark, bool drawMode) -> QVector<QVector<VLayoutPoint>>
 {
-    QVector<VLayoutPoint> shape1;
     if (passmark.lines.isEmpty())
     {
         return {};
@@ -101,6 +100,7 @@ auto PrepareTPassmarkShape(const VLayoutPassmark &passmark, bool drawMode) -> QV
     };
 
     QLineF line1 = passmark.lines.constFirst();
+    QVector<VLayoutPoint> shape1;
     shape1.append(TurnPoint(line1.p1()));
     shape1.append(TurnPoint(line1.p2()));
 
@@ -124,6 +124,50 @@ auto PrepareTPassmarkShape(const VLayoutPassmark &passmark, bool drawMode) -> QV
     shape2.append(TurnPoint(line2.p1()));
     shape2.append(TurnPoint(line2.p2()));
     return {shape1, shape2};
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+auto PrepareExternalVPassmarkShape(const VLayoutPassmark &passmark, bool drawMode) -> QVector<QVector<VLayoutPoint>>
+{
+    if (passmark.lines.isEmpty())
+    {
+        return {};
+    }
+
+    auto TurnPoint = [](QPointF point)
+    {
+        VLayoutPoint p(point);
+        p.SetTurnPoint(true);
+        return p;
+    };
+
+    QLineF line1 = passmark.lines.constFirst();
+    QVector<VLayoutPoint> shape;
+
+    if (!drawMode)
+    {
+        shape.append(TurnPoint(line1.p2()));
+    }
+
+    shape.append(TurnPoint(line1.p1()));
+    shape.append(TurnPoint(line1.p2()));
+
+    if (passmark.lines.size() <= 1)
+    {
+        return {shape};
+    }
+
+    const QLineF &line2 = passmark.lines.constLast();
+
+    shape.append(TurnPoint(line2.p1()));
+    shape.append(TurnPoint(line2.p2()));
+
+    if (!drawMode)
+    {
+        shape.append(TurnPoint(line2.p1()));
+    }
+
+    return {shape};
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -229,17 +273,15 @@ auto PreparePassmarkShape(const VLayoutPassmark &passmark, bool drawMode) -> QVe
     {
         case PassmarkLineType::OneLine:
         case PassmarkLineType::InternalVMark:
-        case PassmarkLineType::ExternalVMark:
         case PassmarkLineType::BoxMark:
         case PassmarkLineType::CheckMark:
             return PrepareNoneBreakingPassmarkShape(passmark);
-            break;
+        case PassmarkLineType::ExternalVMark:
+            return PrepareExternalVPassmarkShape(passmark, drawMode);
         case PassmarkLineType::TMark:
             return PrepareTPassmarkShape(passmark, drawMode);
-            break;
         case PassmarkLineType::UMark:
             return PrepareUPassmarkShape(passmark);
-            break;
         default:
             break;
     }
@@ -511,7 +553,7 @@ auto VBoundary::Combine(const QVector<VLayoutPassmark> &passmarks, bool drawMode
 
     for (const auto &passmark : passmarks)
     {
-        if (SkipPassmark(passmark, drawMode, layoutAllowance))
+        if (SkipPassmark(passmark, layoutAllowance))
         {
             continue;
         }
@@ -550,7 +592,7 @@ auto VBoundary::Combine(const QVector<VLayoutPassmark> &passmarks, bool drawMode
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-auto VBoundary::SkipPassmark(const VLayoutPassmark &passmark, bool drawMode, bool layoutAllowance) const -> bool
+auto VBoundary::SkipPassmark(const VLayoutPassmark &passmark, bool layoutAllowance) const -> bool
 {
     if (m_seamAllowance)
     {
@@ -570,11 +612,6 @@ auto VBoundary::SkipPassmark(const VLayoutPassmark &passmark, bool drawMode, boo
     if (layoutAllowance && (passmark.type == PassmarkLineType::ExternalVMark ||
                             passmark.type == PassmarkLineType::OneLine || passmark.type == PassmarkLineType::TwoLines ||
                             passmark.type == PassmarkLineType::ThreeLines || passmark.type == PassmarkLineType::TMark))
-    {
-        return true;
-    }
-
-    if (!drawMode && passmark.type == PassmarkLineType::ExternalVMark)
     {
         return true;
     }

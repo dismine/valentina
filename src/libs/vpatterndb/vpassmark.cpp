@@ -384,7 +384,7 @@ auto CreateExternalVMarkPassmark(const VPiecePassmarkData &passmarkData, const Q
     QLineF l2 = line;
     l2.setAngle(l2.angle() + angle);
 
-    return {l1, {l2.p2(), l2.p1()}};
+    return {{l1.p2(), l1.p1()}, l2};
 }
 
 //---------------------------------------------------------------------------------------------------------------------

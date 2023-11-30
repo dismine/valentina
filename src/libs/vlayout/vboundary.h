@@ -70,7 +70,7 @@ private:
     bool m_builtInSeamAllowance;
     QString m_pieceName{};
 
-    auto SkipPassmark(const VLayoutPassmark &passmark, bool drawMode, bool layoutAllowance) const -> bool;
+    auto SkipPassmark(const VLayoutPassmark &passmark, bool layoutAllowance) const -> bool;
 
     void InsertPassmark(const VBoundarySequenceItemData &item, QList<VBoundarySequenceItemData> &sequence,
                         bool drawMode) const;
