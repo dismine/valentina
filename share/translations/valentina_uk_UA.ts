@@ -2233,170 +2233,170 @@
         <translation>Попередній перегляд</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/support/dialogeditlabel.cpp" line="198"/>
+        <location filename="../../src/libs/vtools/dialogs/support/dialogeditlabel.cpp" line="200"/>
         <source>&lt;empty&gt;</source>
         <translation>&lt;empty&gt;</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/support/dialogeditlabel.cpp" line="316"/>
+        <location filename="../../src/libs/vtools/dialogs/support/dialogeditlabel.cpp" line="318"/>
         <source>Create new template</source>
         <translation>Створити новий шаблон</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/support/dialogeditlabel.cpp" line="317"/>
+        <location filename="../../src/libs/vtools/dialogs/support/dialogeditlabel.cpp" line="319"/>
         <source>Creating new template will overwrite the current, do you want to continue?</source>
         <translation>Створення нового шаблону замінить поточний. Продовжити?</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/support/dialogeditlabel.cpp" line="337"/>
-        <location filename="../../src/libs/vtools/dialogs/support/dialogeditlabel.cpp" line="391"/>
+        <location filename="../../src/libs/vtools/dialogs/support/dialogeditlabel.cpp" line="339"/>
+        <location filename="../../src/libs/vtools/dialogs/support/dialogeditlabel.cpp" line="393"/>
         <source>Label template</source>
         <translation>Шаблон мітки</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/support/dialogeditlabel.cpp" line="341"/>
+        <location filename="../../src/libs/vtools/dialogs/support/dialogeditlabel.cpp" line="343"/>
         <source>Export label template</source>
         <translation>Експортувати шаблон мітки</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/support/dialogeditlabel.cpp" line="341"/>
+        <location filename="../../src/libs/vtools/dialogs/support/dialogeditlabel.cpp" line="343"/>
         <source>template</source>
         <translation>шаблон</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/support/dialogeditlabel.cpp" line="367"/>
+        <location filename="../../src/libs/vtools/dialogs/support/dialogeditlabel.cpp" line="369"/>
         <source>Could not save file</source>
         <translation>Не вдалося зберегти файл</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/support/dialogeditlabel.cpp" line="381"/>
-        <location filename="../../src/libs/vtools/dialogs/support/dialogeditlabel.cpp" line="394"/>
+        <location filename="../../src/libs/vtools/dialogs/support/dialogeditlabel.cpp" line="383"/>
+        <location filename="../../src/libs/vtools/dialogs/support/dialogeditlabel.cpp" line="396"/>
         <source>Import template</source>
         <translation>Імпорт шаблону</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/support/dialogeditlabel.cpp" line="382"/>
+        <location filename="../../src/libs/vtools/dialogs/support/dialogeditlabel.cpp" line="384"/>
         <source>Import template will overwrite the current, do you want to continue?</source>
         <translation>Імпортований шаблон замінить поточний, продовжити?</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/support/dialogeditlabel.cpp" line="409"/>
+        <location filename="../../src/libs/vtools/dialogs/support/dialogeditlabel.cpp" line="411"/>
         <source>File error.</source>
         <translation>Помилка файла.</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/support/dialogeditlabel.cpp" line="544"/>
+        <location filename="../../src/libs/vtools/dialogs/support/dialogeditlabel.cpp" line="546"/>
         <source>Date</source>
         <translation>Дата</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/support/dialogeditlabel.cpp" line="547"/>
+        <location filename="../../src/libs/vtools/dialogs/support/dialogeditlabel.cpp" line="549"/>
         <source>Time</source>
         <translation>Час</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/support/dialogeditlabel.cpp" line="549"/>
+        <location filename="../../src/libs/vtools/dialogs/support/dialogeditlabel.cpp" line="551"/>
         <source>Pattern name</source>
         <translation>Назва лекала</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/support/dialogeditlabel.cpp" line="550"/>
+        <location filename="../../src/libs/vtools/dialogs/support/dialogeditlabel.cpp" line="552"/>
         <source>Pattern number</source>
         <translation>Номер лекала</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/support/dialogeditlabel.cpp" line="551"/>
+        <location filename="../../src/libs/vtools/dialogs/support/dialogeditlabel.cpp" line="553"/>
         <source>Company name or designer name</source>
         <translation>Назва компанії або дизайнера</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/support/dialogeditlabel.cpp" line="566"/>
-        <location filename="../../src/libs/vtools/dialogs/support/dialogeditlabel.cpp" line="577"/>
+        <location filename="../../src/libs/vtools/dialogs/support/dialogeditlabel.cpp" line="568"/>
+        <location filename="../../src/libs/vtools/dialogs/support/dialogeditlabel.cpp" line="579"/>
         <source>Customer name</source>
         <translation>Ім&apos;я клієнта</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/support/dialogeditlabel.cpp" line="585"/>
+        <location filename="../../src/libs/vtools/dialogs/support/dialogeditlabel.cpp" line="587"/>
         <source>Pattern extension</source>
         <translation>Розширення лекала</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/support/dialogeditlabel.cpp" line="586"/>
+        <location filename="../../src/libs/vtools/dialogs/support/dialogeditlabel.cpp" line="588"/>
         <source>Pattern file name</source>
         <translation>Назва файлу лекала</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/support/dialogeditlabel.cpp" line="707"/>
+        <location filename="../../src/libs/vtools/dialogs/support/dialogeditlabel.cpp" line="709"/>
         <source>Piece letter</source>
         <translation>Лист деталі</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/support/dialogeditlabel.cpp" line="708"/>
+        <location filename="../../src/libs/vtools/dialogs/support/dialogeditlabel.cpp" line="710"/>
         <source>Piece annotation</source>
         <translation>Анотація деталі</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/support/dialogeditlabel.cpp" line="709"/>
+        <location filename="../../src/libs/vtools/dialogs/support/dialogeditlabel.cpp" line="711"/>
         <source>Piece orientation</source>
         <translation>Орієнтація деталі</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/support/dialogeditlabel.cpp" line="710"/>
+        <location filename="../../src/libs/vtools/dialogs/support/dialogeditlabel.cpp" line="712"/>
         <source>Piece rotation</source>
         <translation>Обертання деталі</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/support/dialogeditlabel.cpp" line="711"/>
+        <location filename="../../src/libs/vtools/dialogs/support/dialogeditlabel.cpp" line="713"/>
         <source>Piece tilt</source>
         <translation>Нахил деталі</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/support/dialogeditlabel.cpp" line="712"/>
+        <location filename="../../src/libs/vtools/dialogs/support/dialogeditlabel.cpp" line="714"/>
         <source>Piece fold position</source>
         <translation>Положення згину деталі</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/support/dialogeditlabel.cpp" line="713"/>
+        <location filename="../../src/libs/vtools/dialogs/support/dialogeditlabel.cpp" line="715"/>
         <source>Piece name</source>
         <translation>Назва деталі</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/support/dialogeditlabel.cpp" line="714"/>
+        <location filename="../../src/libs/vtools/dialogs/support/dialogeditlabel.cpp" line="716"/>
         <source>Quantity</source>
         <translation>Кількість</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/support/dialogeditlabel.cpp" line="715"/>
+        <location filename="../../src/libs/vtools/dialogs/support/dialogeditlabel.cpp" line="717"/>
         <source>Material: Fabric</source>
         <translation>Матеріал: Тканина</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/support/dialogeditlabel.cpp" line="716"/>
+        <location filename="../../src/libs/vtools/dialogs/support/dialogeditlabel.cpp" line="718"/>
         <source>Material: Lining</source>
         <translation>Матеріал: Підклада</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/support/dialogeditlabel.cpp" line="718"/>
+        <location filename="../../src/libs/vtools/dialogs/support/dialogeditlabel.cpp" line="720"/>
         <source>Material: Interfacing</source>
         <translation>Матеріал: Дублерин</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/support/dialogeditlabel.cpp" line="720"/>
+        <location filename="../../src/libs/vtools/dialogs/support/dialogeditlabel.cpp" line="722"/>
         <source>Material: Interlining</source>
         <translation>Матеріал: Флізелін</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/support/dialogeditlabel.cpp" line="721"/>
+        <location filename="../../src/libs/vtools/dialogs/support/dialogeditlabel.cpp" line="723"/>
         <source>Word: Cut</source>
         <translation>Слово: Вирізати</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/support/dialogeditlabel.cpp" line="722"/>
+        <location filename="../../src/libs/vtools/dialogs/support/dialogeditlabel.cpp" line="724"/>
         <source>Word: on fold</source>
         <translation>Слово: на згині</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/support/dialogeditlabel.cpp" line="638"/>
+        <location filename="../../src/libs/vtools/dialogs/support/dialogeditlabel.cpp" line="640"/>
         <source>User material</source>
         <translation>Матеріал користувача</translation>
     </message>
@@ -2426,200 +2426,200 @@
         <translation>Перемістити до низу</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/support/dialogeditlabel.cpp" line="553"/>
+        <location filename="../../src/libs/vtools/dialogs/support/dialogeditlabel.cpp" line="555"/>
         <source>Measurements units</source>
         <translation>Одиниці вимірювання</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/support/dialogeditlabel.cpp" line="557"/>
+        <location filename="../../src/libs/vtools/dialogs/support/dialogeditlabel.cpp" line="559"/>
         <source>Pattern units</source>
         <translation>Одиниці вимірювання викрійки</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/support/dialogeditlabel.cpp" line="560"/>
+        <location filename="../../src/libs/vtools/dialogs/support/dialogeditlabel.cpp" line="562"/>
         <source>Size units</source>
         <translation>Одиниці вимірювання розміру</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/support/dialogeditlabel.cpp" line="570"/>
-        <location filename="../../src/libs/vtools/dialogs/support/dialogeditlabel.cpp" line="580"/>
+        <location filename="../../src/libs/vtools/dialogs/support/dialogeditlabel.cpp" line="572"/>
+        <location filename="../../src/libs/vtools/dialogs/support/dialogeditlabel.cpp" line="582"/>
         <source>Customer birth date</source>
         <translation>Дата народження клієнта</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/support/dialogeditlabel.cpp" line="573"/>
-        <location filename="../../src/libs/vtools/dialogs/support/dialogeditlabel.cpp" line="582"/>
+        <location filename="../../src/libs/vtools/dialogs/support/dialogeditlabel.cpp" line="575"/>
+        <location filename="../../src/libs/vtools/dialogs/support/dialogeditlabel.cpp" line="584"/>
         <source>Customer email</source>
         <translation>Електронна адреса клієнта</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/support/dialogeditlabel.cpp" line="591"/>
+        <location filename="../../src/libs/vtools/dialogs/support/dialogeditlabel.cpp" line="593"/>
         <source>Height</source>
         <comment>dimension</comment>
         <translation>Зріст</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/support/dialogeditlabel.cpp" line="595"/>
+        <location filename="../../src/libs/vtools/dialogs/support/dialogeditlabel.cpp" line="597"/>
         <source>Size</source>
         <comment>dimension</comment>
         <translation>Розмір</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/support/dialogeditlabel.cpp" line="599"/>
+        <location filename="../../src/libs/vtools/dialogs/support/dialogeditlabel.cpp" line="601"/>
         <source>Hip</source>
         <comment>dimension</comment>
         <translation>Стегна</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/support/dialogeditlabel.cpp" line="603"/>
+        <location filename="../../src/libs/vtools/dialogs/support/dialogeditlabel.cpp" line="605"/>
         <source>Waist</source>
         <comment>dimension</comment>
         <translation>Талія</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/support/dialogeditlabel.cpp" line="665"/>
+        <location filename="../../src/libs/vtools/dialogs/support/dialogeditlabel.cpp" line="667"/>
         <source>Measurement: %1</source>
         <translation>Мірка: %1</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/support/dialogeditlabel.cpp" line="609"/>
+        <location filename="../../src/libs/vtools/dialogs/support/dialogeditlabel.cpp" line="611"/>
         <source>Height label</source>
         <comment>dimension</comment>
         <translation>Мітка зросту</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/support/dialogeditlabel.cpp" line="615"/>
+        <location filename="../../src/libs/vtools/dialogs/support/dialogeditlabel.cpp" line="617"/>
         <source>Size label</source>
         <comment>dimension</comment>
         <translation>Мітка розміру</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/support/dialogeditlabel.cpp" line="621"/>
+        <location filename="../../src/libs/vtools/dialogs/support/dialogeditlabel.cpp" line="623"/>
         <source>Hip label</source>
         <comment>dimension</comment>
         <translation>Мітка стегон</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/support/dialogeditlabel.cpp" line="627"/>
+        <location filename="../../src/libs/vtools/dialogs/support/dialogeditlabel.cpp" line="629"/>
         <source>Waist label</source>
         <comment>dimension</comment>
         <translation>Мітка талії</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/support/dialogeditlabel.cpp" line="689"/>
+        <location filename="../../src/libs/vtools/dialogs/support/dialogeditlabel.cpp" line="691"/>
         <source>Final measurement: %1</source>
         <translation>Фінальна мірка: %1</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/support/dialogeditlabel.cpp" line="740"/>
+        <location filename="../../src/libs/vtools/dialogs/support/dialogeditlabel.cpp" line="742"/>
         <source>No data for the height dimension.</source>
         <translation>Немає даних для виміру зросту.</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/support/dialogeditlabel.cpp" line="741"/>
+        <location filename="../../src/libs/vtools/dialogs/support/dialogeditlabel.cpp" line="743"/>
         <source>No data for the size dimension.</source>
         <translation>Немає даних для виміру розміру.</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/support/dialogeditlabel.cpp" line="742"/>
+        <location filename="../../src/libs/vtools/dialogs/support/dialogeditlabel.cpp" line="744"/>
         <source>No data for the hip dimension.</source>
         <translation>Немає даних для виміру стегон.</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/support/dialogeditlabel.cpp" line="743"/>
+        <location filename="../../src/libs/vtools/dialogs/support/dialogeditlabel.cpp" line="745"/>
         <source>No data for the waist dimension.</source>
         <translation>Немає даних для виміру талії.</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/support/dialogeditlabel.cpp" line="592"/>
+        <location filename="../../src/libs/vtools/dialogs/support/dialogeditlabel.cpp" line="594"/>
         <source>Dimension X</source>
         <comment>dimension</comment>
         <translation>Вимір X</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/support/dialogeditlabel.cpp" line="588"/>
+        <location filename="../../src/libs/vtools/dialogs/support/dialogeditlabel.cpp" line="590"/>
         <source>Measurements file name</source>
         <translation>Назва файлу вимірювань</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/support/dialogeditlabel.cpp" line="596"/>
+        <location filename="../../src/libs/vtools/dialogs/support/dialogeditlabel.cpp" line="598"/>
         <source>Dimension Y</source>
         <comment>dimension</comment>
         <translation>Вимір Y</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/support/dialogeditlabel.cpp" line="600"/>
+        <location filename="../../src/libs/vtools/dialogs/support/dialogeditlabel.cpp" line="602"/>
         <source>Dimension Z</source>
         <comment>dimension</comment>
         <translation>Вимір Z</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/support/dialogeditlabel.cpp" line="604"/>
+        <location filename="../../src/libs/vtools/dialogs/support/dialogeditlabel.cpp" line="606"/>
         <source>Dimension W</source>
         <comment>dimension</comment>
         <translation>Вимір W</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/support/dialogeditlabel.cpp" line="611"/>
+        <location filename="../../src/libs/vtools/dialogs/support/dialogeditlabel.cpp" line="613"/>
         <source>Dimension X label</source>
         <comment>dimension</comment>
         <translation>Мітка виміру X</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/support/dialogeditlabel.cpp" line="617"/>
+        <location filename="../../src/libs/vtools/dialogs/support/dialogeditlabel.cpp" line="619"/>
         <source>Dimension Y label</source>
         <comment>dimension</comment>
         <translation>Мітка виміру Y</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/support/dialogeditlabel.cpp" line="623"/>
+        <location filename="../../src/libs/vtools/dialogs/support/dialogeditlabel.cpp" line="625"/>
         <source>Dimension Z label</source>
         <comment>dimension</comment>
         <translation>Мітка виміру Z</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/support/dialogeditlabel.cpp" line="629"/>
+        <location filename="../../src/libs/vtools/dialogs/support/dialogeditlabel.cpp" line="631"/>
         <source>Dimension W label</source>
         <comment>dimension</comment>
         <translation>Мітка виміру W</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/support/dialogeditlabel.cpp" line="633"/>
+        <location filename="../../src/libs/vtools/dialogs/support/dialogeditlabel.cpp" line="635"/>
         <source>Measurements extension</source>
         <translation>Розширення мірок</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/support/dialogeditlabel.cpp" line="745"/>
+        <location filename="../../src/libs/vtools/dialogs/support/dialogeditlabel.cpp" line="747"/>
         <source>No data for the X dimension.</source>
         <translation>Немає даних для виміру X.</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/support/dialogeditlabel.cpp" line="746"/>
+        <location filename="../../src/libs/vtools/dialogs/support/dialogeditlabel.cpp" line="748"/>
         <source>No data for the Y dimension.</source>
         <translation>Немає даних для виміру Y.</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/support/dialogeditlabel.cpp" line="747"/>
+        <location filename="../../src/libs/vtools/dialogs/support/dialogeditlabel.cpp" line="749"/>
         <source>No data for the Z dimension.</source>
         <translation>Немає даних для виміру Z.</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/support/dialogeditlabel.cpp" line="748"/>
+        <location filename="../../src/libs/vtools/dialogs/support/dialogeditlabel.cpp" line="750"/>
         <source>No data for the W dimension.</source>
         <translation>Немає даних для виміру W.</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/support/dialogeditlabel.cpp" line="561"/>
+        <location filename="../../src/libs/vtools/dialogs/support/dialogeditlabel.cpp" line="563"/>
         <source>Area units</source>
         <translation>Одиниці виміру площі</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/support/dialogeditlabel.cpp" line="676"/>
+        <location filename="../../src/libs/vtools/dialogs/support/dialogeditlabel.cpp" line="678"/>
         <source>Piece full area</source>
         <translation>Повна площа деталі</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/support/dialogeditlabel.cpp" line="677"/>
+        <location filename="../../src/libs/vtools/dialogs/support/dialogeditlabel.cpp" line="679"/>
         <source>Piece seam line area</source>
         <translation>Площа лінії шва деталі</translation>
     </message>
@@ -8331,22 +8331,22 @@ Apply settings anyway?</source>
 <context>
     <name>DialogSaveLayout</name>
     <message>
-        <location filename="../../src/app/valentina/dialogs/dialogsavelayout.cpp" line="384"/>
+        <location filename="../../src/app/valentina/dialogs/dialogsavelayout.cpp" line="383"/>
         <source>Name conflict</source>
         <translation>Конфлікт назви</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/dialogs/dialogsavelayout.cpp" line="385"/>
+        <location filename="../../src/app/valentina/dialogs/dialogsavelayout.cpp" line="384"/>
         <source>Folder already contain file with name %1. Rewrite all conflict file names?</source>
         <translation>У теці вже є файл з назвою %1. Бажаєте її перезаписати?</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/dialogs/dialogsavelayout.cpp" line="433"/>
+        <location filename="../../src/app/valentina/dialogs/dialogsavelayout.cpp" line="432"/>
         <source>Example:</source>
         <translation>Приклад:</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/dialogs/dialogsavelayout.cpp" line="143"/>
+        <location filename="../../src/app/valentina/dialogs/dialogsavelayout.cpp" line="142"/>
         <source>Select folder</source>
         <translation>Вибрати теку</translation>
     </message>
@@ -8379,12 +8379,12 @@ Apply settings anyway?</source>
         <translation type="vanished">Файли DXF (*.dxf)</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/dialogs/dialogsavelayout.cpp" line="177"/>
+        <location filename="../../src/app/valentina/dialogs/dialogsavelayout.cpp" line="176"/>
         <source>Tried to use out of range format number.</source>
         <translation>Спроба використати значення формату, що виходить за межі діапазону.</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/dialogs/dialogsavelayout.cpp" line="183"/>
+        <location filename="../../src/app/valentina/dialogs/dialogsavelayout.cpp" line="182"/>
         <source>Selected not present format.</source>
         <translation>Вибраного формату не існує.</translation>
     </message>
@@ -8393,7 +8393,7 @@ Apply settings anyway?</source>
         <translation type="vanished">Базова назва файлу не відповідає регулярному виразу.</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/dialogs/dialogsavelayout.cpp" line="333"/>
+        <location filename="../../src/app/valentina/dialogs/dialogsavelayout.cpp" line="332"/>
         <source>The destination directory doesn&apos;t exists or is not readable.</source>
         <translation>Каталог призначення не існує або не читається.</translation>
     </message>
@@ -8536,298 +8536,298 @@ Apply settings anyway?</source>
         <translation>Готовий!</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="2050"/>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="2130"/>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="2214"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="2086"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="2166"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="2250"/>
         <source>Value</source>
         <translation>Значення</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="4408"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="4462"/>
         <source>Default</source>
         <translation>По замовчуванню</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="4821"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="4875"/>
         <source>Detail</source>
         <translation>Деталь</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="2090"/>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="2649"/>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="3095"/>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="3674"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="2126"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="2685"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="3143"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="3735"/>
         <source>Grainline</source>
         <translation>Нитка основи</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.cpp" line="2288"/>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="1167"/>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="5256"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="1203"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="5310"/>
         <source>Reverse</source>
         <translation>Протилежний напрямок</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.cpp" line="2298"/>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="5265"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="5319"/>
         <source>Passmark</source>
         <translation>Надсічка</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.cpp" line="2318"/>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="5285"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="5339"/>
         <source>One line</source>
         <translation>Одна лінія</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.cpp" line="2321"/>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="5288"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="5342"/>
         <source>Two lines</source>
         <translation>Дві лінії</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.cpp" line="2324"/>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="5291"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="5345"/>
         <source>Three lines</source>
         <translation>Три лінії</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.cpp" line="2327"/>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="5294"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="5348"/>
         <source>T mark</source>
         <translation>Т-позначка</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.cpp" line="2331"/>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="5298"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="5352"/>
         <source>External V mark</source>
         <translation>Зовнішня V-позначка</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.cpp" line="2335"/>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="5302"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="5356"/>
         <source>Internal V mark</source>
         <translation>Внутрішня V-позначка</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.cpp" line="2338"/>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="5305"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="5359"/>
         <source>U mark</source>
         <translation>U-позначка</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.cpp" line="2341"/>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="5308"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="5362"/>
         <source>Box mark</source>
         <translation>Квадратна позначка</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.cpp" line="2344"/>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="5311"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="5365"/>
         <source>Check mark</source>
         <translation>Позначка прапорець</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.cpp" line="2348"/>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="5315"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="5369"/>
         <source>Check uniqueness</source>
         <translation>Перевірте унікальність</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.cpp" line="2353"/>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="5320"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="5374"/>
         <source>Turn point</source>
         <translation>Точка повороту</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.cpp" line="2359"/>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="5326"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="5380"/>
         <source>Excluded</source>
         <translation>Виключений</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.cpp" line="2365"/>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="1171"/>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="1214"/>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="1248"/>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="1310"/>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="5332"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="1207"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="1250"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="1284"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="1346"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="5386"/>
         <source>Delete</source>
         <translation>Видалити</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="1161"/>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="1213"/>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="1297"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="1197"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="1249"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="1333"/>
         <source>Options</source>
         <translation>Параметри</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="1737"/>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="1789"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="1773"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="1825"/>
         <source>Error. Can&apos;t save piece path.</source>
         <translation>Помилка. Не вдалося зберегти контур деталі.</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="2062"/>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="2143"/>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="2226"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="2098"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="2179"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="2262"/>
         <source>Infinite/undefined result</source>
         <translation>Нескінченний/не визначений результат</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="2066"/>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="2147"/>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="2230"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="2102"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="2183"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="2266"/>
         <source>Length should be positive</source>
         <translation>Довжина повинна мати додатне значення</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="2077"/>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="2158"/>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="2241"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="2113"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="2194"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="2277"/>
         <source>Parser error: %1</source>
         <translation>Помилка синтаксичного аналізу: %1</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="2682"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="2718"/>
         <source>Current seam allowance</source>
         <translation>Поточна прибавка на шви</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="2892"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="2940"/>
         <source>Edit seam allowance width</source>
         <translation>Редагувати ширину прибавки на шви</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="2906"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="2954"/>
         <source>Edit seam allowance width before</source>
         <translation>Редагувати ширину прибавки на шви перед</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="2920"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="2968"/>
         <source>Edit seam allowance width after</source>
         <translation>Редагувати ширину прибавки на шви після</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="2949"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="2997"/>
         <source>Edit passmark width</source>
         <translation>Редагувати довжину надсічки</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="2963"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="3011"/>
         <source>Edit passmark angle</source>
         <translation>Редагувати кут надсічки</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="3332"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="3393"/>
         <source>You need more points!</source>
         <translation>Потрібно більше точок!</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="3338"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="3399"/>
         <source>You have to choose points in a clockwise direction!</source>
         <translation>Точки потрібно обирати за годинниковою стрілкою!</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="3346"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="3407"/>
         <source>First point cannot be equal to the last point!</source>
         <translation>Перша точка не може збігатися з останньою точкою!</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="3354"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="3415"/>
         <source>You have double points!</source>
         <translation>Одна точка не може бути використана два рази підряд!</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="3909"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="3970"/>
         <source>Empty</source>
         <translation>Порожньо</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="3993"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="4054"/>
         <source>main path</source>
         <translation>головний контур</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="3995"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="4056"/>
         <source>custom seam allowance</source>
         <translation>користувацька прибавка на шви</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.cpp" line="2301"/>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="4376"/>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="5268"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="4430"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="5322"/>
         <source>None</source>
         <translation>Жодного</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="3672"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="3733"/>
         <source>Pins</source>
         <translation>Шпильки</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="3935"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="3996"/>
         <source>no pin</source>
         <translation>без шпильки</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="2172"/>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="2255"/>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="2658"/>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="3118"/>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="3127"/>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="3151"/>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="3160"/>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="3673"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="2208"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="2291"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="2694"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="3166"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="3175"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="3199"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="3208"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="3734"/>
         <source>Labels</source>
         <translation>Мітки</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="2074"/>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="2155"/>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="2238"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="2110"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="2191"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="2274"/>
         <source>Error</source>
         <translation>Помилка</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="2434"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="2470"/>
         <source>Edit length</source>
         <translation>Редагувати довжину</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="2440"/>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="2497"/>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="2557"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="2476"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="2533"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="2593"/>
         <source>Edit angle</source>
         <translation>Редагувати кут</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="2485"/>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="2545"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="2521"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="2581"/>
         <source>Edit height</source>
         <translation>Редагувати висоту</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="2491"/>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="2551"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="2527"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="2587"/>
         <source>Edit width</source>
         <translation>Редагувати ширину</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="585"/>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="3671"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="3732"/>
         <source>Paths</source>
         <translation>Шляхи</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="3368"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="3429"/>
         <source>Each point in the path must be unique!</source>
         <translation>Кожна точка в контурі повинна бути унікальною!</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="623"/>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="3675"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="3736"/>
         <source>Passmarks</source>
         <translation>Надсічки</translation>
     </message>
@@ -8837,52 +8837,52 @@ Apply settings anyway?</source>
         <translation>Інструмент деталь</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="1299"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="1335"/>
         <source>Segment</source>
         <translation>Сегмент</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="1300"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="1336"/>
         <source>Rectangle</source>
         <translation>Прямокутник</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="1301"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="1337"/>
         <source>Cross</source>
         <translation>Хрест</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="1302"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="1338"/>
         <source>T-shaped</source>
         <translation>Т-подібний</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="1303"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="1339"/>
         <source>Doubletree</source>
         <translation>Ялинка</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="1304"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="1340"/>
         <source>Corner</source>
         <translation>Куток</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="1305"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="1341"/>
         <source>Triangle</source>
         <translation>Трикутник</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="1306"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="1342"/>
         <source>H-shaped</source>
         <translation>H-подібний</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="1307"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="1343"/>
         <source>Button</source>
         <translation>Ґудзик</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="3676"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="3737"/>
         <source>Place label</source>
         <translation>Мітка місця</translation>
     </message>
@@ -8892,16 +8892,16 @@ Apply settings anyway?</source>
         <translation>Щоб відкрити всі можливості деталі, завершіть створення головного шляху. Натисніть OK.</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="3362"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="3423"/>
         <source>The same curve repeats twice!</source>
         <translation>Одна і та ж крива повторюється двічі!</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="2715"/>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="2745"/>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="2774"/>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="2802"/>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="2829"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="2751"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="2781"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="2810"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="2838"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="2865"/>
         <source>&lt;Empty&gt;</source>
         <translation>&lt;Пусто&gt;</translation>
     </message>
@@ -8911,287 +8911,287 @@ Apply settings anyway?</source>
         <translation>Виберіть об&apos;єкти основного контуру за годинниковою стрілкою, &lt;b&gt;%1&lt;/b&gt; - обернути напрямок кривої, &lt;b&gt;%2&lt;/b&gt; - закінчити створення</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="637"/>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="3677"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="652"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="3738"/>
         <source>Fold line</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="1308"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="1344"/>
         <source>Circle</source>
         <translation>Коло</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="2934"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="2982"/>
         <source>Edit passmark length</source>
         <translation>Редагувати довжину надсічки</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="2976"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="3024"/>
         <source>Edit fold line height</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="2991"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="3039"/>
         <source>Edit fold line width</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="3006"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="3054"/>
         <source>Edit fold line center position</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="3400"/>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="3434"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="3461"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="3495"/>
         <source>Invalid mirror line start point!</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="3407"/>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="3441"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="3468"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="3502"/>
         <source>Invalid mirror line end point!</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="3415"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="3476"/>
         <source>Start and end mirror line points must be unique!</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="3449"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="3510"/>
         <source>Mirror points must be neighbors!</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="4100"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="4161"/>
         <source>The customer name from individual measurements</source>
         <translation>Ім&apos;я замовника з індивідуальних мірок</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="4104"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="4165"/>
         <source>The customer email from individual measurements</source>
         <translation>Електронна пошта замовника з індивідуальних мірок</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="4108"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="4169"/>
         <source>The customer birth date from individual measurements</source>
         <translation>Дата народження замовника з індивідуальних мірок</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="4162"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="4223"/>
         <source>Two ways (Up/Down)</source>
         <comment>grainline direction</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="4164"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="4225"/>
         <source>One way (Up)</source>
         <comment>grainline direction</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="4166"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="4227"/>
         <source>One way (Down)</source>
         <comment>grainline direction</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="4168"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="4229"/>
         <source>Four ways</source>
         <comment>grainline direction</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="4170"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="4231"/>
         <source>Two ways (Up/Left)</source>
         <comment>grainline direction</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="4172"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="4233"/>
         <source>Two ways (Up/Right)</source>
         <comment>grainline direction</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="4174"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="4235"/>
         <source>Two ways (Down/Left)</source>
         <comment>grainline direction</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="4176"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="4237"/>
         <source>Two ways (Down/Right)</source>
         <comment>grainline direction</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="4178"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="4239"/>
         <source>Three ways (Up/Down/Left)</source>
         <comment>grainline direction</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="4180"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="4241"/>
         <source>Three ways (Up/Down/Right)</source>
         <comment>grainline direction</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="4182"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="4243"/>
         <source>Three ways (Up/Left/Right)</source>
         <comment>grainline direction</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="4184"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="4245"/>
         <source>Three ways (Down/Left/Right)</source>
         <comment>grainline direction</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="4368"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="4422"/>
         <source>Two arrows (text above)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="4370"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="4424"/>
         <source>Two arrows (text under)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="4372"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="4426"/>
         <source>Two arrows</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="4373"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="4427"/>
         <source>Text</source>
         <translation type="unfinished">Текст</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="4374"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="4428"/>
         <source>Three dots</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="4375"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="4429"/>
         <source>Three X</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="5381"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="5435"/>
         <source>Save label data.</source>
         <translation>Зберегти дані мітки.</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="5382"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="5436"/>
         <source>Label data were changed. Do you want to save them before editing label template?</source>
         <translation>Дані мітки змінено. Зберегти їх перед редагуванням шаблону мітки?</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="4936"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="4990"/>
         <source>Height</source>
         <comment>dimension</comment>
         <translation>Зріст</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="4940"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="4994"/>
         <source>Size</source>
         <comment>dimension</comment>
         <translation>Розмір</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="4944"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="4998"/>
         <source>Hip</source>
         <comment>dimension</comment>
         <translation>Стегна</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="4948"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="5002"/>
         <source>Waist</source>
         <comment>dimension</comment>
         <translation>Талія</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="4954"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="5008"/>
         <source>Height label</source>
         <comment>dimension</comment>
         <translation>Мітка зросту</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="4960"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="5014"/>
         <source>Size label</source>
         <comment>dimension</comment>
         <translation>Мітка розміру</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="4966"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="5020"/>
         <source>Hip label</source>
         <comment>dimension</comment>
         <translation>Мітка стегон</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="4972"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="5026"/>
         <source>Waist label</source>
         <comment>dimension</comment>
         <translation>Мітка талії</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="4985"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="5039"/>
         <source>Measurement: %1</source>
         <translation>Мірка: %1</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="3376"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="3437"/>
         <source>Invalid segment!</source>
         <translation>Недійсний сегмент!</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="4937"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="4991"/>
         <source>Dimension X</source>
         <comment>dimension</comment>
         <translation>Вимір X</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="4941"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="4995"/>
         <source>Dimension Y</source>
         <comment>dimension</comment>
         <translation>Вимір Y</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="4945"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="4999"/>
         <source>Dimension Z</source>
         <comment>dimension</comment>
         <translation>Вимір Z</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="4949"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="5003"/>
         <source>Dimension W</source>
         <comment>dimension</comment>
         <translation>Вимір W</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="4955"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="5009"/>
         <source>Dimension X label</source>
         <comment>dimension</comment>
         <translation>Мітка виміру X</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="4961"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="5015"/>
         <source>Dimension Y label</source>
         <comment>dimension</comment>
         <translation>Мітка виміру Y</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="4967"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="5021"/>
         <source>Dimension Z label</source>
         <comment>dimension</comment>
         <translation>Мітка виміру Z</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="4973"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="5027"/>
         <source>Dimension W label</source>
         <comment>dimension</comment>
         <translation>Мітка виміру W</translation>
@@ -10398,7 +10398,7 @@ Apply settings anyway?</source>
 <context>
     <name>FoldLine</name>
     <message>
-        <location filename="../../src/libs/vlayout/vfoldline.cpp" line="140"/>
+        <location filename="../../src/libs/vlayout/vfoldline.cpp" line="358"/>
         <source>Cut On Fold</source>
         <translation type="unfinished"></translation>
     </message>
@@ -10966,7 +10966,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.ui" line="738"/>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="5767"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="5772"/>
         <source>Save</source>
         <translation>Зберегти</translation>
     </message>
@@ -11161,8 +11161,8 @@ Apply settings anyway?</source>
         <translation type="vanished">Показати довідку</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="4765"/>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="5141"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="4770"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="5146"/>
         <source>Pattern piece %1</source>
         <translation>Креслення %1</translation>
     </message>
@@ -11255,7 +11255,7 @@ Apply settings anyway?</source>
         <translation>Вибрати криву</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="6136"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="6141"/>
         <source>About Qt</source>
         <translation>Про Qt</translation>
     </message>
@@ -11295,7 +11295,7 @@ Apply settings anyway?</source>
         <location filename="../../src/app/valentina/mainwindow.cpp" line="2094"/>
         <location filename="../../src/app/valentina/mainwindow.cpp" line="2321"/>
         <location filename="../../src/app/valentina/mainwindow.cpp" line="4224"/>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="6951"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="6956"/>
         <source>Open file</source>
         <translation>Відкрити файл</translation>
     </message>
@@ -11312,7 +11312,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.cpp" line="2839"/>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="4607"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="4612"/>
         <source>Error empty parameter.</source>
         <translation>Помилка, пустий параметр.</translation>
     </message>
@@ -11328,17 +11328,17 @@ Apply settings anyway?</source>
         <translation>Помилка парсингу файлу (std::bad_alloc).</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="4596"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="4601"/>
         <source>Bad id.</source>
         <translation>Поганий id.</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="5601"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="5606"/>
         <source>File saved</source>
         <translation>Файл збережено</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="7548"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="7553"/>
         <source>untitled.val</source>
         <translation>безімений.val</translation>
     </message>
@@ -11349,23 +11349,23 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.cpp" line="1854"/>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="5813"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="5818"/>
         <source>&amp;Undo</source>
         <translation>&amp;Скасувати дію</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.cpp" line="1855"/>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="5820"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="5825"/>
         <source>&amp;Redo</source>
         <translation>&amp;Повторити</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="6288"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="6293"/>
         <source>Pattern piece:</source>
         <translation>Креслення:</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="6290"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="6295"/>
         <source>Enter a new label for the pattern piece.</source>
         <translation>Введіть нову назву для креслення.</translation>
     </message>
@@ -11384,8 +11384,8 @@ Do you want to save your changes?</source>
     <message>
         <location filename="../../src/app/valentina/mainwindow.cpp" line="718"/>
         <location filename="../../src/app/valentina/mainwindow.cpp" line="765"/>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="6387"/>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="6575"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="6392"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="6580"/>
         <source>File error.</source>
         <translation>Помилка файла.</translation>
     </message>
@@ -11394,12 +11394,12 @@ Do you want to save your changes?</source>
         <translation type="vanished">Файл завантажено</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="6913"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="6918"/>
         <source>Valentina didn&apos;t shut down correctly. Do you want reopen files (%1) you had open?</source>
         <translation>Валентина була закрита неправильно. Хочете знову відкрити ці файли (%1)?</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="6915"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="6920"/>
         <source>Reopen files.</source>
         <translation>Відкрити файли знову.</translation>
     </message>
@@ -11654,8 +11654,8 @@ Do you want to save your changes?</source>
         <location filename="../../src/app/valentina/mainwindow.cpp" line="4043"/>
         <location filename="../../src/app/valentina/mainwindow.cpp" line="4066"/>
         <location filename="../../src/app/valentina/mainwindow.cpp" line="4255"/>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="4328"/>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="6841"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="4333"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="6846"/>
         <source>Layout mode</source>
         <translation>Режим розкладки</translation>
     </message>
@@ -11664,7 +11664,7 @@ Do you want to save your changes?</source>
         <translation type="vanished">Ви не можете використовувати Режим розкладки зараз. Будь ласка, створіть хоча б одну деталь.</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="5756"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="5761"/>
         <source>Unsaved changes</source>
         <translation>Незбережені зміни</translation>
     </message>
@@ -11703,7 +11703,7 @@ Do you want to save your changes?</source>
         <translation type="vanished">Стандартні мірки (*.vst);;Індивідуальні мірки (*.vit)</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="7196"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="7201"/>
         <source>You can&apos;t export empty scene.</source>
         <translation>Ви не можете експортувати порожню сцену.</translation>
     </message>
@@ -11740,7 +11740,7 @@ Do you want to save your changes?</source>
         <translation type="vanished">Файл мірок містить недійсні відомі мірки.</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="7061"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="7066"/>
         <source>Measurement file has unknown format.</source>
         <translation>Файл мірок має невідомий формат.</translation>
     </message>
@@ -11767,13 +11767,13 @@ Do you want to save your changes?</source>
         <translation>Не вдалося синхронізувати мірки.</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="4899"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="4904"/>
         <source>Couldn&apos;t update measurements.</source>
         <translation>Не вдалося оновити мірки.</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="6502"/>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="6522"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="6507"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="6527"/>
         <source>The measurements file &apos;%1&apos; could not be found.</source>
         <translation>Не вдалося знайти файл мірок &apos;%1&apos;.</translation>
     </message>
@@ -11782,7 +11782,7 @@ Do you want to save your changes?</source>
         <translation type="vanished">Не вдалося знайти файл мірок &lt;br/&gt;&lt;br/&gt; &lt;b&gt;%1&lt;/b&gt; &lt;br/&gt;&lt;br/&gt;. Хочете оновити розташування файлу</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="6980"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="6985"/>
         <source>Loading measurements file</source>
         <translation>Завантаження файлу мірок</translation>
     </message>
@@ -11799,9 +11799,9 @@ Do you want to save your changes?</source>
         <translation type="vanished">Не вдалося встановити розмір. Файл не було відкрито.</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="7377"/>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="7420"/>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="7463"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="7382"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="7425"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="7468"/>
         <source>The method %1 does nothing in GUI mode</source>
         <translation>Метод %1 не працює в графічному режимі</translation>
     </message>
@@ -11818,15 +11818,15 @@ Do you want to save your changes?</source>
         <translation type="vanished">Не вдалося встановити зріст. Файл не було відкрито.</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="6824"/>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="6880"/>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="7243"/>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="7281"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="6829"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="6885"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="7248"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="7286"/>
         <source>Export error.</source>
         <translation>Помилка експорту.</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="7490"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="7495"/>
         <source>Please, provide one input file.</source>
         <translation>Будь ласка, надайте один вхідний файл.</translation>
     </message>
@@ -11903,7 +11903,7 @@ Do you want to save your changes?</source>
         <translation type="vanished">Зберегти...</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="5772"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="5777"/>
         <source>Don&apos;t Save</source>
         <translation>Не зберігати</translation>
     </message>
@@ -12066,7 +12066,7 @@ Do you want to save your changes?</source>
         <translation type="vanished">Розмір:</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="6977"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="6982"/>
         <source>The measurements file &lt;br/&gt;&lt;br/&gt; &lt;b&gt;%1&lt;/b&gt; &lt;br/&gt;&lt;br/&gt; could not be found. Do you want to update the file location?</source>
         <translation>Не вдалося знайти файл мірок &lt;br/&gt;&lt;br/&gt; &lt;b&gt;%1&lt;/b&gt; &lt;br/&gt;&lt;br/&gt;. Хочете оновити розташування файлу?</translation>
     </message>
@@ -12120,7 +12120,7 @@ Do you want to save your changes?</source>
         <translation>Не вдалося зберегти файл</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="7598"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="7603"/>
         <source>read only</source>
         <translation>тільки читання</translation>
     </message>
@@ -12193,16 +12193,16 @@ Do you want to save your changes?</source>
     <message>
         <location filename="../../src/app/valentina/mainwindow.cpp" line="2056"/>
         <location filename="../../src/app/valentina/mainwindow.cpp" line="2090"/>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="7023"/>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="7037"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="7028"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="7042"/>
         <source>Individual measurements</source>
         <translation>Індивідуальні мірки</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.cpp" line="2056"/>
         <location filename="../../src/app/valentina/mainwindow.cpp" line="2090"/>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="7023"/>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="7037"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="7028"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="7042"/>
         <source>Multisize measurements</source>
         <translation>Стандартні мірки</translation>
     </message>
@@ -12289,22 +12289,22 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.cpp" line="4256"/>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="4329"/>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="6842"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="4334"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="6847"/>
         <source>You don&apos;t have enough details to export. Please, include at least one detail in layout.</source>
         <translation>У вас недостатньо даних для експорту. Будь ласка, додайте принаймні одну деталь у розкладку.</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.cpp" line="4269"/>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="4342"/>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="6855"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="4347"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="6860"/>
         <source>Export details</source>
         <translation>Експорт деталей</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.cpp" line="4269"/>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="4342"/>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="6855"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="4347"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="6860"/>
         <source>Can&apos;t export details.</source>
         <translation>Не вдається експортувати деталі.</translation>
     </message>
@@ -12339,7 +12339,7 @@ Do you want to save your changes?</source>
         <translation>Експортувати як…</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="5766"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="5771"/>
         <source>Save…</source>
         <translation>Зберегти…</translation>
     </message>
@@ -12354,17 +12354,17 @@ Do you want to save your changes?</source>
         <translation>Експортувати остаточні вимірювання в CSV</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="7206"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="7211"/>
         <source>You can&apos;t export empty scene. Please, include at least one detail in layout.</source>
         <translation>Ви не можете експортувати порожню сцену. Будь ласка, додайте принаймні одну деталь у розкладку.</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="7309"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="7314"/>
         <source>Export final measurements error.</source>
         <translation>Помилка експорту фінальних вимірів.</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="7310"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="7315"/>
         <source>Destination path is empty.</source>
         <translation>Шлях призначення порожній.</translation>
     </message>
@@ -12419,7 +12419,7 @@ Do you want to save your changes?</source>
         <translation>Виберіть центральну точку мітки місця</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="6533"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="6538"/>
         <source>The measurements file &apos;%1&apos; could not be found or provides not enough information.</source>
         <translation>Файл вимірювань «%1» не знайдено або містить недостатньо інформації.</translation>
     </message>
@@ -12439,7 +12439,7 @@ Do you want to save your changes?</source>
         <translation>Зміни застосовано.</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="5742"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="5747"/>
         <source>Cannot save settings. Access denied.</source>
         <translation>Не вдається зберегти налаштування. Доступ заборонено.</translation>
     </message>
@@ -12449,7 +12449,7 @@ Do you want to save your changes?</source>
         <translation>Ctrl+O</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="5718"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="5723"/>
         <source>Cannot read settings from a malformed .INI file.</source>
         <translation>Неможливо прочитати налаштування з файлу .INI неправильного формату.</translation>
     </message>
@@ -12505,22 +12505,22 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.ui" line="1536"/>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="5114"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="5119"/>
         <source>Export recipe</source>
         <translation>Експортувати рецепт</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="5113"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="5118"/>
         <source>Recipe files</source>
         <translation>Файли рецептів</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="5115"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="5120"/>
         <source>recipe</source>
         <translation>рецепт</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="5128"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="5133"/>
         <source>Could not save recipe. %1</source>
         <translation>Не вдалося зберегти рецепт. %1</translation>
     </message>
@@ -12546,7 +12546,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.ui" line="407"/>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="7926"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="7931"/>
         <source>Pattern messages</source>
         <translation>Повідомлення лекала</translation>
     </message>
@@ -12561,27 +12561,27 @@ Do you want to save your changes?</source>
         <translation>Фільтр</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="7903"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="7908"/>
         <source>DEBUG</source>
         <translation>НАЛАГОДЖЕННЯ</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="7906"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="7911"/>
         <source>WARNING</source>
         <translation>ПОПЕРЕДЖЕННЯ</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="7909"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="7914"/>
         <source>CRITICAL</source>
         <translation>КРИТИЧНО</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="7912"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="7917"/>
         <source>FATAL</source>
         <translation>ФАТАЛЬНО</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="7915"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="7920"/>
         <source>INFO</source>
         <translation>ІНФО</translation>
     </message>
@@ -12661,78 +12661,78 @@ Do you want to save your changes?</source>
         <translation>Оновити ручну розкладку</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="4297"/>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="4370"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="4302"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="4375"/>
         <source>Unable to prepare raw layout data.</source>
         <translation>Не вдається підготувати вихідні дані розкладки.</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="4304"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="4309"/>
         <source>Manual layout files</source>
         <translation>Файли ручної розкладки</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="4311"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="4316"/>
         <source>Select manual layout</source>
         <translation>Вибрати ручну розкладку</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="4412"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="4417"/>
         <source>Select folder</source>
         <translation>Вибрати теку</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="5757"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="5762"/>
         <source>The pattern has been modified. Do you want to save your changes?</source>
         <translation>Лекало змінено. Хочете зберегти зміни?</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="7358"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="7363"/>
         <source>Not supported dimension A value &apos;%1&apos; for this pattern file.</source>
         <translation>Непідтримуване значення виміру A &quot;%1&quot; для цього файлу викрійки.</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="7365"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="7370"/>
         <source>Couldn&apos;t set dimension A. Need a file with multisize measurements.</source>
         <translation>Не вдалося встановити вимір А. Потрібен файл із багаторозмірними мірками.</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="7371"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="7376"/>
         <source>Couldn&apos;t set dimension A. File wasn&apos;t opened.</source>
         <translation>Не вдалося встановити вимір A. Файл не було відкрито.</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="7401"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="7406"/>
         <source>Not supported dimension B value &apos;%1&apos; for this pattern file.</source>
         <translation>Непідтримуване значення виміру B &quot;%1&quot; для цього файлу викрійки.</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="7408"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="7413"/>
         <source>Couldn&apos;t set dimension B. Need a file with multisize measurements.</source>
         <translation>Не вдалося встановити вимір B. Потрібен файл із багаторозмірними мірками.</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="7414"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="7419"/>
         <source>Couldn&apos;t set dimension B. File wasn&apos;t opened.</source>
         <translation>Не вдалося встановити вимір B. Файл не було відкрито.</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="7444"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="7449"/>
         <source>Not supported dimension C value &apos;%1&apos; for this pattern file.</source>
         <translation>Не підтримуване значення виміру C &quot;%1&quot; для цього файлу викрійки.</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="7451"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="7456"/>
         <source>Couldn&apos;t set dimension C. Need a file with multisize measurements.</source>
         <translation>Не вдалося встановити вимір C. Потрібен файл із багаторозмірними мірками.</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="7457"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="7462"/>
         <source>Couldn&apos;t set dimension C. File wasn&apos;t opened.</source>
         <translation>Не вдалося встановити вимір C. Файл не було відкрито.</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="5133"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="5138"/>
         <source>Could not create recipe file. %1</source>
         <translation>Не вдалося створити файл рецепта. %1</translation>
     </message>
@@ -12742,12 +12742,12 @@ Do you want to save your changes?</source>
         <translation>Магазин</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="6772"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="6777"/>
         <source>Scalable Vector Graphics files</source>
         <translation>Масштабовані файли векторної графіки</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="6774"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="6779"/>
         <source>Save draw</source>
         <translation>Зберегти малюнок</translation>
     </message>
@@ -12842,33 +12842,33 @@ Do you want to save your changes?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="4378"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="4383"/>
         <source>Select background image</source>
         <translation>Виберіть фонове зображення</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="5024"/>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="5065"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="5029"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="5070"/>
         <source>Unable to save image. Error: %1</source>
         <translation>Не вдається зберегти зображення. Помилка: %1</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="5030"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="5035"/>
         <source>Unable to save image. No data.</source>
         <translation>Не вдається зберегти зображення. Немає даних.</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="5036"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="5041"/>
         <source>untitled</source>
         <translation>без назви</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="5050"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="5055"/>
         <source>All files</source>
         <translation>Усі файли</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="5054"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="5059"/>
         <source>Save Image</source>
         <translation>Зберегти зображення</translation>
     </message>
@@ -13255,37 +13255,37 @@ Do you want to save your changes?</source>
     <name>Placeholder</name>
     <message>
         <location filename="../../src/libs/vlayout/vtextmanager.cpp" line="521"/>
-        <location filename="../../src/libs/vtools/dialogs/support/dialogeditlabel.cpp" line="715"/>
+        <location filename="../../src/libs/vtools/dialogs/support/dialogeditlabel.cpp" line="717"/>
         <source>Fabric</source>
         <translation>Тканина</translation>
     </message>
     <message>
         <location filename="../../src/libs/vlayout/vtextmanager.cpp" line="522"/>
-        <location filename="../../src/libs/vtools/dialogs/support/dialogeditlabel.cpp" line="716"/>
+        <location filename="../../src/libs/vtools/dialogs/support/dialogeditlabel.cpp" line="718"/>
         <source>Lining</source>
         <translation>Підклада</translation>
     </message>
     <message>
         <location filename="../../src/libs/vlayout/vtextmanager.cpp" line="523"/>
-        <location filename="../../src/libs/vtools/dialogs/support/dialogeditlabel.cpp" line="718"/>
+        <location filename="../../src/libs/vtools/dialogs/support/dialogeditlabel.cpp" line="720"/>
         <source>Interfacing</source>
         <translation>Дублерин</translation>
     </message>
     <message>
         <location filename="../../src/libs/vlayout/vtextmanager.cpp" line="524"/>
-        <location filename="../../src/libs/vtools/dialogs/support/dialogeditlabel.cpp" line="720"/>
+        <location filename="../../src/libs/vtools/dialogs/support/dialogeditlabel.cpp" line="722"/>
         <source>Interlining</source>
         <translation>Флізелін</translation>
     </message>
     <message>
         <location filename="../../src/libs/vlayout/vtextmanager.cpp" line="525"/>
-        <location filename="../../src/libs/vtools/dialogs/support/dialogeditlabel.cpp" line="721"/>
+        <location filename="../../src/libs/vtools/dialogs/support/dialogeditlabel.cpp" line="723"/>
         <source>Cut</source>
         <translation>Вирізати</translation>
     </message>
     <message>
         <location filename="../../src/libs/vlayout/vtextmanager.cpp" line="545"/>
-        <location filename="../../src/libs/vtools/dialogs/support/dialogeditlabel.cpp" line="832"/>
+        <location filename="../../src/libs/vtools/dialogs/support/dialogeditlabel.cpp" line="834"/>
         <source>on fold</source>
         <translation>на згин</translation>
     </message>
@@ -14445,12 +14445,12 @@ This option will take an affect after restart.</source>
         <translation>Помилка сумісності VLayoutPlaceLabel: actualClassVersion = %1 and classVersion = %2</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vlayout/vabstractpiece_p.h" line="146"/>
+        <location filename="../../src/libs/vlayout/vabstractpiece_p.h" line="148"/>
         <source>VAbstractPieceData prefix mismatch error: actualStreamHeader = 0x%1 and streamHeader = 0x%2</source>
         <translation>Помилка невідповідності префікса VAbstractPieceData: actualStreamHeader = 0x%1 and streamHeader = 0x%2</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vlayout/vabstractpiece_p.h" line="158"/>
+        <location filename="../../src/libs/vlayout/vabstractpiece_p.h" line="160"/>
         <source>VAbstractPieceData compatibility error: actualClassVersion = %1 and classVersion = %2</source>
         <translation>Помилка сумісності VAbstractPieceData: actualClassVersion = %1 and classVersion = %2</translation>
     </message>
@@ -14515,12 +14515,12 @@ This option will take an affect after restart.</source>
         <translation>Помилка сумісності VPieceNodeData: actualClassVersion = %1 and classVersion = %2</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vlayout/vlayoutpiece_p.h" line="177"/>
+        <location filename="../../src/libs/vlayout/vlayoutpiece_p.h" line="189"/>
         <source>VLayoutPieceData prefix mismatch error: actualStreamHeader = 0x%1 and streamHeader = 0x%2</source>
         <translation>Помилка невідповідності префікса VLayoutPieceData: actualStreamHeader = 0x%1 and streamHeader = 0x%2</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vlayout/vlayoutpiece_p.h" line="189"/>
+        <location filename="../../src/libs/vlayout/vlayoutpiece_p.h" line="201"/>
         <source>VLayoutPieceData compatibility error: actualClassVersion = %1 and classVersion = %2</source>
         <translation>Помилка сумісності VLayoutPieceData: actualClassVersion = %1 and classVersion = %2</translation>
     </message>
@@ -14588,14 +14588,14 @@ This option will take an affect after restart.</source>
         <translation type="vanished">Зміни застосовано.</translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/xml/vplayoutfilereader.cpp" line="1123"/>
+        <location filename="../../src/app/puzzle/xml/vplayoutfilereader.cpp" line="1148"/>
         <location filename="../../src/libs/ifc/xml/vdomdocument.cpp" line="458"/>
         <location filename="../../src/libs/ifc/xml/vdomdocument.cpp" line="463"/>
         <source>Can&apos;t convert toUInt parameter</source>
         <translation>Не можу конвертувати toUInt параметр</translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/xml/vplayoutfilereader.cpp" line="1060"/>
+        <location filename="../../src/app/puzzle/xml/vplayoutfilereader.cpp" line="1085"/>
         <location filename="../../src/libs/ifc/xml/vdomdocument.cpp" line="509"/>
         <source>Can&apos;t convert toBool parameter</source>
         <translation>Не вдається перетворити параметр toBool</translation>
@@ -14606,7 +14606,7 @@ This option will take an affect after restart.</source>
         <translation>Отримано порожній параметр</translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/xml/vplayoutfilereader.cpp" line="1097"/>
+        <location filename="../../src/app/puzzle/xml/vplayoutfilereader.cpp" line="1122"/>
         <location filename="../../src/libs/ifc/xml/vdomdocument.cpp" line="618"/>
         <location filename="../../src/libs/ifc/xml/vdomdocument.cpp" line="623"/>
         <source>Can&apos;t convert toDouble parameter</source>
@@ -14709,8 +14709,8 @@ This option will take an affect after restart.</source>
         <translation>Деталь &apos;%1&apos; має неправильний припуск на розкладку. Будь ласка, перевірте припуски на шви, щоб дізнатися, як поводяться припуски на шви.</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vlayout/vlayoutpiece.cpp" line="604"/>
-        <location filename="../../src/libs/vtools/tools/vtoolseamallowance.cpp" line="1820"/>
+        <location filename="../../src/libs/vlayout/vlayoutpiece.cpp" line="672"/>
+        <location filename="../../src/libs/vtools/tools/vtoolseamallowance.cpp" line="1841"/>
         <source>Piece &apos;%1&apos;. Seam allowance is not valid.</source>
         <translation>Деталь &apos;%1&apos;. Припуск на шви недійсний.</translation>
     </message>
@@ -14752,8 +14752,8 @@ This option will take an affect after restart.</source>
         <translation>Неможливо розрахувати довжину надсічки для точки &apos;%1&apos;. Причина: %2.</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vlayout/vlayoutpiece.cpp" line="255"/>
-        <location filename="../../src/libs/vlayout/vlayoutpiece.cpp" line="333"/>
+        <location filename="../../src/libs/vlayout/vlayoutpiece.cpp" line="259"/>
+        <location filename="../../src/libs/vlayout/vlayoutpiece.cpp" line="337"/>
         <source>Passmark &apos;%1&apos; is not part of piece &apos;%2&apos;.</source>
         <translation>Надсічка &apos;%1&apos; не є частиною деталі &apos;%2&apos;.</translation>
     </message>
@@ -14775,7 +14775,7 @@ This option will take an affect after restart.</source>
         <translation>Недійсна формула &quot;%1&quot; для інструмента з ідентифікатором &quot;%2&quot;. %3.</translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/xml/vplayoutfilereader.cpp" line="1149"/>
+        <location filename="../../src/app/puzzle/xml/vplayoutfilereader.cpp" line="1174"/>
         <location filename="../../src/libs/ifc/xml/vdomdocument.cpp" line="487"/>
         <location filename="../../src/libs/ifc/xml/vdomdocument.cpp" line="492"/>
         <source>Can&apos;t convert toInt parameter</source>
@@ -14812,22 +14812,22 @@ This option will take an affect after restart.</source>
         <translation>Помилка в контурі &quot;%1&quot;. Не вдалося обчислити сегмент для кривої &quot;%2&quot;. %3</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vlayout/vlayoutpiece.cpp" line="344"/>
+        <location filename="../../src/libs/vlayout/vlayoutpiece.cpp" line="348"/>
         <source>Cannot prepare builtin passmark &apos;%1&apos; for piece &apos;%2&apos;. Passmark is empty.</source>
         <translation>Неможливо підготувати вбудовану надсічку &quot;%1&quot; для деталі &quot;%2&quot;. Надсічка порожня.</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vlayout/vlayoutpiece.cpp" line="359"/>
+        <location filename="../../src/libs/vlayout/vlayoutpiece.cpp" line="363"/>
         <source>Cannot prepare builtin  passmark &apos;%1&apos; for piece &apos;%2&apos;. Passmark base line is empty.</source>
         <translation>Неможливо підготувати вбудовану надсічку &quot;%1&quot; для деталі &quot;%2&quot;. Базова лінія надсічки порожня.</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vlayout/vlayoutpiece.cpp" line="267"/>
+        <location filename="../../src/libs/vlayout/vlayoutpiece.cpp" line="271"/>
         <source>Cannot prepare passmark &apos;%1&apos; for piece &apos;%2&apos;. Passmark base line is empty.</source>
         <translation>Неможливо підготувати надсічку &quot;%1&quot; для деталі &quot;%2&quot;. Базова лінія надсічки порожня.</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vlayout/vlayoutpiece.cpp" line="296"/>
+        <location filename="../../src/libs/vlayout/vlayoutpiece.cpp" line="300"/>
         <source>Cannot prepare passmark &apos;%1&apos; for piece &apos;%2&apos;. Passmark is empty.</source>
         <translation>Неможливо підготувати надсічку &quot;%1&quot; для деталі &quot;%2&quot;. Надсічка порожня.</translation>
     </message>
@@ -14838,64 +14838,64 @@ This option will take an affect after restart.</source>
     </message>
     <message>
         <location filename="../../src/libs/vlayout/vtextmanager.cpp" line="453"/>
-        <location filename="../../src/libs/vtools/dialogs/support/dialogeditlabel.cpp" line="693"/>
+        <location filename="../../src/libs/vtools/dialogs/support/dialogeditlabel.cpp" line="695"/>
         <source>Failed to prepare final measurement placeholder. Parser error at line %1: %2.</source>
         <translation>Не вдалося підготувати заповнювач фінальної мірки. Помилка синтаксичного аналізатора в рядку %1: %2.</translation>
     </message>
     <message>
         <location filename="../../src/libs/vlayout/vtextmanager.cpp" line="412"/>
-        <location filename="../../src/libs/vtools/dialogs/support/dialogeditlabel.cpp" line="848"/>
+        <location filename="../../src/libs/vtools/dialogs/support/dialogeditlabel.cpp" line="850"/>
         <source>Failed to prepare full piece area placeholder. %1.</source>
         <translation>Не вдалося підготувати заповнювач усієї площі деталі. %1.</translation>
     </message>
     <message>
         <location filename="../../src/libs/vlayout/vtextmanager.cpp" line="427"/>
-        <location filename="../../src/libs/vtools/dialogs/support/dialogeditlabel.cpp" line="862"/>
+        <location filename="../../src/libs/vtools/dialogs/support/dialogeditlabel.cpp" line="864"/>
         <source>Failed to prepare piece seam line area placeholder. %1.</source>
         <translation>Не вдалося підготувати заповнювач площі лінії шва. %1.</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vlayout/vlayoutpiece.cpp" line="448"/>
+        <location filename="../../src/libs/vlayout/vlayoutpiece.cpp" line="452"/>
         <location filename="../../src/libs/vlayout/vtextmanager.cpp" line="564"/>
         <source>No data for the height dimension.</source>
         <translation>Немає даних для виміру зросту.</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vlayout/vlayoutpiece.cpp" line="449"/>
+        <location filename="../../src/libs/vlayout/vlayoutpiece.cpp" line="453"/>
         <location filename="../../src/libs/vlayout/vtextmanager.cpp" line="565"/>
         <source>No data for the size dimension.</source>
         <translation>Немає даних для виміру розміру.</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vlayout/vlayoutpiece.cpp" line="450"/>
+        <location filename="../../src/libs/vlayout/vlayoutpiece.cpp" line="454"/>
         <location filename="../../src/libs/vlayout/vtextmanager.cpp" line="566"/>
         <source>No data for the hip dimension.</source>
         <translation>Немає даних для виміру стегон.</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vlayout/vlayoutpiece.cpp" line="451"/>
+        <location filename="../../src/libs/vlayout/vlayoutpiece.cpp" line="455"/>
         <location filename="../../src/libs/vlayout/vtextmanager.cpp" line="567"/>
         <source>No data for the waist dimension.</source>
         <translation>Немає даних для виміру талії.</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/tools/vtoolseamallowance.cpp" line="341"/>
+        <location filename="../../src/libs/vtools/tools/vtoolseamallowance.cpp" line="351"/>
         <source>Cannot calculate fold line height for piece &apos;%1&apos;. Reason: %2.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/tools/vtoolseamallowance.cpp" line="362"/>
+        <location filename="../../src/libs/vtools/tools/vtoolseamallowance.cpp" line="372"/>
         <source>Cannot calculate fold line width for piece &apos;%1&apos;. Reason: %2.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/tools/vtoolseamallowance.cpp" line="384"/>
+        <location filename="../../src/libs/vtools/tools/vtoolseamallowance.cpp" line="394"/>
         <source>Cannot calculate fold line center position for piece &apos;%1&apos;. Reason: %2.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/tools/vtoolseamallowance.cpp" line="429"/>
-        <location filename="../../src/libs/vtools/tools/vtoolseamallowance.cpp" line="2114"/>
+        <location filename="../../src/libs/vtools/tools/vtoolseamallowance.cpp" line="439"/>
+        <location filename="../../src/libs/vtools/tools/vtoolseamallowance.cpp" line="2136"/>
         <source>Piece &apos;%1&apos;. Unable to load default piece label template.
 %2
 %3</source>
@@ -14904,9 +14904,14 @@ This option will take an affect after restart.</source>
 %3</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/tools/vtoolseamallowance.cpp" line="1111"/>
+        <location filename="../../src/libs/vtools/tools/vtoolseamallowance.cpp" line="1120"/>
         <source>Piece &apos;%1&apos;. Grainline is not valid.</source>
         <translation>Деталь &quot;%1&quot;. Нитка основи недійсна.</translation>
+    </message>
+    <message>
+        <location filename="../../src/libs/vtools/tools/vtoolseamallowance.cpp" line="2798"/>
+        <source>Piece &apos;%1&apos;. Fold line is not valid.</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vpiece.cpp" line="1366"/>
@@ -14991,25 +14996,25 @@ This option will take an affect after restart.</source>
         <translation>Ви дійсно хочете видалити?</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vlayout/vlayoutpiece.cpp" line="453"/>
+        <location filename="../../src/libs/vlayout/vlayoutpiece.cpp" line="457"/>
         <location filename="../../src/libs/vlayout/vtextmanager.cpp" line="569"/>
         <source>No data for the X dimension.</source>
         <translation>Немає даних для виміру X.</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vlayout/vlayoutpiece.cpp" line="454"/>
+        <location filename="../../src/libs/vlayout/vlayoutpiece.cpp" line="458"/>
         <location filename="../../src/libs/vlayout/vtextmanager.cpp" line="570"/>
         <source>No data for the Y dimension.</source>
         <translation>Немає даних для виміру Y.</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vlayout/vlayoutpiece.cpp" line="455"/>
+        <location filename="../../src/libs/vlayout/vlayoutpiece.cpp" line="459"/>
         <location filename="../../src/libs/vlayout/vtextmanager.cpp" line="571"/>
         <source>No data for the Z dimension.</source>
         <translation>Немає даних для виміру Z.</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vlayout/vlayoutpiece.cpp" line="456"/>
+        <location filename="../../src/libs/vlayout/vlayoutpiece.cpp" line="460"/>
         <location filename="../../src/libs/vlayout/vtextmanager.cpp" line="572"/>
         <source>No data for the W dimension.</source>
         <translation>Немає даних для виміру W.</translation>
@@ -15773,7 +15778,7 @@ This option will take an affect after restart.</source>
     <message>
         <location filename="../../src/app/tape/tkmmainwindow.ui" line="801"/>
         <source>Title:</source>
-        <translation type="unfinished"></translation>
+        <translation>Заголовок:</translation>
     </message>
     <message>
         <location filename="../../src/app/tape/tkmmainwindow.ui" line="827"/>
@@ -17423,82 +17428,82 @@ Do you want to save your changes?</source>
         <translation type="unfinished">Вирівнювання за лівим краєм</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabfoldline.ui" line="124"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabfoldline.ui" line="127"/>
         <source>Centers horizontally in the available space</source>
         <translation type="unfinished">Центрує горизонтально у доступному просторі</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabfoldline.ui" line="143"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabfoldline.ui" line="149"/>
         <source>Aligns with the right edge</source>
         <translation type="unfinished">Вирівнювання по правому краю</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabfoldline.ui" line="177"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabfoldline.ui" line="186"/>
         <source>Label:</source>
         <translation type="unfinished">Мітка:</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabfoldline.ui" line="214"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabfoldline.ui" line="223"/>
         <source>Manual shape</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabfoldline.ui" line="223"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabfoldline.ui" line="232"/>
         <source>Height</source>
         <translation type="unfinished">Зріст</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabfoldline.ui" line="283"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabfoldline.ui" line="292"/>
         <source>Height:</source>
         <comment>notch depth</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabfoldline.ui" line="306"/>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabfoldline.ui" line="534"/>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabfoldline.ui" line="762"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabfoldline.ui" line="315"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabfoldline.ui" line="543"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabfoldline.ui" line="771"/>
         <source>Formula wizard</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabfoldline.ui" line="363"/>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabfoldline.ui" line="591"/>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabfoldline.ui" line="819"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabfoldline.ui" line="372"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabfoldline.ui" line="600"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabfoldline.ui" line="828"/>
         <source>Value</source>
         <translation type="unfinished">Значення</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabfoldline.ui" line="395"/>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabfoldline.ui" line="623"/>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabfoldline.ui" line="851"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabfoldline.ui" line="404"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabfoldline.ui" line="632"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabfoldline.ui" line="860"/>
         <source>Calculation</source>
         <translation type="unfinished">Розрахунок</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabfoldline.ui" line="420"/>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabfoldline.ui" line="648"/>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabfoldline.ui" line="876"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabfoldline.ui" line="429"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabfoldline.ui" line="657"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabfoldline.ui" line="885"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Show full calculation in message box&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabfoldline.ui" line="451"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabfoldline.ui" line="460"/>
         <source>Width</source>
         <translation type="unfinished">Ширина</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabfoldline.ui" line="511"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabfoldline.ui" line="520"/>
         <source>Width:</source>
         <comment>notch width</comment>
         <translation type="unfinished">Ширина:</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabfoldline.ui" line="679"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabfoldline.ui" line="688"/>
         <source>Center</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabfoldline.ui" line="739"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabfoldline.ui" line="748"/>
         <source>Center:</source>
         <comment>notch angle</comment>
         <translation type="unfinished"></translation>
@@ -19166,7 +19171,7 @@ Do you want to save your changes?</source>
 <context>
     <name>VAbstractPiece</name>
     <message>
-        <location filename="../../src/libs/vlayout/vabstractpiece.cpp" line="1098"/>
+        <location filename="../../src/libs/vlayout/vabstractpiece.cpp" line="1082"/>
         <source>Piece &apos;%1&apos;. Not enough points to build seam allowance.</source>
         <translation>Деталь &quot;%1&quot;. Недостатньо точок для створення припуску на шви.</translation>
     </message>
@@ -20959,6 +20964,14 @@ Do you want to save your changes?</source>
     </message>
 </context>
 <context>
+    <name>VFoldLine</name>
+    <message>
+        <location filename="../../src/libs/vlayout/vfoldline.cpp" line="789"/>
+        <source>Invalid SVG font &apos;%1&apos;. Fallback to outline font.</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>VFormula</name>
     <message>
         <location filename="../../src/libs/vpatterndb/vformula.cpp" line="281"/>
@@ -21064,7 +21077,7 @@ Do you want to save your changes?</source>
     <message>
         <location filename="../../src/libs/vformat/knownmeasurements/vknownmeasurementsdocument.cpp" line="562"/>
         <source>The image id is empty!</source>
-        <translation type="unfinished"></translation>
+        <translation>ID зображення порожнє!</translation>
     </message>
 </context>
 <context>
@@ -21162,12 +21175,12 @@ Do you want to save your changes?</source>
 <context>
     <name>VLayoutPiece</name>
     <message>
-        <location filename="../../src/libs/vlayout/vlayoutpiece.cpp" line="621"/>
+        <location filename="../../src/libs/vlayout/vlayoutpiece.cpp" line="689"/>
         <source>Piece %1 doesn&apos;t have shape.</source>
         <translation>Деталь %1 не має форми.</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vlayout/vlayoutpiece.cpp" line="1763"/>
+        <location filename="../../src/libs/vlayout/vlayoutpiece.cpp" line="1896"/>
         <source>Invalid SVG font &apos;%1&apos;. Fallback to outline font.</source>
         <translation type="unfinished"></translation>
     </message>
@@ -21580,12 +21593,12 @@ Do you want to save your changes?</source>
 <context>
     <name>VPGraphicsPiece</name>
     <message>
-        <location filename="../../src/app/puzzle/scene/vpgraphicspiece.cpp" line="418"/>
+        <location filename="../../src/app/puzzle/scene/vpgraphicspiece.cpp" line="356"/>
         <source>Move to</source>
         <translation>Перемістити до</translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/scene/vpgraphicspiece.cpp" line="432"/>
+        <location filename="../../src/app/puzzle/scene/vpgraphicspiece.cpp" line="370"/>
         <source>Remove from Sheet</source>
         <translation>Видалити з аркуша</translation>
     </message>
@@ -21619,7 +21632,7 @@ Do you want to save your changes?</source>
         <translation>Помилка в рядку %1. Рядок нитки основи порожній.</translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/xml/vplayoutfilereader.cpp" line="1040"/>
+        <location filename="../../src/app/puzzle/xml/vplayoutfilereader.cpp" line="1065"/>
         <source>Got empty attribute &apos;%1&apos;</source>
         <translation>Отримано порожній атрибут &quot;%1&quot;</translation>
     </message>
@@ -21634,7 +21647,7 @@ Do you want to save your changes?</source>
         <translation>Помилка в рядку %1. Внутрішній контур порожній.</translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/xml/vplayoutfilereader.cpp" line="1027"/>
+        <location filename="../../src/app/puzzle/xml/vplayoutfilereader.cpp" line="1052"/>
         <source>Unexpected tag %1 in line %2</source>
         <translation>Неочікуваний тег %1 у рядку %2</translation>
     </message>
@@ -22513,18 +22526,18 @@ Do you want to save your changes?</source>
 <context>
     <name>VPPiece</name>
     <message>
-        <location filename="../../src/app/puzzle/layout/vppiece.cpp" line="404"/>
-        <location filename="../../src/app/puzzle/layout/vppiece.cpp" line="410"/>
+        <location filename="../../src/app/puzzle/layout/vppiece.cpp" line="416"/>
+        <location filename="../../src/app/puzzle/layout/vppiece.cpp" line="422"/>
         <source>Seam line is empty</source>
         <translation>Лінія шва порожня</translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/layout/vppiece.cpp" line="416"/>
+        <location filename="../../src/app/puzzle/layout/vppiece.cpp" line="428"/>
         <source>Seam allowance line is empty</source>
         <translation>Припуск на шов порожній</translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/layout/vppiece.cpp" line="422"/>
+        <location filename="../../src/app/puzzle/layout/vppiece.cpp" line="434"/>
         <source>Grainline is empty</source>
         <translation>Нитка основи порожня</translation>
     </message>
@@ -22609,74 +22622,74 @@ Do you want to save your changes?</source>
         <translation type="vanished">Помилка не унікальний id.</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="569"/>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="597"/>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="659"/>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="703"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="573"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="601"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="663"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="707"/>
         <source>Error parsing file.</source>
         <translation>Помилка парсингу файла.</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="576"/>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="670"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="580"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="674"/>
         <source>Error can&apos;t convert value.</source>
         <translation>Помилка, не можу конвертувати значення.</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="583"/>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="681"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="587"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="685"/>
         <source>Error empty parameter.</source>
         <translation>Помилка, порожній параметр.</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="590"/>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="692"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="594"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="696"/>
         <source>Error wrong id.</source>
         <translation>Помикла, неправильний id.</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="604"/>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="714"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="608"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="718"/>
         <source>Error parsing file (std::bad_alloc).</source>
         <translation>Помилка парсингу файлу (std::bad_alloc).</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="1044"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="1048"/>
         <source>Error creating or updating detail</source>
         <translation>Помилка створення чи оновлення деталі</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="1664"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="1669"/>
         <source>Error creating or updating single point</source>
         <translation>Помилка створення чи оновлення простої точки</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="1709"/>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="1715"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="1714"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="1720"/>
         <source>Error creating or updating point of end line</source>
         <translation>Помилка створення чи оновлення точки кінця відрізку</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="1759"/>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="1765"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="1764"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="1770"/>
         <source>Error creating or updating point along line</source>
         <translation>Помилка створення чи оновлення точки вздовж лінії</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="1804"/>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="1810"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="1809"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="1815"/>
         <source>Error creating or updating point of shoulder</source>
         <translation>Помилка створення чи оновлення точки плеча</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="1849"/>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="1855"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="1854"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="1860"/>
         <source>Error creating or updating point of normal</source>
         <translation>Помилка створення чи оновлення точки нормалі</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="1894"/>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="1900"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="1899"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="1905"/>
         <source>Error creating or updating point of bisector</source>
         <translation>Помилка створення чи оновлення точки бісектриси</translation>
     </message>
@@ -22685,270 +22698,270 @@ Do you want to save your changes?</source>
         <translation type="vanished">Помилка створення чи оновлення точки перетину ліній</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="1970"/>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="1976"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="1975"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="1981"/>
         <source>Error creating or updating point of contact</source>
         <translation>Помилка створення чи оновлення точки дотику</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="2026"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="2031"/>
         <source>Error creating or updating modeling point</source>
         <translation>Помилка створення чи оновлення модельної точки</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="2170"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="2175"/>
         <source>Error creating or updating height</source>
         <translation>Помилка створення чи оновлення висоти</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="2201"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="2206"/>
         <source>Error creating or updating triangle</source>
         <translation>Помилка створення чи оновлення трикутника</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="2231"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="2236"/>
         <source>Error creating or updating point of intersection</source>
         <translation>Помилка створення чи оновлення точки перетину</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="2270"/>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="2276"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="2275"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="2281"/>
         <source>Error creating or updating cut spline point</source>
         <translation>Помилка створення чи оновлення точки розрізання кривої</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="2315"/>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="2321"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="2320"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="2326"/>
         <source>Error creating or updating cut spline path point</source>
         <translation>Помилка створення чи оновлення точки розрізаня складної кривої</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="2360"/>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="2366"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="2365"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="2371"/>
         <source>Error creating or updating cut arc point</source>
         <translation>Помилка створення чи оновлення точки розрізання дуги</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="2407"/>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="2413"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="2412"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="2418"/>
         <source>Error creating or updating point of intersection line and axis</source>
         <translation>Помилка створення чи оновлення точки перетину лінії і осі</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="2460"/>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="2466"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="2465"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="2471"/>
         <source>Error creating or updating point of intersection curve and axis</source>
         <translation>Помилка створення чи оновлення точки перетину кривої і осі</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="1542"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="1547"/>
         <source>Error creating or updating line</source>
         <translation>Помилка створення чи оновлення лінії</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="2753"/>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="2819"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="2758"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="2824"/>
         <source>Error creating or updating simple curve</source>
         <translation>Помилка створення чи оновлення кривої</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="2951"/>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="3039"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="2956"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="3044"/>
         <source>Error creating or updating curve path</source>
         <translation>Помилка створення чи оновлення шляху кривих</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="3157"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="3162"/>
         <source>Error creating or updating modeling simple curve</source>
         <translation>Помилка створення чи оновлення модельної кривої</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="3205"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="3210"/>
         <source>Error creating or updating modeling curve path</source>
         <translation>Помилка створення чи оновлення модельного шляху кривих</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="3252"/>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="3258"/>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="3443"/>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="3449"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="3257"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="3263"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="3448"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="3454"/>
         <source>Error creating or updating simple arc</source>
         <translation>Помилка створення чи оновлення дуги</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="3396"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="3401"/>
         <source>Error creating or updating modeling arc</source>
         <translation>Помилка створення чи оновлення модельної дуги</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="4073"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="4078"/>
         <source>Error creating or updating union details</source>
         <translation>Помилка створення чи оновлення об&apos;єднання деталей</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="2497"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="2502"/>
         <source>Error creating or updating point of intersection arcs</source>
         <translation>Помилка створення чи оновлення точки перетину дуг</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="2540"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="2545"/>
         <source>Error creating or updating point of intersection circles</source>
         <translation>Помилка створення чи оновлення точки перетину кіл</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="2622"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="2627"/>
         <source>Error creating or updating point from circle and tangent</source>
         <translation>Помилка створення чи оновлення точки кола та дотичної</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="2653"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="2658"/>
         <source>Error creating or updating point from arc and tangent</source>
         <translation>Помилка створення чи оновлення точки дуги та дотичної</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="2703"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="2708"/>
         <source>Error creating or updating true darts</source>
         <translation>Помилка створення чи оновлення виточок</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="787"/>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="895"/>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="972"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="791"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="899"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="976"/>
         <source>Wrong tag name &apos;%1&apos;.</source>
         <translation>Неправильна назва тегу &apos;%1&apos;.</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="1509"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="1514"/>
         <source>Unknown point type &apos;%1&apos;.</source>
         <translation>Невідомий тип точки &apos;%1&apos;.</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="3963"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="3968"/>
         <source>Unknown spline type &apos;%1&apos;.</source>
         <translation>Невідомий тип сплайна &apos;%1&apos;.</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="3999"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="4004"/>
         <source>Unknown arc type &apos;%1&apos;.</source>
         <translation>Невідомий тип дуги &apos;%1&apos;.</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="4079"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="4084"/>
         <source>Unknown tools type &apos;%1&apos;.</source>
         <translation>Невідомий тип інструмента &apos;%1&apos;.</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="504"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="508"/>
         <source>Error not unique id.</source>
         <translation>Помилка, не унікальний id.</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="2582"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="2587"/>
         <source>Error creating or updating point of intersection curves</source>
         <translation>Помилка створення чи оновлення точки перетину кривих</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="2825"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="2830"/>
         <source>Error creating or updating simple interactive spline</source>
         <translation>Помилка створення чи оновлення кривої</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="3045"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="3050"/>
         <source>Error creating or updating interactive spline path</source>
         <translation>Помилка створення чи оновлення складної кривої</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="2879"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="2884"/>
         <source>Error creating or updating cubic bezier curve</source>
         <translation>Помилка створення чи оновлення кубічної кривої Безьє</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="3109"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="3114"/>
         <source>Error creating or updating cubic bezier path curve</source>
         <translation>Помилка створення чи оновлення складної кубічної кривої Безьє</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="3489"/>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="3495"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="3494"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="3500"/>
         <source>Error creating or updating operation of rotation</source>
         <translation>Помилка створення чи оновлення повороту</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="4112"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="4117"/>
         <source>Unknown operation type &apos;%1&apos;.</source>
         <translation>Невідома операція &apos;%1&apos;.</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="3527"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="3532"/>
         <source>Error creating or updating operation of flipping by line</source>
         <translation>Помилка створення чи оновлення операції відзеркалення по лінії</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="3559"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="3564"/>
         <source>Error creating or updating operation of flipping by axis</source>
         <translation>Помилка створення чи оновлення операції віддзеркалення за віссю</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="3605"/>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="3611"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="3610"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="3616"/>
         <source>Error creating or updating operation of moving</source>
         <translation>Помилка створення чи оновлення операції переміщення</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="1931"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="1936"/>
         <source>Error creating or updating point of line intersection</source>
         <translation>Помилка створення чи оновлення точки перетину ліній</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="3312"/>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="3318"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="3317"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="3323"/>
         <source>Error creating or updating simple elliptical arc</source>
         <translation>Помилка створення чи оновлення простої еліптичної дуги</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="4031"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="4036"/>
         <source>Unknown elliptical arc type &apos;%1&apos;.</source>
         <translation>Невідомий тип еліптичної дуги &apos;%1&apos;.</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="3357"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="3362"/>
         <source>Error creating or updating modeling elliptical arc</source>
         <translation>Помилка створення чи оновлення модельної еліптичної дуги</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="989"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="993"/>
         <source>Detail</source>
         <translation>Деталь</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="4163"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="4168"/>
         <source>Unnamed path</source>
         <translation>Контур без назви</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="4156"/>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="4179"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="4161"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="4184"/>
         <source>Error creating or updating a piece path</source>
         <translation>Помилка створення чи оновлення контуру деталі</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="2065"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="2070"/>
         <source>Error creating or updating pin point</source>
         <translation>Помилка створення чи оновлення точки шпильки</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="4157"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="4162"/>
         <source>Piece path doesn&apos;t contain nodes</source>
         <translation>Контур деталі не містить вузлів</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="2134"/>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="2140"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="2139"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="2145"/>
         <source>Error creating or updating place label</source>
         <translation>Помилка створення або оновлення мітки місця</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="4337"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="4342"/>
         <source>Can&apos;t find increment &apos;%1&apos;</source>
         <translation>Не вдалося знайти прибавку &apos;%1&apos;</translation>
     </message>
@@ -23296,7 +23309,7 @@ Raw layout format compatibility error: actualFileVersion = %1 and fileVersion = 
 <context>
     <name>VTextGraphicsItem</name>
     <message>
-        <location filename="../../src/libs/vwidgets/vtextgraphicsitem.cpp" line="859"/>
+        <location filename="../../src/libs/vwidgets/vtextgraphicsitem.cpp" line="860"/>
         <source>Invalid SVG font &apos;%1&apos;. Fallback to outline font.</source>
         <translation type="unfinished"></translation>
     </message>
@@ -24737,113 +24750,113 @@ Raw layout format compatibility error: actualFileVersion = %1 and fileVersion = 
 <context>
     <name>VToolSeamAllowance</name>
     <message>
-        <location filename="../../src/libs/vtools/tools/vtoolseamallowance.cpp" line="460"/>
-        <location filename="../../src/libs/vtools/tools/vtoolseamallowance.cpp" line="472"/>
+        <location filename="../../src/libs/vtools/tools/vtoolseamallowance.cpp" line="470"/>
+        <location filename="../../src/libs/vtools/tools/vtoolseamallowance.cpp" line="482"/>
         <source>Current seam allowance</source>
         <translation>Поточний припуск на шви</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/tools/vtoolseamallowance.cpp" line="1134"/>
+        <location filename="../../src/libs/vtools/tools/vtoolseamallowance.cpp" line="1143"/>
         <source>move pattern piece label</source>
         <translation>перемістити мітку деталі</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/tools/vtoolseamallowance.cpp" line="1153"/>
+        <location filename="../../src/libs/vtools/tools/vtoolseamallowance.cpp" line="1162"/>
         <source>resize pattern piece label</source>
         <translation>змінити розмір мітки деталі</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/tools/vtoolseamallowance.cpp" line="1174"/>
+        <location filename="../../src/libs/vtools/tools/vtoolseamallowance.cpp" line="1182"/>
         <source>rotate pattern piece label</source>
         <translation>повернути мітку деталі</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/tools/vtoolseamallowance.cpp" line="1189"/>
+        <location filename="../../src/libs/vtools/tools/vtoolseamallowance.cpp" line="1197"/>
         <source>move pattern info label</source>
         <translation>перемістити мітку деталі</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/tools/vtoolseamallowance.cpp" line="1208"/>
+        <location filename="../../src/libs/vtools/tools/vtoolseamallowance.cpp" line="1216"/>
         <source>resize pattern info label</source>
         <translation>змінити розмір мітки деталі</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/tools/vtoolseamallowance.cpp" line="1227"/>
+        <location filename="../../src/libs/vtools/tools/vtoolseamallowance.cpp" line="1235"/>
         <source>rotate pattern info label</source>
         <translation>повернути мітку деталі</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/tools/vtoolseamallowance.cpp" line="1240"/>
+        <location filename="../../src/libs/vtools/tools/vtoolseamallowance.cpp" line="1248"/>
         <source>move grainline</source>
         <translation>перемістити нитку основи</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/tools/vtoolseamallowance.cpp" line="1255"/>
+        <location filename="../../src/libs/vtools/tools/vtoolseamallowance.cpp" line="1263"/>
         <source>resize grainline</source>
         <translation>змінити розмір нитки основи</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/tools/vtoolseamallowance.cpp" line="1269"/>
+        <location filename="../../src/libs/vtools/tools/vtoolseamallowance.cpp" line="1277"/>
         <source>rotate grainline</source>
         <translation>обернути нитку основи</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/tools/vtoolseamallowance.cpp" line="1534"/>
+        <location filename="../../src/libs/vtools/tools/vtoolseamallowance.cpp" line="1553"/>
         <source>Options</source>
         <translation>Параметри</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/tools/vtoolseamallowance.cpp" line="1538"/>
+        <location filename="../../src/libs/vtools/tools/vtoolseamallowance.cpp" line="1557"/>
         <source>In layout</source>
         <translation>В розкладку</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/tools/vtoolseamallowance.cpp" line="1542"/>
+        <location filename="../../src/libs/vtools/tools/vtoolseamallowance.cpp" line="1561"/>
         <source>Hide main path</source>
         <translation>Ховати головний контур</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/tools/vtoolseamallowance.cpp" line="1554"/>
+        <location filename="../../src/libs/vtools/tools/vtoolseamallowance.cpp" line="1573"/>
         <source>Show full piece</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/tools/vtoolseamallowance.cpp" line="1566"/>
+        <location filename="../../src/libs/vtools/tools/vtoolseamallowance.cpp" line="1585"/>
         <source>Reset piece label template</source>
         <translation>Скинути шаблон мітки деталі</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/tools/vtoolseamallowance.cpp" line="1569"/>
+        <location filename="../../src/libs/vtools/tools/vtoolseamallowance.cpp" line="1588"/>
         <source>Delete</source>
         <translation>Видалити</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/tools/vtoolseamallowance.cpp" line="1325"/>
+        <location filename="../../src/libs/vtools/tools/vtoolseamallowance.cpp" line="1344"/>
         <source>apply save detail options</source>
         <translation>застосувати зберегти параметри деталі</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/tools/vtoolseamallowance.cpp" line="1630"/>
+        <location filename="../../src/libs/vtools/tools/vtoolseamallowance.cpp" line="1649"/>
         <source>multi deletion</source>
         <translation>групове видалення</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/tools/vtoolseamallowance.cpp" line="1546"/>
+        <location filename="../../src/libs/vtools/tools/vtoolseamallowance.cpp" line="1565"/>
         <source>Forbid flipping</source>
         <translation>Заборонити відзеркалення</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/tools/vtoolseamallowance.cpp" line="1550"/>
+        <location filename="../../src/libs/vtools/tools/vtoolseamallowance.cpp" line="1569"/>
         <source>Force flipping</source>
         <translation>Примусове перевертання</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/tools/vtoolseamallowance.cpp" line="1334"/>
+        <location filename="../../src/libs/vtools/tools/vtoolseamallowance.cpp" line="1353"/>
         <source>This id (%1) is not unique.</source>
         <translation>Цей id (%1) не унікальний.</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/tools/vtoolseamallowance.cpp" line="2437"/>
+        <location filename="../../src/libs/vtools/tools/vtoolseamallowance.cpp" line="2459"/>
         <source>Tool was used after deleting.</source>
         <translation>Інструмент був використаний після видалення.</translation>
     </message>
