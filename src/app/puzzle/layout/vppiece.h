@@ -44,6 +44,12 @@
 class VPLayout;
 class VPSheet;
 
+struct VStickyDistance
+{
+    QLineF m_closestDistance{};
+    qreal m_pieceGap{0};
+};
+
 class VPPiece : public VLayoutPiece
 {
     Q_DECLARE_TR_FUNCTIONS(VPPiece) // NOLINT
@@ -136,6 +142,9 @@ private:
     quint16 m_copyNumber{1};
 
     qreal m_zValue{1.0};
+
+    auto StickySheet(VStickyDistance &match) const -> bool;
+    auto StickyPieces(VStickyDistance &match) const -> bool;
 };
 
 //---------------------------------------------------------------------------------------------------------------------

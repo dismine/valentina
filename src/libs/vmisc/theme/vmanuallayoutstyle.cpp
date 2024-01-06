@@ -41,18 +41,20 @@ namespace
 QT_WARNING_PUSH
 QT_WARNING_DISABLE_CLANG("-Wunused-member-function")
 
-Q_GLOBAL_STATIC_WITH_ARGS(const QString, ManualLayoutStyleNodeVar, ("ManualLayoutStyle"_L1))     // NOLINT
-Q_GLOBAL_STATIC_WITH_ARGS(const QString, SheetBorderColorVar, ("SheetBorderColor"_L1))           // NOLINT
-Q_GLOBAL_STATIC_WITH_ARGS(const QString, SheetMarginColorVar, ("SheetMarginColor"_L1))           // NOLINT
-Q_GLOBAL_STATIC_WITH_ARGS(const QString, SheetGridColorVar, ("SheetGridColor"_L1))               // NOLINT
-Q_GLOBAL_STATIC_WITH_ARGS(const QString, SheetTileGridColorVar, ("SheetTileGridColor"_L1))       // NOLINT
-Q_GLOBAL_STATIC_WITH_ARGS(const QString, SheetTileNumberColorVar, ("SheetTileNumberColor"_L1))   // NOLINT
-Q_GLOBAL_STATIC_WITH_ARGS(const QString, PieceOkColorVar, ("PieceOkColor"_L1))                   // NOLINT
-Q_GLOBAL_STATIC_WITH_ARGS(const QString, PieceErrorColorVar, ("PieceErrorColor"_L1))             // NOLINT
-Q_GLOBAL_STATIC_WITH_ARGS(const QString, PieceHoverColorVar, ("PieceHoverColor"_L1))             // NOLINT
-Q_GLOBAL_STATIC_WITH_ARGS(const QString, PieceHandleColorVar, ("PieceHandleColor"_L1))           // NOLINT
-Q_GLOBAL_STATIC_WITH_ARGS(const QString, PieceHandleHoverColorVar, ("PieceHandleHoverColor"_L1)) // NOLINT
-Q_GLOBAL_STATIC_WITH_ARGS(const QString, CarrouselPieceColorVar, ("CarrouselPieceColor"_L1))     // NOLINT
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, ManualLayoutStyleNodeVar, ("ManualLayoutStyle"_L1))           // NOLINT
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, SheetBorderColorVar, ("SheetBorderColor"_L1))                 // NOLINT
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, SheetFoldShadowColorVar, ("SheetFoldShadowColor"_L1))         // NOLINT
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, SheetMarginColorVar, ("SheetMarginColor"_L1))                 // NOLINT
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, SheetGridColorVar, ("SheetGridColor"_L1))                     // NOLINT
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, SheetTileGridColorVar, ("SheetTileGridColor"_L1))             // NOLINT
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, SheetTileNumberColorVar, ("SheetTileNumberColor"_L1))         // NOLINT
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, PieceOkColorVar, ("PieceOkColor"_L1))                         // NOLINT
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, PieceErrorColorVar, ("PieceErrorColor"_L1))                   // NOLINT
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, PieceHoverColorVar, ("PieceHoverColor"_L1))                   // NOLINT
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, PieceSelectionBrushColorVar, ("PieceSelectionBrushColor"_L1)) // NOLINT
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, PieceHandleColorVar, ("PieceHandleColor"_L1))                 // NOLINT
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, PieceHandleHoverColorVar, ("PieceHandleHoverColor"_L1))       // NOLINT
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, CarrouselPieceColorVar, ("CarrouselPieceColor"_L1))           // NOLINT
 // NOLINTNEXTLINE
 Q_GLOBAL_STATIC_WITH_ARGS(const QString, CarrouselPieceSelectedColorVar, ("CarrouselPieceSelectedColor"_L1))
 // NOLINTNEXTLINE
@@ -72,11 +74,12 @@ VManualLayoutStyle::VManualLayoutStyle()
 //---------------------------------------------------------------------------------------------------------------------
 void VManualLayoutStyle::LoadJson(const QJsonObject &json)
 {
-    QJsonValue toolStyleValues = json[*ManualLayoutStyleNodeVar];
+    QJsonValue const toolStyleValues = json[*ManualLayoutStyleNodeVar];
 
-    QJsonObject obj = toolStyleValues.toObject();
+    QJsonObject const obj = toolStyleValues.toObject();
 
     ReadColor(obj, *SheetBorderColorVar, m_sheetBorderColor);
+    ReadColor(obj, *SheetFoldShadowColorVar, m_sheetFoldShadowColor);
     ReadColor(obj, *SheetMarginColorVar, m_sheetMarginColor);
     ReadColor(obj, *SheetGridColorVar, m_sheetGridColor);
     ReadColor(obj, *SheetTileGridColorVar, m_sheetTileGridColor);
@@ -84,6 +87,7 @@ void VManualLayoutStyle::LoadJson(const QJsonObject &json)
     ReadColor(obj, *PieceOkColorVar, m_pieceOkColor);
     ReadColor(obj, *PieceErrorColorVar, m_pieceErrorColor);
     ReadColor(obj, *PieceHoverColorVar, m_pieceHoverColor);
+    ReadColor(obj, *PieceSelectionBrushColorVar, m_pieceSelectionBrushColor);
     ReadColor(obj, *PieceHandleColorVar, m_pieceHandleColor);
     ReadColor(obj, *PieceHandleHoverColorVar, m_pieceHandleHoverColor);
     ReadColor(obj, *CarrouselPieceColorVar, m_carrouselPieceColor);
@@ -95,7 +99,7 @@ void VManualLayoutStyle::LoadJson(const QJsonObject &json)
 //---------------------------------------------------------------------------------------------------------------------
 auto VManualLayoutStyle::ToJson() const -> QJsonObject
 {
-    QJsonObject obj;
+    QJsonObject const obj;
 
     WriteColor(obj, *SheetBorderColorVar, m_sheetBorderColor);
     WriteColor(obj, *SheetMarginColorVar, m_sheetMarginColor);
@@ -104,6 +108,7 @@ auto VManualLayoutStyle::ToJson() const -> QJsonObject
     WriteColor(obj, *SheetTileNumberColorVar, m_sheetTileNumberColor);
     WriteColor(obj, *PieceOkColorVar, m_pieceOkColor);
     WriteColor(obj, *PieceErrorColorVar, m_pieceErrorColor);
+    WriteColor(obj, *PieceSelectionBrushColorVar, m_pieceSelectionBrushColor);
     WriteColor(obj, *PieceHoverColorVar, m_pieceHoverColor);
     WriteColor(obj, *PieceHandleColorVar, m_pieceHandleColor);
     WriteColor(obj, *PieceHandleHoverColorVar, m_pieceHandleHoverColor);

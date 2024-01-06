@@ -52,6 +52,7 @@ class VSvgFontDatabase;
 class QFileSystemWatcher;
 class VAbstractShortcutManager;
 class VKnownMeasurementsDatabase;
+class VTranslator;
 
 #if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
 class VTextCodec;
@@ -113,6 +114,8 @@ public:
     auto AppUptime() const -> qint64;
 
     auto GetShortcutManager() const -> VAbstractShortcutManager *;
+
+    auto GetPlaceholderTranslator() -> QSharedPointer<VTranslator>;
 
     // NOLINTNEXTLINE(cppcoreguidelines-avoid-c-arrays, hicpp-avoid-c-arrays, modernize-avoid-c-arrays)
     static auto IsOptionSet(int argc, char *argv[], const char *option) -> bool;

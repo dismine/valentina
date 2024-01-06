@@ -418,10 +418,8 @@ auto PassmarkAngleTypeToString(PassmarkAngleType type) -> QString
         case PassmarkAngleType::Intersection2OnlyRight:
             return strIntersection2OnlyRight;
         default:
-            break;
+            return strStraightforward;
     }
-
-    return strStraightforward;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -450,9 +448,62 @@ auto StringToPassmarkAngleType(const QString &value) -> PassmarkAngleType
         case 7:
             return PassmarkAngleType::Intersection2OnlyRight;
         default:
-            break;
+            return PassmarkAngleType::Straightforward;
     }
-    return PassmarkAngleType::Straightforward;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+auto FoldLineTypeToString(FoldLineType type) -> QString
+{
+    switch (type)
+    {
+        case FoldLineType::TwoArrowsTextUnder:
+            return strFoldTypeTwoArrowsTextUnder;
+        case FoldLineType::TwoArrows:
+            return strFoldTypeTwoArrows;
+        case FoldLineType::Text:
+            return strFoldTypeText;
+        case FoldLineType::ThreeDots:
+            return strFoldTypeThreeDots;
+        case FoldLineType::ThreeX:
+            return strFoldTypeThreeX;
+        case FoldLineType::None:
+            return strFoldTypeNone;
+        case FoldLineType::TwoArrowsTextAbove:
+        default:
+            return strFoldTypeTwoArrowsTextAbove;
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+auto StringToFoldLineType(const QString &value) -> FoldLineType
+{
+    const QStringList values{strFoldTypeTwoArrowsTextAbove, // 0
+                             strFoldTypeTwoArrowsTextUnder, // 1
+                             strFoldTypeTwoArrows,          // 2
+                             strFoldTypeText,               // 3
+                             strFoldTypeThreeDots,          // 4
+                             strFoldTypeThreeX,             // 5
+                             strFoldTypeNone};              // 6
+
+    switch (values.indexOf(value))
+    {
+        case 1:
+            return FoldLineType::TwoArrowsTextUnder;
+        case 2:
+            return FoldLineType::TwoArrows;
+        case 3:
+            return FoldLineType::Text;
+        case 4:
+            return FoldLineType::ThreeDots;
+        case 5:
+            return FoldLineType::ThreeX;
+        case 6:
+            return FoldLineType::None;
+        case 0:
+        default:
+            return FoldLineType::TwoArrowsTextAbove;
+    };
 }
 
 //---------------------------------------------------------------------------------------------------------------------

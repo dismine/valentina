@@ -90,6 +90,9 @@ public:
     void SetLastToCuttingContour(bool value);
     auto IsLastToCuttingContour() const -> bool;
 
+    void SetNotMirrored(bool value);
+    auto IsNotMirrored() const -> bool;
+
     auto PathPoints(const VContainer *data, const QVector<QPointF> &cuttingPath = QVector<QPointF>()) const
         -> QVector<VLayoutPoint>;
     auto PathNodePoints(const VContainer *data, bool showExcluded = true) const -> QVector<VPointF>;
@@ -140,6 +143,7 @@ public:
 
     static auto NodesToPoints(const VContainer *data, const QVector<VPieceNode> &nodes,
                               const QString &piece = QString()) -> QVector<VLayoutPoint>;
+    static auto MakePainterPath(const QVector<QPointF> &points) -> QPainterPath;
 
 private:
     QSharedDataPointer<VPiecePathData> d;

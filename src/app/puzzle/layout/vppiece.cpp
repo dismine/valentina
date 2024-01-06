@@ -32,12 +32,12 @@
 #include "../vgeometry/vlayoutplacelabel.h"
 #include "../vlayout/vlayoutpiecepath.h"
 #include "../vlayout/vtextmanager.h"
-#include "qline.h"
-#include "vpiecegrainline.h"
+#include "../vwidgets/vpiecegrainline.h"
 #include "vplayout.h"
 #include "vpsheet.h"
 
 #include <QIcon>
+#include <QLine>
 #include <QLoggingCategory>
 #include <QPainter>
 #include <QPainterPath>
@@ -123,7 +123,7 @@ auto ClosestDistance(const QVector<QPointF> &path1, const QVector<QPointF> &path
     {
         for (auto p2 : path2)
         {
-            QLineF d(p1, p2);
+            QLineF const d(p1, p2);
             if (d.length() <= distance)
             {
                 distance = d.length();
@@ -141,11 +141,6 @@ VPPiece::VPPiece(const VLayoutPiece &layoutPiece)
   : VLayoutPiece(layoutPiece)
 {
     ClearTransformations();
-
-    if (IsForceFlipping())
-    {
-        FlipVertically();
-    }
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -167,6 +162,18 @@ void VPPiece::Update(const VPPiecePtr &piece)
     SetPieceLabelData(piece->GetPieceLabelData());
     SetPatternLabelRect(piece->GetPatternLabelRect());
     SetPatternLabelData(piece->GetPatternLabelData());
+    SetSeamMirrorLine(piece->GetSeamMirrorLine());
+    SetSeamAllowanceMirrorLine(piece->GetMappedSeamAllowanceMirrorLine());
+    SetFoldLineLabel(piece->GetFoldLineLabel());
+    SetFoldLineLabelAlignment(piece->GetFoldLineLabelAlignment());
+    SetFoldLineType(piece->GetFoldLineType());
+    SetFoldLineSvgFontSize(piece->GetFoldLineSvgFontSize());
+    SetFoldLineLabelFontItalic(piece->IsFoldLineLabelFontItalic());
+    SetFoldLineLabelFontBold(piece->IsFoldLineLabelFontBold());
+    SetFoldLineOutlineFont(piece->GetFoldLineOutlineFont());
+    SetFoldLineSVGFontFamily(piece->GetFoldLineSVGFontFamily());
+    SetFoldLineHeight(piece->GetFoldLineHeight());
+    SetFoldLineWidth(piece->GetFoldLineWidth());
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -202,6 +209,11 @@ void VPPiece::ClearTransformations()
 
     SetVerticallyFlipped(false);
     SetHorizontallyFlipped(false);
+
+    if (IsForceFlipping())
+    {
+        FlipVertically();
+    }
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -291,7 +303,7 @@ void VPPiece::SetGrainline(const VPieceGrainline &grainline)
 void VPPiece::FlipVertically()
 {
     QTransform pieceMatrix = GetMatrix();
-    QPointF center = pieceMatrix.map(DetailBoundingRect().center());
+    QPointF const center = pieceMatrix.map(DetailBoundingRect().center());
 
     QTransform m;
     m.translate(center.x(), 0);
@@ -307,7 +319,7 @@ void VPPiece::FlipVertically()
 void VPPiece::FlipHorizontally()
 {
     QTransform pieceMatrix = GetMatrix();
-    QPointF center = pieceMatrix.map(DetailBoundingRect().center());
+    QPointF const center = pieceMatrix.map(DetailBoundingRect().center());
 
     QTransform m;
     m.translate(0, center.y());
@@ -322,85 +334,52 @@ void VPPiece::FlipHorizontally()
 //---------------------------------------------------------------------------------------------------------------------
 auto VPPiece::StickyPosition(qreal &dx, qreal &dy) const -> bool
 {
-    VPLayoutPtr layout = Layout();
+    VPLayoutPtr const layout = Layout();
     if (layout.isNull() || not layout->LayoutSettings().GetStickyEdges())
     {
         return false;
     }
 
-    const qreal pieceGap = layout->LayoutSettings().GetPiecesGap();
-    if (pieceGap <= 0)
-    {
-        return false;
-    }
-
-    VPSheetPtr sheet = Sheet();
+    VPSheetPtr const sheet = Sheet();
     if (sheet.isNull())
     {
         return false;
     }
 
-    QList<VPPiecePtr> allPieces = sheet->GetPieces();
+    VStickyDistance match;
 
-    if (allPieces.count() < 2)
+    if (!StickySheet(match))
     {
         return false;
     }
 
-    QVector<QPointF> path;
-    CastTo(GetMappedExternalContourPoints(), path);
-    QRectF boundingRect = VLayoutPiece::BoundingRect(path);
-    const qreal stickyDistance = pieceGap + minStickyDistance;
-    QRectF stickyZone = QRectF(boundingRect.topLeft().x() - stickyDistance, boundingRect.topLeft().y() - stickyDistance,
-                               boundingRect.width() + stickyDistance * 2, boundingRect.height() + stickyDistance * 2);
-
-    QVector<QPointF> stickyPath = PrepareStickyPath(path);
-    QLineF closestDistance;
-
-    for (const auto &piece : allPieces)
-    {
-        if (piece.isNull() || piece->GetUniqueID() == GetUniqueID())
-        {
-            continue;
-        }
-
-        QVector<QPointF> piecePath;
-        CastTo(piece->GetMappedExternalContourPoints(), piecePath);
-        QRectF pieceBoundingRect = VLayoutPiece::BoundingRect(piecePath);
-
-        if (stickyZone.intersects(pieceBoundingRect) || pieceBoundingRect.contains(stickyZone) ||
-            stickyZone.contains(pieceBoundingRect))
-        {
-            if (not VPPiece::PathsSuperposition(path, piecePath))
-            {
-                QVector<QPointF> pieceStickyPath = PrepareStickyPath(piecePath);
-                closestDistance = ClosestDistance(stickyPath, pieceStickyPath);
-            }
-        }
-    }
-
-    if (closestDistance.isNull())
+    if (!StickyPieces(match))
     {
         return false;
     }
 
-    const qreal extraZone = qBound(minStickyDistance, pieceGap * 50 / 100, maxStickyDistance);
-    const qreal length = closestDistance.length();
-
-    if (length > pieceGap && length <= pieceGap + extraZone)
+    if (match.m_closestDistance.isNull())
     {
-        closestDistance.setLength(length - pieceGap);
-        QPointF diff = closestDistance.p2() - closestDistance.p1();
+        return false;
+    }
+
+    const qreal extraZone = qBound(minStickyDistance, match.m_pieceGap * 50 / 100, maxStickyDistance);
+    const qreal length = match.m_closestDistance.length();
+
+    if (length > match.m_pieceGap && length <= match.m_pieceGap + extraZone)
+    {
+        match.m_closestDistance.setLength(length - match.m_pieceGap);
+        QPointF const diff = match.m_closestDistance.p2() - match.m_closestDistance.p1();
         dx = diff.x();
         dy = diff.y();
         return true;
     }
 
-    if (length < pieceGap && length >= pieceGap - extraZone)
+    if (length < match.m_pieceGap && length >= match.m_pieceGap - extraZone)
     {
-        closestDistance.setAngle(closestDistance.angle() + 180);
-        closestDistance.setLength(pieceGap - length);
-        QPointF diff = closestDistance.p2() - closestDistance.p1();
+        match.m_closestDistance.setAngle(match.m_closestDistance.angle() + 180);
+        match.m_closestDistance.setLength(match.m_pieceGap - length);
+        QPointF const diff = match.m_closestDistance.p2() - match.m_closestDistance.p1();
         dx = diff.x();
         dy = diff.y();
         return true;
@@ -472,6 +451,179 @@ void VPPiece::SetCopyNumber(quint16 newCopyNumber)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+auto VPPiece::StickySheet(VStickyDistance &match) const -> bool
+{
+    VPLayoutPtr const layout = Layout();
+    if (layout.isNull())
+    {
+        return false;
+    }
+
+    const qreal pieceGap = layout->LayoutSettings().GetPiecesGap();
+    if (pieceGap <= 0)
+    {
+        return false;
+    }
+
+    VPSheetPtr const sheet = Sheet();
+    if (sheet.isNull())
+    {
+        return false;
+    }
+
+    QRectF sheetRect = sheet->GetMarginsRect();
+    QVector<QPointF> path;
+    CastTo(GetMappedExternalContourPoints(), path);
+    QRectF const boundingRect = VLayoutPiece::BoundingRect(path);
+    if (!sheetRect.contains(boundingRect))
+    {
+        return true;
+    }
+
+    const qreal stickyDistance = maxStickyDistance;
+    QRectF const stickyZone =
+        QRectF(boundingRect.topLeft().x() - stickyDistance, boundingRect.topLeft().y() - stickyDistance,
+               boundingRect.width() + stickyDistance * 2, boundingRect.height() + stickyDistance * 2);
+
+    if (!stickyZone.intersects(sheetRect))
+    {
+        return true;
+    }
+
+    QVector<QPointF> const stickyPath = PrepareStickyPath(path);
+
+    if (!layout->LayoutSettings().IsCutOnFold())
+    {
+        sheetRect.adjust(accuracyPointOnLine, accuracyPointOnLine, -accuracyPointOnLine, -accuracyPointOnLine);
+        QVector<QPointF> const sheetPath{sheetRect.topLeft(), sheetRect.topRight(), sheetRect.bottomRight(),
+                                         sheetRect.bottomLeft(), sheetRect.topLeft()};
+        QVector<QPointF> const sheetStickyPath = PrepareStickyPath(sheetPath);
+        QLineF const distance = ClosestDistance(stickyPath, sheetStickyPath);
+        if (match.m_closestDistance.isNull() || distance.length() < match.m_closestDistance.length())
+        {
+            match.m_closestDistance = distance;
+        }
+        return true;
+    }
+
+    if (GetSeamAllowanceMirrorLine().isNull() || (!GetSeamAllowanceMirrorLine().isNull() && IsShowFullPiece()))
+    { // regular piece
+        QVector<QPointF> sheetPath;
+        if (sheetRect.width() >= sheetRect.height())
+        {
+            sheetRect.adjust(accuracyPointOnLine, accuracyPointOnLine, -accuracyPointOnLine, -accuracyPointOnLine);
+            QPointF const shift(0, pieceGap / 2. - accuracyPointOnLine);
+            sheetPath = {sheetRect.topLeft() + shift, sheetRect.topRight() + shift, sheetRect.bottomRight(),
+                         sheetRect.bottomLeft(), sheetRect.topLeft() + shift};
+        }
+        else
+        {
+            sheetRect.adjust(accuracyPointOnLine, accuracyPointOnLine, -accuracyPointOnLine, -accuracyPointOnLine);
+            QPointF const shift(pieceGap / 2. - accuracyPointOnLine, 0);
+            sheetPath = {sheetRect.topLeft(), sheetRect.topRight() - shift, sheetRect.bottomRight() - shift,
+                         sheetRect.bottomLeft(), sheetRect.topLeft()};
+        }
+
+        QVector<QPointF> const sheetStickyPath = PrepareStickyPath(sheetPath);
+        QLineF const distance = ClosestDistance(stickyPath, sheetStickyPath);
+        if (match.m_closestDistance.isNull() || distance.length() < match.m_closestDistance.length())
+        {
+            match.m_closestDistance = distance;
+        }
+        return true;
+    }
+
+    // mirrored piece
+    QVector<QPointF> sheetPath;
+    if (sheetRect.width() >= sheetRect.height())
+    {
+        QPointF const shift(0, accuracyPointOnLine);
+        sheetPath = {sheetRect.topLeft() + shift, sheetRect.topRight() + shift};
+    }
+    else
+    {
+        QPointF const shift(accuracyPointOnLine, 0);
+        sheetPath = {sheetRect.topRight() - shift, sheetRect.bottomRight() - shift};
+    }
+
+    QVector<QPointF> const sheetStickyPath = PrepareStickyPath(sheetPath);
+    QLineF const distance = ClosestDistance(stickyPath, sheetStickyPath);
+    if (match.m_closestDistance.isNull() || distance.length() < match.m_closestDistance.length())
+    {
+        match.m_closestDistance = distance;
+    }
+
+    return true;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+auto VPPiece::StickyPieces(VStickyDistance &match) const -> bool
+{
+    VPLayoutPtr const layout = Layout();
+    if (layout.isNull())
+    {
+        return false;
+    }
+
+    const qreal pieceGap = layout->LayoutSettings().GetPiecesGap();
+    if (pieceGap <= 0)
+    {
+        return false;
+    }
+
+    VPSheetPtr const sheet = Sheet();
+    if (sheet.isNull())
+    {
+        return false;
+    }
+
+    QList<VPPiecePtr> const allPieces = sheet->GetPieces();
+    if (allPieces.count() < 2)
+    {
+        return true;
+    }
+
+    QVector<QPointF> path;
+    CastTo(GetMappedExternalContourPoints(), path);
+    QRectF const boundingRect = VLayoutPiece::BoundingRect(path);
+    const qreal stickyDistance = pieceGap + minStickyDistance;
+    QRectF const stickyZone =
+        QRectF(boundingRect.topLeft().x() - stickyDistance, boundingRect.topLeft().y() - stickyDistance,
+               boundingRect.width() + stickyDistance * 2, boundingRect.height() + stickyDistance * 2);
+
+    QVector<QPointF> const stickyPath = PrepareStickyPath(path);
+
+    for (const auto &piece : allPieces)
+    {
+        if (piece.isNull() || piece->GetUniqueID() == GetUniqueID())
+        {
+            continue;
+        }
+
+        QVector<QPointF> piecePath;
+        CastTo(piece->GetMappedExternalContourPoints(), piecePath);
+        QRectF const pieceBoundingRect = VLayoutPiece::BoundingRect(piecePath);
+
+        if (stickyZone.intersects(pieceBoundingRect) || pieceBoundingRect.contains(stickyZone) ||
+            stickyZone.contains(pieceBoundingRect))
+        {
+            if (not VPPiece::PathsSuperposition(path, piecePath))
+            {
+                QVector<QPointF> const pieceStickyPath = PrepareStickyPath(piecePath);
+                QLineF const distance = ClosestDistance(stickyPath, pieceStickyPath);
+                if (match.m_closestDistance.isNull() || distance.length() < match.m_closestDistance.length())
+                {
+                    match.m_closestDistance = distance;
+                    match.m_pieceGap = pieceGap;
+                }
+            }
+        }
+    }
+
+    return true;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 void VPPiece::CleanPosition(const VPPiecePtr &piece)
 {
     QVector<QPointF> points;
@@ -530,4 +682,6 @@ void VPPiece::CleanPosition(const VPPiecePtr &piece)
 
     piece->SetPieceLabelRect(MapVector(piece->GetPieceLabelRect(), matrix));
     piece->SetPatternLabelRect(MapVector(piece->GetPatternLabelRect(), matrix));
+    piece->SetSeamMirrorLine(matrix.map(piece->GetSeamMirrorLine()));
+    piece->SetSeamAllowanceMirrorLine(matrix.map(piece->GetSeamAllowanceMirrorLine()));
 }

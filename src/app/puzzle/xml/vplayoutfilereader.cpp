@@ -343,6 +343,7 @@ void VPLayoutFileReader::ReadControl(const VPLayoutPtr &layout)
     layout->LayoutSettings().SetFollowGrainline(ReadAttributeBool(attribs, ML::AttrFollowGrainline, falseStr));
     layout->LayoutSettings().SetBoundaryTogetherWithNotches(
         ReadAttributeBool(attribs, ML::AttrBoundaryTogetherWithNotches, falseStr));
+    layout->LayoutSettings().SetCutOnFold(ReadAttributeBool(attribs, ML::AttrCutOnFold, falseStr));
 
     readElementText();
 }
@@ -518,6 +519,7 @@ void VPLayoutFileReader::ReadPiece(const VPPiecePtr &piece)
     piece->SetFollowGrainline(ReadAttributeBool(attribs, ML::AttrFollowGrainline, falseStr));
     piece->SetSewLineOnDrawing(ReadAttributeBool(attribs, ML::AttrSewLineOnDrawing, falseStr));
     piece->SetMatrix(StringToTransfrom(ReadAttributeEmptyString(attribs, ML::AttrTransform)));
+    piece->SetShowFullPiece(ReadAttributeBool(attribs, ML::AttrShowFullPiece, trueStr));
 
     const QStringList tags{
         ML::TagSeamLine,      // 0
@@ -526,7 +528,8 @@ void VPLayoutFileReader::ReadPiece(const VPPiecePtr &piece)
         ML::TagNotches,       // 3
         ML::TagInternalPaths, // 4
         ML::TagMarkers,       // 5
-        ML::TagLabels         // 6
+        ML::TagLabels,        // 6
+        ML::TagMirrorLine     // 7
     };
 
     while (readNextStartElement())
@@ -553,6 +556,9 @@ void VPLayoutFileReader::ReadPiece(const VPPiecePtr &piece)
                 break;
             case 6: // labels
                 ReadLabels(piece);
+                break;
+            case 7: // mirror line
+                ReadMirrorLines(piece);
                 break;
             default:
                 qCDebug(MLReader, "Ignoring tag %s", qUtf8Printable(name().toString()));
@@ -738,11 +744,12 @@ auto VPLayoutFileReader::ReadInternalPath() -> VLayoutPiecePath
 
     VLayoutPiecePath path;
 
-    QXmlStreamAttributes attribs = attributes();
+    QXmlStreamAttributes const attribs = attributes();
     path.SetCutPath(ReadAttributeBool(attribs, ML::AttrCut, falseStr));
     path.SetPenStyle(LineStyleToPenStyle(ReadAttributeString(attribs, ML::AttrPenStyle, TypeLineLine)));
+    path.SetNotMirrored(ReadAttributeBool(attribs, ML::AttrNotMirrored, falseStr));
 
-    QVector<VLayoutPoint> shape = ReadLayoutPoints();
+    QVector<VLayoutPoint> const shape = ReadLayoutPoints();
     if (shape.isEmpty())
     {
         throw VException(tr("Error in line %1. Internal path shape is empty.").arg(lineNumber()));
@@ -786,14 +793,15 @@ auto VPLayoutFileReader::ReadMarker() -> VLayoutPlaceLabel
 
     VLayoutPlaceLabel marker;
 
-    QXmlStreamAttributes attribs = attributes();
+    QXmlStreamAttributes const attribs = attributes();
 
-    QString matrix = ReadAttributeEmptyString(attribs, ML::AttrTransform);
+    QString const matrix = ReadAttributeEmptyString(attribs, ML::AttrTransform);
     marker.SetRotationMatrix(StringToTransfrom(matrix));
 
     marker.SetType(static_cast<PlaceLabelType>(ReadAttributeUInt(attribs, ML::AttrType, QChar('0'))));
     marker.SetCenter(StringToPoint(ReadAttributeEmptyString(attribs, ML::AttrCenter)));
     marker.SetBox(StringToRect(ReadAttributeEmptyString(attribs, ML::AttrBox)));
+    marker.SetNotMirrored(ReadAttributeBool(attribs, ML::AttrNotMirrored, falseStr));
 
     // cppcheck-suppress unknownMacro
     QT_WARNING_POP
@@ -938,6 +946,54 @@ void VPLayoutFileReader::ReadWatermark(const VPLayoutPtr &layout)
     QXmlStreamAttributes attribs = attributes();
     layout->LayoutSettings().SetShowWatermark(ReadAttributeBool(attribs, ML::AttrShowPreview, falseStr));
     layout->LayoutSettings().SetWatermarkPath(readElementText());
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VPLayoutFileReader::ReadMirrorLines(const VPPiecePtr &piece)
+{
+    AssertRootTag(ML::TagMirrorLine);
+
+    QXmlStreamAttributes const attribs = attributes();
+
+    piece->SetFoldLineType(StringToFoldLineType(
+        ReadAttributeString(attribs, ML::AttrGrainlineType, FoldLineTypeToString(FoldLineType::TwoArrowsTextAbove))));
+    piece->SetFoldLineHeight(ReadAttributeDouble(attribs, ML::AttrFoldLineHeight, QChar('0')));
+    piece->SetFoldLineWidth(ReadAttributeDouble(attribs, ML::AttrFoldLineWidth, QChar('0')));
+    piece->SetFoldLineCenterPosition(ReadAttributeDouble(attribs, ML::AttrFoldLineCenter, QString::number(0.5)));
+    piece->SetFoldLineLabelFontBold(ReadAttributeBool(attribs, ML::AttrBold, falseStr));
+    piece->SetFoldLineLabelFontItalic(ReadAttributeBool(attribs, ML::AttrItalic, falseStr));
+    piece->SetFoldLineLabelAlignment(
+        ReadAttributeInt(attribs, ML::AttrAlignment, QString::number(static_cast<int>(Qt::AlignHCenter))));
+    piece->SetFoldLineLabel(ReadAttributeEmptyString(attribs, ML::AttrFoldLineLabel));
+    piece->SetFoldLineOutlineFont(FontFromString(ReadAttributeEmptyString(attribs, ML::AttrFont)));
+
+    QStringList const svgFontData = ReadAttributeEmptyString(attribs, ML::AttrSVGFont).split(','_L1);
+    if (!svgFontData.isEmpty())
+    {
+        piece->SetFoldLineSVGFontFamily(svgFontData.constFirst());
+
+        if (svgFontData.size() > 1)
+        {
+            piece->SetFoldLineSvgFontSize(svgFontData.at(1).toUInt());
+        }
+    }
+
+    while (readNextStartElement())
+    {
+        if (name() == ML::TagSeamLine)
+        {
+            piece->SetSeamMirrorLine(StringToLine(readElementText()));
+        }
+        else if (name() == ML::TagSeamAllowance)
+        {
+            piece->SetSeamAllowanceMirrorLine(StringToLine(readElementText()));
+        }
+        else
+        {
+            qCDebug(MLReader, "Ignoring tag %s", qUtf8Printable(name().toString()));
+            skipCurrentElement();
+        }
+    }
 }
 
 //---------------------------------------------------------------------------------------------------------------------

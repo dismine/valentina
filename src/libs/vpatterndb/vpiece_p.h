@@ -33,6 +33,7 @@
 #include <QVector>
 
 #include "../vmisc/def.h"
+#include "../vmisc/typedef.h"
 #include "floatItemData/vgrainlinedata.h"
 #include "floatItemData/vpatternlabeldata.h"
 #include "floatItemData/vpiecelabeldata.h"
@@ -74,6 +75,17 @@ public:
     QString m_gradationLabel{}; // NOLINT(misc-non-private-member-variables-in-classes)
 
     QString m_shortName{}; // NOLINT(misc-non-private-member-variables-in-classes)
+
+    quint32 m_mirrorLineStartPoint{NULL_ID}; // NOLINT(misc-non-private-member-variables-in-classes)
+    quint32 m_mirrorLineEndPoint{NULL_ID};   // NOLINT(misc-non-private-member-variables-in-classes)
+
+    bool m_manualFoldHeight{false}; // NOLINT(misc-non-private-member-variables-in-classes)
+    bool m_manualFoldWidth{false};  // NOLINT(misc-non-private-member-variables-in-classes)
+    bool m_manualFoldCenter{false}; // NOLINT(misc-non-private-member-variables-in-classes)
+
+    QString m_formulaFoldHeight{}; // NOLINT(misc-non-private-member-variables-in-classes)
+    QString m_formulaFoldWidth{};  // NOLINT(misc-non-private-member-variables-in-classes)
+    QString m_formulaFoldCenter{}; // NOLINT(misc-non-private-member-variables-in-classes)
 
 private:
     Q_DISABLE_ASSIGN_MOVE(VPieceData) // NOLINT

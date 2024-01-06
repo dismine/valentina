@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>427</width>
-    <height>651</height>
+    <width>591</width>
+    <height>789</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -28,8 +28,8 @@
        <rect>
         <x>0</x>
         <y>0</y>
-        <width>407</width>
-        <height>631</height>
+        <width>571</width>
+        <height>769</height>
        </rect>
       </property>
       <layout class="QVBoxLayout" name="verticalLayout">
@@ -90,6 +90,19 @@
              </property>
              <property name="text">
               <string>On drawing</string>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QCheckBox" name="checkBoxShowFullPiece">
+             <property name="enabled">
+              <bool>false</bool>
+             </property>
+             <property name="text">
+              <string>Show full piece</string>
+             </property>
+             <property name="checked">
+              <bool>true</bool>
              </property>
             </widget>
            </item>
@@ -184,6 +197,35 @@
               </spacer>
              </item>
             </layout>
+           </item>
+           <item>
+            <widget class="QGroupBox" name="groupBoxMirrorLine">
+             <property name="title">
+              <string>Mirror line</string>
+             </property>
+             <layout class="QFormLayout" name="formLayout">
+              <item row="0" column="0">
+               <widget class="QLabel" name="labelMLStartPoint">
+                <property name="text">
+                 <string>Start point:</string>
+                </property>
+               </widget>
+              </item>
+              <item row="0" column="1">
+               <widget class="QComboBox" name="comboBoxMLStartPoint"/>
+              </item>
+              <item row="1" column="0">
+               <widget class="QLabel" name="labelMLEndPoint">
+                <property name="text">
+                 <string>End point:</string>
+                </property>
+               </widget>
+              </item>
+              <item row="1" column="1">
+               <widget class="QComboBox" name="comboBoxMLEndPoint"/>
+              </item>
+             </layout>
+            </widget>
            </item>
            <item>
             <widget class="QLabel" name="helpLabel">

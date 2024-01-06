@@ -30,6 +30,7 @@
 #include "../../dialogs/tools/piece/dialogpiecepath.h"
 #include "../../undocommands/savepieceoptions.h"
 #include "../ifc/xml/vabstractpattern.h"
+#include "../vlayout/vabstractpiece.h"
 #include "../vmisc/theme/vscenestylesheet.h"
 #include "../vpatterndb/vpiecenode.h"
 #include "../vpatterndb/vpiecepath.h"
@@ -80,7 +81,7 @@ auto VToolPiecePath::Create(VToolPiecePathInitData initData) -> VToolPiecePath *
         VAbstractTool::AddRecord(initData.id, Tool::PiecePath, initData.doc);
         // TODO Need create garbage collector and remove all nodes, that we don't use.
         // Better check garbage before each saving file. Check only modeling tags.
-        VToolPiecePath *pathTool = new VToolPiecePath(initData);
+        auto *pathTool = new VToolPiecePath(initData);
 
         VAbstractPattern::AddTool(initData.id, pathTool);
         if (initData.idTool != NULL_ID)
@@ -95,8 +96,7 @@ auto VToolPiecePath::Create(VToolPiecePathInitData initData) -> VToolPiecePath *
             if (initData.typeCreation == Source::FromGui && initData.path.GetType() == PiecePathType::InternalPath)
             { // Seam allowance tool already initializated and can't init the path
                 SCASSERT(initData.idObject > NULL_ID);
-                VToolSeamAllowance *saTool =
-                    qobject_cast<VToolSeamAllowance *>(VAbstractPattern::getTool(initData.idObject));
+                auto *saTool = qobject_cast<VToolSeamAllowance *>(VAbstractPattern::getTool(initData.idObject));
                 SCASSERT(saTool != nullptr);
                 pathTool->setParentItem(saTool);
                 pathTool->SetParentType(ParentType::Item);
@@ -198,6 +198,8 @@ void VToolPiecePath::AddAttributes(VAbstractPattern *doc, QDomElement &domElemen
         doc->SetAttribute(domElement, AttrCut, path.IsCutPath());
         doc->SetAttribute(domElement, AttrFirstToContour, path.IsFirstToCuttingContour());
         doc->SetAttribute(domElement, AttrLastToContour, path.IsLastToCuttingContour());
+        doc->SetAttributeOrRemoveIf<bool>(domElement, AttrNotMirrored, path.IsNotMirrored(),
+                                          [](bool value) noexcept { return not value; });
     }
 }
 
@@ -281,11 +283,11 @@ void VToolPiecePath::ToolCreation(const Source &typeCreation)
 {
     if (typeCreation == Source::FromGui || typeCreation == Source::FromTool)
     {
-        AddToFile();
+        VToolPiecePath::AddToFile();
     }
     else
     {
-        RefreshDataInFile();
+        VToolPiecePath::RefreshDataInFile();
     }
 }
 
@@ -296,7 +298,7 @@ VToolPiecePath::VToolPiecePath(const VToolPiecePathInitData &initData, QObject *
     m_pieceId(initData.idObject)
 {
     RefreshGeometry();
-    ToolCreation(initData.typeCreation);
+    VToolPiecePath::ToolCreation(initData.typeCreation);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -307,14 +309,31 @@ void VToolPiecePath::RefreshGeometry()
     {
         QVector<QPointF> cuttingPath;
         const quint32 pieceId = VAbstractTool::data.GetPieceForPiecePath(m_id);
+        bool showFullPiece = true;
+        QLineF mirrorLine;
         if (pieceId > NULL_ID)
         {
             VPiece piece = VAbstractTool::data.GetPiece(pieceId);
             // We cannot use current VContainer because it doesn't have current seam allowance value
             const VContainer pData = VAbstractPattern::getTool(pieceId)->getData();
             cuttingPath = piece.CuttingPathPoints(&pData);
+
+            showFullPiece = piece.IsShowFullPiece();
+            mirrorLine = piece.SeamAllowanceMirrorLine(&pData);
         }
         QPainterPath p = path.PainterPath(this->getData(), cuttingPath);
+
+        if (!path.IsNotMirrored() && showFullPiece && !mirrorLine.isNull())
+        {
+            QVector<VLayoutPoint> points = path.PathPoints(this->getData(), cuttingPath);
+            const QTransform matrix = VGObject::FlippingMatrix(mirrorLine);
+            std::transform(points.begin(), points.end(), points.begin(),
+                           [matrix](const VLayoutPoint &point) { return VAbstractPiece::MapPoint(point, matrix); });
+            QVector<QPointF> casted;
+            CastTo(points, casted);
+            p.addPath(VPiecePath::MakePainterPath(casted));
+        }
+
         p.setFillRule(Qt::OddEvenFill);
 
         this->setPath(p);

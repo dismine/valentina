@@ -33,6 +33,7 @@
 #include "../ifc/exception/vexceptionobjecterror.h"
 #include "../ifc/exception/vexceptionundo.h"
 #include "../ifc/exception/vexceptionwrongid.h"
+#include "../ifc/ifcdef.h"
 #include "../ifc/xml/vpatternconverter.h"
 #include "../qmuparser/qmuparsererror.h"
 #include "../qmuparser/qmutokenparser.h"
@@ -43,6 +44,7 @@
 #include "../vgeometry/vsplinepath.h"
 #include "../vmisc/compatibility.h"
 #include "../vmisc/customevents.h"
+#include "../vmisc/def.h"
 #include "../vmisc/projectversion.h"
 #include "../vmisc/vsysexits.h"
 #include "../vmisc/vvalentinasettings.h"
@@ -54,11 +56,6 @@
 #include "../vpatterndb/vnodedetail.h"
 #include "../vpatterndb/vpiecenode.h"
 #include "../vpatterndb/vpiecepath.h"
-#include "../vtools/tools/vdatatool.h"
-#include "../vtools/tools/vtoolseamallowance.h"
-#include "../vtools/tools/vtooluniondetails.h"
-#include "../vwidgets/vabstractmainwindow.h"
-
 #include "../vtools/tools/drawTools/operation/flipping/vtoolflippingbyaxis.h"
 #include "../vtools/tools/drawTools/operation/flipping/vtoolflippingbyline.h"
 #include "../vtools/tools/drawTools/operation/vtoolmove.h"
@@ -93,7 +90,6 @@
 #include "../vtools/tools/drawTools/toolpoint/toolsinglepoint/vtoolpointofintersectioncurves.h"
 #include "../vtools/tools/drawTools/toolpoint/toolsinglepoint/vtooltriangle.h"
 #include "../vtools/tools/drawTools/vtoolline.h"
-
 #include "../vtools/tools/nodeDetails/vnodearc.h"
 #include "../vtools/tools/nodeDetails/vnodeellipticalarc.h"
 #include "../vtools/tools/nodeDetails/vnodepoint.h"
@@ -102,6 +98,11 @@
 #include "../vtools/tools/nodeDetails/vtoolpiecepath.h"
 #include "../vtools/tools/nodeDetails/vtoolpin.h"
 #include "../vtools/tools/nodeDetails/vtoolplacelabel.h"
+#include "../vtools/tools/vdatatool.h"
+#include "../vtools/tools/vtoolseamallowance.h"
+#include "../vtools/tools/vtooluniondetails.h"
+#include "../vwidgets/vabstractmainwindow.h"
+#include "qminmax.h"
 
 #if QT_VERSION < QT_VERSION_CHECK(5, 12, 0)
 #include "../vmisc/backport/qscopeguard.h"
@@ -160,6 +161,51 @@ auto DefLabelLanguage() -> QString
         def = QStringLiteral("en");
     }
     return def;
+}
+
+struct VPieceFoldLineData
+{
+    quint32 p1{NULL_ID};
+    quint32 p2{NULL_ID};
+    QString heightFormula{};
+    QString widthFormula{};
+    QString centerFormula{};
+    bool manualHeight{false};
+    bool manualWidth{false};
+    bool manualCenter{false};
+    FoldLineType type{FoldLineType::TwoArrowsTextAbove};
+    unsigned int fontSize{defFoldLineFontSize};
+    bool italic{false};
+    bool bold{false};
+    QString label{};
+    int alignment{Qt::AlignHCenter};
+};
+
+//---------------------------------------------------------------------------------------------------------------------
+auto ParsePieceMirrorLine(const QDomElement &domElement) -> VPieceFoldLineData
+{
+    VPieceFoldLineData data;
+
+    data.p1 = VDomDocument::GetParametrUInt(domElement, VAbstractPattern::AttrMirrorLineP1, NULL_ID_STR);
+    data.p2 = VDomDocument::GetParametrUInt(domElement, VAbstractPattern::AttrMirrorLineP2, NULL_ID_STR);
+    data.heightFormula = VDomDocument::GetParametrEmptyString(domElement, VAbstractPattern::AttrFoldLineHeightFormula);
+    data.widthFormula = VDomDocument::GetParametrEmptyString(domElement, VAbstractPattern::AttrFoldLineWidthFormula);
+    data.centerFormula = VDomDocument::GetParametrEmptyString(domElement, VAbstractPattern::AttrFoldLineCenterFormula);
+    data.manualHeight = VDomDocument::GetParametrBool(domElement, VAbstractPattern::AttrFoldLineManualHeight, falseStr);
+    data.manualWidth = VDomDocument::GetParametrBool(domElement, VAbstractPattern::AttrFoldLineManualWidth, falseStr);
+    data.manualCenter = VDomDocument::GetParametrBool(domElement, VAbstractPattern::AttrFoldLineManualCenter, falseStr);
+    data.type = StringToFoldLineType(VDomDocument::GetParametrString(
+        domElement, VAbstractPattern::AttrFoldLineType, FoldLineTypeToString(FoldLineType::TwoArrowsTextAbove)));
+    data.fontSize = qMax(static_cast<unsigned int>(VCommonSettings::MinPieceLabelFontPointSize()),
+                         VDomDocument::GetParametrUInt(domElement, VAbstractPattern::AttrFoldLineFontSize,
+                                                       QString::number(defFoldLineFontSize)));
+    data.italic = VDomDocument::GetParametrBool(domElement, VDomDocument::AttrItalic, falseStr);
+    data.bold = VDomDocument::GetParametrBool(domElement, VDomDocument::AttrBold, falseStr);
+    data.label = VDomDocument::GetParametrEmptyString(domElement, VAbstractPattern::AttrFoldLineLabel);
+    data.alignment =
+        VDomDocument::GetParametrInt(domElement, VDomDocument::AttrAlignment, QString::number(Qt::AlignHCenter));
+
+    return data;
 }
 } // anonymous namespace
 
@@ -956,6 +1002,7 @@ void VPattern::ParseDetailElement(QDomElement &domElement, const Document &parse
         initData.detail.SetHideMainPath(
             GetParametrBool(domElement, VToolSeamAllowance::AttrHideMainPath,
                             QString().setNum(VAbstractValApplication::VApp()->ValentinaSettings()->IsHideMainPath())));
+        initData.detail.SetShowFullPiece(GetParametrBool(domElement, VToolSeamAllowance::AttrShowFullPiece, trueStr));
         initData.detail.SetSeamAllowanceBuiltIn(
             GetParametrBool(domElement, VToolSeamAllowance::AttrSeamAllowanceBuiltIn, falseStr));
         initData.detail.SetForbidFlipping(GetParametrBool(
@@ -1009,9 +1056,15 @@ void VPattern::ParseDetailInternals(const QDomElement &domElement, VPiece &detai
 {
     const uint version = GetParametrUInt(domElement, AttrVersion, QChar('1'));
 
-    const QStringList tags = QStringList() << TagNodes << TagData << TagPatternInfo << TagGrainline
-                                           << VToolSeamAllowance::TagCSA << VToolSeamAllowance::TagIPaths
-                                           << VToolSeamAllowance::TagPins << VToolSeamAllowance::TagPlaceLabels;
+    const QStringList tags{TagNodes,
+                           TagData,
+                           TagPatternInfo,
+                           TagGrainline,
+                           VToolSeamAllowance::TagCSA,
+                           VToolSeamAllowance::TagIPaths,
+                           VToolSeamAllowance::TagPins,
+                           VToolSeamAllowance::TagPlaceLabels,
+                           VToolSeamAllowance::TagMirrorLine};
 
     QFuture<QVector<VPieceNode>> futurePathV1;
     QFuture<VPiecePath> futurePathV2;
@@ -1022,6 +1075,7 @@ void VPattern::ParseDetailInternals(const QDomElement &domElement, VPiece &detai
     QFuture<QVector<quint32>> futureIPaths;
     QFuture<QVector<quint32>> futurePins;
     QFuture<QVector<quint32>> futurePlaceLabels;
+    QFuture<VPieceFoldLineData> futureMirrorLine;
 
     const QDomNodeList nodeList = domElement.childNodes();
     for (qint32 i = 0; i < nodeList.size(); ++i)
@@ -1076,6 +1130,9 @@ void VPattern::ParseDetailInternals(const QDomElement &domElement, VPiece &detai
                 case 7: // VToolSeamAllowance::TagPlaceLabels
                     futurePlaceLabels = QtConcurrent::run(&VPattern::ParsePiecePointRecords, element);
                     break;
+                case 8: // VToolSeamAllowance::TagMirrorLine
+                    futureMirrorLine = QtConcurrent::run(&ParsePieceMirrorLine, element);
+                    break;
                 default:
                     break;
             }
@@ -1124,6 +1181,25 @@ void VPattern::ParseDetailInternals(const QDomElement &domElement, VPiece &detai
     if (not futurePlaceLabels.isCanceled())
     {
         detail.SetPlaceLabels(futurePlaceLabels.result());
+    }
+
+    if (not futureMirrorLine.isCanceled())
+    {
+        VPieceFoldLineData const data = futureMirrorLine.result();
+        detail.SetMirrorLineStartPoint(data.p1);
+        detail.SetMirrorLineEndPoint(data.p2);
+        detail.SetManualFoldHeight(data.manualHeight);
+        detail.SetManualFoldWidth(data.manualWidth);
+        detail.SetManualFoldCenter(data.manualCenter);
+        detail.SetFormulaFoldHeight(data.heightFormula);
+        detail.SetFormulaFoldWidth(data.widthFormula);
+        detail.SetFormulaFoldCenter(data.centerFormula);
+        detail.SetFoldLineType(data.type);
+        detail.SetFoldLineSvgFontSize(data.fontSize);
+        detail.SetFoldLineLabelFontItalic(data.italic);
+        detail.SetFoldLineLabelFontBold(data.bold);
+        detail.SetFoldLineLabel(data.label);
+        detail.SetFoldLineLabelAlignment(data.alignment);
     }
 }
 
@@ -2041,6 +2117,8 @@ void VPattern::ParsePlaceLabel(QDomElement &domElement, const Document &parse)
         const QString visibility = initData.visibilityTrigger; // need for saving fixed formula;
 
         initData.type = static_cast<PlaceLabelType>(GetParametrUInt(domElement, AttrPlaceLabelType, QChar('0')));
+
+        initData.notMirrored = GetParametrBool(domElement, AttrNotMirrored, falseStr);
 
         VToolPlaceLabel::Create(initData);
 
@@ -4096,6 +4174,7 @@ void VPattern::ParsePathElement(VMainGraphicsScene *scene, QDomElement &domEleme
             initData.path.SetFirstToCuttingContour(GetParametrBool(domElement, AttrFirstToContour, falseStr));
             initData.path.SetLastToCuttingContour(GetParametrBool(domElement, AttrLastToContour, falseStr));
             initData.path.SetVisibilityTrigger(GetParametrString(domElement, AttrVisible, QChar('1')));
+            initData.path.SetNotMirrored(GetParametrBool(domElement, AttrNotMirrored, falseStr));
         }
 
         VToolPiecePath::Create(initData);

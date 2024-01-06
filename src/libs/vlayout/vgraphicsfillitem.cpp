@@ -66,3 +66,15 @@ void VGraphicsFillItem::paint(QPainter *painter, const QStyleOptionGraphicsItem 
     painter->drawPath(path());
     painter->restore();
 }
+
+//---------------------------------------------------------------------------------------------------------------------
+VGraphicsFoldLineItem::VGraphicsFoldLineItem(QGraphicsItem *parent)
+  : VGraphicsFillItem(parent)
+{
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+VGraphicsFoldLineItem::VGraphicsFoldLineItem(const QPainterPath &path, QGraphicsItem *parent)
+  : VGraphicsFillItem(path, parent)
+{
+}

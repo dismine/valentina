@@ -2850,8 +2850,8 @@ void VToolOptionsPropertyBrowser::ShowOptionsToolTrueDarts(QGraphicsItem *item)
     AddPropertyParentPointName(i->BaseLineP1Name(), tr("First base point:"), AttrFirstPoint);
     AddPropertyParentPointName(i->BaseLineP2Name(), tr("Second base point:"), AttrSecondPoint);
     AddPropertyParentPointName(i->DartP1Name(), tr("First dart point:"), AttrDartP1);
-    AddPropertyParentPointName(i->DartP2Name(), tr("First dart point:"), AttrDartP2);
-    AddPropertyParentPointName(i->DartP3Name(), tr("First dart point:"), AttrDartP3);
+    AddPropertyParentPointName(i->DartP2Name(), tr("Second dart point:"), AttrDartP2);
+    AddPropertyParentPointName(i->DartP3Name(), tr("Third dart point:"), AttrDartP3);
     AddPropertyText(tr("Notes:"), i->GetNotes(), AttrNotes);
 }
 

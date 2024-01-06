@@ -139,3 +139,15 @@ void VLayoutPiecePath::SetCutPath(bool cut)
 {
     d->m_cut = cut;
 }
+
+//---------------------------------------------------------------------------------------------------------------------
+auto VLayoutPiecePath::IsNotMirrored() const -> bool
+{
+    return d->m_notMirrored;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VLayoutPiecePath::SetNotMirrored(bool value)
+{
+    d->m_notMirrored = value;
+}

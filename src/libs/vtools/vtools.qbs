@@ -149,6 +149,7 @@ VLib {
             "tools/piece/dialogseamallowance.ui",
             "tools/piece/dialogpiecepath.ui",
             "tools/piece/dialogpin.ui",
+            "tools/piece/tabs/tabfoldline.ui",
             "tools/piece/tabs/tabpaths.ui",
             "tools/piece/tabs/tablabels.ui",
             "tools/piece/tabs/tabgrainline.ui",
@@ -159,7 +160,7 @@ VLib {
             "tools/piece/dialogplacelabel.ui",
             "tools/piece/tabs/tabplacelabels.ui",
             "tools/piece/dialogduplicatedetail.ui",
-            "tools/piece/dialogpatternmaterials.ui"
+            "tools/piece/dialogpatternmaterials.ui",
         ]
     }
 

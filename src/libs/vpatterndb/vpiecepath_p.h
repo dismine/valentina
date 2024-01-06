@@ -54,6 +54,7 @@ public:
     QString m_visibilityTrigger{'1'};             // NOLINT(misc-non-private-member-variables-in-classes)
     bool m_firstToCuttingContour{false};          // NOLINT(misc-non-private-member-variables-in-classes)
     bool m_lastToCuttingContour{false};           // NOLINT(misc-non-private-member-variables-in-classes)
+    bool m_notMirrored{false};                    // NOLINT(misc-non-private-member-variables-in-classes)
 
 private:
     Q_DISABLE_ASSIGN_MOVE(VPiecePathData) // NOLINT

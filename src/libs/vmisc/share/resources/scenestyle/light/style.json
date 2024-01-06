@@ -28,6 +28,7 @@
   },
   "ManualLayoutStyle": {
     "SheetBorderColor": "black",
+    "SheetFoldShadowColor": "lightGray",
     "SheetMarginColor": [0, 179, 255],
     "SheetGridColor": [204, 204, 204],
     "SheetTileGridColor": [255, 0, 0, 127],
@@ -37,6 +38,7 @@
     "PieceHoverColor": [199, 244, 249, 60],
     "PieceHandleColor": "black",
     "PieceHandleHoverColor": "green",
+    "PieceSelectionBrushColor": [255, 160, 160, 60],
     "CarrouselPieceColor": "black",
     "CarrouselPieceSelectedColor": [255, 160, 160, 60],
     "CarrouselPieceBackgroundColor": "white",

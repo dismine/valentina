@@ -147,7 +147,7 @@ void VPGraphicsTileGrid::paint(QPainter *painter, const QStyleOptionGraphicsItem
     Q_UNUSED(widget);
     Q_UNUSED(option);
 
-    VPLayoutPtr layout = m_layout.toStrongRef();
+    VPLayoutPtr const layout = m_layout.toStrongRef();
     if (layout.isNull() || not layout->LayoutSettings().GetShowTiles())
     {
         return;
@@ -157,14 +157,14 @@ void VPGraphicsTileGrid::paint(QPainter *painter, const QStyleOptionGraphicsItem
              Qt::RoundJoin);
     pen.setCosmetic(true);
     pen.setStyle(Qt::DashLine);
-    QBrush noBrush(Qt::NoBrush);
+    QBrush const noBrush(Qt::NoBrush);
     painter->setPen(pen);
     painter->setBrush(noBrush);
 
-    qreal xScale = layout->LayoutSettings().HorizontalScale();
-    qreal yScale = layout->LayoutSettings().VerticalScale();
+    qreal const xScale = layout->LayoutSettings().HorizontalScale();
+    qreal const yScale = layout->LayoutSettings().VerticalScale();
 
-    VWatermarkData watermarkData = layout->TileFactory()->WatermarkData();
+    VWatermarkData const watermarkData = layout->TileFactory()->WatermarkData();
 
     auto PaintWatermark = [painter, layout, xScale, yScale, watermarkData](const QRectF &img)
     {
@@ -187,13 +187,13 @@ void VPGraphicsTileGrid::paint(QPainter *painter, const QStyleOptionGraphicsItem
     const qreal width = (layout->TileFactory()->DrawingAreaWidth() - VPTileFactory::tileStripeWidth) / xScale;
     const qreal height = (layout->TileFactory()->DrawingAreaHeight() - VPTileFactory::tileStripeWidth) / yScale;
 
-    VPSheetPtr sheet = layout->GetSheet(m_sheetUuid);
-    QMarginsF sheetMargins = SheetMargins(sheet);
+    VPSheetPtr const sheet = layout->GetSheet(m_sheetUuid);
+    QMarginsF const sheetMargins = SheetMargins(sheet);
 
     const int nbCol = layout->TileFactory()->ColNb(sheet);
     const int nbRow = layout->TileFactory()->RowNb(sheet);
 
-    QFont font = OptimizeFontSizeToFitTextInRect(
+    QFont const font = OptimizeFontSizeToFitTextInRect(
         painter, QRectF(sheetMargins.left(), sheetMargins.top(), width / 3., height / 3.),
         QString::number(nbRow * nbCol));
 
@@ -231,7 +231,7 @@ void VPGraphicsTileGrid::paint(QPainter *painter, const QStyleOptionGraphicsItem
 
             if (j < nbRow && i < nbCol)
             {
-                QRectF img(sheetMargins.left() + i * width, sheetMargins.top() + j * height, width, height);
+                QRectF const img(sheetMargins.left() + i * width, sheetMargins.top() + j * height, width, height);
 
                 PaintWatermark(img);
                 PaintTileNumber(img, i, j);

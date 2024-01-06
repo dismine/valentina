@@ -595,3 +595,15 @@ void DialogPlaceLabel::SetFormulaVisible(const QString &formula)
     ui->plainTextEditFormulaVisible->setPlainText(f);
     MoveCursorToEnd(ui->plainTextEditFormulaVisible);
 }
+
+//---------------------------------------------------------------------------------------------------------------------
+auto DialogPlaceLabel::IsNotMirrored() const -> bool
+{
+    return ui->checkBoxNotMirrored->isChecked();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void DialogPlaceLabel::SetNotMirrored(bool value)
+{
+    ui->checkBoxNotMirrored->setChecked(value);
+}

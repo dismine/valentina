@@ -45,6 +45,7 @@
 #include "../vformat/vsinglelineoutlinechar.h"
 #include "../vgeometry/vlayoutplacelabel.h"
 #include "../vlayout/vboundary.h"
+#include "../vlayout/vfoldline.h"
 #include "../vlayout/vgraphicsfillitem.h"
 #include "../vlayout/vlayoutpiecepath.h"
 #include "../vlayout/vtextmanager.h"
@@ -53,7 +54,9 @@
 #include "../vmisc/svgfont/vsvgfontengine.h"
 #include "../vmisc/theme/vscenestylesheet.h"
 #include "../vpapplication.h"
+#include "../vpatterndb/vpiecepath.h"
 #include "compatibility.h"
+#include "qtpreprocessorsupport.h"
 #include "undocommands/vpundomovepieceonsheet.h"
 #include "undocommands/vpundopiecemove.h"
 #include "vpiecegrainline.h"
@@ -72,7 +75,7 @@ namespace
 {
 //---------------------------------------------------------------------------------------------------------------------
 inline auto LineMatrix(const VPPiecePtr &piece, const QPointF &topLeft, qreal angle, const QPointF &linePos,
-                       int maxLineWidth, qreal maxLabelHeight) -> QTransform
+                       int maxLineWidth) -> QTransform
 {
     if (piece.isNull())
     {
@@ -82,25 +85,26 @@ inline auto LineMatrix(const VPPiecePtr &piece, const QPointF &topLeft, qreal an
     QTransform labelMatrix;
     labelMatrix.translate(topLeft.x(), topLeft.y());
 
-    if (piece->IsVerticallyFlipped() || piece->IsHorizontallyFlipped())
+    if ((piece->IsVerticallyFlipped() && piece->IsHorizontallyFlipped()) ||
+        (!piece->IsVerticallyFlipped() && !piece->IsHorizontallyFlipped()))
     {
-        if (piece->IsVerticallyFlipped())
+        labelMatrix.rotate(angle);
+    }
+    else if (piece->IsVerticallyFlipped() || piece->IsHorizontallyFlipped())
+    {
+        if (piece->IsVerticallyFlipped() && !piece->IsHorizontallyFlipped())
         {
             labelMatrix.scale(-1, 1);
             labelMatrix.rotate(-angle);
             labelMatrix.translate(-maxLineWidth, 0);
         }
 
-        if (piece->IsHorizontallyFlipped())
+        if (piece->IsHorizontallyFlipped() && !piece->IsVerticallyFlipped())
         {
-            labelMatrix.scale(1, -1);
+            labelMatrix.scale(-1, 1);
             labelMatrix.rotate(-angle);
-            labelMatrix.translate(0, -maxLabelHeight);
+            labelMatrix.translate(-maxLineWidth, 0);
         }
-    }
-    else
-    {
-        labelMatrix.rotate(angle);
     }
 
     labelMatrix.translate(linePos.x(), linePos.y()); // Each string has own position
@@ -177,73 +181,7 @@ inline auto LineAlign(const TextLine &tl, const QString &text, const VSvgFontEng
 //---------------------------------------------------------------------------------------------------------------------
 inline auto SelectionBrush() -> QBrush
 {
-    return {QColor(255, 160, 160, 60)};
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-auto LabelHeightSVGFont(const VPPiecePtr &piece, const QVector<TextLine> &labelLines, const VSvgFont &svgFont,
-                        const VSvgFontDatabase *db, qreal penWidth, qreal dH, int spacing) -> qreal
-{
-    qreal labelHeight = 0;
-    if (piece->IsHorizontallyFlipped())
-    {
-        for (int i = 0; i < labelLines.size(); ++i)
-        {
-            const VSvgFont fnt = LineFont(labelLines.at(i), svgFont);
-            VSvgFontEngine engine = db->FontEngine(fnt);
-
-            const qreal lineHeight = engine.FontHeight() + penWidth;
-
-            if (labelHeight + lineHeight > dH)
-            {
-                break;
-            }
-
-            if (i < labelLines.size() - 1)
-            {
-                labelHeight += lineHeight + spacing;
-            }
-            else
-            {
-                labelHeight += lineHeight;
-            }
-        }
-    }
-
-    return labelHeight;
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-auto LabelHeightOutlineFont(const VPPiecePtr &piece, const QVector<TextLine> &labelLines, const QFont &font,
-                            bool textAsPaths, qreal penWidth, qreal dH, int spacing) -> qreal
-{
-    qreal labelHeight = 0;
-    if (piece->IsHorizontallyFlipped())
-    {
-        for (int i = 0; i < labelLines.size(); ++i)
-        {
-            const QFont fnt = LineFont(labelLines.at(i), font);
-            QFontMetrics fm(fnt);
-
-            const qreal lineHeight = textAsPaths ? fm.height() + penWidth : fm.height();
-
-            if (labelHeight + lineHeight > dH)
-            {
-                break;
-            }
-
-            if (i < labelLines.size() - 1)
-            {
-                labelHeight += lineHeight + spacing;
-            }
-            else
-            {
-                labelHeight += lineHeight;
-            }
-        }
-    }
-
-    return labelHeight;
+    return {VSceneStylesheet::ManualLayoutStyle().PieceSelectionBrushColor()};
 }
 } // namespace
 
@@ -283,6 +221,8 @@ auto VPGraphicsPiece::boundingRect() const -> QRectF
     shape.addPath(m_passmarks);
     shape.addPath(m_placeLabels);
     shape.addPath(m_stickyPath);
+    shape.addPath(m_foldLineMarkPath);
+    shape.addPath(m_foldLineLabelPath);
 
     VPSettings *settings = VPApplication::VApp()->PuzzleSettings();
     const qreal halfPenWidth = settings->GetLayoutLineWidth() / 2.;
@@ -308,7 +248,7 @@ void VPGraphicsPiece::paint(QPainter *painter, const QStyleOptionGraphicsItem *o
     Q_UNUSED(option);
 
     VPSettings *settings = VPApplication::VApp()->PuzzleSettings();
-    QPen pen(PieceColor(), settings->GetLayoutLineWidth(), Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin);
+    QPen const pen(PieceColor(), settings->GetLayoutLineWidth(), Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin);
     painter->setPen(pen);
 
     PaintPiece(painter);
@@ -459,7 +399,7 @@ void VPGraphicsPiece::InitLabels()
     m_labelPathItems.clear();
     m_labelTextItems.clear();
 
-    VPPiecePtr piece = m_piece.toStrongRef();
+    VPPiecePtr const piece = m_piece.toStrongRef();
     if (piece.isNull())
     {
         return;
@@ -481,7 +421,7 @@ void VPGraphicsPiece::SetStickyPoints(const QVector<QPointF> &newStickyPoint)
 //---------------------------------------------------------------------------------------------------------------------
 void VPGraphicsPiece::InitPieceLabelSVGFont(const QVector<QPointF> &labelShape, const VTextManager &tm)
 {
-    VPPiecePtr piece = m_piece.toStrongRef();
+    VPPiecePtr const piece = m_piece.toStrongRef();
     if (piece.isNull())
     {
         return;
@@ -496,16 +436,16 @@ void VPGraphicsPiece::InitPieceLabelSVGFont(const QVector<QPointF> &labelShape, 
     VSvgFontEngine engine =
         db->FontEngine(tm.GetSVGFontFamily(), SVGFontStyle::Normal, SVGFontWeight::Normal, tm.GetSVGFontPointSize());
 
-    VSvgFont svgFont = engine.Font();
+    VSvgFont const svgFont = engine.Font();
     if (!svgFont.IsValid())
     {
-        QString errorMsg = QStringLiteral("Invalid SVG font '%1'. Fallback to outline font.").arg(svgFont.Name());
+        QString const errorMsg = QStringLiteral("Invalid SVG font '%1'. Fallback to outline font.").arg(svgFont.Name());
         qDebug() << errorMsg;
         InitPieceLabelOutlineFont(labelShape, tm);
         return;
     }
 
-    qreal penWidth = VPApplication::VApp()->PuzzleSettings()->GetLayoutLineWidth();
+    qreal const penWidth = VPApplication::VApp()->PuzzleSettings()->GetLayoutLineWidth();
 
     const qreal dW = QLineF(labelShape.at(0), labelShape.at(1)).length();
     const qreal dH = QLineF(labelShape.at(1), labelShape.at(2)).length();
@@ -516,8 +456,6 @@ void VPGraphicsPiece::InitPieceLabelSVGFont(const QVector<QPointF> &labelShape, 
     qreal dY = penWidth;
 
     const QVector<TextLine> labelLines = tm.GetLabelSourceLines(qFloor(dW), svgFont, penWidth);
-
-    const qreal labelHeight = LabelHeightSVGFont(piece, labelLines, svgFont, db, penWidth, dH, tm.GetSpacing());
 
     for (const auto &tl : labelLines)
     {
@@ -532,8 +470,7 @@ void VPGraphicsPiece::InitPieceLabelSVGFont(const QVector<QPointF> &labelShape, 
         const QString qsText = tl.m_qsText;
         const qreal dX = LineAlign(tl, qsText, engine, dW, penWidth);
         // set up the rotation around top-left corner matrix
-        const QTransform lineMatrix =
-            LineMatrix(piece, labelShape.at(0), angle, QPointF(dX, dY), maxLineWidth, labelHeight);
+        const QTransform lineMatrix = LineMatrix(piece, labelShape.at(0), angle, QPointF(dX, dY), maxLineWidth);
 
         auto *item = new QGraphicsPathItem(this);
         item->setPath(engine.DrawPath(QPointF(), qsText));
@@ -549,7 +486,7 @@ void VPGraphicsPiece::InitPieceLabelSVGFont(const QVector<QPointF> &labelShape, 
         item->setTransform(lineMatrix);
         m_labelPathItems.append(item);
 
-        dY += engine.FontHeight() + penWidth + tm.GetSpacing();
+        dY += engine.FontHeight() - penWidth * 2 + tm.GetSpacing();
     }
 }
 
@@ -587,31 +524,19 @@ void VPGraphicsPiece::InitPieceLabelOutlineFont(const QVector<QPointF> &labelSha
 
     const QVector<TextLine> labelLines = tm.GetLabelSourceLines(qFloor(dW), tm.GetFont());
 
-    const qreal labelHeight =
-        LabelHeightOutlineFont(piece, labelLines, tm.GetFont(), textAsPaths, penWidth, dH, tm.GetSpacing());
-
     for (const auto &tl : labelLines)
     {
         const QFont fnt = LineFont(tl, tm.GetFont());
-
-        VSingleLineOutlineChar corrector(fnt);
-        if (settings->GetSingleStrokeOutlineFont() && !corrector.IsPopulated())
-        {
-            corrector.LoadCorrections(settings->GetPathFontCorrections());
-        }
-
-        QFontMetrics fm(fnt);
+        QFontMetrics const fm(fnt);
 
         if (dY + fm.height() > dH)
         {
             break;
         }
 
-        const QString qsText = tl.m_qsText;
-        const qreal dX = LineAlign(tl, qsText, fm, dW);
+        const qreal dX = LineAlign(tl, tl.m_qsText, fm, dW);
         // set up the rotation around top-left corner matrix
-        const QTransform lineMatrix =
-            LineMatrix(piece, labelShape.at(0), angle, QPointF(dX, dY), maxLineWidth, labelHeight);
+        const QTransform lineMatrix = LineMatrix(piece, labelShape.at(0), angle, QPointF(dX, dY), maxLineWidth);
 
         if (textAsPaths)
         {
@@ -619,8 +544,14 @@ void VPGraphicsPiece::InitPieceLabelOutlineFont(const QVector<QPointF> &labelSha
 
             if (settings->GetSingleStrokeOutlineFont())
             {
+                VSingleLineOutlineChar const corrector(fnt);
+                if (!corrector.IsPopulated())
+                {
+                    corrector.LoadCorrections(settings->GetPathFontCorrections());
+                }
+
                 int w = 0;
-                for (auto c : qAsConst(qsText))
+                for (auto c : qAsConst(tl.m_qsText))
                 {
                     path.addPath(corrector.DrawChar(w, static_cast<qreal>(fm.ascent()), c));
                     w += TextWidth(fm, c);
@@ -628,7 +559,7 @@ void VPGraphicsPiece::InitPieceLabelOutlineFont(const QVector<QPointF> &labelSha
             }
             else
             {
-                path.addText(0, static_cast<qreal>(fm.ascent()), fnt, qsText);
+                path.addText(0, static_cast<qreal>(fm.ascent()), fnt, tl.m_qsText);
             }
 
             auto *item = new QGraphicsPathItem(this);
@@ -644,18 +575,18 @@ void VPGraphicsPiece::InitPieceLabelOutlineFont(const QVector<QPointF> &labelSha
             item->setTransform(lineMatrix);
             m_labelPathItems.append(item);
 
-            dY += fm.height() + penWidth + tm.GetSpacing();
+            dY += fm.height() + penWidth + MmToPixel(1.5) + tm.GetSpacing();
         }
         else
         {
             auto *item = new QGraphicsSimpleTextItem(this);
             item->setFont(fnt);
-            item->setText(qsText);
+            item->setText(tl.m_qsText);
             item->setBrush(QBrush(color));
             item->setTransform(lineMatrix);
             m_labelTextItems.append(item);
 
-            dY += (fm.height() + tm.GetSpacing());
+            dY += (fm.height() + MmToPixel(1.5) + tm.GetSpacing());
         }
     }
 }
@@ -706,8 +637,10 @@ void VPGraphicsPiece::PaintPiece(QPainter *painter)
     m_passmarks = QPainterPath();
     m_placeLabels = QPainterPath();
     m_stickyPath = QPainterPath();
+    m_foldLineMarkPath = QPainterPath();
+    m_foldLineLabelPath = QPainterPath();
 
-    VPPiecePtr piece = m_piece.toStrongRef();
+    VPPiecePtr const piece = m_piece.toStrongRef();
     if (piece.isNull())
     {
         return;
@@ -728,66 +661,76 @@ void VPGraphicsPiece::PaintPiece(QPainter *painter)
     // initialises the place labels (buttons etc)
     PaintPlaceLabels(painter, piece);
 
+    PaintMirrorLine(painter, piece);
+
+    PaintFoldLine(painter, piece);
+
     PaintStickyPath(painter);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 void VPGraphicsPiece::PaintSeamLine(QPainter *painter, const VPPiecePtr &piece)
 {
-    if (piece->IsSeamAllowance() && not piece->IsHideMainPath() && not piece->IsSeamAllowanceBuiltIn())
+    if (piece->IsHideMainPath() && piece->IsSeamAllowance() && not piece->IsSeamAllowanceBuiltIn())
     {
-        QVector<VLayoutPoint> seamLinePoints = piece->GetMappedContourPoints();
+        return;
+    }
 
-        if (seamLinePoints.isEmpty())
+    QVector<VLayoutPoint> const seamLinePoints = piece->GetMappedFullContourPoints();
+
+    if (seamLinePoints.isEmpty())
+    {
+        return;
+    }
+
+    VPLayoutPtr const layout = piece->Layout();
+    if (layout.isNull())
+    {
+        return;
+    }
+
+    if (layout->LayoutSettings().IsBoundaryTogetherWithNotches())
+    {
+        QVector<VLayoutPassmark> const passmarks = piece->GetMappedPassmarks();
+
+        bool const seamAllowance = piece->IsSeamAllowance() && piece->IsSeamAllowanceBuiltIn();
+        bool const builtInSeamAllowance = piece->IsSeamAllowance() && piece->IsSeamAllowanceBuiltIn();
+
+        VBoundary boundary(seamLinePoints, seamAllowance, builtInSeamAllowance);
+        boundary.SetPieceName(piece->GetName());
+        if (piece->IsShowFullPiece())
         {
-            return;
+            boundary.SetMirrorLine(piece->GetMappedSeamMirrorLine());
         }
+        const QList<VBoundarySequenceItemData> sequence = boundary.Combine(passmarks, false, false);
 
-        VPLayoutPtr layout = piece->Layout();
-        if (layout.isNull())
+        QVector<QPointF> combinedBoundary;
+        for (const auto &item : sequence)
         {
-            return;
-        }
-
-        if (layout->LayoutSettings().IsBoundaryTogetherWithNotches())
-        {
-            QVector<VLayoutPassmark> passmarks = piece->GetMappedPassmarks();
-
-            bool seamAllowance = piece->IsSeamAllowance() && piece->IsSeamAllowanceBuiltIn();
-            bool builtInSeamAllowance = piece->IsSeamAllowance() && piece->IsSeamAllowanceBuiltIn();
-
-            VBoundary boundary(seamLinePoints, seamAllowance, builtInSeamAllowance);
-            boundary.SetPieceName(piece->GetName());
-            const QList<VBoundarySequenceItemData> sequence = boundary.Combine(passmarks, false, false);
-
-            QVector<QPointF> combinedBoundary;
-            for (const auto &item : sequence)
-            {
-                const auto path = item.item.value<VLayoutPiecePath>().Points();
-                QVector<QPointF> convertedPoints;
-                CastTo(path, convertedPoints);
-                combinedBoundary += convertedPoints;
-            }
-
-            m_seamLine.addPolygon(QPolygonF(combinedBoundary));
-            m_seamLine.closeSubpath();
-        }
-        else
-        {
+            const auto path = item.item.value<VLayoutPiecePath>().Points();
             QVector<QPointF> convertedPoints;
-            CastTo(seamLinePoints, convertedPoints);
-
-            m_seamLine.addPolygon(QPolygonF(convertedPoints));
-            m_seamLine.closeSubpath();
+            CastTo(path, convertedPoints);
+            combinedBoundary += convertedPoints;
         }
 
-        if (painter != nullptr)
-        {
-            painter->save();
-            painter->setBrush(piece->IsSelected() ? SelectionBrush() : NoBrush());
-            painter->drawPath(m_seamLine);
-            painter->restore();
-        }
+        m_seamLine.addPolygon(QPolygonF(combinedBoundary));
+        m_seamLine.closeSubpath();
+    }
+    else
+    {
+        QVector<QPointF> convertedPoints;
+        CastTo(seamLinePoints, convertedPoints);
+
+        m_seamLine.addPolygon(QPolygonF(convertedPoints));
+        m_seamLine.closeSubpath();
+    }
+
+    if (painter != nullptr)
+    {
+        painter->save();
+        painter->setBrush(piece->IsSelected() ? SelectionBrush() : NoBrush());
+        painter->drawPath(m_seamLine);
+        painter->restore();
     }
 }
 
@@ -796,7 +739,7 @@ void VPGraphicsPiece::PaintCuttingLine(QPainter *painter, const VPPiecePtr &piec
 {
     if (piece->IsSeamAllowance() && not piece->IsSeamAllowanceBuiltIn())
     {
-        QVector<VLayoutPoint> cuttingLinepoints = piece->GetMappedSeamAllowancePoints();
+        QVector<VLayoutPoint> cuttingLinepoints = piece->GetMappedFullSeamAllowancePoints();
         if (cuttingLinepoints.isEmpty())
         {
             return;
@@ -817,6 +760,10 @@ void VPGraphicsPiece::PaintCuttingLine(QPainter *painter, const VPPiecePtr &piec
 
             VBoundary boundary(cuttingLinepoints, seamAllowance, builtInSeamAllowance);
             boundary.SetPieceName(piece->GetName());
+            if (piece->IsShowFullPiece())
+            {
+                boundary.SetMirrorLine(piece->GetMappedSeamAllowanceMirrorLine());
+            }
             const QList<VBoundarySequenceItemData> sequence = boundary.Combine(passmarks, false, false);
 
             QVector<QPointF> combinedBoundary;
@@ -853,10 +800,21 @@ void VPGraphicsPiece::PaintCuttingLine(QPainter *painter, const VPPiecePtr &piec
 //---------------------------------------------------------------------------------------------------------------------
 void VPGraphicsPiece::PaintInternalPaths(QPainter *painter, const VPPiecePtr &piece)
 {
-    QVector<VLayoutPiecePath> internalPaths = piece->GetInternalPaths();
+    QVector<VLayoutPiecePath> const internalPaths = piece->GetInternalPaths();
     for (const auto &piecePath : internalPaths)
     {
         QPainterPath path = piece->GetMatrix().map(piecePath.GetPainterPath());
+
+        if (!piecePath.IsNotMirrored() && piece->IsShowFullPiece() && !piece->GetSeamMirrorLine().isNull())
+        {
+            QVector<VLayoutPoint> points = piecePath.Points();
+            const QTransform matrix = VGObject::FlippingMatrix(piece->GetSeamMirrorLine());
+            std::transform(points.begin(), points.end(), points.begin(),
+                           [matrix](const VLayoutPoint &point) { return VAbstractPiece::MapPoint(point, matrix); });
+            QVector<QPointF> casted;
+            CastTo(points, casted);
+            path.addPath(piece->GetMatrix().map(VPiecePath::MakePainterPath(casted)));
+        }
 
         if (painter != nullptr)
         {
@@ -874,7 +832,7 @@ void VPGraphicsPiece::PaintInternalPaths(QPainter *painter, const VPPiecePtr &pi
 //---------------------------------------------------------------------------------------------------------------------
 void VPGraphicsPiece::PaintPassmarks(QPainter *painter, const VPPiecePtr &piece)
 {
-    VPLayoutPtr layout = piece->Layout();
+    VPLayoutPtr const layout = piece->Layout();
     if (layout.isNull())
     {
         return;
@@ -885,36 +843,66 @@ void VPGraphicsPiece::PaintPassmarks(QPainter *painter, const VPPiecePtr &piece)
         return;
     }
 
-    QVector<VLayoutPassmark> passmarks = piece->GetMappedPassmarks();
-    for (auto &passmark : passmarks)
+    QVector<VLayoutPassmark> const passmarks = piece->GetMappedPassmarks();
+    for (const auto &passmark : passmarks)
     {
         QPainterPath passmarkPath;
-        for (auto &line : passmark.lines)
+        for (const auto &line : passmark.lines)
         {
             passmarkPath.moveTo(line.p1());
             passmarkPath.lineTo(line.p2());
+        }
+
+        m_passmarks.addPath(passmarkPath);
+
+        QLineF const seamAllowanceMirrorLine = piece->GetMappedSeamAllowanceMirrorLine();
+        if (!seamAllowanceMirrorLine.isNull() && piece->IsShowFullPiece())
+        {
+            if (!VGObject::IsPointOnLineviaPDP(passmark.baseLine.p1(), seamAllowanceMirrorLine.p1(),
+                                               seamAllowanceMirrorLine.p2()))
+            {
+                QPainterPath mirroredPassmaksPath;
+                for (const auto &line : passmark.lines)
+                {
+                    mirroredPassmaksPath.moveTo(line.p1());
+                    mirroredPassmaksPath.lineTo(line.p2());
+                }
+                const QTransform matrix = VGObject::FlippingMatrix(seamAllowanceMirrorLine);
+                m_passmarks.addPath(matrix.map(mirroredPassmaksPath));
+            }
         }
 
         if (painter != nullptr)
         {
             painter->save();
             painter->setBrush(NoBrush());
-            painter->drawPath(passmarkPath);
+            painter->drawPath(m_passmarks);
             painter->restore();
         }
-
-        m_passmarks.addPath(passmarkPath);
     }
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 void VPGraphicsPiece::PaintPlaceLabels(QPainter *painter, const VPPiecePtr &piece)
 {
-    QVector<VLayoutPlaceLabel> placeLabels = piece->GetPlaceLabels();
-    for (auto &placeLabel : placeLabels)
+    QVector<VLayoutPlaceLabel> const placeLabels = piece->GetPlaceLabels();
+    for (const auto &placeLabel : placeLabels)
     {
         QPainterPath path =
             VAbstractPiece::LabelShapePath(piece->MapPlaceLabelShape(VAbstractPiece::PlaceLabelShape(placeLabel)));
+
+        if (!placeLabel.IsNotMirrored() && piece->IsShowFullPiece() && !piece->GetSeamMirrorLine().isNull())
+        {
+            PlaceLabelImg shape = VAbstractPiece::PlaceLabelShape(placeLabel);
+            const QTransform matrix = VGObject::FlippingMatrix(piece->GetSeamMirrorLine());
+            for (auto &points : shape)
+            {
+                std::transform(points.begin(), points.end(), points.begin(),
+                               [matrix](const VLayoutPoint &point) { return VAbstractPiece::MapPoint(point, matrix); });
+            }
+
+            path.addPath(VAbstractPiece::LabelShapePath(piece->MapPlaceLabelShape(shape)));
+        }
 
         if (painter != nullptr)
         {
@@ -952,6 +940,127 @@ void VPGraphicsPiece::PaintStickyPath(QPainter *painter)
             painter->drawPath(m_stickyPath);
             painter->restore();
         }
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VPGraphicsPiece::PaintMirrorLine(QPainter *painter, const VPPiecePtr &piece)
+{
+    if (piece->IsShowFullPiece())
+    {
+        bool mirrorFlag = false;
+        QPainterPath mirrorLinePath;
+        if (not piece->IsSeamAllowance() || piece->IsSeamAllowanceBuiltIn())
+        {
+            QLineF const seamMirrorLine = piece->GetMappedSeamMirrorLine();
+            if (!seamMirrorLine.isNull())
+            {
+                QPainterPath mirrorPath;
+                mirrorPath.moveTo(seamMirrorLine.p1());
+                mirrorPath.lineTo(seamMirrorLine.p2());
+                mirrorLinePath.addPath(mirrorPath);
+                mirrorFlag = true;
+            }
+        }
+        else if (not piece->IsSeamAllowanceBuiltIn())
+        {
+            QLineF const seamAllowanceMirrorLine = piece->GetMappedSeamAllowanceMirrorLine();
+            if (!seamAllowanceMirrorLine.isNull())
+            {
+                QPainterPath mirrorPath;
+                mirrorPath.moveTo(seamAllowanceMirrorLine.p1());
+                mirrorPath.lineTo(seamAllowanceMirrorLine.p2());
+                mirrorLinePath.addPath(mirrorPath);
+                mirrorFlag = true;
+            }
+        }
+
+        if (mirrorFlag && painter != nullptr)
+        {
+            painter->save();
+            QPen pen = painter->pen();
+            pen.setStyle(Qt::DashDotLine);
+            painter->setPen(pen);
+            painter->drawPath(mirrorLinePath);
+            painter->restore();
+        }
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VPGraphicsPiece::PaintFoldLine(QPainter *painter, const VPPiecePtr &piece)
+{
+    if (piece->GetFoldLineType() == FoldLineType::None)
+    {
+        return;
+    }
+
+    VFoldLine const fLine = piece->FoldLine();
+    QVector<QPainterPath> const shape = fLine.FoldLinePath();
+
+    if (shape.isEmpty())
+    {
+        return;
+    }
+
+    VCommonSettings *settings = VAbstractApplication::VApp()->Settings();
+    if (!m_textAsPaths && !settings->GetSingleStrokeOutlineFont() && !settings->GetSingleLineFonts())
+    {
+        if (m_foldLineLabelText == nullptr)
+        {
+            m_foldLineLabelText = new QGraphicsSimpleTextItem(this);
+        }
+
+        fLine.UpdateFoldLineLabel(m_foldLineLabelText);
+    }
+    else
+    {
+        if (m_foldLineLabelText != nullptr)
+        {
+            m_foldLineLabelText->setVisible(false);
+        }
+    }
+
+    const bool singleLineFont = settings->GetSingleStrokeOutlineFont() || settings->GetSingleLineFonts();
+
+    if (piece->GetFoldLineType() == FoldLineType::ThreeDots || piece->GetFoldLineType() == FoldLineType::ThreeX ||
+        piece->GetFoldLineType() == FoldLineType::TwoArrows)
+    {
+        m_foldLineMarkPath.addPath(shape.constFirst());
+    }
+    else if (piece->GetFoldLineType() == FoldLineType::Text)
+    {
+        if (singleLineFont || m_textAsPaths)
+        {
+            m_foldLineLabelPath.addPath(shape.constFirst());
+        }
+    }
+    else
+    {
+        m_foldLineMarkPath.addPath(shape.constFirst());
+
+        if (shape.size() > 1 && (singleLineFont || m_textAsPaths))
+        {
+            m_foldLineLabelPath.addPath(shape.constLast());
+        }
+    }
+
+    if (painter != nullptr)
+    {
+        painter->save();
+        painter->setBrush(Qt::SolidPattern);
+        painter->drawPath(m_foldLineMarkPath);
+        painter->restore();
+
+        qreal const penWidth = VPApplication::VApp()->PuzzleSettings()->GetLayoutLineWidth();
+
+        painter->save();
+        QPen pen = painter->pen();
+        pen.setWidthF(penWidth * qMin(piece->GetXScale(), piece->GetYScale()));
+        painter->setPen(pen);
+        painter->setBrush(singleLineFont ? Qt::NoBrush : Qt::SolidPattern);
+        painter->drawPath(m_foldLineLabelPath);
+        painter->restore();
     }
 }
 

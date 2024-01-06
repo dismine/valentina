@@ -90,6 +90,11 @@ inline void noisyFailureMsgHandler(QtMsgType type, const QMessageLogContext &con
         return;
     }
 
+    if (VAbstractApplication::VApp()->IsWarningMessage(msg))
+    {
+        return;
+    }
+
     // Why on earth didn't Qt want to make failed signal/slot connections qWarning?
     if ((type == QtDebugMsg) && msg.contains(QStringLiteral("::connect")))
     {

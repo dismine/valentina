@@ -160,6 +160,13 @@ const QString strIntersection2OnlyRight = QStringLiteral("intersection2Right");
 const QString strTypeIncrement = QStringLiteral("increment");
 const QString strTypeSeparator = QStringLiteral("separator");
 const QString strTypeMeasurement = QStringLiteral("measurement");
+const QString strFoldTypeTwoArrowsTextAbove = QStringLiteral("2ArrowsTextAbove");
+const QString strFoldTypeTwoArrowsTextUnder = QStringLiteral("2ArrowsTextUnder");
+const QString strFoldTypeTwoArrows = QStringLiteral("2Arrows");
+const QString strFoldTypeText = QStringLiteral("text");
+const QString strFoldTypeThreeDots = QStringLiteral("3dots");
+const QString strFoldTypeThreeX = QStringLiteral("3X");
+const QString strFoldTypeNone = QStringLiteral("none");
 
 const QString unitMM = QStringLiteral("mm");
 const QString unitCM = QStringLiteral("cm");

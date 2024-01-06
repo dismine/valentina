@@ -164,6 +164,13 @@ extern const QString strIntersection2OnlyRight;
 extern const QString strTypeIncrement;
 extern const QString strTypeSeparator;
 extern const QString strTypeMeasurement;
+extern const QString strFoldTypeTwoArrowsTextAbove;
+extern const QString strFoldTypeTwoArrowsTextUnder;
+extern const QString strFoldTypeTwoArrows;
+extern const QString strFoldTypeText;
+extern const QString strFoldTypeThreeDots;
+extern const QString strFoldTypeThreeX;
+extern const QString strFoldTypeNone;
 
 extern const QString unitMM;
 extern const QString unitCM;

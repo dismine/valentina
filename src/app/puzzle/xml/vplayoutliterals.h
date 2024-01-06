@@ -66,6 +66,7 @@ extern const QString TagLine;
 extern const QString TagScale;
 extern const QString TagWatermark;
 extern const QString TagPoint;
+extern const QString TagMirrorLine;
 
 extern const QString AttrWarningSuperposition;
 extern const QString AttrWarningOutOfBound;
@@ -122,6 +123,14 @@ extern const QString AttrY;
 extern const QString AttrTurnPoint;
 extern const QString AttrCurvePoint;
 extern const QString AttrClockwiseOpening;
+extern const QString AttrShowFullPiece;
+extern const QString AttrNotMirrored;
+extern const QString AttrCutOnFold;
+extern const QString AttrFoldLineType;
+extern const QString AttrFoldLineHeight;
+extern const QString AttrFoldLineWidth;
+extern const QString AttrFoldLineCenter;
+extern const QString AttrFoldLineLabel;
 
 extern const QString oneWayUpStr;
 extern const QString oneWayDownStr;

@@ -96,3 +96,18 @@ auto operator>>(QDataStream &dataStream, VLayoutPassmark &data) -> QDataStream &
 
     return dataStream;
 }
+
+//---------------------------------------------------------------------------------------------------------------------
+auto SingleParallelPoint(const QPointF &p1, const QPointF &p2, qreal angle, qreal width) -> QPointF
+{
+    QLineF pLine(p1, p2);
+    pLine.setAngle(pLine.angle() + angle);
+    pLine.setLength(width);
+    return pLine.p2();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+auto SimpleParallelLine(const QPointF &p1, const QPointF &p2, qreal width) -> QLineF
+{
+    return {SingleParallelPoint(p1, p2, 90, width), SingleParallelPoint(p2, p1, -90, width)};
+}

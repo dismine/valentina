@@ -44,6 +44,8 @@ VLib {
             "typedef.h",
             "vabstractshortcutmanager.h",
             "vabstractshortcutmanager.cpp",
+            "vtranslator.h",
+            "vtranslator.cpp",
         ]
 
         if (Utilities.versionCompare(Qt.core.version, "6") >= 0) {

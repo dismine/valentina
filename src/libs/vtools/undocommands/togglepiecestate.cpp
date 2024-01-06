@@ -215,3 +215,49 @@ void ToggleHideMainPath::Do(bool state)
         qDebug("Can't get detail by id = %u.", m_id);
     }
 }
+
+//---------------------------------------------------------------------------------------------------------------------
+ToggleShowFullPiece::ToggleShowFullPiece(quint32 id, bool state, VContainer *data, VAbstractPattern *doc,
+                                         QUndoCommand *parent)
+  : VUndoCommand(QDomElement(), doc, parent),
+    m_id(id),
+    m_data(data),
+    m_oldState(not state),
+    m_newState(state)
+{
+    setText(tr("show full piece"));
+    m_oldState = m_data->DataPieces()->value(m_id).IsShowFullPiece();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void ToggleShowFullPiece::undo()
+{
+    qCDebug(vUndo, "ToggleShowFullPiece::undo().");
+    Do(m_oldState);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void ToggleShowFullPiece::redo()
+{
+    qCDebug(vUndo, "ToggleShowFullPiece::redo().");
+    Do(m_newState);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void ToggleShowFullPiece::Do(bool state)
+{
+    QDomElement detail = doc->elementById(m_id, VAbstractPattern::TagDetail);
+    if (detail.isElement())
+    {
+        doc->SetAttribute(detail, VToolSeamAllowance::AttrShowFullPiece, state);
+
+        VPiece det = m_data->DataPieces()->value(m_id);
+        det.SetShowFullPiece(state);
+        m_data->UpdatePiece(m_id, det);
+        emit Toggled(m_id);
+    }
+    else
+    {
+        qDebug("Can't get detail by id = %u.", m_id);
+    }
+}

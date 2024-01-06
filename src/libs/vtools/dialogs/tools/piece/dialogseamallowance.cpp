@@ -37,6 +37,7 @@
 #include "../../support/dialogeditwrongformula.h"
 #include "../vgeometry/vplacelabelitem.h"
 #include "../vmisc/theme/vtheme.h"
+#include "../vmisc/typedef.h"
 #include "../vmisc/vabstractvalapplication.h"
 #include "../vmisc/vmodifierkey.h"
 #include "../vmisc/vvalentinasettings.h"
@@ -48,10 +49,12 @@
 #include "../vpatterndb/vpiecenode.h"
 #include "../vpatterndb/vpiecepath.h"
 #include "../vwidgets/fancytabbar/fancytabbar.h"
+#include "def.h"
 #include "dialogpatternmaterials.h"
 #include "dialogpiecepath.h"
 #include "dialogplacelabel.h"
 #include "ui_dialogseamallowance.h"
+#include "ui_tabfoldline.h"
 #include "ui_tabgrainline.h"
 #include "ui_tablabels.h"
 #include "ui_tabpassmarks.h"
@@ -77,6 +80,12 @@
 #include <array>
 #include <cstddef>
 
+#if QT_VERSION < QT_VERSION_CHECK(6, 4, 0)
+#include "../vmisc/compatibility.h"
+#endif
+
+using namespace Qt::Literals::StringLiterals;
+
 enum TabOrder
 {
     Paths = 0,
@@ -85,7 +94,8 @@ enum TabOrder
     Grainline = 3,
     Passmarks = 4,
     PlaceLabels = 5,
-    Count = 6
+    FoldLine = 6,
+    Count = 7
 };
 
 namespace
@@ -160,12 +170,14 @@ DialogSeamAllowance::DialogSeamAllowance(const VContainer *data, VAbstractPatter
     uiTabPins(new Ui::TabPins),
     uiTabPassmarks(new Ui::TabPassmarks),
     uiTabPlaceLabels(new Ui::TabPlaceLabels),
+    uiTabFoldLine(new Ui::TabFoldLine),
     m_tabPaths(new QWidget),
     m_tabLabels(new QWidget),
     m_tabGrainline(new QWidget),
     m_tabPins(new QWidget),
     m_tabPassmarks(new QWidget),
     m_tabPlaceLabels(new QWidget),
+    m_tabFoldLine(new QWidget),
     m_ftb(new FancyTabBar(FancyTabBar::Left, this)),
     m_timerWidth(new QTimer(this)),
     m_timerWidthBefore(new QTimer(this)),
@@ -173,6 +185,9 @@ DialogSeamAllowance::DialogSeamAllowance(const VContainer *data, VAbstractPatter
     m_timerPassmarkLength(new QTimer(this)),
     m_timerPassmarkWidth(new QTimer(this)),
     m_timerPassmarkAngle(new QTimer(this)),
+    m_timerFoldHeight(new QTimer(this)),
+    m_timerFoldWidth(new QTimer(this)),
+    m_timerFoldCenter(new QTimer(this)),
     m_placeholdersMenu(new QMenu(this))
 {
     ui->setupUi(this);
@@ -193,6 +208,7 @@ DialogSeamAllowance::DialogSeamAllowance(const VContainer *data, VAbstractPatter
     InitPinsTab();
     InitPassmarksTab();
     InitPlaceLabelsTab();
+    InitFoldLineTab();
 
     InitIcons();
 
@@ -208,6 +224,7 @@ DialogSeamAllowance::DialogSeamAllowance(const VContainer *data, VAbstractPatter
 DialogSeamAllowance::~DialogSeamAllowance()
 {
     delete m_visSpecialPoints;
+    delete m_tabFoldLine;
     delete m_tabPlaceLabels;
     delete m_tabPassmarks;
     delete m_tabPins;
@@ -239,11 +256,13 @@ void DialogSeamAllowance::EnableApply(bool enable)
 
     uiTabPaths->tabSeamAllowance->setEnabled(applyAllowed);
     uiTabPaths->tabInternalPaths->setEnabled(applyAllowed);
+    uiTabPaths->groupBoxMirrorLine->setEnabled(applyAllowed);
     m_ftb->SetTabEnabled(TabOrder::Pins, applyAllowed);
     m_ftb->SetTabEnabled(TabOrder::Labels, applyAllowed);
     m_ftb->SetTabEnabled(TabOrder::Grainline, applyAllowed);
     m_ftb->SetTabEnabled(TabOrder::Passmarks, applyAllowed);
     m_ftb->SetTabEnabled(TabOrder::PlaceLabels, applyAllowed);
+    m_ftb->SetTabEnabled(TabOrder::FoldLine, applyAllowed);
 
     if (not applyAllowed && vis.isNull())
     {
@@ -269,7 +288,7 @@ void DialogSeamAllowance::SetPiece(const VPiece &piece)
     uiTabPaths->checkBoxHideMainPath->setChecked(piece.IsHideMainPath());
     uiTabPaths->listWidgetCustomSA->blockSignals(true);
     uiTabPaths->listWidgetCustomSA->clear();
-    QVector<CustomSARecord> records = piece.GetCustomSARecords();
+    QVector<CustomSARecord> const records = piece.GetCustomSARecords();
     for (auto record : records)
     {
         if (record.path > NULL_ID)
@@ -364,6 +383,8 @@ void DialogSeamAllowance::SetPiece(const VPiece &piece)
     uiTabPaths->lineEditShortName->setText(piece.GetShortName());
     uiTabPaths->lineEditGradationLabel->setText(piece.GetGradationLabel());
     uiTabPaths->spinBoxPriority->setValue(static_cast<int>(piece.GetPriority()));
+
+    InitFold(piece);
 
     uiTabPaths->plainTextEditFormulaWidth->setPlainText(VAbstractApplication::VApp()->TrVars()->FormulaToUser(
         piece.GetFormulaSAWidth(), VAbstractApplication::VApp()->Settings()->GetOsSeparator()));
@@ -554,72 +575,42 @@ void DialogSeamAllowance::SaveData()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void DialogSeamAllowance::CheckState()
+void DialogSeamAllowance::CheckTabPathsState()
 {
-    SCASSERT(bOk != nullptr);
-    bOk->setEnabled(IsValid());
-    // In case dialog hasn't apply button
-    if (bApply != nullptr && applyAllowed)
-    {
-        bApply->setEnabled(bOk->isEnabled());
-    }
+    bool isValid = flagFormula && flagFormulaBefore && flagFormulaAfter;
+    bool isMainPathValid = flagMainPathIsValid && flagMirrorLineIsValid;
+    bool isNameAndUUIDValid = flagName && flagUUID;
 
-    if (flagFormula && flagFormulaBefore && flagFormulaAfter)
-    {
-        if (flagMainPathIsValid && flagName && flagUUID)
-        {
-            m_ftb->SetTabText(TabOrder::Paths, tr("Paths"));
-        }
+    m_ftb->SetTabText(TabOrder::Paths,
+                      (isValid && flagMainPathIsValid && isNameAndUUIDValid) ? tr("Paths") : tr("Paths") + '*'_L1);
 
-        uiTabPaths->tabWidget->setTabIcon(uiTabPaths->tabWidget->indexOf(uiTabPaths->tabSeamAllowance), QIcon());
-    }
-    else
-    {
-        m_ftb->SetTabText(TabOrder::Paths, tr("Paths") + '*');
-        const QIcon icon = QIcon::fromTheme(QStringLiteral("dialog-warning"));
-        uiTabPaths->tabWidget->setTabIcon(uiTabPaths->tabWidget->indexOf(uiTabPaths->tabSeamAllowance), icon);
-    }
+    const QIcon warningIcon = QIcon::fromTheme(QStringLiteral("dialog-warning"));
 
-    if (flagMainPathIsValid)
+    uiTabPaths->tabWidget->setTabIcon(uiTabPaths->tabWidget->indexOf(uiTabPaths->tabSeamAllowance),
+                                      isValid ? QIcon() : warningIcon);
+    uiTabPaths->tabWidget->setTabIcon(uiTabPaths->tabWidget->indexOf(uiTabPaths->tabMainPath),
+                                      isMainPathValid ? QIcon() : warningIcon);
+    uiTabPaths->tabWidget->setTabIcon(uiTabPaths->tabWidget->indexOf(uiTabPaths->tabPiece),
+                                      isNameAndUUIDValid ? QIcon() : warningIcon);
+
+    if (flagMainPathIsValid && flagMirrorLineIsValid)
     {
-        if (flagFormula && flagFormulaBefore && flagFormulaAfter && flagName && flagUUID)
-        {
-            m_ftb->SetTabText(TabOrder::Paths, tr("Paths"));
-        }
         QString tooltip = tr("Ready!");
-        if (not applyAllowed)
+        if (!applyAllowed)
         {
-            tooltip = tooltip + QStringLiteral("  <b>") +
-                      tr("To open all detail's features complete creating the main path. Please, press OK.") +
-                      QStringLiteral("</b>");
+            tooltip += "  <b>"_L1 +
+                       tr("To open all detail's features complete creating the main path. Please, press OK.") +
+                       "</b>"_L1;
         }
         uiTabPaths->helpLabel->setText(tooltip);
-        uiTabPaths->tabWidget->setTabIcon(uiTabPaths->tabWidget->indexOf(uiTabPaths->tabMainPath), QIcon());
-    }
-    else
-    {
-        m_ftb->SetTabText(TabOrder::Paths, tr("Paths") + '*');
-        const QIcon icon = QIcon::fromTheme(QStringLiteral("dialog-warning"));
-        uiTabPaths->tabWidget->setTabIcon(uiTabPaths->tabWidget->indexOf(uiTabPaths->tabMainPath), icon);
-    }
-
-    if (flagName && flagUUID)
-    {
-        if (flagFormula && flagFormulaBefore && flagFormulaAfter && flagMainPathIsValid)
-        {
-            m_ftb->SetTabText(TabOrder::Paths, tr("Paths"));
-        }
-        uiTabPaths->tabWidget->setTabIcon(uiTabPaths->tabWidget->indexOf(uiTabPaths->tabPiece), QIcon());
-    }
-    else
-    {
-        m_ftb->SetTabText(TabOrder::Paths, tr("Paths") + '*');
-        const QIcon icon = QIcon::fromTheme(QStringLiteral("dialog-warning"));
-        uiTabPaths->tabWidget->setTabIcon(uiTabPaths->tabWidget->indexOf(uiTabPaths->tabPiece), icon);
     }
 
     uiTabPaths->comboBoxNodes->setEnabled(flagFormulaBefore && flagFormulaAfter);
+}
 
+//---------------------------------------------------------------------------------------------------------------------
+void DialogSeamAllowance::CheckTabPassmarksState()
+{
     if (uiTabPassmarks->comboBoxPassmarks->count() == 0)
     {
         flagFormulaPassmarkLength = true;
@@ -627,21 +618,327 @@ void DialogSeamAllowance::CheckState()
         flagFormulaPassmarkAngle = true;
     }
 
-    if (flagFormulaPassmarkLength && flagFormulaPassmarkWidth && flagFormulaPassmarkAngle)
+    const bool allFormulasValid = flagFormulaPassmarkLength && flagFormulaPassmarkWidth && flagFormulaPassmarkAngle;
+
+    m_ftb->SetTabText(TabOrder::Passmarks, tr("Passmarks") + (allFormulasValid ? QString() : QChar('*')));
+
+    const QIcon icon = QIcon::fromTheme(QStringLiteral("dialog-warning"));
+    uiTabPassmarks->tabWidget->setTabIcon(uiTabPassmarks->tabWidget->indexOf(uiTabPassmarks->tabManualShape),
+                                          allFormulasValid ? QIcon() : icon);
+
+    uiTabPassmarks->comboBoxPassmarks->setEnabled(allFormulasValid);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void DialogSeamAllowance::CheckTabFoldLineState()
+{
+    if (!uiTabFoldLine->groupBoxManualHeight->isChecked())
     {
-        m_ftb->SetTabText(TabOrder::Passmarks, tr("Passmarks"));
-        uiTabPassmarks->tabWidget->setTabIcon(uiTabPassmarks->tabWidget->indexOf(uiTabPassmarks->tabManualShape),
-                                              QIcon());
+        flagFormulaFoldHeight = true;
+    }
+
+    if (!uiTabFoldLine->groupBoxManualWidth->isChecked())
+    {
+        flagFormulaFoldWidth = true;
+    }
+
+    if (!uiTabFoldLine->groupBoxManualCenter->isChecked())
+    {
+        flagFormulaFoldCenter = true;
+    }
+
+    const bool allFormulasValid = flagFormulaFoldHeight && flagFormulaFoldWidth && flagFormulaFoldCenter;
+
+    m_ftb->SetTabText(TabOrder::FoldLine, tr("Fold line") + (allFormulasValid ? QString() : QChar('*')));
+
+    const QIcon icon = QIcon::fromTheme(QStringLiteral("dialog-warning"));
+    uiTabFoldLine->tabWidget->setTabIcon(uiTabFoldLine->tabWidget->indexOf(uiTabFoldLine->tabShape),
+                                         allFormulasValid ? QIcon() : icon);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+auto DialogSeamAllowance::GetMirrorLineStartPoint() const -> quint32
+{
+    const quint32 startPoint = getCurrentObjectId(uiTabPaths->comboBoxMLStartPoint);
+    const quint32 endPoint = getCurrentObjectId(uiTabPaths->comboBoxMLEndPoint);
+
+    if (startPoint == endPoint || startPoint == NULL_ID || endPoint == NULL_ID)
+    {
+        return startPoint;
+    }
+
+    const int index = NodeRowIndex(uiTabPaths->listWidgetMainPath, startPoint);
+    if (index == -1)
+    {
+        return startPoint;
+    }
+
+    int nextIndex = index + 1;
+    if (nextIndex >= uiTabPaths->listWidgetMainPath->count())
+    {
+        nextIndex = 0;
+    }
+
+    int prevIndex = index - 1;
+    if (prevIndex < 0)
+    {
+        prevIndex = uiTabPaths->listWidgetMainPath->count() - 1;
+    }
+
+    const int next = FindNotExcludedNeighborNodeDown(uiTabPaths->listWidgetMainPath, nextIndex);
+    const int prev = FindNotExcludedNeighborNodeUp(uiTabPaths->listWidgetMainPath, prevIndex);
+
+    if (next >= 0 && RowNode(uiTabPaths->listWidgetMainPath, next).GetId() == endPoint)
+    {
+        return startPoint;
+    }
+
+    if (prev >= 0 && RowNode(uiTabPaths->listWidgetMainPath, prev).GetId() == endPoint)
+    {
+        return endPoint;
+    }
+
+    return startPoint;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+auto DialogSeamAllowance::GetMirrorLineEndPoint() const -> quint32
+{
+    const quint32 startPoint = getCurrentObjectId(uiTabPaths->comboBoxMLStartPoint);
+    const quint32 endPoint = getCurrentObjectId(uiTabPaths->comboBoxMLEndPoint);
+
+    if (startPoint == endPoint || startPoint == NULL_ID || endPoint == NULL_ID)
+    {
+        return endPoint;
+    }
+
+    const int index = NodeRowIndex(uiTabPaths->listWidgetMainPath, endPoint);
+    if (index == -1)
+    {
+        return endPoint;
+    }
+
+    int nextIndex = index + 1;
+    if (nextIndex >= uiTabPaths->listWidgetMainPath->count())
+    {
+        nextIndex = 0;
+    }
+
+    int prevIndex = index - 1;
+    if (prevIndex < 0)
+    {
+        prevIndex = uiTabPaths->listWidgetMainPath->count() - 1;
+    }
+
+    const int next = FindNotExcludedNeighborNodeDown(uiTabPaths->listWidgetMainPath, nextIndex);
+    const int prev = FindNotExcludedNeighborNodeUp(uiTabPaths->listWidgetMainPath, prevIndex);
+
+    if (next >= 0 && RowNode(uiTabPaths->listWidgetMainPath, next).GetId() == startPoint)
+    {
+        return startPoint;
+    }
+
+    if (prev >= 0 && RowNode(uiTabPaths->listWidgetMainPath, prev).GetId() == startPoint)
+    {
+        return endPoint;
+    }
+
+    return endPoint;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void DialogSeamAllowance::InitFold(const VPiece &piece)
+{
+    QLineF const mirrorLine = piece.SeamAllowanceMirrorLine(data);
+    uiTabPaths->checkBoxShowFullPiece->setEnabled(not mirrorLine.isNull());
+    uiTabPaths->checkBoxShowFullPiece->setChecked(true);
+    if (not mirrorLine.isNull())
+    {
+        uiTabPaths->checkBoxShowFullPiece->setChecked(piece.IsShowFullPiece());
+    }
+
+    InitMirrorLine();
+
+    {
+        const int index = uiTabPaths->comboBoxMLStartPoint->findData(piece.GetMirrorLineStartPoint());
+        if (index != -1)
+        {
+            uiTabPaths->comboBoxMLStartPoint->setCurrentIndex(index);
+        }
+    }
+
+    {
+        const int index = uiTabPaths->comboBoxMLEndPoint->findData(piece.GetMirrorLineEndPoint());
+        if (index != -1)
+        {
+            uiTabPaths->comboBoxMLEndPoint->setCurrentIndex(index);
+        }
+    }
+
+    uiTabFoldLine->groupBoxManualHeight->blockSignals(true);
+    uiTabFoldLine->groupBoxManualWidth->blockSignals(true);
+    uiTabFoldLine->groupBoxManualCenter->blockSignals(true);
+
+    InitFoldHeightFormula(piece);
+    InitFoldWidthFormula(piece);
+    InitFoldCenterFormula(piece);
+
+    uiTabFoldLine->groupBoxManualHeight->blockSignals(false);
+    uiTabFoldLine->groupBoxManualWidth->blockSignals(false);
+    uiTabFoldLine->groupBoxManualCenter->blockSignals(false);
+
+    {
+        const int index = uiTabFoldLine->comboBoxType->findData(static_cast<unsigned int>(piece.GetFoldLineType()));
+        if (index != -1)
+        {
+            uiTabFoldLine->comboBoxType->setCurrentIndex(index);
+        }
+    }
+
+    {
+      const qint32 indexSize = uiTabFoldLine->comboBoxLabelFontSize->findData(piece.GetFoldLineSvgFontSize());
+        if (indexSize != -1)
+        {
+            uiTabFoldLine->comboBoxLabelFontSize->setCurrentIndex(indexSize);
+        }
+    }
+
+    uiTabFoldLine->toolButtonItalic->setChecked(piece.IsFoldLineLabelFontItalic());
+    uiTabFoldLine->toolButtonBold->setChecked(piece.IsFoldLineLabelFontBold());
+    uiTabFoldLine->lineEditLabel->setText(piece.GetFoldLineLabel());
+
+    const int lineAlignment = piece.GetFoldLineLabelAlignment();
+
+    if (lineAlignment == 0 || lineAlignment & Qt::AlignLeft)
+    {
+        uiTabFoldLine->toolButtonTextLeft->setChecked(true);
+        uiTabFoldLine->toolButtonTextCenter->setChecked(false);
+        uiTabFoldLine->toolButtonTextRight->setChecked(false);
+    }
+    else if (lineAlignment & Qt::AlignHCenter)
+    {
+        uiTabFoldLine->toolButtonTextLeft->setChecked(false);
+        uiTabFoldLine->toolButtonTextCenter->setChecked(true);
+        uiTabFoldLine->toolButtonTextRight->setChecked(false);
+    }
+    else if (lineAlignment & Qt::AlignRight)
+    {
+        uiTabFoldLine->toolButtonTextLeft->setChecked(false);
+        uiTabFoldLine->toolButtonTextCenter->setChecked(false);
+        uiTabFoldLine->toolButtonTextRight->setChecked(true);
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void DialogSeamAllowance::InitFoldHeightFormula(const VPiece &piece)
+{
+    if (piece.IsManualFoldHeight())
+    {
+        uiTabFoldLine->groupBoxManualHeight->setChecked(true);
+
+        uiTabFoldLine->toolButtonExprHeight->setEnabled(uiTabFoldLine->groupBoxManualHeight->isChecked());
+        uiTabFoldLine->plainTextEditHeight->setEnabled(uiTabFoldLine->groupBoxManualHeight->isChecked());
+        uiTabFoldLine->pushButtonGrowHeight->setEnabled(uiTabFoldLine->groupBoxManualHeight->isChecked());
+        uiTabFoldLine->labelEditHeight->setEnabled(uiTabFoldLine->groupBoxManualHeight->isChecked());
+        uiTabFoldLine->label_3->setEnabled(uiTabFoldLine->groupBoxManualHeight->isChecked());
+
+        QString foldHeight = piece.GetFormulaFoldHeight();
+        foldHeight = VAbstractApplication::VApp()->TrVars()->FormulaToUser(
+            foldHeight, VAbstractApplication::VApp()->Settings()->GetOsSeparator());
+        if (foldHeight.length() > 80) // increase height if needed.
+        {
+            this->DeployFoldHeight();
+        }
+
+        uiTabFoldLine->plainTextEditHeight->setPlainText(foldHeight.isEmpty() ? QChar('0') : foldHeight);
     }
     else
     {
-        m_ftb->SetTabText(TabOrder::Passmarks, tr("Passmarks") + '*');
-        const QIcon icon = QIcon::fromTheme(QStringLiteral("dialog-warning"));
-        uiTabPassmarks->tabWidget->setTabIcon(uiTabPassmarks->tabWidget->indexOf(uiTabPassmarks->tabManualShape), icon);
+        uiTabFoldLine->plainTextEditHeight->setPlainText(QChar('0'));
     }
 
-    uiTabPassmarks->comboBoxPassmarks->setEnabled(flagFormulaPassmarkLength && flagFormulaPassmarkWidth &&
-                                                  flagFormulaPassmarkAngle);
+    MoveCursorToEnd(uiTabFoldLine->plainTextEditHeight);
+    ChangeColor(uiTabFoldLine->labelEditHeight, OkColor(this));
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void DialogSeamAllowance::InitFoldWidthFormula(const VPiece &piece)
+{
+    if (piece.IsManualFoldWidth())
+    {
+        uiTabFoldLine->groupBoxManualWidth->setChecked(true);
+
+        uiTabFoldLine->toolButtonExprWidth->setEnabled(uiTabFoldLine->groupBoxManualWidth->isChecked());
+        uiTabFoldLine->plainTextEditWidth->setEnabled(uiTabFoldLine->groupBoxManualWidth->isChecked());
+        uiTabFoldLine->pushButtonGrowWidth->setEnabled(uiTabFoldLine->groupBoxManualWidth->isChecked());
+        uiTabFoldLine->labelEditWidth->setEnabled(uiTabFoldLine->groupBoxManualWidth->isChecked());
+        uiTabFoldLine->label_4->setEnabled(uiTabFoldLine->groupBoxManualWidth->isChecked());
+
+        QString foldWidth = piece.GetFormulaFoldWidth();
+        foldWidth = VAbstractApplication::VApp()->TrVars()->FormulaToUser(
+            foldWidth, VAbstractApplication::VApp()->Settings()->GetOsSeparator());
+        if (foldWidth.length() > 80) // increase height if needed.
+        {
+            this->DeployPassmarkWidth();
+        }
+
+        uiTabFoldLine->plainTextEditWidth->setPlainText(foldWidth.isEmpty() ? QChar('0') : foldWidth);
+    }
+    else
+    {
+        uiTabFoldLine->plainTextEditWidth->setPlainText(QChar('0'));
+    }
+
+    MoveCursorToEnd(uiTabFoldLine->plainTextEditWidth);
+    ChangeColor(uiTabFoldLine->labelEditWidth, OkColor(this));
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void DialogSeamAllowance::InitFoldCenterFormula(const VPiece &piece)
+{
+    if (piece.IsManualFoldCenter())
+    {
+        uiTabFoldLine->groupBoxManualCenter->setChecked(true);
+
+        uiTabFoldLine->toolButtonExprCenter->setEnabled(uiTabFoldLine->groupBoxManualCenter->isChecked());
+        uiTabFoldLine->plainTextEditCenter->setEnabled(uiTabFoldLine->groupBoxManualCenter->isChecked());
+        uiTabFoldLine->pushButtonGrowCenter->setEnabled(uiTabFoldLine->groupBoxManualCenter->isChecked());
+        uiTabFoldLine->labelEditCenter->setEnabled(uiTabFoldLine->groupBoxManualCenter->isChecked());
+        uiTabFoldLine->label_5->setEnabled(uiTabFoldLine->groupBoxManualCenter->isChecked());
+
+        QString foldCenter = piece.GetFormulaFoldCenter();
+        foldCenter = VAbstractApplication::VApp()->TrVars()->FormulaToUser(
+            foldCenter, VAbstractApplication::VApp()->Settings()->GetOsSeparator());
+        if (foldCenter.length() > 80) // increase height if needed.
+        {
+            this->DeployPassmarkAngle();
+        }
+
+        uiTabFoldLine->plainTextEditCenter->setPlainText(foldCenter.isEmpty() ? QString::number(0.5) : foldCenter);
+    }
+    else
+    {
+        uiTabFoldLine->plainTextEditCenter->setPlainText(QString::number(0.5));
+    }
+
+    MoveCursorToEnd(uiTabFoldLine->plainTextEditCenter);
+    ChangeColor(uiTabFoldLine->labelEditCenter, OkColor(this));
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void DialogSeamAllowance::CheckState()
+{
+    CheckTabPathsState();
+    CheckTabPassmarksState();
+    CheckTabFoldLineState();
+
+    SCASSERT(bOk != nullptr);
+    bOk->setEnabled(IsValid());
+    // In case dialog hasn't apply button
+    if (bApply != nullptr && applyAllowed)
+    {
+        bApply->setEnabled(bOk->isEnabled());
+    }
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -653,6 +950,11 @@ void DialogSeamAllowance::closeEvent(QCloseEvent *event)
     uiTabGrainline->lineEditRotFormula->blockSignals(true);
     uiTabGrainline->lineEditLenFormula->blockSignals(true);
     uiTabPassmarks->plainTextEditPassmarkLength->blockSignals(true);
+    uiTabPassmarks->plainTextEditPassmarkWidth->blockSignals(true);
+    uiTabPassmarks->plainTextEditPassmarkAngle->blockSignals(true);
+    uiTabFoldLine->plainTextEditHeight->blockSignals(true);
+    uiTabFoldLine->plainTextEditWidth->blockSignals(true);
+    uiTabFoldLine->plainTextEditCenter->blockSignals(true);
     DialogTool::closeEvent(event);
 }
 
@@ -1060,6 +1362,7 @@ void DialogSeamAllowance::ShowPlaceLabelsContextMenu(const QPoint &pos)
         dialog->SetFormulaVisible(currentLabel.GetVisibilityTrigger());
         dialog->SetPieceId(toolId);
         dialog->SetCenterPoint(currentLabel.GetCenterPoint());
+        dialog->SetNotMirrored(currentLabel.IsNotMirrored());
         m_dialog = dialog;
         m_dialog->setModal(true);
         connect(m_dialog.data(), &DialogTool::DialogClosed, this, &DialogSeamAllowance::PlaceLabelDialogClosed);
@@ -1119,6 +1422,7 @@ void DialogSeamAllowance::ListChanged()
     }
     InitNodesList();
     InitPassmarksList();
+    InitMirrorLine();
     CustomSAChanged(uiTabPaths->listWidgetCustomSA->currentRow());
     SetMoveControls();
 }
@@ -1307,6 +1611,26 @@ void DialogSeamAllowance::CSAEndPointChanged(int index)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+void DialogSeamAllowance::MirrorLineStartPointChanged(int index)
+{
+    Q_UNUSED(index)
+
+    flagMirrorLineIsValid = MirrorLineIsValid();
+    uiTabPaths->checkBoxShowFullPiece->setEnabled(flagMirrorLineIsValid);
+    CheckState();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void DialogSeamAllowance::MirrorLineEndPointChanged(int index)
+{
+    Q_UNUSED(index)
+
+    flagMirrorLineIsValid = MirrorLineIsValid();
+    uiTabPaths->checkBoxShowFullPiece->setEnabled(flagMirrorLineIsValid);
+    CheckState();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 void DialogSeamAllowance::CSAIncludeTypeChanged(int index)
 {
     Q_UNUSED(index);
@@ -1486,6 +1810,7 @@ void DialogSeamAllowance::PlaceLabelDialogClosed(int result)
             newLabel.SetLabelType(dialogTool->GetLabelType());
             newLabel.SetCenterPoint(currentLabel.GetCenterPoint());
             newLabel.SetCorrectionAngle(currentLabel.GetCorrectionAngle());
+            newLabel.SetNotMirrored(dialogTool->IsNotMirrored());
 
             m_newPlaceLabels.insert(dialogTool->GetToolId(), newLabel);
 
@@ -1518,10 +1843,11 @@ void DialogSeamAllowance::FancyTabChanged(int index)
     m_tabPins->hide();
     m_tabPassmarks->hide();
     m_tabPlaceLabels->hide();
+    m_tabFoldLine->hide();
 
     QT_WARNING_PUSH
     QT_WARNING_DISABLE_GCC("-Wswitch-default")
-    switch (index)
+    switch (index) // NOLINT(hicpp-multiway-paths-covered)
     {
         case TabOrder::Paths:
             m_tabPaths->show();
@@ -1540,6 +1866,9 @@ void DialogSeamAllowance::FancyTabChanged(int index)
             break;
         case TabOrder::PlaceLabels:
             m_tabPlaceLabels->show();
+            break;
+        case TabOrder::FoldLine:
+            m_tabFoldLine->show();
             break;
         case TabOrder::Count:
             Q_UNREACHABLE();
@@ -2092,6 +2421,42 @@ void DialogSeamAllowance::EnabledManualPassmarkAngle()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+void DialogSeamAllowance::EnabledManualFoldHeight()
+{
+    uiTabFoldLine->toolButtonExprHeight->setEnabled(uiTabFoldLine->groupBoxManualHeight->isChecked());
+    uiTabFoldLine->plainTextEditHeight->setEnabled(uiTabFoldLine->groupBoxManualHeight->isChecked());
+    uiTabFoldLine->pushButtonGrowHeight->setEnabled(uiTabFoldLine->groupBoxManualHeight->isChecked());
+    uiTabFoldLine->labelEditHeight->setEnabled(uiTabFoldLine->groupBoxManualHeight->isChecked());
+    uiTabFoldLine->label_3->setEnabled(uiTabFoldLine->groupBoxManualHeight->isChecked());
+
+    EvalFoldHeight();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void DialogSeamAllowance::EnabledManualFoldWidth()
+{
+    uiTabFoldLine->toolButtonExprWidth->setEnabled(uiTabFoldLine->groupBoxManualWidth->isChecked());
+    uiTabFoldLine->plainTextEditWidth->setEnabled(uiTabFoldLine->groupBoxManualWidth->isChecked());
+    uiTabFoldLine->pushButtonGrowWidth->setEnabled(uiTabFoldLine->groupBoxManualWidth->isChecked());
+    uiTabFoldLine->labelEditWidth->setEnabled(uiTabFoldLine->groupBoxManualWidth->isChecked());
+    uiTabFoldLine->label_4->setEnabled(uiTabFoldLine->groupBoxManualWidth->isChecked());
+
+    EvalFoldWidth();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void DialogSeamAllowance::EnabledManualFoldCenter()
+{
+    uiTabFoldLine->toolButtonExprCenter->setEnabled(uiTabFoldLine->groupBoxManualCenter->isChecked());
+    uiTabFoldLine->plainTextEditCenter->setEnabled(uiTabFoldLine->groupBoxManualCenter->isChecked());
+    uiTabFoldLine->pushButtonGrowCenter->setEnabled(uiTabFoldLine->groupBoxManualCenter->isChecked());
+    uiTabFoldLine->labelEditCenter->setEnabled(uiTabFoldLine->groupBoxManualCenter->isChecked());
+    uiTabFoldLine->label_5->setEnabled(uiTabFoldLine->groupBoxManualCenter->isChecked());
+
+    EvalFoldCenter();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 void DialogSeamAllowance::EditGrainlineFormula()
 {
     QPlainTextEdit *pleFormula;
@@ -2504,6 +2869,71 @@ void DialogSeamAllowance::EvalPassmarkAngle()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+void DialogSeamAllowance::EvalFoldHeight()
+{
+    if (uiTabFoldLine->groupBoxManualHeight->isChecked())
+    {
+        FormulaData formulaData;
+        formulaData.formula = uiTabFoldLine->plainTextEditHeight->toPlainText();
+        formulaData.variables = data->DataVariables();
+        formulaData.labelEditFormula = uiTabFoldLine->labelEditHeight;
+        formulaData.labelResult = uiTabFoldLine->labelResultHeight;
+        formulaData.postfix = UnitsToStr(VAbstractValApplication::VApp()->patternUnits(), true);
+        formulaData.checkZero = false;
+        formulaData.checkLessThanZero = true;
+
+        Eval(formulaData, flagFormulaFoldHeight);
+    }
+    else
+    {
+        CheckState(); // Disable Ok and Apply buttons if something wrong.
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void DialogSeamAllowance::EvalFoldWidth()
+{
+    if (uiTabFoldLine->groupBoxManualWidth->isChecked())
+    {
+        FormulaData formulaData;
+        formulaData.formula = uiTabFoldLine->plainTextEditWidth->toPlainText();
+        formulaData.variables = data->DataVariables();
+        formulaData.labelEditFormula = uiTabFoldLine->labelEditWidth;
+        formulaData.labelResult = uiTabFoldLine->labelResultWidth;
+        formulaData.postfix = UnitsToStr(VAbstractValApplication::VApp()->patternUnits(), true);
+        formulaData.checkZero = false;
+        formulaData.checkLessThanZero = true;
+
+        Eval(formulaData, flagFormulaFoldWidth);
+    }
+    else
+    {
+        CheckState(); // Disable Ok and Apply buttons if something wrong.
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void DialogSeamAllowance::EvalFoldCenter()
+{
+    if (uiTabFoldLine->groupBoxManualCenter->isChecked())
+    {
+        FormulaData formulaData;
+        formulaData.formula = uiTabFoldLine->plainTextEditCenter->toPlainText();
+        formulaData.variables = data->DataVariables();
+        formulaData.labelEditFormula = uiTabFoldLine->labelEditCenter;
+        formulaData.labelResult = uiTabFoldLine->labelResultCenter;
+        formulaData.checkZero = false;
+        formulaData.checkLessThanZero = true;
+
+        Eval(formulaData, flagFormulaFoldCenter);
+    }
+    else
+    {
+        CheckState(); // Disable Ok and Apply buttons if something wrong.
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 void DialogSeamAllowance::FXWidth()
 {
     QScopedPointer<DialogEditWrongFormula> dialog(new DialogEditWrongFormula(data, toolId, this));
@@ -2588,6 +3018,48 @@ void DialogSeamAllowance::FXPassmarkAngle()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+void DialogSeamAllowance::FXFoldHeight()
+{
+    QScopedPointer<DialogEditWrongFormula> const dialog(new DialogEditWrongFormula(data, toolId, this));
+    dialog->setWindowTitle(tr("Edit fold line height"));
+    dialog->SetFormula(GetFormulaFromUser(uiTabFoldLine->plainTextEditHeight));
+    dialog->setCheckLessThanZero(true);
+    dialog->setCheckZero(true);
+    dialog->setPostfix(UnitsToStr(VAbstractValApplication::VApp()->patternUnits(), true));
+    if (dialog->exec() == QDialog::Accepted)
+    {
+        SetFormulaFoldHeight(dialog->GetFormula());
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void DialogSeamAllowance::FXFoldWidth()
+{
+    QScopedPointer<DialogEditWrongFormula> const dialog(new DialogEditWrongFormula(data, toolId, this));
+    dialog->setWindowTitle(tr("Edit fold line width"));
+    dialog->SetFormula(GetFormulaFromUser(uiTabFoldLine->plainTextEditWidth));
+    dialog->setCheckLessThanZero(true);
+    dialog->setCheckZero(true);
+    dialog->setPostfix(UnitsToStr(VAbstractValApplication::VApp()->patternUnits(), true));
+    if (dialog->exec() == QDialog::Accepted)
+    {
+        SetFormulaFoldWidth(dialog->GetFormula());
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void DialogSeamAllowance::FXFoldCenter()
+{
+    QScopedPointer<DialogEditWrongFormula> const dialog(new DialogEditWrongFormula(data, toolId, this));
+    dialog->setWindowTitle(tr("Edit fold line center position"));
+    dialog->SetFormula(GetFormulaFromUser(uiTabFoldLine->plainTextEditCenter));
+    if (dialog->exec() == QDialog::Accepted)
+    {
+        SetFormulaFoldCenter(dialog->GetFormula());
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 void DialogSeamAllowance::DeployWidthFormulaTextEdit()
 {
     DeployFormula(this, uiTabPaths->plainTextEditFormulaWidth, uiTabPaths->pushButtonGrowWidth, m_formulaBaseWidth);
@@ -2626,6 +3098,26 @@ void DialogSeamAllowance::DeployPassmarkAngle()
 {
     DeployFormula(this, uiTabPassmarks->plainTextEditPassmarkAngle, uiTabPassmarks->pushButtonGrowPassmarkAngle,
                   m_formulaBasePassmarkAngle);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void DialogSeamAllowance::DeployFoldHeight()
+{
+    DeployFormula(this, uiTabFoldLine->plainTextEditHeight, uiTabFoldLine->pushButtonGrowHeight,
+                  m_formulaBaseFoldHeight);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void DialogSeamAllowance::DeployFoldWidth()
+{
+    DeployFormula(this, uiTabFoldLine->plainTextEditWidth, uiTabFoldLine->pushButtonGrowWidth, m_formulaBaseFoldWidth);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void DialogSeamAllowance::DeployFoldCenter()
+{
+    DeployFormula(this, uiTabFoldLine->plainTextEditCenter, uiTabFoldLine->pushButtonGrowCenter,
+                  m_formulaBaseFoldCenter);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -2772,6 +3264,40 @@ auto DialogSeamAllowance::CreatePiece() const -> VPiece
     piece.GetPieceLabelData().SetRotation(GetFormulaFromUser(uiTabLabels->lineEditDLAngleFormula));
     piece.GetPieceLabelData().SetVisible(uiTabLabels->groupBoxDetailLabel->isChecked());
     piece.GetPieceLabelData().SetFontSize(uiTabLabels->comboBoxPieceLabelSize->currentData().toInt());
+    piece.SetMirrorLineStartPoint(GetMirrorLineStartPoint());
+    piece.SetMirrorLineEndPoint(GetMirrorLineEndPoint());
+    piece.SetShowFullPiece(
+        !piece.SeamAllowanceMirrorLine(data).isNull() ? uiTabPaths->checkBoxShowFullPiece->isChecked() : true);
+    piece.SetManualFoldHeight(uiTabFoldLine->groupBoxManualHeight->isChecked());
+    piece.SetManualFoldWidth(uiTabFoldLine->groupBoxManualWidth->isChecked());
+    piece.SetManualFoldCenter(uiTabFoldLine->groupBoxManualCenter->isChecked());
+    piece.SetFormulaFoldHeight(uiTabFoldLine->groupBoxManualHeight->isChecked()
+                                   ? GetFormulaFromUser(uiTabFoldLine->plainTextEditHeight)
+                                   : QString());
+    piece.SetFormulaFoldWidth(uiTabFoldLine->groupBoxManualWidth->isChecked()
+                                  ? GetFormulaFromUser(uiTabFoldLine->plainTextEditWidth)
+                                  : QString());
+    piece.SetFormulaFoldCenter(uiTabFoldLine->groupBoxManualCenter->isChecked()
+                                   ? GetFormulaFromUser(uiTabFoldLine->plainTextEditCenter)
+                                   : QString());
+    piece.SetFoldLineType(static_cast<FoldLineType>(uiTabFoldLine->comboBoxType->currentData().toUInt()));
+    piece.SetFoldLineSvgFontSize(uiTabFoldLine->comboBoxLabelFontSize->currentData().toUInt());
+    piece.SetFoldLineLabelFontItalic(uiTabFoldLine->toolButtonItalic->isChecked());
+    piece.SetFoldLineLabelFontBold(uiTabFoldLine->toolButtonBold->isChecked());
+    piece.SetFoldLineLabel(uiTabFoldLine->lineEditLabel->text());
+
+    if (uiTabFoldLine->toolButtonTextLeft->isChecked())
+    {
+        piece.SetFoldLineLabelAlignment(Qt::AlignLeft);
+    }
+    else if (uiTabFoldLine->toolButtonTextCenter->isChecked())
+    {
+        piece.SetFoldLineLabelAlignment(Qt::AlignHCenter);
+    }
+    else if (uiTabFoldLine->toolButtonTextRight->isChecked())
+    {
+        piece.SetFoldLineLabelAlignment(Qt::AlignRight);
+    }
 
     if (not flagDPin)
     {
@@ -2909,6 +3435,79 @@ auto DialogSeamAllowance::MainPathIsValid() const -> bool
     {
         uiTabPaths->helpLabel->setText(
             QStringLiteral("%1%2 %3").arg(DialogWarningIcon(), tr("Invalid segment!"), error));
+        return false;
+    }
+
+    return true;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+auto DialogSeamAllowance::MirrorLineIsValid() const -> bool
+{
+    ChangeColor(uiTabPaths->labelMLStartPoint, OkColor(this));
+    ChangeColor(uiTabPaths->labelMLEndPoint, OkColor(this));
+
+    const quint32 startPoint = getCurrentObjectId(uiTabPaths->comboBoxMLStartPoint);
+    const quint32 endPoint = getCurrentObjectId(uiTabPaths->comboBoxMLEndPoint);
+
+    if (startPoint == NULL_ID && endPoint == NULL_ID)
+    {
+        return true;
+    }
+
+    if (startPoint == NULL_ID && endPoint != NULL_ID)
+    {
+        ChangeColor(uiTabPaths->labelMLStartPoint, errorColor);
+        uiTabPaths->helpLabel->setText(DialogWarningIcon() + tr("Invalid mirror line start point!"));
+        return false;
+    }
+
+    if (startPoint != NULL_ID && endPoint == NULL_ID)
+    {
+        ChangeColor(uiTabPaths->labelMLEndPoint, errorColor);
+        uiTabPaths->helpLabel->setText(DialogWarningIcon() + tr("Invalid mirror line end point!"));
+        return false;
+    }
+
+    if (startPoint == endPoint)
+    {
+        ChangeColor(uiTabPaths->labelMLStartPoint, errorColor);
+        ChangeColor(uiTabPaths->labelMLEndPoint, errorColor);
+        uiTabPaths->helpLabel->setText(DialogWarningIcon() + tr("Start and end mirror line points must be unique!"));
+        return false;
+    }
+
+    QSet<quint32> uniquePoints;
+    for (int i = 0; i < uiTabPaths->listWidgetMainPath->count(); ++i)
+    {
+        const QListWidgetItem *rowItem = uiTabPaths->listWidgetMainPath->item(i);
+        SCASSERT(rowItem != nullptr);
+        const auto rowNode = qvariant_cast<VPieceNode>(rowItem->data(Qt::UserRole));
+        if (rowNode.GetTypeTool() == Tool::NodePoint && not rowNode.IsExcluded())
+        {
+            uniquePoints.insert(rowNode.GetId());
+        }
+    }
+
+    if (!uniquePoints.contains(startPoint))
+    {
+        ChangeColor(uiTabPaths->labelMLStartPoint, errorColor);
+        uiTabPaths->helpLabel->setText(DialogWarningIcon() + tr("Invalid mirror line start point!"));
+        return false;
+    }
+
+    if (!uniquePoints.contains(endPoint))
+    {
+        ChangeColor(uiTabPaths->labelMLEndPoint, errorColor);
+        uiTabPaths->helpLabel->setText(DialogWarningIcon() + tr("Invalid mirror line end point!"));
+        return false;
+    }
+
+    if (!MirrorLinePointsNeighbors(uiTabPaths->listWidgetMainPath, startPoint, endPoint))
+    {
+        ChangeColor(uiTabPaths->labelMLStartPoint, errorColor);
+        ChangeColor(uiTabPaths->labelMLEndPoint, errorColor);
+        uiTabPaths->helpLabel->setText(DialogWarningIcon() + tr("Mirror points must be neighbors!"));
         return false;
     }
 
@@ -3136,6 +3735,7 @@ void DialogSeamAllowance::InitFancyTabBar()
     m_ftb->InsertTab(TabOrder::Grainline, QIcon("://icon/32x32/grainline.png"), tr("Grainline"));
     m_ftb->InsertTab(TabOrder::Passmarks, QIcon("://icon/32x32/passmark.png"), tr("Passmarks"));
     m_ftb->InsertTab(TabOrder::PlaceLabels, QIcon("://icon/32x32/button.png"), tr("Place label"));
+    m_ftb->InsertTab(TabOrder::FoldLine, QIcon("://icon/32x32/fold.png"), tr("Fold line"));
 
     ui->horizontalLayout->addWidget(m_ftb, 0, Qt::AlignLeft);
 
@@ -3164,6 +3764,10 @@ void DialogSeamAllowance::InitFancyTabBar()
     m_tabPlaceLabels->hide();
     uiTabPlaceLabels->setupUi(m_tabPlaceLabels);
     ui->horizontalLayout->addWidget(m_tabPlaceLabels, 1);
+
+    m_tabFoldLine->hide();
+    uiTabFoldLine->setupUi(m_tabFoldLine);
+    ui->horizontalLayout->addWidget(m_tabFoldLine, 1);
 
     connect(m_ftb, &FancyTabBar::CurrentChanged, this, &DialogSeamAllowance::FancyTabChanged);
     connect(uiTabLabels->tabWidget, &QTabWidget::currentChanged, this, &DialogSeamAllowance::TabChanged);
@@ -3209,6 +3813,11 @@ void DialogSeamAllowance::InitMainPathTab()
                 MoveListRowBottom(uiTabPaths->listWidgetMainPath);
                 ValidObjects(MainPathIsValid());
             });
+
+    connect(uiTabPaths->comboBoxMLStartPoint, QOverload<int>::of(&QComboBox::currentIndexChanged), this,
+            &DialogSeamAllowance::MirrorLineStartPointChanged);
+    connect(uiTabPaths->comboBoxMLEndPoint, QOverload<int>::of(&QComboBox::currentIndexChanged), this,
+            &DialogSeamAllowance::MirrorLineEndPointChanged);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -3384,7 +3993,7 @@ void DialogSeamAllowance::InitPinPoint(QComboBox *box)
     }
 
     box->clear();
-    box->addItem('<' + tr("no pin") + '>', NULL_ID);
+    box->addItem('<'_L1 + tr("no pin") + '>'_L1, NULL_ID);
 
     const QVector<quint32> pins = GetListInternals<quint32>(uiTabPins->listWidgetPins);
 
@@ -3398,6 +4007,43 @@ void DialogSeamAllowance::InitPinPoint(QComboBox *box)
     {
         box->setCurrentIndex(index);
     }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void DialogSeamAllowance::InitMirrorLine()
+{
+    const QVariant idStartPoint = uiTabPaths->comboBoxMLStartPoint->currentData();
+    const QVariant idEndPoint = uiTabPaths->comboBoxMLEndPoint->currentData();
+
+    InitMirrorLinePoint(uiTabPaths->comboBoxMLStartPoint);
+    InitMirrorLinePoint(uiTabPaths->comboBoxMLEndPoint);
+
+    uiTabPaths->comboBoxMLStartPoint->setCurrentIndex(uiTabPaths->comboBoxMLStartPoint->findData(idStartPoint));
+    uiTabPaths->comboBoxMLEndPoint->setCurrentIndex(uiTabPaths->comboBoxMLEndPoint->findData(idEndPoint));
+
+    flagMirrorLineIsValid = MirrorLineIsValid();
+    uiTabPaths->checkBoxShowFullPiece->setEnabled(flagMirrorLineIsValid);
+    CheckState();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void DialogSeamAllowance::InitMirrorLinePoint(QComboBox *box)
+{
+    SCASSERT(box != nullptr);
+    box->blockSignals(true);
+    box->clear();
+
+    const QVector<VPieceNode> nodes = GetListInternals<VPieceNode>(uiTabPaths->listWidgetMainPath);
+
+    for (const auto &node : nodes)
+    {
+        if (node.GetTypeTool() == Tool::NodePoint && not node.IsExcluded())
+        {
+            const QString name = GetNodeName(data, node);
+            box->addItem(name, node.GetId());
+        }
+    }
+    box->blockSignals(false);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -3706,6 +4352,53 @@ void DialogSeamAllowance::InitPlaceLabelsTab()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+void DialogSeamAllowance::InitFoldLineTab()
+{
+    InitFoldLineType();
+
+    InitFoldLabelFontSizes();
+
+    // Height formula
+    this->m_formulaBaseFoldHeight = uiTabFoldLine->plainTextEditHeight->height();
+    uiTabFoldLine->plainTextEditHeight->installEventFilter(this);
+    m_timerFoldHeight->setSingleShot(true);
+
+    connect(m_timerFoldHeight, &QTimer::timeout, this, &DialogSeamAllowance::EvalFoldHeight);
+    connect(uiTabFoldLine->groupBoxManualHeight, &QGroupBox::toggled, this,
+            &DialogSeamAllowance::EnabledManualFoldHeight);
+    connect(uiTabFoldLine->toolButtonExprHeight, &QPushButton::clicked, this, &DialogSeamAllowance::FXFoldHeight);
+    connect(uiTabFoldLine->plainTextEditHeight, &QPlainTextEdit::textChanged, this,
+            [this]() { m_timerFoldHeight->start(formulaTimerTimeout); });
+    connect(uiTabFoldLine->pushButtonGrowHeight, &QPushButton::clicked, this, &DialogSeamAllowance::DeployFoldHeight);
+
+    // Width formula
+    this->m_formulaBaseFoldWidth = uiTabFoldLine->plainTextEditWidth->height();
+    uiTabFoldLine->plainTextEditWidth->installEventFilter(this);
+    m_timerFoldWidth->setSingleShot(true);
+
+    connect(m_timerFoldWidth, &QTimer::timeout, this, &DialogSeamAllowance::EvalFoldWidth);
+    connect(uiTabFoldLine->groupBoxManualWidth, &QGroupBox::toggled, this,
+            &DialogSeamAllowance::EnabledManualFoldWidth);
+    connect(uiTabFoldLine->toolButtonExprWidth, &QPushButton::clicked, this, &DialogSeamAllowance::FXFoldWidth);
+    connect(uiTabFoldLine->plainTextEditWidth, &QPlainTextEdit::textChanged, this,
+            [this]() { m_timerFoldWidth->start(formulaTimerTimeout); });
+    connect(uiTabFoldLine->pushButtonGrowWidth, &QPushButton::clicked, this, &DialogSeamAllowance::DeployFoldWidth);
+
+    // Center formula
+    this->m_formulaBaseFoldCenter = uiTabFoldLine->plainTextEditCenter->height();
+    uiTabFoldLine->plainTextEditCenter->installEventFilter(this);
+    m_timerFoldCenter->setSingleShot(true);
+
+    connect(m_timerFoldCenter, &QTimer::timeout, this, &DialogSeamAllowance::EvalFoldCenter);
+    connect(uiTabFoldLine->groupBoxManualCenter, &QGroupBox::toggled, this,
+            &DialogSeamAllowance::EnabledManualFoldCenter);
+    connect(uiTabFoldLine->toolButtonExprCenter, &QPushButton::clicked, this, &DialogSeamAllowance::FXFoldCenter);
+    connect(uiTabFoldLine->plainTextEditCenter, &QPlainTextEdit::textChanged, this,
+            [this]() { m_timerFoldCenter->start(formulaTimerTimeout); });
+    connect(uiTabFoldLine->pushButtonGrowCenter, &QPushButton::clicked, this, &DialogSeamAllowance::DeployFoldCenter);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 void DialogSeamAllowance::InitAllPinComboboxes()
 {
     InitPinPoint(uiTabGrainline->comboBoxGrainlineCenterPin);
@@ -3719,6 +4412,46 @@ void DialogSeamAllowance::InitAllPinComboboxes()
     InitPinPoint(uiTabLabels->comboBoxPLCenterPin);
     InitPinPoint(uiTabLabels->comboBoxPLTopLeftPin);
     InitPinPoint(uiTabLabels->comboBoxPLBottomRightPin);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void DialogSeamAllowance::InitFoldLineType()
+{
+    uiTabFoldLine->comboBoxType->clear();
+
+    uiTabFoldLine->comboBoxType->addItem(tr("Two arrows (text above)"),
+                                         static_cast<unsigned int>(FoldLineType::TwoArrowsTextAbove));
+    uiTabFoldLine->comboBoxType->addItem(tr("Two arrows (text under)"),
+                                         static_cast<unsigned int>(FoldLineType::TwoArrowsTextUnder));
+    uiTabFoldLine->comboBoxType->addItem(tr("Two arrows"), static_cast<unsigned int>(FoldLineType::TwoArrows));
+    uiTabFoldLine->comboBoxType->addItem(tr("Text"), static_cast<unsigned int>(FoldLineType::Text));
+    uiTabFoldLine->comboBoxType->addItem(tr("Three dots"), static_cast<unsigned int>(FoldLineType::ThreeDots));
+    uiTabFoldLine->comboBoxType->addItem(tr("Three X"), static_cast<unsigned int>(FoldLineType::ThreeX));
+    uiTabFoldLine->comboBoxType->addItem(tr("None"), static_cast<unsigned int>(FoldLineType::None));
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void DialogSeamAllowance::InitFoldLabelFontSizes()
+{
+    uiTabFoldLine->comboBoxLabelFontSize->clear();
+
+    // Get the available font sizes
+    QList<int> const sizes = QFontDatabase::standardSizes();
+    for (auto size : sizes)
+    {
+        if (size >= VCommonSettings::MinPieceLabelFontPointSize())
+        {
+            uiTabFoldLine->comboBoxLabelFontSize->addItem(QString::number(size), size);
+        }
+    }
+
+    {
+        const qint32 indexSize = uiTabFoldLine->comboBoxLabelFontSize->findData(defFoldLineFontSize);
+        if (indexSize != -1)
+        {
+            uiTabFoldLine->comboBoxLabelFontSize->setCurrentIndex(indexSize);
+        }
+    }
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -3817,6 +4550,51 @@ void DialogSeamAllowance::SetFormulaPassmarkAngle(const QString &formula)
     uiTabPassmarks->plainTextEditPassmarkAngle->setPlainText(width);
 
     MoveCursorToEnd(uiTabPassmarks->plainTextEditPassmarkAngle);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void DialogSeamAllowance::SetFormulaFoldHeight(const QString &formula)
+{
+    const QString width = VAbstractApplication::VApp()->TrVars()->FormulaToUser(
+        formula, VAbstractApplication::VApp()->Settings()->GetOsSeparator());
+    // increase height if needed.
+    if (width.length() > 80)
+    {
+        this->DeployFoldHeight();
+    }
+    uiTabFoldLine->plainTextEditHeight->setPlainText(width);
+
+    MoveCursorToEnd(uiTabFoldLine->plainTextEditHeight);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void DialogSeamAllowance::SetFormulaFoldWidth(const QString &formula)
+{
+    const QString width = VAbstractApplication::VApp()->TrVars()->FormulaToUser(
+        formula, VAbstractApplication::VApp()->Settings()->GetOsSeparator());
+    // increase height if needed.
+    if (width.length() > 80)
+    {
+        this->DeployFoldWidth();
+    }
+    uiTabFoldLine->plainTextEditWidth->setPlainText(width);
+
+    MoveCursorToEnd(uiTabFoldLine->plainTextEditWidth);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void DialogSeamAllowance::SetFormulaFoldCenter(const QString &formula)
+{
+    const QString width = VAbstractApplication::VApp()->TrVars()->FormulaToUser(
+        formula, VAbstractApplication::VApp()->Settings()->GetOsSeparator());
+    // increase height if needed.
+    if (width.length() > 80)
+    {
+        this->DeployFoldCenter();
+    }
+    uiTabFoldLine->plainTextEditCenter->setPlainText(width);
+
+    MoveCursorToEnd(uiTabFoldLine->plainTextEditCenter);
 }
 
 //---------------------------------------------------------------------------------------------------------------------

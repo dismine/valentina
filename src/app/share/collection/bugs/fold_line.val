@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<pattern labelPrefix="uk">
+    <!--Pattern created with Valentina v0.7.52.902 (https://smart-pattern.com.ua/).-->
+    <version>0.9.4</version>
+    <unit>cm</unit>
+    <description/>
+    <notes/>
+    <measurements/>
+    <increments/>
+    <previewCalculations/>
+    <draw name="Pattern piece 1">
+        <calculation>
+            <point id="1" mx="0.264583" my="0.396875" name="А" showLabel="true" type="single" x="0.79375" y="1.05833"/>
+            <point angle="270" basePoint="1" id="2" length="15" lineColor="black" mx="0.264583" my="0.396875" name="А1" showLabel="true" type="endLine" typeLine="hair"/>
+            <point angle="0" basePoint="1" id="3" length="20" lineColor="black" mx="0.264583" my="0.396875" name="А2" showLabel="true" type="endLine" typeLine="hair"/>
+            <point angle="270" basePoint="3" id="4" length="10" lineColor="black" mx="0.264583" my="0.396875" name="А3" showLabel="true" type="endLine" typeLine="hair"/>
+            <line firstPoint="2" id="5" lineColor="black" secondPoint="4" typeLine="hair"/>
+        </calculation>
+        <modeling>
+            <point id="10" idObject="1" inUse="false" mx="0.264583" my="0.396875" showLabel="true" type="modeling"/>
+            <point id="11" idObject="3" inUse="false" mx="0.264583" my="0.396875" showLabel="true" type="modeling"/>
+            <point id="12" idObject="4" inUse="false" mx="0.264583" my="0.396875" showLabel="true" type="modeling"/>
+            <point id="13" idObject="2" inUse="false" mx="0.264583" my="0.396875" showLabel="true" type="modeling"/>
+            <point id="15" idObject="1" inUse="false" mx="0.264583" my="0.396875" showLabel="true" type="modeling"/>
+            <point id="16" idObject="3" inUse="false" mx="0.264583" my="0.396875" showLabel="true" type="modeling"/>
+            <point id="17" idObject="4" inUse="false" mx="0.264583" my="0.396875" showLabel="true" type="modeling"/>
+            <point id="18" idObject="2" inUse="false" mx="0.264583" my="0.396875" showLabel="true" type="modeling"/>
+            <point id="20" idObject="1" inUse="true" mx="0.264583" my="0.396875" showLabel="true" type="modeling"/>
+            <point id="21" idObject="3" inUse="true" mx="0.264583" my="0.396875" showLabel="true" type="modeling"/>
+            <point id="22" idObject="4" inUse="true" mx="0.264583" my="0.396875" showLabel="true" type="modeling"/>
+            <point id="23" idObject="2" inUse="true" mx="0.264583" my="0.396875" showLabel="true" type="modeling"/>
+            <point id="25" idObject="1" inUse="true" mx="0.264583" my="0.396875" showLabel="true" type="modeling"/>
+            <point id="26" idObject="3" inUse="true" mx="0.264583" my="0.396875" showLabel="true" type="modeling"/>
+            <point id="27" idObject="4" inUse="true" mx="0.264583" my="0.396875" showLabel="true" type="modeling"/>
+            <point id="28" idObject="2" inUse="true" mx="0.264583" my="0.396875" showLabel="true" type="modeling"/>
+        </modeling>
+        <details>
+            <detail followGrainline="false" forbidFlipping="false" forceFlipping="false" hideMainPath="false" id="14" mx="0" my="0" name="Case 1" seamAllowance="true" sewLineOnDrawing="false" uuid="{410acde1-f2f0-4603-89e9-f2569843673b}" version="2" width="1">
+                <data annotation="" foldPosition="" height="10" letter="" mx="0" my="0" onFold="false" orientation="" quantity="1" rotation="0" rotationWay="" tilt="" visible="false" width="10"/>
+                <patternInfo height="10" mx="0" my="0" rotation="0" visible="false" width="10"/>
+                <grainline arrows="0" length="10" mx="0" my="0" rotation="90" visible="false"/>
+                <nodes>
+                    <node idObject="10" type="NodePoint"/>
+                    <node idObject="11" type="NodePoint"/>
+                    <node idObject="12" type="NodePoint"/>
+                    <node idObject="13" type="NodePoint"/>
+                </nodes>
+                <mirrorLine fontSize="6" p1="12" p2="13" type="none"/>
+            </detail>
+            <detail followGrainline="false" forbidFlipping="false" forceFlipping="false" hideMainPath="false" id="19" mx="31.0026" my="-0.303098" name="Case 2" seamAllowance="true" sewLineOnDrawing="false" uuid="{5ce7b61f-1d49-4ef3-8922-521b9aac6b49}" version="2" width="1">
+                <data annotation="" foldPosition="" height="10" letter="" mx="0" my="0" onFold="false" orientation="" quantity="1" rotation="0" rotationWay="" tilt="" visible="false" width="10"/>
+                <patternInfo height="10" mx="0" my="0" rotation="0" visible="false" width="10"/>
+                <grainline arrows="0" length="10" mx="0" my="0" rotation="90" visible="false"/>
+                <nodes>
+                    <node idObject="16" type="NodePoint"/>
+                    <node idObject="17" type="NodePoint"/>
+                    <node idObject="18" type="NodePoint"/>
+                    <node idObject="15" type="NodePoint"/>
+                </nodes>
+                <mirrorLine fontSize="6" p1="17" p2="18" type="none"/>
+            </detail>
+            <detail followGrainline="false" forbidFlipping="false" forceFlipping="false" hideMainPath="false" id="24" mx="66.2511" my="-0.29709" name="Case 3" seamAllowance="true" sewLineOnDrawing="false" uuid="{cce244ba-8361-44ef-841a-dea47de205c7}" version="2" width="1">
+                <data annotation="" foldPosition="" height="10" letter="" mx="0" my="0" onFold="false" orientation="" quantity="1" rotation="0" rotationWay="" tilt="" visible="false" width="10"/>
+                <patternInfo height="10" mx="0" my="0" rotation="0" visible="false" width="10"/>
+                <grainline arrows="0" length="10" mx="0" my="0" rotation="90" visible="false"/>
+                <nodes>
+                    <node idObject="22" type="NodePoint"/>
+                    <node idObject="23" type="NodePoint"/>
+                    <node idObject="20" type="NodePoint"/>
+                    <node idObject="21" type="NodePoint"/>
+                </nodes>
+                <mirrorLine fontSize="6" p1="22" p2="23" type="none"/>
+            </detail>
+            <detail followGrainline="false" forbidFlipping="false" forceFlipping="false" hideMainPath="false" id="29" mx="101.666" my="0" name="Case 4" seamAllowance="true" sewLineOnDrawing="false" uuid="{c73f153b-9a1a-4a09-9117-b4b8ab4808a7}" version="2" width="1">
+                <data annotation="" foldPosition="" height="10" letter="" mx="0" my="0" onFold="false" orientation="" quantity="1" rotation="0" rotationWay="" tilt="" visible="false" width="10"/>
+                <patternInfo height="10" mx="0" my="0" rotation="0" visible="false" width="10"/>
+                <grainline arrows="0" length="10" mx="0" my="0" rotation="90" visible="false"/>
+                <nodes>
+                    <node idObject="28" type="NodePoint"/>
+                    <node idObject="25" type="NodePoint"/>
+                    <node idObject="26" type="NodePoint"/>
+                    <node idObject="27" type="NodePoint"/>
+                </nodes>
+                <mirrorLine fontSize="6" p1="27" p2="28" type="none"/>
+            </detail>
+        </details>
+        <groups/>
+    </draw>
+</pattern>

@@ -258,7 +258,7 @@ void AbstractTest::ComparePaths(const QVector<QPointF> &actual, const QVector<QP
     QVERIFY2(expected.size() >= 2, "Not enough points");
 
     const qreal accuracy = accuracyPointOnLine * 4.;
-    QVector<QPointF> actualFilled = FillPath(actual, accuracy);
+    QVector<QPointF> const actualFilled = FillPath(actual, accuracy);
 
     bool onLine = false;
     QSet<int> usedEdges;

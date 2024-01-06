@@ -50,7 +50,8 @@ VLayoutPlaceLabel::VLayoutPlaceLabel(const VPlaceLabelItem &item)
   : m_center(item.toQPointF()),
     m_type(item.GetLabelType()),
     m_rotationMatrix(item.RotationMatrix()),
-    m_box(item.Box())
+    m_box(item.Box()),
+    m_notMirrored(item.IsNotMirrored())
 {
 }
 
@@ -66,7 +67,8 @@ auto operator<<(QDataStream &dataStream, const VLayoutPlaceLabel &data) -> QData
     dataStream << data.m_rotationMatrix;
     dataStream << data.m_box;
 
-    // Added in classVersion = 2
+    // Added in classVersion = 3
+    dataStream << data.m_notMirrored;
 
     return dataStream;
 }
@@ -110,10 +112,10 @@ auto operator>>(QDataStream &dataStream, VLayoutPlaceLabel &data) -> QDataStream
     dataStream >> data.m_rotationMatrix;
     dataStream >> data.m_box;
 
-    //    if (actualClassVersion >= 2)
-    //    {
-
-    //    }
+    if (actualClassVersion >= 3)
+    {
+        dataStream >> data.m_notMirrored;
+    }
 
     return dataStream;
 }

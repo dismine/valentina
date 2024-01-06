@@ -67,6 +67,7 @@ const QString TagLine = QStringLiteral("line");                     // NOLINT(ce
 const QString TagScale = QStringLiteral("scale");                   // NOLINT(cert-err58-cpp)
 const QString TagWatermark = QStringLiteral("watermark");           // NOLINT(cert-err58-cpp)
 const QString TagPoint = QStringLiteral("point");                   // NOLINT(cert-err58-cpp)
+const QString TagMirrorLine = QStringLiteral("mirrorLine");         // NOLINT(cert-err58-cpp)
 
 const QString AttrWarningSuperposition = QStringLiteral("warningSuperposition");               // NOLINT(cert-err58-cpp)
 const QString AttrWarningOutOfBound = QStringLiteral("warningOutOfBound");                     // NOLINT(cert-err58-cpp)
@@ -123,6 +124,14 @@ const QString AttrY = QStringLiteral("y");                                      
 const QString AttrTurnPoint = QStringLiteral("turnPoint");                                     // NOLINT(cert-err58-cpp)
 const QString AttrCurvePoint = QStringLiteral("curvePoint");                                   // NOLINT(cert-err58-cpp)
 const QString AttrClockwiseOpening = QStringLiteral("clockwiseOpening");                       // NOLINT(cert-err58-cpp)
+const QString AttrShowFullPiece = QStringLiteral("showFullPiece");                             // NOLINT(cert-err58-cpp)
+const QString AttrNotMirrored = QStringLiteral("notMirrored");                                 // NOLINT(cert-err58-cpp)
+const QString AttrCutOnFold = QStringLiteral("cutOnFold");                                     // NOLINT(cert-err58-cpp)
+const QString AttrFoldLineType = QStringLiteral("type");                                       // NOLINT(cert-err58-cpp)
+const QString AttrFoldLineHeight = QStringLiteral("height");                                   // NOLINT(cert-err58-cpp)
+const QString AttrFoldLineWidth = QStringLiteral("width");                                     // NOLINT(cert-err58-cpp)
+const QString AttrFoldLineCenter = QStringLiteral("center");                                   // NOLINT(cert-err58-cpp)
+const QString AttrFoldLineLabel = QStringLiteral("label");                                     // NOLINT(cert-err58-cpp)
 
 const QString oneWayUpStr = QStringLiteral("oneWayUp");                             // NOLINT(cert-err58-cpp)
 const QString oneWayDownStr = QStringLiteral("oneWayDown");                         // NOLINT(cert-err58-cpp)

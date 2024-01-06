@@ -4274,7 +4274,12 @@ void MainWindow::on_actionCreateManualLayout_triggered()
         DialogLayoutScale layoutScale(false, this);
         layoutScale.SetXScale(1);
         layoutScale.SetYScale(1);
-        layoutScale.exec();
+        int const res = layoutScale.exec();
+
+        if (res == QDialog::Rejected)
+        {
+            return;
+        }
 
         VLayoutExporter exporter;
         exporter.SetFileName(rldFile.fileName());

@@ -155,6 +155,17 @@ const QString VAbstractPattern::AttrImageId = QStringLiteral("imageId");
 const QString VAbstractPattern::AttrDimensionA = QStringLiteral("dimensionA");
 const QString VAbstractPattern::AttrDimensionB = QStringLiteral("dimensionB");
 const QString VAbstractPattern::AttrDimensionC = QStringLiteral("dimensionC");
+const QString VAbstractPattern::AttrMirrorLineP1 = QStringLiteral("p1");
+const QString VAbstractPattern::AttrMirrorLineP2 = QStringLiteral("p2");
+const QString VAbstractPattern::AttrFoldLineHeightFormula = QStringLiteral("height");
+const QString VAbstractPattern::AttrFoldLineWidthFormula = QStringLiteral("width");
+const QString VAbstractPattern::AttrFoldLineCenterFormula = QStringLiteral("center");
+const QString VAbstractPattern::AttrFoldLineManualHeight = QStringLiteral("manualHeight");
+const QString VAbstractPattern::AttrFoldLineManualWidth = QStringLiteral("manualWidth");
+const QString VAbstractPattern::AttrFoldLineManualCenter = QStringLiteral("manualCenter");
+const QString VAbstractPattern::AttrFoldLineType = QStringLiteral("type");
+const QString VAbstractPattern::AttrFoldLineFontSize = QStringLiteral("fontSize");
+const QString VAbstractPattern::AttrFoldLineLabel = QStringLiteral("label");
 
 const QString VAbstractPattern::AttrContentType = QStringLiteral("contentType");
 
@@ -764,8 +775,9 @@ auto VAbstractPattern::ParsePieceInternalPaths(const QDomElement &domElement) ->
 //---------------------------------------------------------------------------------------------------------------------
 auto VAbstractPattern::ParsePiecePointRecords(const QDomElement &domElement) -> QVector<quint32>
 {
-    QVector<quint32> records;
     const QDomNodeList nodeList = domElement.childNodes();
+    QVector<quint32> records;
+    records.reserve(nodeList.size());
     for (qint32 i = 0; i < nodeList.size(); ++i)
     {
         const QDomElement element = nodeList.at(i).toElement();

@@ -63,6 +63,8 @@
 #include "dialogs/vpdialogabout.h"
 #include "layout/vppiece.h"
 #include "layout/vpsheet.h"
+#include "scene/scenedef.h"
+#include "scene/vpgraphicssheet.h"
 #include "ui_vpmainwindow.h"
 #include "undocommands/vpundoaddsheet.h"
 #include "undocommands/vpundopiecemove.h"
@@ -249,7 +251,7 @@ void SetPrinterTiledPageSettings(const QSharedPointer<QPrinter> &printer, const 
         return;
     }
 
-    QSizeF tileSize = layout->LayoutSettings().GetTilesSize(Unit::Mm);
+    QSizeF const tileSize = layout->LayoutSettings().GetTilesSize(Unit::Mm);
     QSizeF pageSize;
 
     if (not forSheet)
@@ -258,8 +260,8 @@ void SetPrinterTiledPageSettings(const QSharedPointer<QPrinter> &printer, const 
     }
     else
     {
-        QPageLayout::Orientation tileOrientation = layout->LayoutSettings().GetTilesOrientation();
-        QPageLayout::Orientation sheetOrientation = sheet->GetSheetOrientation();
+        QPageLayout::Orientation const tileOrientation = layout->LayoutSettings().GetTilesOrientation();
+        QPageLayout::Orientation const sheetOrientation = sheet->GetSheetOrientation();
 
         if (tileOrientation != sheetOrientation)
         {
@@ -636,7 +638,6 @@ auto VPMainWindow::SaveLayout(const QString &path, QString &error) -> bool
 //---------------------------------------------------------------------------------------------------------------------
 void VPMainWindow::ImportRawLayouts(const QStringList &rawLayouts)
 {
-
     for (const auto &path : rawLayouts)
     {
         if (not ImportRawLayout(path))
@@ -778,6 +779,25 @@ void VPMainWindow::InitPropertyTabCurrentPiece()
                         LayoutWasSaved(false);
                         // nothing changed, but will force redraw
                         emit m_layout->PieceTransformationChanged(selectedPiece);
+                    }
+                }
+            });
+
+    connect(ui->checkBoxShowFullPiece, &QCheckBox::toggled, this,
+            [this](bool checked)
+            {
+                QList<VPPiecePtr> selectedPieces = SelectedPieces();
+                if (selectedPieces.size() == 1)
+                {
+                    const VPPiecePtr &selectedPiece = selectedPieces.constFirst();
+                    if (not selectedPiece.isNull())
+                    {
+                        if (selectedPiece->IsShowFullPiece() != checked)
+                        {
+                            selectedPiece->SetShowFullPiece(checked);
+                            LayoutWasSaved(false);
+                            emit m_layout->PieceTransformationChanged(selectedPiece);
+                        }
                     }
                 }
             });
@@ -1197,6 +1217,7 @@ void VPMainWindow::InitPropertyTabLayout()
             &VPMainWindow::LayoutWarningPiecesSuperposition_toggled);
     connect(ui->checkBoxLayoutWarningPiecesOutOfBound, &QCheckBox::toggled, this,
             &VPMainWindow::LayoutWarningPiecesOutOfBound_toggled);
+    connect(ui->checkBoxCutOnFold, &QCheckBox::toggled, this, &VPMainWindow::LayoutCutOnFold_toggled);
 
     connect(ui->checkBoxSheetStickyEdges, &QCheckBox::toggled, this,
             [this](bool checked)
@@ -1277,7 +1298,7 @@ void VPMainWindow::SetPropertiesData()
 //---------------------------------------------------------------------------------------------------------------------
 void VPMainWindow::SetPropertyTabCurrentPieceData()
 {
-    QList<VPPiecePtr> selectedPieces = SelectedPieces();
+    QList<VPPiecePtr> const selectedPieces = SelectedPieces();
 
     ui->labelCurrentPieceNoPieceSelected->setVisible(false);
 
@@ -1309,12 +1330,16 @@ void VPMainWindow::SetPropertyTabCurrentPieceData()
         SetCheckBoxValue(ui->checkBoxCurrentPieceVerticallyFlipped, selectedPiece->IsVerticallyFlipped());
         SetCheckBoxValue(ui->checkBoxCurrentPieceHorizontallyFlipped, selectedPiece->IsHorizontallyFlipped());
 
+        QLineF const seamMirrorLine = selectedPiece->GetSeamMirrorLine();
+        SetCheckBoxValue(ui->checkBoxShowFullPiece, !seamMirrorLine.isNull() ? selectedPiece->IsShowFullPiece() : true);
+        ui->checkBoxShowFullPiece->setEnabled(!seamMirrorLine.isNull());
+
         const bool disableFlipping = selectedPiece->IsForbidFlipping() || selectedPiece->IsForceFlipping();
         ui->checkBoxCurrentPieceVerticallyFlipped->setDisabled(disableFlipping);
 
         if (not ui->checkBoxRelativeTranslation->isChecked())
         {
-            QRectF rect = PiecesBoundingRect(selectedPieces);
+            QRectF const rect = PiecesBoundingRect(selectedPieces);
 
             ui->doubleSpinBoxCurrentPieceBoxPositionX->setValue(
                 UnitConvertor(rect.topLeft().x(), Unit::Px, TranslateUnit()));
@@ -1332,7 +1357,7 @@ void VPMainWindow::SetPropertyTabCurrentPieceData()
 
         if (not ui->checkBoxRelativeTranslation->isChecked())
         {
-            QRectF rect = PiecesBoundingRect(selectedPieces);
+            QRectF const rect = PiecesBoundingRect(selectedPieces);
 
             ui->doubleSpinBoxCurrentPieceBoxPositionX->setValue(
                 UnitConvertor(rect.topLeft().x(), Unit::Px, TranslateUnit()));
@@ -1546,6 +1571,7 @@ void VPMainWindow::SetPropertyTabLayoutData()
         SetCheckBoxValue(ui->checkBoxSheetStickyEdges, m_layout->LayoutSettings().GetStickyEdges());
         SetCheckBoxValue(ui->checkBoxFollowGainline, m_layout->LayoutSettings().GetFollowGrainline());
         SetCheckBoxValue(ui->checkBoxTogetherWithNotches, m_layout->LayoutSettings().IsBoundaryTogetherWithNotches());
+        SetCheckBoxValue(ui->checkBoxCutOnFold, m_layout->LayoutSettings().IsCutOnFold());
 
         // set pieces gap
         SetDoubleSpinBoxValue(ui->doubleSpinBoxSheetPiecesGap, m_layout->LayoutSettings().GetPiecesGapConverted());
@@ -1583,6 +1609,7 @@ void VPMainWindow::SetPropertyTabLayoutData()
         SetCheckBoxValue(ui->checkBoxSheetStickyEdges, false);
         SetCheckBoxValue(ui->checkBoxFollowGainline, false);
         SetCheckBoxValue(ui->checkBoxTogetherWithNotches, false);
+        SetCheckBoxValue(ui->checkBoxCutOnFold, false);
 
         SetDoubleSpinBoxValue(ui->doubleSpinBoxSheetPiecesGap, 0);
 
@@ -2728,7 +2755,7 @@ void VPMainWindow::CleanWaterkmarkEditors()
     QMutableListIterator<QPointer<WatermarkWindow>> i(m_watermarkEditors);
     while (i.hasNext())
     {
-        QPointer<WatermarkWindow> watermarkEditor = i.next();
+        QPointer<WatermarkWindow> const watermarkEditor = i.next();
         if (watermarkEditor.isNull())
         {
             i.remove();
@@ -2761,22 +2788,46 @@ auto VPMainWindow::DrawTilesScheme(QPrinter *printer, QPainter *painter, const V
 
     sheet->SceneData()->PrepareTilesScheme();
 
-    qreal xScale = m_layout->LayoutSettings().HorizontalScale();
-    qreal yScale = m_layout->LayoutSettings().VerticalScale();
+    qreal const xScale = m_layout->LayoutSettings().HorizontalScale();
+    qreal const yScale = m_layout->LayoutSettings().VerticalScale();
 
-    qreal width = m_layout->TileFactory()->DrawingAreaWidth();
-    qreal height = m_layout->TileFactory()->DrawingAreaHeight();
+    qreal const width = m_layout->TileFactory()->DrawingAreaWidth();
+    qreal const height = m_layout->TileFactory()->DrawingAreaHeight();
 
-    QPageLayout::Orientation tileOrientation = m_layout->LayoutSettings().GetTilesOrientation();
-    QPageLayout::Orientation sheetOrientation = sheet->GetSheetOrientation();
+    QPageLayout::Orientation const tileOrientation = m_layout->LayoutSettings().GetTilesOrientation();
+    QPageLayout::Orientation const sheetOrientation = sheet->GetSheetOrientation();
 
-    QRectF sheetRect = sheet->GetMarginsRect();
+    QRectF const sheetRect = sheet->GetMarginsRect();
 
     const int nbCol = m_layout->TileFactory()->ColNb(sheet);
     const int nbRow = m_layout->TileFactory()->RowNb(sheet);
 
-    QRectF source = QRectF(sheetRect.topLeft(), QSizeF(nbCol * ((width - VPTileFactory::tileStripeWidth) / xScale),
-                                                       nbRow * ((height - VPTileFactory::tileStripeWidth) / yScale)));
+    qreal const tilesWidth = nbCol * ((width - VPTileFactory::tileStripeWidth) / xScale);
+    qreal const tilesHeight = nbRow * ((height - VPTileFactory::tileStripeWidth) / yScale);
+
+    QRectF source;
+    if (m_layout->LayoutSettings().IsCutOnFold())
+    {
+        QFont font = QApplication::font();
+        font.setPointSize(foldFontSize);
+        QRectF const textRect = QFontMetrics(font).boundingRect(VPGraphicsSheet::FoldText());
+        qreal const textHeight = foldTextMargin + textRect.height();
+
+        if (sheet->GetSheetOrientation() == QPageLayout::Landscape)
+        {
+            QPointF const shift = QPointF(0, textHeight);
+            source = QRectF(sheetRect.topLeft() - shift, QSizeF(tilesWidth, tilesHeight + textHeight));
+        }
+        else
+        {
+            source = QRectF(sheetRect.topLeft(), QSizeF(tilesWidth + textHeight, tilesHeight));
+        }
+    }
+    else
+    {
+        source = QRectF(sheetRect.topLeft(), QSizeF(tilesWidth, tilesHeight));
+    }
+
     QRectF target;
 
     if (tileOrientation != sheetOrientation)
@@ -2787,7 +2838,7 @@ auto VPMainWindow::DrawTilesScheme(QPrinter *printer, QPainter *painter, const V
             margins = m_layout->LayoutSettings().GetTilesMargins();
         }
 
-        QSizeF tilesSize = m_layout->LayoutSettings().GetTilesSize();
+        QSizeF const tilesSize = m_layout->LayoutSettings().GetTilesSize();
         target = QRectF(0, 0, tilesSize.height() - margins.left() - margins.right(),
                         tilesSize.width() - margins.top() - margins.bottom());
     }
@@ -2800,7 +2851,7 @@ auto VPMainWindow::DrawTilesScheme(QPrinter *printer, QPainter *painter, const V
 
     sheet->SceneData()->Scene()->render(painter, target, source, Qt::KeepAspectRatio);
 
-    VWatermarkData watermarkData = m_layout->TileFactory()->WatermarkData();
+    VWatermarkData const watermarkData = m_layout->TileFactory()->WatermarkData();
     if (watermarkData.opacity > 0)
     {
         if (watermarkData.showImage && not watermarkData.path.isEmpty())
@@ -4755,6 +4806,26 @@ void VPMainWindow::LayoutWarningPiecesOutOfBound_toggled(bool checked)
             }
         }
         m_graphicsView->RefreshPieces();
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VPMainWindow::LayoutCutOnFold_toggled(bool checked)
+{
+    if (not m_layout.isNull())
+    {
+        m_layout->LayoutSettings().SetCutOnFold(checked);
+        LayoutWasSaved(false);
+
+        if (checked)
+        {
+            VPSheetPtr const sheet = m_layout->GetFocusedSheet();
+            if (not sheet.isNull())
+            {
+                sheet->ValidatePiecesOutOfBound();
+            }
+        }
+        m_graphicsView->RefreshLayout();
     }
 }
 

@@ -36,6 +36,7 @@ class VSAPoint;
 class TST_VAbstractPiece : public AbstractTest
 {
     Q_OBJECT // NOLINT
+
 public:
     explicit TST_VAbstractPiece(QObject *parent = nullptr);
 
@@ -65,6 +66,8 @@ private slots:
     void PossibleInfiniteClearLoops() const;
     void IsAllowanceValid_data() const;
     void IsAllowanceValid() const;
+    void TestFullPath_data() const;
+    void TestFullPath() const;
 
 private:
     auto InputPointsCase3() const -> QVector<VSAPoint>;

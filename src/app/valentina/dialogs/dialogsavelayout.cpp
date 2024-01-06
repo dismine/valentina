@@ -126,7 +126,6 @@ DialogSaveLayout::DialogSaveLayout(int count, Draw mode, const QString &fileName
     else
     {
         RemoveFormatFromList(LayoutExportFormats::RLD);
-        ui->checkBoxTextAsPaths->setVisible(false);
     }
 
     connect(bOk, &QPushButton::clicked, this, &DialogSaveLayout::Save);
@@ -439,8 +438,11 @@ void DialogSaveLayout::ShowExample()
     ui->labelOptionsNotAvailable->setVisible(false);
     ui->checkBoxBinaryDXF->setVisible(false);
     ui->checkBoxTextAsPaths->setVisible(false);
+    ui->checkBoxTextAsPaths->setEnabled(true);
     ui->checkBoxShowGrainline->setVisible(false);
     ui->checkBoxTogetherWithNotches->setVisible(false);
+
+    VCommonSettings *settings = VAbstractApplication::VApp()->Settings();
 
     switch (currentFormat)
     {
@@ -452,7 +454,12 @@ void DialogSaveLayout::ShowExample()
         case LayoutExportFormats::PDFTiled:
             ui->groupBoxPaperFormat->setEnabled(true);
             ui->groupBoxMargins->setEnabled(true);
-            ui->checkBoxTextAsPaths->setVisible(m_mode != Draw::Layout);
+            ui->checkBoxTextAsPaths->setVisible(true);
+            if (settings->GetSingleLineFonts() || settings->GetSingleStrokeOutlineFont())
+            {
+                ui->checkBoxTextAsPaths->setDisabled(true);
+                ui->checkBoxTextAsPaths->setChecked(true);
+            }
             ui->checkBoxShowGrainline->setVisible(true);
             ui->checkBoxTogetherWithNotches->setVisible(m_mode != Draw::Layout);
             break;
@@ -463,11 +470,16 @@ void DialogSaveLayout::ShowExample()
             break;
         case LayoutExportFormats::SVG:
         case LayoutExportFormats::PDF:
-        case LayoutExportFormats::PNG:
         case LayoutExportFormats::PS:
         case LayoutExportFormats::EPS:
+        case LayoutExportFormats::PNG:
         case LayoutExportFormats::TIF:
-            ui->checkBoxTextAsPaths->setVisible(m_mode != Draw::Layout);
+            ui->checkBoxTextAsPaths->setVisible(true);
+            if (settings->GetSingleLineFonts() || settings->GetSingleStrokeOutlineFont())
+            {
+                ui->checkBoxTextAsPaths->setDisabled(true);
+                ui->checkBoxTextAsPaths->setChecked(true);
+            }
             ui->checkBoxShowGrainline->setVisible(true);
             ui->checkBoxTogetherWithNotches->setVisible(m_mode != Draw::Layout);
             break;
@@ -481,7 +493,12 @@ void DialogSaveLayout::ShowExample()
         case LayoutExportFormats::DXF_AC1024_Flat:
         case LayoutExportFormats::DXF_AC1027_Flat:
             ui->checkBoxBinaryDXF->setVisible(true);
-            ui->checkBoxTextAsPaths->setVisible(m_mode != Draw::Layout);
+            ui->checkBoxTextAsPaths->setVisible(true);
+            if (settings->GetSingleLineFonts() || settings->GetSingleStrokeOutlineFont())
+            {
+                ui->checkBoxTextAsPaths->setDisabled(true);
+                ui->checkBoxTextAsPaths->setChecked(true);
+            }
             ui->checkBoxShowGrainline->setVisible(true);
             ui->checkBoxTogetherWithNotches->setVisible(m_mode != Draw::Layout);
             break;
@@ -533,14 +550,7 @@ auto DialogSaveLayout::IsTextAsPaths() const -> bool
 //---------------------------------------------------------------------------------------------------------------------
 void DialogSaveLayout::SetTextAsPaths(bool textAsPaths)
 {
-    if (m_mode != Draw::Layout)
-    {
-        ui->checkBoxTextAsPaths->setChecked(textAsPaths);
-    }
-    else
-    {
-        ui->checkBoxTextAsPaths->setChecked(false);
-    }
+    ui->checkBoxTextAsPaths->setChecked(textAsPaths);
 }
 
 //---------------------------------------------------------------------------------------------------------------------

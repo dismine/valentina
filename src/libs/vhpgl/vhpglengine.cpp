@@ -30,6 +30,7 @@
 #include "../vformat/vsinglelineoutlinechar.h"
 #include "../vgeometry/vlayoutplacelabel.h"
 #include "../vlayout/vboundary.h"
+#include "../vlayout/vfoldline.h"
 #include "../vlayout/vlayoutpiece.h"
 #include "../vlayout/vlayoutpiecepath.h"
 #include "../vlayout/vlayoutpoint.h"
@@ -70,6 +71,7 @@ Q_GLOBAL_STATIC_WITH_ARGS(const QString, mPG, ("PG"_L1)) // NOLINT page feed
 Q_GLOBAL_STATIC_WITH_ARGS(const QString, mPA, ("PA"_L1)) // NOLINT plot absolute
 Q_GLOBAL_STATIC_WITH_ARGS(const QString, mPW, ("PW"_L1)) // NOLINT pen width
 Q_GLOBAL_STATIC_WITH_ARGS(const QString, mLA, ("LA"_L1)) // NOLINT line attributes
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, mCI, ("CI"_L1)) // NOLINT circle
 
 QT_WARNING_POP
 
@@ -162,12 +164,17 @@ inline auto LineAlign(const TextLine &tl, const QString &text, const QFontMetric
 
 //---------------------------------------------------------------------------------------------------------------------
 auto LineMatrix(const VLayoutPiece &piece, const QPointF &topLeft, qreal angle, const QPointF &linePos,
-                int maxLineWidth, qreal maxLabelHeight) -> QTransform
+                int maxLineWidth) -> QTransform
 {
     QTransform labelMatrix;
     labelMatrix.translate(topLeft.x(), topLeft.y());
 
-    if (piece.IsVerticallyFlipped() || piece.IsHorizontallyFlipped())
+    if ((piece.IsVerticallyFlipped() && piece.IsHorizontallyFlipped()) ||
+        (!piece.IsVerticallyFlipped() && !piece.IsHorizontallyFlipped()))
+    {
+        labelMatrix.rotate(angle);
+    }
+    else if (piece.IsVerticallyFlipped() || piece.IsHorizontallyFlipped())
     {
         if (piece.IsVerticallyFlipped())
         {
@@ -178,14 +185,10 @@ auto LineMatrix(const VLayoutPiece &piece, const QPointF &topLeft, qreal angle, 
 
         if (piece.IsHorizontallyFlipped())
         {
-            labelMatrix.scale(1, -1);
+            labelMatrix.scale(-1, 1);
             labelMatrix.rotate(-angle);
-            labelMatrix.translate(0, -maxLabelHeight);
+            labelMatrix.translate(-maxLineWidth, 0);
         }
-    }
-    else
-    {
-        labelMatrix.rotate(angle);
     }
 
     labelMatrix.translate(linePos.x(), linePos.y()); // Each string has own position
@@ -229,72 +232,6 @@ auto CurrentPatternDistance(qreal patternDistance, bool dashMode, const QVector<
 auto NextPattern(int patternIndex, const QVector<int> &pattern) -> int
 {
     return (patternIndex + 2) % static_cast<int>(pattern.size());
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-auto LabelHeightSVGFont(const VLayoutPiece &detail, const QVector<TextLine> &labelLines, const VSvgFont &svgFont,
-                        const VSvgFontDatabase *db, qreal penWidth, qreal dH, int spacing) -> qreal
-{
-    qreal labelHeight = 0;
-    if (detail.IsHorizontallyFlipped())
-    {
-        for (int i = 0; i < labelLines.size(); ++i)
-        {
-            const VSvgFont fnt = LineFont(labelLines.at(i), svgFont);
-            VSvgFontEngine engine = db->FontEngine(fnt);
-
-            const qreal lineHeight = engine.FontHeight() + penWidth;
-
-            if (labelHeight + lineHeight > dH)
-            {
-                break;
-            }
-
-            if (i < labelLines.size() - 1)
-            {
-                labelHeight += lineHeight + spacing;
-            }
-            else
-            {
-                labelHeight += lineHeight;
-            }
-        }
-    }
-
-    return labelHeight;
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-auto LabelHeightOutlineFont(const VLayoutPiece &detail, const QVector<TextLine> &labelLines, const QFont &font,
-                            qreal penWidth, qreal dH, int spacing) -> qreal
-{
-    qreal labelHeight = 0;
-    if (detail.IsHorizontallyFlipped())
-    {
-        for (int i = 0; i < labelLines.size(); ++i)
-        {
-            const QFont fnt = LineFont(labelLines.at(i), font);
-            QFontMetrics fm(fnt);
-
-            const qreal lineHeight = fm.height() + penWidth;
-
-            if (labelHeight + lineHeight > dH)
-            {
-                break;
-            }
-
-            if (i < labelLines.size() - 1)
-            {
-                labelHeight += lineHeight + spacing;
-            }
-            else
-            {
-                labelHeight += lineHeight;
-            }
-        }
-    }
-
-    return labelHeight;
 }
 } // namespace
 
@@ -455,9 +392,11 @@ void VHPGLEngine::ExportDetails(QTextStream &out, const QList<VLayoutPiece> &det
         PlotSewLine(out, detail);
         PlotInternalPaths(out, detail);
         PlotGrainline(out, detail);
+        PlotMirrorLine(out, detail);
         PlotPlaceLabels(out, detail);
         PlotPassmarks(out, detail);
         PlotLabels(out, detail);
+        PlotFoldLine(out, detail);
     }
 }
 
@@ -474,17 +413,21 @@ void VHPGLEngine::PlotSewLine(QTextStream &out, const VLayoutPiece &detail)
 {
     if (detail.IsSeamAllowance() && not detail.IsHideMainPath() && not detail.IsSeamAllowanceBuiltIn())
     {
-        QVector<VLayoutPoint> sewLine = detail.GetMappedContourPoints();
+        QVector<VLayoutPoint> const sewLine = detail.GetMappedFullContourPoints();
 
         if (m_togetherWithNotches)
         {
             const QVector<VLayoutPassmark> passmarks = detail.GetMappedPassmarks();
 
-            bool seamAllowance = detail.IsSeamAllowance() && detail.IsSeamAllowanceBuiltIn();
-            bool builtInSeamAllowance = detail.IsSeamAllowance() && detail.IsSeamAllowanceBuiltIn();
+            bool const seamAllowance = detail.IsSeamAllowance() && detail.IsSeamAllowanceBuiltIn();
+            bool const builtInSeamAllowance = detail.IsSeamAllowance() && detail.IsSeamAllowanceBuiltIn();
 
             VBoundary boundary(sewLine, seamAllowance, builtInSeamAllowance);
             boundary.SetPieceName(detail.GetName());
+            if (detail.IsShowFullPiece() && !detail.GetMappedSeamMirrorLine().isNull())
+            {
+                boundary.SetMirrorLine(detail.GetMappedSeamMirrorLine());
+            }
             const QList<VBoundarySequenceItemData> sequence = boundary.Combine(passmarks, true, false);
 
             for (const auto &item : sequence)
@@ -511,18 +454,22 @@ void VHPGLEngine::PlotSewLine(QTextStream &out, const VLayoutPiece &detail)
 void VHPGLEngine::PlotSeamAllowance(QTextStream &out, const VLayoutPiece &detail)
 {
     QVector<VLayoutPoint> pieceBoundary = detail.IsSeamAllowance() && not detail.IsSeamAllowanceBuiltIn()
-                                              ? detail.GetMappedSeamAllowancePoints()
-                                              : detail.GetMappedContourPoints();
+                                              ? detail.GetMappedFullSeamAllowancePoints()
+                                              : detail.GetMappedFullContourPoints();
 
     if (m_togetherWithNotches)
     {
         const QVector<VLayoutPassmark> passmarks = detail.GetMappedPassmarks();
 
-        bool seamAllowance = detail.IsSeamAllowance() && !detail.IsSeamAllowanceBuiltIn();
-        bool builtInSeamAllowance = detail.IsSeamAllowance() && detail.IsSeamAllowanceBuiltIn();
+        bool const seamAllowance = detail.IsSeamAllowance() && !detail.IsSeamAllowanceBuiltIn();
+        bool const builtInSeamAllowance = detail.IsSeamAllowance() && detail.IsSeamAllowanceBuiltIn();
 
         VBoundary boundary(pieceBoundary, seamAllowance, builtInSeamAllowance);
         boundary.SetPieceName(detail.GetName());
+        if (detail.IsShowFullPiece() && !detail.GetMappedSeamAllowanceMirrorLine().isNull())
+        {
+            boundary.SetMirrorLine(detail.GetMappedSeamAllowanceMirrorLine());
+        }
         const QList<VBoundarySequenceItemData> sequence = boundary.Combine(passmarks, false, false);
 
         pieceBoundary.clear();
@@ -548,25 +495,50 @@ void VHPGLEngine::PlotSeamAllowance(QTextStream &out, const VLayoutPiece &detail
 //---------------------------------------------------------------------------------------------------------------------
 void VHPGLEngine::PlotInternalPaths(QTextStream &out, const VLayoutPiece &detail)
 {
-    QVector<VLayoutPiecePath> internalPaths = detail.GetInternalPaths();
+    QVector<VLayoutPiecePath> const internalPaths = detail.GetInternalPaths();
     for (const auto &path : internalPaths)
     {
         QVector<VLayoutPoint> points = VLayoutPiece::MapVector(
             path.Points(), detail.GetMatrix(), detail.IsVerticallyFlipped() || detail.IsHorizontallyFlipped());
         PlotPath(out, CastToPoint(ConvertPath(points)), path.PenStyle());
+
+        if (!path.IsNotMirrored() && detail.IsShowFullPiece() && !detail.GetMappedSeamMirrorLine().isNull())
+        {
+            const QTransform matrix = VGObject::FlippingMatrix(detail.GetMappedSeamMirrorLine());
+            std::transform(points.begin(), points.end(), points.begin(),
+                           [matrix](const VLayoutPoint &point) { return VAbstractPiece::MapPoint(point, matrix); });
+            PlotPath(out, CastToPoint(ConvertPath(points)), path.PenStyle());
+        }
     }
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 void VHPGLEngine::PlotPlaceLabels(QTextStream &out, const VLayoutPiece &detail)
 {
+    auto PlotShape = [this, &out](const PlaceLabelImg &shape)
+    {
+        for (const auto &subShape : shape)
+        {
+            PlotPath(out, CastToPoint(ConvertPath(subShape)), Qt::SolidLine);
+        }
+    };
+
     const QVector<VLayoutPlaceLabel> placeLabels = detail.GetPlaceLabels();
     for (const auto &pLabel : placeLabels)
     {
-        PlaceLabelImg shape = detail.MapPlaceLabelShape(VAbstractPiece::PlaceLabelShape(pLabel));
-        for (auto &subShape : shape)
+        PlotShape(detail.MapPlaceLabelShape(VAbstractPiece::PlaceLabelShape(pLabel)));
+
+        if (!pLabel.IsNotMirrored() && detail.IsShowFullPiece() && !detail.GetMappedSeamMirrorLine().isNull())
         {
-            PlotPath(out, CastToPoint(ConvertPath(subShape)), Qt::SolidLine);
+            PlaceLabelImg shape = detail.MapPlaceLabelShape(VAbstractPiece::PlaceLabelShape(pLabel));
+            const QTransform matrix = VGObject::FlippingMatrix(detail.GetMappedSeamMirrorLine());
+            for (auto &points : shape)
+            {
+                std::transform(points.begin(), points.end(), points.begin(),
+                               [matrix](const VLayoutPoint &point) { return VAbstractPiece::MapPoint(point, matrix); });
+            }
+
+            PlotShape(shape);
         }
     }
 }
@@ -579,13 +551,30 @@ void VHPGLEngine::PlotPassmarks(QTextStream &out, const VLayoutPiece &detail)
         return;
     }
 
-    const QVector<VLayoutPassmark> passmarks = detail.GetMappedPassmarks();
-    for (const auto &passmark : passmarks)
+    auto PlotPassmark = [this, &out](const VLayoutPassmark &passmark)
     {
         for (const auto &subLine : passmark.lines)
         {
             HPPenUp(out, ConvertPoint(subLine.p1()).toPoint());
             HPPenDown(out, ConvertPoint(subLine.p2()).toPoint());
+        }
+    };
+
+    const QVector<VLayoutPassmark> passmarks = detail.GetMappedPassmarks();
+    for (const auto &passmark : passmarks)
+    {
+        PlotPassmark(passmark);
+
+        const QLineF mirrorLine = detail.GetMappedSeamMirrorLine();
+        if (!mirrorLine.isNull() && detail.IsShowFullPiece())
+        {
+            if (!VGObject::IsPointOnLineviaPDP(passmark.baseLine.p1(), mirrorLine.p1(), mirrorLine.p2()))
+            {
+                const QTransform matrix = VGObject::FlippingMatrix(mirrorLine);
+                const VLayoutPassmark mirroredPassmark = VLayoutPiece::MapPassmark(passmark, matrix, false);
+
+                PlotPassmark(mirroredPassmark);
+            }
         }
     }
 }
@@ -605,10 +594,125 @@ void VHPGLEngine::PlotGrainline(QTextStream &out, const VLayoutPiece &detail)
         return;
     }
 
-    GrainlineShape shape = detail.GetMappedGrainlineShape();
+    GrainlineShape const shape = detail.GetMappedGrainlineShape();
     for (const auto &subShape : shape)
     {
         PlotPath(out, CastToPoint(ConvertPath(subShape)), Qt::SolidLine);
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VHPGLEngine::PlotMirrorLine(QTextStream &out, const VLayoutPiece &detail)
+{
+    if (detail.IsShowFullPiece())
+    {
+        const QLineF mirrorLine = detail.GetMappedSeamAllowanceMirrorLine();
+        if (not mirrorLine.isNull())
+        {
+            PlotPath(out, CastToPoint(ConvertPath<QPointF>({mirrorLine.p1(), mirrorLine.p2()})), Qt::DashDotLine);
+        }
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VHPGLEngine::PlotFoldLine(QTextStream &out, const VLayoutPiece &detail)
+{
+    VFoldLine const fLine = detail.FoldLine();
+
+    switch (detail.GetFoldLineType())
+    {
+        case FoldLineType::TwoArrows:
+        case FoldLineType::TwoArrowsTextAbove:
+        case FoldLineType::TwoArrowsTextUnder:
+            PlotFoldTwoArrowsText(out, fLine);
+            break;
+        case FoldLineType::ThreeDots:
+            PlotFoldThreeDots(out, fLine);
+            break;
+        case FoldLineType::ThreeX:
+            PlotFoldThreeX(out, fLine);
+            break;
+        case FoldLineType::LAST_ONE_DO_NOT_USE:
+            Q_UNREACHABLE();
+            break;
+        case FoldLineType::Text:
+            PlotFoldLineText(out, fLine);
+            break;
+        case FoldLineType::None:
+        default:
+            break;
+    };
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VHPGLEngine::PlotFoldLineText(QTextStream &out, const VFoldLine &fLine)
+{
+    QVector<QPainterPath> const path = fLine.FoldLinePath();
+    if (!path.isEmpty())
+    {
+        PlotPainterPath(out, path.constFirst(), Qt::SolidLine);
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VHPGLEngine::PlotFoldThreeX(QTextStream &out, const VFoldLine &fLine)
+{
+    QVector<QVector<QPointF>> const points = fLine.FoldLineMarkPoints();
+
+    if (points.isEmpty())
+    {
+        return;
+    }
+
+    QVector<QPointF> const &shape = points.constFirst();
+    for (int i = 0; i < shape.size() - 1; i += 2)
+    {
+        HPPenUp(out, ConvertPoint(shape.at(i)).toPoint());
+        HPPenDown(out, ConvertPoint(shape.at(i + 1)).toPoint());
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VHPGLEngine::PlotFoldTwoArrowsText(QTextStream &out, const VFoldLine &fLine)
+{
+    QVector<QVector<QPointF>> points = fLine.FoldLineMarkPoints();
+    if (points.isEmpty() || points.size() != 3)
+    {
+        return;
+    }
+
+    points.removeAt(1);
+    QVector<QPointF> shape;
+    for (const auto &subShape : points)
+    {
+        shape += subShape;
+    }
+
+    const auto arrows = CastToPoint(ConvertPath(shape));
+    PlotPath(out, arrows, Qt::SolidLine);
+
+    QVector<QPainterPath> const path = fLine.FoldLinePath();
+    if (path.size() > 1)
+    {
+        PlotPainterPath(out, path.constLast(), Qt::SolidLine);
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VHPGLEngine::PlotFoldThreeDots(QTextStream &out, const VFoldLine &fLine)
+{
+    QVector<QVector<QPointF>> const points = fLine.FoldLineMarkPoints();
+
+    if (points.isEmpty() || points.constFirst().size() != 3)
+    {
+        return;
+    }
+
+    QVector<QPointF> const &shape = points.constFirst();
+    qreal const radius = fLine.ThreeDotsRadius();
+    for (const auto &center : shape)
+    {
+        PlotCircle(out, center, radius);
     }
 }
 
@@ -639,7 +743,7 @@ void VHPGLEngine::PlotLabelSVGFont(QTextStream &out, const VLayoutPiece &detail,
     VSvgFontEngine engine =
         db->FontEngine(tm.GetSVGFontFamily(), SVGFontStyle::Normal, SVGFontWeight::Normal, tm.GetSVGFontPointSize());
 
-    VSvgFont svgFont = engine.Font();
+    VSvgFont const svgFont = engine.Font();
     if (!svgFont.IsValid())
     {
         qDebug() << QStringLiteral("Invalid SVG font '%1'. Fallback to outline font.").arg(svgFont.Name());
@@ -656,8 +760,6 @@ void VHPGLEngine::PlotLabelSVGFont(QTextStream &out, const VLayoutPiece &detail,
 
     const QVector<TextLine> labelLines = tm.GetLabelSourceLines(qFloor(dW), svgFont, m_penWidthPx);
 
-    const qreal labelHeight = LabelHeightSVGFont(detail, labelLines, svgFont, db, m_penWidthPx, dH, tm.GetSpacing());
-
     for (const auto &tl : labelLines)
     {
         const VSvgFont fnt = LineFont(tl, svgFont);
@@ -671,10 +773,9 @@ void VHPGLEngine::PlotLabelSVGFont(QTextStream &out, const VLayoutPiece &detail,
         const QString qsText = tl.m_qsText;
         const qreal dX = LineAlign(tl, qsText, engine, dW, m_penWidthPx);
         // set up the rotation around top-left corner matrix
-        const QTransform lineMatrix =
-            LineMatrix(detail, labelShape.at(0), angle, QPointF(dX, dY), maxLineWidth, labelHeight);
+        const QTransform lineMatrix = LineMatrix(detail, labelShape.at(0), angle, QPointF(dX, dY), maxLineWidth);
 
-        QPainterPath path = lineMatrix.map(engine.DrawPath(QPointF(), qsText));
+        QPainterPath const path = lineMatrix.map(engine.DrawPath(QPointF(), qsText));
         PlotPainterPath(out, path, Qt::SolidLine);
 
         dY += engine.FontHeight() + m_penWidthPx + tm.GetSpacing();
@@ -706,20 +807,17 @@ void VHPGLEngine::PlotLabelOutlineFont(QTextStream &out, const VLayoutPiece &det
 
     const QVector<TextLine> labelLines = tm.GetLabelSourceLines(qFloor(dW), tm.GetFont());
 
-    const qreal labelHeight =
-        LabelHeightOutlineFont(detail, labelLines, tm.GetFont(), m_penWidthPx, dH, tm.GetSpacing());
-
     for (const auto &tl : labelLines)
     {
         const QFont fnt = LineFont(tl, tm.GetFont());
 
-        VSingleLineOutlineChar corrector(fnt);
+        VSingleLineOutlineChar const corrector(fnt);
         if (m_singleStrokeOutlineFont && !corrector.IsPopulated())
         {
             corrector.LoadCorrections(settings->GetPathFontCorrections());
         }
 
-        QFontMetrics fm(fnt);
+        QFontMetrics const fm(fnt);
 
         if (dY + fm.height() > dH)
         {
@@ -729,8 +827,7 @@ void VHPGLEngine::PlotLabelOutlineFont(QTextStream &out, const VLayoutPiece &det
         const QString qsText = tl.m_qsText;
         const qreal dX = LineAlign(tl, qsText, fm, dW);
         // set up the rotation around top-left corner matrix
-        const QTransform lineMatrix =
-            LineMatrix(detail, labelShape.at(0), angle, QPointF(dX, dY), maxLineWidth, labelHeight);
+        const QTransform lineMatrix = LineMatrix(detail, labelShape.at(0), angle, QPointF(dX, dY), maxLineWidth);
 
         QPainterPath path;
 
@@ -777,7 +874,7 @@ template <class T> auto VHPGLEngine::ConvertPoint(T point) const -> T
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VHPGLEngine::PlotPath(QTextStream &out, QVector<QPoint> path, Qt::PenStyle penStyle)
+void VHPGLEngine::PlotPath(QTextStream &out, const QVector<QPoint> &path, Qt::PenStyle penStyle)
 {
     if (penStyle == Qt::NoPen)
     {
@@ -796,22 +893,22 @@ void VHPGLEngine::PlotPath(QTextStream &out, QVector<QPoint> path, Qt::PenStyle 
     }
     else
     {
-        QVector<int> patetrn = PatternForStyle(penStyle);
+        QVector<int> const patetrn = PatternForStyle(penStyle);
         PlotPathForStyle(out, path, patetrn);
     }
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VHPGLEngine::PlotSolidLinePath(QTextStream &out, QVector<QPoint> path)
+void VHPGLEngine::PlotSolidLinePath(QTextStream &out, const QVector<QPoint> &path)
 {
     if (path.size() < 2)
     {
-        HPPenUp(out, path.first());
+        HPPenUp(out, path.constFirst());
         HPPenDown(out);
         return;
     }
 
-    HPPenUp(out, path.first());
+    HPPenUp(out, path.constFirst());
 
     for (int i = 1; i < path.size(); ++i)
     {
@@ -845,13 +942,13 @@ void VHPGLEngine::PlotPathForStyle(QTextStream &out, QVector<QPoint> path, QVect
     for (int i = 1; i < path.size(); ++i)
     {
         QPointF prevPoint = path.at(i - 1);
-        QPoint currPoint = path.at(i);
+        QPoint const currPoint = path.at(i);
 
-        qreal distance = QLineF(prevPoint, currPoint).length();
+        qreal const distance = QLineF(prevPoint, currPoint).length();
         qreal segmentDistance = 0;
         do
         {
-            qreal subDistance = QLineF(prevPoint, currPoint).length();
+            qreal const subDistance = QLineF(prevPoint, currPoint).length();
             patternDistance = CurrentPatternDistance(patternDistance, dashMode, pattern, patternIndex);
 
             if (subDistance < patternDistance)
@@ -911,6 +1008,13 @@ void VHPGLEngine::PlotPainterPath(QTextStream &out, const QPainterPath &path, Qt
     {
         PlotPath(out, CastToPoint(ConvertPath(subpath)), penStyle);
     }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VHPGLEngine::PlotCircle(QTextStream &out, const QPointF &center, qreal radius)
+{
+    HPPenUp(out, ConvertPoint(center).toPoint());
+    HPComand(out, *mCI, QString::number(qFloor(ConvertPixels(radius))));
 }
 
 //---------------------------------------------------------------------------------------------------------------------

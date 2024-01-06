@@ -52,6 +52,7 @@ public:
     auto ToJson() const -> QJsonObject override;
 
     auto SheetBorderColor() const -> QColor;
+    auto SheetFoldShadowColor() const -> QColor;
     auto SheetMarginColor() const -> QColor;
     auto SheetGridColor() const -> QColor;
     auto SheetTileGridColor() const -> QColor;
@@ -59,6 +60,7 @@ public:
     auto PieceOkColor() const -> QColor;
     auto PieceErrorColor() const -> QColor;
     auto PieceHoverColor() const -> QColor;
+    auto PieceSelectionBrushColor() const -> QColor;
     auto PieceHandleColor() const -> QColor;
     auto PieceHandleHoverColor() const -> QColor;
     auto CarrouselPieceColor() const -> QColor;
@@ -68,6 +70,7 @@ public:
 
 private:
     QColor m_sheetBorderColor{};
+    QColor m_sheetFoldShadowColor{};
     QColor m_sheetMarginColor{};
     QColor m_sheetGridColor{};
     QColor m_sheetTileGridColor{};
@@ -75,6 +78,7 @@ private:
     QColor m_pieceOkColor{};
     QColor m_pieceErrorColor{};
     QColor m_pieceHoverColor{};
+    QColor m_pieceSelectionBrushColor{};
     QColor m_pieceHandleColor{};
     QColor m_pieceHandleHoverColor{};
     QColor m_carrouselPieceColor{};
@@ -87,6 +91,12 @@ private:
 inline auto VManualLayoutStyle::SheetBorderColor() const -> QColor
 {
     return m_sheetBorderColor;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+inline auto VManualLayoutStyle::SheetFoldShadowColor() const -> QColor
+{
+    return m_sheetFoldShadowColor;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -132,6 +142,12 @@ inline auto VManualLayoutStyle::PieceHoverColor() const -> QColor
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+inline auto VManualLayoutStyle::PieceSelectionBrushColor() const -> QColor
+{
+    return m_pieceSelectionBrushColor;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 inline auto VManualLayoutStyle::PieceHandleColor() const -> QColor
 {
     return m_pieceHandleColor;
@@ -144,25 +160,25 @@ inline auto VManualLayoutStyle::PieceHandleHoverColor() const -> QColor
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-inline QColor VManualLayoutStyle::CarrouselPieceColor() const
+inline auto VManualLayoutStyle::CarrouselPieceColor() const -> QColor
 {
     return m_carrouselPieceColor;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-inline QColor VManualLayoutStyle::CarrouselPieceSelectedColor() const
+inline auto VManualLayoutStyle::CarrouselPieceSelectedColor() const -> QColor
 {
     return m_carrouselPieceSelectedColor;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-inline QColor VManualLayoutStyle::CarrouselPieceBackgroundColor() const
+inline auto VManualLayoutStyle::CarrouselPieceBackgroundColor() const -> QColor
 {
     return m_carrouselPieceBackgroundColor;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-inline QColor VManualLayoutStyle::CarrouselPieceForegroundColor() const
+inline auto VManualLayoutStyle::CarrouselPieceForegroundColor() const -> QColor
 {
     return m_carrouselPieceForegroundColor;
 }

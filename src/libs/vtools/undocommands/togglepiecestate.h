@@ -87,6 +87,32 @@ private:
     void Do(bool state);
 };
 
+class ToggleShowFullPiece : public VUndoCommand
+{
+    Q_OBJECT // NOLINT
+
+public:
+    ToggleShowFullPiece(quint32 id, bool state, VContainer *data, VAbstractPattern *doc,
+                        QUndoCommand *parent = nullptr);
+    ~ToggleShowFullPiece() override = default;
+
+    void undo() override;
+    void redo() override;
+
+signals:
+    void Toggled(quint32 id);
+
+private:
+    // cppcheck-suppress unknownMacro
+    Q_DISABLE_COPY_MOVE(ToggleShowFullPiece) // NOLINT
+    quint32 m_id;
+    VContainer *m_data;
+    bool m_oldState;
+    bool m_newState;
+
+    void Do(bool state);
+};
+
 enum class ForceForbidFlippingType : qint8
 {
     ForceFlipping,

@@ -59,24 +59,33 @@ public:
 
     QString m_name{tr("Detail")}; // NOLINT (misc-non-private-member-variables-in-classes)
     /** @brief forbidFlipping forbid piece to be mirrored in a layout. */
-    bool m_forbidFlipping{false};       // NOLINT (misc-non-private-member-variables-in-classes)
-    bool m_forceFlipping{false};        // NOLINT (misc-non-private-member-variables-in-classes)
-    bool m_followGrainline{false};      // NOLINT (misc-non-private-member-variables-in-classes)
-    bool m_seamAllowance{false};        // NOLINT (misc-non-private-member-variables-in-classes)
-    bool m_seamAllowanceBuiltIn{false}; // NOLINT (misc-non-private-member-variables-in-classes)
-    bool m_hideMainPath{false};         // NOLINT (misc-non-private-member-variables-in-classes)
-    qreal m_width{0};                   // NOLINT (misc-non-private-member-variables-in-classes)
-    qreal m_mx{0};                      // NOLINT (misc-non-private-member-variables-in-classes)
-    qreal m_my{0};                      // NOLINT (misc-non-private-member-variables-in-classes)
-    uint m_priority{0};                 // NOLINT (misc-non-private-member-variables-in-classes)
-    QUuid m_uuid{QUuid::createUuid()};  // NOLINT (misc-non-private-member-variables-in-classes)
-    bool m_onDrawing{false};            // NOLINT (misc-non-private-member-variables-in-classes)
+    bool m_forbidFlipping{false};                            // NOLINT (misc-non-private-member-variables-in-classes)
+    bool m_forceFlipping{false};                             // NOLINT (misc-non-private-member-variables-in-classes)
+    bool m_followGrainline{false};                           // NOLINT (misc-non-private-member-variables-in-classes)
+    bool m_seamAllowance{false};                             // NOLINT (misc-non-private-member-variables-in-classes)
+    bool m_seamAllowanceBuiltIn{false};                      // NOLINT (misc-non-private-member-variables-in-classes)
+    bool m_hideMainPath{false};                              // NOLINT (misc-non-private-member-variables-in-classes)
+    qreal m_width{0};                                        // NOLINT (misc-non-private-member-variables-in-classes)
+    qreal m_mx{0};                                           // NOLINT (misc-non-private-member-variables-in-classes)
+    qreal m_my{0};                                           // NOLINT (misc-non-private-member-variables-in-classes)
+    uint m_priority{0};                                      // NOLINT (misc-non-private-member-variables-in-classes)
+    QUuid m_uuid{QUuid::createUuid()};                       // NOLINT (misc-non-private-member-variables-in-classes)
+    bool m_onDrawing{false};                                 // NOLINT (misc-non-private-member-variables-in-classes)
+    bool m_showFullPiece{true};                              // NOLINT (misc-non-private-member-variables-in-classes)
+    unsigned int m_foldLineSvgFontSize{defFoldLineFontSize}; // NOLINT (misc-non-private-member-variables-in-classes)
+    bool m_foldLineLabelFontItalic{false};                   // NOLINT (misc-non-private-member-variables-in-classes)
+    bool m_foldLineLabelFontBold{false};                     // NOLINT (misc-non-private-member-variables-in-classes)
+    QString m_foldLineLabel{};                               // NOLINT (misc-non-private-member-variables-in-classes)
+    int m_foldLineLabelAlignment{Qt::AlignHCenter};          // NOLINT (misc-non-private-member-variables-in-classes)
+
+    // NOLINTNEXTLINE(misc-non-private-member-variables-in-classes)
+    FoldLineType m_foldLineType{FoldLineType::TwoArrowsTextAbove};
 
 private:
     Q_DISABLE_ASSIGN_MOVE(VAbstractPieceData) // NOLINT
 
     static constexpr quint32 streamHeader = 0x05CDD73A; // CRC-32Q string "VAbstractPieceData"
-    static constexpr quint16 classVersion = 5;
+    static constexpr quint16 classVersion = 6;
 };
 
 QT_WARNING_POP
@@ -115,6 +124,15 @@ inline auto operator<<(QDataStream &dataStream, const VAbstractPieceData &piece)
 
     // Added in classVersion = 5
     dataStream << piece.m_followGrainline;
+
+    // Added in classVersion = 6
+    dataStream << piece.m_showFullPiece;
+    dataStream << piece.m_foldLineSvgFontSize;
+    dataStream << piece.m_foldLineType;
+    dataStream << piece.m_foldLineLabelFontItalic;
+    dataStream << piece.m_foldLineLabelFontBold;
+    dataStream << piece.m_foldLineLabel;
+    dataStream << piece.m_foldLineLabelAlignment;
 
     return dataStream;
 }
@@ -174,6 +192,17 @@ inline auto operator>>(QDataStream &dataStream, VAbstractPieceData &piece) -> QD
     if (actualClassVersion >= 5)
     {
         dataStream >> piece.m_followGrainline;
+    }
+
+    if (actualClassVersion >= 6)
+    {
+        dataStream >> piece.m_showFullPiece;
+        dataStream >> piece.m_foldLineSvgFontSize;
+        dataStream >> piece.m_foldLineType;
+        dataStream >> piece.m_foldLineLabelFontItalic;
+        dataStream >> piece.m_foldLineLabelFontBold;
+        dataStream >> piece.m_foldLineLabel;
+        dataStream >> piece.m_foldLineLabelAlignment;
     }
 
     return dataStream;

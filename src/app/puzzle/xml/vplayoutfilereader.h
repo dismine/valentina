@@ -29,9 +29,9 @@
 #ifndef VPLAYOUTFILEREADER_H
 #define VPLAYOUTFILEREADER_H
 
-#include <QXmlStreamReader>
 #include "../ifc/xml/vabstractconverter.h"
 #include "../layout/layoutdef.h"
+#include <QXmlStreamReader>
 
 #include <QLoggingCategory>
 
@@ -47,9 +47,10 @@ class VLayoutPoint;
 class VPLayoutFileReader : public QXmlStreamReader
 {
     Q_DECLARE_TR_FUNCTIONS(VPLayoutFileReader) // NOLINT
+
 public:
-    VPLayoutFileReader()=default;
-    ~VPLayoutFileReader()=default;
+    VPLayoutFileReader() = default;
+    ~VPLayoutFileReader() = default;
 
     auto ReadFile(const VPLayoutPtr &layout, QFile *file) -> bool;
 
@@ -65,7 +66,7 @@ private:
     void ReadUnplacedPieces(const VPLayoutPtr &layout);
     void ReadSheets(const VPLayoutPtr &layout);
     void ReadSheet(const VPLayoutPtr &layout);
-    void ReadPieces(const VPLayoutPtr &layout, const VPSheetPtr &sheet=VPSheetPtr());
+    void ReadPieces(const VPLayoutPtr &layout, const VPSheetPtr &sheet = VPSheetPtr());
     void ReadPiece(const VPPiecePtr &piece);
     auto ReadLayoutPoint() -> VLayoutPoint;
     auto ReadLayoutPoints() -> QVector<VLayoutPoint>;
@@ -84,7 +85,7 @@ private:
     auto ReadLabelLines() -> VTextManager;
     auto ReadLabelLine() -> TextLine;
     void ReadWatermark(const VPLayoutPtr &layout);
-
+    void ReadMirrorLines(const VPPiecePtr &piece);
 
     void ReadLayoutMargins(const VPLayoutPtr &layout);
     void ReadSheetMargins(const VPSheetPtr &sheet);
@@ -92,17 +93,17 @@ private:
 
     void AssertRootTag(const QString &tag) const;
 
-    static auto ReadAttributeString(const QXmlStreamAttributes &attribs, const QString &name,
-                                    const QString &defValue) -> QString;
+    static auto ReadAttributeString(const QXmlStreamAttributes &attribs, const QString &name, const QString &defValue)
+        -> QString;
     static auto ReadAttributeEmptyString(const QXmlStreamAttributes &attribs, const QString &name) -> QString;
-    static auto ReadAttributeBool(const QXmlStreamAttributes &attribs, const QString &name,
-                                  const QString &defValue) -> bool;
-    static auto ReadAttributeDouble(const QXmlStreamAttributes &attribs, const QString &name,
-                                    const QString &defValue) -> qreal;
-    static auto ReadAttributeUInt(const QXmlStreamAttributes &attribs, const QString &name,
-                                  const QString &defValue) -> quint32;
-    static auto ReadAttributeInt(const QXmlStreamAttributes &attribs, const QString &name,
-                                 const QString &defValue) -> int;
+    static auto ReadAttributeBool(const QXmlStreamAttributes &attribs, const QString &name, const QString &defValue)
+        -> bool;
+    static auto ReadAttributeDouble(const QXmlStreamAttributes &attribs, const QString &name, const QString &defValue)
+        -> qreal;
+    static auto ReadAttributeUInt(const QXmlStreamAttributes &attribs, const QString &name, const QString &defValue)
+        -> quint32;
+    static auto ReadAttributeInt(const QXmlStreamAttributes &attribs, const QString &name, const QString &defValue)
+        -> int;
 };
 
 #endif // VPLAYOUTFILEREADER_H

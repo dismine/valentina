@@ -66,9 +66,11 @@ public:
     void SetPath(const VPiecePath &path);
 
     auto MainPathPoints(const VContainer *data) const -> QVector<VLayoutPoint>;
+    auto FullMainPathPoints(const VContainer *data) const -> QVector<VLayoutPoint>;
     auto UniteMainPathPoints(const VContainer *data) const -> QVector<VLayoutPoint>;
     auto MainPathNodePoints(const VContainer *data, bool showExcluded = false) const -> QVector<VPointF>;
     auto SeamAllowancePoints(const VContainer *data) const -> QVector<VLayoutPoint>;
+    auto FullSeamAllowancePoints(const VContainer *data) const -> QVector<VLayoutPoint>;
     auto CuttingPathPoints(const VContainer *data) const -> QVector<QPointF>;
     auto PassmarksLines(const VContainer *data) const -> QVector<QLineF>;
 
@@ -77,9 +79,11 @@ public:
     auto CurvesPainterPath(const VContainer *data) const -> QVector<QPainterPath>;
 
     auto MainPathPath(const VContainer *data) const -> QPainterPath;
+    auto FullMainPathPath(const VContainer *data) const -> QPainterPath;
     static auto MainPathPath(const QVector<QPointF> &points) -> QPainterPath;
 
     auto SeamAllowancePath(const VContainer *data) const -> QPainterPath;
+    auto FullSeamAllowancePath(const VContainer *data) const -> QPainterPath;
     template <class T> auto SeamAllowancePath(const QVector<T> &points) const -> QPainterPath;
     auto PassmarksPath(const VContainer *data) const -> QPainterPath;
     auto PlaceLabelPath(const VContainer *data) const -> QPainterPath;
@@ -133,12 +137,36 @@ public:
     auto GetGrainlineGeometry() -> VGrainlineData &;
     auto GetGrainlineGeometry() const -> const VGrainlineData &;
 
+    void SetMirrorLineStartPoint(quint32 id);
+    auto GetMirrorLineStartPoint() const -> quint32;
+
+    void SetMirrorLineEndPoint(quint32 id);
+    auto GetMirrorLineEndPoint() const -> quint32;
+
     auto GetUnitedPath(const VContainer *data) const -> QVector<VPieceNode>;
 
     auto SeamAllowancePointsWithRotation(const VContainer *data, vsizetype makeFirst) const -> QVector<VLayoutPoint>;
 
     void SetGradationLabel(const QString &label);
     auto GetGradationLabel() const -> QString;
+
+    auto IsManualFoldHeight() const -> bool;
+    void SetManualFoldHeight(bool value);
+
+    auto IsManualFoldWidth() const -> bool;
+    void SetManualFoldWidth(bool value);
+
+    auto IsManualFoldCenter() const -> bool;
+    void SetManualFoldCenter(bool value);
+
+    auto GetFormulaFoldHeight() const -> QString;
+    void SetFormulaFoldHeight(const QString &value);
+
+    auto GetFormulaFoldWidth() const -> QString;
+    void SetFormulaFoldWidth(const QString &value);
+
+    auto GetFormulaFoldCenter() const -> QString;
+    void SetFormulaFoldCenter(const QString &value);
 
     static void DumpPiece(const VPiece &piece, const VContainer *data, const QString &templateName = QString());
 
@@ -147,6 +175,9 @@ public:
     static auto ShortNameRegExp() -> QString;
     auto ExternalArea(const VContainer *data) const -> qreal;
     auto SeamLineArea(const VContainer *data) const -> qreal;
+
+    auto SeamMirrorLine(const VContainer *data) const -> QLineF;
+    auto SeamAllowanceMirrorLine(const VContainer *data) const -> QLineF;
 
 private:
     QSharedDataPointer<VPieceData> d;

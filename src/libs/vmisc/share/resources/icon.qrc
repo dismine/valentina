@@ -213,5 +213,7 @@
         <file>icon/light/16x16/viewimage.png</file>
         <file>icon/dark/16x16/viewimage.png</file>
         <file>icon/dark/16x16/viewimage@2x.png</file>
+        <file>icon/32x32/fold.png</file>
+        <file>icon/32x32/fold@2x.png</file>
     </qresource>
 </RCC>

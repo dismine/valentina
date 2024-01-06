@@ -30,15 +30,14 @@
 
 #include <QtGlobal>
 
-#include "vabstractnode.h"
 #include "../vgeometry/vplacelabelitem.h"
+#include "vabstractnode.h"
 
 class DialogTool;
 
 struct VToolPlaceLabelInitData : VAbstractNodeInitData
 {
-    VToolPlaceLabelInitData()
-    {}
+    VToolPlaceLabelInitData() {}
 
     QString width{'0'};
     QString height{'0'};
@@ -46,11 +45,13 @@ struct VToolPlaceLabelInitData : VAbstractNodeInitData
     PlaceLabelType type{PlaceLabelType::Button};
     quint32 centerPoint{NULL_ID};
     QString visibilityTrigger{'1'};
+    bool notMirrored{false};
 };
 
 class VToolPlaceLabel : public VAbstractNode
 {
     Q_OBJECT // NOLINT
+
 public:
     static auto Create(const QPointer<DialogTool> &dialog, VAbstractPattern *doc, VContainer *data)
         -> VToolPlaceLabel *;
@@ -61,13 +62,15 @@ public:
 
     static void AddAttributes(VAbstractPattern *doc, QDomElement &domElement, quint32 id, const VPlaceLabelItem &label);
 public slots:
-    virtual void FullUpdateFromFile () override {}
+    virtual void FullUpdateFromFile() override {}
     virtual void AllowHover(bool enabled) override;
     virtual void AllowSelecting(bool enabled) override;
+
 protected:
     virtual void AddToFile() override;
     virtual void ShowNode() override {}
     virtual void HideNode() override {}
+
 private:
     // cppcheck-suppress unknownMacro
     Q_DISABLE_COPY_MOVE(VToolPlaceLabel) // NOLINT

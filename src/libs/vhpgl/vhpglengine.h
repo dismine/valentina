@@ -47,6 +47,7 @@ class VLayoutPoint;
 class QTextStream;
 class VTextManager;
 class QPainterPath;
+class VFoldLine;
 
 class VHPGLEngine
 {
@@ -121,6 +122,13 @@ private:
     void PlotPassmarks(QTextStream &out, const VLayoutPiece &detail);
     void PlotLabels(QTextStream &out, const VLayoutPiece &detail);
     void PlotGrainline(QTextStream &out, const VLayoutPiece &detail);
+    void PlotMirrorLine(QTextStream &out, const VLayoutPiece &detail);
+    void PlotFoldLine(QTextStream &out, const VLayoutPiece &detail);
+
+    void PlotFoldLineText(QTextStream &out, const VFoldLine &fLine);
+    void PlotFoldThreeX(QTextStream &out, const VFoldLine &fLine);
+    void PlotFoldTwoArrowsText(QTextStream &out, const VFoldLine &fLine);
+    void PlotFoldThreeDots(QTextStream &out, const VFoldLine &fLine);
 
     void PlotLabel(QTextStream &out, const VLayoutPiece &detail, const QVector<QPointF> &labelShape,
                    const VTextManager &tm);
@@ -131,10 +139,11 @@ private:
 
     template <class T> auto ConvertPath(const QVector<T> &path) const -> QVector<T>;
     template <class T> auto ConvertPoint(T point) const -> T;
-    void PlotPath(QTextStream &out, QVector<QPoint> path, Qt::PenStyle penStyle);
-    void PlotSolidLinePath(QTextStream &out, QVector<QPoint> path);
+    void PlotPath(QTextStream &out, const QVector<QPoint> &path, Qt::PenStyle penStyle);
+    void PlotSolidLinePath(QTextStream &out, const QVector<QPoint> &path);
     void PlotPathForStyle(QTextStream &out, QVector<QPoint> path, QVector<int> pattern);
     void PlotPainterPath(QTextStream &out, const QPainterPath &path, Qt::PenStyle penStyle);
+    void PlotCircle(QTextStream &out, const QPointF &center, qreal radius);
 
     void HPPenUp(QTextStream &out, QPoint point);
     void HPPenUp(QTextStream &out);

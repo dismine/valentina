@@ -68,7 +68,7 @@ QPainterPath ShowDirection(const QLineF &edge)
     arrow.setLength(edge.length() / 2.0);
 
     // Reverse line because we want start arrow from this point
-    arrow = QLineF(arrow.p2(), arrow.p1());
+    Swap(arrow);
     const qreal angle = arrow.angle(); // we each time change line angle, better save original angle value
     arrow.setLength(arrowLength);      // arrow length in pixels
 

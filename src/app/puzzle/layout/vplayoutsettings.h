@@ -322,6 +322,9 @@ public:
     void SetBoundaryTogetherWithNotches(bool value);
     auto IsBoundaryTogetherWithNotches() const -> bool;
 
+    void SetCutOnFold(bool value);
+    auto IsCutOnFold() const -> bool;
+
 private:
     Unit m_unit{Unit::Cm};
 
@@ -382,6 +385,7 @@ private:
     bool m_showTileNumbers{false};
 
     bool m_togetherWithNotches{false};
+    bool m_cutOnFold{false};
 };
 
 #endif // VPLAYOUTSETTINGS_H

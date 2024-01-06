@@ -257,7 +257,7 @@ void VSvgFontEngine::Draw(QPainter *p, const QRectF &rect, const QString &str, Q
 
     p->save();
     p->setClipRect(rect);
-    p->translate(rect.x(), rect.y() + baseLine + p->pen().widthF());
+    p->translate(rect.x() + p->pen().widthF(), rect.y() + baseLine + p->pen().widthF());
     p->scale(pixelSize / d->m_font.UnitsPerEm(), -pixelSize / d->m_font.UnitsPerEm());
 
     // Calculate the text width to be used for alignment

@@ -53,6 +53,7 @@ class DRW_Point;
 class DRW_ASTMNotch;
 struct VLayoutPassmark;
 class DRW_ATTDEF;
+class DRW_Circle;
 
 #if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
 class VTextCodec;
@@ -142,21 +143,30 @@ private:
     void ExportAAMAOutline(const QSharedPointer<dx_ifaceBlock> &detailBlock, const VLayoutPiece &detail);
     void ExportAAMADraw(const QSharedPointer<dx_ifaceBlock> &detailBlock, const VLayoutPiece &detail);
     void ExportAAMADrawSewLine(const QSharedPointer<dx_ifaceBlock> &detailBlock, const VLayoutPiece &detail);
+    void ExportAAMADrawInternalPaths(const QSharedPointer<dx_ifaceBlock> &detailBlock, const VLayoutPiece &detail);
+    void ExportAAMADrawPlaceLabels(const QSharedPointer<dx_ifaceBlock> &detailBlock, const VLayoutPiece &detail);
     void ExportAAMAIntcut(const QSharedPointer<dx_ifaceBlock> &detailBlock, const VLayoutPiece &detail);
     void ExportAAMANotch(const QSharedPointer<dx_ifaceBlock> &detailBlock, const VLayoutPiece &detail);
     void ExportAAMAGrainline(const QSharedPointer<dx_ifaceBlock> &detailBlock, const VLayoutPiece &detail);
     void ExportPieceText(const QSharedPointer<dx_ifaceBlock> &detailBlock, const VLayoutPiece &detail);
     void ExportStyleSystemText(const QSharedPointer<dx_iface> &input, const QVector<VLayoutPiece> &details);
     void ExportAAMADrill(const QSharedPointer<dx_ifaceBlock> &detailBlock, const VLayoutPiece &detail);
+    void ExportAAMADrawFoldLine(const QSharedPointer<dx_ifaceBlock> &detailBlock, const VLayoutPiece &detail);
 
     auto ExportToASTM(const QVector<VLayoutPiece> &details) -> bool;
     void ExportASTMPieceBoundary(const QSharedPointer<dx_ifaceBlock> &detailBlock, const VLayoutPiece &detail);
     void ExportASTMSewLine(const QSharedPointer<dx_ifaceBlock> &detailBlock, const VLayoutPiece &detail);
-    void ExportASTMInternalLine(const QSharedPointer<dx_ifaceBlock> &detailBlock, const VLayoutPiece &detail);
+    void ExportASTMDrawInternalPaths(const QSharedPointer<dx_ifaceBlock> &detailBlock, const VLayoutPiece &detail);
+    void ExportASTMDrawPlaceLabels(const QSharedPointer<dx_ifaceBlock> &detailBlock, const VLayoutPiece &detail);
     void ExportASTMInternalCutout(const QSharedPointer<dx_ifaceBlock> &detailBlock, const VLayoutPiece &detail);
     void ExportASTMAnnotationText(const QSharedPointer<dx_ifaceBlock> &detailBlock, const VLayoutPiece &detail);
     void ExportASTMDrill(const QSharedPointer<dx_ifaceBlock> &detailBlock, const VLayoutPiece &detail);
     void ExportASTMNotches(const QSharedPointer<dx_ifaceBlock> &detailBlock, const VLayoutPiece &detail);
+    void ExportASTMMirrorLine(const QSharedPointer<dx_ifaceBlock> &detailBlock, const VLayoutPiece &detail);
+    void ExportASTMDrawFoldLine(const QSharedPointer<dx_ifaceBlock> &detailBlock, const VLayoutPiece &detail);
+
+    void ExportAnnotationText(const QSharedPointer<dx_ifaceBlock> &detailBlock, const VLayoutPiece &detail,
+                              const UTF8STRING &layer);
 
     Q_REQUIRED_RESULT auto ExportASTMNotch(const VLayoutPassmark &passmark) -> DRW_ASTMNotch *;
     Q_REQUIRED_RESULT auto ExportASTMNotchDataDependecy(const VLayoutPassmark &passmark, const UTF8STRING &notchLayer,
@@ -170,6 +180,7 @@ private:
     Q_REQUIRED_RESULT auto AAMALine(const QLineF &line, const UTF8STRING &layer) -> DRW_Entity *;
     Q_REQUIRED_RESULT auto AAMAText(const QPointF &pos, const QString &text, const UTF8STRING &layer) -> DRW_Entity *;
     Q_REQUIRED_RESULT auto AAMAPoint(const QPointF &pos, const UTF8STRING &layer) const -> DRW_Point *;
+    Q_REQUIRED_RESULT auto AAMACircle(const QPointF &pos, const UTF8STRING &layer, qreal radius) const -> DRW_Circle *;
 
     template <class P, class V, class C>
     Q_REQUIRED_RESULT auto CreateAAMAPolygon(const QVector<C> &polygon, const UTF8STRING &layer, bool forceClosed)
@@ -179,6 +190,16 @@ private:
     auto GetFileNameForLocale() const -> std::string;
 
     static auto NotchPrecedingPoint(const QVector<VLayoutPoint> &boundary, QPointF notchBase, QPointF &point) -> bool;
+
+    void AAMADrawFoldLineTwoArrows(const QVector<QVector<QPointF>> &points,
+                                   const QSharedPointer<dx_ifaceBlock> &detailBlock);
+    void AAMADrawFoldLineThreeDots(const QVector<QVector<QPointF>> &points,
+                                   const QSharedPointer<dx_ifaceBlock> &detailBlock, qreal radius);
+    void AAMADrawFoldLineThreeX(const QVector<QVector<QPointF>> &points,
+                                const QSharedPointer<dx_ifaceBlock> &detailBlock);
+
+    void ASTMDrawFoldLineTwoArrows(const QVector<QVector<QPointF>> &points,
+                                   const QSharedPointer<dx_ifaceBlock> &detailBlock);
 };
 
 #endif // VDXFENGINE_H

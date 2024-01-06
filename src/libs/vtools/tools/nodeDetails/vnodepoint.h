@@ -68,6 +68,7 @@ signals:
     void ToggleInLayout(bool checked);
     void ToggleForbidFlipping(bool checked);
     void ToggleForceFlipping(bool checked);
+    void ToggleShowFullPiece(bool checked);
     void Delete();
     void ToggleExcludeState(quint32 id);
     void ToggleTurnPointState(quint32 id);

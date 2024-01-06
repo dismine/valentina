@@ -211,6 +211,23 @@ enum class PiecePathIncludeType : quint8
     AsCustomSA = 1
 };
 
+constexpr unsigned int defFoldLineFontSize{12};
+
+enum class FoldLineType : quint8
+{
+    TwoArrowsTextAbove = 0, // Default
+    TwoArrowsTextUnder,
+    TwoArrows,
+    Text,
+    ThreeDots,
+    ThreeX,
+    None,
+    LAST_ONE_DO_NOT_USE
+};
+
+auto FoldLineTypeToString(FoldLineType type) -> QString;
+auto StringToFoldLineType(const QString &value) -> FoldLineType;
+
 enum class PiecePathType : quint8
 {
     PiecePath = 0,
@@ -348,6 +365,7 @@ enum class Vis : ToolVisHolderType
 enum class Layout : ToolVisHolderType
 {
     GrainlineItem = static_cast<ToolVisHolderType>(Vis::LAST_ONE_DO_NOT_USE),
+    FoldLineItem,
     LAST_ONE_DO_NOT_USE // add new stuffs above this, this constant must be last and never used
 };
 

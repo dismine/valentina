@@ -1199,6 +1199,7 @@ void DialogPiecePath::InitPathTab()
                 ui->tabControl->setEnabled(isInternalPath);
                 ui->checkBoxFirstPointToCuttingContour->setEnabled(isInternalPath);
                 ui->checkBoxLastPointToCuttingContour->setEnabled(isInternalPath);
+                ui->checkBoxNotMirrored->setEnabled(isInternalPath);
                 ValidObjects(PathIsValid());
             });
 
@@ -1498,6 +1499,8 @@ void DialogPiecePath::SetPiecePath(const VPiecePath &path)
     {
         ui->plainTextEditFormulaVisible->setPlainText(QChar('1'));
     }
+
+    ui->checkBoxNotMirrored->setChecked(path.GetType() == PiecePathType::InternalPath ? path.IsNotMirrored() : false);
 
     ValidObjects(PathIsValid());
 
@@ -1845,6 +1848,7 @@ auto DialogPiecePath::CreatePath() const -> VPiecePath
     path.SetFirstToCuttingContour(isInternalPath ? ui->checkBoxFirstPointToCuttingContour->isChecked() : false);
     path.SetLastToCuttingContour(isInternalPath ? ui->checkBoxLastPointToCuttingContour->isChecked() : false);
     path.SetVisibilityTrigger(isInternalPath ? GetFormulaVisible() : QChar('1'));
+    path.SetNotMirrored(isInternalPath ? ui->checkBoxNotMirrored->isChecked() : false);
 
     return path;
 }

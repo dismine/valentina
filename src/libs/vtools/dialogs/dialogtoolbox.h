@@ -63,7 +63,7 @@ struct FormulaData
     const QHash<QString, QSharedPointer<VInternalVariable>> *variables{nullptr};
     QLabel *labelEditFormula{nullptr};
     QLabel *labelResult{nullptr};
-    QString postfix;
+    QString postfix{};
     bool checkZero{false};
     bool checkLessThanZero{false};
 };
@@ -71,14 +71,17 @@ struct FormulaData
 QT_WARNING_POP
 
 auto RowNode(QListWidget *listWidget, int i) -> VPieceNode;
+auto NodeRowIndex(QListWidget *listWidget, quint32 id) -> int;
 void MoveCursorToEnd(QPlainTextEdit *plainTextEdit);
 void DeployFormula(QDialog *dialog, QPlainTextEdit *formula, QPushButton *buttonGrowLength, int formulaBaseHeight);
 auto FilterObject(QObject *object, QEvent *event) -> bool;
 auto EvalToolFormula(QDialog *dialog, const FormulaData &data, bool &flag) -> qreal;
 void ChangeColor(QWidget *widget, const QColor &color);
-auto OkColor(QWidget *widget) -> QColor;
+auto OkColor(const QWidget *widget) -> QColor;
 void CheckPointLabel(QDialog *dialog, QLineEdit *edit, QLabel *labelEditNamePoint, const QString &pointName,
                      const VContainer *data, bool &flag);
+auto FindNotExcludedNeighborNodeDown(QListWidget *listWidget, int candidate) -> int;
+auto FindNotExcludedNeighborNodeUp(QListWidget *listWidget, int candidate) -> int;
 auto FindNotExcludedNodeDown(QListWidget *listWidget, int candidate) -> int;
 auto FindNotExcludedNodeUp(QListWidget *listWidget, int candidate) -> int;
 auto FindNotExcludedPointDown(QListWidget *listWidget, int start) -> int;
@@ -96,5 +99,6 @@ auto LineColor(const QColor &borderColor, int size, const QString &color) -> QIc
 auto SegmentAliases(GOType curveType, const QString &alias1, const QString &alias2) -> QPair<QString, QString>;
 auto GetNodeName(const VContainer *data, const VPieceNode &node, bool showPassmarkDetails = false) -> QString;
 void InitDialogButtonBoxIcons(QDialogButtonBox *buttonBox);
+auto MirrorLinePointsNeighbors(QListWidget *listWidget, quint32 startPoint, quint32 endPoint) -> bool;
 
 #endif // DIALOGTOOLBOX_H

@@ -28,11 +28,16 @@
 #ifndef SCENEDEF_H
 #define SCENEDEF_H
 
+#include "qtypes.h"
+
 enum class PGraphicsItem : int
 {
     Piece = 1,
     Handles = 2,
     TransformationOrigin = 3
 };
+
+constexpr qreal foldTextMargin = 5;
+constexpr int foldFontSize = 34;
 
 #endif // SCENEDEF_H

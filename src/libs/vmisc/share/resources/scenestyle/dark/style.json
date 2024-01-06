@@ -31,6 +31,7 @@
   },
   "ManualLayoutStyle": {
     "SheetBorderColor": "#808080",
+    "SheetFoldShadowColor": "#6699cc",
     "SheetMarginColor": "#00b3ff",
     "SheetGridColor": "#cccccc",
     "SheetTileGridColor": "#80ff0000",
@@ -40,6 +41,7 @@
     "PieceHoverColor": "#80c7f4f9",
     "PieceHandleColor": "#add8e6",
     "PieceHandleHoverColor": "#90ee90",
+    "PieceSelectionBrushColor": [255, 160, 160, 60],
     "CarrouselPieceColor": "#78a0c8",
     "CarrouselPieceSelectedColor": "#80ffa0a0",
     "CarrouselPieceBackgroundColor": "#202020",

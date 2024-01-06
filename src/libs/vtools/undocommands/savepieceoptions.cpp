@@ -60,7 +60,7 @@ void SavePieceOptions::undo()
     if (domElement.isElement())
     {
         VToolSeamAllowance::AddAttributes(doc, domElement, nodeId, m_oldDet);
-        doc->RemoveAllChildren(domElement); // Very important to clear before rewrite
+        VAbstractPattern::RemoveAllChildren(domElement); // Very important to clear before rewrite
         VToolSeamAllowance::AddPatternPieceData(doc, domElement, m_oldDet);
         VToolSeamAllowance::AddPatternInfo(doc, domElement, m_oldDet);
         VToolSeamAllowance::AddGrainline(doc, domElement, m_oldDet);
@@ -69,6 +69,7 @@ void SavePieceOptions::undo()
         VToolSeamAllowance::AddInternalPaths(doc, domElement, m_oldDet.GetInternalPaths());
         VToolSeamAllowance::AddPins(doc, domElement, m_oldDet.GetPins());
         VToolSeamAllowance::AddPlaceLabels(doc, domElement, m_oldDet.GetPlaceLabels());
+        VToolSeamAllowance::AddMirrorLine(doc, domElement, m_oldDet);
 
         DecrementReferences(m_newDet.MissingNodes(m_oldDet));
         IncrementReferences(m_oldDet.MissingNodes(m_newDet));
@@ -85,7 +86,7 @@ void SavePieceOptions::undo()
         DecrementReferences(m_newDet.MissingPlaceLabels(m_oldDet));
         IncrementReferences(m_oldDet.MissingPlaceLabels(m_newDet));
 
-        if (VToolSeamAllowance *tool = qobject_cast<VToolSeamAllowance *>(VAbstractPattern::getTool(nodeId)))
+        if (auto *tool = qobject_cast<VToolSeamAllowance *>(VAbstractPattern::getTool(nodeId)))
         {
             tool->Update(m_oldDet);
         }
@@ -107,7 +108,7 @@ void SavePieceOptions::redo()
     if (domElement.isElement())
     {
         VToolSeamAllowance::AddAttributes(doc, domElement, nodeId, m_newDet);
-        doc->RemoveAllChildren(domElement); // Very important to clear before rewrite
+        VAbstractPattern::RemoveAllChildren(domElement); // Very important to clear before rewrite
         VToolSeamAllowance::AddPatternPieceData(doc, domElement, m_newDet);
         VToolSeamAllowance::AddPatternInfo(doc, domElement, m_newDet);
         VToolSeamAllowance::AddGrainline(doc, domElement, m_newDet);
@@ -116,6 +117,7 @@ void SavePieceOptions::redo()
         VToolSeamAllowance::AddInternalPaths(doc, domElement, m_newDet.GetInternalPaths());
         VToolSeamAllowance::AddPins(doc, domElement, m_newDet.GetPins());
         VToolSeamAllowance::AddPlaceLabels(doc, domElement, m_newDet.GetPlaceLabels());
+        VToolSeamAllowance::AddMirrorLine(doc, domElement, m_newDet);
 
         DecrementReferences(m_oldDet.MissingNodes(m_newDet));
         IncrementReferences(m_newDet.MissingNodes(m_oldDet));
@@ -132,7 +134,7 @@ void SavePieceOptions::redo()
         DecrementReferences(m_oldDet.MissingPlaceLabels(m_newDet));
         IncrementReferences(m_newDet.MissingPlaceLabels(m_oldDet));
 
-        if (VToolSeamAllowance *tool = qobject_cast<VToolSeamAllowance *>(VAbstractPattern::getTool(nodeId)))
+        if (auto *tool = qobject_cast<VToolSeamAllowance *>(VAbstractPattern::getTool(nodeId)))
         {
             tool->Update(m_newDet);
         }
@@ -148,41 +150,39 @@ void SavePieceOptions::redo()
 //---------------------------------------------------------------------------------------------------------------------
 auto SavePieceOptions::mergeWith(const QUndoCommand *command) -> bool
 {
-    const SavePieceOptions *saveCommand = static_cast<const SavePieceOptions *>(command);
+    const auto *saveCommand = static_cast<const SavePieceOptions *>(command);
     SCASSERT(saveCommand != nullptr);
 
     if (saveCommand->DetId() != nodeId)
     {
         return false;
     }
-    else
+
+    const VPiece candidate = saveCommand->NewDet();
+
+    auto currentSet = ConvertToSet(m_newDet.Dependencies());
+    auto candidateSet = ConvertToSet(candidate.Dependencies());
+
+    if (currentSet != candidateSet)
     {
-        const VPiece candidate = saveCommand->NewDet();
+        return false;
+    }
 
-        auto currentSet = ConvertToSet(m_newDet.Dependencies());
-        auto candidateSet = ConvertToSet(candidate.Dependencies());
+    const QVector<VPieceNode> nodes = m_newDet.GetPath().GetNodes();
+    const QVector<VPieceNode> candidateNodes = candidate.GetPath().GetNodes();
 
-        if (currentSet != candidateSet)
+    if (nodes.size() != candidateNodes.size())
+    {
+        return false;
+    }
+
+    for (int i = 0; i < nodes.size(); ++i)
+    {
+        if (nodes.at(i).IsExcluded() != candidateNodes.at(i).IsExcluded() ||
+            nodes.at(i).IsCheckUniqueness() != candidateNodes.at(i).IsCheckUniqueness() ||
+            nodes.at(i).IsPassmark() != candidateNodes.at(i).IsPassmark())
         {
             return false;
-        }
-
-        const QVector<VPieceNode> nodes = m_newDet.GetPath().GetNodes();
-        const QVector<VPieceNode> candidateNodes = candidate.GetPath().GetNodes();
-
-        if (nodes.size() != candidateNodes.size())
-        {
-            return false;
-        }
-
-        for (int i = 0; i < nodes.size(); ++i)
-        {
-            if (nodes.at(i).IsExcluded() != candidateNodes.at(i).IsExcluded() ||
-                nodes.at(i).IsCheckUniqueness() != candidateNodes.at(i).IsCheckUniqueness() ||
-                nodes.at(i).IsPassmark() != candidateNodes.at(i).IsPassmark())
-            {
-                return false;
-            }
         }
     }
 

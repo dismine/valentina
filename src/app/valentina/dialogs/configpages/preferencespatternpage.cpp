@@ -323,7 +323,7 @@ void PreferencesPatternPage::InitLabelFontSizes()
     ui->comboBoxLabelFontSize->clear();
 
     // Get the available font sizes
-    QList<int> sizes = QFontDatabase::standardSizes();
+    QList<int> const sizes = QFontDatabase::standardSizes();
     for (auto size : sizes)
     {
         if (size >= VCommonSettings::MinPieceLabelFontPointSize())

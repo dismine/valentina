@@ -294,6 +294,7 @@ private slots:
 
     void LayoutWarningPiecesSuperposition_toggled(bool checked);
     void LayoutWarningPiecesOutOfBound_toggled(bool checked);
+    void LayoutCutOnFold_toggled(bool checked);
 
     void UpdateShortcuts();
 

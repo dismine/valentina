@@ -220,6 +220,25 @@ void dx_iface::InitHeader(VarMeasurement varMeasurement, VarInsunits varInsunits
     }
 }
 
+auto dx_iface::QtPenStyleToString(Qt::PenStyle style) -> UTF8STRING
+{
+    switch (style)
+    {
+        case Qt::DashLine:
+            return "DASHED";
+        case Qt::DotLine:
+            return "DOT";
+        case Qt::DashDotLine:
+            return "DASHDOT2";
+        case Qt::DashDotDotLine:
+            return "DIVIDE2";
+        case Qt::NoPen:
+        case Qt::SolidLine:
+        default:
+            return "CONTINUOUS";
+    }
+}
+
 void dx_iface::AddQtLTypes()
 {
     DRW_LType ltype;

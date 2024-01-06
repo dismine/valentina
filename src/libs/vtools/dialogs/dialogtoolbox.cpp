@@ -355,7 +355,7 @@ void ChangeColor(QWidget *widget, const QColor &color)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-auto OkColor(QWidget *widget) -> QColor
+auto OkColor(const QWidget *widget) -> QColor
 {
     SCASSERT(widget != nullptr);
     return widget->palette().color(QPalette::Active, QPalette::WindowText);
@@ -381,6 +381,98 @@ void CheckPointLabel(QDialog *dialog, QLineEdit *edit, QLabel *labelEditNamePoin
         flag = true;
         ChangeColor(labelEditNamePoint, OkColor(dialog));
     }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+auto FindNotExcludedNeighborNodeDown(QListWidget *listWidget, int candidate) -> int
+{
+    SCASSERT(listWidget != nullptr);
+
+    int index = -1;
+    if (candidate < 0 || candidate >= listWidget->count())
+    {
+        return index;
+    }
+
+    int i = candidate;
+    VPieceNode rowNode;
+    bool foundNeighbor = false;
+
+    do
+    {
+        const QListWidgetItem *rowItem = listWidget->item(i);
+        SCASSERT(rowItem != nullptr);
+        rowNode = qvariant_cast<VPieceNode>(rowItem->data(Qt::UserRole));
+
+        if (not rowNode.IsExcluded())
+        {
+            index = i;
+            foundNeighbor = true;
+            break;
+        }
+
+        --i;
+        if (i < 0)
+        {
+            // Wrap around to the end of the list
+            i = listWidget->count() - 1;
+        }
+
+    } while (i != candidate);
+
+    if (!foundNeighbor)
+    {
+        // No not excluded neighbor found
+        index = -1;
+    }
+
+    return index;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+auto FindNotExcludedNeighborNodeUp(QListWidget *listWidget, int candidate) -> int
+{
+    SCASSERT(listWidget != nullptr);
+
+    int index = -1;
+    if (candidate < 0 || candidate >= listWidget->count())
+    {
+        return index;
+    }
+
+    int i = candidate;
+    VPieceNode rowNode;
+    bool foundNeighbor = false;
+
+    do
+    {
+        const QListWidgetItem *rowItem = listWidget->item(i);
+        SCASSERT(rowItem != nullptr);
+        rowNode = qvariant_cast<VPieceNode>(rowItem->data(Qt::UserRole));
+
+        if (not rowNode.IsExcluded())
+        {
+            index = i;
+            foundNeighbor = true;
+            break;
+        }
+
+        ++i;
+        if (i >= listWidget->count())
+        {
+            // Wrap around to the beginning of the list
+            i = 0;
+        }
+
+    } while (i != candidate); // Continue until we reach back to the starting point or find a neighbor
+
+    if (!foundNeighbor)
+    {
+        // No not excluded neighbor found
+        index = -1;
+    }
+
+    return index;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -517,7 +609,7 @@ auto EachPointLabelIsUnique(QListWidget *listWidget) -> bool
 //---------------------------------------------------------------------------------------------------------------------
 auto DialogWarningIcon() -> QString
 {
-    const QIcon icon = QIcon::fromTheme("dialog-warning");
+    const QIcon icon = QIcon::fromTheme(QStringLiteral("dialog-warning"));
 
     const QPixmap pixmap = icon.pixmap(QSize(16, 16));
     QByteArray byteArray;
@@ -867,4 +959,59 @@ void InitDialogButtonBoxIcons(QDialogButtonBox *buttonBox)
     {
         bCancel->setIcon(style->standardIcon(QStyle::SP_DialogCancelButton));
     }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+auto MirrorLinePointsNeighbors(QListWidget *listWidget, quint32 startPoint, quint32 endPoint) -> bool
+{
+    SCASSERT(listWidget != nullptr)
+
+    if (startPoint == endPoint || startPoint == NULL_ID || endPoint == NULL_ID)
+    {
+        return false;
+    }
+
+    const int startIndex = NodeRowIndex(listWidget, startPoint);
+    if (startIndex == -1)
+    {
+        return false;
+    }
+
+    int nextIndex = startIndex + 1;
+    if (nextIndex >= listWidget->count())
+    {
+        nextIndex = 0;
+    }
+
+    int prevIndex = startIndex - 1;
+    if (prevIndex < 0)
+    {
+        prevIndex = listWidget->count() - 1;
+    }
+
+    const int next = FindNotExcludedNeighborNodeDown(listWidget, prevIndex);
+    const int prev = FindNotExcludedNeighborNodeUp(listWidget, nextIndex);
+
+    return (next >= 0 && endPoint == RowNode(listWidget, next).GetId()) ||
+           (prev >= 0 && endPoint == RowNode(listWidget, prev).GetId());
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+auto NodeRowIndex(QListWidget *listWidget, quint32 id) -> int
+{
+    SCASSERT(listWidget != nullptr)
+
+    for (int i = 0, sz = listWidget->count(); i < sz; ++i)
+    {
+        const QListWidgetItem *rowItem = listWidget->item(i);
+        SCASSERT(rowItem != nullptr);
+        auto rowNode = qvariant_cast<VPieceNode>(rowItem->data(Qt::UserRole));
+
+        if (id == rowNode.GetId())
+        {
+            return i;
+        }
+    }
+
+    return -1;
 }

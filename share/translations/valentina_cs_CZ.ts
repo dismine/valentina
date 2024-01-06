@@ -6561,99 +6561,99 @@ Přesto použít nastavení?</translation>
         <translation>Typ pera:</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.ui" line="217"/>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.cpp" line="1912"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.ui" line="224"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.cpp" line="1916"/>
         <source>Ready!</source>
         <translation>Připraven!</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.ui" line="234"/>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.cpp" line="1773"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.ui" line="241"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.cpp" line="1776"/>
         <source>Seam allowance</source>
         <translation>Švová záložka</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.ui" line="285"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.ui" line="292"/>
         <source>Width:</source>
         <translation>Šířka:</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.ui" line="308"/>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.ui" line="544"/>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.ui" line="743"/>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.ui" line="1309"/>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.ui" line="1534"/>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.ui" line="1759"/>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.ui" line="2003"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.ui" line="315"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.ui" line="550"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.ui" line="748"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.ui" line="1313"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.ui" line="1538"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.ui" line="1763"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.ui" line="2007"/>
         <source>Formula wizard</source>
         <translation>Průvodce vzorcem</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.ui" line="350"/>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.ui" line="586"/>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.ui" line="785"/>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.ui" line="1363"/>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.ui" line="1588"/>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.ui" line="1813"/>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.ui" line="2045"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.ui" line="357"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.ui" line="592"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.ui" line="790"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.ui" line="1367"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.ui" line="1592"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.ui" line="1817"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.ui" line="2049"/>
         <source>Value</source>
         <translation>Hodnota</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.ui" line="376"/>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.ui" line="612"/>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.ui" line="811"/>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.ui" line="1395"/>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.ui" line="1620"/>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.ui" line="1845"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.ui" line="383"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.ui" line="618"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.ui" line="816"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.ui" line="1399"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.ui" line="1624"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.ui" line="1849"/>
         <source>Calculation</source>
         <translation>Výpočet</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.ui" line="401"/>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.ui" line="637"/>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.ui" line="836"/>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.ui" line="1420"/>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.ui" line="1645"/>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.ui" line="1870"/>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.ui" line="2099"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.ui" line="408"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.ui" line="643"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.ui" line="841"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.ui" line="1424"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.ui" line="1649"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.ui" line="1874"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.ui" line="2103"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Show full calculation in message box&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
         <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Ukázat celý výpočet v okně se zprávami&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.ui" line="426"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.ui" line="432"/>
         <source>Nodes</source>
         <translation>Uzly</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.ui" line="434"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.ui" line="440"/>
         <source>Node:</source>
         <translation>Uzel:</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.ui" line="508"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.ui" line="514"/>
         <source>Before:</source>
         <translation>Předchozí:</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.ui" line="531"/>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.ui" line="730"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.ui" line="537"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.ui" line="735"/>
         <source>Return to default width</source>
         <translation>Vrátit na výchozí šířku</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.ui" line="534"/>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.ui" line="733"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.ui" line="540"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.ui" line="738"/>
         <source>Default</source>
         <translation>Výchozí</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.ui" line="707"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.ui" line="712"/>
         <source>After:</source>
         <translation>Po:</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.ui" line="863"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.ui" line="867"/>
         <source>Angle:</source>
         <translation>Úhel:</translation>
     </message>
@@ -6683,110 +6683,110 @@ Přesto použít nastavení?</translation>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.cpp" line="1371"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.cpp" line="1372"/>
         <source>Internal path</source>
         <translation>Vnitřní cesta</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.cpp" line="1372"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.cpp" line="1373"/>
         <source>Custom seam allowance</source>
         <translation>Vlastní švová záložka</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.cpp" line="1857"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.cpp" line="1861"/>
         <source>You need more points!</source>
         <translation>Potřebujete více bodů!</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.cpp" line="1865"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.cpp" line="1869"/>
         <source>First point of &lt;b&gt;custom seam allowance&lt;/b&gt; cannot be equal to the last point!</source>
         <translation>První bod &lt;b&gt;vlastní švové záložky&lt;/b&gt; nemůže být stejný s posledním bodem!</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.cpp" line="1874"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.cpp" line="1878"/>
         <source>You have double points!</source>
         <translation>Máte zdvojené body!</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.ui" line="909"/>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.cpp" line="1778"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.ui" line="913"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.cpp" line="1781"/>
         <source>Passmarks</source>
         <translation>Značky sestavení</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.ui" line="920"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.ui" line="924"/>
         <source>Passmark:</source>
         <translation>Značka sestavení:</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.ui" line="956"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.ui" line="960"/>
         <source>One line</source>
         <translation>Jedna čára</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.ui" line="969"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.ui" line="973"/>
         <source>Two lines</source>
         <translation>Dvě čáry</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.ui" line="982"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.ui" line="986"/>
         <source>Three lines</source>
         <translation>Tři čáry</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.ui" line="1073"/>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.ui" line="1676"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.ui" line="1077"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.ui" line="1680"/>
         <source>Angle</source>
         <translation>Úhel</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.ui" line="1082"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.ui" line="1086"/>
         <source>Straightforward</source>
         <translation>Přímo</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.ui" line="1095"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.ui" line="1099"/>
         <source>Bisector</source>
         <translation>Osa</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.ui" line="947"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.ui" line="951"/>
         <source>Marks</source>
         <translation>Značky</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.ui" line="995"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.ui" line="999"/>
         <source>T mark</source>
         <translation>Značka T</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.ui" line="1011"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.ui" line="1015"/>
         <source>V mark</source>
         <translation>Značka V</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.cpp" line="1901"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.cpp" line="1905"/>
         <source>Please, select a detail to insert into!</source>
         <translation>Vyberte, prosím, jednotlivost (díl střihu), do níž se má provést vložení!</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.cpp" line="1895"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.cpp" line="1899"/>
         <source>List of details is empty!</source>
         <translation>Seznam jednotlivostí (dílů střihu) je prázdný!</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.ui" line="1108"/>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.ui" line="1156"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.ui" line="1112"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.ui" line="1160"/>
         <source>Select if need designate the corner point as a passmark</source>
         <translation>Vyberte, pokud je potřeba, označte rohový bod jako značku sestavení</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.ui" line="1111"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.ui" line="1115"/>
         <source>Intersection</source>
         <translation>Průsečík</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.cpp" line="1889"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.cpp" line="1893"/>
         <source>Each point in the &lt;b&gt;custom seam allowance&lt;/b&gt; path must be unique!</source>
         <translation>Každý bod v cestě &lt;b&gt;vlastní švové záložky&lt;/b&gt; musí být jedinečný!</translation>
     </message>
@@ -6796,92 +6796,97 @@ Přesto použít nastavení?</translation>
         <translation>Stříhat na látce</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.ui" line="936"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.ui" line="217"/>
+        <source>Not Mirrored</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.ui" line="940"/>
         <source>Type</source>
         <translation>Typ</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.ui" line="1057"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.ui" line="1061"/>
         <source>Check mark</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.ui" line="1124"/>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.ui" line="1172"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.ui" line="1128"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.ui" line="1176"/>
         <source>Select if need designate the corner point as a passmark. Show only left passmark.</source>
         <translation>Vyberte, pokud je potřeba, označte rohový bod jako značku sestavení. Ukázat pouze levou značku sestavení.</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.ui" line="1127"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.ui" line="1131"/>
         <source>Intersection (only left)</source>
         <translation>Průsečík (pouze levý)</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.ui" line="1140"/>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.ui" line="1188"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.ui" line="1144"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.ui" line="1192"/>
         <source>Select if need designate the corner point as a passmark. Show only right passmark.</source>
         <translation>Vyberte, pokud je potřeba, označte rohový bod jako značku sestavení. Ukázat pouze pravou značku sestavení.</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.ui" line="1143"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.ui" line="1147"/>
         <source>Intersection (only right)</source>
         <translation>Průsečík (pouze pravý)</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.ui" line="1209"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.ui" line="1213"/>
         <source>Clockwise opening</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.ui" line="1217"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.ui" line="1221"/>
         <source>Manual shape</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.ui" line="1226"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.ui" line="1230"/>
         <source>Length</source>
         <translation>Délka</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.ui" line="1286"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.ui" line="1290"/>
         <source>Length:</source>
         <comment>notch depth</comment>
         <translation>Délka:</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.ui" line="1451"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.ui" line="1455"/>
         <source>Width</source>
         <translation>Šířka</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.ui" line="1511"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.ui" line="1515"/>
         <source>Width:</source>
         <comment>notch width</comment>
         <translation>Šířka:</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.ui" line="1736"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.ui" line="1740"/>
         <source>Angle:</source>
         <comment>notch angle</comment>
         <translation>Úhel:</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.ui" line="1929"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.ui" line="1933"/>
         <source>Control</source>
         <translation>Nastavení</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.ui" line="1980"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.ui" line="1984"/>
         <source>Visible</source>
         <translation>Viditelný</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.ui" line="2071"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.ui" line="2075"/>
         <source>Create a formula that regulates visibility. Values different from &quot;0&quot; make a path visible.</source>
         <translation>Vytvořte vzorec, který ovlivňuje viditelnost. Všechny hodnoty kromě &quot;0&quot; dělají cestu viditelnou.</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.ui" line="2077"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.ui" line="2081"/>
         <source>1</source>
         <translation>1</translation>
     </message>
@@ -6891,17 +6896,17 @@ Přesto použít nastavení?</translation>
         <translation>Nastavit viditelnost</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.ui" line="1159"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.ui" line="1163"/>
         <source>Intersection 2</source>
         <translation>Průsečík 2</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.ui" line="1175"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.ui" line="1179"/>
         <source>Intersection 2 (only left)</source>
         <translation>Průsečík 2 (pouze levý)</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.ui" line="1191"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.ui" line="1195"/>
         <source>Intersection 2 (only right)</source>
         <translation>Průsečík 2 (pouze pravý)</translation>
     </message>
@@ -6941,22 +6946,22 @@ Přesto použít nastavení?</translation>
         <translation>Cesta je obrys stříhání. Použijte na ovládání vyvedení do DXF-AAMA</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.cpp" line="1825"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.cpp" line="1828"/>
         <source>The list of pieces is empty. Please, first create at least one piece for current pattern piece.</source>
         <translation>Seznam dílů je prázdný. Nejprve, prosím, vytvořte alespoň jeden díl pro nynější střih.</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.ui" line="1905"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.ui" line="1909"/>
         <source>This option has effect only if the second passmark on seam line enabled in global preferences. The option helps disable the second passmark for this passmark only.</source>
         <translation>Tato volba účinkuje, jen když je druhá značka sestavení na čáře švu povolena v celkovém nastavení. Volba pomáhá zakázat druhou značku sestavení jen pro tuto značku sestavení.</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.ui" line="1908"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.ui" line="1912"/>
         <source>Show the second passmark on seam line</source>
         <translation>Ukázat druhou značku sestavení na čáře švu</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.cpp" line="1882"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.cpp" line="1886"/>
         <source>The same curve repeats twice!</source>
         <translation>Tatáž křivka se opakuje dvakrát!</translation>
     </message>
@@ -6975,17 +6980,17 @@ Přesto použít nastavení?</translation>
         <translation>Nynější švová záložka</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.ui" line="1008"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.ui" line="1012"/>
         <source>Acute angle that looks inside of piece</source>
         <translation>Ostrý úhel, který vypadá, že je uvnitř dílu</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.ui" line="1024"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.ui" line="1028"/>
         <source>Acute angle that looks outside of piece</source>
         <translation>Ostrý úhel, který vypadá, že je vně střihu</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.ui" line="1027"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.ui" line="1031"/>
         <source>V mark 2</source>
         <translation>Značka V 2</translation>
     </message>
@@ -6995,12 +7000,12 @@ Přesto použít nastavení?</translation>
         <translation>Vybrat hlavní cestu předmětů, &lt;b&gt;%1&lt;/b&gt; - obrátit směr křivky, &lt;b&gt;%2&lt;/b&gt; - dokončit vytvoření</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.ui" line="1037"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.ui" line="1041"/>
         <source>U mark</source>
         <translation>Značka U</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.ui" line="1047"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.ui" line="1051"/>
         <source>Box mark</source>
         <translation>Značka okénko</translation>
     </message>
@@ -7010,7 +7015,7 @@ Přesto použít nastavení?</translation>
         <translation>Upravit délku značky sestavení</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.cpp" line="1908"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.cpp" line="1912"/>
         <source>Invalid segment!</source>
         <translation>Neplatná část!</translation>
     </message>
@@ -7052,62 +7057,62 @@ Přesto použít nastavení?</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogplacelabel.ui" line="99"/>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogplacelabel.ui" line="282"/>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogplacelabel.ui" line="465"/>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogplacelabel.ui" line="698"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogplacelabel.ui" line="281"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogplacelabel.ui" line="463"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogplacelabel.ui" line="702"/>
         <source>Formula wizard</source>
         <translation>Průvodce vzorcem</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogplacelabel.ui" line="141"/>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogplacelabel.ui" line="324"/>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogplacelabel.ui" line="507"/>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogplacelabel.ui" line="740"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogplacelabel.ui" line="323"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogplacelabel.ui" line="505"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogplacelabel.ui" line="744"/>
         <source>Value</source>
         <translation>Hodnota</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogplacelabel.ui" line="170"/>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogplacelabel.ui" line="353"/>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogplacelabel.ui" line="536"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogplacelabel.ui" line="352"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogplacelabel.ui" line="534"/>
         <source>Calculation</source>
         <translation>Výpočet</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogplacelabel.ui" line="192"/>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogplacelabel.ui" line="375"/>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogplacelabel.ui" line="561"/>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogplacelabel.ui" line="794"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogplacelabel.ui" line="374"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogplacelabel.ui" line="559"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogplacelabel.ui" line="798"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Show full calculation in message box&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
         <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Ukázat celý výpočet v okně se zprávami&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogplacelabel.ui" line="262"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogplacelabel.ui" line="261"/>
         <source>Height:</source>
         <translation>Výška:</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogplacelabel.ui" line="445"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogplacelabel.ui" line="443"/>
         <source>Angle:</source>
         <translation>Úhel:</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogplacelabel.ui" line="542"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogplacelabel.ui" line="540"/>
         <source>0</source>
         <translation>0</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogplacelabel.ui" line="591"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogplacelabel.ui" line="588"/>
         <source>Point:</source>
         <translation>Bod:</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogplacelabel.ui" line="601"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogplacelabel.ui" line="598"/>
         <source>Piece:</source>
         <translation>Díl:</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogplacelabel.ui" line="611"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogplacelabel.ui" line="608"/>
         <source>Type:</source>
         <translation>Typ:</translation>
     </message>
@@ -7174,22 +7179,27 @@ Přesto použít nastavení?</translation>
         <translation>Umístit popis</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogplacelabel.ui" line="624"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogplacelabel.ui" line="620"/>
+        <source>Not mirrored</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogplacelabel.ui" line="628"/>
         <source>Control</source>
         <translation>Nastavení</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogplacelabel.ui" line="675"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogplacelabel.ui" line="679"/>
         <source>Visible</source>
         <translation>Viditelný</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogplacelabel.ui" line="766"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogplacelabel.ui" line="770"/>
         <source>Create a formula that regulates visibility. Values different from &quot;0&quot; make a path visible.</source>
         <translation>Vytvořte vzorec, který ovlivňuje viditelnost. Všechny hodnoty kromě &quot;0&quot; dělají cestu viditelnou.</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogplacelabel.ui" line="772"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogplacelabel.ui" line="776"/>
         <source>1</source>
         <translation>1</translation>
     </message>
@@ -8521,308 +8531,303 @@ Přesto použít nastavení?</translation>
 <context>
     <name>DialogSeamAllowance</name>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="589"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="598"/>
         <source>Ready!</source>
         <translation>Připraven!</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="1757"/>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="1837"/>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="1921"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="2050"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="2130"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="2214"/>
         <source>Value</source>
         <translation>Hodnota</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="3729"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="4408"/>
         <source>Default</source>
         <translation>Výchozí</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="4097"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="4821"/>
         <source>Detail</source>
         <translation>Jednotlivost (díl střihu)</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="1797"/>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="2320"/>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="2651"/>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="3136"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="2090"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="2649"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="3095"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="3674"/>
         <source>Grainline</source>
         <translation>Dráha nitě</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.cpp" line="2284"/>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="901"/>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="4532"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.cpp" line="2288"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="1167"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="5256"/>
         <source>Reverse</source>
         <translation>Převrátit</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.cpp" line="2294"/>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="4541"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.cpp" line="2298"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="5265"/>
         <source>Passmark</source>
         <translation>Značka sestavení</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.cpp" line="2314"/>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="4561"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.cpp" line="2318"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="5285"/>
         <source>One line</source>
         <translation>Jedna čára</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.cpp" line="2317"/>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="4564"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.cpp" line="2321"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="5288"/>
         <source>Two lines</source>
         <translation>Dvě čáry</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.cpp" line="2320"/>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="4567"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.cpp" line="2324"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="5291"/>
         <source>Three lines</source>
         <translation>Tři čáry</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.cpp" line="2323"/>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="4570"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.cpp" line="2327"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="5294"/>
         <source>T mark</source>
         <translation>Značka T</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.cpp" line="2327"/>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="4574"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.cpp" line="2331"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="5298"/>
         <source>External V mark</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.cpp" line="2331"/>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="4578"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.cpp" line="2335"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="5302"/>
         <source>Internal V mark</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.cpp" line="2334"/>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="4581"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.cpp" line="2338"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="5305"/>
         <source>U mark</source>
         <translation>Značka U</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.cpp" line="2337"/>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="4584"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.cpp" line="2341"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="5308"/>
         <source>Box mark</source>
         <translation>Značka okénko</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.cpp" line="2340"/>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="4587"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.cpp" line="2344"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="5311"/>
         <source>Check mark</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.cpp" line="2344"/>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="4591"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.cpp" line="2348"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="5315"/>
         <source>Check uniqueness</source>
         <translation>Ověřit jedinečnost</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.cpp" line="2349"/>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="4596"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.cpp" line="2353"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="5320"/>
         <source>Turn point</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.cpp" line="2355"/>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="4602"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.cpp" line="2359"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="5326"/>
         <source>Excluded</source>
         <translation>Vyloučeno</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.cpp" line="2361"/>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="905"/>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="948"/>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="982"/>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="1044"/>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="4608"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.cpp" line="2365"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="1171"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="1214"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="1248"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="1310"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="5332"/>
         <source>Delete</source>
         <translation>Smazat</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="895"/>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="947"/>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="1031"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="1161"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="1213"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="1297"/>
         <source>Options</source>
         <translation>Volby</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="1449"/>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="1500"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="1737"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="1789"/>
         <source>Error. Can&apos;t save piece path.</source>
         <translation>Chyba. Nelze uložit cestu dílu.</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="1769"/>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="1850"/>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="1933"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="2062"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="2143"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="2226"/>
         <source>Infinite/undefined result</source>
         <translation>Nekonečný/Nevymezený výsledek</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="1773"/>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="1854"/>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="1937"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="2066"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="2147"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="2230"/>
         <source>Length should be positive</source>
         <translation>Délka má být kladná</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="1784"/>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="1865"/>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="1948"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="2077"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="2158"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="2241"/>
         <source>Parser error: %1</source>
         <translation>Chyba při zpracování: %1</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="2353"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="2682"/>
         <source>Current seam allowance</source>
         <translation>Nynější švová záložka</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="2510"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="2892"/>
         <source>Edit seam allowance width</source>
         <translation>Upravit šířku švové záložky</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="2524"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="2906"/>
         <source>Edit seam allowance width before</source>
         <translation>Upravit šířku švové záložky před</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="2538"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="2920"/>
         <source>Edit seam allowance width after</source>
         <translation>Upravit šířku švové záložky po</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="2567"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="2949"/>
         <source>Edit passmark width</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="2581"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="2963"/>
         <source>Edit passmark angle</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="2867"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="3332"/>
         <source>You need more points!</source>
         <translation>Potřebujete více bodů!</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="2873"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="3338"/>
         <source>You have to choose points in a clockwise direction!</source>
         <translation>Musíte vybrat body po směru otáčení hodinových ručiček!</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="2881"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="3346"/>
         <source>First point cannot be equal to the last point!</source>
         <translation>První bod nemůže být stejný s posledním bodem!</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="2889"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="3354"/>
         <source>You have double points!</source>
         <translation>Máte zdvojené body!</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="3361"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="3909"/>
         <source>Empty</source>
         <translation>Prázdný</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="3408"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="3993"/>
         <source>main path</source>
         <translation>Hlavní cesta</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="3410"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="3995"/>
         <source>custom seam allowance</source>
         <translation>Vlastní švová záložka</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.cpp" line="2297"/>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="4544"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.cpp" line="2301"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="4376"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="5268"/>
         <source>None</source>
         <translation>Žádný</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="3134"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="3672"/>
         <source>Pins</source>
         <translation>Špendlíky</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="3387"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="3935"/>
         <source>no pin</source>
         <translation>Žádný špendlík</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="1879"/>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="1962"/>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="2329"/>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="2674"/>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="2683"/>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="2707"/>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="2716"/>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="3135"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="2172"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="2255"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="2658"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="3118"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="3127"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="3151"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="3160"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="3673"/>
         <source>Labels</source>
         <translation>Popisy</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="1781"/>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="1862"/>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="1945"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="2074"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="2155"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="2238"/>
         <source>Error</source>
         <translation>Chyba</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="2105"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="2434"/>
         <source>Edit length</source>
         <translation>Upravit délku</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="2111"/>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="2168"/>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="2228"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="2440"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="2497"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="2557"/>
         <source>Edit angle</source>
         <translation>Upravit úhel</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="2156"/>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="2216"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="2485"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="2545"/>
         <source>Edit height</source>
         <translation>Upravit výšku</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="2162"/>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="2222"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="2491"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="2551"/>
         <source>Edit width</source>
         <translation>Upravit šířku</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="571"/>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="578"/>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="587"/>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="601"/>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="610"/>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="616"/>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="3133"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="585"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="3671"/>
         <source>Paths</source>
         <translation>Cesty</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="2903"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="3368"/>
         <source>Each point in the path must be unique!</source>
         <translation>Každý bod v cestě musí být jedinečný!</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="632"/>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="638"/>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="3137"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="623"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="3675"/>
         <source>Passmarks</source>
         <translation>Značky sestavení</translation>
     </message>
@@ -8832,288 +8837,361 @@ Přesto použít nastavení?</translation>
         <translation>Nástroj Střihový díl</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="1033"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="1299"/>
         <source>Segment</source>
         <translation>Část</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="1034"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="1300"/>
         <source>Rectangle</source>
         <translation>Obdélník</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="1035"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="1301"/>
         <source>Cross</source>
         <translation>Kříž</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="1036"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="1302"/>
         <source>T-shaped</source>
         <translation>T-tvarovaný</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="1037"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="1303"/>
         <source>Doubletree</source>
         <translation>Dvojitý strom</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="1038"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="1304"/>
         <source>Corner</source>
         <translation>Roh</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="1039"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="1305"/>
         <source>Triangle</source>
         <translation>Trojúhelník</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="1040"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="1306"/>
         <source>H-shaped</source>
         <translation>H-tvarovaný</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="1041"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="1307"/>
         <source>Button</source>
         <translation>Tlačítko</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="3138"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="3676"/>
         <source>Place label</source>
         <translation>Umístit popis</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="593"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="602"/>
         <source>To open all detail&apos;s features complete creating the main path. Please, press OK.</source>
         <translation>Pro otevření všech vlastností jednotlivosti (dílu střihu) dokončete vytvoření hlavní cesty. Stiskněte, prosím, OK.</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="2897"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="3362"/>
         <source>The same curve repeats twice!</source>
         <translation>Tatáž křivka se opakuje dvakrát!</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="2386"/>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="2416"/>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="2445"/>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="2473"/>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="2500"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="2715"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="2745"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="2774"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="2802"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="2829"/>
         <source>&lt;Empty&gt;</source>
         <translation>&lt;prázdné&gt;</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="501"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="522"/>
         <source>Select main path objects clockwise, &lt;b&gt;%1&lt;/b&gt; - reverse direction curve, &lt;b&gt;%2&lt;/b&gt; - finish creation</source>
         <translation>Vybrat hlavní cestu předmětů po směru hodinových ručiček (doprava), &lt;b&gt;%1&lt;/b&gt; - obrátit směr křivky, &lt;b&gt;%2&lt;/b&gt; - dokončit vytvoření</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="1042"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="637"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="3677"/>
+        <source>Fold line</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="1308"/>
         <source>Circle</source>
         <translation>Kruh</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="2552"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="2934"/>
         <source>Edit passmark length</source>
         <translation>Upravit délku značky sestavení</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="3515"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="2976"/>
+        <source>Edit fold line height</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="2991"/>
+        <source>Edit fold line width</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="3006"/>
+        <source>Edit fold line center position</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="3400"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="3434"/>
+        <source>Invalid mirror line start point!</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="3407"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="3441"/>
+        <source>Invalid mirror line end point!</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="3415"/>
+        <source>Start and end mirror line points must be unique!</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="3449"/>
+        <source>Mirror points must be neighbors!</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="4100"/>
         <source>The customer name from individual measurements</source>
         <translation>Jméno zákazníka z jednotlivých měr</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="3519"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="4104"/>
         <source>The customer email from individual measurements</source>
         <translation>Adresa elektronické pošty zákazníka z jednotlivých měr</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="3523"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="4108"/>
         <source>The customer birth date from individual measurements</source>
         <translation>Datum narození zákazníka z jednotlivých měr</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="3577"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="4162"/>
         <source>Two ways (Up/Down)</source>
         <comment>grainline direction</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="3579"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="4164"/>
         <source>One way (Up)</source>
         <comment>grainline direction</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="3581"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="4166"/>
         <source>One way (Down)</source>
         <comment>grainline direction</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="3583"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="4168"/>
         <source>Four ways</source>
         <comment>grainline direction</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="3585"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="4170"/>
         <source>Two ways (Up/Left)</source>
         <comment>grainline direction</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="3587"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="4172"/>
         <source>Two ways (Up/Right)</source>
         <comment>grainline direction</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="3589"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="4174"/>
         <source>Two ways (Down/Left)</source>
         <comment>grainline direction</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="3591"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="4176"/>
         <source>Two ways (Down/Right)</source>
         <comment>grainline direction</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="3593"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="4178"/>
         <source>Three ways (Up/Down/Left)</source>
         <comment>grainline direction</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="3595"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="4180"/>
         <source>Three ways (Up/Down/Right)</source>
         <comment>grainline direction</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="3597"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="4182"/>
         <source>Three ways (Up/Left/Right)</source>
         <comment>grainline direction</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="3599"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="4184"/>
         <source>Three ways (Down/Left/Right)</source>
         <comment>grainline direction</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="4657"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="4368"/>
+        <source>Two arrows (text above)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="4370"/>
+        <source>Two arrows (text under)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="4372"/>
+        <source>Two arrows</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="4373"/>
+        <source>Text</source>
+        <translation type="unfinished">Text</translation>
+    </message>
+    <message>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="4374"/>
+        <source>Three dots</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="4375"/>
+        <source>Three X</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="5381"/>
         <source>Save label data.</source>
         <translation>Uložit data popisu.</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="4658"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="5382"/>
         <source>Label data were changed. Do you want to save them before editing label template?</source>
         <translation>Popisy byly změněny. Chcete je uložit, předtím než upravíte předlohu popisu?</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="4212"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="4936"/>
         <source>Height</source>
         <comment>dimension</comment>
         <translation>Výška</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="4216"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="4940"/>
         <source>Size</source>
         <comment>dimension</comment>
         <translation>Velikost</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="4220"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="4944"/>
         <source>Hip</source>
         <comment>dimension</comment>
         <translation>Kyčel</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="4224"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="4948"/>
         <source>Waist</source>
         <comment>dimension</comment>
         <translation>Pas</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="4230"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="4954"/>
         <source>Height label</source>
         <comment>dimension</comment>
         <translation>Popis výšky</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="4236"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="4960"/>
         <source>Size label</source>
         <comment>dimension</comment>
         <translation>Popis velikosti</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="4242"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="4966"/>
         <source>Hip label</source>
         <comment>dimension</comment>
         <translation>Popis kyčle</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="4248"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="4972"/>
         <source>Waist label</source>
         <comment>dimension</comment>
         <translation>Popis pasu</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="4261"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="4985"/>
         <source>Measurement: %1</source>
         <translation>Míry: %1</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="2911"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="3376"/>
         <source>Invalid segment!</source>
         <translation>Neplatná část!</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="4213"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="4937"/>
         <source>Dimension X</source>
         <comment>dimension</comment>
         <translation>Rozměr X</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="4217"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="4941"/>
         <source>Dimension Y</source>
         <comment>dimension</comment>
         <translation>Rozměr Y</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="4221"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="4945"/>
         <source>Dimension Z</source>
         <comment>dimension</comment>
         <translation>Rozměr Z</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="4225"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="4949"/>
         <source>Dimension W</source>
         <comment>dimension</comment>
         <translation>Rozměr W</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="4231"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="4955"/>
         <source>Dimension X label</source>
         <comment>dimension</comment>
         <translation>Popisek rozměru X</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="4237"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="4961"/>
         <source>Dimension Y label</source>
         <comment>dimension</comment>
         <translation>Popisek rozměru Y</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="4243"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="4967"/>
         <source>Dimension Z label</source>
         <comment>dimension</comment>
         <translation>Popisek rozměru Z</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="4249"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="4973"/>
         <source>Dimension W label</source>
         <comment>dimension</comment>
         <translation>Popisek rozměru W</translation>
@@ -10318,6 +10396,14 @@ Přesto použít nastavení?</translation>
     </message>
 </context>
 <context>
+    <name>FoldLine</name>
+    <message>
+        <location filename="../../src/libs/vlayout/vfoldline.cpp" line="140"/>
+        <source>Cut On Fold</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>FvUpdateWindow</name>
     <message>
         <location filename="../../src/libs/fervor/fvupdatewindow.ui" line="14"/>
@@ -10451,7 +10537,7 @@ Přesto použít nastavení?</translation>
 <context>
     <name>InitPieceLabelLanguages</name>
     <message>
-        <location filename="../../src/libs/vmisc/def.cpp" line="521"/>
+        <location filename="../../src/libs/vmisc/def.cpp" line="572"/>
         <source>Default</source>
         <translation>Výchozí</translation>
     </message>
@@ -14350,22 +14436,22 @@ Tato volba se projeví po opětovném spuštění.</translation>
         <translation>Chyba kompatibility VLayoutPassmark: actualClassVersion = %1 and classVersion = %2</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vgeometry/vlayoutplacelabel.cpp" line="82"/>
+        <location filename="../../src/libs/vgeometry/vlayoutplacelabel.cpp" line="84"/>
         <source>VLayoutPlaceLabel prefix mismatch error: actualStreamHeader = 0x%1 and streamHeader = 0x%2</source>
         <translation>Chyba v nesouladu předpony VLayoutPlaceLabel: actualStreamHeader = 0x%1 a streamHeader = 0x%2</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vgeometry/vlayoutplacelabel.cpp" line="94"/>
+        <location filename="../../src/libs/vgeometry/vlayoutplacelabel.cpp" line="96"/>
         <source>VLayoutPlaceLabel compatibility error: actualClassVersion = %1 and classVersion = %2</source>
         <translation>Chyba kompatibility VLayoutPlaceLabel: actualClassVersion = %1 a classVersion = %2</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vlayout/vabstractpiece_p.h" line="130"/>
+        <location filename="../../src/libs/vlayout/vabstractpiece_p.h" line="146"/>
         <source>VAbstractPieceData prefix mismatch error: actualStreamHeader = 0x%1 and streamHeader = 0x%2</source>
         <translation>Chyba v nesouladu předpony VAbstractPieceData: actualStreamHeader = 0x%1 a streamHeader = 0x%2</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vlayout/vabstractpiece_p.h" line="142"/>
+        <location filename="../../src/libs/vlayout/vabstractpiece_p.h" line="158"/>
         <source>VAbstractPieceData compatibility error: actualClassVersion = %1 and classVersion = %2</source>
         <translation>Chyba kompatibility VAbstractPieceData: actualClassVersion = %1 a classVersion = %2</translation>
     </message>
@@ -14380,12 +14466,12 @@ Tato volba se projeví po opětovném spuštění.</translation>
         <translation>Chyba kompatibility VRawLayoutData: actualClassVersion = %1 a classVersion = %2</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vlayout/vlayoutpiecepath_p.h" line="112"/>
+        <location filename="../../src/libs/vlayout/vlayoutpiecepath_p.h" line="114"/>
         <source>VLayoutPiecePathData prefix mismatch error: actualStreamHeader = 0x%1 and streamHeader = 0x%2</source>
         <translation>Chyba v nesouladu předpony VLayoutPiecePathData: actualStreamHeader = 0x%1 a streamHeader = 0x%2</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vlayout/vlayoutpiecepath_p.h" line="124"/>
+        <location filename="../../src/libs/vlayout/vlayoutpiecepath_p.h" line="126"/>
         <source>VLayoutPiecePathData compatibility error: actualClassVersion = %1 and classVersion = %2</source>
         <translation>Chyba kompatibility VLayoutPiecePathData: actualClassVersion = %1 a classVersion = %2</translation>
     </message>
@@ -14410,12 +14496,12 @@ Tato volba se projeví po opětovném spuštění.</translation>
         <translation>Chyba kompatibility VTextManager: actualClassVersion = %1 a classVersion = %2</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vmisc/def.cpp" line="560"/>
+        <location filename="../../src/libs/vmisc/def.cpp" line="611"/>
         <source>CustomSARecord prefix mismatch error: actualStreamHeader = 0x%1 and streamHeader = 0x%2</source>
         <translation>Chyba v nesouladu předpony CustomSARecord: actualStreamHeader = 0x%1 a streamHeader = 0x%2</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vmisc/def.cpp" line="572"/>
+        <location filename="../../src/libs/vmisc/def.cpp" line="623"/>
         <source>CustomSARecord compatibility error: actualClassVersion = %1 and classVersion = %2</source>
         <translation>Chyba kompatibility CustomSARecord: actualClassVersion = %1 a classVersion = %2</translation>
     </message>
@@ -14430,12 +14516,12 @@ Tato volba se projeví po opětovném spuštění.</translation>
         <translation>Chyba kompatibility VPieceNodeData: actualClassVersion = %1 a classVersion = %2</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vlayout/vlayoutpiece_p.h" line="172"/>
+        <location filename="../../src/libs/vlayout/vlayoutpiece_p.h" line="177"/>
         <source>VLayoutPieceData prefix mismatch error: actualStreamHeader = 0x%1 and streamHeader = 0x%2</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/libs/vlayout/vlayoutpiece_p.h" line="184"/>
+        <location filename="../../src/libs/vlayout/vlayoutpiece_p.h" line="189"/>
         <source>VLayoutPieceData compatibility error: actualClassVersion = %1 and classVersion = %2</source>
         <translation type="unfinished"></translation>
     </message>
@@ -14457,17 +14543,17 @@ Tato volba se projeví po opětovném spuštění.</translation>
         <translation type="vanished">Začněte vytvořením nového dílu střihu.</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vmisc/def.cpp" line="490"/>
+        <location filename="../../src/libs/vmisc/def.cpp" line="541"/>
         <source>mm</source>
         <translation>mm</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vmisc/def.cpp" line="499"/>
+        <location filename="../../src/libs/vmisc/def.cpp" line="550"/>
         <source>cm</source>
         <translation>cm</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vmisc/def.cpp" line="492"/>
+        <location filename="../../src/libs/vmisc/def.cpp" line="543"/>
         <source>inch</source>
         <translation>palec</translation>
     </message>
@@ -14485,7 +14571,7 @@ Tato volba se projeví po opětovném spuštění.</translation>
         <translation>Hodnota</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vmisc/def.cpp" line="494"/>
+        <location filename="../../src/libs/vmisc/def.cpp" line="545"/>
         <source>px</source>
         <translation>px</translation>
     </message>
@@ -14503,14 +14589,14 @@ Tato volba se projeví po opětovném spuštění.</translation>
         <translation type="vanished">Změny použity.</translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/xml/vplayoutfilereader.cpp" line="1092"/>
+        <location filename="../../src/app/puzzle/xml/vplayoutfilereader.cpp" line="1123"/>
         <location filename="../../src/libs/ifc/xml/vdomdocument.cpp" line="458"/>
         <location filename="../../src/libs/ifc/xml/vdomdocument.cpp" line="463"/>
         <source>Can&apos;t convert toUInt parameter</source>
         <translation>Nelze převést parametr toUInt</translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/xml/vplayoutfilereader.cpp" line="1029"/>
+        <location filename="../../src/app/puzzle/xml/vplayoutfilereader.cpp" line="1060"/>
         <location filename="../../src/libs/ifc/xml/vdomdocument.cpp" line="509"/>
         <source>Can&apos;t convert toBool parameter</source>
         <translation>Nelze převést parametr toBool</translation>
@@ -14521,7 +14607,7 @@ Tato volba se projeví po opětovném spuštění.</translation>
         <translation>Obdržen prázdný parametr</translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/xml/vplayoutfilereader.cpp" line="1066"/>
+        <location filename="../../src/app/puzzle/xml/vplayoutfilereader.cpp" line="1097"/>
         <location filename="../../src/libs/ifc/xml/vdomdocument.cpp" line="618"/>
         <location filename="../../src/libs/ifc/xml/vdomdocument.cpp" line="623"/>
         <source>Can&apos;t convert toDouble parameter</source>
@@ -14539,13 +14625,13 @@ Tato volba se projeví po opětovném spuštění.</translation>
     </message>
     <message>
         <location filename="../../src/libs/vgeometry/vplacelabelitem.cpp" line="146"/>
-        <location filename="../../src/libs/vpatterndb/vpiecepath.cpp" line="1029"/>
-        <location filename="../../src/libs/vpatterndb/vpiecepath.cpp" line="1040"/>
+        <location filename="../../src/libs/vpatterndb/vpiecepath.cpp" line="1027"/>
+        <location filename="../../src/libs/vpatterndb/vpiecepath.cpp" line="1038"/>
         <source>Visibility trigger contains error and will be ignored</source>
         <translation>Spouštěč viditelnost obsahuje chybu a bude se přehlížet</translation>
     </message>
     <message>
-        <location filename="../../src/libs/ifc/xml/vabstractpattern.cpp" line="243"/>
+        <location filename="../../src/libs/ifc/xml/vabstractpattern.cpp" line="254"/>
         <source>User material number %1 was not defined in this pattern.</source>
         <translation>Uživatelský materiál %1 v tomto střihu nebyl stanoven.</translation>
     </message>
@@ -14580,7 +14666,7 @@ Tato volba se projeví po opětovném spuštění.</translation>
         <translation>Nelze spočítat zářez pro bod &apos;%1&apos; v dílu &apos;%2&apos;. Nelze najít průsečík.</translation>
     </message>
     <message>
-        <location filename="../../src/libs/ifc/xml/vabstractpattern.cpp" line="211"/>
+        <location filename="../../src/libs/ifc/xml/vabstractpattern.cpp" line="222"/>
         <source>Cannot get tokens from formula &apos;%1&apos;. Parser error: %2.</source>
         <translation>Nelze získat symboly ze vzorce &apos;%1&apos;. Chyba v rozboru: %2.</translation>
     </message>
@@ -14624,8 +14710,8 @@ Tato volba se projeví po opětovném spuštění.</translation>
         <translation>Díl &apos;%1&apos; má neplatný přídavek na rozvržení. Prověřte, prosím, švovou záložku, a tak ověřte, jak se švová záložka chová.</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vlayout/vlayoutpiece.cpp" line="589"/>
-        <location filename="../../src/libs/vtools/tools/vtoolseamallowance.cpp" line="1579"/>
+        <location filename="../../src/libs/vlayout/vlayoutpiece.cpp" line="604"/>
+        <location filename="../../src/libs/vtools/tools/vtoolseamallowance.cpp" line="1820"/>
         <source>Piece &apos;%1&apos;. Seam allowance is not valid.</source>
         <translation>Díl &apos;%1&apos;. Švová záložka není platná.</translation>
     </message>
@@ -14667,8 +14753,8 @@ Tato volba se projeví po opětovném spuštění.</translation>
         <translation>Nelze vypočítat délku značky sestavení pro bod &apos;%1&apos;. Důvod: %2.</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vlayout/vlayoutpiece.cpp" line="253"/>
-        <location filename="../../src/libs/vlayout/vlayoutpiece.cpp" line="331"/>
+        <location filename="../../src/libs/vlayout/vlayoutpiece.cpp" line="255"/>
+        <location filename="../../src/libs/vlayout/vlayoutpiece.cpp" line="333"/>
         <source>Passmark &apos;%1&apos; is not part of piece &apos;%2&apos;.</source>
         <translation>Značka sestavení &apos;%1&apos; není součástí dílu &apos;%2&apos;.</translation>
     </message>
@@ -14690,7 +14776,7 @@ Tato volba se projeví po opětovném spuštění.</translation>
         <translation>Neplatný vzorec &apos;%1&apos; pro nástroj s ID &apos;%2&apos;. %3.</translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/xml/vplayoutfilereader.cpp" line="1118"/>
+        <location filename="../../src/app/puzzle/xml/vplayoutfilereader.cpp" line="1149"/>
         <location filename="../../src/libs/ifc/xml/vdomdocument.cpp" line="487"/>
         <location filename="../../src/libs/ifc/xml/vdomdocument.cpp" line="492"/>
         <source>Can&apos;t convert toInt parameter</source>
@@ -14727,27 +14813,27 @@ Tato volba se projeví po opětovném spuštění.</translation>
         <translation>Chyba v cestě &apos;%1&apos;. Výpočet části pro křivku &apos;%2&apos; se nezdařil. %3</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vlayout/vlayoutpiece.cpp" line="342"/>
+        <location filename="../../src/libs/vlayout/vlayoutpiece.cpp" line="344"/>
         <source>Cannot prepare builtin passmark &apos;%1&apos; for piece &apos;%2&apos;. Passmark is empty.</source>
         <translation>Nelze připravit značku sestavení &apos;%1&apos; pro díl &apos;%2&apos;. Značka sestavení je prázdná.</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vlayout/vlayoutpiece.cpp" line="357"/>
+        <location filename="../../src/libs/vlayout/vlayoutpiece.cpp" line="359"/>
         <source>Cannot prepare builtin  passmark &apos;%1&apos; for piece &apos;%2&apos;. Passmark base line is empty.</source>
         <translation>Nelze připravit vestavěnou značku sestavení &apos;%1&apos; pro díl &apos;%2&apos;. Základní čára značky sestavení je prázdná.</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vlayout/vlayoutpiece.cpp" line="265"/>
+        <location filename="../../src/libs/vlayout/vlayoutpiece.cpp" line="267"/>
         <source>Cannot prepare passmark &apos;%1&apos; for piece &apos;%2&apos;. Passmark base line is empty.</source>
         <translation>Nelze připravit značku sestavení &apos;%1&apos; pro díl &apos;%2&apos;. Základní čára značky sestavení je prázdná.</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vlayout/vlayoutpiece.cpp" line="294"/>
+        <location filename="../../src/libs/vlayout/vlayoutpiece.cpp" line="296"/>
         <source>Cannot prepare passmark &apos;%1&apos; for piece &apos;%2&apos;. Passmark is empty.</source>
         <translation>Nelze připravit značku sestavení &apos;%1&apos; pro díl &apos;%2&apos;. Značka sestavení je prázdná.</translation>
     </message>
     <message>
-        <location filename="../../src/libs/ifc/xml/vabstractpattern.cpp" line="217"/>
+        <location filename="../../src/libs/ifc/xml/vabstractpattern.cpp" line="228"/>
         <source>Cannot get tokens from formula &apos;%1&apos;. Formula error: %2.</source>
         <translation>Nelze získat symboly ze vzorce &apos;%1&apos;. Chyba ve vzorci: %2.</translation>
     </message>
@@ -14770,44 +14856,59 @@ Tato volba se projeví po opětovném spuštění.</translation>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/libs/vlayout/vlayoutpiece.cpp" line="446"/>
+        <location filename="../../src/libs/vlayout/vlayoutpiece.cpp" line="448"/>
         <location filename="../../src/libs/vlayout/vtextmanager.cpp" line="564"/>
         <source>No data for the height dimension.</source>
         <translation>Žádná data pro rozměr výšky.</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vlayout/vlayoutpiece.cpp" line="447"/>
+        <location filename="../../src/libs/vlayout/vlayoutpiece.cpp" line="449"/>
         <location filename="../../src/libs/vlayout/vtextmanager.cpp" line="565"/>
         <source>No data for the size dimension.</source>
         <translation>Žádná data pro rozměr velikosti.</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vlayout/vlayoutpiece.cpp" line="448"/>
+        <location filename="../../src/libs/vlayout/vlayoutpiece.cpp" line="450"/>
         <location filename="../../src/libs/vlayout/vtextmanager.cpp" line="566"/>
         <source>No data for the hip dimension.</source>
         <translation>Žádná data pro rozměr kyčle.</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vlayout/vlayoutpiece.cpp" line="449"/>
+        <location filename="../../src/libs/vlayout/vlayoutpiece.cpp" line="451"/>
         <location filename="../../src/libs/vlayout/vtextmanager.cpp" line="567"/>
         <source>No data for the waist dimension.</source>
         <translation>Žádná data pro rozměr pasu.</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/tools/vtoolseamallowance.cpp" line="226"/>
-        <location filename="../../src/libs/vtools/tools/vtoolseamallowance.cpp" line="1862"/>
+        <location filename="../../src/libs/vtools/tools/vtoolseamallowance.cpp" line="341"/>
+        <source>Cannot calculate fold line height for piece &apos;%1&apos;. Reason: %2.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/libs/vtools/tools/vtoolseamallowance.cpp" line="362"/>
+        <source>Cannot calculate fold line width for piece &apos;%1&apos;. Reason: %2.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/libs/vtools/tools/vtoolseamallowance.cpp" line="384"/>
+        <source>Cannot calculate fold line center position for piece &apos;%1&apos;. Reason: %2.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/libs/vtools/tools/vtoolseamallowance.cpp" line="429"/>
+        <location filename="../../src/libs/vtools/tools/vtoolseamallowance.cpp" line="2114"/>
         <source>Piece &apos;%1&apos;. Unable to load default piece label template.
 %2
 %3</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/tools/vtoolseamallowance.cpp" line="856"/>
+        <location filename="../../src/libs/vtools/tools/vtoolseamallowance.cpp" line="1111"/>
         <source>Piece &apos;%1&apos;. Grainline is not valid.</source>
         <translation>Díl &apos;%1&apos;. Dráha nitě není platná.</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vpatterndb/vpiece.cpp" line="1187"/>
+        <location filename="../../src/libs/vpatterndb/vpiece.cpp" line="1366"/>
         <source>Invalid global value for a passmark length. Piece &apos;%1&apos;. Length is less than minimal allowed.</source>
         <translation>Neplatná celková hodnota délky značky sestavení. Díl &apos;%1&apos;. Délka je menší než nejmenší povolená délka.</translation>
     </message>
@@ -14822,15 +14923,15 @@ Tato volba se projeví po opětovném spuštění.</translation>
         <translation>Otočit díly</translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="226"/>
-        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="276"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="228"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="278"/>
         <source>Cannot set printer page size</source>
         <translation>Nelze nastavit velikost strany tiskárny</translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="236"/>
-        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="286"/>
-        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="2992"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="238"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="288"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="3043"/>
         <source>Cannot set printer margins</source>
         <translation>Nelze nastavit okraje tiskárny</translation>
     </message>
@@ -14864,7 +14965,7 @@ Tato volba se projeví po opětovném spuštění.</translation>
         <translation>Ponechat pouze jednu kopii křivky &apos;%1&apos;</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/dialogtoolbox.cpp" line="832"/>
+        <location filename="../../src/libs/vtools/dialogs/dialogtoolbox.cpp" line="924"/>
         <source>Point &apos;%1&apos; does not lie on a curve &apos;%2&apos;</source>
         <translation>Bod &apos;%1&apos; neleží na křivce &apos;%2&apos;</translation>
     </message>
@@ -14889,25 +14990,25 @@ Tato volba se projeví po opětovném spuštění.</translation>
         <translation>Opravdu chcete smazat?</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vlayout/vlayoutpiece.cpp" line="451"/>
+        <location filename="../../src/libs/vlayout/vlayoutpiece.cpp" line="453"/>
         <location filename="../../src/libs/vlayout/vtextmanager.cpp" line="569"/>
         <source>No data for the X dimension.</source>
         <translation>Žádná data pro rozměr X.</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vlayout/vlayoutpiece.cpp" line="452"/>
+        <location filename="../../src/libs/vlayout/vlayoutpiece.cpp" line="454"/>
         <location filename="../../src/libs/vlayout/vtextmanager.cpp" line="570"/>
         <source>No data for the Y dimension.</source>
         <translation>Žádná data pro rozměr Y.</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vlayout/vlayoutpiece.cpp" line="453"/>
+        <location filename="../../src/libs/vlayout/vlayoutpiece.cpp" line="455"/>
         <location filename="../../src/libs/vlayout/vtextmanager.cpp" line="571"/>
         <source>No data for the Z dimension.</source>
         <translation>Žádná data pro rozměr Z.</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vlayout/vlayoutpiece.cpp" line="454"/>
+        <location filename="../../src/libs/vlayout/vlayoutpiece.cpp" line="456"/>
         <location filename="../../src/libs/vlayout/vtextmanager.cpp" line="572"/>
         <source>No data for the W dimension.</source>
         <translation>Žádná data pro rozměr W.</translation>
@@ -14935,32 +15036,32 @@ Tato volba se projeví po opětovném spuštění.</translation>
         <translation>Křivka &apos;%1&apos;. Délka vyjmuté části (%2) je příliš velká. Vylaďte ji na největší hodnotu.</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vpatterndb/vpiece.cpp" line="1435"/>
+        <location filename="../../src/libs/vpatterndb/vpiece.cpp" line="1614"/>
         <source>Piece &apos;%1&apos;. Internal path &apos;%2&apos; intersects with internal path &apos;%3&apos;.</source>
         <translation>Díl &apos;%1&apos;. Vnitřní cesta &apos;%2&apos; se protíná s vnitřní cestou &apos;%3&apos;.</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vpatterndb/vpiece.cpp" line="1350"/>
+        <location filename="../../src/libs/vpatterndb/vpiece.cpp" line="1529"/>
         <source>Piece &apos;%1&apos;. Internal path &apos;%2&apos; intersects with cutting contour.</source>
         <translation>Díl &apos;%1&apos;. Vnitřní cesta &apos;%2&apos; se protíná s řezným obrysem.</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vpatterndb/vpiece.cpp" line="1221"/>
+        <location filename="../../src/libs/vpatterndb/vpiece.cpp" line="1400"/>
         <source>Invalid global value for a passmark width. Piece &apos;%1&apos;. Width is less than minimal allowed.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/libs/vpatterndb/vpiece.cpp" line="1361"/>
+        <location filename="../../src/libs/vpatterndb/vpiece.cpp" line="1540"/>
         <source>Piece &apos;%1&apos;. Internal path &apos;%2&apos; not inside of cutting contour.</source>
         <translation>Díl &apos;%1&apos;. Vnitřní cesta &apos;%2&apos; není uvnitř řezného obrysu.</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vpatterndb/vpiecepath.cpp" line="432"/>
+        <location filename="../../src/libs/vpatterndb/vpiecepath.cpp" line="430"/>
         <source>Error in internal path &apos;%1&apos;. There is no intersection of first point with cutting contour</source>
         <translation>Chyba ve vnitřní cestě &apos;%1&apos;. Není tu žádný průnik prvního bodu s obrysem stříhání</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vpatterndb/vpiecepath.cpp" line="451"/>
+        <location filename="../../src/libs/vpatterndb/vpiecepath.cpp" line="449"/>
         <source>Error in internal path &apos;%1&apos;. There is no intersection of last point with cutting contour</source>
         <translation>Chyba ve vnitřní cestě &apos;%1&apos;. Není tu žádný průnik posledního bodu s obrysem stříhání</translation>
     </message>
@@ -17287,6 +17388,122 @@ Chcete uložit změny?</translation>
     </message>
 </context>
 <context>
+    <name>TabFoldLine</name>
+    <message>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabfoldline.ui" line="14"/>
+        <source>Form</source>
+        <translation type="unfinished">Formulář</translation>
+    </message>
+    <message>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabfoldline.ui" line="24"/>
+        <source>Fold line</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabfoldline.ui" line="32"/>
+        <source>Type:</source>
+        <translation type="unfinished">Typ:</translation>
+    </message>
+    <message>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabfoldline.ui" line="67"/>
+        <source>Bold</source>
+        <comment>Font formating</comment>
+        <translation type="unfinished">Tučné</translation>
+    </message>
+    <message>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabfoldline.ui" line="86"/>
+        <source>Italic</source>
+        <comment>Font formating</comment>
+        <translation type="unfinished">Kurzíva</translation>
+    </message>
+    <message>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabfoldline.ui" line="105"/>
+        <source>Aligns with the left edge</source>
+        <translation type="unfinished">Zarovnat k levému okraji</translation>
+    </message>
+    <message>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabfoldline.ui" line="124"/>
+        <source>Centers horizontally in the available space</source>
+        <translation type="unfinished">Vystředit vodorovně v dostupném prostoru</translation>
+    </message>
+    <message>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabfoldline.ui" line="143"/>
+        <source>Aligns with the right edge</source>
+        <translation type="unfinished">Zarovnat k pravému okraji</translation>
+    </message>
+    <message>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabfoldline.ui" line="177"/>
+        <source>Label:</source>
+        <translation type="unfinished">Popis:</translation>
+    </message>
+    <message>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabfoldline.ui" line="214"/>
+        <source>Manual shape</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabfoldline.ui" line="223"/>
+        <source>Height</source>
+        <translation type="unfinished">Výška</translation>
+    </message>
+    <message>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabfoldline.ui" line="283"/>
+        <source>Height:</source>
+        <comment>notch depth</comment>
+        <translation type="unfinished">Výška:</translation>
+    </message>
+    <message>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabfoldline.ui" line="306"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabfoldline.ui" line="534"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabfoldline.ui" line="762"/>
+        <source>Formula wizard</source>
+        <translation type="unfinished">Průvodce vzorcem</translation>
+    </message>
+    <message>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabfoldline.ui" line="363"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabfoldline.ui" line="591"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabfoldline.ui" line="819"/>
+        <source>Value</source>
+        <translation type="unfinished">Hodnota</translation>
+    </message>
+    <message>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabfoldline.ui" line="395"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabfoldline.ui" line="623"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabfoldline.ui" line="851"/>
+        <source>Calculation</source>
+        <translation type="unfinished">Výpočet</translation>
+    </message>
+    <message>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabfoldline.ui" line="420"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabfoldline.ui" line="648"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabfoldline.ui" line="876"/>
+        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Show full calculation in message box&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
+        <translation type="unfinished">&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Ukázat celý výpočet v okně se zprávami&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+    </message>
+    <message>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabfoldline.ui" line="451"/>
+        <source>Width</source>
+        <translation type="unfinished">Šířka</translation>
+    </message>
+    <message>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabfoldline.ui" line="511"/>
+        <source>Width:</source>
+        <comment>notch width</comment>
+        <translation type="unfinished">Šířka:</translation>
+    </message>
+    <message>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabfoldline.ui" line="679"/>
+        <source>Center</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabfoldline.ui" line="739"/>
+        <source>Center:</source>
+        <comment>notch angle</comment>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>TabGrainline</name>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabgrainline.ui" line="39"/>
@@ -17856,133 +18073,145 @@ Chcete uložit změny?</translation>
         <translation>Všechny předměty v cestě mají následovat po směru otáčení hodinových ručiček.</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabpaths.ui" line="311"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabpaths.ui" line="353"/>
         <source>Forbid piece be mirrored in a layout.</source>
         <translation>Zamezit zrcadlení dílu střihu v rozložení.</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabpaths.ui" line="314"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabpaths.ui" line="356"/>
         <source>Forbid flipping</source>
         <translation>Zakázat přetočení</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabpaths.ui" line="191"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabpaths.ui" line="233"/>
         <source>Ready!</source>
         <translation>Připraven!</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabpaths.ui" line="331"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabpaths.ui" line="102"/>
+        <source>Show full piece</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabpaths.ui" line="204"/>
+        <source>Mirror line</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabpaths.ui" line="373"/>
         <source>Force piece to always follow grainline direction regardless of layout settings.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabpaths.ui" line="334"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabpaths.ui" line="376"/>
         <source>Follow grainline</source>
         <translation>Následovat dráhu nitě</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabpaths.ui" line="355"/>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabpaths.ui" line="361"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabpaths.ui" line="397"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabpaths.ui" line="403"/>
         <source>Seam allowance</source>
         <translation>Švová záložka</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabpaths.ui" line="447"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabpaths.ui" line="489"/>
         <source>Width:</source>
         <translation>Šířka:</translation>
-    </message>
-    <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabpaths.ui" line="467"/>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabpaths.ui" line="706"/>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabpaths.ui" line="896"/>
-        <source>Formula wizard</source>
-        <translation>Průvodce vzorcem</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabpaths.ui" line="509"/>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabpaths.ui" line="748"/>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabpaths.ui" line="938"/>
+        <source>Formula wizard</source>
+        <translation>Průvodce vzorcem</translation>
+    </message>
+    <message>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabpaths.ui" line="551"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabpaths.ui" line="790"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabpaths.ui" line="980"/>
         <source>Value</source>
         <translation>Hodnota</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabpaths.ui" line="535"/>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabpaths.ui" line="774"/>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabpaths.ui" line="964"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabpaths.ui" line="577"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabpaths.ui" line="816"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabpaths.ui" line="1006"/>
         <source>Calculation</source>
         <translation>Výpočet</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabpaths.ui" line="557"/>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabpaths.ui" line="796"/>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabpaths.ui" line="986"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabpaths.ui" line="599"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabpaths.ui" line="838"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabpaths.ui" line="1028"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Show full calculation in message box&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
         <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Ukázat celý výpočet v okně se zprávami&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabpaths.ui" line="582"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabpaths.ui" line="624"/>
         <source>Nodes</source>
         <translation>Uzly</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabpaths.ui" line="599"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabpaths.ui" line="641"/>
         <source>Node:</source>
         <translation>Uzel:</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabpaths.ui" line="676"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabpaths.ui" line="718"/>
         <source>Before:</source>
         <translation>Předchozí:</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabpaths.ui" line="696"/>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabpaths.ui" line="886"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabpaths.ui" line="738"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabpaths.ui" line="928"/>
         <source>Return to default width</source>
         <translation>Vrátit na výchozí šířku</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabpaths.ui" line="699"/>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabpaths.ui" line="889"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabpaths.ui" line="741"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabpaths.ui" line="931"/>
         <source>Default</source>
         <translation>Výchozí</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabpaths.ui" line="866"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabpaths.ui" line="908"/>
         <source>After:</source>
         <translation>Po:</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabpaths.ui" line="1013"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabpaths.ui" line="1055"/>
         <source>Angle:</source>
         <translation>Úhel:</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabpaths.ui" line="1088"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabpaths.ui" line="210"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabpaths.ui" line="1130"/>
         <source>Start point:</source>
         <translation>Počáteční bod:</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabpaths.ui" line="1098"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabpaths.ui" line="220"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabpaths.ui" line="1140"/>
         <source>End point:</source>
         <translation>Koncový bod:</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabpaths.ui" line="1108"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabpaths.ui" line="1150"/>
         <source>Include as:</source>
         <translation>Zahrnout jako:</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabpaths.ui" line="1150"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabpaths.ui" line="1192"/>
         <source>Internal paths</source>
         <translation>Vnitřní cesty</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabpaths.ui" line="374"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabpaths.ui" line="416"/>
         <source>The seam allowance is part of main path</source>
         <translation>Švová záložka je částí hlavní cesty</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabpaths.ui" line="377"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabpaths.ui" line="419"/>
         <source>Built in</source>
         <translation>Vestavěno</translation>
     </message>
@@ -17997,89 +18226,89 @@ Chcete uložit změny?</translation>
         <translation>Skrýt hlavní cestu</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabpaths.ui" line="243"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabpaths.ui" line="285"/>
         <source>Name of detail:</source>
         <translation>Název jednotlivosti (dílu střihu):</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabpaths.ui" line="226"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabpaths.ui" line="268"/>
         <source>Detail</source>
         <translation>Jednotlivost (díl střihu)</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabpaths.ui" line="229"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabpaths.ui" line="271"/>
         <source>Name can&apos;t be empty</source>
         <translation>Název nemůže být prázdný</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabpaths.ui" line="321"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabpaths.ui" line="363"/>
         <source>Force piece to be always flipped in a layout.</source>
         <translation>Vynutit, aby byl díl vždy přetočen v rozložení.</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabpaths.ui" line="324"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabpaths.ui" line="366"/>
         <source>Force flipping</source>
         <translation>Vynutit přetočení</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabpaths.ui" line="111"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabpaths.ui" line="124"/>
         <source>Move on top</source>
         <translation>Posunout úplně nahoru</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabpaths.ui" line="128"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabpaths.ui" line="141"/>
         <source>Move up</source>
         <translation>Posunout nahoru</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabpaths.ui" line="145"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabpaths.ui" line="158"/>
         <source>Move down</source>
         <translation>Posunout dolů</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabpaths.ui" line="162"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabpaths.ui" line="175"/>
         <source>Move on bottom</source>
         <translation>Posunout úplně dolů</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabpaths.ui" line="236"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabpaths.ui" line="278"/>
         <source>Priority:</source>
         <translation>Přednost:</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabpaths.ui" line="264"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabpaths.ui" line="306"/>
         <source>Controls priority in layout. 0 - no priority.</source>
         <translation>Ovládá přednost v rozvržení. 0 - žádná přednost.</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabpaths.ui" line="387"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabpaths.ui" line="429"/>
         <source>Automatic</source>
         <comment>seam allowance</comment>
         <translation>Automaticky</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabpaths.ui" line="1054"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabpaths.ui" line="1096"/>
         <source>Custom</source>
         <comment>seam allowance</comment>
         <translation>Vlastní</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabpaths.ui" line="205"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabpaths.ui" line="247"/>
         <source>Piece</source>
         <translation>Díl</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabpaths.ui" line="213"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabpaths.ui" line="255"/>
         <source>Universally Unique IDentifier of piece. Used to identifier piece while updating manual layout. Left empty to generate new value.</source>
         <translation>Univerzálně jedinečný identifikátor dílu (UUID). Používá se k rozpoznání kusu při aktualizaci ručního rozvržení. Ponechejte prázdné pro vytvoření nové hodnoty.</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabpaths.ui" line="250"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabpaths.ui" line="292"/>
         <source>Gradation label:</source>
         <translation>Popis postupné změny:</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabpaths.ui" line="283"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabpaths.ui" line="325"/>
         <source>Insert…</source>
         <translation>Vložit…</translation>
     </message>
@@ -18089,12 +18318,12 @@ Chcete uložit změny?</translation>
         <translation>Na výkresu</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabpaths.ui" line="292"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabpaths.ui" line="334"/>
         <source>Short name:</source>
         <translation>Krátký název:</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabpaths.ui" line="299"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabpaths.ui" line="341"/>
         <source>Name used to generate a variable</source>
         <translation>Název použitý k vytvoření proměnné</translation>
     </message>
@@ -18462,6 +18691,14 @@ Chcete uložit změny?</translation>
         <location filename="../../src/libs/vtools/undocommands/togglepiecestate.cpp" line="52"/>
         <source>detail in layout list</source>
         <translation>Jednotlivost (díl střihu) v seznamu rozvržení</translation>
+    </message>
+</context>
+<context>
+    <name>ToggleShowFullPiece</name>
+    <message>
+        <location filename="../../src/libs/vtools/undocommands/togglepiecestate.cpp" line="228"/>
+        <source>show full piece</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -18899,29 +19136,29 @@ Chcete uložit změny?</translation>
 <context>
     <name>VAbstractPattern</name>
     <message>
-        <location filename="../../src/libs/ifc/xml/vabstractpattern.cpp" line="1588"/>
+        <location filename="../../src/libs/ifc/xml/vabstractpattern.cpp" line="1600"/>
         <source>Can&apos;t find tool in table.</source>
         <translation>Nelze najít nástroj v tabulce.</translation>
     </message>
     <message>
-        <location filename="../../src/libs/ifc/xml/vabstractpattern.cpp" line="2117"/>
+        <location filename="../../src/libs/ifc/xml/vabstractpattern.cpp" line="2129"/>
         <source>Error creating or updating group</source>
         <translation>Chyba při vytváření nebo aktualizaci skupiny</translation>
     </message>
     <message>
-        <location filename="../../src/libs/ifc/xml/vabstractpattern.cpp" line="2185"/>
+        <location filename="../../src/libs/ifc/xml/vabstractpattern.cpp" line="2197"/>
         <source>measurement</source>
         <translation>míra</translation>
     </message>
     <message>
-        <location filename="../../src/libs/ifc/xml/vabstractpattern.cpp" line="2438"/>
-        <location filename="../../src/libs/ifc/xml/vabstractpattern.cpp" line="2616"/>
-        <location filename="../../src/libs/ifc/xml/vabstractpattern.cpp" line="2696"/>
+        <location filename="../../src/libs/ifc/xml/vabstractpattern.cpp" line="2450"/>
+        <location filename="../../src/libs/ifc/xml/vabstractpattern.cpp" line="2628"/>
+        <location filename="../../src/libs/ifc/xml/vabstractpattern.cpp" line="2708"/>
         <source>New group</source>
         <translation>Nová skupina</translation>
     </message>
     <message>
-        <location filename="../../src/libs/ifc/xml/vabstractpattern.cpp" line="848"/>
+        <location filename="../../src/libs/ifc/xml/vabstractpattern.cpp" line="860"/>
         <source>Wrong tag name &apos;%1&apos;.</source>
         <translation>Špatný název značky &apos;%1&apos;.</translation>
     </message>
@@ -18929,7 +19166,7 @@ Chcete uložit změny?</translation>
 <context>
     <name>VAbstractPiece</name>
     <message>
-        <location filename="../../src/libs/vlayout/vabstractpiece.cpp" line="1086"/>
+        <location filename="../../src/libs/vlayout/vabstractpiece.cpp" line="1098"/>
         <source>Piece &apos;%1&apos;. Not enough points to build seam allowance.</source>
         <translation>Díl &apos;%1&apos;. Nedostatek bodů pro vytvoření švové záložky.</translation>
     </message>
@@ -19745,17 +19982,17 @@ Chcete uložit změny?</translation>
 <context>
     <name>VBoundary</name>
     <message>
-        <location filename="../../src/libs/vlayout/vboundary.cpp" line="628"/>
+        <location filename="../../src/libs/vlayout/vboundary.cpp" line="308"/>
         <source>Piece &apos;%1&apos;.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/libs/vlayout/vboundary.cpp" line="634"/>
+        <location filename="../../src/libs/vlayout/vboundary.cpp" line="314"/>
         <source>Unable to insert notch for point &apos;%1&apos;.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/libs/vlayout/vboundary.cpp" line="638"/>
+        <location filename="../../src/libs/vlayout/vboundary.cpp" line="318"/>
         <source>Unable to insert notch.</source>
         <translation type="unfinished"></translation>
     </message>
@@ -20833,7 +21070,7 @@ Chcete uložit změny?</translation>
 <context>
     <name>VLayoutConverter</name>
     <message>
-        <location filename="../../src/libs/ifc/xml/vlayoutconverter.cpp" line="172"/>
+        <location filename="../../src/libs/ifc/xml/vlayoutconverter.cpp" line="173"/>
         <source>Could not change version.</source>
         <translation>Nebylo možné změnit verzi.</translation>
     </message>
@@ -20925,12 +21162,12 @@ Chcete uložit změny?</translation>
 <context>
     <name>VLayoutPiece</name>
     <message>
-        <location filename="../../src/libs/vlayout/vlayoutpiece.cpp" line="606"/>
+        <location filename="../../src/libs/vlayout/vlayoutpiece.cpp" line="621"/>
         <source>Piece %1 doesn&apos;t have shape.</source>
         <translation>Díl %1 nemá tvar.</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vlayout/vlayoutpiece.cpp" line="1561"/>
+        <location filename="../../src/libs/vlayout/vlayoutpiece.cpp" line="1763"/>
         <source>Invalid SVG font &apos;%1&apos;. Fallback to outline font.</source>
         <translation type="unfinished"></translation>
     </message>
@@ -21002,7 +21239,7 @@ Chcete uložit změny?</translation>
         <translation>V rozvržení</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/tools/nodeDetails/vnodepoint.cpp" line="361"/>
+        <location filename="../../src/libs/vtools/tools/nodeDetails/vnodepoint.cpp" line="374"/>
         <source>Delete</source>
         <translation>Smazat</translation>
     </message>
@@ -21012,37 +21249,37 @@ Chcete uložit změny?</translation>
         <translation>Zakázat přetočení</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/tools/nodeDetails/vnodepoint.cpp" line="455"/>
+        <location filename="../../src/libs/vtools/tools/nodeDetails/vnodepoint.cpp" line="468"/>
         <source>by length</source>
         <translation>Podle délky</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/tools/nodeDetails/vnodepoint.cpp" line="457"/>
+        <location filename="../../src/libs/vtools/tools/nodeDetails/vnodepoint.cpp" line="470"/>
         <source>by points intersetions</source>
         <translation>Podle průsečíků</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/tools/nodeDetails/vnodepoint.cpp" line="459"/>
+        <location filename="../../src/libs/vtools/tools/nodeDetails/vnodepoint.cpp" line="472"/>
         <source>by first edge symmetry</source>
         <translation>Podle souměrnosti prvního okraje</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/tools/nodeDetails/vnodepoint.cpp" line="461"/>
+        <location filename="../../src/libs/vtools/tools/nodeDetails/vnodepoint.cpp" line="474"/>
         <source>by second edge symmetry</source>
         <translation>Podle souměrnosti druhého okraje</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/tools/nodeDetails/vnodepoint.cpp" line="463"/>
+        <location filename="../../src/libs/vtools/tools/nodeDetails/vnodepoint.cpp" line="476"/>
         <source>by first edge right angle</source>
         <translation>Podle pravého úhlu prvního okraje</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/tools/nodeDetails/vnodepoint.cpp" line="465"/>
+        <location filename="../../src/libs/vtools/tools/nodeDetails/vnodepoint.cpp" line="478"/>
         <source>by second edge right angle</source>
         <translation>Podle pravého úhlu druhého okraje</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/tools/nodeDetails/vnodepoint.cpp" line="383"/>
+        <location filename="../../src/libs/vtools/tools/nodeDetails/vnodepoint.cpp" line="396"/>
         <source>Passmark</source>
         <translation>Značka sestavení</translation>
     </message>
@@ -21062,112 +21299,117 @@ Chcete uložit změny?</translation>
         <translation>Vynutit přetočení</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/tools/nodeDetails/vnodepoint.cpp" line="356"/>
+        <location filename="../../src/libs/vtools/tools/nodeDetails/vnodepoint.cpp" line="355"/>
+        <source>Show full piece</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/libs/vtools/tools/nodeDetails/vnodepoint.cpp" line="369"/>
         <source>Reset piece label template</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/tools/nodeDetails/vnodepoint.cpp" line="385"/>
+        <location filename="../../src/libs/vtools/tools/nodeDetails/vnodepoint.cpp" line="398"/>
         <source>None</source>
         <translation>Žádný</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/tools/nodeDetails/vnodepoint.cpp" line="428"/>
+        <location filename="../../src/libs/vtools/tools/nodeDetails/vnodepoint.cpp" line="441"/>
         <source>Seam allowance angle</source>
         <translation>Úhel švové záložky</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/tools/nodeDetails/vnodepoint.cpp" line="481"/>
+        <location filename="../../src/libs/vtools/tools/nodeDetails/vnodepoint.cpp" line="494"/>
         <source>Passmark angle</source>
         <translation>Úhel značky sestavení</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/tools/nodeDetails/vnodepoint.cpp" line="494"/>
+        <location filename="../../src/libs/vtools/tools/nodeDetails/vnodepoint.cpp" line="507"/>
         <source>Straightforward</source>
         <translation>Přímo</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/tools/nodeDetails/vnodepoint.cpp" line="496"/>
+        <location filename="../../src/libs/vtools/tools/nodeDetails/vnodepoint.cpp" line="509"/>
         <source>Bisector</source>
         <translation>Osa</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/tools/nodeDetails/vnodepoint.cpp" line="498"/>
+        <location filename="../../src/libs/vtools/tools/nodeDetails/vnodepoint.cpp" line="511"/>
         <source>Intersection</source>
         <translation>Průsečík</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/tools/nodeDetails/vnodepoint.cpp" line="501"/>
+        <location filename="../../src/libs/vtools/tools/nodeDetails/vnodepoint.cpp" line="514"/>
         <source>Intersection (only left)</source>
         <translation>Průsečík (pouze levý)</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/tools/nodeDetails/vnodepoint.cpp" line="504"/>
+        <location filename="../../src/libs/vtools/tools/nodeDetails/vnodepoint.cpp" line="517"/>
         <source>Intersection (only right)</source>
         <translation>Průsečík (pouze pravý)</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/tools/nodeDetails/vnodepoint.cpp" line="506"/>
+        <location filename="../../src/libs/vtools/tools/nodeDetails/vnodepoint.cpp" line="519"/>
         <source>Intersection 2</source>
         <translation>Průsečík 2</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/tools/nodeDetails/vnodepoint.cpp" line="509"/>
+        <location filename="../../src/libs/vtools/tools/nodeDetails/vnodepoint.cpp" line="522"/>
         <source>Intersection 2 (only left)</source>
         <translation>Průsečík 2 (pouze levý)</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/tools/nodeDetails/vnodepoint.cpp" line="512"/>
+        <location filename="../../src/libs/vtools/tools/nodeDetails/vnodepoint.cpp" line="525"/>
         <source>Intersection 2 (only right)</source>
         <translation>Průsečík 2 (pouze pravý)</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/tools/nodeDetails/vnodepoint.cpp" line="401"/>
+        <location filename="../../src/libs/vtools/tools/nodeDetails/vnodepoint.cpp" line="414"/>
         <source>One line</source>
         <translation>Jedna čára</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/tools/nodeDetails/vnodepoint.cpp" line="403"/>
+        <location filename="../../src/libs/vtools/tools/nodeDetails/vnodepoint.cpp" line="416"/>
         <source>Two lines</source>
         <translation>Dvě čáry</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/tools/nodeDetails/vnodepoint.cpp" line="405"/>
+        <location filename="../../src/libs/vtools/tools/nodeDetails/vnodepoint.cpp" line="418"/>
         <source>Three lines</source>
         <translation>Tři čáry</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/tools/nodeDetails/vnodepoint.cpp" line="407"/>
+        <location filename="../../src/libs/vtools/tools/nodeDetails/vnodepoint.cpp" line="420"/>
         <source>T mark</source>
         <translation>Značka T</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/tools/nodeDetails/vnodepoint.cpp" line="409"/>
+        <location filename="../../src/libs/vtools/tools/nodeDetails/vnodepoint.cpp" line="422"/>
         <source>External V mark</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/tools/nodeDetails/vnodepoint.cpp" line="411"/>
+        <location filename="../../src/libs/vtools/tools/nodeDetails/vnodepoint.cpp" line="424"/>
         <source>Internal V mark</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/tools/nodeDetails/vnodepoint.cpp" line="417"/>
+        <location filename="../../src/libs/vtools/tools/nodeDetails/vnodepoint.cpp" line="430"/>
         <source>Check mark</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/tools/nodeDetails/vnodepoint.cpp" line="413"/>
+        <location filename="../../src/libs/vtools/tools/nodeDetails/vnodepoint.cpp" line="426"/>
         <source>U mark</source>
         <translation>Značka U</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/tools/nodeDetails/vnodepoint.cpp" line="415"/>
+        <location filename="../../src/libs/vtools/tools/nodeDetails/vnodepoint.cpp" line="428"/>
         <source>Box mark</source>
         <translation>Značka okénko</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/tools/nodeDetails/vnodepoint.cpp" line="419"/>
+        <location filename="../../src/libs/vtools/tools/nodeDetails/vnodepoint.cpp" line="432"/>
         <source>Turn point</source>
         <translation type="unfinished"></translation>
     </message>
@@ -21175,52 +21417,52 @@ Chcete uložit změny?</translation>
 <context>
     <name>VPApplication</name>
     <message>
-        <location filename="../../src/app/puzzle/vpapplication.cpp" line="314"/>
+        <location filename="../../src/app/puzzle/vpapplication.cpp" line="319"/>
         <source>Error parsing file. Program will be terminated.</source>
         <translation>Chyba při zpracování souboru. Program bude ukončen.</translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/vpapplication.cpp" line="320"/>
+        <location filename="../../src/app/puzzle/vpapplication.cpp" line="325"/>
         <source>Error bad id. Program will be terminated.</source>
         <translation>Chyba. Špatný identifikátor. Program bude ukončen.</translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/vpapplication.cpp" line="326"/>
+        <location filename="../../src/app/puzzle/vpapplication.cpp" line="331"/>
         <source>Error can&apos;t convert value. Program will be terminated.</source>
         <translation>Chyba. Nelze převést hodnotu. Program bude ukončen.</translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/vpapplication.cpp" line="332"/>
+        <location filename="../../src/app/puzzle/vpapplication.cpp" line="337"/>
         <source>Error empty parameter. Program will be terminated.</source>
         <translation>Chyba. Prázdný parametr. Program bude ukončen.</translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/vpapplication.cpp" line="338"/>
+        <location filename="../../src/app/puzzle/vpapplication.cpp" line="343"/>
         <source>Error wrong id. Program will be terminated.</source>
         <translation>Chyba. Špatný identifikátor. Program bude ukončen.</translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/vpapplication.cpp" line="351"/>
+        <location filename="../../src/app/puzzle/vpapplication.cpp" line="356"/>
         <source>Something&apos;s wrong!!</source>
         <translation>Něco je špatně!</translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/vpapplication.cpp" line="357"/>
+        <location filename="../../src/app/puzzle/vpapplication.cpp" line="362"/>
         <source>Exception thrown: %1. Program will be terminated.</source>
         <translation>Způsobena chyba: %1. Program bude ukončen.</translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/vpapplication.cpp" line="670"/>
+        <location filename="../../src/app/puzzle/vpapplication.cpp" line="675"/>
         <source>Can&apos;t begin to listen for incoming connections on name &apos;%1&apos;</source>
         <translation>Nelze začít naslouchat příchozímu spojení &apos;%1&apos;</translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/vpapplication.cpp" line="689"/>
+        <location filename="../../src/app/puzzle/vpapplication.cpp" line="694"/>
         <source>Export mode doesn&apos;t support opening several files.</source>
         <translation>Režim vyvedení nepodporuje otevření více souborů.</translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/vpapplication.cpp" line="696"/>
+        <location filename="../../src/app/puzzle/vpapplication.cpp" line="701"/>
         <source>Import raw layout data does not support opening several layout files.</source>
         <translation>Zavedení nezpracovaných dat rozvržení nepodporuje otevření více souborů rozvržení.</translation>
     </message>
@@ -21338,14 +21580,22 @@ Chcete uložit změny?</translation>
 <context>
     <name>VPGraphicsPiece</name>
     <message>
-        <location filename="../../src/app/puzzle/scene/vpgraphicspiece.cpp" line="416"/>
+        <location filename="../../src/app/puzzle/scene/vpgraphicspiece.cpp" line="418"/>
         <source>Move to</source>
         <translation>Přesunout do</translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/scene/vpgraphicspiece.cpp" line="430"/>
+        <location filename="../../src/app/puzzle/scene/vpgraphicspiece.cpp" line="432"/>
         <source>Remove from Sheet</source>
         <translation>Odstranit z listu</translation>
+    </message>
+</context>
+<context>
+    <name>VPGraphicsSheet</name>
+    <message>
+        <location filename="../../src/app/puzzle/scene/vpgraphicssheet.cpp" line="443"/>
+        <source>FOLD</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -21359,37 +21609,37 @@ Chcete uložit změny?</translation>
 <context>
     <name>VPLayoutFileReader</name>
     <message>
-        <location filename="../../src/app/puzzle/xml/vplayoutfilereader.cpp" line="503"/>
+        <location filename="../../src/app/puzzle/xml/vplayoutfilereader.cpp" line="504"/>
         <source>Piece</source>
         <translation>Díl</translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/xml/vplayoutfilereader.cpp" line="654"/>
+        <location filename="../../src/app/puzzle/xml/vplayoutfilereader.cpp" line="660"/>
         <source>Error in line %1. Grainline main line is empty.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/xml/vplayoutfilereader.cpp" line="1009"/>
+        <location filename="../../src/app/puzzle/xml/vplayoutfilereader.cpp" line="1040"/>
         <source>Got empty attribute &apos;%1&apos;</source>
         <translation>Obdržena prázdná vlastnost &apos;%1&apos;</translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/xml/vplayoutfilereader.cpp" line="629"/>
+        <location filename="../../src/app/puzzle/xml/vplayoutfilereader.cpp" line="635"/>
         <source>Error in line %1. Seam allowance is empty.</source>
         <translation>Chyba na řádku %1. Švová záložka je prázdná.</translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/xml/vplayoutfilereader.cpp" line="748"/>
+        <location filename="../../src/app/puzzle/xml/vplayoutfilereader.cpp" line="755"/>
         <source>Error in line %1. Internal path shape is empty.</source>
         <translation>Chyba v řádku %1. Tvar vnitřní cesty je prázdný.</translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/xml/vplayoutfilereader.cpp" line="996"/>
+        <location filename="../../src/app/puzzle/xml/vplayoutfilereader.cpp" line="1027"/>
         <source>Unexpected tag %1 in line %2</source>
         <translation>Neočekávaná značka %1 v řádku %2</translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/xml/vplayoutfilereader.cpp" line="483"/>
+        <location filename="../../src/app/puzzle/xml/vplayoutfilereader.cpp" line="484"/>
         <source>Piece %1 invalid. %2</source>
         <translation type="unfinished"></translation>
     </message>
@@ -21441,7 +21691,7 @@ Chcete uložit změny?</translation>
     </message>
     <message>
         <location filename="../../src/app/puzzle/vpmainwindow.ui" line="197"/>
-        <location filename="../../src/app/puzzle/vpmainwindow.ui" line="2140"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.ui" line="2152"/>
         <source>Properties</source>
         <translation>Vlastnosti</translation>
     </message>
@@ -21457,36 +21707,32 @@ Chcete uložit změny?</translation>
     </message>
     <message>
         <location filename="../../src/app/puzzle/vpmainwindow.ui" line="321"/>
-        <location filename="../../src/app/puzzle/vpmainwindow.ui" line="750"/>
-        <location filename="../../src/app/puzzle/vpmainwindow.ui" line="1657"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.ui" line="761"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.ui" line="1668"/>
         <source>Infos</source>
         <translation>Údaje</translation>
     </message>
     <message>
         <location filename="../../src/app/puzzle/vpmainwindow.ui" line="327"/>
-        <location filename="../../src/app/puzzle/vpmainwindow.ui" line="758"/>
-        <location filename="../../src/app/puzzle/vpmainwindow.ui" line="1665"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.ui" line="769"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.ui" line="1676"/>
         <source>Name:</source>
         <translation>Název:</translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/vpmainwindow.ui" line="604"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.ui" line="602"/>
         <source>Seamline</source>
         <translation>Čára švu</translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/vpmainwindow.ui" line="610"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.ui" line="608"/>
         <source>Show Seamline</source>
         <translation>Ukázat čáru švu</translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/vpmainwindow.ui" line="623"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.ui" line="621"/>
         <source>Geometry</source>
         <translation>Uspořádání</translation>
-    </message>
-    <message>
-        <source>Mirror piece</source>
-        <translation type="vanished">Zrcadlit díl</translation>
     </message>
     <message>
         <location filename="../../src/app/puzzle/vpmainwindow.ui" line="482"/>
@@ -21494,7 +21740,7 @@ Chcete uložit změny?</translation>
         <translation>Otáčení</translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/vpmainwindow.ui" line="560"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.ui" line="558"/>
         <source>Angle:</source>
         <translation>Úhel:</translation>
     </message>
@@ -21504,368 +21750,368 @@ Chcete uložit změny?</translation>
         <translation>Umístění</translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/vpmainwindow.ui" line="660"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.ui" line="671"/>
         <source>No piece selected</source>
         <translation>Nebyl vybrán žádný díl</translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/vpmainwindow.ui" line="695"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.ui" line="706"/>
         <source>Sheet properties</source>
         <translation>Vlastnosti listu</translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/vpmainwindow.ui" line="740"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.ui" line="751"/>
         <source>Current sheet</source>
         <translation>Nynější list</translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/vpmainwindow.ui" line="776"/>
-        <location filename="../../src/app/puzzle/vpmainwindow.ui" line="1277"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.ui" line="787"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.ui" line="1288"/>
         <source>Format</source>
         <translation>Formát</translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/vpmainwindow.ui" line="1020"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.ui" line="1031"/>
         <source>Remove unused length</source>
         <translation>Odstranit nepoužívanou délku</translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/vpmainwindow.ui" line="1030"/>
-        <location filename="../../src/app/puzzle/vpmainwindow.ui" line="1437"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.ui" line="1041"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.ui" line="1448"/>
         <source>Margins</source>
         <translation>Okraje</translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/vpmainwindow.ui" line="1038"/>
-        <location filename="../../src/app/puzzle/vpmainwindow.ui" line="1445"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.ui" line="1049"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.ui" line="1456"/>
         <source>Right:</source>
         <translation>Pravý:</translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/vpmainwindow.ui" line="1058"/>
-        <location filename="../../src/app/puzzle/vpmainwindow.ui" line="1465"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.ui" line="1069"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.ui" line="1476"/>
         <source>Top:</source>
         <translation>Nahoře:</translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/vpmainwindow.ui" line="1082"/>
-        <location filename="../../src/app/puzzle/vpmainwindow.ui" line="1489"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.ui" line="1093"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.ui" line="1500"/>
         <source>Left:</source>
         <translation>Levý:</translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/vpmainwindow.ui" line="1092"/>
-        <location filename="../../src/app/puzzle/vpmainwindow.ui" line="1499"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.ui" line="1103"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.ui" line="1510"/>
         <source>Bottom:</source>
         <translation>Dole:</translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/vpmainwindow.ui" line="1127"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.ui" line="1138"/>
         <source>Placement Grid</source>
         <translation>Mřížka umístění</translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/vpmainwindow.ui" line="1138"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.ui" line="1149"/>
         <source>Show Grid</source>
         <translation>Zobrazit mřížku</translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/vpmainwindow.ui" line="1145"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.ui" line="1156"/>
         <source>Column width</source>
         <translation>Šířka sloupce</translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/vpmainwindow.ui" line="1159"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.ui" line="1170"/>
         <source>Row height</source>
         <translation>Výška řádku</translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/vpmainwindow.ui" line="1534"/>
-        <location filename="../../src/app/puzzle/vpmainwindow.ui" line="1694"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.ui" line="1545"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.ui" line="1705"/>
         <source>Control</source>
         <translation>Nastavení</translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/vpmainwindow.ui" line="1721"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.ui" line="1732"/>
         <source>Follow grainline</source>
         <translation>Následovat dráhu nitě</translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/vpmainwindow.ui" line="1714"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.ui" line="1725"/>
         <source>Sticky edges</source>
         <translation>Lepivé okraje</translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/vpmainwindow.ui" line="1178"/>
-        <location filename="../../src/app/puzzle/vpmainwindow.ui" line="1925"/>
-        <location filename="../../src/app/puzzle/vpmainwindow.ui" line="2263"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.ui" line="1189"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.ui" line="1943"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.ui" line="2267"/>
         <location filename="../../src/app/puzzle/vpmainwindow.ui" line="2319"/>
         <source>Export</source>
         <translation>Vyvést</translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/vpmainwindow.ui" line="1184"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.ui" line="1195"/>
         <source>Export Sheet</source>
         <translation>Vyvést list</translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/vpmainwindow.ui" line="1219"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.ui" line="1230"/>
         <source>Tiles properties</source>
         <translation>Vlastnosti dlaždic</translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/vpmainwindow.ui" line="1264"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.ui" line="1275"/>
         <source>Tiled Pdf Export</source>
         <translation>Vyvedení dlaždicového PDF</translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/vpmainwindow.ui" line="1540"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.ui" line="1551"/>
         <source>Show Tiles on sheet</source>
         <translation>Ukázat dlaždice na listu</translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/vpmainwindow.ui" line="1602"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.ui" line="1613"/>
         <source>Layout properties</source>
         <translation>Vlastnosti rozvržení</translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/vpmainwindow.ui" line="1647"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.ui" line="1658"/>
         <source>Layout</source>
         <translation>Rozvržení</translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/vpmainwindow.ui" line="1681"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.ui" line="1692"/>
         <source>Description</source>
         <translation>Popis</translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/vpmainwindow.ui" line="1700"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.ui" line="1711"/>
         <source>Warning superposition of pieces</source>
         <translation>Varování ohledně překrývání se dílů</translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/vpmainwindow.ui" line="1707"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.ui" line="1718"/>
         <source>Warning pieces out of bound</source>
         <translation>Varování díly nedovoleny</translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/vpmainwindow.ui" line="1951"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.ui" line="1969"/>
         <source>zoom</source>
         <translation>Zvětšení</translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/vpmainwindow.ui" line="1752"/>
-        <location filename="../../src/app/puzzle/vpmainwindow.ui" line="1970"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.ui" line="1770"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.ui" line="1988"/>
         <source>Scale</source>
         <translation>Měřítko</translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/vpmainwindow.ui" line="2020"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.ui" line="2037"/>
         <source>&amp;Open</source>
         <translation>&amp;Otevřít</translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/vpmainwindow.ui" line="2038"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.ui" line="2054"/>
         <source>&amp;Save</source>
         <translation>&amp;Uložit</translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/vpmainwindow.ui" line="2056"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.ui" line="2071"/>
         <source>Save &amp;As</source>
         <translation>Uložit j&amp;ako</translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/vpmainwindow.ui" line="2070"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.ui" line="2085"/>
         <source>&amp;Import Raw Layout Data</source>
         <translation>&amp;Zavést nezpracovaná data rozvržení</translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/vpmainwindow.ui" line="2085"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.ui" line="2099"/>
         <source>E&amp;xit</source>
         <translation>&amp;Ukončit</translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/vpmainwindow.ui" line="2100"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.ui" line="2113"/>
         <source>&amp;New</source>
         <translation>&amp;Nový</translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/vpmainwindow.ui" line="2111"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.ui" line="2124"/>
         <source>About &amp;Qt</source>
         <translation>O &amp;Qt</translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/vpmainwindow.ui" line="2123"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.ui" line="2135"/>
         <source>About &amp;Puzzle</source>
         <translation>O programu &amp;Puzzle</translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/vpmainwindow.ui" line="2155"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.ui" line="2166"/>
         <source>Zoom in</source>
         <translation>Přiblížit</translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/vpmainwindow.ui" line="2167"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.ui" line="2177"/>
         <source>Zoom out</source>
         <translation>Oddálit</translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/vpmainwindow.ui" line="2179"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.ui" line="2188"/>
         <source>Zoom 1:1</source>
         <translation>Zvětšení 1:1</translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/vpmainwindow.ui" line="2191"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.ui" line="2199"/>
         <source>Zoom fit best</source>
         <translation>Přizpůsobit velikost oknu aplikace</translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/vpmainwindow.ui" line="2194"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.ui" line="2202"/>
         <source>Zoom sheet</source>
         <translation>Zvětšit list</translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/vpmainwindow.ui" line="2199"/>
-        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="4813"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.ui" line="2207"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="4884"/>
         <source>Preferences</source>
         <translation>Nastavení</translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="462"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="464"/>
         <source>File &apos;%1&apos; doesn&apos;t exist!</source>
         <translation>Soubor &apos;%1&apos; není!</translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="507"/>
-        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="534"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="509"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="536"/>
         <source>File error.</source>
         <translation>Chyba souboru.</translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="617"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="619"/>
         <source>Fail to create layout.</source>
         <translation>Vytvoření rozvržení se nezdařilo.</translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="3210"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="3261"/>
         <source>Could not extract data from file &apos;%1&apos;. %2</source>
         <translation>Nepodařilo se vytáhnout data ze souboru &apos;%1&apos;. %2</translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="825"/>
-        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="912"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="845"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="932"/>
         <source>Centimeters</source>
         <translation>Centimetry</translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="824"/>
-        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="911"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="844"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="931"/>
         <source>Millimiters</source>
         <translation>Milimetry</translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="826"/>
-        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="913"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="846"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="933"/>
         <source>Inches</source>
         <translation>Palce</translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="1637"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="1664"/>
         <source>Scale:</source>
         <translation>Měřítko:</translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="1670"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="1697"/>
         <source>untitled %1.vlt</source>
         <translation>bez názvu %1.vlt</translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="1674"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="1701"/>
         <source>untitled.vlt</source>
         <translation>bez_názvu.vlt</translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="1682"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="1709"/>
         <source>read only</source>
         <translation>Pouze pro čtení</translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="1737"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="1764"/>
         <source>Cannot read settings from a malformed .INI file.</source>
         <translation>Nelze číst nastavení z poškozeného souboru .INI.</translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="1754"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="1781"/>
         <source>Cannot save settings. Access denied.</source>
         <translation>Nelze uložit nastavení. Přístup odepřen.</translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="2651"/>
-        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="2948"/>
-        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="3129"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="2678"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="2999"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="3180"/>
         <source>Failed to open file, is it writable?</source>
         <translation>Soubor se nepodařilo otevřít. Lze do něj zapisovat?</translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="1809"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="1836"/>
         <source>&amp;New Window</source>
         <translation>&amp;Nové okno</translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="1766"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="1793"/>
         <source>Layout has been modified. Do you want to save your changes?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="3490"/>
-        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="3545"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="3541"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="3596"/>
         <source>Layout files</source>
         <translation>Soubory rozvržení</translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="3494"/>
-        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="3637"/>
-        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="4580"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="3545"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="3688"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="4631"/>
         <source>Open file</source>
         <translation>Otevřít soubor</translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="3528"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="3579"/>
         <source>Could not save the file</source>
         <translation>Nepodařilo se uložit soubor</translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="3547"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="3598"/>
         <source>layout</source>
         <translation>Rozvržení</translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="3559"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="3610"/>
         <source>Save as</source>
         <translation>Uložit jako</translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="3590"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="3641"/>
         <source>Failed to lock. This file already opened in another window.</source>
         <translation>Nepodařilo se uzamknout. Tento soubor je již otevřen v jiném okně.</translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="3601"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="3652"/>
         <source>Could not save file</source>
         <translation>Nepodařilo se uložit soubor</translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="3622"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="3673"/>
         <source>Failed to lock. This file already opened in another window. Expect collissions when run 2 copies of the program.</source>
         <translation>Nepodařilo se uzamknout. Tento soubor je již otevřen v jiném okně. Při zdvojeném vykonávání (2 kopie programu) může dojít ke střetům.</translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="3632"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="3683"/>
         <source>Raw Layout files</source>
         <translation>Soubory s nezpracovaným rozvržením</translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="3650"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="3701"/>
         <source>About Qt</source>
         <translation>O Qt</translation>
     </message>
@@ -21902,13 +22148,13 @@ Chcete uložit změny?</translation>
     </message>
     <message>
         <location filename="../../src/app/puzzle/vpmainwindow.ui" line="417"/>
-        <location filename="../../src/app/puzzle/vpmainwindow.ui" line="1766"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.ui" line="1784"/>
         <source>Horizontal:</source>
         <translation>Vodorovná:</translation>
     </message>
     <message>
         <location filename="../../src/app/puzzle/vpmainwindow.ui" line="440"/>
-        <location filename="../../src/app/puzzle/vpmainwindow.ui" line="1779"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.ui" line="1797"/>
         <source>Vertical:</source>
         <translation>Svislá:</translation>
     </message>
@@ -21923,333 +22169,343 @@ Chcete uložit změny?</translation>
         <translation>Otočit</translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/vpmainwindow.ui" line="587"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.ui" line="585"/>
         <source>Apply to each piece separately</source>
         <translation>Použít na každý díl zvlášť</translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/vpmainwindow.ui" line="629"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.ui" line="630"/>
+        <source>Show full piece</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/app/puzzle/vpmainwindow.ui" line="640"/>
         <source>Vertically flipped</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/vpmainwindow.ui" line="636"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.ui" line="647"/>
         <source>Horizontally flipped</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/vpmainwindow.ui" line="796"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.ui" line="807"/>
         <source>Unit:</source>
         <translation>Jednotka:</translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/vpmainwindow.ui" line="812"/>
-        <location filename="../../src/app/puzzle/vpmainwindow.ui" line="1303"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.ui" line="823"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.ui" line="1314"/>
         <source>Templates:</source>
         <translation>Předlohy:</translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/vpmainwindow.ui" line="871"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.ui" line="882"/>
         <source>Length:</source>
         <translation>Délka:</translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/vpmainwindow.ui" line="934"/>
-        <location filename="../../src/app/puzzle/vpmainwindow.ui" line="1380"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.ui" line="945"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.ui" line="1391"/>
         <source>Width:</source>
         <translation>Šířka:</translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/vpmainwindow.ui" line="945"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.ui" line="956"/>
         <source>Grainline orientation:</source>
         <translation>Natočení dráhy nitě:</translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/vpmainwindow.ui" line="957"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.ui" line="968"/>
         <source>Force the grainline orientation to always be horizontal</source>
         <translation>Vynutit, aby natočení dráhy nitě bylo vždy vodorovné</translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/vpmainwindow.ui" line="980"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.ui" line="991"/>
         <source>Force the grainline orientation to always be vertical</source>
         <translation>Vynutit, aby natočení dráhy nitě bylo vždy svislé</translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/vpmainwindow.ui" line="1117"/>
-        <location filename="../../src/app/puzzle/vpmainwindow.ui" line="1524"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.ui" line="1128"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.ui" line="1535"/>
         <source>Ignore margins</source>
         <translation>Přehlížet okraje</translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/vpmainwindow.ui" line="1393"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.ui" line="1404"/>
         <source>Height:</source>
         <translation>Výška:</translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/vpmainwindow.ui" line="1547"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.ui" line="1558"/>
         <source>Show watermark preview</source>
         <translation>Ukázat náhled vodoznaku</translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/vpmainwindow.ui" line="1550"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.ui" line="1561"/>
         <source>Show watermark</source>
         <translation>Ukázat  vodoznak</translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/vpmainwindow.ui" line="1560"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.ui" line="1571"/>
         <source>Print tiles scheme</source>
         <translation>Zobrazit schéma dlaždic</translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/vpmainwindow.ui" line="1728"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.ui" line="1739"/>
         <source>Boundary together with notches</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/vpmainwindow.ui" line="1737"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.ui" line="1746"/>
+        <source>Cut on fold</source>
+        <translation type="unfinished">Střihnout v záhybu</translation>
+    </message>
+    <message>
+        <location filename="../../src/app/puzzle/vpmainwindow.ui" line="1755"/>
         <source>Pieces gap:</source>
         <translation>Dílová mezera:</translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/vpmainwindow.ui" line="1931"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.ui" line="1949"/>
         <source>Export Layout</source>
         <translation>Vyvést rozvržení</translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/vpmainwindow.ui" line="1984"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.ui" line="2002"/>
         <source>Undo commands</source>
         <translation>Zpět příkazy</translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/vpmainwindow.ui" line="2207"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.ui" line="2215"/>
         <source>Add Sheet</source>
         <translation>Přidat list</translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/vpmainwindow.ui" line="2219"/>
-        <location filename="../../src/app/puzzle/vpmainwindow.ui" line="2275"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.ui" line="2226"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.ui" line="2278"/>
         <source>Print</source>
         <translation>Tisk</translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/vpmainwindow.ui" line="2231"/>
-        <location filename="../../src/app/puzzle/vpmainwindow.ui" line="2287"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.ui" line="2237"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.ui" line="2289"/>
         <source>Print preview</source>
         <translation>Náhled před tiskem</translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/vpmainwindow.ui" line="2243"/>
-        <location filename="../../src/app/puzzle/vpmainwindow.ui" line="2299"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.ui" line="2248"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.ui" line="2300"/>
         <source>Print tiled</source>
         <translation>Zobrazit dlaždicové</translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/vpmainwindow.ui" line="2255"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.ui" line="2259"/>
         <location filename="../../src/app/puzzle/vpmainwindow.ui" line="2311"/>
         <source>Print preview tiled</source>
         <translation>Náhled tisku dlaždicový</translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/vpmainwindow.ui" line="2331"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.ui" line="2330"/>
         <source>Editor</source>
         <translation>Editor</translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/vpmainwindow.ui" line="2334"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.ui" line="2333"/>
         <source>Create or edit a watermark</source>
         <translation>Vytvořit nebo upravit vodoznak</translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/vpmainwindow.ui" line="2345"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.ui" line="2344"/>
         <source>Edit current</source>
         <translation>Upravit nynější</translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/vpmainwindow.ui" line="2360"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.ui" line="2358"/>
         <source>Load</source>
         <translation>Nahrát</translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/vpmainwindow.ui" line="2375"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.ui" line="2372"/>
         <source>Remove</source>
         <translation>Odstranit</translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="508"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="510"/>
         <source>Unable to read a layout file. %1</source>
         <translation>Nelze číst soubor rozvržení. %1</translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="714"/>
-        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="3463"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="715"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="3514"/>
         <source>&amp;Undo</source>
         <translation>&amp;Zpět</translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="720"/>
-        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="3464"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="721"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="3515"/>
         <source>&amp;Redo</source>
         <translation>&amp;Znovu</translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="827"/>
-        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="914"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="847"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="934"/>
         <source>Pixels</source>
         <translation>Pixely</translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="1765"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="1792"/>
         <source>Unsaved changes</source>
         <translation>Neuložené změny</translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="1774"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="1801"/>
         <source>Save…</source>
         <translation>Uložit…</translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="1774"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="1801"/>
         <source>Save</source>
         <translation>Uložit</translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="1779"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="1806"/>
         <source>Don&apos;t Save</source>
         <translation>Neukládat</translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="2262"/>
-        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="2323"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="2289"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="2350"/>
         <source>Can&apos;t create a path</source>
         <translation>Nelze vytvořit cestu</translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="2534"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="2561"/>
         <source>Can&apos;t open file &apos;%1&apos;</source>
         <translation>Nelze otevřít soubor &apos;%1&apos;</translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="2548"/>
-        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="2998"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="2575"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="3049"/>
         <source>Failed in flushing page to disk, disk full?</source>
         <translation>Nepodařilo se dostat stránku na disk. Disk je plný?</translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="2864"/>
-        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="2893"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="2915"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="2944"/>
         <source>The layout is invalid.</source>
         <translation>Rozvržení je neplatné.</translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="2865"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="2916"/>
         <source>The layout is invalid. Piece out of bound. Do you want to continue export?</source>
         <translation>Rozvržení je neplatné. Díl mimo plochu. Chcete pokračovat ve vyvádění?</translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="2894"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="2945"/>
         <source>The layout is invalid. Pieces superposition. Do you want to continue export?</source>
         <translation>Rozvržení je neplatné. Překrývání se dílů. Chcete pokračovat ve vyvádění?</translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="3923"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="3974"/>
         <source>Sheet %1</source>
         <translation>List %1</translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="3272"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="3323"/>
         <source>translate pieces</source>
         <translation>Přesunout díly</translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="3366"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="3417"/>
         <source>rotate pieces</source>
         <translation>Otočit díly</translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="4209"/>
         <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="4260"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="4311"/>
         <source>For printing multipages document all sheet should have the same size.</source>
         <translation>Pro tisk vícestránkového dokumentu musí mít všechny listy stejnou velikost.</translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="4221"/>
         <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="4272"/>
-        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="4307"/>
-        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="4345"/>
-        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="4400"/>
-        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="4444"/>
-        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="4477"/>
-        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="4513"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="4323"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="4358"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="4396"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="4451"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="4495"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="4528"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="4564"/>
         <source>Print error</source>
         <translation>Chyba při tisku</translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="4222"/>
         <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="4273"/>
-        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="4308"/>
-        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="4346"/>
-        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="4401"/>
-        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="4445"/>
-        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="4478"/>
-        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="4514"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="4324"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="4359"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="4397"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="4452"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="4496"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="4529"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="4565"/>
         <source>Cannot proceed because there are no available printers in your system.</source>
         <translation>Nelze pokračovat, protože ve vašem systému nejsou dostupné žádné tiskárny.</translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="4577"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="4628"/>
         <source>Watermark files</source>
         <translation>Soubory vodoznaku</translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="4233"/>
         <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="4284"/>
-        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="4319"/>
-        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="4357"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="4335"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="4370"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="4408"/>
         <source>Unable to get sheet page settings</source>
         <translation>Nelze získat nastavení strany listu</translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/vpmainwindow.ui" line="1567"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.ui" line="1578"/>
         <source>Show tile number</source>
         <translation>Zobrazit číslo dlaždice</translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/vpmainwindow.ui" line="1998"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.ui" line="2016"/>
         <source>Z value</source>
         <translation>Hodnota Z</translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/vpmainwindow.ui" line="2387"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.ui" line="2383"/>
         <source>Bottom</source>
         <translation>Dole</translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/vpmainwindow.ui" line="2396"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.ui" line="2391"/>
         <source>Down</source>
         <translation>Dolů</translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/vpmainwindow.ui" line="2405"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.ui" line="2399"/>
         <source>Up</source>
         <translation>Nahoru</translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/vpmainwindow.ui" line="2414"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.ui" line="2407"/>
         <source>Top</source>
         <translation>Nahoře</translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/vpmainwindow.ui" line="1557"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.ui" line="1568"/>
         <source>Has effect only when print in application. To export with tiles scheme use separate setting</source>
         <translation>Působí pouze při tisku v aplikaci. Pro vyvedení se schématem dlaždic použijte samostatné nastavení</translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="4173"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="4224"/>
         <source>sheet</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="3233"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="3284"/>
         <source>Piece %1 invalid. %2</source>
         <translation type="unfinished"></translation>
     </message>
@@ -22257,18 +22513,18 @@ Chcete uložit změny?</translation>
 <context>
     <name>VPPiece</name>
     <message>
-        <location filename="../../src/app/puzzle/layout/vppiece.cpp" line="437"/>
-        <location filename="../../src/app/puzzle/layout/vppiece.cpp" line="443"/>
+        <location filename="../../src/app/puzzle/layout/vppiece.cpp" line="404"/>
+        <location filename="../../src/app/puzzle/layout/vppiece.cpp" line="410"/>
         <source>Seam line is empty</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/layout/vppiece.cpp" line="449"/>
+        <location filename="../../src/app/puzzle/layout/vppiece.cpp" line="416"/>
         <source>Seam allowance line is empty</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/layout/vppiece.cpp" line="455"/>
+        <location filename="../../src/app/puzzle/layout/vppiece.cpp" line="422"/>
         <source>Grainline is empty</source>
         <translation type="unfinished"></translation>
     </message>
@@ -22353,74 +22609,74 @@ Chcete uložit změny?</translation>
         <translation type="vanished">Chyba. Není jedinečný identifikátor.</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="527"/>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="555"/>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="617"/>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="661"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="569"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="597"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="659"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="703"/>
         <source>Error parsing file.</source>
         <translation>Chyba při zpracování souboru.</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="534"/>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="628"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="576"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="670"/>
         <source>Error can&apos;t convert value.</source>
         <translation>Chyba. Nelze převést hodnotu.</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="541"/>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="639"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="583"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="681"/>
         <source>Error empty parameter.</source>
         <translation>Chyba. Prázdný parametr.</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="548"/>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="650"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="590"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="692"/>
         <source>Error wrong id.</source>
         <translation>Chyba. Špatný identifikátor.</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="562"/>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="672"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="604"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="714"/>
         <source>Error parsing file (std::bad_alloc).</source>
         <translation>Chyba při zpracování souboru (std::bad_alloc).</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="1001"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="1044"/>
         <source>Error creating or updating detail</source>
         <translation>Chyba při vytváření nebo aktualizaci záznamu typu &quot;jednotlivost (díl střihu)&quot;</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="1593"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="1664"/>
         <source>Error creating or updating single point</source>
         <translation>Chyba při vytváření nebo aktualizaci jediného bodu</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="1638"/>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="1644"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="1709"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="1715"/>
         <source>Error creating or updating point of end line</source>
         <translation>Chyba při vytváření nebo aktualizaci bodu na konci čáry</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="1688"/>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="1694"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="1759"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="1765"/>
         <source>Error creating or updating point along line</source>
         <translation>Chyba při vytváření nebo aktualizaci bodu podél čáry</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="1733"/>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="1739"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="1804"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="1810"/>
         <source>Error creating or updating point of shoulder</source>
         <translation>Chyba při vytváření nebo aktualizaci bodu ramene</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="1778"/>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="1784"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="1849"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="1855"/>
         <source>Error creating or updating point of normal</source>
         <translation>Chyba při vytváření nebo aktualizaci bodu kolmice</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="1823"/>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="1829"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="1894"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="1900"/>
         <source>Error creating or updating point of bisector</source>
         <translation>Chyba při vytváření nebo aktualizaci bodu osy úhlu</translation>
     </message>
@@ -22429,270 +22685,270 @@ Chcete uložit změny?</translation>
         <translation type="vanished">Chyba při vytváření nebo aktualizaci bodu průsečíku čar</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="1899"/>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="1905"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="1970"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="1976"/>
         <source>Error creating or updating point of contact</source>
         <translation>Chyba při vytváření nebo aktualizaci bodu dotyku</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="1955"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="2026"/>
         <source>Error creating or updating modeling point</source>
         <translation>Chyba při vytváření nebo aktualizaci modelovacího bodu</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="2097"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="2170"/>
         <source>Error creating or updating height</source>
         <translation>Chyba při vytváření nebo aktualizaci výšky</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="2128"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="2201"/>
         <source>Error creating or updating triangle</source>
         <translation>Chyba při vytváření nebo aktualizaci trojúhelníku</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="2158"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="2231"/>
         <source>Error creating or updating point of intersection</source>
         <translation>Chyba při vytváření nebo aktualizaci bodu průsečíku</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="2197"/>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="2203"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="2270"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="2276"/>
         <source>Error creating or updating cut spline point</source>
         <translation>Chyba při vytváření nebo aktualizaci bodu vyjmutí hladké křivky (křivka spline)</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="2242"/>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="2248"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="2315"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="2321"/>
         <source>Error creating or updating cut spline path point</source>
         <translation>Chyba při vytváření nebo aktualizaci bodu cesty vyjmutí hladké křivky (křivka spline)</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="2287"/>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="2293"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="2360"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="2366"/>
         <source>Error creating or updating cut arc point</source>
         <translation>Chyba při vytváření nebo aktualizaci bodu vyjmutí oblouku</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="2334"/>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="2340"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="2407"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="2413"/>
         <source>Error creating or updating point of intersection line and axis</source>
         <translation>Chyba při vytváření nebo aktualizaci bodu průsečíku čáry a osy</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="2387"/>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="2393"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="2460"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="2466"/>
         <source>Error creating or updating point of intersection curve and axis</source>
         <translation>Chyba při vytváření nebo aktualizaci bodu průsečíku křivky a osy</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="1471"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="1542"/>
         <source>Error creating or updating line</source>
         <translation>Chyba při vytváření nebo aktualizaci čáry</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="2680"/>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="2746"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="2753"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="2819"/>
         <source>Error creating or updating simple curve</source>
         <translation>Chyba při vytváření nebo aktualizaci jednoduché křivky</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="2878"/>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="2966"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="2951"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="3039"/>
         <source>Error creating or updating curve path</source>
         <translation>Chyba při vytváření nebo aktualizaci cesty křivky</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="3084"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="3157"/>
         <source>Error creating or updating modeling simple curve</source>
         <translation>Chyba při vytváření nebo aktualizaci jednoduché křivky, záznamu typu &quot;podrobnost křivky&quot;</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="3132"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="3205"/>
         <source>Error creating or updating modeling curve path</source>
         <translation>Chyba při vytváření nebo aktualizaci cesty křivky, záznamu typu &quot;podrobnost cesty&quot;</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="3179"/>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="3185"/>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="3370"/>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="3376"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="3252"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="3258"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="3443"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="3449"/>
         <source>Error creating or updating simple arc</source>
         <translation>Chyba při vytváření nebo aktualizaci jednoduchého oblouku</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="3323"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="3396"/>
         <source>Error creating or updating modeling arc</source>
         <translation>Chyba při vytváření nebo aktualizaci záznamu typu &quot;podrobnost oblouku&quot;</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="4000"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="4073"/>
         <source>Error creating or updating union details</source>
         <translation>Chyba při vytváření nebo aktualizaci záznamu typu &quot;spojení jednotlivostí (dílů střihu)&quot;</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="2424"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="2497"/>
         <source>Error creating or updating point of intersection arcs</source>
         <translation>Chyba při vytváření nebo aktualizaci bodu průsečíku oblouků</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="2467"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="2540"/>
         <source>Error creating or updating point of intersection circles</source>
         <translation>Chyba při vytváření nebo aktualizaci bodu průsečíku kruhů</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="2549"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="2622"/>
         <source>Error creating or updating point from circle and tangent</source>
         <translation>Chyba při vytváření nebo aktualizaci bodu průsečíku kruhu a tangenty</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="2580"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="2653"/>
         <source>Error creating or updating point from arc and tangent</source>
         <translation>Chyba při vytváření nebo aktualizaci bodu průsečíku oblouku a tangenty</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="2630"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="2703"/>
         <source>Error creating or updating true darts</source>
         <translation>Chyba při vytváření nebo aktualizaci vyrovnání délky záševku</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="745"/>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="853"/>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="930"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="787"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="895"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="972"/>
         <source>Wrong tag name &apos;%1&apos;.</source>
         <translation>Špatný název značky &apos;%1&apos;.</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="1438"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="1509"/>
         <source>Unknown point type &apos;%1&apos;.</source>
         <translation>Neznámý typ bodu &apos;%1&apos;.</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="3890"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="3963"/>
         <source>Unknown spline type &apos;%1&apos;.</source>
         <translation>Neznámý typ hladké křivky (křivka spline) &apos;%1&apos;.</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="3926"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="3999"/>
         <source>Unknown arc type &apos;%1&apos;.</source>
         <translation>Neznámý typ oblouku &apos;%1&apos;.</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="4006"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="4079"/>
         <source>Unknown tools type &apos;%1&apos;.</source>
         <translation>Neznámý typ nástroje &apos;%1&apos;.</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="462"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="504"/>
         <source>Error not unique id.</source>
         <translation>Chyba: nejedinečný identifikátor.</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="2509"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="2582"/>
         <source>Error creating or updating point of intersection curves</source>
         <translation>Chyba při vytváření nebo aktualizaci bodu průsečíku křivek</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="2752"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="2825"/>
         <source>Error creating or updating simple interactive spline</source>
         <translation>Chyba při vytváření nebo aktualizaci jednoduché interaktivní hladké křivky (křivka spline)</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="2972"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="3045"/>
         <source>Error creating or updating interactive spline path</source>
         <translation>Chyba při vytváření nebo aktualizaci bodu interaktivní cesty hladké křivky (křivka spline)</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="2806"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="2879"/>
         <source>Error creating or updating cubic bezier curve</source>
         <translation>Chyba při vytváření nebo aktualizaci kubické Bézierovy křivky</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="3036"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="3109"/>
         <source>Error creating or updating cubic bezier path curve</source>
         <translation>Chyba při vytváření nebo aktualizaci cesty kubické Bézierovy křivky</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="3416"/>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="3422"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="3489"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="3495"/>
         <source>Error creating or updating operation of rotation</source>
         <translation>Chyba při vytváření nebo aktualizaci operace otočení</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="4039"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="4112"/>
         <source>Unknown operation type &apos;%1&apos;.</source>
         <translation>Neznámý typ operace &apos;%1&apos;.</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="3454"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="3527"/>
         <source>Error creating or updating operation of flipping by line</source>
         <translation>Chyba při vytváření nebo aktualizaci operace přetočení podle čáry</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="3486"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="3559"/>
         <source>Error creating or updating operation of flipping by axis</source>
         <translation>Chyba při vytváření nebo aktualizaci operace přetočení podle osy</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="3532"/>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="3538"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="3605"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="3611"/>
         <source>Error creating or updating operation of moving</source>
         <translation>Chyba při vytváření nebo aktualizaci operace posunutí</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="1860"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="1931"/>
         <source>Error creating or updating point of line intersection</source>
         <translation>Chyba při vytváření nebo aktualizaci bodu průsečíku čáry</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="3239"/>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="3245"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="3312"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="3318"/>
         <source>Error creating or updating simple elliptical arc</source>
         <translation>Chyba při vytváření nebo aktualizaci jednoduchého elipsovitého oblouku</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="3958"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="4031"/>
         <source>Unknown elliptical arc type &apos;%1&apos;.</source>
         <translation>Neznámý typ elipsovitého oblouku &apos;%1&apos;.</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="3284"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="3357"/>
         <source>Error creating or updating modeling elliptical arc</source>
         <translation>Chyba při vytváření nebo aktualizaci modelovacího elipsovitého oblouku</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="947"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="989"/>
         <source>Detail</source>
         <translation>Jednotlivost (díl střihu)</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="4090"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="4163"/>
         <source>Unnamed path</source>
         <translation>Nepojmenovaná cesta</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="4083"/>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="4105"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="4156"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="4179"/>
         <source>Error creating or updating a piece path</source>
         <translation>Chyba při vytváření nebo aktualizaci cesty dílu</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="1994"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="2065"/>
         <source>Error creating or updating pin point</source>
         <translation>Chyba při vytváření nebo aktualizaci bodu špendlíku</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="4084"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="4157"/>
         <source>Piece path doesn&apos;t contain nodes</source>
         <translation>Cesta dílu neobsahuje uzly</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="2061"/>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="2067"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="2134"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="2140"/>
         <source>Error creating or updating place label</source>
         <translation>Chyba při vytváření nebo aktualizaci popisu umístění</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="4263"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="4337"/>
         <source>Can&apos;t find increment &apos;%1&apos;</source>
         <translation type="unfinished"></translation>
     </message>
@@ -22784,19 +23040,20 @@ Chcete uložit změny?</translation>
 <context>
     <name>VPiece</name>
     <message>
-        <location filename="../../src/libs/vpatterndb/vpiece.cpp" line="185"/>
+        <location filename="../../src/libs/vpatterndb/vpiece.cpp" line="186"/>
+        <location filename="../../src/libs/vpatterndb/vpiece.cpp" line="201"/>
         <source>Main path of piece %1</source>
         <translation>Hlavní cesta dílu %1</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vpatterndb/vpiece.cpp" line="938"/>
-        <location filename="../../src/libs/vpatterndb/vpiece.cpp" line="978"/>
-        <location filename="../../src/libs/vpatterndb/vpiece.cpp" line="1063"/>
+        <location filename="../../src/libs/vpatterndb/vpiece.cpp" line="1117"/>
+        <location filename="../../src/libs/vpatterndb/vpiece.cpp" line="1157"/>
+        <location filename="../../src/libs/vpatterndb/vpiece.cpp" line="1242"/>
         <source>Cannot calculate a notch for point &apos;%1&apos; in piece &apos;%2&apos;.</source>
         <translation>Nelze spočítat zářez pro bod &apos;%1&apos; v dílu &apos;%2&apos;.</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vpatterndb/vpiece.cpp" line="1092"/>
+        <location filename="../../src/libs/vpatterndb/vpiece.cpp" line="1271"/>
         <source>Notch for point &apos;%1&apos; in piece &apos;%2&apos; will be disabled. Manual length is less than allowed value.</source>
         <translation>Zářez pro bod &apos;%1&apos; v části &apos;%2&apos; bude zakázán. Ruční délka je menší než povolená hodnota.</translation>
     </message>
@@ -24009,10 +24266,18 @@ Chyba kompatibility formátu nezpracovaného rozvržení: ActualFileVersion = %1
     </message>
     <message>
         <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="2852"/>
-        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="2853"/>
-        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="2854"/>
         <source>First dart point:</source>
         <translation>První bod záševku:</translation>
+    </message>
+    <message>
+        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="2853"/>
+        <source>Second dart point:</source>
+        <translation type="unfinished">Druhý bod záševku:</translation>
+    </message>
+    <message>
+        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="2854"/>
+        <source>Third dart point:</source>
+        <translation type="unfinished">Třetí bod záševku:</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="2866"/>
@@ -24472,108 +24737,113 @@ Chyba kompatibility formátu nezpracovaného rozvržení: ActualFileVersion = %1
 <context>
     <name>VToolSeamAllowance</name>
     <message>
-        <location filename="../../src/libs/vtools/tools/vtoolseamallowance.cpp" line="257"/>
-        <location filename="../../src/libs/vtools/tools/vtoolseamallowance.cpp" line="269"/>
+        <location filename="../../src/libs/vtools/tools/vtoolseamallowance.cpp" line="460"/>
+        <location filename="../../src/libs/vtools/tools/vtoolseamallowance.cpp" line="472"/>
         <source>Current seam allowance</source>
         <translation>Nynější švová záložka</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/tools/vtoolseamallowance.cpp" line="879"/>
+        <location filename="../../src/libs/vtools/tools/vtoolseamallowance.cpp" line="1134"/>
         <source>move pattern piece label</source>
         <translation>Posunout popis dílu střihu</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/tools/vtoolseamallowance.cpp" line="898"/>
+        <location filename="../../src/libs/vtools/tools/vtoolseamallowance.cpp" line="1153"/>
         <source>resize pattern piece label</source>
         <translation>Změnit velikost popisu dílu střihu</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/tools/vtoolseamallowance.cpp" line="919"/>
+        <location filename="../../src/libs/vtools/tools/vtoolseamallowance.cpp" line="1174"/>
         <source>rotate pattern piece label</source>
         <translation>Otočit velikost popisu dílu střihu</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/tools/vtoolseamallowance.cpp" line="934"/>
+        <location filename="../../src/libs/vtools/tools/vtoolseamallowance.cpp" line="1189"/>
         <source>move pattern info label</source>
         <translation>Posunout popis s údaji ke střihu</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/tools/vtoolseamallowance.cpp" line="953"/>
+        <location filename="../../src/libs/vtools/tools/vtoolseamallowance.cpp" line="1208"/>
         <source>resize pattern info label</source>
         <translation>Změnit velikost popisu s údaji ke střihu</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/tools/vtoolseamallowance.cpp" line="972"/>
+        <location filename="../../src/libs/vtools/tools/vtoolseamallowance.cpp" line="1227"/>
         <source>rotate pattern info label</source>
         <translation>Otočit popis s údaji ke střihu</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/tools/vtoolseamallowance.cpp" line="985"/>
+        <location filename="../../src/libs/vtools/tools/vtoolseamallowance.cpp" line="1240"/>
         <source>move grainline</source>
         <translation>Posunout dráhu nitě</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/tools/vtoolseamallowance.cpp" line="1000"/>
+        <location filename="../../src/libs/vtools/tools/vtoolseamallowance.cpp" line="1255"/>
         <source>resize grainline</source>
         <translation>Změnit velikost dráhy nitě</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/tools/vtoolseamallowance.cpp" line="1014"/>
+        <location filename="../../src/libs/vtools/tools/vtoolseamallowance.cpp" line="1269"/>
         <source>rotate grainline</source>
         <translation>Otočit dráhu nitě</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/tools/vtoolseamallowance.cpp" line="1270"/>
+        <location filename="../../src/libs/vtools/tools/vtoolseamallowance.cpp" line="1534"/>
         <source>Options</source>
         <translation>Volby</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/tools/vtoolseamallowance.cpp" line="1274"/>
+        <location filename="../../src/libs/vtools/tools/vtoolseamallowance.cpp" line="1538"/>
         <source>In layout</source>
         <translation>V rozvržení</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/tools/vtoolseamallowance.cpp" line="1278"/>
+        <location filename="../../src/libs/vtools/tools/vtoolseamallowance.cpp" line="1542"/>
         <source>Hide main path</source>
         <translation>Skrýt hlavní cestu</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/tools/vtoolseamallowance.cpp" line="1290"/>
+        <location filename="../../src/libs/vtools/tools/vtoolseamallowance.cpp" line="1554"/>
+        <source>Show full piece</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/libs/vtools/tools/vtoolseamallowance.cpp" line="1566"/>
         <source>Reset piece label template</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/tools/vtoolseamallowance.cpp" line="1293"/>
+        <location filename="../../src/libs/vtools/tools/vtoolseamallowance.cpp" line="1569"/>
         <source>Delete</source>
         <translation>Smazat</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/tools/vtoolseamallowance.cpp" line="1065"/>
+        <location filename="../../src/libs/vtools/tools/vtoolseamallowance.cpp" line="1325"/>
         <source>apply save detail options</source>
         <translation>Použít uložit volby pro jednotlivosti (díly střihu)</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/tools/vtoolseamallowance.cpp" line="1350"/>
+        <location filename="../../src/libs/vtools/tools/vtoolseamallowance.cpp" line="1630"/>
         <source>multi deletion</source>
         <translation>Vícenásobné smazání</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/tools/vtoolseamallowance.cpp" line="1282"/>
+        <location filename="../../src/libs/vtools/tools/vtoolseamallowance.cpp" line="1546"/>
         <source>Forbid flipping</source>
         <translation>Zakázat přetočení</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/tools/vtoolseamallowance.cpp" line="1286"/>
+        <location filename="../../src/libs/vtools/tools/vtoolseamallowance.cpp" line="1550"/>
         <source>Force flipping</source>
         <translation>Vynutit přetočení</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/tools/vtoolseamallowance.cpp" line="1074"/>
+        <location filename="../../src/libs/vtools/tools/vtoolseamallowance.cpp" line="1334"/>
         <source>This id (%1) is not unique.</source>
         <translation>Tento identifikátor (%1) není jedinečný.</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/tools/vtoolseamallowance.cpp" line="2183"/>
+        <location filename="../../src/libs/vtools/tools/vtoolseamallowance.cpp" line="2437"/>
         <source>Tool was used after deleting.</source>
         <translation>Nástroj byl použit po smazání.</translation>
     </message>
@@ -27124,31 +27394,31 @@ Chyba kompatibility formátu nezpracovaného rozvržení: ActualFileVersion = %1
 <context>
     <name>mNoisyHandler</name>
     <message>
-        <location filename="../../src/app/puzzle/vpapplication.cpp" line="175"/>
+        <location filename="../../src/app/puzzle/vpapplication.cpp" line="180"/>
         <location filename="../../src/app/tape/mapplication.cpp" line="227"/>
         <source>DEBUG:</source>
         <translation>LADĚNÍ:</translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/vpapplication.cpp" line="178"/>
+        <location filename="../../src/app/puzzle/vpapplication.cpp" line="183"/>
         <location filename="../../src/app/tape/mapplication.cpp" line="230"/>
         <source>WARNING:</source>
         <translation>VAROVÁNÍ:</translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/vpapplication.cpp" line="181"/>
+        <location filename="../../src/app/puzzle/vpapplication.cpp" line="186"/>
         <location filename="../../src/app/tape/mapplication.cpp" line="233"/>
         <source>CRITICAL:</source>
         <translation>VÁŽNÁ:</translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/vpapplication.cpp" line="184"/>
+        <location filename="../../src/app/puzzle/vpapplication.cpp" line="189"/>
         <location filename="../../src/app/tape/mapplication.cpp" line="236"/>
         <source>FATAL:</source>
         <translation>ZÁSADNÍ:</translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/vpapplication.cpp" line="187"/>
+        <location filename="../../src/app/puzzle/vpapplication.cpp" line="192"/>
         <location filename="../../src/app/tape/mapplication.cpp" line="239"/>
         <source>INFO:</source>
         <translation>INFORMACE:</translation>
@@ -27170,25 +27440,25 @@ Chyba kompatibility formátu nezpracovaného rozvržení: ActualFileVersion = %1
         <translation type="vanished">Informace.</translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/vpapplication.cpp" line="206"/>
+        <location filename="../../src/app/puzzle/vpapplication.cpp" line="211"/>
         <location filename="../../src/app/tape/mapplication.cpp" line="258"/>
         <source>Warning</source>
         <translation>Upozornění</translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/vpapplication.cpp" line="210"/>
+        <location filename="../../src/app/puzzle/vpapplication.cpp" line="215"/>
         <location filename="../../src/app/tape/mapplication.cpp" line="262"/>
         <source>Critical error</source>
         <translation>Vážná chyba</translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/vpapplication.cpp" line="214"/>
+        <location filename="../../src/app/puzzle/vpapplication.cpp" line="219"/>
         <location filename="../../src/app/tape/mapplication.cpp" line="266"/>
         <source>Fatal error</source>
         <translation>Zásadní chyba</translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/vpapplication.cpp" line="218"/>
+        <location filename="../../src/app/puzzle/vpapplication.cpp" line="223"/>
         <location filename="../../src/app/tape/mapplication.cpp" line="270"/>
         <source>Information</source>
         <translation>Informace</translation>

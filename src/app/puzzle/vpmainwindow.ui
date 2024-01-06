@@ -219,7 +219,7 @@
         <enum>QTabWidget::Rounded</enum>
        </property>
        <property name="currentIndex">
-        <number>0</number>
+        <number>1</number>
        </property>
        <property name="iconSize">
         <size>
@@ -280,7 +280,7 @@
               <x>0</x>
               <y>0</y>
               <width>378</width>
-              <height>707</height>
+              <height>736</height>
              </rect>
             </property>
             <layout class="QVBoxLayout" name="verticalLayout_23">
@@ -488,8 +488,7 @@
                              <string notr="true"/>
                             </property>
                             <property name="icon">
-                             <iconset theme="object-rotate-right">
-                              <normaloff>.</normaloff>.</iconset>
+                             <iconset theme="object-rotate-right"/>
                             </property>
                             <property name="checkable">
                              <bool>true</bool>
@@ -534,8 +533,7 @@
                              <string notr="true"/>
                             </property>
                             <property name="icon">
-                             <iconset theme="object-rotate-left">
-                              <normaloff>.</normaloff>.</iconset>
+                             <iconset theme="object-rotate-left"/>
                             </property>
                             <property name="checkable">
                              <bool>true</bool>
@@ -623,6 +621,19 @@
                    <string>Geometry</string>
                   </property>
                   <layout class="QVBoxLayout" name="verticalLayout_9">
+                   <item>
+                    <widget class="QCheckBox" name="checkBoxShowFullPiece">
+                     <property name="enabled">
+                      <bool>false</bool>
+                     </property>
+                     <property name="text">
+                      <string>Show full piece</string>
+                     </property>
+                     <property name="checked">
+                      <bool>true</bool>
+                     </property>
+                    </widget>
+                   </item>
                    <item>
                     <widget class="QCheckBox" name="checkBoxCurrentPieceVerticallyFlipped">
                      <property name="text">
@@ -1730,6 +1741,13 @@
                  </widget>
                 </item>
                 <item>
+                 <widget class="QCheckBox" name="checkBoxCutOnFold">
+                  <property name="text">
+                   <string>Cut on fold</string>
+                  </property>
+                 </widget>
+                </item>
+                <item>
                  <layout class="QHBoxLayout" name="horizontalLayout_2">
                   <item>
                    <widget class="QLabel" name="labelSheetPiecesGap">
@@ -2013,8 +2031,7 @@
   </widget>
   <action name="actionOpen">
    <property name="icon">
-    <iconset theme="document-open">
-     <normaloff>.</normaloff>.</iconset>
+    <iconset theme="document-open"/>
    </property>
    <property name="text">
     <string>&amp;Open</string>
@@ -2031,8 +2048,7 @@
     <bool>true</bool>
    </property>
    <property name="icon">
-    <iconset theme="document-save">
-     <normaloff>.</normaloff>.</iconset>
+    <iconset theme="document-save"/>
    </property>
    <property name="text">
     <string>&amp;Save</string>
@@ -2049,8 +2065,7 @@
     <bool>true</bool>
    </property>
    <property name="icon">
-    <iconset theme="document-save-as">
-     <normaloff>.</normaloff>.</iconset>
+    <iconset theme="document-save-as"/>
    </property>
    <property name="text">
     <string>Save &amp;As</string>
@@ -2078,8 +2093,7 @@
     <bool>true</bool>
    </property>
    <property name="icon">
-    <iconset theme="application-exit">
-     <normaloff>.</normaloff>.</iconset>
+    <iconset theme="application-exit"/>
    </property>
    <property name="text">
     <string>E&amp;xit</string>
@@ -2093,8 +2107,7 @@
   </action>
   <action name="actionNew">
    <property name="icon">
-    <iconset theme="document-new">
-     <normaloff>.</normaloff>.</iconset>
+    <iconset theme="document-new"/>
    </property>
    <property name="text">
     <string>&amp;New</string>
@@ -2116,8 +2129,7 @@
   </action>
   <action name="actionAboutPuzzle">
    <property name="icon">
-    <iconset theme="help-about">
-     <normaloff>.</normaloff>.</iconset>
+    <iconset theme="help-about"/>
    </property>
    <property name="text">
     <string>About &amp;Puzzle</string>
@@ -2148,8 +2160,7 @@
     <bool>true</bool>
    </property>
    <property name="icon">
-    <iconset theme="zoom-in">
-     <normaloff>.</normaloff>.</iconset>
+    <iconset theme="zoom-in"/>
    </property>
    <property name="text">
     <string>Zoom in</string>
@@ -2160,8 +2171,7 @@
     <bool>true</bool>
    </property>
    <property name="icon">
-    <iconset theme="zoom-out">
-     <normaloff>.</normaloff>.</iconset>
+    <iconset theme="zoom-out"/>
    </property>
    <property name="text">
     <string>Zoom out</string>
@@ -2172,8 +2182,7 @@
     <bool>true</bool>
    </property>
    <property name="icon">
-    <iconset theme="zoom-original">
-     <normaloff>.</normaloff>.</iconset>
+    <iconset theme="zoom-original"/>
    </property>
    <property name="text">
     <string>Zoom 1:1</string>
@@ -2184,8 +2193,7 @@
     <bool>true</bool>
    </property>
    <property name="icon">
-    <iconset theme="zoom-fit-best">
-     <normaloff>.</normaloff>.</iconset>
+    <iconset theme="zoom-fit-best"/>
    </property>
    <property name="text">
     <string>Zoom fit best</string>
@@ -2212,8 +2220,7 @@
   </action>
   <action name="actionPrintLayout">
    <property name="icon">
-    <iconset theme="document-print">
-     <normaloff>.</normaloff>.</iconset>
+    <iconset theme="document-print"/>
    </property>
    <property name="text">
     <string>Print</string>
@@ -2224,8 +2231,7 @@
   </action>
   <action name="actionPrintPreviewLayout">
    <property name="icon">
-    <iconset theme="document-print-preview">
-     <normaloff>.</normaloff>.</iconset>
+    <iconset theme="document-print-preview"/>
    </property>
    <property name="text">
     <string>Print preview</string>
@@ -2236,8 +2242,7 @@
   </action>
   <action name="actionPrintTiledLayout">
    <property name="icon">
-    <iconset theme="document-print">
-     <normaloff>.</normaloff>.</iconset>
+    <iconset theme="document-print"/>
    </property>
    <property name="text">
     <string>Print tiled</string>
@@ -2248,8 +2253,7 @@
   </action>
   <action name="actionPrintPreviewTiledLayout">
    <property name="icon">
-    <iconset theme="document-print-preview">
-     <normaloff>.</normaloff>.</iconset>
+    <iconset theme="document-print-preview"/>
    </property>
    <property name="text">
     <string>Print preview tiled</string>
@@ -2268,8 +2272,7 @@
   </action>
   <action name="actionPrintSheet">
    <property name="icon">
-    <iconset theme="document-print">
-     <normaloff>.</normaloff>.</iconset>
+    <iconset theme="document-print"/>
    </property>
    <property name="text">
     <string>Print</string>
@@ -2280,8 +2283,7 @@
   </action>
   <action name="actionPrintPreviewSheet">
    <property name="icon">
-    <iconset theme="document-print-preview">
-     <normaloff>.</normaloff>.</iconset>
+    <iconset theme="document-print-preview"/>
    </property>
    <property name="text">
     <string>Print preview</string>
@@ -2292,8 +2294,7 @@
   </action>
   <action name="actionPrintTiledSheet">
    <property name="icon">
-    <iconset theme="document-print">
-     <normaloff>.</normaloff>.</iconset>
+    <iconset theme="document-print"/>
    </property>
    <property name="text">
     <string>Print tiled</string>
@@ -2304,8 +2305,7 @@
   </action>
   <action name="actionPrintPreviewTiledSheet">
    <property name="icon">
-    <iconset theme="document-print-preview">
-     <normaloff>.</normaloff>.</iconset>
+    <iconset theme="document-print-preview"/>
    </property>
    <property name="text">
     <string>Print preview tiled</string>
@@ -2324,8 +2324,7 @@
   </action>
   <action name="actionWatermarkEditor">
    <property name="icon">
-    <iconset theme="document-new">
-     <normaloff>.</normaloff>.</iconset>
+    <iconset theme="document-new"/>
    </property>
    <property name="text">
     <string>Editor</string>
@@ -2353,8 +2352,7 @@
     <bool>true</bool>
    </property>
    <property name="icon">
-    <iconset theme="document-open">
-     <normaloff>.</normaloff>.</iconset>
+    <iconset theme="document-open"/>
    </property>
    <property name="text">
     <string>Load</string>
@@ -2368,8 +2366,7 @@
     <bool>false</bool>
    </property>
    <property name="icon">
-    <iconset theme="edit-delete">
-     <normaloff>.</normaloff>.</iconset>
+    <iconset theme="edit-delete"/>
    </property>
    <property name="text">
     <string>Remove</string>
@@ -2380,8 +2377,7 @@
   </action>
   <action name="actionZValueBottom">
    <property name="icon">
-    <iconset theme="go-bottom">
-     <normaloff>.</normaloff>.</iconset>
+    <iconset theme="go-bottom"/>
    </property>
    <property name="text">
     <string>Bottom</string>
@@ -2389,8 +2385,7 @@
   </action>
   <action name="actionZValueDown">
    <property name="icon">
-    <iconset theme="go-down">
-     <normaloff>.</normaloff>.</iconset>
+    <iconset theme="go-down"/>
    </property>
    <property name="text">
     <string>Down</string>
@@ -2398,8 +2393,7 @@
   </action>
   <action name="actionZValueUp">
    <property name="icon">
-    <iconset theme="go-up">
-     <normaloff>.</normaloff>.</iconset>
+    <iconset theme="go-up"/>
    </property>
    <property name="text">
     <string>Up</string>
@@ -2407,8 +2401,7 @@
   </action>
   <action name="actionZValueTop">
    <property name="icon">
-    <iconset theme="go-top">
-     <normaloff>.</normaloff>.</iconset>
+    <iconset theme="go-top"/>
    </property>
    <property name="text">
     <string>Top</string>
@@ -2441,8 +2434,8 @@
  </resources>
  <connections/>
  <buttongroups>
-  <buttongroup name="buttonGroupRotationDirection"/>
   <buttongroup name="buttonGroupSheetOrientation"/>
+  <buttongroup name="buttonGroupRotationDirection"/>
   <buttongroup name="buttonGroupTileOrientation"/>
  </buttongroups>
 </ui>

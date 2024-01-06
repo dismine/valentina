@@ -109,6 +109,9 @@ private:
     QVector<QPointF> m_stickyPoints{};
     QPainterPath m_stickyPath{};
 
+    QPainterPath m_foldLineMarkPath{};
+    QPainterPath m_foldLineLabelPath{};
+
     bool m_hasStickyPosition{false};
     qreal m_stickyTranslateX{0};
     qreal m_stickyTranslateY{0};
@@ -120,6 +123,7 @@ private:
     VGraphicsFillItem *m_grainlineItem{nullptr};
     QVector<QGraphicsPathItem *> m_labelPathItems{};
     QVector<QGraphicsSimpleTextItem *> m_labelTextItems{};
+    QGraphicsSimpleTextItem *m_foldLineLabelText{nullptr};
 
     void InitLabels();
     void InitPieceLabelSVGFont(const QVector<QPointF> &labelShape, const VTextManager &tm);
@@ -133,6 +137,8 @@ private:
     void PaintPassmarks(QPainter *painter, const VPPiecePtr &piece);
     void PaintPlaceLabels(QPainter *painter, const VPPiecePtr &piece);
     void PaintStickyPath(QPainter *painter);
+    void PaintMirrorLine(QPainter *painter, const VPPiecePtr &piece);
+    void PaintFoldLine(QPainter *painter, const VPPiecePtr &piece);
 
     void GroupMove(const QPointF &pos);
 

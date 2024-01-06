@@ -55,9 +55,11 @@
 #include "../vgeometry/vgeometrydef.h"
 #include "../vgeometry/vlayoutplacelabel.h"
 #include "../vlayout/vboundary.h"
+#include "../vlayout/vfoldline.h"
 #include "../vlayout/vlayoutpiece.h"
 #include "../vlayout/vlayoutpiecepath.h"
 #include "../vlayout/vlayoutpoint.h"
+#include "../vlayout/vtextmanager.h"
 #include "../vmisc/def.h"
 #include "dxiface.h"
 #include "libdxfrw/drw_entities.h"
@@ -81,7 +83,7 @@ Q_GLOBAL_STATIC_WITH_ARGS(const UTF8STRING, layer2, (UTF8STRING("2"))) // NOLINT
 Q_GLOBAL_STATIC_WITH_ARGS(const UTF8STRING, layer3, (UTF8STRING("3"))) // NOLINT
 Q_GLOBAL_STATIC_WITH_ARGS(const UTF8STRING, layer4, (UTF8STRING("4"))) // NOLINT
 // Q_GLOBAL_STATIC_WITH_ARGS(const UTF8STRING, layer5, (UTF8STRING("5"))) // NOLINT
-// Q_GLOBAL_STATIC_WITH_ARGS(const UTF8STRING, layer6, (UTF8STRING("6"))) // NOLINT
+Q_GLOBAL_STATIC_WITH_ARGS(const UTF8STRING, layer6, (UTF8STRING("6"))) // NOLINT
 Q_GLOBAL_STATIC_WITH_ARGS(const UTF8STRING, layer7, (UTF8STRING("7"))) // NOLINT
 Q_GLOBAL_STATIC_WITH_ARGS(const UTF8STRING, layer8, (UTF8STRING("8"))) // NOLINT
 // Q_GLOBAL_STATIC_WITH_ARGS(const UTF8STRING, layer9, (UTF8STRING("9"))) // NOLINT
@@ -91,7 +93,7 @@ Q_GLOBAL_STATIC_WITH_ARGS(const UTF8STRING, layer11, (UTF8STRING("11"))) // NOLI
 Q_GLOBAL_STATIC_WITH_ARGS(const UTF8STRING, layer13, (UTF8STRING("13"))) // NOLINT
 Q_GLOBAL_STATIC_WITH_ARGS(const UTF8STRING, layer14, (UTF8STRING("14"))) // NOLINT
 Q_GLOBAL_STATIC_WITH_ARGS(const UTF8STRING, layer15, (UTF8STRING("15"))) // NOLINT
-// Q_GLOBAL_STATIC_WITH_ARGS(const UTF8STRING, layer19, (UTF8STRING("19"))) // NOLINT
+Q_GLOBAL_STATIC_WITH_ARGS(const UTF8STRING, layer19, (UTF8STRING("19"))) // NOLINT
 // Q_GLOBAL_STATIC_WITH_ARGS(const UTF8STRING, layer26, (UTF8STRING("26"))) // NOLINT
 Q_GLOBAL_STATIC_WITH_ARGS(const UTF8STRING, layer80, (UTF8STRING("80"))) // NOLINT
 Q_GLOBAL_STATIC_WITH_ARGS(const UTF8STRING, layer81, (UTF8STRING("81"))) // NOLINT
@@ -109,9 +111,73 @@ auto PieceOutline(const VLayoutPiece &detail) -> QVector<VLayoutPoint>
 {
     if (detail.IsSeamAllowance() && not detail.IsSeamAllowanceBuiltIn())
     {
-        return detail.GetMappedSeamAllowancePoints();
+        return detail.GetMappedFullSeamAllowancePoints();
     }
-    return detail.GetMappedContourPoints();
+    return detail.GetMappedFullContourPoints();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+inline auto LineFont(const TextLine &tl, const QFont &base) -> QFont
+{
+    QFont fnt = base;
+    fnt.setPointSize(qMax(base.pointSize() + tl.m_iFontSize, 1));
+    fnt.setBold(tl.m_bold);
+    fnt.setItalic(tl.m_italic);
+    return fnt;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+inline auto LineAlign(const TextLine &tl, const QString &text, const QFontMetrics &fm, qreal width) -> qreal
+{
+    const int lineWidth = TextWidth(fm, text);
+
+    qreal dX = 0;
+    if ((tl.m_eAlign & Qt::AlignHCenter) > 0)
+    {
+        dX = (width - lineWidth) / 2;
+    }
+    else if ((tl.m_eAlign & Qt::AlignRight) > 0)
+    {
+        dX = width - lineWidth;
+    }
+
+    return dX;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+inline auto LineMatrix(const VLayoutPiece &piece, const QPointF &topLeft, qreal angle, const QPointF &linePos,
+                       int maxLineWidth) -> QTransform
+{
+    QTransform labelMatrix;
+    labelMatrix.translate(topLeft.x(), topLeft.y());
+
+    if ((piece.IsVerticallyFlipped() && piece.IsHorizontallyFlipped()) ||
+        (!piece.IsVerticallyFlipped() && !piece.IsHorizontallyFlipped()))
+    {
+        labelMatrix.rotate(-angle);
+    }
+    else if (piece.IsVerticallyFlipped() || piece.IsHorizontallyFlipped())
+    {
+        if (piece.IsVerticallyFlipped())
+        {
+            labelMatrix.scale(-1, 1);
+            labelMatrix.rotate(angle);
+            labelMatrix.translate(-maxLineWidth, 0);
+        }
+
+        if (piece.IsHorizontallyFlipped())
+        {
+            labelMatrix.scale(-1, 1);
+            labelMatrix.rotate(angle);
+            labelMatrix.translate(-maxLineWidth, 0);
+        }
+    }
+
+    labelMatrix.translate(linePos.x(), linePos.y()); // Each string has own position
+
+    labelMatrix *= piece.GetMatrix();
+
+    return labelMatrix;
 }
 } // namespace
 
@@ -763,6 +829,7 @@ auto VDxfEngine::ExportToAAMA(const QVector<VLayoutPiece> &details) -> bool
         ExportAAMAGrainline(detailBlock, detail);
         ExportPieceText(detailBlock, detail);
         ExportAAMADrill(detailBlock, detail);
+        ExportAnnotationText(detailBlock, detail, *layer19);
 
         m_input->AddBlock(detailBlock.data());
 
@@ -792,6 +859,10 @@ void VDxfEngine::ExportAAMAOutline(const QSharedPointer<dx_ifaceBlock> &detailBl
 
         VBoundary boundary(points, seamAllowance, builtInSeamAllowance);
         boundary.SetPieceName(detail.GetName());
+        if (detail.IsShowFullPiece() && !detail.GetMappedSeamAllowanceMirrorLine().isNull())
+        {
+            boundary.SetMirrorLine(detail.GetMappedSeamAllowanceMirrorLine());
+        }
         const QList<VBoundarySequenceItemData> sequence = boundary.Combine(passmarks, false, false);
 
         points.clear();
@@ -818,35 +889,19 @@ void VDxfEngine::ExportAAMAOutline(const QSharedPointer<dx_ifaceBlock> &detailBl
 void VDxfEngine::ExportAAMADraw(const QSharedPointer<dx_ifaceBlock> &detailBlock, const VLayoutPiece &detail)
 {
     ExportAAMADrawSewLine(detailBlock, detail);
+    ExportAAMADrawInternalPaths(detailBlock, detail);
+    ExportAAMADrawPlaceLabels(detailBlock, detail);
+    ExportAAMADrawFoldLine(detailBlock, detail);
 
-    const QVector<QVector<VLayoutPoint>> drawIntLine = detail.MappedInternalPathsForCut(false);
-    for (const auto &intLine : drawIntLine)
+    if (detail.IsShowFullPiece())
     {
-        if (DRW_Entity *e = AAMAPolygon(intLine, *layer8, false))
+        const QLineF mirrorLine = detail.GetMappedSeamAllowanceMirrorLine();
+        if (not mirrorLine.isNull())
         {
-            detailBlock->ent.push_back(e);
-        }
-
-        ExportTurnPoints(detailBlock, intLine);
-        ExportCurvePoints(detailBlock, intLine);
-    }
-
-    const QVector<VLayoutPlaceLabel> labels = detail.GetPlaceLabels();
-    for (const auto &label : labels)
-    {
-        if (label.Type() != PlaceLabelType::Doubletree && label.Type() != PlaceLabelType::Button &&
-            label.Type() != PlaceLabelType::Circle)
-        {
-            PlaceLabelImg shape = detail.MapPlaceLabelShape(VAbstractPiece::PlaceLabelShape(label));
-            for (const auto &points : shape)
+            if (DRW_Entity *e = AAMALine(mirrorLine, *layer8))
             {
-                if (DRW_Entity *e = AAMAPolygon(points, *layer8, false))
-                {
-                    detailBlock->ent.push_back(e);
-                }
-
-                ExportTurnPoints(detailBlock, points);
-                ExportCurvePoints(detailBlock, points);
+                e->lineType = dx_iface::QtPenStyleToString(Qt::DashDotLine);
+                detailBlock->ent.push_back(e);
             }
         }
     }
@@ -858,7 +913,7 @@ void VDxfEngine::ExportAAMADrawSewLine(const QSharedPointer<dx_ifaceBlock> &deta
     if (detail.IsSeamAllowance() && not detail.IsHideMainPath() && not detail.IsSeamAllowanceBuiltIn())
     {
         const UTF8STRING &layer = not detail.IsSewLineOnDrawing() ? *layer14 : *layer8;
-        QVector<VLayoutPoint> points = detail.GetMappedContourPoints();
+        QVector<VLayoutPoint> points = detail.GetMappedFullContourPoints();
 
         auto DrawPolygon = [this, detailBlock, layer](const QVector<VLayoutPoint> &points, bool forceClosed)
         {
@@ -880,6 +935,10 @@ void VDxfEngine::ExportAAMADrawSewLine(const QSharedPointer<dx_ifaceBlock> &deta
 
             VBoundary boundary(points, seamAllowance, builtInSeamAllowance);
             boundary.SetPieceName(detail.GetName());
+            if (detail.IsShowFullPiece() && !detail.GetMappedSeamAllowanceMirrorLine().isNull())
+            {
+                boundary.SetMirrorLine(detail.GetMappedSeamAllowanceMirrorLine());
+            }
             const QList<VBoundarySequenceItemData> sequence = boundary.Combine(passmarks, true, false);
 
             for (const auto &item : sequence)
@@ -896,39 +955,142 @@ void VDxfEngine::ExportAAMADrawSewLine(const QSharedPointer<dx_ifaceBlock> &deta
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+void VDxfEngine::ExportAAMADrawInternalPaths(const QSharedPointer<dx_ifaceBlock> &detailBlock,
+                                             const VLayoutPiece &detail)
+{
+    auto DrawPolygon = [this, detailBlock](const QVector<VLayoutPoint> &points, Qt::PenStyle style, bool forceClosed)
+    {
+        if (DRW_Entity *e = AAMAPolygon(points, *layer8, forceClosed))
+        {
+            e->lineType = dx_iface::QtPenStyleToString(style);
+            detailBlock->ent.push_back(e);
+        }
+
+        ExportTurnPoints(detailBlock, points);
+        ExportCurvePoints(detailBlock, points);
+    };
+
+    const QVector<VLayoutPiecePath> drawIPaths = detail.MappedInternalPathsForCut(false);
+    for (const auto &iPath : drawIPaths)
+    {
+        QVector<VLayoutPoint> points = iPath.Points();
+        DrawPolygon(points, iPath.PenStyle(), false);
+
+        if (!iPath.IsNotMirrored() && detail.IsShowFullPiece() && !detail.GetMappedSeamMirrorLine().isNull())
+        {
+            const QTransform matrix = VGObject::FlippingMatrix(detail.GetMappedSeamMirrorLine());
+            std::transform(points.begin(), points.end(), points.begin(),
+                           [matrix](const VLayoutPoint &point) { return VAbstractPiece::MapPoint(point, matrix); });
+            DrawPolygon(points, iPath.PenStyle(), false);
+        }
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VDxfEngine::ExportAAMADrawPlaceLabels(const QSharedPointer<dx_ifaceBlock> &detailBlock, const VLayoutPiece &detail)
+{
+    auto DrawShape = [this, detailBlock](const PlaceLabelImg &shape, bool forceClosed)
+    {
+        for (const auto &points : shape)
+        {
+            if (DRW_Entity *e = AAMAPolygon(points, *layer8, forceClosed))
+            {
+                detailBlock->ent.push_back(e);
+            }
+
+            ExportTurnPoints(detailBlock, points);
+            ExportCurvePoints(detailBlock, points);
+        }
+    };
+
+    const QVector<VLayoutPlaceLabel> labels = detail.GetPlaceLabels();
+    for (const auto &label : labels)
+    {
+        if (label.Type() != PlaceLabelType::Doubletree && label.Type() != PlaceLabelType::Button &&
+            label.Type() != PlaceLabelType::Circle)
+        {
+            DrawShape(detail.MapPlaceLabelShape(VAbstractPiece::PlaceLabelShape(label)), false);
+
+            if (!label.IsNotMirrored() && detail.IsShowFullPiece() && !detail.GetMappedSeamMirrorLine().isNull())
+            {
+                PlaceLabelImg shape = detail.MapPlaceLabelShape(VAbstractPiece::PlaceLabelShape(label));
+                const QTransform matrix = VGObject::FlippingMatrix(detail.GetMappedSeamMirrorLine());
+                for (auto &points : shape)
+                {
+                    std::transform(points.begin(), points.end(), points.begin(),
+                                   [matrix](const VLayoutPoint &point)
+                                   { return VAbstractPiece::MapPoint(point, matrix); });
+                }
+
+                DrawShape(shape, false);
+            }
+        }
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 void VDxfEngine::ExportAAMAIntcut(const QSharedPointer<dx_ifaceBlock> &detailBlock, const VLayoutPiece &detail)
 {
-    QVector<QVector<VLayoutPoint>> drawIntCut = detail.MappedInternalPathsForCut(true);
-    for (auto &intCut : drawIntCut)
+    auto DrawPolygon = [this, detailBlock](const QVector<VLayoutPoint> &points, bool forceClosed)
     {
-        if (DRW_Entity *e = AAMAPolygon(intCut, *layer11, false))
+        if (DRW_Entity *e = AAMAPolygon(points, *layer11, forceClosed))
         {
             detailBlock->ent.push_back(e);
         }
 
-        ExportTurnPoints(detailBlock, intCut);
-        ExportCurvePoints(detailBlock, intCut);
+        ExportTurnPoints(detailBlock, points);
+        ExportCurvePoints(detailBlock, points);
+    };
+
+    QVector<VLayoutPiecePath> drawIntCut = detail.MappedInternalPathsForCut(true);
+    for (auto &intCut : drawIntCut)
+    {
+        QVector<VLayoutPoint> points = intCut.Points();
+        DrawPolygon(points, false);
+
+        if (!intCut.IsNotMirrored() && detail.IsShowFullPiece() && !detail.GetMappedSeamMirrorLine().isNull())
+        {
+            const QTransform matrix = VGObject::FlippingMatrix(detail.GetMappedSeamMirrorLine());
+            std::transform(points.begin(), points.end(), points.begin(),
+                           [matrix](const VLayoutPoint &point) { return VAbstractPiece::MapPoint(point, matrix); });
+            DrawPolygon(points, false);
+        }
     }
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 void VDxfEngine::ExportAAMANotch(const QSharedPointer<dx_ifaceBlock> &detailBlock, const VLayoutPiece &detail)
 {
+    auto ExportNotch = [this, detailBlock](QPointF center, qreal length, qreal angle)
+    {
+        std::unique_ptr<DRW_ASTMNotch> notch(new DRW_ASTMNotch());
+
+        notch->basePoint =
+            DRW_Coord(FromPixel(center.x(), m_varInsunits), FromPixel(GetSize().height() - center.y(), m_varInsunits),
+                      FromPixel(length, m_varInsunits));
+        notch->angle = angle;
+        notch->layer = *layer4;
+
+        detailBlock->ent.push_back(notch.release());
+    };
+
     if (detail.IsSeamAllowance() && !m_togetherWithNotches)
     {
+        const QLineF mirrorLine = detail.GetMappedSeamMirrorLine();
         const QVector<VLayoutPassmark> passmarks = detail.GetMappedPassmarks();
         for (const auto &passmark : passmarks)
         {
-            std::unique_ptr<DRW_ASTMNotch> notch(new DRW_ASTMNotch());
-            const QPointF center = passmark.baseLine.p1();
+            ExportNotch(passmark.baseLine.p1(), passmark.baseLine.length(), passmark.baseLine.angle());
 
-            notch->basePoint = DRW_Coord(FromPixel(center.x(), m_varInsunits),
-                                         FromPixel(GetSize().height() - center.y(), m_varInsunits),
-                                         FromPixel(passmark.baseLine.length(), m_varInsunits));
-            notch->angle = passmark.baseLine.angle();
-            notch->layer = *layer4;
-
-            detailBlock->ent.push_back(notch.release());
+            if (!mirrorLine.isNull() && detail.IsShowFullPiece())
+            {
+                if (!VGObject::IsPointOnLineviaPDP(passmark.baseLine.p1(), mirrorLine.p1(), mirrorLine.p2()))
+                {
+                    const QTransform matrix = VGObject::FlippingMatrix(mirrorLine);
+                    QLineF baseLine = matrix.map(passmark.baseLine);
+                    ExportNotch(baseLine.p1(), baseLine.length(), baseLine.angle());
+                }
+            }
         }
     }
 }
@@ -949,15 +1111,125 @@ void VDxfEngine::ExportAAMAGrainline(const QSharedPointer<dx_ifaceBlock> &detail
 //---------------------------------------------------------------------------------------------------------------------
 void VDxfEngine::ExportPieceText(const QSharedPointer<dx_ifaceBlock> &detailBlock, const VLayoutPiece &detail)
 {
-    const QStringList list = detail.GetPieceText();
-    const QPointF startPos = detail.GetPieceTextPosition();
-
-    for (int i = 0; i < list.size(); ++i)
+    QVector<QPointF> const labelShape = detail.GetPieceLabelRect();
+    if (labelShape.count() != 4)
     {
-        const qreal height = ToPixel(AAMATextHeight * m_yscale, m_varInsunits);
-        QPointF pos(startPos.x(), startPos.y() - height * (static_cast<int>(list.size()) - i - 1));
-        detailBlock->ent.push_back(AAMAText(pos, list.at(i), *layer1));
+        return;
     }
+
+    const qreal scale = qMin(detail.GetXScale(), detail.GetYScale());
+    const qreal dW = QLineF(labelShape.at(0), labelShape.at(1)).length();
+    const qreal dH = QLineF(labelShape.at(1), labelShape.at(2)).length();
+    const qreal angle = QLineF(labelShape.at(0), labelShape.at(1)).angle();
+    qreal dY = 0;
+
+    VTextManager const tm = detail.GetPieceLabelData();
+    const QVector<TextLine> labelLines = tm.GetLabelSourceLines(qFloor(dW), tm.GetFont());
+    const int maxLineWidth = tm.MaxLineWidthOutlineFont(static_cast<int>(dW));
+
+    for (const auto &tl : labelLines)
+    {
+        const QFont fnt = LineFont(tl, tm.GetFont());
+        QFontMetrics const fm(fnt);
+
+        if (dY + fm.height() > dH)
+        {
+            break;
+        }
+
+        dY += fm.height();
+
+        const qreal dX = LineAlign(tl, tl.m_qsText, fm, dW);
+        QTransform const lineMatrix = LineMatrix(detail, labelShape.at(0), angle, QPointF(dX, dY), maxLineWidth);
+
+        QPointF const pos = lineMatrix.map(QPointF());
+
+        auto *textLine = new DRW_Text();
+        textLine->basePoint =
+            DRW_Coord(FromPixel(pos.x(), m_varInsunits), FromPixel(GetSize().height() - pos.y(), m_varInsunits), 0);
+        textLine->secPoint =
+            DRW_Coord(FromPixel(pos.x(), m_varInsunits), FromPixel(GetSize().height() - pos.y(), m_varInsunits), 0);
+        textLine->height = FromPixel(fm.ascent() * scale, m_varInsunits);
+        textLine->layer = *layer1;
+        textLine->text = tl.m_qsText.toStdString();
+        textLine->style = m_input->AddFont(fnt);
+
+        if (detail.IsVerticallyFlipped() && detail.IsHorizontallyFlipped())
+        {
+            textLine->angle = angle + 180;
+        }
+        else if (detail.IsVerticallyFlipped())
+        {
+            textLine->angle = -angle;
+        }
+        else if (detail.IsHorizontallyFlipped())
+        {
+            textLine->angle = -angle - 180;
+        }
+        else
+        {
+            textLine->angle = angle;
+        }
+
+        detailBlock->ent.push_back(textLine);
+
+        dY += MmToPixel(1.5);
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VDxfEngine::ExportAnnotationText(const QSharedPointer<dx_ifaceBlock> &detailBlock, const VLayoutPiece &detail,
+                                      const UTF8STRING &layer)
+{
+    VFoldLine const fLine = detail.FoldLine();
+    bool ok = false;
+    FoldLabelPosData const labelData = fLine.LabelPosition(ok);
+
+    if (not ok)
+    {
+        return;
+    }
+
+    QFontMetrics const fm(labelData.font);
+    QPointF pos = labelData.pos;
+    qreal const height = fm.height() * qMin(detail.GetXScale(), detail.GetYScale());
+    qreal const width = TextWidth(fm, labelData.label);
+
+    QLineF base(pos, QPointF(pos.x() + 100, pos.y()));
+    base.setAngle(base.angle() - 90);
+    base.setLength(height);
+    pos = base.p2();
+
+    QTransform matrix;
+    if ((detail.IsVerticallyFlipped() && !detail.IsHorizontallyFlipped()) ||
+        (!detail.IsVerticallyFlipped() && detail.IsHorizontallyFlipped()))
+    {
+        matrix.translate(pos.x(), pos.y());
+        matrix.rotate(180);
+        matrix.translate(-pos.x(), -pos.y());
+        matrix.translate(-width, fm.height());
+    }
+
+    matrix *= detail.GetMatrix();
+
+    QLineF angleLine(QPointF(), QPointF(1000, 0));
+    angleLine.setAngle(labelData.angle);
+    angleLine = matrix.map(angleLine);
+
+    pos = matrix.map(pos);
+
+    auto *text = new DRW_Text();
+    text->basePoint =
+        DRW_Coord(FromPixel(pos.x(), m_varInsunits), FromPixel(GetSize().height() - pos.y(), m_varInsunits), 0);
+    text->secPoint =
+        DRW_Coord(FromPixel(pos.x(), m_varInsunits), FromPixel(GetSize().height() - pos.y(), m_varInsunits), 0);
+    text->height = FromPixel(height, m_varInsunits);
+    text->layer = layer;
+    text->text = labelData.label.toStdString();
+    text->style = m_input->AddFont(labelData.font);
+    text->angle = angleLine.angle();
+
+    detailBlock->ent.push_back(text);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -989,10 +1261,47 @@ void VDxfEngine::ExportAAMADrill(const QSharedPointer<dx_ifaceBlock> &detailBloc
         if (label.Type() == PlaceLabelType::Doubletree || label.Type() == PlaceLabelType::Button ||
             label.Type() == PlaceLabelType::Circle)
         {
-            const QPointF center = detail.GetMatrix().map(label.Center());
+            QPointF center = detail.GetMatrix().map(label.Center());
             detailBlock->ent.push_back(AAMAPoint(center, *layer13));
+
+            if (!label.IsNotMirrored() && detail.IsShowFullPiece() && !detail.GetMappedSeamMirrorLine().isNull())
+            {
+                const QTransform matrix = VGObject::FlippingMatrix(detail.GetMappedSeamMirrorLine());
+                center = VAbstractPiece::MapPoint(center, matrix);
+                detailBlock->ent.push_back(AAMAPoint(center, *layer13));
+            }
         }
     }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VDxfEngine::ExportAAMADrawFoldLine(const QSharedPointer<dx_ifaceBlock> &detailBlock, const VLayoutPiece &detail)
+{
+    VFoldLine const fLine = detail.FoldLine();
+    QVector<QVector<QPointF>> points = fLine.FoldLineMarkPoints();
+
+    switch (detail.GetFoldLineType())
+    {
+        case FoldLineType::TwoArrows:
+        case FoldLineType::TwoArrowsTextAbove:
+        case FoldLineType::TwoArrowsTextUnder:
+            points.removeAt(1);
+            AAMADrawFoldLineTwoArrows(points, detailBlock);
+            break;
+        case FoldLineType::ThreeDots:
+            AAMADrawFoldLineThreeDots(points, detailBlock, fLine.ThreeDotsRadius());
+            break;
+        case FoldLineType::ThreeX:
+            AAMADrawFoldLineThreeX(points, detailBlock);
+            break;
+        case FoldLineType::LAST_ONE_DO_NOT_USE:
+            Q_UNREACHABLE();
+            break;
+        case FoldLineType::Text:
+        case FoldLineType::None:
+        default:
+            break;
+    };
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -1042,13 +1351,17 @@ auto VDxfEngine::ExportToASTM(const QVector<VLayoutPiece> &details) -> bool
 
         ExportASTMPieceBoundary(detailBlock, detail);
         ExportASTMSewLine(detailBlock, detail);
-        ExportASTMInternalLine(detailBlock, detail);
+        ExportASTMDrawInternalPaths(detailBlock, detail);
+        ExportASTMDrawPlaceLabels(detailBlock, detail);
         ExportASTMInternalCutout(detailBlock, detail);
         ExportASTMNotches(detailBlock, detail);
         ExportAAMAGrainline(detailBlock, detail);
         ExportPieceText(detailBlock, detail);
         ExportASTMDrill(detailBlock, detail);
         ExportASTMAnnotationText(detailBlock, detail);
+        ExportASTMMirrorLine(detailBlock, detail);
+        ExportASTMDrawFoldLine(detailBlock, detail);
+        ExportAnnotationText(detailBlock, detail, *layer15);
 
         m_input->AddBlock(detailBlock.data());
 
@@ -1078,6 +1391,10 @@ void VDxfEngine::ExportASTMPieceBoundary(const QSharedPointer<dx_ifaceBlock> &de
 
         VBoundary boundary(pieceBoundary, seamAllowance, builtInSeamAllowance);
         boundary.SetPieceName(detail.GetName());
+        if (detail.IsShowFullPiece() && !detail.GetMappedSeamAllowanceMirrorLine().isNull())
+        {
+            boundary.SetMirrorLine(detail.GetMappedSeamAllowanceMirrorLine());
+        }
         const QList<VBoundarySequenceItemData> sequence = boundary.Combine(passmarks, false, false);
 
         pieceBoundary.clear();
@@ -1112,7 +1429,7 @@ void VDxfEngine::ExportASTMSewLine(const QSharedPointer<dx_ifaceBlock> &detailBl
 {
     if (detail.IsSeamAllowance() && not detail.IsHideMainPath() && not detail.IsSeamAllowanceBuiltIn())
     {
-        QVector<VLayoutPoint> sewLine = detail.GetMappedContourPoints();
+        QVector<VLayoutPoint> sewLine = detail.GetMappedFullContourPoints();
 
         auto DrawPolygon = [this, detailBlock](const QVector<VLayoutPoint> &points, bool forceClosed)
         {
@@ -1141,6 +1458,10 @@ void VDxfEngine::ExportASTMSewLine(const QSharedPointer<dx_ifaceBlock> &detailBl
 
             VBoundary boundary(sewLine, seamAllowance, builtInSeamAllowance);
             boundary.SetPieceName(detail.GetName());
+            if (detail.IsShowFullPiece() && !detail.GetMappedSeamAllowanceMirrorLine().isNull())
+            {
+                boundary.SetMirrorLine(detail.GetMappedSeamAllowanceMirrorLine());
+            }
             const QList<VBoundarySequenceItemData> sequence = boundary.Combine(passmarks, true, false);
 
             for (const auto &item : sequence)
@@ -1157,26 +1478,80 @@ void VDxfEngine::ExportASTMSewLine(const QSharedPointer<dx_ifaceBlock> &detailBl
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VDxfEngine::ExportASTMInternalLine(const QSharedPointer<dx_ifaceBlock> &detailBlock, const VLayoutPiece &detail)
+void VDxfEngine::ExportASTMDrawInternalPaths(const QSharedPointer<dx_ifaceBlock> &detailBlock,
+                                             const VLayoutPiece &detail)
 {
-    const QVector<QVector<VLayoutPoint>> drawIntLine = detail.MappedInternalPathsForCut(false);
-    for (const auto &intLine : drawIntLine)
+    auto DrawPolygon =
+        [this, detailBlock](const QVector<VLayoutPoint> &points, Qt::PenStyle style, bool notMirrored, bool forceClosed)
     {
         // Internal line
-        if (DRW_Entity *e = AAMAPolygon(intLine, *layer8, false))
+        if (DRW_Entity *e = AAMAPolygon(points, *layer8, forceClosed))
         {
+            e->lineType = dx_iface::QtPenStyleToString(style);
             detailBlock->ent.push_back(e);
         }
 
-        ExportTurnPoints(detailBlock, intLine);
-        ExportCurvePoints(detailBlock, intLine);
+        if (notMirrored && !points.isEmpty())
+        {
+            QPointF pos(points.constFirst().x(), points.constFirst().y() - ToPixel(AAMATextHeight, m_varInsunits));
+            detailBlock->ent.push_back(AAMAText(pos, QStringLiteral("NM"), *layer8));
+        }
+
+        ExportTurnPoints(detailBlock, points);
+        ExportCurvePoints(detailBlock, points);
 
         // Internal lines quality validation curves
-        if (DRW_Entity *e = AAMAPolygon(intLine, *layer85, false))
+        if (DRW_Entity *e = AAMAPolygon(points, *layer85, forceClosed))
         {
             detailBlock->ent.push_back(e);
         }
+    };
+
+    const QVector<VLayoutPiecePath> drawIPaths = detail.MappedInternalPathsForCut(false);
+    for (const auto &iPath : drawIPaths)
+    {
+        QVector<VLayoutPoint> points = iPath.Points();
+        DrawPolygon(points, iPath.PenStyle(), iPath.IsNotMirrored(), false);
+
+        if (!iPath.IsNotMirrored() && detail.IsShowFullPiece() && !detail.GetMappedSeamMirrorLine().isNull())
+        {
+            const QTransform matrix = VGObject::FlippingMatrix(detail.GetMappedSeamMirrorLine());
+            std::transform(points.begin(), points.end(), points.begin(),
+                           [matrix](const VLayoutPoint &point) { return VAbstractPiece::MapPoint(point, matrix); });
+            DrawPolygon(points, iPath.PenStyle(), iPath.IsNotMirrored(), false);
+        }
     }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VDxfEngine::ExportASTMDrawPlaceLabels(const QSharedPointer<dx_ifaceBlock> &detailBlock, const VLayoutPiece &detail)
+{
+    auto DrawShape = [this, detailBlock](const PlaceLabelImg &shape, bool notMirrored, bool forceClosed)
+    {
+        for (const auto &points : shape)
+        {
+            // Internal line (placelabel)
+            if (DRW_Entity *e = AAMAPolygon(points, *layer8, forceClosed))
+            {
+                detailBlock->ent.push_back(e);
+            }
+
+            if (notMirrored && !points.isEmpty())
+            {
+                QPointF pos(points.constFirst().x(), points.constFirst().y() - ToPixel(AAMATextHeight, m_varInsunits));
+                detailBlock->ent.push_back(AAMAText(pos, QStringLiteral("NM"), *layer8));
+            }
+
+            ExportTurnPoints(detailBlock, points);
+            ExportCurvePoints(detailBlock, points);
+
+            // Internal lines quality validation curves
+            if (DRW_Entity *e = AAMAPolygon(points, *layer85, false))
+            {
+                detailBlock->ent.push_back(e);
+            }
+        }
+    };
 
     const QVector<VLayoutPlaceLabel> labels = detail.GetPlaceLabels();
     for (const auto &label : labels)
@@ -1185,22 +1560,19 @@ void VDxfEngine::ExportASTMInternalLine(const QSharedPointer<dx_ifaceBlock> &det
             label.Type() != PlaceLabelType::Circle)
         {
             PlaceLabelImg shape = detail.MapPlaceLabelShape(VAbstractPiece::PlaceLabelShape(label));
-            for (const auto &p : shape)
+            DrawShape(shape, label.IsNotMirrored(), false);
+
+            if (!label.IsNotMirrored() && detail.IsShowFullPiece() && !detail.GetMappedSeamMirrorLine().isNull())
             {
-                // Internal line (placelabel)
-                if (DRW_Entity *e = AAMAPolygon(p, *layer8, false))
+                const QTransform matrix = VGObject::FlippingMatrix(detail.GetMappedSeamMirrorLine());
+                for (auto &points : shape)
                 {
-                    detailBlock->ent.push_back(e);
+                    std::transform(points.begin(), points.end(), points.begin(),
+                                   [matrix](const VLayoutPoint &point)
+                                   { return VAbstractPiece::MapPoint(point, matrix); });
                 }
 
-                ExportTurnPoints(detailBlock, p);
-                ExportCurvePoints(detailBlock, p);
-
-                // Internal lines quality validation curves
-                if (DRW_Entity *e = AAMAPolygon(p, *layer85, false))
-                {
-                    detailBlock->ent.push_back(e);
-                }
+                DrawShape(shape, label.IsNotMirrored(), false);
             }
         }
     }
@@ -1209,22 +1581,42 @@ void VDxfEngine::ExportASTMInternalLine(const QSharedPointer<dx_ifaceBlock> &det
 //---------------------------------------------------------------------------------------------------------------------
 void VDxfEngine::ExportASTMInternalCutout(const QSharedPointer<dx_ifaceBlock> &detailBlock, const VLayoutPiece &detail)
 {
-    QVector<QVector<VLayoutPoint>> drawIntCut = detail.MappedInternalPathsForCut(true);
-    for (auto &intCut : drawIntCut)
+    auto DrawPolygon = [this, detailBlock](const QVector<VLayoutPoint> &points, bool notMirrored, bool forceClosed)
     {
         // Internal cutout
-        if (DRW_Entity *e = AAMAPolygon(intCut, *layer11, false))
+        if (DRW_Entity *e = AAMAPolygon(points, *layer11, forceClosed))
         {
             detailBlock->ent.push_back(e);
         }
 
-        ExportTurnPoints(detailBlock, intCut);
-        ExportCurvePoints(detailBlock, intCut);
+        if (notMirrored && !points.isEmpty())
+        {
+            QPointF pos(points.constFirst().x(), points.constFirst().y() - ToPixel(AAMATextHeight, m_varInsunits));
+            detailBlock->ent.push_back(AAMAText(pos, QStringLiteral("NM"), *layer11));
+        }
+
+        ExportTurnPoints(detailBlock, points);
+        ExportCurvePoints(detailBlock, points);
 
         // Internal cutouts quality validation curves
-        if (DRW_Entity *e = AAMAPolygon(intCut, *layer86, false))
+        if (DRW_Entity *e = AAMAPolygon(points, *layer86, forceClosed))
         {
             detailBlock->ent.push_back(e);
+        }
+    };
+
+    QVector<VLayoutPiecePath> drawIntCut = detail.MappedInternalPathsForCut(true);
+    for (auto &intCut : drawIntCut)
+    {
+        QVector<VLayoutPoint> points = intCut.Points();
+        DrawPolygon(points, intCut.IsNotMirrored(), false);
+
+        if (!intCut.IsNotMirrored() && detail.IsShowFullPiece() && !detail.GetMappedSeamMirrorLine().isNull())
+        {
+            const QTransform matrix = VGObject::FlippingMatrix(detail.GetMappedSeamMirrorLine());
+            std::transform(points.begin(), points.end(), points.begin(),
+                           [matrix](const VLayoutPoint &point) { return VAbstractPiece::MapPoint(point, matrix); });
+            DrawPolygon(points, intCut.IsNotMirrored(), false);
         }
     }
 }
@@ -1232,10 +1624,10 @@ void VDxfEngine::ExportASTMInternalCutout(const QSharedPointer<dx_ifaceBlock> &d
 //---------------------------------------------------------------------------------------------------------------------
 void VDxfEngine::ExportASTMAnnotationText(const QSharedPointer<dx_ifaceBlock> &detailBlock, const VLayoutPiece &detail)
 {
-    QString name = detail.GetName();
-    QPointF textPos = detail.VLayoutPiece::DetailBoundingRect().center();
+    QString const name = detail.GetName();
+    QPointF const textPos = detail.VLayoutPiece::MappedDetailBoundingRect().center();
 
-    QPointF pos(textPos.x(), textPos.y() - ToPixel(AAMATextHeight, m_varInsunits));
+    QPointF const pos(textPos.x(), textPos.y() - ToPixel(AAMATextHeight, m_varInsunits));
     detailBlock->ent.push_back(AAMAText(pos, name, *layer15));
 }
 
@@ -1244,24 +1636,36 @@ void VDxfEngine::ExportASTMDrill(const QSharedPointer<dx_ifaceBlock> &detailBloc
 {
     const QVector<VLayoutPlaceLabel> labels = detail.GetPlaceLabels();
 
+    auto ExportPoint = [this, detailBlock](QPointF center, qreal diameter)
+    {
+        std::unique_ptr<DRW_Point> point(new DRW_Point());
+        point->basePoint =
+            DRW_Coord(FromPixel(center.x(), m_varInsunits), FromPixel(GetSize().height() - center.y(), m_varInsunits),
+                      FromPixel(diameter, m_varInsunits));
+        point->layer = *layer13;
+        detailBlock->ent.push_back(point.release());
+
+        // TODO. Investigate drill category
+        // QPointF pos(center.x(), center.y() - ToPixel(AAMATextHeight, m_varInsunits));
+        // detailBlock->ent.push_back(AAMAText(pos, category, *layer13));
+    };
+
     for (const auto &label : labels)
     {
         if (label.Type() == PlaceLabelType::Doubletree || label.Type() == PlaceLabelType::Button ||
             label.Type() == PlaceLabelType::Circle)
         {
-            const QPointF center = detail.GetMatrix().map(label.Center());
-            QLineF diameter = detail.GetMatrix().map(QLineF(label.Box().bottomLeft(), label.Box().topRight()));
+            QPointF center = detail.GetMatrix().map(label.Center());
+            const QLineF diameter(label.Box().bottomLeft(), label.Box().topRight());
 
-            std::unique_ptr<DRW_Point> point(new DRW_Point());
-            point->basePoint = DRW_Coord(FromPixel(center.x(), m_varInsunits),
-                                         FromPixel(GetSize().height() - center.y(), m_varInsunits),
-                                         FromPixel(diameter.length(), m_varInsunits));
-            point->layer = *layer13;
-            detailBlock->ent.push_back(point.release());
+            ExportPoint(center, diameter.length());
 
-            // TODO. Investigate drill category
-            //            QPointF pos(center.x(), center.y() - ToPixel(AAMATextHeight, m_varInsunits));
-            //            detailBlock->ent.push_back(AAMAText(pos, category, *layer13));
+            if (!label.IsNotMirrored() && detail.IsShowFullPiece() && !detail.GetMappedSeamMirrorLine().isNull())
+            {
+                const QTransform matrix = VGObject::FlippingMatrix(detail.GetMappedSeamMirrorLine());
+                center = VAbstractPiece::MapPoint(center, matrix);
+                ExportPoint(center, diameter.length());
+            }
         }
     }
 }
@@ -1274,18 +1678,82 @@ void VDxfEngine::ExportASTMNotches(const QSharedPointer<dx_ifaceBlock> &detailBl
         return;
     }
 
-    const QVector<VLayoutPassmark> passmarks = detail.GetMappedPassmarks();
-    for (const auto &passmark : passmarks)
+    auto ExportPassmark = [this, detailBlock, detail](const VLayoutPassmark &passmark)
     {
         DRW_ASTMNotch *notch = ExportASTMNotch(passmark);
         DRW_ATTDEF *attdef = ExportASTMNotchDataDependecy(passmark, notch->layer, detail);
         detailBlock->ent.push_back(notch);
 
-        if (attdef)
+        if (attdef != nullptr)
         {
             detailBlock->ent.push_back(attdef);
         }
+    };
+
+    const QVector<VLayoutPassmark> passmarks = detail.GetMappedPassmarks();
+    for (const auto &passmark : passmarks)
+    {
+        ExportPassmark(passmark);
+
+        const QLineF mirrorLine = detail.GetMappedSeamMirrorLine();
+        if (!mirrorLine.isNull() && detail.IsShowFullPiece())
+        {
+            if (!VGObject::IsPointOnLineviaPDP(passmark.baseLine.p1(), mirrorLine.p1(), mirrorLine.p2()))
+            {
+                const QTransform matrix = VGObject::FlippingMatrix(mirrorLine);
+                const VLayoutPassmark mirroredPassmark = VLayoutPiece::MapPassmark(passmark, matrix, false);
+
+                ExportPassmark(mirroredPassmark);
+            }
+        }
     }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VDxfEngine::ExportASTMMirrorLine(const QSharedPointer<dx_ifaceBlock> &detailBlock, const VLayoutPiece &detail)
+{
+    if (detail.IsShowFullPiece())
+    {
+        const QLineF mirrorLine = detail.GetMappedSeamAllowanceMirrorLine();
+        if (not mirrorLine.isNull())
+        {
+            if (DRW_Entity *e = AAMALine(mirrorLine, *layer6))
+            {
+                e->lineType = dx_iface::QtPenStyleToString(Qt::DashDotLine);
+                detailBlock->ent.push_back(e);
+            }
+        }
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VDxfEngine::ExportASTMDrawFoldLine(const QSharedPointer<dx_ifaceBlock> &detailBlock, const VLayoutPiece &detail)
+{
+    VFoldLine const fLine = detail.FoldLine();
+    QVector<QVector<QPointF>> points = fLine.FoldLineMarkPoints();
+
+    switch (detail.GetFoldLineType())
+    {
+        case FoldLineType::TwoArrows:
+        case FoldLineType::TwoArrowsTextAbove:
+        case FoldLineType::TwoArrowsTextUnder:
+            points.removeAt(1);
+            ASTMDrawFoldLineTwoArrows(points, detailBlock);
+            break;
+        case FoldLineType::ThreeDots:
+            AAMADrawFoldLineThreeDots(points, detailBlock, fLine.ThreeDotsRadius());
+            break;
+        case FoldLineType::ThreeX:
+            AAMADrawFoldLineThreeX(points, detailBlock);
+            break;
+        case FoldLineType::LAST_ONE_DO_NOT_USE:
+            Q_UNREACHABLE();
+            break;
+        case FoldLineType::Text:
+        case FoldLineType::None:
+        default:
+            break;
+    };
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -1311,7 +1779,7 @@ auto VDxfEngine::ExportASTMNotch(const VLayoutPassmark &passmark) -> DRW_ASTMNot
         case PassmarkLineType::ExternalVMark:
         case PassmarkLineType::InternalVMark:
         { // V-Notch
-            QLineF boundaryLine(passmark.lines.constFirst().p1(), passmark.lines.constLast().p2());
+            const QLineF boundaryLine(passmark.lines.constFirst().p1(), passmark.lines.constLast().p2());
             notch->thickness = FromPixel(boundaryLine.length(), m_varInsunits); // width
             notch->layer = *layer4;
             break;
@@ -1457,7 +1925,6 @@ auto VDxfEngine::AAMALine(const QLineF &line, const UTF8STRING &layer) -> DRW_En
 auto VDxfEngine::AAMAText(const QPointF &pos, const QString &text, const UTF8STRING &layer) -> DRW_Entity *
 {
     auto *textLine = new DRW_Text();
-
     textLine->basePoint =
         DRW_Coord(FromPixel(pos.x(), m_varInsunits), FromPixel(GetSize().height() - pos.y(), m_varInsunits), 0);
     textLine->secPoint =
@@ -1477,6 +1944,17 @@ auto VDxfEngine::AAMAPoint(const QPointF &pos, const UTF8STRING &layer) const ->
         DRW_Coord(FromPixel(pos.x(), m_varInsunits), FromPixel(GetSize().height() - pos.y(), m_varInsunits), 0);
     point->layer = layer;
     return point;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+auto VDxfEngine::AAMACircle(const QPointF &pos, const std::string &layer, qreal radius) const -> DRW_Circle *
+{
+    auto *circle = new DRW_Circle();
+    circle->basePoint =
+        DRW_Coord(FromPixel(pos.x(), m_varInsunits), FromPixel(GetSize().height() - pos.y(), m_varInsunits), 0);
+    circle->layer = layer;
+    circle->radious = FromPixel(radius, m_varInsunits);
+    return circle;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -1542,6 +2020,101 @@ auto VDxfEngine::NotchPrecedingPoint(const QVector<VLayoutPoint> &boundary, QPoi
     }
 
     return found;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VDxfEngine::AAMADrawFoldLineTwoArrows(const QVector<QVector<QPointF>> &points,
+                                           const QSharedPointer<dx_ifaceBlock> &detailBlock)
+{
+    QVector<VLayoutPoint> shape;
+    for (const auto &subShape : points)
+    {
+        for (const auto &point : subShape)
+        {
+            VLayoutPoint p(point);
+            p.SetTurnPoint(true);
+            shape.append(p);
+        }
+    }
+
+    if (DRW_Entity *e = AAMAPolygon(shape, *layer8, false))
+    {
+        detailBlock->ent.push_back(e);
+    }
+
+    ExportTurnPoints(detailBlock, shape);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VDxfEngine::AAMADrawFoldLineThreeDots(const QVector<QVector<QPointF>> &points,
+                                           const QSharedPointer<dx_ifaceBlock> &detailBlock, qreal radius)
+{
+    if (points.isEmpty() || points.constFirst().size() != 3)
+    {
+        return;
+    }
+
+    QVector<QPointF> const &shape = points.constFirst();
+    for (const auto &center : shape)
+    {
+        if (DRW_Entity *e = AAMACircle(center, *layer8, radius))
+        {
+            detailBlock->ent.push_back(e);
+        }
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VDxfEngine::AAMADrawFoldLineThreeX(const QVector<QVector<QPointF>> &points,
+                                        const QSharedPointer<dx_ifaceBlock> &detailBlock)
+{
+    if (points.isEmpty())
+    {
+        return;
+    }
+
+    QVector<QPointF> const &shape = points.constFirst();
+    for (int i = 0; i < shape.size() - 1; i += 2)
+    {
+        if (DRW_Entity *e = AAMALine(QLineF(shape.at(i), shape.at(i + 1)), *layer8))
+        {
+            detailBlock->ent.push_back(e);
+        }
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VDxfEngine::ASTMDrawFoldLineTwoArrows(const QVector<QVector<QPointF>> &points,
+                                           const QSharedPointer<dx_ifaceBlock> &detailBlock)
+{
+    QVector<VLayoutPoint> shape;
+    for (const auto &subShape : points)
+    {
+        for (const auto &point : subShape)
+        {
+            VLayoutPoint p(point);
+            p.SetTurnPoint(true);
+            shape.append(p);
+        }
+    }
+
+    if (DRW_Entity *e = AAMAPolygon(shape, *layer8, false))
+    {
+        detailBlock->ent.push_back(e);
+    }
+
+    if (!shape.isEmpty())
+    {
+        QPointF const pos(shape.constFirst().x(), shape.constFirst().y() - ToPixel(AAMATextHeight, m_varInsunits));
+        detailBlock->ent.push_back(AAMAText(pos, QStringLiteral("NM"), *layer8));
+    }
+
+    ExportTurnPoints(detailBlock, shape);
+
+    if (DRW_Entity *e = AAMAPolygon(shape, *layer85, false))
+    {
+        detailBlock->ent.push_back(e);
+    }
 }
 
 //---------------------------------------------------------------------------------------------------------------------

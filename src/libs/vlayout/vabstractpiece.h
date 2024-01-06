@@ -35,9 +35,12 @@
 #include <QPointF>
 #include <QSharedDataPointer>
 #include <QtGlobal>
+#include <algorithm>
 
+#include "../vgeometry/vgeometrydef.h"
 #include "../vgeometry/vgobject.h"
 #include "../vmisc/compatibility.h"
+#include "../vmisc/testpath.h"
 #include "vrawsapoint.h"
 #include "vsapoint.h"
 
@@ -47,6 +50,17 @@ class VGrainlineData;
 class VContainer;
 class VRawSAPoint;
 class VLayoutPlaceLabel;
+class VLayoutPoint;
+
+template <typename T> struct IsLayoutPoint
+{
+    static const bool value = false;
+};
+
+template <> struct IsLayoutPoint<VLayoutPoint>
+{
+    static const bool value = true;
+};
 
 using PlaceLabelImg = QVector<QVector<VLayoutPoint>>;
 
@@ -89,6 +103,9 @@ public:
     auto IsSewLineOnDrawing() const -> bool;
     void SetSewLineOnDrawing(bool value);
 
+    auto IsShowFullPiece() const -> bool;
+    void SetShowFullPiece(bool value);
+
     auto GetSAWidth() const -> qreal;
     void SetSAWidth(qreal value);
 
@@ -100,6 +117,24 @@ public:
 
     auto GetPriority() const -> uint;
     void SetPriority(uint value);
+
+    auto GetFoldLineType() const -> FoldLineType;
+    void SetFoldLineType(FoldLineType lineType);
+
+    auto GetFoldLineSvgFontSize() const -> unsigned int;
+    void SetFoldLineSvgFontSize(unsigned int size);
+
+    auto IsFoldLineLabelFontItalic() const -> bool;
+    void SetFoldLineLabelFontItalic(bool value);
+
+    auto IsFoldLineLabelFontBold() const -> bool;
+    void SetFoldLineLabelFontBold(bool value);
+
+    auto GetFoldLineLabel() const -> QString;
+    void SetFoldLineLabel(const QString &value);
+
+    auto GetFoldLineLabelAlignment() const -> int;
+    void SetFoldLineLabelAlignment(int alignment);
 
     auto GetUUID() const -> QUuid;
     void SetUUID(const QUuid &uuid);
@@ -142,6 +177,22 @@ public:
     template <class T>
     static auto RemoveDublicates(const QVector<T> &points, bool removeFirstAndLast = true) -> QVector<T>;
 
+    template <class T>
+    static auto SubdividePath(const QVector<T> &boundary, const QPointF &p, QVector<T> &sub1, QVector<T> &sub2) -> bool;
+
+    template <class T> static auto MirrorPath(const QVector<T> &points, const QLineF &mirrorLine) -> QVector<T>;
+
+    template <class T> static auto FullPath(const QVector<T> &points, const QLineF &mirrorLine) -> QVector<T>;
+
+    template <class T>
+    static auto MapVector(QVector<T> points, const QTransform &matrix, bool mirror = false) -> QVector<T>;
+
+    template <class T>
+    static auto MapPoint(T obj, const QTransform &matrix) -> typename std::enable_if<!IsLayoutPoint<T>::value, T>::type;
+
+    template <class T>
+    static auto MapPoint(T obj, const QTransform &matrix) -> typename std::enable_if<IsLayoutPoint<T>::value, T>::type;
+
 protected:
     static auto IsEkvPointOnLine(const QPointF &iPoint, const QPointF &prevPoint, const QPointF &nextPoint) -> bool;
     static auto IsEkvPointOnLine(const VSAPoint &iPoint, const VSAPoint &prevPoint, const VSAPoint &nextPoint) -> bool;
@@ -161,6 +212,11 @@ protected:
 
 private:
     QSharedDataPointer<VAbstractPieceData> d;
+
+    template <typename T>
+    static auto MakeTurnPoint(const QPointF &p) -> typename std::enable_if<!IsLayoutPoint<T>::value, T>::type;
+    template <typename T>
+    static auto MakeTurnPoint(const QPointF &p) -> typename std::enable_if<IsLayoutPoint<T>::value, T>::type;
 };
 
 Q_DECLARE_TYPEINFO(VAbstractPiece, Q_MOVABLE_TYPE); // NOLINT
@@ -692,6 +748,234 @@ inline auto VAbstractPiece::IntersectionPoint<QPointF>(QPointF crosPoint, const 
                                                        const QPointF & /*unused*/) -> QPointF
 {
     return crosPoint;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+template <typename T>
+inline auto VAbstractPiece::MakeTurnPoint(const QPointF &p) ->
+    typename std::enable_if<!IsLayoutPoint<T>::value, T>::type
+{
+    return p;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+template <typename T>
+inline auto VAbstractPiece::MakeTurnPoint(const QPointF &p) -> typename std::enable_if<IsLayoutPoint<T>::value, T>::type
+{
+    T breakPoint(p);
+    breakPoint.SetTurnPoint(true);
+    return breakPoint;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+template <class T>
+inline auto VAbstractPiece::SubdividePath(const QVector<T> &boundary, const QPointF &p, QVector<T> &sub1,
+                                          QVector<T> &sub2) -> bool
+{
+    if (boundary.size() < 2)
+    {
+        return false;
+    }
+
+    bool found = false;
+    sub1.clear();
+    sub2.clear();
+
+    for (qint32 i = 0; i < boundary.count() - 1; ++i)
+    {
+        if (found)
+        {
+            if (not VFuzzyComparePoints(boundary.at(i), p))
+            {
+                sub2.append(boundary.at(i));
+            }
+
+            if (i + 1 == boundary.count() - 1)
+            {
+                sub2.append(boundary.at(i + 1));
+            }
+            continue;
+        }
+
+        if (!VGObject::IsPointOnLineSegment(p, static_cast<QPointF>(boundary.at(i)),
+                                            static_cast<QPointF>(boundary.at(i + 1))))
+        {
+            sub1.append(boundary.at(i));
+            continue;
+        }
+
+        if (not VFuzzyComparePoints(boundary.at(i), p))
+        {
+            sub1.append(boundary.at(i));
+        }
+
+        sub1.append(MakeTurnPoint<T>(p));
+        sub2.append(MakeTurnPoint<T>(p));
+
+        if (i + 1 == boundary.count() - 1 && not VFuzzyComparePoints(boundary.at(i + 1), p))
+        {
+            sub2.append(boundary.at(i + 1));
+        }
+
+        found = true;
+    }
+
+    if (not found)
+    {
+        sub1.clear();
+    }
+
+    return found;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+template <class T>
+inline auto VAbstractPiece::MirrorPath(const QVector<T> &points, const QLineF &mirrorLine) -> QVector<T>
+{
+    QVector<T> flipped;
+    flipped.reserve(points.size());
+
+    const QTransform matrix = VGObject::FlippingMatrix(mirrorLine);
+
+    for (const auto &p : points)
+    {
+        flipped.append(matrix.map(p));
+    }
+
+    return flipped;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+template <>
+inline auto VAbstractPiece::MirrorPath<VLayoutPoint>(const QVector<VLayoutPoint> &points, const QLineF &mirrorLine)
+    -> QVector<VLayoutPoint>
+{
+    QVector<VLayoutPoint> flipped;
+    flipped.reserve(points.size());
+
+    const QTransform matrix = VGObject::FlippingMatrix(mirrorLine);
+
+    for (const auto &p : points)
+    {
+        VLayoutPoint tmp = p;
+        QPointF const flippedPoint = matrix.map(static_cast<QPointF>(p));
+        tmp.setX(flippedPoint.x());
+        tmp.setY(flippedPoint.y());
+        flipped.append(tmp);
+    }
+
+    return flipped;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+template <class T>
+inline auto VAbstractPiece::FullPath(const QVector<T> &points, const QLineF &mirrorLine) -> QVector<T>
+{
+    // DumpVector(points, QStringLiteral("input.json.XXXXXX")); // Uncomment for dumping test data
+
+    if (mirrorLine.isNull())
+    {
+        return points;
+    }
+
+    if (points.size() <= 3)
+    {
+        return points;
+    }
+
+    // points = CorrectFullPathInput(points, mirrorLine);
+
+    bool closedPath = (points.constFirst() == points.constLast());
+    bool pathReady = false;
+    QVector<T> base;
+
+    if (VFuzzyComparePoints(points.constFirst(), mirrorLine.p2()))
+    {
+        if (closedPath)
+        {
+            if (VFuzzyComparePoints(points.at(points.size() - 2), mirrorLine.p1()))
+            {
+                base = points;
+                base.removeLast();
+                pathReady = true;
+            }
+        }
+        else
+        {
+            if (VFuzzyComparePoints(points.constLast(), mirrorLine.p1()))
+            {
+                base = points;
+                pathReady = true;
+            }
+        }
+    }
+
+    if (!pathReady)
+    {
+        QVector<T> sub1;
+        QVector<T> sub2;
+        if (!VAbstractPiece::SubdividePath(points, mirrorLine.p1(), sub1, sub2))
+        {
+            return points;
+        }
+
+        QVector<T> reversed = points;
+        std::reverse(reversed.begin(), reversed.end());
+
+        QVector<T> sub3;
+        QVector<T> sub4;
+        if (!VAbstractPiece::SubdividePath(reversed, mirrorLine.p2(), sub3, sub4))
+        {
+            return points;
+        }
+
+        base = sub3;
+        std::reverse(base.begin(), base.end());
+        base += sub1;
+        pathReady = true;
+    }
+
+    QVector<T> fullPath = MirrorPath(base, mirrorLine);
+
+    std::reverse(fullPath.begin(), fullPath.end());
+
+    fullPath += base;
+
+    // DumpVector(fullPath, QStringLiteral("output.json.XXXXXX")); // Uncomment for dumping test data
+
+    return fullPath;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+template <class T>
+inline auto VAbstractPiece::MapVector(QVector<T> points, const QTransform &matrix, bool mirror) -> QVector<T>
+{
+    std::transform(points.begin(), points.end(), points.begin(),
+                   [matrix](const T &point) { return MapPoint(point, matrix); });
+    if (mirror)
+    {
+        std::reverse(points.begin(), points.end());
+    }
+    return points;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+template <typename T>
+auto VAbstractPiece::MapPoint(T obj, const QTransform &matrix) ->
+    typename std::enable_if<!IsLayoutPoint<T>::value, T>::type
+{
+    return matrix.map(obj);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+template <typename T>
+auto VAbstractPiece::MapPoint(T obj, const QTransform &matrix) ->
+    typename std::enable_if<IsLayoutPoint<T>::value, T>::type
+{
+    auto p = matrix.map(obj);
+    obj.setX(p.x());
+    obj.setY(p.y());
+    return obj;
 }
 
 #endif // VABSTRACTPIECE_H

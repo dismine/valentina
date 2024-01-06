@@ -193,7 +193,7 @@ protected:
     void setCurrentSplinePathId(QComboBox *box, const quint32 &value) const;
     void setCurrentCurveId(QComboBox *box, const quint32 &value) const;
 
-    auto getCurrentObjectId(QComboBox *box) const -> quint32;
+    static auto getCurrentObjectId(QComboBox *box) -> quint32;
 
     template <typename T> auto getCurrentCrossPoint(QComboBox *box) const -> T;
 

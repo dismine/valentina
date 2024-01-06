@@ -777,12 +777,6 @@ void VTextGraphicsItem::PaintLabelOutlineFont(QPainter *painter)
         fnt.setBold(tl.m_bold);
         fnt.setItalic(tl.m_italic);
 
-        VSingleLineOutlineChar corrector(fnt);
-        if (!corrector.IsPopulated())
-        {
-            corrector.LoadCorrections(settings->GetPathFontCorrections());
-        }
-
         QString qsText = tl.m_qsText;
         QFontMetrics fm(fnt);
         qreal lineHeight = fm.height();
@@ -807,6 +801,12 @@ void VTextGraphicsItem::PaintLabelOutlineFont(QPainter *painter)
             else if ((tl.m_eAlign & Qt::AlignRight) > 0)
             {
                 dX = boundingRect.width() - TextWidth(fm, qsText);
+            }
+
+            VSingleLineOutlineChar const corrector(fnt);
+            if (!corrector.IsPopulated())
+            {
+                corrector.LoadCorrections(settings->GetPathFontCorrections());
             }
 
             QPainterPath path;
@@ -835,7 +835,8 @@ void VTextGraphicsItem::PaintLabelOutlineFont(QPainter *painter)
         }
 
         // check if the next line will go out of bounds
-        qreal nextStep = textAsPaths ? iY + fm.height() + penWidth * 2 : iY + fm.height();
+        qreal const nextStep =
+            textAsPaths ? iY + fm.height() + penWidth * 2 + MmToPixel(1.5) : iY + fm.height() + MmToPixel(1.5);
         if (nextStep > boundingRect.height())
         {
             NotEnoughSpace();
@@ -887,17 +888,16 @@ void VTextGraphicsItem::PaintLabelSVGFont(QPainter *painter)
 
         engine = db->FontEngine(lineFont);
 
-        QString qsText = tl.m_qsText;
         qreal lineHeight = engine.FontHeight() + painter->pen().widthF() * 2;
         if (iY + lineHeight > boundingRect.height())
         {
             lineHeight = boundingRect.height() - iY;
         }
 
-        engine.Draw(painter, QRectF(0, iY, iW, lineHeight), qsText, tl.m_eAlign);
+        engine.Draw(painter, QRectF(0, iY, iW, lineHeight), tl.m_qsText, tl.m_eAlign);
 
         // check if the next line will go out of bounds
-        qreal nextStep = iY + engine.FontHeight() + painter->pen().widthF() * 2;
+        qreal const nextStep = iY + engine.FontHeight() - painter->pen().widthF() * 2;
         if (nextStep > boundingRect.height())
         {
             NotEnoughSpace();

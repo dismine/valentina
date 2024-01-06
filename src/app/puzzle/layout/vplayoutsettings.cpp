@@ -404,3 +404,15 @@ auto VPLayoutSettings::IsBoundaryTogetherWithNotches() const -> bool
 {
     return m_togetherWithNotches;
 }
+
+//---------------------------------------------------------------------------------------------------------------------
+void VPLayoutSettings::SetCutOnFold(bool value)
+{
+    m_cutOnFold = value;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+auto VPLayoutSettings::IsCutOnFold() const -> bool
+{
+    return m_cutOnFold;
+}

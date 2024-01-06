@@ -68,6 +68,9 @@ public:
     auto GetFormulaVisible() const -> QString;
     void SetFormulaVisible(const QString &formula);
 
+    auto IsNotMirrored() const -> bool;
+    void SetNotMirrored(bool value);
+
     void SetPiecesList(const QVector<quint32> &list) override;
 
 public slots:

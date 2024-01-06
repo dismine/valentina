@@ -596,7 +596,7 @@ auto VAbstractCurve::DirectionArrows() const -> QVector<DirectionArrow>
         }
 
         // Reverse line because we want start arrow from this point
-        arrow = QLineF(arrow.p2(), arrow.p1());
+        Swap(arrow);
         const qreal angle = arrow.angle(); // we each time change line angle, better save original angle value
         arrow.setLength(VAbstractCurve::LengthCurveDirectionArrow());
 

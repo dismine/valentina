@@ -63,16 +63,7 @@ class VPieceLabelData;
 class VAbstractPattern;
 class VPatternLabelData;
 class VLayoutPoint;
-
-template <typename T> struct IsLayoutPoint
-{
-    static const bool value = false;
-};
-
-template <> struct IsLayoutPoint<VLayoutPoint>
-{
-    static const bool value = true;
-};
+class VFoldLine;
 
 QT_WARNING_PUSH
 QT_WARNING_DISABLE_GCC("-Wsuggest-final-types")
@@ -100,10 +91,14 @@ public:
     auto GetUniqueID() const -> QString override;
 
     auto GetMappedContourPoints() const -> QVector<VLayoutPoint>;
+    auto GetMappedFullContourPoints() const -> QVector<VLayoutPoint>;
+    auto GetFullContourPoints() const -> QVector<VLayoutPoint>;
     auto GetContourPoints() const -> QVector<VLayoutPoint>;
     void SetContourPoints(const QVector<VLayoutPoint> &points, bool hideMainPath = false);
 
     auto GetMappedSeamAllowancePoints() const -> QVector<VLayoutPoint>;
+    auto GetMappedFullSeamAllowancePoints() const -> QVector<VLayoutPoint>;
+    auto GetFullSeamAllowancePoints() const -> QVector<VLayoutPoint>;
     auto GetSeamAllowancePoints() const -> QVector<VLayoutPoint>;
     void SetSeamAllowancePoints(const QVector<VLayoutPoint> &points, bool seamAllowance = true,
                                 bool seamAllowanceBuiltIn = false);
@@ -122,16 +117,14 @@ public:
     auto GetPlaceLabels() const -> QVector<VLayoutPlaceLabel>;
     void SetPlaceLabels(const QVector<VLayoutPlaceLabel> &labels);
 
-    auto MappedInternalPathsForCut(bool cut) const -> QVector<QVector<VLayoutPoint>>;
+    auto MappedInternalPathsForCut(bool cut) const -> QVector<VLayoutPiecePath>;
     auto GetInternalPaths() const -> QVector<VLayoutPiecePath>;
     void SetInternalPaths(const QVector<VLayoutPiecePath> &internalPaths);
 
-    auto GetPieceTextPosition() const -> QPointF;
     auto GetPieceText() const -> QStringList;
     void SetPieceText(const QString &qsName, const VPieceLabelData &data, const QFont &font,
                       const QString &SVGFontFamily, const VContainer *pattern);
 
-    auto GetPatternTextPosition() const -> QPointF;
     auto GetPatternText() const -> QStringList;
     void SetPatternInfo(VAbstractPattern *pDoc, const VPatternLabelData &geom, const QFont &font,
                         const QString &SVGFontFamily, const VContainer *pattern);
@@ -183,6 +176,29 @@ public:
     auto GetPatternLabelData() const -> VTextManager;
     void SetPatternLabelData(const VTextManager &data);
 
+    auto GetMappedSeamMirrorLine() const -> QLineF;
+    auto GetSeamMirrorLine() const -> QLineF;
+    void SetSeamMirrorLine(const QLineF &line);
+
+    auto GetMappedSeamAllowanceMirrorLine() const -> QLineF;
+    auto GetSeamAllowanceMirrorLine() const -> QLineF;
+    void SetSeamAllowanceMirrorLine(const QLineF &line);
+
+    auto GetFoldLineHeight() const -> qreal;
+    void SetFoldLineHeight(qreal height);
+
+    auto GetFoldLineWidth() const -> qreal;
+    void SetFoldLineWidth(qreal width);
+
+    auto GetFoldLineCenterPosition() const -> qreal;
+    void SetFoldLineCenterPosition(qreal center);
+
+    auto GetFoldLineOutlineFont() const -> QFont;
+    void SetFoldLineOutlineFont(const QFont &font);
+
+    auto GetFoldLineSVGFontFamily() const -> QString;
+    void SetFoldLineSVGFontFamily(const QString &font);
+
     void Translate(const QPointF &p);
     void Translate(qreal dx, qreal dy);
     void Scale(qreal sx, qreal sy);
@@ -200,6 +216,8 @@ public:
     auto DetailBoundingRect() const -> QRectF;
     auto MappedLayoutBoundingRect() const -> QRectF;
     auto Diagonal() const -> qreal;
+
+    auto FoldLine() const -> VFoldLine;
 
     static auto BoundingRect(QVector<QPointF> points) -> QRectF;
 
@@ -226,14 +244,7 @@ public:
 
     auto MapPlaceLabelShape(PlaceLabelImg shape) const -> PlaceLabelImg;
 
-    template <class T>
-    static auto MapVector(QVector<T> points, const QTransform &matrix, bool mirror = false) -> QVector<T>;
-
-    template <class T>
-    static auto MapPoint(T obj, const QTransform &matrix) -> typename std::enable_if<!IsLayoutPoint<T>::value, T>::type;
-
-    template <class T>
-    static auto MapPoint(T obj, const QTransform &matrix) -> typename std::enable_if<IsLayoutPoint<T>::value, T>::type;
+    static auto MapPassmark(VLayoutPassmark passmark, const QTransform &matrix, bool mirror) -> VLayoutPassmark;
 
 protected:
     void SetGrainline(const VPieceGrainline &grainline);
@@ -254,6 +265,7 @@ private:
     void CreateLabelStrings(QGraphicsItem *parent, const QVector<QPointF> &labelShape, const VTextManager &tm,
                             bool textAsPaths) const;
     void CreateGrainlineItem(QGraphicsItem *parent) const;
+    void CreateFoldLineItem(QGraphicsItem *parent, bool textAsPaths) const;
 
     template <class T> auto Map(QVector<T> points) const -> QVector<T>;
     auto Map(const GrainlineShape &shape) const -> GrainlineShape;
@@ -265,37 +277,5 @@ private:
 QT_WARNING_POP
 
 Q_DECLARE_TYPEINFO(VLayoutPiece, Q_MOVABLE_TYPE); // NOLINT
-
-//---------------------------------------------------------------------------------------------------------------------
-template <class T>
-inline auto VLayoutPiece::MapVector(QVector<T> points, const QTransform &matrix, bool mirror) -> QVector<T>
-{
-    std::transform(points.begin(), points.end(), points.begin(),
-                   [matrix](const T &point) { return MapPoint(point, matrix); });
-    if (mirror)
-    {
-        std::reverse(points.begin(), points.end());
-    }
-    return points;
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-template <typename T>
-auto VLayoutPiece::MapPoint(T obj, const QTransform &matrix) ->
-    typename std::enable_if<!IsLayoutPoint<T>::value, T>::type
-{
-    return matrix.map(obj);
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-template <typename T>
-auto VLayoutPiece::MapPoint(T obj, const QTransform &matrix) ->
-    typename std::enable_if<IsLayoutPoint<T>::value, T>::type
-{
-    auto p = matrix.map(obj);
-    obj.setX(p.x());
-    obj.setY(p.y());
-    return obj;
-}
 
 #endif // VLAYOUTDETAIL_H

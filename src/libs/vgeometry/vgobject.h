@@ -36,8 +36,8 @@
 #include <QVector>
 #include <QtGlobal>
 
-#include "vgeometrydef.h"
 #include "../vmisc/def.h"
+#include "vgeometrydef.h"
 
 class QLineF;
 class QPoint;
@@ -62,7 +62,7 @@ public:
 
     virtual ~VGObject();
 
-    auto operator= (const VGObject &obj) -> VGObject&;
+    auto operator=(const VGObject &obj) -> VGObject &;
 #ifdef Q_COMPILER_RVALUE_REFS
     VGObject(VGObject &&obj) noexcept;
     auto operator=(VGObject &&obj) noexcept -> VGObject &;
@@ -95,38 +95,37 @@ public:
 
     virtual auto ToJson() const -> QJsonObject;
 
-    static auto BuildLine(const QPointF &p1, const qreal& length, const qreal &angle) -> QLineF;
+    static auto BuildLine(const QPointF &p1, const qreal &length, const qreal &angle) -> QLineF;
     static auto BuildRay(const QPointF &firstPoint, const qreal &angle, const QRectF &scRect) -> QPointF;
     static auto BuildAxis(const QPointF &p, const qreal &angle, const QRectF &scRect) -> QLineF;
     static auto BuildAxis(const QPointF &p1, const QPointF &p2, const QRectF &scRect) -> QLineF;
 
-    static auto ContactPoints (const QPointF &p, const QPointF &center, qreal radius, QPointF &p1, QPointF &p2) -> int;
+    static auto ContactPoints(const QPointF &p, const QPointF &center, qreal radius, QPointF &p1, QPointF &p2) -> int;
     static auto LineIntersectRect(const QRectF &rec, const QLineF &line) -> QPointF;
     static auto IntersectionCircles(const QPointF &c1, double r1, const QPointF &c2, double r2, QPointF &p1,
                                     QPointF &p2) -> int;
-    static auto LineIntersectCircle(const QPointF &center, qreal radius, const QLineF &line, QPointF &p1,
-                                    QPointF &p2) -> qint32;
+    static auto LineIntersectCircle(const QPointF &center, qreal radius, const QLineF &line, QPointF &p1, QPointF &p2)
+        -> qint32;
     static auto ClosestPoint(const QLineF &line, const QPointF &point) -> QPointF;
-    static auto addVector (const QPointF &p, const QPointF &p1, const QPointF &p2, qreal k) -> QPointF;
+    static auto addVector(const QPointF &p, const QPointF &p1, const QPointF &p2, qreal k) -> QPointF;
     static void LineCoefficients(const QLineF &line, qreal *a, qreal *b, qreal *c);
-    static auto IsPointOnLineSegment (const QPointF &t, const QPointF &p1, const QPointF &p2,
-                                      qreal accuracy = accuracyPointOnLine) -> bool;
-    static auto IsLineSegmentOnLineSegment (const QLineF &seg1, const QLineF &seg2,
-                                            qreal accuracy = accuracyPointOnLine) -> bool;
+    static auto IsPointOnLineSegment(const QPointF &t, const QPointF &p1, const QPointF &p2,
+                                     qreal accuracy = accuracyPointOnLine) -> bool;
+    static auto IsLineSegmentOnLineSegment(const QLineF &seg1, const QLineF &seg2, qreal accuracy = accuracyPointOnLine)
+        -> bool;
     static auto CorrectDistortion(const QPointF &t, const QPointF &p1, const QPointF &p2) -> QPointF;
     static auto IsPointOnLineviaPDP(const QPointF &t, const QPointF &p1, const QPointF &p2,
                                     qreal accuracy = accuracyPointOnLine) -> bool;
     static auto GetLengthContour(const QVector<QPointF> &contour, const QVector<QPointF> &newPoints) -> int;
 
-    template <class T>
-    static auto PainterPath(const QVector<T> &points) -> QPainterPath;
+    template <class T> static auto PainterPath(const QVector<T> &points) -> QPainterPath;
 
-protected:
     static auto FlippingMatrix(const QLineF &axis) -> QTransform;
+
 private:
     QSharedDataPointer<VGObjectData> d;
 
-    static auto PointInCircle (const QPointF &p, const QPointF &center, qreal radius) -> int;
+    static auto PointInCircle(const QPointF &p, const QPointF &center, qreal radius) -> int;
 };
 
 QT_WARNING_POP
@@ -134,8 +133,7 @@ QT_WARNING_POP
 Q_DECLARE_TYPEINFO(VGObject, Q_MOVABLE_TYPE); // NOLINT
 
 //---------------------------------------------------------------------------------------------------------------------
-template <class T>
-inline auto VGObject::PainterPath(const QVector<T> &points) -> QPainterPath
+template <class T> inline auto VGObject::PainterPath(const QVector<T> &points) -> QPainterPath
 {
     QPainterPath path;
     path.setFillRule(Qt::WindingFill);

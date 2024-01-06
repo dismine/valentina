@@ -397,7 +397,7 @@ auto VPieceGrainline::IsContained(const QRectF &boundingRect, qreal &dX, qreal &
 auto VPieceGrainline::IsPositionValid(const QVector<QPointF> &contourPoints) const -> bool
 {
     QVector<QLineF> grainLine;
-    QLineF mainLine = GetMainLine();
+    QLineF const mainLine = GetMainLine();
     if (IsFourWays())
     {
         grainLine = {mainLine, SecondaryLine()};
@@ -407,8 +407,8 @@ auto VPieceGrainline::IsPositionValid(const QVector<QPointF> &contourPoints) con
 
     for (auto line : qAsConst(grainLine))
     {
-        QVector<QPointF> points = VAbstractCurve::CurveIntersectLine(contourPoints, line);
-        for (auto &point : points)
+        QVector<QPointF> const points = VAbstractCurve::CurveIntersectLine(contourPoints, line);
+        for (const auto &point : points)
         {
             if (not VFuzzyComparePoints(line.p1(), point) && not VFuzzyComparePoints(line.p2(), point))
             {

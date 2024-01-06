@@ -50,6 +50,7 @@ struct VBoundarySequenceItemData
     int number{0};
     VBoundarySequenceItem type{VBoundarySequenceItem::Unknown};
     QVariant item{};
+    bool mirror{false};
 };
 
 class VBoundary
@@ -63,23 +64,47 @@ public:
         -> QList<VBoundarySequenceItemData>;
 
     void SetPieceName(const QString &newPieceName);
+    void SetMirrorLine(const QLineF &newMirrorLine);
 
 private:
     QVector<VLayoutPoint> m_boundary;
     bool m_seamAllowance;
     bool m_builtInSeamAllowance;
     QString m_pieceName{};
+    QLineF m_mirrorLine{};
 
     auto SkipPassmark(const VLayoutPassmark &passmark, bool layoutAllowance) const -> bool;
 
     void InsertPassmark(const VBoundarySequenceItemData &item, QList<VBoundarySequenceItemData> &sequence,
                         bool drawMode) const;
+
+    auto InsertDisconnect(QList<VBoundarySequenceItemData> &sequence, int i, const VBoundarySequenceItemData &item,
+                          bool drawMode) const -> bool;
+    auto InsertCutOut(QList<VBoundarySequenceItemData> &sequence, int i, const VBoundarySequenceItemData &item,
+                      bool drawMode) const -> bool;
+
+    auto PreparePassmarkShape(const VLayoutPassmark &passmark, bool drawMode, bool mirrorNotch) const
+        -> QVector<QVector<VLayoutPoint>>;
+    auto PrepareNoneBreakingPassmarkShape(const VLayoutPassmark &passmark, bool mirrorNotch) const
+        -> QVector<QVector<VLayoutPoint>>;
+    auto PrepareExternalVPassmarkShape(const VLayoutPassmark &passmark, bool drawMode, bool mirrorNotch) const
+        -> QVector<QVector<VLayoutPoint>>;
+    auto PrepareTPassmarkShape(const VLayoutPassmark &passmark, bool drawMode, bool mirrorNotch) const
+        -> QVector<QVector<VLayoutPoint>>;
+    auto PrepareUPassmarkShape(const VLayoutPassmark &passmark, bool mirrorNotch) const
+        -> QVector<QVector<VLayoutPoint>>;
 };
 
 //---------------------------------------------------------------------------------------------------------------------
 inline void VBoundary::SetPieceName(const QString &newPieceName)
 {
     m_pieceName = newPieceName;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+inline void VBoundary::SetMirrorLine(const QLineF &newMirrorLine)
+{
+    m_mirrorLine = newMirrorLine;
 }
 
 #endif // VBOUNDARY_H

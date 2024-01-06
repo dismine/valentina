@@ -31,6 +31,7 @@
 #include "QtConcurrent/qtconcurrentrun.h"
 #include "compatibility.h"
 #include "svgfont/vsvgfontdatabase.h"
+#include "vtranslator.h"
 #include <QDir>
 #include <QFileSystemWatcher>
 #include <QFuture>
@@ -426,7 +427,14 @@ void VAbstractApplication::RestartSVGFontDatabaseWatcher()
     {
         delete m_svgFontDatabaseWatcher;
         m_svgFontDatabaseWatcher =
-            new QFileSystemWatcher({settings->GetPathSVGFonts(), VSvgFontDatabase::SystemSVGFontPath()}, this);
+            new QFileSystemWatcher({settings->GetPathSVGFonts(), VSvgFontDatabase::SystemSVGFontPath()});
+
+        if (m_svgFontDatabaseWatcher->thread() != this->thread())
+        {
+            m_svgFontDatabaseWatcher->moveToThread(this->thread());
+        }
+
+        m_svgFontDatabaseWatcher->setParent(this);
         connect(m_svgFontDatabaseWatcher, &QFileSystemWatcher::directoryChanged, this,
                 &VAbstractApplication::RepopulateFontDatabase);
     }
@@ -442,6 +450,32 @@ auto VAbstractApplication::AppUptime() const -> qint64
 auto VAbstractApplication::GetShortcutManager() const -> VAbstractShortcutManager *
 {
     return m_shortcutManager;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+auto VAbstractApplication::GetPlaceholderTranslator() -> QSharedPointer<VTranslator>
+{
+    VCommonSettings *settings = Settings();
+
+    QString pieceLabelLocale = settings->GetPieceLabelLocale();
+    if (pieceLabelLocale == VCommonSettings::defaultPieceLabelLocale)
+    {
+        pieceLabelLocale = settings->GetLocale();
+    }
+
+    if (pieceLabelLocale.startsWith("ru"_L1))
+    {
+        return QSharedPointer<VTranslator>(new VTranslator);
+    }
+
+    QSharedPointer<VTranslator> translator = QSharedPointer<VTranslator>(new VTranslator);
+    const QString appQmDir = VAbstractApplication::translationsPath(settings->GetLocale());
+    if (translator->load(QStringLiteral("valentina_") + pieceLabelLocale, appQmDir))
+    {
+        return translator;
+    }
+
+    return QSharedPointer<VTranslator>(new VTranslator);
 }
 
 #if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)

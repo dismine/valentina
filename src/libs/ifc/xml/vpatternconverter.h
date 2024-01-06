@@ -54,7 +54,7 @@ public:
     static const QString PatternMaxVerStr;
     static const QString CurrentSchema;
     static Q_DECL_CONSTEXPR const unsigned PatternMinVer = FormatVersion(0, 1, 4);
-    static Q_DECL_CONSTEXPR const unsigned PatternMaxVer = FormatVersion(0, 9, 3);
+    static Q_DECL_CONSTEXPR const unsigned PatternMaxVer = FormatVersion(0, 9, 4);
 
     static auto XSDSchemas() -> QHash<unsigned, QString>;
 
@@ -91,7 +91,7 @@ private:
     void ToV0_9_0();
     void ToV0_9_1();
     void ToV0_9_2();
-    void ToV0_9_3();
+    void ToV0_9_4();
 
     void TagUnitToV0_2_0();
     void TagIncrementToV0_2_0();

@@ -43,6 +43,7 @@ class TabGrainline;
 class TabPins;
 class TabPassmarks;
 class TabPlaceLabels;
+class TabFoldLine;
 } // namespace Ui
 
 class VisPieceSpecialPoints;
@@ -95,6 +96,8 @@ private slots:
     void PassmarkChanged(int index);
     void CSAStartPointChanged(int index);
     void CSAEndPointChanged(int index);
+    void MirrorLineStartPointChanged(int index);
+    void MirrorLineEndPointChanged(int index);
     void CSAIncludeTypeChanged(int index);
     void NodeAngleChanged(int index);
     void ReturnDefBefore();
@@ -137,6 +140,9 @@ private slots:
     void EnabledManualPassmarkLength();
     void EnabledManualPassmarkWidth();
     void EnabledManualPassmarkAngle();
+    void EnabledManualFoldHeight();
+    void EnabledManualFoldWidth();
+    void EnabledManualFoldCenter();
 
     void EvalWidth();
     void EvalWidthBefore();
@@ -144,6 +150,9 @@ private slots:
     void EvalPassmarkLength();
     void EvalPassmarkWidth();
     void EvalPassmarkAngle();
+    void EvalFoldHeight();
+    void EvalFoldWidth();
+    void EvalFoldCenter();
 
     void FXWidth();
     void FXWidthBefore();
@@ -151,6 +160,9 @@ private slots:
     void FXPassmarkLength();
     void FXPassmarkWidth();
     void FXPassmarkAngle();
+    void FXFoldHeight();
+    void FXFoldWidth();
+    void FXFoldCenter();
 
     void DeployWidthFormulaTextEdit();
     void DeployWidthBeforeFormulaTextEdit();
@@ -158,6 +170,9 @@ private slots:
     void DeployPassmarkLength();
     void DeployPassmarkWidth();
     void DeployPassmarkAngle();
+    void DeployFoldHeight();
+    void DeployFoldWidth();
+    void DeployFoldCenter();
 
     void GrainlinePinPointChanged();
     void DetailPinPointChanged();
@@ -182,6 +197,7 @@ private:
     Ui::TabPins *uiTabPins;
     Ui::TabPassmarks *uiTabPassmarks;
     Ui::TabPlaceLabels *uiTabPlaceLabels;
+    Ui::TabFoldLine *uiTabFoldLine;
 
     QWidget *m_tabPaths{nullptr};
     QWidget *m_tabLabels{nullptr};
@@ -189,6 +205,7 @@ private:
     QWidget *m_tabPins{nullptr};
     QWidget *m_tabPassmarks{nullptr};
     QWidget *m_tabPlaceLabels{nullptr};
+    QWidget *m_tabFoldLine{nullptr};
 
     FancyTabBar *m_ftb{nullptr};
 
@@ -206,6 +223,9 @@ private:
     bool flagFormulaPassmarkLength{true};
     bool flagFormulaPassmarkWidth{true};
     bool flagFormulaPassmarkAngle{true};
+    bool flagFormulaFoldHeight{true};
+    bool flagFormulaFoldWidth{true};
+    bool flagFormulaFoldCenter{true};
     bool flagMainPathIsValid{true};
     bool flagName{true}; // We have default name of piece.
     bool flagUUID{true};
@@ -215,6 +235,7 @@ private:
     bool m_askSavePatternLabelData{false};
     bool m_patternTemplateDataChanged{false};
     bool m_patternMaterialsChanged{false};
+    bool flagMirrorLineIsValid{true};
 
     QPointer<DialogTool> m_dialog{};
     QPointer<VisPieceSpecialPoints> m_visSpecialPoints{};
@@ -237,6 +258,9 @@ private:
     int m_formulaBasePassmarkLength{0};
     int m_formulaBasePassmarkWidth{0};
     int m_formulaBasePassmarkAngle{0};
+    int m_formulaBaseFoldHeight{0};
+    int m_formulaBaseFoldWidth{0};
+    int m_formulaBaseFoldCenter{0};
 
     QTimer *m_timerWidth{nullptr};
     QTimer *m_timerWidthBefore{nullptr};
@@ -244,6 +268,9 @@ private:
     QTimer *m_timerPassmarkLength{nullptr};
     QTimer *m_timerPassmarkWidth{nullptr};
     QTimer *m_timerPassmarkAngle{nullptr};
+    QTimer *m_timerFoldHeight{nullptr};
+    QTimer *m_timerFoldWidth{nullptr};
+    QTimer *m_timerFoldCenter{nullptr};
     qreal m_saWidth{0};
 
     QVector<VLabelTemplateLine> m_templateLines{};
@@ -263,6 +290,7 @@ private:
     void NewMainPathItem(const VPieceNode &node);
     auto GetPathName(quint32 path, bool reverse = false) const -> QString;
     auto MainPathIsValid() const -> bool;
+    auto MirrorLineIsValid() const -> bool;
     void ValidObjects(bool value);
     auto MainPathIsClockwise() const -> bool;
     void UpdateCurrentCustomSARecord();
@@ -290,6 +318,8 @@ private:
     void InitPassmarksList();
     void InitCSAPoint(QComboBox *box);
     void InitPinPoint(QComboBox *box);
+    void InitMirrorLine();
+    void InitMirrorLinePoint(QComboBox *box);
     void InitSAIncludeType();
     void InitInternalPathsTab();
     void InitPatternPieceDataTab();
@@ -298,13 +328,19 @@ private:
     void InitPinsTab();
     void InitPassmarksTab();
     void InitPlaceLabelsTab();
+    void InitFoldLineTab();
     void InitAllPinComboboxes();
-    void InitLabelFontSize(QComboBox *box);
+    void InitFoldLineType();
+    void InitFoldLabelFontSizes();
+    static void InitLabelFontSize(QComboBox *box);
 
     void SetFormulaSAWidth(const QString &formula);
     void SetFormulaPassmarkLength(const QString &formula);
     void SetFormulaPassmarkWidth(const QString &formula);
     void SetFormulaPassmarkAngle(const QString &formula);
+    void SetFormulaFoldHeight(const QString &formula);
+    void SetFormulaFoldWidth(const QString &formula);
+    void SetFormulaFoldCenter(const QString &formula);
 
     void SetGrainlineAngle(QString angleFormula);
     void SetGrainlineLength(QString lengthFormula);
@@ -345,6 +381,18 @@ private:
     void InitIcons();
 
     auto InitMainPathContextMenu(QMenu *menu, const VPieceNode &rowNode) const -> QHash<int, QAction *>;
+
+    void CheckTabPathsState();
+    void CheckTabPassmarksState();
+    void CheckTabFoldLineState();
+
+    auto GetMirrorLineStartPoint() const -> quint32;
+    auto GetMirrorLineEndPoint() const -> quint32;
+
+    void InitFold(const VPiece &piece);
+    void InitFoldHeightFormula(const VPiece &piece);
+    void InitFoldWidthFormula(const VPiece &piece);
+    void InitFoldCenterFormula(const VPiece &piece);
 };
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -352,7 +400,9 @@ inline auto DialogSeamAllowance::IsValid() const -> bool
 {
     return flagName && flagUUID && flagMainPathIsValid && flagFormula && flagFormulaBefore && flagFormulaAfter &&
            (flagGFormulas || flagGPin) && flagDLAngle && (flagDLFormulas || flagDPin) && flagPLAngle &&
-           (flagPLFormulas || flagPPin) && flagFormulaPassmarkLength;
+           (flagPLFormulas || flagPPin) && flagFormulaPassmarkLength && flagFormulaPassmarkWidth &&
+           flagFormulaPassmarkAngle && flagMirrorLineIsValid && flagFormulaFoldHeight && flagFormulaFoldWidth &&
+           flagFormulaFoldCenter;
 }
 
 #endif // DIALOGSEAMALLOWANCE_H

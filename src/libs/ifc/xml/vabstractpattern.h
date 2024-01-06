@@ -382,6 +382,17 @@ public:
     static const QString AttrDimensionA;
     static const QString AttrDimensionB;
     static const QString AttrDimensionC;
+    static const QString AttrMirrorLineP1;
+    static const QString AttrMirrorLineP2;
+    static const QString AttrFoldLineHeightFormula;
+    static const QString AttrFoldLineWidthFormula;
+    static const QString AttrFoldLineCenterFormula;
+    static const QString AttrFoldLineManualHeight;
+    static const QString AttrFoldLineManualWidth;
+    static const QString AttrFoldLineManualCenter;
+    static const QString AttrFoldLineType;
+    static const QString AttrFoldLineFontSize;
+    static const QString AttrFoldLineLabel;
 
     static const QString AttrContentType;
 

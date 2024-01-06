@@ -60,6 +60,8 @@
 - Optimize U-notch shape.
 - New feature. Boundary together with notches.
 - Puzzle app. Horizontal piece flipping.
+- Mirror line.
+- Fold line.
 
 # Valentina 0.7.52 September 12, 2022
 - Fix crash when default locale is ru.

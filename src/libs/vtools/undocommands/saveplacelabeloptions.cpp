@@ -33,11 +33,11 @@
 SavePlaceLabelOptions::SavePlaceLabelOptions(quint32 pieceId, const VPlaceLabelItem &oldLabel,
                                              const VPlaceLabelItem &newLabel, VAbstractPattern *doc, VContainer *data,
                                              quint32 id, QUndoCommand *parent)
-    : VUndoCommand(QDomElement(), doc, parent),
-      m_oldLabel(oldLabel),
-      m_newLabel(newLabel),
-      m_data(data),
-      m_pieceId(pieceId)
+  : VUndoCommand(QDomElement(), doc, parent),
+    m_oldLabel(oldLabel),
+    m_newLabel(newLabel),
+    m_data(data),
+    m_pieceId(pieceId)
 {
     setText(tr("save place label options"));
     nodeId = id;
@@ -64,7 +64,7 @@ void SavePlaceLabelOptions::undo()
 
         if (m_pieceId != NULL_ID)
         {
-            if (VToolSeamAllowance *tool = qobject_cast<VToolSeamAllowance *>(VAbstractPattern::getTool(m_pieceId)))
+            if (auto *tool = qobject_cast<VToolSeamAllowance *>(VAbstractPattern::getTool(m_pieceId)))
             {
                 tool->RefreshGeometry();
             }
@@ -97,7 +97,7 @@ void SavePlaceLabelOptions::redo()
 
         if (m_pieceId != NULL_ID)
         {
-            if (VToolSeamAllowance *tool = qobject_cast<VToolSeamAllowance *>(VAbstractPattern::getTool(m_pieceId)))
+            if (auto *tool = qobject_cast<VToolSeamAllowance *>(VAbstractPattern::getTool(m_pieceId)))
             {
                 tool->RefreshGeometry();
             }
@@ -112,7 +112,7 @@ void SavePlaceLabelOptions::redo()
 //---------------------------------------------------------------------------------------------------------------------
 auto SavePlaceLabelOptions::mergeWith(const QUndoCommand *command) -> bool
 {
-    const SavePlaceLabelOptions *saveCommand = static_cast<const SavePlaceLabelOptions *>(command);
+    const auto *saveCommand = static_cast<const SavePlaceLabelOptions *>(command);
     SCASSERT(saveCommand != nullptr);
 
     if (saveCommand->LabelId() != nodeId || m_newLabel.GetCenterPoint() != saveCommand->NewLabel().GetCenterPoint())

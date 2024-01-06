@@ -97,4 +97,22 @@ inline void VGraphicsFillItem::SetCustomPen(bool newCustomPen)
 {
     m_customPen = newCustomPen;
 }
+
+class VGraphicsFoldLineItem : public VGraphicsFillItem
+{
+public:
+    explicit VGraphicsFoldLineItem(QGraphicsItem *parent = nullptr);
+    explicit VGraphicsFoldLineItem(const QPainterPath &path, QGraphicsItem *parent = nullptr);
+    ~VGraphicsFoldLineItem() override = default;
+
+    auto type() const -> int override { return Type; }
+    enum
+    {
+        Type = UserType + static_cast<int>(Layout::FoldLineItem)
+    };
+
+private:
+    Q_DISABLE_COPY_MOVE(VGraphicsFoldLineItem) // NOLINT
+};
+
 #endif // VGRAPHICSFILLITEM_H

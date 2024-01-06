@@ -52,11 +52,12 @@
 #include "../vgeometry/vlayoutplacelabel.h"
 #include "../vgeometry/vplacelabelitem.h"
 #include "../vgeometry/vpointf.h"
-#include "../vlayout/vabstractpiece.h"
 #include "../vmisc/compatibility.h"
+#include "../vmisc/def.h"
 #include "../vmisc/literals.h"
 #include "../vmisc/svgfont/vsvgfontdatabase.h"
 #include "../vmisc/svgfont/vsvgfontengine.h"
+#include "../vmisc/testpath.h"
 #include "../vmisc/vabstractvalapplication.h"
 #include "../vpatterndb/calculator.h"
 #include "../vpatterndb/floatItemData/vgrainlinedata.h"
@@ -64,10 +65,14 @@
 #include "../vpatterndb/floatItemData/vpiecelabeldata.h"
 #include "../vpatterndb/variables/vmeasurement.h"
 #include "../vpatterndb/vcontainer.h"
+#include "../vpatterndb/vformula.h"
 #include "../vpatterndb/vpassmark.h"
 #include "../vpatterndb/vpiecenode.h"
 #include "../vwidgets/vpiecegrainline.h"
+#include "vabstractpiece.h"
 #include "vboundary.h"
+#include "vcommonsettings.h"
+#include "vfoldline.h"
 #include "vgraphicsfillitem.h"
 #include "vlayoutpiece_p.h"
 #include "vtextmanager.h"
@@ -95,6 +100,7 @@ auto ConvertInternalPaths(const VPiece &piece, const VContainer *pattern) -> QVe
             VLayoutPiecePath convertedPath(path.PathPoints(pattern, cuttingPath));
             convertedPath.SetCutPath(path.IsCutPath());
             convertedPath.SetPenStyle(path.GetPenType());
+            convertedPath.SetNotMirrored(path.IsNotMirrored());
             paths.append(convertedPath);
         }
     }
@@ -468,6 +474,70 @@ auto PrepareGradationId(const QString &label, const VContainer *pattern) -> QStr
     const QMap<QString, QString> placeholders = PrepareGradationPlaceholders(pattern);
     return ReplacePlaceholders(placeholders, label);
 }
+
+//---------------------------------------------------------------------------------------------------------------------
+void InitFoldLine(VLayoutPiece &det, const VPiece &piece, const VContainer *pattern)
+{
+    det.SetFoldLineType(piece.GetFoldLineType());
+
+    if (piece.GetFoldLineType() == FoldLineType::None)
+    {
+        return;
+    }
+
+    det.SetFoldLineSvgFontSize(piece.GetFoldLineSvgFontSize());
+    det.SetFoldLineLabelFontItalic(piece.IsFoldLineLabelFontItalic());
+    det.SetFoldLineLabelFontBold(piece.IsFoldLineLabelFontBold());
+    det.SetFoldLineLabel(piece.GetFoldLineLabel());
+    det.SetFoldLineLabelAlignment(piece.GetFoldLineLabelAlignment());
+
+    {
+        VCommonSettings *settings = VAbstractApplication::VApp()->Settings();
+        QFont font = settings->GetLabelFont();
+        font.setPointSize(static_cast<int>(piece.GetFoldLineSvgFontSize()));
+        det.SetFoldLineOutlineFont(font);
+        det.SetFoldLineSVGFontFamily(settings->GetLabelSVGFont());
+    }
+
+    if (piece.IsManualFoldHeight())
+    {
+        VFormula formula(piece.GetFormulaFoldHeight(), pattern);
+        formula.setCheckZero(false);
+        formula.setCheckLessThanZero(true);
+        formula.Eval();
+
+        if (!formula.error())
+        {
+            det.SetFoldLineHeight(ToPixel(formula.getDoubleValue(), *pattern->GetPatternUnit()));
+        }
+    }
+
+    if (piece.IsManualFoldWidth())
+    {
+        VFormula formula(piece.GetFormulaFoldWidth(), pattern);
+        formula.setCheckZero(false);
+        formula.setCheckLessThanZero(true);
+        formula.Eval();
+
+        if (!formula.error())
+        {
+            det.SetFoldLineWidth(ToPixel(formula.getDoubleValue(), *pattern->GetPatternUnit()));
+        }
+    }
+
+    if (piece.IsManualFoldCenter())
+    {
+        VFormula formula(piece.GetFormulaFoldCenter(), pattern);
+        formula.setCheckZero(false);
+        formula.setCheckLessThanZero(true);
+        formula.Eval();
+
+        if (!formula.error())
+        {
+            det.SetFoldLineCenterPosition(formula.getDoubleValue());
+        }
+    }
+}
 } // namespace
 
 // Friend functions
@@ -557,16 +627,26 @@ VLayoutPiece::~VLayoutPiece() = default;
 //---------------------------------------------------------------------------------------------------------------------
 auto VLayoutPiece::Create(const VPiece &piece, vidtype id, const VContainer *pattern) -> VLayoutPiece
 {
-    QFuture<QVector<VLayoutPoint>> futureSeamAllowance =
-        QtConcurrent::run([piece, pattern]() { return piece.SeamAllowancePoints(pattern); });
-    QFuture<bool> futureSeamAllowanceValid =
+    QFuture<QVector<VLayoutPoint>> const futureSeamAllowance = QtConcurrent::run(
+        [piece, pattern]()
+        {
+            if (!piece.SeamMirrorLine(pattern).isNull())
+            {
+                VPiece tmp = piece;
+                tmp.SetShowFullPiece(false);
+                return tmp.SeamAllowancePoints(pattern);
+            }
+            return piece.SeamAllowancePoints(pattern);
+        });
+    QFuture<bool> const futureSeamAllowanceValid =
         QtConcurrent::run([piece, pattern]() { return piece.IsSeamAllowanceValid(pattern); });
-    QFuture<QVector<VLayoutPoint>> futureMainPath =
+    QFuture<QVector<VLayoutPoint>> const futureMainPath =
         QtConcurrent::run([piece, pattern]() { return piece.MainPathPoints(pattern); });
-    QFuture<QVector<VLayoutPiecePath>> futureInternalPaths = QtConcurrent::run(ConvertInternalPaths, piece, pattern);
-    QFuture<QVector<VLayoutPassmark>> futurePassmarks =
+    QFuture<QVector<VLayoutPiecePath>> const futureInternalPaths =
+        QtConcurrent::run(ConvertInternalPaths, piece, pattern);
+    QFuture<QVector<VLayoutPassmark>> const futurePassmarks =
         QtConcurrent::run(VLayoutPiece::ConvertPassmarks, piece, pattern);
-    QFuture<QVector<VLayoutPlaceLabel>> futurePlaceLabels = QtConcurrent::run(ConvertPlaceLabels, piece, pattern);
+    QFuture<QVector<VLayoutPlaceLabel>> const futurePlaceLabels = QtConcurrent::run(ConvertPlaceLabels, piece, pattern);
 
     VLayoutPiece det;
 
@@ -582,6 +662,9 @@ auto VLayoutPiece::Create(const VPiece &piece, vidtype id, const VContainer *pat
     det.SetForceFlipping(piece.IsForceFlipping());
     det.SetFollowGrainline(piece.IsFollowGrainline());
     det.SetSewLineOnDrawing(piece.IsSewLineOnDrawing());
+    det.SetShowFullPiece(piece.IsShowFullPiece());
+    det.SetSeamMirrorLine(piece.SeamMirrorLine(pattern));
+    det.SetSeamAllowanceMirrorLine(piece.SeamAllowanceMirrorLine(pattern));
     det.SetId(id);
 
     if (not futureSeamAllowanceValid.result())
@@ -626,6 +709,8 @@ auto VLayoutPiece::Create(const VPiece &piece, vidtype id, const VContainer *pat
         det.SetGrainline(grainlineGeom, pattern);
     }
 
+    InitFoldLine(det, piece, pattern);
+
     return det;
 }
 
@@ -648,8 +733,7 @@ auto VLayoutPiece::Map<VLayoutPassmark>(QVector<VLayoutPassmark> passmarks) cons
 {
     for (auto &passmark : passmarks)
     {
-        passmark.lines = Map(passmark.lines);
-        passmark.baseLine = d->m_matrix.map(passmark.baseLine);
+        passmark = MapPassmark(passmark, d->m_matrix, d->m_verticallyFlipped || d->m_horizontallyFlipped);
     }
 
     return passmarks;
@@ -659,14 +743,7 @@ auto VLayoutPiece::Map<VLayoutPassmark>(QVector<VLayoutPassmark> passmarks) cons
 template <> auto VLayoutPiece::Map<VLayoutPoint>(QVector<VLayoutPoint> points) const -> QVector<VLayoutPoint>
 {
     std::transform(points.begin(), points.end(), points.begin(),
-                   [this](VLayoutPoint point)
-                   {
-                       auto p = static_cast<QPointF>(point); // NOLINT(cppcoreguidelines-slicing)
-                       p = d->m_matrix.map(p);
-                       point.rx() = p.x();
-                       point.ry() = p.y();
-                       return point;
-                   });
+                   [this](const VLayoutPoint &point) { return MapPoint(point, d->m_matrix); });
     if (d->m_verticallyFlipped || d->m_horizontallyFlipped)
     {
         std::reverse(points.begin(), points.end());
@@ -695,6 +772,30 @@ auto VLayoutPiece::GetMappedContourPoints() const -> QVector<VLayoutPoint>
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+auto VLayoutPiece::GetMappedFullContourPoints() const -> QVector<VLayoutPoint>
+{
+    return Map(GetFullContourPoints());
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+auto VLayoutPiece::GetFullContourPoints() const -> QVector<VLayoutPoint>
+{
+    QVector<VLayoutPoint> points;
+    points.reserve(d->m_contour.size());
+    if (!d->m_seamMirrorLine.isNull() && IsShowFullPiece())
+    {
+        points = VAbstractPiece::FullPath(d->m_contour, d->m_seamMirrorLine);
+        points = CheckLoops(CorrectEquidistantPoints(points)); // A path can contains loops
+    }
+    else
+    {
+        points = d->m_contour;
+    }
+
+    return points;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 auto VLayoutPiece::GetContourPoints() const -> QVector<VLayoutPoint>
 {
     return d->m_contour;
@@ -712,6 +813,30 @@ void VLayoutPiece::SetContourPoints(const QVector<VLayoutPoint> &points, bool hi
 auto VLayoutPiece::GetMappedSeamAllowancePoints() const -> QVector<VLayoutPoint>
 {
     return Map(d->m_seamAllowance);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+auto VLayoutPiece::GetMappedFullSeamAllowancePoints() const -> QVector<VLayoutPoint>
+{
+    return Map(GetFullSeamAllowancePoints());
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+auto VLayoutPiece::GetFullSeamAllowancePoints() const -> QVector<VLayoutPoint>
+{
+    QVector<VLayoutPoint> points;
+    points.reserve(d->m_seamAllowance.size());
+    if (!d->m_seamAllowanceMirrorLine.isNull() && IsShowFullPiece())
+    {
+        points = VAbstractPiece::FullPath(d->m_seamAllowance, d->m_seamAllowanceMirrorLine);
+        points = CheckLoops(CorrectEquidistantPoints(points)); // A path can contains loops
+    }
+    else
+    {
+        points = d->m_seamAllowance;
+    }
+
+    return points;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -751,17 +876,6 @@ auto VLayoutPiece::GetMappedLayoutAllowancePoints() const -> QVector<QPointF>
 auto VLayoutPiece::GetLayoutAllowancePoints() const -> QVector<QPointF>
 {
     return d->m_layoutAllowance;
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-auto VLayoutPiece::GetPieceTextPosition() const -> QPointF
-{
-    if (d->m_detailLabel.count() > 2)
-    {
-        return d->m_matrix.map(d->m_detailLabel.constFirst());
-    }
-
-    return {};
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -838,17 +952,6 @@ void VLayoutPiece::SetPieceLabelData(const VTextManager &data)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-auto VLayoutPiece::GetPatternTextPosition() const -> QPointF
-{
-    if (d->m_patternInfo.count() > 2)
-    {
-        return d->m_matrix.map(d->m_patternInfo.constFirst());
-    }
-
-    return {};
-}
-
-//---------------------------------------------------------------------------------------------------------------------
 auto VLayoutPiece::GetPatternText() const -> QStringList
 {
     return PieceLabelText(d->m_patternInfo, d->m_tmPattern);
@@ -917,6 +1020,102 @@ auto VLayoutPiece::GetPatternLabelData() const -> VTextManager
 void VLayoutPiece::SetPatternLabelData(const VTextManager &data)
 {
     d->m_tmPattern = data;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+auto VLayoutPiece::GetMappedSeamMirrorLine() const -> QLineF
+{
+    return d->m_matrix.map(d->m_seamMirrorLine);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+auto VLayoutPiece::GetSeamMirrorLine() const -> QLineF
+{
+    return d->m_seamMirrorLine;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VLayoutPiece::SetSeamMirrorLine(const QLineF &line)
+{
+    d->m_seamMirrorLine = line;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+auto VLayoutPiece::GetMappedSeamAllowanceMirrorLine() const -> QLineF
+{
+    return d->m_matrix.map(d->m_seamAllowanceMirrorLine);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+auto VLayoutPiece::GetSeamAllowanceMirrorLine() const -> QLineF
+{
+    return d->m_seamAllowanceMirrorLine;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VLayoutPiece::SetSeamAllowanceMirrorLine(const QLineF &line)
+{
+    d->m_seamAllowanceMirrorLine = line;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+auto VLayoutPiece::GetFoldLineHeight() const -> qreal
+{
+    return d->m_foldLineHeight;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VLayoutPiece::SetFoldLineHeight(qreal height)
+{
+    d->m_foldLineHeight = height;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+auto VLayoutPiece::GetFoldLineWidth() const -> qreal
+{
+    return d->m_foldLineWidth;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VLayoutPiece::SetFoldLineWidth(qreal width)
+{
+    d->m_foldLineWidth = width;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+auto VLayoutPiece::GetFoldLineCenterPosition() const -> qreal
+{
+    return d->m_foldLineCenter;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VLayoutPiece::SetFoldLineCenterPosition(qreal center)
+{
+    d->m_foldLineCenter = center;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+auto VLayoutPiece::GetFoldLineOutlineFont() const -> QFont
+{
+    return d->m_foldLineOutlineFont;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VLayoutPiece::SetFoldLineOutlineFont(const QFont &font)
+{
+    d->m_foldLineOutlineFont = font;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+auto VLayoutPiece::GetFoldLineSVGFontFamily() const -> QString
+{
+    return d->m_foldLineSvgFontFamily;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VLayoutPiece::SetFoldLineSVGFontFamily(const QString &font)
+{
+    d->m_foldLineSvgFontFamily = font;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -1154,6 +1353,30 @@ auto VLayoutPiece::Diagonal() const -> qreal
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+auto VLayoutPiece::FoldLine() const -> VFoldLine
+{
+    QLineF const foldLine = IsHideMainPath() ? GetSeamAllowanceMirrorLine() : GetSeamMirrorLine();
+    VFoldLine fLine(foldLine, GetFoldLineType());
+    fLine.SetLabelSvgFontSize(GetFoldLineSvgFontSize());
+    fLine.SetLabelFontItalic(IsFoldLineLabelFontItalic());
+    fLine.SetLabelFontBold(IsFoldLineLabelFontBold());
+    fLine.SetLabel(GetFoldLineLabel());
+    fLine.SetLabelAlignment(GetFoldLineLabelAlignment());
+    fLine.SetHeight(GetFoldLineHeight());
+    fLine.SetWidth(GetFoldLineWidth());
+    fLine.SetCenterPosition(GetFoldLineCenterPosition());
+    fLine.SetMatrix(GetMatrix());
+    fLine.SetHorizontallyFlipped(IsHorizontallyFlipped());
+    fLine.SetVerticallyFlipped(IsVerticallyFlipped());
+    fLine.SetXScale(GetXScale());
+    fLine.SetYScale(GetYScale());
+    fLine.SetOutlineFont(GetFoldLineOutlineFont());
+    fLine.SetSvgFont(GetFoldLineSVGFontFamily());
+
+    return fLine;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 auto VLayoutPiece::isNull() const -> bool
 {
     if (not d->m_contour.isEmpty() && d->m_layoutWidth > 0)
@@ -1177,8 +1400,8 @@ void VLayoutPiece::SetLayoutAllowancePoints(bool togetherWithNotches)
     if (d->m_layoutWidth > 0)
     {
         QVector<VLayoutPoint> pieceBoundary = IsSeamAllowance() && not IsSeamAllowanceBuiltIn()
-                                                  ? GetMappedSeamAllowancePoints()
-                                                  : GetMappedContourPoints();
+                                                  ? GetMappedFullSeamAllowancePoints()
+                                                  : GetMappedFullContourPoints();
 
         if (togetherWithNotches)
         {
@@ -1188,6 +1411,10 @@ void VLayoutPiece::SetLayoutAllowancePoints(bool togetherWithNotches)
 
             VBoundary boundary(pieceBoundary, seamAllowance, builtInSeamAllowance);
             boundary.SetPieceName(GetName());
+            if (IsShowFullPiece())
+            {
+                boundary.SetMirrorLine(GetMappedSeamAllowanceMirrorLine());
+            }
             const QList<VBoundarySequenceItemData> sequence = boundary.Combine(passmarks, false, true);
 
             pieceBoundary.clear();
@@ -1220,14 +1447,14 @@ void VLayoutPiece::SetLayoutAllowancePoints(bool togetherWithNotches)
 //---------------------------------------------------------------------------------------------------------------------
 auto VLayoutPiece::GetMappedExternalContourPoints() const -> QVector<VLayoutPoint>
 {
-    return IsSeamAllowance() && not IsSeamAllowanceBuiltIn() ? GetMappedSeamAllowancePoints()
-                                                             : GetMappedContourPoints();
+    return IsSeamAllowance() && not IsSeamAllowanceBuiltIn() ? GetMappedFullSeamAllowancePoints()
+                                                             : GetMappedFullContourPoints();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 auto VLayoutPiece::GetExternalContourPoints() const -> QVector<VLayoutPoint>
 {
-    return IsSeamAllowance() && not IsSeamAllowanceBuiltIn() ? GetSeamAllowancePoints() : GetContourPoints();
+    return IsSeamAllowance() && not IsSeamAllowanceBuiltIn() ? GetFullSeamAllowancePoints() : GetFullContourPoints();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -1264,16 +1491,18 @@ void VLayoutPiece::SetPlaceLabels(const QVector<VLayoutPlaceLabel> &labels)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-auto VLayoutPiece::MappedInternalPathsForCut(bool cut) const -> QVector<QVector<VLayoutPoint>>
+auto VLayoutPiece::MappedInternalPathsForCut(bool cut) const -> QVector<VLayoutPiecePath>
 {
-    QVector<QVector<VLayoutPoint>> paths;
+    QVector<VLayoutPiecePath> paths;
     paths.reserve(d->m_internalPaths.size());
 
     for (const auto &path : d->m_internalPaths)
     {
         if (path.IsCutPath() == cut)
         {
-            paths.append(Map(path.Points()));
+            VLayoutPiecePath iPath = path;
+            iPath.SetPoints(Map(path.Points()));
+            paths.append(iPath);
         }
     }
 
@@ -1311,8 +1540,12 @@ auto VLayoutPiece::ContourPath(bool togetherWithNotches, bool showLayoutAllowanc
             bool seamAllowance = IsSeamAllowance() && IsSeamAllowanceBuiltIn();
             bool builtInSeamAllowance = IsSeamAllowance() && IsSeamAllowanceBuiltIn();
 
-            VBoundary boundary(d->m_contour, seamAllowance, builtInSeamAllowance);
+            VBoundary boundary(GetFullContourPoints(), seamAllowance, builtInSeamAllowance);
             boundary.SetPieceName(GetName());
+            if (IsShowFullPiece())
+            {
+                boundary.SetMirrorLine(d->m_seamMirrorLine);
+            }
             const QList<VBoundarySequenceItemData> sequence = boundary.Combine(d->m_passmarks, true, false);
 
             for (const auto &item : sequence)
@@ -1325,7 +1558,7 @@ auto VLayoutPiece::ContourPath(bool togetherWithNotches, bool showLayoutAllowanc
         }
         else
         {
-            path = VGObject::PainterPath(GetContourPoints());
+            path = VGObject::PainterPath(GetFullContourPoints());
         }
     }
 
@@ -1337,8 +1570,12 @@ auto VLayoutPiece::ContourPath(bool togetherWithNotches, bool showLayoutAllowanc
             // Draw seam allowance
             if (togetherWithNotches)
             {
-                VBoundary boundary(d->m_seamAllowance, true);
+                VBoundary boundary(GetFullSeamAllowancePoints(), true);
                 boundary.SetPieceName(GetName());
+                if (IsShowFullPiece())
+                {
+                    boundary.SetMirrorLine(d->m_seamAllowanceMirrorLine);
+                }
                 const QList<VBoundarySequenceItemData> sequence = boundary.Combine(d->m_passmarks, true, false);
 
                 for (const auto &item : sequence)
@@ -1351,7 +1588,7 @@ auto VLayoutPiece::ContourPath(bool togetherWithNotches, bool showLayoutAllowanc
             }
             else
             {
-                QVector<VLayoutPoint> points = d->m_seamAllowance;
+                QVector<VLayoutPoint> points = GetFullSeamAllowancePoints();
                 if (points.constLast().toPoint() != points.constFirst().toPoint())
                 {
                     points.append(points.at(0)); // Should be always closed
@@ -1364,16 +1601,32 @@ auto VLayoutPiece::ContourPath(bool togetherWithNotches, bool showLayoutAllowanc
         if (!togetherWithNotches)
         {
             // Draw passmarks
-            QPainterPath passmaksPath;
             for (const auto &passmark : d->m_passmarks)
             {
+                QPainterPath passmaksPath;
                 for (const auto &line : passmark.lines)
                 {
                     passmaksPath.moveTo(line.p1());
                     passmaksPath.lineTo(line.p2());
                 }
+                path.addPath(passmaksPath);
+
+                if (!d->m_seamAllowanceMirrorLine.isNull() && IsShowFullPiece())
+                {
+                    if (!VGObject::IsPointOnLineviaPDP(passmark.baseLine.p1(), d->m_seamAllowanceMirrorLine.p1(),
+                                                       d->m_seamAllowanceMirrorLine.p2()))
+                    {
+                        QPainterPath mirroredPassmaksPath;
+                        for (const auto &line : passmark.lines)
+                        {
+                            mirroredPassmaksPath.moveTo(line.p1());
+                            mirroredPassmaksPath.lineTo(line.p2());
+                        }
+                        const QTransform matrix = VGObject::FlippingMatrix(d->m_seamAllowanceMirrorLine);
+                        path.addPath(matrix.map(mirroredPassmaksPath));
+                    }
+                }
             }
-            path.addPath(passmaksPath);
         }
 
         path.setFillRule(Qt::WindingFill);
@@ -1428,7 +1681,21 @@ auto VLayoutPiece::GetItem(bool textAsPaths, bool togetherWithNotches, bool show
     for (const auto &path : d->m_internalPaths)
     {
         auto *pathItem = new QGraphicsPathItem(item);
-        pathItem->setPath(d->m_matrix.map(path.GetPainterPath()));
+
+        QPainterPath p = d->m_matrix.map(path.GetPainterPath());
+
+        if (!path.IsNotMirrored() && IsShowFullPiece() && !d->m_seamMirrorLine.isNull())
+        {
+            QVector<VLayoutPoint> points = path.Points();
+            const QTransform matrix = VGObject::FlippingMatrix(d->m_seamMirrorLine);
+            std::transform(points.begin(), points.end(), points.begin(),
+                           [matrix](const VLayoutPoint &point) { return VAbstractPiece::MapPoint(point, matrix); });
+            QVector<QPointF> casted;
+            CastTo(points, casted);
+            p.addPath(d->m_matrix.map(VPiecePath::MakePainterPath(casted)));
+        }
+
+        pathItem->setPath(p);
 
         QPen pen = pathItem->pen();
         pen.setStyle(path.PenStyle());
@@ -1442,12 +1709,68 @@ auto VLayoutPiece::GetItem(bool textAsPaths, bool togetherWithNotches, bool show
         QPen pen = pathItem->pen();
         pen.setWidthF(VAbstractApplication::VApp()->Settings()->WidthHairLine());
         pathItem->setPen(pen);
-        pathItem->setPath(d->m_matrix.map(LabelShapePath(PlaceLabelShape(label))));
+
+        QPainterPath path;
+        path.addPath(d->m_matrix.map(LabelShapePath(label)));
+
+        if (!label.IsNotMirrored() && IsShowFullPiece() && !d->m_seamMirrorLine.isNull())
+        {
+            PlaceLabelImg shape = VAbstractPiece::PlaceLabelShape(label);
+            const QTransform matrix = VGObject::FlippingMatrix(d->m_seamMirrorLine);
+            for (auto &points : shape)
+            {
+                std::transform(points.begin(), points.end(), points.begin(),
+                               [matrix](const VLayoutPoint &point) { return MapPoint(point, matrix); });
+            }
+
+            path.addPath(d->m_matrix.map(LabelShapePath(shape)));
+        }
+
+        pathItem->setPath(path);
     }
 
     CreateLabelStrings(item, d->m_detailLabel, d->m_tmDetail, textAsPaths);
     CreateLabelStrings(item, d->m_patternInfo, d->m_tmPattern, textAsPaths);
     CreateGrainlineItem(item);
+    CreateFoldLineItem(item, textAsPaths);
+
+    if (IsShowFullPiece())
+    {
+        bool mirrorFlag = false;
+        QPainterPath mirrorLinePath;
+        if (not IsSeamAllowance() || IsSeamAllowanceBuiltIn())
+        {
+            if (!d->m_seamMirrorLine.isNull())
+            {
+                QPainterPath mirrorPath;
+                mirrorPath.moveTo(d->m_matrix.map(d->m_seamMirrorLine.p1()));
+                mirrorPath.lineTo(d->m_matrix.map(d->m_seamMirrorLine.p2()));
+                mirrorLinePath.addPath(mirrorPath);
+                mirrorFlag = true;
+            }
+        }
+        else if (not IsSeamAllowanceBuiltIn())
+        {
+            if (!d->m_seamAllowanceMirrorLine.isNull())
+            {
+                QPainterPath mirrorPath;
+                mirrorPath.moveTo(d->m_matrix.map(d->m_seamAllowanceMirrorLine.p1()));
+                mirrorPath.lineTo(d->m_matrix.map(d->m_seamAllowanceMirrorLine.p2()));
+                mirrorLinePath.addPath(mirrorPath);
+                mirrorFlag = true;
+            }
+        }
+
+        if (mirrorFlag)
+        {
+            auto *mirrorLineItem = new QGraphicsPathItem(item);
+            QPen pen = mirrorLineItem->pen();
+            pen.setWidthF(VAbstractApplication::VApp()->Settings()->WidthHairLine());
+            pen.setStyle(Qt::DashDotLine);
+            mirrorLineItem->setPen(pen);
+            mirrorLineItem->setPath(mirrorLinePath);
+        }
+    }
 
     return item;
 }
@@ -1456,7 +1779,7 @@ auto VLayoutPiece::GetItem(bool textAsPaths, bool togetherWithNotches, bool show
 auto VLayoutPiece::IsLayoutAllowanceValid(bool togetherWithNotches) const -> bool
 {
     QVector<VLayoutPoint> base =
-        (IsSeamAllowance() && not IsSeamAllowanceBuiltIn()) ? d->m_seamAllowance : d->m_contour;
+        (IsSeamAllowance() && not IsSeamAllowanceBuiltIn()) ? GetFullSeamAllowancePoints() : GetFullContourPoints();
 
     if (togetherWithNotches)
     {
@@ -1466,6 +1789,10 @@ auto VLayoutPiece::IsLayoutAllowanceValid(bool togetherWithNotches) const -> boo
 
         VBoundary boundary(base, seamAllowance, builtInSeamAllowance);
         boundary.SetPieceName(GetName());
+        if (IsShowFullPiece())
+        {
+            boundary.SetMirrorLine(d->m_seamAllowanceMirrorLine);
+        }
         const QList<VBoundarySequenceItemData> sequence = boundary.Combine(passmarks, false, true);
 
         base.clear();
@@ -1514,6 +1841,14 @@ auto VLayoutPiece::MapPlaceLabelShape(PlaceLabelImg shape) const -> PlaceLabelIm
     }
 
     return shape;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+auto VLayoutPiece::MapPassmark(VLayoutPassmark passmark, const QTransform &matrix, bool mirror) -> VLayoutPassmark
+{
+    passmark.lines = MapVector(passmark.lines, matrix, mirror);
+    passmark.baseLine = matrix.map(passmark.baseLine);
+    return passmark;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -1589,7 +1924,6 @@ void VLayoutPiece::LabelStringsSVGFont(QGraphicsItem *parent, const QVector<QPoi
             break;
         }
 
-        QString qsText = tl.m_qsText;
         qreal dX = 0;
         if (tl.m_eAlign == 0 || (tl.m_eAlign & Qt::AlignLeft) > 0)
         {
@@ -1597,11 +1931,11 @@ void VLayoutPiece::LabelStringsSVGFont(QGraphicsItem *parent, const QVector<QPoi
         }
         else if ((tl.m_eAlign & Qt::AlignHCenter) > 0)
         {
-            dX = (dW - engine.TextWidth(qsText, penWidth)) / 2;
+            dX = (dW - engine.TextWidth(tl.m_qsText, penWidth)) / 2;
         }
         else if ((tl.m_eAlign & Qt::AlignRight) > 0)
         {
-            dX = dW - engine.TextWidth(qsText, penWidth);
+            dX = dW - engine.TextWidth(tl.m_qsText, penWidth);
         }
 
         // set up the rotation around top-left corner matrix
@@ -1630,11 +1964,11 @@ void VLayoutPiece::LabelStringsSVGFont(QGraphicsItem *parent, const QVector<QPoi
         pen.setWidthF(penWidth);
         item->setPen(pen);
 
-        item->setPath(engine.DrawPath(QPointF(), qsText));
+        item->setPath(engine.DrawPath(QPointF(), tl.m_qsText));
         item->setBrush(QBrush(Qt::NoBrush));
         item->setTransform(labelMatrix);
 
-        dY += engine.FontHeight() + penWidth + tm.GetSpacing();
+        dY += engine.FontHeight() - penWidth * 2 + tm.GetSpacing();
     }
 }
 
@@ -1686,7 +2020,6 @@ void VLayoutPiece::LabelStringsOutlineFont(QGraphicsItem *parent, const QVector<
             break;
         }
 
-        QString qsText = tl.m_qsText;
         qreal dX = 0;
         if (tl.m_eAlign == 0 || (tl.m_eAlign & Qt::AlignLeft) > 0)
         {
@@ -1694,11 +2027,11 @@ void VLayoutPiece::LabelStringsOutlineFont(QGraphicsItem *parent, const QVector<
         }
         else if ((tl.m_eAlign & Qt::AlignHCenter) > 0)
         {
-            dX = (dW - TextWidth(fm, qsText)) / 2;
+            dX = (dW - TextWidth(fm, tl.m_qsText)) / 2;
         }
         else if ((tl.m_eAlign & Qt::AlignRight) > 0)
         {
-            dX = dW - TextWidth(fm, qsText);
+            dX = dW - TextWidth(fm, tl.m_qsText);
         }
 
         // set up the rotation around top-left corner matrix
@@ -1708,15 +2041,14 @@ void VLayoutPiece::LabelStringsOutlineFont(QGraphicsItem *parent, const QVector<
         {
             labelMatrix.scale(-1, 1);
             labelMatrix.rotate(-angle);
-            labelMatrix.translate(-dW, 0);
-            labelMatrix.translate(dX, dY); // Each string has own position
+            labelMatrix.translate(-tm.MaxLineWidthOutlineFont(static_cast<int>(dW)), 0);
         }
         else
         {
             labelMatrix.rotate(angle);
-            labelMatrix.translate(dX, dY); // Each string has own position
         }
 
+        labelMatrix.translate(dX, dY); // Each string has own position
         labelMatrix *= d->m_matrix;
 
         if (textAsPaths)
@@ -1726,7 +2058,7 @@ void VLayoutPiece::LabelStringsOutlineFont(QGraphicsItem *parent, const QVector<
             if (settings->GetSingleStrokeOutlineFont())
             {
                 int w = 0;
-                for (auto c : qAsConst(qsText))
+                for (auto c : qAsConst(tl.m_qsText))
                 {
                     path.addPath(corrector.DrawChar(w, static_cast<qreal>(fm.ascent()), c));
                     w += TextWidth(fm, c);
@@ -1734,7 +2066,7 @@ void VLayoutPiece::LabelStringsOutlineFont(QGraphicsItem *parent, const QVector<
             }
             else
             {
-                path.addText(0, static_cast<qreal>(fm.ascent()), fnt, qsText);
+                path.addText(0, static_cast<qreal>(fm.ascent()), fnt, tl.m_qsText);
             }
 
             auto *item = new QGraphicsPathItem(parent);
@@ -1749,16 +2081,16 @@ void VLayoutPiece::LabelStringsOutlineFont(QGraphicsItem *parent, const QVector<
             item->setBrush(settings->GetSingleStrokeOutlineFont() ? QBrush(Qt::NoBrush) : QBrush(Qt::black));
             item->setTransform(labelMatrix);
 
-            dY += fm.height() + penWidth + tm.GetSpacing();
+            dY += fm.height() + penWidth * 2 + MmToPixel(1.5) + tm.GetSpacing();
         }
         else
         {
             auto *item = new QGraphicsSimpleTextItem(parent);
             item->setFont(fnt);
-            item->setText(qsText);
+            item->setText(tl.m_qsText);
             item->setTransform(labelMatrix);
 
-            dY += (fm.height() + tm.GetSpacing());
+            dY += (fm.height() + MmToPixel(1.5) + tm.GetSpacing());
         }
     }
 }
@@ -1798,6 +2130,83 @@ void VLayoutPiece::CreateGrainlineItem(QGraphicsItem *parent) const
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+void VLayoutPiece::CreateFoldLineItem(QGraphicsItem *parent, bool textAsPaths) const
+{
+    SCASSERT(parent != nullptr)
+
+    if (GetFoldLineType() == FoldLineType::None)
+    {
+        return;
+    }
+
+    VFoldLine const fLine = FoldLine();
+
+    QVector<QPainterPath> const shape = fLine.FoldLinePath();
+
+    if (shape.isEmpty())
+    {
+        return;
+    }
+
+    VCommonSettings *settings = VAbstractApplication::VApp()->Settings();
+    if (!textAsPaths && !settings->GetSingleStrokeOutlineFont() && !settings->GetSingleLineFonts())
+    {
+        auto *item = new QGraphicsSimpleTextItem(parent);
+        fLine.UpdateFoldLineLabel(item);
+    }
+
+    auto FoldLineMark = [parent](const QPainterPath &shape)
+    {
+        auto *item = new VGraphicsFoldLineItem(shape, parent);
+        item->SetCustomPen(true);
+        QPen pen = item->pen();
+        pen.setWidthF(VAbstractApplication::VApp()->Settings()->WidthHairLine());
+        pen.setCapStyle(Qt::RoundCap);
+        pen.setJoinStyle(Qt::RoundJoin);
+        item->setPen(pen);
+    };
+
+    auto FoldLineLabel = [parent](const QPainterPath &shape)
+    {
+        auto *item = new QGraphicsPathItem(parent);
+        item->setPath(shape);
+
+        VCommonSettings *settings = VAbstractApplication::VApp()->Settings();
+
+        QPen itemPen = item->pen();
+        itemPen.setColor(Qt::black);
+        itemPen.setCapStyle(Qt::RoundCap);
+        itemPen.setJoinStyle(Qt::RoundJoin);
+        itemPen.setWidthF(settings->WidthHairLine());
+        item->setPen(itemPen);
+        item->setBrush(settings->GetSingleStrokeOutlineFont() || settings->GetSingleLineFonts() ? QBrush(Qt::NoBrush)
+                                                                                                : QBrush(Qt::black));
+    };
+
+    if (GetFoldLineType() == FoldLineType::ThreeDots || GetFoldLineType() == FoldLineType::ThreeX ||
+        GetFoldLineType() == FoldLineType::TwoArrows)
+    {
+        FoldLineMark(shape.constFirst());
+    }
+    else if (GetFoldLineType() == FoldLineType::Text)
+    {
+        if (settings->GetSingleStrokeOutlineFont() || settings->GetSingleLineFonts())
+        {
+            FoldLineLabel(shape.constFirst());
+        }
+    }
+    else
+    {
+        FoldLineMark(shape.constFirst());
+
+        if (shape.size() > 1 && (settings->GetSingleStrokeOutlineFont() || settings->GetSingleLineFonts()))
+        {
+            FoldLineLabel(shape.constLast());
+        }
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 auto VLayoutPiece::DetailPath() const -> QVector<VLayoutPoint>
 {
     if (IsSeamAllowance() && not IsSeamAllowanceBuiltIn())
@@ -1830,7 +2239,7 @@ auto VLayoutPiece::GetMainPathItem() const -> QGraphicsPathItem *
     QPainterPath path;
 
     // contour
-    QVector<VLayoutPoint> points = GetMappedContourPoints();
+    QVector<VLayoutPoint> const points = GetMappedContourPoints();
 
     path.moveTo(points.at(0));
     for (qint32 i = 1; i < points.count(); ++i)

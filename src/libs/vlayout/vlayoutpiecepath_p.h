@@ -62,13 +62,14 @@ public:
     /** @brief m_penStyle path pen style. */
     Qt::PenStyle m_penStyle{Qt::SolidLine}; // NOLINT(misc-non-private-member-variables-in-classes)
 
-    bool m_cut{false}; // NOLINT(misc-non-private-member-variables-in-classes)
+    bool m_cut{false};         // NOLINT(misc-non-private-member-variables-in-classes)
+    bool m_notMirrored{false}; // NOLINT(misc-non-private-member-variables-in-classes)
 
 private:
     Q_DISABLE_ASSIGN_MOVE(VLayoutPiecePathData) // NOLINT
 
     static constexpr quint32 streamHeader = 0xA53F0225; // CRC-32Q string "VLayoutPiecePathData"
-    static constexpr quint16 classVersion = 2;
+    static constexpr quint16 classVersion = 3;
 };
 
 QT_WARNING_POP
@@ -87,7 +88,7 @@ inline VLayoutPiecePathData::VLayoutPiecePathData(const QVector<VLayoutPoint> &p
 
 // Friend functions
 //---------------------------------------------------------------------------------------------------------------------
-auto operator<<(QDataStream &dataStream, const VLayoutPiecePathData &path) -> QDataStream &
+inline auto operator<<(QDataStream &dataStream, const VLayoutPiecePathData &path) -> QDataStream &
 {
     dataStream << VLayoutPiecePathData::streamHeader << VLayoutPiecePathData::classVersion;
 
@@ -96,13 +97,14 @@ auto operator<<(QDataStream &dataStream, const VLayoutPiecePathData &path) -> QD
     dataStream << path.m_penStyle;
     dataStream << path.m_cut;
 
-    // Added in classVersion = 2
+    // Added in classVersion = 3
+    dataStream << path.m_notMirrored;
 
     return dataStream;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-auto operator>>(QDataStream &dataStream, VLayoutPiecePathData &path) -> QDataStream &
+inline auto operator>>(QDataStream &dataStream, VLayoutPiecePathData &path) -> QDataStream &
 {
     quint32 actualStreamHeader = 0;
     dataStream >> actualStreamHeader;
@@ -141,10 +143,10 @@ auto operator>>(QDataStream &dataStream, VLayoutPiecePathData &path) -> QDataStr
     dataStream >> path.m_penStyle;
     dataStream >> path.m_cut;
 
-    //    if (actualClassVersion >= 2)
-    //    {
-
-    //    }
+    if (actualClassVersion >= 3)
+    {
+        dataStream >> path.m_notMirrored;
+    }
 
     return dataStream;
 }

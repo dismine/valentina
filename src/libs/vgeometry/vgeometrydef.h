@@ -88,17 +88,25 @@ Q_DECLARE_METATYPE(VLayoutPassmark) // NOLINT
 
 constexpr qreal accuracyPointOnLine = MmToPixel(0.1555);
 
-Q_REQUIRED_RESULT static inline auto VFuzzyComparePoints(const QPointF &p1, const QPointF &p2,
-                                                         qreal accuracy = accuracyPointOnLine) -> bool;
-static inline auto VFuzzyComparePoints(const QPointF &p1, const QPointF &p2, qreal accuracy) -> bool
+Q_REQUIRED_RESULT inline auto VFuzzyComparePoints(const QPointF &p1, const QPointF &p2,
+                                                  qreal accuracy = accuracyPointOnLine) -> bool;
+inline auto VFuzzyComparePoints(const QPointF &p1, const QPointF &p2, qreal accuracy) -> bool
 {
     return QLineF(p1, p2).length() <= accuracy;
 }
 
-Q_REQUIRED_RESULT static inline auto VFuzzyOnAxis(qreal v1, qreal v2, qreal accuracy = accuracyPointOnLine) -> bool;
-static inline auto VFuzzyOnAxis(qreal v1, qreal v2, qreal accuracy) -> bool
+Q_REQUIRED_RESULT inline auto VFuzzyOnAxis(qreal v1, qreal v2, qreal accuracy = accuracyPointOnLine) -> bool;
+inline auto VFuzzyOnAxis(qreal v1, qreal v2, qreal accuracy) -> bool
 {
     return qAbs(v1 - v2) <= accuracy;
 }
+
+template <class T> inline void Swap(T &line)
+{
+    line = T(line.p2(), line.p1());
+}
+
+auto SingleParallelPoint(const QPointF &p1, const QPointF &p2, qreal angle, qreal width) -> QPointF;
+auto SimpleParallelLine(const QPointF &p1, const QPointF &p2, qreal width) -> QLineF;
 
 #endif // VGEOMETRYDEF_H

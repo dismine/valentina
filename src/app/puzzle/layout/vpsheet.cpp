@@ -143,7 +143,7 @@ void VPSheetSceneData::PrepareForExport()
     m_rotationControls->setVisible(false);
     m_rotationOrigin->setVisible(false);
 
-    VPLayoutPtr layout = m_layout.toStrongRef();
+    VPLayoutPtr const layout = m_layout.toStrongRef();
     if (not layout.isNull())
     {
         m_showGridTmp = layout->LayoutSettings().GetShowGrid();
@@ -152,7 +152,7 @@ void VPSheetSceneData::PrepareForExport()
         m_showTilesTmp = layout->LayoutSettings().GetShowTiles();
         layout->LayoutSettings().SetShowTiles(false);
 
-        VPSheetPtr sheet = layout->GetSheet(m_sheetUuid);
+        VPSheetPtr const sheet = layout->GetSheet(m_sheetUuid);
         m_slectedPiecesTmp = sheet->GetSelectedPieces();
 
         for (const auto &piece : qAsConst(m_slectedPiecesTmp))
@@ -185,7 +185,7 @@ void VPSheetSceneData::CleanAfterExport()
 
     m_rotationControls->setVisible(true);
 
-    VPLayoutPtr layout = m_layout.toStrongRef();
+    VPLayoutPtr const layout = m_layout.toStrongRef();
     if (not layout.isNull())
     {
         layout->LayoutSettings().SetShowGrid(m_showGridTmp);
@@ -544,7 +544,7 @@ void VPSheet::ValidateSuperpositionOfPieces() const
             QVector<QPointF> path2;
             CastTo(p->GetMappedExternalContourPoints(), path2);
 
-            bool superposition = VPPiece::PathsSuperposition(path1, path2);
+            bool const superposition = VPPiece::PathsSuperposition(path1, path2);
             if (superposition)
             {
                 hasSuperposition = superposition;
@@ -556,7 +556,7 @@ void VPSheet::ValidateSuperpositionOfPieces() const
 
         if (oldSuperpositionOfPieces != piece->HasSuperpositionWithPieces())
         {
-            VPLayoutPtr layout = GetLayout();
+            VPLayoutPtr const layout = GetLayout();
             if (not layout.isNull())
             {
                 emit layout->PiecePositionValidityChanged(piece);
@@ -574,15 +574,26 @@ void VPSheet::ValidatePieceOutOfBound(const VPPiecePtr &piece) const
     }
 
     const bool oldOutOfBound = piece->OutOfBound();
+    QRectF const sheetRect = GetMarginsRect();
 
-    QRectF pieceRect = piece->MappedDetailBoundingRect();
-    QRectF sheetRect = GetMarginsRect();
-
-    piece->SetOutOfBound(not sheetRect.contains(pieceRect));
+    VPLayoutPtr const layout = GetLayout();
+    if (not layout.isNull() && layout->LayoutSettings().IsCutOnFold() && not piece->IsShowFullPiece() &&
+        !piece->GetSeamMirrorLine().isNull())
+    {
+        QLineF const foldLine = sheetRect.width() >= sheetRect.height()
+                                    ? QLineF(sheetRect.topLeft(), sheetRect.topRight())
+                                    : QLineF(sheetRect.topRight(), sheetRect.bottomRight());
+        piece->SetOutOfBound(not VGObject::IsLineSegmentOnLineSegment(
+            foldLine, piece->GetMappedSeamAllowanceMirrorLine(), MmToPixel(0.5)));
+    }
+    else
+    {
+        QRectF const pieceRect = piece->MappedDetailBoundingRect();
+        piece->SetOutOfBound(not sheetRect.contains(pieceRect));
+    }
 
     if (oldOutOfBound != piece->OutOfBound())
     {
-        VPLayoutPtr layout = GetLayout();
         if (not layout.isNull())
         {
             emit layout->PiecePositionValidityChanged(piece);
@@ -593,7 +604,7 @@ void VPSheet::ValidatePieceOutOfBound(const VPPiecePtr &piece) const
 //---------------------------------------------------------------------------------------------------------------------
 void VPSheet::ValidatePiecesOutOfBound() const
 {
-    QList<VPPiecePtr> pieces = GetPieces();
+    QList<VPPiecePtr> const pieces = GetPieces();
     for (const auto &piece : pieces)
     {
         ValidatePieceOutOfBound(piece);

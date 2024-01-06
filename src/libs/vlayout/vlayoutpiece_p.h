@@ -115,11 +115,21 @@ public:
     qreal m_xScale{1.0}; // NOLINT(misc-non-private-member-variables-in-classes)
     qreal m_yScale{1.0}; // NOLINT(misc-non-private-member-variables-in-classes)
 
+    QLineF m_seamMirrorLine{};          // NOLINT(misc-non-private-member-variables-in-classes)
+    QLineF m_seamAllowanceMirrorLine{}; // NOLINT(misc-non-private-member-variables-in-classes)
+
+    qreal m_foldLineHeight{0};   // NOLINT(misc-non-private-member-variables-in-classes)
+    qreal m_foldLineWidth{0};    // NOLINT(misc-non-private-member-variables-in-classes)
+    qreal m_foldLineCenter{0.5}; // NOLINT(misc-non-private-member-variables-in-classes)
+
+    QFont m_foldLineOutlineFont{};     // NOLINT (misc-non-private-member-variables-in-classes)
+    QString m_foldLineSvgFontFamily{}; // NOLINT (misc-non-private-member-variables-in-classes)
+
 private:
     Q_DISABLE_ASSIGN_MOVE(VLayoutPieceData) // NOLINT
 
     static constexpr quint32 streamHeader{0x80D7D009}; // CRC-32Q string "VLayoutPieceData"
-    static constexpr quint16 classVersion{6};
+    static constexpr quint16 classVersion{7};
 };
 
 QT_WARNING_POP
@@ -157,6 +167,13 @@ inline auto operator<<(QDataStream &dataStream, const VLayoutPieceData &piece) -
     dataStream << piece.m_yScale;
     dataStream << piece.m_grainline;
     dataStream << piece.m_horizontallyFlipped;
+    dataStream << piece.m_seamMirrorLine;
+    dataStream << piece.m_seamAllowanceMirrorLine;
+    dataStream << piece.m_foldLineHeight;
+    dataStream << piece.m_foldLineWidth;
+    dataStream << piece.m_foldLineCenter;
+    dataStream << piece.m_foldLineOutlineFont;
+    dataStream << piece.m_foldLineSvgFontFamily;
 
     return dataStream;
 }
@@ -273,6 +290,17 @@ inline auto operator>>(QDataStream &dataStream, VLayoutPieceData &piece) -> QDat
     if (actualClassVersion >= 6)
     {
         dataStream >> piece.m_horizontallyFlipped;
+    }
+
+    if (actualClassVersion >= 7)
+    {
+        dataStream >> piece.m_seamMirrorLine;
+        dataStream >> piece.m_seamAllowanceMirrorLine;
+        dataStream >> piece.m_foldLineHeight;
+        dataStream >> piece.m_foldLineWidth;
+        dataStream >> piece.m_foldLineCenter;
+        dataStream >> piece.m_foldLineOutlineFont;
+        dataStream >> piece.m_foldLineSvgFontFamily;
     }
 
     return dataStream;

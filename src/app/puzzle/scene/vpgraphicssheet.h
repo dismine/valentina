@@ -29,6 +29,7 @@
 #ifndef VPGRAPHICSSHEET_H
 #define VPGRAPHICSSHEET_H
 
+#include <QCoreApplication>
 #include <QGraphicsItem>
 #include <QPainter>
 
@@ -41,6 +42,8 @@ class VPLayout;
 
 class VPGraphicsSheet : public QGraphicsItem
 {
+    Q_DECLARE_TR_FUNCTIONS(VPGraphicsSheet) // NOLINT
+
 public:
     explicit VPGraphicsSheet(const VPLayoutPtr &layout, QGraphicsItem *parent = nullptr);
     ~VPGraphicsSheet() override = default;
@@ -65,6 +68,8 @@ public:
 
     void RefreshBoundingRect();
 
+    static auto FoldText() -> QString;
+
 private:
     // cppcheck-suppress unknownMacro
     Q_DISABLE_COPY_MOVE(VPGraphicsSheet) // NOLINT
@@ -73,6 +78,16 @@ private:
 
     bool m_showMargin{true};
     bool m_showBorder{true};
+
+    void PaintVerticalFold(QPainter *painter, const QRectF &sheetRect) const;
+    void PaintHorizontalFold(QPainter *painter, const QRectF &sheetRect) const;
+
+    void PaintMargins(QPainter *painter) const;
+    void PaintBorder(QPainter *painter) const;
+    void PaintFold(QPainter *painter) const;
+    void PaintGrid(QPainter *painter) const;
+
+    auto FoldField(const QRectF &sheetRect) const -> QRectF;
 };
 
 #endif // VPGRAPHICSSHEET_H

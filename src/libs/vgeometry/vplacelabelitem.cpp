@@ -196,6 +196,18 @@ void VPlaceLabelItem::SetLabelType(PlaceLabelType type)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+auto VPlaceLabelItem::IsNotMirrored() const -> bool
+{
+    return d->notMirrored;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VPlaceLabelItem::SetNotMirrored(bool value)
+{
+    d->notMirrored = value;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 auto VPlaceLabelItem::RotationMatrix() const -> QTransform
 {
     QTransform t;

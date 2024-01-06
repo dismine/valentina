@@ -39,8 +39,8 @@ public:
     VLayoutPlaceLabel() = default;
     explicit VLayoutPlaceLabel(const VPlaceLabelItem &item);
 
-    friend auto operator<<(QDataStream& dataStream, const VLayoutPlaceLabel& data) -> QDataStream&;
-    friend auto operator>>(QDataStream& dataStream, VLayoutPlaceLabel& data) -> QDataStream&;
+    friend auto operator<<(QDataStream &dataStream, const VLayoutPlaceLabel &data) -> QDataStream &;
+    friend auto operator>>(QDataStream &dataStream, VLayoutPlaceLabel &data) -> QDataStream &;
 
     auto Center() const -> QPointF;
     void SetCenter(QPointF newCenter);
@@ -54,17 +54,21 @@ public:
     auto Box() const -> const QRectF &;
     void SetBox(const QRectF &newBox);
 
+    auto IsNotMirrored() const -> bool;
+    void SetNotMirrored(bool newNotMirrored);
+
 private:
     static constexpr quint32 streamHeader = 0xB282E284; // CRC-32Q string "VLayoutPlaceLabel"
-    static constexpr quint16 classVersion = 2;
+    static constexpr quint16 classVersion = 3;
 
-    QPointF        m_center{};
+    QPointF m_center{};
     PlaceLabelType m_type{PlaceLabelType::Button};
-    QTransform     m_rotationMatrix{};
-    QRectF         m_box{};
+    QTransform m_rotationMatrix{};
+    QRectF m_box{};
+    bool m_notMirrored{false};
 };
 
-Q_DECLARE_METATYPE(VLayoutPlaceLabel) // NOLINT
+Q_DECLARE_METATYPE(VLayoutPlaceLabel)                  // NOLINT
 Q_DECLARE_TYPEINFO(VLayoutPlaceLabel, Q_MOVABLE_TYPE); // NOLINT
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -113,6 +117,18 @@ inline auto VLayoutPlaceLabel::Box() const -> const QRectF &
 inline void VLayoutPlaceLabel::SetBox(const QRectF &newBox)
 {
     m_box = newBox;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+inline auto VLayoutPlaceLabel::IsNotMirrored() const -> bool
+{
+    return m_notMirrored;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+inline void VLayoutPlaceLabel::SetNotMirrored(bool newNotMirrored)
+{
+    m_notMirrored = newNotMirrored;
 }
 
 #endif // VLAYOUTPLACELABEL_H

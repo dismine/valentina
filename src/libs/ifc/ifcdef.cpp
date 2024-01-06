@@ -149,6 +149,7 @@ const QString AttrCurve2Alias1 = QStringLiteral("curve2Alias1");
 const QString AttrCurve2Alias2 = QStringLiteral("curve2Alias2");
 const QString AttrLayoutVersion = QStringLiteral("version");
 const QString AttrKMVersion = QStringLiteral("version");
+const QString AttrNotMirrored = QStringLiteral("notMirrored");
 
 const QString TypeLineDefault = QStringLiteral("default");
 const QString TypeLineNone = QStringLiteral("none");

@@ -39,6 +39,7 @@
 
 class DialogTool;
 class VNoBrushScalePathItem;
+class VFoldLine;
 
 struct VToolSeamAllowanceInitData : VAbstractToolInitData
 {
@@ -70,9 +71,11 @@ public:
     static const QString TagIPaths;
     static const QString TagPins;
     static const QString TagPlaceLabels;
+    static const QString TagMirrorLine;
 
     static const QString AttrSeamAllowance;
     static const QString AttrHideMainPath;
+    static const QString AttrShowFullPiece;
     static const QString AttrSeamAllowanceBuiltIn;
     static const QString AttrUnited;
     static const QString AttrFont;
@@ -97,6 +100,7 @@ public:
     static void AddPatternPieceData(VAbstractPattern *doc, QDomElement &domElement, const VPiece &piece);
     static void AddPatternInfo(VAbstractPattern *doc, QDomElement &domElement, const VPiece &piece);
     static void AddGrainline(VAbstractPattern *doc, QDomElement &domElement, const VPiece &piece);
+    static void AddMirrorLine(VAbstractPattern *doc, QDomElement &domElement, const VPiece &piece);
 
     void Move(qreal x, qreal y);
     void Update(const VPiece &piece);
@@ -165,6 +169,7 @@ private slots:
     void ToggleHideMainPath(bool checked);
     void ToggleForbidFlipping(bool checked);
     void ToggleForceFlipping(bool checked);
+    void ToggleShowFullPiece(bool checked);
     void ToggleExcludeState(quint32 id);
     void ToggleTurnPointState(quint32 id);
     void ToggleNodePointAngleType(quint32 id, PieceNodeAngle type);
@@ -189,6 +194,10 @@ private:
     VGrainlineItem *m_grainLine;
     QGraphicsPathItem *m_passmarks;
     QGraphicsPathItem *m_placeLabels;
+    QGraphicsPathItem *m_mirrorLine;
+    QGraphicsPathItem *m_foldLineMark;
+    QGraphicsPathItem *m_foldLineLabel;
+    QGraphicsSimpleTextItem *m_foldLineLabelText;
 
     bool m_acceptHoverEvents{true};
 
@@ -217,6 +226,7 @@ private:
     auto SelectedTools() const -> QList<VToolSeamAllowance *>;
 
     auto IsGrainlinePositionValid() const -> bool;
+    auto IsFoldLinePositionValid(const QVector<QPainterPath> &shape, FoldLineType type) const -> bool;
 
     static void AddPointRecords(VAbstractPattern *doc, QDomElement &domElement, const QVector<quint32> &records,
                                 const QString &tag);
@@ -235,6 +245,8 @@ private:
         -> QVector<quint32>;
     static auto DuplicatePlaceLabels(const QVector<quint32> &placeLabels, const VToolSeamAllowanceInitData &initData)
         -> QVector<quint32>;
+
+    void UpdateFoldLine(const VFoldLine &foldLine);
 };
 
 #endif // VTOOLSEAMALLOWANCE_H

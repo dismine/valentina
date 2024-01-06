@@ -81,6 +81,9 @@ public:
     auto GetLabelType() const -> PlaceLabelType;
     void SetLabelType(PlaceLabelType type);
 
+    auto IsNotMirrored() const -> bool;
+    void SetNotMirrored(bool value);
+
     auto RotationMatrix() const -> QTransform;
     auto Box() const -> QRectF;
 

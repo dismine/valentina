@@ -40,6 +40,7 @@
 #include "../vpatterndb/variables/vpiecearea.h"
 #include "../vpatterndb/vpiecenode.h"
 #include "vcontainer.h"
+#include "vgeometrydef.h"
 #include "vpassmark.h"
 #include "vpiece_p.h"
 
@@ -192,6 +193,28 @@ auto VPiece::MainPathPoints(const VContainer *data) const -> QVector<VLayoutPoin
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+auto VPiece::FullMainPathPoints(const VContainer *data) const -> QVector<VLayoutPoint>
+{
+    //    DumpPiece(*this, data, QStringLiteral("input.json.XXXXXX"));  // Uncomment for dumping test data
+
+    VPiecePath mainPath = GetPath();
+    mainPath.SetName(QCoreApplication::translate("VPiece", "Main path of piece %1").arg(GetName()));
+
+    QVector<VLayoutPoint> points = mainPath.PathPoints(data);
+
+    QLineF const mirrorLine = SeamMirrorLine(data);
+    if (!mirrorLine.isNull() && IsShowFullPiece())
+    {
+        points = VAbstractPiece::FullPath(points, mirrorLine);
+    }
+
+    points = CheckLoops(CorrectEquidistantPoints(points)); // A path can contains loops
+
+    //    DumpVector(points, QStringLiteral("output.json.XXXXXX")); // Uncomment for dumping test data
+    return points;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 auto VPiece::UniteMainPathPoints(const VContainer *data) const -> QVector<VLayoutPoint>
 {
     QVector<VLayoutPoint> points = VPiecePath::NodesToPoints(data, GetUnitedPath(data), GetName());
@@ -209,6 +232,21 @@ auto VPiece::MainPathNodePoints(const VContainer *data, bool showExcluded) const
 auto VPiece::SeamAllowancePoints(const VContainer *data) const -> QVector<VLayoutPoint>
 {
     return SeamAllowancePointsWithRotation(data, -1);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+auto VPiece::FullSeamAllowancePoints(const VContainer *data) const -> QVector<VLayoutPoint>
+{
+    QVector<VLayoutPoint> points = SeamAllowancePointsWithRotation(data, -1);
+
+    QLineF const mirrorLine = SeamAllowanceMirrorLine(data);
+    if (!mirrorLine.isNull() && IsShowFullPiece())
+    {
+        points = VAbstractPiece::FullPath(points, mirrorLine);
+        points = CheckLoops(CorrectEquidistantPoints(points)); // A path can contains loops
+    }
+
+    return points;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -284,6 +322,14 @@ auto VPiece::MainPathPath(const VContainer *data) const -> QPainterPath
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+auto VPiece::FullMainPathPath(const VContainer *data) const -> QPainterPath
+{
+    QVector<QPointF> points;
+    CastTo(FullMainPathPoints(data), points);
+    return VPiece::MainPathPath(points);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 auto VPiece::MainPathPath(const QVector<QPointF> &points) -> QPainterPath
 {
     QPainterPath path;
@@ -306,6 +352,12 @@ auto VPiece::MainPathPath(const QVector<QPointF> &points) -> QPainterPath
 auto VPiece::SeamAllowancePath(const VContainer *data) const -> QPainterPath
 {
     return SeamAllowancePath(SeamAllowancePoints(data));
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+auto VPiece::FullSeamAllowancePath(const VContainer *data) const -> QPainterPath
+{
+    return SeamAllowancePath(FullSeamAllowancePoints(data));
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -343,7 +395,22 @@ auto VPiece::PlaceLabelPath(const VContainer *data) const -> QPainterPath
             const auto label = data->GeometricObject<VPlaceLabelItem>(placeLabel);
             if (label->IsVisible())
             {
-                path.addPath(LabelShapePath(VLayoutPlaceLabel(*label)));
+                VLayoutPlaceLabel layoutLabel(*label);
+                path.addPath(LabelShapePath(layoutLabel));
+
+                const QLineF mirrorLine = SeamMirrorLine(data);
+                if (!label->IsNotMirrored() && IsShowFullPiece() && !mirrorLine.isNull())
+                {
+                    PlaceLabelImg shape = VAbstractPiece::PlaceLabelShape(layoutLabel);
+                    const QTransform matrix = VGObject::FlippingMatrix(mirrorLine);
+                    for (auto &points : shape)
+                    {
+                        std::transform(points.begin(), points.end(), points.begin(),
+                                       [matrix](const VLayoutPoint &point) { return MapPoint(point, matrix); });
+                    }
+
+                    path.addPath(LabelShapePath(shape));
+                }
             }
         }
         catch (const VExceptionBadId &e)
@@ -652,6 +719,30 @@ auto VPiece::GetGrainlineGeometry() const -> const VGrainlineData &
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+void VPiece::SetMirrorLineStartPoint(quint32 id)
+{
+    d->m_mirrorLineStartPoint = id;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+auto VPiece::GetMirrorLineStartPoint() const -> quint32
+{
+    return d->m_mirrorLineStartPoint;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VPiece::SetMirrorLineEndPoint(quint32 id)
+{
+    d->m_mirrorLineEndPoint = id;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+auto VPiece::GetMirrorLineEndPoint() const -> quint32
+{
+    return d->m_mirrorLineEndPoint;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 auto VPiece::SeamAllowancePointsWithRotation(const VContainer *data, vsizetype makeFirst) const -> QVector<VLayoutPoint>
 {
     SCASSERT(data != nullptr);
@@ -668,6 +759,9 @@ auto VPiece::SeamAllowancePointsWithRotation(const VContainer *data, vsizetype m
     const QVector<VPieceNode> unitedPath =
         makeFirst > 0 ? RotatePath(GetUnitedPath(data), makeFirst) : GetUnitedPath(data);
 
+    const QLineF mirrorLine = SeamMirrorLine(data);
+    const bool showMirrorLine = !mirrorLine.isNull();
+
     QVector<VSAPoint> pointsEkv;
     for (int i = 0; i < unitedPath.size(); ++i)
     {
@@ -683,7 +777,20 @@ auto VPiece::SeamAllowancePointsWithRotation(const VContainer *data, vsizetype m
             {
                 if (not insertingCSA)
                 {
-                    pointsEkv.append(VPiecePath::PreparePointEkv(node, data));
+                    {
+                        VSAPoint ekvPoint = VPiecePath::PreparePointEkv(node, data);
+                        if (showMirrorLine && VFuzzyComparePoints(ekvPoint, mirrorLine.p1()))
+                        {
+                            ekvPoint.SetSAAfter(0);
+                        }
+
+                        if (showMirrorLine && VFuzzyComparePoints(ekvPoint, mirrorLine.p2()))
+                        {
+                            ekvPoint.SetSABefore(0);
+                        }
+
+                        pointsEkv.append(ekvPoint);
+                    }
 
                     recordIndex = IsCSAStart(records, node.GetId());
                     if (recordIndex != -1 && records.at(recordIndex).includeType == PiecePathIncludeType::AsCustomSA)
@@ -748,6 +855,78 @@ void VPiece::SetGradationLabel(const QString &label)
 auto VPiece::GetGradationLabel() const -> QString
 {
     return d->m_gradationLabel;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+auto VPiece::IsManualFoldHeight() const -> bool
+{
+    return d->m_manualFoldHeight;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VPiece::SetManualFoldHeight(bool value)
+{
+    d->m_manualFoldHeight = value;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+auto VPiece::IsManualFoldWidth() const -> bool
+{
+    return d->m_manualFoldWidth;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VPiece::SetManualFoldWidth(bool value)
+{
+    d->m_manualFoldWidth = value;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+auto VPiece::IsManualFoldCenter() const -> bool
+{
+    return d->m_manualFoldCenter;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VPiece::SetManualFoldCenter(bool value)
+{
+    d->m_manualFoldCenter = value;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+auto VPiece::GetFormulaFoldHeight() const -> QString
+{
+    return d->m_formulaFoldHeight;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VPiece::SetFormulaFoldHeight(const QString &value)
+{
+    d->m_formulaFoldHeight = value;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+auto VPiece::GetFormulaFoldWidth() const -> QString
+{
+    return d->m_formulaFoldWidth;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VPiece::SetFormulaFoldWidth(const QString &value)
+{
+    d->m_formulaFoldWidth = value;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+auto VPiece::GetFormulaFoldCenter() const -> QString
+{
+    return d->m_formulaFoldCenter;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VPiece::SetFormulaFoldCenter(const QString &value)
+{
+    d->m_formulaFoldCenter = value;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -1462,6 +1641,68 @@ auto VPiece::SeamLineArea(const VContainer *data) const -> qreal
     QVector<QPointF> shape;
     CastTo(MainPathPoints(data), shape);
     return Area(shape, data);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+auto VPiece::SeamMirrorLine(const VContainer *data) const -> QLineF
+{
+    Q_UNUSED(data);
+
+    if (d->m_mirrorLineStartPoint == d->m_mirrorLineEndPoint || d->m_mirrorLineStartPoint == NULL_ID ||
+        d->m_mirrorLineEndPoint == NULL_ID)
+    {
+        return {};
+    }
+
+    try
+    {
+        const QSharedPointer<VPointF> startPoint = data->GeometricObject<VPointF>(d->m_mirrorLineStartPoint);
+        const QSharedPointer<VPointF> endPoint = data->GeometricObject<VPointF>(d->m_mirrorLineEndPoint);
+
+        return {startPoint->toQPointF(), endPoint->toQPointF()};
+    }
+    catch (const VExceptionBadId &)
+    {
+        return {};
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+auto VPiece::SeamAllowanceMirrorLine(const VContainer *data) const -> QLineF
+{
+    QLineF seamMirrorLine = SeamMirrorLine(data);
+
+    if (!IsSeamAllowance() || (IsSeamAllowance() && IsSeamAllowanceBuiltIn()))
+    {
+        return seamMirrorLine;
+    }
+
+    QRectF rec = QRectF(0, 0, INT_MAX, INT_MAX);
+    rec.translate(-INT_MAX / 2.0, -INT_MAX / 2.0);
+
+    QLineF axis =
+        QLineF(seamMirrorLine.center(), VGObject::BuildRay(seamMirrorLine.center(), seamMirrorLine.angle() + 180, rec));
+
+    QVector<QPointF> points;
+    CastTo(SeamAllowancePoints(data), points);
+
+    QVector<QPointF> intersections = VAbstractCurve::CurveIntersectLine(points, axis);
+    if (intersections.isEmpty())
+    {
+        return {};
+    }
+
+    const QPointF startPoint = intersections.constFirst();
+
+    std::reverse(points.begin(), points.end());
+    axis = QLineF(seamMirrorLine.center(), VGObject::BuildRay(seamMirrorLine.center(), seamMirrorLine.angle(), rec));
+    intersections = VAbstractCurve::CurveIntersectLine(points, axis);
+    if (intersections.isEmpty())
+    {
+        return {};
+    }
+
+    return {startPoint, intersections.constFirst()};
 }
 
 //---------------------------------------------------------------------------------------------------------------------

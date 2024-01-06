@@ -54,6 +54,7 @@ public:
     qreal aValue{0};          // NOLINT(misc-non-private-member-variables-in-classes)
     qreal correctionAngle{0}; // NOLINT(misc-non-private-member-variables-in-classes)
     qreal isVisible{1};       // NOLINT(misc-non-private-member-variables-in-classes)
+    bool notMirrored{false};  // NOLINT(misc-non-private-member-variables-in-classes)
 
 private:
     Q_DISABLE_ASSIGN_MOVE(VPlaceLabelItemData) // NOLINT

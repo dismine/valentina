@@ -640,22 +640,6 @@ auto AngleBySecondRightAngle(QVector<VRawSAPoint> points, QPointF p1, QPointF p2
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-auto SingleParallelPoint(const QPointF &p1, const QPointF &p2, qreal angle, qreal width) -> QPointF
-{
-    QLineF pLine(p1, p2);
-    pLine.setAngle(pLine.angle() + angle);
-    pLine.setLength(width);
-    return pLine.p2();
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-auto SimpleParallelLine(const QPointF &p1, const QPointF &p2, qreal width) -> QLineF
-{
-    const QLineF paralel = QLineF(SingleParallelPoint(p1, p2, 90, width), SingleParallelPoint(p2, p1, -90, width));
-    return paralel;
-}
-
-//---------------------------------------------------------------------------------------------------------------------
 auto BisectorLine(const QPointF &p1, const QPointF &p2, const QPointF &p3) -> QLineF
 {
     QLineF line1(p2, p1);
@@ -971,7 +955,7 @@ void VAbstractPiece::SetForbidFlipping(bool value)
 
     if (value)
     {
-        SetForceFlipping(not value);
+        d->m_forceFlipping = not value;
     }
 }
 
@@ -988,7 +972,7 @@ void VAbstractPiece::SetForceFlipping(bool value)
 
     if (value)
     {
-        SetForbidFlipping(not value);
+        d->m_forbidFlipping = not value;
     }
 }
 
@@ -1050,6 +1034,18 @@ auto VAbstractPiece::IsSewLineOnDrawing() const -> bool
 void VAbstractPiece::SetSewLineOnDrawing(bool value)
 {
     d->m_onDrawing = value;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+auto VAbstractPiece::IsShowFullPiece() const -> bool
+{
+    return d->m_showFullPiece;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VAbstractPiece::SetShowFullPiece(bool value)
+{
+    d->m_showFullPiece = value;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -1522,6 +1518,78 @@ void VAbstractPiece::SetPriority(uint value)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+auto VAbstractPiece::GetFoldLineType() const -> FoldLineType
+{
+    return d->m_foldLineType;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VAbstractPiece::SetFoldLineType(FoldLineType lineType)
+{
+    d->m_foldLineType = lineType;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+auto VAbstractPiece::GetFoldLineSvgFontSize() const -> unsigned int
+{
+    return d->m_foldLineSvgFontSize;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VAbstractPiece::SetFoldLineSvgFontSize(unsigned int size)
+{
+    d->m_foldLineSvgFontSize = size;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+auto VAbstractPiece::IsFoldLineLabelFontItalic() const -> bool
+{
+    return d->m_foldLineLabelFontItalic;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VAbstractPiece::SetFoldLineLabelFontItalic(bool value)
+{
+    d->m_foldLineLabelFontItalic = value;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+auto VAbstractPiece::IsFoldLineLabelFontBold() const -> bool
+{
+    return d->m_foldLineLabelFontBold;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VAbstractPiece::SetFoldLineLabelFontBold(bool value)
+{
+    d->m_foldLineLabelFontBold = value;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+auto VAbstractPiece::GetFoldLineLabel() const -> QString
+{
+    return d->m_foldLineLabel;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VAbstractPiece::SetFoldLineLabel(const QString &value)
+{
+    d->m_foldLineLabel = value;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+auto VAbstractPiece::GetFoldLineLabelAlignment() const -> int
+{
+    return d->m_foldLineLabelAlignment;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VAbstractPiece::SetFoldLineLabelAlignment(int alignment)
+{
+    d->m_foldLineLabelAlignment = alignment;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 auto VAbstractPiece::GetUUID() const -> QUuid
 {
     return d->m_uuid;
@@ -1953,6 +2021,7 @@ auto VAbstractPiece::PlaceLabelShape(const VLayoutPlaceLabel &label) -> PlaceLab
         }
 
         QVector<VLayoutPoint> shape3;
+        shape3.reserve(points.size());
         for (int i = 0; i < points.size(); ++i)
         {
             bool turnPoint = false;
@@ -1979,6 +2048,7 @@ auto VAbstractPiece::PlaceLabelShape(const VLayoutPlaceLabel &label) -> PlaceLab
         }
 
         QVector<VLayoutPoint> circle;
+        circle.reserve(points.size());
         for (int i = 0; i < points.size(); ++i)
         {
             bool turnPoint = false;

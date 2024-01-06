@@ -35,6 +35,8 @@
 #include "../vlayout/vlayoutpiecepath.h"
 #include "../vlayout/vtextmanager.h"
 #include "../vmisc/projectversion.h"
+#include "def.h"
+#include "qnumeric.h"
 #include "vplayoutliterals.h"
 
 namespace
@@ -174,6 +176,8 @@ void VPLayoutFileWriter::WriteLayoutProperties(const VPLayoutPtr &layout)
     SetAttribute(ML::AttrPiecesGap, layout->LayoutSettings().GetPiecesGap());
     SetAttribute(ML::AttrFollowGrainline, layout->LayoutSettings().GetFollowGrainline());
     SetAttribute(ML::AttrBoundaryTogetherWithNotches, layout->LayoutSettings().IsBoundaryTogetherWithNotches());
+    SetAttributeOrRemoveIf<bool>(ML::AttrCutOnFold, layout->LayoutSettings().IsCutOnFold(),
+                                 [](bool cut) noexcept { return not cut; });
     writeEndElement(); // control
 
     WriteTiles(layout);
@@ -284,6 +288,8 @@ void VPLayoutFileWriter::WritePiece(const VPPiecePtr &piece)
                                   [](qreal ys) noexcept { return VFuzzyComparePossibleNulls(ys, 1.0); });
     SetAttributeOrRemoveIf<qreal>(ML::AttrZValue, piece->ZValue(),
                                   [](qreal z) noexcept { return VFuzzyComparePossibleNulls(z, 1.0); });
+    SetAttributeOrRemoveIf<bool>(ML::AttrShowFullPiece, piece->IsShowFullPiece(),
+                                 [](bool show) noexcept { return show; });
 
     writeStartElement(ML::TagSeamLine);
     QVector<VLayoutPoint> contourPoints = piece->GetContourPoints();
@@ -340,6 +346,8 @@ void VPLayoutFileWriter::WritePiece(const VPPiecePtr &piece)
         writeStartElement(ML::TagInternalPath);
         SetAttribute(ML::AttrCut, path.IsCutPath());
         SetAttribute(ML::AttrPenStyle, PenStyleToLineStyle(path.PenStyle()));
+        SetAttributeOrRemoveIf<bool>(ML::AttrNotMirrored, path.IsNotMirrored(),
+                                     [](bool mirrored) noexcept { return mirrored; });
 
         QVector<VLayoutPoint> points = path.Points();
         for (auto &point : points)
@@ -360,6 +368,8 @@ void VPLayoutFileWriter::WritePiece(const VPPiecePtr &piece)
         SetAttribute(ML::AttrType, static_cast<int>(label.Type()));
         SetAttribute(ML::AttrCenter, PointToString(label.Center()));
         SetAttribute(ML::AttrBox, RectToString(label.Box()));
+        SetAttributeOrRemoveIf<bool>(ML::AttrNotMirrored, label.IsNotMirrored(),
+                                     [](bool mirrored) noexcept { return mirrored; });
         writeEndElement();
     }
     writeEndElement();
@@ -368,6 +378,51 @@ void VPLayoutFileWriter::WritePiece(const VPPiecePtr &piece)
     WriteLabel(piece->GetPieceLabelRect(), piece->GetPieceLabelData(), ML::TagPieceLabel);
     WriteLabel(piece->GetPatternLabelRect(), piece->GetPatternLabelData(), ML::TagPatternLabel);
     writeEndElement();
+
+    QLineF const seamMirrorLine = piece->GetSeamMirrorLine();
+    QLineF const seamAllowenceMirrorLine = piece->GetSeamAllowanceMirrorLine();
+    if (!seamMirrorLine.isNull() || !seamAllowenceMirrorLine.isNull())
+    {
+        writeStartElement(ML::TagMirrorLine);
+
+        SetAttribute(ML::AttrFoldLineType, FoldLineTypeToString(piece->GetFoldLineType()));
+        SetAttributeOrRemoveIf<qreal>(ML::AttrFoldLineHeight, piece->GetFoldLineHeight(),
+                                      [](qreal height) noexcept { return qFuzzyIsNull(height); });
+        SetAttributeOrRemoveIf<qreal>(ML::AttrFoldLineWidth, piece->GetFoldLineWidth(),
+                                      [](qreal width) noexcept { return qFuzzyIsNull(width); });
+        SetAttributeOrRemoveIf<qreal>(ML::AttrFoldLineCenter, piece->GetFoldLineCenterPosition(),
+                                      [](qreal center) noexcept { return VFuzzyComparePossibleNulls(center, 0.5); });
+        SetAttributeOrRemoveIf<bool>(ML::AttrItalic, piece->IsFoldLineLabelFontItalic(),
+                                     [](bool italic) noexcept { return not italic; });
+        SetAttributeOrRemoveIf<bool>(ML::AttrBold, piece->IsFoldLineLabelFontBold(),
+                                     [](bool bold) noexcept { return not bold; });
+        SetAttributeOrRemoveIf<QString>(ML::AttrFoldLineLabel, piece->GetFoldLineLabel(),
+                                        [](const QString &label) noexcept { return label.isEmpty(); });
+        SetAttributeOrRemoveIf<int>(ML::AttrAlignment, piece->GetFoldLineLabelAlignment(),
+                                    [](int alignment) noexcept { return alignment == Qt::AlignHCenter; });
+        SetAttributeOrRemoveIf<QString>(ML::AttrFont, piece->GetFoldLineOutlineFont().toString(),
+                                        [piece](const QString &) { return piece->GetFoldLineLabel().isEmpty(); });
+        SetAttributeOrRemoveIf<QString>(
+            ML::AttrSVGFont,
+            QStringLiteral("%1,%2").arg(piece->GetFoldLineSVGFontFamily()).arg(piece->GetFoldLineSvgFontSize()),
+            [piece](const QString &) { return piece->GetFoldLineLabel().isEmpty(); });
+
+        if (!seamMirrorLine.isNull())
+        {
+            writeStartElement(ML::TagSeamLine);
+            writeCharacters(LineToString(seamMirrorLine));
+            writeEndElement();
+        }
+
+        if (!seamAllowenceMirrorLine.isNull())
+        {
+            writeStartElement(ML::TagSeamAllowance);
+            writeCharacters(LineToString(seamAllowenceMirrorLine));
+            writeEndElement();
+        }
+
+        writeEndElement();
+    }
 
     writeEndElement();
 }
@@ -389,7 +444,7 @@ void VPLayoutFileWriter::WriteLabelLines(const VTextManager &tm)
 {
     writeStartElement(ML::TagLines);
     SetAttribute(ML::AttrFont, tm.GetFont().toString());
-    SetAttribute(ML::AttrSVGFont, QStringLiteral("%1,%2").arg(tm.GetSVGFontFamily(), tm.GetSVGFontPointSize()));
+    SetAttribute(ML::AttrSVGFont, QStringLiteral("%1,%2").arg(tm.GetSVGFontFamily()).arg(tm.GetSVGFontPointSize()));
 
     for (int i = 0; i < tm.GetSourceLinesCount(); ++i)
     {

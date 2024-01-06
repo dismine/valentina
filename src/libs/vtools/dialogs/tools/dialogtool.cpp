@@ -592,7 +592,7 @@ void DialogTool::setCurrentCurveId(QComboBox *box, const quint32 &value) const
  * @param box combobox
  * @return id or 0 if combobox is empty
  */
-auto DialogTool::getCurrentObjectId(QComboBox *box) const -> quint32
+auto DialogTool::getCurrentObjectId(QComboBox *box) -> quint32
 {
     SCASSERT(box != nullptr)
     qint32 index = box->currentIndex();

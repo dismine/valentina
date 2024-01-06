@@ -127,7 +127,7 @@
             <string>Move on top</string>
            </property>
            <property name="text">
-            <string notr="true"></string>
+            <string notr="true"/>
            </property>
            <property name="icon">
             <iconset theme="go-top">
@@ -144,7 +144,7 @@
             <string>Move up</string>
            </property>
            <property name="text">
-            <string notr="true"></string>
+            <string notr="true"/>
            </property>
            <property name="icon">
             <iconset theme="go-up">
@@ -161,7 +161,7 @@
             <string>Move down</string>
            </property>
            <property name="text">
-            <string notr="true"></string>
+            <string notr="true"/>
            </property>
            <property name="icon">
             <iconset theme="go-down">
@@ -178,7 +178,7 @@
             <string>Move on bottom</string>
            </property>
            <property name="text">
-            <string notr="true"></string>
+            <string notr="true"/>
            </property>
            <property name="icon">
             <iconset theme="go-bottom">
@@ -208,6 +208,13 @@
          </property>
          <property name="text">
           <string>Cut on fabric</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QCheckBox" name="checkBoxNotMirrored">
+         <property name="text">
+          <string>Not Mirrored</string>
          </property>
         </widget>
        </item>
@@ -308,7 +315,7 @@
             <string>Formula wizard</string>
            </property>
            <property name="text">
-            <string notr="true"></string>
+            <string notr="true"/>
            </property>
            <property name="icon">
             <iconset resource="../../../../vmisc/share/resources/icon.qrc">
@@ -404,8 +411,7 @@
             <string notr="true"/>
            </property>
            <property name="icon">
-            <iconset theme="go-down">
-             <normaloff>.</normaloff>.</iconset>
+            <iconset theme="go-down"/>
            </property>
            <property name="iconSize">
             <size>
@@ -544,7 +550,7 @@
                <string>Formula wizard</string>
               </property>
               <property name="text">
-               <string notr="true"></string>
+               <string notr="true"/>
               </property>
               <property name="icon">
                <iconset resource="../../../../vmisc/share/resources/icon.qrc">
@@ -640,8 +646,7 @@
                <string notr="true"/>
               </property>
               <property name="icon">
-               <iconset theme="go-down">
-                <normaloff>.</normaloff>.</iconset>
+               <iconset theme="go-down"/>
               </property>
               <property name="iconSize">
                <size>
@@ -743,7 +748,7 @@
                <string>Formula wizard</string>
               </property>
               <property name="text">
-               <string notr="true"></string>
+               <string notr="true"/>
               </property>
               <property name="icon">
                <iconset resource="../../../../vmisc/share/resources/icon.qrc">
@@ -839,8 +844,7 @@
                <string notr="true"/>
               </property>
               <property name="icon">
-               <iconset theme="go-down">
-                <normaloff>.</normaloff>.</iconset>
+               <iconset theme="go-down"/>
               </property>
               <property name="iconSize">
                <size>
@@ -2003,7 +2007,7 @@
             <string>Formula wizard</string>
            </property>
            <property name="text">
-            <string notr="true"></string>
+            <string notr="true"/>
            </property>
            <property name="icon">
             <iconset resource="../../../../vmisc/share/resources/icon.qrc">
@@ -2102,8 +2106,7 @@
             <string notr="true"/>
            </property>
            <property name="icon">
-            <iconset theme="go-down">
-             <normaloff>.</normaloff>.</iconset>
+            <iconset theme="go-down"/>
            </property>
            <property name="iconSize">
             <size>

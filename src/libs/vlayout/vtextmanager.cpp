@@ -44,16 +44,16 @@
 #include "../vmisc/svgfont/vsvgfontengine.h"
 #include "../vmisc/vabstractvalapplication.h"
 #include "../vmisc/vcommonsettings.h"
+#include "../vmisc/vtranslator.h"
+#include "../vpatterndb/calculator.h"
 #include "../vpatterndb/floatItemData/vpiecelabeldata.h"
+#include "../vpatterndb/variables/vmeasurement.h"
+#include "../vpatterndb/vcontainer.h"
+#include "vtextmanager.h"
 
 #if QT_VERSION < QT_VERSION_CHECK(5, 9, 0)
 #include "../vmisc/vdatastreamenum.h"
 #endif
-
-#include "../vpatterndb/calculator.h"
-#include "../vpatterndb/variables/vmeasurement.h"
-#include "../vpatterndb/vcontainer.h"
-#include "vtextmanager.h"
 
 using namespace Qt::Literals::StringLiterals;
 
@@ -471,7 +471,7 @@ auto PreparePlaceholders(const VAbstractPattern *doc, const VContainer *data, bo
     QMap<QString, QString> placeholders;
 
     // Pattern tags
-    QLocale locale(VAbstractApplication::VApp()->Settings()->GetLocale());
+    QLocale const locale(VAbstractApplication::VApp()->Settings()->GetLocale());
 
     const QString date = locale.toString(QDate::currentDate(), doc->GetLabelDateFormat());
     placeholders.insert(pl_date, date);
@@ -516,7 +516,7 @@ auto PreparePlaceholders(const VAbstractPattern *doc, const VContainer *data, bo
     placeholders.insert(pl_pQuantity, QString());
     placeholders.insert(pl_wOnFold, QString());
 
-    QSharedPointer<QTranslator> phTr = VAbstractValApplication::VApp()->GetPlaceholderTranslator();
+    QSharedPointer<VTranslator> const phTr = VAbstractApplication::VApp()->GetPlaceholderTranslator();
 
     placeholders.insert(pl_mFabric, phTr->translate("Placeholder", "Fabric"));
     placeholders.insert(pl_mLining, phTr->translate("Placeholder", "Lining"));
@@ -541,7 +541,7 @@ void InitPiecePlaceholders(QMap<QString, QString> &placeholders, const QString &
 
     if (data.IsOnFold())
     {
-        QSharedPointer<QTranslator> phTr = VAbstractValApplication::VApp()->GetPlaceholderTranslator();
+        QSharedPointer<VTranslator> phTr = VAbstractApplication::VApp()->GetPlaceholderTranslator();
         placeholders[pl_wOnFold] = phTr->translate("Placeholder", "on fold");
     }
 }

@@ -100,7 +100,7 @@ auto GetWeightScore(SVGFontWeight desiredWeight, SVGFontWeight fontWeight) -> in
 //---------------------------------------------------------------------------------------------------------------------
 void VSvgFontDatabase::PopulateFontDatabase(const QString &path)
 {
-    QMutexLocker locker(svgFontDatabaseMutex());
+    QMutexLocker const locker(svgFontDatabaseMutex());
 
     m_fontCache.clear();
     m_fontEngineCache.clear();
@@ -108,7 +108,7 @@ void VSvgFontDatabase::PopulateFontDatabase(const QString &path)
     if (path.isEmpty())
     {
         VCommonSettings *settings = VAbstractApplication::VApp()->Settings();
-        QStringList directories = {SystemSVGFontPath(), settings->GetPathSVGFonts()};
+        QStringList const directories = {SystemSVGFontPath(), settings->GetPathSVGFonts()};
 
         m_fontDB.clear();
         m_populated = false;
@@ -120,7 +120,7 @@ void VSvgFontDatabase::PopulateFontDatabase(const QString &path)
     }
     else
     {
-        int priority = (path == SystemSVGFontPath() ? 0 : 1);
+        int const priority = (path == SystemSVGFontPath() ? 0 : 1);
         Invalidate(path);
         ParseDirectory(path, priority);
     }

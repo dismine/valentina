@@ -36,7 +36,7 @@
        <item>
         <widget class="QTabWidget" name="tabWidget">
          <property name="currentIndex">
-          <number>1</number>
+          <number>2</number>
          </property>
          <widget class="QWidget" name="tabPieceLabelData">
           <attribute name="title">
@@ -548,7 +548,7 @@
                     <string>Formula wizard</string>
                    </property>
                    <property name="text">
-                    <string notr="true"></string>
+                    <string notr="true"/>
                    </property>
                    <property name="icon">
                     <iconset resource="../../../../../vmisc/share/resources/icon.qrc">
@@ -737,7 +737,7 @@
                     <string>Formula wizard</string>
                    </property>
                    <property name="text">
-                    <string notr="true"></string>
+                    <string notr="true"/>
                    </property>
                    <property name="icon">
                     <iconset resource="../../../../../vmisc/share/resources/icon.qrc">
@@ -984,7 +984,7 @@
                     <string>Formula wizard</string>
                    </property>
                    <property name="text">
-                    <string notr="true"></string>
+                    <string notr="true"/>
                    </property>
                    <property name="icon">
                     <iconset resource="../../../../../vmisc/share/resources/icon.qrc">
@@ -1226,7 +1226,7 @@
                     <string>Formula wizard</string>
                    </property>
                    <property name="text">
-                    <string notr="true"></string>
+                    <string notr="true"/>
                    </property>
                    <property name="icon">
                     <iconset resource="../../../../../vmisc/share/resources/icon.qrc">
@@ -1415,7 +1415,7 @@
                     <string>Formula wizard</string>
                    </property>
                    <property name="text">
-                    <string notr="true"></string>
+                    <string notr="true"/>
                    </property>
                    <property name="icon">
                     <iconset resource="../../../../../vmisc/share/resources/icon.qrc">
@@ -1662,7 +1662,7 @@
                     <string>Formula wizard</string>
                    </property>
                    <property name="text">
-                    <string notr="true"></string>
+                    <string notr="true"/>
                    </property>
                    <property name="icon">
                     <iconset resource="../../../../../vmisc/share/resources/icon.qrc">

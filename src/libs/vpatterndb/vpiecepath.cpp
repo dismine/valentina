@@ -160,20 +160,6 @@ auto IndexOfNode(const QVector<VPieceNode> &list, quint32 id) -> int
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-auto MakePainterPath(const QVector<QPointF> &points) -> QPainterPath
-{
-    QPainterPath path;
-
-    if (not points.isEmpty())
-    {
-        path.addPolygon(QPolygonF(points));
-        path.setFillRule(Qt::WindingFill);
-    }
-
-    return path;
-}
-
-//---------------------------------------------------------------------------------------------------------------------
 template <class T> auto FindTipDirection(const QVector<T> &points) -> qreal
 {
     if (points.size() <= 1)
@@ -408,6 +394,18 @@ void VPiecePath::SetLastToCuttingContour(bool value)
 auto VPiecePath::IsLastToCuttingContour() const -> bool
 {
     return d->m_lastToCuttingContour;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VPiecePath::SetNotMirrored(bool value)
+{
+    d->m_notMirrored = value;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+auto VPiecePath::IsNotMirrored() const -> bool
+{
+    return d->m_notMirrored;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -1314,4 +1312,18 @@ auto VPiecePath::NodesToPoints(const VContainer *data, const QVector<VPieceNode>
     }
 
     return points;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+auto VPiecePath::MakePainterPath(const QVector<QPointF> &points) -> QPainterPath
+{
+    QPainterPath path;
+
+    if (not points.isEmpty())
+    {
+        path.addPolygon(QPolygonF(points));
+        path.setFillRule(Qt::WindingFill);
+    }
+
+    return path;
 }

@@ -27,25 +27,27 @@
  *************************************************************************/
 
 #include "dialogeditlabel.h"
-#include "../vmisc/vabstractapplication.h"
-#include "ui_dialogeditlabel.h"
-#include "vabstractvalapplication.h"
-#include "vvalentinasettings.h"
-#if QT_VERSION < QT_VERSION_CHECK(5, 7, 0)
-#include "../vmisc/backport/qoverload.h"
-#endif // QT_VERSION < QT_VERSION_CHECK(5, 7, 0)
 #include "../ifc/exception/vexception.h"
 #include "../ifc/xml/vabstractpattern.h"
 #include "../ifc/xml/vlabeltemplateconverter.h"
 #include "../tools/dialogtool.h"
 #include "../vformat/vlabeltemplate.h"
 #include "../vmisc/compatibility.h"
+#include "../vmisc/vabstractapplication.h"
+#include "../vmisc/vtranslator.h"
 #include "../vpatterndb/calculator.h"
 #include "../vpatterndb/floatItemData/vpiecelabeldata.h"
 #include "../vpatterndb/variables/vmeasurement.h"
 #include "../vpatterndb/variables/vpiecearea.h"
 #include "../vpatterndb/vcontainer.h"
 #include "../vpatterndb/vpiece.h"
+#include "ui_dialogeditlabel.h"
+#include "vabstractvalapplication.h"
+#include "vvalentinasettings.h"
+
+#if QT_VERSION < QT_VERSION_CHECK(5, 7, 0)
+#include "../vmisc/backport/qoverload.h"
+#endif // QT_VERSION < QT_VERSION_CHECK(5, 7, 0)
 
 #include <QDate>
 #include <QDir>
@@ -701,7 +703,7 @@ void DialogEditLabel::InitPlaceholders()
         }
     }
 
-    QSharedPointer<QTranslator> phTr = VAbstractValApplication::VApp()->GetPlaceholderTranslator();
+    QSharedPointer<VTranslator> phTr = VAbstractApplication::VApp()->GetPlaceholderTranslator();
 
     // Piece tags
     m_placeholders.insert(pl_pLetter, qMakePair(tr("Piece letter"), QString()));
@@ -828,7 +830,7 @@ void DialogEditLabel::SetPiece(const VPiece &piece)
     m_placeholders[pl_pQuantity].second = QString::number(pieceData.GetQuantity());
     if (pieceData.IsOnFold())
     {
-        QSharedPointer<QTranslator> phTr = VAbstractValApplication::VApp()->GetPlaceholderTranslator();
+        QSharedPointer<VTranslator> phTr = VAbstractApplication::VApp()->GetPlaceholderTranslator();
         m_placeholders[pl_wOnFold].second = phTr->translate("Placeholder", "on fold");
     }
 
