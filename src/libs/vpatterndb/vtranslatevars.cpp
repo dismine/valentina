@@ -704,12 +704,6 @@ auto VTranslateVars::FormulaFromUser(const QString &formula, bool osSeparator) c
         return formula;
     }
 
-    VCommonSettings *settings = VAbstractApplication::VApp()->Settings();
-    if (!settings->IsTranslateFormula())
-    {
-        return formula;
-    }
-
     // Eval formula
     QScopedPointer<qmu::QmuTokenParser> cal(
         new qmu::QmuTokenParser(formula, osSeparator, true, GetTranslatedFunctions()));
@@ -719,7 +713,12 @@ auto VTranslateVars::FormulaFromUser(const QString &formula, bool osSeparator) c
 
     QString newFormula = formula; // Local copy for making changes
 
-    TranslateVarsFromUser(newFormula, tokens, numbers);
+    VCommonSettings *settings = VAbstractApplication::VApp()->Settings();
+    if (settings->IsTranslateFormula())
+    {
+        TranslateVarsFromUser(newFormula, tokens, numbers);
+    }
+
     TranslateNumbersFromUser(newFormula, tokens, numbers, osSeparator);
 
     return newFormula;
@@ -754,12 +753,6 @@ auto VTranslateVars::FormulaToUser(const QString &formula, bool osSeparator) con
         return formula;
     }
 
-    VCommonSettings *settings = VAbstractApplication::VApp()->Settings();
-    if (!settings->IsTranslateFormula())
-    {
-        return formula;
-    }
-
     QString newFormula = formula; // Local copy for making changes
 
     QMap<vsizetype, QString> tokens;
@@ -780,7 +773,12 @@ auto VTranslateVars::FormulaToUser(const QString &formula, bool osSeparator) con
         return newFormula;
     }
 
-    TranslateVarsToUser(newFormula, tokens, numbers);
+    VCommonSettings *settings = VAbstractApplication::VApp()->Settings();
+    if (settings->IsTranslateFormula())
+    {
+        TranslateVarsToUser(newFormula, tokens, numbers);
+    }
+
     TranslateNumbersToUser(newFormula, tokens, numbers, osSeparator);
 
     return newFormula;
