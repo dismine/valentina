@@ -154,4 +154,6 @@ FORMS += \
     $$PWD/tools/piece/dialogplacelabel.ui \
     $$PWD/tools/piece/tabs/tabplacelabels.ui \
     $$PWD/tools/piece/dialogduplicatedetail.ui \
-    $$PWD/tools/piece/dialogpatternmaterials.ui
+    $$PWD/tools/piece/dialogpatternmaterials.ui \
+    $$PWD/tools/piece/tabs/tabfoldline.ui
+

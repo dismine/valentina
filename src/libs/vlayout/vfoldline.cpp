@@ -42,6 +42,7 @@
 #include <QGraphicsSimpleTextItem>
 #include <QLineF>
 #include <QPainterPath>
+#include <QtDebug>
 #include <QtMath>
 #include <algorithm>
 
@@ -1052,7 +1053,7 @@ auto VFoldLine::ThreeDotsData() const -> ThreeDotsPosData
 {
     ThreeDotsPosData data;
     data.width = qFuzzyIsNull(m_width) ? CmToPixel(2.) : qMin(m_width, m_foldLine.length());
-    data.defHeight = data.width * qSin(qDegreesToRadians(60));
+    data.defHeight = data.width * qSin(qDegreesToRadians(60.0));
     data.height = data.defHeight + (qFuzzyIsNull(m_height) ? CmToPixel(0.5) : m_height);
     data.radius = data.width / 3 / 2;
     data.margin = qMax(0., data.height - data.defHeight);
