@@ -182,6 +182,7 @@ macos_task_template: &MACOS_TASK_TEMPLATE
     PIP_CACHE_DIR: ${HOME}/.cache/pip
     LDFLAGS: "-L$QTDIR/lib"
     CPPFLAGS: "-I$QTDIR/include"
+    HOMEBREW_NO_AUTO_UPDATE:0
   local_homebrew_cache:
     folder: "$HOME/Library/Caches/Homebrew"
   global_conan_cache:
@@ -231,7 +232,7 @@ macos_task_template: &MACOS_TASK_TEMPLATE
     - brew update > /dev/null
     - brew install qt6 coreutils ccache qbs cmake ninja git openssl@1.1 pkg-config poppler xerces-c
     - brew outdated
-    - brew upgrade qt6 qbs
+    - brew upgrade qt6 
     - echo $PATH
     - export PATH="${HOME}/.local/bin:`python3 -m site --user-base`/bin:$PATH"
     - echo $PATH
