@@ -63,7 +63,7 @@ void PaintVerticalFoldShadow(QPainter *painter, const QRectF &sheetRect)
     painter->drawLine(shadowLine);
     painter->drawLine(QLineF(shadowLine.p2(), shadowP));
 
-    QPolygonF const shadow{sheetRect.topLeft(), shadowLine.p2(), shadowP, sheetRect.topLeft()};
+    QPolygonF const shadow({sheetRect.topLeft(), shadowLine.p2(), shadowP, sheetRect.topLeft()});
 
     painter->setBrush(QBrush(VSceneStylesheet::ManualLayoutStyle().SheetFoldShadowColor()));
     painter->drawPolygon(shadow);
