@@ -81,7 +81,7 @@ void PaintHorizontalFoldShadow(QPainter *painter, const QRectF &sheetRect)
     painter->drawLine(shadowLine);
     painter->drawLine(QLineF(shadowLine.p2(), shadowP));
 
-    QPolygonF const shadow{sheetRect.topRight(), shadowLine.p2(), shadowP, sheetRect.topRight()};
+    QPolygonF const shadow({sheetRect.topRight(), shadowLine.p2(), shadowP, sheetRect.topRight()});
 
     painter->setBrush(QBrush(VSceneStylesheet::ManualLayoutStyle().SheetFoldShadowColor()));
     painter->drawPolygon(shadow);
