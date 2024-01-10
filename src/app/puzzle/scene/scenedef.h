@@ -28,7 +28,7 @@
 #ifndef SCENEDEF_H
 #define SCENEDEF_H
 
-#include "qtypes.h"
+#include <QtGlobal>
 
 enum class PGraphicsItem : int
 {

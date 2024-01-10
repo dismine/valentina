@@ -74,6 +74,7 @@ class VFoldLine
     Q_DECLARE_TR_FUNCTIONS(VFoldLine) // NOLINT
 
 public:
+    VFoldLine() = default;
     VFoldLine(const QLineF &line, FoldLineType type);
 
     void SetHeight(qreal newHeight);
