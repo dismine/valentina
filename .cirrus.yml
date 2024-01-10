@@ -246,10 +246,6 @@ macos_task_template: &MACOS_TASK_TEMPLATE
     - qmake --version
     - which qmake
     - qbs --version
-    # Patch Qbs. Remove after Qbs 2.1.2+.
-    - curl https://gist.githubusercontent.com/dismine/43a20f66f563232e54e02f2e85732e7a/raw/e80a0c827348da3e99310ba4a648c1860bb3a8a6/BundleModule.qbs --output $HOME/BundleModule.qbs --silent
-    - cp -f $HOME/BundleModule.qbs $(brew --prefix qbs)/share/qbs/modules/bundle/BundleModule.qbs
-    - rm $HOME/BundleModule.qbs
   build_script:
     - echo $PATH
     - export PATH="${HOME}/.local/bin:`python3 -m site --user-base`/bin:$PATH"
