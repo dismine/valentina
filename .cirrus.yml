@@ -113,7 +113,7 @@ linux_task:
           << : *LINUX_QT5_QBS_TASK_TEMPLATE
           env:
             QT_SELECT: "qt5"
-            ENABLE_CCACHE: false
+            ENABLE_CCACHE: true
           container:
             cpu: 2
             memory: 6G  # Set to 6GB to avoid OOM. https://cirrus-ci.org/guide/linux/#linux-container
@@ -121,7 +121,7 @@ linux_task:
           << : *LINUX_QT6_TASK_TEMPLATE
           env:
             QT_SELECT: "qt6"
-            ENABLE_CCACHE: false
+            ENABLE_CCACHE: true
           container:
             cpu: 8
             memory: 8G  # Set to 8GB to avoid OOM. https://cirrus-ci.org/guide/linux/#linux-container
@@ -301,7 +301,7 @@ macos_task:
     ARCH: armv8
     PLATFORM: "macOS_12.4+"
     MACOS_DEPLOYMENT_TARGET: 12.0
-    ENABLE_CCACHE: false
+    ENABLE_CCACHE: true
   matrix:
     - name: 'macOS Monterey 12 [signle bundle, no tests]'
       env:
