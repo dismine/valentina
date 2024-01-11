@@ -65,9 +65,6 @@ VisToolRotation::VisToolRotation(const VContainer *data, QGraphicsItem *parent)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QT_WARNING_PUSH
-QT_WARNING_DISABLE_GCC("-Wswitch-default")
-
 void VisToolRotation::RefreshGeometry()
 {
     if (Objects().isEmpty())
@@ -124,6 +121,10 @@ void VisToolRotation::RefreshGeometry()
         // This check helps to find missed objects in the switch
         Q_STATIC_ASSERT_X(static_cast<int>(GOType::Unknown) == 8, "Not all objects was handled.");
 
+        QT_WARNING_PUSH
+        QT_WARNING_DISABLE_GCC("-Wswitch-default")
+        QT_WARNING_DISABLE_CLANG("-Wswitch-default")
+
         switch (static_cast<GOType>(obj->getType()))
         {
             case GOType::Point:
@@ -178,10 +179,10 @@ void VisToolRotation::RefreshGeometry()
                 Q_UNREACHABLE();
                 break;
         }
+
+        QT_WARNING_POP
     }
 }
-
-QT_WARNING_POP
 
 //---------------------------------------------------------------------------------------------------------------------
 auto VisToolRotation::Angle() const -> QString

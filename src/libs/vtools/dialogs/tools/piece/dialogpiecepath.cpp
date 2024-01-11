@@ -384,6 +384,8 @@ void DialogPiecePath::ShowContextMenu(const QPoint &pos)
 
     QT_WARNING_PUSH
     QT_WARNING_DISABLE_GCC("-Wswitch-default")
+    QT_WARNING_DISABLE_CLANG("-Wswitch-default")
+
     switch (selectedOption)
     {
         case ContextMenuOption::NoSelection:
@@ -448,6 +450,7 @@ void DialogPiecePath::ShowContextMenu(const QPoint &pos)
             Q_UNREACHABLE();
             break;
     };
+
     QT_WARNING_POP
 
     ValidObjects(PathIsValid());

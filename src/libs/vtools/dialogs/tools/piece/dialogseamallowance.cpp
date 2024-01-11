@@ -796,7 +796,7 @@ void DialogSeamAllowance::InitFold(const VPiece &piece)
     }
 
     {
-      const qint32 indexSize = uiTabFoldLine->comboBoxLabelFontSize->findData(piece.GetFoldLineSvgFontSize());
+        const qint32 indexSize = uiTabFoldLine->comboBoxLabelFontSize->findData(piece.GetFoldLineSvgFontSize());
         if (indexSize != -1)
         {
             uiTabFoldLine->comboBoxLabelFontSize->setCurrentIndex(indexSize);
@@ -1114,6 +1114,8 @@ void DialogSeamAllowance::ShowMainPathContextMenu(const QPoint &pos)
 
     QT_WARNING_PUSH
     QT_WARNING_DISABLE_GCC("-Wswitch-default")
+    QT_WARNING_DISABLE_CLANG("-Wswitch-default")
+
     switch (selectedOption)
     {
         case MainPathContextMenuOption::NoSelection:
@@ -1178,6 +1180,7 @@ void DialogSeamAllowance::ShowMainPathContextMenu(const QPoint &pos)
             Q_UNREACHABLE();
             break;
     };
+
     QT_WARNING_POP
 
     ValidObjects(MainPathIsValid());
@@ -1847,6 +1850,8 @@ void DialogSeamAllowance::FancyTabChanged(int index)
 
     QT_WARNING_PUSH
     QT_WARNING_DISABLE_GCC("-Wswitch-default")
+    QT_WARNING_DISABLE_CLANG("-Wswitch-default")
+
     switch (index) // NOLINT(hicpp-multiway-paths-covered)
     {
         case TabOrder::Paths:
@@ -1874,6 +1879,7 @@ void DialogSeamAllowance::FancyTabChanged(int index)
             Q_UNREACHABLE();
             break;
     }
+
     QT_WARNING_POP
 
     if (index == TabOrder::Pins || index == TabOrder::Grainline ||

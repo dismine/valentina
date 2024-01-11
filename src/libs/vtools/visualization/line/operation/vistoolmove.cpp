@@ -280,9 +280,6 @@ auto VisToolMove::GetOriginPoint(const QVector<QGraphicsItem *> &objects) -> QPo
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QT_WARNING_PUSH
-QT_WARNING_DISABLE_GCC("-Wswitch-default")
-
 auto VisToolMove::CreateOriginObjects(int &iPoint, int &iCurve) -> QVector<QGraphicsItem *>
 {
     QVector<QGraphicsItem *> originObjects;
@@ -294,6 +291,10 @@ auto VisToolMove::CreateOriginObjects(int &iPoint, int &iCurve) -> QVector<QGrap
 
         // This check helps to find missed objects in the switch
         Q_STATIC_ASSERT_X(static_cast<int>(GOType::Unknown) == 8, "Not all objects were handled.");
+
+        QT_WARNING_PUSH
+        QT_WARNING_DISABLE_GCC("-Wswitch-default")
+        QT_WARNING_DISABLE_CLANG("-Wswitch-default")
 
         switch (static_cast<GOType>(obj->getType()))
         {
@@ -331,17 +332,14 @@ auto VisToolMove::CreateOriginObjects(int &iPoint, int &iCurve) -> QVector<QGrap
                 Q_UNREACHABLE();
                 break;
         }
+
+        QT_WARNING_POP
     }
 
     return originObjects;
 }
 
-QT_WARNING_POP
-
 //---------------------------------------------------------------------------------------------------------------------
-QT_WARNING_PUSH
-QT_WARNING_DISABLE_GCC("-Wswitch-default")
-
 void VisToolMove::CreateMovedRotatedObjects(int &iPoint, int &iCurve, qreal length, qreal angle, qreal rotationAngle,
                                             const QPointF &rotationOrigin)
 {
@@ -351,6 +349,10 @@ void VisToolMove::CreateMovedRotatedObjects(int &iPoint, int &iCurve, qreal leng
 
         // This check helps to find missed objects in the switch
         Q_STATIC_ASSERT_X(static_cast<int>(GOType::Unknown) == 8, "Not all objects was handled.");
+
+        QT_WARNING_PUSH
+        QT_WARNING_DISABLE_GCC("-Wswitch-default")
+        QT_WARNING_DISABLE_CLANG("-Wswitch-default")
 
         switch (static_cast<GOType>(obj->getType()))
         {
@@ -387,7 +389,7 @@ void VisToolMove::CreateMovedRotatedObjects(int &iPoint, int &iCurve, qreal leng
                 Q_UNREACHABLE();
                 break;
         }
+
+        QT_WARNING_POP
     }
 }
-
-QT_WARNING_POP

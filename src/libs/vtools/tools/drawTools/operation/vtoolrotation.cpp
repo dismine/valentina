@@ -152,6 +152,8 @@ auto VToolRotation::Create(VToolRotationInitData &initData) -> VToolRotation *
 
             QT_WARNING_PUSH
             QT_WARNING_DISABLE_GCC("-Wswitch-default")
+            QT_WARNING_DISABLE_CLANG("-Wswitch-default")
+
             switch (static_cast<GOType>(obj->getType()))
             {
                 case GOType::Point:
@@ -187,6 +189,7 @@ auto VToolRotation::Create(VToolRotationInitData &initData) -> VToolRotation *
                     Q_UNREACHABLE();
                     break;
             }
+
             QT_WARNING_POP
         }
     }
@@ -202,6 +205,8 @@ auto VToolRotation::Create(VToolRotationInitData &initData) -> VToolRotation *
 
             QT_WARNING_PUSH
             QT_WARNING_DISABLE_GCC("-Wswitch-default")
+            QT_WARNING_DISABLE_CLANG("-Wswitch-default")
+
             switch (static_cast<GOType>(obj->getType()))
             {
                 case GOType::Point:
@@ -239,6 +244,7 @@ auto VToolRotation::Create(VToolRotationInitData &initData) -> VToolRotation *
                     Q_UNREACHABLE();
                     break;
             }
+
             QT_WARNING_POP
         }
         if (initData.parse != Document::FullParse)

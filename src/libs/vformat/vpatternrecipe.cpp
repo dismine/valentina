@@ -359,6 +359,8 @@ auto VPatternRecipe::Step(const VToolRecord &tool, const VContainer &data) -> QD
     {
         QT_WARNING_PUSH
         QT_WARNING_DISABLE_GCC("-Wswitch-default")
+        QT_WARNING_DISABLE_CLANG("-Wswitch-default")
+
         switch (tool.getTypeTool())
         {
             case Tool::Arrow:
@@ -461,8 +463,9 @@ auto VPatternRecipe::Step(const VToolRecord &tool, const VContainer &data) -> QD
             case Tool::PlaceLabel:
             case Tool::InsertNode:
             case Tool::DuplicateDetail:
-                return QDomElement();
+                return {};
         }
+
         QT_WARNING_POP
     }
     catch (const VExceptionBadId &e)
@@ -1249,6 +1252,8 @@ auto VPatternRecipe::GroupOperationSource(VAbstractOperation *tool, quint32 id, 
 
         QT_WARNING_PUSH
         QT_WARNING_DISABLE_GCC("-Wswitch-default")
+        QT_WARNING_DISABLE_CLANG("-Wswitch-default")
+
         switch (static_cast<GOType>(obj->getType()))
         {
             case GOType::Point:
@@ -1273,6 +1278,7 @@ auto VPatternRecipe::GroupOperationSource(VAbstractOperation *tool, quint32 id, 
                 Q_UNREACHABLE();
                 break;
         }
+
         QT_WARNING_POP
 
         nodes.appendChild(node);

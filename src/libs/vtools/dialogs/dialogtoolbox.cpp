@@ -689,8 +689,6 @@ auto LineColor(const QColor &borderColor, int size, const QString &color) -> QIc
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QT_WARNING_PUSH
-QT_WARNING_DISABLE_GCC("-Wswitch-default")
 auto SegmentAliases(GOType curveType, const QString &alias1, const QString &alias2) -> QPair<QString, QString>
 {
     switch (curveType)
@@ -712,11 +710,10 @@ auto SegmentAliases(GOType curveType, const QString &alias1, const QString &alia
         case GOType::Unknown:
             Q_UNREACHABLE();
             break;
+        default:
+            return {};
     }
-
-    return {};
 }
-QT_WARNING_POP
 
 //---------------------------------------------------------------------------------------------------------------------
 auto GetNodeName(const VContainer *data, const VPieceNode &node, bool showPassmarkDetails) -> QString

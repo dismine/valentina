@@ -742,9 +742,6 @@ auto VDxfEngine::ErrorString() const -> QString
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QT_WARNING_PUSH
-QT_WARNING_DISABLE_GCC("-Wswitch-default")
-
 auto VDxfEngine::FromPixel(double pix, const VarInsunits &unit) const -> double
 {
     switch (unit)
@@ -755,8 +752,9 @@ auto VDxfEngine::FromPixel(double pix, const VarInsunits &unit) const -> double
             return pix / m_resolution * 25.4 / 10.0;
         case VarInsunits::Inches:
             return pix / m_resolution;
+        default:
+            return pix;
     }
-    return pix;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -770,11 +768,10 @@ auto VDxfEngine::ToPixel(double val, const VarInsunits &unit) const -> double
             return ((val * 10.0) / 25.4) * m_resolution;
         case VarInsunits::Inches:
             return val * m_resolution;
+        default:
+            return val;
     }
-    return val;
 }
-
-QT_WARNING_POP
 
 //---------------------------------------------------------------------------------------------------------------------
 auto VDxfEngine::ExportToAAMA(const QVector<VLayoutPiece> &details) -> bool

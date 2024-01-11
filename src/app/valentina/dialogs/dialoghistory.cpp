@@ -246,8 +246,6 @@ void DialogHistory::FillTable()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QT_WARNING_PUSH
-QT_WARNING_DISABLE_GCC("-Wswitch-default")
 /**
  * @brief Record return description for record
  * @param tool record data
@@ -498,12 +496,10 @@ auto DialogHistory::RecordDescription(const VToolRecord &tool, HistoryRecord rec
         case Tool::InsertNode:
         case Tool::DuplicateDetail:
             return record;
+        default:
+            return record;
     }
-
-    return record;
 }
-
-QT_WARNING_POP
 
 //---------------------------------------------------------------------------------------------------------------------
 /**

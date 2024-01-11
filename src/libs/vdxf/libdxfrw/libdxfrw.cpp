@@ -3563,6 +3563,7 @@ auto dxfRW::processDimension() -> bool
 
             QT_WARNING_PUSH
             QT_WARNING_DISABLE_GCC("-Wswitch-default")
+            QT_WARNING_DISABLE_CLANG("-Wswitch-default")
 
             switch (type)
             {

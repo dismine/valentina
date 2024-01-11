@@ -83,8 +83,7 @@ auto VisOperation::GetCurve(quint32 i, VColorRole role) -> VCurvePathItem *
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QT_WARNING_PUSH
-QT_WARNING_DISABLE_GCC("-Wswitch-default")
+
 void VisOperation::RefreshFlippedObjects(quint32 originPointId, const QPointF &firstPoint, const QPointF &secondPoint)
 {
     int iPoint = -1;
@@ -95,6 +94,10 @@ void VisOperation::RefreshFlippedObjects(quint32 originPointId, const QPointF &f
 
         // This check helps to find missed objects in the switch
         Q_STATIC_ASSERT_X(static_cast<int>(GOType::Unknown) == 8, "Not all objects were handled.");
+
+        QT_WARNING_PUSH
+        QT_WARNING_DISABLE_GCC("-Wswitch-default")
+        QT_WARNING_DISABLE_CLANG("-Wswitch-default")
 
         switch (static_cast<GOType>(obj->getType()))
         {
@@ -150,6 +153,7 @@ void VisOperation::RefreshFlippedObjects(quint32 originPointId, const QPointF &f
                 Q_UNREACHABLE();
                 break;
         }
+
+        QT_WARNING_POP
     }
 }
-QT_WARNING_POP

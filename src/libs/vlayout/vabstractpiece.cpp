@@ -1119,6 +1119,8 @@ auto VAbstractPiece::Equidistant(QVector<VSAPoint> points, qreal width, const QS
     {
         QT_WARNING_PUSH
         QT_WARNING_DISABLE_GCC("-Wswitch-default")
+        QT_WARNING_DISABLE_CLANG("-Wswitch-default")
+
         // This check helps to find missed angle types in the switch
         Q_STATIC_ASSERT_X(static_cast<int>(PieceNodeAngle::LAST_ONE_DO_NOT_USE) == 7, "Not all types were handled.");
         switch (points.constLast().GetAngleType())
@@ -1144,6 +1146,7 @@ auto VAbstractPiece::Equidistant(QVector<VSAPoint> points, qreal width, const QS
                 RollbackBySecondEdgeRightAngle(ekvPoints, points, width);
                 break;
         }
+
         QT_WARNING_POP
     }
 
@@ -1307,6 +1310,8 @@ auto VAbstractPiece::EkvPoint(QVector<VRawSAPoint> points, const VSAPoint &p1Lin
             {                                                            // Regular equdistant case
                 QT_WARNING_PUSH
                 QT_WARNING_DISABLE_GCC("-Wswitch-default")
+                QT_WARNING_DISABLE_CLANG("-Wswitch-default")
+
                 // This check helps to find missed angle types in the switch
                 Q_STATIC_ASSERT_X(static_cast<int>(PieceNodeAngle::LAST_ONE_DO_NOT_USE) == 7,
                                   "Not all types were handled.");
@@ -1335,6 +1340,7 @@ auto VAbstractPiece::EkvPoint(QVector<VRawSAPoint> points, const VSAPoint &p1Lin
                         return AngleBySecondRightAngle(points, p1Line1, p2Line1, p1Line2, bigLine1, crosPoint, bigLine2,
                                                        p2Line1, width, needRollback);
                 }
+
                 QT_WARNING_POP
             }
             else

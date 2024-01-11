@@ -591,6 +591,8 @@ void VNodePoint::contextMenuEvent(QGraphicsSceneContextMenuEvent *event)
 
     QT_WARNING_PUSH
     QT_WARNING_DISABLE_GCC("-Wswitch-default")
+    QT_WARNING_DISABLE_CLANG("-Wswitch-default")
+
     switch (selectedOption)
     {
         case ContextMenuOption::LAST_ONE_DO_NOT_USE:
@@ -709,6 +711,7 @@ void VNodePoint::contextMenuEvent(QGraphicsSceneContextMenuEvent *event)
             SelectPassmarkLine(PassmarkLineType::CheckMark);
             break;
     };
+
     QT_WARNING_POP
 }
 

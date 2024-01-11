@@ -4591,9 +4591,6 @@ void VPattern::DrawToolsCommonAttributes(const QDomElement &domElement, quint32 
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QT_WARNING_PUSH
-QT_WARNING_DISABLE_GCC("-Wswitch-default")
-
 auto VPattern::ActiveDrawBoundingRect() const -> QRectF
 {
     // This check helps to find missed tools in the switch
@@ -4601,9 +4598,8 @@ auto VPattern::ActiveDrawBoundingRect() const -> QRectF
 
     QRectF rec;
 
-    for (qint32 i = 0; i < history.size(); ++i)
+    for (const auto &tool : history)
     {
-        const VToolRecord tool = history.at(i);
         if (tool.getNameDraw() == nameActivPP)
         {
             switch (tool.getTypeTool())
@@ -4685,15 +4681,13 @@ auto VPattern::ActiveDrawBoundingRect() const -> QRectF
                 case Tool::InsertNode:
                 case Tool::PlaceLabel:
                 case Tool::DuplicateDetail:
+                default:
                     break;
             }
         }
     }
     return rec;
 }
-
-// cppcheck-suppress unknownMacro
-QT_WARNING_POP
 
 //---------------------------------------------------------------------------------------------------------------------
 template <typename T> auto VPattern::ToolBoundingRect(const QRectF &rec, quint32 id) const -> QRectF

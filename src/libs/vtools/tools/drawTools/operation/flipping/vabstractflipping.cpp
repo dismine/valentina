@@ -29,9 +29,9 @@
 #include "vabstractflipping.h"
 #include "../vgeometry/vabstractcurve.h"
 #include "../vgeometry/varc.h"
-#include "../vgeometry/vellipticalarc.h"
 #include "../vgeometry/vcubicbezier.h"
 #include "../vgeometry/vcubicbezierpath.h"
+#include "../vgeometry/vellipticalarc.h"
 #include "../vgeometry/vgobject.h"
 #include "../vgeometry/vpointf.h"
 #include "../vgeometry/vspline.h"
@@ -39,8 +39,9 @@
 
 //---------------------------------------------------------------------------------------------------------------------
 VAbstractFlipping::VAbstractFlipping(const VAbstractOperationInitData &initData, QGraphicsItem *parent)
-    : VAbstractOperation(initData, parent)
-{}
+  : VAbstractOperation(initData, parent)
+{
+}
 
 //---------------------------------------------------------------------------------------------------------------------
 void VAbstractFlipping::CreateDestination(VAbstractOperationInitData &initData, const QPointF &fPoint,
@@ -48,9 +49,9 @@ void VAbstractFlipping::CreateDestination(VAbstractOperationInitData &initData, 
 {
     if (initData.typeCreation == Source::FromGui)
     {
-        initData.destination.clear();// Try to avoid mistake, value must be empty
+        initData.destination.clear(); // Try to avoid mistake, value must be empty
 
-        initData.id = initData.data->getNextId();//Just reserve id for tool
+        initData.id = initData.data->getNextId(); // Just reserve id for tool
 
         for (auto object : qAsConst(initData.source))
         {
@@ -59,46 +60,47 @@ void VAbstractFlipping::CreateDestination(VAbstractOperationInitData &initData, 
             // This check helps to find missed objects in the switch
             Q_STATIC_ASSERT_X(static_cast<int>(GOType::Unknown) == 8, "Not all objects were handled.");
 
-QT_WARNING_PUSH
-QT_WARNING_DISABLE_GCC("-Wswitch-default")
-            switch(static_cast<GOType>(obj->getType()))
+            QT_WARNING_PUSH
+            QT_WARNING_DISABLE_GCC("-Wswitch-default")
+            QT_WARNING_DISABLE_CLANG("-Wswitch-default")
+
+            switch (static_cast<GOType>(obj->getType()))
             {
                 case GOType::Point:
-                    initData.destination.append(CreatePoint(initData.id, object, fPoint, sPoint, initData.suffix,
-                                                            initData.data));
+                    initData.destination.append(
+                        CreatePoint(initData.id, object, fPoint, sPoint, initData.suffix, initData.data));
                     break;
                 case GOType::Arc:
-                    initData.destination.append(CreateArc<VArc>(initData.id, object, fPoint, sPoint, initData.suffix,
-                                                                initData.data));
+                    initData.destination.append(
+                        CreateArc<VArc>(initData.id, object, fPoint, sPoint, initData.suffix, initData.data));
                     break;
                 case GOType::EllipticalArc:
-                    initData.destination.append(CreateArc<VEllipticalArc>(initData.id, object, fPoint, sPoint,
-                                                                          initData.suffix, initData.data));
+                    initData.destination.append(
+                        CreateArc<VEllipticalArc>(initData.id, object, fPoint, sPoint, initData.suffix, initData.data));
                     break;
                 case GOType::Spline:
-                    initData.destination.append(CreateCurve<VSpline>(initData.id, object, fPoint, sPoint,
-                                                                     initData.suffix, initData.data));
+                    initData.destination.append(
+                        CreateCurve<VSpline>(initData.id, object, fPoint, sPoint, initData.suffix, initData.data));
                     break;
                 case GOType::SplinePath:
-                    initData.destination.append(CreateCurveWithSegments<VSplinePath>(initData.id, object, fPoint,
-                                                                                     sPoint, initData.suffix,
-                                                                                     initData.data));
+                    initData.destination.append(CreateCurveWithSegments<VSplinePath>(
+                        initData.id, object, fPoint, sPoint, initData.suffix, initData.data));
                     break;
                 case GOType::CubicBezier:
-                    initData.destination.append(CreateCurve<VCubicBezier>(initData.id, object, fPoint, sPoint,
-                                                                          initData.suffix, initData.data));
+                    initData.destination.append(
+                        CreateCurve<VCubicBezier>(initData.id, object, fPoint, sPoint, initData.suffix, initData.data));
                     break;
                 case GOType::CubicBezierPath:
-                    initData.destination.append(CreateCurveWithSegments<VCubicBezierPath>(initData.id, object, fPoint,
-                                                                                          sPoint, initData.suffix,
-                                                                                          initData.data));
+                    initData.destination.append(CreateCurveWithSegments<VCubicBezierPath>(
+                        initData.id, object, fPoint, sPoint, initData.suffix, initData.data));
                     break;
                 case GOType::Unknown:
                 case GOType::PlaceLabel:
                     Q_UNREACHABLE();
                     break;
             }
-QT_WARNING_POP
+
+            QT_WARNING_POP
         }
     }
     else
@@ -111,9 +113,11 @@ QT_WARNING_POP
             // This check helps to find missed objects in the switch
             Q_STATIC_ASSERT_X(static_cast<int>(GOType::Unknown) == 8, "Not all objects were handled.");
 
-QT_WARNING_PUSH
-QT_WARNING_DISABLE_GCC("-Wswitch-default")
-            switch(static_cast<GOType>(obj->getType()))
+            QT_WARNING_PUSH
+            QT_WARNING_DISABLE_GCC("-Wswitch-default")
+            QT_WARNING_DISABLE_CLANG("-Wswitch-default")
+
+            switch (static_cast<GOType>(obj->getType()))
             {
                 case GOType::Point:
                 {
@@ -150,7 +154,8 @@ QT_WARNING_DISABLE_GCC("-Wswitch-default")
                     Q_UNREACHABLE();
                     break;
             }
-QT_WARNING_POP
+
+            QT_WARNING_POP
         }
         if (initData.parse != Document::FullParse)
         {

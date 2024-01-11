@@ -390,12 +390,15 @@ void VToolSinglePoint::ToolSelectionType(const SelectionType &type)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QT_WARNING_PUSH
-QT_WARNING_DISABLE_GCC("-Wswitch-default")
+
 auto VToolSinglePoint::InitSegments(GOType curveType, qreal segLength, const VPointF *p, quint32 curveId,
                                     VContainer *data, const QString &alias1, const QString &alias2)
     -> QPair<QString, QString>
 {
+    QT_WARNING_PUSH
+    QT_WARNING_DISABLE_GCC("-Wswitch-default")
+    QT_WARNING_DISABLE_CLANG("-Wswitch-default")
+
     switch (curveType)
     {
         case GOType::EllipticalArc:
@@ -518,7 +521,7 @@ auto VToolSinglePoint::InitSegments(GOType curveType, qreal segLength, const VPo
             break;
     }
 
+    QT_WARNING_POP
+
     return {};
 }
-
-QT_WARNING_POP

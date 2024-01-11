@@ -70,8 +70,6 @@ const QString VToolMove::ToolType = QStringLiteral("moving");
 
 namespace
 {
-QT_WARNING_PUSH
-QT_WARNING_DISABLE_GCC("-Wswitch-default")
 auto GetOriginPoint(const QVector<SourceItem> &objects, const VContainer *data, qreal calcLength, qreal calcAngle)
     -> QPointF
 {
@@ -101,6 +99,8 @@ auto GetOriginPoint(const QVector<SourceItem> &objects, const VContainer *data, 
             case GOType::PlaceLabel:
                 Q_UNREACHABLE();
                 break;
+            default:
+                break;
         }
     }
 
@@ -109,7 +109,6 @@ auto GetOriginPoint(const QVector<SourceItem> &objects, const VContainer *data, 
     move.setAngle(calcAngle);
     return move.p2();
 }
-QT_WARNING_POP
 } // namespace
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -202,6 +201,8 @@ auto VToolMove::Create(VToolMoveInitData &initData) -> VToolMove *
 
             QT_WARNING_PUSH
             QT_WARNING_DISABLE_GCC("-Wswitch-default")
+            QT_WARNING_DISABLE_CLANG("-Wswitch-default")
+
             switch (static_cast<GOType>(obj->getType()))
             {
                 case GOType::Point:
@@ -244,6 +245,7 @@ auto VToolMove::Create(VToolMoveInitData &initData) -> VToolMove *
                     Q_UNREACHABLE();
                     break;
             }
+
             QT_WARNING_POP
         }
     }
@@ -259,6 +261,8 @@ auto VToolMove::Create(VToolMoveInitData &initData) -> VToolMove *
 
             QT_WARNING_PUSH
             QT_WARNING_DISABLE_GCC("-Wswitch-default")
+            QT_WARNING_DISABLE_CLANG("-Wswitch-default")
+
             switch (static_cast<GOType>(obj->getType()))
             {
                 case GOType::Point:
@@ -298,6 +302,7 @@ auto VToolMove::Create(VToolMoveInitData &initData) -> VToolMove *
                     Q_UNREACHABLE();
                     break;
             }
+
             QT_WARNING_POP
         }
         if (initData.parse != Document::FullParse)

@@ -197,9 +197,6 @@ auto LineStyleToPenStyle(const QString &typeLine) -> Qt::PenStyle
 //---------------------------------------------------------------------------------------------------------------------
 auto PenStyleToLineStyle(Qt::PenStyle penStyle) -> QString
 {
-    QT_WARNING_PUSH
-    QT_WARNING_DISABLE_GCC("-Wswitch-default")
-
     switch (penStyle)
     {
         case Qt::NoPen:
@@ -215,9 +212,6 @@ auto PenStyleToLineStyle(Qt::PenStyle penStyle) -> QString
         default:
             break;
     }
-
-    // cppcheck-suppress unknownMacro
-    QT_WARNING_POP
 
     return TypeLineLine;
 }

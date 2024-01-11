@@ -685,10 +685,11 @@ auto DRW_MText::parseCode(int code, const std::unique_ptr<dxfReader> &reader) ->
         case 71:
         {
             // Attachment point
-            Attach a = static_cast<Attach>(reader->getInt32());
+            auto a = static_cast<Attach>(reader->getInt32());
 
             QT_WARNING_PUSH
             QT_WARNING_DISABLE_GCC("-Wswitch-default")
+            QT_WARNING_DISABLE_CLANG("-Wswitch-default")
 
             switch (a)
             {

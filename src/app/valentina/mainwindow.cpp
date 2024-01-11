@@ -3476,8 +3476,6 @@ void MainWindow::MouseMove(const QPointF &scenePos)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QT_WARNING_PUSH
-QT_WARNING_DISABLE_GCC("-Wswitch-default")
 /**
  * @brief CancelTool cancel tool.
  */
@@ -3497,6 +3495,10 @@ void MainWindow::CancelTool()
     currentScene->setFocus(Qt::OtherFocusReason);
     currentScene->clearSelection();
     emit ui->view->itemClicked(nullptr); // Hide visualization to avoid a crash
+
+    QT_WARNING_PUSH
+    QT_WARNING_DISABLE_GCC("-Wswitch-default")
+    QT_WARNING_DISABLE_CLANG("-Wswitch-default")
 
     switch (m_currentTool)
     {
@@ -3667,6 +3669,8 @@ void MainWindow::CancelTool()
             break;
     }
 
+    QT_WARNING_POP
+
     // Crash: using CRTL+Z while using line tool.
     // related bug report:
     // https://bitbucket.org/dismine/valentina/issues/454/crash-using-crtl-z-while-using-line-tool
@@ -3738,8 +3742,6 @@ void MainWindow::SetupDrawToolsIcons()
     ui->actionArcStartPointTool->setIcon(VTheme::GetIconResource(resource, QStringLiteral("arc_start.png")));
     ui->actionArcEndPointTool->setIcon(VTheme::GetIconResource(resource, QStringLiteral("arc_end.png")));
 }
-
-QT_WARNING_POP
 
 //---------------------------------------------------------------------------------------------------------------------
 /**
@@ -5477,6 +5479,8 @@ void MainWindow::SetEnableTool(bool enable)
 
     QT_WARNING_PUSH
     QT_WARNING_DISABLE_GCC("-Wswitch-default")
+    QT_WARNING_DISABLE_CLANG("-Wswitch-default")
+
     switch (VAbstractValApplication::VApp()->GetDrawMode())
     {
         case Draw::Calculation:
@@ -5489,6 +5493,7 @@ void MainWindow::SetEnableTool(bool enable)
             layoutTools = enable;
             break;
     }
+
     QT_WARNING_POP
 
     // This check helps to find missed tools
@@ -5837,8 +5842,6 @@ void MainWindow::CreateMenus()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QT_WARNING_PUSH
-QT_WARNING_DISABLE_GCC("-Wswitch-default")
 void MainWindow::LastUsedTool()
 {
     // This check helps to find missed tools in the switch
@@ -5848,6 +5851,10 @@ void MainWindow::LastUsedTool()
     {
         return;
     }
+
+    QT_WARNING_PUSH
+    QT_WARNING_DISABLE_GCC("-Wswitch-default")
+    QT_WARNING_DISABLE_CLANG("-Wswitch-default")
 
     switch (m_lastUsedTool)
     {
@@ -6055,9 +6062,9 @@ void MainWindow::LastUsedTool()
             ToolArcEnd(true);
             break;
     }
-}
 
-QT_WARNING_POP
+    QT_WARNING_POP
+}
 
 //---------------------------------------------------------------------------------------------------------------------
 void MainWindow::AddDocks()
