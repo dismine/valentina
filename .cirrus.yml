@@ -182,7 +182,7 @@ macos_task_template: &MACOS_TASK_TEMPLATE
     PIP_CACHE_DIR: ${HOME}/.cache/pip
     LDFLAGS: "-L$QTDIR/lib"
     CPPFLAGS: "-I$QTDIR/include"
-    HOMEBREW_NO_AUTO_UPDATE:0
+    HOMEBREW_NO_AUTO_UPDATE: 0
   local_homebrew_cache:
     folder: "$HOME/Library/Caches/Homebrew"
   global_conan_cache:
