@@ -726,6 +726,10 @@ for:
     - which qmake
     - which qbs
     - qbs --version
+    # Patch Qbs. Remove after Qbs 2.2.1+.
+    - curl https://gist.githubusercontent.com/dismine/43f3c51e05f3317c5d4fe16cd3c4b6d8/raw/2d297bcb53c2c022f740509923adf1eb1796afe2/qbs-pkg-config-probe.patch --output $HOME/qbs-pkg-config-probe.patch --silent
+    - patch -d $(brew --prefix qbs)/ -p1 < $HOME/qbs-pkg-config-probe.patch
+    - rm $HOME/qbs-pkg-config-probe.patch
     - /usr/bin/curl -LJ https://github.com/dismine/macdeployqt/archive/refs/heads/main.zip --output ${HOME}/macdeployqt-main.zip --silent
     - unzip ${HOME}/macdeployqt-main.zip -d ${HOME}
     - cmake ${HOME}/macdeployqt-main -GNinja -S ${HOME}/macdeployqt-main -B ${HOME}/macdeployqt-build-dir -DCMAKE_INSTALL_PREFIX=${HOME}/macdeployqt-install-dir -DCMAKE_BUILD_TYPE=Release
@@ -905,6 +909,10 @@ for:
     - qmake --version
     - which qmake
     - qbs --version
+    # Patch Qbs. Remove after Qbs 2.2.1+.
+    - curl https://gist.githubusercontent.com/dismine/43f3c51e05f3317c5d4fe16cd3c4b6d8/raw/2d297bcb53c2c022f740509923adf1eb1796afe2/qbs-pkg-config-probe.patch --output $HOME/qbs-pkg-config-probe.patch --silent
+    - patch -d $(brew --prefix qbs)/ -p1 < $HOME/qbs-pkg-config-probe.patch
+    - rm $HOME/qbs-pkg-config-probe.patch
     - /usr/bin/curl -LJ https://github.com/dismine/macdeployqt/archive/refs/heads/main.zip --output ${HOME}/macdeployqt-main.zip --silent
     - unzip ${HOME}/macdeployqt-main.zip -d ${HOME}
     - cmake ${HOME}/macdeployqt-main -S ${HOME}/macdeployqt-main -B ${HOME}/macdeployqt-build-dir -DCMAKE_INSTALL_PREFIX=${HOME}/macdeployqt-install-dir -DCMAKE_BUILD_TYPE=Release
