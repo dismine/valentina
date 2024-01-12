@@ -54,8 +54,6 @@ linux_qt5_qmake_task_template: &LINUX_QT5_QMAKE_TASK_TEMPLATE
     - pwd
     - ls -l /usr/bin/ | grep -E "${COMPILER_REGEX}"
     - ${COMPILER} --version
-    - find / -name 'libstdc++.so.6' || true
-    - strings /usr/lib/x86_64-linux-gnu/libstdc++.so.6 | grep '^CXXABI_'
     - ccache --set-config max_size="$CCACHE_SIZE"
     - qmake --version
     - qmake ../Valentina.pro -r -spec ${QMAKE_SPEC} CONFIG+=noDebugSymbols CONFIG+=checkWarnings
@@ -128,6 +126,21 @@ linux_task:
             cpu: 8
             memory: 8G  # Set to 8GB to avoid OOM. https://cirrus-ci.org/guide/linux/#linux-container
     - container:
+        image: dismine/gcc-ubuntu:13
+      env:
+        COMPILER: gcc
+        QMAKE_SPEC: "linux-g++"
+        GCC_COLORS: 'error=01;31:warning=01;35:note=01;36:caret=01;32:locus=01:quote=01'
+        COMPILER_REGEX: "gcc|g\\+\\+"
+      matrix:
+        - name: 'GCC 13 [Qt5 QMake]'
+          << :  *LINUX_QT5_QMAKE_TASK_TEMPLATE
+          env:
+            QT_SELECT: "qt5"
+          container:
+            cpu: 2 
+            memory: 8G  # Set to 8GB to avoid OOM. https://cirrus-ci.org/guide/linux/#linux-container
+    - container:
         image: dismine/gcc-ubuntu:latest
       env:
         COMPILER: gcc
@@ -135,13 +148,6 @@ linux_task:
         GCC_COLORS: 'error=01;31:warning=01;35:note=01;36:caret=01;32:locus=01:quote=01'
         COMPILER_REGEX: "gcc|g\\+\\+"
       matrix:
-        - name: 'latest GCC [Qt5 QMake]'
-          << :  *LINUX_QT5_QMAKE_TASK_TEMPLATE
-          env:
-            QT_SELECT: "qt5"
-          container:
-            cpu: 2 
-            memory: 8G  # Set to 8GB to avoid OOM. https://cirrus-ci.org/guide/linux/#linux-container
         - name: 'latest GCC [Qt5 QBS]'
           << : *LINUX_QT5_QBS_TASK_TEMPLATE
           env:
