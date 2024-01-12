@@ -1276,6 +1276,10 @@ void VDxfEngine::ExportAAMADrawFoldLine(const QSharedPointer<dx_ifaceBlock> &det
 {
     VFoldLine const fLine = detail.FoldLine();
     QVector<QVector<QPointF>> points = fLine.FoldLineMarkPoints();
+    if (points.isEmpty())
+    {
+        return;
+    }
 
     switch (detail.GetFoldLineType())
     {
@@ -1728,6 +1732,10 @@ void VDxfEngine::ExportASTMDrawFoldLine(const QSharedPointer<dx_ifaceBlock> &det
 {
     VFoldLine const fLine = detail.FoldLine();
     QVector<QVector<QPointF>> points = fLine.FoldLineMarkPoints();
+    if (points.isEmpty())
+    {
+        return;
+    }
 
     switch (detail.GetFoldLineType())
     {
