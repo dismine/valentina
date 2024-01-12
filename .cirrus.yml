@@ -154,8 +154,8 @@ linux_task:
             QT_SELECT: "qt6"
             ENABLE_CCACHE: true
           container:
-            cpu: 3
-            memory: 12G  # Set to 12GB to avoid OOM. https://cirrus-ci.org/guide/linux/#linux-container
+            cpu: 4
+            memory: 16G  # Set to 16GB to avoid OOM. https://cirrus-ci.org/guide/linux/#linux-container
 
 macos_task_template: &MACOS_TASK_TEMPLATE
   << : *REGULER_TASK_TEMPLATE
