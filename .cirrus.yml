@@ -44,7 +44,7 @@ linux_qt6_task_template: &LINUX_QT6_TASK_TEMPLATE
     
 linux_qt5_qmake_task_template: &LINUX_QT5_QMAKE_TASK_TEMPLATE
   install_script:
-    - bash -c "$PACKAGE_MANAGER_INSTALL qtbase5-dev libqt5svg5-dev qttools5-dev-tools libqt5xmlpatterns5-dev libqt5core5a libqt5gui5 libqt5printsupport5 libqt5svg5 libqt5widgets5 libqt5xml5 libqt5xmlpatterns5 poppler-utils libstdc++6"
+    - bash -c "$PACKAGE_MANAGER_INSTALL qtbase5-dev libqt5svg5-dev qttools5-dev-tools libqt5xmlpatterns5-dev libqt5core5a libqt5gui5 libqt5printsupport5 libqt5svg5 libqt5widgets5 libqt5xml5 libqt5xmlpatterns5 poppler-utils"
   build_script:
     - uname -a
     - echo $PATH
@@ -126,21 +126,6 @@ linux_task:
             cpu: 8
             memory: 8G  # Set to 8GB to avoid OOM. https://cirrus-ci.org/guide/linux/#linux-container
     - container:
-        image: dismine/gcc-ubuntu:13
-      env:
-        COMPILER: gcc
-        QMAKE_SPEC: "linux-g++"
-        GCC_COLORS: 'error=01;31:warning=01;35:note=01;36:caret=01;32:locus=01:quote=01'
-        COMPILER_REGEX: "gcc|g\\+\\+"
-      matrix:
-        - name: 'GCC 13 [Qt5 QMake]'
-          << :  *LINUX_QT5_QMAKE_TASK_TEMPLATE
-          env:
-            QT_SELECT: "qt5"
-          container:
-            cpu: 2 
-            memory: 8G  # Set to 8GB to avoid OOM. https://cirrus-ci.org/guide/linux/#linux-container
-    - container:
         image: dismine/gcc-ubuntu:latest
       env:
         COMPILER: gcc
@@ -148,6 +133,13 @@ linux_task:
         GCC_COLORS: 'error=01;31:warning=01;35:note=01;36:caret=01;32:locus=01:quote=01'
         COMPILER_REGEX: "gcc|g\\+\\+"
       matrix:
+        - name: 'latest GCC [Qt5 QMake]'
+          << :  *LINUX_QT5_QMAKE_TASK_TEMPLATE
+          env:
+            QT_SELECT: "qt5"
+          container:
+            cpu: 2 
+            memory: 8G  # Set to 8GB to avoid OOM. https://cirrus-ci.org/guide/linux/#linux-container
         - name: 'latest GCC [Qt5 QBS]'
           << : *LINUX_QT5_QBS_TASK_TEMPLATE
           env:
