@@ -44,7 +44,7 @@ linux_qt6_task_template: &LINUX_QT6_TASK_TEMPLATE
     
 linux_qt5_qmake_task_template: &LINUX_QT5_QMAKE_TASK_TEMPLATE
   install_script:
-    - bash -c "$PACKAGE_MANAGER_INSTALL qtbase5-dev libqt5svg5-dev qttools5-dev-tools libqt5xmlpatterns5-dev libqt5core5a libqt5gui5 libqt5printsupport5 libqt5svg5 libqt5widgets5 libqt5xml5 libqt5xmlpatterns5 poppler-utils"
+    - bash -c "$PACKAGE_MANAGER_INSTALL qtbase5-dev libqt5svg5-dev qttools5-dev-tools libqt5xmlpatterns5-dev libqt5core5a libqt5gui5 libqt5printsupport5 libqt5svg5 libqt5widgets5 libqt5xml5 libqt5xmlpatterns5 poppler-utils libstdc++6"
   build_script:
     - uname -a
     - echo $PATH
@@ -54,6 +54,8 @@ linux_qt5_qmake_task_template: &LINUX_QT5_QMAKE_TASK_TEMPLATE
     - pwd
     - ls -l /usr/bin/ | grep -E "${COMPILER_REGEX}"
     - ${COMPILER} --version
+    - find / -name 'libstdc++.so.6'
+    - strings /usr/lib/x86_64-linux-gnu/libstdc++.so.6 | grep '^CXXABI_'
     - ccache --set-config max_size="$CCACHE_SIZE"
     - qmake --version
     - qmake ../Valentina.pro -r -spec ${QMAKE_SPEC} CONFIG+=noDebugSymbols CONFIG+=checkWarnings
