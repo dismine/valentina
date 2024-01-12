@@ -54,7 +54,7 @@ linux_qt5_qmake_task_template: &LINUX_QT5_QMAKE_TASK_TEMPLATE
     - pwd
     - ls -l /usr/bin/ | grep -E "${COMPILER_REGEX}"
     - ${COMPILER} --version
-    - find / -name 'libstdc++.so.6'
+    - find / -name 'libstdc++.so.6' || true
     - strings /usr/lib/x86_64-linux-gnu/libstdc++.so.6 | grep '^CXXABI_'
     - ccache --set-config max_size="$CCACHE_SIZE"
     - qmake --version
