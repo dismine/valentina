@@ -728,7 +728,8 @@ for:
     - qbs --version
     # Patch Qbs. Remove after Qbs 2.2.1+.
     - curl https://gist.githubusercontent.com/dismine/43f3c51e05f3317c5d4fe16cd3c4b6d8/raw/2d297bcb53c2c022f740509923adf1eb1796afe2/qbs-pkg-config-probe.patch --output $HOME/qbs-pkg-config-probe.patch --silent
-    - patch -N -d $(brew --prefix qbs)/ -p1 < $HOME/qbs-pkg-config-probe.patch
+    - patch -N -d $(brew --prefix qbs)/ -p1 < $HOME/qbs-pkg-config-probe.patch || true
+    - rm -f $(brew --prefix qbs)/share/qbs/imports/qbs/Probes/qbs-pkg-config-probe.js.rej
     - rm $HOME/qbs-pkg-config-probe.patch
     - /usr/bin/curl -LJ https://github.com/dismine/macdeployqt/archive/refs/heads/main.zip --output ${HOME}/macdeployqt-main.zip --silent
     - unzip ${HOME}/macdeployqt-main.zip -d ${HOME}
@@ -911,7 +912,8 @@ for:
     - qbs --version
     # Patch Qbs. Remove after Qbs 2.2.1+.
     - curl https://gist.githubusercontent.com/dismine/43f3c51e05f3317c5d4fe16cd3c4b6d8/raw/2d297bcb53c2c022f740509923adf1eb1796afe2/qbs-pkg-config-probe.patch --output $HOME/qbs-pkg-config-probe.patch --silent
-    - patch -N -d $(brew --prefix qbs)/ -p1 < $HOME/qbs-pkg-config-probe.patch
+    - patch -N -d $(brew --prefix qbs)/ -p1 < $HOME/qbs-pkg-config-probe.patch || true
+    - rm -f $(brew --prefix qbs)/share/qbs/imports/qbs/Probes/qbs-pkg-config-probe.js.rej
     - rm $HOME/qbs-pkg-config-probe.patch
     - /usr/bin/curl -LJ https://github.com/dismine/macdeployqt/archive/refs/heads/main.zip --output ${HOME}/macdeployqt-main.zip --silent
     - unzip ${HOME}/macdeployqt-main.zip -d ${HOME}
