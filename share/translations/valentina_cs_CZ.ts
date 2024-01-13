@@ -3803,7 +3803,7 @@
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialoghistory.ui" line="294"/>
-        <location filename="../../src/app/valentina/dialogs/dialoghistory.cpp" line="516"/>
+        <location filename="../../src/app/valentina/dialogs/dialoghistory.cpp" line="512"/>
         <source>Tool</source>
         <translation>Nástroj</translation>
     </message>
@@ -3812,38 +3812,38 @@
         <translation type="vanished">Nelze vytvořit záznam.</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/dialogs/dialoghistory.cpp" line="309"/>
+        <location filename="../../src/app/valentina/dialogs/dialoghistory.cpp" line="307"/>
         <source>%1 - Base point</source>
         <translation>%1 - Základní bod</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/dialogs/dialoghistory.cpp" line="312"/>
-        <location filename="../../src/app/valentina/dialogs/dialoghistory.cpp" line="317"/>
+        <location filename="../../src/app/valentina/dialogs/dialoghistory.cpp" line="310"/>
+        <location filename="../../src/app/valentina/dialogs/dialoghistory.cpp" line="315"/>
         <source>%1_%2 - Line from point %1 to point %2</source>
         <translation>%1_%2 - Čára od bodu %1 k bodu %2</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/dialogs/dialoghistory.cpp" line="321"/>
+        <location filename="../../src/app/valentina/dialogs/dialoghistory.cpp" line="319"/>
         <source>%3 - Point along line %1_%2</source>
         <translation>%3 - Bod podél čáry %1_%2</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/dialogs/dialoghistory.cpp" line="326"/>
+        <location filename="../../src/app/valentina/dialogs/dialoghistory.cpp" line="324"/>
         <source>%1 - Point of shoulder</source>
         <translation>%1 - Bod ramene</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/dialogs/dialoghistory.cpp" line="329"/>
+        <location filename="../../src/app/valentina/dialogs/dialoghistory.cpp" line="327"/>
         <source>%3 - normal to line %1_%2</source>
         <translation>%3 - kolmice k čáře %1_%2</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/dialogs/dialoghistory.cpp" line="335"/>
+        <location filename="../../src/app/valentina/dialogs/dialoghistory.cpp" line="333"/>
         <source>%4 - bisector of angle %1_%2_%3</source>
         <translation>%4 - osa úhlu %1_%2_%3</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/dialogs/dialoghistory.cpp" line="341"/>
+        <location filename="../../src/app/valentina/dialogs/dialoghistory.cpp" line="339"/>
         <source>%5 - intersection of lines %1_%2 and %3_%4</source>
         <translation>%5 - průsečík čar %1_%2 a %3_%4</translation>
     </message>
@@ -3860,22 +3860,22 @@
         <translation type="vanished">Bod křivky %1</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/dialogs/dialoghistory.cpp" line="384"/>
+        <location filename="../../src/app/valentina/dialogs/dialoghistory.cpp" line="382"/>
         <source>%4 - point of contact of arc with the center in point %1 and line %2_%3</source>
         <translation>%4 - bod doteku oblouku se středem v bodě %1 a čáry %2_%3</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/dialogs/dialoghistory.cpp" line="390"/>
+        <location filename="../../src/app/valentina/dialogs/dialoghistory.cpp" line="388"/>
         <source>Point of perpendicular from point %1 to line %2_%3</source>
         <translation>Bod pravého úhlu z bodu %1 k čáře %2_%3</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/dialogs/dialoghistory.cpp" line="396"/>
+        <location filename="../../src/app/valentina/dialogs/dialoghistory.cpp" line="394"/>
         <source>Triangle: axis %1_%2, points %3 and %4</source>
         <translation>Trojúhelník: osa %1_%2, body %3 a %4</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/dialogs/dialoghistory.cpp" line="401"/>
+        <location filename="../../src/app/valentina/dialogs/dialoghistory.cpp" line="399"/>
         <source>%1 - point of intersection %2 and %3</source>
         <translation>%1 - bod průsečíku %2 a %3</translation>
     </message>
@@ -3892,12 +3892,12 @@
         <translation type="vanished">%1 - vyjmout cestu křivky %2</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/dialogs/dialoghistory.cpp" line="429"/>
+        <location filename="../../src/app/valentina/dialogs/dialoghistory.cpp" line="427"/>
         <source>%1 - point of intersection line %2_%3 and axis through point %4</source>
         <translation>%1 - bod průsečíku čáry %2_%3 a osy procházející bodem %4</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/dialogs/dialoghistory.cpp" line="434"/>
+        <location filename="../../src/app/valentina/dialogs/dialoghistory.cpp" line="432"/>
         <source>%1 - point of intersection curve and axis through point %2</source>
         <translation>%1 - bod průsečíku křivky a osy procházející bodem %2</translation>
     </message>
@@ -3906,116 +3906,116 @@
         <translation type="vanished">Oblouk se středem v bodě %1 a délkou %2</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/dialogs/dialoghistory.cpp" line="438"/>
+        <location filename="../../src/app/valentina/dialogs/dialoghistory.cpp" line="436"/>
         <source>%1 - point of arcs intersection</source>
         <translation>%1 - průsečík oblouků</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/dialogs/dialoghistory.cpp" line="441"/>
+        <location filename="../../src/app/valentina/dialogs/dialoghistory.cpp" line="439"/>
         <source>%1 - point of circles intersection</source>
         <translation>%1 - průsečík kruhů</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/dialogs/dialoghistory.cpp" line="447"/>
+        <location filename="../../src/app/valentina/dialogs/dialoghistory.cpp" line="445"/>
         <source>%1 - point from circle and tangent</source>
         <translation>%1 - průsečík kruhu a tangenty</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/dialogs/dialoghistory.cpp" line="450"/>
+        <location filename="../../src/app/valentina/dialogs/dialoghistory.cpp" line="448"/>
         <source>%1 - point from arc and tangent</source>
         <translation>%1 - průsečík oblouku a tangenty</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/dialogs/dialoghistory.cpp" line="454"/>
+        <location filename="../../src/app/valentina/dialogs/dialoghistory.cpp" line="452"/>
         <source>Correction the dart %1_%2_%3</source>
         <translation>Oprava záševku %1_%2_%3</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/dialogs/dialoghistory.cpp" line="444"/>
+        <location filename="../../src/app/valentina/dialogs/dialoghistory.cpp" line="442"/>
         <source>%1 - point of curves intersection</source>
         <translation>%1 - průsečík křivek</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/dialogs/dialoghistory.cpp" line="349"/>
+        <location filename="../../src/app/valentina/dialogs/dialoghistory.cpp" line="347"/>
         <source>Curve</source>
         <translation>Křivka</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/dialogs/dialoghistory.cpp" line="355"/>
+        <location filename="../../src/app/valentina/dialogs/dialoghistory.cpp" line="353"/>
         <source>Cubic bezier curve</source>
         <translation>Kubická Bezierova křivka</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/dialogs/dialoghistory.cpp" line="361"/>
-        <location filename="../../src/app/valentina/dialogs/dialoghistory.cpp" line="367"/>
+        <location filename="../../src/app/valentina/dialogs/dialoghistory.cpp" line="359"/>
+        <location filename="../../src/app/valentina/dialogs/dialoghistory.cpp" line="365"/>
         <source>Arc</source>
         <translation>Oblouk</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/dialogs/dialoghistory.cpp" line="367"/>
-        <location filename="../../src/app/valentina/dialogs/dialoghistory.cpp" line="462"/>
+        <location filename="../../src/app/valentina/dialogs/dialoghistory.cpp" line="365"/>
+        <location filename="../../src/app/valentina/dialogs/dialoghistory.cpp" line="460"/>
         <source>%1 with length %2</source>
         <translation>%1 s délkou %2</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/dialogs/dialoghistory.cpp" line="373"/>
+        <location filename="../../src/app/valentina/dialogs/dialoghistory.cpp" line="371"/>
         <source>Spline path</source>
         <translation>Cesta hladké křivky (křivka spline)</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/dialogs/dialoghistory.cpp" line="379"/>
+        <location filename="../../src/app/valentina/dialogs/dialoghistory.cpp" line="377"/>
         <source>Cubic bezier curve path</source>
         <translation>Cesta kubické Bezierovy křivky</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/dialogs/dialoghistory.cpp" line="408"/>
-        <location filename="../../src/app/valentina/dialogs/dialoghistory.cpp" line="415"/>
-        <location filename="../../src/app/valentina/dialogs/dialoghistory.cpp" line="424"/>
+        <location filename="../../src/app/valentina/dialogs/dialoghistory.cpp" line="406"/>
+        <location filename="../../src/app/valentina/dialogs/dialoghistory.cpp" line="413"/>
+        <location filename="../../src/app/valentina/dialogs/dialoghistory.cpp" line="422"/>
         <source>%1 - cut %2</source>
         <translation>%1 - ustřihnout %2</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/dialogs/dialoghistory.cpp" line="408"/>
+        <location filename="../../src/app/valentina/dialogs/dialoghistory.cpp" line="406"/>
         <source>arc</source>
         <translation>Oblouk</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/dialogs/dialoghistory.cpp" line="415"/>
+        <location filename="../../src/app/valentina/dialogs/dialoghistory.cpp" line="413"/>
         <source>curve</source>
         <translation>Křivka</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/dialogs/dialoghistory.cpp" line="424"/>
+        <location filename="../../src/app/valentina/dialogs/dialoghistory.cpp" line="422"/>
         <source>curve path</source>
         <translation>Cesta křivky</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/dialogs/dialoghistory.cpp" line="462"/>
+        <location filename="../../src/app/valentina/dialogs/dialoghistory.cpp" line="460"/>
         <source>Elliptical arc</source>
         <translation>Elipsovitý oblouk</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/dialogs/dialoghistory.cpp" line="466"/>
+        <location filename="../../src/app/valentina/dialogs/dialoghistory.cpp" line="464"/>
         <source>Rotate objects around point %1. Suffix &apos;%2&apos;</source>
         <translation>Otočit předměty okolo bodu %1. Přípona &apos;%2&apos;</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/dialogs/dialoghistory.cpp" line="472"/>
+        <location filename="../../src/app/valentina/dialogs/dialoghistory.cpp" line="470"/>
         <source>Flipping by line %1_%2. Suffix &apos;%3&apos;</source>
         <translation>Převrácení podle čáry %1_%2. Přípona &apos;%3&apos;</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/dialogs/dialoghistory.cpp" line="477"/>
+        <location filename="../../src/app/valentina/dialogs/dialoghistory.cpp" line="475"/>
         <source>Flipping by axis through %1 point. Suffix &apos;%2&apos;</source>
         <translation>Převrácení podle osy skrze %1 bod. Přípona &apos;%2&apos;</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/dialogs/dialoghistory.cpp" line="483"/>
+        <location filename="../../src/app/valentina/dialogs/dialoghistory.cpp" line="481"/>
         <source>Move objects. Suffix &apos;%1&apos;</source>
         <translation>Posunout předměty. Přípona &apos;%1&apos;</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/dialogs/dialoghistory.cpp" line="775"/>
+        <location filename="../../src/app/valentina/dialogs/dialoghistory.cpp" line="771"/>
         <source>Empty</source>
         <comment>list</comment>
         <translation>Prázdný</translation>
@@ -4037,7 +4037,7 @@
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialoghistory.ui" line="75"/>
-        <location filename="../../src/app/valentina/dialogs/dialoghistory.cpp" line="692"/>
+        <location filename="../../src/app/valentina/dialogs/dialoghistory.cpp" line="688"/>
         <source>0 results</source>
         <translation>0 výsledků</translation>
     </message>
@@ -6562,13 +6562,13 @@ Přesto použít nastavení?</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.ui" line="224"/>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.cpp" line="1916"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.cpp" line="1919"/>
         <source>Ready!</source>
         <translation>Připraven!</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.ui" line="241"/>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.cpp" line="1776"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.cpp" line="1779"/>
         <source>Seam allowance</source>
         <translation>Švová záložka</translation>
     </message>
@@ -6658,58 +6658,58 @@ Přesto použít nastavení?</translation>
         <translation>Úhel:</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.cpp" line="1018"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.cpp" line="1021"/>
         <source>Edit seam allowance width</source>
         <translation>Upravit šířku švové záložky</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.cpp" line="1032"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.cpp" line="1035"/>
         <source>Edit seam allowance width before</source>
         <translation>Upravit šířku švové záložky před</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.cpp" line="1046"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.cpp" line="1049"/>
         <source>Edit seam allowance width after</source>
         <translation>Upravit šířku švové záložky po</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.cpp" line="1087"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.cpp" line="1090"/>
         <source>Edit passmark width</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.cpp" line="1101"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.cpp" line="1104"/>
         <source>Edit passmark angle</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.cpp" line="1372"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.cpp" line="1375"/>
         <source>Internal path</source>
         <translation>Vnitřní cesta</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.cpp" line="1373"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.cpp" line="1376"/>
         <source>Custom seam allowance</source>
         <translation>Vlastní švová záložka</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.cpp" line="1861"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.cpp" line="1864"/>
         <source>You need more points!</source>
         <translation>Potřebujete více bodů!</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.cpp" line="1869"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.cpp" line="1872"/>
         <source>First point of &lt;b&gt;custom seam allowance&lt;/b&gt; cannot be equal to the last point!</source>
         <translation>První bod &lt;b&gt;vlastní švové záložky&lt;/b&gt; nemůže být stejný s posledním bodem!</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.cpp" line="1878"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.cpp" line="1881"/>
         <source>You have double points!</source>
         <translation>Máte zdvojené body!</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.ui" line="913"/>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.cpp" line="1781"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.cpp" line="1784"/>
         <source>Passmarks</source>
         <translation>Značky sestavení</translation>
     </message>
@@ -6765,12 +6765,12 @@ Přesto použít nastavení?</translation>
         <translation>Značka V</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.cpp" line="1905"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.cpp" line="1908"/>
         <source>Please, select a detail to insert into!</source>
         <translation>Vyberte, prosím, jednotlivost (díl střihu), do níž se má provést vložení!</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.cpp" line="1899"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.cpp" line="1902"/>
         <source>List of details is empty!</source>
         <translation>Seznam jednotlivostí (dílů střihu) je prázdný!</translation>
     </message>
@@ -6786,7 +6786,7 @@ Přesto použít nastavení?</translation>
         <translation>Průsečík</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.cpp" line="1893"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.cpp" line="1896"/>
         <source>Each point in the &lt;b&gt;custom seam allowance&lt;/b&gt; path must be unique!</source>
         <translation>Každý bod v cestě &lt;b&gt;vlastní švové záložky&lt;/b&gt; musí být jedinečný!</translation>
     </message>
@@ -6891,7 +6891,7 @@ Přesto použít nastavení?</translation>
         <translation>1</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.cpp" line="1060"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.cpp" line="1063"/>
         <source>Control visibility</source>
         <translation>Nastavit viditelnost</translation>
     </message>
@@ -6946,7 +6946,7 @@ Přesto použít nastavení?</translation>
         <translation>Cesta je obrys stříhání. Použijte na ovládání vyvedení do DXF-AAMA</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.cpp" line="1828"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.cpp" line="1831"/>
         <source>The list of pieces is empty. Please, first create at least one piece for current pattern piece.</source>
         <translation>Seznam dílů je prázdný. Nejprve, prosím, vytvořte alespoň jeden díl pro nynější střih.</translation>
     </message>
@@ -6961,21 +6961,21 @@ Přesto použít nastavení?</translation>
         <translation>Ukázat druhou značku sestavení na čáře švu</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.cpp" line="1886"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.cpp" line="1889"/>
         <source>The same curve repeats twice!</source>
         <translation>Tatáž křivka se opakuje dvakrát!</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.cpp" line="871"/>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.cpp" line="905"/>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.cpp" line="949"/>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.cpp" line="979"/>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.cpp" line="1008"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.cpp" line="874"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.cpp" line="908"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.cpp" line="952"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.cpp" line="982"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.cpp" line="1011"/>
         <source>&lt;Empty&gt;</source>
         <translation>&lt;prázdné&gt;</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.cpp" line="833"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.cpp" line="836"/>
         <source>Current seam allowance</source>
         <translation>Nynější švová záložka</translation>
     </message>
@@ -7010,12 +7010,12 @@ Přesto použít nastavení?</translation>
         <translation>Značka okénko</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.cpp" line="1072"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.cpp" line="1075"/>
         <source>Edit passmark length</source>
         <translation>Upravit délku značky sestavení</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.cpp" line="1912"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.cpp" line="1915"/>
         <source>Invalid segment!</source>
         <translation>Neplatná část!</translation>
     </message>
@@ -8536,298 +8536,298 @@ Přesto použít nastavení?</translation>
         <translation>Připraven!</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="2086"/>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="2166"/>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="2250"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="2092"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="2172"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="2256"/>
         <source>Value</source>
         <translation>Hodnota</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="4462"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="4468"/>
         <source>Default</source>
         <translation>Výchozí</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="4875"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="4881"/>
         <source>Detail</source>
         <translation>Jednotlivost (díl střihu)</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="2126"/>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="2685"/>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="3143"/>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="3735"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="2132"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="2691"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="3149"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="3741"/>
         <source>Grainline</source>
         <translation>Dráha nitě</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.cpp" line="2288"/>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="1203"/>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="5310"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.cpp" line="2291"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="1206"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="5316"/>
         <source>Reverse</source>
         <translation>Převrátit</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.cpp" line="2298"/>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="5319"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.cpp" line="2301"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="5325"/>
         <source>Passmark</source>
         <translation>Značka sestavení</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.cpp" line="2318"/>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="5339"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.cpp" line="2321"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="5345"/>
         <source>One line</source>
         <translation>Jedna čára</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.cpp" line="2321"/>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="5342"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.cpp" line="2324"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="5348"/>
         <source>Two lines</source>
         <translation>Dvě čáry</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.cpp" line="2324"/>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="5345"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.cpp" line="2327"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="5351"/>
         <source>Three lines</source>
         <translation>Tři čáry</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.cpp" line="2327"/>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="5348"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.cpp" line="2330"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="5354"/>
         <source>T mark</source>
         <translation>Značka T</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.cpp" line="2331"/>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="5352"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.cpp" line="2334"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="5358"/>
         <source>External V mark</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.cpp" line="2335"/>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="5356"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.cpp" line="2338"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="5362"/>
         <source>Internal V mark</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.cpp" line="2338"/>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="5359"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.cpp" line="2341"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="5365"/>
         <source>U mark</source>
         <translation>Značka U</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.cpp" line="2341"/>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="5362"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.cpp" line="2344"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="5368"/>
         <source>Box mark</source>
         <translation>Značka okénko</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.cpp" line="2344"/>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="5365"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.cpp" line="2347"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="5371"/>
         <source>Check mark</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.cpp" line="2348"/>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="5369"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.cpp" line="2351"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="5375"/>
         <source>Check uniqueness</source>
         <translation>Ověřit jedinečnost</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.cpp" line="2353"/>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="5374"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.cpp" line="2356"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="5380"/>
         <source>Turn point</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.cpp" line="2359"/>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="5380"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.cpp" line="2362"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="5386"/>
         <source>Excluded</source>
         <translation>Vyloučeno</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.cpp" line="2365"/>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="1207"/>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="1250"/>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="1284"/>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="1346"/>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="5386"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.cpp" line="2368"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="1210"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="1253"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="1287"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="1349"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="5392"/>
         <source>Delete</source>
         <translation>Smazat</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="1197"/>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="1249"/>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="1333"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="1200"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="1252"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="1336"/>
         <source>Options</source>
         <translation>Volby</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="1773"/>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="1825"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="1776"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="1828"/>
         <source>Error. Can&apos;t save piece path.</source>
         <translation>Chyba. Nelze uložit cestu dílu.</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="2098"/>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="2179"/>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="2262"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="2104"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="2185"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="2268"/>
         <source>Infinite/undefined result</source>
         <translation>Nekonečný/Nevymezený výsledek</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="2102"/>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="2183"/>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="2266"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="2108"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="2189"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="2272"/>
         <source>Length should be positive</source>
         <translation>Délka má být kladná</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="2113"/>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="2194"/>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="2277"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="2119"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="2200"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="2283"/>
         <source>Parser error: %1</source>
         <translation>Chyba při zpracování: %1</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="2718"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="2724"/>
         <source>Current seam allowance</source>
         <translation>Nynější švová záložka</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="2940"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="2946"/>
         <source>Edit seam allowance width</source>
         <translation>Upravit šířku švové záložky</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="2954"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="2960"/>
         <source>Edit seam allowance width before</source>
         <translation>Upravit šířku švové záložky před</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="2968"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="2974"/>
         <source>Edit seam allowance width after</source>
         <translation>Upravit šířku švové záložky po</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="2997"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="3003"/>
         <source>Edit passmark width</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="3011"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="3017"/>
         <source>Edit passmark angle</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="3393"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="3399"/>
         <source>You need more points!</source>
         <translation>Potřebujete více bodů!</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="3399"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="3405"/>
         <source>You have to choose points in a clockwise direction!</source>
         <translation>Musíte vybrat body po směru otáčení hodinových ručiček!</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="3407"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="3413"/>
         <source>First point cannot be equal to the last point!</source>
         <translation>První bod nemůže být stejný s posledním bodem!</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="3415"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="3421"/>
         <source>You have double points!</source>
         <translation>Máte zdvojené body!</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="3970"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="3976"/>
         <source>Empty</source>
         <translation>Prázdný</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="4054"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="4060"/>
         <source>main path</source>
         <translation>Hlavní cesta</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="4056"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="4062"/>
         <source>custom seam allowance</source>
         <translation>Vlastní švová záložka</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.cpp" line="2301"/>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="4430"/>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="5322"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.cpp" line="2304"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="4436"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="5328"/>
         <source>None</source>
         <translation>Žádný</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="3733"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="3739"/>
         <source>Pins</source>
         <translation>Špendlíky</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="3996"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="4002"/>
         <source>no pin</source>
         <translation>Žádný špendlík</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="2208"/>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="2291"/>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="2694"/>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="3166"/>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="3175"/>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="3199"/>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="3208"/>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="3734"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="2214"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="2297"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="2700"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="3172"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="3181"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="3205"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="3214"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="3740"/>
         <source>Labels</source>
         <translation>Popisy</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="2110"/>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="2191"/>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="2274"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="2116"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="2197"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="2280"/>
         <source>Error</source>
         <translation>Chyba</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="2470"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="2476"/>
         <source>Edit length</source>
         <translation>Upravit délku</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="2476"/>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="2533"/>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="2593"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="2482"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="2539"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="2599"/>
         <source>Edit angle</source>
         <translation>Upravit úhel</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="2521"/>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="2581"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="2527"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="2587"/>
         <source>Edit height</source>
         <translation>Upravit výšku</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="2527"/>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="2587"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="2533"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="2593"/>
         <source>Edit width</source>
         <translation>Upravit šířku</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="585"/>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="3732"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="3738"/>
         <source>Paths</source>
         <translation>Cesty</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="3429"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="3435"/>
         <source>Each point in the path must be unique!</source>
         <translation>Každý bod v cestě musí být jedinečný!</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="623"/>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="3736"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="3742"/>
         <source>Passmarks</source>
         <translation>Značky sestavení</translation>
     </message>
@@ -8837,52 +8837,52 @@ Přesto použít nastavení?</translation>
         <translation>Nástroj Střihový díl</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="1335"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="1338"/>
         <source>Segment</source>
         <translation>Část</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="1336"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="1339"/>
         <source>Rectangle</source>
         <translation>Obdélník</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="1337"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="1340"/>
         <source>Cross</source>
         <translation>Kříž</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="1338"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="1341"/>
         <source>T-shaped</source>
         <translation>T-tvarovaný</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="1339"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="1342"/>
         <source>Doubletree</source>
         <translation>Dvojitý strom</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="1340"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="1343"/>
         <source>Corner</source>
         <translation>Roh</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="1341"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="1344"/>
         <source>Triangle</source>
         <translation>Trojúhelník</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="1342"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="1345"/>
         <source>H-shaped</source>
         <translation>H-tvarovaný</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="1343"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="1346"/>
         <source>Button</source>
         <translation>Tlačítko</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="3737"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="3743"/>
         <source>Place label</source>
         <translation>Umístit popis</translation>
     </message>
@@ -8892,16 +8892,16 @@ Přesto použít nastavení?</translation>
         <translation>Pro otevření všech vlastností jednotlivosti (dílu střihu) dokončete vytvoření hlavní cesty. Stiskněte, prosím, OK.</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="3423"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="3429"/>
         <source>The same curve repeats twice!</source>
         <translation>Tatáž křivka se opakuje dvakrát!</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="2751"/>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="2781"/>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="2810"/>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="2838"/>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="2865"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="2757"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="2787"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="2816"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="2844"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="2871"/>
         <source>&lt;Empty&gt;</source>
         <translation>&lt;prázdné&gt;</translation>
     </message>
@@ -8912,286 +8912,286 @@ Přesto použít nastavení?</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="652"/>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="3738"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="3744"/>
         <source>Fold line</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="1344"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="1347"/>
         <source>Circle</source>
         <translation>Kruh</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="2982"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="2988"/>
         <source>Edit passmark length</source>
         <translation>Upravit délku značky sestavení</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="3024"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="3030"/>
         <source>Edit fold line height</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="3039"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="3045"/>
         <source>Edit fold line width</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="3054"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="3060"/>
         <source>Edit fold line center position</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="3461"/>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="3495"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="3467"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="3501"/>
         <source>Invalid mirror line start point!</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="3468"/>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="3502"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="3474"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="3508"/>
         <source>Invalid mirror line end point!</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="3476"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="3482"/>
         <source>Start and end mirror line points must be unique!</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="3510"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="3516"/>
         <source>Mirror points must be neighbors!</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="4161"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="4167"/>
         <source>The customer name from individual measurements</source>
         <translation>Jméno zákazníka z jednotlivých měr</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="4165"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="4171"/>
         <source>The customer email from individual measurements</source>
         <translation>Adresa elektronické pošty zákazníka z jednotlivých měr</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="4169"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="4175"/>
         <source>The customer birth date from individual measurements</source>
         <translation>Datum narození zákazníka z jednotlivých měr</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="4223"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="4229"/>
         <source>Two ways (Up/Down)</source>
         <comment>grainline direction</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="4225"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="4231"/>
         <source>One way (Up)</source>
         <comment>grainline direction</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="4227"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="4233"/>
         <source>One way (Down)</source>
         <comment>grainline direction</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="4229"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="4235"/>
         <source>Four ways</source>
         <comment>grainline direction</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="4231"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="4237"/>
         <source>Two ways (Up/Left)</source>
         <comment>grainline direction</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="4233"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="4239"/>
         <source>Two ways (Up/Right)</source>
         <comment>grainline direction</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="4235"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="4241"/>
         <source>Two ways (Down/Left)</source>
         <comment>grainline direction</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="4237"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="4243"/>
         <source>Two ways (Down/Right)</source>
         <comment>grainline direction</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="4239"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="4245"/>
         <source>Three ways (Up/Down/Left)</source>
         <comment>grainline direction</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="4241"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="4247"/>
         <source>Three ways (Up/Down/Right)</source>
         <comment>grainline direction</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="4243"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="4249"/>
         <source>Three ways (Up/Left/Right)</source>
         <comment>grainline direction</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="4245"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="4251"/>
         <source>Three ways (Down/Left/Right)</source>
         <comment>grainline direction</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="4422"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="4428"/>
         <source>Two arrows (text above)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="4424"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="4430"/>
         <source>Two arrows (text under)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="4426"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="4432"/>
         <source>Two arrows</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="4427"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="4433"/>
         <source>Text</source>
-        <translation type="unfinished">Text</translation>
+        <translation>Text</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="4428"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="4434"/>
         <source>Three dots</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="4429"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="4435"/>
         <source>Three X</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="5435"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="5441"/>
         <source>Save label data.</source>
         <translation>Uložit data popisu.</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="5436"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="5442"/>
         <source>Label data were changed. Do you want to save them before editing label template?</source>
         <translation>Popisy byly změněny. Chcete je uložit, předtím než upravíte předlohu popisu?</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="4990"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="4996"/>
         <source>Height</source>
         <comment>dimension</comment>
         <translation>Výška</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="4994"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="5000"/>
         <source>Size</source>
         <comment>dimension</comment>
         <translation>Velikost</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="4998"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="5004"/>
         <source>Hip</source>
         <comment>dimension</comment>
         <translation>Kyčel</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="5002"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="5008"/>
         <source>Waist</source>
         <comment>dimension</comment>
         <translation>Pas</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="5008"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="5014"/>
         <source>Height label</source>
         <comment>dimension</comment>
         <translation>Popis výšky</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="5014"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="5020"/>
         <source>Size label</source>
         <comment>dimension</comment>
         <translation>Popis velikosti</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="5020"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="5026"/>
         <source>Hip label</source>
         <comment>dimension</comment>
         <translation>Popis kyčle</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="5026"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="5032"/>
         <source>Waist label</source>
         <comment>dimension</comment>
         <translation>Popis pasu</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="5039"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="5045"/>
         <source>Measurement: %1</source>
         <translation>Míry: %1</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="3437"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="3443"/>
         <source>Invalid segment!</source>
         <translation>Neplatná část!</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="4991"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="4997"/>
         <source>Dimension X</source>
         <comment>dimension</comment>
         <translation>Rozměr X</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="4995"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="5001"/>
         <source>Dimension Y</source>
         <comment>dimension</comment>
         <translation>Rozměr Y</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="4999"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="5005"/>
         <source>Dimension Z</source>
         <comment>dimension</comment>
         <translation>Rozměr Z</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="5003"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="5009"/>
         <source>Dimension W</source>
         <comment>dimension</comment>
         <translation>Rozměr W</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="5009"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="5015"/>
         <source>Dimension X label</source>
         <comment>dimension</comment>
         <translation>Popisek rozměru X</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="5015"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="5021"/>
         <source>Dimension Y label</source>
         <comment>dimension</comment>
         <translation>Popisek rozměru Y</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="5021"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="5027"/>
         <source>Dimension Z label</source>
         <comment>dimension</comment>
         <translation>Popisek rozměru Z</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="5027"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="5033"/>
         <source>Dimension W label</source>
         <comment>dimension</comment>
         <translation>Popisek rozměru W</translation>
@@ -10398,7 +10398,7 @@ Přesto použít nastavení?</translation>
 <context>
     <name>FoldLine</name>
     <message>
-        <location filename="../../src/libs/vlayout/vfoldline.cpp" line="358"/>
+        <location filename="../../src/libs/vlayout/vfoldline.cpp" line="359"/>
         <source>Cut On Fold</source>
         <translation type="unfinished"></translation>
     </message>
@@ -10966,7 +10966,7 @@ Přesto použít nastavení?</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.ui" line="738"/>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="5772"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="5777"/>
         <source>Save</source>
         <translation>Uložit</translation>
     </message>
@@ -11027,7 +11027,7 @@ Přesto použít nastavení?</translation>
     <message>
         <location filename="../../src/app/valentina/mainwindow.ui" line="813"/>
         <location filename="../../src/app/valentina/mainwindow.cpp" line="1866"/>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="3977"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="3979"/>
         <source>Details</source>
         <translation>Jednotlivosti</translation>
     </message>
@@ -11161,8 +11161,8 @@ Přesto použít nastavení?</translation>
         <translation type="vanished">Zobrazit nápovědu na internetu</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="4770"/>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="5146"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="4772"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="5148"/>
         <source>Pattern piece %1</source>
         <translation>Díl střihu %1</translation>
     </message>
@@ -11255,7 +11255,7 @@ Přesto použít nastavení?</translation>
         <translation>Vybrat křivku</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="6141"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="6148"/>
         <source>About Qt</source>
         <translation>O Qt</translation>
     </message>
@@ -11276,12 +11276,12 @@ Přesto použít nastavení?</translation>
         <translation type="vanished">Soubory se střihy (*.val)</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="4117"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="4119"/>
         <source>pattern</source>
         <translation>střih</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="4124"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="4126"/>
         <source>Save as</source>
         <translation>Uložit jako</translation>
     </message>
@@ -11294,8 +11294,8 @@ Přesto použít nastavení?</translation>
         <location filename="../../src/app/valentina/mainwindow.cpp" line="2061"/>
         <location filename="../../src/app/valentina/mainwindow.cpp" line="2094"/>
         <location filename="../../src/app/valentina/mainwindow.cpp" line="2321"/>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="4224"/>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="6956"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="4226"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="6963"/>
         <source>Open file</source>
         <translation>Otevřít soubor</translation>
     </message>
@@ -11312,7 +11312,7 @@ Přesto použít nastavení?</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.cpp" line="2839"/>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="4612"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="4614"/>
         <source>Error empty parameter.</source>
         <translation>Chyba. Prázdný parametr.</translation>
     </message>
@@ -11328,17 +11328,17 @@ Přesto použít nastavení?</translation>
         <translation>Chyba při zpracování souboru (std::bad_alloc).</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="4601"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="4603"/>
         <source>Bad id.</source>
         <translation>Chybný identifikátor.</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="5606"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="5611"/>
         <source>File saved</source>
         <translation>Soubor uložen</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="7553"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="7560"/>
         <source>untitled.val</source>
         <translation>Bez názvu.val</translation>
     </message>
@@ -11350,23 +11350,23 @@ Chcete uložit své změny?</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.cpp" line="1854"/>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="5818"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="5823"/>
         <source>&amp;Undo</source>
         <translation>&amp;Zpět</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.cpp" line="1855"/>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="5825"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="5830"/>
         <source>&amp;Redo</source>
         <translation>&amp;Znovu</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="6293"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="6300"/>
         <source>Pattern piece:</source>
         <translation>Díl střihu:</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="6295"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="6302"/>
         <source>Enter a new label for the pattern piece.</source>
         <translation>Zadejte nový štítek dílu střihu.</translation>
     </message>
@@ -11385,8 +11385,8 @@ Chcete uložit své změny?</translation>
     <message>
         <location filename="../../src/app/valentina/mainwindow.cpp" line="718"/>
         <location filename="../../src/app/valentina/mainwindow.cpp" line="765"/>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="6392"/>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="6580"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="6399"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="6587"/>
         <source>File error.</source>
         <translation>Chyba souboru.</translation>
     </message>
@@ -11395,12 +11395,12 @@ Chcete uložit své změny?</translation>
         <translation type="vanished">Soubor nahrán</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="6918"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="6925"/>
         <source>Valentina didn&apos;t shut down correctly. Do you want reopen files (%1) you had open?</source>
         <translation>Valentina nebyla vypnuta správně. Chcete znovu otevřít soubory (%1), které jste měli otevřeny?</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="6920"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="6927"/>
         <source>Reopen files.</source>
         <translation>Znovu otevřít soubory.</translation>
     </message>
@@ -11642,7 +11642,7 @@ Chcete uložit své změny?</translation>
         <translation>Vybrat první bod základní čáry</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="3946"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="3948"/>
         <source>Detail mode</source>
         <translation>Režim jednotlivosti</translation>
     </message>
@@ -11651,12 +11651,12 @@ Chcete uložit své změny?</translation>
         <translation type="vanished">Nyní nemůžete použít Režim jednotlivosti. Vytvořte, prosím, alespoň jeden střihový díl.</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="4030"/>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="4043"/>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="4066"/>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="4255"/>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="4333"/>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="6846"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="4032"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="4045"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="4068"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="4257"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="4335"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="6853"/>
         <source>Layout mode</source>
         <translation>Režim rozvržení</translation>
     </message>
@@ -11665,7 +11665,7 @@ Chcete uložit své změny?</translation>
         <translation type="vanished">Nyní nemůžete použít Režim rozvržení. Vytvořte, prosím, alespoň jeden střihový díl.</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="5761"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="5766"/>
         <source>Unsaved changes</source>
         <translation>Neuložené změny</translation>
     </message>
@@ -11704,7 +11704,7 @@ Chcete uložit své změny?</translation>
         <translation type="vanished">Obvyklé míry (*.vst);;Individuální míry (*.vit)</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="7201"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="7208"/>
         <source>You can&apos;t export empty scene.</source>
         <translation>Nelze vyvést prázdný soubor (prázdné rozvržení).</translation>
     </message>
@@ -11727,7 +11727,7 @@ Chcete uložit své změny?</translation>
         <translation type="vanished">%1, %2 (%3)</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="4151"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="4153"/>
         <source>Failed to lock. This file already opened in another window.</source>
         <translation>Nepodařilo se uzamknout. Tento soubor je již otevřen v jiném okně.</translation>
     </message>
@@ -11741,7 +11741,7 @@ Chcete uložit své změny?</translation>
         <translation type="vanished">Soubor s mírami obsahuje neplatný(é) rozměr(y).</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="7066"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="7073"/>
         <source>Measurement file has unknown format.</source>
         <translation>Soubor s mírami má neznámý formát.</translation>
     </message>
@@ -11768,13 +11768,13 @@ Chcete uložit své změny?</translation>
         <translation>Nepodařilo se seřídit míry.</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="4904"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="4906"/>
         <source>Couldn&apos;t update measurements.</source>
         <translation>Nepodařilo se aktualizovat míry.</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="6507"/>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="6527"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="6514"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="6534"/>
         <source>The measurements file &apos;%1&apos; could not be found.</source>
         <translation>Nepodařilo se najít soubor s mírami &apos;%1&apos;.</translation>
     </message>
@@ -11783,7 +11783,7 @@ Chcete uložit své změny?</translation>
         <translation type="vanished">Nepodařilo se najít soubor s mírami &lt;br/&gt;&lt;br/&gt; &lt;b&gt;%1&lt;/b&gt; &lt;br/&gt;&lt;br/&gt;. Chcete aktualizovat umístění souboru?</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="6985"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="6992"/>
         <source>Loading measurements file</source>
         <translation>Nahrává se soubor s mírami</translation>
     </message>
@@ -11800,9 +11800,9 @@ Chcete uložit své změny?</translation>
         <translation type="vanished">Nepodařilo se stanovit velikost. Soubor nebyl otevřen.</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="7382"/>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="7425"/>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="7468"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="7389"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="7432"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="7475"/>
         <source>The method %1 does nothing in GUI mode</source>
         <translation>Metoda %1 nepůsobí v režimu rozhraní</translation>
     </message>
@@ -11819,15 +11819,15 @@ Chcete uložit své změny?</translation>
         <translation type="vanished">Nepodařilo se stanovit výšku. Soubor nebyl otevřen.</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="6829"/>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="6885"/>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="7248"/>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="7286"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="6836"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="6892"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="7255"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="7293"/>
         <source>Export error.</source>
         <translation>Chyba při vyvádění.</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="7495"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="7502"/>
         <source>Please, provide one input file.</source>
         <translation>Poskytněte, prosím, jeden vstupní soubor.</translation>
     </message>
@@ -11904,7 +11904,7 @@ Chcete uložit své změny?</translation>
         <translation type="vanished">Uložit...</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="5777"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="5782"/>
         <source>Don&apos;t Save</source>
         <translation>Neukládat</translation>
     </message>
@@ -12021,13 +12021,13 @@ Chcete uložit své změny?</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.cpp" line="1862"/>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="3906"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="3908"/>
         <source>Contains all visibility groups</source>
         <translation>Obsahuje všechny skupiny s viditelností</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.cpp" line="1867"/>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="3979"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="3981"/>
         <source>Show which details will go in layout</source>
         <translation>Ukázat, které jednotlivosti (díly střihu) půjdou do rozvržení</translation>
     </message>
@@ -12067,7 +12067,7 @@ Chcete uložit své změny?</translation>
         <translation type="vanished">Velikost:</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="6982"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="6989"/>
         <source>The measurements file &lt;br/&gt;&lt;br/&gt; &lt;b&gt;%1&lt;/b&gt; &lt;br/&gt;&lt;br/&gt; could not be found. Do you want to update the file location?</source>
         <translation>Nepodařilo se najít soubor s mírami &lt;br/&gt;&lt;br/&gt; &lt;b&gt;%1&lt;/b&gt; &lt;br/&gt;&lt;br/&gt;. Chcete aktualizovat umístění souboru?</translation>
     </message>
@@ -12116,12 +12116,12 @@ Chcete uložit své změny?</translation>
         <translation>Vybrat hlavní předměty cesty po směru hodinových ručiček.</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="4194"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="4196"/>
         <source>Could not save the file</source>
         <translation>Nepodařilo se uložit soubor</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="7603"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="7610"/>
         <source>read only</source>
         <translation>Pouze pro čtení</translation>
     </message>
@@ -12194,22 +12194,22 @@ Chcete uložit své změny?</translation>
     <message>
         <location filename="../../src/app/valentina/mainwindow.cpp" line="2056"/>
         <location filename="../../src/app/valentina/mainwindow.cpp" line="2090"/>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="7028"/>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="7042"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="7035"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="7049"/>
         <source>Individual measurements</source>
         <translation>Individuální míry</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.cpp" line="2056"/>
         <location filename="../../src/app/valentina/mainwindow.cpp" line="2090"/>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="7028"/>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="7042"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="7035"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="7049"/>
         <source>Multisize measurements</source>
         <translation>Měření více velikostí</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="4123"/>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="4210"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="4125"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="4212"/>
         <source>Pattern files</source>
         <translation>Soubory se střihem</translation>
     </message>
@@ -12254,22 +12254,22 @@ Chcete uložit své změny?</translation>
         <translation>Vzorec</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="3947"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="3949"/>
         <source>You can&apos;t use Detail mode yet. Please, create at least one workpiece.</source>
         <translation>Nyní nemůžete použít Režim jednotlivosti. Vytvořte, prosím, alespoň jeden střihový díl.</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="4031"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="4033"/>
         <source>You can&apos;t use Layout mode yet. Please, create at least one workpiece.</source>
         <translation>Nyní ještě nemůžete použít Režim rozvržení. Vytvořte, prosím, alespoň jeden střihový díl.</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="4044"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="4046"/>
         <source>You can&apos;t use Layout mode yet. Please, include at least one detail in layout.</source>
         <translation>Nyní ještě nemůžete použít Režim rozvržení. Zahrňte, prosím, do rozvržení alespoň jednu jednotlivost (díl střihu).</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="4067"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="4069"/>
         <source>You can&apos;t use Layout mode yet.</source>
         <translation>Ještě nemůžete použít Režim rozvržení.</translation>
     </message>
@@ -12289,23 +12289,23 @@ Chcete uložit své změny?</translation>
         <translation>Vyvést jednotlivosti (díly střihu) a přeskočit krok rozvržení</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="4256"/>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="4334"/>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="6847"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="4258"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="4336"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="6854"/>
         <source>You don&apos;t have enough details to export. Please, include at least one detail in layout.</source>
         <translation>Nemáte dost jednotlivostí (dílů střihu) k vyvedení. Zahrňte, prosím, alespoň jednu jednotlivost (díl střihu) do rozvržení.</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="4269"/>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="4347"/>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="6860"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="4271"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="4349"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="6867"/>
         <source>Export details</source>
         <translation>Vyvést jednotlivosti (díly střihu)</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="4269"/>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="4347"/>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="6860"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="4271"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="4349"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="6867"/>
         <source>Can&apos;t export details.</source>
         <translation>Nelze vyvést jednotlivosti (díly střihu).</translation>
     </message>
@@ -12340,7 +12340,7 @@ Chcete uložit své změny?</translation>
         <translation>Vyvést jako…</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="5771"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="5776"/>
         <source>Save…</source>
         <translation>Uložit…</translation>
     </message>
@@ -12355,17 +12355,17 @@ Chcete uložit své změny?</translation>
         <translation>Vyvést konečné míry do CSV</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="7211"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="7218"/>
         <source>You can&apos;t export empty scene. Please, include at least one detail in layout.</source>
         <translation>Nemůžete vyvést prázdný výstup. Zahrňte, prosím, do rozvržení alespoň jednu jednotlivost (díl střihu).</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="7314"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="7321"/>
         <source>Export final measurements error.</source>
         <translation>Chyba při vyvádění konečných měr do CSV.</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="7315"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="7322"/>
         <source>Destination path is empty.</source>
         <translation>Cílová cesta je prázdná.</translation>
     </message>
@@ -12420,7 +12420,7 @@ Chcete uložit své změny?</translation>
         <translation>Vybrat středový bod umístění popisu</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="6538"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="6545"/>
         <source>The measurements file &apos;%1&apos; could not be found or provides not enough information.</source>
         <translation>Soubor s mírami &apos;%1&apos; se nepodařilo najít nebo neposkytuje dostatek údajů.</translation>
     </message>
@@ -12440,7 +12440,7 @@ Chcete uložit své změny?</translation>
         <translation>Změny použity.</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="5747"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="5752"/>
         <source>Cannot save settings. Access denied.</source>
         <translation>Nelze uložit nastavení. Přístup odepřen.</translation>
     </message>
@@ -12450,7 +12450,7 @@ Chcete uložit své změny?</translation>
         <translation>Ctrl+O</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="5723"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="5728"/>
         <source>Cannot read settings from a malformed .INI file.</source>
         <translation>Nelze číst nastavení z poškozeného souboru .INI.</translation>
     </message>
@@ -12500,28 +12500,28 @@ Chcete uložit své změny?</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.cpp" line="1861"/>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="3904"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="3906"/>
         <source>Groups of visibility</source>
         <translation>Skupiny viditelnosti</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.ui" line="1536"/>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="5119"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="5121"/>
         <source>Export recipe</source>
         <translation>Vyvést Recipe</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="5118"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="5120"/>
         <source>Recipe files</source>
         <translation>Soubory Recipe</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="5120"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="5122"/>
         <source>recipe</source>
         <translation>Recipe</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="5133"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="5135"/>
         <source>Could not save recipe. %1</source>
         <translation>Nepodařilo se uložit Recipe. %1</translation>
     </message>
@@ -12547,7 +12547,7 @@ Chcete uložit své změny?</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.ui" line="407"/>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="7931"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="7938"/>
         <source>Pattern messages</source>
         <translation>Zprávy střihu</translation>
     </message>
@@ -12562,27 +12562,27 @@ Chcete uložit své změny?</translation>
         <translation>Filtr</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="7908"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="7915"/>
         <source>DEBUG</source>
         <translation>LADĚNÍ</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="7911"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="7918"/>
         <source>WARNING</source>
         <translation>VAROVÁNÍ</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="7914"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="7921"/>
         <source>CRITICAL</source>
         <translation>ZÁSADNÍ</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="7917"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="7924"/>
         <source>FATAL</source>
         <translation>VELMI ZÁVAŽNÉ</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="7920"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="7927"/>
         <source>INFO</source>
         <translation>INFORMACE</translation>
     </message>
@@ -12662,78 +12662,78 @@ Chcete uložit své změny?</translation>
         <translation>Aktualizovat ruční rozvržení</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="4302"/>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="4375"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="4304"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="4377"/>
         <source>Unable to prepare raw layout data.</source>
         <translation>Nelze připravit nezpracovaná data rozvržení.</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="4309"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="4311"/>
         <source>Manual layout files</source>
         <translation>Soubory s ručním rozvržením</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="4316"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="4318"/>
         <source>Select manual layout</source>
         <translation>Vybrat ruční rozvržení</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="4417"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="4419"/>
         <source>Select folder</source>
         <translation>Vybrat složku</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="5762"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="5767"/>
         <source>The pattern has been modified. Do you want to save your changes?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="7363"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="7370"/>
         <source>Not supported dimension A value &apos;%1&apos; for this pattern file.</source>
         <translation>Hodnota A výšky &apos;%1&apos; pro tento soubor se střihem není podporována.</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="7370"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="7377"/>
         <source>Couldn&apos;t set dimension A. Need a file with multisize measurements.</source>
         <translation>Nepodařilo se stanovit rozměr A. Soubor musí mít vícevelikostní míry.</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="7376"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="7383"/>
         <source>Couldn&apos;t set dimension A. File wasn&apos;t opened.</source>
         <translation>Nepodařilo se stanovit rozměr A. Soubor nebyl otevřen.</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="7406"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="7413"/>
         <source>Not supported dimension B value &apos;%1&apos; for this pattern file.</source>
         <translation>Hodnota B výšky &apos;%1&apos; pro tento soubor se střihem není podporována.</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="7413"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="7420"/>
         <source>Couldn&apos;t set dimension B. Need a file with multisize measurements.</source>
         <translation>Nepodařilo se stanovit rozměr B. Soubor musí mít vícevelikostní míry.</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="7419"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="7426"/>
         <source>Couldn&apos;t set dimension B. File wasn&apos;t opened.</source>
         <translation>Nepodařilo se stanovit rozměr B. Soubor nebyl otevřen.</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="7449"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="7456"/>
         <source>Not supported dimension C value &apos;%1&apos; for this pattern file.</source>
         <translation>Hodnota C výšky &apos;%1&apos; pro tento soubor se střihem není podporována.</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="7456"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="7463"/>
         <source>Couldn&apos;t set dimension C. Need a file with multisize measurements.</source>
         <translation>Nepodařilo se stanovit rozměr C. Soubor musí mít vícevelikostní míry.</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="7462"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="7469"/>
         <source>Couldn&apos;t set dimension C. File wasn&apos;t opened.</source>
         <translation>Nepodařilo se stanovit rozměr C. Soubor nebyl otevřen.</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="5138"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="5140"/>
         <source>Could not create recipe file. %1</source>
         <translation>Nepodařilo se vytvořit soubor Recipe. %1</translation>
     </message>
@@ -12743,12 +12743,12 @@ Chcete uložit své změny?</translation>
         <translation>Obchod</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="6777"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="6784"/>
         <source>Scalable Vector Graphics files</source>
         <translation>Škálovatelné soubory vektorové grafiky</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="6779"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="6786"/>
         <source>Save draw</source>
         <translation>Uložit kreslení</translation>
     </message>
@@ -12843,33 +12843,33 @@ Chcete uložit své změny?</translation>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="4383"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="4385"/>
         <source>Select background image</source>
         <translation>Vybrat obrázek pozadí</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="5029"/>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="5070"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="5031"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="5072"/>
         <source>Unable to save image. Error: %1</source>
         <translation>Nepodařilo se uložit obrázek. Chyba: %1</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="5035"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="5037"/>
         <source>Unable to save image. No data.</source>
         <translation>Nelze uložit obrázek. Žádná data.</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="5041"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="5043"/>
         <source>untitled</source>
         <translation>bez názvu</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="5055"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="5057"/>
         <source>All files</source>
         <translation>Všechny soubory</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="5059"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="5061"/>
         <source>Save Image</source>
         <translation>Uložit obrázek</translation>
     </message>
@@ -14764,14 +14764,14 @@ Tato volba se projeví po opětovném spuštění.</translation>
         <translation>Nelze přečíst nástroj s ID &apos;%1&apos;.</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vformat/vpatternrecipe.cpp" line="755"/>
-        <location filename="../../src/libs/vformat/vpatternrecipe.cpp" line="801"/>
-        <location filename="../../src/libs/vformat/vpatternrecipe.cpp" line="1214"/>
+        <location filename="../../src/libs/vformat/vpatternrecipe.cpp" line="758"/>
+        <location filename="../../src/libs/vformat/vpatternrecipe.cpp" line="804"/>
+        <location filename="../../src/libs/vformat/vpatternrecipe.cpp" line="1217"/>
         <source>Empty list of nodes for tool with id &apos;%1&apos;.</source>
         <translation>Prázdný seznam uzlů pro nástroj s ID &apos;%1&apos;.</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vformat/vpatternrecipe.cpp" line="1159"/>
+        <location filename="../../src/libs/vformat/vpatternrecipe.cpp" line="1162"/>
         <source>Invalid formula &apos;%1&apos; for tool with id &apos;%2&apos;. %3.</source>
         <translation>Neplatný vzorec &apos;%1&apos; pro nástroj s ID &apos;%2&apos;. %3.</translation>
     </message>
@@ -14788,27 +14788,27 @@ Tato volba se projeví po opětovném spuštění.</translation>
         <translation>Název dílu &apos;%1&apos; není jedinečný.</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vgeometry/vabstractcurve.cpp" line="148"/>
+        <location filename="../../src/libs/vgeometry/vabstractcurve.cpp" line="143"/>
         <source>Could not find the segment start.</source>
         <translation>Nepodařilo se najít začátek části.</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vgeometry/vabstractcurve.cpp" line="157"/>
+        <location filename="../../src/libs/vgeometry/vabstractcurve.cpp" line="152"/>
         <source>Could not find the segment end.</source>
         <translation>Nepodařilo se najít konec části.</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vgeometry/vabstractcurve.cpp" line="163"/>
+        <location filename="../../src/libs/vgeometry/vabstractcurve.cpp" line="158"/>
         <source>Segment is too short.</source>
         <translation>Část je příliš krátká.</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vgeometry/vabstractcurve.cpp" line="181"/>
+        <location filename="../../src/libs/vgeometry/vabstractcurve.cpp" line="176"/>
         <source>Error calculating segment for curve &apos;%1&apos;. %2</source>
         <translation>Chyba při výpočtu části pro křivku &apos;%1&apos;. %2</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vgeometry/vabstractcurve.cpp" line="185"/>
+        <location filename="../../src/libs/vgeometry/vabstractcurve.cpp" line="180"/>
         <source>Error in path &apos;%1&apos;. Calculating segment for curve &apos;%2&apos; has failed. %3</source>
         <translation>Chyba v cestě &apos;%1&apos;. Výpočet části pro křivku &apos;%2&apos; se nezdařil. %3</translation>
     </message>
@@ -14970,7 +14970,7 @@ Tato volba se projeví po opětovném spuštění.</translation>
         <translation>Ponechat pouze jednu kopii křivky &apos;%1&apos;</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/dialogtoolbox.cpp" line="924"/>
+        <location filename="../../src/libs/vtools/dialogs/dialogtoolbox.cpp" line="921"/>
         <source>Point &apos;%1&apos; does not lie on a curve &apos;%2&apos;</source>
         <translation>Bod &apos;%1&apos; neleží na křivce &apos;%2&apos;</translation>
     </message>
@@ -17397,7 +17397,7 @@ Chcete uložit změny?</translation>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabfoldline.ui" line="14"/>
         <source>Form</source>
-        <translation type="unfinished">Formulář</translation>
+        <translation>Formulář</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabfoldline.ui" line="24"/>
@@ -17407,39 +17407,39 @@ Chcete uložit změny?</translation>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabfoldline.ui" line="32"/>
         <source>Type:</source>
-        <translation type="unfinished">Typ:</translation>
+        <translation>Typ:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabfoldline.ui" line="67"/>
         <source>Bold</source>
         <comment>Font formating</comment>
-        <translation type="unfinished">Tučné</translation>
+        <translation>Tučné</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabfoldline.ui" line="86"/>
         <source>Italic</source>
         <comment>Font formating</comment>
-        <translation type="unfinished">Kurzíva</translation>
+        <translation>Kurzíva</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabfoldline.ui" line="105"/>
         <source>Aligns with the left edge</source>
-        <translation type="unfinished">Zarovnat k levému okraji</translation>
+        <translation>Zarovnat k levému okraji</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabfoldline.ui" line="127"/>
         <source>Centers horizontally in the available space</source>
-        <translation type="unfinished">Vystředit vodorovně v dostupném prostoru</translation>
+        <translation>Vystředit vodorovně v dostupném prostoru</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabfoldline.ui" line="149"/>
         <source>Aligns with the right edge</source>
-        <translation type="unfinished">Zarovnat k pravému okraji</translation>
+        <translation>Zarovnat k pravému okraji</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabfoldline.ui" line="186"/>
         <source>Label:</source>
-        <translation type="unfinished">Popis:</translation>
+        <translation>Popis:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabfoldline.ui" line="223"/>
@@ -17449,52 +17449,52 @@ Chcete uložit změny?</translation>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabfoldline.ui" line="232"/>
         <source>Height</source>
-        <translation type="unfinished">Výška</translation>
+        <translation>Výška</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabfoldline.ui" line="292"/>
         <source>Height:</source>
         <comment>notch depth</comment>
-        <translation type="unfinished">Výška:</translation>
+        <translation>Výška:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabfoldline.ui" line="315"/>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabfoldline.ui" line="543"/>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabfoldline.ui" line="771"/>
         <source>Formula wizard</source>
-        <translation type="unfinished">Průvodce vzorcem</translation>
+        <translation>Průvodce vzorcem</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabfoldline.ui" line="372"/>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabfoldline.ui" line="600"/>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabfoldline.ui" line="828"/>
         <source>Value</source>
-        <translation type="unfinished">Hodnota</translation>
+        <translation>Hodnota</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabfoldline.ui" line="404"/>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabfoldline.ui" line="632"/>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabfoldline.ui" line="860"/>
         <source>Calculation</source>
-        <translation type="unfinished">Výpočet</translation>
+        <translation>Výpočet</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabfoldline.ui" line="429"/>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabfoldline.ui" line="657"/>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabfoldline.ui" line="885"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Show full calculation in message box&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="unfinished">&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Ukázat celý výpočet v okně se zprávami&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Ukázat celý výpočet v okně se zprávami&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabfoldline.ui" line="460"/>
         <source>Width</source>
-        <translation type="unfinished">Šířka</translation>
+        <translation>Šířka</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabfoldline.ui" line="520"/>
         <source>Width:</source>
         <comment>notch width</comment>
-        <translation type="unfinished">Šířka:</translation>
+        <translation>Šířka:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabfoldline.ui" line="688"/>
@@ -19107,13 +19107,13 @@ Chcete uložit změny?</translation>
 <context>
     <name>VAbstractOperation</name>
     <message>
-        <location filename="../../src/libs/vtools/tools/drawTools/operation/vabstractoperation.cpp" line="941"/>
-        <location filename="../../src/libs/vtools/tools/drawTools/operation/vabstractoperation.cpp" line="954"/>
+        <location filename="../../src/libs/vtools/tools/drawTools/operation/vabstractoperation.cpp" line="944"/>
+        <location filename="../../src/libs/vtools/tools/drawTools/operation/vabstractoperation.cpp" line="957"/>
         <source>Label</source>
         <translation>Popis</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/tools/drawTools/operation/vabstractoperation.cpp" line="954"/>
+        <location filename="../../src/libs/vtools/tools/drawTools/operation/vabstractoperation.cpp" line="957"/>
         <source>Length</source>
         <translation>Délka</translation>
     </message>
@@ -19133,7 +19133,7 @@ Chcete uložit změny?</translation>
         <translation>Smazat operaci</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/tools/drawTools/operation/vabstractoperation.cpp" line="967"/>
+        <location filename="../../src/libs/vtools/tools/drawTools/operation/vabstractoperation.cpp" line="970"/>
         <source>Visibility group</source>
         <translation>Skupina viditelnosti</translation>
     </message>
@@ -20966,7 +20966,7 @@ Chcete uložit změny?</translation>
 <context>
     <name>VFoldLine</name>
     <message>
-        <location filename="../../src/libs/vlayout/vfoldline.cpp" line="789"/>
+        <location filename="../../src/libs/vlayout/vfoldline.cpp" line="790"/>
         <source>Invalid SVG font &apos;%1&apos;. Fallback to outline font.</source>
         <translation type="unfinished"></translation>
     </message>
@@ -21593,12 +21593,12 @@ Chcete uložit změny?</translation>
 <context>
     <name>VPGraphicsPiece</name>
     <message>
-        <location filename="../../src/app/puzzle/scene/vpgraphicspiece.cpp" line="356"/>
+        <location filename="../../src/app/puzzle/scene/vpgraphicspiece.cpp" line="355"/>
         <source>Move to</source>
         <translation>Přesunout do</translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/scene/vpgraphicspiece.cpp" line="370"/>
+        <location filename="../../src/app/puzzle/scene/vpgraphicspiece.cpp" line="369"/>
         <source>Remove from Sheet</source>
         <translation>Odstranit z listu</translation>
     </message>
@@ -22272,7 +22272,7 @@ Chcete uložit změny?</translation>
     <message>
         <location filename="../../src/app/puzzle/vpmainwindow.ui" line="1746"/>
         <source>Cut on fold</source>
-        <translation type="unfinished">Střihnout v záhybu</translation>
+        <translation>Střihnout v záhybu</translation>
     </message>
     <message>
         <location filename="../../src/app/puzzle/vpmainwindow.ui" line="1755"/>
@@ -22622,74 +22622,74 @@ Chcete uložit změny?</translation>
         <translation type="vanished">Chyba. Není jedinečný identifikátor.</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="573"/>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="601"/>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="663"/>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="707"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="572"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="600"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="662"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="706"/>
         <source>Error parsing file.</source>
         <translation>Chyba při zpracování souboru.</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="580"/>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="674"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="579"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="673"/>
         <source>Error can&apos;t convert value.</source>
         <translation>Chyba. Nelze převést hodnotu.</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="587"/>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="685"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="586"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="684"/>
         <source>Error empty parameter.</source>
         <translation>Chyba. Prázdný parametr.</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="594"/>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="696"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="593"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="695"/>
         <source>Error wrong id.</source>
         <translation>Chyba. Špatný identifikátor.</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="608"/>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="718"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="607"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="717"/>
         <source>Error parsing file (std::bad_alloc).</source>
         <translation>Chyba při zpracování souboru (std::bad_alloc).</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="1048"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="1047"/>
         <source>Error creating or updating detail</source>
         <translation>Chyba při vytváření nebo aktualizaci záznamu typu &quot;jednotlivost (díl střihu)&quot;</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="1669"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="1668"/>
         <source>Error creating or updating single point</source>
         <translation>Chyba při vytváření nebo aktualizaci jediného bodu</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="1714"/>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="1720"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="1713"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="1719"/>
         <source>Error creating or updating point of end line</source>
         <translation>Chyba při vytváření nebo aktualizaci bodu na konci čáry</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="1764"/>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="1770"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="1763"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="1769"/>
         <source>Error creating or updating point along line</source>
         <translation>Chyba při vytváření nebo aktualizaci bodu podél čáry</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="1809"/>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="1815"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="1808"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="1814"/>
         <source>Error creating or updating point of shoulder</source>
         <translation>Chyba při vytváření nebo aktualizaci bodu ramene</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="1854"/>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="1860"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="1853"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="1859"/>
         <source>Error creating or updating point of normal</source>
         <translation>Chyba při vytváření nebo aktualizaci bodu kolmice</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="1899"/>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="1905"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="1898"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="1904"/>
         <source>Error creating or updating point of bisector</source>
         <translation>Chyba při vytváření nebo aktualizaci bodu osy úhlu</translation>
     </message>
@@ -22698,270 +22698,270 @@ Chcete uložit změny?</translation>
         <translation type="vanished">Chyba při vytváření nebo aktualizaci bodu průsečíku čar</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="1975"/>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="1981"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="1974"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="1980"/>
         <source>Error creating or updating point of contact</source>
         <translation>Chyba při vytváření nebo aktualizaci bodu dotyku</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="2031"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="2030"/>
         <source>Error creating or updating modeling point</source>
         <translation>Chyba při vytváření nebo aktualizaci modelovacího bodu</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="2175"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="2174"/>
         <source>Error creating or updating height</source>
         <translation>Chyba při vytváření nebo aktualizaci výšky</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="2206"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="2205"/>
         <source>Error creating or updating triangle</source>
         <translation>Chyba při vytváření nebo aktualizaci trojúhelníku</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="2236"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="2235"/>
         <source>Error creating or updating point of intersection</source>
         <translation>Chyba při vytváření nebo aktualizaci bodu průsečíku</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="2275"/>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="2281"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="2274"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="2280"/>
         <source>Error creating or updating cut spline point</source>
         <translation>Chyba při vytváření nebo aktualizaci bodu vyjmutí hladké křivky (křivka spline)</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="2320"/>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="2326"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="2319"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="2325"/>
         <source>Error creating or updating cut spline path point</source>
         <translation>Chyba při vytváření nebo aktualizaci bodu cesty vyjmutí hladké křivky (křivka spline)</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="2365"/>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="2371"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="2364"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="2370"/>
         <source>Error creating or updating cut arc point</source>
         <translation>Chyba při vytváření nebo aktualizaci bodu vyjmutí oblouku</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="2412"/>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="2418"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="2411"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="2417"/>
         <source>Error creating or updating point of intersection line and axis</source>
         <translation>Chyba při vytváření nebo aktualizaci bodu průsečíku čáry a osy</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="2465"/>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="2471"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="2464"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="2470"/>
         <source>Error creating or updating point of intersection curve and axis</source>
         <translation>Chyba při vytváření nebo aktualizaci bodu průsečíku křivky a osy</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="1547"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="1546"/>
         <source>Error creating or updating line</source>
         <translation>Chyba při vytváření nebo aktualizaci čáry</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="2758"/>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="2824"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="2757"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="2823"/>
         <source>Error creating or updating simple curve</source>
         <translation>Chyba při vytváření nebo aktualizaci jednoduché křivky</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="2956"/>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="3044"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="2955"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="3043"/>
         <source>Error creating or updating curve path</source>
         <translation>Chyba při vytváření nebo aktualizaci cesty křivky</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="3162"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="3161"/>
         <source>Error creating or updating modeling simple curve</source>
         <translation>Chyba při vytváření nebo aktualizaci jednoduché křivky, záznamu typu &quot;podrobnost křivky&quot;</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="3210"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="3209"/>
         <source>Error creating or updating modeling curve path</source>
         <translation>Chyba při vytváření nebo aktualizaci cesty křivky, záznamu typu &quot;podrobnost cesty&quot;</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="3257"/>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="3263"/>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="3448"/>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="3454"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="3256"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="3262"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="3447"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="3453"/>
         <source>Error creating or updating simple arc</source>
         <translation>Chyba při vytváření nebo aktualizaci jednoduchého oblouku</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="3401"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="3400"/>
         <source>Error creating or updating modeling arc</source>
         <translation>Chyba při vytváření nebo aktualizaci záznamu typu &quot;podrobnost oblouku&quot;</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="4078"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="4077"/>
         <source>Error creating or updating union details</source>
         <translation>Chyba při vytváření nebo aktualizaci záznamu typu &quot;spojení jednotlivostí (dílů střihu)&quot;</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="2502"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="2501"/>
         <source>Error creating or updating point of intersection arcs</source>
         <translation>Chyba při vytváření nebo aktualizaci bodu průsečíku oblouků</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="2545"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="2544"/>
         <source>Error creating or updating point of intersection circles</source>
         <translation>Chyba při vytváření nebo aktualizaci bodu průsečíku kruhů</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="2627"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="2626"/>
         <source>Error creating or updating point from circle and tangent</source>
         <translation>Chyba při vytváření nebo aktualizaci bodu průsečíku kruhu a tangenty</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="2658"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="2657"/>
         <source>Error creating or updating point from arc and tangent</source>
         <translation>Chyba při vytváření nebo aktualizaci bodu průsečíku oblouku a tangenty</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="2708"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="2707"/>
         <source>Error creating or updating true darts</source>
         <translation>Chyba při vytváření nebo aktualizaci vyrovnání délky záševku</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="791"/>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="899"/>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="976"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="790"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="898"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="975"/>
         <source>Wrong tag name &apos;%1&apos;.</source>
         <translation>Špatný název značky &apos;%1&apos;.</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="1514"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="1513"/>
         <source>Unknown point type &apos;%1&apos;.</source>
         <translation>Neznámý typ bodu &apos;%1&apos;.</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="3968"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="3967"/>
         <source>Unknown spline type &apos;%1&apos;.</source>
         <translation>Neznámý typ hladké křivky (křivka spline) &apos;%1&apos;.</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="4004"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="4003"/>
         <source>Unknown arc type &apos;%1&apos;.</source>
         <translation>Neznámý typ oblouku &apos;%1&apos;.</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="4084"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="4083"/>
         <source>Unknown tools type &apos;%1&apos;.</source>
         <translation>Neznámý typ nástroje &apos;%1&apos;.</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="508"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="507"/>
         <source>Error not unique id.</source>
         <translation>Chyba: nejedinečný identifikátor.</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="2587"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="2586"/>
         <source>Error creating or updating point of intersection curves</source>
         <translation>Chyba při vytváření nebo aktualizaci bodu průsečíku křivek</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="2830"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="2829"/>
         <source>Error creating or updating simple interactive spline</source>
         <translation>Chyba při vytváření nebo aktualizaci jednoduché interaktivní hladké křivky (křivka spline)</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="3050"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="3049"/>
         <source>Error creating or updating interactive spline path</source>
         <translation>Chyba při vytváření nebo aktualizaci bodu interaktivní cesty hladké křivky (křivka spline)</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="2884"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="2883"/>
         <source>Error creating or updating cubic bezier curve</source>
         <translation>Chyba při vytváření nebo aktualizaci kubické Bézierovy křivky</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="3114"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="3113"/>
         <source>Error creating or updating cubic bezier path curve</source>
         <translation>Chyba při vytváření nebo aktualizaci cesty kubické Bézierovy křivky</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="3494"/>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="3500"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="3493"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="3499"/>
         <source>Error creating or updating operation of rotation</source>
         <translation>Chyba při vytváření nebo aktualizaci operace otočení</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="4117"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="4116"/>
         <source>Unknown operation type &apos;%1&apos;.</source>
         <translation>Neznámý typ operace &apos;%1&apos;.</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="3532"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="3531"/>
         <source>Error creating or updating operation of flipping by line</source>
         <translation>Chyba při vytváření nebo aktualizaci operace přetočení podle čáry</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="3564"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="3563"/>
         <source>Error creating or updating operation of flipping by axis</source>
         <translation>Chyba při vytváření nebo aktualizaci operace přetočení podle osy</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="3610"/>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="3616"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="3609"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="3615"/>
         <source>Error creating or updating operation of moving</source>
         <translation>Chyba při vytváření nebo aktualizaci operace posunutí</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="1936"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="1935"/>
         <source>Error creating or updating point of line intersection</source>
         <translation>Chyba při vytváření nebo aktualizaci bodu průsečíku čáry</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="3317"/>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="3323"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="3316"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="3322"/>
         <source>Error creating or updating simple elliptical arc</source>
         <translation>Chyba při vytváření nebo aktualizaci jednoduchého elipsovitého oblouku</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="4036"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="4035"/>
         <source>Unknown elliptical arc type &apos;%1&apos;.</source>
         <translation>Neznámý typ elipsovitého oblouku &apos;%1&apos;.</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="3362"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="3361"/>
         <source>Error creating or updating modeling elliptical arc</source>
         <translation>Chyba při vytváření nebo aktualizaci modelovacího elipsovitého oblouku</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="993"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="992"/>
         <source>Detail</source>
         <translation>Jednotlivost (díl střihu)</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="4168"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="4167"/>
         <source>Unnamed path</source>
         <translation>Nepojmenovaná cesta</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="4161"/>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="4184"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="4160"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="4183"/>
         <source>Error creating or updating a piece path</source>
         <translation>Chyba při vytváření nebo aktualizaci cesty dílu</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="2070"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="2069"/>
         <source>Error creating or updating pin point</source>
         <translation>Chyba při vytváření nebo aktualizaci bodu špendlíku</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="4162"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="4161"/>
         <source>Piece path doesn&apos;t contain nodes</source>
         <translation>Cesta dílu neobsahuje uzly</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="2139"/>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="2145"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="2138"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="2144"/>
         <source>Error creating or updating place label</source>
         <translation>Chyba při vytváření nebo aktualizaci popisu umístění</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="4342"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="4341"/>
         <source>Can&apos;t find increment &apos;%1&apos;</source>
         <translation type="unfinished"></translation>
     </message>
@@ -23030,22 +23030,22 @@ Chcete uložit změny?</translation>
         <translation>Nelze najít prvek podle ID &apos;%1&apos;</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vformat/vpatternrecipe.cpp" line="473"/>
+        <location filename="../../src/libs/vformat/vpatternrecipe.cpp" line="476"/>
         <source>Can&apos;t create history record for the tool.</source>
         <translation>Nelze vytvořit záznam historie pro nástroj.</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vformat/vpatternrecipe.cpp" line="507"/>
+        <location filename="../../src/libs/vformat/vpatternrecipe.cpp" line="510"/>
         <source>Reading final measurements error.</source>
         <translation>Chyba při čtení konečných měr.</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vformat/vpatternrecipe.cpp" line="508"/>
+        <location filename="../../src/libs/vformat/vpatternrecipe.cpp" line="511"/>
         <source>Value for final measurtement &apos;%1&apos; is infinite or NaN. Please, check your calculations.</source>
         <translation>Hodnota pro konečné měření &apos;%1&apos; je nekonečná nebo NaN. Ověřte, prosím, své výpočty.</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vformat/vpatternrecipe.cpp" line="521"/>
+        <location filename="../../src/libs/vformat/vpatternrecipe.cpp" line="524"/>
         <source>Unable to create record for final measurement &apos;%1&apos;. Error: %2</source>
         <translation>Nelze vytvořit záznam pro konečné měření &apos;%1&apos;. Chyba: %2</translation>
     </message>
@@ -23754,32 +23754,32 @@ Chyba kompatibility formátu nezpracovaného rozvržení: ActualFileVersion = %1
 <context>
     <name>VToolMove</name>
     <message>
-        <location filename="../../src/libs/vtools/tools/drawTools/operation/vtoolmove.cpp" line="524"/>
+        <location filename="../../src/libs/vtools/tools/drawTools/operation/vtoolmove.cpp" line="529"/>
         <source>Rotation angle</source>
         <translation>Úhel otáčení</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/tools/drawTools/operation/vtoolmove.cpp" line="521"/>
+        <location filename="../../src/libs/vtools/tools/drawTools/operation/vtoolmove.cpp" line="526"/>
         <source>Length</source>
         <translation>Délka</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/tools/drawTools/operation/vtoolmove.cpp" line="418"/>
+        <location filename="../../src/libs/vtools/tools/drawTools/operation/vtoolmove.cpp" line="423"/>
         <source>Center point</source>
         <translation>Středový bod</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/tools/drawTools/operation/vtoolmove.cpp" line="519"/>
+        <location filename="../../src/libs/vtools/tools/drawTools/operation/vtoolmove.cpp" line="524"/>
         <source>Angle</source>
         <translation>Úhel</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/tools/drawTools/operation/vtoolmove.cpp" line="526"/>
+        <location filename="../../src/libs/vtools/tools/drawTools/operation/vtoolmove.cpp" line="531"/>
         <source>Rotation origin point</source>
         <translation>Původní bod otočení</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/tools/drawTools/operation/vtoolmove.cpp" line="313"/>
+        <location filename="../../src/libs/vtools/tools/drawTools/operation/vtoolmove.cpp" line="318"/>
         <source>move</source>
         <translation>Posunout</translation>
     </message>
@@ -24285,12 +24285,12 @@ Chyba kompatibility formátu nezpracovaného rozvržení: ActualFileVersion = %1
     <message>
         <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="2853"/>
         <source>Second dart point:</source>
-        <translation type="unfinished">Druhý bod záševku:</translation>
+        <translation>Druhý bod záševku:</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="2854"/>
         <source>Third dart point:</source>
-        <translation type="unfinished">Třetí bod záševku:</translation>
+        <translation>Třetí bod záševku:</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="2866"/>
@@ -24732,17 +24732,17 @@ Chyba kompatibility formátu nezpracovaného rozvržení: ActualFileVersion = %1
 <context>
     <name>VToolRotation</name>
     <message>
-        <location filename="../../src/libs/vtools/tools/drawTools/operation/vtoolrotation.cpp" line="393"/>
+        <location filename="../../src/libs/vtools/tools/drawTools/operation/vtoolrotation.cpp" line="399"/>
         <source>Origin point</source>
         <translation>Původní bod</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/tools/drawTools/operation/vtoolrotation.cpp" line="393"/>
+        <location filename="../../src/libs/vtools/tools/drawTools/operation/vtoolrotation.cpp" line="399"/>
         <source>Rotation angle</source>
         <translation>Úhel otáčení</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/tools/drawTools/operation/vtoolrotation.cpp" line="254"/>
+        <location filename="../../src/libs/vtools/tools/drawTools/operation/vtoolrotation.cpp" line="260"/>
         <source>rotate</source>
         <translation>Otočit</translation>
     </message>
@@ -26989,7 +26989,7 @@ Chyba kompatibility formátu nezpracovaného rozvržení: ActualFileVersion = %1
         <translation type="vanished">Úhel otočení = %1°, &lt;b&gt;Shift&lt;/b&gt; - úhel přilepení, &lt;b&gt;Klepnutí myši&lt;/b&gt; - dokončit vytváření</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/visualization/line/operation/vistoolrotation.cpp" line="113"/>
+        <location filename="../../src/libs/vtools/visualization/line/operation/vistoolrotation.cpp" line="110"/>
         <source>Rotating angle = %1°, &lt;b&gt;%2&lt;/b&gt; - sticking angle, &lt;b&gt;Mouse click&lt;/b&gt; - finish creation</source>
         <translation>Úhel otočení = %1°, &lt;b&gt;%2&lt;/b&gt; - úhel přilepení, &lt;b&gt;Klepnutí myši&lt;/b&gt; - dokončit vytváření</translation>
     </message>
