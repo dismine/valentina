@@ -507,7 +507,7 @@ auto VFoldLine::TrueCenter(const QLineF &base, qreal width) const -> QPointF
 
     if (VFuzzyComparePossibleNulls(base.length(), width) || qFuzzyIsNull(width))
     {
-        return base.center();
+        return LineCenter(base);
     }
 
     QLineF seg1 = base;

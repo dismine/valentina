@@ -1680,8 +1680,8 @@ auto VPiece::SeamAllowanceMirrorLine(const VContainer *data) const -> QLineF
     QRectF rec = QRectF(0, 0, INT_MAX, INT_MAX);
     rec.translate(-INT_MAX / 2.0, -INT_MAX / 2.0);
 
-    QLineF axis =
-        QLineF(seamMirrorLine.center(), VGObject::BuildRay(seamMirrorLine.center(), seamMirrorLine.angle() + 180, rec));
+    QLineF axis = QLineF(LineCenter(seamMirrorLine),
+                         VGObject::BuildRay(LineCenter(seamMirrorLine), seamMirrorLine.angle() + 180, rec));
 
     QVector<QPointF> points;
     CastTo(SeamAllowancePoints(data), points);
@@ -1695,7 +1695,8 @@ auto VPiece::SeamAllowanceMirrorLine(const VContainer *data) const -> QLineF
     const QPointF startPoint = intersections.constFirst();
 
     std::reverse(points.begin(), points.end());
-    axis = QLineF(seamMirrorLine.center(), VGObject::BuildRay(seamMirrorLine.center(), seamMirrorLine.angle(), rec));
+    axis =
+        QLineF(LineCenter(seamMirrorLine), VGObject::BuildRay(LineCenter(seamMirrorLine), seamMirrorLine.angle(), rec));
     intersections = VAbstractCurve::CurveIntersectLine(points, axis);
     if (intersections.isEmpty())
     {
