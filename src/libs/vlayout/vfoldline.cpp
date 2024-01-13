@@ -525,7 +525,7 @@ auto VFoldLine::TrueCenter(const QLineF &base, qreal width) const -> QPointF
 
     qreal const seg2T = seg2.length() / base.length();
 
-    if (m_center < seg2T && m_center <= 1)
+    if (m_center >= (1 - seg2T) && m_center <= 1)
     {
         return seg2.p2();
     }
