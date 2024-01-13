@@ -17,6 +17,9 @@
 #include "drw_header.h"
 #include "drw_interface.h"
 #include "drw_objects.h"
+#include "intern/dxfreader.h"
+#include "intern/dxfwriter.h"
+
 #include <string>
 #include <unordered_map>
 
@@ -24,9 +27,6 @@
 #if __cplusplus <= 201703L
 #include <ciso646> // and, not, or
 #endif
-
-class dxfReader;
-class dxfWriter;
 
 class dxfRW
 {
