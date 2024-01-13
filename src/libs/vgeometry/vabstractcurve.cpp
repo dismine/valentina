@@ -41,11 +41,6 @@
 #include "../vmisc/vabstractvalapplication.h"
 #include "vabstractcurve_p.h"
 
-// See https://stackoverflow.com/a/46719572/3045403
-#if __cplusplus < 201703L
-constexpr qreal VAbstractCurve::minLength; // NOLINT(readability-redundant-declaration)
-#endif
-
 namespace
 {
 //---------------------------------------------------------------------------------------------------------------------
