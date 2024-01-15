@@ -41,8 +41,8 @@
 #include <QTranslator>
 #include <QtGlobal>
 
-#include "../vmisc/def.h"
 #include "../vpatterndb/vtranslatevars.h"
+#include "def.h"
 #include "vcommonsettings.h"
 
 class QUndoStack;
