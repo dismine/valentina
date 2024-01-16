@@ -109,75 +109,87 @@ auto dxfRW::read(DRW_Interface *interface_, bool ext) -> bool
 
 auto dxfRW::write(DRW_Interface *interface_, DRW::Version ver, bool bin) -> bool
 {
-    bool isOk = false;
     std::ofstream filestr;
-    filestr.exceptions(std::ifstream::failbit | std::ifstream::badbit);
     version = ver;
     binFile = bin;
     iface = interface_;
-    try
+    if (binFile)
     {
-        if (binFile)
-        {
-            filestr.open(fileName.c_str(), std::ios_base::out | std::ios::binary | std::ios::trunc);
-            // write sentinel
-            filestr << "AutoCAD Binary DXF\r\n" << static_cast<char>(26) << '\0';
-            writer = std::make_unique<dxfWriterBinary>(&filestr);
-            DRW_DBG("dxfRW::read binary file\n");
-        }
-        else
-        {
-            filestr.open(fileName.c_str(), std::ios_base::out | std::ios::trunc);
-            writer = std::make_unique<dxfWriterAscii>(&filestr);
-            std::string comm = std::string("dxfrw ") + std::string(DRW_VERSION);
-            writer->writeString(999, comm);
-        }
-        this->header = DRW_Header();
-        iface->writeHeader(header);
-        writer->writeString(0, "SECTION");
-        entCount = FIRSTHANDLE;
-        header.write(writer, version);
-        writer->writeString(0, "ENDSEC");
-        if (ver > DRW::AC1009)
-        {
-            writer->writeString(0, "SECTION");
-            writer->writeString(2, "CLASSES");
-            writer->writeString(0, "ENDSEC");
-        }
-        writer->writeString(0, "SECTION");
-        writer->writeString(2, "TABLES");
-        writeTables();
-        writer->writeString(0, "ENDSEC");
-        writer->writeString(0, "SECTION");
-        writer->writeString(2, "BLOCKS");
-        writeBlocks();
-        writer->writeString(0, "ENDSEC");
+        filestr.open(fileName.c_str(), std::ios_base::out | std::ios::binary | std::ios::trunc);
 
-        writer->writeString(0, "SECTION");
-        writer->writeString(2, "ENTITIES");
-        iface->writeEntities();
-        writer->writeString(0, "ENDSEC");
-
-        if (version > DRW::AC1009)
+        if (!filestr.is_open())
         {
-            writer->writeString(0, "SECTION");
-            writer->writeString(2, "OBJECTS");
-            writeObjects();
-            writer->writeString(0, "ENDSEC");
+            errorString = "Error opening file!";
+            writer.reset();
+            return false;
         }
-        writer->writeString(0, "EOF");
-        filestr.flush();
-        filestr.close();
+
+        // write sentinel
+        filestr << "AutoCAD Binary DXF\r\n" << static_cast<char>(26) << '\0';
+        writer = std::make_unique<dxfWriterBinary>(&filestr);
+        DRW_DBG("dxfRW::read binary file\n");
     }
-    catch (std::ofstream::failure &writeErr)
+    else
     {
-        errorString = writeErr.what();
-        writer.reset();
-        return isOk;
+        filestr.open(fileName.c_str(), std::ios_base::out | std::ios::trunc);
+
+        if (!filestr.is_open())
+        {
+            errorString = "Error opening file!";
+            writer.reset();
+            return false;
+        }
+
+        writer = std::make_unique<dxfWriterAscii>(&filestr);
+        std::string const comm = std::string("dxfrw ") + std::string(DRW_VERSION);
+        writer->writeString(999, comm);
     }
-    isOk = true;
+
+    this->header = DRW_Header();
+    iface->writeHeader(header);
+    writer->writeString(0, "SECTION");
+    entCount = FIRSTHANDLE;
+    header.write(writer, version);
+    writer->writeString(0, "ENDSEC");
+    if (ver > DRW::AC1009)
+    {
+        writer->writeString(0, "SECTION");
+        writer->writeString(2, "CLASSES");
+        writer->writeString(0, "ENDSEC");
+    }
+    writer->writeString(0, "SECTION");
+    writer->writeString(2, "TABLES");
+    writeTables();
+    writer->writeString(0, "ENDSEC");
+    writer->writeString(0, "SECTION");
+    writer->writeString(2, "BLOCKS");
+    writeBlocks();
+    writer->writeString(0, "ENDSEC");
+
+    writer->writeString(0, "SECTION");
+    writer->writeString(2, "ENTITIES");
+    iface->writeEntities();
+    writer->writeString(0, "ENDSEC");
+
+    if (version > DRW::AC1009)
+    {
+        writer->writeString(0, "SECTION");
+        writer->writeString(2, "OBJECTS");
+        writeObjects();
+        writer->writeString(0, "ENDSEC");
+    }
+    writer->writeString(0, "EOF");
+    filestr.flush();
+
+    if (filestr.fail())
+    {
+        errorString = "Error writing to file!";
+        return false;
+    }
+
+    filestr.close();
     writer.reset();
-    return isOk;
+    return true;
 }
 
 auto dxfRW::writeEntity(DRW_Entity *ent) -> bool
