@@ -103,13 +103,13 @@ environment:
       BUILD_SYSTEM: "qbs"
       QMAKE: qmake.exe
       ENABLE_PCH: true
-      GCC_VERSION: 12.2
-      MINGW_PATH: C:\ProgramData\chocolatey\lib\mingw\tools\install\mingw64\bin
+      GCC_VERSION: 13.2
+      MINGW_PATH: C:\ProgramData\mingw64\mingw64\bin
       ARCH: x64
       PYTHON: "C:\\Python311-x64"
       PLATFORM: "Windows10+"
       CHOCOLATEY_PACKAGES: true
-      CHOCOLATEY_MINGW_VERSION: 12.2.0.03042023
+      CHOCOLATEY_MINGW_VERSION: 13.2.0
       WINDEPLOYQT_BIN_PATH: "undefined"
       DEPLOY: true
       RUN_TESTS: true
