@@ -629,6 +629,8 @@ template <class T> void DialogEditWrongFormula::ShowVariable(const QList<T> &var
     ui->tableWidget->setColumnHidden(ColumnFullName, true);
     ui->labelDescription->setText(QString());
 
+    const VTranslateVars *trVars = VAbstractApplication::VApp()->TrVars();
+
     for (const auto &var : vars)
     {
         if (ui->checkBoxHideEmpty->isEnabled() && ui->checkBoxHideEmpty->isChecked() && var->IsNotUsed())
@@ -639,7 +641,7 @@ template <class T> void DialogEditWrongFormula::ShowVariable(const QList<T> &var
         if (!var->Filter(m_toolId))
         { // If we create this variable don't show
             ui->tableWidget->setRowCount(ui->tableWidget->rowCount() + 1);
-            auto *item = new QTableWidgetItem(var->GetName());
+            auto *item = new QTableWidgetItem(trVars->VarToUser(var->GetName()));
             QFont font = item->font();
             font.setBold(true);
             item->setFont(font);
@@ -734,9 +736,9 @@ void DialogEditWrongFormula::ShowFunctions()
     {
         ui->tableWidget->setRowCount(ui->tableWidget->rowCount() + 1);
 
-        QString name = (!settings->IsTranslateFormula()
-                            ? i.value().getMsourceText()
-                            : i.value().translate(VAbstractApplication::VApp()->Settings()->GetLocale()));
+        QString const name = (!settings->IsTranslateFormula()
+                                  ? i.value().getMsourceText()
+                                  : i.value().translate(VAbstractApplication::VApp()->Settings()->GetLocale()));
 
         auto *item = new QTableWidgetItem(name);
         item->setData(Qt::UserRole, i.key());
@@ -747,7 +749,7 @@ void DialogEditWrongFormula::ShowFunctions()
 
         if (functionsDescriptions.contains(i.key()))
         {
-            QString description =
+            QString const description =
                 (!settings->IsTranslateFormula() ? functionsDescriptions.value(i.key()).getMsourceText()
                                                  : functionsDescriptions.value(i.key()).translate(
                                                        VAbstractApplication::VApp()->Settings()->GetLocale()));
