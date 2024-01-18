@@ -45,22 +45,22 @@ public:
     auto GetToolGroupTooltip() const -> QString;
     void SetToolGroupTooltip(const QString &toolGroupTooltip);
 
+protected:
+    auto event(QEvent *event) -> bool override;
+
 private:
     Q_DISABLE_COPY_MOVE(VToolButtonPopup) // NOLINT
 
     QString m_toolGroupTooltip{};
+    bool handlingToolTipChange{false};
+
+    void CorrectToolTip();
 };
 
 //---------------------------------------------------------------------------------------------------------------------
 inline auto VToolButtonPopup::GetToolGroupTooltip() const -> QString
 {
     return m_toolGroupTooltip;
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-inline void VToolButtonPopup::SetToolGroupTooltip(const QString &toolGroupTooltip)
-{
-    m_toolGroupTooltip = toolGroupTooltip;
 }
 
 #endif // VTOOLBUTTONPOPUP_H

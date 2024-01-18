@@ -28,19 +28,41 @@
 #include "vtoolbuttonpopup.h"
 
 #include <QAction>
+#include <QEvent>
 
 //---------------------------------------------------------------------------------------------------------------------
 VToolButtonPopup::VToolButtonPopup(QWidget *parent)
   : QToolButton(parent)
 {
     setPopupMode(QToolButton::MenuButtonPopup);
-    QObject::connect(this, &QToolButton::triggered, this,
-                     [this](QAction *action)
-                     {
-                         setDefaultAction(action);
-                         if (!m_toolGroupTooltip.isEmpty())
-                         {
-                             setToolTip(m_toolGroupTooltip);
-                         }
-                     });
+    QObject::connect(this, &QToolButton::triggered, this, [this](QAction *action) { setDefaultAction(action); });
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VToolButtonPopup::SetToolGroupTooltip(const QString &toolGroupTooltip)
+{
+    m_toolGroupTooltip = toolGroupTooltip;
+    CorrectToolTip();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+auto VToolButtonPopup::event(QEvent *event) -> bool
+{
+    if (event->type() == QEvent::ToolTipChange && !handlingToolTipChange)
+    {
+        handlingToolTipChange = true;
+        CorrectToolTip();
+        handlingToolTipChange = false;
+    }
+
+    return QToolButton::event(event);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VToolButtonPopup::CorrectToolTip()
+{
+    if (!m_toolGroupTooltip.isEmpty())
+    {
+        setToolTip(QStringLiteral("<b><i>%1</i></b>:<br/>%2").arg(m_toolGroupTooltip, toolTip()));
+    }
 }
