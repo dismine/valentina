@@ -384,6 +384,7 @@ for:
     - qbs-config defaultProfile qt6
     - dir "C:\Qt\Tools"
     - conan config install https://gist.github.com/dismine/0abab496338183c36661e635c2aeab8d.git
+    - type C:\Users\appveyor\.conan\settings.yml
     - conan profile new valentina
     - conan profile update settings.build_type=Release valentina
     - conan profile update settings.os=Windows valentina
@@ -415,6 +416,7 @@ for:
     - qbs-config --list profiles
 
   build_script:
+    - conan profile list
     - conan install . -s os=Windows --build=missing -pr valentina
     - qbs build -f valentina.qbs -d %APPVEYOR_BUILD_FOLDER%\build --jobs %NUMBER_OF_PROCESSORS% config:release qbs.installRoot:%APPVEYOR_BUILD_FOLDER%\build\install-root\valentina profile:qt6 project.enableConan:true modules.buildconfig.enableCcache:false project.conanProfiles:valentina modules.buildconfig.enablePCH:%ENABLE_PCH% modules.windeployqt.windeployqtProgramBinPath:%WINDEPLOYQT_BIN_PATH%
   
