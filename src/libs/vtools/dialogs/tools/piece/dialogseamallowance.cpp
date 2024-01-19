@@ -36,6 +36,7 @@
 #include "../../support/dialogeditlabel.h"
 #include "../../support/dialogeditwrongformula.h"
 #include "../vgeometry/vplacelabelitem.h"
+#include "../vmisc/def.h"
 #include "../vmisc/theme/vtheme.h"
 #include "../vmisc/typedef.h"
 #include "../vmisc/vabstractvalapplication.h"
@@ -49,7 +50,6 @@
 #include "../vpatterndb/vpiecenode.h"
 #include "../vpatterndb/vpiecepath.h"
 #include "../vwidgets/fancytabbar/fancytabbar.h"
-#include "def.h"
 #include "dialogpatternmaterials.h"
 #include "dialogpiecepath.h"
 #include "dialogplacelabel.h"
@@ -4038,6 +4038,8 @@ void DialogSeamAllowance::InitMirrorLinePoint(QComboBox *box)
     SCASSERT(box != nullptr);
     box->blockSignals(true);
     box->clear();
+
+    box->addItem(tr("None"), QUuid());
 
     const QVector<VPieceNode> nodes = GetListInternals<VPieceNode>(uiTabPaths->listWidgetMainPath);
 
