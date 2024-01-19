@@ -383,8 +383,7 @@ for:
     - qbs-setup-qt %QTDIR%\bin\%QMAKE% qt6
     - qbs-config defaultProfile qt6
     - dir "C:\Qt\Tools"
-    - git clone https://gist.github.com/dismine/0abab496338183c36661e635c2aeab8d.git
-    - conan config install .\0abab496338183c36661e635c2aeab8d\settings.yml
+    - https://gist.github.com/dismine/0abab496338183c36661e635c2aeab8d.git
     - type C:\Users\appveyor\.conan\settings.yml
     - conan profile new valentina
     - conan profile update settings.build_type=Release valentina
