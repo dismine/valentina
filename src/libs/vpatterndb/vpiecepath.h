@@ -137,7 +137,8 @@ public:
 
     static auto CurveSeamAllowanceSegment(const VContainer *data, const QVector<VPieceNode> &nodes,
                                           const QSharedPointer<VAbstractCurve> &curve, vsizetype i, bool reverse,
-                                          qreal width, const QString &piece = QString()) -> QVector<VSAPoint>;
+                                          qreal width, const QLineF &mirrorLine, const QString &piece = QString())
+        -> QVector<VSAPoint>;
 
     static auto NodeName(const QVector<VPieceNode> &nodes, vsizetype nodeIndex, const VContainer *data) -> QString;
 

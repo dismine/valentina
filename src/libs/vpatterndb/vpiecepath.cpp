@@ -552,7 +552,8 @@ auto VPiecePath::SeamAllowancePoints(const VContainer *data, qreal width, bool r
             case (Tool::NodeSplinePath):
             {
                 const QSharedPointer<VAbstractCurve> curve = data->GeometricObject<VAbstractCurve>(node.GetId());
-                pointsEkv += CurveSeamAllowanceSegment(data, d->m_nodes, curve, i, node.GetReverse(), width, GetName());
+                pointsEkv += CurveSeamAllowanceSegment(data, d->m_nodes, curve, i, node.GetReverse(), width, QLineF(),
+                                                       GetName());
             }
             break;
             default:
@@ -1152,10 +1153,34 @@ auto VPiecePath::PreparePointEkv(const VPieceNode &node, const VContainer *data)
 //---------------------------------------------------------------------------------------------------------------------
 auto VPiecePath::CurveSeamAllowanceSegment(const VContainer *data, const QVector<VPieceNode> &nodes,
                                            const QSharedPointer<VAbstractCurve> &curve, vsizetype i, bool reverse,
-                                           qreal width, const QString &piece) -> QVector<VSAPoint>
+                                           qreal width, const QLineF &mirrorLine, const QString &piece)
+    -> QVector<VSAPoint>
 {
-    const VSAPoint begin = StartSegment(data, nodes, i);
-    const VSAPoint end = EndSegment(data, nodes, i);
+    VSAPoint begin = StartSegment(data, nodes, i);
+    if (!mirrorLine.isNull())
+    {
+        if (VFuzzyComparePoints(begin, mirrorLine.p1()))
+        {
+            begin.SetSAAfter(0);
+        }
+        else if (VFuzzyComparePoints(begin, mirrorLine.p2()))
+        {
+            begin.SetSABefore(0);
+        }
+    }
+
+    VSAPoint end = EndSegment(data, nodes, i);
+    if (!mirrorLine.isNull())
+    {
+        if (VFuzzyComparePoints(end, mirrorLine.p1()))
+        {
+            end.SetSAAfter(0);
+        }
+        else if (VFuzzyComparePoints(end, mirrorLine.p2()))
+        {
+            end.SetSABefore(0);
+        }
+    }
 
     const QVector<QPointF> points = curve->GetSegmentPoints(begin, end, reverse, piece);
     if (points.size() < 2)

@@ -779,14 +779,16 @@ auto VPiece::SeamAllowancePointsWithRotation(const VContainer *data, vsizetype m
                 {
                     {
                         VSAPoint ekvPoint = VPiecePath::PreparePointEkv(node, data);
-                        if (showMirrorLine && VFuzzyComparePoints(ekvPoint, mirrorLine.p1()))
+                        if (showMirrorLine)
                         {
-                            ekvPoint.SetSAAfter(0);
-                        }
-
-                        if (showMirrorLine && VFuzzyComparePoints(ekvPoint, mirrorLine.p2()))
-                        {
-                            ekvPoint.SetSABefore(0);
+                            if (VFuzzyComparePoints(ekvPoint, mirrorLine.p1()))
+                            {
+                                ekvPoint.SetSAAfter(0);
+                            }
+                            else if (VFuzzyComparePoints(ekvPoint, mirrorLine.p2()))
+                            {
+                                ekvPoint.SetSABefore(0);
+                            }
                         }
 
                         pointsEkv.append(ekvPoint);
@@ -832,7 +834,7 @@ auto VPiece::SeamAllowancePointsWithRotation(const VContainer *data, vsizetype m
                     const QSharedPointer<VAbstractCurve> curve = data->GeometricObject<VAbstractCurve>(node.GetId());
 
                     pointsEkv += VPiecePath::CurveSeamAllowanceSegment(data, unitedPath, curve, i, node.GetReverse(),
-                                                                       width, GetName());
+                                                                       width, mirrorLine, GetName());
                 }
             }
             break;
@@ -1081,7 +1083,8 @@ auto VPiece::GetNodeSAPoints(const QVector<VPieceNode> &path, vsizetype index, c
         const QSharedPointer<VAbstractCurve> curve = data->GeometricObject<VAbstractCurve>(node.GetId());
         const qreal width = ToPixel(GetSAWidth(), *data->GetPatternUnit());
 
-        points += VPiecePath::CurveSeamAllowanceSegment(data, path, curve, index, node.GetReverse(), width, GetName());
+        points += VPiecePath::CurveSeamAllowanceSegment(data, path, curve, index, node.GetReverse(), width, QLineF(),
+                                                        GetName());
     }
     return points;
 }
