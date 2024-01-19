@@ -42,6 +42,26 @@ environment:
   APPVEYOR_SAVE_CACHE_ON_ERROR: "true"
 
   matrix:
+    - job_name: Windows_Qt_6_5_(MSVC_x64)
+      APPVEYOR_BUILD_WORKER_IMAGE: Visual Studio 2022
+      COMPILER: msvc
+      QT: Qt\6.5\msvc2019_64
+      QT_VERSION: Qt6_5
+      BUILD_SYSTEM: "qbs"
+      QMAKE: qmake.exe
+      ENABLE_PCH: true
+      MSVC_PATH: "C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.30.30705\\bin\\Hostx64\\x64"
+      VSINSTALLDIR: "C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\"
+      ARCH: x64
+      PYTHON: "C:\\Python311-x64"
+      PLATFORM: "Windows10+"
+      CHOCOLATEY_PACKAGES: false
+      WINDEPLOYQT_BIN_PATH: "undefined"
+      WINDEPLOYQT_COMPILER_RUNTIME: "true"
+      WINDEPLOYQT_NO_COMPILER_RUNTIME: "false"
+      DEPLOY: true
+      RUN_TESTS: true
+
     - job_name: Windows_Qt_6_5_(GCC_x64)
       APPVEYOR_BUILD_WORKER_IMAGE: Visual Studio 2022
       COMPILER: mingw
@@ -60,6 +80,8 @@ environment:
       CHOCOLATEY_PACKAGES: true
       CHOCOLATEY_MINGW_VERSION: 13.2.0
       WINDEPLOYQT_BIN_PATH: "undefined"
+      WINDEPLOYQT_COMPILER_RUNTIME: "false"
+      WINDEPLOYQT_NO_COMPILER_RUNTIME: "true"
       DEPLOY: true
       RUN_TESTS: true
 
@@ -132,6 +154,8 @@ environment:
       PLATFORM: "Windows7+"
       CHOCOLATEY_PACKAGES: false
       WINDEPLOYQT_BIN_PATH: "undefined"
+      WINDEPLOYQT_COMPILER_RUNTIME: "true"
+      WINDEPLOYQT_NO_COMPILER_RUNTIME: "false"
       DEPLOY: true
       RUN_TESTS: true
     
@@ -159,24 +183,6 @@ environment:
       PLATFORM: "Windows7+"
       DEPLOY: false
 
-    - job_name: Windows_Qt_6_5_(MSVC_x64)
-      APPVEYOR_BUILD_WORKER_IMAGE: Visual Studio 2022
-      COMPILER: msvc
-      QT: Qt\6.5\msvc2019_64
-      QT_VERSION: Qt6_5
-      BUILD_SYSTEM: "qbs"
-      QMAKE: qmake.exe
-      ENABLE_PCH: true
-      MSVC_PATH: "C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.30.30705\\bin\\Hostx64\\x64"
-      VSINSTALLDIR: "C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\"
-      ARCH: x64
-      PYTHON: "C:\\Python311-x64"
-      PLATFORM: "Windows10+"
-      CHOCOLATEY_PACKAGES: false
-      WINDEPLOYQT_BIN_PATH: "undefined"
-      DEPLOY: false
-      RUN_TESTS: true
-
     - job_name: Windows_Qt_5_15_(qbs_GCC_x64)
       APPVEYOR_BUILD_WORKER_IMAGE: Visual Studio 2019
       COMPILER: mingw
@@ -194,6 +200,8 @@ environment:
       PLATFORM: "Windows7+"
       CHOCOLATEY_PACKAGES: false
       WINDEPLOYQT_BIN_PATH: "undefined"
+      WINDEPLOYQT_COMPILER_RUNTIME: "true"
+      WINDEPLOYQT_NO_COMPILER_RUNTIME: "false"
       DEPLOY: false
       RUN_TESTS: true
 
@@ -212,6 +220,8 @@ environment:
       PLATFORM: "Windows7+"
       CHOCOLATEY_PACKAGES: false
       WINDEPLOYQT_BIN_PATH: "undefined"
+      WINDEPLOYQT_COMPILER_RUNTIME: "true"
+      WINDEPLOYQT_NO_COMPILER_RUNTIME: "false"
       DEPLOY: false
       RUN_TESTS: true 
 
@@ -419,7 +429,7 @@ for:
   build_script:
     - conan profile list
     - conan install . -s os=Windows --build=missing -pr valentina
-    - qbs build -f valentina.qbs -d %APPVEYOR_BUILD_FOLDER%\build --jobs %NUMBER_OF_PROCESSORS% config:release qbs.installRoot:%APPVEYOR_BUILD_FOLDER%\build\install-root\valentina profile:qt6 project.enableConan:true modules.buildconfig.enableCcache:false project.conanProfiles:valentina modules.buildconfig.enablePCH:%ENABLE_PCH% modules.windeployqt.windeployqtProgramBinPath:%WINDEPLOYQT_BIN_PATH%
+    - qbs build -f valentina.qbs -d %APPVEYOR_BUILD_FOLDER%\build --jobs %NUMBER_OF_PROCESSORS% config:release qbs.installRoot:%APPVEYOR_BUILD_FOLDER%\build\install-root\valentina profile:qt6 project.enableConan:true modules.buildconfig.enableCcache:false project.conanProfiles:valentina modules.buildconfig.enablePCH:%ENABLE_PCH% modules.windeployqt.windeployqtProgramBinPath:%WINDEPLOYQT_BIN_PATH% modules.windeployqt.compilerRuntime:%WINDEPLOYQT_COMPILER_RUNTIME% modules.windeployqt.noCompilerRuntime:%WINDEPLOYQT_NO_COMPILER_RUNTIME%
   
   test_script:
     - path
