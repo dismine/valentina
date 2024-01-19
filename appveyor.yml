@@ -39,6 +39,7 @@ shallow_clone: false                 # default is "false"
 environment:
   ACCESS_TOKEN:
     secure: RUhnEHqaR8KhalOMWwZZOoO342Ja50QV4KpEWdm9g3pG+jG7i6aJqUmeKF1l5VN6dzksk1u+yN6pOLnU8oGcaVQ6v+1dpKK1oZvF0tyHhNE=
+  APPVEYOR_SAVE_CACHE_ON_ERROR: "true"
 
   matrix:
     - job_name: Windows_Qt_6_5_(GCC_x64)
