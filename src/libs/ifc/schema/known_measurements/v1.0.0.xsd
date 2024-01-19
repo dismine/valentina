@@ -20,6 +20,7 @@
                       <xs:attribute type="contentType" name="contentType" use="optional"/>
                       <xs:attribute type="uuid" name="uid" use="required"/>
                       <xs:attribute type="xs:string" name="title" use="optional"/>
+                      <xs:attribute type="imageScale" name="size" use="optional"/>
                     </xs:extension>
                   </xs:simpleContent>
                 </xs:complexType>
@@ -76,6 +77,12 @@
   <xs:simpleType name="uuid">
     <xs:restriction base="xs:string">
       <xs:pattern value="|\{[0-9a-fA-F]{8}\-[0-9a-fA-F]{4}\-[0-9a-fA-F]{4}\-[0-9a-fA-F]{4}\-[0-9a-fA-F]{12}\}"/>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="imageScale">
+    <xs:restriction base="xs:decimal">
+      <xs:minInclusive value="0.1"/>
+      <xs:maxInclusive value="100.0"/>
     </xs:restriction>
   </xs:simpleType>
 </xs:schema>

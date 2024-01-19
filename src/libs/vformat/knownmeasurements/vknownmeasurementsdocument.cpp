@@ -29,6 +29,7 @@
 #include "../ifc/ifcdef.h"
 #include "../ifc/xml/vknownmeasurementsconverter.h"
 #include "../ifc/xml/vpatternimage.h"
+#include "../vmisc/def.h"
 #include "../vmisc/literals.h"
 #include "../vmisc/projectversion.h"
 #include "vknownmeasurement.h"
@@ -63,6 +64,7 @@ Q_GLOBAL_STATIC_WITH_ARGS(const QString, attrName, ("name"_L1))                 
 Q_GLOBAL_STATIC_WITH_ARGS(const QString, attrContentType, ("contentType"_L1))             // NOLINT
 Q_GLOBAL_STATIC_WITH_ARGS(const QString, attrUId, ("uid"_L1))                             // NOLINT
 Q_GLOBAL_STATIC_WITH_ARGS(const QString, attrTitle, ("title"_L1))                         // NOLINT
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, attrSize, ("size"_L1))                           // NOLINT
 Q_GLOBAL_STATIC_WITH_ARGS(const QString, attrReadOnly, ("read-only"_L1))                  // NOLINT
 Q_GLOBAL_STATIC_WITH_ARGS(const QString, attrDescription, ("description"_L1))             // NOLINT
 Q_GLOBAL_STATIC_WITH_ARGS(const QString, attrFullName, ("full_name"_L1))                  // NOLINT
@@ -488,6 +490,21 @@ void VKnownMeasurementsDocument::SetImageTitle(const QUuid &id, const QString &t
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+void VKnownMeasurementsDocument::SetImageSizeScale(const QUuid &id, qreal scale)
+{
+    QDomElement node = FindImage(id);
+    if (not node.isNull())
+    {
+        SetAttributeOrRemoveIf<qreal>(node, *attrSize, scale,
+                                      [](qreal scale) noexcept { return VFuzzyComparePossibleNulls(scale, 100.0); });
+    }
+    else
+    {
+        qWarning() << tr("Can't find image by id '%1'").arg(id.toString());
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 void VKnownMeasurementsDocument::SetImageId(const QUuid &id, const QUuid &newId)
 {
     QDomElement node = FindImage(id);
@@ -588,7 +605,7 @@ auto VKnownMeasurementsDocument::FindImage(const QUuid &id) const -> QDomElement
 //---------------------------------------------------------------------------------------------------------------------
 void VKnownMeasurementsDocument::ReadImages(VKnownMeasurements &known) const
 {
-    QDomNodeList list = elementsByTagName(*tagImage);
+    QDomNodeList const list = elementsByTagName(*tagImage);
 
     for (int i = 0; i < list.size(); ++i)
     {
@@ -601,6 +618,7 @@ void VKnownMeasurementsDocument::ReadImages(VKnownMeasurements &known) const
         VPatternImage image;
         image.SetContentData(domElement.text().toLatin1(), domElement.attribute(*attrContentType));
         image.SetTitle(domElement.attribute(*attrTitle));
+        image.SetSizeScale(GetParametrDouble(domElement, *attrSize, QStringLiteral("100.0")));
 
         known.AddImage(QUuid(domElement.attribute(*attrUId)), image);
     }

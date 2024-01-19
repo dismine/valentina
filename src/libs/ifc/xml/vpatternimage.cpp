@@ -227,3 +227,15 @@ void VPatternImage::SetTitle(const QString &newTitle)
 {
     m_title = newTitle;
 }
+
+//---------------------------------------------------------------------------------------------------------------------
+auto VPatternImage::GetSizeScale() const -> qreal
+{
+    return m_sizeScale;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VPatternImage::SetSizeScale(qreal newSizeScale)
+{
+    m_sizeScale = qBound(0.1, newSizeScale, 100.0);
+}

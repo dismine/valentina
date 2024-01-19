@@ -64,11 +64,15 @@ public:
     auto Title() const -> QString;
     void SetTitle(const QString &newTitle);
 
+    qreal GetSizeScale() const;
+    void SetSizeScale(qreal newSizeScale);
+
 private:
     QString m_contentType{};
     QByteArray m_contentData{};
     mutable QString m_errorString{};
     QString m_title{};
+    qreal m_sizeScale{100};
 };
 
 #endif // VPATTERNIMAGE_H

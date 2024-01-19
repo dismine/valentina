@@ -115,6 +115,7 @@ private slots:
     void SaveMDiagram();
 
     void SaveImageTitle();
+    void SaveImageSizeScale();
 
     void AskDefaultSettings();
 

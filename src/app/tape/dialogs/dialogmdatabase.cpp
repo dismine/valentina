@@ -31,6 +31,7 @@
 #include "../vformat/knownmeasurements/vknownmeasurement.h"
 #include "../vformat/knownmeasurements/vknownmeasurements.h"
 #include "../vformat/knownmeasurements/vknownmeasurementsdatabase.h"
+#include "../vmisc/def.h"
 #include "ui_dialogmdatabase.h"
 
 #include <QKeyEvent>
@@ -105,11 +106,21 @@ auto DialogMDataBase::ImgTag(const VPatternImage &image) -> QString
 {
     if (!image.IsValid())
     {
-        return QStringLiteral("<img src=\"wrong.png\" align=\"center\"/>"); // In case of error
+        return QStringLiteral(R"(<img src="wrong.png" align="center" />)"); // In case of error
     }
 
-    return QStringLiteral("<img src=\"data:%1;base64,%2\" align=\"center\"/>")
-        .arg(image.ContentType(), QString(image.ContentData()));
+    QString size;
+
+    if (!VFuzzyComparePossibleNulls(image.GetSizeScale(), 100.0))
+    {
+        QSizeF const imaheSize = image.Size();
+        size = QStringLiteral(R"(width="%1" height="%2")")
+                   .arg(imaheSize.width() * image.GetSizeScale() / 100)
+                   .arg(imaheSize.height() * image.GetSizeScale() / 100);
+    }
+
+    return QStringLiteral(R"(<img src="data:%1;base64,%2" align="center" %3% />)")
+        .arg(image.ContentType(), QString(image.ContentData()), size);
 }
 
 //---------------------------------------------------------------------------------------------------------------------

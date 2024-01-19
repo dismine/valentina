@@ -50,6 +50,7 @@
 #include <QCloseEvent>
 #include <QCompleter>
 #include <QDesktopServices>
+#include <QDoubleSpinBox>
 #include <QEvent>
 #include <QFileInfo>
 #include <QImageReader>
@@ -1213,6 +1214,10 @@ void TKMMainWindow::ShowImageData()
     disconnect(ui->lineEditImageTitle, &QLineEdit::editingFinished, this, &TKMMainWindow::SaveImageTitle);
     ui->lineEditImageTitle->setText(image.Title());
     connect(ui->lineEditImageTitle, &QLineEdit::editingFinished, this, &TKMMainWindow::SaveImageTitle);
+
+    ui->doubleSpinBoxImageSize->blockSignals(true);
+    ui->doubleSpinBoxImageSize->setValue(image.GetSizeScale());
+    ui->doubleSpinBoxImageSize->blockSignals(false);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -1467,6 +1472,31 @@ void TKMMainWindow::SaveImageTitle()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+void TKMMainWindow::SaveImageSizeScale()
+{
+    auto *item = ui->listWidget->currentItem();
+    int row = ui->listWidget->currentRow();
+
+    if (item == nullptr)
+    {
+        return;
+    }
+
+    m_m->SetImageSizeScale(item->data(Qt::UserRole).toUuid(), ui->doubleSpinBoxImageSize->value());
+
+    MeasurementsWereSaved(false);
+
+    m_known = VKnownMeasurements();
+    RefreshImages();
+
+    ui->listWidget->blockSignals(true);
+    ui->listWidget->setCurrentRow(row);
+    ui->listWidget->blockSignals(false);
+
+    ShowMData();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 #if defined(Q_OS_MAC)
 //---------------------------------------------------------------------------------------------------------------------
 void TKMMainWindow::OpenAt(QAction *where)
@@ -1707,6 +1737,8 @@ void TKMMainWindow::InitWindow()
     connect(ui->listWidget, &QListWidget::itemSelectionChanged, this, &TKMMainWindow::ShowImageData);
 
     connect(ui->lineEditImageTitle, &QLineEdit::editingFinished, this, &TKMMainWindow::SaveImageTitle);
+    connect(ui->doubleSpinBoxImageSize, QOverload<double>::of(&QDoubleSpinBox::valueChanged), this,
+            &TKMMainWindow::SaveImageSizeScale);
 
     // Tab info
     ui->plainTextEditKMDescription->setEnabled(true);
@@ -2403,6 +2435,7 @@ void TKMMainWindow::ImageFields(bool enabled)
     ui->lineEditImageTitle->setEnabled(enabled);
     ui->toolButtonRemoveImage->setEnabled(enabled);
     ui->toolButtonSaveImage->setEnabled(enabled);
+    ui->doubleSpinBoxImageSize->setEnabled(enabled);
 }
 
 //---------------------------------------------------------------------------------------------------------------------

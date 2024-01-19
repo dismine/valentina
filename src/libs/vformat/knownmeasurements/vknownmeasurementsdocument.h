@@ -84,6 +84,7 @@ public:
 
     void SetImageContent(const QUuid &id, const VPatternImage &image);
     void SetImageTitle(const QUuid &id, const QString &text);
+    void SetImageSizeScale(const QUuid &id, qreal scale);
     void SetImageId(const QUuid &id, const QUuid &newId);
 
 private:
