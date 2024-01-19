@@ -77,7 +77,7 @@ Module {
 
     Rule {
 //        alwaysRun: true
-        condition: product.qbs.targetOS.contains("windows")
+        condition: product.qbs.targetOS.contains("windows")  && product.qbs.buildVariant === "release"
         inputs: product.type.contains("dynamiclibrary") ? ["dynamiclibrary"] : ["application"]
 
         prepare: {
