@@ -145,7 +145,8 @@ Module {
 
                 if (product.windeployqt.compilerRuntime)
                     cmdArgs.push("--compiler-runtime")
-                else if (product.windeployqt.noCompilerRuntime)
+
+                if (product.windeployqt.noCompilerRuntime)
                     cmdArgs.push("--no-compiler-runtime")
 
                 if (product.windeployqt.noVirtualkeyboard &&

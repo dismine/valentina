@@ -1,7 +1,7 @@
 import qbs.Utilities
 
 VLib {
-    Depends { name: "windeployqt"; }
+    Depends { name: "windeployqt"; condition: qbs.targetOS.contains("windows") }
     Depends { name: "i18nconfig"; }
 
     buildconfig.staticBuild: false
@@ -28,7 +28,7 @@ VLib {
     }
 
     Properties {
-        condition: i18nconfig.limitDeploymentOfQtTranslations
+        condition: qbs.targetOS.contains("windows") && i18nconfig.limitDeploymentOfQtTranslations
         windeployqt.languages: i18nconfig.qtTranslationLocales.join(',')
     }
 
