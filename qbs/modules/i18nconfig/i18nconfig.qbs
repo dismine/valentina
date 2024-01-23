@@ -29,14 +29,14 @@ Module {
         "he",
         "fr",
         "it",
-//        "nl", Not supported by Qt
+        "nl",
 //        "id", Not supported by Qt
         "es",
         "fi",
         "en",
 //        "ro", Not supported by Qt
         "zh_CN",
-        "pt",
+        "pt_BR",
 //        "el", Not supported by Qt
         "pl",
 //        "zh_TW", Not supported by Valentina
