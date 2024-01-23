@@ -471,7 +471,7 @@ void VTranslateVars::TranslateNumbersToUser(QString &newFormula, QMap<vsizetype,
 
             loc = QLocale();                // To user locale
             QString dStr = loc.toString(d); // Number string in user locale
-            if (VLocaleCharacter(LocaleGroupSeparator(loc)).isSpace())
+            if (LocaleGroupSeparator(loc).isSpace())
             {
                 dStr.replace(LocaleGroupSeparator(loc), QString());
             }

@@ -143,7 +143,7 @@ auto VToolLineIntersect::Create(VToolLineIntersectInitData initData) -> VToolLin
     QLineF line1(static_cast<QPointF>(*p1Line1), static_cast<QPointF>(*p2Line1));
     QLineF line2(static_cast<QPointF>(*p1Line2), static_cast<QPointF>(*p2Line2));
     QPointF fPoint;
-    const QLineF::IntersectType intersect = Intersects(line1, line2, &fPoint);
+    const QLineF::IntersectType intersect = line1.intersects(line2, &fPoint);
 
     if (intersect == QLineF::NoIntersection)
     {

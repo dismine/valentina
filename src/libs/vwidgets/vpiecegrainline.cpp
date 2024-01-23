@@ -140,7 +140,7 @@ void VPieceGrainline::SetEnabled(bool enabled)
 auto VPieceGrainline::SecondaryLine() const -> QLineF
 {
     const QLineF mainLine = GetMainLine();
-    const QPointF center = LineCenter(mainLine);
+    const QPointF center = mainLine.center();
     QTransform t;
     t.translate(center.x(), center.y());
     t.rotate(90);

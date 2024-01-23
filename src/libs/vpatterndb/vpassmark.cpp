@@ -367,7 +367,7 @@ auto CreateTMarkPassmark(const VPiecePassmarkData &passmarkData, const QLineF &l
         p2 = tmpLine.p2();
     }
 
-    return {line, {LineCenter({p1, p2}), p2}, {p2, p1}};
+    return {line, {QLineF(p1, p2).center(), p2}, {p2, p1}};
 }
 
 //---------------------------------------------------------------------------------------------------------------------

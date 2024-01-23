@@ -27,13 +27,10 @@
  *************************************************************************/
 
 #include "dialoglayoutsettings.h"
+#include "../vlayout/vlayoutgenerator.h"
 #include "../vmisc/vabstractvalapplication.h"
 #include "../vmisc/vvalentinasettings.h"
 #include "ui_dialoglayoutsettings.h"
-#if QT_VERSION < QT_VERSION_CHECK(5, 7, 0)
-#include "../vmisc/backport/qoverload.h"
-#endif // QT_VERSION < QT_VERSION_CHECK(5, 7, 0)
-#include "../vlayout/vlayoutgenerator.h"
 
 #include <QMessageBox>
 #include <QPrinterInfo>

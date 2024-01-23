@@ -35,16 +35,12 @@
 #include "../vmisc/theme/vtheme.h"
 #include "../vmisc/vabstractshortcutmanager.h"
 #include "../vmisc/vvalentinasettings.h"
-#include "qpushbutton.h"
 #include "ui_preferencesconfigurationpage.h"
 #include "vcommonsettings.h"
 
-#if QT_VERSION < QT_VERSION_CHECK(5, 7, 0)
-#include "../vmisc/backport/qoverload.h"
-#endif // QT_VERSION < QT_VERSION_CHECK(5, 7, 0)
-
 #include <QDir>
 #include <QDirIterator>
+#include <QPushButton>
 #include <QStyleHints>
 #include <QTimer>
 

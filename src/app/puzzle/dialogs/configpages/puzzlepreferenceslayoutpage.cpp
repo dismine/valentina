@@ -26,15 +26,12 @@
  **
  *************************************************************************/
 #include "puzzlepreferenceslayoutpage.h"
-#include "ui_puzzlepreferenceslayoutpage.h"
 #include "../../vpapplication.h"
-#if QT_VERSION < QT_VERSION_CHECK(5, 7, 0)
-#include "../vmisc/backport/qoverload.h"
-#endif // QT_VERSION < QT_VERSION_CHECK(5, 7, 0)
+#include "ui_puzzlepreferenceslayoutpage.h"
 
 //---------------------------------------------------------------------------------------------------------------------
-PuzzlePreferencesLayoutPage::PuzzlePreferencesLayoutPage(QWidget *parent) :
-    QWidget(parent),
+PuzzlePreferencesLayoutPage::PuzzlePreferencesLayoutPage(QWidget *parent)
+  : QWidget(parent),
     ui(new Ui::PuzzlePreferencesLayoutPage)
 {
     ui->setupUi(this);
@@ -49,47 +46,48 @@ PuzzlePreferencesLayoutPage::PuzzlePreferencesLayoutPage(QWidget *parent) :
 
     ReadSettings();
 
-    connect(ui->comboBoxLayoutUnit, QOverload<int>::of(&QComboBox::currentIndexChanged),
-            this, &PuzzlePreferencesLayoutPage::ConvertPaperSize);
+    connect(ui->comboBoxLayoutUnit, QOverload<int>::of(&QComboBox::currentIndexChanged), this,
+            &PuzzlePreferencesLayoutPage::ConvertPaperSize);
 
-    connect(ui->comboBoxSheetTemplates, QOverload<int>::of(&QComboBox::currentIndexChanged),
-            this, [this]
-    {
-        SheetSize(SheetTemplate()); m_settingsChanged = true;
-    });
-    connect(ui->comboBoxTileTemplates, QOverload<int>::of(&QComboBox::currentIndexChanged),
-            this, [this]
-    {
-        TileSize(TileTemplate());
-        m_settingsChanged = true;
-    });
+    connect(ui->comboBoxSheetTemplates, QOverload<int>::of(&QComboBox::currentIndexChanged), this,
+            [this]
+            {
+                SheetSize(SheetTemplate());
+                m_settingsChanged = true;
+            });
+    connect(ui->comboBoxTileTemplates, QOverload<int>::of(&QComboBox::currentIndexChanged), this,
+            [this]
+            {
+                TileSize(TileTemplate());
+                m_settingsChanged = true;
+            });
 
-    connect(ui->doubleSpinBoxSheetPaperWidth, QOverload<double>::of(&QDoubleSpinBox::valueChanged),
-            this, &PuzzlePreferencesLayoutPage::SheetPaperSizeChanged);
-    connect(ui->doubleSpinBoxSheetPaperHeight, QOverload<double>::of(&QDoubleSpinBox::valueChanged),
-            this, &PuzzlePreferencesLayoutPage::SheetPaperSizeChanged);
-    connect(ui->doubleSpinBoxTilePaperWidth, QOverload<double>::of(&QDoubleSpinBox::valueChanged),
-            this, &PuzzlePreferencesLayoutPage::TilePaperSizeChanged);
-    connect(ui->doubleSpinBoxTilePaperHeight, QOverload<double>::of(&QDoubleSpinBox::valueChanged),
-            this, &PuzzlePreferencesLayoutPage::TilePaperSizeChanged);
+    connect(ui->doubleSpinBoxSheetPaperWidth, QOverload<double>::of(&QDoubleSpinBox::valueChanged), this,
+            &PuzzlePreferencesLayoutPage::SheetPaperSizeChanged);
+    connect(ui->doubleSpinBoxSheetPaperHeight, QOverload<double>::of(&QDoubleSpinBox::valueChanged), this,
+            &PuzzlePreferencesLayoutPage::SheetPaperSizeChanged);
+    connect(ui->doubleSpinBoxTilePaperWidth, QOverload<double>::of(&QDoubleSpinBox::valueChanged), this,
+            &PuzzlePreferencesLayoutPage::TilePaperSizeChanged);
+    connect(ui->doubleSpinBoxTilePaperHeight, QOverload<double>::of(&QDoubleSpinBox::valueChanged), this,
+            &PuzzlePreferencesLayoutPage::TilePaperSizeChanged);
 
-    connect(ui->doubleSpinBoxSheetPaperWidth, QOverload<double>::of(&QDoubleSpinBox::valueChanged),
-            this, &PuzzlePreferencesLayoutPage::FindSheetTemplate);
-    connect(ui->doubleSpinBoxSheetPaperHeight, QOverload<double>::of(&QDoubleSpinBox::valueChanged),
-            this, &PuzzlePreferencesLayoutPage::FindSheetTemplate);
-    connect(ui->doubleSpinBoxTilePaperWidth, QOverload<double>::of(&QDoubleSpinBox::valueChanged),
-            this, &PuzzlePreferencesLayoutPage::FindTileTemplate);
-    connect(ui->doubleSpinBoxTilePaperHeight, QOverload<double>::of(&QDoubleSpinBox::valueChanged),
-            this, &PuzzlePreferencesLayoutPage::FindTileTemplate);
+    connect(ui->doubleSpinBoxSheetPaperWidth, QOverload<double>::of(&QDoubleSpinBox::valueChanged), this,
+            &PuzzlePreferencesLayoutPage::FindSheetTemplate);
+    connect(ui->doubleSpinBoxSheetPaperHeight, QOverload<double>::of(&QDoubleSpinBox::valueChanged), this,
+            &PuzzlePreferencesLayoutPage::FindSheetTemplate);
+    connect(ui->doubleSpinBoxTilePaperWidth, QOverload<double>::of(&QDoubleSpinBox::valueChanged), this,
+            &PuzzlePreferencesLayoutPage::FindTileTemplate);
+    connect(ui->doubleSpinBoxTilePaperHeight, QOverload<double>::of(&QDoubleSpinBox::valueChanged), this,
+            &PuzzlePreferencesLayoutPage::FindTileTemplate);
 
-    connect(ui->doubleSpinBoxSheetPaperWidth, QOverload<double>::of(&QDoubleSpinBox::valueChanged),
-            this, &PuzzlePreferencesLayoutPage::CorrectMaxMargins);
-    connect(ui->doubleSpinBoxSheetPaperHeight, QOverload<double>::of(&QDoubleSpinBox::valueChanged),
-            this, &PuzzlePreferencesLayoutPage::CorrectMaxMargins);
-    connect(ui->doubleSpinBoxTilePaperWidth, QOverload<double>::of(&QDoubleSpinBox::valueChanged),
-            this, &PuzzlePreferencesLayoutPage::CorrectMaxMargins);
-    connect(ui->doubleSpinBoxTilePaperHeight, QOverload<double>::of(&QDoubleSpinBox::valueChanged),
-            this, &PuzzlePreferencesLayoutPage::CorrectMaxMargins);
+    connect(ui->doubleSpinBoxSheetPaperWidth, QOverload<double>::of(&QDoubleSpinBox::valueChanged), this,
+            &PuzzlePreferencesLayoutPage::CorrectMaxMargins);
+    connect(ui->doubleSpinBoxSheetPaperHeight, QOverload<double>::of(&QDoubleSpinBox::valueChanged), this,
+            &PuzzlePreferencesLayoutPage::CorrectMaxMargins);
+    connect(ui->doubleSpinBoxTilePaperWidth, QOverload<double>::of(&QDoubleSpinBox::valueChanged), this,
+            &PuzzlePreferencesLayoutPage::CorrectMaxMargins);
+    connect(ui->doubleSpinBoxTilePaperHeight, QOverload<double>::of(&QDoubleSpinBox::valueChanged), this,
+            &PuzzlePreferencesLayoutPage::CorrectMaxMargins);
 
     connect(ui->checkBoxLayoutIgnoreFileds, &QCheckBox::stateChanged, this,
             &PuzzlePreferencesLayoutPage::LayoutSheetIgnoreMargins);
@@ -105,29 +103,31 @@ PuzzlePreferencesLayoutPage::PuzzlePreferencesLayoutPage(QWidget *parent) :
     connect(ui->toolButtonTileLandscapeOrientation, &QToolButton::toggled, this,
             &PuzzlePreferencesLayoutPage::SwapTileOrientation);
 
-    connect(ui->doubleSpinBoxSheetMarginLeft, QOverload<double>::of(&QDoubleSpinBox::valueChanged),
-            this, [this](){m_settingsChanged=true;});
-    connect(ui->doubleSpinBoxSheetMarginRight, QOverload<double>::of(&QDoubleSpinBox::valueChanged),
-            this, [this](){m_settingsChanged=true;});
-    connect(ui->doubleSpinBoxSheetMarginTop, QOverload<double>::of(&QDoubleSpinBox::valueChanged),
-            this, [this](){m_settingsChanged=true;});
-    connect(ui->doubleSpinBoxSheetMarginBottom, QOverload<double>::of(&QDoubleSpinBox::valueChanged),
-            this, [this](){m_settingsChanged=true;});
+    connect(ui->doubleSpinBoxSheetMarginLeft, QOverload<double>::of(&QDoubleSpinBox::valueChanged), this,
+            [this]() { m_settingsChanged = true; });
+    connect(ui->doubleSpinBoxSheetMarginRight, QOverload<double>::of(&QDoubleSpinBox::valueChanged), this,
+            [this]() { m_settingsChanged = true; });
+    connect(ui->doubleSpinBoxSheetMarginTop, QOverload<double>::of(&QDoubleSpinBox::valueChanged), this,
+            [this]() { m_settingsChanged = true; });
+    connect(ui->doubleSpinBoxSheetMarginBottom, QOverload<double>::of(&QDoubleSpinBox::valueChanged), this,
+            [this]() { m_settingsChanged = true; });
 
-    connect(ui->checkBoxTileShowTiles, &QCheckBox::stateChanged, this, [this](){m_settingsChanged=true;});
-    connect(ui->checkBoxTileShowWatermark, &QCheckBox::stateChanged, this, [this](){m_settingsChanged=true;});
-    connect(ui->checkBoxTileShowWatermark, &QCheckBox::stateChanged, this, [this](){m_settingsChanged=true;});
+    connect(ui->checkBoxTileShowTiles, &QCheckBox::stateChanged, this, [this]() { m_settingsChanged = true; });
+    connect(ui->checkBoxTileShowWatermark, &QCheckBox::stateChanged, this, [this]() { m_settingsChanged = true; });
+    connect(ui->checkBoxTileShowWatermark, &QCheckBox::stateChanged, this, [this]() { m_settingsChanged = true; });
 
-    connect(ui->doubleSpinBoxPiecesGap, QOverload<double>::of(&QDoubleSpinBox::valueChanged),
-            this, [this](){m_settingsChanged=true;});
+    connect(ui->doubleSpinBoxPiecesGap, QOverload<double>::of(&QDoubleSpinBox::valueChanged), this,
+            [this]() { m_settingsChanged = true; });
     ui->doubleSpinBoxPiecesGap->setSuffix(UnitsToStr(m_oldLayoutUnit));
 
     ui->spinBoxLineWidth->setSuffix(UnitsToStr(Unit::Px));
 
-    connect(ui->checkBoxWarningPiecesSuperposition, &QCheckBox::stateChanged, this, [this](){m_settingsChanged=true;});
-    connect(ui->checkBoxStickyEdges, &QCheckBox::stateChanged, this, [this](){m_settingsChanged=true;});
-    connect(ui->checkBoxWarningPiecesOutOfBound, &QCheckBox::stateChanged, this, [this](){m_settingsChanged=true;});
-    connect(ui->checkBoxFollowGrainline, &QCheckBox::stateChanged, this, [this](){m_settingsChanged=true;});
+    connect(ui->checkBoxWarningPiecesSuperposition, &QCheckBox::stateChanged, this,
+            [this]() { m_settingsChanged = true; });
+    connect(ui->checkBoxStickyEdges, &QCheckBox::stateChanged, this, [this]() { m_settingsChanged = true; });
+    connect(ui->checkBoxWarningPiecesOutOfBound, &QCheckBox::stateChanged, this,
+            [this]() { m_settingsChanged = true; });
+    connect(ui->checkBoxFollowGrainline, &QCheckBox::stateChanged, this, [this]() { m_settingsChanged = true; });
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -145,9 +145,9 @@ auto PuzzlePreferencesLayoutPage::Apply() -> QStringList
     settings->SetLayoutUnit(LayoutUnit());
 
     settings->SetLayoutSheetPaperHeight(
-                UnitConvertor(ui->doubleSpinBoxSheetPaperHeight->value(), m_oldLayoutUnit, Unit::Px));
+        UnitConvertor(ui->doubleSpinBoxSheetPaperHeight->value(), m_oldLayoutUnit, Unit::Px));
     settings->SetLayoutSheetPaperWidth(
-                UnitConvertor(ui->doubleSpinBoxSheetPaperWidth->value(), m_oldLayoutUnit, Unit::Px));
+        UnitConvertor(ui->doubleSpinBoxSheetPaperWidth->value(), m_oldLayoutUnit, Unit::Px));
 
     settings->SetLayoutSheetIgnoreMargins(ui->checkBoxLayoutIgnoreFileds->isChecked());
     settings->SetLayoutSheetMargins(GetSheetMargins());
@@ -156,9 +156,9 @@ auto PuzzlePreferencesLayoutPage::Apply() -> QStringList
     settings->SetLayoutTileShowWatermark(ui->checkBoxTileShowWatermark->isChecked());
 
     settings->SetLayoutTilePaperHeight(
-                UnitConvertor(ui->doubleSpinBoxTilePaperHeight->value(), m_oldLayoutUnit, Unit::Px));
+        UnitConvertor(ui->doubleSpinBoxTilePaperHeight->value(), m_oldLayoutUnit, Unit::Px));
     settings->SetLayoutTilePaperWidth(
-                UnitConvertor(ui->doubleSpinBoxTilePaperWidth->value(), m_oldLayoutUnit, Unit::Px));
+        UnitConvertor(ui->doubleSpinBoxTilePaperWidth->value(), m_oldLayoutUnit, Unit::Px));
 
     settings->SetLayoutTileIgnoreMargins(ui->checkBoxTileIgnoreFileds->isChecked());
     settings->SetLayoutTileMargins(GetTileMargins());
@@ -318,8 +318,8 @@ void PuzzlePreferencesLayoutPage::CorrectMaxMargins()
     const qreal sheetHeight = ui->doubleSpinBoxSheetPaperHeight->value();
 
     // 80%/2 of paper size for each field
-    const qreal sheetWidthMargin = (sheetWidth*80.0/100.0)/2.0;
-    const qreal sheetHeightMargin = (sheetHeight*80.0/100.0)/2.0;
+    const qreal sheetWidthMargin = (sheetWidth * 80.0 / 100.0) / 2.0;
+    const qreal sheetHeightMargin = (sheetHeight * 80.0 / 100.0) / 2.0;
 
     ui->doubleSpinBoxSheetMarginLeft->setMaximum(sheetWidthMargin);
     ui->doubleSpinBoxSheetMarginRight->setMaximum(sheetWidthMargin);
@@ -330,8 +330,8 @@ void PuzzlePreferencesLayoutPage::CorrectMaxMargins()
     const qreal tileHeight = ui->doubleSpinBoxTilePaperHeight->value();
 
     // 80%/2 of paper size for each field
-    const qreal tileWidthMargin = (tileWidth*80.0/100.0)/2.0;
-    const qreal tileHeightMargin = (tileHeight*80.0/100.0)/2.0;
+    const qreal tileWidthMargin = (tileWidth * 80.0 / 100.0) / 2.0;
+    const qreal tileHeightMargin = (tileHeight * 80.0 / 100.0) / 2.0;
 
     ui->doubleSpinBoxTileMarginLeft->setMaximum(tileWidthMargin);
     ui->doubleSpinBoxTileMarginRight->setMaximum(tileWidthMargin);
@@ -689,10 +689,10 @@ void PuzzlePreferencesLayoutPage::FindTemplate(QComboBox *box, qreal width, qrea
     const Unit paperUnit = LayoutUnit();
 
     const int max = static_cast<int>(VAbstractLayoutDialog::PaperSizeTemplate::Custom);
-    for (int i=0; i < max; ++i)
+    for (int i = 0; i < max; ++i)
     {
-        const QSizeF tmplSize = VAbstractLayoutDialog::GetTemplateSize(
-                    static_cast<VAbstractLayoutDialog::PaperSizeTemplate>(i), paperUnit);
+        const QSizeF tmplSize =
+            VAbstractLayoutDialog::GetTemplateSize(static_cast<VAbstractLayoutDialog::PaperSizeTemplate>(i), paperUnit);
         if (QSizeF(width, height) == tmplSize || QSizeF(height, width) == tmplSize)
         {
             box->blockSignals(true);

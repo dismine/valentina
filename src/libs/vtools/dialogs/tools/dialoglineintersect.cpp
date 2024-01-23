@@ -39,16 +39,12 @@
 #include <QPushButton>
 #include <QSet>
 #include <QSharedPointer>
-#include <new>
 
 #include "../../visualization/line/vistoollineintersect.h"
 #include "../../visualization/visualization.h"
 #include "../ifc/xml/vabstractpattern.h"
 #include "../vgeometry/vpointf.h"
 #include "../vmisc/compatibility.h"
-#if QT_VERSION < QT_VERSION_CHECK(5, 7, 0)
-#include "../vmisc/backport/qoverload.h"
-#endif // QT_VERSION < QT_VERSION_CHECK(5, 7, 0)
 #include "../vpatterndb/vcontainer.h"
 #include "dialogtool.h"
 #include "ui_dialoglineintersect.h"
@@ -243,7 +239,7 @@ void DialogLineIntersect::PointNameChanged()
         QLineF line1(static_cast<QPointF>(*p1Line1), static_cast<QPointF>(*p2Line1));
         QLineF line2(static_cast<QPointF>(*p1Line2), static_cast<QPointF>(*p2Line2));
         QPointF fPoint;
-        QLineF::IntersectType intersect = Intersects(line1, line2, &fPoint);
+        QLineF::IntersectType intersect = line1.intersects(line2, &fPoint);
 
         flagError = not(set.size() < 3 || intersect == QLineF::NoIntersection);
         color = flagError ? OkColor(this) : errorColor;
@@ -284,7 +280,7 @@ auto DialogLineIntersect::CheckIntersecion() -> bool
         QLineF line1(static_cast<QPointF>(*p1L1), static_cast<QPointF>(*p2L1));
         QLineF line2(static_cast<QPointF>(*p1L2), static_cast<QPointF>(*p2L2));
         QPointF fPoint;
-        QLineF::IntersectType intersect = Intersects(line1, line2, &fPoint);
+        QLineF::IntersectType intersect = line1.intersects(line2, &fPoint);
         return intersect == QLineF::UnboundedIntersection || intersect == QLineF::BoundedIntersection;
     }
     catch (const VExceptionBadId &)

@@ -135,7 +135,7 @@ inline auto LineFont(const TextLine &tl, const VSvgFont &base) -> VSvgFont
 //---------------------------------------------------------------------------------------------------------------------
 inline auto LineAlign(const TextLine &tl, const QString &text, const QFontMetrics &fm, qreal width) -> qreal
 {
-    const int lineWidth = TextWidth(fm, text);
+    const int lineWidth = fm.horizontalAdvance(text);
 
     qreal dX = 0;
     if (tl.m_eAlign == 0 || (tl.m_eAlign & Qt::AlignLeft) > 0)
@@ -553,7 +553,7 @@ void VPGraphicsPiece::InitPieceLabelOutlineFont(const QVector<QPointF> &labelSha
                 for (auto c : qAsConst(tl.m_qsText))
                 {
                     path.addPath(corrector.DrawChar(w, static_cast<qreal>(fm.ascent()), c));
-                    w += TextWidth(fm, c);
+                    w += fm.horizontalAdvance(c);
                 }
             }
             else

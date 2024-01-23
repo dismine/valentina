@@ -143,7 +143,7 @@ void VisToolLineIntersectAxis::SetAngle(const QString &expression)
 void VisToolLineIntersectAxis::ShowIntersection(const QLineF &axis_line, const QLineF &base_line)
 {
     QPointF p;
-    QLineF::IntersectType intersect = Intersects(axis_line, base_line, &p);
+    QLineF::IntersectType intersect = axis_line.intersects(base_line, &p);
 
     if (intersect == QLineF::UnboundedIntersection)
     {

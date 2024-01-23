@@ -796,11 +796,11 @@ void VTextGraphicsItem::PaintLabelOutlineFont(QPainter *painter)
             }
             else if ((tl.m_eAlign & Qt::AlignHCenter) > 0)
             {
-                dX = (boundingRect.width() - TextWidth(fm, qsText)) / 2;
+                dX = (boundingRect.width() - fm.horizontalAdvance(qsText)) / 2;
             }
             else if ((tl.m_eAlign & Qt::AlignRight) > 0)
             {
-                dX = boundingRect.width() - TextWidth(fm, qsText);
+                dX = boundingRect.width() - fm.horizontalAdvance(qsText);
             }
 
             VSingleLineOutlineChar const corrector(fnt);
@@ -814,7 +814,7 @@ void VTextGraphicsItem::PaintLabelOutlineFont(QPainter *painter)
             for (auto c : qAsConst(qsText))
             {
                 path.addPath(corrector.DrawChar(w, static_cast<qreal>(fm.ascent()), c));
-                w += TextWidth(fm, c);
+                w += fm.horizontalAdvance(c);
             }
 
             QTransform matrix;

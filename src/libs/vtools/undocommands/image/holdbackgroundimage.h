@@ -30,19 +30,16 @@
 
 #include "../vundocommand.h"
 
-#if QT_VERSION < QT_VERSION_CHECK(5, 13, 0)
-#include "../vmisc/defglobal.h"
-#endif // QT_VERSION < QT_VERSION_CHECK(5, 13, 0)
-
-
 class HoldBackgroundImage : public VUndoCommand
 {
     Q_OBJECT // NOLINT
+
 public:
     HoldBackgroundImage(QUuid id, bool hold, VAbstractPattern *doc, QUndoCommand *parent = nullptr);
-    ~HoldBackgroundImage() override =default;
+    ~HoldBackgroundImage() override = default;
     void undo() override;
-    void redo() override;  
+    void redo() override;
+
 private:
     // cppcheck-suppress unknownMacro
     Q_DISABLE_COPY_MOVE(HoldBackgroundImage) // NOLINT

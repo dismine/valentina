@@ -95,7 +95,7 @@ auto FancyTabBar::TabSizeHint(bool minimum) const -> QSize
             {
                 sentence = sentence.isEmpty() ? sentence = word : sentence + ' '_L1 + word;
 
-                const int width = TextWidth(fm, sentence);
+                const int width = fm.horizontalAdvance(sentence);
                 if (maxLabelwidth < width)
                 {
                     maxLabelwidth = width;
@@ -105,7 +105,7 @@ auto FancyTabBar::TabSizeHint(bool minimum) const -> QSize
         }
         else
         {
-            const int width = TextWidth(fm, tabText);
+            const int width = fm.horizontalAdvance(tabText);
             if (width > maxLabelwidth)
             {
                 maxLabelwidth = width;

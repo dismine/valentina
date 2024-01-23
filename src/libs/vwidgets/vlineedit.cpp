@@ -37,16 +37,7 @@
 
 #include "../vmisc/defglobal.h"
 
-#if (defined(Q_CC_GNU) && Q_CC_GNU < 409) && !defined(Q_CC_CLANG)
-// DO NOT WORK WITH GCC 4.8
-#else
-#if __cplusplus >= 201402L
 using namespace std::chrono_literals;
-#else
-#include "../vmisc/bpstd/chrono.hpp"
-using namespace bpstd::literals::chrono_literals;
-#endif // __cplusplus >= 201402L
-#endif //(defined(Q_CC_GNU) && Q_CC_GNU < 409) && !defined(Q_CC_CLANG)
 
 #if QT_VERSION < QT_VERSION_CHECK(6, 4, 0)
 #include "../vmisc/compatibility.h"
@@ -193,7 +184,7 @@ void VCompleterLineEdit::ShowCompletion()
     if (text().isEmpty())
     {
         // completion list will be hidden now; we will show it again after a delay
-        QTimer::singleShot(V_MSECONDS(100), this, &VCompleterLineEdit::CompletionPopup);
+        QTimer::singleShot(100ms, this, &VCompleterLineEdit::CompletionPopup);
     }
 }
 

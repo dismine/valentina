@@ -35,16 +35,11 @@
 #include <qt_windows.h>
 #endif /*Q_OS_WIN*/
 
-#include <QString>
-#include <cstdint>
-
-#if QT_VERSION < QT_VERSION_CHECK(5, 13, 0)
-#include "../vmisc/defglobal.h"
-#endif
-
 #include <QFileInfo>
 #include <QLockFile>
 #include <QSharedPointer>
+#include <QString>
+#include <cstdint>
 
 /*@brief
  * This class creates Guarded object if and only if lock file taken. It keeps shared_ptr to object and lock-file.

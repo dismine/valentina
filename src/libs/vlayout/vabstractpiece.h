@@ -583,7 +583,7 @@ inline auto VAbstractPiece::IsInsidePolygon(const QVector<T> &path, const QVecto
             }
 
             QPointF crosPoint;
-            const auto type = Intersects(baseSegment, allowanceSegment, &crosPoint);
+            const auto type = baseSegment.intersects(allowanceSegment, &crosPoint);
 
             if (type == QLineF::BoundedIntersection && not VFuzzyComparePoints(baseSegment.p1(), crosPoint, accuracy) &&
                 not VFuzzyComparePoints(baseSegment.p2(), crosPoint, accuracy) &&
@@ -674,7 +674,7 @@ template <class T> inline auto VAbstractPiece::CheckLoop(const QVector<T> &point
         {
             QLineF line2(points.at(j), points.at(j + 1));
 
-            const QLineF::IntersectType intersect = Intersects(line1, line2, &crosPoint);
+            const QLineF::IntersectType intersect = line1.intersects(line2, &crosPoint);
             if (intersect == QLineF::NoIntersection)
             { // According to the documentation QLineF::NoIntersection indicates that the lines do not intersect;
                 // i.e. they are parallel. But parallel also mean they can be on the same line.

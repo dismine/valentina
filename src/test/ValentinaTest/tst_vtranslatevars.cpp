@@ -151,7 +151,7 @@ void TST_VTranslateVars::PrepareValToUser(double d, const QLocale &locale)
 {
     const QString formulaFromSystem = QLocale::c().toString(d);
     QString formulaToUser = locale.toString(d);
-    if (VLocaleCharacter(LocaleGroupSeparator(locale)).isSpace())
+    if (LocaleGroupSeparator(locale).isSpace())
     {
         formulaToUser.replace(LocaleGroupSeparator(locale), QString());
     }

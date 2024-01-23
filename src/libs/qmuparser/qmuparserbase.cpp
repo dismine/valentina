@@ -36,10 +36,6 @@
 
 #include "qmudef.h"
 
-#if QT_VERSION < QT_VERSION_CHECK(5, 14, 0)
-#include "text.h"
-#endif
-
 /**
  * @file
  * @brief This file contains the basic implementation of the muparser engine.

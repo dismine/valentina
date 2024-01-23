@@ -34,10 +34,6 @@
 #include "qmuparserdef.h"
 #include "qmutranslation.h"
 
-#if QT_VERSION < QT_VERSION_CHECK(5, 13, 0)
-#include "../vmisc/defglobal.h"
-#endif
-
 /** @file
     @brief This file defines the error class used by the parser.
 */

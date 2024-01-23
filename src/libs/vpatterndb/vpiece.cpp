@@ -1472,14 +1472,12 @@ void VPiece::DumpPiece(const VPiece &piece, const VContainer *data, const QStrin
     if (temp.open())
     {
 #if defined(Q_OS_LINUX)
-#if QT_VERSION >= QT_VERSION_CHECK(5, 10, 0)
         //        On Linux, QTemporaryFile will attempt to create unnamed temporary
         //        files. If that succeeds, open() will return true but exists() will be
         //        false. If you call fileName() or any function that calls it,
         //        QTemporaryFile will give the file a name, so most applications will
         //        not see a difference.
         temp.fileName(); // call to create a file on disk
-#endif
 #endif
         QJsonObject testCase{
             {"bd", piece.DBToJson(data)},
@@ -1683,8 +1681,8 @@ auto VPiece::SeamAllowanceMirrorLine(const VContainer *data) const -> QLineF
     QRectF rec = QRectF(0, 0, INT_MAX, INT_MAX);
     rec.translate(-INT_MAX / 2.0, -INT_MAX / 2.0);
 
-    QLineF axis = QLineF(LineCenter(seamMirrorLine),
-                         VGObject::BuildRay(LineCenter(seamMirrorLine), seamMirrorLine.angle() + 180, rec));
+    QLineF axis =
+        QLineF(seamMirrorLine.center(), VGObject::BuildRay(seamMirrorLine.center(), seamMirrorLine.angle() + 180, rec));
 
     QVector<QPointF> points;
     CastTo(SeamAllowancePoints(data), points);
@@ -1698,8 +1696,7 @@ auto VPiece::SeamAllowanceMirrorLine(const VContainer *data) const -> QLineF
     const QPointF startPoint = intersections.constFirst();
 
     std::reverse(points.begin(), points.end());
-    axis =
-        QLineF(LineCenter(seamMirrorLine), VGObject::BuildRay(LineCenter(seamMirrorLine), seamMirrorLine.angle(), rec));
+    axis = QLineF(seamMirrorLine.center(), VGObject::BuildRay(seamMirrorLine.center(), seamMirrorLine.angle(), rec));
     intersections = VAbstractCurve::CurveIntersectLine(points, axis);
     if (intersections.isEmpty())
     {

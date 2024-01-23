@@ -30,10 +30,6 @@
 
 #include "vbackgroundimageitem.h"
 
-#if QT_VERSION < QT_VERSION_CHECK(5, 13, 0)
-#include "../vmisc/defglobal.h"
-#endif // QT_VERSION < QT_VERSION_CHECK(5, 13, 0)
-
 enum class ShapeMode
 {
     MaskShape,
@@ -41,14 +37,18 @@ enum class ShapeMode
     HeuristicMaskShape
 };
 
-class VBackgroundPixmapItem : public VBackgroundImageItem // clazy:exclude=ctor-missing-parent-argument,missing-qobject-macro
+class VBackgroundPixmapItem
+  : public VBackgroundImageItem // clazy:exclude=ctor-missing-parent-argument,missing-qobject-macro
 {
 public:
     VBackgroundPixmapItem(const VBackgroundPatternImage &image, VAbstractPattern *doc, QGraphicsItem *parent = nullptr);
     ~VBackgroundPixmapItem() override = default;
 
-    auto type() const -> int override {return Type;}
-    enum {Type = UserType + static_cast<int>(Tool::BackgroundPixmapImage)};
+    auto type() const -> int override { return Type; }
+    enum
+    {
+        Type = UserType + static_cast<int>(Tool::BackgroundPixmapImage)
+    };
 
     auto boundingRect() const -> QRectF override;
     auto shape() const -> QPainterPath override;

@@ -31,10 +31,6 @@
 #include <QStyle>
 #include <QtGlobal>
 
-#if QT_VERSION < QT_VERSION_CHECK(5, 13, 0)
-#include "../defglobal.h"
-#endif
-
 class VApplicationStyle : public QStyle
 {
     Q_OBJECT // NOLINT

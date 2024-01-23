@@ -51,10 +51,6 @@
 #include "../vpatterndb/vcontainer.h"
 #include "vtextmanager.h"
 
-#if QT_VERSION < QT_VERSION_CHECK(5, 9, 0)
-#include "../vmisc/vdatastreamenum.h"
-#endif
-
 using namespace Qt::Literals::StringLiterals;
 
 namespace
@@ -94,7 +90,7 @@ auto FileBaseName(const QString &filePath) -> QString
 auto SplitTextByWidth(const QString &text, const QFont &font, int maxWidth) -> QStringList
 {
     QFontMetrics fontMetrics(font);
-    if (TextWidth(fontMetrics, text) <= maxWidth)
+    if (fontMetrics.horizontalAdvance(text) <= maxWidth)
     {
         return {text};
     }
@@ -108,7 +104,7 @@ auto SplitTextByWidth(const QString &text, const QFont &font, int maxWidth) -> Q
     for (int endIndex = 0; endIndex < textLength; ++endIndex)
     {
         QChar currentChar = text.at(endIndex);
-        const int charWidth = TextWidth(fontMetrics, currentChar);
+        const int charWidth = fontMetrics.horizontalAdvance(currentChar);
 
         if (lineWidth + charWidth > maxWidth)
         {
@@ -723,7 +719,7 @@ auto VTextManager::GetLabelSourceLines(int width, const QFont &font) const -> QV
 
         QString qsText = tl.m_qsText;
         QFontMetrics fm(fnt);
-        if (TextWidth(fm, qsText) > width)
+        if (fm.horizontalAdvance(qsText) > width)
         {
             const QStringList brokeLines = BreakTextIntoLines(qsText, fnt, width);
             for (const auto &lineText : brokeLines)
@@ -806,12 +802,12 @@ auto VTextManager::MaxLineWidthOutlineFont(int width) const -> int
 
         QString qsText = tl.m_qsText;
 
-        if (TextWidth(fm, qsText) > width)
+        if (fm.horizontalAdvance(qsText) > width)
         {
             qsText = fm.elidedText(qsText, Qt::ElideMiddle, width);
         }
 
-        maxWidth = qMax(TextWidth(fm, qsText), maxWidth);
+        maxWidth = qMax(fm.horizontalAdvance(qsText), maxWidth);
     }
 
     return maxWidth;
@@ -913,7 +909,7 @@ auto VTextManager::BreakTextIntoLines(const QString &text, const QFont &font, in
 
     QString currentLine;
     int currentLineWidth = 0;
-    const int spaceWidth = TextWidth(fontMetrics, QChar(' '));
+    const int spaceWidth = fontMetrics.horizontalAdvance(QChar(' '));
     const float tolerance = 0.3F;
 
     QStringList lines;
@@ -933,7 +929,7 @@ auto VTextManager::BreakTextIntoLines(const QString &text, const QFont &font, in
     while (iterator.hasNext())
     {
         const QString &word = iterator.next();
-        int wordWidth = TextWidth(fontMetrics, word);
+        int wordWidth = fontMetrics.horizontalAdvance(word);
         int totalWidth = !currentLine.isEmpty() ? currentLineWidth + spaceWidth + wordWidth : wordWidth;
 
         if (totalWidth <= maxWidth)
@@ -952,7 +948,7 @@ auto VTextManager::BreakTextIntoLines(const QString &text, const QFont &font, in
         else
         {
             // Word is too long, force line break
-            if (currentLineWidth + spaceWidth + TextWidth(fontMetrics, word.at(0)) > maxWidth)
+            if (currentLineWidth + spaceWidth + fontMetrics.horizontalAdvance(word.at(0)) > maxWidth)
             {
                 lines.append(currentLine);
                 currentLine.clear();
@@ -968,7 +964,7 @@ auto VTextManager::BreakTextIntoLines(const QString &text, const QFont &font, in
             }
             else
             {
-                const int width = TextWidth(fontMetrics, subWords.constFirst());
+                const int width = fontMetrics.horizontalAdvance(subWords.constFirst());
                 const int tWidth = !currentLine.isEmpty() ? currentLineWidth + spaceWidth + width : width;
                 AppendWord(subWords.constFirst(), tWidth);
                 lines.append(currentLine);

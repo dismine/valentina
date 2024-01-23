@@ -497,7 +497,7 @@ void VPoster::Ruler(QVector<QGraphicsItem *> &data, QGraphicsItem *parent, QRect
 
             qreal unitsWidth = 0;
             QFontMetrics fm(fnt);
-            unitsWidth = TextWidth(fm, units->toPlainText());
+            unitsWidth = fm.horizontalAdvance(units->toPlainText());
             units->setPos(rec.x() + step * 0.5 - unitsWidth * 0.7,
                           rec.y() + rec.height() - static_cast<int>(allowance) - shortNotchHeight);
             units->setFont(fnt);

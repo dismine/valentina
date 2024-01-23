@@ -31,17 +31,18 @@
 #include <QGraphicsObject>
 #include <QUuid>
 
-#include "../vmisc/def.h"
 #include "../ifc/xml/vbackgroundpatternimage.h"
-
-#if QT_VERSION < QT_VERSION_CHECK(5, 13, 0)
-#include "../vmisc/defglobal.h"
-#endif // QT_VERSION < QT_VERSION_CHECK(5, 13, 0)
+#include "../vmisc/def.h"
 
 class VAbstractPattern;
 class QScreen;
 
-enum class BITransformationType {Scale, Rotate, Unknown};
+enum class BITransformationType
+{
+    Scale,
+    Rotate,
+    Unknown
+};
 
 enum class BIHandleCorner : int
 {
@@ -71,12 +72,16 @@ enum class BIHandleCornerType
 class VBackgroundImageControls : public QGraphicsObject
 {
     Q_OBJECT // NOLINT
+
 public:
-    explicit VBackgroundImageControls(VAbstractPattern *doc, QGraphicsItem * parent = nullptr);
+    explicit VBackgroundImageControls(VAbstractPattern *doc, QGraphicsItem *parent = nullptr);
     ~VBackgroundImageControls() override = default;
 
-    auto type() const -> int override {return Type;}
-    enum { Type = UserType + static_cast<int>(Tool::BackgroundImageControls)};
+    auto type() const -> int override { return Type; }
+    enum
+    {
+        Type = UserType + static_cast<int>(Tool::BackgroundImageControls)
+    };
 
     auto Id() const -> const QUuid &;
 
@@ -85,7 +90,7 @@ signals:
 
 public slots:
     void ActivateControls(const QUuid &id);
-    void DeactivateControls(QGraphicsItem* item);
+    void DeactivateControls(QGraphicsItem *item);
     void UpdateControls();
 
 protected:
@@ -93,8 +98,8 @@ protected:
     auto shape() const -> QPainterPath override;
     void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget) override;
 
-    void mousePressEvent(QGraphicsSceneMouseEvent * event) override;
-    void mouseMoveEvent(QGraphicsSceneMouseEvent * event) override;
+    void mousePressEvent(QGraphicsSceneMouseEvent *event) override;
+    void mouseMoveEvent(QGraphicsSceneMouseEvent *event) override;
     void mouseReleaseEvent(QGraphicsSceneMouseEvent *event) override;
     void hoverEnterEvent(QGraphicsSceneHoverEvent *event) override;
     void hoverMoveEvent(QGraphicsSceneHoverEvent *event) override;
@@ -167,14 +172,14 @@ private:
     auto RotateBottomRightControl() const -> QPainterPath;
     auto RotateBottomLeftControl() const -> QPainterPath;
 
-    auto ScaleByTopLeft(QGraphicsSceneMouseEvent * event) const -> QTransform;
-    auto ScaleByTop(QGraphicsSceneMouseEvent * event) const -> QTransform;
-    auto ScaleByTopRight(QGraphicsSceneMouseEvent * event) const -> QTransform;
-    auto ScaleByRight(QGraphicsSceneMouseEvent * event) const -> QTransform;
-    auto ScaleByBottomRight(QGraphicsSceneMouseEvent * event) const -> QTransform;
-    auto ScaleByBottom(QGraphicsSceneMouseEvent * event) const -> QTransform;
-    auto ScaleByBottomLeft(QGraphicsSceneMouseEvent * event) const -> QTransform;
-    auto ScaleByLeft(QGraphicsSceneMouseEvent * event) const -> QTransform;
+    auto ScaleByTopLeft(QGraphicsSceneMouseEvent *event) const -> QTransform;
+    auto ScaleByTop(QGraphicsSceneMouseEvent *event) const -> QTransform;
+    auto ScaleByTopRight(QGraphicsSceneMouseEvent *event) const -> QTransform;
+    auto ScaleByRight(QGraphicsSceneMouseEvent *event) const -> QTransform;
+    auto ScaleByBottomRight(QGraphicsSceneMouseEvent *event) const -> QTransform;
+    auto ScaleByBottom(QGraphicsSceneMouseEvent *event) const -> QTransform;
+    auto ScaleByBottomLeft(QGraphicsSceneMouseEvent *event) const -> QTransform;
+    auto ScaleByLeft(QGraphicsSceneMouseEvent *event) const -> QTransform;
 
     auto Handles() const -> QPainterPath;
     auto ControllersRect() const -> QRectF;
@@ -188,8 +193,8 @@ private:
     auto OriginCircle2() const -> QPainterPath;
     auto OriginPath() const -> QPainterPath;
 
-    void ScaleImage(QGraphicsSceneMouseEvent * event);
-    void RotateImage(QGraphicsSceneMouseEvent * event);
+    void ScaleImage(QGraphicsSceneMouseEvent *event);
+    void RotateImage(QGraphicsSceneMouseEvent *event);
 
     void UpdateCursor(BIHandleCorner corner);
 };

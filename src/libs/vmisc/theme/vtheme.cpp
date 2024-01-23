@@ -29,6 +29,7 @@
 #include "../vcommonsettings.h"
 
 #include <QIcon>
+#include <QOperatingSystemVersion>
 #include <QPainter>
 #include <QPalette>
 #include <QPixmap>
@@ -39,15 +40,6 @@
 #include <QtGlobal>
 #include <QtSvg/QSvgRenderer>
 
-#if QT_VERSION >= QT_VERSION_CHECK(5, 9, 0)
-#include <QOperatingSystemVersion>
-#else
-#if defined(Q_OS_WIN)
-#include <Ntddkbd.h> // Required for RtlGetVersion
-#include <Windows.h>
-#endif // defined(Q_OS_WIN)
-#endif // QT_VERSION >= QT_VERSION_CHECK(5, 9, 0)
-
 #if defined(Q_OS_MACX)
 #include "macutils.h"
 #endif
@@ -56,18 +48,8 @@
 #include <QStyleHints>
 #endif
 
-#if (defined(Q_CC_GNU) && Q_CC_GNU < 409) && !defined(Q_CC_CLANG)
-// DO NOT WORK WITH GCC 4.8
-#else
-#if __cplusplus >= 201402L
 using namespace std::chrono_literals;
-#else
-#include "../bpstd/chrono.hpp"
-using namespace bpstd::literals::chrono_literals;
-#endif // __cplusplus >= 201402L
-#endif //(defined(Q_CC_GNU) && Q_CC_GNU < 409) && !defined(Q_CC_CLANG)
 
-#include "../defglobal.h"
 #include "../vabstractapplication.h"
 #include "vapplicationstyle.h"
 #include "vscenestylesheet.h"
@@ -80,76 +62,12 @@ using namespace Qt::Literals::StringLiterals;
 
 namespace
 {
-#if QT_VERSION < QT_VERSION_CHECK(5, 9, 0)
-#if defined(Q_OS_WIN)
-// Define the RtlGetVersion function
-typedef NTSTATUS(WINAPI *RtlGetVersionFunc)(PRTL_OSVERSIONINFOW);
-
-// Function to get the OS version using RtlGetVersion if available, otherwise fallback to GetVersionEx
-bool GetTrueWindowsVersion(RTL_OSVERSIONINFOW &osVersionInfo)
-{
-    // Function pointer to driver function
-    RtlGetVersionFunc pRtlGetVersion = nullptr;
-
-    // Load the System-DLL
-    HMODULE hNTdllDll = LoadLibrary(L"ntdll.dll");
-
-    // Successfully loaded?
-    if (hNTdllDll != nullptr)
-    {
-        QT_WARNING_PUSH
-        QT_WARNING_DISABLE_MSVC(4191)
-
-        // Get the function pointer to RtlGetVersion
-        pRtlGetVersion = reinterpret_cast<RtlGetVersionFunc>(GetProcAddress(hNTdllDll, "RtlGetVersion"));
-
-        QT_WARNING_POP
-
-        // If successful then read the function
-        if (pRtlGetVersion != nullptr)
-        {
-            ZeroMemory(&osVersionInfo, sizeof(RTL_OSVERSIONINFOW));
-            osVersionInfo.dwOSVersionInfoSize = sizeof(RTL_OSVERSIONINFOW);
-
-            if (pRtlGetVersion(&osVersionInfo) == 0)
-            {
-                // Successfully obtained OS version using RtlGetVersion
-                FreeLibrary(hNTdllDll);
-                return true;
-            }
-        }
-
-        // Free the library if RtlGetVersion failed
-        FreeLibrary(hNTdllDll);
-    }
-
-    // Fallback to GetVersionEx if RtlGetVersion is not available
-    OSVERSIONINFOEX osVersionFallback;
-    ZeroMemory(&osVersionFallback, sizeof(OSVERSIONINFOEX));
-    osVersionFallback.dwOSVersionInfoSize = sizeof(OSVERSIONINFOEX);
-
-    if (GetVersionEx(reinterpret_cast<OSVERSIONINFO *>(&osVersionFallback)))
-    {
-        // Successfully obtained OS version using GetVersionEx
-        osVersionInfo.dwMajorVersion = osVersionFallback.dwMajorVersion;
-        osVersionInfo.dwMinorVersion = osVersionFallback.dwMinorVersion;
-        osVersionInfo.dwBuildNumber = osVersionFallback.dwBuildNumber;
-        return true;
-    }
-
-    // Failed to obtain OS version
-    return false;
-}
-#endif // defined(Q_OS_WIN)
-#endif // QT_VERSION < QT_VERSION_CHECK(5, 9, 0)
-
 //---------------------------------------------------------------------------------------------------------------------
 #ifdef Q_OS_WIN
 auto NativeWindowsDarkThemeAvailable() -> bool
 {
     // dark mode supported Windows 10 1809 10.0.17763 onward
     // https://stackoverflow.com/questions/53501268/win10-dark-theme-how-to-use-in-winapi
-#if QT_VERSION >= QT_VERSION_CHECK(5, 9, 0)
     if (QOperatingSystemVersion::current().majorVersion() > 10)
     {
         return true;
@@ -159,21 +77,6 @@ auto NativeWindowsDarkThemeAvailable() -> bool
     {
         return QOperatingSystemVersion::current().microVersion() >= 17763;
     }
-#else
-    RTL_OSVERSIONINFOW osVersionInfo;
-    if (GetTrueWindowsVersion(osVersionInfo))
-    {
-        if (osVersionInfo.dwMajorVersion > 10)
-        {
-            return true;
-        }
-
-        if (osVersionInfo.dwMajorVersion == 10)
-        {
-            return osVersionInfo.dwBuildNumber >= 17763;
-        }
-    }
-#endif // QT_VERSION >= QT_VERSION_CHECK(5, 9, 0)
 
     return false;
 }
@@ -251,18 +154,7 @@ void ActivateDefaultThemeWin()
 #if defined(Q_OS_MACX)
 void ActivateDefaultThemeMac()
 {
-#if QT_VERSION >= QT_VERSION_CHECK(5, 12, 0)
     qApp->setStyleSheet(QString()); // NOLINT(cppcoreguidelines-pro-type-static-cast-downcast)
-#else
-    if (VTheme::IsInDarkTheme())
-    {
-        ActivateCustomDarkTheme();
-    }
-    else
-    {
-        qApp->setStyleSheet(QString()); // NOLINT(cppcoreguidelines-pro-type-static-cast-downcast)
-    }
-#endif // QT_VERSION >= QT_VERSION_CHECK(5, 12, 0)
 }
 #endif // defined(Q_OS_MACX)
 
@@ -717,7 +609,7 @@ VTheme::VTheme(QObject *parent)
         };
 
         connect(m_themeTimer, &QTimer::timeout, this, colorSchemeTimeoutCheck);
-        m_themeTimer->start(V_SECONDS(5));
+        m_themeTimer->start(5s);
     }
 #endif // QT_VERSION >= QT_VERSION_CHECK(6, 5, 0)
 }

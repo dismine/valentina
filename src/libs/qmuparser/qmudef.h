@@ -25,13 +25,6 @@
 #include "qmuparser_global.h"
 #include "qmuparserdef.h"
 
-#if QT_VERSION < QT_VERSION_CHECK(5, 13, 0)
-#define Q_DISABLE_COPY_MOVE(Class)                                                                                     \
-    Q_DISABLE_COPY(Class)                                                                                              \
-    Class(Class &&) = delete;                                                                                          \
-    Class &operator=(Class &&) = delete;
-#endif
-
 #ifndef Q_DISABLE_ASSIGN
 #define Q_DISABLE_ASSIGN(Class) Class &operator=(const Class &) = delete;
 #endif

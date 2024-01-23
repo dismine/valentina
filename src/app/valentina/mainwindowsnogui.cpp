@@ -71,7 +71,7 @@
 #include <QtSvg>
 #include <functional>
 
-#if defined(Q_OS_WIN32) && QT_VERSION < QT_VERSION_CHECK(6, 0, 0) && QT_VERSION >= QT_VERSION_CHECK(5, 7, 0)
+#if defined(Q_OS_WIN32) && QT_VERSION < QT_VERSION_CHECK(6, 0, 0)
 #include <QWinTaskbarButton>
 #include <QWinTaskbarProgress>
 #endif
@@ -134,14 +134,14 @@ MainWindowsNoGUI::MainWindowsNoGUI(QWidget *parent)
   : VAbstractMainWindow(parent),
     pattern(new VContainer(VAbstractApplication::VApp()->TrVars(), VAbstractValApplication::VApp()->patternUnitsP(),
                            valentinaNamespace))
-#if defined(Q_OS_WIN32) && QT_VERSION < QT_VERSION_CHECK(6, 0, 0) && QT_VERSION >= QT_VERSION_CHECK(5, 7, 0)
+#if defined(Q_OS_WIN32) && QT_VERSION < QT_VERSION_CHECK(6, 0, 0)
     ,
     m_taskbarButton(new QWinTaskbarButton(this))
 #endif
 {
     InitTempLayoutScene();
 
-#if defined(Q_OS_WIN32) && QT_VERSION < QT_VERSION_CHECK(6, 0, 0) && QT_VERSION >= QT_VERSION_CHECK(5, 7, 0)
+#if defined(Q_OS_WIN32) && QT_VERSION < QT_VERSION_CHECK(6, 0, 0)
     m_taskbarButton->setWindow(this->windowHandle());
     m_taskbarProgress = m_taskbarButton->progress();
     m_taskbarProgress->setMinimum(0);
@@ -193,14 +193,14 @@ auto MainWindowsNoGUI::GenerateLayout(VLayoutGenerator &lGenerator) -> bool
     QElapsedTimer timer;
     timer.start();
 
-#if defined(Q_OS_WIN32) && QT_VERSION < QT_VERSION_CHECK(6, 0, 0) && QT_VERSION >= QT_VERSION_CHECK(5, 7, 0)
+#if defined(Q_OS_WIN32) && QT_VERSION < QT_VERSION_CHECK(6, 0, 0)
     QTimer *progressTimer = nullptr;
 #endif
 
     QSharedPointer<DialogLayoutProgress> progress;
     if (VApplication::IsGUIMode())
     {
-#if defined(Q_OS_WIN32) && QT_VERSION < QT_VERSION_CHECK(6, 0, 0) && QT_VERSION >= QT_VERSION_CHECK(5, 7, 0)
+#if defined(Q_OS_WIN32) && QT_VERSION < QT_VERSION_CHECK(6, 0, 0)
         m_taskbarProgress->setVisible(true);
         m_taskbarProgress->setValue(0);
         m_taskbarProgress->setMaximum(lGenerator.GetNestingTime() * 60);
@@ -419,7 +419,7 @@ auto MainWindowsNoGUI::GenerateLayout(VLayoutGenerator &lGenerator) -> bool
         progress->Finished();
     }
 
-#if defined(Q_OS_WIN32) && QT_VERSION < QT_VERSION_CHECK(6, 0, 0) && QT_VERSION >= QT_VERSION_CHECK(5, 7, 0)
+#if defined(Q_OS_WIN32) && QT_VERSION < QT_VERSION_CHECK(6, 0, 0)
     if (VApplication::IsGUIMode())
     {
         progressTimer->stop();

@@ -30,13 +30,10 @@
 
 #include <QObject>
 
-#if QT_VERSION < QT_VERSION_CHECK(5, 13, 0)
-#include "../vmisc/defglobal.h"
-#endif
-
-class TST_XSDShema :public QObject
+class TST_XSDShema : public QObject
 {
     Q_OBJECT // NOLINT
+
 public:
     explicit TST_XSDShema(QObject *parent = nullptr);
     ~TST_XSDShema() override = default;

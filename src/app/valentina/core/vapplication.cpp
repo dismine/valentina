@@ -45,13 +45,10 @@
 #include "../vmisc/vvalentinasettings.h"
 #include "vvalentinashortcutmanager.h"
 
-#if QT_VERSION < QT_VERSION_CHECK(5, 14, 0)
-#include "../vmisc/backport/text.h"
-#endif
-
 #include "QtConcurrent/qtconcurrentrun.h"
 #include <QDateTime>
 #include <QDir>
+#include <QEvent>
 #include <QFile>
 #include <QFileSystemWatcher>
 #include <QFuture>
@@ -60,6 +57,7 @@
 #include <QMessageBox>
 #include <QObject>
 #include <QProcess>
+#include <QScopeGuard>
 #include <QStandardPaths>
 #include <QStyleFactory>
 #include <QTemporaryFile>
@@ -75,13 +73,6 @@
 #if !defined(BUILD_REVISION) && defined(QBS_BUILD)
 #include <vcsRepoState.h>
 #define BUILD_REVISION VCS_REPO_STATE_REVISION
-#endif
-
-#if QT_VERSION < QT_VERSION_CHECK(5, 12, 0)
-#include "../vmisc/backport/qscopeguard.h"
-#else
-#include <QEvent>
-#include <QScopeGuard>
 #endif
 
 #if QT_VERSION < QT_VERSION_CHECK(6, 4, 0)
@@ -181,26 +172,6 @@ inline void noisyFailureMsgHandler(QtMsgType type, const QMessageLogContext &con
 #endif // defined(V_NO_ASSERT)
 
 #if defined(Q_OS_MAC)
-#if QT_VERSION < QT_VERSION_CHECK(5, 7, 0)
-    // Try hide very annoying, Qt related, warnings in Mac OS X
-    // QNSView mouseDragged: Internal mouse button tracking invalid (missing Qt::LeftButton)
-    // https://bugreports.qt.io/browse/QTBUG-42846
-    if ((type == QtWarningMsg) && msg.contains(QStringLiteral("QNSView")))
-    {
-        type = QtDebugMsg;
-    }
-#endif
-
-#if QT_VERSION < QT_VERSION_CHECK(5, 9, 0)
-    // Hide Qt bug 'Assertion when reading an icns file'
-    // https://bugreports.qt.io/browse/QTBUG-45537
-    // Remove after Qt fix will be released
-    if ((type == QtWarningMsg) && msg.contains(QStringLiteral("QICNSHandler::read()")))
-    {
-        type = QtDebugMsg;
-    }
-#endif
-
     // Hide anything that starts with QMacCGContext
     if ((type == QtWarningMsg) && msg.contains(QStringLiteral("QMacCGContext::")))
     {
@@ -645,11 +616,7 @@ void VApplication::ClearOldLogs()
     for (const auto &fn : allFiles)
     {
         QFileInfo info(fn);
-#if QT_VERSION >= QT_VERSION_CHECK(5, 10, 0)
         const QDateTime created = info.birthTime();
-#else
-        const QDateTime created = info.created();
-#endif
         if (created.daysTo(QDateTime::currentDateTime()) >= DAYS_TO_KEEP_LOGS)
         {
             VLockGuard<QFile> tmp(info.absoluteFilePath(), [&fn]() { return new QFile(fn); });

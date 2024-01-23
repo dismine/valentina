@@ -75,10 +75,6 @@
 #include "qpainterpath.h"
 #include "toolsdef.h"
 
-#if QT_VERSION < QT_VERSION_CHECK(5, 7, 0)
-#include "../vmisc/backport/qoverload.h"
-#endif // QT_VERSION < QT_VERSION_CHECK(5, 7, 0)
-
 #include <QFuture>
 #include <QGraphicsSceneMouseEvent>
 #include <QGraphicsView>
@@ -93,16 +89,7 @@
 #include <chrono>
 #include <memory>
 
-#if (defined(Q_CC_GNU) && Q_CC_GNU < 409) && !defined(Q_CC_CLANG)
-// DO NOT WORK WITH GCC 4.8
-#else
-#if __cplusplus >= 201402L
 using namespace std::chrono_literals;
-#else
-#include "../vmisc/bpstd/chrono.hpp"
-using namespace bpstd::literals::chrono_literals;
-#endif // __cplusplus >= 201402L
-#endif //(defined(Q_CC_GNU) && Q_CC_GNU < 409) && !defined(Q_CC_CLANG)
 
 // Current version of seam allowance tag need for backward compatibility
 const quint8 VToolSeamAllowance::pieceVersion = 2;
@@ -1862,7 +1849,7 @@ void VToolSeamAllowance::RefreshGeometry(bool updateChildren)
 
     if (VAbstractApplication::VApp()->IsAppInGUIMode())
     {
-        QTimer::singleShot(V_MSECONDS(100), Qt::CoarseTimer, this,
+        QTimer::singleShot(100ms, Qt::CoarseTimer, this,
                            [this, updateChildren]()
                            {
                                this->setFlag(QGraphicsItem::ItemSendsGeometryChanges, false);

@@ -46,17 +46,13 @@
 
 #ifndef QTCOLORPICKER_H
 #define QTCOLORPICKER_H
-#include <QColor>
-#include <QPushButton>
-#include <QtCore/QString>
 
+#include <QColor>
 #include <QFocusEvent>
 #include <QLabel>
+#include <QPushButton>
 #include <QtCore/QEvent>
-
-#if QT_VERSION < QT_VERSION_CHECK(5, 13, 0)
-#include "../vmisc/defglobal.h"
-#endif
+#include <QtCore/QString>
 
 class ColorPickerPopup;
 class ColorPickerItem;

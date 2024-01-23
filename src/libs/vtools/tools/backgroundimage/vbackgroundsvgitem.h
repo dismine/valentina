@@ -30,21 +30,21 @@
 
 #include "vbackgroundimageitem.h"
 
-#if QT_VERSION < QT_VERSION_CHECK(5, 13, 0)
-#include "../vmisc/defglobal.h"
-#endif // QT_VERSION < QT_VERSION_CHECK(5, 13, 0)
-
 class QSvgRenderer;
 
 class VBackgroundSVGItem : public VBackgroundImageItem
 {
     Q_OBJECT // NOLINT
+
 public:
     VBackgroundSVGItem(const VBackgroundPatternImage &image, VAbstractPattern *doc, QGraphicsItem *parent = nullptr);
     ~VBackgroundSVGItem() override;
 
-    auto type() const -> int override {return Type;}
-    enum {Type = UserType + static_cast<int>(Tool::BackgroundSVGImage)};
+    auto type() const -> int override { return Type; }
+    enum
+    {
+        Type = UserType + static_cast<int>(Tool::BackgroundSVGImage)
+    };
 
     auto boundingRect() const -> QRectF override;
     void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget) override;

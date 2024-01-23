@@ -46,7 +46,7 @@ struct PosterData;
 class QGraphicsRectItem;
 class VMeasurements;
 
-#if defined(Q_OS_WIN) && QT_VERSION < QT_VERSION_CHECK(6, 0, 0) && QT_VERSION >= QT_VERSION_CHECK(5, 7, 0)
+#if defined(Q_OS_WIN) && QT_VERSION < QT_VERSION_CHECK(6, 0, 0)
 class QWinTaskbarButton;
 class QWinTaskbarProgress;
 #endif
@@ -127,7 +127,7 @@ protected:
 
     QSharedPointer<DialogSaveLayout> m_dialogSaveLayout{}; // NOLINT(misc-non-private-member-variables-in-classes)
 
-#if defined(Q_OS_WIN) && QT_VERSION < QT_VERSION_CHECK(6, 0, 0) && QT_VERSION >= QT_VERSION_CHECK(5, 7, 0)
+#if defined(Q_OS_WIN) && QT_VERSION < QT_VERSION_CHECK(6, 0, 0)
     QWinTaskbarButton *m_taskbarButton;              // NOLINT(misc-non-private-member-variables-in-classes)
     QWinTaskbarProgress *m_taskbarProgress{nullptr}; // NOLINT(misc-non-private-member-variables-in-classes)
 #endif

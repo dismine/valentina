@@ -29,7 +29,6 @@
 #ifndef VISTOOLSPLINE_H
 #define VISTOOLSPLINE_H
 
-
 #include <QGraphicsItem>
 #include <QMetaObject>
 #include <QObject>
@@ -41,15 +40,12 @@
 #include "../vmisc/def.h"
 #include "vispath.h"
 
-#if QT_VERSION < QT_VERSION_CHECK(5, 13, 0)
-#include "../vmisc/defglobal.h"
-#endif // QT_VERSION < QT_VERSION_CHECK(5, 13, 0)
-
 class VControlPointSpline;
 
 class VisToolSpline : public VisPath // clazy:exclude=ctor-missing-parent-argument
 {
     Q_OBJECT // NOLINT
+
 public:
     explicit VisToolSpline(const VContainer *data, QGraphicsItem *parent = nullptr);
     ~VisToolSpline() override;
@@ -68,23 +64,26 @@ public:
     auto GetP2() const -> QPointF;
     auto GetP3() const -> QPointF;
 
-    auto type() const  -> int override {return Type;}
-    enum {Type = UserType + static_cast<int>(Vis::ToolSpline)};
+    auto type() const -> int override { return Type; }
+    enum
+    {
+        Type = UserType + static_cast<int>(Vis::ToolSpline)
+    };
 public slots:
     void MouseLeftPressed();
     void MouseLeftReleased();
 
 private:
     Q_DISABLE_COPY_MOVE(VisToolSpline) // NOLINT
-    quint32         m_point1Id{NULL_ID};
-    quint32         m_point4Id{NULL_ID};
+    quint32 m_point1Id{NULL_ID};
+    quint32 m_point4Id{NULL_ID};
     VScaledEllipse *m_point1{nullptr};
     VScaledEllipse *m_point4{nullptr};
-    qreal           m_angle1;
-    qreal           m_angle2;
-    qreal           m_kAsm1{1};
-    qreal           m_kAsm2{1};
-    qreal           m_kCurve{1};
+    qreal m_angle1;
+    qreal m_angle2;
+    qreal m_kAsm1{1};
+    qreal m_kAsm2{1};
+    qreal m_kCurve{1};
 
     bool m_isLeftMousePressed{false};
     bool m_p2Selected{false};

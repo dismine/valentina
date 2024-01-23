@@ -34,10 +34,6 @@
 #include "../vmisc/vabstractshortcutmanager.h"
 #include "ui_puzzlepreferencesconfigurationpage.h"
 
-#if QT_VERSION < QT_VERSION_CHECK(5, 7, 0)
-#include "../vmisc/backport/qoverload.h"
-#endif // QT_VERSION < QT_VERSION_CHECK(5, 7, 0)
-
 #include <QStyleHints>
 
 //---------------------------------------------------------------------------------------------------------------------

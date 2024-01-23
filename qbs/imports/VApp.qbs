@@ -42,9 +42,7 @@ CppApplication {
     cpp.cxxLanguageVersion: {
         if (Qt.core.versionMajor >= 6) // Start building with C++20 since Qt 6.0
             return "c++20";
-        else if(Qt.core.versionMajor >= 5 && Qt.core.versionMinor >= 12) // Since Qt 5.12 available support for C++17
-            return "c++17";
-        return "c++11";
+        return "c++17";
     }
 
     Properties {
@@ -52,11 +50,7 @@ CppApplication {
         cpp.minimumWindowsVersion: {
             if (Qt.core.versionMajor >= 6)
                 return "6.02"; // should be 10.0
-
-            if (Qt.core.versionMajor >= 5 && Qt.core.versionMinor >= 7)
-                return "6.00";
-
-            return "5.01";
+            return "6.00";
         }
     }
 
@@ -80,31 +74,18 @@ CppApplication {
                 files.push("msvcr120.dll");
 
             // Minimal supported OpenSSL version since Qt 5.12.4 is 1.1.1.
-            if (Utilities.versionCompare(Qt.core.version, "5.12.4") >= 0) {
-                if (qbs.architecture.contains("x86_64")) {
-                    files.push(
-                        "openssl/win64/libcrypto-1_1-x64.dll",
-                        "openssl/win64/libssl-1_1-x64.dll"
-                    );
-                } else {
-                    files.push(
-                        "openssl/win32/libcrypto-1_1.dll",
-                        "openssl/win32/libssl-1_1.dll"
-                    );
-                }
+            if (qbs.architecture.contains("x86_64")) {
+                files.push(
+                    "openssl/win64/libcrypto-1_1-x64.dll",
+                    "openssl/win64/libssl-1_1-x64.dll"
+                );
             } else {
-                if (qbs.architecture.contains("x86_64")) {
-                    files.push(
-                        "openssl/win64/libeay32.dll",
-                        "openssl/win64/ssleay32.dll"
-                    );
-                } else {
-                    files.push(
-                        "openssl/win32/libeay32.dll",
-                        "openssl/win32/ssleay32.dll"
-                    );
-                }
+                files.push(
+                    "openssl/win32/libcrypto-1_1.dll",
+                    "openssl/win32/libssl-1_1.dll"
+                );
             }
+
             return files;
         }
         qbs.install: true

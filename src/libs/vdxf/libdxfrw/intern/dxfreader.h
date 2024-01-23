@@ -14,9 +14,6 @@
 #define DXFREADER_H
 
 #include "drw_textcodec.h"
-#if QT_VERSION < QT_VERSION_CHECK(5, 13, 0)
-#include "../vmisc/defglobal.h"
-#endif
 
 class dxfReader
 {

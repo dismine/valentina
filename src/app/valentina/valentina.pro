@@ -377,45 +377,18 @@ win32:*g++* {
         package.files += $$[QT_INSTALL_BINS]/Qt5WinExtras.dll
     }
 
-    greaterThan(QT_MAJOR_VERSION, 4):greaterThan(QT_MINOR_VERSION, 10) {
-        versionAtLeast(QT_VERSION, 5.12.4){
-            # Minimal supported OpenSSL version since Qt 5.12.4 is 1.1.1.
-            contains(QMAKE_HOST.arch, x86_64) {
-                package.files += \
-                    $$PWD/../../../dist/win/openssl/win64/libcrypto-1_1-x64.dll \
-                    $$PWD/../../../dist/win/openssl/win64/libssl-1_1-x64.dll
-            } else {
-                package.files += \
-                    $$PWD/../../../dist/win/openssl/win32/libcrypto-1_1.dll \
-                    $$PWD/../../../dist/win/openssl/win32/libssl-1_1.dll
-            }
-        } else {
-            package.files += \
-                $$PWD/../../../dist/win/msvcr120.dll \
+    package.files += \
+        $$PWD/../../../dist/win/msvcr120.dll
 
-            contains(QMAKE_HOST.arch, x86_64) {
-                package.files += \
-                    $$PWD/../../../dist/win/openssl/win64/libeay32.dll \
-                    $$PWD/../../../dist/win/openssl/win64/ssleay32.dll
-            } else {
-                package.files += \
-                    $$PWD/../../../dist/win/openssl/win32/libeay32.dll \
-                    $$PWD/../../../dist/win/openssl/win32/ssleay32.dll
-            }
-        }
+    # Minimal supported OpenSSL version since Qt 5.12.4 is 1.1.1.
+    contains(QMAKE_HOST.arch, x86_64) {
+        package.files += \
+            $$PWD/../../../dist/win/openssl/win64/libcrypto-1_1-x64.dll \
+            $$PWD/../../../dist/win/openssl/win64/libssl-1_1-x64.dll
     } else {
         package.files += \
-            $$PWD/../../../dist/win/msvcr120.dll \
-
-        contains(QMAKE_HOST.arch, x86_64) {
-            package.files += \
-                $$PWD/../../../dist/win/openssl/win64/libeay32.dll \
-                $$PWD/../../../dist/win/openssl/win64/ssleay32.dll
-        } else {
-            package.files += \
-                $$PWD/../../../dist/win/openssl/win32/libeay32.dll \
-                $$PWD/../../../dist/win/openssl/win32/ssleay32.dll
-        }
+            $$PWD/../../../dist/win/openssl/win32/libcrypto-1_1.dll \
+            $$PWD/../../../dist/win/openssl/win32/libssl-1_1.dll
     }
 
     package.CONFIG = no_check_exist

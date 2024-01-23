@@ -184,7 +184,7 @@ auto VToolLineIntersectAxis::FindPoint(const QLineF &axis, const QLineF &line, Q
     SCASSERT(intersectionPoint != nullptr)
 
     QPointF fPoint;
-    QLineF::IntersectType intersect = Intersects(axis, line, &fPoint);
+    QLineF::IntersectType intersect = axis.intersects(line, &fPoint);
 
     if (intersect == QLineF::UnboundedIntersection || intersect == QLineF::BoundedIntersection)
     {

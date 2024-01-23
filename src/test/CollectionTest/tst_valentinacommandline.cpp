@@ -231,10 +231,7 @@ void TST_ValentinaCommandLine::TestOpenCollection_data() const
     QTest::newRow("pantsM7") << "pantsM7.val" << testGOST << V_EX_OK;
 #endif
 
-#if QT_VERSION >= QT_VERSION_CHECK(5, 15, 0)
     QTest::newRow("TShirt_test") << "TShirt_test.val" << keyTest << V_EX_OK;
-#endif
-
     QTest::newRow("TestDart") << "TestDart.val" << keyTest << V_EX_OK;
     QTest::newRow("MaleShirt") << "MaleShirt.val" << keyTest << V_EX_OK;
     QTest::newRow("Trousers") << "Trousers.val" << keyTest << V_EX_OK;

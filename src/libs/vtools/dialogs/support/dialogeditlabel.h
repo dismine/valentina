@@ -32,10 +32,6 @@
 #include <QDialog>
 #include <QMap>
 
-#if QT_VERSION < QT_VERSION_CHECK(5, 13, 0)
-#include "../vmisc/defglobal.h"
-#endif
-
 namespace Ui
 {
 class DialogEditLabel;

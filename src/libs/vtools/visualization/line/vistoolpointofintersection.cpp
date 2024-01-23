@@ -99,7 +99,7 @@ void VisToolPointOfIntersection::VisualMode(quint32 id)
 void VisToolPointOfIntersection::ShowIntersection(const QLineF &axis1, const QLineF &axis2)
 {
     QPointF p;
-    QLineF::IntersectType intersect = Intersects(axis1, axis2, &p);
+    QLineF::IntersectType intersect = axis1.intersects(axis2, &p);
 
     if (intersect == QLineF::UnboundedIntersection || intersect == QLineF::BoundedIntersection)
     {

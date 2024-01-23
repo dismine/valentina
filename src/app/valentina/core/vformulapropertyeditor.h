@@ -35,9 +35,6 @@
 #include <QWidget>
 
 #include "../vpatterndb/vformula.h"
-#if QT_VERSION < QT_VERSION_CHECK(5, 13, 0)
-#include "../vmisc/defglobal.h"
-#endif
 
 class VFormulaPropertyEditor : public QWidget
 {

@@ -33,14 +33,10 @@
 #include <QTransform>
 #include <QUuid>
 
-#if QT_VERSION < QT_VERSION_CHECK(5, 13, 0)
-#include "../vmisc/defglobal.h"
-#endif // QT_VERSION < QT_VERSION_CHECK(5, 13, 0)
-
-
 class RotateBackgroundImage : public VUndoCommand
 {
     Q_OBJECT // NOLINT
+
 public:
     RotateBackgroundImage(QUuid id, const QTransform &matrix, VAbstractPattern *doc, bool allowMerge = false,
                           QUndoCommand *parent = nullptr);

@@ -33,21 +33,21 @@
 #include "../ifc/xml/vbackgroundpatternimage.h"
 #include "../vmisc/def.h"
 
-#if QT_VERSION < QT_VERSION_CHECK(5, 13, 0)
-#include "../vmisc/defglobal.h"
-#endif // QT_VERSION < QT_VERSION_CHECK(5, 13, 0)
-
 class VAbstractPattern;
 
 class VBackgroundImageItem : public QGraphicsObject
 {
     Q_OBJECT // NOLINT
+
 public:
     VBackgroundImageItem(const VBackgroundPatternImage &image, VAbstractPattern *doc, QGraphicsItem *parent = nullptr);
     ~VBackgroundImageItem() override = default;
 
-    auto type() const -> int override {return Type;}
-    enum {Type = UserType + static_cast<int>(Tool::BackgroundImage)};
+    auto type() const -> int override { return Type; }
+    enum
+    {
+        Type = UserType + static_cast<int>(Tool::BackgroundImage)
+    };
 
     auto Image() const -> const VBackgroundPatternImage &;
     void SetImage(const VBackgroundPatternImage &newImage);
@@ -88,15 +88,15 @@ public slots:
 
 protected:
     auto itemChange(GraphicsItemChange change, const QVariant &value) -> QVariant override;
-    void mousePressEvent( QGraphicsSceneMouseEvent * event) override;
-    void mouseMoveEvent ( QGraphicsSceneMouseEvent * event ) override;
-    void mouseReleaseEvent ( QGraphicsSceneMouseEvent * event ) override;
-    void hoverEnterEvent ( QGraphicsSceneHoverEvent * event ) override;
-    void hoverMoveEvent ( QGraphicsSceneHoverEvent * event ) override;
+    void mousePressEvent(QGraphicsSceneMouseEvent *event) override;
+    void mouseMoveEvent(QGraphicsSceneMouseEvent *event) override;
+    void mouseReleaseEvent(QGraphicsSceneMouseEvent *event) override;
+    void hoverEnterEvent(QGraphicsSceneHoverEvent *event) override;
+    void hoverMoveEvent(QGraphicsSceneHoverEvent *event) override;
     void hoverLeaveEvent(QGraphicsSceneHoverEvent *event) override;
-    void contextMenuEvent ( QGraphicsSceneContextMenuEvent * event ) override;
+    void contextMenuEvent(QGraphicsSceneContextMenuEvent *event) override;
     void keyPressEvent(QKeyEvent *event) override;
-    void keyReleaseEvent(QKeyEvent * event) override;
+    void keyReleaseEvent(QKeyEvent *event) override;
 
     auto Stale() const -> bool;
     void MakeFresh() const;

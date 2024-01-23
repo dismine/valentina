@@ -30,18 +30,16 @@
 
 #include "../vundocommand.h"
 
-#if QT_VERSION < QT_VERSION_CHECK(5, 13, 0)
-#include "../vmisc/defglobal.h"
-#endif // QT_VERSION < QT_VERSION_CHECK(5, 13, 0)
-
 class OpaqueBackgroundImage : public VUndoCommand
 {
     Q_OBJECT // NOLINT
+
 public:
     OpaqueBackgroundImage(QUuid id, qreal opacity, VAbstractPattern *doc, QUndoCommand *parent = nullptr);
-    ~OpaqueBackgroundImage() override =default;
+    ~OpaqueBackgroundImage() override = default;
     void undo() override;
     void redo() override;
+
 private:
     // cppcheck-suppress unknownMacro
     Q_DISABLE_COPY_MOVE(OpaqueBackgroundImage) // NOLINT

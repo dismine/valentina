@@ -34,10 +34,6 @@
 
 #include "../vmisc/def.h"
 
-#if QT_VERSION < QT_VERSION_CHECK(5, 13, 0)
-#include "../vmisc/defglobal.h"
-#endif // QT_VERSION < QT_VERSION_CHECK(5, 13, 0)
-
 enum class MeasurementDimension : qint8
 {
     X = 0, // height

@@ -42,10 +42,6 @@
 #include "../vmisc/svgfont/vsvgfontengine.h"
 #include "../vmisc/vabstractapplication.h"
 
-#if QT_VERSION < QT_VERSION_CHECK(5, 14, 0)
-#include "../vmisc/backport/text.h"
-#endif
-
 #include <QFile>
 #include <QLine>
 #include <QtMath>
@@ -143,7 +139,7 @@ auto LineAlign(const TextLine &tl, const QString &text, const VSvgFontEngine &en
 //---------------------------------------------------------------------------------------------------------------------
 inline auto LineAlign(const TextLine &tl, const QString &text, const QFontMetrics &fm, qreal width) -> qreal
 {
-    const int lineWidth = TextWidth(fm, text);
+    const int lineWidth = fm.horizontalAdvance(text);
 
     qreal dX = 0;
     if (tl.m_eAlign == 0 || (tl.m_eAlign & Qt::AlignLeft) > 0)
@@ -837,7 +833,7 @@ void VHPGLEngine::PlotLabelOutlineFont(QTextStream &out, const VLayoutPiece &det
             for (auto c : qAsConst(qsText))
             {
                 path.addPath(corrector.DrawChar(w, static_cast<qreal>(fm.ascent()), c));
-                w += TextWidth(fm, c);
+                w += fm.horizontalAdvance(c);
             }
         }
         else

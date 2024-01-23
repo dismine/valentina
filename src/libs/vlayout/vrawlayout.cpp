@@ -31,12 +31,7 @@
 #include <QDebug>
 #include <QFile>
 #include <QIODevice>
-
-#if QT_VERSION < QT_VERSION_CHECK(5, 12, 0)
-#include "../vmisc/backport/qscopeguard.h"
-#else
 #include <QScopeGuard>
-#endif
 
 #include "../ifc/exception/vexception.h"
 #include "../vmisc/def.h"
@@ -114,7 +109,7 @@ auto VRawLayout::WriteFile(QIODevice *ioDevice, const VRawLayoutData &data) -> b
     if (wasOpen || ioDevice->open(QIODevice::WriteOnly))
     {
         QDataStream dataStream(ioDevice);
-        dataStream.setVersion(QDataStream::Qt_5_6);
+        dataStream.setVersion(QDataStream::Qt_5_15);
 
         // Don't use the << operator for QByteArray. See the note in ReadFile() below.
         dataStream.writeRawData(fileHeaderByteArray.constData(), static_cast<int>(fileHeaderByteArray.size()));
@@ -154,7 +149,7 @@ auto VRawLayout::ReadFile(QIODevice *ioDevice, VRawLayoutData &data) -> bool
             });
 
         QDataStream dataStream(ioDevice);
-        dataStream.setVersion(QDataStream::Qt_5_6);
+        dataStream.setVersion(QDataStream::Qt_5_15);
 
         // Note: we could have used the QDataStream << and >> operators on QByteArray but since the first
         // bytes of the stream will be the size of the array, we might end up attempting to allocate

@@ -32,15 +32,10 @@
 #include <QLineEdit>
 #include <QList>
 #include <QMimeData>
+#include <QRegularExpression>
 #include <QSizePolicy>
 #include <QToolButton>
 #include <QUrl>
-
-#if QT_VERSION >= QT_VERSION_CHECK(5, 15, 0)
-#include <QRegularExpression>
-#else
-#include <QRegExp>
-#endif
 
 VPE::VFileEditWidget::VFileEditWidget(QWidget *parent, bool is_directory)
   : QWidget(parent),
@@ -256,14 +251,9 @@ auto VPE::VFileEditWidget::checkFileFilter(const QString &file) const -> bool
     return std::any_of(FilterList.begin(), FilterList.end(),
                        [file](const QString &tmpFilter)
                        {
-#if QT_VERSION >= QT_VERSION_CHECK(5, 15, 0)
                            const QString wildcardFilter = QRegularExpression::wildcardToRegularExpression(tmpFilter);
                            QRegularExpression tmpRegExpFilter(QRegularExpression::anchoredPattern(wildcardFilter),
                                                               QRegularExpression::CaseInsensitiveOption);
                            return tmpRegExpFilter.match(file).hasMatch();
-#else
-        QRegExp tmpRegExpFilter(tmpFilter, Qt::CaseInsensitive, QRegExp::Wildcard);
-        return tmpRegExpFilter.exactMatch(file);
-#endif
                        });
 }

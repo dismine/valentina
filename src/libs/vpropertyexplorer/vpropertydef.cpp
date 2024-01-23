@@ -69,11 +69,7 @@ auto VPELocaleSign0(const QLocale &locale) -> QChar
     const QString sign = locale.toString(0);
     if (sign.size() == 1)
     {
-#if QT_VERSION >= QT_VERSION_CHECK(5, 10, 0)
         return sign.front();
-#else
-        return sign.at(0);
-#endif
     }
 
 #if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
@@ -89,11 +85,7 @@ auto VPELocaleSign1(const QLocale &locale) -> QChar
     const QString sign = locale.toString(1);
     if (sign.size() == 1)
     {
-#if QT_VERSION >= QT_VERSION_CHECK(5, 10, 0)
         return sign.front();
-#else
-        return sign.at(0);
-#endif
     }
 
 #if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
@@ -109,11 +101,7 @@ auto VPELocaleSign2(const QLocale &locale) -> QChar
     const QString sign = locale.toString(2);
     if (sign.size() == 1)
     {
-#if QT_VERSION >= QT_VERSION_CHECK(5, 10, 0)
         return sign.front();
-#else
-        return sign.at(0);
-#endif
     }
 
 #if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
@@ -129,11 +117,7 @@ auto VPELocaleSign3(const QLocale &locale) -> QChar
     const QString sign = locale.toString(3);
     if (sign.size() == 1)
     {
-#if QT_VERSION >= QT_VERSION_CHECK(5, 10, 0)
         return sign.front();
-#else
-        return sign.at(0);
-#endif
     }
 
 #if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
@@ -149,11 +133,7 @@ auto VPELocaleSign4(const QLocale &locale) -> QChar
     const QString sign = locale.toString(4);
     if (sign.size() == 1)
     {
-#if QT_VERSION >= QT_VERSION_CHECK(5, 10, 0)
         return sign.front();
-#else
-        return sign.at(0);
-#endif
     }
 
 #if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
@@ -169,11 +149,7 @@ auto VPELocaleSign5(const QLocale &locale) -> QChar
     const QString sign = locale.toString(5);
     if (sign.size() == 1)
     {
-#if QT_VERSION >= QT_VERSION_CHECK(5, 10, 0)
         return sign.front();
-#else
-        return sign.at(0);
-#endif
     }
 
 #if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
@@ -189,11 +165,7 @@ auto VPELocaleSign6(const QLocale &locale) -> QChar
     const QString sign = locale.toString(6);
     if (sign.size() == 1)
     {
-#if QT_VERSION >= QT_VERSION_CHECK(5, 10, 0)
         return sign.front();
-#else
-        return sign.at(0);
-#endif
     }
 
 #if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
@@ -209,11 +181,7 @@ auto VPELocaleSign7(const QLocale &locale) -> QChar
     const QString sign = locale.toString(7);
     if (sign.size() == 1)
     {
-#if QT_VERSION >= QT_VERSION_CHECK(5, 10, 0)
         return sign.front();
-#else
-        return sign.at(0);
-#endif
     }
 
 #if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
@@ -229,11 +197,7 @@ auto VPELocaleSign8(const QLocale &locale) -> QChar
     const QString sign = locale.toString(8);
     if (sign.size() == 1)
     {
-#if QT_VERSION >= QT_VERSION_CHECK(5, 10, 0)
         return sign.front();
-#else
-        return sign.at(0);
-#endif
     }
 
 #if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
@@ -249,11 +213,7 @@ auto VPELocaleSign9(const QLocale &locale) -> QChar
     const QString sign = locale.toString(9);
     if (sign.size() == 1)
     {
-#if QT_VERSION >= QT_VERSION_CHECK(5, 10, 0)
         return sign.front();
-#else
-        return sign.at(0);
-#endif
     }
 
 #if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)

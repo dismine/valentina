@@ -30,10 +30,6 @@
 
 #include <QToolButton>
 
-#if QT_VERSION < QT_VERSION_CHECK(5, 13, 0)
-#include "../vmisc/defglobal.h"
-#endif
-
 class VToolButtonPopup : public QToolButton
 {
     Q_OBJECT // NOLINT

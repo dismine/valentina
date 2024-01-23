@@ -588,7 +588,7 @@ auto VContainer::DataMeasurementsWithSeparators() const -> const QMap<QString, Q
     QMap<QString, QSharedPointer<VMeasurement>> measurements = DataVar<VMeasurement>(VarType::Measurement);
     QMap<QString, QSharedPointer<VMeasurement>> separators = DataVar<VMeasurement>(VarType::MeasurementSeparator);
 
-    Insert(measurements, separators);
+    measurements.insert(separators);
 
     return measurements;
 }
@@ -605,7 +605,7 @@ auto VContainer::DataIncrementsWithSeparators() const -> const QMap<QString, QSh
     QMap<QString, QSharedPointer<VIncrement>> increments = DataVar<VIncrement>(VarType::Increment);
     QMap<QString, QSharedPointer<VIncrement>> separators = DataVar<VIncrement>(VarType::IncrementSeparator);
 
-    Insert(increments, separators);
+    increments.insert(separators);
 
     return increments;
 }
@@ -652,7 +652,7 @@ auto VContainer::DataPieceArea() const -> const QMap<QString, QSharedPointer<VPi
     QMap<QString, QSharedPointer<VPieceArea>> externalAreas = DataVar<VPieceArea>(VarType::PieceExternalArea);
     QMap<QString, QSharedPointer<VPieceArea>> seamLineAreas = DataVar<VPieceArea>(VarType::PieceSeamLineArea);
 
-    Insert(externalAreas, seamLineAreas);
+    externalAreas.insert(seamLineAreas);
 
     return externalAreas;
 }
@@ -795,11 +795,7 @@ VContainerData::VContainerData(const VTranslateVars *trVars, const Unit *pattern
 //---------------------------------------------------------------------------------------------------------------------
 VContainerData::~VContainerData()
 {
-#if QT_VERSION >= QT_VERSION_CHECK(5, 14, 0)
     if (ref.loadRelaxed() == 0)
-#else
-    if (ref.load() == 0)
-#endif
     {
         --VContainer::copyCounter[nspace];
     }

@@ -44,7 +44,6 @@
 #include <QSharedPointer>
 #include <QToolButton>
 #include <QVariant>
-#include <new>
 
 #include "../../visualization/path/vistoolsplinepath.h"
 #include "../../visualization/visualization.h"
@@ -61,10 +60,6 @@
 #include "../vwidgets/vabstractmainwindow.h"
 #include "../vwidgets/vmaingraphicsscene.h"
 #include "ui_dialogsplinepath.h"
-
-#if QT_VERSION < QT_VERSION_CHECK(5, 7, 0)
-#include "../vmisc/backport/qoverload.h"
-#endif // QT_VERSION < QT_VERSION_CHECK(5, 7, 0)
 
 #if QT_VERSION < QT_VERSION_CHECK(6, 4, 0)
 #include "../vmisc/compatibility.h"

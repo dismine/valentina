@@ -129,7 +129,7 @@ inline auto LineFont(const TextLine &tl, const QFont &base) -> QFont
 //---------------------------------------------------------------------------------------------------------------------
 inline auto LineAlign(const TextLine &tl, const QString &text, const QFontMetrics &fm, qreal width) -> qreal
 {
-    const int lineWidth = TextWidth(fm, text);
+    const int lineWidth = fm.horizontalAdvance(text);
 
     qreal dX = 0;
     if ((tl.m_eAlign & Qt::AlignHCenter) > 0)
@@ -1190,7 +1190,7 @@ void VDxfEngine::ExportAnnotationText(const QSharedPointer<dx_ifaceBlock> &detai
     QFontMetrics const fm(labelData.font);
     QPointF pos = labelData.pos;
     qreal const height = fm.height() * qMin(detail.GetXScale(), detail.GetYScale());
-    qreal const width = TextWidth(fm, labelData.label);
+    qreal const width = fm.horizontalAdvance(labelData.label);
 
     QLineF base(pos, QPointF(pos.x() + 100, pos.y()));
     base.setAngle(base.angle() - 90);

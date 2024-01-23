@@ -55,52 +55,6 @@
 
 class QPointF;
 
-#if QT_VERSION < QT_VERSION_CHECK(5, 8, 0)
-//---------------------------------------------------------------------------------------------------------------------
-inline bool operator==(QChar lhs, const QString &rhs) Q_DECL_NOEXCEPT
-{
-    return rhs.size() == 1 && lhs == rhs[0];
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-inline bool operator!=(QChar lhs, const QString &rhs) Q_DECL_NOEXCEPT
-{
-    return !(lhs == rhs);
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-inline bool operator==(const QString &lhs, QChar rhs) Q_DECL_NOEXCEPT
-{
-    return rhs == lhs;
-}
-#endif
-
-#if QT_VERSION < QT_VERSION_CHECK(5, 10, 0)
-//---------------------------------------------------------------------------------------------------------------------
-Q_DECL_CONSTEXPR inline bool operator==(QChar c1, char16_t c2) Q_DECL_NOEXCEPT
-{
-    return c1 == QChar(static_cast<ushort>(c2));
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-Q_DECL_CONSTEXPR inline bool operator!=(QChar c1, char16_t c2) Q_DECL_NOEXCEPT
-{
-    return !(c1 == QChar(static_cast<ushort>(c2)));
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-Q_DECL_CONSTEXPR inline bool operator==(char16_t c1, QChar c2) Q_DECL_NOEXCEPT
-{
-    return c2 == c1;
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-Q_DECL_CONSTEXPR inline bool operator!=(char16_t c1, QChar c2) Q_DECL_NOEXCEPT
-{
-    return c2 != c1;
-}
-#endif
-
 #if QT_VERSION < QT_VERSION_CHECK(6, 4, 0)
 namespace Qt
 {
@@ -145,24 +99,9 @@ inline auto operator""_s(const char16_t *str, size_t size)Q_DECL_NOEXCEPT->QStri
 
 // Contains helpful methods to hide version dependent code. It can be deprecation of method or change in API
 //---------------------------------------------------------------------------------------------------------------------
-template <typename T>
-inline auto Intersects(const T &l1, const T &l2, QPointF *intersectionPoint) -> typename T::IntersectType
-{
-#if QT_VERSION >= QT_VERSION_CHECK(5, 14, 0)
-    return l1.intersects(l2, intersectionPoint);
-#else
-    return l1.intersect(l2, intersectionPoint);
-#endif
-}
-
-//---------------------------------------------------------------------------------------------------------------------
 template <typename T, template <typename> class C> inline auto ConvertToList(const C<T> &container) -> QList<T>
 {
-#if QT_VERSION >= QT_VERSION_CHECK(5, 14, 0)
     return QList<T>(container.begin(), container.end());
-#else
-    return container.toList();
-#endif
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -174,54 +113,26 @@ template <typename T, template <typename> class C> inline auto ConvertToStringLi
 //---------------------------------------------------------------------------------------------------------------------
 template <typename T, template <typename> class C> inline auto ConvertToSet(const C<T> &container) -> QSet<T>
 {
-#if QT_VERSION >= QT_VERSION_CHECK(5, 14, 0)
     return QSet<T>(container.begin(), container.end());
-#else
-    return container.toSet();
-#endif
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 template <typename T, typename C> inline auto ConvertToSet(const C &container) -> QSet<T>
 {
-#if QT_VERSION >= QT_VERSION_CHECK(5, 14, 0)
     return QSet<T>(container.begin(), container.end());
-#else
-    return container.toSet();
-#endif
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 template <typename T, template <typename> class C> inline auto ConvertToVector(const C<T> &container) -> QVector<T>
 {
-#if QT_VERSION >= QT_VERSION_CHECK(5, 14, 0)
     return QVector<T>(container.begin(), container.end());
-#else
-    return container.toVector();
-#endif
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 template <typename T> inline auto ConvertToVector(const QSet<T> &container) -> QVector<T>
 {
-#if QT_VERSION >= QT_VERSION_CHECK(5, 14, 0)
     return QVector<T>(container.begin(), container.end());
-#else
-    return container.toList().toVector();
-#endif
 }
-
-//---------------------------------------------------------------------------------------------------------------------
-// NOTE: Delete if not necessary anymore
-// template <typename T>
-// inline void SwapItemsAt(T &container, int i, int j)
-//{
-// #if QT_VERSION >= QT_VERSION_CHECK(5, 13, 0)
-//    container.swapItemsAt(i, j);
-// #else
-//    container.swap(i, j);
-// #endif
-//}
 
 //---------------------------------------------------------------------------------------------------------------------
 template <typename T> inline auto Reverse(const QVector<T> &container) -> QVector<T>
@@ -255,58 +166,6 @@ inline auto Reverse(const T &container) -> T
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-inline auto TextWidth(const QFontMetrics &fm, const QString &text, int len = -1) -> int
-{
-#if QT_VERSION >= QT_VERSION_CHECK(5, 11, 0)
-    return fm.horizontalAdvance(text, len);
-#else
-    return fm.width(text, len);
-#endif
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-inline auto TextWidthF(const QFontMetricsF &fm, const QString &text) -> qreal
-{
-#if QT_VERSION >= QT_VERSION_CHECK(5, 11, 0)
-    return fm.horizontalAdvance(text);
-#else
-    return fm.width(text);
-#endif
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-template <typename Key, typename T> inline auto Insert(QMap<Key, T> &map1, const QMap<Key, T> &map2) -> void
-{
-#if QT_VERSION >= QT_VERSION_CHECK(5, 15, 0)
-    map1.insert(map2);
-#else
-    auto i = map2.constBegin();
-    while (i != map2.constEnd())
-    {
-        map1.insert(i.key(), i.value());
-        ++i;
-    }
-#endif
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-inline auto VLocaleCharacter(const QString &character) -> QChar
-{
-    Q_ASSERT(character.size() == 1);
-#if QT_VERSION >= QT_VERSION_CHECK(5, 10, 0)
-    return character.front();
-#else
-    return character.at(0);
-#endif
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-inline auto VLocaleCharacter(const QChar &character) -> QChar
-{
-    return character;
-}
-
-//---------------------------------------------------------------------------------------------------------------------
 template <typename T> inline auto DropEventPos(const T *event) -> QPoint
 {
 #if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
@@ -323,16 +182,6 @@ template <typename T> inline auto QLibraryPath(T loc) -> QString
     return QLibraryInfo::path(loc);
 #else
     return QLibraryInfo::location(loc);
-#endif
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-inline auto LineCenter(const QLineF &line) -> QPointF
-{
-#if QT_VERSION >= QT_VERSION_CHECK(5, 8, 0)
-    return line.center();
-#else
-    return {0.5 * line.p1().x() + 0.5 * line.p2().x(), 0.5 * line.p1().y() + 0.5 * line.p2().y()};
 #endif
 }
 
@@ -391,26 +240,6 @@ template <typename T, typename N> inline auto Sliced(const T &list, N pos, N n) 
     result.reserve(n);
     std::copy(list.begin() + pos, list.begin() + pos + n, std::back_inserter(result));
     return result;
-#endif
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-inline auto Back(const QString &str) -> QChar
-{
-#if QT_VERSION >= QT_VERSION_CHECK(5, 10, 0)
-    return str.back();
-#else
-    return str.at(str.size() - 1);
-#endif
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-inline auto Front(const QString &str) -> QChar
-{
-#if QT_VERSION >= QT_VERSION_CHECK(5, 10, 0)
-    return str.front();
-#else
-    return str.at(0);
 #endif
 }
 
@@ -489,23 +318,6 @@ inline void RemoveLast(QString &str)
     if (!str.isEmpty())
     {
         str.remove(str.size() - 1, 1);
-    }
-#endif
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-inline void SetWindowFlag(QWidget *widget, Qt::WindowType flag, bool on = true)
-{
-#if QT_VERSION >= QT_VERSION_CHECK(5, 9, 0)
-    widget->setWindowFlag(flag, on);
-#else
-    if (on)
-    {
-        widget->setWindowFlags(widget->windowFlags() | flag);
-    }
-    else
-    {
-        widget->setWindowFlags(widget->windowFlags() & ~flag);
     }
 #endif
 }

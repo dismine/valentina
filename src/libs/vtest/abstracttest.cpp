@@ -393,15 +393,7 @@ auto AbstractTest::TranslationsPath() -> QString
 //---------------------------------------------------------------------------------------------------------------------
 auto AbstractTest::RunTimeout(int defMsecs) -> int
 {
-#if QT_VERSION < QT_VERSION_CHECK(5, 10, 0)
-    QString timeout = QString::fromLocal8Bit(qgetenv("VTEST_RUN_TIMEOUT"));
-    if (timeout.isEmpty())
-    {
-        return defMsecs;
-    }
-#else
     QString timeout = qEnvironmentVariable("VTEST_RUN_TIMEOUT", QString::number(defMsecs));
-#endif
 
     bool ok = false;
     int msecs = timeout.toInt(&ok);

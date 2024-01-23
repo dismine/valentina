@@ -28,17 +28,13 @@
 #ifndef VPUNDOCOMMAND_H
 #define VPUNDOCOMMAND_H
 
+#include <QLoggingCategory>
 #include <QObject>
 #include <QUndoCommand>
-#include <QLoggingCategory>
-
-#if QT_VERSION < QT_VERSION_CHECK(5, 13, 0)
-#include "../vmisc/defglobal.h"
-#endif // QT_VERSION < QT_VERSION_CHECK(5, 13, 0)
 
 namespace ML
 {
-enum class UndoCommand: qint8
+enum class UndoCommand : qint8
 {
     MovePiece = 0,
     MovePieces = 1,
@@ -51,17 +47,18 @@ enum class UndoCommand: qint8
     ZValueMovePiece = 8,
     ZValueMovePieces = 9,
 };
-}  // namespace ML
+} // namespace ML
 
 Q_DECLARE_LOGGING_CATEGORY(vpUndo) // NOLINT
 
 class VPUndoCommand : public QObject, public QUndoCommand
 {
     Q_OBJECT // NOLINT
+
 public:
     explicit VPUndoCommand(QUndoCommand *parent = nullptr);
     explicit VPUndoCommand(bool allowMerge = false, QUndoCommand *parent = nullptr);
-    ~VPUndoCommand() override =default;
+    ~VPUndoCommand() override = default;
 
     auto AllowMerge() const -> bool;
 
@@ -71,7 +68,6 @@ private:
 
     bool m_allowMerge{false};
 };
-
 
 //---------------------------------------------------------------------------------------------------------------------
 inline auto VPUndoCommand::AllowMerge() const -> bool

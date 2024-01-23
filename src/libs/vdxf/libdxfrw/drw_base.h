@@ -58,41 +58,6 @@
 #define __has_cpp_attribute(x) 0
 #endif
 
-#if QT_VERSION < QT_VERSION_CHECK(5, 8, 0)
-
-#ifndef QT_HAS_CPP_ATTRIBUTE
-#ifdef __has_cpp_attribute
-#define QT_HAS_CPP_ATTRIBUTE(x) __has_cpp_attribute(x)
-#else
-#define QT_HAS_CPP_ATTRIBUTE(x) 0
-#endif
-#endif // QT_HAS_CPP_ATTRIBUTE
-
-#if defined(__cplusplus)
-#if QT_HAS_CPP_ATTRIBUTE(clang::fallthrough)
-#define Q_FALLTHROUGH() [[clang::fallthrough]]
-#elif QT_HAS_CPP_ATTRIBUTE(gnu::fallthrough)
-#define Q_FALLTHROUGH() [[gnu::fallthrough]]
-#elif QT_HAS_CPP_ATTRIBUTE(fallthrough)
-#define Q_FALLTHROUGH() [[fallthrough]]
-#endif
-#endif
-#ifndef Q_FALLTHROUGH
-#if (defined(Q_CC_GNU) && Q_CC_GNU >= 700) && !defined(Q_CC_INTEL)
-#define Q_FALLTHROUGH() __attribute__((fallthrough))
-#else
-#define Q_FALLTHROUGH() (void)0
-#endif
-#endif // defined(__cplusplus)
-#endif // QT_VERSION < QT_VERSION_CHECK(5, 8, 0)
-
-#if QT_VERSION < QT_VERSION_CHECK(5, 13, 0)
-#define Q_DISABLE_COPY_MOVE(Class)                                                                                     \
-    Q_DISABLE_COPY(Class)                                                                                              \
-    Class(Class &&) = delete;                                                                                          \
-    Class &operator=(Class &&) = delete;
-#endif
-
 #ifndef Q_DISABLE_ASSIGN_MOVE
 #define Q_DISABLE_ASSIGN_MOVE(Class)                                                                                   \
     Q_DISABLE_ASSIGN(Class)                                                                                            \

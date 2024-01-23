@@ -29,7 +29,6 @@
 #ifndef VISTOOLSPLINEPATH_H
 #define VISTOOLSPLINEPATH_H
 
-
 #include <QGraphicsItem>
 #include <QMetaObject>
 #include <QObject>
@@ -42,15 +41,12 @@
 #include "../vmisc/def.h"
 #include "vispath.h"
 
-#if QT_VERSION < QT_VERSION_CHECK(5, 13, 0)
-#include "../vmisc/defglobal.h"
-#endif // QT_VERSION < QT_VERSION_CHECK(5, 13, 0)
-
 class VControlPointSpline;
 
 class VisToolSplinePath : public VisPath // clazy:exclude=ctor-missing-parent-argument
 {
     Q_OBJECT // NOLINT
+
 public:
     explicit VisToolSplinePath(const VContainer *data, QGraphicsItem *parent = nullptr);
     ~VisToolSplinePath() override;
@@ -61,8 +57,11 @@ public:
     void SetPath(const VSplinePath &value);
     auto GetPath() -> VSplinePath;
 
-    auto type() const -> int override {return Type;}
-    enum {Type = UserType + static_cast<int>(Vis::ToolSplinePath)};
+    auto type() const -> int override { return Type; }
+    enum
+    {
+        Type = UserType + static_cast<int>(Vis::ToolSplinePath)
+    };
 signals:
     void PathChanged(const VSplinePath &path);
 
@@ -72,17 +71,17 @@ public slots:
 
 private:
     Q_DISABLE_COPY_MOVE(VisToolSplinePath) // NOLINT
-    QVector<VScaledEllipse *>      m_points{};
+    QVector<VScaledEllipse *> m_points{};
     QVector<VControlPointSpline *> m_ctrlPoints{};
-    VCurvePathItem*                m_newCurveSegment{nullptr};
-    VSplinePath                    m_path{};
+    VCurvePathItem *m_newCurveSegment{nullptr};
+    VSplinePath m_path{};
 
     bool m_isLeftMousePressed{false};
     bool m_pointSelected{false};
 
     QPointF m_ctrlPoint{};
 
-    auto GetPoint(quint32 i) -> VScaledEllipse*;
+    auto GetPoint(quint32 i) -> VScaledEllipse *;
     void DragControlPoint(vsizetype lastPoint, vsizetype preLastPoint, const QPointF &pSpl, vsizetype size);
     void NewCurveSegment(const VSpline &spline, const QPointF &pSpl, vsizetype size);
     void Creating(const QPointF &pSpl, vsizetype size);

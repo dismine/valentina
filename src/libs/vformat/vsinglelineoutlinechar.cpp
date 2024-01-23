@@ -75,7 +75,7 @@ Q_REQUIRED_RESULT auto ParseCorrectiosn(const QJsonObject &correctionsObject) ->
 
         if (!segments.isEmpty())
         {
-            corrections->insert(Front(glyph), segments);
+            corrections->insert(glyph.front(), segments);
         }
     }
 

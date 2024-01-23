@@ -36,9 +36,6 @@
 #include <QtGlobal>
 
 #include "../vmisc/def.h"
-#if QT_VERSION < QT_VERSION_CHECK(5, 13, 0)
-#include "../vmisc/defglobal.h"
-#endif
 #include "vispath.h"
 
 class VisToolArc final : public VisPath

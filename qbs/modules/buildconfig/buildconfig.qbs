@@ -157,34 +157,8 @@ Module {
             return "10.15"; // Qt 6.4 and above
         }
 
-        if (Qt.core.versionMajor >= 5) {
-            // See page https://doc.qt.io/qt-5.15/supported-platforms.html
-            // For qt 5.14 https://doc.qt.io/archives/qt-5.14/supported-platforms.html
-            if (Qt.core.versionMinor >= 14) // Qt 5.14
-                return "10.13";
-
-            // For Qt 5.13 https://doc.qt.io/archives/qt-5.13/supported-platforms.html
-            // For Qt 5.12 https://doc.qt.io/archives/qt-5.12/supported-platforms.html
-            if (Qt.core.versionMinor >= 12) // Qt 5.12
-                return "10.12";
-
-            // For older versions https://doc.qt.io/archives/qt-5.11/supported-platforms-and-configurations.html
-            if (Qt.core.versionMinor >= 10) // Qt 5.11 and Qt 5.10
-                return "10.11";
-
-            if (Qt.core.versionMinor >= 9) // Qt 5.9
-                return "10.10";
-
-            if (Qt.core.versionMinor >= 8) // Qt 5.8
-                return "10.9";
-
-            if (Qt.core.versionMinor >= 7) // Qt 5.7
-                return "10.8";
-
-            return "10.7";
-        }
-
-        return undefined;
+        // See page https://doc.qt.io/qt-5.15/supported-platforms.html
+        return "10.13";
     }
 
     cpp.separateDebugInformation: true

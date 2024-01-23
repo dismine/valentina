@@ -2027,11 +2027,11 @@ void VLayoutPiece::LabelStringsOutlineFont(QGraphicsItem *parent, const QVector<
         }
         else if ((tl.m_eAlign & Qt::AlignHCenter) > 0)
         {
-            dX = (dW - TextWidth(fm, tl.m_qsText)) / 2;
+            dX = (dW - fm.horizontalAdvance(tl.m_qsText)) / 2;
         }
         else if ((tl.m_eAlign & Qt::AlignRight) > 0)
         {
-            dX = dW - TextWidth(fm, tl.m_qsText);
+            dX = dW - fm.horizontalAdvance(tl.m_qsText);
         }
 
         // set up the rotation around top-left corner matrix
@@ -2061,7 +2061,7 @@ void VLayoutPiece::LabelStringsOutlineFont(QGraphicsItem *parent, const QVector<
                 for (auto c : qAsConst(tl.m_qsText))
                 {
                     path.addPath(corrector.DrawChar(w, static_cast<qreal>(fm.ascent()), c));
-                    w += TextWidth(fm, c);
+                    w += fm.horizontalAdvance(c);
                 }
             }
             else

@@ -28,24 +28,22 @@
 #ifndef ADDBACKGROUNDIMAGE_H
 #define ADDBACKGROUNDIMAGE_H
 
-#include "../vundocommand.h"
 #include "../ifc/xml/vbackgroundpatternimage.h"
-
-#if QT_VERSION < QT_VERSION_CHECK(5, 13, 0)
-#include "../vmisc/defglobal.h"
-#endif // QT_VERSION < QT_VERSION_CHECK(5, 13, 0)
+#include "../vundocommand.h"
 
 class AddBackgroundImage : public VUndoCommand
 {
     Q_OBJECT // NOLINT
+
 public:
-    AddBackgroundImage(const VBackgroundPatternImage& image, VAbstractPattern *doc, QUndoCommand *parent = nullptr);
-    ~AddBackgroundImage() override =default;
+    AddBackgroundImage(const VBackgroundPatternImage &image, VAbstractPattern *doc, QUndoCommand *parent = nullptr);
+    ~AddBackgroundImage() override = default;
     void undo() override;
     void redo() override;
 signals:
     void AddItem(const QUuid &id);
     void DeleteItem(const QUuid &id);
+
 private:
     // cppcheck-suppress unknownMacro
     Q_DISABLE_COPY_MOVE(AddBackgroundImage) // NOLINT

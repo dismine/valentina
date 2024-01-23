@@ -62,10 +62,6 @@ VLib {
             "vfoldline.cpp"
         ];
 
-        if (Qt.core.versionMajor >= 5 && Qt.core.versionMinor < 12) {
-            files.push("vsapoint.cpp"); // need only before C++17
-        }
-
         return files;
     }
 

@@ -32,10 +32,6 @@
 
 #include "../vformat/vdimensions.h"
 
-#if QT_VERSION < QT_VERSION_CHECK(5, 13, 0)
-#include "../vmisc/defglobal.h"
-#endif // QT_VERSION < QT_VERSION_CHECK(5, 13, 0)
-
 namespace Ui
 {
 class DialogDimensionCustomNames;
@@ -46,7 +42,7 @@ class DialogDimensionCustomNames : public QDialog
     Q_OBJECT // NOLINT
 
 public:
-    explicit DialogDimensionCustomNames(const QMap<MeasurementDimension, MeasurementDimension_p > &dimensions,
+    explicit DialogDimensionCustomNames(const QMap<MeasurementDimension, MeasurementDimension_p> &dimensions,
                                         QWidget *parent = nullptr);
     ~DialogDimensionCustomNames() override;
 

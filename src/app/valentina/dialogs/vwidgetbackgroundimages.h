@@ -30,10 +30,6 @@
 
 #include <QWidget>
 
-#if QT_VERSION < QT_VERSION_CHECK(5, 13, 0)
-#include "../vmisc/defglobal.h"
-#endif // QT_VERSION < QT_VERSION_CHECK(5, 13, 0)
-
 #include "../vmisc/def.h"
 
 class VAbstractPattern;
@@ -41,10 +37,17 @@ class VBackgroundPatternImage;
 
 namespace Ui
 {
-    class VWidgetBackgroundImages;
+class VWidgetBackgroundImages;
 }
 
-enum class ScaleUnit {Percent, Mm, Cm, Inch, Px};
+enum class ScaleUnit
+{
+    Percent,
+    Mm,
+    Cm,
+    Inch,
+    Px
+};
 
 class VWidgetBackgroundImages : public QWidget
 {

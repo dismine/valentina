@@ -28,12 +28,8 @@
 #ifndef VPUNDOPIECEZVALUEMOVE_H
 #define VPUNDOPIECEZVALUEMOVE_H
 
-#include "vpundocommand.h"
 #include "../layout/layoutdef.h"
-
-#if QT_VERSION < QT_VERSION_CHECK(5, 13, 0)
-#include "../vmisc/defglobal.h"
-#endif // QT_VERSION < QT_VERSION_CHECK(5, 13, 0)
+#include "vpundocommand.h"
 
 namespace ML
 {
@@ -49,9 +45,10 @@ enum class ZValueMove
 class VPUndoPieceZValueMove : public VPUndoCommand
 {
     Q_OBJECT // NOLINT
+
 public:
     VPUndoPieceZValueMove(const VPPiecePtr &piece, ML::ZValueMove move, QUndoCommand *parent = nullptr);
-    ~VPUndoPieceZValueMove() override =default;
+    ~VPUndoPieceZValueMove() override = default;
 
     void undo() override;
     void redo() override;
@@ -74,9 +71,10 @@ private:
 class VPUndoPiecesZValueMove : public VPUndoCommand
 {
     Q_OBJECT // NOLINT
+
 public:
     VPUndoPiecesZValueMove(const QList<VPPiecePtr> &pieces, ML::ZValueMove move, QUndoCommand *parent = nullptr);
-    ~VPUndoPiecesZValueMove() override =default;
+    ~VPUndoPiecesZValueMove() override = default;
 
     void undo() override;
     void redo() override;
@@ -86,15 +84,15 @@ private:
     Q_DISABLE_COPY_MOVE(VPUndoPiecesZValueMove) // NOLINT
 
     QList<VPPieceWeakPtr> m_pieces{};
-    ML::ZValueMove        m_move;
+    ML::ZValueMove m_move;
     QHash<QString, qreal> m_oldValues{};
 
     auto Layout() const -> VPLayoutPtr;
     auto Sheet() const -> VPSheetPtr;
 
     auto PieceIds() const -> QVector<QString>;
-    static auto Levels(const QList<VPPiecePtr> &allPieces, const QVector<QString> &skipPieces,
-                       bool skip) -> QList<QVector<QString>>;
+    static auto Levels(const QList<VPPiecePtr> &allPieces, const QVector<QString> &skipPieces, bool skip)
+        -> QList<QVector<QString>>;
     static auto LevelStep(const QList<VPPiecePtr> &pieces) -> qreal;
 };
 

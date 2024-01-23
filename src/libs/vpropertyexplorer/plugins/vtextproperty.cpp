@@ -18,8 +18,8 @@
  **
  *************************************************************************/
 #include "vtextproperty.h"
-#include "../vproperty_p.h"
 #include "../vmisc/compatibility.h"
+#include "../vproperty_p.h"
 
 #include <QPlainTextEdit>
 #include <QTextEdit>
@@ -27,34 +27,28 @@
 namespace
 {
 //---------------------------------------------------------------------------------------------------------------------
-void SetTabStopDistance(QPlainTextEdit *edit, int tabWidthChar=4);
+void SetTabStopDistance(QPlainTextEdit *edit, int tabWidthChar = 4);
 void SetTabStopDistance(QPlainTextEdit *edit, int tabWidthChar)
 {
     const auto fontMetrics = edit->fontMetrics();
 
     const QString testString(" ");
 
-#if QT_VERSION < QT_VERSION_CHECK(5, 10, 0)
-    const int singleCharWidth = fontMetrics.width(testString);
-    edit->setTabStopWidth(tabWidthChar * singleCharWidth);
-#else
     // compute the size of a char in double-precision
     static constexpr int bigNumber = 1000; // arbitrary big number.
-    const int many_char_width = TextWidth(fontMetrics, testString.repeated(bigNumber));
+    const int many_char_width = fontMetrics.horizontalAdvance(testString.repeated(bigNumber));
     const double singleCharWidthDouble = many_char_width / double(bigNumber);
     // set the tab stop with double precision
     edit->setTabStopDistance(tabWidthChar * singleCharWidthDouble);
-#endif
 }
-}
-
+} // namespace
 
 VPE::VTextProperty::VTextProperty(const QString &name, const QMap<QString, QVariant> &settings)
-    : VProperty(name,
+  : VProperty(name,
 #if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
-                QMetaType::QString),
+              QMetaType::QString),
 #else
-                QVariant::String),
+              QVariant::String),
 #endif
     readOnly(false)
 {
@@ -68,7 +62,7 @@ VPE::VTextProperty::VTextProperty(const QString &name, const QMap<QString, QVari
 }
 
 VPE::VTextProperty::VTextProperty(const QString &name)
-    : VProperty(name),
+  : VProperty(name),
     readOnly(false)
 {
     d_ptr->VariantValue.setValue(QString());
@@ -85,7 +79,7 @@ auto VPE::VTextProperty::createEditor(QWidget *parent, const QStyleOptionViewIte
     Q_UNUSED(options)
     Q_UNUSED(delegate)
 
-    QPlainTextEdit* tmpEditor = new QPlainTextEdit(parent);
+    QPlainTextEdit *tmpEditor = new QPlainTextEdit(parent);
     tmpEditor->setLocale(parent->locale());
     tmpEditor->setReadOnly(readOnly);
     tmpEditor->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
@@ -98,7 +92,7 @@ auto VPE::VTextProperty::createEditor(QWidget *parent, const QStyleOptionViewIte
 
 auto VPE::VTextProperty::setEditorData(QWidget *editor) -> bool
 {
-    if (QPlainTextEdit* tmpWidget = qobject_cast<QPlainTextEdit*>(editor))
+    if (QPlainTextEdit *tmpWidget = qobject_cast<QPlainTextEdit *>(editor))
     {
         tmpWidget->setPlainText(d_ptr->VariantValue.toString());
         return true;
@@ -109,7 +103,7 @@ auto VPE::VTextProperty::setEditorData(QWidget *editor) -> bool
 
 auto VPE::VTextProperty::getEditorData(const QWidget *editor) const -> QVariant
 {
-    const QPlainTextEdit* tmpEditor = qobject_cast<const QPlainTextEdit*>(editor);
+    const QPlainTextEdit *tmpEditor = qobject_cast<const QPlainTextEdit *>(editor);
     if (tmpEditor)
     {
         return tmpEditor->toPlainText();

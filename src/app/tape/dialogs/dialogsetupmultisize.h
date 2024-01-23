@@ -33,10 +33,6 @@
 #include "../vformat/vdimensions.h"
 #include "../vmisc/def.h"
 
-#if QT_VERSION < QT_VERSION_CHECK(5, 13, 0)
-#include "../vmisc/defglobal.h"
-#endif // QT_VERSION < QT_VERSION_CHECK(5, 13, 0)
-
 class QDoubleSpinBox;
 class QGroupBox;
 class QLineEdit;
@@ -101,8 +97,7 @@ private:
 
     void DimensionStepChanged(int index, QComboBox *comboBoxStep, QComboBox *comboBoxBase,
                               const MeasurementDimension_p &dimension);
-    void DimensionBaseChanged(int index, QComboBox *comboBoxBase,
-                              const MeasurementDimension_p &dimension);
+    void DimensionBaseChanged(int index, QComboBox *comboBoxBase, const MeasurementDimension_p &dimension);
 
     void UpdateSteps(QComboBox *comboBoxStep, const MeasurementDimension_p &dimension);
     void UpdateBase(QComboBox *comboBoxBase, const MeasurementDimension_p &dimension);

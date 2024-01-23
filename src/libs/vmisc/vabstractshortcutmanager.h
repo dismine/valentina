@@ -35,10 +35,6 @@
 #include <QtCore/QHashFunctions>
 #endif
 
-#if QT_VERSION < QT_VERSION_CHECK(5, 13, 0)
-#include "defglobal.h"
-#endif
-
 #if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
 #define QKEY_SEQUENCE_OP |
 #else

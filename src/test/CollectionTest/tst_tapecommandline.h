@@ -30,9 +30,6 @@
 #define TST_TAPECOMMANDLINE_H
 
 #include "../vtest/abstracttest.h"
-#if QT_VERSION < QT_VERSION_CHECK(5, 13, 0)
-#include "../vmisc/defglobal.h"
-#endif
 
 class TST_TapeCommandLine : public AbstractTest
 {

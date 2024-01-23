@@ -35,9 +35,6 @@
 #include <QtGlobal>
 
 #include "vpropertyexplorer_global.h"
-#if QT_VERSION < QT_VERSION_CHECK(5, 7, 0)
-#include "../vmisc/backport/qoverload.h"
-#endif // QT_VERSION < QT_VERSION_CHECK(5, 7, 0)
 
 // Header <ciso646> is removed in C++20.
 #if __cplusplus <= 201703L

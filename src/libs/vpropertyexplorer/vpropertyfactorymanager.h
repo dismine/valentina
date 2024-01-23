@@ -28,10 +28,6 @@
 
 #include "vpropertyexplorer_global.h"
 
-#if QT_VERSION < QT_VERSION_CHECK(5, 13, 0)
-#include "../vmisc/defglobal.h"
-#endif
-
 namespace VPE
 {
 

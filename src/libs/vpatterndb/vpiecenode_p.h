@@ -35,9 +35,6 @@
 
 #include "../ifc/exception/vexception.h"
 #include "../ifc/ifcdef.h"
-#if QT_VERSION < QT_VERSION_CHECK(5, 14, 0)
-#include "../vmisc/vdatastreamenum.h"
-#endif
 
 QT_WARNING_PUSH
 QT_WARNING_DISABLE_GCC("-Weffc++")
@@ -106,12 +103,6 @@ private:
     static constexpr quint32 streamHeader = 0x2198CBC8; // CRC-32Q string "VPieceNodeData"
     static constexpr quint16 classVersion = 3;
 };
-
-// See https://stackoverflow.com/a/46719572/3045403
-#if __cplusplus < 201703L                       // C++17
-constexpr quint32 VPieceNodeData::streamHeader; // NOLINT(readability-redundant-declaration)
-constexpr quint16 VPieceNodeData::classVersion; // NOLINT(readability-redundant-declaration)
-#endif
 
 //---------------------------------------------------------------------------------------------------------------------
 inline VPieceNodeData::VPieceNodeData(quint32 id, Tool typeTool, bool reverse)

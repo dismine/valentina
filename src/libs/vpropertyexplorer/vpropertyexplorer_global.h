@@ -24,27 +24,19 @@
 #include <QtCore/qglobal.h>
 
 #if defined(VPROPERTYEXPLORER_LIBRARY)
-#  define VPROPERTYEXPLORERSHARED_EXPORT Q_DECL_EXPORT
+#define VPROPERTYEXPLORERSHARED_EXPORT Q_DECL_EXPORT
 #else
-#  define VPROPERTYEXPLORERSHARED_EXPORT Q_DECL_IMPORT
+#define VPROPERTYEXPLORERSHARED_EXPORT Q_DECL_IMPORT
 #endif
 
 #ifndef Q_DISABLE_ASSIGN
-#define Q_DISABLE_ASSIGN(Class) \
-    Class &operator=(const Class &) = delete;
-#endif
-
-#if QT_VERSION < QT_VERSION_CHECK(5, 13, 0)
-#define Q_DISABLE_COPY_MOVE(Class) \
-    Q_DISABLE_COPY(Class) \
-    Class(Class &&) = delete; \
-    Class &operator=(Class &&) = delete;
+#define Q_DISABLE_ASSIGN(Class) Class &operator=(const Class &) = delete;
 #endif
 
 #ifndef Q_DISABLE_ASSIGN_MOVE
-#define Q_DISABLE_ASSIGN_MOVE(Class) \
-    Q_DISABLE_ASSIGN(Class) \
-    Class(Class &&) = delete; \
+#define Q_DISABLE_ASSIGN_MOVE(Class)                                                                                   \
+    Q_DISABLE_ASSIGN(Class)                                                                                            \
+    Class(Class &&) = delete;                                                                                          \
     Class &operator=(Class &&) = delete;
 #endif
 

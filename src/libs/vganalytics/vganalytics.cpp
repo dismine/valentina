@@ -57,16 +57,7 @@
 #include <sys/sysinfo.h>
 #endif
 
-#if (defined(Q_CC_GNU) && Q_CC_GNU < 409) && !defined(Q_CC_CLANG)
-// DO NOT WORK WITH GCC 4.8
-#else
-#if __cplusplus >= 201402L
 using namespace std::chrono_literals;
-#else
-#include "../vmisc/bpstd/chrono.hpp"
-using namespace bpstd::literals::chrono_literals;
-#endif // __cplusplus >= 201402L
-#endif //(defined(Q_CC_GNU) && Q_CC_GNU < 409) && !defined(Q_CC_CLANG)
 
 #if QT_VERSION < QT_VERSION_CHECK(6, 4, 0)
 #include "../vmisc/compatibility.h"
@@ -454,7 +445,7 @@ auto VGAnalytics::CountryCode() -> QString
 
     QTimer timer;
     timer.setSingleShot(true);
-    timer.start(V_SECONDS(5)); // Set the timeout to 5 seconds
+    timer.start(5s); // Set the timeout to 5 seconds
 
     QEventLoop eventLoop;
 

@@ -43,10 +43,6 @@
 #include <QTextCodec>
 #endif
 
-#if QT_VERSION < QT_VERSION_CHECK(5, 7, 0)
-#include "../vmisc/backport/qoverload.h"
-#endif // QT_VERSION < QT_VERSION_CHECK(5, 7, 0)
-
 #if QT_VERSION < QT_VERSION_CHECK(6, 4, 0)
 #include "../compatibility.h"
 #endif
@@ -100,11 +96,7 @@ DialogExportToCSV::DialogExportToCSV(QWidget *parent)
 
     connect(ui->comboBoxCodec, QOverload<int>::of(&QComboBox::currentIndexChanged), this, [this]() { ShowPreview(); });
     connect(ui->checkBoxWithHeader, &QCheckBox::stateChanged, this, [this]() { ShowPreview(); });
-#if QT_VERSION < QT_VERSION_CHECK(5, 15, 0)
-    connect(ui->buttonGroup, QOverload<int>::of(&QButtonGroup::buttonClicked), this, [this]() { ShowPreview(); });
-#else
     connect(ui->buttonGroup, &QButtonGroup::idClicked, this, [this]() { ShowPreview(); });
-#endif
 }
 
 //---------------------------------------------------------------------------------------------------------------------

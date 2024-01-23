@@ -30,19 +30,16 @@
 
 #include "../vundocommand.h"
 
-#if QT_VERSION < QT_VERSION_CHECK(5, 13, 0)
-#include "../vmisc/defglobal.h"
-#endif // QT_VERSION < QT_VERSION_CHECK(5, 13, 0)
-
-
 class HideAllBackgroundImages : public VUndoCommand
 {
     Q_OBJECT // NOLINT
+
 public:
     HideAllBackgroundImages(bool hide, VAbstractPattern *doc, QUndoCommand *parent = nullptr);
-    ~HideAllBackgroundImages() override =default;
+    ~HideAllBackgroundImages() override = default;
     void undo() override;
     void redo() override;
+
 private:
     // cppcheck-suppress unknownMacro
     Q_DISABLE_COPY_MOVE(HideAllBackgroundImages) // NOLINT

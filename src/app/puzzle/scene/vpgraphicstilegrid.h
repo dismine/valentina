@@ -35,10 +35,6 @@
 
 #include "../layout/layoutdef.h"
 
-#if QT_VERSION < QT_VERSION_CHECK(5, 13, 0)
-#include "../vmisc/defglobal.h"
-#endif // QT_VERSION < QT_VERSION_CHECK(5, 13, 0)
-
 class VPTileFactory;
 class VPLayout;
 struct VWatermarkData;
@@ -47,7 +43,7 @@ class VPGraphicsTileGrid : public QGraphicsItem
 {
 public:
     explicit VPGraphicsTileGrid(const VPLayoutPtr &layout, const QUuid &sheetUuid, QGraphicsItem *parent = nullptr);
-    ~VPGraphicsTileGrid() override =default;
+    ~VPGraphicsTileGrid() override = default;
 
     auto boundingRect() const -> QRectF override;
     void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget) override;

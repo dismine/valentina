@@ -30,19 +30,16 @@
 
 #include "../vundocommand.h"
 
-#if QT_VERSION < QT_VERSION_CHECK(5, 13, 0)
-#include "../vmisc/defglobal.h"
-#endif // QT_VERSION < QT_VERSION_CHECK(5, 13, 0)
-
-
 class RenameBackgroundImage : public VUndoCommand
 {
     Q_OBJECT // NOLINT
+
 public:
     RenameBackgroundImage(QUuid id, const QString &name, VAbstractPattern *doc, QUndoCommand *parent = nullptr);
-    ~RenameBackgroundImage() override =default;
+    ~RenameBackgroundImage() override = default;
     void undo() override;
     void redo() override;
+
 private:
     // cppcheck-suppress unknownMacro
     Q_DISABLE_COPY_MOVE(RenameBackgroundImage) // NOLINT

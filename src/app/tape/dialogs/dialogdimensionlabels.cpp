@@ -27,17 +27,14 @@
  *************************************************************************/
 #include "dialogdimensionlabels.h"
 #include "ui_dialogdimensionlabels.h"
-#if QT_VERSION < QT_VERSION_CHECK(5, 7, 0)
-#include "../vmisc/backport/qoverload.h"
-#endif // QT_VERSION < QT_VERSION_CHECK(5, 7, 0)
 
 //---------------------------------------------------------------------------------------------------------------------
 DialogDimensionLabels::DialogDimensionLabels(const QMap<MeasurementDimension, MeasurementDimension_p> &dimensions,
                                              bool fullCircumference, QWidget *parent)
-    : QDialog(parent),
-      ui(new Ui::DialogDimensionLabels),
-      m_dimensions(dimensions),
-      m_fullCircumference(fullCircumference)
+  : QDialog(parent),
+    ui(new Ui::DialogDimensionLabels),
+    m_dimensions(dimensions),
+    m_fullCircumference(fullCircumference)
 {
     ui->setupUi(this);
 
@@ -119,7 +116,7 @@ void DialogDimensionLabels::InitLabels()
 
     const QList<MeasurementDimension_p> dimensions = m_dimensions.values();
 
-    for(const auto &dimension : dimensions)
+    for (const auto &dimension : dimensions)
     {
         m_labels.insert(dimension->Type(), dimension->Labels());
     }
@@ -131,7 +128,7 @@ void DialogDimensionLabels::InitDimensions()
     ui->comboBoxDimensionLabels->blockSignals(true);
     ui->comboBoxDimensionLabels->clear();
 
-    for(auto &dimension : m_dimensions)
+    for (auto &dimension : m_dimensions)
     {
         ui->comboBoxDimensionLabels->addItem(dimension->Name(), static_cast<int>(dimension->Type()));
     }
@@ -166,7 +163,7 @@ void DialogDimensionLabels::InitTable()
 
     const DimesionLabels labels = m_labels.value(type);
 
-    for(int row = 0; row < bases.size(); ++row)
+    for (int row = 0; row < bases.size(); ++row)
     {
         const qreal base = bases.at(row);
 
@@ -208,16 +205,15 @@ auto DialogDimensionLabels::DimensionValue(const MeasurementDimension_p &dimensi
     {
         if (dimension->IsBodyMeasurement())
         {
-            return QString::number(m_fullCircumference ? value*2 : value);
+            return QString::number(m_fullCircumference ? value * 2 : value);
         }
 
         return QString::number(value);
-
     }
 
     if (dimension->Type() == MeasurementDimension::W || dimension->Type() == MeasurementDimension::Z)
     {
-        return QString::number(m_fullCircumference ? value*2 : value);
+        return QString::number(m_fullCircumference ? value * 2 : value);
     }
 
     return QString::number(value);

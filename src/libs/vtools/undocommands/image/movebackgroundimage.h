@@ -33,13 +33,10 @@
 #include <QTransform>
 #include <QUuid>
 
-#if QT_VERSION < QT_VERSION_CHECK(5, 13, 0)
-#include "../vmisc/defglobal.h"
-#endif // QT_VERSION < QT_VERSION_CHECK(5, 13, 0)
-
 class MoveBackgroundImage : public VUndoCommand
 {
     Q_OBJECT // NOLINT
+
 public:
     MoveBackgroundImage(QUuid id, qreal dx, qreal dy, VAbstractPattern *doc, bool allowMerge = false,
                         QUndoCommand *parent = nullptr);

@@ -44,10 +44,6 @@
 #include "../vtools/undocommands/image/zvaluemovebackgroundimage.h"
 #include "ui_vwidgetbackgroundimages.h"
 
-#if QT_VERSION < QT_VERSION_CHECK(5, 7, 0)
-#include "../vmisc/backport/qoverload.h"
-#endif // QT_VERSION < QT_VERSION_CHECK(5, 7, 0)
-
 #include <QMenu>
 #include <QPushButton>
 

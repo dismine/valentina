@@ -32,7 +32,6 @@ VDynamicLib {
         "qmutokenparser.h",
         "qmuparsercallback_p.h",
         "make_unique.h",
-        "text.h"
     ]
 
     cpp.defines: ["QMUPARSER_LIBRARY", 'QMUP_VERSION="' + product.version + '"']

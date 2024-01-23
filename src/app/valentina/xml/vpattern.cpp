@@ -103,16 +103,11 @@
 #include "../vtools/tools/vtooluniondetails.h"
 #include "../vwidgets/vabstractmainwindow.h"
 
-#if QT_VERSION < QT_VERSION_CHECK(5, 12, 0)
-#include "../vmisc/backport/qscopeguard.h"
-#else
-#include <QScopeGuard>
-#endif
-
 #include <QDebug>
 #include <QFileInfo>
 #include <QFuture>
 #include <QMessageBox>
+#include <QScopeGuard>
 #include <QTimer>
 #include <QUndoStack>
 #include <QtConcurrentMap>
@@ -121,16 +116,7 @@
 #include <chrono>
 #include <functional>
 
-#if (defined(Q_CC_GNU) && Q_CC_GNU < 409) && !defined(Q_CC_CLANG)
-// DO NOT WORK WITH GCC 4.8
-#else
-#if __cplusplus >= 201402L
 using namespace std::chrono_literals;
-#else
-#include "../vmisc/bpstd/chrono.hpp"
-using namespace bpstd::literals::chrono_literals;
-#endif // __cplusplus >= 201402L
-#endif //(defined(Q_CC_GNU) && Q_CC_GNU < 409) && !defined(Q_CC_CLANG)
 
 using namespace Qt::Literals::StringLiterals;
 
@@ -291,7 +277,7 @@ void VPattern::Parse(const Document &parse)
 
     if (VApplication::IsGUIMode())
     {
-        QTimer::singleShot(V_SECONDS(1), Qt::VeryCoarseTimer, this, &VPattern::RefreshPieceGeometry);
+        QTimer::singleShot(1s, Qt::VeryCoarseTimer, this, &VPattern::RefreshPieceGeometry);
     }
     else if (VApplication::CommandLine()->IsTestModeEnabled())
     {

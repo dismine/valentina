@@ -49,33 +49,6 @@ contains(DEFINES, APPIMAGE) {
 }
 
 HEADERS += \
-    $$PWD/bpstd/any.hpp \
-    $$PWD/bpstd/chrono.hpp \
-    $$PWD/bpstd/complex.hpp \
-    $$PWD/bpstd/cstddef.hpp \
-    $$PWD/bpstd/detail/config.hpp \
-    $$PWD/bpstd/detail/enable_overload.hpp \
-    $$PWD/bpstd/detail/invoke.hpp \
-    $$PWD/bpstd/detail/move.hpp \
-    $$PWD/bpstd/detail/nth_type.hpp \
-    $$PWD/bpstd/detail/proxy_iterator.hpp \
-    $$PWD/bpstd/detail/variant_base.hpp \
-    $$PWD/bpstd/detail/variant_fwds.hpp \
-    $$PWD/bpstd/detail/variant_traits.hpp \
-    $$PWD/bpstd/detail/variant_union.hpp \
-    $$PWD/bpstd/detail/variant_visitors.hpp \
-    $$PWD/bpstd/exception.hpp \
-    $$PWD/bpstd/functional.hpp \
-    $$PWD/bpstd/iterator.hpp \
-    $$PWD/bpstd/memory.hpp \
-    $$PWD/bpstd/optional.hpp \
-    $$PWD/bpstd/span.hpp \
-    $$PWD/bpstd/string.hpp \
-    $$PWD/bpstd/string_view.hpp \
-    $$PWD/bpstd/tuple.hpp \
-    $$PWD/bpstd/type_traits.hpp \
-    $$PWD/bpstd/utility.hpp \
-    $$PWD/bpstd/variant.hpp \
     $$PWD/compatibility.h \
     $$PWD/dialogs/dialogaskcollectstatistic.h \
     $$PWD/dialogs/vshortcutdialog.h \
@@ -116,15 +89,11 @@ HEADERS += \
     $$PWD/dialogs/dialogexporttocsv.h \
     $$PWD/customevents.h \
     $$PWD/defglobal.h \
-    $$PWD/backport/qoverload.h \
     $$PWD/testvapplication.h \
     $$PWD/literals.h \
     $$PWD/qt_dispatch/qt_dispatch.h \
-    $$PWD/vdatastreamenum.h \
     $$PWD/vmodifierkey.h \
     $$PWD/typedef.h \
-    $$PWD/backport/qscopeguard.h \
-    $$PWD/backport/text.h \
     $$PWD/dialogs/dialogselectlanguage.h \
     $$PWD/fpm/fixed.hpp \
     $$PWD/fpm/math.hpp \

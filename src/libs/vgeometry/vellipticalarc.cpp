@@ -769,7 +769,7 @@ auto VEllipticalArc::ArcPoints(QVector<QPointF> points) const -> QVector<QPointF
             QLineF edge(points.at(i), points.at(i + 1));
 
             QPointF p;
-            QLineF::IntersectType type = Intersects(start, edge, &p);
+            QLineF::IntersectType type = start.intersects(edge, &p);
 
             // QLineF::intersects not always accurate on edge cases
             if (IsBoundedIntersection(type, p, edge, start))
@@ -802,7 +802,7 @@ auto VEllipticalArc::ArcPoints(QVector<QPointF> points) const -> QVector<QPointF
         if (begin)
         {
             QPointF p;
-            QLineF::IntersectType type = Intersects(start, edge, &p);
+            QLineF::IntersectType type = start.intersects(edge, &p);
 
             // QLineF::intersects not always accurate on edge cases
             if (IsBoundedIntersection(type, p, edge, start))
@@ -814,7 +814,7 @@ auto VEllipticalArc::ArcPoints(QVector<QPointF> points) const -> QVector<QPointF
         else
         {
             QPointF p;
-            QLineF::IntersectType type = Intersects(end, edge, &p);
+            QLineF::IntersectType type = end.intersects(edge, &p);
 
             // QLineF::intersects not always accurate on edge cases
             if (IsBoundedIntersection(type, p, edge, end))

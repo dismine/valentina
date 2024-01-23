@@ -66,20 +66,10 @@
 #include "vlitepattern.h"
 #include "vtapesettings.h"
 
-#if QT_VERSION < QT_VERSION_CHECK(5, 7, 0)
-#include "../vmisc/backport/qoverload.h"
-#endif // QT_VERSION < QT_VERSION_CHECK(5, 7, 0)
-
 #if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
 #include "../vmisc/vtextcodec.h"
 #else
 #include <QTextCodec>
-#endif
-
-#if QT_VERSION < QT_VERSION_CHECK(5, 12, 0)
-#include "../vmisc/backport/qscopeguard.h"
-#else
-#include <QScopeGuard>
 #endif
 
 #include <QComboBox>
@@ -91,21 +81,13 @@
 #include <QMimeType>
 #include <QPixmap>
 #include <QProcess>
+#include <QScopeGuard>
 #include <QTimer>
 #include <QUuid>
 #include <QtNumeric>
 #include <chrono>
 
-#if (defined(Q_CC_GNU) && Q_CC_GNU < 409) && !defined(Q_CC_CLANG)
-// DO NOT WORK WITH GCC 4.8
-#else
-#if __cplusplus >= 201402L
 using namespace std::chrono_literals;
-#else
-#include "../vmisc/bpstd/chrono.hpp"
-using namespace bpstd::literals::chrono_literals;
-#endif // __cplusplus >= 201402L
-#endif //(defined(Q_CC_GNU) && Q_CC_GNU < 409) && !defined(Q_CC_CLANG)
 
 #if defined(Q_OS_MAC)
 #include <QDrag>
@@ -313,7 +295,7 @@ TMainWindow::TMainWindow(QWidget *parent)
 
     if (MApplication::VApp()->IsAppInGUIMode())
     {
-        QTimer::singleShot(V_SECONDS(1), this, &TMainWindow::AskDefaultSettings);
+        QTimer::singleShot(1s, this, &TMainWindow::AskDefaultSettings);
     }
 
     m_buttonShortcuts.insert(VShortcutAction::CaseSensitiveMatch, ui->toolButtonCaseSensitive);
@@ -732,15 +714,6 @@ void TMainWindow::ToolBarStyles()
 //---------------------------------------------------------------------------------------------------------------------
 void TMainWindow::closeEvent(QCloseEvent *event)
 {
-#if defined(Q_OS_MAC) && QT_VERSION < QT_VERSION_CHECK(5, 11, 1)
-    // Workaround for Qt bug https://bugreports.qt.io/browse/QTBUG-43344
-    static int numCalled = 0;
-    if (numCalled++ >= 1)
-    {
-        return;
-    }
-#endif
-
     if (MaybeSave())
     {
         WriteSettings();
@@ -3278,7 +3251,7 @@ void TMainWindow::InitDimensionGradation(int index, const MeasurementDimension_p
     int maxWidth = 0;
     for (int i = 0; i < control->count(); ++i)
     {
-        int itemWidth = TextWidth(fontMetrics, control->itemText(i));
+        int itemWidth = fontMetrics.horizontalAdvance(control->itemText(i));
         if (itemWidth > maxWidth)
         {
             maxWidth = itemWidth;

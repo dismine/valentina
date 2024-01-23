@@ -51,27 +51,10 @@ template <class T> class QSharedPointer;
 #include <ciso646> // and, not, or
 #endif
 
-#if (defined(Q_CC_GNU) && Q_CC_GNU <= 409) && !defined(Q_CC_CLANG)
-// NOLINTNEXTLINE(cppcoreguidelines-macro-usage)
-#define COPY_CONSTRUCTOR_IMPL(className)                                                                               \
-    className::className(const className &item)                                                                        \
-      : d(item.d)                                                                                                      \
-    {                                                                                                                  \
-    }
-
-// NOLINTNEXTLINE(cppcoreguidelines-macro-usage)
-#define COPY_CONSTRUCTOR_IMPL_2(className, baseClassName)                                                              \
-    className::className(const className &item)                                                                        \
-      : baseClassName(item),                                                                                           \
-        d(item.d)                                                                                                      \
-    {                                                                                                                  \
-    }
-#else
 // NOLINTNEXTLINE(cppcoreguidelines-macro-usage)
 #define COPY_CONSTRUCTOR_IMPL(className) className::className(const className &) = default;
 // NOLINTNEXTLINE(cppcoreguidelines-macro-usage)
 #define COPY_CONSTRUCTOR_IMPL_2(className, baseClassName) className::className(const className &) = default;
-#endif
 
 // https://stackoverflow.com/questions/75008386/constructor-is-implicitly-deleted-because-its-exception-specification-does-not-m
 #if (defined(Q_CC_GNU) && Q_CC_GNU < 1001) && !defined(Q_CC_CLANG)
@@ -454,34 +437,6 @@ enum class IMD : qint8 // Individual measurement dimension
 #define __has_cpp_attribute(x) 0
 #endif
 
-#if QT_VERSION < QT_VERSION_CHECK(5, 8, 0)
-
-#ifndef QT_HAS_CPP_ATTRIBUTE
-#ifdef __has_cpp_attribute
-#define QT_HAS_CPP_ATTRIBUTE(x) __has_cpp_attribute(x)
-#else
-#define QT_HAS_CPP_ATTRIBUTE(x) 0
-#endif
-#endif // QT_HAS_CPP_ATTRIBUTE
-
-#if defined(__cplusplus)
-#if QT_HAS_CPP_ATTRIBUTE(clang::fallthrough)
-#define Q_FALLTHROUGH() [[clang::fallthrough]]
-#elif QT_HAS_CPP_ATTRIBUTE(gnu::fallthrough)
-#define Q_FALLTHROUGH() [[gnu::fallthrough]]
-#elif QT_HAS_CPP_ATTRIBUTE(fallthrough)
-#define Q_FALLTHROUGH() [[fallthrough]]
-#endif
-#endif
-#ifndef Q_FALLTHROUGH
-#if (defined(Q_CC_GNU) && Q_CC_GNU >= 700) && !defined(Q_CC_INTEL)
-#define Q_FALLTHROUGH() __attribute__((fallthrough))
-#else
-#define Q_FALLTHROUGH() (void)0
-#endif
-#endif // defined(__cplusplus)
-#endif // QT_VERSION < QT_VERSION_CHECK(5, 8, 0)
-
 #ifdef Q_OS_MAC
 // Fix QT issue on MacOS version 11.0 "Big Sur"
 //     https://bugreports.qt.io/browse/QTBUG-87014
@@ -500,8 +455,7 @@ enum class IMD : qint8 // Individual measurement dimension
 // We'll assume that it will be fixed in 5.12.11, 5.15.3, and 6.0.1.
 // Feel free to add other versions if needed.
 #define MACOS_LAYER_BACKING_AFFECTED                                                                                   \
-    (QT_VERSION >= QT_VERSION_CHECK(5, 12, 0) && QT_VERSION < QT_VERSION_CHECK(5, 12, 11) ||                           \
-     (QT_VERSION >= QT_VERSION_CHECK(5, 15, 0) && QT_VERSION < QT_VERSION_CHECK(5, 15, 3)) ||                          \
+    ((QT_VERSION >= QT_VERSION_CHECK(5, 15, 0) && QT_VERSION < QT_VERSION_CHECK(5, 15, 3)) ||                          \
      (QT_VERSION >= QT_VERSION_CHECK(6, 0, 0) && QT_VERSION < QT_VERSION_CHECK(6, 0, 1)))
 
 #if MACOS_LAYER_BACKING_AFFECTED

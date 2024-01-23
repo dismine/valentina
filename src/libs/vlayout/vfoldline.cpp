@@ -262,12 +262,12 @@ auto VFoldLine::LabelPosition(bool &ok) const -> FoldLabelPosData
 
     if (m_alignment & Qt::AlignHCenter) // NOLINT(readability-implicit-bool-conversion)
     {
-        qreal const shift = (data.labelWidth - TextWidth(fm, posData.label)) / 2;
+        qreal const shift = (data.labelWidth - fm.horizontalAdvance(posData.label)) / 2;
         baseLine.setLength(baseLine.length() - shift);
     }
     else if (m_alignment & Qt::AlignRight) // NOLINT(readability-implicit-bool-conversion)
     {
-        qreal const shift = data.labelWidth - TextWidth(fm, posData.label);
+        qreal const shift = data.labelWidth - fm.horizontalAdvance(posData.label);
         baseLine.setLength(baseLine.length() - shift);
     }
 
@@ -507,7 +507,7 @@ auto VFoldLine::TrueCenter(const QLineF &base, qreal width) const -> QPointF
 
     if (VFuzzyComparePossibleNulls(base.length(), width) || qFuzzyIsNull(width))
     {
-        return LineCenter(base);
+        return base.center();
     }
 
     QLineF seg1 = base;
@@ -574,12 +574,12 @@ auto VFoldLine::OutlineFontLabel(const QLineF &base, qreal width, qreal textHeig
 
     if (m_alignment & Qt::AlignHCenter) // NOLINT(readability-implicit-bool-conversion)
     {
-        qreal const shift = (width - TextWidth(fm, label)) / 2;
+        qreal const shift = (width - fm.horizontalAdvance(label)) / 2;
         baseLine.setLength(baseLine.length() - shift);
     }
     else if (m_alignment & Qt::AlignRight) // NOLINT(readability-implicit-bool-conversion)
     {
-        qreal const shift = width - TextWidth(fm, label);
+        qreal const shift = width - fm.horizontalAdvance(label);
         baseLine.setLength(baseLine.length() - shift);
     }
 
@@ -598,7 +598,7 @@ auto VFoldLine::OutlineFontLabel(const QLineF &base, qreal width, qreal textHeig
         for (auto c : qAsConst(label))
         {
             labelPath.addPath(corrector.DrawChar(w, static_cast<qreal>(fm.ascent()), c));
-            w += TextWidth(fm, c);
+            w += fm.horizontalAdvance(c);
         }
 
         QTransform matrix;

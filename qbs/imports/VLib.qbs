@@ -26,9 +26,7 @@ Library {
     cpp.cxxLanguageVersion: {
         if (Qt.core.versionMajor >= 6) // Start building with C++20 since Qt 6.0
             return "c++20";
-        else if(Qt.core.versionMajor >= 5 && Qt.core.versionMinor >= 12) // Since Qt 5.12 available support for C++17
-            return "c++17";
-        return "c++11";
+        return "c++17";
     }
 
     Properties {
@@ -37,10 +35,7 @@ Library {
             if (Qt.core.versionMajor >= 6)
                 return "6.02"; // should be 10.0
 
-            if (Qt.core.versionMajor >= 5 && Qt.core.versionMinor >= 7)
-                return "6.00";
-
-            return "5.01";
+            return "6.00";
         }
     }
 

@@ -42,6 +42,7 @@
 #include <QMessageBox>
 #include <QProcess>
 #include <QProgressBar>
+#include <QScopeGuard>
 #include <QScrollBar>
 #include <QSettings>
 #include <QShowEvent>
@@ -202,21 +203,11 @@
 #include <QTextCodec>
 #endif
 
-#if QT_VERSION < QT_VERSION_CHECK(5, 7, 0)
-#include "../vmisc/backport/qoverload.h"
-#endif // QT_VERSION < QT_VERSION_CHECK(5, 7, 0)
-
-#if QT_VERSION < QT_VERSION_CHECK(5, 12, 0)
-#include "../vmisc/backport/qscopeguard.h"
-#else
-#include <QScopeGuard>
-#endif
-
 #if QT_VERSION < QT_VERSION_CHECK(6, 0, 0)
 #include <QSourceLocation>
 #endif
 
-#if defined(Q_OS_WIN32) && QT_VERSION < QT_VERSION_CHECK(6, 0, 0) && QT_VERSION >= QT_VERSION_CHECK(5, 7, 0)
+#if defined(Q_OS_WIN32) && QT_VERSION < QT_VERSION_CHECK(6, 0, 0)
 #include <QWinTaskbarButton>
 #include <QWinTaskbarProgress>
 #endif
@@ -226,16 +217,7 @@
 #include <QMimeData>
 #endif // defined(Q_OS_MAC)
 
-#if (defined(Q_CC_GNU) && Q_CC_GNU < 409) && !defined(Q_CC_CLANG)
-// DO NOT WORK WITH GCC 4.8
-#else
-#if __cplusplus >= 201402L
 using namespace std::chrono_literals;
-#else
-#include "../vmisc/bpstd/chrono.hpp"
-using namespace bpstd::literals::chrono_literals;
-#endif // __cplusplus >= 201402L
-#endif //(defined(Q_CC_GNU) && Q_CC_GNU < 409) && !defined(Q_CC_CLANG)
 
 #if QT_VERSION < QT_VERSION_CHECK(6, 4, 0)
 #include "../vmisc/compatibility.h"
@@ -403,7 +385,7 @@ MainWindow::MainWindow(QWidget *parent)
     connect(ui->actionExportFontCorrections, &QAction::triggered, this, &MainWindow::ActionExportFontCorrections);
 
     m_progressBar->setVisible(false);
-#if defined(Q_OS_WIN32) && QT_VERSION < QT_VERSION_CHECK(6, 0, 0) && QT_VERSION >= QT_VERSION_CHECK(5, 7, 0)
+#if defined(Q_OS_WIN32) && QT_VERSION < QT_VERSION_CHECK(6, 0, 0)
     m_taskbarProgress->setVisible(false);
 #endif
     m_statusLabel->setText(tr("Create new pattern piece to start working."));
@@ -531,7 +513,7 @@ MainWindow::MainWindow(QWidget *parent)
 
     if (VApplication::IsGUIMode())
     {
-        QTimer::singleShot(V_SECONDS(1), this, &MainWindow::AskDefaultSettings);
+        QTimer::singleShot(1s, this, &MainWindow::AskDefaultSettings);
     }
 
     ui->actionExportFontCorrections->setEnabled(settings->GetSingleStrokeOutlineFont());
@@ -1829,7 +1811,7 @@ void MainWindow::showEvent(QShowEvent *event)
         return;
     }
 
-#if defined(Q_OS_WIN32) && QT_VERSION < QT_VERSION_CHECK(6, 0, 0) && QT_VERSION >= QT_VERSION_CHECK(5, 7, 0)
+#if defined(Q_OS_WIN32) && QT_VERSION < QT_VERSION_CHECK(6, 0, 0)
     m_taskbarButton->setWindow(windowHandle());
 #endif
 
@@ -1894,15 +1876,6 @@ void MainWindow::changeEvent(QEvent *event)
  */
 void MainWindow::closeEvent(QCloseEvent *event)
 {
-#if defined(Q_OS_MAC) && QT_VERSION < QT_VERSION_CHECK(5, 11, 1)
-    // Workaround for Qt bug https://bugreports.qt.io/browse/QTBUG-43344
-    static int numCalled = 0;
-    if (numCalled++ >= 1)
-    {
-        return;
-    }
-#endif
-
     qCDebug(vMainWindow, "Closing main window");
     if (MaybeSave())
     {
@@ -2235,7 +2208,7 @@ void MainWindow::MeasurementsChanged(const QString &path)
     {
         m_mChanges = true;
         m_mChangesAsked = false;
-        m_measurementsSyncTimer->start(V_MSECONDS(1500));
+        m_measurementsSyncTimer->start(1500ms);
     }
     else
     {
@@ -2245,7 +2218,7 @@ void MainWindow::MeasurementsChanged(const QString &path)
             {
                 m_mChanges = true;
                 m_mChangesAsked = false;
-                m_measurementsSyncTimer->start(V_MSECONDS(1500));
+                m_measurementsSyncTimer->start(1500ms);
                 break;
             }
 
@@ -4498,7 +4471,7 @@ void MainWindow::Clear()
     m_toolOptions->ClearPropertyBrowser();
     m_toolOptions->itemClicked(nullptr);
     m_progressBar->setVisible(false);
-#if defined(Q_OS_WIN32) && QT_VERSION < QT_VERSION_CHECK(6, 0, 0) && QT_VERSION >= QT_VERSION_CHECK(5, 7, 0)
+#if defined(Q_OS_WIN32) && QT_VERSION < QT_VERSION_CHECK(6, 0, 0)
     m_taskbarProgress->setVisible(false);
 #endif
     m_statusLabel->setVisible(true);
@@ -4914,7 +4887,7 @@ void MainWindow::ShowProgress()
     {
         const int newValue = m_progressBar->value() + 1;
         m_progressBar->setValue(newValue);
-#if defined(Q_OS_WIN32) && QT_VERSION < QT_VERSION_CHECK(6, 0, 0) && QT_VERSION >= QT_VERSION_CHECK(5, 7, 0)
+#if defined(Q_OS_WIN32) && QT_VERSION < QT_VERSION_CHECK(6, 0, 0)
         m_taskbarProgress->setValue(newValue);
 #endif
         QCoreApplication::processEvents();
@@ -5393,7 +5366,7 @@ void MainWindow::InitDimensionGradation(int index, const MeasurementDimension_p 
     int maxWidth = 0;
     for (int i = 0; i < control->count(); ++i)
     {
-        int itemWidth = TextWidth(fontMetrics, control->itemText(i));
+        int itemWidth = fontMetrics.horizontalAdvance(control->itemText(i));
         if (itemWidth > maxWidth)
         {
             maxWidth = itemWidth;
@@ -6600,7 +6573,7 @@ auto MainWindow::LoadPattern(QString fileName, const QString &customMeasureFile)
     m_progressBar->setValue(0);
     const int elements = doc->ElementsToParse();
     m_progressBar->setMaximum(elements);
-#if defined(Q_OS_WIN32) && QT_VERSION < QT_VERSION_CHECK(6, 0, 0) && QT_VERSION >= QT_VERSION_CHECK(5, 7, 0)
+#if defined(Q_OS_WIN32) && QT_VERSION < QT_VERSION_CHECK(6, 0, 0)
     m_taskbarProgress->setVisible(true);
     m_taskbarProgress->setMaximum(elements);
 #endif
@@ -6608,7 +6581,7 @@ auto MainWindow::LoadPattern(QString fileName, const QString &customMeasureFile)
     FullParseFile();
 
     m_progressBar->setVisible(false);
-#if defined(Q_OS_WIN32) && QT_VERSION < QT_VERSION_CHECK(6, 0, 0) && QT_VERSION >= QT_VERSION_CHECK(5, 7, 0)
+#if defined(Q_OS_WIN32) && QT_VERSION < QT_VERSION_CHECK(6, 0, 0)
     m_taskbarProgress->setVisible(false);
 #endif
     m_statusLabel->setVisible(true);
@@ -6619,7 +6592,7 @@ auto MainWindow::LoadPattern(QString fileName, const QString &customMeasureFile)
         {
             /* Collect garbage only after successfully parse. This way wrongly accused items have one more time to
              * restore a reference. */
-            QTimer::singleShot(V_MSECONDS(100), Qt::CoarseTimer, this, [this]() { doc->GarbageCollector(true); });
+            QTimer::singleShot(100ms, Qt::CoarseTimer, this, [this]() { doc->GarbageCollector(true); });
         }
 
         m_patternReadOnly = doc->IsReadOnly();

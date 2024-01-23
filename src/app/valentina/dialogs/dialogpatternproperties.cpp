@@ -43,16 +43,13 @@
 #include <QUrl>
 
 #include "../core/vapplication.h"
+#include "../ifc/xml/utils.h"
+#include "../ifc/xml/vpatternimage.h"
+#include "../qmuparser/qmudef.h"
 #include "../vmisc/vabstractvalapplication.h"
 #include "../vmisc/vvalentinasettings.h"
 #include "../vpatterndb/vcontainer.h"
 #include "../xml/vpattern.h"
-#if QT_VERSION < QT_VERSION_CHECK(5, 7, 0)
-#include "../vmisc/backport/qoverload.h"
-#endif // QT_VERSION < QT_VERSION_CHECK(5, 7, 0)
-#include "../ifc/xml/utils.h"
-#include "../ifc/xml/vpatternimage.h"
-#include "../qmuparser/qmudef.h"
 
 #if QT_VERSION < QT_VERSION_CHECK(6, 4, 0)
 #include "../vmisc/compatibility.h"

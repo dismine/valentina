@@ -39,10 +39,6 @@
 #include "../vmisc/def.h"
 #include "vdimensions.h"
 
-#if QT_VERSION < QT_VERSION_CHECK(5, 13, 0)
-#include "../vmisc/defglobal.h"
-#endif
-
 class VContainer;
 class VPatternImage;
 class VMeasurement;

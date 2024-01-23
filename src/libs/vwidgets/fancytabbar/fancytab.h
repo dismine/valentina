@@ -33,10 +33,6 @@
 #include <QIcon>
 #include <QPropertyAnimation>
 
-#if QT_VERSION < QT_VERSION_CHECK(5, 13, 0)
-#include "../vmisc/defglobal.h"
-#endif
-
 class FancyTab final : public QObject
 {
     friend class FancyTabBar;

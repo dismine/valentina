@@ -36,6 +36,7 @@
 #include <QPrintPreviewDialog>
 #include <QPrinterInfo>
 #include <QSaveFile>
+#include <QScopeGuard>
 #include <QSvgGenerator>
 #include <QTimer>
 #include <QUndoStack>
@@ -75,16 +76,6 @@
 #include "xml/vplayoutfilereader.h"
 #include "xml/vplayoutfilewriter.h"
 
-#if QT_VERSION < QT_VERSION_CHECK(5, 7, 0)
-#include "../vmisc/backport/qoverload.h"
-#endif // QT_VERSION < QT_VERSION_CHECK(5, 7, 0)
-
-#if QT_VERSION < QT_VERSION_CHECK(5, 12, 0)
-#include "../vmisc/backport/qscopeguard.h"
-#else
-#include <QScopeGuard>
-#endif
-
 QT_WARNING_PUSH
 QT_WARNING_DISABLE_CLANG("-Wmissing-prototypes")
 QT_WARNING_DISABLE_INTEL(1418)
@@ -93,16 +84,7 @@ Q_LOGGING_CATEGORY(pWindow, "p.window") // NOLINT
 
 QT_WARNING_POP
 
-#if (defined(Q_CC_GNU) && Q_CC_GNU < 409) && !defined(Q_CC_CLANG)
-// DO NOT WORK WITH GCC 4.8
-#else
-#if __cplusplus >= 201402L
 using namespace std::chrono_literals;
-#else
-#include "../vmisc/bpstd/chrono.hpp"
-using namespace bpstd::literals::chrono_literals;
-#endif // __cplusplus >= 201402L
-#endif //(defined(Q_CC_GNU) && Q_CC_GNU < 409) && !defined(Q_CC_CLANG)
 
 #if QT_VERSION < QT_VERSION_CHECK(6, 4, 0)
 #include "../vmisc/compatibility.h"
@@ -432,7 +414,7 @@ VPMainWindow::VPMainWindow(const VPCommandLinePtr &cmd, QWidget *parent)
 
     if (m_cmd->IsGuiEnabled())
     {
-        QTimer::singleShot(V_SECONDS(1), this, &VPMainWindow::AskDefaultSettings);
+        QTimer::singleShot(1s, this, &VPMainWindow::AskDefaultSettings);
     }
 
     if (VAbstractShortcutManager *manager = VAbstractApplication::VApp()->GetShortcutManager())
@@ -3483,15 +3465,6 @@ void VPMainWindow::ShowToolTip(const QString &toolTip)
 //---------------------------------------------------------------------------------------------------------------------
 void VPMainWindow::closeEvent(QCloseEvent *event)
 {
-#if defined(Q_OS_MAC) && QT_VERSION < QT_VERSION_CHECK(5, 11, 1)
-    // Workaround for Qt bug https://bugreports.qt.io/browse/QTBUG-43344
-    static int numCalled = 0;
-    if (numCalled++ >= 1)
-    {
-        return;
-    }
-#endif
-
     if (MaybeSave())
     {
         WriteSettings();

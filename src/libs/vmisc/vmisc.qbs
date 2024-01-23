@@ -39,7 +39,6 @@ VLib {
             "testvapplication.h",
             "literals.h",
             "qt_dispatch/qt_dispatch.h",
-            "vdatastreamenum.h",
             "vmodifierkey.h",
             "typedef.h",
             "vabstractshortcutmanager.h",
@@ -82,50 +81,6 @@ VLib {
             "vshortcutdialog.cpp",
             "vshortcutdialog.h",
             "vshortcutdialog.ui",
-        ]
-    }
-
-    Group {
-        name: "bpstd"
-        prefix: "bpstd/"
-        files: [
-            "any.hpp",
-            "chrono.hpp",
-            "complex.hpp",
-            "cstddef.hpp",
-            "detail/config.hpp",
-            "detail/enable_overload.hpp",
-            "detail/invoke.hpp",
-            "detail/move.hpp",
-            "detail/nth_type.hpp",
-            "detail/proxy_iterator.hpp",
-            "detail/variant_base.hpp",
-            "detail/variant_fwds.hpp",
-            "detail/variant_traits.hpp",
-            "detail/variant_union.hpp",
-            "detail/variant_visitors.hpp",
-            "exception.hpp",
-            "functional.hpp",
-            "iterator.hpp",
-            "memory.hpp",
-            "optional.hpp",
-            "span.hpp",
-            "string.hpp",
-            "string_view.hpp",
-            "tuple.hpp",
-            "type_traits.hpp",
-            "utility.hpp",
-            "variant.hpp",
-        ]
-    }
-
-    Group {
-        name: "backport"
-        prefix: "backport/"
-        files: [
-            "qoverload.h",
-            "qscopeguard.h",
-            "text.h",
         ]
     }
 

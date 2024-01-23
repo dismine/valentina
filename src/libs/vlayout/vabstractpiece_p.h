@@ -34,10 +34,6 @@
 #include <QString>
 #include <QUuid>
 
-#if QT_VERSION < QT_VERSION_CHECK(5, 14, 0)
-#include "../vmisc/vdatastreamenum.h"
-#endif
-
 #include "../ifc/exception/vexception.h"
 #include "../vmisc/defglobal.h"
 
@@ -89,12 +85,6 @@ private:
 };
 
 QT_WARNING_POP
-
-// See https://stackoverflow.com/a/46719572/3045403
-#if __cplusplus < 201703L                           // C++17
-constexpr quint32 VAbstractPieceData::streamHeader; // NOLINT(readability-redundant-declaration)
-constexpr quint16 VAbstractPieceData::classVersion; // NOLINT(readability-redundant-declaration)
-#endif
 
 // Friend functions
 //---------------------------------------------------------------------------------------------------------------------

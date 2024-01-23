@@ -27,14 +27,10 @@
  *************************************************************************/
 
 #include "dialogincrements.h"
-#include "../vmisc/vvalentinasettings.h"
-#include "ui_dialogincrements.h"
-#if QT_VERSION < QT_VERSION_CHECK(5, 7, 0)
-#include "../vmisc/backport/qoverload.h"
-#endif // QT_VERSION < QT_VERSION_CHECK(5, 7, 0)
 #include "../qmuparser/qmudef.h"
 #include "../qmuparser/qmutokenparser.h"
 #include "../vmisc/theme/vtheme.h"
+#include "../vmisc/vvalentinasettings.h"
 #include "../vpatterndb/calculator.h"
 #include "../vpatterndb/variables/varcradius.h"
 #include "../vpatterndb/variables/vcurveangle.h"
@@ -45,6 +41,7 @@
 #include "../vpatterndb/variables/vlinelength.h"
 #include "../vpatterndb/vtranslatevars.h"
 #include "../vtools/dialogs/support/dialogeditwrongformula.h"
+#include "ui_dialogincrements.h"
 
 #include <QCloseEvent>
 #include <QDir>
@@ -2106,9 +2103,6 @@ DialogIncrements::~DialogIncrements()
 //---------------------------------------------------------------------------------------------------------------------
 void DialogIncrements::RestoreAfterClose()
 {
-    // Because of bug on Mac OS with Qt 5.11 closing this dialog causes a crash. Instead of closing we will keep
-    // dialog in memory and reuse it again. This function redo some moves made after close.
-
     connect(this->m_doc, &VPattern::FullUpdateFromFile, this, &DialogIncrements::FullUpdateFromFile);
 
     ui->tabWidget->setCurrentIndex(0);

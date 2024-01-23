@@ -69,20 +69,7 @@
 #include <QTextCodec>
 #endif
 
-#if QT_VERSION < QT_VERSION_CHECK(5, 7, 0)
-#include "../vmisc/backport/qoverload.h"
-#endif // QT_VERSION < QT_VERSION_CHECK(5, 7, 0)
-
-#if (defined(Q_CC_GNU) && Q_CC_GNU < 409) && !defined(Q_CC_CLANG)
-// DO NOT WORK WITH GCC 4.8
-#else
-#if __cplusplus >= 201402L
 using namespace std::chrono_literals;
-#else
-#include "../vmisc/bpstd/chrono.hpp"
-using namespace bpstd::literals::chrono_literals;
-#endif // __cplusplus >= 201402L
-#endif //(defined(Q_CC_GNU) && Q_CC_GNU < 409) && !defined(Q_CC_CLANG)
 
 QT_WARNING_PUSH
 QT_WARNING_DISABLE_CLANG("-Wmissing-prototypes")
@@ -145,7 +132,7 @@ TKMMainWindow::TKMMainWindow(QWidget *parent)
 
     if (MApplication::VApp()->IsAppInGUIMode())
     {
-        QTimer::singleShot(V_SECONDS(1), this, &TKMMainWindow::AskDefaultSettings);
+        QTimer::singleShot(1s, this, &TKMMainWindow::AskDefaultSettings);
     }
 
     m_buttonShortcuts.insert(VShortcutAction::CaseSensitiveMatch, ui->toolButtonCaseSensitive);
@@ -358,15 +345,6 @@ void TKMMainWindow::UpdateWindowTitle()
 //---------------------------------------------------------------------------------------------------------------------
 void TKMMainWindow::closeEvent(QCloseEvent *event)
 {
-#if defined(Q_OS_MAC) && QT_VERSION < QT_VERSION_CHECK(5, 11, 1)
-    // Workaround for Qt bug https://bugreports.qt.io/browse/QTBUG-43344
-    static int numCalled = 0;
-    if (numCalled++ >= 1)
-    {
-        return;
-    }
-#endif
-
     if (MaybeSave())
     {
         WriteSettings();

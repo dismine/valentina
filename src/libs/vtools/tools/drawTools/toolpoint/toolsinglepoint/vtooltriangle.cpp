@@ -201,7 +201,7 @@ auto VToolTriangle::FindPoint(const QPointF &axisP1, const QPointF &axisP2, cons
     QLineF hypotenuse(firstPoint, secondPoint);
 
     QPointF startPoint;
-    QLineF::IntersectType intersect = Intersects(axis, hypotenuse, &startPoint);
+    QLineF::IntersectType intersect = axis.intersects(hypotenuse, &startPoint);
 
     if (intersect != QLineF::UnboundedIntersection && intersect != QLineF::BoundedIntersection)
     {

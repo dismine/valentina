@@ -27,20 +27,16 @@
  *************************************************************************/
 
 #include "dialoglayoutscale.h"
-#include "ui_dialoglayoutscale.h"
 #include "../vmisc/vabstractvalapplication.h"
 #include "../vmisc/vcommonsettings.h"
+#include "ui_dialoglayoutscale.h"
 
 #include <QPushButton>
 #include <QShowEvent>
 
-#if QT_VERSION < QT_VERSION_CHECK(5, 7, 0)
-#include "../vmisc/backport/qoverload.h"
-#endif // QT_VERSION < QT_VERSION_CHECK(5, 7, 0)
-
 //---------------------------------------------------------------------------------------------------------------------
 DialogLayoutScale::DialogLayoutScale(bool printTiled, QWidget *parent)
-    :QDialog(parent),
+  : QDialog(parent),
     ui(new Ui::DialogLayoutScale)
 {
     ui->setupUi(this);
@@ -59,10 +55,10 @@ DialogLayoutScale::DialogLayoutScale(bool printTiled, QWidget *parent)
 
     connect(ui->toolButtonScaleConnected, &QToolButton::clicked, this, &DialogLayoutScale::ToggleScaleConnection);
 
-    connect(ui->doubleSpinBoxHorizontalScale, QOverload<double>::of(&QDoubleSpinBox::valueChanged),
-            this, &DialogLayoutScale::HorizontalScaleChanged);
-    connect(ui->doubleSpinBoxVerticalScale, QOverload<double>::of(&QDoubleSpinBox::valueChanged),
-            this, &DialogLayoutScale::VerticalScaleChanged);
+    connect(ui->doubleSpinBoxHorizontalScale, QOverload<double>::of(&QDoubleSpinBox::valueChanged), this,
+            &DialogLayoutScale::HorizontalScaleChanged);
+    connect(ui->doubleSpinBoxVerticalScale, QOverload<double>::of(&QDoubleSpinBox::valueChanged), this,
+            &DialogLayoutScale::VerticalScaleChanged);
 
     ReadSettings();
 }
@@ -88,12 +84,8 @@ void DialogLayoutScale::SetTiledMargins(QMarginsF margins)
 //---------------------------------------------------------------------------------------------------------------------
 auto DialogLayoutScale::GetTiledMargins() const -> QMarginsF
 {
-    QMarginsF margins = QMarginsF(
-        ui->doubleSpinBoxLeftField->value(),
-        ui->doubleSpinBoxTopField->value(),
-        ui->doubleSpinBoxRightField->value(),
-        ui->doubleSpinBoxBottomField->value()
-        );
+    QMarginsF margins = QMarginsF(ui->doubleSpinBoxLeftField->value(), ui->doubleSpinBoxTopField->value(),
+                                  ui->doubleSpinBoxRightField->value(), ui->doubleSpinBoxBottomField->value());
 
     return UnitConvertor(margins, VAbstractValApplication::VApp()->patternUnits(), Unit::Mm);
 }
@@ -125,8 +117,8 @@ auto DialogLayoutScale::GetYScale() const -> qreal
 //---------------------------------------------------------------------------------------------------------------------
 void DialogLayoutScale::showEvent(QShowEvent *event)
 {
-    QDialog::showEvent( event );
-    if ( event->spontaneous() )
+    QDialog::showEvent(event);
+    if (event->spontaneous())
     {
         return;
     }
@@ -139,7 +131,7 @@ void DialogLayoutScale::showEvent(QShowEvent *event)
 
     setFixedSize(size());
 
-    isInitialized = true;//first show windows are held
+    isInitialized = true; // first show windows are held
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -210,11 +202,7 @@ void DialogLayoutScale::WriteSettings() const
     const Unit unit = VAbstractValApplication::VApp()->patternUnits();
 
     // write Margins top, right, bottom, left
-    QMarginsF margins = QMarginsF(
-        ui->doubleSpinBoxLeftField->value(),
-        ui->doubleSpinBoxTopField->value(),
-        ui->doubleSpinBoxRightField->value(),
-        ui->doubleSpinBoxBottomField->value()
-        );
-    settings->SetTiledPDFMargins(margins,unit);
+    QMarginsF margins = QMarginsF(ui->doubleSpinBoxLeftField->value(), ui->doubleSpinBoxTopField->value(),
+                                  ui->doubleSpinBoxRightField->value(), ui->doubleSpinBoxBottomField->value());
+    settings->SetTiledPDFMargins(margins, unit);
 }

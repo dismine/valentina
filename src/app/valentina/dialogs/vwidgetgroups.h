@@ -30,10 +30,8 @@
 #define VWIDGETGROUPS_H
 
 #include "../vmisc/typedef.h"
+
 #include <QWidget>
-#if QT_VERSION < QT_VERSION_CHECK(5, 13, 0)
-#include "../vmisc/defglobal.h"
-#endif
 
 class QTableWidgetItem;
 class VAbstractPattern;

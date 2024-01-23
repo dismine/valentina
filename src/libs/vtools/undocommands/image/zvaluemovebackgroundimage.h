@@ -30,10 +30,6 @@
 
 #include "../vundocommand.h"
 
-#if QT_VERSION < QT_VERSION_CHECK(5, 13, 0)
-#include "../vmisc/defglobal.h"
-#endif // QT_VERSION < QT_VERSION_CHECK(5, 13, 0)
-
 enum class ZValueMoveType
 {
     Top,
@@ -45,11 +41,13 @@ enum class ZValueMoveType
 class ZValueMoveBackgroundImage : public VUndoCommand
 {
     Q_OBJECT // NOLINT
+
 public:
     ZValueMoveBackgroundImage(QUuid id, ZValueMoveType move, VAbstractPattern *doc, QUndoCommand *parent = nullptr);
-    ~ZValueMoveBackgroundImage() override =default;
+    ~ZValueMoveBackgroundImage() override = default;
     void undo() override;
     void redo() override;
+
 private:
     // cppcheck-suppress unknownMacro
     Q_DISABLE_COPY_MOVE(ZValueMoveBackgroundImage) // NOLINT

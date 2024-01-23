@@ -31,10 +31,6 @@
 #include <QLabel>
 #include <QPixmap>
 
-#if QT_VERSION < QT_VERSION_CHECK(5, 13, 0)
-#include "../vmisc/defglobal.h"
-#endif
-
 class VAspectRatioPixmapLabel : public QLabel
 {
     Q_OBJECT // NOLINT

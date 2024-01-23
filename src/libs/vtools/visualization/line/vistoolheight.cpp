@@ -109,7 +109,7 @@ void VisToolHeight::VisualMode(quint32 id)
 void VisToolHeight::ShowIntersection(const QLineF &height_line, const QLineF &base_line)
 {
     QPointF p;
-    QLineF::IntersectType intersect = Intersects(height_line, base_line, &p);
+    QLineF::IntersectType intersect = height_line.intersects(base_line, &p);
 
     if (intersect == QLineF::UnboundedIntersection)
     {

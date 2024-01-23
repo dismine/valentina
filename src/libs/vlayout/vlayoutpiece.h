@@ -45,13 +45,8 @@
 #include "qpainterpath.h"
 #include "vabstractpiece.h"
 
-#if __cplusplus >= 201703L // C++17
 #include <optional>
 using EdgeIndex = std::optional<int>;
-#else
-#include "../vmisc/bpstd/optional.hpp"
-using EdgeIndex = bpstd::optional<int>;
-#endif
 
 class VLayoutPieceData;
 class VLayoutPiecePath;

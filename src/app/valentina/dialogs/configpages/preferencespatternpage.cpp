@@ -29,24 +29,21 @@
 #include "preferencespatternpage.h"
 #include "../dialogdatetimeformats.h"
 #include "../dialogknownmaterials.h"
+#include "../ifc/xml/vabstractpattern.h"
+#include "../vformat/vsinglelineoutlinechar.h"
 #include "../vmisc/svgfont/vsvgfontdatabase.h"
 #include "../vmisc/vabstractvalapplication.h"
 #include "../vmisc/vvalentinasettings.h"
+#include "../vwidgets/vmaingraphicsview.h"
 #include "svgfont/svgdef.h"
 #include "svgfont/vsvgfont.h"
 #include "svgfont/vsvgfontengine.h"
 #include "ui_preferencespatternpage.h"
 #include "vabstractapplication.h"
-#include <QFontMetrics>
-#if QT_VERSION < QT_VERSION_CHECK(5, 7, 0)
-#include "../vmisc/backport/qoverload.h"
-#endif // QT_VERSION < QT_VERSION_CHECK(5, 7, 0)
-#include "../ifc/xml/vabstractpattern.h"
-#include "../vformat/vsinglelineoutlinechar.h"
-#include "../vwidgets/vmaingraphicsview.h"
 
 #include <QCompleter>
 #include <QDate>
+#include <QFontMetrics>
 #include <QMessageBox>
 #include <QScreen>
 #include <QStyledItemDelegate>

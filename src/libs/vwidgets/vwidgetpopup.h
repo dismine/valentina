@@ -35,10 +35,6 @@
 #include <QString>
 #include <QtGlobal>
 
-#if QT_VERSION < QT_VERSION_CHECK(5, 13, 0)
-#include "../vmisc/defglobal.h"
-#endif
-
 /**
     \brief Class showing a widget as popup window.
 

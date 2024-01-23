@@ -28,25 +28,22 @@
 #ifndef DELETEBACKGROUNDIMAGE_H
 #define DELETEBACKGROUNDIMAGE_H
 
-#include "../vundocommand.h"
 #include "../ifc/xml/vbackgroundpatternimage.h"
-
-#if QT_VERSION < QT_VERSION_CHECK(5, 13, 0)
-#include "../vmisc/defglobal.h"
-#endif // QT_VERSION < QT_VERSION_CHECK(5, 13, 0)
-
+#include "../vundocommand.h"
 
 class DeleteBackgroundImage : public VUndoCommand
 {
     Q_OBJECT // NOLINT
+
 public:
-    DeleteBackgroundImage(const VBackgroundPatternImage& image, VAbstractPattern *doc, QUndoCommand *parent = nullptr);
-    ~DeleteBackgroundImage() override =default;
+    DeleteBackgroundImage(const VBackgroundPatternImage &image, VAbstractPattern *doc, QUndoCommand *parent = nullptr);
+    ~DeleteBackgroundImage() override = default;
     void undo() override;
     void redo() override;
 signals:
     void AddItem(const QUuid &id);
     void DeleteItem(const QUuid &id);
+
 private:
     // cppcheck-suppress unknownMacro
     Q_DISABLE_COPY_MOVE(DeleteBackgroundImage) // NOLINT

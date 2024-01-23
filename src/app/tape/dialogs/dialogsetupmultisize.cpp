@@ -31,11 +31,6 @@
 #include <QPushButton>
 #include <QShowEvent>
 
-#include "../mapplication.h"
-#if QT_VERSION < QT_VERSION_CHECK(5, 7, 0)
-#include "../vmisc/backport/qoverload.h"
-#endif // QT_VERSION < QT_VERSION_CHECK(5, 7, 0)
-
 namespace
 {
 void InitDimensionTitle(QGroupBox *group, const MeasurementDimension_p &dimension)
@@ -43,11 +38,11 @@ void InitDimensionTitle(QGroupBox *group, const MeasurementDimension_p &dimensio
     SCASSERT(group != nullptr)
     group->setTitle(QStringLiteral("%1 (%2)").arg(dimension->Name(), dimension->Axis()));
 }
-}
+} // namespace
 
 //---------------------------------------------------------------------------------------------------------------------
-DialogSetupMultisize::DialogSetupMultisize(Unit unit, QWidget *parent) :
-    QDialog(parent),
+DialogSetupMultisize::DialogSetupMultisize(Unit unit, QWidget *parent)
+  : QDialog(parent),
     ui(new Ui::DialogSetupMultisize),
     m_xDimension(QSharedPointer<VXMeasurementDimension>::create(unit)),
     m_yDimension(QSharedPointer<VYMeasurementDimension>::create(unit)),
@@ -64,150 +59,133 @@ DialogSetupMultisize::DialogSetupMultisize(Unit unit, QWidget *parent) :
     InitZDimension();
 
     // height
-    connect(ui->doubleSpinBoxXDimensionMinValue, QOverload<qreal>::of(&QDoubleSpinBox::valueChanged),
-            this, [this](qreal value)
+    connect(ui->doubleSpinBoxXDimensionMinValue, QOverload<qreal>::of(&QDoubleSpinBox::valueChanged), this,
+            [this](qreal value)
             {
                 DimensionMinValueChanged(value, ui->doubleSpinBoxXDimensionMaxValue, ui->comboBoxXDimensionStep,
                                          ui->comboBoxXDimensionBase, m_xDimension);
             });
-    connect(ui->doubleSpinBoxXDimensionMaxValue, QOverload<qreal>::of(&QDoubleSpinBox::valueChanged),
-            this, [this](qreal value)
+    connect(ui->doubleSpinBoxXDimensionMaxValue, QOverload<qreal>::of(&QDoubleSpinBox::valueChanged), this,
+            [this](qreal value)
             {
                 DimensionMaxValueChanged(value, ui->doubleSpinBoxXDimensionMinValue, ui->comboBoxXDimensionStep,
                                          ui->comboBoxXDimensionBase, m_xDimension);
             });
-    connect(ui->comboBoxXDimensionStep, QOverload<int>::of(&QComboBox::currentIndexChanged),
-            this, [this](int index)
-            {
-                DimensionStepChanged(index, ui->comboBoxXDimensionStep, ui->comboBoxXDimensionBase, m_xDimension);
-            });
-    connect(ui->comboBoxXDimensionBase, QOverload<int>::of(&QComboBox::currentIndexChanged),
-            this, [this](int index)
-            {
-                DimensionBaseChanged(index, ui->comboBoxXDimensionBase, m_xDimension);
-            });
+    connect(ui->comboBoxXDimensionStep, QOverload<int>::of(&QComboBox::currentIndexChanged), this,
+            [this](int index)
+            { DimensionStepChanged(index, ui->comboBoxXDimensionStep, ui->comboBoxXDimensionBase, m_xDimension); });
+    connect(ui->comboBoxXDimensionBase, QOverload<int>::of(&QComboBox::currentIndexChanged), this,
+            [this](int index) { DimensionBaseChanged(index, ui->comboBoxXDimensionBase, m_xDimension); });
 
     // size
-    connect(ui->doubleSpinBoxYDimensionMinValue, QOverload<qreal>::of(&QDoubleSpinBox::valueChanged),
-            this, [this](qreal value)
+    connect(ui->doubleSpinBoxYDimensionMinValue, QOverload<qreal>::of(&QDoubleSpinBox::valueChanged), this,
+            [this](qreal value)
             {
                 DimensionMinValueChanged(value, ui->doubleSpinBoxYDimensionMaxValue, ui->comboBoxYDimensionStep,
                                          ui->comboBoxYDimensionBase, m_yDimension);
             });
-    connect(ui->doubleSpinBoxYDimensionMaxValue, QOverload<qreal>::of(&QDoubleSpinBox::valueChanged),
-            this, [this](qreal value)
+    connect(ui->doubleSpinBoxYDimensionMaxValue, QOverload<qreal>::of(&QDoubleSpinBox::valueChanged), this,
+            [this](qreal value)
             {
                 DimensionMaxValueChanged(value, ui->doubleSpinBoxYDimensionMinValue, ui->comboBoxYDimensionStep,
                                          ui->comboBoxYDimensionBase, m_yDimension);
             });
-    connect(ui->comboBoxYDimensionStep, QOverload<int>::of(&QComboBox::currentIndexChanged),
-            this, [this](int index)
-            {
-                DimensionStepChanged(index, ui->comboBoxYDimensionStep, ui->comboBoxYDimensionBase, m_yDimension);
-            });
-    connect(ui->comboBoxYDimensionBase, QOverload<int>::of(&QComboBox::currentIndexChanged),
-            this, [this](int index)
-            {
-                DimensionBaseChanged(index, ui->comboBoxYDimensionBase, m_yDimension);
-            });
+    connect(ui->comboBoxYDimensionStep, QOverload<int>::of(&QComboBox::currentIndexChanged), this,
+            [this](int index)
+            { DimensionStepChanged(index, ui->comboBoxYDimensionStep, ui->comboBoxYDimensionBase, m_yDimension); });
+    connect(ui->comboBoxYDimensionBase, QOverload<int>::of(&QComboBox::currentIndexChanged), this,
+            [this](int index) { DimensionBaseChanged(index, ui->comboBoxYDimensionBase, m_yDimension); });
 
     // hip
-    connect(ui->doubleSpinBoxWDimensionMinValue, QOverload<qreal>::of(&QDoubleSpinBox::valueChanged),
-            this, [this](qreal value)
+    connect(ui->doubleSpinBoxWDimensionMinValue, QOverload<qreal>::of(&QDoubleSpinBox::valueChanged), this,
+            [this](qreal value)
             {
                 DimensionMinValueChanged(value, ui->doubleSpinBoxWDimensionMaxValue, ui->comboBoxWDimensionStep,
                                          ui->comboBoxWDimensionBase, m_wDimension);
             });
-    connect(ui->doubleSpinBoxWDimensionMaxValue, QOverload<qreal>::of(&QDoubleSpinBox::valueChanged),
-            this, [this](qreal value)
+    connect(ui->doubleSpinBoxWDimensionMaxValue, QOverload<qreal>::of(&QDoubleSpinBox::valueChanged), this,
+            [this](qreal value)
             {
                 DimensionMaxValueChanged(value, ui->doubleSpinBoxWDimensionMinValue, ui->comboBoxWDimensionStep,
                                          ui->comboBoxWDimensionBase, m_wDimension);
             });
-    connect(ui->comboBoxWDimensionStep, QOverload<int>::of(&QComboBox::currentIndexChanged),
-            this, [this](int index)
-            {
-                DimensionStepChanged(index, ui->comboBoxWDimensionStep, ui->comboBoxWDimensionBase, m_wDimension);
-            });
-    connect(ui->comboBoxWDimensionBase, QOverload<int>::of(&QComboBox::currentIndexChanged),
-            this, [this](int index)
-            {
-                DimensionBaseChanged(index, ui->comboBoxWDimensionBase, m_wDimension);
-            });
+    connect(ui->comboBoxWDimensionStep, QOverload<int>::of(&QComboBox::currentIndexChanged), this,
+            [this](int index)
+            { DimensionStepChanged(index, ui->comboBoxWDimensionStep, ui->comboBoxWDimensionBase, m_wDimension); });
+    connect(ui->comboBoxWDimensionBase, QOverload<int>::of(&QComboBox::currentIndexChanged), this,
+            [this](int index) { DimensionBaseChanged(index, ui->comboBoxWDimensionBase, m_wDimension); });
 
     // waist
-    connect(ui->doubleSpinBoxZDimensionMinValue, QOverload<qreal>::of(&QDoubleSpinBox::valueChanged),
-            this, [this](qreal value)
+    connect(ui->doubleSpinBoxZDimensionMinValue, QOverload<qreal>::of(&QDoubleSpinBox::valueChanged), this,
+            [this](qreal value)
             {
                 DimensionMinValueChanged(value, ui->doubleSpinBoxZDimensionMaxValue, ui->comboBoxZDimensionStep,
                                          ui->comboBoxZDimensionBase, m_zDimension);
             });
-    connect(ui->doubleSpinBoxZDimensionMaxValue, QOverload<qreal>::of(&QDoubleSpinBox::valueChanged),
-            this, [this](qreal value)
+    connect(ui->doubleSpinBoxZDimensionMaxValue, QOverload<qreal>::of(&QDoubleSpinBox::valueChanged), this,
+            [this](qreal value)
             {
                 DimensionMaxValueChanged(value, ui->doubleSpinBoxZDimensionMinValue, ui->comboBoxZDimensionStep,
                                          ui->comboBoxZDimensionBase, m_zDimension);
             });
-    connect(ui->comboBoxZDimensionStep, QOverload<int>::of(&QComboBox::currentIndexChanged),
-            this, [this](int index)
+    connect(ui->comboBoxZDimensionStep, QOverload<int>::of(&QComboBox::currentIndexChanged), this,
+            [this](int index)
+            { DimensionStepChanged(index, ui->comboBoxZDimensionStep, ui->comboBoxZDimensionBase, m_zDimension); });
+    connect(ui->comboBoxZDimensionBase, QOverload<int>::of(&QComboBox::currentIndexChanged), this,
+            [this](int index) { DimensionBaseChanged(index, ui->comboBoxZDimensionBase, m_zDimension); });
+
+    connect(ui->groupBoxXDimension, &QGroupBox::clicked, this, [this]() { CheckState(); });
+    connect(ui->groupBoxYDimension, &QGroupBox::clicked, this, [this]() { CheckState(); });
+    connect(ui->groupBoxWDimension, &QGroupBox::clicked, this, [this]() { CheckState(); });
+    connect(ui->groupBoxZDimension, &QGroupBox::clicked, this, [this]() { CheckState(); });
+
+    connect(ui->checkBoxFullCircumference, &QCheckBox::stateChanged, this,
+            &DialogSetupMultisize::ShowFullCircumference);
+
+    connect(ui->checkBoxXDimensionBodyMeasurement, &QCheckBox::stateChanged, this,
+            &DialogSetupMultisize::XDimensionBodyMeasurementChanged);
+    connect(ui->checkBoxYDimensionBodyMeasurement, &QCheckBox::stateChanged, this,
+            &DialogSetupMultisize::YDimensionBodyMeasurementChanged);
+    connect(ui->checkBoxWDimensionBodyMeasurement, &QCheckBox::stateChanged, this,
+            &DialogSetupMultisize::WDimensionBodyMeasurementChanged);
+    connect(ui->checkBoxZDimensionBodyMeasurement, &QCheckBox::stateChanged, this,
+            &DialogSetupMultisize::ZDimensionBodyMeasurementChanged);
+
+    connect(ui->lineEditCustomXDimensionName, &QLineEdit::textChanged, this,
+            [this](const QString &text)
             {
-                DimensionStepChanged(index, ui->comboBoxZDimensionStep, ui->comboBoxZDimensionBase, m_zDimension);
+                m_xDimension->SetCustomName(text);
+                InitDimensionTitle(ui->groupBoxXDimension, m_xDimension);
+
+                CheckState();
             });
-    connect(ui->comboBoxZDimensionBase, QOverload<int>::of(&QComboBox::currentIndexChanged),
-            this, [this](int index)
+
+    connect(ui->lineEditCustomYDimensionName, &QLineEdit::textChanged, this,
+            [this](const QString &text)
             {
-                DimensionBaseChanged(index, ui->comboBoxZDimensionBase, m_zDimension);
+                m_yDimension->SetCustomName(text);
+                InitDimensionTitle(ui->groupBoxYDimension, m_yDimension);
+
+                CheckState();
             });
 
+    connect(ui->lineEditCustomWDimensionName, &QLineEdit::textChanged, this,
+            [this](const QString &text)
+            {
+                m_wDimension->SetCustomName(text);
+                InitDimensionTitle(ui->groupBoxWDimension, m_wDimension);
 
-    connect(ui->groupBoxXDimension, &QGroupBox::clicked, this, [this](){CheckState();});
-    connect(ui->groupBoxYDimension, &QGroupBox::clicked, this, [this](){CheckState();});
-    connect(ui->groupBoxWDimension, &QGroupBox::clicked, this, [this](){CheckState();});
-    connect(ui->groupBoxZDimension, &QGroupBox::clicked, this, [this](){CheckState();});
+                CheckState();
+            });
 
-    connect(ui->checkBoxFullCircumference, &QCheckBox::stateChanged,
-            this, &DialogSetupMultisize::ShowFullCircumference);
+    connect(ui->lineEditCustomZDimensionName, &QLineEdit::textChanged, this,
+            [this](const QString &text)
+            {
+                m_zDimension->SetCustomName(text);
+                InitDimensionTitle(ui->groupBoxZDimension, m_zDimension);
 
-    connect(ui->checkBoxXDimensionBodyMeasurement, &QCheckBox::stateChanged,
-            this, &DialogSetupMultisize::XDimensionBodyMeasurementChanged);
-    connect(ui->checkBoxYDimensionBodyMeasurement, &QCheckBox::stateChanged,
-            this, &DialogSetupMultisize::YDimensionBodyMeasurementChanged);
-    connect(ui->checkBoxWDimensionBodyMeasurement, &QCheckBox::stateChanged,
-            this, &DialogSetupMultisize::WDimensionBodyMeasurementChanged);
-    connect(ui->checkBoxZDimensionBodyMeasurement, &QCheckBox::stateChanged,
-            this, &DialogSetupMultisize::ZDimensionBodyMeasurementChanged);
-
-    connect(ui->lineEditCustomXDimensionName, &QLineEdit::textChanged, this, [this](const QString &text)
-    {
-        m_xDimension->SetCustomName(text);
-        InitDimensionTitle(ui->groupBoxXDimension, m_xDimension);
-
-        CheckState();
-    });
-
-    connect(ui->lineEditCustomYDimensionName, &QLineEdit::textChanged, this, [this](const QString &text)
-    {
-        m_yDimension->SetCustomName(text);
-        InitDimensionTitle(ui->groupBoxYDimension, m_yDimension);
-
-        CheckState();
-    });
-
-    connect(ui->lineEditCustomWDimensionName, &QLineEdit::textChanged, this, [this](const QString &text)
-    {
-        m_wDimension->SetCustomName(text);
-        InitDimensionTitle(ui->groupBoxWDimension, m_wDimension);
-
-        CheckState();
-    });
-
-    connect(ui->lineEditCustomZDimensionName, &QLineEdit::textChanged, this, [this](const QString &text)
-    {
-        m_zDimension->SetCustomName(text);
-        InitDimensionTitle(ui->groupBoxZDimension, m_zDimension);
-
-        CheckState();
-    });
+                CheckState();
+            });
 
     CheckState();
 }
@@ -271,8 +249,8 @@ auto DialogSetupMultisize::FullCircumference() const -> bool
 //---------------------------------------------------------------------------------------------------------------------
 void DialogSetupMultisize::showEvent(QShowEvent *event)
 {
-    QDialog::showEvent( event );
-    if ( event->spontaneous() )
+    QDialog::showEvent(event);
+    if (event->spontaneous())
     {
         return;
     }
@@ -286,15 +264,15 @@ void DialogSetupMultisize::showEvent(QShowEvent *event)
     setMaximumSize(size());
     setMinimumSize(size());
 
-    m_isInitialized = true;//first show windows are held
+    m_isInitialized = true; // first show windows are held
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 void DialogSetupMultisize::ShowFullCircumference()
 {
     auto ShowDimensionFullCircumference = [this](QDoubleSpinBox *doubleSpinBoxMinValue,
-            QDoubleSpinBox *doubleSpinBoxMaxValue, QComboBox *comboBoxStep, QComboBox *comboBoxBase,
-            const MeasurementDimension_p &dimension)
+                                                 QDoubleSpinBox *doubleSpinBoxMaxValue, QComboBox *comboBoxStep,
+                                                 QComboBox *comboBoxBase, const MeasurementDimension_p &dimension)
     {
         SCASSERT(doubleSpinBoxMinValue != nullptr)
         SCASSERT(doubleSpinBoxMaxValue != nullptr)
@@ -498,24 +476,23 @@ void DialogSetupMultisize::InitDimensionMinMax(QDoubleSpinBox *doubleSpinBoxMinV
     doubleSpinBoxMinValue->blockSignals(true);
     doubleSpinBoxMinValue->setSuffix(unitStr);
     doubleSpinBoxMinValue->setDecimals(dimension->Units() == Unit::Mm ? 0 : 1);
-    doubleSpinBoxMinValue->setMinimum(m && fc ? dimension->RangeMin()*2 : dimension->RangeMin());
-    doubleSpinBoxMinValue->setMaximum(m && fc ? dimension->MaxValue()*2 : dimension->MaxValue());
-    doubleSpinBoxMinValue->setValue(m && fc ? dimension->MinValue()*2 : dimension->MinValue());
+    doubleSpinBoxMinValue->setMinimum(m && fc ? dimension->RangeMin() * 2 : dimension->RangeMin());
+    doubleSpinBoxMinValue->setMaximum(m && fc ? dimension->MaxValue() * 2 : dimension->MaxValue());
+    doubleSpinBoxMinValue->setValue(m && fc ? dimension->MinValue() * 2 : dimension->MinValue());
     doubleSpinBoxMinValue->blockSignals(false);
 
     doubleSpinBoxMaxValue->blockSignals(true);
     doubleSpinBoxMaxValue->setSuffix(unitStr);
     doubleSpinBoxMaxValue->setDecimals(dimension->Units() == Unit::Mm ? 0 : 1);
-    doubleSpinBoxMaxValue->setMinimum(m && fc ? dimension->MinValue()*2 : dimension->MinValue());
-    doubleSpinBoxMaxValue->setMaximum(m && fc ? dimension->RangeMax()*2 : dimension->RangeMax());
-    doubleSpinBoxMaxValue->setValue(m && fc ? dimension->RangeMax()*2 : dimension->RangeMax());
-    doubleSpinBoxMaxValue->setValue(m && fc ? dimension->MaxValue()*2 : dimension->MaxValue());
+    doubleSpinBoxMaxValue->setMinimum(m && fc ? dimension->MinValue() * 2 : dimension->MinValue());
+    doubleSpinBoxMaxValue->setMaximum(m && fc ? dimension->RangeMax() * 2 : dimension->RangeMax());
+    doubleSpinBoxMaxValue->setValue(m && fc ? dimension->RangeMax() * 2 : dimension->RangeMax());
+    doubleSpinBoxMaxValue->setValue(m && fc ? dimension->MaxValue() * 2 : dimension->MaxValue());
     doubleSpinBoxMaxValue->blockSignals(false);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void DialogSetupMultisize::InitDimensionStep(QComboBox *comboBoxStep,
-                                             const MeasurementDimension_p &dimension)
+void DialogSetupMultisize::InitDimensionStep(QComboBox *comboBoxStep, const MeasurementDimension_p &dimension)
 {
     SCASSERT(comboBoxStep != nullptr)
 
@@ -528,9 +505,9 @@ void DialogSetupMultisize::InitDimensionStep(QComboBox *comboBoxStep,
     comboBoxStep->blockSignals(true);
     const QVector<qreal> steps = dimension->ValidSteps();
     comboBoxStep->clear();
-    for(auto step : steps)
+    for (auto step : steps)
     {
-        comboBoxStep->addItem(QStringLiteral("%1%2").arg(m && fc ? step*2 : step).arg(unitStr), step);
+        comboBoxStep->addItem(QStringLiteral("%1%2").arg(m && fc ? step * 2 : step).arg(unitStr), step);
     }
 
     comboBoxStep->setCurrentIndex(-1); // force a user to select
@@ -560,7 +537,7 @@ void DialogSetupMultisize::InitXDimension()
 //---------------------------------------------------------------------------------------------------------------------
 void DialogSetupMultisize::InitYDimension()
 {
-    InitDimensionTitle(ui->groupBoxYDimension,  m_yDimension);
+    InitDimensionTitle(ui->groupBoxYDimension, m_yDimension);
     InitDimension(ui->doubleSpinBoxYDimensionMinValue, ui->doubleSpinBoxYDimensionMaxValue, ui->comboBoxYDimensionStep,
                   m_yDimension);
 }
@@ -663,8 +640,7 @@ void DialogSetupMultisize::DimensionBaseChanged(int index, QComboBox *comboBoxBa
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void DialogSetupMultisize::UpdateSteps(QComboBox *comboBoxStep,
-                                       const MeasurementDimension_p &dimension)
+void DialogSetupMultisize::UpdateSteps(QComboBox *comboBoxStep, const MeasurementDimension_p &dimension)
 {
     SCASSERT(comboBoxStep != nullptr)
 
@@ -683,7 +659,7 @@ void DialogSetupMultisize::UpdateSteps(QComboBox *comboBoxStep,
     const bool m = dimension->IsBodyMeasurement();
     const QString unitStr = m ? " " + UnitsToStr(dimension->Units()) : QString();
 
-    for(auto step : steps)
+    for (auto step : steps)
     {
         comboBoxStep->addItem(QStringLiteral("%1%2").arg(m && fc ? step * 2 : step).arg(unitStr), step);
     }
@@ -697,8 +673,7 @@ void DialogSetupMultisize::UpdateSteps(QComboBox *comboBoxStep,
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void DialogSetupMultisize::UpdateBase(QComboBox *comboBoxBase,
-                                      const MeasurementDimension_p &dimension)
+void DialogSetupMultisize::UpdateBase(QComboBox *comboBoxBase, const MeasurementDimension_p &dimension)
 {
     SCASSERT(comboBoxBase != nullptr)
 
@@ -716,7 +691,7 @@ void DialogSetupMultisize::UpdateBase(QComboBox *comboBoxBase,
     const bool m = dimension->IsBodyMeasurement();
     const QString unitStr = m ? " " + UnitsToStr(dimension->Units()) : QString();
 
-    for(auto base : bases)
+    for (auto base : bases)
     {
         comboBoxBase->addItem(QStringLiteral("%1%2").arg(m && fc ? base * 2 : base).arg(unitStr), base);
     }
@@ -728,4 +703,3 @@ void DialogSetupMultisize::UpdateBase(QComboBox *comboBoxBase,
     const qreal base = comboBoxBase->currentData().toDouble(&ok);
     dimension->SetBaseValue(ok ? base : -1);
 }
-

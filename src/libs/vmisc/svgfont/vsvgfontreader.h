@@ -32,10 +32,6 @@
 #include <QString>
 #include <QXmlStreamReader>
 
-#if QT_VERSION < QT_VERSION_CHECK(5, 13, 0)
-#include "../defglobal.h"
-#endif
-
 class QFile;
 class VSvgFont;
 class VSvgFontEngine;

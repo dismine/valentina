@@ -32,12 +32,8 @@
 #include <QTimer>
 
 #if defined(APPIMAGE) && defined(Q_OS_LINUX)
-#if QT_VERSION < QT_VERSION_CHECK(5, 12, 0)
-#include "../vmisc/backport/qscopeguard.h"
-#else
-#include <QScopeGuard>
-#endif
 #include "../vmisc/appimage.h"
+#include <QScopeGuard>
 #endif // defined(APPIMAGE) && defined(Q_OS_LINUX)
 
 #if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
@@ -119,11 +115,9 @@ auto main(int argc, char *argv[]) -> int
     MApplication app(argc, argv);
     app.InitOptions();
 
-    QT_REQUIRE_VERSION(argc, argv, "5.6.0"); // clazy:exclude=qstring-arg,qstring-allocations NOLINT
+    QT_REQUIRE_VERSION(argc, argv, "5.15.0"); // clazy:exclude=qstring-arg,qstring-allocations NOLINT
 
-#if QT_VERSION >= QT_VERSION_CHECK(5, 7, 0)
     MApplication::setDesktopFileName(QStringLiteral("ua.com.smart-pattern.tape.desktop"));
-#endif
 
     QTimer::singleShot(0, &app, &MApplication::ProcessCMD);
 

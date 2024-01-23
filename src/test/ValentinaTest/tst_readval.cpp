@@ -146,8 +146,8 @@ void TST_ReadVal::TestVal()
     qreal resVal = 0;
     QLocale::setDefault(locale);
 
-    const vsizetype resCount = ReadVal(formula, resVal, locale, VLocaleCharacter(LocaleDecimalPoint(locale)),
-                                       VLocaleCharacter(LocaleGroupSeparator(locale)));
+    const vsizetype resCount =
+        ReadVal(formula, resVal, locale, LocaleDecimalPoint(locale), LocaleGroupSeparator(locale));
 
     // cppcheck-suppress unreadVariable
     QString errorMsg = QStringLiteral("Conversion failed. Locale: '%1'.").arg(locale.name());

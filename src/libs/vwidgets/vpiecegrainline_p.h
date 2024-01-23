@@ -34,10 +34,6 @@
 #include <QLineF>
 #include <QSharedData>
 
-#if QT_VERSION < QT_VERSION_CHECK(5, 14, 0)
-#include "../vmisc/vdatastreamenum.h"
-#endif
-
 QT_WARNING_PUSH
 QT_WARNING_DISABLE_GCC("-Weffc++")
 QT_WARNING_DISABLE_GCC("-Wnon-virtual-dtor")
@@ -68,12 +64,6 @@ private:
 };
 
 QT_WARNING_POP
-
-// See https://stackoverflow.com/a/46719572/3045403
-#if __cplusplus < 201703L                               // C++17
-constexpr quint32 VPieceGrainlinePrivate::streamHeader; // NOLINT(readability-redundant-declaration)
-constexpr quint16 VPieceGrainlinePrivate::classVersion; // NOLINT(readability-redundant-declaration)
-#endif
 
 //---------------------------------------------------------------------------------------------------------------------
 inline VPieceGrainlinePrivate::VPieceGrainlinePrivate(const QLineF &mainLine, GrainlineArrowDirection arrowType)

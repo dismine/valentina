@@ -54,13 +54,10 @@
 #include <QUrl>
 #include <QtDebug>
 
-#include "vabstractapplication.h"
-#if QT_VERSION < QT_VERSION_CHECK(5, 14, 0)
-#include "vdatastreamenum.h"
-#endif
 #include "../ifc/exception/vexception.h"
 #include "compatibility.h"
 #include "literals.h"
+#include "vabstractapplication.h"
 
 using namespace Qt::Literals::StringLiterals;
 

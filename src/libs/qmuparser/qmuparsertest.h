@@ -22,17 +22,14 @@
 #ifndef QMUPARSERTEST_H
 #define QMUPARSERTEST_H
 
-#include <stdlib.h>
 #include <QMetaObject>
 #include <QObject>
+#include <QRandomGenerator>
 #include <QString>
 #include <QVector>
 #include <QtGlobal>
 #include <locale>
-
-#if QT_VERSION >= QT_VERSION_CHECK(5, 10, 0)
-#   include <QRandomGenerator>
-#endif
+#include <stdlib.h>
 
 #include "qmuparser.h"
 #include "qmuparser_global.h"
@@ -60,8 +57,9 @@ namespace Test
 class QMUPARSERSHARED_EXPORT QmuParserTester : public QObject // final
 {
     Q_OBJECT // NOLINT
+
 public:
-    typedef int ( QmuParserTester::*testfun_type ) ();
+    typedef int (QmuParserTester::*testfun_type)();
 
     explicit QmuParserTester(QObject *parent = nullptr);
 
@@ -73,7 +71,7 @@ private:
     QVector<testfun_type> m_vTestFun;
     static int c_iCount;
 
-    void AddTest ( testfun_type a_pFun );
+    void AddTest(testfun_type a_pFun);
 
     // Test Double Parser
     static auto EqnTest(const QString &a_str, double a_fRes, bool a_fPass) -> int;
@@ -133,9 +131,9 @@ private:
 
     static auto FirstArg(const qreal *a_afArg, qmusizetype a_iArgc) -> qreal
     {
-        if ( a_iArgc == 0)
+        if (a_iArgc == 0)
         {
-            throw QmuParserError ( "too few arguments for function FirstArg." );
+            throw QmuParserError("too few arguments for function FirstArg.");
         }
 
         return a_afArg[0];
@@ -143,9 +141,9 @@ private:
 
     static auto LastArg(const qreal *a_afArg, qmusizetype a_iArgc) -> qreal
     {
-        if ( a_iArgc == 0)
+        if (a_iArgc == 0)
         {
-            throw QmuParserError ( "too few arguments for function LastArg." );
+            throw QmuParserError("too few arguments for function LastArg.");
         }
 
         return a_afArg[a_iArgc - 1];
@@ -153,13 +151,13 @@ private:
 
     static auto Sum(const qreal *a_afArg, qmusizetype a_iArgc) -> qreal
     {
-        if ( a_iArgc == 0)
+        if (a_iArgc == 0)
         {
-            throw QmuParserError ( "too few arguments for function sum." );
+            throw QmuParserError("too few arguments for function sum.");
         }
 
         qreal fRes = 0;
-        for ( int i = 0; i < a_iArgc; ++i )
+        for (int i = 0; i < a_iArgc; ++i)
         {
             fRes += a_afArg[i];
         }
@@ -168,22 +166,14 @@ private:
 
     static auto Rnd(qreal v) -> qreal
     {
-#if QT_VERSION >= QT_VERSION_CHECK(5, 10, 0)
-        return static_cast<qreal>( ( 1 + ( v * QRandomGenerator().bounded(static_cast<qreal>(RAND_MAX)) /
-                                           ( RAND_MAX + 1.0 ) ) ) );
-#else
-        return static_cast<qreal>( ( 1 + ( v * qrand() / ( RAND_MAX + 1.0 ) ) ) );
-#endif
+        return static_cast<qreal>(
+            (1 + (v * QRandomGenerator().bounded(static_cast<qreal>(RAND_MAX)) / (RAND_MAX + 1.0))));
     }
 
     static auto RndWithString(const char_type *) -> qreal
     {
-#if QT_VERSION >= QT_VERSION_CHECK(5, 10, 0)
-        return static_cast<qreal>( ( 1 + ( 1000.0f * QRandomGenerator().bounded(static_cast<qreal>(RAND_MAX)) /
-                                           ( RAND_MAX + 1.0 ) ) ) );
-#else
-        return static_cast<qreal>( ( 1 + ( 1000.0f * static_cast<qreal>(qrand()) / ( RAND_MAX + 1.0 ) ) ) );
-#endif
+        return static_cast<qreal>(
+            (1 + (1000.0f * QRandomGenerator().bounded(static_cast<qreal>(RAND_MAX)) / (RAND_MAX + 1.0))));
     }
 
     static auto Ping() -> qreal { return 10; }
@@ -199,7 +189,7 @@ private:
     static auto StrFun2(const QString &v1, qreal v2) -> qreal
     {
         int val = v1.toInt();
-        return static_cast<qreal>( val + v2 );
+        return static_cast<qreal>(val + v2);
     }
 
     static auto StrFun3(const QString &v1, qreal v2, qreal v3) -> qreal

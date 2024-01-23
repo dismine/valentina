@@ -24,14 +24,8 @@ Module {
             var enableCompression = input.moduleProperty("ebr", "enableCompression");
             if (enableCompression) {
                 var compressAlgorithm = input.moduleProperty("ebr", "compressAlgorithm");
-                if (product.Qt.core.versionMajor >= 5 && product.Qt.core.versionMinor >= 13) {
-                    // Since Qt 5.13 we have option to select compress algorithm
-                    if (compressAlgorithm !== "zstd")
-                        args.push("-compress-algo", compressAlgorithm);
-                } else {
-                    if (compressAlgorithm !== "zlib")
-                        compressAlgorithm = "zlib";
-                }
+                if (compressAlgorithm !== "zstd")
+                    args.push("-compress-algo", compressAlgorithm);
 
                 var thresholdLevel = input.moduleProperty("ebr", "thresholdLevel");
                 if (thresholdLevel !== 70)

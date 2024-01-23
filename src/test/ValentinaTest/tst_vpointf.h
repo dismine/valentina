@@ -32,10 +32,6 @@
 #include <QtCore/QObject>
 #include <QtCore/qglobal.h>
 
-#if QT_VERSION < QT_VERSION_CHECK(5, 13, 0)
-#include "../vmisc/defglobal.h"
-#endif
-
 class TST_VPointF : public QObject
 {
     Q_OBJECT // NOLINT

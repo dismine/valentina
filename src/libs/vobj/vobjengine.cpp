@@ -45,10 +45,6 @@
 
 #include "../vmisc/defglobal.h"
 
-#if QT_VERSION < QT_VERSION_CHECK(5, 14, 0)
-#include "../vmisc/backport/text.h"
-#endif
-
 // Header <ciso646> is removed in C++20.
 #if __cplusplus <= 201703L
 #include <ciso646> // and, not, or

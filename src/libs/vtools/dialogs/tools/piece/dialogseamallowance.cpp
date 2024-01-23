@@ -62,18 +62,9 @@
 #include "ui_tabpins.h"
 #include "ui_tabplacelabels.h"
 
-#if QT_VERSION < QT_VERSION_CHECK(5, 7, 0)
-#include "../vmisc/backport/qoverload.h"
-#endif // QT_VERSION < QT_VERSION_CHECK(5, 7, 0)
-
-#if QT_VERSION < QT_VERSION_CHECK(5, 12, 0)
-#include "../vmisc/backport/qscopeguard.h"
-#else
-#include <QScopeGuard>
-#endif
-
 #include <QMenu>
 #include <QMessageBox>
+#include <QScopeGuard>
 #include <QTimer>
 #include <QUuid>
 #include <QtNumeric>
@@ -4324,17 +4315,10 @@ void DialogSeamAllowance::InitPassmarksTab()
     connect(uiTabPassmarks->comboBoxPassmarks, QOverload<int>::of(&QComboBox::currentIndexChanged), this,
             &DialogSeamAllowance::PassmarkChanged);
 
-#if QT_VERSION < QT_VERSION_CHECK(5, 15, 0)
-    connect(uiTabPassmarks->buttonGroupLineType, QOverload<int>::of(&QButtonGroup::buttonClicked), this,
-            &DialogSeamAllowance::PassmarkLineTypeChanged);
-    connect(uiTabPassmarks->buttonGroupAngleType, QOverload<int>::of(&QButtonGroup::buttonClicked), this,
-            &DialogSeamAllowance::PassmarkAngleTypeChanged);
-#else
     connect(uiTabPassmarks->buttonGroupLineType, &QButtonGroup::idClicked, this,
             &DialogSeamAllowance::PassmarkLineTypeChanged);
     connect(uiTabPassmarks->buttonGroupAngleType, &QButtonGroup::idClicked, this,
             &DialogSeamAllowance::PassmarkAngleTypeChanged);
-#endif
     connect(uiTabPassmarks->checkBoxShowSecondPassmark, &QCheckBox::stateChanged, this,
             &DialogSeamAllowance::PassmarkShowSecondChanged);
     connect(uiTabPassmarks->checkBoxClockwiseOpening, &QCheckBox::stateChanged, this,

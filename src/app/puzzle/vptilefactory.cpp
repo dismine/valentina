@@ -102,11 +102,6 @@ auto TriangleBasic() -> QPainterPath
 }
 } // namespace
 
-// See https://stackoverflow.com/a/46719572/3045403
-#if __cplusplus < 201703L                       // C++17
-constexpr qreal VPTileFactory::tileStripeWidth; // NOLINT(readability-redundant-declaration)
-#endif
-
 //---------------------------------------------------------------------------------------------------------------------
 VPTileFactory::VPTileFactory(const VPLayoutPtr &layout, VCommonSettings *commonSettings, QObject *parent)
   : QObject(parent),
@@ -359,7 +354,7 @@ void VPTileFactory::DrawRuler(QPainter *painter, qreal scale) const
             qreal unitsWidth = 0;
             QFontMetrics fm(fnt);
             QString units = rulerUnits != Unit::Inch ? tr("cm", "unit") : tr("in", "unit");
-            unitsWidth = TextWidth(fm, units);
+            unitsWidth = fm.horizontalAdvance(units);
             painter->drawText(QPointF(step * 0.5 - unitsWidth * 0.6,
                                       m_drawingAreaHeight - tileStripeWidth + notchHeight + shortNotchHeight),
                               units);
@@ -629,7 +624,7 @@ void VPTileFactory::DrawTextInformation(QPainter *painter, int row, int col, int
     td.setPageSize(QSizeF(m_drawingAreaHeight - UnitConvertor(2, Unit::Cm, Unit::Px), m_drawingAreaWidth));
 
     QFontMetrics metrix = QFontMetrics(td.defaultFont());
-    int maxWidth = TextWidth(metrix, QString().fill('z', 50));
+    int maxWidth = metrix.horizontalAdvance(QString().fill('z', 50));
     QString clippedSheetName = metrix.elidedText(sheetName, Qt::ElideMiddle, maxWidth);
 
     td.setHtml(QStringLiteral("<table width='100%' style='color:rgb(%1);'>"
@@ -754,11 +749,7 @@ void VPTileFactory::PaintWatermarkImage(QPainter *painter, const QRectF &img, co
         return;
     }
 
-#if QT_VERSION < QT_VERSION_CHECK(5, 10, 0)
-    qint64 fileSize = watermarkImage.byteCount();
-#else
     qint64 fileSize = watermarkImage.sizeInBytes();
-#endif
     qint64 pixelSize = fileSize / watermarkImage.height() / watermarkImage.width();
     QSize scaledSize(qRound(watermarkImage.width() / xScale), qRound(watermarkImage.height() / yScale));
     qint64 scaledImageSize = pixelSize * scaledSize.width() * scaledSize.height() / 1024;

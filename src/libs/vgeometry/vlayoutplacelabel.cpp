@@ -27,10 +27,6 @@
  *************************************************************************/
 #include "vlayoutplacelabel.h"
 
-#if QT_VERSION < QT_VERSION_CHECK(5, 14, 0)
-#include "../vmisc/vdatastreamenum.h"
-#endif
-
 #include "../ifc/exception/vexception.h"
 
 #if QT_VERSION < QT_VERSION_CHECK(6, 4, 0)
@@ -38,12 +34,6 @@
 #endif
 
 using namespace Qt::Literals::StringLiterals;
-
-// See https://stackoverflow.com/a/46719572/3045403
-#if __cplusplus < 201703L                          // C++17
-constexpr quint32 VLayoutPlaceLabel::streamHeader; // NOLINT(readability-redundant-declaration)
-constexpr quint16 VLayoutPlaceLabel::classVersion; // NOLINT(readability-redundant-declaration)
-#endif
 
 //---------------------------------------------------------------------------------------------------------------------
 VLayoutPlaceLabel::VLayoutPlaceLabel(const VPlaceLabelItem &item)

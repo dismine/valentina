@@ -68,12 +68,12 @@ auto IsSeparator(const QString &currentToken, const QChar &ch) -> bool
         return true;
     }
 
-    if (ch == '-'_L1 && !currentToken.isEmpty() && Back(currentToken) != 'e'_L1 && Back(currentToken) != 'E'_L1)
+    if (ch == '-'_L1 && !currentToken.isEmpty() && currentToken.back() != 'e'_L1 && currentToken.back() != 'E'_L1)
     {
         return true;
     }
 
-    if (ch == '+'_L1 && !currentToken.isEmpty() && Back(currentToken) != 'e'_L1 && Back(currentToken) != 'E'_L1)
+    if (ch == '+'_L1 && !currentToken.isEmpty() && currentToken.back() != 'e'_L1 && currentToken.back() != 'E'_L1)
     {
         return true;
     }

@@ -118,7 +118,6 @@ auto StandardIconPaths() -> QHash<QStyle::StandardPixmap, QString>
         {QStyle::SP_LineEditClearButton, "clear_text.svg"},
     };
 
-#if QT_VERSION >= QT_VERSION_CHECK(5, 14, 0)
     icons.insert(QStyle::SP_DialogYesToAllButton, QStringLiteral("dialog_yes_to_all.svg"));
     icons.insert(QStyle::SP_DialogNoToAllButton, QStringLiteral("dialog_no.svg"));
     icons.insert(QStyle::SP_DialogSaveAllButton, QStringLiteral("dialog_save_all.svg"));
@@ -126,7 +125,6 @@ auto StandardIconPaths() -> QHash<QStyle::StandardPixmap, QString>
     icons.insert(QStyle::SP_DialogRetryButton, QStringLiteral("dialog_retry.svg"));
     icons.insert(QStyle::SP_DialogIgnoreButton, QStringLiteral("dialog_ignore.svg"));
     icons.insert(QStyle::SP_RestoreDefaultsButton, QStringLiteral("restore_defaults.svg"));
-#endif
 
 #if QT_VERSION >= QT_VERSION_CHECK(6, 3, 0)
     icons.insert(QStyle::SP_TabCloseButton, QStringLiteral("tab_close.svg"));
