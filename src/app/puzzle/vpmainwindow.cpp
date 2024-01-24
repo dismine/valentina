@@ -1740,6 +1740,11 @@ void VPMainWindow::ReadSettings()
 
         // Stack limit
         m_undoStack->setUndoLimit(settings->GetUndoCount());
+
+        if (VAbstractShortcutManager *manager = VAbstractApplication::VApp()->GetShortcutManager())
+        {
+            manager->UpdateShortcuts();
+        }
     }
     else
     {
