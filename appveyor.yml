@@ -413,7 +413,7 @@ for:
     - if "%RUN_TESTS%" == "true" (qbs -p autotest-runner -d %APPVEYOR_BUILD_FOLDER%\build profile:qt6 config:release)
 
   deploy_script:
-    - if "%DEPLOY%" == "true" (qbs build -f valentina.qbs -d %APPVEYOR_BUILD_FOLDER%\build -p 'ValentinaSetup' --jobs %NUMBER_OF_PROCESSORS% config:release qbs.installRoot:%APPVEYOR_BUILD_FOLDER%\build\install-root\valentina profile:qt6 project.enableConan:true modules.buildconfig.enableCcache:false project.conanProfiles:valentina modules.buildconfig.enablePCH:%ENABLE_PCH% modules.windeployqt.windeployqtProgramBinPath:%WINDEPLOYQT_BIN_PATH% modules.windeployqt.compilerRuntime:%WINDEPLOYQT_COMPILER_RUNTIME% modules.windeployqt.noCompilerRuntime:%WINDEPLOYQT_NO_COMPILER_RUNTIME%)
+    - if "%DEPLOY%" == "true" (qbs build -f valentina.qbs -d %APPVEYOR_BUILD_FOLDER%\build -p ValentinaSetup --jobs %NUMBER_OF_PROCESSORS% config:release qbs.installRoot:%APPVEYOR_BUILD_FOLDER%\build\install-root\valentina profile:qt6 project.enableConan:true modules.buildconfig.enableCcache:false project.conanProfiles:valentina modules.buildconfig.enablePCH:%ENABLE_PCH% modules.windeployqt.windeployqtProgramBinPath:%WINDEPLOYQT_BIN_PATH% modules.windeployqt.compilerRuntime:%WINDEPLOYQT_COMPILER_RUNTIME% modules.windeployqt.noCompilerRuntime:%WINDEPLOYQT_NO_COMPILER_RUNTIME%)
     - ps: scripts/appveyor-deploy.ps1
 
   on_finish:
