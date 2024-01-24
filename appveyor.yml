@@ -307,7 +307,7 @@ for:
     - path
     - set QTDIR=C:\%QT%
     - set QT_PLUGIN_PATH=%QTDIR%\plugins
-    - set PATH=%QTDIR%\bin;%QTDIR%\include;C:\Qt\Tools\QtCreator\bin;C:\Tools\PsTools;C:\Program Files\Git\cmd;C:\Program Files\Git\usr\bin;C:\Program Files\Git LFS;C:\Tools\GitVersion;C:\Windows\system32;C:\Windows;C:\Windows\System32\WindowsPowerShell\v1.0\;C:\Program Files\CMake\bin;%PYTHON%;%PYTHON%\Scripts;C:\ProgramData\chocolatey\bin
+    - set PATH=%QTDIR%\bin;%QTDIR%\include;C:\Qt\Tools\QtCreator\bin;C:\Tools\PsTools;C:\Program Files\Git\cmd;C:\Program Files\Git\usr\bin;C:\Program Files\Git LFS;C:\Tools\GitVersion;C:\Windows\system32;C:\Windows;C:\Windows\System32\WindowsPowerShell\v1.0\;C:\Program Files\CMake\bin;%PYTHON%;%PYTHON%\Scripts;C:\ProgramData\chocolatey\bin;C:\Program Files (x86)\Inno Setup 6
     # Set VC variables for the platform
     - ps: |
         if ($env:COMPILER -eq "msvc") {
@@ -408,6 +408,7 @@ for:
     - if "%RUN_TESTS%" == "true" (qbs -p autotest-runner -d %APPVEYOR_BUILD_FOLDER%\build profile:qt6 config:release)
 
   deploy_script:
+    - if "%DEPLOY%" == "true" (qbs build -f valentina.qbs -d %APPVEYOR_BUILD_FOLDER%\build -p 'ValentinaSetup' --jobs %NUMBER_OF_PROCESSORS% config:release qbs.installRoot:%APPVEYOR_BUILD_FOLDER%\build\install-root\valentina profile:qt6 project.enableConan:true modules.buildconfig.enableCcache:false project.conanProfiles:valentina modules.buildconfig.enablePCH:%ENABLE_PCH% modules.windeployqt.windeployqtProgramBinPath:%WINDEPLOYQT_BIN_PATH% modules.windeployqt.compilerRuntime:%WINDEPLOYQT_COMPILER_RUNTIME% modules.windeployqt.noCompilerRuntime:%WINDEPLOYQT_NO_COMPILER_RUNTIME%)
     - ps: scripts/appveyor-deploy.ps1
 
   on_finish:
@@ -433,7 +434,7 @@ for:
     # Path before 
     - path
     - set QTDIR=C:\%QT%
-    - set PATH=%QTDIR%\bin;%QTDIR%\include;C:\Tools\PsTools;C:\Program Files\Git\cmd;C:\Program Files\Git\usr\bin;C:\Program Files\Git LFS;C:\Tools\GitVersion;C:\Windows\system32;C:\Windows;C:\Windows\System32\WindowsPowerShell\v1.0\
+    - set PATH=%QTDIR%\bin;%QTDIR%\include;C:\Tools\PsTools;C:\Program Files\Git\cmd;C:\Program Files\Git\usr\bin;C:\Program Files\Git LFS;C:\Tools\GitVersion;C:\Windows\system32;C:\Windows;C:\Windows\System32\WindowsPowerShell\v1.0\;C:\Program Files (x86)\Inno Setup 6
     - if NOT "%BUILD_SYSTEM%" == "make" echo "Using Visual Studio %VSVER%.0"
     - if "%BUILD_SYSTEM%" == "make" echo "Using MinGW"
     # Set VC variables for the platform
@@ -501,14 +502,6 @@ for:
   # to run your custom scripts instead of automatic tests
   test_script:
     - if "%BUILD_SYSTEM%" == "make" (mingw32-make -s check TESTARGS="-silent")
-  
-  # prepare to deploy
-  after_test:
-    - if "%DEPLOY%" == "true" (mingw32-make install)
-
-  # to run your custom scripts instead of provider deployments
-  deploy_script:
-    - ps: ../scripts/appveyor-deploy.ps1
 
 #---------------------------------#
 #             MacOS               #

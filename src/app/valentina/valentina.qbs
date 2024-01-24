@@ -342,7 +342,6 @@ VToolApp {
         files: [
             "dist/win/valentina.ico",
             "dist/win/pattern.ico",
-            "dist/win/EUDC.TTE",
             "AUTHORS.txt",
             "LICENSE_GPL.txt",
             "README.txt",

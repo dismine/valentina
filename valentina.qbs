@@ -25,7 +25,8 @@ Project {
     references: [
         "src/src.qbs",
         "share/translations/translations.qbs",
-        "dmg.qbs"
+        "dmg.qbs",
+        "winsetup.qbs"
     ]
     qbsSearchPaths: "qbs"
 
