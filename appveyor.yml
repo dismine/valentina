@@ -360,6 +360,14 @@ for:
     - dir %QTDIR%
     - dir "%QTDIR%\bin"
     - qbs --version
+    # Patch Qbs. Remove after Qbs 2.2.1+.
+    - ps: |
+        Invoke-WebRequest -Uri "https://gist.githubusercontent.com/dismine/43f3c51e05f3317c5d4fe16cd3c4b6d8/raw/2d297bcb53c2c022f740509923adf1eb1796afe2/qbs-pkg-config-probe.patch" -OutFile "$env:USERPROFILE\qbs-pkg-config-probe.patch"
+        $qbsInstallationDir = "C:\ProgramData\chocolatey\lib\qbs\tools"
+        cd $qbsInstallationDir
+        Get-Content "$env:USERPROFILE\qbs-pkg-config-probe.patch" | git apply --directory=. -p1
+        Remove-Item -Path "$qbsInstallationDir\share\qbs\imports\qbs\Probes\qbs-pkg-config-probe.js.rej" -ErrorAction SilentlyContinue
+        Remove-Item -Path "$env:USERPROFILE\qbs-pkg-config-probe.patch" -ErrorAction SilentlyContinue
 
   before_build:
     - cd %APPVEYOR_BUILD_FOLDER%
