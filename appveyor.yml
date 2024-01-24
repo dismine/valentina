@@ -351,9 +351,6 @@ for:
     - (python -m pip install --upgrade pip)
     - if "%DEPLOY%" == "true" (python -m pip install dropbox)
     - python -m pip install conan==1.61.0
-    # Trick qmake to not work through MSYS
-    - del /F "C:\Program Files\Git\usr\bin\sh.exe"
-    - del /F "C:\Program Files\Git\bin\sh.exe"
     - dir "C:\"
     - dir "C:\Qt"
     - dir "C:\Qt\Tools"
@@ -365,7 +362,7 @@ for:
         Invoke-WebRequest -Uri "https://gist.githubusercontent.com/dismine/43f3c51e05f3317c5d4fe16cd3c4b6d8/raw/2d297bcb53c2c022f740509923adf1eb1796afe2/qbs-pkg-config-probe.patch" -OutFile "$env:USERPROFILE\qbs-pkg-config-probe.patch"
         $qbsInstallationDir = "C:\ProgramData\chocolatey\lib\qbs\tools"
         cd $qbsInstallationDir
-        Get-Content "$env:USERPROFILE\qbs-pkg-config-probe.patch" | git apply --directory=. -p1
+        cmd.exe /c "patch -p1 -N -d . -i $env:USERPROFILE\qbs-pkg-config-probe.patch" || $true
         Remove-Item -Path "$qbsInstallationDir\share\qbs\imports\qbs\Probes\qbs-pkg-config-probe.js.rej" -ErrorAction SilentlyContinue
         Remove-Item -Path "$env:USERPROFILE\qbs-pkg-config-probe.patch" -ErrorAction SilentlyContinue
 
