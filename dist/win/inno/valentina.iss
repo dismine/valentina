@@ -319,94 +319,117 @@ Root: HKA; Subkey: "Software\Classes\Applications\tape.exe\SupportedTypes"; Valu
 SystemLanguage = System language
 english.SystemLanguage = System language
 ukrainian.SystemLanguage = Мова системи
+french.SystemLanguage = Langue du système
 
 FullInstallation = Full installation
 english.FullInstallation = Full installation
 ukrainian.FullInstallation = Повна інсталяція
+french.FullInstallation = Installation complète
 
 CustomInstallation = Custom installation
 english.CustomInstallation = Custom installation
 ukrainian.CustomInstallation = Користувацьке налаштування
+french.CustomInstallation = Installation personnalisée
 
 LanguageComponent = Language Component
 english.LanguageComponent = Language Component
 ukrainian.LanguageComponent = Мовний компонент
+french.LanguageComponent = Composant linguistique
 
 FileAssoc = Create file associations
 english.FileAssoc = Create file associations
 ukrainian.FileAssoc = Створити асоціації файлів
+french.FileAssoc = Créer les associations de types de fichiers
 
 CreateFileAssocVal = *.val (Pattern file)
 english.CreateFileAssocVal = *.val (Pattern file)
 ukrainian.CreateFileAssocVal = *.val (Файл викрійки)
+french.CreateFileAssocVal = *.val (Fichier de patron)
 
 CreateFileAssocVit = *.vit (Individual measurement file)
 english.CreateFileAssocVit = *.vit (Individual measurement file)
 ukrainian.CreateFileAssocVit = *.vit (Файл індивідуальних мірок)
+french.CreateFileAssocVit = *.vit (Fichier de mesures individuelles)
 
 CreateFileAssocVst = *.vst (Multisize measurement file)
 english.CreateFileAssocVst = *.vst (Multisize measurement file)
 ukrainian.CreateFileAssocVst = *.vst (Мультирозмірний файл мірок)
+french.CreateFileAssocVst = *.vst (Fichier de mesures multi-tailles)
 
 CreateFileAssocVlt = *.vlt (Layout file)
 english.CreateFileAssocVlt = *.vlt (Layout file)
 ukrainian.CreateFileAssocVlt = *.vlt (Файл роскладки)
+french.CreateFileAssocVlt = *.vlt (Fichier de plan de coupe manuel)
 
 CreateFileAssocVkm = *.vkm (Known measurements file)
 english.CreateFileAssocVkm = *.vkm (Known measurements file)
 ukrainian.CreateFileAssocVkm = *.vkm (Файл відомих мірок)
+french.CreateFileAssocVkm = *.vkm (Fichier de base de données de mesures)
 
 WarnRemoveOld = is installed at the moment. Remove old version?
 english.WarnRemoveOld = is installed at the moment. Remove old version?
 ukrainian.WarnRemoveOld = встановлено на даний момент. Видалити стару версію?
+french.WarnRemoveOld = est déjà installé. Voulez-vous désinstaller l'ancienne version ?
 
 WarnSameVersionExit = is already installed. This installer will exit.
 english.WarnSameVersionExit = is already installed. This installer will exit.
 ukrainian.WarnSameVersionExit = вже встановлено. Інсталятор завершить свою роботу.
+french.WarnSameVersionExit = est déjà installé. Le processus d'installation va s'arrêter.
 
 WarnRunningOnUnInstall1 = is currently running.
 english.WarnRunningOnUnInstall1 = is currently running.
 ukrainian.WarnRunningOnUnInstall1 = в даний час працює.
+french.WarnRunningOnUnInstall1 = est actuellement en cours d'exécution.
 
 WarnRunningOnUnInstall2 = Please close it and then click on ''Retry'' to proceed.
 english.WarnRunningOnUnInstall2 = Please close it and then click on ''Retry'' to proceed.
 ukrainian.WarnRunningOnUnInstall2 = Закрийте його та натисніть ''Повторити'', щоб продовжити.
+french.WarnRunningOnUnInstall2 = Merci de fermer l'application puis de cliquer sur 'Réessayer' pour poursuivre l'installation.
 
 WarnCancelInstall = The installation was canceled.
 english.WarnCancelInstall = The installation was canceled.
 ukrainian.WarnCancelInstall = Установка була скасована.
+french.WarnCancelInstall = Le processus d'installation a été annulé.
 
 WarnCancelUninstall = The uninstallation process was canceled.
 english.WarnCancelUninstall = The uninstallation process was canceled.
 ukrainian.WarnCancelUninstall = Процес деінсталяції скасовано.
+french.WarnCancelUninstall = Le processus de désinstallation a été annulée.
 
 WarnOverwrite = is already installed. Overwrite existing installation?
 english.WarnOverwrite= is already installed. Overwrite existing installation?
 ukrainian.WarnOverwrite= вже встановлено. Перезаписати існуючу установку?
+french.WarnOverwrite= est déjà installé. Voulez-vous réinstaller quand même ?
 
 SetupIsRunningWarning = Valentina setup is already running!
 english.SetupIsRunningWarning = Valentina setup is already running!
 ukrainian.SetupIsRunningWarning = Встановлення Valentina вже працює!
+french.SetupIsRunningWarning = L'installation de Valentina est déjà en cours d'exécution !
 
 DeinstIsRunningWarning = Valentina uninstall is already running!
 english.DeinstIsRunningWarning = Valentina uninstall is already running!
 ukrainian.DeinstIsRunningWarning = Видалення Valentina вже працює!
+french.DeinstIsRunningWarning = La désinstallation de Valentina est déjà en cours d'exécution !
 
 RemoveAnyExistingSettings = Remove any existing settings
 english.RemoveAnyExistingSettings = Remove any existing settings
 ukrainian.RemoveAnyExistingSettings = Видалити всі існуючі налаштування
+french.RemoveAnyExistingSettings = Supprimer tous les paramètres de configuration déjà existants
 
 ManageSettings = Manage settings
 english.ManageSettings = Manage settings
 ukrainian.ManageSettings = Керування налаштуваннями
+french.ManageSettings = Paramètres de configuration
 
 QuestionRemoveAnyExistingSettings = Do you want to remove any existing settings?
 english.QuestionRemoveAnyExistingSettings = Do you want to remove any existing settings?
 ukrainian.QuestionRemoveAnyExistingSettings = Видалити будь-які існуючі налаштування?
+french.QuestionRemoveAnyExistingSettings = Voulez-vous supprimer les paramètres configurés dans la version précédente ?
 
 ErrorFindApp = Unable to check if a program is running. Please, close the program before continue and press OK to continue the installation.
 english.ErrorFindApp = Unable to check if a program is running. Please, close the program before continue and press OK to continue the installation.
 ukrainian.ErrorFindApp = Неможливо перевірити, чи запущена програма. Будь ласка, закрийте програму перед продовженням та натисніть OK, щоб продовжити встановлення.
+french.ErrorFindApp = Impossible de vérifier si le programme est en cours d'exécution. Merci de le fermer avant de continuer s'il est ouvert, puis de cliquer sur OK pour poursuivre l'installation.
 
 [Code]
 const
