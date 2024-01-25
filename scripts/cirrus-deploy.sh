@@ -22,9 +22,9 @@ check_failure() {
 if [[ "$DEPLOY" == "true" ]]; then
     print_info "Start labeling.";
     if [[ "$MULTI_BUNDLE" == "false" ]]; then
-      mv $CIRRUS_WORKING_DIR/build/install-root/share/valentina.dmg $CIRRUS_WORKING_DIR/build/install-root/share/valentina-${PLATFORM}-${QT_VERSION}-${ARCH}-${CIRRUS_BRANCH}-${CIRRUS_CHANGE_IN_REPO}.dmg;
+      mv $CIRRUS_WORKING_DIR/build/install-root/share/valentina.dmg $CIRRUS_WORKING_DIR/build/install-root/share/valentina-${TARGET_PLATFORM}-${QT_VERSION}-${ARCH}-${CIRRUS_BRANCH}-${CIRRUS_CHANGE_IN_REPO}.dmg;
     else
-      mv $CIRRUS_WORKING_DIR/build/install-root/share/valentina.dmg $CIRRUS_WORKING_DIR/build/install-root/share/valentina-${PLATFORM}-${QT_VERSION}-${ARCH}-${CIRRUS_BRANCH}-multibundle-${CIRRUS_CHANGE_IN_REPO}.dmg;
+      mv $CIRRUS_WORKING_DIR/build/install-root/share/valentina.dmg $CIRRUS_WORKING_DIR/build/install-root/share/valentina-${TARGET_PLATFORM}-${QT_VERSION}-${ARCH}-${CIRRUS_BRANCH}-multibundle-${CIRRUS_CHANGE_IN_REPO}.dmg;
     fi
     check_failure "Unable to label Valentina DMG."; 
 
@@ -34,9 +34,9 @@ if [[ "$DEPLOY" == "true" ]]; then
 
     print_info "Start uploading.";
     if [[ "$MULTI_BUNDLE" == "false" ]]; then
-      python3 $CIRRUS_WORKING_DIR/scripts/deploy.py upload $ACCESS_TOKEN $CIRRUS_WORKING_DIR/build/install-root/share/valentina-${PLATFORM}-${QT_VERSION}-${ARCH}-${CIRRUS_BRANCH}-${CIRRUS_CHANGE_IN_REPO}.dmg "/0.7.x/Mac OS X/valentina-${PLATFORM}-${QT_VERSION}-${ARCH}-${CIRRUS_BRANCH}-${CIRRUS_CHANGE_IN_REPO}.dmg";
+      python3 $CIRRUS_WORKING_DIR/scripts/deploy.py upload $ACCESS_TOKEN $CIRRUS_WORKING_DIR/build/install-root/share/valentina-${TARGET_PLATFORM}-${QT_VERSION}-${ARCH}-${CIRRUS_BRANCH}-${CIRRUS_CHANGE_IN_REPO}.dmg "/0.7.x/Mac OS X/valentina-${TARGET_PLATFORM}-${QT_VERSION}-${ARCH}-${CIRRUS_BRANCH}-${CIRRUS_CHANGE_IN_REPO}.dmg";
     else
-      python3 $CIRRUS_WORKING_DIR/scripts/deploy.py upload $ACCESS_TOKEN $CIRRUS_WORKING_DIR/build/install-root/share/valentina-${PLATFORM}-${QT_VERSION}-${ARCH}-${CIRRUS_BRANCH}-multibundle-${CIRRUS_CHANGE_IN_REPO}.dmg "/0.7.x/Mac OS X/valentina-${PLATFORM}-${QT_VERSION}-${ARCH}-${CIRRUS_BRANCH}-multibundle-${CIRRUS_CHANGE_IN_REPO}.dmg";
+      python3 $CIRRUS_WORKING_DIR/scripts/deploy.py upload $ACCESS_TOKEN $CIRRUS_WORKING_DIR/build/install-root/share/valentina-${TARGET_PLATFORM}-${QT_VERSION}-${ARCH}-${CIRRUS_BRANCH}-multibundle-${CIRRUS_CHANGE_IN_REPO}.dmg "/0.7.x/Mac OS X/valentina-${TARGET_PLATFORM}-${QT_VERSION}-${ARCH}-${CIRRUS_BRANCH}-multibundle-${CIRRUS_CHANGE_IN_REPO}.dmg";
     fi
     check_failure "Unable to upload Valentina DMG.";
 

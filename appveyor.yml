@@ -54,7 +54,7 @@ environment:
       VSINSTALLDIR: "C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\"
       ARCH: x64
       PYTHON: "C:\\Python311-x64"
-      PLATFORM: "Windows10+"
+      TARGET_PLATFORM: "Windows10+"
       CHOCOLATEY_PACKAGES: false
       WINDEPLOYQT_BIN_PATH: "undefined"
       WINDEPLOYQT_COMPILER_RUNTIME: "true"
@@ -76,7 +76,7 @@ environment:
       MINGW_PATH: C:\Qt\Tools\mingw810_32\bin
       ARCH: x86
       PYTHON: "C:\\Python311"
-      PLATFORM: "Windows7+"
+      TARGET_PLATFORM: "Windows7+"
       CHOCOLATEY_PACKAGES: false
       WINDEPLOYQT_BIN_PATH: "undefined"
       WINDEPLOYQT_COMPILER_RUNTIME: "true"
@@ -98,7 +98,7 @@ environment:
 #      MINGW_PATH: C:\ProgramData\mingw64\mingw64\bin
 #      ARCH: x64
 #      PYTHON: "C:\\Python311-x64"
-#      PLATFORM: "Windows10+"
+#      TARGET_PLATFORM: "Windows10+"
 #      CHOCOLATEY_PACKAGES: true
 #      CHOCOLATEY_MINGW_VERSION: 13.2.0
 #      WINDEPLOYQT_BIN_PATH: "undefined"
@@ -115,7 +115,7 @@ environment:
       BUILD_SYSTEM: "qbs"
       ARCH: x64
       XCODE_VERSION: 14.1
-      PLATFORM: "macOS_10.13+"
+      TARGET_PLATFORM: "macOS_10.13+"
       MACOS_DEPLOYMENT_TARGET: 10.13
       MULTI_BUNDLE: true
       DEPLOY: true
@@ -128,7 +128,7 @@ environment:
       BUILD_SYSTEM: "qbs"
       ARCH: x64
       XCODE_VERSION: 14.1
-      PLATFORM: "macOS_10.13+"
+      TARGET_PLATFORM: "macOS_10.13+"
       MACOS_DEPLOYMENT_TARGET: 10.13
       MULTI_BUNDLE: false
       DEPLOY: true
@@ -141,7 +141,7 @@ environment:
       BUILD_SYSTEM: "qbs"
       ARCH: x64
       XCODE_VERSION: 14.1
-      PLATFORM: "macOS_11+"
+      TARGET_PLATFORM: "macOS_11+"
       MACOS_DEPLOYMENT_TARGET: 11.0
       MULTI_BUNDLE: true
       DEPLOY: true
@@ -154,7 +154,7 @@ environment:
       BUILD_SYSTEM: "qbs"
       ARCH: x64
       XCODE_VERSION: 14.1
-      PLATFORM: "macOS_11+"
+      TARGET_PLATFORM: "macOS_11+"
       MACOS_DEPLOYMENT_TARGET: 11.0
       MULTI_BUNDLE: false
       DEPLOY: true
@@ -168,7 +168,7 @@ environment:
       MINGW_PATH: C:\Qt\Tools\mingw810_32\bin
       ARCH: x86
       PYTHON: "C:\\Python311"
-      PLATFORM: "Windows7+"
+      TARGET_PLATFORM: "Windows7+"
       DEPLOY: false
 
     - job_name: Windows_Qt_5_15_(qbs_GCC_x64)
@@ -185,7 +185,7 @@ environment:
       MINGW_PATH: C:\Qt\Tools\mingw810_64\bin
       ARCH: x64
       PYTHON: "C:\\Python311-x64"
-      PLATFORM: "Windows7+"
+      TARGET_PLATFORM: "Windows7+"
       CHOCOLATEY_PACKAGES: false
       WINDEPLOYQT_BIN_PATH: "undefined"
       WINDEPLOYQT_COMPILER_RUNTIME: "true"
@@ -205,7 +205,7 @@ environment:
       VSVER: 16
       ARCH: x64
       PYTHON: "C:\\Python311-x64"
-      PLATFORM: "Windows7+"
+      TARGET_PLATFORM: "Windows7+"
       CHOCOLATEY_PACKAGES: false
       WINDEPLOYQT_BIN_PATH: "undefined"
       WINDEPLOYQT_COMPILER_RUNTIME: "true"
@@ -222,7 +222,7 @@ environment:
       MINGW_PATH: C:\Qt\Tools\mingw810_64\bin
       ARCH: x64
       PYTHON: "C:\\Python311-x64"
-      PLATFORM: "Windows7+"
+      TARGET_PLATFORM: "Windows7+"
       DEPLOY: false
 
     - job_name: Windows_Qt_5_15_(nmake_MSVC_x64)
@@ -233,7 +233,7 @@ environment:
       VSVER: 16
       ARCH: x64
       PYTHON: "C:\\Python311-x64"
-      PLATFORM: "Windows7+"
+      TARGET_PLATFORM: "Windows7+"
       DEPLOY: false
 
     - job_name: MacOS_10_15_Qt_5_15 (make)
@@ -244,7 +244,7 @@ environment:
       BUILD_SYSTEM: "make"
       ARCH: x64
       XCODE_VERSION: 12.3
-      PLATFORM: "macOS_10.13+"
+      TARGET_PLATFORM: "macOS_10.13+"
       DEPLOY: false 
 
 matrix:

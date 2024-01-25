@@ -1,7 +1,7 @@
 $env:BUILD_FOLDER = "$env:APPVEYOR_BUILD_FOLDER\build";
 $env:INSTALL_ROOT = "$env:BUILD_FOLDER\install-root\valentina";
 
-$file_name = "valentina-$env:PLATFORM-$env:COMPILER-$env:ARCH-$env:QT_VERSION-$env:APPVEYOR_REPO_BRANCH-$env:APPVEYOR_REPO_COMMIT.exe";
+$file_name = "valentina-$env:TARGET_PLATFORM-$env:COMPILER-$env:ARCH-$env:QT_VERSION-$env:APPVEYOR_REPO_BRANCH-$env:APPVEYOR_REPO_COMMIT.exe";
 
 if($env:DEPLOY -eq "true") {
     Write-Host "[CI] Preparing installer." -ForegroundColor Green;
