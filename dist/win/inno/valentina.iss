@@ -236,7 +236,7 @@ Source: "{#buildDirectory}\networkinformation\*"; DestDir: "{app}\networkinforma
 Source: "{#buildDirectory}\platforms\*"; DestDir: "{app}\platforms"; Flags: recursesubdirs createallsubdirs
 Source: "{#buildDirectory}\styles\*"; DestDir: "{app}\styles"; Flags: recursesubdirs createallsubdirs
 Source: "{#buildDirectory}\svgfonts\*"; DestDir: "{app}\svgfonts"; Flags: recursesubdirs createallsubdirs
-Source: "{#buildDirectory}\tls\*"; DestDir: "{app}\tls"; Flags: recursesubdirs createallsubdirs
+Source: "{#buildDirectory}\tls\*"; DestDir: "{app}\tls"; Flags: recursesubdirs createallsubdirs skipifsourcedoesntexist
 Source: "{#buildDirectory}\printsupport\*"; DestDir: "{app}\printsupport"; Flags: recursesubdirs createallsubdirs skipifsourcedoesntexist
 Source: "{#buildDirectory}\*.exe"; DestDir: "{app}"; Flags: ignoreversion
 Source: "{#buildDirectory}\*.dll"; DestDir: "{app}"

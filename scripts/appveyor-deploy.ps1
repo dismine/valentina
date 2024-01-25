@@ -6,7 +6,7 @@ $file_name = "valentina-$env:PLATFORM-$env:COMPILER-$env:ARCH-$env:QT_VERSION-$e
 if($env:DEPLOY -eq "true") {
     Write-Host "[CI] Preparing installer." -ForegroundColor Green;
     Rename-Item -Path "$env:INSTALL_ROOT\valentina\ValentinaInstaller.exe" -NewName "$file_name";
-    if ($LastExitCode -ne 0) {
+    if ($?) {
         Write-Error -Message "[CI] Error preparing installer." -Category InvalidResult;
         exit 1;
     } else {
