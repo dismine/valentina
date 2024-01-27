@@ -37,6 +37,7 @@
 #include <QRect>
 #include <QStyleOption>
 #include <QWidget>
+#include <QtMath>
 
 //---------------------------------------------------------------------------------------------------------------------
 auto StyleHelper::sidebarFontSize() -> qreal
