@@ -215,5 +215,17 @@
         <file>icon/dark/16x16/viewimage@2x.png</file>
         <file>icon/32x32/fold.png</file>
         <file>icon/32x32/fold@2x.png</file>
+        <file>icon/dark/32x32/expand2-hover@2x.png</file>
+        <file>icon/dark/32x32/expand2-hover.png</file>
+        <file>icon/dark/32x32/expand2-disabled@2x.png</file>
+        <file>icon/dark/32x32/expand2-disabled.png</file>
+        <file>icon/dark/32x32/expand2@2x.png</file>
+        <file>icon/dark/32x32/expand2.png</file>
+        <file>icon/dark/32x32/expand1-hover@2x.png</file>
+        <file>icon/dark/32x32/expand1-hover.png</file>
+        <file>icon/dark/32x32/expand1-disabled@2x.png</file>
+        <file>icon/dark/32x32/expand1-disabled.png</file>
+        <file>icon/dark/32x32/expand1@2x.png</file>
+        <file>icon/dark/32x32/expand1.png</file>
     </qresource>
 </RCC>
