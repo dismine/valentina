@@ -2397,51 +2397,26 @@ QSplitter::handle
     max-height: 0em;
 }
 
-/**
- *  It's not possible to get satisfactory rounded borders here.
- *  If you set the border to be negative, while adjusting the
- *  widths, you get an asymmetrical curve which produces an
- *  unappealing border.
- */
 QProgressBar:horizontal,
 QProgressBar:vertical
 {
-    background-color: #626568;
-    border: 0.9em solid #272729;
-    border-radius: 0.13em;
-    padding: 0em;
-}
-
-QProgressBar:horizontal
-{
-    height: 0.2em;
-    min-width: 6em;
-    text-align: right;
-    padding-left: -0.03em;
-    padding-right: -0.03em;
-    margin-top: 0.2em;
-    margin-bottom: 0.2em;
-    margin-right: 1.3em;
-}
-
-QProgressBar:vertical
-{
-    width: 0.2em;
-    min-height: 6em;
-    text-align: bottom;
-    padding-top: -0.03em;
-    padding-bottom: -0.03em;
-    margin-left: 0.2em;
-    margin-right: 0.2em;
-    margin-bottom: 0.41em;
+  margin: 2px 0 0;
+  background: #404040;
+  padding: 3px;
+  border-radius: 6px;
+  text-align: center;
+  font: bold;
+  border-radius: 6px;
+  border: 2px solid #3a6dad;
 }
 
 QProgressBar::chunk:horizontal,
 QProgressBar::chunk:vertical
 {
-    background-color: #3d3d42;
-    border: 0.9em transparent;
-    border-radius: 0.08em;
+  background: qlineargradient(x1:0, y1:0, x2:0, y2:1,
+                              stop:0 #3d9cc7, stop:0.1 #3a6dad, stop: 0.9 #3a6dad, stop:1 #101c3f);
+  border: 1px solid #111111;
+  border-radius: 6px;
 }
 
 QScrollArea,
