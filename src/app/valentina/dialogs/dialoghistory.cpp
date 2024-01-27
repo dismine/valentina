@@ -33,6 +33,7 @@
 #include "../vgeometry/vellipticalarc.h"
 #include "../vgeometry/vpointf.h"
 #include "../vgeometry/vsplinepath.h"
+#include "../vmisc/theme/vtheme.h"
 #include "../vmisc/vtablesearch.h"
 #include "../vmisc/vvalentinasettings.h"
 #include "../vtools/tools/drawTools/toolpoint/toolsinglepoint/toolcut/vtoolcutarc.h"
@@ -141,7 +142,7 @@ void DialogHistory::cellClicked(int row, int column)
 
         item = ui->tableWidget->item(row, 0);
         m_cursorRow = row;
-        item->setIcon(QIcon("://icon/32x32/put_after.png"));
+        item->setIcon(QIcon(VTheme::GetPixmapResource(QStringLiteral("icon"), QStringLiteral("32x32/put_after.png"))));
         const auto id = qvariant_cast<quint32>(item->data(Qt::UserRole));
         m_doc->blockSignals(true);
         row == ui->tableWidget->rowCount() - 1 ? m_doc->setCursor(0) : m_doc->setCursor(id);
@@ -176,7 +177,8 @@ void DialogHistory::ChangedCursor(quint32 id)
             QTableWidgetItem *oldCursorItem = ui->tableWidget->item(m_cursorRow, 0);
             oldCursorItem->setIcon(QIcon());
             m_cursorRow = i;
-            item->setIcon(QIcon("://icon/32x32/put_after.png"));
+            item->setIcon(
+                QIcon(VTheme::GetPixmapResource(QStringLiteral("icon"), QStringLiteral("32x32/put_after.png"))));
         }
     }
 }
@@ -234,11 +236,12 @@ void DialogHistory::FillTable()
     ui->tableWidget->setRowCount(count); // Real row count
     if (count > 0)
     {
+        ui->tableWidget->selectRow(0);
         m_cursorRow = CursorRow();
         QTableWidgetItem *item = ui->tableWidget->item(m_cursorRow, 0);
         // cppcheck-suppress unknownMacro
         SCASSERT(item != nullptr)
-        item->setIcon(QIcon("://icon/32x32/put_after.png"));
+        item->setIcon(QIcon(VTheme::GetPixmapResource(QStringLiteral("icon"), QStringLiteral("32x32/put_after.png"))));
     }
     ui->tableWidget->resizeColumnsToContents();
     ui->tableWidget->resizeRowsToContents();

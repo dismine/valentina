@@ -527,7 +527,7 @@ auto VTheme::GetIconResource(const QString &root, const QString &iconName) -> QI
 //---------------------------------------------------------------------------------------------------------------------
 auto VTheme::GetPixmapResource(const QString &root, const QString &iconName) -> QPixmap
 {
-    bool dark = (ColorSheme() == VColorSheme::Dark);
+    bool const dark = (ColorSheme() == VColorSheme::Dark);
     return ::GetPixmapResource(root, iconName, dark);
 }
 

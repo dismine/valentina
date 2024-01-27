@@ -41,8 +41,7 @@
         <string notr="true"/>
        </property>
        <property name="icon">
-        <iconset theme="system-search">
-         <normaloff>.</normaloff>.</iconset>
+        <iconset theme="system-search"/>
        </property>
        <property name="shortcut">
         <string>Alt+Down</string>
@@ -94,7 +93,6 @@
        <property name="font">
         <font>
          <pointsize>14</pointsize>
-         <weight>75</weight>
          <italic>false</italic>
          <bold>true</bold>
         </font>
@@ -127,7 +125,6 @@
        <property name="font">
         <font>
          <pointsize>14</pointsize>
-         <weight>75</weight>
          <bold>true</bold>
         </font>
        </property>
@@ -162,7 +159,6 @@
        <property name="font">
         <font>
          <pointsize>14</pointsize>
-         <weight>75</weight>
          <bold>true</bold>
         </font>
        </property>
@@ -194,7 +190,6 @@
        <property name="font">
         <font>
          <pointsize>14</pointsize>
-         <weight>75</weight>
          <bold>true</bold>
         </font>
        </property>
@@ -228,11 +223,10 @@
         <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Find Previous &lt;span style=&quot; color:#888a85;&quot;&gt;%1&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
        </property>
        <property name="text">
-        <string notr="true"></string>
+        <string notr="true"/>
        </property>
        <property name="icon">
-        <iconset theme="go-up">
-         <normaloff>.</normaloff>.</iconset>
+        <iconset theme="go-up"/>
        </property>
        <property name="shortcut">
         <string>Shift+F3</string>
@@ -248,11 +242,10 @@
         <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Find Next %1&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
        </property>
        <property name="text">
-        <string notr="true"></string>
+        <string notr="true"/>
        </property>
        <property name="icon">
-        <iconset theme="go-down">
-         <normaloff>.</normaloff>.</iconset>
+        <iconset theme="go-down"/>
        </property>
        <property name="shortcut">
         <string>F3</string>
@@ -268,6 +261,9 @@
     <widget class="QTableWidget" name="tableWidget">
      <property name="alternatingRowColors">
       <bool>true</bool>
+     </property>
+     <property name="selectionBehavior">
+      <enum>QAbstractItemView::SelectRows</enum>
      </property>
      <attribute name="horizontalHeaderVisible">
       <bool>false</bool>
