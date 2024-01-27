@@ -29,16 +29,14 @@
 
 #include "stylehelper.h"
 
-#include <QPixmapCache>
-#include <QWidget>
-#include <QRect>
-#include <QPainter>
 #include <QApplication>
-#include <QPalette>
-#include <QStyleOption>
 #include <QObject>
-
-#include "../vmisc/vmath.h"
+#include <QPainter>
+#include <QPalette>
+#include <QPixmapCache>
+#include <QRect>
+#include <QStyleOption>
+#include <QWidget>
 
 //---------------------------------------------------------------------------------------------------------------------
 auto StyleHelper::sidebarFontSize() -> qreal
@@ -53,7 +51,7 @@ auto StyleHelper::sidebarFontSize() -> qreal
 //---------------------------------------------------------------------------------------------------------------------
 auto StyleHelper::panelTextColor(bool lightColored) -> QColor
 {
-    //qApp->palette().highlightedText().color();
+    // qApp->palette().highlightedText().color();
     if (!lightColored)
     {
         return Qt::white;
@@ -82,9 +80,7 @@ auto StyleHelper::baseColor(bool lightColored) -> QColor
 auto StyleHelper::borderColor(bool lightColored) -> QColor
 {
     QColor result = baseColor(lightColored);
-    result.setHsv(result.hue(),
-                  result.saturation(),
-                  result.value() / 2);
+    result.setHsv(result.hue(), result.saturation(), result.value() / 2);
     return result;
 }
 
@@ -103,9 +99,7 @@ void StyleHelper::setBaseColor(const QColor &newcolor)
     m_requestedBaseColor = newcolor;
 
     QColor color;
-    color.setHsv(newcolor.hue(),
-                 static_cast<int>(newcolor.saturation() * 0.7),
-                 64 + newcolor.value() / 3);
+    color.setHsv(newcolor.hue(), static_cast<int>(newcolor.saturation() * 0.7), 64 + newcolor.value() / 3);
 
     if (color.isValid() && color != m_baseColor)
     {
@@ -144,10 +138,10 @@ void StyleHelper::drawIconWithShadow(const QIcon &icon, const QRect &rect, QPain
         if (iconMode == QIcon::Disabled)
         {
             QImage im = px.toImage().convertToFormat(QImage::Format_ARGB32);
-            for (int y=0; y<im.height(); ++y)
+            for (int y = 0; y < im.height(); ++y)
             {
                 QRgb *scanLine = reinterpret_cast<QRgb *>(im.scanLine(y));
-                for (int x=0; x<im.width(); ++x)
+                for (int x = 0; x < im.width(); ++x)
                 {
                     QRgb pixel = *scanLine;
                     char intensity = static_cast<char>(qGray(pixel));
