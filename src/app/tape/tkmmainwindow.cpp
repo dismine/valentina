@@ -1942,6 +1942,7 @@ auto TKMMainWindow::MaybeSave() -> bool
     }
 
     messageBox->setWindowModality(Qt::ApplicationModal);
+    messageBox->setFixedSize(300, 85);
     const auto ret = static_cast<QMessageBox::StandardButton>(messageBox->exec());
 
     switch (ret)
