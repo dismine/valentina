@@ -284,10 +284,10 @@ auto MainWindowsNoGUI::GenerateLayout(VLayoutGenerator &lGenerator) -> bool
         {
             QEventLoop wait;
             QFutureWatcher<void> fw;
+            QObject::connect(&fw, &QFutureWatcher<void>::finished, &wait, &QEventLoop::quit);
             fw.setFuture(
                 QtConcurrent::run([&lGenerator, timer, nestingState]()
                                   { lGenerator.Generate(timer, lGenerator.GetNestingTimeMSecs(), nestingState); }));
-            QObject::connect(&fw, &QFutureWatcher<void>::finished, &wait, &QEventLoop::quit);
             wait.exec();
         }
 

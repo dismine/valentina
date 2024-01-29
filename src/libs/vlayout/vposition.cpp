@@ -235,10 +235,10 @@ auto VPosition::ArrangeDetail(const VPositionData &data, std::atomic_bool *stop,
         return position.getBestResult();
     };
 
-    watcher.setFuture(QtConcurrent::mapped(jobs, Nest));
-
     QEventLoop wait;
     QObject::connect(&watcher, &QFutureWatcher<VBestSquare>::finished, &wait, &QEventLoop::quit);
+
+    watcher.setFuture(QtConcurrent::mapped(jobs, Nest));
     wait.exec();
 
     if (stop->load())

@@ -829,10 +829,10 @@ void MApplication::RepopulateMeasurementsDatabase(const QString &path)
     Q_UNUSED(path)
     if (m_knownMeasurementsDatabase != nullptr)
     {
-        m_knownMeasurementsRepopulateWatcher->setFuture(
-            QtConcurrent::run([this]() { m_knownMeasurementsDatabase->PopulateMeasurementsDatabase(); }));
         QObject::connect(m_knownMeasurementsRepopulateWatcher, &QFutureWatcher<void>::finished, this,
                          &MApplication::SyncKnownMeasurements);
+        m_knownMeasurementsRepopulateWatcher->setFuture(
+            QtConcurrent::run([this]() { m_knownMeasurementsDatabase->PopulateMeasurementsDatabase(); }));
     }
 }
 
