@@ -61,8 +61,6 @@ LANGUAGES += \
     es_ES \
     fi_FI \
     en_US \
-    en_CA \
-    en_IN \
     ro_RO \
     zh_CN \
     pt_BR \

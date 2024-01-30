@@ -181,22 +181,6 @@ macx{
             QMAKE_BUNDLE_DATA += TRANSLATION_en_US
         }
 
-        exists($${TRANSLATIONS_PATH}/valentina_en_CA.qm){
-            TRANSLATION_en_CA.files += \
-                $$files($${TRANSLATIONS_PATH}/*_en_CA.qm) \
-                $${TRANSLATIONS_PATH}/Localizable.strings
-            TRANSLATION_en_CA.path = "$$RESOURCES_DIR/translations/en_CA.lproj"
-            QMAKE_BUNDLE_DATA += TRANSLATION_en_CA
-        }
-
-        exists($${TRANSLATIONS_PATH}/valentina_en_IN.qm){
-            TRANSLATION_en_IN.files += \
-                $$files($${TRANSLATIONS_PATH}/*_en_IN.qm) \
-                $${TRANSLATIONS_PATH}/Localizable.strings
-            TRANSLATION_en_IN.path = "$$RESOURCES_DIR/translations/en_IN.lproj"
-            QMAKE_BUNDLE_DATA += TRANSLATION_en_IN
-        }
-
         exists($${TRANSLATIONS_PATH}/valentina_ro_RO.qm){
             TRANSLATION_ro_RO.files += \
                 $$files($${TRANSLATIONS_PATH}/*_ro_RO.qm) \
