@@ -289,25 +289,25 @@ Root: HKA; Subkey: "Software\Classes\.vst\shell\open\command"; ValueType: string
 Root: HKA; Subkey: "Software\Classes\.vlt\shell\open\command"; ValueType: string; ValueName: ""; ValueData: """{app}\puzzle.exe"" ""%1"""; Tasks: fileassoc4
 Root: HKA; Subkey: "Software\Classes\.vkm\shell\open\command"; ValueType: string; ValueName: ""; ValueData: """{app}\tape.exe"" ""%1"""; Tasks: fileassoc5
 
-Root: HKA; Subkey: "Software\Classes\.val\shell\Edit with {#MyAppName}{#MyAppStatus}"; ValueType: none; ValueName: ""; ValueData: ""; Flags: uninsdeletekey; Tasks: fileassoc1
-Root: HKA; Subkey: "Software\Classes\.val\shell\Edit with {#MyAppName}{#MyAppStatus}"; ValueType: string; ValueName: "Icon"; ValueData: "{app}\valentina.exe,0"; Flags: uninsdeletekey; Tasks: fileassoc1
-Root: HKA; Subkey: "Software\Classes\.val\shell\Edit with {#MyAppName}{#MyAppStatus}\command"; ValueType: string; ValueName: ""; ValueData: """{app}\valentina.exe"" ""%1"""; Flags: uninsdeletekey; Tasks: fileassoc1
+Root: HKA; Subkey: "Software\Classes\.val\shell\{cm:EditWith} {#MyAppName}{#MyAppStatus}"; ValueType: none; ValueName: ""; ValueData: ""; Flags: uninsdeletekey; Tasks: fileassoc1
+Root: HKA; Subkey: "Software\Classes\.val\shell\{cm:EditWith} {#MyAppName}{#MyAppStatus}"; ValueType: string; ValueName: "Icon"; ValueData: "{app}\valentina.exe,0"; Flags: uninsdeletekey; Tasks: fileassoc1
+Root: HKA; Subkey: "Software\Classes\.val\shell\{cm:EditWith} {#MyAppName}{#MyAppStatus}\command"; ValueType: string; ValueName: ""; ValueData: """{app}\valentina.exe"" ""%1"""; Flags: uninsdeletekey; Tasks: fileassoc1
 
-Root: HKA; Subkey: "Software\Classes\.vit\shell\Edit with Tape{#MyAppStatus}"; ValueType: none; ValueName: ""; ValueData: ""; Flags: uninsdeletekey; Tasks: fileassoc2
-Root: HKA; Subkey: "Software\Classes\.vit\shell\Edit with Tape{#MyAppStatus}"; ValueType: string; ValueName: "Icon"; ValueData: "{app}\tape.exe,0"; Flags: uninsdeletekey; Tasks: fileassoc2
-Root: HKA; Subkey: "Software\Classes\.vit\shell\Edit with Tape{#MyAppStatus}\command"; ValueType: string; ValueName: ""; ValueData: """{app}\tape.exe"" ""%1"""; Flags: uninsdeletekey; Tasks: fileassoc2
+Root: HKA; Subkey: "Software\Classes\.vit\shell\{cm:EditWith} Tape{#MyAppStatus}"; ValueType: none; ValueName: ""; ValueData: ""; Flags: uninsdeletekey; Tasks: fileassoc2
+Root: HKA; Subkey: "Software\Classes\.vit\shell\{cm:EditWith} Tape{#MyAppStatus}"; ValueType: string; ValueName: "Icon"; ValueData: "{app}\tape.exe,0"; Flags: uninsdeletekey; Tasks: fileassoc2
+Root: HKA; Subkey: "Software\Classes\.vit\shell\{cm:EditWith} Tape{#MyAppStatus}\command"; ValueType: string; ValueName: ""; ValueData: """{app}\tape.exe"" ""%1"""; Flags: uninsdeletekey; Tasks: fileassoc2
 
-Root: HKA; Subkey: "Software\Classes\.vst\shell\Edit with Tape{#MyAppStatus}"; ValueType: none; ValueName: ""; ValueData: ""; Flags: uninsdeletekey; Tasks: fileassoc3
-Root: HKA; Subkey: "Software\Classes\.vst\shell\Edit with Tape{#MyAppStatus}"; ValueType: string; ValueName: "Icon"; ValueData: "{app}\tape.exe,0"; Flags: uninsdeletekey; Tasks: fileassoc3
-Root: HKA; Subkey: "Software\Classes\.vst\shell\Edit with Tape{#MyAppStatus}\command"; ValueType: string; ValueName: ""; ValueData: """{app}\tape.exe"" ""%1"""; Flags: uninsdeletekey; Tasks: fileassoc3
+Root: HKA; Subkey: "Software\Classes\.vst\shell\{cm:EditWith} Tape{#MyAppStatus}"; ValueType: none; ValueName: ""; ValueData: ""; Flags: uninsdeletekey; Tasks: fileassoc3
+Root: HKA; Subkey: "Software\Classes\.vst\shell\{cm:EditWith} Tape{#MyAppStatus}"; ValueType: string; ValueName: "Icon"; ValueData: "{app}\tape.exe,0"; Flags: uninsdeletekey; Tasks: fileassoc3
+Root: HKA; Subkey: "Software\Classes\.vst\shell\{cm:EditWith} Tape{#MyAppStatus}\command"; ValueType: string; ValueName: ""; ValueData: """{app}\tape.exe"" ""%1"""; Flags: uninsdeletekey; Tasks: fileassoc3
 
-Root: HKA; Subkey: "Software\Classes\.vlt\shell\Edit with Puzzle{#MyAppStatus}"; ValueType: none; ValueName: ""; ValueData: ""; Flags: uninsdeletekey; Tasks: fileassoc4
-Root: HKA; Subkey: "Software\Classes\.vlt\shell\Edit with Puzzle{#MyAppStatus}"; ValueType: string; ValueName: "Icon"; ValueData: "{app}\puzzle.exe,0"; Flags: uninsdeletekey; Tasks: fileassoc4
-Root: HKA; Subkey: "Software\Classes\.vlt\shell\Edit with Puzzle{#MyAppStatus}\command"; ValueType: string; ValueName: ""; ValueData: """{app}\puzzle.exe"" ""%1"""; Flags: uninsdeletekey; Tasks: fileassoc4
+Root: HKA; Subkey: "Software\Classes\.vlt\shell\{cm:EditWith} Puzzle{#MyAppStatus}"; ValueType: none; ValueName: ""; ValueData: ""; Flags: uninsdeletekey; Tasks: fileassoc4
+Root: HKA; Subkey: "Software\Classes\.vlt\shell\{cm:EditWith} Puzzle{#MyAppStatus}"; ValueType: string; ValueName: "Icon"; ValueData: "{app}\puzzle.exe,0"; Flags: uninsdeletekey; Tasks: fileassoc4
+Root: HKA; Subkey: "Software\Classes\.vlt\shell\{cm:EditWith} Puzzle{#MyAppStatus}\command"; ValueType: string; ValueName: ""; ValueData: """{app}\puzzle.exe"" ""%1"""; Flags: uninsdeletekey; Tasks: fileassoc4
 
-Root: HKA; Subkey: "Software\Classes\.vkm\shell\Edit with Tape{#MyAppStatus}"; ValueType: none; ValueName: ""; ValueData: ""; Flags: uninsdeletekey; Tasks: fileassoc5
-Root: HKA; Subkey: "Software\Classes\.vkm\shell\Edit with Tape{#MyAppStatus}"; ValueType: string; ValueName: "Icon"; ValueData: "{app}\tape.exe,0"; Flags: uninsdeletekey; Tasks: fileassoc5
-Root: HKA; Subkey: "Software\Classes\.vkm\shell\Edit with Tape{#MyAppStatus}\command"; ValueType: string; ValueName: ""; ValueData: """{app}\tape.exe"" ""%1"""; Flags: uninsdeletekey; Tasks: fileassoc5
+Root: HKA; Subkey: "Software\Classes\.vkm\shell\{cm:EditWith} Tape{#MyAppStatus}"; ValueType: none; ValueName: ""; ValueData: ""; Flags: uninsdeletekey; Tasks: fileassoc5
+Root: HKA; Subkey: "Software\Classes\.vkm\shell\{cm:EditWith} Tape{#MyAppStatus}"; ValueType: string; ValueName: "Icon"; ValueData: "{app}\tape.exe,0"; Flags: uninsdeletekey; Tasks: fileassoc5
+Root: HKA; Subkey: "Software\Classes\.vkm\shell\{cm:EditWith} Tape{#MyAppStatus}\command"; ValueType: string; ValueName: ""; ValueData: """{app}\tape.exe"" ""%1"""; Flags: uninsdeletekey; Tasks: fileassoc5
 
 Root: HKA; Subkey: "Software\Classes\Applications\valentina.exe\SupportedTypes"; ValueType: string; ValueName: ".val"; ValueData: ""; Tasks: fileassoc1
 Root: HKA; Subkey: "Software\Classes\Applications\tape.exe\SupportedTypes"; ValueType: string; ValueName: ".vit"; ValueData: ""; Tasks: fileassoc2
@@ -430,6 +430,11 @@ ErrorFindApp = Unable to check if a program is running. Please, close the progra
 english.ErrorFindApp = Unable to check if a program is running. Please, close the program before continue and press OK to continue the installation.
 ukrainian.ErrorFindApp = Неможливо перевірити, чи запущена програма. Будь ласка, закрийте програму перед продовженням та натисніть OK, щоб продовжити встановлення.
 french.ErrorFindApp = Impossible de vérifier si le programme est en cours d'exécution. Merci de le fermer avant de continuer s'il est ouvert, puis de cliquer sur OK pour poursuivre l'installation.
+
+EditWith = Edit with
+english.EditWith = Edit with
+ukrainian.EditWith = Відкрити за допомогою
+french.EditWith = Editer avec
 
 [Code]
 const
