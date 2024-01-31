@@ -44,6 +44,7 @@
 #include "../vmisc/def.h"
 #include "../vmisc/vabstractapplication.h"
 #include "../vpropertyexplorer/checkablemessagebox.h"
+#include "../vwidgets/vmousewheelwidgetadjustmentguard.h"
 
 #if QT_VERSION < QT_VERSION_CHECK(6, 4, 0)
 #include "../vmisc/compatibility.h"
@@ -58,6 +59,12 @@ WatermarkWindow::WatermarkWindow(const QString &patternPath, QWidget *parent)
     m_patternPath(patternPath)
 {
     ui->setupUi(this);
+
+    // Prevent stealing focus when scrolling
+    VMouseWheelWidgetAdjustmentGuard::InstallEventFilter(ui->spinBoxOpacity);
+    VMouseWheelWidgetAdjustmentGuard::InstallEventFilter(ui->spinBoxTextRotation);
+    VMouseWheelWidgetAdjustmentGuard::InstallEventFilter(ui->spinBoxImageRotation);
+
     m_okPathColor = ui->lineEditPath->palette().color(ui->lineEditPath->foregroundRole());
 
     VAbstractApplication::VApp()->Settings()->GetOsSeparator() ? setLocale(QLocale()) : setLocale(QLocale::c());

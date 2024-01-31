@@ -35,8 +35,10 @@
 #include "../vmisc/dialogs/vshortcutdialog.h"
 #include "../vmisc/theme/vtheme.h"
 #include "../vmisc/vabstractshortcutmanager.h"
+#include "../vwidgets/vmousewheelwidgetadjustmentguard.h"
 #include "ui_tapepreferencesconfigurationpage.h"
 
+#include <QScrollBar>
 #include <QStyleHints>
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -48,6 +50,11 @@ TapePreferencesConfigurationPage::TapePreferencesConfigurationPage(QWidget *pare
 {
     ui->setupUi(this);
     RetranslateUi();
+
+    // Prevent stealing focus when scrolling
+    VMouseWheelWidgetAdjustmentGuard::InstallEventFilter(ui->langCombo);
+    VMouseWheelWidgetAdjustmentGuard::InstallEventFilter(ui->comboBoxKnownMeasurements);
+    VMouseWheelWidgetAdjustmentGuard::InstallEventFilter(ui->comboBoxThemeMode);
 
     InitLanguages(ui->langCombo);
     connect(ui->langCombo, QOverload<int>::of(&QComboBox::currentIndexChanged), this,

@@ -59,6 +59,7 @@
 #include "../vpatterndb/vtranslatevars.h"
 #include "../vwidgets/vabstractmainwindow.h"
 #include "../vwidgets/vmaingraphicsscene.h"
+#include "../vwidgets/vmousewheelwidgetadjustmentguard.h"
 #include "ui_dialogsplinepath.h"
 
 #if QT_VERSION < QT_VERSION_CHECK(6, 4, 0)
@@ -78,6 +79,13 @@ DialogSplinePath::DialogSplinePath(const VContainer *data, VAbstractPattern *doc
     ui(new Ui::DialogSplinePath)
 {
     ui->setupUi(this);
+
+    // Prevent stealing focus when scrolling
+    VMouseWheelWidgetAdjustmentGuard::InstallEventFilter(ui->comboBoxNewPoint);
+    VMouseWheelWidgetAdjustmentGuard::InstallEventFilter(ui->comboBoxPoint);
+    VMouseWheelWidgetAdjustmentGuard::InstallEventFilter(ui->comboBoxPenStyle);
+    VMouseWheelWidgetAdjustmentGuard::InstallEventFilter(ui->comboBoxColor);
+    VMouseWheelWidgetAdjustmentGuard::InstallEventFilter(ui->doubleSpinBoxApproximationScale);
 
     InitIcons();
 

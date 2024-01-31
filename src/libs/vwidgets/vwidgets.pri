@@ -31,7 +31,8 @@ SOURCES += \
     $$PWD/vhighlighter.cpp \
     $$PWD/vpiecegrainline.cpp \
     $$PWD/vtoolbuttonpopup.cpp \
-    $$PWD/vaspectratiopixmaplabel.cpp
+    $$PWD/vaspectratiopixmaplabel.cpp \
+    $$PWD/vmousewheelwidgetadjustmentguard.cpp
         
 *msvc*:SOURCES += $$PWD/stable.cpp
 
@@ -67,5 +68,6 @@ HEADERS += \
     $$PWD/vpiecegrainline.h \
     $$PWD/vpiecegrainline_p.h \
     $$PWD/vtoolbuttonpopup.h \
-    $$PWD/vaspectratiopixmaplabel.h
+    $$PWD/vaspectratiopixmaplabel.h \
+    $$PWD/vmousewheelwidgetadjustmentguard.h
 

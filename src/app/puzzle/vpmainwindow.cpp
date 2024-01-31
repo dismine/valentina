@@ -59,6 +59,7 @@
 #include "../vmisc/theme/vtheme.h"
 #include "../vmisc/vsysexits.h"
 #include "../vwidgets/vmaingraphicsscene.h"
+#include "../vwidgets/vmousewheelwidgetadjustmentguard.h"
 #include "dialogs/dialogpuzzlepreferences.h"
 #include "dialogs/dialogsavemanuallayout.h"
 #include "dialogs/vpdialogabout.h"
@@ -332,6 +333,31 @@ VPMainWindow::VPMainWindow(const VPCommandLinePtr &cmd, QWidget *parent)
     m_watermarkWatcher(new QFileSystemWatcher(this))
 {
     ui->setupUi(this);
+
+    // Prevent stealing focus when scrolling
+    VMouseWheelWidgetAdjustmentGuard::InstallEventFilter(ui->doubleSpinBoxCurrentPieceBoxPositionX);
+    VMouseWheelWidgetAdjustmentGuard::InstallEventFilter(ui->doubleSpinBoxCurrentPieceBoxPositionY);
+    VMouseWheelWidgetAdjustmentGuard::InstallEventFilter(ui->doubleSpinBoxCurrentPieceAngle);
+    VMouseWheelWidgetAdjustmentGuard::InstallEventFilter(ui->comboBoxLayoutUnit);
+    VMouseWheelWidgetAdjustmentGuard::InstallEventFilter(ui->comboBoxSheetTemplates);
+    VMouseWheelWidgetAdjustmentGuard::InstallEventFilter(ui->doubleSpinBoxSheetPaperWidth);
+    VMouseWheelWidgetAdjustmentGuard::InstallEventFilter(ui->doubleSpinBoxSheetPaperHeight);
+    VMouseWheelWidgetAdjustmentGuard::InstallEventFilter(ui->doubleSpinBoxSheetMarginTop);
+    VMouseWheelWidgetAdjustmentGuard::InstallEventFilter(ui->doubleSpinBoxSheetMarginLeft);
+    VMouseWheelWidgetAdjustmentGuard::InstallEventFilter(ui->doubleSpinBoxSheetMarginRight);
+    VMouseWheelWidgetAdjustmentGuard::InstallEventFilter(ui->doubleSpinBoxSheetMarginBottom);
+    VMouseWheelWidgetAdjustmentGuard::InstallEventFilter(ui->doubleSpinBoxSheetGridColWidth);
+    VMouseWheelWidgetAdjustmentGuard::InstallEventFilter(ui->doubleSpinBoxSheetGridRowHeight);
+    VMouseWheelWidgetAdjustmentGuard::InstallEventFilter(ui->comboBoxTileTemplates);
+    VMouseWheelWidgetAdjustmentGuard::InstallEventFilter(ui->doubleSpinBoxTilePaperWidth);
+    VMouseWheelWidgetAdjustmentGuard::InstallEventFilter(ui->doubleSpinBoxTilePaperHeight);
+    VMouseWheelWidgetAdjustmentGuard::InstallEventFilter(ui->doubleSpinBoxTileMarginTop);
+    VMouseWheelWidgetAdjustmentGuard::InstallEventFilter(ui->doubleSpinBoxTileMarginLeft);
+    VMouseWheelWidgetAdjustmentGuard::InstallEventFilter(ui->doubleSpinBoxTileMarginRight);
+    VMouseWheelWidgetAdjustmentGuard::InstallEventFilter(ui->doubleSpinBoxTileMarginBottom);
+    VMouseWheelWidgetAdjustmentGuard::InstallEventFilter(ui->doubleSpinBoxSheetPiecesGap);
+    VMouseWheelWidgetAdjustmentGuard::InstallEventFilter(ui->doubleSpinBoxHorizontalScale);
+    VMouseWheelWidgetAdjustmentGuard::InstallEventFilter(ui->doubleSpinBoxVerticalScale);
 
     connect(m_layout.data(), &VPLayout::PieceSelectionChanged, this, &VPMainWindow::on_PieceSelectionChanged);
     connect(m_layout.data(), &VPLayout::LayoutChanged, this, [this]() { LayoutWasSaved(false); });

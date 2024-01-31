@@ -35,6 +35,7 @@
 #include "../vmisc/theme/vtheme.h"
 #include "../vmisc/vabstractshortcutmanager.h"
 #include "../vmisc/vvalentinasettings.h"
+#include "../vwidgets/vmousewheelwidgetadjustmentguard.h"
 #include "ui_preferencesconfigurationpage.h"
 #include "vcommonsettings.h"
 
@@ -51,6 +52,15 @@ PreferencesConfigurationPage::PreferencesConfigurationPage(QWidget *parent)
 {
     ui->setupUi(this);
     RetranslateUi();
+
+    // Prevent stealing focus when scrolling
+    VMouseWheelWidgetAdjustmentGuard::InstallEventFilter(ui->autoTime);
+    VMouseWheelWidgetAdjustmentGuard::InstallEventFilter(ui->langCombo);
+    VMouseWheelWidgetAdjustmentGuard::InstallEventFilter(ui->comboBoxPieceLbelLanguage);
+    VMouseWheelWidgetAdjustmentGuard::InstallEventFilter(ui->unitCombo);
+    VMouseWheelWidgetAdjustmentGuard::InstallEventFilter(ui->labelCombo);
+    VMouseWheelWidgetAdjustmentGuard::InstallEventFilter(ui->comboBoxThemeMode);
+    VMouseWheelWidgetAdjustmentGuard::InstallEventFilter(ui->comboBoxPointerMode);
 
     ui->tabWidget->setCurrentIndex(0);
 

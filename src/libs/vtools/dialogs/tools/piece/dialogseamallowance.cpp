@@ -50,6 +50,7 @@
 #include "../vpatterndb/vpiecenode.h"
 #include "../vpatterndb/vpiecepath.h"
 #include "../vwidgets/fancytabbar/fancytabbar.h"
+#include "../vwidgets/vmousewheelwidgetadjustmentguard.h"
 #include "dialogpatternmaterials.h"
 #include "dialogpiecepath.h"
 #include "dialogplacelabel.h"
@@ -202,6 +203,33 @@ DialogSeamAllowance::DialogSeamAllowance(const VContainer *data, VAbstractPatter
     InitFoldLineTab();
 
     InitIcons();
+
+    // Prevent stealing focus when scrolling
+    VMouseWheelWidgetAdjustmentGuard::InstallEventFilter(uiTabGrainline->comboBoxGrainlineCenterPin);
+    VMouseWheelWidgetAdjustmentGuard::InstallEventFilter(uiTabGrainline->comboBoxGrainlineTopPin);
+    VMouseWheelWidgetAdjustmentGuard::InstallEventFilter(uiTabGrainline->comboBoxGrainlineBottomPin);
+    VMouseWheelWidgetAdjustmentGuard::InstallEventFilter(uiTabGrainline->comboBoxArrow);
+    VMouseWheelWidgetAdjustmentGuard::InstallEventFilter(uiTabLabels->comboBoxPieceLabelSize);
+    VMouseWheelWidgetAdjustmentGuard::InstallEventFilter(uiTabLabels->comboBoxDLCenterPin);
+    VMouseWheelWidgetAdjustmentGuard::InstallEventFilter(uiTabLabels->comboBoxDLTopLeftPin);
+    VMouseWheelWidgetAdjustmentGuard::InstallEventFilter(uiTabLabels->comboBoxDLBottomRightPin);
+    VMouseWheelWidgetAdjustmentGuard::InstallEventFilter(uiTabLabels->comboBoxPatternLabelSize);
+    VMouseWheelWidgetAdjustmentGuard::InstallEventFilter(uiTabLabels->comboBoxPLCenterPin);
+    VMouseWheelWidgetAdjustmentGuard::InstallEventFilter(uiTabLabels->comboBoxPLTopLeftPin);
+    VMouseWheelWidgetAdjustmentGuard::InstallEventFilter(uiTabLabels->comboBoxPLBottomRightPin);
+    VMouseWheelWidgetAdjustmentGuard::InstallEventFilter(uiTabLabels->dateEditCustomerBirthDate);
+    VMouseWheelWidgetAdjustmentGuard::InstallEventFilter(uiTabLabels->comboBoxDateFormat);
+    VMouseWheelWidgetAdjustmentGuard::InstallEventFilter(uiTabLabels->comboBoxTimeFormat);
+    VMouseWheelWidgetAdjustmentGuard::InstallEventFilter(uiTabLabels->spinBoxQuantity);
+    VMouseWheelWidgetAdjustmentGuard::InstallEventFilter(uiTabPassmarks->comboBoxPassmarks);
+    VMouseWheelWidgetAdjustmentGuard::InstallEventFilter(uiTabPaths->comboBoxMLStartPoint);
+    VMouseWheelWidgetAdjustmentGuard::InstallEventFilter(uiTabPaths->comboBoxMLEndPoint);
+    VMouseWheelWidgetAdjustmentGuard::InstallEventFilter(uiTabPaths->spinBoxPriority);
+    VMouseWheelWidgetAdjustmentGuard::InstallEventFilter(uiTabPaths->comboBoxNodes);
+    VMouseWheelWidgetAdjustmentGuard::InstallEventFilter(uiTabPaths->comboBoxAngle);
+    VMouseWheelWidgetAdjustmentGuard::InstallEventFilter(uiTabPaths->comboBoxStartPoint);
+    VMouseWheelWidgetAdjustmentGuard::InstallEventFilter(uiTabPaths->comboBoxEndPoint);
+    VMouseWheelWidgetAdjustmentGuard::InstallEventFilter(uiTabPaths->comboBoxIncludeType);
 
     ChangeColor(uiTabPaths->labelEditName, OkColor(this));
     flagMainPathIsValid = MainPathIsValid();

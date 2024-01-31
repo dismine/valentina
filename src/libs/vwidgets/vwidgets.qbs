@@ -21,6 +21,8 @@ VLib {
         "velidedlabel.cpp",
         "vmaingraphicsscene.cpp",
         "vmaingraphicsview.cpp",
+        "vmousewheelwidgetadjustmentguard.cpp",
+        "vmousewheelwidgetadjustmentguard.h",
         "vtoolbuttonpopup.cpp",
         "vtoolbuttonpopup.h",
         "vwidgetpopup.cpp",

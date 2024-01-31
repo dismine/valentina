@@ -42,6 +42,7 @@
 #include "../vtools/undocommands/image/rotatebackgroundimage.h"
 #include "../vtools/undocommands/image/scalebackgroundimage.h"
 #include "../vtools/undocommands/image/zvaluemovebackgroundimage.h"
+#include "../vwidgets/vmousewheelwidgetadjustmentguard.h"
 #include "ui_vwidgetbackgroundimages.h"
 
 #include <QMenu>
@@ -153,6 +154,15 @@ VWidgetBackgroundImages::VWidgetBackgroundImages(VAbstractPattern *doc, QWidget 
     m_doc(doc)
 {
     ui->setupUi(this);
+
+    // Prevent stealing focus when scrolling
+    VMouseWheelWidgetAdjustmentGuard::InstallEventFilter(ui->doubleSpinBoxImageHorizontalTranslate);
+    VMouseWheelWidgetAdjustmentGuard::InstallEventFilter(ui->comboBoxTranslateUnit);
+    VMouseWheelWidgetAdjustmentGuard::InstallEventFilter(ui->doubleSpinBoxImageVerticalTranslate);
+    VMouseWheelWidgetAdjustmentGuard::InstallEventFilter(ui->doubleSpinBoxScaleWidth);
+    VMouseWheelWidgetAdjustmentGuard::InstallEventFilter(ui->comboBoxScaleUnit);
+    VMouseWheelWidgetAdjustmentGuard::InstallEventFilter(ui->doubleSpinBoxScaleHeight);
+    VMouseWheelWidgetAdjustmentGuard::InstallEventFilter(ui->doubleSpinBoxRotationAngle);
 
     SCASSERT(doc != nullptr)
 

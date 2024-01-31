@@ -32,6 +32,7 @@
 #include "../vmisc/dialogs/vshortcutdialog.h"
 #include "../vmisc/theme/vtheme.h"
 #include "../vmisc/vabstractshortcutmanager.h"
+#include "../vwidgets/vmousewheelwidgetadjustmentguard.h"
 #include "ui_puzzlepreferencesconfigurationpage.h"
 
 #include <QStyleHints>
@@ -42,6 +43,16 @@ PuzzlePreferencesConfigurationPage::PuzzlePreferencesConfigurationPage(QWidget *
     ui(new Ui::PuzzlePreferencesConfigurationPage)
 {
     ui->setupUi(this);
+
+    // Prevent stealing focus when scrolling
+    VMouseWheelWidgetAdjustmentGuard::InstallEventFilter(ui->langCombo);
+    VMouseWheelWidgetAdjustmentGuard::InstallEventFilter(ui->comboBoxThemeMode);
+    VMouseWheelWidgetAdjustmentGuard::InstallEventFilter(ui->undoCount);
+    VMouseWheelWidgetAdjustmentGuard::InstallEventFilter(ui->spinBoxDuration);
+    VMouseWheelWidgetAdjustmentGuard::InstallEventFilter(ui->spinBoxUpdateInterval);
+    VMouseWheelWidgetAdjustmentGuard::InstallEventFilter(ui->doubleSpinBoxSensor);
+    VMouseWheelWidgetAdjustmentGuard::InstallEventFilter(ui->doubleSpinBoxWheel);
+    VMouseWheelWidgetAdjustmentGuard::InstallEventFilter(ui->doubleSpinBoxAcceleration);
 
     InitLanguages(ui->langCombo);
     connect(ui->langCombo, QOverload<int>::of(&QComboBox::currentIndexChanged), this,

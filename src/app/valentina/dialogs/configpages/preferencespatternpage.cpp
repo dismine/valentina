@@ -35,6 +35,7 @@
 #include "../vmisc/vabstractvalapplication.h"
 #include "../vmisc/vvalentinasettings.h"
 #include "../vwidgets/vmaingraphicsview.h"
+#include "../vwidgets/vmousewheelwidgetadjustmentguard.h"
 #include "svgfont/svgdef.h"
 #include "svgfont/vsvgfont.h"
 #include "svgfont/vsvgfontengine.h"
@@ -73,6 +74,18 @@ PreferencesPatternPage::PreferencesPatternPage(QWidget *parent)
 {
     ui->setupUi(this);
     RetranslateUi();
+
+    // Prevent stealing focus when scrolling
+    VMouseWheelWidgetAdjustmentGuard::InstallEventFilter(ui->doubleSpinBoxCurveApproximation);
+    VMouseWheelWidgetAdjustmentGuard::InstallEventFilter(ui->doubleSpinBoxLineWidth);
+    VMouseWheelWidgetAdjustmentGuard::InstallEventFilter(ui->comboBoxLineWidthUnit);
+    VMouseWheelWidgetAdjustmentGuard::InstallEventFilter(ui->defaultSeamAllowance);
+    VMouseWheelWidgetAdjustmentGuard::InstallEventFilter(ui->comboBoxLabelFontSize);
+    VMouseWheelWidgetAdjustmentGuard::InstallEventFilter(ui->fontComboBoxLabelFont);
+    VMouseWheelWidgetAdjustmentGuard::InstallEventFilter(ui->comboBoxSingleLineFont);
+    VMouseWheelWidgetAdjustmentGuard::InstallEventFilter(ui->comboBoxDateFormats);
+    VMouseWheelWidgetAdjustmentGuard::InstallEventFilter(ui->comboBoxTimeFormats);
+    VMouseWheelWidgetAdjustmentGuard::InstallEventFilter(ui->spinBoxOpacity);
 
     VValentinaSettings *settings = VAbstractValApplication::VApp()->ValentinaSettings();
 

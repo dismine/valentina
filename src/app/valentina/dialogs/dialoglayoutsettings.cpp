@@ -30,6 +30,7 @@
 #include "../vlayout/vlayoutgenerator.h"
 #include "../vmisc/vabstractvalapplication.h"
 #include "../vmisc/vvalentinasettings.h"
+#include "../vwidgets/vmousewheelwidgetadjustmentguard.h"
 #include "ui_dialoglayoutsettings.h"
 
 #include <QMessageBox>
@@ -53,6 +54,22 @@ DialogLayoutSettings::DialogLayoutSettings(VLayoutGenerator *generator, QWidget 
     m_isInitialized(false)
 {
     ui->setupUi(this);
+
+    // Prevent stealing focus when scrolling
+    VMouseWheelWidgetAdjustmentGuard::InstallEventFilter(ui->comboBoxTemplates);
+    VMouseWheelWidgetAdjustmentGuard::InstallEventFilter(ui->doubleSpinBoxPaperWidth);
+    VMouseWheelWidgetAdjustmentGuard::InstallEventFilter(ui->doubleSpinBoxPaperHeight);
+    VMouseWheelWidgetAdjustmentGuard::InstallEventFilter(ui->comboBoxPaperSizeUnit);
+    VMouseWheelWidgetAdjustmentGuard::InstallEventFilter(ui->comboBoxPaperSizeUnit);
+    VMouseWheelWidgetAdjustmentGuard::InstallEventFilter(ui->doubleSpinBoxLeftField);
+    VMouseWheelWidgetAdjustmentGuard::InstallEventFilter(ui->doubleSpinBoxRightField);
+    VMouseWheelWidgetAdjustmentGuard::InstallEventFilter(ui->doubleSpinBoxTopField);
+    VMouseWheelWidgetAdjustmentGuard::InstallEventFilter(ui->doubleSpinBoxBottomField);
+    VMouseWheelWidgetAdjustmentGuard::InstallEventFilter(ui->doubleSpinBoxLayoutWidth);
+    VMouseWheelWidgetAdjustmentGuard::InstallEventFilter(ui->comboBoxLayoutUnit);
+    VMouseWheelWidgetAdjustmentGuard::InstallEventFilter(ui->spinBoxNestingTime);
+    VMouseWheelWidgetAdjustmentGuard::InstallEventFilter(ui->doubleSpinBoxEfficiency);
+    VMouseWheelWidgetAdjustmentGuard::InstallEventFilter(ui->spinBoxMultiplier);
 
     VAbstractValApplication::VApp()->ValentinaSettings()->GetOsSeparator() ? setLocale(QLocale())
                                                                            : setLocale(QLocale::c());
@@ -537,7 +554,8 @@ auto DialogLayoutSettings::PageToPixels(qreal value) const -> qreal
 auto DialogLayoutSettings::MakeGroupsHelp() -> QString
 {
     // that is REALLY dummy ... can't figure fast how to automate generation... :/
-    return tr("\n\tThree groups: big, middle, small = 0;\n\tTwo groups: big, small = 1;\n\tDescending area = 2");
+    return tr("\n\tThree groups: big, middle, small = 0;\n\tTwo groups: big, small = "
+              "1;\n\tDescending area = 2");
 }
 
 //---------------------------------------------------------------------------------------------------------------------
