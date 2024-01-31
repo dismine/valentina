@@ -1151,21 +1151,26 @@ void VDxfEngine::ExportPieceText(const QSharedPointer<dx_ifaceBlock> &detailBloc
         textLine->text = tl.m_qsText.toStdString();
         textLine->style = m_input->AddFont(fnt);
 
+        QLineF string(0, 0, 100, 0);
+        string.setAngle(angle);
+        string = lineMatrix.map(string);
+        const qreal labelAngle = string.angle();
+
         if (detail.IsVerticallyFlipped() && detail.IsHorizontallyFlipped())
         {
-            textLine->angle = angle + 180;
+            textLine->angle = labelAngle + 180;
         }
         else if (detail.IsVerticallyFlipped())
         {
-            textLine->angle = -angle;
+            textLine->angle = -labelAngle;
         }
         else if (detail.IsHorizontallyFlipped())
         {
-            textLine->angle = -angle - 180;
+            textLine->angle = -labelAngle - 180;
         }
         else
         {
-            textLine->angle = angle;
+            textLine->angle = labelAngle;
         }
 
         detailBlock->ent.push_back(textLine);
