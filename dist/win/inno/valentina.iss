@@ -107,7 +107,6 @@ Name: "fileassoc5"; Description: "{cm:CreateFileAssocVkm}"; GroupDescription: "{
 Name: "deletesettings"; Description: "{cm:RemoveAnyExistingSettings}"; GroupDescription: "{cm:ManageSettings}"; Flags: unchecked
 
 [Types]
-Name: "full_english"; Description: "{cm:SystemLanguage}"; Languages: english;
 ;Name: "full_armenian"; Description: "{cm:SystemLanguage}"; Languages: armenian;
 Name: "full_brazilianportuguese"; Description: "{cm:SystemLanguage}"; Languages: brazilianportuguese;
 ;Name: "full_catalan"; Description: "{cm:SystemLanguage}"; Languages: catalan;
@@ -139,10 +138,6 @@ Name: "custom"; Description: "{cm:CustomInstallation}"; Flags: iscustom
 
 [Components]
 Name: "lang_files"; Description: "{cm:LanguageComponent}"; Types: full custom; Flags: fixed
-Name: "lang_files\english"; Description: "English"; Types: full full_english custom; Flags: disablenouninstallwarning
-Name: "lang_files\english\us"; Description: "English (United States)"; Types: full full_english custom; Flags: disablenouninstallwarning
-Name: "lang_files\english\in"; Description: "English (India)"; Types: full full_english custom; Flags: disablenouninstallwarning
-Name: "lang_files\english\ca"; Description: "English (Canada)"; Types: full full_english custom; Flags: disablenouninstallwarning
 ;Name: "lang_files\armenian"; Description: "Armenian"; Types: full full_armenian custom; Flags: disablenouninstallwarning
 Name: "lang_files\brazilianportuguese"; Description: "Brazilian portuguese"; Types: full full_brazilianportuguese custom; Flags: disablenouninstallwarning
 ;Name: "lang_files\catalan"; Description: "Catalan"; Types: full full_catalan custom; Flags: disablenouninstallwarning 
@@ -182,11 +177,6 @@ Source: "{#buildDirectory}\VPropertyExplorerLib.dll"; DestDir: "{app}"; Flags: i
 Source: "{#buildDirectory}\QMUParserLib.dll"; DestDir: "{app}"; Flags: ignoreversion sign
 
 ; Localizations
-Source: "{#buildDirectory}\translations\*_en_US.qm"; DestDir: "{app}\translations"; Flags: ignoreversion; Components: lang_files\english\us
-Source: "{#buildDirectory}\translations\*_en_IN.qm"; DestDir: "{app}\translations"; Flags: ignoreversion; Components: lang_files\english\in
-Source: "{#buildDirectory}\translations\*_en_CA.qm"; DestDir: "{app}\translations"; Flags: ignoreversion; Components: lang_files\english\ca
-Source: "{#buildDirectory}\translations\*_en.qm"; DestDir: "{app}\translations"; Flags: ignoreversion; Components: lang_files\english
-
 Source: "{#buildDirectory}\translations\*_uk_UA.qm"; DestDir: "{app}\translations"; Flags: ignoreversion; Components: lang_files\ukrainian
 Source: "{#buildDirectory}\translations\*_uk.qm"; DestDir: "{app}\translations"; Flags: ignoreversion; Components: lang_files\ukrainian
 
