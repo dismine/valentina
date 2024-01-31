@@ -172,7 +172,7 @@ QCheckBox:disabled
 QGroupBox
 {
     /* Need to make sure the groupbox doesn't compress below the title. */
-    min-height: 1.2em;
+    /*min-height: 1.2em;*/
     border: 0.04em solid #bab9b8;
     border-radius: 0.09em;
     /**
