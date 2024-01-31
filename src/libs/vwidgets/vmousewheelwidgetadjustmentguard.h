@@ -28,7 +28,6 @@
 #ifndef VMOUSEWHEELWIDGETADJUSTMENTGUARD_H
 #define VMOUSEWHEELWIDGETADJUSTMENTGUARD_H
 
-#include "qtclasshelpermacros.h"
 #include <QObject>
 
 // Helps to prevent widget from stealing scroll event.
