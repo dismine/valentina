@@ -344,7 +344,7 @@ VToolApp {
             "dist/win/pattern.ico",
             "AUTHORS.txt",
             "LICENSE_GPL.txt",
-            "README.txt",
+            "README.md",
             "ChangeLog.txt",
             "share/qtlogging.ini"
         ]

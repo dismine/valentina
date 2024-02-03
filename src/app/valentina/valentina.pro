@@ -349,7 +349,7 @@ win32:*g++* {
         $$PWD/../../../dist/win/EUDC.TTE \
         $$PWD/../../../AUTHORS.txt \
         $$PWD/../../../LICENSE_GPL.txt \
-        $$PWD/../../../README.txt \
+        $$PWD/../../../README.md \
         $$PWD/../../../ChangeLog.txt \
         $$PWD/../../../share/qtlogging.ini \
         $$PWD/../../libs/qmuparser/LICENSE_BSD.txt \

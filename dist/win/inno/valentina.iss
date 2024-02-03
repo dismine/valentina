@@ -34,7 +34,6 @@ AppUpdatesURL={#MyAppURL}
 DefaultDirName={commonpf}\{#MyAppName}{#MyAppStatus}
 DefaultGroupName={#MyAppName}{#MyAppStatus}
 LicenseFile={#buildDirectory}\LICENSE_GPL.txt
-InfoAfterFile={#buildDirectory}\README.txt
 OutputDir={#buildDirectory}
 ArchitecturesInstallIn64BitMode={#MyAppArchitecture}
 ArchitecturesAllowed={#MyAppArchitecture}
