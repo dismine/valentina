@@ -31,7 +31,7 @@ AppPublisher={#MyAppPublisher}
 AppPublisherURL={#MyAppURL}
 AppSupportURL={#MyAppURL}
 AppUpdatesURL={#MyAppURL}
-DefaultDirName={commonpf}\{#MyAppName}{#MyAppStatus}
+DefaultDirName={autopf}\{#MyAppName}{#MyAppStatus}
 DefaultGroupName={#MyAppName}{#MyAppStatus}
 LicenseFile={#buildDirectory}\LICENSE_GPL.txt
 OutputDir={#buildDirectory}
@@ -238,17 +238,17 @@ Source: "{#buildDirectory}\*.ini"; DestDir: "{app}"; Flags: ignoreversion
 
 [InstallDelete]
 Type: filesandordirs; Name: "{app}\translations"
-Type: files; Name: "{userappdata}\ValentinaTeam\*.ini"; Tasks: deletesettings
+Type: files; Name: "{autoappdata}\ValentinaTeam\*.ini"; Tasks: deletesettings
 
 [Icons]
 Name: "{group}\{#MyAppName}{#MyAppStatus}"; Filename: "{app}\valentina.exe"
 Name: "{group}\{cm:UninstallProgram,{#MyAppName}{#MyAppStatus}}"; Filename: "{uninstallexe}"
 Name: "{group}\Tape"; Filename: "{app}\tape.exe"
 Name: "{group}\Puzzle"; Filename: "{app}\puzzle.exe"
-Name: "{commondesktop}\{#MyAppName}{#MyAppStatus}"; Filename: "{app}\valentina.exe"; Tasks: desktopicon
-Name: "{commondesktop}\Tape"; Filename: "{app}\tape.exe"; Tasks: desktopicon
-Name: "{commondesktop}\Puzzle"; Filename: "{app}\puzzle.exe"; Tasks: desktopicon
-Name: "{userappdata}\Microsoft\Internet Explorer\Quick Launch\{#MyAppName}{#MyAppStatus}"; Filename: "{app}\valentina.exe"; Tasks: quicklaunchicon
+Name: "{autodesktop}\{#MyAppName}{#MyAppStatus}"; Filename: "{app}\valentina.exe"; Tasks: desktopicon
+Name: "{autodesktop}\Tape"; Filename: "{app}\tape.exe"; Tasks: desktopicon
+Name: "{autodesktop}\Puzzle"; Filename: "{app}\puzzle.exe"; Tasks: desktopicon
+Name: "{autoappdata}\Microsoft\Internet Explorer\Quick Launch\{#MyAppName}{#MyAppStatus}"; Filename: "{app}\valentina.exe"; Tasks: quicklaunchicon
 
 [Run]
 Filename: "{app}\valentina.exe"; Description: "{cm:LaunchProgram,{#StringChange(MyAppName, '&', '&&')}}"; Flags: nowait postinstall skipifsilent
@@ -657,7 +657,7 @@ begin
     if MsgBox(ExpandConstant('{cm:QuestionRemoveAnyExistingSettings}'), mbConfirmation, MB_YESNO or MB_DEFBUTTON2) = IDYES then
     //this is the msg that will display after uninstall 
     begin
-        DelTree(ExpandConstant('{userappdata}\ValentinaTeam'), True, True, True);
+        DelTree(ExpandConstant('{autoappdata}\ValentinaTeam'), True, True, True);
     end;
   end;
 end;
