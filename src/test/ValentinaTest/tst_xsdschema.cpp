@@ -27,19 +27,19 @@
  *************************************************************************/
 #include "tst_xsdschema.h"
 
-#include "../ifc/xml/vpatternconverter.h"
 #include "../ifc/xml/vlabeltemplateconverter.h"
 #include "../ifc/xml/vlayoutconverter.h"
+#include "../ifc/xml/vparsererrorhandler.h"
+#include "../ifc/xml/vpatternconverter.h"
 #include "../ifc/xml/vvitconverter.h"
 #include "../ifc/xml/vvstconverter.h"
 #include "../ifc/xml/vwatermarkconverter.h"
-#include "../ifc/xml/vparsererrorhandler.h"
 
 #include <QTest>
 
 #if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
-#include <xercesc/parsers/XercesDOMParser.hpp>
 #include <xercesc/framework/MemBufInputSource.hpp>
+#include <xercesc/parsers/XercesDOMParser.hpp>
 
 #include <QMap>
 #else
@@ -65,16 +65,14 @@ void ValidateSchema(const QString &schema)
     XERCES_CPP_NAMESPACE::XercesDOMParser domParser;
     domParser.setErrorHandler(&parserErrorHandler);
 
-    QByteArray data = fileSchema.readAll();
-    const char* schemaData = data.constData();
+    QByteArray const data = fileSchema.readAll();
+    const char *schemaData = data.constData();
+    const auto schemaSize = static_cast<size_t>(data.size());
 
-    QScopedPointer<XERCES_CPP_NAMESPACE::InputSource> grammarSource(
-        new XERCES_CPP_NAMESPACE::MemBufInputSource(reinterpret_cast<const XMLByte*>(schemaData),
-                                                    strlen(schemaData), "schema"));
+    QScopedPointer<XERCES_CPP_NAMESPACE::InputSource> grammarSource(new XERCES_CPP_NAMESPACE::MemBufInputSource(
+        reinterpret_cast<const XMLByte *>(schemaData), schemaSize, "schema"));
 
-    if (domParser.loadGrammar(
-            *grammarSource,
-            XERCES_CPP_NAMESPACE::Grammar::SchemaGrammarType, true) == nullptr)
+    if (domParser.loadGrammar(*grammarSource, XERCES_CPP_NAMESPACE::Grammar::SchemaGrammarType, true) == nullptr)
     {
         QFAIL(qUtf8Printable(QStringLiteral("%1 Could not load schema file '%2'.")
                                  .arg(parserErrorHandler.StatusMessage(), fileSchema.fileName())));
@@ -115,12 +113,13 @@ auto HashToMap(const QHash<unsigned int, QString> &hash) -> QMap<unsigned int, Q
 
     return map;
 }
-}  // namespace
+} // namespace
 
 //---------------------------------------------------------------------------------------------------------------------
 TST_XSDShema::TST_XSDShema(QObject *parent)
-    :QObject(parent)
-{}
+  : QObject(parent)
+{
+}
 
 //---------------------------------------------------------------------------------------------------------------------
 void TST_XSDShema::TestPatternSchema_data()

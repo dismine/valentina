@@ -190,11 +190,12 @@ void VAbstractConverter::ValidateXML(const QString &schema) const
     XERCES_CPP_NAMESPACE::XercesDOMParser domParser;
     domParser.setErrorHandler(&parserErrorHandler);
 
-    QByteArray data = fileSchema.readAll();
+    QByteArray const data = fileSchema.readAll();
     const char *schemaData = data.constData();
+    const auto schemaSize = static_cast<size_t>(data.size());
 
     QScopedPointer<XERCES_CPP_NAMESPACE::InputSource> grammarSource(new XERCES_CPP_NAMESPACE::MemBufInputSource(
-        reinterpret_cast<const XMLByte *>(schemaData), strlen(schemaData), "schema"));
+        reinterpret_cast<const XMLByte *>(schemaData), schemaSize, "schema"));
 
     if (domParser.loadGrammar(*grammarSource, XERCES_CPP_NAMESPACE::Grammar::SchemaGrammarType, true) == nullptr)
     {
@@ -229,11 +230,12 @@ void VAbstractConverter::ValidateXML(const QString &schema) const
         throw VException(errorMsg);
     }
 
-    QByteArray patternFileData = pattern.readAll();
+    QByteArray const patternFileData = pattern.readAll();
     const char *patternData = patternFileData.constData();
+    const auto patternSize = static_cast<size_t>(patternFileData.size());
 
     QScopedPointer<XERCES_CPP_NAMESPACE::InputSource> patternSource(new XERCES_CPP_NAMESPACE::MemBufInputSource(
-        reinterpret_cast<const XMLByte *>(patternData), strlen(patternData), "pattern"));
+        reinterpret_cast<const XMLByte *>(patternData), patternSize, "pattern"));
 
     domParser.parse(*patternSource);
 
