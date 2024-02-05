@@ -7,6 +7,7 @@
 [![Dev version](https://img.shields.io/badge/Dev-v0.7.52-yellow)](https://smart-pattern.com.ua/valentina/version/0.7.52/)
 [![Build Status](https://api.cirrus-ci.com/github/dismine/valentina.svg)](https://cirrus-ci.com/github/dismine/valentina)
 [![Build status](https://ci.appveyor.com/api/projects/status/m505f1pfs19j81nt/branch/develop?svg=true)](https://ci.appveyor.com/project/dismi_/valentina)
+[![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=dismine_valentina&metric=alert_status)](https://sonarcloud.io/summary/new_code?id=dismine_valentina)
 [![License: GPL v3](https://img.shields.io/badge/License-GPLv3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0)
 
 Welcome to [Valentina](https://smart-pattern.com.ua/), a versatile cross-platform patternmaking program designed for creating and modeling clothing patterns. Whether you prefer using standard sizing tables or individual measurements, this software provides a flexible environment for pattern creation. Valentina seamlessly integrates modern technologies with traditional methods to offer a comprehensive patternmaking tool.

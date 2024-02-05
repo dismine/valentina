@@ -37,10 +37,33 @@ linux_qt6_task_template: &LINUX_QT6_TASK_TEMPLATE
     - qbs setup-toolchains /usr/bin/${COMPILER} ${COMPILER}
     - qbs setup-qt /usr/bin/qmake6 qt6
     - qbs config profiles.qt6.baseProfile ${COMPILER}
-    - qbs-config defaultProfile qt6
+    - qbs config defaultProfile qt6
     - qbs build -f valentina.qbs -d build --jobs $(nproc) profile:qt6 config:release modules.buildconfig.enableCcache:${ENABLE_CCACHE} modules.cpp.linkerVariant:mold --force-probe-execution
     - qbs -p autotest-runner -d build profile:qt6 config:release
     - ccache -s
+
+linux_qt6_sonar_task_template: &LINUX_QT6_TASK_SONAR_TEMPLATE
+  install_script:
+    - bash -c "$PACKAGE_MANAGER_INSTALL -y qt6-base-dev qt6-l10n-tools libqt6svg6-dev qt6-base-dev-tools qmake6 libxerces-c-dev poppler-utils libgl1-mesa-dev"
+  build_script:
+    - uname -a
+    - mkdir -pm 0700 $XDG_RUNTIME_DIR
+    - Xvfb $DISPLAY -ac -screen 0 1600x1200x24+32 -nolisten tcp -nolisten unix &
+    - sleep 1
+    - echo $PATH
+    - which qmake6
+    - which qbs
+    - pwd
+    - ls -l /usr/bin/ | grep -E "${COMPILER_REGEX}"
+    - ${COMPILER} --version
+    - qmake6 --version
+    - qbs --version
+    - qbs setup-toolchains /usr/bin/${COMPILER} ${COMPILER}
+    - qbs setup-qt /usr/bin/qmake6 qt6
+    - qbs config profiles.qt6.baseProfile ${COMPILER}
+    - qbs config defaultProfile qt6
+    - build-wrapper-linux-x86-64 --out-dir bw-output qbs build --no-install -f valentina.qbs -d build --jobs $(nproc) profile:qt6 config:release modules.buildconfig.enableCcache:false modules.cpp.linkerVariant:mold
+    - sonar-scanner -Dsonar.cfamily.threads=$(nproc) -Dsonar.scm.revision=${CIRRUS_CHANGE_IN_REPO} -Dsonar.links.ci=https://cirrus-ci.com/task/${CIRRUS_TASK_ID} -Dsonar.branch.name=${CIRRUS_BRANCH}
     
 linux_qt5_qmake_task_template: &LINUX_QT5_QMAKE_TASK_TEMPLATE
   install_script:
@@ -82,7 +105,7 @@ linux_qt5_qbs_task_template: &LINUX_QT5_QBS_TASK_TEMPLATE
     - qbs --version
     - qbs setup-toolchains /usr/bin/${COMPILER} ${COMPILER}
     - qbs setup-qt /usr/bin/qmake qt5
-    - qbs-config defaultProfile qt5
+    - qbs config defaultProfile qt5
     - qbs config profiles.qt5.baseProfile ${COMPILER}
     - qbs build -f valentina.qbs -d build --jobs $(nproc) profile:qt5 config:release modules.buildconfig.enableCcache:${ENABLE_CCACHE} modules.cpp.linkerVariant:mold --force-probe-execution
     - qbs -p autotest-runner -d build profile:qt5 config:release
@@ -126,6 +149,16 @@ linux_task:
           container:
             cpu: 8
             memory: 8G  # Set to 8GB to avoid OOM. https://cirrus-ci.org/guide/linux/#linux-container
+        - name: 'Sonar, latest Clang [Qt6]'
+          << : *LINUX_QT6_TASK_SONAR_TEMPLATE
+          env:
+            QT_SELECT: "qt6"
+            SONAR_TOKEN: ENCRYPTED[!715ab983713a5035d505d2c601c9bb78a9475b9a04db62cdda9c674affd58ac956e563ce6d38228b48e05c4dbea2f52d!]
+          container:
+            cpu: 8
+            memory: 8G  # Set to 8GB to avoid OOM. https://cirrus-ci.org/guide/linux/#linux-container
+          sonar_cache:
+            folder: "${HOME}/.sonar/cache"
     - container:
         image: dismine/gcc-ubuntu:13
       env:
@@ -276,7 +309,7 @@ macos_task_template: &MACOS_TASK_TEMPLATE
     - qbs setup-toolchains --detect
     - qbs config --list profiles
     - qbs setup-qt /opt/homebrew/opt/qt6/bin/qmake qt6
-    - qbs-config defaultProfile qt6
+    - qbs config defaultProfile qt6
     - qbs config profiles.qt6.baseProfile clang
     - qbs build -f valentina.qbs -d $CIRRUS_WORKING_DIR/build --jobs $(nproc) config:release modules.buildconfig.enableUnitTests:false modules.buildconfig.enableMultiBundle:${MULTI_BUNDLE} qbs.installRoot:$CIRRUS_WORKING_DIR/build/install-root profile:qt6 project.minimumMacosVersion:${MACOS_DEPLOYMENT_TARGET} modules.buildconfig.enableCcache:${ENABLE_CCACHE} moduleProviders.qbspkgconfig.extraPaths:$(brew --prefix xerces-c)/lib/pkgconfig,$(brew --prefix qt6)/lib/pkgconfig,$(brew --prefix openssl@1.1)/lib/pkgconfig "modules.buildconfig.signingIdentity:$MACOS_CERTIFICATE_NAME" modules.macdeployqt.libpath:$(brew --prefix qt6)/lib,$(brew --prefix poppler)/lib modules.macdeployqt.macdeployqtProgramBinPath:${HOME}/macdeployqt-install-dir
     - qbs build -f valentina.qbs -d $CIRRUS_WORKING_DIR/build -p 'Valentina DMG' --force-probe-execution --jobs $(nproc) config:release modules.buildconfig.enableUnitTests:false modules.buildconfig.enableMultiBundle:${MULTI_BUNDLE} qbs.installRoot:$CIRRUS_WORKING_DIR/build/install-root profile:qt6 project.minimumMacosVersion:${MACOS_DEPLOYMENT_TARGET} modules.buildconfig.enableCcache:${ENABLE_CCACHE} moduleProviders.qbspkgconfig.extraPaths:$(brew --prefix xerces-c)/lib/pkgconfig,$(brew --prefix qt6)/lib/pkgconfig,$(brew --prefix openssl@1.1)/lib/pkgconfig "modules.buildconfig.signingIdentity:$MACOS_CERTIFICATE_NAME" modules.macdeployqt.libpath:$(brew --prefix qt6)/lib,$(brew --prefix poppler)/lib modules.macdeployqt.macdeployqtProgramBinPath:${HOME}/macdeployqt-install-dir
