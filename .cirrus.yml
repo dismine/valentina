@@ -62,7 +62,7 @@ linux_qt6_sonar_task_template: &LINUX_QT6_TASK_SONAR_TEMPLATE
     - qbs setup-qt /usr/bin/qmake6 qt6
     - qbs config profiles.qt6.baseProfile ${COMPILER}
     - qbs config defaultProfile qt6
-    - build-wrapper-linux-x86-64 --out-dir bw-output qbs build --no-install -f valentina.qbs -d build --jobs $(nproc) profile:qt6 config:release modules.buildconfig.enableCcache:false modules.cpp.linkerVariant:mold
+    - build-wrapper-linux-x86-64 --out-dir bw-output qbs build --no-install -f valentina.qbs -d build profile:qt6 config:release modules.buildconfig.enableCcache:false modules.cpp.linkerVariant:mold
     - sonar-scanner -Dsonar.cfamily.threads=$(nproc) -Dsonar.scm.revision=${CIRRUS_CHANGE_IN_REPO} -Dsonar.links.ci=https://cirrus-ci.com/task/${CIRRUS_TASK_ID} -Dsonar.branch.name=${CIRRUS_BRANCH}
     
 linux_qt5_qmake_task_template: &LINUX_QT5_QMAKE_TASK_TEMPLATE
@@ -156,7 +156,7 @@ linux_task:
             SONAR_TOKEN: ENCRYPTED[!715ab983713a5035d505d2c601c9bb78a9475b9a04db62cdda9c674affd58ac956e563ce6d38228b48e05c4dbea2f52d!]
           container:
             cpu: 8
-            memory: 8G  # Set to 8GB to avoid OOM. https://cirrus-ci.org/guide/linux/#linux-container
+            memory: 10G  # Set to 10GB to avoid OOM. https://cirrus-ci.org/guide/linux/#linux-container
           sonar_cache:
             folder: "${HOME}/.sonar/cache"
     - container:
