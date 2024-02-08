@@ -310,7 +310,7 @@ for:
     - set PATH=%QTDIR%\bin;%QTDIR%\include;C:\ProgramData\chocolatey\bin;C:\Qt\Tools\QtCreator\bin;C:\Tools\PsTools;C:\Program Files\Git\cmd;C:\Program Files\Git\usr\bin;C:\Program Files\Git LFS;C:\Tools\GitVersion;C:\Windows\system32;C:\Windows;C:\Windows\System32\WindowsPowerShell\v1.0\;C:\Program Files\CMake\bin;%PYTHON%;%PYTHON%\Scripts;C:\Program Files (x86)\Inno Setup 6
     # Set VC variables for the platform
     - ps: |
-        & choco install qbs -y
+        & choco install qbs -y --version=2.2.2
         if ($env:COMPILER -eq "msvc") {
           if ($env:APPVEYOR_BUILD_WORKER_IMAGE -eq "Visual Studio 2022") {
             if ($env:ARCH -eq "x64") {
@@ -357,13 +357,6 @@ for:
     - dir %QTDIR%
     - dir "%QTDIR%\bin"
     - qbs --version
-    # Patch Qbs. Remove after Qbs 2.2.1+.
-    - ps: |
-        Invoke-WebRequest -Uri "https://gist.githubusercontent.com/dismine/43f3c51e05f3317c5d4fe16cd3c4b6d8/raw/2d297bcb53c2c022f740509923adf1eb1796afe2/qbs-pkg-config-probe.patch" -OutFile "$env:USERPROFILE\qbs-pkg-config-probe.patch"
-        $qbsInstallationDir = "C:\ProgramData\chocolatey\lib\qbs\tools"
-        cmd.exe /c "patch -p1 -N -d $qbsInstallationDir -i $env:USERPROFILE\qbs-pkg-config-probe.patch"
-        Remove-Item -Path "$qbsInstallationDir\share\qbs\imports\qbs\Probes\qbs-pkg-config-probe.js.rej" -ErrorAction SilentlyContinue
-        Remove-Item -Path "$env:USERPROFILE\qbs-pkg-config-probe.patch" -ErrorAction SilentlyContinue
 
   before_build:
     - cd %APPVEYOR_BUILD_FOLDER%
