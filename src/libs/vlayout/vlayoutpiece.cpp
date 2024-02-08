@@ -544,7 +544,7 @@ void InitFoldLine(VLayoutPiece &det, const VPiece &piece, const VContainer *patt
 //---------------------------------------------------------------------------------------------------------------------
 auto operator<<(QDataStream &dataStream, const VLayoutPoint &p) -> QDataStream &
 {
-    dataStream << static_cast<QPointF>(p); // NOLINT(cppcoreguidelines-slicing)
+    dataStream << p.ToQPointF();
     dataStream << p.TurnPoint();
     dataStream << p.CurvePoint();
     return dataStream;
@@ -570,7 +570,8 @@ auto operator>>(QDataStream &dataStream, VLayoutPoint &p) -> QDataStream &
 //---------------------------------------------------------------------------------------------------------------------
 auto operator<<(QDataStream &dataStream, const VLayoutPiece &piece) -> QDataStream &
 {
-    dataStream << static_cast<VAbstractPiece>(piece); // NOLINT(cppcoreguidelines-slicing)
+    const VAbstractPiece &abstractPiece = piece;
+    dataStream << abstractPiece;
     dataStream << *piece.d;
     return dataStream;
 }

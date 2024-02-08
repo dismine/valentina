@@ -55,7 +55,7 @@ COPY_CONSTRUCTOR_IMPL_2(VPointF, VGObject)
 
 //---------------------------------------------------------------------------------------------------------------------
 VPointF::VPointF(const QPointF &point)
-  : VGObject(VPointF()),
+  : VGObject(GOType::Point, 0, Draw::Calculation),
     d(new VPointFData(point))
 {
 }

@@ -797,8 +797,7 @@ inline auto VAbstractPiece::SubdividePath(const QVector<T> &boundary, const QPoi
             continue;
         }
 
-        if (!VGObject::IsPointOnLineSegment(p, static_cast<QPointF>(boundary.at(i)),
-                                            static_cast<QPointF>(boundary.at(i + 1))))
+        if (!VGObject::IsPointOnLineSegment(p, boundary.at(i).ToQPointF(), boundary.at(i + 1).ToQPointF()))
         {
             sub1.append(boundary.at(i));
             continue;
@@ -858,7 +857,7 @@ inline auto VAbstractPiece::MirrorPath<VLayoutPoint>(const QVector<VLayoutPoint>
     for (const auto &p : points)
     {
         VLayoutPoint tmp = p;
-        QPointF const flippedPoint = matrix.map(static_cast<QPointF>(p));
+        QPointF const flippedPoint = matrix.map(p.ToQPointF());
         tmp.setX(flippedPoint.x());
         tmp.setY(flippedPoint.y());
         flipped.append(tmp);

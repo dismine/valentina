@@ -56,3 +56,9 @@ auto VLayoutPoint::toJson() const -> QJsonObject
 
     return pointObject;
 }
+
+//---------------------------------------------------------------------------------------------------------------------
+auto VLayoutPoint::ToQPointF() const -> QPointF
+{
+    return {x(), y()};
+}

@@ -1993,13 +1993,13 @@ auto VDxfEngine::NotchPrecedingPoint(const QVector<VLayoutPoint> &boundary, QPoi
 
     if (VFuzzyComparePoints(boundary.constFirst(), notchBase))
     {
-        point = boundary.constFirst();
+        point = boundary.constFirst().ToQPointF();
         return true;
     }
 
     if (VFuzzyComparePoints(boundary.constLast(), notchBase))
     {
-        point = boundary.constLast();
+        point = boundary.constLast().ToQPointF();
         return true;
     }
 
@@ -2016,7 +2016,7 @@ auto VDxfEngine::NotchPrecedingPoint(const QVector<VLayoutPoint> &boundary, QPoi
             const qreal length = QLineF(notchBase, cPoint).length();
             if (length < bestDistance)
             {
-                candidatePoint = boundary.at(i);
+                candidatePoint = boundary.at(i).ToQPointF();
                 bestDistance = length;
                 found = true;
             }

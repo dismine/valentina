@@ -510,8 +510,8 @@ auto VPiecePath::PathCurvePoints(const VContainer *data) const -> QVector<QVecto
             {
                 const QSharedPointer<VAbstractCurve> curve = data->GeometricObject<VAbstractCurve>(at(i).GetId());
 
-                const QPointF begin = StartSegment(data, i);
-                const QPointF end = EndSegment(data, i);
+                const QPointF begin = StartSegment(data, i).ToQPointF();
+                const QPointF end = EndSegment(data, i).ToQPointF();
 
                 curves.append(curve->GetSegmentPoints(begin, end, at(i).GetReverse(), GetName()));
                 break;

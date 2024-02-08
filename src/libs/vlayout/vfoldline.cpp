@@ -225,54 +225,54 @@ auto VFoldLine::LabelPosition(bool &ok) const -> FoldLabelPosData
 {
     FoldLabelPosData posData;
 
-    TextPosData data;
+    std::unique_ptr<TextPosData> data;
     if (m_type == FoldLineType::Text)
     {
-        data = TextData();
+        data = std::make_unique<TextPosData>(TextData());
     }
     else if (m_type == FoldLineType::TwoArrowsTextAbove)
     {
-        data = TwoArrowsTextAboveData();
+        data = std::make_unique<ArrowsTextPosData>(TwoArrowsTextAboveData());
     }
     else
     {
-        data = TwoArrowsTextUnderData();
+        data = std::make_unique<ArrowsTextPosData>(TwoArrowsTextUnderData());
     }
 
-    if (data.base.isNull())
+    if (data->base.isNull())
     {
         ok = false;
         return {};
     }
 
-    qreal const height = data.labelHeight + (qFuzzyIsNull(m_height) ? defLabelMargin : m_height);
-    qreal const margin = qMax(0., height - data.labelHeight);
+    qreal const height = data->labelHeight + (qFuzzyIsNull(m_height) ? defLabelMargin : m_height);
+    qreal const margin = qMax(0., height - data->labelHeight);
 
-    QPointF const center = TrueCenter(data.base, data.labelWidth);
+    QPointF const center = TrueCenter(data->base, data->labelWidth);
 
-    QLineF baseLine(center, data.base.p1());
-    baseLine.setLength(data.labelWidth / 2);
+    QLineF baseLine(center, data->base.p1());
+    baseLine.setLength(data->labelWidth / 2);
     Swap(baseLine);
     baseLine.setLength(baseLine.length() * 2);
-    baseLine = SimpleParallelLine(baseLine.p1(), baseLine.p2(), -(margin + data.labelHeight));
+    baseLine = SimpleParallelLine(baseLine.p1(), baseLine.p2(), -(margin + data->labelHeight));
 
     posData.font = LabelOutlineFont();
     QFontMetrics const fm(posData.font);
-    posData.label = fm.elidedText(FoldLineLabel(), Qt::ElideRight, qFloor(data.labelWidth));
+    posData.label = fm.elidedText(FoldLineLabel(), Qt::ElideRight, qFloor(data->labelWidth));
 
     if (m_alignment & Qt::AlignHCenter) // NOLINT(readability-implicit-bool-conversion)
     {
-        qreal const shift = (data.labelWidth - fm.horizontalAdvance(posData.label)) / 2;
+        qreal const shift = (data->labelWidth - fm.horizontalAdvance(posData.label)) / 2;
         baseLine.setLength(baseLine.length() - shift);
     }
     else if (m_alignment & Qt::AlignRight) // NOLINT(readability-implicit-bool-conversion)
     {
-        qreal const shift = data.labelWidth - fm.horizontalAdvance(posData.label);
+        qreal const shift = data->labelWidth - fm.horizontalAdvance(posData.label);
         baseLine.setLength(baseLine.length() - shift);
     }
 
     posData.pos = baseLine.p2();
-    posData.angle = QLineF(center, data.base.p1()).angle();
+    posData.angle = QLineF(center, data->base.p1()).angle();
     ok = true;
 
     return posData;

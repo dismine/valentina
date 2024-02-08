@@ -374,37 +374,31 @@ auto VGObject::ContactPoints(const QPointF &p, const QPointF &center, qreal radi
  */
 auto VGObject::LineIntersectRect(const QRectF &rec, const QLineF &line) -> QPointF
 {
-    qreal x1, y1, x2, y2;
+    qreal x1 = 0;
+    qreal y1 = 0;
+    qreal x2 = 0;
+    qreal y2 = 0;
     rec.getCoords(&x1, &y1, &x2, &y2);
+
+    // Define lines representing each side of the rectangle
+    QLineF const topLine(QPointF(x1, y1), QPointF(x2, y1));
+    QLineF const bottomLine(QPointF(x1, y2), QPointF(x2, y2));
+    QLineF const leftLine(QPointF(x1, y1), QPointF(x1, y2));
+    QLineF const rightLine(QPointF(x2, y1), QPointF(x2, y2));
+
     QPointF point;
-    QLineF::IntersectType type = line.intersects(QLineF(QPointF(x1, y1), QPointF(x1, y2)), &point);
 
-    if (type == QLineF::BoundedIntersection)
+    // Check intersections with each side of the rectangle
+    if (line.intersects(topLine, &point) == QLineF::BoundedIntersection ||
+        line.intersects(bottomLine, &point) == QLineF::BoundedIntersection ||
+        line.intersects(leftLine, &point) == QLineF::BoundedIntersection ||
+        line.intersects(rightLine, &point) == QLineF::BoundedIntersection)
     {
         return point;
     }
 
-    type = line.intersects(QLineF(QPointF(x1, y1), QPointF(x2, y1)), &point);
-
-    if (type == QLineF::BoundedIntersection)
-    {
-        return point;
-    }
-
-    type = line.intersects(QLineF(QPointF(x1, y2), QPointF(x2, y2)), &point);
-
-    if (type == QLineF::BoundedIntersection)
-    {
-        return point;
-    }
-
-    type = line.intersects(QLineF(QPointF(x2, y1), QPointF(x2, y2)), &point);
-
-    if (type == QLineF::BoundedIntersection)
-    {
-        return point;
-    }
-    return point;
+    // Return the point (which would be (0,0) if no intersection is found)
+    return {};
 }
 
 //---------------------------------------------------------------------------------------------------------------------

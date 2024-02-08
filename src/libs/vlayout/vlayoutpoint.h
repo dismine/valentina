@@ -52,6 +52,7 @@ public:
     Q_DECL_RELAXED_CONSTEXPR void SetCurvePoint(bool newCurvePoint);
 
     auto toJson() const -> QJsonObject;
+    auto ToQPointF() const -> QPointF;
 
 private:
     bool m_turnPoint{false};

@@ -609,7 +609,7 @@ auto AngleBySecondRightAngle(QVector<VRawSAPoint> points, QPointF p1, QPointF p2
         if (success)
         {
             points = temp;
-            px = points.constLast();
+            px = points.constLast().ToQPointF();
         }
 
         if (countBefore > 0)
@@ -852,7 +852,7 @@ void RollbackBySecondEdgeRightAngle(QVector<VRawSAPoint> &ekvPoints, const QVect
             if (success)
             {
                 ekvPoints = temp;
-                px = ekvPoints.constLast();
+                px = ekvPoints.constLast().ToQPointF();
             }
 
             QLineF seam(px, points.at(1));
@@ -1322,23 +1322,28 @@ auto VAbstractPiece::EkvPoint(QVector<VRawSAPoint> points, const VSAPoint &p1Lin
                         break;
                     case PieceNodeAngle::ByLength:
                     case PieceNodeAngle::ByLengthCurve:
-                        return AngleByLength(points, p1Line1, p2Line1, p1Line2, bigLine1, crosPoint, bigLine2, p2Line1,
-                                             width, needRollback);
+                        return AngleByLength(points, p1Line1.ToQPointF(), p2Line1.ToQPointF(), p1Line2.ToQPointF(),
+                                             bigLine1, crosPoint, bigLine2, p2Line1, width, needRollback);
                     case PieceNodeAngle::ByPointsIntersection:
-                        return AngleByIntersection(points, p1Line1, p2Line1, p1Line2, bigLine1, crosPoint, bigLine2,
-                                                   p2Line1, width, needRollback);
+                        return AngleByIntersection(points, p1Line1.ToQPointF(), p2Line1.ToQPointF(),
+                                                   p1Line2.ToQPointF(), bigLine1, crosPoint, bigLine2, p2Line1, width,
+                                                   needRollback);
                     case PieceNodeAngle::ByFirstEdgeSymmetry:
-                        return AngleByFirstSymmetry(points, p1Line1, p2Line1, p1Line2, bigLine1, crosPoint, bigLine2,
-                                                    p2Line1, width, needRollback);
+                        return AngleByFirstSymmetry(points, p1Line1.ToQPointF(), p2Line1.ToQPointF(),
+                                                    p1Line2.ToQPointF(), bigLine1, crosPoint, bigLine2, p2Line1, width,
+                                                    needRollback);
                     case PieceNodeAngle::BySecondEdgeSymmetry:
-                        return AngleBySecondSymmetry(points, p1Line1, p2Line1, p1Line2, bigLine1, crosPoint, bigLine2,
-                                                     p2Line1, width, needRollback);
+                        return AngleBySecondSymmetry(points, p1Line1.ToQPointF(), p2Line1.ToQPointF(),
+                                                     p1Line2.ToQPointF(), bigLine1, crosPoint, bigLine2, p2Line1, width,
+                                                     needRollback);
                     case PieceNodeAngle::ByFirstEdgeRightAngle:
-                        return AngleByFirstRightAngle(points, p1Line1, p2Line1, p1Line2, bigLine1, crosPoint, bigLine2,
-                                                      p2Line1, width, needRollback);
+                        return AngleByFirstRightAngle(points, p1Line1.ToQPointF(), p2Line1.ToQPointF(),
+                                                      p1Line2.ToQPointF(), bigLine1, crosPoint, bigLine2, p2Line1,
+                                                      width, needRollback);
                     case PieceNodeAngle::BySecondEdgeRightAngle:
-                        return AngleBySecondRightAngle(points, p1Line1, p2Line1, p1Line2, bigLine1, crosPoint, bigLine2,
-                                                       p2Line1, width, needRollback);
+                        return AngleBySecondRightAngle(points, p1Line1.ToQPointF(), p2Line1.ToQPointF(),
+                                                       p1Line2.ToQPointF(), bigLine1, crosPoint, bigLine2, p2Line1,
+                                                       width, needRollback);
                 }
 
                 QT_WARNING_POP

@@ -69,7 +69,7 @@ auto GetSeamPassmarkSAPoint(const VPiecePassmarkData &passmarkData, const QVecto
         return PassmarkStatus::Error; // Something wrong
     }
 
-    point = ekvPoints.constFirst(); // NOLINT(cppcoreguidelines-slicing)
+    point = ekvPoints.constFirst().ToQPointF();
     return needRollback ? PassmarkStatus::Rollback : PassmarkStatus::Common;
 }
 

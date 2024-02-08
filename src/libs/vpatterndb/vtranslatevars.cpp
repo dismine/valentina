@@ -686,7 +686,7 @@ auto VTranslateVars::VarFromUser(const QString &var) const -> QString
     {
         return newVar;
     }
-    return newVar;
+    return var;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
