@@ -62,8 +62,8 @@ linux_qt6_sonar_task_template: &LINUX_QT6_TASK_SONAR_TEMPLATE
     - qbs setup-qt /usr/bin/qmake6 qt6
     - qbs config profiles.qt6.baseProfile ${COMPILER}
     - qbs config defaultProfile qt6
-    - build-wrapper-linux-x86-64 --out-dir bw-output qbs build --no-install -f valentina.qbs -d build profile:qt6 config:release modules.buildconfig.enableCcache:false modules.cpp.linkerVariant:mold
-    - sonar-scanner -Dsonar.cfamily.threads=$(nproc) -Dsonar.scm.revision=${CIRRUS_CHANGE_IN_REPO} -Dsonar.links.ci=https://cirrus-ci.com/task/${CIRRUS_TASK_ID} -Dsonar.branch.name=${CIRRUS_BRANCH}
+    - build-wrapper-linux-x86-64 --out-dir bw-output qbs build --no-install -f valentina.qbs -d build --jobs $(nproc) profile:qt6 config:release modules.buildconfig.enableCcache:false modules.cpp.linkerVariant:mold
+    - sonar-scanner -Dsonar.scm.revision=${CIRRUS_CHANGE_IN_REPO} -Dsonar.links.ci=https://cirrus-ci.com/task/${CIRRUS_TASK_ID} -Dsonar.branch.name=${CIRRUS_BRANCH}
     
 linux_qt5_qmake_task_template: &LINUX_QT5_QMAKE_TASK_TEMPLATE
   install_script:
