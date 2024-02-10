@@ -27,45 +27,15 @@
  *************************************************************************/
 #include "appimage.h"
 
-#include <stdlib.h>
-#include <unicode/putil.h>
-#include <QString>
 #include <QCoreApplication>
-#include <cstring>
+#include <QString>
 #include <QVector>
-extern "C" {
-#include "binreloc.h"
-}
-#include "../vmisc/def.h"
+#include <unicode/putil.h>
+
 #include "compatibility.h"
+#include "def.h"
 
-//---------------------------------------------------------------------------------------------------------------------
-/* When deploying with AppImage based on OpenSuse, the ICU library has a hardcoded path to the icudt*.dat file.
- * This prevents the library from using shared in memory data. There are few ways to resolve this issue. According
- * to documentation we can either use ICU_DATA environment variable or the function u_setDataDirectory().
- */
-char* IcuDataPath(const char* correction)
-{
-    char * data_path = nullptr;
-    BrInitError error;
-    if (br_init (&error))
-    {
-        char *path = br_find_exe_dir(nullptr);
-        if (path)
-        {
-            data_path = static_cast<char *> (malloc(strlen(path) + strlen(correction) + 1));
-            if(data_path)
-            {
-                strcpy(data_path, path);
-                strcat(data_path, correction);
-                u_setDataDirectory(data_path);
-            }
-            free(path);
-        }
-    }
-
-    return data_path;
-}
+using namespace Qt::Literals::StringLiterals;
 
 //---------------------------------------------------------------------------------------------------------------------
 /**
@@ -89,7 +59,7 @@ QString AppImageRoot(const QString &applicationDir, const QString &defaultAppDir
 
     if (appSub.isEmpty() || defaultSub.isEmpty() || appSub.size() <= defaultSub.size())
     {
-        return QString();
+        return {};
     }
 
     appSub = Reverse(appSub);
@@ -99,12 +69,12 @@ QString AppImageRoot(const QString &applicationDir, const QString &defaultAppDir
     {
         if (defaultSub.at(i) != appSub.at(i))
         {
-            return QString();
+            return {};
         }
     }
 
     QStringList rootSub = appSub.mid(defaultSub.size());
     rootSub = Reverse(rootSub);
 
-    return '/' + rootSub.join('/');
+    return '/'_L1 + rootSub.join('/');
 }

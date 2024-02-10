@@ -51,10 +51,15 @@ auto VPieceGrainlinePrivate::MainLine(const QPointF &p1, qreal length, qreal ang
 
 // VPieceGrainline
 //---------------------------------------------------------------------------------------------------------------------
+QT_WARNING_PUSH
+QT_WARNING_DISABLE_GCC("-Wnoexcept")
+
 VPieceGrainline::VPieceGrainline()
   : d(new VPieceGrainlinePrivate)
 {
 }
+
+QT_WARNING_POP
 
 //---------------------------------------------------------------------------------------------------------------------
 VPieceGrainline::~VPieceGrainline() = default;

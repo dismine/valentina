@@ -261,8 +261,31 @@ VToolApp {
         name: "freedesktop"
         prefix: project.sourceDirectory + "/dist/"
         files: [
-            "ua.com.smart-pattern." + product.targetName + ".metainfo.xml"
+            "ua.com.smart-pattern." + product.targetName + ".metainfo.xml",
+            "ua.com.smart-pattern." + product.targetName + ".desktop"
         ]
+    }
+
+    freedesktop2.desktopKeys: {
+        var desktopKeys = {
+            'Exec': FileInfo.joinPaths(qbs.installPrefix,
+                                       product.installDir,
+                                       product.targetName) + ' %F',
+            'X-Application-Version': product.version,
+        };
+
+        if (buildconfig.enableAppImage) {
+            var mimeTypes = [
+                'application/x-valentina-pattern',
+                'application/x-valentina-s-measurements',
+                'application/x-valentina-i-measurements',
+                'application/x-valentina-k-measurements',
+                'application/x-valentina-layout'
+            ];
+            desktopKeys['MimeType'] = mimeTypes.join(';');
+        }
+
+        return (desktopKeys);
     }
 
     Group {

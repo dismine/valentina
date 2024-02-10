@@ -46,12 +46,7 @@ QT_WARNING_DISABLE_CLANG("-Wnon-virtual-dtor")
 class VSAPoint final : public VLayoutPoint
 {
 public:
-    QT_WARNING_PUSH
-    QT_WARNING_DISABLE_GCC("-Wnoexcept")
-
-    Q_DECL_CONSTEXPR VSAPoint() = default;
-
-    QT_WARNING_POP
+    Q_DECL_CONSTEXPR VSAPoint() noexcept;
 
     Q_DECL_CONSTEXPR VSAPoint(qreal xpos, qreal ypos);
     Q_DECL_CONSTEXPR explicit VSAPoint(QPointF p);
@@ -113,6 +108,11 @@ private:
 
 Q_DECLARE_METATYPE(VSAPoint)                  // NOLINT
 Q_DECLARE_TYPEINFO(VSAPoint, Q_MOVABLE_TYPE); // NOLINT
+
+//---------------------------------------------------------------------------------------------------------------------
+Q_DECL_CONSTEXPR inline VSAPoint::VSAPoint() noexcept // NOLINT(hicpp-use-equals-default)
+{
+}
 
 //---------------------------------------------------------------------------------------------------------------------
 Q_DECL_CONSTEXPR inline VSAPoint::VSAPoint(qreal xpos, qreal ypos)

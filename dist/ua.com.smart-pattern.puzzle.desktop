@@ -2,7 +2,7 @@
 Type=Application
 Name=Puzzle
 Exec=puzzle %F
-Version=1.1
+Version=1.0
 GenericName=Valentina's layout editor
 GenericName[uk]=Редактор розкладки Валентини
 Comment=Create and edit layouts
@@ -12,5 +12,5 @@ Terminal=false
 MimeType=application/x-valentina-layout;
 Categories=Qt;Utility;FileTools;
 TryExec=puzzle
-Keywords=layout;nesting
+Keywords=layout;nesting;
 StartupWMClass=puzzle

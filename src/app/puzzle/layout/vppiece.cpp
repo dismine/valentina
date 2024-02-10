@@ -346,7 +346,12 @@ auto VPPiece::StickyPosition(qreal &dx, qreal &dy) const -> bool
         return false;
     }
 
+    QT_WARNING_PUSH
+    QT_WARNING_DISABLE_GCC("-Wnoexcept")
+
     VStickyDistance match;
+
+    QT_WARNING_POP
 
     if (!StickySheet(match))
     {

@@ -35,11 +35,6 @@
 #include <QMessageBox> // For QT_REQUIRE_VERSION
 #include <QTimer>
 
-#if defined(APPIMAGE) && defined(Q_OS_LINUX)
-#include "../vmisc/appimage.h"
-#include <QScopeGuard>
-#endif // defined(APPIMAGE) && defined(Q_OS_LINUX)
-
 #if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
 #include <xercesc/util/PlatformUtils.hpp>
 #endif
@@ -77,12 +72,6 @@
 
 auto main(int argc, char *argv[]) -> int
 {
-#if defined(APPIMAGE) && defined(Q_OS_LINUX)
-    /* Fix path to ICU_DATA when run AppImage.*/
-    char *exe_dir = IcuDataPath("/../share/icu");
-    auto FreeMemory = qScopeGuard([exe_dir] { free(exe_dir); });
-#endif // defined(APPIMAGE) && defined(Q_OS_LINUX)
-
     Q_INIT_RESOURCE(cursor);     // NOLINT
     Q_INIT_RESOURCE(toolcursor); // NOLINT
     Q_INIT_RESOURCE(icon);       // NOLINT
@@ -157,13 +146,6 @@ auto main(int argc, char *argv[]) -> int
     }
 
     QTimer::singleShot(msec, &w, &MainWindow::ProcessCMD);
-
-#if defined(APPIMAGE) && defined(Q_OS_LINUX)
-    if (exe_dir)
-    {
-        qDebug() << "Path to ICU folder:" << exe_dir;
-    }
-#endif // defined(APPIMAGE) && defined(Q_OS_LINUX)
 
     return VApplication::exec();
 }

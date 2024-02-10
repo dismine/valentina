@@ -38,6 +38,10 @@
 #include "vsvgfontengine.h"
 #include "vsvgfontreader.h"
 
+#if defined(APPIMAGE) && defined(Q_OS_LINUX)
+#include "../appimage.h"
+#endif // defined(APPIMAGE) && defined(Q_OS_LINUX)
+
 #if QT_VERSION < QT_VERSION_CHECK(6, 4, 0)
 #include "../compatibility.h"
 #endif
@@ -231,9 +235,9 @@ auto VSvgFontDatabase::SystemSVGFontPath() -> QString
 
 #ifdef QBS_BUILD
 #if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
-    dir.setPath(QCoreApplication::applicationDirPath() + "/../../.." + PKGDATADIR + fontPath);
+    dir.setPath(QCoreApplication::applicationDirPath() + "/../../.."_L1 + PKGDATADIR + fontPath);
 #else
-    dir = QDir(QCoreApplication::applicationDirPath() + "/../../.." + PKGDATADIR + fontPath);
+    dir = QDir(QCoreApplication::applicationDirPath() + "/../../.."_L1 + PKGDATADIR + fontPath);
 #endif
     if (dir.exists())
     {
@@ -243,7 +247,7 @@ auto VSvgFontDatabase::SystemSVGFontPath() -> QString
 
 #if defined(APPIMAGE) && defined(Q_OS_LINUX)
     /* Fix path to trasnaltions when run inside AppImage. */
-    return AppImageRoot() + PKGDATADIR + trPath;
+    return AppImageRoot() + PKGDATADIR + fontPath;
 #else
     return PKGDATADIR + fontPath;
 #endif // defined(APPIMAGE) && defined(Q_OS_LINUX)

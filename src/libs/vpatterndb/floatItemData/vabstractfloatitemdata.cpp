@@ -31,10 +31,15 @@
 #include "vabstractfloatitemdata_p.h"
 
 //---------------------------------------------------------------------------------------------------------------------
+QT_WARNING_PUSH
+QT_WARNING_DISABLE_GCC("-Wnoexcept")
+
 VAbstractFloatItemData::VAbstractFloatItemData()
   : d(new VAbstractFloatItemDataPrivate())
 {
 }
+
+QT_WARNING_POP
 
 //---------------------------------------------------------------------------------------------------------------------
 COPY_CONSTRUCTOR_IMPL(VAbstractFloatItemData)

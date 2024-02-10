@@ -111,6 +111,34 @@ linux_qt5_qbs_task_template: &LINUX_QT5_QBS_TASK_TEMPLATE
     - qbs -p autotest-runner -d build profile:qt5 config:release
     - ccache -s
 
+linuxdeployqt_task_template: &LINUXDEPLOYQT_TASK_TEMPLATE
+    - bash -c "$PACKAGE_MANAGER_INSTALL qt515base qt515svg qt515tools qt515xmlpatterns qt515translations qt515doc qt515imageformats poppler-utils git xvfb ccache build-essential"
+  build_script:
+    - uname -a
+    - mkdir -pm 0700 $XDG_RUNTIME_DIR
+    - Xvfb $DISPLAY -ac -screen 0 1600x1200x24+32 -nolisten tcp -nolisten unix &
+    - sleep 1
+    - ccache --set-config sloppiness=pch_defines,time_macros max_size="$CCACHE_SIZE"
+    - echo $PATH
+    - which qmake
+    - which qbs
+    - pwd
+    - ls -l /usr/bin/ | grep -E "${COMPILER_REGEX}"
+    - ${COMPILER} --version
+    - qmake --version
+    - qbs --version
+    - qbs setup-toolchains /usr/bin/${COMPILER} ${COMPILER}
+    - qbs setup-qt /opt/qt515/bin/qmake qt5
+    - qbs config defaultProfile qt5
+    - qbs config profiles.qt5.baseProfile ${COMPILER}
+    - qbs build -f valentina.qbs -d $CIRRUS_WORKING_DIR/build --jobs $(nproc) profile:qt5 config:release modules.buildconfig.enableCcache:${ENABLE_CCACHE} modules.cpp.linkerVariant:mold qbs.installRoot:$CIRRUS_WORKING_DIR/build/install-root modules.buildconfig.enableAppImage:true
+    - qbs -p autotest-runner -d build profile:qt5 config:release
+    - linuxdeployqt $CIRRUS_WORKING_DIR/build/install-root/usr/local/share/applications/ua.com.smart-pattern.valentina.desktop -appimage -qmake='/opt/qt515/bin/qmake' -executable-dir=$CIRRUS_WORKING_DIR/build/install-root/usr/local/bin -extra-plugins=iconengines,platformthemes/libqgtk3.so
+    - ccache -s
+  deploy_script:
+    - pwd
+    - $CIRRUS_WORKING_DIR/scripts/appimage-deploy.sh
+
 linux_task:
   << : *REGULER_TASK_TEMPLATE
   env:
@@ -173,6 +201,28 @@ linux_task:
             QT_SELECT: "qt5"
           container:
             cpu: 2 
+            memory: 8G  # Set to 8GB to avoid OOM. https://cirrus-ci.org/guide/linux/#linux-container
+    - container:
+        image: dismine/linuxdeployqt:latest
+      env:
+        COMPILER: gcc
+        QMAKE_SPEC: "linux-g++"
+        GCC_COLORS: 'error=01;31:warning=01;35:note=01;36:caret=01;32:locus=01:quote=01'
+        COMPILER_REGEX: "gcc|g\\+\\+"
+      matrix:
+        - name: 'AppImage'
+          << :  *LINUXDEPLOYQT_TASK_TEMPLATE
+          env:
+            ACCESS_TOKEN: ENCRYPTED[81e0b2381ffb628b73f5c94f834010e6631191e0ad03cdd0850d440fb2737a74b68131d842030f010c1bf73ab4cdc1ae]
+            DEPLOY: "true"
+            QT_SELECT: "qt5"
+            ENABLE_CCACHE: true
+            VERSION: "continuous"
+            QT_VERSION: Qt6
+            ARCH: x86_64
+            TARGET_PLATFORM: "Linux"
+          container:
+            cpu: 4 
             memory: 8G  # Set to 8GB to avoid OOM. https://cirrus-ci.org/guide/linux/#linux-container
     - container:
         image: dismine/gcc-ubuntu:latest

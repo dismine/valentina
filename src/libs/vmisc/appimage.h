@@ -30,8 +30,6 @@
 
 class QString;
 
-char* IcuDataPath(const char* correction);
-
 QString AppImageRoot();
 QString AppImageRoot(const QString &applicationDir, const QString &defaultAppDir);
 

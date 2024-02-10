@@ -74,10 +74,6 @@
 #define BUILD_REVISION VCS_REPO_STATE_REVISION
 #endif
 
-#if defined(APPIMAGE) && defined(Q_OS_LINUX)
-#include "../vmisc/appimage.h"
-#endif // defined(APPIMAGE) && defined(Q_OS_LINUX)
-
 #if QT_VERSION < QT_VERSION_CHECK(6, 4, 0)
 #include "../vmisc/compatibility.h"
 #endif

@@ -585,10 +585,15 @@ auto operator>>(QDataStream &dataStream, VLayoutPiece &piece) -> QDataStream &
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+QT_WARNING_PUSH
+QT_WARNING_DISABLE_GCC("-Wnoexcept")
+
 VLayoutPiece::VLayoutPiece()
   : d(new VLayoutPieceData)
 {
 }
+
+QT_WARNING_POP
 
 //---------------------------------------------------------------------------------------------------------------------
 COPY_CONSTRUCTOR_IMPL_2(VLayoutPiece, VAbstractPiece)

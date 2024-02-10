@@ -141,7 +141,8 @@ def run_clean(refresh_token):
                         r'^valentina-macOS_10.13\+-Qt.*-x64-develop-[a-f0-9]{40}\.dmg$',
                         r'^valentina-macOS_10.13\+-Qt.*-x64-develop-multibundle-[a-f0-9]{40}\.dmg$',
                         r'^valentina-macOS.*\+-Qt.*-arm.*-develop-[a-f0-9]{40}\.dmg$',
-                        r'^valentina-macOS.*\+-Qt.*-arm.*-develop-multibundle-[a-f0-9]{40}\.dmg$']
+                        r'^valentina-macOS.*\+-Qt.*-arm.*-develop-multibundle-[a-f0-9]{40}\.dmg$',
+                        r'^valentina-Linux-x86_64-develop-[a-f0-9]{40}\.AppImage$']
 
         item_types = {}
 

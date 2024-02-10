@@ -34,21 +34,6 @@ VApp {
     }
 
     Group {
-        name: "freedesktop"
-        prefix: project.sourceDirectory + "/dist/"
-        files: [
-            "ua.com.smart-pattern." + product.targetName + ".desktop"
-        ]
-    }
-
-    freedesktop2.desktopKeys: ({
-        'Exec': FileInfo.joinPaths(qbs.installPrefix,
-                                   product.installDir,
-                                   product.targetName) + ' %F',
-        'X-Application-Version': product.version,
-    })
-
-    Group {
         name: "Translations"
         condition: product.primaryApp || (qbs.targetOS.contains("macos") && (!bundle.isBundle || (bundle.isBundle && buildconfig.enableMultiBundle)))
         prefix: project.sourceDirectory + "/share/translations/"

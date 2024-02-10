@@ -239,12 +239,47 @@ auto VAbstractApplication::translationsPath(const QString &locale) -> QString
 #endif // QBS_BUILD
 
 #if defined(APPIMAGE) && defined(Q_OS_LINUX)
-    /* Fix path to trasnaltions when run inside AppImage. */
+    /* Fix path to translations when run inside AppImage. */
     return AppImageRoot() + PKGDATADIR + trPath;
 #else
     return PKGDATADIR + trPath;
 #endif // defined(APPIMAGE) && defined(Q_OS_LINUX)
 #endif // Unix
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+auto VAbstractApplication::QtTranslationsPath(const QString &locale) -> QString
+{
+#if defined(Q_OS_LINUX)
+    const QString trPath = QStringLiteral("/translations");
+
+    QDir dir(QCoreApplication::applicationDirPath() + trPath);
+    if (dir.exists())
+    {
+        return dir.absolutePath();
+    }
+
+#ifdef QBS_BUILD
+#if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
+    dir.setPath(QCoreApplication::applicationDirPath() + "/../../.."_L1 + PKGDATADIR + trPath);
+#else
+    dir = QDir(QCoreApplication::applicationDirPath() + "/../../.."_L1 + PKGDATADIR + trPath);
+#endif
+    if (dir.exists())
+    {
+        return dir.absolutePath();
+    }
+#endif // QBS_BUILD
+
+#if defined(APPIMAGE)
+    /* Fix path to translations when run inside AppImage. */
+    return AppImageRoot() + APPIMAGE_QT_TRANSLATIONS;
+#else
+    return translationsPath(locale);
+#endif // defined(APPIMAGE)
+#else
+    return translationsPath(locale);
+#endif // defined(Q_OS_LINUX)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -308,7 +343,11 @@ void VAbstractApplication::LoadTranslation(QString locale)
 #if defined(Q_OS_WIN) || defined(Q_OS_MAC)
     const QString qtQmDir = appQmDir;
 #else
+#if defined(APPIMAGE)
+    const QString qtQmDir = VAbstractApplication::QtTranslationsPath(locale);
+#else
     const QString qtQmDir = QLibraryPath(QLibraryInfo::TranslationsPath);
+#endif // defined(APPIMAGE)
 #endif
     LoadQM(qtTranslator, QStringLiteral("qt_"), locale, qtQmDir);
     installTranslator(qtTranslator);

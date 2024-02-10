@@ -58,10 +58,8 @@ VLib {
         name: "AppImage"
         condition: buildconfig.enableAppImage && qbs.targetOS.contains("unix") && !qbs.targetOS.contains("macos")
         files: [
-            "binreloc.h",
             "appimage.h",
-            "binreloc.c",
-            "appimage.cpp"
+            "appimage.cpp",
         ]
     }
 

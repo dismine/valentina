@@ -2,7 +2,7 @@
 Type=Application
 Name=Tape
 Exec=tape %F
-Version=1.1
+Version=1.0
 GenericName=Valentina's measurements editor
 GenericName[uk]=Редактор мірок Валентини
 Comment=Create and edit measurements
@@ -12,5 +12,5 @@ Terminal=false
 MimeType=application/x-valentina-s-measurements;application/x-valentina-i-measurements;application/x-valentina-k-measurements
 Categories=Qt;Utility;FileTools;
 TryExec=tape
-Keywords=measurements
+Keywords=measurements;
 StartupWMClass=tape

@@ -76,6 +76,7 @@ public:
     virtual auto TrVars() -> const VTranslateVars * = 0;
 
     static auto translationsPath(const QString &locale = QString()) -> QString;
+    static auto QtTranslationsPath(const QString &locale = QString()) -> QString;
 
     void LoadTranslation(QString locale);
 

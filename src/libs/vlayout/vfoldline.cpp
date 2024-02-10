@@ -223,9 +223,13 @@ auto VFoldLine::FoldLineMarkPoints() const -> QVector<QVector<QPointF>>
 //---------------------------------------------------------------------------------------------------------------------
 auto VFoldLine::LabelPosition(bool &ok) const -> FoldLabelPosData
 {
-    FoldLabelPosData posData;
+    QT_WARNING_PUSH
+    QT_WARNING_DISABLE_GCC("-Wnoexcept")
 
+    FoldLabelPosData posData;
     std::unique_ptr<TextPosData> data;
+
+    QT_WARNING_POP
     if (m_type == FoldLineType::Text)
     {
         data = std::make_unique<TextPosData>(TextData());

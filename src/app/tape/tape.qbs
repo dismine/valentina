@@ -245,4 +245,20 @@ VToolApp {
             "k-measurements.iconset"
         ]
     }
+
+    Group {
+        name: "freedesktop"
+        condition: !buildconfig.enableAppImage && qbs.targetOS.contains("unix") && !qbs.targetOS.contains("macos")
+        prefix: project.sourceDirectory + "/dist/"
+        files: [
+            "ua.com.smart-pattern." + product.targetName + ".desktop"
+        ]
+    }
+
+    freedesktop2.desktopKeys: ({
+       'Exec': FileInfo.joinPaths(qbs.installPrefix,
+                                  product.installDir,
+                                  product.targetName) + ' %F',
+       'X-Application-Version': product.version,
+    })
 }

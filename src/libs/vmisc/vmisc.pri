@@ -44,7 +44,6 @@ macx {
 
 contains(DEFINES, APPIMAGE) {
     SOURCES += \
-        $$PWD/binreloc.c \
         $$PWD/appimage.cpp
 }
 
@@ -102,7 +101,6 @@ HEADERS += \
 
 contains(DEFINES, APPIMAGE) {
     SOURCES += \
-        $$PWD/binreloc.h \
         $$PWD/appimage.h
 }
 
