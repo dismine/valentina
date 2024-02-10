@@ -132,7 +132,7 @@ linuxdeployqt_task_template: &LINUXDEPLOYQT_TASK_TEMPLATE
     - qbs setup-qt /opt/qt515/bin/qmake qt5
     - qbs config defaultProfile qt5
     - qbs config profiles.qt5.baseProfile ${COMPILER}
-    - qbs build -f valentina.qbs -d $CIRRUS_WORKING_DIR/build --jobs $(nproc) profile:qt5 config:release modules.buildconfig.enableCcache:${ENABLE_CCACHE} modules.cpp.linkerVariant:mold qbs.installRoot:$CIRRUS_WORKING_DIR/build/install-root modules.buildconfig.enableAppImage:true
+    - qbs build -f valentina.qbs -d $CIRRUS_WORKING_DIR/build --jobs $(nproc) profile:qt5 config:release modules.buildconfig.enableCcache:${ENABLE_CCACHE} qbs.installRoot:$CIRRUS_WORKING_DIR/build/install-root modules.buildconfig.enableAppImage:true
     - qbs -p autotest-runner -d build profile:qt5 config:release
     - linuxdeployqt $CIRRUS_WORKING_DIR/build/install-root/usr/local/share/applications/ua.com.smart-pattern.valentina.desktop -appimage -qmake='/opt/qt515/bin/qmake' -executable-dir=$CIRRUS_WORKING_DIR/build/install-root/usr/local/bin -extra-plugins=iconengines,platformthemes/libqgtk3.so
     - ccache -s
