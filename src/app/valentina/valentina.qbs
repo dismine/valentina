@@ -282,7 +282,7 @@ VToolApp {
                 'application/x-valentina-k-measurements',
                 'application/x-valentina-layout'
             ];
-            desktopKeys['MimeType'] = mimeTypes.join(';');
+            desktopKeys['MimeType'] = mimeTypes.join(';') + ';';
         }
 
         return (desktopKeys);
