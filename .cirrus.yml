@@ -113,7 +113,7 @@ linux_qt5_qbs_task_template: &LINUX_QT5_QBS_TASK_TEMPLATE
 
 linuxdeployqt_task_template: &LINUXDEPLOYQT_TASK_TEMPLATE
   install_script:
-    - bash -c "$PACKAGE_MANAGER_INSTALL qt515base qt515svg qt515tools qt515xmlpatterns qt515translations qt515doc qt515imageformats poppler-utils git xvfb ccache build-essential libgl1-mesa-dev"
+    - bash -c "$PACKAGE_MANAGER_INSTALL qt515base qt515svg qt515tools qt515xmlpatterns qt515translations qt515doc qt515imageformats poppler-utils git xvfb ccache build-essential libgl1-mesa-dev libicu-dev"
   build_script:
     - uname -a
     - mkdir -pm 0700 $XDG_RUNTIME_DIR
