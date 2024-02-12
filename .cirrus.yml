@@ -112,8 +112,12 @@ linux_qt5_qbs_task_template: &LINUX_QT5_QBS_TASK_TEMPLATE
     - ccache -s
 
 linuxdeployqt_task_template: &LINUXDEPLOYQT_TASK_TEMPLATE
+  pip_cache:
+    folder: ${PIP_CACHE_DIR}
   install_script:
-    - bash -c "$PACKAGE_MANAGER_INSTALL qt515base qt515svg qt515tools qt515xmlpatterns qt515translations qt515doc qt515imageformats poppler-utils git xvfb ccache build-essential libgl1-mesa-dev libicu-dev"
+    - bash -c "$PACKAGE_MANAGER_INSTALL qt515base qt515svg qt515tools qt515xmlpatterns qt515translations qt515doc qt515imageformats poppler-utils git xvfb ccache build-essential libgl1-mesa-dev libicu-dev python3-pip"
+    - python3 --version
+    - pip3 install --user --upgrade pip dropbox 'urllib3<2.0'
   build_script:
     - uname -a
     - mkdir -pm 0700 $XDG_RUNTIME_DIR
@@ -211,6 +215,7 @@ linux_task:
         QMAKE_SPEC: "linux-g++"
         GCC_COLORS: 'error=01;31:warning=01;35:note=01;36:caret=01;32:locus=01:quote=01'
         COMPILER_REGEX: "gcc|g\\+\\+"
+        PIP_CACHE_DIR: ${HOME}/.cache/pip
       matrix:
         - name: 'AppImage'
           << :  *LINUXDEPLOYQT_TASK_TEMPLATE
