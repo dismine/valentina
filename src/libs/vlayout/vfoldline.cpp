@@ -1004,7 +1004,13 @@ auto VFoldLine::ThreeXPoints() const -> QVector<QVector<QPointF>>
 //---------------------------------------------------------------------------------------------------------------------
 auto VFoldLine::TwoArrowsData() const -> ArrowsTextPosData
 {
+    QT_WARNING_PUSH
+    QT_WARNING_DISABLE_GCC("-Wnoexcept")
+
     ArrowsTextPosData data;
+
+    QT_WARNING_POP
+
     data.arrowsWidth = qFuzzyIsNull(m_width) ? m_foldLine.length() * 0.9 : qMin(m_width, m_foldLine.length());
     data.arrowsHeight = qFuzzyIsNull(m_height) ? defArrowsHeight : m_height;
     return data;
@@ -1015,7 +1021,13 @@ auto VFoldLine::TwoArrowsTextAboveData() const -> ArrowsTextPosData
 {
     const qreal defLabelHeight = LabelTextHeight();
 
+    QT_WARNING_PUSH
+    QT_WARNING_DISABLE_GCC("-Wnoexcept")
+
     ArrowsTextPosData data;
+
+    QT_WARNING_POP
+
     data.arrowsWidth = qFuzzyIsNull(m_width) ? m_foldLine.length() * 0.9 : qMin(m_width, m_foldLine.length());
     data.labelWidth = data.arrowsWidth;
     data.arrowsHeight =
@@ -1030,7 +1042,13 @@ auto VFoldLine::TwoArrowsTextUnderData() const -> ArrowsTextPosData
 {
     const qreal defLabelHeight = LabelTextHeight();
 
+    QT_WARNING_PUSH
+    QT_WARNING_DISABLE_GCC("-Wnoexcept")
+
     ArrowsTextPosData data;
+
+    QT_WARNING_POP
+
     data.arrowsWidth = qFuzzyIsNull(m_width) ? m_foldLine.length() * 0.9 : qMin(m_width, m_foldLine.length());
     data.labelWidth = data.arrowsWidth * 0.9;
     data.labelHeight = qFuzzyIsNull(m_height) ? defLabelHeight : (defLabelHeight + CmToPixel(0.2)) - m_height;
