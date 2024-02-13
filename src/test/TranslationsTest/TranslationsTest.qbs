@@ -1,11 +1,21 @@
 import qbs.FileInfo
+import qbs.Utilities
 
 VTestApp {
     Depends { name: "buildconfig" }
     Depends { name: "VTestLib" }
     Depends { name: "Qt"; submodules: ["testlib", "xml", "gui", "printsupport"] }
-    Depends { name: "conan.XercesC"; condition: buildconfig.useConanPackages }
     Depends { name: "autotest" }
+
+    Depends {
+        name: "xerces-c"
+        condition: Utilities.versionCompare(Qt.core.version, "6") >= 0 && !buildconfig.useConanPackages
+    }
+
+    Depends {
+        name: "conan.XercesC"
+        condition: Utilities.versionCompare(Qt.core.version, "6") >= 0 && buildconfig.useConanPackages
+    }
 
     name: "TranslationsTest"
     buildconfig.appTarget: qbs.targetOS.contains("macos") ? "TranslationsTest" : "translationsTest"
