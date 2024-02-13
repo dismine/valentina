@@ -1,0 +1,126 @@
+# appimage-builder recipe see https://appimage-builder.readthedocs.io for details
+version: 1
+AppDir:
+  app_info:
+    id: ua.com.smart-pattern.valentina
+    name: Valentina
+    icon: valentina
+    version: continuous
+    exec: usr/local/bin/valentina
+    exec_args: $@
+  apt:
+    arch:
+    - amd64
+    allow_unauthenticated: true
+    sources:
+    - sourceline: deb http://us.archive.ubuntu.com/ubuntu/ focal main restricted
+    - sourceline: deb http://us.archive.ubuntu.com/ubuntu/ focal-updates main restricted
+    - sourceline: deb http://us.archive.ubuntu.com/ubuntu/ focal universe
+    - sourceline: deb http://us.archive.ubuntu.com/ubuntu/ focal-updates universe
+    - sourceline: deb http://us.archive.ubuntu.com/ubuntu/ focal multiverse
+    - sourceline: deb http://us.archive.ubuntu.com/ubuntu/ focal-updates multiverse
+    - sourceline: deb http://us.archive.ubuntu.com/ubuntu/ focal-backports main restricted
+        universe multiverse
+    - sourceline: deb http://security.ubuntu.com/ubuntu focal-security main restricted
+    - sourceline: deb http://security.ubuntu.com/ubuntu focal-security universe
+    - sourceline: deb http://security.ubuntu.com/ubuntu focal-security multiverse
+    - sourceline: deb http://ppa.launchpad.net/beineri/opt-qt-5.15.4-focal/ubuntu
+        focal main
+    include:
+    - xdg-desktop-portal-kde
+    - libgtk-3-0
+    - libgtk-3-common
+    - librsvg2-2
+    - librsvg2-common:amd64
+    - liblzma5:amd64
+    - libpcre3:amd64
+    - libgdk-pixbuf2.0-0
+    - libgdk-pixbuf2.0-bin
+    - libgdk-pixbuf2.0-common
+    - qt515base
+    - qt515imageformats
+    - qt515svg
+    - qt515xmlpatterns
+    - libpango-1.0-0
+  files:
+    include: []
+    exclude:
+    - usr/share/man
+    - usr/share/doc/*/README.*
+    - usr/share/doc/*/changelog.*
+    - usr/share/doc/*/NEWS.*
+    - usr/share/doc/*/TODO.*
+    - usr/lib/x86_64-linux-gnu/libQt5*
+    - opt/qt515/include
+    - opt/qt515/bin/opt/qt515/bin/fixqt4headers.pl
+    - opt/qt515/bin/moc
+    - opt/qt515/bin/qdbuscpp2xml
+    - opt/qt515/bin/qdbusxml2cpp
+    - opt/qt515/bin/qlalr
+    - opt/qt515/bin/qmake
+    - opt/qt515/bin/qt.conf
+    - opt/qt515/bin/qt515-env.sh
+    - opt/qt515/bin/qvkgen
+    - opt/qt515/bin/rcc
+    - opt/qt515/bin/syncqt.pl
+    - opt/qt515/bin/uic
+    - opt/qt515/doc
+    - opt/qt515/examples
+    - opt/qt515/mkspecs
+    - opt/qt515/lib/cmake
+    - opt/qt515/lib/metatypes
+    - opt/qt515/lib/pkgconfig
+    - opt/qt515/lib/*.a
+    - opt/qt515/lib/*.la
+    - opt/qt515/lib/*.prl
+    - opt/qt515/lib/libQt5AccessibilitySupport.*
+    - opt/qt515/lib/libQt5Bootstrap.*
+    - opt/qt515/lib/libQt5DeviceDiscoverySupport.*
+    - opt/qt515/lib/libQt5EdidSupport.*
+    - opt/qt515/lib/libQt5EglFSDeviceIntegration.*
+    - opt/qt515/lib/libQt5EglSupport.*
+    - opt/qt515/lib/libQt5EventDispatcherSupport.*
+    - opt/qt515/lib/libQt5FbSupport.*
+    - opt/qt515/lib/libQt5FontDatabaseSupport.*
+    - opt/qt515/lib/libQt5GlxSupport.*
+    - opt/qt515/lib/libQt5InputSupport.*
+    - opt/qt515/lib/libQt5LinuxAccessibilitySupport.*
+    - opt/qt515/lib/libQt5OpenGL.*
+    - opt/qt515/lib/libQt5OpenGLExtensions.*
+    - opt/qt515/lib/libQt5PlatformCompositorSupport.*
+    - opt/qt515/lib/libQt5ServiceSupport.*
+    - opt/qt515/lib/libQt5ThemeSupport.*
+    - opt/qt515/lib/libQt5VulkanSupport.*
+    - opt/qt515/lib/libQt5XcbQpa.*
+    - opt/qt515/lib/libQt5XkbCommonSupport.*
+    - opt/qt515/plugins/egldeviceintegrations
+    - opt/qt515/plugins/platforminputcontexts
+    - opt/qt515/plugins/sqldrivers
+    - opt/qt515/plugins/xcbglintegrations
+  runtime:
+    env:
+      APPDIR_LIBRARY_PATH: "$APPDIR:$APPDIR/runtime/compat/:$APPDIR/opt/qt515/lib:$APPDIR/usr/lib/x86_64-linux-gnu:$APPDIR/lib/x86_64-linux-gnu:$APPDIR/usr/lib:$APPDIR/usr/lib/x86_64-linux-gnu/gdk-pixbuf-2.0/2.10.0/loaders:$APPDIR/usr/local/lib/valentina"
+      LD_LIBRARY_PATH: "$APPDIR:$APPDIR/runtime/compat/:$APPDIR/opt/qt515/lib:$APPDIR/usr/lib/x86_64-linux-gnu:$APPDIR/lib/x86_64-linux-gnu:$APPDIR/usr/lib:$APPDIR/usr/lib/x86_64-linux-gnu/gdk-pixbuf-2.0/2.10.0/loaders:$APPDIR/usr/local/lib/valentina"
+      QT_PLUGIN_PATH: "$APPDIR/opt/qt515/plugins"
+      QT_QPA_PLATFORMTHEME: xdgdesktopportal
+      GDK_PIXBUF_MODULEDIR: $APPDIR/usr/lib/x86_64-linux-gnu/gdk-pixbuf-2.0/2.10.0/loaders
+      GDK_PIXBUF_MODULE_FILE: $APPDIR/usr/lib/x86_64-linux-gnu/gdk-pixbuf-2.0/2.10.0/loaders.cache
+  test:
+    fedora-30:
+      image: appimagecrafters/tests-env:fedora-30
+      command: ./AppRun
+    debian-stable:
+      image: appimagecrafters/tests-env:debian-stable
+      command: ./AppRun
+    archlinux-latest:
+      image: appimagecrafters/tests-env:archlinux-latest
+      command: ./AppRun
+    centos-7:
+      image: appimagecrafters/tests-env:centos-7
+      command: ./AppRun
+    ubuntu-xenial:
+      image: appimagecrafters/tests-env:ubuntu-xenial
+      command: ./AppRun
+AppImage:
+  arch: x86_64
+  update-information: guess
