@@ -79,6 +79,10 @@
 #include "../vmisc/compatibility.h"
 #endif
 
+#if defined(APPIMAGE) && defined(Q_OS_LINUX)
+#include "../vmisc/appimage.h"
+#endif // defined(APPIMAGE) && defined(Q_OS_LINUX)
+
 using namespace Qt::Literals::StringLiterals;
 
 QT_WARNING_PUSH
@@ -101,12 +105,16 @@ auto AppFilePath(const QString &appName) -> QString
     const QString executableSuffix;
 #endif
 
+#if defined(APPIMAGE) && defined(Q_OS_LINUX)
+    return AppImageRoot() + BINDIR + '/'_L1 + appName;
+#else
     QFileInfo canonicalFile(
         QStringLiteral("%1/%2").arg(QCoreApplication::applicationDirPath(), appName + executableSuffix));
     if (canonicalFile.exists())
     {
         return canonicalFile.absoluteFilePath();
     }
+#endif // defined(APPIMAGE) && defined(Q_OS_LINUX)
 
 #if defined(Q_OS_MACOS) && defined(QBS_BUILD) && defined(MULTI_BUNDLE)
     QFileInfo multiBundleFile(
