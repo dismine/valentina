@@ -2191,7 +2191,9 @@ void MainWindow::ShowMeasurements()
             arguments.append("--"_L1 + LONG_OPTION_NO_HDPI_SCALING);
         }
 
-        VApplication::StartDetachedProcess(VApplication::TapeFilePath(), arguments);
+        const QString path = VApplication::TapeFilePath();
+        qDebug("Opening Tape: path = %s.", qUtf8Printable(path));
+        VApplication::StartDetachedProcess(path, arguments);
     }
     else
     {
@@ -4214,7 +4216,9 @@ void MainWindow::on_actionOpenPuzzle_triggered()
         arguments.append(QStringLiteral("--") + LONG_OPTION_NO_HDPI_SCALING);
     }
 
-    VApplication::StartDetachedProcess(VApplication::PuzzleFilePath(), arguments);
+    const QString path = VApplication::PuzzleFilePath();
+    qDebug("Opening Puzzle: path = %s.", qUtf8Printable(path));
+    VApplication::StartDetachedProcess(path, arguments);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -4270,7 +4274,9 @@ void MainWindow::on_actionCreateManualLayout_triggered()
 
         rldFile.setAutoRemove(false);
 
-        VApplication::StartDetachedProcess(VApplication::PuzzleFilePath(), arguments);
+        const QString path = VApplication::PuzzleFilePath();
+        qDebug("Opening Puzzle: path = %s.", qUtf8Printable(path));
+        VApplication::StartDetachedProcess(path, arguments);
     }
     else
     {
@@ -4343,7 +4349,9 @@ void MainWindow::on_actionUpdateManualLayout_triggered()
 
         rldFile.setAutoRemove(false);
 
-        VApplication::StartDetachedProcess(VApplication::PuzzleFilePath(), arguments);
+        const QString path = VApplication::PuzzleFilePath();
+        qDebug("Opening Puzzle: path = %s.", qUtf8Printable(path));
+        VApplication::StartDetachedProcess(path, arguments);
     }
     else
     {
@@ -5232,7 +5240,9 @@ void MainWindow::ActionOpenTape_triggered()
         arguments.append("--"_L1 + LONG_OPTION_NO_HDPI_SCALING);
     }
 
-    VApplication::StartDetachedProcess(VApplication::TapeFilePath(), arguments);
+    const QString path = VApplication::TapeFilePath();
+    qDebug("Opening Tape: path = %s.", qUtf8Printable(path));
+    VApplication::StartDetachedProcess(path, arguments);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -6363,7 +6373,9 @@ auto MainWindow::LoadPattern(QString fileName, const QString &customMeasureFile)
                     arguments.append("--"_L1 + LONG_OPTION_NO_HDPI_SCALING);
                 }
 
-                VApplication::StartDetachedProcess(VApplication::TapeFilePath(), arguments);
+                const QString path = VApplication::TapeFilePath();
+                qDebug("Opening Tape: path = %s.", qUtf8Printable(path));
+                VApplication::StartDetachedProcess(path, arguments);
                 QCoreApplication::exit(V_EX_OK);
                 return false; // stop continue processing
             }
@@ -6392,7 +6404,9 @@ auto MainWindow::LoadPattern(QString fileName, const QString &customMeasureFile)
             arguments.append("--known"_L1);
         }
 
-        VApplication::StartDetachedProcess(VApplication::TapeFilePath(), arguments);
+        const QString path = VApplication::TapeFilePath();
+        qDebug("Opening Tape: path = %s.", qUtf8Printable(path));
+        VApplication::StartDetachedProcess(path, arguments);
         QCoreApplication::exit(V_EX_OK);
         return false; // stop continue processing
     }
@@ -6407,7 +6421,9 @@ auto MainWindow::LoadPattern(QString fileName, const QString &customMeasureFile)
             arguments.append("--"_L1 + LONG_OPTION_NO_HDPI_SCALING);
         }
 
-        VApplication::StartDetachedProcess(VApplication::PuzzleFilePath(), arguments);
+        const QString path = VApplication::PuzzleFilePath();
+        qDebug("Opening Puzzle: path = %s.", qUtf8Printable(path));
+        VApplication::StartDetachedProcess(path, arguments);
         QCoreApplication::exit(V_EX_OK);
         return false; // stop continue processing
     }
