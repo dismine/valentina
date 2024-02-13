@@ -4,7 +4,7 @@ import qbs.Utilities
 VTestApp {
     Depends { name: "buildconfig" }
     Depends { name: "VTestLib" }
-    Depends { name: "Qt"; submodules: ["testlib", "xml", "gui", "printsupport"] }
+    Depends { name: "Qt"; submodules: ["core", "testlib", "xml", "gui", "printsupport"] }
     Depends { name: "autotest" }
 
     Depends {
