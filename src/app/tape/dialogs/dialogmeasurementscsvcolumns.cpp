@@ -240,13 +240,13 @@ auto DialogMeasurementsCSVColumns::ColumnHeader(int column) const -> QString
         switch (individualColumn)
         {
             case IndividualMeasurementsColumns::Name:
-                return tr("Name", "measurement column");
+                return QCoreApplication::translate("DialogMeasurementsCSVColumns", "Name", "measurement column");
             case IndividualMeasurementsColumns::Value:
-                return tr("Value", "measurement column");
+                return QCoreApplication::translate("DialogMeasurementsCSVColumns", "Value", "measurement column");
             case IndividualMeasurementsColumns::FullName:
-                return tr("Full name", "measurement column");
+                return QCoreApplication::translate("DialogMeasurementsCSVColumns", "Full name", "measurement column");
             case IndividualMeasurementsColumns::Description:
-                return tr("Description", "measurement column");
+                return QCoreApplication::translate("DialogMeasurementsCSVColumns", "Description", "measurement column");
             default:
                 return {};
         }
@@ -258,14 +258,15 @@ auto DialogMeasurementsCSVColumns::ColumnHeader(int column) const -> QString
         switch (multisizeColumn)
         {
             case MultisizeMeasurementsColumns::Name:
-                return tr("Name", "measurement column");
+                return QCoreApplication::translate("DialogMeasurementsCSVColumns", "Name", "measurement column");
             case MultisizeMeasurementsColumns::BaseValue:
-                return tr("Base value", "measurement column");
+                return QCoreApplication::translate("DialogMeasurementsCSVColumns", "Base value", "measurement column");
             case MultisizeMeasurementsColumns::ShiftA:
                 if (not m_dimensions.empty())
                 {
                     MeasurementDimension_p dimension = m_dimensions.at(0);
-                    return tr("Shift", "measurement column") + suffix.arg(dimension->Name());
+                    return QCoreApplication::translate("DialogMeasurementsCSVColumns", "Shift", "measurement column") +
+                           suffix.arg(dimension->Name());
                 }
                 else
                 {
@@ -275,7 +276,8 @@ auto DialogMeasurementsCSVColumns::ColumnHeader(int column) const -> QString
                 if (m_dimensions.size() > 1)
                 {
                     MeasurementDimension_p dimension = m_dimensions.at(1);
-                    return tr("Shift", "measurement column") + suffix.arg(dimension->Name());
+                    return QCoreApplication::translate("DialogMeasurementsCSVColumns", "Shift", "measurement column") +
+                           suffix.arg(dimension->Name());
                 }
                 else
                 {
@@ -285,16 +287,17 @@ auto DialogMeasurementsCSVColumns::ColumnHeader(int column) const -> QString
                 if (m_dimensions.size() > 2)
                 {
                     MeasurementDimension_p dimension = m_dimensions.at(2);
-                    return tr("Shift", "measurement column") + suffix.arg(dimension->Name());
+                    return QCoreApplication::translate("DialogMeasurementsCSVColumns", "Shift", "measurement column") +
+                           suffix.arg(dimension->Name());
                 }
                 else
                 {
                     return QStringLiteral("Shift C");
                 }
             case MultisizeMeasurementsColumns::FullName:
-                return tr("Full name", "measurement column");
+                return QCoreApplication::translate("DialogMeasurementsCSVColumns", "Full name", "measurement column");
             case MultisizeMeasurementsColumns::Description:
-                return tr("Description", "measurement column");
+                return QCoreApplication::translate("DialogMeasurementsCSVColumns", "Description", "measurement column");
             default:
                 return {};
         }
@@ -504,7 +507,7 @@ void DialogMeasurementsCSVColumns::InitColumnsControls()
 
         if (not ColumnMandatory(column))
         {
-            control->addItem(tr("Skip"), -1);
+            control->addItem(QCoreApplication::translate("DialogMeasurementsCSVColumns", "Skip"), -1);
         }
 
         control->setCurrentIndex(-1);
@@ -730,34 +733,43 @@ void DialogMeasurementsCSVColumns::HackColumnControls()
 //---------------------------------------------------------------------------------------------------------------------
 void DialogMeasurementsCSVColumns::RetranslateLabels()
 {
-    ui->labelName->setText(tr("Name", "measurement column") + "*:"_L1);
+    ui->labelName->setText(QCoreApplication::translate("DialogMeasurementsCSVColumns", "Name", "measurement column") +
+                           "*:"_L1);
 
     if (m_type == MeasurementsType::Individual)
     {
-        ui->labelValue->setText(tr("Value", "measurement column") + "*:"_L1);
+        ui->labelValue->setText(
+            QCoreApplication::translate("DialogMeasurementsCSVColumns", "Value", "measurement column") + "*:"_L1);
     }
     else
     {
-        ui->labelValue->setText(tr("Base value", "measurement column") + "*:"_L1);
+        ui->labelValue->setText(
+            QCoreApplication::translate("DialogMeasurementsCSVColumns", "Base value", "measurement column") + "*:"_L1);
 
         const QString suffix = QStringLiteral(" (%1)");
 
         if (not m_dimensions.empty())
         {
             MeasurementDimension_p dimension = m_dimensions.at(0);
-            ui->labelShiftA->setText(tr("Shift", "measurement column") + suffix.arg(dimension->Name()));
+            ui->labelShiftA->setText(
+                QCoreApplication::translate("DialogMeasurementsCSVColumns", "Shift", "measurement column") +
+                suffix.arg(dimension->Name()));
         }
 
         if (m_dimensions.size() > 1)
         {
             MeasurementDimension_p dimension = m_dimensions.at(1);
-            ui->labelShiftB->setText(tr("Shift", "measurement column") + suffix.arg(dimension->Name()));
+            ui->labelShiftB->setText(
+                QCoreApplication::translate("DialogMeasurementsCSVColumns", "Shift", "measurement column") +
+                suffix.arg(dimension->Name()));
         }
 
         if (m_dimensions.size() > 2)
         {
             MeasurementDimension_p dimension = m_dimensions.at(2);
-            ui->labelShiftC->setText(tr("Shift", "measurement column") + suffix.arg(dimension->Name()));
+            ui->labelShiftC->setText(
+                QCoreApplication::translate("DialogMeasurementsCSVColumns", "Shift", "measurement column") +
+                suffix.arg(dimension->Name()));
         }
     }
 }
@@ -822,7 +834,7 @@ void DialogMeasurementsCSVColumns::CheckStatus()
     if (m_fileName.isEmpty())
     {
         SetStatus(false);
-        ui->labelStatus->setText(tr("File path is empty"));
+        ui->labelStatus->setText(QCoreApplication::translate("DialogMeasurementsCSVColumns", "File path is empty"));
         return;
     }
 
@@ -832,7 +844,7 @@ void DialogMeasurementsCSVColumns::CheckStatus()
     if (columns < MinimumColumns())
     {
         SetStatus(false);
-        ui->labelStatus->setText(tr("Not enough columns"));
+        ui->labelStatus->setText(QCoreApplication::translate("DialogMeasurementsCSVColumns", "Not enough columns"));
         return;
     }
 
@@ -840,19 +852,21 @@ void DialogMeasurementsCSVColumns::CheckStatus()
     if (rows < 1)
     {
         SetStatus(false);
-        ui->labelStatus->setText(tr("Not enough data to import"));
+        ui->labelStatus->setText(
+            QCoreApplication::translate("DialogMeasurementsCSVColumns", "Not enough data to import"));
         return;
     }
 
     if (not ColumnsValid())
     {
         SetStatus(false);
-        ui->labelStatus->setText(tr("Please, select unique number for each column"));
+        ui->labelStatus->setText(QCoreApplication::translate("DialogMeasurementsCSVColumns",
+                                                             "Please, select unique number for each column"));
         return;
     }
 
     SetStatus(true);
-    ui->labelStatus->setText(tr("Ready"));
+    ui->labelStatus->setText(QCoreApplication::translate("DialogMeasurementsCSVColumns", "Ready"));
 }
 
 //---------------------------------------------------------------------------------------------------------------------

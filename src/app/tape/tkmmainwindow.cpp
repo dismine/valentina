@@ -127,7 +127,7 @@ TKMMainWindow::TKMMainWindow(QWidget *parent)
     ReadSettings();
 
 #if defined(Q_OS_MAC)
-    ui->pushButtonShowInExplorer->setText(tr("Show in Finder"));
+    ui->pushButtonShowInExplorer->setText(QCoreApplication::translate("TKMMainWindow", "Show in Finder"));
 #endif // defined(Q_OS_MAC)
 
     if (MApplication::VApp()->IsAppInGUIMode())

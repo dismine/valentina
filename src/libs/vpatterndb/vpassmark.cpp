@@ -750,17 +750,19 @@ auto VPassmark::PassmarkIntersection(const QVector<QPointF> &path, QLineF line, 
             return line;
         }
 
-        const QString errorMsg = QObject::tr("Cannot calculate a notch for point '%1' in piece '%2'. Notch "
-                                             "collapse.")
-                                     .arg(m_data.nodeName, m_data.pieceName);
+        const QString errorMsg =
+            QCoreApplication::translate("VPassmark", "Cannot calculate a notch for point '%1' in piece '%2'. Notch "
+                                                     "collapse.")
+                .arg(m_data.nodeName, m_data.pieceName);
         VAbstractApplication::VApp()->IsPedantic()
             ? throw VExceptionInvalidNotch(errorMsg)
             : qWarning() << VAbstractValApplication::warningMessageSignature + errorMsg;
     }
     else
     {
-        const QString errorMsg = QObject::tr("Cannot calculate a notch for point '%1' in piece '%2'. Cannot find "
-                                             "intersection.")
+        const QString errorMsg = QCoreApplication::translate(
+                                     "VPassmark", "Cannot calculate a notch for point '%1' in piece '%2'. Cannot find "
+                                                  "intersection.")
                                      .arg(m_data.nodeName, m_data.pieceName);
         VAbstractApplication::VApp()->IsPedantic()
             ? throw VExceptionInvalidNotch(errorMsg)
@@ -937,9 +939,11 @@ auto VPassmark::BuiltInSAPassmarkBaseLine(const VPiece &piece) const -> QVector<
             }
             else
             {
-                const QString errorMsg = QObject::tr("Cannot calculate a notch for point '%1' in piece '%2' with built "
-                                                     "in seam allowance. User must manually provide length.")
-                                             .arg(m_data.nodeName, m_data.pieceName);
+                const QString errorMsg =
+                    QCoreApplication::translate("VPassmark",
+                                                "Cannot calculate a notch for point '%1' in piece '%2' with built "
+                                                "in seam allowance. User must manually provide length.")
+                        .arg(m_data.nodeName, m_data.pieceName);
                 VAbstractApplication::VApp()->IsPedantic()
                     ? throw VExceptionInvalidNotch(errorMsg)
                     : qWarning() << VAbstractValApplication::warningMessageSignature + errorMsg;
@@ -992,9 +996,11 @@ auto VPassmark::SAPassmarkBaseLine(const QVector<QPointF> &seamAllowance, const 
 
     if (rotatedSeamAllowance.size() < 2)
     {
-        const QString errorMsg = QObject::tr("Cannot calculate a notch for point '%1' in piece '%2'. Seam allowance is "
-                                             "empty.")
-                                     .arg(m_data.nodeName, m_data.pieceName);
+        const QString errorMsg =
+            QCoreApplication::translate("VPassmark",
+                                        "Cannot calculate a notch for point '%1' in piece '%2'. Seam allowance is "
+                                        "empty.")
+                .arg(m_data.nodeName, m_data.pieceName);
         VAbstractApplication::VApp()->IsPedantic()
             ? throw VExceptionInvalidNotch(errorMsg)
             : qWarning() << VAbstractValApplication::warningMessageSignature + errorMsg;
@@ -1005,8 +1011,9 @@ auto VPassmark::SAPassmarkBaseLine(const QVector<QPointF> &seamAllowance, const 
     const PassmarkStatus seamPassmarkType = GetSeamPassmarkSAPoint(m_data, rotatedSeamAllowance, seamPassmarkSAPoint);
     if (seamPassmarkType == PassmarkStatus::Error)
     {
-        const QString errorMsg = QObject::tr("Cannot calculate a notch for point '%1' in piece '%2'. Cannot find "
-                                             "position for a notch.")
+        const QString errorMsg = QCoreApplication::translate(
+                                     "VPassmark", "Cannot calculate a notch for point '%1' in piece '%2'. Cannot find "
+                                                  "position for a notch.")
                                      .arg(m_data.nodeName, m_data.pieceName);
         VAbstractApplication::VApp()->IsPedantic()
             ? throw VExceptionInvalidNotch(errorMsg)
@@ -1021,9 +1028,11 @@ auto VPassmark::SAPassmarkBaseLine(const QVector<QPointF> &seamAllowance, const 
 
     if (not FixNotchPoint(path, m_data, &seamPassmarkSAPoint))
     {
-        const QString errorMsg = QObject::tr("Cannot calculate a notch for point '%1' in piece '%2'. Unable to fix a "
-                                             "notch position.")
-                                     .arg(m_data.nodeName, m_data.pieceName);
+        const QString errorMsg =
+            QCoreApplication::translate("VPassmark",
+                                        "Cannot calculate a notch for point '%1' in piece '%2'. Unable to fix a "
+                                        "notch position.")
+                .arg(m_data.nodeName, m_data.pieceName);
         VAbstractApplication::VApp()->IsPedantic()
             ? throw VExceptionInvalidNotch(errorMsg)
             : qWarning() << VAbstractValApplication::warningMessageSignature + errorMsg;

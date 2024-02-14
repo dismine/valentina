@@ -305,17 +305,19 @@ void VBoundary::InsertPassmark(const VBoundarySequenceItemData &item, QList<VBou
         QString pieceName;
         if (!m_pieceName.isEmpty())
         {
-            pieceName = tr("Piece '%1'.").arg(m_pieceName) + ' '_L1;
+            pieceName = QCoreApplication::translate("VBoundary", "Piece '%1'.").arg(m_pieceName) + ' '_L1;
         }
 
         QString errorMsg;
         if (!passmark.label.isEmpty())
         {
-            errorMsg = pieceName + tr("Unable to insert notch for point '%1'.").arg(passmark.label);
+            errorMsg =
+                pieceName +
+                QCoreApplication::translate("VBoundary", "Unable to insert notch for point '%1'.").arg(passmark.label);
         }
         else
         {
-            errorMsg = pieceName + tr("Unable to insert notch.");
+            errorMsg = pieceName + QCoreApplication::translate("VBoundary", "Unable to insert notch.");
         }
 
         VAbstractApplication::VApp()->IsPedantic()

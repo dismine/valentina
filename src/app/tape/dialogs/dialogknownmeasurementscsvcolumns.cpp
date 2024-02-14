@@ -163,15 +163,16 @@ QString DialogKnownMeasurementsCSVColumns::ColumnHeader(int column) const
     switch (individualColumn)
     {
         case KnownMeasurementsColumns::Name:
-            return tr("Name", "measurement column");
+            return QCoreApplication::translate("DialogKnownMeasurementsCSVColumns", "Name", "measurement column");
         case KnownMeasurementsColumns::Group:
-            return tr("Group", "measurement column");
+            return QCoreApplication::translate("DialogKnownMeasurementsCSVColumns", "Group", "measurement column");
         case KnownMeasurementsColumns::FullName:
-            return tr("Full name", "measurement column");
+            return QCoreApplication::translate("DialogKnownMeasurementsCSVColumns", "Full name", "measurement column");
         case KnownMeasurementsColumns::Formula:
-            return tr("Formula", "measurement column");
+            return QCoreApplication::translate("DialogKnownMeasurementsCSVColumns", "Formula", "measurement column");
         case KnownMeasurementsColumns::Description:
-            return tr("Description", "measurement column");
+            return QCoreApplication::translate("DialogKnownMeasurementsCSVColumns", "Description",
+                                               "measurement column");
         default:
             return {};
     }
@@ -284,7 +285,7 @@ void DialogKnownMeasurementsCSVColumns::InitColumnsControls()
 
         if (not ColumnMandatory(column))
         {
-            control->addItem(tr("Skip"), -1);
+            control->addItem(QCoreApplication::translate("DialogKnownMeasurementsCSVColumns", "Skip"), -1);
         }
 
         control->setCurrentIndex(-1);
@@ -444,7 +445,7 @@ void DialogKnownMeasurementsCSVColumns::ShowImportPreview()
 //---------------------------------------------------------------------------------------------------------------------
 void DialogKnownMeasurementsCSVColumns::RetranslateLabels()
 {
-    ui->labelName->setText(tr("Name") + "*:"_L1);
+    ui->labelName->setText(QCoreApplication::translate("DialogKnownMeasurementsCSVColumns", "Name") + "*:"_L1);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -482,7 +483,8 @@ void DialogKnownMeasurementsCSVColumns::CheckStatus()
     if (m_fileName.isEmpty())
     {
         SetStatus(false);
-        ui->labelStatus->setText(tr("File path is empty"));
+        ui->labelStatus->setText(
+            QCoreApplication::translate("DialogKnownMeasurementsCSVColumns", "File path is empty"));
         return;
     }
 
@@ -492,7 +494,8 @@ void DialogKnownMeasurementsCSVColumns::CheckStatus()
     if (columns < MinimumColumns())
     {
         SetStatus(false);
-        ui->labelStatus->setText(tr("Not enough columns"));
+        ui->labelStatus->setText(
+            QCoreApplication::translate("DialogKnownMeasurementsCSVColumns", "Not enough columns"));
         return;
     }
 
@@ -500,19 +503,21 @@ void DialogKnownMeasurementsCSVColumns::CheckStatus()
     if (rows < 1)
     {
         SetStatus(false);
-        ui->labelStatus->setText(tr("Not enough data to import"));
+        ui->labelStatus->setText(
+            QCoreApplication::translate("DialogKnownMeasurementsCSVColumns", "Not enough data to import"));
         return;
     }
 
     if (not ColumnsValid())
     {
         SetStatus(false);
-        ui->labelStatus->setText(tr("Please, select unique number for each column"));
+        ui->labelStatus->setText(QCoreApplication::translate("DialogKnownMeasurementsCSVColumns",
+                                                             "Please, select unique number for each column"));
         return;
     }
 
     SetStatus(true);
-    ui->labelStatus->setText(tr("Ready"));
+    ui->labelStatus->setText(QCoreApplication::translate("DialogKnownMeasurementsCSVColumns", "Ready"));
 }
 
 //---------------------------------------------------------------------------------------------------------------------

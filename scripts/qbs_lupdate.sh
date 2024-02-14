@@ -19,10 +19,12 @@ wait
 cp -r ./share/translations/* ../share/translations
 rm -r ./share
 
+QMAKEPATH=$HOME/Qt6.6/6.6.0/gcc_64/bin/qmake
+
 # Resolve any changes to config
-qbs resolve -d ../../build_translations modules.i18n.update:true moduleProviders.Qt.qmakeFilePaths:$HOME/Qt6.5/6.5.0/gcc_64/bin/qmake
+qbs resolve -d ../../build_translations -f ../valentina.qbs modules.i18n.update:true moduleProviders.Qt.qmakeFilePaths:${QMAKEPATH}
 # Update local strings
-qbs -d ../../build_translations -f ../valentina.qbs -p 'Translations' modules.i18n.update:true moduleProviders.Qt.qmakeFilePaths:$HOME/Qt6.6/6.6.0/gcc_64/bin/qmake
+qbs -d ../../build_translations -f ../valentina.qbs -p 'Translations' modules.i18n.update:true moduleProviders.Qt.qmakeFilePaths:${QMAKEPATH}
 
 end=$(date +%s)
 runtime=$(python3 -c "print('Time passed %u:%02u seconds' % ((${end} - ${start})/60, (${end} - ${start})%60))")

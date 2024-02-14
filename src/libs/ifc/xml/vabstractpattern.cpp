@@ -857,7 +857,7 @@ auto VAbstractPattern::ParseSANode(const QDomElement &domElement) -> VPieceNode
             tool = Tool::NodeElArc;
             break;
         default:
-            throw VException(tr("Wrong tag name '%1'.").arg(t));
+            throw VException(QCoreApplication::translate("VAbstractPattern", "Wrong tag name '%1'.").arg(t));
     }
     VPieceNode node(id, tool, reverse);
     node.SetFormulaSABefore(saBefore);
@@ -1597,7 +1597,7 @@ void VAbstractPattern::ToolExists(const quint32 &id)
 {
     if (tools.contains(id) == false)
     {
-        throw VExceptionBadId(tr("Can't find tool in table."), id);
+        throw VExceptionBadId(QCoreApplication::translate("VAbstractPattern", "Can't find tool in table."), id);
     }
 }
 
@@ -2447,7 +2447,7 @@ auto VAbstractPattern::GroupLinkedToTool(vidtype toolId) const -> vidtype
 //---------------------------------------------------------------------------------------------------------------------
 auto VAbstractPattern::GetGroupName(quint32 id) -> QString
 {
-    QString name = tr("New group");
+    QString name = QCoreApplication::translate("VAbstractPattern", "New group");
     QDomElement group = elementById(id, TagGroup);
     if (group.isElement())
     {

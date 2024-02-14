@@ -23,7 +23,7 @@ Module {
     property bool update: false
 
     // Build with legacy way though .pro file
-    property bool buildWithPro: true
+    property bool buildWithPro: false
 
     property string lupdateName: "lupdate"
 
@@ -135,9 +135,13 @@ Module {
                     // It seems all we need are projectFile, sources and translations options.
 
                     var sources = [];
+                    var includePaths = [];
                     if (inputs["i18n.hpp"] !== undefined)
-                        for (var i = 0; i < inputs["i18n.hpp"].length; i++)
+                        for (var i = 0; i < inputs["i18n.hpp"].length; i++) {
                             sources.push(inputs["i18n.hpp"][i].filePath);
+                            if (!includePaths.includes(FileInfo.path(inputs["i18n.hpp"][i].filePath)))
+                                includePaths.push(FileInfo.path(inputs["i18n.hpp"][i].filePath));
+                        }
 
                     if (inputs["i18n.src"] !== undefined)
                         for (var i = 0; i < inputs["i18n.src"].length; i++)
@@ -166,6 +170,7 @@ Module {
 
                     var project = {
                         projectFile: "", // Looks like can be empty
+                        includePaths: includePaths.sort(),
                         sources: sources.sort(),
                         translations: translations.sort()
                     };

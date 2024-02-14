@@ -186,8 +186,9 @@ void DialogPiecePath::ChosenObject(quint32 id, const SceneObject &type)
 
             if (p.CountNodes() == 1)
             {
-                emit ToolTip(tr("Select main path objects, <b>%1</b> - reverse direction curve, "
-                                "<b>%2</b> - finish creation")
+                emit ToolTip(QCoreApplication::translate(
+                                 "DialogPiecePath", "Select main path objects, <b>%1</b> - reverse direction curve, "
+                                                    "<b>%2</b> - finish creation")
                                  .arg(VModifierKey::Shift(), VModifierKey::EnterKey()));
 
                 if (not VAbstractValApplication::VApp()->getCurrentScene()->items().contains(visPath))
