@@ -81,22 +81,14 @@ AppDir:
     - opt/qt515/lib/libQt5EglSupport.*
     - opt/qt515/lib/libQt5EventDispatcherSupport.*
     - opt/qt515/lib/libQt5FbSupport.*
-    - opt/qt515/lib/libQt5FontDatabaseSupport.*
-    - opt/qt515/lib/libQt5GlxSupport.*
     - opt/qt515/lib/libQt5InputSupport.*
     - opt/qt515/lib/libQt5LinuxAccessibilitySupport.*
-    - opt/qt515/lib/libQt5OpenGL.*
-    - opt/qt515/lib/libQt5OpenGLExtensions.*
     - opt/qt515/lib/libQt5PlatformCompositorSupport.*
     - opt/qt515/lib/libQt5ServiceSupport.*
-    - opt/qt515/lib/libQt5ThemeSupport.*
     - opt/qt515/lib/libQt5VulkanSupport.*
-    - opt/qt515/lib/libQt5XcbQpa.*
-    - opt/qt515/lib/libQt5XkbCommonSupport.*
     - opt/qt515/plugins/egldeviceintegrations
     - opt/qt515/plugins/platforminputcontexts
     - opt/qt515/plugins/sqldrivers
-    - opt/qt515/plugins/xcbglintegrations
   runtime:
     env:
       APPDIR_LIBRARY_PATH: "$APPDIR:$APPDIR/runtime/compat/:$APPDIR/opt/qt515/lib:$APPDIR/usr/lib/x86_64-linux-gnu:$APPDIR/lib/x86_64-linux-gnu:$APPDIR/usr/lib:$APPDIR/usr/lib/x86_64-linux-gnu/gdk-pixbuf-2.0/2.10.0/loaders:$APPDIR/usr/local/lib/valentina"
