@@ -580,19 +580,19 @@ auto DRW_LWPolyline::parseCode(int code, const std::unique_ptr<dxfReader> &reade
             break;
         }
         case 20:
-            if (vertex != NULL)
+            if (vertex != nullptr)
                 vertex->y = reader->getDouble();
             break;
         case 40:
-            if (vertex != NULL)
+            if (vertex != nullptr)
                 vertex->stawidth = reader->getDouble();
             break;
         case 41:
-            if (vertex != NULL)
+            if (vertex != nullptr)
                 vertex->endwidth = reader->getDouble();
             break;
         case 42:
-            if (vertex != NULL)
+            if (vertex != nullptr)
                 vertex->bulge = reader->getDouble();
             break;
         case 38:
@@ -1038,11 +1038,11 @@ auto DRW_Spline::parseCode(int code, const std::unique_ptr<dxfReader> &reader) -
             break;
         }
         case 20:
-            if (controlpoint != NULL)
+            if (controlpoint != nullptr)
                 controlpoint->y = reader->getDouble();
             break;
         case 30:
-            if (controlpoint != NULL)
+            if (controlpoint != nullptr)
                 controlpoint->z = reader->getDouble();
             break;
         case 11:
@@ -1053,11 +1053,11 @@ auto DRW_Spline::parseCode(int code, const std::unique_ptr<dxfReader> &reader) -
             break;
         }
         case 21:
-            if (fitpoint != NULL)
+            if (fitpoint != nullptr)
                 fitpoint->y = reader->getDouble();
             break;
         case 31:
-            if (fitpoint != NULL)
+            if (fitpoint != nullptr)
                 fitpoint->z = reader->getDouble();
             break;
         case 40:
@@ -1279,11 +1279,11 @@ auto DRW_Leader::parseCode(int code, const std::unique_ptr<dxfReader> &reader) -
             break;
         }
         case 20:
-            if (vertexpoint != NULL)
+            if (vertexpoint != nullptr)
                 vertexpoint->y = reader->getDouble();
             break;
         case 30:
-            if (vertexpoint != NULL)
+            if (vertexpoint != nullptr)
                 vertexpoint->z = reader->getDouble();
             break;
         case 340:

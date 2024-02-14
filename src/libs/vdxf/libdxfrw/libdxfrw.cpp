@@ -1649,7 +1649,7 @@ auto dxfRW::writeImage(DRW_Image *ent, const std::string &name) -> DRW_ImageDef 
                 id = imageDef.at(i);
             }
         }
-        if (id == NULL)
+        if (id == nullptr)
         {
             id = new DRW_ImageDef();
             imageDef.push_back(id);

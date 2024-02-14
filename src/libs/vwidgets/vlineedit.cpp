@@ -37,12 +37,11 @@
 
 #include "../vmisc/defglobal.h"
 
-using namespace std::chrono_literals;
-
 #if QT_VERSION < QT_VERSION_CHECK(6, 4, 0)
 #include "../vmisc/compatibility.h"
 #endif
 
+using namespace std::chrono_literals;
 using namespace Qt::Literals::StringLiterals;
 
 namespace

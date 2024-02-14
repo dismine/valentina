@@ -77,6 +77,10 @@
 #include "xml/vplayoutfilereader.h"
 #include "xml/vplayoutfilewriter.h"
 
+#if QT_VERSION < QT_VERSION_CHECK(6, 4, 0)
+#include "../vmisc/compatibility.h"
+#endif
+
 QT_WARNING_PUSH
 QT_WARNING_DISABLE_CLANG("-Wmissing-prototypes")
 QT_WARNING_DISABLE_INTEL(1418)
@@ -86,11 +90,6 @@ Q_LOGGING_CATEGORY(pWindow, "p.window") // NOLINT
 QT_WARNING_POP
 
 using namespace std::chrono_literals;
-
-#if QT_VERSION < QT_VERSION_CHECK(6, 4, 0)
-#include "../vmisc/compatibility.h"
-#endif
-
 using namespace Qt::Literals::StringLiterals;
 
 namespace

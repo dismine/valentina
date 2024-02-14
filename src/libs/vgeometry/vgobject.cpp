@@ -386,13 +386,11 @@ auto VGObject::LineIntersectRect(const QRectF &rec, const QLineF &line) -> QPoin
     QLineF const leftLine(QPointF(x1, y1), QPointF(x1, y2));
     QLineF const rightLine(QPointF(x2, y1), QPointF(x2, y2));
 
-    QPointF point;
-
     // Check intersections with each side of the rectangle
-    if (line.intersects(topLine, &point) == QLineF::BoundedIntersection ||
-        line.intersects(bottomLine, &point) == QLineF::BoundedIntersection ||
-        line.intersects(leftLine, &point) == QLineF::BoundedIntersection ||
-        line.intersects(rightLine, &point) == QLineF::BoundedIntersection)
+    if (QPointF point; line.intersects(topLine, &point) == QLineF::BoundedIntersection ||
+                       line.intersects(bottomLine, &point) == QLineF::BoundedIntersection ||
+                       line.intersects(leftLine, &point) == QLineF::BoundedIntersection ||
+                       line.intersects(rightLine, &point) == QLineF::BoundedIntersection)
     {
         return point;
     }

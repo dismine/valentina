@@ -743,9 +743,8 @@ auto DialogSeamAllowance::GetMirrorLineEndPoint() const -> quint32
         nextIndex = 0;
     }
 
-    const int next = FindNotExcludedNeighborNodeDown(uiTabPaths->listWidgetMainPath, nextIndex);
-
-    if (next >= 0 && RowNode(uiTabPaths->listWidgetMainPath, next).GetId() == startPoint)
+    if (const int next = FindNotExcludedNeighborNodeDown(uiTabPaths->listWidgetMainPath, nextIndex);
+        next >= 0 && RowNode(uiTabPaths->listWidgetMainPath, next).GetId() == startPoint)
     {
         return startPoint;
     }

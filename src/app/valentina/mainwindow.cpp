@@ -217,12 +217,11 @@
 #include <QMimeData>
 #endif // defined(Q_OS_MAC)
 
-using namespace std::chrono_literals;
-
 #if QT_VERSION < QT_VERSION_CHECK(6, 4, 0)
 #include "../vmisc/compatibility.h"
 #endif
 
+using namespace std::chrono_literals;
 using namespace Qt::Literals::StringLiterals;
 
 QT_WARNING_PUSH
@@ -4349,9 +4348,9 @@ void MainWindow::on_actionUpdateManualLayout_triggered()
 
         rldFile.setAutoRemove(false);
 
-        const QString path = VApplication::PuzzleFilePath();
-        qDebug("Opening Puzzle: path = %s.", qUtf8Printable(path));
-        VApplication::StartDetachedProcess(path, arguments);
+        const QString puzzlePath = VApplication::PuzzleFilePath();
+        qDebug("Opening Puzzle: path = %s.", qUtf8Printable(puzzlePath));
+        VApplication::StartDetachedProcess(puzzlePath, arguments);
     }
     else
     {

@@ -48,8 +48,6 @@
 #include <QStyleHints>
 #endif
 
-using namespace std::chrono_literals;
-
 #include "../vabstractapplication.h"
 #include "vapplicationstyle.h"
 #include "vscenestylesheet.h"
@@ -58,6 +56,7 @@ using namespace std::chrono_literals;
 #include "../compatibility.h"
 #endif
 
+using namespace std::chrono_literals;
 using namespace Qt::Literals::StringLiterals;
 
 namespace
@@ -597,8 +596,7 @@ VTheme::VTheme(QObject *parent)
             isProcessingColorSchemeChange = true;
             QGuiApplication::setOverrideCursor(QCursor(Qt::WaitCursor));
 
-            bool darkTheme = IsInDarkTheme();
-            if (m_darkTheme != darkTheme)
+            if (bool darkTheme = IsInDarkTheme(); m_darkTheme != darkTheme)
             {
                 m_darkTheme = darkTheme;
                 ResetThemeSettings();

@@ -80,7 +80,7 @@ public:
     //! \param container If a property is being passed here, no new VProperty is being created but instead it is tried
     //! to fill all the data into container. This can also be used when subclassing this function.
     //! \return Returns the newly created property (or container, if it was not NULL)
-    auto clone(bool include_children = true, VProperty *container = NULL) const -> VProperty * override;
+    auto clone(bool include_children = true, VProperty *container = nullptr) const -> VProperty * override;
 
 public slots:
     void StateChanged();

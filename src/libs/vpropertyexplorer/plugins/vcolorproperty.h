@@ -70,7 +70,7 @@ public:
     //! \param container If a property is being passed here, no new VProperty is being created but instead it is tried
     //! to fill all the data into container. This can also be used when subclassing this function.
     //! \return Returns the newly created property (or container, if it was not NULL)
-    virtual auto clone(bool include_children = true, VProperty *container = NULL) const -> VProperty * override;
+    virtual auto clone(bool include_children = true, VProperty *container = nullptr) const -> VProperty * override;
 
 private:
     Q_DISABLE_COPY_MOVE(VColorProperty) // NOLINT
