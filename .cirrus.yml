@@ -62,7 +62,7 @@ linux_qt6_sonar_task_template: &LINUX_QT6_TASK_SONAR_TEMPLATE
     - qbs setup-qt /usr/bin/qmake6 qt6
     - qbs config profiles.qt6.baseProfile ${COMPILER}
     - qbs config defaultProfile qt6
-    - build-wrapper-linux-x86-64 --out-dir ${CIRRUS_WORKING_DIR}/bw-output qbs build --no-install -f valentina.qbs -d ${CIRRUS_WORKING_DIR}/build --jobs $(nproc) profile:qt6 config:debug modules.buildconfig.enableCcache:false modules.cpp.linkerVariant:mold modules.buildconfig.enableTestCoverage:true
+    - build-wrapper-linux-x86-64 --out-dir ${CIRRUS_WORKING_DIR}/bw-output qbs build --no-install -f valentina.qbs -d ${CIRRUS_WORKING_DIR}/build --jobs $(nproc) profile:qt6 config:debug modules.buildconfig.enableCcache:true modules.cpp.linkerVariant:mold modules.buildconfig.enableTestCoverage:true modules.buildconfig.enablePCH:false
     # Execute the tests to generate the coverage statistics
     - qbs -p autotest-runner -d build profile:qt6 config:debug
     # Run gcov to translate `.gcda` files into `.gcov` readable by humans and SonarCloud
