@@ -4,6 +4,7 @@ Library {
     Depends { name: "buildconfig" }
     Depends { name: "bundle"; condition: qbs.targetOS.contains("macos") }
     Depends { name: "cpp" }
+    Depends { name: "coverage" }
 
     type: buildconfig.staticBuild ? "staticlibrary" : "dynamiclibrary"
 
@@ -63,5 +64,6 @@ Library {
 
     Export {
         Depends { name: "buildconfig" }
+        Depends { name: "coverage" }
     }
 }

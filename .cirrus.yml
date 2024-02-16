@@ -62,8 +62,17 @@ linux_qt6_sonar_task_template: &LINUX_QT6_TASK_SONAR_TEMPLATE
     - qbs setup-qt /usr/bin/qmake6 qt6
     - qbs config profiles.qt6.baseProfile ${COMPILER}
     - qbs config defaultProfile qt6
-    - build-wrapper-linux-x86-64 --out-dir bw-output qbs build --no-install -f valentina.qbs -d build --jobs $(nproc) profile:qt6 config:release modules.buildconfig.enableCcache:false modules.cpp.linkerVariant:mold
-    - sonar-scanner -Dsonar.scm.revision=${CIRRUS_CHANGE_IN_REPO} -Dsonar.links.ci=https://cirrus-ci.com/task/${CIRRUS_TASK_ID} -Dsonar.branch.name=${CIRRUS_BRANCH}
+    - build-wrapper-linux-x86-64 --out-dir ${CIRRUS_WORKING_DIR}/bw-output qbs build --no-install -f valentina.qbs -d ${CIRRUS_WORKING_DIR}/build --jobs $(nproc) profile:qt6 config:debug modules.buildconfig.enableCcache:false modules.cpp.linkerVariant:mold modules.buildconfig.enableTestCoverage:true
+    # Execute the tests to generate the coverage statistics
+    - qbs -p autotest-runner -d build profile:qt6 config:debug
+    # Run gcov to translate `.gcda` files into `.gcov` readable by humans and SonarCloud
+    - mkdir ${CIRRUS_WORKING_DIR}/build/coverage-dir
+    - cd ${CIRRUS_WORKING_DIR}/build/coverage-dir
+    # --preserve-paths helps us avoid name clash for `.gcov` files corresponding to source files
+    # with the same name but in different directories.
+    - find .. -name '*.o' | xargs gcov --preserve-paths
+    - cd $CIRRUS_WORKING_DIR
+    - sonar-scanner -Dsonar.scm.revision=${CIRRUS_CHANGE_IN_REPO} -Dsonar.links.ci=https://cirrus-ci.com/task/${CIRRUS_TASK_ID} -Dsonar.branch.name=${CIRRUS_BRANCH} -Dsonar.cfamily.gcov.reportsPath="${CIRRUS_WORKING_DIR}/build/coverage-dir"
     
 linux_qt5_qmake_task_template: &LINUX_QT5_QMAKE_TASK_TEMPLATE
   install_script:
@@ -182,16 +191,6 @@ linux_task:
           container:
             cpu: 8
             memory: 8G  # Set to 8GB to avoid OOM. https://cirrus-ci.org/guide/linux/#linux-container
-        - name: 'Sonar, latest Clang [Qt6]'
-          << : *LINUX_QT6_TASK_SONAR_TEMPLATE
-          env:
-            QT_SELECT: "qt6"
-            SONAR_TOKEN: ENCRYPTED[!715ab983713a5035d505d2c601c9bb78a9475b9a04db62cdda9c674affd58ac956e563ce6d38228b48e05c4dbea2f52d!]
-          container:
-            cpu: 8
-            memory: 10G  # Set to 10GB to avoid OOM. https://cirrus-ci.org/guide/linux/#linux-container
-          sonar_cache:
-            folder: "${HOME}/.sonar/cache"
     - container:
         image: dismine/gcc-ubuntu:13
       env:
@@ -254,6 +253,16 @@ linux_task:
           container:
             cpu: 4
             memory: 16G  # Set to 16GB to avoid OOM. https://cirrus-ci.org/guide/linux/#linux-container
+        - name: 'Sonar, latest GCC [Qt6]'
+          << : *LINUX_QT6_TASK_SONAR_TEMPLATE
+          env:
+            QT_SELECT: "qt6"
+            SONAR_TOKEN: ENCRYPTED[!715ab983713a5035d505d2c601c9bb78a9475b9a04db62cdda9c674affd58ac956e563ce6d38228b48e05c4dbea2f52d!]
+          container:
+            cpu: 8
+            memory: 10G  # Set to 10GB to avoid OOM. https://cirrus-ci.org/guide/linux/#linux-container
+          sonar_cache:
+            folder: "${HOME}/.sonar/cache"
 
 macos_task_template: &MACOS_TASK_TEMPLATE
   << : *REGULER_TASK_TEMPLATE

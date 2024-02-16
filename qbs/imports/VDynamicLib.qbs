@@ -4,7 +4,12 @@ VLib {
     Depends { name: "windeployqt"; condition: qbs.targetOS.contains("windows") }
     Depends { name: "i18nconfig"; }
 
-    buildconfig.staticBuild: false
+    buildconfig.staticBuild: {
+        if (product.buildconfig.enableUnitTests && product.buildconfig.enableTestCoverage)
+            return true;
+        else
+            return false;
+    }
 
     Properties {
         condition: qbs.targetOS.contains("windows") && Utilities.versionCompare(Qt.core.version, "6.5") < 0
