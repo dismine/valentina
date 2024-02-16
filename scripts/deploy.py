@@ -131,7 +131,7 @@ def run_clean(refresh_token):
             sys.exit("ERROR: Invalid access token; try re-generating an "
                      "access token from the app console on the web.")
 
-        clean_folders = ["/0.7.x/Mac OS X", "/0.7.x/Windows"]
+        clean_folders = ["/0.7.x/Mac OS X", "/0.7.x/Windows", "/0.7.x/Linux"]
         arhive_types = [r'^valentina-Windows10\+-mingw-x64-Qt.*-develop-[a-f0-9]{40}\.exe$',
                         r'^valentina-Windows7\+-mingw-x86-Qt.*-develop-[a-f0-9]{40}\.exe$',
                         r'^valentina-Windows10\+-msvc-x64-Qt.*-develop-[a-f0-9]{40}\.exe$',
