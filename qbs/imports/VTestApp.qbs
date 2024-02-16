@@ -3,7 +3,7 @@ VApp {
     install: false
     condition: buildconfig.enableUnitTests
 
-    Depends { name: "coverage" }
+    Depends { name: "coverage"; required: false }
 
     Properties {
         condition: qbs.targetOS.contains("macos")
