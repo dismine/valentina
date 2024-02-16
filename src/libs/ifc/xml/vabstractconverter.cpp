@@ -188,6 +188,8 @@ void VAbstractConverter::ValidateXML(const QString &schema) const
 
 #if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
     XERCES_CPP_NAMESPACE::XercesDOMParser domParser;
+    domParser.setCreateEntityReferenceNodes(true);
+    domParser.setDisableDefaultEntityResolution(true);
     domParser.setErrorHandler(&parserErrorHandler);
 
     QByteArray const data = fileSchema.readAll();
