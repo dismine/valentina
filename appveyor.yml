@@ -538,7 +538,7 @@ for:
 
   cache:
     #- /Users/appveyor/.conan/data -> conanfile.py
-    - /Users/appveyor/cache_dir
+    - /Users/appveyor/brew_cache_dir
 
   init:
     - find /Applications -maxdepth 1 -type d -name 'Xcode*.app'
@@ -596,7 +596,7 @@ for:
 
       sudo ln -s /usr/local /opt/local;
 
-      cache_tag=usr_local_4 # this can be modified to rebuild deps
+      cache_tag=usr_local # this can be modified to rebuild deps
 
       cdir=$HOME/cache_dir
       cache_tar=$cdir/$cache_tag.tar
@@ -655,11 +655,6 @@ for:
     - which qmake
     - which qbs
     - qbs --version
-    # Patch Qbs. Remove after Qbs 2.2.1+.
-    - curl https://gist.githubusercontent.com/dismine/43f3c51e05f3317c5d4fe16cd3c4b6d8/raw/2d297bcb53c2c022f740509923adf1eb1796afe2/qbs-pkg-config-probe.patch --output $HOME/qbs-pkg-config-probe.patch --silent
-    - patch -N -d $(brew --prefix qbs)/ -p1 < $HOME/qbs-pkg-config-probe.patch || true
-    - rm -f $(brew --prefix qbs)/share/qbs/imports/qbs/Probes/qbs-pkg-config-probe.js.rej
-    - rm $HOME/qbs-pkg-config-probe.patch
     - /usr/bin/curl -LJ https://github.com/dismine/macdeployqt/archive/refs/heads/main.zip --output ${HOME}/macdeployqt-main.zip --silent
     - unzip ${HOME}/macdeployqt-main.zip -d ${HOME}
     - cmake ${HOME}/macdeployqt-main -GNinja -S ${HOME}/macdeployqt-main -B ${HOME}/macdeployqt-build-dir -DCMAKE_INSTALL_PREFIX=${HOME}/macdeployqt-install-dir -DCMAKE_BUILD_TYPE=Release
@@ -726,7 +721,7 @@ for:
 
   cache:
     #- /Users/appveyor/.conan/data -> conanfile.py
-    - /Users/appveyor/cache_dir
+    - /Users/appveyor/brew_cache_dir
 
   init:
     - find /Applications -maxdepth 1 -type d -name 'Xcode*.app'
@@ -785,7 +780,7 @@ for:
 
       sudo ln -s /usr/local /opt/local;
 
-      cache_tag=usr_local_3 # this can be modified to rebuild deps
+      cache_tag=usr_local # this can be modified to rebuild deps
 
       cdir=$HOME/cache_dir
       cache_tar=$cdir/$cache_tag.tar
