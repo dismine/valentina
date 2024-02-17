@@ -101,7 +101,7 @@ inline auto operator""_s(const char16_t *str, size_t size)Q_DECL_NOEXCEPT->QStri
 //---------------------------------------------------------------------------------------------------------------------
 template <typename T, template <typename> class C> inline auto ConvertToList(const C<T> &container) -> QList<T>
 {
-    return QList<T>(container.begin(), container.end());
+    return QList<T>(std::begin(container), std::end(container));
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -113,25 +113,25 @@ template <typename T, template <typename> class C> inline auto ConvertToStringLi
 //---------------------------------------------------------------------------------------------------------------------
 template <typename T, template <typename> class C> inline auto ConvertToSet(const C<T> &container) -> QSet<T>
 {
-    return QSet<T>(container.begin(), container.end());
+    return QSet<T>(std::begin(container), std::end(container));
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 template <typename T, typename C> inline auto ConvertToSet(const C &container) -> QSet<T>
 {
-    return QSet<T>(container.begin(), container.end());
+    return QSet<T>(std::begin(container), std::end(container));
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 template <typename T, template <typename> class C> inline auto ConvertToVector(const C<T> &container) -> QVector<T>
 {
-    return QVector<T>(container.begin(), container.end());
+    return QVector<T>(std::begin(container), std::end(container));
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 template <typename T> inline auto ConvertToVector(const QSet<T> &container) -> QVector<T>
 {
-    return QVector<T>(container.begin(), container.end());
+    return QVector<T>(std::begin(container), std::end(container));
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -159,7 +159,7 @@ inline auto Reverse(const C<T> &container) -> C<T>
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-template <typename T, typename std::enable_if<std::is_same<T, QStringList>::value, T>::type * = nullptr>
+template <typename T, std::enable_if_t<std::is_same_v<T, QStringList>, T> * = nullptr>
 inline auto Reverse(const T &container) -> T
 {
     return Reverse<QString, QList>(container);

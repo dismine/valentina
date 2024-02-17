@@ -28,12 +28,11 @@
 #ifndef UTILS_H
 #define UTILS_H
 
-#include <QtGlobal>
 #include <QtCore/qcontainerfwd.h>
+#include <QtGlobal>
 
 class QMimeType;
 class QString;
-class QMimeType;
 class QByteArray;
 
 #if QT_VERSION < QT_VERSION_CHECK(6, 0, 0)

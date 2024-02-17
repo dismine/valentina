@@ -39,7 +39,7 @@ class QGraphicsScene;
 class VCommonSettings;
 class QPainter;
 
-class VPTileFactory : QObject
+class VPTileFactory : public QObject
 {
     Q_OBJECT // NOLINT
 

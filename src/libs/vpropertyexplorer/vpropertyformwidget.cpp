@@ -78,16 +78,16 @@ void VPE::VPropertyFormWidget::build()
 {
     // Clear the old content, delete old widgets
     d_ptr->EditorWidgets.clear();
-    if (layout())
+    if (layout() != nullptr)
     {
-        QLayoutItem *child;
-        while (layout()->count() > 0 && (child = layout()->takeAt(0)) != nullptr)
+        while (layout()->count() > 0)
         {
-            if (child->widget())
+            QLayoutItem *child = layout()->takeAt(0);
+            if (child != nullptr)
             {
                 delete child->widget();
+                delete child;
             }
-            delete child;
         }
         delete layout();
     }
@@ -98,7 +98,7 @@ void VPE::VPropertyFormWidget::build()
         return; //... only if there are properties
     }
 
-    QFormLayout *tmpFormLayout = new QFormLayout(this);
+    auto *tmpFormLayout = new QFormLayout(this);
     tmpFormLayout->setFieldGrowthPolicy(QFormLayout::ExpandingFieldsGrow);
     setLayout(tmpFormLayout);
 
@@ -116,10 +116,10 @@ void VPE::VPropertyFormWidget::build()
             if (tmpProperty->propertyType() == Property::Complex)
             {
                 buildEditor(tmpProperty, tmpFormLayout, Property::Complex);
-                QWidget *group = new QWidget(this);
+                auto *group = new QWidget(this);
                 tmpFormLayout->addRow(group);
 
-                QFormLayout *subFormLayout = new QFormLayout(group);
+                auto *subFormLayout = new QFormLayout(group);
                 subFormLayout->setFieldGrowthPolicy(QFormLayout::ExpandingFieldsGrow);
                 QMargins margins = subFormLayout->contentsMargins();
                 margins.setTop(0);

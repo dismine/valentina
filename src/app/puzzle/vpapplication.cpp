@@ -56,6 +56,11 @@
 #include "../vmisc/compatibility.h"
 #endif
 
+#if !defined(BUILD_REVISION) && defined(QBS_BUILD)
+#include <vcsRepoState.h>
+#define BUILD_REVISION VCS_REPO_STATE_REVISION
+#endif
+
 using namespace Qt::Literals::StringLiterals;
 
 QT_WARNING_PUSH
@@ -65,11 +70,6 @@ QT_WARNING_DISABLE_INTEL(1418)
 Q_LOGGING_CATEGORY(pApp, "p.application") // NOLINT
 
 QT_WARNING_POP
-
-#if !defined(BUILD_REVISION) && defined(QBS_BUILD)
-#include <vcsRepoState.h>
-#define BUILD_REVISION VCS_REPO_STATE_REVISION
-#endif
 
 //---------------------------------------------------------------------------------------------------------------------
 inline void noisyFailureMsgHandler(QtMsgType type, const QMessageLogContext &context,

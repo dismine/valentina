@@ -83,13 +83,13 @@ auto StrToGrainlineType(const QString &string) -> GrainlineType
     return type;
 }
 
+#if __cplusplus < 202002L
 //---------------------------------------------------------------------------------------------------------------------
 auto VPTransformationOrigon::operator==(const VPTransformationOrigon &origin) const -> bool
 {
-    return this->origin == origin.origin && custom == origin.custom;
+    return origin == origin.origin && custom == origin.custom;
 }
 
-#if __cplusplus < 202002L
 //---------------------------------------------------------------------------------------------------------------------
 auto VPTransformationOrigon::operator!=(const VPTransformationOrigon &origin) const -> bool
 {
