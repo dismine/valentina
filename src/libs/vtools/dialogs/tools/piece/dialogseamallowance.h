@@ -96,8 +96,7 @@ private slots:
     void PassmarkChanged(int index);
     void CSAStartPointChanged(int index);
     void CSAEndPointChanged(int index);
-    void MirrorLineStartPointChanged(int index);
-    void MirrorLineEndPointChanged(int index);
+    void MirrorLinePointChanged(int index);
     void CSAIncludeTypeChanged(int index);
     void NodeAngleChanged(int index);
     void ReturnDefBefore();

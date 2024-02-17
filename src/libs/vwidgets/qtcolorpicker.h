@@ -64,9 +64,9 @@ class QtColorPicker : public QPushButton
     Q_PROPERTY(bool colorDialog READ colorDialogEnabled WRITE setColorDialogEnabled)
 
 public:
-    QtColorPicker(QWidget *parent = 0, int columns = -1, bool enableColorDialog = true);
+    explicit QtColorPicker(QWidget *parent = 0, int columns = -1, bool enableColorDialog = true);
 
-    ~QtColorPicker();
+    ~QtColorPicker() override;
 
     void insertColor(const QColor &color, const QString &text = QString(), int index = -1);
 
@@ -90,7 +90,7 @@ Q_SIGNALS:
     void colorChanged(const QColor &);
 
 protected:
-    void paintEvent(QPaintEvent *e);
+    void paintEvent(QPaintEvent *e) override;
 
 private Q_SLOTS:
     void buttonPressed(bool toggled);

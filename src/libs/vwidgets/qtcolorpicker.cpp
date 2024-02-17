@@ -1224,7 +1224,7 @@ void ColorPickerButton::focusInEvent(QFocusEvent *e)
 {
     setFrameShadow(Raised);
     update();
-    QFrame::focusOutEvent(e);
+    QFrame::focusInEvent(e);
 }
 
 /*!

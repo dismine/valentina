@@ -103,20 +103,12 @@ void VPE::VPropertyFormView::setPropertySet(VPropertySet *property_set)
 
 void VPE::VPropertyFormView::rowsRemoved(const QModelIndex &parent, int start, int end)
 {
-    // todo: Only rebuild the neccessary parts
-    Q_UNUSED(parent)
-    Q_UNUSED(start)
-    Q_UNUSED(end)
-    updatePropertyList();
+    rowsChanged(parent, start, end);
 }
 
 void VPE::VPropertyFormView::rowsInserted(const QModelIndex &parent, int start, int end) //-V524
 {
-    // todo: Only rebuild the neccessary parts
-    Q_UNUSED(parent)
-    Q_UNUSED(start)
-    Q_UNUSED(end)
-    updatePropertyList();
+    rowsChanged(parent, start, end);
 }
 
 void VPE::VPropertyFormView::modelReset()
@@ -218,4 +210,13 @@ void VPE::VPropertyFormView::connectPropertyFormWidget(VPropertyFormWidget *widg
     {
         connectPropertyFormWidget(tmpEditorWidget);
     }
+}
+
+void VPE::VPropertyFormView::rowsChanged(const QModelIndex &parent, int start, int end)
+{
+    // todo: Only rebuild the neccessary parts
+    Q_UNUSED(parent)
+    Q_UNUSED(start)
+    Q_UNUSED(end)
+    updatePropertyList();
 }

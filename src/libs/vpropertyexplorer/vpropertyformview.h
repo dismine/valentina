@@ -103,6 +103,8 @@ protected:
 
 private:
     Q_DISABLE_COPY_MOVE(VPropertyFormView) // NOLINT
+
+    void rowsChanged(const QModelIndex &parent, int start, int end);
 };
 
 QT_WARNING_POP

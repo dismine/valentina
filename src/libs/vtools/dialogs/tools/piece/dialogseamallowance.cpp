@@ -1620,17 +1620,7 @@ void DialogSeamAllowance::CSAEndPointChanged(int index)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void DialogSeamAllowance::MirrorLineStartPointChanged(int index)
-{
-    Q_UNUSED(index)
-
-    flagMirrorLineIsValid = MirrorLineIsValid();
-    uiTabPaths->checkBoxShowFullPiece->setEnabled(flagMirrorLineIsValid);
-    CheckState();
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-void DialogSeamAllowance::MirrorLineEndPointChanged(int index)
+void DialogSeamAllowance::MirrorLinePointChanged(int index)
 {
     Q_UNUSED(index)
 
@@ -3827,9 +3817,9 @@ void DialogSeamAllowance::InitMainPathTab()
             });
 
     connect(uiTabPaths->comboBoxMLStartPoint, QOverload<int>::of(&QComboBox::currentIndexChanged), this,
-            &DialogSeamAllowance::MirrorLineStartPointChanged);
+            &DialogSeamAllowance::MirrorLinePointChanged);
     connect(uiTabPaths->comboBoxMLEndPoint, QOverload<int>::of(&QComboBox::currentIndexChanged), this,
-            &DialogSeamAllowance::MirrorLineEndPointChanged);
+            &DialogSeamAllowance::MirrorLinePointChanged);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
