@@ -340,11 +340,11 @@ void VLayoutConverter::ConvertPiecesToV0_1_5()
                 }
             }
 
-            auto StringToPath = [](const QString &path) -> QVector<QPointF>
+            auto StringToPath = [](const QString &path)
             {
                 auto StringToPoint = [](const QString &point) -> QPointF
                 {
-                    QStringList coordinates = point.split(coordintatesSep);
+                    QStringList const coordinates = point.split(coordintatesSep);
                     if (coordinates.count() == 2)
                     {
                         return {coordinates.at(0).toDouble(), coordinates.at(1).toDouble()};
@@ -359,7 +359,7 @@ void VLayoutConverter::ConvertPiecesToV0_1_5()
                     return p;
                 }
 
-                QStringList points = path.split(pointsSep);
+                QStringList const points = path.split(pointsSep);
                 p.reserve(points.size());
                 for (const auto &point : points)
                 {
@@ -372,9 +372,9 @@ void VLayoutConverter::ConvertPiecesToV0_1_5()
             const QVector<QPointF> path = StringToPath(node.text());
             if (not path.isEmpty())
             {
-                auto LineToString = [](const QLineF &line) -> QString
+                auto LineToString = [](const QLineF &line)
                 {
-                    auto PointToString = [](const QPointF &p) -> QString
+                    auto PointToString = [](const QPointF &p)
                     { return NumberToString(p.x()) + coordintatesSep + NumberToString(p.y()); };
 
                     return PointToString(line.p1()) + groupSep + PointToString(line.p2());

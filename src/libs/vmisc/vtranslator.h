@@ -35,7 +35,7 @@ class VTranslator : public QTranslator
     Q_OBJECT // NOLINT
 
 public:
-    VTranslator(QObject *parent = nullptr);
+    explicit VTranslator(QObject *parent = nullptr);
 
     auto translate(const char *context, const char *sourceText, const char *disambiguation = nullptr, int n = -1) const
         -> QString override;
