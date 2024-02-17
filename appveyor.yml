@@ -538,7 +538,7 @@ for:
 
   cache:
     #- /Users/appveyor/.conan/data -> conanfile.py
-    - /Users/appveyor/brew_cache_dir
+    - $HOME/brew_cache_dir
 
   init:
     - find /Applications -maxdepth 1 -type d -name 'Xcode*.app'
@@ -721,7 +721,7 @@ for:
 
   cache:
     #- /Users/appveyor/.conan/data -> conanfile.py
-    - /Users/appveyor/brew_cache_dir
+    - $HOME/brew_cache_dir
 
   init:
     - find /Applications -maxdepth 1 -type d -name 'Xcode*.app'
