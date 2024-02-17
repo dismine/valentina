@@ -59,7 +59,10 @@ public:
     ~VFormula();
 
     auto operator==(const VFormula &formula) const -> bool;
+
+#if __cplusplus < 202002L
     auto operator!=(const VFormula &formula) const -> bool;
+#endif
 
     auto GetFormula(FormulaType type = FormulaType::ToUser) const -> QString;
     void SetFormula(const QString &value, FormulaType type = FormulaType::FromSystem);

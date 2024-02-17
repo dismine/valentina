@@ -55,11 +55,14 @@ auto StrToGrainlineType(const QString &string) -> GrainlineType;
 
 struct VPTransformationOrigon
 {
-    QPointF origin{}; // NOLINT(misc-non-private-member-variables-in-classes)
-    bool    custom{false}; // NOLINT(misc-non-private-member-variables-in-classes)
+    QPointF origin{};   // NOLINT(misc-non-private-member-variables-in-classes)
+    bool custom{false}; // NOLINT(misc-non-private-member-variables-in-classes)
 
     auto operator==(const VPTransformationOrigon &origin) const -> bool;
+
+#if __cplusplus < 202002L
     auto operator!=(const VPTransformationOrigon &origin) const -> bool;
+#endif
 };
 
 #endif // LAYOUTDEF_H

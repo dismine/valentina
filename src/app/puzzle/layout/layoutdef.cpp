@@ -89,8 +89,10 @@ auto VPTransformationOrigon::operator==(const VPTransformationOrigon &origin) co
     return this->origin == origin.origin && custom == origin.custom;
 }
 
+#if __cplusplus < 202002L
 //---------------------------------------------------------------------------------------------------------------------
 auto VPTransformationOrigon::operator!=(const VPTransformationOrigon &origin) const -> bool
 {
     return !VPTransformationOrigon::operator==(origin);
 }
+#endif

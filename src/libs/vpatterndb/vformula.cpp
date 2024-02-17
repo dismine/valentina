@@ -87,11 +87,13 @@ auto VFormula::operator==(const VFormula &formula) const -> bool
            d->error == formula.error() && VFuzzyComparePossibleNulls(d->dValue, formula.getDoubleValue());
 }
 
+#if __cplusplus < 202002L
 //---------------------------------------------------------------------------------------------------------------------
 auto VFormula::operator!=(const VFormula &formula) const -> bool
 {
     return !VFormula::operator==(formula);
 }
+#endif
 
 //---------------------------------------------------------------------------------------------------------------------
 auto VFormula::GetFormula(FormulaType type) const -> QString
