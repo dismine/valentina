@@ -87,7 +87,7 @@ auto StrToGrainlineType(const QString &string) -> GrainlineType
 //---------------------------------------------------------------------------------------------------------------------
 auto VPTransformationOrigon::operator==(const VPTransformationOrigon &origin) const -> bool
 {
-    return origin == origin.origin && custom == origin.custom;
+    return this->origin == origin.origin && custom == origin.custom;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
