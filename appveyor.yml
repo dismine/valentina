@@ -236,14 +236,14 @@ environment:
       TARGET_PLATFORM: "Windows7+"
       DEPLOY: false
 
-    - job_name: MacOS_10_15_Qt_5_15 (make)
-      APPVEYOR_BUILD_WORKER_IMAGE: macos-catalina
+    - job_name: MacOS_12_Qt_5_15 (make)
+      APPVEYOR_BUILD_WORKER_IMAGE: macos-monterey
       COMPILER: clang
       QT: Qt/5.15/clang_64
       QT_VERSION: Qt5_15
       BUILD_SYSTEM: "make"
       ARCH: x64
-      XCODE_VERSION: 12.3
+      XCODE_VERSION: 13.4.1
       TARGET_PLATFORM: "macOS_10.13+"
       DEPLOY: false 
 
@@ -263,15 +263,15 @@ matrix:
     - platform: x86
       job_name: Windows_Qt_5_15_(qbs_MSVC_x64)
     - platform: x86
-      job_name: MacOS_12_Qt_6_4 (multibundle)
+      job_name: MacOS_14_Qt_6_6 (multibundle)
     - platform: x86
-      job_name: MacOS_12_Qt_6_4 (singlebundle)
+      job_name: MacOS_14_Qt_6_6 (singlebundle)
     - platform: x86
-      job_name: MacOS_10_15_Qt_5_15 (qbs, multibundle)
+      job_name: MacOS_12_Qt_5_15 (qbs, multibundle)
     - platform: x86
-      job_name: MacOS_10_15_Qt_5_15 (qbs, singlebundle)
+      job_name: MacOS_12_Qt_5_15 (qbs, singlebundle)
     - platform: x86
-      job_name: MacOS_10_15_Qt_5_15 (make)
+      job_name: MacOS_12_Qt_5_15 (make)
     - platform: x64
       job_name: Windows_Qt_5_15_(make_GCC_x86)
     - platform: x64
@@ -508,8 +508,8 @@ for:
 -
   matrix:
     only:
-      - job_name: MacOS_12_Qt_6_4 (multibundle)
-      - job_name: MacOS_12_Qt_6_4 (singlebundle)
+      - job_name: MacOS_14_Qt_6_6 (multibundle)
+      - job_name: MacOS_14_Qt_6_6 (singlebundle)
 
   environment:
     CONAN_USER_HOME: /Users/appveyor
@@ -691,8 +691,8 @@ for:
 -
   matrix:
     only:
-      - job_name: MacOS_10_15_Qt_5_15 (qbs, multibundle)
-      - job_name: MacOS_10_15_Qt_5_15 (qbs, singlebundle)
+      - job_name: MacOS_12_Qt_5_15 (qbs, multibundle)
+      - job_name: MacOS_12_Qt_5_15 (qbs, singlebundle)
 
   environment:
     CONAN_USER_HOME: /Users/appveyor
@@ -874,7 +874,7 @@ for:
 -
   matrix:
     only:
-      - job_name: MacOS_10_15_Qt_5_15 (make)
+      - job_name: MacOS_12_Qt_5_15 (make)
 
   init:
     - find /Applications -maxdepth 1 -type d -name 'Xcode*.app'
