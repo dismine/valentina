@@ -107,53 +107,53 @@ environment:
 #      DEPLOY: true
 #      RUN_TESTS: true
 
-    - job_name: MacOS_10_15_Qt_5_15 (qbs, multibundle)
+    - job_name: MacOS_12_Qt_5_15 (qbs, multibundle)
       APPVEYOR_BUILD_WORKER_IMAGE: macos-monterey
       COMPILER: clang
       QT: Qt/5.15/clang_64
       QT_VERSION: Qt5_15
       BUILD_SYSTEM: "qbs"
       ARCH: x64
-      XCODE_VERSION: 14.1
+      XCODE_VERSION: 14.2
       TARGET_PLATFORM: "macOS_10.13+"
       MACOS_DEPLOYMENT_TARGET: 10.13
       MULTI_BUNDLE: true
       DEPLOY: true
 
-    - job_name: MacOS_10_15_Qt_5_15 (qbs, singlebundle)
+    - job_name: MacOS_12_Qt_5_15 (qbs, singlebundle)
       APPVEYOR_BUILD_WORKER_IMAGE: macos-monterey
       COMPILER: clang
       QT: Qt/5.15/clang_64
       QT_VERSION: Qt5_15
       BUILD_SYSTEM: "qbs"
       ARCH: x64
-      XCODE_VERSION: 14.1
+      XCODE_VERSION: 14.2
       TARGET_PLATFORM: "macOS_10.13+"
       MACOS_DEPLOYMENT_TARGET: 10.13
       MULTI_BUNDLE: false
       DEPLOY: true
 
-    - job_name: MacOS_12_Qt_6_4 (multibundle)
-      APPVEYOR_BUILD_WORKER_IMAGE: macos-monterey
+    - job_name: MacOS_14_Qt_6_6 (multibundle)
+      APPVEYOR_BUILD_WORKER_IMAGE: macos-sonoma
       COMPILER: clang
-      QT: Qt/6.4/macos
+      QT: Qt/6.6/macos
       QT_VERSION: Qt6
       BUILD_SYSTEM: "qbs"
       ARCH: x64
-      XCODE_VERSION: 14.1
+      XCODE_VERSION: 15.2
       TARGET_PLATFORM: "macOS_11+"
       MACOS_DEPLOYMENT_TARGET: 11.0
       MULTI_BUNDLE: true
       DEPLOY: true
 
-    - job_name: MacOS_12_Qt_6_4 (singlebundle)
-      APPVEYOR_BUILD_WORKER_IMAGE: macos-monterey
+    - job_name: MacOS_14_Qt_6_6 (singlebundle)
+      APPVEYOR_BUILD_WORKER_IMAGE: macos-sonoma
       COMPILER: clang
-      QT: Qt/6.4/macos
+      QT: Qt/6.6/macos
       QT_VERSION: Qt6
       BUILD_SYSTEM: "qbs"
       ARCH: x64
-      XCODE_VERSION: 14.1
+      XCODE_VERSION: 15.2
       TARGET_PLATFORM: "macOS_11+"
       MACOS_DEPLOYMENT_TARGET: 11.0
       MULTI_BUNDLE: false
@@ -598,7 +598,7 @@ for:
 
       cache_tag=usr_local # this can be modified to rebuild deps
 
-      cdir=$HOME/cache_dir
+      cdir=$HOME/brew_cache_dir
       cache_tar=$cdir/$cache_tag.tar
       cache=$cache_tar.xz
 
@@ -782,7 +782,7 @@ for:
 
       cache_tag=usr_local # this can be modified to rebuild deps
 
-      cdir=$HOME/cache_dir
+      cdir=$HOME/brew_cache_dir
       cache_tar=$cdir/$cache_tag.tar
       cache=$cache_tar.xz
 
