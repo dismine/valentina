@@ -114,7 +114,7 @@ environment:
       QT_VERSION: Qt5_15
       BUILD_SYSTEM: "qbs"
       ARCH: x64
-      XCODE_VERSION: 14.2
+      XCODE_VERSION: 14.2.0
       TARGET_PLATFORM: "macOS_10.13+"
       MACOS_DEPLOYMENT_TARGET: 10.13
       MULTI_BUNDLE: true
@@ -127,7 +127,7 @@ environment:
       QT_VERSION: Qt5_15
       BUILD_SYSTEM: "qbs"
       ARCH: x64
-      XCODE_VERSION: 14.2
+      XCODE_VERSION: 14.2.0
       TARGET_PLATFORM: "macOS_10.13+"
       MACOS_DEPLOYMENT_TARGET: 10.13
       MULTI_BUNDLE: false
@@ -140,7 +140,7 @@ environment:
       QT_VERSION: Qt6
       BUILD_SYSTEM: "qbs"
       ARCH: x64
-      XCODE_VERSION: 15.2
+      XCODE_VERSION: 15.2.0
       TARGET_PLATFORM: "macOS_11+"
       MACOS_DEPLOYMENT_TARGET: 11.0
       MULTI_BUNDLE: true
@@ -153,7 +153,7 @@ environment:
       QT_VERSION: Qt6
       BUILD_SYSTEM: "qbs"
       ARCH: x64
-      XCODE_VERSION: 15.2
+      XCODE_VERSION: 15.2.0
       TARGET_PLATFORM: "macOS_11+"
       MACOS_DEPLOYMENT_TARGET: 11.0
       MULTI_BUNDLE: false
