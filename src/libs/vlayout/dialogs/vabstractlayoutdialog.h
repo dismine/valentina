@@ -66,8 +66,8 @@ public:
     static void InitTileTemplates(QComboBox *comboBoxTemplates, bool keepCustom = false);
 
 protected:
-    typedef QStringList FormatsVector;
-    typedef int VIndexType;
+    using FormatsVector = QStringList;
+    using VIndexType = int;
 
     static auto PageFormatNames() -> const FormatsVector &;
     static auto RoundTemplateSize(qreal width, qreal height, Unit unit) -> QSizeF;

@@ -39,7 +39,7 @@
 
 using namespace Qt::Literals::StringLiterals;
 
-typedef QPair<bool, VPieceNode> UnitedPathNode;
+using UnitedPathNode = QPair<bool, VPieceNode>;
 
 Q_DECLARE_METATYPE(UnitedPathNode)
 

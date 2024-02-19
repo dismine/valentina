@@ -141,7 +141,7 @@ protected:
     /**
      * @brief Typedef for the token reader.
      */
-    typedef QmuParserTokenReader token_reader_type;
+    using token_reader_type = QmuParserTokenReader;
 
     QLocale m_locale; ///< The locale used by the parser
     QChar m_decimalPoint;
@@ -202,22 +202,22 @@ private:
      * the function pointer to the parser function depending on
      * which state it is in. (i.e. bytecode parser vs. string parser)
      */
-    typedef qreal (QmuParserBase::*ParseFunction)() const;
+    using ParseFunction = qreal (QmuParserBase::*)() const;
 
     /**
      * @brief Type used for storing an array of values.
      */
-    typedef QVector<qreal> valbuf_type;
+    using valbuf_type = QVector<qreal>;
 
     /**
      * @brief Type for a vector of strings.
      */
-    typedef QVector<QString> stringbuf_type;
+    using stringbuf_type = QVector<QString>;
 
     /**
      * @brief Type used for parser tokens.
      */
-    typedef QmuParserToken<qreal, QString> token_type;
+    using token_type = QmuParserToken<qreal, QString>;
 
     /**
      * @brief Maximum number of threads spawned by OpenMP when using the bulk mode.

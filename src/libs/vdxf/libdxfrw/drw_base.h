@@ -65,19 +65,19 @@
     Class &operator=(Class &&) = delete;
 #endif
 
-typedef signed char dint8;    /* 8 bit signed */
-typedef signed short dint16;  /* 16 bit signed */
-typedef signed int dint32;    /* 32 bit signed */
-typedef long long int dint64; /* 64 bit signed */
+using dint8 = signed char; /* 8 bit signed */
+using dint16 = short;      /* 16 bit signed */
+using dint32 = int;        /* 32 bit signed */
+using dint64 = long long;  /* 64 bit signed */
 
-typedef unsigned char duint8;           /* 8 bit unsigned */
-typedef unsigned short duint16;         /* 16 bit unsigned */
-typedef unsigned int duint32;           /* 32 bit unsigned */
-typedef unsigned long long int duint64; /* 64 bit unsigned */
+using duint8 = unsigned char;       /* 8 bit unsigned */
+using duint16 = unsigned short;     /* 16 bit unsigned */
+using duint32 = unsigned int;       /* 32 bit unsigned */
+using duint64 = unsigned long long; /* 64 bit unsigned */
 
-typedef float dfloat32;        /* 32 bit floating point */
-typedef double ddouble64;      /* 64 bit floating point */
-typedef long double ddouble80; /* 80 bit floating point */
+using dfloat32 = float;        /* 32 bit floating point */
+using ddouble64 = double;      /* 64 bit floating point */
+using ddouble80 = long double; /* 80 bit floating point */
 
 namespace DRW
 {
@@ -493,13 +493,13 @@ public:
     }
 
 private:
-    typedef union
+    using DRW_VarContent = union
     {
         UTF8STRING *s;
         dint32 i;
         double d;
         DRW_Coord *v;
-    } DRW_VarContent;
+    };
 
 public:
     DRW_VarContent content;

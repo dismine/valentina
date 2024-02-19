@@ -219,7 +219,7 @@ enum class PiecePathType : quint8
     Unknown = 3
 };
 
-typedef int ToolVisHolderType;
+using ToolVisHolderType = int;
 enum class Tool : ToolVisHolderType
 {
     Arrow,

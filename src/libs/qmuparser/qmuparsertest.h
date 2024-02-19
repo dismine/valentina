@@ -59,7 +59,7 @@ class QMUPARSERSHARED_EXPORT QmuParserTester : public QObject // final
     Q_OBJECT // NOLINT
 
 public:
-    typedef int (QmuParserTester::*testfun_type)();
+    using testfun_type = int (QmuParserTester::*)();
 
     explicit QmuParserTester(QObject *parent = nullptr);
 
