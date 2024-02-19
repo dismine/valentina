@@ -610,7 +610,6 @@ auto VLayoutPiece::operator=(const VLayoutPiece &detail) -> VLayoutPiece &
     return *this;
 }
 
-#ifdef Q_COMPILER_RVALUE_REFS
 //---------------------------------------------------------------------------------------------------------------------
 VLayoutPiece::VLayoutPiece(VLayoutPiece &&detail) noexcept
   : VAbstractPiece(std::move(detail)),
@@ -625,7 +624,6 @@ auto VLayoutPiece::operator=(VLayoutPiece &&detail) noexcept -> VLayoutPiece &
     std::swap(d, detail.d);
     return *this;
 }
-#endif
 
 //---------------------------------------------------------------------------------------------------------------------
 VLayoutPiece::~VLayoutPiece() = default;

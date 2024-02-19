@@ -42,10 +42,8 @@ public:
     VPatternPieceStyle(const VPatternPieceStyle &) = default;
     auto operator=(const VPatternPieceStyle &) -> VPatternPieceStyle & = default;
 
-#ifdef Q_COMPILER_RVALUE_REFS
     VPatternPieceStyle(VPatternPieceStyle &&) = default;
     auto operator=(VPatternPieceStyle &&) -> VPatternPieceStyle & = default;
-#endif
 
     void LoadJson(QJsonObject const &json) override;
 

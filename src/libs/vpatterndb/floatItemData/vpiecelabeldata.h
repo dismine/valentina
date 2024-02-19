@@ -49,10 +49,9 @@ public:
     ~VPieceLabelData() override;
 
     auto operator=(const VPieceLabelData &data) -> VPieceLabelData &;
-#ifdef Q_COMPILER_RVALUE_REFS
+
     VPieceLabelData(VPieceLabelData &&data) noexcept;
-    auto operator=(VPieceLabelData &&data) noexcept->VPieceLabelData &;
-#endif
+    auto operator=(VPieceLabelData &&data) noexcept -> VPieceLabelData &;
 
     void Clear();
 
@@ -80,7 +79,7 @@ public:
 
     auto IsOnFold() const -> bool;
     void SetOnFold(bool onFold);
-    
+
     auto GetAreaShortName() const -> QString;
     void SetAreaShortName(const QString &val);
 

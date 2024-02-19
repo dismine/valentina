@@ -29,7 +29,6 @@
 #ifndef VPOSITION_H
 #define VPOSITION_H
 
-
 #include <QRunnable>
 #include <QVector>
 #include <QtGlobal>
@@ -69,13 +68,13 @@ class VPosition
 public:
     VPosition() = default;
     VPosition(const VPositionData &data, std::atomic_bool *stop, bool saveLength);
-    VPosition(const VPosition&) = default;
-    auto operator=(const VPosition&) -> VPosition& = default;
-#ifdef Q_COMPILER_RVALUE_REFS
-    VPosition(VPosition&&) = default;
-    auto operator=(VPosition&&) -> VPosition& = default;
-#endif
-    ~VPosition()= default;
+    VPosition(const VPosition &) = default;
+    auto operator=(const VPosition &) -> VPosition & = default;
+
+    VPosition(VPosition &&) = default;
+    auto operator=(VPosition &&) -> VPosition & = default;
+
+    ~VPosition() = default;
 
     void run();
 

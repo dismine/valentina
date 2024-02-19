@@ -96,7 +96,6 @@ auto VMeasurement::operator=(const VMeasurement &m) -> VMeasurement &
     return *this;
 }
 
-#ifdef Q_COMPILER_RVALUE_REFS
 //---------------------------------------------------------------------------------------------------------------------
 VMeasurement::VMeasurement(VMeasurement &&m) noexcept
   : VVariable(std::move(m)),
@@ -111,7 +110,6 @@ auto VMeasurement::operator=(VMeasurement &&m) noexcept -> VMeasurement &
     std::swap(d, m.d);
     return *this;
 }
-#endif
 
 //---------------------------------------------------------------------------------------------------------------------
 VMeasurement::~VMeasurement() = default;

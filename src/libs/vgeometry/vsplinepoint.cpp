@@ -71,7 +71,6 @@ auto VFSplinePoint::operator=(const VFSplinePoint &point) -> VFSplinePoint &
     return *this;
 }
 
-#ifdef Q_COMPILER_RVALUE_REFS
 //---------------------------------------------------------------------------------------------------------------------
 VFSplinePoint::VFSplinePoint(VFSplinePoint &&point) noexcept
   : d(std::move(point.d))
@@ -84,7 +83,6 @@ auto VFSplinePoint::operator=(VFSplinePoint &&point) noexcept -> VFSplinePoint &
     std::swap(d, point.d);
     return *this;
 }
-#endif
 
 //---------------------------------------------------------------------------------------------------------------------
 VFSplinePoint::~VFSplinePoint() = default;
@@ -227,7 +225,6 @@ auto VSplinePoint::operator=(const VSplinePoint &point) -> VSplinePoint &
     return *this;
 }
 
-#ifdef Q_COMPILER_RVALUE_REFS
 //---------------------------------------------------------------------------------------------------------------------
 VSplinePoint::VSplinePoint(VSplinePoint &&point) noexcept
   : d(std::move(point.d))
@@ -240,7 +237,6 @@ auto VSplinePoint::operator=(VSplinePoint &&point) noexcept -> VSplinePoint &
     std::swap(d, point.d);
     return *this;
 }
-#endif
 
 //---------------------------------------------------------------------------------------------------------------------
 VSplinePoint::~VSplinePoint() = default;

@@ -74,10 +74,9 @@ public:
     virtual ~VAbstractPiece();
 
     auto operator=(const VAbstractPiece &piece) -> VAbstractPiece &;
-#ifdef Q_COMPILER_RVALUE_REFS
+
     VAbstractPiece(VAbstractPiece &&piece) noexcept;
     auto operator=(VAbstractPiece &&piece) noexcept -> VAbstractPiece &;
-#endif
 
     auto GetName() const -> QString;
     void SetName(const QString &value);

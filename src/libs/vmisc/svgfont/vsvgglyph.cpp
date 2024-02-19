@@ -61,7 +61,6 @@ auto VSvgGlyph::operator=(const VSvgGlyph &glyph) -> VSvgGlyph &
     return *this;
 }
 
-#ifdef Q_COMPILER_RVALUE_REFS
 //---------------------------------------------------------------------------------------------------------------------
 VSvgGlyph::VSvgGlyph(VSvgGlyph &&glyph) noexcept
   : d(std::move(glyph.d))
@@ -74,7 +73,6 @@ auto VSvgGlyph::operator=(VSvgGlyph &&glyph) noexcept -> VSvgGlyph &
     std::swap(d, glyph.d);
     return *this;
 }
-#endif
 
 //---------------------------------------------------------------------------------------------------------------------
 void VSvgGlyph::SetUnicode(const QChar &unicode)

@@ -90,7 +90,6 @@ auto VPieceArea::operator=(const VPieceArea &var) -> VPieceArea &
 //---------------------------------------------------------------------------------------------------------------------
 VPieceArea::~VPieceArea() = default;
 
-#ifdef Q_COMPILER_RVALUE_REFS
 //---------------------------------------------------------------------------------------------------------------------
 VPieceArea::VPieceArea(VPieceArea &&var) noexcept
   : VInternalVariable(std::move(var)),
@@ -105,7 +104,6 @@ auto VPieceArea::operator=(VPieceArea &&var) noexcept -> VPieceArea &
     std::swap(d, var.d);
     return *this;
 }
-#endif
 
 //---------------------------------------------------------------------------------------------------------------------
 void VPieceArea::SetValue(quint32 pieceId, const VPiece &piece, const VContainer *data, Unit unit)

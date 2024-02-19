@@ -117,7 +117,6 @@ auto VContainer::operator=(const VContainer &data) -> VContainer &
     return *this;
 }
 
-#ifdef Q_COMPILER_RVALUE_REFS
 //---------------------------------------------------------------------------------------------------------------------
 VContainer::VContainer(VContainer &&data) noexcept
   : d(std::move(data.d))
@@ -130,7 +129,6 @@ auto VContainer::operator=(VContainer &&data) noexcept -> VContainer &
     std::swap(d, data.d);
     return *this;
 }
-#endif
 
 //---------------------------------------------------------------------------------------------------------------------
 /**

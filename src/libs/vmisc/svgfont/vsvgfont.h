@@ -44,10 +44,9 @@ public:
     ~VSvgFont();
 
     auto operator=(const VSvgFont &font) -> VSvgFont &;
-#ifdef Q_COMPILER_RVALUE_REFS
+
     VSvgFont(VSvgFont &&font) noexcept;
     auto operator=(VSvgFont &&font) noexcept -> VSvgFont &;
-#endif
 
     void SetId(const QString &id);
     auto Id() const -> QString;

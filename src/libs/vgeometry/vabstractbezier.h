@@ -38,17 +38,15 @@ class VAbstractBezier : public VAbstractCurve
 public:
     explicit VAbstractBezier(const GOType &type, const quint32 &idObject = NULL_ID,
                              const Draw &mode = Draw::Calculation);
-    VAbstractBezier(const VAbstractBezier &curve) =default;
-    auto operator= (const VAbstractBezier &curve) -> VAbstractBezier&;
-    ~VAbstractBezier() override =default;
+    VAbstractBezier(const VAbstractBezier &curve) = default;
+    auto operator=(const VAbstractBezier &curve) -> VAbstractBezier &;
+    ~VAbstractBezier() override = default;
 
-#ifdef Q_COMPILER_RVALUE_REFS
-    VAbstractBezier(VAbstractBezier &&curve) noexcept =default;
-    auto operator=(VAbstractBezier &&curve) noexcept -> VAbstractBezier & =default;
-#endif
+    VAbstractBezier(VAbstractBezier &&curve) noexcept = default;
+    auto operator=(VAbstractBezier &&curve) noexcept -> VAbstractBezier & = default;
 
-    virtual auto GetC1Length() const -> qreal =0;
-    virtual auto GetC2Length() const -> qreal =0;
+    virtual auto GetC1Length() const -> qreal = 0;
+    virtual auto GetC2Length() const -> qreal = 0;
 };
 
 #endif // VABSTRACTBEZIER_H

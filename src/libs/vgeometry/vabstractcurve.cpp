@@ -96,7 +96,6 @@ auto VAbstractCurve::operator=(const VAbstractCurve &curve) -> VAbstractCurve &
     return *this;
 }
 
-#ifdef Q_COMPILER_RVALUE_REFS
 //---------------------------------------------------------------------------------------------------------------------
 VAbstractCurve::VAbstractCurve(VAbstractCurve &&curve) noexcept
   : VGObject(std::move(curve)),
@@ -111,7 +110,6 @@ auto VAbstractCurve::operator=(VAbstractCurve &&curve) noexcept -> VAbstractCurv
     std::swap(d, curve.d);
     return *this;
 }
-#endif
 
 //---------------------------------------------------------------------------------------------------------------------
 VAbstractCurve::~VAbstractCurve() = default;

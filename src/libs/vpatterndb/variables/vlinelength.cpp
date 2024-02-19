@@ -83,7 +83,6 @@ VLengthLine::VLengthLine(VLengthLine &&var) noexcept
 {
 }
 
-#ifdef Q_COMPILER_RVALUE_REFS
 //---------------------------------------------------------------------------------------------------------------------
 auto VLengthLine::operator=(VLengthLine &&var) noexcept -> VLengthLine &
 {
@@ -91,7 +90,6 @@ auto VLengthLine::operator=(VLengthLine &&var) noexcept -> VLengthLine &
     std::swap(d, var.d);
     return *this;
 }
-#endif
 
 //---------------------------------------------------------------------------------------------------------------------
 VLengthLine::~VLengthLine() = default;

@@ -139,7 +139,6 @@ auto VSvgFontEngine::ToFontUnits(qreal val, int pixelSize) const -> qreal
     return val * d->m_font.UnitsPerEm() / pxSize;
 }
 
-#ifdef Q_COMPILER_RVALUE_REFS
 //---------------------------------------------------------------------------------------------------------------------
 VSvgFontEngine::VSvgFontEngine(VSvgFontEngine &&engine) noexcept
   : d(std::move(engine.d))
@@ -152,7 +151,6 @@ auto VSvgFontEngine::operator=(VSvgFontEngine &&engine) noexcept -> VSvgFontEngi
     std::swap(d, engine.d);
     return *this;
 }
-#endif
 
 //---------------------------------------------------------------------------------------------------------------------
 void VSvgFontEngine::AddGlyph(QChar unicode, const QPainterPath &path, qreal horizAdvX)

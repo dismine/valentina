@@ -84,11 +84,8 @@ public:
     QmuParserCallback();
     QmuParserCallback(const QmuParserCallback &a_Fun);
     auto operator=(const QmuParserCallback &a_Fun) -> QmuParserCallback &;
-
-#ifdef Q_COMPILER_RVALUE_REFS
     QmuParserCallback(QmuParserCallback &&a_Fun) noexcept;
     auto operator=(QmuParserCallback &&a_Fun) noexcept -> QmuParserCallback &;
-#endif
 
     Q_REQUIRED_RESULT auto Clone() const -> QmuParserCallback *;
 

@@ -59,10 +59,9 @@ public:
     ~VPointF() override;
 
     auto operator=(const VPointF &point) -> VPointF &;
-#ifdef Q_COMPILER_RVALUE_REFS
+
     VPointF(VPointF &&point) noexcept;
     auto operator=(VPointF &&point) noexcept -> VPointF &;
-#endif
 
     explicit operator QPointF() const;
     auto Rotate(const QPointF &originPoint, qreal degrees, const QString &prefix = QString()) const -> VPointF;

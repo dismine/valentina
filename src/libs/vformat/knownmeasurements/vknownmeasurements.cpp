@@ -58,7 +58,6 @@ auto VKnownMeasurements::operator=(const VKnownMeasurements &measurements) -> VK
     return *this;
 }
 
-#ifdef Q_COMPILER_RVALUE_REFS
 //---------------------------------------------------------------------------------------------------------------------
 VKnownMeasurements::VKnownMeasurements(VKnownMeasurements &&paper) noexcept
   : d(std::move(paper.d))
@@ -71,7 +70,6 @@ auto VKnownMeasurements::operator=(VKnownMeasurements &&paper) noexcept -> VKnow
     std::swap(d, paper.d);
     return *this;
 }
-#endif
 
 //---------------------------------------------------------------------------------------------------------------------
 auto VKnownMeasurements::IsValid() const -> bool

@@ -59,10 +59,9 @@ public:
     ~VMeasurement() override;
 
     auto operator=(const VMeasurement &m) -> VMeasurement &;
-#ifdef Q_COMPILER_RVALUE_REFS
+
     VMeasurement(VMeasurement &&m) noexcept;
     auto operator=(VMeasurement &&m) noexcept -> VMeasurement &;
-#endif
 
     auto GetKnownMeasurementsId() const -> QUuid;
     void SetKnownMeasurementsId(const QUuid &id);

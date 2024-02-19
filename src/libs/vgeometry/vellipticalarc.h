@@ -68,10 +68,9 @@ public:
     ~VEllipticalArc() override;
 
     auto operator=(const VEllipticalArc &arc) -> VEllipticalArc &;
-#ifdef Q_COMPILER_RVALUE_REFS
+
     VEllipticalArc(VEllipticalArc &&arc) noexcept;
     auto operator=(VEllipticalArc &&arc) noexcept -> VEllipticalArc &;
-#endif
 
     auto GetFormulaRotationAngle() const -> QString;
     void SetFormulaRotationAngle(const QString &formula, qreal value);

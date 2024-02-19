@@ -51,10 +51,8 @@ public:
     VStylesheetStyle(const VStylesheetStyle &) = default;
     auto operator=(const VStylesheetStyle &) -> VStylesheetStyle & = default;
 
-#ifdef Q_COMPILER_RVALUE_REFS
     VStylesheetStyle(VStylesheetStyle &&) = default;
     auto operator=(VStylesheetStyle &&) -> VStylesheetStyle & = default;
-#endif
 
     virtual void LoadJson(QJsonObject const &json) = 0;
     virtual auto ToJson() const -> QJsonObject = 0;

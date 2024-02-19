@@ -66,10 +66,9 @@ public:
 
     auto operator[](vsizetype indx) -> VSplinePoint &;
     auto operator=(const VSplinePath &path) -> VSplinePath &;
-#ifdef Q_COMPILER_RVALUE_REFS
+
     VSplinePath(VSplinePath &&splPath) noexcept;
     auto operator=(VSplinePath &&path) noexcept -> VSplinePath &;
-#endif
 
     void append(const VSplinePoint &point);
 

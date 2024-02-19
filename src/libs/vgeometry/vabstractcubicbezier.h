@@ -51,10 +51,8 @@ public:
     auto operator=(const VAbstractCubicBezier &curve) -> VAbstractCubicBezier &;
     ~VAbstractCubicBezier() override = default;
 
-#ifdef Q_COMPILER_RVALUE_REFS
     VAbstractCubicBezier(VAbstractCubicBezier &&curve) noexcept = default;
     auto operator=(VAbstractCubicBezier &&curve) noexcept -> VAbstractCubicBezier & = default;
-#endif
 
     virtual auto GetP1() const -> VPointF = 0;
     virtual auto GetP2() const -> VPointF = 0;

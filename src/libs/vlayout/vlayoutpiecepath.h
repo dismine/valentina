@@ -47,10 +47,9 @@ public:
     virtual ~VLayoutPiecePath();
 
     auto operator=(const VLayoutPiecePath &path) -> VLayoutPiecePath &;
-#ifdef Q_COMPILER_RVALUE_REFS
+
     VLayoutPiecePath(VLayoutPiecePath &&path) noexcept;
     auto operator=(VLayoutPiecePath &&path) noexcept -> VLayoutPiecePath &;
-#endif
 
     auto GetPainterPath() const -> QPainterPath;
 

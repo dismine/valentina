@@ -86,7 +86,6 @@ auto VAbstractArc::operator=(const VAbstractArc &arc) -> VAbstractArc &
     return *this;
 }
 
-#ifdef Q_COMPILER_RVALUE_REFS
 //---------------------------------------------------------------------------------------------------------------------
 VAbstractArc::VAbstractArc(VAbstractArc &&arc) noexcept
   : VAbstractCurve(std::move(arc)),
@@ -101,7 +100,6 @@ auto VAbstractArc::operator=(VAbstractArc &&arc) noexcept -> VAbstractArc &
     std::swap(d, arc.d);
     return *this;
 }
-#endif
 
 //---------------------------------------------------------------------------------------------------------------------
 VAbstractArc::~VAbstractArc() = default;

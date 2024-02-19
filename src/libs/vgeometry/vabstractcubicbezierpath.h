@@ -57,10 +57,8 @@ public:
     auto operator=(const VAbstractCubicBezierPath &curve) -> VAbstractCubicBezierPath &;
     ~VAbstractCubicBezierPath() override;
 
-#ifdef Q_COMPILER_RVALUE_REFS
     VAbstractCubicBezierPath(VAbstractCubicBezierPath &&curve) noexcept = default;
     auto operator=(VAbstractCubicBezierPath &&curve) noexcept -> VAbstractCubicBezierPath & = default;
-#endif
 
     virtual auto CountSubSpl() const -> vsizetype = 0;
     virtual auto CountPoints() const -> vsizetype = 0;

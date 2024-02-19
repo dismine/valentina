@@ -48,10 +48,9 @@ public:
     ~VLengthLine() override;
 
     auto operator=(const VLengthLine &var) -> VLengthLine &;
-#ifdef Q_COMPILER_RVALUE_REFS
+
     VLengthLine(VLengthLine &&var) noexcept;
     auto operator=(VLengthLine &&var) noexcept -> VLengthLine &;
-#endif
 
     auto Filter(quint32 id) -> bool override;
 

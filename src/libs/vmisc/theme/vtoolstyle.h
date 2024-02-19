@@ -43,10 +43,8 @@ public:
     VToolStyle(const VToolStyle &) = default;
     auto operator=(const VToolStyle &) -> VToolStyle & = default;
 
-#ifdef Q_COMPILER_RVALUE_REFS
     VToolStyle(VToolStyle &&) = default;
     auto operator=(VToolStyle &&) -> VToolStyle & = default;
-#endif
 
     void LoadJson(QJsonObject const &json) override;
 

@@ -42,10 +42,9 @@ public:
     ~VSvgGlyph();
 
     auto operator=(const VSvgGlyph &glyph) -> VSvgGlyph &;
-#ifdef Q_COMPILER_RVALUE_REFS
+
     VSvgGlyph(VSvgGlyph &&glyph) noexcept;
     auto operator=(VSvgGlyph &&glyph) noexcept -> VSvgGlyph &;
-#endif
 
     void SetUnicode(const QChar &unicode);
     auto Unicode() const -> QChar;

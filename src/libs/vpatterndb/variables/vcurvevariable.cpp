@@ -61,7 +61,6 @@ auto VCurveVariable::operator=(const VCurveVariable &var) -> VCurveVariable &
     return *this;
 }
 
-#ifdef Q_COMPILER_RVALUE_REFS
 //---------------------------------------------------------------------------------------------------------------------
 VCurveVariable::VCurveVariable(VCurveVariable &&var) noexcept
   : VInternalVariable(std::move(var)),
@@ -76,7 +75,6 @@ auto VCurveVariable::operator=(VCurveVariable &&var) noexcept -> VCurveVariable 
     std::swap(d, var.d);
     return *this;
 }
-#endif
 
 //---------------------------------------------------------------------------------------------------------------------
 VCurveVariable::~VCurveVariable() = default;

@@ -54,10 +54,9 @@ public:
     ~VPiecePath();
 
     auto operator=(const VPiecePath &path) -> VPiecePath &;
-#ifdef Q_COMPILER_RVALUE_REFS
+
     VPiecePath(VPiecePath &&path) noexcept;
     auto operator=(VPiecePath &&path) noexcept -> VPiecePath &;
-#endif
 
     void Append(const VPieceNode &node);
     void Clear();

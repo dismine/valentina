@@ -64,10 +64,9 @@ public:
     ~VArc() override;
 
     auto operator=(const VArc &arc) -> VArc &;
-#ifdef Q_COMPILER_RVALUE_REFS
+
     VArc(VArc &&arc) noexcept;
     auto operator=(VArc &&arc) noexcept -> VArc &;
-#endif
 
     auto GetFormulaRadius() const -> QString;
     void SetFormulaRadius(const QString &formula, qreal value);

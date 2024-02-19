@@ -75,10 +75,9 @@ public:
     ~VLayoutPiece() override;
 
     auto operator=(const VLayoutPiece &detail) -> VLayoutPiece &;
-#ifdef Q_COMPILER_RVALUE_REFS
+
     VLayoutPiece(VLayoutPiece &&detail) noexcept;
     auto operator=(VLayoutPiece &&detail) noexcept -> VLayoutPiece &;
-#endif
 
     static auto Create(const VPiece &piece, vidtype id, const VContainer *pattern) -> VLayoutPiece;
     static auto ConvertPassmarks(const VPiece &piece, const VContainer *pattern) -> QVector<VLayoutPassmark>;

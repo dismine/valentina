@@ -80,10 +80,8 @@ public:
     VTextManager(const VTextManager &text) = default;
     auto operator=(const VTextManager &text) -> VTextManager & = default;
 
-#ifdef Q_COMPILER_RVALUE_REFS
     VTextManager(VTextManager &&text) = default;
     auto operator=(VTextManager &&text) -> VTextManager & = default;
-#endif
 
     virtual auto GetSpacing() const -> int;
 

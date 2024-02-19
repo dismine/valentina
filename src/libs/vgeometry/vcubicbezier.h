@@ -54,10 +54,9 @@ public:
     ~VCubicBezier() override;
 
     auto operator=(const VCubicBezier &curve) -> VCubicBezier &;
-#ifdef Q_COMPILER_RVALUE_REFS
+
     VCubicBezier(VCubicBezier &&curve) noexcept;
     auto operator=(VCubicBezier &&curve) noexcept -> VCubicBezier &;
-#endif
 
     auto GetP1() const -> VPointF override;
     void SetP1(const VPointF &p);

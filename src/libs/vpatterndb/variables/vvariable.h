@@ -48,10 +48,9 @@ public:
     ~VVariable() override;
 
     auto operator=(const VVariable &var) -> VVariable &;
-#ifdef Q_COMPILER_RVALUE_REFS
+
     VVariable(VVariable &&var) noexcept;
     auto operator=(VVariable &&var) noexcept -> VVariable &;
-#endif
 
     auto GetDescription() const -> QString;
     void SetDescription(const QString &desc);

@@ -47,10 +47,9 @@ public:
     VArcRadius(const VArcRadius &var) = default;
     auto operator=(const VArcRadius &var) -> VArcRadius &;
     ~VArcRadius() override = default;
-#ifdef Q_COMPILER_RVALUE_REFS
+
     VArcRadius(VArcRadius &&var) noexcept = default;
     auto operator=(VArcRadius &&var) noexcept -> VArcRadius & = default;
-#endif
 };
 
 #endif // VARCRADIUS_H

@@ -45,10 +45,9 @@ public:
     VKnownMeasurements(const VKnownMeasurements &measurements);
 
     auto operator=(const VKnownMeasurements &paper) -> VKnownMeasurements &;
-#ifdef Q_COMPILER_RVALUE_REFS
+
     VKnownMeasurements(VKnownMeasurements &&paper) noexcept;
     auto operator=(VKnownMeasurements &&paper) noexcept -> VKnownMeasurements &;
-#endif
 
     auto IsValid() const -> bool;
 
@@ -63,7 +62,7 @@ public:
 
     auto IsReadOnly() const -> bool;
     void SetReadOnly(bool ro);
-    
+
     auto Measurements() const -> QHash<QString, VKnownMeasurement>;
     auto OrderedMeasurements() const -> QMap<int, VKnownMeasurement>;
     auto OrderedGroupMeasurements(const QString &group) const -> QMap<int, VKnownMeasurement>;

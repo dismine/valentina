@@ -50,10 +50,9 @@ public:
     virtual ~VInternalVariable();
 
     auto operator=(const VInternalVariable &var) -> VInternalVariable &;
-#ifdef Q_COMPILER_RVALUE_REFS
+
     VInternalVariable(VInternalVariable &&var) noexcept;
     auto operator=(VInternalVariable &&var) noexcept -> VInternalVariable &;
-#endif
 
     virtual auto GetValue() const -> qreal;
     virtual auto GetValue() -> qreal *;

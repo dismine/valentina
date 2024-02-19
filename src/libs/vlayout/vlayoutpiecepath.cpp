@@ -72,7 +72,6 @@ auto VLayoutPiecePath::operator=(const VLayoutPiecePath &path) -> VLayoutPiecePa
     return *this;
 }
 
-#ifdef Q_COMPILER_RVALUE_REFS
 //---------------------------------------------------------------------------------------------------------------------
 VLayoutPiecePath::VLayoutPiecePath(VLayoutPiecePath &&path) noexcept
   : d(std::move(path.d))
@@ -85,7 +84,6 @@ auto VLayoutPiecePath::operator=(VLayoutPiecePath &&path) noexcept -> VLayoutPie
     std::swap(d, path.d);
     return *this;
 }
-#endif
 
 //---------------------------------------------------------------------------------------------------------------------
 VLayoutPiecePath::~VLayoutPiecePath() = default;

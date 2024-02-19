@@ -119,7 +119,6 @@ auto VNodeDetail::operator=(const VNodeDetail &node) -> VNodeDetail &
     return *this;
 }
 
-#ifdef Q_COMPILER_RVALUE_REFS
 //---------------------------------------------------------------------------------------------------------------------
 VNodeDetail::VNodeDetail(VNodeDetail &&node) noexcept
   : d(std::move(node.d))
@@ -132,7 +131,6 @@ auto VNodeDetail::operator=(VNodeDetail &&node) noexcept -> VNodeDetail &
     std::swap(d, node.d);
     return *this;
 }
-#endif
 
 //---------------------------------------------------------------------------------------------------------------------
 VNodeDetail::~VNodeDetail() = default;

@@ -119,7 +119,6 @@ auto VContour::operator=(const VContour &contour) -> VContour &
     return *this;
 }
 
-#ifdef Q_COMPILER_RVALUE_REFS
 //---------------------------------------------------------------------------------------------------------------------
 VContour::VContour(VContour &&contour) noexcept
   : d(std::move(contour.d))
@@ -132,7 +131,6 @@ auto VContour::operator=(VContour &&contour) noexcept -> VContour &
     std::swap(d, contour.d);
     return *this;
 }
-#endif
 
 //---------------------------------------------------------------------------------------------------------------------
 VContour::~VContour() = default;

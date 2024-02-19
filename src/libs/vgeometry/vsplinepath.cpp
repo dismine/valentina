@@ -312,7 +312,6 @@ auto VSplinePath::operator=(const VSplinePath &path) -> VSplinePath &
     return *this;
 }
 
-#ifdef Q_COMPILER_RVALUE_REFS
 //---------------------------------------------------------------------------------------------------------------------
 VSplinePath::VSplinePath(VSplinePath &&splPath) noexcept
   : VAbstractCubicBezierPath(std::move(splPath)),
@@ -327,7 +326,6 @@ auto VSplinePath::operator=(VSplinePath &&path) noexcept -> VSplinePath &
     std::swap(d, path.d);
     return *this;
 }
-#endif
 
 //---------------------------------------------------------------------------------------------------------------------
 /**

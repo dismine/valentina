@@ -47,10 +47,9 @@ public:
     ~VLineAngle() override;
 
     auto operator=(const VLineAngle &var) -> VLineAngle &;
-#ifdef Q_COMPILER_RVALUE_REFS
+
     VLineAngle(VLineAngle &&var) noexcept;
     auto operator=(VLineAngle &&var) noexcept -> VLineAngle &;
-#endif
 
     auto Filter(quint32 id) -> bool override;
 

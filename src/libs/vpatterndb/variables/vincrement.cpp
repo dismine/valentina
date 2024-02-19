@@ -70,7 +70,6 @@ auto VIncrement::operator=(const VIncrement &incr) -> VIncrement &
     return *this;
 }
 
-#ifdef Q_COMPILER_RVALUE_REFS
 //---------------------------------------------------------------------------------------------------------------------
 VIncrement::VIncrement(VIncrement &&incr) noexcept
   : VVariable(std::move(incr)),
@@ -85,7 +84,6 @@ auto VIncrement::operator=(VIncrement &&incr) noexcept -> VIncrement &
     std::swap(d, incr.d);
     return *this;
 }
-#endif
 
 //---------------------------------------------------------------------------------------------------------------------
 VIncrement::~VIncrement() = default;

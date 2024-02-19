@@ -252,7 +252,6 @@ auto VPiecePath::operator=(const VPiecePath &path) -> VPiecePath &
     return *this;
 }
 
-#ifdef Q_COMPILER_RVALUE_REFS
 //---------------------------------------------------------------------------------------------------------------------
 VPiecePath::VPiecePath(VPiecePath &&path) noexcept
   : d(std::move(path.d))
@@ -265,7 +264,6 @@ auto VPiecePath::operator=(VPiecePath &&path) noexcept -> VPiecePath &
     std::swap(d, path.d);
     return *this;
 }
-#endif
 
 //---------------------------------------------------------------------------------------------------------------------
 VPiecePath::~VPiecePath() = default;

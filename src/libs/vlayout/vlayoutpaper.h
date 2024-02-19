@@ -56,10 +56,9 @@ public:
     ~VLayoutPaper();
 
     auto operator=(const VLayoutPaper &paper) -> VLayoutPaper &;
-#ifdef Q_COMPILER_RVALUE_REFS
+
     VLayoutPaper(VLayoutPaper &&paper) noexcept;
     auto operator=(VLayoutPaper &&paper) noexcept -> VLayoutPaper &;
-#endif
 
     auto GetHeight() const -> int;
     void SetHeight(int height);

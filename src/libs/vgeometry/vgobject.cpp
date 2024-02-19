@@ -125,7 +125,6 @@ auto VGObject::operator=(const VGObject &obj) -> VGObject &
     return *this;
 }
 
-#ifdef Q_COMPILER_RVALUE_REFS
 //---------------------------------------------------------------------------------------------------------------------
 VGObject::VGObject(VGObject &&obj) noexcept
   : d(std::move(obj.d))
@@ -138,7 +137,6 @@ auto VGObject::operator=(VGObject &&obj) noexcept -> VGObject &
     std::swap(d, obj.d);
     return *this;
 }
-#endif
 
 //---------------------------------------------------------------------------------------------------------------------
 VGObject::~VGObject() = default;

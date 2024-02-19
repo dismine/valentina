@@ -45,10 +45,9 @@ public:
     ~VSvgFontEngine();
 
     auto operator=(const VSvgFontEngine &engine) -> VSvgFontEngine &;
-#ifdef Q_COMPILER_RVALUE_REFS
+
     VSvgFontEngine(VSvgFontEngine &&engine) noexcept;
     auto operator=(VSvgFontEngine &&engine) noexcept -> VSvgFontEngine &;
-#endif
 
     auto Font() const -> VSvgFont;
     void SetFont(const VSvgFont &fnt);

@@ -66,10 +66,8 @@ struct VAbstractToolInitData
     VAbstractToolInitData(const VAbstractToolInitData &) = default;
     auto operator=(const VAbstractToolInitData &) -> VAbstractToolInitData & = default;
 
-#ifdef Q_COMPILER_RVALUE_REFS
     VAbstractToolInitData(VAbstractToolInitData &&) = default;
     auto operator=(VAbstractToolInitData &&) -> VAbstractToolInitData & = default;
-#endif
 
     /** @brief id tool id, 0 if tool doesn't exist yet.*/
     quint32 id;

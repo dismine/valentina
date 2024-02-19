@@ -34,9 +34,13 @@ class VPiece;
 class VContainer;
 class VPieceAreaData;
 
-enum class PieceAreaType : qint8 { External, SeamLine };
+enum class PieceAreaType : qint8
+{
+    External,
+    SeamLine
+};
 
-class VPieceArea final :public VInternalVariable
+class VPieceArea final : public VInternalVariable
 {
 public:
     VPieceArea();
@@ -45,16 +49,16 @@ public:
     ~VPieceArea() override;
 
     auto operator=(const VPieceArea &var) -> VPieceArea &;
-#ifdef Q_COMPILER_RVALUE_REFS
+
     VPieceArea(VPieceArea &&var) noexcept;
     auto operator=(VPieceArea &&var) noexcept -> VPieceArea &;
-#endif
 
     void SetValue(quint32 pieceId, const VPiece &piece, const VContainer *data, Unit unit);
 
     auto GetPieceId() const -> quint32;
 
     static auto PieceShortName(const VPiece &piece) -> QString;
+
 private:
     QSharedDataPointer<VPieceAreaData> d;
 };

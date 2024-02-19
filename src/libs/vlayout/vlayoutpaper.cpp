@@ -79,7 +79,6 @@ auto VLayoutPaper::operator=(const VLayoutPaper &paper) -> VLayoutPaper &
     return *this;
 }
 
-#ifdef Q_COMPILER_RVALUE_REFS
 //---------------------------------------------------------------------------------------------------------------------
 VLayoutPaper::VLayoutPaper(VLayoutPaper &&paper) noexcept
   : d(std::move(paper.d))
@@ -92,7 +91,6 @@ auto VLayoutPaper::operator=(VLayoutPaper &&paper) noexcept -> VLayoutPaper &
     std::swap(d, paper.d);
     return *this;
 }
-#endif
 
 //---------------------------------------------------------------------------------------------------------------------
 VLayoutPaper::~VLayoutPaper() = default;

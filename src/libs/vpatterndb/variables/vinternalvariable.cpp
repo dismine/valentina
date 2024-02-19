@@ -55,14 +55,12 @@ VInternalVariable::VInternalVariable(VInternalVariable &&var) noexcept
 {
 }
 
-#ifdef Q_COMPILER_RVALUE_REFS
 //---------------------------------------------------------------------------------------------------------------------
 auto VInternalVariable::operator=(VInternalVariable &&var) noexcept -> VInternalVariable &
 {
     std::swap(d, var.d);
     return *this;
 }
-#endif
 
 //---------------------------------------------------------------------------------------------------------------------
 VInternalVariable::~VInternalVariable() = default;

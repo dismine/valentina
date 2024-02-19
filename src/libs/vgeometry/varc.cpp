@@ -118,7 +118,6 @@ auto VArc::operator=(const VArc &arc) -> VArc &
     return *this;
 }
 
-#ifdef Q_COMPILER_RVALUE_REFS
 //---------------------------------------------------------------------------------------------------------------------
 VArc::VArc(VArc &&arc) noexcept
   : VAbstractArc(std::move(arc)),
@@ -133,7 +132,6 @@ auto VArc::operator=(VArc &&arc) noexcept -> VArc &
     std::swap(d, arc.d);
     return *this;
 }
-#endif
 
 //---------------------------------------------------------------------------------------------------------------------
 auto VArc::Rotate(const QPointF &originPoint, qreal degrees, const QString &prefix) const -> VArc

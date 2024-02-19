@@ -51,10 +51,9 @@ public:
     ~VPieceGrainline();
 
     auto operator=(const VPieceGrainline &grainline) -> VPieceGrainline &;
-#ifdef Q_COMPILER_RVALUE_REFS
+
     VPieceGrainline(VPieceGrainline &&grainline) noexcept;
     auto operator=(VPieceGrainline &&grainline) noexcept -> VPieceGrainline &;
-#endif
 
     auto GetMainLine() const -> QLineF;
     void SetMainLine(const QLineF &mainLine);

@@ -58,10 +58,9 @@ public:
     ~VAbstractArc() override;
 
     auto operator=(const VAbstractArc &arc) -> VAbstractArc &;
-#ifdef Q_COMPILER_RVALUE_REFS
+
     VAbstractArc(VAbstractArc &&arc) noexcept;
     auto operator=(VAbstractArc &&arc) noexcept -> VAbstractArc &;
-#endif
 
     auto GetFormulaF1() const -> QString;
     void SetFormulaF1(const QString &formula, qreal value);

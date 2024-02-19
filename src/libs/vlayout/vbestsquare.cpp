@@ -68,7 +68,6 @@ auto VBestSquare::operator=(const VBestSquare &res) -> VBestSquare &
     return *this;
 }
 
-#ifdef Q_COMPILER_RVALUE_REFS
 //---------------------------------------------------------------------------------------------------------------------
 VBestSquare::VBestSquare(VBestSquare &&res) noexcept
   : d(std::move(res.d))
@@ -81,7 +80,6 @@ auto VBestSquare::operator=(VBestSquare &&res) noexcept -> VBestSquare &
     std::swap(d, res.d);
     return *this;
 }
-#endif
 
 //---------------------------------------------------------------------------------------------------------------------
 void VBestSquare::NewResult(const VBestSquareResData &data)

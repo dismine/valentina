@@ -42,10 +42,8 @@ public:
     VManualLayoutStyle(const VManualLayoutStyle &) = default;
     auto operator=(const VManualLayoutStyle &) -> VManualLayoutStyle & = default;
 
-#ifdef Q_COMPILER_RVALUE_REFS
     VManualLayoutStyle(VManualLayoutStyle &&) = default;
     auto operator=(VManualLayoutStyle &&) -> VManualLayoutStyle & = default;
-#endif
 
     void LoadJson(QJsonObject const &json) override;
 

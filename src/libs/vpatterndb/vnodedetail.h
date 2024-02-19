@@ -73,10 +73,9 @@ public:
      * @return node
      */
     auto operator=(const VNodeDetail &node) -> VNodeDetail &;
-#ifdef Q_COMPILER_RVALUE_REFS
+
     VNodeDetail(VNodeDetail &&node) noexcept;
     auto operator=(VNodeDetail &&node) noexcept -> VNodeDetail &;
-#endif
 
     /**
      * @brief getId return object id.

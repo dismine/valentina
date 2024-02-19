@@ -43,10 +43,8 @@ public:
     VAbstractPropertyFactory(const VAbstractPropertyFactory &) = default;
     auto operator=(const VAbstractPropertyFactory &) -> VAbstractPropertyFactory & = default;
 
-#ifdef Q_COMPILER_RVALUE_REFS
     VAbstractPropertyFactory(VAbstractPropertyFactory &&) = default;
     auto operator=(VAbstractPropertyFactory &&) -> VAbstractPropertyFactory & = default;
-#endif
 
     //! Creates a new property of a certain type and assigns a name and description (otionally)
     //! \param type The type of the property as string

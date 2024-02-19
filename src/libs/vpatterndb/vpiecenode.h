@@ -48,10 +48,9 @@ public:
     ~VPieceNode();
 
     auto operator=(const VPieceNode &node) -> VPieceNode &;
-#ifdef Q_COMPILER_RVALUE_REFS
+
     VPieceNode(VPieceNode &&node) noexcept;
     auto operator=(VPieceNode &&node) noexcept -> VPieceNode &;
-#endif
 
     friend auto operator<<(QDataStream &out, const VPieceNode &p) -> QDataStream &;
     friend auto operator>>(QDataStream &in, VPieceNode &p) -> QDataStream &;

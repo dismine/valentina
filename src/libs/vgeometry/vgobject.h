@@ -63,10 +63,9 @@ public:
     virtual ~VGObject();
 
     auto operator=(const VGObject &obj) -> VGObject &;
-#ifdef Q_COMPILER_RVALUE_REFS
+
     VGObject(VGObject &&obj) noexcept;
     auto operator=(VGObject &&obj) noexcept -> VGObject &;
-#endif
 
     auto getIdObject() const -> quint32;
     void setIdObject(const quint32 &value);

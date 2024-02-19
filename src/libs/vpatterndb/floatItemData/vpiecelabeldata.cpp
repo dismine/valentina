@@ -53,7 +53,6 @@ auto VPieceLabelData::operator=(const VPieceLabelData &data) -> VPieceLabelData 
     return *this;
 }
 
-#ifdef Q_COMPILER_RVALUE_REFS
 //---------------------------------------------------------------------------------------------------------------------
 VPieceLabelData::VPieceLabelData(VPieceLabelData &&data) noexcept
   : VPatternLabelData(std::move(data)),
@@ -68,7 +67,6 @@ auto VPieceLabelData::operator=(VPieceLabelData &&data) noexcept -> VPieceLabelD
     std::swap(d, data.d);
     return *this;
 }
-#endif
 
 //---------------------------------------------------------------------------------------------------------------------
 VPieceLabelData::~VPieceLabelData() = default;

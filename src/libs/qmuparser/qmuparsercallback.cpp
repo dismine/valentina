@@ -237,7 +237,6 @@ auto QmuParserCallback::operator=(const QmuParserCallback &a_Fun) -> QmuParserCa
     return *this;
 }
 
-#ifdef Q_COMPILER_RVALUE_REFS
 //---------------------------------------------------------------------------------------------------------------------
 QmuParserCallback::QmuParserCallback(QmuParserCallback &&a_Fun) noexcept
   : d(std::move(a_Fun.d))
@@ -250,7 +249,6 @@ auto QmuParserCallback::operator=(QmuParserCallback &&a_Fun) noexcept -> QmuPars
     std::swap(d, a_Fun.d);
     return *this;
 }
-#endif
 
 //---------------------------------------------------------------------------------------------------------------------
 /**

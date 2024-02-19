@@ -235,7 +235,6 @@ auto VPlaceLabelItem::operator=(const VPlaceLabelItem &item) -> VPlaceLabelItem 
     return *this;
 }
 
-#ifdef Q_COMPILER_RVALUE_REFS
 //---------------------------------------------------------------------------------------------------------------------
 VPlaceLabelItem::VPlaceLabelItem(VPlaceLabelItem &&item) noexcept
   : VPointF(std::move(item)),
@@ -250,4 +249,3 @@ auto VPlaceLabelItem::operator=(VPlaceLabelItem &&item) noexcept -> VPlaceLabelI
     std::swap(d, item.d);
     return *this;
 }
-#endif

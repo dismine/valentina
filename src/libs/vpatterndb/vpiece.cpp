@@ -139,7 +139,6 @@ auto VPiece::operator=(const VPiece &piece) -> VPiece &
     return *this;
 }
 
-#ifdef Q_COMPILER_RVALUE_REFS
 //---------------------------------------------------------------------------------------------------------------------
 VPiece::VPiece(VPiece &&piece) noexcept
   : VAbstractPiece(std::move(piece)),
@@ -154,7 +153,6 @@ auto VPiece::operator=(VPiece &&piece) noexcept -> VPiece &
     std::swap(d, piece.d);
     return *this;
 }
-#endif
 
 //---------------------------------------------------------------------------------------------------------------------
 VPiece::~VPiece() = default;

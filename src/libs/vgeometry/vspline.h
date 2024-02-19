@@ -64,10 +64,9 @@ public:
     ~VSpline() override;
 
     auto operator=(const VSpline &spline) -> VSpline &;
-#ifdef Q_COMPILER_RVALUE_REFS
+
     VSpline(VSpline &&spline) noexcept;
     auto operator=(VSpline &&spline) noexcept -> VSpline &;
-#endif
 
     auto GetP1() const -> VPointF override;
     void SetP1(const VPointF &p);

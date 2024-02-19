@@ -74,7 +74,6 @@ auto VCubicBezierPath::operator=(const VCubicBezierPath &curve) -> VCubicBezierP
     return *this;
 }
 
-#ifdef Q_COMPILER_RVALUE_REFS
 //---------------------------------------------------------------------------------------------------------------------
 VCubicBezierPath::VCubicBezierPath(VCubicBezierPath &&curve) noexcept
   : VAbstractCubicBezierPath(std::move(curve)),
@@ -89,7 +88,6 @@ auto VCubicBezierPath::operator=(VCubicBezierPath &&curve) noexcept -> VCubicBez
     std::swap(d, curve.d);
     return *this;
 }
-#endif
 
 //---------------------------------------------------------------------------------------------------------------------
 auto VCubicBezierPath::Rotate(const QPointF &originPoint, qreal degrees, const QString &prefix) const

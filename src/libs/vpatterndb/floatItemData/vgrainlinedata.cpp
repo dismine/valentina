@@ -54,7 +54,6 @@ auto VGrainlineData::operator=(const VGrainlineData &data) -> VGrainlineData &
     return *this;
 }
 
-#ifdef Q_COMPILER_RVALUE_REFS
 //---------------------------------------------------------------------------------------------------------------------
 VGrainlineData::VGrainlineData(VGrainlineData &&data) noexcept
   : VAbstractFloatItemData(std::move(data)),
@@ -69,7 +68,6 @@ auto VGrainlineData::operator=(VGrainlineData &&data) noexcept -> VGrainlineData
     std::swap(d, data.d);
     return *this;
 }
-#endif
 
 //---------------------------------------------------------------------------------------------------------------------
 VGrainlineData::~VGrainlineData() = default;

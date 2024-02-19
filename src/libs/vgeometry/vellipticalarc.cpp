@@ -320,7 +320,6 @@ auto VEllipticalArc::operator=(const VEllipticalArc &arc) -> VEllipticalArc &
     return *this;
 }
 
-#ifdef Q_COMPILER_RVALUE_REFS
 //---------------------------------------------------------------------------------------------------------------------
 VEllipticalArc::VEllipticalArc(VEllipticalArc &&arc) noexcept
   : VAbstractArc(std::move(arc)),
@@ -335,7 +334,6 @@ auto VEllipticalArc::operator=(VEllipticalArc &&arc) noexcept -> VEllipticalArc 
     std::swap(d, arc.d);
     return *this;
 }
-#endif
 
 //---------------------------------------------------------------------------------------------------------------------
 auto VEllipticalArc::Rotate(QPointF originPoint, qreal degrees, const QString &prefix) const -> VEllipticalArc

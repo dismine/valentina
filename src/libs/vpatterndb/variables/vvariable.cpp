@@ -62,7 +62,6 @@ auto VVariable::operator=(const VVariable &var) -> VVariable &
     return *this;
 }
 
-#ifdef Q_COMPILER_RVALUE_REFS
 //---------------------------------------------------------------------------------------------------------------------
 VVariable::VVariable(VVariable &&var) noexcept
   : VInternalVariable(std::move(var)),
@@ -77,7 +76,6 @@ auto VVariable::operator=(VVariable &&var) noexcept -> VVariable &
     std::swap(d, var.d);
     return *this;
 }
-#endif
 
 //---------------------------------------------------------------------------------------------------------------------
 VVariable::~VVariable() = default;

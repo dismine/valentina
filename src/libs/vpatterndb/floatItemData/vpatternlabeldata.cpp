@@ -52,7 +52,6 @@ auto VPatternLabelData::operator=(const VPatternLabelData &data) -> VPatternLabe
     return *this;
 }
 
-#ifdef Q_COMPILER_RVALUE_REFS
 //---------------------------------------------------------------------------------------------------------------------
 VPatternLabelData::VPatternLabelData(VPatternLabelData &&data) noexcept
   : VAbstractFloatItemData(std::move(data)),
@@ -67,7 +66,6 @@ auto VPatternLabelData::operator=(VPatternLabelData &&data) noexcept -> VPattern
     std::swap(d, data.d);
     return *this;
 }
-#endif
 
 //---------------------------------------------------------------------------------------------------------------------
 VPatternLabelData::~VPatternLabelData() = default;

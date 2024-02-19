@@ -61,7 +61,6 @@ auto VPieceNode::operator=(const VPieceNode &node) -> VPieceNode &
     return *this;
 }
 
-#ifdef Q_COMPILER_RVALUE_REFS
 //---------------------------------------------------------------------------------------------------------------------
 VPieceNode::VPieceNode(VPieceNode &&node) noexcept
   : d(std::move(node.d))
@@ -74,7 +73,6 @@ auto VPieceNode::operator=(VPieceNode &&node) noexcept -> VPieceNode &
     std::swap(d, node.d);
     return *this;
 }
-#endif
 
 //---------------------------------------------------------------------------------------------------------------------
 VPieceNode::~VPieceNode() = default;

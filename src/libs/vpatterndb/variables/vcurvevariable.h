@@ -46,10 +46,9 @@ public:
     ~VCurveVariable() override;
 
     auto operator=(const VCurveVariable &var) -> VCurveVariable &;
-#ifdef Q_COMPILER_RVALUE_REFS
+
     VCurveVariable(VCurveVariable &&var) noexcept;
     auto operator=(VCurveVariable &&var) noexcept -> VCurveVariable &;
-#endif
 
     auto Filter(quint32 id) -> bool override;
 

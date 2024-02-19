@@ -64,7 +64,6 @@ auto VSvgFont::operator=(const VSvgFont &font) -> VSvgFont &
     return *this;
 }
 
-#ifdef Q_COMPILER_RVALUE_REFS
 //---------------------------------------------------------------------------------------------------------------------
 VSvgFont::VSvgFont(VSvgFont &&font) noexcept
   : d(std::move(font.d))
@@ -77,7 +76,6 @@ auto VSvgFont::operator=(VSvgFont &&font) noexcept -> VSvgFont &
     std::swap(d, font.d);
     return *this;
 }
-#endif
 
 //---------------------------------------------------------------------------------------------------------------------
 void VSvgFont::SetId(const QString &id)

@@ -52,10 +52,9 @@ public:
     ~VIncrement() override;
 
     auto operator=(const VIncrement &incr) -> VIncrement &;
-#ifdef Q_COMPILER_RVALUE_REFS
+
     VIncrement(VIncrement &&incr) noexcept;
     auto operator=(VIncrement &&incr) noexcept -> VIncrement &;
-#endif
 
     void SetFormula(qreal base, const QString &formula, bool ok);
     auto GetFormula() const -> QString;

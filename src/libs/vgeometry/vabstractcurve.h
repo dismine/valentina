@@ -58,10 +58,9 @@ public:
     ~VAbstractCurve() override;
 
     auto operator=(const VAbstractCurve &curve) -> VAbstractCurve &;
-#ifdef Q_COMPILER_RVALUE_REFS
+
     VAbstractCurve(VAbstractCurve &&curve) noexcept;
     auto operator=(VAbstractCurve &&curve) noexcept -> VAbstractCurve &;
-#endif
 
     virtual auto GetPoints() const -> QVector<QPointF> = 0;
     static auto GetSegmentPoints(const QVector<QPointF> &points, const QPointF &begin, const QPointF &end, bool reverse,

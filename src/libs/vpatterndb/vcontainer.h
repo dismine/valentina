@@ -120,10 +120,9 @@ public:
     friend class VContainerData;
 
     auto operator=(const VContainer &data) -> VContainer &;
-#ifdef Q_COMPILER_RVALUE_REFS
+
     VContainer(VContainer &&data) noexcept;
     auto operator=(VContainer &&data) noexcept -> VContainer &;
-#endif
 
     static auto UniqueNamespace() -> QString;
 

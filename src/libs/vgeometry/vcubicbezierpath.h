@@ -56,10 +56,9 @@ public:
     ~VCubicBezierPath() override;
 
     auto operator=(const VCubicBezierPath &curve) -> VCubicBezierPath &;
-#ifdef Q_COMPILER_RVALUE_REFS
+
     VCubicBezierPath(VCubicBezierPath &&curve) noexcept;
     auto operator=(VCubicBezierPath &&curve) noexcept -> VCubicBezierPath &;
-#endif
 
     auto operator[](vsizetype indx) -> VPointF &;
 

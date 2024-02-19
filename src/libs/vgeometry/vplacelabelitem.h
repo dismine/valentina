@@ -47,10 +47,9 @@ public:
     ~VPlaceLabelItem() override;
 
     auto operator=(const VPlaceLabelItem &item) -> VPlaceLabelItem &;
-#ifdef Q_COMPILER_RVALUE_REFS
+
     VPlaceLabelItem(VPlaceLabelItem &&item) noexcept;
     auto operator=(VPlaceLabelItem &&item) noexcept -> VPlaceLabelItem &;
-#endif
 
     auto GetWidthFormula() const -> QString;
     auto GetWidthFormula() -> QString &;
