@@ -80,8 +80,8 @@ public:
     VTextManager(const VTextManager &text) = default;
     auto operator=(const VTextManager &text) -> VTextManager & = default;
 
-    VTextManager(VTextManager &&text) = default;
-    auto operator=(VTextManager &&text) -> VTextManager & = default;
+    VTextManager(VTextManager &&text) noexcept = default;
+    auto operator=(VTextManager &&text) noexcept -> VTextManager & = default;
 
     virtual auto GetSpacing() const -> int;
 

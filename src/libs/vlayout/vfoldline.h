@@ -63,10 +63,17 @@ struct ThreeDotsPosData
 
 struct FoldLabelPosData
 {
-    QFont font{};
-    QPointF pos{};
-    QString label{};
-    qreal angle{0};
+    QFont font{};    // NOLINT(misc-non-private-member-variables-in-classes)
+    QPointF pos{};   // NOLINT(misc-non-private-member-variables-in-classes)
+    QString label{}; // NOLINT(misc-non-private-member-variables-in-classes)
+    qreal angle{0};  // NOLINT(misc-non-private-member-variables-in-classes)
+
+    FoldLabelPosData() = default;
+    FoldLabelPosData(FoldLabelPosData &&) noexcept = default;
+    auto operator=(FoldLabelPosData &&) noexcept -> FoldLabelPosData & = default;
+    FoldLabelPosData(const FoldLabelPosData &) = default;
+    auto operator=(const FoldLabelPosData &) -> FoldLabelPosData & = default;
+    ~FoldLabelPosData() = default;
 };
 
 class VFoldLine
@@ -76,6 +83,11 @@ class VFoldLine
 public:
     VFoldLine() = default;
     VFoldLine(const QLineF &line, FoldLineType type);
+    VFoldLine(VFoldLine &&) noexcept = default;
+    auto operator=(VFoldLine &&) noexcept -> VFoldLine & = default;
+    VFoldLine(const VFoldLine &) = default;
+    auto operator=(const VFoldLine &) -> VFoldLine & = default;
+    ~VFoldLine() = default;
 
     void SetHeight(qreal newHeight);
     void SetWidth(qreal newWidth);

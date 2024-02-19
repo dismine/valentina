@@ -112,6 +112,4 @@ static inline void q_dispatch_async_main(const msgHandlerBlock &block, QtMsgType
     q_dispatch_async(mainThread, block, type, context, msg);
 }
 
-#undef V_UNUSED
-
 #endif // THREAD_DISPATCHER_H

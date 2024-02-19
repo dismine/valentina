@@ -260,17 +260,24 @@ struct VLabelTemplateLine
 
 struct VWatermarkData
 {
-    int opacity{20};
-    bool showText{true};
-    QString text{};
-    int textRotation{0};
-    QFont font{};
-    bool showImage{true};
-    QString path{};
-    int imageRotation{0};
-    bool grayscale{false};
-    bool invalidFile{false};
-    QColor textColor{Qt::black};
+    int opacity{20};             // NOLINT(misc-non-private-member-variables-in-classes)
+    bool showText{true};         // NOLINT(misc-non-private-member-variables-in-classes)
+    QString text{};              // NOLINT(misc-non-private-member-variables-in-classes)
+    int textRotation{0};         // NOLINT(misc-non-private-member-variables-in-classes)
+    QFont font{};                // NOLINT(misc-non-private-member-variables-in-classes)
+    bool showImage{true};        // NOLINT(misc-non-private-member-variables-in-classes)
+    QString path{};              // NOLINT(misc-non-private-member-variables-in-classes)
+    int imageRotation{0};        // NOLINT(misc-non-private-member-variables-in-classes)
+    bool grayscale{false};       // NOLINT(misc-non-private-member-variables-in-classes)
+    bool invalidFile{false};     // NOLINT(misc-non-private-member-variables-in-classes)
+    QColor textColor{Qt::black}; // NOLINT(misc-non-private-member-variables-in-classes)
+
+    VWatermarkData() = default;
+    VWatermarkData(VWatermarkData &&) noexcept = default;
+    auto operator=(VWatermarkData &&) noexcept -> VWatermarkData & = default;
+    VWatermarkData(const VWatermarkData &) = default;
+    auto operator=(const VWatermarkData &) -> VWatermarkData & = default;
+    ~VWatermarkData() = default;
 };
 
 QT_WARNING_POP

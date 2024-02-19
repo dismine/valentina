@@ -102,8 +102,15 @@ struct VBestSquareResData
 
 struct VCachedPositions
 {
-    QRectF boundingRect{};
-    QPainterPath layoutAllowancePath{};
+    QRectF boundingRect{};              // NOLINT(misc-non-private-member-variables-in-classes)
+    QPainterPath layoutAllowancePath{}; // NOLINT(misc-non-private-member-variables-in-classes)
+
+    VCachedPositions() = default;
+    VCachedPositions(VCachedPositions &&) noexcept = default;
+    auto operator=(VCachedPositions &&) noexcept -> VCachedPositions & = default;
+    VCachedPositions(const VCachedPositions &) = default;
+    auto operator=(const VCachedPositions &) -> VCachedPositions & = default;
+    ~VCachedPositions() = default;
 };
 
 enum class Cases : qint8

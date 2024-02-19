@@ -93,9 +93,16 @@ QT_WARNING_DISABLE_GCC("-Weffc++")
 
 struct VFormulaField
 {
-    QString expression;
-    QDomElement element;
-    QString attribute;
+    QString expression;  // NOLINT(misc-non-private-member-variables-in-classes)
+    QDomElement element; // NOLINT(misc-non-private-member-variables-in-classes)
+    QString attribute;   // NOLINT(misc-non-private-member-variables-in-classes)
+
+    VFormulaField() = default;
+    VFormulaField(VFormulaField &&) noexcept = default;
+    auto operator=(VFormulaField &&) noexcept -> VFormulaField & = default;
+    VFormulaField(const VFormulaField &) = default;
+    auto operator=(const VFormulaField &) -> VFormulaField & = default;
+    ~VFormulaField() = default;
 };
 
 struct VFinalMeasurement
