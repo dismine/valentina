@@ -282,8 +282,8 @@ auto DrawName(VAbstractPattern *doc, quint32 d1id, quint32 d2id) -> QString
         return {};
     }
 
-    const QString draw1Name = draw1.attribute(VAbstractPattern::AttrName);
-    const QString draw2Name = draw2.attribute(VAbstractPattern::AttrName);
+    QString draw1Name = draw1.attribute(VAbstractPattern::AttrName);
+    QString draw2Name = draw2.attribute(VAbstractPattern::AttrName);
 
     if (draw1Name == draw2Name)
     {

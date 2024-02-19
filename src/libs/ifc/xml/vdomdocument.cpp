@@ -574,7 +574,7 @@ auto VDomDocument::GetParametrString(const QDomElement &domElement, const QStrin
 {
     Q_ASSERT_X(not name.isEmpty(), Q_FUNC_INFO, "name of parametr is empty");
     Q_ASSERT_X(not domElement.isNull(), Q_FUNC_INFO, "domElement is null");
-    const QString parameter = domElement.attribute(name, defValue);
+    QString parameter = domElement.attribute(name, defValue);
     if (parameter.isEmpty())
     {
         if (defValue.isEmpty())
@@ -664,7 +664,7 @@ auto VDomDocument::UniqueTagText(const QString &tagName, const QString &defVal) 
     QDomElement const domElement = UniqueTag(tagName);
     if (not domElement.isNull())
     {
-        const QString text = domElement.text();
+        QString text = domElement.text();
         if (text.isEmpty())
         {
             return defVal;

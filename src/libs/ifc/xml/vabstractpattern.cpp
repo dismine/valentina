@@ -2778,7 +2778,7 @@ auto VAbstractPattern::ReadPatternNumber() const -> QString
 //---------------------------------------------------------------------------------------------------------------------
 auto VAbstractPattern::ReadLabelDateFormat() const -> QString
 {
-    const QString globalLabelDateFormat = VAbstractApplication::VApp()->Settings()->GetLabelDateFormat();
+    QString globalLabelDateFormat = VAbstractApplication::VApp()->Settings()->GetLabelDateFormat();
 
     const QDomNodeList list = elementsByTagName(TagPatternLabel);
     if (list.isEmpty())

@@ -1058,7 +1058,7 @@ void VPLayoutFileReader::AssertRootTag(const QString &tag) const
 auto VPLayoutFileReader::ReadAttributeString(const QXmlStreamAttributes &attribs, const QString &name,
                                              const QString &defValue) -> QString
 {
-    const QString parameter = attribs.value(name).toString();
+    QString parameter = attribs.value(name).toString();
     if (parameter.isEmpty())
     {
         if (defValue.isEmpty())
