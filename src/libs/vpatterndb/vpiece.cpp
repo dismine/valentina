@@ -266,7 +266,7 @@ auto VPiece::PassmarksLines(const VContainer *data) const -> QVector<QLineF>
 {
     QVector<VPassmark> const passmarks = Passmarks(data);
     QVector<QLineF> lines;
-    for (auto &passmark : passmarks)
+    for (const auto &passmark : passmarks)
     {
         if (not passmark.IsNull())
         {
@@ -1211,7 +1211,7 @@ auto VPiece::IsPassmarkVisible(const QVector<VPieceNode> &path, vsizetype passma
         return true;
     }
 
-    for (auto &record : records)
+    for (const auto &record : records)
     {
         if (record.includeType == PiecePathIncludeType::AsCustomSA)
         {

@@ -357,7 +357,7 @@ auto VBoundary::InsertDisconnect(QList<VBoundarySequenceItemData> &sequence, int
     }
 
     QVector<QVector<VLayoutPoint>> const shape = PreparePassmarkShape(passmark, drawMode, item.mirror);
-    for (auto &subShape : shape)
+    for (const auto &subShape : shape)
     {
         sequence.insert(i, PrepareSequenceItem(subShape, drawMode, VBoundarySequenceItem::PassmarkShape));
     }

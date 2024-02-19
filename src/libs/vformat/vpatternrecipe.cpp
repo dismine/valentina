@@ -758,7 +758,7 @@ auto VPatternRecipe::SplinePath(const VToolRecord &record) -> QDomElement
         throw VExceptionInvalidHistory(QObject::tr("Empty list of nodes for tool with id '%1'.").arg(record.getId()));
     }
 
-    for (auto &pathNode : path)
+    for (const auto &pathNode : path)
     {
         QDomElement node = createElement(QStringLiteral("node"));
 
@@ -804,7 +804,7 @@ auto VPatternRecipe::CubicBezierPath(const VToolRecord &record) -> QDomElement
         throw VExceptionInvalidHistory(QObject::tr("Empty list of nodes for tool with id '%1'.").arg(record.getId()));
     }
 
-    for (auto &pathNode : path)
+    for (const auto &pathNode : path)
     {
         QDomElement node = createElement(QStringLiteral("node"));
 
@@ -1217,7 +1217,7 @@ auto VPatternRecipe::GroupOperationSource(VAbstractOperation *tool, quint32 id, 
         throw VExceptionInvalidHistory(QObject::tr("Empty list of nodes for tool with id '%1'.").arg(id));
     }
 
-    for (auto &item : items)
+    for (const auto &item : items)
     {
         QDomElement node = createElement(QStringLiteral("node"));
 

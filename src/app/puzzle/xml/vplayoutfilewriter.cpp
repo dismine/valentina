@@ -293,7 +293,7 @@ void VPLayoutFileWriter::WritePiece(const VPPiecePtr &piece)
 
     writeStartElement(ML::TagSeamLine);
     QVector<VLayoutPoint> const contourPoints = piece->GetContourPoints();
-    for (auto &point : contourPoints)
+    for (const auto &point : contourPoints)
     {
         WriteLayoutPoint(point);
     }
@@ -307,7 +307,7 @@ void VPLayoutFileWriter::WritePiece(const VPPiecePtr &piece)
     if (piece->IsSeamAllowance() && not piece->IsSeamAllowanceBuiltIn())
     {
         QVector<VLayoutPoint> const seamAllowancePoints = piece->GetSeamAllowancePoints();
-        for (auto &point : seamAllowancePoints)
+        for (const auto &point : seamAllowancePoints)
         {
             WriteLayoutPoint(point);
         }
@@ -350,7 +350,7 @@ void VPLayoutFileWriter::WritePiece(const VPPiecePtr &piece)
                                      [](bool mirrored) noexcept { return mirrored; });
 
         QVector<VLayoutPoint> const points = path.Points();
-        for (auto &point : points)
+        for (const auto &point : points)
         {
             WriteLayoutPoint(point);
         }

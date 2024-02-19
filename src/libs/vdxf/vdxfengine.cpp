@@ -1040,7 +1040,7 @@ void VDxfEngine::ExportAAMAIntcut(const QSharedPointer<dx_ifaceBlock> &detailBlo
     };
 
     QVector<VLayoutPiecePath> const drawIntCut = detail.MappedInternalPathsForCut(true);
-    for (auto &intCut : drawIntCut)
+    for (const auto &intCut : drawIntCut)
     {
         QVector<VLayoutPoint> points = intCut.Points();
         DrawPolygon(points, false);
@@ -1615,7 +1615,7 @@ void VDxfEngine::ExportASTMInternalCutout(const QSharedPointer<dx_ifaceBlock> &d
     };
 
     QVector<VLayoutPiecePath> const drawIntCut = detail.MappedInternalPathsForCut(true);
-    for (auto &intCut : drawIntCut)
+    for (const auto &intCut : drawIntCut)
     {
         QVector<VLayoutPoint> points = intCut.Points();
         DrawPolygon(points, intCut.IsNotMirrored(), false);

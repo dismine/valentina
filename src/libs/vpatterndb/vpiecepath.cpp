@@ -842,7 +842,7 @@ auto VPiecePath::Edge(quint32 p1, quint32 p2) const -> vsizetype
 auto VPiecePath::ListNodePoint() const -> QVector<VPieceNode>
 {
     QVector<VPieceNode> list;
-    for (auto &node : d->m_nodes) //-const V807
+    for (const auto &node : d->m_nodes) //-const V807
     {
         if (node.GetTypeTool() == Tool::NodePoint)
         {

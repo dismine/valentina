@@ -154,7 +154,7 @@ auto VAbstartMeasurementDimension::ValidBasesList() const -> QStringList
     QVector<qreal> const bases = ValidBases();
     QStringList list;
     list.reserve(bases.size());
-    for(auto &base : bases)
+    for (const auto &base : bases)
     {
         list.append(QString::number(base));
     }
@@ -382,7 +382,7 @@ void VDimensionRestriction::SetExcludeString(const QString &exclude)
     m_exclude.clear();
 
     QStringList const values = exclude.split(';');
-    for(auto &value : values)
+    for (const auto &value : values)
     {
         bool ok = false;
         qreal const val = value.toDouble(&ok);
@@ -400,7 +400,7 @@ auto VDimensionRestriction::GetExcludeString() const -> QString
     QList<qreal> const list = m_exclude.values();
     QStringList excludeList;
 
-    for(auto &value : list)
+    for (const auto &value : list)
     {
         excludeList.append(QString::number(value));
     }

@@ -313,7 +313,7 @@ void DialogMDataBase::InitDataBase(const QStringList &usedMeasurements)
     }
 
     QStringList const groups = knownDB.Groups();
-    for (auto &group : groups)
+    for (const auto &group : groups)
     {
         QMap<int, VKnownMeasurement> const groupMeasurements = knownDB.OrderedGroupMeasurements(group);
         m_groups.append(InitGroup(group, groupMeasurements, usedMeasurements));

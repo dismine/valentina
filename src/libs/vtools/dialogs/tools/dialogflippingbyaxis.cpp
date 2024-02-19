@@ -333,7 +333,7 @@ void DialogFlippingByAxis::SuffixChanged()
         {
             QRegularExpression const rx(NameRegExp());
             const QStringList uniqueNames = data->AllUniqueNames();
-            for (auto &uniqueName : uniqueNames)
+            for (const auto &uniqueName : uniqueNames)
             {
                 const QString name = uniqueName + suffix;
                 if (not rx.match(name).hasMatch() || not data->IsUnique(name))

@@ -212,7 +212,7 @@ void DialogHistory::FillTable()
 
     QVector<HistoryRecord> const historyRecords = QtConcurrent::blockingMapped(history, CreateRecord);
 
-    for (auto &record : historyRecords)
+    for (const auto &record : historyRecords)
     {
         if (not record.description.isEmpty())
         {

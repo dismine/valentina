@@ -247,7 +247,7 @@ auto VPosition::ArrangeDetail(const VPositionData &data, std::atomic_bool *stop,
     }
 
     QList<VBestSquare> const results = watcher.future().results();
-    for (auto &result : results)
+    for (const auto &result : results)
     {
         bestResult.NewResult(result);
     }

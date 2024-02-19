@@ -4864,7 +4864,7 @@ auto DialogSeamAllowance::GetDefaultPieceName() const -> QString
     QList<VPiece> const pieces = data->DataPieces()->values();
     QSet<QString> names;
 
-    for (auto &piece : pieces)
+    for (const auto &piece : pieces)
     {
         names.insert(piece.GetName());
     }

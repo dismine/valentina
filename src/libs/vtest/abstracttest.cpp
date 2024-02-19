@@ -469,7 +469,7 @@ auto AbstractTest::CopyRecursively(const QString &srcFilePath, const QString &tg
         QDir const sourceDir(srcFilePath);
         const QStringList fileNames =
             sourceDir.entryList(QDir::Files | QDir::Dirs | QDir::NoDotAndDotDot | QDir::Hidden | QDir::System);
-        for (auto &fileName : fileNames)
+        for (const auto &fileName : fileNames)
         {
             const QString newSrcFilePath = srcFilePath + QDir::separator() + fileName;
             const QString newTgtFilePath = tgtFilePath + QDir::separator() + fileName;
