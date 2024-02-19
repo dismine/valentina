@@ -51,9 +51,9 @@ template <class T> auto NumberToString(T number) -> QString
 //---------------------------------------------------------------------------------------------------------------------
 auto TransformToString(const QTransform &m) -> QString
 {
-    QStringList matrix{NumberToString(m.m11()), NumberToString(m.m12()), NumberToString(m.m13()),
-                       NumberToString(m.m21()), NumberToString(m.m22()), NumberToString(m.m23()),
-                       NumberToString(m.m31()), NumberToString(m.m32()), NumberToString(m.m33())};
+    QStringList const matrix{NumberToString(m.m11()), NumberToString(m.m12()), NumberToString(m.m13()),
+                             NumberToString(m.m21()), NumberToString(m.m22()), NumberToString(m.m23()),
+                             NumberToString(m.m31()), NumberToString(m.m32()), NumberToString(m.m33())};
     return matrix.join(ML::groupSep);
 }
 
@@ -201,7 +201,7 @@ void VPLayoutFileWriter::WriteSheets(const VPLayoutPtr &layout)
 {
     writeStartElement(ML::TagSheets);
 
-    QList<VPSheetPtr> sheets = layout->GetSheets();
+    QList<VPSheetPtr> const sheets = layout->GetSheets();
     for (const auto &sheet : sheets)
     {
         if (not sheet.isNull())
@@ -292,7 +292,7 @@ void VPLayoutFileWriter::WritePiece(const VPPiecePtr &piece)
                                  [](bool show) noexcept { return show; });
 
     writeStartElement(ML::TagSeamLine);
-    QVector<VLayoutPoint> contourPoints = piece->GetContourPoints();
+    QVector<VLayoutPoint> const contourPoints = piece->GetContourPoints();
     for (auto &point : contourPoints)
     {
         WriteLayoutPoint(point);
@@ -306,7 +306,7 @@ void VPLayoutFileWriter::WritePiece(const VPPiecePtr &piece)
                                  [](bool builtin) noexcept { return not builtin; });
     if (piece->IsSeamAllowance() && not piece->IsSeamAllowanceBuiltIn())
     {
-        QVector<VLayoutPoint> seamAllowancePoints = piece->GetSeamAllowancePoints();
+        QVector<VLayoutPoint> const seamAllowancePoints = piece->GetSeamAllowancePoints();
         for (auto &point : seamAllowancePoints)
         {
             WriteLayoutPoint(point);
@@ -325,7 +325,7 @@ void VPLayoutFileWriter::WritePiece(const VPPiecePtr &piece)
     writeEndElement();
 
     writeStartElement(ML::TagNotches);
-    QVector<VLayoutPassmark> passmarks = piece->GetPassmarks();
+    QVector<VLayoutPassmark> const passmarks = piece->GetPassmarks();
     for (const auto &passmark : passmarks)
     {
         writeStartElement(ML::TagNotch);
@@ -340,7 +340,7 @@ void VPLayoutFileWriter::WritePiece(const VPPiecePtr &piece)
     writeEndElement();
 
     writeStartElement(ML::TagInternalPaths);
-    QVector<VLayoutPiecePath> internalPaths = piece->GetInternalPaths();
+    QVector<VLayoutPiecePath> const internalPaths = piece->GetInternalPaths();
     for (const auto &path : internalPaths)
     {
         writeStartElement(ML::TagInternalPath);
@@ -349,7 +349,7 @@ void VPLayoutFileWriter::WritePiece(const VPPiecePtr &piece)
         SetAttributeOrRemoveIf<bool>(ML::AttrNotMirrored, path.IsNotMirrored(),
                                      [](bool mirrored) noexcept { return mirrored; });
 
-        QVector<VLayoutPoint> points = path.Points();
+        QVector<VLayoutPoint> const points = path.Points();
         for (auto &point : points)
         {
             WriteLayoutPoint(point);
@@ -360,7 +360,7 @@ void VPLayoutFileWriter::WritePiece(const VPPiecePtr &piece)
     writeEndElement();
 
     writeStartElement(ML::TagMarkers);
-    QVector<VLayoutPlaceLabel> placelabels = piece->GetPlaceLabels();
+    QVector<VLayoutPlaceLabel> const placelabels = piece->GetPlaceLabels();
     for (const auto &label : placelabels)
     {
         writeStartElement(ML::TagMarker);

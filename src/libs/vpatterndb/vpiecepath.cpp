@@ -80,7 +80,7 @@ auto CurveStartPoint(VSAPoint candidate, const VContainer *data, const VPieceNod
     QVector<QPointF> intersections;
     for (auto i = 0; i < curvePoints.count() - 1; ++i)
     {
-        QLineF segment(curvePoints.at(i), curvePoints.at(i + 1));
+        QLineF const segment(curvePoints.at(i), curvePoints.at(i + 1));
         intersections << VAbstractCurve::CurveIntersectLine(points, segment);
     }
 
@@ -120,7 +120,7 @@ auto CurveEndPoint(VSAPoint candidate, const VContainer *data, const VPieceNode 
     QVector<QPointF> intersections;
     for (auto i = 0; i < curvePoints.count() - 1; ++i)
     {
-        QLineF segment(curvePoints.at(i), curvePoints.at(i + 1));
+        QLineF const segment(curvePoints.at(i), curvePoints.at(i + 1));
         intersections << VAbstractCurve::CurveIntersectLine(points, segment);
     }
 
@@ -571,7 +571,7 @@ auto VPiecePath::SeamAllowancePoints(const VContainer *data, qreal width, bool r
 //---------------------------------------------------------------------------------------------------------------------
 auto VPiecePath::PainterPath(const VContainer *data, const QVector<QPointF> &cuttingPath) const -> QPainterPath
 {
-    QVector<VLayoutPoint> points = PathPoints(data, cuttingPath);
+    QVector<VLayoutPoint> const points = PathPoints(data, cuttingPath);
     QVector<QPointF> casted;
     CastTo(points, casted);
     return MakePainterPath(casted);
@@ -775,7 +775,7 @@ auto VPiecePath::OnEdge(quint32 p1, quint32 p2) const -> bool
         qDebug() << "Not enough points.";
         return false;
     }
-    int i = IndexOfNode(list, p1);
+    int const i = IndexOfNode(list, p1);
     vsizetype j1 = 0, j2 = 0;
 
     if (i == list.size() - 1)
@@ -821,10 +821,10 @@ auto VPiecePath::Edge(quint32 p1, quint32 p2) const -> vsizetype
     }
 
     const QVector<VPieceNode> list = ListNodePoint();
-    int i = IndexOfNode(list, p1);
-    int j = IndexOfNode(list, p2);
+    int const i = IndexOfNode(list, p1);
+    int const j = IndexOfNode(list, p2);
 
-    int min = qMin(i, j);
+    int const min = qMin(i, j);
 
     if (min == 0 && (i == list.size() - 1 || j == list.size() - 1))
     {
@@ -1018,7 +1018,7 @@ auto VPiecePath::IsVisible(const QHash<QString, QSharedPointer<VInternalVariable
     bool visible = true;
     try
     {
-        QScopedPointer<Calculator> cal(new Calculator());
+        QScopedPointer<Calculator> const cal(new Calculator());
         const qreal result = cal->EvalFormula(vars, GetVisibilityTrigger());
 
         if (qIsInf(result) || qIsNaN(result))
@@ -1281,7 +1281,7 @@ auto VPiecePath::NodeName(const QVector<VPieceNode> &nodes, vsizetype nodeIndex,
 
     try
     {
-        QSharedPointer<VGObject> obj = data->GetGObject(nodes.at(nodeIndex).GetId());
+        QSharedPointer<VGObject> const obj = data->GetGObject(nodes.at(nodeIndex).GetId());
         return obj->name();
     }
     catch (const VExceptionBadId &)

@@ -237,7 +237,7 @@ void VPrintLayout::PrintLayout()
     {
         info = QPrinterInfo::defaultPrinter();
     }
-    QSharedPointer<QPrinter> printer = PreparePrinter(info, QPrinter::HighResolution);
+    QSharedPointer<QPrinter> const printer = PreparePrinter(info, QPrinter::HighResolution);
     if (printer.isNull())
     {
         qCritical("%s\n\n%s", qUtf8Printable(tr("Print error")),
@@ -282,7 +282,7 @@ void VPrintLayout::PrintPreview()
     {
         info = QPrinterInfo::defaultPrinter();
     }
-    QSharedPointer<QPrinter> printer = PreparePrinter(info);
+    QSharedPointer<QPrinter> const printer = PreparePrinter(info);
     if (printer.isNull())
     {
         qCritical("%s\n\n%s", qUtf8Printable(tr("Print error")),
@@ -347,8 +347,8 @@ void VPrintLayout::PrintPages(QPrinter *printer)
             auto *paper = qgraphicsitem_cast<QGraphicsRectItem *>(m_layoutPapers.at(i));
             if (paper != nullptr)
             {
-                QRectF paperRect = paper->rect();
-                QSizeF image(paperRect.width() * m_xscale, paperRect.height() * m_yscale);
+                QRectF const paperRect = paper->rect();
+                QSizeF const image(paperRect.width() * m_xscale, paperRect.height() * m_yscale);
                 *poster += posterazor->Calc(image.toSize(), i, m_tiledPDFOrientation);
             }
         }
@@ -384,7 +384,7 @@ void VPrintLayout::PrintPages(QPrinter *printer)
         copyCount = printer->copyCount();
     }
 
-    VWatermarkData data = WatermarkData();
+    VWatermarkData const data = WatermarkData();
 
     for (int i = 0; i < copyCount; ++i)
     {
@@ -613,7 +613,7 @@ void VPrintLayout::PreparePaper(vsizetype index) const
     auto *paper = qgraphicsitem_cast<QGraphicsRectItem *>(m_layoutPapers.at(index));
     if (paper != nullptr)
     {
-        QBrush brush(Qt::white);
+        QBrush const brush(Qt::white);
         m_layoutScenes.at(index)->setBackgroundBrush(brush);
         m_layoutShadows.at(index)->setVisible(false);
         const float thinPen = 0.1F;
@@ -623,7 +623,7 @@ void VPrintLayout::PreparePaper(vsizetype index) const
     QTransform matrix;
     matrix.scale(m_xscale, m_yscale);
 
-    QList<QGraphicsItem *> paperDetails = m_layoutDetails.at(index);
+    QList<QGraphicsItem *> const paperDetails = m_layoutDetails.at(index);
     for (auto *detail : paperDetails)
     {
         QTransform m = detail->transform();
@@ -640,7 +640,7 @@ void VPrintLayout::RestorePaper(vsizetype index) const
     {
         // Restore
         paper->setPen(QPen(Qt::black, 1));
-        QBrush brush(Qt::gray);
+        QBrush const brush(Qt::gray);
         m_layoutScenes.at(index)->setBackgroundBrush(brush);
         m_layoutShadows.at(index)->setVisible(true);
     }
@@ -648,7 +648,7 @@ void VPrintLayout::RestorePaper(vsizetype index) const
     QTransform matrix;
     matrix.scale(1. / m_xscale, 1. / m_yscale);
 
-    QList<QGraphicsItem *> paperDetails = m_layoutDetails.at(index);
+    QList<QGraphicsItem *> const paperDetails = m_layoutDetails.at(index);
     for (auto *detail : paperDetails)
     {
         QTransform m = detail->transform();
@@ -736,7 +736,7 @@ auto VPrintLayout::ContinueIfLayoutStale(QWidget *parent) -> int
         msgBox.setStandardButtons(QDialogButtonBox::Yes | QDialogButtonBox::No);
         msgBox.setDefaultButton(QDialogButtonBox::No);
 
-        int dialogResult = msgBox.exec();
+        int const dialogResult = msgBox.exec();
 
         if (msgBox.isChecked())
         {
@@ -760,7 +760,7 @@ auto VPrintLayout::SceneTargetRect(QPrinter *printer, const QRectF &source) -> Q
     {
         QPageLayout layout = printer->pageLayout();
         layout.setUnits(QPageLayout::Millimeter);
-        QMarginsF printerMargins = layout.margins();
+        QMarginsF const printerMargins = layout.margins();
         x = qFloor(ToPixel(printerMargins.left(), Unit::Mm));
         y = qFloor(ToPixel(printerMargins.top(), Unit::Mm));
     }
@@ -770,7 +770,7 @@ auto VPrintLayout::SceneTargetRect(QPrinter *printer, const QRectF &source) -> Q
         y = 0;
     }
 
-    QPair<qreal, qreal> scaleDiff = PrinterScaleDiff(printer);
+    QPair<qreal, qreal> const scaleDiff = PrinterScaleDiff(printer);
     const double xscale = scaleDiff.first;
     const double yscale = scaleDiff.second;
 

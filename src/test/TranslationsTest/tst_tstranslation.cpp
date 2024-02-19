@@ -81,10 +81,10 @@ void TST_TSTranslation::CheckEnglishLocalization_data()
 
             auto PluralForm = [translationTag]()
             {
-                QDomNodeList children = translationTag.childNodes();
+                QDomNodeList const children = translationTag.childNodes();
                 for (int i = 0; i < children.size(); ++i)
                 {
-                    QDomNode child = children.item(i);
+                    QDomNode const child = children.item(i);
                     if (child.isElement())
                     {
                         return true;

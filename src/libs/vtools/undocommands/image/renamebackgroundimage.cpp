@@ -36,7 +36,7 @@ RenameBackgroundImage::RenameBackgroundImage(QUuid id, const QString &name, VAbs
 {
     setText(tr("rename background image"));
 
-    VBackgroundPatternImage image = doc->GetBackgroundImage(m_id);
+    VBackgroundPatternImage const image = doc->GetBackgroundImage(m_id);
 
     m_oldName = image.Name();
 }

@@ -53,7 +53,7 @@ VPieceArea::VPieceArea(PieceAreaType type, quint32 pieceId, const VPiece &piece,
     // cppcheck-suppress unknownMacro
     SCASSERT(data != nullptr)
 
-    QString shortName = PieceShortName(piece);
+    QString const shortName = PieceShortName(piece);
 
     VContainer tempData = *data;
     auto *currentSA = new VIncrement(&tempData, currentSeamAllowance);

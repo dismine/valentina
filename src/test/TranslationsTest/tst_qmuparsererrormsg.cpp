@@ -68,7 +68,7 @@ void TST_QmuParserErrorMsg::initTestCase()
         QFAIL("Unsupported locale code.");
     }
 
-    QDir dir(TranslationsPath());
+    QDir const dir(TranslationsPath());
     const QStringList fileNames = dir.entryList(QStringList("valentina_*.qm"));
     QVERIFY2(locales.size() == fileNames.size(), "Unexpected count of files.");
 

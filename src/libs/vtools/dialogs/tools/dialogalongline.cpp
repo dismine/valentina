@@ -277,8 +277,8 @@ void DialogAlongLine::SetCurrentLength()
     }
     catch (const VExceptionBadId &)
     {
-        QScopedPointer<VPointF> p1(new VPointF());
-        QScopedPointer<VPointF> p2(new VPointF());
+        QScopedPointer<VPointF> const p1(new VPointF());
+        QScopedPointer<VPointF> const p2(new VPointF());
         length = new VLengthLine(p1.data(), GetFirstPointId(), p2.data(), GetSecondPointId(), *data->GetPatternUnit());
     }
 
@@ -408,12 +408,12 @@ void DialogAlongLine::ShowDialog(bool click)
 
         const QSharedPointer<VPointF> p1 = data->GeometricObject<VPointF>(GetFirstPointId());
         const QSharedPointer<VPointF> p2 = data->GeometricObject<VPointF>(GetSecondPointId());
-        QLineF baseLine(static_cast<QPointF>(*p1), static_cast<QPointF>(*p2));
+        QLineF const baseLine(static_cast<QPointF>(*p1), static_cast<QPointF>(*p2));
 
-        QLineF line(static_cast<QPointF>(*p1), scene->getScenePos());
+        QLineF const line(static_cast<QPointF>(*p1), scene->getScenePos());
 
         qreal len = line.length();
-        qreal angleTo = baseLine.angleTo(line);
+        qreal const angleTo = baseLine.angleTo(line);
         if (angleTo > 90 && angleTo < 270)
         {
             len *= -1;

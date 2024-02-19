@@ -352,7 +352,7 @@ auto PointBezier_r(qreal x1, qreal y1, qreal x2, qreal y2, qreal x3, qreal y3, q
     //----------------------
     auto BezierTailPoints = [x1234, y1234, x234, y234, x34, y34, x4, y4, level, approximationScale]()
     {
-        QVector<QPointF> tail;
+        QVector<QPointF> const tail;
         return PointBezier_r(x1234, y1234, x234, y234, x34, y34, x4, y4, static_cast<qint16>(level + 1), tail,
                              approximationScale);
     };
@@ -365,7 +365,7 @@ auto PointBezier_r(qreal x1, qreal y1, qreal x2, qreal y2, qreal x3, qreal y3, q
 
     if (level < 1)
     {
-        QFuture<QVector<QPointF>> futureBezier = QtConcurrent::run(BezierPoints);
+        QFuture<QVector<QPointF>> const futureBezier = QtConcurrent::run(BezierPoints);
         const QVector<QPointF> tail = BezierTailPoints();
         return futureBezier.result() + tail;
     }

@@ -116,13 +116,13 @@ auto VToolCut::GetAliasSuffix1() const -> QString
 //---------------------------------------------------------------------------------------------------------------------
 void VToolCut::SetAliasSuffix1(QString alias)
 {
-    QSharedPointer<VAbstractCurve> curve = VAbstractTool::data.GeometricObject<VAbstractCurve>(baseCurveId);
+    QSharedPointer<VAbstractCurve> const curve = VAbstractTool::data.GeometricObject<VAbstractCurve>(baseCurveId);
 
     const QString oldAliasSuffix = curve->GetAliasSuffix();
     alias = alias.simplified().replace(QChar(QChar::Space), '_'_L1);
     curve->SetAliasSuffix(alias);
 
-    QRegularExpression rx(NameRegExp());
+    QRegularExpression const rx(NameRegExp());
 
     if (alias.isEmpty() || (rx.match(curve->GetAlias()).hasMatch() && VAbstractTool::data.IsUnique(curve->GetAlias())))
     {
@@ -145,13 +145,13 @@ auto VToolCut::GetAliasSuffix2() const -> QString
 //---------------------------------------------------------------------------------------------------------------------
 void VToolCut::SetAliasSuffix2(QString alias)
 {
-    QSharedPointer<VAbstractCurve> curve = VAbstractTool::data.GeometricObject<VAbstractCurve>(baseCurveId);
+    QSharedPointer<VAbstractCurve> const curve = VAbstractTool::data.GeometricObject<VAbstractCurve>(baseCurveId);
 
     const QString oldAliasSuffix = curve->GetAliasSuffix();
     alias = alias.simplified().replace(QChar(QChar::Space), '_'_L1);
     curve->SetAliasSuffix(alias);
 
-    QRegularExpression rx(NameRegExp());
+    QRegularExpression const rx(NameRegExp());
 
     if (alias.isEmpty() || (rx.match(curve->GetAlias()).hasMatch() && VAbstractTool::data.IsUnique(curve->GetAlias())))
     {

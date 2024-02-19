@@ -38,7 +38,7 @@ dx_iface::~dx_iface()
 
 auto dx_iface::fileExport(bool binary) -> bool
 {
-    bool success = dxfW->write(this, version, binary);
+    bool const success = dxfW->write(this, version, binary);
     return success;
 }
 
@@ -518,7 +518,7 @@ void dx_iface::AddBlock(dx_ifaceBlock *block)
 
 auto dx_iface::LocaleToISO() -> std::string
 {
-    QMap<QString, QString> locMap = LocaleMap();
+    QMap<QString, QString> const locMap = LocaleMap();
     return locMap.value(QLocale(VAbstractApplication::VApp()->Settings()->GetLocale()).name(), "ISO8859-1")
         .toStdString();
 }

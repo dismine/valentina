@@ -103,8 +103,8 @@ void VisToolRotation::RefreshGeometry()
         DrawLine(this, rLine, Qt::DashLine);
         DrawLine(m_xAxis, QLineF(static_cast<QPointF>(*origin), Ray(static_cast<QPointF>(*origin), 0)), Qt::DashLine);
 
-        VArc arc(*origin, ScaledRadius(SceneScale(VAbstractValApplication::VApp()->getCurrentScene())) * 2, 0,
-                 tempAngle);
+        VArc const arc(*origin, ScaledRadius(SceneScale(VAbstractValApplication::VApp()->getCurrentScene())) * 2, 0,
+                       tempAngle);
         DrawPath(m_angleArc, arc.GetPath(), Qt::SolidLine, Qt::RoundCap);
 
         SetToolTip(tr("Rotating angle = %1°, <b>%2</b> - sticking angle, "

@@ -48,15 +48,15 @@ auto OptimizeFontSizeToFitTextInRect(QPainter *painter, const QRectF &drawRect, 
     while ((error > goalError) && (iterationNumber < maxIterationNumber))
     {
         iterationNumber++;
-        QRect fontBoundRect = painter->fontMetrics().boundingRect(drawRect.toRect(), flags, text);
+        QRect const fontBoundRect = painter->fontMetrics().boundingRect(drawRect.toRect(), flags, text);
         if (fontBoundRect.isNull())
         {
             font.setPointSizeF(0.00000001);
             break;
         }
 
-        double xFactor = drawRect.width() / fontBoundRect.width();
-        double yFactor = drawRect.height() / fontBoundRect.height();
+        double const xFactor = drawRect.width() / fontBoundRect.width();
+        double const yFactor = drawRect.height() / fontBoundRect.height();
         double factor;
         if (xFactor < 1 && yFactor < 1)
         {
@@ -113,10 +113,10 @@ VPGraphicsTileGrid::VPGraphicsTileGrid(const VPLayoutPtr &layout, const QUuid &s
 //---------------------------------------------------------------------------------------------------------------------
 auto VPGraphicsTileGrid::boundingRect() const -> QRectF
 {
-    VPLayoutPtr layout = m_layout.toStrongRef();
+    VPLayoutPtr const layout = m_layout.toStrongRef();
     if (not layout.isNull() && layout->LayoutSettings().GetShowTiles())
     {
-        VPSheetPtr sheet = layout->GetSheet(m_sheetUuid);
+        VPSheetPtr const sheet = layout->GetSheet(m_sheetUuid);
 
         QMarginsF sheetMargins;
         if (not sheet.isNull() && not sheet->IgnoreMargins())
@@ -124,14 +124,15 @@ auto VPGraphicsTileGrid::boundingRect() const -> QRectF
             sheetMargins = sheet->GetSheetMargins();
         }
 
-        qreal xScale = layout->LayoutSettings().HorizontalScale();
-        qreal yScale = layout->LayoutSettings().VerticalScale();
+        qreal const xScale = layout->LayoutSettings().HorizontalScale();
+        qreal const yScale = layout->LayoutSettings().VerticalScale();
 
-        qreal width = layout->TileFactory()->DrawingAreaWidth() - VPTileFactory::tileStripeWidth;
-        qreal height = layout->TileFactory()->DrawingAreaHeight() - VPTileFactory::tileStripeWidth;
+        qreal const width = layout->TileFactory()->DrawingAreaWidth() - VPTileFactory::tileStripeWidth;
+        qreal const height = layout->TileFactory()->DrawingAreaHeight() - VPTileFactory::tileStripeWidth;
 
-        QRectF rect(sheetMargins.left(), sheetMargins.top(), layout->TileFactory()->ColNb(sheet) * (width / xScale),
-                    layout->TileFactory()->RowNb(sheet) * (height / yScale));
+        QRectF const rect(sheetMargins.left(), sheetMargins.top(),
+                          layout->TileFactory()->ColNb(sheet) * (width / xScale),
+                          layout->TileFactory()->RowNb(sheet) * (height / yScale));
 
         constexpr qreal halfPenWidth = penWidth / 2.;
 

@@ -58,7 +58,7 @@ const qreal centerRadius2 = 10;
 auto TransformationOrigin(const VPLayoutPtr &layout, const QRectF &boundingRect) -> VPTransformationOrigon
 {
     SCASSERT(layout != nullptr)
-    VPSheetPtr sheet = layout->GetFocusedSheet();
+    VPSheetPtr const sheet = layout->GetFocusedSheet();
     if (not sheet.isNull())
     {
         return sheet->TransformationOrigin();
@@ -133,7 +133,7 @@ void VPGraphicsTransformationOrigin::paint(QPainter *painter, const QStyleOption
 
     const qreal scale = SceneScale(scene());
 
-    QPen pen(CurrentColor(), penWidth / scale, Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin);
+    QPen const pen(CurrentColor(), penWidth / scale, Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin);
 
     painter->setPen(pen);
 
@@ -170,10 +170,10 @@ void VPGraphicsTransformationOrigin::mousePressEvent(QGraphicsSceneMouseEvent *e
 //---------------------------------------------------------------------------------------------------------------------
 void VPGraphicsTransformationOrigin::mouseMoveEvent(QGraphicsSceneMouseEvent *event)
 {
-    VPLayoutPtr layout = m_layout.toStrongRef();
+    VPLayoutPtr const layout = m_layout.toStrongRef();
     if (not layout.isNull())
     {
-        VPSheetPtr sheet = layout->GetFocusedSheet();
+        VPSheetPtr const sheet = layout->GetFocusedSheet();
         if (not sheet.isNull())
         {
             VPTransformationOrigon origin = sheet->TransformationOrigin();
@@ -225,7 +225,7 @@ auto VPGraphicsTransformationOrigin::RotationCenter(QPainter *painter) const -> 
 
     const qreal scale = SceneScale(scene());
     qreal radius = centerRadius1 / scale;
-    VPTransformationOrigon transformationOrigin = TransformationOrigin(m_layout, QRectF());
+    VPTransformationOrigon const transformationOrigin = TransformationOrigin(m_layout, QRectF());
     QRectF rect(transformationOrigin.origin.x() - radius, transformationOrigin.origin.y() - radius, radius * 2.,
                 radius * 2.);
 
@@ -264,10 +264,10 @@ auto VPGraphicsTransformationOrigin::RotationCenter(QPainter *painter) const -> 
 auto VPGraphicsTransformationOrigin::Center1() const -> QPainterPath
 {
     const qreal scale = SceneScale(scene());
-    qreal radius = centerRadius1 / scale;
-    VPTransformationOrigon transformationOrigin = TransformationOrigin(m_layout, QRectF());
-    QRectF rect(transformationOrigin.origin.x() - radius, transformationOrigin.origin.y() - radius, radius * 2.,
-                radius * 2.);
+    qreal const radius = centerRadius1 / scale;
+    VPTransformationOrigon const transformationOrigin = TransformationOrigin(m_layout, QRectF());
+    QRectF const rect(transformationOrigin.origin.x() - radius, transformationOrigin.origin.y() - radius, radius * 2.,
+                      radius * 2.);
 
     QPainterPath center1;
     center1.addEllipse(rect);
@@ -279,10 +279,10 @@ auto VPGraphicsTransformationOrigin::Center1() const -> QPainterPath
 auto VPGraphicsTransformationOrigin::Center2() const -> QPainterPath
 {
     const qreal scale = SceneScale(scene());
-    qreal radius = centerRadius2 / scale;
-    VPTransformationOrigon transformationOrigin = TransformationOrigin(m_layout, QRectF());
-    QRectF rect = QRectF(transformationOrigin.origin.x() - radius, transformationOrigin.origin.y() - radius,
-                         radius * 2., radius * 2.);
+    qreal const radius = centerRadius2 / scale;
+    VPTransformationOrigon const transformationOrigin = TransformationOrigin(m_layout, QRectF());
+    QRectF const rect = QRectF(transformationOrigin.origin.x() - radius, transformationOrigin.origin.y() - radius,
+                               radius * 2., radius * 2.);
 
     QPainterPath center2;
     center2.addEllipse(rect);
@@ -326,10 +326,10 @@ void VPGraphicsPieceControls::on_UpdateControls()
 
     if (not m_pieceRect.isNull())
     {
-        VPLayoutPtr layout = m_layout.toStrongRef();
+        VPLayoutPtr const layout = m_layout.toStrongRef();
         if (not layout.isNull())
         {
-            VPSheetPtr sheet = layout->GetFocusedSheet();
+            VPSheetPtr const sheet = layout->GetFocusedSheet();
             if (not sheet.isNull())
             {
                 VPTransformationOrigon origin = sheet->TransformationOrigin();
@@ -361,7 +361,7 @@ auto VPGraphicsPieceControls::boundingRect() const -> QRectF
 
     auto HandlerBoundingRect = [this, &boundingRect](VPHandleCorner corner, VPHandleCornerType type, QPointF pos)
     {
-        QPixmap handler = HandlerPixmap(m_handleCorner == corner, type);
+        QPixmap const handler = HandlerPixmap(m_handleCorner == corner, type);
         boundingRect = boundingRect.united(QRectF(pos, handler.size() / handler.devicePixelRatio()));
     };
 
@@ -439,12 +439,12 @@ void VPGraphicsPieceControls::mouseMoveEvent(QGraphicsSceneMouseEvent *event)
 {
     PrepareTransformationOrigin(event->modifiers() & Qt::ShiftModifier);
 
-    QPointF rotationNewPoint = event->scenePos();
+    QPointF const rotationNewPoint = event->scenePos();
 
     // get the angle from the center to the initial click point
-    VPTransformationOrigon rotationOrigin = TransformationOrigin(m_layout, m_pieceRect);
-    QLineF initPosition(rotationOrigin.origin, m_rotationStartPoint);
-    QLineF initRotationPosition(rotationOrigin.origin, rotationNewPoint);
+    VPTransformationOrigon const rotationOrigin = TransformationOrigin(m_layout, m_pieceRect);
+    QLineF const initPosition(rotationOrigin.origin, m_rotationStartPoint);
+    QLineF const initRotationPosition(rotationOrigin.origin, rotationNewPoint);
 
     qreal rotateOn = initPosition.angleTo(initRotationPosition);
 
@@ -455,9 +455,9 @@ void VPGraphicsPieceControls::mouseMoveEvent(QGraphicsSceneMouseEvent *event)
 
     if (not qFuzzyIsNull(rotateOn))
     {
-        QList<VPPiecePtr> pieces = SelectedPieces();
+        QList<VPPiecePtr> const pieces = SelectedPieces();
 
-        VPLayoutPtr layout = m_layout.toStrongRef();
+        VPLayoutPtr const layout = m_layout.toStrongRef();
         if (not layout.isNull())
         {
             CorrectRotationSum(layout, rotationOrigin, rotateOn);
@@ -512,10 +512,10 @@ void VPGraphicsPieceControls::mouseReleaseEvent(QGraphicsSceneMouseEvent *event)
 
         if (m_originSaved)
         {
-            VPLayoutPtr layout = m_layout.toStrongRef();
+            VPLayoutPtr const layout = m_layout.toStrongRef();
             if (not layout.isNull())
             {
-                VPSheetPtr sheet = layout->GetFocusedSheet();
+                VPSheetPtr const sheet = layout->GetFocusedSheet();
                 if (not sheet.isNull())
                 {
                     if (not m_savedOrigin.custom)
@@ -569,7 +569,7 @@ void VPGraphicsPieceControls::InitPixmaps()
         const QString resource = QStringLiteral("icon");
 
         const QString fileName = QStringLiteral("32x32/%1.png").arg(imageName);
-        QPixmap handlePixmap = VTheme::GetPixmapResource(resource, fileName);
+        QPixmap const handlePixmap = VTheme::GetPixmapResource(resource, fileName);
 
         if (QGuiApplication::primaryScreen()->devicePixelRatio() >= 2)
         {
@@ -608,27 +608,27 @@ auto VPGraphicsPieceControls::TopLeftHandlerPosition() const -> QPointF
 //---------------------------------------------------------------------------------------------------------------------
 auto VPGraphicsPieceControls::TopRightHandlerPosition() const -> QPointF
 {
-    QRectF rect = ControllersRect();
-    QPixmap handler = m_handlePixmaps.value(VPHandleCornerType::TopRight);
-    QSize size = handler.size() / handler.devicePixelRatio();
+    QRectF const rect = ControllersRect();
+    QPixmap const handler = m_handlePixmaps.value(VPHandleCornerType::TopRight);
+    QSize const size = handler.size() / handler.devicePixelRatio();
     return {rect.topLeft().x() + (rect.width() - size.width()), rect.topLeft().y()};
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 auto VPGraphicsPieceControls::BottomRightHandlerPosition() const -> QPointF
 {
-    QRectF rect = ControllersRect();
-    QPixmap handler = m_handlePixmaps.value(VPHandleCornerType::BottomRight);
-    QSize size = handler.size() / handler.devicePixelRatio();
+    QRectF const rect = ControllersRect();
+    QPixmap const handler = m_handlePixmaps.value(VPHandleCornerType::BottomRight);
+    QSize const size = handler.size() / handler.devicePixelRatio();
     return {rect.topLeft().x() + (rect.width() - size.width()), rect.topLeft().y() + (rect.height() - size.height())};
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 auto VPGraphicsPieceControls::BottomLeftHandlerPosition() const -> QPointF
 {
-    QRectF rect = ControllersRect();
-    QPixmap handler = m_handlePixmaps.value(VPHandleCornerType::BottomLeft);
-    QSize size = handler.size() / handler.devicePixelRatio();
+    QRectF const rect = ControllersRect();
+    QPixmap const handler = m_handlePixmaps.value(VPHandleCornerType::BottomLeft);
+    QSize const size = handler.size() / handler.devicePixelRatio();
     return {rect.topLeft().x(), rect.topLeft().y() + (rect.height() - size.height())};
 }
 
@@ -692,7 +692,7 @@ auto VPGraphicsPieceControls::Handles() const -> QPainterPath
 auto VPGraphicsPieceControls::ControllersRect() const -> QRectF
 {
     const qreal scale = SceneScale(scene());
-    QPixmap handler = m_handlePixmaps.value(VPHandleCornerType::TopLeft);
+    QPixmap const handler = m_handlePixmaps.value(VPHandleCornerType::TopLeft);
     QRectF pieceRect = m_pieceRect;
 
     pieceRect = QRectF(pieceRect.topLeft() * scale, QSizeF(pieceRect.width() * scale, pieceRect.height() * scale));
@@ -700,13 +700,13 @@ auto VPGraphicsPieceControls::ControllersRect() const -> QRectF
 
     if (pieceRect.width() < handler.width())
     {
-        qreal diff = handler.width() - pieceRect.width();
+        qreal const diff = handler.width() - pieceRect.width();
         rect.adjust(0, 0, diff, 0);
     }
 
     if (pieceRect.height() < handler.height())
     {
-        qreal diff = handler.height() - pieceRect.height();
+        qreal const diff = handler.height() - pieceRect.height();
         rect.adjust(0, 0, 0, diff);
     }
 
@@ -721,10 +721,10 @@ auto VPGraphicsPieceControls::SelectedPieces() const -> QList<VPPiecePtr>
 {
     QList<VPPiecePtr> pieces;
 
-    VPLayoutPtr layout = m_layout.toStrongRef();
+    VPLayoutPtr const layout = m_layout.toStrongRef();
     if (not layout.isNull())
     {
-        VPSheetPtr sheet = layout->GetFocusedSheet();
+        VPSheetPtr const sheet = layout->GetFocusedSheet();
         if (not sheet.isNull())
         {
             pieces = sheet->GetSelectedPieces();
@@ -755,7 +755,7 @@ auto VPGraphicsPieceControls::ItemView() -> QGraphicsView *
     QGraphicsScene *scene = this->scene();
     if (scene != nullptr)
     {
-        QList<QGraphicsView *> views = scene->views();
+        QList<QGraphicsView *> const views = scene->views();
         if (not views.isEmpty())
         {
             return views.at(0);
@@ -794,13 +794,13 @@ void VPGraphicsPieceControls::PrepareTransformationOrigin(bool shiftPressed)
             return;
         }
 
-        VPLayoutPtr layout = m_layout.toStrongRef();
+        VPLayoutPtr const layout = m_layout.toStrongRef();
         if (layout.isNull())
         {
             return;
         }
 
-        VPSheetPtr sheet = layout->GetFocusedSheet();
+        VPSheetPtr const sheet = layout->GetFocusedSheet();
         if (sheet.isNull())
         {
             return;
@@ -842,13 +842,13 @@ void VPGraphicsPieceControls::PrepareTransformationOrigin(bool shiftPressed)
             return;
         }
 
-        VPLayoutPtr layout = m_layout.toStrongRef();
+        VPLayoutPtr const layout = m_layout.toStrongRef();
         if (layout.isNull())
         {
             return;
         }
 
-        VPSheetPtr sheet = layout->GetFocusedSheet();
+        VPSheetPtr const sheet = layout->GetFocusedSheet();
         if (sheet.isNull())
         {
             return;
@@ -894,7 +894,7 @@ void VPGraphicsPieceControls::CorrectRotationSum(const VPLayoutPtr &layout,
 //---------------------------------------------------------------------------------------------------------------------
 auto VPGraphicsPieceControls::SelectedHandleCorner(const QPointF &pos) const -> VPHandleCorner
 {
-    QMap<VPHandleCorner, QPainterPath> corners{
+    QMap<VPHandleCorner, QPainterPath> const corners{
         {VPHandleCorner::TopLeft, TopLeftControl()},
         {VPHandleCorner::TopRight, TopRightControl()},
         {VPHandleCorner::BottomRight, BottomRightControl()},

@@ -53,7 +53,7 @@ VPCarrouselPiece::VPCarrouselPiece(const VPPiecePtr &piece, QListWidget *parent)
 {
     SCASSERT(m_piece != nullptr)
     const int width = 120 - 8;
-    QString clippedText = QFontMetrics(font()).elidedText(piece->GetName(), Qt::ElideRight, width);
+    QString const clippedText = QFontMetrics(font()).elidedText(piece->GetName(), Qt::ElideRight, width);
     RefreshPieceIcon();
     setText(clippedText);
     setToolTip(piece->GetName());
@@ -68,7 +68,7 @@ auto VPCarrouselPiece::GetPiece() const -> VPPiecePtr
 //---------------------------------------------------------------------------------------------------------------------
 void VPCarrouselPiece::RefreshSelection()
 {
-    VPPiecePtr piece = GetPiece();
+    VPPiecePtr const piece = GetPiece();
     if (not piece.isNull())
     {
         setSelected(piece->IsSelected());
@@ -84,18 +84,18 @@ void VPCarrouselPiece::RefreshPieceIcon()
 //---------------------------------------------------------------------------------------------------------------------
 auto VPCarrouselPiece::CreatePieceIcon(const QSize &size, bool isDragIcon) const -> QIcon
 {
-    VPPiecePtr piece = GetPiece();
+    VPPiecePtr const piece = GetPiece();
     if (piece.isNull())
     {
         return {};
     }
 
-    QRectF boundingRect = piece->DetailBoundingRect();
-    qreal canvasSize = qMax(boundingRect.height(), boundingRect.width());
-    QRectF canvas = QRectF(0, 0, canvasSize, canvasSize);
+    QRectF const boundingRect = piece->DetailBoundingRect();
+    qreal const canvasSize = qMax(boundingRect.height(), boundingRect.width());
+    QRectF const canvas = QRectF(0, 0, canvasSize, canvasSize);
 
-    qreal dx = canvas.center().x() - boundingRect.center().x();
-    qreal dy = canvas.center().y() - boundingRect.center().y();
+    qreal const dx = canvas.center().x() - boundingRect.center().x();
+    qreal const dy = canvas.center().y() - boundingRect.center().y();
 
     QVector<QIcon::Mode> iconModes;
     iconModes.append(QIcon::Normal);
@@ -119,12 +119,12 @@ auto VPCarrouselPiece::CreatePieceIcon(const QSize &size, bool isDragIcon) const
         painter.setRenderHint(QPainter::Antialiasing);
         painter.setRenderHint(QPainter::SmoothPixmapTransform);
 
-        int spacing = 2;
+        int const spacing = 2;
 
         painter.translate(spacing, spacing);
 
-        qreal scaleFactorX = canvasSize * 100 / (size.width() - spacing * 2) / 100;
-        qreal scaleFactorY = canvasSize * 100 / (size.height() - spacing * 2) / 100;
+        qreal const scaleFactorX = canvasSize * 100 / (size.width() - spacing * 2) / 100;
+        qreal const scaleFactorY = canvasSize * 100 / (size.height() - spacing * 2) / 100;
         painter.scale(1. / scaleFactorX, 1. / scaleFactorY);
         painter.setPen(QPen(style.CarrouselPieceColor(), 0.8 * qMax(scaleFactorX, scaleFactorY)));
 
@@ -141,7 +141,7 @@ auto VPCarrouselPiece::CreatePieceIcon(const QSize &size, bool isDragIcon) const
                                                             : style.CarrouselPieceForegroundColor()));
 
         bool togetherWithNotches = false;
-        VPLayoutPtr pieceLayout = piece->Layout();
+        VPLayoutPtr const pieceLayout = piece->Layout();
         if (not pieceLayout.isNull())
         {
             togetherWithNotches = pieceLayout->LayoutSettings().IsBoundaryTogetherWithNotches();

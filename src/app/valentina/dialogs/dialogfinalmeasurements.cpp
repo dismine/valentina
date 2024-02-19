@@ -388,7 +388,7 @@ void DialogFinalMeasurements::SaveFormula()
     }
 
     // Replace line return character with spaces for calc if exist
-    QString text = ui->plainTextEditFormula->toPlainText();
+    QString const text = ui->plainTextEditFormula->toPlainText();
 
     QTableWidgetItem *formulaField = ui->tableWidget->item(row, 2);
     if (formulaField->text() == text)
@@ -472,7 +472,7 @@ void DialogFinalMeasurements::Fx()
         return;
     }
 
-    QScopedPointer<DialogEditWrongFormula> dialog(new DialogEditWrongFormula(&m_data, NULL_ID, this));
+    QScopedPointer<DialogEditWrongFormula> const dialog(new DialogEditWrongFormula(&m_data, NULL_ID, this));
     dialog->setWindowTitle(tr("Edit measurement"));
     dialog->SetFormula(VTranslateVars::TryFormulaFromUser(ui->plainTextEditFormula->toPlainText(),
                                                           VAbstractApplication::VApp()->Settings()->GetOsSeparator()));
@@ -610,7 +610,7 @@ auto DialogFinalMeasurements::EvalUserFormula(const QString &formula, bool fromU
         {
             f = formula;
         }
-        QScopedPointer<Calculator> cal(new Calculator());
+        QScopedPointer<Calculator> const cal(new Calculator());
         const qreal result = cal->EvalFormula(m_data.DataVariables(), f);
 
         if (qIsInf(result) || qIsNaN(result))
@@ -708,7 +708,7 @@ void DialogFinalMeasurements::EnableDetails(bool enabled)
 //---------------------------------------------------------------------------------------------------------------------
 void DialogFinalMeasurements::UpdateTree()
 {
-    int row = ui->tableWidget->currentRow();
+    int const row = ui->tableWidget->currentRow();
     FillFinalMeasurements();
     ui->tableWidget->blockSignals(true);
     ui->tableWidget->selectRow(row);
@@ -730,7 +730,7 @@ auto DialogFinalMeasurements::EvalFormula(const QString &formula, bool &ok) -> q
     try
     {
         // Replace line return character with spaces for calc if exist
-        QScopedPointer<Calculator> cal(new Calculator());
+        QScopedPointer<Calculator> const cal(new Calculator());
         result = cal->EvalFormula(m_data.DataVariables(), formula);
 
         if (qIsInf(result) || qIsNaN(result))
@@ -882,7 +882,7 @@ void DialogFinalMeasurements::InitSearch()
 //---------------------------------------------------------------------------------------------------------------------
 void DialogFinalMeasurements::InitSearchHistory()
 {
-    QStringList searchHistory =
+    QStringList const searchHistory =
         VAbstractValApplication::VApp()->ValentinaSettings()->GetFinalMeasurementsSearchHistory();
     m_searchHistory->clear();
 
@@ -903,7 +903,7 @@ void DialogFinalMeasurements::InitSearchHistory()
                     auto *action = qobject_cast<QAction *>(sender());
                     if (action != nullptr)
                     {
-                        QString term = action->data().toString();
+                        QString const term = action->data().toString();
                         ui->lineEditFind->setText(term);
                         m_search->Find(term);
                         ui->lineEditFind->setFocus();
@@ -917,7 +917,7 @@ void DialogFinalMeasurements::SaveSearchRequest()
 {
     QStringList searchHistory =
         VAbstractValApplication::VApp()->ValentinaSettings()->GetFinalMeasurementsSearchHistory();
-    QString term = ui->lineEditFind->text();
+    QString const term = ui->lineEditFind->text();
     if (term.isEmpty())
     {
         return;
@@ -944,7 +944,7 @@ void DialogFinalMeasurements::UpdateSearchControlsTooltips()
         }
         else if (m_serachButtonTooltips.contains(button))
         {
-            QString tooltip = m_serachButtonTooltips.value(button);
+            QString const tooltip = m_serachButtonTooltips.value(button);
             button->setToolTip(tooltip.arg(button->shortcut().toString(QKeySequence::NativeText)));
         }
     };
@@ -961,7 +961,7 @@ void DialogFinalMeasurements::UpdateSearchControlsTooltips()
 //---------------------------------------------------------------------------------------------------------------------
 void DialogFinalMeasurements::InitIcons()
 {
-    QString resource = QStringLiteral("icon");
+    QString const resource = QStringLiteral("icon");
 
     ui->toolButtonExpr->setIcon(VTheme::GetIconResource(resource, QStringLiteral("24x24/fx.png")));
 }

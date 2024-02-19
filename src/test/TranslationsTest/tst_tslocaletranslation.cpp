@@ -51,7 +51,7 @@ void TST_TSLocaleTranslation::CheckPlaceMarkerExist_data()
     QTest::addColumn<Qt::LayoutDirection>("direction");
 
     const QString filename = QStringLiteral("valentina_%1.ts").arg(m_locale);
-    QLocale locale(m_locale);
+    QLocale const locale(m_locale);
 
     const QDomNodeList messages = LoadTSFile(filename);
     if (messages.isEmpty())

@@ -135,10 +135,11 @@ inline auto operator>>(QDataStream &dataStream, VAbstractPieceData &piece) -> QD
 
     if (actualStreamHeader != VAbstractPieceData::streamHeader)
     {
-        QString message = QCoreApplication::tr("VAbstractPieceData prefix mismatch error: actualStreamHeader = 0x%1 "
-                                               "and streamHeader = 0x%2")
-                              .arg(actualStreamHeader, 8, 0x10, QLatin1Char('0'))
-                              .arg(VAbstractPieceData::streamHeader, 8, 0x10, QLatin1Char('0'));
+        QString const message =
+            QCoreApplication::tr("VAbstractPieceData prefix mismatch error: actualStreamHeader = 0x%1 "
+                                 "and streamHeader = 0x%2")
+                .arg(actualStreamHeader, 8, 0x10, QLatin1Char('0'))
+                .arg(VAbstractPieceData::streamHeader, 8, 0x10, QLatin1Char('0'));
         throw VException(message);
     }
 
@@ -147,10 +148,11 @@ inline auto operator>>(QDataStream &dataStream, VAbstractPieceData &piece) -> QD
 
     if (actualClassVersion > VAbstractPieceData::classVersion)
     {
-        QString message = QCoreApplication::tr("VAbstractPieceData compatibility error: actualClassVersion = %1 and "
-                                               "classVersion = %2")
-                              .arg(actualClassVersion)
-                              .arg(VAbstractPieceData::classVersion);
+        QString const message =
+            QCoreApplication::tr("VAbstractPieceData compatibility error: actualClassVersion = %1 and "
+                                 "classVersion = %2")
+                .arg(actualClassVersion)
+                .arg(VAbstractPieceData::classVersion);
         throw VException(message);
     }
 

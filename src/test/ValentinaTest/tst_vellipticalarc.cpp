@@ -149,15 +149,16 @@ void TST_VEllipticalArc::CompareTwoWays()
 
     const VPointF center(c);
 
-    VEllipticalArc arc1(center, radius1, radius2, f1, f2, rotationAngle);
+    VEllipticalArc const arc1(center, radius1, radius2, f1, f2, rotationAngle);
     const qreal length = arc1.GetLength();
 
-    VEllipticalArc arc2(length, center, radius1, radius2, f1, rotationAngle);
+    VEllipticalArc const arc2(length, center, radius1, radius2, f1, rotationAngle);
 
     Q_RELAXED_CONSTEXPR qreal lengthEps = ToPixel(0.45, Unit::Mm); // computing error
 
     // cppcheck-suppress unreadVariable
-    QString errorLengthMsg = u"Difference between real and computing lengthes bigger than eps = %1. l1 = %2; l2 = %3"_s;
+    QString const errorLengthMsg =
+        u"Difference between real and computing lengthes bigger than eps = %1. l1 = %2; l2 = %3"_s;
     QVERIFY2(qAbs(arc2.GetLength() - length) <= lengthEps,
              qUtf8Printable(errorLengthMsg.arg(lengthEps).arg(arc2.GetLength()).arg(length)));
     QVERIFY2(qAbs(arc1.GetLength() - arc2.GetLength()) <= lengthEps,
@@ -212,7 +213,7 @@ void TST_VEllipticalArc::ArcByLength()
                     ((qAbs(radius1) + qAbs(radius2)) * (qAbs(radius1) + qAbs(radius2)));
     const qreal length =
         (M_PI * (qAbs(radius1) + qAbs(radius2)) * (1 + 3 * h / (10 + qSqrt(4 - 3 * h))) / 2) * direction;
-    VEllipticalArc arc(length, center, radius1, radius2, f1, rotationAngle);
+    VEllipticalArc const arc(length, center, radius1, radius2, f1, rotationAngle);
 
     Q_RELAXED_CONSTEXPR qreal eps = ToPixel(0.45, Unit::Mm); // computing error
     // cppcheck-suppress unreadVariable
@@ -718,7 +719,7 @@ void TST_VEllipticalArc::TestGetPoints1()
     VEllipticalArc arc(center, radius1, radius2, startAngle, endAngle, rotationAngle);
     arc.SetApproximationScale(maxCurveApproximationScale);
 
-    QVector<QPointF> points = arc.GetPoints();
+    QVector<QPointF> const points = arc.GetPoints();
     if (qFuzzyIsNull(rotationAngle))
     { // equation of ellipse will be different when rotation angle isn't 0 so we can't use this test in this case
         const qreal eps = 0.05;
@@ -750,7 +751,7 @@ void TST_VEllipticalArc::TestGetPoints2()
     const VPointF center;
     VEllipticalArc arc(center, radius1, radius2, startAngle, endAngle, rotationAngle);
     arc.SetApproximationScale(maxCurveApproximationScale);
-    QVector<QPointF> points = arc.GetPoints();
+    QVector<QPointF> const points = arc.GetPoints();
 
     const qreal c = qSqrt(qAbs(radius2 * radius2 - radius1 * radius1));
     // distance from the center to the focus
@@ -826,7 +827,7 @@ void TST_VEllipticalArc::TestGetPoints3()
     const VPointF center;
     VEllipticalArc arc(center, radius1, radius2, startAngle, endAngle, rotationAngle);
     arc.SetApproximationScale(maxCurveApproximationScale);
-    QVector<QPointF> points = arc.GetPoints();
+    QVector<QPointF> const points = arc.GetPoints();
 
     if (VFuzzyComparePossibleNulls(arc.AngleArc(), 360.0))
     { // calculated full ellipse square
@@ -918,7 +919,7 @@ void TST_VEllipticalArc::TestGetPoints5()
     QCOMPARE(f1, stAngle);
     QCOMPARE(f2, enAngle);
 
-    QVector<QPointF> points = arc.GetPoints();
+    QVector<QPointF> const points = arc.GetPoints();
 
     if (points.size() > 2 && qFuzzyIsNull(rotationAngle))
     {
@@ -1081,7 +1082,8 @@ void TST_VEllipticalArc::TestRotation()
              qUtf8Printable(u"a1 = %1, a2 - %2"_s.arg(arcOrigin.AngleArc()).arg(rotatedArc.AngleArc())));
 
     // cppcheck-suppress unreadVariable
-    QString errorLengthMsg = u"Difference between real and computing lengthes bigger than eps = %1. l1 = %2; l2 = %3"_s;
+    QString const errorLengthMsg =
+        u"Difference between real and computing lengthes bigger than eps = %1. l1 = %2; l2 = %3"_s;
     QVERIFY2(qAbs(arcOrigin.GetLength() - rotatedArc.GetLength()) <= ToPixel(1, Unit::Mm),
              qUtf8Printable(
                  errorLengthMsg.arg(ToPixel(1, Unit::Mm)).arg(arcOrigin.GetLength()).arg(rotatedArc.GetLength())));

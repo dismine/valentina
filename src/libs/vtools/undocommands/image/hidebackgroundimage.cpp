@@ -43,7 +43,7 @@ HideBackgroundImage::HideBackgroundImage(QUuid id, bool hide, VAbstractPattern *
         setText(tr("show a background image"));
     }
 
-    VBackgroundPatternImage image = doc->GetBackgroundImage(m_id);
+    VBackgroundPatternImage const image = doc->GetBackgroundImage(m_id);
 
     m_oldVisibility = image.Visible();
 }

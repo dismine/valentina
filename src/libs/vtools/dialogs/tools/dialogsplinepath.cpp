@@ -543,7 +543,7 @@ void DialogSplinePath::FXLength2()
 //---------------------------------------------------------------------------------------------------------------------
 void DialogSplinePath::ValidateAlias()
 {
-    QRegularExpression rx(NameRegExp());
+    QRegularExpression const rx(NameRegExp());
 
     VSplinePath tempPath = path;
     tempPath.SetAliasSuffix(ui->lineEditAlias->text());
@@ -914,7 +914,7 @@ void DialogSplinePath::DataPoint(const VSplinePoint &p)
     ChangeCurrentData(ui->comboBoxPoint, p.P().id());
     ui->comboBoxPoint->blockSignals(false);
 
-    int row = ui->listWidget->currentRow();
+    int const row = ui->listWidget->currentRow();
     const QString field = tr("Not used");
     const QString emptyRes = QChar('_');
 

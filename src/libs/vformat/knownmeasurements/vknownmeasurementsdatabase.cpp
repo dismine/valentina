@@ -51,7 +51,7 @@ QT_WARNING_POP
 //---------------------------------------------------------------------------------------------------------------------
 void VKnownMeasurementsDatabase::PopulateMeasurementsDatabase()
 {
-    QMutexLocker locker(knownMeasurementsDatabaseMutex());
+    QMutexLocker const locker(knownMeasurementsDatabaseMutex());
 
     m_measurementsCache.clear();
 
@@ -69,7 +69,7 @@ void VKnownMeasurementsDatabase::PopulateMeasurementsDatabase()
 //---------------------------------------------------------------------------------------------------------------------
 auto VKnownMeasurementsDatabase::IsPopulated() const -> bool
 {
-    QMutexLocker locker(knownMeasurementsDatabaseMutex());
+    QMutexLocker const locker(knownMeasurementsDatabaseMutex());
     return m_populated;
 }
 
@@ -92,7 +92,7 @@ auto VKnownMeasurementsDatabase::KnownMeasurements(const QUuid &id) const -> VKn
         return {*m_measurementsCache.object(id)};
     }
 
-    QString measurementsFilePath = m_indexMeasurementsPath.value(id);
+    QString const measurementsFilePath = m_indexMeasurementsPath.value(id);
     if (measurementsFilePath.isEmpty())
     {
         return {};
@@ -136,7 +136,7 @@ void VKnownMeasurementsDatabase::ParseDirectory(const QString &path)
     QDirIterator it(path, {"*.vkm"}, QDir::Files, QDirIterator::Subdirectories);
     while (it.hasNext())
     {
-        QString measurementsFilePath = it.next();
+        QString const measurementsFilePath = it.next();
 
         try
         {

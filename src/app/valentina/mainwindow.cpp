@@ -288,7 +288,7 @@ auto SortDetailsForLayout(const QHash<quint32, VPiece> *allDetails, const QStrin
     }
     else
     {
-        QRegularExpression nameRe(nameRegex);
+        QRegularExpression const nameRe(nameRegex);
         while (i != allDetails->constEnd())
         {
             if (nameRe.match(i.value().GetName()).hasMatch())
@@ -852,8 +852,8 @@ void MainWindow::SetToolButton(bool checked, Tool t, const QString &cursor, cons
                     cursorResource = cursorHiDPIResource;
                 }
             }
-            QPixmap pixmap(cursorResource);
-            QCursor cur(pixmap, 2, 2);
+            QPixmap const pixmap(cursorResource);
+            QCursor const cur(pixmap, 2, 2);
             ui->view->viewport()->setCursor(cur);
             ui->view->setCurrentCursorShape(); // Hack to fix problem with a cursor
         }
@@ -1603,7 +1603,7 @@ void MainWindow::PlaceBackgroundImage(const QPointF &pos, const QString &fileNam
 //---------------------------------------------------------------------------------------------------------------------
 void MainWindow::RemoveBackgroundImage(const QUuid &id)
 {
-    VBackgroundPatternImage image = doc->GetBackgroundImage(id);
+    VBackgroundPatternImage const image = doc->GetBackgroundImage(id);
 
     auto *deleteBackgroundImage = new DeleteBackgroundImage(image, doc);
     connect(deleteBackgroundImage, &DeleteBackgroundImage::AddItem, this, &MainWindow::AddBackgroundImageItem);
@@ -1971,7 +1971,7 @@ void MainWindow::ExportToCSVData(const QString &fileName, bool withHeader, int m
         while (iMap.hasNext())
         {
             iMap.next();
-            QSharedPointer<VIncrement> incr = increments.value(iMap.value());
+            QSharedPointer<VIncrement> const incr = increments.value(iMap.value());
             currentRow++;
 
             csv.insertRow(currentRow);
@@ -1979,7 +1979,7 @@ void MainWindow::ExportToCSVData(const QString &fileName, bool withHeader, int m
             csv.setText(currentRow, 1,
                         VAbstractApplication::VApp()->LocaleToString(*incr->GetValue())); // calculated value
 
-            QString formula = VTranslateVars::TryFormulaToUser(
+            QString const formula = VTranslateVars::TryFormulaToUser(
                 incr->GetFormula(), VAbstractApplication::VApp()->Settings()->GetOsSeparator());
             csv.setText(currentRow, 2, formula); // formula
         }
@@ -2062,7 +2062,7 @@ void MainWindow::LoadMultisize()
     const QString filter = tr("Multisize measurements") + QStringLiteral(" (*.vst);;") + tr("Individual measurements") +
                            QStringLiteral("(*.vit)");
     // Use standard path to multisize measurements
-    QString path = VAbstractValApplication::VApp()->ValentinaSettings()->GetPathMultisizeMeasurements();
+    QString const path = VAbstractValApplication::VApp()->ValentinaSettings()->GetPathMultisizeMeasurements();
     const QString mPath = QFileDialog::getOpenFileName(this, tr("Open file"), path, filter, nullptr,
                                                        VAbstractApplication::VApp()->NativeFileDialog());
 
@@ -2204,7 +2204,7 @@ void MainWindow::ShowMeasurements()
 void MainWindow::MeasurementsChanged(const QString &path)
 {
     m_mChanges = false;
-    QFileInfo checkFile(path);
+    QFileInfo const checkFile(path);
     if (checkFile.exists())
     {
         m_mChanges = true;
@@ -2279,7 +2279,7 @@ void MainWindow::EditCurrentWatermark()
 {
     CleanWaterkmarkEditors();
 
-    QString watermarkFile = doc->GetWatermarkPath();
+    QString const watermarkFile = doc->GetWatermarkPath();
     if (not watermarkFile.isEmpty())
     {
         OpenWatermark(watermarkFile);
@@ -2290,7 +2290,7 @@ void MainWindow::EditCurrentWatermark()
 void MainWindow::LoadWatermark()
 {
     const QString filter(tr("Watermark files") + QStringLiteral(" (*.vwm)"));
-    QString dir = QDir::homePath();
+    QString const dir = QDir::homePath();
     qDebug("Run QFileDialog::getOpenFileName: dir = %s.", qUtf8Printable(dir));
     const QString filePath = QFileDialog::getOpenFileName(this, tr("Open file"), dir, filter, nullptr,
                                                           VAbstractApplication::VApp()->NativeFileDialog());
@@ -2322,7 +2322,7 @@ void MainWindow::CleanWaterkmarkEditors()
     QMutableListIterator<QPointer<WatermarkWindow>> i(m_watermarkEditors);
     while (i.hasNext())
     {
-        QPointer<WatermarkWindow> watermarkEditor = i.next();
+        QPointer<WatermarkWindow> const watermarkEditor = i.next();
         if (watermarkEditor.isNull())
         {
             i.remove();
@@ -2335,7 +2335,7 @@ void MainWindow::StoreMultisizeMDimensions()
 {
     VAbstractValApplication::VApp()->SetMeasurementsUnits(m_m->Units());
 
-    QList<MeasurementDimension_p> dimensions = m_m->Dimensions().values();
+    QList<MeasurementDimension_p> const dimensions = m_m->Dimensions().values();
 
     if (not dimensions.isEmpty())
     {
@@ -2369,7 +2369,7 @@ void MainWindow::StoreMultisizeMDimensions()
 //---------------------------------------------------------------------------------------------------------------------
 void MainWindow::StoreIndividualMDimensions()
 {
-    QMap<QString, QSharedPointer<VMeasurement>> measurements = pattern->DataMeasurements();
+    QMap<QString, QSharedPointer<VMeasurement>> const measurements = pattern->DataMeasurements();
 
     StoreIndividualMDimension(measurements, IMD::X);
     StoreIndividualMDimension(measurements, IMD::Y);
@@ -2549,10 +2549,10 @@ void MainWindow::ExportDraw(const QString &fileName)
 
     exporter.SetFileName(fileName);
 
-    int verticalScrollBarValue = ui->view->verticalScrollBar()->value();
-    int horizontalScrollBarValue = ui->view->horizontalScrollBar()->value();
+    int const verticalScrollBarValue = ui->view->verticalScrollBar()->value();
+    int const horizontalScrollBarValue = ui->view->horizontalScrollBar()->value();
 
-    QTransform viewTransform = ui->view->transform();
+    QTransform const viewTransform = ui->view->transform();
     ui->view->ZoomFitBest(); // Resize all labels
     ui->view->repaint();
     ui->view->ZoomOriginal(); // Set to original scale
@@ -2942,7 +2942,7 @@ void MainWindow::ToolBarDraws()
             [this]()
             {
                 QString draw = doc->GetNameActivPP();
-                bool ok = PatternPieceName(draw);
+                bool const ok = PatternPieceName(draw);
                 if (not ok)
                 {
                     return;
@@ -4087,8 +4087,8 @@ void MainWindow::ActionLayout(bool checked)
 auto MainWindow::on_actionSaveAs_triggered() -> bool
 {
     VValentinaSettings *settings = VAbstractValApplication::VApp()->ValentinaSettings();
-    QString patternPath = VAbstractValApplication::VApp()->GetPatternPath();
-    QString dir = patternPath.isEmpty() ? settings->GetPathPattern() : QFileInfo(patternPath).absolutePath();
+    QString const patternPath = VAbstractValApplication::VApp()->GetPatternPath();
+    QString const dir = patternPath.isEmpty() ? settings->GetPathPattern() : QFileInfo(patternPath).absolutePath();
 
     QString newFileName = tr("pattern") + QStringLiteral(".val");
     if (not patternPath.isEmpty())
@@ -4096,7 +4096,7 @@ auto MainWindow::on_actionSaveAs_triggered() -> bool
         newFileName = QFileInfo(patternPath).fileName();
     }
 
-    QString filters(tr("Pattern files") + QStringLiteral("(*.val)"));
+    QString const filters(tr("Pattern files") + QStringLiteral("(*.val)"));
     QString fileName = QFileDialog::getSaveFileName(this, tr("Save as"), dir + '/'_L1 + newFileName, filters, nullptr,
                                                     VAbstractApplication::VApp()->NativeFileDialog());
 
@@ -4105,7 +4105,7 @@ auto MainWindow::on_actionSaveAs_triggered() -> bool
         return false;
     }
 
-    QFileInfo f(fileName);
+    QFileInfo const f(fileName);
     if (f.suffix().isEmpty() && f.suffix() != "val"_L1)
     {
         fileName += ".val"_L1;
@@ -4120,7 +4120,7 @@ auto MainWindow::on_actionSaveAs_triggered() -> bool
     {
         // Temporary try to lock the file before saving
         // Also help to rewite current read-only pattern
-        VLockGuard<char> tmp(fileName);
+        VLockGuard<char> const tmp(fileName);
         if (not tmp.IsLocked())
         {
             qCCritical(vMainWindow, "%s",
@@ -4156,7 +4156,7 @@ auto MainWindow::on_actionSave_triggered() -> bool
     }
 
     QString error;
-    bool result = SavePattern(VAbstractValApplication::VApp()->GetPatternPath(), error);
+    bool const result = SavePattern(VAbstractValApplication::VApp()->GetPatternPath(), error);
     if (result)
     {
         QFile::remove(VAbstractValApplication::VApp()->GetPatternPath() + *autosavePrefix);
@@ -4226,7 +4226,7 @@ void MainWindow::on_actionCreateManualLayout_triggered()
     QTemporaryFile rldFile(QDir::tempPath() + "/puzzle.rld.XXXXXX"_L1);
     if (rldFile.open())
     {
-        QVector<DetailForLayout> detailsInLayout = SortDetailsForLayout(pattern->DataPieces());
+        QVector<DetailForLayout> const detailsInLayout = SortDetailsForLayout(pattern->DataPieces());
 
         if (detailsInLayout.count() == 0)
         {
@@ -4306,7 +4306,7 @@ void MainWindow::on_actionUpdateManualLayout_triggered()
     rldFile.setAutoRemove(false);
     if (rldFile.open())
     {
-        QVector<DetailForLayout> detailsInLayout = SortDetailsForLayout(pattern->DataPieces());
+        QVector<DetailForLayout> const detailsInLayout = SortDetailsForLayout(pattern->DataPieces());
 
         if (detailsInLayout.count() == 0)
         {
@@ -4366,7 +4366,7 @@ void MainWindow::ActionAddBackgroundImage()
                                      nullptr, VAbstractApplication::VApp()->NativeFileDialog());
     if (not fileName.isEmpty())
     {
-        QRect viewportRect(0, 0, ui->view->viewport()->width(), ui->view->viewport()->height());
+        QRect const viewportRect(0, 0, ui->view->viewport()->width(), ui->view->viewport()->height());
         PlaceBackgroundImage(ui->view->mapToScene(viewportRect.center()), fileName);
     }
 }
@@ -4379,7 +4379,7 @@ void MainWindow::ActionExportFontCorrections()
     const QString dirPath = settings->GetPathFontCorrections();
 
     bool usedNotExistedDir = false;
-    QDir directory(dirPath);
+    QDir const directory(dirPath);
     if (not directory.exists())
     {
         usedNotExistedDir = directory.mkpath(QChar('.'));
@@ -4390,7 +4390,7 @@ void MainWindow::ActionExportFontCorrections()
         {
             if (usedNotExistedDir)
             {
-                QDir directory(dirPath);
+                QDir const directory(dirPath);
                 directory.rmpath(QChar('.'));
             }
         });
@@ -4400,7 +4400,7 @@ void MainWindow::ActionExportFontCorrections()
         VAbstractApplication::VApp()->NativeFileDialog(QFileDialog::ShowDirsOnly | QFileDialog::DontResolveSymlinks));
     if (not dir.isEmpty())
     {
-        VSingleLineOutlineChar corrector(settings->GetLabelFont());
+        VSingleLineOutlineChar const corrector(settings->GetLabelFont());
         corrector.ExportCorrections(dir);
     }
 }
@@ -4924,7 +4924,7 @@ void MainWindow::AskDefaultSettings()
             QGuiApplication::restoreOverrideCursor();
             if (dialog.exec() == QDialog::Accepted)
             {
-                QString locale = dialog.Locale();
+                QString const locale = dialog.Locale();
                 settings->SetLocale(locale);
                 VAbstractApplication::VApp()->LoadTranslation(locale);
             }
@@ -5004,7 +5004,7 @@ void MainWindow::ShowBackgroundImageInExplorer(const QUuid &id)
 //---------------------------------------------------------------------------------------------------------------------
 void MainWindow::SaveBackgroundImage(const QUuid &id)
 {
-    VBackgroundPatternImage image = doc->GetBackgroundImage(id);
+    VBackgroundPatternImage const image = doc->GetBackgroundImage(id);
 
     if (not image.IsValid())
     {
@@ -5019,13 +5019,13 @@ void MainWindow::SaveBackgroundImage(const QUuid &id)
     }
 
     const QByteArray imageData = QByteArray::fromBase64(image.ContentData());
-    QMimeType mime = MimeTypeFromByteArray(imageData);
+    QMimeType const mime = MimeTypeFromByteArray(imageData);
     QString path = QDir::homePath() + QDir::separator() + tr("untitled");
     QStringList filters;
 
     if (mime.isValid())
     {
-        QStringList suffixes = mime.suffixes();
+        QStringList const suffixes = mime.suffixes();
         if (not suffixes.isEmpty())
         {
             path += '.'_L1 + suffixes.at(0);
@@ -5036,9 +5036,9 @@ void MainWindow::SaveBackgroundImage(const QUuid &id)
 
     filters.append(tr("All files") + " (*.*)"_L1);
 
-    QString filter = filters.join(QStringLiteral(";;"));
+    QString const filter = filters.join(QStringLiteral(";;"));
 
-    QString filename = QFileDialog::getSaveFileName(this, tr("Save Image"), path, filter, nullptr,
+    QString const filename = QFileDialog::getSaveFileName(this, tr("Save Image"), path, filter, nullptr,
                                                     VAbstractApplication::VApp()->NativeFileDialog());
     if (not filename.isEmpty())
     {
@@ -5061,7 +5061,7 @@ void MainWindow::ParseBackgroundImages()
     m_backgroudcontrols = nullptr; // force creating new controls
     m_backgroundImages.clear();    // clear dangling pointers
 
-    QVector<VBackgroundPatternImage> allImages = doc->GetBackgroundImages();
+    QVector<VBackgroundPatternImage> const allImages = doc->GetBackgroundImages();
     for (const auto &image : allImages)
     {
         NewBackgroundImageItem(image);
@@ -5097,8 +5097,8 @@ void MainWindow::ActionHistory_triggered(bool checked)
 //---------------------------------------------------------------------------------------------------------------------
 void MainWindow::ActionExportRecipe_triggered()
 {
-    QString filters(tr("Recipe files") + QStringLiteral("(*.vpr)"));
-    QString fileName = QFileDialog::getSaveFileName(this, tr("Export recipe"),
+    QString const filters(tr("Recipe files") + QStringLiteral("(*.vpr)"));
+    QString const fileName = QFileDialog::getSaveFileName(this, tr("Export recipe"),
                                                     QDir::homePath() + '/' + tr("recipe") + QStringLiteral(".vpr"),
                                                     filters, nullptr, VAbstractApplication::VApp()->NativeFileDialog());
     if (fileName.isEmpty())
@@ -5129,7 +5129,7 @@ void MainWindow::ActionNewDraw_triggered()
     qCDebug(vMainWindow, "Generated PP name: %s", qUtf8Printable(patternPieceName));
 
     qCDebug(vMainWindow, "PP count %d", m_comboBoxDraws->count());
-    bool ok = PatternPieceName(patternPieceName);
+    bool const ok = PatternPieceName(patternPieceName);
     qCDebug(vMainWindow, "PP name: %s", qUtf8Printable(patternPieceName));
     if (not ok)
     {
@@ -5371,11 +5371,11 @@ void MainWindow::InitDimensionGradation(int index, const MeasurementDimension_p 
     }
 
     // Calculate the width of the largest item using QFontMetrics
-    QFontMetrics fontMetrics(control->font());
+    QFontMetrics const fontMetrics(control->font());
     int maxWidth = 0;
     for (int i = 0; i < control->count(); ++i)
     {
-        int itemWidth = fontMetrics.horizontalAdvance(control->itemText(i));
+        int const itemWidth = fontMetrics.horizontalAdvance(control->itemText(i));
         if (itemWidth > maxWidth)
         {
             maxWidth = itemWidth;
@@ -5389,7 +5389,7 @@ void MainWindow::InitDimensionGradation(int index, const MeasurementDimension_p 
     // it invalid first
     control->setCurrentIndex(-1);
 
-    int i = control->findData(current);
+    int const i = control->findData(current);
     if (i != -1)
     {
         control->setCurrentIndex(i);
@@ -5576,7 +5576,7 @@ void MainWindow::MinimumScrollBar()
 auto MainWindow::SavePattern(const QString &fileName, QString &error) -> bool
 {
     qCDebug(vMainWindow, "Saving pattern file %s.", qUtf8Printable(fileName));
-    QFileInfo tempInfo(fileName);
+    QFileInfo const tempInfo(fileName);
 
     const QString mPath = AbsoluteMPath(VAbstractValApplication::VApp()->GetPatternPath(), doc->MPath());
     if (not mPath.isEmpty() && VAbstractValApplication::VApp()->GetPatternPath() != fileName)
@@ -5744,7 +5744,7 @@ auto MainWindow::MaybeSave() -> bool
 {
     if (this->isWindowModified() && m_guiEnabled)
     {
-        QScopedPointer<QMessageBox> messageBox(
+        QScopedPointer<QMessageBox> const messageBox(
             new QMessageBox(QMessageBox::Warning, tr("Unsaved changes"),
                             tr("The pattern has been modified. Do you want to save your changes?"),
                             QMessageBox::Yes | QMessageBox::No | QMessageBox::Cancel, this, Qt::Sheet));
@@ -6278,7 +6278,7 @@ void MainWindow::InitAutoSave()
 //---------------------------------------------------------------------------------------------------------------------
 auto MainWindow::PatternPieceName(QString &name) -> bool
 {
-    QScopedPointer<QInputDialog> dlg(new QInputDialog(this));
+    QScopedPointer<QInputDialog> const dlg(new QInputDialog(this));
     dlg->setInputMode(QInputDialog::TextInput);
     dlg->setLabelText(tr("Pattern piece:"));
     dlg->setTextEchoMode(QLineEdit::Normal);
@@ -6328,14 +6328,14 @@ auto MainWindow::LoadPattern(QString fileName, const QString &customMeasureFile)
     qCDebug(vMainWindow, "Loading new file %s.", qUtf8Printable(fileName));
 
     { // Convert to absolute path if need
-        QFileInfo info(fileName);
+        QFileInfo const info(fileName);
         if (info.exists() && info.isRelative())
         {
             fileName = QFileInfo(QDir::currentPath() + '/'_L1 + fileName).canonicalFilePath();
         }
     }
 
-    QFuture<VPatternConverter *> futureConverter = QtConcurrent::run(
+    QFuture<VPatternConverter *> const futureConverter = QtConcurrent::run(
         [fileName]()
         {
             std::unique_ptr<VPatternConverter> converter(new VPatternConverter(fileName));
@@ -6455,7 +6455,7 @@ auto MainWindow::LoadPattern(QString fileName, const QString &customMeasureFile)
         if (currentFormatVersion != VPatternConverter::PatternMaxVer)
         { // Because we rely on the fact that we know where is path to measurements optimization available only for
           // the latest format version
-            QScopedPointer<VPatternConverter> converter(futureConverter.result());
+            QScopedPointer<VPatternConverter> const converter(futureConverter.result());
             m_curFileFormatVersion = converter->GetCurrentFormatVersion();
             m_curFileFormatVersionStr = converter->GetFormatVersionStr();
             doc->setXMLContent(converter->Convert());
@@ -6556,7 +6556,7 @@ auto MainWindow::LoadPattern(QString fileName, const QString &customMeasureFile)
         if (currentFormatVersion == VPatternConverter::PatternMaxVer)
         {
             // Real read
-            QScopedPointer<VPatternConverter> converter(futureConverter.result());
+            QScopedPointer<VPatternConverter> const converter(futureConverter.result());
             m_curFileFormatVersion = converter->GetCurrentFormatVersion();
             m_curFileFormatVersionStr = converter->GetFormatVersionStr();
             doc->setXMLContent(converter->Convert());
@@ -6643,7 +6643,7 @@ auto MainWindow::GetUnlokedRestoreFileList() -> QStringList
         for (auto &file : files)
         {
             // Seeking file that realy need reopen
-            VLockGuard<char> tmp(file);
+            VLockGuard<char> const tmp(file);
             if (tmp.IsLocked())
             {
                 restoreFiles.append(file);
@@ -6687,7 +6687,7 @@ void MainWindow::ToolboxIconSize()
     auto SetIconSize = [](QToolBar *bar)
     {
         VCommonSettings *settings = VAbstractApplication::VApp()->Settings();
-        QSize size = settings->GetToolboxIconSizeSmall() ? QSize(24, 24) : QSize(32, 32);
+        QSize const size = settings->GetToolboxIconSizeSmall() ? QSize(24, 24) : QSize(32, 32);
         bar->setIconSize(size);
     };
 
@@ -6724,7 +6724,7 @@ void MainWindow::Preferences()
         QGuiApplication::setOverrideCursor(QCursor(Qt::WaitCursor));
         auto *preferences = new DialogPreferences(this);
         // QScopedPointer needs to be sure any exception will never block guard
-        QScopedPointer<DialogPreferences> dlg(preferences);
+        QScopedPointer<DialogPreferences> const dlg(preferences);
         guard = preferences;
         connect(dlg.data(), &DialogPreferences::UpdateProperties, this, &MainWindow::WindowsLocale); // Must be first
         connect(dlg.data(), &DialogPreferences::UpdateProperties, m_toolOptions,
@@ -6770,8 +6770,8 @@ void MainWindow::ExportDrawAs(bool checked)
 
     auto Uncheck = qScopeGuard([this] { ui->actionExportDraw->setChecked(false); });
 
-    QString filters(tr("Scalable Vector Graphics files") + QStringLiteral("(*.svg)"));
-    QString dir = QDir::homePath() + '/'_L1 + FileName() + QStringLiteral(".svg");
+    QString const filters(tr("Scalable Vector Graphics files") + QStringLiteral("(*.svg)"));
+    QString const dir = QDir::homePath() + '/'_L1 + FileName() + QStringLiteral(".svg");
     QString fileName = QFileDialog::getSaveFileName(this, tr("Save draw"), dir, filters, nullptr,
                                                     VAbstractApplication::VApp()->NativeFileDialog());
 
@@ -6780,7 +6780,7 @@ void MainWindow::ExportDrawAs(bool checked)
         return;
     }
 
-    QFileInfo f(fileName);
+    QFileInfo const f(fileName);
     if (f.suffix().isEmpty() || f.suffix() != "svg"_L1)
     {
         fileName += ".svg"_L1;
@@ -6835,7 +6835,7 @@ void MainWindow::ExportDetailsAs(bool checked)
 
     auto Uncheck = qScopeGuard([this] { ui->actionDetailExportAs->setChecked(false); });
 
-    QVector<DetailForLayout> detailsInLayout = SortDetailsForLayout(pattern->DataPieces());
+    QVector<DetailForLayout> const detailsInLayout = SortDetailsForLayout(pattern->DataPieces());
 
     if (detailsInLayout.count() == 0)
     {
@@ -6964,7 +6964,7 @@ auto MainWindow::CheckPathToMeasurements(const QString &patternPath, const QStri
         return mPath;
     };
 
-    QFileInfo table(path);
+    QFileInfo const table(path);
     if (table.exists())
     {
         return path;
@@ -6978,7 +6978,7 @@ auto MainWindow::CheckPathToMeasurements(const QString &patternPath, const QStri
     const QString text = tr("The measurements file <br/><br/> <b>%1</b> <br/><br/> could not be found. Do you "
                             "want to update the file location?")
                              .arg(path);
-    QMessageBox::StandardButton res = QMessageBox::question(this, tr("Loading measurements file"), text,
+    QMessageBox::StandardButton const res = QMessageBox::question(this, tr("Loading measurements file"), text,
                                                             QMessageBox::Yes | QMessageBox::No, QMessageBox::Yes);
     if (res == QMessageBox::No)
     {
@@ -7052,7 +7052,7 @@ auto MainWindow::CheckPathToMeasurements(const QString &patternPath, const QStri
         return mPath;
     }
 
-    QScopedPointer<VMeasurements> m(new VMeasurements(pattern));
+    QScopedPointer<VMeasurements> const m(new VMeasurements(pattern));
     m->setXMLContent(mPath);
 
     patternType = m->Type();
@@ -7313,7 +7313,7 @@ auto MainWindow::DoFMExport(const VCommandLinePtr &expParams) -> bool
         return false;
     }
 
-    QFileInfo info(filePath);
+    QFileInfo const info(filePath);
     if (info.isRelative())
     {
         filePath = QDir::currentPath() + '/'_L1 + filePath;

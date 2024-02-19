@@ -64,7 +64,7 @@ auto VPE::QVector3DProperty::data(int column, int role) const -> QVariant
 {
     if (column == DPC_Data && Qt::DisplayRole == role)
     {
-        Vector3D tmpVect = getVector();
+        Vector3D const tmpVect = getVector();
         return u"(%1, %2, %3)"_s.arg(QString::number(tmpVect.X), QString::number(tmpVect.Y),
                                      QString::number(tmpVect.Z));
     }
@@ -165,6 +165,6 @@ void VPE::QVector3DProperty::setValue(const QVariant &value)
 
 auto VPE::QVector3DProperty::getValue() const -> QVariant
 {
-    Vector3D tmpVect = getVector();
+    Vector3D const tmpVect = getVector();
     return u"%1,%2,%3"_s.arg(QString::number(tmpVect.X), QString::number(tmpVect.Y), QString::number(tmpVect.Z));
 }

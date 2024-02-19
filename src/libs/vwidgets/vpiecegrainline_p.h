@@ -95,10 +95,11 @@ inline auto operator>>(QDataStream &dataStream, VPieceGrainlinePrivate &data) ->
 
     if (actualStreamHeader != VPieceGrainlinePrivate::streamHeader)
     {
-        QString message = QCoreApplication::tr("VPieceGrainlinePrivate prefix mismatch error: actualStreamHeader = "
-                                               "0x%1 and streamHeader = 0x%2")
-                              .arg(actualStreamHeader, 8, 0x10, QLatin1Char('0'))
-                              .arg(VPieceGrainlinePrivate::streamHeader, 8, 0x10, QLatin1Char('0'));
+        QString const message =
+            QCoreApplication::tr("VPieceGrainlinePrivate prefix mismatch error: actualStreamHeader = "
+                                 "0x%1 and streamHeader = 0x%2")
+                .arg(actualStreamHeader, 8, 0x10, QLatin1Char('0'))
+                .arg(VPieceGrainlinePrivate::streamHeader, 8, 0x10, QLatin1Char('0'));
         throw VException(message);
     }
 
@@ -107,10 +108,11 @@ inline auto operator>>(QDataStream &dataStream, VPieceGrainlinePrivate &data) ->
 
     if (actualClassVersion > VPieceGrainlinePrivate::classVersion)
     {
-        QString message = QCoreApplication::tr("VPieceGrainlinePrivate compatibility error: actualClassVersion = %1 "
-                                               "and classVersion = %2")
-                              .arg(actualClassVersion)
-                              .arg(VPieceGrainlinePrivate::classVersion);
+        QString const message =
+            QCoreApplication::tr("VPieceGrainlinePrivate compatibility error: actualClassVersion = %1 "
+                                 "and classVersion = %2")
+                .arg(actualClassVersion)
+                .arg(VPieceGrainlinePrivate::classVersion);
         throw VException(message);
     }
 

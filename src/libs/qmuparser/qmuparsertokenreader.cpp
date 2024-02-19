@@ -283,7 +283,7 @@ auto QmuParserTokenReader::ReadNextToken(const QLocale &locale, bool cNumbers, c
     // !!! From this point on there is no exit without an exception possible...
     //
     QString strTok;
-    qmusizetype iEnd = ExtractToken ( m_pParser->ValidNameChars(), strTok, m_iPos );
+    qmusizetype const iEnd = ExtractToken(m_pParser->ValidNameChars(), strTok, m_iPos);
     if ( iEnd != m_iPos )
     {
         Error ( ecUNASSIGNABLE_TOKEN, m_iPos, strTok );
@@ -381,7 +381,7 @@ auto QmuParserTokenReader::IsBuiltIn ( token_type &a_Tok ) -> bool
     // check string for operator/function
     for ( int i = 0; i < pOprtDef.size(); ++i )
     {
-        qmusizetype len = pOprtDef.at ( i ).length();
+        qmusizetype const len = pOprtDef.at(i).length();
         if ( pOprtDef.at ( i ) == m_strFormula.mid ( m_iPos, len ) )
         {
             if (i >= cmLE && i <= cmASSIGN)
@@ -485,7 +485,7 @@ auto QmuParserTokenReader::IsArgSep ( token_type &a_Tok ) -> bool
     if ( m_strFormula.at ( m_iPos ) == m_cArgSep )
     {
         // copy the separator into null terminated string
-        QString szSep(m_cArgSep);
+        QString const szSep(m_cArgSep);
 
         if ( m_iSynFlags & noARG_SEP )
         {
@@ -548,7 +548,7 @@ auto QmuParserTokenReader::IsEOF ( token_type &a_Tok ) -> bool
 auto QmuParserTokenReader::IsInfixOpTok ( token_type &a_Tok ) -> bool
 {
     QString sTok;
-    qmusizetype iEnd = ExtractToken ( m_pParser->ValidInfixOprtChars(), sTok, m_iPos );
+    qmusizetype const iEnd = ExtractToken(m_pParser->ValidInfixOprtChars(), sTok, m_iPos);
     if ( iEnd == m_iPos )
     {
         return false;
@@ -587,7 +587,7 @@ auto QmuParserTokenReader::IsInfixOpTok ( token_type &a_Tok ) -> bool
 auto QmuParserTokenReader::IsFunTok ( token_type &a_Tok ) -> bool
 {
     QString strTok;
-    qmusizetype iEnd = ExtractToken ( m_pParser->ValidNameChars(), strTok, m_iPos );
+    qmusizetype const iEnd = ExtractToken(m_pParser->ValidNameChars(), strTok, m_iPos);
     if ( iEnd == m_iPos )
     {
         return false;
@@ -627,7 +627,7 @@ auto QmuParserTokenReader::IsOprt ( token_type &a_Tok ) -> bool
 {
     QString strTok;
 
-    qmusizetype iEnd = ExtractOperatorToken ( strTok, m_iPos );
+    qmusizetype const iEnd = ExtractOperatorToken(strTok, m_iPos);
     if ( iEnd == m_iPos )
     {
         return false;
@@ -714,7 +714,7 @@ auto QmuParserTokenReader::IsPostOpTok ( token_type &a_Tok ) -> bool
 
     // Test if there could be a postfix operator
     QString sTok;
-    qmusizetype iEnd = ExtractToken ( m_pParser->ValidOprtChars(), sTok, m_iPos );
+    qmusizetype const iEnd = ExtractToken(m_pParser->ValidOprtChars(), sTok, m_iPos);
     if ( iEnd == m_iPos )
     {
         return false;
@@ -782,7 +782,7 @@ auto QmuParserTokenReader::IsValTok ( token_type &a_Tok, const QLocale &locale, 
     auto item = m_vIdentFun.begin();
     for ( item = m_vIdentFun.begin(); item != m_vIdentFun.end(); ++item )
     {
-        qmusizetype iStart = m_iPos;
+        qmusizetype const iStart = m_iPos;
         if ( ( *item ) ( m_strFormula.mid ( m_iPos ), &m_iPos, &fVal, locale, cNumbers, decimal, thousand ) == 1 )
         {
             // 2013-11-27 Issue 2:  https://code.google.com/p/muparser/issues/detail?id=2
@@ -854,7 +854,7 @@ auto QmuParserTokenReader::IsStrVarTok ( token_type &a_Tok ) -> bool
     }
 
     QString strTok;
-    qmusizetype iEnd = ExtractToken ( m_pParser->ValidNameChars(), strTok, m_iPos );
+    qmusizetype const iEnd = ExtractToken(m_pParser->ValidNameChars(), strTok, m_iPos);
     if ( iEnd == m_iPos )
     {
         return false;
@@ -895,7 +895,7 @@ auto QmuParserTokenReader::IsStrVarTok ( token_type &a_Tok ) -> bool
 auto QmuParserTokenReader::IsUndefVarTok ( token_type &a_Tok ) -> bool
 {
     QString strTok;
-    qmusizetype iEnd ( ExtractToken ( m_pParser->ValidNameChars(), strTok, m_iPos ) );
+    qmusizetype const iEnd(ExtractToken(m_pParser->ValidNameChars(), strTok, m_iPos));
     if ( iEnd == m_iPos )
     {
         return false;
@@ -980,7 +980,7 @@ auto QmuParserTokenReader::IsString ( token_type &a_Tok ) -> bool
         Error ( ecUNTERMINATED_STRING, m_iPos, "\"" );
     }
 
-    QString strTok = strBuf.mid ( 0, iEnd );
+    QString const strTok = strBuf.mid(0, iEnd);
 
     if ( m_iSynFlags & noSTR )
     {

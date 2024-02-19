@@ -53,7 +53,7 @@ using namespace Qt::Literals::StringLiterals;
 auto VPatternImage::FromFile(const QString &fileName) -> VPatternImage
 {
     VPatternImage image;
-    QMimeType mime = QMimeDatabase().mimeTypeForFile(fileName);
+    QMimeType const mime = QMimeDatabase().mimeTypeForFile(fileName);
 
     if (not IsMimeTypeImage(mime))
     {
@@ -68,7 +68,7 @@ auto VPatternImage::FromFile(const QString &fileName) -> VPatternImage
         return {};
     }
 
-    QString base64 = SplitString(QString::fromLatin1(file.readAll().toBase64().data())).join('\n'_L1);
+    QString const base64 = SplitString(QString::fromLatin1(file.readAll().toBase64().data())).join('\n'_L1);
 
     image.SetContentData(base64.toLatin1(), mime.name());
     return image;
@@ -116,7 +116,7 @@ auto VPatternImage::IsValid() const -> bool
         return false;
     }
 
-    QMimeType mime = MimeTypeFromData();
+    QMimeType const mime = MimeTypeFromData();
     QSet<QString> aliases = ConvertToSet<QString>(mime.aliases());
     aliases.insert(mime.name());
 
@@ -148,7 +148,7 @@ auto VPatternImage::GetPixmap() const -> QPixmap
     buffer.open(QIODevice::ReadOnly);
 
     QImageReader imageReader(&buffer);
-    QImage image = imageReader.read();
+    QImage const image = imageReader.read();
     if (image.isNull())
     {
         qCritical() << tr("Couldn't read the image. Error: %1").arg(imageReader.errorString());
@@ -179,7 +179,7 @@ auto VPatternImage::GetPixmap(const QSize &size) const -> QPixmap
     QImageReader imageReader(&buffer);
     imageReader.setScaledSize(size);
 
-    QImage image = imageReader.read();
+    QImage const image = imageReader.read();
     if (image.isNull())
     {
         qCritical() << tr("Couldn't read the image. Error: %1").arg(imageReader.errorString());

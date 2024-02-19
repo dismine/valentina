@@ -66,11 +66,11 @@ auto Grayscale(QImage image) -> QImage
     for (int ii = 0; ii < image.height(); ii++)
     {
         uchar *scan = image.scanLine(ii);
-        int depth = 4;
+        int const depth = 4;
         for (int jj = 0; jj < image.width(); jj++)
         {
             QRgb *rgbpixel = reinterpret_cast<QRgb *>(scan + jj * depth);
-            int gray = qGray(*rgbpixel);
+            int const gray = qGray(*rgbpixel);
             *rgbpixel = QColor(gray, gray, gray, qAlpha(*rgbpixel)).rgba();
         }
     }
@@ -83,7 +83,7 @@ auto WatermarkImageFromCache(const VWatermarkData &watermarkData, const QString 
     -> QPixmap
 {
     QPixmap pixmap;
-    QString imagePath = AbsoluteMPath(watermarkPath, watermarkData.path);
+    QString const imagePath = AbsoluteMPath(watermarkPath, watermarkData.path);
 
     if (not QPixmapCache::find(imagePath, &pixmap))
     {
@@ -287,8 +287,8 @@ auto VPoster::TextWatermark(QGraphicsItem *parent, const PosterData &img, const 
     text->setRotation(-watermarkData.textRotation);
 
     const QRect boundingRect = text->boundingRect().toRect();
-    int x = img.rect.x() + (img.rect.width() - boundingRect.width()) / 2;
-    int y = img.rect.y() + (img.rect.height() - boundingRect.height()) / 2;
+    int const x = img.rect.x() + (img.rect.width() - boundingRect.width()) / 2;
+    int const y = img.rect.y() + (img.rect.height() - boundingRect.height()) / 2;
 
     text->setX(x);
     text->setY(y);
@@ -309,11 +309,11 @@ auto VPoster::ImageWatermark(QGraphicsItem *parent, const PosterData &img, const
 
     QGraphicsItem *image = nullptr;
 
-    QFileInfo f(watermarkData.path);
+    QFileInfo const f(watermarkData.path);
     if (f.suffix() == "png" || f.suffix() == "jpg" || f.suffix() == "jpeg" || f.suffix() == "bmp")
     {
         QString error;
-        QPixmap watermark = WatermarkImageFromCache(watermarkData, watermarkPath, error);
+        QPixmap const watermark = WatermarkImageFromCache(watermarkData, watermarkPath, error);
 
         if (watermark.isNull())
         {
@@ -342,8 +342,8 @@ auto VPoster::ImageWatermark(QGraphicsItem *parent, const PosterData &img, const
     image->setRotation(-watermarkData.imageRotation);
 
     const QRect boundingRect = image->boundingRect().toRect();
-    int x = img.rect.x() + (img.rect.width() - boundingRect.width()) / 2;
-    int y = img.rect.y() + (img.rect.height() - boundingRect.height()) / 2;
+    int const x = img.rect.x() + (img.rect.width() - boundingRect.width()) / 2;
+    int const y = img.rect.y() + (img.rect.height() - boundingRect.height()) / 2;
 
     image->setX(x);
     image->setY(y);
@@ -443,8 +443,8 @@ auto VPoster::PageRect() const -> QRect
     {
         QPageLayout layout = printer->pageLayout();
         layout.setUnits(QPageLayout::Millimeter);
-        QMarginsF pMargins = layout.margins();
-        QRectF newRect = rect.marginsRemoved(pMargins);
+        QMarginsF const pMargins = layout.margins();
+        QRectF const newRect = rect.marginsRemoved(pMargins);
         const QRect pageRectFP(0, 0, qFloor(ToPixel(newRect.width())), qFloor(ToPixel(newRect.height())));
         return pageRectFP;
     }
@@ -465,9 +465,9 @@ void VPoster::Ruler(QVector<QGraphicsItem *> &data, QGraphicsItem *parent, QRect
 
     const qreal notchHeight = ToPixel(3);        // mm
     const qreal shortNotchHeight = ToPixel(1.1); // mm
-    Unit patternUnits = VAbstractValApplication::VApp()->patternUnits();
+    Unit const patternUnits = VAbstractValApplication::VApp()->patternUnits();
     const qreal step = UnitConvertor(1, patternUnits, Unit::Px);
-    double marksCount = rec.width() / step;
+    double const marksCount = rec.width() / step;
     int i = 0;
     while (i < marksCount)
     {
@@ -496,7 +496,7 @@ void VPoster::Ruler(QVector<QGraphicsItem *> &data, QGraphicsItem *parent, QRect
             fnt.setPointSize(10);
 
             qreal unitsWidth = 0;
-            QFontMetrics fm(fnt);
+            QFontMetrics const fm(fnt);
             unitsWidth = fm.horizontalAdvance(units->toPlainText());
             units->setPos(rec.x() + step * 0.5 - unitsWidth * 0.7,
                           rec.y() + rec.height() - static_cast<int>(allowance) - shortNotchHeight);

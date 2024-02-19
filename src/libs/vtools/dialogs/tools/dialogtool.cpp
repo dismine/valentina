@@ -257,7 +257,7 @@ void DialogTool::FillComboBoxCurves(QComboBox *box) const
     {
         if (i.key() != toolId)
         {
-            QSharedPointer<VGObject> obj = i.value();
+            QSharedPointer<VGObject> const obj = i.value();
             if (obj->getType() == GOType::Arc || obj->getType() == GOType::EllipticalArc ||
                 obj->getType() == GOType::Spline || obj->getType() == GOType::SplinePath ||
                 obj->getType() == GOType::CubicBezier || obj->getType() == GOType::CubicBezierPath)
@@ -595,7 +595,7 @@ void DialogTool::setCurrentCurveId(QComboBox *box, const quint32 &value) const
 auto DialogTool::getCurrentObjectId(QComboBox *box) -> quint32
 {
     SCASSERT(box != nullptr)
-    qint32 index = box->currentIndex();
+    qint32 const index = box->currentIndex();
     if (index != -1)
     {
         return qvariant_cast<quint32>(box->itemData(index));

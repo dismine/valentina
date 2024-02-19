@@ -69,7 +69,7 @@ void ValidateSchema(const QString &schema)
     const char *schemaData = data.constData();
     const auto schemaSize = static_cast<size_t>(data.size());
 
-    QScopedPointer<XERCES_CPP_NAMESPACE::InputSource> grammarSource(new XERCES_CPP_NAMESPACE::MemBufInputSource(
+    QScopedPointer<XERCES_CPP_NAMESPACE::InputSource> const grammarSource(new XERCES_CPP_NAMESPACE::MemBufInputSource(
         reinterpret_cast<const XMLByte *>(schemaData), schemaSize, "schema"));
 
     if (domParser.loadGrammar(*grammarSource, XERCES_CPP_NAMESPACE::Grammar::SchemaGrammarType, true) == nullptr)
@@ -131,7 +131,7 @@ void TST_XSDShema::TestPatternSchema_data()
     auto i = schemas.constBegin();
     while (i != schemas.constEnd())
     {
-        QFileInfo f(i.value());
+        QFileInfo const f(i.value());
         QTest::newRow(qUtf8Printable(f.fileName())) << i.value();
         ++i;
     }
@@ -155,7 +155,7 @@ void TST_XSDShema::TestPatternLabelSchema_data()
     auto i = schemas.constBegin();
     while (i != schemas.constEnd())
     {
-        QFileInfo f(i.value());
+        QFileInfo const f(i.value());
         QTest::newRow(qUtf8Printable(f.fileName())) << i.value();
         ++i;
     }
@@ -179,7 +179,7 @@ void TST_XSDShema::TestLayoutSchema_data()
     auto i = schemas.constBegin();
     while (i != schemas.constEnd())
     {
-        QFileInfo f(i.value());
+        QFileInfo const f(i.value());
         QTest::newRow(qUtf8Printable(f.fileName())) << i.value();
         ++i;
     }
@@ -203,7 +203,7 @@ void TST_XSDShema::TestVITSchema_data()
     auto i = schemas.constBegin();
     while (i != schemas.constEnd())
     {
-        QFileInfo f(i.value());
+        QFileInfo const f(i.value());
         QTest::newRow(qUtf8Printable(f.fileName())) << i.value();
         ++i;
     }
@@ -227,7 +227,7 @@ void TST_XSDShema::TestVSTSchema_data()
     auto i = schemas.constBegin();
     while (i != schemas.constEnd())
     {
-        QFileInfo f(i.value());
+        QFileInfo const f(i.value());
         QTest::newRow(qUtf8Printable(f.fileName())) << i.value();
         ++i;
     }
@@ -251,7 +251,7 @@ void TST_XSDShema::TestWatermarkSchema_data()
     auto i = schemas.constBegin();
     while (i != schemas.constEnd())
     {
-        QFileInfo f(i.value());
+        QFileInfo const f(i.value());
         QTest::newRow(qUtf8Printable(f.fileName())) << i.value();
         ++i;
     }

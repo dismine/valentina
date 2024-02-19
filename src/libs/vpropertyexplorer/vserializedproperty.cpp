@@ -63,7 +63,7 @@ void VPE::VSerializedProperty::initChildren(const VProperty *property, const VPr
         const QList<VProperty*>& tmpChildren = property->getChildren();
         for (auto *tmpChild : tmpChildren)
         {
-            QString tmpChildID = set->getPropertyID(property);
+            QString const tmpChildID = set->getPropertyID(property);
             Children.append(VSerializedProperty(tmpChild, tmpChildID, set));
         }
     }

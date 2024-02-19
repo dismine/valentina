@@ -141,7 +141,7 @@ auto DuplicatePins(const QVector<quint32> &pins, const VToolSeamAllowanceInitDat
     QMap<quint32, quint32> newPins;
     for (auto p : pins)
     {
-        QSharedPointer<VPointF> pin = initData.data->GeometricObject<VPointF>(p);
+        QSharedPointer<VPointF> const pin = initData.data->GeometricObject<VPointF>(p);
 
         auto *tool = qobject_cast<VAbstractNode *>(VAbstractPattern::getTool(p));
         SCASSERT(tool != nullptr)
@@ -194,13 +194,13 @@ auto RenderSeamPath(const VPiece &detail, bool combineTogether, const VContainer
         const QVector<VLayoutPassmark> passmarks = VLayoutPiece::ConvertPassmarks(detail, data);
         const QVector<VLayoutPoint> points = detail.FullMainPathPoints(data);
 
-        bool seamAllowance = detail.IsSeamAllowance() && detail.IsSeamAllowanceBuiltIn();
-        bool builtInSeamAllowance = detail.IsSeamAllowance() && detail.IsSeamAllowanceBuiltIn();
+        bool const seamAllowance = detail.IsSeamAllowance() && detail.IsSeamAllowanceBuiltIn();
+        bool const builtInSeamAllowance = detail.IsSeamAllowance() && detail.IsSeamAllowanceBuiltIn();
 
         VBoundary boundary(points, seamAllowance, builtInSeamAllowance);
         boundary.SetPieceName(detail.GetName());
 
-        QLineF mirrorLine = detail.SeamMirrorLine(data);
+        QLineF const mirrorLine = detail.SeamMirrorLine(data);
         if (!mirrorLine.isNull() && detail.IsShowFullPiece())
         {
             boundary.SetMirrorLine(mirrorLine);
@@ -1122,7 +1122,7 @@ void VToolSeamAllowance::UpdateGrainline()
  */
 void VToolSeamAllowance::SaveMoveDetail(const QPointF &ptPos)
 {
-    VPiece oldDet = VAbstractTool::data.GetPiece(m_id);
+    VPiece const oldDet = VAbstractTool::data.GetPiece(m_id);
     VPiece newDet = oldDet;
     newDet.GetPieceLabelData().SetPos(ptPos);
 
@@ -1137,7 +1137,7 @@ void VToolSeamAllowance::SaveMoveDetail(const QPointF &ptPos)
  */
 void VToolSeamAllowance::SaveResizeDetail(qreal dLabelW)
 {
-    VPiece oldDet = VAbstractTool::data.GetPiece(m_id);
+    VPiece const oldDet = VAbstractTool::data.GetPiece(m_id);
     VPiece newDet = oldDet;
 
     dLabelW = FromPixel(dLabelW, *VDataTool::data.GetPatternUnit());
@@ -1176,7 +1176,7 @@ void VToolSeamAllowance::SaveRotationDetail(qreal dRot)
  */
 void VToolSeamAllowance::SaveMovePattern(const QPointF &ptPos)
 {
-    VPiece oldDet = VAbstractTool::data.GetPiece(m_id);
+    VPiece const oldDet = VAbstractTool::data.GetPiece(m_id);
     VPiece newDet = oldDet;
     newDet.GetPatternLabelData().SetPos(ptPos);
 
@@ -1191,12 +1191,12 @@ void VToolSeamAllowance::SaveMovePattern(const QPointF &ptPos)
  */
 void VToolSeamAllowance::SaveResizePattern(qreal dLabelW)
 {
-    VPiece oldDet = VAbstractTool::data.GetPiece(m_id);
+    VPiece const oldDet = VAbstractTool::data.GetPiece(m_id);
     VPiece newDet = oldDet;
 
     dLabelW = FromPixel(dLabelW, *VDataTool::data.GetPatternUnit());
     newDet.GetPatternLabelData().SetLabelWidth(QString().setNum(dLabelW));
-    qreal height = FromPixel(m_patternInfo->boundingRect().height(), *VDataTool::data.GetPatternUnit());
+    qreal const height = FromPixel(m_patternInfo->boundingRect().height(), *VDataTool::data.GetPatternUnit());
     newDet.GetPatternLabelData().SetLabelHeight(QString().setNum(height));
 
     auto *resizeCommand = new SavePieceOptions(oldDet, newDet, doc, m_id);
@@ -1207,7 +1207,7 @@ void VToolSeamAllowance::SaveResizePattern(qreal dLabelW)
 //---------------------------------------------------------------------------------------------------------------------
 void VToolSeamAllowance::SaveRotationPattern(qreal dRot)
 {
-    VPiece oldDet = VAbstractTool::data.GetPiece(m_id);
+    VPiece const oldDet = VAbstractTool::data.GetPiece(m_id);
     VPiece newDet = oldDet;
 
     newDet.GetPatternLabelData().SetPos(m_patternInfo->pos());
@@ -1226,7 +1226,7 @@ void VToolSeamAllowance::SaveRotationPattern(qreal dRot)
 //---------------------------------------------------------------------------------------------------------------------
 void VToolSeamAllowance::SaveMoveGrainline(const QPointF &ptPos)
 {
-    VPiece oldDet = VAbstractTool::data.GetPiece(m_id);
+    VPiece const oldDet = VAbstractTool::data.GetPiece(m_id);
     VPiece newDet = oldDet;
     newDet.GetGrainlineGeometry().SetPos(ptPos);
     qDebug() << "******* new grainline pos" << ptPos;
@@ -1239,7 +1239,7 @@ void VToolSeamAllowance::SaveMoveGrainline(const QPointF &ptPos)
 //---------------------------------------------------------------------------------------------------------------------
 void VToolSeamAllowance::SaveResizeGrainline(qreal dLength)
 {
-    VPiece oldDet = VAbstractTool::data.GetPiece(m_id);
+    VPiece const oldDet = VAbstractTool::data.GetPiece(m_id);
     VPiece newDet = oldDet;
 
     dLength = FromPixel(dLength, *VDataTool::data.GetPatternUnit());
@@ -1254,7 +1254,7 @@ void VToolSeamAllowance::SaveResizeGrainline(qreal dLength)
 //---------------------------------------------------------------------------------------------------------------------
 void VToolSeamAllowance::SaveRotateGrainline(qreal dRot, const QPointF &ptPos)
 {
-    VPiece oldDet = VAbstractTool::data.GetPiece(m_id);
+    VPiece const oldDet = VAbstractTool::data.GetPiece(m_id);
     VPiece newDet = oldDet;
 
     newDet.GetGrainlineGeometry().SetRotation(QString().setNum(qRadiansToDegrees(dRot)));
@@ -1687,7 +1687,7 @@ VToolSeamAllowance::VToolSeamAllowance(const VToolSeamAllowanceInitData &initDat
     m_foldLineLabel(new QGraphicsPathItem(this)),
     m_foldLineLabelText(new QGraphicsSimpleTextItem(this))
 {
-    VPiece detail = initData.data->GetPiece(initData.id);
+    VPiece const detail = initData.data->GetPiece(initData.id);
     ReinitInternals(detail, m_sceneDetails);
     VToolSeamAllowance::AllowSelecting(true);
     EnableToolMove(true);
@@ -1925,7 +1925,7 @@ void VToolSeamAllowance::SaveDialogChange(const QString &undoText)
 //---------------------------------------------------------------------------------------------------------------------
 void VToolSeamAllowance::ShowOptions()
 {
-    QPointer<DialogSeamAllowance> dialog =
+    QPointer<DialogSeamAllowance> const dialog =
         new DialogSeamAllowance(getData(), doc, m_id, VAbstractValApplication::VApp()->getMainWindow());
     dialog->EnableApply(true);
     m_dialog = dialog;
@@ -2693,7 +2693,7 @@ auto VToolSeamAllowance::DuplicatePlaceLabels(const QVector<quint32> &placeLabel
     newPlaceLabels.reserve(placeLabels.size());
     for (auto placeLabel : placeLabels)
     {
-        QSharedPointer<VPlaceLabelItem> label = initData.data->GeometricObject<VPlaceLabelItem>(placeLabel);
+        QSharedPointer<VPlaceLabelItem> const label = initData.data->GeometricObject<VPlaceLabelItem>(placeLabel);
         auto *tool = qobject_cast<VAbstractNode *>(VAbstractPattern::getTool(placeLabel));
         SCASSERT(tool != nullptr)
 

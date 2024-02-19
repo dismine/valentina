@@ -239,7 +239,7 @@ auto VToolSpline::getSpline() const -> VSpline
 void VToolSpline::setSpline(const VSpline &spl)
 {
     QSharedPointer<VGObject> obj = VAbstractTool::data.GetGObject(m_id);
-    QSharedPointer<VSpline> spline = qSharedPointerDynamicCast<VSpline>(obj);
+    QSharedPointer<VSpline> const spline = qSharedPointerDynamicCast<VSpline>(obj);
     *spline.data() = spl;
     SaveOption(obj);
 }

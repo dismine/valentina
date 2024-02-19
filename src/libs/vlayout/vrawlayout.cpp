@@ -69,10 +69,11 @@ auto operator>>(QDataStream &dataStream, VRawLayoutData &data) -> QDataStream &
 
     if (actualStreamHeader != VRawLayoutData::streamHeader)
     {
-        QString message = QCoreApplication::tr("VRawLayoutData prefix mismatch error: actualStreamHeader = 0x%1 and "
-                                               "streamHeader = 0x%2")
-                              .arg(actualStreamHeader, 8, 0x10, '0'_L1)
-                              .arg(VRawLayoutData::streamHeader, 8, 0x10, '0'_L1);
+        QString const message =
+            QCoreApplication::tr("VRawLayoutData prefix mismatch error: actualStreamHeader = 0x%1 and "
+                                 "streamHeader = 0x%2")
+                .arg(actualStreamHeader, 8, 0x10, '0'_L1)
+                .arg(VRawLayoutData::streamHeader, 8, 0x10, '0'_L1);
         throw VException(message);
     }
 
@@ -81,10 +82,10 @@ auto operator>>(QDataStream &dataStream, VRawLayoutData &data) -> QDataStream &
 
     if (actualClassVersion > VRawLayoutData::classVersion)
     {
-        QString message = QCoreApplication::tr("VRawLayoutData compatibility error: actualClassVersion = %1 and "
-                                               "classVersion = %2")
-                              .arg(actualClassVersion)
-                              .arg(VRawLayoutData::classVersion);
+        QString const message = QCoreApplication::tr("VRawLayoutData compatibility error: actualClassVersion = %1 and "
+                                                     "classVersion = %2")
+                                    .arg(actualClassVersion)
+                                    .arg(VRawLayoutData::classVersion);
         throw VException(message);
     }
 

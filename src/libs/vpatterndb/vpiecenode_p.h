@@ -139,10 +139,10 @@ inline auto operator>>(QDataStream &in, VPieceNodeData &p) -> QDataStream &
 
     if (actualStreamHeader != VPieceNodeData::streamHeader)
     {
-        QString message = QCoreApplication::tr("VPieceNodeData prefix mismatch error: actualStreamHeader = 0x%1 "
-                                               "and streamHeader = 0x%2")
-                              .arg(actualStreamHeader, 8, 0x10, QChar('0'))
-                              .arg(VPieceNodeData::streamHeader, 8, 0x10, QChar('0'));
+        QString const message = QCoreApplication::tr("VPieceNodeData prefix mismatch error: actualStreamHeader = 0x%1 "
+                                                     "and streamHeader = 0x%2")
+                                    .arg(actualStreamHeader, 8, 0x10, QChar('0'))
+                                    .arg(VPieceNodeData::streamHeader, 8, 0x10, QChar('0'));
         throw VException(message);
     }
 
@@ -151,10 +151,10 @@ inline auto operator>>(QDataStream &in, VPieceNodeData &p) -> QDataStream &
 
     if (actualClassVersion > VPieceNodeData::classVersion)
     {
-        QString message = QCoreApplication::tr("VPieceNodeData compatibility error: actualClassVersion = %1 and "
-                                               "classVersion = %2")
-                              .arg(actualClassVersion)
-                              .arg(VPieceNodeData::classVersion);
+        QString const message = QCoreApplication::tr("VPieceNodeData compatibility error: actualClassVersion = %1 and "
+                                                     "classVersion = %2")
+                                    .arg(actualClassVersion)
+                                    .arg(VPieceNodeData::classVersion);
         throw VException(message);
     }
 

@@ -187,7 +187,7 @@ auto VBackgroundImageControls::boundingRect() const -> QRectF
 
     auto HandlerBoundingRect = [this, &boundingRect](BIHandleCorner corner, BIHandleCornerType type, QPointF pos)
     {
-        QPixmap handler = HandlerPixmap(m_handleCornerHover == corner, type);
+        QPixmap const handler = HandlerPixmap(m_handleCornerHover == corner, type);
         boundingRect = boundingRect.united(QRectF(pos, handler.size() / handler.devicePixelRatio()));
     };
 
@@ -485,7 +485,7 @@ void VBackgroundImageControls::InitPixmaps()
         const QString resource = QStringLiteral("icon");
 
         const QString fileName = QStringLiteral("32x32/%1.png").arg(imageName);
-        QPixmap handlePixmap = VTheme::GetPixmapResource(resource, fileName);
+        QPixmap const handlePixmap = VTheme::GetPixmapResource(resource, fileName);
 
         if (QGuiApplication::primaryScreen()->devicePixelRatio() >= 2)
         {
@@ -532,27 +532,27 @@ auto VBackgroundImageControls::TopLeftHandlerPosition() const -> QPointF
 //---------------------------------------------------------------------------------------------------------------------
 auto VBackgroundImageControls::TopHandlerPosition() const -> QPointF
 {
-    QRectF rect = ControllersRect();
-    QPixmap handler = m_handlePixmaps.value(BIHandleCornerType::ScaleTopBottom);
-    QSize size = handler.size() / handler.devicePixelRatio();
+    QRectF const rect = ControllersRect();
+    QPixmap const handler = m_handlePixmaps.value(BIHandleCornerType::ScaleTopBottom);
+    QSize const size = handler.size() / handler.devicePixelRatio();
     return {rect.topLeft().x() + (rect.width() / 2. - size.width() / 2.), rect.topLeft().y()};
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 auto VBackgroundImageControls::TopRightHandlerPosition() const -> QPointF
 {
-    QRectF rect = ControllersRect();
-    QPixmap handler = m_handlePixmaps.value(BIHandleCornerType::ScaleTopRightBottomLeft);
-    QSize size = handler.size() / handler.devicePixelRatio();
+    QRectF const rect = ControllersRect();
+    QPixmap const handler = m_handlePixmaps.value(BIHandleCornerType::ScaleTopRightBottomLeft);
+    QSize const size = handler.size() / handler.devicePixelRatio();
     return {rect.topLeft().x() + (rect.width() - size.width()), rect.topLeft().y()};
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 auto VBackgroundImageControls::RightHandlerPosition() const -> QPointF
 {
-    QRectF rect = ControllersRect();
-    QPixmap handler = m_handlePixmaps.value(BIHandleCornerType::ScaleRightLeft);
-    QSize size = handler.size() / handler.devicePixelRatio();
+    QRectF const rect = ControllersRect();
+    QPixmap const handler = m_handlePixmaps.value(BIHandleCornerType::ScaleRightLeft);
+    QSize const size = handler.size() / handler.devicePixelRatio();
     return {rect.topLeft().x() + (rect.width() - size.width()),
             rect.topLeft().y() + (rect.height() / 2. - size.height() / 2.)};
 }
@@ -560,18 +560,18 @@ auto VBackgroundImageControls::RightHandlerPosition() const -> QPointF
 //---------------------------------------------------------------------------------------------------------------------
 auto VBackgroundImageControls::BottomRightHandlerPosition() const -> QPointF
 {
-    QRectF rect = ControllersRect();
-    QPixmap handler = m_handlePixmaps.value(BIHandleCornerType::ScaleTopLeftBottomRight);
-    QSize size = handler.size() / handler.devicePixelRatio();
+    QRectF const rect = ControllersRect();
+    QPixmap const handler = m_handlePixmaps.value(BIHandleCornerType::ScaleTopLeftBottomRight);
+    QSize const size = handler.size() / handler.devicePixelRatio();
     return {rect.topLeft().x() + (rect.width() - size.width()), rect.topLeft().y() + (rect.height() - size.height())};
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 auto VBackgroundImageControls::BottomHandlerPosition() const -> QPointF
 {
-    QRectF rect = ControllersRect();
-    QPixmap handler = m_handlePixmaps.value(BIHandleCornerType::ScaleTopBottom);
-    QSize size = handler.size() / handler.devicePixelRatio();
+    QRectF const rect = ControllersRect();
+    QPixmap const handler = m_handlePixmaps.value(BIHandleCornerType::ScaleTopBottom);
+    QSize const size = handler.size() / handler.devicePixelRatio();
     return {rect.topLeft().x() + (rect.width() / 2. - size.width() / 2.),
             rect.topLeft().y() + (rect.height() - size.height())};
 }
@@ -579,18 +579,18 @@ auto VBackgroundImageControls::BottomHandlerPosition() const -> QPointF
 //---------------------------------------------------------------------------------------------------------------------
 auto VBackgroundImageControls::BottomLeftHandlerPosition() const -> QPointF
 {
-    QRectF rect = ControllersRect();
-    QPixmap handler = m_handlePixmaps.value(BIHandleCornerType::ScaleTopRightBottomLeft);
-    QSize size = handler.size() / handler.devicePixelRatio();
+    QRectF const rect = ControllersRect();
+    QPixmap const handler = m_handlePixmaps.value(BIHandleCornerType::ScaleTopRightBottomLeft);
+    QSize const size = handler.size() / handler.devicePixelRatio();
     return {rect.topLeft().x(), rect.topLeft().y() + (rect.height() - size.height())};
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 auto VBackgroundImageControls::LeftHandlerPosition() const -> QPointF
 {
-    QRectF rect = ControllersRect();
-    QPixmap handler = m_handlePixmaps.value(BIHandleCornerType::ScaleRightLeft);
-    QSize size = handler.size() / handler.devicePixelRatio();
+    QRectF const rect = ControllersRect();
+    QPixmap const handler = m_handlePixmaps.value(BIHandleCornerType::ScaleRightLeft);
+    QSize const size = handler.size() / handler.devicePixelRatio();
     return {rect.topLeft().x(), rect.topLeft().y() + (rect.height() / 2. - size.height() / 2.)};
 }
 
@@ -682,7 +682,7 @@ auto VBackgroundImageControls::RotateBottomLeftControl() const -> QPainterPath
 //---------------------------------------------------------------------------------------------------------------------
 auto VBackgroundImageControls::ScaleByTopLeft(QGraphicsSceneMouseEvent *event) const -> QTransform
 {
-    QRectF rectOriginal = m_imageBoundingRect;
+    QRectF const rectOriginal = m_imageBoundingRect;
     QRectF rect = m_imageScreenBoundingRect;
 
     const qreal adjustmentX = -rect.topLeft().x();
@@ -777,18 +777,18 @@ auto VBackgroundImageControls::ScaleByTopLeft(QGraphicsSceneMouseEvent *event) c
         }
     }
 
-    QPointF newScalePoint = pos - m_scaleDiff;
+    QPointF const newScalePoint = pos - m_scaleDiff;
 
     QTransform m;
 
-    QPointF scaleCenterOriginal =
+    QPointF const scaleCenterOriginal =
         (event->modifiers() & Qt::ShiftModifier) ? rectOriginal.center() : rectOriginal.bottomRight();
 
     m.translate(scaleCenterOriginal.x(), scaleCenterOriginal.y());
 
     m.scale(scaleX, scaleY);
 
-    QPointF scaleCenter = (event->modifiers() & Qt::ShiftModifier) ? rect.center() : rect.bottomRight();
+    QPointF const scaleCenter = (event->modifiers() & Qt::ShiftModifier) ? rect.center() : rect.bottomRight();
 
     if (newScalePoint.x() > scaleCenter.x())
     {
@@ -808,7 +808,7 @@ auto VBackgroundImageControls::ScaleByTopLeft(QGraphicsSceneMouseEvent *event) c
 //---------------------------------------------------------------------------------------------------------------------
 auto VBackgroundImageControls::ScaleByTop(QGraphicsSceneMouseEvent *event) const -> QTransform
 {
-    QRectF rectOriginal = m_imageBoundingRect;
+    QRectF const rectOriginal = m_imageBoundingRect;
     QRectF rect = m_imageScreenBoundingRect;
 
     const qreal adjustmentX = -rect.topLeft().x();
@@ -832,7 +832,7 @@ auto VBackgroundImageControls::ScaleByTop(QGraphicsSceneMouseEvent *event) const
             centerScalePoint.ry() = rect.center().y() - (centerScalePoint.y() - rect.center().y());
         }
 
-        QPointF diff = centerScalePoint - RectTopPoint(rect);
+        QPointF const diff = centerScalePoint - RectTopPoint(rect);
 
         if (event->modifiers() & Qt::ControlModifier)
         {
@@ -856,24 +856,24 @@ auto VBackgroundImageControls::ScaleByTop(QGraphicsSceneMouseEvent *event) const
     }
 
     qreal scaleX = nowRect.height() / rect.height();
-    qreal scaleY = nowRect.height() / rect.height();
+    qreal const scaleY = nowRect.height() / rect.height();
 
     if (event->modifiers() & Qt::ControlModifier)
     {
         scaleX = 1;
     }
 
-    QPointF newScalePoint = pos - m_scaleDiff;
+    QPointF const newScalePoint = pos - m_scaleDiff;
 
     QTransform m;
 
-    QPointF scaleCenterOriginal =
+    QPointF const scaleCenterOriginal =
         (event->modifiers() & Qt::ShiftModifier) ? rectOriginal.center() : RectBottomPoint(rectOriginal);
 
     m.translate(scaleCenterOriginal.x(), scaleCenterOriginal.y());
     m.scale(scaleX, scaleY);
 
-    QPointF scaleCenter = (event->modifiers() & Qt::ShiftModifier) ? rect.center() : rect.bottomRight();
+    QPointF const scaleCenter = (event->modifiers() & Qt::ShiftModifier) ? rect.center() : rect.bottomRight();
 
     if (newScalePoint.y() > scaleCenter.y())
     {
@@ -888,7 +888,7 @@ auto VBackgroundImageControls::ScaleByTop(QGraphicsSceneMouseEvent *event) const
 //---------------------------------------------------------------------------------------------------------------------
 auto VBackgroundImageControls::ScaleByTopRight(QGraphicsSceneMouseEvent *event) const -> QTransform
 {
-    QRectF rectOriginal = m_imageBoundingRect;
+    QRectF const rectOriginal = m_imageBoundingRect;
     QRectF rect = m_imageScreenBoundingRect;
 
     const qreal adjustmentX = -rect.topLeft().x();
@@ -991,16 +991,16 @@ auto VBackgroundImageControls::ScaleByTopRight(QGraphicsSceneMouseEvent *event) 
         }
     }
 
-    QPointF newScalePoint = pos - m_scaleDiff;
+    QPointF const newScalePoint = pos - m_scaleDiff;
 
     QTransform m;
-    QPointF scaleCenterOriginal =
+    QPointF const scaleCenterOriginal =
         (event->modifiers() & Qt::ShiftModifier) ? rectOriginal.center() : rectOriginal.bottomLeft();
 
     m.translate(scaleCenterOriginal.x(), scaleCenterOriginal.y());
     m.scale(scaleX, scaleY);
 
-    QPointF scaleCenter = (event->modifiers() & Qt::ShiftModifier) ? rect.center() : rect.bottomLeft();
+    QPointF const scaleCenter = (event->modifiers() & Qt::ShiftModifier) ? rect.center() : rect.bottomLeft();
 
     if (newScalePoint.x() < scaleCenter.x())
     {
@@ -1020,7 +1020,7 @@ auto VBackgroundImageControls::ScaleByTopRight(QGraphicsSceneMouseEvent *event) 
 //---------------------------------------------------------------------------------------------------------------------
 auto VBackgroundImageControls::ScaleByRight(QGraphicsSceneMouseEvent *event) const -> QTransform
 {
-    QRectF rectOriginal = m_imageBoundingRect;
+    QRectF const rectOriginal = m_imageBoundingRect;
     QRectF rect = m_imageScreenBoundingRect;
 
     const qreal adjustmentX = -rect.topLeft().x();
@@ -1045,7 +1045,7 @@ auto VBackgroundImageControls::ScaleByRight(QGraphicsSceneMouseEvent *event) con
             centerScalePoint.rx() = rect.center().x() + (rect.center().x() - centerScalePoint.x());
         }
 
-        QPointF diff = centerScalePoint - RectRightPoint(rect);
+        QPointF const diff = centerScalePoint - RectRightPoint(rect);
 
         if (event->modifiers() & Qt::ControlModifier)
         {
@@ -1068,7 +1068,7 @@ auto VBackgroundImageControls::ScaleByRight(QGraphicsSceneMouseEvent *event) con
         nowRect = QRectF(rect.topLeft(), QPointF(newScalePoint.x(), rect.bottomRight().y()));
     }
 
-    qreal scaleX = nowRect.width() / rect.width();
+    qreal const scaleX = nowRect.width() / rect.width();
     qreal scaleY = nowRect.width() / rect.width();
 
     if (event->modifiers() & Qt::ControlModifier)
@@ -1076,17 +1076,17 @@ auto VBackgroundImageControls::ScaleByRight(QGraphicsSceneMouseEvent *event) con
         scaleY = 1;
     }
 
-    QPointF newScalePoint = pos - m_scaleDiff;
+    QPointF const newScalePoint = pos - m_scaleDiff;
 
     QTransform m;
 
-    QPointF scaleCenterOriginal =
+    QPointF const scaleCenterOriginal =
         (event->modifiers() & Qt::ShiftModifier) ? rectOriginal.center() : RectLeftPoint(rectOriginal);
 
     m.translate(scaleCenterOriginal.x(), scaleCenterOriginal.y());
     m.scale(scaleX, scaleY);
 
-    QPointF scaleCenter = (event->modifiers() & Qt::ShiftModifier) ? rect.center() : RectLeftPoint(rect);
+    QPointF const scaleCenter = (event->modifiers() & Qt::ShiftModifier) ? rect.center() : RectLeftPoint(rect);
 
     if (newScalePoint.x() < scaleCenter.x())
     {
@@ -1101,7 +1101,7 @@ auto VBackgroundImageControls::ScaleByRight(QGraphicsSceneMouseEvent *event) con
 //---------------------------------------------------------------------------------------------------------------------
 auto VBackgroundImageControls::ScaleByBottomRight(QGraphicsSceneMouseEvent *event) const -> QTransform
 {
-    QRectF rectOriginal = m_imageBoundingRect;
+    QRectF const rectOriginal = m_imageBoundingRect;
     QRectF rect = m_imageScreenBoundingRect;
 
     // move to origin
@@ -1199,18 +1199,18 @@ auto VBackgroundImageControls::ScaleByBottomRight(QGraphicsSceneMouseEvent *even
     }
 
     // prepare transformation
-    QPointF newScalePoint = pos - m_scaleDiff;
+    QPointF const newScalePoint = pos - m_scaleDiff;
 
     QTransform m;
 
-    QPointF scaleCenterOriginal =
+    QPointF const scaleCenterOriginal =
         (event->modifiers() & Qt::ShiftModifier) ? rectOriginal.center() : rectOriginal.topLeft();
 
     m.translate(scaleCenterOriginal.x(), scaleCenterOriginal.y());
 
     m.scale(scaleX, scaleY);
 
-    QPointF scaleCenter = (event->modifiers() & Qt::ShiftModifier) ? rect.center() : rect.topLeft();
+    QPointF const scaleCenter = (event->modifiers() & Qt::ShiftModifier) ? rect.center() : rect.topLeft();
 
     if (newScalePoint.x() < scaleCenter.x())
     {
@@ -1230,7 +1230,7 @@ auto VBackgroundImageControls::ScaleByBottomRight(QGraphicsSceneMouseEvent *even
 //---------------------------------------------------------------------------------------------------------------------
 auto VBackgroundImageControls::ScaleByBottom(QGraphicsSceneMouseEvent *event) const -> QTransform
 {
-    QRectF rectOriginal = m_imageBoundingRect;
+    QRectF const rectOriginal = m_imageBoundingRect;
     QRectF rect = m_imageScreenBoundingRect;
 
     const qreal adjustmentX = -rect.topLeft().x();
@@ -1254,7 +1254,7 @@ auto VBackgroundImageControls::ScaleByBottom(QGraphicsSceneMouseEvent *event) co
             centerScalePoint.ry() = rect.center().y() + (rect.center().y() - centerScalePoint.y());
         }
 
-        QPointF diff = centerScalePoint - RectBottomPoint(rect);
+        QPointF const diff = centerScalePoint - RectBottomPoint(rect);
 
         if (event->modifiers() & Qt::ControlModifier)
         {
@@ -1278,24 +1278,24 @@ auto VBackgroundImageControls::ScaleByBottom(QGraphicsSceneMouseEvent *event) co
     }
 
     qreal scaleX = nowRect.height() / rect.height();
-    qreal scaleY = nowRect.height() / rect.height();
+    qreal const scaleY = nowRect.height() / rect.height();
 
     if (event->modifiers() & Qt::ControlModifier)
     {
         scaleX = 1;
     }
 
-    QPointF newScalePoint = pos - m_scaleDiff;
+    QPointF const newScalePoint = pos - m_scaleDiff;
 
     QTransform m;
 
-    QPointF scaleCenterOriginal =
+    QPointF const scaleCenterOriginal =
         (event->modifiers() & Qt::ShiftModifier) ? rectOriginal.center() : RectTopPoint(rectOriginal);
 
     m.translate(scaleCenterOriginal.x(), scaleCenterOriginal.y());
     m.scale(scaleX, scaleY);
 
-    QPointF scaleCenter = (event->modifiers() & Qt::ShiftModifier) ? rect.center() : RectTopPoint(rect);
+    QPointF const scaleCenter = (event->modifiers() & Qt::ShiftModifier) ? rect.center() : RectTopPoint(rect);
 
     if (newScalePoint.y() < scaleCenter.y())
     {
@@ -1310,7 +1310,7 @@ auto VBackgroundImageControls::ScaleByBottom(QGraphicsSceneMouseEvent *event) co
 //---------------------------------------------------------------------------------------------------------------------
 auto VBackgroundImageControls::ScaleByBottomLeft(QGraphicsSceneMouseEvent *event) const -> QTransform
 {
-    QRectF rectOriginal = m_imageBoundingRect;
+    QRectF const rectOriginal = m_imageBoundingRect;
     QRectF rect = m_imageScreenBoundingRect;
 
     const qreal adjustmentX = -rect.topLeft().x();
@@ -1414,16 +1414,16 @@ auto VBackgroundImageControls::ScaleByBottomLeft(QGraphicsSceneMouseEvent *event
         }
     }
 
-    QPointF newScalePoint = pos - m_scaleDiff;
+    QPointF const newScalePoint = pos - m_scaleDiff;
 
     QTransform m;
-    QPointF scaleCenterOriginal =
+    QPointF const scaleCenterOriginal =
         (event->modifiers() & Qt::ShiftModifier) ? rectOriginal.center() : rectOriginal.topRight();
 
     m.translate(scaleCenterOriginal.x(), scaleCenterOriginal.y());
     m.scale(scaleX, scaleY);
 
-    QPointF scaleCenter = (event->modifiers() & Qt::ShiftModifier) ? rect.center() : rect.topRight();
+    QPointF const scaleCenter = (event->modifiers() & Qt::ShiftModifier) ? rect.center() : rect.topRight();
 
     if (newScalePoint.x() > scaleCenter.x())
     {
@@ -1443,7 +1443,7 @@ auto VBackgroundImageControls::ScaleByBottomLeft(QGraphicsSceneMouseEvent *event
 //---------------------------------------------------------------------------------------------------------------------
 auto VBackgroundImageControls::ScaleByLeft(QGraphicsSceneMouseEvent *event) const -> QTransform
 {
-    QRectF rectOriginal = m_imageBoundingRect;
+    QRectF const rectOriginal = m_imageBoundingRect;
     QRectF rect = m_imageScreenBoundingRect;
 
     const qreal adjustmentX = -rect.topLeft().x();
@@ -1467,7 +1467,7 @@ auto VBackgroundImageControls::ScaleByLeft(QGraphicsSceneMouseEvent *event) cons
             centerScalePoint.rx() = rect.center().x() - (centerScalePoint.x() - rect.center().x());
         }
 
-        QPointF diff = centerScalePoint - RectLeftPoint(rect);
+        QPointF const diff = centerScalePoint - RectLeftPoint(rect);
 
         if (event->modifiers() & Qt::ControlModifier)
         {
@@ -1490,7 +1490,7 @@ auto VBackgroundImageControls::ScaleByLeft(QGraphicsSceneMouseEvent *event) cons
         nowRect = QRectF(QPointF(newScalePoint.x(), rect.topLeft().y()), rect.bottomRight());
     }
 
-    qreal scaleX = nowRect.width() / rect.width();
+    qreal const scaleX = nowRect.width() / rect.width();
     qreal scaleY = nowRect.width() / rect.width();
 
     if (event->modifiers() & Qt::ControlModifier)
@@ -1498,17 +1498,17 @@ auto VBackgroundImageControls::ScaleByLeft(QGraphicsSceneMouseEvent *event) cons
         scaleY = 1;
     }
 
-    QPointF newScalePoint = pos - m_scaleDiff;
+    QPointF const newScalePoint = pos - m_scaleDiff;
 
     QTransform m;
 
-    QPointF scaleCenterOriginal =
+    QPointF const scaleCenterOriginal =
         (event->modifiers() & Qt::ShiftModifier) ? rectOriginal.center() : RectRightPoint(rectOriginal);
 
     m.translate(scaleCenterOriginal.x(), scaleCenterOriginal.y());
     m.scale(scaleX, scaleY);
 
-    QPointF scaleCenter = (event->modifiers() & Qt::ShiftModifier) ? rect.center() : RectRightPoint(rect);
+    QPointF const scaleCenter = (event->modifiers() & Qt::ShiftModifier) ? rect.center() : RectRightPoint(rect);
 
     if (newScalePoint.x() > scaleCenter.x())
     {
@@ -1551,7 +1551,7 @@ auto VBackgroundImageControls::Handles() const -> QPainterPath
 auto VBackgroundImageControls::ControllersRect() const -> QRectF
 {
     const qreal scale = SceneScale(scene());
-    QPixmap handler = m_handlePixmaps.value(BIHandleCornerType::ScaleTopLeftBottomRight);
+    QPixmap const handler = m_handlePixmaps.value(BIHandleCornerType::ScaleTopLeftBottomRight);
     QRectF imageRect = m_image.BoundingRect();
 
     imageRect = QRectF(imageRect.topLeft() * scale, QSizeF(imageRect.width() * scale, imageRect.height() * scale));
@@ -1559,13 +1559,13 @@ auto VBackgroundImageControls::ControllersRect() const -> QRectF
 
     if (imageRect.width() < handler.width())
     {
-        qreal diff = handler.width() - imageRect.width();
+        qreal const diff = handler.width() - imageRect.width();
         rect.adjust(0, 0, diff, 0);
     }
 
     if (imageRect.height() < handler.height())
     {
-        qreal diff = handler.height() - imageRect.height();
+        qreal const diff = handler.height() - imageRect.height();
         rect.adjust(0, 0, 0, diff);
     }
 
@@ -1648,7 +1648,7 @@ auto VBackgroundImageControls::OriginCircle1() const -> QPainterPath
     const qreal radius1 = 4;
     QPainterPath path;
     const qreal sceneScale = SceneScale(scene());
-    QPointF screeOrigin = m_originPos * sceneScale;
+    QPointF const screeOrigin = m_originPos * sceneScale;
     path.addEllipse({screeOrigin.x() - radius1, screeOrigin.y() - radius1, radius1 * 2., radius1 * 2.});
     return path;
 }
@@ -1659,7 +1659,7 @@ auto VBackgroundImageControls::OriginCircle2() const -> QPainterPath
     const qreal radius2 = 8;
     QPainterPath path;
     const qreal sceneScale = SceneScale(scene());
-    QPointF screeOrigin = m_originPos * sceneScale;
+    QPointF const screeOrigin = m_originPos * sceneScale;
     path.addEllipse({screeOrigin.x() - radius2, screeOrigin.y() - radius2, radius2 * 2., radius2 * 2.});
     return path;
 }
@@ -1756,12 +1756,12 @@ void VBackgroundImageControls::RotateImage(QGraphicsSceneMouseEvent *event)
 
     if (m_handleCornerHover != BIHandleCorner::Invalid)
     {
-        QPointF rotationNewPoint = event->pos();
+        QPointF const rotationNewPoint = event->pos();
         const qreal sceneScale = SceneScale(scene());
-        QPointF screenOriginPos = m_originPos * sceneScale;
+        QPointF const screenOriginPos = m_originPos * sceneScale;
 
-        QLineF initPosition(screenOriginPos, m_rotationStartPoint);
-        QLineF initRotationPosition(screenOriginPos, rotationNewPoint);
+        QLineF const initPosition(screenOriginPos, m_rotationStartPoint);
+        QLineF const initRotationPosition(screenOriginPos, rotationNewPoint);
 
         qreal rotateOn = initPosition.angleTo(initRotationPosition);
 

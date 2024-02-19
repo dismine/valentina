@@ -237,7 +237,7 @@ auto VArc::GetLength() const -> qreal
  */
 auto VArc::GetP1() const -> QPointF
 {
-    QPointF p1(GetCenter().x() + qAbs(d->radius), GetCenter().y());
+    QPointF const p1(GetCenter().x() + qAbs(d->radius), GetCenter().y());
     QLineF centerP1(static_cast<QPointF>(GetCenter()), p1);
     centerP1.setAngle(GetStartAngle());
     return centerP1.p2();
@@ -250,7 +250,7 @@ auto VArc::GetP1() const -> QPointF
  */
 auto VArc::GetP2() const -> QPointF
 {
-    QPointF p2(GetCenter().x() + qAbs(d->radius), GetCenter().y());
+    QPointF const p2(GetCenter().x() + qAbs(d->radius), GetCenter().y());
     QLineF centerP2(static_cast<QPointF>(GetCenter()), p2);
     centerP2.setAngle(GetEndAngle());
     return centerP2.p2();
@@ -381,7 +381,7 @@ auto VArc::CutArc(qreal length, VArc &arc1, VArc &arc2, const QString &pointName
         return GetP2();
     }
 
-    QLineF line =
+    QLineF const line =
         not IsFlipped() ? CutPoint(length, fullLength, pointName) : CutPointFlipped(length, fullLength, pointName);
 
     arc1 = VArc(GetCenter(), d->radius, d->formulaRadius, GetStartAngle(), GetFormulaF1(), line.angle(),
@@ -419,7 +419,7 @@ auto VArc::OptimalApproximationScale(qreal radius, qreal f1, qreal f2, qreal tol
     {
         VArc arc(VPointF(), radius, f1, f2);
         arc.SetApproximationScale(scale);
-        qreal curvature = Curvature(arc.GetPoints());
+        qreal const curvature = Curvature(arc.GetPoints());
 
         if (expectedCurvature - curvature <= expectedCurvature * tolerance)
         {

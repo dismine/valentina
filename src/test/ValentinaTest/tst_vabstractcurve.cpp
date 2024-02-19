@@ -167,7 +167,7 @@ void TST_VAbstractCurve::IsPointOnCurve() const
     QFETCH(QPointF, point);
     QFETCH(bool, expectedResult);
 
-    bool result = VAbstractCurve::IsPointOnCurve(points, point);
+    bool const result = VAbstractCurve::IsPointOnCurve(points, point);
     QCOMPARE(result, expectedResult);
 }
 
@@ -180,8 +180,8 @@ void TST_VAbstractCurve::CurveIntersectLine_data()
 
     auto ASSERT_TEST_CASE = [](const char *title, const QString &input, const QString &output, QLineF line)
     {
-        QVector<QPointF> points = AbstractTest::VectorFromJson<QPointF>(input);
-        QVector<QPointF> intersections = AbstractTest::VectorFromJson<QPointF>(output);
+        QVector<QPointF> const points = AbstractTest::VectorFromJson<QPointF>(input);
+        QVector<QPointF> const intersections = AbstractTest::VectorFromJson<QPointF>(output);
         QTest::newRow(title) << points << intersections << line;
     };
 

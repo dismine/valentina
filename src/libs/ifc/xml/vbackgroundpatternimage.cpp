@@ -85,7 +85,7 @@ auto VBackgroundPatternImage::FromFile(const QString &fileName, bool builtIn) ->
 
     QT_WARNING_POP
 
-    QMimeType mime = QMimeDatabase().mimeTypeForFile(fileName);
+    QMimeType const mime = QMimeDatabase().mimeTypeForFile(fileName);
 
     if (not IsMimeTypeImage(mime))
     {
@@ -102,7 +102,7 @@ auto VBackgroundPatternImage::FromFile(const QString &fileName, bool builtIn) ->
             return {};
         }
 
-        QString base64 = SplitString(QString::fromLatin1(file.readAll().toBase64().data())).join('\n'_L1);
+        QString const base64 = SplitString(QString::fromLatin1(file.readAll().toBase64().data())).join('\n'_L1);
         image.SetContentData(base64.toLatin1(), mime.name());
     }
     else
@@ -159,7 +159,7 @@ auto VBackgroundPatternImage::IsValid() const -> bool
 
     if (not m_filePath.isEmpty())
     {
-        QMimeType mime = MimeTypeFromData();
+        QMimeType const mime = MimeTypeFromData();
 
         if (not IsMimeTypeImage(mime))
         {
@@ -175,7 +175,7 @@ auto VBackgroundPatternImage::IsValid() const -> bool
             return false;
         }
 
-        QMimeType mime = MimeTypeFromData();
+        QMimeType const mime = MimeTypeFromData();
         QSet<QString> aliases = ConvertToSet<QString>(mime.aliases());
         aliases.insert(mime.name());
 
@@ -326,7 +326,7 @@ auto VBackgroundPatternImage::Type() const -> PatternImage
         return PatternImage::Unknown;
     }
 
-    QMimeType mime = MimeTypeFromData();
+    QMimeType const mime = MimeTypeFromData();
 
     if (mime.name().startsWith(QStringLiteral("image/svg+xml")))
     {
@@ -339,8 +339,8 @@ auto VBackgroundPatternImage::Type() const -> PatternImage
 //---------------------------------------------------------------------------------------------------------------------
 auto VBackgroundPatternImage::BoundingRect() const -> QRectF
 {
-    QSize imageSize = Size();
-    QRectF imageRect({0, 0}, QSizeF(imageSize.width(), imageSize.height()));
+    QSize const imageSize = Size();
+    QRectF const imageRect({0, 0}, QSizeF(imageSize.width(), imageSize.height()));
     return m_matrix.mapRect(imageRect);
 }
 
@@ -379,7 +379,7 @@ auto VBackgroundPatternImage::LinkedImageSize() const -> QSize
 
     if (Type() == PatternImage::Vector)
     {
-        QSvgRenderer renderer(m_filePath);
+        QSvgRenderer const renderer(m_filePath);
         return not renderer.isValid() ? ScaleVectorImage(QSvgRenderer(brokenImage)) : ScaleVectorImage(renderer);
     }
 
@@ -402,7 +402,7 @@ auto VBackgroundPatternImage::BuiltInImageSize() const -> QSize
 
     if (Type() == PatternImage::Vector)
     {
-        QSvgRenderer renderer(array);
+        QSvgRenderer const renderer(array);
         return not renderer.isValid() ? ScaleVectorImage(QSvgRenderer(brokenImage)) : ScaleVectorImage(renderer);
     }
 

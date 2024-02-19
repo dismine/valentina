@@ -130,10 +130,10 @@ void VisToolMove::RefreshGeometry()
                 rLine.setAngle(CorrectAngle(rLine.angle()));
             }
 
-            qreal cursorLength = rLine.length();
+            qreal const cursorLength = rLine.length();
             rLine.setP2(Ray(origin, rLine.angle()));
             // Radius of point circle, but little bigger. Need handle with hover sizes.
-            qreal minL = ScaledRadius(SceneScale(VAbstractValApplication::VApp()->getCurrentScene())) * 1.5;
+            qreal const minL = ScaledRadius(SceneScale(VAbstractValApplication::VApp()->getCurrentScene())) * 1.5;
             if (cursorLength > minL)
             {
                 tempRoationAngle = rLine.angle();
@@ -152,8 +152,9 @@ void VisToolMove::RefreshGeometry()
         DrawLine(m_rotationLine, rLine, Qt::DashLine);
         DrawLine(m_xAxis, QLineF(origin, Ray(origin, 0)), Qt::DashLine);
 
-        VArc arc(VPointF(origin), ScaledRadius(SceneScale(VAbstractValApplication::VApp()->getCurrentScene())) * 2, 0,
-                 tempRoationAngle);
+        VArc const arc(VPointF(origin),
+                       ScaledRadius(SceneScale(VAbstractValApplication::VApp()->getCurrentScene())) * 2, 0,
+                       tempRoationAngle);
         DrawPath(m_angleArc, arc.GetPath(), Qt::SolidLine, Qt::RoundCap);
     }
     DrawLine(this, line, Qt::DashLine);

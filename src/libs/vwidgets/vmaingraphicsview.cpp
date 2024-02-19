@@ -169,9 +169,9 @@ void GraphicsViewZoom::gentle_zoom(double factor)
             FictiveSceneRect(_view->scene(), _view);
         }
         _view->centerOn(target_scene_pos);
-        QPointF delta_viewport_pos =
+        QPointF const delta_viewport_pos =
             target_viewport_pos - QPointF(_view->viewport()->width() / 2.0, _view->viewport()->height() / 2.0);
-        QPointF viewport_center = _view->mapFromScene(target_scene_pos) - delta_viewport_pos;
+        QPointF const viewport_center = _view->mapFromScene(target_scene_pos) - delta_viewport_pos;
         _view->centerOn(_view->mapToScene(viewport_center.toPoint()));
         // In the end we just set correct scene size
         VMainGraphicsView::NewSceneRect(_view->scene(), _view);
@@ -270,7 +270,7 @@ auto GraphicsViewZoom::eventFilter(QObject *object, QEvent *event) -> bool
          */
         // NOLINTNEXTLINE(cppcoreguidelines-pro-type-static-cast-downcast)
         auto *mouse_event = static_cast<QMouseEvent *>(event);
-        QPointF delta = target_viewport_pos - mouse_event->pos();
+        QPointF const delta = target_viewport_pos - mouse_event->pos();
         if (qAbs(delta.x()) > 5 || qAbs(delta.y()) > 5)
         {
             target_viewport_pos = mouse_event->pos();
@@ -404,10 +404,10 @@ auto GraphicsViewZoom::GestureEvent(QGestureEvent *event) -> bool
 //---------------------------------------------------------------------------------------------------------------------
 void GraphicsViewZoom::PinchTriggered(QPinchGesture *gesture)
 {
-    QPinchGesture::ChangeFlags changeFlags = gesture->changeFlags();
+    QPinchGesture::ChangeFlags const changeFlags = gesture->changeFlags();
     if (changeFlags & QPinchGesture::ScaleFactorChanged)
     {
-        qreal currentStepScaleFactor = gesture->lastScaleFactor();
+        qreal const currentStepScaleFactor = gesture->lastScaleFactor();
         gentle_zoom(currentStepScaleFactor);
     }
 }
@@ -449,7 +449,7 @@ VMainGraphicsView::VMainGraphicsView(QWidget *parent)
 //---------------------------------------------------------------------------------------------------------------------
 void VMainGraphicsView::Zoom(qreal scale)
 {
-    qreal factor = qBound(MinScale(), scale, MaxScale());
+    qreal const factor = qBound(MinScale(), scale, MaxScale());
     QTransform transform = this->transform();
     transform.setMatrix(factor, transform.m12(), transform.m13(), transform.m21(), factor, transform.m23(),
                         transform.m31(), transform.m32(), transform.m33());
@@ -590,7 +590,7 @@ void VMainGraphicsView::mouseMoveEvent(QMouseEvent *event)
     // Because no real way to catch this call we will check state for each move and compare to excpected state.
     if (dragMode() != QGraphicsView::ScrollHandDrag)
     {
-        QCursor cur = viewport()->cursor();
+        QCursor const cur = viewport()->cursor();
         // No way to restore bitmap from shape and we really don't need this for now.
         if (m_currentCursor != Qt::BitmapCursor && cur.shape() == Qt::BitmapCursor &&
             cur.pixmap().cacheKey() != QPixmapFromCache(cursorArrowOpenHand).cacheKey() &&
@@ -653,11 +653,11 @@ void VMainGraphicsView::dragEnterEvent(QDragEnterEvent *event)
     auto *currentScene = qobject_cast<VMainGraphicsScene *>(scene());
     if (currentScene != nullptr && currentScene->AcceptDrop() && mime != nullptr && mime->hasText())
     {
-        QUrl urlPath(mime->text().simplified());
+        QUrl const urlPath(mime->text().simplified());
         if (urlPath.isLocalFile())
         {
             const QString fileName = urlPath.toLocalFile();
-            QFileInfo f(fileName);
+            QFileInfo const f(fileName);
             if (f.exists() && IsMimeTypeImage(QMimeDatabase().mimeTypeForFile(fileName)))
             {
                 event->acceptProposedAction();
@@ -674,11 +674,11 @@ void VMainGraphicsView::dragMoveEvent(QDragMoveEvent *event)
     auto *currentScene = qobject_cast<VMainGraphicsScene *>(scene());
     if (currentScene != nullptr && currentScene->AcceptDrop() && mime != nullptr && mime->hasText())
     {
-        QUrl urlPath(mime->text().simplified());
+        QUrl const urlPath(mime->text().simplified());
         if (urlPath.isLocalFile())
         {
             const QString fileName = urlPath.toLocalFile();
-            QFileInfo f(fileName);
+            QFileInfo const f(fileName);
             if (f.exists() && IsMimeTypeImage(QMimeDatabase().mimeTypeForFile(fileName)))
             {
                 event->acceptProposedAction();
@@ -694,11 +694,11 @@ void VMainGraphicsView::dropEvent(QDropEvent *event)
     auto *currentScene = qobject_cast<VMainGraphicsScene *>(scene());
     if (currentScene != nullptr && currentScene->AcceptDrop() && mime != nullptr && mime->hasText())
     {
-        QUrl urlPath(mime->text().simplified());
+        QUrl const urlPath(mime->text().simplified());
         if (urlPath.isLocalFile())
         {
             const QString fileName = urlPath.toLocalFile();
-            QFileInfo f(fileName);
+            QFileInfo const f(fileName);
             if (f.exists() && IsMimeTypeImage(QMimeDatabase().mimeTypeForFile(fileName)))
             {
                 emit currentScene->AddBackgroundImage(mapToScene(DropEventPos(event)), fileName);

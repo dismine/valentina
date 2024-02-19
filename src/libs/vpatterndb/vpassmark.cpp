@@ -82,7 +82,7 @@ auto PointsToSegments(const QVector<QPointF> &points) -> QVector<QLineF>
         lines.reserve(points.size() - 1);
         for (int i = 0; i < points.size() - 1; ++i)
         {
-            QLineF segment = QLineF(points.at(i), points.at(i + 1));
+            QLineF const segment = QLineF(points.at(i), points.at(i + 1));
             if (segment.length() > 0)
             {
                 lines.append(segment);
@@ -713,7 +713,7 @@ auto VPassmark::FindIntersection(const QLineF &line, const QVector<QPointF> &sea
 {
     QLineF testLine = line;
     testLine.setLength(testLine.length() * 10);
-    QVector<QPointF> intersections = VAbstractCurve::CurveIntersectLine(seamAllowance, testLine);
+    QVector<QPointF> const intersections = VAbstractCurve::CurveIntersectLine(seamAllowance, testLine);
     if (not intersections.isEmpty())
     {
         return {line.p1(), intersections.constLast()};
@@ -953,7 +953,7 @@ auto VPassmark::BuiltInSAPassmarkBaseLine(const VPiece &piece) const -> QVector<
     }
 
     QLineF edge1 = QLineF(m_data.passmarkSAPoint, m_data.previousSAPoint);
-    QLineF edge2 = QLineF(m_data.passmarkSAPoint, m_data.nextSAPoint);
+    QLineF const edge2 = QLineF(m_data.passmarkSAPoint, m_data.nextSAPoint);
 
     edge1.setAngle(edge1.angle() + edge1.angleTo(edge2) / 2.);
     edge1.setLength(length);

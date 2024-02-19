@@ -59,9 +59,9 @@ namespace
 auto FileBaseName(const QString &filePath) -> QString
 {
     // Known suffixes to check for
-    QStringList knownSuffixes = {".val", ".vst", ".vit"};
+    QStringList const knownSuffixes = {".val", ".vst", ".vit"};
 
-    QFileInfo fileInfo(filePath);
+    QFileInfo const fileInfo(filePath);
 
     // Check if the file has one of the known suffixes
     for (const QString &suffix : knownSuffixes)
@@ -332,7 +332,7 @@ void DialogEditLabel::ExportTemplate()
 {
     VValentinaSettings *settings = VAbstractValApplication::VApp()->ValentinaSettings();
 
-    QString filters(tr("Label template") + "(*.xml)"_L1);
+    QString const filters(tr("Label template") + "(*.xml)"_L1);
     const QString path = settings->GetPathLabelTemplate();
 
     QString fileName =
@@ -344,7 +344,7 @@ void DialogEditLabel::ExportTemplate()
         return;
     }
 
-    QFileInfo f(fileName);
+    QFileInfo const f(fileName);
     if (f.suffix().isEmpty() && f.suffix() != "xml"_L1)
     {
         fileName += ".xml"_L1;
@@ -386,7 +386,7 @@ void DialogEditLabel::ImportTemplate()
         }
     }
 
-    QString filter(tr("Label template") + " (*.xml)"_L1);
+    QString const filter(tr("Label template") + " (*.xml)"_L1);
     // Use standard path to label templates
     const QString path = VAbstractValApplication::VApp()->ValentinaSettings()->GetPathLabelTemplate();
     const QString fileName = QFileDialog::getOpenFileName(this, tr("Import template"), path, filter, nullptr,
@@ -507,7 +507,7 @@ void DialogEditLabel::SetupControls()
 auto DialogEditLabel::SortedActions() const -> QMap<QString, QString>
 {
     QMap<QString, QString> sortedActions;
-    QChar per('%');
+    QChar const per('%');
     auto i = m_placeholders.constBegin();
     while (i != m_placeholders.constEnd())
     {
@@ -520,7 +520,7 @@ auto DialogEditLabel::SortedActions() const -> QMap<QString, QString>
 //---------------------------------------------------------------------------------------------------------------------
 void DialogEditLabel::InitPlaceholdersMenu()
 {
-    QMap<QString, QString> sortedActions = SortedActions();
+    QMap<QString, QString> const sortedActions = SortedActions();
     auto i = sortedActions.constBegin();
     while (i != sortedActions.constEnd())
     {
@@ -536,7 +536,7 @@ void DialogEditLabel::InitPlaceholdersMenu()
 void DialogEditLabel::InitPlaceholders()
 {
     // Pattern tags
-    QLocale locale(VAbstractApplication::VApp()->Settings()->GetLocale());
+    QLocale const locale(VAbstractApplication::VApp()->Settings()->GetLocale());
 
     const QString date = locale.toString(QDate::currentDate(), m_doc->GetLabelDateFormat());
     m_placeholders.insert(pl_date, qMakePair(tr("Date"), date));
@@ -585,19 +585,19 @@ void DialogEditLabel::InitPlaceholders()
                                                   FileBaseName(VAbstractValApplication::VApp()->GetPatternPath())));
     m_placeholders.insert(pl_mFileName, qMakePair(tr("Measurements file name"), FileBaseName(m_doc->MPath())));
 
-    QString heightValue = QString::number(VAbstractValApplication::VApp()->GetDimensionHeight());
+    QString const heightValue = QString::number(VAbstractValApplication::VApp()->GetDimensionHeight());
     m_placeholders.insert(pl_height, qMakePair(tr("Height", "dimension"), heightValue));
     m_placeholders.insert(pl_dimensionX, qMakePair(tr("Dimension X", "dimension"), heightValue));
 
-    QString sizeValue = QString::number(VAbstractValApplication::VApp()->GetDimensionSize());
+    QString const sizeValue = QString::number(VAbstractValApplication::VApp()->GetDimensionSize());
     m_placeholders.insert(pl_size, qMakePair(tr("Size", "dimension"), sizeValue));
     m_placeholders.insert(pl_dimensionY, qMakePair(tr("Dimension Y", "dimension"), sizeValue));
 
-    QString hipValue = QString::number(VAbstractValApplication::VApp()->GetDimensionHip());
+    QString const hipValue = QString::number(VAbstractValApplication::VApp()->GetDimensionHip());
     m_placeholders.insert(pl_hip, qMakePair(tr("Hip", "dimension"), hipValue));
     m_placeholders.insert(pl_dimensionZ, qMakePair(tr("Dimension Z", "dimension"), hipValue));
 
-    QString waistValue = QString::number(VAbstractValApplication::VApp()->GetDimensionWaist());
+    QString const waistValue = QString::number(VAbstractValApplication::VApp()->GetDimensionWaist());
     m_placeholders.insert(pl_waist, qMakePair(tr("Waist", "dimension"), waistValue));
     m_placeholders.insert(pl_dimensionW, qMakePair(tr("Dimension W", "dimension"), waistValue));
 
@@ -659,7 +659,7 @@ void DialogEditLabel::InitPlaceholders()
         auto i = measurements.constBegin();
         while (i != measurements.constEnd())
         {
-            QString description = i.value()->GetGuiText().isEmpty() ? i.key() : i.value()->GetGuiText();
+            QString const description = i.value()->GetGuiText().isEmpty() ? i.key() : i.value()->GetGuiText();
             m_placeholders.insert(pl_measurement + i.key(), qMakePair(tr("Measurement: %1").arg(description),
                                                                       QString::number(*i.value()->GetValue())));
             ++i;
@@ -680,7 +680,7 @@ void DialogEditLabel::InitPlaceholders()
 
             try
             {
-                QScopedPointer<Calculator> cal(new Calculator());
+                QScopedPointer<Calculator> const cal(new Calculator());
                 const qreal result = cal->EvalFormula(completeData.DataVariables(), m.formula);
 
                 m_placeholders.insert(pl_finalMeasurement + m.name,
@@ -699,7 +699,7 @@ void DialogEditLabel::InitPlaceholders()
         }
     }
 
-    QSharedPointer<VTranslator> phTr = VAbstractApplication::VApp()->GetPlaceholderTranslator();
+    QSharedPointer<VTranslator> const phTr = VAbstractApplication::VApp()->GetPlaceholderTranslator();
 
     // Piece tags
     m_placeholders.insert(pl_pLetter, qMakePair(tr("Piece letter"), QString()));
@@ -723,7 +723,7 @@ void DialogEditLabel::InitPlaceholders()
 //---------------------------------------------------------------------------------------------------------------------
 auto DialogEditLabel::ReplacePlaceholders(QString line) const -> QString
 {
-    QChar per('%');
+    QChar const per('%');
 
     auto TestDimension = [per, this, line](const QString &placeholder, const QString &errorMsg)
     {
@@ -826,14 +826,14 @@ void DialogEditLabel::SetPiece(const VPiece &piece)
     m_placeholders[pl_pQuantity].second = QString::number(pieceData.GetQuantity());
     if (pieceData.IsOnFold())
     {
-        QSharedPointer<VTranslator> phTr = VAbstractApplication::VApp()->GetPlaceholderTranslator();
+        QSharedPointer<VTranslator> const phTr = VAbstractApplication::VApp()->GetPlaceholderTranslator();
         m_placeholders[pl_wOnFold].second = phTr->translate("Placeholder", "on fold");
     }
 
     VContainer completeData = m_doc->GetCompleteData();
     completeData.FillPiecesAreas(VAbstractValApplication::VApp()->patternUnits());
 
-    QScopedPointer<Calculator> cal(new Calculator());
+    QScopedPointer<Calculator> const cal(new Calculator());
 
     try
     {

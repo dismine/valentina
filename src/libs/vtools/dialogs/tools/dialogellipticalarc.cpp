@@ -620,8 +620,8 @@ void DialogEllipticalArc::ShowDialog(bool click)
 
         if (m_stage == 1) // radius 2
         {
-            QLineF radius2Line(center->x(), center->y(), center->x(), center->y() - 100);
-            QPointF p = VGObject::ClosestPoint(radius2Line, scene->getScenePos());
+            QLineF const radius2Line(center->x(), center->y(), center->x(), center->y() - 100);
+            QPointF const p = VGObject::ClosestPoint(radius2Line, scene->getScenePos());
             line = QLineF(static_cast<QPointF>(*center), p);
 
             // Radius of point circle, but little bigger. Need to handle with hover sizes.
@@ -758,7 +758,7 @@ void DialogEllipticalArc::changeEvent(QEvent *event)
 //---------------------------------------------------------------------------------------------------------------------
 void DialogEllipticalArc::ValidateAlias()
 {
-    QRegularExpression rx(NameRegExp());
+    QRegularExpression const rx(NameRegExp());
     VEllipticalArc arc;
     arc.SetAliasSuffix(GetAliasSuffix());
     if (not GetAliasSuffix().isEmpty() &&

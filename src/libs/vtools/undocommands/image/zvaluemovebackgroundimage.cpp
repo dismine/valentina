@@ -57,7 +57,7 @@ ZValueMoveBackgroundImage::ZValueMoveBackgroundImage(QUuid id, ZValueMoveType mo
 {
     setText(tr("z value move a background image"));
 
-    QVector<VBackgroundPatternImage> images = doc->GetBackgroundImages();
+    QVector<VBackgroundPatternImage> const images = doc->GetBackgroundImages();
 
     for (const auto &image: images)
     {
@@ -147,7 +147,7 @@ void ZValueMoveBackgroundImage::redo()
         order.append({m_id});
     }
 
-    QHash<QUuid, qreal> correctedZValues = CorrectedZValues(order);
+    QHash<QUuid, qreal> const correctedZValues = CorrectedZValues(order);
     for (auto &image: images)
     {
         image.SetZValue(correctedZValues.value(image.Id(), image.ZValue()));

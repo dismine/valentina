@@ -484,7 +484,7 @@ void VLayoutExporter::PdfToPs(const QStringList &params)
     QGuiApplication::restoreOverrideCursor();
 #endif
 
-    QFile f(params.constLast());
+    QFile const f(params.constLast());
     if (not f.exists())
     {
         qCritical() << qUtf8Printable(tr("Creating file '%1' failed! %2").arg(params.constLast(), proc.errorString()));
@@ -506,13 +506,13 @@ void VLayoutExporter::ExportToPDF(QGraphicsScene *scene, const QList<QGraphicsIt
     printer.setResolution(static_cast<int>(PrintDPI));
     printer.setFullPage(m_ignorePrinterMargins);
 
-    QPageLayout::Orientation imageOrientation =
+    QPageLayout::Orientation const imageOrientation =
         m_imageRect.height() >= m_imageRect.width() ? QPageLayout::Portrait : QPageLayout::Landscape;
 
-    qreal width = FromPixel(m_imageRect.width() * m_xScale + m_margins.left() + m_margins.right(), Unit::Mm);
-    qreal height = FromPixel(m_imageRect.height() * m_yScale + m_margins.top() + m_margins.bottom(), Unit::Mm);
+    qreal const width = FromPixel(m_imageRect.width() * m_xScale + m_margins.left() + m_margins.right(), Unit::Mm);
+    qreal const height = FromPixel(m_imageRect.height() * m_yScale + m_margins.top() + m_margins.bottom(), Unit::Mm);
 
-    QSizeF pageSize = imageOrientation == QPageLayout::Portrait ? QSizeF(width, height) : QSizeF(height, width);
+    QSizeF const pageSize = imageOrientation == QPageLayout::Portrait ? QSizeF(width, height) : QSizeF(height, width);
     if (not printer.setPageSize(QPageSize(pageSize, QPageSize::Millimeter)))
     {
         qWarning() << tr("Cannot set printer page size");

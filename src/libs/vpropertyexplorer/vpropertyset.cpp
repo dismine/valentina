@@ -64,7 +64,7 @@ auto VPE::VPropertySet::addProperty(VProperty *property, const QString &id, VPro
         return false;
     }
 
-    QString tmpOldID = getPropertyID(property);
+    QString const tmpOldID = getPropertyID(property);
     if (!tmpOldID.isEmpty())
     {
         d_ptr->Properties.remove(tmpOldID);
@@ -235,7 +235,7 @@ void VPE::VPropertySet::cloneProperty(VProperty* property_to_clone, VProperty *p
         return;
     }
 
-    QString tmpID = getPropertyID(property_to_clone, false);
+    QString const tmpID = getPropertyID(property_to_clone, false);
 
     // We want to clone the children ourselves (because of the IDs)
     VProperty* tmpNewProperty = property_to_clone->clone(false);

@@ -151,14 +151,14 @@ template <class T> inline auto AbstractTest::VectorFromJson(const QString &json)
 {
     QByteArray saveData;
     PrepareDocument(json, saveData);
-    QJsonDocument loadDoc(QJsonDocument::fromJson(saveData));
+    QJsonDocument const loadDoc(QJsonDocument::fromJson(saveData));
 
     const QString vectorKey = QStringLiteral("vector");
 
     QJsonObject vectorObject = loadDoc.object();
     TestRoot(vectorObject, vectorKey, json);
 
-    QJsonArray vectorArray = vectorObject[vectorKey].toArray();
+    QJsonArray const vectorArray = vectorObject[vectorKey].toArray();
     QVector<T> vector;
     vector.reserve(vectorArray.size());
 

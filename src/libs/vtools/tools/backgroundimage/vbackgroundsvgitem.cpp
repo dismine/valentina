@@ -92,7 +92,7 @@ auto VBackgroundSVGItem::Renderer() const -> QSvgRenderer *
 {
     if (Stale())
     {
-        VBackgroundPatternImage image = Image();
+        VBackgroundPatternImage const image = Image();
         if (not image.IsValid())
         {
             MakeFresh();

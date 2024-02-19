@@ -249,8 +249,8 @@ auto VSpline::SplinePoints(const QPointF &p1, const QPointF &p4, qreal angle1, q
     p1p2.setAngle(angle1);
     QLineF p4p3(p4.x(), p4.y(), p4.x() + L * kAsm2, p4.y());
     p4p3.setAngle(angle2);
-    QPointF p2 = p1p2.p2();
-    QPointF p3 = p4p3.p2();
+    QPointF const p2 = p1p2.p2();
+    QPointF const p3 = p4p3.p2();
     return GetCubicBezierPoints(p1, p2, p3, p4, approximationScale);
 }
 

@@ -127,7 +127,7 @@ void PuzzlePreferencesPathPage::EditPath()
     }
 
     bool usedNotExistedDir = false;
-    QDir directory(path);
+    QDir const directory(path);
     if (not directory.exists())
     {
         usedNotExistedDir = directory.mkpath(QChar('.'));

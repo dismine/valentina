@@ -109,7 +109,7 @@ auto VSvgFontEngine::FontPixelSize() const -> int
         return d->m_font.PixelSize();
     }
 
-    qreal pointSize = d->m_font.PointSizeF();
+    qreal const pointSize = d->m_font.PointSizeF();
     if (pointSize <= 0)
     {
         qWarning("VSvgFontEngine::FontPixelSize: Point size <= 0 (%f), must be greater than 0", pointSize);
@@ -128,14 +128,14 @@ auto VSvgFontEngine::FontHeight() const -> qreal
 //---------------------------------------------------------------------------------------------------------------------
 auto VSvgFontEngine::FromFontUnits(qreal val, int pixelSize) const -> qreal
 {
-    int pxSize = pixelSize > 0 ? pixelSize : FontPixelSize();
+    int const pxSize = pixelSize > 0 ? pixelSize : FontPixelSize();
     return pxSize * val / d->m_font.UnitsPerEm();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 auto VSvgFontEngine::ToFontUnits(qreal val, int pixelSize) const -> qreal
 {
-    int pxSize = pixelSize > 0 ? pixelSize : FontPixelSize();
+    int const pxSize = pixelSize > 0 ? pixelSize : FontPixelSize();
     return val * d->m_font.UnitsPerEm() / pxSize;
 }
 
@@ -169,7 +169,7 @@ void VSvgFontEngine::AddGlyph(QChar unicode, const QPainterPath &path, qreal hor
 //---------------------------------------------------------------------------------------------------------------------
 auto VSvgFontEngine::DrawPath(const QPointF &point, const QString &str) const -> QPainterPath
 {
-    qreal pixelSize = FontPixelSize();
+    qreal const pixelSize = FontPixelSize();
 
     if (d->m_font.UnitsPerEm() <= 0 || pixelSize <= 0)
     {
@@ -203,7 +203,7 @@ auto VSvgFontEngine::DrawPath(const QPointF &point, const QString &str) const ->
 //---------------------------------------------------------------------------------------------------------------------
 void VSvgFontEngine::Draw(QPainter *p, const QPointF &point, const QString &str) const
 {
-    int pixelSize = FontPixelSize();
+    int const pixelSize = FontPixelSize();
 
     if (d->m_font.UnitsPerEm() <= 0 || pixelSize <= 0)
     {
@@ -244,7 +244,7 @@ void VSvgFontEngine::Draw(QPainter *p, const QRectF &rect, const QString &str, Q
 {
     SCASSERT(p != nullptr)
 
-    int pixelSize = FontPixelSize();
+    int const pixelSize = FontPixelSize();
 
     if (d->m_font.UnitsPerEm() <= 0 || pixelSize <= 0)
     {
@@ -262,14 +262,14 @@ void VSvgFontEngine::Draw(QPainter *p, const QRectF &rect, const QString &str, Q
     QPoint alignmentOffset(0, 0);
     if (alignment == Qt::AlignHCenter)
     {
-        qreal stringWidth = ToFontUnits(rect.width());
-        int textWidth = TextHorizAdvX(str);
+        qreal const stringWidth = ToFontUnits(rect.width());
+        int const textWidth = TextHorizAdvX(str);
         alignmentOffset.setX(qRound(stringWidth / 2. - textWidth / 2.));
     }
     else if (alignment == Qt::AlignRight)
     {
-        qreal stringWidth = ToFontUnits(rect.width());
-        int textWidth = TextHorizAdvX(str);
+        qreal const stringWidth = ToFontUnits(rect.width());
+        int const textWidth = TextHorizAdvX(str);
         alignmentOffset.setX(qRound(stringWidth - textWidth));
     }
 
@@ -346,11 +346,11 @@ auto VSvgFontEngine::FontSample() const -> QString
         sample = d->m_font.FamilyName();
     }
 
-    QList<SVGFontWritingSystem> writingSystems = d->m_font.WritingSystems();
+    QList<SVGFontWritingSystem> const writingSystems = d->m_font.WritingSystems();
 
     for (auto system : writingSystems)
     {
-        QString systemSample = WritingSystemSample(system);
+        QString const systemSample = WritingSystemSample(system);
         if (CanRender(systemSample))
         {
             if (sample.isEmpty())
@@ -381,7 +381,7 @@ auto VSvgFontEngine::ElidedText(const QString &text, SVGTextElideMode mode, int 
     QString ellipsis;
     {
         // We only want to use the ellipsis character if it supported by font.
-        QChar ellipsisChar = u'\x2026';
+        QChar const ellipsisChar = u'\x2026';
         if (InFont(ellipsisChar))
         {
             ellipsis = ellipsisChar;
@@ -422,8 +422,8 @@ auto VSvgFontEngine::ElidedText(const QString &text, SVGTextElideMode mode, int 
 
         while (leftIndex < rightIndex && remainingWidth > 0)
         {
-            qreal leftAdvance = TextWidth(elidedText.at(leftIndex), penWidth);
-            qreal rightAdvance = TextWidth(elidedText.at(rightIndex), penWidth);
+            qreal const leftAdvance = TextWidth(elidedText.at(leftIndex), penWidth);
+            qreal const rightAdvance = TextWidth(elidedText.at(rightIndex), penWidth);
 
             if (leftAdvance <= rightAdvance && remainingWidth >= leftAdvance)
             {
@@ -453,20 +453,20 @@ auto VSvgFontEngine::ElidedText(const QString &text, SVGTextElideMode mode, int 
 //---------------------------------------------------------------------------------------------------------------------
 void VSvgFontEngine::RecalculateFontSize()
 {
-    int pixelSize = 100;
+    int const pixelSize = 100;
     QTransform matrix;
     matrix.translate(0, FromFontUnits(d->m_font.Ascent(), pixelSize));
     matrix.scale(pixelSize / d->m_font.UnitsPerEm(), -pixelSize / d->m_font.UnitsPerEm());
 
-    QRectF standard(0, 0, pixelSize, pixelSize);
+    QRectF const standard(0, 0, pixelSize, pixelSize);
     qreal top = standard.top();
     qreal bottom = standard.bottom();
 
     QHash<QChar, VSvgGlyph>::const_iterator i = d->m_glyphs.constBegin();
     while (i != d->m_glyphs.constEnd())
     {
-        QPainterPath path = i.value().Path();
-        QChar c = i.key();
+        QPainterPath const path = i.value().Path();
+        QChar const c = i.key();
         if (path.isEmpty() || c == u'\0')
         {
             ++i;
@@ -505,7 +505,7 @@ void VSvgFontEngine::RecalculateFontSize()
             d->m_font.SetDescent(descent);
         }
 
-        qreal units = ascent + qAbs(descent);
+        qreal const units = ascent + qAbs(descent);
         d->m_font.SetUnitsPerEm(units);
     }
 }

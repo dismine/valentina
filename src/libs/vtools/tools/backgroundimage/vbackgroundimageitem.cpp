@@ -154,7 +154,7 @@ void VBackgroundImageItem::paint(QPainter *painter, const QStyleOptionGraphicsIt
     {
         painter->save();
 
-        QBrush brush(QColor(177, 216, 250, 25));
+        QBrush const brush(QColor(177, 216, 250, 25));
         painter->setBrush(brush);
 
         painter->drawRect(boundingRect());
@@ -171,9 +171,9 @@ void VBackgroundImageItem::PositionChanged(QUuid id)
         return;
     }
 
-    QTransform oldMatrix = m_image.Matrix();
+    QTransform const oldMatrix = m_image.Matrix();
     m_image = m_doc->GetBackgroundImage(id);
-    QTransform newMatrix = m_image.Matrix();
+    QTransform const newMatrix = m_image.Matrix();
 
     if (not VFuzzyComparePossibleNulls(oldMatrix.m31(), newMatrix.m31()) ||
             not VFuzzyComparePossibleNulls(oldMatrix.m32(), newMatrix.m32()))
@@ -665,7 +665,7 @@ void VBackgroundImageItem::RotateImageByAngle(qreal angle)
 {
     QTransform imageMatrix = m_image.Matrix();
 
-    QPointF originPos = m_image.BoundingRect().center();
+    QPointF const originPos = m_image.BoundingRect().center();
 
     QTransform m;
     m.translate(originPos.x(), originPos.y());
@@ -684,11 +684,11 @@ void VBackgroundImageItem::RotateImageByAngle(qreal angle)
 //---------------------------------------------------------------------------------------------------------------------
 void VBackgroundImageItem::ScaleImageByAdjustSize(qreal value)
 {
-    QRectF rect = m_image.BoundingRect();
+    QRectF const rect = m_image.BoundingRect();
     QRectF adjusted = rect;
     adjusted.adjust(-value, -value, value, value);
 
-    qreal factor = adjusted.width() / rect.width();
+    qreal const factor = adjusted.width() / rect.width();
     ScaleImageByFactor(factor);
 }
 
@@ -696,7 +696,7 @@ void VBackgroundImageItem::ScaleImageByAdjustSize(qreal value)
 void VBackgroundImageItem::ScaleImageByFactor(qreal factor)
 {
     QTransform imageMatrix = m_image.Matrix();
-    QPointF originPos = m_image.BoundingRect().center();
+    QPointF const originPos = m_image.BoundingRect().center();
 
     QTransform m;
     m.translate(originPos.x(), originPos.y());

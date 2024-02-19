@@ -76,12 +76,12 @@ VTextCodec::VTextCodec(QStringConverter::Encoding encoding)
 //---------------------------------------------------------------------------------------------------------------------
 auto VTextCodec::codecForName(const QString &name) -> VTextCodec *
 {
-    QMap<QStringConverter::Encoding, QStringList> codecs = QtCodecs();
+    QMap<QStringConverter::Encoding, QStringList> const codecs = QtCodecs();
 
     auto i = codecs.constBegin();
     while (i != codecs.constEnd())
     {
-        QStringList aliases = i.value();
+        QStringList const aliases = i.value();
         if (aliases.contains(name))
         {
             return MakeCodec(i.key());
@@ -101,7 +101,7 @@ auto VTextCodec::codecForLocale() -> VTextCodec *
 //---------------------------------------------------------------------------------------------------------------------
 auto VTextCodec::codecForMib(int mib) -> VTextCodec *
 {
-    QMap<QStringConverter::Encoding, int> mibs = CodecMibs();
+    QMap<QStringConverter::Encoding, int> const mibs = CodecMibs();
 
     auto i = mibs.constBegin();
     while (i != mibs.constEnd())
@@ -125,7 +125,7 @@ auto VTextCodec::availableMibs() -> QList<int>
 //---------------------------------------------------------------------------------------------------------------------
 auto VTextCodec::availableCodecs() -> QList<QByteArray>
 {
-    QMap<QStringConverter::Encoding, QStringList> codecs = QtCodecs();
+    QMap<QStringConverter::Encoding, QStringList> const codecs = QtCodecs();
 
     QList<QByteArray> names;
     names.reserve(codecs.size());

@@ -67,7 +67,7 @@ namespace
 auto SelectNumber(QStringList path, int number) -> QStringList
 {
     path = Reverse(path);
-    QStringList subPath = path.mid(0, number);
+    QStringList const subPath = path.mid(0, number);
     return Reverse(subPath);
 }
 
@@ -98,7 +98,7 @@ auto RecentFiles(const QStringList &paths) -> QStringList
                     continue;
                 }
 
-                QStringList testSubPath = SelectNumber(table.at(row), count);
+                QStringList const testSubPath = SelectNumber(table.at(row), count);
                 if (optimized.join(QDir::separator()) == testSubPath.join(QDir::separator()))
                 {
                     isUnique = false;
@@ -176,7 +176,7 @@ auto VAbstractMainWindow::ContinueFormatRewrite(const QString &currentFormatVers
         msgBox.setDefaultButton(QDialogButtonBox::No);
         msgBox.setIconPixmap(QApplication::style()->standardIcon(QStyle::SP_MessageBoxQuestion).pixmap(32, 32));
 
-        int dialogResult = msgBox.exec();
+        int const dialogResult = msgBox.exec();
 
         if (dialogResult == QDialog::Accepted)
         {
@@ -213,7 +213,7 @@ auto VAbstractMainWindow::CSVFilePath() -> QString
         return fileName;
     }
 
-    QFileInfo f(fileName);
+    QFileInfo const f(fileName);
     if (f.suffix().isEmpty() && f.suffix() != suffix)
     {
         fileName += '.'_L1 + suffix;
@@ -257,7 +257,7 @@ void VAbstractMainWindow::UpdateRecentFileActions()
 //---------------------------------------------------------------------------------------------------------------------
 auto VAbstractMainWindow::CheckFilePermissions(const QString &path, QWidget *messageBoxParent) -> bool
 {
-    QFileInfo info(path);
+    QFileInfo const info(path);
 
     // #ifdef Q_OS_WIN32
     //         qt_ntfs_permission_lookup++; // turn checking on
@@ -288,7 +288,7 @@ auto VAbstractMainWindow::CheckFilePermissions(const QString &path, QWidget *mes
             // #ifdef Q_OS_WIN32
             //             qt_ntfs_permission_lookup++; // turn checking on
             // #endif /*Q_OS_WIN32*/
-            bool changed = QFile::setPermissions(path, QFileInfo(path).permissions() | QFileDevice::WriteUser);
+            bool const changed = QFile::setPermissions(path, QFileInfo(path).permissions() | QFileDevice::WriteUser);
             // #ifdef Q_OS_WIN32
             //             qt_ntfs_permission_lookup--; // turn it off again
             // #endif /*Q_OS_WIN32*/
@@ -387,7 +387,7 @@ void VAbstractMainWindow::WindowsLocale()
 //---------------------------------------------------------------------------------------------------------------------
 void VAbstractMainWindow::ExportDataToCSV()
 {
-    QString fileName = CSVFilePath();
+    QString const fileName = CSVFilePath();
 
     if (fileName.isEmpty())
     {

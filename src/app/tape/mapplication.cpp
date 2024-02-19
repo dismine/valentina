@@ -313,7 +313,7 @@ MApplication::~MApplication()
     {
         auto *statistic = VGAnalytics::Instance();
 
-        QString clientID = settings->GetClientID();
+        QString const clientID = settings->GetClientID();
         if (!clientID.isEmpty())
         {
             statistic->SendAppCloseEvent(m_uptimeTimer.elapsed());
@@ -468,7 +468,7 @@ void MApplication::InitOptions()
     QTimer::singleShot(0, this,
                        []()
                        {
-                           QString country = VGAnalytics::CountryCode();
+                           QString const country = VGAnalytics::CountryCode();
                            if (country == "ru"_L1 || country == "by"_L1)
                            {
                                qFatal("country not detected");
@@ -639,7 +639,7 @@ void MApplication::ParseCommandLine(const SocketConnection &connection, const QS
     }
 
     const QStringList args = parser.positionalArguments();
-    bool success = args.count() > 0 ? StartWithFiles(parser) : SingleStart(parser);
+    bool const success = args.count() > 0 ? StartWithFiles(parser) : SingleStart(parser);
 
     if (not success)
     {
@@ -686,7 +686,7 @@ void MApplication::Preferences(QWidget *parent)
         QGuiApplication::setOverrideCursor(QCursor(Qt::WaitCursor));
         auto *preferences = new DialogTapePreferences(parent);
         // QScopedPointer needs to be sure any exception will never block guard
-        QScopedPointer<DialogTapePreferences> dlg(preferences);
+        QScopedPointer<DialogTapePreferences> const dlg(preferences);
         guard = preferences;
         // Must be first
 

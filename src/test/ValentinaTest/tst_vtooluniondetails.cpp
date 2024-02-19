@@ -58,18 +58,18 @@ void TST_VToolUnionDetails::TestUnitingMainPaths_data()
     QTest::addColumn<quint32>("pRotate");
     QTest::addColumn<QVector<UnitedPathNode>>("result");
 
-    VPieceNode d1p0(1205, Tool::NodePoint);
-    VPieceNode d1p1(1206, Tool::NodePoint);
-    VPieceNode d1p2(1207, Tool::NodeSpline);
-    VPieceNode d1p3(1208, Tool::NodePoint);
-    VPieceNode d1p4(1209, Tool::NodePoint);
-    VPieceNode d1p5(1204, Tool::NodeSpline);
+    VPieceNode const d1p0(1205, Tool::NodePoint);
+    VPieceNode const d1p1(1206, Tool::NodePoint);
+    VPieceNode const d1p2(1207, Tool::NodeSpline);
+    VPieceNode const d1p3(1208, Tool::NodePoint);
+    VPieceNode const d1p4(1209, Tool::NodePoint);
+    VPieceNode const d1p5(1204, Tool::NodeSpline);
 
-    VPieceNode d2p0(1211, Tool::NodePoint);
-    VPieceNode d2p1(1212, Tool::NodePoint);
-    VPieceNode d2p2(1213, Tool::NodeSpline);
-    VPieceNode d2p3(1214, Tool::NodePoint);
-    VPieceNode d2p4(1215, Tool::NodePoint);
+    VPieceNode const d2p0(1211, Tool::NodePoint);
+    VPieceNode const d2p1(1212, Tool::NodePoint);
+    VPieceNode const d2p2(1213, Tool::NodeSpline);
+    VPieceNode const d2p3(1214, Tool::NodePoint);
+    VPieceNode const d2p4(1215, Tool::NodePoint);
 
     QVector<UnitedPathNode> result;
     result.append(qMakePair(true, d1p0));
@@ -98,8 +98,8 @@ void TST_VToolUnionDetails::TestUnitingMainPaths_data()
     d2.Append(d2p3);
     d2.Append(d2p4);
 
-    quint32 indexD2 = 0;
-    quint32 pRotate = 1208;
+    quint32 const indexD2 = 0;
+    quint32 const pRotate = 1208;
 
     // See the file <root>/src/app/share/collection/Issue_#752.val
     QTest::newRow("Case 1") << d1 << d2 << indexD2 << pRotate << result;

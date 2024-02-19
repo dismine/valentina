@@ -88,7 +88,7 @@ void VAbstractShortcutManager::UpdateButtonShortcut(const QMultiHash<VShortcutAc
         {
             if (button)
             {
-                QList<QKeySequence> keySequence = StringListToKeySequenceList(shortcut.shortcuts);
+                QList<QKeySequence> const keySequence = StringListToKeySequenceList(shortcut.shortcuts);
                 if (!keySequence.isEmpty())
                 {
                     button->setShortcut(keySequence.constFirst());

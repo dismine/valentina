@@ -328,7 +328,7 @@ void VToolSplinePath::UpdateControlPoints(const VSpline &spl, QSharedPointer<VSp
 
     if (indexSpline > 1)
     {
-        VSpline prevSpline = splPath->GetSpline(indexSpline - 1);
+        VSpline const prevSpline = splPath->GetSpline(indexSpline - 1);
         if (qmu::QmuTokenParser::IsSingle(prevSpline.GetEndAngleFormula()))
         {
             p.SetAngle2(spl.GetStartAngle(), spl.GetStartAngleFormula());
@@ -346,7 +346,7 @@ void VToolSplinePath::UpdateControlPoints(const VSpline &spl, QSharedPointer<VSp
 
     if (indexSpline < splPath->CountSubSpl())
     {
-        VSpline nextSpline = splPath->GetSpline(indexSpline + 1);
+        VSpline const nextSpline = splPath->GetSpline(indexSpline + 1);
         if (qmu::QmuTokenParser::IsSingle(nextSpline.GetStartAngleFormula()))
         {
             p.SetAngle1(spl.GetEndAngle(), spl.GetEndAngleFormula());
@@ -470,7 +470,7 @@ void VToolSplinePath::UpdatePathPoints(VAbstractPattern *doc, QDomElement &eleme
 //---------------------------------------------------------------------------------------------------------------------
 auto VToolSplinePath::getSplinePath() const -> VSplinePath
 {
-    QSharedPointer<VSplinePath> splPath = VAbstractTool::data.GeometricObject<VSplinePath>(m_id);
+    QSharedPointer<VSplinePath> const splPath = VAbstractTool::data.GeometricObject<VSplinePath>(m_id);
     return *splPath.data();
 }
 
@@ -478,7 +478,7 @@ auto VToolSplinePath::getSplinePath() const -> VSplinePath
 void VToolSplinePath::setSplinePath(const VSplinePath &splPath)
 {
     QSharedPointer<VGObject> obj = VAbstractTool::data.GetGObject(m_id);
-    QSharedPointer<VSplinePath> splinePath = qSharedPointerDynamicCast<VSplinePath>(obj);
+    QSharedPointer<VSplinePath> const splinePath = qSharedPointerDynamicCast<VSplinePath>(obj);
     *splinePath.data() = splPath;
     SaveOption(obj);
 }
@@ -585,7 +585,7 @@ void VToolSplinePath::SaveOptions(QDomElement &tag, QSharedPointer<VGObject> &ob
 {
     VAbstractSpline::SaveOptions(tag, obj);
 
-    QSharedPointer<VSplinePath> splPath = qSharedPointerDynamicCast<VSplinePath>(obj);
+    QSharedPointer<VSplinePath> const splPath = qSharedPointerDynamicCast<VSplinePath>(obj);
     SCASSERT(splPath.isNull() == false)
 
     SetSplinePathAttributes(tag, *splPath);
@@ -646,7 +646,7 @@ void VToolSplinePath::mouseMoveEvent(QGraphicsSceneMouseEvent *event)
 
         newMoveSplinePath = QSharedPointer<VSplinePath>::create(*oldSplPath);
 
-        VSpline spline = newMoveSplinePath->GetSpline(splIndex);
+        VSpline const spline = newMoveSplinePath->GetSpline(splIndex);
         const qreal t = spline.ParamT(oldPosition);
 
         if (qFloor(t) == -1)
@@ -779,7 +779,7 @@ void VToolSplinePath::SetVisualization()
         auto *visual = qobject_cast<VisToolSplinePath *>(vis);
         SCASSERT(visual != nullptr)
 
-        QSharedPointer<VSplinePath> splPath = VAbstractTool::data.GeometricObject<VSplinePath>(m_id);
+        QSharedPointer<VSplinePath> const splPath = VAbstractTool::data.GeometricObject<VSplinePath>(m_id);
         visual->SetPath(*splPath.data());
         visual->SetLineStyle(LineStyleToPenStyle(splPath->GetPenStyle()));
         visual->SetMode(Mode::Show);

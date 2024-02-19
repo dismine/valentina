@@ -66,9 +66,9 @@ QT_WARNING_POP
 auto FileBaseName(const QString &filePath) -> QString
 {
     // Known suffixes to check for
-    QStringList knownSuffixes = {".val", ".vst", ".vit"};
+    QStringList const knownSuffixes = {".val", ".vst", ".vit"};
 
-    QFileInfo fileInfo(filePath);
+    QFileInfo const fileInfo(filePath);
 
     // Check if the file has one of the known suffixes
     for (const QString &suffix : knownSuffixes)
@@ -89,7 +89,7 @@ auto FileBaseName(const QString &filePath) -> QString
 //---------------------------------------------------------------------------------------------------------------------
 auto SplitTextByWidth(const QString &text, const QFont &font, int maxWidth) -> QStringList
 {
-    QFontMetrics fontMetrics(font);
+    QFontMetrics const fontMetrics(font);
     if (fontMetrics.horizontalAdvance(text) <= maxWidth)
     {
         return {text};
@@ -103,7 +103,7 @@ auto SplitTextByWidth(const QString &text, const QFont &font, int maxWidth) -> Q
 
     for (int endIndex = 0; endIndex < textLength; ++endIndex)
     {
-        QChar currentChar = text.at(endIndex);
+        QChar const currentChar = text.at(endIndex);
         const int charWidth = fontMetrics.horizontalAdvance(currentChar);
 
         if (lineWidth + charWidth > maxWidth)
@@ -131,7 +131,7 @@ auto SplitTextByWidth(const QString &text, const QFont &font, int maxWidth) -> Q
 auto SplitTextByWidth(const QString &text, const VSvgFont &font, int maxWidth, qreal penWidth) -> QStringList
 {
     VSvgFontDatabase *db = VAbstractApplication::VApp()->SVGFontDatabase();
-    VSvgFontEngine engine = db->FontEngine(font);
+    VSvgFontEngine const engine = db->FontEngine(font);
 
     if (engine.TextWidth(text, penWidth) <= maxWidth)
     {
@@ -146,7 +146,7 @@ auto SplitTextByWidth(const QString &text, const VSvgFont &font, int maxWidth, q
 
     for (int endIndex = 0; endIndex < textLength; ++endIndex)
     {
-        QChar currentChar = text.at(endIndex);
+        QChar const currentChar = text.at(endIndex);
         const qreal charWidth = engine.TextWidth(currentChar, penWidth);
 
         if (lineWidth + charWidth > maxWidth)
@@ -200,10 +200,10 @@ auto operator>>(QDataStream &dataStream, TextLine &data) -> QDataStream &
 
     if (actualStreamHeader != TextLine::streamHeader)
     {
-        QString message = QCoreApplication::tr("TextLine prefix mismatch error: actualStreamHeader = 0x%1 and "
-                                               "streamHeader = 0x%2")
-                              .arg(actualStreamHeader, 8, 0x10, '0'_L1)
-                              .arg(TextLine::streamHeader, 8, 0x10, '0'_L1);
+        QString const message = QCoreApplication::tr("TextLine prefix mismatch error: actualStreamHeader = 0x%1 and "
+                                                     "streamHeader = 0x%2")
+                                    .arg(actualStreamHeader, 8, 0x10, '0'_L1)
+                                    .arg(TextLine::streamHeader, 8, 0x10, '0'_L1);
         throw VException(message);
     }
 
@@ -212,10 +212,10 @@ auto operator>>(QDataStream &dataStream, TextLine &data) -> QDataStream &
 
     if (actualClassVersion > TextLine::classVersion)
     {
-        QString message = QCoreApplication::tr("TextLine compatibility error: actualClassVersion = %1 and "
-                                               "classVersion = %2")
-                              .arg(actualClassVersion)
-                              .arg(TextLine::classVersion);
+        QString const message = QCoreApplication::tr("TextLine compatibility error: actualClassVersion = %1 and "
+                                                     "classVersion = %2")
+                                    .arg(actualClassVersion)
+                                    .arg(TextLine::classVersion);
         throw VException(message);
     }
 
@@ -261,10 +261,11 @@ auto operator>>(QDataStream &dataStream, VTextManager &data) -> QDataStream &
 
     if (actualStreamHeader != VTextManager::streamHeader)
     {
-        QString message = QCoreApplication::tr("VTextManager prefix mismatch error: actualStreamHeader = 0x%1 and "
-                                               "streamHeader = 0x%2")
-                              .arg(actualStreamHeader, 8, 0x10, '0'_L1)
-                              .arg(VTextManager::streamHeader, 8, 0x10, '0'_L1);
+        QString const message =
+            QCoreApplication::tr("VTextManager prefix mismatch error: actualStreamHeader = 0x%1 and "
+                                 "streamHeader = 0x%2")
+                .arg(actualStreamHeader, 8, 0x10, '0'_L1)
+                .arg(VTextManager::streamHeader, 8, 0x10, '0'_L1);
         throw VException(message);
     }
 
@@ -273,10 +274,10 @@ auto operator>>(QDataStream &dataStream, VTextManager &data) -> QDataStream &
 
     if (actualClassVersion > VTextManager::classVersion)
     {
-        QString message = QCoreApplication::tr("VTextManager compatibility error: actualClassVersion = %1 and "
-                                               "classVersion = %2")
-                              .arg(actualClassVersion)
-                              .arg(VTextManager::classVersion);
+        QString const message = QCoreApplication::tr("VTextManager compatibility error: actualClassVersion = %1 and "
+                                                     "classVersion = %2")
+                                    .arg(actualClassVersion)
+                                    .arg(VTextManager::classVersion);
         throw VException(message);
     }
 
@@ -311,7 +312,7 @@ void PrepareMeasurementsPlaceholders(const VContainer *data, QMap<QString, QStri
 //---------------------------------------------------------------------------------------------------------------------
 void PrepareCustomerPlaceholders(const VAbstractPattern *doc, QMap<QString, QString> &placeholders)
 {
-    QLocale locale(VAbstractApplication::VApp()->Settings()->GetLocale());
+    QLocale const locale(VAbstractApplication::VApp()->Settings()->GetLocale());
 
     if (VAbstractValApplication::VApp()->GetMeasurementsType() == MeasurementsType::Individual)
     {
@@ -337,19 +338,19 @@ void PrepareCustomerPlaceholders(const VAbstractPattern *doc, QMap<QString, QStr
 //---------------------------------------------------------------------------------------------------------------------
 void PrepareDimensionPlaceholders(QMap<QString, QString> &placeholders)
 {
-    QString heightValue = QString::number(VAbstractValApplication::VApp()->GetDimensionHeight());
+    QString const heightValue = QString::number(VAbstractValApplication::VApp()->GetDimensionHeight());
     placeholders.insert(pl_height, heightValue);
     placeholders.insert(pl_dimensionX, heightValue);
 
-    QString sizeValue = QString::number(VAbstractValApplication::VApp()->GetDimensionSize());
+    QString const sizeValue = QString::number(VAbstractValApplication::VApp()->GetDimensionSize());
     placeholders.insert(pl_size, sizeValue);
     placeholders.insert(pl_dimensionY, sizeValue);
 
-    QString hipValue = QString::number(VAbstractValApplication::VApp()->GetDimensionHip());
+    QString const hipValue = QString::number(VAbstractValApplication::VApp()->GetDimensionHip());
     placeholders.insert(pl_hip, hipValue);
     placeholders.insert(pl_dimensionZ, hipValue);
 
-    QString waistValue = QString::number(VAbstractValApplication::VApp()->GetDimensionWaist());
+    QString const waistValue = QString::number(VAbstractValApplication::VApp()->GetDimensionWaist());
     placeholders.insert(pl_waist, waistValue);
     placeholders.insert(pl_dimensionW, waistValue);
 
@@ -395,7 +396,7 @@ void PrepareFinalMeasurementsPlaceholders(const VAbstractPattern *doc, bool piec
 
     if (pieceLabel)
     {
-        QScopedPointer<Calculator> cal(new Calculator());
+        QScopedPointer<Calculator> const cal(new Calculator());
 
         try
         {
@@ -439,7 +440,7 @@ void PrepareFinalMeasurementsPlaceholders(const VAbstractPattern *doc, bool piec
 
         try
         {
-            QScopedPointer<Calculator> cal(new Calculator());
+            QScopedPointer<Calculator> const cal(new Calculator());
             const qreal result = cal->EvalFormula(completeData.DataVariables(), m.formula);
 
             placeholders.insert(pl_finalMeasurement + m.name, QString::number(result));
@@ -537,7 +538,7 @@ void InitPiecePlaceholders(QMap<QString, QString> &placeholders, const QString &
 
     if (data.IsOnFold())
     {
-        QSharedPointer<VTranslator> phTr = VAbstractApplication::VApp()->GetPlaceholderTranslator();
+        QSharedPointer<VTranslator> const phTr = VAbstractApplication::VApp()->GetPlaceholderTranslator();
         placeholders[pl_wOnFold] = phTr->translate("Placeholder", "on fold");
     }
 }
@@ -545,7 +546,7 @@ void InitPiecePlaceholders(QMap<QString, QString> &placeholders, const QString &
 //---------------------------------------------------------------------------------------------------------------------
 auto ReplacePlaceholders(const QMap<QString, QString> &placeholders, QString line) -> QString
 {
-    QChar per('%');
+    QChar const per('%');
 
     auto TestDimension = [per, placeholders, line](const QString &placeholder, const QString &errorMsg)
     {
@@ -709,7 +710,7 @@ auto VTextManager::GetLabelSourceLines(int width, const QFont &font) const -> QV
     QVector<TextLine> lines;
     lines.reserve(m_liLines.size());
     QFont fnt = font;
-    int fSize = m_font.pointSize();
+    int const fSize = m_font.pointSize();
 
     for (const auto &tl : m_liLines)
     {
@@ -717,8 +718,8 @@ auto VTextManager::GetLabelSourceLines(int width, const QFont &font) const -> QV
         fnt.setBold(tl.m_bold);
         fnt.setItalic(tl.m_italic);
 
-        QString qsText = tl.m_qsText;
-        QFontMetrics fm(fnt);
+        QString const qsText = tl.m_qsText;
+        QFontMetrics const fm(fnt);
         if (fm.horizontalAdvance(qsText) > width)
         {
             const QStringList brokeLines = BreakTextIntoLines(qsText, fnt, width);
@@ -748,7 +749,7 @@ auto VTextManager::GetLabelSourceLines(int width, const VSvgFont &font, qreal pe
     VSvgFontDatabase *db = VAbstractApplication::VApp()->SVGFontDatabase();
     QVector<TextLine> lines;
     lines.reserve(m_liLines.size());
-    int fSize = m_font.pointSize();
+    int const fSize = m_font.pointSize();
 
     for (const auto &tl : m_liLines)
     {
@@ -757,16 +758,16 @@ auto VTextManager::GetLabelSourceLines(int width, const VSvgFont &font, qreal pe
         lineFont.SetBold(tl.m_bold);
         lineFont.SetItalic(tl.m_italic);
 
-        VSvgFontEngine engine = db->FontEngine(lineFont);
+        VSvgFontEngine const engine = db->FontEngine(lineFont);
 
-        VSvgFont svgFont = engine.Font();
+        VSvgFont const svgFont = engine.Font();
         if (!svgFont.IsValid())
         {
             lines.append(tl);
             continue;
         }
 
-        QString qsText = tl.m_qsText;
+        QString const qsText = tl.m_qsText;
         if (engine.TextWidth(qsText, penWidth) > width)
         {
             const QStringList brokeLines = BreakTextIntoLines(qsText, svgFont, width, penWidth);
@@ -798,7 +799,7 @@ auto VTextManager::MaxLineWidthOutlineFont(int width) const -> int
         fnt.setBold(tl.m_bold);
         fnt.setItalic(tl.m_italic);
 
-        QFontMetrics fm(fnt);
+        QFontMetrics const fm(fnt);
 
         QString qsText = tl.m_qsText;
 
@@ -819,7 +820,7 @@ auto VTextManager::MaxLineWidthSVGFont(int width, qreal penWidth) const -> int
     VSvgFontDatabase *db = VAbstractApplication::VApp()->SVGFontDatabase();
     VSvgFontEngine engine =
         db->FontEngine(m_svgFontFamily, SVGFontStyle::Normal, SVGFontWeight::Normal, m_svgFontPointSize);
-    VSvgFont svgFont = engine.Font();
+    VSvgFont const svgFont = engine.Font();
 
     int maxWidth = 0;
     for (int i = 0; i < m_liLines.count(); ++i)
@@ -904,7 +905,7 @@ void VTextManager::Update(VAbstractPattern *pDoc, const VContainer *pattern)
 //---------------------------------------------------------------------------------------------------------------------
 auto VTextManager::BreakTextIntoLines(const QString &text, const QFont &font, int maxWidth) -> QStringList
 {
-    QFontMetrics fontMetrics(font);
+    QFontMetrics const fontMetrics(font);
     QStringList words = text.split(' ');
 
     QString currentLine;
@@ -929,8 +930,8 @@ auto VTextManager::BreakTextIntoLines(const QString &text, const QFont &font, in
     while (iterator.hasNext())
     {
         const QString &word = iterator.next();
-        int wordWidth = fontMetrics.horizontalAdvance(word);
-        int totalWidth = !currentLine.isEmpty() ? currentLineWidth + spaceWidth + wordWidth : wordWidth;
+        int const wordWidth = fontMetrics.horizontalAdvance(word);
+        int const totalWidth = !currentLine.isEmpty() ? currentLineWidth + spaceWidth + wordWidth : wordWidth;
 
         if (totalWidth <= maxWidth)
         {
@@ -997,9 +998,9 @@ auto VTextManager::BreakTextIntoLines(const QString &text, const VSvgFont &font,
 {
     VSvgFontDatabase *db = VAbstractApplication::VApp()->SVGFontDatabase();
 
-    VSvgFontEngine engine = db->FontEngine(font);
+    VSvgFontEngine const engine = db->FontEngine(font);
 
-    VSvgFont svgFont = engine.Font();
+    VSvgFont const svgFont = engine.Font();
     if (!svgFont.IsValid())
     {
         return {text};
@@ -1029,8 +1030,8 @@ auto VTextManager::BreakTextIntoLines(const QString &text, const VSvgFont &font,
     while (iterator.hasNext())
     {
         const QString &word = iterator.next();
-        int wordWidth = qRound(engine.TextWidth(word, penWidth));
-        int totalWidth = !currentLine.isEmpty() ? currentLineWidth + spaceWidth + wordWidth : wordWidth;
+        int const wordWidth = qRound(engine.TextWidth(word, penWidth));
+        int const totalWidth = !currentLine.isEmpty() ? currentLineWidth + spaceWidth + wordWidth : wordWidth;
 
         if (totalWidth <= maxWidth)
         {

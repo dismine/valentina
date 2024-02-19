@@ -69,7 +69,7 @@ VSplinePath::VSplinePath(const QVector<VFSplinePoint> &points, qreal kCurve, qui
     {
         const VFSplinePoint &p1 = points.at(i - 1);
         const VFSplinePoint &p2 = points.at(i);
-        VSpline spl(p1.P(), p2.P(), p1.Angle2(), p2.Angle1(), p1.KAsm2(), p2.KAsm1(), kCurve);
+        VSpline const spl(p1.P(), p2.P(), p1.Angle2(), p2.Angle1(), p1.KAsm2(), p2.KAsm1(), kCurve);
 
         newPoints[i - 1].SetP(p1.P());
         newPoints[i - 1].SetAngle2(p1.Angle2(), spl.GetStartAngleFormula());
@@ -438,8 +438,8 @@ auto VSplinePath::GetFSplinePath() const -> QVector<VFSplinePoint>
     {
         const VSplinePoint &p1 = d->path.at(i - 1);
         const VSplinePoint &p2 = d->path.at(i);
-        VSpline spl(p1.P(), p2.P(), p1.Angle2(), p1.Angle2Formula(), p2.Angle1(), p2.Angle1Formula(), p1.Length2(),
-                    p1.Length2Formula(), p2.Length1(), p2.Length1Formula(), 1);
+        VSpline const spl(p1.P(), p2.P(), p1.Angle2(), p1.Angle2Formula(), p2.Angle1(), p2.Angle1Formula(),
+                          p1.Length2(), p1.Length2Formula(), p2.Length1(), p2.Length1Formula(), 1);
 
         points[i - 1].SetP(p1.P());
         points[i - 1].SetAngle2(p1.Angle2());

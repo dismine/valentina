@@ -56,7 +56,7 @@ void AddToCalc::undo()
     QDomElement calcElement;
     if (doc->GetActivNodeElement(VAbstractPattern::TagCalculation, calcElement))
     {
-        QDomElement domElement = doc->elementById(nodeId);
+        QDomElement const domElement = doc->elementById(nodeId);
         if (domElement.isElement())
         {
             if (calcElement.removeChild(domElement).isNull())
@@ -102,7 +102,7 @@ void AddToCalc::redo()
         }
         else
         {
-            QDomElement refElement = doc->elementById(cursor);
+            QDomElement const refElement = doc->elementById(cursor);
             if (refElement.isElement())
             {
                 calcElement.insertAfter(xml, refElement);

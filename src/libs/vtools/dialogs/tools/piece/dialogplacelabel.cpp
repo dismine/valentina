@@ -387,7 +387,7 @@ void DialogPlaceLabel::EvalVisible()
 //---------------------------------------------------------------------------------------------------------------------
 void DialogPlaceLabel::FXWidth()
 {
-    QScopedPointer<DialogEditWrongFormula> dialog(new DialogEditWrongFormula(data, toolId, this));
+    QScopedPointer<DialogEditWrongFormula> const dialog(new DialogEditWrongFormula(data, toolId, this));
     dialog->setWindowTitle(tr("Edit rectangle width"));
     dialog->SetFormula(GetWidth());
     dialog->setCheckLessThanZero(true);
@@ -401,7 +401,7 @@ void DialogPlaceLabel::FXWidth()
 //---------------------------------------------------------------------------------------------------------------------
 void DialogPlaceLabel::FXHeight()
 {
-    QScopedPointer<DialogEditWrongFormula> dialog(new DialogEditWrongFormula(data, toolId, this));
+    QScopedPointer<DialogEditWrongFormula> const dialog(new DialogEditWrongFormula(data, toolId, this));
     dialog->setWindowTitle(tr("Edit rectangle width"));
     dialog->SetFormula(GetHeight());
     dialog->setCheckLessThanZero(true);
@@ -415,7 +415,7 @@ void DialogPlaceLabel::FXHeight()
 //---------------------------------------------------------------------------------------------------------------------
 void DialogPlaceLabel::FXAngle()
 {
-    QScopedPointer<DialogEditWrongFormula> dialog(new DialogEditWrongFormula(data, toolId, this));
+    QScopedPointer<DialogEditWrongFormula> const dialog(new DialogEditWrongFormula(data, toolId, this));
     dialog->setWindowTitle(tr("Edit angle"));
     dialog->SetFormula(GetAngle());
     dialog->setPostfix(degreeSymbol);
@@ -428,7 +428,7 @@ void DialogPlaceLabel::FXAngle()
 //---------------------------------------------------------------------------------------------------------------------
 void DialogPlaceLabel::FXVisible()
 {
-    QScopedPointer<DialogEditWrongFormula> dialog(new DialogEditWrongFormula(data, toolId, this));
+    QScopedPointer<DialogEditWrongFormula> const dialog(new DialogEditWrongFormula(data, toolId, this));
     dialog->setWindowTitle(tr("Control visibility"));
     dialog->SetFormula(GetFormulaVisible());
     if (dialog->exec() == QDialog::Accepted)
@@ -574,7 +574,7 @@ void DialogPlaceLabel::InitIcons()
 //---------------------------------------------------------------------------------------------------------------------
 auto DialogPlaceLabel::GetFormulaVisible() const -> QString
 {
-    QString formula = ui->plainTextEditFormulaVisible->toPlainText();
+    QString const formula = ui->plainTextEditFormulaVisible->toPlainText();
     return VTranslateVars::TryFormulaFromUser(formula, VAbstractApplication::VApp()->Settings()->GetOsSeparator());
 }
 

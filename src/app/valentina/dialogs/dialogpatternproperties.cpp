@@ -101,7 +101,7 @@ DialogPatternProperties::DialogPatternProperties(VPattern *doc, VContainer *patt
         ui->comboBoxLabelLanguage->addItem(QLocale(name).nativeLanguageName(), name);
     }
 
-    int index =
+    int const index =
         ui->comboBoxLabelLanguage->findData(VAbstractValApplication::VApp()->ValentinaSettings()->GetLabelLanguage());
     if (index != -1)
     {
@@ -329,7 +329,7 @@ void DialogPatternProperties::ValidatePassmarkLength() const
     QPalette palette = ui->lineEditPassmarkLength->palette();
     const QPalette::ColorRole foregroundRole = ui->lineEditPassmarkLength->foregroundRole();
 
-    QRegularExpression rx(NameRegExp());
+    QRegularExpression const rx(NameRegExp());
     if (not text.isEmpty())
     {
         palette.setColor(foregroundRole, rx.match(text).hasMatch() && m_variables.contains(text)
@@ -351,7 +351,7 @@ void DialogPatternProperties::ValidatePassmarkWidth() const
     QPalette palette = ui->lineEditPassmarkWidth->palette();
     const QPalette::ColorRole foregroundRole = ui->lineEditPassmarkWidth->foregroundRole();
 
-    QRegularExpression rx(NameRegExp());
+    QRegularExpression const rx(NameRegExp());
     if (not text.isEmpty())
     {
         palette.setColor(foregroundRole, rx.match(text).hasMatch() && m_variables.contains(text)
@@ -405,7 +405,7 @@ void DialogPatternProperties::InitImage()
     const VPatternImage image = m_doc->GetImage();
     if (image.IsValid())
     {
-        QPixmap pixImage = image.GetPixmap();
+        QPixmap const pixImage = image.GetPixmap();
         ui->imageLabel->setPixmap(
             pixImage.scaled(ui->imageLabel->width(), ui->imageLabel->height(), Qt::KeepAspectRatio));
     }
@@ -432,7 +432,7 @@ void DialogPatternProperties::ChangeImage()
             settings->SetPathCustomImage(QFileInfo(fileName).absolutePath());
         }
 
-        VPatternImage image = VPatternImage::FromFile(fileName);
+        VPatternImage const image = VPatternImage::FromFile(fileName);
 
         if (not image.IsValid())
         {
@@ -442,7 +442,7 @@ void DialogPatternProperties::ChangeImage()
 
         m_doc->SetImage(image);
 
-        QPixmap pixImage = image.GetPixmap();
+        QPixmap const pixImage = image.GetPixmap();
         ui->imageLabel->setPixmap(
             pixImage.scaled(ui->imageLabel->width(), ui->imageLabel->height(), Qt::KeepAspectRatio));
 
@@ -465,18 +465,18 @@ void DialogPatternProperties::SaveImage()
 
     VValentinaSettings *settings = VAbstractValApplication::VApp()->ValentinaSettings();
 
-    QMimeType mime = image.MimeTypeFromData();
+    QMimeType const mime = image.MimeTypeFromData();
     QString path = settings->GetPathCustomImage() + QDir::separator() + tr("untitled");
 
-    QStringList suffixes = mime.suffixes();
+    QStringList const suffixes = mime.suffixes();
     if (not suffixes.isEmpty())
     {
         path += '.'_L1 + suffixes.at(0);
     }
 
-    QString filter = mime.filterString();
-    QString filename = QFileDialog::getSaveFileName(this, tr("Save Image"), path, filter, nullptr,
-                                                    VAbstractApplication::VApp()->NativeFileDialog());
+    QString const filter = mime.filterString();
+    QString const filename = QFileDialog::getSaveFileName(this, tr("Save Image"), path, filter, nullptr,
+                                                          VAbstractApplication::VApp()->NativeFileDialog());
     if (not filename.isEmpty())
     {
         if (QFileInfo::exists(filename))
@@ -507,10 +507,10 @@ void DialogPatternProperties::ShowImage()
         return;
     }
 
-    QMimeType mime = image.MimeTypeFromData();
+    QMimeType const mime = image.MimeTypeFromData();
     QString name = QDir::tempPath() + QDir::separator() + QStringLiteral("image.XXXXXX");
 
-    QStringList suffixes = mime.suffixes();
+    QStringList const suffixes = mime.suffixes();
     if (not suffixes.isEmpty())
     {
         name += '.'_L1 + suffixes.at(0);
@@ -541,7 +541,7 @@ void DialogPatternProperties::BrowseLabelPath()
         path = settings->GetPathLabelTemplate();
     }
 
-    QString filters(tr("Label template") + "(*.xml)"_L1);
+    QString const filters(tr("Label template") + "(*.xml)"_L1);
 
     const QString filePath = QFileDialog::getOpenFileName(this, tr("Label template"), path, filters, nullptr,
                                                           VAbstractApplication::VApp()->NativeFileDialog());

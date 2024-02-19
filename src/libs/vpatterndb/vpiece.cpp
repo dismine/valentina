@@ -264,7 +264,7 @@ auto VPiece::CuttingPathPoints(const VContainer *data) const -> QVector<QPointF>
 //---------------------------------------------------------------------------------------------------------------------
 auto VPiece::PassmarksLines(const VContainer *data) const -> QVector<QLineF>
 {
-    QVector<VPassmark> passmarks = Passmarks(data);
+    QVector<VPassmark> const passmarks = Passmarks(data);
     QVector<QLineF> lines;
     for (auto &passmark : passmarks)
     {
@@ -393,7 +393,7 @@ auto VPiece::PlaceLabelPath(const VContainer *data) const -> QPainterPath
             const auto label = data->GeometricObject<VPlaceLabelItem>(placeLabel);
             if (label->IsVisible())
             {
-                VLayoutPlaceLabel layoutLabel(*label);
+                VLayoutPlaceLabel const layoutLabel(*label);
                 path.addPath(LabelShapePath(layoutLabel));
 
                 const QLineF mirrorLine = SeamMirrorLine(data);
@@ -1128,7 +1128,7 @@ auto VPiece::GetPassmarkPreviousSAPoints(const QVector<VPieceNode> &path, vsizet
     do
     {
         const VSAPoint previous = points.at(nodeIndex);
-        QLineF line(passmarkSAPoint, previous);
+        QLineF const line(passmarkSAPoint, previous);
         if (line.length() > accuracyPointOnLine)
         {
             point = previous;
@@ -1168,7 +1168,7 @@ auto VPiece::GetPassmarkNextSAPoints(const QVector<VPieceNode> &path, vsizetype 
     do
     {
         const VSAPoint next = points.at(nodeIndex);
-        QLineF line(passmarkSAPoint, next);
+        QLineF const line(passmarkSAPoint, next);
         if (line.length() >= ToPixel(1, Unit::Mm))
         {
             point = next;
@@ -1349,7 +1349,8 @@ auto VPiece::Area(const QVector<QPointF> &shape, const VContainer *data) const -
 //---------------------------------------------------------------------------------------------------------------------
 auto VPiece::GlobalPassmarkLength(const VContainer *data) const -> qreal
 {
-    QString passmarkLengthVariable = VAbstractValApplication::VApp()->getCurrentDocument()->GetPassmarkLengthVariable();
+    QString const passmarkLengthVariable =
+        VAbstractValApplication::VApp()->getCurrentDocument()->GetPassmarkLengthVariable();
     if (passmarkLengthVariable.isEmpty())
     {
         return 0;
@@ -1359,7 +1360,7 @@ auto VPiece::GlobalPassmarkLength(const VContainer *data) const -> qreal
 
     try
     {
-        QSharedPointer<VInternalVariable> var = data->GetVariable<VInternalVariable>(passmarkLengthVariable);
+        QSharedPointer<VInternalVariable> const var = data->GetVariable<VInternalVariable>(passmarkLengthVariable);
         length = *var->GetValue();
 
         if (VAbstractValApplication::VApp()->toPixel(length) <= accuracyPointOnLine)
@@ -1383,7 +1384,8 @@ auto VPiece::GlobalPassmarkLength(const VContainer *data) const -> qreal
 //---------------------------------------------------------------------------------------------------------------------
 qreal VPiece::GlobalPassmarkWidth(const VContainer *data) const
 {
-    QString passmarkWidthVariable = VAbstractValApplication::VApp()->getCurrentDocument()->GetPassmarkWidthVariable();
+    QString const passmarkWidthVariable =
+        VAbstractValApplication::VApp()->getCurrentDocument()->GetPassmarkWidthVariable();
     if (passmarkWidthVariable.isEmpty())
     {
         return 0;
@@ -1393,7 +1395,7 @@ qreal VPiece::GlobalPassmarkWidth(const VContainer *data) const
 
     try
     {
-        QSharedPointer<VInternalVariable> var = data->GetVariable<VInternalVariable>(passmarkWidthVariable);
+        QSharedPointer<VInternalVariable> const var = data->GetVariable<VInternalVariable>(passmarkWidthVariable);
         width = *var->GetValue();
 
         if (VAbstractValApplication::VApp()->toPixel(width) <= accuracyPointOnLine)
@@ -1428,7 +1430,7 @@ auto VPiece::MainPathToJson() const -> QJsonObject
     QJsonArray nodesArray;
     for (qint32 i = 0; i < d->m_path.CountNodes(); ++i)
     {
-        QJsonObject nodeObject{
+        QJsonObject const nodeObject{
             {"id", static_cast<qint64>(d->m_path.at(i).GetId())},
             {"type", static_cast<int>(d->m_path.at(i).GetTypeTool())},
             {"reverse", d->m_path.at(i).GetReverse()},
@@ -1482,11 +1484,11 @@ void VPiece::DumpPiece(const VPiece &piece, const VContainer *data, const QStrin
             {"piece", piece.MainPathToJson()},
         };
 
-        QJsonObject json{
+        QJsonObject const json{
             {"testCase", testCase},
         };
 
-        QJsonDocument document(json);
+        QJsonDocument const document(json);
 
         QTextStream out(&temp);
         out << document.toJson();

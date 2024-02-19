@@ -114,7 +114,7 @@ auto VCommandLine::DefaultGenerator() const -> VLayoutGeneratorPtr
         }
 
         bool ok = false;
-        qreal height = Pg2Px(OptionValue(LONG_OPTION_PAGEH), diag, &ok);
+        qreal const height = Pg2Px(OptionValue(LONG_OPTION_PAGEH), diag, &ok);
         if (not ok)
         {
             qCritical() << translate("VCommandLine", "Invalid page height value.") << "\n";
@@ -123,7 +123,7 @@ auto VCommandLine::DefaultGenerator() const -> VLayoutGeneratorPtr
         diag.SetPaperHeight(height);
 
         ok = false;
-        qreal width = Pg2Px(OptionValue(LONG_OPTION_PAGEW), diag, &ok);
+        qreal const width = Pg2Px(OptionValue(LONG_OPTION_PAGEW), diag, &ok);
         if (not ok)
         {
             qCritical() << translate("VCommandLine", "Invalid page width value.") << "\n";
@@ -151,7 +151,7 @@ auto VCommandLine::DefaultGenerator() const -> VLayoutGeneratorPtr
     if (IsOptionSet(LONG_OPTION_GAPWIDTH))
     {
         bool ok = false;
-        qreal width = Lo2Px(OptionValue(LONG_OPTION_GAPWIDTH), diag, &ok);
+        qreal const width = Lo2Px(OptionValue(LONG_OPTION_GAPWIDTH), diag, &ok);
         if (not ok)
         {
             qCritical() << translate("VCommandLine", "Invalid gap width.") << "\n";
@@ -472,7 +472,7 @@ auto VCommandLine::OptDimensionA() const -> int
     const QString value = OptionValue(LONG_OPTION_DIMENSION_A);
 
     bool ok = false;
-    int dimensionAValue = value.toInt(&ok);
+    int const dimensionAValue = value.toInt(&ok);
     if (ok && dimensionAValue > 0)
     {
         return dimensionAValue;
@@ -488,7 +488,7 @@ auto VCommandLine::OptDimensionB() const -> int
     const QString value = OptionValue(LONG_OPTION_DIMENSION_B);
 
     bool ok = false;
-    int dimensionBValue = value.toInt(&ok);
+    int const dimensionBValue = value.toInt(&ok);
     if (ok && dimensionBValue > 0)
     {
         return dimensionBValue;
@@ -504,7 +504,7 @@ auto VCommandLine::OptDimensionC() const -> int
     const QString value = OptionValue(LONG_OPTION_DIMENSION_C);
 
     bool ok = false;
-    int dimensionCValue = value.toInt(&ok);
+    int const dimensionCValue = value.toInt(&ok);
     if (ok && dimensionCValue > 0)
     {
         return dimensionCValue;
@@ -536,7 +536,7 @@ auto VCommandLine::TiledPageMargins() const -> QMarginsF
     if (IsOptionSet(LONG_OPTION_LEFT_MARGIN))
     {
         bool ok = false;
-        qreal margin = UnitConvertor(OptionValue(LONG_OPTION_LEFT_MARGIN).toDouble(&ok), unit, Unit::Mm);
+        qreal const margin = UnitConvertor(OptionValue(LONG_OPTION_LEFT_MARGIN).toDouble(&ok), unit, Unit::Mm);
         if (not ok)
         {
             qCritical() << translate("VCommandLine", "Invalid tiled page left margin.") << "\n";
@@ -548,7 +548,7 @@ auto VCommandLine::TiledPageMargins() const -> QMarginsF
     if (IsOptionSet(LONG_OPTION_RIGHT_MARGIN))
     {
         bool ok = false;
-        qreal margin = UnitConvertor(OptionValue(LONG_OPTION_RIGHT_MARGIN).toDouble(&ok), unit, Unit::Mm);
+        qreal const margin = UnitConvertor(OptionValue(LONG_OPTION_RIGHT_MARGIN).toDouble(&ok), unit, Unit::Mm);
         if (not ok)
         {
             qCritical() << translate("VCommandLine", "Invalid tiled page right margin.") << "\n";
@@ -560,7 +560,7 @@ auto VCommandLine::TiledPageMargins() const -> QMarginsF
     if (IsOptionSet(LONG_OPTION_TOP_MARGIN))
     {
         bool ok = false;
-        qreal margin = UnitConvertor(OptionValue(LONG_OPTION_TOP_MARGIN).toDouble(&ok), unit, Unit::Mm);
+        qreal const margin = UnitConvertor(OptionValue(LONG_OPTION_TOP_MARGIN).toDouble(&ok), unit, Unit::Mm);
         if (not ok)
         {
             qCritical() << translate("VCommandLine", "Invalid tiled page top margin.") << "\n";
@@ -572,7 +572,7 @@ auto VCommandLine::TiledPageMargins() const -> QMarginsF
     if (IsOptionSet(LONG_OPTION_BOTTOM_MARGIN))
     {
         bool ok = false;
-        qreal margin = UnitConvertor(OptionValue(LONG_OPTION_BOTTOM_MARGIN).toDouble(&ok), unit, Unit::Mm);
+        qreal const margin = UnitConvertor(OptionValue(LONG_OPTION_BOTTOM_MARGIN).toDouble(&ok), unit, Unit::Mm);
         if (not ok)
         {
             qCritical() << translate("VCommandLine", "Invalid tiled page bottom margin.") << "\n";
@@ -865,11 +865,11 @@ auto VCommandLine::OptEfficiencyCoefficient() const -> qreal
 //---------------------------------------------------------------------------------------------------------------------
 void VCommandLine::TestPageformat() const
 {
-    bool x = IsOptionSet(LONG_OPTION_PAGETEMPLATE);
+    bool const x = IsOptionSet(LONG_OPTION_PAGETEMPLATE);
 
-    bool a = IsOptionSet(LONG_OPTION_PAGEH);
-    bool b = IsOptionSet(LONG_OPTION_PAGEW);
-    bool c = IsOptionSet(LONG_OPTION_PAGEUNITS);
+    bool const a = IsOptionSet(LONG_OPTION_PAGEH);
+    bool const b = IsOptionSet(LONG_OPTION_PAGEW);
+    bool const c = IsOptionSet(LONG_OPTION_PAGEUNITS);
 
     if ((a || b) && x)
     {
@@ -887,8 +887,8 @@ void VCommandLine::TestPageformat() const
 //---------------------------------------------------------------------------------------------------------------------
 void VCommandLine::TestGapWidth() const
 {
-    bool a = IsOptionSet(LONG_OPTION_GAPWIDTH);
-    bool b = IsOptionSet(LONG_OPTION_SHIFTUNITS);
+    bool const a = IsOptionSet(LONG_OPTION_GAPWIDTH);
+    bool const b = IsOptionSet(LONG_OPTION_SHIFTUNITS);
 
     if ((a || b) && !(a && b))
     {
@@ -902,8 +902,8 @@ void VCommandLine::TestMargins() const
 {
     auto CheckKey = [this](const QString &key, const QString &message)
     {
-        bool a = IsOptionSet(key);
-        bool b = IsOptionSet(LONG_OPTION_PAGEUNITS);
+        bool const a = IsOptionSet(key);
+        bool const b = IsOptionSet(LONG_OPTION_PAGEUNITS);
 
         if (a && !(a && b))
         {
@@ -945,7 +945,7 @@ auto VCommandLine::ParseMargins(const DialogLayoutSettings &diag) const -> QMarg
     if (IsOptionSet(LONG_OPTION_LEFT_MARGIN))
     {
         bool ok = false;
-        qreal margin = Pg2Px(OptionValue(LONG_OPTION_LEFT_MARGIN), diag, &ok);
+        qreal const margin = Pg2Px(OptionValue(LONG_OPTION_LEFT_MARGIN), diag, &ok);
         if (not ok)
         {
             qCritical() << translate("VCommandLine", "Invalid layout page left margin.") << "\n";
@@ -957,7 +957,7 @@ auto VCommandLine::ParseMargins(const DialogLayoutSettings &diag) const -> QMarg
     if (IsOptionSet(LONG_OPTION_RIGHT_MARGIN))
     {
         bool ok = false;
-        qreal margin = Pg2Px(OptionValue(LONG_OPTION_RIGHT_MARGIN), diag, &ok);
+        qreal const margin = Pg2Px(OptionValue(LONG_OPTION_RIGHT_MARGIN), diag, &ok);
         if (not ok)
         {
             qCritical() << translate("VCommandLine", "Invalid layout page right margin.") << "\n";
@@ -969,7 +969,7 @@ auto VCommandLine::ParseMargins(const DialogLayoutSettings &diag) const -> QMarg
     if (IsOptionSet(LONG_OPTION_TOP_MARGIN))
     {
         bool ok = false;
-        qreal margin = Pg2Px(OptionValue(LONG_OPTION_TOP_MARGIN), diag, &ok);
+        qreal const margin = Pg2Px(OptionValue(LONG_OPTION_TOP_MARGIN), diag, &ok);
         if (not ok)
         {
             qCritical() << translate("VCommandLine", "Invalid layout page top margin.") << "\n";
@@ -981,7 +981,7 @@ auto VCommandLine::ParseMargins(const DialogLayoutSettings &diag) const -> QMarg
     if (IsOptionSet(LONG_OPTION_BOTTOM_MARGIN))
     {
         bool ok = false;
-        qreal margin = Pg2Px(OptionValue(LONG_OPTION_BOTTOM_MARGIN), diag, &ok);
+        qreal const margin = Pg2Px(OptionValue(LONG_OPTION_BOTTOM_MARGIN), diag, &ok);
         if (not ok)
         {
             qCritical() << translate("VCommandLine", "Invalid layout page bottom margin.") << "\n";

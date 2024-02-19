@@ -216,7 +216,8 @@ void DialogExportToCSV::ShowPreview()
 
     ui->groupBoxPreview->setVisible(true);
 
-    QxtCsvModel csv(m_fileName, nullptr, IsWithHeader(), GetSeparator(), VTextCodec::codecForMib(GetSelectedMib()));
+    QxtCsvModel const csv(m_fileName, nullptr, IsWithHeader(), GetSeparator(),
+                          VTextCodec::codecForMib(GetSelectedMib()));
 
     const int columns = csv.columnCount();
     const int rows = csv.rowCount();

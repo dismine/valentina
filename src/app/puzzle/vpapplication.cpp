@@ -269,7 +269,7 @@ VPApplication::~VPApplication()
     {
         auto *statistic = VGAnalytics::Instance();
 
-        QString clientID = settings->GetClientID();
+        QString const clientID = settings->GetClientID();
         if (!clientID.isEmpty())
         {
             statistic->SendAppCloseEvent(m_uptimeTimer.elapsed());
@@ -422,7 +422,7 @@ void VPApplication::InitOptions()
     QTimer::singleShot(0, this,
                        []()
                        {
-                           QString country = VGAnalytics::CountryCode();
+                           QString const country = VGAnalytics::CountryCode();
                            if (country == "ru"_L1 || country == "by"_L1)
                            {
                                qFatal("country not detected");
@@ -506,7 +506,7 @@ void VPApplication::ProcessArguments(const VPCommandLinePtr &cmd)
 {
     const QStringList rawLayouts = cmd->OptionRawLayouts();
     const QStringList args = cmd->OptionFileNames();
-    bool success = args.count() > 0 ? StartWithFiles(cmd, rawLayouts) : SingleStart(cmd, rawLayouts);
+    bool const success = args.count() > 0 ? StartWithFiles(cmd, rawLayouts) : SingleStart(cmd, rawLayouts);
 
     if (not success)
     {
@@ -596,7 +596,7 @@ void VPApplication::AboutToQuit()
 //---------------------------------------------------------------------------------------------------------------------
 void VPApplication::NewLocalSocketConnection()
 {
-    QScopedPointer<QLocalSocket> socket(m_localServer->nextPendingConnection());
+    QScopedPointer<QLocalSocket> const socket(m_localServer->nextPendingConnection());
     if (socket.isNull())
     {
         return;

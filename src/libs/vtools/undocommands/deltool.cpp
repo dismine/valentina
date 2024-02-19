@@ -62,7 +62,7 @@ DelTool::DelTool(VAbstractPattern *doc, quint32 id, QUndoCommand *parent)
     xml = doc->CloneNodeById(nodeId);
 
     QVector<QPair<vidtype, vidtype>> cleanItems;
-    QMap<quint32, VGroupData> groups = doc->GetGroups(nameActivDraw);
+    QMap<quint32, VGroupData> const groups = doc->GetGroups(nameActivDraw);
     auto i = groups.constBegin();
     while (i != groups.constEnd())
     {
@@ -122,7 +122,7 @@ void DelTool::redo()
     {                                          // Keep first!
         emit doc->SetCurrentPP(nameActivDraw); // Without this user will not see this change
     }
-    QDomElement domElement = doc->NodeById(nodeId);
+    QDomElement const domElement = doc->NodeById(nodeId);
     parentNode.removeChild(domElement);
 
     if (not m_groupsAfter.isEmpty())

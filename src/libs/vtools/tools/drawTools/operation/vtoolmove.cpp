@@ -104,7 +104,7 @@ auto GetOriginPoint(const QVector<SourceItem> &objects, const VContainer *data, 
         }
     }
 
-    QPointF rotationOrigin = originObjects.boundingRect().center();
+    QPointF const rotationOrigin = originObjects.boundingRect().center();
     QLineF move(rotationOrigin, QPointF(rotationOrigin.x() + calcLength, rotationOrigin.y()));
     move.setAngle(calcAngle);
     return move.p2();

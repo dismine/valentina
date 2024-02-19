@@ -106,7 +106,7 @@ void VShortcutDialog::ButtonBoxClicked(QAbstractButton *button)
 {
     if (ui->buttonBox->buttonRole(button) == QDialogButtonBox::AcceptRole)
     {
-        QStringList shortcutsStringList = ui->keySequenceEdit->keySequence().toString().split(", "_L1);
+        QStringList const shortcutsStringList = ui->keySequenceEdit->keySequence().toString().split(", "_L1);
         const auto sequenceList = VAbstractShortcutManager::StringListToKeySequenceList(shortcutsStringList);
 
         for (const auto &sequence : sequenceList)
@@ -114,7 +114,7 @@ void VShortcutDialog::ButtonBoxClicked(QAbstractButton *button)
             auto conflictingShortcut = ShortcutAlreadyBound(sequence, m_shortcutObject.type);
             if (!conflictingShortcut.isEmpty())
             {
-                QString nativeShortcutString = sequence.toString(QKeySequence::NativeText);
+                QString const nativeShortcutString = sequence.toString(QKeySequence::NativeText);
                 QMessageBox::warning(
                     this, tr("Shortcut Already Used"),
                     tr(R"("%1" is already bound to "%2")").arg(nativeShortcutString, conflictingShortcut));

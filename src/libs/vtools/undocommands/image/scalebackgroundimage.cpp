@@ -38,7 +38,7 @@ ScaleBackgroundImage::ScaleBackgroundImage(QUuid id, const QTransform &matrix, V
 {
     setText(tr("scale background image"));
 
-    VBackgroundPatternImage image = doc->GetBackgroundImage(m_id);
+    VBackgroundPatternImage const image = doc->GetBackgroundImage(m_id);
 
     m_oldMatrix = image.Matrix();
 }

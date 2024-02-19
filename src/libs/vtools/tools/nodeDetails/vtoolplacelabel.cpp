@@ -70,7 +70,7 @@ auto VToolPlaceLabel::Create(VToolPlaceLabelInitData &initData) -> VToolPlaceLab
     const qreal a = CheckFormula(initData.id, initData.angle, initData.data);
     const qreal v = CheckFormula(initData.id, initData.visibilityTrigger, initData.data);
 
-    QSharedPointer<VPlaceLabelItem> node(new VPlaceLabelItem());
+    QSharedPointer<VPlaceLabelItem> const node(new VPlaceLabelItem());
     node->SetWidth(w, initData.width);
     node->SetHeight(h, initData.height);
     node->SetAngle(a, initData.angle);
@@ -113,7 +113,7 @@ auto VToolPlaceLabel::Create(VToolPlaceLabelInitData &initData) -> VToolPlaceLab
 
         if (initData.idTool != NULL_ID)
         {
-            QSharedPointer<VPlaceLabelItem> label = qSharedPointerDynamicCast<VPlaceLabelItem>(point);
+            QSharedPointer<VPlaceLabelItem> const label = qSharedPointerDynamicCast<VPlaceLabelItem>(point);
             SCASSERT(label.isNull() == false)
 
             node->SetCorrectionAngle(label->GetCorrectionAngle());

@@ -35,7 +35,7 @@ ResetBackgroundImage::ResetBackgroundImage(QUuid id, VAbstractPattern *doc, QUnd
 {
     setText(tr("reset background image transformation"));
 
-    VBackgroundPatternImage image = doc->GetBackgroundImage(m_id);
+    VBackgroundPatternImage const image = doc->GetBackgroundImage(m_id);
     m_oldMatrix = image.Matrix();
 }
 

@@ -50,7 +50,7 @@ auto IsMimeTypeImage(const QMimeType &mime) -> bool
     QStringList aliases = mime.aliases();
     aliases.prepend(mime.name());
 
-    static QRegularExpression rx(QStringLiteral("^image\\/[-\\w]+(\\.[-\\w]+)*([+][-\\w]+)?$"));
+    static QRegularExpression const rx(QStringLiteral("^image\\/[-\\w]+(\\.[-\\w]+)*([+][-\\w]+)?$"));
 
     return std::any_of(aliases.begin(), aliases.end(), [](const QString &name) { return rx.match(name).hasMatch(); });
 }
@@ -78,11 +78,11 @@ auto MimeTypeFromByteArray(const QByteArray &data) -> QMimeType
     QSet<QString> aliases = ConvertToSet<QString>(mime.aliases());
     aliases.insert(mime.name());
 
-    QSet<QString> gzipMime{"application/gzip", "application/x-gzip"};
+    QSet<QString> const gzipMime{"application/gzip", "application/x-gzip"};
 
     if (gzipMime.contains(aliases))
     {
-        QSvgRenderer render(data);
+        QSvgRenderer const render(data);
         if (render.isValid())
         {
             mime = QMimeDatabase().mimeTypeForName(QStringLiteral("image/svg+xml-compressed"));

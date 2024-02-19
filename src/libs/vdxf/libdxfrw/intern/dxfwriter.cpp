@@ -93,7 +93,7 @@
 
 auto dxfWriter::writeUtf8String(int code, const std::string &text) -> bool
 {
-    std::string t = encoder.fromUtf8(text);
+    std::string const t = encoder.fromUtf8(text);
     return writeString(code, t);
 }
 
@@ -101,7 +101,7 @@ auto dxfWriter::writeUtf8Caps(int code, const std::string &text) -> bool
 {
     std::string strname = text;
     std::transform(strname.begin(), strname.end(), strname.begin(),::toupper);
-    std::string t = encoder.fromUtf8(strname);
+    std::string const t = encoder.fromUtf8(strname);
     return writeString(code, t);
 }
 

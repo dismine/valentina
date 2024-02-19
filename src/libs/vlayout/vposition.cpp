@@ -229,7 +229,7 @@ auto VPosition::ArrangeDetail(const VPositionData &data, std::atomic_bool *stop,
 
     Q_ASSERT(not jobs.isEmpty());
 
-    std::function<VBestSquare(VPosition position)> Nest = [](VPosition position)
+    std::function<VBestSquare(VPosition position)> const Nest = [](VPosition position)
     {
         position.run();
         return position.getBestResult();
@@ -246,7 +246,7 @@ auto VPosition::ArrangeDetail(const VPositionData &data, std::atomic_bool *stop,
         return bestResult;
     }
 
-    QList<VBestSquare> results = watcher.future().results();
+    QList<VBestSquare> const results = watcher.future().results();
     for (auto &result : results)
     {
         bestResult.NewResult(result);
@@ -502,7 +502,7 @@ void VPosition::CombineEdges(VLayoutPiece &detail, const QLineF &globalEdge, int
 //---------------------------------------------------------------------------------------------------------------------
 void VPosition::RotateEdges(VLayoutPiece &detail, const QLineF &globalEdge, int dEdge, qreal angle)
 {
-    QLineF detailEdge = detail.LayoutEdge(dEdge);
+    QLineF const detailEdge = detail.LayoutEdge(dEdge);
     // Now we move detail to position near to global contour edge.
     detail.Translate(globalEdge.x2() - detailEdge.x2(), globalEdge.y2() - detailEdge.y2());
     detail.Rotate(globalEdge.p2(), angle);
@@ -540,7 +540,7 @@ void VPosition::FollowGrainline()
         return;
     }
 
-    VPieceGrainline pieceGrainline = m_data.detail.GetGrainline();
+    VPieceGrainline const pieceGrainline = m_data.detail.GetGrainline();
     QLineF detailGrainline(10, 10, 100, 10);
     detailGrainline.setAngle(pieceGrainline.GetMainLine().angle());
 

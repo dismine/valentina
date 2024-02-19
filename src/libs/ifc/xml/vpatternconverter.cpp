@@ -1142,7 +1142,7 @@ auto VPatternConverter::TagMeasurementsV0_1_4() const -> QDomElement
     const QDomElement element = list.at(0).toElement();
     if (not element.isElement())
     {
-        VException excep("Can't get tag measurements.");
+        VException const excep("Can't get tag measurements.");
         throw excep;
     }
     return element;
@@ -1158,7 +1158,7 @@ auto VPatternConverter::TagIncrementsV0_1_4() const -> QDomElement
     const QDomElement element = list.at(0).toElement();
     if (not element.isElement())
     {
-        VException excep("Can't get tag measurements.");
+        VException const excep("Can't get tag measurements.");
         throw excep;
     }
     return element;
@@ -1170,7 +1170,7 @@ void VPatternConverter::FixToolUnionToV0_2_4()
     // TODO. Delete if minimal supported version is 0.2.4
     Q_STATIC_ASSERT_X(VPatternConverter::PatternMinVer < FormatVersion(0, 2, 4), "Time to refactor the code.");
 
-    QDomElement root = documentElement();
+    QDomElement const root = documentElement();
     const QDomNodeList modelings = root.elementsByTagName(*strModeling);
     for (int i = 0; i < modelings.size(); ++i)
     {
@@ -1440,7 +1440,7 @@ void VPatternConverter::FixCutPoint()
     const QDomNodeList list = elementsByTagName(*strPoint);
     for (int i = 0; i < list.size(); ++i)
     {
-        QDomElement element = list.at(i).toElement();
+        QDomElement const element = list.at(i).toElement();
         if (not element.isNull())
         {
             const QString type = element.attribute(*strType);
@@ -1449,21 +1449,21 @@ void VPatternConverter::FixCutPoint()
                 case 0: // strCutSplinePath
                 {
                     const quint32 id = element.attribute(*strId).toUInt();
-                    quint32 curve = element.attribute(*strSplinePath).toUInt();
+                    quint32 const curve = element.attribute(*strSplinePath).toUInt();
                     FixSubPaths(i, id, curve);
                     break;
                 }
                 case 1: // strCutSpline
                 {
                     const quint32 id = element.attribute(*strId).toUInt();
-                    quint32 curve = element.attribute(*strSpline).toUInt();
+                    quint32 const curve = element.attribute(*strSpline).toUInt();
                     FixSubPaths(i, id, curve);
                     break;
                 }
                 case 2: // strCutArc
                 {
                     const quint32 id = element.attribute(*strId).toUInt();
-                    quint32 curve = element.attribute(*strArc).toUInt();
+                    quint32 const curve = element.attribute(*strArc).toUInt();
                     FixSubPaths(i, id, curve);
                     break;
                 }
@@ -1617,7 +1617,7 @@ void VPatternConverter::TagRemoveAttributeTypeObjectInV0_4_0()
     const QDomNodeList list = elementsByTagName(*strModeling);
     for (int i = 0; i < list.size(); ++i)
     {
-        QDomElement modeling = list.at(i).toElement();
+        QDomElement const modeling = list.at(i).toElement();
         if (not modeling.isNull())
         {
             QDomNode domNode = modeling.firstChild();
@@ -1767,7 +1767,7 @@ auto VPatternConverter::GetUnionChildrenNodesV0_4_0(const QDomElement &detail) -
             const QDomElement node = childList.at(i).toElement();
             if (not node.isNull())
             {
-                QDomElement tagNode = node.cloneNode().toElement();
+                QDomElement const tagNode = node.cloneNode().toElement();
                 tagNodes.appendChild(tagNode);
             }
         }
@@ -1805,7 +1805,7 @@ void VPatternConverter::LabelTagToV0_4_4(const QString &tagName)
     {
         if (dom.hasAttribute(attribute))
         {
-            QString valStr = dom.attribute(attribute, QChar('1'));
+            QString const valStr = dom.attribute(attribute, QChar('1'));
             bool ok = false;
             qreal val = valStr.toDouble(&ok);
             if (not ok)
@@ -1842,7 +1842,7 @@ auto VPatternConverter::AddTagPatternLabelV0_5_1() -> QDomElement
                                                << *strGradation << *strPatternName << *strPatternNum << *strCompanyName
                                                << *strCustomerName << *strPatternLabel;
 
-        QDomElement element = createElement(*strPatternLabel);
+        QDomElement const element = createElement(*strPatternLabel);
         QDomElement pattern = documentElement();
         for (vsizetype i = tags.indexOf(element.tagName()) - 1; i >= 0; --i)
         {
@@ -1937,7 +1937,7 @@ void VPatternConverter::PortPieceLabelstoV0_6_0()
     for (int i = 0; i < nodeList.size(); ++i)
     {
         QDomElement dataTag = nodeList.at(i).toElement();
-        QDomNodeList nodeListMCP = dataTag.childNodes();
+        QDomNodeList const nodeListMCP = dataTag.childNodes();
         const int count = nodeListMCP.count();
         try
         {
@@ -1957,7 +1957,7 @@ void VPatternConverter::PortPieceLabelstoV0_6_0()
 
         for (int iMCP = 0; iMCP < count; ++iMCP)
         {
-            QDomElement domMCP = nodeListMCP.at(iMCP).toElement();
+            QDomElement const domMCP = nodeListMCP.at(iMCP).toElement();
 
             QString line;
 
@@ -2026,7 +2026,7 @@ void VPatternConverter::RemoveUnusedTagsV0_6_0()
     RemoveUniqueTagV0_6_0(*strShowDate);
     RemoveUniqueTagV0_6_0(*strShowMeasurements);
 
-    QDomNodeList nodeList = elementsByTagName(*strData);
+    QDomNodeList const nodeList = elementsByTagName(*strData);
     for (int i = 0; i < nodeList.size(); ++i)
     {
         QDomElement child = nodeList.at(i).firstChildElement(*strMCP);
@@ -2074,7 +2074,7 @@ void VPatternConverter::RemoveGradationV0_8_8()
     QDomElement patternElement = documentElement();
     if (patternElement.isElement())
     {
-        QDomElement gradationTag = patternElement.firstChildElement(*strGradation);
+        QDomElement const gradationTag = patternElement.firstChildElement(*strGradation);
         if (gradationTag.isElement())
         {
             patternElement.removeChild(gradationTag);
@@ -2112,12 +2112,13 @@ void VPatternConverter::ConvertImageToV0_9_0()
         QDomElement img = list.at(0).toElement();
         if (not img.isNull())
         {
-            QString extension = img.attribute(*strExtension);
+            QString const extension = img.attribute(*strExtension);
             img.removeAttribute(*strExtension);
 
             if (not extension.isEmpty())
             {
-                QMap<QString, QString> mimeTypes{{"BMP", "image/bmp"}, {"JPG", "image/jpeg"}, {"PNG", "image/png"}};
+                QMap<QString, QString> const mimeTypes{
+                    {"BMP", "image/bmp"}, {"JPG", "image/jpeg"}, {"PNG", "image/png"}};
 
                 if (mimeTypes.contains(extension))
                 {
@@ -2143,7 +2144,7 @@ void VPatternConverter::ConvertImageToV0_9_0()
                     return list;
                 };
 
-                QStringList data = SplitString();
+                QStringList const data = SplitString();
                 setTagText(img, data.join("\n"));
             }
         }

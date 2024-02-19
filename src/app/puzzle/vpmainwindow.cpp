@@ -112,7 +112,7 @@ void RemoveLayoutPath(const QString &path, bool usedNotExistedDir)
 {
     if (usedNotExistedDir)
     {
-        QDir dir(path);
+        QDir const dir(path);
         dir.rmpath(QChar('.'));
     }
 }
@@ -198,13 +198,13 @@ void SetPrinterSheetPageSettings(const QSharedPointer<QPrinter> &printer, const 
         margins = sheet->GetSheetMargins();
     }
 
-    QPageLayout::Orientation sheetOrientation = sheet->GetSheetOrientation();
+    QPageLayout::Orientation const sheetOrientation = sheet->GetSheetOrientation();
 
-    QRectF imageRect = sheet->GetMarginsRect();
-    qreal width = FromPixel(imageRect.width() * xScale + margins.left() + margins.right(), Unit::Mm);
-    qreal height = FromPixel(imageRect.height() * yScale + margins.top() + margins.bottom(), Unit::Mm);
+    QRectF const imageRect = sheet->GetMarginsRect();
+    qreal const width = FromPixel(imageRect.width() * xScale + margins.left() + margins.right(), Unit::Mm);
+    qreal const height = FromPixel(imageRect.height() * yScale + margins.top() + margins.bottom(), Unit::Mm);
 
-    QSizeF pageSize = sheetOrientation == QPageLayout::Portrait ? QSizeF(width, height) : QSizeF(height, width);
+    QSizeF const pageSize = sheetOrientation == QPageLayout::Portrait ? QSizeF(width, height) : QSizeF(height, width);
     if (not printer->setPageSize(QPageSize(pageSize, QPageSize::Millimeter)))
     {
         qWarning() << QObject::tr("Cannot set printer page size");
@@ -280,15 +280,15 @@ auto IsValidFileName(const QString &fileName) -> bool
         return false;
     }
 
-    static QRegularExpression regex(QStringLiteral("[<>:\"/\\\\|?*]"));
+    static QRegularExpression const regex(QStringLiteral("[<>:\"/\\\\|?*]"));
     QRegularExpressionMatch match = regex.match(fileName);
     if (match.hasMatch())
     {
         return false;
     }
 
-    static QRegularExpression regexReservedNames(QStringLiteral("^(CON|AUX|PRN|NUL|COM[1-9]|LPT[1-9])(\\..*)?$"),
-                                                 QRegularExpression::CaseInsensitiveOption);
+    static QRegularExpression const regexReservedNames(QStringLiteral("^(CON|AUX|PRN|NUL|COM[1-9]|LPT[1-9])(\\..*)?$"),
+                                                       QRegularExpression::CaseInsensitiveOption);
     match = regexReservedNames.match(fileName);
     if (match.hasMatch())
     {
@@ -398,7 +398,7 @@ VPMainWindow::VPMainWindow(const VPCommandLinePtr &cmd, QWidget *parent)
     connect(m_layoutWatcher, &QFileSystemWatcher::fileChanged, this,
             [this](const QString &path)
             {
-                QFileInfo checkFile(path);
+                QFileInfo const checkFile(path);
                 if (not checkFile.exists())
                 {
                     for (int i = 0; i <= 1000; i = i + 10)
@@ -770,7 +770,7 @@ void VPMainWindow::InitPropertyTabCurrentPiece()
     connect(ui->checkBoxCurrentPieceShowSeamline, &QCheckBox::toggled, this,
             [this](bool checked)
             {
-                QList<VPPiecePtr> selectedPieces = SelectedPieces();
+                QList<VPPiecePtr> const selectedPieces = SelectedPieces();
                 if (selectedPieces.size() == 1)
                 {
                     const VPPiecePtr &selectedPiece = selectedPieces.constFirst();
@@ -787,7 +787,7 @@ void VPMainWindow::InitPropertyTabCurrentPiece()
     connect(ui->checkBoxShowFullPiece, &QCheckBox::toggled, this,
             [this](bool checked)
             {
-                QList<VPPiecePtr> selectedPieces = SelectedPieces();
+                QList<VPPiecePtr> const selectedPieces = SelectedPieces();
                 if (selectedPieces.size() == 1)
                 {
                     const VPPiecePtr &selectedPiece = selectedPieces.constFirst();
@@ -806,7 +806,7 @@ void VPMainWindow::InitPropertyTabCurrentPiece()
     connect(ui->checkBoxCurrentPieceVerticallyFlipped, &QCheckBox::toggled, this,
             [this](bool checked)
             {
-                QList<VPPiecePtr> selectedPieces = SelectedPieces();
+                QList<VPPiecePtr> const selectedPieces = SelectedPieces();
                 if (selectedPieces.size() == 1)
                 {
                     const VPPiecePtr &selectedPiece = selectedPieces.constFirst();
@@ -825,7 +825,7 @@ void VPMainWindow::InitPropertyTabCurrentPiece()
     connect(ui->checkBoxCurrentPieceHorizontallyFlipped, &QCheckBox::toggled, this,
             [this](bool checked)
             {
-                QList<VPPiecePtr> selectedPieces = SelectedPieces();
+                QList<VPPiecePtr> const selectedPieces = SelectedPieces();
                 if (selectedPieces.size() == 1)
                 {
                     const VPPiecePtr &selectedPiece = selectedPieces.constFirst();
@@ -914,7 +914,7 @@ void VPMainWindow::InitPropertyTabCurrentSheet()
             {
                 if (not m_layout.isNull())
                 {
-                    VPSheetPtr sheet = m_layout->GetFocusedSheet();
+                    VPSheetPtr const sheet = m_layout->GetFocusedSheet();
                     if (not sheet.isNull())
                     {
                         sheet->SetName(text);
@@ -982,7 +982,7 @@ void VPMainWindow::InitPaperSizeData(const QString &suffix)
     connect(ui->toolButtonGrainlineHorizontalOrientation, &QToolButton::clicked, this,
             [this](bool checked)
             {
-                VPSheetPtr sheet = m_layout->GetFocusedSheet();
+                VPSheetPtr const sheet = m_layout->GetFocusedSheet();
                 if (sheet.isNull())
                 {
                     return;
@@ -1005,7 +1005,7 @@ void VPMainWindow::InitPaperSizeData(const QString &suffix)
     connect(ui->toolButtonGrainlineVerticalOrientation, &QToolButton::clicked, this,
             [this](bool checked)
             {
-                VPSheetPtr sheet = m_layout->GetFocusedSheet();
+                VPSheetPtr const sheet = m_layout->GetFocusedSheet();
                 if (sheet.isNull())
                 {
                     return;
@@ -1030,7 +1030,7 @@ void VPMainWindow::InitPaperSizeData(const QString &suffix)
             {
                 if (not m_layout.isNull())
                 {
-                    VPSheetPtr sheet = m_layout->GetFocusedSheet();
+                    VPSheetPtr const sheet = m_layout->GetFocusedSheet();
                     if (not sheet.isNull())
                     {
                         sheet->RemoveUnusedLength();
@@ -1071,7 +1071,7 @@ void VPMainWindow::InitMarginsData(const QString &suffix)
                     ui->doubleSpinBoxSheetMarginTop->setDisabled(state != 0);
                     ui->doubleSpinBoxSheetMarginBottom->setDisabled(state != 0);
 
-                    VPSheetPtr sheet = m_layout->GetFocusedSheet();
+                    VPSheetPtr const sheet = m_layout->GetFocusedSheet();
                     if (not sheet.isNull())
                     {
                         sheet->SetIgnoreMargins(state != 0);
@@ -1373,7 +1373,7 @@ void VPMainWindow::SetPropertyTabSheetData()
 {
     if (not m_layout.isNull())
     {
-        VPSheetPtr sheet = m_layout->GetFocusedSheet();
+        VPSheetPtr const sheet = m_layout->GetFocusedSheet();
         if (not sheet.isNull())
         {
             ui->groupBoxSheetInfos->setDisabled(false);
@@ -1403,7 +1403,7 @@ void VPMainWindow::SetPropertyTabSheetData()
             ui->doubleSpinBoxSheetMarginBottom->setSuffix(suffix);
 
             // set Width / Length
-            QSizeF size = sheet->GetSheetSizeConverted();
+            QSizeF const size = sheet->GetSheetSizeConverted();
             SetDoubleSpinBoxValue(ui->doubleSpinBoxSheetPaperWidth, size.width());
             SetDoubleSpinBoxValue(ui->doubleSpinBoxSheetPaperHeight, size.height());
 
@@ -1412,7 +1412,7 @@ void VPMainWindow::SetPropertyTabSheetData()
 
             // set margins
             ui->groupBoxSheetMargin->setDisabled(false);
-            QMarginsF margins = sheet->GetSheetMarginsConverted();
+            QMarginsF const margins = sheet->GetSheetMarginsConverted();
             SetDoubleSpinBoxValue(ui->doubleSpinBoxSheetMarginLeft, margins.left());
             SetDoubleSpinBoxValue(ui->doubleSpinBoxSheetMarginTop, margins.top());
             SetDoubleSpinBoxValue(ui->doubleSpinBoxSheetMarginRight, margins.right());
@@ -1428,7 +1428,7 @@ void VPMainWindow::SetPropertyTabSheetData()
             ui->doubleSpinBoxSheetMarginTop->setDisabled(ignoreMargins);
             ui->doubleSpinBoxSheetMarginBottom->setDisabled(ignoreMargins);
 
-            GrainlineType type = sheet->GetGrainlineType();
+            GrainlineType const type = sheet->GetGrainlineType();
             ui->toolButtonGrainlineHorizontalOrientation->setChecked(type == GrainlineType::Horizontal);
             ui->toolButtonGrainlineVerticalOrientation->setChecked(type == GrainlineType::Vertical);
 
@@ -1489,7 +1489,7 @@ void VPMainWindow::SetPropertyTabTilesData()
     {
         ui->groupBoxTilePaperFormat->setDisabled(false);
         // set Width / Length
-        QSizeF size = m_layout->LayoutSettings().GetTilesSizeConverted();
+        QSizeF const size = m_layout->LayoutSettings().GetTilesSizeConverted();
         SetDoubleSpinBoxValue(ui->doubleSpinBoxTilePaperWidth, size.width());
         SetDoubleSpinBoxValue(ui->doubleSpinBoxTilePaperHeight, size.height());
 
@@ -1498,7 +1498,7 @@ void VPMainWindow::SetPropertyTabTilesData()
 
         // set margins
         ui->groupBoxTileMargins->setDisabled(false);
-        QMarginsF margins = m_layout->LayoutSettings().GetTilesMarginsConverted();
+        QMarginsF const margins = m_layout->LayoutSettings().GetTilesMarginsConverted();
         SetDoubleSpinBoxValue(ui->doubleSpinBoxTileMarginLeft, margins.left());
         SetDoubleSpinBoxValue(ui->doubleSpinBoxTileMarginTop, margins.top());
         SetDoubleSpinBoxValue(ui->doubleSpinBoxTileMarginRight, margins.right());
@@ -1692,7 +1692,7 @@ void VPMainWindow::UpdateWindowTitle()
     }
     else
     {
-        vsizetype index = VPApplication::VApp()->MainWindows().indexOf(this);
+        vsizetype const index = VPApplication::VApp()->MainWindows().indexOf(this);
         if (index != -1)
         {
             showName = tr("untitled %1.vlt").arg(index + 1);
@@ -1794,7 +1794,7 @@ auto VPMainWindow::MaybeSave() -> bool
     // TODO: Implement maybe save check
     if (this->isWindowModified())
     {
-        QScopedPointer<QMessageBox> messageBox(
+        QScopedPointer<QMessageBox> const messageBox(
             new QMessageBox(QMessageBox::Warning, tr("Unsaved changes"),
                             tr("Layout has been modified. Do you want to save your changes?"),
                             QMessageBox::Yes | QMessageBox::No | QMessageBox::Cancel, this, Qt::Sheet));
@@ -1876,7 +1876,7 @@ auto VPMainWindow::IsLayoutReadOnly() const -> bool
         return false;
     }
 
-    QFileInfo f(curFile);
+    QFileInfo const f(curFile);
 
     if (not f.exists())
     {
@@ -1887,7 +1887,7 @@ auto VPMainWindow::IsLayoutReadOnly() const -> bool
     //     qt_ntfs_permission_lookup++; // turn checking on
     // #endif /*Q_OS_WIN32*/
 
-    bool fileWritable = f.isWritable();
+    bool const fileWritable = f.isWritable();
 
     // #ifdef Q_OS_WIN32
     //     qt_ntfs_permission_lookup--; // turn it off again
@@ -1918,7 +1918,7 @@ auto VPMainWindow::SelectedPieces() const -> QList<VPPiecePtr>
     QList<VPPiecePtr> selectedPieces;
     if (not m_layout.isNull())
     {
-        VPSheetPtr activeSheet = m_layout->GetFocusedSheet();
+        VPSheetPtr const activeSheet = m_layout->GetFocusedSheet();
         if (not activeSheet.isNull())
         {
             selectedPieces = activeSheet->GetSelectedPieces();
@@ -2070,7 +2070,7 @@ void VPMainWindow::CorrectPaperDecimals()
 //---------------------------------------------------------------------------------------------------------------------
 void VPMainWindow::SheetPaperSizeChanged()
 {
-    bool portrait = ui->doubleSpinBoxSheetPaperHeight->value() >= ui->doubleSpinBoxSheetPaperWidth->value();
+    bool const portrait = ui->doubleSpinBoxSheetPaperHeight->value() >= ui->doubleSpinBoxSheetPaperWidth->value();
 
     ui->toolButtonSheetPortraitOritation->blockSignals(true);
     ui->toolButtonSheetPortraitOritation->setChecked(portrait);
@@ -2087,7 +2087,7 @@ void VPMainWindow::SheetPaperSizeChanged()
             RotatePiecesToGrainline();
         }
 
-        VPSheetPtr sheet = m_layout->GetFocusedSheet();
+        VPSheetPtr const sheet = m_layout->GetFocusedSheet();
         if (not sheet.isNull())
         {
             sheet->ValidatePiecesOutOfBound();
@@ -2103,7 +2103,7 @@ void VPMainWindow::SheetPaperSizeChanged()
 //---------------------------------------------------------------------------------------------------------------------
 void VPMainWindow::TilePaperSizeChanged()
 {
-    bool portrait = ui->doubleSpinBoxTilePaperHeight->value() >= ui->doubleSpinBoxTilePaperWidth->value();
+    bool const portrait = ui->doubleSpinBoxTilePaperHeight->value() >= ui->doubleSpinBoxTilePaperWidth->value();
 
     ui->toolButtonTilePortraitOrientation->blockSignals(true);
     ui->toolButtonTilePortraitOrientation->setChecked(portrait);
@@ -2228,12 +2228,12 @@ void VPMainWindow::RotatePiecesToGrainline()
         return;
     }
 
-    QList<VPSheetPtr> sheets = m_layout->GetAllSheets();
+    QList<VPSheetPtr> const sheets = m_layout->GetAllSheets();
     for (const auto &sheet : sheets)
     {
         if (not sheet.isNull())
         {
-            QList<VPPiecePtr> pieces = sheet->GetPieces();
+            QList<VPPiecePtr> const pieces = sheet->GetPieces();
             for (const auto &piece : pieces)
             {
                 if (not piece.isNull() && piece->IsGrainlineEnabled())
@@ -2275,7 +2275,7 @@ void VPMainWindow::ExportData(const VPExportData &data)
                 name = data.path + '/' + data.fileName + VLayoutExporter::ExportFormatSuffix(data.format);
             }
 
-            VPSheetPtr sheet = data.sheets.at(i);
+            VPSheetPtr const sheet = data.sheets.at(i);
             ExportApparelLayout(data, sheet->GetAsLayoutPieces(), name, sheet->GetSheetSize().toSize());
         }
     }
@@ -2290,7 +2290,7 @@ void VPMainWindow::ExportApparelLayout(const VPExportData &data, const QVector<V
                                        const QString &name, const QSize &size)
 {
     const QString path = data.path;
-    bool usedNotExistedDir = CreateLayoutPath(path);
+    bool const usedNotExistedDir = CreateLayoutPath(path);
     if (not usedNotExistedDir)
     {
         qCritical() << tr("Can't create a path");
@@ -2351,7 +2351,7 @@ void VPMainWindow::ExportApparelLayout(const VPExportData &data, const QVector<V
 void VPMainWindow::ExportFlatLayout(const VPExportData &data)
 {
     const QString path = data.path;
-    bool usedNotExistedDir = CreateLayoutPath(path);
+    bool const usedNotExistedDir = CreateLayoutPath(path);
     if (not usedNotExistedDir)
     {
         qCritical() << tr("Can't create a path");
@@ -2396,7 +2396,7 @@ void VPMainWindow::ExportScene(const VPExportData &data)
     exporter.SetBinaryDxfFormat(data.isBinaryDXF);
     exporter.SetShowGrainline(data.showGrainline);
 
-    QList<VPSheetPtr> sheets = data.sheets;
+    QList<VPSheetPtr> const sheets = data.sheets;
 
     for (int i = 0; i < sheets.size(); ++i)
     {
@@ -2549,7 +2549,7 @@ void VPMainWindow::ExportUnifiedPdfFile(const VPExportData &data)
 //---------------------------------------------------------------------------------------------------------------------
 void VPMainWindow::GenerateUnifiedPdfFile(const VPExportData &data, const QString &name)
 {
-    QSharedPointer<QPrinter> printer(new QPrinter());
+    QSharedPointer<QPrinter> const printer(new QPrinter());
     printer->setCreator(QGuiApplication::applicationDisplayName() + QChar(QChar::Space) +
                         QCoreApplication::applicationVersion());
     printer->setOutputFormat(QPrinter::PdfFormat);
@@ -2595,7 +2595,7 @@ void VPMainWindow::GenerateUnifiedPdfFile(const VPExportData &data, const QStrin
 
         sheet->SceneData()->PrepareForExport(); // Go first because recreates pieces
         VLayoutExporter::PrepareGrainlineForExport(sheet->SceneData()->GraphicsPiecesAsItems(), data.showGrainline);
-        QRectF imageRect = sheet->GetMarginsRect();
+        QRectF const imageRect = sheet->GetMarginsRect();
         sheet->SceneData()->Scene()->render(&painter, VPrintLayout::SceneTargetRect(printer.data(), imageRect),
                                             imageRect, Qt::IgnoreAspectRatio);
         sheet->SceneData()->CleanAfterExport(); // Will restore the grainlines automatically
@@ -2609,7 +2609,7 @@ void VPMainWindow::GenerateUnifiedPdfFile(const VPExportData &data, const QStrin
 //---------------------------------------------------------------------------------------------------------------------
 void VPMainWindow::ExportPdfTiledFile(const VPExportData &data)
 {
-    QSharedPointer<QPrinter> printer(new QPrinter());
+    QSharedPointer<QPrinter> const printer(new QPrinter());
 #ifdef Q_OS_MAC
     printer->setOutputFormat(QPrinter::NativeFormat);
 #else
@@ -2901,7 +2901,7 @@ auto VPMainWindow::AskLayoutIsInvalid(const QList<VPSheetPtr> &sheets) -> bool
         bool outOfBoundChecked = false;
         bool pieceSuperpositionChecked = false;
 
-        QList<VPPiecePtr> pieces = sheet->GetPieces();
+        QList<VPPiecePtr> const pieces = sheet->GetPieces();
         for (const auto &piece : pieces)
         {
             if (not CheckPiecesOutOfBound(piece, outOfBoundChecked))
@@ -3026,7 +3026,7 @@ void VPMainWindow::PrintLayoutSheets(QPrinter *printer, const QList<VPSheetPtr> 
     {
         for (int j = 0; j < numPages; ++j)
         {
-            vsizetype index =
+            vsizetype const index =
                 printer->pageOrder() == QPrinter::FirstPageFirst ? firstPageNumber + j : lastPageNumber - j;
 
             const VPSheetPtr &sheet = sheets.at(index);
@@ -3053,7 +3053,7 @@ auto VPMainWindow::PrintLayoutSheetPage(QPrinter *printer, QPainter &painter, co
 
     if (not sheet->IgnoreMargins())
     {
-        QMarginsF margins = sheet->GetSheetMargins();
+        QMarginsF const margins = sheet->GetSheetMargins();
         if (not printer->setPageMargins(UnitConvertor(margins, Unit::Px, Unit::Mm), QPageLayout::Millimeter))
         {
             qWarning() << QObject::tr("Cannot set printer margins");
@@ -3067,7 +3067,7 @@ auto VPMainWindow::PrintLayoutSheetPage(QPrinter *printer, QPainter &painter, co
     }
 
     sheet->SceneData()->PrepareForExport();
-    QRectF imageRect = sheet->GetMarginsRect();
+    QRectF const imageRect = sheet->GetMarginsRect();
     sheet->SceneData()->Scene()->render(&painter, VPrintLayout::SceneTargetRect(printer, imageRect), imageRect,
                                         Qt::IgnoreAspectRatio);
     sheet->SceneData()->CleanAfterExport();
@@ -3116,7 +3116,7 @@ void VPMainWindow::PrintLayoutTiledSheets(QPrinter *printer, const QList<VPSheet
     {
         for (int j = 0; j < numPages; ++j)
         {
-            vsizetype index =
+            vsizetype const index =
                 printer->pageOrder() == QPrinter::FirstPageFirst ? firstPageNumber + j : lastPageNumber - j;
             const VPLayoutPrinterPage &page = pages.at(index);
 
@@ -3232,19 +3232,19 @@ auto VPMainWindow::PrintLayoutTiledSheetPage(QPrinter *printer, QPainter &painte
 //---------------------------------------------------------------------------------------------------------------------
 void VPMainWindow::ZValueMove(int move)
 {
-    VPSheetPtr sheet = m_layout->GetFocusedSheet();
+    VPSheetPtr const sheet = m_layout->GetFocusedSheet();
     if (sheet.isNull())
     {
         return;
     }
 
-    QList<VPPiecePtr> selectedPieces = sheet->GetSelectedPieces();
+    QList<VPPiecePtr> const selectedPieces = sheet->GetSelectedPieces();
     if (selectedPieces.isEmpty())
     {
         return;
     }
 
-    QList<VPPiecePtr> allPieces = sheet->GetPieces();
+    QList<VPPiecePtr> const allPieces = sheet->GetPieces();
     if (allPieces.isEmpty() || (allPieces.size() == selectedPieces.size()))
     {
         return;
@@ -3291,7 +3291,7 @@ auto VPMainWindow::AddLayoutPieces(const QVector<VLayoutPiece> &pieces) -> bool
     {
         for (quint16 i = 1; i <= rawPiece.GetQuantity(); ++i)
         {
-            VPPiecePtr piece(new VPPiece(rawPiece));
+            VPPiecePtr const piece(new VPPiece(rawPiece));
             piece->SetCopyNumber(i);
 
             QString error;
@@ -3339,7 +3339,7 @@ void VPMainWindow::TranslatePieces()
                 m_layout->UndoStack()->beginMacro(tr("translate pieces"));
             }
 
-            QRectF rect = PiecesBoundingRect(selectedPieces);
+            QRectF const rect = PiecesBoundingRect(selectedPieces);
             for (const auto &piece : qAsConst(selectedPieces))
             {
                 TranslatePieceRelatively(piece, rect, selectedPieces.size(), dx, dy);
@@ -3358,9 +3358,9 @@ void VPMainWindow::TranslatePieces()
     }
     else
     {
-        QRectF rect = PiecesBoundingRect(selectedPieces);
-        qreal pieceDx = dx - rect.topLeft().x();
-        qreal pieceDy = dy - rect.topLeft().y();
+        QRectF const rect = PiecesBoundingRect(selectedPieces);
+        qreal const pieceDx = dx - rect.topLeft().x();
+        qreal const pieceDy = dy - rect.topLeft().y();
 
         if (selectedPieces.size() == 1)
         {
@@ -3404,7 +3404,7 @@ void VPMainWindow::TranslatePieceRelatively(const VPPiecePtr &piece, const QRect
             qreal stickyTranslateY = 0;
             if (piece->StickyPosition(stickyTranslateX, stickyTranslateY))
             {
-                bool allowMerge = selectedPiecesCount == 1;
+                bool const allowMerge = selectedPiecesCount == 1;
                 auto *stickyCommand = new VPUndoPieceMove(piece, stickyTranslateX, stickyTranslateY, allowMerge);
                 m_layout->UndoStack()->push(stickyCommand);
             }
@@ -3422,7 +3422,7 @@ void VPMainWindow::RotatePieces()
         angle *= -1;
     }
 
-    QList<VPPiecePtr> selectedPieces = SelectedPieces();
+    QList<VPPiecePtr> const selectedPieces = SelectedPieces();
     if (selectedPieces.isEmpty())
     {
         return;
@@ -3449,13 +3449,13 @@ void VPMainWindow::RotatePieces()
     }
     else
     {
-        VPSheetPtr sheet = m_layout->GetFocusedSheet();
+        VPSheetPtr const sheet = m_layout->GetFocusedSheet();
         if (sheet.isNull())
         {
             return;
         }
 
-        VPTransformationOrigon origin = sheet->TransformationOrigin();
+        VPTransformationOrigon const origin = sheet->TransformationOrigin();
         auto *command = new VPUndoPiecesRotate(selectedPieces, origin, angle, angle);
         m_layout->UndoStack()->push(command);
     }
@@ -3600,9 +3600,9 @@ auto VPMainWindow::on_actionSave_triggered() -> bool
 //---------------------------------------------------------------------------------------------------------------------
 auto VPMainWindow::on_actionSaveAs_triggered() -> bool
 {
-    QString filters = tr("Layout files") + QStringLiteral(" (*.vlt)");
-    QString suffix = QStringLiteral("vlt");
-    QString fName = tr("layout") + '.'_L1 + suffix;
+    QString const filters = tr("Layout files") + QStringLiteral(" (*.vlt)");
+    QString const suffix = QStringLiteral("vlt");
+    QString const fName = tr("layout") + '.'_L1 + suffix;
 
     QString dir;
     if (curFile.isEmpty())
@@ -3622,7 +3622,7 @@ auto VPMainWindow::on_actionSaveAs_triggered() -> bool
         return false;
     }
 
-    QFileInfo f(fileName);
+    QFileInfo const f(fileName);
     if (f.suffix().isEmpty() && f.suffix() != suffix)
     {
         fileName += '.'_L1 + suffix;
@@ -3641,7 +3641,7 @@ auto VPMainWindow::on_actionSaveAs_triggered() -> bool
     if (QFileInfo::exists(fileName) && curFile != fileName)
     {
         // Temporary try to lock the file before saving
-        VLockGuard<char> tmp(fileName);
+        VLockGuard<char> const tmp(fileName);
         if (not tmp.IsLocked())
         {
             qCCritical(pWindow, "%s",
@@ -3651,7 +3651,7 @@ auto VPMainWindow::on_actionSaveAs_triggered() -> bool
     }
 
     QString error;
-    bool result = SaveLayout(fileName, error);
+    bool const result = SaveLayout(fileName, error);
     if (not result)
     {
         QMessageBox messageBox;
@@ -3720,7 +3720,7 @@ void VPMainWindow::on_actionAboutPuzzle_triggered()
 void VPMainWindow::on_LayoutUnitChanged(int index)
 {
     Q_UNUSED(index);
-    QVariant comboBoxValue = ui->comboBoxLayoutUnit->currentData();
+    QVariant const comboBoxValue = ui->comboBoxLayoutUnit->currentData();
     m_layout->LayoutSettings().SetUnit(StrToUnits(comboBoxValue.toString()));
 
     SetPropertyTabCurrentPieceData();
@@ -3733,7 +3733,7 @@ void VPMainWindow::on_SheetSizeChanged()
 {
     if (not m_layout.isNull())
     {
-        VPSheetPtr sheet = m_layout->GetFocusedSheet();
+        VPSheetPtr const sheet = m_layout->GetFocusedSheet();
         if (not sheet.isNull())
         {
             sheet->SetSheetSizeConverted(ui->doubleSpinBoxSheetPaperWidth->value(),
@@ -3761,7 +3761,7 @@ void VPMainWindow::on_SheetOrientationChanged(bool checked)
         SetDoubleSpinBoxValue(ui->doubleSpinBoxSheetPaperWidth, height);
         SetDoubleSpinBoxValue(ui->doubleSpinBoxSheetPaperHeight, width);
 
-        VPSheetPtr sheet = m_layout->GetFocusedSheet();
+        VPSheetPtr const sheet = m_layout->GetFocusedSheet();
         if (not sheet.isNull())
         {
             sheet->SetSheetSizeConverted(height, width); // NOLINT(readability-suspicious-call-argument)
@@ -3780,7 +3780,7 @@ void VPMainWindow::on_SheetMarginChanged()
 {
     if (not m_layout.isNull())
     {
-        VPSheetPtr sheet = m_layout->GetFocusedSheet();
+        VPSheetPtr const sheet = m_layout->GetFocusedSheet();
         if (not sheet.isNull())
         {
             sheet->SetSheetMarginsConverted(
@@ -3977,7 +3977,7 @@ void VPMainWindow::ToolBarStyles()
 //---------------------------------------------------------------------------------------------------------------------
 void VPMainWindow::on_actionAddSheet_triggered()
 {
-    VPSheetPtr sheet(new VPSheet(m_layout));
+    VPSheetPtr const sheet(new VPSheet(m_layout));
     sheet->SetName(tr("Sheet %1").arg(m_layout->GetAllSheets().size() + 1));
     m_layout->UndoStack()->push(new VPUndoAddSheet(sheet));
 }
@@ -4013,7 +4013,7 @@ void VPMainWindow::on_ResetPieceTransformationSettings()
         }
         else
         {
-            int unitIndex = ui->comboBoxTranslateUnit->findData(QVariant(UnitsToStr(Unit::Px)));
+            int const unitIndex = ui->comboBoxTranslateUnit->findData(QVariant(UnitsToStr(Unit::Px)));
             if (unitIndex != -1)
             {
                 ui->comboBoxTranslateUnit->setCurrentIndex(unitIndex);
@@ -4036,7 +4036,7 @@ void VPMainWindow::on_RelativeTranslationChanged(bool checked)
     }
     else
     {
-        QRectF rect = PiecesBoundingRect(SelectedPieces());
+        QRectF const rect = PiecesBoundingRect(SelectedPieces());
 
         ui->doubleSpinBoxCurrentPieceBoxPositionX->setValue(
             UnitConvertor(rect.topLeft().x(), Unit::Px, TranslateUnit()));
@@ -4096,7 +4096,7 @@ void VPMainWindow::on_ConvertPaperSize()
     const qreal newTileTopMargin = UnitConvertor(tileTopMargin, m_oldLayoutUnit, layoutUnit);
     const qreal newTileBottomMargin = UnitConvertor(tileBottomMargin, m_oldLayoutUnit, layoutUnit);
 
-    qreal newGap = UnitConvertor(ui->doubleSpinBoxSheetPiecesGap->value(), m_oldLayoutUnit, layoutUnit);
+    qreal const newGap = UnitConvertor(ui->doubleSpinBoxSheetPiecesGap->value(), m_oldLayoutUnit, layoutUnit);
 
     m_oldLayoutUnit = layoutUnit;
     m_layout->LayoutSettings().SetUnit(layoutUnit);
@@ -4166,7 +4166,7 @@ void VPMainWindow::on_ExportLayout()
         return;
     }
 
-    QList<VPSheetPtr> sheets = m_layout->GetSheets();
+    QList<VPSheetPtr> const sheets = m_layout->GetSheets();
     if (sheets.isEmpty())
     {
         return;
@@ -4216,7 +4216,7 @@ void VPMainWindow::on_ExportSheet()
         return;
     }
 
-    VPSheetPtr sheet = m_layout->GetFocusedSheet();
+    VPSheetPtr const sheet = m_layout->GetFocusedSheet();
     if (sheet.isNull())
     {
         return;
@@ -4273,7 +4273,7 @@ void VPMainWindow::on_actionPrintLayout_triggered()
         return;
     }
 
-    QSharedPointer<QPrinter> printer = PreparePrinter(QPrinterInfo::defaultPrinter(), QPrinter::HighResolution);
+    QSharedPointer<QPrinter> const printer = PreparePrinter(QPrinterInfo::defaultPrinter(), QPrinter::HighResolution);
     if (printer.isNull())
     {
         qCritical("%s\n\n%s", qUtf8Printable(tr("Print error")),
@@ -4284,15 +4284,15 @@ void VPMainWindow::on_actionPrintLayout_triggered()
     printer->setCreator(QGuiApplication::applicationDisplayName() + QChar(QChar::Space) +
                         QCoreApplication::applicationVersion());
 
-    QList<VPSheetPtr> sheets = m_layout->GetSheets();
+    QList<VPSheetPtr> const sheets = m_layout->GetSheets();
     const VPSheetPtr &firstSheet = sheets.constFirst();
     if (firstSheet.isNull())
     {
         qCritical() << tr("Unable to get sheet page settings");
     }
 
-    qreal xScale = m_layout->LayoutSettings().HorizontalScale();
-    qreal yScale = m_layout->LayoutSettings().VerticalScale();
+    qreal const xScale = m_layout->LayoutSettings().HorizontalScale();
+    qreal const yScale = m_layout->LayoutSettings().VerticalScale();
 
     SetPrinterSheetPageSettings(printer, firstSheet, xScale, yScale);
     printer->setDocName(m_layout->LayoutSettings().GetTitle());
@@ -4324,7 +4324,7 @@ void VPMainWindow::on_actionPrintPreviewLayout_triggered()
         return;
     }
 
-    QSharedPointer<QPrinter> printer = PreparePrinter(QPrinterInfo::defaultPrinter());
+    QSharedPointer<QPrinter> const printer = PreparePrinter(QPrinterInfo::defaultPrinter());
     if (printer.isNull())
     {
         qCritical("%s\n\n%s", qUtf8Printable(tr("Print error")),
@@ -4335,7 +4335,7 @@ void VPMainWindow::on_actionPrintPreviewLayout_triggered()
     printer->setCreator(QGuiApplication::applicationDisplayName() + QChar(QChar::Space) +
                         QCoreApplication::applicationVersion());
 
-    QList<VPSheetPtr> sheets = m_layout->GetSheets();
+    QList<VPSheetPtr> const sheets = m_layout->GetSheets();
     const VPSheetPtr &firstSheet = sheets.constFirst();
     if (firstSheet.isNull())
     {
@@ -4343,8 +4343,8 @@ void VPMainWindow::on_actionPrintPreviewLayout_triggered()
         return;
     }
 
-    qreal xScale = m_layout->LayoutSettings().HorizontalScale();
-    qreal yScale = m_layout->LayoutSettings().VerticalScale();
+    qreal const xScale = m_layout->LayoutSettings().HorizontalScale();
+    qreal const yScale = m_layout->LayoutSettings().VerticalScale();
 
     SetPrinterSheetPageSettings(printer, firstSheet, xScale, yScale);
     printer->setDocName(m_layout->LayoutSettings().GetTitle());
@@ -4359,7 +4359,7 @@ void VPMainWindow::on_actionPrintPreviewLayout_triggered()
 //---------------------------------------------------------------------------------------------------------------------
 void VPMainWindow::on_actionPrintTiledLayout_triggered()
 {
-    QSharedPointer<QPrinter> printer = PreparePrinter(QPrinterInfo::defaultPrinter(), QPrinter::HighResolution);
+    QSharedPointer<QPrinter> const printer = PreparePrinter(QPrinterInfo::defaultPrinter(), QPrinter::HighResolution);
     if (printer.isNull())
     {
         qCritical("%s\n\n%s", qUtf8Printable(tr("Print error")),
@@ -4370,7 +4370,7 @@ void VPMainWindow::on_actionPrintTiledLayout_triggered()
     printer->setCreator(QGuiApplication::applicationDisplayName() + QChar(QChar::Space) +
                         QCoreApplication::applicationVersion());
 
-    QList<VPSheetPtr> sheets = m_layout->GetSheets();
+    QList<VPSheetPtr> const sheets = m_layout->GetSheets();
     const VPSheetPtr &firstSheet = sheets.constFirst();
     if (firstSheet.isNull())
     {
@@ -4397,7 +4397,7 @@ void VPMainWindow::on_actionPrintTiledLayout_triggered()
 //---------------------------------------------------------------------------------------------------------------------
 void VPMainWindow::on_actionPrintPreviewTiledLayout_triggered()
 {
-    QSharedPointer<QPrinter> printer = PreparePrinter(QPrinterInfo::defaultPrinter(), QPrinter::HighResolution);
+    QSharedPointer<QPrinter> const printer = PreparePrinter(QPrinterInfo::defaultPrinter(), QPrinter::HighResolution);
     if (printer.isNull())
     {
         qCritical("%s\n\n%s", qUtf8Printable(tr("Print error")),
@@ -4408,7 +4408,7 @@ void VPMainWindow::on_actionPrintPreviewTiledLayout_triggered()
     printer->setCreator(QGuiApplication::applicationDisplayName() + QChar(QChar::Space) +
                         QCoreApplication::applicationVersion());
 
-    QList<VPSheetPtr> sheets = m_layout->GetSheets();
+    QList<VPSheetPtr> const sheets = m_layout->GetSheets();
     const VPSheetPtr &firstSheet = sheets.constFirst();
     if (firstSheet.isNull())
     {
@@ -4441,7 +4441,7 @@ void VPMainWindow::on_printLayoutTiledPages(QPrinter *printer)
 //---------------------------------------------------------------------------------------------------------------------
 void VPMainWindow::on_actionPrintSheet_triggered()
 {
-    VPSheetPtr sheet = m_layout->GetFocusedSheet();
+    VPSheetPtr const sheet = m_layout->GetFocusedSheet();
     if (sheet.isNull())
     {
         return;
@@ -4452,7 +4452,7 @@ void VPMainWindow::on_actionPrintSheet_triggered()
         return;
     }
 
-    QSharedPointer<QPrinter> printer = PreparePrinter(QPrinterInfo::defaultPrinter(), QPrinter::HighResolution);
+    QSharedPointer<QPrinter> const printer = PreparePrinter(QPrinterInfo::defaultPrinter(), QPrinter::HighResolution);
     if (printer.isNull())
     {
         qCritical("%s\n\n%s", qUtf8Printable(tr("Print error")),
@@ -4463,8 +4463,8 @@ void VPMainWindow::on_actionPrintSheet_triggered()
     printer->setCreator(QGuiApplication::applicationDisplayName() + QChar(QChar::Space) +
                         QCoreApplication::applicationVersion());
 
-    qreal xScale = m_layout->LayoutSettings().HorizontalScale();
-    qreal yScale = m_layout->LayoutSettings().VerticalScale();
+    qreal const xScale = m_layout->LayoutSettings().HorizontalScale();
+    qreal const yScale = m_layout->LayoutSettings().VerticalScale();
 
     SetPrinterSheetPageSettings(printer, sheet, xScale, yScale);
     printer->setDocName(sheet->GetName());
@@ -4485,7 +4485,7 @@ void VPMainWindow::on_actionPrintSheet_triggered()
 //---------------------------------------------------------------------------------------------------------------------
 void VPMainWindow::on_actionPrintPreviewSheet_triggered()
 {
-    VPSheetPtr sheet = m_layout->GetFocusedSheet();
+    VPSheetPtr const sheet = m_layout->GetFocusedSheet();
     if (sheet.isNull())
     {
         return;
@@ -4496,7 +4496,7 @@ void VPMainWindow::on_actionPrintPreviewSheet_triggered()
         return;
     }
 
-    QSharedPointer<QPrinter> printer = PreparePrinter(QPrinterInfo::defaultPrinter());
+    QSharedPointer<QPrinter> const printer = PreparePrinter(QPrinterInfo::defaultPrinter());
     if (printer.isNull())
     {
         qCritical("%s\n\n%s", qUtf8Printable(tr("Print error")),
@@ -4507,8 +4507,8 @@ void VPMainWindow::on_actionPrintPreviewSheet_triggered()
     printer->setCreator(QGuiApplication::applicationDisplayName() + QChar(QChar::Space) +
                         QCoreApplication::applicationVersion());
 
-    qreal xScale = m_layout->LayoutSettings().HorizontalScale();
-    qreal yScale = m_layout->LayoutSettings().VerticalScale();
+    qreal const xScale = m_layout->LayoutSettings().HorizontalScale();
+    qreal const yScale = m_layout->LayoutSettings().VerticalScale();
 
     SetPrinterSheetPageSettings(printer, sheet, xScale, yScale);
     printer->setDocName(sheet->GetName());
@@ -4523,13 +4523,13 @@ void VPMainWindow::on_actionPrintPreviewSheet_triggered()
 //---------------------------------------------------------------------------------------------------------------------
 void VPMainWindow::on_actionPrintTiledSheet_triggered()
 {
-    VPSheetPtr sheet = m_layout->GetFocusedSheet();
+    VPSheetPtr const sheet = m_layout->GetFocusedSheet();
     if (sheet.isNull())
     {
         return;
     }
 
-    QSharedPointer<QPrinter> printer = PreparePrinter(QPrinterInfo::defaultPrinter(), QPrinter::HighResolution);
+    QSharedPointer<QPrinter> const printer = PreparePrinter(QPrinterInfo::defaultPrinter(), QPrinter::HighResolution);
     if (printer.isNull())
     {
         qCritical("%s\n\n%s", qUtf8Printable(tr("Print error")),
@@ -4559,13 +4559,13 @@ void VPMainWindow::on_actionPrintTiledSheet_triggered()
 //---------------------------------------------------------------------------------------------------------------------
 void VPMainWindow::on_actionPrintPreviewTiledSheet_triggered()
 {
-    VPSheetPtr sheet = m_layout->GetFocusedSheet();
+    VPSheetPtr const sheet = m_layout->GetFocusedSheet();
     if (sheet.isNull())
     {
         return;
     }
 
-    QSharedPointer<QPrinter> printer = PreparePrinter(QPrinterInfo::defaultPrinter(), QPrinter::HighResolution);
+    QSharedPointer<QPrinter> const printer = PreparePrinter(QPrinterInfo::defaultPrinter(), QPrinter::HighResolution);
     if (printer.isNull())
     {
         qCritical("%s\n\n%s", qUtf8Printable(tr("Print error")),
@@ -4589,7 +4589,7 @@ void VPMainWindow::on_actionPrintPreviewTiledSheet_triggered()
 //---------------------------------------------------------------------------------------------------------------------
 void VPMainWindow::on_printLayoutSheet(QPrinter *printer)
 {
-    VPSheetPtr sheet = m_layout->GetFocusedSheet();
+    VPSheetPtr const sheet = m_layout->GetFocusedSheet();
     if (sheet.isNull())
     {
         return;
@@ -4601,7 +4601,7 @@ void VPMainWindow::on_printLayoutSheet(QPrinter *printer)
 //---------------------------------------------------------------------------------------------------------------------
 void VPMainWindow::on_printLayoutSheetTiledPages(QPrinter *printer)
 {
-    VPSheetPtr sheet = m_layout->GetFocusedSheet();
+    VPSheetPtr const sheet = m_layout->GetFocusedSheet();
     if (sheet.isNull())
     {
         return;
@@ -4622,7 +4622,7 @@ void VPMainWindow::EditCurrentWatermark()
 {
     CleanWaterkmarkEditors();
 
-    QString watermarkFile = m_layout->LayoutSettings().WatermarkPath();
+    QString const watermarkFile = m_layout->LayoutSettings().WatermarkPath();
     if (not watermarkFile.isEmpty())
     {
         OpenWatermark(watermarkFile);
@@ -4633,7 +4633,7 @@ void VPMainWindow::EditCurrentWatermark()
 void VPMainWindow::LoadWatermark()
 {
     const QString filter(tr("Watermark files") + QStringLiteral(" (*.vwm)"));
-    QString dir = QDir::homePath();
+    QString const dir = QDir::homePath();
     qDebug("Run QFileDialog::getOpenFileName: dir = %s.", qUtf8Printable(dir));
     const QString filePath = QFileDialog::getOpenFileName(this, tr("Open file"), dir, filter, nullptr,
                                                           VAbstractApplication::VApp()->NativeFileDialog());
@@ -4685,7 +4685,7 @@ void VPMainWindow::AskDefaultSettings()
             dialog.setWindowModality(Qt::WindowModal);
             if (dialog.exec() == QDialog::Accepted)
             {
-                QString locale = dialog.Locale();
+                QString const locale = dialog.Locale();
                 settings->SetLocale(locale);
                 VAbstractApplication::VApp()->LoadTranslation(locale);
             }
@@ -4786,7 +4786,7 @@ void VPMainWindow::LayoutWarningPiecesSuperposition_toggled(bool checked)
         LayoutWasSaved(false);
         if (checked)
         {
-            VPSheetPtr sheet = m_layout->GetFocusedSheet();
+            VPSheetPtr const sheet = m_layout->GetFocusedSheet();
             if (not sheet.isNull())
             {
                 sheet->ValidateSuperpositionOfPieces();
@@ -4806,7 +4806,7 @@ void VPMainWindow::LayoutWarningPiecesOutOfBound_toggled(bool checked)
 
         if (checked)
         {
-            VPSheetPtr sheet = m_layout->GetFocusedSheet();
+            VPSheetPtr const sheet = m_layout->GetFocusedSheet();
             if (not sheet.isNull())
             {
                 sheet->ValidatePiecesOutOfBound();
@@ -4856,7 +4856,7 @@ void VPMainWindow::TogetherWithNotchesChanged(bool checked)
     m_layout->LayoutSettings().SetBoundaryTogetherWithNotches(checked);
     m_carrousel->RefreshPieceMiniature();
 
-    QList<VPSheetPtr> sheets = m_layout->GetAllSheets();
+    QList<VPSheetPtr> const sheets = m_layout->GetAllSheets();
     for (const auto &sheet : sheets)
     {
         if (sheet.isNull())
@@ -4864,7 +4864,7 @@ void VPMainWindow::TogetherWithNotchesChanged(bool checked)
             continue;
         }
 
-        QList<VPPiecePtr> pieces = sheet->GetPieces();
+        QList<VPPiecePtr> const pieces = sheet->GetPieces();
         for (const auto &piece : pieces)
         {
             if (not piece.isNull())

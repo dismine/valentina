@@ -153,7 +153,7 @@ auto TST_QmuTokenParser::IsSingleFromUser(const QString &formula) -> bool
 
     try
     {
-        QScopedPointer<qmu::QmuTokenParser> cal(new qmu::QmuTokenParser(formula, true, true));
+        QScopedPointer<qmu::QmuTokenParser> const cal(new qmu::QmuTokenParser(formula, true, true));
         tokens = cal->GetTokens();   // Tokens (variables, measurements)
         numbers = cal->GetNumbers(); // All numbers in expression
     }

@@ -106,7 +106,7 @@ void VDrawTool::SaveDialogChange(const QString &undoText)
 {
     Q_UNUSED(undoText)
     qCDebug(vTool, "Saving tool options after using dialog");
-    QDomElement oldDomElement = doc->elementById(m_id, getTagName());
+    QDomElement const oldDomElement = doc->elementById(m_id, getTagName());
     if (oldDomElement.isElement())
     {
         QDomElement newDomElement = oldDomElement.cloneNode().toElement();
@@ -150,7 +150,7 @@ void VDrawTool::AddToFile()
 void VDrawTool::SaveOption(QSharedPointer<VGObject> &obj)
 {
     qCDebug(vTool, "Saving tool options");
-    QDomElement oldDomElement = doc->elementById(m_id, getTagName());
+    QDomElement const oldDomElement = doc->elementById(m_id, getTagName());
     if (oldDomElement.isElement())
     {
         QDomElement newDomElement = oldDomElement.cloneNode().toElement();

@@ -34,7 +34,7 @@
 //---------------------------------------------------------------------------------------------------------------------
 inline void testMessageOutput(QtMsgType type, const QMessageLogContext &context, const QString &msg)
 {
-    QByteArray localMsg = msg.toLocal8Bit();
+    QByteArray const localMsg = msg.toLocal8Bit();
     switch (type)
     {
         case QtDebugMsg:
@@ -57,9 +57,9 @@ inline void testMessageOutput(QtMsgType type, const QMessageLogContext &context,
 //---------------------------------------------------------------------------------------------------------------------
 auto main(int argc, char *argv[]) -> int
 {
-    QCoreApplication a(argc, argv);
+    QCoreApplication const a(argc, argv);
     qInstallMessageHandler(testMessageOutput);
-    qmu::Test::QmuParserTester pt;
+    qmu::Test::QmuParserTester const pt;
     QTimer::singleShot(0, &pt, &qmu::Test::QmuParserTester::Run);
     return a.exec();
 }

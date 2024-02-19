@@ -286,7 +286,7 @@ void DialogEditWrongFormula::PutVal(QTableWidgetItem *item)
     QTextCursor cursor = ui->plainTextEditFormula->textCursor();
     if (ui->radioButtonFunctions->isChecked())
     {
-        QString function = valItem->data(Qt::UserRole).toString();
+        QString const function = valItem->data(Qt::UserRole).toString();
         const VTranslateVars *trVars = VAbstractApplication::VApp()->TrVars();
         const QMap<QString, QString> functionsArguments = trVars->GetFunctionsArguments();
         cursor.insertText(valItem->text() + functionsArguments.value(function));
@@ -696,7 +696,7 @@ void DialogEditWrongFormula::ShowMeasurements(const QList<QSharedPointer<VMeasur
                 itemFullName->setText(QString());
                 if (VKnownMeasurementsDatabase *db = VAbstractApplication::VApp()->KnownMeasurementsDatabase())
                 {
-                    VKnownMeasurements known = db->KnownMeasurements(var->GetKnownMeasurementsId());
+                    VKnownMeasurements const known = db->KnownMeasurements(var->GetKnownMeasurementsId());
                     if (known.IsValid())
                     {
                         itemFullName->setText(known.Measurement(var->GetName()).fullName);
@@ -804,7 +804,7 @@ void DialogEditWrongFormula::SetMeasurementDescription(QTableWidgetItem *item, c
     {
         if (VKnownMeasurementsDatabase *db = VAbstractApplication::VApp()->KnownMeasurementsDatabase())
         {
-            VKnownMeasurements known = db->KnownMeasurements(stable->GetKnownMeasurementsId());
+            VKnownMeasurements const known = db->KnownMeasurements(stable->GetKnownMeasurementsId());
             if (known.IsValid())
             {
                 description = known.Measurement(stable->GetName()).description;
@@ -828,8 +828,8 @@ void DialogEditWrongFormula::SetPieceAreaDescription(QTableWidgetItem *item, con
 
     try
     {
-        VPiece piece = m_data->GetPiece(var->GetPieceId());
-        QString name = piece.GetName();
+        VPiece const piece = m_data->GetPiece(var->GetPieceId());
+        QString const name = piece.GetName();
         if (not name.isEmpty())
         {
             description += QStringLiteral(" '%1'").arg(piece.GetName());

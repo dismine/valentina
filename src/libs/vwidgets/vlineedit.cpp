@@ -72,9 +72,9 @@ auto MultiSelectCompleter::pathFromIndex(const QModelIndex &index) const -> QStr
 {
     QString path = QCompleter::pathFromIndex(index);
 
-    QString text = static_cast<QLineEdit *>(widget())->text();
+    QString const text = static_cast<QLineEdit *>(widget())->text();
 
-    vsizetype pos = text.lastIndexOf(',');
+    vsizetype const pos = text.lastIndexOf(',');
     if (pos >= 0)
     {
         path = text.left(pos) + ", " + path;

@@ -82,7 +82,7 @@ VToolCutSpline::VToolCutSpline(const VToolCutInitData &initData, QGraphicsItem *
 void VToolCutSpline::SetDialog()
 {
     SCASSERT(not m_dialog.isNull())
-    QPointer<DialogCutSpline> dialogTool = qobject_cast<DialogCutSpline *>(m_dialog);
+    QPointer<DialogCutSpline> const dialogTool = qobject_cast<DialogCutSpline *>(m_dialog);
     SCASSERT(not dialogTool.isNull())
     const QSharedPointer<VPointF> point = VAbstractTool::data.GeometricObject<VPointF>(m_id);
     dialogTool->SetFormula(formula);
@@ -147,7 +147,7 @@ auto VToolCutSpline::Create(VToolCutInitData &initData) -> VToolCutSpline *
     const qreal result = CheckFormula(initData.id, initData.formula, initData.data);
 
     QPointF spl1p2, spl1p3, spl2p2, spl2p3;
-    QPointF point =
+    QPointF const point =
         spl->CutSpline(VAbstractValApplication::VApp()->toPixel(result), spl1p2, spl1p3, spl2p2, spl2p3, initData.name);
 
     auto *p = new VPointF(point, initData.name, initData.mx, initData.my);
@@ -296,7 +296,7 @@ auto VToolCutSpline::MakeToolTip() const -> QString
     const QSharedPointer<VPointF> p = VAbstractTool::data.GeometricObject<VPointF>(m_id);
 
     QPointF spl1p2, spl1p3, spl2p2, spl2p3;
-    QPointF point =
+    QPointF const point =
         spl->CutSpline(VAbstractValApplication::VApp()->toPixel(length), spl1p2, spl1p3, spl2p2, spl2p3, p->name());
 
     VSpline spline1 = VSpline(spl->GetP1(), spl1p2, spl1p3, VPointF(point));

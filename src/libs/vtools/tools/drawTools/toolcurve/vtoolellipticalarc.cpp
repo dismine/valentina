@@ -202,7 +202,7 @@ auto VToolEllipticalArc::getTagName() const -> QString
 //---------------------------------------------------------------------------------------------------------------------
 auto VToolEllipticalArc::GetFormulaRadius1() const -> VFormula
 {
-    QSharedPointer<VEllipticalArc> elArc = VAbstractTool::data.GeometricObject<VEllipticalArc>(m_id);
+    QSharedPointer<VEllipticalArc> const elArc = VAbstractTool::data.GeometricObject<VEllipticalArc>(m_id);
     SCASSERT(elArc.isNull() == false)
 
     VFormula radius1(elArc->GetFormulaRadius1(), getData());
@@ -218,7 +218,7 @@ void VToolEllipticalArc::SetFormulaRadius1(const VFormula &value)
     if (!value.error())
     {
         QSharedPointer<VGObject> obj = VAbstractTool::data.GetGObject(m_id);
-        QSharedPointer<VEllipticalArc> elArc = qSharedPointerDynamicCast<VEllipticalArc>(obj);
+        QSharedPointer<VEllipticalArc> const elArc = qSharedPointerDynamicCast<VEllipticalArc>(obj);
         elArc->SetFormulaRadius1(value.GetFormula(FormulaType::FromUser), value.getDoubleValue());
         SaveOption(obj);
     }
@@ -227,7 +227,7 @@ void VToolEllipticalArc::SetFormulaRadius1(const VFormula &value)
 //---------------------------------------------------------------------------------------------------------------------
 auto VToolEllipticalArc::GetFormulaRadius2() const -> VFormula
 {
-    QSharedPointer<VEllipticalArc> elArc = VAbstractTool::data.GeometricObject<VEllipticalArc>(m_id);
+    QSharedPointer<VEllipticalArc> const elArc = VAbstractTool::data.GeometricObject<VEllipticalArc>(m_id);
     SCASSERT(elArc.isNull() == false)
 
     VFormula radius2(elArc->GetFormulaRadius2(), getData());
@@ -243,7 +243,7 @@ void VToolEllipticalArc::SetFormulaRadius2(const VFormula &value)
     if (!value.error())
     {
         QSharedPointer<VGObject> obj = VAbstractTool::data.GetGObject(m_id);
-        QSharedPointer<VEllipticalArc> elArc = qSharedPointerDynamicCast<VEllipticalArc>(obj);
+        QSharedPointer<VEllipticalArc> const elArc = qSharedPointerDynamicCast<VEllipticalArc>(obj);
         elArc->SetFormulaRadius2(value.GetFormula(FormulaType::FromUser), value.getDoubleValue());
         SaveOption(obj);
     }
@@ -252,7 +252,7 @@ void VToolEllipticalArc::SetFormulaRadius2(const VFormula &value)
 //---------------------------------------------------------------------------------------------------------------------
 auto VToolEllipticalArc::GetFormulaF1() const -> VFormula
 {
-    QSharedPointer<VEllipticalArc> elArc = VAbstractTool::data.GeometricObject<VEllipticalArc>(m_id);
+    QSharedPointer<VEllipticalArc> const elArc = VAbstractTool::data.GeometricObject<VEllipticalArc>(m_id);
     SCASSERT(elArc.isNull() == false)
 
     VFormula f1(elArc->GetFormulaF1(), getData());
@@ -268,7 +268,7 @@ void VToolEllipticalArc::SetFormulaF1(const VFormula &value)
     if (!value.error())
     {
         QSharedPointer<VGObject> obj = VAbstractTool::data.GetGObject(m_id);
-        QSharedPointer<VEllipticalArc> elArc = qSharedPointerDynamicCast<VEllipticalArc>(obj);
+        QSharedPointer<VEllipticalArc> const elArc = qSharedPointerDynamicCast<VEllipticalArc>(obj);
         elArc->SetFormulaF1(value.GetFormula(FormulaType::FromUser), value.getDoubleValue());
         SaveOption(obj);
     }
@@ -277,7 +277,7 @@ void VToolEllipticalArc::SetFormulaF1(const VFormula &value)
 //---------------------------------------------------------------------------------------------------------------------
 auto VToolEllipticalArc::GetFormulaF2() const -> VFormula
 {
-    QSharedPointer<VEllipticalArc> elArc = VAbstractTool::data.GeometricObject<VEllipticalArc>(m_id);
+    QSharedPointer<VEllipticalArc> const elArc = VAbstractTool::data.GeometricObject<VEllipticalArc>(m_id);
     SCASSERT(elArc.isNull() == false)
 
     VFormula f2(elArc->GetFormulaF2(), getData());
@@ -293,7 +293,7 @@ void VToolEllipticalArc::SetFormulaF2(const VFormula &value)
     if (!value.error())
     {
         QSharedPointer<VGObject> obj = VAbstractTool::data.GetGObject(m_id);
-        QSharedPointer<VEllipticalArc> elArc = qSharedPointerDynamicCast<VEllipticalArc>(obj);
+        QSharedPointer<VEllipticalArc> const elArc = qSharedPointerDynamicCast<VEllipticalArc>(obj);
         elArc->SetFormulaF2(value.GetFormula(FormulaType::FromUser), value.getDoubleValue());
         SaveOption(obj);
     }
@@ -302,7 +302,7 @@ void VToolEllipticalArc::SetFormulaF2(const VFormula &value)
 //---------------------------------------------------------------------------------------------------------------------
 auto VToolEllipticalArc::GetFormulaRotationAngle() const -> VFormula
 {
-    QSharedPointer<VEllipticalArc> elArc = VAbstractTool::data.GeometricObject<VEllipticalArc>(m_id);
+    QSharedPointer<VEllipticalArc> const elArc = VAbstractTool::data.GeometricObject<VEllipticalArc>(m_id);
     SCASSERT(elArc.isNull() == false)
 
     VFormula rotationAngle(elArc->GetFormulaRotationAngle(), getData());
@@ -318,7 +318,7 @@ void VToolEllipticalArc::SetFormulaRotationAngle(const VFormula &value)
     if (!value.error())
     {
         QSharedPointer<VGObject> obj = VAbstractTool::data.GetGObject(m_id);
-        QSharedPointer<VEllipticalArc> elArc = qSharedPointerDynamicCast<VEllipticalArc>(obj);
+        QSharedPointer<VEllipticalArc> const elArc = qSharedPointerDynamicCast<VEllipticalArc>(obj);
         elArc->SetFormulaRotationAngle(value.GetFormula(FormulaType::FromUser), value.getDoubleValue());
         SaveOption(obj);
     }
@@ -327,7 +327,7 @@ void VToolEllipticalArc::SetFormulaRotationAngle(const VFormula &value)
 //---------------------------------------------------------------------------------------------------------------------
 auto VToolEllipticalArc::GetApproximationScale() const -> qreal
 {
-    QSharedPointer<VEllipticalArc> arc = VAbstractTool::data.GeometricObject<VEllipticalArc>(m_id);
+    QSharedPointer<VEllipticalArc> const arc = VAbstractTool::data.GeometricObject<VEllipticalArc>(m_id);
     SCASSERT(arc.isNull() == false)
 
     return arc->GetApproximationScale();
@@ -337,7 +337,7 @@ auto VToolEllipticalArc::GetApproximationScale() const -> qreal
 void VToolEllipticalArc::SetApproximationScale(qreal value)
 {
     QSharedPointer<VGObject> obj = VAbstractTool::data.GetGObject(m_id);
-    QSharedPointer<VEllipticalArc> arc = qSharedPointerDynamicCast<VEllipticalArc>(obj);
+    QSharedPointer<VEllipticalArc> const arc = qSharedPointerDynamicCast<VEllipticalArc>(obj);
     arc->SetApproximationScale(value);
     SaveOption(obj);
 }
@@ -409,7 +409,7 @@ void VToolEllipticalArc::SaveOptions(QDomElement &tag, QSharedPointer<VGObject> 
 {
     VAbstractSpline::SaveOptions(tag, obj);
 
-    QSharedPointer<VEllipticalArc> elArc = qSharedPointerDynamicCast<VEllipticalArc>(obj);
+    QSharedPointer<VEllipticalArc> const elArc = qSharedPointerDynamicCast<VEllipticalArc>(obj);
     SCASSERT(elArc.isNull() == false)
 
     doc->SetAttribute(tag, AttrType, ToolType);

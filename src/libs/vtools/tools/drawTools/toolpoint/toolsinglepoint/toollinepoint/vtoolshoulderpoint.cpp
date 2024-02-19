@@ -194,7 +194,7 @@ auto VToolShoulderPoint::Create(VToolShoulderPointInitData &initData) -> VToolSh
 
     const qreal result = CheckFormula(initData.id, initData.formula, initData.data);
 
-    QPointF fPoint = VToolShoulderPoint::FindPoint(
+    QPointF const fPoint = VToolShoulderPoint::FindPoint(
         static_cast<QPointF>(*firstPoint), static_cast<QPointF>(*secondPoint), static_cast<QPointF>(*shoulderPoint),
         VAbstractValApplication::VApp()->toPixel(result));
 

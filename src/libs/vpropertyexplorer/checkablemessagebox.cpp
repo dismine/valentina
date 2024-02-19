@@ -300,7 +300,7 @@ auto CheckableMessageBox::askAgain(QSettings *settings, const QString &settingsS
     if (settings)
     {
         settings->beginGroup(QLatin1String(kDoNotAskAgainKey));
-        bool shouldNotAsk = settings->value(settingsSubKey, false).toBool();
+        bool const shouldNotAsk = settings->value(settingsSubKey, false).toBool();
         settings->endGroup();
         if (shouldNotAsk)
         {

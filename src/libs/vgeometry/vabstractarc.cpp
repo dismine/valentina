@@ -242,7 +242,7 @@ auto VAbstractArc::GetPath() const -> QPainterPath
     }
     else
     {
-        QPointF center = GetCenter().toQPointF();
+        QPointF const center = GetCenter().toQPointF();
         QRectF rec = QRectF(center.x(), center.y(), accuracyPointOnLine * 2, accuracyPointOnLine * 2);
         rec.translate(-rec.center().x(), -rec.center().y());
         path.addEllipse(rec);

@@ -41,7 +41,7 @@ VPUndoMovePieceOnSheet::VPUndoMovePieceOnSheet(const VPSheetPtr &sheet, const VP
 
     m_oldSheet = piece->Sheet();
 
-    VPLayoutPtr layout = piece->Layout();
+    VPLayoutPtr const layout = piece->Layout();
     if (not layout.isNull())
     {
         m_followGrainline = layout->LayoutSettings().GetFollowGrainline();
@@ -53,7 +53,7 @@ VPUndoMovePieceOnSheet::VPUndoMovePieceOnSheet(const VPSheetPtr &sheet, const VP
 //---------------------------------------------------------------------------------------------------------------------
 void VPUndoMovePieceOnSheet::undo()
 {
-    VPSheetPtr sourceSheet = m_oldSheet.toStrongRef();
+    VPSheetPtr const sourceSheet = m_oldSheet.toStrongRef();
     VPSheetPtr activateSheet = sourceSheet;
     if (activateSheet.isNull())
     {
@@ -71,7 +71,7 @@ void VPUndoMovePieceOnSheet::undo()
         }
     }
 
-    VPPiecePtr piece = m_piece.toStrongRef();
+    VPPiecePtr const piece = m_piece.toStrongRef();
     if (not piece.isNull())
     {
         piece->SetSheet(sourceSheet);
@@ -88,7 +88,7 @@ void VPUndoMovePieceOnSheet::undo()
 //---------------------------------------------------------------------------------------------------------------------
 void VPUndoMovePieceOnSheet::redo()
 {
-    VPSheetPtr sourceSheet = m_sheet.toStrongRef();
+    VPSheetPtr const sourceSheet = m_sheet.toStrongRef();
     VPSheetPtr activateSheet = sourceSheet;
     if (activateSheet.isNull())
     {
@@ -106,7 +106,7 @@ void VPUndoMovePieceOnSheet::redo()
         }
     }
 
-    VPPiecePtr piece = m_piece.toStrongRef();
+    VPPiecePtr const piece = m_piece.toStrongRef();
     if (not piece.isNull())
     {
         piece->SetSheet(sourceSheet);

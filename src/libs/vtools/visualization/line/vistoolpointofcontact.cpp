@@ -92,8 +92,8 @@ void VisToolPointOfContact::RefreshGeometry()
                 }
                 else if (GetMode() == Mode::Creation)
                 {
-                    QLineF cursorLine(static_cast<QPointF>(*third), ScenePos());
-                    qreal radius = cursorLine.length();
+                    QLineF const cursorLine(static_cast<QPointF>(*third), ScenePos());
+                    qreal const radius = cursorLine.length();
 
                     QPointF fPoint;
                     VToolPointOfContact::FindPoint(radius, static_cast<QPointF>(*third), static_cast<QPointF>(*first),

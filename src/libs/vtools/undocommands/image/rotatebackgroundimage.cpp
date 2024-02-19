@@ -38,7 +38,7 @@ RotateBackgroundImage::RotateBackgroundImage(QUuid id, const QTransform &matrix,
 {
     setText(tr("rotate background image"));
 
-    VBackgroundPatternImage image = doc->GetBackgroundImage(m_id);
+    VBackgroundPatternImage const image = doc->GetBackgroundImage(m_id);
 
     m_oldMatrix = image.Matrix();
 }

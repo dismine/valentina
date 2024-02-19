@@ -602,7 +602,7 @@ auto VDxfEngine::GetPenStyle() -> std::string
 //---------------------------------------------------------------------------------------------------------------------
 auto VDxfEngine::GetPenColor() -> int
 {
-    QColor color = state->pen().color();
+    QColor const color = state->pen().color();
 
     if (color == Qt::black)
     {
@@ -851,8 +851,8 @@ void VDxfEngine::ExportAAMAOutline(const QSharedPointer<dx_ifaceBlock> &detailBl
     {
         const QVector<VLayoutPassmark> passmarks = detail.GetMappedPassmarks();
 
-        bool seamAllowance = detail.IsSeamAllowance() && !detail.IsSeamAllowanceBuiltIn();
-        bool builtInSeamAllowance = detail.IsSeamAllowance() && detail.IsSeamAllowanceBuiltIn();
+        bool const seamAllowance = detail.IsSeamAllowance() && !detail.IsSeamAllowanceBuiltIn();
+        bool const builtInSeamAllowance = detail.IsSeamAllowance() && detail.IsSeamAllowanceBuiltIn();
 
         VBoundary boundary(points, seamAllowance, builtInSeamAllowance);
         boundary.SetPieceName(detail.GetName());
@@ -910,7 +910,7 @@ void VDxfEngine::ExportAAMADrawSewLine(const QSharedPointer<dx_ifaceBlock> &deta
     if (detail.IsSeamAllowance() && not detail.IsHideMainPath() && not detail.IsSeamAllowanceBuiltIn())
     {
         const UTF8STRING &layer = not detail.IsSewLineOnDrawing() ? *layer14 : *layer8;
-        QVector<VLayoutPoint> points = detail.GetMappedFullContourPoints();
+        QVector<VLayoutPoint> const points = detail.GetMappedFullContourPoints();
 
         auto DrawPolygon = [this, detailBlock, layer](const QVector<VLayoutPoint> &points, bool forceClosed)
         {
@@ -927,8 +927,8 @@ void VDxfEngine::ExportAAMADrawSewLine(const QSharedPointer<dx_ifaceBlock> &deta
         {
             const QVector<VLayoutPassmark> passmarks = detail.GetMappedPassmarks();
 
-            bool seamAllowance = detail.IsSeamAllowance() && detail.IsSeamAllowanceBuiltIn();
-            bool builtInSeamAllowance = detail.IsSeamAllowance() && detail.IsSeamAllowanceBuiltIn();
+            bool const seamAllowance = detail.IsSeamAllowance() && detail.IsSeamAllowanceBuiltIn();
+            bool const builtInSeamAllowance = detail.IsSeamAllowance() && detail.IsSeamAllowanceBuiltIn();
 
             VBoundary boundary(points, seamAllowance, builtInSeamAllowance);
             boundary.SetPieceName(detail.GetName());
@@ -1039,7 +1039,7 @@ void VDxfEngine::ExportAAMAIntcut(const QSharedPointer<dx_ifaceBlock> &detailBlo
         ExportCurvePoints(detailBlock, points);
     };
 
-    QVector<VLayoutPiecePath> drawIntCut = detail.MappedInternalPathsForCut(true);
+    QVector<VLayoutPiecePath> const drawIntCut = detail.MappedInternalPathsForCut(true);
     for (auto &intCut : drawIntCut)
     {
         QVector<VLayoutPoint> points = intCut.Points();
@@ -1084,7 +1084,7 @@ void VDxfEngine::ExportAAMANotch(const QSharedPointer<dx_ifaceBlock> &detailBloc
                 if (!VGObject::IsPointOnLineviaPDP(passmark.baseLine.p1(), mirrorLine.p1(), mirrorLine.p2()))
                 {
                     const QTransform matrix = VGObject::FlippingMatrix(mirrorLine);
-                    QLineF baseLine = matrix.map(passmark.baseLine);
+                    QLineF const baseLine = matrix.map(passmark.baseLine);
                     ExportNotch(baseLine.p1(), baseLine.length(), baseLine.angle());
                 }
             }
@@ -1245,7 +1245,7 @@ void VDxfEngine::ExportStyleSystemText(const QSharedPointer<dx_iface> &input, co
             for (int j = 0; j < strings.size(); ++j)
             {
                 const qreal height = ToPixel(AAMATextHeight * m_yscale, m_varInsunits);
-                QPointF pos(0, GetSize().height() - height * (static_cast<int>(strings.size()) - j - 1));
+                QPointF const pos(0, GetSize().height() - height * (static_cast<int>(strings.size()) - j - 1));
                 input->AddEntity(AAMAText(pos, strings.at(j), *layer1));
             }
             return;
@@ -1392,8 +1392,8 @@ void VDxfEngine::ExportASTMPieceBoundary(const QSharedPointer<dx_ifaceBlock> &de
     {
         const QVector<VLayoutPassmark> passmarks = detail.GetMappedPassmarks();
 
-        bool seamAllowance = detail.IsSeamAllowance() && !detail.IsSeamAllowanceBuiltIn();
-        bool builtInSeamAllowance = detail.IsSeamAllowance() && detail.IsSeamAllowanceBuiltIn();
+        bool const seamAllowance = detail.IsSeamAllowance() && !detail.IsSeamAllowanceBuiltIn();
+        bool const builtInSeamAllowance = detail.IsSeamAllowance() && detail.IsSeamAllowanceBuiltIn();
 
         VBoundary boundary(pieceBoundary, seamAllowance, builtInSeamAllowance);
         boundary.SetPieceName(detail.GetName());
@@ -1435,7 +1435,7 @@ void VDxfEngine::ExportASTMSewLine(const QSharedPointer<dx_ifaceBlock> &detailBl
 {
     if (detail.IsSeamAllowance() && not detail.IsHideMainPath() && not detail.IsSeamAllowanceBuiltIn())
     {
-        QVector<VLayoutPoint> sewLine = detail.GetMappedFullContourPoints();
+        QVector<VLayoutPoint> const sewLine = detail.GetMappedFullContourPoints();
 
         auto DrawPolygon = [this, detailBlock](const QVector<VLayoutPoint> &points, bool forceClosed)
         {
@@ -1459,8 +1459,8 @@ void VDxfEngine::ExportASTMSewLine(const QSharedPointer<dx_ifaceBlock> &detailBl
         {
             const QVector<VLayoutPassmark> passmarks = detail.GetMappedPassmarks();
 
-            bool seamAllowance = detail.IsSeamAllowance() && detail.IsSeamAllowanceBuiltIn();
-            bool builtInSeamAllowance = detail.IsSeamAllowance() && detail.IsSeamAllowanceBuiltIn();
+            bool const seamAllowance = detail.IsSeamAllowance() && detail.IsSeamAllowanceBuiltIn();
+            bool const builtInSeamAllowance = detail.IsSeamAllowance() && detail.IsSeamAllowanceBuiltIn();
 
             VBoundary boundary(sewLine, seamAllowance, builtInSeamAllowance);
             boundary.SetPieceName(detail.GetName());
@@ -1499,7 +1499,8 @@ void VDxfEngine::ExportASTMDrawInternalPaths(const QSharedPointer<dx_ifaceBlock>
 
         if (notMirrored && !points.isEmpty())
         {
-            QPointF pos(points.constFirst().x(), points.constFirst().y() - ToPixel(AAMATextHeight, m_varInsunits));
+            QPointF const pos(points.constFirst().x(),
+                              points.constFirst().y() - ToPixel(AAMATextHeight, m_varInsunits));
             detailBlock->ent.push_back(AAMAText(pos, QStringLiteral("NM"), *layer8));
         }
 
@@ -1544,7 +1545,8 @@ void VDxfEngine::ExportASTMDrawPlaceLabels(const QSharedPointer<dx_ifaceBlock> &
 
             if (notMirrored && !points.isEmpty())
             {
-                QPointF pos(points.constFirst().x(), points.constFirst().y() - ToPixel(AAMATextHeight, m_varInsunits));
+                QPointF const pos(points.constFirst().x(),
+                                  points.constFirst().y() - ToPixel(AAMATextHeight, m_varInsunits));
                 detailBlock->ent.push_back(AAMAText(pos, QStringLiteral("NM"), *layer8));
             }
 
@@ -1597,7 +1599,8 @@ void VDxfEngine::ExportASTMInternalCutout(const QSharedPointer<dx_ifaceBlock> &d
 
         if (notMirrored && !points.isEmpty())
         {
-            QPointF pos(points.constFirst().x(), points.constFirst().y() - ToPixel(AAMATextHeight, m_varInsunits));
+            QPointF const pos(points.constFirst().x(),
+                              points.constFirst().y() - ToPixel(AAMATextHeight, m_varInsunits));
             detailBlock->ent.push_back(AAMAText(pos, QStringLiteral("NM"), *layer11));
         }
 
@@ -1611,7 +1614,7 @@ void VDxfEngine::ExportASTMInternalCutout(const QSharedPointer<dx_ifaceBlock> &d
         }
     };
 
-    QVector<VLayoutPiecePath> drawIntCut = detail.MappedInternalPathsForCut(true);
+    QVector<VLayoutPiecePath> const drawIntCut = detail.MappedInternalPathsForCut(true);
     for (auto &intCut : drawIntCut)
     {
         QVector<VLayoutPoint> points = intCut.Points();
@@ -1801,8 +1804,8 @@ auto VDxfEngine::ExportASTMNotch(const VLayoutPassmark &passmark) -> DRW_ASTMNot
             break;
         case PassmarkLineType::BoxMark:
         { // Castle Notch
-            QPointF start = passmark.lines.constFirst().p1();
-            QPointF end = passmark.lines.constLast().p2();
+            QPointF const start = passmark.lines.constFirst().p1();
+            QPointF const end = passmark.lines.constLast().p2();
 
             notch->layer = *layer81;
             notch->thickness = FromPixel(QLineF(start, end).length(), m_varInsunits); // width
@@ -1810,8 +1813,8 @@ auto VDxfEngine::ExportASTMNotch(const VLayoutPassmark &passmark) -> DRW_ASTMNot
         }
         case PassmarkLineType::UMark:
         { // U-Notch
-            QPointF start = passmark.lines.constFirst().p1();
-            QPointF end = passmark.lines.constLast().p2();
+            QPointF const start = passmark.lines.constFirst().p1();
+            QPointF const end = passmark.lines.constLast().p2();
 
             notch->thickness = FromPixel(QLineF(start, end).length(), m_varInsunits); // width
 
@@ -1848,9 +1851,9 @@ auto VDxfEngine::ExportASTMNotch(const VLayoutPassmark &passmark) -> DRW_ASTMNot
 auto VDxfEngine::ExportASTMNotchDataDependecy(const VLayoutPassmark &passmark, const UTF8STRING &notchLayer,
                                               const VLayoutPiece &detail) -> DRW_ATTDEF *
 {
-    QVector<VLayoutPoint> boundary = not detail.IsSeamAllowanceBuiltIn() && !passmark.isBuiltIn
-                                         ? detail.GetMappedSeamAllowancePoints()
-                                         : detail.GetMappedContourPoints();
+    QVector<VLayoutPoint> const boundary = not detail.IsSeamAllowanceBuiltIn() && !passmark.isBuiltIn
+                                               ? detail.GetMappedSeamAllowancePoints()
+                                               : detail.GetMappedContourPoints();
 
     const QPointF center = passmark.baseLine.p1();
     QPointF referencePoint;

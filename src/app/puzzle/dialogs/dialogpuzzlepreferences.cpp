@@ -92,7 +92,7 @@ void DialogPuzzlePreferences::showEvent(QShowEvent *event)
     }
     // do your init stuff here
 
-    QSize sz = VAbstractApplication::VApp()->Settings()->GetPreferenceDialogSize();
+    QSize const sz = VAbstractApplication::VApp()->Settings()->GetPreferenceDialogSize();
     if (not sz.isEmpty())
     {
         resize(sz);
@@ -180,6 +180,6 @@ void DialogPuzzlePreferences::PageChanged(QListWidgetItem *current, QListWidgetI
     {
         current = previous;
     }
-    int rowIndex = ui->contentsWidget->row(current);
+    int const rowIndex = ui->contentsWidget->row(current);
     ui->pagesWidget->setCurrentIndex(rowIndex);
 }

@@ -75,7 +75,7 @@ void VToolEndLine::SetDialog()
 {
     SCASSERT(not m_dialog.isNull())
     m_dialog->setModal(true);
-    QPointer<DialogEndLine> dialogTool = qobject_cast<DialogEndLine *>(m_dialog);
+    QPointer<DialogEndLine> const dialogTool = qobject_cast<DialogEndLine *>(m_dialog);
     SCASSERT(not dialogTool.isNull())
     const QSharedPointer<VPointF> p = VAbstractTool::data.GeometricObject<VPointF>(m_id);
     dialogTool->SetTypeLine(m_lineType);

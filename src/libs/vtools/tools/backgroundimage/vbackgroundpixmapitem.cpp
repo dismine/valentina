@@ -60,7 +60,7 @@ void VBackgroundPixmapItem::SetTransformationMode(Qt::TransformationMode mode)
 //---------------------------------------------------------------------------------------------------------------------
 auto VBackgroundPixmapItem::boundingRect() const -> QRectF
 {
-    QPixmap pixmap = Pixmap();
+    QPixmap const pixmap = Pixmap();
     if (pixmap.isNull())
     {
         return {};
@@ -169,13 +169,13 @@ void VBackgroundPixmapItem::mouseReleaseEvent(QGraphicsSceneMouseEvent *event)
 //---------------------------------------------------------------------------------------------------------------------
 void VBackgroundPixmapItem::UpdateShape() const
 {
-    QPixmap pixmap = Pixmap();
+    QPixmap const pixmap = Pixmap();
     m_shape = QPainterPath();
     switch (m_shapeMode)
     {
         case ShapeMode::MaskShape:
         {
-            QBitmap mask = pixmap.mask();
+            QBitmap const mask = pixmap.mask();
             if (!mask.isNull())
             {
                 m_shape = qt_regionToPath(QRegion(mask));
@@ -205,7 +205,7 @@ auto VBackgroundPixmapItem::Pixmap() const -> QPixmap
     {
         m_pixmap = QPixmap();
 
-        VBackgroundPatternImage image = Image();
+        VBackgroundPatternImage const image = Image();
         if (not image.IsValid())
         {
             m_pixmap = InvalidImage();
@@ -227,7 +227,7 @@ auto VBackgroundPixmapItem::Pixmap() const -> QPixmap
         if (not image.FilePath().isEmpty())
         {
             QImageReader imageReader(image.FilePath());
-            QImage image = imageReader.read();
+            QImage const image = imageReader.read();
             if (not image.isNull())
             {
                 m_pixmap = QPixmap::fromImage(ScaleImage(image));
@@ -251,7 +251,7 @@ auto VBackgroundPixmapItem::Pixmap() const -> QPixmap
             buffer.open(QIODevice::ReadOnly);
 
             QImageReader imageReader(&buffer);
-            QImage image = imageReader.read();
+            QImage const image = imageReader.read();
             if (not image.isNull())
             {
                 m_pixmap = QPixmap::fromImage(ScaleImage(image));

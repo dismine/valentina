@@ -264,7 +264,7 @@ auto DialogMeasurementsCSVColumns::ColumnHeader(int column) const -> QString
             case MultisizeMeasurementsColumns::ShiftA:
                 if (not m_dimensions.empty())
                 {
-                    MeasurementDimension_p dimension = m_dimensions.at(0);
+                    MeasurementDimension_p const dimension = m_dimensions.at(0);
                     return QCoreApplication::translate("DialogMeasurementsCSVColumns", "Shift", "measurement column") +
                            suffix.arg(dimension->Name());
                 }
@@ -275,7 +275,7 @@ auto DialogMeasurementsCSVColumns::ColumnHeader(int column) const -> QString
             case MultisizeMeasurementsColumns::ShiftB:
                 if (m_dimensions.size() > 1)
                 {
-                    MeasurementDimension_p dimension = m_dimensions.at(1);
+                    MeasurementDimension_p const dimension = m_dimensions.at(1);
                     return QCoreApplication::translate("DialogMeasurementsCSVColumns", "Shift", "measurement column") +
                            suffix.arg(dimension->Name());
                 }
@@ -286,7 +286,7 @@ auto DialogMeasurementsCSVColumns::ColumnHeader(int column) const -> QString
             case MultisizeMeasurementsColumns::ShiftC:
                 if (m_dimensions.size() > 2)
                 {
-                    MeasurementDimension_p dimension = m_dimensions.at(2);
+                    MeasurementDimension_p const dimension = m_dimensions.at(2);
                     return QCoreApplication::translate("DialogMeasurementsCSVColumns", "Shift", "measurement column") +
                            suffix.arg(dimension->Name());
                 }
@@ -433,7 +433,7 @@ void DialogMeasurementsCSVColumns::ClearColumnCollor()
 //---------------------------------------------------------------------------------------------------------------------
 void DialogMeasurementsCSVColumns::InitColumnsMap()
 {
-    QSharedPointer<QxtCsvModel> csv = DialogMeasurementsCSVColumns::CSVModel();
+    QSharedPointer<QxtCsvModel> const csv = DialogMeasurementsCSVColumns::CSVModel();
     m_columnsMap.clear();
 
     auto InitColumn = [this, csv](int column, int &index, bool forceSkip = false)
@@ -618,7 +618,7 @@ void DialogMeasurementsCSVColumns::ShowInputPreview()
         return;
     }
 
-    QSharedPointer<QxtCsvModel> csv = DialogMeasurementsCSVColumns::CSVModel();
+    QSharedPointer<QxtCsvModel> const csv = DialogMeasurementsCSVColumns::CSVModel();
 
     const int columns = csv->columnCount();
     const int rows = csv->rowCount();
@@ -667,7 +667,7 @@ void DialogMeasurementsCSVColumns::ShowImportPreview()
         return;
     }
 
-    QSharedPointer<QxtCsvModel> csv = DialogMeasurementsCSVColumns::CSVModel();
+    QSharedPointer<QxtCsvModel> const csv = DialogMeasurementsCSVColumns::CSVModel();
 
     const int importColumns = ImportColumnCount();
     const int columns = csv->columnCount();
@@ -750,7 +750,7 @@ void DialogMeasurementsCSVColumns::RetranslateLabels()
 
         if (not m_dimensions.empty())
         {
-            MeasurementDimension_p dimension = m_dimensions.at(0);
+            MeasurementDimension_p const dimension = m_dimensions.at(0);
             ui->labelShiftA->setText(
                 QCoreApplication::translate("DialogMeasurementsCSVColumns", "Shift", "measurement column") +
                 suffix.arg(dimension->Name()));
@@ -758,7 +758,7 @@ void DialogMeasurementsCSVColumns::RetranslateLabels()
 
         if (m_dimensions.size() > 1)
         {
-            MeasurementDimension_p dimension = m_dimensions.at(1);
+            MeasurementDimension_p const dimension = m_dimensions.at(1);
             ui->labelShiftB->setText(
                 QCoreApplication::translate("DialogMeasurementsCSVColumns", "Shift", "measurement column") +
                 suffix.arg(dimension->Name()));
@@ -766,7 +766,7 @@ void DialogMeasurementsCSVColumns::RetranslateLabels()
 
         if (m_dimensions.size() > 2)
         {
-            MeasurementDimension_p dimension = m_dimensions.at(2);
+            MeasurementDimension_p const dimension = m_dimensions.at(2);
             ui->labelShiftC->setText(
                 QCoreApplication::translate("DialogMeasurementsCSVColumns", "Shift", "measurement column") +
                 suffix.arg(dimension->Name()));
@@ -781,7 +781,7 @@ void DialogMeasurementsCSVColumns::SetDefaultColumns()
     {
         SCASSERT(control != nullptr)
 
-        int index = control->findData(m_columnsMap.at(column));
+        int const index = control->findData(m_columnsMap.at(column));
         if (index != -1)
         {
             control->setCurrentIndex(index);
@@ -838,7 +838,7 @@ void DialogMeasurementsCSVColumns::CheckStatus()
         return;
     }
 
-    QSharedPointer<QxtCsvModel> csv = DialogMeasurementsCSVColumns::CSVModel();
+    QSharedPointer<QxtCsvModel> const csv = DialogMeasurementsCSVColumns::CSVModel();
 
     const int columns = csv->columnCount();
     if (columns < MinimumColumns())
@@ -881,7 +881,7 @@ template <class T> void DialogMeasurementsCSVColumns::HackWidget(T **widget)
 template <class T> auto DialogMeasurementsCSVColumns::ColumnValid(T column) const -> bool
 {
     const int columnNumber = static_cast<int>(column);
-    int value = m_columnsMap.at(columnNumber);
+    int const value = m_columnsMap.at(columnNumber);
 
     if (value == -1 && not ColumnMandatory(columnNumber))
     {

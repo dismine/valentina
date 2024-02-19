@@ -189,12 +189,12 @@ void VisToolCubicBezierPath::Creating(const QVector<VPointF> &pathPoints, vsizet
             if (pathPoints.size() >= 4)
             {
                 QLineF p1p2(static_cast<QPointF>(p1), ScenePos());
-                QLineF prP3p1(static_cast<QPointF>(pathPoints.at(size - 2)), static_cast<QPointF>(p1));
+                QLineF const prP3p1(static_cast<QPointF>(pathPoints.at(size - 2)), static_cast<QPointF>(p1));
                 p1p2.setAngle(prP3p1.angle());
 
                 const QPointF p2 = p1p2.p2();
 
-                VSpline spline(p1, p2, ScenePos(), VPointF(ScenePos()));
+                VSpline const spline(p1, p2, ScenePos(), VPointF(ScenePos()));
                 DrawPath(newCurveSegment, spline.GetPath(), Qt::SolidLine, Qt::RoundCap);
 
                 DrawLine(helpLine1, p1p2, Qt::DashLine);
@@ -218,15 +218,15 @@ void VisToolCubicBezierPath::Creating(const QVector<VPointF> &pathPoints, vsizet
             if (subSplCount >= 1)
             {
                 QLineF p1p2(static_cast<QPointF>(p1), p2);
-                QLineF prP3p1(static_cast<QPointF>(pathPoints.at(subSplPoints + pointsLeft - 2)),
-                              static_cast<QPointF>(p1));
+                QLineF const prP3p1(static_cast<QPointF>(pathPoints.at(subSplPoints + pointsLeft - 2)),
+                                    static_cast<QPointF>(p1));
                 p1p2.setAngle(prP3p1.angle());
                 p2 = p1p2.p2();
             }
 
             DrawLine(helpLine1, QLineF(static_cast<QPointF>(p1), p2), Qt::DashLine);
 
-            VSpline spline(p1, p2, ScenePos(), VPointF(ScenePos()));
+            VSpline const spline(p1, p2, ScenePos(), VPointF(ScenePos()));
             DrawPath(newCurveSegment, spline.GetPath(), Qt::SolidLine, Qt::RoundCap);
 
             const vsizetype preLastPoint = subSplCount * 2;
@@ -244,8 +244,8 @@ void VisToolCubicBezierPath::Creating(const QVector<VPointF> &pathPoints, vsizet
             if (subSplCount >= 1)
             {
                 QLineF p1p2(static_cast<QPointF>(p1), p2);
-                QLineF prP3p1(static_cast<QPointF>(pathPoints.at(subSplPoints + pointsLeft - 3)),
-                              static_cast<QPointF>(p1));
+                QLineF const prP3p1(static_cast<QPointF>(pathPoints.at(subSplPoints + pointsLeft - 3)),
+                                    static_cast<QPointF>(p1));
                 p1p2.setAngle(prP3p1.angle());
                 p2 = p1p2.p2();
             }
@@ -253,7 +253,7 @@ void VisToolCubicBezierPath::Creating(const QVector<VPointF> &pathPoints, vsizet
             DrawLine(helpLine1, QLineF(static_cast<QPointF>(p1), p2), Qt::DashLine);
             DrawLine(helpLine2, QLineF(p3, ScenePos()), Qt::DashLine);
 
-            VSpline spline(p1, p2, p3, VPointF(ScenePos()));
+            VSpline const spline(p1, p2, p3, VPointF(ScenePos()));
             DrawPath(newCurveSegment, spline.GetPath(), Qt::SolidLine, Qt::RoundCap);
 
             const vsizetype preLastPoint = subSplCount * 2;

@@ -65,7 +65,7 @@ auto SourceAliasValid(const SourceItem &item, const QSharedPointer<VGObject> &ob
 {
     SCASSERT(data != nullptr)
 
-    QRegularExpression rx(NameRegExp());
+    QRegularExpression const rx(NameRegExp());
 
     QString alias;
 
@@ -133,7 +133,7 @@ auto ConfirmDeletion() -> int
     msgBox.setDefaultButton(QDialogButtonBox::No);
     msgBox.setIconPixmap(QApplication::style()->standardIcon(QStyle::SP_MessageBoxQuestion).pixmap(32, 32));
 
-    int dialogResult = msgBox.exec();
+    int const dialogResult = msgBox.exec();
 
     if (dialogResult == QDialog::Accepted)
     {

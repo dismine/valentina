@@ -80,7 +80,7 @@ DialogPatternMaterials::~DialogPatternMaterials()
 void DialogPatternMaterials::SetPatternMaterials(const QMap<int, QString> &list)
 {
     ui->tableWidget->setRowCount(userMaterialPlaceholdersQuantity);
-    QChar per('%');
+    QChar const per('%');
 
     for (int i = 0; i < userMaterialPlaceholdersQuantity; ++i)
     {

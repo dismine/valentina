@@ -137,7 +137,7 @@ void SaveNodeCanonically(QXmlStreamWriter &stream, const QDomNode &domNode)
 //---------------------------------------------------------------------------------------------------------------------
 auto GetChildElements(const QDomNode &e) -> QList<QDomNode>
 {
-    QDomNodeList children = e.childNodes();
+    QDomNodeList const children = e.childNodes();
     QList<QDomNode> r;
     r.reserve(children.size());
     for (int k = 0; k < children.size(); ++k)
@@ -150,7 +150,7 @@ auto GetChildElements(const QDomNode &e) -> QList<QDomNode>
 //---------------------------------------------------------------------------------------------------------------------
 auto GetElementAttributes(const QDomNode &e) -> QList<QDomNode>
 {
-    QDomNamedNodeMap attributes = e.attributes();
+    QDomNamedNodeMap const attributes = e.attributes();
     QList<QDomNode> r;
     r.reserve(attributes.size());
     for (int k = 0; k < attributes.size(); ++k)
@@ -168,8 +168,8 @@ auto LessThen(const QDomNode &element1, const QDomNode &element2) -> bool
         return element1.nodeType() < element2.nodeType();
     }
 
-    QString tag1 = element1.nodeName();
-    QString tag2 = element2.nodeName();
+    QString const tag1 = element1.nodeName();
+    QString const tag2 = element2.nodeName();
 
     // qDebug() << tag1 <<tag2;
     if (tag1 != tag2)
@@ -178,8 +178,8 @@ auto LessThen(const QDomNode &element1, const QDomNode &element2) -> bool
     }
 
     // Compare attributes
-    QList<QDomNode> attributes1 = GetElementAttributes(element1);
-    QList<QDomNode> attributes2 = GetElementAttributes(element2);
+    QList<QDomNode> const attributes1 = GetElementAttributes(element1);
+    QList<QDomNode> const attributes2 = GetElementAttributes(element2);
 
     if (attributes1.size() != attributes2.size())
     {
@@ -221,10 +221,11 @@ auto LessThen(const QDomNode &element1, const QDomNode &element2) -> bool
     }
 
     // Compare children
-    QList<QDomNode> elts1 = GetChildElements(element1);
-    QList<QDomNode> elts2 = GetChildElements(element2);
+    QList<QDomNode> const elts1 = GetChildElements(element1);
+    QList<QDomNode> const elts2 = GetChildElements(element2);
 
-    QString value1, value2;
+    QString value1;
+    QString value2;
 
     if (elts1.size() != elts2.size())
     {
@@ -660,7 +661,7 @@ auto VDomDocument::GetParametrId(const QDomElement &domElement) -> quint32
 //---------------------------------------------------------------------------------------------------------------------
 auto VDomDocument::UniqueTagText(const QString &tagName, const QString &defVal) const -> QString
 {
-    QDomElement domElement = UniqueTag(tagName);
+    QDomElement const domElement = UniqueTag(tagName);
     if (not domElement.isNull())
     {
         const QString text = domElement.text();
@@ -720,7 +721,7 @@ void VDomDocument::RefreshElementIdCache()
 //---------------------------------------------------------------------------------------------------------------------
 auto VDomDocument::Compare(const QDomElement &element1, const QDomElement &element2) -> bool
 {
-    QFuture<bool> lessThen2 = QtConcurrent::run(LessThen, element2, element1);
+    QFuture<bool> const lessThen2 = QtConcurrent::run(LessThen, element2, element1);
     return !LessThen(element1, element2) && !lessThen2.result();
 }
 
@@ -809,8 +810,8 @@ auto VDomDocument::SaveDocument(const QString &fileName, QString &error) -> bool
         if (success)
         {
             // https://stackoverflow.com/questions/74051505/does-qsavefilecommit-fsync-the-file-to-the-filesystem
-            QString directoryPath = QFileInfo(file.fileName()).absoluteDir().path();
-            int dirFd = ::open(directoryPath.toLocal8Bit().data(), O_RDONLY | O_DIRECTORY);
+            QString const directoryPath = QFileInfo(file.fileName()).absoluteDir().path();
+            int const dirFd = ::open(directoryPath.toLocal8Bit().data(), O_RDONLY | O_DIRECTORY);
             if (dirFd != -1)
             {
                 ::fsync(dirFd);
@@ -832,8 +833,8 @@ auto VDomDocument::SaveDocument(const QString &fileName, QString &error) -> bool
 // cppcheck-suppress unusedFunction
 auto VDomDocument::Major() const -> QString
 {
-    QString version = UniqueTagText(TagVersion, "0.0.0"_L1);
-    QStringList v = version.split('.'_L1);
+    QString const version = UniqueTagText(TagVersion, "0.0.0"_L1);
+    QStringList const v = version.split('.'_L1);
     return v.at(0);
 }
 
@@ -841,8 +842,8 @@ auto VDomDocument::Major() const -> QString
 // cppcheck-suppress unusedFunction
 auto VDomDocument::Minor() const -> QString
 {
-    QString version = UniqueTagText(TagVersion, "0.0.0"_L1);
-    QStringList v = version.split('.'_L1);
+    QString const version = UniqueTagText(TagVersion, "0.0.0"_L1);
+    QStringList const v = version.split('.'_L1);
     return v.at(1);
 }
 
@@ -850,8 +851,8 @@ auto VDomDocument::Minor() const -> QString
 // cppcheck-suppress unusedFunction
 auto VDomDocument::Patch() const -> QString
 {
-    QString version = UniqueTagText(TagVersion, "0.0.0"_L1);
-    QStringList v = version.split('.'_L1);
+    QString const version = UniqueTagText(TagVersion, "0.0.0"_L1);
+    QStringList const v = version.split('.'_L1);
     return v.at(2);
 }
 
@@ -924,7 +925,7 @@ auto VDomDocument::setTagText(const QString &tag, const QString &text) -> bool
     }
     else
     {
-        QDomNode domNode = nodeList.at(0);
+        QDomNode const domNode = nodeList.at(0);
         if (not domNode.isNull() && domNode.isElement())
         {
             QDomElement domElement = domNode.toElement();
@@ -939,7 +940,7 @@ auto VDomDocument::setTagText(QDomElement &domElement, const QString &text) -> b
 {
     if (not domElement.isNull())
     {
-        QDomNode oldText = domElement.firstChild();
+        QDomNode const oldText = domElement.firstChild();
         const QDomText newText = createTextNode(text);
 
         if (oldText.isNull())
@@ -1004,21 +1005,21 @@ void VDomDocument::RemoveAllChildren(QDomElement &domElement)
 //---------------------------------------------------------------------------------------------------------------------
 auto VDomDocument::ParentNodeById(const quint32 &nodeId) -> QDomNode
 {
-    QDomElement domElement = NodeById(nodeId);
+    QDomElement const domElement = NodeById(nodeId);
     return domElement.parentNode();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 auto VDomDocument::CloneNodeById(const quint32 &nodeId) -> QDomElement
 {
-    QDomElement domElement = NodeById(nodeId);
+    QDomElement const domElement = NodeById(nodeId);
     return domElement.cloneNode().toElement();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 auto VDomDocument::NodeById(const quint32 &nodeId, const QString &tagName) -> QDomElement
 {
-    QDomElement domElement = elementById(nodeId, tagName);
+    QDomElement const domElement = elementById(nodeId, tagName);
     if (domElement.isNull() || domElement.isElement() == false)
     {
         throw VExceptionBadId(tr("Couldn't get node"), nodeId);

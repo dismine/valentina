@@ -49,8 +49,8 @@ auto NodeCurvature(const QPointF &p1, const QPointF &p2, const QPointF &p3, doub
     QLineF l1(p2, p1);
     l1.setAngle(l1.angle() + 180);
 
-    QLineF l2(p2, p3);
-    double angle = qDegreesToRadians(l2.angleTo(l1));
+    QLineF const l2(p2, p3);
+    double const angle = qDegreesToRadians(l2.angleTo(l1));
 
     return qSin(angle / 2.0) / length;
 }
@@ -58,12 +58,12 @@ auto NodeCurvature(const QPointF &p1, const QPointF &p2, const QPointF &p3, doub
 //---------------------------------------------------------------------------------------------------------------------
 auto MinimalLength(const QVector<QPointF> &points) -> double
 {
-    vsizetype numPoints = points.size();
+    vsizetype const numPoints = points.size();
     double smallestDistance = std::numeric_limits<double>::max();
 
     for (int i = 0; i < numPoints - 1; ++i)
     {
-        double distance = QLineF(points[i], points[i + 1]).length();
+        double const distance = QLineF(points[i], points[i + 1]).length();
         if (!qFuzzyIsNull(distance))
         {
             smallestDistance = std::min(smallestDistance, distance);
@@ -649,14 +649,14 @@ void VAbstractCurve::SetAliasSuffix(const QString &aliasSuffix)
 //---------------------------------------------------------------------------------------------------------------------
 auto VAbstractCurve::Curvature(const QVector<QPointF> &vertices) -> double
 {
-    vsizetype numVertices = vertices.size();
+    vsizetype const numVertices = vertices.size();
     if (numVertices < 3)
     {
         // A polygonal chain needs at least 3 vertices
         return 0.0;
     }
 
-    qreal minLength = MinimalLength(vertices);
+    qreal const minLength = MinimalLength(vertices);
 
     double sumCurvature = 0.0;
     for (vsizetype i = 1; i < vertices.size() - 1; ++i)

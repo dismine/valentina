@@ -59,10 +59,11 @@ auto operator>>(QDataStream &dataStream, VLayoutPassmark &data) -> QDataStream &
 
     if (actualStreamHeader != VLayoutPassmark::streamHeader)
     {
-        QString message = QCoreApplication::tr("VLayoutPassmark prefix mismatch error: actualStreamHeader = 0x%1 and "
-                                               "streamHeader = 0x%2")
-                              .arg(actualStreamHeader, 8, 0x10, '0'_L1)
-                              .arg(VLayoutPassmark::streamHeader, 8, 0x10, '0'_L1);
+        QString const message =
+            QCoreApplication::tr("VLayoutPassmark prefix mismatch error: actualStreamHeader = 0x%1 and "
+                                 "streamHeader = 0x%2")
+                .arg(actualStreamHeader, 8, 0x10, '0'_L1)
+                .arg(VLayoutPassmark::streamHeader, 8, 0x10, '0'_L1);
         throw VException(message);
     }
 
@@ -71,10 +72,10 @@ auto operator>>(QDataStream &dataStream, VLayoutPassmark &data) -> QDataStream &
 
     if (actualClassVersion > VLayoutPassmark::classVersion)
     {
-        QString message = QCoreApplication::tr("VLayoutPassmark compatibility error: actualClassVersion = %1 and "
-                                               "classVersion = %2")
-                              .arg(actualClassVersion)
-                              .arg(VLayoutPassmark::classVersion);
+        QString const message = QCoreApplication::tr("VLayoutPassmark compatibility error: actualClassVersion = %1 and "
+                                                     "classVersion = %2")
+                                    .arg(actualClassVersion)
+                                    .arg(VLayoutPassmark::classVersion);
         throw VException(message);
     }
 

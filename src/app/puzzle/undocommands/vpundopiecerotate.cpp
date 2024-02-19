@@ -52,7 +52,7 @@ VPUndoPieceRotate::VPUndoPieceRotate(const VPPiecePtr &piece, const VPTransforma
 
     m_oldTransform = piece->GetMatrix();
 
-    VPLayoutPtr layout = piece->Layout();
+    VPLayoutPtr const layout = piece->Layout();
     if (not layout.isNull())
     {
         m_followGrainline = layout->LayoutSettings().GetFollowGrainline();
@@ -64,13 +64,13 @@ VPUndoPieceRotate::VPUndoPieceRotate(const VPPiecePtr &piece, const VPTransforma
 //---------------------------------------------------------------------------------------------------------------------
 void VPUndoPieceRotate::undo()
 {
-    VPPiecePtr piece = Piece();
+    VPPiecePtr const piece = Piece();
     if (piece.isNull())
     {
         return;
     }
 
-    VPLayoutPtr layout = piece->Layout();
+    VPLayoutPtr const layout = piece->Layout();
     if (layout.isNull())
     {
         return;
@@ -88,13 +88,13 @@ void VPUndoPieceRotate::undo()
 //---------------------------------------------------------------------------------------------------------------------
 void VPUndoPieceRotate::redo()
 {
-    VPPiecePtr piece = Piece();
+    VPPiecePtr const piece = Piece();
     if (piece.isNull())
     {
         return;
     }
 
-    VPLayoutPtr layout = piece->Layout();
+    VPLayoutPtr const layout = piece->Layout();
     if (layout.isNull())
     {
         return;
@@ -147,7 +147,7 @@ auto VPUndoPieceRotate::mergeWith(const QUndoCommand *command) -> bool
     const auto *moveCommand = dynamic_cast<const VPUndoPieceRotate *>(command);
     SCASSERT(moveCommand != nullptr)
 
-    VPPiecePtr piece = Piece();
+    VPPiecePtr const piece = Piece();
     if (not moveCommand->AllowMerge() || (moveCommand->Piece().isNull() || piece.isNull()) ||
         moveCommand->Piece() != piece || moveCommand->Origin() != m_origin ||
         moveCommand->FollowGrainline() != m_followGrainline)
@@ -186,7 +186,7 @@ VPUndoPiecesRotate::VPUndoPiecesRotate(const QList<VPPiecePtr> &pieces, const VP
         }
     }
 
-    VPLayoutPtr layout = Layout();
+    VPLayoutPtr const layout = Layout();
     if (not layout.isNull())
     {
         m_followGrainline = layout->LayoutSettings().GetFollowGrainline();
@@ -201,13 +201,13 @@ void VPUndoPiecesRotate::undo()
         return;
     }
 
-    VPLayoutPtr layout = Layout();
+    VPLayoutPtr const layout = Layout();
     if (layout.isNull())
     {
         return;
     }
 
-    VPSheetPtr sheet = Sheet();
+    VPSheetPtr const sheet = Sheet();
     if (layout->GetFocusedSheet() != sheet)
     {
         layout->SetFocusedSheet(sheet);
@@ -215,7 +215,7 @@ void VPUndoPiecesRotate::undo()
 
     for (const auto &piece : qAsConst(m_pieces))
     {
-        VPPiecePtr p = piece.toStrongRef();
+        VPPiecePtr const p = piece.toStrongRef();
         if (not p.isNull())
         {
             if (m_oldTransforms.contains(p->GetUniqueID()))
@@ -235,13 +235,13 @@ void VPUndoPiecesRotate::redo()
         return;
     }
 
-    VPLayoutPtr layout = Layout();
+    VPLayoutPtr const layout = Layout();
     if (layout.isNull())
     {
         return;
     }
 
-    VPSheetPtr sheet = Sheet();
+    VPSheetPtr const sheet = Sheet();
     if (layout->GetFocusedSheet() != sheet)
     {
         layout->SetFocusedSheet(sheet);
@@ -249,7 +249,7 @@ void VPUndoPiecesRotate::redo()
 
     for (const auto &piece : qAsConst(m_pieces))
     {
-        VPPiecePtr p = piece.toStrongRef();
+        VPPiecePtr const p = piece.toStrongRef();
         if (not p.isNull())
         {
             if (m_firstCall)
@@ -319,7 +319,7 @@ auto VPUndoPiecesRotate::PieceIds() const -> QSet<QString>
     QSet<QString> ids;
     for (const auto &piece : m_pieces)
     {
-        VPPiecePtr p = piece.toStrongRef();
+        VPPiecePtr const p = piece.toStrongRef();
         if (not p.isNull())
         {
             ids.insert(p->GetUniqueID());
@@ -334,7 +334,7 @@ auto VPUndoPiecesRotate::Layout() const -> VPLayoutPtr
 {
     for (const auto &piece : m_pieces)
     {
-        VPPiecePtr p = piece.toStrongRef();
+        VPPiecePtr const p = piece.toStrongRef();
         if (not p.isNull())
         {
             return p->Layout();
@@ -349,7 +349,7 @@ auto VPUndoPiecesRotate::Sheet() const -> VPSheetPtr
 {
     for (const auto &piece : m_pieces)
     {
-        VPPiecePtr p = piece.toStrongRef();
+        VPPiecePtr const p = piece.toStrongRef();
         if (not p.isNull())
         {
             return p->Sheet();

@@ -110,14 +110,14 @@ void InitLanguageList(QComboBox *combobox)
             englishUS = (en_US == locale);
         }
 
-        QLocale loc = QLocale(locale);
-        QString lang = loc.nativeLanguageName();
+        QLocale const loc = QLocale(locale);
+        QString const lang = loc.nativeLanguageName();
         QString country = TerritoryToString(loc);
         if (country == "Czechia"_L1)
         {
             country = "CzechRepublic"_L1;
         }
-        QIcon ico(u"://flags/%1.png"_s.arg(country));
+        QIcon const ico(u"://flags/%1.png"_s.arg(country));
 
         combobox->addItem(ico, lang, locale);
     }
@@ -126,10 +126,10 @@ void InitLanguageList(QComboBox *combobox)
     {
         // English language is internal and doens't have own *.qm file.
         // Since Qt 5.12 country names have spaces
-        QIcon ico(u"://flags/%1.png"_s.arg(TerritoryToString(QLocale::UnitedStates))
+        QIcon const ico(u"://flags/%1.png"_s.arg(TerritoryToString(QLocale::UnitedStates))
 
         );
-        QString lang = QLocale(en_US).nativeLanguageName();
+        QString const lang = QLocale(en_US).nativeLanguageName();
         combobox->addItem(ico, lang, en_US);
     }
 }
@@ -245,7 +245,9 @@ auto darkenPixmap(const QPixmap &pixmap) -> QPixmap
     {
         for (int x = 0; x < imgw; ++x)
         {
-            int h, s, v;
+            int h;
+            int s;
+            int v;
             QRgb pixel = img.pixel(x, y);
             const int a = qAlpha(pixel);
             QColor hsvColor(pixel);
@@ -273,11 +275,11 @@ void ShowInGraphicalShell(const QString &filePath)
     QProcess::startDetached(QStringLiteral("explorer"), QStringList{"/select", QDir::toNativeSeparators(filePath)});
 #else
     const int timeout = 1000; // ms
-    QString command = QStringLiteral("dbus-send --reply-timeout=%1 --session --dest=org.freedesktop.FileManager1 "
-                                     "--type=method_call /org/freedesktop/FileManager1 "
-                                     "org.freedesktop.FileManager1.ShowItems array:string:\"%2\" string:\"\"")
-                          .arg(timeout)
-                          .arg(QUrl::fromLocalFile(filePath).toString());
+    QString const command = QStringLiteral("dbus-send --reply-timeout=%1 --session --dest=org.freedesktop.FileManager1 "
+                                           "--type=method_call /org/freedesktop/FileManager1 "
+                                           "org.freedesktop.FileManager1.ShowItems array:string:\"%2\" string:\"\"")
+                                .arg(timeout)
+                                .arg(QUrl::fromLocalFile(filePath).toString());
 
     // Sending message through dbus will highlighting file
     QProcess dbus;
@@ -554,7 +556,7 @@ void InitLanguages(QComboBox *combobox)
     InitLanguageList(combobox);
 
     // set default translators and language checked
-    qint32 index = combobox->findData(VAbstractApplication::VApp()->Settings()->GetLocale());
+    qint32 const index = combobox->findData(VAbstractApplication::VApp()->Settings()->GetLocale());
     if (index != -1)
     {
         combobox->setCurrentIndex(index);
@@ -569,7 +571,7 @@ void InitPieceLabelLanguages(QComboBox *combobox)
     combobox->addItem(QApplication::translate("InitPieceLabelLanguages", "Default"),
                       VCommonSettings::defaultPieceLabelLocale);
 
-    qint32 index = combobox->findData(VAbstractApplication::VApp()->Settings()->GetPieceLabelLocale());
+    qint32 const index = combobox->findData(VAbstractApplication::VApp()->Settings()->GetPieceLabelLocale());
     if (index != -1)
     {
         combobox->setCurrentIndex(index);
@@ -605,10 +607,10 @@ auto operator>>(QDataStream &in, CustomSARecord &record) -> QDataStream &
 
     if (actualStreamHeader != CustomSARecord::streamHeader)
     {
-        QString message = QCoreApplication::tr("CustomSARecord prefix mismatch error: actualStreamHeader = 0x%1 "
-                                               "and streamHeader = 0x%2")
-                              .arg(actualStreamHeader, 8, 0x10, '0'_L1)
-                              .arg(CustomSARecord::streamHeader, 8, 0x10, '0'_L1);
+        QString const message = QCoreApplication::tr("CustomSARecord prefix mismatch error: actualStreamHeader = 0x%1 "
+                                                     "and streamHeader = 0x%2")
+                                    .arg(actualStreamHeader, 8, 0x10, '0'_L1)
+                                    .arg(CustomSARecord::streamHeader, 8, 0x10, '0'_L1);
         throw VException(message);
     }
 
@@ -617,10 +619,10 @@ auto operator>>(QDataStream &in, CustomSARecord &record) -> QDataStream &
 
     if (actualClassVersion > CustomSARecord::classVersion)
     {
-        QString message = QCoreApplication::tr("CustomSARecord compatibility error: actualClassVersion = %1 and "
-                                               "classVersion = %2")
-                              .arg(actualClassVersion)
-                              .arg(CustomSARecord::classVersion);
+        QString const message = QCoreApplication::tr("CustomSARecord compatibility error: actualClassVersion = %1 and "
+                                                     "classVersion = %2")
+                                    .arg(actualClassVersion)
+                                    .arg(CustomSARecord::classVersion);
         throw VException(message);
     }
 
@@ -713,7 +715,7 @@ auto SplitFilePaths(const QString &path) -> QStringList
 
     do
     {
-        QFileInfo fileInfo(subPath);
+        QFileInfo const fileInfo(subPath);
         lastFileName = fileInfo.fileName();
         if (not lastFileName.isEmpty())
         {

@@ -57,7 +57,8 @@ void TST_VPiece::Issue620()
 
         QVector<QPointF> pointsEkv;
         CastTo(detail.MainPathPoints(data.data()), pointsEkv);
-        QVector<QPointF> origPoints = AbstractTest::VectorFromJson<QPointF>(QStringLiteral("://Issue_620/output.json"));
+        QVector<QPointF> const origPoints =
+            AbstractTest::VectorFromJson<QPointF>(QStringLiteral("://Issue_620/output.json"));
 
         // Begin comparison
         ComparePaths(pointsEkv, origPoints);
@@ -85,8 +86,8 @@ void TST_VPiece::TestSAPassmark_data()
         VPiecePassmarkData inputPassmarkData;
         AbstractTest::PassmarkDataFromJson(passmarkData, inputPassmarkData);
 
-        QVector<QPointF> inputSeamAllowance = AbstractTest::VectorFromJson<QPointF>(seamAllowance);
-        QVector<QPointF> inputRotatedSeamAllowance = AbstractTest::VectorFromJson<QPointF>(rotatedSeamAllowance);
+        QVector<QPointF> const inputSeamAllowance = AbstractTest::VectorFromJson<QPointF>(seamAllowance);
+        QVector<QPointF> const inputRotatedSeamAllowance = AbstractTest::VectorFromJson<QPointF>(rotatedSeamAllowance);
 
         QVector<QLineF> inputOutputShape;
         AbstractTest::PassmarkShapeFromJson(shape, inputOutputShape);
@@ -127,7 +128,7 @@ void TST_VPiece::TestSAPassmark()
     QFETCH(QVector<QPointF>, rotatedSeamAllowance);
     QFETCH(QVector<QLineF>, expectedResult);
 
-    VPassmark passmark(passmarkData);
+    VPassmark const passmark(passmarkData);
 
     CompareLinesDistance(passmark.SAPassmark(seamAllowance, rotatedSeamAllowance, PassmarkSide::All), expectedResult);
 }

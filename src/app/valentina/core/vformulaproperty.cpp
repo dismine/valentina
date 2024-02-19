@@ -166,7 +166,7 @@ void VFormulaProperty::setValue(const QVariant &value)
 //---------------------------------------------------------------------------------------------------------------------
 auto VFormulaProperty::getValue() const -> QVariant
 {
-    VFormula tmpFormula = GetFormula();
+    VFormula const tmpFormula = GetFormula();
     QVariant value;
     value.setValue(tmpFormula);
     return value;

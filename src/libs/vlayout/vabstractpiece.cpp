@@ -68,8 +68,8 @@ inline auto IsSameDirection(QPointF p1, QPointF p2, QPointF px) -> bool
 // Do we create a point outside of a path?
 inline auto IsOutsidePoint(QPointF p1, QPointF p2, QPointF px) -> bool
 {
-    QLineF seg1(p1, p2);
-    QLineF seg2(p1, px);
+    QLineF const seg1(p1, p2);
+    QLineF const seg2(p1, px);
 
     return IsSameDirection(p1, p2, px) && seg2.length() >= seg1.length();
 }
@@ -136,8 +136,8 @@ auto AngleByLength(QVector<VRawSAPoint> points, QPointF p1, QPointF p2, QPointF 
     }
     else
     {
-        QLineF edge1(p2, p1);
-        QLineF edge2(p2, p3);
+        QLineF const edge1(p2, p1);
+        QLineF const edge2(p2, p3);
         const qreal angle = edge1.angleTo(edge2);
 
         if (angle > 180 && p.GetAngleType() != PieceNodeAngle::ByLengthCurve)
@@ -225,8 +225,8 @@ auto AngleByIntersection(const QVector<VRawSAPoint> &points, QPointF p1, QPointF
                          bool *needRollback = nullptr) -> QVector<VRawSAPoint>
 {
     {
-        QLineF edge1(p2, p1);
-        QLineF edge2(p2, p3);
+        QLineF const edge1(p2, p1);
+        QLineF const edge2(p2, p3);
         const qreal angle = edge1.angleTo(edge2);
 
         if (angle > 180)
@@ -244,7 +244,7 @@ auto AngleByIntersection(const QVector<VRawSAPoint> &points, QPointF p1, QPointF
     QVector<VRawSAPoint> pointsIntr = points;
 
     // First point
-    QLineF edge2(p2, p3);
+    QLineF const edge2(p2, p3);
 
     QPointF px;
     QLineF::IntersectType type = edge2.intersects(bigLine1, &px);
@@ -281,7 +281,7 @@ auto AngleByIntersection(const QVector<VRawSAPoint> &points, QPointF p1, QPointF
     }
 
     // Second point
-    QLineF edge1(p1, p2);
+    QLineF const edge1(p1, p2);
     type = edge1.intersects(bigLine2, &px);
 
     if (type == QLineF::NoIntersection)
@@ -312,8 +312,8 @@ auto AngleByFirstSymmetry(const QVector<VRawSAPoint> &points, QPointF p1, QPoint
                           bool *needRollback = nullptr) -> QVector<VRawSAPoint>
 {
     {
-        QLineF edge1(p2, p1);
-        QLineF edge2(p2, p3);
+        QLineF const edge1(p2, p1);
+        QLineF const edge2(p2, p3);
         const qreal angle = edge1.angleTo(edge2);
 
         if (angle > 180)
@@ -329,7 +329,7 @@ auto AngleByFirstSymmetry(const QVector<VRawSAPoint> &points, QPointF p1, QPoint
 
     const QLineF axis = QLineF(p1, p2);
 
-    QLineF sEdge(VPointF::FlipPF(axis, bigLine2.p1()), VPointF::FlipPF(axis, bigLine2.p2()));
+    QLineF const sEdge(VPointF::FlipPF(axis, bigLine2.p1()), VPointF::FlipPF(axis, bigLine2.p2()));
 
     QPointF px1;
     QLineF::IntersectType type = sEdge.intersects(bigLine1, &px1);
@@ -393,8 +393,8 @@ auto AngleBySecondSymmetry(const QVector<VRawSAPoint> &points, QPointF p1, QPoin
                            bool *needRollback = nullptr) -> QVector<VRawSAPoint>
 {
     {
-        QLineF edge1(p2, p1);
-        QLineF edge2(p2, p3);
+        QLineF const edge1(p2, p1);
+        QLineF const edge2(p2, p3);
         const qreal angle = edge1.angleTo(edge2);
 
         if (angle > 180)
@@ -410,7 +410,7 @@ auto AngleBySecondSymmetry(const QVector<VRawSAPoint> &points, QPointF p1, QPoin
 
     const QLineF axis = QLineF(p3, p2);
 
-    QLineF sEdge(VPointF::FlipPF(axis, bigLine1.p1()), VPointF::FlipPF(axis, bigLine1.p2()));
+    QLineF const sEdge(VPointF::FlipPF(axis, bigLine1.p1()), VPointF::FlipPF(axis, bigLine1.p2()));
 
     QPointF px1;
     QLineF::IntersectType type = sEdge.intersects(bigLine1, &px1);
@@ -476,8 +476,8 @@ auto AngleByFirstRightAngle(const QVector<VRawSAPoint> &points, QPointF p1, QPoi
                             bool *needRollback = nullptr) -> QVector<VRawSAPoint>
 {
     {
-        QLineF edge1(p2, p1);
-        QLineF edge2(p2, p3);
+        QLineF const edge1(p2, p1);
+        QLineF const edge2(p2, p3);
         const qreal angle = edge1.angleTo(edge2);
 
         if (angle > 270)
@@ -488,10 +488,10 @@ auto AngleByFirstRightAngle(const QVector<VRawSAPoint> &points, QPointF p1, QPoi
 
     const qreal localWidth = p.MaxLocalSA(width);
     QVector<VRawSAPoint> pointsRA = points;
-    QLineF edge(p1, p2);
+    QLineF const edge(p1, p2);
 
     QPointF px;
-    QLineF::IntersectType type = edge.intersects(bigLine2, &px);
+    QLineF::IntersectType const type = edge.intersects(bigLine2, &px);
 
     if (type == QLineF::NoIntersection)
     {
@@ -513,8 +513,8 @@ auto AngleByFirstRightAngle(const QVector<VRawSAPoint> &points, QPointF p1, QPoi
     }
     else
     {
-        QLineF edge1(p2, p1);
-        QLineF edge2(p2, p3);
+        QLineF const edge1(p2, p1);
+        QLineF const edge2(p2, p3);
         const qreal angle = edge1.angleTo(edge2);
 
         if (angle > 180)
@@ -544,8 +544,8 @@ auto AngleBySecondRightAngle(QVector<VRawSAPoint> points, QPointF p1, QPointF p2
                              bool *needRollback = nullptr) -> QVector<VRawSAPoint>
 {
     {
-        QLineF edge1(p2, p1);
-        QLineF edge2(p2, p3);
+        QLineF const edge1(p2, p1);
+        QLineF const edge2(p2, p3);
         const qreal angle = edge1.angleTo(edge2);
 
         if (angle > 270)
@@ -560,10 +560,10 @@ auto AngleBySecondRightAngle(QVector<VRawSAPoint> points, QPointF p1, QPointF p2
     }
 
     const qreal localWidth = p.MaxLocalSA(width);
-    QLineF edge(p2, p3);
+    QLineF const edge(p2, p3);
 
     QPointF px;
-    QLineF::IntersectType type = edge.intersects(bigLine1, &px);
+    QLineF::IntersectType const type = edge.intersects(bigLine1, &px);
 
     if (type == QLineF::NoIntersection)
     {
@@ -590,8 +590,8 @@ auto AngleBySecondRightAngle(QVector<VRawSAPoint> points, QPointF p1, QPointF p2
     }
     else
     {
-        QLineF edge1(p2, p1);
-        QLineF edge2(p2, p3);
+        QLineF const edge1(p2, p1);
+        QLineF const edge2(p2, p3);
         const qreal angle = edge1.angleTo(edge2);
 
         if (angle > 180)
@@ -642,8 +642,8 @@ auto AngleBySecondRightAngle(QVector<VRawSAPoint> points, QPointF p1, QPointF p2
 //---------------------------------------------------------------------------------------------------------------------
 auto BisectorLine(const QPointF &p1, const QPointF &p2, const QPointF &p3) -> QLineF
 {
-    QLineF line1(p2, p1);
-    QLineF line2(p2, p3);
+    QLineF const line1(p2, p1);
+    QLineF const line2(p2, p3);
     QLineF bLine;
 
     const qreal angle1 = line1.angleTo(line2);
@@ -747,7 +747,7 @@ void RollbackByLength(QVector<VRawSAPoint> &ekvPoints, const QVector<VSAPoint> &
 
     QVector<VRawSAPoint> temp = ekvPoints;
     temp.insert(ekvPoints.size() - 1, VRawSAPoint(bigLine1.p2(), points.at(0).CurvePoint(), points.at(0).TurnPoint()));
-    bool success = Rollback(temp, VAbstractPiece::ParallelLine(points.at(0), points.at(1), width));
+    bool const success = Rollback(temp, VAbstractPiece::ParallelLine(points.at(0), points.at(1), width));
 
     if (success)
     {
@@ -760,11 +760,11 @@ void RollbackBySecondEdgeSymmetry(QVector<VRawSAPoint> &ekvPoints, const QVector
 {
     const QLineF axis = QLineF(points.at(points.size() - 1), points.at(1));
     const QLineF bigLine1 = VAbstractPiece::ParallelLine(points.at(points.size() - 2), points.at(0), width);
-    QLineF sEdge(VPointF::FlipPF(axis, bigLine1.p1()), VPointF::FlipPF(axis, bigLine1.p2()));
+    QLineF const sEdge(VPointF::FlipPF(axis, bigLine1.p1()), VPointF::FlipPF(axis, bigLine1.p2()));
 
     QVector<VRawSAPoint> temp = ekvPoints;
     temp.insert(ekvPoints.size() - 1, VRawSAPoint(bigLine1.p2(), points.at(0).CurvePoint(), points.at(0).TurnPoint()));
-    bool success = Rollback(temp, sEdge);
+    bool const success = Rollback(temp, sEdge);
 
     if (success)
     {
@@ -777,12 +777,12 @@ void RollbackByFirstEdgeSymmetry(QVector<VRawSAPoint> &ekvPoints, const QVector<
 {
     const QLineF axis = QLineF(points.at(points.size() - 2), points.at(points.size() - 1));
     const QLineF bigLine2 = VAbstractPiece::ParallelLine(points.at(points.size() - 1), points.at(1), width);
-    QLineF sEdge(VPointF::FlipPF(axis, bigLine2.p1()), VPointF::FlipPF(axis, bigLine2.p2()));
+    QLineF const sEdge(VPointF::FlipPF(axis, bigLine2.p1()), VPointF::FlipPF(axis, bigLine2.p2()));
     const QLineF bigLine1 = VAbstractPiece::ParallelLine(points.at(points.size() - 2), points.at(0), width);
 
     QVector<VRawSAPoint> temp = ekvPoints;
     temp.insert(ekvPoints.size() - 1, VRawSAPoint(bigLine1.p2(), points.at(0).CurvePoint(), points.at(0).TurnPoint()));
-    bool success = Rollback(temp, sEdge);
+    bool const success = Rollback(temp, sEdge);
 
     if (success)
     {
@@ -796,7 +796,7 @@ void RollbackByPointsIntersection(QVector<VRawSAPoint> &ekvPoints, const QVector
     const QLineF bigLine1 = VAbstractPiece::ParallelLine(points.at(points.size() - 2), points.at(0), width);
     QVector<VRawSAPoint> temp = ekvPoints;
     temp.insert(ekvPoints.size() - 1, VRawSAPoint(bigLine1.p2(), points.at(0).CurvePoint(), points.at(0).TurnPoint()));
-    bool success = Rollback(temp, QLineF(points.constLast(), points.at(1)));
+    bool const success = Rollback(temp, QLineF(points.constLast(), points.at(1)));
 
     if (success)
     {
@@ -1234,9 +1234,9 @@ auto VAbstractPiece::EkvPoint(QVector<VRawSAPoint> points, const VSAPoint &p1Lin
         return points;
     }
 
-    QLineF edge1(p2Line2, p1Line2);
-    QLineF edge2(p2Line1, p1Line1);
-    qreal a = edge2.angleTo(edge1);
+    QLineF const edge1(p2Line2, p1Line2);
+    QLineF const edge2(p2Line1, p1Line1);
+    qreal const a = edge2.angleTo(edge1);
 
     if (a >= 175 && a <= 185 && not VFuzzyComparePossibleNulls(p2Line1.GetSABefore(width), p2Line1.GetSAAfter(width)))
     {
@@ -1356,8 +1356,8 @@ auto VAbstractPiece::EkvPoint(QVector<VRawSAPoint> points, const VSAPoint &p1Lin
 
                 if ((result1 < 0 || qFuzzyIsNull(result1)) && (result2 < 0 || qFuzzyIsNull(result2)))
                 { // Dart case. A bisector watches outside.
-                    QLineF edge1(p1Line1, p2Line1);
-                    QLineF edge2(p1Line2, p2Line2);
+                    QLineF const edge1(p1Line1, p2Line1);
+                    QLineF const edge2(p1Line2, p2Line2);
 
                     if (qAbs(edge1.length() - edge2.length()) <= qMax(edge1.length(), edge2.length()) * 0.2)
                     {
@@ -1476,16 +1476,16 @@ auto VAbstractPiece::IsEkvPointOnLine(const VSAPoint &iPoint, const VSAPoint &pr
     const QLineF bigLine1 = ParallelLine(prevPoint, iPoint, tmpWidth);
     const QLineF bigLine2 = ParallelLine(iPoint, nextPoint, tmpWidth);
 
-    bool seamOnLine = VGObject::IsPointOnLineviaPDP(iPoint, prevPoint, nextPoint);
-    bool sa1OnLine = VGObject::IsPointOnLineviaPDP(bigLine1.p2(), bigLine1.p1(), bigLine2.p2());
-    bool sa2OnLine = VGObject::IsPointOnLineviaPDP(bigLine2.p1(), bigLine1.p1(), bigLine2.p2());
-    bool saDiff = qAbs(prevPoint.GetSAAfter(tmpWidth) - nextPoint.GetSABefore(tmpWidth)) < accuracyPointOnLine;
+    bool const seamOnLine = VGObject::IsPointOnLineviaPDP(iPoint, prevPoint, nextPoint);
+    bool const sa1OnLine = VGObject::IsPointOnLineviaPDP(bigLine1.p2(), bigLine1.p1(), bigLine2.p2());
+    bool const sa2OnLine = VGObject::IsPointOnLineviaPDP(bigLine2.p1(), bigLine1.p1(), bigLine2.p2());
+    bool const saDiff = qAbs(prevPoint.GetSAAfter(tmpWidth) - nextPoint.GetSABefore(tmpWidth)) < accuracyPointOnLine;
 
     // left point that splits a curve
-    bool curve = (prevPoint.GetAngleType() == PieceNodeAngle::ByLengthCurve &&
-                  iPoint.GetAngleType() == PieceNodeAngle::ByLengthCurve) ||
-                 (nextPoint.GetAngleType() == PieceNodeAngle::ByLengthCurve &&
-                  iPoint.GetAngleType() == PieceNodeAngle::ByLengthCurve);
+    bool const curve = (prevPoint.GetAngleType() == PieceNodeAngle::ByLengthCurve &&
+                        iPoint.GetAngleType() == PieceNodeAngle::ByLengthCurve) ||
+                       (nextPoint.GetAngleType() == PieceNodeAngle::ByLengthCurve &&
+                        iPoint.GetAngleType() == PieceNodeAngle::ByLengthCurve);
 
     return seamOnLine && sa1OnLine && sa2OnLine && saDiff && not curve;
 }
@@ -1679,7 +1679,7 @@ auto VAbstractPiece::RollbackSeamAllowance(QVector<VRawSAPoint> points, const QL
     clipped.reserve(points.count() + 1);
     for (auto i = points.count() - 1; i > 0; --i)
     {
-        QLineF segment(points.at(i), points.at(i - 1));
+        QLineF const segment(points.at(i), points.at(i - 1));
         QPointF crosPoint;
         const QLineF::IntersectType type = cuttingEdge.intersects(segment, &crosPoint);
 
@@ -1700,8 +1700,8 @@ auto VAbstractPiece::RollbackSeamAllowance(QVector<VRawSAPoint> points, const QL
     if (not *success && points.size() > 1)
     {
         QPointF crosPoint;
-        QLineF secondLast(points.at(points.size() - 2), points.at(points.size() - 1));
-        QLineF::IntersectType type = secondLast.intersects(cuttingEdge, &crosPoint);
+        QLineF const secondLast(points.at(points.size() - 2), points.at(points.size() - 1));
+        QLineF::IntersectType const type = secondLast.intersects(cuttingEdge, &crosPoint);
 
         if (type != QLineF::NoIntersection && IsOutsidePoint(secondLast.p1(), secondLast.p2(), crosPoint))
         {
@@ -1874,18 +1874,18 @@ auto VAbstractPiece::GrainlineMainLine(const VGrainlineData &geom, const VContai
 
     QPointF pt2(pt1.x() + dLen * qCos(dAng), pt1.y() - dLen * qSin(dAng));
 
-    VPieceGrainline grainline(QLineF(pt1, pt2), geom.GetArrowType());
+    VPieceGrainline const grainline(QLineF(pt1, pt2), geom.GetArrowType());
 
     QVector<QPointF> v;
     if (grainline.IsFourWays())
     {
-        QLineF mainLine = grainline.GetMainLine();
-        QLineF secondaryLine = grainline.SecondaryLine();
+        QLineF const mainLine = grainline.GetMainLine();
+        QLineF const secondaryLine = grainline.SecondaryLine();
         v = {mainLine.p1(), mainLine.p2(), secondaryLine.p1(), secondaryLine.p2()};
     }
     else
     {
-        QLineF mainLine = grainline.GetMainLine();
+        QLineF const mainLine = grainline.GetMainLine();
         v = {mainLine.p1(), mainLine.p2()};
     }
 
@@ -1919,77 +1919,77 @@ auto VAbstractPiece::PlaceLabelShape(const VLayoutPlaceLabel &label) -> PlaceLab
 
     auto SegmentShape = [pos, box, LayoutPoint]()
     {
-        QVector<VLayoutPoint> shape{LayoutPoint(QPointF(pos.x(), pos.y() - box.height() / 2.0), true),
-                                    LayoutPoint(QPointF(pos.x(), pos.y() + box.height() / 2.0), true)};
+        QVector<VLayoutPoint> const shape{LayoutPoint(QPointF(pos.x(), pos.y() - box.height() / 2.0), true),
+                                          LayoutPoint(QPointF(pos.x(), pos.y() + box.height() / 2.0), true)};
 
         return PlaceLabelImg{shape};
     };
 
     auto RectangleShape = [pos, box, LayoutPoint]()
     {
-        QRectF rect(QPointF(pos.x() - box.width() / 2.0, pos.y() - box.height() / 2.0),
-                    QPointF(pos.x() + box.width() / 2.0, pos.y() + box.height() / 2.0));
+        QRectF const rect(QPointF(pos.x() - box.width() / 2.0, pos.y() - box.height() / 2.0),
+                          QPointF(pos.x() + box.width() / 2.0, pos.y() + box.height() / 2.0));
 
-        QVector<VLayoutPoint> shape{LayoutPoint(rect.topLeft(), true), LayoutPoint(rect.topRight(), true),
-                                    LayoutPoint(rect.bottomRight(), true), LayoutPoint(rect.bottomLeft(), true),
-                                    LayoutPoint(rect.topLeft(), true)};
+        QVector<VLayoutPoint> const shape{LayoutPoint(rect.topLeft(), true), LayoutPoint(rect.topRight(), true),
+                                          LayoutPoint(rect.bottomRight(), true), LayoutPoint(rect.bottomLeft(), true),
+                                          LayoutPoint(rect.topLeft(), true)};
 
         return PlaceLabelImg{shape};
     };
 
     auto CrossShape = [pos, box, LayoutPoint]()
     {
-        QVector<VLayoutPoint> shape1{LayoutPoint(QPointF(pos.x(), pos.y() - box.height() / 2.0), true),
-                                     LayoutPoint(QPointF(pos.x(), pos.y() + box.height() / 2.0), true)};
+        QVector<VLayoutPoint> const shape1{LayoutPoint(QPointF(pos.x(), pos.y() - box.height() / 2.0), true),
+                                           LayoutPoint(QPointF(pos.x(), pos.y() + box.height() / 2.0), true)};
 
-        QVector<VLayoutPoint> shape2{LayoutPoint(QPointF(pos.x() - box.width() / 2.0, pos.y()), true),
-                                     LayoutPoint(QPointF(pos.x() + box.width() / 2.0, pos.y()), true)};
+        QVector<VLayoutPoint> const shape2{LayoutPoint(QPointF(pos.x() - box.width() / 2.0, pos.y()), true),
+                                           LayoutPoint(QPointF(pos.x() + box.width() / 2.0, pos.y()), true)};
 
         return PlaceLabelImg{shape1, shape2};
     };
 
     auto TshapedShape = [pos, box, LayoutPoint]()
     {
-        QPointF center2(pos.x(), pos.y() + box.height() / 2.0);
+        QPointF const center2(pos.x(), pos.y() + box.height() / 2.0);
 
-        QVector<VLayoutPoint> shape1{LayoutPoint(QPointF(pos.x(), pos.y()), true), LayoutPoint(center2, true)};
+        QVector<VLayoutPoint> const shape1{LayoutPoint(QPointF(pos.x(), pos.y()), true), LayoutPoint(center2, true)};
 
-        QVector<VLayoutPoint> shape2{LayoutPoint(QPointF(center2.x() - box.width() / 2.0, center2.y()), true),
-                                     LayoutPoint(QPointF(center2.x() + box.width() / 2.0, center2.y()), true)};
+        QVector<VLayoutPoint> const shape2{LayoutPoint(QPointF(center2.x() - box.width() / 2.0, center2.y()), true),
+                                           LayoutPoint(QPointF(center2.x() + box.width() / 2.0, center2.y()), true)};
 
         return PlaceLabelImg{shape1, shape2};
     };
 
     auto DoubletreeShape = [pos, box, LayoutPoint]()
     {
-        QRectF rect(QPointF(pos.x() - box.width() / 2.0, pos.y() - box.height() / 2.0),
-                    QPointF(pos.x() + box.width() / 2.0, pos.y() + box.height() / 2.0));
+        QRectF const rect(QPointF(pos.x() - box.width() / 2.0, pos.y() - box.height() / 2.0),
+                          QPointF(pos.x() + box.width() / 2.0, pos.y() + box.height() / 2.0));
 
-        QVector<VLayoutPoint> shape1{LayoutPoint(rect.topLeft(), true), LayoutPoint(rect.bottomRight(), true)};
+        QVector<VLayoutPoint> const shape1{LayoutPoint(rect.topLeft(), true), LayoutPoint(rect.bottomRight(), true)};
 
-        QVector<VLayoutPoint> shape2{LayoutPoint(rect.topRight(), true), LayoutPoint(rect.bottomLeft(), true)};
+        QVector<VLayoutPoint> const shape2{LayoutPoint(rect.topRight(), true), LayoutPoint(rect.bottomLeft(), true)};
 
         return PlaceLabelImg{shape1, shape2};
     };
 
     auto CornerShape = [pos, box, LayoutPoint]()
     {
-        QVector<VLayoutPoint> shape1{LayoutPoint(QPointF(pos.x(), pos.y()), true),
-                                     LayoutPoint(QPointF(pos.x(), pos.y() + box.height() / 2.0), true)};
+        QVector<VLayoutPoint> const shape1{LayoutPoint(QPointF(pos.x(), pos.y()), true),
+                                           LayoutPoint(QPointF(pos.x(), pos.y() + box.height() / 2.0), true)};
 
-        QVector<VLayoutPoint> shape2{LayoutPoint(QPointF(pos.x() - box.width() / 2.0, pos.y()), true),
-                                     LayoutPoint(QPointF(pos.x(), pos.y()), true)};
+        QVector<VLayoutPoint> const shape2{LayoutPoint(QPointF(pos.x() - box.width() / 2.0, pos.y()), true),
+                                           LayoutPoint(QPointF(pos.x(), pos.y()), true)};
 
         return PlaceLabelImg{shape1, shape2};
     };
 
     auto TriangleShape = [pos, box, LayoutPoint]()
     {
-        QRectF rect(QPointF(pos.x() - box.width() / 2.0, pos.y() - box.height() / 2.0),
-                    QPointF(pos.x() + box.width() / 2.0, pos.y() + box.height() / 2.0));
+        QRectF const rect(QPointF(pos.x() - box.width() / 2.0, pos.y() - box.height() / 2.0),
+                          QPointF(pos.x() + box.width() / 2.0, pos.y() + box.height() / 2.0));
 
-        QVector<VLayoutPoint> shape{LayoutPoint(rect.topLeft(), true), LayoutPoint(rect.topRight(), true),
-                                    LayoutPoint(rect.bottomRight(), true), LayoutPoint(rect.topLeft(), true)};
+        QVector<VLayoutPoint> const shape{LayoutPoint(rect.topLeft(), true), LayoutPoint(rect.topRight(), true),
+                                          LayoutPoint(rect.bottomRight(), true), LayoutPoint(rect.topLeft(), true)};
 
         return PlaceLabelImg{shape};
     };
@@ -1999,13 +1999,13 @@ auto VAbstractPiece::PlaceLabelShape(const VLayoutPlaceLabel &label) -> PlaceLab
         const QPointF center1(pos.x(), pos.y() - box.height() / 2.0);
         const QPointF center2(pos.x(), pos.y() + box.height() / 2.0);
 
-        QVector<VLayoutPoint> shape1{LayoutPoint(center1, true), LayoutPoint(center2, true)};
+        QVector<VLayoutPoint> const shape1{LayoutPoint(center1, true), LayoutPoint(center2, true)};
 
-        QVector<VLayoutPoint> shape2{LayoutPoint(QPointF(center1.x() - box.width() / 2.0, center1.y()), true),
-                                     LayoutPoint(QPointF(center1.x() + box.width() / 2.0, center1.y()), true)};
+        QVector<VLayoutPoint> const shape2{LayoutPoint(QPointF(center1.x() - box.width() / 2.0, center1.y()), true),
+                                           LayoutPoint(QPointF(center1.x() + box.width() / 2.0, center1.y()), true)};
 
-        QVector<VLayoutPoint> shape3{LayoutPoint(QPointF(center2.x() - box.width() / 2.0, center2.y()), true),
-                                     LayoutPoint(QPointF(center2.x() + box.width() / 2.0, center2.y()), true)};
+        QVector<VLayoutPoint> const shape3{LayoutPoint(QPointF(center2.x() - box.width() / 2.0, center2.y()), true),
+                                           LayoutPoint(QPointF(center2.x() + box.width() / 2.0, center2.y()), true)};
 
         return PlaceLabelImg{shape1, shape2, shape3};
     };
@@ -2013,11 +2013,11 @@ auto VAbstractPiece::PlaceLabelShape(const VLayoutPlaceLabel &label) -> PlaceLab
     auto ButtonShape = [pos, box, LayoutPoint]()
     {
         const qreal radius = qMin(box.width() / 2.0, box.height() / 2.0);
-        QVector<VLayoutPoint> shape1{LayoutPoint(QPointF(pos.x(), pos.y() - radius), true),
-                                     LayoutPoint(QPointF(pos.x(), pos.y() + radius), true)};
+        QVector<VLayoutPoint> const shape1{LayoutPoint(QPointF(pos.x(), pos.y() - radius), true),
+                                           LayoutPoint(QPointF(pos.x(), pos.y() + radius), true)};
 
-        QVector<VLayoutPoint> shape2{LayoutPoint(QPointF(pos.x() - radius, pos.y()), true),
-                                     LayoutPoint(QPointF(pos.x() + radius, pos.y()), true)};
+        QVector<VLayoutPoint> const shape2{LayoutPoint(QPointF(pos.x() - radius, pos.y()), true),
+                                           LayoutPoint(QPointF(pos.x() + radius, pos.y()), true)};
 
         const qreal circleSize = 0.85;
         VArc arc(VPointF(pos), radius * circleSize, 0, 360);

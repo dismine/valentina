@@ -94,7 +94,7 @@ void VisToolSplinePath::RefreshGeometry()
                 const auto preLastPoint = (m_path.CountSubSpl() - 1) * 2;
                 const auto lastPoint = preLastPoint + 1;
 
-                VSpline spl = m_path.GetSpline(i);
+                VSpline const spl = m_path.GetSpline(i);
 
                 m_ctrlPoints.at(preLastPoint)
                     ->RefreshCtrlPoint(i, SplinePointPosition::FirstPoint, static_cast<QPointF>(spl.GetP2()),
@@ -233,7 +233,7 @@ void VisToolSplinePath::DragControlPoint(vsizetype lastPoint, vsizetype preLastP
         m_ctrlPoints.at(lastPoint)->RefreshCtrlPoint(size, SplinePointPosition::FirstPoint, m_ctrlPoint, pSpl);
     }
 
-    VSpline spline(VPointF(pSpl), m_ctrlPoint, ScenePos(), VPointF(ScenePos()));
+    VSpline const spline(VPointF(pSpl), m_ctrlPoint, ScenePos(), VPointF(ScenePos()));
 
     if (size == 1)
     {
@@ -242,7 +242,7 @@ void VisToolSplinePath::DragControlPoint(vsizetype lastPoint, vsizetype preLastP
     else
     {
         const VSpline spl = m_path.GetSpline(size - 1);
-        VSpline preSpl(spl.GetP1(), static_cast<QPointF>(spl.GetP2()), ctrlLine.p2(), VPointF(pSpl));
+        VSpline const preSpl(spl.GetP1(), static_cast<QPointF>(spl.GetP2()), ctrlLine.p2(), VPointF(pSpl));
 
         m_path[size - 1].SetAngle2(spline.GetStartAngle(), spline.GetStartAngleFormula());
         if (m_ctrlPoint != pSpl)
@@ -300,7 +300,7 @@ void VisToolSplinePath::Creating(const QPointF &pSpl, vsizetype size)
     {
         m_pointSelected = true;
 
-        VSpline spline(VPointF(pSpl), m_ctrlPoint, ScenePos(), VPointF(ScenePos()));
+        VSpline const spline(VPointF(pSpl), m_ctrlPoint, ScenePos(), VPointF(ScenePos()));
         NewCurveSegment(spline, pSpl, size);
         DrawPath(m_newCurveSegment, spline.GetPath(), Qt::SolidLine, Qt::RoundCap);
     }

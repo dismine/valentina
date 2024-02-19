@@ -108,7 +108,7 @@ void VAbstractConverter::ReserveFile() const
     // It's not possible in all cases make conversion without lose data.
     // For such cases we will store old version in a reserve file.
     QString error;
-    QFileInfo info(m_convertedFileName);
+    QFileInfo const info(m_convertedFileName);
     const QString reserveFileName = u"%1/%2(v%3).%4.bak"_s.arg(info.absoluteDir().absolutePath(), info.baseName(),
                                                                GetFormatVersionStr(), info.completeSuffix());
     if (not SafeCopy(m_convertedFileName, reserveFileName, error))
@@ -196,7 +196,7 @@ void VAbstractConverter::ValidateXML(const QString &schema) const
     const char *schemaData = data.constData();
     const auto schemaSize = static_cast<size_t>(data.size());
 
-    QScopedPointer<XERCES_CPP_NAMESPACE::InputSource> grammarSource(new XERCES_CPP_NAMESPACE::MemBufInputSource(
+    QScopedPointer<XERCES_CPP_NAMESPACE::InputSource> const grammarSource(new XERCES_CPP_NAMESPACE::MemBufInputSource(
         reinterpret_cast<const XMLByte *>(schemaData), schemaSize, "schema"));
 
     if (domParser.loadGrammar(*grammarSource, XERCES_CPP_NAMESPACE::Grammar::SchemaGrammarType, true) == nullptr)
@@ -236,7 +236,7 @@ void VAbstractConverter::ValidateXML(const QString &schema) const
     const char *patternData = patternFileData.constData();
     const auto patternSize = static_cast<size_t>(patternFileData.size());
 
-    QScopedPointer<XERCES_CPP_NAMESPACE::InputSource> patternSource(new XERCES_CPP_NAMESPACE::MemBufInputSource(
+    QScopedPointer<XERCES_CPP_NAMESPACE::InputSource> const patternSource(new XERCES_CPP_NAMESPACE::MemBufInputSource(
         reinterpret_cast<const XMLByte *>(patternData), patternSize, "pattern"));
 
     domParser.parse(*patternSource);
@@ -375,7 +375,7 @@ void VAbstractConverter::SetVersion(const QString &version)
 
     if (setTagText(TagVersion, version) == false)
     {
-        VException e(tr("Could not change version."));
+        VException const e(tr("Could not change version."));
         throw e;
     }
 }

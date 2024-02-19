@@ -358,7 +358,7 @@ void DialogPiecePath::ShowContextMenu(const QPoint &pos)
     auto rowNode = qvariant_cast<VPieceNode>(rowItem->data(Qt::UserRole));
 
     QMenu menu;
-    QHash<int, QAction *> contextMenu = InitContextMenu(&menu, rowNode);
+    QHash<int, QAction *> const contextMenu = InitContextMenu(&menu, rowNode);
 
     QAction *selectedAction = menu.exec(ui->listWidget->viewport()->mapToGlobal(pos));
     auto selectedOption = static_cast<ContextMenuOption>(
@@ -1009,7 +1009,7 @@ void DialogPiecePath::EvalPassmarkAngle()
 //---------------------------------------------------------------------------------------------------------------------
 void DialogPiecePath::FXWidth()
 {
-    QScopedPointer<DialogEditWrongFormula> dialog(new DialogEditWrongFormula(data, toolId, this));
+    QScopedPointer<DialogEditWrongFormula> const dialog(new DialogEditWrongFormula(data, toolId, this));
     dialog->setWindowTitle(tr("Edit seam allowance width"));
     dialog->SetFormula(GetFormulaSAWidth());
     dialog->setCheckLessThanZero(true);
@@ -1023,7 +1023,7 @@ void DialogPiecePath::FXWidth()
 //---------------------------------------------------------------------------------------------------------------------
 void DialogPiecePath::FXWidthBefore()
 {
-    QScopedPointer<DialogEditWrongFormula> dialog(new DialogEditWrongFormula(data, toolId, this));
+    QScopedPointer<DialogEditWrongFormula> const dialog(new DialogEditWrongFormula(data, toolId, this));
     dialog->setWindowTitle(tr("Edit seam allowance width before"));
     dialog->SetFormula(GetFormulaSAWidthBefore());
     dialog->setCheckLessThanZero(true);
@@ -1037,7 +1037,7 @@ void DialogPiecePath::FXWidthBefore()
 //---------------------------------------------------------------------------------------------------------------------
 void DialogPiecePath::FXWidthAfter()
 {
-    QScopedPointer<DialogEditWrongFormula> dialog(new DialogEditWrongFormula(data, toolId, this));
+    QScopedPointer<DialogEditWrongFormula> const dialog(new DialogEditWrongFormula(data, toolId, this));
     dialog->setWindowTitle(tr("Edit seam allowance width after"));
     dialog->SetFormula(GetFormulaSAWidthAfter());
     dialog->setCheckLessThanZero(true);
@@ -1051,7 +1051,7 @@ void DialogPiecePath::FXWidthAfter()
 //---------------------------------------------------------------------------------------------------------------------
 void DialogPiecePath::FXVisible()
 {
-    QScopedPointer<DialogEditWrongFormula> dialog(new DialogEditWrongFormula(data, toolId, this));
+    QScopedPointer<DialogEditWrongFormula> const dialog(new DialogEditWrongFormula(data, toolId, this));
     dialog->setWindowTitle(tr("Control visibility"));
     dialog->SetFormula(GetFormulaVisible());
     if (dialog->exec() == QDialog::Accepted)
@@ -1063,7 +1063,7 @@ void DialogPiecePath::FXVisible()
 //---------------------------------------------------------------------------------------------------------------------
 void DialogPiecePath::FXPassmarkLength()
 {
-    QScopedPointer<DialogEditWrongFormula> dialog(new DialogEditWrongFormula(data, toolId, this));
+    QScopedPointer<DialogEditWrongFormula> const dialog(new DialogEditWrongFormula(data, toolId, this));
     dialog->setWindowTitle(tr("Edit passmark length"));
     dialog->SetFormula(GetFormulaPassmarkLength());
     dialog->setCheckZero(true);
@@ -1078,7 +1078,7 @@ void DialogPiecePath::FXPassmarkLength()
 //---------------------------------------------------------------------------------------------------------------------
 void DialogPiecePath::FXPassmarkWidth()
 {
-    QScopedPointer<DialogEditWrongFormula> dialog(new DialogEditWrongFormula(data, toolId, this));
+    QScopedPointer<DialogEditWrongFormula> const dialog(new DialogEditWrongFormula(data, toolId, this));
     dialog->setWindowTitle(tr("Edit passmark width"));
     dialog->SetFormula(GetFormulaPassmarkWidth());
     dialog->setCheckZero(true);
@@ -1092,7 +1092,7 @@ void DialogPiecePath::FXPassmarkWidth()
 //---------------------------------------------------------------------------------------------------------------------
 void DialogPiecePath::FXPassmarkAngle()
 {
-    QScopedPointer<DialogEditWrongFormula> dialog(new DialogEditWrongFormula(data, toolId, this));
+    QScopedPointer<DialogEditWrongFormula> const dialog(new DialogEditWrongFormula(data, toolId, this));
     dialog->setWindowTitle(tr("Edit passmark angle"));
     dialog->SetFormula(GetFormulaPassmarkAngle());
     dialog->setPostfix(degreeSymbol);
@@ -1801,7 +1801,7 @@ void DialogPiecePath::SetPieceId(quint32 id)
 //---------------------------------------------------------------------------------------------------------------------
 auto DialogPiecePath::GetFormulaSAWidth() const -> QString
 {
-    QString width = ui->plainTextEditFormulaWidth->toPlainText();
+    QString const width = ui->plainTextEditFormulaWidth->toPlainText();
     return VTranslateVars::TryFormulaFromUser(width, VAbstractApplication::VApp()->Settings()->GetOsSeparator());
 }
 
@@ -1920,21 +1920,21 @@ void DialogPiecePath::NewItem(const VPieceNode &node)
 //---------------------------------------------------------------------------------------------------------------------
 auto DialogPiecePath::GetFormulaSAWidthBefore() const -> QString
 {
-    QString width = ui->plainTextEditFormulaWidthBefore->toPlainText();
+    QString const width = ui->plainTextEditFormulaWidthBefore->toPlainText();
     return VTranslateVars::TryFormulaFromUser(width, VAbstractApplication::VApp()->Settings()->GetOsSeparator());
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 auto DialogPiecePath::GetFormulaSAWidthAfter() const -> QString
 {
-    QString width = ui->plainTextEditFormulaWidthAfter->toPlainText();
+    QString const width = ui->plainTextEditFormulaWidthAfter->toPlainText();
     return VTranslateVars::TryFormulaFromUser(width, VAbstractApplication::VApp()->Settings()->GetOsSeparator());
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 auto DialogPiecePath::GetFormulaVisible() const -> QString
 {
-    QString formula = ui->plainTextEditFormulaVisible->toPlainText();
+    QString const formula = ui->plainTextEditFormulaVisible->toPlainText();
     return VTranslateVars::TryFormulaFromUser(formula, VAbstractApplication::VApp()->Settings()->GetOsSeparator());
 }
 
@@ -1955,7 +1955,7 @@ void DialogPiecePath::SetFormulaVisible(const QString &formula)
 //---------------------------------------------------------------------------------------------------------------------
 auto DialogPiecePath::GetFormulaPassmarkLength() const -> QString
 {
-    QString formula = ui->plainTextEditPassmarkLength->toPlainText();
+    QString const formula = ui->plainTextEditPassmarkLength->toPlainText();
     return VTranslateVars::TryFormulaFromUser(formula, VAbstractApplication::VApp()->Settings()->GetOsSeparator());
 }
 
@@ -1976,7 +1976,7 @@ void DialogPiecePath::SetFormulaPassmarkLength(const QString &formula)
 //---------------------------------------------------------------------------------------------------------------------
 auto DialogPiecePath::GetFormulaPassmarkWidth() const -> QString
 {
-    QString formula = ui->plainTextEditPassmarkWidth->toPlainText();
+    QString const formula = ui->plainTextEditPassmarkWidth->toPlainText();
     return VTranslateVars::TryFormulaFromUser(formula, VAbstractApplication::VApp()->Settings()->GetOsSeparator());
 }
 
@@ -1997,7 +1997,7 @@ void DialogPiecePath::SetFormulaPassmarkWidth(const QString &formula)
 //---------------------------------------------------------------------------------------------------------------------
 auto DialogPiecePath::GetFormulaPassmarkAngle() const -> QString
 {
-    QString formula = ui->plainTextEditPassmarkWidth->toPlainText();
+    QString const formula = ui->plainTextEditPassmarkWidth->toPlainText();
     return VTranslateVars::TryFormulaFromUser(formula, VAbstractApplication::VApp()->Settings()->GetOsSeparator());
 }
 
@@ -2053,7 +2053,7 @@ void DialogPiecePath::InitPassmarkLengthFormula(const VPieceNode &node)
 
         if (passmarkLength.isEmpty())
         {
-            qreal length = UnitConvertor(1, Unit::Cm, VAbstractValApplication::VApp()->patternUnits());
+            qreal const length = UnitConvertor(1, Unit::Cm, VAbstractValApplication::VApp()->patternUnits());
             ui->plainTextEditPassmarkLength->setPlainText(VAbstractApplication::VApp()->LocaleToString(length));
         }
         else
@@ -2063,7 +2063,7 @@ void DialogPiecePath::InitPassmarkLengthFormula(const VPieceNode &node)
     }
     else
     {
-        qreal length = UnitConvertor(1, Unit::Cm, VAbstractValApplication::VApp()->patternUnits());
+        qreal const length = UnitConvertor(1, Unit::Cm, VAbstractValApplication::VApp()->patternUnits());
         ui->plainTextEditPassmarkLength->setPlainText(VAbstractApplication::VApp()->LocaleToString(length));
     }
 
@@ -2099,7 +2099,7 @@ void DialogPiecePath::InitPassmarkWidthFormula(const VPieceNode &node)
 
             if (passmarkWidth.isEmpty())
             {
-                qreal width = UnitConvertor(0.85, Unit::Cm, VAbstractValApplication::VApp()->patternUnits());
+                qreal const width = UnitConvertor(0.85, Unit::Cm, VAbstractValApplication::VApp()->patternUnits());
                 ui->plainTextEditPassmarkWidth->setPlainText(VAbstractApplication::VApp()->LocaleToString(width));
             }
             else
@@ -2109,7 +2109,7 @@ void DialogPiecePath::InitPassmarkWidthFormula(const VPieceNode &node)
         }
         else
         {
-            qreal width = UnitConvertor(0.85, Unit::Cm, VAbstractValApplication::VApp()->patternUnits());
+            qreal const width = UnitConvertor(0.85, Unit::Cm, VAbstractValApplication::VApp()->patternUnits());
             ui->plainTextEditPassmarkWidth->setPlainText(VAbstractApplication::VApp()->LocaleToString(width));
         }
 
@@ -2117,7 +2117,7 @@ void DialogPiecePath::InitPassmarkWidthFormula(const VPieceNode &node)
     }
     else
     {
-        qreal width = UnitConvertor(0.85, Unit::Cm, VAbstractValApplication::VApp()->patternUnits());
+        qreal const width = UnitConvertor(0.85, Unit::Cm, VAbstractValApplication::VApp()->patternUnits());
         ui->plainTextEditPassmarkWidth->setPlainText(VAbstractApplication::VApp()->LocaleToString(width));
     }
     ChangeColor(ui->labelEditPassmarkWidth, OkColor(this));

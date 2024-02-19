@@ -368,16 +368,16 @@ void DialogBisector::ShowDialog(bool click)
         const QSharedPointer<VPointF> p2 = data->GeometricObject<VPointF>(GetSecondPointId());
         const QSharedPointer<VPointF> p3 = data->GeometricObject<VPointF>(GetThirdPointId());
 
-        qreal angle = VToolBisector::BisectorAngle(static_cast<QPointF>(*p1), static_cast<QPointF>(*p2),
-                                                   static_cast<QPointF>(*p3));
+        qreal const angle = VToolBisector::BisectorAngle(static_cast<QPointF>(*p1), static_cast<QPointF>(*p2),
+                                                         static_cast<QPointF>(*p3));
 
         QLineF baseLine(static_cast<QPointF>(*p2), static_cast<QPointF>(*p3));
         baseLine.setAngle(angle);
 
-        QLineF line(static_cast<QPointF>(*p2), scene->getScenePos());
+        QLineF const line(static_cast<QPointF>(*p2), scene->getScenePos());
 
         qreal len = line.length();
-        qreal angleTo = baseLine.angleTo(line);
+        qreal const angleTo = baseLine.angleTo(line);
         if (angleTo > 90 && angleTo < 270)
         {
             len *= -1;
@@ -475,7 +475,7 @@ void DialogBisector::FinishCreating()
 //---------------------------------------------------------------------------------------------------------------------
 void DialogBisector::InitIcons()
 {
-    QString resource = QStringLiteral("icon");
+    QString const resource = QStringLiteral("icon");
 
     ui->toolButtonExprLength->setIcon(VTheme::GetIconResource(resource, QStringLiteral("24x24/fx.png")));
     ui->label_3->setPixmap(VTheme::GetPixmapResource(resource, QStringLiteral("24x24/equal.png")));

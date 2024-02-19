@@ -256,7 +256,7 @@ void DialogCutArc::ArcChanged()
 //---------------------------------------------------------------------------------------------------------------------
 void DialogCutArc::ValidateAlias()
 {
-    QRegularExpression rx(NameRegExp());
+    QRegularExpression const rx(NameRegExp());
 
     VArc arc1;
     arc1.SetAliasSuffix(GetAliasSuffix1());
@@ -308,7 +308,7 @@ void DialogCutArc::FinishCreating()
 //---------------------------------------------------------------------------------------------------------------------
 void DialogCutArc::InitIcons()
 {
-    QString resource = QStringLiteral("icon");
+    QString const resource = QStringLiteral("icon");
 
     ui->toolButtonExprLength->setIcon(VTheme::GetIconResource(resource, QStringLiteral("24x24/fx.png")));
     ui->label_4->setPixmap(VTheme::GetPixmapResource(resource, QStringLiteral("24x24/equal.png")));
@@ -458,7 +458,7 @@ void DialogCutArc::ShowDialog(bool click)
         SCASSERT(scene != nullptr)
 
         const QSharedPointer<VArc> arc = data->GeometricObject<VArc>(getArcId());
-        QPointF p = arc->ClosestPoint(scene->getScenePos());
+        QPointF const p = arc->ClosestPoint(scene->getScenePos());
         qreal len = arc->GetLengthByPoint(p);
 
         len = !arc->IsFlipped() ? qBound(0.0, len, arc->GetLength()) : qBound(arc->GetLength(), -len, 0.0);

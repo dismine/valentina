@@ -87,10 +87,10 @@ void VisToolHeight::RefreshGeometry()
 
             DrawLine(m_line, base_line);
 
-            QPointF height = VToolHeight::FindPoint(base_line, static_cast<QPointF>(*first));
+            QPointF const height = VToolHeight::FindPoint(base_line, static_cast<QPointF>(*first));
             DrawPoint(m_point, height);
 
-            QLineF height_line(static_cast<QPointF>(*first), height);
+            QLineF const height_line(static_cast<QPointF>(*first), height);
             DrawLine(this, height_line, LineStyle());
 
             ShowIntersection(height_line, base_line);
@@ -109,7 +109,7 @@ void VisToolHeight::VisualMode(quint32 id)
 void VisToolHeight::ShowIntersection(const QLineF &height_line, const QLineF &base_line)
 {
     QPointF p;
-    QLineF::IntersectType intersect = height_line.intersects(base_line, &p);
+    QLineF::IntersectType const intersect = height_line.intersects(base_line, &p);
 
     if (intersect == QLineF::UnboundedIntersection)
     {

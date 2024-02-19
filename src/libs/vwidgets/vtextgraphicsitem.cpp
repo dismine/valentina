@@ -72,19 +72,19 @@ constexpr int activeZ = 10;
 auto GetBoundingRect(const QRectF &rectBB, qreal dRot) -> QRectF
 {
     std::array<QPointF, 4> apt = {rectBB.topLeft(), rectBB.topRight(), rectBB.bottomLeft(), rectBB.bottomRight()};
-    QPointF ptCenter = rectBB.center();
+    QPointF const ptCenter = rectBB.center();
 
     qreal dX1 = 0;
     qreal dX2 = 0;
     qreal dY1 = 0;
     qreal dY2 = 0;
 
-    double dAng = qDegreesToRadians(dRot);
+    double const dAng = qDegreesToRadians(dRot);
     for (std::size_t i = 0; i < 4; ++i)
     {
-        QPointF pt = apt.at(i) - ptCenter;
-        qreal dX = pt.x() * cos(dAng) + pt.y() * sin(dAng);
-        qreal dY = -pt.x() * sin(dAng) + pt.y() * cos(dAng);
+        QPointF const pt = apt.at(i) - ptCenter;
+        qreal const dX = pt.x() * cos(dAng) + pt.y() * sin(dAng);
+        qreal const dY = -pt.x() * sin(dAng) + pt.y() * cos(dAng);
 
         if (i == 0)
         {
@@ -205,10 +205,10 @@ void VTextGraphicsItem::paint(QPainter *painter, const QStyleOptionGraphicsItem 
                 painter->setPen(QPen(VSceneStylesheet::PatternPieceStyle().LabelModeColor(), 3));
                 painter->setBrush(Qt::NoBrush);
                 // and then draw the arc in each of the corners
-                int iTop = rotateRect - rotateArc;
-                int iLeft = rotateRect - rotateArc;
-                int iRight = qRound(m_rectBoundingBox.width()) - rotateRect;
-                int iBottom = qRound(m_rectBoundingBox.height()) - rotateRect;
+                int const iTop = rotateRect - rotateArc;
+                int const iLeft = rotateRect - rotateArc;
+                int const iRight = qRound(m_rectBoundingBox.width()) - rotateRect;
+                int const iBottom = qRound(m_rectBoundingBox.height()) - rotateRect;
                 painter->drawArc(iLeft, iTop, rotateArc, rotateArc, 180 * 16, -90 * 16);
                 painter->drawArc(iRight, iTop, rotateArc, rotateArc, 90 * 16, -90 * 16);
                 painter->drawArc(iLeft, iBottom, rotateArc, rotateArc, 270 * 16, -90 * 16);
@@ -260,7 +260,7 @@ void VTextGraphicsItem::Update()
  */
 auto VTextGraphicsItem::IsContained(QRectF rectBB, qreal dRot, qreal &dX, qreal &dY) const -> bool
 {
-    QRectF rectParent = parentItem()->boundingRect();
+    QRectF const rectParent = parentItem()->boundingRect();
     rectBB = GetBoundingRect(rectBB, dRot);
     dX = 0;
     dY = 0;
@@ -337,7 +337,7 @@ auto VTextGraphicsItem::GetFontSize() const -> int
     int size = m_tm.GetFont().pixelSize();
     if (size == -1)
     {
-        QFontMetrics fontMetrics(m_tm.GetFont());
+        QFontMetrics const fontMetrics(m_tm.GetFont());
         size = fontMetrics.height();
     }
 
@@ -478,10 +478,10 @@ void VTextGraphicsItem::mouseReleaseEvent(QGraphicsSceneMouseEvent *pME)
         SetItemOverrideCursor(this, cursorArrowOpenHand, 1, 1);
     }
 
-    double dDist = fabs(pME->scenePos().x() - m_ptStart.x()) + fabs(pME->scenePos().y() - m_ptStart.y());
+    double const dDist = fabs(pME->scenePos().x() - m_ptStart.x()) + fabs(pME->scenePos().y() - m_ptStart.y());
     // determine if this was just press/release (bShort == true) or user did some operation between press and
     // release
-    bool bShort = (dDist < 2);
+    bool const bShort = (dDist < 2);
 
     if (m_eMode == mMove || m_eMode == mResize)
     { // if user just pressed and released the button, we must switch the mode to rotate
@@ -717,7 +717,7 @@ void VTextGraphicsItem::RotateLabel(QGraphicsSceneMouseEvent *pME)
     rectBB.setHeight(m_rectBoundingBox.height());
 
     // calculate the angle difference from the starting angle
-    double dAng = qRadiansToDegrees(GetAngle(mapToParent(pME->pos())) - m_dAngle);
+    double const dAng = qRadiansToDegrees(GetAngle(mapToParent(pME->pos())) - m_dAngle);
 
     // check if the rotated label will be inside the parent item and then rotate it
     qreal dX;
@@ -752,11 +752,11 @@ void VTextGraphicsItem::PaintLabelOutlineFont(QPainter *painter)
     const QVector<TextLine> labelLines = m_tm.GetLabelSourceLines(iW, fnt);
 
     VCommonSettings *settings = VAbstractApplication::VApp()->Settings();
-    bool textAsPaths = settings->GetSingleStrokeOutlineFont();
+    bool const textAsPaths = settings->GetSingleStrokeOutlineFont();
 
     // draw text lines
     qreal iY = 0;
-    qreal penWidth = VAbstractApplication::VApp()->Settings()->WidthHairLine();
+    qreal const penWidth = VAbstractApplication::VApp()->Settings()->WidthHairLine();
 
     if (textAsPaths)
     {
@@ -777,8 +777,8 @@ void VTextGraphicsItem::PaintLabelOutlineFont(QPainter *painter)
         fnt.setBold(tl.m_bold);
         fnt.setItalic(tl.m_italic);
 
-        QString qsText = tl.m_qsText;
-        QFontMetrics fm(fnt);
+        QString const qsText = tl.m_qsText;
+        QFontMetrics const fm(fnt);
         qreal lineHeight = fm.height();
 
         if (iY + lineHeight > boundingRect.height())
@@ -854,10 +854,10 @@ void VTextGraphicsItem::PaintLabelSVGFont(QPainter *painter)
     VSvgFontEngine engine = db->FontEngine(m_tm.GetSVGFontFamily(), SVGFontStyle::Normal, SVGFontWeight::Normal,
                                            m_tm.GetSVGFontPointSize());
 
-    VSvgFont svgFont = engine.Font();
+    VSvgFont const svgFont = engine.Font();
     if (!svgFont.IsValid())
     {
-        QString errorMsg = tr("Invalid SVG font '%1'. Fallback to outline font.").arg(svgFont.Name());
+        QString const errorMsg = tr("Invalid SVG font '%1'. Fallback to outline font.").arg(svgFont.Name());
         VAbstractApplication::VApp()->IsPedantic()
             ? throw VException(errorMsg)
             : qWarning() << VAbstractValApplication::warningMessageSignature + errorMsg;
@@ -865,7 +865,7 @@ void VTextGraphicsItem::PaintLabelSVGFont(QPainter *painter)
         return;
     }
 
-    qreal penWidth = VAbstractApplication::VApp()->Settings()->WidthHairLine();
+    qreal const penWidth = VAbstractApplication::VApp()->Settings()->WidthHairLine();
     QPen pen = painter->pen();
     pen.setCapStyle(Qt::RoundCap);
     pen.setJoinStyle(Qt::RoundJoin);

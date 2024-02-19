@@ -109,7 +109,7 @@ auto GetSystemMemorySize() -> qint64
 //---------------------------------------------------------------------------------------------------------------------
 auto GetSystemMemorySizeGB() -> double
 {
-    qint64 totalMemoryBytes = GetSystemMemorySize();
+    qint64 const totalMemoryBytes = GetSystemMemorySize();
     if (totalMemoryBytes != -1)
     {
         return static_cast<double>(totalMemoryBytes) / (1024 * 1024 * 1024); // Convert bytes to gigabytes
@@ -121,7 +121,7 @@ auto GetSystemMemorySizeGB() -> double
 //---------------------------------------------------------------------------------------------------------------------
 auto TotalMemory() -> QString
 {
-    double size = qRound(GetSystemMemorySizeGB() * 10.0) / 10.0;
+    double const size = qRound(GetSystemMemorySizeGB() * 10.0) / 10.0;
     return !qFuzzyCompare(size, -1.0) ? QStringLiteral("%1 GB").arg(size) : QStringLiteral("Unknown RAM");
 }
 } // namespace
@@ -262,7 +262,7 @@ void VGAnalytics::SendAppStartEvent(qint64 engagementTimeMsec)
 //---------------------------------------------------------------------------------------------------------------------
 void VGAnalytics::SendAppCloseEvent(qint64 engagementTimeMsec)
 {
-    QHash<QString, QJsonValue> params{
+    QHash<QString, QJsonValue> const params{
         // {QStringLiteral("category"), ""},
         // In order for user activity to display in standard reports like Realtime, engagement_time_msec and session_id
         // must be supplied as part of the params for an event.
@@ -289,7 +289,7 @@ void VGAnalytics::SendAppCloseEvent(qint64 engagementTimeMsec)
 //---------------------------------------------------------------------------------------------------------------------
 void VGAnalytics::SendPatternToolUsedEvent(qint64 engagementTimeMsec, const QString &toolName)
 {
-    QHash<QString, QJsonValue> params{
+    QHash<QString, QJsonValue> const params{
         // {QStringLiteral("category"), ""},
         // In order for user activity to display in standard reports like Realtime, engagement_time_msec and session_id
         // must be supplied as part of the params for an event.
@@ -304,7 +304,7 @@ void VGAnalytics::SendPatternToolUsedEvent(qint64 engagementTimeMsec, const QStr
 //---------------------------------------------------------------------------------------------------------------------
 void VGAnalytics::SendPatternFormatVersion(qint64 engagementTimeMsec, const QString &version)
 {
-    QHash<QString, QJsonValue> params{
+    QHash<QString, QJsonValue> const params{
         // In order for user activity to display in standard reports like Realtime, engagement_time_msec and session_id
         // must be supplied as part of the params for an event.
         // https://developers.google.com/analytics/devguides/collection/protocol/ga4/sending-events?client_type=gtag#optional_parameters_for_reports
@@ -318,7 +318,7 @@ void VGAnalytics::SendPatternFormatVersion(qint64 engagementTimeMsec, const QStr
 //---------------------------------------------------------------------------------------------------------------------
 void VGAnalytics::SendIndividualMeasurementsFormatVersion(qint64 engagementTimeMsec, const QString &version)
 {
-    QHash<QString, QJsonValue> params{
+    QHash<QString, QJsonValue> const params{
         // In order for user activity to display in standard reports like Realtime, engagement_time_msec and session_id
         // must be supplied as part of the params for an event.
         // https://developers.google.com/analytics/devguides/collection/protocol/ga4/sending-events?client_type=gtag#optional_parameters_for_reports
@@ -332,7 +332,7 @@ void VGAnalytics::SendIndividualMeasurementsFormatVersion(qint64 engagementTimeM
 //---------------------------------------------------------------------------------------------------------------------
 void VGAnalytics::SendMultisizeMeasurementsFormatVersion(qint64 engagementTimeMsec, const QString &version)
 {
-    QHash<QString, QJsonValue> params{
+    QHash<QString, QJsonValue> const params{
         // In order for user activity to display in standard reports like Realtime, engagement_time_msec and session_id
         // must be supplied as part of the params for an event.
         // https://developers.google.com/analytics/devguides/collection/protocol/ga4/sending-events?client_type=gtag#optional_parameters_for_reports
@@ -346,7 +346,7 @@ void VGAnalytics::SendMultisizeMeasurementsFormatVersion(qint64 engagementTimeMs
 //---------------------------------------------------------------------------------------------------------------------
 void VGAnalytics::SendLayoutFormatVersion(qint64 engagementTimeMsec, const QString &version)
 {
-    QHash<QString, QJsonValue> params{
+    QHash<QString, QJsonValue> const params{
         // In order for user activity to display in standard reports like Realtime, engagement_time_msec and session_id
         // must be supplied as part of the params for an event.
         // https://developers.google.com/analytics/devguides/collection/protocol/ga4/sending-events?client_type=gtag#optional_parameters_for_reports
@@ -439,7 +439,7 @@ auto VGAnalytics::InitAppStartEventParams(qint64 engagementTimeMsec) const -> QH
 auto VGAnalytics::CountryCode() -> QString
 {
     QNetworkAccessManager manager;
-    QNetworkRequest request(QUrl(QStringLiteral("https://api.country.is")));
+    QNetworkRequest const request(QUrl(QStringLiteral("https://api.country.is")));
     QNetworkReply *reply = manager.get(request);
 
     QTimer timer;
@@ -460,9 +460,9 @@ auto VGAnalytics::CountryCode() -> QString
         // The API response was received before the timeout
         if (reply->error() == QNetworkReply::NoError)
         {
-            QByteArray responseData = reply->readAll();
+            QByteArray const responseData = reply->readAll();
             QJsonParseError error;
-            QJsonDocument jsonDoc = QJsonDocument::fromJson(responseData, &error);
+            QJsonDocument const jsonDoc = QJsonDocument::fromJson(responseData, &error);
 
             if (error.error == QJsonParseError::NoError && jsonDoc.isObject())
             {

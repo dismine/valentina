@@ -42,7 +42,7 @@ HideAllBackgroundImages::HideAllBackgroundImages(bool hide, VAbstractPattern *do
         setText(tr("show all background images"));
     }
 
-    QVector<VBackgroundPatternImage> images = doc->GetBackgroundImages();
+    QVector<VBackgroundPatternImage> const images = doc->GetBackgroundImages();
 
     for (const auto& image : images)
     {

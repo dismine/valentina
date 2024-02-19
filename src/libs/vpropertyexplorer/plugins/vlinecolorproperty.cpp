@@ -92,7 +92,7 @@ auto VPE::VLineColorProperty::createEditor(QWidget *parent, const QStyleOptionVi
     auto *tmpEditor = new QComboBox(parent);
     tmpEditor->setPalette(parent->palette());
 
-    int size = tmpEditor->iconSize().height();
+    int const size = tmpEditor->iconSize().height();
     // On Mac pixmap should be little bit smaller.
 #if defined(Q_OS_MAC)
     size -= 2; // Two pixels should be enough.

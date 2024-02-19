@@ -197,7 +197,7 @@ auto FindLabelGeometry(const VPatternLabelData &labelData, const VContainer *pat
 auto RotatePoint(const QPointF &ptCenter, const QPointF &pt, qreal dAng) -> QPointF
 {
     QPointF ptDest;
-    QPointF ptRel = pt - ptCenter;
+    QPointF const ptRel = pt - ptCenter;
     ptDest.setX(cos(dAng) * ptRel.x() - sin(dAng) * ptRel.y());
     ptDest.setY(sin(dAng) * ptRel.x() + cos(dAng) * ptRel.y());
 
@@ -250,7 +250,7 @@ auto ConvertPlaceLabels(const VPiece &piece, const VContainer *pattern) -> QVect
 auto PrepareSAPassmark(const VPiece &piece, const VContainer *pattern, const VPassmark &passmark, PassmarkSide side,
                        bool &ok) -> VLayoutPassmark
 {
-    VPiecePassmarkData pData = passmark.Data();
+    VPiecePassmarkData const pData = passmark.Data();
     const QVector<VPieceNode> path = piece.GetUnitedPath(pattern);
     const int nodeIndex = VPiecePath::indexOfNode(path, pData.id);
     if (nodeIndex == -1)
@@ -264,7 +264,7 @@ auto PrepareSAPassmark(const VPiece &piece, const VContainer *pattern, const VPa
         return {};
     }
 
-    QVector<QLineF> baseLines = passmark.SAPassmarkBaseLine(piece, pattern, static_cast<PassmarkSide>(side));
+    QVector<QLineF> const baseLines = passmark.SAPassmarkBaseLine(piece, pattern, static_cast<PassmarkSide>(side));
     if (baseLines.isEmpty())
     {
         const QString errorMsg =
@@ -328,7 +328,7 @@ auto PreapreBuiltInSAPassmark(const VPiece &piece, const VContainer *pattern, co
 
     QT_WARNING_POP
 
-    VPiecePassmarkData pData = passmark.Data();
+    VPiecePassmarkData const pData = passmark.Data();
     const QVector<VPieceNode> path = piece.GetUnitedPath(pattern);
     const int nodeIndex = VPiecePath::indexOfNode(path, pData.id);
     if (nodeIndex == -1)
@@ -387,19 +387,19 @@ auto PrepareGradationPlaceholders(const VContainer *data) -> QMap<QString, QStri
 
     QMap<QString, QString> placeholders;
 
-    QString heightValue = QString::number(VAbstractValApplication::VApp()->GetDimensionHeight());
+    QString const heightValue = QString::number(VAbstractValApplication::VApp()->GetDimensionHeight());
     placeholders.insert(pl_height, heightValue);
     placeholders.insert(pl_dimensionX, heightValue);
 
-    QString sizeValue = QString::number(VAbstractValApplication::VApp()->GetDimensionSize());
+    QString const sizeValue = QString::number(VAbstractValApplication::VApp()->GetDimensionSize());
     placeholders.insert(pl_size, sizeValue);
     placeholders.insert(pl_dimensionY, sizeValue);
 
-    QString hipValue = QString::number(VAbstractValApplication::VApp()->GetDimensionHip());
+    QString const hipValue = QString::number(VAbstractValApplication::VApp()->GetDimensionHip());
     placeholders.insert(pl_hip, hipValue);
     placeholders.insert(pl_dimensionZ, hipValue);
 
-    QString waistValue = QString::number(VAbstractValApplication::VApp()->GetDimensionWaist());
+    QString const waistValue = QString::number(VAbstractValApplication::VApp()->GetDimensionWaist());
     placeholders.insert(pl_waist, waistValue);
     placeholders.insert(pl_dimensionW, waistValue);
 
@@ -437,7 +437,7 @@ auto PrepareGradationPlaceholders(const VContainer *data) -> QMap<QString, QStri
 //---------------------------------------------------------------------------------------------------------------------
 auto ReplacePlaceholders(const QMap<QString, QString> &placeholders, QString line) -> QString
 {
-    QChar per('%');
+    QChar const per('%');
 
     auto TestDimension = [per, placeholders, line](const QString &placeholder, const QString &errorMsg)
     {
@@ -913,7 +913,7 @@ void VLayoutPiece::SetPieceText(const QString &qsName, const VPieceLabelData &da
         v[i] = RotatePoint(ptCenter, v.at(i), dAng);
     }
 
-    QScopedPointer<QGraphicsItem> item(GetMainPathItem());
+    QScopedPointer<QGraphicsItem> const item(GetMainPathItem());
     d->m_detailLabel = CorrectPosition(item->boundingRect(), v);
 
     // generate text
@@ -984,7 +984,7 @@ void VLayoutPiece::SetPatternInfo(VAbstractPattern *pDoc, const VPatternLabelDat
     {
         v[i] = RotatePoint(ptCenter, v.at(i), dAng);
     }
-    QScopedPointer<QGraphicsItem> item(GetMainPathItem());
+    QScopedPointer<QGraphicsItem> const item(GetMainPathItem());
     d->m_patternInfo = CorrectPosition(item->boundingRect(), v);
 
     // Generate text
@@ -1131,9 +1131,9 @@ void VLayoutPiece::SetGrainline(const VPieceGrainline &grainline)
 //---------------------------------------------------------------------------------------------------------------------
 void VLayoutPiece::SetGrainline(const VGrainlineData &geom, const VContainer *pattern)
 {
-    QScopedPointer<QGraphicsItem> item(GetMainPathItem());
+    QScopedPointer<QGraphicsItem> const item(GetMainPathItem());
 
-    QLineF mainLine = GrainlineMainLine(geom, pattern, item->boundingRect());
+    QLineF const mainLine = GrainlineMainLine(geom, pattern, item->boundingRect());
     if (mainLine.isNull())
     {
         return;
@@ -1410,8 +1410,8 @@ void VLayoutPiece::SetLayoutAllowancePoints(bool togetherWithNotches)
         if (togetherWithNotches)
         {
             const QVector<VLayoutPassmark> passmarks = GetMappedPassmarks();
-            bool seamAllowance = IsSeamAllowance() && !IsSeamAllowanceBuiltIn();
-            bool builtInSeamAllowance = IsSeamAllowance() && IsSeamAllowanceBuiltIn();
+            bool const seamAllowance = IsSeamAllowance() && !IsSeamAllowanceBuiltIn();
+            bool const builtInSeamAllowance = IsSeamAllowance() && IsSeamAllowanceBuiltIn();
 
             VBoundary boundary(pieceBoundary, seamAllowance, builtInSeamAllowance);
             boundary.SetPieceName(GetName());
@@ -1541,8 +1541,8 @@ auto VLayoutPiece::ContourPath(bool togetherWithNotches, bool showLayoutAllowanc
     {
         if (togetherWithNotches)
         {
-            bool seamAllowance = IsSeamAllowance() && IsSeamAllowanceBuiltIn();
-            bool builtInSeamAllowance = IsSeamAllowance() && IsSeamAllowanceBuiltIn();
+            bool const seamAllowance = IsSeamAllowance() && IsSeamAllowanceBuiltIn();
+            bool const builtInSeamAllowance = IsSeamAllowance() && IsSeamAllowanceBuiltIn();
 
             VBoundary boundary(GetFullContourPoints(), seamAllowance, builtInSeamAllowance);
             boundary.SetPieceName(GetName());
@@ -1788,8 +1788,8 @@ auto VLayoutPiece::IsLayoutAllowanceValid(bool togetherWithNotches) const -> boo
     if (togetherWithNotches)
     {
         const QVector<VLayoutPassmark> passmarks = GetMappedPassmarks();
-        bool seamAllowance = IsSeamAllowance() && !IsSeamAllowanceBuiltIn();
-        bool builtInSeamAllowance = IsSeamAllowance() && IsSeamAllowanceBuiltIn();
+        bool const seamAllowance = IsSeamAllowance() && !IsSeamAllowanceBuiltIn();
+        bool const builtInSeamAllowance = IsSeamAllowance() && IsSeamAllowanceBuiltIn();
 
         VBoundary boundary(base, seamAllowance, builtInSeamAllowance);
         boundary.SetPieceName(GetName());
@@ -1894,10 +1894,10 @@ void VLayoutPiece::LabelStringsSVGFont(QGraphicsItem *parent, const QVector<QPoi
     VSvgFontEngine engine =
         db->FontEngine(tm.GetSVGFontFamily(), SVGFontStyle::Normal, SVGFontWeight::Normal, tm.GetSVGFontPointSize());
 
-    VSvgFont svgFont = engine.Font();
+    VSvgFont const svgFont = engine.Font();
     if (!svgFont.IsValid())
     {
-        QString errorMsg = tr("Invalid SVG font '%1'. Fallback to outline font.").arg(svgFont.Name());
+        QString const errorMsg = tr("Invalid SVG font '%1'. Fallback to outline font.").arg(svgFont.Name());
         VAbstractApplication::VApp()->IsPedantic()
             ? throw VException(errorMsg)
             : qWarning() << VAbstractValApplication::warningMessageSignature + errorMsg;
@@ -1905,7 +1905,7 @@ void VLayoutPiece::LabelStringsSVGFont(QGraphicsItem *parent, const QVector<QPoi
         return;
     }
 
-    qreal penWidth = VAbstractApplication::VApp()->Settings()->WidthHairLine();
+    qreal const penWidth = VAbstractApplication::VApp()->Settings()->WidthHairLine();
 
     const qreal dW = QLineF(labelShape.at(0), labelShape.at(1)).length();
     const qreal dH = QLineF(labelShape.at(1), labelShape.at(2)).length();
@@ -1992,7 +1992,7 @@ void VLayoutPiece::LabelStringsOutlineFont(QGraphicsItem *parent, const QVector<
     const qreal dW = QLineF(labelShape.at(0), labelShape.at(1)).length();
     const qreal dH = QLineF(labelShape.at(1), labelShape.at(2)).length();
     const qreal angle = -QLineF(labelShape.at(0), labelShape.at(1)).angle();
-    qreal penWidth = settings->WidthHairLine();
+    qreal const penWidth = settings->WidthHairLine();
     qreal dY = 0;
 
     const QVector<TextLine> labelLines = tm.GetLabelSourceLines(qFloor(dW), tm.GetFont());
@@ -2011,13 +2011,13 @@ void VLayoutPiece::LabelStringsOutlineFont(QGraphicsItem *parent, const QVector<
         fnt.setBold(tl.m_bold);
         fnt.setItalic(tl.m_italic);
 
-        VSingleLineOutlineChar corrector(fnt);
+        VSingleLineOutlineChar const corrector(fnt);
         if (settings->GetSingleStrokeOutlineFont() && !corrector.IsPopulated())
         {
             corrector.LoadCorrections(settings->GetPathFontCorrections());
         }
 
-        QFontMetrics fm(fnt);
+        QFontMetrics const fm(fnt);
 
         if (dY + fm.height() > dH)
         {
@@ -2338,7 +2338,7 @@ auto VLayoutPiece::Edge(const QVector<QPointF> &path, int i) const -> QLineF
 
     if (d->m_verticallyFlipped || d->m_horizontallyFlipped)
     {
-        QVector<QPointF> newPath = Map(path);
+        QVector<QPointF> const newPath = Map(path);
         return {newPath.at(i1), newPath.at(i2)};
     }
     return {d->m_matrix.map(path.at(i1)), d->m_matrix.map(path.at(i2))};
@@ -2385,7 +2385,7 @@ auto VLayoutPiece::ConvertPassmarks(const VPiece &piece, const VContainer *patte
         auto AddPassmark = [passmark, piece, pattern, &layoutPassmarks](PassmarkSide side)
         {
             bool ok = false;
-            VLayoutPassmark layoutPassmark = PrepareSAPassmark(piece, pattern, passmark, side, ok);
+            VLayoutPassmark const layoutPassmark = PrepareSAPassmark(piece, pattern, passmark, side, ok);
             if (ok)
             {
                 layoutPassmarks.append(layoutPassmark);
@@ -2395,7 +2395,7 @@ auto VLayoutPiece::ConvertPassmarks(const VPiece &piece, const VContainer *patte
         auto AddBuiltInPassmark = [passmark, piece, pattern, &layoutPassmarks]()
         {
             bool ok = false;
-            VLayoutPassmark layoutPassmark = PreapreBuiltInSAPassmark(piece, pattern, passmark, ok);
+            VLayoutPassmark const layoutPassmark = PreapreBuiltInSAPassmark(piece, pattern, passmark, ok);
             if (ok)
             {
                 layoutPassmarks.append(layoutPassmark);
@@ -2408,7 +2408,7 @@ auto VLayoutPiece::ConvertPassmarks(const VPiece &piece, const VContainer *patte
             continue;
         }
 
-        VPiecePassmarkData pData = passmark.Data();
+        VPiecePassmarkData const pData = passmark.Data();
 
         switch (pData.passmarkAngleType)
         {

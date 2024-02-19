@@ -71,10 +71,11 @@ auto operator>>(QDataStream &dataStream, VLayoutPlaceLabel &data) -> QDataStream
 
     if (actualStreamHeader != VLayoutPlaceLabel::streamHeader)
     {
-        QString message = QCoreApplication::tr("VLayoutPlaceLabel prefix mismatch error: actualStreamHeader = 0x%1 and "
-                                               "streamHeader = 0x%2")
-                              .arg(actualStreamHeader, 8, 0x10, '0'_L1)
-                              .arg(VLayoutPlaceLabel::streamHeader, 8, 0x10, '0'_L1);
+        QString const message =
+            QCoreApplication::tr("VLayoutPlaceLabel prefix mismatch error: actualStreamHeader = 0x%1 and "
+                                 "streamHeader = 0x%2")
+                .arg(actualStreamHeader, 8, 0x10, '0'_L1)
+                .arg(VLayoutPlaceLabel::streamHeader, 8, 0x10, '0'_L1);
         throw VException(message);
     }
 
@@ -83,10 +84,11 @@ auto operator>>(QDataStream &dataStream, VLayoutPlaceLabel &data) -> QDataStream
 
     if (actualClassVersion > VLayoutPlaceLabel::classVersion)
     {
-        QString message = QCoreApplication::tr("VLayoutPlaceLabel compatibility error: actualClassVersion = %1 and "
-                                               "classVersion = %2")
-                              .arg(actualClassVersion)
-                              .arg(VLayoutPlaceLabel::classVersion);
+        QString const message =
+            QCoreApplication::tr("VLayoutPlaceLabel compatibility error: actualClassVersion = %1 and "
+                                 "classVersion = %2")
+                .arg(actualClassVersion)
+                .arg(VLayoutPlaceLabel::classVersion);
         throw VException(message);
     }
 

@@ -89,7 +89,7 @@ void VFormulaPropertyEditor::SetFormula(const VFormula &formula)
 //---------------------------------------------------------------------------------------------------------------------
 void VFormulaPropertyEditor::onToolButtonClicked()
 {
-    QScopedPointer<DialogEditWrongFormula> tmpWidget(new DialogEditWrongFormula(
+    QScopedPointer<DialogEditWrongFormula> const tmpWidget(new DialogEditWrongFormula(
         m_formula.getData(), m_formula.getToolId(), VAbstractValApplication::VApp()->getMainWindow()));
     tmpWidget->setCheckZero(m_formula.getCheckZero());
     tmpWidget->setPostfix(m_formula.getPostfix());

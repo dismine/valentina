@@ -67,13 +67,13 @@ auto CSR(qreal length, qreal split, qreal arcLength) -> qreal
     tmp.setAngle(tmp.angle() + 90.0 * sign);
     tmp.setLength(split);
 
-    QPointF p1 = tmp.p2();
+    QPointF const p1 = tmp.p2();
 
     tmp = QLineF(QPointF(0, length), QPointF(0, 0));
     tmp.setAngle(tmp.angle() - 90.0 * sign);
     tmp.setLength(split);
 
-    QPointF p2 = tmp.p2();
+    QPointF const p2 = tmp.p2();
 
     const QLineF line2(p1, p2);
 
@@ -109,7 +109,7 @@ auto CSR(qreal length, qreal split, qreal arcLength) -> qreal
             return 0;
         }
 
-        QLineF radius(crosPoint, tmp.p2());
+        QLineF const radius(crosPoint, tmp.p2());
         const qreal arcAngle = sign > 0 ? line.angleTo(radius) : radius.angleTo(line);
         arcL = (M_PI * radius.length()) / 180.0 * arcAngle;
     } while (qAbs(arcL - arcLength) > (0.5 /*mm*/ / 25.4) * PrintDPI);
@@ -385,7 +385,7 @@ auto QmuParser::IsVal(const QString &a_szExpr, qmusizetype *a_iPos, qreal *a_fVa
 {
     qreal fVal(0);
 
-    qmusizetype pos =
+    qmusizetype const pos =
         ReadVal(a_szExpr, fVal, locale != QLocale::c() && cNumbers ? QLocale::c() : locale, decimal, thousand);
 
     if (pos == -1)

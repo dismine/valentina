@@ -181,7 +181,7 @@ void VNodePoint::ChangeLabelPosition(quint32 id, const QPointF &pos)
 {
     if (id == m_id)
     {
-        QSharedPointer<VPointF> point = VAbstractTool::data.GeometricObject<VPointF>(id);
+        QSharedPointer<VPointF> const point = VAbstractTool::data.GeometricObject<VPointF>(id);
         point->setMx(pos.x());
         point->setMy(pos.y());
         m_namePoint->SetRealPos(pos);
@@ -540,7 +540,7 @@ void VNodePoint::contextMenuEvent(QGraphicsSceneContextMenuEvent *event)
     }
 
     QMenu menu;
-    QHash<int, QAction *> contextMenu = InitContextMenu(&menu, piece->getId(), piece->referens());
+    QHash<int, QAction *> const contextMenu = InitContextMenu(&menu, piece->getId(), piece->referens());
 
     PieceNodeAngle angleCurType = PieceNodeAngle::ByLength;
     PassmarkAngleType passmarkAngleCurType = PassmarkAngleType::Straightforward;
@@ -584,7 +584,7 @@ void VNodePoint::contextMenuEvent(QGraphicsSceneContextMenuEvent *event)
     };
 
     QAction *selectedAction = menu.exec(event->screenPos());
-    ContextMenuOption selectedOption = static_cast<ContextMenuOption>(
+    ContextMenuOption const selectedOption = static_cast<ContextMenuOption>(
         contextMenu.key(selectedAction, static_cast<int>(ContextMenuOption::NoSelection)));
 
     Q_STATIC_ASSERT_X(static_cast<int>(ContextMenuOption::LAST_ONE_DO_NOT_USE) == 35, "Not all options were handled.");

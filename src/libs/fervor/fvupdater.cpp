@@ -201,7 +201,7 @@ void FvUpdater::SkipUpdate()
 {
     qDebug() << "Skip update";
 
-    QPointer<FvAvailableUpdate> proposedUpdate = GetProposedUpdate();
+    QPointer<FvAvailableUpdate> const proposedUpdate = GetProposedUpdate();
     if (proposedUpdate.isNull())
     {
         qWarning() << "Proposed update is NULL (shouldn't be at this point)";
@@ -229,7 +229,7 @@ void FvUpdater::UpdateInstallationConfirmed()
 {
     qDebug() << "Confirm update installation";
 
-    QPointer<FvAvailableUpdate> proposedUpdate = GetProposedUpdate();
+    QPointer<FvAvailableUpdate> const proposedUpdate = GetProposedUpdate();
     if (proposedUpdate.isNull())
     {
         qWarning() << "Proposed update is NULL (shouldn't be at this point)";

@@ -30,11 +30,11 @@ auto Grayscale(QImage image) -> QImage
     for (int ii = 0; ii < image.height(); ii++)
     {
         uchar *scan = image.scanLine(ii);
-        int depth = 4;
+        int const depth = 4;
         for (int jj = 0; jj < image.width(); jj++)
         {
             auto *rgbpixel = reinterpret_cast<QRgb *>(scan + jj * depth); // NOLINT
-            int gray = qGray(*rgbpixel);
+            int const gray = qGray(*rgbpixel);
             *rgbpixel = QColor(gray, gray, gray, qAlpha(*rgbpixel)).rgba();
         }
     }
@@ -47,8 +47,8 @@ auto WatermarkImageFromCache(const VWatermarkData &watermarkData, const QString 
                              qreal yScale, QString &error) -> QPixmap
 {
     QPixmap pixmap;
-    QString imagePath = AbsoluteMPath(watermarkPath, watermarkData.path);
-    QString imageCacheKey =
+    QString const imagePath = AbsoluteMPath(watermarkPath, watermarkData.path);
+    QString const imageCacheKey =
         QStringLiteral("puzzle=path%1+rotation%3+grayscale%4+xscale%5+yxcale%6")
             .arg(imagePath, QString::number(watermarkData.imageRotation), watermarkData.grayscale ? trueStr : falseStr)
             .arg(xScale)
@@ -91,8 +91,8 @@ auto WatermarkImageFromCache(const VWatermarkData &watermarkData, const QString 
 auto TriangleBasic() -> QPainterPath
 {
     // ------------- prepare triangles for position marks
-    QRectF rectBasic = QRectF(-UnitConvertor(0.5, Unit::Cm, Unit::Px), 0, UnitConvertor(1, Unit::Cm, Unit::Px),
-                              UnitConvertor(0.5, Unit::Cm, Unit::Px));
+    QRectF const rectBasic = QRectF(-UnitConvertor(0.5, Unit::Cm, Unit::Px), 0, UnitConvertor(1, Unit::Cm, Unit::Px),
+                                    UnitConvertor(0.5, Unit::Cm, Unit::Px));
     QPainterPath triangleBasic;
     triangleBasic.moveTo(rectBasic.topLeft());
     triangleBasic.lineTo(rectBasic.topRight());
@@ -113,11 +113,11 @@ VPTileFactory::VPTileFactory(const VPLayoutPtr &layout, VCommonSettings *commonS
 //---------------------------------------------------------------------------------------------------------------------
 void VPTileFactory::RefreshTileInfos()
 {
-    VPLayoutPtr layout = m_layout.toStrongRef();
+    VPLayoutPtr const layout = m_layout.toStrongRef();
     if (not layout.isNull())
     {
-        QSizeF tilesSize = layout->LayoutSettings().GetTilesSize();
-        QMarginsF tilesMargins = layout->LayoutSettings().GetTilesMargins();
+        QSizeF const tilesSize = layout->LayoutSettings().GetTilesSize();
+        QMarginsF const tilesMargins = layout->LayoutSettings().GetTilesMargins();
 
         // sets the drawing height
         m_drawingAreaHeight = tilesSize.height();
@@ -140,7 +140,7 @@ void VPTileFactory::RefreshTileInfos()
 //---------------------------------------------------------------------------------------------------------------------
 void VPTileFactory::RefreshWatermarkData()
 {
-    VPLayoutPtr layout = m_layout.toStrongRef();
+    VPLayoutPtr const layout = m_layout.toStrongRef();
     if (not layout.isNull())
     {
         m_watermarkData = layout->WatermarkData();
@@ -157,7 +157,7 @@ void VPTileFactory::drawTile(QPainter *painter, QPrinter *printer, const VPSheet
     SCASSERT(painter != nullptr)
     SCASSERT(printer != nullptr)
 
-    VPLayoutPtr layout = m_layout.toStrongRef();
+    VPLayoutPtr const layout = m_layout.toStrongRef();
     if (layout.isNull())
     {
         return;
@@ -260,13 +260,13 @@ auto VPTileFactory::RowNb(const VPSheetPtr &sheet) const -> int
     }
 
     qreal yScale = 1;
-    VPLayoutPtr layout = m_layout.toStrongRef();
+    VPLayoutPtr const layout = m_layout.toStrongRef();
     if (not layout.isNull())
     {
         yScale = layout->LayoutSettings().VerticalScale();
     }
 
-    QRectF sheetSize = sheet->GetMarginsRect();
+    QRectF const sheetSize = sheet->GetMarginsRect();
     return qCeil(sheetSize.height() * yScale / (m_drawingAreaHeight - tileStripeWidth));
 }
 
@@ -279,13 +279,13 @@ auto VPTileFactory::ColNb(const VPSheetPtr &sheet) const -> int
     }
 
     qreal xScale = 1;
-    VPLayoutPtr layout = m_layout.toStrongRef();
+    VPLayoutPtr const layout = m_layout.toStrongRef();
     if (not layout.isNull())
     {
         xScale = layout->LayoutSettings().HorizontalScale();
     }
 
-    QRectF sheetSize = sheet->GetMarginsRect();
+    QRectF const sheetSize = sheet->GetMarginsRect();
     return qCeil(sheetSize.width() * xScale / (m_drawingAreaWidth - tileStripeWidth));
 }
 
@@ -310,13 +310,13 @@ auto VPTileFactory::WatermarkData() const -> const VWatermarkData &
 //---------------------------------------------------------------------------------------------------------------------
 void VPTileFactory::DrawRuler(QPainter *painter, qreal scale) const
 {
-    VPLayoutPtr layout = m_layout.toStrongRef();
+    VPLayoutPtr const layout = m_layout.toStrongRef();
     if (layout.isNull())
     {
         return;
     }
 
-    QPen rulePen(*tileColor, 1, Qt::SolidLine);
+    QPen const rulePen(*tileColor, 1, Qt::SolidLine);
 
     painter->save();
     painter->setPen(rulePen);
@@ -324,11 +324,11 @@ void VPTileFactory::DrawRuler(QPainter *painter, qreal scale) const
     const qreal notchHeight = UnitConvertor(3, Unit::Mm, Unit::Px);
     const qreal shortNotchHeight = UnitConvertor(1.1, Unit::Mm, Unit::Px);
 
-    Unit layoutUnits = layout->LayoutSettings().GetUnit();
-    Unit rulerUnits = layoutUnits == Unit::Inch ? layoutUnits : Unit::Cm;
+    Unit const layoutUnits = layout->LayoutSettings().GetUnit();
+    Unit const rulerUnits = layoutUnits == Unit::Inch ? layoutUnits : Unit::Cm;
 
     const qreal step = UnitConvertor(1, rulerUnits, Unit::Px);
-    double marksCount = (m_drawingAreaWidth - tileStripeWidth) / step;
+    double const marksCount = (m_drawingAreaWidth - tileStripeWidth) / step;
     int i = 0;
     while (i < marksCount)
     {
@@ -352,8 +352,8 @@ void VPTileFactory::DrawRuler(QPainter *painter, qreal scale) const
             painter->setFont(fnt);
 
             qreal unitsWidth = 0;
-            QFontMetrics fm(fnt);
-            QString units = rulerUnits != Unit::Inch ? tr("cm", "unit") : tr("in", "unit");
+            QFontMetrics const fm(fnt);
+            QString const units = rulerUnits != Unit::Inch ? tr("cm", "unit") : tr("in", "unit");
             unitsWidth = fm.horizontalAdvance(units);
             painter->drawText(QPointF(step * 0.5 - unitsWidth * 0.6,
                                       m_drawingAreaHeight - tileStripeWidth + notchHeight + shortNotchHeight),
@@ -372,7 +372,7 @@ void VPTileFactory::DrawWatermark(QPainter *painter) const
 {
     SCASSERT(painter != nullptr)
 
-    VPLayoutPtr layout = m_layout.toStrongRef();
+    VPLayoutPtr const layout = m_layout.toStrongRef();
     if (layout.isNull())
     {
         return;
@@ -380,7 +380,7 @@ void VPTileFactory::DrawWatermark(QPainter *painter) const
 
     if (m_watermarkData.opacity > 0)
     {
-        QRectF img(0, 0, m_drawingAreaWidth - tileStripeWidth, m_drawingAreaHeight - tileStripeWidth);
+        QRectF const img(0, 0, m_drawingAreaWidth - tileStripeWidth, m_drawingAreaHeight - tileStripeWidth);
 
         if (m_watermarkData.showImage && not m_watermarkData.path.isEmpty())
         {
@@ -404,7 +404,7 @@ inline auto VPTileFactory::PenTileInfos() const -> QPen
 void VPTileFactory::DrawTilePageContent(QPainter *painter, const VPSheetPtr &sheet, int row, int col,
                                         QPrinter *printer) const
 {
-    VPLayoutPtr layout = m_layout.toStrongRef();
+    VPLayoutPtr const layout = m_layout.toStrongRef();
     if (layout.isNull())
     {
         return;
@@ -416,7 +416,7 @@ void VPTileFactory::DrawTilePageContent(QPainter *painter, const VPSheetPtr &she
         sheetMargins = sheet->GetSheetMargins();
     }
 
-    QPen penTileDrawing =
+    QPen const penTileDrawing =
         QPen(Qt::black, m_commonSettings->WidthMainLine(), Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin);
 
     painter->setPen(penTileDrawing);
@@ -424,11 +424,11 @@ void VPTileFactory::DrawTilePageContent(QPainter *painter, const VPSheetPtr &she
     // paint the content of the page
     const qreal xScale = layout->LayoutSettings().HorizontalScale();
     const qreal yScale = layout->LayoutSettings().VerticalScale();
-    QRectF source = QRectF(sheetMargins.left() + col * (m_drawingAreaWidth - tileStripeWidth) / xScale,
-                           sheetMargins.top() + row * (m_drawingAreaHeight - tileStripeWidth) / yScale,
-                           m_drawingAreaWidth / xScale, m_drawingAreaHeight / yScale);
+    QRectF const source = QRectF(sheetMargins.left() + col * (m_drawingAreaWidth - tileStripeWidth) / xScale,
+                                 sheetMargins.top() + row * (m_drawingAreaHeight - tileStripeWidth) / yScale,
+                                 m_drawingAreaWidth / xScale, m_drawingAreaHeight / yScale);
 
-    QRectF target = QRectF(0, 0, m_drawingAreaWidth, m_drawingAreaHeight);
+    QRectF const target = QRectF(0, 0, m_drawingAreaWidth, m_drawingAreaHeight);
     sheet->SceneData()->Scene()->render(painter, VPrintLayout::SceneTargetRect(printer, target), source,
                                         Qt::IgnoreAspectRatio);
 }
@@ -436,34 +436,35 @@ void VPTileFactory::DrawTilePageContent(QPainter *painter, const VPSheetPtr &she
 //---------------------------------------------------------------------------------------------------------------------
 void VPTileFactory::DrawTopTriangle(QPainter *painter) const
 {
-    QPainterPath triangleTop = QTransform().translate(m_drawingAreaWidth / 2, 0).map(TriangleBasic());
+    QPainterPath const triangleTop = QTransform().translate(m_drawingAreaWidth / 2, 0).map(TriangleBasic());
     painter->fillPath(triangleTop, *triangleBush);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 void VPTileFactory::DrawLeftTriangle(QPainter *painter) const
 {
-    QPainterPath triangleLeft = QTransform().translate(0, m_drawingAreaHeight / 2).rotate(-90).map(TriangleBasic());
+    QPainterPath const triangleLeft =
+        QTransform().translate(0, m_drawingAreaHeight / 2).rotate(-90).map(TriangleBasic());
     painter->fillPath(triangleLeft, *triangleBush);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 void VPTileFactory::DrawBottomTriangle(QPainter *painter) const
 {
-    QPainterPath triangleBottom = QTransform()
-                                      .translate(m_drawingAreaWidth / 2, m_drawingAreaHeight - tileStripeWidth)
-                                      .rotate(180)
-                                      .map(TriangleBasic());
+    QPainterPath const triangleBottom = QTransform()
+                                            .translate(m_drawingAreaWidth / 2, m_drawingAreaHeight - tileStripeWidth)
+                                            .rotate(180)
+                                            .map(TriangleBasic());
     painter->fillPath(triangleBottom, *triangleBush);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 void VPTileFactory::DrawRightTriangle(QPainter *painter) const
 {
-    QPainterPath triangleRight = QTransform()
-                                     .translate(m_drawingAreaWidth - tileStripeWidth, m_drawingAreaHeight / 2)
-                                     .rotate(90)
-                                     .map(TriangleBasic());
+    QPainterPath const triangleRight = QTransform()
+                                           .translate(m_drawingAreaWidth - tileStripeWidth, m_drawingAreaHeight / 2)
+                                           .rotate(90)
+                                           .map(TriangleBasic());
     painter->fillPath(triangleRight, *triangleBush);
 }
 
@@ -623,9 +624,9 @@ void VPTileFactory::DrawTextInformation(QPainter *painter, int row, int col, int
 
     td.setPageSize(QSizeF(m_drawingAreaHeight - UnitConvertor(2, Unit::Cm, Unit::Px), m_drawingAreaWidth));
 
-    QFontMetrics metrix = QFontMetrics(td.defaultFont());
-    int maxWidth = metrix.horizontalAdvance(QString().fill('z', 50));
-    QString clippedSheetName = metrix.elidedText(sheetName, Qt::ElideMiddle, maxWidth);
+    QFontMetrics const metrix = QFontMetrics(td.defaultFont());
+    int const maxWidth = metrix.horizontalAdvance(QString().fill('z', 50));
+    QString const clippedSheetName = metrix.elidedText(sheetName, Qt::ElideMiddle, maxWidth);
 
     td.setHtml(QStringLiteral("<table width='100%' style='color:rgb(%1);'>"
                               "<tr>"
@@ -670,7 +671,7 @@ void VPTileFactory::PaintWatermarkText(QPainter *painter, const QRectF &img, con
 
     text = t.map(text);
 
-    QPointF center = img.center() - text.boundingRect().center();
+    QPointF const center = img.center() - text.boundingRect().center();
     t = QTransform();
     t.translate(center.x(), center.y());
 
@@ -699,15 +700,15 @@ void VPTileFactory::PaintWatermarkImage(QPainter *painter, const QRectF &img, co
         }
 
         QPixmap watermark;
-        QString imagePath =
+        QString const imagePath =
             QStringLiteral("puzzle=colorScheme%1+path%2+opacity%3_broken")
                 .arg(colorScheme, AbsoluteMPath(watermarkPath, watermarkData.path), QString::number(opacity));
 
         if (not QPixmapCache::find(imagePath, &watermark))
         {
-            QScopedPointer<QSvgRenderer> svgRenderer(new QSvgRenderer());
+            QScopedPointer<QSvgRenderer> const svgRenderer(new QSvgRenderer());
 
-            QRect imageRect(0, 0, qRound(img.width() / 4.), qRound(img.width() / 4.));
+            QRect const imageRect(0, 0, qRound(img.width() / 4.), qRound(img.width() / 4.));
             watermark = QPixmap(imageRect.size());
             watermark.fill(Qt::transparent);
 
@@ -725,15 +726,15 @@ void VPTileFactory::PaintWatermarkImage(QPainter *painter, const QRectF &img, co
         return watermark;
     };
 
-    QString imagePath = AbsoluteMPath(watermarkPath, watermarkData.path);
-    QFileInfo f(imagePath);
+    QString const imagePath = AbsoluteMPath(watermarkPath, watermarkData.path);
+    QFileInfo const f(imagePath);
 
     QImageReader imageReader(imagePath);
-    QImage watermarkImage = imageReader.read();
+    QImage const watermarkImage = imageReader.read();
 
     if (watermarkImage.isNull())
     {
-        QPixmap watermarkPixmap = BrokenImage();
+        QPixmap const watermarkPixmap = BrokenImage();
 
         if (watermarkPixmap.width() < img.width() && watermarkPixmap.height() < img.height())
         {
@@ -749,21 +750,21 @@ void VPTileFactory::PaintWatermarkImage(QPainter *painter, const QRectF &img, co
         return;
     }
 
-    qint64 fileSize = watermarkImage.sizeInBytes();
-    qint64 pixelSize = fileSize / watermarkImage.height() / watermarkImage.width();
-    QSize scaledSize(qRound(watermarkImage.width() / xScale), qRound(watermarkImage.height() / yScale));
-    qint64 scaledImageSize = pixelSize * scaledSize.width() * scaledSize.height() / 1024;
-    int limit = QPixmapCache::cacheLimit();
+    qint64 const fileSize = watermarkImage.sizeInBytes();
+    qint64 const pixelSize = fileSize / watermarkImage.height() / watermarkImage.width();
+    QSize const scaledSize(qRound(watermarkImage.width() / xScale), qRound(watermarkImage.height() / yScale));
+    qint64 const scaledImageSize = pixelSize * scaledSize.width() * scaledSize.height() / 1024;
+    int const limit = QPixmapCache::cacheLimit();
 
     if (scaledImageSize > limit && (xScale < 1 || yScale < 1))
     {
-        QScopedPointer<QSvgRenderer> svgRenderer(new QSvgRenderer());
+        QScopedPointer<QSvgRenderer> const svgRenderer(new QSvgRenderer());
 
         painter->save();
         painter->setOpacity(opacity);
         painter->restore();
 
-        QString grayscale = watermarkData.grayscale ? QStringLiteral("_grayscale") : QString();
+        QString const grayscale = watermarkData.grayscale ? QStringLiteral("_grayscale") : QString();
         svgRenderer->load(QStringLiteral("://puzzleicon/svg/watermark_placeholder%1.svg").arg(grayscale));
         QRect imageRect(0, 0, qRound(watermarkImage.width() / xScale), qRound(watermarkImage.height() / yScale));
         imageRect.translate(img.center().toPoint() - imageRect.center());
@@ -799,8 +800,8 @@ void VPTileFactory::PaintWatermarkImage(QPainter *painter, const QRectF &img, co
     }
     else
     {
-        QRect croppedRect = imagePosition.intersected(img.toRect());
-        QPixmap cropped = watermark.copy(croppedRect.translated(-imagePosition.x(), -imagePosition.y()));
+        QRect const croppedRect = imagePosition.intersected(img.toRect());
+        QPixmap const cropped = watermark.copy(croppedRect.translated(-imagePosition.x(), -imagePosition.y()));
 
         painter->drawPixmap(croppedRect, cropped);
     }

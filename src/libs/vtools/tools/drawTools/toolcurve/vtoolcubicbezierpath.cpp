@@ -150,7 +150,7 @@ void VToolCubicBezierPath::UpdatePathPoints(VAbstractPattern *doc, QDomElement &
 //---------------------------------------------------------------------------------------------------------------------
 auto VToolCubicBezierPath::getSplinePath() const -> VCubicBezierPath
 {
-    QSharedPointer<VCubicBezierPath> splPath = VAbstractTool::data.GeometricObject<VCubicBezierPath>(m_id);
+    QSharedPointer<VCubicBezierPath> const splPath = VAbstractTool::data.GeometricObject<VCubicBezierPath>(m_id);
     return *splPath.data();
 }
 
@@ -158,7 +158,7 @@ auto VToolCubicBezierPath::getSplinePath() const -> VCubicBezierPath
 void VToolCubicBezierPath::setSplinePath(const VCubicBezierPath &splPath)
 {
     QSharedPointer<VGObject> obj = VAbstractTool::data.GetGObject(m_id);
-    QSharedPointer<VCubicBezierPath> splinePath = qSharedPointerDynamicCast<VCubicBezierPath>(obj);
+    QSharedPointer<VCubicBezierPath> const splinePath = qSharedPointerDynamicCast<VCubicBezierPath>(obj);
     *splinePath.data() = splPath;
     SaveOption(obj);
 }
@@ -225,7 +225,7 @@ void VToolCubicBezierPath::SaveOptions(QDomElement &tag, QSharedPointer<VGObject
 {
     VAbstractSpline::SaveOptions(tag, obj);
 
-    QSharedPointer<VCubicBezierPath> splPath = qSharedPointerDynamicCast<VCubicBezierPath>(obj);
+    QSharedPointer<VCubicBezierPath> const splPath = qSharedPointerDynamicCast<VCubicBezierPath>(obj);
     SCASSERT(splPath.isNull() == false)
 
     SetSplinePathAttributes(tag, *splPath);
@@ -239,7 +239,7 @@ void VToolCubicBezierPath::SetVisualization()
         auto *visual = qobject_cast<VisToolCubicBezierPath *>(vis);
         SCASSERT(visual != nullptr)
 
-        QSharedPointer<VCubicBezierPath> splPath = VAbstractTool::data.GeometricObject<VCubicBezierPath>(m_id);
+        QSharedPointer<VCubicBezierPath> const splPath = VAbstractTool::data.GeometricObject<VCubicBezierPath>(m_id);
         visual->SetPath(*splPath.data());
         visual->SetLineStyle(LineStyleToPenStyle(splPath->GetPenStyle()));
         visual->SetMode(Mode::Show);
@@ -250,7 +250,7 @@ void VToolCubicBezierPath::SetVisualization()
 //---------------------------------------------------------------------------------------------------------------------
 void VToolCubicBezierPath::RefreshGeometry()
 {
-    QSharedPointer<VCubicBezierPath> splPath = VAbstractTool::data.GeometricObject<VCubicBezierPath>(m_id);
+    QSharedPointer<VCubicBezierPath> const splPath = VAbstractTool::data.GeometricObject<VCubicBezierPath>(m_id);
     setPath(splPath->GetPath());
 
     SetVisualization();

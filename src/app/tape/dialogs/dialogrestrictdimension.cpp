@@ -188,7 +188,7 @@ void DialogRestrictDimension::changeEvent(QEvent *event)
 
             if (m_dimensions.size() > index)
             {
-                MeasurementDimension_p dimension = m_dimensions.at(index);
+                MeasurementDimension_p const dimension = m_dimensions.at(index);
 
                 name->setText(dimension->Name() + ':'_L1);
                 name->setToolTip(VAbstartMeasurementDimension::DimensionToolTip(dimension, m_fullCircumference));
@@ -240,7 +240,7 @@ void DialogRestrictDimension::RowSelected()
             }
         }
 
-        VDimensionRestriction restriction = m_restrictions.value(VMeasurement::CorrectionHash(base1, base2));
+        VDimensionRestriction const restriction = m_restrictions.value(VMeasurement::CorrectionHash(base1, base2));
 
         if (dimension.isNull())
         {
@@ -251,7 +251,8 @@ void DialogRestrictDimension::RowSelected()
 
         ui->comboBoxMin->blockSignals(true);
         ui->comboBoxMin->clear();
-        QVector<qreal> filtered = FilterByMinimum(FilterByMaximum(bases, restriction.GetMax()), restriction.GetMin());
+        QVector<qreal> const filtered =
+            FilterByMinimum(FilterByMaximum(bases, restriction.GetMax()), restriction.GetMin());
         FillBases(filtered, dimension, ui->comboBoxMin);
         int index = ui->comboBoxMin->findData(restriction.GetMin());
         ui->comboBoxMin->setCurrentIndex(index != -1 ? index : 0);
@@ -380,7 +381,7 @@ void DialogRestrictDimension::CellContextMenu(QPoint pos)
 
         dimension = m_dimensions.at(1);
         columnValue = dimension->ValidBases().at(item->column());
-        qreal base1 = m_dimensions.at(0)->ValidBases().at(item->row());
+        qreal const base1 = m_dimensions.at(0)->ValidBases().at(item->row());
         coordinates = VMeasurement::CorrectionHash(base1);
     }
     else if (m_restrictionType == RestrictDimension::Third)
@@ -392,14 +393,14 @@ void DialogRestrictDimension::CellContextMenu(QPoint pos)
 
         dimension = m_dimensions.at(2);
         columnValue = dimension->ValidBases().at(item->column());
-        qreal base1 = ui->comboBoxDimensionA->currentData().toDouble();
-        qreal base2 = m_dimensions.at(1)->ValidBases().at(item->row());
+        qreal const base1 = ui->comboBoxDimensionA->currentData().toDouble();
+        qreal const base2 = m_dimensions.at(1)->ValidBases().at(item->row());
         coordinates = VMeasurement::CorrectionHash(base1, base2);
     }
 
     VDimensionRestriction restriction = m_restrictions.value(coordinates);
-    bool exclude = not VFuzzyContains(restriction.GetExcludeValues(), columnValue);
-    QScopedPointer<QMenu> menu(new QMenu());
+    bool const exclude = not VFuzzyContains(restriction.GetExcludeValues(), columnValue);
+    QScopedPointer<QMenu> const menu(new QMenu());
     QAction *actionExclude = menu->addAction(exclude ? tr("Exclude") : tr("Include"));
 
     if (m_restrictionType == RestrictDimension::Second || m_restrictionType == RestrictDimension::Third)
@@ -453,7 +454,7 @@ void DialogRestrictDimension::InitDimensionsBaseValues()
 
         if (m_dimensions.size() > index)
         {
-            MeasurementDimension_p dimension = m_dimensions.at(index);
+            MeasurementDimension_p const dimension = m_dimensions.at(index);
             name->setText(dimension->Name() + ':'_L1);
             name->setToolTip(VAbstartMeasurementDimension::DimensionToolTip(dimension, m_fullCircumference));
 
@@ -502,7 +503,7 @@ void DialogRestrictDimension::InitDimensionGradation(const MeasurementDimension_
 
     FillBases(DimensionRestrictedValues(dimension), dimension, control);
 
-    int i = control->findData(current);
+    int const i = control->findData(current);
     if (i != -1)
     {
         control->setCurrentIndex(i);
@@ -525,7 +526,7 @@ void DialogRestrictDimension::InitTable()
     {
         if (m_dimensions.size() > index)
         {
-            MeasurementDimension_p dimension = m_dimensions.at(index);
+            MeasurementDimension_p const dimension = m_dimensions.at(index);
             const QVector<qreal> bases = dimension->ValidBases();
             ui->tableWidget->setRowCount(static_cast<int>(bases.size()));
             ui->tableWidget->setVerticalHeaderLabels(DimensionLabels(bases, dimension));
@@ -536,7 +537,7 @@ void DialogRestrictDimension::InitTable()
     {
         if (m_dimensions.size() > index)
         {
-            MeasurementDimension_p dimension = m_dimensions.at(index);
+            MeasurementDimension_p const dimension = m_dimensions.at(index);
             const QVector<qreal> bases = dimension->ValidBases();
             ui->tableWidget->setColumnCount(static_cast<int>(bases.size()));
             ui->tableWidget->setHorizontalHeaderLabels(DimensionLabels(bases, dimension));
@@ -575,7 +576,7 @@ void DialogRestrictDimension::RefreshTable()
     {
         if (not m_dimensions.empty())
         {
-            MeasurementDimension_p dimensionA = m_dimensions.at(0);
+            MeasurementDimension_p const dimensionA = m_dimensions.at(0);
             basesColumn = dimensionA->ValidBases();
         }
         else
@@ -587,10 +588,10 @@ void DialogRestrictDimension::RefreshTable()
     {
         if (m_dimensions.size() >= 2)
         {
-            MeasurementDimension_p dimensionA = m_dimensions.at(0);
+            MeasurementDimension_p const dimensionA = m_dimensions.at(0);
             basesRow = dimensionA->ValidBases();
 
-            MeasurementDimension_p dimensionB = m_dimensions.at(1);
+            MeasurementDimension_p const dimensionB = m_dimensions.at(1);
             basesColumn = dimensionB->ValidBases();
         }
         else
@@ -602,10 +603,10 @@ void DialogRestrictDimension::RefreshTable()
     {
         if (m_dimensions.size() >= 3)
         {
-            MeasurementDimension_p dimensionB = m_dimensions.at(1);
+            MeasurementDimension_p const dimensionB = m_dimensions.at(1);
             basesRow = dimensionB->ValidBases();
 
-            MeasurementDimension_p dimensionC = m_dimensions.at(2);
+            MeasurementDimension_p const dimensionC = m_dimensions.at(2);
             basesColumn = dimensionC->ValidBases();
         }
         else
@@ -653,7 +654,7 @@ void DialogRestrictDimension::AddCell(int row, int column, qreal rowValue, qreal
 
     if (m_restrictionType == RestrictDimension::First)
     {
-        VDimensionRestriction restriction = m_restrictions.value(QChar('0'));
+        VDimensionRestriction const restriction = m_restrictions.value(QChar('0'));
         item->setIcon(QIcon(VFuzzyContains(restriction.GetExcludeValues(), columnValue)
                                 ? QStringLiteral("://icon/24x24/close.png")
                                 : QStringLiteral("://icon/24x24/star.png")));
@@ -690,7 +691,7 @@ void DialogRestrictDimension::AddCell(int row, int column, qreal rowValue, qreal
             }
         }
 
-        VDimensionRestriction restriction = m_restrictions.value(VMeasurement::CorrectionHash(base1, base2));
+        VDimensionRestriction const restriction = m_restrictions.value(VMeasurement::CorrectionHash(base1, base2));
         qreal min = INT32_MIN;
         qreal max = INT32_MAX;
 
@@ -745,7 +746,7 @@ void DialogRestrictDimension::FillBase(double base, const MeasurementDimension_p
 
     if (dimension->Type() == MeasurementDimension::X)
     {
-        QString item = useLabel ? label : QStringLiteral("%1 %2").arg(base).arg(units);
+        QString const item = useLabel ? label : QStringLiteral("%1 %2").arg(base).arg(units);
         control->addItem(item, base);
     }
     else if (dimension->Type() == MeasurementDimension::Y)
@@ -756,15 +757,16 @@ void DialogRestrictDimension::FillBase(double base, const MeasurementDimension_p
         }
         else
         {
-            QString item = dimension->IsBodyMeasurement()
-                               ? QStringLiteral("%1 %2").arg(m_fullCircumference ? base * 2 : base).arg(units)
-                               : QString::number(base);
+            QString const item = dimension->IsBodyMeasurement()
+                                     ? QStringLiteral("%1 %2").arg(m_fullCircumference ? base * 2 : base).arg(units)
+                                     : QString::number(base);
             control->addItem(item, base);
         }
     }
     else if (dimension->Type() == MeasurementDimension::W || dimension->Type() == MeasurementDimension::Z)
     {
-        QString item = useLabel ? label : QStringLiteral("%1 %2").arg(m_fullCircumference ? base * 2 : base).arg(units);
+        QString const item =
+            useLabel ? label : QStringLiteral("%1 %2").arg(m_fullCircumference ? base * 2 : base).arg(units);
         control->addItem(item, base);
     }
 }
@@ -888,7 +890,7 @@ auto DialogRestrictDimension::DimensionRestrictedValues(const MeasurementDimensi
     }
     else if (m_restrictionType == RestrictDimension::Third)
     {
-        qreal base1 = ui->comboBoxDimensionA->currentData().toDouble();
+        qreal const base1 = ui->comboBoxDimensionA->currentData().toDouble();
         restriction = m_restrictions.value(VMeasurement::CorrectionHash(base1));
     }
 
@@ -918,10 +920,10 @@ auto DialogRestrictDimension::StartRow() const -> int
 
     if (m_dimensions.size() >= 3)
     {
-        MeasurementDimension_p dimensionB = m_dimensions.at(1);
+        MeasurementDimension_p const dimensionB = m_dimensions.at(1);
         basesRow = dimensionB->ValidBases();
 
-        QVector<qreal> validRows = DimensionRestrictedValues(dimensionB);
+        QVector<qreal> const validRows = DimensionRestrictedValues(dimensionB);
 
         for (int i = 0; i < basesRow.size(); ++i)
         {

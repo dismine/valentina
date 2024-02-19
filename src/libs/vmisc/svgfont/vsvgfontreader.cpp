@@ -75,7 +75,7 @@ auto ParseFontWeight(const QString &fontWeight) -> SVGFontWeight
     }
 
     bool ok;
-    int parsedWeight = fontWeight.toInt(&ok);
+    int const parsedWeight = fontWeight.toInt(&ok);
 
     if (ok)
     {
@@ -104,7 +104,7 @@ auto ParseFontWeight(const QString &fontWeight) -> SVGFontWeight
     }
     else
     {
-        QString fontWeightLower = fontWeight.toLower();
+        QString const fontWeightLower = fontWeight.toLower();
         if (fontWeightLower == "normal"_L1)
         {
             return SVGFontWeight::Normal;
@@ -122,7 +122,7 @@ auto ParseFontWeight(const QString &fontWeight) -> SVGFontWeight
 auto InitFont(const QXmlStreamAttributes &fontAttr) -> VSvgFont
 {
     const auto hax = fontAttr.value("horiz-adv-x"_L1);
-    qreal horizAdvX = hax.toDouble();
+    qreal const horizAdvX = hax.toDouble();
 
     QString id = fontAttr.value("id"_L1).toString();
     if (id.isEmpty())
@@ -336,8 +336,8 @@ void VSvgFontReader::AssertRootTag(const QString &tag) const
 //---------------------------------------------------------------------------------------------------------------------
 void VSvgFontReader::SetFontFace(VSvgFont *font)
 {
-    QXmlStreamAttributes fontFaceAttr = attributes();
-    QString fontFamily = fontFaceAttr.value("font-family"_L1).toString();
+    QXmlStreamAttributes const fontFaceAttr = attributes();
+    QString const fontFamily = fontFaceAttr.value("font-family"_L1).toString();
     const auto unitsPerEmStr = fontFaceAttr.value("units-per-em"_L1);
 
     qreal unitsPerEm = unitsPerEmStr.toDouble();
@@ -360,8 +360,8 @@ void VSvgFontReader::SetFontFace(VSvgFont *font)
         descent = -200;
     }
 
-    QString fontStyle = fontFaceAttr.value("font-style"_L1).toString();
-    QString fontWeight = fontFaceAttr.value("font-weight"_L1).toString();
+    QString const fontStyle = fontFaceAttr.value("font-style"_L1).toString();
+    QString const fontWeight = fontFaceAttr.value("font-weight"_L1).toString();
     QString fontName;
 
     while (readNextStartElement())
@@ -402,8 +402,8 @@ void VSvgFontReader::ParseSvgGlyph(VSvgFontEngine *engine, const QXmlStreamAttri
     auto havStr = glyphAttr.value("horiz-adv-x"_L1);
     auto pathStr = glyphAttr.value("d"_L1);
 
-    QChar unicode = (uncStr.isEmpty()) ? u'\0' : uncStr.at(0);
-    qreal havx = (havStr.isEmpty()) ? -1 : havStr.toDouble();
+    QChar const unicode = (uncStr.isEmpty()) ? u'\0' : uncStr.at(0);
+    qreal const havx = (havStr.isEmpty()) ? -1 : havStr.toDouble();
     QPainterPath path;
     path.setFillRule(Qt::WindingFill);
     VSVGPathTokenizer tokenizer(pathStr.toString());

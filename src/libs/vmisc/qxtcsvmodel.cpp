@@ -554,7 +554,7 @@ static auto qxt_addCsvQuotes(QxtCsvModel::QuoteMode mode, QString field) -> QStr
 {
     bool addDoubleQuotes = ((mode & QxtCsvModel::DoubleQuote) && field.contains('"'));
     bool addSingleQuotes = ((mode & QxtCsvModel::SingleQuote) && field.contains('\''));
-    bool quoteField = (mode & QxtCsvModel::AlwaysQuoteOutput) || addDoubleQuotes || addSingleQuotes;
+    bool const quoteField = (mode & QxtCsvModel::AlwaysQuoteOutput) || addDoubleQuotes || addSingleQuotes;
     if (quoteField && !addDoubleQuotes && !addSingleQuotes)
     {
         if (mode & QxtCsvModel::DoubleQuote)

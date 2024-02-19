@@ -202,15 +202,15 @@ void DialogHistory::UpdateHistory()
 void DialogHistory::FillTable()
 {
     ui->tableWidget->clear();
-    QVector<VToolRecord> history = m_doc->getLocalHistory();
+    QVector<VToolRecord> const history = m_doc->getLocalHistory();
     qint32 currentRow = -1;
     qint32 count = 0;
     ui->tableWidget->setRowCount(static_cast<int>(history.size())); // Make row count max possible number
 
-    std::function<HistoryRecord(const VToolRecord &tool)> CreateRecord = [this](const VToolRecord &tool)
+    std::function<HistoryRecord(const VToolRecord &tool)> const CreateRecord = [this](const VToolRecord &tool)
     { return Record(tool); };
 
-    QVector<HistoryRecord> historyRecords = QtConcurrent::blockingMapped(history, CreateRecord);
+    QVector<HistoryRecord> const historyRecords = QtConcurrent::blockingMapped(history, CreateRecord);
 
     for (auto &record : historyRecords)
     {
@@ -259,7 +259,7 @@ auto DialogHistory::Record(const VToolRecord &tool) const -> HistoryRecord
     HistoryRecord record;
     record.id = tool.getId();
 
-    bool updateCache = false;
+    bool const updateCache = false;
     const QDomElement domElem = m_doc->elementById(tool.getId(), QString(), updateCache);
     if (not domElem.isElement())
     {
@@ -599,7 +599,7 @@ void DialogHistory::UpdateShortcuts()
 //---------------------------------------------------------------------------------------------------------------------
 void DialogHistory::RetranslateUi()
 {
-    qint32 currentRow = m_cursorRow;
+    qint32 const currentRow = m_cursorRow;
     UpdateHistory();
 
     QTableWidgetItem *item = ui->tableWidget->item(m_cursorRow, 0);
@@ -766,7 +766,7 @@ void DialogHistory::InitSearch()
 //---------------------------------------------------------------------------------------------------------------------
 void DialogHistory::InitSearchHistory()
 {
-    QStringList searchHistory = VAbstractValApplication::VApp()->ValentinaSettings()->GetHistorySearchHistory();
+    QStringList const searchHistory = VAbstractValApplication::VApp()->ValentinaSettings()->GetHistorySearchHistory();
     m_searchHistory->clear();
 
     if (searchHistory.isEmpty())
@@ -786,7 +786,7 @@ void DialogHistory::InitSearchHistory()
                     auto *action = qobject_cast<QAction *>(sender());
                     if (action != nullptr)
                     {
-                        QString term = action->data().toString();
+                        QString const term = action->data().toString();
                         ui->lineEditFind->setText(term);
                         m_search->Find(term);
                         ui->lineEditFind->setFocus();
@@ -799,7 +799,7 @@ void DialogHistory::InitSearchHistory()
 void DialogHistory::SaveSearchRequest()
 {
     QStringList searchHistory = VAbstractValApplication::VApp()->ValentinaSettings()->GetHistorySearchHistory();
-    QString term = ui->lineEditFind->text();
+    QString const term = ui->lineEditFind->text();
     if (term.isEmpty())
     {
         return;
@@ -826,7 +826,7 @@ void DialogHistory::UpdateSearchControlsTooltips()
         }
         else if (m_serachButtonTooltips.contains(button))
         {
-            QString tooltip = m_serachButtonTooltips.value(button);
+            QString const tooltip = m_serachButtonTooltips.value(button);
             button->setToolTip(tooltip.arg(button->shortcut().toString(QKeySequence::NativeText)));
         }
     };

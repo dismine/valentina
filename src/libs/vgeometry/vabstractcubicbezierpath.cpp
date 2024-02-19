@@ -245,7 +245,7 @@ auto VAbstractCubicBezierPath::CutSplinePath(qreal length, qint32 &p1, qint32 &p
             if (p1 > 0)
             {
                 const VSplinePoint &splP1 = points.at(p1);
-                QLineF line(splP1.P().toQPointF(), spl1p2);
+                QLineF const line(splP1.P().toQPointF(), spl1p2);
                 if (qFuzzyIsNull(line.length()))
                 {
                     spl1p2.rx() += ToPixel(0.1, Unit::Mm);
@@ -259,7 +259,7 @@ auto VAbstractCubicBezierPath::CutSplinePath(qreal length, qint32 &p1, qint32 &p
             if (p2 < points.size() - 1)
             {
                 const VSplinePoint &splP2 = points.at(p2);
-                QLineF line(splP2.P().toQPointF(), spl2p3);
+                QLineF const line(splP2.P().toQPointF(), spl2p3);
                 if (qFuzzyIsNull(line.length()))
                 {
                     spl2p3.rx() += ToPixel(0.1, Unit::Mm);

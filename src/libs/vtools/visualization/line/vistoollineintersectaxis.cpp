@@ -99,7 +99,7 @@ void VisToolLineIntersectAxis::RefreshGeometry()
 
                 QPointF p;
                 VToolLineIntersectAxis::FindPoint(axis, base_line, &p);
-                QLineF axis_line(static_cast<QPointF>(*third), p);
+                QLineF const axis_line(static_cast<QPointF>(*third), p);
                 if (not axis_line.isNull())
                 {
                     DrawLine(this, axis_line, LineStyle());
@@ -143,7 +143,7 @@ void VisToolLineIntersectAxis::SetAngle(const QString &expression)
 void VisToolLineIntersectAxis::ShowIntersection(const QLineF &axis_line, const QLineF &base_line)
 {
     QPointF p;
-    QLineF::IntersectType intersect = axis_line.intersects(base_line, &p);
+    QLineF::IntersectType const intersect = axis_line.intersects(base_line, &p);
 
     if (intersect == QLineF::UnboundedIntersection)
     {

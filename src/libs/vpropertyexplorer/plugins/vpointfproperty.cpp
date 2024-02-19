@@ -143,12 +143,12 @@ auto VPE::VPointFProperty::clone(bool include_children, VProperty *container) co
 
 void VPE::VPointFProperty::setValue(const QVariant &value)
 {
-    QPointF tmpPoint = value.toPointF();
+    QPointF const tmpPoint = value.toPointF();
     setPointF(tmpPoint);
 }
 
 auto VPE::VPointFProperty::getValue() const -> QVariant
 {
-    QPointF tmpValue = getPointF();
+    QPointF const tmpValue = getPointF();
     return QString("%1,%2").arg(QString::number(tmpValue.x()), QString::number(tmpValue.y()));
 }

@@ -192,7 +192,7 @@ auto VToolArc::getTagName() const -> QString
 //---------------------------------------------------------------------------------------------------------------------
 auto VToolArc::GetFormulaRadius() const -> VFormula
 {
-    QSharedPointer<VArc> arc = VAbstractTool::data.GeometricObject<VArc>(m_id);
+    QSharedPointer<VArc> const arc = VAbstractTool::data.GeometricObject<VArc>(m_id);
     SCASSERT(arc.isNull() == false)
 
     VFormula radius(arc->GetFormulaRadius(), getData());
@@ -209,7 +209,7 @@ void VToolArc::SetFormulaRadius(const VFormula &value)
     if (!value.error())
     {
         QSharedPointer<VGObject> obj = VAbstractTool::data.GetGObject(m_id);
-        QSharedPointer<VArc> arc = qSharedPointerDynamicCast<VArc>(obj);
+        QSharedPointer<VArc> const arc = qSharedPointerDynamicCast<VArc>(obj);
         arc->SetFormulaRadius(value.GetFormula(FormulaType::FromUser), value.getDoubleValue());
         SaveOption(obj);
     }
@@ -218,7 +218,7 @@ void VToolArc::SetFormulaRadius(const VFormula &value)
 //---------------------------------------------------------------------------------------------------------------------
 auto VToolArc::GetFormulaF1() const -> VFormula
 {
-    QSharedPointer<VArc> arc = VAbstractTool::data.GeometricObject<VArc>(m_id);
+    QSharedPointer<VArc> const arc = VAbstractTool::data.GeometricObject<VArc>(m_id);
     SCASSERT(arc.isNull() == false)
 
     VFormula f1(arc->GetFormulaF1(), getData());
@@ -234,7 +234,7 @@ void VToolArc::SetFormulaF1(const VFormula &value)
     if (!value.error())
     {
         QSharedPointer<VGObject> obj = VAbstractTool::data.GetGObject(m_id);
-        QSharedPointer<VArc> arc = qSharedPointerDynamicCast<VArc>(obj);
+        QSharedPointer<VArc> const arc = qSharedPointerDynamicCast<VArc>(obj);
 
         arc->SetFormulaF1(value.GetFormula(FormulaType::FromUser), value.getDoubleValue());
         SaveOption(obj);
@@ -244,7 +244,7 @@ void VToolArc::SetFormulaF1(const VFormula &value)
 //---------------------------------------------------------------------------------------------------------------------
 auto VToolArc::GetFormulaF2() const -> VFormula
 {
-    QSharedPointer<VArc> arc = VAbstractTool::data.GeometricObject<VArc>(m_id);
+    QSharedPointer<VArc> const arc = VAbstractTool::data.GeometricObject<VArc>(m_id);
     SCASSERT(arc.isNull() == false)
 
     VFormula f2(arc->GetFormulaF2(), getData());
@@ -260,7 +260,7 @@ void VToolArc::SetFormulaF2(const VFormula &value)
     if (!value.error())
     {
         QSharedPointer<VGObject> obj = VAbstractTool::data.GetGObject(m_id);
-        QSharedPointer<VArc> arc = qSharedPointerDynamicCast<VArc>(obj);
+        QSharedPointer<VArc> const arc = qSharedPointerDynamicCast<VArc>(obj);
         arc->SetFormulaF2(value.GetFormula(FormulaType::FromUser), value.getDoubleValue());
         SaveOption(obj);
     }
@@ -269,7 +269,7 @@ void VToolArc::SetFormulaF2(const VFormula &value)
 //---------------------------------------------------------------------------------------------------------------------
 auto VToolArc::GetApproximationScale() const -> qreal
 {
-    QSharedPointer<VArc> arc = VAbstractTool::data.GeometricObject<VArc>(m_id);
+    QSharedPointer<VArc> const arc = VAbstractTool::data.GeometricObject<VArc>(m_id);
     SCASSERT(arc.isNull() == false)
 
     return arc->GetApproximationScale();
@@ -279,7 +279,7 @@ auto VToolArc::GetApproximationScale() const -> qreal
 void VToolArc::SetApproximationScale(qreal value)
 {
     QSharedPointer<VGObject> obj = VAbstractTool::data.GetGObject(m_id);
-    QSharedPointer<VArc> arc = qSharedPointerDynamicCast<VArc>(obj);
+    QSharedPointer<VArc> const arc = qSharedPointerDynamicCast<VArc>(obj);
     arc->SetApproximationScale(value);
     SaveOption(obj);
 }
@@ -322,10 +322,10 @@ void VToolArc::RemoveReferens()
 void VToolArc::SaveDialog(QDomElement &domElement, QList<quint32> &oldDependencies, QList<quint32> &newDependencies)
 {
     SCASSERT(not m_dialog.isNull())
-    QPointer<DialogArc> dialogTool = qobject_cast<DialogArc *>(m_dialog);
+    QPointer<DialogArc> const dialogTool = qobject_cast<DialogArc *>(m_dialog);
     SCASSERT(not dialogTool.isNull())
 
-    QSharedPointer<VArc> arc = VAbstractTool::data.GeometricObject<VArc>(m_id);
+    QSharedPointer<VArc> const arc = VAbstractTool::data.GeometricObject<VArc>(m_id);
     SCASSERT(arc.isNull() == false)
     AddDependence(oldDependencies, arc->GetCenter().id());
     AddDependence(newDependencies, dialogTool->GetCenter());
@@ -348,7 +348,7 @@ void VToolArc::SaveOptions(QDomElement &tag, QSharedPointer<VGObject> &obj)
 {
     VAbstractSpline::SaveOptions(tag, obj);
 
-    QSharedPointer<VArc> arc = qSharedPointerDynamicCast<VArc>(obj);
+    QSharedPointer<VArc> const arc = qSharedPointerDynamicCast<VArc>(obj);
     SCASSERT(arc.isNull() == false)
 
     doc->SetAttribute(tag, AttrType, ToolType);

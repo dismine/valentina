@@ -69,7 +69,7 @@ auto main(int argc, char **argv) -> int
     auto Terminate = qScopeGuard([]() { XERCES_CPP_NAMESPACE::XMLPlatformUtils::Terminate(); });
 #endif
 
-    TestVApplication app(argc, argv); // For QPrinter
+    TestVApplication const app(argc, argv); // For QPrinter
 
     QResource::registerResource(QCoreApplication::applicationDirPath() + QStringLiteral("/test_data.rcc"));
 

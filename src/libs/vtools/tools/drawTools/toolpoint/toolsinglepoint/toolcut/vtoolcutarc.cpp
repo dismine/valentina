@@ -145,7 +145,7 @@ auto VToolCutArc::Create(VToolCutInitData &initData) -> VToolCutArc *
 
     VArc arc1;
     VArc arc2;
-    QPointF point = arc->CutArc(VAbstractValApplication::VApp()->toPixel(result), arc1, arc2, initData.name);
+    QPointF const point = arc->CutArc(VAbstractValApplication::VApp()->toPixel(result), arc1, arc2, initData.name);
 
     arc1.SetAliasSuffix(initData.aliasSuffix1);
     arc2.SetAliasSuffix(initData.aliasSuffix2);

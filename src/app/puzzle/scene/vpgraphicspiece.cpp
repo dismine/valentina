@@ -293,10 +293,10 @@ void VPGraphicsPiece::mouseReleaseEvent(QGraphicsSceneMouseEvent *event)
         setCursor(Qt::OpenHandCursor);
         emit HideTransformationHandles(false);
 
-        VPPiecePtr piece = m_piece.toStrongRef();
+        VPPiecePtr const piece = m_piece.toStrongRef();
         if (not piece.isNull())
         {
-            VPLayoutPtr layout = piece->Layout();
+            VPLayoutPtr const layout = piece->Layout();
             if (not layout.isNull())
             {
                 if (layout->LayoutSettings().GetStickyEdges() && m_hasStickyPosition)
@@ -332,13 +332,13 @@ void VPGraphicsPiece::hoverLeaveEvent(QGraphicsSceneHoverEvent *event)
 //---------------------------------------------------------------------------------------------------------------------
 void VPGraphicsPiece::contextMenuEvent(QGraphicsSceneContextMenuEvent *event)
 {
-    VPPiecePtr piece = m_piece.toStrongRef();
+    VPPiecePtr const piece = m_piece.toStrongRef();
     if (piece.isNull())
     {
         return;
     }
 
-    VPLayoutPtr layout = piece->Layout();
+    VPLayoutPtr const layout = piece->Layout();
     if (layout.isNull())
     {
         return;
@@ -492,7 +492,7 @@ void VPGraphicsPiece::InitPieceLabelSVGFont(const QVector<QPointF> &labelShape, 
 //---------------------------------------------------------------------------------------------------------------------
 void VPGraphicsPiece::InitPieceLabelOutlineFont(const QVector<QPointF> &labelShape, const VTextManager &tm)
 {
-    VPPiecePtr piece = m_piece.toStrongRef();
+    VPPiecePtr const piece = m_piece.toStrongRef();
     if (piece.isNull())
     {
         return;
@@ -508,7 +508,7 @@ void VPGraphicsPiece::InitPieceLabelOutlineFont(const QVector<QPointF> &labelSha
     const qreal angle = -QLineF(labelShape.at(0), labelShape.at(1)).angle();
     const QColor color = PieceColor();
     const int maxLineWidth = tm.MaxLineWidthOutlineFont(static_cast<int>(dW));
-    qreal penWidth = VPApplication::VApp()->PuzzleSettings()->GetLayoutLineWidth();
+    qreal const penWidth = VPApplication::VApp()->PuzzleSettings()->GetLayoutLineWidth();
 
     qreal dY = 0;
 
@@ -609,7 +609,7 @@ void VPGraphicsPiece::InitGrainlineItem()
 {
     delete m_grainlineItem;
 
-    VPPiecePtr piece = m_piece.toStrongRef();
+    VPPiecePtr const piece = m_piece.toStrongRef();
     if (piece.isNull())
     {
         return;
@@ -621,7 +621,7 @@ void VPGraphicsPiece::InitGrainlineItem()
         m_grainlineItem->setPath(VLayoutPiece::GrainlinePath(piece->GetMappedGrainlineShape()));
 
         VPSettings *settings = VPApplication::VApp()->PuzzleSettings();
-        QPen pen(PieceColor(), settings->GetLayoutLineWidth(), Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin);
+        QPen const pen(PieceColor(), settings->GetLayoutLineWidth(), Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin);
         m_grainlineItem->SetCustomPen(true);
         m_grainlineItem->setPen(pen);
     }
@@ -738,13 +738,13 @@ void VPGraphicsPiece::PaintCuttingLine(QPainter *painter, const VPPiecePtr &piec
 {
     if (piece->IsSeamAllowance() && not piece->IsSeamAllowanceBuiltIn())
     {
-        QVector<VLayoutPoint> cuttingLinepoints = piece->GetMappedFullSeamAllowancePoints();
+        QVector<VLayoutPoint> const cuttingLinepoints = piece->GetMappedFullSeamAllowancePoints();
         if (cuttingLinepoints.isEmpty())
         {
             return;
         }
 
-        VPLayoutPtr layout = piece->Layout();
+        VPLayoutPtr const layout = piece->Layout();
         if (layout.isNull())
         {
             return;
@@ -754,8 +754,8 @@ void VPGraphicsPiece::PaintCuttingLine(QPainter *painter, const VPPiecePtr &piec
         {
             const QVector<VLayoutPassmark> passmarks = piece->GetMappedPassmarks();
 
-            bool seamAllowance = piece->IsSeamAllowance() && !piece->IsSeamAllowanceBuiltIn();
-            bool builtInSeamAllowance = piece->IsSeamAllowance() && piece->IsSeamAllowanceBuiltIn();
+            bool const seamAllowance = piece->IsSeamAllowance() && !piece->IsSeamAllowanceBuiltIn();
+            bool const builtInSeamAllowance = piece->IsSeamAllowance() && piece->IsSeamAllowanceBuiltIn();
 
             VBoundary boundary(cuttingLinepoints, seamAllowance, builtInSeamAllowance);
             boundary.SetPieceName(piece->GetName());
@@ -1066,13 +1066,13 @@ void VPGraphicsPiece::PaintFoldLine(QPainter *painter, const VPPiecePtr &piece)
 //---------------------------------------------------------------------------------------------------------------------
 void VPGraphicsPiece::GroupMove(const QPointF &pos)
 {
-    VPPiecePtr piece = m_piece.toStrongRef();
+    VPPiecePtr const piece = m_piece.toStrongRef();
     if (piece.isNull())
     {
         return;
     }
 
-    VPLayoutPtr layout = piece->Layout();
+    VPLayoutPtr const layout = piece->Layout();
     if (layout.isNull())
     {
         return;
@@ -1082,7 +1082,7 @@ void VPGraphicsPiece::GroupMove(const QPointF &pos)
     {
         QList<VPPiecePtr> pieces;
 
-        VPSheetPtr sheet = layout->GetFocusedSheet();
+        VPSheetPtr const sheet = layout->GetFocusedSheet();
         if (not sheet.isNull())
         {
             return sheet->GetSelectedPieces();
@@ -1091,8 +1091,8 @@ void VPGraphicsPiece::GroupMove(const QPointF &pos)
         return pieces;
     };
 
-    QList<VPPiecePtr> pieces = PreparePieces();
-    QPointF newPos = pos - m_moveStartPoint;
+    QList<VPPiecePtr> const pieces = PreparePieces();
+    QPointF const newPos = pos - m_moveStartPoint;
 
     if (qFuzzyIsNull(newPos.x()) && qFuzzyIsNull(newPos.y()))
     {
@@ -1134,13 +1134,13 @@ void VPGraphicsPiece::GroupMove(const QPointF &pos)
 //---------------------------------------------------------------------------------------------------------------------
 auto VPGraphicsPiece::PieceColor() const -> QColor
 {
-    VPPiecePtr piece = m_piece.toStrongRef();
+    VPPiecePtr const piece = m_piece.toStrongRef();
     if (piece.isNull())
     {
         return VSceneStylesheet::ManualLayoutStyle().PieceOkColor();
     }
 
-    VPLayoutPtr layout = piece->Layout();
+    VPLayoutPtr const layout = piece->Layout();
     if (layout.isNull())
     {
         return VSceneStylesheet::ManualLayoutStyle().PieceOkColor();
@@ -1175,7 +1175,7 @@ auto VPGraphicsPiece::NoBrush() const -> QBrush
 //---------------------------------------------------------------------------------------------------------------------
 void VPGraphicsPiece::on_RefreshPiece(const VPPiecePtr &piece)
 {
-    VPPiecePtr p = m_piece.toStrongRef();
+    VPPiecePtr const p = m_piece.toStrongRef();
     if (p.isNull())
     {
         return;
@@ -1199,7 +1199,7 @@ void VPGraphicsPiece::on_RefreshPiece(const VPPiecePtr &piece)
 //---------------------------------------------------------------------------------------------------------------------
 void VPGraphicsPiece::PieceZValueChanged(const VPPiecePtr &piece)
 {
-    VPPiecePtr p = m_piece.toStrongRef();
+    VPPiecePtr const p = m_piece.toStrongRef();
     if (p.isNull() || piece.isNull())
     {
         return;
@@ -1218,12 +1218,12 @@ auto VPGraphicsPiece::itemChange(GraphicsItemChange change, const QVariant &valu
     {
         if (change == ItemSelectedHasChanged)
         {
-            VPPiecePtr piece = m_piece.toStrongRef();
+            VPPiecePtr const piece = m_piece.toStrongRef();
             if (not piece.isNull())
             {
                 piece->SetSelected(value.toBool());
 
-                VPLayoutPtr layout = piece->Layout();
+                VPLayoutPtr const layout = piece->Layout();
                 if (not layout.isNull())
                 {
                     emit layout->PieceSelectionChanged(piece);

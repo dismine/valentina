@@ -183,7 +183,7 @@ void VPE::VPropertyFormWidget::buildEditor(VProperty *property, QFormLayout *for
     // add new row
     if (type == Property::Complex)
     {
-        QString name = "<b>" + property->getName() + "</b>";
+        QString const name = "<b>" + property->getName() + "</b>";
         formLayout->addRow(name, tmpEditor);
     }
     else
@@ -225,8 +225,8 @@ void VPE::VPropertyFormWidget::commitData(int row)
     }
     else if (tmpEditorWidget.Editor && tmpProperty)
     {
-        QVariant newValue = tmpProperty->getEditorData(tmpEditorWidget.Editor);
-        QVariant oldValue = tmpProperty->data(VProperty::DPC_Data, Qt::EditRole);
+        QVariant const newValue = tmpProperty->getEditorData(tmpEditorWidget.Editor);
+        QVariant const oldValue = tmpProperty->data(VProperty::DPC_Data, Qt::EditRole);
         if (oldValue != newValue)
         {
             VProperty *parent = tmpProperty->getParent();
@@ -378,7 +378,7 @@ void VPE::VPropertyFormWidget::commitData(const QWidget *editor)
 
     for (int i = 0; i < d_ptr->EditorWidgets.count(); ++i)
     {
-        VPropertyFormWidgetPrivate::SEditorWidget &tmpEditorWidget = d_ptr->EditorWidgets[i];
+        VPropertyFormWidgetPrivate::SEditorWidget const &tmpEditorWidget = d_ptr->EditorWidgets[i];
         if (tmpEditorWidget.Editor == editor)
         {
             commitData(i);

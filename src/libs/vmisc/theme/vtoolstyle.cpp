@@ -74,13 +74,13 @@ void ReadColorAdjustments(const QJsonObject &values, const QString &variable, QM
         return;
     }
 
-    QJsonObject colorAdjustmentsObject = valueRef.toObject();
+    QJsonObject const colorAdjustmentsObject = valueRef.toObject();
 
     for (const QString &key : colorAdjustmentsObject.keys())
     {
-        QColor keyColor(key);
-        QColor valueColor = VStylesheetStyle::ReadColorValue(colorAdjustmentsObject.value(key));
-        QString colorName = valueColor.name(QColor::HexArgb);
+        QColor const keyColor(key);
+        QColor const valueColor = VStylesheetStyle::ReadColorValue(colorAdjustmentsObject.value(key));
+        QString const colorName = valueColor.name(QColor::HexArgb);
         adjustments.insert(keyColor.name(QColor::HexArgb), colorName);
     }
 }
@@ -109,9 +109,9 @@ VToolStyle::VToolStyle()
 //---------------------------------------------------------------------------------------------------------------------
 void VToolStyle::LoadJson(const QJsonObject &json)
 {
-    QJsonValue toolStyleValues = json[*ToolStyleNodeVar];
+    QJsonValue const toolStyleValues = json[*ToolStyleNodeVar];
 
-    QJsonObject obj = toolStyleValues.toObject();
+    QJsonObject const obj = toolStyleValues.toObject();
 
     ReadColor(obj, *PatternColorVar, m_patternColor);
     ReadColor(obj, *DisabledColorVar, m_disabledColor);
@@ -134,7 +134,7 @@ void VToolStyle::LoadJson(const QJsonObject &json)
 //---------------------------------------------------------------------------------------------------------------------
 auto VToolStyle::ToJson() const -> QJsonObject
 {
-    QJsonObject obj;
+    QJsonObject const obj;
 
     WriteColor(obj, *PatternColorVar, m_patternColor);
     WriteColor(obj, *DisabledColorVar, m_disabledColor);

@@ -299,7 +299,7 @@ auto VLayoutPaper::SaveResult(const VBestSquare &bestResult, const VLayoutPiece 
         d->globalContour.SetContour(newGContour);
 
         VCachedPositions positionChache;
-        QVector<QPointF> layoutPoints = workDetail.GetMappedLayoutAllowancePoints();
+        QVector<QPointF> const layoutPoints = workDetail.GetMappedLayoutAllowancePoints();
         positionChache.boundingRect = VLayoutPiece::BoundingRect(layoutPoints);
         positionChache.layoutAllowancePath = VGObject::PainterPath(layoutPoints);
         d->positionsCache.append(positionChache);
@@ -327,8 +327,8 @@ auto VLayoutPaper::GetPaperItem(bool autoCropLength, bool autoCropWidth, bool te
 
     if (autoCropLength || autoCropWidth)
     {
-        QScopedPointer<QGraphicsScene> scene(new QGraphicsScene());
-        QList<QGraphicsItem *> list = GetItemDetails(textAsPaths, togetherWithNotches, showLayoutAllowance);
+        QScopedPointer<QGraphicsScene> const scene(new QGraphicsScene());
+        QList<QGraphicsItem *> const list = GetItemDetails(textAsPaths, togetherWithNotches, showLayoutAllowance);
         for (auto *item : list)
         {
             scene->addItem(item);

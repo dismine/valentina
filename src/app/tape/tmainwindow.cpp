@@ -886,7 +886,7 @@ void TMainWindow::ExportToCSVData(const QString &fileName, bool withHeader, int 
     }
 
     VKnownMeasurementsDatabase *db = MApplication::VApp()->KnownMeasurementsDatabase();
-    VKnownMeasurements knownDB = db->KnownMeasurements(m_m->KnownMeasurements());
+    VKnownMeasurements const knownDB = db->KnownMeasurements(m_m->KnownMeasurements());
 
     const QMap<int, QSharedPointer<VMeasurement>> orderedTable = OrderedMeasurements();
     int row = 0;
@@ -992,7 +992,7 @@ auto TMainWindow::FileSaveAs() -> bool
         return false;
     }
 
-    QFileInfo f(fileName);
+    QFileInfo const f(fileName);
     if (f.suffix().isEmpty() && f.suffix() != suffix)
     {
         fileName += '.'_L1 + suffix;
@@ -1009,7 +1009,7 @@ auto TMainWindow::FileSaveAs() -> bool
     if (QFileInfo::exists(fileName) && m_curFile != fileName)
     {
         // Temporary try to lock the file before saving
-        VLockGuard<char> tmp(fileName);
+        VLockGuard<char> const tmp(fileName);
         if (not tmp.IsLocked())
         {
             qCCritical(tMainWindow, "%s",
@@ -1025,7 +1025,7 @@ auto TMainWindow::FileSaveAs() -> bool
     m_mIsReadOnly = false;
 
     QString error;
-    bool result = SaveMeasurements(fileName, error);
+    bool const result = SaveMeasurements(fileName, error);
     if (not result)
     {
         QMessageBox messageBox;
@@ -1113,7 +1113,7 @@ void TMainWindow::ImportDataFromCSV()
         return;
     }
 
-    QFileInfo f(fileName);
+    QFileInfo const f(fileName);
     if (f.suffix().isEmpty() && f.suffix() != suffix)
     {
         fileName += '.'_L1 + suffix;
@@ -1147,8 +1147,8 @@ void TMainWindow::ImportDataFromCSV()
 
         if (columns->exec() == QDialog::Accepted)
         {
-            QxtCsvModel csv(fileName, nullptr, dialog.IsWithHeader(), dialog.GetSeparator(),
-                            VTextCodec::codecForMib(dialog.GetSelectedMib()));
+            QxtCsvModel const csv(fileName, nullptr, dialog.IsWithHeader(), dialog.GetSeparator(),
+                                  VTextCodec::codecForMib(dialog.GetSelectedMib()));
             const QVector<int> map = columns->ColumnsMap();
 
             if (m_m->Type() == MeasurementsType::Individual)
@@ -1254,7 +1254,7 @@ void TMainWindow::SaveNotes()
 //---------------------------------------------------------------------------------------------------------------------
 void TMainWindow::SaveKnownMeasurements(int index)
 {
-    QUuid known = ui->comboBoxKnownMeasurements->itemData(index).toUuid();
+    QUuid const known = ui->comboBoxKnownMeasurements->itemData(index).toUuid();
 
     ui->actionEditCurrentKnownMeasurements->setEnabled(KnownMeasurementsRegistred(known));
 
@@ -1502,7 +1502,7 @@ void TMainWindow::AddImage()
             settings->SetPathCustomImage(QFileInfo(filePath).absolutePath());
         }
 
-        VPatternImage image = VPatternImage::FromFile(filePath);
+        VPatternImage const image = VPatternImage::FromFile(filePath);
 
         if (not image.IsValid())
         {
@@ -1589,18 +1589,18 @@ void TMainWindow::SaveImage()
 
     VTapeSettings *settings = MApplication::VApp()->TapeSettings();
 
-    QMimeType mime = image.MimeTypeFromData();
+    QMimeType const mime = image.MimeTypeFromData();
     QString path = settings->GetPathCustomImage() + QDir::separator() + tr("untitled");
 
-    QStringList suffixes = mime.suffixes();
+    QStringList const suffixes = mime.suffixes();
     if (not suffixes.isEmpty())
     {
         path += '.'_L1 + suffixes.at(0);
     }
 
-    QString filter = mime.filterString();
-    QString filename = QFileDialog::getSaveFileName(this, tr("Save Image"), path, filter, nullptr,
-                                                    VAbstractApplication::VApp()->NativeFileDialog());
+    QString const filter = mime.filterString();
+    QString const filename = QFileDialog::getSaveFileName(this, tr("Save Image"), path, filter, nullptr,
+                                                          VAbstractApplication::VApp()->NativeFileDialog());
     if (not filename.isEmpty())
     {
         if (QFileInfo::exists(filename))
@@ -1654,10 +1654,10 @@ void TMainWindow::ShowImage()
         return;
     }
 
-    QMimeType mime = image.MimeTypeFromData();
+    QMimeType const mime = image.MimeTypeFromData();
     QString name = QDir::tempPath() + QDir::separator() + "image.XXXXXX"_L1;
 
-    QStringList suffixes = mime.suffixes();
+    QStringList const suffixes = mime.suffixes();
     if (not suffixes.isEmpty())
     {
         name += '.'_L1 + suffixes.at(0);
@@ -1710,7 +1710,7 @@ void TMainWindow::AddCustom()
 //---------------------------------------------------------------------------------------------------------------------
 void TMainWindow::AddKnown()
 {
-    QScopedPointer<DialogMDataBase> dialog(new DialogMDataBase(m_m->KnownMeasurements(), m_m->ListKnown(), this));
+    QScopedPointer<DialogMDataBase> const dialog(new DialogMDataBase(m_m->KnownMeasurements(), m_m->ListKnown(), this));
     if (dialog->exec() == QDialog::Rejected)
     {
         return;
@@ -1719,11 +1719,11 @@ void TMainWindow::AddKnown()
     vsizetype currentRow;
     const QStringList list = dialog->GetNewNames();
     VKnownMeasurementsDatabase *db = MApplication::VApp()->KnownMeasurementsDatabase();
-    VKnownMeasurements knownDB = db->KnownMeasurements(m_m->KnownMeasurements());
+    VKnownMeasurements const knownDB = db->KnownMeasurements(m_m->KnownMeasurements());
 
     auto AddMeasurement = [this, knownDB, &currentRow](const QString &name)
     {
-        VKnownMeasurement known = knownDB.Measurement(name);
+        VKnownMeasurement const known = knownDB.Measurement(name);
 
         if (m_mType == MeasurementsType::Individual)
         {
@@ -1809,7 +1809,7 @@ void TMainWindow::ImportFromPattern()
 
     const QString filter(tr("Pattern files (*.val)"));
     // Use standard path to individual measurements
-    QString pathTo = MApplication::VApp()->TapeSettings()->GetPathPattern();
+    QString const pathTo = MApplication::VApp()->TapeSettings()->GetPathPattern();
 
     const QString mPath = QFileDialog::getOpenFileName(this, tr("Import from a pattern"), pathTo, filter, nullptr,
                                                        VAbstractApplication::VApp()->NativeFileDialog());
@@ -1818,7 +1818,7 @@ void TMainWindow::ImportFromPattern()
         return;
     }
 
-    VLockGuard<char> tmp(mPath);
+    VLockGuard<char> const tmp(mPath);
     if (not tmp.IsLocked())
     {
         qCCritical(tMainWindow, "%s", qUtf8Printable(tr("This file already opened in another window.")));
@@ -1829,7 +1829,7 @@ void TMainWindow::ImportFromPattern()
     try
     {
         VPatternConverter converter(mPath);
-        QScopedPointer<VLitePattern> doc(new VLitePattern());
+        QScopedPointer<VLitePattern> const doc(new VLitePattern());
         doc->setXMLContent(converter.Convert());
         measurements = doc->ListMeasurements();
 
@@ -2008,8 +2008,8 @@ void TMainWindow::ShowNewMData(bool fresh)
     {
         // Show known
         VKnownMeasurementsDatabase *db = MApplication::VApp()->KnownMeasurementsDatabase();
-        VKnownMeasurements knownDB = db->KnownMeasurements(m_m->KnownMeasurements());
-        VKnownMeasurement known = knownDB.Measurement(meash->GetName());
+        VKnownMeasurements const knownDB = db->KnownMeasurements(m_m->KnownMeasurements());
+        VKnownMeasurement const known = knownDB.Measurement(meash->GetName());
 
         ui->plainTextEditDescription->setPlainText(known.description);
         ui->lineEditFullName->setText(known.fullName);
@@ -2111,8 +2111,8 @@ void TMainWindow::ShowNewMData(bool fresh)
 
         ui->plainTextEditFormula->blockSignals(true);
 
-        QString formula = VTranslateVars::TryFormulaToUser(meash->GetFormula(),
-                                                           VAbstractApplication::VApp()->Settings()->GetOsSeparator());
+        QString const formula = VTranslateVars::TryFormulaToUser(
+            meash->GetFormula(), VAbstractApplication::VApp()->Settings()->GetOsSeparator());
 
         ui->plainTextEditFormula->setPlainText(formula);
         ui->plainTextEditFormula->blockSignals(false);
@@ -2148,8 +2148,8 @@ void TMainWindow::ShowMDiagram(const QSharedPointer<VMeasurement> &m)
     else
     {
         VKnownMeasurementsDatabase *db = MApplication::VApp()->KnownMeasurementsDatabase();
-        VKnownMeasurements knownDB = db->KnownMeasurements(m_m->KnownMeasurements());
-        VKnownMeasurement known = knownDB.Measurement(m->GetName());
+        VKnownMeasurements const knownDB = db->KnownMeasurements(m_m->KnownMeasurements());
+        VKnownMeasurement const known = knownDB.Measurement(m->GetName());
         image = knownDB.Image(known.diagram);
     }
 
@@ -2269,7 +2269,7 @@ void TMainWindow::SaveMValue()
 
     const QTableWidgetItem *nameField = ui->tableWidget->item(row, ColumnName);
 
-    QString text = ui->plainTextEditFormula->toPlainText();
+    QString const text = ui->plainTextEditFormula->toPlainText();
 
     QTableWidgetItem *formulaField = ui->tableWidget->item(row, ColumnFormula);
     if (formulaField->text() == text)
@@ -2603,8 +2603,8 @@ void TMainWindow::ExportToIndividual()
         dir = QFileInfo(m_curFile).absolutePath();
     }
 
-    QString filters = tr("Individual measurements") + QStringLiteral(" (*.vit)");
-    QString fName = tr("measurements.vit");
+    QString const filters = tr("Individual measurements") + QStringLiteral(" (*.vit)");
+    QString const fName = tr("measurements.vit");
     QString fileName = QFileDialog::getSaveFileName(this, tr("Export to individual"), dir + '/'_L1 + fName, filters,
                                                     nullptr, VAbstractApplication::VApp()->NativeFileDialog());
 
@@ -2613,8 +2613,8 @@ void TMainWindow::ExportToIndividual()
         return;
     }
 
-    QString suffix = QStringLiteral("vit");
-    QFileInfo f(fileName);
+    QString const suffix = QStringLiteral("vit");
+    QFileInfo const f(fileName);
     if (f.suffix().isEmpty() && f.suffix() != suffix)
     {
         fileName += '.'_L1 + suffix;
@@ -2625,7 +2625,7 @@ void TMainWindow::ExportToIndividual()
         MApplication::VApp()->TapeSettings()->SetPathIndividualMeasurements(QFileInfo(fileName).absolutePath());
     }
 
-    QScopedPointer<VContainer> tmpData(
+    QScopedPointer<VContainer> const tmpData(
         new VContainer(VAbstractApplication::VApp()->TrVars(), &m_mUnit, VContainer::UniqueNamespace()));
 
     VMeasurements individualMeasurements(m_mUnit, tmpData.data());
@@ -2665,7 +2665,7 @@ void TMainWindow::RestrictFirstDimesion()
 {
     const QList<MeasurementDimension_p> dimensions = m_m->Dimensions().values();
     const QMap<QString, VDimensionRestriction> restrictions = m_m->GetRestrictions();
-    bool fullCircumference = m_m->IsFullCircumference();
+    bool const fullCircumference = m_m->IsFullCircumference();
 
     DialogRestrictDimension dialog(dimensions, restrictions, RestrictDimension::First, fullCircumference, this);
     if (dialog.exec() == QDialog::Rejected)
@@ -2687,7 +2687,7 @@ void TMainWindow::RestrictSecondDimesion()
 {
     const QList<MeasurementDimension_p> dimensions = m_m->Dimensions().values();
     const QMap<QString, VDimensionRestriction> restrictions = m_m->GetRestrictions();
-    bool fullCircumference = m_m->IsFullCircumference();
+    bool const fullCircumference = m_m->IsFullCircumference();
 
     DialogRestrictDimension dialog(dimensions, restrictions, RestrictDimension::Second, fullCircumference, this);
     if (dialog.exec() == QDialog::Rejected)
@@ -2705,7 +2705,7 @@ void TMainWindow::RestrictThirdDimesion()
 {
     const QList<MeasurementDimension_p> dimensions = m_m->Dimensions().values();
     const QMap<QString, VDimensionRestriction> restrictions = m_m->GetRestrictions();
-    bool fullCircumference = m_m->IsFullCircumference();
+    bool const fullCircumference = m_m->IsFullCircumference();
 
     DialogRestrictDimension dialog(dimensions, restrictions, RestrictDimension::Third, fullCircumference, this);
     if (dialog.exec() == QDialog::Rejected)
@@ -2771,7 +2771,7 @@ void TMainWindow::AskDefaultSettings()
         dialog.setWindowModality(Qt::WindowModal);
         if (dialog.exec() == QDialog::Accepted)
         {
-            QString locale = dialog.Locale();
+            QString const locale = dialog.Locale();
             settings->SetLocale(locale);
             VAbstractApplication::VApp()->LoadTranslation(locale);
         }
@@ -2902,7 +2902,7 @@ void TMainWindow::SetupMenu()
     connect(ui->actionEditCurrentKnownMeasurements, &QAction::triggered, this,
             [this]()
             {
-                QUuid id = m_m->KnownMeasurements();
+                QUuid const id = m_m->KnownMeasurements();
                 if (id.isNull())
                 {
                     ui->actionEditCurrentKnownMeasurements->setDisabled(true);
@@ -2910,7 +2910,7 @@ void TMainWindow::SetupMenu()
                 }
 
                 VKnownMeasurementsDatabase *db = MApplication::VApp()->KnownMeasurementsDatabase();
-                QHash<QUuid, VKnownMeasurementsHeader> known = db->AllKnownMeasurements();
+                QHash<QUuid, VKnownMeasurementsHeader> const known = db->AllKnownMeasurements();
                 if (!known.contains(id))
                 {
                     qCritical() << tr("Unknown known measurements: %1").arg(id.toString());
@@ -3183,7 +3183,7 @@ void TMainWindow::InitDimensionsBaseValue()
             name->setText(dimension->Name() + ':'_L1);
             name->setToolTip(VAbstartMeasurementDimension::DimensionToolTip(dimension, m_m->IsFullCircumference()));
 
-            DimesionLabels labels = dimension->Labels();
+            DimesionLabels const labels = dimension->Labels();
 
             if (VFuzzyContains(labels, dimension->BaseValue()) &&
                 not VFuzzyValue(labels, dimension->BaseValue()).isEmpty())
@@ -3247,11 +3247,11 @@ void TMainWindow::InitDimensionGradation(int index, const MeasurementDimension_p
     }
 
     // Calculate the width of the largest item using QFontMetrics
-    QFontMetrics fontMetrics(control->font());
+    QFontMetrics const fontMetrics(control->font());
     int maxWidth = 0;
     for (int i = 0; i < control->count(); ++i)
     {
-        int itemWidth = fontMetrics.horizontalAdvance(control->itemText(i));
+        int const itemWidth = fontMetrics.horizontalAdvance(control->itemText(i));
         if (itemWidth > maxWidth)
         {
             maxWidth = itemWidth;
@@ -3265,7 +3265,7 @@ void TMainWindow::InitDimensionGradation(int index, const MeasurementDimension_p
     // it invalid first
     control->setCurrentIndex(-1);
 
-    int i = control->findData(current);
+    int const i = control->findData(current);
     if (i != -1)
     {
         control->setCurrentIndex(i);
@@ -3455,7 +3455,7 @@ auto TMainWindow::MaybeSave() -> bool
         return true; // Don't ask if file was created without modifications.
     }
 
-    QScopedPointer<QMessageBox> messageBox(
+    QScopedPointer<QMessageBox> const messageBox(
         new QMessageBox(QMessageBox::Warning, tr("Unsaved changes"),
                         tr("Measurements have been modified. Do you want to save your changes?"),
                         QMessageBox::Yes | QMessageBox::No | QMessageBox::Cancel, this, Qt::Sheet));
@@ -3603,8 +3603,8 @@ void TMainWindow::RefreshTable(bool freshCall)
 void TMainWindow::RefreshMeasurementData(const QSharedPointer<VMeasurement> &meash, qint32 currentRow)
 {
     VKnownMeasurementsDatabase *db = MApplication::VApp()->KnownMeasurementsDatabase();
-    VKnownMeasurements knownDB = db->KnownMeasurements(m_m->KnownMeasurements());
-    VKnownMeasurement known = knownDB.Measurement(meash->GetName());
+    VKnownMeasurements const knownDB = db->KnownMeasurements(m_m->KnownMeasurements());
+    VKnownMeasurement const known = knownDB.Measurement(meash->GetName());
 
     if (m_mType == MeasurementsType::Individual)
     {
@@ -3633,8 +3633,8 @@ void TMainWindow::RefreshMeasurementData(const QSharedPointer<VMeasurement> &mea
         AddCell(calculatedValue, currentRow, ColumnCalcValue, Qt::AlignHCenter | Qt::AlignVCenter,
                 meash->IsFormulaOk()); // calculated value
 
-        QString formula = VTranslateVars::TryFormulaToUser(meash->GetFormula(),
-                                                           VAbstractApplication::VApp()->Settings()->GetOsSeparator());
+        QString const formula = VTranslateVars::TryFormulaToUser(
+            meash->GetFormula(), VAbstractApplication::VApp()->Settings()->GetOsSeparator());
 
         AddCell(formula, currentRow, ColumnFormula, Qt::AlignVCenter); // formula
     }
@@ -3890,8 +3890,8 @@ void TMainWindow::SyncKnownMeasurements()
         ShowMDiagram(meash);
 
         VKnownMeasurementsDatabase *db = MApplication::VApp()->KnownMeasurementsDatabase();
-        VKnownMeasurements knownDB = db->KnownMeasurements(m_m->KnownMeasurements());
-        VKnownMeasurement known = knownDB.Measurement(meash->GetName());
+        VKnownMeasurements const knownDB = db->KnownMeasurements(m_m->KnownMeasurements());
+        VKnownMeasurement const known = knownDB.Measurement(meash->GetName());
 
         ui->plainTextEditDescription->blockSignals(true);
         ui->plainTextEditDescription->setPlainText(known.description);
@@ -3941,7 +3941,7 @@ auto TMainWindow::EvalFormula(const QString &formula, bool fromUser, VContainer 
         {
             f = formula;
         }
-        QScopedPointer<Calculator> cal(new Calculator());
+        QScopedPointer<Calculator> const cal(new Calculator());
         qreal result = cal->EvalFormula(data->DataVariables(), f);
 
         if (qIsInf(result) || qIsNaN(result))
@@ -4139,7 +4139,7 @@ auto TMainWindow::LoadFromExistingFile(const QString &path) -> bool
             throw VException(tr("File has unknown format."));
         }
 
-        QScopedPointer<VAbstractMConverter> converter(
+        QScopedPointer<VAbstractMConverter> const converter(
             (m_mType == MeasurementsType::Individual) ? static_cast<VAbstractMConverter *>(new VVITConverter(path))
                                                       : static_cast<VAbstractMConverter *>(new VVSTConverter(path)));
 
@@ -4292,7 +4292,7 @@ auto TMainWindow::CheckMName(const QString &name, const QSet<QString> &importedN
         throw VException(tr("Imported file must not contain the same name twice."));
     }
 
-    QRegularExpression rx(NameRegExp());
+    QRegularExpression const rx(NameRegExp());
     if (not rx.match(name).hasMatch())
     {
         throw VException(tr("Measurement '%1' doesn't match regex pattern.").arg(name));
@@ -4723,12 +4723,12 @@ auto TMainWindow::OrderedMeasurements() const -> QMap<int, QSharedPointer<VMeasu
 //---------------------------------------------------------------------------------------------------------------------
 void TMainWindow::InitIcons()
 {
-    QString iconResource = QStringLiteral("icon");
+    QString const iconResource = QStringLiteral("icon");
     ui->toolButtonExpr->setIcon(VTheme::GetIconResource(iconResource, QStringLiteral("24x24/fx.png")));
     ui->toolButtonAddImage->setIcon(VTheme::GetIconResource(iconResource, QStringLiteral("16x16/insert-image.png")));
     ui->toolButtonRemoveImage->setIcon(VTheme::GetIconResource(iconResource, QStringLiteral("16x16/remove-image.png")));
 
-    QString tapeIconResource = QStringLiteral("tapeicon");
+    QString const tapeIconResource = QStringLiteral("tapeicon");
     ui->actionMeasurementDiagram->setIcon(
         VTheme::GetIconResource(tapeIconResource, QStringLiteral("24x24/mannequin.png")));
 }
@@ -4770,12 +4770,12 @@ void TMainWindow::RetranslateMDiagram()
 void TMainWindow::InitKnownMeasurements(QComboBox *combo)
 {
     VKnownMeasurementsDatabase *db = MApplication::VApp()->KnownMeasurementsDatabase();
-    QHash<QUuid, VKnownMeasurementsHeader> known = db->AllKnownMeasurements();
+    QHash<QUuid, VKnownMeasurementsHeader> const known = db->AllKnownMeasurements();
 
     SCASSERT(combo != nullptr)
     combo->addItem(tr("None"), QUuid());
 
-    QUuid kmId = m_m->KnownMeasurements();
+    QUuid const kmId = m_m->KnownMeasurements();
     if (!kmId.isNull() && !known.contains(kmId))
     {
         combo->addItem(tr("Invalid link"), kmId);
@@ -4802,10 +4802,10 @@ void TMainWindow::InitKnownMeasurements(QComboBox *combo)
 void TMainWindow::InitKnownMeasurementsDescription()
 {
     VKnownMeasurementsDatabase *db = MApplication::VApp()->KnownMeasurementsDatabase();
-    QHash<QUuid, VKnownMeasurementsHeader> known = db->AllKnownMeasurements();
+    QHash<QUuid, VKnownMeasurementsHeader> const known = db->AllKnownMeasurements();
 
     ui->plainTextEditKnownMeasurementsDescription->clear();
-    QUuid id = m_m->KnownMeasurements();
+    QUuid const id = m_m->KnownMeasurements();
     if (!id.isNull() && known.contains(id))
     {
         ui->plainTextEditKnownMeasurementsDescription->setPlainText(known.value(id).description);
@@ -4821,7 +4821,7 @@ auto TMainWindow::KnownMeasurementsRegistred(const QUuid &id) -> bool
     }
 
     VKnownMeasurementsDatabase *db = MApplication::VApp()->KnownMeasurementsDatabase();
-    QHash<QUuid, VKnownMeasurementsHeader> known = db->AllKnownMeasurements();
+    QHash<QUuid, VKnownMeasurementsHeader> const known = db->AllKnownMeasurements();
     return known.contains(id);
 }
 
@@ -4907,7 +4907,7 @@ void TMainWindow::ExportRowToCSV(QxtCsvModel &csv, int row, const QSharedPointer
 {
     csv.insertRow(row);
 
-    VKnownMeasurement known = knownDB.Measurement(meash->GetName());
+    VKnownMeasurement const known = knownDB.Measurement(meash->GetName());
 
     csv.setText(row, 0, meash->GetName());
 
@@ -4933,8 +4933,8 @@ void TMainWindow::ExportRowToCSV(QxtCsvModel &csv, int row, const QSharedPointer
 
     if (m_mType == MeasurementsType::Individual)
     {
-        QString formula = VTranslateVars::TryFormulaToUser(meash->GetFormula(),
-                                                           VAbstractApplication::VApp()->Settings()->GetOsSeparator());
+        QString const formula = VTranslateVars::TryFormulaToUser(
+            meash->GetFormula(), VAbstractApplication::VApp()->Settings()->GetOsSeparator());
         csv.setText(row, 3, formula);
 
         if (meash->IsCustom())
@@ -5103,7 +5103,7 @@ void TMainWindow::InitMeasurementUnits()
     ui->comboBoxMUnits->addItem(units, QVariant(static_cast<int>(MUnits::Table)));
     ui->comboBoxMUnits->addItem(tr("Degrees"), QVariant(static_cast<int>(MUnits::Degrees)));
 
-    int i = ui->comboBoxMUnits->findData(current);
+    int const i = ui->comboBoxMUnits->findData(current);
     if (i != -1)
     {
         ui->comboBoxMUnits->setCurrentIndex(i);
@@ -5140,7 +5140,7 @@ void TMainWindow::InitMeasurementDimension()
     ui->comboBoxDimension->addItem(VMeasurements::IMDName(IMD::W), QVariant(static_cast<int>(IMD::W)));
     ui->comboBoxDimension->addItem(VMeasurements::IMDName(IMD::Z), QVariant(static_cast<int>(IMD::Z)));
 
-    int i = ui->comboBoxDimension->findData(current);
+    int const i = ui->comboBoxDimension->findData(current);
     if (i != -1)
     {
         ui->comboBoxDimension->setCurrentIndex(i);
@@ -5280,7 +5280,7 @@ void TMainWindow::InitSearch()
 //---------------------------------------------------------------------------------------------------------------------
 void TMainWindow::InitSearchHistory()
 {
-    QStringList searchHistory = MApplication::VApp()->TapeSettings()->GetTapeSearchHistory();
+    QStringList const searchHistory = MApplication::VApp()->TapeSettings()->GetTapeSearchHistory();
     m_searchHistory->clear();
 
     if (searchHistory.isEmpty())
@@ -5300,7 +5300,7 @@ void TMainWindow::InitSearchHistory()
                     auto *action = qobject_cast<QAction *>(sender());
                     if (action != nullptr)
                     {
-                        QString term = action->data().toString();
+                        QString const term = action->data().toString();
                         ui->lineEditFind->setText(term);
                         m_search->Find(term);
                         ui->lineEditFind->setFocus();
@@ -5313,7 +5313,7 @@ void TMainWindow::InitSearchHistory()
 void TMainWindow::SaveSearchRequest()
 {
     QStringList searchHistory = MApplication::VApp()->TapeSettings()->GetTapeSearchHistory();
-    QString term = ui->lineEditFind->text();
+    QString const term = ui->lineEditFind->text();
     if (term.isEmpty())
     {
         return;
@@ -5340,7 +5340,7 @@ void TMainWindow::UpdateSearchControlsTooltips()
         }
         else if (m_serachButtonTooltips.contains(button))
         {
-            QString tooltip = m_serachButtonTooltips.value(button);
+            QString const tooltip = m_serachButtonTooltips.value(button);
             button->setToolTip(tooltip.arg(button->shortcut().toString(QKeySequence::NativeText)));
         }
     };

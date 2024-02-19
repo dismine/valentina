@@ -77,9 +77,9 @@ auto Calculator::EvalFormula(const QHash<QString, QSharedPointer<VInternalVariab
     -> qreal
 {
     // Converting with locale is much faster in case of single numerical value.
-    QLocale c(QLocale::C);
+    QLocale const c(QLocale::C);
     bool ok = false;
-    qreal result = c.toDouble(formula, &ok);
+    qreal const result = c.toDouble(formula, &ok);
     if (ok)
     {
         return result;
@@ -101,14 +101,14 @@ auto Calculator::VarFactory(const QString &a_szName, void *a_pUserData) -> qreal
 
     if (calc->m_vars != nullptr && calc->m_vars->contains(a_szName))
     {
-        QSharedPointer<qreal> val(new qreal(*calc->m_vars->value(a_szName)->GetValue()));
+        QSharedPointer<qreal> const val(new qreal(*calc->m_vars->value(a_szName)->GetValue()));
         calc->m_varsValues.append(val);
         return val.data();
     }
 
     if (a_szName.startsWith('#'))
     {
-        QSharedPointer<qreal> val(new qreal(std::numeric_limits<qreal>::quiet_NaN()));
+        QSharedPointer<qreal> const val(new qreal(std::numeric_limits<qreal>::quiet_NaN()));
         calc->m_varsValues.append(val);
         return val.data();
     }

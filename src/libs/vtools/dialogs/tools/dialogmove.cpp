@@ -525,7 +525,7 @@ void DialogMove::SuffixChanged()
 
         if (m_suffix != suffix)
         {
-            QRegularExpression rx(NameRegExp());
+            QRegularExpression const rx(NameRegExp());
             const QStringList uniqueNames = data->AllUniqueNames();
             for (const auto &uniqueName : uniqueNames)
             {
@@ -625,7 +625,7 @@ void DialogMove::ShowSourceDetails(int row)
         if (sourceItem.penStyle.isEmpty() || sourceItem.penStyle == TypeLineDefault)
         {
             const QSharedPointer<VAbstractCurve> curve = data->GeometricObject<VAbstractCurve>(sourceItem.id);
-            int index = ui->comboBoxPenStyle->currentIndex();
+            int const index = ui->comboBoxPenStyle->currentIndex();
             ui->comboBoxPenStyle->setItemText(index, '<' + tr("Default") + '>');
         }
 
@@ -634,7 +634,7 @@ void DialogMove::ShowSourceDetails(int row)
         if (sourceItem.color.isEmpty() || sourceItem.color == ColorDefault)
         {
             const QSharedPointer<VAbstractCurve> curve = data->GeometricObject<VAbstractCurve>(sourceItem.id);
-            int index = ui->comboBoxColor->currentIndex();
+            int const index = ui->comboBoxColor->currentIndex();
             ui->comboBoxColor->setItemIcon(index, LineColor(ui->comboBoxColor->palette().color(QPalette::Text),
                                                             ui->comboBoxColor->iconSize().height(), curve->GetColor()));
         }
@@ -844,7 +844,7 @@ void DialogMove::FillSourceList()
     for (auto &sourceItem : sourceObjects)
     {
         const QSharedPointer<VGObject> obj = data->GetGObject(sourceItem.id);
-        bool valid = SourceAliasValid(sourceItem, obj, data, OriginAlias(sourceItem.id, sourceObjects, obj));
+        bool const valid = SourceAliasValid(sourceItem, obj, data, OriginAlias(sourceItem.id, sourceObjects, obj));
 
         auto *item = new QListWidgetItem(valid ? obj->ObjectName() : obj->ObjectName() + '*');
         item->setToolTip(obj->ObjectName());
@@ -939,7 +939,7 @@ auto DialogMove::GetNotes() const -> QString
 //---------------------------------------------------------------------------------------------------------------------
 auto DialogMove::IsValid() const -> bool
 {
-    bool ready = flagAngle && flagRotationAngle && flagLength && flagName && flagGroupName && flagAlias;
+    bool const ready = flagAngle && flagRotationAngle && flagLength && flagName && flagGroupName && flagAlias;
 
     if (ready)
     {

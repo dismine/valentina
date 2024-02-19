@@ -36,7 +36,7 @@ OpaqueBackgroundImage::OpaqueBackgroundImage(QUuid id, qreal opacity, VAbstractP
 {
     setText(tr("change a background image opacity"));
 
-    VBackgroundPatternImage image = doc->GetBackgroundImage(m_id);
+    VBackgroundPatternImage const image = doc->GetBackgroundImage(m_id);
 
     m_oldOpacity = image.Opacity();
 }

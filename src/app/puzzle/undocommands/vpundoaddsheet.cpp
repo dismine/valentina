@@ -43,7 +43,7 @@ VPUndoAddSheet::VPUndoAddSheet(const VPSheetPtr &sheet, QUndoCommand *parent)
 //---------------------------------------------------------------------------------------------------------------------
 void VPUndoAddSheet::undo()
 {
-    VPSheetPtr sheet = m_sheet.toStrongRef();
+    VPSheetPtr const sheet = m_sheet.toStrongRef();
     if (sheet.isNull())
     {
         return;
@@ -51,7 +51,7 @@ void VPUndoAddSheet::undo()
 
     sheet->SetVisible(false);
 
-    VPLayoutPtr layout = sheet->GetLayout();
+    VPLayoutPtr const layout = sheet->GetLayout();
     if (layout.isNull())
     {
         return;
@@ -64,13 +64,13 @@ void VPUndoAddSheet::undo()
 //---------------------------------------------------------------------------------------------------------------------
 void VPUndoAddSheet::redo()
 {
-    VPSheetPtr sheet = m_sheet.toStrongRef();
+    VPSheetPtr const sheet = m_sheet.toStrongRef();
     if (sheet.isNull())
     {
         return;
     }
 
-    VPLayoutPtr layout = sheet->GetLayout();
+    VPLayoutPtr const layout = sheet->GetLayout();
     if (layout.isNull())
     {
         return;

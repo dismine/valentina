@@ -238,7 +238,7 @@ void VFormula::Eval()
     {
         try
         {
-            QScopedPointer<Calculator> cal(new Calculator());
+            QScopedPointer<Calculator> const cal(new Calculator());
             result = cal->EvalFormula(d->data->DataVariables(), d->formula);
         }
         catch (qmu::QmuParserError &e)

@@ -51,7 +51,7 @@ void TST_VPointF::TestFlip_data()
     QTest::addColumn<QPointF>("flipped");
     QTest::addColumn<QString>("prefix");
 
-    VPointF originPoint;
+    VPointF const originPoint;
     QLineF axis = QLineF(QPointF(5, 0), QPointF(5, 10));
     QPointF flipped = QPointF(10, 0);
 

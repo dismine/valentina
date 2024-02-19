@@ -320,7 +320,7 @@ void VToolSinglePoint::SaveOptions(QDomElement &tag, QSharedPointer<VGObject> &o
 {
     VDrawTool::SaveOptions(tag, obj);
 
-    QSharedPointer<VPointF> point = qSharedPointerDynamicCast<VPointF>(obj);
+    QSharedPointer<VPointF> const point = qSharedPointerDynamicCast<VPointF>(obj);
     SCASSERT(point.isNull() == false)
 
     doc->SetAttribute(tag, AttrName, point->name());
@@ -343,7 +343,7 @@ void VToolSinglePoint::ChangeLabelPosition(quint32 id, const QPointF &pos)
 {
     if (id == m_id)
     {
-        QSharedPointer<VPointF> point = VAbstractTool::data.GeometricObject<VPointF>(id);
+        QSharedPointer<VPointF> const point = VAbstractTool::data.GeometricObject<VPointF>(id);
         point->setMx(pos.x());
         point->setMy(pos.y());
         m_namePoint->SetRealPos(pos);

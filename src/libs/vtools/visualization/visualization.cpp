@@ -161,7 +161,7 @@ auto Visualization::FindValFromUser(const QString &expression,
                     formula, VAbstractApplication::VApp()->Settings()->GetOsSeparator());
             }
 
-            QScopedPointer<Calculator> cal(new Calculator());
+            QScopedPointer<Calculator> const cal(new Calculator());
             val = cal->EvalFormula(vars, formula);
 
             if (qIsInf(val) || qIsNaN(val))

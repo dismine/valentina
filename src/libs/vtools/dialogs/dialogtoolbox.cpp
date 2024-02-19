@@ -113,7 +113,7 @@ auto DoublePoint(const VPieceNode &firstNode, const VPieceNode &secondNode, cons
             return false;
         }
 
-        bool sameCoordinates = VFuzzyComparePoints(firstPoint->toQPointF(), secondPoint->toQPointF());
+        bool const sameCoordinates = VFuzzyComparePoints(firstPoint->toQPointF(), secondPoint->toQPointF());
         if (sameCoordinates)
         {
             error = QObject::tr("Points '%1' and '%2' have the same coordinates.")
@@ -288,9 +288,9 @@ auto EvalToolFormula(QDialog *dialog, const FormulaData &data, bool &flag) -> qr
         try
         {
             // Translate to internal look.
-            QString formula = VAbstractApplication::VApp()->TrVars()->FormulaFromUser(
+            QString const formula = VAbstractApplication::VApp()->TrVars()->FormulaFromUser(
                 data.formula, VAbstractApplication::VApp()->Settings()->GetOsSeparator());
-            QScopedPointer<Calculator> cal(new Calculator());
+            QScopedPointer<Calculator> const cal(new Calculator());
             result = cal->EvalFormula(data.variables, formula);
 
             if (qIsInf(result) || qIsNaN(result))
@@ -370,7 +370,7 @@ void CheckPointLabel(QDialog *dialog, QLineEdit *edit, QLabel *labelEditNamePoin
     SCASSERT(labelEditNamePoint != nullptr)
 
     const QString name = edit->text();
-    QRegularExpression rx(NameRegExp());
+    QRegularExpression const rx(NameRegExp());
     if (name.isEmpty() || (pointName != name && not data->IsUnique(name)) || not rx.match(name).hasMatch())
     {
         flag = false;
@@ -915,7 +915,7 @@ auto InvalidSegment(QListWidget *listWidget, const VContainer *data, QString &er
 
             error = QObject::tr("Point '%1' does not lie on a curve '%2'").arg(point->name(), curve1->name());
 
-            bool validSegment = curve1->IsPointOnCurve(point->toQPointF());
+            bool const validSegment = curve1->IsPointOnCurve(point->toQPointF());
             if (not validSegment)
             {
                 return true;

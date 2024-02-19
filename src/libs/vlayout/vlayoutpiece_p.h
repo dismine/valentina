@@ -175,7 +175,7 @@ inline auto operator>>(QDataStream &dataStream, VLayoutPieceData &piece) -> QDat
 
     if (actualStreamHeader != VLayoutPieceData::streamHeader)
     {
-        QString message = QCoreApplication::tr("VLayoutPieceData prefix mismatch error: actualStreamHeader = 0x%1 and "
+        QString const message = QCoreApplication::tr("VLayoutPieceData prefix mismatch error: actualStreamHeader = 0x%1 and "
                                                "streamHeader = 0x%2")
                               .arg(actualStreamHeader, 8, 0x10, QLatin1Char('0'))
                               .arg(VLayoutPieceData::streamHeader, 8, 0x10, QLatin1Char('0'));
@@ -187,7 +187,7 @@ inline auto operator>>(QDataStream &dataStream, VLayoutPieceData &piece) -> QDat
 
     if (actualClassVersion > VLayoutPieceData::classVersion)
     {
-        QString message = QCoreApplication::tr("VLayoutPieceData compatibility error: actualClassVersion = %1 and "
+        QString const message = QCoreApplication::tr("VLayoutPieceData compatibility error: actualClassVersion = %1 and "
                                                "classVersion = %2")
                               .arg(actualClassVersion)
                               .arg(VLayoutPieceData::classVersion);

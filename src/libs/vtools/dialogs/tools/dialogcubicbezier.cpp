@@ -264,7 +264,7 @@ void DialogCubicBezier::SaveData()
 //---------------------------------------------------------------------------------------------------------------------
 void DialogCubicBezier::ValidateAlias()
 {
-    QRegularExpression rx(NameRegExp());
+    QRegularExpression const rx(NameRegExp());
     VCubicBezier spline = spl;
     spline.SetAliasSuffix(ui->lineEditAlias->text());
     if (not ui->lineEditAlias->text().isEmpty() &&

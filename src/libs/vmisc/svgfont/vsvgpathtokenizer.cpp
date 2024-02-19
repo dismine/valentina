@@ -50,8 +50,8 @@ const qreal V_PI = static_cast<qreal>(M_PI); // pi
 //---------------------------------------------------------------------------------------------------------------------
 auto IsCommand(const QChar &ch) -> bool
 {
-    static QSet<QChar> commandCharacterSet{'m', 'M', 'z', 'Z', 'l', 'L', 'h', 'H', 'v', 'V',
-                                           'c', 'C', 's', 'S', 'q', 'Q', 't', 'T', 'a', 'A'};
+    static QSet<QChar> const commandCharacterSet{'m', 'M', 'z', 'Z', 'l', 'L', 'h', 'H', 'v', 'V',
+                                                 'c', 'C', 's', 'S', 'q', 'Q', 't', 'T', 'a', 'A'};
     return commandCharacterSet.contains(ch);
 }
 
@@ -87,7 +87,7 @@ void AddArgumentIfNotEmpty(VSVGPathCommand &currentCommand, const QString &curre
     if (!currentToken.isEmpty() && !currentCommand.m_command.isNull())
     {
         bool ok = false;
-        qreal val = currentToken.toDouble(&ok);
+        qreal const val = currentToken.toDouble(&ok);
         if (ok)
         {
             currentCommand.m_arguments.push_back(val);
@@ -235,7 +235,7 @@ void PathArc(QPainterPath &path, qreal rx, qreal ry, qreal x_axis_rotation, int 
 //---------------------------------------------------------------------------------------------------------------------
 VSVGPathTokenizer::VSVGPathTokenizer(const QString &path)
 {
-    QMutexLocker locker(svgPathTokenizerMutex());
+    QMutexLocker const locker(svgPathTokenizerMutex());
 
     TokenizePathString(path);
 }
@@ -243,7 +243,7 @@ VSVGPathTokenizer::VSVGPathTokenizer(const QString &path)
 //---------------------------------------------------------------------------------------------------------------------
 auto VSVGPathTokenizer::ToPainterPath(QPainterPath &path) const -> bool
 {
-    QMutexLocker locker(svgPathTokenizerMutex());
+    QMutexLocker const locker(svgPathTokenizerMutex());
 
     // starting point
     m_x0 = 0;
@@ -525,9 +525,9 @@ void VSVGPathTokenizer::Command_c(QPainterPath &path) const
         m_count = 0;
         return;
     }
-    QPointF c1(m_num[0] + m_offsetX, m_num[1] + m_offsetY);
-    QPointF c2(m_num[2] + m_offsetX, m_num[3] + m_offsetY);
-    QPointF e(m_num[4] + m_offsetX, m_num[5] + m_offsetY);
+    QPointF const c1(m_num[0] + m_offsetX, m_num[1] + m_offsetY);
+    QPointF const c2(m_num[2] + m_offsetX, m_num[3] + m_offsetY);
+    QPointF const e(m_num[4] + m_offsetX, m_num[5] + m_offsetY);
     m_num += 6;
     m_count -= 6;
     path.cubicTo(c1, c2, e);
@@ -545,9 +545,9 @@ void VSVGPathTokenizer::Command_C(QPainterPath &path) const
         m_count = 0;
         return;
     }
-    QPointF c1(m_num[0], m_num[1]);
-    QPointF c2(m_num[2], m_num[3]);
-    QPointF e(m_num[4], m_num[5]);
+    QPointF const c1(m_num[0], m_num[1]);
+    QPointF const c2(m_num[2], m_num[3]);
+    QPointF const e(m_num[4], m_num[5]);
     m_num += 6;
     m_count -= 6;
     path.cubicTo(c1, c2, e);
@@ -574,8 +574,8 @@ void VSVGPathTokenizer::Command_s(QPainterPath &path) const
     {
         c1 = QPointF(m_x, m_y);
     }
-    QPointF c2(m_num[0] + m_offsetX, m_num[1] + m_offsetY);
-    QPointF e(m_num[2] + m_offsetX, m_num[3] + m_offsetY);
+    QPointF const c2(m_num[0] + m_offsetX, m_num[1] + m_offsetY);
+    QPointF const e(m_num[2] + m_offsetX, m_num[3] + m_offsetY);
     m_num += 4;
     m_count -= 4;
     path.cubicTo(c1, c2, e);
@@ -604,8 +604,8 @@ void VSVGPathTokenizer::Command_S(QPainterPath &path) const
         c1 = QPointF(m_x, m_y);
     }
 
-    QPointF c2(m_num[0], m_num[1]);
-    QPointF e(m_num[2], m_num[3]);
+    QPointF const c2(m_num[0], m_num[1]);
+    QPointF const e(m_num[2], m_num[3]);
     m_num += 4;
     m_count -= 4;
     path.cubicTo(c1, c2, e);
@@ -624,8 +624,8 @@ void VSVGPathTokenizer::Command_q(QPainterPath &path) const
         return;
     }
 
-    QPointF c(m_num[0] + m_offsetX, m_num[1] + m_offsetY);
-    QPointF e(m_num[2] + m_offsetX, m_num[3] + m_offsetY);
+    QPointF const c(m_num[0] + m_offsetX, m_num[1] + m_offsetY);
+    QPointF const e(m_num[2] + m_offsetX, m_num[3] + m_offsetY);
     m_num += 4;
     m_count -= 4;
     path.quadTo(c, e);
@@ -644,8 +644,8 @@ void VSVGPathTokenizer::Command_Q(QPainterPath &path) const
         return;
     }
 
-    QPointF c(m_num[0], m_num[1]);
-    QPointF e(m_num[2], m_num[3]);
+    QPointF const c(m_num[0], m_num[1]);
+    QPointF const e(m_num[2], m_num[3]);
     m_num += 4;
     m_count -= 4;
     path.quadTo(c, e);
@@ -664,7 +664,7 @@ void VSVGPathTokenizer::Command_t(QPainterPath &path) const
         return;
     }
 
-    QPointF e(m_num[0] + m_offsetX, m_num[1] + m_offsetY);
+    QPointF const e(m_num[0] + m_offsetX, m_num[1] + m_offsetY);
     m_num += 2;
     m_count -= 2;
     QPointF c;
@@ -692,7 +692,7 @@ void VSVGPathTokenizer::Command_T(QPainterPath &path) const
         return;
     }
 
-    QPointF e(m_num[0], m_num[1]);
+    QPointF const e(m_num[0], m_num[1]);
     m_num += 2;
     m_count -= 2;
     QPointF c;
@@ -720,16 +720,16 @@ void VSVGPathTokenizer::Command_a(QPainterPath &path) const
         return;
     }
 
-    qreal rx = (*m_num++);
-    qreal ry = (*m_num++);
-    qreal xAxisRotation = (*m_num++);
-    qreal largeArcFlag = (*m_num++);
-    qreal sweepFlag = (*m_num++);
-    qreal ex = (*m_num++) + m_offsetX;
-    qreal ey = (*m_num++) + m_offsetY;
+    qreal const rx = (*m_num++);
+    qreal const ry = (*m_num++);
+    qreal const xAxisRotation = (*m_num++);
+    qreal const largeArcFlag = (*m_num++);
+    qreal const sweepFlag = (*m_num++);
+    qreal const ex = (*m_num++) + m_offsetX;
+    qreal const ey = (*m_num++) + m_offsetY;
     m_count -= 7;
-    qreal curx = m_x;
-    qreal cury = m_y;
+    qreal const curx = m_x;
+    qreal const cury = m_y;
     PathArc(path, rx, ry, xAxisRotation, static_cast<int>(largeArcFlag), static_cast<int>(sweepFlag), ex, ey, curx,
             cury);
     m_x = ex;
@@ -745,16 +745,16 @@ void VSVGPathTokenizer::Command_A(QPainterPath &path) const
         m_count = 0;
         return;
     }
-    qreal rx = (*m_num++);
-    qreal ry = (*m_num++);
-    qreal xAxisRotation = (*m_num++);
-    qreal largeArcFlag = (*m_num++);
-    qreal sweepFlag = (*m_num++);
-    qreal ex = (*m_num++);
-    qreal ey = (*m_num++);
+    qreal const rx = (*m_num++);
+    qreal const ry = (*m_num++);
+    qreal const xAxisRotation = (*m_num++);
+    qreal const largeArcFlag = (*m_num++);
+    qreal const sweepFlag = (*m_num++);
+    qreal const ex = (*m_num++);
+    qreal const ey = (*m_num++);
     m_count -= 7;
-    qreal curx = m_x;
-    qreal cury = m_y;
+    qreal const curx = m_x;
+    qreal const cury = m_y;
     PathArc(path, rx, ry, xAxisRotation, static_cast<int>(largeArcFlag), static_cast<int>(sweepFlag), ex, ey, curx,
             cury);
     m_x = ex;
@@ -764,7 +764,7 @@ void VSVGPathTokenizer::Command_A(QPainterPath &path) const
 //---------------------------------------------------------------------------------------------------------------------
 auto VSVGPathTokenizer::GetCommands() const -> QList<VSVGPathCommand>
 {
-    QMutexLocker locker(svgPathTokenizerMutex());
+    QMutexLocker const locker(svgPathTokenizerMutex());
 
     return m_commands;
 }

@@ -65,7 +65,7 @@ void VisToolArc::RefreshGeometry()
 
         if (GetMode() == Mode::Creation)
         {
-            QLineF r = QLineF(static_cast<QPointF>(*first), ScenePos());
+            QLineF const r = QLineF(static_cast<QPointF>(*first), ScenePos());
 
             auto Angle = [r]()
             {
@@ -94,7 +94,7 @@ void VisToolArc::RefreshGeometry()
             }
             else if (m_f1 < 0)
             {
-                qreal f1Angle = Angle();
+                qreal const f1Angle = Angle();
                 VArc arc = VArc(*first, m_radius, f1Angle, f1Angle);
                 arc.SetApproximationScale(ApproximationScale());
                 DrawPath(this, arc.GetPath(), QVector<DirectionArrow>(), Qt::DashLine, Qt::RoundCap);
@@ -114,7 +114,7 @@ void VisToolArc::RefreshGeometry()
             }
             else if (m_f1 >= 0)
             {
-                qreal f2Angle = StickyEnd(Angle());
+                qreal const f2Angle = StickyEnd(Angle());
                 VArc arc = VArc(*first, m_radius, m_f1, f2Angle);
                 arc.SetApproximationScale(ApproximationScale());
                 DrawPath(this, arc.GetPath(), arc.DirectionArrows(), LineStyle(), Qt::RoundCap);

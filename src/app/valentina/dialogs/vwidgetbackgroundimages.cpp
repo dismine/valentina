@@ -209,13 +209,13 @@ void VWidgetBackgroundImages::UpdateImages()
 //---------------------------------------------------------------------------------------------------------------------
 void VWidgetBackgroundImages::UpdateImage(const QUuid &id)
 {
-    int row = ImageRow(id);
+    int const row = ImageRow(id);
     if (row == -1)
     {
         return;
     }
 
-    VBackgroundPatternImage image = m_doc->GetBackgroundImage(id);
+    VBackgroundPatternImage const image = m_doc->GetBackgroundImage(id);
     if (image.IsNull())
     {
         return;
@@ -238,7 +238,7 @@ void VWidgetBackgroundImages::UpdateImage(const QUuid &id)
 //---------------------------------------------------------------------------------------------------------------------
 void VWidgetBackgroundImages::ImageSelected(const QUuid &id)
 {
-    int row = ImageRow(id);
+    int const row = ImageRow(id);
 
     ui->tableWidget->blockSignals(true);
     ui->tableWidget->setCurrentCell(row, ImageData::Name);
@@ -308,7 +308,7 @@ void VWidgetBackgroundImages::ContextMenu(const QPoint &pos)
     const int row = item->row();
     item = ui->tableWidget->item(row, 0);
     const QUuid id = item->data(Qt::UserRole).toUuid();
-    VBackgroundPatternImage image = m_doc->GetBackgroundImage(id);
+    VBackgroundPatternImage const image = m_doc->GetBackgroundImage(id);
     if (image.IsNull())
     {
         return;
@@ -428,7 +428,7 @@ void VWidgetBackgroundImages::CurrentImageChanged(int currentRow, int currentCol
 //---------------------------------------------------------------------------------------------------------------------
 void VWidgetBackgroundImages::MoveImageOnTop()
 {
-    int row = ui->tableWidget->currentRow();
+    int const row = ui->tableWidget->currentRow();
     if (row == -1)
     {
         return;
@@ -437,7 +437,7 @@ void VWidgetBackgroundImages::MoveImageOnTop()
     QTableWidgetItem *item = ui->tableWidget->item(row, 0);
     if (item != nullptr)
     {
-        QUuid id = item->data(Qt::UserRole).toUuid();
+        QUuid const id = item->data(Qt::UserRole).toUuid();
         auto *command = new ZValueMoveBackgroundImage(id, ZValueMoveType::Top, m_doc);
         VAbstractApplication::VApp()->getUndoStack()->push(command);
     }
@@ -446,7 +446,7 @@ void VWidgetBackgroundImages::MoveImageOnTop()
 //---------------------------------------------------------------------------------------------------------------------
 void VWidgetBackgroundImages::MoveImageUp()
 {
-    int row = ui->tableWidget->currentRow();
+    int const row = ui->tableWidget->currentRow();
     if (row == -1)
     {
         return;
@@ -455,7 +455,7 @@ void VWidgetBackgroundImages::MoveImageUp()
     QTableWidgetItem *item = ui->tableWidget->item(row, 0);
     if (item != nullptr)
     {
-        QUuid id = item->data(Qt::UserRole).toUuid();
+        QUuid const id = item->data(Qt::UserRole).toUuid();
         auto *command = new ZValueMoveBackgroundImage(id, ZValueMoveType::Up, m_doc);
         VAbstractApplication::VApp()->getUndoStack()->push(command);
     }
@@ -464,7 +464,7 @@ void VWidgetBackgroundImages::MoveImageUp()
 //---------------------------------------------------------------------------------------------------------------------
 void VWidgetBackgroundImages::MoveImageDown()
 {
-    int row = ui->tableWidget->currentRow();
+    int const row = ui->tableWidget->currentRow();
     if (row == -1)
     {
         return;
@@ -473,7 +473,7 @@ void VWidgetBackgroundImages::MoveImageDown()
     QTableWidgetItem *item = ui->tableWidget->item(row, 0);
     if (item != nullptr)
     {
-        QUuid id = item->data(Qt::UserRole).toUuid();
+        QUuid const id = item->data(Qt::UserRole).toUuid();
         auto *command = new ZValueMoveBackgroundImage(id, ZValueMoveType::Down, m_doc);
         VAbstractApplication::VApp()->getUndoStack()->push(command);
     }
@@ -482,7 +482,7 @@ void VWidgetBackgroundImages::MoveImageDown()
 //---------------------------------------------------------------------------------------------------------------------
 void VWidgetBackgroundImages::MoveImageBottom()
 {
-    int row = ui->tableWidget->currentRow();
+    int const row = ui->tableWidget->currentRow();
     if (row == -1)
     {
         return;
@@ -491,7 +491,7 @@ void VWidgetBackgroundImages::MoveImageBottom()
     QTableWidgetItem *item = ui->tableWidget->item(row, 0);
     if (item != nullptr)
     {
-        QUuid id = item->data(Qt::UserRole).toUuid();
+        QUuid const id = item->data(Qt::UserRole).toUuid();
         auto *command = new ZValueMoveBackgroundImage(id, ZValueMoveType::Bottom, m_doc);
         VAbstractApplication::VApp()->getUndoStack()->push(command);
     }
@@ -500,7 +500,7 @@ void VWidgetBackgroundImages::MoveImageBottom()
 //---------------------------------------------------------------------------------------------------------------------
 void VWidgetBackgroundImages::ApplyImageTransformation()
 {
-    int row = ui->tableWidget->currentRow();
+    int const row = ui->tableWidget->currentRow();
     if (row == -1)
     {
         return;
@@ -512,8 +512,8 @@ void VWidgetBackgroundImages::ApplyImageTransformation()
         return;
     }
 
-    QUuid id = item->data(Qt::UserRole).toUuid();
-    VBackgroundPatternImage image = m_doc->GetBackgroundImage(id);
+    QUuid const id = item->data(Qt::UserRole).toUuid();
+    VBackgroundPatternImage const image = m_doc->GetBackgroundImage(id);
 
     if (image.IsNull() || image.Hold())
     {
@@ -528,7 +528,7 @@ void VWidgetBackgroundImages::ApplyImageTransformation()
 
         if (not ui->checkBoxRelativeTranslation->isChecked())
         {
-            QRectF rect = image.BoundingRect();
+            QRectF const rect = image.BoundingRect();
             dx = dx - rect.topLeft().x();
             dy = dy - rect.topLeft().y();
         }
@@ -538,14 +538,14 @@ void VWidgetBackgroundImages::ApplyImageTransformation()
     }
     else if (ui->tabWidgetImageTransformation->indexOf(ui->tabScale) == index)
     { // scale
-        qreal sx =
+        qreal const sx =
             WidthScaleUnitConvertor(ui->doubleSpinBoxScaleWidth->value(), CurrentScaleUnit(), ScaleUnit::Percent) / 100;
-        qreal sy =
+        qreal const sy =
             HeightScaleUnitConvertor(ui->doubleSpinBoxScaleHeight->value(), CurrentScaleUnit(), ScaleUnit::Percent) /
             100;
 
         QTransform imageMatrix = image.Matrix();
-        QPointF originPos = image.BoundingRect().center();
+        QPointF const originPos = image.BoundingRect().center();
 
         QTransform m;
         m.translate(originPos.x(), originPos.y());
@@ -567,7 +567,7 @@ void VWidgetBackgroundImages::ApplyImageTransformation()
 
         QTransform imageMatrix = image.Matrix();
 
-        QPointF originPos = image.BoundingRect().center();
+        QPointF const originPos = image.BoundingRect().center();
 
         QTransform m;
         m.translate(originPos.x(), originPos.y());
@@ -600,7 +600,7 @@ void VWidgetBackgroundImages::ResetImageTransformationSettings()
             }
         }
 
-        int unitIndex = ui->comboBoxTranslateUnit->findData(QVariant(static_cast<int>(Unit::Px)));
+        int const unitIndex = ui->comboBoxTranslateUnit->findData(QVariant(static_cast<int>(Unit::Px)));
         if (unitIndex != -1)
         {
             ui->comboBoxTranslateUnit->setCurrentIndex(unitIndex);
@@ -608,7 +608,7 @@ void VWidgetBackgroundImages::ResetImageTransformationSettings()
     }
     else if (ui->tabWidgetImageTransformation->indexOf(ui->tabScale) == index)
     { // scale
-        int unitIndex = ui->comboBoxScaleUnit->findData(QVariant(static_cast<int>(ScaleUnit::Percent)));
+        int const unitIndex = ui->comboBoxScaleUnit->findData(QVariant(static_cast<int>(ScaleUnit::Percent)));
         if (unitIndex != -1)
         {
             ui->comboBoxScaleUnit->setCurrentIndex(unitIndex);
@@ -633,7 +633,7 @@ void VWidgetBackgroundImages::RelativeTranslationChanged(bool checked)
     }
     else
     {
-        int row = ui->tableWidget->currentRow();
+        int const row = ui->tableWidget->currentRow();
         if (row == -1)
         {
             return;
@@ -642,7 +642,7 @@ void VWidgetBackgroundImages::RelativeTranslationChanged(bool checked)
         QTableWidgetItem *item = ui->tableWidget->item(row, 0);
         if (item != nullptr)
         {
-            QUuid id = item->data(Qt::UserRole).toUuid();
+            QUuid const id = item->data(Qt::UserRole).toUuid();
             SetAbsolutePisition(id);
         }
     }
@@ -653,7 +653,7 @@ void VWidgetBackgroundImages::ScaleProportionallyChanged(bool checked)
 {
     if (checked)
     {
-        qreal value = ui->doubleSpinBoxScaleWidth->value();
+        qreal const value = ui->doubleSpinBoxScaleWidth->value();
         ui->doubleSpinBoxScaleHeight->setValue(value);
     }
 }
@@ -663,7 +663,7 @@ void VWidgetBackgroundImages::ScaleWidthChanged(double value)
 {
     if (ui->checkBoxScaleProportionally->isChecked())
     {
-        ScaleUnit unit = CurrentScaleUnit();
+        ScaleUnit const unit = CurrentScaleUnit();
         if (unit == ScaleUnit::Percent)
         {
             ui->doubleSpinBoxScaleHeight->blockSignals(true);
@@ -672,9 +672,9 @@ void VWidgetBackgroundImages::ScaleWidthChanged(double value)
         }
         else
         {
-            qreal factor = WidthScaleUnitConvertor(value, unit, ScaleUnit::Percent) / 100.;
-            qreal heightPx = ImageHeight() * factor;
-            qreal height = HeightScaleUnitConvertor(heightPx, ScaleUnit::Px, unit);
+            qreal const factor = WidthScaleUnitConvertor(value, unit, ScaleUnit::Percent) / 100.;
+            qreal const heightPx = ImageHeight() * factor;
+            qreal const height = HeightScaleUnitConvertor(heightPx, ScaleUnit::Px, unit);
 
             ui->doubleSpinBoxScaleHeight->blockSignals(true);
             ui->doubleSpinBoxScaleHeight->setValue(height);
@@ -688,7 +688,7 @@ void VWidgetBackgroundImages::ScaleHeightChanged(double value)
 {
     if (ui->checkBoxScaleProportionally->isChecked())
     {
-        ScaleUnit unit = CurrentScaleUnit();
+        ScaleUnit const unit = CurrentScaleUnit();
         if (unit == ScaleUnit::Percent)
         {
             ui->doubleSpinBoxScaleWidth->blockSignals(true);
@@ -697,9 +697,9 @@ void VWidgetBackgroundImages::ScaleHeightChanged(double value)
         }
         else
         {
-            qreal factor = HeightScaleUnitConvertor(value, unit, ScaleUnit::Percent) / 100.;
-            qreal widthPx = ImageWidth() * factor;
-            qreal width = WidthScaleUnitConvertor(widthPx, ScaleUnit::Px, unit);
+            qreal const factor = HeightScaleUnitConvertor(value, unit, ScaleUnit::Percent) / 100.;
+            qreal const widthPx = ImageWidth() * factor;
+            qreal const width = WidthScaleUnitConvertor(widthPx, ScaleUnit::Px, unit);
 
             ui->doubleSpinBoxScaleHeight->blockSignals(true);
             ui->doubleSpinBoxScaleHeight->setValue(width);
@@ -716,7 +716,7 @@ void VWidgetBackgroundImages::ImagePositionChanged(const QUuid &id)
         return;
     }
 
-    int row = ui->tableWidget->currentRow();
+    int const row = ui->tableWidget->currentRow();
     if (row == -1)
     {
         return;
@@ -725,7 +725,7 @@ void VWidgetBackgroundImages::ImagePositionChanged(const QUuid &id)
     QTableWidgetItem *item = ui->tableWidget->item(row, 0);
     if (item != nullptr)
     {
-        QUuid curentId = item->data(Qt::UserRole).toUuid();
+        QUuid const curentId = item->data(Qt::UserRole).toUuid();
         if (curentId != id)
         {
             return;
@@ -788,7 +788,7 @@ void VWidgetBackgroundImages::FillTable(const QVector<VBackgroundPatternImage> &
 //---------------------------------------------------------------------------------------------------------------------
 void VWidgetBackgroundImages::ToggleImageHold(const QUuid &id) const
 {
-    VBackgroundPatternImage image = m_doc->GetBackgroundImage(id);
+    VBackgroundPatternImage const image = m_doc->GetBackgroundImage(id);
     if (not image.IsNull())
     {
         auto *command = new HoldBackgroundImage(image.Id(), not image.Hold(), m_doc);
@@ -799,7 +799,7 @@ void VWidgetBackgroundImages::ToggleImageHold(const QUuid &id) const
 //---------------------------------------------------------------------------------------------------------------------
 void VWidgetBackgroundImages::ToggleImageVisibility(const QUuid &id) const
 {
-    VBackgroundPatternImage image = m_doc->GetBackgroundImage(id);
+    VBackgroundPatternImage const image = m_doc->GetBackgroundImage(id);
     if (not image.IsNull())
     {
         auto *command = new HideBackgroundImage(image.Id(), image.Visible(), m_doc);
@@ -972,14 +972,14 @@ auto VWidgetBackgroundImages::ImageWidth() const -> qreal
 {
     qreal width = 0;
 
-    int row = ui->tableWidget->currentRow();
+    int const row = ui->tableWidget->currentRow();
     if (row != -1)
     {
         QTableWidgetItem *item = ui->tableWidget->item(row, 0);
         if (item != nullptr)
         {
-            QUuid id = item->data(Qt::UserRole).toUuid();
-            VBackgroundPatternImage image = m_doc->GetBackgroundImage(id);
+            QUuid const id = item->data(Qt::UserRole).toUuid();
+            VBackgroundPatternImage const image = m_doc->GetBackgroundImage(id);
             width = image.Size().width();
         }
     }
@@ -992,14 +992,14 @@ auto VWidgetBackgroundImages::ImageHeight() const -> qreal
 {
     qreal height = 0;
 
-    int row = ui->tableWidget->currentRow();
+    int const row = ui->tableWidget->currentRow();
     if (row != -1)
     {
         QTableWidgetItem *item = ui->tableWidget->item(row, 0);
         if (item != nullptr)
         {
-            QUuid id = item->data(Qt::UserRole).toUuid();
-            VBackgroundPatternImage image = m_doc->GetBackgroundImage(id);
+            QUuid const id = item->data(Qt::UserRole).toUuid();
+            VBackgroundPatternImage const image = m_doc->GetBackgroundImage(id);
             height = image.Size().height();
         }
     }
@@ -1022,8 +1022,8 @@ auto VWidgetBackgroundImages::HeightScaleUnitConvertor(qreal value, ScaleUnit fr
 //---------------------------------------------------------------------------------------------------------------------
 void VWidgetBackgroundImages::SetAbsolutePisition(const QUuid &id)
 {
-    VBackgroundPatternImage image = m_doc->GetBackgroundImage(id);
-    QRectF rect = image.BoundingRect();
+    VBackgroundPatternImage const image = m_doc->GetBackgroundImage(id);
+    QRectF const rect = image.BoundingRect();
 
     ui->doubleSpinBoxImageHorizontalTranslate->setValue(
         UnitConvertor(rect.topLeft().x(), Unit::Px, CurrentTranslateUnit()));

@@ -255,8 +255,8 @@ auto VApplicationStyle::StyleIcon(StandardPixmap standardIcon, const QStyleOptio
 auto VApplicationStyle::StylesheetIcon(StandardPixmap standardIcon, const QStyleOption *option,
                                        const QWidget *widget) const -> QIcon
 {
-    static QHash<QStyle::StandardPixmap, QString> icons = StandardIconPaths();
-    QString resource = QStringLiteral("://%1/%2").arg(VTheme::ThemeStylesheet(), icons.value(standardIcon));
+    static QHash<QStyle::StandardPixmap, QString> const icons = StandardIconPaths();
+    QString const resource = QStringLiteral("://%1/%2").arg(VTheme::ThemeStylesheet(), icons.value(standardIcon));
     if (QFileInfo::exists(resource))
     {
         return QIcon(resource);

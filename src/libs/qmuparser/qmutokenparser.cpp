@@ -92,7 +92,7 @@ QmuTokenParser::QmuTokenParser(const QString &formula, bool osSeparator,
  */
 auto QmuTokenParser::IsSingle(const QString &formula) -> bool
 {
-    QLocale c(QLocale::C);
+    QLocale const c(QLocale::C);
     bool ok = false;
     c.toDouble(formula, &ok);
     return ok;

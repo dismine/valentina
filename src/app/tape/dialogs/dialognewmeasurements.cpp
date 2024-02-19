@@ -112,7 +112,7 @@ void DialogNewMeasurements::InitMTypes()
     ui->comboBoxMType->addItem(tr("Multisize"), static_cast<int>(MeasurementsType::Multisize));
     ui->comboBoxMType->blockSignals(false);
 
-    int index = ui->comboBoxMType->findData(val);
+    int const index = ui->comboBoxMType->findData(val);
     if (index != -1)
     {
         ui->comboBoxMType->setCurrentIndex(index);

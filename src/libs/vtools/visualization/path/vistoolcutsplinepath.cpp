@@ -88,8 +88,8 @@ void VisToolCutSplinePath::RefreshGeometry()
         }
         else if (GetMode() == Mode::Creation)
         {
-            QPointF p = splPath->ClosestPoint(ScenePos());
-            qreal length = splPath->GetLengthByPoint(p);
+            QPointF const p = splPath->ClosestPoint(ScenePos());
+            qreal const length = splPath->GetLengthByPoint(p);
 
             DrawPoint(m_point, p);
 

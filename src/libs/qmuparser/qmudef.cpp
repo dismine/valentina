@@ -180,8 +180,8 @@ auto ReadVal(const QString &formula, qreal &val, const QLocale &locale, const QC
     Q_UNUSED(decimalPoint)
     Q_UNUSED(groupSeparator)
 
-    QSet<QChar> reserved{positiveSign, negativeSign, sign0, sign1, sign2, sign3,    sign4,
-                         sign5,        sign6,        sign7, sign8, sign9, expUpper, expLower};
+    QSet<QChar> const reserved{positiveSign, negativeSign, sign0, sign1, sign2, sign3,    sign4,
+                               sign5,        sign6,        sign7, sign8, sign9, expUpper, expLower};
 
     if (reserved.contains(decimal) || reserved.contains(thousand))
     {
@@ -190,7 +190,7 @@ auto ReadVal(const QString &formula, qreal &val, const QLocale &locale, const QC
     }
 
     // row - current state, column - new state
-    static uchar table[9][6] = {
+    static uchar const table[9][6] = {
         /*    None	     InputSign     InputThousand      InputDigit     InputDot      InputExp */
         {
             0,

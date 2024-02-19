@@ -134,7 +134,7 @@ auto VAbstractTool::CheckFormula(const quint32 &toolId, QString &formula, VConta
     qreal result = 0;
     try
     {
-        QScopedPointer<Calculator> cal(new Calculator());
+        QScopedPointer<Calculator> const cal(new Calculator());
         result = cal->EvalFormula(data->DataVariables(), formula);
 
         if (qIsInf(result) || qIsNaN(result))
@@ -153,7 +153,8 @@ auto VAbstractTool::CheckFormula(const quint32 &toolId, QString &formula, VConta
 
         if (VAbstractApplication::VApp()->IsAppInGUIMode())
         {
-            QScopedPointer<DialogUndo> dialogUndo(new DialogUndo(VAbstractValApplication::VApp()->getMainWindow()));
+            QScopedPointer<DialogUndo> const dialogUndo(
+                new DialogUndo(VAbstractValApplication::VApp()->getMainWindow()));
             forever
             {
                 if (dialogUndo->exec() == QDialog::Accepted)
@@ -171,7 +172,7 @@ auto VAbstractTool::CheckFormula(const quint32 &toolId, QString &formula, VConta
                             /* Need delete dialog here because parser in dialog don't allow use correct separator for
                              * parsing here. */
                             delete dialog;
-                            QScopedPointer<Calculator> cal1(new Calculator());
+                            QScopedPointer<Calculator> const cal1(new Calculator());
                             result = cal1->EvalFormula(data->DataVariables(), formula);
 
                             if (qIsInf(result) || qIsNaN(result))
@@ -227,7 +228,7 @@ void VAbstractTool::DeleteToolWithConfirm(bool ask)
         PerformDelete();
 
         // Throw exception, this will help prevent case when we forget to immediately quit function.
-        VExceptionToolWasDeleted e("Tool was used after deleting.");
+        VExceptionToolWasDeleted const e("Tool was used after deleting.");
         throw e;
     }
     else
@@ -335,7 +336,7 @@ auto VAbstractTool::PointsList() const -> QMap<QString, quint32>
     {
         if (i.key() != m_id)
         {
-            QSharedPointer<VGObject> obj = i.value();
+            QSharedPointer<VGObject> const obj = i.value();
             if (obj->getType() == GOType::Point)
             {
                 const QSharedPointer<VPointF> point = data.GeometricObject<VPointF>(i.key());
@@ -422,7 +423,7 @@ void VAbstractTool::AddRecord(const VToolRecord &record, VAbstractPattern *doc)
         return;
     }
 
-    quint32 cursor = doc->getCursor();
+    quint32 const cursor = doc->getCursor();
     if (cursor == NULL_ID)
     {
         history->append(record);
@@ -432,7 +433,7 @@ void VAbstractTool::AddRecord(const VToolRecord &record, VAbstractPattern *doc)
         qint32 index = 0;
         for (qint32 i = 0; i < history->size(); ++i)
         {
-            VToolRecord rec = history->at(i);
+            VToolRecord const rec = history->at(i);
             if (rec.getId() == cursor)
             {
                 index = i;
@@ -708,7 +709,7 @@ auto VAbstractTool::CreateNodeSplinePath(VContainer *data, quint32 id) -> quint3
 auto VAbstractTool::CreateNodePoint(VContainer *data, quint32 id, const QSharedPointer<VPointF> &point) -> quint32
 {
     const quint32 pointId = CreateNode<VPointF>(data, id);
-    QSharedPointer<VPointF> p = data->GeometricObject<VPointF>(pointId);
+    QSharedPointer<VPointF> const p = data->GeometricObject<VPointF>(pointId);
     p->SetShowLabel(point->IsShowLabel());
     p->setMx(point->mx());
     p->setMy(point->my());

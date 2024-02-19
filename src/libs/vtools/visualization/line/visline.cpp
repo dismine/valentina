@@ -110,7 +110,7 @@ auto VisLine::Ray(const QPointF &firstPoint, const qreal &angle) const -> QPoint
 //---------------------------------------------------------------------------------------------------------------------
 auto VisLine::Ray(const QPointF &firstPoint) const -> QPointF
 {
-    QLineF line = QLineF(firstPoint, ScenePos());
+    QLineF const line = QLineF(firstPoint, ScenePos());
     return Ray(firstPoint, line.angle());
 }
 
@@ -123,7 +123,7 @@ auto VisLine::Axis(const QPointF &p, const qreal &angle) const -> QLineF
 //---------------------------------------------------------------------------------------------------------------------
 auto VisLine::Axis(const QPointF &p1, const QPointF &p2) const -> QLineF
 {
-    QLineF line(p1, p2);
+    QLineF const line(p1, p2);
     return Axis(p1, line.angle());
 }
 

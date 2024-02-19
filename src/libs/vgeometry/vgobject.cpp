@@ -69,7 +69,7 @@ auto PerpDotProduct(const QPointF &p1, const QPointF &p2, const QPointF &t) -> d
 auto GetEpsilon(const QPointF &t, QPointF p1, QPointF p2, qreal accuracy) -> double
 {
     QLineF edge1(p1, p2);
-    QLineF edge2(p1, t);
+    QLineF const edge2(p1, t);
     if (edge2.length() > edge1.length())
     {
         edge1.setLength(edge2.length());
@@ -318,8 +318,8 @@ auto VGObject::BuildRay(const QPointF &firstPoint, const qreal &angle, const QRe
     if (not rect.contains(firstPoint))
     {
         // If point outside of scene rect create one around point and unite two rects.
-        QRectF rectangle(firstPoint.x() - rect.width() / 2, firstPoint.y() - rect.height() / 2, rect.width(),
-                         rect.height());
+        QRectF const rectangle(firstPoint.x() - rect.width() / 2, firstPoint.y() - rect.height() / 2, rect.width(),
+                               rect.height());
         rect = rect.united(rectangle);
     }
     const qreal diagonal = qSqrt(pow(rect.height(), 2) + pow(rect.width(), 2));
@@ -457,7 +457,9 @@ auto VGObject::LineIntersectCircle(const QPointF &center, qreal radius, const QL
     }
 
     // coefficient for equation of segment
-    qreal a = 0, b = 0, c = 0;
+    qreal a = 0;
+    qreal b = 0;
+    qreal c = 0;
     LineCoefficients(line, &a, &b, &c);
     // projection center of circle on to line
     const QPointF p = ClosestPoint(line, center);
@@ -496,13 +498,15 @@ auto VGObject::LineIntersectCircle(const QPointF &center, qreal radius, const QL
  */
 auto VGObject::ClosestPoint(const QLineF &line, const QPointF &point) -> QPointF
 {
-    qreal a = 0, b = 0, c = 0;
+    qreal a = 0;
+    qreal b = 0;
+    qreal c = 0;
     LineCoefficients(line, &a, &b, &c);
-    qreal x = point.x() + a;
-    qreal y = b + point.y();
-    QLineF lin(point, QPointF(x, y));
+    qreal const x = point.x() + a;
+    qreal const y = b + point.y();
+    QLineF const lin(point, QPointF(x, y));
     QPointF p;
-    QLineF::IntersectType intersect = line.intersects(lin, &p);
+    QLineF::IntersectType const intersect = line.intersects(lin, &p);
 
     if (intersect == QLineF::UnboundedIntersection || intersect == QLineF::BoundedIntersection)
     {
@@ -529,7 +533,7 @@ auto VGObject::addVector(const QPointF &p, const QPointF &p1, const QPointF &p2,
 void VGObject::LineCoefficients(const QLineF &line, qreal *a, qreal *b, qreal *c)
 {
     // coefficient for equation of segment
-    QPointF p1 = line.p1();
+    QPointF const p1 = line.p1();
     *a = line.p2().y() - p1.y();
     *b = p1.x() - line.p2().x();
     *c = -*a * p1.x() - *b * p1.y();
@@ -562,31 +566,31 @@ auto VGObject::IsPointOnLineSegment(const QPointF &t, const QPointF &p1, const Q
     QLineF edge(p1, p2);
     edge.setAngle(edge.angle() + degrees);
     edge.setLength(accuracy);
-    QPointF sP1 = edge.p2();
+    QPointF const sP1 = edge.p2();
 
     edge = QLineF(p2, p1);
     edge.setAngle(edge.angle() - degrees);
     edge.setLength(accuracy);
-    QPointF sP2 = edge.p2();
+    QPointF const sP2 = edge.p2();
 
     edge = QLineF(p2, p1);
     edge.setAngle(edge.angle() + degrees);
     edge.setLength(accuracy);
-    QPointF sP3 = edge.p2();
+    QPointF const sP3 = edge.p2();
 
     edge = QLineF(p1, p2);
     edge.setAngle(edge.angle() - degrees);
     edge.setLength(accuracy);
-    QPointF sP4 = edge.p2();
+    QPointF const sP4 = edge.p2();
 
-    QVector<QPointF> shape{sP1, sP2, sP3, sP4, sP1};
+    QVector<QPointF> const shape{sP1, sP2, sP3, sP4, sP1};
 
     for (int i = 0; i < shape.size() - 1; ++i)
     {
         const QPointF &sp1 = shape.at(i);
         const QPointF &sp2 = shape.at(i + 1);
         // This formula helps to determine on which side of a vector lies a point.
-        qreal position = (sp2.x() - sp1.x()) * (t.y() - sp1.y()) - (sp2.y() - sp1.y()) * (t.x() - sp1.x());
+        qreal const position = (sp2.x() - sp1.x()) * (t.y() - sp1.y()) - (sp2.y() - sp1.y()) * (t.x() - sp1.x());
         if (position < 0)
         {
             return false;
@@ -676,7 +680,7 @@ auto VGObject::GetLengthContour(const QVector<QPointF> &contour, const QVector<Q
     points << contour << newPoints;
     for (qint32 i = 0; i < points.size() - 1; ++i)
     {
-        QLineF line(points.at(i), points.at(i + 1));
+        QLineF const line(points.at(i), points.at(i + 1));
         length += line.length();
     }
     return qFloor(length);

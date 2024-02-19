@@ -256,7 +256,7 @@ void VVITConverter::GenderV0_3_1()
     Q_STATIC_ASSERT_X(VVITConverter::MeasurementMinVer < FormatVersion(0, 3, 1), "Time to refactor the code.");
 
     const QDomNodeList nodeList = this->elementsByTagName(QStringLiteral("sex"));
-    QDomElement sex = nodeList.at(0).toElement();
+    QDomElement const sex = nodeList.at(0).toElement();
     QDomElement parent = sex.parentNode().toElement();
     parent.replaceChild(CreateElementWithText(QStringLiteral("gender"), sex.text()), sex);
 }
@@ -268,7 +268,7 @@ void VVITConverter::PM_SystemV0_3_2()
     Q_STATIC_ASSERT_X(VVITConverter::MeasurementMinVer < FormatVersion(0, 3, 2), "Time to refactor the code.");
 
     const QDomNodeList nodeList = this->elementsByTagName(QStringLiteral("personal"));
-    QDomElement personal = nodeList.at(0).toElement();
+    QDomElement const personal = nodeList.at(0).toElement();
 
     QDomElement parent = personal.parentNode().toElement();
     parent.insertBefore(CreateElementWithText(QStringLiteral("pm_system"), QStringLiteral("998")), personal);
@@ -323,7 +323,7 @@ void VVITConverter::ConvertCustomerNameToV0_4_0()
     const QDomNodeList givenNameList = this->elementsByTagName(*strGivenName);
     if (not givenNameList.isEmpty())
     {
-        QDomNode givenNameNode = givenNameList.at(0);
+        QDomNode const givenNameNode = givenNameList.at(0);
         givenName = givenNameNode.toElement().text();
         personal.removeChild(givenNameNode);
     }
@@ -333,7 +333,7 @@ void VVITConverter::ConvertCustomerNameToV0_4_0()
     const QDomNodeList familyNameList = this->elementsByTagName(*strFamilyName);
     if (not familyNameList.isEmpty())
     {
-        QDomNode familyNameNode = familyNameList.at(0);
+        QDomNode const familyNameNode = familyNameList.at(0);
         familyName = familyNameNode.toElement().text();
         personal.removeChild(familyNameNode);
     }

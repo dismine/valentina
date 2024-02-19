@@ -127,7 +127,7 @@ inline VSplineData::VSplineData(const VPointF &p1, QPointF p2, QPointF p3, const
   : p1(p1),
     p4(p4)
 {
-    QLineF p1p2(static_cast<QPointF>(p1), static_cast<QPointF>(p2));
+    QLineF const p1p2(static_cast<QPointF>(p1), static_cast<QPointF>(p2));
 
     angle1 = p1p2.angle();
     angle1F = QString::number(angle1);
@@ -138,7 +138,7 @@ inline VSplineData::VSplineData(const VPointF &p1, QPointF p2, QPointF p3, const
         c1LengthF = QString::number(VAbstractValApplication::VApp()->fromPixel(c1Length));
     }
 
-    QLineF p4p3(static_cast<QPointF>(p4), static_cast<QPointF>(p3));
+    QLineF const p4p3(static_cast<QPointF>(p4), static_cast<QPointF>(p3));
 
     angle2 = p4p3.angle();
     angle2F = QString::number(angle2);
@@ -171,7 +171,7 @@ inline VSplineData::VSplineData(const VPointF &p1, const VPointF &p4, qreal angl
 inline auto VSplineData::GetL(const QPointF &p1, const QPointF &p4, qreal kCurve) -> qreal
 {
     static const qreal angle = 90;
-    qreal length = VFuzzyComparePoints(p1, p4) ? accuracyPointOnLine * 2 : QLineF(p1, p4).length();
+    qreal const length = VFuzzyComparePoints(p1, p4) ? accuracyPointOnLine * 2 : QLineF(p1, p4).length();
     const qreal radius = length / M_SQRT2;
     return kCurve * radius * 4 / 3 * qTan(angle * M_PI_4 / 180.0);
 }

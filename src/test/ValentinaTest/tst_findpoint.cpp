@@ -293,7 +293,7 @@ void TST_FindPoint::TestShoulderPoint_data()
 
     // The same file <root>/src/app/share/collection/bugs/Issue_#647.val
     // The length changed to get default value
-    QPointF p2(-574.724409448819, 115.5904251968504);
+    QPointF const p2(-574.724409448819, 115.5904251968504);
     QTest::newRow("Value not found") << QPointF(-234.5669291338583, 39.999874015748034)
                                      << p2
                                      << QPointF(-234.5669291338583, -35.590677165354336)
@@ -310,7 +310,7 @@ void TST_FindPoint::TestShoulderPoint()
     QFETCH(qreal, length);
     QFETCH(QPointF, point);
 
-    QPointF resultPoint = VToolShoulderPoint::FindPoint(p1, p2, pShoulder, length);
+    QPointF const resultPoint = VToolShoulderPoint::FindPoint(p1, p2, pShoulder, length);
 
     ComparePointsDistance(point, resultPoint, accuracyPointOnLine);
 }

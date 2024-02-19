@@ -111,7 +111,7 @@ auto VPE::VFileEditWidget::getFile() const -> QString
 
 void VPE::VFileEditWidget::onToolButtonClicked()
 {
-    QString filepath =
+    QString const filepath =
         (Directory ? QFileDialog::getExistingDirectory(nullptr, tr("Directory"), CurrentFilePath,
                                                        QFileDialog::ShowDirsOnly
 #ifdef Q_OS_LINUX
@@ -213,7 +213,7 @@ auto VPE::VFileEditWidget::checkMimeData(const QMimeData *data, QString &file) c
 {
     if (data->hasUrls())
     {
-        QList<QUrl> tmpUrlList = data->urls();
+        QList<QUrl> const tmpUrlList = data->urls();
         QFileInfo tmpFileInfo;
 
         auto tmpUrl = std::find_if(tmpUrlList.cbegin(), tmpUrlList.cend(),
@@ -241,7 +241,7 @@ auto VPE::VFileEditWidget::checkFileFilter(const QString &file) const -> bool
         return true;
     }
 
-    QFileInfo tmpFileInfo(file);
+    QFileInfo const tmpFileInfo(file);
 
     if ((Directory && !tmpFileInfo.isDir()) || (!Directory && !tmpFileInfo.isFile()))
     {
@@ -252,8 +252,8 @@ auto VPE::VFileEditWidget::checkFileFilter(const QString &file) const -> bool
                        [file](const QString &tmpFilter)
                        {
                            const QString wildcardFilter = QRegularExpression::wildcardToRegularExpression(tmpFilter);
-                           QRegularExpression tmpRegExpFilter(QRegularExpression::anchoredPattern(wildcardFilter),
-                                                              QRegularExpression::CaseInsensitiveOption);
+                           QRegularExpression const tmpRegExpFilter(QRegularExpression::anchoredPattern(wildcardFilter),
+                                                                    QRegularExpression::CaseInsensitiveOption);
                            return tmpRegExpFilter.match(file).hasMatch();
                        });
 }

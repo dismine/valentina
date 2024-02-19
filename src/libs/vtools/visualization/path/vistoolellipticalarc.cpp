@@ -92,8 +92,8 @@ void VisToolEllipticalArc::RefreshGeometry()
             {
                 DrawRadius2Line(center, m_radius1);
 
-                QLineF radius2Line(center.x(), center.y(), center.x(), center.y() - 100);
-                QPointF p = VGObject::ClosestPoint(radius2Line, ScenePos());
+                QLineF const radius2Line(center.x(), center.y(), center.x(), center.y() - 100);
+                QPointF const p = VGObject::ClosestPoint(radius2Line, ScenePos());
                 radius = QLineF(static_cast<QPointF>(*first), p);
 
                 DrawRadius2Line(center, radius.length());
@@ -111,8 +111,8 @@ void VisToolEllipticalArc::RefreshGeometry()
                 DrawRadius1Line(center, m_radius1);
                 DrawRadius2Line(center, m_radius2);
 
-                qreal f1Angle = Angle(radius);
-                VEllipticalArc elArc = DrawElArc(*first, m_radius1, m_radius2, f1Angle, f1Angle);
+                qreal const f1Angle = Angle(radius);
+                VEllipticalArc const elArc = DrawElArc(*first, m_radius1, m_radius2, f1Angle, f1Angle);
 
                 DrawPoint(m_f1Point, elArc.GetP1());
 
@@ -130,7 +130,7 @@ void VisToolEllipticalArc::RefreshGeometry()
                 DrawRadius2Line(center, m_radius2);
 
                 const qreal f2Angle = Angle(radius);
-                VEllipticalArc elArc = DrawElArc(*first, m_radius1, m_radius2, m_f1, f2Angle);
+                VEllipticalArc const elArc = DrawElArc(*first, m_radius1, m_radius2, m_f1, f2Angle);
 
                 DrawPoint(m_f1Point, elArc.GetP1());
 
@@ -149,11 +149,11 @@ void VisToolEllipticalArc::RefreshGeometry()
                     m_startingRotationAngle = radius.angle();
                 }
 
-                qreal rotationAngle = Angle(radius) - m_startingRotationAngle;
+                qreal const rotationAngle = Angle(radius) - m_startingRotationAngle;
 
                 DrawRadius1Line(center, m_radius1, rotationAngle);
                 DrawRadius2Line(center, m_radius2, rotationAngle);
-                VEllipticalArc elArc = DrawElArc(*first, m_radius1, m_radius2, m_f1, m_f2, rotationAngle);
+                VEllipticalArc const elArc = DrawElArc(*first, m_radius1, m_radius2, m_f1, m_f2, rotationAngle);
 
                 DrawPoint(m_f1Point, elArc.GetP1());
 

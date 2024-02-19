@@ -67,7 +67,7 @@ auto OptimizeCombining(const QVector<QPointF> &contour, const QPointF &withdrawE
         return contour;
     }
 
-    QPointF withdrawFirst = contour.constLast();
+    QPointF const withdrawFirst = contour.constLast();
     bool optimize = false;
     int count = 0;
     vsizetype cutIndex = -1;

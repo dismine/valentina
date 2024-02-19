@@ -109,7 +109,7 @@ void TST_BuitInRegExp::TestCheckIsNamesUnique_data()
     QTest::addColumn<QString>("translatedName");
     QTest::addColumn<QStringList>("originalNames");
 
-    QList<QString> keys = names.uniqueKeys();
+    QList<QString> const keys = names.uniqueKeys();
     for (const auto &key : keys)
     {
         const QString tag = u"Locale: '%1'. Name '%2'"_s.arg(m_locale, key);

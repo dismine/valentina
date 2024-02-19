@@ -46,7 +46,7 @@ auto PassmarkShapeToJson(const QVector<QLineF> &shape) -> QJsonArray
     QJsonArray shapeArray;
     for (auto line : shape)
     {
-        QJsonObject lineObject{
+        QJsonObject const lineObject{
             {"type", "QLineF"},
             {"p1", PointToJson(line.p1())},
             {"p2", PointToJson(line.p2())},
@@ -80,10 +80,10 @@ void DumpPassmarkData(const VPiecePassmarkData &data, const QString &templateNam
         //        not see a difference.
         temp.fileName(); // call to create a file on disk
 #endif
-        QJsonObject dataObject{
+        QJsonObject const dataObject{
             {"data", data.toJson()},
         };
-        QJsonDocument vector(dataObject);
+        QJsonDocument const vector(dataObject);
 
         QTextStream out(&temp);
         out << vector.toJson();
@@ -112,10 +112,10 @@ void DumpPassmarkShape(const QVector<QLineF> &shape, const QString &templateName
         //        not see a difference.
         temp.fileName(); // call to create a file on disk
 #endif
-        QJsonObject shapeObject{
+        QJsonObject const shapeObject{
             {"shape", PassmarkShapeToJson(shape)},
         };
-        QJsonDocument vector(shapeObject);
+        QJsonDocument const vector(shapeObject);
 
         QTextStream out(&temp);
         out << vector.toJson();

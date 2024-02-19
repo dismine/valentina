@@ -43,7 +43,7 @@ HoldBackgroundImage::HoldBackgroundImage(QUuid id, bool hold, VAbstractPattern *
         setText(tr("unhold background image"));
     }
 
-    VBackgroundPatternImage image = doc->GetBackgroundImage(m_id);
+    VBackgroundPatternImage const image = doc->GetBackgroundImage(m_id);
 
     m_oldHold = image.Hold();
 }

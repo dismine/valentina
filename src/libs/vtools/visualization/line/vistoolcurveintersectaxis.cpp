@@ -81,7 +81,7 @@ void VisToolCurveIntersectAxis::RefreshGeometry()
 
             QPointF p;
             VToolCurveIntersectAxis::FindPoint(static_cast<QPointF>(*first), axis.angle(), curve->GetPoints(), &p);
-            QLineF axis_line(static_cast<QPointF>(*first), p);
+            QLineF const axis_line(static_cast<QPointF>(*first), p);
             DrawLine(this, axis_line, LineStyle());
 
             DrawPoint(m_point, p);

@@ -245,7 +245,7 @@ void DialogCutSplinePath::SplinePathChanged()
 //---------------------------------------------------------------------------------------------------------------------
 void DialogCutSplinePath::ValidateAlias()
 {
-    QRegularExpression rx(NameRegExp());
+    QRegularExpression const rx(NameRegExp());
 
     VSplinePath path1;
     path1.SetAliasSuffix(GetAliasSuffix1());
@@ -297,7 +297,7 @@ void DialogCutSplinePath::FinishCreating()
 //---------------------------------------------------------------------------------------------------------------------
 void DialogCutSplinePath::InitIcons()
 {
-    QString resource = QStringLiteral("icon");
+    QString const resource = QStringLiteral("icon");
 
     ui->toolButtonExprLength->setIcon(VTheme::GetIconResource(resource, QStringLiteral("24x24/fx.png")));
     ui->label_4->setPixmap(VTheme::GetPixmapResource(resource, QStringLiteral("24x24/equal.png")));
@@ -425,8 +425,8 @@ void DialogCutSplinePath::ShowDialog(bool click)
 
         const QSharedPointer<VAbstractCubicBezierPath> curve =
             data->GeometricObject<VAbstractCubicBezierPath>(getSplinePathId());
-        QPointF p = curve->ClosestPoint(scene->getScenePos());
-        qreal len = curve->GetLengthByPoint(p);
+        QPointF const p = curve->ClosestPoint(scene->getScenePos());
+        qreal const len = curve->GetLengthByPoint(p);
         SetFormula(QString::number(FromPixel(len, *data->GetPatternUnit())));
     }
 

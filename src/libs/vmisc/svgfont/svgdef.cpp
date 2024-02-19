@@ -40,7 +40,7 @@ using namespace Qt::Literals::StringLiterals;
 //---------------------------------------------------------------------------------------------------------------------
 auto LatinWritingSystem(QChar c) -> bool
 {
-    char16_t codePoint = c.unicode();
+    char16_t const codePoint = c.unicode();
 
     return (codePoint > 0x0000 && codePoint <= 0x007F)      // Basic Latin
            || (codePoint >= 0x0080 && codePoint <= 0x00FF)  // Latin-1 Supplement
@@ -64,7 +64,7 @@ auto LatinWritingSystem(QChar c) -> bool
 //---------------------------------------------------------------------------------------------------------------------
 auto GreekWritingSystem(QChar c) -> bool
 {
-    char16_t codePoint = c.unicode();
+    char16_t const codePoint = c.unicode();
 
     return (codePoint >= 0x0370 && codePoint <= 0x03FF)     // Greek and Coptic
            || (codePoint >= 0x1F00 && codePoint <= 0x1FFF); // Greek Extended
@@ -73,7 +73,7 @@ auto GreekWritingSystem(QChar c) -> bool
 //---------------------------------------------------------------------------------------------------------------------
 auto CyrillicWritingSystem(QChar c) -> bool
 {
-    char16_t codePoint = c.unicode();
+    char16_t const codePoint = c.unicode();
 
     return (codePoint >= 0x0400 && codePoint <= 0x04FF)     // Cyrillic
            || (codePoint >= 0x0500 && codePoint <= 0x052F)  // Cyrillic Supplement
@@ -85,7 +85,7 @@ auto CyrillicWritingSystem(QChar c) -> bool
 //---------------------------------------------------------------------------------------------------------------------
 auto ArmenianWritingSystem(QChar c) -> bool
 {
-    char16_t codePoint = c.unicode();
+    char16_t const codePoint = c.unicode();
 
     return (codePoint >= 0x0530 && codePoint <= 0x058F)     // Armenian
            || (codePoint >= 0xFB00 && codePoint <= 0xFB17); // Alphabetic Pres. Forms
@@ -94,7 +94,7 @@ auto ArmenianWritingSystem(QChar c) -> bool
 //---------------------------------------------------------------------------------------------------------------------
 auto HebrewWritingSystem(QChar c) -> bool
 {
-    char16_t codePoint = c.unicode();
+    char16_t const codePoint = c.unicode();
 
     return (codePoint >= 0x0590 && codePoint <= 0x05FF)     // Hebrew,
            || (codePoint >= 0xFB1D && codePoint <= 0xFB4F); // Alphabetic Presentation Forms
@@ -103,7 +103,7 @@ auto HebrewWritingSystem(QChar c) -> bool
 //---------------------------------------------------------------------------------------------------------------------
 auto ArabicWritingSystem(QChar c) -> bool
 {
-    char16_t codePoint = c.unicode();
+    char16_t const codePoint = c.unicode();
 
     return (codePoint >= 0x0600 && codePoint <= 0x06FF)     // Arabic
            || (codePoint >= 0x0750 && codePoint <= 0x077F)  // Arabic Supplement
@@ -116,7 +116,7 @@ auto ArabicWritingSystem(QChar c) -> bool
 //---------------------------------------------------------------------------------------------------------------------
 auto SyriacWritingSystem(QChar c) -> bool
 {
-    char16_t codePoint = c.unicode();
+    char16_t const codePoint = c.unicode();
 
     return (codePoint >= 0x0700 && codePoint <= 0x074F)     // Syriac
            || (codePoint >= 0x0860 && codePoint <= 0x086F); // Syriac Supplement
@@ -125,7 +125,7 @@ auto SyriacWritingSystem(QChar c) -> bool
 //---------------------------------------------------------------------------------------------------------------------
 auto ThaanaWritingSystem(QChar c) -> bool
 {
-    char16_t codePoint = c.unicode();
+    char16_t const codePoint = c.unicode();
 
     return codePoint >= 0x0780 && codePoint <= 0x07BF; // Thaana
 }
@@ -133,7 +133,7 @@ auto ThaanaWritingSystem(QChar c) -> bool
 //---------------------------------------------------------------------------------------------------------------------
 auto DevanagariWritingSystem(QChar c) -> bool
 {
-    char16_t codePoint = c.unicode();
+    char16_t const codePoint = c.unicode();
 
     return (codePoint >= 0x0900 && codePoint <= 0x097F)     // Devanagari,
            || (codePoint >= 0xA8E0 && codePoint <= 0xA8FF)  // Devanagari Extended,
@@ -143,7 +143,7 @@ auto DevanagariWritingSystem(QChar c) -> bool
 //---------------------------------------------------------------------------------------------------------------------
 auto BengaliWritingSystem(QChar c) -> bool
 {
-    char16_t codePoint = c.unicode();
+    char16_t const codePoint = c.unicode();
 
     return codePoint >= 0x0980 && codePoint <= 0x09FF; // Bengali
 }
@@ -151,7 +151,7 @@ auto BengaliWritingSystem(QChar c) -> bool
 //---------------------------------------------------------------------------------------------------------------------
 auto GurmukhiWritingSystem(QChar c) -> bool
 {
-    char16_t codePoint = c.unicode();
+    char16_t const codePoint = c.unicode();
 
     return codePoint >= 0x0A00 && codePoint <= 0x0A7F; // Gurmukhi
 }
@@ -159,7 +159,7 @@ auto GurmukhiWritingSystem(QChar c) -> bool
 //---------------------------------------------------------------------------------------------------------------------
 auto GujaratiWritingSystem(QChar c) -> bool
 {
-    char16_t codePoint = c.unicode();
+    char16_t const codePoint = c.unicode();
 
     return codePoint >= 0x0A80 && codePoint <= 0x0AFF; // Gujarati
 }
@@ -167,7 +167,7 @@ auto GujaratiWritingSystem(QChar c) -> bool
 //---------------------------------------------------------------------------------------------------------------------
 auto OriyaWritingSystem(QChar c) -> bool
 {
-    char16_t codePoint = c.unicode();
+    char16_t const codePoint = c.unicode();
 
     return codePoint >= 0x0B00 && codePoint <= 0x0B7F; // Oriya
 }
@@ -175,7 +175,7 @@ auto OriyaWritingSystem(QChar c) -> bool
 //---------------------------------------------------------------------------------------------------------------------
 auto TamilWritingSystem(QChar c) -> bool
 {
-    char16_t codePoint = c.unicode();
+    char16_t const codePoint = c.unicode();
 
     return codePoint >= 0x0B80 && codePoint <= 0x0BFF; // Tamil
 }
@@ -183,7 +183,7 @@ auto TamilWritingSystem(QChar c) -> bool
 //---------------------------------------------------------------------------------------------------------------------
 auto TeluguWritingSystem(QChar c) -> bool
 {
-    char16_t codePoint = c.unicode();
+    char16_t const codePoint = c.unicode();
 
     return codePoint >= 0x0C00 && codePoint <= 0x0C7F; // Telugu
 }
@@ -191,7 +191,7 @@ auto TeluguWritingSystem(QChar c) -> bool
 //---------------------------------------------------------------------------------------------------------------------
 auto KannadaWritingSystem(QChar c) -> bool
 {
-    char16_t codePoint = c.unicode();
+    char16_t const codePoint = c.unicode();
 
     return codePoint >= 0x0C80 && codePoint <= 0x0CFF; // Kannada
 }
@@ -199,7 +199,7 @@ auto KannadaWritingSystem(QChar c) -> bool
 //---------------------------------------------------------------------------------------------------------------------
 auto MalayalamWritingSystem(QChar c) -> bool
 {
-    char16_t codePoint = c.unicode();
+    char16_t const codePoint = c.unicode();
 
     return codePoint >= 0x0D00 && codePoint <= 0x0D7F; // Malayalam
 }
@@ -207,7 +207,7 @@ auto MalayalamWritingSystem(QChar c) -> bool
 //---------------------------------------------------------------------------------------------------------------------
 auto SinhalaWritingSystem(QChar c) -> bool
 {
-    char16_t codePoint = c.unicode();
+    char16_t const codePoint = c.unicode();
 
     return codePoint >= 0x0D80 && codePoint <= 0x0DFF; // Sinhala
 }
@@ -215,7 +215,7 @@ auto SinhalaWritingSystem(QChar c) -> bool
 //---------------------------------------------------------------------------------------------------------------------
 auto ThaiWritingSystem(QChar c) -> bool
 {
-    char16_t codePoint = c.unicode();
+    char16_t const codePoint = c.unicode();
 
     return codePoint >= 0x0E00 && codePoint <= 0x0E7F; // Thai
 }
@@ -223,7 +223,7 @@ auto ThaiWritingSystem(QChar c) -> bool
 //---------------------------------------------------------------------------------------------------------------------
 auto LaoWritingSystem(QChar c) -> bool
 {
-    char16_t codePoint = c.unicode();
+    char16_t const codePoint = c.unicode();
 
     return codePoint >= 0x0E80 && codePoint <= 0x0EFF; // Lao
 }
@@ -231,7 +231,7 @@ auto LaoWritingSystem(QChar c) -> bool
 //---------------------------------------------------------------------------------------------------------------------
 auto TibetanWritingSystem(QChar c) -> bool
 {
-    char16_t codePoint = c.unicode();
+    char16_t const codePoint = c.unicode();
 
     return codePoint >= 0x0F00 && codePoint <= 0x0FFF; // Final Accepted Script Proposal of the First Usable Edition
 }
@@ -239,7 +239,7 @@ auto TibetanWritingSystem(QChar c) -> bool
 //---------------------------------------------------------------------------------------------------------------------
 auto MyanmarWritingSystem(QChar c) -> bool
 {
-    char16_t codePoint = c.unicode();
+    char16_t const codePoint = c.unicode();
 
     return (codePoint >= 0x1000 && codePoint <= 0x109F)     // Myanmar
            || (codePoint >= 0xAA60 && codePoint <= 0xAA7F)  // Myanmar Extended-A
@@ -249,7 +249,7 @@ auto MyanmarWritingSystem(QChar c) -> bool
 //---------------------------------------------------------------------------------------------------------------------
 auto GeorgianWritingSystem(QChar c) -> bool
 {
-    char16_t codePoint = c.unicode();
+    char16_t const codePoint = c.unicode();
 
     return (codePoint >= 0x10A0 && codePoint <= 0x10FF)     // Georgian
            || (codePoint >= 0x2D00 && codePoint <= 0x2D2F)  // Supplement
@@ -259,7 +259,7 @@ auto GeorgianWritingSystem(QChar c) -> bool
 //---------------------------------------------------------------------------------------------------------------------
 auto KhmerWritingSystem(QChar c) -> bool
 {
-    char16_t codePoint = c.unicode();
+    char16_t const codePoint = c.unicode();
 
     return (codePoint >= 0x1780 && codePoint <= 0x17FF)     // Khmer
            || (codePoint >= 0x19E0 && codePoint <= 0x19FF); // Khmer Symbols
@@ -268,7 +268,7 @@ auto KhmerWritingSystem(QChar c) -> bool
 //---------------------------------------------------------------------------------------------------------------------
 auto SimplifiedChineseWritingSystem(QChar c) -> bool
 {
-    char16_t codePoint = c.unicode();
+    char16_t const codePoint = c.unicode();
 
     return (codePoint >= 0x20 && codePoint <= 0x5F) || (codePoint >= 0x7B && codePoint <= 0x7D) || codePoint == 0xA0 ||
            codePoint == 0xA7 || codePoint == 0xA9 || codePoint == 0xB7 ||
@@ -824,7 +824,7 @@ auto SimplifiedChineseWritingSystem(QChar c) -> bool
 //---------------------------------------------------------------------------------------------------------------------
 auto TraditionalChineseWritingSystem(QChar c) -> bool
 {
-    char16_t codePoint = c.unicode();
+    char16_t const codePoint = c.unicode();
 
     return (codePoint >= 0x20 && codePoint <= 0x40) || (codePoint >= 0x5B && codePoint <= 0x5F) ||
            (codePoint >= 0x7B && codePoint <= 0x7D) || codePoint == 0xA0 || codePoint == 0xA7 || codePoint == 0xA9 ||
@@ -1410,7 +1410,7 @@ auto TraditionalChineseWritingSystem(QChar c) -> bool
 //---------------------------------------------------------------------------------------------------------------------
 auto JapaneseWritingSystem(QChar c) -> bool
 {
-    char16_t codePoint = c.unicode();
+    char16_t const codePoint = c.unicode();
 
     return (codePoint >= 0x3040 && codePoint <= 0x309F)     // Hiragana
            || (codePoint >= 0x30A0 && codePoint <= 0x30FF)  // Katakana
@@ -1420,7 +1420,7 @@ auto JapaneseWritingSystem(QChar c) -> bool
 //---------------------------------------------------------------------------------------------------------------------
 auto KoreanWritingSystem(QChar c) -> bool
 {
-    char16_t codePoint = c.unicode();
+    char16_t const codePoint = c.unicode();
 
     return (codePoint >= 0x1100 && codePoint <= 0x11FF) || (codePoint >= 0x3130 && codePoint <= 0x318F) ||
            (codePoint >= 0xA960 && codePoint <= 0xA97F) || (codePoint >= 0xD7B0 && codePoint <= 0xD7FF);
@@ -1429,7 +1429,7 @@ auto KoreanWritingSystem(QChar c) -> bool
 //---------------------------------------------------------------------------------------------------------------------
 auto VietnameseWritingSystem(QChar c) -> bool
 {
-    char16_t codePoint = c.unicode();
+    char16_t const codePoint = c.unicode();
 
     return (codePoint >= 0x0020 && codePoint <= 0x002F) || (codePoint >= 0x0030 && codePoint <= 0x0039) ||
            (codePoint >= 0x003A && codePoint <= 0x0040) || (codePoint >= 0x0041 && codePoint <= 0x005A) ||
@@ -1450,7 +1450,7 @@ auto VietnameseWritingSystem(QChar c) -> bool
 //---------------------------------------------------------------------------------------------------------------------
 auto SymbolWritingSystem(QChar c) -> bool
 {
-    char16_t codePoint = c.unicode();
+    char16_t const codePoint = c.unicode();
 
     return (codePoint >= 0x2600 && codePoint <= 0x26FF)     // Miscellaneous Symbols
            || (codePoint >= 0x19E0 && codePoint <= 0x19FF)  // Khmer Symbols
@@ -1467,7 +1467,7 @@ auto SymbolWritingSystem(QChar c) -> bool
 //---------------------------------------------------------------------------------------------------------------------
 auto OghamWritingSystem(QChar c) -> bool
 {
-    char16_t codePoint = c.unicode();
+    char16_t const codePoint = c.unicode();
 
     return codePoint >= 0x1680 && codePoint <= 0x169F; // Ogham
 }
@@ -1475,7 +1475,7 @@ auto OghamWritingSystem(QChar c) -> bool
 //---------------------------------------------------------------------------------------------------------------------
 auto RunicWritingSystem(QChar c) -> bool
 {
-    char16_t codePoint = c.unicode();
+    char16_t const codePoint = c.unicode();
 
     return codePoint >= 0x16A0 && codePoint <= 0x16FF; // Runic
 }
@@ -1483,7 +1483,7 @@ auto RunicWritingSystem(QChar c) -> bool
 //---------------------------------------------------------------------------------------------------------------------
 auto NkoWritingSystem(QChar c) -> bool
 {
-    char16_t codePoint = c.unicode();
+    char16_t const codePoint = c.unicode();
 
     return codePoint >= 0x07C0 && codePoint <= 0x07FF; // Nko
 }

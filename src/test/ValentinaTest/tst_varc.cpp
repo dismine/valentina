@@ -47,7 +47,7 @@ void PrepareTestCase(const QPointF &center, qreal startAngle, qreal endAngle)
     const qreal threshold = UnitConvertor(2000, Unit::Cm, Unit::Px);
     while (radius <= threshold)
     {
-        VArc arc(VPointF(center), radius, startAngle, endAngle);
+        VArc const arc(VPointF(center), radius, startAngle, endAngle);
         const QVector<QPointF> points = arc.GetPoints();
 
         const QString testStartAngle = u"Test start angel. Arc radius %1, start angle %2, end angle %3"_s.arg(radius)
@@ -80,8 +80,8 @@ void TST_VArc::CompareTwoWays()
     const qreal f2 = 46;
     const qreal length = M_PI * radius / 180 * (f2 - f1);
 
-    VArc arc1(center, radius, f1, f2);
-    VArc arc2(length, center, radius, f1);
+    VArc const arc1(center, radius, f1, f2);
+    VArc const arc2(length, center, radius, f1);
 
     QCOMPARE(arc1.GetLength(), length);
     QCOMPARE(arc2.GetLength(), length);
@@ -120,7 +120,7 @@ void TST_VArc::ArcByLength()
     QFETCH(int, direction);
 
     const qreal length = (M_PI * qAbs(radius) / 180 * arcAngle) * direction;
-    VArc arc(length, VPointF(), radius, startAngle);
+    VArc const arc(length, VPointF(), radius, startAngle);
 
     QCOMPARE(arc.GetLength(), length);
     QCOMPARE(arc.GetEndAngle(), endAngle);
@@ -300,7 +300,7 @@ void TST_VArc::TestGetPoints()
 
         for (auto point : points)
         {
-            QLineF rLine(static_cast<QPointF>(center), point);
+            QLineF const rLine(static_cast<QPointF>(center), point);
             const qreal value = qAbs(rLine.length() - qAbs(radius));
             // cppcheck-suppress unreadVariable
             const QString errorMsg = u"Broken the first rule. All points should be on the same distance from "
@@ -382,7 +382,7 @@ void TST_VArc::TestFlip_data()
     QTest::addColumn<QString>("prefix");
 
     const qreal radius = 5;
-    QPointF center(10, 5);
+    QPointF const center(10, 5);
 
     QPointF p1(10, 0);
     QPointF p2(5, 5);
@@ -435,7 +435,7 @@ void TST_VArc::TestFlip()
     QFETCH(QLineF, axis);
     QFETCH(QString, prefix);
 
-    VArc originArc(VPointF(center), radius, startAngle, endAngle);
+    VArc const originArc(VPointF(center), radius, startAngle, endAngle);
     const VArc res = originArc.Flip(axis, prefix);
 
     // cppcheck-suppress unreadVariable
@@ -531,7 +531,7 @@ void TST_VArc::TestCutArcByLength()
 
     VArc arc1;
     VArc arc2;
-    QPointF point = arc.CutArc(cutLength, arc1, arc2, QString());
+    QPointF const point = arc.CutArc(cutLength, arc1, arc2, QString());
 
     QCOMPARE(point, cutPoint);
 
@@ -548,7 +548,8 @@ void TST_VArc::TestCutArcByLength()
 
     QCOMPARE(arc1.GetLength() + arc2.GetLength(), arc.GetLength());
 
-    qreal segmentsLength = VAbstractCurve::PathLength(arc1.GetPoints()) + VAbstractCurve::PathLength(arc2.GetPoints());
+    qreal const segmentsLength =
+        VAbstractCurve::PathLength(arc1.GetPoints()) + VAbstractCurve::PathLength(arc2.GetPoints());
     QVERIFY(qAbs(segmentsLength - VAbstractCurve::PathLength(arc.GetPoints())) <= accuracyPointOnLine);
 }
 
@@ -561,7 +562,7 @@ void TST_VArc::TestCurveIntersectAxis_data()
     QTest::addColumn<QPointF>("crosPoint");
     QTest::addColumn<bool>("result");
 
-    QPointF basePoint(10, 10);
+    QPointF const basePoint(10, 10);
 
     PrepareTestCase(basePoint, 0, 15);
     PrepareTestCase(basePoint, 0, 25);
@@ -592,7 +593,7 @@ void TST_VArc::TestCurveIntersectAxis()
 //---------------------------------------------------------------------------------------------------------------------
 void TST_VArc::EmptyArc()
 {
-    VArc empty;
+    VArc const empty;
 
     ComparePathsDistance(empty.GetPoints(), {QPointF()});
     QCOMPARE(empty.GetLength(), 0.);
@@ -757,22 +758,22 @@ void TST_VArc::TestCurvature()
     QFETCH(qreal, endAngle);
 
     const qreal tolerance = 0.1;
-    qreal expectedCurvature = 1. / qAbs(radius);
-    qreal scale = VArc::OptimalApproximationScale(radius, startAngle, endAngle, 0.1);
+    qreal const expectedCurvature = 1. / qAbs(radius);
+    qreal const scale = VArc::OptimalApproximationScale(radius, startAngle, endAngle, 0.1);
 
     const VPointF center;
     VArc arc(center, radius, startAngle, endAngle);
     arc.SetApproximationScale(scale);
 
-    qreal curvature = VAbstractCurve::Curvature(arc.GetPoints());
+    qreal const curvature = VAbstractCurve::Curvature(arc.GetPoints());
 
     if (scale < 10)
     {
         QVERIFY(expectedCurvature - curvature <= expectedCurvature * tolerance);
 
-        QVector<QPointF> p1 = arc.GetPoints();
+        QVector<QPointF> const p1 = arc.GetPoints();
         arc.SetApproximationScale(10);
-        QVector<QPointF> p2 = arc.GetPoints();
+        QVector<QPointF> const p2 = arc.GetPoints();
         QVERIFY(p1.size() <= p2.size());
     }
 }

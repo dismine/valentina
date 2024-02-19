@@ -139,7 +139,7 @@ void QmuParserByteCode::AddVal(qreal a_fVal)
 //---------------------------------------------------------------------------------------------------------------------
 void QmuParserByteCode::ConstantFolding(ECmdCode a_Oprt)
 {
-    qmusizetype sz = m_vRPN.size();
+    qmusizetype const sz = m_vRPN.size();
     qreal &x = m_vRPN[sz-2].Val.data2,
           &y = m_vRPN[sz-1].Val.data2;
     switch (a_Oprt)
@@ -370,7 +370,7 @@ void QmuParserByteCode::AddOp(ECmdCode a_Oprt)
         return;
     }
 
-    qmusizetype sz = m_vRPN.size();
+    qmusizetype const sz = m_vRPN.size();
 
     // Check for foldable constants like:
     //   cmVAL cmVAL cmADD

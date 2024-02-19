@@ -214,7 +214,7 @@ auto GetTokens(const VFormulaField &formula) -> QList<QString>
 {
     try
     {
-        QScopedPointer<qmu::QmuTokenParser> cal(new qmu::QmuTokenParser(formula.expression, false, false));
+        QScopedPointer<qmu::QmuTokenParser> const cal(new qmu::QmuTokenParser(formula.expression, false, false));
         return cal->GetTokens().values();
     }
     catch (const qmu::QmuParserError &e)
@@ -275,18 +275,18 @@ auto PrepareGroupTags(QStringList tags) -> QString
 //---------------------------------------------------------------------------------------------------------------------
 auto StringToTransfrom(const QString &matrix) -> QTransform
 {
-    QStringList elements = matrix.split(';'_L1);
+    QStringList const elements = matrix.split(';'_L1);
     if (elements.count() == 9)
     {
-        qreal m11 = elements.at(0).toDouble();
-        qreal m12 = elements.at(1).toDouble();
-        qreal m13 = elements.at(2).toDouble();
-        qreal m21 = elements.at(3).toDouble();
-        qreal m22 = elements.at(4).toDouble();
-        qreal m23 = elements.at(5).toDouble();
-        qreal m31 = elements.at(6).toDouble();
-        qreal m32 = elements.at(7).toDouble();
-        qreal m33 = elements.at(8).toDouble();
+        qreal const m11 = elements.at(0).toDouble();
+        qreal const m12 = elements.at(1).toDouble();
+        qreal const m13 = elements.at(2).toDouble();
+        qreal const m21 = elements.at(3).toDouble();
+        qreal const m22 = elements.at(4).toDouble();
+        qreal const m23 = elements.at(5).toDouble();
+        qreal const m31 = elements.at(6).toDouble();
+        qreal const m32 = elements.at(7).toDouble();
+        qreal const m33 = elements.at(8).toDouble();
         return {m11, m12, m13, m21, m22, m23, m31, m32, m33};
     }
 
@@ -303,9 +303,9 @@ template <class T> auto NumberToString(T number) -> QString
 //---------------------------------------------------------------------------------------------------------------------
 auto TransformToString(const QTransform &m) -> QString
 {
-    QStringList matrix{NumberToString(m.m11()), NumberToString(m.m12()), NumberToString(m.m13()),
-                       NumberToString(m.m21()), NumberToString(m.m22()), NumberToString(m.m23()),
-                       NumberToString(m.m31()), NumberToString(m.m32()), NumberToString(m.m33())};
+    QStringList const matrix{NumberToString(m.m11()), NumberToString(m.m12()), NumberToString(m.m13()),
+                             NumberToString(m.m21()), NumberToString(m.m22()), NumberToString(m.m23()),
+                             NumberToString(m.m31()), NumberToString(m.m32()), NumberToString(m.m33())};
     return matrix.join(';'_L1);
 }
 } // namespace
@@ -560,7 +560,7 @@ auto VAbstractPattern::GetPPElement(const QString &name) -> QDomElement
 
         for (qint32 i = 0; i < elements.count(); i++)
         {
-            QDomElement element = elements.at(i).toElement();
+            QDomElement const element = elements.at(i).toElement();
             if (not element.isNull())
             {
                 if (element.attribute(AttrName) == name)
@@ -1166,7 +1166,7 @@ auto VAbstractPattern::GetLabelTimeFormat() const -> QString
         return globalLabelTimeFormat;
     }
 
-    QDomElement tag = list.at(0).toElement();
+    QDomElement const tag = list.at(0).toElement();
     return GetParametrString(tag, AttrTimeFormat, globalLabelTimeFormat);
 }
 
@@ -1385,7 +1385,7 @@ auto VAbstractPattern::GetImage() const -> VPatternImage
     const QDomNodeList list = elementsByTagName(TagImage);
     if (not list.isEmpty())
     {
-        QDomElement imgTag = list.at(0).toElement();
+        QDomElement const imgTag = list.at(0).toElement();
         if (not imgTag.isNull())
         {
             image.SetContentData(imgTag.text().toLatin1(), imgTag.attribute(AttrContentType));
@@ -1425,7 +1425,7 @@ auto VAbstractPattern::GetBackgroundImages() const -> QVector<VBackgroundPattern
         return images;
     }
 
-    QDomElement imagesTag = list.at(0).toElement();
+    QDomElement const imagesTag = list.at(0).toElement();
     if (not imagesTag.isNull())
     {
         QDomNode imageNode = imagesTag.firstChild();
@@ -1515,7 +1515,7 @@ void VAbstractPattern::DeleteBackgroundImage(const QUuid &id)
             const QDomElement imageElement = imageNode.toElement();
             if (not imageElement.isNull())
             {
-                QUuid imageId = QUuid(GetParametrEmptyString(imageElement, AttrImageId));
+                QUuid const imageId = QUuid(GetParametrEmptyString(imageElement, AttrImageId));
                 if (imageId == id)
                 {
                     imagesTag.removeChild(imageElement);
@@ -1738,7 +1738,7 @@ auto VAbstractPattern::GetIndexActivPP() const -> int
     {
         for (int i = 0; i < drawList.size(); ++i)
         {
-            QDomElement node = drawList.at(i).toElement();
+            QDomElement const node = drawList.at(i).toElement();
             if (node.attribute(AttrName) == nameActivPP)
             {
                 index = i;
@@ -2231,7 +2231,7 @@ auto VAbstractPattern::GetBackgroundPatternImage(const QDomElement &element) con
 {
     VBackgroundPatternImage image;
     image.SetId(QUuid(GetParametrEmptyString(element, AttrImageId)));
-    QString path = GetParametrEmptyString(element, AttrPath);
+    QString const path = GetParametrEmptyString(element, AttrPath);
 
     if (not path.isEmpty())
     {
@@ -2239,8 +2239,8 @@ auto VAbstractPattern::GetBackgroundPatternImage(const QDomElement &element) con
     }
     else
     {
-        QString contentType = GetParametrEmptyString(element, AttrContentType);
-        QByteArray contentData = element.text().toLatin1();
+        QString const contentType = GetParametrEmptyString(element, AttrContentType);
+        QByteArray const contentData = element.text().toLatin1();
         image.SetContentData(contentData, contentType);
     }
 
@@ -2253,7 +2253,7 @@ auto VAbstractPattern::GetBackgroundPatternImage(const QDomElement &element) con
     image.SetOpacity(
         GetParametrDouble(element, AttrOpacity, QString::number(settings->GetBackgroundImageDefOpacity() / 100.)));
 
-    QString matrix = GetParametrEmptyString(element, AttrTransform);
+    QString const matrix = GetParametrEmptyString(element, AttrTransform);
     image.SetMatrix(StringToTransfrom(matrix));
 
     return image;
@@ -2265,7 +2265,7 @@ auto VAbstractPattern::GetBackgroundImageElement(const QUuid &id) const -> QDomE
     const QDomNodeList list = elementsByTagName(TagBackgroundImages);
     if (not list.isEmpty())
     {
-        QDomElement imagesTag = list.at(0).toElement();
+        QDomElement const imagesTag = list.at(0).toElement();
         if (not imagesTag.isNull())
         {
             QDomNode imageNode = imagesTag.firstChild();
@@ -2276,7 +2276,7 @@ auto VAbstractPattern::GetBackgroundImageElement(const QUuid &id) const -> QDomE
                     const QDomElement imageElement = imageNode.toElement();
                     if (not imageElement.isNull())
                     {
-                        QUuid imageId = QUuid(GetParametrEmptyString(imageElement, AttrImageId));
+                        QUuid const imageId = QUuid(GetParametrEmptyString(imageElement, AttrImageId));
                         if (imageId == id)
                         {
                             return imageElement;
@@ -2345,7 +2345,7 @@ auto VAbstractPattern::GetDraw(const QString &name) const -> QDomElement
     const QDomNodeList draws = documentElement().elementsByTagName(TagDraw);
     for (int i = 0; i < draws.size(); ++i)
     {
-        QDomElement draw = draws.at(i).toElement();
+        QDomElement const draw = draws.at(i).toElement();
         if (draw.isNull())
         {
             continue;
@@ -2448,7 +2448,7 @@ auto VAbstractPattern::GroupLinkedToTool(vidtype toolId) const -> vidtype
 auto VAbstractPattern::GetGroupName(quint32 id) -> QString
 {
     QString name = QCoreApplication::translate("VAbstractPattern", "New group");
-    QDomElement group = elementById(id, TagGroup);
+    QDomElement const group = elementById(id, TagGroup);
     if (group.isElement())
     {
         name = GetParametrString(group, AttrName, name);
@@ -2473,7 +2473,7 @@ void VAbstractPattern::SetGroupName(quint32 id, const QString &name)
 auto VAbstractPattern::GetGroupTags(vidtype id) -> QStringList
 {
     QStringList tags;
-    QDomElement group = elementById(id, TagGroup);
+    QDomElement const group = elementById(id, TagGroup);
     if (group.isElement())
     {
         tags = FilterGroupTags(GetParametrEmptyString(group, AttrTags));
@@ -2498,7 +2498,7 @@ void VAbstractPattern::SetGroupTags(quint32 id, const QStringList &tags)
 //---------------------------------------------------------------------------------------------------------------------
 auto VAbstractPattern::GetDimensionAValue() -> double
 {
-    QDomElement domElement = UniqueTag(TagMeasurements);
+    QDomElement const domElement = UniqueTag(TagMeasurements);
     if (not domElement.isNull())
     {
         return GetParametrDouble(domElement, AttrDimensionA, *dimensionDefValue);
@@ -2527,7 +2527,7 @@ void VAbstractPattern::SetDimensionAValue(double value)
 //---------------------------------------------------------------------------------------------------------------------
 auto VAbstractPattern::GetDimensionBValue() -> double
 {
-    QDomElement domElement = UniqueTag(TagMeasurements);
+    QDomElement const domElement = UniqueTag(TagMeasurements);
     if (not domElement.isNull())
     {
         return GetParametrDouble(domElement, AttrDimensionB, *dimensionDefValue);
@@ -2556,7 +2556,7 @@ void VAbstractPattern::SetDimensionBValue(double value)
 //---------------------------------------------------------------------------------------------------------------------
 auto VAbstractPattern::GetDimensionCValue() -> double
 {
-    QDomElement domElement = UniqueTag(TagMeasurements);
+    QDomElement const domElement = UniqueTag(TagMeasurements);
     if (not domElement.isNull())
     {
         return GetParametrDouble(domElement, AttrDimensionC, *dimensionDefValue);
@@ -2593,7 +2593,7 @@ auto VAbstractPattern::GetGroupCategories() const -> QStringList
         const QDomElement group = groups.at(i).toElement();
         if (not group.isNull() && group.hasAttribute(AttrTags))
         {
-            QStringList groupTags = VAbstractPattern::FilterGroupTags(GetParametrEmptyString(group, AttrTags));
+            QStringList const groupTags = VAbstractPattern::FilterGroupTags(GetParametrEmptyString(group, AttrTags));
             categories.unite(ConvertToSet<QString>(groupTags));
         }
     }
@@ -2608,7 +2608,7 @@ auto VAbstractPattern::GetGroups(const QString &patternPieceName) -> QMap<quint3
 
     try
     {
-        QDomElement groups = CreateGroups(patternPieceName);
+        QDomElement const groups = CreateGroups(patternPieceName);
         if (not groups.isNull())
         {
             QDomNode domNode = groups.firstChild();
@@ -2687,7 +2687,7 @@ auto VAbstractPattern::GetGroupsContainingItem(quint32 toolId, quint32 objectId,
 
     // TODO : order in alphabetical order
 
-    QDomElement groups = CreateGroups();
+    QDomElement const groups = CreateGroups();
     if (not groups.isNull())
     {
         QDomNode domNode = groups.firstChild();
@@ -2700,7 +2700,7 @@ auto VAbstractPattern::GetGroupsContainingItem(quint32 toolId, quint32 objectId,
                 {
                     if (group.tagName() == TagGroup)
                     {
-                        bool groupHasItem = GroupHasItem(group, toolId, objectId);
+                        bool const groupHasItem = GroupHasItem(group, toolId, objectId);
                         if ((containItem && groupHasItem) || (not containItem && not groupHasItem))
                         {
                             const quint32 groupId = GetParametrUInt(group, AttrId, QChar('0'));
@@ -2741,8 +2741,8 @@ auto VAbstractPattern::GroupHasItem(const QDomElement &groupDomElement, quint32 
             const QDomElement item = itemNode.toElement();
             if (item.isNull() == false)
             {
-                quint32 toolIdIterate = GetParametrUInt(item, AttrTool, QChar('0'));
-                quint32 objectIdIterate = GetParametrUInt(item, AttrObject, QString::number(toolIdIterate));
+                quint32 const toolIdIterate = GetParametrUInt(item, AttrTool, QChar('0'));
+                quint32 const objectIdIterate = GetParametrUInt(item, AttrObject, QString::number(toolIdIterate));
 
                 if (toolIdIterate == toolId && objectIdIterate == objectId)
                 {
@@ -2808,7 +2808,7 @@ auto VAbstractPattern::ReadPatternName() const -> QString
 //---------------------------------------------------------------------------------------------------------------------
 auto VAbstractPattern::ReadMPath() const -> QString
 {
-    QDomElement domElement = UniqueTag(TagMeasurements);
+    QDomElement const domElement = UniqueTag(TagMeasurements);
     if (not domElement.isNull())
     {
         return domElement.attribute(AttrPath);
@@ -2862,7 +2862,7 @@ auto VAbstractPattern::AddItemToGroup(quint32 toolId, quint32 objectId, quint32 
         emit UpdateGroups();
 
         // parse the groups to update the drawing, in case the item was added to an invisible group
-        QDomElement groups = CreateGroups();
+        QDomElement const groups = CreateGroups();
         if (not groups.isNull())
         {
             ParseGroups(groups);
@@ -2902,8 +2902,8 @@ auto VAbstractPattern::RemoveItemFromGroup(quint32 toolId, quint32 objectId, qui
                 const QDomElement item = itemNode.toElement();
                 if (not item.isNull())
                 {
-                    quint32 toolIdIterate = GetParametrUInt(item, AttrTool, QChar('0'));
-                    quint32 objectIdIterate = GetParametrUInt(item, AttrObject, QString::number(toolIdIterate));
+                    quint32 const toolIdIterate = GetParametrUInt(item, AttrTool, QChar('0'));
+                    quint32 const objectIdIterate = GetParametrUInt(item, AttrObject, QString::number(toolIdIterate));
 
                     if (toolIdIterate == toolId && objectIdIterate == objectId)
                     {
@@ -2917,7 +2917,7 @@ auto VAbstractPattern::RemoveItemFromGroup(quint32 toolId, quint32 objectId, qui
                         emit UpdateGroups();
 
                         // parse the groups to update the drawing, in case the item was removed from an invisible group
-                        QDomElement groups = CreateGroups();
+                        QDomElement const groups = CreateGroups();
                         if (not groups.isNull())
                         {
                             ParseGroups(groups);
@@ -2941,7 +2941,7 @@ auto VAbstractPattern::RemoveItemFromGroup(quint32 toolId, quint32 objectId, qui
 //---------------------------------------------------------------------------------------------------------------------
 auto VAbstractPattern::GetGroupVisibility(quint32 id) -> bool
 {
-    QDomElement group = elementById(id, TagGroup);
+    QDomElement const group = elementById(id, TagGroup);
     if (group.isElement())
     {
         return GetParametrBool(group, AttrVisible, trueStr);

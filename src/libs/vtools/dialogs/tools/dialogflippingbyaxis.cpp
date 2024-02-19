@@ -332,7 +332,7 @@ void DialogFlippingByAxis::SuffixChanged()
 
         if (m_suffix != suffix)
         {
-            QRegularExpression rx(NameRegExp());
+            QRegularExpression const rx(NameRegExp());
             const QStringList uniqueNames = data->AllUniqueNames();
             for (auto &uniqueName : uniqueNames)
             {
@@ -431,7 +431,7 @@ void DialogFlippingByAxis::ShowSourceDetails(int row)
 
         if (sourceItem.penStyle.isEmpty() || sourceItem.penStyle == TypeLineDefault)
         {
-            int index = ui->comboBoxPenStyle->currentIndex();
+            int const index = ui->comboBoxPenStyle->currentIndex();
             ui->comboBoxPenStyle->setItemText(index, '<' + tr("Default") + '>');
         }
 
@@ -440,7 +440,7 @@ void DialogFlippingByAxis::ShowSourceDetails(int row)
         if (sourceItem.color.isEmpty() || sourceItem.color == ColorDefault)
         {
             const QSharedPointer<VAbstractCurve> curve = data->GeometricObject<VAbstractCurve>(sourceItem.id);
-            int index = ui->comboBoxColor->currentIndex();
+            int const index = ui->comboBoxColor->currentIndex();
             ui->comboBoxColor->setItemIcon(index, LineColor(ui->comboBoxColor->palette().color(QPalette::Text),
                                                             ui->comboBoxColor->iconSize().height(), curve->GetColor()));
         }
@@ -557,7 +557,7 @@ void DialogFlippingByAxis::SaveData()
 void DialogFlippingByAxis::PointChanged()
 {
     QColor color;
-    quint32 id = getCurrentObjectId(ui->comboBoxOriginPoint);
+    quint32 const id = getCurrentObjectId(ui->comboBoxOriginPoint);
     auto obj = std::find_if(sourceObjects.begin(), sourceObjects.end(),
                             [id](const SourceItem &sItem) { return sItem.id == id; });
     if (obj != sourceObjects.end())
@@ -596,7 +596,7 @@ void DialogFlippingByAxis::FillSourceList()
     for (auto &sourceItem : sourceObjects)
     {
         const QSharedPointer<VGObject> obj = data->GetGObject(sourceItem.id);
-        bool valid = SourceAliasValid(sourceItem, obj, data, OriginAlias(sourceItem.id, sourceObjects, obj));
+        bool const valid = SourceAliasValid(sourceItem, obj, data, OriginAlias(sourceItem.id, sourceObjects, obj));
 
         auto *item = new QListWidgetItem(valid ? obj->ObjectName() : obj->ObjectName() + '*');
         item->setToolTip(obj->ObjectName());
@@ -675,7 +675,7 @@ auto DialogFlippingByAxis::GetNotes() const -> QString
 //---------------------------------------------------------------------------------------------------------------------
 auto DialogFlippingByAxis::IsValid() const -> bool
 {
-    bool ready = flagError && flagName && flagGroupName && flagAlias;
+    bool const ready = flagError && flagName && flagGroupName && flagAlias;
 
     if (ready)
     {

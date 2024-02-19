@@ -494,10 +494,10 @@ void DialogNormal::ShowDialog(bool click)
         QLineF baseLine(static_cast<QPointF>(*p1), static_cast<QPointF>(*p2));
         baseLine.setAngle(baseLine.angle() + 90);
 
-        QLineF line(static_cast<QPointF>(*p1), scene->getScenePos());
+        QLineF const line(static_cast<QPointF>(*p1), scene->getScenePos());
 
         qreal len = line.length();
-        qreal angleTo = baseLine.angleTo(line);
+        qreal const angleTo = baseLine.angleTo(line);
         if (angleTo > 90 && angleTo < 270)
         {
             len *= -1;

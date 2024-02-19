@@ -118,7 +118,7 @@ auto VTableSearch::FindTableItems(QString term) -> QList<QTableWidgetItem *>
         options |= QRegularExpression::UseUnicodePropertiesOption;
     }
 
-    QRegularExpression re(term, options);
+    QRegularExpression const re(term, options);
 
     if (not re.isValid())
     {
@@ -134,8 +134,8 @@ auto VTableSearch::FindTableItems(QString term) -> QList<QTableWidgetItem *>
             QTableWidgetItem *cell = table->item(r, c);
             if (cell != nullptr)
             {
-                QString text = cell->text();
-                QRegularExpressionMatch match = re.match(text);
+                QString const text = cell->text();
+                QRegularExpressionMatch const match = re.match(text);
                 if (match.hasMatch())
                 {
                     list.append(cell);
@@ -154,7 +154,7 @@ auto VTableSearch::FindCurrentMatchIndex() const -> int
         return 0;
     }
 
-    QList<QTableWidgetItem *> selectedItems = table->selectedItems();
+    QList<QTableWidgetItem *> const selectedItems = table->selectedItems();
     if (selectedItems.isEmpty())
     {
         return 0;

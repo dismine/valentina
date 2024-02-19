@@ -228,14 +228,14 @@ void VPPiece::SetPosition(QPointF point)
 //---------------------------------------------------------------------------------------------------------------------
 auto VPPiece::GetPosition() -> QPointF
 {
-    QTransform matrix = GetMatrix();
+    QTransform const matrix = GetMatrix();
     return {matrix.dx(), matrix.dy()};
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 void VPPiece::RotateToGrainline(const VPTransformationOrigon &origin)
 {
-    VPSheetPtr sheet = Sheet();
+    VPSheetPtr const sheet = Sheet();
     if (not IsGrainlineEnabled() || sheet.isNull())
     {
         return;

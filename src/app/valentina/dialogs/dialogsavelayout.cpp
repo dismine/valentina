@@ -375,7 +375,7 @@ void DialogSaveLayout::Save()
             Path() + '/' + FileName() + QString::number(i + 1) + VLayoutExporter::ExportFormatSuffix(Format());
         if (QFile::exists(name))
         {
-            QMessageBox::StandardButton res = QMessageBox::question(
+            QMessageBox::StandardButton const res = QMessageBox::question(
                 this, tr("Name conflict"),
                 tr("Folder already contain file with name %1. Rewrite all conflict file names?").arg(name),
                 QMessageBox::Yes | QMessageBox::No, QMessageBox::Yes);
@@ -570,8 +570,8 @@ void DialogSaveLayout::SetTiledMargins(QMarginsF margins)
 //---------------------------------------------------------------------------------------------------------------------
 auto DialogSaveLayout::GetTiledMargins() const -> QMarginsF
 {
-    QMarginsF margins = QMarginsF(ui->doubleSpinBoxLeftField->value(), ui->doubleSpinBoxTopField->value(),
-                                  ui->doubleSpinBoxRightField->value(), ui->doubleSpinBoxBottomField->value());
+    QMarginsF const margins = QMarginsF(ui->doubleSpinBoxLeftField->value(), ui->doubleSpinBoxTopField->value(),
+                                        ui->doubleSpinBoxRightField->value(), ui->doubleSpinBoxBottomField->value());
 
     return UnitConvertor(margins, VAbstractValApplication::VApp()->patternUnits(), Unit::Mm);
 }
@@ -579,7 +579,7 @@ auto DialogSaveLayout::GetTiledMargins() const -> QMarginsF
 //---------------------------------------------------------------------------------------------------------------------
 void DialogSaveLayout::SetTiledPageFormat(PaperSizeTemplate format)
 {
-    int index = ui->comboBoxTemplates->findData(static_cast<int>(format));
+    int const index = ui->comboBoxTemplates->findData(static_cast<int>(format));
     if (index != -1)
     {
         ui->comboBoxTemplates->setCurrentIndex(index);
@@ -811,8 +811,8 @@ void DialogSaveLayout::WriteSettings() const
     const Unit unit = VAbstractValApplication::VApp()->patternUnits();
 
     // write Margins top, right, bottom, left
-    QMarginsF margins = QMarginsF(ui->doubleSpinBoxLeftField->value(), ui->doubleSpinBoxTopField->value(),
-                                  ui->doubleSpinBoxRightField->value(), ui->doubleSpinBoxBottomField->value());
+    QMarginsF const margins = QMarginsF(ui->doubleSpinBoxLeftField->value(), ui->doubleSpinBoxTopField->value(),
+                                        ui->doubleSpinBoxRightField->value(), ui->doubleSpinBoxBottomField->value());
     settings->SetTiledPDFMargins(margins, unit);
 
     // write Template

@@ -42,14 +42,14 @@ TST_VSpline::TST_VSpline(QObject *parent)
 void TST_VSpline::GetSegmentPoints()
 {
     // Input data taken from real case
-    VPointF p1(1168.8582803149607, 39.999874015748034, "p1", 5.0000125984251973, 9.9999874015748045);
-    VPointF p4(681.33729132409951, 1815.7969526662778, "p4", 5.0000125984251973, 9.9999874015748045);
+    VPointF const p1(1168.8582803149607, 39.999874015748034, "p1", 5.0000125984251973, 9.9999874015748045);
+    VPointF const p4(681.33729132409951, 1815.7969526662778, "p4", 5.0000125984251973, 9.9999874015748045);
 
     VSpline spl(p1, p4, 229.381, 41.6325, 0.96294100000000005, 1.00054, 1);
     spl.SetApproximationScale(10);
 
-    QPointF begin(957.69885233364062, 943.84482037833141);
-    QPointF end(681.33729132409951, 1815.7969526662778);
+    QPointF const begin(957.69885233364062, 943.84482037833141);
+    QPointF const end(681.33729132409951, 1815.7969526662778);
 
     QVector<QPointF> points;
     points << spl.GetSegmentPoints(begin, end, false);
@@ -170,14 +170,14 @@ void TST_VSpline::GetSegmentPoints_issue412()
 {
     // Input data taken from real case
     // See issue #412 https://bitbucket.org/dismine/valentina/issues/412/error-in-detail-using-segment-a-simple
-    VPointF p1(869.11748031496063, -61.117228346456692, "p1", 5.0000125984251973, 9.9999874015748045);
-    VPointF p4(491.16472440944887, 316.83552755905515, "p4", 5.0000125984251973, 9.9999874015748045);
+    VPointF const p1(869.11748031496063, -61.117228346456692, "p1", 5.0000125984251973, 9.9999874015748045);
+    VPointF const p4(491.16472440944887, 316.83552755905515, "p4", 5.0000125984251973, 9.9999874015748045);
 
     VSpline spl(p1, p4, 270, 0, 1, 1, 1);
     spl.SetApproximationScale(10);
 
-    QPointF begin(869.11748031496063, -61.117228346456692);
-    QPointF end(758.41768107838425, 206.13572832247544);
+    QPointF const begin(869.11748031496063, -61.117228346456692);
+    QPointF const end(758.41768107838425, 206.13572832247544);
 
     QVector<QPointF> points;
     points << spl.GetSegmentPoints(begin, end, false);
@@ -260,14 +260,14 @@ void TST_VSpline::GetSegmentPoints_TestPuzzle()
     // Input data taken from real case
     // See the file <root>/src/app/share/collection/TestPuzzle.val
     // Test issue with method IsPointOnLineSegment.
-    VPointF p1(1168.8582803149607, 39.999874015748034, "p1", 5.0000125984251973, 9.9999874015748045);
-    VPointF p4(681.33729132409951, 1815.7969526662778, "p4", 5.0000125984251973, 9.9999874015748045);
+    VPointF const p1(1168.8582803149607, 39.999874015748034, "p1", 5.0000125984251973, 9.9999874015748045);
+    VPointF const p4(681.33729132409951, 1815.7969526662778, "p4", 5.0000125984251973, 9.9999874015748045);
 
     VSpline spl(p1, p4, 229.381, 41.6325, 0.96294100000000005, 1.00054, 1);
     spl.SetApproximationScale(10);
 
-    QPointF begin(1168.85828031, 39.9998740157);
-    QPointF end(957.69883966, 943.844812978);
+    QPointF const begin(1168.85828031, 39.9998740157);
+    QPointF const end(957.69883966, 943.844812978);
 
     QVector<QPointF> points;
     points << spl.GetSegmentPoints(begin, end, false);
@@ -695,8 +695,8 @@ void TST_VSpline::CompareThreeWays()
 {
     // Input data taken from real case
     // See the file <root>/src/app/share/collection/TestPuzzle.val
-    VPointF p1(1168.8582803149607, 39.999874015748034, "p1", 5.0000125984251973, 9.9999874015748045);
-    VPointF p4(681.33729132409951, 1815.7969526662778, "p4", 5.0000125984251973, 9.9999874015748045);
+    VPointF const p1(1168.8582803149607, 39.999874015748034, "p1", 5.0000125984251973, 9.9999874015748045);
+    VPointF const p4(681.33729132409951, 1815.7969526662778, "p4", 5.0000125984251973, 9.9999874015748045);
 
     VSpline spl1(p1, p4, 229.381, 41.6325, 0.96294100000000005, 1.00054, 1);
     spl1.SetApproximationScale(10);
@@ -771,10 +771,10 @@ void TST_VSpline::TestParametrT()
 //---------------------------------------------------------------------------------------------------------------------
 void TST_VSpline::TestLengthByPoint_data()
 {
-    VPointF p1(1168.8582803149607, 39.999874015748034, "p1", 5.0000125984251973, 9.9999874015748045);
-    VPointF p4(681.33729132409951, 1815.7969526662778, "p4", 5.0000125984251973, 9.9999874015748045);
+    VPointF const p1(1168.8582803149607, 39.999874015748034, "p1", 5.0000125984251973, 9.9999874015748045);
+    VPointF const p4(681.33729132409951, 1815.7969526662778, "p4", 5.0000125984251973, 9.9999874015748045);
 
-    VSpline spl(p1, p4, 229.381, 41.6325, 0.96294100000000005, 1.00054, 1);
+    VSpline const spl(p1, p4, 229.381, 41.6325, 0.96294100000000005, 1.00054, 1);
 
     QTest::addColumn<VSpline>("spl");
     QTest::addColumn<QPointF>("point");
@@ -810,10 +810,10 @@ void TST_VSpline::TestFlip_data()
     QTest::addColumn<QLineF>("axis");
     QTest::addColumn<QString>("prefix");
 
-    VPointF p1(1168.8582803149607, 39.999874015748034, "p1", 5.0000125984251973, 9.9999874015748045);
-    VPointF p4(681.33729132409951, 1815.7969526662778, "p4", 5.0000125984251973, 9.9999874015748045);
+    VPointF const p1(1168.8582803149607, 39.999874015748034, "p1", 5.0000125984251973, 9.9999874015748045);
+    VPointF const p4(681.33729132409951, 1815.7969526662778, "p4", 5.0000125984251973, 9.9999874015748045);
 
-    VSpline spl(p1, p4, 229.381, 41.6325, 0.96294100000000005, 1.00054, 1);
+    VSpline const spl(p1, p4, 229.381, 41.6325, 0.96294100000000005, 1.00054, 1);
 
     QLineF axis(QPointF(600, 30), QPointF(600, 1800));
 
@@ -855,15 +855,16 @@ void TST_VSpline::TestCutSpline_data()
     QTest::addColumn<QString>("name");
 
     {
-        VPointF p1(187.31716535433043, 51.31464566929152, QStringLiteral("p1"), 140.42872440944885, -22.62372283464567);
-        VPointF p4(-991.8954330708666, 9.739842519685212, QStringLiteral("p4"), 9.999987401574804, 15.0);
+        VPointF const p1(187.31716535433043, 51.31464566929152, QStringLiteral("p1"), 140.42872440944885,
+                         -22.62372283464567);
+        VPointF const p4(-991.8954330708666, 9.739842519685212, QStringLiteral("p4"), 9.999987401574804, 15.0);
 
         VSpline spl(p1, p4, 181.0, QStringLiteral("181"), 356.0, QStringLiteral("356"), 548.7874015748031,
                     QStringLiteral("Line_Г3_Г6*1.1"), 226.7716535433071, QStringLiteral("6"));
         spl.SetApproximationScale(0.5);
 
-        QString name(QStringLiteral("з"));
-        qreal result = 1.35; // Correct distance in cm.
+        QString const name(QStringLiteral("з"));
+        qreal const result = 1.35; // Correct distance in cm.
 
         // See file valentina_private_collection/bugs/men_jacket/issue_cut_spline.val (private collection)
         // Size 54 produces incorrect spline segment distance
@@ -871,14 +872,14 @@ void TST_VSpline::TestCutSpline_data()
     }
 
     {
-        VPointF p1(1898.0384322000489, -143.17624447113994, QStringLiteral("p1"), 9.999987401574804,
-                   -105.35848818897638);
-        VPointF p4(1557.8809518850883, -143.17624447113994, QStringLiteral("p4"), 9.999987401574804, 15.0);
+        VPointF const p1(1898.0384322000489, -143.17624447113994, QStringLiteral("p1"), 9.999987401574804,
+                         -105.35848818897638);
+        VPointF const p4(1557.8809518850883, -143.17624447113994, QStringLiteral("p4"), 9.999987401574804, 15.0);
 
-        VSpline spl(p1, p4, 175.0, QStringLiteral("175"), 5.0, QStringLiteral("5"), 151.18110236220474,
-                    QStringLiteral("4"), 151.18110236220474, QStringLiteral("4"));
+        VSpline const spl(p1, p4, 175.0, QStringLiteral("175"), 5.0, QStringLiteral("5"), 151.18110236220474,
+                          QStringLiteral("4"), 151.18110236220474, QStringLiteral("4"));
 
-        QString name(QStringLiteral("А193"));
+        QString const name(QStringLiteral("А193"));
         const qreal result = 4.5090698038574057; // Correct distance in cm.
         // See file valentina_private_collection/bugs/coat/coat.val (private collection)
         QTest::newRow("Half of a curve") << spl << result << name;
@@ -893,9 +894,10 @@ void TST_VSpline::TestCutSpline()
     QFETCH(QString, name);
 
     QPointF spl1p2, spl1p3, spl2p2, spl2p3;
-    QPointF point = spl.CutSpline(UnitConvertor(result, Unit::Cm, Unit::Px), spl1p2, spl1p3, spl2p2, spl2p3, name);
+    QPointF const point =
+        spl.CutSpline(UnitConvertor(result, Unit::Cm, Unit::Px), spl1p2, spl1p3, spl2p2, spl2p3, name);
 
-    VPointF p(point, name, -16.590651968503941, 37.574173228346453);
+    VPointF const p(point, name, -16.590651968503941, 37.574173228346453);
 
     VSpline spline1(spl.GetP1(), spl1p2, spl1p3, p);
     spline1.SetApproximationScale(0.5);

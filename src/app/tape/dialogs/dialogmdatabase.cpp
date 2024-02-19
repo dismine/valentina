@@ -181,7 +181,7 @@ void DialogMDataBase::UpdateChecks(QTreeWidgetItem *item, int column)
     if (item->childCount() != 0 && item->checkState(0) != Qt::PartiallyChecked && column != -1)
     {
         bool flag = false; // Check if we could change atleast one children
-        Qt::CheckState checkState = item->checkState(0);
+        Qt::CheckState const checkState = item->checkState(0);
         for (int i = 0; i < item->childCount(); ++i)
         {
             if (not m_usedMeasurements.contains(item->child(i)->data(0, Qt::UserRole).toString()))
@@ -303,19 +303,19 @@ void DialogMDataBase::InitDataBase(const QStringList &usedMeasurements)
     }
 
     VKnownMeasurementsDatabase *db = MApplication::VApp()->KnownMeasurementsDatabase();
-    VKnownMeasurements knownDB = db->KnownMeasurements(m_knownId);
+    VKnownMeasurements const knownDB = db->KnownMeasurements(m_knownId);
 
-    QMap<int, VKnownMeasurement> measurements = knownDB.OrderedGroupMeasurements(QString());
+    QMap<int, VKnownMeasurement> const measurements = knownDB.OrderedGroupMeasurements(QString());
     if (!measurements.isEmpty())
     {
         m_generalGroup = InitGroup(tr("General", "Measurement section"), measurements, usedMeasurements);
         m_groups.append(m_generalGroup);
     }
 
-    QStringList groups = knownDB.Groups();
+    QStringList const groups = knownDB.Groups();
     for (auto &group : groups)
     {
-        QMap<int, VKnownMeasurement> groupMeasurements = knownDB.OrderedGroupMeasurements(group);
+        QMap<int, VKnownMeasurement> const groupMeasurements = knownDB.OrderedGroupMeasurements(group);
         m_groups.append(InitGroup(group, groupMeasurements, usedMeasurements));
     }
 }
@@ -431,8 +431,8 @@ auto DialogMDataBase::ItemFullDescription(QTreeWidgetItem *item, bool showImage)
     }
 
     VKnownMeasurementsDatabase *db = MApplication::VApp()->KnownMeasurementsDatabase();
-    VKnownMeasurements knownDB = db->KnownMeasurements(m_knownId);
-    VKnownMeasurement known = knownDB.Measurement(name);
+    VKnownMeasurements const knownDB = db->KnownMeasurements(m_knownId);
+    VKnownMeasurement const known = knownDB.Measurement(name);
 
     QString imgTag;
     if (showImage)

@@ -54,7 +54,7 @@ void TST_VPoster::BigPoster()
     printer.setPageMargins(QMarginsF(), QPageLayout::Millimeter);
 
     const QSize image(2622, 3178); // Little bit bigger than A1
-    VPoster posterazor(&printer);
+    VPoster const posterazor(&printer);
     const QVector<PosterData> poster = posterazor.Calc(image, 0, PageOrientation::Portrait);
 
     QCOMPARE(poster.size(), 12);
@@ -74,7 +74,7 @@ void TST_VPoster::SmallPoster()
     printer.setPageSize(QPageSize(QPageSize::A4));
 
     const QSize image(700, 1000); // Little bit less than A4
-    VPoster posterazor(&printer);
+    VPoster const posterazor(&printer);
     const QVector<PosterData> poster = posterazor.Calc(image, 0, PageOrientation::Portrait);
 
     QCOMPARE(poster.size(), 1);

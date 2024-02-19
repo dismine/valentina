@@ -236,7 +236,7 @@ void VVSTConverter::ConvertMeasurementsToV0_4_0()
                 continue;
             }
 
-            QDomElement m = nodeList.at(0).toElement();
+            QDomElement const m = nodeList.at(0).toElement();
             const qreal value = GetParametrDouble(m, QStringLiteral("value"), QStringLiteral("0.0"));
             const qreal size_increase = GetParametrDouble(m, QStringLiteral("size_increase"), QStringLiteral("0.0"));
             const qreal height_increase =
@@ -284,7 +284,7 @@ void VVSTConverter::PM_SystemV0_4_1()
     Q_STATIC_ASSERT_X(VVSTConverter::MeasurementMinVer < FormatVersion(0, 4, 1), "Time to refactor the code.");
 
     const QDomNodeList nodeList = this->elementsByTagName(QStringLiteral("size"));
-    QDomElement personal = nodeList.at(0).toElement();
+    QDomElement const personal = nodeList.at(0).toElement();
 
     QDomElement parent = personal.parentNode().toElement();
     parent.insertBefore(CreateElementWithText(QStringLiteral("pm_system"), QStringLiteral("998")), personal);
@@ -434,7 +434,7 @@ void VVSTConverter::ConvertCircumferenceAttreibuteToV0_5_4()
         QDomElement dom = list.at(i).toElement();
         if (dom.hasAttribute(*strAttrCircumference))
         {
-            bool m = GetParametrBool(dom, *strAttrCircumference, trueStr);
+            bool const m = GetParametrBool(dom, *strAttrCircumference, trueStr);
             dom.removeAttribute(*strAttrCircumference);
             SetAttribute(dom, *strAttrMeasurement, m);
         }

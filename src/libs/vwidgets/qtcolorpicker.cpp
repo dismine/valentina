@@ -347,14 +347,14 @@ void QtColorPicker::paintEvent(QPaintEvent *e)
 {
     if (dirty)
     {
-        int iconSize = style()->pixelMetric(QStyle::PM_SmallIconSize);
+        int const iconSize = style()->pixelMetric(QStyle::PM_SmallIconSize);
         QPixmap pix(iconSize, iconSize);
         pix.fill(palette().button().color());
 
         QPainter p(&pix);
 
-        int w = pix.width();  // width of cell in pixels
-        int h = pix.height(); // height of cell in pixels
+        int const w = pix.width();  // width of cell in pixels
+        int const h = pix.height(); // height of cell in pixels
         p.setPen(QPen(Qt::gray));
         p.setBrush(col);
         p.drawRect(2, 2, w - 5, h - 5);
@@ -427,7 +427,7 @@ auto QtColorPicker::CustomColors() const -> QVector<QColor>
     QVector<QColor> customColor;
     if (popup != nullptr)
     {
-        QVector<ColorPickerItem *> items = popup->CustomItems();
+        QVector<ColorPickerItem *> const items = popup->CustomItems();
         customColor.reserve(items.size());
 
         for (auto *item : items)
@@ -1002,7 +1002,7 @@ void ColorPickerPopup::regenerateGrid()
 */
 void ColorPickerPopup::getColorFromDialog()
 {
-    QColor col = QColorDialog::getColor(lastSel, parentWidget());
+    QColor const col = QColorDialog::getColor(lastSel, parentWidget());
     if (!col.isValid())
     {
         return;
@@ -1116,8 +1116,8 @@ void ColorPickerItem::mousePressEvent(QMouseEvent *)
 void ColorPickerItem::paintEvent(QPaintEvent *)
 {
     QPainter p(this);
-    int w = width();  // width of cell in pixels
-    int h = height(); // height of cell in pixels
+    int const w = width();  // width of cell in pixels
+    int const h = height(); // height of cell in pixels
 
     p.setPen(QPen(Qt::gray, 0, Qt::SolidLine));
 
@@ -1247,11 +1247,11 @@ void ColorPickerButton::paintEvent(QPaintEvent *e)
     QPainter p(this);
     p.fillRect(contentsRect(), palette().button());
 
-    QRect r = rect();
+    QRect const r = rect();
 
-    int offset = frameShadow() == Sunken ? 1 : 0;
+    int const offset = frameShadow() == Sunken ? 1 : 0;
 
-    QPen pen(palette().buttonText(), 1);
+    QPen const pen(palette().buttonText(), 1);
     p.setPen(pen);
 
     p.drawRect(r.center().x() + offset - 4, r.center().y() + offset, 1, 1);

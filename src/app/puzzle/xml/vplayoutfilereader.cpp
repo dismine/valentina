@@ -65,18 +65,18 @@ namespace
 //---------------------------------------------------------------------------------------------------------------------
 auto StringToTransfrom(const QString &matrix) -> QTransform
 {
-    QStringList elements = matrix.split(ML::groupSep);
+    QStringList const elements = matrix.split(ML::groupSep);
     if (elements.count() == 9)
     {
-        qreal m11 = elements.at(0).toDouble();
-        qreal m12 = elements.at(1).toDouble();
-        qreal m13 = elements.at(2).toDouble();
-        qreal m21 = elements.at(3).toDouble();
-        qreal m22 = elements.at(4).toDouble();
-        qreal m23 = elements.at(5).toDouble();
-        qreal m31 = elements.at(6).toDouble();
-        qreal m32 = elements.at(7).toDouble();
-        qreal m33 = elements.at(8).toDouble();
+        qreal const m11 = elements.at(0).toDouble();
+        qreal const m12 = elements.at(1).toDouble();
+        qreal const m13 = elements.at(2).toDouble();
+        qreal const m21 = elements.at(3).toDouble();
+        qreal const m22 = elements.at(4).toDouble();
+        qreal const m23 = elements.at(5).toDouble();
+        qreal const m31 = elements.at(6).toDouble();
+        qreal const m32 = elements.at(7).toDouble();
+        qreal const m33 = elements.at(8).toDouble();
         return {m11, m12, m13, m21, m22, m23, m31, m32, m33};
     }
 
@@ -86,7 +86,7 @@ auto StringToTransfrom(const QString &matrix) -> QTransform
 //---------------------------------------------------------------------------------------------------------------------
 auto StringToPoint(const QString &point) -> QPointF
 {
-    QStringList coordinates = point.split(ML::coordintatesSep);
+    QStringList const coordinates = point.split(ML::coordintatesSep);
     if (coordinates.count() == 2)
     {
         return {coordinates.at(0).toDouble(), coordinates.at(1).toDouble()};
@@ -104,7 +104,7 @@ auto StringToPath(const QString &path) -> QVector<QPointF>
         return p;
     }
 
-    QStringList points = path.split(ML::pointsSep);
+    QStringList const points = path.split(ML::pointsSep);
     p.reserve(points.size());
     for (const auto &point : points)
     {
@@ -179,7 +179,7 @@ auto StringToGrainlineArrowDirrection(const QString &dirrection) -> GrainlineArr
 //---------------------------------------------------------------------------------------------------------------------
 auto StringToLine(const QString &string) -> QLineF
 {
-    QStringList points = string.split(ML::groupSep);
+    QStringList const points = string.split(ML::groupSep);
     if (points.count() == 2)
     {
         return {StringToPoint(points.at(0)), StringToPoint(points.at(1))};
@@ -191,13 +191,13 @@ auto StringToLine(const QString &string) -> QLineF
 //---------------------------------------------------------------------------------------------------------------------
 auto StringToLines(const QString &string) -> QVector<QLineF>
 {
-    QStringList lines = string.split(ML::itemsSep);
+    QStringList const lines = string.split(ML::itemsSep);
     QVector<QLineF> path;
     path.reserve(lines.size());
 
     for (const auto &line : lines)
     {
-        QLineF l = StringToLine(line);
+        QLineF const l = StringToLine(line);
         if (not l.isNull())
         {
             path.append(StringToLine(line));
@@ -210,7 +210,7 @@ auto StringToLines(const QString &string) -> QVector<QLineF>
 //---------------------------------------------------------------------------------------------------------------------
 auto StringToRect(const QString &string) -> QRectF
 {
-    QStringList points = string.split(ML::groupSep);
+    QStringList const points = string.split(ML::groupSep);
     if (points.count() == 4)
     {
         return {points.at(0).toDouble(), points.at(1).toDouble(), points.at(2).toDouble(), points.at(3).toDouble()};
@@ -334,7 +334,7 @@ void VPLayoutFileReader::ReadControl(const VPLayoutPtr &layout)
 {
     AssertRootTag(ML::TagControl);
 
-    QXmlStreamAttributes attribs = attributes();
+    QXmlStreamAttributes const attribs = attributes();
     layout->LayoutSettings().SetWarningSuperpositionOfPieces(
         ReadAttributeBool(attribs, ML::AttrWarningSuperposition, trueStr));
     layout->LayoutSettings().SetWarningPiecesOutOfBound(ReadAttributeBool(attribs, ML::AttrWarningOutOfBound, trueStr));
@@ -361,7 +361,7 @@ void VPLayoutFileReader::ReadTiles(const VPLayoutPtr &layout)
 {
     AssertRootTag(ML::TagTiles);
 
-    QXmlStreamAttributes attribs = attributes();
+    QXmlStreamAttributes const attribs = attributes();
     layout->LayoutSettings().SetShowTiles(ReadAttributeBool(attribs, ML::AttrVisible, falseStr));
     layout->LayoutSettings().SetPrintTilesScheme(ReadAttributeBool(attribs, ML::AttrPrintScheme, falseStr));
     layout->LayoutSettings().SetShowTileNumber(ReadAttributeBool(attribs, ML::AttrTileNumber, falseStr));
@@ -397,7 +397,7 @@ void VPLayoutFileReader::ReadScale(const VPLayoutPtr &layout)
 {
     AssertRootTag(ML::TagScale);
 
-    QXmlStreamAttributes attribs = attributes();
+    QXmlStreamAttributes const attribs = attributes();
     layout->LayoutSettings().SetHorizontalScale(ReadAttributeDouble(attribs, ML::AttrXScale, QChar('1')));
     layout->LayoutSettings().SetVerticalScale(ReadAttributeDouble(attribs, ML::AttrYScale, QChar('1')));
 
@@ -428,9 +428,9 @@ void VPLayoutFileReader::ReadSheet(const VPLayoutPtr &layout)
 {
     AssertRootTag(ML::TagSheet);
 
-    VPSheetPtr sheet(new VPSheet(layout));
+    VPSheetPtr const sheet(new VPSheet(layout));
 
-    QXmlStreamAttributes attribs = attributes();
+    QXmlStreamAttributes const attribs = attributes();
     sheet->SetGrainlineType(StrToGrainlineType(ReadAttributeEmptyString(attribs, ML::AttrGrainlineType)));
 
     const QStringList tags{
@@ -475,7 +475,7 @@ void VPLayoutFileReader::ReadPieces(const VPLayoutPtr &layout, const VPSheetPtr 
     {
         if (name() == ML::TagPiece)
         {
-            VPPiecePtr piece(new VPPiece());
+            VPPiecePtr const piece(new VPPiece());
             ReadPiece(piece);
 
             QString error;
@@ -500,10 +500,10 @@ void VPLayoutFileReader::ReadPiece(const VPPiecePtr &piece)
 {
     AssertRootTag(ML::TagPiece);
 
-    QXmlStreamAttributes attribs = attributes();
+    QXmlStreamAttributes const attribs = attributes();
     piece->SetName(ReadAttributeString(attribs, ML::AttrName, tr("Piece")));
 
-    QString uuidStr = ReadAttributeString(attribs, ML::AttrUID, QUuid::createUuid().toString());
+    QString const uuidStr = ReadAttributeString(attribs, ML::AttrUID, QUuid::createUuid().toString());
     piece->SetUUID(QUuid(uuidStr));
 
     piece->SetGradationId(ReadAttributeEmptyString(attribs, ML::AttrGradationLabel));
@@ -575,7 +575,7 @@ auto VPLayoutFileReader::ReadLayoutPoint() -> VLayoutPoint
 
     VLayoutPoint point;
 
-    QXmlStreamAttributes attribs = attributes();
+    QXmlStreamAttributes const attribs = attributes();
     point.setX(ReadAttributeDouble(attribs, ML::AttrX, QChar('0')));
     point.setY(ReadAttributeDouble(attribs, ML::AttrY, QChar('0')));
     point.SetTurnPoint(ReadAttributeBool(attribs, ML::AttrTurnPoint, falseStr));
@@ -619,14 +619,14 @@ void VPLayoutFileReader::ReadSeamAllowance(const VPPiecePtr &piece)
 {
     AssertRootTag(ML::TagSeamAllowance);
 
-    QXmlStreamAttributes attribs = attributes();
-    bool enabled = ReadAttributeBool(attribs, ML::AttrEnabled, falseStr);
+    QXmlStreamAttributes const attribs = attributes();
+    bool const enabled = ReadAttributeBool(attribs, ML::AttrEnabled, falseStr);
     piece->SetSeamAllowance(enabled);
 
-    bool builtIn = ReadAttributeBool(attribs, ML::AttrBuiltIn, falseStr);
+    bool const builtIn = ReadAttributeBool(attribs, ML::AttrBuiltIn, falseStr);
     piece->SetSeamAllowanceBuiltIn(builtIn);
 
-    QVector<VLayoutPoint> path = ReadLayoutPoints();
+    QVector<VLayoutPoint> const path = ReadLayoutPoints();
 
     if (enabled && not builtIn)
     {
@@ -645,14 +645,14 @@ void VPLayoutFileReader::ReadGrainline(const VPPiecePtr &piece)
 
     VPieceGrainline grainline;
 
-    QXmlStreamAttributes attribs = attributes();
-    bool enabled = ReadAttributeBool(attribs, ML::AttrEnabled, falseStr);
+    QXmlStreamAttributes const attribs = attributes();
+    bool const enabled = ReadAttributeBool(attribs, ML::AttrEnabled, falseStr);
     grainline.SetEnabled(enabled);
-    QLineF mainLine = StringToLine(readElementText());
+    QLineF const mainLine = StringToLine(readElementText());
 
     if (enabled)
     {
-        QString arrowDirection = ReadAttributeEmptyString(attribs, ML::AttrArrowDirection);
+        QString const arrowDirection = ReadAttributeEmptyString(attribs, ML::AttrArrowDirection);
         grainline.SetArrowType(StringToGrainlineArrowDirrection(arrowDirection));
 
         if (mainLine.isNull())
@@ -693,7 +693,7 @@ auto VPLayoutFileReader::ReadNotch() -> VLayoutPassmark
 {
     AssertRootTag(ML::TagNotch);
 
-    QXmlStreamAttributes attribs = attributes();
+    QXmlStreamAttributes const attribs = attributes();
 
     QT_WARNING_PUSH
     QT_WARNING_DISABLE_GCC("-Wnoexcept")
@@ -704,7 +704,7 @@ auto VPLayoutFileReader::ReadNotch() -> VLayoutPassmark
     passmark.lines = StringToLines(ReadAttributeEmptyString(attribs, ML::AttrPath));
     passmark.isClockwiseOpening = ReadAttributeBool(attribs, ML::AttrClockwiseOpening, falseStr);
 
-    QString defaultType = QString::number(static_cast<int>(PassmarkLineType::OneLine));
+    QString const defaultType = QString::number(static_cast<int>(PassmarkLineType::OneLine));
     passmark.type = static_cast<PassmarkLineType>(ReadAttributeUInt(attribs, ML::AttrType, defaultType));
 
     QT_WARNING_POP
@@ -839,7 +839,7 @@ void VPLayoutFileReader::ReadPieceLabel(const VPPiecePtr &piece)
 {
     AssertRootTag(ML::TagPieceLabel);
 
-    QXmlStreamAttributes attribs = attributes();
+    QXmlStreamAttributes const attribs = attributes();
     piece->SetPieceLabelRect(StringToPath(ReadAttributeEmptyString(attribs, ML::AttrShape)));
 
     while (readNextStartElement())
@@ -861,7 +861,7 @@ void VPLayoutFileReader::ReadPatternLabel(const VPPiecePtr &piece)
 {
     AssertRootTag(ML::TagPatternLabel);
 
-    QXmlStreamAttributes attribs = attributes();
+    QXmlStreamAttributes const attribs = attributes();
     piece->SetPatternLabelRect(StringToPath(ReadAttributeEmptyString(attribs, ML::AttrShape)));
 
     while (readNextStartElement())
@@ -886,10 +886,10 @@ auto VPLayoutFileReader::ReadLabelLines() -> VTextManager
     VTextManager text;
     QVector<TextLine> lines;
 
-    QXmlStreamAttributes attribs = attributes();
+    QXmlStreamAttributes const attribs = attributes();
     text.SetFont(FontFromString(ReadAttributeEmptyString(attribs, ML::AttrFont)));
 
-    QStringList svgFontData = ReadAttributeEmptyString(attribs, ML::AttrSVGFont).split(',');
+    QStringList const svgFontData = ReadAttributeEmptyString(attribs, ML::AttrSVGFont).split(',');
     if (!svgFontData.isEmpty())
     {
         text.SetSVGFontFamily(svgFontData.constFirst());
@@ -925,13 +925,14 @@ auto VPLayoutFileReader::ReadLabelLine() -> TextLine
 
     TextLine line;
 
-    QXmlStreamAttributes attribs = attributes();
+    QXmlStreamAttributes const attribs = attributes();
 
     line.m_iFontSize =
         ReadAttributeInt(attribs, ML::AttrFontSize, QString::number(VCommonSettings::MinPieceLabelFontPointSize()));
     line.m_bold = ReadAttributeBool(attribs, ML::AttrBold, falseStr);
     line.m_italic = ReadAttributeBool(attribs, ML::AttrItalic, falseStr);
-    int alignment = ReadAttributeInt(attribs, ML::AttrAlignment, QString::number(static_cast<int>(Qt::AlignCenter)));
+    int const alignment =
+        ReadAttributeInt(attribs, ML::AttrAlignment, QString::number(static_cast<int>(Qt::AlignCenter)));
     line.m_eAlign = static_cast<Qt::Alignment>(alignment);
     line.m_qsText = readElementText();
 
@@ -943,7 +944,7 @@ void VPLayoutFileReader::ReadWatermark(const VPLayoutPtr &layout)
 {
     AssertRootTag(ML::TagWatermark);
 
-    QXmlStreamAttributes attribs = attributes();
+    QXmlStreamAttributes const attribs = attributes();
     layout->LayoutSettings().SetShowWatermark(ReadAttributeBool(attribs, ML::AttrShowPreview, falseStr));
     layout->LayoutSettings().SetWatermarkPath(readElementText());
 }
@@ -999,7 +1000,7 @@ void VPLayoutFileReader::ReadMirrorLines(const VPPiecePtr &piece)
 //---------------------------------------------------------------------------------------------------------------------
 void VPLayoutFileReader::ReadLayoutMargins(const VPLayoutPtr &layout)
 {
-    QXmlStreamAttributes attribs = attributes();
+    QXmlStreamAttributes const attribs = attributes();
 
     QMarginsF margins = QMarginsF();
     margins.setLeft(ReadAttributeDouble(attribs, ML::AttrLeft, QChar('0')));
@@ -1016,7 +1017,7 @@ void VPLayoutFileReader::ReadLayoutMargins(const VPLayoutPtr &layout)
 //---------------------------------------------------------------------------------------------------------------------
 void VPLayoutFileReader::ReadSheetMargins(const VPSheetPtr &sheet)
 {
-    QXmlStreamAttributes attribs = attributes();
+    QXmlStreamAttributes const attribs = attributes();
 
     QMarginsF margins = QMarginsF();
     margins.setLeft(ReadAttributeDouble(attribs, ML::AttrLeft, QChar('0')));
@@ -1035,7 +1036,7 @@ auto VPLayoutFileReader::ReadSize() -> QSizeF
 {
     QSizeF size;
 
-    QXmlStreamAttributes attribs = attributes();
+    QXmlStreamAttributes const attribs = attributes();
     size.setWidth(ReadAttributeDouble(attribs, ML::AttrWidth, QChar('0')));
     size.setHeight(ReadAttributeDouble(attribs, ML::AttrLength, QChar('0')));
 

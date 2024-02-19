@@ -185,7 +185,7 @@ auto GetResourceName(const QString &root, const QString &iconName, bool dark) ->
 //---------------------------------------------------------------------------------------------------------------------
 auto GetPixmapResource(const QString &root, const QString &iconName, bool dark) -> QPixmap
 {
-    QString resourceName = GetResourceName(root, iconName, dark);
+    QString const resourceName = GetResourceName(root, iconName, dark);
     QPixmap pixmap = QPixmap(resourceName);
     Q_ASSERT(!pixmap.isNull());
     return pixmap;
@@ -251,14 +251,14 @@ auto VTheme::IsInDarkTheme() -> bool
 //---------------------------------------------------------------------------------------------------------------------
 auto VTheme::ShouldApplyDarkTheme() -> bool
 {
-    QPalette palette = qApp->palette(); // NOLINT(cppcoreguidelines-pro-type-static-cast-downcast)
+    QPalette const palette = qApp->palette(); // NOLINT(cppcoreguidelines-pro-type-static-cast-downcast)
     return palette.color(QPalette::WindowText).lightness() > palette.color(QPalette::Window).lightness();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 auto VTheme::ColorSheme() -> VColorSheme
 {
-    VThemeMode themeMode = VAbstractApplication::VApp()->Settings()->GetThemeMode();
+    VThemeMode const themeMode = VAbstractApplication::VApp()->Settings()->GetThemeMode();
 
     if (themeMode == VThemeMode::Light)
     {
@@ -291,8 +291,8 @@ auto VTheme::ColorSheme() -> VColorSheme
 //---------------------------------------------------------------------------------------------------------------------
 auto VTheme::DefaultThemeName() -> QString
 {
-    VColorSheme colorScheme = ColorSheme();
-    QString themePrefix = (colorScheme == VColorSheme::Light ? QStringLiteral("Light") : QStringLiteral("Dark"));
+    VColorSheme const colorScheme = ColorSheme();
+    QString const themePrefix = (colorScheme == VColorSheme::Light ? QStringLiteral("Light") : QStringLiteral("Dark"));
 
 #if defined(Q_OS_MACX)
     return QStringLiteral("La-Sierra-%1").arg(themePrefix);
@@ -304,7 +304,7 @@ auto VTheme::DefaultThemeName() -> QString
 //---------------------------------------------------------------------------------------------------------------------
 void VTheme::InitApplicationStyle()
 {
-    VThemeMode themeMode = VAbstractApplication::VApp()->Settings()->GetThemeMode();
+    VThemeMode const themeMode = VAbstractApplication::VApp()->Settings()->GetThemeMode();
 
     if (themeMode == VThemeMode::Light || themeMode == VThemeMode::Dark)
     {
@@ -345,7 +345,7 @@ void VTheme::SetIconTheme()
     }
     else
     {
-        VThemeMode themeMode = VAbstractApplication::VApp()->Settings()->GetThemeMode();
+        VThemeMode const themeMode = VAbstractApplication::VApp()->Settings()->GetThemeMode();
 
         if ((themeMode == VThemeMode::Dark && !ShouldApplyDarkTheme()) ||
             (themeMode == VThemeMode::Light && ShouldApplyDarkTheme()))
@@ -365,7 +365,7 @@ void VTheme::SetToAutoTheme() const
 //---------------------------------------------------------------------------------------------------------------------
 void VTheme::InitThemeMode()
 {
-    VThemeMode themeMode = VAbstractApplication::VApp()->Settings()->GetThemeMode();
+    VThemeMode const themeMode = VAbstractApplication::VApp()->Settings()->GetThemeMode();
 
     if (themeMode == VThemeMode::Light)
     {
@@ -422,7 +422,7 @@ void VTheme::InitThemeMode()
 //---------------------------------------------------------------------------------------------------------------------
 auto VTheme::ThemeStylesheet() -> QString
 {
-    VThemeMode themeMode = VAbstractApplication::VApp()->Settings()->GetThemeMode();
+    VThemeMode const themeMode = VAbstractApplication::VApp()->Settings()->GetThemeMode();
 
     if (themeMode == VThemeMode::Light)
     {
@@ -509,7 +509,7 @@ auto VTheme::GetFallbackThemeIcon(const QString &iconName, QSize iconSize) -> QI
 auto VTheme::GetIconResource(const QString &root, const QString &iconName) -> QIcon
 {
     QIcon icon;
-    bool dark = (ColorSheme() == VColorSheme::Dark);
+    bool const dark = (ColorSheme() == VColorSheme::Dark);
     QPixmap pixmap = ::GetPixmapResource(root, iconName, dark);
     icon.addPixmap(pixmap);
     if (dark)
@@ -554,7 +554,7 @@ VTheme::VTheme(QObject *parent)
         QGuiApplication::setOverrideCursor(QCursor(Qt::WaitCursor));
 
         VCommonSettings *settings = VAbstractApplication::VApp()->Settings();
-        VThemeMode themeMode = settings->GetThemeMode();
+        VThemeMode const themeMode = settings->GetThemeMode();
         if (themeMode == VThemeMode::System && VTheme::NativeDarkThemeAvailable())
         {
             if (QGuiApplication::styleHints()->colorScheme() == Qt::ColorScheme::Dark)

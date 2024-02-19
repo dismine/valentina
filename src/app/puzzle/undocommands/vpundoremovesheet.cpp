@@ -38,7 +38,7 @@ VPUndoRemoveSheet::VPUndoRemoveSheet(const VPSheetPtr &sheet, QUndoCommand *pare
 {
     SCASSERT(not sheet.isNull())
 
-    QList<VPPiecePtr> pieces = sheet->GetPieces();
+    QList<VPPiecePtr> const pieces = sheet->GetPieces();
     m_pieces.reserve(pieces.size());
     for (const auto &piece : pieces)
     {
@@ -51,7 +51,7 @@ VPUndoRemoveSheet::VPUndoRemoveSheet(const VPSheetPtr &sheet, QUndoCommand *pare
 //---------------------------------------------------------------------------------------------------------------------
 void VPUndoRemoveSheet::undo()
 {
-    VPSheetPtr sheet = m_sheet.toStrongRef();
+    VPSheetPtr const sheet = m_sheet.toStrongRef();
     if (sheet.isNull())
     {
         return;
@@ -63,14 +63,14 @@ void VPUndoRemoveSheet::undo()
 
         for (const auto &piece : qAsConst(m_pieces))
         {
-            VPPiecePtr p = piece.toStrongRef();
+            VPPiecePtr const p = piece.toStrongRef();
             if (not p.isNull())
             {
                 p->SetSheet(sheet);
             }
         }
 
-        VPLayoutPtr layout = sheet->GetLayout();
+        VPLayoutPtr const layout = sheet->GetLayout();
         if (layout.isNull())
         {
             return;
@@ -84,7 +84,7 @@ void VPUndoRemoveSheet::undo()
 //---------------------------------------------------------------------------------------------------------------------
 void VPUndoRemoveSheet::redo()
 {
-    VPSheetPtr sheet = m_sheet.toStrongRef();
+    VPSheetPtr const sheet = m_sheet.toStrongRef();
     if (sheet.isNull())
     {
         return;
@@ -96,7 +96,7 @@ void VPUndoRemoveSheet::redo()
 
         for (const auto &piece : qAsConst(m_pieces))
         {
-            VPPiecePtr p = piece.toStrongRef();
+            VPPiecePtr const p = piece.toStrongRef();
             if (not p.isNull())
             {
                 p->SetSheet(VPSheetPtr());
@@ -104,7 +104,7 @@ void VPUndoRemoveSheet::redo()
         }
     }
 
-    VPLayoutPtr layout = sheet->GetLayout();
+    VPLayoutPtr const layout = sheet->GetLayout();
     if (layout.isNull())
     {
         return;

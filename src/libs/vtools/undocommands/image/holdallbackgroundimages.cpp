@@ -42,7 +42,7 @@ HoldAllBackgroundImages::HoldAllBackgroundImages(bool hold, VAbstractPattern *do
         setText(tr("unhold background images"));
     }
 
-    QVector<VBackgroundPatternImage> images = doc->GetBackgroundImages();
+    QVector<VBackgroundPatternImage> const images = doc->GetBackgroundImages();
 
     for (const auto& image : images)
     {

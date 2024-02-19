@@ -296,7 +296,7 @@ void DialogArcWithLength::ShowDialog(bool click)
             auto *scene = qobject_cast<VMainGraphicsScene *>(VAbstractValApplication::VApp()->getCurrentScene());
             SCASSERT(scene != nullptr)
             const QSharedPointer<VPointF> point = data->GeometricObject<VPointF>(GetCenter());
-            QLineF line = QLineF(static_cast<QPointF>(*point), scene->getScenePos());
+            QLineF const line = QLineF(static_cast<QPointF>(*point), scene->getScenePos());
 
             auto Angle = [line]()
             {
@@ -336,7 +336,7 @@ void DialogArcWithLength::ShowDialog(bool click)
             {
                 const qreal r = Visualization::FindLengthFromUser(m_radius, data->DataVariables());
                 const qreal angle1 = Visualization::FindValFromUser(m_f1, data->DataVariables());
-                VArc arc(*point, r, angle1, line.angle());
+                VArc const arc(*point, r, angle1, line.angle());
 
                 SetLength(QString::number(VAbstractValApplication::VApp()->fromPixel(arc.GetLength())));
 
@@ -495,7 +495,7 @@ void DialogArcWithLength::changeEvent(QEvent *event)
 //---------------------------------------------------------------------------------------------------------------------
 void DialogArcWithLength::ValidateAlias()
 {
-    QRegularExpression rx(NameRegExp());
+    QRegularExpression const rx(NameRegExp());
     VArc arc;
     arc.SetAliasSuffix(GetAliasSuffix());
     if (not GetAliasSuffix().isEmpty() &&

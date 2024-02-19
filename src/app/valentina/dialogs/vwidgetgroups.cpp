@@ -70,7 +70,7 @@ void VWidgetGroups::SetGroupVisibility(vidtype id, bool visible) const
     connect(changeGroup, &ChangeGroupVisibility::UpdateGroup, this,
             [this](vidtype id, bool visible)
             {
-                int row = GroupRow(id);
+                int const row = GroupRow(id);
                 if (row == -1)
                 {
                     return;
@@ -97,7 +97,7 @@ void VWidgetGroups::SetMultipleGroupsVisibility(const QVector<vidtype> &groups, 
                 QMap<vidtype, bool>::const_iterator i = groups.constBegin();
                 while (i != groups.constEnd())
                 {
-                    int row = GroupRow(i.key());
+                    int const row = GroupRow(i.key());
                     if (row == -1)
                     {
                         ++i;
@@ -122,7 +122,8 @@ void VWidgetGroups::SetMultipleGroupsVisibility(const QVector<vidtype> &groups, 
 auto VWidgetGroups::FilterGroups(const QMap<quint32, VGroupData> &groups) -> QMap<quint32, VGroupData>
 {
     QMap<quint32, VGroupData> filtered;
-    QSet<QString> filterCategories = ConvertToSet<QString>(VAbstractPattern::FilterGroupTags(ui->lineEditTags->text()));
+    QSet<QString> const filterCategories =
+        ConvertToSet<QString>(VAbstractPattern::FilterGroupTags(ui->lineEditTags->text()));
 
     if (filterCategories.isEmpty())
     {
@@ -133,7 +134,7 @@ auto VWidgetGroups::FilterGroups(const QMap<quint32, VGroupData> &groups) -> QMa
     while (i != groups.constEnd())
     {
         const VGroupData &data = i.value();
-        QSet<QString> groupCategories = ConvertToSet<QString>(data.tags);
+        QSet<QString> const groupCategories = ConvertToSet<QString>(data.tags);
         if (filterCategories.intersects(groupCategories))
         {
             filtered.insert(i.key(), data);
@@ -164,10 +165,10 @@ auto VWidgetGroups::GroupRow(vidtype id) const -> int
 //---------------------------------------------------------------------------------------------------------------------
 void VWidgetGroups::ActionPreferences(quint32 id)
 {
-    QScopedPointer<VContainer> fackeContainer(new VContainer(VAbstractApplication::VApp()->TrVars(),
-                                                             VAbstractValApplication::VApp()->patternUnitsP(),
-                                                             VContainer::UniqueNamespace()));
-    QScopedPointer<DialogGroup> dialog(new DialogGroup(fackeContainer.data(), m_doc, NULL_ID, this));
+    QScopedPointer<VContainer> const fackeContainer(new VContainer(VAbstractApplication::VApp()->TrVars(),
+                                                                   VAbstractValApplication::VApp()->patternUnitsP(),
+                                                                   VContainer::UniqueNamespace()));
+    QScopedPointer<DialogGroup> const dialog(new DialogGroup(fackeContainer.data(), m_doc, NULL_ID, this));
     dialog->SetName(m_doc->GetGroupName(id));
     dialog->SetTags(m_doc->GetGroupTags(id));
     dialog->SetGroupCategories(m_doc->GetGroupCategories());
@@ -194,7 +195,7 @@ void VWidgetGroups::ActionHideAll()
     for (int r = 0; r < ui->tableWidget->rowCount(); ++r)
     {
         QTableWidgetItem *rowItem = ui->tableWidget->item(r, 0);
-        quint32 i = rowItem->data(Qt::UserRole).toUInt();
+        quint32 const i = rowItem->data(Qt::UserRole).toUInt();
         if (m_doc->GetGroupVisibility(i))
         {
             groups.append(i);
@@ -220,7 +221,7 @@ void VWidgetGroups::ActionShowAll()
     for (int r = 0; r < ui->tableWidget->rowCount(); ++r)
     {
         QTableWidgetItem *rowItem = ui->tableWidget->item(r, 0);
-        quint32 i = rowItem->data(Qt::UserRole).toUInt();
+        quint32 const i = rowItem->data(Qt::UserRole).toUInt();
         if (not m_doc->GetGroupVisibility(i))
         {
             groups.append(i);
@@ -286,7 +287,7 @@ void VWidgetGroups::CtxMenu(const QPoint &pos)
         return false;
     };
 
-    QScopedPointer<QMenu> menu(new QMenu());
+    QScopedPointer<QMenu> const menu(new QMenu());
     const QString resource = QStringLiteral("icon");
     QAction *triggerVisibilityMenu =
         m_doc->GetGroupVisibility(id)

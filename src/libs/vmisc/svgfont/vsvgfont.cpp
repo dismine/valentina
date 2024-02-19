@@ -265,7 +265,7 @@ auto VSvgFont::Hash() const -> QByteArray
 //---------------------------------------------------------------------------------------------------------------------
 auto VSvgFont::Hash(const QString &family, SVGFontStyle style, SVGFontWeight weight) -> QByteArray
 {
-    QString combinedString =
+    QString const combinedString =
         family + QString::number(static_cast<int>(style)) + QString::number(static_cast<int>(weight));
 
     QByteArray data;

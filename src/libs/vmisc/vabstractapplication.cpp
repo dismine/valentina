@@ -115,7 +115,7 @@ VAbstractApplication::VAbstractApplication(int &argc, char **argv)
   : QApplication(argc, argv),
     undoStack(new QUndoStack(this))
 {
-    QString rules;
+    QString const rules;
 
 #if defined(V_NO_ASSERT)
     // Ignore SSL-related warnings
@@ -587,7 +587,8 @@ void VAbstractApplication::RepopulateFontDatabase(const QString &path)
 {
     if (m_svgFontDatabase != nullptr)
     {
-        QFuture<void> future = QtConcurrent::run([this, path]() { m_svgFontDatabase->PopulateFontDatabase(path); });
+        QFuture<void> const future =
+            QtConcurrent::run([this, path]() { m_svgFontDatabase->PopulateFontDatabase(path); });
     }
 }
 

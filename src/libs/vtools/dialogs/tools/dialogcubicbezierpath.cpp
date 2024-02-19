@@ -278,7 +278,7 @@ void DialogCubicBezierPath::currentPointChanged(int index)
 //---------------------------------------------------------------------------------------------------------------------
 void DialogCubicBezierPath::ValidateAlias()
 {
-    QRegularExpression rx(NameRegExp());
+    QRegularExpression const rx(NameRegExp());
     VCubicBezierPath tempPath = path;
     tempPath.SetAliasSuffix(ui->lineEditAlias->text());
     if (not ui->lineEditAlias->text().isEmpty() &&

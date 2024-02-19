@@ -175,7 +175,7 @@ auto VPatternRecipe::Measurements() -> QDomElement
 {
     QDomElement measurements = createElement(QStringLiteral("measurements"));
 
-    VContainer data = m_pattern->GetCompleteData();
+    VContainer const data = m_pattern->GetCompleteData();
     QList<QSharedPointer<VMeasurement>> patternMeasurements = data.DataMeasurementsWithSeparators().values();
 
     // Resore order
@@ -208,7 +208,7 @@ auto VPatternRecipe::Measurement(const QSharedPointer<VMeasurement> &m) -> QDomE
     {
         SetAttribute(measurement, QStringLiteral("fullName"), m->GetGuiText());
 
-        QString formula = m->GetFormula();
+        QString const formula = m->GetFormula();
         if (not formula.isEmpty())
         {
             SetAttribute(measurement, QStringLiteral("formula"), m->GetFormula());
@@ -232,7 +232,7 @@ auto VPatternRecipe::Increments() -> QDomElement
 {
     QDomElement increments = createElement(QStringLiteral("increments"));
 
-    VContainer data = m_pattern->GetCompleteData();
+    VContainer const data = m_pattern->GetCompleteData();
     QList<QSharedPointer<VIncrement>> patternIncrements = data.DataIncrementsWithSeparators().values();
 
     // Resore order
@@ -256,7 +256,7 @@ auto VPatternRecipe::PreviewCalculations() -> QDomElement
 {
     QDomElement previewCalculations = createElement(QStringLiteral("previewCalculations"));
 
-    VContainer data = m_pattern->GetCompleteData();
+    VContainer const data = m_pattern->GetCompleteData();
     QList<QSharedPointer<VIncrement>> patternIncrements = data.DataIncrementsWithSeparators().values();
 
     // Resore order
@@ -304,7 +304,7 @@ auto VPatternRecipe::Content() -> QDomElement
     const QDomNodeList draws = m_pattern->documentElement().elementsByTagName(VAbstractPattern::TagDraw);
     for (int i = 0; i < draws.size(); ++i)
     {
-        QDomElement draw = draws.at(i).toElement();
+        QDomElement const draw = draws.at(i).toElement();
         if (draw.isNull())
         {
             throw VExceptionInvalidHistory(tr("Invalid tag %1").arg(VAbstractPattern::TagDraw));
@@ -326,14 +326,14 @@ auto VPatternRecipe::Draft(const QDomElement &draft) -> QDomElement
     const QString draftName = draft.attribute(QStringLiteral("name"));
     SetAttribute(recipeDraft, QStringLiteral("name"), draftName);
 
-    VContainer data = m_pattern->GetCompletePPData(draftName);
+    VContainer const data = m_pattern->GetCompletePPData(draftName);
 
     QVector<VToolRecord> *history = m_pattern->getHistory();
     for (auto &record : *history)
     {
         if (record.getNameDraw() == draftName)
         {
-            QDomElement step = Step(record, data);
+            QDomElement const step = Step(record, data);
             if (not step.isNull())
             {
                 recipeDraft.appendChild(step);
@@ -482,7 +482,7 @@ auto VPatternRecipe::FinalMeasurements() -> QDomElement
     QDomElement recipeFinalMeasurements = createElement(QStringLiteral("finalMeasurements"));
 
     const QVector<VFinalMeasurement> measurements = m_pattern->GetFinalMeasurements();
-    VContainer data = m_pattern->GetCompleteData();
+    VContainer const data = m_pattern->GetCompleteData();
 
     for (const auto &m : measurements)
     {
@@ -501,7 +501,7 @@ auto VPatternRecipe::FinalMeasurement(const VFinalMeasurement &fm, const VContai
     SetAttribute(recipeFinalMeasurement, QStringLiteral("name"), fm.name);
     SetAttribute(recipeFinalMeasurement, QStringLiteral("formula"), fm.formula); // TODO: localize
 
-    QScopedPointer<Calculator> cal(new Calculator());
+    QScopedPointer<Calculator> const cal(new Calculator());
     try
     {
         const qreal result = cal->EvalFormula(data.DataVariables(), fm.formula);
@@ -656,7 +656,7 @@ auto VPatternRecipe::LineIntersect(const VToolRecord &record) -> QDomElement
 auto VPatternRecipe::Spline(const VToolRecord &record) -> QDomElement
 {
     auto *tool = GetPatternTool<VToolSpline>(record.getId());
-    VSpline spl = tool->getSpline();
+    VSpline const spl = tool->getSpline();
 
     QDomElement step = createElement(TagStep);
 
@@ -687,7 +687,7 @@ auto VPatternRecipe::Spline(const VToolRecord &record) -> QDomElement
 auto VPatternRecipe::CubicBezier(const VToolRecord &record) -> QDomElement
 {
     auto *tool = GetPatternTool<VToolCubicBezier>(record.getId());
-    VCubicBezier spl = tool->getSpline();
+    VCubicBezier const spl = tool->getSpline();
 
     QDomElement step = createElement(TagStep);
 
@@ -743,7 +743,7 @@ auto VPatternRecipe::ArcWithLength(const VToolRecord &record) -> QDomElement
 auto VPatternRecipe::SplinePath(const VToolRecord &record) -> QDomElement
 {
     auto *tool = GetPatternTool<VToolSplinePath>(record.getId());
-    VSplinePath spl = tool->getSplinePath();
+    VSplinePath const spl = tool->getSplinePath();
 
     QDomElement step = createElement(TagStep);
 
@@ -751,7 +751,7 @@ auto VPatternRecipe::SplinePath(const VToolRecord &record) -> QDomElement
     SetAttribute(step, AttrLabel, tool->name());
 
     QDomElement nodes = createElement(QStringLiteral("nodes"));
-    QVector<VSplinePoint> path = spl.GetSplinePath();
+    QVector<VSplinePoint> const path = spl.GetSplinePath();
 
     if (path.isEmpty())
     {
@@ -790,14 +790,14 @@ auto VPatternRecipe::SplinePath(const VToolRecord &record) -> QDomElement
 auto VPatternRecipe::CubicBezierPath(const VToolRecord &record) -> QDomElement
 {
     auto *tool = GetPatternTool<VToolCubicBezierPath>(record.getId());
-    VCubicBezierPath spl = tool->getSplinePath();
+    VCubicBezierPath const spl = tool->getSplinePath();
 
     QDomElement step = createElement(TagStep);
 
     ToolAttributes(step, tool);
 
     QDomElement nodes = createElement(QStringLiteral("nodes"));
-    QVector<VSplinePoint> path = spl.GetSplinePath();
+    QVector<VSplinePoint> const path = spl.GetSplinePath();
 
     if (path.isEmpty())
     {
@@ -1210,7 +1210,7 @@ auto VPatternRecipe::GroupOperationSource(VAbstractOperation *tool, quint32 id, 
     SCASSERT(tool)
 
     QDomElement nodes = createElement(QStringLiteral("nodes"));
-    QVector<SourceItem> items = tool->SourceItems();
+    QVector<SourceItem> const items = tool->SourceItems();
 
     if (items.isEmpty())
     {

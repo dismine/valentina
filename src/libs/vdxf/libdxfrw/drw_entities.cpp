@@ -314,7 +314,7 @@ void DRW_Arc::applyExtrusion()
             staangle = M_PI - staangle;
             endangle = M_PI - endangle;
 
-            double temp = staangle;
+            double const temp = staangle;
             staangle = endangle;
             endangle = temp;
         }
@@ -364,7 +364,7 @@ void DRW_Ellipse::applyExtrusion()
     {
         calculateAxis(extPoint);
         extrudePoint(extPoint, &secPoint);
-        double intialparam = staparam;
+        double const intialparam = staparam;
         if (extPoint.z < 0.)
         {
             staparam = M_PIx2 - endparam;
@@ -387,7 +387,7 @@ void DRW_Ellipse::correctAxis()
     {
         if (fabs(endparam - staparam - M_PIx2) < 1.0e-10)
             complete = true;
-        double incX = secPoint.x;
+        double const incX = secPoint.x;
         secPoint.x = -(secPoint.y * ratio);
         secPoint.y = incX * ratio;
         ratio = 1 / ratio;
@@ -423,10 +423,10 @@ void DRW_Ellipse::toPolyline(DRW_Polyline *pol, int parts)
             curAngle = endparam;
             i = parts + 2;
         }
-        double cosCurr = cos(curAngle);
-        double sinCurr = sin(curAngle);
-        double x = basePoint.x + (cosCurr * cosRot * radMajor) - (sinCurr * sinRot * radMinor);
-        double y = basePoint.y + (cosCurr * sinRot * radMajor) + (sinCurr * cosRot * radMinor);
+        double const cosCurr = cos(curAngle);
+        double const sinCurr = sin(curAngle);
+        double const x = basePoint.x + (cosCurr * cosRot * radMajor) - (sinCurr * sinRot * radMinor);
+        double const y = basePoint.y + (cosCurr * sinRot * radMajor) + (sinCurr * cosRot * radMinor);
         pol->addVertex(DRW_Vertex(x, y, 0.0, 0.0));
         curAngle = (++i) * incAngle;
     } while (i < parts);

@@ -300,7 +300,7 @@ void DialogSetupMultisize::ShowFullCircumference()
 //---------------------------------------------------------------------------------------------------------------------
 void DialogSetupMultisize::XDimensionBodyMeasurementChanged()
 {
-    bool checked = ui->checkBoxXDimensionBodyMeasurement->isChecked();
+    bool const checked = ui->checkBoxXDimensionBodyMeasurement->isChecked();
     m_xDimension->SetBodyMeasurement(checked);
 
     InitDimension(ui->doubleSpinBoxXDimensionMinValue, ui->doubleSpinBoxXDimensionMaxValue, ui->comboBoxXDimensionStep,
@@ -322,7 +322,7 @@ void DialogSetupMultisize::XDimensionBodyMeasurementChanged()
 //---------------------------------------------------------------------------------------------------------------------
 void DialogSetupMultisize::YDimensionBodyMeasurementChanged()
 {
-    bool checked = ui->checkBoxYDimensionBodyMeasurement->isChecked();
+    bool const checked = ui->checkBoxYDimensionBodyMeasurement->isChecked();
     m_yDimension->SetBodyMeasurement(checked);
 
     InitDimension(ui->doubleSpinBoxYDimensionMinValue, ui->doubleSpinBoxYDimensionMaxValue, ui->comboBoxYDimensionStep,
@@ -344,7 +344,7 @@ void DialogSetupMultisize::YDimensionBodyMeasurementChanged()
 //---------------------------------------------------------------------------------------------------------------------
 void DialogSetupMultisize::WDimensionBodyMeasurementChanged()
 {
-    bool checked = ui->checkBoxWDimensionBodyMeasurement->isChecked();
+    bool const checked = ui->checkBoxWDimensionBodyMeasurement->isChecked();
     m_wDimension->SetBodyMeasurement(checked);
 
     InitDimension(ui->doubleSpinBoxWDimensionMinValue, ui->doubleSpinBoxWDimensionMaxValue, ui->comboBoxWDimensionStep,
@@ -366,7 +366,7 @@ void DialogSetupMultisize::WDimensionBodyMeasurementChanged()
 //---------------------------------------------------------------------------------------------------------------------
 void DialogSetupMultisize::ZDimensionBodyMeasurementChanged()
 {
-    bool checked = ui->checkBoxZDimensionBodyMeasurement->isChecked();
+    bool const checked = ui->checkBoxZDimensionBodyMeasurement->isChecked();
     m_zDimension->SetBodyMeasurement(checked);
 
     InitDimension(ui->doubleSpinBoxZDimensionMinValue, ui->doubleSpinBoxZDimensionMaxValue, ui->comboBoxZDimensionStep,

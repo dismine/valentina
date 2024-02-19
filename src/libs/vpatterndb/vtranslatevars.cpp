@@ -759,7 +759,7 @@ auto VTranslateVars::FormulaToUser(const QString &formula, bool osSeparator) con
     QMap<vsizetype, QString> numbers;
     try
     {
-        QScopedPointer<qmu::QmuTokenParser> cal(new qmu::QmuTokenParser(formula, false, false)); // Eval formula
+        QScopedPointer<qmu::QmuTokenParser> const cal(new qmu::QmuTokenParser(formula, false, false)); // Eval formula
         tokens = cal->GetTokens();   // Tokens (variables, measurements)
         numbers = cal->GetNumbers(); // All numbers in expression for changing decimal separator
     }

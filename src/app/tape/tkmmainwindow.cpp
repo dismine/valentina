@@ -384,7 +384,7 @@ void TKMMainWindow::changeEvent(QEvent *event)
 
         InitMeasurementDiagramList();
 
-        int i = ui->comboBoxDiagram->findData(current);
+        int const i = ui->comboBoxDiagram->findData(current);
         if (i != -1)
         {
             ui->comboBoxDiagram->setCurrentIndex(i);
@@ -453,7 +453,7 @@ void TKMMainWindow::ExportToCSVData(const QString &fileName, bool withHeader, in
 {
     QxtCsvModel csv;
 
-    int columns = 5;
+    int const columns = 5;
     int colCount = 0;
     for (int column = 0; column <= columns; ++column)
     {
@@ -524,7 +524,7 @@ void TKMMainWindow::OpenKnownMeasurements()
 {
     const QString filter = tr("Known measurements") + " (*.vkm);;"_L1 + tr("All files") + " (*.*)"_L1;
     // Use standard path to known measurements
-    QString pathTo = MApplication::VApp()->TapeSettings()->GetPathKnownMeasurements();
+    QString const pathTo = MApplication::VApp()->TapeSettings()->GetPathKnownMeasurements();
 
     Open(pathTo, filter);
 }
@@ -576,17 +576,17 @@ auto TKMMainWindow::FileSave() -> bool
 //---------------------------------------------------------------------------------------------------------------------
 auto TKMMainWindow::FileSaveAs() -> bool
 {
-    QString filters = tr("Known measurements") + QStringLiteral(" (*.vkm)");
+    QString const filters = tr("Known measurements") + QStringLiteral(" (*.vkm)");
 
     QString fName = tr("known measurements");
-    QString suffix = QStringLiteral("vkm");
+    QString const suffix = QStringLiteral("vkm");
 
     fName += '.'_L1 + suffix;
 
     VTapeSettings *settings = MApplication::VApp()->TapeSettings();
     const QString dir = settings->GetPathKnownMeasurements();
 
-    QDir directory(dir);
+    QDir const directory(dir);
     if (not directory.exists())
     {
         directory.mkpath(QChar('.'));
@@ -605,7 +605,7 @@ auto TKMMainWindow::FileSaveAs() -> bool
         return false;
     }
 
-    QFileInfo f(fileName);
+    QFileInfo const f(fileName);
     if (f.suffix().isEmpty() && f.suffix() != suffix)
     {
         fileName += '.'_L1 + suffix;
@@ -614,7 +614,7 @@ auto TKMMainWindow::FileSaveAs() -> bool
     if (QFileInfo::exists(fileName) && m_curFile != fileName)
     {
         // Temporary try to lock the file before saving
-        VLockGuard<char> tmp(fileName);
+        VLockGuard<char> const tmp(fileName);
         if (not tmp.IsLocked())
         {
             qCCritical(kmMainWindow, "%s",
@@ -630,7 +630,7 @@ auto TKMMainWindow::FileSaveAs() -> bool
     m_mIsReadOnly = false;
 
     QString error;
-    bool result = SaveKnownMeasurements(fileName, error);
+    bool const result = SaveKnownMeasurements(fileName, error);
     if (not result)
     {
         QMessageBox messageBox;
@@ -710,7 +710,7 @@ void TKMMainWindow::ImportDataFromCSV()
         return;
     }
 
-    QFileInfo f(fileName);
+    QFileInfo const f(fileName);
     if (f.suffix().isEmpty() && f.suffix() != suffix)
     {
         fileName += '.'_L1 + suffix;
@@ -735,8 +735,8 @@ void TKMMainWindow::ImportDataFromCSV()
 
         if (columns->exec() == QDialog::Accepted)
         {
-            QxtCsvModel csv(fileName, nullptr, dialog.IsWithHeader(), dialog.GetSeparator(),
-                            VTextCodec::codecForMib(dialog.GetSelectedMib()));
+            QxtCsvModel const csv(fileName, nullptr, dialog.IsWithHeader(), dialog.GetSeparator(),
+                                  VTextCodec::codecForMib(dialog.GetSelectedMib()));
             const QVector<int> map = columns->ColumnsMap();
             ImportKnownMeasurements(csv, map, dialog.IsWithHeader());
         }
@@ -910,7 +910,7 @@ void TKMMainWindow::AddImage()
             settings->SetPathCustomImage(QFileInfo(filePath).absolutePath());
         }
 
-        VPatternImage image = VPatternImage::FromFile(filePath);
+        VPatternImage const image = VPatternImage::FromFile(filePath);
 
         if (not image.IsValid())
         {
@@ -973,9 +973,9 @@ void TKMMainWindow::SaveImage()
         return;
     }
 
-    QMap<QUuid, VPatternImage> images = m_known.Images();
+    QMap<QUuid, VPatternImage> const images = m_known.Images();
 
-    QUuid id = item->data(Qt::UserRole).toUuid();
+    QUuid const id = item->data(Qt::UserRole).toUuid();
     if (!images.contains(id))
     {
         ui->toolButtonSaveImage->setDisabled(true);
@@ -992,7 +992,7 @@ void TKMMainWindow::SaveImage()
 
     VTapeSettings *settings = MApplication::VApp()->TapeSettings();
 
-    QMimeType mime = image.MimeTypeFromData();
+    QMimeType const mime = image.MimeTypeFromData();
 
     QString title = image.Title();
     if (title.isEmpty())
@@ -1001,15 +1001,15 @@ void TKMMainWindow::SaveImage()
     }
     QString path = settings->GetPathCustomImage() + QDir::separator() + title;
 
-    QStringList suffixes = mime.suffixes();
+    QStringList const suffixes = mime.suffixes();
     if (not suffixes.isEmpty())
     {
         path += '.'_L1 + suffixes.at(0);
     }
 
-    QString filter = mime.filterString();
-    QString filename = QFileDialog::getSaveFileName(this, tr("Save Image"), path, filter, nullptr,
-                                                    VAbstractApplication::VApp()->NativeFileDialog());
+    QString const filter = mime.filterString();
+    QString const filename = QFileDialog::getSaveFileName(this, tr("Save Image"), path, filter, nullptr,
+                                                          VAbstractApplication::VApp()->NativeFileDialog());
     if (not filename.isEmpty())
     {
         if (QFileInfo::exists(filename))
@@ -1039,9 +1039,9 @@ void TKMMainWindow::ShowImage()
         return;
     }
 
-    QMap<QUuid, VPatternImage> images = m_known.Images();
+    QMap<QUuid, VPatternImage> const images = m_known.Images();
 
-    QUuid id = item->data(Qt::UserRole).toUuid();
+    QUuid const id = item->data(Qt::UserRole).toUuid();
     if (!images.contains(id))
     {
         return;
@@ -1055,10 +1055,10 @@ void TKMMainWindow::ShowImage()
         return;
     }
 
-    QMimeType mime = image.MimeTypeFromData();
+    QMimeType const mime = image.MimeTypeFromData();
     QString name = QDir::tempPath() + QDir::separator() + "image.XXXXXX"_L1;
 
-    QStringList suffixes = mime.suffixes();
+    QStringList const suffixes = mime.suffixes();
     if (not suffixes.isEmpty())
     {
         name += '.'_L1 + suffixes.at(0);
@@ -1130,7 +1130,7 @@ void TKMMainWindow::ShowMData()
     const QTableWidgetItem *nameField = ui->tableWidget->item(ui->tableWidget->currentRow(), ColumnName); // name
     SCASSERT(nameField != nullptr)
 
-    VKnownMeasurement m = m_known.Measurement(nameField->data(Qt::UserRole).toString());
+    VKnownMeasurement const m = m_known.Measurement(nameField->data(Qt::UserRole).toString());
 
     ShowMDiagram(m_known.Image(m.diagram));
 
@@ -1185,8 +1185,8 @@ void TKMMainWindow::ShowImageData()
     ImageFields(true);
 
     const QListWidgetItem *activeImage = ui->listWidget->item(ui->listWidget->currentRow());
-    QUuid imageId = activeImage->data(Qt::UserRole).toUuid();
-    VPatternImage image = m_known.Image(imageId);
+    QUuid const imageId = activeImage->data(Qt::UserRole).toUuid();
+    VPatternImage const image = m_known.Image(imageId);
 
     // Don't block all signal for QLineEdit. Need for correct handle with clear button.
     disconnect(ui->lineEditImageTitle, &QLineEdit::editingFinished, this, &TKMMainWindow::SaveImageTitle);
@@ -1243,7 +1243,7 @@ void TKMMainWindow::SaveMName()
 
     QString newName = ui->lineEditName->text().isEmpty() ? GenerateMeasurementName() : ui->lineEditName->text();
 
-    QHash<QString, VKnownMeasurement> m = m_known.Measurements();
+    QHash<QString, VKnownMeasurement> const m = m_known.Measurements();
     if (m.contains(newName))
     {
         qint32 num = 2;
@@ -1279,7 +1279,7 @@ void TKMMainWindow::SaveMFormula()
 
     const QTableWidgetItem *nameField = ui->tableWidget->item(row, ColumnName);
 
-    QString formula = ui->plainTextEditFormula->toPlainText();
+    QString const formula = ui->plainTextEditFormula->toPlainText();
     m_m->SetMFormula(nameField->data(Qt::UserRole).toString(), formula);
 
     MeasurementsWereSaved(false);
@@ -1428,7 +1428,7 @@ void TKMMainWindow::SaveMDiagram()
 void TKMMainWindow::SaveImageTitle()
 {
     auto *item = ui->listWidget->currentItem();
-    int row = ui->listWidget->currentRow();
+    int const row = ui->listWidget->currentRow();
 
     if (item == nullptr)
     {
@@ -1453,7 +1453,7 @@ void TKMMainWindow::SaveImageTitle()
 void TKMMainWindow::SaveImageSizeScale()
 {
     auto *item = ui->listWidget->currentItem();
-    int row = ui->listWidget->currentRow();
+    int const row = ui->listWidget->currentRow();
 
     if (item == nullptr)
     {
@@ -1507,7 +1507,7 @@ void TKMMainWindow::AskDefaultSettings()
         dialog.setWindowModality(Qt::WindowModal);
         if (dialog.exec() == QDialog::Accepted)
         {
-            QString locale = dialog.Locale();
+            QString const locale = dialog.Locale();
             settings->SetLocale(locale);
             VAbstractApplication::VApp()->LoadTranslation(locale);
         }
@@ -1923,7 +1923,7 @@ auto TKMMainWindow::MaybeSave() -> bool
         return true; // Don't ask if file was created without modifications.
     }
 
-    QScopedPointer<QMessageBox> messageBox(
+    QScopedPointer<QMessageBox> const messageBox(
         new QMessageBox(QMessageBox::Warning, tr("Unsaved changes"),
                         tr("Measurements have been modified. Do you want to save your changes?"),
                         QMessageBox::Yes | QMessageBox::No | QMessageBox::Cancel, this, Qt::Sheet));
@@ -2042,17 +2042,17 @@ void TKMMainWindow::WriteSettings()
 //---------------------------------------------------------------------------------------------------------------------
 void TKMMainWindow::InitIcons()
 {
-    QString iconResource = QStringLiteral("icon");
+    QString const iconResource = QStringLiteral("icon");
     ui->toolButtonAddImage->setIcon(VTheme::GetIconResource(iconResource, QStringLiteral("16x16/insert-image.png")));
     ui->toolButtonRemoveImage->setIcon(VTheme::GetIconResource(iconResource, QStringLiteral("16x16/remove-image.png")));
 
-    int index = ui->tabWidget->indexOf(ui->tabImages);
+    int const index = ui->tabWidget->indexOf(ui->tabImages);
     if (index != -1)
     {
         ui->tabWidget->setTabIcon(index, VTheme::GetIconResource(iconResource, QStringLiteral("16x16/viewimage.png")));
     }
 
-    QString tapeIconResource = QStringLiteral("tapeicon");
+    QString const tapeIconResource = QStringLiteral("tapeicon");
     ui->actionMeasurementDiagram->setIcon(
         VTheme::GetIconResource(tapeIconResource, QStringLiteral("24x24/mannequin.png")));
 }
@@ -2060,7 +2060,7 @@ void TKMMainWindow::InitIcons()
 //---------------------------------------------------------------------------------------------------------------------
 void TKMMainWindow::InitSearchHistory()
 {
-    QStringList searchHistory = MApplication::VApp()->TapeSettings()->GetTapeSearchHistory();
+    QStringList const searchHistory = MApplication::VApp()->TapeSettings()->GetTapeSearchHistory();
     m_searchHistory->clear();
 
     if (searchHistory.isEmpty())
@@ -2080,7 +2080,7 @@ void TKMMainWindow::InitSearchHistory()
                     auto *action = qobject_cast<QAction *>(sender());
                     if (action != nullptr)
                     {
-                        QString term = action->data().toString();
+                        QString const term = action->data().toString();
                         ui->lineEditFind->setText(term);
                         m_search->Find(term);
                         ui->lineEditFind->setFocus();
@@ -2093,7 +2093,7 @@ void TKMMainWindow::InitSearchHistory()
 void TKMMainWindow::SaveSearchRequest()
 {
     QStringList searchHistory = MApplication::VApp()->TapeSettings()->GetKMSearchHistory();
-    QString term = ui->lineEditFind->text();
+    QString const term = ui->lineEditFind->text();
     if (term.isEmpty())
     {
         return;
@@ -2120,7 +2120,7 @@ void TKMMainWindow::UpdateSearchControlsTooltips()
         }
         else if (m_serachButtonTooltips.contains(button))
         {
-            QString tooltip = m_serachButtonTooltips.value(button);
+            QString const tooltip = m_serachButtonTooltips.value(button);
             button->setToolTip(tooltip.arg(button->shortcut().toString(QKeySequence::NativeText)));
         }
     };
@@ -2220,7 +2220,7 @@ void TKMMainWindow::RefreshImages()
 {
     QGuiApplication::setOverrideCursor(QCursor(Qt::WaitCursor));
 
-    int row = ui->listWidget->currentRow();
+    int const row = ui->listWidget->currentRow();
 
     ui->listWidget->blockSignals(true);
     ui->listWidget->clear();
@@ -2229,7 +2229,7 @@ void TKMMainWindow::RefreshImages()
     {
         m_known = m_m->KnownMeasurements();
     }
-    QMap<QUuid, VPatternImage> images = m_known.Images();
+    QMap<QUuid, VPatternImage> const images = m_known.Images();
 
     int index = 1;
     for (auto i = images.cbegin(), end = images.cend(); i != end; ++i)
@@ -2244,13 +2244,14 @@ void TKMMainWindow::RefreshImages()
 
         if (i.value().IsValid())
         {
-            QSize size = i.value().Size();
-            QSize targetSize = ui->listWidget->iconSize();
+            QSize const size = i.value().Size();
+            QSize const targetSize = ui->listWidget->iconSize();
 
-            double scalingFactorWidth = static_cast<double>(targetSize.width()) / size.width();
-            double scalingFactorHeight = static_cast<double>(targetSize.height()) / size.height();
+            double const scalingFactorWidth = static_cast<double>(targetSize.width()) / size.width();
+            double const scalingFactorHeight = static_cast<double>(targetSize.height()) / size.height();
 
-            int newWidth, newHeight;
+            int newWidth;
+            int newHeight;
 
             if (scalingFactorWidth < scalingFactorHeight)
             {
@@ -2267,11 +2268,11 @@ void TKMMainWindow::RefreshImages()
             background.fill(Qt::transparent);
 
             QPainter painter(&background);
-            QPixmap sourcePixmap = i.value().GetPixmap(newWidth, newHeight);
+            QPixmap const sourcePixmap = i.value().GetPixmap(newWidth, newHeight);
 
             // Calculate the position to center the source pixmap in the transparent pixmap
-            int x = (background.width() - sourcePixmap.width()) / 2;
-            int y = background.height() - sourcePixmap.height();
+            int const x = (background.width() - sourcePixmap.width()) / 2;
+            int const y = background.height() - sourcePixmap.height();
 
             painter.drawPixmap(x, y, sourcePixmap);
             painter.end();
@@ -2282,7 +2283,7 @@ void TKMMainWindow::RefreshImages()
         {
             QImageReader imageReader(QStringLiteral("://icon/svg/broken_path.svg"));
             imageReader.setScaledSize(ui->listWidget->iconSize());
-            QImage image = imageReader.read();
+            QImage const image = imageReader.read();
             item->setIcon(QPixmap::fromImage(image));
         }
 
@@ -2425,7 +2426,7 @@ void TKMMainWindow::ImageFields(bool enabled)
 //---------------------------------------------------------------------------------------------------------------------
 auto TKMMainWindow::GenerateMeasurementName() const -> QString
 {
-    QHash<QString, VKnownMeasurement> m = m_known.Measurements();
+    QHash<QString, VKnownMeasurement> const m = m_known.Measurements();
     qint32 num = 1;
     QString name;
     do
@@ -2452,7 +2453,7 @@ void TKMMainWindow::InitMeasurementUnits()
     ui->comboBoxMUnits->addItem(tr("Length units"), QVariant(static_cast<int>(MUnits::Table)));
     ui->comboBoxMUnits->addItem(tr("Degrees"), QVariant(static_cast<int>(MUnits::Degrees)));
 
-    int i = ui->comboBoxMUnits->findData(current);
+    int const i = ui->comboBoxMUnits->findData(current);
     if (i != -1)
     {
         ui->comboBoxMUnits->setCurrentIndex(i);
@@ -2466,7 +2467,7 @@ void TKMMainWindow::InitMeasurementDiagramList()
 {
     ui->comboBoxDiagram->clear();
 
-    QMap<QUuid, VPatternImage> images = m_known.Images();
+    QMap<QUuid, VPatternImage> const images = m_known.Images();
 
     ui->comboBoxDiagram->addItem(tr("None"), QUuid());
 
@@ -2521,7 +2522,7 @@ auto TKMMainWindow::CheckMName(const QString &name, const QSet<QString> &importe
         throw VException(tr("Imported file must not contain the same name twice."));
     }
 
-    QRegularExpression rx(NameRegExp(VariableRegex::KnownMeasurement));
+    QRegularExpression const rx(NameRegExp(VariableRegex::KnownMeasurement));
     if (not rx.match(name).hasMatch())
     {
         throw VException(tr("Measurement '%1' doesn't match regex pattern.").arg(name));

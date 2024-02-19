@@ -105,10 +105,10 @@ VPMainGraphicsView::VPMainGraphicsView(const VPLayoutPtr &layout, QWidget *paren
 //---------------------------------------------------------------------------------------------------------------------
 void VPMainGraphicsView::RefreshLayout()
 {
-    VPLayoutPtr layout = m_layout.toStrongRef();
+    VPLayoutPtr const layout = m_layout.toStrongRef();
     if (not layout.isNull())
     {
-        VPSheetPtr sheet = layout->GetFocusedSheet();
+        VPSheetPtr const sheet = layout->GetFocusedSheet();
         if (not sheet.isNull())
         {
             sheet->SceneData()->RefreshLayout();
@@ -119,10 +119,10 @@ void VPMainGraphicsView::RefreshLayout()
 //---------------------------------------------------------------------------------------------------------------------
 void VPMainGraphicsView::RefreshPieces()
 {
-    VPLayoutPtr layout = m_layout.toStrongRef();
+    VPLayoutPtr const layout = m_layout.toStrongRef();
     if (not layout.isNull())
     {
-        VPSheetPtr sheet = layout->GetFocusedSheet();
+        VPSheetPtr const sheet = layout->GetFocusedSheet();
         if (not sheet.isNull())
         {
             sheet->SceneData()->RefreshPieces();
@@ -137,7 +137,7 @@ void VPMainGraphicsView::dragEnterEvent(QDragEnterEvent *event)
 
     if (mime->hasFormat(VPMimeDataPiece::mineFormatPiecePtr))
     {
-        VPLayoutPtr layout = m_layout.toStrongRef();
+        VPLayoutPtr const layout = m_layout.toStrongRef();
         if (layout.isNull())
         {
             return;
@@ -159,7 +159,7 @@ void VPMainGraphicsView::dragMoveEvent(QDragMoveEvent *event)
 
     if (mime->hasFormat(VPMimeDataPiece::mineFormatPiecePtr))
     {
-        VPLayoutPtr layout = m_layout.toStrongRef();
+        VPLayoutPtr const layout = m_layout.toStrongRef();
         if (layout.isNull())
         {
             return;
@@ -188,7 +188,7 @@ void VPMainGraphicsView::dropEvent(QDropEvent *event)
 
     if (mime->hasFormat(VPMimeDataPiece::mineFormatPiecePtr))
     {
-        VPLayoutPtr layout = m_layout.toStrongRef();
+        VPLayoutPtr const layout = m_layout.toStrongRef();
         if (layout.isNull())
         {
             return;
@@ -201,7 +201,7 @@ void VPMainGraphicsView::dropEvent(QDropEvent *event)
             return;
         }
 
-        VPPiecePtr piece = mimePiece->GetPiecePtr();
+        VPPiecePtr const piece = mimePiece->GetPiecePtr();
         if (not piece.isNull())
         {
             qCDebug(pMainGraphicsView(), "element dropped, %s", qUtf8Printable(piece->GetName()));
@@ -308,13 +308,13 @@ void VPMainGraphicsView::keyReleaseEvent(QKeyEvent *event)
     {
         if (not event->isAutoRepeat())
         {
-            VPLayoutPtr layout = m_layout.toStrongRef();
+            VPLayoutPtr const layout = m_layout.toStrongRef();
             if (layout.isNull())
             {
                 return;
             }
 
-            VPSheetPtr sheet = layout->GetFocusedSheet();
+            VPSheetPtr const sheet = layout->GetFocusedSheet();
             if (not sheet.isNull())
             {
                 sheet->SceneData()->RotationControls()->SetIgnorePieceTransformation(false);
@@ -338,13 +338,13 @@ void VPMainGraphicsView::contextMenuEvent(QContextMenuEvent *event)
         return;
     }
 
-    VPLayoutPtr layout = m_layout.toStrongRef();
+    VPLayoutPtr const layout = m_layout.toStrongRef();
     if (layout.isNull())
     {
         return;
     }
 
-    VPSheetPtr sheet = layout->GetFocusedSheet();
+    VPSheetPtr const sheet = layout->GetFocusedSheet();
 
     QMenu menu;
 
@@ -369,13 +369,13 @@ void VPMainGraphicsView::contextMenuEvent(QContextMenuEvent *event)
 //---------------------------------------------------------------------------------------------------------------------
 void VPMainGraphicsView::RestoreOrigin() const
 {
-    VPLayoutPtr layout = m_layout.toStrongRef();
+    VPLayoutPtr const layout = m_layout.toStrongRef();
     if (layout.isNull())
     {
         return;
     }
 
-    VPSheetPtr sheet = layout->GetFocusedSheet();
+    VPSheetPtr const sheet = layout->GetFocusedSheet();
     if (not sheet.isNull())
     {
         VPTransformationOrigon origin = sheet->TransformationOrigin();
@@ -384,7 +384,7 @@ void VPMainGraphicsView::RestoreOrigin() const
             origin.custom = false;
 
             QRectF boundingRect;
-            QList<VPPiecePtr> selectedPieces = sheet->GetSelectedPieces();
+            QList<VPPiecePtr> const selectedPieces = sheet->GetSelectedPieces();
             for (const auto &piece : selectedPieces)
             {
                 if (piece->IsSelected())
@@ -409,13 +409,13 @@ void VPMainGraphicsView::on_SceneMouseMove(const QPointF &scenePos)
 //---------------------------------------------------------------------------------------------------------------------
 void VPMainGraphicsView::RotatePiecesByAngle(qreal angle)
 {
-    VPLayoutPtr layout = m_layout.toStrongRef();
+    VPLayoutPtr const layout = m_layout.toStrongRef();
     if (layout.isNull())
     {
         return;
     }
 
-    VPSheetPtr sheet = layout->GetFocusedSheet();
+    VPSheetPtr const sheet = layout->GetFocusedSheet();
     if (sheet.isNull())
     {
         return;
@@ -424,15 +424,15 @@ void VPMainGraphicsView::RotatePiecesByAngle(qreal angle)
     sheet->SceneData()->RotationControls()->on_HideHandles(true);
     sheet->SceneData()->RotationControls()->SetIgnorePieceTransformation(true);
 
-    VPTransformationOrigon origin = sheet->TransformationOrigin();
+    VPTransformationOrigon const origin = sheet->TransformationOrigin();
 
     auto PreparePieces = [this]()
     {
         QList<VPPiecePtr> pieces;
-        VPLayoutPtr layout = m_layout.toStrongRef();
+        VPLayoutPtr const layout = m_layout.toStrongRef();
         if (not layout.isNull())
         {
-            VPSheetPtr sheet = layout->GetFocusedSheet();
+            VPSheetPtr const sheet = layout->GetFocusedSheet();
             if (not sheet.isNull())
             {
                 pieces = sheet->GetSelectedPieces();
@@ -458,7 +458,7 @@ void VPMainGraphicsView::RotatePiecesByAngle(qreal angle)
         m_rotationSum = angle;
     }
 
-    QList<VPPiecePtr> pieces = PreparePieces();
+    QList<VPPiecePtr> const pieces = PreparePieces();
 
     if (pieces.size() == 1)
     {
@@ -477,13 +477,13 @@ void VPMainGraphicsView::RotatePiecesByAngle(qreal angle)
 //---------------------------------------------------------------------------------------------------------------------
 void VPMainGraphicsView::TranslatePiecesOn(qreal dx, qreal dy)
 {
-    VPLayoutPtr layout = m_layout.toStrongRef();
+    VPLayoutPtr const layout = m_layout.toStrongRef();
     if (layout.isNull())
     {
         return;
     }
 
-    VPSheetPtr sheet = layout->GetFocusedSheet();
+    VPSheetPtr const sheet = layout->GetFocusedSheet();
     if (sheet.isNull())
     {
         return;
@@ -496,7 +496,7 @@ void VPMainGraphicsView::TranslatePiecesOn(qreal dx, qreal dy)
         return;
     }
 
-    VPPiecePtr piece = graphicsPieces.constFirst()->GetPiece();
+    VPPiecePtr const piece = graphicsPieces.constFirst()->GetPiece();
     if (piece.isNull())
     {
         return;
@@ -505,10 +505,10 @@ void VPMainGraphicsView::TranslatePiecesOn(qreal dx, qreal dy)
     auto PreparePieces = [this]()
     {
         QList<VPPiecePtr> pieces;
-        VPLayoutPtr layout = m_layout.toStrongRef();
+        VPLayoutPtr const layout = m_layout.toStrongRef();
         if (not layout.isNull())
         {
-            VPSheetPtr sheet = layout->GetFocusedSheet();
+            VPSheetPtr const sheet = layout->GetFocusedSheet();
             if (not sheet.isNull())
             {
                 pieces = sheet->GetSelectedPieces();
@@ -518,7 +518,7 @@ void VPMainGraphicsView::TranslatePiecesOn(qreal dx, qreal dy)
         return pieces;
     };
 
-    QList<VPPiecePtr> pieces = PreparePieces();
+    QList<VPPiecePtr> const pieces = PreparePieces();
     if (pieces.size() == 1)
     {
         const VPPiecePtr &p = pieces.constFirst();
@@ -562,7 +562,7 @@ void VPMainGraphicsView::SwitchScene(const VPSheetPtr &sheet)
 {
     if (not sheet.isNull())
     {
-        QSharedPointer<VMainGraphicsScene> scene = sheet->SceneData()->Scene();
+        QSharedPointer<VMainGraphicsScene> const scene = sheet->SceneData()->Scene();
         setScene(scene.data());
         connect(scene.data(), &VMainGraphicsScene::mouseMove, this, &VPMainGraphicsView::on_SceneMouseMove,
                 Qt::UniqueConnection);
@@ -572,19 +572,19 @@ void VPMainGraphicsView::SwitchScene(const VPSheetPtr &sheet)
 //---------------------------------------------------------------------------------------------------------------------
 void VPMainGraphicsView::ClearSelection()
 {
-    VPLayoutPtr layout = m_layout.toStrongRef();
+    VPLayoutPtr const layout = m_layout.toStrongRef();
     if (layout.isNull())
     {
         return;
     }
 
-    VPSheetPtr sheet = layout->GetFocusedSheet();
+    VPSheetPtr const sheet = layout->GetFocusedSheet();
     if (sheet.isNull())
     {
         return;
     }
 
-    QList<VPPiecePtr> pieces = sheet->GetSelectedPieces();
+    QList<VPPiecePtr> const pieces = sheet->GetSelectedPieces();
     for (const auto &piece : pieces)
     {
         piece->SetSelected(false);
@@ -595,25 +595,25 @@ void VPMainGraphicsView::ClearSelection()
 //---------------------------------------------------------------------------------------------------------------------
 void VPMainGraphicsView::ZValueMove(int move)
 {
-    VPLayoutPtr layout = m_layout.toStrongRef();
+    VPLayoutPtr const layout = m_layout.toStrongRef();
     if (layout.isNull())
     {
         return;
     }
 
-    VPSheetPtr sheet = layout->GetFocusedSheet();
+    VPSheetPtr const sheet = layout->GetFocusedSheet();
     if (sheet.isNull())
     {
         return;
     }
 
-    QList<VPPiecePtr> selectedPieces = sheet->GetSelectedPieces();
+    QList<VPPiecePtr> const selectedPieces = sheet->GetSelectedPieces();
     if (selectedPieces.isEmpty())
     {
         return;
     }
 
-    QList<VPPiecePtr> allPieces = sheet->GetPieces();
+    QList<VPPiecePtr> const allPieces = sheet->GetPieces();
     if (allPieces.isEmpty() || (allPieces.size() == selectedPieces.size()))
     {
         return;
@@ -634,13 +634,13 @@ void VPMainGraphicsView::ZValueMove(int move)
 //---------------------------------------------------------------------------------------------------------------------
 void VPMainGraphicsView::RemovePiece() const
 {
-    VPLayoutPtr layout = m_layout.toStrongRef();
+    VPLayoutPtr const layout = m_layout.toStrongRef();
     if (layout.isNull())
     {
         return;
     }
 
-    VPSheetPtr sheet = layout->GetFocusedSheet();
+    VPSheetPtr const sheet = layout->GetFocusedSheet();
     if (sheet.isNull())
     {
         return;
@@ -649,13 +649,13 @@ void VPMainGraphicsView::RemovePiece() const
     const QList<VPGraphicsPiece *> &graphicsPieces = sheet->SceneData()->GraphicsPieces();
     for (auto *graphicsPiece : graphicsPieces)
     {
-        VPPiecePtr piece = graphicsPiece->GetPiece();
+        VPPiecePtr const piece = graphicsPiece->GetPiece();
 
         if (not piece.isNull() && piece->IsSelected())
         {
             piece->SetSelected(false);
 
-            VPLayoutPtr layout = m_layout.toStrongRef();
+            VPLayoutPtr const layout = m_layout.toStrongRef();
             if (not layout.isNull())
             {
                 emit layout->PieceSelectionChanged(piece);
@@ -672,13 +672,13 @@ void VPMainGraphicsView::MovePiece(QKeyEvent *event)
 {
     if (not event->isAutoRepeat())
     {
-        VPLayoutPtr layout = m_layout.toStrongRef();
+        VPLayoutPtr const layout = m_layout.toStrongRef();
         if (layout.isNull())
         {
             return;
         }
 
-        VPSheetPtr sheet = layout->GetFocusedSheet();
+        VPSheetPtr const sheet = layout->GetFocusedSheet();
         if (sheet.isNull())
         {
             return;
@@ -692,7 +692,7 @@ void VPMainGraphicsView::MovePiece(QKeyEvent *event)
                 auto PreparePieces = [layout]()
                 {
                     QList<VPPiecePtr> pieces;
-                    VPSheetPtr sheet = layout->GetFocusedSheet();
+                    VPSheetPtr const sheet = layout->GetFocusedSheet();
                     if (not sheet.isNull())
                     {
                         pieces = sheet->GetSelectedPieces();
@@ -701,7 +701,7 @@ void VPMainGraphicsView::MovePiece(QKeyEvent *event)
                     return pieces;
                 };
 
-                QList<VPPiecePtr> pieces = PreparePieces();
+                QList<VPPiecePtr> const pieces = PreparePieces();
                 if (pieces.size() == 1)
                 {
                     const VPPiecePtr &p = pieces.constFirst();
@@ -726,13 +726,13 @@ void VPMainGraphicsView::MovePiece(QKeyEvent *event)
 //---------------------------------------------------------------------------------------------------------------------
 void VPMainGraphicsView::on_PieceSheetChanged(const VPPiecePtr &piece)
 {
-    VPLayoutPtr layout = m_layout.toStrongRef();
+    VPLayoutPtr const layout = m_layout.toStrongRef();
     if (layout.isNull())
     {
         return;
     }
 
-    VPSheetPtr sheet = layout->GetFocusedSheet();
+    VPSheetPtr const sheet = layout->GetFocusedSheet();
     if (sheet.isNull())
     {
         return;

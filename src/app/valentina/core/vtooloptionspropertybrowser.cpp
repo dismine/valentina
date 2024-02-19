@@ -807,10 +807,10 @@ void VToolOptionsPropertyBrowser::AddPropertyApproximationScale(const QString &p
 //---------------------------------------------------------------------------------------------------------------------
 void VToolOptionsPropertyBrowser::AddPropertyOpacity(const QString &propertyName, int opacity)
 {
-    QMap<QString, QVariant> settings{{QStringLiteral("Min"), 0},
-                                     {QStringLiteral("Max"), 100},
-                                     {QStringLiteral("Step"), 1},
-                                     {QStringLiteral("Suffix"), QChar('%')}};
+    QMap<QString, QVariant> const settings{{QStringLiteral("Min"), 0},
+                                           {QStringLiteral("Max"), 100},
+                                           {QStringLiteral("Step"), 1},
+                                           {QStringLiteral("Suffix"), QChar('%')}};
 
     auto *opacityProperty = new VPE::VIntegerProperty(propertyName, settings);
     opacityProperty->setValue(opacity);
@@ -822,7 +822,7 @@ template <class Tool> void VToolOptionsPropertyBrowser::SetName(VPE::VProperty *
 {
     if (auto *i = qgraphicsitem_cast<Tool *>(m_currentItem))
     {
-        QString name = property->data(VPE::VProperty::DPC_Data, Qt::DisplayRole).toString();
+        QString const name = property->data(VPE::VProperty::DPC_Data, Qt::DisplayRole).toString();
         if (name == i->name())
         {
             return;
@@ -841,7 +841,7 @@ template <class Tool> void VToolOptionsPropertyBrowser::SetHold(VPE::VProperty *
 {
     if (auto *i = qgraphicsitem_cast<Tool *>(m_currentItem))
     {
-        bool hold = property->data(VPE::VProperty::DPC_Data, Qt::DisplayRole).toBool();
+        bool const hold = property->data(VPE::VProperty::DPC_Data, Qt::DisplayRole).toBool();
         if (hold == i->IsHold())
         {
             return;
@@ -860,7 +860,7 @@ template <class Tool> void VToolOptionsPropertyBrowser::SetVisible(VPE::VPropert
 {
     if (auto *i = qgraphicsitem_cast<Tool *>(m_currentItem))
     {
-        bool visible = property->data(VPE::VProperty::DPC_Data, Qt::DisplayRole).toBool();
+        bool const visible = property->data(VPE::VProperty::DPC_Data, Qt::DisplayRole).toBool();
         if (visible == i->IsVisible())
         {
             return;
@@ -898,13 +898,13 @@ template <class Tool> void VToolOptionsPropertyBrowser::SetPointName(VPE::VPrope
 {
     if (auto *i = qgraphicsitem_cast<Tool *>(m_currentItem))
     {
-        QString name = property->data(VPE::VProperty::DPC_Data, Qt::DisplayRole).toString();
+        QString const name = property->data(VPE::VProperty::DPC_Data, Qt::DisplayRole).toString();
         if (name == i->name())
         {
             return;
         }
 
-        QRegularExpression rx(NameRegExp());
+        QRegularExpression const rx(NameRegExp());
         if (name.isEmpty() || not VContainer::IsUnique(name, valentinaNamespace) || not rx.match(name).hasMatch())
         {
             m_idToProperty[AttrName]->setValue(i->name());
@@ -925,13 +925,13 @@ template <class Tool> void VToolOptionsPropertyBrowser::SetPointName1(VPE::VProp
 {
     if (auto *i = qgraphicsitem_cast<Tool *>(m_currentItem))
     {
-        QString name = property->data(VPE::VProperty::DPC_Data, Qt::DisplayRole).toString();
+        QString const name = property->data(VPE::VProperty::DPC_Data, Qt::DisplayRole).toString();
         if (name == i->nameP1())
         {
             return;
         }
 
-        QRegularExpression rx(NameRegExp());
+        QRegularExpression const rx(NameRegExp());
         if (name.isEmpty() || not VContainer::IsUnique(name, valentinaNamespace) || not rx.match(name).hasMatch())
         {
             m_idToProperty[AttrName1]->setValue(i->nameP1());
@@ -952,13 +952,13 @@ template <class Tool> void VToolOptionsPropertyBrowser::SetPointName2(VPE::VProp
 {
     if (auto *i = qgraphicsitem_cast<Tool *>(m_currentItem))
     {
-        QString name = property->data(VPE::VProperty::DPC_Data, Qt::DisplayRole).toString();
+        QString const name = property->data(VPE::VProperty::DPC_Data, Qt::DisplayRole).toString();
         if (name == i->nameP2())
         {
             return;
         }
 
-        QRegularExpression rx(NameRegExp());
+        QRegularExpression const rx(NameRegExp());
         if (name.isEmpty() || not VContainer::IsUnique(name, valentinaNamespace) || not rx.match(name).hasMatch())
         {
             m_idToProperty[AttrName2]->setValue(i->nameP2());
@@ -979,7 +979,7 @@ template <class Tool> void VToolOptionsPropertyBrowser::SetOperationSuffix(VPE::
 {
     if (auto *item = qgraphicsitem_cast<Tool *>(m_currentItem))
     {
-        QString suffix = property->data(VPE::VProperty::DPC_Data, Qt::DisplayRole).toString();
+        QString const suffix = property->data(VPE::VProperty::DPC_Data, Qt::DisplayRole).toString();
 
         if (suffix == item->Suffix())
         {
@@ -992,7 +992,7 @@ template <class Tool> void VToolOptionsPropertyBrowser::SetOperationSuffix(VPE::
             return;
         }
 
-        QRegularExpression rx(NameRegExp());
+        QRegularExpression const rx(NameRegExp());
         const QStringList uniqueNames = VContainer::AllUniqueNames(valentinaNamespace);
         for (const auto &uniqueName : uniqueNames)
         {
@@ -1114,7 +1114,7 @@ template <class Tool> void VToolOptionsPropertyBrowser::SetNotes(VPE::VProperty 
 {
     if (auto *i = qgraphicsitem_cast<Tool *>(m_currentItem))
     {
-        QString notes = property->data(VPE::VProperty::DPC_Data, Qt::DisplayRole).toString();
+        QString const notes = property->data(VPE::VProperty::DPC_Data, Qt::DisplayRole).toString();
         if (notes == i->GetNotes())
         {
             return;
@@ -1133,7 +1133,7 @@ template <class Tool> void VToolOptionsPropertyBrowser::SetAlias(VPE::VProperty 
 {
     if (auto *i = qgraphicsitem_cast<Tool *>(m_currentItem))
     {
-        QString notes = property->data(VPE::VProperty::DPC_Data, Qt::DisplayRole).toString();
+        QString const notes = property->data(VPE::VProperty::DPC_Data, Qt::DisplayRole).toString();
         if (notes == i->GetAliasSuffix())
         {
             return;
@@ -1152,7 +1152,7 @@ template <class Tool> void VToolOptionsPropertyBrowser::SetAlias1(VPE::VProperty
 {
     if (auto *i = qgraphicsitem_cast<Tool *>(m_currentItem))
     {
-        QString notes = property->data(VPE::VProperty::DPC_Data, Qt::DisplayRole).toString();
+        QString const notes = property->data(VPE::VProperty::DPC_Data, Qt::DisplayRole).toString();
         if (notes == i->GetAliasSuffix1())
         {
             return;
@@ -1171,7 +1171,7 @@ template <class Tool> void VToolOptionsPropertyBrowser::SetAlias2(VPE::VProperty
 {
     if (auto *i = qgraphicsitem_cast<Tool *>(m_currentItem))
     {
-        QString notes = property->data(VPE::VProperty::DPC_Data, Qt::DisplayRole).toString();
+        QString const notes = property->data(VPE::VProperty::DPC_Data, Qt::DisplayRole).toString();
         if (notes == i->GetAliasSuffix2())
         {
             return;
@@ -1190,7 +1190,7 @@ template <class Tool> void VToolOptionsPropertyBrowser::SetLineType(VPE::VProper
 {
     if (auto *i = qgraphicsitem_cast<Tool *>(m_currentItem))
     {
-        QString type = property->data(VPE::VProperty::DPC_Data, Qt::DisplayRole).toString();
+        QString const type = property->data(VPE::VProperty::DPC_Data, Qt::DisplayRole).toString();
         if (type == i->getLineType())
         {
             return;
@@ -1209,7 +1209,7 @@ template <class Tool> void VToolOptionsPropertyBrowser::SetLineColor(VPE::VPrope
 {
     if (auto *i = qgraphicsitem_cast<Tool *>(m_currentItem))
     {
-        QString color = property->data(VPE::VProperty::DPC_Data, Qt::DisplayRole).toString();
+        QString const color = property->data(VPE::VProperty::DPC_Data, Qt::DisplayRole).toString();
         if (color == i->GetLineColor())
         {
             return;
@@ -1323,7 +1323,7 @@ template <class Tool> void VToolOptionsPropertyBrowser::SetPenStyle(VPE::VProper
 {
     if (auto *i = qgraphicsitem_cast<Tool *>(m_currentItem))
     {
-        QString pen = property->data(VPE::VProperty::DPC_Data, Qt::DisplayRole).toString();
+        QString const pen = property->data(VPE::VProperty::DPC_Data, Qt::DisplayRole).toString();
         if (pen == i->GetPenStyle())
         {
             return;
@@ -1361,7 +1361,7 @@ template <class Tool> void VToolOptionsPropertyBrowser::SetApproximationScale(VP
 {
     if (auto *i = qgraphicsitem_cast<Tool *>(m_currentItem))
     {
-        double scale = property->data(VPE::VProperty::DPC_Data, Qt::DisplayRole).toDouble();
+        double const scale = property->data(VPE::VProperty::DPC_Data, Qt::DisplayRole).toDouble();
         if (VFuzzyComparePossibleNulls(scale, i->GetApproximationScale()))
         {
             return;
@@ -1394,7 +1394,7 @@ void VToolOptionsPropertyBrowser::ChangeDataToolSinglePoint(VPE::VProperty *prop
     {
         if (auto *i = qgraphicsitem_cast<VToolBasePoint *>(m_currentItem))
         {
-            QVariant value = property->data(VPE::VProperty::DPC_Data, Qt::DisplayRole);
+            QVariant const value = property->data(VPE::VProperty::DPC_Data, Qt::DisplayRole);
             i->SetBasePointPos(value.toPointF());
         }
         else
@@ -1831,7 +1831,7 @@ void VToolOptionsPropertyBrowser::ChangeDataToolNormal(VPE::VProperty *property)
     {
         if (auto *i = qgraphicsitem_cast<VToolNormal *>(m_currentItem))
         {
-            double value = property->data(VPE::VProperty::DPC_Data, Qt::DisplayRole).toDouble();
+            double const value = property->data(VPE::VProperty::DPC_Data, Qt::DisplayRole).toDouble();
             if (VFuzzyComparePossibleNulls(value, i->GetAngle()))
             {
                 return;
@@ -2183,7 +2183,7 @@ void VToolOptionsPropertyBrowser::ChangeDataToolSpline(VPE::VProperty *property)
 {
     SCASSERT(property != nullptr)
 
-    QVariant value = property->data(VPE::VProperty::DPC_Data, Qt::DisplayRole);
+    QVariant const value = property->data(VPE::VProperty::DPC_Data, Qt::DisplayRole);
     const QString id = m_propertyToId[property];
 
     auto *i = qgraphicsitem_cast<VToolSpline *>(m_currentItem);
@@ -2318,7 +2318,7 @@ void VToolOptionsPropertyBrowser::ChangeDataToolSplinePath(VPE::VProperty *prope
             auto *i = qgraphicsitem_cast<VToolSplinePath *>(m_currentItem);
             SCASSERT(i != nullptr)
 
-            QVariant value = property->data(VPE::VProperty::DPC_Data, Qt::DisplayRole);
+            QVariant const value = property->data(VPE::VProperty::DPC_Data, Qt::DisplayRole);
             VSplinePath spl = i->getSplinePath();
             spl.SetApproximationScale(value.toDouble());
             i->setSplinePath(spl);
@@ -2359,7 +2359,7 @@ void VToolOptionsPropertyBrowser::ChangeDataToolCubicBezierPath(VPE::VProperty *
             auto *i = qgraphicsitem_cast<VToolCubicBezierPath *>(m_currentItem);
             SCASSERT(i != nullptr)
 
-            QVariant value = property->data(VPE::VProperty::DPC_Data, Qt::DisplayRole);
+            QVariant const value = property->data(VPE::VProperty::DPC_Data, Qt::DisplayRole);
             VCubicBezierPath spl = i->getSplinePath();
             spl.SetApproximationScale(value.toDouble());
             i->setSplinePath(spl);
@@ -2741,7 +2741,7 @@ void VToolOptionsPropertyBrowser::ShowOptionsToolEndLine(QGraphicsItem *item)
     i->ShowVisualization(true);
     m_formView->setTitle(tr("Point at distance and angle"));
 
-    QPalette comboBoxPalette = ComboBoxPalette();
+    QPalette const comboBoxPalette = ComboBoxPalette();
 
     AddPropertyObjectName(i, tr("Point label:"));
     AddPropertyParentPointName(i->BasePointName(), tr("Base point:"), AttrBasePoint);
@@ -2760,7 +2760,7 @@ void VToolOptionsPropertyBrowser::ShowOptionsToolAlongLine(QGraphicsItem *item)
     i->ShowVisualization(true);
     m_formView->setTitle(tr("Point at distance along line"));
 
-    QPalette comboBoxPalette = ComboBoxPalette();
+    QPalette const comboBoxPalette = ComboBoxPalette();
 
     AddPropertyObjectName(i, tr("Point label:"));
     AddPropertyParentPointName(i->BasePointName(), tr("First point:"), AttrBasePoint);
@@ -2779,7 +2779,7 @@ void VToolOptionsPropertyBrowser::ShowOptionsToolArc(QGraphicsItem *item)
     i->ShowVisualization(true);
     m_formView->setTitle(tr("Arc"));
 
-    QPalette comboBoxPalette = ComboBoxPalette();
+    QPalette const comboBoxPalette = ComboBoxPalette();
 
     AddPropertyObjectName(i, tr("Name:"), true);
     AddPropertyParentPointName(i->CenterPointName(), tr("Center point:"), AttrCenter);
@@ -2802,7 +2802,7 @@ void VToolOptionsPropertyBrowser::ShowOptionsToolArcWithLength(QGraphicsItem *it
     i->ShowVisualization(true);
     m_formView->setTitle(tr("Arc with given length"));
 
-    QPalette comboBoxPalette = ComboBoxPalette();
+    QPalette const comboBoxPalette = ComboBoxPalette();
 
     AddPropertyObjectName(i, tr("Name:"), true);
     AddPropertyParentPointName(i->CenterPointName(), tr("Center point:"), AttrCenter);
@@ -2825,7 +2825,7 @@ void VToolOptionsPropertyBrowser::ShowOptionsToolBisector(QGraphicsItem *item)
     i->ShowVisualization(true);
     m_formView->setTitle(tr("Point along bisector"));
 
-    QPalette comboBoxPalette = ComboBoxPalette();
+    QPalette const comboBoxPalette = ComboBoxPalette();
 
     AddPropertyObjectName(i, tr("Point label:"));
     AddPropertyParentPointName(i->FirstPointName(), tr("First point:"), AttrFirstPoint);
@@ -2907,7 +2907,7 @@ void VToolOptionsPropertyBrowser::ShowOptionsToolHeight(QGraphicsItem *item)
     i->ShowVisualization(true);
     m_formView->setTitle(tr("Perpendicular point along line"));
 
-    QPalette comboBoxPalette = ComboBoxPalette();
+    QPalette const comboBoxPalette = ComboBoxPalette();
 
     AddPropertyObjectName(i, tr("Point label:"));
     AddPropertyParentPointName(i->BasePointName(), tr("Base point:"), AttrBasePoint);
@@ -2926,7 +2926,7 @@ void VToolOptionsPropertyBrowser::ShowOptionsToolLine(QGraphicsItem *item)
     i->ShowVisualization(true);
     m_formView->setTitle(tr("Line between points"));
 
-    QPalette comboBoxPalette = ComboBoxPalette();
+    QPalette const comboBoxPalette = ComboBoxPalette();
 
     AddPropertyParentPointName(i->FirstPointName(), tr("First point:"), AttrFirstPoint);
     AddPropertyParentPointName(i->SecondPointName(), tr("Second point:"), AttrSecondPoint);
@@ -2960,7 +2960,7 @@ void VToolOptionsPropertyBrowser::ShowOptionsToolNormal(QGraphicsItem *item)
     i->ShowVisualization(true);
     m_formView->setTitle(tr("Point along perpendicular"));
 
-    QPalette comboBoxPalette = ComboBoxPalette();
+    QPalette const comboBoxPalette = ComboBoxPalette();
 
     AddPropertyFormula(tr("Length:"), i->GetFormulaLength(), AttrLength);
     AddPropertyObjectName(i, tr("Point label:"));
@@ -3089,7 +3089,7 @@ void VToolOptionsPropertyBrowser::ShowOptionsToolShoulderPoint(QGraphicsItem *it
     i->ShowVisualization(true);
     m_formView->setTitle(tr("Special point on shoulder"));
 
-    QPalette comboBoxPalette = ComboBoxPalette();
+    QPalette const comboBoxPalette = ComboBoxPalette();
 
     AddPropertyObjectName(i, tr("Point label:"));
     AddPropertyParentPointName(i->BasePointName(), tr("First point:"), AttrBasePoint);
@@ -3137,7 +3137,7 @@ void VToolOptionsPropertyBrowser::ShowOptionsToolSpline(QGraphicsItem *item)
     length2.Eval();
     AddPropertyFormula(tr("C2: length:"), length2, AttrLength2);
 
-    QPalette comboBoxPalette = ComboBoxPalette();
+    QPalette const comboBoxPalette = ComboBoxPalette();
 
     AddPropertyAlias(i, tr("Alias:"));
     AddPropertyCurvePenStyle(
@@ -3155,7 +3155,7 @@ void VToolOptionsPropertyBrowser::ShowOptionsToolCubicBezier(QGraphicsItem *item
     i->ShowVisualization(true);
     m_formView->setTitle(tr("Cubic bezier curve"));
 
-    QPalette comboBoxPalette = ComboBoxPalette();
+    QPalette const comboBoxPalette = ComboBoxPalette();
 
     AddPropertyObjectName(i, tr("Name:"), true);
     AddPropertyParentPointName(i->FirstPointName(), tr("First point:"), AttrPoint1);
@@ -3178,7 +3178,7 @@ void VToolOptionsPropertyBrowser::ShowOptionsToolSplinePath(QGraphicsItem *item)
     i->ShowVisualization(true);
     m_formView->setTitle(tr("Tool for path curve"));
 
-    QPalette comboBoxPalette = ComboBoxPalette();
+    QPalette const comboBoxPalette = ComboBoxPalette();
 
     AddPropertyObjectName(i, tr("Name:"), true);
     AddPropertyAlias(i, tr("Alias:"));
@@ -3197,7 +3197,7 @@ void VToolOptionsPropertyBrowser::ShowOptionsToolCubicBezierPath(QGraphicsItem *
     i->ShowVisualization(true);
     m_formView->setTitle(tr("Tool cubic bezier curve"));
 
-    QPalette comboBoxPalette = ComboBoxPalette();
+    QPalette const comboBoxPalette = ComboBoxPalette();
 
     AddPropertyObjectName(i, tr("Name:"), true);
     AddPropertyAlias(i, tr("Alias:"));
@@ -3231,7 +3231,7 @@ void VToolOptionsPropertyBrowser::ShowOptionsToolLineIntersectAxis(QGraphicsItem
     i->ShowVisualization(true);
     m_formView->setTitle(tr("Point intersection line and axis"));
 
-    QPalette comboBoxPalette = ComboBoxPalette();
+    QPalette const comboBoxPalette = ComboBoxPalette();
 
     AddPropertyObjectName(i, tr("Point label:"));
     AddPropertyParentPointName(i->BasePointName(), tr("Axis point:"), AttrBasePoint);
@@ -3251,7 +3251,7 @@ void VToolOptionsPropertyBrowser::ShowOptionsToolCurveIntersectAxis(QGraphicsIte
     i->ShowVisualization(true);
     m_formView->setTitle(tr("Point intersection curve and axis"));
 
-    QPalette comboBoxPalette = ComboBoxPalette();
+    QPalette const comboBoxPalette = ComboBoxPalette();
 
     AddPropertyObjectName(i, tr("Point label:"));
     AddPropertyParentPointName(i->BasePointName(), tr("Axis point:"), AttrBasePoint);
@@ -3377,7 +3377,7 @@ void VToolOptionsPropertyBrowser::UpdateOptionsToolEndLine()
     m_idToProperty[AttrName]->setValue(i->name());
 
     {
-        QPalette comboBoxPalette = ComboBoxPalette();
+        QPalette const comboBoxPalette = ComboBoxPalette();
         const auto index = VPE::VLineTypeProperty::IndexOfStyle(
             LineStylesPics(comboBoxPalette.color(QPalette::Base), comboBoxPalette.color(QPalette::Text)),
             i->getLineType());
@@ -3411,7 +3411,7 @@ void VToolOptionsPropertyBrowser::UpdateOptionsToolAlongLine()
     m_idToProperty[AttrName]->setValue(i->name());
 
     {
-        QPalette comboBoxPalette = ComboBoxPalette();
+        QPalette const comboBoxPalette = ComboBoxPalette();
         const auto index = VPE::VLineTypeProperty::IndexOfStyle(
             LineStylesPics(comboBoxPalette.color(QPalette::Base), comboBoxPalette.color(QPalette::Text)),
             i->getLineType());
@@ -3458,7 +3458,7 @@ void VToolOptionsPropertyBrowser::UpdateOptionsToolArc()
     m_idToProperty[AttrAngle2]->setValue(valueSecondAngle);
 
     {
-        QPalette comboBoxPalette = ComboBoxPalette();
+        QPalette const comboBoxPalette = ComboBoxPalette();
         const auto index = VPE::VLineTypeProperty::IndexOfStyle(
             CurvePenStylesPics(comboBoxPalette.color(QPalette::Base), comboBoxPalette.color(QPalette::Text)),
             i->GetPenStyle());
@@ -3503,7 +3503,7 @@ void VToolOptionsPropertyBrowser::UpdateOptionsToolArcWithLength()
     m_idToProperty[AttrLength]->setValue(valueLength);
 
     {
-        QPalette comboBoxPalette = ComboBoxPalette();
+        QPalette const comboBoxPalette = ComboBoxPalette();
         const auto index = VPE::VLineTypeProperty::IndexOfStyle(
             CurvePenStylesPics(comboBoxPalette.color(QPalette::Base), comboBoxPalette.color(QPalette::Text)),
             i->GetPenStyle());
@@ -3540,7 +3540,7 @@ void VToolOptionsPropertyBrowser::UpdateOptionsToolBisector()
     m_idToProperty[AttrLength]->setValue(valueFormula);
 
     {
-        QPalette comboBoxPalette = ComboBoxPalette();
+        QPalette const comboBoxPalette = ComboBoxPalette();
         const auto index = VPE::VLineTypeProperty::IndexOfStyle(
             LineStylesPics(comboBoxPalette.color(QPalette::Base), comboBoxPalette.color(QPalette::Text)),
             i->getLineType());
@@ -3669,7 +3669,7 @@ void VToolOptionsPropertyBrowser::UpdateOptionsToolHeight()
     m_idToProperty[AttrName]->setValue(i->name());
 
     {
-        QPalette comboBoxPalette = ComboBoxPalette();
+        QPalette const comboBoxPalette = ComboBoxPalette();
         const auto index = VPE::VLineTypeProperty::IndexOfStyle(
             LineStylesPics(comboBoxPalette.color(QPalette::Base), comboBoxPalette.color(QPalette::Text)),
             i->getLineType());
@@ -3702,7 +3702,7 @@ void VToolOptionsPropertyBrowser::UpdateOptionsToolLine()
     auto *i = qgraphicsitem_cast<VToolLine *>(m_currentItem);
 
     {
-        QPalette comboBoxPalette = ComboBoxPalette();
+        QPalette const comboBoxPalette = ComboBoxPalette();
         const auto index = VPE::VLineTypeProperty::IndexOfStyle(
             LineStylesPics(comboBoxPalette.color(QPalette::Base), comboBoxPalette.color(QPalette::Text)),
             i->getLineType());
@@ -3765,7 +3765,7 @@ void VToolOptionsPropertyBrowser::UpdateOptionsToolNormal()
     m_idToProperty[AttrAngle]->setValue(i->GetAngle());
 
     {
-        QPalette comboBoxPalette = ComboBoxPalette();
+        QPalette const comboBoxPalette = ComboBoxPalette();
         const auto index = VPE::VLineTypeProperty::IndexOfStyle(
             LineStylesPics(comboBoxPalette.color(QPalette::Base), comboBoxPalette.color(QPalette::Text)),
             i->getLineType());
@@ -3952,7 +3952,7 @@ void VToolOptionsPropertyBrowser::UpdateOptionsToolShoulderPoint()
     m_idToProperty[AttrName]->setValue(i->name());
 
     {
-        QPalette comboBoxPalette = ComboBoxPalette();
+        QPalette const comboBoxPalette = ComboBoxPalette();
         const auto index = VPE::VLineTypeProperty::IndexOfStyle(
             LineStylesPics(comboBoxPalette.color(QPalette::Base), comboBoxPalette.color(QPalette::Text)),
             i->getLineType());
@@ -4020,7 +4020,7 @@ void VToolOptionsPropertyBrowser::UpdateOptionsToolSpline()
     m_idToProperty[AttrLength2]->setValue(length2);
 
     {
-        QPalette comboBoxPalette = ComboBoxPalette();
+        QPalette const comboBoxPalette = ComboBoxPalette();
         const auto index = VPE::VLineTypeProperty::IndexOfStyle(
             CurvePenStylesPics(comboBoxPalette.color(QPalette::Base), comboBoxPalette.color(QPalette::Text)),
             i->GetPenStyle());
@@ -4047,7 +4047,7 @@ void VToolOptionsPropertyBrowser::UpdateOptionsToolCubicBezier()
     m_idToProperty[AttrName]->setValue(i->name());
 
     {
-        QPalette comboBoxPalette = ComboBoxPalette();
+        QPalette const comboBoxPalette = ComboBoxPalette();
         const auto index = VPE::VLineTypeProperty::IndexOfStyle(
             CurvePenStylesPics(comboBoxPalette.color(QPalette::Base), comboBoxPalette.color(QPalette::Text)),
             i->GetPenStyle());
@@ -4090,7 +4090,7 @@ void VToolOptionsPropertyBrowser::UpdateOptionsToolSplinePath()
     m_idToProperty[AttrName]->setValue(i->name());
 
     {
-        QPalette comboBoxPalette = ComboBoxPalette();
+        QPalette const comboBoxPalette = ComboBoxPalette();
         const auto index = VPE::VLineTypeProperty::IndexOfStyle(
             CurvePenStylesPics(comboBoxPalette.color(QPalette::Base), comboBoxPalette.color(QPalette::Text)),
             i->GetPenStyle());
@@ -4117,7 +4117,7 @@ void VToolOptionsPropertyBrowser::UpdateOptionsToolCubicBezierPath()
     m_idToProperty[AttrName]->setValue(i->name());
 
     {
-        QPalette comboBoxPalette = ComboBoxPalette();
+        QPalette const comboBoxPalette = ComboBoxPalette();
         const auto index = VPE::VLineTypeProperty::IndexOfStyle(
             CurvePenStylesPics(comboBoxPalette.color(QPalette::Base), comboBoxPalette.color(QPalette::Text)),
             i->GetPenStyle());
@@ -4169,7 +4169,7 @@ void VToolOptionsPropertyBrowser::UpdateOptionsToolLineIntersectAxis()
     m_idToProperty[AttrName]->setValue(i->name());
 
     {
-        QPalette comboBoxPalette = ComboBoxPalette();
+        QPalette const comboBoxPalette = ComboBoxPalette();
         const auto index = VPE::VLineTypeProperty::IndexOfStyle(
             LineStylesPics(comboBoxPalette.color(QPalette::Base), comboBoxPalette.color(QPalette::Text)),
             i->getLineType());
@@ -4207,7 +4207,7 @@ void VToolOptionsPropertyBrowser::UpdateOptionsToolCurveIntersectAxis()
     m_idToProperty[AttrName]->setValue(i->name());
 
     {
-        QPalette comboBoxPalette = ComboBoxPalette();
+        QPalette const comboBoxPalette = ComboBoxPalette();
         const auto index = VPE::VLineTypeProperty::IndexOfStyle(
             LineStylesPics(comboBoxPalette.color(QPalette::Base), comboBoxPalette.color(QPalette::Text)),
             i->getLineType());
@@ -4375,7 +4375,7 @@ void VToolOptionsPropertyBrowser::UpdateOptionsBackgroundSVGItem()
 //---------------------------------------------------------------------------------------------------------------------
 auto VToolOptionsPropertyBrowser::PropertiesList() -> QStringList
 {
-    static QStringList attr{
+    static QStringList const attr{
         AttrName,                           /* 0 */
         "position"_L1,                      /* 1 */
         AttrBasePoint,                      /* 2 */

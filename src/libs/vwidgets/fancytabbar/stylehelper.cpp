@@ -119,7 +119,8 @@ void StyleHelper::drawIconWithShadow(const QIcon &icon, const QRect &rect, QPain
                                      int dipRadius, const QColor &color, const QPoint &dipOffset)
 {
     QPixmap cache;
-    QString pixmapName = QString::fromLatin1("icon %0 %1 %2").arg(icon.cacheKey()).arg(iconMode).arg(rect.height());
+    QString const pixmapName =
+        QString::fromLatin1("icon %0 %1 %2").arg(icon.cacheKey()).arg(iconMode).arg(rect.height());
 
     if (!QPixmapCache::find(pixmapName, &cache))
     {
@@ -129,9 +130,9 @@ void StyleHelper::drawIconWithShadow(const QIcon &icon, const QRect &rect, QPain
         // different than 1. The shadow drawing caluculations are done in device
         // pixels.
         QPixmap px = icon.pixmap(rect.size());
-        int devicePixelRatio = qCeil(px.devicePixelRatio());
-        int radius = dipRadius * devicePixelRatio;
-        QPoint offset = dipOffset * devicePixelRatio;
+        int const devicePixelRatio = qCeil(px.devicePixelRatio());
+        int const radius = dipRadius * devicePixelRatio;
+        QPoint const offset = dipOffset * devicePixelRatio;
         cache = QPixmap(px.size() + QSize(radius * 2, radius * 2));
         cache.fill(Qt::transparent);
 
@@ -144,8 +145,8 @@ void StyleHelper::drawIconWithShadow(const QIcon &icon, const QRect &rect, QPain
                 QRgb *scanLine = reinterpret_cast<QRgb *>(im.scanLine(y));
                 for (int x = 0; x < im.width(); ++x)
                 {
-                    QRgb pixel = *scanLine;
-                    char intensity = static_cast<char>(qGray(pixel));
+                    QRgb const pixel = *scanLine;
+                    char const intensity = static_cast<char>(qGray(pixel));
                     *scanLine = qRgba(intensity, intensity, intensity, qAlpha(pixel));
                     ++scanLine;
                 }

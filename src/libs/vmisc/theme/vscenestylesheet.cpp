@@ -158,7 +158,7 @@ auto VSceneStylesheet::CorrectToolColorForDarkTheme(const QColor &color) -> QCol
         return color;
     }
 
-    QMap<QString, QString> adjustments = ToolStyle().ColorAdjustments();
+    QMap<QString, QString> const adjustments = ToolStyle().ColorAdjustments();
 
     QString colorName = color.name(QColor::HexArgb);
     if (adjustments.contains(colorName))

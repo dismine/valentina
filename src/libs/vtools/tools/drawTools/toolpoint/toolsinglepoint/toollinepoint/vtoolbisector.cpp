@@ -71,8 +71,8 @@ VToolBisector::VToolBisector(const VToolBisectorInitData &initData, QGraphicsIte
 auto VToolBisector::BisectorAngle(const QPointF &firstPoint, const QPointF &secondPoint, const QPointF &thirdPoint)
     -> qreal
 {
-    QLineF line1(secondPoint, firstPoint);
-    QLineF line2(secondPoint, thirdPoint);
+    QLineF const line1(secondPoint, firstPoint);
+    QLineF const line2(secondPoint, thirdPoint);
     qreal angle = line1.angleTo(line2);
     if (angle>180)
     {
@@ -171,9 +171,9 @@ auto VToolBisector::Create(VToolBisectorInitData &initData) -> VToolBisector *
 
     const qreal result = CheckFormula(initData.id, initData.formula, initData.data);
 
-    QPointF fPoint = VToolBisector::FindPoint(static_cast<QPointF>(*firstPoint), static_cast<QPointF>(*secondPoint),
-                                              static_cast<QPointF>(*thirdPoint),
-                                              VAbstractValApplication::VApp()->toPixel(result));
+    QPointF const fPoint =
+        VToolBisector::FindPoint(static_cast<QPointF>(*firstPoint), static_cast<QPointF>(*secondPoint),
+                                 static_cast<QPointF>(*thirdPoint), VAbstractValApplication::VApp()->toPixel(result));
 
     VPointF *p = new VPointF(fPoint, initData.name, initData.mx, initData.my);
     p->SetShowLabel(initData.showLabel);
@@ -242,7 +242,7 @@ void VToolBisector::SaveDialog(QDomElement &domElement, QList<quint32> &oldDepen
                                QList<quint32> &newDependencies)
 {
     SCASSERT(not m_dialog.isNull())
-    QPointer<DialogBisector> dialogTool = qobject_cast<DialogBisector *>(m_dialog);
+    QPointer<DialogBisector> const dialogTool = qobject_cast<DialogBisector *>(m_dialog);
     SCASSERT(not dialogTool.isNull())
 
     AddDependence(oldDependencies, firstPointId);

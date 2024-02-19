@@ -407,7 +407,7 @@ void DialogTrueDarts::CheckName(QLineEdit *edit, QLabel *labelEditNamePoint, con
 
     const QString name = edit->text();
     const QString secondName = secondPointName->text();
-    QRegularExpression rx(NameRegExp());
+    QRegularExpression const rx(NameRegExp());
     if (name.isEmpty() || secondName == name ||
         (pointD1Name != name && pointD2Name != name && data->IsUnique(name) == false) ||
         rx.match(name).hasMatch() == false)

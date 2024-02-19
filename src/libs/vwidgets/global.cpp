@@ -132,7 +132,7 @@ auto PixmapToPainterPath(const QPixmap &pixmap) -> QPainterPath
 {
     if (not pixmap.isNull())
     {
-        QBitmap mask = pixmap.mask();
+        QBitmap const mask = pixmap.mask();
         if (not mask.isNull())
         {
             return qt_regionToPath(QRegion(mask));

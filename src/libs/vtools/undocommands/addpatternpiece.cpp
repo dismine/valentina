@@ -55,7 +55,7 @@ void AddPatternPiece::undo()
     else
     {
         QDomElement rootElement = doc->documentElement();
-        QDomElement patternPiece = doc->GetPPElement(namePP);
+        QDomElement const patternPiece = doc->GetPPElement(namePP);
         rootElement.removeChild(patternPiece);
         emit NeedFullParsing();
     }

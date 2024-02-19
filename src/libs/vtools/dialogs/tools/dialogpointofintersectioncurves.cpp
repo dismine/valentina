@@ -258,14 +258,14 @@ void DialogPointOfIntersectionCurves::CurveChanged()
 //---------------------------------------------------------------------------------------------------------------------
 void DialogPointOfIntersectionCurves::ValidateAlias()
 {
-    QRegularExpression rx(NameRegExp());
+    QRegularExpression const rx(NameRegExp());
 
     const QSharedPointer<VAbstractCurve> curve1 = data->GeometricObject<VAbstractCurve>(GetFirstCurveId());
-    QPair<QString, QString> curve1Alias =
+    QPair<QString, QString> const curve1Alias =
         SegmentAliases(curve1->getType(), GetCurve1AliasSuffix1(), GetCurve1AliasSuffix2());
 
     const QSharedPointer<VAbstractCurve> curve2 = data->GeometricObject<VAbstractCurve>(GetSecondCurveId());
-    QPair<QString, QString> curve2Alias =
+    QPair<QString, QString> const curve2Alias =
         SegmentAliases(curve2->getType(), GetCurve2AliasSuffix1(), GetCurve2AliasSuffix2());
 
     QSet<QString> uniqueAliases;

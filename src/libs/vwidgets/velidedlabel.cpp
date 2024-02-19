@@ -75,7 +75,7 @@ void VElidedLabel::paintEvent(QPaintEvent *event)
     int y = 0;
 
     // QTextLayout works with paragraphs
-    QStringList paragraphs = m_content.split('\n');
+    QStringList const paragraphs = m_content.split('\n');
     for (int i = 0; i < paragraphs.size(); ++i)
     {
         if (not DrawParagraph(painter, paragraphs.at(i), y, didElide))
@@ -122,9 +122,9 @@ void VElidedLabel::paintEvent(QPaintEvent *event)
 //---------------------------------------------------------------------------------------------------------------------
 auto VElidedLabel::DrawParagraph(QPainter &painter, const QString &paragraph, int &y, bool &didElide) -> bool
 {
-    QFontMetrics fontMetrics = painter.fontMetrics();
+    QFontMetrics const fontMetrics = painter.fontMetrics();
 
-    int lineSpacing = fontMetrics.lineSpacing();
+    int const lineSpacing = fontMetrics.lineSpacing();
     bool ok = true;
 
     QTextLayout textLayout(paragraph, painter.font());
@@ -139,7 +139,7 @@ auto VElidedLabel::DrawParagraph(QPainter &painter, const QString &paragraph, in
         }
 
         line.setLineWidth(width());
-        int nextLineY = y + lineSpacing;
+        int const nextLineY = y + lineSpacing;
 
         if (height() >= nextLineY + lineSpacing)
         {
@@ -148,8 +148,8 @@ auto VElidedLabel::DrawParagraph(QPainter &painter, const QString &paragraph, in
         }
         else
         {
-            QString lastLine = paragraph.mid(line.textStart());
-            QString elidedLastLine = fontMetrics.elidedText(lastLine, Qt::ElideRight, width());
+            QString const lastLine = paragraph.mid(line.textStart());
+            QString const elidedLastLine = fontMetrics.elidedText(lastLine, Qt::ElideRight, width());
             painter.drawText(QPoint(0, y + fontMetrics.ascent()), elidedLastLine);
             y = nextLineY;
             ok = false;

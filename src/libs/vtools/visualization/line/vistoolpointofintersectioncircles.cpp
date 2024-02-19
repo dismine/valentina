@@ -92,7 +92,7 @@ void VisToolPointOfIntersectionCircles::RefreshGeometry()
                 }
                 else if (GetMode() == Mode::Creation)
                 {
-                    QLineF radiusLine(static_cast<QPointF>(*second), ScenePos());
+                    QLineF const radiusLine(static_cast<QPointF>(*second), ScenePos());
                     const qreal length = radiusLine.length();
 
                     m_c2Path->setRect(PointRect(length));
@@ -114,7 +114,7 @@ void VisToolPointOfIntersectionCircles::RefreshGeometry()
         }
         else if (GetMode() == Mode::Creation && VAbstractValApplication::VApp()->Settings()->IsInteractiveTools())
         {
-            QLineF radiusLine(static_cast<QPointF>(*first), ScenePos());
+            QLineF const radiusLine(static_cast<QPointF>(*first), ScenePos());
             const qreal length = radiusLine.length();
 
             m_c1Path->setRect(PointRect(length));

@@ -94,7 +94,7 @@ auto VPE::VObjectProperty::setEditorData(QWidget *editor) -> bool
     QComboBox* tmpEditor = qobject_cast<QComboBox*>(editor);
     if (tmpEditor)
     {
-        quint32 objId = VProperty::d_ptr->VariantValue.toUInt();
+        quint32 const objId = VProperty::d_ptr->VariantValue.toUInt();
         qint32 tmpIndex = tmpEditor->findData(objId);
 
         if (tmpIndex == -1)

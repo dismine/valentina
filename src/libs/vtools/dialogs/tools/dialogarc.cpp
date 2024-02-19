@@ -269,7 +269,7 @@ void DialogArc::ShowDialog(bool click)
             auto *scene = qobject_cast<VMainGraphicsScene *>(VAbstractValApplication::VApp()->getCurrentScene());
             SCASSERT(scene != nullptr)
             const QSharedPointer<VPointF> point = data->GeometricObject<VPointF>(GetCenter());
-            QLineF line = QLineF(static_cast<QPointF>(*point), scene->getScenePos());
+            QLineF const line = QLineF(static_cast<QPointF>(*point), scene->getScenePos());
 
             auto Angle = [line]()
             {
@@ -451,7 +451,7 @@ void DialogArc::changeEvent(QEvent *event)
 //---------------------------------------------------------------------------------------------------------------------
 void DialogArc::ValidateAlias()
 {
-    QRegularExpression rx(NameRegExp());
+    QRegularExpression const rx(NameRegExp());
     VArc arc;
     arc.SetAliasSuffix(GetAliasSuffix());
     if (not GetAliasSuffix().isEmpty() &&

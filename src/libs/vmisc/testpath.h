@@ -70,7 +70,7 @@ template <class T> void DumpVector(const QVector<T> &points, const QString &temp
 #endif
         QJsonObject vectorObject;
         VectorToJson(points, vectorObject);
-        QJsonDocument vector(vectorObject);
+        QJsonDocument const vector(vectorObject);
 
         QTextStream out(&temp);
         out << vector.toJson();

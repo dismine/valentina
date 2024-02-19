@@ -429,7 +429,7 @@ void QmuParserBase::CheckName(const QString &a_sName, const QString &a_szCharSet
 void QmuParserBase::SetExpr(const QString &a_sExpr)
 {
     // Check locale compatibility
-    std::locale loc;
+    std::locale const loc;
     if (m_pTokenReader->GetArgSep() == QChar(std::use_facet<std::numpunct<char_type>>(loc).decimal_point()))
     {
         Error(ecLOCALE);
@@ -440,7 +440,7 @@ void QmuParserBase::SetExpr(const QString &a_sExpr)
     // when calling tellg on a stringstream created from the expression after
     // reading a value at the end of an expression. (qmu::QmuParser::IsVal function)
     // (tellg returns -1 otherwise causing the parser to ignore the value)
-    QString sBuf(a_sExpr + QChar(' '));
+    QString const sBuf(a_sExpr + QChar(' '));
     m_pTokenReader->SetFormula(sBuf);
     ReInit();
 }
@@ -790,20 +790,20 @@ void QmuParserBase::ApplyFunc(QStack<token_type> &a_stOpt, QStack<token_type> &a
         return;
     }
 
-    token_type funTok = a_stOpt.pop();
+    token_type const funTok = a_stOpt.pop();
     assert(funTok.GetFuncAddr());
 
     // Binary operators must rely on their internal operator number
     // since counting of operators relies on commas for function arguments
     // binary operators do not have commas in their expression
-    int iArgCount = (funTok.GetCode() == cmOPRT_BIN) ? funTok.GetArgCount() : a_iArgCount;
+    int const iArgCount = (funTok.GetCode() == cmOPRT_BIN) ? funTok.GetArgCount() : a_iArgCount;
 
     // determine how many parameters the function needs. To remember iArgCount includes the
     // string parameter whilst GetArgCount() counts only numeric parameters.
-    int iArgRequired = funTok.GetArgCount() + ((funTok.GetType() == tpSTR) ? 1 : 0);
+    int const iArgRequired = funTok.GetArgCount() + ((funTok.GetType() == tpSTR) ? 1 : 0);
 
     // Thats the number of numerical parameters
-    int iArgNumerical = iArgCount - ((funTok.GetType() == tpSTR) ? 1 : 0);
+    int const iArgNumerical = iArgCount - ((funTok.GetType() == tpSTR) ? 1 : 0);
 
     if (funTok.GetCode() == cmFUNC_STR && iArgCount - iArgNumerical > 1)
     {
@@ -882,23 +882,23 @@ void QmuParserBase::ApplyIfElse(QStack<token_type> &a_stOpt, QStack<token_type> 
     // Check if there is an if Else clause to be calculated
     while (a_stOpt.size() && a_stOpt.top().GetCode() == cmELSE)
     {
-        token_type opElse = a_stOpt.pop();
+        token_type const opElse = a_stOpt.pop();
         Q_ASSERT(a_stOpt.size() > 0);
 
         // Take the value associated with the else branch from the value stack
-        token_type vVal2 = a_stVal.pop();
+        token_type const vVal2 = a_stVal.pop();
 
         Q_ASSERT(a_stOpt.size() > 0);
         Q_ASSERT(a_stVal.size() >= 2);
 
         // it then else is a ternary operator Pop all three values from the value s
         // tack and just return the right value
-        token_type vVal1 = a_stVal.pop();
-        token_type vExpr = a_stVal.pop();
+        token_type const vVal1 = a_stVal.pop();
+        token_type const vExpr = a_stVal.pop();
 
         a_stVal.push(not qFuzzyIsNull(vExpr.GetVal()) ? vVal1 : vVal2);
 
-        token_type opIf = a_stOpt.pop();
+        token_type const opIf = a_stOpt.pop();
         Q_ASSERT(opElse.GetCode() == cmELSE);
         Q_ASSERT(opIf.GetCode() == cmIF);
 
@@ -1131,7 +1131,7 @@ auto QmuParserBase::ParseCmdCodeBulk(int nOffset, int nThreadID) const -> qreal
             // Next is treatment of numeric functions
             case cmFUNC:
             {
-                qmusizetype iArgCount = pTok->Fun.argc;
+                qmusizetype const iArgCount = pTok->Fun.argc;
 
                 QT_WARNING_PUSH
                 QT_WARNING_DISABLE_GCC("-Wcast-function-type")
@@ -1214,7 +1214,7 @@ auto QmuParserBase::ParseCmdCodeBulk(int nOffset, int nThreadID) const -> qreal
                 sidx -= pTok->Fun.argc - 1;
 
                 // The index of the string argument in the string table
-                qmusizetype iIdxStack = pTok->Fun.idx;
+                qmusizetype const iIdxStack = pTok->Fun.idx;
                 Q_ASSERT(iIdxStack >= 0 && iIdxStack < m_vStringBuf.size());
 
                 switch (pTok->Fun.argc) // switch according to argument count
@@ -1238,7 +1238,7 @@ auto QmuParserBase::ParseCmdCodeBulk(int nOffset, int nThreadID) const -> qreal
             }
             case cmFUNC_BULK:
             {
-                qmusizetype iArgCount = pTok->Fun.argc;
+                qmusizetype const iArgCount = pTok->Fun.argc;
 
                 // switch according to argument count
                 switch (iArgCount)
@@ -1438,7 +1438,7 @@ void QmuParserBase::CreateRPN() const
                     // Check if a function is standing in front of the opening bracket,
                     // if yes evaluate it afterwards check for infix operators
                     assert(stArgCount.size());
-                    int iArgCount = stArgCount.pop();
+                    int const iArgCount = stArgCount.pop();
 
                     stOpt.pop(); // Take opening bracket from stack
 
@@ -1495,7 +1495,7 @@ void QmuParserBase::CreateRPN() const
                     if (code == opt.GetCode())
                     {
                         // Deal with operator associativity
-                        EOprtAssociativity eOprtAsct = GetOprtAssociativity(opt);
+                        EOprtAssociativity const eOprtAsct = GetOprtAssociativity(opt);
                         if ((eOprtAsct == oaRIGHT && (nPrec1 <= nPrec2)) || (eOprtAsct == oaLEFT && (nPrec1 < nPrec2)))
                         {
                             break;
@@ -1663,7 +1663,7 @@ void QmuParserBase::ClearVar()
  */
 void QmuParserBase::RemoveVar(const QString &a_strVarName)
 {
-    varmap_type::iterator item = m_VarDef.find(a_strVarName);
+    varmap_type::iterator const item = m_VarDef.find(a_strVarName);
     if (item != m_VarDef.end())
     {
         m_VarDef.erase(item);
@@ -1812,7 +1812,7 @@ void QmuParserBase::StackDump(const QStack<token_type> &a_stVal, const QStack<to
     qDebug() << "\nValue stack:\n";
     while (stVal.empty() == false)
     {
-        token_type val = stVal.pop();
+        token_type const val = stVal.pop();
         if (val.GetType() == tpSTR)
         {
             qDebug() << " \"" << val.GetAsString() << "\" ";

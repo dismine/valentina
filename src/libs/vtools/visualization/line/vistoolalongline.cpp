@@ -84,28 +84,29 @@ void VisToolAlongLine::RefreshGeometry()
             const QSharedPointer<VPointF> second = GetData()->GeometricObject<VPointF>(m_point2Id);
             DrawPoint(m_lineP2, static_cast<QPointF>(*second));
 
-            QLineF baseLine(static_cast<QPointF>(*first), static_cast<QPointF>(*second));
+            QLineF const baseLine(static_cast<QPointF>(*first), static_cast<QPointF>(*second));
             DrawLine(m_line, baseLine);
 
             if (not qFuzzyIsNull(m_length))
             {
-                QLineF mainLine = VGObject::BuildLine(static_cast<QPointF>(*first), m_length, m_line->line().angle());
+                QLineF const mainLine =
+                    VGObject::BuildLine(static_cast<QPointF>(*first), m_length, m_line->line().angle());
                 DrawLine(this, mainLine, LineStyle());
 
                 DrawPoint(m_point, mainLine.p2());
             }
             else if (GetMode() == Mode::Creation)
             {
-                QLineF cursorLine(static_cast<QPointF>(*first), ScenePos());
+                QLineF const cursorLine(static_cast<QPointF>(*first), ScenePos());
 
                 qreal len = cursorLine.length();
-                qreal angleTo = baseLine.angleTo(cursorLine);
+                qreal const angleTo = baseLine.angleTo(cursorLine);
                 if (angleTo > 90 && angleTo < 270)
                 {
                     len *= -1;
                 }
 
-                QLineF mainLine = VGObject::BuildLine(static_cast<QPointF>(*first), len, m_line->line().angle());
+                QLineF const mainLine = VGObject::BuildLine(static_cast<QPointF>(*first), len, m_line->line().angle());
                 DrawLine(this, mainLine, LineStyle());
 
                 DrawPoint(m_point, mainLine.p2());

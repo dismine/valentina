@@ -236,10 +236,10 @@ void DialogLineIntersect::PointNameChanged()
         const QSharedPointer<VPointF> p1Line2 = data->GeometricObject<VPointF>(p1Line2Id);
         const QSharedPointer<VPointF> p2Line2 = data->GeometricObject<VPointF>(p2Line2Id);
 
-        QLineF line1(static_cast<QPointF>(*p1Line1), static_cast<QPointF>(*p2Line1));
-        QLineF line2(static_cast<QPointF>(*p1Line2), static_cast<QPointF>(*p2Line2));
+        QLineF const line1(static_cast<QPointF>(*p1Line1), static_cast<QPointF>(*p2Line1));
+        QLineF const line2(static_cast<QPointF>(*p1Line2), static_cast<QPointF>(*p2Line2));
         QPointF fPoint;
-        QLineF::IntersectType intersect = line1.intersects(line2, &fPoint);
+        QLineF::IntersectType const intersect = line1.intersects(line2, &fPoint);
 
         flagError = not(set.size() < 3 || intersect == QLineF::NoIntersection);
         color = flagError ? OkColor(this) : errorColor;
@@ -277,10 +277,10 @@ auto DialogLineIntersect::CheckIntersecion() -> bool
         const QSharedPointer<VPointF> p1L2 = data->GeometricObject<VPointF>(GetP1Line2());
         const QSharedPointer<VPointF> p2L2 = data->GeometricObject<VPointF>(GetP2Line2());
 
-        QLineF line1(static_cast<QPointF>(*p1L1), static_cast<QPointF>(*p2L1));
-        QLineF line2(static_cast<QPointF>(*p1L2), static_cast<QPointF>(*p2L2));
+        QLineF const line1(static_cast<QPointF>(*p1L1), static_cast<QPointF>(*p2L1));
+        QLineF const line2(static_cast<QPointF>(*p1L2), static_cast<QPointF>(*p2L2));
         QPointF fPoint;
-        QLineF::IntersectType intersect = line1.intersects(line2, &fPoint);
+        QLineF::IntersectType const intersect = line1.intersects(line2, &fPoint);
         return intersect == QLineF::UnboundedIntersection || intersect == QLineF::BoundedIntersection;
     }
     catch (const VExceptionBadId &)

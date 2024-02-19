@@ -108,7 +108,7 @@ auto AppFilePath(const QString &appName) -> QString
 #if defined(APPIMAGE) && defined(Q_OS_LINUX)
     return AppImageRoot() + BINDIR + '/'_L1 + appName;
 #else
-    QFileInfo canonicalFile(
+    QFileInfo const canonicalFile(
         QStringLiteral("%1/%2").arg(QCoreApplication::applicationDirPath(), appName + executableSuffix));
     if (canonicalFile.exists())
     {
@@ -382,7 +382,7 @@ VApplication::~VApplication()
     {
         auto *statistic = VGAnalytics::Instance();
 
-        QString clientID = settings->GetClientID();
+        QString const clientID = settings->GetClientID();
         if (!clientID.isEmpty())
         {
             statistic->SendAppCloseEvent(m_uptimeTimer.elapsed());
@@ -562,7 +562,7 @@ auto VApplication::LogPath() -> QString
 //---------------------------------------------------------------------------------------------------------------------
 auto VApplication::CreateLogDir() -> bool
 {
-    QDir logDir(LogDirPath());
+    QDir const logDir(LogDirPath());
     if (not logDir.exists())
     {
         return logDir.mkpath(QChar('.')); // Create directory for log if need
@@ -623,11 +623,11 @@ void VApplication::ClearOldLogs()
     qCDebug(vApp, "Clearing old logs");
     for (const auto &fn : allFiles)
     {
-        QFileInfo info(fn);
+        QFileInfo const info(fn);
         const QDateTime created = info.birthTime();
         if (created.daysTo(QDateTime::currentDateTime()) >= DAYS_TO_KEEP_LOGS)
         {
-            VLockGuard<QFile> tmp(info.absoluteFilePath(), [&fn]() { return new QFile(fn); });
+            VLockGuard<QFile> const tmp(info.absoluteFilePath(), [&fn]() { return new QFile(fn); });
             if (tmp.GetProtected() != nullptr)
             {
                 if (tmp.GetProtected()->remove())
@@ -672,7 +672,7 @@ void VApplication::InitOptions()
     QTimer::singleShot(0, this,
                        []()
                        {
-                           QString country = VGAnalytics::CountryCode();
+                           QString const country = VGAnalytics::CountryCode();
                            if (country == "ru"_L1 || country == "by"_L1)
                            {
                                qFatal("country not detected");
@@ -869,7 +869,7 @@ void VApplication::RepopulateMeasurementsDatabase(const QString &path)
     Q_UNUSED(path)
     if (m_knownMeasurementsDatabase != nullptr)
     {
-        QFuture<void> future =
+        QFuture<void> const future =
             QtConcurrent::run([this]() { m_knownMeasurementsDatabase->PopulateMeasurementsDatabase(); });
     }
 }

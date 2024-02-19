@@ -69,7 +69,7 @@ auto VAspectRatioPixmapLabel::sizeHint() const -> QSize
         return QLabel::sizeHint();
     }
 
-    int w = m_pix.width();
+    int const w = m_pix.width();
     return {w, heightForWidth(w)};
 }
 

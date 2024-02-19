@@ -86,7 +86,7 @@ const QChar pointsSep = ' '_L1;
 //---------------------------------------------------------------------------------------------------------------------
 auto StringV0_1_2ToPoint(const QString &point) -> QPointF
 {
-    QStringList coordinates = point.split(coordintatesSep);
+    QStringList const coordinates = point.split(coordintatesSep);
     if (coordinates.count() == 2)
     {
         return {coordinates.at(0).toDouble(), coordinates.at(1).toDouble()};
@@ -99,7 +99,7 @@ auto StringV0_1_2ToPoint(const QString &point) -> QPointF
 auto StringV0_1_2ToPath(const QString &path) -> QVector<QPointF>
 {
     QVector<QPointF> p;
-    QStringList points = path.split(pointsSep);
+    QStringList const points = path.split(pointsSep);
     p.reserve(points.size());
     for (const auto &point : points)
     {
@@ -128,7 +128,7 @@ VLayoutConverter::VLayoutConverter(const QString &fileName)
 //---------------------------------------------------------------------------------------------------------------------
 auto VLayoutConverter::GetFormatVersionStr() const -> QString
 {
-    QDomNode root = documentElement();
+    QDomNode const root = documentElement();
     if (not root.isNull() && root.isElement())
     {
         const QDomElement layoutElement = root.toElement();
@@ -232,7 +232,7 @@ void VLayoutConverter::ConvertPiecesToV0_1_3()
 
     for (const auto &tagType : types)
     {
-        QDomNodeList tags = elementsByTagName(tagType);
+        QDomNodeList const tags = elementsByTagName(tagType);
         for (int i = 0; i < tags.size(); ++i)
         {
             QDomElement node = tags.at(i).toElement();
@@ -240,14 +240,14 @@ void VLayoutConverter::ConvertPiecesToV0_1_3()
         }
     }
 
-    QDomNodeList tags = elementsByTagName(*strMarkerTag);
+    QDomNodeList const tags = elementsByTagName(*strMarkerTag);
     for (int i = 0; i < tags.size(); ++i)
     {
         QDomElement node = tags.at(i).toElement();
         RemoveAllChildren(node);
     }
 
-    QDomNodeList pieceTags = elementsByTagName(*strPieceTag);
+    QDomNodeList const pieceTags = elementsByTagName(*strPieceTag);
     for (int i = 0; i < pieceTags.size(); ++i)
     {
         QDomElement node = pieceTags.at(i).toElement();
@@ -262,7 +262,7 @@ void VLayoutConverter::ConvertPiecesToV0_1_3()
 //---------------------------------------------------------------------------------------------------------------------
 void VLayoutConverter::ConvertPathToV0_1_3(QDomElement &node)
 {
-    QString oldPath = node.text();
+    QString const oldPath = node.text();
     if (oldPath.isEmpty())
     {
         return;
@@ -298,7 +298,7 @@ void VLayoutConverter::ConvertPiecesToV0_1_5()
     // TODO. Delete if minimal supported version is 0.1.5
     Q_STATIC_ASSERT_X(VLayoutConverter::LayoutMinVer < FormatVersion(0, 1, 5), "Time to refactor the code.");
 
-    QDomNodeList grainlineTags = elementsByTagName(*strGrainlineTag);
+    QDomNodeList const grainlineTags = elementsByTagName(*strGrainlineTag);
     for (int i = 0; i < grainlineTags.size(); ++i)
     {
         QDomElement node = grainlineTags.at(i).toElement();
@@ -313,7 +313,7 @@ void VLayoutConverter::ConvertPiecesToV0_1_5()
             // convert arrowDirection
             if (node.hasAttribute(*strAttrArrowDirection))
             {
-                QString arrowDirection = node.attribute(*strAttrArrowDirection);
+                QString const arrowDirection = node.attribute(*strAttrArrowDirection);
 
                 const QStringList arrows{
                     "atFront",   // 0
@@ -392,7 +392,7 @@ void VLayoutConverter::ConvertPiecesToV0_1_7()
     // TODO. Delete if minimal supported version is 0.1.7
     Q_STATIC_ASSERT_X(VLayoutConverter::LayoutMinVer < FormatVersion(0, 1, 7), "Time to refactor the code.");
 
-    QDomNodeList pieceTags = elementsByTagName(*strPieceTag);
+    QDomNodeList const pieceTags = elementsByTagName(*strPieceTag);
     for (int i = 0; i < pieceTags.size(); ++i)
     {
         QDomElement node = pieceTags.at(i).toElement();

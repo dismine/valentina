@@ -62,9 +62,9 @@ VPatternPieceStyle::VPatternPieceStyle()
 //---------------------------------------------------------------------------------------------------------------------
 void VPatternPieceStyle::LoadJson(const QJsonObject &json)
 {
-    QJsonValue toolStyleValues = json[*PatternPieceStyleNodeVar];
+    QJsonValue const toolStyleValues = json[*PatternPieceStyleNodeVar];
 
-    QJsonObject obj = toolStyleValues.toObject();
+    QJsonObject const obj = toolStyleValues.toObject();
 
     ReadColor(obj, *PieceColorVar, m_pieceColor);
     ReadColor(obj, *PointColorVar, m_pointColor);
@@ -79,7 +79,7 @@ void VPatternPieceStyle::LoadJson(const QJsonObject &json)
 //---------------------------------------------------------------------------------------------------------------------
 auto VPatternPieceStyle::ToJson() const -> QJsonObject
 {
-    QJsonObject obj;
+    QJsonObject const obj;
 
     WriteColor(obj, *PieceColorVar, m_pieceColor);
     WriteColor(obj, *PointColorVar, m_pointColor);

@@ -72,7 +72,7 @@ void VisToolCutArc::RefreshGeometry()
         {
             VArc ar1;
             VArc ar2;
-            QPointF p = arc->CutArc(m_length, ar1, ar2, QString());
+            QPointF const p = arc->CutArc(m_length, ar1, ar2, QString());
             DrawPoint(m_point, p);
 
             DrawPath(m_arc1, ar1.GetPath(), ar1.DirectionArrows(), LineStyle(), Qt::RoundCap);
@@ -80,7 +80,7 @@ void VisToolCutArc::RefreshGeometry()
         }
         else if (GetMode() == Mode::Creation)
         {
-            QPointF p = arc->ClosestPoint(ScenePos());
+            QPointF const p = arc->ClosestPoint(ScenePos());
             qreal length = arc->GetLengthByPoint(p);
             length = !arc->IsFlipped() ? qBound(0.0, length, arc->GetLength()) : qBound(arc->GetLength(), -length, 0.0);
 

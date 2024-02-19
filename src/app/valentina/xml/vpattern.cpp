@@ -469,7 +469,7 @@ auto VPattern::GetActivePPPieces() const -> QVector<quint32>
             QDomElement detail = details.firstChildElement(TagDetail);
             while (not detail.isNull())
             {
-                bool united = GetParametrBool(detail, VToolSeamAllowance::AttrUnited, falseStr);
+                bool const united = GetParametrBool(detail, VToolSeamAllowance::AttrUnited, falseStr);
                 if (not united)
                 {
                     pieces.append(GetParametrId(detail));
@@ -496,7 +496,7 @@ auto VPattern::SaveDocument(const QString &fileName, QString &error) -> bool
     }
 
     // Update comment with Valentina version
-    QDomNode commentNode = documentElement().firstChild();
+    QDomNode const commentNode = documentElement().firstChild();
     if (commentNode.isComment())
     {
         QDomComment comment = commentNode.toComment();
@@ -599,9 +599,9 @@ void VPattern::LiteParseIncrements()
 //---------------------------------------------------------------------------------------------------------------------
 auto VPattern::ElementsToParse() const -> int
 {
-    QVector<QString> tags{TagCalculation, TagDetails, TagModeling, TagIncrements};
+    QVector<QString> const tags{TagCalculation, TagDetails, TagModeling, TagIncrements};
 
-    std::function<int(const QString &tagName)> TagsCount = [this](const QString &tagName)
+    std::function<int(const QString &tagName)> const TagsCount = [this](const QString &tagName)
     { return elementsByTagName(tagName).length(); };
 
     return QtConcurrent::blockingMappedReduced(tags, TagsCount, GatherCount);
@@ -614,7 +614,7 @@ auto VPattern::ElementsToParse() const -> int
 void VPattern::LiteParseTree(const Document &parse)
 {
     // Save name current pattern piece
-    QString namePP = nameActivPP;
+    QString const namePP = nameActivPP;
 
     try
     {
@@ -753,8 +753,8 @@ auto VPattern::ParseDetailNode(const QDomElement &domElement) -> VNodeDetail
     const QString t = GetParametrString(domElement, AttrType, QStringLiteral("NodePoint"));
     Tool tool;
 
-    QStringList types{VAbstractPattern::NodePoint, VAbstractPattern::NodeArc, VAbstractPattern::NodeSpline,
-                      VAbstractPattern::NodeSplinePath, VAbstractPattern::NodeElArc};
+    QStringList const types{VAbstractPattern::NodePoint, VAbstractPattern::NodeArc, VAbstractPattern::NodeSpline,
+                            VAbstractPattern::NodeSplinePath, VAbstractPattern::NodeElArc};
     switch (types.indexOf(t))
     {
         case 0: // NodePoint
@@ -844,7 +844,7 @@ void VPattern::ParseRootElement(const Document &parse, const QDomNode &node)
  */
 void VPattern::ParseDrawElement(const QDomNode &node, const Document &parse)
 {
-    QStringList tags{TagCalculation, TagModeling, TagDetails, TagGroups};
+    QStringList const tags{TagCalculation, TagModeling, TagDetails, TagGroups};
     QDomNode domNode = node.firstChild();
     while (not domNode.isNull())
     {
@@ -2001,7 +2001,7 @@ void VPattern::ParseNodePoint(const QDomElement &domElement, const Document &par
             return; // Just ignore
         }
 
-        QSharedPointer<VPointF> p(new VPointF(*point));
+        QSharedPointer<VPointF> const p(new VPointF(*point));
         p->setIdObject(initData.idObject);
         p->setMode(Draw::Modeling);
         p->SetShowLabel(GetParametrBool(domElement, AttrShowLabel, trueStr));
@@ -2913,7 +2913,7 @@ void VPattern::ParseOldToolSplinePath(VMainGraphicsScene *scene, QDomElement &do
                     QLineF line(0, 0, 100, 0);
                     line.setAngle(angle + 180);
 
-                    VFSplinePoint splPoint(p, kAsm1, line.angle(), kAsm2, angle);
+                    VFSplinePoint const splPoint(p, kAsm1, line.angle(), kAsm2, angle);
                     points.append(splPoint);
                     if (parse == Document::FullParse)
                     {
@@ -3646,7 +3646,7 @@ auto VPattern::MakeEmptyIncrement(const QString &name, IncrementType type) -> QD
 //---------------------------------------------------------------------------------------------------------------------
 auto VPattern::FindIncrement(const QString &name) const -> QDomElement
 {
-    QDomNodeList list = elementsByTagName(TagIncrement);
+    QDomNodeList const list = elementsByTagName(TagIncrement);
 
     for (int i = 0; i < list.size(); ++i)
     {
@@ -3669,7 +3669,7 @@ void VPattern::GarbageCollector(bool commit)
 {
     bool cleared = false;
 
-    QDomNodeList modelingList = elementsByTagName(TagModeling);
+    QDomNodeList const modelingList = elementsByTagName(TagModeling);
     for (int i = 0; i < modelingList.size(); ++i)
     {
         QDomElement modElement = modelingList.at(i).toElement();
@@ -3679,7 +3679,7 @@ void VPattern::GarbageCollector(bool commit)
             while (not modNode.isNull())
             {
                 // First get next sibling because later will not have chance to get it
-                QDomElement nextSibling = modNode.nextSibling().toElement();
+                QDomElement const nextSibling = modNode.nextSibling().toElement();
                 if (modNode.hasAttribute(VAbstractTool::AttrInUse))
                 {
                     const NodeUsage inUse = GetParametrUsage(modNode, VAbstractTool::AttrInUse);
@@ -3698,7 +3698,7 @@ void VPattern::GarbageCollector(bool commit)
                             // Clear history
                             try
                             {
-                                vidtype id = GetParametrId(modNode);
+                                vidtype const id = GetParametrId(modNode);
                                 auto record =
                                     std::find_if(history.begin(), history.end(),
                                                  [id](const VToolRecord &record) { return record.getId() == id; });
@@ -3950,7 +3950,7 @@ void VPattern::ParseSplineElement(VMainGraphicsScene *scene, QDomElement &domEle
             ParseToolCubicBezierPath(scene, domElement, parse);
             break;
         default:
-            VException e(tr("Unknown spline type '%1'.").arg(type));
+            VException const e(tr("Unknown spline type '%1'.").arg(type));
             throw e;
     }
 }
@@ -3970,9 +3970,9 @@ void VPattern::ParseArcElement(VMainGraphicsScene *scene, QDomElement &domElemen
     Q_ASSERT_X(not domElement.isNull(), Q_FUNC_INFO, "domElement is null");
     Q_ASSERT_X(not type.isEmpty(), Q_FUNC_INFO, "type of arc is empty");
 
-    QStringList arcs = QStringList() << VToolArc::ToolType            /*0*/
-                                     << VNodeArc::ToolType            /*1*/
-                                     << VToolArcWithLength::ToolType; /*2*/
+    QStringList const arcs = QStringList() << VToolArc::ToolType            /*0*/
+                                           << VNodeArc::ToolType            /*1*/
+                                           << VToolArcWithLength::ToolType; /*2*/
 
     switch (arcs.indexOf(type))
     {
@@ -3986,7 +3986,7 @@ void VPattern::ParseArcElement(VMainGraphicsScene *scene, QDomElement &domElemen
             ParseToolArcWithLength(scene, domElement, parse);
             break;
         default:
-            VException e(tr("Unknown arc type '%1'.").arg(type));
+            VException const e(tr("Unknown arc type '%1'.").arg(type));
             throw e;
     }
 }
@@ -4018,7 +4018,7 @@ void VPattern::ParseEllipticalArcElement(VMainGraphicsScene *scene, QDomElement 
             ParseNodeEllipticalArc(domElement, parse);
             break;
         default:
-            VException e(tr("Unknown elliptical arc type '%1'.").arg(type));
+            VException const e(tr("Unknown elliptical arc type '%1'.").arg(type));
             throw e;
     }
 }
@@ -4066,7 +4066,7 @@ void VPattern::ParseToolsElement(VMainGraphicsScene *scene, const QDomElement &d
             }
             break;
         default:
-            VException e(tr("Unknown tools type '%1'.").arg(type));
+            VException const e(tr("Unknown tools type '%1'.").arg(type));
             throw e;
     }
 }
@@ -4099,7 +4099,7 @@ void VPattern::ParseOperationElement(VMainGraphicsScene *scene, QDomElement &dom
             ParseToolMove(scene, domElement, parse);
             break;
         default:
-            VException e(tr("Unknown operation type '%1'.").arg(type));
+            VException const e(tr("Unknown operation type '%1'.").arg(type));
             throw e;
     }
 }
@@ -4342,7 +4342,7 @@ void VPattern::ReplaceNameInFormula(QVector<VFormulaField> &expressions, const Q
             // Eval formula
             try
             {
-                QScopedPointer<qmu::QmuTokenParser> cal(
+                QScopedPointer<qmu::QmuTokenParser> const cal(
                     new qmu::QmuTokenParser(expressions.at(i).expression, false, false));
                 tokens = cal->GetTokens(); // Tokens (variables, measurements)
             }

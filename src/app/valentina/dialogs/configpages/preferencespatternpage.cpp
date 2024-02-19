@@ -134,7 +134,7 @@ PreferencesPatternPage::PreferencesPatternPage(QWidget *parent)
     ui->checkBoxHideMainPath->setChecked(settings->IsHideMainPath());
 
     QFont labelFont = settings->GetLabelFont();
-    int pointSize = settings->GetPieceLabelFontPointSize();
+    int const pointSize = settings->GetPieceLabelFontPointSize();
     labelFont.setPointSize(qMax(pointSize, 1));
 
     ui->fontComboBoxLabelFont->setCurrentFont(labelFont);
@@ -268,7 +268,7 @@ void PreferencesPatternPage::changeEvent(QEvent *event)
 
     if (event->type() == QEvent::PaletteChange)
     {
-        QString currentSingleLineFont = ui->comboBoxSingleLineFont->currentData().toString();
+        QString const currentSingleLineFont = ui->comboBoxSingleLineFont->currentData().toString();
         InitSingleLineFonts();
         const qint32 indexFont = ui->comboBoxSingleLineFont->findData(currentSingleLineFont);
         if (indexFont != -1)
@@ -353,8 +353,8 @@ void PreferencesPatternPage::InitSingleLineFonts()
     const qreal dpiY = primaryScreen->physicalDotsPerInchY();
     const qreal scale = primaryScreen->devicePixelRatio();
 
-    int previewWidth = 250;
-    int previewHeight = QFontMetrics(QGuiApplication::font()).height();
+    int const previewWidth = 250;
+    int const previewHeight = QFontMetrics(QGuiApplication::font()).height();
 
     // Calculate the desired image size in physical pixels
     const int desiredWidthInPixels = qRound(previewWidth * dpiX / 96.0);
@@ -379,7 +379,7 @@ void PreferencesPatternPage::InitSingleLineFonts()
     {
         VSvgFontEngine engine = db->FontEngine(family, SVGFontStyle::Normal, SVGFontWeight::Normal);
 
-        VSvgFont svgFont = engine.Font();
+        VSvgFont const svgFont = engine.Font();
         if (!svgFont.IsValid())
         {
             continue;
@@ -412,7 +412,7 @@ void PreferencesPatternPage::InitComboBoxFormats(QComboBox *box, const QStringLi
     SCASSERT(box != nullptr)
 
     box->addItems(items);
-    int index = box->findText(currentFormat);
+    int const index = box->findText(currentFormat);
     if (index != -1)
     {
         box->setCurrentIndex(index);
@@ -456,7 +456,7 @@ void PreferencesPatternPage::CallDateTimeFormatEditor(const T &type, const QStri
         box->clear();
         box->addItems(dialog.GetFormats());
 
-        int index = box->findText(currentFormat);
+        int const index = box->findText(currentFormat);
         if (index != -1)
         {
             box->setCurrentIndex(index);

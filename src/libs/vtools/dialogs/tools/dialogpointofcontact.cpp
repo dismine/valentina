@@ -205,7 +205,7 @@ void DialogPointOfContact::ShowDialog(bool click)
 
         const QSharedPointer<VPointF> center = data->GeometricObject<VPointF>(GetCenter());
 
-        QLineF line(static_cast<QPointF>(*center), scene->getScenePos());
+        QLineF const line(static_cast<QPointF>(*center), scene->getScenePos());
 
         SetRadius(QString::number(FromPixel(line.length(), *data->GetPatternUnit())));
     }

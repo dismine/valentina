@@ -519,7 +519,7 @@ void DialogLayoutSettings::ConvertPaperSize()
 //---------------------------------------------------------------------------------------------------------------------
 auto DialogLayoutSettings::SelectPaperUnit(const QString &units) -> bool
 {
-    qint32 indexUnit = ui->comboBoxPaperSizeUnit->findData(units);
+    qint32 const indexUnit = ui->comboBoxPaperSizeUnit->findData(units);
     if (indexUnit != -1)
     {
         ui->comboBoxPaperSizeUnit->setCurrentIndex(indexUnit);
@@ -530,7 +530,7 @@ auto DialogLayoutSettings::SelectPaperUnit(const QString &units) -> bool
 //---------------------------------------------------------------------------------------------------------------------
 auto DialogLayoutSettings::SelectLayoutUnit(const QString &units) -> bool
 {
-    qint32 indexUnit = ui->comboBoxLayoutUnit->findData(units);
+    qint32 const indexUnit = ui->comboBoxLayoutUnit->findData(units);
     if (indexUnit != -1)
     {
         ui->comboBoxLayoutUnit->setCurrentIndex(indexUnit);
@@ -632,7 +632,7 @@ void DialogLayoutSettings::PaperSizeChanged()
 //---------------------------------------------------------------------------------------------------------------------
 auto DialogLayoutSettings::SelectTemplate(const PaperSizeTemplate &id) -> bool
 {
-    int index = ui->comboBoxTemplates->findData(static_cast<VIndexType>(id));
+    int const index = ui->comboBoxTemplates->findData(static_cast<VIndexType>(id));
     if (index > -1)
     {
         ui->comboBoxTemplates->setCurrentIndex(index);
@@ -689,7 +689,7 @@ void DialogLayoutSettings::DialogAccepted()
     }
     else
     {
-        QPrinterInfo printer = QPrinterInfo::printerInfo(ui->comboBoxPrinter->currentText());
+        QPrinterInfo const printer = QPrinterInfo::printerInfo(ui->comboBoxPrinter->currentText());
         if (printer.isNull())
         {
             m_generator->SetPrinterFields(true, GetFields());
@@ -764,7 +764,7 @@ void DialogLayoutSettings::RestoreDefaults()
 //---------------------------------------------------------------------------------------------------------------------
 void DialogLayoutSettings::PrinterMargins()
 {
-    QPrinterInfo printer = QPrinterInfo::printerInfo(ui->comboBoxPrinter->currentText());
+    QPrinterInfo const printer = QPrinterInfo::printerInfo(ui->comboBoxPrinter->currentText());
     if (not printer.isNull())
     {
         SetFields(GetPrinterFields(QSharedPointer<QPrinter>(new QPrinter(printer))));
@@ -958,7 +958,7 @@ auto DialogLayoutSettings::GetTemplateSize(const PaperSizeTemplate &tmpl, const 
 //---------------------------------------------------------------------------------------------------------------------
 auto DialogLayoutSettings::MinPrinterFields() const -> QMarginsF
 {
-    QPrinterInfo printer = QPrinterInfo::printerInfo(ui->comboBoxPrinter->currentText());
+    QPrinterInfo const printer = QPrinterInfo::printerInfo(ui->comboBoxPrinter->currentText());
     if (not printer.isNull())
     {
         return GetMinPrinterFields(QSharedPointer<QPrinter>(new QPrinter(printer)));
@@ -970,7 +970,7 @@ auto DialogLayoutSettings::MinPrinterFields() const -> QMarginsF
 //---------------------------------------------------------------------------------------------------------------------
 auto DialogLayoutSettings::GetDefPrinterFields() const -> QMarginsF
 {
-    QPrinterInfo printer = QPrinterInfo::printerInfo(ui->comboBoxPrinter->currentText());
+    QPrinterInfo const printer = QPrinterInfo::printerInfo(ui->comboBoxPrinter->currentText());
     if (not printer.isNull())
     {
         return GetPrinterFields(QSharedPointer<QPrinter>(new QPrinter(printer)));

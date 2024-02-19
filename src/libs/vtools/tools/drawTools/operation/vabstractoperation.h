@@ -192,7 +192,7 @@ template <typename T> void VAbstractOperation::SetDialogVisibilityGroupData(QPoi
 {
     SCASSERT(not dialogTool.isNull())
 
-    vidtype group = doc->GroupLinkedToTool(m_id);
+    vidtype const group = doc->GroupLinkedToTool(m_id);
     dialogTool->SetGroupCategories(doc->GetGroupCategories());
     if (group != null_id)
     {

@@ -45,7 +45,7 @@ constexpr int arrowLength = 15;
 //---------------------------------------------------------------------------------------------------------------------
 auto VPieceGrainlinePrivate::MainLine(const QPointF &p1, qreal length, qreal angle) -> QLineF
 {
-    QPointF pt2(p1.x() + length * cos(angle), p1.y() - length * sin(angle));
+    QPointF const pt2(p1.x() + length * cos(angle), p1.y() - length * sin(angle));
     return {p1, pt2};
 }
 
@@ -432,7 +432,7 @@ auto VPieceGrainline::IsPositionValid(const QVector<QPointF> &contourPoints) con
 //---------------------------------------------------------------------------------------------------------------------
 auto VPieceGrainline::IsShapeValid() const -> bool
 {
-    GrainlineShape shape = Shape();
+    GrainlineShape const shape = Shape();
     return std::all_of(shape.cbegin(), shape.cend(), [](const auto &subShape) { return not subShape.isEmpty(); });
 }
 

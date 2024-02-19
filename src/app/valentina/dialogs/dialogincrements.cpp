@@ -231,7 +231,7 @@ template <typename T> void DialogIncrements::FillTable(const QMap<QString, T> &v
     while (i.hasNext())
     {
         i.next();
-        qreal length = *i.value()->GetValue();
+        qreal const length = *i.value()->GetValue();
         currentRow++;
         table->setRowCount(static_cast<int>(varTable.size()));
 
@@ -421,7 +421,7 @@ auto DialogIncrements::EvalIncrementFormula(const QString &formula, bool fromUse
         {
             f = formula;
         }
-        QScopedPointer<Calculator> cal(new Calculator());
+        QScopedPointer<Calculator> const cal(new Calculator());
         const qreal result = cal->EvalFormula(data->DataVariables(), f);
 
         if (qIsInf(result) || qIsNaN(result))
@@ -627,7 +627,7 @@ void DialogIncrements::EnableDetails(QTableWidget *table, bool enabled)
     {
         const QTableWidgetItem *nameField = table->item(table->currentRow(), 0);
         SCASSERT(nameField != nullptr)
-        QSharedPointer<VIncrement> incr = m_data->GetVariable<VIncrement>(nameField->text());
+        QSharedPointer<VIncrement> const incr = m_data->GetVariable<VIncrement>(nameField->text());
         const bool isSeparator = incr->GetIncrementType() == IncrementType::Separator;
 
         if (table == ui->tableWidgetIncrement)
@@ -696,7 +696,7 @@ auto DialogIncrements::IncrementUsed(const QString &name) const -> bool
                            // Eval formula
                            try
                            {
-                               QScopedPointer<qmu::QmuTokenParser> cal(
+                               QScopedPointer<qmu::QmuTokenParser> const cal(
                                    new qmu::QmuTokenParser(field.expression, false, false));
 
                                // Tokens (variables, measurements)
@@ -793,8 +793,8 @@ void DialogIncrements::ShowTableIncrementDetails(QTableWidget *table)
         EvalIncrementFormula(incr->GetFormula(), false, incr->GetData(), labelCalculatedValue, incr->IsSpecialUnits());
         plainTextEditFormula->blockSignals(true);
 
-        QString formula = VTranslateVars::TryFormulaToUser(incr->GetFormula(),
-                                                           VAbstractApplication::VApp()->Settings()->GetOsSeparator());
+        QString const formula = VTranslateVars::TryFormulaToUser(
+            incr->GetFormula(), VAbstractApplication::VApp()->Settings()->GetOsSeparator());
 
         plainTextEditFormula->setPlainText(formula);
         plainTextEditFormula->blockSignals(false);
@@ -1126,7 +1126,8 @@ void DialogIncrements::InitSearch()
 //---------------------------------------------------------------------------------------------------------------------
 void DialogIncrements::InitIncrementsSearchHistory()
 {
-    QStringList searchHistory = VAbstractValApplication::VApp()->ValentinaSettings()->GetIncrementsSearchHistory();
+    QStringList const searchHistory =
+        VAbstractValApplication::VApp()->ValentinaSettings()->GetIncrementsSearchHistory();
     m_searchHistory->clear();
 
     if (searchHistory.isEmpty())
@@ -1146,7 +1147,7 @@ void DialogIncrements::InitIncrementsSearchHistory()
                     auto *action = qobject_cast<QAction *>(sender());
                     if (action != nullptr)
                     {
-                        QString term = action->data().toString();
+                        QString const term = action->data().toString();
                         ui->lineEditFind->setText(term);
                         m_search->Find(term);
                         ui->lineEditFind->setFocus();
@@ -1158,7 +1159,7 @@ void DialogIncrements::InitIncrementsSearchHistory()
 //---------------------------------------------------------------------------------------------------------------------
 void DialogIncrements::InitPreviewCalculationsSearchHistory()
 {
-    QStringList searchHistory =
+    QStringList const searchHistory =
         VAbstractValApplication::VApp()->ValentinaSettings()->GetPreviewCalculationsSearchHistory();
     m_searchHistoryPC->clear();
 
@@ -1179,7 +1180,7 @@ void DialogIncrements::InitPreviewCalculationsSearchHistory()
                     auto *action = qobject_cast<QAction *>(sender());
                     if (action != nullptr)
                     {
-                        QString term = action->data().toString();
+                        QString const term = action->data().toString();
                         ui->lineEditFindPC->setText(term);
                         m_searchPC->Find(term);
                         ui->lineEditFindPC->setFocus();
@@ -1192,7 +1193,7 @@ void DialogIncrements::InitPreviewCalculationsSearchHistory()
 void DialogIncrements::SaveIncrementsSearchRequest()
 {
     QStringList searchHistory = VAbstractValApplication::VApp()->ValentinaSettings()->GetIncrementsSearchHistory();
-    QString term = ui->lineEditFind->text();
+    QString const term = ui->lineEditFind->text();
     if (term.isEmpty())
     {
         return;
@@ -1212,7 +1213,7 @@ void DialogIncrements::SavePreviewCalculationsSearchRequest()
 {
     QStringList searchHistory =
         VAbstractValApplication::VApp()->ValentinaSettings()->GetPreviewCalculationsSearchHistory();
-    QString term = ui->lineEditFindPC->text();
+    QString const term = ui->lineEditFindPC->text();
     if (term.isEmpty())
     {
         return;
@@ -1239,7 +1240,7 @@ void DialogIncrements::UpdateSearchControlsTooltips()
         }
         else if (m_serachButtonTooltips.contains(button))
         {
-            QString tooltip = m_serachButtonTooltips.value(button);
+            QString const tooltip = m_serachButtonTooltips.value(button);
             button->setToolTip(tooltip.arg(button->shortcut().toString(QKeySequence::NativeText)));
         }
     };
@@ -1295,7 +1296,7 @@ void DialogIncrements::InitIncrementUnits(QComboBox *combo)
     combo->addItem(units, QVariant(static_cast<int>(IncrUnits::Pattern)));
     combo->addItem(tr("Degrees"), QVariant(static_cast<int>(IncrUnits::Degrees)));
 
-    int i = combo->findData(current);
+    int const i = combo->findData(current);
     if (i != -1)
     {
         combo->setCurrentIndex(i);
@@ -1430,7 +1431,7 @@ void DialogIncrements::FillIncrementsTable(QTableWidget *table,
             }
             AddCell(table, calculatedValue, currentRow, 1, Qt::AlignCenter, incr->IsFormulaOk()); // calculated value
 
-            QString formula = VTranslateVars::TryFormulaToUser(
+            QString const formula = VTranslateVars::TryFormulaToUser(
                 incr->GetFormula(), VAbstractApplication::VApp()->Settings()->GetOsSeparator());
 
             AddCell(table, formula, currentRow, 2, Qt::AlignVCenter); // formula
@@ -1783,8 +1784,8 @@ void DialogIncrements::SaveIncrFormula()
 
     const QTableWidgetItem *nameField = table->item(row, 0);
 
-    QString text = textEdit->toPlainText();
-    QSharedPointer<VIncrement> incr = m_data->GetVariable<VIncrement>(nameField->text());
+    QString const text = textEdit->toPlainText();
+    QSharedPointer<VIncrement> const incr = m_data->GetVariable<VIncrement>(nameField->text());
 
     QTableWidgetItem *formulaField = table->item(row, 2);
     if (formulaField->text() == text)
@@ -1941,9 +1942,9 @@ void DialogIncrements::Fx()
     }
 
     const QTableWidgetItem *nameField = table->item(row, 0);
-    QSharedPointer<VIncrement> incr = m_data->GetVariable<VIncrement>(nameField->text());
+    QSharedPointer<VIncrement> const incr = m_data->GetVariable<VIncrement>(nameField->text());
 
-    QScopedPointer<DialogEditWrongFormula> dialog(new DialogEditWrongFormula(incr->GetData(), NULL_ID, this));
+    QScopedPointer<DialogEditWrongFormula> const dialog(new DialogEditWrongFormula(incr->GetData(), NULL_ID, this));
     dialog->setWindowTitle(tr("Edit increment"));
     incrementMode ? dialog->SetIncrementsMode() : dialog->SetPreviewCalculationsMode();
 

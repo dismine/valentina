@@ -140,8 +140,8 @@ auto VToolLineIntersect::Create(VToolLineIntersectInitData initData) -> VToolLin
     const QSharedPointer<VPointF> p1Line2 = initData.data->GeometricObject<VPointF>(initData.p1Line2Id);
     const QSharedPointer<VPointF> p2Line2 = initData.data->GeometricObject<VPointF>(initData.p2Line2Id);
 
-    QLineF line1(static_cast<QPointF>(*p1Line1), static_cast<QPointF>(*p2Line1));
-    QLineF line2(static_cast<QPointF>(*p1Line2), static_cast<QPointF>(*p2Line2));
+    QLineF const line1(static_cast<QPointF>(*p1Line1), static_cast<QPointF>(*p2Line1));
+    QLineF const line2(static_cast<QPointF>(*p1Line2), static_cast<QPointF>(*p2Line2));
     QPointF fPoint;
     const QLineF::IntersectType intersect = line1.intersects(line2, &fPoint);
 

@@ -83,8 +83,8 @@ void VisToolPointFromCircleAndTangent::RefreshGeometry()
             }
             else if (GetMode() == Mode::Creation)
             {
-                QLineF cursorLine(static_cast<QPointF>(*center), ScenePos());
-                qreal len = cursorLine.length();
+                QLineF const cursorLine(static_cast<QPointF>(*center), ScenePos());
+                qreal const len = cursorLine.length();
 
                 m_cPath->setRect(PointRect(len));
                 DrawPoint(m_cPath, static_cast<QPointF>(*center), Qt::DashLine);

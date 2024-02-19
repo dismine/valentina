@@ -35,7 +35,7 @@ DeleteBackgroundImage::DeleteBackgroundImage(const VBackgroundPatternImage &imag
 {
     setText(tr("delete background image"));
 
-    QVector<VBackgroundPatternImage> allImages = doc->GetBackgroundImages();
+    QVector<VBackgroundPatternImage> const allImages = doc->GetBackgroundImages();
 
     for (int i = 0; i < allImages.size(); ++i)
     {

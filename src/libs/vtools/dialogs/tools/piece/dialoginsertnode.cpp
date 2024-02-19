@@ -101,7 +101,7 @@ auto DialogInsertNode::GetNodes() const -> QVector<VPieceNode>
     QVector<VPieceNode> nodes;
     for (qint32 i = 0; i < ui->listWidget->count(); ++i)
     {
-        VPieceNode node = qvariant_cast<VPieceNode>(ui->listWidget->item(i)->data(Qt::UserRole));
+        VPieceNode const node = qvariant_cast<VPieceNode>(ui->listWidget->item(i)->data(Qt::UserRole));
         for (int n = 1; n <= nodeNumbers.value(node.GetId(), 1); ++n)
         {
             nodes.append(node);
@@ -212,7 +212,7 @@ void DialogInsertNode::ShowContextMenu(const QPoint &pos)
         return;
     }
 
-    QScopedPointer<QMenu> menu(new QMenu());
+    QScopedPointer<QMenu> const menu(new QMenu());
 
     QListWidgetItem *rowItem = ui->listWidget->item(row);
     SCASSERT(rowItem != nullptr);
@@ -242,7 +242,7 @@ void DialogInsertNode::NodeSelected()
         return;
     }
 
-    VPieceNode node = qvariant_cast<VPieceNode>(item->data(Qt::UserRole));
+    VPieceNode const node = qvariant_cast<VPieceNode>(item->data(Qt::UserRole));
     ui->spinBoxNodeNumber->setEnabled(true);
     ui->spinBoxNodeNumber->blockSignals(true);
     ui->spinBoxNodeNumber->setValue(nodeNumbers.value(node.GetId(), 1));
@@ -259,7 +259,7 @@ void DialogInsertNode::NodeNumberChanged(int val)
         return;
     }
 
-    VPieceNode node = qvariant_cast<VPieceNode>(item->data(Qt::UserRole));
+    VPieceNode const node = qvariant_cast<VPieceNode>(item->data(Qt::UserRole));
     nodeNumbers[node.GetId()] = val;
 }
 

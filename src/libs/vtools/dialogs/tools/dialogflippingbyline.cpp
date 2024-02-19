@@ -354,7 +354,7 @@ void DialogFlippingByLine::SuffixChanged()
 
         if (m_suffix != suffix)
         {
-            QRegularExpression rx(NameRegExp());
+            QRegularExpression const rx(NameRegExp());
             const QStringList uniqueNames = data->AllUniqueNames();
             for (auto &uniqueName : uniqueNames)
             {
@@ -454,7 +454,7 @@ void DialogFlippingByLine::ShowSourceDetails(int row)
         if (sourceItem.penStyle.isEmpty() || sourceItem.penStyle == TypeLineDefault)
         {
             ;
-            int index = ui->comboBoxPenStyle->currentIndex();
+            int const index = ui->comboBoxPenStyle->currentIndex();
             ui->comboBoxPenStyle->setItemText(index, '<' + tr("Default") + '>');
         }
 
@@ -463,7 +463,7 @@ void DialogFlippingByLine::ShowSourceDetails(int row)
         if (sourceItem.color.isEmpty() || sourceItem.color == ColorDefault)
         {
             const QSharedPointer<VAbstractCurve> curve = data->GeometricObject<VAbstractCurve>(sourceItem.id);
-            int index = ui->comboBoxColor->currentIndex();
+            int const index = ui->comboBoxColor->currentIndex();
             ui->comboBoxColor->setItemIcon(index, LineColor(ui->comboBoxColor->palette().color(QPalette::Text),
                                                             ui->comboBoxColor->iconSize().height(), curve->GetColor()));
         }
@@ -584,11 +584,11 @@ void DialogFlippingByLine::PointChanged()
     ChangeColor(ui->labelFirstLinePoint, color);
     ChangeColor(ui->labelSecondLinePoint, color);
 
-    quint32 id1 = getCurrentObjectId(ui->comboBoxFirstLinePoint);
+    quint32 const id1 = getCurrentObjectId(ui->comboBoxFirstLinePoint);
     auto obj1 = std::find_if(sourceObjects.begin(), sourceObjects.end(),
                              [id1](const SourceItem &sItem) { return sItem.id == id1; });
 
-    quint32 id2 = getCurrentObjectId(ui->comboBoxSecondLinePoint);
+    quint32 const id2 = getCurrentObjectId(ui->comboBoxSecondLinePoint);
     auto obj2 = std::find_if(sourceObjects.begin(), sourceObjects.end(),
                              [id2](const SourceItem &sItem) { return sItem.id == id2; });
 
@@ -630,7 +630,7 @@ void DialogFlippingByLine::FillSourceList()
     for (auto &sourceItem : sourceObjects)
     {
         const QSharedPointer<VGObject> obj = data->GetGObject(sourceItem.id);
-        bool valid = SourceAliasValid(sourceItem, obj, data, OriginAlias(sourceItem.id, sourceObjects, obj));
+        bool const valid = SourceAliasValid(sourceItem, obj, data, OriginAlias(sourceItem.id, sourceObjects, obj));
 
         auto *item = new QListWidgetItem(valid ? obj->ObjectName() : obj->ObjectName() + '*');
         item->setToolTip(obj->ObjectName());
@@ -709,7 +709,7 @@ auto DialogFlippingByLine::GetNotes() const -> QString
 //---------------------------------------------------------------------------------------------------------------------
 auto DialogFlippingByLine::IsValid() const -> bool
 {
-    bool ready = flagError && flagName && flagGroupName && flagAlias;
+    bool const ready = flagError && flagName && flagGroupName && flagAlias;
 
     if (ready)
     {

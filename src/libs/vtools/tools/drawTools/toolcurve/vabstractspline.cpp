@@ -100,7 +100,7 @@ void VAbstractSpline::paint(QPainter *painter, const QStyleOptionGraphicsItem *o
                                    SceneScale(scene()));
 
     const QSharedPointer<VAbstractCurve> curve = VAbstractTool::data.GeometricObject<VAbstractCurve>(m_id);
-    QColor penColor =
+    QColor const penColor =
         VSceneStylesheet::CorrectToolColor(this, VSceneStylesheet::CorrectToolColorForDarkTheme(curve->GetColor()));
     setPen(QPen(penColor, width, LineStyleToPenStyle(curve->GetPenStyle()), Qt::RoundCap));
 
@@ -421,7 +421,7 @@ auto VAbstractSpline::GetLineColor() const -> QString
 //---------------------------------------------------------------------------------------------------------------------
 void VAbstractSpline::SetLineColor(const QString &value)
 {
-    QSharedPointer<VAbstractCurve> curve = VAbstractTool::data.GeometricObject<VAbstractCurve>(m_id);
+    QSharedPointer<VAbstractCurve> const curve = VAbstractTool::data.GeometricObject<VAbstractCurve>(m_id);
     curve->SetColor(value);
     QSharedPointer<VGObject> obj = qSharedPointerCast<VGObject>(curve);
     SaveOption(obj);
@@ -437,7 +437,7 @@ auto VAbstractSpline::GetPenStyle() const -> QString
 //---------------------------------------------------------------------------------------------------------------------
 void VAbstractSpline::SetPenStyle(const QString &value)
 {
-    QSharedPointer<VAbstractCurve> curve = VAbstractTool::data.GeometricObject<VAbstractCurve>(m_id);
+    QSharedPointer<VAbstractCurve> const curve = VAbstractTool::data.GeometricObject<VAbstractCurve>(m_id);
     curve->SetPenStyle(value);
     QSharedPointer<VGObject> obj = qSharedPointerCast<VGObject>(curve);
     SaveOption(obj);
@@ -470,13 +470,13 @@ auto VAbstractSpline::GetAliasSuffix() const -> QString
 //---------------------------------------------------------------------------------------------------------------------
 void VAbstractSpline::SetAliasSuffix(QString alias)
 {
-    QSharedPointer<VAbstractCurve> curve = VAbstractTool::data.GeometricObject<VAbstractCurve>(m_id);
+    QSharedPointer<VAbstractCurve> const curve = VAbstractTool::data.GeometricObject<VAbstractCurve>(m_id);
 
     const QString oldAliasSuffix = curve->GetAliasSuffix();
     alias = alias.simplified().replace(QChar(QChar::Space), '_'_L1);
     curve->SetAliasSuffix(alias);
 
-    QRegularExpression rx(NameRegExp());
+    QRegularExpression const rx(NameRegExp());
 
     if (alias.isEmpty() || (rx.match(curve->GetAlias()).hasMatch() && VAbstractTool::data.IsUnique(curve->GetAlias())))
     {
@@ -507,7 +507,7 @@ VToolAbstractArc::VToolAbstractArc(VAbstractPattern *doc, VContainer *data, quin
 //---------------------------------------------------------------------------------------------------------------------
 auto VToolAbstractArc::CenterPointName() const -> QString
 {
-    QSharedPointer<VAbstractArc> arc = VAbstractTool::data.GeometricObject<VAbstractArc>(m_id);
+    QSharedPointer<VAbstractArc> const arc = VAbstractTool::data.GeometricObject<VAbstractArc>(m_id);
     SCASSERT(arc.isNull() == false)
 
     return VAbstractTool::data.GetGObject(arc->GetCenter().id())->name();

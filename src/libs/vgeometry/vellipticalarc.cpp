@@ -67,12 +67,12 @@ auto VLen(fpm::fixed_16_16 x, fpm::fixed_16_16 y) -> fpm::fixed_16_16
 //---------------------------------------------------------------------------------------------------------------------
 auto AuxRadius(fpm::fixed_16_16 xP, fpm::fixed_16_16 yP, fpm::fixed_16_16 xQ, fpm::fixed_16_16 yQ) -> fpm::fixed_16_16
 {
-    fpm::fixed_16_16 dP = VLen(xP, yP);
-    fpm::fixed_16_16 dQ = VLen(xQ, yQ);
-    fpm::fixed_16_16 dJ = VLen(xP + xQ, yP + yQ);
-    fpm::fixed_16_16 dK = VLen(xP - xQ, yP - yQ);
-    fpm::fixed_16_16 r1 = qMax(dP, dQ);
-    fpm::fixed_16_16 r2 = qMax(dJ, dK);
+    fpm::fixed_16_16 const dP = VLen(xP, yP);
+    fpm::fixed_16_16 const dQ = VLen(xQ, yQ);
+    fpm::fixed_16_16 const dJ = VLen(xP + xQ, yP + yQ);
+    fpm::fixed_16_16 const dK = VLen(xP - xQ, yP - yQ);
+    fpm::fixed_16_16 const r1 = qMax(dP, dQ);
+    fpm::fixed_16_16 const r2 = qMax(dJ, dK);
     return qMax(r1 + r1 / 16, r2 - r2 / 4);
 }
 
@@ -81,7 +81,7 @@ auto AngularInc(fpm::fixed_16_16 xP, fpm::fixed_16_16 yP, fpm::fixed_16_16 xQ, f
                 fpm::fixed_16_16 flatness) -> int
 {
 
-    fpm::fixed_16_16 r = AuxRadius(xP, yP, xQ, yQ);
+    fpm::fixed_16_16 const r = AuxRadius(xP, yP, xQ, yQ);
     fpm::fixed_16_16 err2{r >> 3};
     // 2nd-order term
     fpm::fixed_16_16 err4{r >> 7};
@@ -109,7 +109,7 @@ inline void CircleGen(fpm::fixed_16_16 &u, fpm::fixed_16_16 &v, uint k)
 //---------------------------------------------------------------------------------------------------------------------
 auto InitialValue(fpm::fixed_16_16 u0, fpm::fixed_16_16 v0, uint k) -> fpm::fixed_16_16
 {
-    uint shift = 2 * k + 3;
+    uint const shift = 2 * k + 3;
     fpm::fixed_16_16 w{u0 >> shift};
 
     fpm::fixed_16_16 U0 = u0 - w + (v0 >> (k + 1));
@@ -125,7 +125,7 @@ auto EllipseCore(fpm::fixed_16_16 xC, fpm::fixed_16_16 yC, fpm::fixed_16_16 xP, 
                  fpm::fixed_16_16 xQ, fpm::fixed_16_16 yQ, fpm::fixed_16_16 sweep, fpm::fixed_16_16 flatness)
     -> QVector<QPointF>
 {
-    uint k = qMin(static_cast<uint>(AngularInc(xP, yP, xQ, yQ, flatness)), 16U);
+    uint const k = qMin(static_cast<uint>(AngularInc(xP, yP, xQ, yQ, flatness)), 16U);
     const uint count = static_cast<std::uint32_t>(sweep.raw_value()) >> (16 - k);
 
     QVector<QPointF> arc;
@@ -151,8 +151,8 @@ auto EllipseCore(fpm::fixed_16_16 xC, fpm::fixed_16_16 yC, fpm::fixed_16_16 xP, 
 auto EllipticArcPoints(QPointF c, qreal radius1, qreal radius2, qreal astart, qreal asweep, qreal approximationScale)
     -> QVector<QPointF>
 {
-    fpm::fixed_16_16 xC{c.x()};
-    fpm::fixed_16_16 yC{c.y()};
+    fpm::fixed_16_16 const xC{c.x()};
+    fpm::fixed_16_16 const yC{c.y()};
 
     fpm::fixed_16_16 xP{c.x() + radius1};
     fpm::fixed_16_16 yP{c.y()};
@@ -168,10 +168,10 @@ auto EllipticArcPoints(QPointF c, qreal radius1, qreal radius2, qreal astart, qr
     if (not qFuzzyIsNull(astart))
     {
         // Set new conjugate diameter end points P’ and Q’
-        fpm::fixed_16_16 cosa{cos(astart)};
-        fpm::fixed_16_16 sina{sin(astart)};
-        fpm::fixed_16_16 x{xP * cosa + xQ * sina};
-        fpm::fixed_16_16 y{yP * cosa + yQ * sina};
+        fpm::fixed_16_16 const cosa{cos(astart)};
+        fpm::fixed_16_16 const sina{sin(astart)};
+        fpm::fixed_16_16 const x{xP * cosa + xQ * sina};
+        fpm::fixed_16_16 const y{yP * cosa + yQ * sina};
 
         xQ = xQ * cosa - xP * sina;
         yQ = yQ * cosa - yP * sina;
@@ -192,13 +192,13 @@ auto EllipticArcPoints(QPointF c, qreal radius1, qreal radius2, qreal astart, qr
         approximationScale = VAbstractApplication::VApp()->Settings()->GetCurveApproximationScale();
     }
 
-    fpm::fixed_16_16 flatness{maxCurveApproximationScale / approximationScale * tolerance};
-    fpm::fixed_16_16 swangle{asweep};
+    fpm::fixed_16_16 const flatness{maxCurveApproximationScale / approximationScale * tolerance};
+    fpm::fixed_16_16 const swangle{asweep};
     QVector<QPointF> arc = EllipseCore(xC, yC, xP, yP, xQ, yQ, swangle, flatness);
 
     // Arc end point
-    fpm::fixed_16_16 cosb{qCos(asweep)};
-    fpm::fixed_16_16 sinb{qSin(asweep)};
+    fpm::fixed_16_16 const cosb{qCos(asweep)};
+    fpm::fixed_16_16 const sinb{qSin(asweep)};
     xP = xP * cosb + xQ * sinb;
     yP = yP * cosb + yQ * sinb;
     arc.append({static_cast<qreal>(xP + xC), static_cast<qreal>(yP + yC)});
@@ -491,7 +491,7 @@ auto VEllipticalArc::GetPoints() const -> QVector<QPointF>
     Q_RELAXED_CONSTEXPR qreal threshold = ToPixel(0.001, Unit::Mm);
     qreal radius1 = qMax(qAbs(d->radius1), threshold);
     qreal radius2 = qMax(qAbs(d->radius2), threshold);
-    qreal max = qMax(qAbs(d->radius1), qAbs(d->radius2));
+    qreal const max = qMax(qAbs(d->radius1), qAbs(d->radius2));
     qreal scale = 1;
 
     if (max > maxRadius)
@@ -581,7 +581,7 @@ auto VEllipticalArc::CutArc(qreal length, VEllipticalArc &arc1, VEllipticalArc &
         return GetP2();
     }
 
-    qreal len = CorrectCutLength(length, fullLength, pointName);
+    qreal const len = CorrectCutLength(length, fullLength, pointName);
 
     // the first arc has given length and startAngle just like in the origin arc
     arc1 = VEllipticalArc(len, QString().setNum(length), GetCenter(), d->radius1, d->radius2, d->formulaRadius1,
@@ -662,7 +662,7 @@ void VEllipticalArc::FindF2(qreal length)
     // We need to calculate the second angle
     // first approximation of angle between start and end angles
 
-    VPointF center = GetCenter();
+    VPointF const center = GetCenter();
     QLineF radius1(center.x(), center.y(), center.x() + qAbs(d->radius1), center.y());
     radius1.setAngle(GetStartAngle());
     radius1.setAngle(radius1.angle() + gap);
@@ -732,7 +732,7 @@ auto VEllipticalArc::GetP(qreal angle) const -> QPointF
         return GetCenter().toQPointF();
     }
 
-    QPointF p(line.p2().x() / k, line.p2().y() / k);
+    QPointF const p(line.p2().x() / k, line.p2().y() / k);
 
     QLineF line2(QPointF(), p);
     SCASSERT(VFuzzyComparePossibleNulls(line2.angle(), line.angle()))
@@ -749,8 +749,8 @@ auto VEllipticalArc::ArcPoints(QVector<QPointF> points) const -> QVector<QPointF
         return points;
     }
 
-    QPointF center = VAbstractArc::GetCenter().toQPointF();
-    qreal radius = qMax(qAbs(d->radius1), qAbs(d->radius2)) * 2;
+    QPointF const center = VAbstractArc::GetCenter().toQPointF();
+    qreal const radius = qMax(qAbs(d->radius1), qAbs(d->radius2)) * 2;
 
     QLineF start(center.x(), center.y(), center.x() + radius, center.y());
     start.setAngle(VAbstractArc::GetStartAngle());
@@ -764,15 +764,15 @@ auto VEllipticalArc::ArcPoints(QVector<QPointF> points) const -> QVector<QPointF
     {
         for (int i = 0; i < points.size() - 1; ++i)
         {
-            QLineF edge(points.at(i), points.at(i + 1));
+            QLineF const edge(points.at(i), points.at(i + 1));
 
             QPointF p;
-            QLineF::IntersectType type = start.intersects(edge, &p);
+            QLineF::IntersectType const type = start.intersects(edge, &p);
 
             // QLineF::intersects not always accurate on edge cases
             if (IsBoundedIntersection(type, p, edge, start))
             {
-                QVector<QPointF> head = points.mid(0, i + 1);
+                QVector<QPointF> const head = points.mid(0, i + 1);
                 QVector<QPointF> tail = points.mid(i + 1, -1);
 
                 tail = JoinVectors({p}, tail);
@@ -795,12 +795,12 @@ auto VEllipticalArc::ArcPoints(QVector<QPointF> points) const -> QVector<QPointF
 
     for (int i = 0; i < points.size() - 1; ++i)
     {
-        QLineF edge(points.at(i), points.at(i + 1));
+        QLineF const edge(points.at(i), points.at(i + 1));
 
         if (begin)
         {
             QPointF p;
-            QLineF::IntersectType type = start.intersects(edge, &p);
+            QLineF::IntersectType const type = start.intersects(edge, &p);
 
             // QLineF::intersects not always accurate on edge cases
             if (IsBoundedIntersection(type, p, edge, start))
@@ -812,7 +812,7 @@ auto VEllipticalArc::ArcPoints(QVector<QPointF> points) const -> QVector<QPointF
         else
         {
             QPointF p;
-            QLineF::IntersectType type = end.intersects(edge, &p);
+            QLineF::IntersectType const type = end.intersects(edge, &p);
 
             // QLineF::intersects not always accurate on edge cases
             if (IsBoundedIntersection(type, p, edge, end))

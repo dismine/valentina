@@ -87,7 +87,7 @@ WatermarkWindow::WatermarkWindow(const QString &patternPath, QWidget *parent)
             [this]()
             {
                 bool ok;
-                QFont font = QFontDialog::getFont(&ok, m_data.font, this);
+                QFont const font = QFontDialog::getFont(&ok, m_data.font, this);
                 if (ok)
                 {
                     WatermarkChangesWereSaved(false);
@@ -141,7 +141,7 @@ WatermarkWindow::WatermarkWindow(const QString &patternPath, QWidget *parent)
     ui->pushButtonColorPicker->insertColor(Qt::darkGray, tr("Dark gray", "color"));
     ui->pushButtonColorPicker->insertColor(Qt::lightGray, tr("Light gray", "color"));
 
-    QVector<QColor> colors = VAbstractApplication::VApp()->Settings()->GetWatermarkCustomColors();
+    QVector<QColor> const colors = VAbstractApplication::VApp()->Settings()->GetWatermarkCustomColors();
     for (const auto &color : colors)
     {
         ui->pushButtonColorPicker->insertColor(color);
@@ -178,7 +178,7 @@ auto WatermarkWindow::Open(QString path) -> bool
     // Convert to absolute path if need
     path = AbsoluteMPath(m_patternPath, path);
 
-    QFuture<VWatermarkConverter *> futureConverter = QtConcurrent::run(
+    QFuture<VWatermarkConverter *> const futureConverter = QtConcurrent::run(
         [path]()
         {
             std::unique_ptr<VWatermarkConverter> converter(new VWatermarkConverter(path));
@@ -210,7 +210,7 @@ auto WatermarkWindow::Open(QString path) -> bool
 
     try
     {
-        QScopedPointer<VWatermarkConverter> converter(futureConverter.result());
+        QScopedPointer<VWatermarkConverter> const converter(futureConverter.result());
         m_curFileFormatVersion = converter->GetCurrentFormatVersion();
         m_curFileFormatVersionStr = converter->GetFormatVersionStr();
         doc.setXMLContent(converter->Convert());
@@ -274,7 +274,7 @@ void WatermarkWindow::showEvent(QShowEvent *event)
     }
     // do your init stuff here
 
-    QSize sz = VAbstractApplication::VApp()->Settings()->GetWatermarkEditorSize();
+    QSize const sz = VAbstractApplication::VApp()->Settings()->GetWatermarkEditorSize();
     if (not sz.isEmpty())
     {
         resize(sz);
@@ -305,7 +305,7 @@ void WatermarkWindow::on_actionNew_triggered()
 //---------------------------------------------------------------------------------------------------------------------
 auto WatermarkWindow::on_actionSaveAs_triggered() -> bool
 {
-    QString filters(tr("Watermark files") + "(*.vwm)"_L1);
+    QString const filters(tr("Watermark files") + "(*.vwm)"_L1);
     QString dir;
     if (m_curFile.isEmpty())
     {
@@ -324,7 +324,7 @@ auto WatermarkWindow::on_actionSaveAs_triggered() -> bool
         return false;
     }
 
-    QFileInfo f(fileName);
+    QFileInfo const f(fileName);
     if (f.suffix().isEmpty() && f.suffix() != "vwm"_L1)
     {
         fileName += ".vwm"_L1;
@@ -333,7 +333,7 @@ auto WatermarkWindow::on_actionSaveAs_triggered() -> bool
     if (f.exists() && m_curFile != fileName)
     {
         // Temporary try to lock the file before saving
-        VLockGuard<char> tmp(fileName);
+        VLockGuard<char> const tmp(fileName);
         if (not tmp.IsLocked())
         {
             qCritical("%s", qUtf8Printable(tr("Failed to lock. This file already opened in another window.")));
@@ -412,7 +412,7 @@ auto WatermarkWindow::on_actionSave_triggered() -> bool
             // #ifdef Q_OS_WIN32
             //                 qt_ntfs_permission_lookup++; // turn checking on
             // #endif /*Q_OS_WIN32*/
-            bool changed =
+            bool const changed =
                 QFile::setPermissions(m_curFile, QFileInfo(m_curFile).permissions() | QFileDevice::WriteUser);
             // #ifdef Q_OS_WIN32
             //                 qt_ntfs_permission_lookup--; // turn it off again
@@ -437,7 +437,7 @@ auto WatermarkWindow::on_actionSave_triggered() -> bool
     }
 
     QString error;
-    bool result = SaveWatermark(m_curFile, error);
+    bool const result = SaveWatermark(m_curFile, error);
     if (result)
     {
         m_curFileFormatVersion = VWatermarkConverter::WatermarkMaxVer;
@@ -461,7 +461,7 @@ void WatermarkWindow::on_actionOpen_triggered()
 {
     qDebug("Openning new watermark file.");
     const QString filter(tr("Watermark files") + " (*.vwm)"_L1);
-    QString dir = QDir::homePath();
+    QString const dir = QDir::homePath();
     qDebug("Run QFileDialog::getOpenFileName: dir = %s.", qUtf8Printable(dir));
     const QString filePath = QFileDialog::getOpenFileName(this, tr("Open file"), dir, filter, nullptr,
                                                           VAbstractApplication::VApp()->NativeFileDialog());
@@ -490,7 +490,7 @@ auto WatermarkWindow::MaybeSave() -> bool
 {
     if (this->isWindowModified())
     {
-        QScopedPointer<QMessageBox> messageBox(
+        QScopedPointer<QMessageBox> const messageBox(
             new QMessageBox(QMessageBox::Warning, tr("Unsaved changes"),
                             tr("The watermark has been modified. Do you want to save your changes?"),
                             QMessageBox::Yes | QMessageBox::No | QMessageBox::Cancel, this, Qt::Sheet));
@@ -605,7 +605,7 @@ auto WatermarkWindow::ContinueFormatRewrite(const QString &currentFormatVersion,
         msgBox.setDefaultButton(QDialogButtonBox::No);
         msgBox.setIconPixmap(QApplication::style()->standardIcon(QStyle::SP_MessageBoxQuestion).pixmap(32, 32));
 
-        int dialogResult = msgBox.exec();
+        int const dialogResult = msgBox.exec();
 
         if (dialogResult == QDialog::Accepted)
         {

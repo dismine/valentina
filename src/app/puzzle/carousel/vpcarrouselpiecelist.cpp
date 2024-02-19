@@ -168,7 +168,7 @@ void VPCarrouselPieceList::startDrag(Qt::DropActions supportedActions)
             return;
         }
 
-        VPLayoutPtr layout = m_carrousel->Layout().toStrongRef();
+        VPLayoutPtr const layout = m_carrousel->Layout().toStrongRef();
         if (layout.isNull())
         {
             return;
@@ -177,11 +177,11 @@ void VPCarrouselPieceList::startDrag(Qt::DropActions supportedActions)
         // starts the dragging
         auto *drag = new QDrag(this);
         auto *mimeData = new VPMimeDataPiece(layout->Uuid());
-        VPPiecePtr piece = pieceItem->GetPiece();
+        VPPiecePtr const piece = pieceItem->GetPiece();
         mimeData->SetPiecePtr(piece);
 
-        QIcon pieceIcon = pieceItem->CreatePieceIcon(QSize(120, 120), true);
-        QPixmap pixmap;
+        QIcon const pieceIcon = pieceItem->CreatePieceIcon(QSize(120, 120), true);
+        QPixmap const pixmap;
         if (!pieceIcon.isNull())
         {
             pieceIcon.pixmap(QSize(120, 120));
@@ -194,7 +194,7 @@ void VPCarrouselPieceList::startDrag(Qt::DropActions supportedActions)
             m_carrousel->Refresh();
             piece->SetSelected(false);
 
-            VPLayoutPtr pieceLayout = piece->Layout();
+            VPLayoutPtr const pieceLayout = piece->Layout();
             if (not pieceLayout.isNull())
             {
                 emit pieceLayout->PieceSelectionChanged(piece);
@@ -222,8 +222,8 @@ void VPCarrouselPieceList::contextMenuEvent(QContextMenuEvent *event)
     auto *pieceItem = dynamic_cast<VPCarrouselPiece *>(_item);
     SCASSERT(pieceItem != nullptr)
 
-    VPPiecePtr piece = pieceItem->GetPiece();
-    VPLayoutPtr layout = piece->Layout();
+    VPPiecePtr const piece = pieceItem->GetPiece();
+    VPLayoutPtr const layout = piece->Layout();
 
     if (piece.isNull() || layout.isNull())
     {
@@ -279,11 +279,11 @@ void VPCarrouselPieceList::contextMenuEvent(QContextMenuEvent *event)
 
     if (selectedAction == moveAction)
     {
-        VPSheetPtr sheet = layout->GetFocusedSheet();
+        VPSheetPtr const sheet = layout->GetFocusedSheet();
         if (not sheet.isNull())
         {
             piece->ClearTransformations();
-            QRectF rect = sheet->GetMarginsRect();
+            QRectF const rect = sheet->GetMarginsRect();
             piece->SetPosition(QPointF(rect.topLeft().x() + 1, rect.topLeft().y() + 1));
             piece->SetZValue(1.0);
             auto *command = new VPUndoMovePieceOnSheet(layout->GetFocusedSheet(), piece);

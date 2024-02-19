@@ -100,7 +100,7 @@ auto dxfRW::read(DRW_Interface *interface_, bool ext) -> bool
         reader = std::make_unique<dxfReaderAscii>(&filestr);
     }
 
-    bool isOk = processDxf();
+    bool const isOk = processDxf();
     filestr.close();
     reader.reset();
     reader = nullptr;
@@ -671,7 +671,7 @@ auto dxfRW::writeDimstyle(DRW_Dimstyle *ent) -> bool
         std::transform(txstyname.begin(), txstyname.end(), txstyname.begin(), ::toupper);
         if (textStyleMap.count(txstyname) > 0)
         {
-            int txstyHandle = (*(textStyleMap.find(txstyname))).second;
+            int const txstyHandle = (*(textStyleMap.find(txstyname))).second;
             writer->writeUtf8String(340, toHexStr(txstyHandle));
         }
     }
@@ -679,7 +679,7 @@ auto dxfRW::writeDimstyle(DRW_Dimstyle *ent) -> bool
     {
         if (blockMap.count(ent->dimldrblk) > 0)
         {
-            int blkHandle = (*(blockMap.find(ent->dimldrblk))).second;
+            int const blkHandle = (*(blockMap.find(ent->dimldrblk))).second;
             writer->writeUtf8String(341, toHexStr(blkHandle));
             writer->writeInt16(371, ent->dimlwd);
             writer->writeInt16(372, ent->dimlwe);
@@ -1096,7 +1096,7 @@ auto dxfRW::writePolyline(DRW_Polyline *ent) -> bool
     {
         writer->writeInt16(75, ent->curvetype);
     }
-    DRW_Coord crd = ent->extPoint;
+    DRW_Coord const crd = ent->extPoint;
     if (not qFuzzyIsNull(crd.x) || not qFuzzyIsNull(crd.y) || not DRW_FuzzyComparePossibleNulls(crd.z, 1))
     {
         writer->writeDouble(210, crd.x);
@@ -1104,7 +1104,7 @@ auto dxfRW::writePolyline(DRW_Polyline *ent) -> bool
         writer->writeDouble(230, crd.z);
     }
 
-    size_t vertexnum = ent->vertlist.size();
+    size_t const vertexnum = ent->vertlist.size();
     for (size_t i = 0; i < vertexnum; i++)
     {
         DRW_Vertex *v = ent->vertlist.at(i);
@@ -1400,7 +1400,7 @@ auto dxfRW::writeDimension(DRW_Dimension *ent) -> bool
             {
                 DRW_DimAligned *dd = static_cast<DRW_DimAligned *>(ent);
                 writer->writeString(100, "AcDbAlignedDimension");
-                DRW_Coord crd = dd->getClonepoint();
+                DRW_Coord const crd = dd->getClonepoint();
                 if (not qFuzzyIsNull(crd.x) || not qFuzzyIsNull(crd.y) || not qFuzzyIsNull(crd.z))
                 {
                     writer->writeDouble(12, crd.x);
@@ -1589,7 +1589,7 @@ auto dxfRW::writeMText(DRW_MText *ent) -> bool
         writer->writeDouble(41, ent->widthscale);
         writer->writeInt16(71, ent->textgen);
         writer->writeInt16(72, ent->alignH);
-        std::string text = writer->fromUtf8String(ent->text);
+        std::string const text = writer->fromUtf8String(ent->text);
 
         int i;
         for (i = 0; (text.size() - static_cast<size_t>(i)) > 250;)
@@ -1656,7 +1656,7 @@ auto dxfRW::writeImage(DRW_Image *ent, const std::string &name) -> DRW_ImageDef 
             id->handle = static_cast<duint32>(++entCount);
         }
         id->fileName = name;
-        std::string idReactor = toHexStr(++entCount);
+        std::string const idReactor = toHexStr(++entCount);
 
         writer->writeString(0, "IMAGE");
         writeEntity(ent);
@@ -2282,7 +2282,7 @@ auto dxfRW::writeExtData(const std::vector<DRW_Variant *> &ed) -> bool
             case 1004:
             case 1005:
             {
-                int cc = (*it)->code;
+                int const cc = (*it)->code;
                 if ((*it)->type == DRW_Variant::STRING)
                     writer->writeUtf8String(cc, *(*it)->content.s);
                 //            writer->writeUtf8String((*it)->code, (*it)->content.s);
@@ -2350,7 +2350,7 @@ auto dxfRW::processDxf() -> bool
                 reader->setIgnoreComments(true);
                 if (!inSection)
                 {
-                    std::string sectionstr{reader->getString()};
+                    std::string const sectionstr{reader->getString()};
 
                     if ("SECTION" == sectionstr)
                     {
@@ -2378,7 +2378,7 @@ auto dxfRW::processDxf() -> bool
                 if (inSection)
                 {
                     bool processed{false};
-                    std::string sectionname{reader->getString()};
+                    std::string const sectionname{reader->getString()};
 
                     DRW_DBG(sectionname);
                     DRW_DBG(" process section\n");
@@ -3571,7 +3571,7 @@ auto dxfRW::processDimension() -> bool
             nextentity = reader->getString();
             DRW_DBG(nextentity);
             DRW_DBG("\n");
-            int type = dim.type & 0x0F;
+            int const type = dim.type & 0x0F;
 
             QT_WARNING_PUSH
             QT_WARNING_DISABLE_GCC("-Wswitch-default")
@@ -3581,43 +3581,43 @@ auto dxfRW::processDimension() -> bool
             {
                 case 0:
                 {
-                    DRW_DimLinear d(dim);
+                    DRW_DimLinear const d(dim);
                     iface->addDimLinear(&d);
                     break;
                 }
                 case 1:
                 {
-                    DRW_DimAligned d(dim);
+                    DRW_DimAligned const d(dim);
                     iface->addDimAlign(&d);
                     break;
                 }
                 case 2:
                 {
-                    DRW_DimAngular d(dim);
+                    DRW_DimAngular const d(dim);
                     iface->addDimAngular(&d);
                     break;
                 }
                 case 3:
                 {
-                    DRW_DimDiametric d(dim);
+                    DRW_DimDiametric const d(dim);
                     iface->addDimDiametric(&d);
                     break;
                 }
                 case 4:
                 {
-                    DRW_DimRadial d(dim);
+                    DRW_DimRadial const d(dim);
                     iface->addDimRadial(&d);
                     break;
                 }
                 case 5:
                 {
-                    DRW_DimAngular3p d(dim);
+                    DRW_DimAngular3p const d(dim);
                     iface->addDimAngular3P(&d);
                     break;
                 }
                 case 6:
                 {
-                    DRW_DimOrdinate d(dim);
+                    DRW_DimOrdinate const d(dim);
                     iface->addDimOrdinate(&d);
                     break;
                 }

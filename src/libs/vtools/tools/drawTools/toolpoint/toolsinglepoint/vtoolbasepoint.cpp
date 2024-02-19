@@ -189,7 +189,7 @@ auto VToolBasePoint::itemChange(QGraphicsItem::GraphicsItemChange change, const 
         {
             changeFinished = false;
             // value - this is new position.
-            QPointF newPos = value.toPointF();
+            QPointF const newPos = value.toPointF();
 
             MoveSPoint *moveSP = new MoveSPoint(doc, newPos.x(), newPos.y(), m_id, this->scene());
             connect(moveSP, &MoveSPoint::NeedLiteParsing, doc, &VAbstractPattern::LiteParseTree);
@@ -219,7 +219,7 @@ auto VToolBasePoint::GetBasePointPos() const -> QPointF
 //---------------------------------------------------------------------------------------------------------------------
 void VToolBasePoint::SetBasePointPos(const QPointF &pos)
 {
-    QSharedPointer<VPointF> p = VAbstractTool::data.GeometricObject<VPointF>(m_id);
+    QSharedPointer<VPointF> const p = VAbstractTool::data.GeometricObject<VPointF>(m_id);
     p->setX(VAbstractValApplication::VApp()->toPixel(pos.x()));
     p->setY(VAbstractValApplication::VApp()->toPixel(pos.y()));
 
@@ -254,7 +254,7 @@ void VToolBasePoint::DeleteToolWithConfirm(bool ask)
     VAbstractApplication::VApp()->getUndoStack()->push(deletePP);
 
     // Throw exception, this will help prevent case when we forget to immediately quit function.
-    VExceptionToolWasDeleted e("Tool was used after deleting.");
+    VExceptionToolWasDeleted const e("Tool was used after deleting.");
     throw e;
 }
 
@@ -324,7 +324,7 @@ void VToolBasePoint::SaveOptions(QDomElement &tag, QSharedPointer<VGObject> &obj
 {
     VToolSinglePoint::SaveOptions(tag, obj);
 
-    QSharedPointer<VPointF> point = qSharedPointerDynamicCast<VPointF>(obj);
+    QSharedPointer<VPointF> const point = qSharedPointerDynamicCast<VPointF>(obj);
     SCASSERT(point.isNull() == false)
 
     doc->SetAttribute(tag, AttrType, ToolType);

@@ -356,7 +356,7 @@ auto VBoundary::InsertDisconnect(QList<VBoundarySequenceItemData> &sequence, int
         sequence.insert(i, PrepareSequenceItem(sub2, drawMode, VBoundarySequenceItem::Boundary));
     }
 
-    QVector<QVector<VLayoutPoint>> shape = PreparePassmarkShape(passmark, drawMode, item.mirror);
+    QVector<QVector<VLayoutPoint>> const shape = PreparePassmarkShape(passmark, drawMode, item.mirror);
     for (auto &subShape : shape)
     {
         sequence.insert(i, PrepareSequenceItem(subShape, drawMode, VBoundarySequenceItem::PassmarkShape));
@@ -378,7 +378,7 @@ auto VBoundary::InsertCutOut(QList<VBoundarySequenceItemData> &sequence, int i, 
 {
     auto passmark = item.item.value<VLayoutPassmark>();
 
-    QVector<QVector<VLayoutPoint>> shape = PreparePassmarkShape(passmark, drawMode, item.mirror);
+    QVector<QVector<VLayoutPoint>> const shape = PreparePassmarkShape(passmark, drawMode, item.mirror);
     if (shape.isEmpty())
     {
         return false;
@@ -511,7 +511,7 @@ auto VBoundary::PrepareExternalVPassmarkShape(const VLayoutPassmark &passmark, b
         lines = VAbstractPiece::MapVector(lines, matrix);
     }
 
-    QLineF line1 = lines.constFirst();
+    QLineF const line1 = lines.constFirst();
     QVector<VLayoutPoint> shape;
 
     if (!drawMode)
@@ -568,7 +568,7 @@ auto VBoundary::PrepareTPassmarkShape(const VLayoutPassmark &passmark, bool draw
         lines = VAbstractPiece::MapVector(lines, matrix);
     }
 
-    QLineF line1 = lines.constFirst();
+    QLineF const line1 = lines.constFirst();
     QVector<VLayoutPoint> shape1;
     shape1.append(TurnPoint(line1.p1()));
     shape1.append(TurnPoint(line1.p2()));
@@ -617,7 +617,7 @@ auto VBoundary::PrepareUPassmarkShape(const VLayoutPassmark &passmark, bool mirr
         return {};
     }
 
-    qreal radius = QLineF(passmark.baseLine.p1(), passmark.lines.constFirst().p1()).length();
+    qreal const radius = QLineF(passmark.baseLine.p1(), passmark.lines.constFirst().p1()).length();
 
     QVector<QLineF> lines = passmark.lines;
     if (mirrorNotch && !m_mirrorLine.isNull())
@@ -633,7 +633,7 @@ auto VBoundary::PrepareUPassmarkShape(const VLayoutPassmark &passmark, bool mirr
             return {};
         }
 
-        QLineF line1 = lines.takeFirst();
+        QLineF const line1 = lines.takeFirst();
 
         QVector<VLayoutPoint> shape;
         shape.reserve(4 + passmark.lines.size() + 1);
@@ -641,7 +641,7 @@ auto VBoundary::PrepareUPassmarkShape(const VLayoutPassmark &passmark, bool mirr
         shape.append(LayoutPoint(line1.p1(), true, false));
         shape.append(LayoutPoint(line1.p2(), true, true));
 
-        QLineF line2 = lines.takeLast();
+        QLineF const line2 = lines.takeLast();
 
         for (int i = 0; i < lines.size(); ++i)
         {

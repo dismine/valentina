@@ -127,7 +127,7 @@ auto VToolPointOfIntersection::Create(VToolPointOfIntersectionInitData initData)
     const QSharedPointer<VPointF> firstPoint = initData.data->GeometricObject<VPointF>(initData.firstPointId);
     const QSharedPointer<VPointF> secondPoint = initData.data->GeometricObject<VPointF>(initData.secondPointId);
 
-    QPointF point(firstPoint->x(), secondPoint->y());
+    QPointF const point(firstPoint->x(), secondPoint->y());
 
     VPointF *p = new VPointF(point, initData.name, initData.mx, initData.my);
     p->SetShowLabel(initData.showLabel);

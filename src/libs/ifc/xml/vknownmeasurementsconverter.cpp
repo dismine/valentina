@@ -61,7 +61,7 @@ VKnownMeasurementsConverter::VKnownMeasurementsConverter(const QString &fileName
 //---------------------------------------------------------------------------------------------------------------------
 auto VKnownMeasurementsConverter::GetFormatVersionStr() const -> QString
 {
-    QDomNode root = documentElement();
+    QDomNode const root = documentElement();
     if (not root.isNull() && root.isElement())
     {
         const QDomElement layoutElement = root.toElement();

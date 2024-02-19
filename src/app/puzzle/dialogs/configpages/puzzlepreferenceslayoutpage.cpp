@@ -239,7 +239,7 @@ void PuzzlePreferencesLayoutPage::ConvertPaperSize()
     const qreal newTileTopMargin = UnitConvertor(tileTopMargin, m_oldLayoutUnit, layoutUnit);
     const qreal newTileBottomMargin = UnitConvertor(tileBottomMargin, m_oldLayoutUnit, layoutUnit);
 
-    qreal newGap = UnitConvertor(ui->doubleSpinBoxPiecesGap->value(), m_oldLayoutUnit, layoutUnit);
+    qreal const newGap = UnitConvertor(ui->doubleSpinBoxPiecesGap->value(), m_oldLayoutUnit, layoutUnit);
 
     m_oldLayoutUnit = layoutUnit;
     CorrectPaperDecimals();
@@ -555,7 +555,7 @@ void PuzzlePreferencesLayoutPage::CorrectPaperDecimals()
 //---------------------------------------------------------------------------------------------------------------------
 void PuzzlePreferencesLayoutPage::SheetPaperSizeChanged()
 {
-    bool portrait = ui->doubleSpinBoxSheetPaperHeight->value() > ui->doubleSpinBoxSheetPaperWidth->value();
+    bool const portrait = ui->doubleSpinBoxSheetPaperHeight->value() > ui->doubleSpinBoxSheetPaperWidth->value();
 
     ui->toolButtonSheetPortraitOritation->blockSignals(true);
     ui->toolButtonSheetPortraitOritation->setChecked(portrait);
@@ -571,7 +571,7 @@ void PuzzlePreferencesLayoutPage::SheetPaperSizeChanged()
 //---------------------------------------------------------------------------------------------------------------------
 void PuzzlePreferencesLayoutPage::TilePaperSizeChanged()
 {
-    bool portrait = ui->doubleSpinBoxTilePaperHeight->value() > ui->doubleSpinBoxTilePaperWidth->value();
+    bool const portrait = ui->doubleSpinBoxTilePaperHeight->value() > ui->doubleSpinBoxTilePaperWidth->value();
 
     ui->toolButtonTilePortraitOrientation->blockSignals(true);
     ui->toolButtonTilePortraitOrientation->setChecked(portrait);
@@ -627,7 +627,7 @@ void PuzzlePreferencesLayoutPage::SetTileMargins(const QMarginsF &value)
 //---------------------------------------------------------------------------------------------------------------------
 void PuzzlePreferencesLayoutPage::SetPieceGap(qreal gap)
 {
-    qreal value = UnitConvertor(gap, Unit::Px, LayoutUnit());
+    qreal const value = UnitConvertor(gap, Unit::Px, LayoutUnit());
     ui->doubleSpinBoxPiecesGap->setValue(value);
     CorrectPaperDecimals();
 }

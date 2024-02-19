@@ -52,9 +52,9 @@ TST_VMeasurements::TST_VMeasurements(QObject *parent)
  */
 void TST_VMeasurements::CreateEmptyMultisizeFile()
 {
-    Unit mUnit = Unit::Cm;
+    Unit const mUnit = Unit::Cm;
 
-    QSharedPointer<VContainer> data =
+    QSharedPointer<VContainer> const data =
         QSharedPointer<VContainer>(new VContainer(nullptr, &mUnit, VContainer::UniqueNamespace()));
     auto m_xDimension = QSharedPointer<VXMeasurementDimension>::create(mUnit, 50, 200, 6);
     m_xDimension->SetBaseValue(176);
@@ -63,9 +63,10 @@ void TST_VMeasurements::CreateEmptyMultisizeFile()
     m_yDimension->SetBaseValue(50);
     m_yDimension->SetBodyMeasurement(true);
 
-    QVector<MeasurementDimension_p> dimensions{m_xDimension, m_yDimension};
+    QVector<MeasurementDimension_p> const dimensions{m_xDimension, m_yDimension};
 
-    QSharedPointer<VMeasurements> m = QSharedPointer<VMeasurements>(new VMeasurements(mUnit, dimensions, data.data()));
+    QSharedPointer<VMeasurements> const m =
+        QSharedPointer<VMeasurements>(new VMeasurements(mUnit, dimensions, data.data()));
 
     QTemporaryFile file;
     QString fileName;
@@ -89,7 +90,7 @@ void TST_VMeasurements::CreateEmptyMultisizeFile()
 
     try
     {
-        VVSTConverter converter(fileName);
+        VVSTConverter const converter(fileName);
     }
     catch (VException &e)
     {
@@ -103,12 +104,12 @@ void TST_VMeasurements::CreateEmptyMultisizeFile()
  */
 void TST_VMeasurements::CreateEmptyIndividualFile()
 {
-    Unit mUnit = Unit::Cm;
+    Unit const mUnit = Unit::Cm;
 
-    QSharedPointer<VContainer> data =
+    QSharedPointer<VContainer> const data =
         QSharedPointer<VContainer>(new VContainer(nullptr, &mUnit, VContainer::UniqueNamespace()));
 
-    QSharedPointer<VMeasurements> m = QSharedPointer<VMeasurements>(new VMeasurements(mUnit, data.data()));
+    QSharedPointer<VMeasurements> const m = QSharedPointer<VMeasurements>(new VMeasurements(mUnit, data.data()));
 
     QTemporaryFile file;
     QString fileName;
@@ -129,7 +130,7 @@ void TST_VMeasurements::CreateEmptyIndividualFile()
 
     try
     {
-        VVITConverter converter(fileName);
+        VVITConverter const converter(fileName);
     }
     catch (VException &e)
     {

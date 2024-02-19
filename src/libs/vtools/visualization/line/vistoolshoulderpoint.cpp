@@ -89,10 +89,10 @@ void VisToolShoulderPoint::RefreshGeometry()
 
                 if (not qFuzzyIsNull(m_length))
                 {
-                    QPointF fPoint =
+                    QPointF const fPoint =
                         VToolShoulderPoint::FindPoint(static_cast<QPointF>(*second), static_cast<QPointF>(*third),
                                                       static_cast<QPointF>(*first), m_length);
-                    QLineF mainLine = QLineF(static_cast<QPointF>(*second), fPoint);
+                    QLineF const mainLine = QLineF(static_cast<QPointF>(*second), fPoint);
                     DrawLine(this, mainLine, LineStyle());
 
                     DrawPoint(m_point, mainLine.p2());
@@ -100,12 +100,12 @@ void VisToolShoulderPoint::RefreshGeometry()
                 }
                 else if (GetMode() == Mode::Creation)
                 {
-                    QLineF cursorLine(static_cast<QPointF>(*first), ScenePos());
+                    QLineF const cursorLine(static_cast<QPointF>(*first), ScenePos());
 
-                    qreal len = cursorLine.length();
-                    QPointF fPoint = VToolShoulderPoint::FindPoint(
+                    qreal const len = cursorLine.length();
+                    QPointF const fPoint = VToolShoulderPoint::FindPoint(
                         static_cast<QPointF>(*second), static_cast<QPointF>(*third), static_cast<QPointF>(*first), len);
-                    QLineF mainLine = QLineF(static_cast<QPointF>(*second), fPoint);
+                    QLineF const mainLine = QLineF(static_cast<QPointF>(*second), fPoint);
                     DrawLine(this, mainLine, LineStyle());
 
                     DrawPoint(m_point, mainLine.p2());
@@ -119,9 +119,9 @@ void VisToolShoulderPoint::RefreshGeometry()
                 }
                 else
                 {
-                    qreal angle = QLineF(static_cast<QPointF>(*second), static_cast<QPointF>(*third)).angle();
-                    QPointF endRay = Ray(static_cast<QPointF>(*second), angle);
-                    QLineF mainLine = VGObject::BuildLine(
+                    qreal const angle = QLineF(static_cast<QPointF>(*second), static_cast<QPointF>(*third)).angle();
+                    QPointF const endRay = Ray(static_cast<QPointF>(*second), angle);
+                    QLineF const mainLine = VGObject::BuildLine(
                         static_cast<QPointF>(*second), QLineF(static_cast<QPointF>(*second), endRay).length(), angle);
                     DrawLine(this, mainLine, LineStyle());
                 }

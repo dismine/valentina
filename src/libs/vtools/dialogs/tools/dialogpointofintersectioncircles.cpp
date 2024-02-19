@@ -265,10 +265,10 @@ void DialogPointOfIntersectionCircles::ShowDialog(bool click)
         auto *scene = qobject_cast<VMainGraphicsScene *>(VAbstractValApplication::VApp()->getCurrentScene());
         SCASSERT(scene != nullptr)
 
-        QSharedPointer<VPointF> center =
+        QSharedPointer<VPointF> const center =
             data->GeometricObject<VPointF>(m_stage == 1 ? GetFirstCircleCenterId() : GetSecondCircleCenterId());
 
-        QLineF line(static_cast<QPointF>(*center), scene->getScenePos());
+        QLineF const line(static_cast<QPointF>(*center), scene->getScenePos());
 
         if (m_stage == 1)
         {

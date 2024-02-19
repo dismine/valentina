@@ -217,7 +217,7 @@ auto VCubicBezierPath::GetSpline(vsizetype index) const -> VSpline
     if (base + 1 > 1)
     {
         const QPointF b = static_cast<QPointF>(d->path.at(base));
-        QLineF foot1(b, static_cast<QPointF>(d->path.at(base - 1)));
+        QLineF const foot1(b, static_cast<QPointF>(d->path.at(base - 1)));
         QLineF foot2(b, p2);
 
         foot2.setAngle(foot1.angle() + 180);

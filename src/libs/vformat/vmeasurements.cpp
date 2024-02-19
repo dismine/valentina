@@ -180,7 +180,7 @@ void VMeasurements::setXMLContent(const QString &fileName)
 auto VMeasurements::SaveDocument(const QString &fileName, QString &error) -> bool
 {
     // Update comment with Valentina version
-    QDomNode commentNode = documentElement().firstChild();
+    QDomNode const commentNode = documentElement().firstChild();
     if (commentNode.isComment())
     {
         QDomComment comment = commentNode.toComment();
@@ -632,7 +632,7 @@ void VMeasurements::SetReadOnly(bool ro)
 //---------------------------------------------------------------------------------------------------------------------
 auto VMeasurements::IsFullCircumference() const -> bool
 {
-    QDomElement dimenstionsTag = documentElement().firstChildElement(TagDimensions);
+    QDomElement const dimenstionsTag = documentElement().firstChildElement(TagDimensions);
     if (not dimenstionsTag.isNull())
     {
         return GetParametrBool(dimenstionsTag, AttrFullCircumference, falseStr);
@@ -850,7 +850,7 @@ void VMeasurements::SetMImage(const QString &name, const VPatternImage &image)
 auto VMeasurements::MeasurementForDimension(IMD type) const -> QString
 {
     const QString d = VMeasurements::IMDToStr(type);
-    QDomNodeList list = elementsByTagName(TagMeasurement);
+    QDomNodeList const list = elementsByTagName(TagMeasurement);
 
     for (int i = 0; i < list.size(); ++i)
     {
@@ -882,7 +882,7 @@ auto VMeasurements::GetRestrictions() const -> QMap<QString, VDimensionRestricti
     {
         const QDomElement res = list.at(i).toElement();
 
-        QString coordinates = GetParametrString(res, AttrCoordinates);
+        QString const coordinates = GetParametrString(res, AttrCoordinates);
         const qreal min = GetParametrDouble(res, AttrMin, QChar('0'));
         const qreal max = GetParametrDouble(res, AttrMax, QChar('0'));
         const QString exclude = GetParametrEmptyString(res, AttrExclude);
@@ -896,7 +896,7 @@ auto VMeasurements::GetRestrictions() const -> QMap<QString, VDimensionRestricti
 //---------------------------------------------------------------------------------------------------------------------
 void VMeasurements::SetRestrictions(const QMap<QString, VDimensionRestriction> &restrictions)
 {
-    QDomElement root = documentElement();
+    QDomElement const root = documentElement();
     QDomElement restrictionsTag = root.firstChildElement(TagRestrictions);
 
     if (restrictionsTag.isNull())
@@ -1279,7 +1279,7 @@ auto VMeasurements::FindM(const QString &name) const -> QDomElement
         return {};
     }
 
-    QDomNodeList list = elementsByTagName(TagMeasurement);
+    QDomNodeList const list = elementsByTagName(TagMeasurement);
 
     for (int i = 0; i < list.size(); ++i)
     {
@@ -1302,7 +1302,7 @@ auto VMeasurements::FindM(const QString &name) const -> QDomElement
 //---------------------------------------------------------------------------------------------------------------------
 auto VMeasurements::ReadType() const -> MeasurementsType
 {
-    QDomElement root = documentElement();
+    QDomElement const root = documentElement();
     if (root.tagName() == TagVST)
     {
         return MeasurementsType::Multisize;
@@ -1401,7 +1401,7 @@ auto VMeasurements::EvalFormula(VContainer *data, const QString &formula, bool *
 
     try
     {
-        QScopedPointer<Calculator> cal(new Calculator());
+        QScopedPointer<Calculator> const cal(new Calculator());
         const qreal result = cal->EvalFormula(data->DataVariables(), formula);
 
         (qIsInf(result) || qIsNaN(result)) ? *ok = false : *ok = true;
@@ -1423,7 +1423,7 @@ auto VMeasurements::ReadCorrections(const QDomElement &mElement) const -> QMap<Q
         return {};
     }
 
-    QDomElement correctionsTag = mElement.firstChildElement(TagCorrections);
+    QDomElement const correctionsTag = mElement.firstChildElement(TagCorrections);
     if (correctionsTag.isNull())
     {
         return {};
@@ -1488,7 +1488,7 @@ void VMeasurements::WriteCorrections(QDomElement &mElement, const QMap<QString, 
 //---------------------------------------------------------------------------------------------------------------------
 auto VMeasurements::ReadImage(const QDomElement &mElement) -> VPatternImage
 {
-    QDomElement imageTag = mElement.firstChildElement(TagImage);
+    QDomElement const imageTag = mElement.firstChildElement(TagImage);
     if (imageTag.isNull())
     {
         return {};
@@ -1583,7 +1583,7 @@ auto VMeasurements::ReadDimensionLabels(const QDomElement &dElement) const -> Di
         return {};
     }
 
-    QDomElement labelsTag = dElement.firstChildElement(TagLabels);
+    QDomElement const labelsTag = dElement.firstChildElement(TagLabels);
     if (labelsTag.isNull())
     {
         return {};
@@ -1615,7 +1615,7 @@ auto VMeasurements::ReadDimensionLabels(const QDomElement &dElement) const -> Di
 void VMeasurements::ClearDimension(IMD type)
 {
     const QString d = VMeasurements::IMDToStr(type);
-    QDomNodeList list = elementsByTagName(TagMeasurement);
+    QDomNodeList const list = elementsByTagName(TagMeasurement);
 
     for (int i = 0; i < list.size(); ++i)
     {

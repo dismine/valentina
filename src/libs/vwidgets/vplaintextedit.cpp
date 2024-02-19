@@ -101,21 +101,21 @@ void VPlainTextEdit::appendPlainText(const QString &text)
 //---------------------------------------------------------------------------------------------------------------------
 void VPlainTextEdit::MatchParentheses()
 {
-    QList<QTextEdit::ExtraSelection> selections;
+    QList<QTextEdit::ExtraSelection> const selections;
     setExtraSelections(selections);
 
     VTextBlockData *data = static_cast<VTextBlockData *>(textCursor().block().userData());
 
     if (data)
     {
-        QVector<ParenthesisInfo *> infos = data->Parentheses();
+        QVector<ParenthesisInfo *> const infos = data->Parentheses();
 
-        int pos = textCursor().block().position();
+        int const pos = textCursor().block().position();
         for (int i = 0; i < infos.size(); ++i)
         {
             ParenthesisInfo *info = infos.at(i);
 
-            int curPos = textCursor().position() - textCursor().block().position();
+            int const curPos = textCursor().position() - textCursor().block().position();
             if ((info->position == curPos - 1 || info->position == curPos) && info->character == '(')
             {
                 CreateParenthesisSelection(pos + static_cast<int>(info->position),
@@ -137,9 +137,9 @@ void VPlainTextEdit::MatchParentheses()
 auto VPlainTextEdit::MatchLeftParenthesis(QTextBlock currentBlock, int i, int numLeftParentheses) -> bool
 {
     VTextBlockData *data = static_cast<VTextBlockData *>(currentBlock.userData());
-    QVector<ParenthesisInfo *> infos = data->Parentheses();
+    QVector<ParenthesisInfo *> const infos = data->Parentheses();
 
-    int docPos = currentBlock.position();
+    int const docPos = currentBlock.position();
     for (; i < infos.size(); ++i)
     {
         ParenthesisInfo *info = infos.at(i);
@@ -172,9 +172,9 @@ auto VPlainTextEdit::MatchLeftParenthesis(QTextBlock currentBlock, int i, int nu
 auto VPlainTextEdit::MatchRightParenthesis(QTextBlock currentBlock, int i, int numRightParentheses) -> bool
 {
     VTextBlockData *data = static_cast<VTextBlockData *>(currentBlock.userData());
-    QVector<ParenthesisInfo *> parentheses = data->Parentheses();
+    QVector<ParenthesisInfo *> const parentheses = data->Parentheses();
 
-    int docPos = currentBlock.position();
+    int const docPos = currentBlock.position();
     for (; i > -1 && parentheses.size() > 0; --i)
     {
         ParenthesisInfo *info = parentheses.at(i);

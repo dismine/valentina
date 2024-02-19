@@ -89,7 +89,7 @@ auto QmuParserTester::IsHexVal(const QString &a_szExpr, qmusizetype *a_iPos, qre
 
     unsigned iVal ( 0 );
 
-    std::wstring a_szExprStd = a_szExpr.mid(2).toStdWString();
+    std::wstring const a_szExprStd = a_szExpr.mid(2).toStdWString();
 
     // New code based on streams for UNICODE compliance:
     stringstream_type::pos_type nPos(0);
@@ -816,7 +816,7 @@ auto QmuParserTester::TestExpression() -> int
     int iStat = 0;
     qWarning() << "testing expression samples...";
 
-    qreal b = 2;
+    qreal const b = 2;
 
     // Optimization
     iStat += EqnTest ( "2*b*5", 20, true );
@@ -1204,7 +1204,7 @@ auto QmuParserTester::ThrowTest(const QString &a_str, int a_iErrc, bool a_bFail)
     }
 
     // if a_bFail==false no exception is expected
-    bool bRet ( ( a_bFail == false ) ? 0 : 1 );
+    bool const bRet((a_bFail == false) ? 0 : 1);
     if ( bRet == 1 )
     {
         qWarning() << "\n  "
@@ -1375,7 +1375,7 @@ auto QmuParserTester::EqnTest(const QString &a_str, double a_fRes, bool a_fPass)
             // Test copy constructor
             QVector<qmu::QmuParser> vParser;
             vParser.push_back ( * ( p1.get() ) );
-            qmu::QmuParser p2 = vParser[0];   // take parser from vector
+            qmu::QmuParser const p2 = vParser[0]; // take parser from vector
 
             // destroy the originals from p2
             vParser.clear();              // delete the vector
@@ -1475,7 +1475,7 @@ auto QmuParserTester::EqnTestBulk(const QString &a_str, double a_fRes[4], bool a
     try
     {
         // Define Bulk Variables
-        int nBulkSize = 4;
+        int const nBulkSize = 4;
         double vVariableA[] = { 1, 2, 3, 4 };   // variable values
         double vVariableB[] = { 2, 2, 2, 2 };   // variable values
         double vVariableC[] = { 3, 3, 3, 3 };   // variable values

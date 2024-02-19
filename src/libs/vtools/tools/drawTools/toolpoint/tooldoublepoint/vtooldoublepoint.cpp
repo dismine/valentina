@@ -245,7 +245,7 @@ void VToolDoublePoint::ChangeLabelPosition(quint32 id, const QPointF &pos)
 {
     if (id == p1id)
     {
-        QSharedPointer<VPointF> point = VAbstractTool::data.GeometricObject<VPointF>(p1id);
+        QSharedPointer<VPointF> const point = VAbstractTool::data.GeometricObject<VPointF>(p1id);
         point->setMx(pos.x());
         point->setMy(pos.y());
         firstPoint->RefreshPointGeometry(*(point.data()));
@@ -257,7 +257,7 @@ void VToolDoublePoint::ChangeLabelPosition(quint32 id, const QPointF &pos)
     }
     else if (id == p2id)
     {
-        QSharedPointer<VPointF> point = VAbstractTool::data.GeometricObject<VPointF>(p2id);
+        QSharedPointer<VPointF> const point = VAbstractTool::data.GeometricObject<VPointF>(p2id);
         point->setMx(pos.x());
         point->setMy(pos.y());
         secondPoint->RefreshPointGeometry(*(point.data()));
@@ -400,14 +400,14 @@ void VToolDoublePoint::SaveOptions(QDomElement &tag, QSharedPointer<VGObject> &o
 
     if (obj->id() == p1id)
     {
-        QSharedPointer<VPointF> point = qSharedPointerDynamicCast<VPointF>(obj);
+        QSharedPointer<VPointF> const point = qSharedPointerDynamicCast<VPointF>(obj);
         SCASSERT(point.isNull() == false)
 
         SavePoint1(tag, point);
     }
     else if (obj->id() == p2id)
     {
-        QSharedPointer<VPointF> point = qSharedPointerDynamicCast<VPointF>(obj);
+        QSharedPointer<VPointF> const point = qSharedPointerDynamicCast<VPointF>(obj);
         SCASSERT(point.isNull() == false)
 
         SavePoint2(tag, point);

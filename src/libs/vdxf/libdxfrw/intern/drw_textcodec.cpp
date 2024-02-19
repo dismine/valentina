@@ -279,7 +279,7 @@ auto DRW_ConvTable::fromUtf8(const std::string &s) -> std::string
         if (c > 0x7F)
         { // need to decode
             result += s.substr(j, i - j);
-            std::string part1 = s.substr(i, 4);
+            std::string const part1 = s.substr(i, 4);
             unsigned int l;
             code = decodeNum(part1, &l);
             j = i + l;
@@ -446,7 +446,7 @@ template <size_t DoubleTableSize> auto DRW_ConvDBCSTable<DoubleTableSize>::fromU
         if (c > 0x7F)
         { // need to decode
             result += s.substr(j, i - j);
-            std::string part1 = s.substr(i, 4);
+            std::string const part1 = s.substr(i, 4);
             unsigned int l;
             code = decodeNum(part1, &l);
             j = i + l;
@@ -456,7 +456,7 @@ template <size_t DoubleTableSize> auto DRW_ConvDBCSTable<DoubleTableSize>::fromU
             {
                 if (row[1] == code)
                 {
-                    int data = row[0];
+                    int const data = row[0];
                     char d[3];
                     d[0] = static_cast<char>(data >> 8);
                     d[1] = static_cast<char>(data & 0xFF);
@@ -513,9 +513,9 @@ template <size_t DoubleTableSize> auto DRW_ConvDBCSTable<DoubleTableSize>::toUtf
         else
         { // 2 bytes
             ++it;
-            int code = (c << 8) | static_cast<unsigned char>(*it);
-            int sta = leadTable[static_cast<size_t>(c - 0x81)];
-            int end = leadTable[static_cast<size_t>(c - 0x80)];
+            int const code = (c << 8) | static_cast<unsigned char>(*it);
+            int const sta = leadTable[static_cast<size_t>(c - 0x81)];
+            int const end = leadTable[static_cast<size_t>(c - 0x80)];
             for (auto k = static_cast<size_t>(sta); k < static_cast<size_t>(end); k++)
             {
                 if (doubleTable[k][0] == code)
@@ -549,7 +549,7 @@ auto DRW_Conv932Table::fromUtf8(const std::string &s) -> std::string
         if (c > 0x7F)
         { // need to decode
             result += s.substr(j, i - j);
-            std::string part1 = s.substr(i, 4);
+            std::string const part1 = s.substr(i, 4);
             unsigned int l;
             code = decodeNum(part1, &l);
             j = i + l;
@@ -568,7 +568,7 @@ auto DRW_Conv932Table::fromUtf8(const std::string &s) -> std::string
                 {
                     if (row[1] == code)
                     {
-                        int data = row[0];
+                        int const data = row[0];
                         char d[3];
                         d[0] = static_cast<char>(data >> 8);
                         d[1] = static_cast<char>(data & 0xFF);
@@ -624,7 +624,7 @@ auto DRW_Conv932Table::toUtf8(const std::string &s) -> std::string
         else
         { // 2 bytes
             ++it;
-            int code = (c << 8) | static_cast<unsigned char>(*it);
+            int const code = (c << 8) | static_cast<unsigned char>(*it);
             int sta = 0;
             int end = 0;
             if (c > 0x80 && c < 0xA0)

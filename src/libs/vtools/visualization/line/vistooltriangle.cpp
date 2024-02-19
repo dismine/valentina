@@ -137,8 +137,8 @@ void VisToolTriangle::DrawAimedAxis(VCurvePathItem *item, const QLineF &line, Qt
     path.moveTo(line.p1());
     path.lineTo(line.p2());
 
-    qreal arrow_step = 60;
-    qreal arrow_size = 10;
+    qreal const arrow_step = 60;
+    qreal const arrow_size = 10;
 
     if (line.length() < arrow_step)
     {
@@ -150,7 +150,7 @@ void VisToolTriangle::DrawAimedAxis(VCurvePathItem *item, const QLineF &line, Qt
     axis.setAngle(line.angle());
     axis.setLength(arrow_step);
 
-    int steps = qFloor(line.length() / arrow_step);
+    int const steps = qFloor(line.length() / arrow_step);
     for (int i = 0; i < steps; ++i)
     {
         DrawArrow(axis, path, arrow_size);

@@ -138,8 +138,8 @@ auto VToolHeight::Create(VToolHeightInitData initData) -> VToolHeight *
     const QSharedPointer<VPointF> p1Line = initData.data->GeometricObject<VPointF>(initData.p1LineId);
     const QSharedPointer<VPointF> p2Line = initData.data->GeometricObject<VPointF>(initData.p2LineId);
 
-    QPointF pHeight = FindPoint(QLineF(static_cast<QPointF>(*p1Line), static_cast<QPointF>(*p2Line)),
-                                static_cast<QPointF>(*basePoint));
+    QPointF const pHeight = FindPoint(QLineF(static_cast<QPointF>(*p1Line), static_cast<QPointF>(*p2Line)),
+                                      static_cast<QPointF>(*basePoint));
 
     VPointF *p = new VPointF(pHeight, initData.name, initData.mx, initData.my);
     p->SetShowLabel(initData.showLabel);

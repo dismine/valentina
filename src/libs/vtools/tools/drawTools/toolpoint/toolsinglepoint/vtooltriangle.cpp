@@ -197,11 +197,11 @@ auto VToolTriangle::FindPoint(const QPointF &axisP1, const QPointF &axisP2, cons
 {
     SCASSERT(intersectionPoint != nullptr)
 
-    QLineF axis(axisP1, axisP2);
-    QLineF hypotenuse(firstPoint, secondPoint);
+    QLineF const axis(axisP1, axisP2);
+    QLineF const hypotenuse(firstPoint, secondPoint);
 
     QPointF startPoint;
-    QLineF::IntersectType intersect = axis.intersects(hypotenuse, &startPoint);
+    QLineF::IntersectType const intersect = axis.intersects(hypotenuse, &startPoint);
 
     if (intersect != QLineF::UnboundedIntersection && intersect != QLineF::BoundedIntersection)
     {
@@ -213,19 +213,19 @@ auto VToolTriangle::FindPoint(const QPointF &axisP1, const QPointF &axisP2, cons
         return false;
     }
 
-    qreal step = 1;
+    qreal const step = 1;
 
     QLineF line;
     line.setP1(startPoint);
     line.setAngle(axis.angle());
     line.setLength(step);
 
-    qint64 c = qFloor(hypotenuse.length());
+    qint64 const c = qFloor(hypotenuse.length());
     while (true)
     {
         line.setLength(line.length() + step);
-        qint64 a = qFloor(QLineF(line.p2(), firstPoint).length());
-        qint64 b = qFloor(QLineF(line.p2(), secondPoint).length());
+        qint64 const a = qFloor(QLineF(line.p2(), firstPoint).length());
+        qint64 const b = qFloor(QLineF(line.p2(), secondPoint).length());
         if (c * c <= (a * a + b * b))
         {
             *intersectionPoint = line.p2();

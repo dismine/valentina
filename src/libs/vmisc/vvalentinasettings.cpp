@@ -217,7 +217,7 @@ void VValentinaSettings::SetLabelLanguage(const QString &value)
 //---------------------------------------------------------------------------------------------------------------------
 auto VValentinaSettings::GetPathLayout() const -> QString
 {
-    QSettings settings(this->format(), this->scope(), this->organizationName(), this->applicationName());
+    QSettings const settings(this->format(), this->scope(), this->organizationName(), this->applicationName());
     return settings.value(*settingPathsLayout, QDir::homePath()).toString();
 }
 

@@ -124,9 +124,10 @@ void VPE::VPropertyDelegate::paint(QPainter* painter, const QStyleOptionViewItem
         QStyledItemDelegate::paint(painter, option, index);
     }
 
-    QColor tmpPenColor = static_cast<QRgb>(QApplication::style()->styleHint(QStyle::SH_Table_GridLineColor, &option));
+    QColor const tmpPenColor =
+        static_cast<QRgb>(QApplication::style()->styleHint(QStyle::SH_Table_GridLineColor, &option));
 
-    QPen tmpOldPen = painter->pen();
+    QPen const tmpOldPen = painter->pen();
     painter->setPen(QPen(tmpPenColor));
     painter->drawLine(option.rect.right(), option.rect.y(), option.rect.right(), option.rect.bottom());
     painter->drawLine(option.rect.x(), option.rect.bottom(), option.rect.right(), option.rect.bottom());

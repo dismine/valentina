@@ -437,7 +437,7 @@ void DialogSpline::EvalLength2()
 //---------------------------------------------------------------------------------------------------------------------
 void DialogSpline::ValidateAlias()
 {
-    QRegularExpression rx(NameRegExp());
+    QRegularExpression const rx(NameRegExp());
 
     VSpline spline = spl;
     spline.SetAliasSuffix(ui->lineEditAlias->text());

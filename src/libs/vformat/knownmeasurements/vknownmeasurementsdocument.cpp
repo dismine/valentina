@@ -90,7 +90,7 @@ VKnownMeasurementsDocument::VKnownMeasurementsDocument(QObject *parent)
 auto VKnownMeasurementsDocument::SaveDocument(const QString &fileName, QString &error) -> bool
 {
     // Update comment with Valentina version
-    QDomNode commentNode = documentElement().firstChild();
+    QDomNode const commentNode = documentElement().firstChild();
     if (commentNode.isComment())
     {
         QDomComment comment = commentNode.toComment();
@@ -255,7 +255,7 @@ void VKnownMeasurementsDocument::MoveBottom(const QString &name)
 //---------------------------------------------------------------------------------------------------------------------
 auto VKnownMeasurementsDocument::GetUId() const -> QUuid
 {
-    QDomNode root = documentElement();
+    QDomNode const root = documentElement();
     if (not root.isNull() && root.isElement())
     {
         const QDomElement rootElement = root.toElement();
@@ -270,7 +270,7 @@ auto VKnownMeasurementsDocument::GetUId() const -> QUuid
 //---------------------------------------------------------------------------------------------------------------------
 void VKnownMeasurementsDocument::SetUId(const QUuid &id)
 {
-    QDomNode root = documentElement();
+    QDomNode const root = documentElement();
     if (not root.isNull() && root.isElement())
     {
         QDomElement rootElement = root.toElement();
@@ -312,7 +312,7 @@ void VKnownMeasurementsDocument::SetDescription(const QString &desc)
 //---------------------------------------------------------------------------------------------------------------------
 auto VKnownMeasurementsDocument::IsReadOnly() const -> bool
 {
-    QDomNode root = documentElement();
+    QDomNode const root = documentElement();
     if (not root.isNull() && root.isElement())
     {
         const QDomElement rootElement = root.toElement();
@@ -327,7 +327,7 @@ auto VKnownMeasurementsDocument::IsReadOnly() const -> bool
 //---------------------------------------------------------------------------------------------------------------------
 void VKnownMeasurementsDocument::SetReadOnly(bool ro)
 {
-    QDomNode root = documentElement();
+    QDomNode const root = documentElement();
     if (not root.isNull() && root.isElement())
     {
         QDomElement rootElement = root.toElement();
@@ -537,7 +537,7 @@ auto VKnownMeasurementsDocument::FindM(const QString &name) const -> QDomElement
         return {};
     }
 
-    QDomNodeList list = elementsByTagName(*tagMeasurement);
+    QDomNodeList const list = elementsByTagName(*tagMeasurement);
 
     for (int i = 0; i < list.size(); ++i)
     {
@@ -580,9 +580,9 @@ auto VKnownMeasurementsDocument::FindImage(const QUuid &id) const -> QDomElement
         return {};
     }
 
-    QDomNodeList list = elementsByTagName(*tagImage);
+    QDomNodeList const list = elementsByTagName(*tagImage);
 
-    QString idString = id.toString();
+    QString const idString = id.toString();
 
     for (int i = 0; i < list.size(); ++i)
     {
@@ -627,7 +627,7 @@ void VKnownMeasurementsDocument::ReadImages(VKnownMeasurements &known) const
 //---------------------------------------------------------------------------------------------------------------------
 void VKnownMeasurementsDocument::ReadMeasurements(VKnownMeasurements &known) const
 {
-    QDomNodeList list = elementsByTagName(*tagMeasurement);
+    QDomNodeList const list = elementsByTagName(*tagMeasurement);
 
     for (int i = 0; i < list.size(); ++i)
     {
@@ -654,7 +654,7 @@ void VKnownMeasurementsDocument::ReadMeasurements(VKnownMeasurements &known) con
 //---------------------------------------------------------------------------------------------------------------------
 void VKnownMeasurementsDocument::UpdateDiagramId(const QUuid &oldId, const QUuid &newId)
 {
-    QDomNodeList list = elementsByTagName(*tagMeasurement);
+    QDomNodeList const list = elementsByTagName(*tagMeasurement);
 
     for (int i = 0; i < list.size(); ++i)
     {

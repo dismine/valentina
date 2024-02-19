@@ -72,8 +72,8 @@ void DialogDimensionCustomNames::InitTable(const QMap<MeasurementDimension, Meas
     while (i != dimensions.constEnd())
     {
         {
-            QString name = QStringLiteral("%1 (%2)").arg(VAbstartMeasurementDimension::DimensionName(i.value()->Type()),
-                                                         i.value()->Axis());
+            QString const name = QStringLiteral("%1 (%2)").arg(
+                VAbstartMeasurementDimension::DimensionName(i.value()->Type()), i.value()->Axis());
             auto *itemValue = new QTableWidgetItem(name);
             itemValue->setTextAlignment(Qt::AlignHCenter | Qt::AlignCenter);
 

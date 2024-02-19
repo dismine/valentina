@@ -65,7 +65,7 @@ VPUndoPieceZValueMove::VPUndoPieceZValueMove(const VPPiecePtr &piece, ML::ZValue
 {
     setText(QObject::tr("z value move piece"));
 
-    VPSheetPtr sheet = Sheet();
+    VPSheetPtr const sheet = Sheet();
     if (not sheet.isNull())
     {
         const QList<VPPiecePtr> pieces = sheet->GetPieces();
@@ -82,19 +82,19 @@ VPUndoPieceZValueMove::VPUndoPieceZValueMove(const VPPiecePtr &piece, ML::ZValue
 //---------------------------------------------------------------------------------------------------------------------
 void VPUndoPieceZValueMove::undo()
 {
-    VPPiecePtr piece = Piece();
+    VPPiecePtr const piece = Piece();
     if (piece.isNull())
     {
         return;
     }
 
-    VPLayoutPtr layout = piece->Layout();
+    VPLayoutPtr const layout = piece->Layout();
     if (layout.isNull())
     {
         return;
     }
 
-    VPSheetPtr sheet = Sheet();
+    VPSheetPtr const sheet = Sheet();
     if (sheet.isNull())
     {
         return;
@@ -123,19 +123,19 @@ void VPUndoPieceZValueMove::undo()
 //---------------------------------------------------------------------------------------------------------------------
 void VPUndoPieceZValueMove::redo()
 {
-    VPPiecePtr piece = Piece();
+    VPPiecePtr const piece = Piece();
     if (piece.isNull())
     {
         return;
     }
 
-    VPLayoutPtr layout = piece->Layout();
+    VPLayoutPtr const layout = piece->Layout();
     if (layout.isNull())
     {
         return;
     }
 
-    VPSheetPtr sheet = Sheet();
+    VPSheetPtr const sheet = Sheet();
     if (sheet.isNull())
     {
         return;
@@ -187,7 +187,7 @@ void VPUndoPieceZValueMove::redo()
         order.prepend({piece->GetUniqueID()});
     }
 
-    QHash<QString, qreal> correctedZValues = CorrectedZValues(order);
+    QHash<QString, qreal> const correctedZValues = CorrectedZValues(order);
     for (const auto &p: pieces)
     {
         if (not p.isNull())
@@ -215,7 +215,7 @@ auto VPUndoPieceZValueMove::Piece() const -> VPPiecePtr
 //---------------------------------------------------------------------------------------------------------------------
 auto VPUndoPieceZValueMove::Sheet() const -> VPSheetPtr
 {
-    VPPiecePtr p = Piece();
+    VPPiecePtr const p = Piece();
     if (not p.isNull())
     {
         return p->Sheet();
@@ -227,7 +227,7 @@ auto VPUndoPieceZValueMove::Sheet() const -> VPSheetPtr
 //---------------------------------------------------------------------------------------------------------------------
 auto VPUndoPieceZValueMove::Levels(const QList<VPPiecePtr> &pieces, bool skip) const -> QList<QVector<QString> >
 {
-    VPPiecePtr piece = Piece();
+    VPPiecePtr const piece = Piece();
     if (piece.isNull())
     {
         return {};
@@ -260,7 +260,7 @@ auto VPUndoPieceZValueMove::Levels(const QList<VPPiecePtr> &pieces, bool skip) c
 //---------------------------------------------------------------------------------------------------------------------
 auto VPUndoPieceZValueMove::LevelStep(const QList<VPPiecePtr> &pieces) const -> qreal
 {
-    QList<QVector<QString>> levels = Levels(pieces, false);
+    QList<QVector<QString>> const levels = Levels(pieces, false);
     if (levels.isEmpty())
     {
         return 0;
@@ -284,7 +284,7 @@ VPUndoPiecesZValueMove::VPUndoPiecesZValueMove(const QList<VPPiecePtr> &pieces, 
         m_pieces.append(p);
     }
 
-    VPSheetPtr sheet = Sheet();
+    VPSheetPtr const sheet = Sheet();
     if (not sheet.isNull())
     {
         const QList<VPPiecePtr> pieces = sheet->GetPieces();
@@ -306,13 +306,13 @@ void VPUndoPiecesZValueMove::undo()
         return;
     }
 
-    VPLayoutPtr layout = Layout();
+    VPLayoutPtr const layout = Layout();
     if (layout.isNull())
     {
         return;
     }
 
-    VPSheetPtr sheet = Sheet();
+    VPSheetPtr const sheet = Sheet();
     if (sheet.isNull())
     {
         return;
@@ -346,13 +346,13 @@ void VPUndoPiecesZValueMove::redo()
         return;
     }
 
-    VPLayoutPtr layout = Layout();
+    VPLayoutPtr const layout = Layout();
     if (layout.isNull())
     {
         return;
     }
 
-    VPSheetPtr sheet = Sheet();
+    VPSheetPtr const sheet = Sheet();
     if (sheet.isNull())
     {
         return;
@@ -364,7 +364,7 @@ void VPUndoPiecesZValueMove::redo()
     }
 
     const QList<VPPiecePtr> allPieces = sheet->GetPieces();
-    QVector<QString> ids = PieceIds();
+    QVector<QString> const ids = PieceIds();
 
     QList<QVector<QString>> order;
 
@@ -405,7 +405,7 @@ void VPUndoPiecesZValueMove::redo()
         order.prepend(ids);
     }
 
-    QHash<QString, qreal> correctedZValues = CorrectedZValues(order);
+    QHash<QString, qreal> const correctedZValues = CorrectedZValues(order);
     for (const auto &p: allPieces)
     {
         if (not p.isNull())
@@ -429,7 +429,7 @@ auto VPUndoPiecesZValueMove::Layout() const -> VPLayoutPtr
 {
     for (const auto& piece : m_pieces)
     {
-        VPPiecePtr p = piece.toStrongRef();
+        VPPiecePtr const p = piece.toStrongRef();
         if (not p.isNull())
         {
             return p->Layout();
@@ -444,7 +444,7 @@ auto VPUndoPiecesZValueMove::Sheet() const -> VPSheetPtr
 {
     for (const auto& piece : m_pieces)
     {
-        VPPiecePtr p = piece.toStrongRef();
+        VPPiecePtr const p = piece.toStrongRef();
         if (not p.isNull())
         {
             return p->Sheet();
@@ -462,7 +462,7 @@ auto VPUndoPiecesZValueMove::PieceIds() const -> QVector<QString>
 
     for (const auto& piece : m_pieces)
     {
-        VPPiecePtr p = piece.toStrongRef();
+        VPPiecePtr const p = piece.toStrongRef();
         if (not p.isNull())
         {
             ids.append(p->GetUniqueID());
@@ -503,7 +503,7 @@ auto VPUndoPiecesZValueMove::Levels(const QList<VPPiecePtr> &allPieces, const QV
 //---------------------------------------------------------------------------------------------------------------------
 auto VPUndoPiecesZValueMove::LevelStep(const QList<VPPiecePtr> &pieces) -> qreal
 {
-    QList<QVector<QString>> levels = Levels(pieces, QVector<QString>(), false);
+    QList<QVector<QString>> const levels = Levels(pieces, QVector<QString>(), false);
     if (levels.isEmpty())
     {
         return 0;

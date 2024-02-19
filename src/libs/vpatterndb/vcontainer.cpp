@@ -238,7 +238,7 @@ auto VContainer::GetPieceForPiecePath(quint32 id) const -> quint32
 void VContainer::RegisterUniqueName(VGObject *obj) const
 {
     SCASSERT(obj != nullptr)
-    QSharedPointer<VGObject> pointer(obj);
+    QSharedPointer<VGObject> const pointer(obj);
     RegisterUniqueName(pointer);
 }
 
@@ -264,7 +264,7 @@ void VContainer::RegisterUniqueName(const QSharedPointer<VGObject> &obj) const
 auto VContainer::AddGObject(VGObject *obj) -> quint32
 {
     SCASSERT(obj != nullptr)
-    QSharedPointer<VGObject> pointer(obj);
+    QSharedPointer<VGObject> const pointer(obj);
     return AddGObject(pointer);
 }
 
@@ -584,7 +584,7 @@ auto VContainer::DataMeasurements() const -> const QMap<QString, QSharedPointer<
 auto VContainer::DataMeasurementsWithSeparators() const -> const QMap<QString, QSharedPointer<VMeasurement>>
 {
     QMap<QString, QSharedPointer<VMeasurement>> measurements = DataVar<VMeasurement>(VarType::Measurement);
-    QMap<QString, QSharedPointer<VMeasurement>> separators = DataVar<VMeasurement>(VarType::MeasurementSeparator);
+    QMap<QString, QSharedPointer<VMeasurement>> const separators = DataVar<VMeasurement>(VarType::MeasurementSeparator);
 
     measurements.insert(separators);
 
@@ -601,7 +601,7 @@ auto VContainer::DataIncrements() const -> const QMap<QString, QSharedPointer<VI
 auto VContainer::DataIncrementsWithSeparators() const -> const QMap<QString, QSharedPointer<VIncrement>>
 {
     QMap<QString, QSharedPointer<VIncrement>> increments = DataVar<VIncrement>(VarType::Increment);
-    QMap<QString, QSharedPointer<VIncrement>> separators = DataVar<VIncrement>(VarType::IncrementSeparator);
+    QMap<QString, QSharedPointer<VIncrement>> const separators = DataVar<VIncrement>(VarType::IncrementSeparator);
 
     increments.insert(separators);
 
@@ -648,7 +648,7 @@ auto VContainer::DataAnglesCurves() const -> const QMap<QString, QSharedPointer<
 auto VContainer::DataPieceArea() const -> const QMap<QString, QSharedPointer<VPieceArea>>
 {
     QMap<QString, QSharedPointer<VPieceArea>> externalAreas = DataVar<VPieceArea>(VarType::PieceExternalArea);
-    QMap<QString, QSharedPointer<VPieceArea>> seamLineAreas = DataVar<VPieceArea>(VarType::PieceSeamLineArea);
+    QMap<QString, QSharedPointer<VPieceArea>> const seamLineAreas = DataVar<VPieceArea>(VarType::PieceSeamLineArea);
 
     externalAreas.insert(seamLineAreas);
 
@@ -717,7 +717,7 @@ template <typename T> auto VContainer::DataVar(const VarType &type) const -> con
     {
         if (i.value()->GetType() == type)
         {
-            QSharedPointer<T> var = GetVariable<T>(i.key());
+            QSharedPointer<T> const var = GetVariable<T>(i.key());
             map.insert(d->trVars->VarToUser(i.key()), var);
         }
     }

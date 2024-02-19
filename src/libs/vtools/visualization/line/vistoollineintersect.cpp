@@ -85,10 +85,10 @@ void VisToolLineIntersect::RefreshGeometry()
                 {
                     DrawLine(this, QLineF(static_cast<QPointF>(*third), ScenePos()));
 
-                    QLineF l1(static_cast<QPointF>(*first), static_cast<QPointF>(*second));
-                    QLineF l2(static_cast<QPointF>(*third), ScenePos());
+                    QLineF const l1(static_cast<QPointF>(*first), static_cast<QPointF>(*second));
+                    QLineF const l2(static_cast<QPointF>(*third), ScenePos());
                     QPointF fPoint;
-                    QLineF::IntersectType intersect = l1.intersects(l2, &fPoint);
+                    QLineF::IntersectType const intersect = l1.intersects(l2, &fPoint);
 
                     if (intersect == QLineF::UnboundedIntersection || intersect == QLineF::BoundedIntersection)
                     {
@@ -102,10 +102,10 @@ void VisToolLineIntersect::RefreshGeometry()
 
                     DrawLine(this, QLineF(static_cast<QPointF>(*third), static_cast<QPointF>(*forth)));
 
-                    QLineF l1(static_cast<QPointF>(*first), static_cast<QPointF>(*second));
-                    QLineF l2(static_cast<QPointF>(*third), static_cast<QPointF>(*forth));
+                    QLineF const l1(static_cast<QPointF>(*first), static_cast<QPointF>(*second));
+                    QLineF const l2(static_cast<QPointF>(*third), static_cast<QPointF>(*forth));
                     QPointF fPoint;
-                    QLineF::IntersectType intersect = l1.intersects(l2, &fPoint);
+                    QLineF::IntersectType const intersect = l1.intersects(l2, &fPoint);
 
                     if (intersect == QLineF::UnboundedIntersection || intersect == QLineF::BoundedIntersection)
                     {

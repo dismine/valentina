@@ -172,7 +172,7 @@ auto VToolCubicBezier::getSpline() const -> VCubicBezier
 void VToolCubicBezier::setSpline(const VCubicBezier &spl)
 {
     QSharedPointer<VGObject> obj = VAbstractTool::data.GetGObject(m_id);
-    QSharedPointer<VCubicBezier> spline = qSharedPointerDynamicCast<VCubicBezier>(obj);
+    QSharedPointer<VCubicBezier> const spline = qSharedPointerDynamicCast<VCubicBezier>(obj);
     *spline.data() = spl;
     SaveOption(obj);
 }

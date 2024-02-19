@@ -83,17 +83,17 @@ auto GetStyleScore(SVGFontStyle desiredStyle, SVGFontStyle fontStyle) -> int
 auto GetWeightScore(SVGFontWeight desiredWeight, SVGFontWeight fontWeight) -> int
 {
     // Assign a score based on the proximity of the desired weight to the font weight
-    int weightDifference = qAbs(static_cast<int>(desiredWeight) - static_cast<int>(fontWeight));
+    int const weightDifference = qAbs(static_cast<int>(desiredWeight) - static_cast<int>(fontWeight));
     if (weightDifference == 0)
     {
         return 100; // Direct match
     }
 
-    int gradationThreshold = 200;
+    int const gradationThreshold = 200;
     if (weightDifference <= gradationThreshold)
     {
         // Calculate a score based on the proximity of the desired weight to the font weight
-        int score = 100 - (weightDifference * 100 / gradationThreshold);
+        int const score = 100 - (weightDifference * 100 / gradationThreshold);
         return score;
     }
 
@@ -136,14 +136,14 @@ void VSvgFontDatabase::PopulateFontDatabase(const QString &path)
 //---------------------------------------------------------------------------------------------------------------------
 auto VSvgFontDatabase::IsPopulated() const -> bool
 {
-    QMutexLocker locker(svgFontDatabaseMutex());
+    QMutexLocker const locker(svgFontDatabaseMutex());
     return m_populated;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 void VSvgFontDatabase::InvalidatePath(const QString &path)
 {
-    QMutexLocker locker(svgFontDatabaseMutex());
+    QMutexLocker const locker(svgFontDatabaseMutex());
 
     Invalidate(path);
 }
@@ -151,7 +151,7 @@ void VSvgFontDatabase::InvalidatePath(const QString &path)
 //---------------------------------------------------------------------------------------------------------------------
 auto VSvgFontDatabase::Families() const -> QStringList
 {
-    QMutexLocker locker(svgFontDatabaseMutex());
+    QMutexLocker const locker(svgFontDatabaseMutex());
 
     return m_indexFontFamily.keys();
 }
@@ -159,7 +159,7 @@ auto VSvgFontDatabase::Families() const -> QStringList
 //---------------------------------------------------------------------------------------------------------------------
 auto VSvgFontDatabase::Font(const QString &family, SVGFontStyle style, SVGFontWeight weight) const -> VSvgFont
 {
-    QMutexLocker locker(svgFontDatabaseMutex());
+    QMutexLocker const locker(svgFontDatabaseMutex());
 
     return QueryFont(family, style, weight);
 }
@@ -167,7 +167,7 @@ auto VSvgFontDatabase::Font(const QString &family, SVGFontStyle style, SVGFontWe
 //---------------------------------------------------------------------------------------------------------------------
 auto VSvgFontDatabase::FontEngine(const VSvgFont &font) const -> VSvgFontEngine
 {
-    QMutexLocker locker(svgFontDatabaseMutex());
+    QMutexLocker const locker(svgFontDatabaseMutex());
 
     return QueryFontEngine(font.FamilyName(), font.Style(), font.Weight(), font.PointSize());
 }
@@ -176,7 +176,7 @@ auto VSvgFontDatabase::FontEngine(const VSvgFont &font) const -> VSvgFontEngine
 auto VSvgFontDatabase::FontEngine(const QString &family, SVGFontStyle style, SVGFontWeight weight, int pointSize) const
     -> VSvgFontEngine
 {
-    QMutexLocker locker(svgFontDatabaseMutex());
+    QMutexLocker const locker(svgFontDatabaseMutex());
 
     return QueryFontEngine(family, style, weight, pointSize);
 }
@@ -184,20 +184,20 @@ auto VSvgFontDatabase::FontEngine(const QString &family, SVGFontStyle style, SVG
 //---------------------------------------------------------------------------------------------------------------------
 auto VSvgFontDatabase::Bold(const QString &family, SVGFontStyle style) const -> bool
 {
-    QMutexLocker locker(svgFontDatabaseMutex());
+    QMutexLocker const locker(svgFontDatabaseMutex());
 
-    VSvgFont font = QueryFont(family, style, SVGFontWeight::Bold);
-    int weightScore = GetWeightScore(SVGFontWeight::Bold, font.Weight());
+    VSvgFont const font = QueryFont(family, style, SVGFontWeight::Bold);
+    int const weightScore = GetWeightScore(SVGFontWeight::Bold, font.Weight());
     return weightScore > 0;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 auto VSvgFontDatabase::Italic(const QString &family, SVGFontStyle style) const -> bool
 {
-    QMutexLocker locker(svgFontDatabaseMutex());
+    QMutexLocker const locker(svgFontDatabaseMutex());
 
-    VSvgFont font = QueryFont(family, style, SVGFontWeight::Normal);
-    int styleScore = GetStyleScore(style, font.Style());
+    VSvgFont const font = QueryFont(family, style, SVGFontWeight::Normal);
+    int const styleScore = GetStyleScore(style, font.Style());
 
     return styleScore > 0;
 }
@@ -276,7 +276,7 @@ void VSvgFontDatabase::ParseDirectory(const QString &path, int priority)
     QDirIterator it(path, {"*.svg"}, QDir::Files, QDirIterator::Subdirectories);
     while (it.hasNext())
     {
-        QString fontFilePath = it.next();
+        QString const fontFilePath = it.next();
         QFile fontFile(fontFilePath);
 
         if (fontFile.exists() && fontFile.open(QIODevice::ReadOnly))
@@ -291,7 +291,7 @@ void VSvgFontDatabase::ParseDirectory(const QString &path, int priority)
             font.SetPath(fontFilePath);
             if (m_fontDB.contains(font.Id()))
             {
-                VSvgFont duplicate = m_fontDB.value(font.Id());
+                VSvgFont const duplicate = m_fontDB.value(font.Id());
                 if (font.Priority() >= duplicate.Priority())
                 {
                     m_fontDB.insert(font.Id(), font);
@@ -328,7 +328,7 @@ void VSvgFontDatabase::Invalidate(const QString &path)
 //---------------------------------------------------------------------------------------------------------------------
 auto VSvgFontDatabase::QueryFont(const QString &family, SVGFontStyle style, SVGFontWeight weight) const -> VSvgFont
 {
-    QByteArray hash = VSvgFont::Hash(family, style, weight);
+    QByteArray const hash = VSvgFont::Hash(family, style, weight);
     if (m_fontCache.contains(hash))
     {
         return {*m_fontCache.object(hash)};
@@ -343,14 +343,14 @@ auto VSvgFontDatabase::QueryFont(const QString &family, SVGFontStyle style, SVGF
         {
             if (m_fontDB.contains(fontId))
             {
-                VSvgFont f = m_fontDB.value(fontId);
+                VSvgFont const f = m_fontDB.value(fontId);
 
-                int styleScore = GetStyleScore(style, f.Style());
-                int weightScore = GetWeightScore(weight, f.Weight());
+                int const styleScore = GetStyleScore(style, f.Style());
+                int const weightScore = GetWeightScore(weight, f.Weight());
 
                 // Calculate the total match score
-                int familyScore = 100;
-                int totalScore = familyScore + styleScore + weightScore;
+                int const familyScore = 100;
+                int const totalScore = familyScore + styleScore + weightScore;
 
                 // Update the best match if the current font has a higher score
                 if (totalScore > bestMatchScore)
@@ -372,8 +372,8 @@ auto VSvgFontDatabase::QueryFont(const QString &family, SVGFontStyle style, SVGF
 auto VSvgFontDatabase::QueryFontEngine(const QString &family, SVGFontStyle style, SVGFontWeight weight,
                                        int pointSize) const -> VSvgFontEngine
 {
-    VSvgFont font = QueryFont(family, style, weight);
-    QByteArray hash = font.Hash();
+    VSvgFont const font = QueryFont(family, style, weight);
+    QByteArray const hash = font.Hash();
     if (m_fontEngineCache.contains(hash))
     {
         VSvgFontEngine engine = *m_fontEngineCache.object(hash);

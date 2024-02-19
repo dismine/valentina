@@ -67,12 +67,12 @@ VGAnalyticsWorker::VGAnalyticsWorker(QObject *parent)
     m_screensNumber = QString::number(QGuiApplication::screens().size());
 
     QScreen *screen = QGuiApplication::primaryScreen();
-    QSize logicalSize = screen->size();
-    qreal devicePixelRatio = screen->devicePixelRatio();
+    QSize const logicalSize = screen->size();
+    qreal const devicePixelRatio = screen->devicePixelRatio();
     m_screenPixelRatio = QString::number(devicePixelRatio);
 
-    int screenWidth = qRound(logicalSize.width() * devicePixelRatio);
-    int screenHeight = qRound(logicalSize.height() * devicePixelRatio);
+    int const screenWidth = qRound(logicalSize.width() * devicePixelRatio);
+    int const screenHeight = qRound(logicalSize.height() * devicePixelRatio);
 
     m_screenResolution = QStringLiteral("%1x%2").arg(screenWidth).arg(screenHeight);
     m_screenScaleFactor = screen->logicalDotsPerInchX() / 96.0;
@@ -159,17 +159,17 @@ void VGAnalyticsWorker::ReadMessagesFromFile(const QList<QString> &dataList)
     QListIterator<QString> iter(dataList);
     while (iter.hasNext())
     {
-        QString queryString = iter.next();
-        QString dateString = iter.next();
-        QDateTime dateTime = QDateTime::fromString(dateString, dateTimeFormat);
+        QString const queryString = iter.next();
+        QString const dateString = iter.next();
+        QDateTime const dateTime = QDateTime::fromString(dateString, dateTimeFormat);
         QueryBuffer buffer;
 
-        QJsonDocument jsonDocument = QJsonDocument::fromJson(queryString.toUtf8());
+        QJsonDocument const jsonDocument = QJsonDocument::fromJson(queryString.toUtf8());
         if (jsonDocument.isNull())
         {
             qDebug() << "===> please check the string " << queryString.toUtf8();
         }
-        QJsonObject jsonObject = jsonDocument.object();
+        QJsonObject const jsonObject = jsonDocument.object();
 
         buffer.postQuery = jsonObject;
         buffer.time = dateTime;
@@ -221,9 +221,9 @@ auto VGAnalyticsWorker::PostMessage() -> QNetworkReply *
         connection = "keep-alive"_L1;
     }
 
-    QueryBuffer buffer = m_messageQueue.head();
-    QDateTime sendTime = QDateTime::currentDateTime();
-    qint64 timeDiff = buffer.time.msecsTo(sendTime);
+    QueryBuffer const buffer = m_messageQueue.head();
+    QDateTime const sendTime = QDateTime::currentDateTime();
+    qint64 const timeDiff = buffer.time.msecsTo(sendTime);
 
     if (timeDiff > fourHours)
     {
@@ -232,7 +232,7 @@ auto VGAnalyticsWorker::PostMessage() -> QNetworkReply *
         return PostMessage();
     }
 
-    QByteArray requestJson = QJsonDocument(buffer.postQuery).toJson(QJsonDocument::Compact);
+    QByteArray const requestJson = QJsonDocument(buffer.postQuery).toJson(QJsonDocument::Compact);
     m_request.setRawHeader("Connection", connection.toUtf8());
     m_request.setHeader(QNetworkRequest::ContentLengthHeader, requestJson.length());
 
@@ -276,7 +276,7 @@ void VGAnalyticsWorker::PostMessageFinished()
 {
     auto *reply = qobject_cast<QNetworkReply *>(sender());
 
-    int httpStausCode = reply->attribute(QNetworkRequest::HttpStatusCodeAttribute).toInt();
+    int const httpStausCode = reply->attribute(QNetworkRequest::HttpStatusCodeAttribute).toInt();
     if (httpStausCode < 200 || httpStausCode > 299)
     {
         LogMessage(VGAnalytics::Error, QStringLiteral("Error posting message: %1").arg(reply->errorString()));

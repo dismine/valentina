@@ -58,12 +58,12 @@ void DialogDimensionLabels::changeEvent(QEvent *event)
         // retranslate designer form (single inheritance approach)
         ui->retranslateUi(this);
 
-        MeasurementDimension type =
+        MeasurementDimension const type =
             static_cast<MeasurementDimension>(ui->comboBoxDimensionLabels->currentData().toInt());
 
         InitDimensions();
 
-        int index = ui->comboBoxDimensionLabels->findData(static_cast<int>(type));
+        int const index = ui->comboBoxDimensionLabels->findData(static_cast<int>(type));
         if (index != -1)
         {
             ui->comboBoxDimensionLabels->blockSignals(true);
@@ -94,9 +94,9 @@ void DialogDimensionLabels::LabelChanged(QTableWidgetItem *item)
 {
     if (item != nullptr)
     {
-        MeasurementDimension type =
+        MeasurementDimension const type =
             static_cast<MeasurementDimension>(ui->comboBoxDimensionLabels->currentData().toInt());
-        qreal value = item->data(Qt::UserRole).toDouble();
+        qreal const value = item->data(Qt::UserRole).toDouble();
 
         DimesionLabels labels = m_labels.value(type);
         labels.insert(value, item->text());

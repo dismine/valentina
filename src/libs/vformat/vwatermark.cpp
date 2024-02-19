@@ -79,7 +79,7 @@ void VWatermark::CreateEmptyWatermark()
 auto VWatermark::SaveDocument(const QString &fileName, QString &error) -> bool
 {
     // Update comment with Valentina version
-    QDomNode commentNode = documentElement().firstChild();
+    QDomNode const commentNode = documentElement().firstChild();
     if (commentNode.isComment())
     {
         QDomComment comment = commentNode.toComment();
@@ -94,13 +94,13 @@ auto VWatermark::GetWatermark() const -> VWatermarkData
 {
     VWatermarkData data;
 
-    QDomNode root = documentElement();
+    QDomNode const root = documentElement();
     if (not root.isNull() && root.isElement())
     {
         const QDomElement rootElement = root.toElement();
         data.opacity = GetParametrInt(rootElement, AttrOpacity, QChar('2'));
 
-        QDomElement text = rootElement.firstChildElement(TagText);
+        QDomElement const text = rootElement.firstChildElement(TagText);
         if (not text.isNull())
         {
             data.showText = GetParametrBool(text, AttrShow, trueStr);
@@ -115,7 +115,7 @@ auto VWatermark::GetWatermark() const -> VWatermarkData
             data.textColor = color;
         }
 
-        QDomElement image = rootElement.firstChildElement(TagImage);
+        QDomElement const image = rootElement.firstChildElement(TagImage);
         if (not image.isNull())
         {
             data.showImage = GetParametrBool(image, AttrShow, trueStr);
@@ -131,7 +131,7 @@ auto VWatermark::GetWatermark() const -> VWatermarkData
 //---------------------------------------------------------------------------------------------------------------------
 void VWatermark::SetWatermark(const VWatermarkData &data)
 {
-    QDomNode root = documentElement();
+    QDomNode const root = documentElement();
     if (not root.isNull() && root.isElement())
     {
         QDomElement rootElement = root.toElement();

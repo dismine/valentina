@@ -52,7 +52,7 @@ MovePiece::MovePiece(VAbstractPattern *doc, const double &x, const double &y, co
     nodeId = id;
 
     SCASSERT(scene != nullptr)
-    QDomElement domElement = doc->elementById(id, VAbstractPattern::TagDetail);
+    QDomElement const domElement = doc->elementById(id, VAbstractPattern::TagDetail);
     if (domElement.isElement())
     {
         m_oldX = VAbstractValApplication::VApp()->toPixel(doc->GetParametrDouble(domElement, AttrMx, "0.0"));

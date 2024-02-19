@@ -39,7 +39,7 @@ MoveBackgroundImage::MoveBackgroundImage(QUuid id, qreal dx, qreal dy, VAbstract
 {
     setText(tr("move background image"));
 
-    VBackgroundPatternImage image = doc->GetBackgroundImage(m_id);
+    VBackgroundPatternImage const image = doc->GetBackgroundImage(m_id);
 
     m_oldPos = image.Matrix();
 }

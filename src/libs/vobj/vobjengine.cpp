@@ -169,7 +169,7 @@ void VObjEngine::drawPath(const QPainterPath &path)
         return;
     }
 
-    qint64 sq = Square(polygon);
+    qint64 const sq = Square(polygon);
 
     ++planeCount;
     *stream << "o Plane." << u"%1"_s.arg(planeCount, 3, 10, '0'_L1) << Qt::endl;
@@ -203,11 +203,11 @@ void VObjEngine::drawPath(const QPainterPath &path)
         {
             skipFace = false;
         }
-        int num_verts = static_cast<int>(res->faces[offset]);
+        int const num_verts = static_cast<int>(res->faces[offset]);
         offset++;
         for (int j = 0; j < num_verts; j++)
         {
-            int p0 = static_cast<int>(res->faces[offset + j]);
+            int const p0 = static_cast<int>(res->faces[offset + j]);
             pf[j] = QPointF(points[p0].x, points[p0].y);
         }
         if (skipFace == false)
@@ -217,8 +217,8 @@ void VObjEngine::drawPath(const QPainterPath &path)
             {
                 face << QPointF(pf[ind]);
             }
-            QPolygonF united = polygon.united(face);
-            qint64 sqUnited = Square(united);
+            QPolygonF const united = polygon.united(face);
+            qint64 const sqUnited = Square(united);
             if (sqUnited <= sq)
             { // This face incide our base polygon.
                 drawPolygon(pf, num_verts, QPaintEngine::OddEvenMode);
@@ -263,8 +263,8 @@ void VObjEngine::drawPoints(const QPointF *points, int pointCount)
 {
     for (int i = 0; i < pointCount; ++i)
     {
-        qreal x = ((points[i].x() - 0) / qFloor(size.width() / 2.0)) - 1.0;
-        qreal y = (((points[i].y() - 0) / qFloor(size.width() / 2.0)) - 1.0) * -1;
+        qreal const x = ((points[i].x() - 0) / qFloor(size.width() / 2.0)) - 1.0;
+        qreal const y = (((points[i].y() - 0) / qFloor(size.width() / 2.0)) - 1.0) * -1;
 
         *stream << "v"
                 << " " << QString::number(x, 'f', 6) << " " << QString::number(y, 'f', 6) << " "
@@ -349,7 +349,7 @@ auto VObjEngine::Square(const QPolygonF &poly) const -> qint64
     QVector<qreal> x;
     QVector<qreal> y;
 
-    vsizetype n = poly.count();
+    vsizetype const n = poly.count();
     qreal s, res = 0;
     qint64 sq = 0;
 

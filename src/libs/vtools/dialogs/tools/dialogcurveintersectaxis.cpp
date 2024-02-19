@@ -232,7 +232,7 @@ void DialogCurveIntersectAxis::ShowDialog(bool click)
             auto *scene = qobject_cast<VMainGraphicsScene *>(VAbstractValApplication::VApp()->getCurrentScene());
             SCASSERT(scene != nullptr)
             const QSharedPointer<VPointF> point = data->GeometricObject<VPointF>(GetBasePointId());
-            QLineF line = QLineF(static_cast<QPointF>(*point), scene->getScenePos());
+            QLineF const line = QLineF(static_cast<QPointF>(*point), scene->getScenePos());
 
             // Radius of point circle, but little bigger. Need handle with hover sizes.
             if (line.length() <= ScaledRadius(SceneScale(VAbstractValApplication::VApp()->getCurrentScene())) * 1.5)
@@ -383,10 +383,10 @@ void DialogCurveIntersectAxis::changeEvent(QEvent *event)
 //---------------------------------------------------------------------------------------------------------------------
 void DialogCurveIntersectAxis::ValidateAlias()
 {
-    QRegularExpression rx(NameRegExp());
+    QRegularExpression const rx(NameRegExp());
 
     const QSharedPointer<VAbstractCurve> curve = data->GeometricObject<VAbstractCurve>(getCurveId());
-    QPair<QString, QString> alias = SegmentAliases(curve->getType(), GetAliasSuffix1(), GetAliasSuffix2());
+    QPair<QString, QString> const alias = SegmentAliases(curve->getType(), GetAliasSuffix1(), GetAliasSuffix2());
 
     if (not GetAliasSuffix1().isEmpty() &&
         (not rx.match(alias.first).hasMatch() ||
@@ -420,7 +420,7 @@ void DialogCurveIntersectAxis::ValidateAlias()
 //---------------------------------------------------------------------------------------------------------------------
 void DialogCurveIntersectAxis::InitIcons()
 {
-    QString resource = QStringLiteral("icon");
+    QString const resource = QStringLiteral("icon");
 
     ui->toolButtonExprAngle->setIcon(VTheme::GetIconResource(resource, QStringLiteral("24x24/fx.png")));
     ui->label_3->setPixmap(VTheme::GetPixmapResource(resource, QStringLiteral("24x24/equal.png")));

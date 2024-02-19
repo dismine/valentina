@@ -72,7 +72,7 @@ auto VPE::VFileProperty::data(int column, int role) const -> QVariant
 {
     if (column == DPC_Data && (Qt::DisplayRole == role || Qt::EditRole == role))
     {
-        QFileInfo tmpFile(d_ptr->VariantValue.toString());
+        QFileInfo const tmpFile(d_ptr->VariantValue.toString());
         return tmpFile.fileName();
     }
     else

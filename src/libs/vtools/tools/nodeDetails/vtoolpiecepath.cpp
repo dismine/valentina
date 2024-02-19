@@ -313,7 +313,7 @@ void VToolPiecePath::RefreshGeometry()
         QLineF mirrorLine;
         if (pieceId > NULL_ID)
         {
-            VPiece piece = VAbstractTool::data.GetPiece(pieceId);
+            VPiece const piece = VAbstractTool::data.GetPiece(pieceId);
             // We cannot use current VContainer because it doesn't have current seam allowance value
             const VContainer pData = VAbstractPattern::getTool(pieceId)->getData();
             cuttingPath = piece.CuttingPathPoints(&pData);

@@ -361,7 +361,7 @@ static void compute_circle(point2d_t *pt0, point2d_t *pt1, point2d_t *pt2, real 
 static auto in_circle(point2d_t *pt0, point2d_t *pt1, point2d_t *pt2, point2d_t *p) -> int
 {
 #if PREDICATE == EXACT_PREDICATE
-    real res = incircle(&(pt0->x), &(pt1->x), &(pt2->x), &(p->x));
+    real const res = incircle(&(pt0->x), &(pt1->x), &(pt2->x), &(p->x));
     if (res > REAL_ZERO)
         return INSIDE;
     else if (res < REAL_ZERO)
@@ -781,7 +781,7 @@ static auto del_valid_link(halfedge_t *b) -> halfedge_t *
 
     if (g != g_p && d != d_p)
     {
-        int a = in_circle(g, d, g_p, d_p);
+        int const a = in_circle(g, d, g_p, d_p);
 
         if (a != ON_CIRCLE)
         {
@@ -924,11 +924,11 @@ void del_divide_and_conquer(delaunay_t *del, int start, int end)
 {
     delaunay_t left, right;
 
-    int n = (end - start + 1);
+    int const n = (end - start + 1);
 
     if (n > 3)
     {
-        int i = (n / 2) + (n & 1);
+        int const i = (n / 2) + (n & 1);
         left.points = del->points;
         right.points = del->points;
         del_divide_and_conquer(&left, start, start + i - 1);

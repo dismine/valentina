@@ -147,7 +147,7 @@ void VAbstractOperation::ChangeLabelPosition(quint32 id, const QPointF &pos)
         {
             auto *item = qobject_cast<VSimplePoint *>(obj);
             SCASSERT(item != nullptr)
-            QSharedPointer<VPointF> point = VAbstractTool::data.GeometricObject<VPointF>(id);
+            QSharedPointer<VPointF> const point = VAbstractTool::data.GeometricObject<VPointF>(id);
             point->setMx(pos.x());
             point->setMy(pos.y());
             item->RefreshPointGeometry(*(point.data()));
@@ -618,9 +618,9 @@ void VAbstractOperation::ChangeLabelVisibility(quint32 id, bool visible)
 void VAbstractOperation::ApplyToolOptions(const QList<quint32> &oldDependencies, const QList<quint32> &newDependencies,
                                           const QDomElement &oldDomElement, const QDomElement &newDomElement)
 {
-    bool updateToolOptions =
+    bool const updateToolOptions =
         newDependencies != oldDependencies || not VDomDocument::Compare(newDomElement, oldDomElement);
-    bool updateVisibilityOptions = NeedUpdateVisibilityGroup();
+    bool const updateVisibilityOptions = NeedUpdateVisibilityGroup();
 
     if (updateToolOptions && updateVisibilityOptions)
     {
@@ -637,7 +637,7 @@ void VAbstractOperation::ApplyToolOptions(const QList<quint32> &oldDependencies,
 
     if (updateVisibilityOptions)
     {
-        vidtype group = doc->GroupLinkedToTool(m_id);
+        vidtype const group = doc->GroupLinkedToTool(m_id);
 
         if (hasLinkedGroup)
         {
@@ -678,8 +678,8 @@ void VAbstractOperation::ApplyToolOptions(const QList<quint32> &oldDependencies,
 //---------------------------------------------------------------------------------------------------------------------
 void VAbstractOperation::PerformDelete()
 {
-    vidtype group = doc->GroupLinkedToTool(m_id);
-    bool deleteGroup = group != null_id;
+    vidtype const group = doc->GroupLinkedToTool(m_id);
+    bool const deleteGroup = group != null_id;
 
     qCDebug(vTool, "Begin deleting.");
     if (deleteGroup)
@@ -852,7 +852,7 @@ void VAbstractOperation::AllowCurveSelecting(bool enabled, GOType type)
 //---------------------------------------------------------------------------------------------------------------------
 auto VAbstractOperation::NeedUpdateVisibilityGroup() const -> bool
 {
-    vidtype group = doc->GroupLinkedToTool(m_id);
+    vidtype const group = doc->GroupLinkedToTool(m_id);
 
     if (hasLinkedGroup)
     {
@@ -963,7 +963,7 @@ auto VAbstractOperation::ComplexCurveToolTip(quint32 itemId) const -> QString
 //---------------------------------------------------------------------------------------------------------------------
 auto VAbstractOperation::VisibilityGroupToolTip() const -> QString
 {
-    vidtype group = doc->GroupLinkedToTool(m_id);
+    vidtype const group = doc->GroupLinkedToTool(m_id);
     if (group != null_id)
     {
         return QStringLiteral("<tr> <td><b>%1:</b> %2</td> </tr>")
@@ -982,7 +982,7 @@ void VAbstractOperation::CreateVisibilityGroup(const VAbstractOperationInitData 
     }
 
     const QMap<quint32, quint32> groupData = VisibilityGroupDataFromSource(initData.data, initData.source);
-    vidtype groupId = initData.data->getNextId();
+    vidtype const groupId = initData.data->getNextId();
     const QDomElement group = initData.doc->CreateGroup(groupId, initData.visibilityGroupName,
                                                         initData.visibilityGroupTags, groupData, initData.id);
     if (not group.isNull())

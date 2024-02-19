@@ -63,10 +63,10 @@ Q_REQUIRED_RESULT auto ParseCorrectiosn(const QJsonObject &correctionsObject) ->
         }
 
         QHash<int, bool> segments;
-        QJsonObject segmentsObject = it.value().toObject();
+        QJsonObject const segmentsObject = it.value().toObject();
         for (auto segmentsIt = segmentsObject.constBegin(); segmentsIt != segmentsObject.constEnd(); ++segmentsIt)
         {
-            bool correct = segmentsIt.value().toBool();
+            bool const correct = segmentsIt.value().toBool();
             if (!correct)
             {
                 segments.insert(segmentsIt.key().toInt(), correct);
@@ -111,7 +111,7 @@ VSingleLineOutlineChar::VSingleLineOutlineChar(const QFont &font)
 //---------------------------------------------------------------------------------------------------------------------
 void VSingleLineOutlineChar::ExportCorrections(const QString &dirPath) const
 {
-    QRawFont rawFont = QRawFont::fromFont(m_font);
+    QRawFont const rawFont = QRawFont::fromFont(m_font);
     QJsonObject correctionsObject;
 
     for (uint unicode = 0; unicode <= 0x10FFFF; ++unicode)
@@ -119,7 +119,7 @@ void VSingleLineOutlineChar::ExportCorrections(const QString &dirPath) const
         // Check if the glyph is available for the font
         if (rawFont.supportsCharacter(unicode))
         {
-            QChar character(unicode);
+            QChar const character(unicode);
 
             QPainterPath path;
             path.addText(0, 0, m_font, character);
@@ -140,7 +140,7 @@ void VSingleLineOutlineChar::ExportCorrections(const QString &dirPath) const
         }
     }
 
-    QString filename = QStringLiteral("%1/%2.json").arg(dirPath, m_font.family());
+    QString const filename = QStringLiteral("%1/%2.json").arg(dirPath, m_font.family());
     QFile jsonFile(filename);
     if (!jsonFile.open(QIODevice::WriteOnly | QIODevice::Text))
     {
@@ -148,7 +148,7 @@ void VSingleLineOutlineChar::ExportCorrections(const QString &dirPath) const
         return;
     }
 
-    QJsonDocument jsonDocument(correctionsObject);
+    QJsonDocument const jsonDocument(correctionsObject);
 
     // Write the JSON string to the file
     QTextStream out(&jsonFile);
@@ -158,16 +158,16 @@ void VSingleLineOutlineChar::ExportCorrections(const QString &dirPath) const
 //---------------------------------------------------------------------------------------------------------------------
 void VSingleLineOutlineChar::LoadCorrections(const QString &dirPath) const
 {
-    QString fileName = QStringLiteral("%1.json").arg(m_font.family());
+    QString const fileName = QStringLiteral("%1.json").arg(m_font.family());
 
     QDir directory(dirPath);
     directory.setNameFilters(QStringList(fileName));
-    QStringList matchingFiles = directory.entryList();
+    QStringList const matchingFiles = directory.entryList();
     if (matchingFiles.isEmpty())
     {
         return;
     }
-    QString filePath = directory.absoluteFilePath(matchingFiles.constFirst());
+    QString const filePath = directory.absoluteFilePath(matchingFiles.constFirst());
 
     QFile jsonFile(filePath);
     if (!jsonFile.open(QIODevice::ReadOnly | QIODevice::Text))
@@ -177,10 +177,10 @@ void VSingleLineOutlineChar::LoadCorrections(const QString &dirPath) const
     }
 
     // Read the JSON data from the file
-    QByteArray jsonData = jsonFile.readAll();
+    QByteArray const jsonData = jsonFile.readAll();
 
     // Create a JSON document from the JSON data
-    QJsonDocument jsonDocument = QJsonDocument::fromJson(jsonData);
+    QJsonDocument const jsonDocument = QJsonDocument::fromJson(jsonData);
 
     if (jsonDocument.isNull())
     {
@@ -188,14 +188,14 @@ void VSingleLineOutlineChar::LoadCorrections(const QString &dirPath) const
         return;
     }
 
-    QMutexLocker locker(singleLineOutlineCharMutex());
+    QMutexLocker const locker(singleLineOutlineCharMutex());
     cachedCorrections()->insert(m_font.family(), ParseCorrectiosn(jsonDocument.object()));
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 void VSingleLineOutlineChar::ClearCorrectionsCache()
 {
-    QMutexLocker locker(singleLineOutlineCharMutex());
+    QMutexLocker const locker(singleLineOutlineCharMutex());
     cachedCorrections()->remove(m_font.family());
 }
 

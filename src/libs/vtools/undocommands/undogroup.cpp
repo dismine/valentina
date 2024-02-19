@@ -224,8 +224,8 @@ void AddItemToGroup::performUndoRedo(bool isUndo)
 
             // set the item visible. Because if the undo is done when unvisible and it's not in any group after the
             // undo, it stays unvisible until the entire drawing is completly rerendered.
-            quint32 objectId = doc->GetParametrUInt(xml, QStringLiteral("object"), NULL_ID_STR);
-            quint32 toolId = doc->GetParametrUInt(xml, QStringLiteral("tool"), NULL_ID_STR);
+            quint32 const objectId = doc->GetParametrUInt(xml, QStringLiteral("object"), NULL_ID_STR);
+            quint32 const toolId = doc->GetParametrUInt(xml, QStringLiteral("tool"), NULL_ID_STR);
             VDataTool* tool = VAbstractPattern::getTool(toolId);
             tool->GroupVisibility(objectId,true);
         }
@@ -242,7 +242,7 @@ void AddItemToGroup::performUndoRedo(bool isUndo)
         doc->SetModified(true);
         emit VAbstractValApplication::VApp()->getCurrentDocument()->patternChanged(false);
 
-        QDomElement groups = doc->CreateGroups();
+        QDomElement const groups = doc->CreateGroups();
         if (not groups.isNull())
         {
             doc->ParseGroups(groups);
@@ -318,8 +318,8 @@ void RemoveItemFromGroup::performUndoRedo(bool isUndo)
 
             // set the item visible. Because if the undo is done when unvisibile and it's not in any group after the
             // undo, it stays unvisible until the entire drawing is completly rerendered.
-            quint32 objectId = doc->GetParametrUInt(xml, QStringLiteral("object"), NULL_ID_STR);
-            quint32 toolId = doc->GetParametrUInt(xml, QStringLiteral("tool"), NULL_ID_STR);
+            quint32 const objectId = doc->GetParametrUInt(xml, QStringLiteral("object"), NULL_ID_STR);
+            quint32 const toolId = doc->GetParametrUInt(xml, QStringLiteral("tool"), NULL_ID_STR);
             VDataTool* tool = VAbstractPattern::getTool(toolId);
             tool->GroupVisibility(objectId,true);
         }
@@ -327,7 +327,7 @@ void RemoveItemFromGroup::performUndoRedo(bool isUndo)
         doc->SetModified(true);
         emit VAbstractValApplication::VApp()->getCurrentDocument()->patternChanged(false);
 
-        QDomElement groups = doc->CreateGroups();
+        QDomElement const groups = doc->CreateGroups();
         if (not groups.isNull())
         {
             doc->ParseGroups(groups);
@@ -363,7 +363,7 @@ ChangeGroupVisibility::ChangeGroupVisibility(VAbstractPattern *doc, vidtype id, 
 {
     setText(tr("change group visibility"));
     nodeId = id;
-    QDomElement group = doc->elementById(nodeId, VAbstractPattern::TagGroup);
+    QDomElement const group = doc->elementById(nodeId, VAbstractPattern::TagGroup);
     if (group.isElement())
     {
         m_oldVisibility = doc->GetParametrBool(group, VAbstractPattern::AttrVisible, trueStr);
@@ -400,7 +400,7 @@ void ChangeGroupVisibility::Do(bool visible)
     {
         doc->SetAttribute(group, VAbstractPattern::AttrVisible, visible);
 
-        QDomElement groups = doc->CreateGroups();
+        QDomElement const groups = doc->CreateGroups();
         if (not groups.isNull())
         {
             doc->ParseGroups(groups);
@@ -430,7 +430,7 @@ ChangeMultipleGroupsVisibility::ChangeMultipleGroupsVisibility(VAbstractPattern 
 
     for(auto & groupId : m_groups)
     {
-        QDomElement group = doc->elementById(groupId, VAbstractPattern::TagGroup);
+        QDomElement const group = doc->elementById(groupId, VAbstractPattern::TagGroup);
         if (group.isElement())
         {
             m_oldVisibility.insert(groupId, doc->GetParametrBool(group, VAbstractPattern::AttrVisible, trueStr));
@@ -470,7 +470,7 @@ void ChangeMultipleGroupsVisibility::undo()
 
     if (not groupsState.isEmpty())
     {
-        QDomElement groups = doc->CreateGroups();
+        QDomElement const groups = doc->CreateGroups();
         if (not groups.isNull())
         {
             doc->ParseGroups(groups);
@@ -508,7 +508,7 @@ void ChangeMultipleGroupsVisibility::redo()
 
     if (not groupsState.isEmpty())
     {
-        QDomElement groups = doc->CreateGroups();
+        QDomElement const groups = doc->CreateGroups();
         if (not groups.isNull())
         {
             doc->ParseGroups(groups);

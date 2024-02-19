@@ -44,7 +44,7 @@ using namespace Qt::Literals::StringLiterals;
 
 auto main(int argc, char **argv) -> int
 {
-    TestVApplication app(argc, argv); // For QPrinter
+    TestVApplication const app(argc, argv); // For QPrinter
 
     int status = 0;
     auto ASSERT_TEST = [&status, argc, argv](QObject *obj)

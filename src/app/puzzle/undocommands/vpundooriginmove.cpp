@@ -47,13 +47,13 @@ VPUndoOriginMove::VPUndoOriginMove(const VPSheetPtr &sheet, const VPTransformati
 //---------------------------------------------------------------------------------------------------------------------
 void VPUndoOriginMove::undo()
 {
-    VPSheetPtr sheet = m_sheet.toStrongRef();
+    VPSheetPtr const sheet = m_sheet.toStrongRef();
     if (sheet.isNull())
     {
         return;
     }
 
-    VPLayoutPtr layout = sheet->GetLayout();
+    VPLayoutPtr const layout = sheet->GetLayout();
     if (layout.isNull())
     {
         return;
@@ -71,13 +71,13 @@ void VPUndoOriginMove::undo()
 //---------------------------------------------------------------------------------------------------------------------
 void VPUndoOriginMove::redo()
 {
-    VPSheetPtr sheet = m_sheet.toStrongRef();
+    VPSheetPtr const sheet = m_sheet.toStrongRef();
     if (sheet.isNull())
     {
         return;
     }
 
-    VPLayoutPtr layout = sheet->GetLayout();
+    VPLayoutPtr const layout = sheet->GetLayout();
     if (layout.isNull())
     {
         return;
@@ -104,13 +104,13 @@ auto VPUndoOriginMove::mergeWith(const QUndoCommand *command) -> bool
     const auto *moveCommand = dynamic_cast<const VPUndoOriginMove *>(command);
     SCASSERT(moveCommand != nullptr)
 
-    VPSheetPtr sheet = Sheet();
+    VPSheetPtr const sheet = Sheet();
     if (moveCommand->Sheet().isNull() || sheet.isNull() || not moveCommand->AllowMerge())
     {
         return false;
     }
 
-    VPTransformationOrigon origin = moveCommand->Origin();
+    VPTransformationOrigon const origin = moveCommand->Origin();
 
     if (origin.custom != m_origin.custom)
     {

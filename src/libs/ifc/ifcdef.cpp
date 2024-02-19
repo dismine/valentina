@@ -222,7 +222,7 @@ auto PenStylePic(QColor backgroundColor, QColor textColor, Qt::PenStyle style) -
     QPixmap pix(80, 14);
     pix.fill(backgroundColor);
 
-    QPen pen(textColor, 2.5, style);
+    QPen const pen(textColor, 2.5, style);
 
     QPainter painter(&pix);
     painter.setPen(pen);

@@ -73,7 +73,7 @@ auto FillPath(const QVector<QPointF> &path, qreal accuracy) -> QVector<QPointF>
     {
         pathFilled.append(path.at(i));
 
-        QLineF line(path.at(i), path.at(i + 1));
+        QLineF const line(path.at(i), path.at(i + 1));
         if (line.length() > accuracy)
         {
             qreal len = accuracy;
@@ -104,7 +104,7 @@ void AbstractTest::PieceFromJson(const QString &json, VPiece &piece, QSharedPoin
 {
     QByteArray saveData;
     PrepareDocument(json, saveData);
-    QJsonDocument loadDoc(QJsonDocument::fromJson(saveData));
+    QJsonDocument const loadDoc(QJsonDocument::fromJson(saveData));
 
     const QString testCaseKey = QStringLiteral("testCase");
     const QString bdKey = QStringLiteral("bd");
@@ -141,7 +141,7 @@ void AbstractTest::PassmarkDataFromJson(const QString &json, VPiecePassmarkData 
 {
     QByteArray saveData;
     PrepareDocument(json, saveData);
-    QJsonDocument loadDoc(QJsonDocument::fromJson(saveData));
+    QJsonDocument const loadDoc(QJsonDocument::fromJson(saveData));
 
     const QString dataKey = QStringLiteral("data");
 
@@ -224,7 +224,7 @@ void AbstractTest::PassmarkShapeFromJson(const QString &json, QVector<QLineF> &s
 {
     QByteArray saveData;
     PrepareDocument(json, saveData);
-    QJsonDocument loadDoc(QJsonDocument::fromJson(saveData));
+    QJsonDocument const loadDoc(QJsonDocument::fromJson(saveData));
 
     const QString shapeKey = QStringLiteral("shape");
     const QString typeKey = QStringLiteral("type");
@@ -232,7 +232,7 @@ void AbstractTest::PassmarkShapeFromJson(const QString &json, QVector<QLineF> &s
     QJsonObject shapeObject = loadDoc.object();
     TestRoot(shapeObject, shapeKey, json);
 
-    QJsonArray vectorArray = shapeObject[shapeKey].toArray();
+    QJsonArray const vectorArray = shapeObject[shapeKey].toArray();
     for (auto item : vectorArray)
     {
         QJsonObject lineObject = item.toObject();
@@ -393,10 +393,10 @@ auto AbstractTest::TranslationsPath() -> QString
 //---------------------------------------------------------------------------------------------------------------------
 auto AbstractTest::RunTimeout(int defMsecs) -> int
 {
-    QString timeout = qEnvironmentVariable("VTEST_RUN_TIMEOUT", QString::number(defMsecs));
+    QString const timeout = qEnvironmentVariable("VTEST_RUN_TIMEOUT", QString::number(defMsecs));
 
     bool ok = false;
-    int msecs = timeout.toInt(&ok);
+    int const msecs = timeout.toInt(&ok);
     return ok ? msecs : defMsecs;
 }
 
@@ -408,14 +408,14 @@ auto AbstractTest::Run(int exit, const QString &program, const QStringList &argu
     const QString parameters =
         QStringLiteral("Program: %1 \nArguments: %2.").arg(program, arguments.join(QStringLiteral(", ")));
 
-    QFileInfo info(program);
+    QFileInfo const info(program);
     if (not info.exists())
     {
         error = QStringLiteral("Can't find binary.\n%1").arg(parameters);
         return TST_EX_BIN;
     }
 
-    QScopedPointer<QProcess> process(new QProcess());
+    QScopedPointer<QProcess> const process(new QProcess());
     process->setWorkingDirectory(info.absoluteDir().absolutePath());
     process->start(program, arguments);
 
@@ -455,7 +455,7 @@ auto AbstractTest::Run(int exit, const QString &program, const QStringList &argu
 //---------------------------------------------------------------------------------------------------------------------
 auto AbstractTest::CopyRecursively(const QString &srcFilePath, const QString &tgtFilePath) const -> bool
 {
-    QFileInfo srcFileInfo(srcFilePath);
+    QFileInfo const srcFileInfo(srcFilePath);
     if (srcFileInfo.isDir())
     {
         QDir targetDir(tgtFilePath);
@@ -466,7 +466,7 @@ auto AbstractTest::CopyRecursively(const QString &srcFilePath, const QString &tg
             qWarning("Can't create dir '%s'.", qUtf8Printable(dirName));
             return false;
         }
-        QDir sourceDir(srcFilePath);
+        QDir const sourceDir(srcFilePath);
         const QStringList fileNames =
             sourceDir.entryList(QDir::Files | QDir::Dirs | QDir::NoDotAndDotDot | QDir::Hidden | QDir::System);
         for (auto &fileName : fileNames)
@@ -545,7 +545,7 @@ void AbstractTest::ReadStringValue(const QJsonObject &itemObject, const QString 
 {
     if (itemObject.contains(attribute))
     {
-        QJsonValue attributeValue = itemObject[attribute];
+        QJsonValue const attributeValue = itemObject[attribute];
         if (attributeValue.isString())
         {
             value = attributeValue.toString();
@@ -576,7 +576,7 @@ void AbstractTest::ReadBooleanValue(const QJsonObject &itemObject, const QString
 {
     if (itemObject.contains(attribute))
     {
-        QJsonValue attributeValue = itemObject[attribute];
+        QJsonValue const attributeValue = itemObject[attribute];
         if (attributeValue.isBool())
         {
             value = attributeValue.toBool();
@@ -593,7 +593,7 @@ void AbstractTest::ReadBooleanValue(const QJsonObject &itemObject, const QString
         if (not defaultValue.isEmpty())
         {
             bool ok = false;
-            int defVal = defaultValue.toInt(&ok);
+            int const defVal = defaultValue.toInt(&ok);
 
             if (not ok)
             {
@@ -635,7 +635,7 @@ void AbstractTest::ReadSplinePointValues(const QJsonObject &itemObject, const QS
         QJsonArray nodes = itemObject[attribute].toArray();
         for (int i = 0; i < nodes.size(); ++i)
         {
-            QJsonObject item = nodes[i].toObject();
+            QJsonObject const item = nodes[i].toObject();
             VSplinePoint point;
             ReadSplinePointValue(item, point);
             points.append(point);
@@ -704,7 +704,7 @@ void AbstractTest::ReadDoubleValue(const QJsonObject &itemObject, const QString 
 {
     if (itemObject.contains(attribute))
     {
-        QJsonValue attributeValue = itemObject[attribute];
+        QJsonValue const attributeValue = itemObject[attribute];
         if (attributeValue.isDouble())
         {
             value = static_cast<T>(attributeValue.toDouble());
@@ -743,7 +743,7 @@ void AbstractTest::ReadDoubleValue(const QJsonObject &itemObject, const QString 
 {
     if (itemObject.contains(attribute))
     {
-        QJsonValue attributeValue = itemObject[attribute];
+        QJsonValue const attributeValue = itemObject[attribute];
         if (attributeValue.isDouble())
         {
             value = static_cast<T>(static_cast<int>(attributeValue.toDouble()));
@@ -782,7 +782,7 @@ void AbstractTest::ReadDoubleValue(const QJsonObject &itemObject, const QString 
 {
     if (itemObject.contains(attribute))
     {
-        QJsonValue attributeValue = itemObject[attribute];
+        QJsonValue const attributeValue = itemObject[attribute];
         if (attributeValue.isDouble())
         {
             value = static_cast<T>(attributeValue.toDouble());
@@ -899,10 +899,10 @@ void AbstractTest::DBFromJson(const QJsonObject &dbObject, QSharedPointer<VConta
 
     if (dbObject.contains(itemsKey))
     {
-        QJsonArray items = dbObject[itemsKey].toArray();
+        QJsonArray const items = dbObject[itemsKey].toArray();
         for (auto item : items)
         {
-            QJsonObject itemObject = item.toObject();
+            QJsonObject const itemObject = item.toObject();
             GOType objectType;
             AbstractTest::ReadDoubleValue(itemObject, QStringLiteral("type"), objectType);
 
@@ -958,7 +958,7 @@ void AbstractTest::MainPathFromJson(const QJsonObject &pieceObject, VPiece &piec
         QJsonArray nodes = pieceObject[nodesKey].toArray();
         for (int i = 0; i < nodes.size(); ++i)
         {
-            QJsonObject itemObject = nodes[i].toObject();
+            QJsonObject const itemObject = nodes[i].toObject();
 
             VPieceNode node;
             ReadPieceNodeValue(itemObject, node);

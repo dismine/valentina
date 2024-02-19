@@ -210,7 +210,7 @@ void VWidgetDetails::ToggledPieceItem(QTableWidgetItem *item)
 {
     SCASSERT(item != nullptr)
 
-    quint32 id = item->data(Qt::UserRole).toUInt();
+    quint32 const id = item->data(Qt::UserRole).toUInt();
     const QHash<quint32, VPiece> *details = m_data->DataPieces();
 
     if (details->contains(id))
@@ -292,7 +292,7 @@ auto VWidgetDetails::PreparePieceNameColumnCell(const VPiece &det) -> QTableWidg
 //---------------------------------------------------------------------------------------------------------------------
 void VWidgetDetails::ShowContextMenu(const QPoint &pos)
 {
-    QScopedPointer<QMenu> menu(new QMenu());
+    QScopedPointer<QMenu> const menu(new QMenu());
     QAction *actionSelectAll = menu->addAction(tr("Select all"));
     QAction *actionSelectNone = menu->addAction(tr("Select none"));
 

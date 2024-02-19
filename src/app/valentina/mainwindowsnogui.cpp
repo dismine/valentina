@@ -106,7 +106,7 @@ void RemoveLayoutPath(const QString &path, bool usedNotExistedDir)
 {
     if (usedNotExistedDir)
     {
-        QDir dir(path);
+        QDir const dir(path);
         dir.rmpath(QChar('.'));
     }
 }
@@ -474,7 +474,7 @@ void MainWindowsNoGUI::ShowLayoutError(const LayoutErrors &state)
 //---------------------------------------------------------------------------------------------------------------------
 void MainWindowsNoGUI::ExportFMeasurementsToCSV()
 {
-    QString fileName = CSVFilePath();
+    QString const fileName = CSVFilePath();
 
     if (fileName.isEmpty())
     {
@@ -546,7 +546,7 @@ void MainWindowsNoGUI::ExportFlatLayout(const QList<QGraphicsScene *> &scenes, c
                                         const QMarginsF &margins)
 {
     const QString path = m_dialogSaveLayout->Path();
-    bool usedNotExistedDir = CreateLayoutPath(path);
+    bool const usedNotExistedDir = CreateLayoutPath(path);
     if (not usedNotExistedDir)
     {
         qCritical() << tr("Can't create a path");
@@ -577,7 +577,7 @@ void MainWindowsNoGUI::ExportDetailsAsFlatLayout(const QVector<VLayoutPiece> &li
         return;
     }
 
-    QScopedPointer<QGraphicsScene> scene(new QGraphicsScene());
+    QScopedPointer<QGraphicsScene> const scene(new QGraphicsScene());
 
     QList<QGraphicsItem *> list;
     list.reserve(listDetails.count());
@@ -635,8 +635,8 @@ void MainWindowsNoGUI::ExportDetailsAsFlatLayout(const QVector<VLayoutPiece> &li
     QList<QList<QGraphicsItem *>> details; // All details
     details.append(list);
 
-    QList<QGraphicsItem *> shadows = CreateShadows(papers);
-    QList<QGraphicsScene *> scenes = CreateScenes(papers, shadows, details);
+    QList<QGraphicsItem *> const shadows = CreateShadows(papers);
+    QList<QGraphicsScene *> const scenes = CreateScenes(papers, shadows, details);
 
     const bool ignorePrinterFields = false;
     Q_RELAXED_CONSTEXPR qreal margin = ToPixel(1, Unit::Cm);
@@ -650,7 +650,7 @@ void MainWindowsNoGUI::ExportApparelLayout(const QVector<VLayoutPiece> &details,
                                            const QSize &size) const
 {
     const QString path = m_dialogSaveLayout->Path();
-    bool usedNotExistedDir = CreateLayoutPath(path);
+    bool const usedNotExistedDir = CreateLayoutPath(path);
     if (not usedNotExistedDir)
     {
         qCritical() << tr("Can't create a path");
@@ -717,7 +717,7 @@ void MainWindowsNoGUI::ExportDetailsAsApparelLayout(QVector<VLayoutPiece> listDe
         return;
     }
 
-    QScopedPointer<QGraphicsScene> scene(new QGraphicsScene());
+    QScopedPointer<QGraphicsScene> const scene(new QGraphicsScene());
 
     QList<QGraphicsItem *> list;
     list.reserve(listDetails.count());
@@ -809,7 +809,7 @@ void MainWindowsNoGUI::PrintPreviewTiled()
         m_layoutSettings->SetTiledMargins(m_dialogSaveLayout->GetTiledMargins());
         m_layoutSettings->SetTiledPDFOrientation(m_dialogSaveLayout->GetTiledPageOrientation());
 
-        VAbstractLayoutDialog::PaperSizeTemplate tiledFormat = m_dialogSaveLayout->GetTiledPageFormat();
+        VAbstractLayoutDialog::PaperSizeTemplate const tiledFormat = m_dialogSaveLayout->GetTiledPageFormat();
         m_layoutSettings->SetTiledPDFPaperSize(VAbstractLayoutDialog::GetTemplateSize(tiledFormat, Unit::Mm));
     }
     else
@@ -843,7 +843,7 @@ void MainWindowsNoGUI::PrintTiled()
         m_layoutSettings->SetTiledMargins(m_dialogSaveLayout->GetTiledMargins());
         m_layoutSettings->SetTiledPDFOrientation(m_dialogSaveLayout->GetTiledPageOrientation());
 
-        VAbstractLayoutDialog::PaperSizeTemplate tiledFormat = m_dialogSaveLayout->GetTiledPageFormat();
+        VAbstractLayoutDialog::PaperSizeTemplate const tiledFormat = m_dialogSaveLayout->GetTiledPageFormat();
         m_layoutSettings->SetTiledPDFPaperSize(VAbstractLayoutDialog::GetTemplateSize(tiledFormat, Unit::Mm));
     }
     else
@@ -868,7 +868,7 @@ auto MainWindowsNoGUI::PrepareDetailsForLayout(const QVector<DetailForLayout> &d
         return {};
     }
 
-    std::function<VLayoutPiece(const DetailForLayout &data)> PrepareDetail = [](const DetailForLayout &data)
+    std::function<VLayoutPiece(const DetailForLayout &data)> const PrepareDetail = [](const DetailForLayout &data)
     {
         auto *tool = qobject_cast<VAbstractTool *>(VAbstractPattern::getTool(data.id));
         SCASSERT(tool != nullptr)
@@ -1028,7 +1028,7 @@ void MainWindowsNoGUI::PdfTiledFile(const QString &name)
         m_layoutSettings->SetTiledMargins(m_dialogSaveLayout->GetTiledMargins());
         m_layoutSettings->SetTiledPDFOrientation(m_dialogSaveLayout->GetTiledPageOrientation());
 
-        VAbstractLayoutDialog::PaperSizeTemplate tiledFormat = m_dialogSaveLayout->GetTiledPageFormat();
+        VAbstractLayoutDialog::PaperSizeTemplate const tiledFormat = m_dialogSaveLayout->GetTiledPageFormat();
         m_layoutSettings->SetTiledPDFPaperSize(VAbstractLayoutDialog::GetTemplateSize(tiledFormat, Unit::Mm));
 
         m_layoutSettings->SetXScale(m_dialogSaveLayout->GetXScale());
@@ -1091,8 +1091,8 @@ void MainWindowsNoGUI::ExportScene(const QList<QGraphicsScene *> &scenes, const 
             exporter.SetFileName(name);
             exporter.SetImageRect(paper->rect());
 
-            QPen defaultPen(Qt::black, VAbstractApplication::VApp()->Settings()->WidthHairLine(), Qt::SolidLine,
-                            Qt::RoundCap, Qt::RoundJoin);
+            QPen const defaultPen(Qt::black, VAbstractApplication::VApp()->Settings()->WidthHairLine(), Qt::SolidLine,
+                                  Qt::RoundCap, Qt::RoundJoin);
 
             switch (m_dialogSaveLayout->Format())
             {
@@ -1237,7 +1237,7 @@ auto MainWindowsNoGUI::ExportFMeasurementsToCSVData(const QString &fileName, boo
         {
             try
             {
-                QScopedPointer<Calculator> cal(new Calculator());
+                QScopedPointer<Calculator> const cal(new Calculator());
                 const qreal result = cal->EvalFormula(completeData.DataVariables(), m.formula);
 
                 csv.setText(i, 1, VAbstractApplication::VApp()->LocaleToString(result)); // value
@@ -1383,7 +1383,7 @@ void MainWindowsNoGUI::CheckRequiredMeasurements(const VMeasurements *m) const
 
     if (not match.isEmpty())
     {
-        QStringList list = ConvertToList(match);
+        QStringList const list = ConvertToList(match);
         VException e(tr("Measurement file doesn't include all required measurements."));
         e.AddMoreInformation(tr("Please, additionally provide: %1").arg(list.join(", "_L1)));
         throw e;

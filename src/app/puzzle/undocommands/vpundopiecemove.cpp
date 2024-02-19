@@ -47,13 +47,13 @@ VPUndoPieceMove::VPUndoPieceMove(const VPPiecePtr &piece, qreal dx, qreal dy, bo
 //---------------------------------------------------------------------------------------------------------------------
 void VPUndoPieceMove::undo()
 {
-    VPPiecePtr piece = Piece();
+    VPPiecePtr const piece = Piece();
     if (piece.isNull())
     {
         return;
     }
 
-    VPLayoutPtr layout = piece->Layout();
+    VPLayoutPtr const layout = piece->Layout();
     if (layout.isNull())
     {
         return;
@@ -71,13 +71,13 @@ void VPUndoPieceMove::undo()
 //---------------------------------------------------------------------------------------------------------------------
 void VPUndoPieceMove::redo()
 {
-    VPPiecePtr piece = Piece();
+    VPPiecePtr const piece = Piece();
     if (piece.isNull())
     {
         return;
     }
 
-    VPLayoutPtr layout = piece->Layout();
+    VPLayoutPtr const layout = piece->Layout();
     if (layout.isNull())
     {
         return;
@@ -104,7 +104,7 @@ auto VPUndoPieceMove::mergeWith(const QUndoCommand *command) -> bool
     const auto *moveCommand = dynamic_cast<const VPUndoPieceMove *>(command);
     SCASSERT(moveCommand != nullptr)
 
-    VPPiecePtr piece = Piece();
+    VPPiecePtr const piece = Piece();
     if (moveCommand->Piece().isNull() || piece.isNull() || moveCommand->Piece() != piece ||
             not moveCommand->AllowMerge())
     {
@@ -150,13 +150,13 @@ void VPUndoPiecesMove::undo()
         return;
     }
 
-    VPLayoutPtr layout = Layout();
+    VPLayoutPtr const layout = Layout();
     if (layout.isNull())
     {
         return;
     }
 
-    VPSheetPtr sheet = Sheet();
+    VPSheetPtr const sheet = Sheet();
     if (layout->GetFocusedSheet() != sheet)
     {
         layout->SetFocusedSheet(sheet);
@@ -164,7 +164,7 @@ void VPUndoPiecesMove::undo()
 
     for (const auto& piece : qAsConst(m_pieces))
     {
-        VPPiecePtr p = piece.toStrongRef();
+        VPPiecePtr const p = piece.toStrongRef();
         if (not p.isNull())
         {
             if (m_oldTransforms.contains(p->GetUniqueID()))
@@ -184,13 +184,13 @@ void VPUndoPiecesMove::redo()
         return;
     }
 
-    VPLayoutPtr layout = Layout();
+    VPLayoutPtr const layout = Layout();
     if (layout.isNull())
     {
         return;
     }
 
-    VPSheetPtr sheet = Sheet();
+    VPSheetPtr const sheet = Sheet();
     if (layout->GetFocusedSheet() != sheet)
     {
         layout->SetFocusedSheet(sheet);
@@ -198,7 +198,7 @@ void VPUndoPiecesMove::redo()
 
     for (const auto& piece : qAsConst(m_pieces))
     {
-        VPPiecePtr p = piece.toStrongRef();
+        VPPiecePtr const p = piece.toStrongRef();
         if (not p.isNull())
         {
             p->Translate(m_dx, m_dy);
@@ -246,7 +246,7 @@ auto VPUndoPiecesMove::Layout() const -> VPLayoutPtr
 {
     for (const auto& piece : m_pieces)
     {
-        VPPiecePtr p = piece.toStrongRef();
+        VPPiecePtr const p = piece.toStrongRef();
         if (not p.isNull())
         {
             return p->Layout();
@@ -261,7 +261,7 @@ auto VPUndoPiecesMove::Sheet() const  -> VPSheetPtr
 {
     for (const auto& piece : m_pieces)
     {
-        VPPiecePtr p = piece.toStrongRef();
+        VPPiecePtr const p = piece.toStrongRef();
         if (not p.isNull())
         {
             return p->Sheet();
@@ -277,7 +277,7 @@ inline auto VPUndoPiecesMove::PieceIds() const -> QSet<QString>
     QSet<QString> ids;
     for (const auto& piece : m_pieces)
     {
-        VPPiecePtr p = piece.toStrongRef();
+        VPPiecePtr const p = piece.toStrongRef();
         if (not p.isNull())
         {
             ids.insert(p->GetUniqueID());

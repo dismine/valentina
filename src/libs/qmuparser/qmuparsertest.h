@@ -182,25 +182,25 @@ private:
 
     static auto StrFun1(const QString &v1) -> qreal
     {
-        int val = v1.toInt();
+        int const val = v1.toInt();
         return static_cast<qreal>(val);
     }
 
     static auto StrFun2(const QString &v1, qreal v2) -> qreal
     {
-        int val = v1.toInt();
+        int const val = v1.toInt();
         return static_cast<qreal>(val + v2);
     }
 
     static auto StrFun3(const QString &v1, qreal v2, qreal v3) -> qreal
     {
-        int val = v1.toInt();
+        int const val = v1.toInt();
         return val + v2 + v3;
     }
 
     static auto StrToFloat(const QString &a_szMsg) -> qreal
     {
-        qreal val = a_szMsg.toDouble();
+        qreal const val = a_szMsg.toDouble();
         return val;
     }
 

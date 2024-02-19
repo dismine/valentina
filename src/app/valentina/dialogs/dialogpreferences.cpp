@@ -93,7 +93,7 @@ void DialogPreferences::showEvent(QShowEvent *event)
     }
     // do your init stuff here
 
-    QSize sz = VAbstractApplication::VApp()->Settings()->GetPreferenceDialogSize();
+    QSize const sz = VAbstractApplication::VApp()->Settings()->GetPreferenceDialogSize();
     if (not sz.isEmpty())
     {
         resize(sz);
@@ -140,7 +140,7 @@ void DialogPreferences::PageChanged(QListWidgetItem *current, QListWidgetItem *p
     {
         current = previous;
     }
-    int rowIndex = ui->contentsWidget->row(current);
+    int const rowIndex = ui->contentsWidget->row(current);
     ui->pagesWidget->setCurrentIndex(rowIndex);
 }
 

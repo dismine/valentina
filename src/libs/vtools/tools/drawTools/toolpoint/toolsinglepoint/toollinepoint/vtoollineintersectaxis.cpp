@@ -125,7 +125,7 @@ auto VToolLineIntersectAxis::Create(VToolLineIntersectAxisInitData &initData) ->
 
     const QSharedPointer<VPointF> firstPoint = initData.data->GeometricObject<VPointF>(initData.firstPointId);
     const QSharedPointer<VPointF> secondPoint = initData.data->GeometricObject<VPointF>(initData.secondPointId);
-    QLineF line(static_cast<QPointF>(*firstPoint), static_cast<QPointF>(*secondPoint));
+    QLineF const line(static_cast<QPointF>(*firstPoint), static_cast<QPointF>(*secondPoint));
 
     QPointF fPoint;
     const bool success = FindPoint(axis, line, &fPoint);
@@ -184,7 +184,7 @@ auto VToolLineIntersectAxis::FindPoint(const QLineF &axis, const QLineF &line, Q
     SCASSERT(intersectionPoint != nullptr)
 
     QPointF fPoint;
-    QLineF::IntersectType intersect = axis.intersects(line, &fPoint);
+    QLineF::IntersectType const intersect = axis.intersects(line, &fPoint);
 
     if (intersect == QLineF::UnboundedIntersection || intersect == QLineF::BoundedIntersection)
     {

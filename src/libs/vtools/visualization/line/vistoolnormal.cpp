@@ -63,11 +63,11 @@ void VisToolNormal::RefreshGeometry()
 
         if (m_object2Id <= NULL_ID)
         {
-            QLineF line_mouse(static_cast<QPointF>(*first), ScenePos());
+            QLineF const line_mouse(static_cast<QPointF>(*first), ScenePos());
             DrawLine(m_line, line_mouse);
 
-            QLineF normal = line_mouse.normalVector();
-            QPointF endRay = Ray(normal.p1(), normal.angle());
+            QLineF const normal = line_mouse.normalVector();
+            QPointF const endRay = Ray(normal.p1(), normal.angle());
             DrawLine(this, QLineF(normal.p1(), endRay));
         }
         else
@@ -75,33 +75,33 @@ void VisToolNormal::RefreshGeometry()
             const QSharedPointer<VPointF> second = GetData()->GeometricObject<VPointF>(m_object2Id);
             DrawPoint(m_lineP2, static_cast<QPointF>(*second));
 
-            QLineF line_mouse(static_cast<QPointF>(*first), static_cast<QPointF>(*second));
+            QLineF const line_mouse(static_cast<QPointF>(*first), static_cast<QPointF>(*second));
             DrawLine(m_line, line_mouse);
 
             if (not qFuzzyIsNull(m_length))
             {
-                QPointF fPoint = VToolNormal::FindPoint(static_cast<QPointF>(*first), static_cast<QPointF>(*second),
-                                                        m_length, m_angle);
-                QLineF mainLine = QLineF(static_cast<QPointF>(*first), fPoint);
+                QPointF const fPoint = VToolNormal::FindPoint(static_cast<QPointF>(*first),
+                                                              static_cast<QPointF>(*second), m_length, m_angle);
+                QLineF const mainLine = QLineF(static_cast<QPointF>(*first), fPoint);
                 DrawLine(this, mainLine, LineStyle());
 
                 DrawPoint(m_point, mainLine.p2());
             }
             else if (GetMode() == Mode::Creation)
             {
-                QLineF cursorLine(static_cast<QPointF>(*first), ScenePos());
-                QLineF normal = line_mouse.normalVector();
+                QLineF const cursorLine(static_cast<QPointF>(*first), ScenePos());
+                QLineF const normal = line_mouse.normalVector();
 
                 qreal len = cursorLine.length();
-                qreal angleTo = normal.angleTo(cursorLine);
+                qreal const angleTo = normal.angleTo(cursorLine);
                 if (angleTo > 90 && angleTo < 270)
                 {
                     len *= -1;
                 }
 
-                QPointF fPoint =
+                QPointF const fPoint =
                     VToolNormal::FindPoint(static_cast<QPointF>(*first), static_cast<QPointF>(*second), len, m_angle);
-                QLineF mainLine = QLineF(static_cast<QPointF>(*first), fPoint);
+                QLineF const mainLine = QLineF(static_cast<QPointF>(*first), fPoint);
                 DrawLine(this, mainLine, LineStyle());
 
                 DrawPoint(m_point, mainLine.p2());
@@ -114,8 +114,8 @@ void VisToolNormal::RefreshGeometry()
             }
             else
             {
-                QLineF normal = line_mouse.normalVector();
-                QPointF endRay = Ray(normal.p1(), normal.angle());
+                QLineF const normal = line_mouse.normalVector();
+                QPointF const endRay = Ray(normal.p1(), normal.angle());
                 DrawLine(this, QLineF(normal.p1(), endRay));
             }
         }
