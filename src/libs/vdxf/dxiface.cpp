@@ -137,7 +137,7 @@ void dx_iface::writeBlocks()
     {
         dxfW->writeBlock(bk);
         // and write each entity in block
-        for (std::list<DRW_Entity *>::const_iterator it = bk->ent.begin(); it != bk->ent.end(); ++it)
+        for (auto it = bk->ent.begin(); it != bk->ent.end(); ++it)
             writeEntity(*it);
     }
 }
@@ -150,7 +150,7 @@ void dx_iface::writeBlockRecords()
 
 void dx_iface::writeEntities()
 {
-    for (std::list<DRW_Entity *>::const_iterator it = cData.mBlock->ent.begin(); it != cData.mBlock->ent.end(); ++it)
+    for (auto it = cData.mBlock->ent.begin(); it != cData.mBlock->ent.end(); ++it)
         writeEntity(*it);
 }
 

@@ -113,7 +113,7 @@ auto DialogFlippingByAxis::GetOriginPointId() const -> quint32
 void DialogFlippingByAxis::SetOriginPointId(quint32 value)
 {
     ChangeCurrentData(ui->comboBoxOriginPoint, value);
-    VisToolFlippingByAxis *operation = qobject_cast<VisToolFlippingByAxis *>(vis);
+    auto *operation = qobject_cast<VisToolFlippingByAxis *>(vis);
     SCASSERT(operation != nullptr)
     operation->SetOriginPointId(value);
 }
@@ -206,12 +206,11 @@ void DialogFlippingByAxis::ShowDialog(bool click)
 
         stage1 = false;
 
-        VMainGraphicsScene *scene =
-            qobject_cast<VMainGraphicsScene *>(VAbstractValApplication::VApp()->getCurrentScene());
+        auto *scene = qobject_cast<VMainGraphicsScene *>(VAbstractValApplication::VApp()->getCurrentScene());
         SCASSERT(scene != nullptr)
         scene->clearSelection();
 
-        VisToolFlippingByAxis *operation = qobject_cast<VisToolFlippingByAxis *>(vis);
+        auto *operation = qobject_cast<VisToolFlippingByAxis *>(vis);
         SCASSERT(operation != nullptr)
         operation->SetObjects(SourceToObjects(sourceObjects));
         operation->VisualMode();
@@ -253,7 +252,7 @@ void DialogFlippingByAxis::SetSourceObjects(const QVector<SourceItem> &value)
     sourceObjects = value;
     FillSourceList();
 
-    VisToolFlippingByAxis *operation = qobject_cast<VisToolFlippingByAxis *>(vis);
+    auto *operation = qobject_cast<VisToolFlippingByAxis *>(vis);
     SCASSERT(operation != nullptr)
     operation->SetObjects(SourceToObjects(sourceObjects));
 }
@@ -276,7 +275,7 @@ void DialogFlippingByAxis::ChosenObject(quint32 id, const SceneObject &type)
 
             if (SetObject(id, ui->comboBoxOriginPoint, QString()))
             {
-                VisToolFlippingByAxis *operation = qobject_cast<VisToolFlippingByAxis *>(vis);
+                auto *operation = qobject_cast<VisToolFlippingByAxis *>(vis);
                 SCASSERT(operation != nullptr)
                 operation->SetOriginPointId(id);
                 operation->RefreshGeometry();
@@ -317,7 +316,7 @@ void DialogFlippingByAxis::SelectedObject(bool selected, quint32 object, quint32
 //---------------------------------------------------------------------------------------------------------------------
 void DialogFlippingByAxis::SuffixChanged()
 {
-    QLineEdit *edit = qobject_cast<QLineEdit *>(sender());
+    auto *edit = qobject_cast<QLineEdit *>(sender());
     if (edit)
     {
         const QString suffix = edit->text();
@@ -357,7 +356,7 @@ void DialogFlippingByAxis::SuffixChanged()
 //---------------------------------------------------------------------------------------------------------------------
 void DialogFlippingByAxis::GroupNameChanged()
 {
-    QLineEdit *edit = qobject_cast<QLineEdit *>(sender());
+    auto *edit = qobject_cast<QLineEdit *>(sender());
     if (edit)
     {
         const QString name = edit->text();
@@ -532,7 +531,7 @@ void DialogFlippingByAxis::SaveData()
         }
     }
 
-    VisToolFlippingByAxis *operation = qobject_cast<VisToolFlippingByAxis *>(vis);
+    auto *operation = qobject_cast<VisToolFlippingByAxis *>(vis);
     SCASSERT(operation != nullptr)
 
     operation->SetObjects(SourceToObjects(sourceObjects));

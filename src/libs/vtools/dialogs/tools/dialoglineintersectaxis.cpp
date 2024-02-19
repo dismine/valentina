@@ -169,7 +169,7 @@ void DialogLineIntersectAxis::SetAngle(const QString &value)
     }
     ui->plainTextEditFormula->setPlainText(formulaAngle);
 
-    VisToolLineIntersectAxis *line = qobject_cast<VisToolLineIntersectAxis *>(vis);
+    auto *line = qobject_cast<VisToolLineIntersectAxis *>(vis);
     SCASSERT(line != nullptr)
     line->SetAngle(formulaAngle);
 
@@ -187,7 +187,7 @@ void DialogLineIntersectAxis::SetBasePointId(quint32 value)
 {
     setCurrentPointId(ui->comboBoxAxisPoint, value);
 
-    VisToolLineIntersectAxis *line = qobject_cast<VisToolLineIntersectAxis *>(vis);
+    auto *line = qobject_cast<VisToolLineIntersectAxis *>(vis);
     SCASSERT(line != nullptr)
     line->SetAxisPointId(value);
 }
@@ -203,7 +203,7 @@ void DialogLineIntersectAxis::SetFirstPointId(quint32 value)
 {
     setCurrentPointId(ui->comboBoxFirstLinePoint, value);
 
-    VisToolLineIntersectAxis *line = qobject_cast<VisToolLineIntersectAxis *>(vis);
+    auto *line = qobject_cast<VisToolLineIntersectAxis *>(vis);
     SCASSERT(line != nullptr)
     line->SetPoint1Id(value);
 }
@@ -219,7 +219,7 @@ void DialogLineIntersectAxis::SetSecondPointId(quint32 value)
 {
     setCurrentPointId(ui->comboBoxSecondLinePoint, value);
 
-    VisToolLineIntersectAxis *line = qobject_cast<VisToolLineIntersectAxis *>(vis);
+    auto *line = qobject_cast<VisToolLineIntersectAxis *>(vis);
     SCASSERT(line != nullptr)
     line->SetPoint2Id(value);
 }
@@ -410,7 +410,7 @@ void DialogLineIntersectAxis::SaveData()
     pointName = ui->lineEditNamePoint->text();
     formulaAngle = ui->plainTextEditFormula->toPlainText();
 
-    VisToolLineIntersectAxis *line = qobject_cast<VisToolLineIntersectAxis *>(vis);
+    auto *line = qobject_cast<VisToolLineIntersectAxis *>(vis);
     SCASSERT(line != nullptr)
 
     line->SetPoint1Id(GetFirstPointId());

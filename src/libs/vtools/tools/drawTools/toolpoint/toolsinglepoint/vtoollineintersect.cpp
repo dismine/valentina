@@ -156,7 +156,7 @@ auto VToolLineIntersect::Create(VToolLineIntersectInitData initData) -> VToolLin
             : qWarning() << VAbstractValApplication::warningMessageSignature + errorMsg;
     }
 
-    VPointF *p = new VPointF(fPoint, initData.name, initData.mx, initData.my);
+    auto *p = new VPointF(fPoint, initData.name, initData.mx, initData.my);
     p->SetShowLabel(initData.showLabel);
 
     if (initData.typeCreation == Source::FromGui)
@@ -183,7 +183,7 @@ auto VToolLineIntersect::Create(VToolLineIntersectInitData initData) -> VToolLin
     if (initData.parse == Document::FullParse)
     {
         VAbstractTool::AddRecord(initData.id, Tool::LineIntersect, initData.doc);
-        VToolLineIntersect *point = new VToolLineIntersect(initData);
+        auto *point = new VToolLineIntersect(initData);
         initData.scene->addItem(point);
         InitToolConnections(initData.scene, point);
         VAbstractPattern::AddTool(initData.id, point);

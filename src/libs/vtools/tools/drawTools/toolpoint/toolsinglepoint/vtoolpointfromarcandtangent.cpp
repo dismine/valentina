@@ -123,7 +123,7 @@ auto VToolPointFromArcAndTangent::Create(VToolPointFromArcAndTangentInitData ini
                                               qWarning() << VAbstractValApplication::warningMessageSignature + errorMsg;
     }
 
-    VPointF *p = new VPointF(point, initData.name, initData.mx, initData.my);
+    auto *p = new VPointF(point, initData.name, initData.mx, initData.my);
     p->SetShowLabel(initData.showLabel);
 
     if (initData.typeCreation == Source::FromGui)
@@ -142,7 +142,7 @@ auto VToolPointFromArcAndTangent::Create(VToolPointFromArcAndTangentInitData ini
     if (initData.parse == Document::FullParse)
     {
         VAbstractTool::AddRecord(initData.id, Tool::PointFromArcAndTangent, initData.doc);
-        VToolPointFromArcAndTangent *point = new VToolPointFromArcAndTangent(initData);
+        auto *point = new VToolPointFromArcAndTangent(initData);
         initData.scene->addItem(point);
         InitToolConnections(initData.scene, point);
         VAbstractPattern::AddTool(initData.id, point);

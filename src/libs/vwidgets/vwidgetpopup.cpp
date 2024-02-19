@@ -96,8 +96,8 @@ void VWidgetPopup::PopupMessage(QWidget *w, const QString &msg)
 {
     SCASSERT(w != nullptr)
 
-    VWidgetPopup *popup = new VWidgetPopup(w);
-    QLabel *label = new QLabel(msg);
+    auto *popup = new VWidgetPopup(w);
+    auto *label = new QLabel(msg);
     QFont f = label->font();
     f.setBold(true);
     f.setPixelSize(16);

@@ -141,7 +141,7 @@ void VPE::VPropertyFormWidget::build()
             else
             {
                 // Child properties, the property itself is not being added
-                VPropertyFormWidget *tmpNewFormWidget = new VPropertyFormWidget(tmpProperty, this);
+                auto *tmpNewFormWidget = new VPropertyFormWidget(tmpProperty, this);
                 tmpFormLayout->addRow(tmpNewFormWidget);
                 d_ptr->EditorWidgets.append(VPropertyFormWidgetPrivate::SEditorWidget(tmpNewFormWidget));
                 tmpNewFormWidget->setCommitBehaviour(d_ptr->UpdateEditors);
@@ -149,7 +149,7 @@ void VPE::VPropertyFormWidget::build()
         }
         else if (tmpProperty->type() == "widget")
         {
-            VWidgetProperty *tmpWidgetProperty = static_cast<VWidgetProperty *>(tmpProperty);
+            auto *tmpWidgetProperty = static_cast<VWidgetProperty *>(tmpProperty);
             tmpFormLayout->addRow(tmpWidgetProperty->getWidget());
             d_ptr->EditorWidgets.append(VPropertyFormWidgetPrivate::SEditorWidget(tmpWidgetProperty->getWidget()));
         }

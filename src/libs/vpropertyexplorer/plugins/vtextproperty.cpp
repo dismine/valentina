@@ -79,7 +79,7 @@ auto VPE::VTextProperty::createEditor(QWidget *parent, const QStyleOptionViewIte
     Q_UNUSED(options)
     Q_UNUSED(delegate)
 
-    QPlainTextEdit *tmpEditor = new QPlainTextEdit(parent);
+    auto *tmpEditor = new QPlainTextEdit(parent);
     tmpEditor->setLocale(parent->locale());
     tmpEditor->setReadOnly(readOnly);
     tmpEditor->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
@@ -92,7 +92,7 @@ auto VPE::VTextProperty::createEditor(QWidget *parent, const QStyleOptionViewIte
 
 auto VPE::VTextProperty::setEditorData(QWidget *editor) -> bool
 {
-    if (QPlainTextEdit *tmpWidget = qobject_cast<QPlainTextEdit *>(editor))
+    if (auto *tmpWidget = qobject_cast<QPlainTextEdit *>(editor))
     {
         tmpWidget->setPlainText(d_ptr->VariantValue.toString());
         return true;
@@ -103,7 +103,7 @@ auto VPE::VTextProperty::setEditorData(QWidget *editor) -> bool
 
 auto VPE::VTextProperty::getEditorData(const QWidget *editor) const -> QVariant
 {
-    const QPlainTextEdit *tmpEditor = qobject_cast<const QPlainTextEdit *>(editor);
+    const auto *tmpEditor = qobject_cast<const QPlainTextEdit *>(editor);
     if (tmpEditor)
     {
         return tmpEditor->toPlainText();

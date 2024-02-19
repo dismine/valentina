@@ -52,7 +52,7 @@ auto VPE::VObjectProperty::data(int column, int role) const -> QVariant
         return QVariant();
     }
 
-    QComboBox* tmpEditor = qobject_cast<QComboBox*>(VProperty::d_ptr->editor);
+    auto *tmpEditor = qobject_cast<QComboBox *>(VProperty::d_ptr->editor);
 
     if (column == DPC_Data && Qt::DisplayRole == role)
     {
@@ -72,7 +72,7 @@ auto VPE::VObjectProperty::createEditor(QWidget *parent, const QStyleOptionViewI
 {
     Q_UNUSED(options)
     Q_UNUSED(delegate)
-    QComboBox* tmpEditor = new QComboBox(parent);
+    auto *tmpEditor = new QComboBox(parent);
     tmpEditor->clear();
     tmpEditor->setLocale(parent->locale());
     FillList(tmpEditor, objects);
@@ -91,7 +91,7 @@ auto VPE::VObjectProperty::setEditorData(QWidget *editor) -> bool
         return false;
     }
 
-    QComboBox* tmpEditor = qobject_cast<QComboBox*>(editor);
+    auto *tmpEditor = qobject_cast<QComboBox *>(editor);
     if (tmpEditor)
     {
         quint32 const objId = VProperty::d_ptr->VariantValue.toUInt();
@@ -113,7 +113,7 @@ auto VPE::VObjectProperty::setEditorData(QWidget *editor) -> bool
 //! Gets the data from the widget
 auto VPE::VObjectProperty::getEditorData(const QWidget *editor) const -> QVariant
 {
-    const QComboBox* tmpEditor = qobject_cast<const QComboBox*>(editor);
+    const auto *tmpEditor = qobject_cast<const QComboBox *>(editor);
     if (tmpEditor)
     {
         return tmpEditor->itemData(tmpEditor->currentIndex());
@@ -165,7 +165,7 @@ auto VPE::VObjectProperty::clone(bool include_children, VProperty *container) co
 void VPE::VObjectProperty::currentIndexChanged(int index)
 {
     Q_UNUSED(index)
-    UserChangeEvent *event = new UserChangeEvent();
+    auto *event = new UserChangeEvent();
     QCoreApplication::postEvent ( VProperty::d_ptr->editor, event );
 }
 

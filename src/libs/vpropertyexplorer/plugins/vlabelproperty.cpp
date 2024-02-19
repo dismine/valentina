@@ -77,7 +77,7 @@ auto VPE::VLabelProperty::createEditor(QWidget *parent, const QStyleOptionViewIt
     Q_UNUSED(options)
     Q_UNUSED(delegate)
 
-    QLabel *tmpEditor = new QLabel(parent);
+    auto *tmpEditor = new QLabel(parent);
     tmpEditor->setLocale(parent->locale());
     tmpEditor->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Preferred);
     tmpEditor->setText(d_ptr->VariantValue.toString());
@@ -88,7 +88,7 @@ auto VPE::VLabelProperty::createEditor(QWidget *parent, const QStyleOptionViewIt
 
 auto VPE::VLabelProperty::setEditorData(QWidget *editor) -> bool
 {
-    if (QLabel *tmpWidget = qobject_cast<QLabel *>(editor))
+    if (auto *tmpWidget = qobject_cast<QLabel *>(editor))
     {
         tmpWidget->setText(d_ptr->VariantValue.toString());
         return true;
@@ -99,7 +99,7 @@ auto VPE::VLabelProperty::setEditorData(QWidget *editor) -> bool
 
 auto VPE::VLabelProperty::getEditorData(const QWidget *editor) const -> QVariant
 {
-    const QLabel *tmpEditor = qobject_cast<const QLabel *>(editor);
+    const auto *tmpEditor = qobject_cast<const QLabel *>(editor);
     if (tmpEditor)
     {
         return tmpEditor->text();

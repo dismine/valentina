@@ -204,7 +204,7 @@ auto VPE::VPropertySet::getRootPropertyCount() const -> vpesizetype
 
 auto VPE::VPropertySet::clone() const -> VPE::VPropertySet *
 {
-    VPropertySet* tmpResult = new VPropertySet();
+    auto *tmpResult = new VPropertySet();
 
     const QList<VProperty*> rootProperties = d_ptr->RootProperties;
     for (auto *tmpProperty : rootProperties)

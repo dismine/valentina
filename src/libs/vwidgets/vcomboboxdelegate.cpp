@@ -45,7 +45,7 @@ auto VComboBoxDelegate::createEditor(QWidget *parent, const QStyleOptionViewItem
     Q_UNUSED(option)
     Q_UNUSED(index)
 
-    QComboBox *editor = new QComboBox(parent);
+    auto *editor = new QComboBox(parent);
     editor->addItems(m_items);
 
     return editor;
@@ -56,7 +56,7 @@ void VComboBoxDelegate::setEditorData(QWidget *editor, const QModelIndex &index)
 {
     const QString value = index.model()->data(index, Qt::EditRole).toString();
 
-    QComboBox *comboBox = static_cast<QComboBox*>(editor);
+    auto *comboBox = static_cast<QComboBox *>(editor);
     const int cIndex = comboBox->findText(value);
 
     if (cIndex != -1)
@@ -68,7 +68,7 @@ void VComboBoxDelegate::setEditorData(QWidget *editor, const QModelIndex &index)
 //---------------------------------------------------------------------------------------------------------------------
 void VComboBoxDelegate::setModelData(QWidget *editor, QAbstractItemModel *model, const QModelIndex &index) const
 {
-    QComboBox *comboBox = static_cast<QComboBox*>(editor);
+    auto *comboBox = static_cast<QComboBox *>(editor);
     QString value;
     const int cIndex = comboBox->currentIndex();
 

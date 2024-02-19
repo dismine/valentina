@@ -422,8 +422,8 @@ auto VToolSinglePoint::InitSegments(GOType curveType, qreal segLength, const VPo
                 spl->CutSpline(0, spl1p2, spl1p3, spl2p2, spl2p3, p->name());
             }
 
-            VSpline *spl1 = new VSpline(spl->GetP1(), spl1p2, spl1p3, *p);
-            VSpline *spl2 = new VSpline(*p, spl2p2, spl2p3, spl->GetP4());
+            auto *spl1 = new VSpline(spl->GetP1(), spl1p2, spl1p3, *p);
+            auto *spl2 = new VSpline(*p, spl2p2, spl2p3, spl->GetP4());
 
             if (not VFuzzyComparePossibleNulls(segLength, -1))
             {

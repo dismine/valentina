@@ -64,7 +64,7 @@ auto VPE::VStringProperty::createEditor(QWidget *parent, const QStyleOptionViewI
     Q_UNUSED(options)
     Q_UNUSED(delegate)
 
-    QLineEdit* tmpEditor = new QLineEdit(parent);
+    auto *tmpEditor = new QLineEdit(parent);
     tmpEditor->setLocale(parent->locale());
     tmpEditor->setReadOnly(readOnly);
     tmpEditor->installEventFilter(this);
@@ -78,7 +78,7 @@ auto VPE::VStringProperty::createEditor(QWidget *parent, const QStyleOptionViewI
 
 auto VPE::VStringProperty::setEditorData(QWidget *editor) -> bool
 {
-    if (QLineEdit* tmpWidget = qobject_cast<QLineEdit*>(editor))
+    if (auto *tmpWidget = qobject_cast<QLineEdit *>(editor))
     {
         if (not readOnly)
         {
@@ -92,7 +92,7 @@ auto VPE::VStringProperty::setEditorData(QWidget *editor) -> bool
 
 auto VPE::VStringProperty::getEditorData(const QWidget *editor) const -> QVariant
 {
-    const QLineEdit* tmpEditor = qobject_cast<const QLineEdit*>(editor);
+    const auto *tmpEditor = qobject_cast<const QLineEdit *>(editor);
     if (tmpEditor)
     {
         return tmpEditor->text();
@@ -177,11 +177,11 @@ void VPE::VStringProperty::setTypeForParent(int value)
 
 auto VPE::VStringProperty::eventFilter(QObject *object, QEvent *event) -> bool
 {
-    if (QLineEdit *textEdit = qobject_cast<QLineEdit *>(object))
+    if (auto *textEdit = qobject_cast<QLineEdit *>(object))
     {
         if (event->type() == QEvent::KeyPress)
         {
-            QKeyEvent *keyEvent = static_cast<QKeyEvent *>(event);
+            auto *keyEvent = static_cast<QKeyEvent *>(event);
             if ((keyEvent->key() == Qt::Key_Period) && (keyEvent->modifiers() & Qt::KeypadModifier))
             {
                 if (m_osSeparator)

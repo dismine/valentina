@@ -88,7 +88,7 @@ MoveDoubleLabel::MoveDoubleLabel(VAbstractPattern *doc, const QPointF &pos, Move
 //---------------------------------------------------------------------------------------------------------------------
 auto MoveDoubleLabel::mergeWith(const QUndoCommand *command) -> bool
 {
-    const MoveDoubleLabel *moveCommand = static_cast<const MoveDoubleLabel *>(command);
+    const auto *moveCommand = static_cast<const MoveDoubleLabel *>(command);
     SCASSERT(moveCommand != nullptr)
 
     if (moveCommand->GetPointId() != nodeId ||
@@ -151,7 +151,7 @@ void MoveDoubleLabel::Do(const QPointF &pos)
                               QString().setNum(VAbstractValApplication::VApp()->fromPixel(pos.y())));
         }
 
-        if (VDrawTool *tool = qobject_cast<VDrawTool *>(VAbstractPattern::getTool(m_idTool)))
+        if (auto *tool = qobject_cast<VDrawTool *>(VAbstractPattern::getTool(m_idTool)))
         {
             tool->ChangeLabelPosition(nodeId, pos);
         }

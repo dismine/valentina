@@ -469,7 +469,7 @@ void VToolLine::ShowVisualization(bool show)
         }
         else
         {
-            if (VisToolLine *visual = qobject_cast<VisToolLine *>(vis))
+            if (auto *visual = qobject_cast<VisToolLine *>(vis))
             {
                 visual->show();
             }

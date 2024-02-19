@@ -72,7 +72,7 @@ void SavePiecePathOptions::undo()
 
         if (m_pieceId != NULL_ID)
         {
-            if (VToolSeamAllowance *tool = qobject_cast<VToolSeamAllowance *>(VAbstractPattern::getTool(m_pieceId)))
+            if (auto *tool = qobject_cast<VToolSeamAllowance *>(VAbstractPattern::getTool(m_pieceId)))
             {
                 tool->RefreshGeometry();
             }
@@ -104,7 +104,7 @@ void SavePiecePathOptions::redo()
 
         if (m_pieceId != NULL_ID)
         {
-            if (VToolSeamAllowance *tool = qobject_cast<VToolSeamAllowance *>(VAbstractPattern::getTool(m_pieceId)))
+            if (auto *tool = qobject_cast<VToolSeamAllowance *>(VAbstractPattern::getTool(m_pieceId)))
             {
                 tool->RefreshGeometry();
             }
@@ -119,7 +119,7 @@ void SavePiecePathOptions::redo()
 //---------------------------------------------------------------------------------------------------------------------
 auto SavePiecePathOptions::mergeWith(const QUndoCommand *command) -> bool
 {
-    const SavePiecePathOptions *saveCommand = static_cast<const SavePiecePathOptions *>(command);
+    const auto *saveCommand = static_cast<const SavePiecePathOptions *>(command);
     SCASSERT(saveCommand != nullptr);
 
     if (saveCommand->PathId() != nodeId)

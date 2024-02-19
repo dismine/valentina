@@ -275,7 +275,7 @@ auto VPoster::TextWatermark(QGraphicsItem *parent, const PosterData &img, const 
 
     QVector<QGraphicsItem *> data;
 
-    QGraphicsSimpleTextItem *text = new QGraphicsSimpleTextItem(watermarkData.text, parent);
+    auto *text = new QGraphicsSimpleTextItem(watermarkData.text, parent);
     text->setFont(watermarkData.font);
 
     QPen pen = text->pen();

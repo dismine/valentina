@@ -85,7 +85,7 @@ void VObjPaintDevice::setFileName(const QString &value)
     owns_iodevice = static_cast<int>(true);
 
     fileName = value;
-    QFile *file = new QFile(fileName);
+    auto *file = new QFile(fileName);
     engine->setOutputDevice(file);
 }
 

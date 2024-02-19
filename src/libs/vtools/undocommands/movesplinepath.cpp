@@ -71,7 +71,7 @@ void MoveSplinePath::redo()
 //---------------------------------------------------------------------------------------------------------------------
 auto MoveSplinePath::mergeWith(const QUndoCommand *command) -> bool
 {
-    const MoveSplinePath *moveCommand = static_cast<const MoveSplinePath *>(command);
+    const auto *moveCommand = static_cast<const MoveSplinePath *>(command);
     SCASSERT(moveCommand != nullptr)
     const quint32 id = moveCommand->getSplinePathId();
 

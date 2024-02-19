@@ -67,7 +67,7 @@ auto VPE::VColorProperty::createEditor(QWidget *parent, const QStyleOptionViewIt
     Q_UNUSED(options)
     Q_UNUSED(delegate)
 
-    VColorPropertyEditor* tmpWidget = new VColorPropertyEditor(parent);
+    auto *tmpWidget = new VColorPropertyEditor(parent);
     tmpWidget->setLocale(parent->locale());
     tmpWidget->SetColor(d_ptr->VariantValue.value<QColor>());
     return tmpWidget;
@@ -76,7 +76,7 @@ auto VPE::VColorProperty::createEditor(QWidget *parent, const QStyleOptionViewIt
 //! Sets the property's data to the editor (returns false, if the standard delegate should do that)
 auto VPE::VColorProperty::setEditorData(QWidget *editor) -> bool
 {
-    VColorPropertyEditor* tmpWidget = qobject_cast<VColorPropertyEditor*>(editor);
+    auto *tmpWidget = qobject_cast<VColorPropertyEditor *>(editor);
     if (tmpWidget)
     {
         tmpWidget->SetColor(d_ptr->VariantValue.value<QColor>());
@@ -90,7 +90,7 @@ auto VPE::VColorProperty::setEditorData(QWidget *editor) -> bool
 //! Gets the data from the widget
 auto VPE::VColorProperty::getEditorData(const QWidget *editor) const -> QVariant
 {
-    const VColorPropertyEditor* tmpWidget = qobject_cast<const VColorPropertyEditor*>(editor);
+    const auto *tmpWidget = qobject_cast<const VColorPropertyEditor *>(editor);
     if (tmpWidget)
     {
         return tmpWidget->GetColor();

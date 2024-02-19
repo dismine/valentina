@@ -1035,7 +1035,7 @@ auto VPatternConverter::FixIncrementInFormulaToV0_2_0(const QString &formula, co
     // TODO. Delete if minimal supported version is 0.2.0
     Q_STATIC_ASSERT_X(VPatternConverter::PatternMinVer < FormatVersion(0, 2, 0), "Time to refactor the code.");
 
-    qmu::QmuTokenParser *cal = new qmu::QmuTokenParser(formula, false, false); // Eval formula
+    auto *cal = new qmu::QmuTokenParser(formula, false, false);                // Eval formula
     QMap<vsizetype, QString> tokens = cal->GetTokens();                        // Tokens (variables, measurements)
     delete cal;
 

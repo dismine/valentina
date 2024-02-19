@@ -61,7 +61,7 @@ void VNodeArc::Create(const VAbstractNodeInitData &initData)
     if (initData.parse == Document::FullParse)
     {
         VAbstractTool::AddRecord(initData.id, Tool::NodeArc, initData.doc);
-        VNodeArc *arc = new VNodeArc(initData);
+        auto *arc = new VNodeArc(initData);
 
         VAbstractPattern::AddTool(initData.id, arc);
         if (initData.idTool != NULL_ID)

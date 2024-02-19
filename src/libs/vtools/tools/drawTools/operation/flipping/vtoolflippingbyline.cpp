@@ -126,7 +126,7 @@ auto VToolFlippingByLine::Create(VToolFlippingByLineInitData initData) -> VToolF
         }
 
         VAbstractTool::AddRecord(initData.id, Tool::FlippingByLine, initData.doc);
-        VToolFlippingByLine *tool = new VToolFlippingByLine(initData);
+        auto *tool = new VToolFlippingByLine(initData);
         initData.scene->addItem(tool);
         InitOperationToolConnections(initData.scene, tool);
         VAbstractPattern::AddTool(initData.id, tool);

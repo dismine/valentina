@@ -104,7 +104,7 @@ auto ItemShapeFromPath(const QPainterPath &path, const QPen &pen) -> QPainterPat
 {
     // We unfortunately need this hack as QPainterPathStroker will set a width of 1.0
     // if we pass a value of 0.0 to QPainterPathStroker::setWidth()
-    const qreal penWidthZero = qreal(0.00000001);
+    const auto penWidthZero = qreal(0.00000001);
 
     if (path == QPainterPath() || pen == Qt::NoPen)
     {

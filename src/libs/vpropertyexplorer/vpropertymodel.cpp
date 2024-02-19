@@ -83,7 +83,7 @@ auto VPE::VPropertyModel::addProperty(VProperty *property, const QString &id, co
 auto VPE::VPropertyModel::createProperty(const QString &id, const QString &name, const QString &parentid,
                                          const QVariant &data) -> VPE::VProperty *
 {
-    VProperty* tmpProp = new VProperty(name);
+    auto *tmpProp = new VProperty(name);
     tmpProp->setValue(data);
     if (addProperty(tmpProp, id, parentid))
     {
@@ -263,7 +263,7 @@ auto VPE::VPropertyModel::getProperty(const QModelIndex &index) const -> VPE::VP
 {
     if (index.isValid())
     {
-        VProperty* prop = static_cast<VProperty*>(index.internalPointer());
+        auto *prop = static_cast<VProperty *>(index.internalPointer());
 
         if (prop)
         {

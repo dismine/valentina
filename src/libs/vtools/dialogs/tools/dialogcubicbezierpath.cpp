@@ -170,8 +170,7 @@ void DialogCubicBezierPath::ChosenObject(quint32 id, const SceneObject &type)
         if (path.CountPoints() == 1)
         {
             visPath->VisualMode(NULL_ID);
-            VAbstractMainWindow *window =
-                qobject_cast<VAbstractMainWindow *>(VAbstractValApplication::VApp()->getMainWindow());
+            auto *window = qobject_cast<VAbstractMainWindow *>(VAbstractValApplication::VApp()->getMainWindow());
             SCASSERT(window != nullptr)
             connect(visPath, &VisToolCubicBezierPath::ToolTip, window, &VAbstractMainWindow::ShowToolTip);
         }
@@ -253,7 +252,7 @@ void DialogCubicBezierPath::PointChanged(int row)
 //---------------------------------------------------------------------------------------------------------------------
 void DialogCubicBezierPath::currentPointChanged(int index)
 {
-    const quint32 id = qvariant_cast<quint32>(ui->comboBoxPoint->itemData(index));
+    const auto id = qvariant_cast<quint32>(ui->comboBoxPoint->itemData(index));
 
     try
     {

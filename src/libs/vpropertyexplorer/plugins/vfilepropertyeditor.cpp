@@ -63,7 +63,7 @@ VPE::VFileEditWidget::VFileEditWidget(QWidget *parent, bool is_directory)
     FileLineEdit->installEventFilter(this);
 
     // The layout (a horizontal layout)
-    QHBoxLayout *layout = new QHBoxLayout(this);
+    auto *layout = new QHBoxLayout(this);
     layout->setSpacing(0);
     layout->setContentsMargins(0, 0, 0, 0);
     layout->addWidget(FileLineEdit);

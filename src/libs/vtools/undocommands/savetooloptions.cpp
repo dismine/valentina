@@ -99,7 +99,7 @@ auto SaveToolOptions::Missing(const QList<quint32> &list1, const QList<quint32> 
 //---------------------------------------------------------------------------------------------------------------------
 auto SaveToolOptions::mergeWith(const QUndoCommand *command) -> bool
 {
-    const SaveToolOptions *saveCommand = static_cast<const SaveToolOptions *>(command);
+    const auto *saveCommand = static_cast<const SaveToolOptions *>(command);
 
     if (saveCommand->getToolId() != nodeId)
     {

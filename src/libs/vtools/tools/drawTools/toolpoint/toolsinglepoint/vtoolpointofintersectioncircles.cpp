@@ -141,7 +141,7 @@ auto VToolPointOfIntersectionCircles::Create(VToolPointOfIntersectionCirclesInit
             : qWarning() << VAbstractValApplication::warningMessageSignature + errorMsg;
     }
 
-    VPointF *p = new VPointF(point, initData.name, initData.mx, initData.my);
+    auto *p = new VPointF(point, initData.name, initData.mx, initData.my);
     p->SetShowLabel(initData.showLabel);
 
     if (initData.typeCreation == Source::FromGui)
@@ -160,7 +160,7 @@ auto VToolPointOfIntersectionCircles::Create(VToolPointOfIntersectionCirclesInit
     if (initData.parse == Document::FullParse)
     {
         VAbstractTool::AddRecord(initData.id, Tool::PointOfIntersectionCircles, initData.doc);
-        VToolPointOfIntersectionCircles *point = new VToolPointOfIntersectionCircles(initData);
+        auto *point = new VToolPointOfIntersectionCircles(initData);
         initData.scene->addItem(point);
         InitToolConnections(initData.scene, point);
         VAbstractPattern::AddTool(initData.id, point);

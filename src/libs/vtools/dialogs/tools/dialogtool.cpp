@@ -432,7 +432,7 @@ void DialogTool::NewNodeItem(QListWidget *listWidget, const VPieceNode &node, bo
 
     if (canAddNewPoint)
     {
-        QListWidgetItem *item = new QListWidgetItem(name);
+        auto *item = new QListWidgetItem(name);
         item->setFont(NodeFont(item->font(), showExclusion ? node.IsExcluded() : false));
         item->setData(Qt::UserRole, QVariant::fromValue(node));
         listWidget->addItem(item);

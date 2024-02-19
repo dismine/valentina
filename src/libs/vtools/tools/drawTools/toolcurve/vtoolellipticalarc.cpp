@@ -157,9 +157,8 @@ auto VToolEllipticalArc::Create(VToolEllipticalArcInitData &initData) -> VToolEl
     calcRotationAngle = CheckFormula(initData.id, initData.rotationAngle, initData.data);
 
     const VPointF c = *initData.data->GeometricObject<VPointF>(initData.center);
-    VEllipticalArc *elArc =
-        new VEllipticalArc(c, calcRadius1, calcRadius2, initData.radius1, initData.radius2, calcF1, initData.f1, calcF2,
-                           initData.f2, calcRotationAngle, initData.rotationAngle);
+    auto *elArc = new VEllipticalArc(c, calcRadius1, calcRadius2, initData.radius1, initData.radius2, calcF1,
+                                     initData.f1, calcF2, initData.f2, calcRotationAngle, initData.rotationAngle);
     elArc->SetColor(initData.color);
     elArc->SetPenStyle(initData.penStyle);
     elArc->SetApproximationScale(initData.approximationScale);

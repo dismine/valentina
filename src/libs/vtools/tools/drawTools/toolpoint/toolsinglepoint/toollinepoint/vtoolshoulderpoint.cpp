@@ -198,7 +198,7 @@ auto VToolShoulderPoint::Create(VToolShoulderPointInitData &initData) -> VToolSh
         static_cast<QPointF>(*firstPoint), static_cast<QPointF>(*secondPoint), static_cast<QPointF>(*shoulderPoint),
         VAbstractValApplication::VApp()->toPixel(result));
 
-    VPointF *p = new VPointF(fPoint, initData.name, initData.mx, initData.my);
+    auto *p = new VPointF(fPoint, initData.name, initData.mx, initData.my);
     p->SetShowLabel(initData.showLabel);
 
     if (initData.typeCreation == Source::FromGui)
@@ -221,7 +221,7 @@ auto VToolShoulderPoint::Create(VToolShoulderPointInitData &initData) -> VToolSh
     if (initData.parse == Document::FullParse)
     {
         VAbstractTool::AddRecord(initData.id, Tool::ShoulderPoint, initData.doc);
-        VToolShoulderPoint *point = new VToolShoulderPoint(initData);
+        auto *point = new VToolShoulderPoint(initData);
         initData.scene->addItem(point);
         InitToolConnections(initData.scene, point);
         VAbstractPattern::AddTool(initData.id, point);

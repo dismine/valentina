@@ -61,7 +61,7 @@ void VNodeSplinePath::Create(const VAbstractNodeInitData &initData)
     if (initData.parse == Document::FullParse)
     {
         VAbstractTool::AddRecord(initData.id, Tool::NodeSplinePath, initData.doc);
-        VNodeSplinePath *splPath = new VNodeSplinePath(initData);
+        auto *splPath = new VNodeSplinePath(initData);
 
         VAbstractPattern::AddTool(initData.id, splPath);
         if (initData.idTool != NULL_ID)

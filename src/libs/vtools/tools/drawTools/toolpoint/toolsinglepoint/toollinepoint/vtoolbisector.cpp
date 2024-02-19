@@ -175,7 +175,7 @@ auto VToolBisector::Create(VToolBisectorInitData &initData) -> VToolBisector *
         VToolBisector::FindPoint(static_cast<QPointF>(*firstPoint), static_cast<QPointF>(*secondPoint),
                                  static_cast<QPointF>(*thirdPoint), VAbstractValApplication::VApp()->toPixel(result));
 
-    VPointF *p = new VPointF(fPoint, initData.name, initData.mx, initData.my);
+    auto *p = new VPointF(fPoint, initData.name, initData.mx, initData.my);
     p->SetShowLabel(initData.showLabel);
 
     if (initData.typeCreation == Source::FromGui)
@@ -196,7 +196,7 @@ auto VToolBisector::Create(VToolBisectorInitData &initData) -> VToolBisector *
     if (initData.parse == Document::FullParse)
     {
         VAbstractTool::AddRecord(initData.id, Tool::Bisector, initData.doc);
-        VToolBisector *point = new VToolBisector(initData);
+        auto *point = new VToolBisector(initData);
         initData.scene->addItem(point);
         InitToolConnections(initData.scene, point);
         VAbstractPattern::AddTool(initData.id, point);

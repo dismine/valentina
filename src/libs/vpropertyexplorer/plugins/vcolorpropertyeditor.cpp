@@ -60,7 +60,7 @@ VPE::VColorPropertyEditor::VColorPropertyEditor(QWidget *parent)
     Spacer = new QSpacerItem(1, 0, QSizePolicy::Expanding, QSizePolicy::Ignored);
 
     // The layout (a horizontal layout)
-    QHBoxLayout* layout = new QHBoxLayout(this);
+    auto *layout = new QHBoxLayout(this);
     layout->setSpacing(3);
     layout->setContentsMargins(0, 0, 0, 0);
     layout->addWidget(ColorLabel);
@@ -101,7 +101,7 @@ void VPE::VColorPropertyEditor::onToolButtonClicked()
     {
         SetColor(newColor);
         emit dataChangedByUser(Color, this);
-        UserChangeEvent *event = new UserChangeEvent();
+        auto *event = new UserChangeEvent();
         QCoreApplication::postEvent ( this, event );
     }
 }

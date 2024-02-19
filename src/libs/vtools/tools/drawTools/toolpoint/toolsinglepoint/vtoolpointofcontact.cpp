@@ -222,7 +222,7 @@ auto VToolPointOfContact::Create(VToolPointOfContactInitData &initData) -> VTool
             : qWarning() << VAbstractValApplication::warningMessageSignature + errorMsg;
     }
 
-    VPointF *p = new VPointF(fPoint, initData.name, initData.mx, initData.my);
+    auto *p = new VPointF(fPoint, initData.name, initData.mx, initData.my);
     p->SetShowLabel(initData.showLabel);
 
     if (initData.typeCreation == Source::FromGui)
@@ -247,7 +247,7 @@ auto VToolPointOfContact::Create(VToolPointOfContactInitData &initData) -> VTool
     if (initData.parse == Document::FullParse)
     {
         VAbstractTool::AddRecord(initData.id, Tool::PointOfContact, initData.doc);
-        VToolPointOfContact *point = new VToolPointOfContact(initData);
+        auto *point = new VToolPointOfContact(initData);
         initData.scene->addItem(point);
         InitToolConnections(initData.scene, point);
         VAbstractPattern::AddTool(initData.id, point);

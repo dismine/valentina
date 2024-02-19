@@ -2787,8 +2787,7 @@ void VPattern::ParseToolSpline(VMainGraphicsScene *scene, QDomElement &domElemen
 
         if (spl != nullptr)
         {
-            VAbstractMainWindow *window =
-                qobject_cast<VAbstractMainWindow *>(VAbstractValApplication::VApp()->getMainWindow());
+            auto *window = qobject_cast<VAbstractMainWindow *>(VAbstractValApplication::VApp()->getMainWindow());
             SCASSERT(window != nullptr)
             connect(spl, &VToolSpline::ToolTip, window, &VAbstractMainWindow::ShowToolTip);
         }
@@ -2997,8 +2996,7 @@ void VPattern::ParseToolSplinePath(VMainGraphicsScene *scene, const QDomElement 
 
         if (spl != nullptr)
         {
-            VAbstractMainWindow *window =
-                qobject_cast<VAbstractMainWindow *>(VAbstractValApplication::VApp()->getMainWindow());
+            auto *window = qobject_cast<VAbstractMainWindow *>(VAbstractValApplication::VApp()->getMainWindow());
             SCASSERT(window != nullptr)
             connect(spl, &VToolSplinePath::ToolTip, window, &VAbstractMainWindow::ShowToolTip);
         }
@@ -3121,14 +3119,14 @@ void VPattern::ParseNodeSpline(const QDomElement &domElement, const Document &pa
             const auto obj = initData.data->GetGObject(initData.idObject);
             if (obj->getType() == GOType::Spline)
             {
-                VSpline *spl = new VSpline(*data->GeometricObject<VSpline>(initData.idObject));
+                auto *spl = new VSpline(*data->GeometricObject<VSpline>(initData.idObject));
                 spl->setIdObject(initData.idObject);
                 spl->setMode(Draw::Modeling);
                 initData.data->UpdateGObject(initData.id, spl);
             }
             else
             {
-                VCubicBezier *spl = new VCubicBezier(*initData.data->GeometricObject<VCubicBezier>(initData.idObject));
+                auto *spl = new VCubicBezier(*initData.data->GeometricObject<VCubicBezier>(initData.idObject));
                 spl->setIdObject(initData.idObject);
                 spl->setMode(Draw::Modeling);
                 initData.data->UpdateGObject(initData.id, spl);
@@ -3169,15 +3167,14 @@ void VPattern::ParseNodeSplinePath(const QDomElement &domElement, const Document
             const auto obj = initData.data->GetGObject(initData.idObject);
             if (obj->getType() == GOType::SplinePath)
             {
-                VSplinePath *path = new VSplinePath(*initData.data->GeometricObject<VSplinePath>(initData.idObject));
+                auto *path = new VSplinePath(*initData.data->GeometricObject<VSplinePath>(initData.idObject));
                 path->setIdObject(initData.idObject);
                 path->setMode(Draw::Modeling);
                 initData.data->UpdateGObject(initData.id, path);
             }
             else
             {
-                VCubicBezierPath *spl =
-                    new VCubicBezierPath(*initData.data->GeometricObject<VCubicBezierPath>(initData.idObject));
+                auto *spl = new VCubicBezierPath(*initData.data->GeometricObject<VCubicBezierPath>(initData.idObject));
                 spl->setIdObject(initData.idObject);
                 spl->setMode(Draw::Modeling);
                 initData.data->UpdateGObject(initData.id, spl);

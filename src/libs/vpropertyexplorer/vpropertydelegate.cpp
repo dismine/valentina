@@ -49,7 +49,7 @@ auto VPE::VPropertyDelegate::createEditor(QWidget *parent, const QStyleOptionVie
     QWidget* tmpWidget = nullptr;
     if (index.isValid())
     {
-        VProperty* tmpProperty = reinterpret_cast<VProperty*>(index.internalPointer());
+        auto *tmpProperty = reinterpret_cast<VProperty *>(index.internalPointer());
         tmpWidget = tmpProperty->createEditor(parent, option, this);
     }
 
@@ -63,7 +63,7 @@ void VPE::VPropertyDelegate::setEditorData (QWidget * editor, const QModelIndex 
     bool done = false;
     if (index.isValid() && editor)
     {
-        VProperty* tmpProperty = reinterpret_cast<VProperty*>(index.internalPointer());
+        auto *tmpProperty = reinterpret_cast<VProperty *>(index.internalPointer());
         done = tmpProperty->setEditorData(editor);
     }
 
@@ -80,7 +80,7 @@ void VPE::VPropertyDelegate::setModelData (QWidget * editor, QAbstractItemModel 
     QVariant tmpData;
     if (index.isValid() && editor)
     {
-        VProperty* tmpProperty = reinterpret_cast<VProperty*>(index.internalPointer());
+        auto *tmpProperty = reinterpret_cast<VProperty *>(index.internalPointer());
         tmpData = tmpProperty->getEditorData(editor);
     }
 

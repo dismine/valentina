@@ -664,7 +664,7 @@ auto FancyTabBar::IsTabEnabled(int index) const -> bool
 //---------------------------------------------------------------------------------------------------------------------
 void FancyTabBar::InsertTab(int index, const QIcon &icon, const QString &label)
 {
-    FancyTab *tab = new FancyTab(this);
+    auto *tab = new FancyTab(this);
     tab->m_icon = icon;
     tab->m_text = label;
     m_attachedTabs.insert(index, tab);

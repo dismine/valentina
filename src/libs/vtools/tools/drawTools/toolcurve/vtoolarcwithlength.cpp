@@ -155,7 +155,7 @@ auto VToolArcWithLength::Create(VToolArcWithLengthInitData &initData) -> VToolAr
     if (initData.parse == Document::FullParse)
     {
         VAbstractTool::AddRecord(initData.id, Tool::ArcWithLength, initData.doc);
-        VToolArcWithLength *toolArc = new VToolArcWithLength(initData);
+        auto *toolArc = new VToolArcWithLength(initData);
         initData.scene->addItem(toolArc);
         InitArcToolConnections(initData.scene, toolArc);
         VAbstractPattern::AddTool(initData.id, toolArc);

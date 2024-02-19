@@ -68,7 +68,7 @@ OperationMoveLabel::OperationMoveLabel(quint32 idTool, VAbstractPattern *doc, co
 //---------------------------------------------------------------------------------------------------------------------
 auto OperationMoveLabel::mergeWith(const QUndoCommand *command) -> bool
 {
-    const OperationMoveLabel *moveCommand = static_cast<const OperationMoveLabel *>(command);
+    const auto *moveCommand = static_cast<const OperationMoveLabel *>(command);
     SCASSERT(moveCommand != nullptr)
 
     if (moveCommand->GetToolId() != m_idTool && moveCommand->GetPointId() != nodeId)
@@ -101,7 +101,7 @@ void OperationMoveLabel::Do(const QPointF &pos)
         doc->SetAttribute(domElement, AttrMx, QString().setNum(VAbstractValApplication::VApp()->fromPixel(pos.x())));
         doc->SetAttribute(domElement, AttrMy, QString().setNum(VAbstractValApplication::VApp()->fromPixel(pos.y())));
 
-        if (VDrawTool *tool = qobject_cast<VDrawTool *>(VAbstractPattern::getTool(m_idTool)))
+        if (auto *tool = qobject_cast<VDrawTool *>(VAbstractPattern::getTool(m_idTool)))
         {
             tool->ChangeLabelPosition(nodeId, pos);
         }

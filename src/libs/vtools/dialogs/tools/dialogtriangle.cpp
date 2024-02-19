@@ -103,7 +103,7 @@ void DialogTriangle::ChosenObject(quint32 id, const SceneObject &type)
     {
         if (type == SceneObject::Point)
         {
-            VisToolTriangle *line = qobject_cast<VisToolTriangle *>(vis);
+            auto *line = qobject_cast<VisToolTriangle *>(vis);
             SCASSERT(line != nullptr)
 
             switch (number)
@@ -176,7 +176,7 @@ void DialogTriangle::SaveData()
 {
     pointName = ui->lineEditNamePoint->text();
 
-    VisToolTriangle *line = qobject_cast<VisToolTriangle *>(vis);
+    auto *line = qobject_cast<VisToolTriangle *>(vis);
     SCASSERT(line != nullptr)
 
     line->SetObject1Id(GetAxisP1Id());
@@ -239,7 +239,7 @@ void DialogTriangle::SetSecondPointId(const quint32 &value)
 {
     setCurrentPointId(ui->comboBoxSecondPoint, value);
 
-    VisToolTriangle *line = qobject_cast<VisToolTriangle *>(vis);
+    auto *line = qobject_cast<VisToolTriangle *>(vis);
     SCASSERT(line != nullptr)
     line->SetHypotenuseP2Id(value);
 }
@@ -259,7 +259,7 @@ void DialogTriangle::SetFirstPointId(const quint32 &value)
 {
     setCurrentPointId(ui->comboBoxFirstPoint, value);
 
-    VisToolTriangle *line = qobject_cast<VisToolTriangle *>(vis);
+    auto *line = qobject_cast<VisToolTriangle *>(vis);
     SCASSERT(line != nullptr)
     line->SetHypotenuseP1Id(value);
 }
@@ -273,7 +273,7 @@ void DialogTriangle::SetAxisP2Id(const quint32 &value)
 {
     setCurrentPointId(ui->comboBoxAxisP2, value);
 
-    VisToolTriangle *line = qobject_cast<VisToolTriangle *>(vis);
+    auto *line = qobject_cast<VisToolTriangle *>(vis);
     SCASSERT(line != nullptr)
     line->SetObject2Id(value);
 }
@@ -287,7 +287,7 @@ void DialogTriangle::SetAxisP1Id(const quint32 &value)
 {
     setCurrentPointId(ui->comboBoxAxisP1, value);
 
-    VisToolTriangle *line = qobject_cast<VisToolTriangle *>(vis);
+    auto *line = qobject_cast<VisToolTriangle *>(vis);
     SCASSERT(line != nullptr)
     line->SetObject1Id(value);
 }

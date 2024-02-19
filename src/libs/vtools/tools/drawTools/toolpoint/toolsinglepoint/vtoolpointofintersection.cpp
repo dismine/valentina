@@ -129,7 +129,7 @@ auto VToolPointOfIntersection::Create(VToolPointOfIntersectionInitData initData)
 
     QPointF const point(firstPoint->x(), secondPoint->y());
 
-    VPointF *p = new VPointF(point, initData.name, initData.mx, initData.my);
+    auto *p = new VPointF(point, initData.name, initData.mx, initData.my);
     p->SetShowLabel(initData.showLabel);
 
     if (initData.typeCreation == Source::FromGui)
@@ -148,7 +148,7 @@ auto VToolPointOfIntersection::Create(VToolPointOfIntersectionInitData initData)
     if (initData.parse == Document::FullParse)
     {
         VAbstractTool::AddRecord(initData.id, Tool::PointOfIntersection, initData.doc);
-        VToolPointOfIntersection *point = new VToolPointOfIntersection(initData);
+        auto *point = new VToolPointOfIntersection(initData);
         initData.scene->addItem(point);
         InitToolConnections(initData.scene, point);
         VAbstractPattern::AddTool(initData.id, point);

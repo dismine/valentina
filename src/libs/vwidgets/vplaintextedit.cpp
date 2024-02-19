@@ -136,7 +136,7 @@ void VPlainTextEdit::MatchParentheses()
 //---------------------------------------------------------------------------------------------------------------------
 auto VPlainTextEdit::MatchLeftParenthesis(QTextBlock currentBlock, int i, int numLeftParentheses) -> bool
 {
-    VTextBlockData *data = static_cast<VTextBlockData *>(currentBlock.userData());
+    auto *data = static_cast<VTextBlockData *>(currentBlock.userData());
     QVector<ParenthesisInfo *> const infos = data->Parentheses();
 
     int const docPos = currentBlock.position();
@@ -171,7 +171,7 @@ auto VPlainTextEdit::MatchLeftParenthesis(QTextBlock currentBlock, int i, int nu
 //---------------------------------------------------------------------------------------------------------------------
 auto VPlainTextEdit::MatchRightParenthesis(QTextBlock currentBlock, int i, int numRightParentheses) -> bool
 {
-    VTextBlockData *data = static_cast<VTextBlockData *>(currentBlock.userData());
+    auto *data = static_cast<VTextBlockData *>(currentBlock.userData());
     QVector<ParenthesisInfo *> const parentheses = data->Parentheses();
 
     int const docPos = currentBlock.position();

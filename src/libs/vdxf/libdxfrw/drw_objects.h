@@ -80,10 +80,10 @@ public:
         extData(),
         curr(nullptr)
     {
-        for (std::vector<DRW_Variant *>::const_iterator it = e.extData.begin(); it != e.extData.end(); ++it)
+        for (auto it = e.extData.begin(); it != e.extData.end(); ++it)
         {
             DRW_Variant *src = *it;
-            DRW_Variant *dst = new DRW_Variant(*src);
+            auto *dst = new DRW_Variant(*src);
             extData.push_back(dst);
             if (src == e.curr)
             {

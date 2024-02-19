@@ -117,7 +117,7 @@ auto VPE::VProperty::createEditor(QWidget *parent, const QStyleOptionViewItem &o
     Q_UNUSED(options)
     Q_UNUSED(delegate)
 
-    QItemEditorFactory *factory = new QItemEditorFactory;
+    auto *factory = new QItemEditorFactory;
     QItemEditorCreatorBase *lineCreator = new QStandardItemEditorCreator<QLineEdit>();
 #if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
     factory->registerEditor(QMetaType::QString, lineCreator);

@@ -104,7 +104,7 @@ void DialogPointOfIntersection::SetSecondPointId(quint32 value)
 {
     setCurrentPointId(ui->comboBoxSecondPoint, value);
 
-    VisToolPointOfIntersection *line = qobject_cast<VisToolPointOfIntersection *>(vis);
+    auto *line = qobject_cast<VisToolPointOfIntersection *>(vis);
     SCASSERT(line != nullptr)
     line->SetPoint2Id(value);
 }
@@ -121,7 +121,7 @@ void DialogPointOfIntersection::ChosenObject(quint32 id, const SceneObject &type
     {
         if (type == SceneObject::Point)
         {
-            VisToolPointOfIntersection *line = qobject_cast<VisToolPointOfIntersection *>(vis);
+            auto *line = qobject_cast<VisToolPointOfIntersection *>(vis);
             SCASSERT(line != nullptr)
 
             switch (number)
@@ -158,7 +158,7 @@ void DialogPointOfIntersection::SaveData()
 {
     pointName = ui->lineEditNamePoint->text();
 
-    VisToolPointOfIntersection *line = qobject_cast<VisToolPointOfIntersection *>(vis);
+    auto *line = qobject_cast<VisToolPointOfIntersection *>(vis);
     SCASSERT(line != nullptr)
 
     line->SetPoint1Id(GetFirstPointId());
@@ -200,7 +200,7 @@ void DialogPointOfIntersection::SetFirstPointId(quint32 value)
 {
     setCurrentPointId(ui->comboBoxFirstPoint, value);
 
-    VisToolPointOfIntersection *line = qobject_cast<VisToolPointOfIntersection *>(vis);
+    auto *line = qobject_cast<VisToolPointOfIntersection *>(vis);
     SCASSERT(line != nullptr)
     line->SetPoint1Id(value);
 }

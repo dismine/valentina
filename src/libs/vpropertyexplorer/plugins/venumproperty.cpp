@@ -79,7 +79,7 @@ auto VPE::VEnumProperty::createEditor(QWidget *parent, const QStyleOptionViewIte
 {
     Q_UNUSED(options)
     Q_UNUSED(delegate)
-    QComboBox* tmpEditor = new QComboBox(parent);
+    auto *tmpEditor = new QComboBox(parent);
     tmpEditor->clear();
     tmpEditor->setLocale(parent->locale());
     tmpEditor->addItems(EnumerationLiterals);
@@ -93,7 +93,7 @@ auto VPE::VEnumProperty::createEditor(QWidget *parent, const QStyleOptionViewIte
 //! Gets the data from the widget
 auto VPE::VEnumProperty::getEditorData(const QWidget *editor) const -> QVariant
 {
-    const QComboBox* tmpEditor = qobject_cast<const QComboBox*>(editor);
+    const auto *tmpEditor = qobject_cast<const QComboBox *>(editor);
     if (tmpEditor)
     {
         return tmpEditor->currentIndex();
@@ -173,6 +173,6 @@ auto VPE::VEnumProperty::getSettingKeys() const -> QStringList
 void VPE::VEnumProperty::currentIndexChanged(int index)
 {
     Q_UNUSED(index)
-    UserChangeEvent *event = new UserChangeEvent();
+    auto *event = new UserChangeEvent();
     QCoreApplication::postEvent ( VProperty::d_ptr->editor, event );
 }

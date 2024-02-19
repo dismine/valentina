@@ -97,7 +97,7 @@ auto Calculator::EvalFormula(const QHash<QString, QSharedPointer<VInternalVariab
 auto Calculator::VarFactory(const QString &a_szName, void *a_pUserData) -> qreal *
 {
     Q_UNUSED(a_szName)
-    Calculator *calc = static_cast<Calculator *>(a_pUserData);
+    auto *calc = static_cast<Calculator *>(a_pUserData);
 
     if (calc->m_vars != nullptr && calc->m_vars->contains(a_szName))
     {

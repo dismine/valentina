@@ -141,7 +141,7 @@ auto VToolNormal::Create(VToolNormalInitData initData) -> VToolNormal *
     QPointF const fPoint = VToolNormal::FindPoint(static_cast<QPointF>(*firstPoint), static_cast<QPointF>(*secondPoint),
                                                   VAbstractValApplication::VApp()->toPixel(result), initData.angle);
 
-    VPointF *p = new VPointF(fPoint, initData.name, initData.mx, initData.my);
+    auto *p = new VPointF(fPoint, initData.name, initData.mx, initData.my);
     p->SetShowLabel(initData.showLabel);
 
     if (initData.typeCreation == Source::FromGui)
@@ -162,7 +162,7 @@ auto VToolNormal::Create(VToolNormalInitData initData) -> VToolNormal *
     if (initData.parse == Document::FullParse)
     {
         VAbstractTool::AddRecord(initData.id, Tool::Normal, initData.doc);
-        VToolNormal *point = new VToolNormal(initData);
+        auto *point = new VToolNormal(initData);
         initData.scene->addItem(point);
         InitToolConnections(initData.scene, point);
         VAbstractPattern::AddTool(initData.id, point);

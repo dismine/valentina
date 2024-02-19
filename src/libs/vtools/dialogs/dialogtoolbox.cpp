@@ -245,11 +245,11 @@ void DeployFormula(QDialog *dialog, QPlainTextEdit *formula, QPushButton *button
 //---------------------------------------------------------------------------------------------------------------------
 auto FilterObject(QObject *object, QEvent *event) -> bool
 {
-    if (QPlainTextEdit *plainTextEdit = qobject_cast<QPlainTextEdit *>(object))
+    if (auto *plainTextEdit = qobject_cast<QPlainTextEdit *>(object))
     {
         if (event->type() == QEvent::KeyPress)
         {
-            QKeyEvent *keyEvent = static_cast<QKeyEvent *>(event);
+            auto *keyEvent = static_cast<QKeyEvent *>(event);
             if ((keyEvent->key() == Qt::Key_Period) && (keyEvent->modifiers() & Qt::KeypadModifier))
             {
                 if (VAbstractApplication::VApp()->Settings()->GetOsSeparator())

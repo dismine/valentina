@@ -216,7 +216,7 @@ void VDrawTool::ContextMenu(QGraphicsSceneContextMenuEvent *event, quint32 itemI
 
     // add the menu "remove from group" to the context menu
     QMap<quint32, QString> groupsContainingItem = doc->GetGroupsContainingItem(this->getId(), itemId, true);
-    QActionGroup *actionsRemoveFromGroup = new QActionGroup(this);
+    auto *actionsRemoveFromGroup = new QActionGroup(this);
     if (not groupsContainingItem.empty())
     {
         QMenu *menuRemoveFromGroup =

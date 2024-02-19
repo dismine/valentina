@@ -865,8 +865,8 @@ void AbstractTest::SplineFromJson(const QJsonObject &itemObject, QSharedPointer<
     ReadPointValue(itemObject, QStringLiteral("p4"), p4);
     data->UpdateGObject(p4.id(), new VPointF(p4));
 
-    VSpline *spl = new VSpline(p1, p4, angle1, angle1Formula, angle2, angle2Formula, c1Length, c1LengthFormula,
-                               c2Length, c2LengthFormula);
+    auto *spl = new VSpline(p1, p4, angle1, angle1Formula, angle2, angle2Formula, c1Length, c1LengthFormula, c2Length,
+                            c2LengthFormula);
     spl->SetApproximationScale(aScale);
     data->UpdateGObject(id, spl);
 }
@@ -887,7 +887,7 @@ void AbstractTest::SplinePathFromJson(const QJsonObject &itemObject, QSharedPoin
         data->UpdateGObject(point.P().id(), new VPointF(point.P()));
     }
 
-    VSplinePath *path = new VSplinePath(points);
+    auto *path = new VSplinePath(points);
     path->SetApproximationScale(aScale);
     data->UpdateGObject(id, path);
 }

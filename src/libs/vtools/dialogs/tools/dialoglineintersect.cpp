@@ -112,7 +112,7 @@ void DialogLineIntersect::ChosenObject(quint32 id, const SceneObject &type)
     {
         if (type == SceneObject::Point)
         {
-            VisToolLineIntersect *line = qobject_cast<VisToolLineIntersect *>(vis);
+            auto *line = qobject_cast<VisToolLineIntersect *>(vis);
             SCASSERT(line != nullptr)
 
             switch (number)
@@ -193,7 +193,7 @@ void DialogLineIntersect::SaveData()
 {
     pointName = ui->lineEditNamePoint->text();
 
-    VisToolLineIntersect *line = qobject_cast<VisToolLineIntersect *>(vis);
+    auto *line = qobject_cast<VisToolLineIntersect *>(vis);
     SCASSERT(line != nullptr)
 
     line->SetLine1P1Id(GetP1Line1());
@@ -298,7 +298,7 @@ void DialogLineIntersect::SetP2Line2(quint32 value)
 {
     setCurrentPointId(ui->comboBoxP2Line2, value);
 
-    VisToolLineIntersect *line = qobject_cast<VisToolLineIntersect *>(vis);
+    auto *line = qobject_cast<VisToolLineIntersect *>(vis);
     SCASSERT(line != nullptr)
     line->SetLine2P2Id(value);
 }
@@ -318,7 +318,7 @@ void DialogLineIntersect::SetP1Line2(quint32 value)
 {
     setCurrentPointId(ui->comboBoxP1Line2, value);
 
-    VisToolLineIntersect *line = qobject_cast<VisToolLineIntersect *>(vis);
+    auto *line = qobject_cast<VisToolLineIntersect *>(vis);
     SCASSERT(line != nullptr)
     line->SetLine2P1Id(value);
 }
@@ -332,7 +332,7 @@ void DialogLineIntersect::SetP2Line1(quint32 value)
 {
     setCurrentPointId(ui->comboBoxP2Line1, value);
 
-    VisToolLineIntersect *line = qobject_cast<VisToolLineIntersect *>(vis);
+    auto *line = qobject_cast<VisToolLineIntersect *>(vis);
     SCASSERT(line != nullptr)
     line->SetLine1P2Id(value);
 }
@@ -346,7 +346,7 @@ void DialogLineIntersect::SetP1Line1(quint32 value)
 {
     setCurrentPointId(ui->comboBoxP1Line1, value);
 
-    VisToolLineIntersect *line = qobject_cast<VisToolLineIntersect *>(vis);
+    auto *line = qobject_cast<VisToolLineIntersect *>(vis);
     SCASSERT(line != nullptr)
     line->SetLine1P1Id(value);
 }

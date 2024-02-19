@@ -58,7 +58,7 @@ auto VPE::VShortcutProperty::createEditor(QWidget *parent, const QStyleOptionVie
 {
     Q_UNUSED(options)
 
-    VShortcutEditWidget* tmpWidget = new VShortcutEditWidget(parent);
+    auto *tmpWidget = new VShortcutEditWidget(parent);
     if (delegate)
     {
         VShortcutEditWidget::connect(tmpWidget, SIGNAL(commitData(QWidget*)), delegate, SIGNAL(commitData(QWidget*)));
@@ -69,7 +69,7 @@ auto VPE::VShortcutProperty::createEditor(QWidget *parent, const QStyleOptionVie
 
 auto VPE::VShortcutProperty::setEditorData(QWidget *editor) -> bool
 {
-    VShortcutEditWidget* tmpWidget = qobject_cast<VShortcutEditWidget*>(editor);
+    auto *tmpWidget = qobject_cast<VShortcutEditWidget *>(editor);
     if (tmpWidget)
     {
         tmpWidget->setShortcut(d_ptr->VariantValue.toString(), false);
@@ -82,7 +82,7 @@ auto VPE::VShortcutProperty::setEditorData(QWidget *editor) -> bool
 
 auto VPE::VShortcutProperty::getEditorData(const QWidget *editor) const -> QVariant
 {
-    const VShortcutEditWidget* tmpWidget = qobject_cast<const VShortcutEditWidget*>(editor);
+    const auto *tmpWidget = qobject_cast<const VShortcutEditWidget *>(editor);
     if (tmpWidget)
     {
         return tmpWidget->getShortcutAsString();

@@ -106,7 +106,7 @@ void VToolBasePoint::SetDialog()
 //---------------------------------------------------------------------------------------------------------------------
 auto VToolBasePoint::Create(VToolBasePointInitData initData) -> VToolBasePoint *
 {
-    VPointF *point = new VPointF(initData.x, initData.y, initData.name, initData.mx, initData.my);
+    auto *point = new VPointF(initData.x, initData.y, initData.name, initData.mx, initData.my);
     point->SetShowLabel(initData.showLabel);
 
     if (initData.typeCreation == Source::FromGui)
@@ -125,7 +125,7 @@ auto VToolBasePoint::Create(VToolBasePointInitData initData) -> VToolBasePoint *
     if (initData.parse == Document::FullParse)
     {
         VAbstractTool::AddRecord(initData.id, Tool::BasePoint, initData.doc);
-        VToolBasePoint *spoint = new VToolBasePoint(initData);
+        auto *spoint = new VToolBasePoint(initData);
         initData.scene->addItem(spoint);
         InitToolConnections(initData.scene, spoint);
         VAbstractPattern::AddTool(initData.id, spoint);
@@ -165,7 +165,7 @@ void VToolBasePoint::AddToFile()
     patternPiece.appendChild(doc->createElement(VAbstractPattern::TagModeling));
     patternPiece.appendChild(doc->createElement(VAbstractPattern::TagDetails));
 
-    AddPatternPiece *addPP = new AddPatternPiece(patternPiece, doc, namePP);
+    auto *addPP = new AddPatternPiece(patternPiece, doc, namePP);
     connect(addPP, &AddPatternPiece::ClearScene, doc, &VAbstractPattern::ClearScene);
     connect(addPP, &AddPatternPiece::NeedFullParsing, doc, &VAbstractPattern::NeedFullParsing);
     VAbstractApplication::VApp()->getUndoStack()->push(addPP);
@@ -191,13 +191,13 @@ auto VToolBasePoint::itemChange(QGraphicsItem::GraphicsItemChange change, const 
             // value - this is new position.
             QPointF const newPos = value.toPointF();
 
-            MoveSPoint *moveSP = new MoveSPoint(doc, newPos.x(), newPos.y(), m_id, this->scene());
+            auto *moveSP = new MoveSPoint(doc, newPos.x(), newPos.y(), m_id, this->scene());
             connect(moveSP, &MoveSPoint::NeedLiteParsing, doc, &VAbstractPattern::LiteParseTree);
             VAbstractApplication::VApp()->getUndoStack()->push(moveSP);
             const QList<QGraphicsView *> viewList = scene()->views();
             if (not viewList.isEmpty())
             {
-                if (VMainGraphicsView *view = qobject_cast<VMainGraphicsView *>(viewList.at(0)))
+                if (auto *view = qobject_cast<VMainGraphicsView *>(viewList.at(0)))
                 {
                     view->EnsureItemVisibleWithDelay(this, VMainGraphicsView::scrollDelay);
                 }
@@ -249,7 +249,7 @@ void VToolBasePoint::DeleteToolWithConfirm(bool ask)
     }
 
     qCDebug(vTool, "Begin deleting.");
-    DeletePatternPiece *deletePP = new DeletePatternPiece(doc, nameActivDraw);
+    auto *deletePP = new DeletePatternPiece(doc, nameActivDraw);
     connect(deletePP, &DeletePatternPiece::NeedFullParsing, doc, &VAbstractPattern::NeedFullParsing);
     VAbstractApplication::VApp()->getUndoStack()->push(deletePP);
 

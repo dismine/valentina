@@ -67,7 +67,7 @@ void RenamePP::redo()
 //---------------------------------------------------------------------------------------------------------------------
 auto RenamePP::mergeWith(const QUndoCommand *command) -> bool
 {
-    const RenamePP *renameCommand = static_cast<const RenamePP *>(command);
+    const auto *renameCommand = static_cast<const RenamePP *>(command);
     SCASSERT(renameCommand != nullptr)
 
     const QString oldName = renameCommand->getOldPPname();

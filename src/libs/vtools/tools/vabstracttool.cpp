@@ -241,7 +241,7 @@ void VAbstractTool::DeleteToolWithConfirm(bool ask)
 void VAbstractTool::PerformDelete()
 {
     qCDebug(vTool, "Begin deleting.");
-    DelTool *delTool = new DelTool(doc, m_id);
+    auto *delTool = new DelTool(doc, m_id);
     connect(delTool, &DelTool::NeedFullParsing, doc, &VAbstractPattern::NeedFullParsing);
     VAbstractApplication::VApp()->getUndoStack()->push(delTool);
 }

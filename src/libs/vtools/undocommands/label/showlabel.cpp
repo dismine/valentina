@@ -81,7 +81,7 @@ void ShowLabel::Do(bool visible)
     {
         doc->SetAttribute<bool>(domElement, AttrShowLabel, visible);
 
-        if (VAbstractTool *tool = qobject_cast<VAbstractTool *>(VAbstractPattern::getTool(nodeId)))
+        if (auto *tool = qobject_cast<VAbstractTool *>(VAbstractPattern::getTool(nodeId)))
         {
             tool->SetLabelVisible(nodeId, visible);
         }

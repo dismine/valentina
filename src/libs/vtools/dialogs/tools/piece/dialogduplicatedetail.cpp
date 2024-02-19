@@ -67,7 +67,7 @@ void DialogDuplicateDetail::ShowDialog(bool click)
                 return;
             }
 
-            VisToolDuplicateDetail *piece = qobject_cast<VisToolDuplicateDetail *>(vis);
+            auto *piece = qobject_cast<VisToolDuplicateDetail *>(vis);
             SCASSERT(piece != nullptr)
 
             m_mx = piece->Mx();
@@ -87,7 +87,7 @@ void DialogDuplicateDetail::ChosenObject(quint32 id, const SceneObject &type)
         {
             m_idDetail = id;
 
-            VAbstractTool *tool = qobject_cast<VAbstractTool *>(VAbstractPattern::getTool(m_idDetail));
+            auto *tool = qobject_cast<VAbstractTool *>(VAbstractPattern::getTool(m_idDetail));
             if (tool)
             {
                 vis->SetData(tool->getData()); // Includes currentSeamAllowance variable we need

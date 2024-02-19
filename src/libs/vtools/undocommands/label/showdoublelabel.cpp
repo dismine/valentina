@@ -106,7 +106,7 @@ void ShowDoubleLabel::Do(bool visible)
             doc->SetAttribute<bool>(domElement, AttrShowLabel2, visible);
         }
 
-        if (VDrawTool *tool = qobject_cast<VDrawTool *>(VAbstractPattern::getTool(m_idTool)))
+        if (auto *tool = qobject_cast<VDrawTool *>(VAbstractPattern::getTool(m_idTool)))
         {
             tool->SetLabelVisible(nodeId, visible);
         }

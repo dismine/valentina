@@ -66,7 +66,7 @@ public:
         pixmapLabel->setSizePolicy(sizePolicy);
         pixmapLabel->setVisible(false);
 
-        QSpacerItem *pixmapSpacer = new QSpacerItem(0, 5, QSizePolicy::Minimum, QSizePolicy::MinimumExpanding);
+        auto *pixmapSpacer = new QSpacerItem(0, 5, QSizePolicy::Minimum, QSizePolicy::MinimumExpanding);
 
         messageLabel = new QLabel(q);
         messageLabel->setMinimumSize(QSize(300, 0));
@@ -74,8 +74,8 @@ public:
         messageLabel->setOpenExternalLinks(true);
         messageLabel->setTextInteractionFlags(Qt::LinksAccessibleByKeyboard | Qt::LinksAccessibleByMouse);
 
-        QSpacerItem *checkBoxRightSpacer = new QSpacerItem(1, 1, QSizePolicy::Expanding, QSizePolicy::Minimum);
-        QSpacerItem *buttonSpacer = new QSpacerItem(0, 1, QSizePolicy::Minimum, QSizePolicy::Minimum);
+        auto *checkBoxRightSpacer = new QSpacerItem(1, 1, QSizePolicy::Expanding, QSizePolicy::Minimum);
+        auto *buttonSpacer = new QSpacerItem(0, 1, QSizePolicy::Minimum, QSizePolicy::Minimum);
 
         checkBox = new QCheckBox(q);
         checkBox->setText(CheckableMessageBox::tr("Do not ask again"));
@@ -84,19 +84,19 @@ public:
         buttonBox->setOrientation(Qt::Horizontal);
         buttonBox->setStandardButtons(QDialogButtonBox::Cancel | QDialogButtonBox::Ok);
 
-        QVBoxLayout *verticalLayout = new QVBoxLayout();
+        auto *verticalLayout = new QVBoxLayout();
         verticalLayout->addWidget(pixmapLabel);
         verticalLayout->addItem(pixmapSpacer);
 
-        QHBoxLayout *horizontalLayout_2 = new QHBoxLayout();
+        auto *horizontalLayout_2 = new QHBoxLayout();
         horizontalLayout_2->addLayout(verticalLayout);
         horizontalLayout_2->addWidget(messageLabel);
 
-        QHBoxLayout *horizontalLayout = new QHBoxLayout();
+        auto *horizontalLayout = new QHBoxLayout();
         horizontalLayout->addWidget(checkBox);
         horizontalLayout->addItem(checkBoxRightSpacer);
 
-        QVBoxLayout *verticalLayout_2 = new QVBoxLayout(q);
+        auto *verticalLayout_2 = new QVBoxLayout(q);
         verticalLayout_2->addLayout(horizontalLayout_2);
         verticalLayout_2->addLayout(horizontalLayout);
         verticalLayout_2->addItem(buttonSpacer);
@@ -230,7 +230,7 @@ auto CheckableMessageBox::defaultButton() const -> QDialogButtonBox::StandardBut
     const QList<QAbstractButton *> buttons = d->buttonBox->buttons();
     for (auto *b : buttons)
     {
-        if (QPushButton *pb = qobject_cast<QPushButton *>(b))
+        if (auto *pb = qobject_cast<QPushButton *>(b))
         {
             if (pb->isDefault())
             {

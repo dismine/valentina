@@ -91,7 +91,7 @@ void DialogLine::SetSecondPoint(quint32 value)
 {
     setCurrentPointId(ui->comboBoxSecondPoint, value);
 
-    VisToolLine *line = qobject_cast<VisToolLine *>(vis);
+    auto *line = qobject_cast<VisToolLine *>(vis);
     SCASSERT(line != nullptr)
     line->SetPoint2Id(value);
 }
@@ -128,7 +128,7 @@ void DialogLine::SetFirstPoint(quint32 value)
 {
     setCurrentPointId(ui->comboBoxFirstPoint, value);
 
-    VisToolLine *line = qobject_cast<VisToolLine *>(vis);
+    auto *line = qobject_cast<VisToolLine *>(vis);
     SCASSERT(line != nullptr)
     line->SetPoint1Id(value);
 }
@@ -161,7 +161,7 @@ void DialogLine::ShowVisualization()
 //---------------------------------------------------------------------------------------------------------------------
 void DialogLine::SaveData()
 {
-    VisToolLine *line = qobject_cast<VisToolLine *>(vis);
+    auto *line = qobject_cast<VisToolLine *>(vis);
     SCASSERT(line != nullptr)
 
     line->SetPoint1Id(GetFirstPoint());

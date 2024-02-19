@@ -133,7 +133,7 @@ auto VToolFlippingByAxis::Create(VToolFlippingByAxisInitData initData) -> VToolF
         }
 
         VAbstractTool::AddRecord(initData.id, Tool::FlippingByAxis, initData.doc);
-        VToolFlippingByAxis *tool = new VToolFlippingByAxis(initData);
+        auto *tool = new VToolFlippingByAxis(initData);
         initData.scene->addItem(tool);
         InitOperationToolConnections(initData.scene, tool);
         VAbstractPattern::AddTool(initData.id, tool);

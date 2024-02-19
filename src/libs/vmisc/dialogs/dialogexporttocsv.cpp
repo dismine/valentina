@@ -231,7 +231,7 @@ void DialogExportToCSV::ShowPreview()
     {
         for (int column = 0; column < columns; ++column)
         {
-            QTableWidgetItem *header = new QTableWidgetItem(csv.headerText(column));
+            auto *header = new QTableWidgetItem(csv.headerText(column));
             ui->tableWidget->setHorizontalHeaderItem(column, header);
         }
         ui->tableWidget->horizontalHeader()->setStretchLastSection(true);
@@ -241,7 +241,7 @@ void DialogExportToCSV::ShowPreview()
     {
         for (int column = 0; column < columns; ++column)
         {
-            QTableWidgetItem *item = new QTableWidgetItem(csv.text(row, column));
+            auto *item = new QTableWidgetItem(csv.text(row, column));
             item->setToolTip(csv.text(row, column));
 
             // set the item non-editable (view only), and non-selectable

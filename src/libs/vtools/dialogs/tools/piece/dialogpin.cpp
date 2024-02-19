@@ -100,7 +100,7 @@ void DialogPin::SetPointId(quint32 id)
 {
     setCurrentPointId(ui->comboBoxPoint, id);
 
-    VisToolSpecialPoint *point = qobject_cast<VisToolSpecialPoint *>(vis);
+    auto *point = qobject_cast<VisToolSpecialPoint *>(vis);
     SCASSERT(point != nullptr)
     point->SetPointId(id);
 

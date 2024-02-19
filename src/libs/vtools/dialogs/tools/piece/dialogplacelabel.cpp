@@ -97,7 +97,7 @@ void DialogPlaceLabel::SetCenterPoint(quint32 id)
 
     if (not m_showMode)
     {
-        VisToolSpecialPoint *point = qobject_cast<VisToolSpecialPoint *>(vis);
+        auto *point = qobject_cast<VisToolSpecialPoint *>(vis);
         SCASSERT(point != nullptr)
         point->SetPointId(id);
     }

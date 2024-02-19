@@ -82,7 +82,7 @@ void MovePiece::redo()
 // cppcheck-suppress unusedFunction
 auto MovePiece::mergeWith(const QUndoCommand *command) -> bool
 {
-    const MovePiece *moveCommand = static_cast<const MovePiece *>(command);
+    const auto *moveCommand = static_cast<const MovePiece *>(command);
     SCASSERT(moveCommand != nullptr)
     const quint32 id = moveCommand->getDetId();
 
@@ -112,7 +112,7 @@ void MovePiece::Do(qreal x, qreal y)
     {
         SaveCoordinates(domElement, x, y);
 
-        VToolSeamAllowance *tool = qobject_cast<VToolSeamAllowance *>(VAbstractPattern::getTool(nodeId));
+        auto *tool = qobject_cast<VToolSeamAllowance *>(VAbstractPattern::getTool(nodeId));
         if (tool)
         {
             tool->Move(x, y);

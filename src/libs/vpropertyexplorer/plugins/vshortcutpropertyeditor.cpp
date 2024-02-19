@@ -40,7 +40,7 @@ VPE::VShortcutEditWidget::VShortcutEditWidget(QWidget *parent)
     connect(LineEdit, &QLineEdit::textEdited, this, &VShortcutEditWidget::onTextEdited);
 
     // The layout (a horizontal layout)
-    QHBoxLayout *layout = new QHBoxLayout(this);
+    auto *layout = new QHBoxLayout(this);
     layout->setSpacing(0);
     layout->setContentsMargins(0, 0, 0, 0);
     layout->addWidget(LineEdit);
@@ -57,7 +57,7 @@ auto VPE::VShortcutEditWidget::eventFilter(QObject *obj, QEvent *event) -> bool
     {
         if (event->type() == QEvent::KeyPress)
         {
-            QKeyEvent *keyEvent = static_cast<QKeyEvent *>(event);
+            auto *keyEvent = static_cast<QKeyEvent *>(event);
 
             int keys = keyEvent->key();
 

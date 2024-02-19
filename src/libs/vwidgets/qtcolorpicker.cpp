@@ -827,7 +827,7 @@ void ColorPickerPopup::keyPressEvent(QKeyEvent *e)
             QWidget *w = widgetAt[curRow][curCol];
             if ((w != nullptr) && w->inherits("ColorPickerItem"))
             {
-                ColorPickerItem *wi = reinterpret_cast<ColorPickerItem *>(w);
+                auto *wi = reinterpret_cast<ColorPickerItem *>(w);
                 wi->setSelected(true);
 
                 QLayoutItem *layoutItem;
@@ -852,7 +852,7 @@ void ColorPickerPopup::keyPressEvent(QKeyEvent *e)
             }
             else if (w && w->inherits("QPushButton"))
             {
-                ColorPickerItem *wi = reinterpret_cast<ColorPickerItem *>(w);
+                auto *wi = reinterpret_cast<ColorPickerItem *>(w);
                 wi->setSelected(true);
 
                 QLayoutItem *layoutItem;

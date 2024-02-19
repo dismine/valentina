@@ -292,8 +292,7 @@ template <typename T> inline void DialogTool::AddVisualization()
 {
     if (prepare == false)
     {
-        VMainGraphicsScene *scene =
-            qobject_cast<VMainGraphicsScene *>(VAbstractValApplication::VApp()->getCurrentScene());
+        auto *scene = qobject_cast<VMainGraphicsScene *>(VAbstractValApplication::VApp()->getCurrentScene());
         SCASSERT(scene != nullptr)
 
         T *toolVis = qobject_cast<T *>(vis);

@@ -72,7 +72,7 @@ auto VToolPin::Create(VToolPinInitData initData) -> VToolPin *
             initData.data->UpdateId(initData.id);
             return nullptr;// Just ignore
         }
-        VPointF *pinPoint = new VPointF(*point);
+        auto *pinPoint = new VPointF(*point);
         pinPoint->setIdObject(initData.pointId);
         pinPoint->setMode(Draw::Modeling);
         initData.data->UpdateGObject(initData.id, pinPoint);

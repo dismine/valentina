@@ -52,7 +52,7 @@ auto VPE::VWidgetProperty::getWidget() const -> QWidget *
 
 void VPE::VWidgetProperty::setWidget(QWidget* widget)
 {
-    VWidgetPropertyPrivate* tmpDPtr = static_cast<VWidgetPropertyPrivate*>(d_ptr);
+    auto *tmpDPtr = static_cast<VWidgetPropertyPrivate *>(d_ptr);
     QWidget* tmpOldWidget = tmpDPtr->Widget.data();
     if (tmpOldWidget)
     {

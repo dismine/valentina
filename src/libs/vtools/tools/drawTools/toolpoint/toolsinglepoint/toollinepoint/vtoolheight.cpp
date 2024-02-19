@@ -141,7 +141,7 @@ auto VToolHeight::Create(VToolHeightInitData initData) -> VToolHeight *
     QPointF const pHeight = FindPoint(QLineF(static_cast<QPointF>(*p1Line), static_cast<QPointF>(*p2Line)),
                                       static_cast<QPointF>(*basePoint));
 
-    VPointF *p = new VPointF(pHeight, initData.name, initData.mx, initData.my);
+    auto *p = new VPointF(pHeight, initData.name, initData.mx, initData.my);
     p->SetShowLabel(initData.showLabel);
 
     if (initData.typeCreation == Source::FromGui)
@@ -166,7 +166,7 @@ auto VToolHeight::Create(VToolHeightInitData initData) -> VToolHeight *
     if (initData.parse == Document::FullParse)
     {
         VAbstractTool::AddRecord(initData.id, Tool::Height, initData.doc);
-        VToolHeight *point = new VToolHeight(initData);
+        auto *point = new VToolHeight(initData);
         initData.scene->addItem(point);
         InitToolConnections(initData.scene, point);
         VAbstractPattern::AddTool(initData.id, point);

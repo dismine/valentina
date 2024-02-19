@@ -44,7 +44,7 @@ void VNodeEllipticalArc::Create(const VAbstractNodeInitData &initData)
     if (initData.parse == Document::FullParse)
     {
         VAbstractTool::AddRecord(initData.id, Tool::NodeElArc, initData.doc);
-        VNodeEllipticalArc *arc = new VNodeEllipticalArc(initData);
+        auto *arc = new VNodeEllipticalArc(initData);
 
         VAbstractPattern::AddTool(initData.id, arc);
         if (initData.idTool != NULL_ID)

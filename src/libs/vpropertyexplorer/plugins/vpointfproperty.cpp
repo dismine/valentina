@@ -42,11 +42,11 @@ VPE::VPointFProperty::VPointFProperty(const QString &name)
     d_ptr->VariantValue.convert(QVariant::PointF);
 #endif
 
-    VDoubleProperty* tmpX = new VDoubleProperty("X");
+    auto *tmpX = new VDoubleProperty("X");
     addChild(tmpX);
     tmpX->setUpdateBehaviour(true, false);
 
-    VDoubleProperty* tmpY = new VDoubleProperty("Y");
+    auto *tmpY = new VDoubleProperty("Y");
     addChild(tmpY);
     tmpY->setUpdateBehaviour(true, false);
 

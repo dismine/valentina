@@ -139,7 +139,7 @@ auto VToolEndLine::Create(VToolEndLineInitData &initData) -> VToolEndLine *
     line.setLength(
         VAbstractValApplication::VApp()->toPixel(CheckFormula(initData.id, initData.formulaLength, initData.data)));
 
-    VPointF *p = new VPointF(line.p2(), initData.name, initData.mx, initData.my);
+    auto *p = new VPointF(line.p2(), initData.name, initData.mx, initData.my);
     p->SetShowLabel(initData.showLabel);
 
     if (initData.typeCreation == Source::FromGui)
@@ -160,7 +160,7 @@ auto VToolEndLine::Create(VToolEndLineInitData &initData) -> VToolEndLine *
     if (initData.parse == Document::FullParse)
     {
         VAbstractTool::AddRecord(initData.id, Tool::EndLine, initData.doc);
-        VToolEndLine *point = new VToolEndLine(initData);
+        auto *point = new VToolEndLine(initData);
         initData.scene->addItem(point);
         InitToolConnections(initData.scene, point);
         VAbstractPattern::AddTool(initData.id, point);

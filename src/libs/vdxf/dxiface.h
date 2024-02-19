@@ -56,7 +56,7 @@ public:
 
     virtual ~dx_ifaceBlock()
     {
-        for (std::list<DRW_Entity *>::const_iterator it = ent.begin(); it != ent.end(); ++it)
+        for (auto it = ent.begin(); it != ent.end(); ++it)
             delete *it;
     }
     std::list<DRW_Entity *> ent; // stores the entities list
@@ -83,7 +83,7 @@ public:
     ~dx_data()
     {
         // cleanup,
-        for (std::list<dx_ifaceBlock *>::const_iterator it = blocks.begin(); it != blocks.end(); ++it)
+        for (auto it = blocks.begin(); it != blocks.end(); ++it)
             delete *it;
         delete mBlock;
     }

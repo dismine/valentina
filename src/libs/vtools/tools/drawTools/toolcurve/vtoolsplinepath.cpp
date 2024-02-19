@@ -128,7 +128,7 @@ auto VToolSplinePath::Create(const QPointer<DialogTool> &dialog, VMainGraphicsSc
     initData.typeCreation = Source::FromGui;
     initData.notes = dialogTool->GetNotes();
 
-    VSplinePath *path = new VSplinePath(dialogTool->GetPath());
+    auto *path = new VSplinePath(dialogTool->GetPath());
     for (qint32 i = 0; i < path->CountPoints(); ++i)
     {
         doc->IncrementReferens((*path)[i].P().getIdTool());
@@ -170,7 +170,7 @@ auto VToolSplinePath::Create(VToolSplinePathInitData &initData, VSplinePath *pat
     if (initData.parse == Document::FullParse)
     {
         VAbstractTool::AddRecord(initData.id, Tool::SplinePath, initData.doc);
-        VToolSplinePath *spl = new VToolSplinePath(initData);
+        auto *spl = new VToolSplinePath(initData);
         initData.scene->addItem(spl);
         InitSplinePathToolConnections(initData.scene, spl);
         VAbstractPattern::AddTool(initData.id, spl);

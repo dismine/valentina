@@ -101,7 +101,7 @@ void DialogPointFromArcAndTangent::SetArcId(quint32 value)
 {
     setCurrentArcId(ui->comboBoxArc, value);
 
-    VisToolPointFromArcAndTangent *point = qobject_cast<VisToolPointFromArcAndTangent *>(vis);
+    auto *point = qobject_cast<VisToolPointFromArcAndTangent *>(vis);
     SCASSERT(point != nullptr)
     point->SetArcId(value);
 }
@@ -136,7 +136,7 @@ void DialogPointFromArcAndTangent::SetCrossCirclesPoint(CrossCirclesPoint p)
     {
         ui->comboBoxResult->setCurrentIndex(index);
 
-        VisToolPointFromArcAndTangent *point = qobject_cast<VisToolPointFromArcAndTangent *>(vis);
+        auto *point = qobject_cast<VisToolPointFromArcAndTangent *>(vis);
         SCASSERT(point != nullptr)
         point->SetCrossPoint(p);
     }
@@ -149,7 +149,7 @@ void DialogPointFromArcAndTangent::ChosenObject(quint32 id, const SceneObject &t
     {
         if (type == SceneObject::Point || type == SceneObject::Arc)
         {
-            VisToolPointFromArcAndTangent *point = qobject_cast<VisToolPointFromArcAndTangent *>(vis);
+            auto *point = qobject_cast<VisToolPointFromArcAndTangent *>(vis);
             SCASSERT(point != nullptr)
 
             switch (number)
