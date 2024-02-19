@@ -1641,7 +1641,7 @@ auto dxfRW::writeImage(DRW_Image *ent, const std::string &name) -> DRW_ImageDef 
     {
         // search if exist imagedef with this mane (image inserted more than 1 time)
         // RLZ: imagedef_reactor seem needed to read in acad
-        DRW_ImageDef *id = NULL;
+        DRW_ImageDef *id = nullptr;
         for (unsigned int i = 0; i < imageDef.size(); i++)
         {
             if (imageDef.at(i)->name == name)
@@ -1682,7 +1682,7 @@ auto dxfRW::writeImage(DRW_Image *ent, const std::string &name) -> DRW_ImageDef 
         id->reactors[idReactor] = toHexStr(static_cast<int>(ent->handle));
         return id;
     }
-    return NULL; // not exist in acad 12
+    return nullptr; // not exist in acad 12
 }
 
 auto dxfRW::writeBlockRecord(std::string name) -> bool

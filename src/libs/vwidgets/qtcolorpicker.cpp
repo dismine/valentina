@@ -168,7 +168,7 @@ class ColorPickerItem : public QFrame
     Q_OBJECT // NOLINT
 
 public:
-    ColorPickerItem(const QColor &color = Qt::white, const QString &text = QString(), QWidget *parent = 0);
+    ColorPickerItem(const QColor &color = Qt::white, const QString &text = QString(), QWidget *parent = nullptr);
     ~ColorPickerItem();
 
     auto color() const -> QColor;
@@ -573,7 +573,7 @@ ColorPickerPopup::ColorPickerPopup(int width, bool withColorDialog, QWidget *par
     }
     else
     {
-        moreButton = 0;
+        moreButton = nullptr;
     }
 
     eventLoop = nullptr;
@@ -709,7 +709,7 @@ void ColorPickerPopup::updateSelected()
 {
     QLayoutItem *layoutItem;
     int i = 0;
-    while ((layoutItem = grid->itemAt(i)) != 0)
+    while ((layoutItem = grid->itemAt(i)) != nullptr)
     {
         QWidget *w = layoutItem->widget();
         if (w && w->inherits("ColorPickerItem"))
@@ -832,7 +832,7 @@ void ColorPickerPopup::keyPressEvent(QKeyEvent *e)
 
                 QLayoutItem *layoutItem;
                 int i = 0;
-                while ((layoutItem = grid->itemAt(i)) != 0)
+                while ((layoutItem = grid->itemAt(i)) != nullptr)
                 {
                     QWidget *wl = layoutItem->widget();
                     if (wl && wl->inherits("ColorPickerItem"))
@@ -857,7 +857,7 @@ void ColorPickerPopup::keyPressEvent(QKeyEvent *e)
 
                 QLayoutItem *layoutItem;
                 int i = 0;
-                while ((layoutItem = grid->itemAt(i)) != 0)
+                while ((layoutItem = grid->itemAt(i)) != nullptr)
                 {
                     QWidget *wl = layoutItem->widget();
                     if (wl && wl->inherits("ColorPickerItem"))

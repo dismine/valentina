@@ -20,35 +20,34 @@
 
 #include "vpropertyfactorymanager.h"
 
-#include <stddef.h>
 #include <QList>
 #include <QMap>
 #include <QStringList>
+#include <stddef.h>
 
 #include "vabstractpropertyfactory.h"
 #include "vproperty.h"
 #include "vpropertyfactorymanager_p.h"
 #include "vstandardpropertyfactory.h"
 
-VPE::VPropertyFactoryManager* VPE::VPropertyFactoryManager::DefaultManager = NULL;
+VPE::VPropertyFactoryManager *VPE::VPropertyFactoryManager::DefaultManager = nullptr;
 
 VPE::VPropertyFactoryManager::VPropertyFactoryManager(QObject *parent)
-    : QObject(parent), d_ptr(new VPropertyFactoryManagerPrivate())
+  : QObject(parent),
+    d_ptr(new VPropertyFactoryManagerPrivate())
 {
-
 }
 
 VPE::VPropertyFactoryManager::~VPropertyFactoryManager()
 {
     // Delete all factories
-    QList<VAbstractPropertyFactory*> tmpFactories = d_ptr->Factories.values();
+    QList<VAbstractPropertyFactory *> tmpFactories = d_ptr->Factories.values();
     while (!tmpFactories.isEmpty())
     {
-        VAbstractPropertyFactory* tmpFactory = tmpFactories.takeLast();
+        VAbstractPropertyFactory *tmpFactory = tmpFactories.takeLast();
         tmpFactories.removeAll(tmpFactory);
         delete tmpFactory;
     }
-
 
     delete d_ptr;
     if (this == DefaultManager)
@@ -57,7 +56,7 @@ VPE::VPropertyFactoryManager::~VPropertyFactoryManager()
     }
 }
 
-void VPE::VPropertyFactoryManager::registerFactory(const QString& type, VAbstractPropertyFactory* factory)
+void VPE::VPropertyFactoryManager::registerFactory(const QString &type, VAbstractPropertyFactory *factory)
 {
     if (type.isEmpty())
     {
@@ -70,8 +69,8 @@ void VPE::VPropertyFactoryManager::registerFactory(const QString& type, VAbstrac
     d_ptr->Factories[type] = factory;
 }
 
-void VPE::VPropertyFactoryManager::unregisterFactory(VAbstractPropertyFactory* factory, const QString& type,
-                                                bool delete_if_unused)
+void VPE::VPropertyFactoryManager::unregisterFactory(VAbstractPropertyFactory *factory, const QString &type,
+                                                     bool delete_if_unused)
 {
     if (!factory)
     {
@@ -89,7 +88,7 @@ void VPE::VPropertyFactoryManager::unregisterFactory(VAbstractPropertyFactory* f
             {
                 d_ptr->Factories.remove(tmpKey);
             }
-        } while(!tmpKey.isEmpty());
+        } while (!tmpKey.isEmpty());
     }
     else
     {
@@ -119,8 +118,8 @@ auto VPE::VPropertyFactoryManager::getFactory(const QString &type) -> VPE::VAbst
 auto VPE::VPropertyFactoryManager::createProperty(const QString &type, const QString &name, const QString &description,
                                                   const QString &default_value) -> VPE::VProperty *
 {
-    VAbstractPropertyFactory* tmpFactory = getFactory(type);
-    VProperty* tmpResult = NULL;
+    VAbstractPropertyFactory *tmpFactory = getFactory(type);
+    VProperty *tmpResult = nullptr;
     if (tmpFactory)
     {
         tmpResult = tmpFactory->createProperty(type, name);
@@ -140,7 +139,7 @@ auto VPE::VPropertyFactoryManager::createProperty(const QString &type, const QSt
 }
 
 // cppcheck-suppress unusedFunction
-//VPE::VPropertyFactoryManager *VPE::VPropertyFactoryManager::getDefaultManager()
+// VPE::VPropertyFactoryManager *VPE::VPropertyFactoryManager::getDefaultManager()
 //{
 //    if (!DefaultManager)
 //    {

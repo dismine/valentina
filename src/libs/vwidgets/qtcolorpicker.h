@@ -64,7 +64,7 @@ class QtColorPicker : public QPushButton
     Q_PROPERTY(bool colorDialog READ colorDialogEnabled WRITE setColorDialogEnabled)
 
 public:
-    explicit QtColorPicker(QWidget *parent = 0, int columns = -1, bool enableColorDialog = true);
+    explicit QtColorPicker(QWidget *parent = nullptr, int columns = -1, bool enableColorDialog = true);
 
     ~QtColorPicker() override;
 

@@ -20,34 +20,33 @@
 
 #include "vemptyproperty.h"
 
-#include <stddef.h>
 #include <QBrush>
 #include <QColor>
 #include <QFlags>
 #include <QFont>
+#include <stddef.h>
 
 #include "../vproperty.h"
 
-namespace VPE {
+namespace VPE
+{
 class VPropertyPrivate;
-}  // namespace VPE
+} // namespace VPE
 
-VPE::VEmptyProperty::VEmptyProperty(const QString& name)
-    : VProperty(name,
+VPE::VEmptyProperty::VEmptyProperty(const QString &name)
+  : VProperty(name,
 #if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
-                QMetaType::UnknownType)
+              QMetaType::UnknownType)
 #else
-                QVariant::Invalid)
+              QVariant::Invalid)
 #endif
 {
 }
 
-
 VPE::VEmptyProperty::VEmptyProperty(VPropertyPrivate *d)
-    : VProperty(d)
+  : VProperty(d)
 {
 }
-
 
 VPE::VEmptyProperty::~VEmptyProperty()
 {
@@ -61,12 +60,12 @@ auto VPE::VEmptyProperty::data(int column, int role) const -> QVariant
     {
         return QVariant();
     }
-    
+
     if (role == Qt::BackgroundRole)
     {
         return QBrush(QColor(217, 217, 217));
     }
-    
+
     if (role == Qt::FontRole)
     {
         QFont tmpFont;
@@ -85,9 +84,8 @@ auto VPE::VEmptyProperty::createEditor(QWidget *parent, const QStyleOptionViewIt
     Q_UNUSED(parent)
     Q_UNUSED(delegate)
 
-    return NULL;
+    return nullptr;
 }
-
 
 //! Gets the data from the widget
 auto VPE::VEmptyProperty::getEditorData(const QWidget *editor) const -> QVariant
