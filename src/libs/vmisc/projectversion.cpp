@@ -87,7 +87,7 @@ auto compilerString() -> QString
 #endif
 #elif defined(Q_CC_CLANG)            // must be before GNU, because clang claims to be GNU too
     // cppcheck-suppress unassignedVariable
-    QString const isAppleString;
+    QString isAppleString; // NOLINT(misc-const-correctness)
 #if defined(__apple_build_version__) // Apple clang has other version numbers
     isAppleString = " (Apple)"_L1;
 #endif
