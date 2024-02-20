@@ -159,7 +159,7 @@ public:
         extAxisY(),
         curr(nullptr /*e.curr*/)
     {
-        for (std::vector<DRW_Variant *>::const_iterator it = e.extData.begin(); it != e.extData.end(); ++it)
+        for (auto it = e.extData.begin(); it != e.extData.end(); ++it)
         {
             extData.push_back(new DRW_Variant(*(*it)));
         }
@@ -167,7 +167,7 @@ public:
 
     virtual ~DRW_Entity()
     {
-        for (std::vector<DRW_Variant *>::iterator it = extData.begin(); it != extData.end(); ++it)
+        for (auto it = extData.begin(); it != extData.end(); ++it)
             delete *it;
 
         extData.clear();
@@ -175,7 +175,7 @@ public:
 
     void reset()
     {
-        for (std::vector<DRW_Variant *>::iterator it = extData.begin(); it != extData.end(); ++it)
+        for (auto it = extData.begin(); it != extData.end(); ++it)
             delete *it;
         extData.clear();
     }
@@ -666,7 +666,7 @@ public:
     void applyExtrusion() override;
     void addVertex(DRW_Vertex2D v)
     {
-        DRW_Vertex2D *vert = new DRW_Vertex2D();
+        auto *vert = new DRW_Vertex2D();
         vert->x = v.x;
         vert->y = v.y;
         vert->stawidth = v.stawidth;
@@ -676,7 +676,7 @@ public:
     }
     auto addVertex() -> DRW_Vertex2D *
     {
-        DRW_Vertex2D *vert = new DRW_Vertex2D();
+        auto *vert = new DRW_Vertex2D();
         vert->stawidth = 0;
         vert->endwidth = 0;
         vert->bulge = 0;
@@ -919,7 +919,7 @@ public:
     }
     void addVertex(DRW_Vertex v)
     {
-        DRW_Vertex *vert = new DRW_Vertex();
+        auto *vert = new DRW_Vertex();
         vert->basePoint.x = v.basePoint.x;
         vert->basePoint.y = v.basePoint.y;
         vert->basePoint.z = v.basePoint.z;

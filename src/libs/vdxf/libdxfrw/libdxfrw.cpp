@@ -1260,7 +1260,7 @@ auto dxfRW::writeHatch(DRW_Hatch *ent) -> bool
                         case DRW::LINE:
                         {
                             writer->writeInt16(72, 1);
-                            DRW_Line *l = static_cast<DRW_Line *>(loop->objlist.at(static_cast<size_t>(j)));
+                            auto *l = static_cast<DRW_Line *>(loop->objlist.at(static_cast<size_t>(j)));
                             writer->writeDouble(10, l->basePoint.x);
                             writer->writeDouble(20, l->basePoint.y);
                             writer->writeDouble(11, l->secPoint.x);
@@ -1270,7 +1270,7 @@ auto dxfRW::writeHatch(DRW_Hatch *ent) -> bool
                         case DRW::ARC:
                         {
                             writer->writeInt16(72, 2);
-                            DRW_Arc *a = static_cast<DRW_Arc *>(loop->objlist.at(static_cast<size_t>(j)));
+                            auto *a = static_cast<DRW_Arc *>(loop->objlist.at(static_cast<size_t>(j)));
                             writer->writeDouble(10, a->basePoint.x);
                             writer->writeDouble(20, a->basePoint.y);
                             writer->writeDouble(40, a->radious);
@@ -1282,7 +1282,7 @@ auto dxfRW::writeHatch(DRW_Hatch *ent) -> bool
                         case DRW::ELLIPSE:
                         {
                             writer->writeInt16(72, 3);
-                            DRW_Ellipse *a = static_cast<DRW_Ellipse *>(loop->objlist.at(static_cast<size_t>(j)));
+                            auto *a = static_cast<DRW_Ellipse *>(loop->objlist.at(static_cast<size_t>(j)));
                             a->correctAxis();
                             writer->writeDouble(10, a->basePoint.x);
                             writer->writeDouble(20, a->basePoint.y);
@@ -1398,7 +1398,7 @@ auto dxfRW::writeDimension(DRW_Dimension *ent) -> bool
             case DRW::DIMALIGNED:
             case DRW::DIMLINEAR:
             {
-                DRW_DimAligned *dd = static_cast<DRW_DimAligned *>(ent);
+                auto *dd = static_cast<DRW_DimAligned *>(ent);
                 writer->writeString(100, "AcDbAlignedDimension");
                 DRW_Coord const crd = dd->getClonepoint();
                 if (not qFuzzyIsNull(crd.x) || not qFuzzyIsNull(crd.y) || not qFuzzyIsNull(crd.z))
@@ -1415,7 +1415,7 @@ auto dxfRW::writeDimension(DRW_Dimension *ent) -> bool
                 writer->writeDouble(34, dd->getDef2Point().z);
                 if (ent->eType == DRW::DIMLINEAR)
                 {
-                    DRW_DimLinear *dl = static_cast<DRW_DimLinear *>(ent);
+                    auto *dl = static_cast<DRW_DimLinear *>(ent);
                     if (not qFuzzyIsNull(dl->getAngle()))
                         writer->writeDouble(50, dl->getAngle());
                     if (not qFuzzyIsNull(dl->getOblique()))
@@ -1426,7 +1426,7 @@ auto dxfRW::writeDimension(DRW_Dimension *ent) -> bool
             }
             case DRW::DIMRADIAL:
             {
-                DRW_DimRadial *dd = static_cast<DRW_DimRadial *>(ent);
+                auto *dd = static_cast<DRW_DimRadial *>(ent);
                 writer->writeString(100, "AcDbRadialDimension");
                 writer->writeDouble(15, dd->getDiameterPoint().x);
                 writer->writeDouble(25, dd->getDiameterPoint().y);
@@ -1436,7 +1436,7 @@ auto dxfRW::writeDimension(DRW_Dimension *ent) -> bool
             }
             case DRW::DIMDIAMETRIC:
             {
-                DRW_DimDiametric *dd = static_cast<DRW_DimDiametric *>(ent);
+                auto *dd = static_cast<DRW_DimDiametric *>(ent);
                 writer->writeString(100, "AcDbDiametricDimension");
                 writer->writeDouble(15, dd->getDiameter1Point().x);
                 writer->writeDouble(25, dd->getDiameter1Point().y);
@@ -1446,7 +1446,7 @@ auto dxfRW::writeDimension(DRW_Dimension *ent) -> bool
             }
             case DRW::DIMANGULAR:
             {
-                DRW_DimAngular *dd = static_cast<DRW_DimAngular *>(ent);
+                auto *dd = static_cast<DRW_DimAngular *>(ent);
                 writer->writeString(100, "AcDb2LineAngularDimension");
                 writer->writeDouble(13, dd->getFirstLine1().x);
                 writer->writeDouble(23, dd->getFirstLine1().y);
@@ -1464,7 +1464,7 @@ auto dxfRW::writeDimension(DRW_Dimension *ent) -> bool
             }
             case DRW::DIMANGULAR3P:
             {
-                DRW_DimAngular3p *dd = static_cast<DRW_DimAngular3p *>(ent);
+                auto *dd = static_cast<DRW_DimAngular3p *>(ent);
                 writer->writeDouble(13, dd->getFirstLine().x);
                 writer->writeDouble(23, dd->getFirstLine().y);
                 writer->writeDouble(33, dd->getFirstLine().z);
@@ -1478,7 +1478,7 @@ auto dxfRW::writeDimension(DRW_Dimension *ent) -> bool
             }
             case DRW::DIMORDINATE:
             {
-                DRW_DimOrdinate *dd = static_cast<DRW_DimOrdinate *>(ent);
+                auto *dd = static_cast<DRW_DimOrdinate *>(ent);
                 writer->writeString(100, "AcDbOrdinateDimension");
                 writer->writeDouble(13, dd->getFirstLine().x);
                 writer->writeDouble(23, dd->getFirstLine().y);
@@ -2271,7 +2271,7 @@ auto dxfRW::writeObjects() -> bool
 
 auto dxfRW::writeExtData(const std::vector<DRW_Variant *> &ed) -> bool
 {
-    for (std::vector<DRW_Variant *>::const_iterator it = ed.begin(); it != ed.end(); ++it)
+    for (auto it = ed.begin(); it != ed.end(); ++it)
     {
         switch ((*it)->code)
         {

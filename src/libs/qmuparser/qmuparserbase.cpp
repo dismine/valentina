@@ -1663,7 +1663,7 @@ void QmuParserBase::ClearVar()
  */
 void QmuParserBase::RemoveVar(const QString &a_strVarName)
 {
-    varmap_type::iterator const item = m_VarDef.find(a_strVarName);
+    auto const item = m_VarDef.find(a_strVarName);
     if (item != m_VarDef.end())
     {
         m_VarDef.erase(item);

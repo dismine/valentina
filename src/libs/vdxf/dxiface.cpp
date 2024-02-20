@@ -144,7 +144,7 @@ void dx_iface::writeBlocks()
 
 void dx_iface::writeBlockRecords()
 {
-    for (std::list<dx_ifaceBlock *>::iterator it = cData.blocks.begin(); it != cData.blocks.end(); ++it)
+    for (auto it = cData.blocks.begin(); it != cData.blocks.end(); ++it)
         dxfW->writeBlockRecord((*it)->name);
 }
 
@@ -156,31 +156,31 @@ void dx_iface::writeEntities()
 
 void dx_iface::writeLTypes()
 {
-    for (std::list<DRW_LType>::iterator it = cData.lineTypes.begin(); it != cData.lineTypes.end(); ++it)
+    for (auto it = cData.lineTypes.begin(); it != cData.lineTypes.end(); ++it)
         dxfW->writeLineType(&(*it));
 }
 
 void dx_iface::writeLayers()
 {
-    for (std::list<DRW_Layer>::iterator it = cData.layers.begin(); it != cData.layers.end(); ++it)
+    for (auto it = cData.layers.begin(); it != cData.layers.end(); ++it)
         dxfW->writeLayer(&(*it));
 }
 
 void dx_iface::writeTextstyles()
 {
-    for (std::list<DRW_Textstyle>::iterator it = cData.textStyles.begin(); it != cData.textStyles.end(); ++it)
+    for (auto it = cData.textStyles.begin(); it != cData.textStyles.end(); ++it)
         dxfW->writeTextstyle(&(*it));
 }
 
 void dx_iface::writeVports()
 {
-    for (std::list<DRW_Vport>::iterator it = cData.VPorts.begin(); it != cData.VPorts.end(); ++it)
+    for (auto it = cData.VPorts.begin(); it != cData.VPorts.end(); ++it)
         dxfW->writeVport(&(*it));
 }
 
 void dx_iface::writeDimstyles()
 {
-    for (std::list<DRW_Dimstyle>::iterator it = cData.dimStyles.begin(); it != cData.dimStyles.end(); ++it)
+    for (auto it = cData.dimStyles.begin(); it != cData.dimStyles.end(); ++it)
         dxfW->writeDimstyle(&(*it));
 }
 

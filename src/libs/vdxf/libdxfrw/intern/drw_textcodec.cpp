@@ -639,7 +639,7 @@ auto DRW_Conv932Table::toUtf8(const std::string &s) -> std::string
             }
             if (end > 0)
             {
-                for (size_t k = static_cast<size_t>(sta); k < static_cast<size_t>(end); k++)
+                for (auto k = static_cast<size_t>(sta); k < static_cast<size_t>(end); k++)
                 {
                     if (DRW_DoubleTable932[k][0] == code)
                     {
