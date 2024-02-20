@@ -31,7 +31,8 @@
 
 //---------------------------------------------------------------------------------------------------------------------
 PuzzlePreferencesPathPage::PuzzlePreferencesPathPage(QWidget *parent)
-  : QWidget(parent)
+  : QWidget(parent),
+    ui(std::make_unique<Ui::PuzzlePreferencesPathPage>())
 {
     ui->setupUi(this);
 

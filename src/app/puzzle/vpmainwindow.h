@@ -303,7 +303,7 @@ private slots:
 
 private:
     Q_DISABLE_COPY_MOVE(VPMainWindow) // NOLINT
-    std::unique_ptr<Ui::VPMainWindow> ui{};
+    std::unique_ptr<Ui::VPMainWindow> ui;
 
     std::unique_ptr<VPCarrousel> m_carrousel{nullptr};
     VPMainGraphicsView *m_graphicsView{nullptr};

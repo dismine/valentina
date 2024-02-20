@@ -65,7 +65,7 @@ private slots:
 private:
     // cppcheck-suppress unknownMacro
     Q_DISABLE_COPY_MOVE(DialogPuzzlePreferences) // NOLINT
-    std::unique_ptr<Ui::DialogPuzzlePreferences> ui{};
+    std::unique_ptr<Ui::DialogPuzzlePreferences> ui;
     bool m_isInitialized{false};
     PuzzlePreferencesConfigurationPage *m_configurationPage;
     PuzzlePreferencesLayoutPage *m_layoutPage;

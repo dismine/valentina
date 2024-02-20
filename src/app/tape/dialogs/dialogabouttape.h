@@ -52,7 +52,7 @@ protected:
 private:
     // cppcheck-suppress unknownMacro
     Q_DISABLE_COPY_MOVE(DialogAboutTape) // NOLINT
-    std::unique_ptr<Ui::DialogAboutTape> ui{};
+    std::unique_ptr<Ui::DialogAboutTape> ui;
     bool m_isInitialized;
 
     static void FontPointSize(QWidget *w, int pointSize);

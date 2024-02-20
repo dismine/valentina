@@ -53,6 +53,7 @@ using namespace Qt::Literals::StringLiterals;
 //---------------------------------------------------------------------------------------------------------------------
 VPDialogAbout::VPDialogAbout(QWidget *parent)
   : QDialog(parent),
+    ui(std::make_unique<Ui::VPDialogAbout>()),
     m_isInitialized(false)
 {
     ui->setupUi(this);

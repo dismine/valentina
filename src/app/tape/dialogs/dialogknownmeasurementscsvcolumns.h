@@ -80,7 +80,7 @@ private slots:
 private:
     // cppcheck-suppress unknownMacro
     Q_DISABLE_COPY_MOVE(DialogKnownMeasurementsCSVColumns) // NOLINT
-    std::unique_ptr<Ui::DialogKnownMeasurementsCSVColumns> ui{};
+    std::unique_ptr<Ui::DialogKnownMeasurementsCSVColumns> ui;
     bool m_isInitialized{false};
     QString m_fileName;
     bool m_withHeader{false};

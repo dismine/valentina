@@ -47,6 +47,7 @@
 //---------------------------------------------------------------------------------------------------------------------
 DialogAboutTape::DialogAboutTape(QWidget *parent)
   : QDialog(parent),
+    ui(std::make_unique<Ui::DialogAboutTape>()),
     m_isInitialized(false)
 {
     ui->setupUi(this);

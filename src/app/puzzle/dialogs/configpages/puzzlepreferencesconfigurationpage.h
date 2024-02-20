@@ -55,7 +55,7 @@ private slots:
 private:
     // cppcheck-suppress unknownMacro
     Q_DISABLE_COPY_MOVE(PuzzlePreferencesConfigurationPage) // NOLINT
-    std::unique_ptr<Ui::PuzzlePreferencesConfigurationPage> ui{};
+    std::unique_ptr<Ui::PuzzlePreferencesConfigurationPage> ui;
     bool m_langChanged{false};
     QList<QStringList> m_transientShortcuts{};
 

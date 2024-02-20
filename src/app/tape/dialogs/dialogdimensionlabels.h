@@ -62,7 +62,7 @@ private slots:
 private:
     // cppcheck-suppress unknownMacro
     Q_DISABLE_COPY_MOVE(DialogDimensionLabels) // NOLINT
-    std::unique_ptr<Ui::DialogDimensionLabels> ui{};
+    std::unique_ptr<Ui::DialogDimensionLabels> ui;
 
     QMap<MeasurementDimension, MeasurementDimension_p> m_dimensions;
     QMap<MeasurementDimension, DimesionLabels> m_labels{};

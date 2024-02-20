@@ -46,6 +46,7 @@ using namespace Qt::Literals::StringLiterals;
 //---------------------------------------------------------------------------------------------------------------------
 DialogPuzzlePreferences::DialogPuzzlePreferences(QWidget *parent)
   : QDialog(parent),
+    ui(std::make_unique<Ui::DialogPuzzlePreferences>()),
     m_configurationPage(new PuzzlePreferencesConfigurationPage),
     m_layoutPage(new PuzzlePreferencesLayoutPage),
     m_pathPage(new PuzzlePreferencesPathPage)

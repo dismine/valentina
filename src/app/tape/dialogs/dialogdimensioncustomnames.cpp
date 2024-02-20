@@ -31,7 +31,8 @@
 //---------------------------------------------------------------------------------------------------------------------
 DialogDimensionCustomNames::DialogDimensionCustomNames(
     const QMap<MeasurementDimension, MeasurementDimension_p> &dimensions, QWidget *parent)
-  : QDialog(parent)
+  : QDialog(parent),
+    ui(std::make_unique<Ui::DialogDimensionCustomNames>())
 {
     ui->setupUi(this);
 

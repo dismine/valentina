@@ -44,6 +44,7 @@
 //---------------------------------------------------------------------------------------------------------------------
 TapePreferencesConfigurationPage::TapePreferencesConfigurationPage(QWidget *parent)
   : QWidget(parent),
+    ui(std::make_unique<Ui::TapePreferencesConfigurationPage>()),
     m_langChanged(false),
     m_systemChanged(false)
 {

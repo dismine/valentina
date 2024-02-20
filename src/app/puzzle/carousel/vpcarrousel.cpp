@@ -56,6 +56,7 @@ QT_WARNING_POP
 //---------------------------------------------------------------------------------------------------------------------
 VPCarrousel::VPCarrousel(const VPLayoutPtr &layout, QWidget *parent)
   : QWidget(parent),
+    ui(std::make_unique<Ui::VPCarrousel>()),
     m_layout(layout)
 {
     SCASSERT(not layout.isNull())

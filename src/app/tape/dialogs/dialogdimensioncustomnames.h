@@ -52,7 +52,7 @@ public:
 private:
     // cppcheck-suppress unknownMacro
     Q_DISABLE_COPY_MOVE(DialogDimensionCustomNames) // NOLINT
-    std::unique_ptr<Ui::DialogDimensionCustomNames> ui{};
+    std::unique_ptr<Ui::DialogDimensionCustomNames> ui;
 
     void InitTable(const QMap<MeasurementDimension, MeasurementDimension_p> &dimensions);
 };

@@ -82,7 +82,7 @@ private slots:
 private:
     // cppcheck-suppress unknownMacro
     Q_DISABLE_COPY_MOVE(DialogSaveManualLayout) // NOLINT
-    std::unique_ptr<Ui::DialogSaveManualLayout> ui{};
+    std::unique_ptr<Ui::DialogSaveManualLayout> ui;
     vsizetype m_count;
     bool m_isInitialized{false};
     bool m_scaleConnected{true};

@@ -103,7 +103,7 @@ private slots:
 private:
     // cppcheck-suppress unknownMacro
     Q_DISABLE_COPY_MOVE(VPCarrousel) // NOLINT
-    std::unique_ptr<Ui::VPCarrousel> ui{};
+    std::unique_ptr<Ui::VPCarrousel> ui;
 
     VPLayoutWeakPtr m_layout{};
 

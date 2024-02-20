@@ -51,6 +51,7 @@ using namespace Qt::Literals::StringLiterals;
 //---------------------------------------------------------------------------------------------------------------------
 DialogKnownMeasurementsCSVColumns::DialogKnownMeasurementsCSVColumns(QString filename, QWidget *parent)
   : QDialog(parent),
+    ui(std::make_unique<Ui::DialogKnownMeasurementsCSVColumns>()),
     m_fileName{std::move(filename)}
 {
     ui->setupUi(this);

@@ -52,7 +52,7 @@ protected:
 private:
     // cppcheck-suppress unknownMacro
     Q_DISABLE_COPY_MOVE(VPDialogAbout) // NOLINT
-    std::unique_ptr<Ui::VPDialogAbout> ui{};
+    std::unique_ptr<Ui::VPDialogAbout> ui;
     bool m_isInitialized;
 
     static void FontPointSize(QWidget *w, int pointSize);

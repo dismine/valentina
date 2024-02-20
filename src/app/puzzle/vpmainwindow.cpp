@@ -323,6 +323,7 @@ struct VPExportData
 //---------------------------------------------------------------------------------------------------------------------
 VPMainWindow::VPMainWindow(const VPCommandLinePtr &cmd, QWidget *parent)
   : VAbstractMainWindow(parent),
+    ui(std::make_unique<Ui::VPMainWindow>()),
     m_cmd(cmd),
     m_undoStack(new QUndoStack(this)),
     m_layout{VPLayout::CreateLayout(m_undoStack)},

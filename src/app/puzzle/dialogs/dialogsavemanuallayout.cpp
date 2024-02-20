@@ -59,6 +59,7 @@ QT_WARNING_POP
 DialogSaveManualLayout::DialogSaveManualLayout(vsizetype count, bool consoleExport, const QString &fileName,
                                                QWidget *parent)
   : VAbstractLayoutDialog(parent),
+    ui(std::make_unique<Ui::DialogSaveManualLayout>()),
     m_count(count),
     m_consoleExport(consoleExport)
 {
