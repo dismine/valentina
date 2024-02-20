@@ -186,11 +186,7 @@ public:
     template <class T>
     static auto MapVector(QVector<T> points, const QTransform &matrix, bool mirror = false) -> QVector<T>;
 
-    template <class T>
-    static auto MapPoint(T obj, const QTransform &matrix) -> typename std::enable_if<!IsLayoutPoint<T>::value, T>::type;
-
-    template <class T>
-    static auto MapPoint(T obj, const QTransform &matrix) -> typename std::enable_if<IsLayoutPoint<T>::value, T>::type;
+    template <typename T> static auto MapPoint(T obj, const QTransform &matrix) -> T;
 
 protected:
     static auto IsEkvPointOnLine(const QPointF &iPoint, const QPointF &prevPoint, const QPointF &nextPoint) -> bool;
@@ -212,10 +208,7 @@ protected:
 private:
     QSharedDataPointer<VAbstractPieceData> d;
 
-    template <typename T>
-    static auto MakeTurnPoint(const QPointF &p) -> typename std::enable_if<!IsLayoutPoint<T>::value, T>::type;
-    template <typename T>
-    static auto MakeTurnPoint(const QPointF &p) -> typename std::enable_if<IsLayoutPoint<T>::value, T>::type;
+    template <typename T> static auto MakeTurnPoint(const QPointF &p) -> T;
 };
 
 Q_DECLARE_TYPEINFO(VAbstractPiece, Q_MOVABLE_TYPE); // NOLINT
@@ -750,20 +743,18 @@ inline auto VAbstractPiece::IntersectionPoint<QPointF>(QPointF crosPoint, const 
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-template <typename T>
-inline auto VAbstractPiece::MakeTurnPoint(const QPointF &p) ->
-    typename std::enable_if<!IsLayoutPoint<T>::value, T>::type
+template <typename T> inline auto VAbstractPiece::MakeTurnPoint(const QPointF &p) -> T
 {
-    return p;
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-template <typename T>
-inline auto VAbstractPiece::MakeTurnPoint(const QPointF &p) -> typename std::enable_if<IsLayoutPoint<T>::value, T>::type
-{
-    T breakPoint(p);
-    breakPoint.SetTurnPoint(true);
-    return breakPoint;
+    if constexpr (!IsLayoutPoint<T>::value)
+    {
+        return p;
+    }
+    else
+    {
+        T breakPoint(p);
+        breakPoint.SetTurnPoint(true);
+        return breakPoint;
+    }
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -958,22 +949,19 @@ inline auto VAbstractPiece::MapVector(QVector<T> points, const QTransform &matri
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-template <typename T>
-auto VAbstractPiece::MapPoint(T obj, const QTransform &matrix) ->
-    typename std::enable_if<!IsLayoutPoint<T>::value, T>::type
+template <typename T> auto VAbstractPiece::MapPoint(T obj, const QTransform &matrix) -> T
 {
-    return matrix.map(obj);
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-template <typename T>
-auto VAbstractPiece::MapPoint(T obj, const QTransform &matrix) ->
-    typename std::enable_if<IsLayoutPoint<T>::value, T>::type
-{
-    auto p = matrix.map(obj);
-    obj.setX(p.x());
-    obj.setY(p.y());
-    return obj;
+    if constexpr (!IsLayoutPoint<T>::value)
+    {
+        return matrix.map(obj);
+    }
+    else
+    {
+        auto p = matrix.map(obj);
+        obj.setX(p.x());
+        obj.setY(p.y());
+        return obj;
+    }
 }
 
 #endif // VABSTRACTPIECE_H
