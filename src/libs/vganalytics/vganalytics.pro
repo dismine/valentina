@@ -49,6 +49,10 @@ MOC_DIR = moc
 # objecs files
 OBJECTS_DIR = obj
 
+DVCS_HESH=$$FindBuildRevision()
+message("Build revision:" $${DVCS_HESH})
+DEFINES += "BUILD_REVISION=$${DVCS_HESH}" # Make available build revision number in sources.
+
 # Set using ccache. Function enable_ccache() defined in common.pri.
 $$enable_ccache()
 
