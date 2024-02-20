@@ -51,9 +51,9 @@
 #include "../vmisc/def.h"
 #include "vpiecegrainline.h"
 
+#ifdef LAYOUT_DEBUG
 namespace
 {
-#ifdef LAYOUT_DEBUG
 //---------------------------------------------------------------------------------------------------------------------
 QPainterPath ShowDirection(const QLineF &edge)
 {
@@ -127,8 +127,8 @@ QPainterPath DumpDetails(const QVector<VLayoutPiece> &details)
     }
     return path;
 }
-#endif
 } // anonymous namespace
+#endif
 
 //---------------------------------------------------------------------------------------------------------------------
 VPosition::VPosition(const VPositionData &data, std::atomic_bool *stop, bool saveLength)
