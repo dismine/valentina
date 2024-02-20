@@ -613,7 +613,7 @@ auto VLayoutPiece::operator=(const VLayoutPiece &detail) -> VLayoutPiece &
 //---------------------------------------------------------------------------------------------------------------------
 VLayoutPiece::VLayoutPiece(VLayoutPiece &&detail) noexcept
   : VAbstractPiece(std::move(detail)),
-    d(std::move(detail.d))
+    d(std::move(detail.d)) // NOLINT(bugprone-use-after-move)
 {
 }
 

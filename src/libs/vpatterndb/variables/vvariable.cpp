@@ -65,7 +65,7 @@ auto VVariable::operator=(const VVariable &var) -> VVariable &
 //---------------------------------------------------------------------------------------------------------------------
 VVariable::VVariable(VVariable &&var) noexcept
   : VInternalVariable(std::move(var)),
-    d(std::move(var.d))
+    d(std::move(var.d)) // NOLINT(bugprone-use-after-move)
 {
 }
 

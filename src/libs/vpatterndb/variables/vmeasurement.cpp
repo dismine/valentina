@@ -99,7 +99,7 @@ auto VMeasurement::operator=(const VMeasurement &m) -> VMeasurement &
 //---------------------------------------------------------------------------------------------------------------------
 VMeasurement::VMeasurement(VMeasurement &&m) noexcept
   : VVariable(std::move(m)),
-    d(std::move(m.d))
+    d(std::move(m.d)) // NOLINT(bugprone-use-after-move)
 {
 }
 

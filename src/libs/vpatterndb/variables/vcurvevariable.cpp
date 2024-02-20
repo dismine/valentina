@@ -64,7 +64,7 @@ auto VCurveVariable::operator=(const VCurveVariable &var) -> VCurveVariable &
 //---------------------------------------------------------------------------------------------------------------------
 VCurveVariable::VCurveVariable(VCurveVariable &&var) noexcept
   : VInternalVariable(std::move(var)),
-    d(std::move(var.d))
+    d(std::move(var.d)) // NOLINT(bugprone-use-after-move)
 {
 }
 

@@ -89,7 +89,7 @@ auto VAbstractArc::operator=(const VAbstractArc &arc) -> VAbstractArc &
 //---------------------------------------------------------------------------------------------------------------------
 VAbstractArc::VAbstractArc(VAbstractArc &&arc) noexcept
   : VAbstractCurve(std::move(arc)),
-    d(std::move(arc.d))
+    d(std::move(arc.d)) // NOLINT(bugprone-use-after-move)
 {
 }
 

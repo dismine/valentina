@@ -57,7 +57,7 @@ auto VGrainlineData::operator=(const VGrainlineData &data) -> VGrainlineData &
 //---------------------------------------------------------------------------------------------------------------------
 VGrainlineData::VGrainlineData(VGrainlineData &&data) noexcept
   : VAbstractFloatItemData(std::move(data)),
-    d(std::move(data.d))
+    d(std::move(data.d)) // NOLINT(bugprone-use-after-move)
 {
 }
 

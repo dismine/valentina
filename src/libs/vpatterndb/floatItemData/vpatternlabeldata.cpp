@@ -55,7 +55,7 @@ auto VPatternLabelData::operator=(const VPatternLabelData &data) -> VPatternLabe
 //---------------------------------------------------------------------------------------------------------------------
 VPatternLabelData::VPatternLabelData(VPatternLabelData &&data) noexcept
   : VAbstractFloatItemData(std::move(data)),
-    d(std::move(data.d))
+    d(std::move(data.d)) // NOLINT(bugprone-use-after-move)
 {
 }
 

@@ -323,7 +323,7 @@ auto VEllipticalArc::operator=(const VEllipticalArc &arc) -> VEllipticalArc &
 //---------------------------------------------------------------------------------------------------------------------
 VEllipticalArc::VEllipticalArc(VEllipticalArc &&arc) noexcept
   : VAbstractArc(std::move(arc)),
-    d(std::move(arc.d))
+    d(std::move(arc.d)) // NOLINT(bugprone-use-after-move)
 {
 }
 

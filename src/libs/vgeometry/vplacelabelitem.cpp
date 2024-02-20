@@ -238,7 +238,7 @@ auto VPlaceLabelItem::operator=(const VPlaceLabelItem &item) -> VPlaceLabelItem 
 //---------------------------------------------------------------------------------------------------------------------
 VPlaceLabelItem::VPlaceLabelItem(VPlaceLabelItem &&item) noexcept
   : VPointF(std::move(item)),
-    d(std::move(item.d))
+    d(std::move(item.d)) // NOLINT(bugprone-use-after-move)
 {
 }
 

@@ -269,7 +269,7 @@ auto VSpline::operator=(const VSpline &spline) -> VSpline &
 //---------------------------------------------------------------------------------------------------------------------
 VSpline::VSpline(VSpline &&spline) noexcept
   : VAbstractCubicBezier(std::move(spline)),
-    d(std::move(spline.d))
+    d(std::move(spline.d)) // NOLINT(bugprone-use-after-move)
 {
 }
 

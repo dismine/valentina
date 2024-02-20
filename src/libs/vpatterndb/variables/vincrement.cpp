@@ -73,7 +73,7 @@ auto VIncrement::operator=(const VIncrement &incr) -> VIncrement &
 //---------------------------------------------------------------------------------------------------------------------
 VIncrement::VIncrement(VIncrement &&incr) noexcept
   : VVariable(std::move(incr)),
-    d(std::move(incr.d))
+    d(std::move(incr.d)) // NOLINT(bugprone-use-after-move)
 {
 }
 

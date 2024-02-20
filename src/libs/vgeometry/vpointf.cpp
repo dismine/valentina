@@ -114,7 +114,7 @@ auto VPointF::operator=(const VPointF &point) -> VPointF &
 //---------------------------------------------------------------------------------------------------------------------
 VPointF::VPointF(VPointF &&point) noexcept
   : VGObject(std::move(point)),
-    d(std::move(point.d))
+    d(std::move(point.d)) // NOLINT(bugprone-use-after-move)
 {
 }
 

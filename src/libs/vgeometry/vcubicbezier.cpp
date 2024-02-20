@@ -66,7 +66,7 @@ auto VCubicBezier::operator=(const VCubicBezier &curve) -> VCubicBezier &
 //---------------------------------------------------------------------------------------------------------------------
 VCubicBezier::VCubicBezier(VCubicBezier &&curve) noexcept
   : VAbstractCubicBezier(std::move(curve)),
-    d(std::move(curve.d))
+    d(std::move(curve.d)) // NOLINT(bugprone-use-after-move)
 {
 }
 

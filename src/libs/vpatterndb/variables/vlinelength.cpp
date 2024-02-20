@@ -79,7 +79,7 @@ auto VLengthLine::operator=(const VLengthLine &var) -> VLengthLine &
 //---------------------------------------------------------------------------------------------------------------------
 VLengthLine::VLengthLine(VLengthLine &&var) noexcept
   : VInternalVariable(std::move(var)),
-    d(std::move(var.d))
+    d(std::move(var.d)) // NOLINT(bugprone-use-after-move)
 {
 }
 

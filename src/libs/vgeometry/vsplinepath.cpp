@@ -315,7 +315,7 @@ auto VSplinePath::operator=(const VSplinePath &path) -> VSplinePath &
 //---------------------------------------------------------------------------------------------------------------------
 VSplinePath::VSplinePath(VSplinePath &&splPath) noexcept
   : VAbstractCubicBezierPath(std::move(splPath)),
-    d(std::move(splPath.d))
+    d(std::move(splPath.d)) // NOLINT(bugprone-use-after-move)
 {
 }
 

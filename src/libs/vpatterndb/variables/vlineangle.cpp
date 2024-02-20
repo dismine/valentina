@@ -81,7 +81,7 @@ auto VLineAngle::operator=(const VLineAngle &var) -> VLineAngle &
 //---------------------------------------------------------------------------------------------------------------------
 VLineAngle::VLineAngle(VLineAngle &&var) noexcept
   : VInternalVariable(std::move(var)),
-    d(std::move(var.d))
+    d(std::move(var.d)) // NOLINT(bugprone-use-after-move)
 {
 }
 

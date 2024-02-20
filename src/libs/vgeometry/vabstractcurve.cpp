@@ -99,7 +99,7 @@ auto VAbstractCurve::operator=(const VAbstractCurve &curve) -> VAbstractCurve &
 //---------------------------------------------------------------------------------------------------------------------
 VAbstractCurve::VAbstractCurve(VAbstractCurve &&curve) noexcept
   : VGObject(std::move(curve)),
-    d(std::move(curve.d))
+    d(std::move(curve.d)) // NOLINT(bugprone-use-after-move)
 {
 }
 

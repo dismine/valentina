@@ -121,7 +121,7 @@ auto VArc::operator=(const VArc &arc) -> VArc &
 //---------------------------------------------------------------------------------------------------------------------
 VArc::VArc(VArc &&arc) noexcept
   : VAbstractArc(std::move(arc)),
-    d(std::move(arc.d))
+    d(std::move(arc.d)) // NOLINT(bugprone-use-after-move)
 {
 }
 

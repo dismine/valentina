@@ -56,7 +56,7 @@ auto VPieceLabelData::operator=(const VPieceLabelData &data) -> VPieceLabelData 
 //---------------------------------------------------------------------------------------------------------------------
 VPieceLabelData::VPieceLabelData(VPieceLabelData &&data) noexcept
   : VPatternLabelData(std::move(data)),
-    d(std::move(data.d))
+    d(std::move(data.d)) // NOLINT(bugprone-use-after-move)
 {
 }
 

@@ -142,7 +142,7 @@ auto VPiece::operator=(const VPiece &piece) -> VPiece &
 //---------------------------------------------------------------------------------------------------------------------
 VPiece::VPiece(VPiece &&piece) noexcept
   : VAbstractPiece(std::move(piece)),
-    d(std::move(piece.d))
+    d(std::move(piece.d)) // NOLINT(bugprone-use-after-move)
 {
 }
 
