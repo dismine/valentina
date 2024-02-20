@@ -115,28 +115,26 @@ VAbstractApplication::VAbstractApplication(int &argc, char **argv)
   : QApplication(argc, argv),
     undoStack(new QUndoStack(this))
 {
-    QString const rules;
-
 #if defined(V_NO_ASSERT)
+    QString rules;
+
     // Ignore SSL-related warnings
     // See issue #528: Error: QSslSocket: cannot resolve SSLv2_client_method.
     rules += "qt.network.ssl.warning=false\n"_L1;
     // See issue #568: Certificate checking on Mac OS X.
     rules += "qt.network.ssl.critical=false\n"
              "qt.network.ssl.fatal=false\n"_L1;
-#endif // defined(V_NO_ASSERT)
 
-#if defined(V_NO_ASSERT)
     // See issue #992: QXcbConnection: XCB Error.
     rules += "qt.qpa*=false\n"_L1;
     rules += "kf5.kio.core*=false\n"_L1;
     rules += "qt.gui.icc.warning=false\n"_L1;
-#endif
 
     if (not rules.isEmpty())
     {
         QLoggingCategory::setFilterRules(rules);
     }
+#endif
 
 #if QT_VERSION < QT_VERSION_CHECK(6, 0, 0)
     // Enable support for HiDPI bitmap resources
