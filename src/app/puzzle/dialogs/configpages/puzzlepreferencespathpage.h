@@ -29,6 +29,7 @@
 #define PUZZLEPREFERENCESPATHPAGE_H
 
 #include <QWidget>
+#include <memory>
 
 namespace Ui
 {
@@ -55,7 +56,7 @@ private slots:
 private:
     // cppcheck-suppress unknownMacro
     Q_DISABLE_COPY_MOVE(PuzzlePreferencesPathPage) // NOLINT
-    Ui::PuzzlePreferencesPathPage *ui;
+    std::unique_ptr<Ui::PuzzlePreferencesPathPage> ui{};
 
     void InitTable();
 };

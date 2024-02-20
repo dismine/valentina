@@ -91,8 +91,8 @@ public:
 
     void CheckPiecesPositionValidity() const;
 
-    auto TileFactory() const -> VPTileFactory *;
-    void SetTileFactory(VPTileFactory *newTileFactory);
+    auto TileFactory() const -> QSharedPointer<VPTileFactory>;
+    void SetTileFactory(const QSharedPointer<VPTileFactory> &newTileFactory);
 
     void RefreshScenePieces() const;
 
@@ -134,7 +134,7 @@ private:
 
     QUndoStack *m_undoStack;
 
-    VPTileFactory *m_tileFactory{nullptr};
+    QSharedPointer<VPTileFactory> m_tileFactory{nullptr};
 
     QUuid m_uuid{QUuid::createUuid()};
 };

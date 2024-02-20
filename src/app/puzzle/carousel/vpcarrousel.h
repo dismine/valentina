@@ -33,6 +33,7 @@
 #include <QScrollArea>
 #include <QUuid>
 #include <QWidget>
+#include <memory>
 
 #include "../layout/layoutdef.h"
 
@@ -102,7 +103,7 @@ private slots:
 private:
     // cppcheck-suppress unknownMacro
     Q_DISABLE_COPY_MOVE(VPCarrousel) // NOLINT
-    Ui::VPCarrousel *ui;
+    std::unique_ptr<Ui::VPCarrousel> ui{};
 
     VPLayoutWeakPtr m_layout{};
 

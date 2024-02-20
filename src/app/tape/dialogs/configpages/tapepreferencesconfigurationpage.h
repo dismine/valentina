@@ -30,6 +30,7 @@
 #define TAPEPREFERENCESCONFIGURATIONPAGE_H
 
 #include <QWidget>
+#include <memory>
 
 class QComboBox;
 
@@ -57,7 +58,7 @@ private slots:
 private:
     // cppcheck-suppress unknownMacro
     Q_DISABLE_COPY_MOVE(TapePreferencesConfigurationPage) // NOLINT
-    Ui::TapePreferencesConfigurationPage *ui;
+    std::unique_ptr<Ui::TapePreferencesConfigurationPage> ui{};
     bool m_langChanged;
     bool m_systemChanged;
     QList<QStringList> m_transientShortcuts{};

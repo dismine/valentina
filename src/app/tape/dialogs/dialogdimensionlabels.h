@@ -30,6 +30,7 @@
 
 #include <QDialog>
 #include <QMap>
+#include <memory>
 
 #include "../vformat/vdimensions.h"
 
@@ -45,14 +46,14 @@ class DialogDimensionLabels : public QDialog
     Q_OBJECT // NOLINT
 
 public:
-    explicit DialogDimensionLabels(const QMap<MeasurementDimension, MeasurementDimension_p > &dimensions,
+    explicit DialogDimensionLabels(const QMap<MeasurementDimension, MeasurementDimension_p> &dimensions,
                                    bool fullCircumference, QWidget *parent = nullptr);
     ~DialogDimensionLabels() override;
 
     auto Labels() const -> QMap<MeasurementDimension, DimesionLabels>;
 
 protected:
-    void changeEvent(QEvent* event) override;
+    void changeEvent(QEvent *event) override;
 
 private slots:
     void DimensionChanged();
@@ -61,9 +62,9 @@ private slots:
 private:
     // cppcheck-suppress unknownMacro
     Q_DISABLE_COPY_MOVE(DialogDimensionLabels) // NOLINT
-    Ui::DialogDimensionLabels *ui;
+    std::unique_ptr<Ui::DialogDimensionLabels> ui{};
 
-    QMap<MeasurementDimension, MeasurementDimension_p > m_dimensions;
+    QMap<MeasurementDimension, MeasurementDimension_p> m_dimensions;
     QMap<MeasurementDimension, DimesionLabels> m_labels{};
     bool m_fullCircumference;
 

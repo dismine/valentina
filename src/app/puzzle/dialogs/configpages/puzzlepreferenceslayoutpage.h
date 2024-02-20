@@ -29,13 +29,14 @@
 #define PUZZLEPREFERENCESLAYOUTPAGE_H
 
 #include <QWidget>
+#include <memory>
 
-#include "../vmisc/def.h"
 #include "../vlayout/dialogs/vabstractlayoutdialog.h"
+#include "../vmisc/def.h"
 
 namespace Ui
 {
-    class PuzzlePreferencesLayoutPage;
+class PuzzlePreferencesLayoutPage;
 }
 
 class PuzzlePreferencesLayoutPage : public QWidget
@@ -49,7 +50,7 @@ public:
     auto Apply() -> QStringList;
 
 protected:
-    void changeEvent(QEvent* event) override;
+    void changeEvent(QEvent *event) override;
 
 private slots:
     void ConvertPaperSize();
@@ -64,7 +65,7 @@ private slots:
 private:
     // cppcheck-suppress unknownMacro
     Q_DISABLE_COPY_MOVE(PuzzlePreferencesLayoutPage) // NOLINT
-    Ui::PuzzlePreferencesLayoutPage *ui;
+    std::unique_ptr<Ui::PuzzlePreferencesLayoutPage> ui{};
     Unit m_oldLayoutUnit{Unit::Mm};
     bool m_settingsChanged{false};
 

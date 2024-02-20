@@ -42,7 +42,7 @@
 //---------------------------------------------------------------------------------------------------------------------
 VPSheetSceneData::VPSheetSceneData(const VPLayoutPtr &layout, const QUuid &sheetUuid)
   : m_layout(layout),
-    m_scene(new VMainGraphicsScene()),
+    m_scene(QSharedPointer<VMainGraphicsScene>::create()),
     m_sheetUuid(sheetUuid)
 {
     SCASSERT(not layout.isNull())
@@ -68,13 +68,10 @@ VPSheetSceneData::VPSheetSceneData(const VPLayoutPtr &layout, const QUuid &sheet
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-VPSheetSceneData::~VPSheetSceneData()
-{
-    delete m_scene;
-}
+VPSheetSceneData::~VPSheetSceneData() = default;
 
 //---------------------------------------------------------------------------------------------------------------------
-auto VPSheetSceneData::Scene() const -> VMainGraphicsScene *
+auto VPSheetSceneData::Scene() const -> QSharedPointer<VMainGraphicsScene>
 {
     return m_scene;
 }
@@ -95,19 +92,19 @@ void VPSheetSceneData::RefreshPieces()
     qDeleteAll(m_graphicsPieces);
     m_graphicsPieces.clear();
 
-    VPLayoutPtr layout = m_layout.toStrongRef();
+    VPLayoutPtr const layout = m_layout.toStrongRef();
     if (layout.isNull())
     {
         return;
     }
 
-    VPSheetPtr sheet = layout->GetSheet(m_sheetUuid);
+    VPSheetPtr const sheet = layout->GetSheet(m_sheetUuid);
     if (sheet.isNull())
     {
         return;
     }
 
-    QList<VPPiecePtr> pieces = sheet->GetPieces();
+    QList<VPPiecePtr> const pieces = sheet->GetPieces();
     m_graphicsPieces.reserve(pieces.size());
 
     for (const auto &piece : pieces)
@@ -277,7 +274,7 @@ void VPSheetSceneData::SetTextAsPaths(bool textAsPaths) const
 //---------------------------------------------------------------------------------------------------------------------
 void VPSheetSceneData::PrepareTilesScheme()
 {
-    VPLayoutPtr layout = m_layout.toStrongRef();
+    VPLayoutPtr const layout = m_layout.toStrongRef();
     if (not layout.isNull())
     {
         m_showTilesSchemeTmp = layout->LayoutSettings().GetShowTiles();
@@ -293,7 +290,7 @@ void VPSheetSceneData::PrepareTilesScheme()
 //---------------------------------------------------------------------------------------------------------------------
 void VPSheetSceneData::ClearTilesScheme()
 {
-    VPLayoutPtr layout = m_layout.toStrongRef();
+    VPLayoutPtr const layout = m_layout.toStrongRef();
     if (not layout.isNull())
     {
         layout->LayoutSettings().SetShowTiles(m_showTilesSchemeTmp);
@@ -317,7 +314,7 @@ void VPSheetSceneData::ConnectPiece(VPGraphicsPiece *piece)
 {
     SCASSERT(piece != nullptr)
 
-    VPLayoutPtr layout = m_layout.toStrongRef();
+    VPLayoutPtr const layout = m_layout.toStrongRef();
     if (layout.isNull())
     {
         return;
@@ -343,7 +340,7 @@ void VPSheetSceneData::ConnectPiece(VPGraphicsPiece *piece)
 VPSheet::VPSheet(const VPLayoutPtr &layout, QObject *parent)
   : QObject(parent),
     m_layout(layout),
-    m_sceneData(new VPSheetSceneData(layout, Uuid()))
+    m_sceneData(QSharedPointer<VPSheetSceneData>::create(layout, Uuid()))
 {
     SCASSERT(not layout.isNull())
 
@@ -354,10 +351,7 @@ VPSheet::VPSheet(const VPLayoutPtr &layout, QObject *parent)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-VPSheet::~VPSheet()
-{
-    delete m_sceneData;
-}
+VPSheet::~VPSheet() = default;
 
 //---------------------------------------------------------------------------------------------------------------------
 auto VPSheet::GetLayout() const -> VPLayoutPtr
@@ -368,7 +362,7 @@ auto VPSheet::GetLayout() const -> VPLayoutPtr
 //---------------------------------------------------------------------------------------------------------------------
 auto VPSheet::GetPieces() const -> QList<VPPiecePtr>
 {
-    VPLayoutPtr layout = GetLayout();
+    VPLayoutPtr const layout = GetLayout();
     if (not layout.isNull())
     {
         return layout->PiecesForSheet(m_uuid);
@@ -380,10 +374,10 @@ auto VPSheet::GetPieces() const -> QList<VPPiecePtr>
 //---------------------------------------------------------------------------------------------------------------------
 auto VPSheet::GetSelectedPieces() const -> QList<VPPiecePtr>
 {
-    VPLayoutPtr layout = GetLayout();
+    VPLayoutPtr const layout = GetLayout();
     if (not layout.isNull())
     {
-        QList<VPPiecePtr> list = layout->PiecesForSheet(m_uuid);
+        QList<VPPiecePtr> const list = layout->PiecesForSheet(m_uuid);
 
         QList<VPPiecePtr> selected;
         selected.reserve(list.size());
@@ -405,7 +399,7 @@ auto VPSheet::GetSelectedPieces() const -> QList<VPPiecePtr>
 //---------------------------------------------------------------------------------------------------------------------
 auto VPSheet::GetAsLayoutPieces() const -> QVector<VLayoutPiece>
 {
-    QList<VPPiecePtr> pieces = GetPieces();
+    QList<VPPiecePtr> const pieces = GetPieces();
 
     QVector<VLayoutPiece> details;
     details.reserve(pieces.size());
@@ -520,7 +514,7 @@ void VPSheet::SetTrashSheet(bool newTrashSheet)
 //---------------------------------------------------------------------------------------------------------------------
 void VPSheet::ValidateSuperpositionOfPieces() const
 {
-    QList<VPPiecePtr> pieces = GetPieces();
+    QList<VPPiecePtr> const pieces = GetPieces();
 
     for (const auto &piece : pieces)
     {
@@ -633,13 +627,13 @@ auto VPSheet::GetMarginsRect() const -> QRectF
 //---------------------------------------------------------------------------------------------------------------------
 void VPSheet::RemoveUnusedLength()
 {
-    VPLayoutPtr layout = GetLayout();
+    VPLayoutPtr const layout = GetLayout();
     if (layout.isNull())
     {
         return;
     }
 
-    QList<VPPiecePtr> pieces = GetPieces();
+    QList<VPPiecePtr> const pieces = GetPieces();
     if (pieces.isEmpty())
     {
         return;
@@ -658,8 +652,8 @@ void VPSheet::RemoveUnusedLength()
     }
 
     const qreal extra = 2;
-    QRectF sheetRect = GetSheetRect();
-    GrainlineType type = GrainlineOrientation();
+    QRectF const sheetRect = GetSheetRect();
+    GrainlineType const type = GrainlineOrientation();
 
     if (type == GrainlineType::Vertical)
     {
@@ -692,13 +686,13 @@ void VPSheet::RemoveUnusedLength()
 //---------------------------------------------------------------------------------------------------------------------
 void VPSheet::CheckPiecePositionValidity(const VPPiecePtr &piece) const
 {
-    VPLayoutPtr layout = GetLayout();
+    VPLayoutPtr const layout = GetLayout();
     if (layout.isNull())
     {
         return;
     }
 
-    QList<VPPiecePtr> pieces = GetPieces();
+    QList<VPPiecePtr> const pieces = GetPieces();
     if (piece.isNull() || not pieces.contains(piece))
     {
         return;
@@ -716,7 +710,7 @@ void VPSheet::CheckPiecePositionValidity(const VPPiecePtr &piece) const
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-auto VPSheet::SceneData() const -> VPSheetSceneData *
+auto VPSheet::SceneData() const -> QSharedPointer<VPSheetSceneData>
 {
     return m_sceneData;
 }
@@ -724,7 +718,7 @@ auto VPSheet::SceneData() const -> VPSheetSceneData *
 //---------------------------------------------------------------------------------------------------------------------
 void VPSheet::ClearSelection() const
 {
-    QList<VPPiecePtr> selectedPieces = GetSelectedPieces();
+    QList<VPPiecePtr> const selectedPieces = GetSelectedPieces();
     for (const auto &piece : selectedPieces)
     {
         if (piece->IsSelected())
@@ -735,7 +729,7 @@ void VPSheet::ClearSelection() const
 
     if (not selectedPieces.isEmpty())
     {
-        VPLayoutPtr layout = GetLayout();
+        VPLayoutPtr const layout = GetLayout();
         if (not layout.isNull())
         {
             emit layout->PieceSelectionChanged(VPPiecePtr());
@@ -752,7 +746,7 @@ auto VPSheet::GetSheetOrientation() const -> QPageLayout::Orientation
 //---------------------------------------------------------------------------------------------------------------------
 auto VPSheet::SheetUnits() const -> Unit
 {
-    VPLayoutPtr layout = GetLayout();
+    VPLayoutPtr const layout = GetLayout();
     if (not layout.isNull())
     {
         return layout->LayoutSettings().GetUnit();
@@ -776,7 +770,7 @@ void VPSheet::SetSheetSize(qreal width, qreal height)
 //---------------------------------------------------------------------------------------------------------------------
 void VPSheet::SetSheetSizeConverted(qreal width, qreal height)
 {
-    Unit unit = SheetUnits();
+    Unit const unit = SheetUnits();
     m_size.setWidth(UnitConvertor(width, unit, Unit::Px));
     m_size.setHeight(UnitConvertor(height, unit, Unit::Px));
 
@@ -800,7 +794,7 @@ void VPSheet::SetSheetSize(const QSizeF &size)
 //---------------------------------------------------------------------------------------------------------------------
 void VPSheet::SetSheetSizeConverted(const QSizeF &size)
 {
-    Unit unit = SheetUnits();
+    Unit const unit = SheetUnits();
     m_size = QSizeF(UnitConvertor(size.width(), unit, Unit::Px), UnitConvertor(size.height(), unit, Unit::Px));
 
     if (m_sceneData != nullptr)
@@ -818,7 +812,7 @@ auto VPSheet::GetSheetSize() const -> QSizeF
 //---------------------------------------------------------------------------------------------------------------------
 auto VPSheet::GetSheetSizeConverted() const -> QSizeF
 {
-    Unit unit = SheetUnits();
+    Unit const unit = SheetUnits();
     QSizeF convertedSize =
         QSizeF(UnitConvertor(m_size.width(), Unit::Px, unit), UnitConvertor(m_size.height(), Unit::Px, unit));
 
@@ -836,7 +830,7 @@ void VPSheet::SetSheetMargins(qreal left, qreal top, qreal right, qreal bottom)
 //---------------------------------------------------------------------------------------------------------------------
 void VPSheet::SetSheetMarginsConverted(qreal left, qreal top, qreal right, qreal bottom)
 {
-    Unit unit = SheetUnits();
+    Unit const unit = SheetUnits();
     m_margins.setLeft(UnitConvertor(left, unit, Unit::Px));
     m_margins.setTop(UnitConvertor(top, unit, Unit::Px));
     m_margins.setRight(UnitConvertor(right, unit, Unit::Px));
@@ -852,7 +846,7 @@ void VPSheet::SetSheetMargins(const QMarginsF &margins)
 //---------------------------------------------------------------------------------------------------------------------
 void VPSheet::SetSheetMarginsConverted(const QMarginsF &margins)
 {
-    Unit unit = SheetUnits();
+    Unit const unit = SheetUnits();
     m_margins = UnitConvertor(margins, unit, Unit::Px);
 }
 
@@ -865,7 +859,7 @@ auto VPSheet::GetSheetMargins() const -> QMarginsF
 //---------------------------------------------------------------------------------------------------------------------
 auto VPSheet::GetSheetMarginsConverted() const -> QMarginsF
 {
-    Unit unit = SheetUnits();
+    Unit const unit = SheetUnits();
     return UnitConvertor(m_margins, Unit::Px, unit);
 }
 

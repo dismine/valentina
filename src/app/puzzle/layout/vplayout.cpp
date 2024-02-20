@@ -61,10 +61,7 @@ VPLayout::VPLayout(QUndoStack *undoStack)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-VPLayout::~VPLayout()
-{
-    delete m_tileFactory;
-}
+VPLayout::~VPLayout() = default;
 
 //---------------------------------------------------------------------------------------------------------------------
 auto VPLayout::CreateLayout(QUndoStack *undoStack) -> VPLayoutPtr
@@ -75,7 +72,7 @@ auto VPLayout::CreateLayout(QUndoStack *undoStack) -> VPLayoutPtr
     layout->AddTrashSheet(VPSheetPtr(new VPSheet(layout)));
 
     // create a standard sheet
-    VPSheetPtr sheet(new VPSheet(layout));
+    VPSheetPtr const sheet(new VPSheet(layout));
     sheet->SetName(tr("Sheet %1").arg(layout->GetAllSheets().size() + 1));
     layout->AddSheet(sheet);
     layout->SetFocusedSheet(sheet);
@@ -100,7 +97,7 @@ auto VPLayout::CreateLayout(QUndoStack *undoStack) -> VPLayoutPtr
     // --------------------------------------------------------
 
     // init the tile factory
-    auto *tileFactory = new VPTileFactory(layout, settings);
+    auto tileFactory = QSharedPointer<VPTileFactory>(new VPTileFactory(layout, settings));
     tileFactory->RefreshTileInfos();
     tileFactory->RefreshWatermarkData();
     layout->SetTileFactory(tileFactory);
@@ -131,7 +128,7 @@ void VPLayout::AddPiece(const VPPiecePtr &piece)
     }
     else
     {
-        VPPiecePtr oldPiece = m_pieces.value(piece->GetUniqueID());
+        VPPiecePtr const oldPiece = m_pieces.value(piece->GetUniqueID());
         if (not oldPiece.isNull())
         {
             oldPiece->Update(piece);
@@ -150,15 +147,15 @@ auto VPLayout::Uuid() const -> const QUuid &
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-auto VPLayout::TileFactory() const -> VPTileFactory *
+auto VPLayout::TileFactory() const -> QSharedPointer<VPTileFactory>
 {
     return m_tileFactory;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VPLayout::SetTileFactory(VPTileFactory *newTileFactory)
+void VPLayout::SetTileFactory(const QSharedPointer<VPTileFactory> &newTileFactory)
 {
-    delete m_tileFactory;
+    m_tileFactory.clear();
     m_tileFactory = newTileFactory;
 }
 
@@ -217,7 +214,7 @@ auto VPLayout::IsSheetsUniform() const -> bool
         return false;
     }
 
-    QSizeF sheetSize = sheet->GetSheetSize().toSize();
+    QSizeF const sheetSize = sheet->GetSheetSize().toSize();
 
     return std::all_of(sheets.begin(), sheets.end(),
                        [sheetSize](const VPSheetPtr &sheet)
@@ -226,7 +223,7 @@ auto VPLayout::IsSheetsUniform() const -> bool
                            {
                                return false;
                            }
-                           QSize size = sheet->GetSheetSize().toSize();
+                           QSize const size = sheet->GetSheetSize().toSize();
                            return size == sheetSize || size.transposed() == sheetSize;
                        });
 }
@@ -377,7 +374,7 @@ auto VPLayout::PiecesForSheet(const QUuid &uuid) const -> QList<VPPiecePtr>
     {
         if (not piece.isNull())
         {
-            VPSheetPtr sheet = piece->Sheet();
+            VPSheetPtr const sheet = piece->Sheet();
             if (not sheet.isNull() && sheet->Uuid() == uuid)
             {
                 list.append(piece);

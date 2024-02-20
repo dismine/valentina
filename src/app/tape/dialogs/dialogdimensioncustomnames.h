@@ -29,6 +29,7 @@
 #define DIALOGDIMENSIONCUSTOMNAMES_H
 
 #include <QDialog>
+#include <memory>
 
 #include "../vformat/vdimensions.h"
 
@@ -51,7 +52,7 @@ public:
 private:
     // cppcheck-suppress unknownMacro
     Q_DISABLE_COPY_MOVE(DialogDimensionCustomNames) // NOLINT
-    Ui::DialogDimensionCustomNames *ui;
+    std::unique_ptr<Ui::DialogDimensionCustomNames> ui{};
 
     void InitTable(const QMap<MeasurementDimension, MeasurementDimension_p> &dimensions);
 };

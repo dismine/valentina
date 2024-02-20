@@ -28,6 +28,8 @@
 #ifndef DIALOGSAVEMANUALLAYOUT_H
 #define DIALOGSAVEMANUALLAYOUT_H
 
+#include <memory>
+
 #include "../vlayout/dialogs/vabstractlayoutdialog.h"
 #include "../vlayout/vlayoutdef.h"
 #include "../vmisc/defglobal.h"
@@ -80,7 +82,7 @@ private slots:
 private:
     // cppcheck-suppress unknownMacro
     Q_DISABLE_COPY_MOVE(DialogSaveManualLayout) // NOLINT
-    Ui::DialogSaveManualLayout *ui;
+    std::unique_ptr<Ui::DialogSaveManualLayout> ui{};
     vsizetype m_count;
     bool m_isInitialized{false};
     bool m_scaleConnected{true};

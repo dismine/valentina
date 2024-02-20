@@ -53,7 +53,6 @@ using namespace Qt::Literals::StringLiterals;
 //---------------------------------------------------------------------------------------------------------------------
 VPDialogAbout::VPDialogAbout(QWidget *parent)
   : QDialog(parent),
-    ui(new Ui::VPDialogAbout),
     m_isInitialized(false)
 {
     ui->setupUi(this);
@@ -85,10 +84,7 @@ VPDialogAbout::VPDialogAbout(QWidget *parent)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-VPDialogAbout::~VPDialogAbout()
-{
-    delete ui;
-}
+VPDialogAbout::~VPDialogAbout() = default;
 
 //---------------------------------------------------------------------------------------------------------------------
 void VPDialogAbout::changeEvent(QEvent *event)

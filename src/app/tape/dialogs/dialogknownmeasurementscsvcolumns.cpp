@@ -40,6 +40,7 @@ using VTextCodec = QTextCodec;
 
 #include <QPushButton>
 #include <QShowEvent>
+#include <utility>
 
 #if QT_VERSION < QT_VERSION_CHECK(6, 4, 0)
 #include "../vmisc/compatibility.h"
@@ -48,19 +49,15 @@ using VTextCodec = QTextCodec;
 using namespace Qt::Literals::StringLiterals;
 
 //---------------------------------------------------------------------------------------------------------------------
-DialogKnownMeasurementsCSVColumns::DialogKnownMeasurementsCSVColumns(const QString &filename, QWidget *parent)
+DialogKnownMeasurementsCSVColumns::DialogKnownMeasurementsCSVColumns(QString filename, QWidget *parent)
   : QDialog(parent),
-    ui(new Ui::DialogKnownMeasurementsCSVColumns),
-    m_fileName{filename}
+    m_fileName{std::move(filename)}
 {
     ui->setupUi(this);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-DialogKnownMeasurementsCSVColumns::~DialogKnownMeasurementsCSVColumns()
-{
-    delete ui;
-}
+DialogKnownMeasurementsCSVColumns::~DialogKnownMeasurementsCSVColumns() = default;
 
 //---------------------------------------------------------------------------------------------------------------------
 void DialogKnownMeasurementsCSVColumns::changeEvent(QEvent *event)
@@ -151,13 +148,13 @@ void DialogKnownMeasurementsCSVColumns::ColumnChanged()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-bool DialogKnownMeasurementsCSVColumns::ColumnMandatory(int column) const
+auto DialogKnownMeasurementsCSVColumns::ColumnMandatory(int column) const -> bool
 {
     return column < static_cast<int>(KnownMeasurementsColumns::Group);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QString DialogKnownMeasurementsCSVColumns::ColumnHeader(int column) const
+auto DialogKnownMeasurementsCSVColumns::ColumnHeader(int column) const -> QString
 {
     const auto individualColumn = static_cast<KnownMeasurementsColumns>(column);
     switch (individualColumn)
@@ -179,19 +176,19 @@ QString DialogKnownMeasurementsCSVColumns::ColumnHeader(int column) const
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-int DialogKnownMeasurementsCSVColumns::ImportColumnCount() const
+auto DialogKnownMeasurementsCSVColumns::ImportColumnCount() const -> int
 {
     return static_cast<int>(KnownMeasurementsColumns::LAST_DO_NOT_USE);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-int DialogKnownMeasurementsCSVColumns::MinimumColumns() const
+auto DialogKnownMeasurementsCSVColumns::MinimumColumns() const -> int
 {
     return 1;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-bool DialogKnownMeasurementsCSVColumns::ColumnsValid()
+auto DialogKnownMeasurementsCSVColumns::ColumnsValid() -> bool
 {
     ClearColumnCollor();
 
@@ -234,7 +231,7 @@ void DialogKnownMeasurementsCSVColumns::ClearColumnCollor()
 //---------------------------------------------------------------------------------------------------------------------
 void DialogKnownMeasurementsCSVColumns::InitColumnsMap()
 {
-    QSharedPointer<QxtCsvModel> csv = DialogKnownMeasurementsCSVColumns::CSVModel();
+    QSharedPointer<QxtCsvModel> const csv = DialogKnownMeasurementsCSVColumns::CSVModel();
     m_columnsMap.clear();
 
     auto InitColumn = [this, csv](int column, int &index)
@@ -346,7 +343,7 @@ void DialogKnownMeasurementsCSVColumns::InitImportHeaders()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QSharedPointer<QxtCsvModel> DialogKnownMeasurementsCSVColumns::CSVModel() const
+auto DialogKnownMeasurementsCSVColumns::CSVModel() const -> QSharedPointer<QxtCsvModel>
 {
     return QSharedPointer<QxtCsvModel>::create(m_fileName, nullptr, m_withHeader, m_separator, m_codec);
 }
@@ -359,7 +356,7 @@ void DialogKnownMeasurementsCSVColumns::ShowInputPreview()
         return;
     }
 
-    QSharedPointer<QxtCsvModel> csv = DialogKnownMeasurementsCSVColumns::CSVModel();
+    QSharedPointer<QxtCsvModel> const csv = DialogKnownMeasurementsCSVColumns::CSVModel();
 
     const int columns = csv->columnCount();
     const int rows = csv->rowCount();
@@ -408,7 +405,7 @@ void DialogKnownMeasurementsCSVColumns::ShowImportPreview()
         return;
     }
 
-    QSharedPointer<QxtCsvModel> csv = DialogKnownMeasurementsCSVColumns::CSVModel();
+    QSharedPointer<QxtCsvModel> const csv = DialogKnownMeasurementsCSVColumns::CSVModel();
 
     const int importColumns = ImportColumnCount();
     const int columns = csv->columnCount();
@@ -455,7 +452,7 @@ void DialogKnownMeasurementsCSVColumns::SetDefaultColumns()
     {
         SCASSERT(control != nullptr)
 
-        int index = control->findData(m_columnsMap.at(column));
+        int const index = control->findData(m_columnsMap.at(column));
         if (index != -1)
         {
             control->setCurrentIndex(index);
@@ -488,7 +485,7 @@ void DialogKnownMeasurementsCSVColumns::CheckStatus()
         return;
     }
 
-    QSharedPointer<QxtCsvModel> csv = DialogKnownMeasurementsCSVColumns::CSVModel();
+    QSharedPointer<QxtCsvModel> const csv = DialogKnownMeasurementsCSVColumns::CSVModel();
 
     const int columns = csv->columnCount();
     if (columns < MinimumColumns())
@@ -521,10 +518,10 @@ void DialogKnownMeasurementsCSVColumns::CheckStatus()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-template <class T> bool DialogKnownMeasurementsCSVColumns::ColumnValid(T column) const
+template <class T> auto DialogKnownMeasurementsCSVColumns::ColumnValid(T column) const -> bool
 {
     const int columnNumber = static_cast<int>(column);
-    int value = m_columnsMap.at(columnNumber);
+    int const value = m_columnsMap.at(columnNumber);
 
     if (value == -1 && not ColumnMandatory(columnNumber))
     {

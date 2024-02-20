@@ -32,7 +32,6 @@
 DialogDimensionLabels::DialogDimensionLabels(const QMap<MeasurementDimension, MeasurementDimension_p> &dimensions,
                                              bool fullCircumference, QWidget *parent)
   : QDialog(parent),
-    ui(new Ui::DialogDimensionLabels),
     m_dimensions(dimensions),
     m_fullCircumference(fullCircumference)
 {
@@ -49,10 +48,7 @@ DialogDimensionLabels::DialogDimensionLabels(const QMap<MeasurementDimension, Me
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-DialogDimensionLabels::~DialogDimensionLabels()
-{
-    delete ui;
-}
+DialogDimensionLabels::~DialogDimensionLabels() = default;
 
 //---------------------------------------------------------------------------------------------------------------------
 void DialogDimensionLabels::changeEvent(QEvent *event)

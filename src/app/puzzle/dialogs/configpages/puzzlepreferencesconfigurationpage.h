@@ -29,6 +29,7 @@
 #define PUZZLEPREFERENCESCONFIGURATIONPAGE_H
 
 #include <QWidget>
+#include <memory>
 
 namespace Ui
 {
@@ -54,7 +55,7 @@ private slots:
 private:
     // cppcheck-suppress unknownMacro
     Q_DISABLE_COPY_MOVE(PuzzlePreferencesConfigurationPage) // NOLINT
-    Ui::PuzzlePreferencesConfigurationPage *ui;
+    std::unique_ptr<Ui::PuzzlePreferencesConfigurationPage> ui{};
     bool m_langChanged{false};
     QList<QStringList> m_transientShortcuts{};
 

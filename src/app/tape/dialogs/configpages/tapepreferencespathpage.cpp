@@ -32,8 +32,7 @@
 
 //---------------------------------------------------------------------------------------------------------------------
 TapePreferencesPathPage::TapePreferencesPathPage(QWidget *parent)
-  : QWidget(parent),
-    ui(new Ui::TapePreferencesPathPage)
+  : QWidget(parent)
 {
     ui->setupUi(this);
 
@@ -54,10 +53,7 @@ TapePreferencesPathPage::TapePreferencesPathPage(QWidget *parent)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-TapePreferencesPathPage::~TapePreferencesPathPage()
-{
-    delete ui;
-}
+TapePreferencesPathPage::~TapePreferencesPathPage() = default;
 
 //---------------------------------------------------------------------------------------------------------------------
 auto TapePreferencesPathPage::Apply() -> QStringList

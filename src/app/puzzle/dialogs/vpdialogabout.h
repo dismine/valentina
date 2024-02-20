@@ -30,6 +30,7 @@
 #define VPDIALOGABOUT_H
 
 #include <QDialog>
+#include <memory>
 
 namespace Ui
 {
@@ -51,7 +52,7 @@ protected:
 private:
     // cppcheck-suppress unknownMacro
     Q_DISABLE_COPY_MOVE(VPDialogAbout) // NOLINT
-    Ui::VPDialogAbout *ui;
+    std::unique_ptr<Ui::VPDialogAbout> ui{};
     bool m_isInitialized;
 
     static void FontPointSize(QWidget *w, int pointSize);

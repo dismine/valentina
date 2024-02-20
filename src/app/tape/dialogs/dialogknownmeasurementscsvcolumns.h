@@ -29,6 +29,7 @@
 #define DIALOGKNOWNMEASUREMENTSCSVCOLUMNS_H
 
 #include <QDialog>
+#include <memory>
 
 class QxtCsvModel;
 class QComboBox;
@@ -60,7 +61,7 @@ class DialogKnownMeasurementsCSVColumns : public QDialog
     Q_OBJECT // NOLINT
 
 public:
-    explicit DialogKnownMeasurementsCSVColumns(const QString &filename, QWidget *parent = nullptr);
+    explicit DialogKnownMeasurementsCSVColumns(QString filename, QWidget *parent = nullptr);
     ~DialogKnownMeasurementsCSVColumns() override;
 
     auto ColumnsMap() const -> QVector<int>;
@@ -79,7 +80,7 @@ private slots:
 private:
     // cppcheck-suppress unknownMacro
     Q_DISABLE_COPY_MOVE(DialogKnownMeasurementsCSVColumns) // NOLINT
-    Ui::DialogKnownMeasurementsCSVColumns *ui;
+    std::unique_ptr<Ui::DialogKnownMeasurementsCSVColumns> ui{};
     bool m_isInitialized{false};
     QString m_fileName;
     bool m_withHeader{false};

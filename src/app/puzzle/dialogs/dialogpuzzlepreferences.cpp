@@ -46,7 +46,6 @@ using namespace Qt::Literals::StringLiterals;
 //---------------------------------------------------------------------------------------------------------------------
 DialogPuzzlePreferences::DialogPuzzlePreferences(QWidget *parent)
   : QDialog(parent),
-    ui(new Ui::DialogPuzzlePreferences),
     m_configurationPage(new PuzzlePreferencesConfigurationPage),
     m_layoutPage(new PuzzlePreferencesLayoutPage),
     m_pathPage(new PuzzlePreferencesPathPage)
@@ -76,10 +75,7 @@ DialogPuzzlePreferences::DialogPuzzlePreferences(QWidget *parent)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-DialogPuzzlePreferences::~DialogPuzzlePreferences()
-{
-    delete ui;
-}
+DialogPuzzlePreferences::~DialogPuzzlePreferences() = default;
 
 //---------------------------------------------------------------------------------------------------------------------
 void DialogPuzzlePreferences::showEvent(QShowEvent *event)

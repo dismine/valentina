@@ -30,9 +30,8 @@
 
 //---------------------------------------------------------------------------------------------------------------------
 DialogDimensionCustomNames::DialogDimensionCustomNames(
-        const QMap<MeasurementDimension, MeasurementDimension_p> &dimensions, QWidget *parent) :
-    QDialog(parent),
-    ui(new Ui::DialogDimensionCustomNames)
+    const QMap<MeasurementDimension, MeasurementDimension_p> &dimensions, QWidget *parent)
+  : QDialog(parent)
 {
     ui->setupUi(this);
 
@@ -40,10 +39,7 @@ DialogDimensionCustomNames::DialogDimensionCustomNames(
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-DialogDimensionCustomNames::~DialogDimensionCustomNames()
-{
-    delete ui;
-}
+DialogDimensionCustomNames::~DialogDimensionCustomNames() = default;
 
 //---------------------------------------------------------------------------------------------------------------------
 auto DialogDimensionCustomNames::CustomNames() const -> QMap<MeasurementDimension, QString>
@@ -76,8 +72,8 @@ void DialogDimensionCustomNames::InitTable(const QMap<MeasurementDimension, Meas
     while (i != dimensions.constEnd())
     {
         {
-            QString name = QStringLiteral("%1 (%2)")
-                    .arg(VAbstartMeasurementDimension::DimensionName(i.value()->Type()), i.value()->Axis());
+            QString name = QStringLiteral("%1 (%2)").arg(VAbstartMeasurementDimension::DimensionName(i.value()->Type()),
+                                                         i.value()->Axis());
             auto *itemValue = new QTableWidgetItem(name);
             itemValue->setTextAlignment(Qt::AlignHCenter | Qt::AlignCenter);
 

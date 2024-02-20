@@ -56,7 +56,6 @@ QT_WARNING_POP
 //---------------------------------------------------------------------------------------------------------------------
 VPCarrousel::VPCarrousel(const VPLayoutPtr &layout, QWidget *parent)
   : QWidget(parent),
-    ui(new Ui::VPCarrousel),
     m_layout(layout)
 {
     SCASSERT(not layout.isNull())
@@ -74,11 +73,7 @@ VPCarrousel::VPCarrousel(const VPLayoutPtr &layout, QWidget *parent)
     Refresh();
 }
 
-//---------------------------------------------------------------------------------------------------------------------
-VPCarrousel::~VPCarrousel()
-{
-    delete ui;
-}
+VPCarrousel::~VPCarrousel() = default;
 
 //---------------------------------------------------------------------------------------------------------------------
 void VPCarrousel::Refresh()
@@ -94,7 +89,7 @@ void VPCarrousel::Refresh()
     // Do not rely on m_layout because we do not control it.
     m_pieceLists = QList<VPCarrouselSheet>();
 
-    VPLayoutPtr layout = m_layout.toStrongRef();
+    VPLayoutPtr const layout = m_layout.toStrongRef();
     if (not layout.isNull())
     {
         {
@@ -107,7 +102,7 @@ void VPCarrousel::Refresh()
             m_pieceLists.append(carrouselSheet);
         }
 
-        QList<VPSheetPtr> sheets = layout->GetSheets();
+        QList<VPSheetPtr> const sheets = layout->GetSheets();
         for (const auto &sheet : sheets)
         {
             if (not sheet.isNull())
@@ -137,7 +132,7 @@ void VPCarrousel::Refresh()
     ui->comboBoxPieceList->setCurrentIndex(-1);
     ui->comboBoxPieceList->blockSignals(false);
 
-    int index = ui->comboBoxPieceList->findData(sheetUuid);
+    int const index = ui->comboBoxPieceList->findData(sheetUuid);
     ui->comboBoxPieceList->setCurrentIndex(index != -1 ? index : 0);
 
     RefreshOrientation();
@@ -148,7 +143,7 @@ void VPCarrousel::on_ActiveSheetChanged(const VPSheetPtr &sheet)
 {
     if (not sheet.isNull())
     {
-        int index = ui->comboBoxPieceList->findData(sheet->Uuid());
+        int const index = ui->comboBoxPieceList->findData(sheet->Uuid());
         if (index != -1)
         {
             ui->comboBoxPieceList->setCurrentIndex(index);
@@ -163,7 +158,7 @@ void VPCarrousel::on_ActiveSheetChanged(const VPSheetPtr &sheet)
 //---------------------------------------------------------------------------------------------------------------------
 void VPCarrousel::RefreshSheetNames()
 {
-    VPLayoutPtr layout = m_layout.toStrongRef();
+    VPLayoutPtr const layout = m_layout.toStrongRef();
     if (layout.isNull())
     {
         return;
@@ -173,7 +168,7 @@ void VPCarrousel::RefreshSheetNames()
     {
         if (not m_pieceLists.at(i).unplaced)
         {
-            VPSheetPtr sheet = layout->GetSheet(m_pieceLists.at(i).sheetUuid);
+            VPSheetPtr const sheet = layout->GetSheet(m_pieceLists.at(i).sheetUuid);
             if (not sheet.isNull())
             {
                 m_pieceLists[i].name = sheet->GetName();
@@ -203,7 +198,7 @@ void VPCarrousel::on_ActivePieceListChanged(int index)
 {
     qCDebug(pCarrousel, "index changed %i", index);
 
-    VPLayoutPtr layout = m_layout.toStrongRef();
+    VPLayoutPtr const layout = m_layout.toStrongRef();
     if (layout.isNull())
     {
         return;
@@ -215,12 +210,12 @@ void VPCarrousel::on_ActivePieceListChanged(int index)
 
         if (index > 0)
         {
-            QUuid sheetUuid = ui->comboBoxPieceList->currentData().toUuid();
-            VPSheetPtr sheet = layout->GetSheet(sheetUuid);
+            QUuid const sheetUuid = ui->comboBoxPieceList->currentData().toUuid();
+            VPSheetPtr const sheet = layout->GetSheet(sheetUuid);
 
             if (not sheet.isNull())
             {
-                VPSheetPtr activeSheet = layout->GetFocusedSheet();
+                VPSheetPtr const activeSheet = layout->GetFocusedSheet();
                 if (not activeSheet.isNull())
                 {
                     activeSheet->ClearSelection();

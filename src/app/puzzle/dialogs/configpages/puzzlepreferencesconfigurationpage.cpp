@@ -39,8 +39,7 @@
 
 //---------------------------------------------------------------------------------------------------------------------
 PuzzlePreferencesConfigurationPage::PuzzlePreferencesConfigurationPage(QWidget *parent)
-  : QWidget(parent),
-    ui(new Ui::PuzzlePreferencesConfigurationPage)
+  : QWidget(parent)
 {
     ui->setupUi(this);
 
@@ -62,7 +61,7 @@ PuzzlePreferencesConfigurationPage::PuzzlePreferencesConfigurationPage(QWidget *
 
     // Theme
     SetThemeModeComboBox();
-    int index = ui->comboBoxThemeMode->findData(static_cast<int>(settings->GetThemeMode()));
+    int const index = ui->comboBoxThemeMode->findData(static_cast<int>(settings->GetThemeMode()));
     if (index != -1)
     {
         ui->comboBoxThemeMode->setCurrentIndex(index);
@@ -120,10 +119,7 @@ PuzzlePreferencesConfigurationPage::PuzzlePreferencesConfigurationPage(QWidget *
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-PuzzlePreferencesConfigurationPage::~PuzzlePreferencesConfigurationPage()
-{
-    delete ui;
-}
+PuzzlePreferencesConfigurationPage::~PuzzlePreferencesConfigurationPage() = default;
 
 //---------------------------------------------------------------------------------------------------------------------
 auto PuzzlePreferencesConfigurationPage::Apply() -> QStringList

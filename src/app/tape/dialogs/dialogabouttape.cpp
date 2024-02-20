@@ -47,7 +47,6 @@
 //---------------------------------------------------------------------------------------------------------------------
 DialogAboutTape::DialogAboutTape(QWidget *parent)
   : QDialog(parent),
-    ui(new Ui::DialogAboutTape),
     m_isInitialized(false)
 {
     ui->setupUi(this);
@@ -80,10 +79,7 @@ DialogAboutTape::DialogAboutTape(QWidget *parent)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-DialogAboutTape::~DialogAboutTape()
-{
-    delete ui;
-}
+DialogAboutTape::~DialogAboutTape() = default;
 
 //---------------------------------------------------------------------------------------------------------------------
 void DialogAboutTape::changeEvent(QEvent *event)

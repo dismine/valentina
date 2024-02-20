@@ -32,6 +32,7 @@
 #include <QMainWindow>
 #include <QMessageBox>
 #include <QPointer>
+#include <memory>
 
 #include "../vlayout/dialogs/vabstractlayoutdialog.h"
 #include "../vlayout/vlayoutpiece.h"
@@ -302,9 +303,9 @@ private slots:
 
 private:
     Q_DISABLE_COPY_MOVE(VPMainWindow) // NOLINT
-    Ui::VPMainWindow *ui;
+    std::unique_ptr<Ui::VPMainWindow> ui{};
 
-    VPCarrousel *m_carrousel{nullptr};
+    std::unique_ptr<VPCarrousel> m_carrousel{nullptr};
     VPMainGraphicsView *m_graphicsView{nullptr};
 
     VPCommandLinePtr m_cmd;

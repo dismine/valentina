@@ -29,6 +29,7 @@
 #define TAPEPREFERENCESPATHPAGE_H
 
 #include <QWidget>
+#include <memory>
 
 namespace Ui
 {
@@ -55,7 +56,7 @@ private slots:
 private:
     // cppcheck-suppress unknownMacro
     Q_DISABLE_COPY_MOVE(TapePreferencesPathPage) // NOLINT
-    Ui::TapePreferencesPathPage *ui;
+    std::unique_ptr<Ui::TapePreferencesPathPage> ui{};
 
     void InitTable();
 };

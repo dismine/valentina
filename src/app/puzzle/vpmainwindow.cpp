@@ -323,7 +323,6 @@ struct VPExportData
 //---------------------------------------------------------------------------------------------------------------------
 VPMainWindow::VPMainWindow(const VPCommandLinePtr &cmd, QWidget *parent)
   : VAbstractMainWindow(parent),
-    ui(new Ui::VPMainWindow),
     m_cmd(cmd),
     m_undoStack(new QUndoStack(this)),
     m_layout{VPLayout::CreateLayout(m_undoStack)},
@@ -450,12 +449,7 @@ VPMainWindow::VPMainWindow(const VPCommandLinePtr &cmd, QWidget *parent)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-VPMainWindow::~VPMainWindow()
-{
-    delete m_undoStack;
-    delete ui;
-    delete m_carrousel;
-}
+VPMainWindow::~VPMainWindow() = default;
 
 //---------------------------------------------------------------------------------------------------------------------
 auto VPMainWindow::CurrentFile() const -> QString
@@ -1286,8 +1280,8 @@ void VPMainWindow::InitPropertyTabLayout()
 //---------------------------------------------------------------------------------------------------------------------
 void VPMainWindow::InitCarrousel()
 {
-    m_carrousel = new VPCarrousel(m_layout, ui->dockWidgetCarrousel);
-    ui->dockWidgetCarrousel->setWidget(m_carrousel);
+    m_carrousel = std::make_unique<VPCarrousel>(m_layout, ui->dockWidgetCarrousel);
+    ui->dockWidgetCarrousel->setWidget(m_carrousel.get());
 
     connect(ui->dockWidgetCarrousel, QOverload<Qt::DockWidgetArea>::of(&QDockWidget::dockLocationChanged), this,
             &VPMainWindow::on_CarrouselLocationChanged);
@@ -1638,7 +1632,7 @@ void VPMainWindow::InitMainGraphics()
 
     connect(m_graphicsView, &VPMainGraphicsView::ScaleChanged, this, &VPMainWindow::on_ScaleChanged);
     connect(m_graphicsView, &VPMainGraphicsView::mouseMove, this, &VPMainWindow::on_MouseMoved);
-    connect(m_layout.data(), &VPLayout::PieceSheetChanged, m_carrousel, &VPCarrousel::Refresh);
+    connect(m_layout.data(), &VPLayout::PieceSheetChanged, m_carrousel.get(), &VPCarrousel::Refresh);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -2438,71 +2432,80 @@ void VPMainWindow::ExportScene(const VPExportData &data)
             case LayoutExportFormats::SVG:
                 exporter.SetPen(QPen(Qt::black, VAbstractApplication::VApp()->Settings()->WidthHairLine(),
                                      Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin));
-                exporter.ExportToSVG(sheet->SceneData()->Scene(), sheet->SceneData()->GraphicsPiecesAsItems());
+                exporter.ExportToSVG(sheet->SceneData()->Scene().data(), sheet->SceneData()->GraphicsPiecesAsItems());
                 break;
             case LayoutExportFormats::PDF:
                 exporter.SetPen(QPen(Qt::black, VAbstractApplication::VApp()->Settings()->WidthHairLine(),
                                      Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin));
-                exporter.ExportToPDF(sheet->SceneData()->Scene(), sheet->SceneData()->GraphicsPiecesAsItems());
+                exporter.ExportToPDF(sheet->SceneData()->Scene().data(), sheet->SceneData()->GraphicsPiecesAsItems());
                 break;
             case LayoutExportFormats::PNG:
                 exporter.SetPen(QPen(Qt::black, VAbstractApplication::VApp()->Settings()->WidthHairLine(),
                                      Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin));
-                exporter.ExportToPNG(sheet->SceneData()->Scene(), sheet->SceneData()->GraphicsPiecesAsItems());
+                exporter.ExportToPNG(sheet->SceneData()->Scene().data(), sheet->SceneData()->GraphicsPiecesAsItems());
                 break;
             case LayoutExportFormats::OBJ:
-                exporter.ExportToOBJ(sheet->SceneData()->Scene());
+                exporter.ExportToOBJ(sheet->SceneData()->Scene().data());
                 break;
             case LayoutExportFormats::PS:
                 exporter.SetPen(QPen(Qt::black, VAbstractApplication::VApp()->Settings()->WidthHairLine(),
                                      Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin));
-                exporter.ExportToPS(sheet->SceneData()->Scene(), sheet->SceneData()->GraphicsPiecesAsItems());
+                exporter.ExportToPS(sheet->SceneData()->Scene().data(), sheet->SceneData()->GraphicsPiecesAsItems());
                 break;
             case LayoutExportFormats::EPS:
                 exporter.SetPen(QPen(Qt::black, VAbstractApplication::VApp()->Settings()->WidthHairLine(),
                                      Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin));
-                exporter.ExportToEPS(sheet->SceneData()->Scene(), sheet->SceneData()->GraphicsPiecesAsItems());
+                exporter.ExportToEPS(sheet->SceneData()->Scene().data(), sheet->SceneData()->GraphicsPiecesAsItems());
                 break;
             case LayoutExportFormats::DXF_AC1006_Flat:
                 exporter.SetDxfVersion(DRW::AC1006);
-                exporter.ExportToFlatDXF(sheet->SceneData()->Scene(), sheet->SceneData()->GraphicsPiecesAsItems());
+                exporter.ExportToFlatDXF(sheet->SceneData()->Scene().data(),
+                                         sheet->SceneData()->GraphicsPiecesAsItems());
                 break;
             case LayoutExportFormats::DXF_AC1009_Flat:
                 exporter.SetDxfVersion(DRW::AC1009);
-                exporter.ExportToFlatDXF(sheet->SceneData()->Scene(), sheet->SceneData()->GraphicsPiecesAsItems());
+                exporter.ExportToFlatDXF(sheet->SceneData()->Scene().data(),
+                                         sheet->SceneData()->GraphicsPiecesAsItems());
                 break;
             case LayoutExportFormats::DXF_AC1012_Flat:
                 exporter.SetDxfVersion(DRW::AC1012);
-                exporter.ExportToFlatDXF(sheet->SceneData()->Scene(), sheet->SceneData()->GraphicsPiecesAsItems());
+                exporter.ExportToFlatDXF(sheet->SceneData()->Scene().data(),
+                                         sheet->SceneData()->GraphicsPiecesAsItems());
                 break;
             case LayoutExportFormats::DXF_AC1014_Flat:
                 exporter.SetDxfVersion(DRW::AC1014);
-                exporter.ExportToFlatDXF(sheet->SceneData()->Scene(), sheet->SceneData()->GraphicsPiecesAsItems());
+                exporter.ExportToFlatDXF(sheet->SceneData()->Scene().data(),
+                                         sheet->SceneData()->GraphicsPiecesAsItems());
                 break;
             case LayoutExportFormats::DXF_AC1015_Flat:
                 exporter.SetDxfVersion(DRW::AC1015);
-                exporter.ExportToFlatDXF(sheet->SceneData()->Scene(), sheet->SceneData()->GraphicsPiecesAsItems());
+                exporter.ExportToFlatDXF(sheet->SceneData()->Scene().data(),
+                                         sheet->SceneData()->GraphicsPiecesAsItems());
                 break;
             case LayoutExportFormats::DXF_AC1018_Flat:
                 exporter.SetDxfVersion(DRW::AC1018);
-                exporter.ExportToFlatDXF(sheet->SceneData()->Scene(), sheet->SceneData()->GraphicsPiecesAsItems());
+                exporter.ExportToFlatDXF(sheet->SceneData()->Scene().data(),
+                                         sheet->SceneData()->GraphicsPiecesAsItems());
                 break;
             case LayoutExportFormats::DXF_AC1021_Flat:
                 exporter.SetDxfVersion(DRW::AC1021);
-                exporter.ExportToFlatDXF(sheet->SceneData()->Scene(), sheet->SceneData()->GraphicsPiecesAsItems());
+                exporter.ExportToFlatDXF(sheet->SceneData()->Scene().data(),
+                                         sheet->SceneData()->GraphicsPiecesAsItems());
                 break;
             case LayoutExportFormats::DXF_AC1024_Flat:
                 exporter.SetDxfVersion(DRW::AC1024);
-                exporter.ExportToFlatDXF(sheet->SceneData()->Scene(), sheet->SceneData()->GraphicsPiecesAsItems());
+                exporter.ExportToFlatDXF(sheet->SceneData()->Scene().data(),
+                                         sheet->SceneData()->GraphicsPiecesAsItems());
                 break;
             case LayoutExportFormats::DXF_AC1027_Flat:
                 exporter.SetDxfVersion(DRW::AC1027);
-                exporter.ExportToFlatDXF(sheet->SceneData()->Scene(), sheet->SceneData()->GraphicsPiecesAsItems());
+                exporter.ExportToFlatDXF(sheet->SceneData()->Scene().data(),
+                                         sheet->SceneData()->GraphicsPiecesAsItems());
                 break;
             case LayoutExportFormats::TIF:
                 exporter.SetPen(QPen(Qt::black, VAbstractApplication::VApp()->Settings()->WidthHairLine(),
                                      Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin));
-                exporter.ExportToTIF(sheet->SceneData()->Scene(), sheet->SceneData()->GraphicsPiecesAsItems());
+                exporter.ExportToTIF(sheet->SceneData()->Scene().data(), sheet->SceneData()->GraphicsPiecesAsItems());
                 break;
             default:
                 qDebug() << "Can't recognize file type." << Q_FUNC_INFO;

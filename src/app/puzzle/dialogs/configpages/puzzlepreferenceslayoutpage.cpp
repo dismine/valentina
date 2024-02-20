@@ -31,8 +31,7 @@
 
 //---------------------------------------------------------------------------------------------------------------------
 PuzzlePreferencesLayoutPage::PuzzlePreferencesLayoutPage(QWidget *parent)
-  : QWidget(parent),
-    ui(new Ui::PuzzlePreferencesLayoutPage)
+  : QWidget(parent)
 {
     ui->setupUi(this);
 
@@ -131,10 +130,7 @@ PuzzlePreferencesLayoutPage::PuzzlePreferencesLayoutPage(QWidget *parent)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-PuzzlePreferencesLayoutPage::~PuzzlePreferencesLayoutPage()
-{
-    delete ui;
-}
+PuzzlePreferencesLayoutPage::~PuzzlePreferencesLayoutPage() = default;
 
 //---------------------------------------------------------------------------------------------------------------------
 auto PuzzlePreferencesLayoutPage::Apply() -> QStringList

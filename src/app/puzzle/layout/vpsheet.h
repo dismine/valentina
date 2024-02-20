@@ -56,7 +56,7 @@ public:
     explicit VPSheetSceneData(const VPLayoutPtr &layout, const QUuid &sheetUuid);
     ~VPSheetSceneData();
 
-    auto Scene() const -> VMainGraphicsScene *;
+    auto Scene() const -> QSharedPointer<VMainGraphicsScene>;
 
     /**
      * @brief RefreshLayout Refreshes the rectangles for the layout border and the margin
@@ -98,7 +98,7 @@ private:
 
     VPLayoutWeakPtr m_layout{};
 
-    VMainGraphicsScene *m_scene;
+    QSharedPointer<VMainGraphicsScene> m_scene{nullptr};
 
     VPGraphicsSheet *m_graphicsSheet{nullptr};
 
@@ -273,7 +273,7 @@ public:
     auto IgnoreMargins() const -> bool;
     void SetIgnoreMargins(bool newIgnoreMargins);
 
-    auto SceneData() const -> VPSheetSceneData *;
+    auto SceneData() const -> QSharedPointer<VPSheetSceneData>;
 
     void ClearSelection() const;
 
@@ -311,7 +311,7 @@ private:
 
     GrainlineType m_grainlineType{GrainlineType::NotFixed};
 
-    VPSheetSceneData *m_sceneData{nullptr};
+    QSharedPointer<VPSheetSceneData> m_sceneData{nullptr};
 
     auto SheetUnits() const -> Unit;
 };

@@ -31,8 +31,7 @@
 
 //---------------------------------------------------------------------------------------------------------------------
 PuzzlePreferencesPathPage::PuzzlePreferencesPathPage(QWidget *parent)
-  : QWidget(parent),
-    ui(new Ui::PuzzlePreferencesPathPage)
+  : QWidget(parent)
 {
     ui->setupUi(this);
 
@@ -53,10 +52,7 @@ PuzzlePreferencesPathPage::PuzzlePreferencesPathPage(QWidget *parent)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-PuzzlePreferencesPathPage::~PuzzlePreferencesPathPage()
-{
-    delete ui;
-}
+PuzzlePreferencesPathPage::~PuzzlePreferencesPathPage() = default;
 
 //---------------------------------------------------------------------------------------------------------------------
 void PuzzlePreferencesPathPage::Apply()

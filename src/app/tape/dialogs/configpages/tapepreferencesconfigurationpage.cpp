@@ -44,7 +44,6 @@
 //---------------------------------------------------------------------------------------------------------------------
 TapePreferencesConfigurationPage::TapePreferencesConfigurationPage(QWidget *parent)
   : QWidget(parent),
-    ui(new Ui::TapePreferencesConfigurationPage),
     m_langChanged(false),
     m_systemChanged(false)
 {
@@ -118,10 +117,7 @@ TapePreferencesConfigurationPage::TapePreferencesConfigurationPage(QWidget *pare
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-TapePreferencesConfigurationPage::~TapePreferencesConfigurationPage()
-{
-    delete ui;
-}
+TapePreferencesConfigurationPage::~TapePreferencesConfigurationPage() = default;
 
 //---------------------------------------------------------------------------------------------------------------------
 auto TapePreferencesConfigurationPage::Apply() -> QStringList
@@ -338,7 +334,7 @@ void TapePreferencesConfigurationPage::RetranslateShortcutsTable()
 void TapePreferencesConfigurationPage::InitKnownMeasurements(QComboBox *combo)
 {
     VKnownMeasurementsDatabase *db = MApplication::VApp()->KnownMeasurementsDatabase();
-    QHash<QUuid, VKnownMeasurementsHeader> known = db->AllKnownMeasurements();
+    QHash<QUuid, VKnownMeasurementsHeader> const known = db->AllKnownMeasurements();
 
     combo->blockSignals(true);
     combo->clear();
@@ -369,10 +365,10 @@ void TapePreferencesConfigurationPage::InitKnownMeasurements(QComboBox *combo)
 void TapePreferencesConfigurationPage::InitKnownMeasurementsDescription()
 {
     VKnownMeasurementsDatabase *db = MApplication::VApp()->KnownMeasurementsDatabase();
-    QHash<QUuid, VKnownMeasurementsHeader> known = db->AllKnownMeasurements();
+    QHash<QUuid, VKnownMeasurementsHeader> const known = db->AllKnownMeasurements();
 
     ui->knownMeasurementsDescription->clear();
-    QUuid id = ui->comboBoxKnownMeasurements->currentData().toUuid();
+    QUuid const id = ui->comboBoxKnownMeasurements->currentData().toUuid();
     if (!id.isNull() && known.contains(id))
     {
         ui->knownMeasurementsDescription->setPlainText(known.value(id).description);

@@ -562,9 +562,9 @@ void VPMainGraphicsView::SwitchScene(const VPSheetPtr &sheet)
 {
     if (not sheet.isNull())
     {
-        VMainGraphicsScene *scene = sheet->SceneData()->Scene();
-        setScene(scene);
-        connect(scene, &VMainGraphicsScene::mouseMove, this, &VPMainGraphicsView::on_SceneMouseMove,
+        QSharedPointer<VMainGraphicsScene> scene = sheet->SceneData()->Scene();
+        setScene(scene.data());
+        connect(scene.data(), &VMainGraphicsScene::mouseMove, this, &VPMainGraphicsView::on_SceneMouseMove,
                 Qt::UniqueConnection);
     }
 }

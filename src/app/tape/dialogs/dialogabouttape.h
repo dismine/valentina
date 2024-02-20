@@ -30,6 +30,7 @@
 #define DIALOGABOUTTAPE_H
 
 #include <QDialog>
+#include <memory>
 
 namespace Ui
 {
@@ -51,7 +52,7 @@ protected:
 private:
     // cppcheck-suppress unknownMacro
     Q_DISABLE_COPY_MOVE(DialogAboutTape) // NOLINT
-    Ui::DialogAboutTape *ui;
+    std::unique_ptr<Ui::DialogAboutTape> ui{};
     bool m_isInitialized;
 
     static void FontPointSize(QWidget *w, int pointSize);
