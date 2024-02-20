@@ -36,6 +36,7 @@
 
 class QNetworkAccessManager;
 class VGAnalyticsWorker;
+class VCommonSettings;
 
 // https://developers.google.com/analytics/devguides/collection/protocol/ga4/verify-implementation?client_type=gtag
 class VGAnalytics : public QObject
@@ -46,6 +47,8 @@ public:
     ~VGAnalytics() override;
 
     static auto Instance() -> VGAnalytics *;
+
+    static void Init(VCommonSettings *settings);
 
     enum LogLevel
     {

@@ -433,19 +433,7 @@ void VPApplication::InitOptions()
     VTheme::SetIconTheme();
     VTheme::InitThemeMode();
 
-    auto *statistic = VGAnalytics::Instance();
-    QString clientID = settings->GetClientID();
-    if (clientID.isEmpty())
-    {
-        clientID = QUuid::createUuid().toString();
-        settings->SetClientID(clientID);
-    }
-    statistic->SetClientID(clientID);
-    statistic->SetGUILanguage(settings->GetLocale());
-    statistic->SetMeasurementId(GA_MEASUREMENT_ID);
-    statistic->SetApiSecret(GA_API_SECRET);
-    statistic->SetRepoRevision(QLatin1String(BUILD_REVISION));
-    statistic->Enable(settings->IsCollectStatistic());
+    VGAnalytics::Init(settings);
 
     m_shortcutManager = new VPuzzleShortcutManager(this);
 }

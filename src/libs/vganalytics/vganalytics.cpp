@@ -26,7 +26,6 @@
  **
  *************************************************************************/
 #include "vganalytics.h"
-#include "../vmisc/defglobal.h"
 #include "vganalyticsworker.h"
 
 #include <QDataStream>
@@ -60,6 +59,14 @@
 #if QT_VERSION < QT_VERSION_CHECK(6, 4, 0)
 #include "../vmisc/compatibility.h"
 #endif
+
+#if !defined(BUILD_REVISION) && defined(QBS_BUILD)
+#include <vcsRepoState.h>
+#define BUILD_REVISION VCS_REPO_STATE_REVISION
+#endif
+
+#include "../vmisc/vcommonsettings.h"
+#include "def.h"
 
 using namespace std::chrono_literals;
 using namespace Qt::Literals::StringLiterals;
@@ -149,6 +156,26 @@ auto VGAnalytics::Instance() -> VGAnalytics *
     }
 
     return instance;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VGAnalytics::Init(VCommonSettings *settings)
+{
+    SCASSERT(settings != nullptr)
+
+    auto *statistic = VGAnalytics::Instance();
+    QString clientID = settings->GetClientID();
+    if (clientID.isEmpty())
+    {
+        clientID = QUuid::createUuid().toString();
+        settings->SetClientID(clientID);
+    }
+    statistic->SetClientID(clientID);
+    statistic->SetGUILanguage(settings->GetLocale());
+    statistic->SetMeasurementId(GA_MEASUREMENT_ID);
+    statistic->SetApiSecret(GA_API_SECRET);
+    statistic->SetRepoRevision(QLatin1String(BUILD_REVISION));
+    statistic->Enable(settings->IsCollectStatistic());
 }
 
 //---------------------------------------------------------------------------------------------------------------------

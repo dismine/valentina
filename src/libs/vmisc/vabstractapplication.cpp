@@ -28,10 +28,11 @@
 
 #include "vabstractapplication.h"
 
-#include "QtConcurrent/qtconcurrentrun.h"
 #include "compatibility.h"
 #include "svgfont/vsvgfontdatabase.h"
 #include "vtranslator.h"
+
+#include "QtConcurrent/qtconcurrentrun.h"
 #include <QDir>
 #include <QFileSystemWatcher>
 #include <QFuture>

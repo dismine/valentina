@@ -37,7 +37,6 @@
 #include "../qmuparser/qmuparsererror.h"
 #include "../version.h"
 #include "../vformat/knownmeasurements/vknownmeasurementsdatabase.h"
-#include "../vganalytics/def.h"
 #include "../vganalytics/vganalytics.h"
 #include "../vmisc/qt_dispatch/qt_dispatch.h"
 #include "../vmisc/theme/vtheme.h"
@@ -690,19 +689,7 @@ void VApplication::InitOptions()
         m_shortcutManager = new VValentinaShortcutManager(this);
     }
 
-    auto *statistic = VGAnalytics::Instance();
-    QString clientID = settings->GetClientID();
-    if (clientID.isEmpty())
-    {
-        clientID = QUuid::createUuid().toString();
-        settings->SetClientID(clientID);
-    }
-    statistic->SetClientID(clientID);
-    statistic->SetGUILanguage(settings->GetLocale());
-    statistic->SetMeasurementId(GA_MEASUREMENT_ID);
-    statistic->SetApiSecret(GA_API_SECRET);
-    statistic->SetRepoRevision(QLatin1String(BUILD_REVISION));
-    statistic->Enable(settings->IsCollectStatistic());
+    VGAnalytics::Init(settings);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
