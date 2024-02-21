@@ -251,7 +251,7 @@ inline auto modf(fixed<B, I, F> x, fixed<B, I, F> *iptr) noexcept -> fixed<B, I,
 //
 
 template <typename B, typename I, unsigned int F, typename T,
-          typename std::enable_if<std::is_integral<T>::value>::type * = nullptr>
+          std::enable_if_t<std::is_integral_v<T>> * = nullptr>
 auto pow(fixed<B, I, F> base, T exp) noexcept -> fixed<B, I, F>
 {
     using Fixed = fixed<B, I, F>;

@@ -19,12 +19,12 @@ namespace fpm
 //! \tparam FractionBits     the number of bits of the BaseType used to store the fraction
 template <typename BaseType, typename IntermediateType, unsigned int FractionBits> class fixed
 {
-    static_assert(std::is_integral<BaseType>::value, "BaseType must be an integral type");
+    static_assert(std::is_integral_v<BaseType>, "BaseType must be an integral type");
     static_assert(FractionBits > 0, "FractionBits must be greater than zero");
     static_assert(FractionBits <= sizeof(BaseType) * 8 - 1, "BaseType must at least be able to contain entire "
                                                             "fraction, with space for at least one integral bit");
     static_assert(sizeof(IntermediateType) > sizeof(BaseType), "IntermediateType must be larger than BaseType");
-    static_assert(std::is_signed<IntermediateType>::value == std::is_signed<BaseType>::value,
+    static_assert(std::is_signed_v<IntermediateType> == std::is_signed_v<BaseType>,
                   "IntermediateType must have same signedness as BaseType");
 
     // Although this value fits in the BaseType in terms of bits, if there's only one integral bit, this value
@@ -44,7 +44,7 @@ public:
 
     // Converts an integral number to the fixed-point type.
     // Like static_cast, this truncates bits that don't fit.
-    template <typename T, typename std::enable_if<std::is_integral<T>::value>::type * = nullptr>
+    template <typename T, std::enable_if_t<std::is_integral_v<T>> * = nullptr>
     constexpr inline explicit fixed(T val) noexcept
       : m_value(static_cast<BaseType>(val * FRACTION_MULT))
     {
@@ -52,7 +52,7 @@ public:
 
     // Converts an floating-point number to the fixed-point type.
     // Like static_cast, this truncates bits that don't fit.
-    template <typename T, typename std::enable_if<std::is_floating_point<T>::value>::type * = nullptr>
+    template <typename T, std::enable_if_t<std::is_floating_point_v<T>> * = nullptr>
     constexpr inline explicit fixed(T val) noexcept
       : m_value(static_cast<BaseType>((val >= 0.0) ? (val * FRACTION_MULT + T{0.5}) : (val * FRACTION_MULT - T{0.5})))
     {
@@ -67,14 +67,14 @@ public:
     }
 
     // Explicit conversion to a floating-point type
-    template <typename T, typename std::enable_if<std::is_floating_point<T>::value>::type * = nullptr>
+    template <typename T, std::enable_if_t<std::is_floating_point_v<T>> * = nullptr>
     constexpr inline explicit operator T() const noexcept
     {
         return static_cast<T>(m_value) / FRACTION_MULT;
     }
 
     // Explicit conversion to an integral type
-    template <typename T, typename std::enable_if<std::is_integral<T>::value>::type * = nullptr>
+    template <typename T, std::enable_if_t<std::is_integral_v<T>> * = nullptr>
     constexpr inline explicit operator T() const noexcept
     {
         return static_cast<T>(m_value / FRACTION_MULT);
@@ -87,8 +87,7 @@ public:
     //! Constructs a fixed-point number from another fixed-point number.
     //! \tparam NumFractionBits the number of bits used by the fraction in \a value.
     //! \param value the integer fixed-point number
-    template <unsigned int NumFractionBits, typename T,
-              typename std::enable_if<(NumFractionBits > FractionBits)>::type * = nullptr>
+    template <unsigned int NumFractionBits, typename T, std::enable_if_t<(NumFractionBits > FractionBits)> * = nullptr>
     static constexpr inline auto from_fixed_point(T value) noexcept -> fixed
     {
         // To correctly round the last bit in the result, we need one more bit of information.
@@ -98,8 +97,7 @@ public:
                      raw_construct_tag{});
     }
 
-    template <unsigned int NumFractionBits, typename T,
-              typename std::enable_if<(NumFractionBits <= FractionBits)>::type * = nullptr>
+    template <unsigned int NumFractionBits, typename T, std::enable_if_t<(NumFractionBits <= FractionBits)> * = nullptr>
     static constexpr inline auto from_fixed_point(T value) noexcept -> fixed
     {
         return fixed(static_cast<BaseType>(value * (T(1) << (FractionBits - NumFractionBits))), raw_construct_tag{});
@@ -132,7 +130,7 @@ public:
         return *this;
     }
 
-    template <typename I, typename std::enable_if<std::is_integral<I>::value>::type * = nullptr>
+    template <typename I, std::enable_if_t<std::is_integral_v<I>> * = nullptr>
     inline auto operator+=(I y) noexcept -> fixed &
     {
         m_value += y * FRACTION_MULT;
@@ -145,7 +143,7 @@ public:
         return *this;
     }
 
-    template <typename I, typename std::enable_if<std::is_integral<I>::value>::type * = nullptr>
+    template <typename I, std::enable_if_t<std::is_integral_v<I>> * = nullptr>
     inline auto operator-=(I y) noexcept -> fixed &
     {
         m_value -= y * FRACTION_MULT;
@@ -163,7 +161,7 @@ public:
         return *this;
     }
 
-    template <typename I, typename std::enable_if<std::is_integral<I>::value>::type * = nullptr>
+    template <typename I, std::enable_if_t<std::is_integral_v<I>> * = nullptr>
     inline auto operator*=(I y) noexcept -> fixed &
     {
         m_value *= y;
@@ -181,7 +179,7 @@ public:
         return *this;
     }
 
-    template <typename I, typename std::enable_if<std::is_integral<I>::value>::type * = nullptr>
+    template <typename I, std::enable_if_t<std::is_integral_v<I>> * = nullptr>
     inline auto operator/=(I y) noexcept -> fixed &
     {
         m_value /= y;
@@ -192,14 +190,14 @@ public:
     // Shift operators
     //
 
-    template <typename I, typename std::enable_if<std::is_integral<I>::value>::type * = nullptr>
+    template <typename I, std::enable_if_t<std::is_integral_v<I>> * = nullptr>
     inline auto operator>>=(I y) noexcept -> fixed &
     {
         m_value >>= y;
         return *this;
     }
 
-    template <typename I, typename std::enable_if<std::is_integral<I>::value>::type * = nullptr>
+    template <typename I, std::enable_if_t<std::is_integral_v<I>> * = nullptr>
     inline auto operator<<=(I y) noexcept -> fixed &
     {
         m_value <<= y;
@@ -228,15 +226,13 @@ constexpr inline auto operator+(const fixed<B, I, F> &x, const fixed<B, I, F> &y
     return fixed<B, I, F>(x) += y;
 }
 
-template <typename B, typename I, unsigned int F, typename T,
-          typename std::enable_if<std::is_integral<T>::value>::type * = nullptr>
+template <typename B, typename I, unsigned int F, typename T, std::enable_if_t<std::is_integral_v<T>> * = nullptr>
 constexpr inline auto operator+(const fixed<B, I, F> &x, T y) noexcept -> fixed<B, I, F>
 {
     return fixed<B, I, F>(x) += y;
 }
 
-template <typename B, typename I, unsigned int F, typename T,
-          typename std::enable_if<std::is_integral<T>::value>::type * = nullptr>
+template <typename B, typename I, unsigned int F, typename T, std::enable_if_t<std::is_integral_v<T>> * = nullptr>
 constexpr inline auto operator+(T x, const fixed<B, I, F> &y) noexcept -> fixed<B, I, F>
 {
     return fixed<B, I, F>(y) += x;
@@ -252,15 +248,13 @@ constexpr inline auto operator-(const fixed<B, I, F> &x, const fixed<B, I, F> &y
     return fixed<B, I, F>(x) -= y;
 }
 
-template <typename B, typename I, unsigned int F, typename T,
-          typename std::enable_if<std::is_integral<T>::value>::type * = nullptr>
+template <typename B, typename I, unsigned int F, typename T, std::enable_if_t<std::is_integral_v<T>> * = nullptr>
 constexpr inline auto operator-(const fixed<B, I, F> &x, T y) noexcept -> fixed<B, I, F>
 {
     return fixed<B, I, F>(x) -= y;
 }
 
-template <typename B, typename I, unsigned int F, typename T,
-          typename std::enable_if<std::is_integral<T>::value>::type * = nullptr>
+template <typename B, typename I, unsigned int F, typename T, std::enable_if_t<std::is_integral_v<T>> * = nullptr>
 constexpr inline auto operator-(T x, const fixed<B, I, F> &y) noexcept -> fixed<B, I, F>
 {
     return fixed<B, I, F>(x) -= y;
@@ -276,15 +270,13 @@ constexpr inline auto operator*(const fixed<B, I, F> &x, const fixed<B, I, F> &y
     return fixed<B, I, F>(x) *= y;
 }
 
-template <typename B, typename I, unsigned int F, typename T,
-          typename std::enable_if<std::is_integral<T>::value>::type * = nullptr>
+template <typename B, typename I, unsigned int F, typename T, std::enable_if_t<std::is_integral_v<T>> * = nullptr>
 constexpr inline auto operator*(const fixed<B, I, F> &x, T y) noexcept -> fixed<B, I, F>
 {
     return fixed<B, I, F>(x) *= y;
 }
 
-template <typename B, typename I, unsigned int F, typename T,
-          typename std::enable_if<std::is_integral<T>::value>::type * = nullptr>
+template <typename B, typename I, unsigned int F, typename T, std::enable_if_t<std::is_integral_v<T>> * = nullptr>
 constexpr inline auto operator*(T x, const fixed<B, I, F> &y) noexcept -> fixed<B, I, F>
 {
     return fixed<B, I, F>(y) *= x;
@@ -300,15 +292,13 @@ constexpr inline auto operator/(const fixed<B, I, F> &x, const fixed<B, I, F> &y
     return fixed<B, I, F>(x) /= y;
 }
 
-template <typename B, typename I, unsigned int F, typename T,
-          typename std::enable_if<std::is_integral<T>::value>::type * = nullptr>
+template <typename B, typename I, unsigned int F, typename T, std::enable_if_t<std::is_integral_v<T>> * = nullptr>
 constexpr inline auto operator/(const fixed<B, I, F> &x, T y) noexcept -> fixed<B, I, F>
 {
     return fixed<B, I, F>(x) /= y;
 }
 
-template <typename B, typename I, unsigned int F, typename T,
-          typename std::enable_if<std::is_integral<T>::value>::type * = nullptr>
+template <typename B, typename I, unsigned int F, typename T, std::enable_if_t<std::is_integral_v<T>> * = nullptr>
 constexpr inline auto operator/(T x, const fixed<B, I, F> &y) noexcept -> fixed<B, I, F>
 {
     return fixed<B, I, F>(x) /= y;
@@ -318,15 +308,13 @@ constexpr inline auto operator/(T x, const fixed<B, I, F> &y) noexcept -> fixed<
 // Shift operators
 //
 
-template <typename B, typename I, unsigned int F, typename T,
-          typename std::enable_if<std::is_integral<T>::value>::type * = nullptr>
+template <typename B, typename I, unsigned int F, typename T, std::enable_if_t<std::is_integral_v<T>> * = nullptr>
 constexpr inline auto operator>>(const fixed<B, I, F> &x, T y) noexcept -> fixed<B, I, F>
 {
     return fixed<B, I, F>(x) >>= y;
 }
 
-template <typename B, typename I, unsigned int F, typename T,
-          typename std::enable_if<std::is_integral<T>::value>::type * = nullptr>
+template <typename B, typename I, unsigned int F, typename T, std::enable_if_t<std::is_integral_v<T>> * = nullptr>
 constexpr inline auto operator<<(const fixed<B, I, F> &x, T y) noexcept -> fixed<B, I, F>
 {
     return fixed<B, I, F>(x) <<= y;

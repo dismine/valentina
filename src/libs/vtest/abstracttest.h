@@ -114,13 +114,13 @@ protected:
     static void PrepareDocument(const QString &json, QByteArray &data);
     static void TestRoot(const QJsonObject &root, const QString &attribute, const QString &file);
 
-    template <typename T, typename std::enable_if<std::is_floating_point<T>::value>::type * = nullptr>
+    template <typename T, std::enable_if_t<std::is_floating_point_v<T>> * = nullptr>
     static void ReadDoubleValue(const QJsonObject &itemObject, const QString &attribute, T &value,
                                 const QString &defaultValue = QString());
-    template <typename T, typename std::enable_if<std::is_enum<T>::value>::type * = nullptr>
+    template <typename T, std::enable_if_t<std::is_enum_v<T>> * = nullptr>
     static void ReadDoubleValue(const QJsonObject &itemObject, const QString &attribute, T &value,
                                 const QString &defaultValue = QString());
-    template <typename T, typename std::enable_if<std::is_integral<T>::value>::type * = nullptr>
+    template <typename T, std::enable_if_t<std::is_integral_v<T>> * = nullptr>
     static void ReadDoubleValue(const QJsonObject &itemObject, const QString &attribute, T &value,
                                 const QString &defaultValue = QString());
     static void ReadStringValue(const QJsonObject &itemObject, const QString &attribute, QString &value,

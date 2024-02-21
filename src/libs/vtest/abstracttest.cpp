@@ -698,7 +698,7 @@ void AbstractTest::ReadPieceNodeValue(const QJsonObject &itemObject, VPieceNode 
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-template <typename T, typename std::enable_if<std::is_floating_point<T>::value>::type *>
+template <typename T, std::enable_if_t<std::is_floating_point_v<T>> *>
 void AbstractTest::ReadDoubleValue(const QJsonObject &itemObject, const QString &attribute, T &value,
                                    const QString &defaultValue)
 {
@@ -737,7 +737,7 @@ void AbstractTest::ReadDoubleValue(const QJsonObject &itemObject, const QString 
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-template <typename T, typename std::enable_if<std::is_enum<T>::value>::type *>
+template <typename T, std::enable_if_t<std::is_enum_v<T>> *>
 void AbstractTest::ReadDoubleValue(const QJsonObject &itemObject, const QString &attribute, T &value,
                                    const QString &defaultValue)
 {
@@ -776,7 +776,7 @@ void AbstractTest::ReadDoubleValue(const QJsonObject &itemObject, const QString 
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-template <typename T, typename std::enable_if<std::is_integral<T>::value>::type *>
+template <typename T, std::enable_if_t<std::is_integral_v<T>> *>
 void AbstractTest::ReadDoubleValue(const QJsonObject &itemObject, const QString &attribute, T &value,
                                    const QString &defaultValue)
 {

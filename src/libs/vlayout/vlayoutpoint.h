@@ -71,7 +71,7 @@ template <class T> inline auto CastTo(const QVector<T> &points, QVector<T> &cast
 
 //---------------------------------------------------------------------------------------------------------------------
 // upcast
-template <class Derived, class Base, typename std::enable_if<std::is_base_of<Base, Derived>::value>::type * = nullptr>
+template <class Derived, class Base, std::enable_if_t<std::is_base_of_v<Base, Derived>> * = nullptr>
 inline auto CastTo(const QVector<Base> &points, QVector<Derived> &casted) -> void
 {
     casted.clear();
@@ -84,7 +84,7 @@ inline auto CastTo(const QVector<Base> &points, QVector<Derived> &casted) -> voi
 
 //---------------------------------------------------------------------------------------------------------------------
 // downcast
-template <class Base, class Derived, typename std::enable_if<std::is_base_of<Base, Derived>::value>::type * = nullptr>
+template <class Base, class Derived, std::enable_if_t<std::is_base_of_v<Base, Derived>> * = nullptr>
 inline auto CastTo(const QVector<Derived> &points, QVector<Base> &casted) -> void
 {
     casted.clear();
