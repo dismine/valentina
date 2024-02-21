@@ -360,7 +360,7 @@ MainWindow::MainWindow(QWidget *parent)
     connect(doc, &VPattern::CheckLayout, this,
             [this]()
             {
-                if (pattern->DataPieces()->count() == 0)
+                if (pattern->DataPieces()->isEmpty())
                 {
                     if (not ui->actionDraw->isChecked())
                     {
@@ -3917,7 +3917,7 @@ void MainWindow::ActionDetails(bool checked)
 
         if (not VAbstractValApplication::VApp()->getOpeningPattern())
         {
-            if (pattern->DataPieces()->count() == 0)
+            if (pattern->DataPieces()->isEmpty())
             {
                 QMessageBox::information(this, tr("Detail mode"),
                                          tr("You can't use Detail mode yet. "
@@ -4001,7 +4001,7 @@ void MainWindow::ActionLayout(bool checked)
     if (not VAbstractValApplication::VApp()->getOpeningPattern())
     {
         const QHash<quint32, VPiece> *allDetails = pattern->DataPieces();
-        if (allDetails->count() == 0)
+        if (allDetails->isEmpty())
         {
             QMessageBox::information(this, tr("Layout mode"),
                                      tr("You can't use Layout mode yet. "
@@ -4014,7 +4014,7 @@ void MainWindow::ActionLayout(bool checked)
         WarningNotUniquePieceName(allDetails);
         details = SortDetailsForLayout(allDetails);
 
-        if (details.count() == 0)
+        if (details.isEmpty())
         {
             QMessageBox::information(this, tr("Layout mode"),
                                      tr("You can't use Layout mode yet. Please, "
@@ -4228,7 +4228,7 @@ void MainWindow::on_actionCreateManualLayout_triggered()
     {
         QVector<DetailForLayout> const detailsInLayout = SortDetailsForLayout(pattern->DataPieces());
 
-        if (detailsInLayout.count() == 0)
+        if (detailsInLayout.isEmpty())
         {
             QMessageBox::information(this, tr("Layout mode"),
                                      tr("You don't have enough details to export. Please, "
@@ -4308,7 +4308,7 @@ void MainWindow::on_actionUpdateManualLayout_triggered()
     {
         QVector<DetailForLayout> const detailsInLayout = SortDetailsForLayout(pattern->DataPieces());
 
-        if (detailsInLayout.count() == 0)
+        if (detailsInLayout.isEmpty())
         {
             QMessageBox::information(this, tr("Layout mode"),
                                      tr("You don't have enough details to export. Please, "
@@ -5039,7 +5039,7 @@ void MainWindow::SaveBackgroundImage(const QUuid &id)
     QString const filter = filters.join(QStringLiteral(";;"));
 
     QString const filename = QFileDialog::getSaveFileName(this, tr("Save Image"), path, filter, nullptr,
-                                                    VAbstractApplication::VApp()->NativeFileDialog());
+                                                          VAbstractApplication::VApp()->NativeFileDialog());
     if (not filename.isEmpty())
     {
         QFile file(filename);
@@ -5098,9 +5098,9 @@ void MainWindow::ActionHistory_triggered(bool checked)
 void MainWindow::ActionExportRecipe_triggered()
 {
     QString const filters(tr("Recipe files") + QStringLiteral("(*.vpr)"));
-    QString const fileName = QFileDialog::getSaveFileName(this, tr("Export recipe"),
-                                                    QDir::homePath() + '/' + tr("recipe") + QStringLiteral(".vpr"),
-                                                    filters, nullptr, VAbstractApplication::VApp()->NativeFileDialog());
+    QString const fileName = QFileDialog::getSaveFileName(
+        this, tr("Export recipe"), QDir::homePath() + '/' + tr("recipe") + QStringLiteral(".vpr"), filters, nullptr,
+        VAbstractApplication::VApp()->NativeFileDialog());
     if (fileName.isEmpty())
     {
         return;
@@ -6837,7 +6837,7 @@ void MainWindow::ExportDetailsAs(bool checked)
 
     QVector<DetailForLayout> const detailsInLayout = SortDetailsForLayout(pattern->DataPieces());
 
-    if (detailsInLayout.count() == 0)
+    if (detailsInLayout.isEmpty())
     {
         QMessageBox::information(this, tr("Layout mode"),
                                  tr("You don't have enough details to export. Please, "
@@ -6979,7 +6979,7 @@ auto MainWindow::CheckPathToMeasurements(const QString &patternPath, const QStri
                             "want to update the file location?")
                              .arg(path);
     QMessageBox::StandardButton const res = QMessageBox::question(this, tr("Loading measurements file"), text,
-                                                            QMessageBox::Yes | QMessageBox::No, QMessageBox::Yes);
+                                                                  QMessageBox::Yes | QMessageBox::No, QMessageBox::Yes);
     if (res == QMessageBox::No)
     {
         return {};
@@ -7192,7 +7192,7 @@ auto MainWindow::DoExport(const VCommandLinePtr &expParams) -> bool
     if (not VAbstractValApplication::VApp()->getOpeningPattern())
     {
         const QHash<quint32, VPiece> *allDetails = pattern->DataPieces();
-        if (allDetails->count() == 0)
+        if (allDetails->isEmpty())
         {
             qCCritical(vMainWindow, "%s", qUtf8Printable(tr("You can't export empty scene.")));
             QCoreApplication::exit(V_EX_DATAERR);
@@ -7201,7 +7201,7 @@ auto MainWindow::DoExport(const VCommandLinePtr &expParams) -> bool
 
         details = SortDetailsForLayout(allDetails, expParams->OptExportSuchDetails());
 
-        if (details.count() == 0)
+        if (details.isEmpty())
         {
             qCCritical(vMainWindow, "%s",
                        qUtf8Printable(tr("You can't export empty scene. Please, "

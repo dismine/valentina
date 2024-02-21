@@ -185,7 +185,7 @@ void VWidgetDetails::FillTable(const QHash<quint32, VPiece> *details)
 void VWidgetDetails::ToggleSectionDetails(bool select)
 {
     const QHash<quint32, VPiece> *allDetails = m_data->DataPieces();
-    if (allDetails->count() == 0)
+    if (allDetails->isEmpty())
     {
         return;
     }
@@ -335,7 +335,7 @@ void VWidgetDetails::ShowContextMenu(const QPoint &pos)
     }
 
     const QHash<quint32, VPiece> *allDetails = m_data->DataPieces();
-    if (allDetails->count() == 0)
+    if (allDetails->isEmpty())
     {
         return;
     }

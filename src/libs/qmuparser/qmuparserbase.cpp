@@ -1442,9 +1442,9 @@ void QmuParserBase::CreateRPN() const
 
                     stOpt.pop(); // Take opening bracket from stack
 
-                    if (iArgCount > 1 && (stOpt.size() == 0 ||
-                                          (stOpt.top().GetCode() != cmFUNC && stOpt.top().GetCode() != cmFUNC_BULK &&
-                                           stOpt.top().GetCode() != cmFUNC_STR)))
+                    if (iArgCount > 1 &&
+                        (stOpt.isEmpty() || (stOpt.top().GetCode() != cmFUNC && stOpt.top().GetCode() != cmFUNC_BULK &&
+                                             stOpt.top().GetCode() != cmFUNC_STR)))
                     {
                         Error(ecUNEXPECTED_ARG, m_pTokenReader->GetPos());
                     }
@@ -1587,7 +1587,7 @@ void QmuParserBase::CreateRPN() const
         Error(ecINTERNAL_ERROR, 9);
     }
 
-    if (stVal.size() == 0)
+    if (stVal.isEmpty())
     {
         Error(ecEMPTY_EXPRESSION);
     }

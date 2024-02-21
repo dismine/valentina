@@ -494,7 +494,7 @@ void VPApplication::ProcessArguments(const VPCommandLinePtr &cmd)
 {
     const QStringList rawLayouts = cmd->OptionRawLayouts();
     const QStringList args = cmd->OptionFileNames();
-    bool const success = args.count() > 0 ? StartWithFiles(cmd, rawLayouts) : SingleStart(cmd, rawLayouts);
+    bool const success = !args.isEmpty() ? StartWithFiles(cmd, rawLayouts) : SingleStart(cmd, rawLayouts);
 
     if (not success)
     {

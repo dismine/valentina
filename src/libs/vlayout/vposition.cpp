@@ -118,7 +118,7 @@ QPainterPath DumpDetails(const QVector<VLayoutPiece> &details)
 {
     QPainterPath path;
     path.setFillRule(Qt::WindingFill);
-    if (details.count() > 0)
+    if (!details.isEmpty())
     {
         for (auto &detail : details)
         {

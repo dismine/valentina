@@ -2191,7 +2191,7 @@ auto dxfRW::writeObjects() -> bool
     writer->writeInt16(281, 1);
     writer->writeString(3, "ACAD_GROUP");
     writer->writeString(350, "D");
-    if (imageDef.size() != 0)
+    if (!imageDef.empty())
     {
         writer->writeString(3, "ACAD_IMAGE_DICT");
         imgDictH = toHexStr(++entCount);
@@ -2216,7 +2216,7 @@ auto dxfRW::writeObjects() -> bool
             writer->writeString(330, (*it).second);
         }
     }
-    if (imageDef.size() != 0)
+    if (!imageDef.empty())
     {
         writer->writeString(0, "DICTIONARY");
         writer->writeString(5, imgDictH);

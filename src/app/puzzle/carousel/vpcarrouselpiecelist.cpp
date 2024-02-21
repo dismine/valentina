@@ -140,9 +140,8 @@ void VPCarrouselPieceList::mouseMoveEvent(QMouseEvent *event)
 {
     if (((event->buttons() & Qt::LeftButton) != 0U) &&
         ((event->pos() - m_dragStart).manhattanLength() >= QApplication::startDragDistance()) &&
-        (selectedItems().count() > 0) &&
-        (not m_pieceList.isEmpty() &&
-         m_pieceList.constFirst()->Sheet() == nullptr)) // only if it's from unplaced pieces
+        (!selectedItems().isEmpty()) &&
+        (!m_pieceList.isEmpty() && m_pieceList.constFirst()->Sheet() == nullptr)) // only if it's from unplaced pieces
     {
         startDrag(Qt::MoveAction);
     }

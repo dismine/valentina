@@ -627,7 +627,7 @@ void MApplication::ParseCommandLine(const SocketConnection &connection, const QS
     }
 
     const QStringList args = parser.positionalArguments();
-    bool const success = args.count() > 0 ? StartWithFiles(parser) : SingleStart(parser);
+    bool const success = !args.isEmpty() ? StartWithFiles(parser) : SingleStart(parser);
 
     if (not success)
     {
