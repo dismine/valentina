@@ -533,7 +533,7 @@ auto dxfRW::writeVport(DRW_Vport *ent) -> bool
             writer->writeString(348, "10020");
             writer->writeInt16(60, ent->gridBehavior); // v2007 undocummented see DRW_Vport class
             writer->writeInt16(61, 5);
-            writer->writeBool(292, 1);
+            writer->writeBool(292, true);
             writer->writeInt16(282, 1);
             writer->writeDouble(141, 0.0);
             writer->writeDouble(142, 0.0);

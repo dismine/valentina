@@ -1200,7 +1200,7 @@ auto QmuParserTester::ThrowTest(const QString &a_str, int a_iErrc, bool a_bFail)
     }
 
     // if a_bFail==false no exception is expected
-    bool const bRet((a_bFail == false) ? 0 : 1);
+    bool const bRet((a_bFail == false) ? false : true);
     if (bRet == 1)
     {
         qWarning() << "\n  "

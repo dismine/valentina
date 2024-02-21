@@ -337,7 +337,7 @@ __extension__
     m_eOprtAsct(oaNONE),
     m_iCode(cmUNKNOWN),
     m_iType(tpVOID),
-    m_bAllowOpti(0)
+    m_bAllowOpti(false)
 {
 }
 
