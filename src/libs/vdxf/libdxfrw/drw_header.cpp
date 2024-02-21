@@ -1831,7 +1831,7 @@ void DRW_Header::write(const std::unique_ptr<dxfWriter> &writer, DRW::Version ve
 #endif
 }
 
-void DRW_Header::addDouble(std::string key, double value, int code)
+void DRW_Header::addDouble(const std::string &key, double value, int code)
 {
     curr = new DRW_Variant();
     curr->addDouble(value);
@@ -1839,7 +1839,7 @@ void DRW_Header::addDouble(std::string key, double value, int code)
     vars[key] = curr;
 }
 
-void DRW_Header::addInt(std::string key, int value, int code)
+void DRW_Header::addInt(const std::string &key, int value, int code)
 {
     curr = new DRW_Variant();
     curr->addInt(value);
@@ -1847,7 +1847,7 @@ void DRW_Header::addInt(std::string key, int value, int code)
     vars[key] = curr;
 }
 
-void DRW_Header::addStr(std::string key, const std::string &value, int code)
+void DRW_Header::addStr(const std::string &key, const std::string &value, int code)
 {
     curr = new DRW_Variant();
     curr->addString(value);
@@ -1855,7 +1855,7 @@ void DRW_Header::addStr(std::string key, const std::string &value, int code)
     vars[key] = curr;
 }
 
-void DRW_Header::addCoord(std::string key, const DRW_Coord &value, int code)
+void DRW_Header::addCoord(const std::string &key, const DRW_Coord &value, int code)
 {
     curr = new DRW_Variant();
     curr->addCoord(value);

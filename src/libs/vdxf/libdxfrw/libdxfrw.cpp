@@ -1685,7 +1685,7 @@ auto dxfRW::writeImage(DRW_Image *ent, const std::string &name) -> DRW_ImageDef 
     return nullptr; // not exist in acad 12
 }
 
-auto dxfRW::writeBlockRecord(std::string name) -> bool
+auto dxfRW::writeBlockRecord(const std::string &name) -> bool
 {
     if (version > DRW::AC1009)
     {

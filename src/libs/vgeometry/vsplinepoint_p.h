@@ -90,7 +90,7 @@ class VSplinePointData final : public QSharedData
 {
 public:
     VSplinePointData() = default;
-    VSplinePointData(VPointF pSpline, qreal angle1, const QString &angle1F, qreal angle2, const QString &angle2F,
+    VSplinePointData(const VPointF &pSpline, qreal angle1, const QString &angle1F, qreal angle2, const QString &angle2F,
                      qreal length1, const QString &length1F, qreal length2, const QString &length2F);
     VSplinePointData(const VSplinePointData &point);
     ~VSplinePointData() = default;
@@ -119,7 +119,7 @@ private:
 };
 
 //---------------------------------------------------------------------------------------------------------------------
-inline VSplinePointData::VSplinePointData(VPointF pSpline, qreal angle1, const QString &angle1F, qreal angle2,
+inline VSplinePointData::VSplinePointData(const VPointF &pSpline, qreal angle1, const QString &angle1F, qreal angle2,
                                           const QString &angle2F, qreal length1, const QString &length1F, qreal length2,
                                           const QString &length2F)
   : pSpline(pSpline),

@@ -25,7 +25,7 @@ public:
     }
 
     virtual ~dxfWriter() = default;
-    virtual auto writeString(int code, std::string text) -> bool = 0;
+    virtual auto writeString(int code, const std::string &text) -> bool = 0;
     auto writeUtf8String(int code, const std::string &text) -> bool;
     auto writeUtf8Caps(int code, const std::string &text) -> bool;
     auto fromUtf8String(const std::string &t) -> std::string { return encoder.fromUtf8(t); }
@@ -52,7 +52,7 @@ public:
     using dxfWriter::dxfWriter;
 
     virtual ~dxfWriterBinary() = default;
-    virtual auto writeString(int code, std::string text) -> bool override;
+    virtual auto writeString(int code, const std::string &text) -> bool override;
     virtual auto writeInt16(int code, int data) -> bool override;
     virtual auto writeInt32(int code, int data) -> bool override;
     virtual auto writeInt64(int code, unsigned long long int data) -> bool override;
@@ -65,7 +65,7 @@ class dxfWriterAscii final : public dxfWriter
 public:
     explicit dxfWriterAscii(std::ofstream *stream);
     virtual ~dxfWriterAscii() = default;
-    virtual auto writeString(int code, std::string text) -> bool override;
+    virtual auto writeString(int code, const std::string &text) -> bool override;
     virtual auto writeInt16(int code, int data) -> bool override;
     virtual auto writeInt32(int code, int data) -> bool override;
     virtual auto writeInt64(int code, unsigned long long int data) -> bool override;

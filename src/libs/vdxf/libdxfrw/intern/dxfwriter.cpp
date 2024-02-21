@@ -105,7 +105,7 @@ auto dxfWriter::writeUtf8Caps(int code, const std::string &text) -> bool
     return writeString(code, t);
 }
 
-auto dxfWriterBinary::writeString(int code, std::string text) -> bool
+auto dxfWriterBinary::writeString(int code, const std::string &text) -> bool
 {
     char bufcode[2];
     bufcode[0] = static_cast<char>(code & 0xFF);
@@ -227,7 +227,7 @@ dxfWriterAscii::dxfWriterAscii(std::ofstream *stream):dxfWriter(stream){
     filestr->precision(16);
 }
 
-auto dxfWriterAscii::writeString(int code, std::string text) -> bool
+auto dxfWriterAscii::writeString(int code, const std::string &text) -> bool
 {
     //    *filestr << code << std::endl << text << std::endl ;
     filestr->width(3);

@@ -178,7 +178,7 @@ void TST_VAbstractCurve::CurveIntersectLine_data()
     QTest::addColumn<QVector<QPointF>>("intersections");
     QTest::addColumn<QLineF>("line");
 
-    auto ASSERT_TEST_CASE = [](const char *title, const QString &input, const QString &output, QLineF line)
+    auto ASSERT_TEST_CASE = [](const char *title, const QString &input, const QString &output, const QLineF &line)
     {
         QVector<QPointF> const points = AbstractTest::VectorFromJson<QPointF>(input);
         QVector<QPointF> const intersections = AbstractTest::VectorFromJson<QPointF>(output);

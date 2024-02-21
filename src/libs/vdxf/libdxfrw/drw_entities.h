@@ -664,7 +664,7 @@ public:
             delete item;
     }
     void applyExtrusion() override;
-    void addVertex(DRW_Vertex2D v)
+    void addVertex(const DRW_Vertex2D &v)
     {
         auto *vert = new DRW_Vertex2D();
         vert->x = v.x;
@@ -917,7 +917,7 @@ public:
         for (DRW_Vertex *item : vertlist)
             delete item;
     }
-    void addVertex(DRW_Vertex v)
+    void addVertex(const DRW_Vertex& v)
     {
         auto *vert = new DRW_Vertex();
         vert->basePoint.x = v.basePoint.x;

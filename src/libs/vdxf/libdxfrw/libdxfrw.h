@@ -69,7 +69,7 @@ public:
     auto writeLWPolyline(DRW_LWPolyline *ent) -> bool;
     auto writePolyline(DRW_Polyline *ent) -> bool;
     auto writeSpline(DRW_Spline *ent) -> bool;
-    auto writeBlockRecord(std::string name) -> bool;
+    auto writeBlockRecord(const std::string &name) -> bool;
     auto writeBlock(DRW_Block *bk) -> bool;
     auto writeInsert(DRW_Insert *ent) -> bool;
     auto writeMText(DRW_MText *ent) -> bool;

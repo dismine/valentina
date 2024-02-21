@@ -107,10 +107,10 @@ public:
        return *this;
     }
 
-    void addDouble(std::string key, double value, int code);
-    void addInt(std::string key, int value, int code);
-    void addStr(std::string key, const std::string &value, int code);
-    void addCoord(std::string key, const DRW_Coord &value, int code);
+    void addDouble(const std::string &key, double value, int code);
+    void addInt(const std::string &key, int value, int code);
+    void addStr(const std::string &key, const std::string &value, int code);
+    void addCoord(const std::string &key, const DRW_Coord &value, int code);
     auto getComments() const -> std::string { return comments; }
     void write(const std::unique_ptr<dxfWriter>& writer, DRW::Version ver);
     void addComment(const std::string &c);
