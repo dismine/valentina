@@ -804,7 +804,7 @@ for:
         python3 ./scripts/treestate.py scan /usr/local usrlocal.json
 
         brew update
-        brew install coreutils ccache git pkg-config qbs qt6 cmake ninja xerces-c
+        brew install coreutils ccache git pkg-config qbs qt6 cmake ninja poppler
 
         # The build environment is now ready for use. We can complete
         # the rest of the process of creating the Homebrew archive
@@ -851,8 +851,8 @@ for:
     - qbs setup-qt ${QTDIR}/bin/qmake qt5
     - qbs config defaultProfile qt5
     - qbs config profiles.qt5.baseProfile clang
-    - qbs build -f valentina.qbs -d ${APPVEYOR_BUILD_FOLDER}/build --jobs $(nproc) config:release modules.buildconfig.enableUnitTests:false modules.buildconfig.enableMultiBundle:${MULTI_BUNDLE} qbs.installRoot:${APPVEYOR_BUILD_FOLDER}/build/install-root profile:qt5 project.minimumMacosVersion:${MACOS_DEPLOYMENT_TARGET} modules.buildconfig.enableCcache:true moduleProviders.qbspkgconfig.extraPaths:$(brew --prefix xerces-c)/lib/pkgconfig "modules.buildconfig.signingIdentity:$MACOS_CERTIFICATE_NAME" modules.macdeployqt.libpath:${QTDIR}/lib modules.macdeployqt.pluginspath:${QTDIR}/plugins modules.macdeployqt.macdeployqtProgramBinPath:${HOME}/macdeployqt-install-dir
-    - qbs build -f valentina.qbs -d ${APPVEYOR_BUILD_FOLDER}/build -p 'Valentina DMG' --force-probe-execution --jobs $(nproc) config:release modules.buildconfig.enableUnitTests:false modules.buildconfig.enableMultiBundle:${MULTI_BUNDLE} qbs.installRoot:${APPVEYOR_BUILD_FOLDER}/build/install-root profile:qt5 project.minimumMacosVersion:${MACOS_DEPLOYMENT_TARGET} modules.buildconfig.enableCcache:true moduleProviders.qbspkgconfig.extraPaths:$(brew --prefix xerces-c)/lib/pkgconfig "modules.buildconfig.signingIdentity:$MACOS_CERTIFICATE_NAME" modules.macdeployqt.libpath:${QTDIR}/lib modules.macdeployqt.pluginspath:${QTDIR}/plugins modules.macdeployqt.macdeployqtProgramBinPath:${HOME}/macdeployqt-install-dir
+    - qbs build -f valentina.qbs -d ${APPVEYOR_BUILD_FOLDER}/build --jobs $(nproc) config:release modules.buildconfig.enableUnitTests:false modules.buildconfig.enableMultiBundle:${MULTI_BUNDLE} qbs.installRoot:${APPVEYOR_BUILD_FOLDER}/build/install-root profile:qt5 project.minimumMacosVersion:${MACOS_DEPLOYMENT_TARGET} modules.buildconfig.enableCcache:true "modules.buildconfig.signingIdentity:$MACOS_CERTIFICATE_NAME" modules.macdeployqt.libpath:${QTDIR}/lib modules.macdeployqt.pluginspath:${QTDIR}/plugins modules.macdeployqt.macdeployqtProgramBinPath:${HOME}/macdeployqt-install-dir
+    - qbs build -f valentina.qbs -d ${APPVEYOR_BUILD_FOLDER}/build -p 'Valentina DMG' --force-probe-execution --jobs $(nproc) config:release modules.buildconfig.enableUnitTests:false modules.buildconfig.enableMultiBundle:${MULTI_BUNDLE} qbs.installRoot:${APPVEYOR_BUILD_FOLDER}/build/install-root profile:qt5 project.minimumMacosVersion:${MACOS_DEPLOYMENT_TARGET} modules.buildconfig.enableCcache:true "modules.buildconfig.signingIdentity:$MACOS_CERTIFICATE_NAME" modules.macdeployqt.libpath:${QTDIR}/lib modules.macdeployqt.pluginspath:${QTDIR}/plugins modules.macdeployqt.macdeployqtProgramBinPath:${HOME}/macdeployqt-install-dir
     # Store the notarization credentials so that we can prevent a UI password dialog
     # from blocking the CI
     - echo "Create keychain profile"
