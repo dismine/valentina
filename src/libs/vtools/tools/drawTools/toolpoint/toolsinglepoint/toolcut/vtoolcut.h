@@ -46,10 +46,7 @@ class VFormula;
 
 struct VToolCutInitData : VToolSinglePointInitData
 {
-    VToolCutInitData()
-      : VToolSinglePointInitData()
-    {
-    }
+    using VToolSinglePointInitData::VToolSinglePointInitData;
 
     quint32 baseCurveId{NULL_ID}; // NOLINT(misc-non-private-member-variables-in-classes)
     QString formula{};            // NOLINT(misc-non-private-member-variables-in-classes)

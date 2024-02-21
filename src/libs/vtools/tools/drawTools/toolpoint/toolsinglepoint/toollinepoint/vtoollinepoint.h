@@ -43,10 +43,7 @@ template <class T> class QSharedPointer;
 
 struct VToolLinePointInitData : VToolSinglePointInitData
 {
-    VToolLinePointInitData()
-      : VToolSinglePointInitData()
-    {
-    }
+    using VToolSinglePointInitData::VToolSinglePointInitData;
 
     QString typeLine{TypeLineLine};
     QString lineColor{ColorBlack};

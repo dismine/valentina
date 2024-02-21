@@ -52,10 +52,7 @@ struct DestinationItem
 
 struct VAbstractOperationInitData : VDrawToolInitData
 {
-    VAbstractOperationInitData()
-      : VDrawToolInitData()
-    {
-    }
+    using VDrawToolInitData::VDrawToolInitData;
 
     QString suffix{};
     QVector<SourceItem> source{};

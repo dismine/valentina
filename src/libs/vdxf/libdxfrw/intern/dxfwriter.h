@@ -15,12 +15,14 @@
 
 #include "drw_textcodec.h"
 
-class dxfWriter {
+class dxfWriter
+{
 public:
     explicit dxfWriter(std::ofstream *stream)
-        : filestr(stream),
-          encoder()
-    {}
+      : filestr(stream),
+        encoder()
+    {
+    }
 
     virtual ~dxfWriter() = default;
     virtual auto writeString(int code, std::string text) -> bool = 0;
@@ -32,22 +34,23 @@ public:
     virtual auto writeInt64(int code, unsigned long long int data) -> bool = 0;
     virtual auto writeDouble(int code, double data) -> bool = 0;
     virtual auto writeBool(int code, bool data) -> bool = 0;
-    void setVersion(const std::string &v, bool dxfFormat){encoder.setVersion(v, dxfFormat);}
-    void setCodePage(const std::string &c){encoder.setCodePage(c, true);}
+    void setVersion(const std::string &v, bool dxfFormat) { encoder.setVersion(v, dxfFormat); }
+    void setCodePage(const std::string &c) { encoder.setCodePage(c, true); }
     auto getCodePage() const -> std::string { return encoder.getCodePage(); }
 
 protected:
     std::ofstream *filestr;
+
 private:
     Q_DISABLE_COPY_MOVE(dxfWriter) // NOLINT
     DRW_TextCodec encoder;
 };
 
-class dxfWriterBinary : public dxfWriter {
+class dxfWriterBinary : public dxfWriter
+{
 public:
-    explicit dxfWriterBinary(std::ofstream *stream)
-        : dxfWriter(stream)
-    {}
+    using dxfWriter::dxfWriter;
+
     virtual ~dxfWriterBinary() = default;
     virtual auto writeString(int code, std::string text) -> bool override;
     virtual auto writeInt16(int code, int data) -> bool override;
@@ -57,7 +60,8 @@ public:
     virtual auto writeBool(int code, bool data) -> bool override;
 };
 
-class dxfWriterAscii final : public dxfWriter {
+class dxfWriterAscii final : public dxfWriter
+{
 public:
     explicit dxfWriterAscii(std::ofstream *stream);
     virtual ~dxfWriterAscii() = default;
