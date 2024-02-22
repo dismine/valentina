@@ -71,7 +71,7 @@
                  </sizepolicy>
                 </property>
                 <property name="suffix">
-                 <string>min</string>
+                 <string comment="minutes">min</string>
                 </property>
                 <property name="minimum">
                  <number>1</number>
