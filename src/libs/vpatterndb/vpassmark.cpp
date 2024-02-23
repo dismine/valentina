@@ -95,7 +95,7 @@ auto PointsToSegments(const QVector<QPointF> &points) -> QVector<QLineF>
 //---------------------------------------------------------------------------------------------------------------------
 auto PassmarkLength(const VPiecePassmarkData &passmarkData, qreal width, bool &ok) -> qreal
 {
-    auto ValidateLength = [passmarkData](qreal length)
+    auto ValidateLength = [&passmarkData](qreal length)
     {
         if (length <= accuracyPointOnLine)
         {

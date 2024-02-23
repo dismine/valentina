@@ -1318,7 +1318,7 @@ void DialogSeamAllowance::ShowPlaceLabelsContextMenu(const QPoint &pos)
 
     QScopedPointer<QMenu> menu(new QMenu());
 
-    auto InitAction = [currentLabel, &menu](const QString &text, PlaceLabelType type)
+    auto InitAction = [&currentLabel, &menu](const QString &text, PlaceLabelType type)
     {
         QAction *action = menu->addAction(text);
         action->setCheckable(true);
@@ -1326,7 +1326,7 @@ void DialogSeamAllowance::ShowPlaceLabelsContextMenu(const QPoint &pos)
         return action;
     };
 
-    auto SaveType = [this, currentLabel, labelId](PlaceLabelType type)
+    auto SaveType = [this, &currentLabel, labelId](PlaceLabelType type)
     {
         VPlaceLabelItem newLabel = VPlaceLabelItem(currentLabel);
         newLabel.SetLabelType(type);

@@ -1559,7 +1559,7 @@ void CreateUnitedDetail(const VToolUnionDetailsInitData &initData, qreal dx, qre
         piece->RefreshGeometry(true); // Refresh internal paths
     }
 
-    auto DuplicateDetail = [initData](quint32 id)
+    auto DuplicateDetail = [&initData](quint32 id)
     {
         VToolSeamAllowanceInitData initPieceData;
         initPieceData.scene = initData.scene;

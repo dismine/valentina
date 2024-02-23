@@ -404,7 +404,7 @@ auto VPiece::PlaceLabelPath(const VContainer *data) const -> QPainterPath
                     for (auto &points : shape)
                     {
                         std::transform(points.begin(), points.end(), points.begin(),
-                                       [matrix](const VLayoutPoint &point) { return MapPoint(point, matrix); });
+                                       [&matrix](const VLayoutPoint &point) { return MapPoint(point, matrix); });
                     }
 
                     path.addPath(LabelShapePath(shape));
