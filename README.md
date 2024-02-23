@@ -70,7 +70,12 @@ We value your experience with Valentina and are here to assist you at every step
    Stay updated with the latest news and announcements about the Valentina project by subscribing to our Telegram channel. Get insights into new features, releases, and project developments.  
    [![Chat on Telegram](https://img.shields.io/badge/Channel-on_Telegram-green?logo=telegram)](https://t.me/smart_pattern)
 
-3. **Instagram Accounts:**
+3. **Discord Server:**
+
+   Join our Discord server to connect with the Valentina community, get support, and participate in discussions. Stay updated with the latest developments and engage with like-minded individuals.  
+   [![Discord](https://img.shields.io/discord/1209739539816517692?logo=discord&logoColor=white)](https://discord.gg/XUxKFQuQ)      
+
+4. **Instagram Accounts:**
 
    Follow our Instagram accounts for visual updates and behind-the-scenes content. We have separate accounts for English and Ukrainian users, providing a diverse range of content related to Valentina.  
    [![Instagram En](https://img.shields.io/badge/Follow-on_Instagram_(En)-green?style=social&logo=instagram
@@ -78,7 +83,7 @@ We value your experience with Valentina and are here to assist you at every step
    [![Instagram Uk](https://img.shields.io/badge/Follow-on_Instagram_(Uk)-green?style=social&logo=instagram
 )](https://www.instagram.com/valentina_project/)
 
-4. **Facebook Groups:**
+5. **Facebook Groups:**
 
    Engage with our community through Facebook groups. Join the English group for discussions and updates, or connect with the French-speaking community in our dedicated group.  
    [![Facebook Group - English](https://img.shields.io/badge/Follow-on_Facebook_(En,_It,_De)-green?style=social&logo=facebook
@@ -86,12 +91,12 @@ We value your experience with Valentina and are here to assist you at every step
    [![Facebook Group - French](https://img.shields.io/badge/Follow-on_Facebook_(Fr)-green?style=social&logo=facebook
 )](https://facebook.com/groups/valentina.france/?ref=share)
 
-5. **Issue Tracker:**
+6. **Issue Tracker:**
 
    Report bugs, suggest improvements, and contribute to the ongoing development of Valentina by visiting our Issue Tracker. Your feedback is crucial in enhancing the user experience.  
    [![GitLab Issues](https://img.shields.io/gitlab/issues/open/smart-pattern%2Fvalentina)](https://gitlab.com/smart-pattern/valentina/-/issues/)
 
-6. **User Manual and Shop:**
+7. **User Manual and Shop:**
 
    Visit our shop to explore the user manual, a valuable resource for mastering Valentina's features. By purchasing the manual, you not only gain in-depth insights but also contribute to supporting the continued development of the project.  
    [![Shop](https://img.shields.io/badge/Shop-now-informational)
