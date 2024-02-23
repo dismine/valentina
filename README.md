@@ -3,6 +3,7 @@
 [![Project status](https://img.shields.io/badge/Status-Active-green)]()
 [![Maintainer](https://img.shields.io/badge/Maintainer-Roman_Telezhynskyi-blue)]()
 [![GitLab Last Commit](https://img.shields.io/gitlab/last-commit/smart-pattern%2Fvalentina?style=flat)]()
+[![Discord](https://img.shields.io/discord/1209739539816517692?logo=discord&logoColor=white)](https://discord.gg/XUxKFQuQ)
 [![Stable version](https://img.shields.io/badge/Stable-v0.6.1-blue)](https://smart-pattern.com.ua/valentina/version/0.6.1/)
 [![Dev version](https://img.shields.io/badge/Dev-v0.7.52-yellow)](https://smart-pattern.com.ua/valentina/version/0.7.52/)
 [![Build Status](https://api.cirrus-ci.com/github/dismine/valentina.svg)](https://cirrus-ci.com/github/dismine/valentina)
@@ -174,6 +175,7 @@ Other components released under:
 
 * [Web site](https://smart-pattern.com.ua/)
 * [Shop](https://smart-pattern.com.ua/catalogue/)
-* [Chat](https://t.me/valentina_project/)
+* [Chat Telegram](https://t.me/valentina_project/)
+* [Chat Discord](https://discord.gg/XUxKFQuQ)
 * [Issue tracker](https://gitlab.com/smart-pattern/valentina/-/issues/)
 * [Source code](https://gitlab.com/smart-pattern/valentina/)
