@@ -809,7 +809,7 @@ void VPGraphicsPiece::PaintInternalPaths(QPainter *painter, const VPPiecePtr &pi
             QVector<VLayoutPoint> points = piecePath.Points();
             const QTransform matrix = VGObject::FlippingMatrix(piece->GetSeamMirrorLine());
             std::transform(points.begin(), points.end(), points.begin(),
-                           [matrix](const VLayoutPoint &point) { return VAbstractPiece::MapPoint(point, matrix); });
+                           [&matrix](const VLayoutPoint &point) { return VAbstractPiece::MapPoint(point, matrix); });
             QVector<QPointF> casted;
             CastTo(points, casted);
             path.addPath(piece->GetMatrix().map(VPiecePath::MakePainterPath(casted)));
