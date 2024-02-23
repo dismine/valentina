@@ -912,7 +912,7 @@ void VDxfEngine::ExportAAMADrawSewLine(const QSharedPointer<dx_ifaceBlock> &deta
         const UTF8STRING &layer = not detail.IsSewLineOnDrawing() ? *layer14 : *layer8;
         QVector<VLayoutPoint> const points = detail.GetMappedFullContourPoints();
 
-        auto DrawPolygon = [this, detailBlock, layer](const QVector<VLayoutPoint> &points, bool forceClosed)
+        auto DrawPolygon = [this, detailBlock, &layer](const QVector<VLayoutPoint> &points, bool forceClosed)
         {
             if (DRW_Entity *e = AAMAPolygon(points, layer, forceClosed))
             {
@@ -977,7 +977,7 @@ void VDxfEngine::ExportAAMADrawInternalPaths(const QSharedPointer<dx_ifaceBlock>
         {
             const QTransform matrix = VGObject::FlippingMatrix(detail.GetMappedSeamMirrorLine());
             std::transform(points.begin(), points.end(), points.begin(),
-                           [matrix](const VLayoutPoint &point) { return VAbstractPiece::MapPoint(point, matrix); });
+                           [&matrix](const VLayoutPoint &point) { return VAbstractPiece::MapPoint(point, matrix); });
             DrawPolygon(points, iPath.PenStyle(), false);
         }
     }
@@ -1015,7 +1015,7 @@ void VDxfEngine::ExportAAMADrawPlaceLabels(const QSharedPointer<dx_ifaceBlock> &
                 for (auto &points : shape)
                 {
                     std::transform(points.begin(), points.end(), points.begin(),
-                                   [matrix](const VLayoutPoint &point)
+                                   [&matrix](const VLayoutPoint &point)
                                    { return VAbstractPiece::MapPoint(point, matrix); });
                 }
 
@@ -1049,7 +1049,7 @@ void VDxfEngine::ExportAAMAIntcut(const QSharedPointer<dx_ifaceBlock> &detailBlo
         {
             const QTransform matrix = VGObject::FlippingMatrix(detail.GetMappedSeamMirrorLine());
             std::transform(points.begin(), points.end(), points.begin(),
-                           [matrix](const VLayoutPoint &point) { return VAbstractPiece::MapPoint(point, matrix); });
+                           [&matrix](const VLayoutPoint &point) { return VAbstractPiece::MapPoint(point, matrix); });
             DrawPolygon(points, false);
         }
     }
@@ -1524,7 +1524,7 @@ void VDxfEngine::ExportASTMDrawInternalPaths(const QSharedPointer<dx_ifaceBlock>
         {
             const QTransform matrix = VGObject::FlippingMatrix(detail.GetMappedSeamMirrorLine());
             std::transform(points.begin(), points.end(), points.begin(),
-                           [matrix](const VLayoutPoint &point) { return VAbstractPiece::MapPoint(point, matrix); });
+                           [&matrix](const VLayoutPoint &point) { return VAbstractPiece::MapPoint(point, matrix); });
             DrawPolygon(points, iPath.PenStyle(), iPath.IsNotMirrored(), false);
         }
     }
@@ -1576,7 +1576,7 @@ void VDxfEngine::ExportASTMDrawPlaceLabels(const QSharedPointer<dx_ifaceBlock> &
                 for (auto &points : shape)
                 {
                     std::transform(points.begin(), points.end(), points.begin(),
-                                   [matrix](const VLayoutPoint &point)
+                                   [&matrix](const VLayoutPoint &point)
                                    { return VAbstractPiece::MapPoint(point, matrix); });
                 }
 
@@ -1624,7 +1624,7 @@ void VDxfEngine::ExportASTMInternalCutout(const QSharedPointer<dx_ifaceBlock> &d
         {
             const QTransform matrix = VGObject::FlippingMatrix(detail.GetMappedSeamMirrorLine());
             std::transform(points.begin(), points.end(), points.begin(),
-                           [matrix](const VLayoutPoint &point) { return VAbstractPiece::MapPoint(point, matrix); });
+                           [&matrix](const VLayoutPoint &point) { return VAbstractPiece::MapPoint(point, matrix); });
             DrawPolygon(points, intCut.IsNotMirrored(), false);
         }
     }
@@ -1687,7 +1687,7 @@ void VDxfEngine::ExportASTMNotches(const QSharedPointer<dx_ifaceBlock> &detailBl
         return;
     }
 
-    auto ExportPassmark = [this, detailBlock, detail](const VLayoutPassmark &passmark)
+    auto ExportPassmark = [this, detailBlock, &detail](const VLayoutPassmark &passmark)
     {
         DRW_ASTMNotch *notch = ExportASTMNotch(passmark);
         DRW_ATTDEF *attdef = ExportASTMNotchDataDependecy(passmark, notch->layer, detail);
