@@ -502,7 +502,7 @@ void VHPGLEngine::PlotInternalPaths(QTextStream &out, const VLayoutPiece &detail
         {
             const QTransform matrix = VGObject::FlippingMatrix(detail.GetMappedSeamMirrorLine());
             std::transform(points.begin(), points.end(), points.begin(),
-                           [matrix](const VLayoutPoint &point) { return VAbstractPiece::MapPoint(point, matrix); });
+                           [&matrix](const VLayoutPoint &point) { return VAbstractPiece::MapPoint(point, matrix); });
             PlotPath(out, CastToPoint(ConvertPath(points)), path.PenStyle());
         }
     }
@@ -531,7 +531,7 @@ void VHPGLEngine::PlotPlaceLabels(QTextStream &out, const VLayoutPiece &detail)
             for (auto &points : shape)
             {
                 std::transform(points.begin(), points.end(), points.begin(),
-                               [matrix](const VLayoutPoint &point) { return VAbstractPiece::MapPoint(point, matrix); });
+                               [&matrix](const VLayoutPoint &point) { return VAbstractPiece::MapPoint(point, matrix); });
             }
 
             PlotShape(shape);

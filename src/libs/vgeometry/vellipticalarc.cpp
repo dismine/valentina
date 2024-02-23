@@ -516,7 +516,7 @@ auto VEllipticalArc::GetPoints() const -> QVector<QPointF>
     t.rotate(-d->rotationAngle);
     t.translate(-center.x(), -center.y());
 
-    std::transform(points.begin(), points.end(), points.begin(), [t](const QPointF &point) { return t.map(point); });
+    std::transform(points.begin(), points.end(), points.begin(), [&t](const QPointF &point) { return t.map(point); });
 
     return IsFlipped() ? Reverse(points) : points;
 }

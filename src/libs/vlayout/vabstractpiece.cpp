@@ -1906,7 +1906,7 @@ auto VAbstractPiece::GrainlineMainLine(const VGrainlineData &geom, const VContai
 //---------------------------------------------------------------------------------------------------------------------
 auto VAbstractPiece::PlaceLabelShape(const VLayoutPlaceLabel &label) -> PlaceLabelImg
 {
-    auto LayoutPoint = [label](QPointF p, bool turnPoint = false, bool curvePoint = false)
+    auto LayoutPoint = [&label](QPointF p, bool turnPoint = false, bool curvePoint = false)
     {
         VLayoutPoint point(label.RotationMatrix().map(p));
         point.SetTurnPoint(turnPoint);
@@ -1917,7 +1917,7 @@ auto VAbstractPiece::PlaceLabelShape(const VLayoutPlaceLabel &label) -> PlaceLab
     const QPointF pos = label.Center();
     const QRectF box = label.Box();
 
-    auto SegmentShape = [pos, box, LayoutPoint]()
+    auto SegmentShape = [pos, &box, &LayoutPoint]()
     {
         QVector<VLayoutPoint> const shape{LayoutPoint(QPointF(pos.x(), pos.y() - box.height() / 2.0), true),
                                           LayoutPoint(QPointF(pos.x(), pos.y() + box.height() / 2.0), true)};
@@ -1925,7 +1925,7 @@ auto VAbstractPiece::PlaceLabelShape(const VLayoutPlaceLabel &label) -> PlaceLab
         return PlaceLabelImg{shape};
     };
 
-    auto RectangleShape = [pos, box, LayoutPoint]()
+    auto RectangleShape = [pos, &box, &LayoutPoint]()
     {
         QRectF const rect(QPointF(pos.x() - box.width() / 2.0, pos.y() - box.height() / 2.0),
                           QPointF(pos.x() + box.width() / 2.0, pos.y() + box.height() / 2.0));
@@ -1937,7 +1937,7 @@ auto VAbstractPiece::PlaceLabelShape(const VLayoutPlaceLabel &label) -> PlaceLab
         return PlaceLabelImg{shape};
     };
 
-    auto CrossShape = [pos, box, LayoutPoint]()
+    auto CrossShape = [pos, &box, &LayoutPoint]()
     {
         QVector<VLayoutPoint> const shape1{LayoutPoint(QPointF(pos.x(), pos.y() - box.height() / 2.0), true),
                                            LayoutPoint(QPointF(pos.x(), pos.y() + box.height() / 2.0), true)};
@@ -1948,7 +1948,7 @@ auto VAbstractPiece::PlaceLabelShape(const VLayoutPlaceLabel &label) -> PlaceLab
         return PlaceLabelImg{shape1, shape2};
     };
 
-    auto TshapedShape = [pos, box, LayoutPoint]()
+    auto TshapedShape = [pos, &box, &LayoutPoint]()
     {
         QPointF const center2(pos.x(), pos.y() + box.height() / 2.0);
 
@@ -1960,7 +1960,7 @@ auto VAbstractPiece::PlaceLabelShape(const VLayoutPlaceLabel &label) -> PlaceLab
         return PlaceLabelImg{shape1, shape2};
     };
 
-    auto DoubletreeShape = [pos, box, LayoutPoint]()
+    auto DoubletreeShape = [pos, &box, &LayoutPoint]()
     {
         QRectF const rect(QPointF(pos.x() - box.width() / 2.0, pos.y() - box.height() / 2.0),
                           QPointF(pos.x() + box.width() / 2.0, pos.y() + box.height() / 2.0));
@@ -1972,7 +1972,7 @@ auto VAbstractPiece::PlaceLabelShape(const VLayoutPlaceLabel &label) -> PlaceLab
         return PlaceLabelImg{shape1, shape2};
     };
 
-    auto CornerShape = [pos, box, LayoutPoint]()
+    auto CornerShape = [pos, &box, &LayoutPoint]()
     {
         QVector<VLayoutPoint> const shape1{LayoutPoint(QPointF(pos.x(), pos.y()), true),
                                            LayoutPoint(QPointF(pos.x(), pos.y() + box.height() / 2.0), true)};
@@ -1983,7 +1983,7 @@ auto VAbstractPiece::PlaceLabelShape(const VLayoutPlaceLabel &label) -> PlaceLab
         return PlaceLabelImg{shape1, shape2};
     };
 
-    auto TriangleShape = [pos, box, LayoutPoint]()
+    auto TriangleShape = [pos, &box, &LayoutPoint]()
     {
         QRectF const rect(QPointF(pos.x() - box.width() / 2.0, pos.y() - box.height() / 2.0),
                           QPointF(pos.x() + box.width() / 2.0, pos.y() + box.height() / 2.0));
@@ -1994,7 +1994,7 @@ auto VAbstractPiece::PlaceLabelShape(const VLayoutPlaceLabel &label) -> PlaceLab
         return PlaceLabelImg{shape};
     };
 
-    auto HshapedShape = [pos, box, LayoutPoint]()
+    auto HshapedShape = [pos, &box, &LayoutPoint]()
     {
         const QPointF center1(pos.x(), pos.y() - box.height() / 2.0);
         const QPointF center2(pos.x(), pos.y() + box.height() / 2.0);
@@ -2010,7 +2010,7 @@ auto VAbstractPiece::PlaceLabelShape(const VLayoutPlaceLabel &label) -> PlaceLab
         return PlaceLabelImg{shape1, shape2, shape3};
     };
 
-    auto ButtonShape = [pos, box, LayoutPoint]()
+    auto ButtonShape = [pos, &box, &LayoutPoint]()
     {
         const qreal radius = qMin(box.width() / 2.0, box.height() / 2.0);
         QVector<VLayoutPoint> const shape1{LayoutPoint(QPointF(pos.x(), pos.y() - radius), true),
@@ -2044,7 +2044,7 @@ auto VAbstractPiece::PlaceLabelShape(const VLayoutPlaceLabel &label) -> PlaceLab
         return PlaceLabelImg{shape1, shape2, shape3};
     };
 
-    auto CircleShape = [pos, box, LayoutPoint]()
+    auto CircleShape = [pos, &box, &LayoutPoint]()
     {
         const qreal radius = qMin(box.width() / 2.0, box.height() / 2.0);
         VArc arc(VPointF(pos), radius, 0, 360);
