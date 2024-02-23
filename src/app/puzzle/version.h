@@ -29,11 +29,12 @@
 #ifndef VERSION_H
 #define VERSION_H
 
+#include <QString>
 #include "../../libs/vmisc/projectversion.h"
 
-#define VER_INTERNALNAME_STR        "Puzzle"
-#define VER_ORIGINALFILENAME_STR    "puzzle.exe"
-#define VER_PRODUCTNAME_STR         "Puzzle"
-#define VER_FILEDESCRIPTION_STR     "Valentina's manual layout creator."
+extern const QString verInternalNameStr;
+extern const QString verOriginalFilenameStr;
+extern const QString verProductNameStr;
+extern const QString verFileDescriptionStr;
 
 #endif // VERSION_H

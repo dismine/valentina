@@ -175,7 +175,7 @@ void DialogPuzzlePreferences::Ok()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void DialogPuzzlePreferences::PageChanged(QListWidgetItem *current, QListWidgetItem *previous)
+void DialogPuzzlePreferences::PageChanged(const QListWidgetItem * current, QListWidgetItem * const previous)
 {
     if (current == nullptr)
     {

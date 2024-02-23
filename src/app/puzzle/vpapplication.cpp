@@ -71,6 +71,16 @@ Q_LOGGING_CATEGORY(pApp, "p.application") // NOLINT
 
 QT_WARNING_POP
 
+const QString verInternalNameStr = QStringLiteral("Puzzle");
+const QString verOriginalFilenameStr = QStringLiteral("puzzle.exe");
+const QString verProductNameStr = QStringLiteral("Puzzle");
+const QString verFileDescriptionStr = QStringLiteral("Valentina's manual layout creator.");
+
+//#define VER_INTERNALNAME_STR        "Puzzle"
+//#define VER_ORIGINALFILENAME_STR    "puzzle.exe"
+//#define VER_PRODUCTNAME_STR         "Puzzle"
+//#define VER_FILEDESCRIPTION_STR     "Valentina's manual layout creator."
+
 //---------------------------------------------------------------------------------------------------------------------
 inline void noisyFailureMsgHandler(QtMsgType type, const QMessageLogContext &context,
                                    const QString &msg) // NOLINT(readability-function-cognitive-complexity)
@@ -249,8 +259,8 @@ inline void noisyFailureMsgHandler(QtMsgType type, const QMessageLogContext &con
 VPApplication::VPApplication(int &argc, char **argv)
   : VAbstractApplication(argc, argv)
 {
-    setApplicationDisplayName(QStringLiteral(VER_PRODUCTNAME_STR));
-    setApplicationName(QStringLiteral(VER_INTERNALNAME_STR));
+    setApplicationDisplayName(verProductNameStr);
+    setApplicationName(verInternalNameStr);
     setOrganizationName(QStringLiteral(VER_COMPANYNAME_STR));
     setOrganizationDomain(QStringLiteral(VER_COMPANYDOMAIN_STR));
     // Setting the Application version
