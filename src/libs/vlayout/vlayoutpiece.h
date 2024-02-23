@@ -123,7 +123,7 @@ public:
     void SetPatternInfo(VAbstractPattern *pDoc, const VPatternLabelData &geom, const QFont &font,
                         const QString &SVGFontFamily, const VContainer *pattern);
 
-    virtual void SetGrainline(const VGrainlineData &geom, const VContainer *pattern);
+    void SetGrainline(const VGrainlineData &geom, const VContainer *pattern);
     auto GetGrainline() const -> VPieceGrainline;
     auto GetMappedGrainlineShape() const -> GrainlineShape;
     auto GetGrainlineShape() const -> GrainlineShape;
