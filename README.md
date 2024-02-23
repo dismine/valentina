@@ -1,8 +1,8 @@
 # Valentina
 
-![Project status](https://img.shields.io/badge/Status-Active-green)
-![Maintainer](https://img.shields.io/badge/Maintainer-Roman_Telezhynskyi-blue)
-![GitLab Last Commit](https://img.shields.io/gitlab/last-commit/smart-pattern%2Fvalentina?style=flat)
+[![Project status](https://img.shields.io/badge/Status-Active-green)]()
+[![Maintainer](https://img.shields.io/badge/Maintainer-Roman_Telezhynskyi-blue)]()
+[![GitLab Last Commit](https://img.shields.io/gitlab/last-commit/smart-pattern%2Fvalentina?style=flat)]()
 [![Stable version](https://img.shields.io/badge/Stable-v0.6.1-blue)](https://smart-pattern.com.ua/valentina/version/0.6.1/)
 [![Dev version](https://img.shields.io/badge/Dev-v0.7.52-yellow)](https://smart-pattern.com.ua/valentina/version/0.7.52/)
 [![Build Status](https://api.cirrus-ci.com/github/dismine/valentina.svg)](https://cirrus-ci.com/github/dismine/valentina)
