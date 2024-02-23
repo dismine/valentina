@@ -662,7 +662,7 @@ void VPLayoutFileReader::ReadGrainline(const VPPiecePtr &piece)
         grainline.SetMainLine(mainLine);
     }
 
-    piece->SetGrainline(grainline);
+    piece->SetVPGrainline(grainline);
 }
 
 //---------------------------------------------------------------------------------------------------------------------

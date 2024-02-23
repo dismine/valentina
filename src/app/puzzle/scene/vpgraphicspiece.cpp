@@ -855,11 +855,8 @@ void VPGraphicsPiece::PaintPassmarks(QPainter *painter, const VPPiecePtr &piece)
         m_passmarks.addPath(passmarkPath);
 
         QLineF const seamAllowanceMirrorLine = piece->GetMappedSeamAllowanceMirrorLine();
-        if (!seamAllowanceMirrorLine.isNull() && piece->IsShowFullPiece())
+        if (!seamAllowanceMirrorLine.isNull() && piece->IsShowFullPiece() && !VGObject::IsPointOnLineviaPDP(passmark.baseLine.p1(), seamAllowanceMirrorLine.p1(), seamAllowanceMirrorLine.p2()))
         {
-            if (!VGObject::IsPointOnLineviaPDP(passmark.baseLine.p1(), seamAllowanceMirrorLine.p1(),
-                                               seamAllowanceMirrorLine.p2()))
-            {
                 QPainterPath mirroredPassmaksPath;
                 for (const auto &line : passmark.lines)
                 {
@@ -868,7 +865,6 @@ void VPGraphicsPiece::PaintPassmarks(QPainter *painter, const VPPiecePtr &piece)
                 }
                 const QTransform matrix = VGObject::FlippingMatrix(seamAllowanceMirrorLine);
                 m_passmarks.addPath(matrix.map(mirroredPassmaksPath));
-            }
         }
 
         if (painter != nullptr)

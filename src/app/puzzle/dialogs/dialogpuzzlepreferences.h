@@ -60,7 +60,7 @@ protected:
 private slots:
     void Apply();
     void Ok();
-    void PageChanged(QListWidgetItem *current, QListWidgetItem *previous);
+    void PageChanged(const QListWidgetItem *current, QListWidgetItem * const previous);
 
 private:
     // cppcheck-suppress unknownMacro

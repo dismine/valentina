@@ -90,8 +90,7 @@ void VPCarrousel::Refresh()
     // Do not rely on m_layout because we do not control it.
     m_pieceLists = QList<VPCarrouselSheet>();
 
-    VPLayoutPtr const layout = m_layout.toStrongRef();
-    if (not layout.isNull())
+    if (VPLayoutPtr const layout = m_layout.toStrongRef(); not layout.isNull())
     {
         {
             VPCarrouselSheet carrouselSheet;
@@ -216,8 +215,7 @@ void VPCarrousel::on_ActivePieceListChanged(int index)
 
             if (not sheet.isNull())
             {
-                VPSheetPtr const activeSheet = layout->GetFocusedSheet();
-                if (not activeSheet.isNull())
+                if (VPSheetPtr const activeSheet = layout->GetFocusedSheet(); not activeSheet.isNull())
                 {
                     activeSheet->ClearSelection();
                 }

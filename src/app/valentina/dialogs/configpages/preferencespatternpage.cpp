@@ -353,8 +353,8 @@ void PreferencesPatternPage::InitSingleLineFonts()
     const qreal dpiY = primaryScreen->physicalDotsPerInchY();
     const qreal scale = primaryScreen->devicePixelRatio();
 
-    int const previewWidth = 250;
-    int const previewHeight = QFontMetrics(QGuiApplication::font()).height();
+    int previewWidth = 128;
+    int previewHeight = QFontMetrics(QGuiApplication::font()).height() / 2;
 
     // Calculate the desired image size in physical pixels
     const int desiredWidthInPixels = qRound(previewWidth * dpiX / 96.0);
@@ -368,7 +368,7 @@ void PreferencesPatternPage::InitSingleLineFonts()
     ui->comboBoxSingleLineFont->setMinimumSize(QSize(previewScaledWidthPixels, 0));
     ui->comboBoxSingleLineFont->setIconSize(QSize(previewScaledWidthPixels, previewScaledHeightPixels));
 
-    QPen pen(Qt::SolidPattern, 1 * scale, Qt::SolidLine, Qt::RoundCap, Qt::SvgMiterJoin);
+    QPen pen(Qt::SolidPattern, 1, Qt::SolidLine, Qt::RoundCap, Qt::SvgMiterJoin);
     pen.setColor(ui->comboBoxSingleLineFont->palette().color(QPalette::Text));
 
     VSvgFontDatabase *db = VAbstractApplication::VApp()->SVGFontDatabase();
@@ -377,7 +377,7 @@ void PreferencesPatternPage::InitSingleLineFonts()
 
     for (const auto &family : families)
     {
-        VSvgFontEngine engine = db->FontEngine(family, SVGFontStyle::Normal, SVGFontWeight::Normal);
+        VSvgFontEngine engine = db->FontEngine(family, SVGFontStyle::Normal, SVGFontWeight::Thin);
 
         VSvgFont const svgFont = engine.Font();
         if (!svgFont.IsValid())
@@ -396,6 +396,7 @@ void PreferencesPatternPage::InitSingleLineFonts()
         engine.Draw(&painter, QPointF(0, 0), engine.FontSample());
 
         ui->comboBoxSingleLineFont->addItem(pixmap, svgFont.FamilyName(), svgFont.FamilyName());
+
     }
 
     ui->comboBoxSingleLineFont->setInsertPolicy(QComboBox::NoInsert);

@@ -157,7 +157,7 @@ void VPPiece::Update(const VPPiecePtr &piece)
     SetInternalPaths(piece->GetInternalPaths());
     SetPassmarks(piece->GetPassmarks());
     SetPlaceLabels(piece->GetPlaceLabels());
-    SetGrainline(piece->GetGrainline());
+    SetVPGrainline(piece->GetGrainline());
     SetPieceLabelRect(piece->GetPieceLabelRect());
     SetPieceLabelData(piece->GetPieceLabelData());
     SetPatternLabelRect(piece->GetPatternLabelRect());
@@ -294,7 +294,7 @@ void VPPiece::RotateToGrainline(const VPTransformationOrigon &origin)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VPPiece::SetGrainline(const VPieceGrainline &grainline)
+void VPPiece::SetVPGrainline(const VPieceGrainline &grainline)
 {
     VLayoutPiece::SetGrainline(grainline);
 }
@@ -682,7 +682,7 @@ void VPPiece::CleanPosition(const VPPiecePtr &piece)
     {
         VPieceGrainline grainline = piece->GetGrainline();
         grainline.SetMainLine(matrix.map(grainline.GetMainLine()));
-        piece->SetGrainline(grainline);
+        piece->SetVPGrainline(grainline);
     }
 
     piece->SetPieceLabelRect(MapVector(piece->GetPieceLabelRect(), matrix));

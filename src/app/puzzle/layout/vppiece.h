@@ -96,7 +96,7 @@ public:
     auto Layout() const -> VPLayoutPtr;
     void SetLayout(const VPLayoutPtr &layout);
 
-    void SetGrainline(const VPieceGrainline &grainline);
+    void SetVPGrainline(const VPieceGrainline &grainline);
 
     /**
      * @brief Flip verticvally mirror around center of bounding rect
