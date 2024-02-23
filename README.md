@@ -74,9 +74,9 @@ We value your experience with Valentina and are here to assist you at every step
 
    Follow our Instagram accounts for visual updates and behind-the-scenes content. We have separate accounts for English and Ukrainian users, providing a diverse range of content related to Valentina.  
    [![Instagram En](https://img.shields.io/badge/Follow-on_Instagram_(En)-green?style=social&logo=instagram
-)](https://t.me/smart_pattern)
+)](https://www.instagram.com/smart_pattern/)
    [![Instagram Uk](https://img.shields.io/badge/Follow-on_Instagram_(Uk)-green?style=social&logo=instagram
-)](https://t.me/valentina_project/)
+)](https://www.instagram.com/valentina_project/)
 
 4. **Facebook Groups:**
 
