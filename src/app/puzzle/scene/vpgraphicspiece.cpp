@@ -893,7 +893,7 @@ void VPGraphicsPiece::PaintPlaceLabels(QPainter *painter, const VPPiecePtr &piec
             for (auto &points : shape)
             {
                 std::transform(points.begin(), points.end(), points.begin(),
-                               [matrix](const VLayoutPoint &point) { return VAbstractPiece::MapPoint(point, matrix); });
+                               [&matrix](const VLayoutPoint &point) { return VAbstractPiece::MapPoint(point, matrix); });
             }
 
             path.addPath(VAbstractPiece::LabelShapePath(piece->MapPlaceLabelShape(shape)));
