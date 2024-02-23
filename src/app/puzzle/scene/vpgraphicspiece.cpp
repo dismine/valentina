@@ -205,7 +205,7 @@ VPGraphicsPiece::VPGraphicsPiece(const VPPiecePtr &piece, QGraphicsItem *parent)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-auto VPGraphicsPiece::GetPiece() -> VPPiecePtr
+auto VPGraphicsPiece::GetPiece() const -> VPPiecePtr
 {
     return m_piece.toStrongRef();
 }
@@ -939,7 +939,7 @@ void VPGraphicsPiece::PaintStickyPath(QPainter *painter)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VPGraphicsPiece::PaintMirrorLine(QPainter *painter, const VPPiecePtr &piece)
+void VPGraphicsPiece::PaintMirrorLine(QPainter *painter, const VPPiecePtr &piece) const
 {
     if (piece->IsShowFullPiece())
     {

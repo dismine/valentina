@@ -44,13 +44,13 @@ public:
     explicit PuzzlePreferencesPathPage(QWidget *parent = nullptr);
     ~PuzzlePreferencesPathPage() override;
 
-    void Apply();
+    void Apply() const;
 
 protected:
     void changeEvent(QEvent *event) override;
 
 private slots:
-    void DefaultPath();
+    void DefaultPath() const;
     void EditPath();
 
 private:

@@ -61,8 +61,8 @@ private:
 
     void SetThemeModeComboBox();
     void InitShortcuts(bool defaults = false);
-    void UpdateShortcutsTable();
-    void RetranslateShortcutsTable();
+    void UpdateShortcutsTable() const;
+    void RetranslateShortcutsTable() const;
 };
 
 #endif // PUZZLEPREFERENCESCONFIGURATIONPAGE_H

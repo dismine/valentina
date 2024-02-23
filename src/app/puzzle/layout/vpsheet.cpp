@@ -310,7 +310,7 @@ void VPSheetSceneData::RefreshSheetSize()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VPSheetSceneData::ConnectPiece(VPGraphicsPiece *piece)
+void VPSheetSceneData::ConnectPiece(VPGraphicsPiece *piece) const
 {
     SCASSERT(piece != nullptr)
 

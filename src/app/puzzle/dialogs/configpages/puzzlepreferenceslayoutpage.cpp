@@ -680,7 +680,7 @@ void PuzzlePreferencesLayoutPage::ReadSettings()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void PuzzlePreferencesLayoutPage::FindTemplate(QComboBox *box, qreal width, qreal height)
+void PuzzlePreferencesLayoutPage::FindTemplate(QComboBox *box, qreal width, qreal height) const
 {
     SCASSERT(box != nullptr)
     const Unit paperUnit = LayoutUnit();
