@@ -36,12 +36,9 @@ class VPSettings : public VCommonSettings
 {
     Q_OBJECT // NOLINT
 
-private:
-    Q_DISABLE_COPY_MOVE(VPSettings) // NOLINT
-    int cachedLineWidth;
-
 public:
-    VPSettings(Format format, Scope scope, const QString &organization, const QString &application = QString(), QObject *parent = nullptr);
+    VPSettings(Format format, Scope scope, const QString &organization, const QString &application = QString(),
+               QObject *parent = nullptr);
     VPSettings(const QString &fileName, Format format, QObject *parent = nullptr);
     ~VPSettings() override = default;
 
@@ -108,15 +105,14 @@ public:
     auto GetLayoutExportFormat() const -> qint8;
     void SetLayoutExportFormat(qint8 format);
 
-    void SetCachedLineWidth(int lineWidth);
-    auto GetCachedLineWidth() -> int;
-
-    auto GetLayoutLineWidth() -> int;
+    auto GetLayoutLineWidth() const -> int;
     void SetLayoutLineWidth(int width);
 
     auto GetShowGrainline() const -> bool;
     void SetShowGrainline(bool value);
 
+private:
+    Q_DISABLE_COPY_MOVE(VPSettings) // NOLINT
 };
 
 #endif // VPSETTINGS_H

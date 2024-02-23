@@ -76,6 +76,8 @@ Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingPathsRawLayoutData, ("paths/rawL
 
 QT_WARNING_POP
 
+int cachedLineWidth = -1; // NOLINT(cppcoreguidelines-avoid-non-const-global-variables)
+
 } // namespace
 
 #ifndef QPRINTENGINE_H
@@ -83,15 +85,18 @@ Q_DECLARE_METATYPE(QMarginsF) // NOLINT
 #endif
 
 //---------------------------------------------------------------------------------------------------------------------
-VPSettings::VPSettings(Format format, Scope scope, const QString &organization, const QString &application, QObject *parent)
-  : VCommonSettings(format, scope, organization, application, parent), cachedLineWidth(-1) {
-        REGISTER_META_TYPE_STREAM_OPERATORS(QMarginsF)
+VPSettings::VPSettings(Format format, Scope scope, const QString &organization, const QString &application,
+                       QObject *parent)
+  : VCommonSettings(format, scope, organization, application, parent)
+{
+    REGISTER_META_TYPE_STREAM_OPERATORS(QMarginsF);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 VPSettings::VPSettings(const QString &fileName, QSettings::Format format, QObject *parent)
-  : VCommonSettings(fileName, format, parent), cachedLineWidth(-1) {
-        REGISTER_META_TYPE_STREAM_OPERATORS(QMarginsF)
+  : VCommonSettings(fileName, format, parent)
+{
+    REGISTER_META_TYPE_STREAM_OPERATORS(QMarginsF);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -353,12 +358,8 @@ void VPSettings::SetLayoutExportFormat(qint8 format)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VPSettings::SetCachedLineWidth(int lineWidth) {
-    cachedLineWidth = lineWidth;
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-auto VPSettings::GetCachedLineWidth() -> int {
+auto VPSettings::GetLayoutLineWidth() const -> int
+{
     if (cachedLineWidth == -1)
     {
         cachedLineWidth = qvariant_cast<int>(value(*settingLayoutLineWidth, 3));
@@ -368,16 +369,10 @@ auto VPSettings::GetCachedLineWidth() -> int {
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-auto VPSettings::GetLayoutLineWidth() -> int
-{
-    return GetCachedLineWidth();
-}
-
-//---------------------------------------------------------------------------------------------------------------------
 void VPSettings::SetLayoutLineWidth(int width)
 {
-    SetCachedLineWidth(qBound(1, width, 10));
-    setValue(*settingLayoutLineWidth, GetCachedLineWidth());
+    cachedLineWidth = qBound(1, width, 10);
+    setValue(*settingLayoutLineWidth, cachedLineWidth);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
