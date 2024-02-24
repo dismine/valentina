@@ -50,7 +50,7 @@ public:
      * @brief GetPiece Returns the piece that corresponds to the graphics piece
      * @return the piece
      */
-    auto GetPiece() -> VPPiecePtr;
+    auto GetPiece() const -> VPPiecePtr;
 
     auto type() const -> int override { return Type; }
     enum
@@ -133,7 +133,7 @@ private:
     void PaintPassmarks(QPainter *painter, const VPPiecePtr &piece);
     void PaintPlaceLabels(QPainter *painter, const VPPiecePtr &piece);
     void PaintStickyPath(QPainter *painter);
-    void PaintMirrorLine(QPainter *painter, const VPPiecePtr &piece);
+    void PaintMirrorLine(QPainter *painter, const VPPiecePtr &piece) const;
     void PaintFoldLine(QPainter *painter, const VPPiecePtr &piece);
 
     void GroupMove(const QPointF &pos);

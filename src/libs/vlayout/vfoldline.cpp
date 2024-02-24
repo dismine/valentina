@@ -459,7 +459,7 @@ auto VFoldLine::FoldLineThreeDotsPath() const -> QVector<QPainterPath>
     ThreeDotsPosData const data = ThreeDotsData();
     QPainterPath dots;
 
-    auto DrawCircle = [&dots, data](const QPointF &center)
+    auto DrawCircle = [&dots, &data](const QPointF &center)
     {
         qreal const diameter = 2 * data.radius;
         qreal const x = center.x() - data.radius;

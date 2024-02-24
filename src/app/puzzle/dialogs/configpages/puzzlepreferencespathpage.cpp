@@ -56,7 +56,7 @@ PuzzlePreferencesPathPage::PuzzlePreferencesPathPage(QWidget *parent)
 PuzzlePreferencesPathPage::~PuzzlePreferencesPathPage() = default;
 
 //---------------------------------------------------------------------------------------------------------------------
-void PuzzlePreferencesPathPage::Apply()
+void PuzzlePreferencesPathPage::Apply() const
 {
     VPSettings *settings = VPApplication::VApp()->PuzzleSettings();
     settings->SetPathSVGFonts(ui->pathTable->item(0, 1)->text());
@@ -78,7 +78,7 @@ void PuzzlePreferencesPathPage::changeEvent(QEvent *event)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void PuzzlePreferencesPathPage::DefaultPath()
+void PuzzlePreferencesPathPage::DefaultPath() const
 {
     const int row = ui->pathTable->currentRow();
     QTableWidgetItem *item = ui->pathTable->item(row, 1);

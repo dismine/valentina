@@ -328,7 +328,7 @@ void VToolPiecePath::RefreshGeometry()
             QVector<VLayoutPoint> points = path.PathPoints(this->getData(), cuttingPath);
             const QTransform matrix = VGObject::FlippingMatrix(mirrorLine);
             std::transform(points.begin(), points.end(), points.begin(),
-                           [matrix](const VLayoutPoint &point) { return VAbstractPiece::MapPoint(point, matrix); });
+                           [&matrix](const VLayoutPoint &point) { return VAbstractPiece::MapPoint(point, matrix); });
             QVector<QPointF> casted;
             CastTo(points, casted);
             p.addPath(VPiecePath::MakePainterPath(casted));

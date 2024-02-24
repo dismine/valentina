@@ -1693,7 +1693,7 @@ auto VLayoutPiece::GetItem(bool textAsPaths, bool togetherWithNotches, bool show
             QVector<VLayoutPoint> points = path.Points();
             const QTransform matrix = VGObject::FlippingMatrix(d->m_seamMirrorLine);
             std::transform(points.begin(), points.end(), points.begin(),
-                           [matrix](const VLayoutPoint &point) { return VAbstractPiece::MapPoint(point, matrix); });
+                           [&matrix](const VLayoutPoint &point) { return VAbstractPiece::MapPoint(point, matrix); });
             QVector<QPointF> casted;
             CastTo(points, casted);
             p.addPath(d->m_matrix.map(VPiecePath::MakePainterPath(casted)));
@@ -1724,7 +1724,7 @@ auto VLayoutPiece::GetItem(bool textAsPaths, bool togetherWithNotches, bool show
             for (auto &points : shape)
             {
                 std::transform(points.begin(), points.end(), points.begin(),
-                               [matrix](const VLayoutPoint &point) { return MapPoint(point, matrix); });
+                               [&matrix](const VLayoutPoint &point) { return MapPoint(point, matrix); });
             }
 
             path.addPath(d->m_matrix.map(LabelShapePath(shape)));
@@ -2382,7 +2382,7 @@ auto VLayoutPiece::ConvertPassmarks(const VPiece &piece, const VContainer *patte
             continue;
         }
 
-        auto AddPassmark = [passmark, piece, pattern, &layoutPassmarks](PassmarkSide side)
+        auto AddPassmark = [&passmark, &piece, pattern, &layoutPassmarks](PassmarkSide side)
         {
             bool ok = false;
             VLayoutPassmark const layoutPassmark = PrepareSAPassmark(piece, pattern, passmark, side, ok);
@@ -2392,7 +2392,7 @@ auto VLayoutPiece::ConvertPassmarks(const VPiece &piece, const VContainer *patte
             }
         };
 
-        auto AddBuiltInPassmark = [passmark, piece, pattern, &layoutPassmarks]()
+        auto AddBuiltInPassmark = [&passmark, &piece, pattern, &layoutPassmarks]()
         {
             bool ok = false;
             VLayoutPassmark const layoutPassmark = PreapreBuiltInSAPassmark(piece, pattern, passmark, ok);

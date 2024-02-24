@@ -65,7 +65,7 @@ void VisToolArcWithLength::RefreshGeometry()
         {
             QLineF const r = QLineF(static_cast<QPointF>(*first), ScenePos());
 
-            auto Angle = [r]()
+            auto Angle = [&r]()
             {
                 if (QGuiApplication::keyboardModifiers() == Qt::ShiftModifier)
                 {

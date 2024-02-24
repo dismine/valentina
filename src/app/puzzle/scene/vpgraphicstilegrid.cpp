@@ -167,7 +167,7 @@ void VPGraphicsTileGrid::paint(QPainter *painter, const QStyleOptionGraphicsItem
 
     VWatermarkData const watermarkData = layout->TileFactory()->WatermarkData();
 
-    auto PaintWatermark = [painter, layout, xScale, yScale, watermarkData](const QRectF &img)
+    auto PaintWatermark = [painter, layout, xScale, yScale, &watermarkData](const QRectF &img)
     {
         if (not layout->LayoutSettings().WatermarkPath().isEmpty() && layout->LayoutSettings().GetShowWatermark() &&
             watermarkData.opacity > 0)

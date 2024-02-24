@@ -271,7 +271,7 @@ void DialogArc::ShowDialog(bool click)
             const QSharedPointer<VPointF> point = data->GeometricObject<VPointF>(GetCenter());
             QLineF const line = QLineF(static_cast<QPointF>(*point), scene->getScenePos());
 
-            auto Angle = [line]()
+            auto Angle = [&line]()
             {
                 if (QGuiApplication::keyboardModifiers() == Qt::ShiftModifier)
                 {

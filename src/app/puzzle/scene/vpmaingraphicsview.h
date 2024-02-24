@@ -52,7 +52,7 @@ public:
     /**
      * @brief RefreshLayout Refreshes the rectangles for the layout border and the margin
      */
-    void RefreshLayout();
+    void RefreshLayout() const;
 
 public slots:
     /**
@@ -64,7 +64,7 @@ public slots:
 
     void on_ActiveSheetChanged(const VPSheetPtr &focusedSheet);
 
-    void RefreshPieces();
+    void RefreshPieces() const;
 
 signals:
     /**
@@ -108,9 +108,9 @@ private:
     void TranslatePiecesOn(qreal dx, qreal dy);
 
     void SwitchScene(const VPSheetPtr &sheet);
-    void ClearSelection();
+    void ClearSelection() const;
 
-    void ZValueMove(int move);
+    void ZValueMove(int move) const;
 
     void RemovePiece() const;
     void MovePiece(QKeyEvent *event);

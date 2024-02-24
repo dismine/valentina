@@ -103,7 +103,7 @@ VPMainGraphicsView::VPMainGraphicsView(const VPLayoutPtr &layout, QWidget *paren
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VPMainGraphicsView::RefreshLayout()
+void VPMainGraphicsView::RefreshLayout() const
 {
     VPLayoutPtr const layout = m_layout.toStrongRef();
     if (not layout.isNull())
@@ -117,7 +117,7 @@ void VPMainGraphicsView::RefreshLayout()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VPMainGraphicsView::RefreshPieces()
+void VPMainGraphicsView::RefreshPieces() const
 {
     VPLayoutPtr const layout = m_layout.toStrongRef();
     if (not layout.isNull())
@@ -570,7 +570,7 @@ void VPMainGraphicsView::SwitchScene(const VPSheetPtr &sheet)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VPMainGraphicsView::ClearSelection()
+void VPMainGraphicsView::ClearSelection() const
 {
     VPLayoutPtr const layout = m_layout.toStrongRef();
     if (layout.isNull())
@@ -593,7 +593,7 @@ void VPMainGraphicsView::ClearSelection()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VPMainGraphicsView::ZValueMove(int move)
+void VPMainGraphicsView::ZValueMove(int move) const
 {
     VPLayoutPtr const layout = m_layout.toStrongRef();
     if (layout.isNull())

@@ -84,7 +84,7 @@ auto VBestSquare::operator=(VBestSquare &&res) noexcept -> VBestSquare &
 //---------------------------------------------------------------------------------------------------------------------
 void VBestSquare::NewResult(const VBestSquareResData &data)
 {
-    auto SaveResult = [this, data]()
+    auto SaveResult = [this, &data]()
     {
         d->valideResult = true;
         d->data = data;

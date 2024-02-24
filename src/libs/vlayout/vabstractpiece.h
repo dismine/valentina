@@ -940,7 +940,7 @@ template <class T>
 inline auto VAbstractPiece::MapVector(QVector<T> points, const QTransform &matrix, bool mirror) -> QVector<T>
 {
     std::transform(points.begin(), points.end(), points.begin(),
-                   [matrix](const T &point) { return MapPoint(point, matrix); });
+                   [&matrix](const T &point) { return MapPoint(point, matrix); });
     if (mirror)
     {
         std::reverse(points.begin(), points.end());

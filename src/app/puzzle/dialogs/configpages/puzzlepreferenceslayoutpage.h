@@ -99,7 +99,7 @@ private:
 
     void ReadSettings();
 
-    void FindTemplate(QComboBox *box, qreal width, qreal height);
+    void FindTemplate(QComboBox *box, qreal width, qreal height) const;
 };
 
 #endif // PUZZLEPREFERENCESLAYOUTPAGE_H

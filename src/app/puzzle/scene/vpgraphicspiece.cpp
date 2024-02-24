@@ -205,7 +205,7 @@ VPGraphicsPiece::VPGraphicsPiece(const VPPiecePtr &piece, QGraphicsItem *parent)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-auto VPGraphicsPiece::GetPiece() -> VPPiecePtr
+auto VPGraphicsPiece::GetPiece() const -> VPPiecePtr
 {
     return m_piece.toStrongRef();
 }
@@ -809,7 +809,7 @@ void VPGraphicsPiece::PaintInternalPaths(QPainter *painter, const VPPiecePtr &pi
             QVector<VLayoutPoint> points = piecePath.Points();
             const QTransform matrix = VGObject::FlippingMatrix(piece->GetSeamMirrorLine());
             std::transform(points.begin(), points.end(), points.begin(),
-                           [matrix](const VLayoutPoint &point) { return VAbstractPiece::MapPoint(point, matrix); });
+                           [&matrix](const VLayoutPoint &point) { return VAbstractPiece::MapPoint(point, matrix); });
             QVector<QPointF> casted;
             CastTo(points, casted);
             path.addPath(piece->GetMatrix().map(VPiecePath::MakePainterPath(casted)));
@@ -893,7 +893,7 @@ void VPGraphicsPiece::PaintPlaceLabels(QPainter *painter, const VPPiecePtr &piec
             for (auto &points : shape)
             {
                 std::transform(points.begin(), points.end(), points.begin(),
-                               [matrix](const VLayoutPoint &point) { return VAbstractPiece::MapPoint(point, matrix); });
+                               [&matrix](const VLayoutPoint &point) { return VAbstractPiece::MapPoint(point, matrix); });
             }
 
             path.addPath(VAbstractPiece::LabelShapePath(piece->MapPlaceLabelShape(shape)));
@@ -939,7 +939,7 @@ void VPGraphicsPiece::PaintStickyPath(QPainter *painter)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VPGraphicsPiece::PaintMirrorLine(QPainter *painter, const VPPiecePtr &piece)
+void VPGraphicsPiece::PaintMirrorLine(QPainter *painter, const VPPiecePtr &piece) const
 {
     if (piece->IsShowFullPiece())
     {

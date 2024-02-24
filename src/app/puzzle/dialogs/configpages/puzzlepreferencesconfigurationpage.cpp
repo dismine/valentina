@@ -310,7 +310,7 @@ void PuzzlePreferencesConfigurationPage::InitShortcuts(bool defaults)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void PuzzlePreferencesConfigurationPage::UpdateShortcutsTable()
+void PuzzlePreferencesConfigurationPage::UpdateShortcutsTable() const
 {
     for (int i = 0; i < m_transientShortcuts.length(); i++)
     {
@@ -320,7 +320,7 @@ void PuzzlePreferencesConfigurationPage::UpdateShortcutsTable()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void PuzzlePreferencesConfigurationPage::RetranslateShortcutsTable()
+void PuzzlePreferencesConfigurationPage::RetranslateShortcutsTable() const
 {
     VAbstractShortcutManager *manager = VAbstractApplication::VApp()->GetShortcutManager();
     if (manager == nullptr)

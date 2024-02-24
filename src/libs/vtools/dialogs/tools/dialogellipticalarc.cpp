@@ -592,7 +592,7 @@ void DialogEllipticalArc::ShowDialog(bool click)
         const QSharedPointer<VPointF> center = data->GeometricObject<VPointF>(GetCenter());
         QLineF line = QLineF(static_cast<QPointF>(*center), scene->getScenePos());
 
-        auto Angle = [line]()
+        auto Angle = [&line]()
         {
             if (QGuiApplication::keyboardModifiers() == Qt::ShiftModifier)
             {

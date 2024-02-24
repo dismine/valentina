@@ -689,7 +689,7 @@ void VPTileFactory::PaintWatermarkImage(QPainter *painter, const QRectF &img, co
     SCASSERT(painter != nullptr)
 
     const qreal opacity = watermarkData.opacity / 100.;
-    auto BrokenImage = [img, watermarkData, watermarkPath, opacity, folowColorScheme]()
+    auto BrokenImage = [&img, &watermarkData, watermarkPath, opacity, folowColorScheme]()
     {
         QString colorScheme = QStringLiteral("light");
 

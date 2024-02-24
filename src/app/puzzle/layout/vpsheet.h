@@ -129,7 +129,7 @@ private:
     bool m_outOfBoundTmp{false};
     bool m_pieceSuperpositionTmp{false};
 
-    void ConnectPiece(VPGraphicsPiece *piece);
+    void ConnectPiece(VPGraphicsPiece *piece) const;
 };
 
 class VPSheet : public QObject
