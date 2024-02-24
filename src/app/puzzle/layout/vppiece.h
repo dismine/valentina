@@ -65,13 +65,13 @@ public:
      * @brief SetPosition Sets the position of the piece, in relation to the origin of the scene
      * @param point the point where to set the piece
      */
-    void SetPosition(QPointF point) const;
+    void SetPosition(QPointF point);
 
     /**
      * @brief GetPosition Returns the position of the piece
      * @return the position of the piece
      */
-    auto QPointF GetPosition() -> QPointF;
+    auto GetPosition() const -> QPointF;
 
     /**
      * @brief RotateToGrainline  rotates the piece to follow the grainline

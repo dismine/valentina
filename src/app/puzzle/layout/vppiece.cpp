@@ -217,7 +217,7 @@ void VPPiece::ClearTransformations()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VPPiece::SetPosition(QPointF point) const
+void VPPiece::SetPosition(QPointF point)
 {
     QTransform matrix = GetMatrix();
     const QPointF offset = MappedDetailBoundingRect().topLeft();
