@@ -607,7 +607,14 @@ void DialogSaveManualLayout::RemoveFormatFromList(LayoutExportFormats format)
 void DialogSaveManualLayout::ReadSettings()
 {
     VPSettings *settings = VPApplication::VApp()->PuzzleSettings();
-    SelectFormat(static_cast<LayoutExportFormats>(settings->GetLayoutExportFormat()));
+    try
+    {
+        SelectFormat(static_cast<LayoutExportFormats>(settings->GetLayoutExportFormat()));
+    }
+    catch (VException &e)
+    {
+        qDebug() << qUtf8Printable(e.ErrorMessage());
+    }
     SetShowGrainline(settings->GetShowGrainline());
 }
 

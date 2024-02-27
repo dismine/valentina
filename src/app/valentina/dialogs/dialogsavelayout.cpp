@@ -786,11 +786,25 @@ void DialogSaveLayout::ReadSettings()
 
     if (m_mode != Draw::Layout)
     {
-        SelectFormat(static_cast<LayoutExportFormats>(settings->GetDetailExportFormat()));
+        try
+        {
+            SelectFormat(static_cast<LayoutExportFormats>(settings->GetDetailExportFormat()));
+        }
+        catch (VException &e)
+        {
+            qDebug() << qUtf8Printable(e.ErrorMessage());
+        }
     }
     else
     {
-        SelectFormat(static_cast<LayoutExportFormats>(settings->GetLayoutExportFormat()));
+        try
+        {
+            SelectFormat(static_cast<LayoutExportFormats>(settings->GetLayoutExportFormat()));
+        }
+        catch (VException &e)
+        {
+            qDebug() << qUtf8Printable(e.ErrorMessage());
+        }
         SetShowGrainline(settings->GetShowGrainline());
     }
 }
