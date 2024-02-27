@@ -163,7 +163,7 @@ void VPPiece::Update(const VPPiecePtr &piece)
     SetPatternLabelRect(piece->GetPatternLabelRect());
     SetPatternLabelData(piece->GetPatternLabelData());
     SetSeamMirrorLine(piece->GetSeamMirrorLine());
-    SetSeamAllowanceMirrorLine(piece->GetMappedSeamAllowanceMirrorLine());
+    SetSeamAllowanceMirrorLine(piece->GetSeamAllowanceMirrorLine());
     SetFoldLineLabel(piece->GetFoldLineLabel());
     SetFoldLineLabelAlignment(piece->GetFoldLineLabelAlignment());
     SetFoldLineType(piece->GetFoldLineType());
