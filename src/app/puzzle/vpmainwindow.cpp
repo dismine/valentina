@@ -3552,12 +3552,20 @@ void VPMainWindow::on_actionOpen_triggered()
 
     const QString mPath = QFileDialog::getOpenFileName(this, tr("Open file"), pathTo, filter, nullptr,
                                                        VAbstractApplication::VApp()->NativeFileDialog());
+    if (mPath.isEmpty())
+    {
+        return;
+    }
 
-    if (not mPath.isEmpty())
+    if (curFile.isEmpty() && !this->isWindowModified())
+    {
+        VPApplication::VApp()->MainWindow()->LoadFile(mPath);
+    }
+    else
     {
         VPApplication::VApp()->NewMainWindow()->LoadFile(mPath);
-        VPApplication::VApp()->PuzzleSettings()->SetPathManualLayouts(QFileInfo(mPath).absolutePath());
     }
+    VPApplication::VApp()->PuzzleSettings()->SetPathManualLayouts(QFileInfo(mPath).absolutePath());
 }
 
 //---------------------------------------------------------------------------------------------------------------------
