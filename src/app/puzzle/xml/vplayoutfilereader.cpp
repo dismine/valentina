@@ -957,7 +957,7 @@ void VPLayoutFileReader::ReadMirrorLines(const VPPiecePtr &piece)
     QXmlStreamAttributes const attribs = attributes();
 
     piece->SetFoldLineType(StringToFoldLineType(
-        ReadAttributeString(attribs, ML::AttrGrainlineType, FoldLineTypeToString(FoldLineType::TwoArrowsTextAbove))));
+        ReadAttributeString(attribs, ML::AttrFoldLineType, FoldLineTypeToString(FoldLineType::TwoArrowsTextAbove))));
     piece->SetFoldLineHeight(ReadAttributeDouble(attribs, ML::AttrFoldLineHeight, QChar('0')));
     piece->SetFoldLineWidth(ReadAttributeDouble(attribs, ML::AttrFoldLineWidth, QChar('0')));
     piece->SetFoldLineCenterPosition(ReadAttributeDouble(attribs, ML::AttrFoldLineCenter, QString::number(0.5)));
