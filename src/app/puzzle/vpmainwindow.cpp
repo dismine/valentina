@@ -2144,7 +2144,8 @@ void VPMainWindow::FindTemplate(QComboBox *box, qreal width, qreal height)
     {
         const QSizeF tmplSize =
             VAbstractLayoutDialog::GetTemplateSize(static_cast<VAbstractLayoutDialog::PaperSizeTemplate>(i), paperUnit);
-        if (QSizeF(width, height) == tmplSize || QSizeF(height, width) == tmplSize)
+        if (VAbstractLayoutDialog::RoundTemplateSize(width, height, paperUnit) == tmplSize ||
+            VAbstractLayoutDialog::RoundTemplateSize(height, width, paperUnit) == tmplSize)
         {
             box->blockSignals(true);
             const int index = box->findData(i);

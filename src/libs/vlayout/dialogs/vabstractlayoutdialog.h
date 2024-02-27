@@ -61,6 +61,7 @@ public:
     explicit VAbstractLayoutDialog(QWidget *parent = nullptr);
 
     static auto GetTemplateSize(PaperSizeTemplate tmpl, Unit unit) -> QSizeF;
+    static auto RoundTemplateSize(qreal width, qreal height, Unit unit) -> QSizeF;
 
     static void InitTemplates(QComboBox *comboBoxTemplates);
     static void InitTileTemplates(QComboBox *comboBoxTemplates, bool keepCustom = false);
@@ -70,7 +71,6 @@ protected:
     using VIndexType = int;
 
     static auto PageFormatNames() -> const FormatsVector &;
-    static auto RoundTemplateSize(qreal width, qreal height, Unit unit) -> QSizeF;
 
 private:
     Q_DISABLE_COPY_MOVE(VAbstractLayoutDialog) // NOLINT

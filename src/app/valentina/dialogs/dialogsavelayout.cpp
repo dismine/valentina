@@ -760,7 +760,8 @@ void DialogSaveLayout::ReadSettings()
     ui->doubleSpinBoxBottomField->setSuffix(UnitsToStr(unit, true));
 
     // read Template
-    const QSizeF size = QSizeF(settings->GetTiledPDFPaperWidth(Unit::Mm), settings->GetTiledPDFPaperHeight(Unit::Mm));
+    const QSizeF size = VAbstractLayoutDialog::RoundTemplateSize(settings->GetTiledPDFPaperWidth(Unit::Mm),
+                                                                 settings->GetTiledPDFPaperHeight(Unit::Mm), Unit::Mm);
 
     const int max = static_cast<int>(PaperSizeTemplate::Custom);
     for (int i = 0; i < max; ++i)
