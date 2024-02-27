@@ -91,8 +91,7 @@ void InitLanguageList(QComboBox *combobox)
     combobox->clear();
 
     const QStringList fileNames = LocalList();
-    bool englishUS = false;
-    const QString en_US = QStringLiteral("en_US");
+    const QStringList supportedLocales = SupportedLocales();
 
     for (auto locale : fileNames)
     {
@@ -100,14 +99,9 @@ void InitLanguageList(QComboBox *combobox)
         locale.truncate(locale.lastIndexOf('.'_L1));  // "valentina_de_De"
         locale.remove(0, locale.indexOf('_'_L1) + 1); // "de_De"
 
-        if (locale.startsWith("ru"_L1))
+        if (locale.startsWith("ru"_L1) || !supportedLocales.contains(locale))
         {
             continue;
-        }
-
-        if (not englishUS)
-        {
-            englishUS = (en_US == locale);
         }
 
         QLocale const loc = QLocale(locale);
@@ -122,16 +116,12 @@ void InitLanguageList(QComboBox *combobox)
         combobox->addItem(ico, lang, locale);
     }
 
-    if (combobox->count() == 0 || not englishUS)
-    {
-        // English language is internal and doens't have own *.qm file.
-        // Since Qt 5.12 country names have spaces
-        QIcon const ico(u"://flags/%1.png"_s.arg(TerritoryToString(QLocale::UnitedStates))
-
-        );
-        QString const lang = QLocale(en_US).nativeLanguageName();
-        combobox->addItem(ico, lang, en_US);
-    }
+    // English language is internal and doesn't have own *.qm file.
+    // Since Qt 5.12 country names have spaces
+    QIcon const ico(u"://flags/%1.png"_s.arg(TerritoryToString(QLocale::UnitedStates)));
+    const QString en_US = QStringLiteral("en_US");
+    QString const lang = QLocale(en_US).nativeLanguageName();
+    combobox->addItem(ico, lang, en_US);
 }
 } // namespace
 
@@ -166,7 +156,7 @@ void SetItemOverrideCursor(QGraphicsItem *item, const QString &pixmapPath, int h
 auto SupportedLocales() -> QStringList
 {
     return QStringList{"uk_UA", "de_DE", "cs_CZ", "he_IL", "fr_FR", "it_IT", "nl_NL", "id_ID",
-                       "es_ES", "fi_FI", "en_US", "ro_RO", "zh_CN", "pt_BR", "el_GR", "pl_PL"};
+                       "es_ES", "fi_FI", "ro_RO", "zh_CN", "pt_BR", "el_GR", "pl_PL"};
 }
 
 //---------------------------------------------------------------------------------------------------------------------

@@ -17,7 +17,6 @@ isEmpty(LOCALES){
         id_ID \
         es_ES \
         fi_FI \
-        en_US \
         ro_RO \
         zh_CN \
         pt_BR \
@@ -166,17 +165,6 @@ macx{
                 $${TRANSLATIONS_PATH}/Localizable.strings
             TRANSLATION_fi_FI.path = "$$RESOURCES_DIR/translations/fi_FI.lproj"
             QMAKE_BUNDLE_DATA += TRANSLATION_fi_FI
-        }
-
-        exists($${TRANSLATIONS_PATH}/valentina_en_US.qm){
-            TRANSLATION_en_US.files += \
-                $$files($${TRANSLATIONS_PATH}/*_en_US.qm) \
-                $$[QT_INSTALL_TRANSLATIONS]/qtbase_en.qm \
-                $$[QT_INSTALL_TRANSLATIONS]/qt_en.qm \
-                $$[QT_INSTALL_TRANSLATIONS]/qtxmlpatterns_en.qm \
-                $${TRANSLATIONS_PATH}/Localizable.strings
-            TRANSLATION_en_US.path = "$$RESOURCES_DIR/translations/en_US.lproj"
-            QMAKE_BUNDLE_DATA += TRANSLATION_en_US
         }
 
         exists($${TRANSLATIONS_PATH}/valentina_ro_RO.qm){

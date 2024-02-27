@@ -34,12 +34,11 @@
 class TST_TSTranslation : public TST_AbstractTranslation
 {
     Q_OBJECT // NOLINT
+
 public:
     explicit TST_TSTranslation(QObject *parent = nullptr);
 
 private slots:
-    void CheckEnglishLocalization_data();
-    void CheckEnglishLocalization();
     void CheckEmptyToolButton_data();
     void CheckEmptyToolButton();
     void CheckEllipsis_data();

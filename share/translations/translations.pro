@@ -60,7 +60,6 @@ LANGUAGES += \
     id_ID \
     es_ES \
     fi_FI \
-    en_US \
     ro_RO \
     zh_CN \
     pt_BR \
