@@ -519,6 +519,15 @@ end;
 /////////////////////////////////////////////////////////////////////
 // Version comparison on installation
 
+function GetRegistryRootKey(): Integer;
+begin
+  // Check if the installer is running in administrative install mode
+  if IsAdminInstallMode() then
+    Result := HKEY_LOCAL_MACHINE
+  else
+    Result := HKEY_CURRENT_USER;
+end;
+
 function VersionCompareAndUninstall(): Boolean;
 var
   oldVersion: String;
@@ -528,10 +537,10 @@ var
 begin
   tmpId := '{#emit SetupSetting("AppId")}';
   Delete(tmpId,1,1);
-  if RegKeyExists(HKEY_LOCAL_MACHINE,
+  if RegKeyExists(GetRegistryRootKey(),
     'SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall\' + tmpId + '_is1') then
   begin
-    RegQueryStringValue(HKEY_LOCAL_MACHINE,
+    RegQueryStringValue(GetRegistryRootKey(),
       'SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall\' + tmpId + '_is1',
       'DisplayVersion', oldVersion);
     if (CompareVersion(oldVersion, '{#emit SetupSetting("AppVersion")}') < 0) then
@@ -543,7 +552,7 @@ begin
       end
       else
       begin
-          RegQueryStringValue(HKEY_LOCAL_MACHINE,'SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall\' + tmpId + '_is1','UninstallString', uninstaller);
+          RegQueryStringValue(GetRegistryRootKey(),'SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall\' + tmpId + '_is1','UninstallString', uninstaller);
           If ShellExec('', uninstaller, '/SILENT', '', SW_SHOW, ewWaitUntilTerminated, ErrorCode) then
           begin
             // handle success if necessary; ResultCode contains the exit code
