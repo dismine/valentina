@@ -1721,17 +1721,22 @@ void VDxfEngine::ExportASTMNotches(const QSharedPointer<dx_ifaceBlock> &detailBl
 //---------------------------------------------------------------------------------------------------------------------
 void VDxfEngine::ExportASTMMirrorLine(const QSharedPointer<dx_ifaceBlock> &detailBlock, const VLayoutPiece &detail)
 {
-    if (detail.IsShowFullPiece())
+    const QLineF mirrorLine = detail.GetMappedSeamAllowanceMirrorLine();
+    if (mirrorLine.isNull())
     {
-        const QLineF mirrorLine = detail.GetMappedSeamAllowanceMirrorLine();
-        if (not mirrorLine.isNull())
+        return;
+    }
+
+    const bool isShowFullPiece = detail.IsShowFullPiece();
+    const auto layer = isShowFullPiece ? layer8 : layer6;
+
+    if (DRW_Entity *e = AAMALine(mirrorLine, *layer))
+    {
+        if (isShowFullPiece)
         {
-            if (DRW_Entity *e = AAMALine(mirrorLine, *layer6))
-            {
-                e->lineType = dx_iface::QtPenStyleToString(Qt::DashDotLine);
-                detailBlock->ent.push_back(e);
-            }
+            e->lineType = dx_iface::QtPenStyleToString(Qt::DashDotLine);
         }
+        detailBlock->ent.push_back(e);
     }
 }
 
