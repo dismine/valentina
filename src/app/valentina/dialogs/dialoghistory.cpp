@@ -151,12 +151,15 @@ void DialogHistory::cellClicked(int row, int column)
     else
     {
         QTableWidgetItem *item = ui->tableWidget->item(m_cursorToolRecordRow, 0);
-        auto id = qvariant_cast<quint32>(item->data(Qt::UserRole));
-        emit ShowHistoryTool(id, false);
+        if (item != nullptr)
+        {
+            auto id = qvariant_cast<quint32>(item->data(Qt::UserRole));
+            emit ShowHistoryTool(id, false);
+        }
 
         m_cursorToolRecordRow = row;
         item = ui->tableWidget->item(m_cursorToolRecordRow, 0);
-        id = qvariant_cast<quint32>(item->data(Qt::UserRole));
+        auto id = qvariant_cast<quint32>(item->data(Qt::UserRole));
         emit ShowHistoryTool(id, true);
     }
 }
