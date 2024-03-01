@@ -349,8 +349,8 @@ for:
     - (python --version)
     # Install the build dependencies of the project.
     - (python -m pip install --upgrade pip)
-    - if "%DEPLOY%" == "true" (python -m pip install dropbox)
-    - python -m pip install conan==1.61.0
+    - if "%DEPLOY%" == "true" (python -m pip install dropbox py7zr)
+    - python -m pip install conan==1.63.0 
     - dir "C:\"
     - dir "C:\Qt"
     - dir "C:\Qt\Tools"
@@ -481,7 +481,7 @@ for:
     - if "%DEPLOY%" == "true" (python --version)
     # Install the build dependencies of the project.
     - if "%DEPLOY%" == "true" (python -m pip install --upgrade pip)
-    - if "%DEPLOY%" == "true" (python -m pip install dropbox)
+    - if "%DEPLOY%" == "true" (python -m pip install dropbox py7zr)
     # Trick qmake to not work through MSYS
     - del /F "C:\Program Files\Git\usr\bin\sh.exe"
     - del /F "C:\Program Files\Git\bin\sh.exe"
@@ -643,7 +643,7 @@ for:
 
       fi
     - sudo python3 -m pip install --upgrade pip
-    - pip3 install --user --upgrade pip dropbox 'urllib3<2.0'
+    - pip3 install --user --upgrade pip dropbox py7zr 'urllib3<2.0'
     - export QTDIR=`$(brew --prefix qt6)`
     - export PATH="$PATH:`python3 -m site --user-base`/bin:$QTDIR/bin"
     - echo $PATH
@@ -827,7 +827,7 @@ for:
 
       fi
     - sudo python3 -m pip install --upgrade pip
-    - pip3 install --user --upgrade pip dropbox 'urllib3<2.0'
+    - pip3 install --user --upgrade pip dropbox py7zr 'urllib3<2.0'
     - export PATH="`brew --prefix qbs`/bin:$PATH"
     - echo $PATH
     - clang --version

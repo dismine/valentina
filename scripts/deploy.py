@@ -5,6 +5,7 @@ import pathlib
 import re
 import shutil
 import sys
+import py7zr
 
 import dropbox
 from dropbox import DropboxOAuth2FlowNoRedirect
@@ -47,15 +48,23 @@ def run_pack(source, destination):
 
     formats = {
         ".zip": "zip",
-        ".tar.xz": "xztar"
+        ".tar.xz": "xztar",
+        ".7z": "7zip"
     }
     suffix = ''.join(pathlib.Path(base).suffixes)
-    format = formats.get(suffix)
     archive_from = pathlib.Path(source).parent
     archive_to = os.path.basename(source.strip(os.sep))
     print(source, destination, archive_from)
-    shutil.make_archive(name, format, archive_from, archive_to)
-    shutil.move(f'{name}{suffix}', destination)
+    format = formats.get(suffix)
+    if format:
+        if format == "7zip":
+            with py7zr.SevenZipFile(f"{name}{suffix}", 'w') as archive:
+                archive.writeall(source, arcname=os.path.basename(source))
+        else:
+            shutil.make_archive(name, format, archive_from, archive_to)
+        shutil.move(f'{name}{suffix}', destination)
+    else:
+        print("Unsupported archive format.")
 
 
 def run_upload(refresh_token, file, path):
@@ -136,6 +145,10 @@ def run_clean(refresh_token):
                         r'^valentina-Windows7\+-mingw-x86-Qt.*-develop-[a-f0-9]{40}\.exe$',
                         r'^valentina-Windows10\+-msvc-x64-Qt.*-develop-[a-f0-9]{40}\.exe$',
                         r'^valentina-Windows7\+-msvc-x86-Qt.*-develop-[a-f0-9]{40}\.exe$',
+                        r'^valentina-portable-Windows10\+-mingw-x64-Qt.*-develop-[a-f0-9]{40}\.7z$',
+                        r'^valentina-portable-Windows7\+-mingw-x86-Qt.*-develop-[a-f0-9]{40}\.7z$',
+                        r'^valentina-portable-Windows10\+-msvc-x64-Qt.*-develop-[a-f0-9]{40}\.7z$',
+                        r'^valentina-portable-Windows7\+-msvc-x86-Qt.*-develop-[a-f0-9]{40}\.7z$',
                         r'^valentina-macOS_11\+-Qt.*-x64-develop-[a-f0-9]{40}\.dmg$',
                         r'^valentina-macOS_11\+-Qt.*-x64-develop-multibundle-[a-f0-9]{40}\.dmg$',
                         r'^valentina-macOS_10.13\+-Qt.*-x64-develop-[a-f0-9]{40}\.dmg$',
