@@ -1728,9 +1728,9 @@ void VDxfEngine::ExportASTMMirrorLine(const QSharedPointer<dx_ifaceBlock> &detai
     }
 
     const bool isShowFullPiece = detail.IsShowFullPiece();
-    const auto layer = isShowFullPiece ? layer8 : layer6;
+    const auto layer = isShowFullPiece ? *layer8 : *layer6;
 
-    if (DRW_Entity *e = AAMALine(mirrorLine, *layer))
+    if (DRW_Entity *e = AAMALine(mirrorLine, layer))
     {
         if (isShowFullPiece)
         {
