@@ -45,7 +45,7 @@ class DialogPointOfIntersection;
 /**
  * @brief The DialogPointOfIntersection class dialog for ToolPointOfIntersection. Help create point and edit option.
  */
-class DialogPointOfIntersection : public DialogTool
+class DialogPointOfIntersection final : public DialogTool
 {
     Q_OBJECT // NOLINT
 
@@ -75,7 +75,7 @@ protected:
      * @brief SaveData Put dialog data in local variables
      */
     void SaveData() override;
-    auto IsValid() const -> bool final;
+    auto IsValid() const -> bool override;
 
 private:
     Q_DISABLE_COPY_MOVE(DialogPointOfIntersection) // NOLINT

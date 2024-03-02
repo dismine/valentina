@@ -45,7 +45,7 @@ namespace Ui
 class DialogRotation;
 }
 
-class DialogRotation : public DialogTool
+class DialogRotation final : public DialogTool
 {
     Q_OBJECT // NOLINT
 
@@ -104,7 +104,7 @@ protected:
     void SaveData() override;
     void closeEvent(QCloseEvent *event) override;
     void changeEvent(QEvent *event) override;
-    auto IsValid() const -> bool final;
+    auto IsValid() const -> bool override;
 
 private slots:
     void PointChanged();

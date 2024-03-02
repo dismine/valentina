@@ -33,32 +33,33 @@
 
 namespace Ui
 {
-    class DialogPin;
+class DialogPin;
 }
 
-class DialogPin : public DialogTool
+class DialogPin final : public DialogTool
 {
     Q_OBJECT // NOLINT
+
 public:
     explicit DialogPin(const VContainer *data, VAbstractPattern *doc, quint32 toolId, QWidget *parent = nullptr);
-    virtual ~DialogPin();
+    ~DialogPin() override;
 
     void EnbleShowMode(bool disable);
 
     auto GetPieceId() const -> quint32;
-    void    SetPieceId(quint32 id);
+    void SetPieceId(quint32 id);
 
     auto GetPointId() const -> quint32;
-    void    SetPointId(quint32 id);
+    void SetPointId(quint32 id);
 
-    virtual void SetPiecesList(const QVector<quint32> &list) override;
+    void SetPiecesList(const QVector<quint32> &list) override;
 
 public slots:
-    virtual void ChosenObject(quint32 id, const SceneObject &type) override;
+    void ChosenObject(quint32 id, const SceneObject &type) override;
 
 protected:
-    virtual void ShowVisualization() override;
-    virtual auto IsValid() const -> bool final;
+    void ShowVisualization() override;
+    auto IsValid() const -> bool override;
 
 private:
     Q_DISABLE_COPY_MOVE(DialogPin) // NOLINT

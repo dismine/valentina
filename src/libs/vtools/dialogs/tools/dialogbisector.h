@@ -98,7 +98,7 @@ protected:
     void SaveData() override;
     void closeEvent(QCloseEvent *event) override;
     void changeEvent(QEvent *event) override;
-    auto IsValid() const -> bool final;
+    auto IsValid() const -> bool override;
 
 private:
     Q_DISABLE_COPY_MOVE(DialogBisector) // NOLINT

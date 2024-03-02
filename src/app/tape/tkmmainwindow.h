@@ -47,7 +47,7 @@ class VPatternImage;
 class QCompleter;
 class QxtCsvModel;
 
-class TKMMainWindow : public VAbstractMainWindow
+class TKMMainWindow final : public VAbstractMainWindow
 {
     Q_OBJECT // NOLINT
 
@@ -68,7 +68,7 @@ protected:
     void closeEvent(QCloseEvent *event) override;
     void changeEvent(QEvent *event) override;
     auto eventFilter(QObject *object, QEvent *event) -> bool override;
-    void ExportToCSVData(const QString &fileName, bool withHeader, int mib, const QChar &separator) final;
+    void ExportToCSVData(const QString &fileName, bool withHeader, int mib, const QChar &separator) override;
     auto RecentFileList() const -> QStringList override;
 
 private slots:

@@ -64,7 +64,7 @@ class VWidgetBackgroundImages;
 /**
  * @brief The MainWindow class main windows.
  */
-class MainWindow : public MainWindowsNoGUI
+class MainWindow final : public MainWindowsNoGUI
 {
     Q_OBJECT // NOLINT
 
@@ -120,7 +120,7 @@ protected:
     void customEvent(QEvent *event) override;
     void CleanLayout() override;
     void PrepareSceneList(PreviewQuatilty quality) override;
-    void ExportToCSVData(const QString &fileName, bool withHeader, int mib, const QChar &separator) final;
+    void ExportToCSVData(const QString &fileName, bool withHeader, int mib, const QChar &separator) override;
     void ToolBarStyle(QToolBar *bar) const override;
 private slots:
     void ScaleChanged(qreal scale);

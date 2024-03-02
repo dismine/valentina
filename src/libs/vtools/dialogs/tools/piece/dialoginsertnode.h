@@ -34,31 +34,31 @@
 
 namespace Ui
 {
-    class DialogInsertNode;
+class DialogInsertNode;
 }
 
-class DialogInsertNode : public DialogTool
+class DialogInsertNode final : public DialogTool
 {
     Q_OBJECT // NOLINT
 
 public:
     explicit DialogInsertNode(const VContainer *data, VAbstractPattern *doc, quint32 toolId, QWidget *parent = nullptr);
-    virtual ~DialogInsertNode();
+    ~DialogInsertNode() override;
 
-    virtual void SetPiecesList(const QVector<quint32> &list) override;
+    void SetPiecesList(const QVector<quint32> &list) override;
 
     auto GetPieceId() const -> quint32;
-    void    SetPieceId(quint32 id);
+    void SetPieceId(quint32 id);
 
     auto GetNodes() const -> QVector<VPieceNode>;
 
-    virtual void ShowDialog(bool click) override;
+    void ShowDialog(bool click) override;
 
 public slots:
-    virtual void SelectedObject(bool selected, quint32 object, quint32 tool) override;
+    void SelectedObject(bool selected, quint32 object, quint32 tool) override;
 
 protected:
-    virtual auto IsValid() const -> bool final;
+    auto IsValid() const -> bool override;
 
 private slots:
     void ShowContextMenu(const QPoint &pos);

@@ -45,7 +45,7 @@ namespace Ui
 class DialogCubicBezierPath;
 }
 
-class DialogCubicBezierPath : public DialogTool
+class DialogCubicBezierPath final : public DialogTool
 {
     Q_OBJECT // NOLINT
 
@@ -67,7 +67,7 @@ public slots:
 protected:
     void ShowVisualization() override;
     void SaveData() override;
-    auto IsValid() const -> bool final;
+    auto IsValid() const -> bool override;
 
 private slots:
     void PointChanged(int row);

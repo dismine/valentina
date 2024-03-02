@@ -44,12 +44,13 @@ namespace Ui
 class DialogCubicBezier;
 }
 
-class DialogCubicBezier : public DialogTool
+class DialogCubicBezier final : public DialogTool
 {
     Q_OBJECT // NOLINT
 
 public:
-    explicit DialogCubicBezier(const VContainer *data, VAbstractPattern *doc, quint32 toolId, QWidget *parent = nullptr);
+    explicit DialogCubicBezier(const VContainer *data, VAbstractPattern *doc, quint32 toolId,
+                               QWidget *parent = nullptr);
     ~DialogCubicBezier() override;
 
     auto GetSpline() const -> VCubicBezier;
@@ -68,7 +69,7 @@ protected:
      * @brief SaveData Put dialog data in local variables
      */
     void SaveData() override;
-    auto IsValid() const -> bool final;
+    auto IsValid() const -> bool override;
 
 private slots:
     void ValidateAlias();

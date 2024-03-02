@@ -52,7 +52,7 @@ class QAbstractButton;
 class QUuid;
 class VKnownMeasurements;
 
-class TMainWindow : public VAbstractMainWindow
+class TMainWindow final : public VAbstractMainWindow
 {
     Q_OBJECT // NOLINT
 
@@ -80,7 +80,7 @@ protected:
     void closeEvent(QCloseEvent *event) override;
     void changeEvent(QEvent *event) override;
     auto eventFilter(QObject *object, QEvent *event) -> bool override;
-    void ExportToCSVData(const QString &fileName, bool withHeader, int mib, const QChar &separator) final;
+    void ExportToCSVData(const QString &fileName, bool withHeader, int mib, const QChar &separator) override;
     auto RecentFileList() const -> QStringList override;
 
 private slots:
@@ -295,7 +295,7 @@ private:
     void SetCurrentDimensionValues();
 
     auto DimensionRestrictedValues(int index, const MeasurementDimension_p &dimension) -> QVector<double>;
-    
+
     auto OrderedMeasurements() const -> QMap<int, QSharedPointer<VMeasurement>>;
 
     void InitIcons();

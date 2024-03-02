@@ -45,7 +45,7 @@ class DialogLineIntersect;
 /**
  * @brief The DialogLineIntersect class dialog for ToolLineIntersect. Help create point and edit option.
  */
-class DialogLineIntersect : public DialogTool
+class DialogLineIntersect final : public DialogTool
 {
     Q_OBJECT // NOLINT
 
@@ -82,7 +82,7 @@ protected:
      * @brief SaveData Put dialog data in local variables
      */
     void SaveData() override;
-    auto IsValid() const -> bool final;
+    auto IsValid() const -> bool override;
 
 private:
     Q_DISABLE_COPY_MOVE(DialogLineIntersect) // NOLINT

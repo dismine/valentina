@@ -47,7 +47,7 @@ class DialogSpline;
 /**
  * @brief The DialogSpline class dialog for ToolSpline. Help create spline and edit option.
  */
-class DialogSpline : public DialogTool
+class DialogSpline final : public DialogTool
 {
     Q_OBJECT // NOLINT
 
@@ -74,7 +74,7 @@ protected:
     void SaveData() override;
     void closeEvent(QCloseEvent *event) override;
     void changeEvent(QEvent *event) override;
-    auto IsValid() const -> bool final;
+    auto IsValid() const -> bool override;
 
 private slots:
     void DeployAngle1TextEdit();

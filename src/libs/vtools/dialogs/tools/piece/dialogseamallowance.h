@@ -50,7 +50,7 @@ class VisPieceSpecialPoints;
 class FancyTabBar;
 class VUndoCommand;
 
-class DialogSeamAllowance : public DialogTool
+class DialogSeamAllowance final : public DialogTool
 {
     Q_OBJECT // NOLINT
 
@@ -74,13 +74,13 @@ public slots:
 protected:
     /** @brief SaveData Put dialog data in local variables */
     void SaveData() override;
-    void CheckState() final;
+    void CheckState() override;
     void closeEvent(QCloseEvent *event) override;
     void showEvent(QShowEvent *event) override;
     void resizeEvent(QResizeEvent *event) override;
     void changeEvent(QEvent *event) override;
-    auto IsValid() const -> bool final;
-    void SetPatternDoc(VAbstractPattern *doc) final;
+    auto IsValid() const -> bool override;
+    void SetPatternDoc(VAbstractPattern *doc) override;
 
 private slots:
     void NameDetailChanged();

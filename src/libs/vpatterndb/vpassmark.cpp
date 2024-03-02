@@ -152,7 +152,7 @@ auto PassmarkAngle(const VPiecePassmarkData &passmarkData, qreal angle) -> qreal
 //---------------------------------------------------------------------------------------------------------------------
 auto PassmarkWidth(const VPiecePassmarkData &passmarkData, qreal width) -> qreal
 {
-    auto ValidateWidth = [passmarkData](qreal width)
+    auto ValidateWidth = [&passmarkData](qreal width)
     {
         if (qAbs(width) <= accuracyPointOnLine)
         {

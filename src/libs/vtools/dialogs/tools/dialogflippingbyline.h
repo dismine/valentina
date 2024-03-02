@@ -46,12 +46,13 @@ namespace Ui
 class DialogFlippingByLine;
 }
 
-class DialogFlippingByLine : public DialogTool
+class DialogFlippingByLine final : public DialogTool
 {
     Q_OBJECT // NOLINT
 
 public:
-    explicit DialogFlippingByLine(const VContainer *data, VAbstractPattern *doc, quint32 toolId, QWidget *parent = nullptr);
+    explicit DialogFlippingByLine(const VContainer *data, VAbstractPattern *doc, quint32 toolId,
+                                  QWidget *parent = nullptr);
     ~DialogFlippingByLine() override;
 
     auto GetFirstLinePointId() const -> quint32;
@@ -99,7 +100,7 @@ protected:
 
     /** @brief SaveData Put dialog data in local variables */
     void SaveData() override;
-    auto IsValid() const -> bool final;
+    auto IsValid() const -> bool override;
 
 private slots:
     void PointChanged();

@@ -42,7 +42,7 @@ namespace Ui
 class DialogGroup;
 }
 
-class DialogGroup : public DialogTool
+class DialogGroup final : public DialogTool
 {
     Q_OBJECT // NOLINT
 
@@ -66,7 +66,7 @@ public slots:
     void SelectedObject(bool selected, quint32 object, quint32 tool) override;
 
 protected:
-    auto IsValid() const -> bool final;
+    auto IsValid() const -> bool override;
 
 private slots:
     void NameChanged();

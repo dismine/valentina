@@ -55,13 +55,9 @@
 
 struct VDrawToolInitData : VAbstractToolInitData
 {
-    VDrawToolInitData()
-      : VAbstractToolInitData(),
-        notes()
-    {
-    }
+    VDrawToolInitData() = default;
 
-    QString notes;
+    QString notes{};
 };
 
 /**
@@ -73,7 +69,7 @@ class VDrawTool : public VInteractiveTool
 
 public:
     VDrawTool(VAbstractPattern *doc, VContainer *data, quint32 id, const QString &notes, QObject *parent = nullptr);
-    virtual ~VDrawTool() = default;
+    ~VDrawTool() override = default;
 
     auto getLineType() const -> QString;
     virtual void SetLineType(const QString &value);
@@ -122,10 +118,10 @@ protected:
     /** @brief SaveDialog save options into file after change in dialog. */
     virtual void SaveDialog(QDomElement &domElement, QList<quint32> &oldDependencies,
                             QList<quint32> &newDependencies) = 0;
-    virtual void SaveDialogChange(const QString &undoText = QString()) final;
+    void SaveDialogChange(const QString &undoText = QString()) final;
     virtual void ApplyToolOptions(const QList<quint32> &oldDependencies, const QList<quint32> &newDependencies,
                                   const QDomElement &oldDomElement, const QDomElement &newDomElement);
-    virtual void AddToFile() override;
+    void AddToFile() override;
     void SaveOption(QSharedPointer<VGObject> &obj);
     virtual void SaveOptions(QDomElement &tag, QSharedPointer<VGObject> &obj);
     virtual auto MakeToolTip() const -> QString;

@@ -43,7 +43,7 @@ namespace Ui
 class DialogPointFromArcAndTangent;
 }
 
-class DialogPointFromArcAndTangent : public DialogTool
+class DialogPointFromArcAndTangent final : public DialogTool
 {
     Q_OBJECT // NOLINT
 
@@ -76,7 +76,7 @@ protected:
      * @brief SaveData Put dialog data in local variables
      */
     void SaveData() override;
-    auto IsValid() const -> bool final;
+    auto IsValid() const -> bool override;
 
 private:
     Q_DISABLE_COPY_MOVE(DialogPointFromArcAndTangent) // NOLINT

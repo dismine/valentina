@@ -43,12 +43,13 @@ namespace Ui
 class DialogPointOfIntersectionCircles;
 }
 
-class DialogPointOfIntersectionCircles : public DialogTool
+class DialogPointOfIntersectionCircles final : public DialogTool
 {
     Q_OBJECT // NOLINT
 
 public:
-    DialogPointOfIntersectionCircles(const VContainer *data, VAbstractPattern *doc, quint32 toolId, QWidget *parent = nullptr);
+    DialogPointOfIntersectionCircles(const VContainer *data, VAbstractPattern *doc, quint32 toolId,
+                                     QWidget *parent = nullptr);
     ~DialogPointOfIntersectionCircles() override;
 
     auto GetPointName() const -> QString;
@@ -95,7 +96,7 @@ protected:
     void SaveData() override;
     void closeEvent(QCloseEvent *event) override;
     void changeEvent(QEvent *event) override;
-    auto IsValid() const -> bool final;
+    auto IsValid() const -> bool override;
 
 private:
     Q_DISABLE_COPY_MOVE(DialogPointOfIntersectionCircles) // NOLINT

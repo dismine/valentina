@@ -50,7 +50,7 @@ struct VToolSeamAllowanceInitData : VAbstractToolInitData
     QString drawName{}; // NOLINT(misc-non-private-member-variables-in-classes)
 };
 
-class VToolSeamAllowance : public VInteractiveTool, public QGraphicsPathItem
+class VToolSeamAllowance final : public VInteractiveTool, public QGraphicsPathItem
 {
     Q_OBJECT // NOLINT
 
@@ -161,8 +161,8 @@ protected:
     void SetVisualization() override {}
     void DeleteToolWithConfirm(bool ask = true) override;
     void ToolCreation(const Source &typeCreation) override;
-    void SetDialog() final;
-    void SaveDialogChange(const QString &undoText = QString()) final;
+    void SetDialog() override;
+    void SaveDialogChange(const QString &undoText = QString()) override;
 
 private slots:
     void ToggleInLayout(bool checked);

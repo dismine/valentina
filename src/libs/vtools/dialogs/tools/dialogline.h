@@ -45,7 +45,7 @@ class DialogLine;
 /**
  * @brief The DialogLine class dialog for ToolLine. Help create line and edit option.
  */
-class DialogLine : public DialogTool
+class DialogLine final : public DialogTool
 {
     Q_OBJECT // NOLINT
 
@@ -78,7 +78,7 @@ protected:
      * @brief SaveData Put dialog data in local variables
      */
     void SaveData() override;
-    auto IsValid() const -> bool final;
+    auto IsValid() const -> bool override;
 
 private:
     Q_DISABLE_COPY_MOVE(DialogLine) // NOLINT

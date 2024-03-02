@@ -45,7 +45,7 @@ class DialogSinglePoint;
 /**
  * @brief The DialogSinglePoint class dialog for ToolSinglePoint. Help create point and edit option.
  */
-class DialogSinglePoint : public DialogTool
+class DialogSinglePoint final : public DialogTool
 {
     Q_OBJECT // NOLINT
 
@@ -69,7 +69,7 @@ protected:
      * @brief SaveData Put dialog data in local variables
      */
     void SaveData() override;
-    auto IsValid() const -> bool final;
+    auto IsValid() const -> bool override;
 
 private:
     Q_DISABLE_COPY_MOVE(DialogSinglePoint) // NOLINT

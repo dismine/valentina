@@ -105,7 +105,7 @@ signals:
     void DialogApplied();
 
 protected:
-    virtual auto IsValid() const -> bool final;
+    virtual auto IsValid() const -> bool;
     void closeEvent(QCloseEvent *event) override;
     void showEvent(QShowEvent *event) override;
     void resizeEvent(QResizeEvent *event) override;

@@ -45,7 +45,7 @@ class DialogEndLine;
 /**
  * @brief The DialogEndLine class dialog for ToolEndLine. Help create point and edit option.
  */
-class DialogEndLine : public DialogTool
+class DialogEndLine final : public DialogTool
 {
     Q_OBJECT // NOLINT
 
@@ -97,7 +97,7 @@ protected:
     void SaveData() override;
     void closeEvent(QCloseEvent *event) override;
     void changeEvent(QEvent *event) override;
-    auto IsValid() const -> bool final;
+    auto IsValid() const -> bool override;
 
 private:
     Q_DISABLE_COPY_MOVE(DialogEndLine) // NOLINT

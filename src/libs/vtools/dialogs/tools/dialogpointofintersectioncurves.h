@@ -43,7 +43,7 @@ namespace Ui
 class DialogPointOfIntersectionCurves;
 }
 
-class DialogPointOfIntersectionCurves : public DialogTool
+class DialogPointOfIntersectionCurves final : public DialogTool
 {
     Q_OBJECT // NOLINT
 
@@ -92,7 +92,7 @@ protected:
      * @brief SaveData Put dialog data in local variables
      */
     void SaveData() override;
-    auto IsValid() const -> bool final;
+    auto IsValid() const -> bool override;
 
 private slots:
     void CurveChanged();

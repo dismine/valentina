@@ -45,7 +45,7 @@ class DialogNormal;
 /**
  * @brief The DialogNormal class dialog for ToolNormal. Help create point and edit option.
  */
-class DialogNormal : public DialogTool
+class DialogNormal final : public DialogTool
 {
     Q_OBJECT // NOLINT
 
@@ -97,7 +97,7 @@ protected:
     void SaveData() override;
     void closeEvent(QCloseEvent *event) override;
     void changeEvent(QEvent *event) override;
-    auto IsValid() const -> bool final;
+    auto IsValid() const -> bool override;
 
 private:
     Q_DISABLE_COPY_MOVE(DialogNormal) // NOLINT

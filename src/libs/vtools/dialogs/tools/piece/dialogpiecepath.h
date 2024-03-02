@@ -36,7 +36,7 @@ namespace Ui
 class DialogPiecePath;
 }
 
-class DialogPiecePath : public DialogTool
+class DialogPiecePath final : public DialogTool
 {
     Q_OBJECT // NOLINT
 
@@ -63,11 +63,11 @@ public slots:
     void ShowDialog(bool click) override;
 
 protected:
-    void CheckState() final;
+    void CheckState() override;
     void ShowVisualization() override;
     void closeEvent(QCloseEvent *event) override;
     void changeEvent(QEvent *event) override;
-    auto IsValid() const -> bool final;
+    auto IsValid() const -> bool override;
 
 private slots:
     void ShowContextMenu(const QPoint &pos);

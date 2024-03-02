@@ -45,7 +45,7 @@ class DialogPointOfContact;
 /**
  * @brief The DialogPointOfContact class dialog for ToolPointOfContact. Help create point and edit option.
  */
-class DialogPointOfContact : public DialogTool
+class DialogPointOfContact final : public DialogTool
 {
     Q_OBJECT // NOLINT
 
@@ -91,7 +91,7 @@ protected:
     void SaveData() override;
     void closeEvent(QCloseEvent *event) override;
     void changeEvent(QEvent *event) override;
-    auto IsValid() const -> bool final;
+    auto IsValid() const -> bool override;
 
 private:
     Q_DISABLE_COPY_MOVE(DialogPointOfContact) // NOLINT

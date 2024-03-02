@@ -46,12 +46,13 @@ namespace Ui
 class DialogFlippingByAxis;
 }
 
-class DialogFlippingByAxis : public DialogTool
+class DialogFlippingByAxis final : public DialogTool
 {
     Q_OBJECT // NOLINT
 
 public:
-    explicit DialogFlippingByAxis(const VContainer *data, VAbstractPattern *doc, quint32 toolId, QWidget *parent = nullptr);
+    explicit DialogFlippingByAxis(const VContainer *data, VAbstractPattern *doc, quint32 toolId,
+                                  QWidget *parent = nullptr);
     ~DialogFlippingByAxis() override;
 
     auto GetOriginPointId() const -> quint32;
@@ -99,7 +100,7 @@ protected:
 
     /** @brief SaveData Put dialog data in local variables */
     void SaveData() override;
-    auto IsValid() const -> bool final;
+    auto IsValid() const -> bool override;
 
 private slots:
     void PointChanged();
