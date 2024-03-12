@@ -137,6 +137,7 @@ appimage_task_template: &APPIMAGE_TASK_TEMPLATE
     - Xvfb $DISPLAY -ac -screen 0 1600x1200x24+32 -nolisten tcp -nolisten unix &
     - sleep 1
     - ccache --set-config sloppiness=pch_defines,time_macros max_size="$CCACHE_SIZE"
+    - export PATH="${PATH}:/root/.local/bin"
     - echo $PATH
     - which qmake
     - which qbs
