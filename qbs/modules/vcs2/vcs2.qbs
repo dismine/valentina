@@ -7,11 +7,14 @@ import qbs.Utilities
 Module {
     property string type: typeProbe.type
     property string repoDir: project.sourceDirectory
+
+    // TODO: If minimal qbs version is 1.23 replace with FileInfo.executableSuffix()
+    readonly property string executableSuffix: project.qbs.targetOS.contains("windows") ? ".exe" : ""
     property string toolFilePath: {
         if (type === "git")
-            return "git";
+            return "git" + executableSuffix;
         if (type === "svn")
-            return "svn";
+            return "svn" + executableSuffix;
     }
 
     property string headerFileName: "vcs-repo-state.h"
@@ -101,13 +104,14 @@ Module {
                 // 3. latest commit is gSHA
                 proc.exec(tool, ["describe", "--always", "HEAD"], true);
                 repoState = proc.readStdOut().trim();
-                if (repoState)
+                if (repoState) {
                     found = true;
 
                     const tagSections = repoState.split("-");
                     repoStateTag = tagSections[0];
                     repoStateDistance = tagSections[1];
                     repoStateRevision = tagSections[2];
+                }
             } finally {
                 proc.close();
             }

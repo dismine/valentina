@@ -4,10 +4,12 @@ import "qbs/imports/conan/ConanfileProbe.qbs" as ConanfileProbe
 
 Project {
     name: "Valentina"
-    minimumQbsVersion: "1.21"
+    minimumQbsVersion: "1.22"
     qbsModuleProviders: ["Qt", "conan", "qbspkgconfig"]
 
     property bool enableConan: false
+    property bool conanWithXerces: false
+    property bool conanWithCrashReporting: false
     property string minimumMacosVersion: undefined
     property string minimumQtVersion: "5.15"
     property stringList conanProfiles: []
@@ -16,10 +18,19 @@ Project {
     // Temporary probe until qbs doesn't support conan 2.0
     ConanfileProbe {
         id: thirdPartyConanPackages
-        condition: enableConan
+        condition: enableConan && (conanWithXerces || conanWithCrashReporting)
         conanfilePath: project.sourceDirectory + "/conanfile.py"
         verbose: true
         profiles: conanProfiles
+        options: {
+            var o = {};
+            if (conanWithXerces)
+                o.with_xerces = "True";
+
+            if (conanWithCrashReporting)
+                o.with_crash_reporting = "True";
+            return o;
+        }
     }
 
     references: [

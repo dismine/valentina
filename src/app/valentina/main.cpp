@@ -39,6 +39,11 @@
 #include <xercesc/util/PlatformUtils.hpp>
 #endif
 
+#ifdef CRASH_REPORTING
+#include "../vmisc/crashhandler/crashhandler.h"
+#include "version.h"
+#endif
+
 // Fix bug in Qt. Deprecation warning in QMessageBox::critical.
 #if QT_VERSION >= QT_VERSION_CHECK(6, 2, 0)
 #undef QT_REQUIRE_VERSION
@@ -69,7 +74,6 @@
 #endif
 
 //---------------------------------------------------------------------------------------------------------------------
-
 auto main(int argc, char *argv[]) -> int
 {
     Q_INIT_RESOURCE(cursor);     // NOLINT
@@ -87,6 +91,10 @@ auto main(int argc, char *argv[]) -> int
 #endif
     Q_INIT_RESOURCE(win_light_theme); // NOLINT
     Q_INIT_RESOURCE(win_dark_theme);  // NOLINT
+
+#ifdef CRASH_REPORTING
+    InitializeCrashpad(QStringLiteral(VER_PRODUCTNAME_STR).toLower());
+#endif
 
 #if defined(Q_OS_WIN)
     VAbstractApplication::WinAttachConsole();

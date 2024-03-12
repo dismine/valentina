@@ -44,4 +44,9 @@ VLib {
         install: true
         installDir: buildconfig.installLibraryPath
     }
+
+    Properties {
+        condition: buildconfig.useConanPackages && buildconfig.conanCrashReportingEnabled
+        qbs.debugInformation: true
+    }
 }

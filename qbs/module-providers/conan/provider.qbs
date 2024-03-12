@@ -2,6 +2,8 @@ import qbs.File
 import qbs.FileInfo
 import qbs.TextFile
 
+import "utils.js" as Utils
+
 ModuleProvider {
     relativeSearchPaths: {
         var conanPackageDir = FileInfo.cleanPath(FileInfo.joinPaths(outputBaseDir, "../../..", "genconan"));
@@ -25,8 +27,6 @@ ModuleProvider {
 
             file.close();
 
-            console.info(JSON.stringify(fileContent));
-
             var deps = fileContent.dependencies;
 
             for(i in deps){
@@ -48,11 +48,11 @@ ModuleProvider {
 
                 // module name can be invalid for Javascrip. Search for alternative names for cmake.
                 var moduleName = deps[i].name;
-                if (deps[i].hasOwnProperty("names"))
+                if (!Utils.isValidAttributeName(moduleName) && deps[i].hasOwnProperty("names"))
                 {
                     if (deps[i].names.hasOwnProperty("cmake_find_package"))
                         moduleName = deps[i].names.cmake_find_package;
-                    else if (deps.names.hasOwnProperty("cmake_find_package_multi"))
+                    else if (deps[i].names.hasOwnProperty("cmake_find_package_multi"))
                         moduleName = deps[i].names.cmake_find_package_multi;
                 }
 
@@ -63,15 +63,18 @@ ModuleProvider {
                 var moduleFile = new TextFile(FileInfo.joinPaths(moduleDir, moduleName + ".qbs"), TextFile.WriteOnly);
 
                 var shared = false;
-                if (fileContent.options[deps[i].name].hasOwnProperty("shared"))
+                if (fileContent.options.hasOwnProperty(deps[i].name) && fileContent.options[deps[i].name].hasOwnProperty("shared"))
                 {
                     shared = (fileContent.options[deps[i].name].shared === 'True');
                 }
 
                 var cppLibraries = shared ? "\tcpp.dynamicLibraries: " : "\tcpp.staticLibraries: ";
+                var cppLibrariesTag = shared ? "dynamiclibrary" : "staticlibrary";
+                var cppLibrarySuffix = shared ? "cpp.dynamicLibrarySuffix" : "cpp.staticLibrarySuffix";
 
                 moduleFile.write("import qbs\n" +
                                  "Module {\n" +
+                                     "\tDepends { name: \"cpp\" }\n\n" +
                                      "\tproperty bool installBin: false\n" +
                                      "\tproperty bool installLib: false\n" +
                                      "\tproperty bool installRes: false\n" +
@@ -81,10 +84,9 @@ ModuleProvider {
                                      "\tproperty string resInstallDir: \"res\"\n" +
                                      "\tproperty string includeInstallDir: \"include\"\n" +
                                      "\tproperty stringList binFilePatterns: [\"**/*\"]\n" +
-                                     "\tproperty stringList libFilePatterns: [\"**/*\"]\n" +
+                                     "\tproperty stringList libFilePatterns: [\"**/*\" + " + cppLibrarySuffix + "]\n" +
                                      "\tproperty stringList resFilePatterns: [\"**/*\"]\n" +
                                      "\tproperty stringList includeFilePatterns: [\"**/*\"]\n\n" +
-                                     "\tDepends { name: \"cpp\" }\n\n" +
                                      "\tcpp.includePaths: " + JSON.stringify(deps[i].include_paths) + "\n" +
                                      "\tcpp.systemIncludePaths: " + JSON.stringify(deps[i].include_paths) + "\n" +
                                      "\tcpp.libraryPaths: " + JSON.stringify(deps[i].lib_paths) + "\n" +
@@ -94,9 +96,9 @@ ModuleProvider {
                 function writeGroups(file, moduleName, prefix, pathList, install) {
                     for(j in pathList) {
                         file.write("\tGroup {\n" +
-                                        "\t\tname: \"" + prefix + (j > 0 ? j : "") + "\"\n" +
-                                        "\t\tprefix: \"" + FileInfo.fromNativeSeparators(pathList[j]) + "/\"\n" +
-                                        "\t\tfilesAreTargets: true\n");
+                                       "\t\tname: \"" + prefix + (j > 0 ? j : "") + "\"\n" +
+                                       "\t\tprefix: \"" + FileInfo.fromNativeSeparators(pathList[j]) + "/\"\n" +
+                                       "\t\tfilesAreTargets: true\n");
 
                         if (install)
                             file.write("\t\tqbs.install: product.conan." + moduleName + ".install" + (prefix.charAt(0).toUpperCase() + prefix.substring(1)) + "\n" +
@@ -104,15 +106,19 @@ ModuleProvider {
                                        "\t\tqbs.installDir: product.conan." + moduleName + "." + prefix + "InstallDir\n" +
                                        "\t\tqbs.installSourceBase: \"" + FileInfo.fromNativeSeparators(pathList[j]) + "\"\n");
 
-                        file.write("\t\tfiles: product.conan." + moduleName + "." + prefix + "FilePatterns\n" +
-                                   "\t}\n");
+                        file.write("\t\tfiles: product.conan." + moduleName + "." + prefix + "FilePatterns\n");
+
+                        if (prefix === "lib")
+                            file.write("\t\tfileTags: [\"" + cppLibrariesTag + "\"]\n");
+
+                        file.write("\t}\n");
                     }
                 }
 
                 writeGroups(moduleFile, moduleName, "bin", deps[i].bin_paths, true);
                 writeGroups(moduleFile, moduleName, "lib", deps[i].lib_paths, shared);
                 writeGroups(moduleFile, moduleName, "res", deps[i].res_paths, true);
-                writeGroups(moduleFile, moduleName, "include", deps[i].include_paths, shared);
+                writeGroups(moduleFile, moduleName, "include", Utils.filterUniqueRootPaths(deps[i].include_paths), shared);
 
                 moduleFile.writeLine("}");
                 moduleFile.close();

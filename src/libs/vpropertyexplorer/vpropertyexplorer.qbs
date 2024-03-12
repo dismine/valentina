@@ -1,6 +1,7 @@
 VDynamicLib {
     Depends { name: "Qt"; submodules: ["gui", "widgets"] }
     Depends { name: "VMiscLib" }
+    Depends { name: "IFCLib" }
     Depends { name: "multibundle"; }
 
     name: "VPropertyExplorerLib"

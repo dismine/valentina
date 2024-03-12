@@ -58,7 +58,7 @@ constexpr inline auto AppVersion() -> unsigned
 #define VER_PRODUCTVERSION VER_FILEVERSION
 #define VER_PRODUCTVERSION_STR VER_FILEVERSION_STR
 
-#define VER_COMPANYNAME_STR "ValentinaTeam"
+#define VER_COMPANYNAME_STR "Valentina"
 // #define VER_FILEDESCRIPTION_STR   "Patternmaking program." // Defined in program
 // #define VER_INTERNALNAME_STR      "Valentina" // Defined in program
 #define VER_LEGALCOPYRIGHT_STR "Copyright © 2014-2022 Valentina Team"

@@ -64,6 +64,7 @@
 - Fold line.
 - Minimal Qt version increased to Qt 5.15. Minimal C++ standard to C++17.
 - Updated Windows installer.
+- Automatic crash reports.
 
 # Valentina 0.7.52 September 12, 2022
 - Fix crash when default locale is ru.

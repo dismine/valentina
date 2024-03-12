@@ -4701,15 +4701,20 @@ void VPMainWindow::AskDefaultSettings()
             }
         }
 
-        if (settings->IsAskCollectStatistic())
+        if (settings->IsAskCollectStatistic() || settings->IsAskSendCrashReport())
         {
             DialogAskCollectStatistic dialog(this);
             if (dialog.exec() == QDialog::Accepted)
             {
                 settings->SetCollectStatistic(dialog.CollectStatistic());
+#if defined(CRASH_REPORTING)
+                settings->SeSendCrashReport(dialog.SendCrashReport());
+                settings->SetCrashEmail(dialog.UserEmail());
+#endif
             }
 
             settings->SetAskCollectStatistic(false);
+            settings->SetAskSendCrashReport(false);
         }
 
         if (settings->IsCollectStatistic())

@@ -10,14 +10,20 @@ VTestApp {
 
     Depends {
         name: "xerces-c"
-        condition: Utilities.versionCompare(Qt.core.version, "6") >= 0 && !buildconfig.useConanPackages
+        condition: Utilities.versionCompare(Qt.core.version, "6") >= 0 &&
+                   (!buildconfig.useConanPackages || (buildconfig.useConanPackages && !buildconfig.conanXercesEnabled))
     }
 
     Depends {
         name: "conan.XercesC"
-        condition: Utilities.versionCompare(Qt.core.version, "6") >= 0 && buildconfig.useConanPackages
+        condition: Utilities.versionCompare(Qt.core.version, "6") >= 0 && buildconfig.useConanPackages &&
+                   buildconfig.conanXercesEnabled
     }
 
+    Depends {
+        name: "conan.crashpad";
+        condition: buildconfig.useConanPackages && buildconfig.conanCrashReportingEnabled
+    }
 
     name: "CollectionTest"
     buildconfig.appTarget: qbs.targetOS.contains("macos") ? "CollectionTest" : "collectionTest"

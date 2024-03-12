@@ -2,6 +2,12 @@ import qbs.Utilities
 
 VLib {
     Depends { name: "Qt"; submodules: ["core", "printsupport", "gui", "widgets"] }
+    Depends { name: "buildconfig" }
+
+    Depends {
+        name: "conan.crashpad";
+        condition: buildconfig.useConanPackages && buildconfig.conanCrashReportingEnabled
+    }
 
     name: "VMiscLib"
     files: {
@@ -178,9 +184,25 @@ VLib {
         condition: qbs.targetOS.contains("macos")
     }
 
+    Group {
+        name: "crashhandler"
+        prefix: "crashhandler/"
+        files: [
+            "crashhandler.h",
+            "crashhandler.cpp",
+            "vcrashpaths.cpp",
+            "vcrashpaths.h",
+        ]
+        condition: buildconfig.useConanPackages && buildconfig.conanCrashReportingEnabled
+    }
+
     Export {
         Depends { name: "cpp" }
         Depends { name: "Qt"; submodules: ["printsupport", "widgets"] }
+        Depends {
+            name: "conan.crashpad";
+            condition: buildconfig.useConanPackages && buildconfig.conanCrashReportingEnabled
+        }
         cpp.includePaths: [exportingProduct.sourceDirectory]
     }
 }

@@ -73,7 +73,6 @@ cov-int/
 *.la
 *.a
 *.lib
-*.lo
 
 # Executables
 *.exe
@@ -117,7 +116,6 @@ Makefile*
 *.xcodeproj
 
 # OSX specific
-.DS_Store
 .AppleDouble
 .LSOverride
 
@@ -173,3 +171,14 @@ __pycache__
 # Sonar Cloud
 .scannerwork
 bw-output
+
+# Conan
+/activate_run.ps1
+/activate_run.sh
+/conanbuildinfo.txt
+/conaninfo.txt
+/deactivate_run.ps1
+/deactivate_run.sh
+/environment_run.ps1.env
+/environment_run.sh.env
+/graph_info.json

@@ -51,7 +51,7 @@ VToolApp {
     type: base.concat("install_root_svg_fonts")
 
     Properties {
-        condition: buildconfig.useConanPackages && (qbs.targetOS.contains("windows") || qbs.targetOS.contains("macos"))
+        condition: buildconfig.useConanPackages && buildconfig.conanXercesEnabled && (qbs.targetOS.contains("windows") || qbs.targetOS.contains("macos"))
         conan.XercesC.libInstallDir: qbs.installPrefix + "/" + buildconfig.installLibraryPath
         conan.XercesC.binInstallDir: qbs.installPrefix + "/" + buildconfig.installBinaryPath
         conan.XercesC.installLib: {
@@ -64,6 +64,12 @@ VToolApp {
                 return true
             return false
         }
+    }
+
+    Properties {
+        condition: buildconfig.useConanPackages && buildconfig.conanCrashReportingEnabled
+        conan.crashpad.installBin: true
+        conan.crashpad.binInstallDir: qbs.installPrefix + "/" + buildconfig.installBinaryPath
     }
 
     files: [

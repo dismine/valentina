@@ -1,14 +1,14 @@
 /************************************************************************
  **
- **  @file   dialogaskcollectstatistic.h
+ **  @file   vcrashpaths.h
  **  @author Roman Telezhynskyi <dismine(at)gmail.com>
- **  @date   26 6, 2023
+ **  @date   4 3, 2024
  **
  **  @brief
  **  @copyright
  **  This source code is part of the Valentina project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
- **  Copyright (C) 2023 Valentina project
+ **  Copyright (C) 2024 Valentina project
  **  <https://gitlab.com/smart-pattern/valentina> All Rights Reserved.
  **
  **  Valentina is free software: you can redistribute it and/or modify
@@ -25,32 +25,32 @@
  **  along with Valentina.  If not, see <http://www.gnu.org/licenses/>.
  **
  *************************************************************************/
-#ifndef DIALOGASKCOLLECTSTATISTIC_H
-#define DIALOGASKCOLLECTSTATISTIC_H
+#ifndef VCRASHPATHS_H
+#define VCRASHPATHS_H
 
-#include <QDialog>
-#include <QtGlobal>
+#include <QString>
 
-namespace Ui
+class VCrashPaths
 {
-class DialogAskCollectStatistic;
-}
-
-class DialogAskCollectStatistic : public QDialog
-{
-    Q_OBJECT // NOLINT
-
 public:
-    explicit DialogAskCollectStatistic(QWidget *parent = nullptr);
-    ~DialogAskCollectStatistic() override;
+    explicit VCrashPaths(QString exeDir);
 
-    auto CollectStatistic() const -> bool;
-    auto SendCrashReport() const -> bool;
-    auto UserEmail() const -> QString;
+    auto GetHandlerPath() -> QString;
+
+    static auto GetAttachmentPath(const QString &appName) -> QString;
+    static auto GetReportsPath() -> QString;
+    static auto GetMetricsPath() -> QString;
+
+#if defined(Q_OS_UNIX)
+    static auto GetPlatformString(const QString &string) -> std::string;
+#elif defined(Q_OS_WINDOWS)
+    static auto GetPlatformString(QString string) -> std::wstring;
+#else
+#error GetPlatformString not implemented on this platform
+#endif
 
 private:
-    Q_DISABLE_COPY_MOVE(DialogAskCollectStatistic) // NOLINT
-    Ui::DialogAskCollectStatistic *ui;
+    QString m_exeDir;
 };
 
-#endif // DIALOGASKCOLLECTSTATISTIC_H
+#endif // VCRASHPATHS_H

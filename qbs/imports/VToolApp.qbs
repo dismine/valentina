@@ -33,6 +33,11 @@ VApp {
         cpp.dynamicLibraries: ["icudata", "icui18n", "icuuc"]
     }
 
+    Properties {
+        condition: buildconfig.useConanPackages && buildconfig.conanCrashReportingEnabled
+        qbs.debugInformation: true
+    }
+
     Group {
         name: "Translations"
         condition: product.primaryApp || (qbs.targetOS.contains("macos") && (!bundle.isBundle || (bundle.isBundle && buildconfig.enableMultiBundle)))

@@ -131,6 +131,13 @@ Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingConfigurationInteractiveTools, (
 Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingConfigurationDontUseNativeDialog,
                           ("configuration/dontUseNativeDialog"_L1))
 
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingsConfigurationCrashEmail, ("configuration/crashEmail"_L1)) // NOLINT
+// NOLINTNEXTLINE
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingsConfigurationSendCrashReport, ("configuration/sendCrashReport"_L1))
+// NOLINTNEXTLINE
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingsConfigurationAskSendCrashReport,
+                          ("configuration/askSendCrashReport"_L1))
+
 Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingPatternUndo, ("pattern/undo"_L1))                         // NOLINT
 Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingPatternForbidFlipping, ("pattern/forbidFlipping"_L1))     // NOLINT
 Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingPatternForceFlipping, ("pattern/forceFlipping"_L1))       // NOLINT
@@ -1696,5 +1703,50 @@ void VCommonSettings::SetActionShortcuts(const QString &name, const QStringList 
     QSettings settings(this->format(), this->scope(), this->organizationName(), *commonIniFilename);
     settings.beginGroup("shortcuts"_L1);
     settings.setValue(name, shortcuts);
+    settings.sync();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+auto VCommonSettings::GetCrashEmail() const -> QString
+{
+    QSettings const settings(this->format(), this->scope(), this->organizationName(), *commonIniFilename);
+    return settings.value(*settingsConfigurationCrashEmail, QString()).toString();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VCommonSettings::SetCrashEmail(const QString &value)
+{
+    QSettings settings(this->format(), this->scope(), this->organizationName(), *commonIniFilename);
+    settings.setValue(*settingsConfigurationCrashEmail, value);
+    settings.sync();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+auto VCommonSettings::IsSendCrashReport() const -> bool
+{
+    QSettings const settings(this->format(), this->scope(), this->organizationName(), *commonIniFilename);
+    return settings.value(*settingsConfigurationSendCrashReport, 1).toBool();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VCommonSettings::SeSendCrashReport(bool value)
+{
+    QSettings settings(this->format(), this->scope(), this->organizationName(), *commonIniFilename);
+    settings.setValue(*settingsConfigurationSendCrashReport, value);
+    settings.sync();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+auto VCommonSettings::IsAskSendCrashReport() const -> bool
+{
+    QSettings const settings(this->format(), this->scope(), this->organizationName(), *commonIniFilename);
+    return settings.value(*settingsConfigurationAskSendCrashReport, 1).toBool();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VCommonSettings::SetAskSendCrashReport(bool value)
+{
+    QSettings settings(this->format(), this->scope(), this->organizationName(), *commonIniFilename);
+    settings.setValue(*settingsConfigurationAskSendCrashReport, value);
     settings.sync();
 }

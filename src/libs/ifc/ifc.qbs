@@ -11,12 +11,14 @@ VLib {
 
     Depends {
         name: "xerces-c"
-        condition: Utilities.versionCompare(Qt.core.version, "6") >= 0 && !buildconfig.useConanPackages
+        condition: Utilities.versionCompare(Qt.core.version, "6") >= 0 &&
+                   (!buildconfig.useConanPackages || (buildconfig.useConanPackages && !buildconfig.conanXercesEnabled))
     }
 
     Depends {
         name: "conan.XercesC"
-        condition: Utilities.versionCompare(Qt.core.version, "6") >= 0 && buildconfig.useConanPackages
+        condition: Utilities.versionCompare(Qt.core.version, "6") >= 0 && buildconfig.useConanPackages &&
+                   buildconfig.conanXercesEnabled
     }
 
     name: "IFCLib"
@@ -102,8 +104,11 @@ VLib {
         Depends { name: "cpp" }
         Depends { name: "Qt"; submodules: ["core", "xml"] }
         Depends { name: "VMiscLib" }
-        Depends { name: "xerces-c"; condition: Utilities.versionCompare(Qt.core.version, "6") >= 0 && !buildconfig.useConanPackages }
-        Depends { name: "conan.XercesC"; condition: Utilities.versionCompare(Qt.core.version, "6") >= 0 && buildconfig.useConanPackages }
+        Depends { name: "xerces-c"; condition: Utilities.versionCompare(Qt.core.version, "6") >= 0 &&
+                                               (!buildconfig.useConanPackages ||
+                                                (buildconfig.useConanPackages && !buildconfig.conanXercesEnabled)) }
+        Depends { name: "conan.XercesC"; condition: Utilities.versionCompare(Qt.core.version, "6") >= 0 &&
+                                                    buildconfig.useConanPackages && buildconfig.conanXercesEnabled }
         cpp.includePaths: [exportingProduct.sourceDirectory]
     }
 }

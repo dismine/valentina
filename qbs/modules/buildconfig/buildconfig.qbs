@@ -48,6 +48,18 @@ Module {
 
         return project.enableConan;
     }
+    readonly property bool conanXercesEnabled : project.conanWithXerces
+    readonly property bool conanCrashReportingEnabled : {
+        if (qbs.targetOS.contains("windows")) {
+            if (qbs.toolchain.contains("msvc")) {
+                return project.conanWithCrashReporting;
+            } else {
+                return false;
+            }
+        } else {
+            return project.conanWithCrashReporting;
+        }
+    }
 
     readonly property bool enableCodeSigning: project.enableSigning
 
@@ -139,6 +151,9 @@ Module {
 
         if (enableMultiBundle)
             defines.push('MULTI_BUNDLE');
+
+        if (useConanPackages && conanCrashReportingEnabled)
+            defines.push('CRASH_REPORTING');
 
         return defines;
     }
@@ -823,39 +838,6 @@ Module {
                     if (File.exists(xercescHeaders) && !paths.contains(xercescHeaders))
                     {
                         paths.push(xercescHeaders);
-                    }
-                }
-            }
-
-            if (Utilities.versionCompare(qbs.version, "1.22") < 0)
-            {
-                var qtLibs = [
-                    "QtCore",
-                    "QtSvg",
-                    "QtXml",
-                    "QtPrintSupport",
-                    "QtXmlPatterns",
-                    "QtWidgets",
-                    "QtGui",
-                    "QtNetwork",
-                    "QtTest",
-                    "QtConcurrent"
-                ];
-
-                if (!qbs.targetOS.contains("macos"))
-                {
-                    paths.push(Qt.core.incPath);
-
-                    for (var i = 0; i < qtLibs.length; i++) {
-                        paths.push(FileInfo.joinPaths(Qt.core.incPath, qtLibs[i]));
-                    }
-
-                } else {
-                    for (var i = 0; i < qtLibs.length; i++) {
-                        paths.push(FileInfo.joinPaths(Qt.core.incPath,
-                                                      qtLibs[i] + ".framework/Versions/" + Qt.core.versionMajor +
-                                                      "/Headers"));
-                        paths.push(FileInfo.joinPaths(Qt.core.incPath, qtLibs[i] + ".framework/Headers"));
                     }
                 }
             }

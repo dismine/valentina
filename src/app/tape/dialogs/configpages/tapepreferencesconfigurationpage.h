@@ -61,6 +61,8 @@ private:
     std::unique_ptr<Ui::TapePreferencesConfigurationPage> ui;
     bool m_langChanged;
     bool m_systemChanged;
+    bool m_sendCrashReportsChanged{false};
+    bool m_crashUserEmailChanged{false};
     QList<QStringList> m_transientShortcuts{};
 
     void RetranslateUi();

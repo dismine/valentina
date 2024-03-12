@@ -101,11 +101,8 @@ private:
     VKnownMeasurementsDatabase *m_knownMeasurementsDatabase{nullptr};
     QFileSystemWatcher *m_knownMeasurementsDatabaseWatcher{nullptr};
 
-    static auto LogDirPath() -> QString;
     static auto LogPath() -> QString;
-    static auto CreateLogDir() -> bool;
     void BeginLogging();
-    static void ClearOldLogs();
 };
 
 //---------------------------------------------------------------------------------------------------------------------

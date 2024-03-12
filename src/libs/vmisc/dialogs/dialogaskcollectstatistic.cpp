@@ -28,12 +28,28 @@
 #include "dialogaskcollectstatistic.h"
 #include "ui_dialogaskcollectstatistic.h"
 
+#include <QRegularExpression>
+#include <QRegularExpressionValidator>
+
+#include "../vabstractapplication.h"
+
 //---------------------------------------------------------------------------------------------------------------------
 DialogAskCollectStatistic::DialogAskCollectStatistic(QWidget *parent)
   : QDialog(parent),
     ui(new Ui::DialogAskCollectStatistic)
 {
     ui->setupUi(this);
+
+#if !defined(CRASH_REPORTING)
+    ui->groupBoxCrashReports->setDisabled(true);
+#endif
+
+    VCommonSettings *settings = VAbstractApplication::VApp()->Settings();
+
+    QRegularExpression const rx(QStringLiteral("\\b[A-Z0-9._%+-]+@[A-Z0-9.-]+\\.[A-Z]{2,4}\\b"),
+                                QRegularExpression::CaseInsensitiveOption);
+    ui->lineEditCrashUserEmail->setValidator(new QRegularExpressionValidator(rx, this));
+    ui->lineEditCrashUserEmail->setText(settings->GetCrashEmail());
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -43,7 +59,19 @@ DialogAskCollectStatistic::~DialogAskCollectStatistic()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-auto DialogAskCollectStatistic::CollectStatistic() -> bool
+auto DialogAskCollectStatistic::CollectStatistic() const -> bool
 {
     return ui->checkBoxSendUsageStatistics->isChecked();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+auto DialogAskCollectStatistic::SendCrashReport() const -> bool
+{
+    return ui->checkBoxSendCrashReports->isChecked();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+auto DialogAskCollectStatistic::UserEmail() const -> QString
+{
+    return ui->lineEditCrashUserEmail->text();
 }

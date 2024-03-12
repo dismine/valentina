@@ -1,14 +1,14 @@
 /************************************************************************
  **
- **  @file   dialogaskcollectstatistic.h
+ **  @file   crashhandler.h
  **  @author Roman Telezhynskyi <dismine(at)gmail.com>
- **  @date   26 6, 2023
+ **  @date   4 3, 2024
  **
  **  @brief
  **  @copyright
  **  This source code is part of the Valentina project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
- **  Copyright (C) 2023 Valentina project
+ **  Copyright (C) 2024 Valentina project
  **  <https://gitlab.com/smart-pattern/valentina> All Rights Reserved.
  **
  **  Valentina is free software: you can redistribute it and/or modify
@@ -25,32 +25,11 @@
  **  along with Valentina.  If not, see <http://www.gnu.org/licenses/>.
  **
  *************************************************************************/
-#ifndef DIALOGASKCOLLECTSTATISTIC_H
-#define DIALOGASKCOLLECTSTATISTIC_H
+#ifndef CRASHHANDLER_H
+#define CRASHHANDLER_H
 
-#include <QDialog>
-#include <QtGlobal>
+#include <QString>
 
-namespace Ui
-{
-class DialogAskCollectStatistic;
-}
+auto InitializeCrashpad(const QString &appName) -> bool;
 
-class DialogAskCollectStatistic : public QDialog
-{
-    Q_OBJECT // NOLINT
-
-public:
-    explicit DialogAskCollectStatistic(QWidget *parent = nullptr);
-    ~DialogAskCollectStatistic() override;
-
-    auto CollectStatistic() const -> bool;
-    auto SendCrashReport() const -> bool;
-    auto UserEmail() const -> QString;
-
-private:
-    Q_DISABLE_COPY_MOVE(DialogAskCollectStatistic) // NOLINT
-    Ui::DialogAskCollectStatistic *ui;
-};
-
-#endif // DIALOGASKCOLLECTSTATISTIC_H
+#endif // CRASHHANDLER_H

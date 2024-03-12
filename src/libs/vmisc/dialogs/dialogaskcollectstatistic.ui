@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>376</width>
-    <height>183</height>
+    <width>593</width>
+    <height>406</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -19,23 +19,79 @@
   </property>
   <layout class="QVBoxLayout" name="verticalLayout">
    <item>
-    <widget class="QCheckBox" name="checkBoxSendUsageStatistics">
-     <property name="text">
-      <string>Send usage statistics</string>
+    <widget class="QGroupBox" name="groupBox_12">
+     <property name="title">
+      <string>Usage statistic</string>
      </property>
-     <property name="checked">
-      <bool>true</bool>
-     </property>
+     <layout class="QVBoxLayout" name="verticalLayout_13">
+      <item>
+       <widget class="QCheckBox" name="checkBoxSendUsageStatistics">
+        <property name="text">
+         <string>Send usage statistics</string>
+        </property>
+        <property name="checked">
+         <bool>true</bool>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QLabel" name="label_15">
+        <property name="text">
+         <string>Please help to improve Valentina's quality by automatically sending usage statistics. Sent data contains &lt;span style=&quot; font-weight:700;&quot;&gt;no potentially sensitive information&lt;/span&gt; like user names, email addresses, file contents or file paths.</string>
+        </property>
+        <property name="wordWrap">
+         <bool>true</bool>
+        </property>
+       </widget>
+      </item>
+     </layout>
     </widget>
    </item>
    <item>
-    <widget class="QLabel" name="label">
-     <property name="text">
-      <string>Please help to improve Valentina's quality by automatically sending usage statistics. Sent data contains &lt;span style=&quot; font-weight:700;&quot;&gt;no potentially sensitive information&lt;/span&gt; like user names, email addresses, file contents or file paths.</string>
+    <widget class="QGroupBox" name="groupBoxCrashReports">
+     <property name="title">
+      <string>Crash reports</string>
      </property>
-     <property name="wordWrap">
-      <bool>true</bool>
-     </property>
+     <layout class="QVBoxLayout" name="verticalLayout_11">
+      <item>
+       <widget class="QCheckBox" name="checkBoxSendCrashReports">
+        <property name="text">
+         <string>Send automatic crash reports</string>
+        </property>
+        <property name="checked">
+         <bool>true</bool>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <layout class="QHBoxLayout" name="horizontalLayout_6">
+        <item>
+         <widget class="QLabel" name="label_7">
+          <property name="text">
+           <string>Email:</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QLineEdit" name="lineEditCrashUserEmail">
+          <property name="clearButtonEnabled">
+           <bool>true</bool>
+          </property>
+         </widget>
+        </item>
+       </layout>
+      </item>
+      <item>
+       <widget class="QLabel" name="label_9">
+        <property name="text">
+         <string>Reporting crash reports will help us make Valentina more reliable. All information is treated as confidential and is only used to improve future versions of this program. Please activate sending automatic crash reports and fill your email address (optional). If provided, we may contact you with additional information about the crash.</string>
+        </property>
+        <property name="wordWrap">
+         <bool>true</bool>
+        </property>
+       </widget>
+      </item>
+     </layout>
     </widget>
    </item>
    <item>

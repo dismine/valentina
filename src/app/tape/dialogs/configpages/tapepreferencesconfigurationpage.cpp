@@ -115,6 +115,21 @@ TapePreferencesConfigurationPage::TapePreferencesConfigurationPage(QWidget *pare
 
     // Tab Privacy
     ui->checkBoxSendUsageStatistics->setChecked(settings->IsCollectStatistic());
+
+#if !defined(CRASH_REPORTING)
+    ui->groupBoxCrashReports->setDisabled(true);
+#endif
+
+    ui->checkBoxSendCrashReports->setChecked(settings->IsSendCrashReport());
+    connect(ui->checkBoxSendCrashReports, &QCheckBox::stateChanged, this,
+            [this]() { m_sendCrashReportsChanged = true; });
+
+    QRegularExpression const rx(QStringLiteral("\\b[A-Z0-9._%+-]+@[A-Z0-9.-]+\\.[A-Z]{2,4}\\b"),
+                                QRegularExpression::CaseInsensitiveOption);
+    ui->lineEditCrashUserEmail->setValidator(new QRegularExpressionValidator(rx, this));
+    ui->lineEditCrashUserEmail->setText(settings->GetCrashEmail());
+    connect(ui->lineEditCrashUserEmail, &QLineEdit::editingFinished, this,
+            [this]() { m_crashUserEmailChanged = true; });
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -201,6 +216,22 @@ auto TapePreferencesConfigurationPage::Apply() -> QStringList
     // Tab Privacy
     settings->SetCollectStatistic(ui->checkBoxSendUsageStatistics->isChecked());
     VGAnalytics::Instance()->Enable(ui->checkBoxSendUsageStatistics->isChecked());
+
+#if defined(CRASH_REPORTING)
+    if (m_sendCrashReportsChanged)
+    {
+        settings->SeSendCrashReport(ui->checkBoxSendCrashReports->isChecked());
+        m_sendCrashReportsChanged = false;
+        preferences.append(tr("send crash report"));
+    }
+
+    if (m_crashUserEmailChanged)
+    {
+        settings->SetCrashEmail(ui->lineEditCrashUserEmail->text());
+        m_crashUserEmailChanged = false;
+        preferences.append(tr("user email in case of crash"));
+    }
+#endif
 
     return preferences;
 }

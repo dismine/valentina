@@ -349,6 +349,15 @@ public:
     auto GetActionShortcuts(const QString &name, const QStringList &defaultShortcuts) -> QStringList;
     void SetActionShortcuts(const QString &name, const QStringList &shortcuts);
 
+    auto GetCrashEmail() const -> QString;
+    void SetCrashEmail(const QString &value);
+
+    auto IsSendCrashReport() const -> bool;
+    void SeSendCrashReport(bool value);
+
+    auto IsAskSendCrashReport() const -> bool;
+    void SetAskSendCrashReport(bool value);
+
 signals:
     void SVGFontsPathChanged(const QString &oldPath, const QString &newPath);
     void KnownMeasurementsPathChanged(const QString &oldPath, const QString &newPath);

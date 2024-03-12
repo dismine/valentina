@@ -60,6 +60,8 @@ private:
     bool m_pieceLabelLangChanged{false};
     bool m_unitChanged{false};
     bool m_labelLangChanged{false};
+    bool m_sendCrashReportsChanged{false};
+    bool m_crashUserEmailChanged{false};
     QList<QStringList> m_transientShortcuts{};
 
     void SetLabelComboBox(const QStringList &list);

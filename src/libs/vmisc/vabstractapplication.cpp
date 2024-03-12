@@ -30,6 +30,7 @@
 
 #include "compatibility.h"
 #include "svgfont/vsvgfontdatabase.h"
+#include "vlockguard.h"
 #include "vtranslator.h"
 
 #include "QtConcurrent/qtconcurrentrun.h"
@@ -67,6 +68,8 @@ using namespace Qt::Literals::StringLiterals;
 
 namespace
 {
+Q_DECL_CONSTEXPR auto DAYS_TO_KEEP_LOGS = 3;
+
 auto FilterLocales(const QStringList &locales) -> QStringList
 {
     QStringList filtered;
@@ -624,4 +627,76 @@ void VAbstractApplication::InitHighDpiScaling(int argc, char *argv[])
     Q_UNUSED(argc);
     Q_UNUSED(argv);
 #endif
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+auto VAbstractApplication::LogDirPath() -> QString
+{
+    const QString logDirPath =
+        QStandardPaths::locate(QStandardPaths::ConfigLocation, QString(), QStandardPaths::LocateDirectory) +
+        QCoreApplication::organizationName();
+    return logDirPath;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+auto VAbstractApplication::CreateLogDir() -> bool
+{
+    QDir const logDir(LogDirPath());
+    if (not logDir.exists())
+    {
+        return logDir.mkpath(QChar('.')); // Create directory for log if need
+    }
+    return true;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VAbstractApplication::ClearOldLogs()
+{
+    const QString workingDirectory = QDir::currentPath(); // Save the app working directory
+    const QString logDirPath = LogDirPath();
+    QDir logsDir(logDirPath);
+
+    if (!logsDir.exists())
+    {
+        return;
+    }
+
+    logsDir.setNameFilters(QStringList(QStringLiteral("*.log")));
+    QDir::setCurrent(logDirPath);
+
+    // Restore working directory
+    auto restore = qScopeGuard([workingDirectory] { QDir::setCurrent(workingDirectory); });
+
+    const QStringList allFiles = logsDir.entryList(QDir::NoDotAndDotDot | QDir::Files);
+    if (allFiles.isEmpty())
+    {
+        qDebug("There are no old logs.");
+        return;
+    }
+
+    qDebug("Clearing old logs");
+    for (const auto &fn : allFiles)
+    {
+        QFileInfo const info(fn);
+        const QDateTime created = info.birthTime();
+        if (created.daysTo(QDateTime::currentDateTime()) >= DAYS_TO_KEEP_LOGS)
+        {
+            VLockGuard<QFile> const tmp(info.absoluteFilePath(), [&fn]() { return new QFile(fn); });
+            if (tmp.GetProtected() != nullptr)
+            {
+                if (tmp.GetProtected()->remove())
+                {
+                    qDebug("Deleted %s", qUtf8Printable(info.absoluteFilePath()));
+                }
+                else
+                {
+                    qDebug("Could not delete %s", qUtf8Printable(info.absoluteFilePath()));
+                }
+            }
+            else
+            {
+                qDebug("Failed to lock %s", qUtf8Printable(info.absoluteFilePath()));
+            }
+        }
+    }
 }

@@ -123,6 +123,10 @@ public:
     // NOLINTNEXTLINE(cppcoreguidelines-avoid-c-arrays, hicpp-avoid-c-arrays, modernize-avoid-c-arrays)
     static void InitHighDpiScaling(int argc, char *argv[]);
 
+    static auto LogDirPath() -> QString;
+    static auto CreateLogDir() -> bool;
+    static void ClearOldLogs();
+
 protected:
     QUndoStack *undoStack;
 
