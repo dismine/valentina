@@ -42,7 +42,7 @@
 #endif
 
 // Fix bug in Qt. Deprecation warning in QMessageBox::critical.
-#if QT_VERSION >= QT_VERSION_CHECK(6, 2, 0)
+#if QT_VERSION >= QT_VERSION_CHECK(6, 2, 0) && QT_VERSION < QT_VERSION_CHECK(6, 6, 0)
 #undef QT_REQUIRE_VERSION
 #define QT_REQUIRE_VERSION(argc, argv, str)                                                                            \
     {                                                                                                                  \
