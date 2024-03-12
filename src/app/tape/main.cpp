@@ -29,6 +29,7 @@
 #include "mapplication.h"
 
 #include <QMessageBox> // For QT_REQUIRE_VERSION
+#include <QScopeGuard>
 #include <QTimer>
 
 #if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)

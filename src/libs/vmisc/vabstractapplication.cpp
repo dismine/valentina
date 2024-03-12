@@ -40,6 +40,7 @@
 #include <QLibraryInfo>
 #include <QLoggingCategory>
 #include <QMessageLogger>
+#include <QScopeGuard>
 #include <QStandardPaths>
 #include <QTranslator>
 #include <QUndoStack>
