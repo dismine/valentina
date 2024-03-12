@@ -1005,12 +1005,37 @@
     </message>
     <message>
         <location filename="../../src/libs/vmisc/dialogs/dialogaskcollectstatistic.ui" line="24"/>
+        <source>Usage statistic</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/libs/vmisc/dialogs/dialogaskcollectstatistic.ui" line="30"/>
         <source>Send usage statistics</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/libs/vmisc/dialogs/dialogaskcollectstatistic.ui" line="34"/>
+        <location filename="../../src/libs/vmisc/dialogs/dialogaskcollectstatistic.ui" line="40"/>
         <source>Please help to improve Valentina&apos;s quality by automatically sending usage statistics. Sent data contains &lt;span style=&quot; font-weight:700;&quot;&gt;no potentially sensitive information&lt;/span&gt; like user names, email addresses, file contents or file paths.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/libs/vmisc/dialogs/dialogaskcollectstatistic.ui" line="53"/>
+        <source>Crash reports</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/libs/vmisc/dialogs/dialogaskcollectstatistic.ui" line="59"/>
+        <source>Send automatic crash reports</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/libs/vmisc/dialogs/dialogaskcollectstatistic.ui" line="71"/>
+        <source>Email:</source>
+        <translation type="unfinished">Email:</translation>
+    </message>
+    <message>
+        <location filename="../../src/libs/vmisc/dialogs/dialogaskcollectstatistic.ui" line="87"/>
+        <source>Reporting crash reports will help us make Valentina more reliable. All information is treated as confidential and is only used to improve future versions of this program. Please activate sending automatic crash reports and fill your email address (optional). If provided, we may contact you with additional information about the crash.</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -3859,7 +3884,7 @@
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialoghistory.ui" line="290"/>
-        <location filename="../../src/app/valentina/dialogs/dialoghistory.cpp" line="515"/>
+        <location filename="../../src/app/valentina/dialogs/dialoghistory.cpp" line="518"/>
         <source>Tool</source>
         <translation>Tool</translation>
     </message>
@@ -3868,38 +3893,38 @@
         <translation type="vanished">Can&apos;t create record.</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/dialogs/dialoghistory.cpp" line="310"/>
+        <location filename="../../src/app/valentina/dialogs/dialoghistory.cpp" line="313"/>
         <source>%1 - Base point</source>
         <translation>%1 - Base point</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/dialogs/dialoghistory.cpp" line="313"/>
-        <location filename="../../src/app/valentina/dialogs/dialoghistory.cpp" line="318"/>
+        <location filename="../../src/app/valentina/dialogs/dialoghistory.cpp" line="316"/>
+        <location filename="../../src/app/valentina/dialogs/dialoghistory.cpp" line="321"/>
         <source>%1_%2 - Line from point %1 to point %2</source>
         <translation>%1_%2 - Line from point %1 to point %2</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/dialogs/dialoghistory.cpp" line="322"/>
+        <location filename="../../src/app/valentina/dialogs/dialoghistory.cpp" line="325"/>
         <source>%3 - Point along line %1_%2</source>
         <translation>%3 - Point along line %1_%2</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/dialogs/dialoghistory.cpp" line="327"/>
+        <location filename="../../src/app/valentina/dialogs/dialoghistory.cpp" line="330"/>
         <source>%1 - Point of shoulder</source>
         <translation>%1 - Point of shoulder</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/dialogs/dialoghistory.cpp" line="330"/>
+        <location filename="../../src/app/valentina/dialogs/dialoghistory.cpp" line="333"/>
         <source>%3 - normal to line %1_%2</source>
         <translation>%3 - normal to line %1_%2</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/dialogs/dialoghistory.cpp" line="336"/>
+        <location filename="../../src/app/valentina/dialogs/dialoghistory.cpp" line="339"/>
         <source>%4 - bisector of angle %1_%2_%3</source>
         <translation>%4 - bisector of angle %1_%2_%3</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/dialogs/dialoghistory.cpp" line="342"/>
+        <location filename="../../src/app/valentina/dialogs/dialoghistory.cpp" line="345"/>
         <source>%5 - intersection of lines %1_%2 and %3_%4</source>
         <translation>%5 - intersection of lines %1_%2 and %3_%4</translation>
     </message>
@@ -3916,22 +3941,22 @@
         <translation type="vanished">Curve point %1</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/dialogs/dialoghistory.cpp" line="385"/>
+        <location filename="../../src/app/valentina/dialogs/dialoghistory.cpp" line="388"/>
         <source>%4 - point of contact of arc with the center in point %1 and line %2_%3</source>
         <translation>%4 - point of contact of arc with the center in point %1 and line %2_%3</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/dialogs/dialoghistory.cpp" line="391"/>
+        <location filename="../../src/app/valentina/dialogs/dialoghistory.cpp" line="394"/>
         <source>Point of perpendicular from point %1 to line %2_%3</source>
         <translation>Point of perpendicular from point %1 to line %2_%3</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/dialogs/dialoghistory.cpp" line="397"/>
+        <location filename="../../src/app/valentina/dialogs/dialoghistory.cpp" line="400"/>
         <source>Triangle: axis %1_%2, points %3 and %4</source>
         <translation>Triangle: axis %1_%2, points %3 and %4</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/dialogs/dialoghistory.cpp" line="402"/>
+        <location filename="../../src/app/valentina/dialogs/dialoghistory.cpp" line="405"/>
         <source>%1 - point of intersection %2 and %3</source>
         <translation>%1 - point of intersection %2 and %3</translation>
     </message>
@@ -3948,12 +3973,12 @@
         <translation type="vanished">%1 - cut curve path %2</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/dialogs/dialoghistory.cpp" line="430"/>
+        <location filename="../../src/app/valentina/dialogs/dialoghistory.cpp" line="433"/>
         <source>%1 - point of intersection line %2_%3 and axis through point %4</source>
         <translation>%1 - point of intersection line %2_%3 and axis through point %4</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/dialogs/dialoghistory.cpp" line="435"/>
+        <location filename="../../src/app/valentina/dialogs/dialoghistory.cpp" line="438"/>
         <source>%1 - point of intersection curve and axis through point %2</source>
         <translation>%1 - point of intersection curve and axis through point %2</translation>
     </message>
@@ -3962,116 +3987,116 @@
         <translation type="vanished">Arc with center in point %1 and length %2</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/dialogs/dialoghistory.cpp" line="439"/>
+        <location filename="../../src/app/valentina/dialogs/dialoghistory.cpp" line="442"/>
         <source>%1 - point of arcs intersection</source>
         <translation>%1 - point of arcs intersection</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/dialogs/dialoghistory.cpp" line="442"/>
+        <location filename="../../src/app/valentina/dialogs/dialoghistory.cpp" line="445"/>
         <source>%1 - point of circles intersection</source>
         <translation>%1 - point of circles intersection</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/dialogs/dialoghistory.cpp" line="448"/>
+        <location filename="../../src/app/valentina/dialogs/dialoghistory.cpp" line="451"/>
         <source>%1 - point from circle and tangent</source>
         <translation>%1 - point from circle and tangent</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/dialogs/dialoghistory.cpp" line="451"/>
+        <location filename="../../src/app/valentina/dialogs/dialoghistory.cpp" line="454"/>
         <source>%1 - point from arc and tangent</source>
         <translation>%1 - point from arc and tangent</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/dialogs/dialoghistory.cpp" line="455"/>
+        <location filename="../../src/app/valentina/dialogs/dialoghistory.cpp" line="458"/>
         <source>Correction the dart %1_%2_%3</source>
         <translation>Correction the dart %1_%2_%3</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/dialogs/dialoghistory.cpp" line="445"/>
+        <location filename="../../src/app/valentina/dialogs/dialoghistory.cpp" line="448"/>
         <source>%1 - point of curves intersection</source>
         <translation>%1 - point of curves intersection</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/dialogs/dialoghistory.cpp" line="350"/>
+        <location filename="../../src/app/valentina/dialogs/dialoghistory.cpp" line="353"/>
         <source>Curve</source>
         <translation>Curve</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/dialogs/dialoghistory.cpp" line="356"/>
+        <location filename="../../src/app/valentina/dialogs/dialoghistory.cpp" line="359"/>
         <source>Cubic bezier curve</source>
         <translation>Cubic bezier curve</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/dialogs/dialoghistory.cpp" line="362"/>
-        <location filename="../../src/app/valentina/dialogs/dialoghistory.cpp" line="368"/>
+        <location filename="../../src/app/valentina/dialogs/dialoghistory.cpp" line="365"/>
+        <location filename="../../src/app/valentina/dialogs/dialoghistory.cpp" line="371"/>
         <source>Arc</source>
         <translation>Arc</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/dialogs/dialoghistory.cpp" line="368"/>
-        <location filename="../../src/app/valentina/dialogs/dialoghistory.cpp" line="463"/>
+        <location filename="../../src/app/valentina/dialogs/dialoghistory.cpp" line="371"/>
+        <location filename="../../src/app/valentina/dialogs/dialoghistory.cpp" line="466"/>
         <source>%1 with length %2</source>
         <translation>%1 with length %2</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/dialogs/dialoghistory.cpp" line="374"/>
+        <location filename="../../src/app/valentina/dialogs/dialoghistory.cpp" line="377"/>
         <source>Spline path</source>
         <translation>Spline path</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/dialogs/dialoghistory.cpp" line="380"/>
+        <location filename="../../src/app/valentina/dialogs/dialoghistory.cpp" line="383"/>
         <source>Cubic bezier curve path</source>
         <translation>Cubic bezier curve path</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/dialogs/dialoghistory.cpp" line="409"/>
-        <location filename="../../src/app/valentina/dialogs/dialoghistory.cpp" line="416"/>
-        <location filename="../../src/app/valentina/dialogs/dialoghistory.cpp" line="425"/>
+        <location filename="../../src/app/valentina/dialogs/dialoghistory.cpp" line="412"/>
+        <location filename="../../src/app/valentina/dialogs/dialoghistory.cpp" line="419"/>
+        <location filename="../../src/app/valentina/dialogs/dialoghistory.cpp" line="428"/>
         <source>%1 - cut %2</source>
         <translation>%1 - cut %2</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/dialogs/dialoghistory.cpp" line="409"/>
+        <location filename="../../src/app/valentina/dialogs/dialoghistory.cpp" line="412"/>
         <source>arc</source>
         <translation>arc</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/dialogs/dialoghistory.cpp" line="416"/>
+        <location filename="../../src/app/valentina/dialogs/dialoghistory.cpp" line="419"/>
         <source>curve</source>
         <translation>curve</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/dialogs/dialoghistory.cpp" line="425"/>
+        <location filename="../../src/app/valentina/dialogs/dialoghistory.cpp" line="428"/>
         <source>curve path</source>
         <translation>curve path</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/dialogs/dialoghistory.cpp" line="463"/>
+        <location filename="../../src/app/valentina/dialogs/dialoghistory.cpp" line="466"/>
         <source>Elliptical arc</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/dialogs/dialoghistory.cpp" line="467"/>
+        <location filename="../../src/app/valentina/dialogs/dialoghistory.cpp" line="470"/>
         <source>Rotate objects around point %1. Suffix &apos;%2&apos;</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/dialogs/dialoghistory.cpp" line="473"/>
+        <location filename="../../src/app/valentina/dialogs/dialoghistory.cpp" line="476"/>
         <source>Flipping by line %1_%2. Suffix &apos;%3&apos;</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/dialogs/dialoghistory.cpp" line="478"/>
+        <location filename="../../src/app/valentina/dialogs/dialoghistory.cpp" line="481"/>
         <source>Flipping by axis through %1 point. Suffix &apos;%2&apos;</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/dialogs/dialoghistory.cpp" line="484"/>
+        <location filename="../../src/app/valentina/dialogs/dialoghistory.cpp" line="487"/>
         <source>Move objects. Suffix &apos;%1&apos;</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/dialogs/dialoghistory.cpp" line="774"/>
+        <location filename="../../src/app/valentina/dialogs/dialoghistory.cpp" line="777"/>
         <source>Empty</source>
         <comment>list</comment>
         <translation type="unfinished"></translation>
@@ -4093,7 +4118,7 @@
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialoghistory.ui" line="74"/>
-        <location filename="../../src/app/valentina/dialogs/dialoghistory.cpp" line="691"/>
+        <location filename="../../src/app/valentina/dialogs/dialoghistory.cpp" line="694"/>
         <source>0 results</source>
         <translation type="unfinished"></translation>
     </message>
@@ -10807,7 +10832,7 @@ Apply settings anyway?</source>
 <context>
     <name>InitPieceLabelLanguages</name>
     <message>
-        <location filename="../../src/libs/vmisc/def.cpp" line="571"/>
+        <location filename="../../src/libs/vmisc/def.cpp" line="561"/>
         <source>Default</source>
         <translation type="unfinished">Default</translation>
     </message>
@@ -11236,7 +11261,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.ui" line="738"/>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="5759"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="5764"/>
         <source>Save</source>
         <translation>Save</translation>
     </message>
@@ -11432,7 +11457,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.cpp" line="4752"/>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="5128"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="5133"/>
         <source>Pattern piece %1</source>
         <translation>Pattern piece %1</translation>
     </message>
@@ -11525,7 +11550,7 @@ Apply settings anyway?</source>
         <translation>Select curve</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="6131"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="6136"/>
         <source>About Qt</source>
         <translation>About Qt</translation>
     </message>
@@ -11565,7 +11590,7 @@ Apply settings anyway?</source>
         <location filename="../../src/app/valentina/mainwindow.cpp" line="2066"/>
         <location filename="../../src/app/valentina/mainwindow.cpp" line="2295"/>
         <location filename="../../src/app/valentina/mainwindow.cpp" line="4200"/>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="6952"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="6957"/>
         <source>Open file</source>
         <translation>Open file</translation>
     </message>
@@ -11603,12 +11628,12 @@ Apply settings anyway?</source>
         <translation>Bad id.</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="5593"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="5598"/>
         <source>File saved</source>
         <translation>File saved</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="7549"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="7554"/>
         <source>untitled.val</source>
         <translation>untitled.val</translation>
     </message>
@@ -11620,23 +11645,23 @@ Do you want to save your changes?</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.cpp" line="1835"/>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="5806"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="5811"/>
         <source>&amp;Undo</source>
         <translation>&amp;Undo</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.cpp" line="1836"/>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="5813"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="5818"/>
         <source>&amp;Redo</source>
         <translation>&amp;Redo</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="6283"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="6288"/>
         <source>Pattern piece:</source>
         <translation>Pattern piece:</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="6285"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="6290"/>
         <source>Enter a new label for the pattern piece.</source>
         <translation>Enter a new label for the pattern piece.</translation>
     </message>
@@ -11655,8 +11680,8 @@ Do you want to save your changes?</translation>
     <message>
         <location filename="../../src/app/valentina/mainwindow.cpp" line="699"/>
         <location filename="../../src/app/valentina/mainwindow.cpp" line="746"/>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="6384"/>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="6576"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="6389"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="6581"/>
         <source>File error.</source>
         <translation>File error.</translation>
     </message>
@@ -11665,12 +11690,12 @@ Do you want to save your changes?</translation>
         <translation type="vanished">File loaded</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="6914"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="6919"/>
         <source>Valentina didn&apos;t shut down correctly. Do you want reopen files (%1) you had open?</source>
         <translation>Valentina didn&apos;t shut down correctly. Do you want reopen files (%1) you had open?</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="6916"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="6921"/>
         <source>Reopen files.</source>
         <translation>Reopen files.</translation>
     </message>
@@ -11926,7 +11951,7 @@ Do you want to save your changes?</translation>
         <location filename="../../src/app/valentina/mainwindow.cpp" line="4042"/>
         <location filename="../../src/app/valentina/mainwindow.cpp" line="4233"/>
         <location filename="../../src/app/valentina/mainwindow.cpp" line="4313"/>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="6842"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="6847"/>
         <source>Layout mode</source>
         <translation>Layout mode</translation>
     </message>
@@ -11935,7 +11960,7 @@ Do you want to save your changes?</translation>
         <translation type="vanished">You can&apos;t use now the Layout mode. Please, create at least one workpiece.</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="5748"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="5753"/>
         <source>Unsaved changes</source>
         <translation>Unsaved changes</translation>
     </message>
@@ -11974,7 +11999,7 @@ Do you want to save your changes?</translation>
         <translation type="vanished">Standard measurements (*.vst);;Individual measurements (*.vit)</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="7197"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="7202"/>
         <source>You can&apos;t export empty scene.</source>
         <translation>You can&apos;t export empty scene.</translation>
     </message>
@@ -12011,7 +12036,7 @@ Do you want to save your changes?</translation>
         <translation type="vanished">Measurement file contains invalid known measurement(s).</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="7062"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="7067"/>
         <source>Measurement file has unknown format.</source>
         <translation>Measurement file has unknown format.</translation>
     </message>
@@ -12043,8 +12068,8 @@ Do you want to save your changes?</translation>
         <translation>Couldn&apos;t update measurements.</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="6503"/>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="6523"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="6508"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="6528"/>
         <source>The measurements file &apos;%1&apos; could not be found.</source>
         <translation>The measurements file &apos;%1&apos; could not be found.</translation>
     </message>
@@ -12053,7 +12078,7 @@ Do you want to save your changes?</translation>
         <translation type="vanished">The measurements file &lt;br/&gt;&lt;br/&gt; &lt;b&gt;%1&lt;/b&gt; &lt;br/&gt;&lt;br/&gt; could not be found. Do you want to update the file location</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="6981"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="6986"/>
         <source>Loading measurements file</source>
         <translation>Loading measurements file</translation>
     </message>
@@ -12070,9 +12095,9 @@ Do you want to save your changes?</translation>
         <translation type="vanished">Couldn&apos;t set size. File wasn&apos;t opened.</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="7378"/>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="7421"/>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="7464"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="7383"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="7426"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="7469"/>
         <source>The method %1 does nothing in GUI mode</source>
         <translation>The method %1 does nothing in GUI mode</translation>
     </message>
@@ -12089,15 +12114,15 @@ Do you want to save your changes?</translation>
         <translation type="vanished">Couldn&apos;t set height. File wasn&apos;t opened.</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="6825"/>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="6881"/>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="7244"/>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="7282"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="6830"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="6886"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="7249"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="7287"/>
         <source>Export error.</source>
         <translation>Export error.</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="7491"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="7496"/>
         <source>Please, provide one input file.</source>
         <translation>Please, provide one input file.</translation>
     </message>
@@ -12174,7 +12199,7 @@ Do you want to save your changes?</translation>
         <translation type="vanished">Save...</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="5764"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="5769"/>
         <source>Don&apos;t Save</source>
         <translation>Don&apos;t Save</translation>
     </message>
@@ -12337,7 +12362,7 @@ Do you want to save your changes?</translation>
         <translation type="vanished">Size:</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="6978"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="6983"/>
         <source>The measurements file &lt;br/&gt;&lt;br/&gt; &lt;b&gt;%1&lt;/b&gt; &lt;br/&gt;&lt;br/&gt; could not be found. Do you want to update the file location?</source>
         <translation>The measurements file &lt;br/&gt;&lt;br/&gt; &lt;b&gt;%1&lt;/b&gt; &lt;br/&gt;&lt;br/&gt; could not be found. Do you want to update the file location?</translation>
     </message>
@@ -12391,7 +12416,7 @@ Do you want to save your changes?</translation>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="7599"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="7604"/>
         <source>read only</source>
         <translation type="unfinished"></translation>
     </message>
@@ -12464,16 +12489,16 @@ Do you want to save your changes?</translation>
     <message>
         <location filename="../../src/app/valentina/mainwindow.cpp" line="2028"/>
         <location filename="../../src/app/valentina/mainwindow.cpp" line="2062"/>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="7024"/>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="7038"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="7029"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="7043"/>
         <source>Individual measurements</source>
         <translation type="unfinished">Individual measurements</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.cpp" line="2028"/>
         <location filename="../../src/app/valentina/mainwindow.cpp" line="2062"/>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="7024"/>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="7038"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="7029"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="7043"/>
         <source>Multisize measurements</source>
         <translation type="unfinished"></translation>
     </message>
@@ -12561,21 +12586,21 @@ Do you want to save your changes?</translation>
     <message>
         <location filename="../../src/app/valentina/mainwindow.cpp" line="4234"/>
         <location filename="../../src/app/valentina/mainwindow.cpp" line="4314"/>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="6843"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="6848"/>
         <source>You don&apos;t have enough details to export. Please, include at least one detail in layout.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.cpp" line="4247"/>
         <location filename="../../src/app/valentina/mainwindow.cpp" line="4327"/>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="6856"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="6861"/>
         <source>Export details</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.cpp" line="4247"/>
         <location filename="../../src/app/valentina/mainwindow.cpp" line="4327"/>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="6856"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="6861"/>
         <source>Can&apos;t export details.</source>
         <translation type="unfinished"></translation>
     </message>
@@ -12610,7 +12635,7 @@ Do you want to save your changes?</translation>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="5758"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="5763"/>
         <source>Save…</source>
         <translation type="unfinished"></translation>
     </message>
@@ -12625,17 +12650,17 @@ Do you want to save your changes?</translation>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="7207"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="7212"/>
         <source>You can&apos;t export empty scene. Please, include at least one detail in layout.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="7310"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="7315"/>
         <source>Export final measurements error.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="7311"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="7316"/>
         <source>Destination path is empty.</source>
         <translation type="unfinished"></translation>
     </message>
@@ -12690,7 +12715,7 @@ Do you want to save your changes?</translation>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="6534"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="6539"/>
         <source>The measurements file &apos;%1&apos; could not be found or provides not enough information.</source>
         <translation type="unfinished"></translation>
     </message>
@@ -12710,7 +12735,7 @@ Do you want to save your changes?</translation>
         <translation type="unfinished">Changes applied.</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="5734"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="5739"/>
         <source>Cannot save settings. Access denied.</source>
         <translation type="unfinished"></translation>
     </message>
@@ -12720,7 +12745,7 @@ Do you want to save your changes?</translation>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="5710"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="5715"/>
         <source>Cannot read settings from a malformed .INI file.</source>
         <translation type="unfinished"></translation>
     </message>
@@ -12776,22 +12801,22 @@ Do you want to save your changes?</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.ui" line="1536"/>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="5102"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="5107"/>
         <source>Export recipe</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="5100"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="5105"/>
         <source>Recipe files</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="5102"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="5107"/>
         <source>recipe</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="5115"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="5120"/>
         <source>Could not save recipe. %1</source>
         <translation type="unfinished"></translation>
     </message>
@@ -12817,7 +12842,7 @@ Do you want to save your changes?</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.ui" line="407"/>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="7927"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="7932"/>
         <source>Pattern messages</source>
         <translation type="unfinished"></translation>
     </message>
@@ -12836,27 +12861,27 @@ Do you want to save your changes?</translation>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="7904"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="7909"/>
         <source>DEBUG</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="7907"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="7912"/>
         <source>WARNING</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="7910"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="7915"/>
         <source>CRITICAL</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="7913"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="7918"/>
         <source>FATAL</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="7916"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="7921"/>
         <source>INFO</source>
         <translation type="unfinished"></translation>
     </message>
@@ -12957,57 +12982,57 @@ Do you want to save your changes?</translation>
         <translation type="unfinished">Select folder</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="5749"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="5754"/>
         <source>The pattern has been modified. Do you want to save your changes?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="7359"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="7364"/>
         <source>Not supported dimension A value &apos;%1&apos; for this pattern file.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="7366"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="7371"/>
         <source>Couldn&apos;t set dimension A. Need a file with multisize measurements.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="7372"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="7377"/>
         <source>Couldn&apos;t set dimension A. File wasn&apos;t opened.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="7402"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="7407"/>
         <source>Not supported dimension B value &apos;%1&apos; for this pattern file.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="7409"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="7414"/>
         <source>Couldn&apos;t set dimension B. Need a file with multisize measurements.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="7415"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="7420"/>
         <source>Couldn&apos;t set dimension B. File wasn&apos;t opened.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="7445"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="7450"/>
         <source>Not supported dimension C value &apos;%1&apos; for this pattern file.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="7452"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="7457"/>
         <source>Couldn&apos;t set dimension C. Need a file with multisize measurements.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="7458"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="7463"/>
         <source>Couldn&apos;t set dimension C. File wasn&apos;t opened.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="5120"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="5125"/>
         <source>Could not create recipe file. %1</source>
         <translation type="unfinished"></translation>
     </message>
@@ -13017,12 +13042,12 @@ Do you want to save your changes?</translation>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="6773"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="6778"/>
         <source>Scalable Vector Graphics files</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="6775"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="6780"/>
         <source>Save draw</source>
         <translation type="unfinished"></translation>
     </message>
@@ -13122,28 +13147,28 @@ Do you want to save your changes?</translation>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="5011"/>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="5052"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="5016"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="5057"/>
         <source>Unable to save image. Error: %1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="5017"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="5022"/>
         <source>Unable to save image. No data.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="5023"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="5028"/>
         <source>untitled</source>
         <translation type="unfinished">untitled</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="5037"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="5042"/>
         <source>All files</source>
         <translation type="unfinished">All files</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="5041"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="5046"/>
         <source>Save Image</source>
         <translation type="unfinished"></translation>
     </message>
@@ -13664,7 +13689,7 @@ Do you want to save your changes?</translation>
         <translation type="unfinished">The text appears under the icon (recommended for beginners).</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/dialogs/configpages/preferencesconfigurationpage.cpp" line="376"/>
+        <location filename="../../src/app/valentina/dialogs/configpages/preferencesconfigurationpage.cpp" line="407"/>
         <source>With OS options</source>
         <translation type="unfinished"></translation>
     </message>
@@ -13677,45 +13702,55 @@ Do you want to save your changes?</translation>
         <translation type="obsolete">The Default unit has been updated and will be used as the default for the next pattern you create.</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/dialogs/configpages/preferencesconfigurationpage.cpp" line="352"/>
+        <location filename="../../src/app/valentina/dialogs/configpages/preferencesconfigurationpage.cpp" line="329"/>
+        <source>send crash report</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/app/valentina/dialogs/configpages/preferencesconfigurationpage.cpp" line="336"/>
+        <source>user email in case of crash</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/app/valentina/dialogs/configpages/preferencesconfigurationpage.cpp" line="383"/>
         <source>System</source>
         <comment>theme</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/dialogs/configpages/preferencesconfigurationpage.cpp" line="353"/>
+        <location filename="../../src/app/valentina/dialogs/configpages/preferencesconfigurationpage.cpp" line="384"/>
         <source>Dark</source>
         <comment>theme</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/dialogs/configpages/preferencesconfigurationpage.cpp" line="354"/>
+        <location filename="../../src/app/valentina/dialogs/configpages/preferencesconfigurationpage.cpp" line="385"/>
         <source>Light</source>
         <comment>theme</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/dialogs/configpages/preferencesconfigurationpage.cpp" line="361"/>
+        <location filename="../../src/app/valentina/dialogs/configpages/preferencesconfigurationpage.cpp" line="392"/>
         <source>Tool icon cursor</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/dialogs/configpages/preferencesconfigurationpage.cpp" line="362"/>
+        <location filename="../../src/app/valentina/dialogs/configpages/preferencesconfigurationpage.cpp" line="393"/>
         <source>Arrow cursor</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/dialogs/configpages/preferencesconfigurationpage.cpp" line="368"/>
+        <location filename="../../src/app/valentina/dialogs/configpages/preferencesconfigurationpage.cpp" line="399"/>
         <source>Centimeters</source>
         <translation type="unfinished">Centimeters</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/dialogs/configpages/preferencesconfigurationpage.cpp" line="369"/>
+        <location filename="../../src/app/valentina/dialogs/configpages/preferencesconfigurationpage.cpp" line="400"/>
         <source>Millimiters</source>
         <translation type="unfinished">Millimiters</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/dialogs/configpages/preferencesconfigurationpage.cpp" line="370"/>
+        <location filename="../../src/app/valentina/dialogs/configpages/preferencesconfigurationpage.cpp" line="401"/>
         <source>Inches</source>
         <translation type="unfinished">Inches</translation>
     </message>
@@ -13730,7 +13765,7 @@ Do you want to save your changes?</translation>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/dialogs/configpages/preferencesconfigurationpage.cpp" line="270"/>
+        <location filename="../../src/app/valentina/dialogs/configpages/preferencesconfigurationpage.cpp" line="285"/>
         <source>default unit</source>
         <translation type="unfinished"></translation>
     </message>
@@ -13888,12 +13923,37 @@ Do you want to save your changes?</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/configpages/preferencesconfigurationpage.ui" line="668"/>
+        <source>Usage statistic</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/app/valentina/dialogs/configpages/preferencesconfigurationpage.ui" line="674"/>
         <source>Send usage statistics</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/dialogs/configpages/preferencesconfigurationpage.ui" line="675"/>
+        <location filename="../../src/app/valentina/dialogs/configpages/preferencesconfigurationpage.ui" line="681"/>
         <source>Please help to improve Valentina&apos;s quality by automatically sending usage statistics. Sent data contains &lt;span style=&quot; font-weight:700;&quot;&gt;no potentially sensitive information&lt;/span&gt; like user names, email addresses, file contents or file paths.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/app/valentina/dialogs/configpages/preferencesconfigurationpage.ui" line="694"/>
+        <source>Crash reports</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/app/valentina/dialogs/configpages/preferencesconfigurationpage.ui" line="700"/>
+        <source>Send automatic crash reports</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/app/valentina/dialogs/configpages/preferencesconfigurationpage.ui" line="709"/>
+        <source>Email:</source>
+        <translation type="unfinished">Email:</translation>
+    </message>
+    <message>
+        <location filename="../../src/app/valentina/dialogs/configpages/preferencesconfigurationpage.ui" line="725"/>
+        <source>Reporting crash reports will help us make Valentina more reliable. All information is treated as confidential and is only used to improve future versions of this program. Please activate sending automatic crash reports and fill your email address (optional). If provided, we may contact you with additional information about the crash.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -14437,43 +14497,78 @@ This option will take an affect after restart.</source>
     </message>
     <message>
         <location filename="../../src/app/puzzle/dialogs/configpages/puzzlepreferencesconfigurationpage.ui" line="529"/>
+        <source>Usage statistic</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/app/puzzle/dialogs/configpages/puzzlepreferencesconfigurationpage.ui" line="535"/>
         <source>Send usage statistics</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/dialogs/configpages/puzzlepreferencesconfigurationpage.ui" line="536"/>
+        <location filename="../../src/app/puzzle/dialogs/configpages/puzzlepreferencesconfigurationpage.ui" line="542"/>
         <source>Please help to improve Valentina&apos;s quality by automatically sending usage statistics. Sent data contains &lt;span style=&quot; font-weight:700;&quot;&gt;no potentially sensitive information&lt;/span&gt; like user names, email addresses, file contents or file paths.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/dialogs/configpages/puzzlepreferencesconfigurationpage.cpp" line="180"/>
+        <location filename="../../src/app/puzzle/dialogs/configpages/puzzlepreferencesconfigurationpage.ui" line="555"/>
+        <source>Crash reports</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/app/puzzle/dialogs/configpages/puzzlepreferencesconfigurationpage.ui" line="561"/>
+        <source>Send automatic crash reports</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/app/puzzle/dialogs/configpages/puzzlepreferencesconfigurationpage.ui" line="570"/>
+        <source>Email:</source>
+        <translation type="unfinished">Email:</translation>
+    </message>
+    <message>
+        <location filename="../../src/app/puzzle/dialogs/configpages/puzzlepreferencesconfigurationpage.ui" line="586"/>
+        <source>Reporting crash reports will help us make Valentina more reliable. All information is treated as confidential and is only used to improve future versions of this program. Please activate sending automatic crash reports and fill your email address (optional). If provided, we may contact you with additional information about the crash.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/app/puzzle/dialogs/configpages/puzzlepreferencesconfigurationpage.cpp" line="195"/>
         <source>undo limit</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/dialogs/configpages/puzzlepreferencesconfigurationpage.cpp" line="187"/>
+        <location filename="../../src/app/puzzle/dialogs/configpages/puzzlepreferencesconfigurationpage.cpp" line="202"/>
         <source>antialiasing</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/dialogs/configpages/puzzlepreferencesconfigurationpage.cpp" line="193"/>
+        <location filename="../../src/app/puzzle/dialogs/configpages/puzzlepreferencesconfigurationpage.cpp" line="208"/>
         <source>scene render</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/dialogs/configpages/puzzlepreferencesconfigurationpage.cpp" line="266"/>
+        <location filename="../../src/app/puzzle/dialogs/configpages/puzzlepreferencesconfigurationpage.cpp" line="252"/>
+        <source>send crash report</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/app/puzzle/dialogs/configpages/puzzlepreferencesconfigurationpage.cpp" line="259"/>
+        <source>user email in case of crash</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/app/puzzle/dialogs/configpages/puzzlepreferencesconfigurationpage.cpp" line="297"/>
         <source>System</source>
         <comment>theme</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/dialogs/configpages/puzzlepreferencesconfigurationpage.cpp" line="267"/>
+        <location filename="../../src/app/puzzle/dialogs/configpages/puzzlepreferencesconfigurationpage.cpp" line="298"/>
         <source>Dark</source>
         <comment>theme</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/dialogs/configpages/puzzlepreferencesconfigurationpage.cpp" line="268"/>
+        <location filename="../../src/app/puzzle/dialogs/configpages/puzzlepreferencesconfigurationpage.cpp" line="299"/>
         <source>Light</source>
         <comment>theme</comment>
         <translation type="unfinished"></translation>
@@ -14714,16 +14809,16 @@ This option will take an affect after restart.</source>
         <translation type="vanished">The path to the measurments is already absolute.</translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/main.cpp" line="56"/>
-        <location filename="../../src/app/tape/main.cpp" line="56"/>
-        <location filename="../../src/app/valentina/main.cpp" line="60"/>
+        <location filename="../../src/app/puzzle/main.cpp" line="61"/>
+        <location filename="../../src/app/tape/main.cpp" line="61"/>
+        <location filename="../../src/app/valentina/main.cpp" line="65"/>
         <source>Executable &apos;%1&apos; requires Qt %2, found Qt %3.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/main.cpp" line="60"/>
-        <location filename="../../src/app/tape/main.cpp" line="60"/>
-        <location filename="../../src/app/valentina/main.cpp" line="64"/>
+        <location filename="../../src/app/puzzle/main.cpp" line="65"/>
+        <location filename="../../src/app/tape/main.cpp" line="65"/>
+        <location filename="../../src/app/valentina/main.cpp" line="69"/>
         <source>Incompatible Qt Library Error</source>
         <translation type="unfinished"></translation>
     </message>
@@ -14849,12 +14944,12 @@ This option will take an affect after restart.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/libs/vmisc/def.cpp" line="610"/>
+        <location filename="../../src/libs/vmisc/def.cpp" line="600"/>
         <source>CustomSARecord prefix mismatch error: actualStreamHeader = 0x%1 and streamHeader = 0x%2</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/libs/vmisc/def.cpp" line="622"/>
+        <location filename="../../src/libs/vmisc/def.cpp" line="612"/>
         <source>CustomSARecord compatibility error: actualClassVersion = %1 and classVersion = %2</source>
         <translation type="unfinished"></translation>
     </message>
@@ -14896,17 +14991,17 @@ This option will take an affect after restart.</source>
         <translation type="vanished">Create new pattern piece to start working.</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vmisc/def.cpp" line="540"/>
+        <location filename="../../src/libs/vmisc/def.cpp" line="530"/>
         <source>mm</source>
         <translation>mm</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vmisc/def.cpp" line="549"/>
+        <location filename="../../src/libs/vmisc/def.cpp" line="539"/>
         <source>cm</source>
         <translation>cm</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vmisc/def.cpp" line="542"/>
+        <location filename="../../src/libs/vmisc/def.cpp" line="532"/>
         <source>inch</source>
         <translation>inch</translation>
     </message>
@@ -14924,7 +15019,7 @@ This option will take an affect after restart.</source>
         <translation>Value</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vmisc/def.cpp" line="544"/>
+        <location filename="../../src/libs/vmisc/def.cpp" line="534"/>
         <source>px</source>
         <translation>px</translation>
     </message>
@@ -15287,7 +15382,7 @@ This option will take an affect after restart.</source>
     <message>
         <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="220"/>
         <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="270"/>
-        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="3060"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="3061"/>
         <source>Cannot set printer margins</source>
         <translation type="unfinished">Cannot set printer margins</translation>
     </message>
@@ -15957,7 +16052,7 @@ This option will take an affect after restart.</source>
     </message>
     <message>
         <location filename="../../src/app/tape/tkmmainwindow.ui" line="109"/>
-        <location filename="../../src/app/tape/tkmmainwindow.cpp" line="1787"/>
+        <location filename="../../src/app/tape/tkmmainwindow.cpp" line="1792"/>
         <source>0 results</source>
         <translation type="unfinished"></translation>
     </message>
@@ -16008,21 +16103,21 @@ This option will take an affect after restart.</source>
     </message>
     <message>
         <location filename="../../src/app/tape/tkmmainwindow.ui" line="320"/>
-        <location filename="../../src/app/tape/tkmmainwindow.cpp" line="2545"/>
+        <location filename="../../src/app/tape/tkmmainwindow.cpp" line="2550"/>
         <source>Name</source>
         <comment>measurement column</comment>
         <translation type="unfinished">Name</translation>
     </message>
     <message>
         <location filename="../../src/app/tape/tkmmainwindow.ui" line="325"/>
-        <location filename="../../src/app/tape/tkmmainwindow.cpp" line="2547"/>
+        <location filename="../../src/app/tape/tkmmainwindow.cpp" line="2552"/>
         <source>Full name</source>
         <comment>measurement column</comment>
         <translation type="unfinished">Full name</translation>
     </message>
     <message>
         <location filename="../../src/app/tape/tkmmainwindow.ui" line="330"/>
-        <location filename="../../src/app/tape/tkmmainwindow.cpp" line="2549"/>
+        <location filename="../../src/app/tape/tkmmainwindow.cpp" line="2554"/>
         <source>Group</source>
         <comment>measurement column</comment>
         <translation type="unfinished">Group</translation>
@@ -16366,141 +16461,141 @@ This option will take an affect after restart.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tkmmainwindow.cpp" line="1634"/>
+        <location filename="../../src/app/tape/tkmmainwindow.cpp" line="1639"/>
         <source>About Qt</source>
         <translation type="unfinished">About Qt</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tkmmainwindow.cpp" line="1875"/>
+        <location filename="../../src/app/tape/tkmmainwindow.cpp" line="1880"/>
         <source>Empty</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tkmmainwindow.cpp" line="1876"/>
+        <location filename="../../src/app/tape/tkmmainwindow.cpp" line="1881"/>
         <source>File was not saved yet.</source>
         <translation type="unfinished">File was not saved yet.</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tkmmainwindow.cpp" line="1927"/>
+        <location filename="../../src/app/tape/tkmmainwindow.cpp" line="1932"/>
         <source>Unsaved changes</source>
         <translation type="unfinished">Unsaved changes</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tkmmainwindow.cpp" line="1928"/>
+        <location filename="../../src/app/tape/tkmmainwindow.cpp" line="1933"/>
         <source>Measurements have been modified. Do you want to save your changes?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tkmmainwindow.cpp" line="1936"/>
+        <location filename="../../src/app/tape/tkmmainwindow.cpp" line="1941"/>
         <source>Save…</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tkmmainwindow.cpp" line="1936"/>
+        <location filename="../../src/app/tape/tkmmainwindow.cpp" line="1941"/>
         <source>Save</source>
         <translation type="unfinished">Save</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tkmmainwindow.cpp" line="1941"/>
+        <location filename="../../src/app/tape/tkmmainwindow.cpp" line="1946"/>
         <source>Don&apos;t Save</source>
         <translation type="unfinished">Don&apos;t Save</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tkmmainwindow.cpp" line="2019"/>
+        <location filename="../../src/app/tape/tkmmainwindow.cpp" line="2024"/>
         <source>Cannot read settings from a malformed .INI file.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tkmmainwindow.cpp" line="2038"/>
+        <location filename="../../src/app/tape/tkmmainwindow.cpp" line="2043"/>
         <source>Cannot save settings. Access denied.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tkmmainwindow.cpp" line="2068"/>
+        <location filename="../../src/app/tape/tkmmainwindow.cpp" line="2073"/>
         <source>Empty</source>
         <comment>list</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tkmmainwindow.cpp" line="2141"/>
+        <location filename="../../src/app/tape/tkmmainwindow.cpp" line="2146"/>
         <source>Unknown measurement</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tkmmainwindow.cpp" line="2149"/>
+        <location filename="../../src/app/tape/tkmmainwindow.cpp" line="2154"/>
         <source>&amp;New Window</source>
         <translation type="unfinished">&amp;New Window</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tkmmainwindow.cpp" line="2293"/>
-        <location filename="../../src/app/tape/tkmmainwindow.cpp" line="2480"/>
+        <location filename="../../src/app/tape/tkmmainwindow.cpp" line="2298"/>
+        <location filename="../../src/app/tape/tkmmainwindow.cpp" line="2485"/>
         <source>Unnamed image %1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tkmmainwindow.cpp" line="2334"/>
+        <location filename="../../src/app/tape/tkmmainwindow.cpp" line="2339"/>
         <source>Open file</source>
         <translation type="unfinished">Open file</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tkmmainwindow.cpp" line="2453"/>
+        <location filename="../../src/app/tape/tkmmainwindow.cpp" line="2458"/>
         <source>Length units</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tkmmainwindow.cpp" line="2454"/>
+        <location filename="../../src/app/tape/tkmmainwindow.cpp" line="2459"/>
         <source>Degrees</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tkmmainwindow.cpp" line="2472"/>
+        <location filename="../../src/app/tape/tkmmainwindow.cpp" line="2477"/>
         <source>None</source>
         <translation type="unfinished">None</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tkmmainwindow.cpp" line="2517"/>
+        <location filename="../../src/app/tape/tkmmainwindow.cpp" line="2522"/>
         <source>Measurement name is empty.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tkmmainwindow.cpp" line="2522"/>
+        <location filename="../../src/app/tape/tkmmainwindow.cpp" line="2527"/>
         <source>Imported file must not contain the same name twice.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tkmmainwindow.cpp" line="2528"/>
+        <location filename="../../src/app/tape/tkmmainwindow.cpp" line="2533"/>
         <source>Measurement &apos;%1&apos; doesn&apos;t match regex pattern.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tkmmainwindow.cpp" line="2533"/>
+        <location filename="../../src/app/tape/tkmmainwindow.cpp" line="2538"/>
         <source>Measurement &apos;%1&apos; already used in the file.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tkmmainwindow.cpp" line="2551"/>
+        <location filename="../../src/app/tape/tkmmainwindow.cpp" line="2556"/>
         <source>Formula</source>
         <comment>measurement column</comment>
         <translation type="unfinished">Formula</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tkmmainwindow.cpp" line="2553"/>
+        <location filename="../../src/app/tape/tkmmainwindow.cpp" line="2558"/>
         <source>Description</source>
         <comment>measurement column</comment>
         <translation type="unfinished">Description</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tkmmainwindow.cpp" line="2577"/>
+        <location filename="../../src/app/tape/tkmmainwindow.cpp" line="2582"/>
         <source>Error in row %1. The measurement name is empty.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tkmmainwindow.cpp" line="2620"/>
+        <location filename="../../src/app/tape/tkmmainwindow.cpp" line="2625"/>
         <source>Error in row %1. %2</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tkmmainwindow.cpp" line="2633"/>
+        <location filename="../../src/app/tape/tkmmainwindow.cpp" line="2638"/>
         <source>Individual measurements require at least 2 columns.</source>
         <translation type="unfinished"></translation>
     </message>
@@ -16701,7 +16796,7 @@ This option will take an affect after restart.</source>
         <translation type="vanished">Open individual ...</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="3468"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="3473"/>
         <source>Save</source>
         <translation>Save</translation>
     </message>
@@ -16765,7 +16860,7 @@ This option will take an affect after restart.</source>
         <translation>Preferences</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="3805"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="3810"/>
         <source>untitled %1</source>
         <translation>untitled %1</translation>
     </message>
@@ -16777,7 +16872,7 @@ This option will take an affect after restart.</source>
     <message>
         <location filename="../../src/app/tape/tmainwindow.cpp" line="549"/>
         <location filename="../../src/app/tape/tmainwindow.cpp" line="1857"/>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="4181"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="4186"/>
         <source>File error.</source>
         <translation>File error.</translation>
     </message>
@@ -16805,7 +16900,7 @@ This option will take an affect after restart.</source>
         <translation>Save as</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="4206"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="4211"/>
         <source>&amp;New Window</source>
         <translation>&amp;New Window</translation>
     </message>
@@ -16820,21 +16915,21 @@ This option will take an affect after restart.</source>
     </message>
     <message>
         <location filename="../../src/app/tape/tmainwindow.cpp" line="2286"/>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="3926"/>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="3949"/>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="3965"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="3931"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="3954"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="3970"/>
         <source>Error</source>
         <translation>Error</translation>
     </message>
     <message>
         <location filename="../../src/app/tape/tmainwindow.cpp" line="2286"/>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="3926"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="3931"/>
         <source>Empty field.</source>
         <translation>Empty field.</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="3965"/>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="3966"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="3970"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="3971"/>
         <source>Parser error: %1</source>
         <translation>Parser error: %1</translation>
     </message>
@@ -16856,13 +16951,13 @@ This option will take an affect after restart.</source>
         <location filename="../../src/app/tape/tmainwindow.cpp" line="759"/>
         <location filename="../../src/app/tape/tmainwindow.cpp" line="969"/>
         <location filename="../../src/app/tape/tmainwindow.cpp" line="2606"/>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="3006"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="3011"/>
         <source>Individual measurements</source>
         <translation>Individual measurements</translation>
     </message>
     <message>
         <location filename="../../src/app/tape/tmainwindow.cpp" line="1593"/>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="3809"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="3814"/>
         <source>untitled</source>
         <translation>untitled</translation>
     </message>
@@ -16871,7 +16966,7 @@ This option will take an affect after restart.</source>
         <translation type="vanished">&lt;Empty&gt;</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="3459"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="3464"/>
         <source>Unsaved changes</source>
         <translation>Unsaved changes</translation>
     </message>
@@ -16882,17 +16977,17 @@ Do you want to save your changes?</source>
 Do you want to save your changes?</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="3927"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="3932"/>
         <source>Empty field</source>
         <translation>Empty field</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="3960"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="3965"/>
         <source>Value</source>
         <translation>Value</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="3974"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="3979"/>
         <source>Open file</source>
         <translation>Open file</translation>
     </message>
@@ -16909,7 +17004,7 @@ Do you want to save your changes?</translation>
     </message>
     <message>
         <location filename="../../src/app/tape/tmainwindow.cpp" line="783"/>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="5042"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="5047"/>
         <source>Pattern unit:</source>
         <translation>Pattern unit:</translation>
     </message>
@@ -16961,7 +17056,7 @@ Do you want to save your changes?</translation>
     </message>
     <message>
         <location filename="../../src/app/tape/tmainwindow.cpp" line="462"/>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="4139"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="4144"/>
         <source>File has unknown format.</source>
         <translation>File has unknown format.</translation>
     </message>
@@ -16971,7 +17066,7 @@ Do you want to save your changes?</translation>
     </message>
     <message>
         <location filename="../../src/app/tape/tmainwindow.cpp" line="422"/>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="4099"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="4104"/>
         <source>File &apos;%1&apos; doesn&apos;t exist!</source>
         <translation>File &apos;%1&apos; doesn&apos;t exist!</translation>
     </message>
@@ -17030,19 +17125,19 @@ Do you want to save your changes?</translation>
         <translation>Delete measurement</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="5119"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="5124"/>
         <source>unknown</source>
         <comment>gender</comment>
         <translation>unknown</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="5120"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="5125"/>
         <source>male</source>
         <comment>gender</comment>
         <translation>male</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="5121"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="5126"/>
         <source>female</source>
         <comment>gender</comment>
         <translation>female</translation>
@@ -17089,12 +17184,12 @@ Do you want to save your changes?</translation>
         <translation type="vanished">&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:340pt;&quot;&gt;?&lt;/span&gt;&lt;/p&gt;&lt;p align=&quot;center&quot;&gt;Unknown measurement&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="2929"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="2934"/>
         <source>About Qt</source>
         <translation>About Qt</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="3408"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="3413"/>
         <source>File was not saved yet.</source>
         <translation>File was not saved yet.</translation>
     </message>
@@ -17135,7 +17230,7 @@ Do you want to save your changes?</translation>
         <translation type="vanished">Save...</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="3473"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="3478"/>
         <source>Don&apos;t Save</source>
         <translation>Don&apos;t Save</translation>
     </message>
@@ -17223,7 +17318,7 @@ Do you want to save your changes?</translation>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="3818"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="3823"/>
         <source>read only</source>
         <translation type="unfinished"></translation>
     </message>
@@ -17232,17 +17327,17 @@ Do you want to save your changes?</translation>
         <location filename="../../src/app/tape/tmainwindow.cpp" line="651"/>
         <location filename="../../src/app/tape/tmainwindow.cpp" line="750"/>
         <location filename="../../src/app/tape/tmainwindow.cpp" line="974"/>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="2956"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="2961"/>
         <source>Multisize measurements</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="3950"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="3955"/>
         <source>Invalid result. Value is infinite or NaN. Please, check your calculations.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="3407"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="3412"/>
         <source>Empty</source>
         <translation type="unfinished"></translation>
     </message>
@@ -17262,7 +17357,7 @@ Do you want to save your changes?</translation>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="3468"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="3473"/>
         <source>Save…</source>
         <translation type="unfinished"></translation>
     </message>
@@ -17274,22 +17369,22 @@ Do you want to save your changes?</translation>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="4341"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="4346"/>
         <source>Individual measurements require at least 2 columns.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="4424"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="4429"/>
         <source>Multisize measurements require at least 4 columns.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="4292"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="4297"/>
         <source>Imported file must not contain the same name twice.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="4062"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="4067"/>
         <source>Cannot save settings. Access denied.</source>
         <translation type="unfinished"></translation>
     </message>
@@ -17344,44 +17439,44 @@ Do you want to save your changes?</translation>
         <translation type="unfinished">&amp;New</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="4043"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="4048"/>
         <source>Cannot read settings from a malformed .INI file.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/app/tape/tmainwindow.ui" line="326"/>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="4836"/>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="4852"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="4841"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="4857"/>
         <source>Name</source>
         <comment>measurement column</comment>
         <translation type="unfinished">Name</translation>
     </message>
     <message>
         <location filename="../../src/app/tape/tmainwindow.ui" line="331"/>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="4838"/>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="4857"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="4843"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="4862"/>
         <source>Full name</source>
         <comment>measurement column</comment>
         <translation type="unfinished">Full name</translation>
     </message>
     <message>
         <location filename="../../src/app/tape/tmainwindow.ui" line="336"/>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="4840"/>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="4862"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="4845"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="4867"/>
         <source>Calculated value</source>
         <comment>measurement column</comment>
         <translation type="unfinished">Calculated value</translation>
     </message>
     <message>
         <location filename="../../src/app/tape/tmainwindow.ui" line="341"/>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="4842"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="4847"/>
         <source>Formula</source>
         <comment>measurement column</comment>
         <translation type="unfinished">Formula</translation>
     </message>
     <message>
         <location filename="../../src/app/tape/tmainwindow.ui" line="346"/>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="4867"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="4872"/>
         <source>Base value</source>
         <comment>measurement column</comment>
         <translation type="unfinished">Base value</translation>
@@ -17560,97 +17655,97 @@ Do you want to save your changes?</translation>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="2916"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="2921"/>
         <source>Unknown known measurements: %1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="3328"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="3333"/>
         <source>Shift (%1):</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="3460"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="3465"/>
         <source>Measurements have been modified. Do you want to save your changes?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="4740"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="4745"/>
         <source>Unknown measurement</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="4776"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="4781"/>
         <source>None</source>
         <translation type="unfinished">None</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="4781"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="4786"/>
         <source>Invalid link</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="4792"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="4797"/>
         <source>Known measurements %1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="4844"/>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="4898"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="4849"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="4903"/>
         <source>Description</source>
         <comment>measurement column</comment>
         <translation type="unfinished">Description</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="4878"/>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="4887"/>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="4893"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="4883"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="4892"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="4898"/>
         <source>Shift</source>
         <comment>measurement column</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="5288"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="5293"/>
         <source>Empty</source>
         <comment>list</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="5367"/>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="5377"/>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="5387"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="5372"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="5382"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="5392"/>
         <source>%1 shift</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="4514"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="4519"/>
         <source>Cannot convert base value to double in column 2.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="4518"/>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="4524"/>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="4531"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="4523"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="4529"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="4536"/>
         <source>Cannot convert shift value to double in column %1.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="5089"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="5094"/>
         <source>Millimeters</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="5092"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="5097"/>
         <source>Inches</source>
         <translation type="unfinished">Inches</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="5095"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="5100"/>
         <source>Centimeters</source>
         <translation type="unfinished">Centimeters</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="5104"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="5109"/>
         <source>Degrees</source>
         <translation type="unfinished"></translation>
     </message>
@@ -17676,7 +17771,7 @@ Do you want to save your changes?</translation>
     </message>
     <message>
         <location filename="../../src/app/tape/tmainwindow.ui" line="115"/>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="5205"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="5210"/>
         <source>0 results</source>
         <translation type="unfinished"></translation>
     </message>
@@ -17736,33 +17831,33 @@ Do you want to save your changes?</translation>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="4287"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="4292"/>
         <source>Measurement name is empty.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="4298"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="4303"/>
         <source>Measurement &apos;%1&apos; doesn&apos;t match regex pattern.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="4303"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="4308"/>
         <source>Measurement &apos;%1&apos; already used in the file.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="4356"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="4361"/>
         <source>Error in row %1. The measurement name is empty.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="4496"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="4501"/>
         <source>The measurement name is empty.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="4389"/>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="4447"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="4394"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="4452"/>
         <source>Error in row %1. %2</source>
         <translation type="unfinished"></translation>
     </message>
@@ -19027,12 +19122,37 @@ Do you want to save your changes?</translation>
     </message>
     <message>
         <location filename="../../src/app/tape/dialogs/configpages/tapepreferencesconfigurationpage.ui" line="317"/>
+        <source>Usage statistic</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/app/tape/dialogs/configpages/tapepreferencesconfigurationpage.ui" line="323"/>
         <source>Send usage statistics</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/dialogs/configpages/tapepreferencesconfigurationpage.ui" line="324"/>
+        <location filename="../../src/app/tape/dialogs/configpages/tapepreferencesconfigurationpage.ui" line="330"/>
         <source>Please help to improve Valentina&apos;s quality by automatically sending usage statistics. Sent data contains &lt;span style=&quot; font-weight:700;&quot;&gt;no potentially sensitive information&lt;/span&gt; like user names, email addresses, file contents or file paths.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/app/tape/dialogs/configpages/tapepreferencesconfigurationpage.ui" line="343"/>
+        <source>Crash reports</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/app/tape/dialogs/configpages/tapepreferencesconfigurationpage.ui" line="349"/>
+        <source>Send automatic crash reports</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/app/tape/dialogs/configpages/tapepreferencesconfigurationpage.ui" line="358"/>
+        <source>Email:</source>
+        <translation type="unfinished">Email:</translation>
+    </message>
+    <message>
+        <location filename="../../src/app/tape/dialogs/configpages/tapepreferencesconfigurationpage.ui" line="374"/>
+        <source>Reporting crash reports will help us make Valentina more reliable. All information is treated as confidential and is only used to improve future versions of this program. Please activate sending automatic crash reports and fill your email address (optional). If provided, we may contact you with additional information about the crash.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -19048,35 +19168,45 @@ Do you want to save your changes?</translation>
         <translation type="obsolete">Default size:</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/dialogs/configpages/tapepreferencesconfigurationpage.cpp" line="238"/>
+        <location filename="../../src/app/tape/dialogs/configpages/tapepreferencesconfigurationpage.cpp" line="225"/>
+        <source>send crash report</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/app/tape/dialogs/configpages/tapepreferencesconfigurationpage.cpp" line="232"/>
+        <source>user email in case of crash</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/app/tape/dialogs/configpages/tapepreferencesconfigurationpage.cpp" line="269"/>
         <source>With OS options</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/dialogs/configpages/tapepreferencesconfigurationpage.cpp" line="257"/>
+        <location filename="../../src/app/tape/dialogs/configpages/tapepreferencesconfigurationpage.cpp" line="288"/>
         <source>System</source>
         <comment>theme</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/dialogs/configpages/tapepreferencesconfigurationpage.cpp" line="258"/>
+        <location filename="../../src/app/tape/dialogs/configpages/tapepreferencesconfigurationpage.cpp" line="289"/>
         <source>Dark</source>
         <comment>theme</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/dialogs/configpages/tapepreferencesconfigurationpage.cpp" line="259"/>
+        <location filename="../../src/app/tape/dialogs/configpages/tapepreferencesconfigurationpage.cpp" line="290"/>
         <source>Light</source>
         <comment>theme</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/dialogs/configpages/tapepreferencesconfigurationpage.cpp" line="344"/>
+        <location filename="../../src/app/tape/dialogs/configpages/tapepreferencesconfigurationpage.cpp" line="375"/>
         <source>None</source>
         <translation type="unfinished">None</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/dialogs/configpages/tapepreferencesconfigurationpage.cpp" line="354"/>
+        <location filename="../../src/app/tape/dialogs/configpages/tapepreferencesconfigurationpage.cpp" line="385"/>
         <source>Known measurements %1</source>
         <translation type="unfinished"></translation>
     </message>
@@ -20377,52 +20507,52 @@ Do you want to save your changes?</translation>
 <context>
     <name>VApplication</name>
     <message>
-        <location filename="../../src/app/valentina/core/vapplication.cpp" line="450"/>
+        <location filename="../../src/app/valentina/core/vapplication.cpp" line="448"/>
         <source>Error parsing file. Program will be terminated.</source>
         <translation>Error parsing file. Program will be terminated.</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/core/vapplication.cpp" line="456"/>
+        <location filename="../../src/app/valentina/core/vapplication.cpp" line="454"/>
         <source>Error bad id. Program will be terminated.</source>
         <translation>Error bad id. Program will be terminated.</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/core/vapplication.cpp" line="462"/>
+        <location filename="../../src/app/valentina/core/vapplication.cpp" line="460"/>
         <source>Error can&apos;t convert value. Program will be terminated.</source>
         <translation>Error can&apos;t convert value. Program will be terminated.</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/core/vapplication.cpp" line="468"/>
+        <location filename="../../src/app/valentina/core/vapplication.cpp" line="466"/>
         <source>Error empty parameter. Program will be terminated.</source>
         <translation>Error empty parameter. Program will be terminated.</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/core/vapplication.cpp" line="474"/>
+        <location filename="../../src/app/valentina/core/vapplication.cpp" line="472"/>
         <source>Error wrong id. Program will be terminated.</source>
         <translation>Error wrong id. Program will be terminated.</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/core/vapplication.cpp" line="493"/>
+        <location filename="../../src/app/valentina/core/vapplication.cpp" line="491"/>
         <source>Something&apos;s wrong!!</source>
         <translation>Something&apos;s wrong!!</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/core/vapplication.cpp" line="507"/>
+        <location filename="../../src/app/valentina/core/vapplication.cpp" line="505"/>
         <source>Parser error: %1. Program will be terminated.</source>
         <translation>Parser error: %1. Program will be terminated.</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/core/vapplication.cpp" line="512"/>
+        <location filename="../../src/app/valentina/core/vapplication.cpp" line="510"/>
         <source>Exception thrown: %1. Program will be terminated.</source>
         <translation>Exception thrown: %1. Program will be terminated.</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/core/vapplication.cpp" line="487"/>
+        <location filename="../../src/app/valentina/core/vapplication.cpp" line="485"/>
         <source>Invalid notch.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/core/vapplication.cpp" line="499"/>
+        <location filename="../../src/app/valentina/core/vapplication.cpp" line="497"/>
         <source>Formula warning: %1. Program will be terminated.</source>
         <translation type="unfinished"></translation>
     </message>
@@ -21492,12 +21622,12 @@ Do you want to save your changes?</translation>
         <translation type="vanished">Edit wrong formula</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/tools/drawTools/vdrawtool.h" line="191"/>
+        <location filename="../../src/libs/vtools/tools/drawTools/vdrawtool.h" line="187"/>
         <source>Options</source>
         <translation>Options</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/tools/drawTools/vdrawtool.h" line="253"/>
+        <location filename="../../src/libs/vtools/tools/drawTools/vdrawtool.h" line="249"/>
         <source>Delete</source>
         <translation>Delete</translation>
     </message>
@@ -21507,22 +21637,22 @@ Do you want to save your changes?</translation>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/tools/drawTools/vdrawtool.h" line="199"/>
+        <location filename="../../src/libs/vtools/tools/drawTools/vdrawtool.h" line="195"/>
         <source>Add to group</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/tools/drawTools/vdrawtool.h" line="223"/>
+        <location filename="../../src/libs/vtools/tools/drawTools/vdrawtool.h" line="219"/>
         <source>Remove from group</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/tools/drawTools/vdrawtool.h" line="238"/>
+        <location filename="../../src/libs/vtools/tools/drawTools/vdrawtool.h" line="234"/>
         <source>Show label</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/tools/drawTools/vdrawtool.h" line="250"/>
+        <location filename="../../src/libs/vtools/tools/drawTools/vdrawtool.h" line="246"/>
         <source>Restore label position</source>
         <translation type="unfinished"></translation>
     </message>
@@ -22585,7 +22715,7 @@ Do you want to save your changes?</translation>
     </message>
     <message>
         <location filename="../../src/app/puzzle/vpmainwindow.ui" line="2207"/>
-        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="4900"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="4906"/>
         <source>Preferences</source>
         <translation type="unfinished">Preferences</translation>
     </message>
@@ -22606,7 +22736,7 @@ Do you want to save your changes?</translation>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="3278"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="3279"/>
         <source>Could not extract data from file &apos;%1&apos;. %2</source>
         <translation type="unfinished"></translation>
     </message>
@@ -22659,9 +22789,9 @@ Do you want to save your changes?</translation>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="2695"/>
-        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="3016"/>
-        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="3197"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="2696"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="3017"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="3198"/>
         <source>Failed to open file, is it writable?</source>
         <translation type="unfinished"></translation>
     </message>
@@ -22676,55 +22806,55 @@ Do you want to save your changes?</translation>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="3549"/>
-        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="3612"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="3550"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="3613"/>
         <source>Layout files</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="3553"/>
-        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="3704"/>
-        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="4647"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="3554"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="3705"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="4648"/>
         <source>Open file</source>
         <translation type="unfinished">Open file</translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="3595"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="3596"/>
         <source>Could not save the file</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="3614"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="3615"/>
         <source>layout</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="3626"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="3627"/>
         <source>Save as</source>
         <translation type="unfinished">Save as</translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="3657"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="3658"/>
         <source>Failed to lock. This file already opened in another window.</source>
         <translation type="unfinished">Failed to lock. This file already opened in another window.</translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="3668"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="3669"/>
         <source>Could not save file</source>
         <translation type="unfinished">Could not save file</translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="3689"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="3690"/>
         <source>Failed to lock. This file already opened in another window. Expect collissions when run 2 copies of the program.</source>
         <translation type="unfinished">Failed to lock. This file already opened in another window. Expect collissions when run 2 copies of the program.</translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="3699"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="3700"/>
         <source>Raw Layout files</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="3717"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="3718"/>
         <source>About Qt</source>
         <translation type="unfinished">About Qt</translation>
     </message>
@@ -22950,13 +23080,13 @@ Do you want to save your changes?</translation>
     </message>
     <message>
         <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="717"/>
-        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="3522"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="3523"/>
         <source>&amp;Undo</source>
         <translation type="unfinished">&amp;Undo</translation>
     </message>
     <message>
         <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="723"/>
-        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="3523"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="3524"/>
         <source>&amp;Redo</source>
         <translation type="unfinished">&amp;Redo</translation>
     </message>
@@ -22987,70 +23117,58 @@ Do you want to save your changes?</translation>
         <translation type="unfinished">Don&apos;t Save</translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="2297"/>
-        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="2358"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="2298"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="2359"/>
         <source>Can&apos;t create a path</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="2578"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="2579"/>
         <source>Can&apos;t open file &apos;%1&apos;</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="2592"/>
-        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="3066"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="2593"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="3067"/>
         <source>Failed in flushing page to disk, disk full?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="2932"/>
-        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="2961"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="2933"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="2962"/>
         <source>The layout is invalid.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="2933"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="2934"/>
         <source>The layout is invalid. Piece out of bound. Do you want to continue export?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="2962"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="2963"/>
         <source>The layout is invalid. Pieces superposition. Do you want to continue export?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="3990"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="3991"/>
         <source>Sheet %1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="3340"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="3341"/>
         <source>translate pieces</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="3434"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="3435"/>
         <source>rotate pieces</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="4276"/>
-        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="4327"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="4277"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="4328"/>
         <source>For printing multipages document all sheet should have the same size.</source>
         <translation type="unfinished">For printing multipages document all sheet should have the same size.</translation>
-    </message>
-    <message>
-        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="4288"/>
-        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="4339"/>
-        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="4374"/>
-        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="4412"/>
-        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="4467"/>
-        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="4511"/>
-        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="4544"/>
-        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="4580"/>
-        <source>Print error</source>
-        <translation type="unfinished">Print error</translation>
     </message>
     <message>
         <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="4289"/>
@@ -23061,19 +23179,31 @@ Do you want to save your changes?</translation>
         <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="4512"/>
         <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="4545"/>
         <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="4581"/>
+        <source>Print error</source>
+        <translation type="unfinished">Print error</translation>
+    </message>
+    <message>
+        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="4290"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="4341"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="4376"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="4414"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="4469"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="4513"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="4546"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="4582"/>
         <source>Cannot proceed because there are no available printers in your system.</source>
         <translation type="unfinished">Cannot proceed because there are no available printers in your system.</translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="4644"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="4645"/>
         <source>Watermark files</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="4300"/>
-        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="4351"/>
-        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="4386"/>
-        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="4424"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="4301"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="4352"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="4387"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="4425"/>
         <source>Unable to get sheet page settings</source>
         <translation type="unfinished"></translation>
     </message>
@@ -23113,12 +23243,12 @@ Do you want to save your changes?</translation>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="4240"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="4241"/>
         <source>sheet</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="3301"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="3302"/>
         <source>Piece %1 invalid. %2</source>
         <translation type="unfinished"></translation>
     </message>
@@ -28192,27 +28322,27 @@ Raw layout format compatibility error: actualFileVersion = %1 and fileVersion = 
 <context>
     <name>vNoisyHandler</name>
     <message>
-        <location filename="../../src/app/valentina/core/vapplication.cpp" line="238"/>
+        <location filename="../../src/app/valentina/core/vapplication.cpp" line="236"/>
         <source>DEBUG:</source>
         <translation>DEBUG:</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/core/vapplication.cpp" line="249"/>
+        <location filename="../../src/app/valentina/core/vapplication.cpp" line="247"/>
         <source>WARNING:</source>
         <translation>WARNING:</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/core/vapplication.cpp" line="260"/>
+        <location filename="../../src/app/valentina/core/vapplication.cpp" line="258"/>
         <source>CRITICAL:</source>
         <translation>CRITICAL:</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/core/vapplication.cpp" line="267"/>
+        <location filename="../../src/app/valentina/core/vapplication.cpp" line="265"/>
         <source>FATAL:</source>
         <translation>FATAL:</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/core/vapplication.cpp" line="278"/>
+        <location filename="../../src/app/valentina/core/vapplication.cpp" line="276"/>
         <source>INFO:</source>
         <translation>INFO:</translation>
     </message>
@@ -28233,22 +28363,22 @@ Raw layout format compatibility error: actualFileVersion = %1 and fileVersion = 
         <translation type="vanished">Information.</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/core/vapplication.cpp" line="306"/>
+        <location filename="../../src/app/valentina/core/vapplication.cpp" line="304"/>
         <source>Warning</source>
         <translation type="unfinished">Warning</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/core/vapplication.cpp" line="310"/>
+        <location filename="../../src/app/valentina/core/vapplication.cpp" line="308"/>
         <source>Critical error</source>
         <translation type="unfinished">Critical error</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/core/vapplication.cpp" line="314"/>
+        <location filename="../../src/app/valentina/core/vapplication.cpp" line="312"/>
         <source>Fatal error</source>
         <translation type="unfinished">Fatal error</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/core/vapplication.cpp" line="318"/>
+        <location filename="../../src/app/valentina/core/vapplication.cpp" line="316"/>
         <source>Information</source>
         <translation type="unfinished">Information</translation>
     </message>

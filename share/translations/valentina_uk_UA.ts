@@ -1005,13 +1005,38 @@
     </message>
     <message>
         <location filename="../../src/libs/vmisc/dialogs/dialogaskcollectstatistic.ui" line="24"/>
+        <source>Usage statistic</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/libs/vmisc/dialogs/dialogaskcollectstatistic.ui" line="30"/>
         <source>Send usage statistics</source>
         <translation>Надсилати статистику про користування</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vmisc/dialogs/dialogaskcollectstatistic.ui" line="34"/>
+        <location filename="../../src/libs/vmisc/dialogs/dialogaskcollectstatistic.ui" line="40"/>
         <source>Please help to improve Valentina&apos;s quality by automatically sending usage statistics. Sent data contains &lt;span style=&quot; font-weight:700;&quot;&gt;no potentially sensitive information&lt;/span&gt; like user names, email addresses, file contents or file paths.</source>
         <translation>Будь ласка, допоможіть поліпшити якість роботи Valentina, автоматично надсилаючи статистику користування. Надіслані дані не містять &lt;span style=&quot; font-weight:700;&quot;&gt;жодної потенційно конфіденційної інформації&lt;/span&gt;, такої як імена користувачів, адреси електронної пошти, вміст файлів або шляхи до них.</translation>
+    </message>
+    <message>
+        <location filename="../../src/libs/vmisc/dialogs/dialogaskcollectstatistic.ui" line="53"/>
+        <source>Crash reports</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/libs/vmisc/dialogs/dialogaskcollectstatistic.ui" line="59"/>
+        <source>Send automatic crash reports</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/libs/vmisc/dialogs/dialogaskcollectstatistic.ui" line="71"/>
+        <source>Email:</source>
+        <translation type="unfinished">Email:</translation>
+    </message>
+    <message>
+        <location filename="../../src/libs/vmisc/dialogs/dialogaskcollectstatistic.ui" line="87"/>
+        <source>Reporting crash reports will help us make Valentina more reliable. All information is treated as confidential and is only used to improve future versions of this program. Please activate sending automatic crash reports and fill your email address (optional). If provided, we may contact you with additional information about the crash.</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -3803,7 +3828,7 @@
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialoghistory.ui" line="290"/>
-        <location filename="../../src/app/valentina/dialogs/dialoghistory.cpp" line="515"/>
+        <location filename="../../src/app/valentina/dialogs/dialoghistory.cpp" line="518"/>
         <source>Tool</source>
         <translation>Інструмент</translation>
     </message>
@@ -3812,38 +3837,38 @@
         <translation type="vanished">Не можу створити запис.</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/dialogs/dialoghistory.cpp" line="310"/>
+        <location filename="../../src/app/valentina/dialogs/dialoghistory.cpp" line="313"/>
         <source>%1 - Base point</source>
         <translation>%1 - Базова точка</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/dialogs/dialoghistory.cpp" line="313"/>
-        <location filename="../../src/app/valentina/dialogs/dialoghistory.cpp" line="318"/>
+        <location filename="../../src/app/valentina/dialogs/dialoghistory.cpp" line="316"/>
+        <location filename="../../src/app/valentina/dialogs/dialoghistory.cpp" line="321"/>
         <source>%1_%2 - Line from point %1 to point %2</source>
         <translation>%1_%2 - Лінія від точки %1 до точки %2</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/dialogs/dialoghistory.cpp" line="322"/>
+        <location filename="../../src/app/valentina/dialogs/dialoghistory.cpp" line="325"/>
         <source>%3 - Point along line %1_%2</source>
         <translation>%3 - Точка вздовж лінії %1_%2</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/dialogs/dialoghistory.cpp" line="327"/>
+        <location filename="../../src/app/valentina/dialogs/dialoghistory.cpp" line="330"/>
         <source>%1 - Point of shoulder</source>
         <translation>%1 - точка плеча</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/dialogs/dialoghistory.cpp" line="330"/>
+        <location filename="../../src/app/valentina/dialogs/dialoghistory.cpp" line="333"/>
         <source>%3 - normal to line %1_%2</source>
         <translation>%3 - перпендикуляр до лінії %1_%2</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/dialogs/dialoghistory.cpp" line="336"/>
+        <location filename="../../src/app/valentina/dialogs/dialoghistory.cpp" line="339"/>
         <source>%4 - bisector of angle %1_%2_%3</source>
         <translation>%4 - бісектриса кута %1_%2_%3</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/dialogs/dialoghistory.cpp" line="342"/>
+        <location filename="../../src/app/valentina/dialogs/dialoghistory.cpp" line="345"/>
         <source>%5 - intersection of lines %1_%2 and %3_%4</source>
         <translation>%5 - перетин ліній %1_%2 і %3_%4</translation>
     </message>
@@ -3860,22 +3885,22 @@
         <translation type="vanished">Точка кривої %1</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/dialogs/dialoghistory.cpp" line="385"/>
+        <location filename="../../src/app/valentina/dialogs/dialoghistory.cpp" line="388"/>
         <source>%4 - point of contact of arc with the center in point %1 and line %2_%3</source>
         <translation>%4 - точка перетину дуги з центром в точці %1 і лінії %2_%3</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/dialogs/dialoghistory.cpp" line="391"/>
+        <location filename="../../src/app/valentina/dialogs/dialoghistory.cpp" line="394"/>
         <source>Point of perpendicular from point %1 to line %2_%3</source>
         <translation>Точка перпендикуляра з точки %1 до лінії %2_%3</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/dialogs/dialoghistory.cpp" line="397"/>
+        <location filename="../../src/app/valentina/dialogs/dialoghistory.cpp" line="400"/>
         <source>Triangle: axis %1_%2, points %3 and %4</source>
         <translation>Трикутник: вісь %1_%2, точки %3 і %4</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/dialogs/dialoghistory.cpp" line="402"/>
+        <location filename="../../src/app/valentina/dialogs/dialoghistory.cpp" line="405"/>
         <source>%1 - point of intersection %2 and %3</source>
         <translation>%1 - перитину %2 і %3</translation>
     </message>
@@ -3892,12 +3917,12 @@
         <translation type="vanished">%1 - розрізає складну криву %2</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/dialogs/dialoghistory.cpp" line="430"/>
+        <location filename="../../src/app/valentina/dialogs/dialoghistory.cpp" line="433"/>
         <source>%1 - point of intersection line %2_%3 and axis through point %4</source>
         <translation>%1 - точка перетину лінії %2_%3 і осі через точку %4</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/dialogs/dialoghistory.cpp" line="435"/>
+        <location filename="../../src/app/valentina/dialogs/dialoghistory.cpp" line="438"/>
         <source>%1 - point of intersection curve and axis through point %2</source>
         <translation>%1 - точка перетину кривої і осі через точку %2</translation>
     </message>
@@ -3906,116 +3931,116 @@
         <translation type="vanished">Дуга з центром в точці %1 і довжиною %2</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/dialogs/dialoghistory.cpp" line="439"/>
+        <location filename="../../src/app/valentina/dialogs/dialoghistory.cpp" line="442"/>
         <source>%1 - point of arcs intersection</source>
         <translation>%1 - точка перетину дуг</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/dialogs/dialoghistory.cpp" line="442"/>
+        <location filename="../../src/app/valentina/dialogs/dialoghistory.cpp" line="445"/>
         <source>%1 - point of circles intersection</source>
         <translation>%1 - точка перетину кіл</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/dialogs/dialoghistory.cpp" line="448"/>
+        <location filename="../../src/app/valentina/dialogs/dialoghistory.cpp" line="451"/>
         <source>%1 - point from circle and tangent</source>
         <translation>%1 - точка кола і дотичної</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/dialogs/dialoghistory.cpp" line="451"/>
+        <location filename="../../src/app/valentina/dialogs/dialoghistory.cpp" line="454"/>
         <source>%1 - point from arc and tangent</source>
         <translation>%1 - точка дуги і дотичної</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/dialogs/dialoghistory.cpp" line="455"/>
+        <location filename="../../src/app/valentina/dialogs/dialoghistory.cpp" line="458"/>
         <source>Correction the dart %1_%2_%3</source>
         <translation>Виправлення виточки %1_%2_%3</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/dialogs/dialoghistory.cpp" line="445"/>
+        <location filename="../../src/app/valentina/dialogs/dialoghistory.cpp" line="448"/>
         <source>%1 - point of curves intersection</source>
         <translation>%1 - точка перетину кривих</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/dialogs/dialoghistory.cpp" line="350"/>
+        <location filename="../../src/app/valentina/dialogs/dialoghistory.cpp" line="353"/>
         <source>Curve</source>
         <translation>Крива</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/dialogs/dialoghistory.cpp" line="356"/>
+        <location filename="../../src/app/valentina/dialogs/dialoghistory.cpp" line="359"/>
         <source>Cubic bezier curve</source>
         <translation>Кубічна крива Безьє</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/dialogs/dialoghistory.cpp" line="362"/>
-        <location filename="../../src/app/valentina/dialogs/dialoghistory.cpp" line="368"/>
+        <location filename="../../src/app/valentina/dialogs/dialoghistory.cpp" line="365"/>
+        <location filename="../../src/app/valentina/dialogs/dialoghistory.cpp" line="371"/>
         <source>Arc</source>
         <translation>Дуга</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/dialogs/dialoghistory.cpp" line="368"/>
-        <location filename="../../src/app/valentina/dialogs/dialoghistory.cpp" line="463"/>
+        <location filename="../../src/app/valentina/dialogs/dialoghistory.cpp" line="371"/>
+        <location filename="../../src/app/valentina/dialogs/dialoghistory.cpp" line="466"/>
         <source>%1 with length %2</source>
         <translation>%1 з довжиною %2</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/dialogs/dialoghistory.cpp" line="374"/>
+        <location filename="../../src/app/valentina/dialogs/dialoghistory.cpp" line="377"/>
         <source>Spline path</source>
         <translation>Складна крива</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/dialogs/dialoghistory.cpp" line="380"/>
+        <location filename="../../src/app/valentina/dialogs/dialoghistory.cpp" line="383"/>
         <source>Cubic bezier curve path</source>
         <translation>Складна кубічна крива Безьє</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/dialogs/dialoghistory.cpp" line="409"/>
-        <location filename="../../src/app/valentina/dialogs/dialoghistory.cpp" line="416"/>
-        <location filename="../../src/app/valentina/dialogs/dialoghistory.cpp" line="425"/>
+        <location filename="../../src/app/valentina/dialogs/dialoghistory.cpp" line="412"/>
+        <location filename="../../src/app/valentina/dialogs/dialoghistory.cpp" line="419"/>
+        <location filename="../../src/app/valentina/dialogs/dialoghistory.cpp" line="428"/>
         <source>%1 - cut %2</source>
         <translation>%1 - розрізає %2</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/dialogs/dialoghistory.cpp" line="409"/>
+        <location filename="../../src/app/valentina/dialogs/dialoghistory.cpp" line="412"/>
         <source>arc</source>
         <translation>дуга</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/dialogs/dialoghistory.cpp" line="416"/>
+        <location filename="../../src/app/valentina/dialogs/dialoghistory.cpp" line="419"/>
         <source>curve</source>
         <translation>крива</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/dialogs/dialoghistory.cpp" line="425"/>
+        <location filename="../../src/app/valentina/dialogs/dialoghistory.cpp" line="428"/>
         <source>curve path</source>
         <translation>складна крива</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/dialogs/dialoghistory.cpp" line="463"/>
+        <location filename="../../src/app/valentina/dialogs/dialoghistory.cpp" line="466"/>
         <source>Elliptical arc</source>
         <translation>Еліптична дуга</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/dialogs/dialoghistory.cpp" line="467"/>
+        <location filename="../../src/app/valentina/dialogs/dialoghistory.cpp" line="470"/>
         <source>Rotate objects around point %1. Suffix &apos;%2&apos;</source>
         <translation>Поверніть об’єкти навколо точки %1. Суфікс &apos;%2&apos;</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/dialogs/dialoghistory.cpp" line="473"/>
+        <location filename="../../src/app/valentina/dialogs/dialoghistory.cpp" line="476"/>
         <source>Flipping by line %1_%2. Suffix &apos;%3&apos;</source>
         <translation>Симетрія по лінії %1_%2. Суфікс &apos;%3&apos;</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/dialogs/dialoghistory.cpp" line="478"/>
+        <location filename="../../src/app/valentina/dialogs/dialoghistory.cpp" line="481"/>
         <source>Flipping by axis through %1 point. Suffix &apos;%2&apos;</source>
         <translation>Симетрія по осі через %1 точку. Суфікс &apos;%2&apos;</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/dialogs/dialoghistory.cpp" line="484"/>
+        <location filename="../../src/app/valentina/dialogs/dialoghistory.cpp" line="487"/>
         <source>Move objects. Suffix &apos;%1&apos;</source>
         <translation>Переміщення об’єктів. Суфікс &apos;%1&apos;</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/dialogs/dialoghistory.cpp" line="774"/>
+        <location filename="../../src/app/valentina/dialogs/dialoghistory.cpp" line="777"/>
         <source>Empty</source>
         <comment>list</comment>
         <translation>Порожньо</translation>
@@ -4037,7 +4062,7 @@
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialoghistory.ui" line="74"/>
-        <location filename="../../src/app/valentina/dialogs/dialoghistory.cpp" line="691"/>
+        <location filename="../../src/app/valentina/dialogs/dialoghistory.cpp" line="694"/>
         <source>0 results</source>
         <translation>0 результатів</translation>
     </message>
@@ -10538,7 +10563,7 @@ Apply settings anyway?</source>
 <context>
     <name>InitPieceLabelLanguages</name>
     <message>
-        <location filename="../../src/libs/vmisc/def.cpp" line="571"/>
+        <location filename="../../src/libs/vmisc/def.cpp" line="561"/>
         <source>Default</source>
         <translation>По замовчуванню</translation>
     </message>
@@ -10967,7 +10992,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.ui" line="738"/>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="5759"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="5764"/>
         <source>Save</source>
         <translation>Зберегти</translation>
     </message>
@@ -11163,7 +11188,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.cpp" line="4752"/>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="5128"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="5133"/>
         <source>Pattern piece %1</source>
         <translation>Креслення %1</translation>
     </message>
@@ -11256,7 +11281,7 @@ Apply settings anyway?</source>
         <translation>Вибрати криву</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="6131"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="6136"/>
         <source>About Qt</source>
         <translation>Про Qt</translation>
     </message>
@@ -11296,7 +11321,7 @@ Apply settings anyway?</source>
         <location filename="../../src/app/valentina/mainwindow.cpp" line="2066"/>
         <location filename="../../src/app/valentina/mainwindow.cpp" line="2295"/>
         <location filename="../../src/app/valentina/mainwindow.cpp" line="4200"/>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="6952"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="6957"/>
         <source>Open file</source>
         <translation>Відкрити файл</translation>
     </message>
@@ -11334,12 +11359,12 @@ Apply settings anyway?</source>
         <translation>Поганий id.</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="5593"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="5598"/>
         <source>File saved</source>
         <translation>Файл збережено</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="7549"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="7554"/>
         <source>untitled.val</source>
         <translation>безімений.val</translation>
     </message>
@@ -11350,23 +11375,23 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.cpp" line="1835"/>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="5806"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="5811"/>
         <source>&amp;Undo</source>
         <translation>&amp;Скасувати дію</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.cpp" line="1836"/>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="5813"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="5818"/>
         <source>&amp;Redo</source>
         <translation>&amp;Повторити</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="6283"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="6288"/>
         <source>Pattern piece:</source>
         <translation>Креслення:</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="6285"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="6290"/>
         <source>Enter a new label for the pattern piece.</source>
         <translation>Введіть нову назву для креслення.</translation>
     </message>
@@ -11385,8 +11410,8 @@ Do you want to save your changes?</source>
     <message>
         <location filename="../../src/app/valentina/mainwindow.cpp" line="699"/>
         <location filename="../../src/app/valentina/mainwindow.cpp" line="746"/>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="6384"/>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="6576"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="6389"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="6581"/>
         <source>File error.</source>
         <translation>Помилка файла.</translation>
     </message>
@@ -11395,12 +11420,12 @@ Do you want to save your changes?</source>
         <translation type="vanished">Файл завантажено</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="6914"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="6919"/>
         <source>Valentina didn&apos;t shut down correctly. Do you want reopen files (%1) you had open?</source>
         <translation>Валентина була закрита неправильно. Хочете знову відкрити ці файли (%1)?</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="6916"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="6921"/>
         <source>Reopen files.</source>
         <translation>Відкрити файли знову.</translation>
     </message>
@@ -11656,7 +11681,7 @@ Do you want to save your changes?</source>
         <location filename="../../src/app/valentina/mainwindow.cpp" line="4042"/>
         <location filename="../../src/app/valentina/mainwindow.cpp" line="4233"/>
         <location filename="../../src/app/valentina/mainwindow.cpp" line="4313"/>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="6842"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="6847"/>
         <source>Layout mode</source>
         <translation>Режим розкладки</translation>
     </message>
@@ -11665,7 +11690,7 @@ Do you want to save your changes?</source>
         <translation type="vanished">Ви не можете використовувати Режим розкладки зараз. Будь ласка, створіть хоча б одну деталь.</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="5748"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="5753"/>
         <source>Unsaved changes</source>
         <translation>Незбережені зміни</translation>
     </message>
@@ -11704,7 +11729,7 @@ Do you want to save your changes?</source>
         <translation type="vanished">Стандартні мірки (*.vst);;Індивідуальні мірки (*.vit)</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="7197"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="7202"/>
         <source>You can&apos;t export empty scene.</source>
         <translation>Ви не можете експортувати порожню сцену.</translation>
     </message>
@@ -11741,7 +11766,7 @@ Do you want to save your changes?</source>
         <translation type="vanished">Файл мірок містить недійсні відомі мірки.</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="7062"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="7067"/>
         <source>Measurement file has unknown format.</source>
         <translation>Файл мірок має невідомий формат.</translation>
     </message>
@@ -11773,8 +11798,8 @@ Do you want to save your changes?</source>
         <translation>Не вдалося оновити мірки.</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="6503"/>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="6523"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="6508"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="6528"/>
         <source>The measurements file &apos;%1&apos; could not be found.</source>
         <translation>Не вдалося знайти файл мірок &apos;%1&apos;.</translation>
     </message>
@@ -11783,7 +11808,7 @@ Do you want to save your changes?</source>
         <translation type="vanished">Не вдалося знайти файл мірок &lt;br/&gt;&lt;br/&gt; &lt;b&gt;%1&lt;/b&gt; &lt;br/&gt;&lt;br/&gt;. Хочете оновити розташування файлу</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="6981"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="6986"/>
         <source>Loading measurements file</source>
         <translation>Завантаження файлу мірок</translation>
     </message>
@@ -11800,9 +11825,9 @@ Do you want to save your changes?</source>
         <translation type="vanished">Не вдалося встановити розмір. Файл не було відкрито.</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="7378"/>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="7421"/>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="7464"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="7383"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="7426"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="7469"/>
         <source>The method %1 does nothing in GUI mode</source>
         <translation>Метод %1 не працює в графічному режимі</translation>
     </message>
@@ -11819,15 +11844,15 @@ Do you want to save your changes?</source>
         <translation type="vanished">Не вдалося встановити зріст. Файл не було відкрито.</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="6825"/>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="6881"/>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="7244"/>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="7282"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="6830"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="6886"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="7249"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="7287"/>
         <source>Export error.</source>
         <translation>Помилка експорту.</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="7491"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="7496"/>
         <source>Please, provide one input file.</source>
         <translation>Будь ласка, надайте один вхідний файл.</translation>
     </message>
@@ -11904,7 +11929,7 @@ Do you want to save your changes?</source>
         <translation type="vanished">Зберегти...</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="5764"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="5769"/>
         <source>Don&apos;t Save</source>
         <translation>Не зберігати</translation>
     </message>
@@ -12067,7 +12092,7 @@ Do you want to save your changes?</source>
         <translation type="vanished">Розмір:</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="6978"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="6983"/>
         <source>The measurements file &lt;br/&gt;&lt;br/&gt; &lt;b&gt;%1&lt;/b&gt; &lt;br/&gt;&lt;br/&gt; could not be found. Do you want to update the file location?</source>
         <translation>Не вдалося знайти файл мірок &lt;br/&gt;&lt;br/&gt; &lt;b&gt;%1&lt;/b&gt; &lt;br/&gt;&lt;br/&gt;. Хочете оновити розташування файлу?</translation>
     </message>
@@ -12121,7 +12146,7 @@ Do you want to save your changes?</source>
         <translation>Не вдалося зберегти файл</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="7599"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="7604"/>
         <source>read only</source>
         <translation>тільки читання</translation>
     </message>
@@ -12194,16 +12219,16 @@ Do you want to save your changes?</source>
     <message>
         <location filename="../../src/app/valentina/mainwindow.cpp" line="2028"/>
         <location filename="../../src/app/valentina/mainwindow.cpp" line="2062"/>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="7024"/>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="7038"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="7029"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="7043"/>
         <source>Individual measurements</source>
         <translation>Індивідуальні мірки</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.cpp" line="2028"/>
         <location filename="../../src/app/valentina/mainwindow.cpp" line="2062"/>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="7024"/>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="7038"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="7029"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="7043"/>
         <source>Multisize measurements</source>
         <translation>Стандартні мірки</translation>
     </message>
@@ -12291,21 +12316,21 @@ Do you want to save your changes?</source>
     <message>
         <location filename="../../src/app/valentina/mainwindow.cpp" line="4234"/>
         <location filename="../../src/app/valentina/mainwindow.cpp" line="4314"/>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="6843"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="6848"/>
         <source>You don&apos;t have enough details to export. Please, include at least one detail in layout.</source>
         <translation>У вас недостатньо даних для експорту. Будь ласка, додайте принаймні одну деталь у розкладку.</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.cpp" line="4247"/>
         <location filename="../../src/app/valentina/mainwindow.cpp" line="4327"/>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="6856"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="6861"/>
         <source>Export details</source>
         <translation>Експорт деталей</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.cpp" line="4247"/>
         <location filename="../../src/app/valentina/mainwindow.cpp" line="4327"/>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="6856"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="6861"/>
         <source>Can&apos;t export details.</source>
         <translation>Не вдається експортувати деталі.</translation>
     </message>
@@ -12340,7 +12365,7 @@ Do you want to save your changes?</source>
         <translation>Експортувати як…</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="5758"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="5763"/>
         <source>Save…</source>
         <translation>Зберегти…</translation>
     </message>
@@ -12355,17 +12380,17 @@ Do you want to save your changes?</source>
         <translation>Експортувати фінальні вимірювання в CSV</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="7207"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="7212"/>
         <source>You can&apos;t export empty scene. Please, include at least one detail in layout.</source>
         <translation>Ви не можете експортувати порожню сцену. Будь ласка, додайте принаймні одну деталь у розкладку.</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="7310"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="7315"/>
         <source>Export final measurements error.</source>
         <translation>Помилка експорту фінальних вимірів.</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="7311"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="7316"/>
         <source>Destination path is empty.</source>
         <translation>Шлях призначення порожній.</translation>
     </message>
@@ -12420,7 +12445,7 @@ Do you want to save your changes?</source>
         <translation>Виберіть центральну точку мітки місця</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="6534"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="6539"/>
         <source>The measurements file &apos;%1&apos; could not be found or provides not enough information.</source>
         <translation>Файл вимірювань «%1» не знайдено або містить недостатньо інформації.</translation>
     </message>
@@ -12440,7 +12465,7 @@ Do you want to save your changes?</source>
         <translation>Зміни застосовано.</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="5734"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="5739"/>
         <source>Cannot save settings. Access denied.</source>
         <translation>Не вдається зберегти налаштування. Доступ заборонено.</translation>
     </message>
@@ -12450,7 +12475,7 @@ Do you want to save your changes?</source>
         <translation>Ctrl+O</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="5710"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="5715"/>
         <source>Cannot read settings from a malformed .INI file.</source>
         <translation>Неможливо прочитати налаштування з файлу .INI неправильного формату.</translation>
     </message>
@@ -12506,22 +12531,22 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.ui" line="1536"/>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="5102"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="5107"/>
         <source>Export recipe</source>
         <translation>Експортувати рецепт</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="5100"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="5105"/>
         <source>Recipe files</source>
         <translation>Файли рецептів</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="5102"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="5107"/>
         <source>recipe</source>
         <translation>рецепт</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="5115"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="5120"/>
         <source>Could not save recipe. %1</source>
         <translation>Не вдалося зберегти рецепт. %1</translation>
     </message>
@@ -12547,7 +12572,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.ui" line="407"/>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="7927"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="7932"/>
         <source>Pattern messages</source>
         <translation>Повідомлення лекала</translation>
     </message>
@@ -12562,27 +12587,27 @@ Do you want to save your changes?</source>
         <translation>Фільтр</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="7904"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="7909"/>
         <source>DEBUG</source>
         <translation>НАЛАГОДЖЕННЯ</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="7907"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="7912"/>
         <source>WARNING</source>
         <translation>ПОПЕРЕДЖЕННЯ</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="7910"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="7915"/>
         <source>CRITICAL</source>
         <translation>КРИТИЧНО</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="7913"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="7918"/>
         <source>FATAL</source>
         <translation>ФАТАЛЬНО</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="7916"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="7921"/>
         <source>INFO</source>
         <translation>ІНФО</translation>
     </message>
@@ -12683,57 +12708,57 @@ Do you want to save your changes?</source>
         <translation>Вибрати теку</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="5749"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="5754"/>
         <source>The pattern has been modified. Do you want to save your changes?</source>
         <translation>Лекало змінено. Хочете зберегти зміни?</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="7359"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="7364"/>
         <source>Not supported dimension A value &apos;%1&apos; for this pattern file.</source>
         <translation>Непідтримуване значення виміру A &quot;%1&quot; для цього файлу викрійки.</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="7366"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="7371"/>
         <source>Couldn&apos;t set dimension A. Need a file with multisize measurements.</source>
         <translation>Не вдалося встановити вимір А. Потрібен файл із багаторозмірними мірками.</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="7372"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="7377"/>
         <source>Couldn&apos;t set dimension A. File wasn&apos;t opened.</source>
         <translation>Не вдалося встановити вимір A. Файл не було відкрито.</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="7402"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="7407"/>
         <source>Not supported dimension B value &apos;%1&apos; for this pattern file.</source>
         <translation>Непідтримуване значення виміру B &quot;%1&quot; для цього файлу викрійки.</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="7409"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="7414"/>
         <source>Couldn&apos;t set dimension B. Need a file with multisize measurements.</source>
         <translation>Не вдалося встановити вимір B. Потрібен файл із багаторозмірними мірками.</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="7415"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="7420"/>
         <source>Couldn&apos;t set dimension B. File wasn&apos;t opened.</source>
         <translation>Не вдалося встановити вимір B. Файл не було відкрито.</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="7445"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="7450"/>
         <source>Not supported dimension C value &apos;%1&apos; for this pattern file.</source>
         <translation>Не підтримуване значення виміру C &quot;%1&quot; для цього файлу викрійки.</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="7452"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="7457"/>
         <source>Couldn&apos;t set dimension C. Need a file with multisize measurements.</source>
         <translation>Не вдалося встановити вимір C. Потрібен файл із багаторозмірними мірками.</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="7458"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="7463"/>
         <source>Couldn&apos;t set dimension C. File wasn&apos;t opened.</source>
         <translation>Не вдалося встановити вимір C. Файл не було відкрито.</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="5120"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="5125"/>
         <source>Could not create recipe file. %1</source>
         <translation>Не вдалося створити файл рецепта. %1</translation>
     </message>
@@ -12743,12 +12768,12 @@ Do you want to save your changes?</source>
         <translation>Магазин</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="6773"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="6778"/>
         <source>Scalable Vector Graphics files</source>
         <translation>Масштабовані файли векторної графіки</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="6775"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="6780"/>
         <source>Save draw</source>
         <translation>Зберегти малюнок</translation>
     </message>
@@ -12848,28 +12873,28 @@ Do you want to save your changes?</source>
         <translation>Виберіть фонове зображення</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="5011"/>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="5052"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="5016"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="5057"/>
         <source>Unable to save image. Error: %1</source>
         <translation>Не вдається зберегти зображення. Помилка: %1</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="5017"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="5022"/>
         <source>Unable to save image. No data.</source>
         <translation>Не вдається зберегти зображення. Немає даних.</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="5023"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="5028"/>
         <source>untitled</source>
         <translation>без назви</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="5037"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="5042"/>
         <source>All files</source>
         <translation>Усі файли</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="5041"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="5046"/>
         <source>Save Image</source>
         <translation>Зберегти зображення</translation>
     </message>
@@ -13309,10 +13334,6 @@ Do you want to save your changes?</source>
         <translation>Інтервал:</translation>
     </message>
     <message>
-        <source>min</source>
-        <translation type="vanished">хв</translation>
-    </message>
-    <message>
         <location filename="../../src/app/valentina/dialogs/configpages/preferencesconfigurationpage.ui" line="90"/>
         <source>Language</source>
         <translation>Мова</translation>
@@ -13358,50 +13379,60 @@ Do you want to save your changes?</source>
         <translation>Текст під піктограмою (рекомендовано для новачків).</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/dialogs/configpages/preferencesconfigurationpage.cpp" line="376"/>
+        <location filename="../../src/app/valentina/dialogs/configpages/preferencesconfigurationpage.cpp" line="407"/>
         <source>With OS options</source>
         <translation>З параметрами ОС</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/dialogs/configpages/preferencesconfigurationpage.cpp" line="352"/>
+        <location filename="../../src/app/valentina/dialogs/configpages/preferencesconfigurationpage.cpp" line="329"/>
+        <source>send crash report</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/app/valentina/dialogs/configpages/preferencesconfigurationpage.cpp" line="336"/>
+        <source>user email in case of crash</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/app/valentina/dialogs/configpages/preferencesconfigurationpage.cpp" line="383"/>
         <source>System</source>
         <comment>theme</comment>
         <translation>Системна</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/dialogs/configpages/preferencesconfigurationpage.cpp" line="353"/>
+        <location filename="../../src/app/valentina/dialogs/configpages/preferencesconfigurationpage.cpp" line="384"/>
         <source>Dark</source>
         <comment>theme</comment>
         <translation>Темна</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/dialogs/configpages/preferencesconfigurationpage.cpp" line="354"/>
+        <location filename="../../src/app/valentina/dialogs/configpages/preferencesconfigurationpage.cpp" line="385"/>
         <source>Light</source>
         <comment>theme</comment>
         <translation>Світла</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/dialogs/configpages/preferencesconfigurationpage.cpp" line="361"/>
+        <location filename="../../src/app/valentina/dialogs/configpages/preferencesconfigurationpage.cpp" line="392"/>
         <source>Tool icon cursor</source>
         <translation>Піктограма курсора інструмента</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/dialogs/configpages/preferencesconfigurationpage.cpp" line="362"/>
+        <location filename="../../src/app/valentina/dialogs/configpages/preferencesconfigurationpage.cpp" line="393"/>
         <source>Arrow cursor</source>
         <translation>Курсор-стрілка</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/dialogs/configpages/preferencesconfigurationpage.cpp" line="368"/>
+        <location filename="../../src/app/valentina/dialogs/configpages/preferencesconfigurationpage.cpp" line="399"/>
         <source>Centimeters</source>
         <translation>Сантиметри</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/dialogs/configpages/preferencesconfigurationpage.cpp" line="369"/>
+        <location filename="../../src/app/valentina/dialogs/configpages/preferencesconfigurationpage.cpp" line="400"/>
         <source>Millimiters</source>
         <translation>Міліметри</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/dialogs/configpages/preferencesconfigurationpage.cpp" line="370"/>
+        <location filename="../../src/app/valentina/dialogs/configpages/preferencesconfigurationpage.cpp" line="401"/>
         <source>Inches</source>
         <translation>Дюйми</translation>
     </message>
@@ -13416,7 +13447,7 @@ Do you want to save your changes?</source>
         <translation>Режим вільної кривої</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/dialogs/configpages/preferencesconfigurationpage.cpp" line="270"/>
+        <location filename="../../src/app/valentina/dialogs/configpages/preferencesconfigurationpage.cpp" line="285"/>
         <source>default unit</source>
         <translation>одиниця виміру по замовчуванню</translation>
     </message>
@@ -13429,7 +13460,7 @@ Do you want to save your changes?</source>
         <location filename="../../src/app/valentina/dialogs/configpages/preferencesconfigurationpage.ui" line="74"/>
         <source>min</source>
         <comment>minutes</comment>
-        <translation type="unfinished"></translation>
+        <translation>хв</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/configpages/preferencesconfigurationpage.ui" line="116"/>
@@ -13574,13 +13605,38 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/configpages/preferencesconfigurationpage.ui" line="668"/>
+        <source>Usage statistic</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/app/valentina/dialogs/configpages/preferencesconfigurationpage.ui" line="674"/>
         <source>Send usage statistics</source>
         <translation>Надсилати статистику про користування</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/dialogs/configpages/preferencesconfigurationpage.ui" line="675"/>
+        <location filename="../../src/app/valentina/dialogs/configpages/preferencesconfigurationpage.ui" line="681"/>
         <source>Please help to improve Valentina&apos;s quality by automatically sending usage statistics. Sent data contains &lt;span style=&quot; font-weight:700;&quot;&gt;no potentially sensitive information&lt;/span&gt; like user names, email addresses, file contents or file paths.</source>
         <translation>Будь ласка, допоможіть поліпшити якість роботи Valentina, автоматично надсилаючи статистику користування. Надіслані дані не містять &lt;span style=&quot; font-weight:700;&quot;&gt;жодної потенційно конфіденційної інформації&lt;/span&gt;, такої як імена користувачів, адреси електронної пошти, вміст файлів або шляхи до них.</translation>
+    </message>
+    <message>
+        <location filename="../../src/app/valentina/dialogs/configpages/preferencesconfigurationpage.ui" line="694"/>
+        <source>Crash reports</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/app/valentina/dialogs/configpages/preferencesconfigurationpage.ui" line="700"/>
+        <source>Send automatic crash reports</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/app/valentina/dialogs/configpages/preferencesconfigurationpage.ui" line="709"/>
+        <source>Email:</source>
+        <translation type="unfinished">Email:</translation>
+    </message>
+    <message>
+        <location filename="../../src/app/valentina/dialogs/configpages/preferencesconfigurationpage.ui" line="725"/>
+        <source>Reporting crash reports will help us make Valentina more reliable. All information is treated as confidential and is only used to improve future versions of this program. Please activate sending automatic crash reports and fill your email address (optional). If provided, we may contact you with additional information about the crash.</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/configpages/preferencesconfigurationpage.ui" line="303"/>
@@ -14097,43 +14153,78 @@ This option will take an affect after restart.</source>
     </message>
     <message>
         <location filename="../../src/app/puzzle/dialogs/configpages/puzzlepreferencesconfigurationpage.ui" line="529"/>
+        <source>Usage statistic</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/app/puzzle/dialogs/configpages/puzzlepreferencesconfigurationpage.ui" line="535"/>
         <source>Send usage statistics</source>
         <translation>Надсилати статистику про користування</translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/dialogs/configpages/puzzlepreferencesconfigurationpage.ui" line="536"/>
+        <location filename="../../src/app/puzzle/dialogs/configpages/puzzlepreferencesconfigurationpage.ui" line="542"/>
         <source>Please help to improve Valentina&apos;s quality by automatically sending usage statistics. Sent data contains &lt;span style=&quot; font-weight:700;&quot;&gt;no potentially sensitive information&lt;/span&gt; like user names, email addresses, file contents or file paths.</source>
         <translation>Будь ласка, допоможіть поліпшити якість роботи Valentina, автоматично надсилаючи статистику користування. Надіслані дані не містять &lt;span style=&quot; font-weight:700;&quot;&gt;жодної потенційно конфіденційної інформації&lt;/span&gt;, такої як імена користувачів, адреси електронної пошти, вміст файлів або шляхи до них.</translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/dialogs/configpages/puzzlepreferencesconfigurationpage.cpp" line="180"/>
+        <location filename="../../src/app/puzzle/dialogs/configpages/puzzlepreferencesconfigurationpage.ui" line="555"/>
+        <source>Crash reports</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/app/puzzle/dialogs/configpages/puzzlepreferencesconfigurationpage.ui" line="561"/>
+        <source>Send automatic crash reports</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/app/puzzle/dialogs/configpages/puzzlepreferencesconfigurationpage.ui" line="570"/>
+        <source>Email:</source>
+        <translation type="unfinished">Email:</translation>
+    </message>
+    <message>
+        <location filename="../../src/app/puzzle/dialogs/configpages/puzzlepreferencesconfigurationpage.ui" line="586"/>
+        <source>Reporting crash reports will help us make Valentina more reliable. All information is treated as confidential and is only used to improve future versions of this program. Please activate sending automatic crash reports and fill your email address (optional). If provided, we may contact you with additional information about the crash.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/app/puzzle/dialogs/configpages/puzzlepreferencesconfigurationpage.cpp" line="195"/>
         <source>undo limit</source>
         <translation>скасувати обмеження</translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/dialogs/configpages/puzzlepreferencesconfigurationpage.cpp" line="187"/>
+        <location filename="../../src/app/puzzle/dialogs/configpages/puzzlepreferencesconfigurationpage.cpp" line="202"/>
         <source>antialiasing</source>
         <translation>згладжування</translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/dialogs/configpages/puzzlepreferencesconfigurationpage.cpp" line="193"/>
+        <location filename="../../src/app/puzzle/dialogs/configpages/puzzlepreferencesconfigurationpage.cpp" line="208"/>
         <source>scene render</source>
         <translation>рендеринг сцени</translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/dialogs/configpages/puzzlepreferencesconfigurationpage.cpp" line="266"/>
+        <location filename="../../src/app/puzzle/dialogs/configpages/puzzlepreferencesconfigurationpage.cpp" line="252"/>
+        <source>send crash report</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/app/puzzle/dialogs/configpages/puzzlepreferencesconfigurationpage.cpp" line="259"/>
+        <source>user email in case of crash</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/app/puzzle/dialogs/configpages/puzzlepreferencesconfigurationpage.cpp" line="297"/>
         <source>System</source>
         <comment>theme</comment>
         <translation>Системна</translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/dialogs/configpages/puzzlepreferencesconfigurationpage.cpp" line="267"/>
+        <location filename="../../src/app/puzzle/dialogs/configpages/puzzlepreferencesconfigurationpage.cpp" line="298"/>
         <source>Dark</source>
         <comment>theme</comment>
         <translation>Темна</translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/dialogs/configpages/puzzlepreferencesconfigurationpage.cpp" line="268"/>
+        <location filename="../../src/app/puzzle/dialogs/configpages/puzzlepreferencesconfigurationpage.cpp" line="299"/>
         <source>Light</source>
         <comment>theme</comment>
         <translation>Світла</translation>
@@ -14366,16 +14457,16 @@ This option will take an affect after restart.</source>
         <translation type="vanished">Шлях до мірок вже абсолютний.</translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/main.cpp" line="56"/>
-        <location filename="../../src/app/tape/main.cpp" line="56"/>
-        <location filename="../../src/app/valentina/main.cpp" line="60"/>
+        <location filename="../../src/app/puzzle/main.cpp" line="61"/>
+        <location filename="../../src/app/tape/main.cpp" line="61"/>
+        <location filename="../../src/app/valentina/main.cpp" line="65"/>
         <source>Executable &apos;%1&apos; requires Qt %2, found Qt %3.</source>
         <translation>Виконуваний &apos;%1&apos; потребує Qt %2, знайдено Qt %3.</translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/main.cpp" line="60"/>
-        <location filename="../../src/app/tape/main.cpp" line="60"/>
-        <location filename="../../src/app/valentina/main.cpp" line="64"/>
+        <location filename="../../src/app/puzzle/main.cpp" line="65"/>
+        <location filename="../../src/app/tape/main.cpp" line="65"/>
+        <location filename="../../src/app/valentina/main.cpp" line="69"/>
         <source>Incompatible Qt Library Error</source>
         <translation>Помилка несумісної бібліотеки Qt</translation>
     </message>
@@ -14501,12 +14592,12 @@ This option will take an affect after restart.</source>
         <translation>Помилка сумісності VTextManager: actualClassVersion = %1 and classVersion = %2</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vmisc/def.cpp" line="610"/>
+        <location filename="../../src/libs/vmisc/def.cpp" line="600"/>
         <source>CustomSARecord prefix mismatch error: actualStreamHeader = 0x%1 and streamHeader = 0x%2</source>
         <translation>Помилка невідповідності префікса CustomSARecord: actualStreamHeader = 0x%1 and streamHeader = 0x%2</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vmisc/def.cpp" line="622"/>
+        <location filename="../../src/libs/vmisc/def.cpp" line="612"/>
         <source>CustomSARecord compatibility error: actualClassVersion = %1 and classVersion = %2</source>
         <translation>Помилка сумісності CustomSARecord: actualClassVersion = %1 and classVersion = %2</translation>
     </message>
@@ -14548,17 +14639,17 @@ This option will take an affect after restart.</source>
         <translation type="vanished">Створіть нове креслення для початку роботи.</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vmisc/def.cpp" line="540"/>
+        <location filename="../../src/libs/vmisc/def.cpp" line="530"/>
         <source>mm</source>
         <translation>мм</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vmisc/def.cpp" line="549"/>
+        <location filename="../../src/libs/vmisc/def.cpp" line="539"/>
         <source>cm</source>
         <translation>см</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vmisc/def.cpp" line="542"/>
+        <location filename="../../src/libs/vmisc/def.cpp" line="532"/>
         <source>inch</source>
         <translation>дюйми</translation>
     </message>
@@ -14576,7 +14667,7 @@ This option will take an affect after restart.</source>
         <translation>Значення</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vmisc/def.cpp" line="544"/>
+        <location filename="../../src/libs/vmisc/def.cpp" line="534"/>
         <source>px</source>
         <translation>пікселі</translation>
     </message>
@@ -14913,7 +15004,7 @@ This option will take an affect after restart.</source>
     <message>
         <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="220"/>
         <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="270"/>
-        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="3060"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="3061"/>
         <source>Cannot set printer margins</source>
         <translation>Не вдалося встановити поля принтера</translation>
     </message>
@@ -15568,7 +15659,7 @@ This option will take an affect after restart.</source>
     </message>
     <message>
         <location filename="../../src/app/tape/tkmmainwindow.ui" line="109"/>
-        <location filename="../../src/app/tape/tkmmainwindow.cpp" line="1787"/>
+        <location filename="../../src/app/tape/tkmmainwindow.cpp" line="1792"/>
         <source>0 results</source>
         <translation>0 результатів</translation>
     </message>
@@ -15619,21 +15710,21 @@ This option will take an affect after restart.</source>
     </message>
     <message>
         <location filename="../../src/app/tape/tkmmainwindow.ui" line="320"/>
-        <location filename="../../src/app/tape/tkmmainwindow.cpp" line="2545"/>
+        <location filename="../../src/app/tape/tkmmainwindow.cpp" line="2550"/>
         <source>Name</source>
         <comment>measurement column</comment>
         <translation>Назва</translation>
     </message>
     <message>
         <location filename="../../src/app/tape/tkmmainwindow.ui" line="325"/>
-        <location filename="../../src/app/tape/tkmmainwindow.cpp" line="2547"/>
+        <location filename="../../src/app/tape/tkmmainwindow.cpp" line="2552"/>
         <source>Full name</source>
         <comment>measurement column</comment>
         <translation>Повне ім&apos;я</translation>
     </message>
     <message>
         <location filename="../../src/app/tape/tkmmainwindow.ui" line="330"/>
-        <location filename="../../src/app/tape/tkmmainwindow.cpp" line="2549"/>
+        <location filename="../../src/app/tape/tkmmainwindow.cpp" line="2554"/>
         <source>Group</source>
         <comment>measurement column</comment>
         <translation>Група</translation>
@@ -15973,141 +16064,141 @@ This option will take an affect after restart.</source>
         <translation>Неможливо показати зображення. Помилка: %1</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tkmmainwindow.cpp" line="1634"/>
+        <location filename="../../src/app/tape/tkmmainwindow.cpp" line="1639"/>
         <source>About Qt</source>
         <translation>Про Qt</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tkmmainwindow.cpp" line="1875"/>
+        <location filename="../../src/app/tape/tkmmainwindow.cpp" line="1880"/>
         <source>Empty</source>
         <translation>Порожньо</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tkmmainwindow.cpp" line="1876"/>
+        <location filename="../../src/app/tape/tkmmainwindow.cpp" line="1881"/>
         <source>File was not saved yet.</source>
         <translation>Файл ще не було збережено.</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tkmmainwindow.cpp" line="1927"/>
+        <location filename="../../src/app/tape/tkmmainwindow.cpp" line="1932"/>
         <source>Unsaved changes</source>
         <translation>Незбереженні зміни</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tkmmainwindow.cpp" line="1928"/>
+        <location filename="../../src/app/tape/tkmmainwindow.cpp" line="1933"/>
         <source>Measurements have been modified. Do you want to save your changes?</source>
         <translation>Мірки змінені. Хочете зберегти зміни?</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tkmmainwindow.cpp" line="1936"/>
+        <location filename="../../src/app/tape/tkmmainwindow.cpp" line="1941"/>
         <source>Save…</source>
         <translation>Зберегти…</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tkmmainwindow.cpp" line="1936"/>
+        <location filename="../../src/app/tape/tkmmainwindow.cpp" line="1941"/>
         <source>Save</source>
         <translation>Зберегти</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tkmmainwindow.cpp" line="1941"/>
+        <location filename="../../src/app/tape/tkmmainwindow.cpp" line="1946"/>
         <source>Don&apos;t Save</source>
         <translation>Не зберігати</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tkmmainwindow.cpp" line="2019"/>
+        <location filename="../../src/app/tape/tkmmainwindow.cpp" line="2024"/>
         <source>Cannot read settings from a malformed .INI file.</source>
         <translation>Неможливо прочитати налаштування з файлу .INI неправильного формату.</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tkmmainwindow.cpp" line="2038"/>
+        <location filename="../../src/app/tape/tkmmainwindow.cpp" line="2043"/>
         <source>Cannot save settings. Access denied.</source>
         <translation>Не вдається зберегти налаштування. Доступ заборонено.</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tkmmainwindow.cpp" line="2068"/>
+        <location filename="../../src/app/tape/tkmmainwindow.cpp" line="2073"/>
         <source>Empty</source>
         <comment>list</comment>
         <translation>Порожньо</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tkmmainwindow.cpp" line="2141"/>
+        <location filename="../../src/app/tape/tkmmainwindow.cpp" line="2146"/>
         <source>Unknown measurement</source>
         <translation>Невідомі мірки</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tkmmainwindow.cpp" line="2149"/>
+        <location filename="../../src/app/tape/tkmmainwindow.cpp" line="2154"/>
         <source>&amp;New Window</source>
         <translation>&amp;Нове вікно</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tkmmainwindow.cpp" line="2293"/>
-        <location filename="../../src/app/tape/tkmmainwindow.cpp" line="2480"/>
+        <location filename="../../src/app/tape/tkmmainwindow.cpp" line="2298"/>
+        <location filename="../../src/app/tape/tkmmainwindow.cpp" line="2485"/>
         <source>Unnamed image %1</source>
         <translation>Зображення без назви %1</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tkmmainwindow.cpp" line="2334"/>
+        <location filename="../../src/app/tape/tkmmainwindow.cpp" line="2339"/>
         <source>Open file</source>
         <translation>Відкрити файл</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tkmmainwindow.cpp" line="2453"/>
+        <location filename="../../src/app/tape/tkmmainwindow.cpp" line="2458"/>
         <source>Length units</source>
         <translation>Одиниці довжини</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tkmmainwindow.cpp" line="2454"/>
+        <location filename="../../src/app/tape/tkmmainwindow.cpp" line="2459"/>
         <source>Degrees</source>
         <translation>Градуси</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tkmmainwindow.cpp" line="2472"/>
+        <location filename="../../src/app/tape/tkmmainwindow.cpp" line="2477"/>
         <source>None</source>
         <translation>Жодного</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tkmmainwindow.cpp" line="2517"/>
+        <location filename="../../src/app/tape/tkmmainwindow.cpp" line="2522"/>
         <source>Measurement name is empty.</source>
         <translation>Назва мірки порожня.</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tkmmainwindow.cpp" line="2522"/>
+        <location filename="../../src/app/tape/tkmmainwindow.cpp" line="2527"/>
         <source>Imported file must not contain the same name twice.</source>
         <translation>Імпортований файл не повинен містити однакову назву двічі.</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tkmmainwindow.cpp" line="2528"/>
+        <location filename="../../src/app/tape/tkmmainwindow.cpp" line="2533"/>
         <source>Measurement &apos;%1&apos; doesn&apos;t match regex pattern.</source>
         <translation>Мірка &quot;%1&quot; не відповідає шаблону регулярного виразу.</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tkmmainwindow.cpp" line="2533"/>
+        <location filename="../../src/app/tape/tkmmainwindow.cpp" line="2538"/>
         <source>Measurement &apos;%1&apos; already used in the file.</source>
         <translation>Мірка &quot;%1&quot; вже використовується у файлі.</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tkmmainwindow.cpp" line="2551"/>
+        <location filename="../../src/app/tape/tkmmainwindow.cpp" line="2556"/>
         <source>Formula</source>
         <comment>measurement column</comment>
         <translation>Формула</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tkmmainwindow.cpp" line="2553"/>
+        <location filename="../../src/app/tape/tkmmainwindow.cpp" line="2558"/>
         <source>Description</source>
         <comment>measurement column</comment>
         <translation>Опис</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tkmmainwindow.cpp" line="2577"/>
+        <location filename="../../src/app/tape/tkmmainwindow.cpp" line="2582"/>
         <source>Error in row %1. The measurement name is empty.</source>
         <translation>Помилка в рядку %1. Назва мірки порожня.</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tkmmainwindow.cpp" line="2620"/>
+        <location filename="../../src/app/tape/tkmmainwindow.cpp" line="2625"/>
         <source>Error in row %1. %2</source>
         <translation>Помилка в рядку %1. %2</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tkmmainwindow.cpp" line="2633"/>
+        <location filename="../../src/app/tape/tkmmainwindow.cpp" line="2638"/>
         <source>Individual measurements require at least 2 columns.</source>
         <translation>Для окремих вимірювань потрібно щонайменше 2 стовпці.</translation>
     </message>
@@ -16308,7 +16399,7 @@ This option will take an affect after restart.</source>
         <translation type="vanished">Відкрити індивідуальні ...</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="3468"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="3473"/>
         <source>Save</source>
         <translation>Зберегти</translation>
     </message>
@@ -16372,7 +16463,7 @@ This option will take an affect after restart.</source>
         <translation>Властивості</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="3805"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="3810"/>
         <source>untitled %1</source>
         <translation>безіменний %1</translation>
     </message>
@@ -16384,7 +16475,7 @@ This option will take an affect after restart.</source>
     <message>
         <location filename="../../src/app/tape/tmainwindow.cpp" line="549"/>
         <location filename="../../src/app/tape/tmainwindow.cpp" line="1857"/>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="4181"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="4186"/>
         <source>File error.</source>
         <translation>Помилка файла.</translation>
     </message>
@@ -16412,7 +16503,7 @@ This option will take an affect after restart.</source>
         <translation>Зберегти як</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="4206"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="4211"/>
         <source>&amp;New Window</source>
         <translation>&amp;Нове вікно</translation>
     </message>
@@ -16427,21 +16518,21 @@ This option will take an affect after restart.</source>
     </message>
     <message>
         <location filename="../../src/app/tape/tmainwindow.cpp" line="2286"/>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="3926"/>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="3949"/>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="3965"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="3931"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="3954"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="3970"/>
         <source>Error</source>
         <translation>Помилка</translation>
     </message>
     <message>
         <location filename="../../src/app/tape/tmainwindow.cpp" line="2286"/>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="3926"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="3931"/>
         <source>Empty field.</source>
         <translation>Порожнє поле.</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="3965"/>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="3966"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="3970"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="3971"/>
         <source>Parser error: %1</source>
         <translation>Помилка синтаксичного аналізу: %1</translation>
     </message>
@@ -16463,13 +16554,13 @@ This option will take an affect after restart.</source>
         <location filename="../../src/app/tape/tmainwindow.cpp" line="759"/>
         <location filename="../../src/app/tape/tmainwindow.cpp" line="969"/>
         <location filename="../../src/app/tape/tmainwindow.cpp" line="2606"/>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="3006"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="3011"/>
         <source>Individual measurements</source>
         <translation>Індивідуальні мірки</translation>
     </message>
     <message>
         <location filename="../../src/app/tape/tmainwindow.cpp" line="1593"/>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="3809"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="3814"/>
         <source>untitled</source>
         <translation>без назви</translation>
     </message>
@@ -16478,7 +16569,7 @@ This option will take an affect after restart.</source>
         <translation type="vanished">&lt;Пусто&gt;</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="3459"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="3464"/>
         <source>Unsaved changes</source>
         <translation>Незбереженні змінення</translation>
     </message>
@@ -16489,17 +16580,17 @@ Do you want to save your changes?</source>
 Бажаєте зберегти зміни?</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="3927"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="3932"/>
         <source>Empty field</source>
         <translation>Порожнє поле</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="3960"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="3965"/>
         <source>Value</source>
         <translation>Значення</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="3974"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="3979"/>
         <source>Open file</source>
         <translation>Відкрити файл</translation>
     </message>
@@ -16516,7 +16607,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <location filename="../../src/app/tape/tmainwindow.cpp" line="783"/>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="5042"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="5047"/>
         <source>Pattern unit:</source>
         <translation>Одиниці вимірювання викрійки:</translation>
     </message>
@@ -16568,7 +16659,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <location filename="../../src/app/tape/tmainwindow.cpp" line="462"/>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="4139"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="4144"/>
         <source>File has unknown format.</source>
         <translation>Невідомий формат файлу.</translation>
     </message>
@@ -16578,7 +16669,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <location filename="../../src/app/tape/tmainwindow.cpp" line="422"/>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="4099"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="4104"/>
         <source>File &apos;%1&apos; doesn&apos;t exist!</source>
         <translation>Файл &apos;%1&apos; не існує!</translation>
     </message>
@@ -16637,19 +16728,19 @@ Do you want to save your changes?</source>
         <translation>Видалити мірку</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="5119"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="5124"/>
         <source>unknown</source>
         <comment>gender</comment>
         <translation>невідомий</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="5120"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="5125"/>
         <source>male</source>
         <comment>gender</comment>
         <translation>чоловік</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="5121"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="5126"/>
         <source>female</source>
         <comment>gender</comment>
         <translation>жінка</translation>
@@ -16696,12 +16787,12 @@ Do you want to save your changes?</source>
         <translation type="vanished">&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:340pt;&quot;&gt;?&lt;/span&gt;&lt;/p&gt;&lt;p align=&quot;center&quot;&gt;Невідома мірка&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="2929"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="2934"/>
         <source>About Qt</source>
         <translation>Про Qt</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="3408"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="3413"/>
         <source>File was not saved yet.</source>
         <translation>Файл ще не було збережено.</translation>
     </message>
@@ -16742,7 +16833,7 @@ Do you want to save your changes?</source>
         <translation type="vanished">Зберегти...</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="3473"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="3478"/>
         <source>Don&apos;t Save</source>
         <translation>Не зберігати</translation>
     </message>
@@ -16830,7 +16921,7 @@ Do you want to save your changes?</source>
         <translation>Не вдалося зберегти файл</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="3818"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="3823"/>
         <source>read only</source>
         <translation>тільки читання</translation>
     </message>
@@ -16839,17 +16930,17 @@ Do you want to save your changes?</source>
         <location filename="../../src/app/tape/tmainwindow.cpp" line="651"/>
         <location filename="../../src/app/tape/tmainwindow.cpp" line="750"/>
         <location filename="../../src/app/tape/tmainwindow.cpp" line="974"/>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="2956"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="2961"/>
         <source>Multisize measurements</source>
         <translation>Стандартні мірки</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="3950"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="3955"/>
         <source>Invalid result. Value is infinite or NaN. Please, check your calculations.</source>
         <translation>Недійсний результат. Значення нескінченність чи NaN, перевірте ваші розрахунки.</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="3407"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="3412"/>
         <source>Empty</source>
         <translation>Порожньо</translation>
     </message>
@@ -16869,7 +16960,7 @@ Do you want to save your changes?</source>
         <translation>Створити з наявного…</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="3468"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="3473"/>
         <source>Save…</source>
         <translation>Зберегти…</translation>
     </message>
@@ -16881,22 +16972,22 @@ Do you want to save your changes?</source>
         <translation>Імпорт із CSV</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="4341"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="4346"/>
         <source>Individual measurements require at least 2 columns.</source>
         <translation>Для окремих вимірювань потрібно щонайменше 2 стовпці.</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="4424"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="4429"/>
         <source>Multisize measurements require at least 4 columns.</source>
         <translation>Для багаторозмірних вимірювань потрібно щонайменше 4 стовпці.</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="4292"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="4297"/>
         <source>Imported file must not contain the same name twice.</source>
         <translation>Імпортований файл не повинен містити однакову назву двічі.</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="4062"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="4067"/>
         <source>Cannot save settings. Access denied.</source>
         <translation>Не вдається зберегти налаштування. Доступ заборонено.</translation>
     </message>
@@ -16951,44 +17042,44 @@ Do you want to save your changes?</source>
         <translation>&amp;Новий</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="4043"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="4048"/>
         <source>Cannot read settings from a malformed .INI file.</source>
         <translation>Неможливо прочитати налаштування з файлу .INI неправильного формату.</translation>
     </message>
     <message>
         <location filename="../../src/app/tape/tmainwindow.ui" line="326"/>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="4836"/>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="4852"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="4841"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="4857"/>
         <source>Name</source>
         <comment>measurement column</comment>
         <translation>Ім&apos;я</translation>
     </message>
     <message>
         <location filename="../../src/app/tape/tmainwindow.ui" line="331"/>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="4838"/>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="4857"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="4843"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="4862"/>
         <source>Full name</source>
         <comment>measurement column</comment>
         <translation>Повне ім&apos;я</translation>
     </message>
     <message>
         <location filename="../../src/app/tape/tmainwindow.ui" line="336"/>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="4840"/>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="4862"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="4845"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="4867"/>
         <source>Calculated value</source>
         <comment>measurement column</comment>
         <translation>Розраховане значення</translation>
     </message>
     <message>
         <location filename="../../src/app/tape/tmainwindow.ui" line="341"/>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="4842"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="4847"/>
         <source>Formula</source>
         <comment>measurement column</comment>
         <translation>Формула</translation>
     </message>
     <message>
         <location filename="../../src/app/tape/tmainwindow.ui" line="346"/>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="4867"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="4872"/>
         <source>Base value</source>
         <comment>measurement column</comment>
         <translation>Базове значення</translation>
@@ -17167,97 +17258,97 @@ Do you want to save your changes?</source>
         <translation>вимірювання.vit</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="2916"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="2921"/>
         <source>Unknown known measurements: %1</source>
         <translation>Невідома відома мірка %1</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="3328"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="3333"/>
         <source>Shift (%1):</source>
         <translation>Зміщення (%1):</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="3460"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="3465"/>
         <source>Measurements have been modified. Do you want to save your changes?</source>
         <translation>Мірки змінені. Хочете зберегти зміни?</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="4740"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="4745"/>
         <source>Unknown measurement</source>
         <translation>Невідома мірка</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="4776"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="4781"/>
         <source>None</source>
         <translation>Жодного</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="4781"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="4786"/>
         <source>Invalid link</source>
         <translation>Недійсне посилання</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="4792"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="4797"/>
         <source>Known measurements %1</source>
         <translation>Відомі мірки %1</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="4844"/>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="4898"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="4849"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="4903"/>
         <source>Description</source>
         <comment>measurement column</comment>
         <translation>Опис</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="4878"/>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="4887"/>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="4893"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="4883"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="4892"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="4898"/>
         <source>Shift</source>
         <comment>measurement column</comment>
         <translation>Зміщення</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="5288"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="5293"/>
         <source>Empty</source>
         <comment>list</comment>
         <translation>Порожньо</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="5367"/>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="5377"/>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="5387"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="5372"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="5382"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="5392"/>
         <source>%1 shift</source>
         <translation>%1 зміщення</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="4514"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="4519"/>
         <source>Cannot convert base value to double in column 2.</source>
         <translation>Неможливо перетворити базове значення на дробове в стовпці 2.</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="4518"/>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="4524"/>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="4531"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="4523"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="4529"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="4536"/>
         <source>Cannot convert shift value to double in column %1.</source>
         <translation>Неможливо перетворити значення зсуву на дробове в стовпці %1.</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="5089"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="5094"/>
         <source>Millimeters</source>
         <translation>Міліметри</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="5092"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="5097"/>
         <source>Inches</source>
         <translation>Дюйми</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="5095"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="5100"/>
         <source>Centimeters</source>
         <translation>Сантиметри</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="5104"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="5109"/>
         <source>Degrees</source>
         <translation>Градуси</translation>
     </message>
@@ -17283,7 +17374,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <location filename="../../src/app/tape/tmainwindow.ui" line="115"/>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="5205"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="5210"/>
         <source>0 results</source>
         <translation>0 результатів</translation>
     </message>
@@ -17343,33 +17434,33 @@ Do you want to save your changes?</source>
         <translation>Користувацькі назви вимірів</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="4287"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="4292"/>
         <source>Measurement name is empty.</source>
         <translation>Назва мірки порожня.</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="4298"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="4303"/>
         <source>Measurement &apos;%1&apos; doesn&apos;t match regex pattern.</source>
         <translation>Мірка &quot;%1&quot; не відповідає шаблону регулярного виразу.</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="4303"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="4308"/>
         <source>Measurement &apos;%1&apos; already used in the file.</source>
         <translation>Мірка &quot;%1&quot; вже використовується у файлі.</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="4356"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="4361"/>
         <source>Error in row %1. The measurement name is empty.</source>
         <translation>Помилка в рядку %1. Назва мірки порожня.</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="4496"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="4501"/>
         <source>The measurement name is empty.</source>
         <translation>Назва мірки порожня.</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="4389"/>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="4447"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="4394"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="4452"/>
         <source>Error in row %1. %2</source>
         <translation>Помилка в рядку %1. %2</translation>
     </message>
@@ -18539,44 +18630,79 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <location filename="../../src/app/tape/dialogs/configpages/tapepreferencesconfigurationpage.ui" line="317"/>
+        <source>Usage statistic</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/app/tape/dialogs/configpages/tapepreferencesconfigurationpage.ui" line="323"/>
         <source>Send usage statistics</source>
         <translation>Надсилати статистику про користування</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/dialogs/configpages/tapepreferencesconfigurationpage.ui" line="324"/>
+        <location filename="../../src/app/tape/dialogs/configpages/tapepreferencesconfigurationpage.ui" line="330"/>
         <source>Please help to improve Valentina&apos;s quality by automatically sending usage statistics. Sent data contains &lt;span style=&quot; font-weight:700;&quot;&gt;no potentially sensitive information&lt;/span&gt; like user names, email addresses, file contents or file paths.</source>
         <translation>Будь ласка, допоможіть поліпшити якість роботи Valentina, автоматично надсилаючи статистику користування. Надіслані дані не містять &lt;span style=&quot; font-weight:700;&quot;&gt;жодної потенційно конфіденційної інформації&lt;/span&gt;, такої як імена користувачів, адреси електронної пошти, вміст файлів або шляхи до них.</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/dialogs/configpages/tapepreferencesconfigurationpage.cpp" line="238"/>
+        <location filename="../../src/app/tape/dialogs/configpages/tapepreferencesconfigurationpage.ui" line="343"/>
+        <source>Crash reports</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/app/tape/dialogs/configpages/tapepreferencesconfigurationpage.ui" line="349"/>
+        <source>Send automatic crash reports</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/app/tape/dialogs/configpages/tapepreferencesconfigurationpage.ui" line="358"/>
+        <source>Email:</source>
+        <translation type="unfinished">Email:</translation>
+    </message>
+    <message>
+        <location filename="../../src/app/tape/dialogs/configpages/tapepreferencesconfigurationpage.ui" line="374"/>
+        <source>Reporting crash reports will help us make Valentina more reliable. All information is treated as confidential and is only used to improve future versions of this program. Please activate sending automatic crash reports and fill your email address (optional). If provided, we may contact you with additional information about the crash.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/app/tape/dialogs/configpages/tapepreferencesconfigurationpage.cpp" line="225"/>
+        <source>send crash report</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/app/tape/dialogs/configpages/tapepreferencesconfigurationpage.cpp" line="232"/>
+        <source>user email in case of crash</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/app/tape/dialogs/configpages/tapepreferencesconfigurationpage.cpp" line="269"/>
         <source>With OS options</source>
         <translation>З параметрами ОС</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/dialogs/configpages/tapepreferencesconfigurationpage.cpp" line="257"/>
+        <location filename="../../src/app/tape/dialogs/configpages/tapepreferencesconfigurationpage.cpp" line="288"/>
         <source>System</source>
         <comment>theme</comment>
         <translation>Системна</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/dialogs/configpages/tapepreferencesconfigurationpage.cpp" line="258"/>
+        <location filename="../../src/app/tape/dialogs/configpages/tapepreferencesconfigurationpage.cpp" line="289"/>
         <source>Dark</source>
         <comment>theme</comment>
         <translation>Темна</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/dialogs/configpages/tapepreferencesconfigurationpage.cpp" line="259"/>
+        <location filename="../../src/app/tape/dialogs/configpages/tapepreferencesconfigurationpage.cpp" line="290"/>
         <source>Light</source>
         <comment>theme</comment>
         <translation>Світла</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/dialogs/configpages/tapepreferencesconfigurationpage.cpp" line="344"/>
+        <location filename="../../src/app/tape/dialogs/configpages/tapepreferencesconfigurationpage.cpp" line="375"/>
         <source>None</source>
         <translation>Жодного</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/dialogs/configpages/tapepreferencesconfigurationpage.cpp" line="354"/>
+        <location filename="../../src/app/tape/dialogs/configpages/tapepreferencesconfigurationpage.cpp" line="385"/>
         <source>Known measurements %1</source>
         <translation>Відомі мірки %1</translation>
     </message>
@@ -19793,52 +19919,52 @@ Do you want to save your changes?</source>
 <context>
     <name>VApplication</name>
     <message>
-        <location filename="../../src/app/valentina/core/vapplication.cpp" line="450"/>
+        <location filename="../../src/app/valentina/core/vapplication.cpp" line="448"/>
         <source>Error parsing file. Program will be terminated.</source>
         <translation>Помилка парсингу файла. Програма буде закрита.</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/core/vapplication.cpp" line="456"/>
+        <location filename="../../src/app/valentina/core/vapplication.cpp" line="454"/>
         <source>Error bad id. Program will be terminated.</source>
         <translation>Помилка неправильний id. Програма буде закрита.</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/core/vapplication.cpp" line="462"/>
+        <location filename="../../src/app/valentina/core/vapplication.cpp" line="460"/>
         <source>Error can&apos;t convert value. Program will be terminated.</source>
         <translation>Помилка конвертації значення. Програма буде закрита.</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/core/vapplication.cpp" line="468"/>
+        <location filename="../../src/app/valentina/core/vapplication.cpp" line="466"/>
         <source>Error empty parameter. Program will be terminated.</source>
         <translation>Помилка порожній параметр. Програма буде закрита.</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/core/vapplication.cpp" line="474"/>
+        <location filename="../../src/app/valentina/core/vapplication.cpp" line="472"/>
         <source>Error wrong id. Program will be terminated.</source>
         <translation>Помилка неправильний id. Програма буде закрита.</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/core/vapplication.cpp" line="493"/>
+        <location filename="../../src/app/valentina/core/vapplication.cpp" line="491"/>
         <source>Something&apos;s wrong!!</source>
         <translation>Щось не так!!</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/core/vapplication.cpp" line="507"/>
+        <location filename="../../src/app/valentina/core/vapplication.cpp" line="505"/>
         <source>Parser error: %1. Program will be terminated.</source>
         <translation>Помилка парсингу: %1. Програма буде закрита.</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/core/vapplication.cpp" line="512"/>
+        <location filename="../../src/app/valentina/core/vapplication.cpp" line="510"/>
         <source>Exception thrown: %1. Program will be terminated.</source>
         <translation>Програмне виключення: %1. Програма буде закрита.</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/core/vapplication.cpp" line="487"/>
+        <location filename="../../src/app/valentina/core/vapplication.cpp" line="485"/>
         <source>Invalid notch.</source>
         <translation>Недійсна надсічка.</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/core/vapplication.cpp" line="499"/>
+        <location filename="../../src/app/valentina/core/vapplication.cpp" line="497"/>
         <source>Formula warning: %1. Program will be terminated.</source>
         <translation>Попередження у формулі: %1. Програму буде завершено.</translation>
     </message>
@@ -20901,12 +21027,12 @@ Do you want to save your changes?</source>
         <translation type="vanished">Редагувати неправильну формулу</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/tools/drawTools/vdrawtool.h" line="191"/>
+        <location filename="../../src/libs/vtools/tools/drawTools/vdrawtool.h" line="187"/>
         <source>Options</source>
         <translation>Параметри</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/tools/drawTools/vdrawtool.h" line="253"/>
+        <location filename="../../src/libs/vtools/tools/drawTools/vdrawtool.h" line="249"/>
         <source>Delete</source>
         <translation>Видалити</translation>
     </message>
@@ -20916,22 +21042,22 @@ Do you want to save your changes?</source>
         <translation>Цей id (%1) не унікальний.</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/tools/drawTools/vdrawtool.h" line="199"/>
+        <location filename="../../src/libs/vtools/tools/drawTools/vdrawtool.h" line="195"/>
         <source>Add to group</source>
         <translation>Додати до групи</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/tools/drawTools/vdrawtool.h" line="223"/>
+        <location filename="../../src/libs/vtools/tools/drawTools/vdrawtool.h" line="219"/>
         <source>Remove from group</source>
         <translation>Видалити з групи</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/tools/drawTools/vdrawtool.h" line="238"/>
+        <location filename="../../src/libs/vtools/tools/drawTools/vdrawtool.h" line="234"/>
         <source>Show label</source>
         <translation>Показати мітку</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/tools/drawTools/vdrawtool.h" line="250"/>
+        <location filename="../../src/libs/vtools/tools/drawTools/vdrawtool.h" line="246"/>
         <source>Restore label position</source>
         <translation>Відновити положення мітки</translation>
     </message>
@@ -21967,7 +22093,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <location filename="../../src/app/puzzle/vpmainwindow.ui" line="2207"/>
-        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="4900"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="4906"/>
         <source>Preferences</source>
         <translation>Властивості</translation>
     </message>
@@ -21988,7 +22114,7 @@ Do you want to save your changes?</source>
         <translation>Не вдалося створити розкладку.</translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="3278"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="3279"/>
         <source>Could not extract data from file &apos;%1&apos;. %2</source>
         <translation>Не вдалося витягти дані з файлу &quot;%1&quot;. %2</translation>
     </message>
@@ -22041,9 +22167,9 @@ Do you want to save your changes?</source>
         <translation>Не вдається зберегти налаштування. Доступ заборонено.</translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="2695"/>
-        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="3016"/>
-        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="3197"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="2696"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="3017"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="3198"/>
         <source>Failed to open file, is it writable?</source>
         <translation>Не вдалося відкрити файл, чи доступний він для запису?</translation>
     </message>
@@ -22058,55 +22184,55 @@ Do you want to save your changes?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="3549"/>
-        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="3612"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="3550"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="3613"/>
         <source>Layout files</source>
         <translation>Файли розкладки</translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="3553"/>
-        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="3704"/>
-        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="4647"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="3554"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="3705"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="4648"/>
         <source>Open file</source>
         <translation>Відкрити файл</translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="3595"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="3596"/>
         <source>Could not save the file</source>
         <translation>Не вдалося зберегти файл</translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="3614"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="3615"/>
         <source>layout</source>
         <translation>розкладка</translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="3626"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="3627"/>
         <source>Save as</source>
         <translation>Зберегти як</translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="3657"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="3658"/>
         <source>Failed to lock. This file already opened in another window.</source>
         <translation>Неможливо заблокувати. Цей файл вже був відкритий в іншому вікні.</translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="3668"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="3669"/>
         <source>Could not save file</source>
         <translation>Не вдалося зберегти файл</translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="3689"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="3690"/>
         <source>Failed to lock. This file already opened in another window. Expect collissions when run 2 copies of the program.</source>
         <translation>Неможливо заблокувати. Цей файл вже був відкритий в іншому вікні. Можливі конфлікти, якщо одночасно запущено 2 екземпляри програми.</translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="3699"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="3700"/>
         <source>Raw Layout files</source>
         <translation>Необроблені файли розкладки</translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="3717"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="3718"/>
         <source>About Qt</source>
         <translation>Про Qt</translation>
     </message>
@@ -22332,13 +22458,13 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="717"/>
-        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="3522"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="3523"/>
         <source>&amp;Undo</source>
         <translation>&amp;Скасувати дію</translation>
     </message>
     <message>
         <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="723"/>
-        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="3523"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="3524"/>
         <source>&amp;Redo</source>
         <translation>&amp;Повторити</translation>
     </message>
@@ -22369,70 +22495,58 @@ Do you want to save your changes?</source>
         <translation>Не зберігати</translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="2297"/>
-        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="2358"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="2298"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="2359"/>
         <source>Can&apos;t create a path</source>
         <translation>Не вдається створити шлях</translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="2578"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="2579"/>
         <source>Can&apos;t open file &apos;%1&apos;</source>
         <translation>Не вдається відкрити файл &quot;%1&quot;</translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="2592"/>
-        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="3066"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="2593"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="3067"/>
         <source>Failed in flushing page to disk, disk full?</source>
         <translation>Не вдалося скинути сторінку на диск, чи переповнений диск?</translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="2932"/>
-        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="2961"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="2933"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="2962"/>
         <source>The layout is invalid.</source>
         <translation>Розкладка недійсна.</translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="2933"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="2934"/>
         <source>The layout is invalid. Piece out of bound. Do you want to continue export?</source>
         <translation>Розкладка недійсна. Деталь поза межами аркуша. Ви хочете продовжити експорт?</translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="2962"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="2963"/>
         <source>The layout is invalid. Pieces superposition. Do you want to continue export?</source>
         <translation>Розкладка недійсна. Деталі перетинаються. Ви хочете продовжити експорт?</translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="3990"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="3991"/>
         <source>Sheet %1</source>
         <translation>Аркуш %1</translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="3340"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="3341"/>
         <source>translate pieces</source>
         <translation>перемістити деталі</translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="3434"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="3435"/>
         <source>rotate pieces</source>
         <translation>обертання деталей</translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="4276"/>
-        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="4327"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="4277"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="4328"/>
         <source>For printing multipages document all sheet should have the same size.</source>
         <translation>Для друку багатосторінкового документа всі сторінки мають бути одного розміру.</translation>
-    </message>
-    <message>
-        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="4288"/>
-        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="4339"/>
-        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="4374"/>
-        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="4412"/>
-        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="4467"/>
-        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="4511"/>
-        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="4544"/>
-        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="4580"/>
-        <source>Print error</source>
-        <translation>Помилка друку</translation>
     </message>
     <message>
         <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="4289"/>
@@ -22443,19 +22557,31 @@ Do you want to save your changes?</source>
         <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="4512"/>
         <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="4545"/>
         <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="4581"/>
+        <source>Print error</source>
+        <translation>Помилка друку</translation>
+    </message>
+    <message>
+        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="4290"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="4341"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="4376"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="4414"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="4469"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="4513"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="4546"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="4582"/>
         <source>Cannot proceed because there are no available printers in your system.</source>
         <translation>Неможливо виконати, тому що не знайдено доступних принтерів у вашій системі.</translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="4644"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="4645"/>
         <source>Watermark files</source>
         <translation>Файли з водяними знаками</translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="4300"/>
-        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="4351"/>
-        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="4386"/>
-        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="4424"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="4301"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="4352"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="4387"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="4425"/>
         <source>Unable to get sheet page settings</source>
         <translation>Не вдається отримати налаштування сторінки аркуша</translation>
     </message>
@@ -22495,12 +22621,12 @@ Do you want to save your changes?</source>
         <translation>Впливає тільки на друку в застосунку. Для експорту зі схемою плитки використовуйте окреме налаштування</translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="4240"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="4241"/>
         <source>sheet</source>
         <translation>аркуш</translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="3301"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="3302"/>
         <source>Piece %1 invalid. %2</source>
         <translation>Деталь %1 невірна. %2</translation>
     </message>
@@ -27495,27 +27621,27 @@ Raw layout format compatibility error: actualFileVersion = %1 and fileVersion = 
 <context>
     <name>vNoisyHandler</name>
     <message>
-        <location filename="../../src/app/valentina/core/vapplication.cpp" line="238"/>
+        <location filename="../../src/app/valentina/core/vapplication.cpp" line="236"/>
         <source>DEBUG:</source>
         <translation>НАЛАГОДЖЕННЯ:</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/core/vapplication.cpp" line="249"/>
+        <location filename="../../src/app/valentina/core/vapplication.cpp" line="247"/>
         <source>WARNING:</source>
         <translation>ПОПЕРЕДЖЕННЯ:</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/core/vapplication.cpp" line="260"/>
+        <location filename="../../src/app/valentina/core/vapplication.cpp" line="258"/>
         <source>CRITICAL:</source>
         <translation>КРИТИЧНО:</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/core/vapplication.cpp" line="267"/>
+        <location filename="../../src/app/valentina/core/vapplication.cpp" line="265"/>
         <source>FATAL:</source>
         <translation>ФАТАЛЬНО:</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/core/vapplication.cpp" line="278"/>
+        <location filename="../../src/app/valentina/core/vapplication.cpp" line="276"/>
         <source>INFO:</source>
         <translation>ІНФО:</translation>
     </message>
@@ -27536,22 +27662,22 @@ Raw layout format compatibility error: actualFileVersion = %1 and fileVersion = 
         <translation type="vanished">Інформація.</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/core/vapplication.cpp" line="306"/>
+        <location filename="../../src/app/valentina/core/vapplication.cpp" line="304"/>
         <source>Warning</source>
         <translation>Попердження</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/core/vapplication.cpp" line="310"/>
+        <location filename="../../src/app/valentina/core/vapplication.cpp" line="308"/>
         <source>Critical error</source>
         <translation>Критична помилка</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/core/vapplication.cpp" line="314"/>
+        <location filename="../../src/app/valentina/core/vapplication.cpp" line="312"/>
         <source>Fatal error</source>
         <translation>Фатальна помилка</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/core/vapplication.cpp" line="318"/>
+        <location filename="../../src/app/valentina/core/vapplication.cpp" line="316"/>
         <source>Information</source>
         <translation>Інформація</translation>
     </message>
