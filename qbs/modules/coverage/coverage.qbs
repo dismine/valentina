@@ -20,6 +20,11 @@ Module {
         return flags;
     }
 
+    Properties {
+        condition: qbs.toolchain.contains("gcc") && !qbs.toolchain.contains("clang")
+        cpp.staticLibraries: ["gcov"]
+    }
+
     Rule { // Fake rule for '*.gcno' generation.
         condition: qbs.debugInformation && qbs.toolchain.contains("gcc") && !qbs.toolchain.contains("clang")
         inputs: ["cpp", "c"]
