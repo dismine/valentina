@@ -2740,10 +2740,7 @@ void VToolSeamAllowance::UpdateFoldLine(const VFoldLine &foldLine)
     if (detail.GetFoldLineType() == FoldLineType::ThreeDots || detail.GetFoldLineType() == FoldLineType::ThreeX ||
         detail.GetFoldLineType() == FoldLineType::TwoArrows)
     {
-        if (!shape.isEmpty())
-        {
-            m_foldLineMark->setPath(shape.constFirst());
-        }
+        m_foldLineMark->setPath(!shape.isEmpty() ? shape.constFirst() : QPainterPath());
         m_foldLineLabel->setPath(QPainterPath());
     }
     else if (detail.GetFoldLineType() == FoldLineType::Text)
@@ -2765,10 +2762,7 @@ void VToolSeamAllowance::UpdateFoldLine(const VFoldLine &foldLine)
     }
     else
     {
-        if (!shape.isEmpty())
-        {
-            m_foldLineMark->setPath(shape.constFirst());
-        }
+        m_foldLineMark->setPath(!shape.isEmpty() ? shape.constFirst() : QPainterPath());
 
         if (shape.size() > 1 && (settings->GetSingleStrokeOutlineFont() || settings->GetSingleLineFonts()))
         {

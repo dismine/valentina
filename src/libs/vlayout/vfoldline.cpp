@@ -290,6 +290,12 @@ void VFoldLine::UpdateFoldLineLabel(QGraphicsSimpleTextItem *item) const
         return;
     }
 
+    if (m_foldLine.isNull())
+    {
+        item->setVisible(false);
+        return;
+    }
+
     if (m_type == FoldLineType::TwoArrows || m_type == FoldLineType::ThreeDots || m_type == FoldLineType::ThreeX ||
         m_type == FoldLineType::None)
     {
