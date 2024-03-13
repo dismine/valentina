@@ -30,6 +30,7 @@
 
 #include "../vmisc/def.h"
 #include "../vmisc/vabstractapplication.h"
+#include "../vmisc/vlockguard.h"
 #include "vpcommandline.h"
 #include "vpsettings.h"
 
@@ -61,6 +62,9 @@ public:
     auto NewMainWindow(const VPCommandLinePtr &cmd) -> VPMainWindow *;
 
     void InitOptions();
+
+    void StartLogging();
+    auto LogFile() -> QTextStream *;
 
     auto TrVars() -> const VTranslateVars * override;
 
@@ -95,6 +99,8 @@ private:
     QList<QPointer<VPMainWindow>> m_mainWindows{};
     QLocalServer *m_localServer{nullptr};
     QWeakPointer<DialogPuzzlePreferences> m_preferencesDialog{};
+    QSharedPointer<VLockGuard<QFile>> m_lockLog{};
+    std::shared_ptr<QTextStream> m_out{nullptr};
 
     void Clean();
 
@@ -102,6 +108,9 @@ private:
 
     auto StartWithFiles(const VPCommandLinePtr &cmd, const QStringList &rawLayouts) -> bool;
     auto SingleStart(const VPCommandLinePtr &cmd, const QStringList &rawLayouts) -> bool;
+
+    static auto LogPath() -> QString;
+    void BeginLogging();
 };
 
 #endif // VPAPPLICATION_H

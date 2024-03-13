@@ -30,6 +30,7 @@
 #define MAPPLICATION_H
 
 #include "../vmisc/vabstractapplication.h"
+#include "../vmisc/vlockguard.h"
 #include "../vpatterndb/vtranslatevars.h"
 #include "dialogs/dialogmdatabase.h"
 #include "vtapesettings.h"
@@ -70,6 +71,9 @@ public:
     auto NewMainKMWindow() -> TKMMainWindow *;
 
     void InitOptions();
+
+    void StartLogging();
+    auto LogFile() -> QTextStream *;
 
     auto TrVars() -> const VTranslateVars * override;
 
@@ -113,6 +117,8 @@ private:
     VKnownMeasurementsDatabase *m_knownMeasurementsDatabase{nullptr};
     QFileSystemWatcher *m_knownMeasurementsDatabaseWatcher{nullptr};
     QFutureWatcher<void> *m_knownMeasurementsRepopulateWatcher;
+    QSharedPointer<VLockGuard<QFile>> m_lockLog{};
+    std::shared_ptr<QTextStream> m_out{nullptr};
 
     void CleanTapeWindows();
     void CleanKMWindows();
@@ -131,6 +137,9 @@ private:
     static void ParseUnitsOption(QCommandLineParser &parser, Unit &unit, bool &flagUnits);
 
     void RestartKnownMeasurementsDatabaseWatcher();
+
+    static auto LogPath() -> QString;
+    void BeginLogging();
 };
 
 //---------------------------------------------------------------------------------------------------------------------

@@ -33,12 +33,11 @@
 #include "../ifc/exception/vexceptionemptyparameter.h"
 #include "../ifc/exception/vexceptionobjecterror.h"
 #include "../ifc/exception/vexceptionwrongid.h"
-#include "../vganalytics/def.h"
 #include "../vganalytics/vganalytics.h"
+#include "../vmisc/projectversion.h"
 #include "../vmisc/qt_dispatch/qt_dispatch.h"
 #include "../vmisc/theme/vtheme.h"
 #include "../vmisc/vsysexits.h"
-#include "version.h"
 #include "vpmainwindow.h"
 #include "vpuzzleshortcutmanager.h"
 
@@ -159,29 +158,55 @@ inline void noisyFailureMsgHandler(QtMsgType type, const QMessageLogContext &con
         type = QtDebugMsg;
     }
 
-    switch (type)
     {
-        case QtDebugMsg:
-            vStdOut() << QApplication::translate("mNoisyHandler", "DEBUG:") << msg << "\n";
-            return;
-        case QtWarningMsg:
-            vStdErr() << QApplication::translate("mNoisyHandler", "WARNING:") << msg << "\n";
-            break;
-        case QtCriticalMsg:
-            vStdErr() << QApplication::translate("mNoisyHandler", "CRITICAL:") << msg << "\n";
-            break;
-        case QtFatalMsg:
-            vStdErr() << QApplication::translate("mNoisyHandler", "FATAL:") << msg << "\n";
-            break;
-        case QtInfoMsg:
-            vStdOut() << QApplication::translate("mNoisyHandler", "INFO:") << msg << "\n";
-            break;
-        default:
-            break;
-    }
+        QString debugdate = "["_L1 + QDateTime::currentDateTime().toString(QStringLiteral("yyyy.MM.dd hh:mm:ss"));
 
-    vStdOut().flush();
-    vStdErr().flush();
+        switch (type)
+        {
+            case QtDebugMsg:
+                debugdate += QStringLiteral(":DEBUG:%1(%2)] %3: %4: %5")
+                                 .arg(context.file)
+                                 .arg(context.line)
+                                 .arg(context.function, context.category, msg);
+                vStdOut() << QApplication::translate("mNoisyHandler", "DEBUG:") << msg << "\n";
+                break;
+            case QtWarningMsg:
+                debugdate += QStringLiteral(":WARNING:%1(%2)] %3: %4: %5")
+                                 .arg(context.file)
+                                 .arg(context.line)
+                                 .arg(context.function, context.category, msg);
+                vStdErr() << QApplication::translate("mNoisyHandler", "WARNING:") << msg << "\n";
+                break;
+            case QtCriticalMsg:
+                debugdate += QStringLiteral(":CRITICAL:%1(%2)] %3: %4: %5")
+                                 .arg(context.file)
+                                 .arg(context.line)
+                                 .arg(context.function, context.category, msg);
+                vStdErr() << QApplication::translate("mNoisyHandler", "CRITICAL:") << msg << "\n";
+                break;
+            case QtFatalMsg:
+                debugdate += QStringLiteral(":FATAL:%1(%2)] %3: %4: %5")
+                                 .arg(context.file)
+                                 .arg(context.line)
+                                 .arg(context.function, context.category, msg);
+                vStdErr() << QApplication::translate("mNoisyHandler", "FATAL:") << msg << "\n";
+                break;
+            case QtInfoMsg:
+                debugdate += QStringLiteral(":INFO:%1(%2)] %3: %4: %5")
+                                 .arg(context.file)
+                                 .arg(context.line)
+                                 .arg(context.function, context.category, msg);
+                vStdOut() << QApplication::translate("mNoisyHandler", "INFO:") << msg << "\n";
+                break;
+            default:
+                break;
+        }
+
+        vStdOut().flush();
+        vStdErr().flush();
+
+        (*VPApplication::VApp()->LogFile()) << debugdate << Qt::endl;
+    }
 
     if (isGuiThread)
     {
@@ -209,8 +234,6 @@ inline void noisyFailureMsgHandler(QtMsgType type, const QMessageLogContext &con
                 messageBox.setIcon(QMessageBox::Information);
                 break;
             case QtDebugMsg:
-                Q_UNREACHABLE(); //-V501
-                break;
             default:
                 break;
         }
@@ -405,9 +428,9 @@ auto VPApplication::NewMainWindow(const VPCommandLinePtr &cmd) -> VPMainWindow *
 //---------------------------------------------------------------------------------------------------------------------
 void VPApplication::InitOptions()
 {
-    qInstallMessageHandler(noisyFailureMsgHandler);
-
     OpenSettings();
+
+    StartLogging();
 
     qCDebug(pApp, "Version: %s", qUtf8Printable(AppVersionStr()));
     qCDebug(pApp, "Build revision: %s", BUILD_REVISION);
@@ -441,6 +464,22 @@ void VPApplication::InitOptions()
     VGAnalytics::Init(settings);
 
     m_shortcutManager = new VPuzzleShortcutManager(this);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VPApplication::StartLogging()
+{
+    if (CreateLogDir())
+    {
+        BeginLogging();
+        ClearOldLogs();
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+auto VPApplication::LogFile() -> QTextStream *
+{
+    return m_out.get();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -721,6 +760,38 @@ auto VPApplication::SingleStart(const VPCommandLinePtr &cmd, const QStringList &
     }
 
     return true;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+auto VPApplication::LogPath() -> QString
+{
+    // Keep in sync with VCrashPaths::GetAttachmentPath
+    return QStringLiteral("%1/puzzle-pid%2.log").arg(LogDirPath()).arg(applicationPid());
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VPApplication::BeginLogging()
+{
+    VlpCreateLock(m_lockLog, LogPath(), []() { return new QFile(LogPath()); });
+
+    if (m_lockLog->IsLocked())
+    {
+        if (m_lockLog->GetProtected()->open(QIODevice::WriteOnly | QIODevice::Truncate | QIODevice::Text))
+        {
+            m_out.reset(new QTextStream(m_lockLog->GetProtected().data()));
+            qInstallMessageHandler(noisyFailureMsgHandler);
+            qCDebug(pApp, "Log file %s was locked.", qUtf8Printable(LogPath()));
+        }
+        else
+        {
+            qCDebug(pApp, "Error opening log file \'%s\'. All debug output redirected to console.",
+                    qUtf8Printable(LogPath()));
+        }
+    }
+    else
+    {
+        qCDebug(pApp, "Failed to lock %s", qUtf8Printable(LogPath()));
+    }
 }
 
 //---------------------------------------------------------------------------------------------------------------------

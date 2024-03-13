@@ -224,7 +224,7 @@ inline void noisyFailureMsgHandler(QtMsgType type, const QMessageLogContext &con
     }
 
     {
-        QString debugdate = "[" + QDateTime::currentDateTime().toString(QStringLiteral("yyyy.MM.dd hh:mm:ss"));
+        QString debugdate = "["_L1 + QDateTime::currentDateTime().toString(QStringLiteral("yyyy.MM.dd hh:mm:ss"));
 
         switch (type)
         {
@@ -572,7 +572,6 @@ void VApplication::InitOptions()
 {
     OpenSettings();
 
-    // Run creation log after sending crash report
     StartLogging();
 
     qDebug() << "Version:" << AppVersionStr();
