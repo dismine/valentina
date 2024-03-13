@@ -573,7 +573,10 @@ auto VPMainWindow::LoadFile(const QString &path) -> bool
 void VPMainWindow::LayoutWasSaved(bool saved)
 {
     setWindowModified(!saved);
-    not IsLayoutReadOnly() ? ui->actionSave->setEnabled(!saved) : ui->actionSave->setEnabled(false);
+    if (ui)
+    {
+        not IsLayoutReadOnly() ? ui->actionSave->setEnabled(!saved) : ui->actionSave->setEnabled(false);
+    }
 }
 
 //---------------------------------------------------------------------------------------------------------------------
