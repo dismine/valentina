@@ -40,13 +40,12 @@ class DialogRestrictDimension;
 
 class QTableWidgetItem;
 
-enum class RestrictDimension: qint8
+enum class RestrictDimension : qint8
 {
     First = 0,
     Second = 1,
     Third = 2
 };
-
 
 class DialogRestrictDimension : public QDialog
 {
@@ -61,7 +60,7 @@ public:
     auto Restrictions() const -> QMap<QString, VDimensionRestriction>;
 
 protected:
-    void changeEvent(QEvent* event) override;
+    void changeEvent(QEvent *event) override;
 
 protected slots:
     void RowSelected();
@@ -94,11 +93,11 @@ private:
 
     void FillBases(const QVector<qreal> &bases, const MeasurementDimension_p &dimension, QComboBox *control) const;
     void FillBase(double base, const MeasurementDimension_p &dimension, QComboBox *control) const;
-    static auto FillDimensionXBases(const QVector<qreal> &bases,
-                                    const MeasurementDimension_p &dimension) -> QStringList;
+    static auto FillDimensionXBases(const QVector<qreal> &bases, const MeasurementDimension_p &dimension)
+        -> QStringList;
     auto FillDimensionYBases(const QVector<qreal> &bases, const MeasurementDimension_p &dimension) const -> QStringList;
-    auto FillDimensionWZBases(const QVector<qreal> &bases,
-                              const MeasurementDimension_p &dimension) const -> QStringList;
+    auto FillDimensionWZBases(const QVector<qreal> &bases, const MeasurementDimension_p &dimension) const
+        -> QStringList;
 
     auto DimensionLabels(const QVector<qreal> &bases, const MeasurementDimension_p &dimension) const -> QStringList;
     auto DimensionRestrictedValues(const MeasurementDimension_p &dimension) const -> QVector<qreal>;
@@ -106,7 +105,7 @@ private:
 };
 
 //---------------------------------------------------------------------------------------------------------------------
-inline auto DialogRestrictDimension::Restrictions() const -> QMap<QString, VDimensionRestriction >
+inline auto DialogRestrictDimension::Restrictions() const -> QMap<QString, VDimensionRestriction>
 {
     return m_restrictions;
 }
