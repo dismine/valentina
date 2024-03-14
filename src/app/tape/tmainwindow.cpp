@@ -58,6 +58,7 @@
 #include "dialogs/dialogmdatabase.h"
 #include "dialogs/dialogmeasurementscsvcolumns.h"
 #include "dialogs/dialognewmeasurements.h"
+#include "dialogs/dialognoknownmeasurements.h"
 #include "dialogs/dialogrestrictdimension.h"
 #include "dialogs/dialogsetupmultisize.h"
 #include "mapplication.h" // Should be last because of definning qApp
@@ -1710,13 +1711,23 @@ void TMainWindow::AddCustom()
 //---------------------------------------------------------------------------------------------------------------------
 void TMainWindow::AddKnown()
 {
+    if (m_m->KnownMeasurements().isNull())
+    {
+        DialogNoKnownMeasurements dialog(this);
+        if (dialog.exec() == QDialog::Accepted)
+        {
+            MApplication::VApp()->NewMainKMWindow();
+        }
+        return;
+    }
+
     QScopedPointer<DialogMDataBase> const dialog(new DialogMDataBase(m_m->KnownMeasurements(), m_m->ListKnown(), this));
     if (dialog->exec() == QDialog::Rejected)
     {
         return;
     }
 
-    vsizetype currentRow;
+    vsizetype currentRow = -1;
     const QStringList list = dialog->GetNewNames();
     VKnownMeasurementsDatabase *db = MApplication::VApp()->KnownMeasurementsDatabase();
     VKnownMeasurements const knownDB = db->KnownMeasurements(m_m->KnownMeasurements());
