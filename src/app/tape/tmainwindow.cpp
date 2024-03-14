@@ -4780,6 +4780,11 @@ void TMainWindow::InitKnownMeasurements(QComboBox *combo)
     SCASSERT(combo != nullptr)
     combo->addItem(tr("None"), QUuid());
 
+    if (m_m == nullptr)
+    {
+        return;
+    }
+
     QUuid const kmId = m_m->KnownMeasurements();
     if (!kmId.isNull() && !known.contains(kmId))
     {
