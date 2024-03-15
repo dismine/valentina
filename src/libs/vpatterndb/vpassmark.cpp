@@ -484,7 +484,7 @@ auto CreateUMarkPassmark(const VPiecePassmarkData &passmarkData, const QLineF &l
 auto CreateBoxMarkPassmark(const VPiecePassmarkData &passmarkData, const QLineF &line,
                            const QVector<QPointF> &seamAllowance) -> QVector<QLineF>
 {
-    const qreal defWidth = line.length() * VPassmark::passmarkRadiusFactor;
+    const qreal defWidth = line.length() * VPassmark::passmarkRadiusFactor * 2;
     const qreal width = PassmarkWidth(passmarkData, defWidth);
 
     QPointF l1p1;
