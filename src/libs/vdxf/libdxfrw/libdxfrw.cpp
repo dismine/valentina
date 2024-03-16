@@ -194,7 +194,7 @@ auto dxfRW::write(DRW_Interface *interface_, DRW::Version ver, bool bin) -> bool
 
 auto dxfRW::writeEntity(DRW_Entity *ent) -> bool
 {
-    // A handle is an arbitrary but in your DXF file unique hex value as string like ‘10FF’. It is common to to use
+    // A handle is arbitrary, but in your DXF file unique hex value as string like ‘10FF’. It is common to to use
     // uppercase letters for hex numbers. Handle can have up to 16 hexadecimal digits (8 bytes).
     //
     // For DXF R10 until R12 the usage of handles was optional. The header variable $HANDLING set to 1 indicate the
@@ -1514,6 +1514,7 @@ auto dxfRW::writeInsert(DRW_Insert *ent) -> bool
 {
     writer->writeString(0, "INSERT");
     writeEntity(ent);
+
     if (version > DRW::AC1009)
     {
         writer->writeString(100, "AcDbBlockReference");
@@ -1523,17 +1524,54 @@ auto dxfRW::writeInsert(DRW_Insert *ent) -> bool
     {
         writer->writeUtf8Caps(2, ent->name);
     }
+
     writer->writeDouble(10, ent->basePoint.x);
     writer->writeDouble(20, ent->basePoint.y);
-    writer->writeDouble(30, ent->basePoint.z);
-    writer->writeDouble(41, ent->xscale);
-    writer->writeDouble(42, ent->yscale);
-    writer->writeDouble(43, ent->zscale);
-    writer->writeDouble(50, (ent->angle) * ARAD); // in dxf angle is writed in degrees
-    writer->writeInt16(70, ent->colcount);
-    writer->writeInt16(71, ent->rowcount);
-    writer->writeDouble(44, ent->colspace);
-    writer->writeDouble(45, ent->rowspace);
+
+    if (!qFuzzyIsNull(ent->basePoint.z))
+    {
+        writer->writeDouble(30, ent->basePoint.z);
+    }
+
+    if (!DRW_FuzzyComparePossibleNulls(ent->xscale, 1))
+    {
+        writer->writeDouble(41, ent->xscale);
+    }
+
+    if (!DRW_FuzzyComparePossibleNulls(ent->yscale, 1))
+    {
+        writer->writeDouble(42, ent->yscale);
+    }
+
+    if (!DRW_FuzzyComparePossibleNulls(ent->zscale, 1))
+    {
+        writer->writeDouble(43, ent->zscale);
+    }
+
+    if (!qFuzzyIsNull(ent->angle))
+    {
+        writer->writeDouble(50, (ent->angle) * ARAD); // in dxf angle is writed in degrees
+    }
+
+    if (!DRW_FuzzyComparePossibleNulls(ent->colcount, 1))
+    {
+        writer->writeInt16(70, ent->colcount);
+    }
+
+    if (!DRW_FuzzyComparePossibleNulls(ent->rowcount, 1))
+    {
+        writer->writeInt16(71, ent->rowcount);
+    }
+
+    if (!qFuzzyIsNull(ent->colspace))
+    {
+        writer->writeDouble(44, ent->colspace);
+    }
+
+    if (!qFuzzyIsNull(ent->rowspace))
+    {
+        writer->writeDouble(45, ent->rowspace);
+    }
     return true;
 }
 
@@ -1548,7 +1586,10 @@ auto dxfRW::writeText(DRW_Text *ent) -> bool
     //    writer->writeDouble(39, ent->thickness);
     writer->writeDouble(10, ent->basePoint.x);
     writer->writeDouble(20, ent->basePoint.y);
-    writer->writeDouble(30, ent->basePoint.z);
+    if (not qFuzzyIsNull(ent->basePoint.z))
+    {
+        writer->writeDouble(30, ent->basePoint.z);
+    }
     writer->writeDouble(40, ent->height);
     writer->writeUtf8String(1, ent->text);
     writer->writeDouble(50, ent->angle);
