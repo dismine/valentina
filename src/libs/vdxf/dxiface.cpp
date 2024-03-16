@@ -346,15 +346,13 @@ void dx_iface::AddASTMLayers()
     layer.color = DRW::black;
     cData.layers.push_back(layer);
 
-    // Do not support
-    //    layer.name = '2';// turn points
-    //    layer.color = DRW::black;
-    //    cData.layers.push_back(layer);
+    layer.name = '2'; // turn points
+    layer.color = DRW::black;
+    cData.layers.push_back(layer);
 
-    // Do not support
-    //    layer.name = '3';// curve points
-    //    layer.color = DRW::black;
-    //    cData.layers.push_back(layer);
+    layer.name = '3'; // curve points
+    layer.color = DRW::black;
+    cData.layers.push_back(layer);
 
     layer.name = '4'; // V-notch and slit notch
     layer.color = DRW::black;
@@ -365,10 +363,9 @@ void dx_iface::AddASTMLayers()
     //    layer.color = DRW::black;
     //    cData.layers.push_back(layer);
 
-    // Do not support
-    //    layer.name = '6';// mirror line
-    //    layer.color = DRW::black;
-    //    cData.layers.push_back(layer);
+    layer.name = '6'; // mirror line
+    layer.color = DRW::black;
+    cData.layers.push_back(layer);
 
     layer.name = '7'; // grainline
     layer.color = DRW::black;

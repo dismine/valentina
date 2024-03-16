@@ -70,6 +70,7 @@ Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingLayoutWarningPiecesOutOfBound, (
 Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingLayoutFollowGrainline, ("layout/followGrainline"_L1))
 Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingLayoutPieceGap, ("layout/pieceGap"_L1))           // NOLINT
 Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingLayoutExportFormat, ("layout/exportFormat"_L1))   // NOLINT
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingDxfCompatibility, ("layout/dxfCompatibility"_L1)) // NOLINT
 Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingLayoutLineWidth, ("layout/lineWidth"_L1))         // NOLINT
 Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingLayoutShowGrainline, ("layout/showGrainline"_L1)) // NOLINT
 Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingPathsRawLayoutData, ("paths/rawLatoutData"_L1))   // NOLINT
@@ -355,6 +356,18 @@ auto VPSettings::GetLayoutExportFormat() const -> qint8
 void VPSettings::SetLayoutExportFormat(qint8 format)
 {
     setValue(*settingLayoutExportFormat, format);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+auto VPSettings::GetDxfCompatibility() const -> qint8
+{
+    return CastToLayoutExportFormat(qvariant_cast<qint8>(value(*settingDxfCompatibility, 0)));
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VPSettings::SetDxfCompatibility(qint8 type)
+{
+    setValue(*settingDxfCompatibility, type);
 }
 
 //---------------------------------------------------------------------------------------------------------------------

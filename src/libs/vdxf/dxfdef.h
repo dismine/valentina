@@ -51,6 +51,15 @@ enum class VarInsunits : quint8
     Centimeters = 5
 };
 
+enum class DXFApparelCompatibility : qint8
+{
+    STANDARD = 0, // According to specification AAMA/ASTM
+    RPCADV08 = 1, // Richpeace CAD V8
+    RPCADV09 = 2, // Richpeace CAD V9
+    RPCADV10 = 3, // Richpeace CAD V10
+    COUNT         /*Use only for validation*/
+};
+
 // Helps mark end of string. See VDxfEngine::drawTextItem for more details
 extern const QString endStringPlaceholder;
 

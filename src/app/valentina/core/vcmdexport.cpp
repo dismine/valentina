@@ -323,6 +323,17 @@ auto VCommandLine::OptExportType() const -> int
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+int VCommandLine::DXFApparelCompatibilityType() const
+{
+    int r = 0;
+    if (IsOptionSet(LONG_OPTION_DXF_APPAREL_COMP))
+    {
+        r = OptionValue(LONG_OPTION_DXF_APPAREL_COMP).toInt();
+    }
+    return r;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 auto VCommandLine::IsBinaryDXF() const -> bool
 {
     return IsOptionSet(LONG_OPTION_BINARYDXF);
@@ -631,6 +642,11 @@ void VCommandLine::InitCommandLineOptions()
          translate("VCommandLine", "Format number"),
          QChar('0')},
         {LONG_OPTION_BINARYDXF, translate("VCommandLine", "Export dxf in binary form.")},
+        {LONG_OPTION_DXF_APPAREL_COMP,
+         translate("VCommandLine",
+                   "Number corresponding to compatibility mode for DXF AAMA/ASTM format (default = 0, export mode):") +
+             DialogSaveLayout::MakeHelpDxfApparelCompatibilityList(),
+         translate("VCommandLine", "Mode number"), QChar('0')},
         {LONG_OPTION_NOGRAINLINE, translate("VCommandLine", "Show/hide grainline when export layout.")},
         {LONG_OPTION_TEXT2PATHS, translate("VCommandLine", "Export text as paths.")},
         {LONG_OPTION_EXPORTONLYDETAILS,

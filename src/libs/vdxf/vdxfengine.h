@@ -117,6 +117,9 @@ public:
     void SetBoundaryTogetherWithNotches(bool value);
     auto IsBoundaryTogetherWithNotches() const -> bool;
 
+    auto DxfApparelCompatibility() const -> DXFApparelCompatibility;
+    void SetDxfApparelCompatibility(DXFApparelCompatibility mode);
+
     auto ErrorString() const -> QString;
 
 private:
@@ -135,6 +138,7 @@ private:
     qreal m_xscale{1};
     qreal m_yscale{1};
     bool m_togetherWithNotches{false};
+    DXFApparelCompatibility m_compatibilityMode{DXFApparelCompatibility::STANDARD};
 
     Q_REQUIRED_RESULT auto FromPixel(double pix, const VarInsunits &unit) const -> double;
     Q_REQUIRED_RESULT auto ToPixel(double val, const VarInsunits &unit) const -> double;
@@ -200,6 +204,9 @@ private:
 
     void ASTMDrawFoldLineTwoArrows(const QVector<QVector<QPointF>> &points,
                                    const QSharedPointer<dx_ifaceBlock> &detailBlock);
+
+    static void CheckLabelCompatibilityRPCADV09(const VLayoutPiece &detail);
+    static void CheckLabelCompatibilityRPCADV08(const VLayoutPiece &detail);
 };
 
 #endif // VDXFENGINE_H

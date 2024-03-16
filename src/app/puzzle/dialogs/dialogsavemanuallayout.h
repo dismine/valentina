@@ -30,6 +30,7 @@
 
 #include <memory>
 
+#include "../vdxf/dxfdef.h"
 #include "../vlayout/dialogs/vabstractlayoutdialog.h"
 #include "../vlayout/vlayoutdef.h"
 #include "../vmisc/defglobal.h"
@@ -56,6 +57,9 @@ public:
 
     void SetBinaryDXFFormat(bool binary);
     auto IsBinaryDXFFormat() const -> bool;
+
+    auto DxfCompatibility() const -> DXFApparelCompatibility;
+    void SetDxfCompatibility(DXFApparelCompatibility type);
 
     void SetShowGrainline(bool show);
     auto IsShowGrainline() const -> bool;
@@ -95,6 +99,8 @@ private:
 
     void ReadSettings();
     void WriteSettings() const;
+
+    void InitDxfCompatibility();
 };
 
 #endif // DIALOGSAVEMANUALLAYOUT_H

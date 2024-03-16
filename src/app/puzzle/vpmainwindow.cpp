@@ -313,6 +313,7 @@ struct VPExportData
     QString fileName{};
     qreal xScale{1.};
     qreal yScale{1.};
+    DXFApparelCompatibility dxfCompatibility{DXFApparelCompatibility::STANDARD};
     bool isBinaryDXF{false};
     bool textAsPaths{false};
     bool exportUnified{true};
@@ -2323,10 +2324,12 @@ void VPMainWindow::ExportApparelLayout(const VPExportData &data, const QVector<V
     {
         case LayoutExportFormats::DXF_ASTM:
             exporter.SetDxfVersion(DRW::AC1009);
+            exporter.SetDxfApparelCompatibility(data.dxfCompatibility);
             exporter.ExportToASTMDXF(details);
             break;
         case LayoutExportFormats::DXF_AAMA:
             exporter.SetDxfVersion(DRW::AC1009);
+            exporter.SetDxfApparelCompatibility(data.dxfCompatibility);
             exporter.ExportToAAMADXF(details);
             break;
         case LayoutExportFormats::RLD:
@@ -4217,6 +4220,7 @@ void VPMainWindow::on_ExportLayout()
     data.exportUnified = dialog.IsExportUnified();
     data.showTilesScheme = dialog.IsTilesScheme();
     data.showGrainline = dialog.IsShowGrainline();
+    data.dxfCompatibility = dialog.DxfCompatibility();
 
     ExportData(data);
 }
@@ -4268,6 +4272,7 @@ void VPMainWindow::on_ExportSheet()
     data.exportUnified = dialog.IsExportUnified();
     data.showTilesScheme = dialog.IsTilesScheme();
     data.showGrainline = dialog.IsShowGrainline();
+    data.dxfCompatibility = dialog.DxfCompatibility();
 
     ExportData(data);
 }

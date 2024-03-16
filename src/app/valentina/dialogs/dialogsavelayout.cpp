@@ -124,6 +124,8 @@ DialogSaveLayout::DialogSaveLayout(int count, Draw mode, const QString &fileName
         RemoveFormatFromList(LayoutExportFormats::RLD);
     }
 
+    InitDxfCompatibility();
+
     connect(bOk, &QPushButton::clicked, this, &DialogSaveLayout::Save);
     connect(ui->lineEditFileName, &QLineEdit::textChanged, this, &DialogSaveLayout::ShowExample);
     connect(ui->comboBoxFormat, QOverload<int>::of(&QComboBox::currentIndexChanged), this,
@@ -227,6 +229,45 @@ auto DialogSaveLayout::IsBinaryDXFFormat() const -> bool
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+auto DialogSaveLayout::DxfCompatibility() const -> DXFApparelCompatibility
+{
+    switch (Format())
+    {
+        case LayoutExportFormats::DXF_AAMA:
+        case LayoutExportFormats::DXF_ASTM:
+            return static_cast<DXFApparelCompatibility>(ui->comboBoxDxfCompatibility->currentData().toInt());
+        default:
+            return DXFApparelCompatibility::STANDARD;
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void DialogSaveLayout::SetDxfCompatibility(DXFApparelCompatibility type)
+{
+    switch (Format())
+    {
+        case LayoutExportFormats::DXF_AAMA:
+        case LayoutExportFormats::DXF_ASTM:
+        {
+            if (static_cast<int>(type) < 0 || type >= DXFApparelCompatibility::COUNT)
+            {
+                break;
+            }
+
+            const int i = ui->comboBoxDxfCompatibility->findData(static_cast<int>(type));
+            if (i < 0)
+            {
+                break;
+            }
+            ui->comboBoxDxfCompatibility->setCurrentIndex(i);
+            break;
+        }
+        default:
+            break;
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 void DialogSaveLayout::SetShowGrainline(bool show)
 {
     switch (Format())
@@ -293,8 +334,7 @@ auto DialogSaveLayout::MakeHelpFormatList() -> QString
     const auto formats = InitFormats();
     for (int i = 0; i < formats.size(); ++i)
     {
-        out += QStringLiteral("\t* ") + formats.at(i).first + QStringLiteral(" = ") +
-               QString::number(static_cast<int>(formats.at(i).second));
+        out += "\t* "_L1 + formats.at(i).first + " = "_L1 + QString::number(static_cast<int>(formats.at(i).second));
 
         if (i < formats.size() - 1)
         {
@@ -305,6 +345,20 @@ auto DialogSaveLayout::MakeHelpFormatList() -> QString
             out += ".\n"_L1;
         }
     }
+    return out;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+auto DialogSaveLayout::MakeHelpDxfApparelCompatibilityList() -> QString
+{
+    QString out("\n"_L1);
+    out += QStringLiteral("\t* %1 = %2,\n")
+               .arg(tr("By standard"))
+               .arg(static_cast<int>(DXFApparelCompatibility::STANDARD));
+    out += QStringLiteral("\t* Richpeace CAD V8 = %1,\n").arg(static_cast<int>(DXFApparelCompatibility::RPCADV08));
+    out += QStringLiteral("\t* Richpeace CAD V9 = %1,\n").arg(static_cast<int>(DXFApparelCompatibility::RPCADV09));
+    out += QStringLiteral("\t* Richpeace CAD V10 = %1.\n").arg(static_cast<int>(DXFApparelCompatibility::RPCADV10));
+
     return out;
 }
 
@@ -437,6 +491,8 @@ void DialogSaveLayout::ShowExample()
     ui->checkBoxTextAsPaths->setEnabled(true);
     ui->checkBoxShowGrainline->setVisible(false);
     ui->checkBoxTogetherWithNotches->setVisible(false);
+    ui->labelDxfCompatibility->setVisible(false);
+    ui->comboBoxDxfCompatibility->setVisible(false);
 
     VCommonSettings *settings = VAbstractApplication::VApp()->Settings();
 
@@ -446,6 +502,8 @@ void DialogSaveLayout::ShowExample()
         case LayoutExportFormats::DXF_ASTM:
             ui->checkBoxBinaryDXF->setVisible(true);
             ui->checkBoxTogetherWithNotches->setVisible(m_mode != Draw::Layout);
+            ui->labelDxfCompatibility->setVisible(true);
+            ui->comboBoxDxfCompatibility->setVisible(true);
             break;
         case LayoutExportFormats::PDFTiled:
             ui->groupBoxPaperFormat->setEnabled(true);
@@ -808,6 +866,8 @@ void DialogSaveLayout::ReadSettings()
         }
         SetShowGrainline(settings->GetShowGrainline());
     }
+
+    SetDxfCompatibility(static_cast<DXFApparelCompatibility>(settings->GetDxfCompatibility()));
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -856,4 +916,19 @@ void DialogSaveLayout::WriteSettings() const
         settings->SetLayoutExportFormat(static_cast<qint8>(Format()));
         settings->SetShowGrainline(IsShowGrainline());
     }
+
+    settings->SetDxfCompatibility(static_cast<qint8>(DxfCompatibility()));
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void DialogSaveLayout::InitDxfCompatibility()
+{
+    ui->comboBoxDxfCompatibility->addItem(tr("By standard"),
+                                          QVariant(static_cast<int>(DXFApparelCompatibility::STANDARD)));
+    ui->comboBoxDxfCompatibility->addItem("Richpeace CAD V8"_L1,
+                                          QVariant(static_cast<int>(DXFApparelCompatibility::RPCADV08)));
+    ui->comboBoxDxfCompatibility->addItem("Richpeace CAD V9"_L1,
+                                          QVariant(static_cast<int>(DXFApparelCompatibility::RPCADV09)));
+    ui->comboBoxDxfCompatibility->addItem("Richpeace CAD V10"_L1,
+                                          QVariant(static_cast<int>(DXFApparelCompatibility::RPCADV10)));
 }

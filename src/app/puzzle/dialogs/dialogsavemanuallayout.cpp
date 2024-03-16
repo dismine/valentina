@@ -111,6 +111,8 @@ DialogSaveManualLayout::DialogSaveManualLayout(vsizetype count, bool consoleExpo
 
     //    RemoveFormatFromList(LayoutExportFormats::NC); // No support for now
 
+    InitDxfCompatibility();
+
     connect(bOk, &QPushButton::clicked, this, &DialogSaveManualLayout::Save);
     connect(ui->lineEditFileName, &QLineEdit::textChanged, this, &DialogSaveManualLayout::ShowExample);
     connect(ui->comboBoxFormat, QOverload<int>::of(&QComboBox::currentIndexChanged), this,
@@ -221,6 +223,45 @@ auto DialogSaveManualLayout::IsBinaryDXFFormat() const -> bool
             return ui->checkBoxBinaryDXF->isChecked();
         default:
             return false;
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+auto DialogSaveManualLayout::DxfCompatibility() const -> DXFApparelCompatibility
+{
+    switch (Format())
+    {
+        case LayoutExportFormats::DXF_AAMA:
+        case LayoutExportFormats::DXF_ASTM:
+            return static_cast<DXFApparelCompatibility>(ui->comboBoxDxfCompatibility->currentData().toInt());
+        default:
+            return DXFApparelCompatibility::STANDARD;
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void DialogSaveManualLayout::SetDxfCompatibility(DXFApparelCompatibility type)
+{
+    switch (Format())
+    {
+        case LayoutExportFormats::DXF_AAMA:
+        case LayoutExportFormats::DXF_ASTM:
+        {
+            if (static_cast<int>(type) < 0 || type >= DXFApparelCompatibility::COUNT)
+            {
+                break;
+            }
+
+            const int i = ui->comboBoxDxfCompatibility->findData(static_cast<int>(type));
+            if (i < 0)
+            {
+                break;
+            }
+            ui->comboBoxDxfCompatibility->setCurrentIndex(i);
+            break;
+        }
+        default:
+            break;
     }
 }
 
@@ -491,6 +532,8 @@ void DialogSaveManualLayout::ShowExample()
     ui->checkBoxExportUnified->setVisible(false);
     ui->checkBoxTilesScheme->setVisible(false);
     ui->checkBoxShowGrainline->setVisible(false);
+    ui->labelDxfCompatibility->setVisible(false);
+    ui->comboBoxDxfCompatibility->setVisible(false);
 
     const bool editableTextAsPaths = !settings->GetSingleLineFonts() && !settings->GetSingleStrokeOutlineFont();
 
@@ -499,6 +542,8 @@ void DialogSaveManualLayout::ShowExample()
         case LayoutExportFormats::DXF_AAMA:
         case LayoutExportFormats::DXF_ASTM:
             ui->checkBoxBinaryDXF->setVisible(true);
+            ui->labelDxfCompatibility->setVisible(true);
+            ui->comboBoxDxfCompatibility->setVisible(true);
             break;
         case LayoutExportFormats::PDFTiled:
             ui->checkBoxTextAsPaths->setVisible(editableTextAsPaths);
@@ -616,6 +661,8 @@ void DialogSaveManualLayout::ReadSettings()
         qDebug() << qUtf8Printable(e.ErrorMessage());
     }
     SetShowGrainline(settings->GetShowGrainline());
+
+    SetDxfCompatibility(static_cast<DXFApparelCompatibility>(settings->GetDxfCompatibility()));
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -629,4 +676,19 @@ void DialogSaveManualLayout::WriteSettings() const
     VPSettings *settings = VPApplication::VApp()->PuzzleSettings();
     settings->SetLayoutExportFormat(static_cast<qint8>(Format()));
     settings->SetShowGrainline(IsShowGrainline());
+
+    settings->SetDxfCompatibility(static_cast<qint8>(DxfCompatibility()));
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void DialogSaveManualLayout::InitDxfCompatibility()
+{
+    ui->comboBoxDxfCompatibility->addItem(tr("By standard"),
+                                          QVariant(static_cast<int>(DXFApparelCompatibility::STANDARD)));
+    ui->comboBoxDxfCompatibility->addItem("Richpeace CAD V8"_L1,
+                                          QVariant(static_cast<int>(DXFApparelCompatibility::RPCADV08)));
+    ui->comboBoxDxfCompatibility->addItem("Richpeace CAD V9"_L1,
+                                          QVariant(static_cast<int>(DXFApparelCompatibility::RPCADV09)));
+    ui->comboBoxDxfCompatibility->addItem("Richpeace CAD V10"_L1,
+                                          QVariant(static_cast<int>(DXFApparelCompatibility::RPCADV10)));
 }

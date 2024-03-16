@@ -28,6 +28,7 @@
 
 #include "vdxfengine.h"
 
+#include <QApplication>
 #include <QByteArray>
 #include <QColor>
 #include <QDateTime>
@@ -36,6 +37,7 @@
 #include <QFont>
 #include <QLineF>
 #include <QList>
+#include <QLoggingCategory>
 #include <QMessageLogger>
 #include <QPaintEngineState>
 #include <QPainterPath>
@@ -69,6 +71,14 @@
 #endif
 
 using namespace Qt::Literals::StringLiterals;
+
+QT_WARNING_PUSH
+QT_WARNING_DISABLE_CLANG("-Wmissing-prototypes")
+QT_WARNING_DISABLE_INTEL(1418)
+
+Q_LOGGING_CATEGORY(vDxf, "v.undo") // NOLINT
+
+QT_WARNING_POP
 
 namespace
 {
@@ -214,13 +224,13 @@ auto VDxfEngine::begin(QPaintDevice *pdev) -> bool
 
     if (isActive())
     {
-        qWarning("VDxfEngine::begin(), the engine was alredy activated");
+        qCWarning(vDxf) << qUtf8Printable("VDxfEngine::begin(), the engine was alredy activated"_L1);
         return false;
     }
 
     if (not m_size.isValid())
     {
-        qWarning() << "VDxfEngine::begin(), size is not valid";
+        qCWarning(vDxf) << qUtf8Printable("VDxfEngine::begin(), size is not valid"_L1);
         return false;
     }
 
@@ -736,6 +746,18 @@ auto VDxfEngine::IsBoundaryTogetherWithNotches() const -> bool
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+auto VDxfEngine::DxfApparelCompatibility() const -> DXFApparelCompatibility
+{
+    return m_compatibilityMode;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VDxfEngine::SetDxfApparelCompatibility(DXFApparelCompatibility mode)
+{
+    m_compatibilityMode = mode;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 auto VDxfEngine::ErrorString() const -> QString
 {
     return QString::fromStdString(m_input->ErrorString());
@@ -778,7 +800,7 @@ auto VDxfEngine::ExportToAAMA(const QVector<VLayoutPiece> &details) -> bool
 {
     if (not m_size.isValid())
     {
-        qWarning() << "VDxfEngine::begin(), size is not valid";
+        qCWarning(vDxf) << qUtf8Printable("VDxfEngine::ExportToAAMA(), size is not valid"_L1);
         return false;
     }
 
@@ -1111,7 +1133,22 @@ void VDxfEngine::ExportPieceText(const QSharedPointer<dx_ifaceBlock> &detailBloc
     QVector<QPointF> const labelShape = detail.GetPieceLabelRect();
     if (labelShape.count() != 4)
     {
+        if (m_compatibilityMode == DXFApparelCompatibility::STANDARD)
+        {
+            qCWarning(vDxf) << qUtf8Printable(
+                QApplication::translate("VDxfEngine", "Piece '%1'. Piece System Text is missing.")
+                    .arg(detail.GetName()));
+        }
         return;
+    }
+
+    if (m_compatibilityMode == DXFApparelCompatibility::RPCADV08)
+    {
+        CheckLabelCompatibilityRPCADV08(detail);
+    }
+    else if (m_compatibilityMode == DXFApparelCompatibility::RPCADV09)
+    {
+        CheckLabelCompatibilityRPCADV09(detail);
     }
 
     const qreal scale = qMin(detail.GetXScale(), detail.GetYScale());
@@ -1251,6 +1288,13 @@ void VDxfEngine::ExportStyleSystemText(const QSharedPointer<dx_iface> &input, co
             return;
         }
     }
+
+    if (m_compatibilityMode == DXFApparelCompatibility::STANDARD)
+    {
+        // According to ASTM standard Style System Text is mandatory.
+        // Some applications may refuse file without Style System Text.
+        qCWarning(vDxf) << qUtf8Printable(QApplication::translate("VDxfEngine", "Style System Text is missing."));
+    }
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -1315,7 +1359,7 @@ auto VDxfEngine::ExportToASTM(const QVector<VLayoutPiece> &details) -> bool
 {
     if (not m_size.isValid())
     {
-        qWarning() << "VDxfEngine::begin(), size is not valid";
+        qCWarning(vDxf) << qUtf8Printable("VDxfEngine::ExportToASTM(), size is not valid"_L1);
         return false;
     }
 
@@ -1786,7 +1830,18 @@ auto VDxfEngine::ExportASTMNotch(const VLayoutPassmark &passmark) -> DRW_ASTMNot
 
     notch->angle = passmark.baseLine.angle();
 
-    switch (passmark.type)
+    PassmarkLineType type = passmark.type;
+    if (m_compatibilityMode == DXFApparelCompatibility::RPCADV08 ||
+        m_compatibilityMode == DXFApparelCompatibility::RPCADV09 ||
+        m_compatibilityMode == DXFApparelCompatibility::RPCADV10)
+    {
+        if (type == PassmarkLineType::ExternalVMark || type == PassmarkLineType::InternalVMark)
+        {
+            type = PassmarkLineType::CheckMark;
+        }
+    }
+
+    switch (type)
     {
         case PassmarkLineType::OneLine:
         case PassmarkLineType::TwoLines:
@@ -1876,7 +1931,7 @@ auto VDxfEngine::ExportASTMNotchDataDependecy(const VLayoutPassmark &passmark, c
     attdef->height = 3.0;
     attdef->text = "Link:" + notchLayer;
     attdef->name = "Dependency";
-    attdef->flags = 2;                // this is a constant attribute
+    attdef->flags |= 0x2;             // this is a constant attribute
     attdef->horizontalAdjustment = 3; // aligned (if vertical alignment = 0)
 
     return attdef;
@@ -2136,6 +2191,77 @@ void VDxfEngine::ASTMDrawFoldLineTwoArrows(const QVector<QVector<QPointF>> &poin
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+void VDxfEngine::CheckLabelCompatibilityRPCADV09(const VLayoutPiece &detail)
+{
+    // According to ASTM standard Piece System Text is mandatory.
+    // Richpeace CAD V9. At least 'Piece Name:' or 'Size:' identifiers must be present.
+    const QStringList strings = detail.GetPieceText();
+    bool pieceNameFound = false;
+    bool sizeFound = false;
+
+    for (const QString &line : strings)
+    {
+        if (line.startsWith("Piece Name:"_L1))
+        {
+            pieceNameFound = true;
+        }
+        else if (line.startsWith("Size:"_L1))
+        {
+            sizeFound = true;
+        }
+
+        // Break the loop early if both conditions are met
+        if (pieceNameFound || sizeFound)
+        {
+            break;
+        }
+    }
+
+    if (!pieceNameFound && !sizeFound)
+    {
+        qCWarning(vDxf) << qUtf8Printable(
+            QApplication::translate("VDxfEngine", "Piece '%1'. 'Piece Name:' or 'Size:' identifier is missing.")
+                .arg(detail.GetName()));
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VDxfEngine::CheckLabelCompatibilityRPCADV08(const VLayoutPiece &detail)
+{
+    // According to ASTM standard Piece System Text is mandatory.
+    // Richpeace CAD V8. If present 'Piece Name:' identifier, 'Size:' identifier must also be present.
+    const QStringList strings = detail.GetPieceText();
+    bool pieceNameFound = false;
+    bool sizeFound = false;
+
+    for (const QString &line : strings)
+    {
+        if (line.startsWith("Piece Name:"_L1))
+        {
+            pieceNameFound = true;
+        }
+        else if (line.startsWith("Size:"_L1))
+        {
+            sizeFound = true;
+        }
+
+        // Break the loop early if both conditions are met
+        if (pieceNameFound && sizeFound)
+        {
+            break;
+        }
+    }
+
+    if (pieceNameFound && !sizeFound)
+    {
+        qCWarning(vDxf) << qUtf8Printable(
+            QApplication::translate("VDxfEngine",
+                                    "Piece '%1'. 'Piece Name:' identifier requires 'Size:' identifier to be present.")
+                .arg(detail.GetName()));
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 template <class P, class V, class C>
 auto VDxfEngine::CreateAAMAPolygon(const QVector<C> &polygon, const UTF8STRING &layer, bool forceClosed) -> P *
 {
@@ -2156,7 +2282,17 @@ auto VDxfEngine::CreateAAMAPolygon(const QVector<C> &polygon, const UTF8STRING &
 
     for (const auto &p : polygon)
     {
-        poly->addVertex(V(FromPixel(p.x(), m_varInsunits), FromPixel(GetSize().height() - p.y(), m_varInsunits)));
+        V vertex(FromPixel(p.x(), m_varInsunits), FromPixel(GetSize().height() - p.y(), m_varInsunits));
+
+        if constexpr (std::is_same_v<V, DRW_Vertex>)
+        {
+            if (p.CurvePoint())
+            {
+                vertex.flags |= 0x1;
+            }
+        }
+
+        poly->addVertex(vertex);
     }
 
     return poly;

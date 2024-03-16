@@ -82,6 +82,8 @@ public:
     //@brief returns export type set, defaults 0 - svg
     auto OptExportType() const -> int;
 
+    auto DXFApparelCompatibilityType() const -> int;
+
     auto IsBinaryDXF() const -> bool;
     auto IsNoGrainline() const -> bool;
     auto IsTextAsPaths() const -> bool;

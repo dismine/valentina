@@ -75,6 +75,9 @@ public:
     void SetBoundaryTogetherWithNotches(bool value);
     auto IsBoundaryTogetherWithNotches() const -> bool;
 
+    auto DxfApparelCompatibility() const -> DXFApparelCompatibility;
+    void SetDxfApparelCompatibility(DXFApparelCompatibility mode);
+
     auto ExportToAAMA(const QVector<VLayoutPiece> &details) const -> bool;
     auto ExportToASTM(const QVector<VLayoutPiece> &details) const -> bool;
 

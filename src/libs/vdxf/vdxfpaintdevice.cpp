@@ -215,6 +215,24 @@ auto VDxfPaintDevice::IsBoundaryTogetherWithNotches() const -> bool
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+auto VDxfPaintDevice::DxfApparelCompatibility() const -> DXFApparelCompatibility
+{
+    return m_engine->DxfApparelCompatibility();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VDxfPaintDevice::SetDxfApparelCompatibility(DXFApparelCompatibility mode)
+{
+    if (m_engine->isActive())
+    {
+        qWarning("VDxfPaintDevice::SetDxfApparelCompatibility(), cannot set compatibility mode while Dxf is being "
+                 "generated");
+        return;
+    }
+    m_engine->SetDxfApparelCompatibility(mode);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 auto VDxfPaintDevice::ExportToAAMA(const QVector<VLayoutPiece> &details) const -> bool
 {
     m_engine->setActive(true);

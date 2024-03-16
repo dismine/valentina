@@ -129,6 +129,18 @@ void RestoreDetailsAfterDXF(const QString &placeholder, const QList<QGraphicsIte
 } // namespace
 
 //---------------------------------------------------------------------------------------------------------------------
+auto VLayoutExporter::DxfApparelCompatibility() const -> DXFApparelCompatibility
+{
+    return m_dxfCompatibility;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VLayoutExporter::SetDxfApparelCompatibility(DXFApparelCompatibility mode)
+{
+    m_dxfCompatibility = mode;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 auto VLayoutExporter::IsShowGrainline() const -> bool
 {
     return m_showGrainline;
@@ -325,6 +337,7 @@ void VLayoutExporter::ExportToAAMADXF(const QVector<VLayoutPiece> &details) cons
     generator.SetXScale(m_xScale);
     generator.SetYScale(m_yScale);
     generator.SetBoundaryTogetherWithNotches(m_togetherWithNotches);
+    generator.SetDxfApparelCompatibility(m_dxfCompatibility);
     if (not generator.ExportToAAMA(details))
     {
         qCritical() << tr("Can't create an AAMA dxf file.") << generator.ErrorString();
@@ -344,6 +357,7 @@ void VLayoutExporter::ExportToASTMDXF(const QVector<VLayoutPiece> &details) cons
     generator.SetXScale(m_xScale);
     generator.SetYScale(m_yScale);
     generator.SetBoundaryTogetherWithNotches(m_togetherWithNotches);
+    generator.SetDxfApparelCompatibility(m_dxfCompatibility);
     if (not generator.ExportToASTM(details))
     {
         qCritical() << tr("Can't create an ASTM dxf file.") << generator.ErrorString();

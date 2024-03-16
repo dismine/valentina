@@ -97,6 +97,20 @@ The path to output destination folder. By default the directory at which the app
 .RE
 .IP "--bdxf"
 .RB "Export dxf in binary form."
+.IP "--dxfApparelComp <Mode number>" 
+.RB "Number corresponding to compatibility mode for DXF AAMA/ASTM format (default = 0, " "export mode" "):
+.RS 
+.BR "*" " By standard = 0,"
+.RE
+.RS 
+.BR "*" " Richpeace CAD V8 = 1,"
+.RE
+.RS 
+.BR "*" " Richpeace CAD V9 = 2,"
+.RE
+.RS 
+.BR "*" " Richpeace CAD V10 = 3."
+.RE
 .IP "--noGrainline"
 .RB "Show/hide grainline when export layout."
 .IP "--text2paths"

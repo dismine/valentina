@@ -182,6 +182,9 @@ public:
     auto GetDetailExportFormat() const -> qint8;
     void SetDetailExportFormat(qint8 format);
 
+    auto GetDxfCompatibility() const -> qint8;
+    void SetDxfCompatibility(qint8 type);
+
     auto GetHistorySearchHistory() const -> QStringList;
     void SetHistorySearchHistory(const QStringList &history);
 

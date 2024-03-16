@@ -105,6 +105,9 @@ public:
     auto GetLayoutExportFormat() const -> qint8;
     void SetLayoutExportFormat(qint8 format);
 
+    auto GetDxfCompatibility() const -> qint8;
+    void SetDxfCompatibility(qint8 type);
+
     auto GetLayoutLineWidth() const -> int;
     void SetLayoutLineWidth(int width);
 

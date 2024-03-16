@@ -46,6 +46,7 @@ const QString SINGLE_OPTION_PAGETEMPLATE = QStringLiteral("p");
 const QString LONG_OPTION_EXP2FORMAT = QStringLiteral("format");
 const QString SINGLE_OPTION_EXP2FORMAT = QStringLiteral("f");
 
+const QString LONG_OPTION_DXF_APPAREL_COMP = QStringLiteral("dxfApparelComp");
 const QString LONG_OPTION_BINARYDXF = QStringLiteral("bdxf");
 const QString LONG_OPTION_NOGRAINLINE = QStringLiteral("noGrainline"); // NOLINT
 const QString LONG_OPTION_TEXT2PATHS = QStringLiteral("text2paths");
@@ -152,6 +153,7 @@ auto AllKeys() -> QStringList
                        SINGLE_OPTION_PAGETEMPLATE,
                        LONG_OPTION_EXP2FORMAT,
                        SINGLE_OPTION_EXP2FORMAT,
+                       LONG_OPTION_DXF_APPAREL_COMP,
                        LONG_OPTION_BINARYDXF,
                        LONG_OPTION_NOGRAINLINE,
                        LONG_OPTION_TEXT2PATHS,

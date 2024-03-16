@@ -29,6 +29,7 @@
 #ifndef DIALOGSAVELAYOUT_H
 #define DIALOGSAVELAYOUT_H
 
+#include "../vdxf/dxfdef.h"
 #include "../vlayout/dialogs/vabstractlayoutdialog.h"
 #include "../vlayout/vlayoutdef.h"
 #include "../vmisc/def.h"
@@ -56,10 +57,15 @@ public:
     void SetBinaryDXFFormat(bool binary);
     auto IsBinaryDXFFormat() const -> bool;
 
+    auto DxfCompatibility() const -> DXFApparelCompatibility;
+    void SetDxfCompatibility(DXFApparelCompatibility type);
+
     void SetShowGrainline(bool show);
     auto IsShowGrainline() const -> bool;
 
     static auto MakeHelpFormatList() -> QString;
+    static auto MakeHelpDxfApparelCompatibilityList() -> QString;
+
     void SetDestinationPath(const QString &cmdDestinationPath);
 
     auto Mode() const -> Draw;
@@ -117,6 +123,8 @@ private:
 
     void ReadSettings();
     void WriteSettings() const;
+
+    void InitDxfCompatibility();
 };
 
 #endif // DIALOGSAVELAYOUT_H

@@ -223,8 +223,12 @@ auto dxfRW::writeEntity(DRW_Entity *ent) -> bool
     {
         writer->writeString(100, "AcDbEntity");
     }
+
     if (ent->space == 1)
+    {
         writer->writeInt16(67, 1);
+    }
+
     if (version > DRW::AC1009)
     {
         writer->writeUtf8String(8, ent->layer);
@@ -1062,7 +1066,9 @@ auto dxfRW::writePolyline(DRW_Polyline *ent) -> bool
         }
     }
     else
+    {
         writer->writeInt16(66, 1);
+    }
     writer->writeDouble(10, 0.0);
     writer->writeDouble(20, 0.0);
     writer->writeDouble(30, ent->basePoint.z);
@@ -1514,7 +1520,9 @@ auto dxfRW::writeInsert(DRW_Insert *ent) -> bool
         writer->writeUtf8String(2, ent->name);
     }
     else
+    {
         writer->writeUtf8Caps(2, ent->name);
+    }
     writer->writeDouble(10, ent->basePoint.x);
     writer->writeDouble(20, ent->basePoint.y);
     writer->writeDouble(30, ent->basePoint.z);
@@ -1751,7 +1759,9 @@ auto dxfRW::writeBlock(DRW_Block *bk) -> bool
         writer->writeUtf8String(2, bk->name);
     }
     else
+    {
         writer->writeUtf8Caps(2, bk->name);
+    }
     writer->writeInt16(70, bk->flags);
     writer->writeDouble(10, bk->basePoint.x);
     writer->writeDouble(20, bk->basePoint.y);
@@ -1760,9 +1770,13 @@ auto dxfRW::writeBlock(DRW_Block *bk) -> bool
         writer->writeDouble(30, bk->basePoint.z);
     }
     if (version > DRW::AC1009)
+    {
         writer->writeUtf8String(3, bk->name);
+    }
     else
+    {
         writer->writeUtf8Caps(3, bk->name);
+    }
     writer->writeString(1, "");
 
     return true;

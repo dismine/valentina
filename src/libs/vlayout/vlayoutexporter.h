@@ -34,6 +34,7 @@
 #include <QRectF>
 #include <QString>
 
+#include "../vdxf/dxfdef.h"
 #include "../vlayout/vlayoutdef.h"
 
 class QGraphicsScene;
@@ -76,6 +77,9 @@ public:
 
     auto BinaryDxfFormat() const -> bool;
     void SetBinaryDxfFormat(bool binaryFormat);
+
+    auto DxfApparelCompatibility() const -> DXFApparelCompatibility;
+    void SetDxfApparelCompatibility(DXFApparelCompatibility mode);
 
     auto IsShowGrainline() const -> bool;
     void SetShowGrainline(bool show);
@@ -138,6 +142,7 @@ private:
     bool m_singleStrokeOutlineFont{false};
     int m_penWidth{1};
     bool m_togetherWithNotches{false};
+    DXFApparelCompatibility m_dxfCompatibility{DXFApparelCompatibility::STANDARD};
 
     void ExportToPDF(QGraphicsScene *scene, const QList<QGraphicsItem *> &details, const QString &filename) const;
 };

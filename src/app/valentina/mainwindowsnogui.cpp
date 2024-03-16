@@ -680,10 +680,12 @@ void MainWindowsNoGUI::ExportApparelLayout(const QVector<VLayoutPiece> &details,
     {
         case LayoutExportFormats::DXF_ASTM:
             exporter.SetDxfVersion(DRW::AC1009);
+            exporter.SetDxfApparelCompatibility(m_dialogSaveLayout->DxfCompatibility());
             exporter.ExportToASTMDXF(details);
             break;
         case LayoutExportFormats::DXF_AAMA:
             exporter.SetDxfVersion(DRW::AC1009);
+            exporter.SetDxfApparelCompatibility(m_dialogSaveLayout->DxfCompatibility());
             exporter.ExportToAAMADXF(details);
             break;
         case LayoutExportFormats::RLD:

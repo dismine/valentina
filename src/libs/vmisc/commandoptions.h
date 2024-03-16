@@ -46,6 +46,7 @@ extern const QString SINGLE_OPTION_PAGETEMPLATE;
 extern const QString LONG_OPTION_EXP2FORMAT;
 extern const QString SINGLE_OPTION_EXP2FORMAT;
 
+extern const QString LONG_OPTION_DXF_APPAREL_COMP;
 extern const QString LONG_OPTION_BINARYDXF;
 extern const QString LONG_OPTION_NOGRAINLINE;
 extern const QString LONG_OPTION_TEXT2PATHS;

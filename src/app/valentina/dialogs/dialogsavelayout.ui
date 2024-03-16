@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>544</width>
-    <height>439</height>
+    <height>472</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -148,6 +148,20 @@
            <string>Boundary together with notches</string>
           </property>
          </widget>
+        </item>
+        <item>
+         <layout class="QHBoxLayout" name="horizontalLayout_8">
+          <item>
+           <widget class="QLabel" name="labelDxfCompatibility">
+            <property name="text">
+             <string>Compatibility:</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QComboBox" name="comboBoxDxfCompatibility"/>
+          </item>
+         </layout>
         </item>
         <item>
          <widget class="QLabel" name="labelOptionsNotAvailable">
