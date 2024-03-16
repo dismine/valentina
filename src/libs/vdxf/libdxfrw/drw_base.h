@@ -249,14 +249,13 @@ static inline auto DRW_FuzzyComparePossibleNulls(double p1, double p2) -> bool
     {
         return qFuzzyIsNull(p2);
     }
+
     if (qFuzzyIsNull(p2))
     {
         return false;
     }
-    else
-    {
-        return qFuzzyCompare(p1, p2);
-    }
+
+    return qFuzzyCompare(p1, p2);
 }
 
 //! Class to handle 3D coordinate point
