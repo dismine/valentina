@@ -109,8 +109,13 @@ void VAbstractConverter::ReserveFile() const
     // For such cases we will store old version in a reserve file.
     QString error;
     QFileInfo const info(m_convertedFileName);
-    const QString reserveFileName = u"%1/%2(v%3).%4.bak"_s.arg(info.absoluteDir().absolutePath(), info.baseName(),
-                                                               GetFormatVersionStr(), info.completeSuffix());
+#if defined(Q_OS_UNIX) || defined(Q_OS_MACOS)
+    const QChar hidden = QChar('.');
+#else
+    const QChar hidden;
+#endif
+    const QString reserveFileName = u"%1/%2%3(v%4).%5.bak"_s.arg(
+        info.absoluteDir().absolutePath(), hidden, info.baseName(), GetFormatVersionStr(), info.completeSuffix());
     if (not SafeCopy(m_convertedFileName, reserveFileName, error))
     {
         // #ifdef Q_OS_WIN32
