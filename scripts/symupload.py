@@ -4,6 +4,7 @@ import subprocess
 import sys
 import glob
 import zipfile
+import requests
 
 database = "valentina"
 
@@ -21,17 +22,6 @@ def debug_extension():
 
     return debug_ext
 
-def check_binary(binary):
-    # Check if binary file exists
-    if not os.path.exists(binary):
-        # If binary file doesn't exist, it may be part of a framework
-        framework_binary = os.path.basename(binary.replace(".framework", ""))
-        for root, dirs, files in os.walk(binary):
-            for file in files:
-                if file == framework_binary:
-                    return os.path.join(root, file)
-    return binary
-
 def zip_sym(sym_file):
   zip_sym_file = sym_file + ".zip"
   with zipfile.ZipFile(zip_sym_file, 'w', zipfile.ZIP_DEFLATED) as zipf:
@@ -48,24 +38,10 @@ def generate_sym_files(install_root):
 
     for debug_file in debug_files:
         print(f"Generating symbols for: {os.path.basename(debug_file)}")
-        if platform == "win32":
-            # For Windows, return the executable file
-            sym_file = os.path.splitext(debug_file)[0] + ".exe"
-        else:
-            sym_file = os.path.splitext(debug_file)[0] + ".sym"
-            if platform == "darwin":
-                binary = check_binary(os.path.splitext(debug_file)[0])
-                dump_syms_cmd = ["dump_syms", "-g", debug_file, binary]
-            elif platform == "linux":
-                dump_syms_cmd = ["dump_syms", debug_file]
 
-            with open(sym_file, "w") as f:
-                subprocess.run(dump_syms_cmd, check=True, stdout=f)
-
-            if platform == "linux":
-                # When symbols are dumped from a debug file Crashpad creates an incorrect module name.
-                sed_cmd = ["sed", "-i", "1s/.debug//", sym_file]
-                subprocess.run(sed_cmd, check=True)
+        sym_file = os.path.splitext(debug_file)[0] + ".sym"
+        dump_syms_cmd = ["dump_syms", '-o', sym_file, debug_file]
+        subprocess.run(dump_syms_cmd, check=True)
 
         sym_files.append((debug_file, zip_sym(sym_file)))
 
@@ -89,7 +65,7 @@ def generate_version_string(val_version, commit_hash, qt_version):
 
 def get_app_name(sym_file):
     # Get the base name of the symbol file without extension
-    base_name = os.path.splitext(os.path.basename(sym_file))[0].lower()
+    base_name = os.path.basename(sym_file).split(".sym")[0].lower()
 
     # Determine the platform
     platform = sys.platform
@@ -114,18 +90,18 @@ def upload_symbols(install_root, val_version, commit_hash, qt_version, clean=Fal
         app_name = get_app_name(sym_file)
         print(f"Uploading symbols for application {app_name}")
 
-        if platform == "linux":
-            upload_cmd = ["sym_upload", sym_file, f"https://{database}.bugsplat.com/post/bp/symbol/breakpadsymbols.php?appName={app_name}&appVer={app_version}"]
-        elif platform == "darwin":
-            upload_cmd = ["symupload", sym_file, f"https://{database}.bugsplat.com/post/bp/symbol/breakpadsymbols.php?appName={app_name}&appVer={app_version}"]
-        elif platform == "win32":
-            upload_cmd = ["symupload.exe", "--product", app_name, sym_file, f"https://{database}.bugsplat.com/post/bp/symbol/breakpadsymbols.php?appName={app_name}&appVer={app_version}"]
+        sym_file_name = os.path.basename(sym_file)
+        url = f"https://{database}.bugsplat.com/post/bp/symbol/breakpadsymbols.php?appName={app_name}&appVer={app_version}&code_file={sym_file_name}"
 
-        try:
-            subprocess.run(upload_cmd, check=True)
+        files = {'symbol_file': (f'{sym_file_name}', open(sym_file, 'rb'))}
+        response = requests.post(url, files=files)
+
+        if response.status_code == 200:
             print(f"Symbol file '{sym_file}' uploaded successfully.")
-        except subprocess.CalledProcessError as e:
-            print(f"Error: {e}")
+        else:
+            print("Request failed with status code:", response.status_code)
+            print("Server response:")
+            print(response.text)
 
     # Cleanup if requested
     if clean:

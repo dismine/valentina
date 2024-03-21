@@ -4,7 +4,7 @@ from conan import ConanFile
 
 class Recipe(ConanFile):
   settings = "os"
-  requires = "xerces-c/[~3.2]", "crashpad/cci.20220219", "breakpad/cci.20210521"
+  requires = "xerces-c/[~3.2]", "sentry-crashpad/0.6.5"
   options = {
       "with_xerces": [True, False], 
       "with_crash_reporting": [True, False]
@@ -27,5 +27,4 @@ class Recipe(ConanFile):
       del self.requires["xerces-c"]
 
     if not self.options.with_crash_reporting:
-      del self.requires["crashpad/cci.20220219"]
-      del self.requires["breakpad/cci.20210521"]
+      del self.requires["sentry-crashpad/0.6.5"]

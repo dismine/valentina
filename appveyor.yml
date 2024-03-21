@@ -655,7 +655,7 @@ for:
 
       fi
     - sudo python3 -m pip install --upgrade pip
-    - pip3 install --user --upgrade pip dropbox py7zr 'urllib3<2.0' conan==1.63.0
+    - pip3 install --user --upgrade pip dropbox py7zr 'urllib3<2.0' conan==1.63.0 requests
     - export QTDIR=`$(brew --prefix qt6)`
     - export PATH="$PATH:`python3 -m site --user-base`/bin:$QTDIR/bin"
     - echo $PATH
@@ -689,13 +689,11 @@ for:
     - qbs setup-qt $(brew --prefix qt6)/bin/qmake qt6
     - qbs config defaultProfile qt6
     - qbs config profiles.qt6.baseProfile clang
-    - conan install . -s os=Macos --build=missing -o with_crash_reporting=True -pr valentina -g virtualrunenv
+    - conan install . -s os=Macos --build=missing -o with_crash_reporting=True -pr valentina
     - qbs build -f valentina.qbs -d ${APPVEYOR_BUILD_FOLDER}/build --jobs $(nproc) config:release modules.buildconfig.enableUnitTests:false modules.buildconfig.enableMultiBundle:${MULTI_BUNDLE} qbs.installRoot:${APPVEYOR_BUILD_FOLDER}/build/install-root profile:qt6 project.minimumMacosVersion:${MACOS_DEPLOYMENT_TARGET} modules.buildconfig.enableCcache:true moduleProviders.qbspkgconfig.extraPaths:$(brew --prefix xerces-c)/lib/pkgconfig,$(brew --prefix qt6)/lib/pkgconfig,$(brew --prefix openssl@1.1)/lib/pkgconfig "modules.buildconfig.signingIdentity:$MACOS_CERTIFICATE_NAME" modules.macdeployqt.libpath:$(brew --prefix qt6)/lib,$(brew --prefix poppler)/lib modules.macdeployqt.macdeployqtProgramBinPath:${HOME}/macdeployqt-install-dir project.enableConan:true project.conanWithCrashReporting:true
     - export CRASH_QT_VERSION=$($QTDIR/bin/qmake -query QT_VERSION | awk -F. '{print $1 "_" $2}')
     - export CRASH_SHORT_SHA=$(git log --pretty=format:%h -n 1)
-    - source activate_run.sh
     - python3 scripts/symupload.py ${APPVEYOR_BUILD_FOLDER}/build/install-root $VALENTINA_VERSION $CRASH_SHORT_SHA $CRASH_QT_VERSION --clean
-    - source deactivate_run.sh
     - qbs build -f valentina.qbs -d ${APPVEYOR_BUILD_FOLDER}/build -p 'Valentina DMG' --force-probe-execution --jobs $(nproc) config:release modules.buildconfig.enableUnitTests:false modules.buildconfig.enableMultiBundle:${MULTI_BUNDLE} qbs.installRoot:${APPVEYOR_BUILD_FOLDER}/build/install-root profile:qt6 project.minimumMacosVersion:${MACOS_DEPLOYMENT_TARGET} modules.buildconfig.enableCcache:true  moduleProviders.qbspkgconfig.extraPaths:$(brew --prefix xerces-c)/lib/pkgconfig,$(brew --prefix qt6)/lib/pkgconfig,$(brew --prefix openssl@1.1)/lib/pkgconfig "modules.buildconfig.signingIdentity:$MACOS_CERTIFICATE_NAME" modules.macdeployqt.libpath:$(brew --prefix qt6)/lib,$(brew --prefix poppler)/lib modules.macdeployqt.macdeployqtProgramBinPath:${HOME}/macdeployqt-install-dir project.enableConan:true project.conanWithCrashReporting:true
     # Store the notarization credentials so that we can prevent a UI password dialog
     # from blocking the CI
@@ -854,7 +852,7 @@ for:
 
       fi
     - sudo python3 -m pip install --upgrade pip
-    - pip3 install --user --upgrade pip dropbox py7zr 'urllib3<2.0' conan==1.63.0
+    - pip3 install --user --upgrade pip dropbox py7zr 'urllib3<2.0' conan==1.63.0 requests
     - export PATH="`brew --prefix qbs`/bin:$PATH"
     - echo $PATH
     - clang --version
@@ -886,13 +884,11 @@ for:
     - qbs setup-qt ${QTDIR}/bin/qmake qt5
     - qbs config defaultProfile qt5
     - qbs config profiles.qt5.baseProfile clang
-    - conan install . -s os=Macos --build=missing -o with_crash_reporting=True -pr valentina -g virtualrunenv
+    - conan install . -s os=Macos --build=missing -o with_crash_reporting=True -pr valentina
     - qbs build -f valentina.qbs -d ${APPVEYOR_BUILD_FOLDER}/build --jobs $(nproc) config:release modules.buildconfig.enableUnitTests:false modules.buildconfig.enableMultiBundle:${MULTI_BUNDLE} qbs.installRoot:${APPVEYOR_BUILD_FOLDER}/build/install-root profile:qt5 project.minimumMacosVersion:${MACOS_DEPLOYMENT_TARGET} modules.buildconfig.enableCcache:true "modules.buildconfig.signingIdentity:$MACOS_CERTIFICATE_NAME" modules.macdeployqt.libpath:${QTDIR}/lib modules.macdeployqt.pluginspath:${QTDIR}/plugins modules.macdeployqt.macdeployqtProgramBinPath:${HOME}/macdeployqt-install-dir project.enableConan:true project.conanWithCrashReporting:true
     - export CRASH_QT_VERSION=$($QTDIR/bin/qmake -query QT_VERSION | awk -F. '{print $1 "_" $2}')
     - export CRASH_SHORT_SHA=$(git log --pretty=format:%h -n 1)
-    - source activate_run.sh
     - python3 scripts/symupload.py ${APPVEYOR_BUILD_FOLDER}/build/install-root $VALENTINA_VERSION $CRASH_SHORT_SHA $CRASH_QT_VERSION --clean
-    - source deactivate_run.sh
     - qbs build -f valentina.qbs -d ${APPVEYOR_BUILD_FOLDER}/build -p 'Valentina DMG' --force-probe-execution --jobs $(nproc) config:release modules.buildconfig.enableUnitTests:false modules.buildconfig.enableMultiBundle:${MULTI_BUNDLE} qbs.installRoot:${APPVEYOR_BUILD_FOLDER}/build/install-root profile:qt5 project.minimumMacosVersion:${MACOS_DEPLOYMENT_TARGET} modules.buildconfig.enableCcache:true "modules.buildconfig.signingIdentity:$MACOS_CERTIFICATE_NAME" modules.macdeployqt.libpath:${QTDIR}/lib modules.macdeployqt.pluginspath:${QTDIR}/plugins modules.macdeployqt.macdeployqtProgramBinPath:${HOME}/macdeployqt-install-dir project.enableConan:true project.conanWithCrashReporting:true
     # Store the notarization credentials so that we can prevent a UI password dialog
     # from blocking the CI
