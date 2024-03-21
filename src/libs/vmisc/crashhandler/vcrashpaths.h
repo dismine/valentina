@@ -44,7 +44,7 @@ public:
 #if defined(Q_OS_UNIX)
     static auto GetPlatformString(const QString &string) -> std::string;
 #elif defined(Q_OS_WINDOWS)
-    static auto GetPlatformString(QString string) -> std::wstring;
+    static auto GetPlatformString(const QString &string) -> std::wstring;
 #else
 #error GetPlatformString not implemented on this platform
 #endif
