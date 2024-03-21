@@ -62,6 +62,7 @@ environment:
       WINDEPLOYQT_NO_COMPILER_RUNTIME: "false"
       DEPLOY: true
       RUN_TESTS: true
+      WITH_CRASH_REPORTING: True
 
     - job_name: Windows_Qt_5_15_(qbs_GCC_x86)
       APPVEYOR_BUILD_WORKER_IMAGE: Visual Studio 2019
@@ -84,6 +85,7 @@ environment:
       WINDEPLOYQT_NO_COMPILER_RUNTIME: "false"
       DEPLOY: true
       RUN_TESTS: true
+      WITH_CRASH_REPORTING: False
 
 #    - job_name: Windows_Qt_6_5_(GCC_x64)
 #      APPVEYOR_BUILD_WORKER_IMAGE: Visual Studio 2022
@@ -107,6 +109,7 @@ environment:
 #      WINDEPLOYQT_NO_COMPILER_RUNTIME: "true"
 #      DEPLOY: true
 #      RUN_TESTS: true
+#      WITH_CRASH_REPORTING: False   
 
     - job_name: MacOS_12_Qt_5_15 (qbs, multibundle)
       APPVEYOR_BUILD_WORKER_IMAGE: macos-monterey
@@ -193,6 +196,7 @@ environment:
       WINDEPLOYQT_NO_COMPILER_RUNTIME: "false"
       DEPLOY: false
       RUN_TESTS: true
+      WITH_CRASH_REPORTING: False
 
     - job_name: Windows_Qt_5_15_(qbs_MSVC_x64)
       APPVEYOR_BUILD_WORKER_IMAGE: Visual Studio 2019
@@ -213,6 +217,7 @@ environment:
       WINDEPLOYQT_NO_COMPILER_RUNTIME: "false"
       DEPLOY: false
       RUN_TESTS: true 
+      WITH_CRASH_REPORTING: False
 
     - job_name: Windows_Qt_5_15_(make_GCC_x64)
       APPVEYOR_BUILD_WORKER_IMAGE: Visual Studio 2019
@@ -399,7 +404,7 @@ for:
 
   build_script:
     - conan profile list
-    - conan install . -s os=Windows --build=missing -o with_crash_reporting=True -o with_xerces=True -pr valentina -g virtualrunenv
+    - conan install . -s os=Windows --build=missing -o with_crash_reporting=%WITH_CRASH_REPORTING% -o with_xerces=True -pr=valentina
     - qbs build -f valentina.qbs -d %APPVEYOR_BUILD_FOLDER%\build --jobs %NUMBER_OF_PROCESSORS% config:release qbs.installRoot:%APPVEYOR_BUILD_FOLDER%\build\install-root\valentina profile:qt6 project.enableConan:true project.conanWithCrashReporting:true project.conanWithXerces:true modules.buildconfig.enableCcache:false project.conanProfiles:valentina modules.buildconfig.enablePCH:%ENABLE_PCH% modules.windeployqt.windeployqtProgramBinPath:%WINDEPLOYQT_BIN_PATH% modules.windeployqt.compilerRuntime:%WINDEPLOYQT_COMPILER_RUNTIME% modules.windeployqt.noCompilerRuntime:%WINDEPLOYQT_NO_COMPILER_RUNTIME%
   
   test_script:
@@ -408,16 +413,14 @@ for:
 
   deploy_script:
     - ps: |
-        if ($env:DEPLOY -eq "true") {
+        if ($env:WITH_CRASH_REPORTING -eq "True") {
           $qmakeOutput = %QTDIR%\bin\%QMAKE% -query QT_VERSION
           $majorMinorVersion = $qmakeOutput -replace '\D+(\d+)\.(\d+).*', '$1_$2'
           $env:CRASH_QT_VERSION = $majorMinorVersion
 
           $env:CRASH_SHORT_SHA = git log --pretty=format:%h -n 1
         }
-    - ps: activate_run.ps1
-    - if "%DEPLOY%" == "true" (python3 scripts/symupload.py %APPVEYOR_BUILD_FOLDER%\build\install-root\valentina $VALENTINA_VERSION $CRASH_SHORT_SHA $CRASH_QT_VERSION --clean)
-    - ps: deactivate_run.ps1
+    - if "%WITH_CRASH_REPORTING%" == "True" (python3 scripts/symupload.py %APPVEYOR_BUILD_FOLDER%\build\install-root\valentina $VALENTINA_VERSION $CRASH_SHORT_SHA $CRASH_QT_VERSION --clean)
     - if "%DEPLOY%" == "true" (qbs build -f valentina.qbs -d %APPVEYOR_BUILD_FOLDER%\build -p ValentinaSetup --jobs %NUMBER_OF_PROCESSORS% config:release qbs.installRoot:%APPVEYOR_BUILD_FOLDER%\build\install-root\valentina profile:qt6 project.enableConan:true project.conanWithCrashReporting:true project.conanWithXerces:true modules.buildconfig.enableCcache:false project.conanProfiles:valentina modules.buildconfig.enablePCH:%ENABLE_PCH% modules.windeployqt.windeployqtProgramBinPath:%WINDEPLOYQT_BIN_PATH% modules.windeployqt.compilerRuntime:%WINDEPLOYQT_COMPILER_RUNTIME% modules.windeployqt.noCompilerRuntime:%WINDEPLOYQT_NO_COMPILER_RUNTIME%)
     - ps: scripts/appveyor-deploy.ps1
 
@@ -689,7 +692,7 @@ for:
     - qbs setup-qt $(brew --prefix qt6)/bin/qmake qt6
     - qbs config defaultProfile qt6
     - qbs config profiles.qt6.baseProfile clang
-    - conan install . -s os=Macos --build=missing -o with_crash_reporting=True -pr valentina
+    - conan install . -s os=Macos --build=missing -o with_crash_reporting=True -pr=valentina
     - qbs build -f valentina.qbs -d ${APPVEYOR_BUILD_FOLDER}/build --jobs $(nproc) config:release modules.buildconfig.enableUnitTests:false modules.buildconfig.enableMultiBundle:${MULTI_BUNDLE} qbs.installRoot:${APPVEYOR_BUILD_FOLDER}/build/install-root profile:qt6 project.minimumMacosVersion:${MACOS_DEPLOYMENT_TARGET} modules.buildconfig.enableCcache:true moduleProviders.qbspkgconfig.extraPaths:$(brew --prefix xerces-c)/lib/pkgconfig,$(brew --prefix qt6)/lib/pkgconfig,$(brew --prefix openssl@1.1)/lib/pkgconfig "modules.buildconfig.signingIdentity:$MACOS_CERTIFICATE_NAME" modules.macdeployqt.libpath:$(brew --prefix qt6)/lib,$(brew --prefix poppler)/lib modules.macdeployqt.macdeployqtProgramBinPath:${HOME}/macdeployqt-install-dir project.enableConan:true project.conanWithCrashReporting:true
     - export CRASH_QT_VERSION=$($QTDIR/bin/qmake -query QT_VERSION | awk -F. '{print $1 "_" $2}')
     - export CRASH_SHORT_SHA=$(git log --pretty=format:%h -n 1)
@@ -884,7 +887,7 @@ for:
     - qbs setup-qt ${QTDIR}/bin/qmake qt5
     - qbs config defaultProfile qt5
     - qbs config profiles.qt5.baseProfile clang
-    - conan install . -s os=Macos --build=missing -o with_crash_reporting=True -pr valentina
+    - conan install . -s os=Macos --build=missing -o with_crash_reporting=True -pr=valentina
     - qbs build -f valentina.qbs -d ${APPVEYOR_BUILD_FOLDER}/build --jobs $(nproc) config:release modules.buildconfig.enableUnitTests:false modules.buildconfig.enableMultiBundle:${MULTI_BUNDLE} qbs.installRoot:${APPVEYOR_BUILD_FOLDER}/build/install-root profile:qt5 project.minimumMacosVersion:${MACOS_DEPLOYMENT_TARGET} modules.buildconfig.enableCcache:true "modules.buildconfig.signingIdentity:$MACOS_CERTIFICATE_NAME" modules.macdeployqt.libpath:${QTDIR}/lib modules.macdeployqt.pluginspath:${QTDIR}/plugins modules.macdeployqt.macdeployqtProgramBinPath:${HOME}/macdeployqt-install-dir project.enableConan:true project.conanWithCrashReporting:true
     - export CRASH_QT_VERSION=$($QTDIR/bin/qmake -query QT_VERSION | awk -F. '{print $1 "_" $2}')
     - export CRASH_SHORT_SHA=$(git log --pretty=format:%h -n 1)
