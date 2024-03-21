@@ -10,6 +10,7 @@ Project {
     property bool enableConan: false
     property bool conanWithXerces: false
     property bool conanWithCrashReporting: false
+    property string conanRemote
     property string minimumMacosVersion: undefined
     property string minimumQtVersion: "5.15"
     property stringList conanProfiles: []
@@ -22,6 +23,7 @@ Project {
         conanfilePath: project.sourceDirectory + "/conanfile.py"
         verbose: true
         profiles: conanProfiles
+        remote: conanRemote
         options: {
             var o = {};
             if (conanWithXerces)

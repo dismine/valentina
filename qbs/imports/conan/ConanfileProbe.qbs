@@ -45,6 +45,7 @@ Probe {
     property var settings
     property bool verbose: false
     property stringList profiles: []
+    property string remote
 
     // Output
     property var dependencies
@@ -115,6 +116,11 @@ Probe {
                                                   Utilities.getHash(args.join()));
 
         args = args.concat(["-if", generatedFilesPath]);
+
+        if (remote) {
+            args = args.concat(["--remote", remote]);
+        }
+
         var p = new Process();
         p.start(executable, args);
         while (!p.waitForFinished(500)) {
