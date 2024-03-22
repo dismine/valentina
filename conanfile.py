@@ -24,7 +24,9 @@ class Recipe(ConanFile):
 
   def requirements(self):
     if not self.options.with_xerces:
-      del self.requires["xerces-c"]
+      if "xerces-c" in self.requires:
+        del self.requires["xerces-c"]
 
     if not self.options.with_crash_reporting:
-      del self.requires["sentry-crashpad/0.6.5"]
+      if "sentry-crashpad/0.6.5" in self.requires:
+        del self.requires["sentry-crashpad/0.6.5"]

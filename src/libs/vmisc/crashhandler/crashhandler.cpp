@@ -246,6 +246,6 @@ auto InitializeCrashpad(const QString &appName) -> bool
 
     // Start crash handler
     auto *client = new CrashpadClient();
-    return client->StartHandler(handler, reportsDir, metricsDir, url.toStdString(), annotations.toStdMap(), arguments,
-                                true, true, attachments);
+    return client->StartHandler(handler, reportsDir, metricsDir, url.toStdString(), "", annotations.toStdMap(),
+                                arguments, true, true, attachments);
 }

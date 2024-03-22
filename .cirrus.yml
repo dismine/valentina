@@ -71,7 +71,7 @@ linux_qt6_sonar_task_template: &LINUX_QT6_TASK_SONAR_TEMPLATE
     - cd ${CIRRUS_WORKING_DIR}/build/coverage-dir
     # --preserve-paths helps us avoid name clash for `.gcov` files corresponding to source files
     # with the same name but in different directories.
-    - find .. -name '*.o' | xargs gcov --preserve-paths
+    - find .. -name '*.o' -exec gcov --preserve-paths {} \;
     - cd $CIRRUS_WORKING_DIR
     - sonar-scanner -Dsonar.scm.revision=${CIRRUS_CHANGE_IN_REPO} -Dsonar.links.ci=https://cirrus-ci.com/task/${CIRRUS_TASK_ID} -Dsonar.branch.name=${CIRRUS_BRANCH} -Dsonar.cfamily.gcov.reportsPath="${CIRRUS_WORKING_DIR}/build/coverage-dir"
     - ccache -s
@@ -149,7 +149,7 @@ appimage_task_template: &APPIMAGE_TASK_TEMPLATE
     - conan profile new valentina
     - conan profile update settings.build_type=Release valentina
     - conan profile update settings.os=Linux valentina
-    - conan profile update settings.arch=x86_64
+    - conan profile update settings.arch=x86_64 valentina
     - conan profile update settings.compiler=gcc valentina
     - conan profile update settings.compiler.cppstd=17 valentina
     - conan profile update settings.compiler.libcxx=libstdc++11 valentina
@@ -361,10 +361,6 @@ macos_task_template: &MACOS_TASK_TEMPLATE
     - echo $PATH
     - export PATH="${HOME}/.local/bin:`python3 -m site --user-base`/bin:$PATH"
     - echo $PATH
-    - chmod -R 755 /opt/homebrew/opt/qt6/*
-    - chmod -R 755 /opt/homebrew/opt/openssl@1.1/*
-    - chmod -R 755 /opt/homebrew/opt/poppler/*
-    - chmod -R 755 /opt/homebrew/opt/xerces-c/*
     - python3 --version
     - pip3 install --user --upgrade pip dropbox py7zr 'urllib3<2.0' conan==1.63.0 requests
     - ccache --set-config sloppiness=pch_defines,time_macros max_size="$CCACHE_SIZE"
