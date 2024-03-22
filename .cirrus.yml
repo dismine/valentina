@@ -128,7 +128,7 @@ appimage_task_template: &APPIMAGE_TASK_TEMPLATE
   conan_cache:
     folder: "~/.conan/data"
   install_script:
-    - bash -c "$PACKAGE_MANAGER_INSTALL qt515base qt515svg qt515tools qt515xmlpatterns qt515translations qt515doc qt515imageformats poppler-utils git xvfb ccache build-essential libgl1-mesa-dev libicu-dev python3-pip"
+    - bash -c "$PACKAGE_MANAGER_INSTALL qt515base qt515svg qt515tools qt515xmlpatterns qt515translations qt515doc qt515imageformats poppler-utils git xvfb ccache build-essential libgl1-mesa-dev libicu-dev python3-pip cmake"
     - python3 --version
     - pip3 install --user --upgrade pip dropbox py7zr 'urllib3<2.0' conan==1.63.0 requests
   build_script:
@@ -364,8 +364,8 @@ macos_task_template: &MACOS_TASK_TEMPLATE
     - python3 --version
     - pip3 install --user --upgrade pip dropbox py7zr 'urllib3<2.0' conan==1.63.0 requests
     - ccache --set-config sloppiness=pch_defines,time_macros max_size="$CCACHE_SIZE"
-    - qmake --version
-    - which qmake
+    - qmake6 --version
+    - which qmake6
     - qbs --version
   build_script:
     - echo $PATH
@@ -390,12 +390,12 @@ macos_task_template: &MACOS_TASK_TEMPLATE
     - conan profile update settings.compiler.version=14 valentina
     - qbs setup-toolchains --detect
     - qbs config --list profiles
-    - qbs setup-qt /opt/homebrew/opt/qt6/bin/qmake qt6
+    - qbs setup-qt /opt/homebrew/opt/qt6/bin/qmake6 qt6
     - qbs config defaultProfile qt6
     - qbs config profiles.qt6.baseProfile clang
     - conan install . -s os=Macos --build=missing -o with_crash_reporting=True -pr=valentina
     - qbs build -f valentina.qbs -d $CIRRUS_WORKING_DIR/build --jobs $(nproc) config:release modules.buildconfig.enableUnitTests:false modules.buildconfig.enableMultiBundle:${MULTI_BUNDLE} qbs.installRoot:$CIRRUS_WORKING_DIR/build/install-root profile:qt6 project.minimumMacosVersion:${MACOS_DEPLOYMENT_TARGET} modules.buildconfig.enableCcache:${ENABLE_CCACHE} moduleProviders.qbspkgconfig.extraPaths:$(brew --prefix xerces-c)/lib/pkgconfig,$(brew --prefix qt6)/lib/pkgconfig,$(brew --prefix openssl@1.1)/lib/pkgconfig "modules.buildconfig.signingIdentity:$MACOS_CERTIFICATE_NAME" modules.macdeployqt.libpath:$(brew --prefix qt6)/lib,$(brew --prefix poppler)/lib modules.macdeployqt.macdeployqtProgramBinPath:${HOME}/macdeployqt-install-dir
-    - export CRASH_QT_VERSION=$(/opt/homebrew/opt/qt6/bin/qmake -query QT_VERSION | awk -F. '{print $1 "_" $2}')
+    - export CRASH_QT_VERSION=$(/opt/homebrew/opt/qt6/bin/qmake6 -query QT_VERSION | awk -F. '{print $1 "_" $2}')
     - export CRASH_SHORT_SHA=$(git log --pretty=format:%h -n 1)
     - python3 scripts/symupload.py $CIRRUS_WORKING_DIR/build/install-root $VALENTINA_VERSION $CRASH_SHORT_SHA $CRASH_QT_VERSION --clean
     - qbs build -f valentina.qbs -d $CIRRUS_WORKING_DIR/build -p 'Valentina DMG' --force-probe-execution --jobs $(nproc) config:release modules.buildconfig.enableUnitTests:false modules.buildconfig.enableMultiBundle:${MULTI_BUNDLE} qbs.installRoot:$CIRRUS_WORKING_DIR/build/install-root profile:qt6 project.minimumMacosVersion:${MACOS_DEPLOYMENT_TARGET} modules.buildconfig.enableCcache:${ENABLE_CCACHE} moduleProviders.qbspkgconfig.extraPaths:$(brew --prefix xerces-c)/lib/pkgconfig,$(brew --prefix qt6)/lib/pkgconfig,$(brew --prefix openssl@1.1)/lib/pkgconfig "modules.buildconfig.signingIdentity:$MACOS_CERTIFICATE_NAME" modules.macdeployqt.libpath:$(brew --prefix qt6)/lib,$(brew --prefix poppler)/lib modules.macdeployqt.macdeployqtProgramBinPath:${HOME}/macdeployqt-install-dir
