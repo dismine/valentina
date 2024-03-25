@@ -275,6 +275,7 @@ auto VAbstractApplication::QtTranslationsPath(const QString &locale) -> QString
 #endif // QBS_BUILD
 
 #if defined(APPIMAGE)
+    Q_UNUSED(locale)
     /* Fix path to translations when run inside AppImage. */
     return AppImageRoot() + APPIMAGE_QT_TRANSLATIONS;
 #else
