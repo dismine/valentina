@@ -9,6 +9,11 @@ VLib {
         condition: buildconfig.useConanPackages && buildconfig.conanCrashReportingEnabled
     }
 
+    Properties {
+        condition: buildconfig.useConanPackages && buildconfig.conanCrashReportingEnabled && qbs.targetOS.contains("windows") && qbs.toolchain.contains("msvc")
+        cpp.dynamicLibraries: ["Advapi32"]
+    }
+
     name: "VMiscLib"
     files: {
         var files = [

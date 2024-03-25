@@ -25,6 +25,11 @@ VTestApp {
         condition: buildconfig.useConanPackages && buildconfig.conanCrashReportingEnabled
     }
 
+    Properties {
+        condition: buildconfig.useConanPackages && buildconfig.conanCrashReportingEnabled && qbs.targetOS.contains("windows") && qbs.toolchain.contains("msvc")
+        cpp.dynamicLibraries: ["Advapi32"]
+    }
+
     name: "CollectionTest"
     buildconfig.appTarget: qbs.targetOS.contains("macos") ? "CollectionTest" : "collectionTest"
     targetName: buildconfig.appTarget
