@@ -27,6 +27,7 @@ ModuleProvider {
 
             file.close();
 
+            var settings = fileContent.settings;
             var deps = fileContent.dependencies;
 
             for(i in deps){
@@ -69,8 +70,32 @@ ModuleProvider {
                 }
 
                 var cppLibraries = shared ? "\tcpp.dynamicLibraries: " : "\tcpp.staticLibraries: ";
-                var cppLibrariesTag = shared ? "dynamiclibrary" : "staticlibrary";
-                var cppLibrarySuffix = shared ? "cpp.dynamicLibrarySuffix" : "cpp.staticLibrarySuffix";
+
+                var cppLibrariesTag = "staticlibrary";
+                if (shared)
+                {
+                    if (settings["os"] == "Linux" || settings["os"] == "Macos")
+                    {
+                        cppLibrariesTag = "dynamiclibrary";
+                    }
+                    else
+                    {
+                        cppLibrariesTag = "dynamiclibrary_import";
+                    }
+                }
+
+                var cppLibrarySuffix = "cpp.staticLibrarySuffix";
+                if (shared)
+                {
+                    if (settings["os"] == "Linux" || settings["os"] == "Macos")
+                    {
+                        cppLibrarySuffix = "cpp.dynamicLibrarySuffix";
+                    }
+                    else
+                    {
+                        cppLibrarySuffix = "cpp.staticLibrarySuffix";
+                    }
+                }
 
                 moduleFile.write("import qbs\n" +
                                  "Module {\n" +
