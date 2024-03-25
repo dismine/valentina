@@ -372,7 +372,7 @@ macos_task_template: &MACOS_TASK_TEMPLATE
     - export PATH="${HOME}/.local/bin:`python3 -m site --user-base`/bin:$PATH"
     - echo $PATH
     - whereis python3
-    - sudo ln -s -f /usr/bin/python3 /usr/local/bin/python
+    - sudo ln -s -f /usr/bin/python3 /usr/bin/python
     - sudo ln -s /Library/Developer/CommandLineTools/usr/bin/python3 /Library/Developer/CommandLineTools/usr/bin/python
     - whereis python
     - pwd
