@@ -389,7 +389,7 @@ macos_task_template: &MACOS_TASK_TEMPLATE
     - conan profile update settings.compiler=clang valentina
     - conan profile update settings.compiler.cppstd=17 valentina
     - conan profile update settings.compiler.libcxx=libstdc++11 valentina
-    - conan profile update settings.compiler.version=14 valentina
+    - conan profile update settings.compiler.version=15 valentina
     - qbs setup-toolchains --detect
     - qbs config --list profiles
     - qbs setup-qt /opt/homebrew/opt/qt6/bin/qmake qt6
