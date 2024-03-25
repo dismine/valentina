@@ -36,6 +36,9 @@ def generate_sym_files(install_root):
 
     debug_files = glob.glob(os.path.join(install_root, "**", "*" + debug_ext), recursive=True)
 
+    if not debug_files:
+        print("No debug files found.")
+
     for debug_file in debug_files:
         print(f"Generating symbols for: {os.path.basename(debug_file)}")
 
@@ -83,6 +86,11 @@ def upload_symbols(install_root, val_version, commit_hash, qt_version, clean=Fal
     # Platform-specific commands for generating and uploading symbol files
     platform = sys.platform
     sym_files = generate_sym_files(install_root)
+
+    if not sym_files:
+        print("No symbol files found. Exiting upload process.")
+        return
+
     app_version = generate_version_string(val_version, commit_hash, qt_version)
     print(f"Uploading symbols for version {app_version}")
 
