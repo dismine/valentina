@@ -355,7 +355,7 @@ macos_task_template: &MACOS_TASK_TEMPLATE
     # This won't display anything secret.
     - security find-identity -v -p codesigning
     - brew update > /dev/null
-    - brew install qt6 coreutils ccache qbs cmake ninja git openssl@1.1 pkg-config poppler xerces-c pipx
+    - brew install qt6 coreutils ccache qbs cmake ninja git openssl@1.1 pkg-config poppler xerces-c
     - brew outdated
     - brew upgrade qt6
     - pipx ensurepath 
@@ -363,7 +363,7 @@ macos_task_template: &MACOS_TASK_TEMPLATE
     - export PATH="${HOME}/.local/bin:`python3 -m site --user-base`/bin:$PATH"
     - echo $PATH
     - python3 --version
-    - pipx install pip dropbox py7zr 'urllib3<2.0' conan==1.63.0 requests
+    - pip3 install --user --upgrade pip dropbox py7zr 'urllib3<2.0' conan==1.63.0 requests
     - ccache --set-config sloppiness=pch_defines,time_macros max_size="$CCACHE_SIZE"
     - qmake --version
     - which qmake
@@ -384,7 +384,7 @@ macos_task_template: &MACOS_TASK_TEMPLATE
     - conan profile new valentina
     - conan profile update settings.build_type=Release valentina
     - conan profile update settings.os=Macos valentina
-    - conan profile update settings.os.Macos.sdk_version=${MACOS_DEPLOYMENT_TARGET} valentina
+    - conan profile update settings.os.sdk_version=${MACOS_DEPLOYMENT_TARGET} valentina
     - conan profile update settings.compiler=clang valentina
     - conan profile update settings.compiler.cppstd=17 valentina
     - conan profile update settings.compiler.libcxx=libstdc++11 valentina
