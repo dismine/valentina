@@ -30,22 +30,22 @@
 
 #include <QString>
 
+#include <base/files/file_path.h>
+
 class VCrashPaths
 {
 public:
     explicit VCrashPaths(QString exeDir);
 
-    auto GetHandlerPath() -> QString;
+    auto GetHandlerPath() const -> QString;
 
     static auto GetAttachmentPath(const QString &appName) -> QString;
     static auto GetReportsPath() -> QString;
     static auto GetMetricsPath() -> QString;
 
-#if defined(Q_OS_UNIX)
-    static auto GetPlatformString(const QString &string) -> std::string;
-#elif defined(Q_OS_WINDOWS)
-    static auto GetPlatformString(const QString &string) -> std::wstring;
-#else
+#if defined(Q_OS_UNIX) || defined(Q_OS_WINDOWS)
+    static auto GetPlatformString(const QString &string) -> base::FilePath::StringType;
+#elif
 #error GetPlatformString not implemented on this platform
 #endif
 

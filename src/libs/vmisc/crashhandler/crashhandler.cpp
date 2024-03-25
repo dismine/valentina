@@ -43,6 +43,9 @@
 #define MIN(x, y) (((x) < (y)) ? (x) : (y)) // NOLINT
 #endif
 
+#include <string>
+#include <vector>
+
 #include <client/crash_report_database.h>
 #include <client/crashpad_client.h>
 #include <client/settings.h>
@@ -58,7 +61,6 @@
 
 #include <vcsRepoState.h>
 
-using namespace base;
 using namespace crashpad;
 
 namespace
@@ -168,7 +170,7 @@ auto InitializeCrashpad(const QString &appName) -> bool
 #endif
 
     // Helper class for cross-platform file systems
-    VCrashPaths crashpadPaths(exeDir);
+    VCrashPaths const crashpadPaths(exeDir);
 
     auto MakeDir = [](const QString &path)
     {
@@ -182,7 +184,7 @@ auto InitializeCrashpad(const QString &appName) -> bool
     // Directory where reports will be saved. Important! Must be writable or crashpad_handler will crash.
     QString const reportsPath = VCrashPaths::GetReportsPath();
     MakeDir(reportsPath);
-    FilePath const reportsDir(VCrashPaths::GetPlatformString(reportsPath));
+    base::FilePath const reportsDir(VCrashPaths::GetPlatformString(reportsPath));
 
     // Initialize crashpad database
     std::unique_ptr<CrashReportDatabase> database = CrashReportDatabase::Initialize(reportsDir);
@@ -200,20 +202,20 @@ auto InitializeCrashpad(const QString &appName) -> bool
     settings->SetUploadsEnabled(true);
 
     // Attachments to be uploaded alongside the crash - default bundle size limit is 20MB
-    std::vector<FilePath> attachments;
-    FilePath const attachment(VCrashPaths::GetPlatformString(VCrashPaths::GetAttachmentPath(appName)));
+    std::vector<base::FilePath> attachments;
+    base::FilePath const attachment(VCrashPaths::GetPlatformString(VCrashPaths::GetAttachmentPath(appName)));
 #if defined(Q_OS_WINDOWS) || defined(Q_OS_LINUX)
     // Crashpad hasn't implemented attachments on OS X yet
     attachments.push_back(attachment);
 #endif
 
     // Ensure that crashpad_handler is shipped with your application
-    FilePath const handler(VCrashPaths::GetPlatformString(crashpadPaths.GetHandlerPath()));
+    base::FilePath const handler(VCrashPaths::GetPlatformString(crashpadPaths.GetHandlerPath()));
 
     // Directory where metrics will be saved. Important! Must be writable or crashpad_handler will crash.
     QString const metricsPath = VCrashPaths::GetMetricsPath();
     MakeDir(metricsPath);
-    FilePath const metricsDir(VCrashPaths::GetPlatformString(metricsPath));
+    base::FilePath const metricsDir(VCrashPaths::GetPlatformString(metricsPath));
 
     QString const dbName = QStringLiteral("valentina");
     // Configure url with your BugSplat database
@@ -221,7 +223,7 @@ auto InitializeCrashpad(const QString &appName) -> bool
 
     // Metadata that will be posted to BugSplat
     QMap<std::string, std::string> annotations;
-    annotations["format"] = "minidump";                       // Required: Crashpad setting to save crash as a minidump
+    annotations["format"] = "minidump";                       // Required: Crashpad setting to save crash as a
     annotations["database"] = dbName.toStdString();           // Required: BugSplat database
     annotations["product"] = appName.toStdString();           // Required: BugSplat appName
     annotations["version"] = AppCrashVersion().toStdString(); // Required: BugSplat appVersion
@@ -245,7 +247,7 @@ auto InitializeCrashpad(const QString &appName) -> bool
     arguments.emplace_back("--no-rate-limit");
 
     // Start crash handler
-    auto *client = new CrashpadClient();
-    return client->StartHandler(handler, reportsDir, metricsDir, url.toStdString(), "", annotations.toStdMap(),
-                                arguments, true, true, attachments);
+    CrashpadClient client;
+    return client.StartHandler(handler, reportsDir, metricsDir, url.toStdString(), "", annotations.toStdMap(),
+                               arguments, true, true, attachments);
 }

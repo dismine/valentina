@@ -49,7 +49,7 @@ auto VCrashPaths::GetAttachmentPath(const QString &appName) -> QString
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-auto VCrashPaths::GetHandlerPath() -> QString
+auto VCrashPaths::GetHandlerPath() const -> QString
 {
 #if defined(Q_OS_WINDOWS)
     const QString handler = QStringLiteral("crashpad_handler.exe");
@@ -76,16 +76,14 @@ auto VCrashPaths::GetMetricsPath() -> QString
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+
+auto VCrashPaths::GetPlatformString(const QString &string) -> base::FilePath::StringType
+{
 #if defined(Q_OS_UNIX)
-auto VCrashPaths::GetPlatformString(const QString &string) -> std::string
-{
     return string.toStdString();
-}
 #elif defined(Q_OS_WINDOWS)
-auto VCrashPaths::GetPlatformString(const QString &string) -> std::wstring
-{
-    return string.toStdWString();
-}
 #else
+    return string.toStdWString();
 #error GetPlatformString not implemented on this platform
 #endif
+}
