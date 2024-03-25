@@ -82,8 +82,8 @@ auto VCrashPaths::GetPlatformString(const QString &string) -> base::FilePath::St
 #if defined(Q_OS_UNIX)
     return string.toStdString();
 #elif defined(Q_OS_WINDOWS)
-#else
     return string.toStdWString();
+#else
 #error GetPlatformString not implemented on this platform
 #endif
 }
