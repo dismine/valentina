@@ -358,7 +358,6 @@ macos_task_template: &MACOS_TASK_TEMPLATE
     - brew install qt6 coreutils ccache qbs cmake ninja git openssl@1.1 pkg-config poppler xerces-c
     - brew outdated
     - brew upgrade qt6
-    - pipx ensurepath 
     - echo $PATH
     - export PATH="${HOME}/.local/bin:`python3 -m site --user-base`/bin:$PATH"
     - echo $PATH
