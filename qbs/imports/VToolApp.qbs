@@ -12,7 +12,7 @@ VApp {
     version: buildconfig.projectVersion
     install: true
     installDir: buildconfig.installBinaryPath
-    installDebugInformation: qbs.buildVariant !== "release"
+    installDebugInformation: qbs.buildVariant !== "release" || buildconfig.useConanPackages && buildconfig.conanCrashReportingEnabled
     consoleApplication: false
 
     property bool primaryApp: false

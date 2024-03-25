@@ -37,7 +37,7 @@ VLib {
         windeployqt.languages: i18nconfig.qtTranslationLocales.join(',')
     }
 
-    installDebugInformation: qbs.buildVariant !== "release"
+    installDebugInformation: qbs.buildVariant !== "release" || buildconfig.useConanPackages && buildconfig.conanCrashReportingEnabled
 
     Properties {
         condition: !qbs.targetOS.contains("macos") || (qbs.targetOS.contains("macos") && !buildconfig.enableMultiBundle)
