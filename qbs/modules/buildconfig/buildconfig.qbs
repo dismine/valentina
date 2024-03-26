@@ -815,7 +815,7 @@ Module {
         cpp.systemIncludePaths: {
             var paths = [FileInfo.joinPaths(product.buildDirectory, "qt.headers")];
 
-            if (Utilities.versionCompare(Qt.core.version, "6") >= 0 && !useConanPackages)
+            if (Utilities.versionCompare(Qt.core.version, "6") >= 0)
             {
                 var includePaths = product.cpp.includePaths;
 
