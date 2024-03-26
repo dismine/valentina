@@ -363,7 +363,7 @@ macos_task_template: &MACOS_TASK_TEMPLATE
     - export PATH="${HOME}/.local/bin:`python3 -m site --user-base`/bin:$PATH"
     - echo $PATH
     - python3 --version
-    - pip3 install --break-system-packages --user --upgrade pip dropbox py7zr 'urllib3<2.0' conan==1.63.0 requests
+    - pip3 install --break-system-packages --user --upgrade pip dropbox py7zr 'urllib3<2.0' conan==1.63.0 requests setuptools
     - ccache --set-config sloppiness=pch_defines,time_macros max_size="$CCACHE_SIZE"
     - qmake --version
     - which qmake
