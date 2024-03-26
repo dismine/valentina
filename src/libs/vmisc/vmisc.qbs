@@ -14,6 +14,13 @@ VLib {
         cpp.dynamicLibraries: ["Advapi32"]
     }
 
+    Properties {
+        condition: buildconfig.useConanPackages && buildconfig.conanCrashReportingEnabled && qbs.targetOS.contains("macos")
+        cpp.libraryPaths: ["/usr/lib"]
+        cpp.dynamicLibraries: ["bsm"]
+        cpp.frameworks: ["AppKit", "Security"]
+    }
+
     name: "VMiscLib"
     files: {
         var files = [
