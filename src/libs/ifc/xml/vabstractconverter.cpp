@@ -110,9 +110,9 @@ void VAbstractConverter::ReserveFile() const
     QString error;
     QFileInfo const info(m_convertedFileName);
 #if defined(Q_OS_UNIX) || defined(Q_OS_MACOS)
-    const QChar hidden = QChar('.');
+    const QString hidden = QChar('.');
 #else
-    const QChar hidden;
+    const QString hidden;
 #endif
     const QString reserveFileName = u"%1/%2%3(v%4).%5.bak"_s.arg(
         info.absoluteDir().absolutePath(), hidden, info.baseName(), GetFormatVersionStr(), info.completeSuffix());
