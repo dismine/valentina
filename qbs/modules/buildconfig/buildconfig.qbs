@@ -42,12 +42,7 @@ Module {
 
     property bool treatWarningsAsErrors: true
 
-    readonly property bool useConanPackages : {
-        if (Utilities.versionCompare(Qt.core.version, "6") < 0)
-            return false;
-
-        return project.enableConan;
-    }
+    readonly property bool useConanPackages : project.enableConan
     readonly property bool conanXercesEnabled : project.conanWithXerces
     readonly property bool conanCrashReportingEnabled : {
         if (qbs.targetOS.contains("windows")) {
