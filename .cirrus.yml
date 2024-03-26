@@ -370,7 +370,7 @@ macos_task_template: &MACOS_TASK_TEMPLATE
     - qbs --version
   build_script:
     - echo $PATH
-    - export PATH="${HOME}/.local/bin:`python3 -m site --user-base`/bin:$PATH"
+    - export PATH="${HOME}/.local/bin:`python3 -m site --user-base`/bin:$HOME/.cargo/bin:$PATH"
     - echo $PATH
     - whereis python3
     - sudo mkdir /usr/local/bin
