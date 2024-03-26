@@ -320,6 +320,7 @@ macos_task_template: &MACOS_TASK_TEMPLATE
     - clang --version
     - find /Applications -maxdepth 1 -type d -name 'Xcode*.app'
     - sudo xcode-select -p
+    - xcrun --show-sdk-path -sdk macosx
     # Decode the environment variable into a regular .p12 file
     - echo $MACOS_CERTIFICATE | base64 --decode > certificate.p12
     # We need to create a new keychain, otherwise using the certificate will prompt
@@ -386,9 +387,9 @@ macos_task_template: &MACOS_TASK_TEMPLATE
     - conan profile update settings.os=Macos valentina
     - conan profile update settings.os.sdk_version=${MACOS_DEPLOYMENT_TARGET} valentina
     - conan profile update settings.arch=armv8 valentina
-    - conan profile update settings.compiler=clang valentina
+    - conan profile update settings.compiler=apple-clang valentina
     - conan profile update settings.compiler.cppstd=17 valentina
-    - conan profile update settings.compiler.libcxx=libstdc++11 valentina
+    - conan profile update settings.compiler.libcxx=libc++ valentina
     - conan profile update settings.compiler.version=15 valentina
     - qbs setup-toolchains --detect
     - qbs config --list profiles

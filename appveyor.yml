@@ -414,7 +414,7 @@ for:
   deploy_script:
     - ps: |
         if ($env:WITH_CRASH_REPORTING -eq "True") {
-          $qmakeOutput = %QTDIR%\bin\%QMAKE% -query QT_VERSION
+          $qmakeOutput = $env:QTDIR\bin\$env:QMAKE -query QT_VERSION
           $majorMinorVersion = $qmakeOutput -replace '\D+(\d+)\.(\d+).*', '$1_$2'
           $env:CRASH_QT_VERSION = $majorMinorVersion
 
@@ -561,6 +561,7 @@ for:
     - sudo xcode-select -p
     - sudo xcode-select -s /Applications/Xcode-$XCODE_VERSION.app
     - sudo xcode-select -p
+    - xcrun --show-sdk-path -sdk macosx
     # Decode the environment variable into a regular .p12 file
     - echo $MACOS_CERTIFICATE | base64 --decode > certificate.p12
     # We need to create a new keychain, otherwise using the certificate will prompt
@@ -761,6 +762,7 @@ for:
     - sudo xcode-select -p
     - sudo xcode-select -s /Applications/Xcode-$XCODE_VERSION.app
     - sudo xcode-select -p
+    - xcrun --show-sdk-path -sdk macosx
     # Decode the environment variable into a regular .p12 file
     - echo $MACOS_CERTIFICATE | base64 --decode > certificate.p12
     # We need to create a new keychain, otherwise using the certificate will prompt
