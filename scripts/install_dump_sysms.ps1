@@ -15,7 +15,7 @@ if ($env:WITH_CRASH_REPORTING -eq "True") {
     $env:Path += ";$extractPath"
 
     # Check if dump_syms is callable
-    if (Test-Path (Join-Path $extractedFolderPath "dump_syms.exe")) {
+    if (Test-Path (Join-Path $extractPath "dump_syms.exe")) {
         Write-Host "dump_syms utility installed successfully and added to PATH."
     } else {
         Write-Host "Failed to install dump_syms utility."
