@@ -122,25 +122,8 @@ Probe {
         }
 
         var p = new Process();
-        p.start(executable, args);
-        while (!p.waitForFinished(500)) {
-            const output = p.readStdOut();
-            if (verbose && output) {
-                console.info(output);
-            }
-        }
-        while (!p.atEnd()) {
-            const output = p.readStdOut();
-            if (verbose && output) {
-                console.info(output);
-            }
-        }
-        if (p.exitCode()) {
-            const errorOutput = p.readStdErr();
-            p.close();
-            throw errorOutput;
-        }
-        p.close();
+        console.info("Start conan: " + executable + " " + args.join(" "));
+        p.exec(executable, args, true);
 
         if (generators.contains("json")) {
             if (!File.exists(generatedFilesPath + "/conanbuildinfo.json"))
