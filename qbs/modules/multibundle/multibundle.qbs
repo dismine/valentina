@@ -80,7 +80,7 @@ Module {
                 artifactNames.push(installRoot + "/" + targetApp + ".app/Contents/MacOS/" + input.fileName);
 
                 if (product.installDebugInformation)
-                    artifactNames.push(installRoot + "/" + targetApp + ".app/Contents/MacOS/" + input.fileName +
+                    artifactNames.push(installRoot + "/" + targetApp + ".app/Contents/MacOS/" + input.fileName + ".app" +
                                        product.cpp.debugInfoBundleSuffix);
             });
 
@@ -109,7 +109,7 @@ Module {
 
                 if (product.installDebugInformation)
                     data.push({
-                        "source" : product.buildDirectory + "/" + input.fileName + product.cpp.debugInfoBundleSuffix,
+                        "source" : product.buildDirectory + "/" + input.fileName + ".app" + product.cpp.debugInfoBundleSuffix,
                         "destination": installRoot + "/" + targetApp + ".app/Contents/MacOS/" + fileName +
                                        product.cpp.debugInfoBundleSuffix
                     });

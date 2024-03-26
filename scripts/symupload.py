@@ -79,6 +79,8 @@ def get_app_name(sym_file):
     elif platform == "darwin":
         if base_name.endswith(".framework"):
             return base_name.split(".framework")[0]
+        elif base_name.endswith(".app"):
+            return base_name.split(".app")[0]
 
     return base_name
 
