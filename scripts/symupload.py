@@ -47,6 +47,7 @@ def generate_sym_files(install_root):
         subprocess.run(dump_syms_cmd, check=True)
 
         sym_files.append((debug_file, zip_sym(sym_file)))
+        os.remove(sym_file)
 
     return sym_files
 
