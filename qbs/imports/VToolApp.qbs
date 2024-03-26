@@ -12,7 +12,7 @@ VApp {
     version: buildconfig.projectVersion
     install: true
     installDir: buildconfig.installBinaryPath
-    installDebugInformation: qbs.buildVariant !== "release" || buildconfig.useConanPackages && buildconfig.conanCrashReportingEnabled
+    installDebugInformation: qbs.buildVariant !== "release" || (buildconfig.useConanPackages && buildconfig.conanCrashReportingEnabled)
     consoleApplication: false
 
     property bool primaryApp: false
@@ -33,10 +33,7 @@ VApp {
         cpp.dynamicLibraries: ["icudata", "icui18n", "icuuc"]
     }
 
-    Properties {
-        condition: buildconfig.useConanPackages && buildconfig.conanCrashReportingEnabled
-        qbs.debugInformation: true
-    }
+    cpp.debugInformation: qbs.buildVariant !== "release" || (buildconfig.useConanPackages && buildconfig.conanCrashReportingEnabled)
 
     Group {
         name: "Translations"

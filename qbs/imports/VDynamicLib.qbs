@@ -37,7 +37,7 @@ VLib {
         windeployqt.languages: i18nconfig.qtTranslationLocales.join(',')
     }
 
-    installDebugInformation: qbs.buildVariant !== "release" || buildconfig.useConanPackages && buildconfig.conanCrashReportingEnabled
+    installDebugInformation: qbs.buildVariant !== "release" || (buildconfig.useConanPackages && buildconfig.conanCrashReportingEnabled)
 
     Properties {
         condition: !qbs.targetOS.contains("macos") || (qbs.targetOS.contains("macos") && !buildconfig.enableMultiBundle)
@@ -45,8 +45,5 @@ VLib {
         installDir: buildconfig.installLibraryPath
     }
 
-    Properties {
-        condition: buildconfig.useConanPackages && buildconfig.conanCrashReportingEnabled
-        qbs.debugInformation: true
-    }
+    cpp.debugInformation: qbs.buildVariant !== "release" || (buildconfig.useConanPackages && buildconfig.conanCrashReportingEnabled)
 }
