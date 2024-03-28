@@ -113,8 +113,9 @@ def upload_symbols(install_root, val_version, commit_hash, qt_version, clean=Fal
         sym_file_name = os.path.basename(sym_file)
         url = f"https://{database}.bugsplat.com/post/bp/symbol/breakpadsymbols.php?appName={app_name}&appVer={app_version}&code_file={sym_file_name}"
 
-        files = {'symbol_file': (f'{sym_file_name}', open(sym_file, 'rb'))}
-        response = requests.post(url, files=files)
+        with open(sym_file, 'rb') as symbol_file:
+            files = {'symbol_file': (f'{sym_file_name}', symbol_file)}
+            response = requests.post(url, files=files)
 
         if response.status_code == 200:
             print(f"Symbol file '{sym_file}' uploaded successfully.")
