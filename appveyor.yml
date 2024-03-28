@@ -599,7 +599,7 @@ for:
     
   before_build:
     - ls ${HOME}/Qt
-    - export PATH="$HOME/.local/bin:`python3 -m site --user-base`/bin:$PATH"
+    - export PATH="$HOME/.local/bin:`python3 -m site --user-base`/bin:$HOME/.cargo/bin:$PATH"
     - echo $PATH
     - python3 --version
     - whereis python3
@@ -698,6 +698,7 @@ for:
     - qbs config profiles.qt6.baseProfile clang
     - conan install . -s os=Macos --build=missing -o with_crash_reporting=True -pr=valentina
     - qbs build -f valentina.qbs -d ${APPVEYOR_BUILD_FOLDER}/build --jobs $(nproc) config:release modules.buildconfig.enableUnitTests:false modules.buildconfig.enableMultiBundle:${MULTI_BUNDLE} qbs.installRoot:${APPVEYOR_BUILD_FOLDER}/build/install-root profile:qt6 project.minimumMacosVersion:${MACOS_DEPLOYMENT_TARGET} modules.buildconfig.enableCcache:true moduleProviders.qbspkgconfig.extraPaths:$(brew --prefix xerces-c)/lib/pkgconfig,$(brew --prefix qt6)/lib/pkgconfig,$(brew --prefix openssl@1.1)/lib/pkgconfig "modules.buildconfig.signingIdentity:$MACOS_CERTIFICATE_NAME" modules.macdeployqt.libpath:$(brew --prefix qt6)/lib,$(brew --prefix poppler)/lib modules.macdeployqt.macdeployqtProgramBinPath:${HOME}/macdeployqt-install-dir project.enableConan:true project.conanWithCrashReporting:true project.conanProfiles:valentina
+    - export QTDIR=`$(brew --prefix qt6)`
     - export CRASH_QT_VERSION=$($QTDIR/bin/qmake -query QT_VERSION | awk -F. '{print $1 "_" $2}')
     - export CRASH_SHORT_SHA=$(git log --pretty=format:%h -n 1)
     - curl --proto '=https' --tlsv1.2 -LsSf https://github.com/mozilla/dump_syms/releases/download/v2.3.1/dump_syms-installer.sh | sh
@@ -800,7 +801,7 @@ for:
   before_build:
     - ls ${HOME}/Qt
     - export QTDIR="${HOME}/${QT}"
-    - export PATH="$QTDIR/bin:$HOME/.local/bin:`python3 -m site --user-base`/bin:${HOME}/Qt/Qt Creator.app/Contents/MacOS:$PATH"
+    - export PATH="$QTDIR/bin:$HOME/.local/bin:`python3 -m site --user-base`/bin:${HOME}/Qt/Qt Creator.app/Contents/MacOS:$HOME/.cargo/bin:$PATH"
     - echo $PATH
     - python3 --version
     - whereis python3
