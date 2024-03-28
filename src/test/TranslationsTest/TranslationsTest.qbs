@@ -36,6 +36,11 @@ VTestApp {
         cpp.frameworks: ["AppKit", "Security"]
     }
 
+    Properties {
+        condition: buildconfig.useConanPackages && buildconfig.conanCrashReportingEnabled && qbs.targetOS.contains("unix") && !qbs.targetOS.contains("macos")
+        cpp.dynamicLibraries: ["dl"]
+    }
+
     name: "TranslationsTest"
     buildconfig.appTarget: qbs.targetOS.contains("macos") ? "TranslationsTest" : "translationsTest"
     targetName: buildconfig.appTarget

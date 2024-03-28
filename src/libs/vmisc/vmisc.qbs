@@ -21,6 +21,11 @@ VLib {
         cpp.frameworks: ["AppKit", "Security"]
     }
 
+    Properties {
+        condition: buildconfig.useConanPackages && buildconfig.conanCrashReportingEnabled && qbs.targetOS.contains("unix") && !qbs.targetOS.contains("macos")
+        cpp.dynamicLibraries: ["dl"]
+    }
+
     name: "VMiscLib"
     files: {
         var files = [
