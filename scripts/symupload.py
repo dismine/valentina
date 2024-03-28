@@ -55,20 +55,25 @@ def generate_sym_files(install_root):
 
     return sym_files
 
-def generate_version_string(val_version, commit_hash, qt_version):
+def generate_version_string(val_version, commit_hash, qt_version, multibundle):
     # Determine the platform
     platform = sys.platform
+    multibundle_str = ""
+
     if platform == "win32":
         platform_str = "windows"
     elif platform == "darwin":
         platform_str = "macos"
+
+        if multibundle:
+          multibundle_str = "-multibundle"
     elif platform == "linux":
         platform_str = "linux"
     else:
         platform_str = "unknown"
 
     # Generate the version string
-    version_string = f"{val_version}-{commit_hash}-Qt_{qt_version}-{platform_str}"
+    version_string = f"{val_version}-{commit_hash}-Qt_{qt_version}-{platform_str}{multibundle_str}"
     return version_string
 
 def get_app_name(sym_file):
@@ -89,7 +94,7 @@ def get_app_name(sym_file):
 
     return base_name
 
-def upload_symbols(install_root, val_version, commit_hash, qt_version, clean=False):
+def upload_symbols(install_root, val_version, commit_hash, qt_version, clean=False, multibundle=False):
     # Platform-specific commands for generating and uploading symbol files
     platform = sys.platform
     sym_files = generate_sym_files(install_root)
@@ -98,7 +103,7 @@ def upload_symbols(install_root, val_version, commit_hash, qt_version, clean=Fal
         print("No symbol files found. Exiting upload process.")
         return
 
-    app_version = generate_version_string(val_version, commit_hash, qt_version)
+    app_version = generate_version_string(val_version, commit_hash, qt_version, multibundle)
     print(f"Uploading symbols for version {app_version}")
 
     for _, sym_file in sym_files:
@@ -141,6 +146,7 @@ if __name__ == "__main__":
     #   - Third argument: Commit git hash
     #   - Fourth argument: Qt version
     #   - Optional argument: --clean (Clean up after upload)
+    #   - Optional argument: --multibundle (Mark multibundle version. Has effect only on macos)
 
     # Parse command-line arguments
     parser = argparse.ArgumentParser(description="Upload symbols to BugSplat.")
@@ -149,8 +155,11 @@ if __name__ == "__main__":
     parser.add_argument("hash", type=str, help="Commit git hash")
     parser.add_argument("qt_version", type=str, help="Qt version")
     parser.add_argument("--clean", action="store_true", help="Clean up after upload")
+    parser.add_argument("--multibundle", type=str, default="false", choices=["true", "false"], help="Mark multibundle version. Has effect only on Macos")
 
     args = parser.parse_args()
 
+    multibundle = (args.multibundle == "true")
+
     # Call install_package function with provided arguments
-    upload_symbols(args.install_root, args.val_version, args.hash, args.qt_version, args.clean)
+    upload_symbols(args.install_root, args.val_version, args.hash, args.qt_version, args.clean, multibundle)
