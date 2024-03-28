@@ -149,11 +149,12 @@ appimage_task_template: &APPIMAGE_TASK_TEMPLATE
     - conan profile new valentina
     - conan profile update settings.build_type=Release valentina
     - conan profile update settings.os=Linux valentina
+    - conan profile update settings.os_build=Linux valentina
     - conan profile update settings.arch=x86_64 valentina
-    - conan profile update settings.compiler=gcc valentina
-    - conan profile update settings.compiler.cppstd=17 valentina
+    - conan profile update settings.arch_build=x86_64 valentina
+    - conan profile update settings.compiler=clang valentina
     - conan profile update settings.compiler.libcxx=libstdc++11 valentina
-    - conan profile update settings.compiler.version=9 valentina
+    - conan profile update settings.compiler.version=10 valentina
     - qbs setup-toolchains /usr/bin/${COMPILER} ${COMPILER}
     - qbs setup-qt /opt/qt515/bin/qmake qt5
     - qbs config defaultProfile qt5
@@ -226,10 +227,9 @@ linux_task:
     - container:
         image: dismine/appimage-builder:latest
       env:
-        COMPILER: gcc
-        QMAKE_SPEC: "linux-g++"
-        GCC_COLORS: 'error=01;31:warning=01;35:note=01;36:caret=01;32:locus=01:quote=01'
-        COMPILER_REGEX: "gcc|g\\+\\+"
+        COMPILER: clang
+        QMAKE_SPEC: "linux-clang"
+        COMPILER_REGEX: clang
         PIP_CACHE_DIR: ${HOME}/.cache/pip
       matrix:
         - name: 'AppImage'
