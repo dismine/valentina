@@ -47,7 +47,11 @@ def generate_sym_files(install_root):
         subprocess.run(dump_syms_cmd, check=True)
 
         sym_files.append((debug_file, zip_sym(sym_file)))
-        os.remove(sym_file)
+        
+        try:
+            os.remove(sym_file)
+        except PermissionError as e:
+            print(f"PermissionError removing '{sym_file}': {e}")
 
     return sym_files
 
@@ -118,10 +122,17 @@ def upload_symbols(install_root, val_version, commit_hash, qt_version, clean=Fal
     if clean:
         debug_ext = debug_extension()
         for debug_file, sym_file in sym_files:
-            os.remove(sym_file)
-            print(f"Symbol file '{sym_file}' removed.")
-            os.remove(debug_file)
-            print(f"Debug file '{debug_file}' removed.")
+            try:
+                os.remove(sym_file)
+                print(f"Symbol file '{sym_file}' removed.")
+            except PermissionError as e:
+                print(f"PermissionError removing '{sym_file}': {e}")
+
+            try:
+                os.remove(debug_file)
+                print(f"Debug file '{debug_file}' removed.")
+            except PermissionError as e:
+                print(f"PermissionError removing '{debug_file}': {e}")
 
 if __name__ == "__main__":
     # Command-line usage: python symupload.py /path/to/install_root/folder 0_7_52 abcdef123456 6_6 --clean
