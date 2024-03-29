@@ -314,6 +314,7 @@ for:
     - set QTDIR=C:\%QT%
     - set QT_PLUGIN_PATH=%QTDIR%\plugins
     - set PATH=%QTDIR%\bin;%QTDIR%\include;C:\ProgramData\chocolatey\bin;C:\Qt\Tools\QtCreator\bin;C:\Tools\PsTools;C:\Program Files\Git\cmd;C:\Program Files\Git\usr\bin;C:\Program Files\Git LFS;C:\Tools\GitVersion;C:\Windows\system32;C:\Windows;C:\Windows\System32\WindowsPowerShell\v1.0\;C:\Program Files\CMake\bin;%PYTHON%;%PYTHON%\Scripts;C:\Program Files (x86)\Inno Setup 6
+    - git fetch --tags
     # Set VC variables for the platform
     - ps: |
         & choco install qbs -y --version=2.2.2
@@ -557,6 +558,7 @@ for:
     - $HOME/brew_cache_dir
 
   init:
+    - git fetch --tags
     - find /Applications -maxdepth 1 -type d -name 'Xcode*.app'
     - sudo xcode-select -p
     - sudo xcode-select -s /Applications/Xcode-$XCODE_VERSION.app
@@ -758,6 +760,7 @@ for:
     - $HOME/brew_cache_dir
 
   init:
+    - git fetch --tags
     - find /Applications -maxdepth 1 -type d -name 'Xcode*.app'
     - sudo xcode-select -p
     - sudo xcode-select -s /Applications/Xcode-$XCODE_VERSION.app
