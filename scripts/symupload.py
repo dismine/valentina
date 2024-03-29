@@ -5,6 +5,7 @@ import sys
 import glob
 import zipfile
 import requests
+import shutil
 
 database = "valentina"
 
@@ -135,7 +136,10 @@ def upload_symbols(install_root, val_version, commit_hash, qt_version, clean=Fal
                 print(f"PermissionError removing '{sym_file}': {e}")
 
             try:
-                os.remove(debug_file)
+                if sys.platform == "darwin":
+                    shutil.rmtree(debug_file)
+                else:
+                    os.remove(debug_file)
                 print(f"Debug file '{debug_file}' removed.")
             except PermissionError as e:
                 print(f"PermissionError removing '{debug_file}': {e}")
