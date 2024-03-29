@@ -84,8 +84,6 @@ Module {
 
         property string tool: toolFilePath
         property string theRepoDir: repoDir
-        property string filePath: FileInfo.joinPaths(metaDataBaseDir, "logs/HEAD")
-        property var timestamp: File.lastModified(filePath)
 
         property string repoState
         property string repoStateTag
@@ -93,8 +91,24 @@ Module {
         property string repoStateRevision
 
         configure: {
-            if (!File.exists(filePath))
-                return; // No commits yet.
+            var commitsProbe = new Process();
+            try {
+                commitsProbe.setWorkingDirectory(theRepoDir);
+                var exitCode = commitsProbe.exec(tool, ["rev-list", "HEAD", "--count"], false);
+                if (exitCode !== 0) {
+                    console.info("Cannot read repo state.");
+                    return;
+                }
+
+                var count = parseInt(commitsProbe.readStdOut().trim());
+                if (count < 1) {
+                    console.info("The repo has no commits yet.");
+                    return;
+                }
+            } finally {
+                commitsProbe.close();
+            }
+
             var proc = new Process();
             try {
                 proc.setWorkingDirectory(theRepoDir);
@@ -108,9 +122,14 @@ Module {
                     found = true;
 
                     const tagSections = repoState.split("-");
-                    repoStateTag = tagSections[0];
-                    repoStateDistance = tagSections[1];
-                    repoStateRevision = tagSections[2];
+
+                    if (tagSections.length >= 3) {
+                        repoStateTag = tagSections[0];
+                        repoStateDistance = tagSections[1];
+                        repoStateRevision = tagSections[2];
+                    } else  {
+                        repoStateRevision = tagSections[0];
+                    }
                 }
             } finally {
                 proc.close();
