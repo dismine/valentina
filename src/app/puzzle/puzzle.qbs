@@ -218,6 +218,9 @@ VToolApp {
             if (pdftops.pdftopsPresent)
                 apps.push("pdftops");
 
+            if (buildconfig.useConanPackages && buildconfig.conanCrashReportingEnabled)
+                apps.push("crashpad_handler");
+
             return apps;
         }
     }

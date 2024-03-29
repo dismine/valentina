@@ -58,6 +58,18 @@ VToolApp {
         conan.crashpad.binInstallDir: qbs.installPrefix + "/" + buildconfig.installBinaryPath
     }
 
+    Properties {
+        condition: qbs.targetOS.contains("macos") && buildconfig.enableMultiBundle
+        macdeployqt.targetApps: {
+            var apps = [];
+
+            if (buildconfig.useConanPackages && buildconfig.conanCrashReportingEnabled)
+                apps.push("crashpad_handler");
+
+            return apps;
+        }
+    }
+
     files: [
         "main.cpp",
         "tkmmainwindow.cpp",
