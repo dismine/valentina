@@ -114,9 +114,6 @@ VAppleApplicationDiskImage {
         if (Qt.core.versionMajor >= 6)
             return "ULMO"; // macOS 10.15+ only
 
-        if (Qt.core.versionMajor >= 5 && Qt.core.versionMinor >= 10)
-            return "ULFO"; // OS X 10.11+ only
-
-        return "UDBZ"; // OS X 10.4+ only
+        return "ULFO"; // OS X 10.11+ only
     }
 }
