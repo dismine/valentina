@@ -1429,7 +1429,7 @@ void QmuParserBase::CreateRPN() const
                 ApplyRemainingOprt(stOpt, stVal);
 
                 // Check if the bracket content has been evaluated completely
-                if (stOpt.size() && stOpt.top().GetCode() == cmBO)
+                if (!stOpt.empty() && stOpt.top().GetCode() == cmBO)
                 {
                     // if opt is ")" and opta is "(" the bracket has been evaluated, now its time to check
                     // if there is either a function or a sign pending
@@ -1437,7 +1437,7 @@ void QmuParserBase::CreateRPN() const
                     // the operator stack
                     // Check if a function is standing in front of the opening bracket,
                     // if yes evaluate it afterwards check for infix operators
-                    assert(stArgCount.size());
+                    assert(!stArgCount.empty());
                     int const iArgCount = stArgCount.pop();
 
                     stOpt.pop(); // Take opening bracket from stack
@@ -1451,8 +1451,8 @@ void QmuParserBase::CreateRPN() const
 
                     // The opening bracket was popped from the stack now check if there
                     // was a function before this bracket
-                    if (stOpt.size() && stOpt.top().GetCode() != cmOPRT_INFIX && stOpt.top().GetCode() != cmOPRT_BIN &&
-                        stOpt.top().GetFuncAddr() != nullptr)
+                    if (!stOpt.empty() && stOpt.top().GetCode() != cmOPRT_INFIX &&
+                        stOpt.top().GetCode() != cmOPRT_BIN && stOpt.top().GetFuncAddr() != nullptr)
                     {
                         ApplyFunc(stOpt, stVal, iArgCount);
                     }
@@ -1485,11 +1485,12 @@ void QmuParserBase::CreateRPN() const
             case cmASSIGN:
             case cmOPRT_BIN:
                 // A binary operator (user defined or built in) has been found.
-                while (stOpt.size() && stOpt.top().GetCode() != cmBO && stOpt.top().GetCode() != cmELSE &&
+                while (!stOpt.empty() && stOpt.top().GetCode() != cmBO && stOpt.top().GetCode() != cmELSE &&
                        stOpt.top().GetCode() != cmIF)
                 {
                     const token_type &topToken = stOpt.top();
-                    int nPrec1 = GetOprtPrecedence(topToken), nPrec2 = GetOprtPrecedence(opt);
+                    int const nPrec1 = GetOprtPrecedence(topToken);
+                    int const nPrec2 = GetOprtPrecedence(opt);
 
                     const ECmdCode code = topToken.GetCode();
                     if (code == opt.GetCode())

@@ -1,5 +1,7 @@
 #include "vpgraphicstilegrid.h"
 
+#include <math.h>
+
 #include "../layout/vplayout.h"
 #include "../layout/vpsheet.h"
 #include "../vmisc/theme/vscenestylesheet.h"
@@ -57,7 +59,7 @@ auto OptimizeFontSizeToFitTextInRect(QPainter *painter, const QRectF &drawRect, 
 
         double const xFactor = drawRect.width() / fontBoundRect.width();
         double const yFactor = drawRect.height() / fontBoundRect.height();
-        double factor;
+        double factor = NAN;
         if (xFactor < 1 && yFactor < 1)
         {
             factor = std::min(xFactor, yFactor);
