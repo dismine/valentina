@@ -46,9 +46,7 @@
  * @brief This file contains the implementation of parser test cases.
  */
 
-namespace qmu
-{
-namespace Test
+namespace qmu::Test
 {
 int QmuParserTester::c_iCount = 0;
 
@@ -1523,5 +1521,4 @@ void QmuParserTester::Abort()
         ;
     QCoreApplication::exit(-1);
 }
-} // namespace Test
-} // namespace qmu
+} // namespace qmu::Test

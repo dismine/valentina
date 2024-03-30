@@ -41,12 +41,10 @@
  * @brief This file contains the parser test class.
  */
 
-namespace qmu
-{
 /**
  * @brief Namespace for test cases.
  */
-namespace Test
+namespace qmu::Test
 {
 //---------------------------------------------------------------------------------------------------------------------
 /**
@@ -231,7 +229,6 @@ private:
 
     static void Abort();
 };
-} // namespace Test
-} // namespace qmu
+} // namespace qmu::Test
 
 #endif
