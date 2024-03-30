@@ -207,8 +207,7 @@ void DialogFinalMeasurements::showEvent(QShowEvent *event)
     }
     // do your init stuff here
 
-    const QSize sz = VAbstractApplication::VApp()->Settings()->GetFinalMeasurementsDialogSize();
-    if (not sz.isEmpty())
+    if (const QSize sz = VAbstractApplication::VApp()->Settings()->GetFinalMeasurementsDialogSize(); not sz.isEmpty())
     {
         resize(sz);
     }
@@ -390,8 +389,7 @@ void DialogFinalMeasurements::SaveFormula()
     // Replace line return character with spaces for calc if exist
     QString const text = ui->plainTextEditFormula->toPlainText();
 
-    QTableWidgetItem *formulaField = ui->tableWidget->item(row, 2);
-    if (formulaField->text() == text)
+    if (QTableWidgetItem *formulaField = ui->tableWidget->item(row, 2); formulaField->text() == text)
     {
         QTableWidgetItem *result = ui->tableWidget->item(row, 1);
         // Show unit in dialog lable (cm, mm or inch)

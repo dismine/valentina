@@ -80,8 +80,9 @@ PreferencesConfigurationPage::PreferencesConfigurationPage(QWidget *parent)
 
     //----------------------- Unit setup
     // set default unit
-    const qint32 indexUnit = ui->unitCombo->findData(VAbstractValApplication::VApp()->ValentinaSettings()->GetUnit());
-    if (indexUnit != -1)
+    if (const qint32 indexUnit =
+            ui->unitCombo->findData(VAbstractValApplication::VApp()->ValentinaSettings()->GetUnit());
+        indexUnit != -1)
     {
         ui->unitCombo->setCurrentIndex(indexUnit);
     }
@@ -217,8 +218,8 @@ auto PreferencesConfigurationPage::Apply() -> QStringList
     settings->SetToolBarStyle(ui->toolBarStyleCheck->isChecked());
     settings->SetToolboxIconSizeSmall(ui->radioButtonToolboxIconSizeSmall->isChecked());
 
-    auto themeMode = static_cast<VThemeMode>(ui->comboBoxThemeMode->currentData().toInt());
-    if (settings->GetThemeMode() != themeMode)
+    if (auto themeMode = static_cast<VThemeMode>(ui->comboBoxThemeMode->currentData().toInt());
+        settings->GetThemeMode() != themeMode)
     {
         QGuiApplication::setOverrideCursor(QCursor(Qt::WaitCursor));
 #if QT_VERSION >= QT_VERSION_CHECK(6, 5, 0)

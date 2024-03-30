@@ -251,8 +251,7 @@ void LogPatternToolUsed(bool checked, const QString &toolName)
         {
             auto *statistic = VGAnalytics::Instance();
 
-            QString clientID = settings->GetClientID();
-            if (clientID.isEmpty())
+            if (QString clientID = settings->GetClientID(); clientID.isEmpty())
             {
                 clientID = QUuid::createUuid().toString();
                 settings->SetClientID(clientID);
@@ -4932,8 +4931,7 @@ void MainWindow::AskDefaultSettings()
 
         if (settings->IsAskCollectStatistic() || settings->IsAskSendCrashReport())
         {
-            DialogAskCollectStatistic dialog(this);
-            if (dialog.exec() == QDialog::Accepted)
+            if (DialogAskCollectStatistic dialog(this); dialog.exec() == QDialog::Accepted)
             {
                 settings->SetCollectStatistic(dialog.CollectStatistic());
 #if defined(CRASH_REPORTING)
@@ -4951,9 +4949,8 @@ void MainWindow::AskDefaultSettings()
             auto *statistic = VGAnalytics::Instance();
             statistic->SetGUILanguage(settings->GetLocale());
 
-            QString clientID = settings->GetClientID();
             bool freshID = false;
-            if (clientID.isEmpty())
+            if (QString clientID = settings->GetClientID(); clientID.isEmpty())
             {
                 clientID = QUuid::createUuid().toString();
                 settings->SetClientID(clientID);
@@ -5030,8 +5027,7 @@ void MainWindow::SaveBackgroundImage(const QUuid &id)
 
     if (mime.isValid())
     {
-        QStringList const suffixes = mime.suffixes();
-        if (not suffixes.isEmpty())
+        if (QStringList const suffixes = mime.suffixes(); not suffixes.isEmpty())
         {
             path += '.'_L1 + suffixes.at(0);
         }
@@ -5771,9 +5767,8 @@ auto MainWindow::MaybeSave() -> bool
 
         messageBox->setWindowModality(Qt::ApplicationModal);
         messageBox->setFixedSize(300, 85);
-        const auto ret = static_cast<QMessageBox::StandardButton>(messageBox->exec());
 
-        switch (ret)
+        switch (static_cast<QMessageBox::StandardButton>(messageBox->exec()))
         {
             case QMessageBox::Yes:
                 if (m_patternReadOnly)
@@ -6470,8 +6465,7 @@ auto MainWindow::LoadPattern(QString fileName, const QString &customMeasureFile)
             {
                 auto *statistic = VGAnalytics::Instance();
 
-                QString clientID = settings->GetClientID();
-                if (clientID.isEmpty())
+                if (QString clientID = settings->GetClientID(); clientID.isEmpty())
                 {
                     clientID = QUuid::createUuid().toString();
                     settings->SetClientID(clientID);
@@ -7077,8 +7071,7 @@ auto MainWindow::CheckPathToMeasurements(const QString &patternPath, const QStri
         {
             auto *statistic = VGAnalytics::Instance();
 
-            QString clientID = settings->GetClientID();
-            if (clientID.isEmpty())
+            if (QString clientID = settings->GetClientID(); clientID.isEmpty())
             {
                 clientID = QUuid::createUuid().toString();
                 settings->SetClientID(clientID);
@@ -7101,8 +7094,7 @@ auto MainWindow::CheckPathToMeasurements(const QString &patternPath, const QStri
         {
             auto *statistic = VGAnalytics::Instance();
 
-            QString clientID = settings->GetClientID();
-            if (clientID.isEmpty())
+            if (QString clientID = settings->GetClientID(); clientID.isEmpty())
             {
                 clientID = QUuid::createUuid().toString();
                 settings->SetClientID(clientID);

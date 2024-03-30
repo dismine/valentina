@@ -178,8 +178,7 @@ auto InitializeCrashpad(const QString &appName) -> bool
 
     auto MakeDir = [](const QString &path)
     {
-        QDir const directory(path);
-        if (not directory.exists())
+        if (QDir const directory(path); not directory.exists())
         {
             directory.mkpath(QChar('.'));
         }

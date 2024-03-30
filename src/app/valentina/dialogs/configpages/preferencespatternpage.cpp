@@ -99,8 +99,7 @@ PreferencesPatternPage::PreferencesPatternPage(QWidget *parent)
     //----------------------- Unit setup
     // set default unit
     const Unit defUnit = QLocale().measurementSystem() == QLocale::MetricSystem ? Unit::Mm : Unit::Inch;
-    const qint32 indexUnit = ui->comboBoxLineWidthUnit->findData(static_cast<int>(defUnit));
-    if (indexUnit != -1)
+    if (const qint32 indexUnit = ui->comboBoxLineWidthUnit->findData(static_cast<int>(defUnit)); indexUnit != -1)
     {
         ui->comboBoxLineWidthUnit->setCurrentIndex(indexUnit);
     }
@@ -140,15 +139,13 @@ PreferencesPatternPage::PreferencesPatternPage(QWidget *parent)
     ui->fontComboBoxLabelFont->setCurrentFont(labelFont);
 
     InitLabelFontSizes();
-    const qint32 indexSize = ui->comboBoxLabelFontSize->findData(pointSize);
-    if (indexSize != -1)
+    if (const qint32 indexSize = ui->comboBoxLabelFontSize->findData(pointSize); indexSize != -1)
     {
         ui->comboBoxLabelFontSize->setCurrentIndex(indexSize);
     }
 
     InitSingleLineFonts();
-    const qint32 indexFont = ui->comboBoxSingleLineFont->findData(settings->GetLabelSVGFont());
-    if (indexFont != -1)
+    if (const qint32 indexFont = ui->comboBoxSingleLineFont->findData(settings->GetLabelSVGFont()); indexFont != -1)
     {
         ui->comboBoxSingleLineFont->setCurrentIndex(indexFont);
     }

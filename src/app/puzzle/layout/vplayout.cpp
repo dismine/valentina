@@ -303,10 +303,9 @@ auto VPLayout::GetSheets() const -> QList<VPSheetPtr>
 //---------------------------------------------------------------------------------------------------------------------
 auto VPLayout::GetSheet(const QUuid &uuid) -> VPSheetPtr
 {
-    auto sheet = std::find_if(m_sheets.begin(), m_sheets.end(),
-                              [uuid](const VPSheetPtr &sheet) { return sheet->Uuid() == uuid; });
-
-    if (sheet != m_sheets.end())
+    if (auto sheet = std::find_if(m_sheets.begin(), m_sheets.end(),
+                                  [uuid](const VPSheetPtr &sheet) { return sheet->Uuid() == uuid; });
+        sheet != m_sheets.end())
     {
         return *sheet;
     }

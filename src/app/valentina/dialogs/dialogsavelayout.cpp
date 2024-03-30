@@ -429,11 +429,11 @@ void DialogSaveLayout::Save()
             Path() + '/' + FileName() + QString::number(i + 1) + VLayoutExporter::ExportFormatSuffix(Format());
         if (QFile::exists(name))
         {
-            QMessageBox::StandardButton const res = QMessageBox::question(
-                this, tr("Name conflict"),
-                tr("Folder already contain file with name %1. Rewrite all conflict file names?").arg(name),
-                QMessageBox::Yes | QMessageBox::No, QMessageBox::Yes);
-            if (res == QMessageBox::No)
+            if (QMessageBox::StandardButton const res = QMessageBox::question(
+                    this, tr("Name conflict"),
+                    tr("Folder already contain file with name %1. Rewrite all conflict file names?").arg(name),
+                    QMessageBox::Yes | QMessageBox::No, QMessageBox::Yes);
+                res == QMessageBox::No)
             {
                 reject();
                 return;

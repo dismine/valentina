@@ -694,8 +694,7 @@ void PuzzlePreferencesLayoutPage::FindTemplate(QComboBox *box, qreal width, qrea
             VAbstractLayoutDialog::RoundTemplateSize(height, width, paperUnit) == tmplSize)
         {
             box->blockSignals(true);
-            const int index = box->findData(i);
-            if (index != -1)
+            if (const int index = box->findData(i); index != -1)
             {
                 box->setCurrentIndex(index);
             }
@@ -705,8 +704,7 @@ void PuzzlePreferencesLayoutPage::FindTemplate(QComboBox *box, qreal width, qrea
     }
 
     box->blockSignals(true);
-    const int index = box->findData(max);
-    if (index != -1)
+    if (const int index = box->findData(max); index != -1)
     {
         box->setCurrentIndex(index);
     }

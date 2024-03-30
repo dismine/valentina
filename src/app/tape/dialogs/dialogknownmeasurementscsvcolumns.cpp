@@ -488,8 +488,7 @@ void DialogKnownMeasurementsCSVColumns::CheckStatus()
 
     QSharedPointer<QxtCsvModel> const csv = DialogKnownMeasurementsCSVColumns::CSVModel();
 
-    const int columns = csv->columnCount();
-    if (columns < MinimumColumns())
+    if (const int columns = csv->columnCount(); columns < MinimumColumns())
     {
         SetStatus(false);
         ui->labelStatus->setText(
@@ -497,8 +496,7 @@ void DialogKnownMeasurementsCSVColumns::CheckStatus()
         return;
     }
 
-    const int rows = csv->rowCount();
-    if (rows < 1)
+    if (const int rows = csv->rowCount(); rows < 1)
     {
         SetStatus(false);
         ui->labelStatus->setText(

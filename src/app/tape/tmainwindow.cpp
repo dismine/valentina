@@ -333,16 +333,13 @@ auto TMainWindow::CurrentFile() const -> QString
 //---------------------------------------------------------------------------------------------------------------------
 void TMainWindow::SetDimensionABase(qreal base)
 {
-    const QList<MeasurementDimension_p> dimensions = m_m->Dimensions().values();
-
-    if (dimensions.isEmpty())
+    if (const QList<MeasurementDimension_p> dimensions = m_m->Dimensions().values(); dimensions.isEmpty())
     {
         qCWarning(tMainWindow, "%s\n", qPrintable(tr("The table doesn't provide dimensions")));
         return;
     }
 
-    const qint32 i = m_gradationDimensionA->findData(base);
-    if (i != -1)
+    if (const qint32 i = m_gradationDimensionA->findData(base); i != -1)
     {
         m_gradationDimensionA->setCurrentIndex(i);
     }
@@ -357,16 +354,13 @@ void TMainWindow::SetDimensionABase(qreal base)
 //---------------------------------------------------------------------------------------------------------------------
 void TMainWindow::SetDimensionBBase(qreal base)
 {
-    const QList<MeasurementDimension_p> dimensions = m_m->Dimensions().values();
-
-    if (dimensions.size() <= 1)
+    if (const QList<MeasurementDimension_p> dimensions = m_m->Dimensions().values(); dimensions.size() <= 1)
     {
         qCWarning(tMainWindow, "%s\n", qPrintable(tr("The table doesn't support dimension B")));
         return;
     }
 
-    const qint32 i = m_gradationDimensionB->findData(base);
-    if (i != -1)
+    if (const qint32 i = m_gradationDimensionB->findData(base); i != -1)
     {
         m_gradationDimensionB->setCurrentIndex(i);
     }
@@ -381,16 +375,13 @@ void TMainWindow::SetDimensionBBase(qreal base)
 //---------------------------------------------------------------------------------------------------------------------
 void TMainWindow::SetDimensionCBase(qreal base)
 {
-    const QList<MeasurementDimension_p> dimensions = m_m->Dimensions().values();
-
-    if (dimensions.size() <= 2)
+    if (const QList<MeasurementDimension_p> dimensions = m_m->Dimensions().values(); dimensions.size() <= 2)
     {
         qCWarning(tMainWindow, "%s\n", qPrintable(tr("The table doesn't support dimension C")));
         return;
     }
 
-    const qint32 i = m_gradationDimensionC->findData(base);
-    if (i != -1)
+    if (const qint32 i = m_gradationDimensionC->findData(base); i != -1)
     {
         m_gradationDimensionC->setCurrentIndex(i);
     }
@@ -430,9 +421,9 @@ auto TMainWindow::LoadFile(const QString &path) -> bool
 
     // Check if file already opened
     const QList<TMainWindow *> list = MApplication::VApp()->MainTapeWindows();
-    auto w =
-        std::find_if(list.begin(), list.end(), [path](TMainWindow *window) { return window->CurrentFile() == path; });
-    if (w != list.end())
+    if (auto w = std::find_if(list.begin(), list.end(),
+                              [path](TMainWindow *window) { return window->CurrentFile() == path; });
+        w != list.end())
     {
         (*w)->activateWindow();
         close();
@@ -475,8 +466,7 @@ auto TMainWindow::LoadFile(const QString &path) -> bool
             {
                 auto *statistic = VGAnalytics::Instance();
 
-                QString clientID = settings->GetClientID();
-                if (clientID.isEmpty())
+                if (QString clientID = settings->GetClientID(); clientID.isEmpty())
                 {
                     clientID = QUuid::createUuid().toString();
                     settings->SetClientID(clientID);
@@ -501,8 +491,7 @@ auto TMainWindow::LoadFile(const QString &path) -> bool
             {
                 auto *statistic = VGAnalytics::Instance();
 
-                QString clientID = settings->GetClientID();
-                if (clientID.isEmpty())
+                if (QString clientID = settings->GetClientID(); clientID.isEmpty())
                 {
                     clientID = QUuid::createUuid().toString();
                     settings->SetClientID(clientID);
@@ -865,8 +854,7 @@ void TMainWindow::ExportToCSVData(const QString &fileName, bool withHeader, int 
     {
         columns = 5;
 
-        const QList<MeasurementDimension_p> dimensions = m_m->Dimensions().values();
-        if (dimensions.size() > 1)
+        if (const QList<MeasurementDimension_p> dimensions = m_m->Dimensions().values(); dimensions.size() > 1)
         {
             columns += qMin(static_cast<int>(dimensions.size()), 2);
         }
@@ -932,8 +920,7 @@ auto TMainWindow::FileSave() -> bool
         return false;
     }
 
-    QString error;
-    if (not SaveMeasurements(m_curFile, error))
+    if (QString error; not SaveMeasurements(m_curFile, error))
     {
         QMessageBox messageBox;
         messageBox.setIcon(QMessageBox::Warning);
@@ -993,8 +980,7 @@ auto TMainWindow::FileSaveAs() -> bool
         return false;
     }
 
-    QFileInfo const f(fileName);
-    if (f.suffix().isEmpty() && f.suffix() != suffix)
+    if (QFileInfo const f(fileName); f.suffix().isEmpty() && f.suffix() != suffix)
     {
         fileName += '.'_L1 + suffix;
     }
@@ -1026,8 +1012,7 @@ auto TMainWindow::FileSaveAs() -> bool
     m_mIsReadOnly = false;
 
     QString error;
-    bool const result = SaveMeasurements(fileName, error);
-    if (not result)
+    if (bool const result = SaveMeasurements(fileName, error); not result)
     {
         QMessageBox messageBox;
         messageBox.setIcon(QMessageBox::Warning);
@@ -1114,8 +1099,7 @@ void TMainWindow::ImportDataFromCSV()
         return;
     }
 
-    QFileInfo const f(fileName);
-    if (f.suffix().isEmpty() && f.suffix() != suffix)
+    if (QFileInfo const f(fileName); f.suffix().isEmpty() && f.suffix() != suffix)
     {
         fileName += '.'_L1 + suffix;
     }
@@ -1556,9 +1540,7 @@ void TMainWindow::RemoveImage()
 //---------------------------------------------------------------------------------------------------------------------
 void TMainWindow::SaveImage()
 {
-    const int row = ui->tableWidget->currentRow();
-
-    if (row == -1)
+    if (const int row = ui->tableWidget->currentRow(); row == -1)
     {
         ui->toolButtonSaveImage->setDisabled(true);
         return;
@@ -1593,8 +1575,7 @@ void TMainWindow::SaveImage()
     QMimeType const mime = image.MimeTypeFromData();
     QString path = settings->GetPathCustomImage() + QDir::separator() + tr("untitled");
 
-    QStringList const suffixes = mime.suffixes();
-    if (not suffixes.isEmpty())
+    if (QStringList const suffixes = mime.suffixes(); not suffixes.isEmpty())
     {
         path += '.'_L1 + suffixes.at(0);
     }
@@ -1624,9 +1605,7 @@ void TMainWindow::SaveImage()
 //---------------------------------------------------------------------------------------------------------------------
 void TMainWindow::ShowImage()
 {
-    const int row = ui->tableWidget->currentRow();
-
-    if (row == -1)
+    if (const int row = ui->tableWidget->currentRow(); row == -1)
     {
         return;
     }
@@ -1658,8 +1637,7 @@ void TMainWindow::ShowImage()
     QMimeType const mime = image.MimeTypeFromData();
     QString name = QDir::tempPath() + QDir::separator() + "image.XXXXXX"_L1;
 
-    QStringList const suffixes = mime.suffixes();
-    if (not suffixes.isEmpty())
+    if (QStringList const suffixes = mime.suffixes(); not suffixes.isEmpty())
     {
         name += '.'_L1 + suffixes.at(0);
     }
@@ -1713,8 +1691,7 @@ void TMainWindow::AddKnown()
 {
     if (m_m->KnownMeasurements().isNull())
     {
-        DialogNoKnownMeasurements dialog(this);
-        if (dialog.exec() == QDialog::Accepted)
+        if (DialogNoKnownMeasurements dialog(this); dialog.exec() == QDialog::Accepted)
         {
             MApplication::VApp()->NewMainKMWindow();
         }
@@ -1829,8 +1806,7 @@ void TMainWindow::ImportFromPattern()
         return;
     }
 
-    VLockGuard<char> const tmp(mPath);
-    if (not tmp.IsLocked())
+    if (VLockGuard<char> const tmp(mPath); not tmp.IsLocked())
     {
         qCCritical(tMainWindow, "%s", qUtf8Printable(tr("This file already opened in another window.")));
         return;
@@ -1849,8 +1825,7 @@ void TMainWindow::ImportFromPattern()
         {
             auto *statistic = VGAnalytics::Instance();
 
-            QString clientID = settings->GetClientID();
-            if (clientID.isEmpty())
+            if (QString clientID = settings->GetClientID(); clientID.isEmpty())
             {
                 clientID = QUuid::createUuid().toString();
                 settings->SetClientID(clientID);
@@ -1908,8 +1883,7 @@ void TMainWindow::DimensionABaseChanged()
 {
     m_currentDimensionA = m_gradationDimensionA->currentData().toDouble();
 
-    const QList<MeasurementDimension_p> dimensions = m_m->Dimensions().values();
-    if (dimensions.size() > 1)
+    if (const QList<MeasurementDimension_p> dimensions = m_m->Dimensions().values(); dimensions.size() > 1)
     {
         MeasurementDimension_p dimension = dimensions.at(1);
         InitDimensionGradation(1, dimension, m_gradationDimensionB);
@@ -1929,9 +1903,7 @@ void TMainWindow::DimensionBBaseChanged()
 {
     m_currentDimensionB = m_gradationDimensionB->currentData().toDouble();
 
-    const QList<MeasurementDimension_p> dimensions = m_m->Dimensions().values();
-
-    if (dimensions.size() > 2)
+    if (const QList<MeasurementDimension_p> dimensions = m_m->Dimensions().values(); dimensions.size() > 2)
     {
         const MeasurementDimension_p &dimension = dimensions.at(2);
         InitDimensionGradation(2, dimension, m_gradationDimensionC);
@@ -2282,8 +2254,7 @@ void TMainWindow::SaveMValue()
 
     QString const text = ui->plainTextEditFormula->toPlainText();
 
-    QTableWidgetItem *formulaField = ui->tableWidget->item(row, ColumnFormula);
-    if (formulaField->text() == text)
+    if (QTableWidgetItem *formulaField = ui->tableWidget->item(row, ColumnFormula); formulaField->text() == text)
     {
         QTableWidgetItem *result = ui->tableWidget->item(row, ColumnCalcValue);
         const QString postfix = UnitsToStr(m_mUnit); // Show unit in dialog lable (cm, mm or inch)
@@ -2625,8 +2596,7 @@ void TMainWindow::ExportToIndividual()
     }
 
     QString const suffix = QStringLiteral("vit");
-    QFileInfo const f(fileName);
-    if (f.suffix().isEmpty() && f.suffix() != suffix)
+    if (QFileInfo const f(fileName); f.suffix().isEmpty() && f.suffix() != suffix)
     {
         fileName += '.'_L1 + suffix;
     }
@@ -2790,8 +2760,7 @@ void TMainWindow::AskDefaultSettings()
 
     if (settings->IsAskCollectStatistic() || settings->IsAskSendCrashReport())
     {
-        DialogAskCollectStatistic dialog(this);
-        if (dialog.exec() == QDialog::Accepted)
+        if (DialogAskCollectStatistic dialog(this); dialog.exec() == QDialog::Accepted)
         {
             settings->SetCollectStatistic(dialog.CollectStatistic());
 #if defined(CRASH_REPORTING)
@@ -2809,9 +2778,8 @@ void TMainWindow::AskDefaultSettings()
         auto *statistic = VGAnalytics::Instance();
         statistic->SetGUILanguage(settings->GetLocale());
 
-        QString clientID = settings->GetClientID();
         bool freshID = false;
-        if (clientID.isEmpty())
+        if (QString clientID = settings->GetClientID(); clientID.isEmpty())
         {
             clientID = QUuid::createUuid().toString();
             settings->SetClientID(clientID);
@@ -3142,8 +3110,7 @@ void TMainWindow::InitMenu()
         separator->setSeparator(true);
         ui->menuMeasurements->insertAction(ui->actionUseFullCircumference, separator);
 
-        const QList<MeasurementDimension_p> dimensions = m_m->Dimensions().values();
-        if (not dimensions.empty())
+        if (const QList<MeasurementDimension_p> dimensions = m_m->Dimensions().values(); not dimensions.empty())
         {
             ui->actionRestrictFirstDimension->setVisible(true);
             ui->actionRestrictFirstDimension->setEnabled(true);
@@ -3398,8 +3365,7 @@ void TMainWindow::ShowHeaderUnits(QTableWidget *table, int column, const QString
     SCASSERT(table != nullptr)
 
     QString header = table->horizontalHeaderItem(column)->text();
-    const auto index = header.indexOf('('_L1);
-    if (index != -1)
+    if (const auto index = header.indexOf('('_L1); index != -1)
     {
         header.remove(index - 1, 100);
     }
@@ -3491,9 +3457,8 @@ auto TMainWindow::MaybeSave() -> bool
 
     messageBox->setWindowModality(Qt::ApplicationModal);
     messageBox->setFixedSize(300, 85);
-    const auto ret = static_cast<QMessageBox::StandardButton>(messageBox->exec());
 
-    switch (ret)
+    switch (static_cast<QMessageBox::StandardButton>(messageBox->exec()))
     {
         case QMessageBox::Yes:
             if (m_mIsReadOnly)
@@ -3815,8 +3780,7 @@ void TMainWindow::UpdateWindowTitle()
     }
     else
     {
-        auto index = MApplication::VApp()->MainTapeWindows().indexOf(this);
-        if (index != -1)
+        if (auto index = MApplication::VApp()->MainTapeWindows().indexOf(this); index != -1)
         {
             showName = tr("untitled %1").arg(index + 1);
         }
@@ -3923,8 +3887,7 @@ void TMainWindow::SyncKnownMeasurements()
 auto TMainWindow::ClearCustomName(const QString &name) -> QString
 {
     QString clear = name;
-    const auto index = clear.indexOf(CustomMSign);
-    if (index == 0)
+    if (const auto index = clear.indexOf(CustomMSign); index == 0)
     {
         clear.remove(0, 1);
     }
@@ -4122,9 +4085,9 @@ auto TMainWindow::LoadFromExistingFile(const QString &path) -> bool
 
     // Check if file already opened
     const QList<TMainWindow *> list = MApplication::VApp()->MainTapeWindows();
-    auto w =
-        std::find_if(list.begin(), list.end(), [path](TMainWindow *window) { return window->CurrentFile() == path; });
-    if (w != list.end())
+    if (auto w = std::find_if(list.begin(), list.end(),
+                              [path](TMainWindow *window) { return window->CurrentFile() == path; });
+        w != list.end())
     {
         (*w)->activateWindow();
         close();
@@ -4234,8 +4197,7 @@ void TMainWindow::CreateWindowMenu(QMenu *menu)
         TMainWindow *window = windows.at(i);
 
         QString title = QStringLiteral("%1. %2").arg(i + 1).arg(window->windowTitle());
-        const auto index = title.lastIndexOf("[*]"_L1);
-        if (index != -1)
+        if (const auto index = title.lastIndexOf("[*]"_L1); index != -1)
         {
             window->isWindowModified() ? title.replace(index, 3, '*'_L1) : title.replace(index, 3, QString());
         }
@@ -4308,8 +4270,7 @@ auto TMainWindow::CheckMName(const QString &name, const QSet<QString> &importedN
         throw VException(tr("Imported file must not contain the same name twice."));
     }
 
-    QRegularExpression const rx(NameRegExp());
-    if (not rx.match(name).hasMatch())
+    if (QRegularExpression const rx(NameRegExp()); not rx.match(name).hasMatch())
     {
         throw VException(tr("Measurement '%1' doesn't match regex pattern.").arg(name));
     }
@@ -4433,9 +4394,7 @@ void TMainWindow::ImportIndividualMeasurements(const QxtCsvModel &csv, const QVe
 //---------------------------------------------------------------------------------------------------------------------
 void TMainWindow::ImportMultisizeMeasurements(const QxtCsvModel &csv, const QVector<int> &map, bool withHeader)
 {
-    const int columns = csv.columnCount();
-
-    if (columns < 4)
+    if (const int columns = csv.columnCount(); columns < 4)
     {
         ShowError(tr("Multisize measurements require at least 4 columns."));
         return;
@@ -4576,8 +4535,7 @@ void TMainWindow::SetCurrentPatternUnit()
     if (m_comboBoxUnits)
     {
         m_comboBoxUnits->blockSignals(true);
-        const qint32 indexUnit = m_comboBoxUnits->findData(static_cast<int>(m_pUnit));
-        if (indexUnit != -1)
+        if (const qint32 indexUnit = m_comboBoxUnits->findData(static_cast<int>(m_pUnit)); indexUnit != -1)
         {
             m_comboBoxUnits->setCurrentIndex(indexUnit);
         }
@@ -4796,8 +4754,7 @@ void TMainWindow::InitKnownMeasurements(QComboBox *combo)
         return;
     }
 
-    QUuid const kmId = m_m->KnownMeasurements();
-    if (!kmId.isNull() && !known.contains(kmId))
+    if (QUuid const kmId = m_m->KnownMeasurements(); !kmId.isNull() && !known.contains(kmId))
     {
         combo->addItem(tr("Invalid link"), kmId);
     }
@@ -5124,8 +5081,7 @@ void TMainWindow::InitMeasurementUnits()
     ui->comboBoxMUnits->addItem(units, QVariant(static_cast<int>(MUnits::Table)));
     ui->comboBoxMUnits->addItem(tr("Degrees"), QVariant(static_cast<int>(MUnits::Degrees)));
 
-    int const i = ui->comboBoxMUnits->findData(current);
-    if (i != -1)
+    if (int const i = ui->comboBoxMUnits->findData(current); i != -1)
     {
         ui->comboBoxMUnits->setCurrentIndex(i);
     }
@@ -5161,8 +5117,7 @@ void TMainWindow::InitMeasurementDimension()
     ui->comboBoxDimension->addItem(VMeasurements::IMDName(IMD::W), QVariant(static_cast<int>(IMD::W)));
     ui->comboBoxDimension->addItem(VMeasurements::IMDName(IMD::Z), QVariant(static_cast<int>(IMD::Z)));
 
-    int const i = ui->comboBoxDimension->findData(current);
-    if (i != -1)
+    if (int const i = ui->comboBoxDimension->findData(current); i != -1)
     {
         ui->comboBoxDimension->setCurrentIndex(i);
     }

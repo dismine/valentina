@@ -1317,8 +1317,7 @@ auto MainWindowsNoGUI::OpenMeasurementFile(const QString &path) const -> QShared
             {
                 auto *statistic = VGAnalytics::Instance();
 
-                QString clientID = settings->GetClientID();
-                if (clientID.isEmpty())
+                if (QString clientID = settings->GetClientID(); clientID.isEmpty())
                 {
                     clientID = QUuid::createUuid().toString();
                     settings->SetClientID(clientID);
@@ -1341,8 +1340,7 @@ auto MainWindowsNoGUI::OpenMeasurementFile(const QString &path) const -> QShared
             {
                 auto *statistic = VGAnalytics::Instance();
 
-                QString clientID = settings->GetClientID();
-                if (clientID.isEmpty())
+                if (QString clientID = settings->GetClientID(); clientID.isEmpty())
                 {
                     clientID = QUuid::createUuid().toString();
                     settings->SetClientID(clientID);

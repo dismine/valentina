@@ -65,8 +65,7 @@ namespace
 //---------------------------------------------------------------------------------------------------------------------
 auto StringToTransfrom(const QString &matrix) -> QTransform
 {
-    QStringList const elements = matrix.split(ML::groupSep);
-    if (elements.count() == 9)
+    if (QStringList const elements = matrix.split(ML::groupSep); elements.count() == 9)
     {
         qreal const m11 = elements.at(0).toDouble();
         qreal const m12 = elements.at(1).toDouble();
@@ -86,8 +85,7 @@ auto StringToTransfrom(const QString &matrix) -> QTransform
 //---------------------------------------------------------------------------------------------------------------------
 auto StringToPoint(const QString &point) -> QPointF
 {
-    QStringList const coordinates = point.split(ML::coordintatesSep);
-    if (coordinates.count() == 2)
+    if (QStringList const coordinates = point.split(ML::coordintatesSep); coordinates.count() == 2)
     {
         return {coordinates.at(0).toDouble(), coordinates.at(1).toDouble()};
     }
@@ -179,8 +177,7 @@ auto StringToGrainlineArrowDirrection(const QString &dirrection) -> GrainlineArr
 //---------------------------------------------------------------------------------------------------------------------
 auto StringToLine(const QString &string) -> QLineF
 {
-    QStringList const points = string.split(ML::groupSep);
-    if (points.count() == 2)
+    if (QStringList const points = string.split(ML::groupSep); points.count() == 2)
     {
         return {StringToPoint(points.at(0)), StringToPoint(points.at(1))};
     }
@@ -210,8 +207,7 @@ auto StringToLines(const QString &string) -> QVector<QLineF>
 //---------------------------------------------------------------------------------------------------------------------
 auto StringToRect(const QString &string) -> QRectF
 {
-    QStringList const points = string.split(ML::groupSep);
-    if (points.count() == 4)
+    if (QStringList const points = string.split(ML::groupSep); points.count() == 4)
     {
         return {points.at(0).toDouble(), points.at(1).toDouble(), points.at(2).toDouble(), points.at(3).toDouble()};
     }
@@ -478,8 +474,7 @@ void VPLayoutFileReader::ReadPieces(const VPLayoutPtr &layout, const VPSheetPtr 
             VPPiecePtr const piece(new VPPiece());
             ReadPiece(piece);
 
-            QString error;
-            if (not piece->IsValid(error))
+            if (QString error; not piece->IsValid(error))
             {
                 throw VException(tr("Piece %1 invalid. %2").arg(piece->GetName(), error));
             }
@@ -889,8 +884,8 @@ auto VPLayoutFileReader::ReadLabelLines() -> VTextManager
     QXmlStreamAttributes const attribs = attributes();
     text.SetFont(FontFromString(ReadAttributeEmptyString(attribs, ML::AttrFont)));
 
-    QStringList const svgFontData = ReadAttributeEmptyString(attribs, ML::AttrSVGFont).split(',');
-    if (!svgFontData.isEmpty())
+    if (QStringList const svgFontData = ReadAttributeEmptyString(attribs, ML::AttrSVGFont).split(',');
+        !svgFontData.isEmpty())
     {
         text.SetSVGFontFamily(svgFontData.constFirst());
 
@@ -968,8 +963,8 @@ void VPLayoutFileReader::ReadMirrorLines(const VPPiecePtr &piece)
     piece->SetFoldLineLabel(ReadAttributeEmptyString(attribs, ML::AttrFoldLineLabel));
     piece->SetFoldLineOutlineFont(FontFromString(ReadAttributeEmptyString(attribs, ML::AttrFont)));
 
-    QStringList const svgFontData = ReadAttributeEmptyString(attribs, ML::AttrSVGFont).split(','_L1);
-    if (!svgFontData.isEmpty())
+    if (QStringList const svgFontData = ReadAttributeEmptyString(attribs, ML::AttrSVGFont).split(','_L1);
+        !svgFontData.isEmpty())
     {
         piece->SetFoldLineSVGFontFamily(svgFontData.constFirst());
 

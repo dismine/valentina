@@ -510,9 +510,8 @@ auto WatermarkWindow::MaybeSave() -> bool
 
         messageBox->setWindowModality(Qt::ApplicationModal);
         messageBox->setFixedSize(300, 85);
-        const auto ret = static_cast<QMessageBox::StandardButton>(messageBox->exec());
 
-        switch (ret)
+        switch (static_cast<QMessageBox::StandardButton>(messageBox->exec()))
         {
             case QMessageBox::Yes:
                 return m_curFile.isEmpty() ? on_actionSaveAs_triggered() : on_actionSave_triggered();

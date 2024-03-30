@@ -52,8 +52,7 @@ VPUndoPieceRotate::VPUndoPieceRotate(const VPPiecePtr &piece, const VPTransforma
 
     m_oldTransform = piece->GetMatrix();
 
-    VPLayoutPtr const layout = piece->Layout();
-    if (not layout.isNull())
+    if (VPLayoutPtr const layout = piece->Layout(); not layout.isNull())
     {
         m_followGrainline = layout->LayoutSettings().GetFollowGrainline();
     }
@@ -147,10 +146,10 @@ auto VPUndoPieceRotate::mergeWith(const QUndoCommand *command) -> bool
     const auto *moveCommand = dynamic_cast<const VPUndoPieceRotate *>(command);
     SCASSERT(moveCommand != nullptr)
 
-    VPPiecePtr const piece = Piece();
-    if (not moveCommand->AllowMerge() || (moveCommand->Piece().isNull() || piece.isNull()) ||
-        moveCommand->Piece() != piece || moveCommand->Origin() != m_origin ||
-        moveCommand->FollowGrainline() != m_followGrainline)
+    if (VPPiecePtr const piece = Piece(); not moveCommand->AllowMerge() ||
+                                          (moveCommand->Piece().isNull() || piece.isNull()) ||
+                                          moveCommand->Piece() != piece || moveCommand->Origin() != m_origin ||
+                                          moveCommand->FollowGrainline() != m_followGrainline)
     {
         return false;
     }
@@ -207,8 +206,7 @@ void VPUndoPiecesRotate::undo()
         return;
     }
 
-    VPSheetPtr const sheet = Sheet();
-    if (layout->GetFocusedSheet() != sheet)
+    if (VPSheetPtr const sheet = Sheet(); layout->GetFocusedSheet() != sheet)
     {
         layout->SetFocusedSheet(sheet);
     }
@@ -241,8 +239,7 @@ void VPUndoPiecesRotate::redo()
         return;
     }
 
-    VPSheetPtr const sheet = Sheet();
-    if (layout->GetFocusedSheet() != sheet)
+    if (VPSheetPtr const sheet = Sheet(); layout->GetFocusedSheet() != sheet)
     {
         layout->SetFocusedSheet(sheet);
     }

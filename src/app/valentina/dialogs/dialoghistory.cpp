@@ -118,8 +118,7 @@ DialogHistory::~DialogHistory()
  */
 void DialogHistory::DialogAccepted()
 {
-    QTableWidgetItem *item = ui->tableWidget->item(m_cursorToolRecordRow, 0);
-    if (item != nullptr)
+    if (QTableWidgetItem *item = ui->tableWidget->item(m_cursorToolRecordRow, 0); item != nullptr)
     {
         auto id = qvariant_cast<quint32>(item->data(Qt::UserRole));
         emit ShowHistoryTool(id, false);

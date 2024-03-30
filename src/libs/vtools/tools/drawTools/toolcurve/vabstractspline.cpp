@@ -476,9 +476,8 @@ void VAbstractSpline::SetAliasSuffix(QString alias)
     alias = alias.simplified().replace(QChar(QChar::Space), '_'_L1);
     curve->SetAliasSuffix(alias);
 
-    QRegularExpression const rx(NameRegExp());
-
-    if (alias.isEmpty() || (rx.match(curve->GetAlias()).hasMatch() && VAbstractTool::data.IsUnique(curve->GetAlias())))
+    if (QRegularExpression const rx(NameRegExp());
+        alias.isEmpty() || (rx.match(curve->GetAlias()).hasMatch() && VAbstractTool::data.IsUnique(curve->GetAlias())))
     {
         QSharedPointer<VGObject> obj = qSharedPointerCast<VGObject>(curve);
         SaveOption(obj);

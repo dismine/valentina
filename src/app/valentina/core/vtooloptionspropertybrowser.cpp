@@ -904,8 +904,8 @@ template <class Tool> void VToolOptionsPropertyBrowser::SetPointName(VPE::VPrope
             return;
         }
 
-        QRegularExpression const rx(NameRegExp());
-        if (name.isEmpty() || not VContainer::IsUnique(name, valentinaNamespace) || not rx.match(name).hasMatch())
+        if (QRegularExpression const rx(NameRegExp());
+            name.isEmpty() || not VContainer::IsUnique(name, valentinaNamespace) || not rx.match(name).hasMatch())
         {
             m_idToProperty[AttrName]->setValue(i->name());
         }
@@ -931,8 +931,8 @@ template <class Tool> void VToolOptionsPropertyBrowser::SetPointName1(VPE::VProp
             return;
         }
 
-        QRegularExpression const rx(NameRegExp());
-        if (name.isEmpty() || not VContainer::IsUnique(name, valentinaNamespace) || not rx.match(name).hasMatch())
+        if (QRegularExpression const rx(NameRegExp());
+            name.isEmpty() || not VContainer::IsUnique(name, valentinaNamespace) || not rx.match(name).hasMatch())
         {
             m_idToProperty[AttrName1]->setValue(i->nameP1());
         }
@@ -958,8 +958,8 @@ template <class Tool> void VToolOptionsPropertyBrowser::SetPointName2(VPE::VProp
             return;
         }
 
-        QRegularExpression const rx(NameRegExp());
-        if (name.isEmpty() || not VContainer::IsUnique(name, valentinaNamespace) || not rx.match(name).hasMatch())
+        if (QRegularExpression const rx(NameRegExp());
+            name.isEmpty() || not VContainer::IsUnique(name, valentinaNamespace) || not rx.match(name).hasMatch())
         {
             m_idToProperty[AttrName2]->setValue(i->nameP2());
         }
@@ -1075,8 +1075,7 @@ template <class Tool> void VToolOptionsPropertyBrowser::SetHCrossCurvesPoint(VPE
     if (auto *i = qgraphicsitem_cast<Tool *>(m_currentItem))
     {
         const QVariant value = property->data(VPE::VProperty::DPC_Data, Qt::EditRole);
-        auto type = GetCrossPoint<HCrossCurvesPoint>(value);
-        if (type == i->GetHCrossPoint())
+        if (auto type = GetCrossPoint<HCrossCurvesPoint>(value); type == i->GetHCrossPoint())
         {
             return;
         }

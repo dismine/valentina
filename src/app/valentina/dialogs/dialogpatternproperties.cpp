@@ -329,9 +329,9 @@ void DialogPatternProperties::ValidatePassmarkLength() const
     QPalette palette = ui->lineEditPassmarkLength->palette();
     const QPalette::ColorRole foregroundRole = ui->lineEditPassmarkLength->foregroundRole();
 
-    QRegularExpression const rx(NameRegExp());
     if (not text.isEmpty())
     {
+        QRegularExpression const rx(NameRegExp());
         palette.setColor(foregroundRole, rx.match(text).hasMatch() && m_variables.contains(text)
                                              ? palette.color(QPalette::Text)
                                              : Qt::red);
@@ -351,9 +351,9 @@ void DialogPatternProperties::ValidatePassmarkWidth() const
     QPalette palette = ui->lineEditPassmarkWidth->palette();
     const QPalette::ColorRole foregroundRole = ui->lineEditPassmarkWidth->foregroundRole();
 
-    QRegularExpression const rx(NameRegExp());
     if (not text.isEmpty())
     {
+        QRegularExpression const rx(NameRegExp());
         palette.setColor(foregroundRole, rx.match(text).hasMatch() && m_variables.contains(text)
                                              ? palette.color(QPalette::Text)
                                              : Qt::red);
@@ -468,8 +468,7 @@ void DialogPatternProperties::SaveImage()
     QMimeType const mime = image.MimeTypeFromData();
     QString path = settings->GetPathCustomImage() + QDir::separator() + tr("untitled");
 
-    QStringList const suffixes = mime.suffixes();
-    if (not suffixes.isEmpty())
+    if (QStringList const suffixes = mime.suffixes(); not suffixes.isEmpty())
     {
         path += '.'_L1 + suffixes.at(0);
     }
@@ -510,8 +509,7 @@ void DialogPatternProperties::ShowImage()
     QMimeType const mime = image.MimeTypeFromData();
     QString name = QDir::tempPath() + QDir::separator() + QStringLiteral("image.XXXXXX");
 
-    QStringList const suffixes = mime.suffixes();
-    if (not suffixes.isEmpty())
+    if (QStringList const suffixes = mime.suffixes(); not suffixes.isEmpty())
     {
         name += '.'_L1 + suffixes.at(0);
     }

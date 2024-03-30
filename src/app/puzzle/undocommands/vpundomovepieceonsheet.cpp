@@ -41,8 +41,7 @@ VPUndoMovePieceOnSheet::VPUndoMovePieceOnSheet(const VPSheetPtr &sheet, const VP
 
     m_oldSheet = piece->Sheet();
 
-    VPLayoutPtr const layout = piece->Layout();
-    if (not layout.isNull())
+    if (VPLayoutPtr const layout = piece->Layout(); not layout.isNull())
     {
         m_followGrainline = layout->LayoutSettings().GetFollowGrainline();
     }

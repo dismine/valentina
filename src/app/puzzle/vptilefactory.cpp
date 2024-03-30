@@ -48,13 +48,13 @@ auto WatermarkImageFromCache(const VWatermarkData &watermarkData, const QString 
 {
     QPixmap pixmap;
     QString const imagePath = AbsoluteMPath(watermarkPath, watermarkData.path);
-    QString const imageCacheKey =
-        QStringLiteral("puzzle=path%1+rotation%3+grayscale%4+xscale%5+yxcale%6")
-            .arg(imagePath, QString::number(watermarkData.imageRotation), watermarkData.grayscale ? trueStr : falseStr)
-            .arg(xScale)
-            .arg(yScale);
 
-    if (not QPixmapCache::find(imageCacheKey, &pixmap))
+    if (QString const imageCacheKey = QStringLiteral("puzzle=path%1+rotation%3+grayscale%4+xscale%5+yxcale%6")
+                                          .arg(imagePath, QString::number(watermarkData.imageRotation),
+                                               watermarkData.grayscale ? trueStr : falseStr)
+                                          .arg(xScale)
+                                          .arg(yScale);
+        not QPixmapCache::find(imageCacheKey, &pixmap))
     {
         QImageReader imageReader(imagePath);
         QImage watermark = imageReader.read();
@@ -157,12 +157,6 @@ void VPTileFactory::drawTile(QPainter *painter, QPrinter *printer, const VPSheet
     SCASSERT(painter != nullptr)
     SCASSERT(printer != nullptr)
 
-    VPLayoutPtr const layout = m_layout.toStrongRef();
-    if (layout.isNull())
-    {
-        return;
-    }
-
     if (sheet.isNull())
     {
         return;
@@ -260,8 +254,7 @@ auto VPTileFactory::RowNb(const VPSheetPtr &sheet) const -> int
     }
 
     qreal yScale = 1;
-    VPLayoutPtr const layout = m_layout.toStrongRef();
-    if (not layout.isNull())
+    if (VPLayoutPtr const layout = m_layout.toStrongRef(); not layout.isNull())
     {
         yScale = layout->LayoutSettings().VerticalScale();
     }
@@ -279,8 +272,7 @@ auto VPTileFactory::ColNb(const VPSheetPtr &sheet) const -> int
     }
 
     qreal xScale = 1;
-    VPLayoutPtr const layout = m_layout.toStrongRef();
-    if (not layout.isNull())
+    if (VPLayoutPtr const layout = m_layout.toStrongRef(); not layout.isNull())
     {
         xScale = layout->LayoutSettings().HorizontalScale();
     }
@@ -700,11 +692,11 @@ void VPTileFactory::PaintWatermarkImage(QPainter *painter, const QRectF &img, co
         }
 
         QPixmap watermark;
-        QString const imagePath =
-            QStringLiteral("puzzle=colorScheme%1+path%2+opacity%3_broken")
-                .arg(colorScheme, AbsoluteMPath(watermarkPath, watermarkData.path), QString::number(opacity));
 
-        if (not QPixmapCache::find(imagePath, &watermark))
+        if (QString const imagePath =
+                QStringLiteral("puzzle=colorScheme%1+path%2+opacity%3_broken")
+                    .arg(colorScheme, AbsoluteMPath(watermarkPath, watermarkData.path), QString::number(opacity));
+            not QPixmapCache::find(imagePath, &watermark))
         {
             QScopedPointer<QSvgRenderer> const svgRenderer(new QSvgRenderer());
 
@@ -734,9 +726,8 @@ void VPTileFactory::PaintWatermarkImage(QPainter *painter, const QRectF &img, co
 
     if (watermarkImage.isNull())
     {
-        QPixmap const watermarkPixmap = BrokenImage();
-
-        if (watermarkPixmap.width() < img.width() && watermarkPixmap.height() < img.height())
+        if (QPixmap const watermarkPixmap = BrokenImage();
+            watermarkPixmap.width() < img.width() && watermarkPixmap.height() < img.height())
         {
             QRect imagePosition(0, 0, watermarkPixmap.width(), watermarkPixmap.height());
             imagePosition.translate(img.center().toPoint() - imagePosition.center());
@@ -754,9 +745,8 @@ void VPTileFactory::PaintWatermarkImage(QPainter *painter, const QRectF &img, co
     qint64 const pixelSize = fileSize / watermarkImage.height() / watermarkImage.width();
     QSize const scaledSize(qRound(watermarkImage.width() / xScale), qRound(watermarkImage.height() / yScale));
     qint64 const scaledImageSize = pixelSize * scaledSize.width() * scaledSize.height() / 1024;
-    int const limit = QPixmapCache::cacheLimit();
 
-    if (scaledImageSize > limit && (xScale < 1 || yScale < 1))
+    if (int const limit = QPixmapCache::cacheLimit(); scaledImageSize > limit && (xScale < 1 || yScale < 1))
     {
         QScopedPointer<QSvgRenderer> const svgRenderer(new QSvgRenderer());
 

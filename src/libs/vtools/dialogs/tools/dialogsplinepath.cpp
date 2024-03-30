@@ -543,12 +543,11 @@ void DialogSplinePath::FXLength2()
 //---------------------------------------------------------------------------------------------------------------------
 void DialogSplinePath::ValidateAlias()
 {
-    QRegularExpression const rx(NameRegExp());
-
     VSplinePath tempPath = path;
     tempPath.SetAliasSuffix(ui->lineEditAlias->text());
 
-    if (not ui->lineEditAlias->text().isEmpty() &&
+    if (QRegularExpression const rx(NameRegExp());
+        not ui->lineEditAlias->text().isEmpty() &&
         (not rx.match(tempPath.GetAlias()).hasMatch() ||
          (originAliasSuffix != ui->lineEditAlias->text() && not data->IsUnique(tempPath.GetAlias()))))
     {

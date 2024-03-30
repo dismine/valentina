@@ -115,8 +115,8 @@ VPGraphicsTileGrid::VPGraphicsTileGrid(const VPLayoutPtr &layout, const QUuid &s
 //---------------------------------------------------------------------------------------------------------------------
 auto VPGraphicsTileGrid::boundingRect() const -> QRectF
 {
-    VPLayoutPtr const layout = m_layout.toStrongRef();
-    if (not layout.isNull() && layout->LayoutSettings().GetShowTiles())
+    if (VPLayoutPtr const layout = m_layout.toStrongRef();
+        not layout.isNull() && layout->LayoutSettings().GetShowTiles())
     {
         VPSheetPtr const sheet = layout->GetSheet(m_sheetUuid);
 

@@ -758,10 +758,10 @@ void DialogEllipticalArc::changeEvent(QEvent *event)
 //---------------------------------------------------------------------------------------------------------------------
 void DialogEllipticalArc::ValidateAlias()
 {
-    QRegularExpression const rx(NameRegExp());
     VEllipticalArc arc;
     arc.SetAliasSuffix(GetAliasSuffix());
-    if (not GetAliasSuffix().isEmpty() &&
+    if (QRegularExpression const rx(NameRegExp());
+        not GetAliasSuffix().isEmpty() &&
         (not rx.match(arc.GetAlias()).hasMatch() ||
          (m_originAliasSuffix != GetAliasSuffix() && not data->IsUnique(arc.GetAlias()))))
     {

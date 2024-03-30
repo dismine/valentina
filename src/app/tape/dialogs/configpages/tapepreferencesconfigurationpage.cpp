@@ -144,8 +144,8 @@ auto TapePreferencesConfigurationPage::Apply() -> QStringList
 
     settings->SetToolBarStyle(ui->toolBarStyleCheck->isChecked());
 
-    auto themeMode = static_cast<VThemeMode>(ui->comboBoxThemeMode->currentData().toInt());
-    if (settings->GetThemeMode() != themeMode)
+    if (auto themeMode = static_cast<VThemeMode>(ui->comboBoxThemeMode->currentData().toInt());
+        settings->GetThemeMode() != themeMode)
     {
         QGuiApplication::setOverrideCursor(QCursor(Qt::WaitCursor));
 #if QT_VERSION >= QT_VERSION_CHECK(6, 5, 0)

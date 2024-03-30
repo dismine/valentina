@@ -538,9 +538,9 @@ void VPApplication::ProcessArguments(const VPCommandLinePtr &cmd)
 {
     const QStringList rawLayouts = cmd->OptionRawLayouts();
     const QStringList args = cmd->OptionFileNames();
-    bool const success = !args.isEmpty() ? StartWithFiles(cmd, rawLayouts) : SingleStart(cmd, rawLayouts);
 
-    if (not success)
+    if (bool const success = !args.isEmpty() ? StartWithFiles(cmd, rawLayouts) : SingleStart(cmd, rawLayouts);
+        not success)
     {
         return;
     }
@@ -577,11 +577,9 @@ auto VPApplication::event(QEvent *e) -> bool
         {
             // NOLINTNEXTLINE(cppcoreguidelines-pro-type-static-cast-downcast)
             auto *fileOpenEvent = static_cast<QFileOpenEvent *>(e);
-            const QString macFileOpen = fileOpenEvent->file();
-            if (not macFileOpen.isEmpty())
+            if (const QString macFileOpen = fileOpenEvent->file(); not macFileOpen.isEmpty())
             {
-                VPMainWindow *mw = MainWindow();
-                if (mw != nullptr)
+                if (VPMainWindow *mw = MainWindow(); mw != nullptr)
                 {
                     mw->LoadFile(macFileOpen); // open file in existing window
                 }
@@ -595,8 +593,7 @@ auto VPApplication::event(QEvent *e) -> bool
             if (static_cast<QApplicationStateChangeEvent *>(e)->applicationState() == Qt::ApplicationActive)
             {
                 Clean();
-                VPMainWindow *mw = MainWindow();
-                if (mw && not mw->isMinimized())
+                if (VPMainWindow *mw = MainWindow(); mw && not mw->isMinimized())
                 {
                     mw->show();
                 }
@@ -635,8 +632,7 @@ void VPApplication::NewLocalSocketConnection()
     }
     socket->waitForReadyRead(1000);
     QTextStream stream(socket.data());
-    const QString arg = stream.readAll();
-    if (not arg.isEmpty())
+    if (const QString arg = stream.readAll(); not arg.isEmpty())
     {
         ParseCommandLine(SocketConnection::Server, arg.split(QStringLiteral(";;")));
     }

@@ -468,11 +468,11 @@ void DialogSaveManualLayout::Save()
 
         if (QFile::exists(name))
         {
-            QMessageBox::StandardButton const res = QMessageBox::question(
-                this, tr("Name conflict"),
-                tr("Folder already contain file with name %1. Rewrite all conflict file names?").arg(name),
-                QMessageBox::Yes | QMessageBox::No, QMessageBox::Yes);
-            if (res == QMessageBox::No)
+            if (QMessageBox::StandardButton const res = QMessageBox::question(
+                    this, tr("Name conflict"),
+                    tr("Folder already contain file with name %1. Rewrite all conflict file names?").arg(name),
+                    QMessageBox::Yes | QMessageBox::No, QMessageBox::Yes);
+                res == QMessageBox::No)
             {
                 reject();
                 return;
@@ -591,8 +591,7 @@ void DialogSaveManualLayout::ShowExample()
 auto DialogSaveManualLayout::SupportPSTest() -> bool
 {
     static bool havePdf = false;
-    static bool tested = false;
-    if (!tested)
+    if (static bool tested = false; !tested)
     {
         havePdf = VLayoutExporter::SupportPDFConversion();
         tested = true;

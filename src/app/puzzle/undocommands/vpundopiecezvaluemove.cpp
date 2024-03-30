@@ -26,8 +26,8 @@
  **
  *************************************************************************/
 #include "vpundopiecezvaluemove.h"
-#include "../layout/vppiece.h"
 #include "../layout/vplayout.h"
+#include "../layout/vppiece.h"
 #include "../layout/vpsheet.h"
 #include "undocommands/vpundocommand.h"
 
@@ -49,19 +49,19 @@ auto CorrectedZValues(const QList<QVector<QString>> &order) -> QHash<QString, qr
         const QVector<QString> &level = order.at(i);
         for (const auto &pieceId : level)
         {
-            correctedZValues.insert(pieceId, i*step);
+            correctedZValues.insert(pieceId, i * step);
         }
     }
 
     return correctedZValues;
 }
-}  // namespace
+} // namespace
 
 //---------------------------------------------------------------------------------------------------------------------
 VPUndoPieceZValueMove::VPUndoPieceZValueMove(const VPPiecePtr &piece, ML::ZValueMove move, QUndoCommand *parent)
-    : VPUndoCommand(parent),
-      m_piece(piece),
-      m_move(move)
+  : VPUndoCommand(parent),
+    m_piece(piece),
+    m_move(move)
 {
     setText(QObject::tr("z value move piece"));
 
@@ -69,7 +69,7 @@ VPUndoPieceZValueMove::VPUndoPieceZValueMove(const VPPiecePtr &piece, ML::ZValue
     if (not sheet.isNull())
     {
         const QList<VPPiecePtr> pieces = sheet->GetPieces();
-        for(const auto& p : pieces)
+        for (const auto &p : pieces)
         {
             if (not p.isNull())
             {
@@ -107,7 +107,7 @@ void VPUndoPieceZValueMove::undo()
 
     const QList<VPPiecePtr> pieces = sheet->GetPieces();
 
-    for (const auto &p: pieces)
+    for (const auto &p : pieces)
     {
         if (not p.isNull())
         {
@@ -158,7 +158,7 @@ void VPUndoPieceZValueMove::redo()
     else if (m_move == ML::ZValueMove::Up)
     {
         const qreal step = LevelStep(pieces);
-        for (const auto &p: pieces)
+        for (const auto &p : pieces)
         {
             if (p->GetUniqueID() != piece->GetUniqueID())
             {
@@ -171,7 +171,7 @@ void VPUndoPieceZValueMove::redo()
     else if (m_move == ML::ZValueMove::Down)
     {
         const qreal step = LevelStep(pieces);
-        for (const auto &p: pieces)
+        for (const auto &p : pieces)
         {
             if (p->GetUniqueID() != piece->GetUniqueID())
             {
@@ -188,7 +188,7 @@ void VPUndoPieceZValueMove::redo()
     }
 
     QHash<QString, qreal> const correctedZValues = CorrectedZValues(order);
-    for (const auto &p: pieces)
+    for (const auto &p : pieces)
     {
         if (not p.isNull())
         {
@@ -215,8 +215,7 @@ auto VPUndoPieceZValueMove::Piece() const -> VPPiecePtr
 //---------------------------------------------------------------------------------------------------------------------
 auto VPUndoPieceZValueMove::Sheet() const -> VPSheetPtr
 {
-    VPPiecePtr const p = Piece();
-    if (not p.isNull())
+    if (VPPiecePtr const p = Piece(); not p.isNull())
     {
         return p->Sheet();
     }
@@ -225,7 +224,7 @@ auto VPUndoPieceZValueMove::Sheet() const -> VPSheetPtr
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-auto VPUndoPieceZValueMove::Levels(const QList<VPPiecePtr> &pieces, bool skip) const -> QList<QVector<QString> >
+auto VPUndoPieceZValueMove::Levels(const QList<VPPiecePtr> &pieces, bool skip) const -> QList<QVector<QString>>
 {
     VPPiecePtr const piece = Piece();
     if (piece.isNull())
@@ -235,7 +234,7 @@ auto VPUndoPieceZValueMove::Levels(const QList<VPPiecePtr> &pieces, bool skip) c
 
     QMap<qreal, QVector<QString>> levels;
 
-    for (const auto &p: pieces)
+    for (const auto &p : pieces)
     {
         if (p.isNull() || (skip && p->GetUniqueID() == piece->GetUniqueID()))
         {
@@ -273,13 +272,13 @@ auto VPUndoPieceZValueMove::LevelStep(const QList<VPPiecePtr> &pieces) const -> 
 // Z value pieces
 VPUndoPiecesZValueMove::VPUndoPiecesZValueMove(const QList<VPPiecePtr> &pieces, ML::ZValueMove move,
                                                QUndoCommand *parent)
-    : VPUndoCommand(parent),
-      m_move(move)
+  : VPUndoCommand(parent),
+    m_move(move)
 {
     setText(QObject::tr("z value move pieces"));
 
     m_pieces.reserve(pieces.size());
-    for(const auto& p : pieces)
+    for (const auto &p : pieces)
     {
         m_pieces.append(p);
     }
@@ -288,7 +287,7 @@ VPUndoPiecesZValueMove::VPUndoPiecesZValueMove(const QList<VPPiecePtr> &pieces, 
     if (not sheet.isNull())
     {
         const QList<VPPiecePtr> pieces = sheet->GetPieces();
-        for(const auto& p : pieces)
+        for (const auto &p : pieces)
         {
             if (not p.isNull())
             {
@@ -325,7 +324,7 @@ void VPUndoPiecesZValueMove::undo()
 
     const QList<VPPiecePtr> pieces = sheet->GetPieces();
 
-    for (const auto &p: pieces)
+    for (const auto &p : pieces)
     {
         if (not p.isNull())
         {
@@ -376,7 +375,7 @@ void VPUndoPiecesZValueMove::redo()
     else if (m_move == ML::ZValueMove::Up)
     {
         const qreal step = LevelStep(allPieces);
-        for (const auto &p: allPieces)
+        for (const auto &p : allPieces)
         {
             if (not ids.contains(p->GetUniqueID()))
             {
@@ -389,7 +388,7 @@ void VPUndoPiecesZValueMove::redo()
     else if (m_move == ML::ZValueMove::Down)
     {
         const qreal step = LevelStep(allPieces);
-        for (const auto &p: allPieces)
+        for (const auto &p : allPieces)
         {
             if (not ids.contains(p->GetUniqueID()))
             {
@@ -406,7 +405,7 @@ void VPUndoPiecesZValueMove::redo()
     }
 
     QHash<QString, qreal> const correctedZValues = CorrectedZValues(order);
-    for (const auto &p: allPieces)
+    for (const auto &p : allPieces)
     {
         if (not p.isNull())
         {
@@ -427,7 +426,7 @@ auto VPUndoPiecesZValueMove::id() const -> int
 //---------------------------------------------------------------------------------------------------------------------
 auto VPUndoPiecesZValueMove::Layout() const -> VPLayoutPtr
 {
-    for (const auto& piece : m_pieces)
+    for (const auto &piece : m_pieces)
     {
         VPPiecePtr const p = piece.toStrongRef();
         if (not p.isNull())
@@ -442,7 +441,7 @@ auto VPUndoPiecesZValueMove::Layout() const -> VPLayoutPtr
 //---------------------------------------------------------------------------------------------------------------------
 auto VPUndoPiecesZValueMove::Sheet() const -> VPSheetPtr
 {
-    for (const auto& piece : m_pieces)
+    for (const auto &piece : m_pieces)
     {
         VPPiecePtr const p = piece.toStrongRef();
         if (not p.isNull())
@@ -460,7 +459,7 @@ auto VPUndoPiecesZValueMove::PieceIds() const -> QVector<QString>
     QVector<QString> ids;
     ids.reserve(m_pieces.size());
 
-    for (const auto& piece : m_pieces)
+    for (const auto &piece : m_pieces)
     {
         VPPiecePtr const p = piece.toStrongRef();
         if (not p.isNull())
@@ -473,12 +472,12 @@ auto VPUndoPiecesZValueMove::PieceIds() const -> QVector<QString>
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-auto VPUndoPiecesZValueMove::Levels(const QList<VPPiecePtr> &allPieces, const QVector<QString> &skipPieces,
-                                    bool skip) -> QList<QVector<QString> >
+auto VPUndoPiecesZValueMove::Levels(const QList<VPPiecePtr> &allPieces, const QVector<QString> &skipPieces, bool skip)
+    -> QList<QVector<QString>>
 {
     QMap<qreal, QVector<QString>> levels;
 
-    for (const auto &p: allPieces)
+    for (const auto &p : allPieces)
     {
         if (p.isNull() || (skip && skipPieces.contains(p->GetUniqueID())))
         {

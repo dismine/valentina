@@ -140,8 +140,7 @@ void VPSheetSceneData::PrepareForExport()
     m_rotationControls->setVisible(false);
     m_rotationOrigin->setVisible(false);
 
-    VPLayoutPtr const layout = m_layout.toStrongRef();
-    if (not layout.isNull())
+    if (VPLayoutPtr const layout = m_layout.toStrongRef(); not layout.isNull())
     {
         m_showGridTmp = layout->LayoutSettings().GetShowGrid();
         layout->LayoutSettings().SetShowGrid(false);
@@ -182,8 +181,7 @@ void VPSheetSceneData::CleanAfterExport()
 
     m_rotationControls->setVisible(true);
 
-    VPLayoutPtr const layout = m_layout.toStrongRef();
-    if (not layout.isNull())
+    if (VPLayoutPtr const layout = m_layout.toStrongRef(); not layout.isNull())
     {
         layout->LayoutSettings().SetShowGrid(m_showGridTmp);
         layout->LayoutSettings().SetShowTiles(m_showTilesTmp);
@@ -234,11 +232,10 @@ auto VPSheetSceneData::RotationControls() const -> VPGraphicsPieceControls *
 //---------------------------------------------------------------------------------------------------------------------
 auto VPSheetSceneData::ScenePiece(const VPPiecePtr &piece) const -> VPGraphicsPiece *
 {
-    auto _graphicsPiece =
-        std::find_if(m_graphicsPieces.begin(), m_graphicsPieces.end(),
-                     [piece](VPGraphicsPiece *graphicPiece) { return graphicPiece->GetPiece() == piece; });
-
-    if (_graphicsPiece != m_graphicsPieces.end())
+    if (auto _graphicsPiece =
+            std::find_if(m_graphicsPieces.begin(), m_graphicsPieces.end(),
+                         [piece](VPGraphicsPiece *graphicPiece) { return graphicPiece->GetPiece() == piece; });
+        _graphicsPiece != m_graphicsPieces.end())
     {
         return *_graphicsPiece;
     }
@@ -274,8 +271,7 @@ void VPSheetSceneData::SetTextAsPaths(bool textAsPaths) const
 //---------------------------------------------------------------------------------------------------------------------
 void VPSheetSceneData::PrepareTilesScheme()
 {
-    VPLayoutPtr const layout = m_layout.toStrongRef();
-    if (not layout.isNull())
+    if (VPLayoutPtr const layout = m_layout.toStrongRef(); not layout.isNull())
     {
         m_showTilesSchemeTmp = layout->LayoutSettings().GetShowTiles();
         layout->LayoutSettings().SetShowTiles(true);
@@ -290,8 +286,7 @@ void VPSheetSceneData::PrepareTilesScheme()
 //---------------------------------------------------------------------------------------------------------------------
 void VPSheetSceneData::ClearTilesScheme()
 {
-    VPLayoutPtr const layout = m_layout.toStrongRef();
-    if (not layout.isNull())
+    if (VPLayoutPtr const layout = m_layout.toStrongRef(); not layout.isNull())
     {
         layout->LayoutSettings().SetShowTiles(m_showTilesSchemeTmp);
         layout->LayoutSettings().SetShowWatermark(m_showTilesWatermarkSchemeTmp);
@@ -362,8 +357,7 @@ auto VPSheet::GetLayout() const -> VPLayoutPtr
 //---------------------------------------------------------------------------------------------------------------------
 auto VPSheet::GetPieces() const -> QList<VPPiecePtr>
 {
-    VPLayoutPtr const layout = GetLayout();
-    if (not layout.isNull())
+    if (VPLayoutPtr const layout = GetLayout(); not layout.isNull())
     {
         return layout->PiecesForSheet(m_uuid);
     }
@@ -374,8 +368,7 @@ auto VPSheet::GetPieces() const -> QList<VPPiecePtr>
 //---------------------------------------------------------------------------------------------------------------------
 auto VPSheet::GetSelectedPieces() const -> QList<VPPiecePtr>
 {
-    VPLayoutPtr const layout = GetLayout();
-    if (not layout.isNull())
+    if (VPLayoutPtr const layout = GetLayout(); not layout.isNull())
     {
         QList<VPPiecePtr> const list = layout->PiecesForSheet(m_uuid);
 
@@ -692,8 +685,7 @@ void VPSheet::CheckPiecePositionValidity(const VPPiecePtr &piece) const
         return;
     }
 
-    QList<VPPiecePtr> const pieces = GetPieces();
-    if (piece.isNull() || not pieces.contains(piece))
+    if (QList<VPPiecePtr> const pieces = GetPieces(); piece.isNull() || not pieces.contains(piece))
     {
         return;
     }
@@ -746,8 +738,7 @@ auto VPSheet::GetSheetOrientation() const -> QPageLayout::Orientation
 //---------------------------------------------------------------------------------------------------------------------
 auto VPSheet::SheetUnits() const -> Unit
 {
-    VPLayoutPtr const layout = GetLayout();
-    if (not layout.isNull())
+    if (VPLayoutPtr const layout = GetLayout(); not layout.isNull())
     {
         return layout->LayoutSettings().GetUnit();
     }

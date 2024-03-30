@@ -451,10 +451,10 @@ void DialogArc::changeEvent(QEvent *event)
 //---------------------------------------------------------------------------------------------------------------------
 void DialogArc::ValidateAlias()
 {
-    QRegularExpression const rx(NameRegExp());
     VArc arc;
     arc.SetAliasSuffix(GetAliasSuffix());
-    if (not GetAliasSuffix().isEmpty() &&
+    if (QRegularExpression const rx(NameRegExp());
+        not GetAliasSuffix().isEmpty() &&
         (not rx.match(arc.GetAlias()).hasMatch() ||
          (m_originAliasSuffix != GetAliasSuffix() && not data->IsUnique(arc.GetAlias()))))
     {

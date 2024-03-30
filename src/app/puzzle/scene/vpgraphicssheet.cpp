@@ -162,9 +162,8 @@ void VPGraphicsSheet::RefreshBoundingRect()
 //---------------------------------------------------------------------------------------------------------------------
 void VPGraphicsSheet::PaintVerticalFold(QPainter *painter, const QRectF &sheetRect) const
 {
-    VPLayoutPtr const layout = m_layout.toStrongRef();
-
-    if (not layout.isNull() && layout->LayoutSettings().IsCutOnFold())
+    if (VPLayoutPtr const layout = m_layout.toStrongRef();
+        not layout.isNull() && layout->LayoutSettings().IsCutOnFold())
     {
         QString const foldText = FoldText();
         painter->save();
@@ -223,9 +222,8 @@ void VPGraphicsSheet::PaintVerticalFold(QPainter *painter, const QRectF &sheetRe
 //---------------------------------------------------------------------------------------------------------------------
 void VPGraphicsSheet::PaintHorizontalFold(QPainter *painter, const QRectF &sheetRect) const
 {
-    VPLayoutPtr const layout = m_layout.toStrongRef();
-
-    if (not layout.isNull() && layout->LayoutSettings().IsCutOnFold())
+    if (VPLayoutPtr const layout = m_layout.toStrongRef();
+        not layout.isNull() && layout->LayoutSettings().IsCutOnFold())
     {
         QString const foldText = FoldText();
         painter->save();
@@ -299,8 +297,7 @@ void VPGraphicsSheet::PaintMargins(QPainter *painter) const
     }
 
     bool ignoreMargins = true;
-    VPSheetPtr const sheet = layout->GetFocusedSheet();
-    if (!sheet.isNull())
+    if (VPSheetPtr const sheet = layout->GetFocusedSheet(); !sheet.isNull())
     {
         ignoreMargins = sheet->IgnoreMargins();
     }
@@ -333,9 +330,8 @@ void VPGraphicsSheet::PaintBorder(QPainter *painter) const
         painter->setPen(pen);
         painter->drawRect(sheetRect);
 
-        VPLayoutPtr const layout = m_layout.toStrongRef();
-
-        if (!layout.isNull() && layout->LayoutSettings().IsCutOnFold())
+        if (VPLayoutPtr const layout = m_layout.toStrongRef();
+            !layout.isNull() && layout->LayoutSettings().IsCutOnFold())
         {
             if (sheetRect.width() >= sheetRect.height())
             {
@@ -354,8 +350,7 @@ void VPGraphicsSheet::PaintBorder(QPainter *painter) const
 //---------------------------------------------------------------------------------------------------------------------
 void VPGraphicsSheet::PaintFold(QPainter *painter) const
 {
-    VPLayoutPtr const layout = m_layout.toStrongRef();
-    if (!layout.isNull() && layout->LayoutSettings().IsCutOnFold())
+    if (VPLayoutPtr const layout = m_layout.toStrongRef(); !layout.isNull() && layout->LayoutSettings().IsCutOnFold())
     {
         QRectF const sheetRect = GetSheetRect();
         QRectF const foldField = m_showBorder ? sheetRect : FoldField(GetMarginsRect());
@@ -387,8 +382,7 @@ void VPGraphicsSheet::PaintGrid(QPainter *painter) const
 
         QRectF const sheetRect = GetSheetRect();
 
-        qreal const colWidth = layout->LayoutSettings().GetGridColWidth();
-        if (colWidth > 0)
+        if (qreal const colWidth = layout->LayoutSettings().GetGridColWidth(); colWidth > 0)
         {
             qreal colX = colWidth;
             while (colX < sheetRect.right())
@@ -399,8 +393,7 @@ void VPGraphicsSheet::PaintGrid(QPainter *painter) const
             }
         }
 
-        qreal const rowHeight = layout->LayoutSettings().GetGridRowHeight();
-        if (rowHeight > 0)
+        if (qreal const rowHeight = layout->LayoutSettings().GetGridRowHeight(); rowHeight > 0)
         {
             qreal rowY = rowHeight;
 
@@ -447,9 +440,9 @@ auto VPGraphicsSheet::FoldText() -> QString
 auto VPGraphicsSheet::boundingRect() const -> QRectF
 {
     QRectF boundingRect = GetSheetRect();
-    VPLayoutPtr const layout = m_layout.toStrongRef();
 
-    if (not layout.isNull() && layout->LayoutSettings().IsCutOnFold())
+    if (VPLayoutPtr const layout = m_layout.toStrongRef();
+        not layout.isNull() && layout->LayoutSettings().IsCutOnFold())
     {
         QString const foldText = FoldText();
         QFont font = QApplication::font();

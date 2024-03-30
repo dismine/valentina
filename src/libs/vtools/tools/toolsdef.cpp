@@ -65,8 +65,6 @@ auto SourceAliasValid(const SourceItem &item, const QSharedPointer<VGObject> &ob
 {
     SCASSERT(data != nullptr)
 
-    QRegularExpression const rx(NameRegExp());
-
     QString alias;
 
     if (obj->getType() == GOType::Point)
@@ -81,7 +79,8 @@ auto SourceAliasValid(const SourceItem &item, const QSharedPointer<VGObject> &ob
         obj->SetAliasSuffix(oldAlias);
     }
 
-    if (not alias.isEmpty() && originAlias != alias && (not rx.match(alias).hasMatch() || not data->IsUnique(alias)))
+    if (QRegularExpression const rx(NameRegExp());
+        not alias.isEmpty() && originAlias != alias && (not rx.match(alias).hasMatch() || not data->IsUnique(alias)))
     {
         return false;
     }

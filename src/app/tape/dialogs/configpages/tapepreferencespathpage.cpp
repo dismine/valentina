@@ -118,8 +118,7 @@ void TapePreferencesPathPage::EditPath()
     }
 
     bool usedNotExistedDir = false;
-    QDir const directory(path);
-    if (not directory.exists())
+    if (QDir const directory(path); not directory.exists())
     {
         usedNotExistedDir = directory.mkpath(QChar('.'));
     }

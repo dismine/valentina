@@ -840,16 +840,14 @@ void DialogMeasurementsCSVColumns::CheckStatus()
 
     QSharedPointer<QxtCsvModel> const csv = DialogMeasurementsCSVColumns::CSVModel();
 
-    const int columns = csv->columnCount();
-    if (columns < MinimumColumns())
+    if (const int columns = csv->columnCount(); columns < MinimumColumns())
     {
         SetStatus(false);
         ui->labelStatus->setText(QCoreApplication::translate("DialogMeasurementsCSVColumns", "Not enough columns"));
         return;
     }
 
-    const int rows = csv->rowCount();
-    if (rows < 1)
+    if (const int rows = csv->rowCount(); rows < 1)
     {
         SetStatus(false);
         ui->labelStatus->setText(

@@ -58,8 +58,7 @@ const qreal centerRadius2 = 10;
 auto TransformationOrigin(const VPLayoutPtr &layout, const QRectF &boundingRect) -> VPTransformationOrigon
 {
     SCASSERT(layout != nullptr)
-    VPSheetPtr const sheet = layout->GetFocusedSheet();
-    if (not sheet.isNull())
+    if (VPSheetPtr const sheet = layout->GetFocusedSheet(); not sheet.isNull())
     {
         return sheet->TransformationOrigin();
     }
@@ -170,11 +169,9 @@ void VPGraphicsTransformationOrigin::mousePressEvent(QGraphicsSceneMouseEvent *e
 //---------------------------------------------------------------------------------------------------------------------
 void VPGraphicsTransformationOrigin::mouseMoveEvent(QGraphicsSceneMouseEvent *event)
 {
-    VPLayoutPtr const layout = m_layout.toStrongRef();
-    if (not layout.isNull())
+    if (VPLayoutPtr const layout = m_layout.toStrongRef(); not layout.isNull())
     {
-        VPSheetPtr const sheet = layout->GetFocusedSheet();
-        if (not sheet.isNull())
+        if (VPSheetPtr const sheet = layout->GetFocusedSheet(); not sheet.isNull())
         {
             VPTransformationOrigon origin = sheet->TransformationOrigin();
             origin.origin = event->scenePos();
@@ -420,8 +417,7 @@ void VPGraphicsPieceControls::mousePressEvent(QGraphicsSceneMouseEvent *event)
         }
         else
         {
-            QGraphicsView *view = ItemView();
-            if (view != nullptr)
+            if (QGraphicsView *view = ItemView(); view != nullptr)
             {
                 setCursor(view->viewport()->cursor()); // clazy:exclude=clazy-qt6-deprecated-api-fixes
             }
@@ -503,8 +499,7 @@ void VPGraphicsPieceControls::mouseReleaseEvent(QGraphicsSceneMouseEvent *event)
         }
         else
         {
-            QGraphicsView *view = ItemView();
-            if (view != nullptr)
+            if (QGraphicsView *view = ItemView(); view != nullptr)
             {
                 setCursor(view->viewport()->cursor()); // clazy:exclude=clazy-qt6-deprecated-api-fixes
             }
@@ -512,11 +507,9 @@ void VPGraphicsPieceControls::mouseReleaseEvent(QGraphicsSceneMouseEvent *event)
 
         if (m_originSaved)
         {
-            VPLayoutPtr const layout = m_layout.toStrongRef();
-            if (not layout.isNull())
+            if (VPLayoutPtr const layout = m_layout.toStrongRef(); not layout.isNull())
             {
-                VPSheetPtr const sheet = layout->GetFocusedSheet();
-                if (not sheet.isNull())
+                if (VPSheetPtr const sheet = layout->GetFocusedSheet(); not sheet.isNull())
                 {
                     if (not m_savedOrigin.custom)
                     {
@@ -721,11 +714,9 @@ auto VPGraphicsPieceControls::SelectedPieces() const -> QList<VPPiecePtr>
 {
     QList<VPPiecePtr> pieces;
 
-    VPLayoutPtr const layout = m_layout.toStrongRef();
-    if (not layout.isNull())
+    if (VPLayoutPtr const layout = m_layout.toStrongRef(); not layout.isNull())
     {
-        VPSheetPtr const sheet = layout->GetFocusedSheet();
-        if (not sheet.isNull())
+        if (VPSheetPtr const sheet = layout->GetFocusedSheet(); not sheet.isNull())
         {
             pieces = sheet->GetSelectedPieces();
         }
@@ -752,11 +743,9 @@ auto VPGraphicsPieceControls::PiecesBoundingRect(const QList<VPPiecePtr> &select
 //---------------------------------------------------------------------------------------------------------------------
 auto VPGraphicsPieceControls::ItemView() -> QGraphicsView *
 {
-    QGraphicsScene *scene = this->scene();
-    if (scene != nullptr)
+    if (QGraphicsScene *scene = this->scene(); scene != nullptr)
     {
-        QList<QGraphicsView *> const views = scene->views();
-        if (not views.isEmpty())
+        if (QList<QGraphicsView *> const views = scene->views(); not views.isEmpty())
         {
             return views.at(0);
         }
@@ -776,8 +765,7 @@ void VPGraphicsPieceControls::UpdateCursor(VPHandleCorner corner)
     }
     else
     {
-        QGraphicsView *view = ItemView();
-        if (view != nullptr)
+        if (QGraphicsView *view = ItemView(); view != nullptr)
         {
             setCursor(view->viewport()->cursor()); // clazy:exclude=clazy-qt6-deprecated-api-fixes
         }

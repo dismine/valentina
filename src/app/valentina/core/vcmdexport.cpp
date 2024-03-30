@@ -483,8 +483,7 @@ auto VCommandLine::OptDimensionA() const -> int
     const QString value = OptionValue(LONG_OPTION_DIMENSION_A);
 
     bool ok = false;
-    int const dimensionAValue = value.toInt(&ok);
-    if (ok && dimensionAValue > 0)
+    if (int const dimensionAValue = value.toInt(&ok); ok && dimensionAValue > 0)
     {
         return dimensionAValue;
     }
@@ -499,8 +498,7 @@ auto VCommandLine::OptDimensionB() const -> int
     const QString value = OptionValue(LONG_OPTION_DIMENSION_B);
 
     bool ok = false;
-    int const dimensionBValue = value.toInt(&ok);
-    if (ok && dimensionBValue > 0)
+    if (int const dimensionBValue = value.toInt(&ok); ok && dimensionBValue > 0)
     {
         return dimensionBValue;
     }
@@ -515,8 +513,7 @@ auto VCommandLine::OptDimensionC() const -> int
     const QString value = OptionValue(LONG_OPTION_DIMENSION_C);
 
     bool ok = false;
-    int const dimensionCValue = value.toInt(&ok);
-    if (ok && dimensionCValue > 0)
+    if (int const dimensionCValue = value.toInt(&ok); ok && dimensionCValue > 0)
     {
         return dimensionCValue;
     }
@@ -535,8 +532,8 @@ auto VCommandLine::TiledPageMargins() const -> QMarginsF
     if (IsOptionSet(LONG_OPTION_SHIFTUNITS))
     {
         const QString value = OptionValue(LONG_OPTION_SHIFTUNITS);
-        const QStringList supportedUnits = QStringList() << unitMM << unitCM << unitINCH;
-        if (not supportedUnits.contains(value))
+        if (const QStringList supportedUnits = QStringList() << unitMM << unitCM << unitINCH;
+            not supportedUnits.contains(value))
         {
             qCritical() << translate("VCommandLine", "Unsupported paper units.") << "\n";
             const_cast<VCommandLine *>(this)->parser.showHelp(V_EX_USAGE);

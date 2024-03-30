@@ -334,14 +334,12 @@ void VPPiece::FlipHorizontally()
 //---------------------------------------------------------------------------------------------------------------------
 auto VPPiece::StickyPosition(qreal &dx, qreal &dy) const -> bool
 {
-    VPLayoutPtr const layout = Layout();
-    if (layout.isNull() || not layout->LayoutSettings().GetStickyEdges())
+    if (VPLayoutPtr const layout = Layout(); layout.isNull() || not layout->LayoutSettings().GetStickyEdges())
     {
         return false;
     }
 
-    VPSheetPtr const sheet = Sheet();
-    if (sheet.isNull())
+    if (VPSheetPtr const sheet = Sheet(); sheet.isNull())
     {
         return false;
     }
@@ -486,11 +484,10 @@ auto VPPiece::StickySheet(VStickyDistance &match) const -> bool
     }
 
     const qreal stickyDistance = maxStickyDistance;
-    QRectF const stickyZone =
-        QRectF(boundingRect.topLeft().x() - stickyDistance, boundingRect.topLeft().y() - stickyDistance,
-               boundingRect.width() + stickyDistance * 2, boundingRect.height() + stickyDistance * 2);
-
-    if (!stickyZone.intersects(sheetRect))
+    if (QRectF const stickyZone =
+            QRectF(boundingRect.topLeft().x() - stickyDistance, boundingRect.topLeft().y() - stickyDistance,
+                   boundingRect.width() + stickyDistance * 2, boundingRect.height() + stickyDistance * 2);
+        !stickyZone.intersects(sheetRect))
     {
         return true;
     }
@@ -503,8 +500,8 @@ auto VPPiece::StickySheet(VStickyDistance &match) const -> bool
         QVector<QPointF> const sheetPath{sheetRect.topLeft(), sheetRect.topRight(), sheetRect.bottomRight(),
                                          sheetRect.bottomLeft(), sheetRect.topLeft()};
         QVector<QPointF> const sheetStickyPath = PrepareStickyPath(sheetPath);
-        QLineF const distance = ClosestDistance(stickyPath, sheetStickyPath);
-        if (match.m_closestDistance.isNull() || distance.length() < match.m_closestDistance.length())
+        if (QLineF const distance = ClosestDistance(stickyPath, sheetStickyPath);
+            match.m_closestDistance.isNull() || distance.length() < match.m_closestDistance.length())
         {
             match.m_closestDistance = distance;
         }
@@ -530,8 +527,8 @@ auto VPPiece::StickySheet(VStickyDistance &match) const -> bool
         }
 
         QVector<QPointF> const sheetStickyPath = PrepareStickyPath(sheetPath);
-        QLineF const distance = ClosestDistance(stickyPath, sheetStickyPath);
-        if (match.m_closestDistance.isNull() || distance.length() < match.m_closestDistance.length())
+        if (QLineF const distance = ClosestDistance(stickyPath, sheetStickyPath);
+            match.m_closestDistance.isNull() || distance.length() < match.m_closestDistance.length())
         {
             match.m_closestDistance = distance;
         }
@@ -552,8 +549,8 @@ auto VPPiece::StickySheet(VStickyDistance &match) const -> bool
     }
 
     QVector<QPointF> const sheetStickyPath = PrepareStickyPath(sheetPath);
-    QLineF const distance = ClosestDistance(stickyPath, sheetStickyPath);
-    if (match.m_closestDistance.isNull() || distance.length() < match.m_closestDistance.length())
+    if (QLineF const distance = ClosestDistance(stickyPath, sheetStickyPath);
+        match.m_closestDistance.isNull() || distance.length() < match.m_closestDistance.length())
     {
         match.m_closestDistance = distance;
     }
@@ -615,8 +612,8 @@ auto VPPiece::StickyPieces(VStickyDistance &match) const -> bool
             if (not VPPiece::PathsSuperposition(path, piecePath))
             {
                 QVector<QPointF> const pieceStickyPath = PrepareStickyPath(piecePath);
-                QLineF const distance = ClosestDistance(stickyPath, pieceStickyPath);
-                if (match.m_closestDistance.isNull() || distance.length() < match.m_closestDistance.length())
+                if (QLineF const distance = ClosestDistance(stickyPath, pieceStickyPath);
+                    match.m_closestDistance.isNull() || distance.length() < match.m_closestDistance.length())
                 {
                     match.m_closestDistance = distance;
                     match.m_pieceGap = pieceGap;

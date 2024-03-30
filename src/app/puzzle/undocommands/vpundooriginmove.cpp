@@ -26,16 +26,16 @@
  **
  *************************************************************************/
 #include "vpundooriginmove.h"
-#include "../vmisc/def.h"
-#include "../layout/vpsheet.h"
 #include "../layout/vplayout.h"
+#include "../layout/vpsheet.h"
+#include "../vmisc/def.h"
 
 //---------------------------------------------------------------------------------------------------------------------
 VPUndoOriginMove::VPUndoOriginMove(const VPSheetPtr &sheet, const VPTransformationOrigon &origin, bool allowMerge,
                                    QUndoCommand *parent)
-    : VPUndoCommand(allowMerge, parent),
-      m_sheet(sheet),
-      m_origin(origin)
+  : VPUndoCommand(allowMerge, parent),
+    m_sheet(sheet),
+    m_origin(origin)
 {
     SCASSERT(not sheet.isNull())
 
@@ -104,8 +104,8 @@ auto VPUndoOriginMove::mergeWith(const QUndoCommand *command) -> bool
     const auto *moveCommand = dynamic_cast<const VPUndoOriginMove *>(command);
     SCASSERT(moveCommand != nullptr)
 
-    VPSheetPtr const sheet = Sheet();
-    if (moveCommand->Sheet().isNull() || sheet.isNull() || not moveCommand->AllowMerge())
+    if (VPSheetPtr const sheet = Sheet();
+        moveCommand->Sheet().isNull() || sheet.isNull() || not moveCommand->AllowMerge())
     {
         return false;
     }

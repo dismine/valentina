@@ -105,9 +105,9 @@ auto AppFilePath(const QString &appName) -> QString
 #if defined(APPIMAGE) && defined(Q_OS_LINUX)
     return AppImageRoot() + BINDIR + '/'_L1 + appName;
 #else
-    QFileInfo const canonicalFile(
-        QStringLiteral("%1/%2").arg(QCoreApplication::applicationDirPath(), appName + executableSuffix));
-    if (canonicalFile.exists())
+    if (QFileInfo const canonicalFile(
+            QStringLiteral("%1/%2").arg(QCoreApplication::applicationDirPath(), appName + executableSuffix));
+        canonicalFile.exists())
     {
         return canonicalFile.absoluteFilePath();
     }
@@ -730,11 +730,9 @@ auto VApplication::event(QEvent *e) -> bool
         case QEvent::FileOpen:
         {
             auto *fileOpenEvent = dynamic_cast<QFileOpenEvent *>(e);
-            const QString macFileOpen = fileOpenEvent->file();
-            if (not macFileOpen.isEmpty())
+            if (const QString macFileOpen = fileOpenEvent->file(); not macFileOpen.isEmpty())
             {
-                auto *window = qobject_cast<MainWindow *>(mainWindow);
-                if (window)
+                if (auto *window = qobject_cast<MainWindow *>(mainWindow); window != nullptr)
                 {
                     window->LoadPattern(macFileOpen); // open file in existing window
                 }

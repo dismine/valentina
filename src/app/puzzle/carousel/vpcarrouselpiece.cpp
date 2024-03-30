@@ -141,8 +141,7 @@ auto VPCarrouselPiece::CreatePieceIcon(const QSize &size, bool isDragIcon) const
                                                             : style.CarrouselPieceForegroundColor()));
 
         bool togetherWithNotches = false;
-        VPLayoutPtr const pieceLayout = piece->Layout();
-        if (not pieceLayout.isNull())
+        if (VPLayoutPtr const pieceLayout = piece->Layout(); not pieceLayout.isNull())
         {
             togetherWithNotches = pieceLayout->LayoutSettings().IsBoundaryTogetherWithNotches();
         }

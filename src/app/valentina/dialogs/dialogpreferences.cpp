@@ -93,8 +93,7 @@ void DialogPreferences::showEvent(QShowEvent *event)
     }
     // do your init stuff here
 
-    QSize const sz = VAbstractApplication::VApp()->Settings()->GetPreferenceDialogSize();
-    if (not sz.isEmpty())
+    if (QSize const sz = VAbstractApplication::VApp()->Settings()->GetPreferenceDialogSize(); not sz.isEmpty())
     {
         resize(sz);
     }

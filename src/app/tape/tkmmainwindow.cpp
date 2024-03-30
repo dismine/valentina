@@ -184,9 +184,9 @@ auto TKMMainWindow::LoadFile(const QString &path) -> bool
 
     // Check if file already opened
     const QList<TKMMainWindow *> list = MApplication::VApp()->MainKMWindows();
-    auto w =
-        std::find_if(list.begin(), list.end(), [path](TKMMainWindow *window) { return window->CurrentFile() == path; });
-    if (w != list.end())
+    if (auto w = std::find_if(list.begin(), list.end(),
+                              [path](TKMMainWindow *window) { return window->CurrentFile() == path; });
+        w != list.end())
     {
         (*w)->activateWindow();
         close();
@@ -211,13 +211,11 @@ auto TKMMainWindow::LoadFile(const QString &path) -> bool
         m_m = new VKnownMeasurementsDocument();
         m_m->setXMLContent(converter.Convert());
 
-        VCommonSettings *settings = VAbstractApplication::VApp()->Settings();
-        if (settings->IsCollectStatistic())
+        if (VCommonSettings *settings = VAbstractApplication::VApp()->Settings(); settings->IsCollectStatistic())
         {
             auto *statistic = VGAnalytics::Instance();
 
-            QString clientID = settings->GetClientID();
-            if (clientID.isEmpty())
+            if (QString clientID = settings->GetClientID(); clientID.isEmpty())
             {
                 clientID = QUuid::createUuid().toString();
                 settings->SetClientID(clientID);
@@ -296,8 +294,7 @@ void TKMMainWindow::UpdateWindowTitle()
     }
     else
     {
-        auto index = MApplication::VApp()->MainKMWindows().indexOf(this);
-        if (index != -1)
+        if (auto index = MApplication::VApp()->MainKMWindows().indexOf(this); index != -1)
         {
             showName = tr("untitled %1").arg(index + 1);
         }
@@ -384,8 +381,7 @@ void TKMMainWindow::changeEvent(QEvent *event)
 
         InitMeasurementDiagramList();
 
-        int const i = ui->comboBoxDiagram->findData(current);
-        if (i != -1)
+        if (int const i = ui->comboBoxDiagram->findData(current); i != -1)
         {
             ui->comboBoxDiagram->setCurrentIndex(i);
         }
@@ -554,8 +550,7 @@ auto TKMMainWindow::FileSave() -> bool
         return false;
     }
 
-    QString error;
-    if (not SaveKnownMeasurements(m_curFile, error))
+    if (QString error; not SaveKnownMeasurements(m_curFile, error))
     {
         QMessageBox messageBox;
         messageBox.setIcon(QMessageBox::Warning);
@@ -586,8 +581,7 @@ auto TKMMainWindow::FileSaveAs() -> bool
     VTapeSettings *settings = MApplication::VApp()->TapeSettings();
     const QString dir = settings->GetPathKnownMeasurements();
 
-    QDir const directory(dir);
-    if (not directory.exists())
+    if (QDir const directory(dir); not directory.exists())
     {
         directory.mkpath(QChar('.'));
     }
@@ -605,8 +599,7 @@ auto TKMMainWindow::FileSaveAs() -> bool
         return false;
     }
 
-    QFileInfo const f(fileName);
-    if (f.suffix().isEmpty() && f.suffix() != suffix)
+    if (QFileInfo const f(fileName); f.suffix().isEmpty() && f.suffix() != suffix)
     {
         fileName += '.'_L1 + suffix;
     }
@@ -630,8 +623,7 @@ auto TKMMainWindow::FileSaveAs() -> bool
     m_mIsReadOnly = false;
 
     QString error;
-    bool const result = SaveKnownMeasurements(fileName, error);
-    if (not result)
+    if (bool const result = SaveKnownMeasurements(fileName, error); not result)
     {
         QMessageBox messageBox;
         messageBox.setIcon(QMessageBox::Warning);
@@ -710,8 +702,7 @@ void TKMMainWindow::ImportDataFromCSV()
         return;
     }
 
-    QFileInfo const f(fileName);
-    if (f.suffix().isEmpty() && f.suffix() != suffix)
+    if (QFileInfo const f(fileName); f.suffix().isEmpty() && f.suffix() != suffix)
     {
         fileName += '.'_L1 + suffix;
     }
@@ -1001,8 +992,7 @@ void TKMMainWindow::SaveImage()
     }
     QString path = settings->GetPathCustomImage() + QDir::separator() + title;
 
-    QStringList const suffixes = mime.suffixes();
-    if (not suffixes.isEmpty())
+    if (QStringList const suffixes = mime.suffixes(); not suffixes.isEmpty())
     {
         path += '.'_L1 + suffixes.at(0);
     }
@@ -1058,8 +1048,7 @@ void TKMMainWindow::ShowImage()
     QMimeType const mime = image.MimeTypeFromData();
     QString name = QDir::tempPath() + QDir::separator() + "image.XXXXXX"_L1;
 
-    QStringList const suffixes = mime.suffixes();
-    if (not suffixes.isEmpty())
+    if (QStringList const suffixes = mime.suffixes(); not suffixes.isEmpty())
     {
         name += '.'_L1 + suffixes.at(0);
     }
@@ -1243,8 +1232,7 @@ void TKMMainWindow::SaveMName()
 
     QString newName = ui->lineEditName->text().isEmpty() ? GenerateMeasurementName() : ui->lineEditName->text();
 
-    QHash<QString, VKnownMeasurement> const m = m_known.Measurements();
-    if (m.contains(newName))
+    if (QHash<QString, VKnownMeasurement> const m = m_known.Measurements(); m.contains(newName))
     {
         qint32 num = 2;
         QString name = newName;
@@ -1515,8 +1503,7 @@ void TKMMainWindow::AskDefaultSettings()
 
     if (settings->IsAskCollectStatistic() || settings->IsAskSendCrashReport())
     {
-        DialogAskCollectStatistic dialog(this);
-        if (dialog.exec() == QDialog::Accepted)
+        if (DialogAskCollectStatistic dialog(this); dialog.exec() == QDialog::Accepted)
         {
             settings->SetCollectStatistic(dialog.CollectStatistic());
 #if defined(CRASH_REPORTING)
@@ -1534,9 +1521,8 @@ void TKMMainWindow::AskDefaultSettings()
         auto *statistic = VGAnalytics::Instance();
         statistic->SetGUILanguage(settings->GetLocale());
 
-        QString clientID = settings->GetClientID();
         bool freshID = false;
-        if (clientID.isEmpty())
+        if (QString clientID = settings->GetClientID(); clientID.isEmpty())
         {
             clientID = QUuid::createUuid().toString();
             settings->SetClientID(clientID);
@@ -1948,9 +1934,8 @@ auto TKMMainWindow::MaybeSave() -> bool
 
     messageBox->setWindowModality(Qt::ApplicationModal);
     messageBox->setFixedSize(300, 85);
-    const auto ret = static_cast<QMessageBox::StandardButton>(messageBox->exec());
 
-    switch (ret)
+    switch (static_cast<QMessageBox::StandardButton>(messageBox->exec()))
     {
         case QMessageBox::Yes:
             if (m_mIsReadOnly)
@@ -2051,8 +2036,7 @@ void TKMMainWindow::InitIcons()
     ui->toolButtonAddImage->setIcon(VTheme::GetIconResource(iconResource, QStringLiteral("16x16/insert-image.png")));
     ui->toolButtonRemoveImage->setIcon(VTheme::GetIconResource(iconResource, QStringLiteral("16x16/remove-image.png")));
 
-    int const index = ui->tabWidget->indexOf(ui->tabImages);
-    if (index != -1)
+    if (int const index = ui->tabWidget->indexOf(ui->tabImages); index != -1)
     {
         ui->tabWidget->setTabIcon(index, VTheme::GetIconResource(iconResource, QStringLiteral("16x16/viewimage.png")));
     }
@@ -2166,8 +2150,7 @@ void TKMMainWindow::CreateWindowMenu(QMenu *menu)
         TKMMainWindow *window = windows.at(i);
 
         QString title = QStringLiteral("%1. %2").arg(i + 1).arg(window->windowTitle());
-        const auto index = title.lastIndexOf("[*]"_L1);
-        if (index != -1)
+        if (const auto index = title.lastIndexOf("[*]"_L1); index != -1)
         {
             window->isWindowModified() ? title.replace(index, 3, '*'_L1) : title.replace(index, 3, QString());
         }
@@ -2458,8 +2441,7 @@ void TKMMainWindow::InitMeasurementUnits()
     ui->comboBoxMUnits->addItem(tr("Length units"), QVariant(static_cast<int>(MUnits::Table)));
     ui->comboBoxMUnits->addItem(tr("Degrees"), QVariant(static_cast<int>(MUnits::Degrees)));
 
-    int const i = ui->comboBoxMUnits->findData(current);
-    if (i != -1)
+    if (int const i = ui->comboBoxMUnits->findData(current); i != -1)
     {
         ui->comboBoxMUnits->setCurrentIndex(i);
     }
@@ -2527,8 +2509,7 @@ auto TKMMainWindow::CheckMName(const QString &name, const QSet<QString> &importe
         throw VException(tr("Imported file must not contain the same name twice."));
     }
 
-    QRegularExpression const rx(NameRegExp(VariableRegex::KnownMeasurement));
-    if (not rx.match(name).hasMatch())
+    if (QRegularExpression const rx(NameRegExp(VariableRegex::KnownMeasurement)); not rx.match(name).hasMatch())
     {
         throw VException(tr("Measurement '%1' doesn't match regex pattern.").arg(name));
     }
@@ -2588,26 +2569,24 @@ auto TKMMainWindow::ReadCSV(const QxtCsvModel &csv, const QVector<int> &map, boo
             importedNames.insert(mName);
             measurement.name = mName;
 
-            const int nameGroup = map.at(static_cast<int>(KnownMeasurementsColumns::Group));
-            if (nameGroup >= 0)
+            if (const int nameGroup = map.at(static_cast<int>(KnownMeasurementsColumns::Group)); nameGroup >= 0)
             {
                 measurement.group = csv.text(i, nameGroup).simplified();
             }
 
-            const int nameFullName = map.at(static_cast<int>(KnownMeasurementsColumns::FullName));
-            if (nameFullName >= 0)
+            if (const int nameFullName = map.at(static_cast<int>(KnownMeasurementsColumns::FullName));
+                nameFullName >= 0)
             {
                 measurement.fullName = csv.text(i, nameFullName);
             }
 
-            const int nameFormula = map.at(static_cast<int>(KnownMeasurementsColumns::Formula));
-            if (nameFormula >= 0)
+            if (const int nameFormula = map.at(static_cast<int>(KnownMeasurementsColumns::Formula)); nameFormula >= 0)
             {
                 measurement.formula = csv.text(i, nameFormula);
             }
 
-            const int nameDescription = map.at(static_cast<int>(KnownMeasurementsColumns::Description));
-            if (nameDescription >= 0)
+            if (const int nameDescription = map.at(static_cast<int>(KnownMeasurementsColumns::Description));
+                nameDescription >= 0)
             {
                 measurement.description = csv.text(i, nameDescription);
             }

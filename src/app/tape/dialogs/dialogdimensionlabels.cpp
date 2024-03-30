@@ -64,8 +64,7 @@ void DialogDimensionLabels::changeEvent(QEvent *event)
 
         InitDimensions();
 
-        int const index = ui->comboBoxDimensionLabels->findData(static_cast<int>(type));
-        if (index != -1)
+        if (int const index = ui->comboBoxDimensionLabels->findData(static_cast<int>(type)); index != -1)
         {
             ui->comboBoxDimensionLabels->blockSignals(true);
             ui->comboBoxDimensionLabels->setCurrentIndex(index);

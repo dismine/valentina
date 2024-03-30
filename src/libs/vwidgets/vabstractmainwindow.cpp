@@ -213,8 +213,7 @@ auto VAbstractMainWindow::CSVFilePath() -> QString
         return fileName;
     }
 
-    QFileInfo const f(fileName);
-    if (f.suffix().isEmpty() && f.suffix() != suffix)
+    if (QFileInfo const f(fileName); f.suffix().isEmpty() && f.suffix() != suffix)
     {
         fileName += '.'_L1 + suffix;
     }

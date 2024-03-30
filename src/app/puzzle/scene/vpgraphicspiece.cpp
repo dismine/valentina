@@ -293,11 +293,9 @@ void VPGraphicsPiece::mouseReleaseEvent(QGraphicsSceneMouseEvent *event)
         setCursor(Qt::OpenHandCursor);
         emit HideTransformationHandles(false);
 
-        VPPiecePtr const piece = m_piece.toStrongRef();
-        if (not piece.isNull())
+        if (VPPiecePtr const piece = m_piece.toStrongRef(); not piece.isNull())
         {
-            VPLayoutPtr const layout = piece->Layout();
-            if (not layout.isNull())
+            if (VPLayoutPtr const layout = piece->Layout(); not layout.isNull())
             {
                 if (layout->LayoutSettings().GetStickyEdges() && m_hasStickyPosition)
                 {
@@ -854,17 +852,19 @@ void VPGraphicsPiece::PaintPassmarks(QPainter *painter, const VPPiecePtr &piece)
 
         m_passmarks.addPath(passmarkPath);
 
-        QLineF const seamAllowanceMirrorLine = piece->GetMappedSeamAllowanceMirrorLine();
-        if (!seamAllowanceMirrorLine.isNull() && piece->IsShowFullPiece() && !VGObject::IsPointOnLineviaPDP(passmark.baseLine.p1(), seamAllowanceMirrorLine.p1(), seamAllowanceMirrorLine.p2()))
+        if (QLineF const seamAllowanceMirrorLine = piece->GetMappedSeamAllowanceMirrorLine();
+            !seamAllowanceMirrorLine.isNull() && piece->IsShowFullPiece() &&
+            !VGObject::IsPointOnLineviaPDP(passmark.baseLine.p1(), seamAllowanceMirrorLine.p1(),
+                                           seamAllowanceMirrorLine.p2()))
         {
-                QPainterPath mirroredPassmaksPath;
-                for (const auto &line : passmark.lines)
-                {
-                    mirroredPassmaksPath.moveTo(line.p1());
-                    mirroredPassmaksPath.lineTo(line.p2());
-                }
-                const QTransform matrix = VGObject::FlippingMatrix(seamAllowanceMirrorLine);
-                m_passmarks.addPath(matrix.map(mirroredPassmaksPath));
+            QPainterPath mirroredPassmaksPath;
+            for (const auto &line : passmark.lines)
+            {
+                mirroredPassmaksPath.moveTo(line.p1());
+                mirroredPassmaksPath.lineTo(line.p2());
+            }
+            const QTransform matrix = VGObject::FlippingMatrix(seamAllowanceMirrorLine);
+            m_passmarks.addPath(matrix.map(mirroredPassmaksPath));
         }
 
         if (painter != nullptr)
@@ -893,7 +893,8 @@ void VPGraphicsPiece::PaintPlaceLabels(QPainter *painter, const VPPiecePtr &piec
             for (auto &points : shape)
             {
                 std::transform(points.begin(), points.end(), points.begin(),
-                               [&matrix](const VLayoutPoint &point) { return VAbstractPiece::MapPoint(point, matrix); });
+                               [&matrix](const VLayoutPoint &point)
+                               { return VAbstractPiece::MapPoint(point, matrix); });
             }
 
             path.addPath(VAbstractPiece::LabelShapePath(piece->MapPlaceLabelShape(shape)));
@@ -1078,8 +1079,7 @@ void VPGraphicsPiece::GroupMove(const QPointF &pos)
     {
         QList<VPPiecePtr> pieces;
 
-        VPSheetPtr const sheet = layout->GetFocusedSheet();
-        if (not sheet.isNull())
+        if (VPSheetPtr const sheet = layout->GetFocusedSheet(); not sheet.isNull())
         {
             return sheet->GetSelectedPieces();
         }

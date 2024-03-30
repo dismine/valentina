@@ -29,24 +29,24 @@
 #include "vformulaproperty.h"
 #include "vformulapropertyeditor.h"
 
-#include "../vpropertyexplorer/vproperty_p.h"
-#include "../vpropertyexplorer/plugins/vstringproperty.h"
-#include "vformulapropertyeditor.h"
-#include "../vpatterndb/vformula.h"
 #include "../vmisc/vabstractapplication.h"
+#include "../vpatterndb/vformula.h"
+#include "../vpropertyexplorer/plugins/vstringproperty.h"
+#include "../vpropertyexplorer/vproperty_p.h"
+#include "vformulapropertyeditor.h"
 
 //---------------------------------------------------------------------------------------------------------------------
 VFormulaProperty::VFormulaProperty(const QString &name)
-    : VProperty(name,
+  : VProperty(name,
 #if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
-                static_cast<QMetaType::Type>(VFormula::FormulaTypeId()))
+              static_cast<QMetaType::Type>(VFormula::FormulaTypeId()))
 #else
-                static_cast<QVariant::Type>(VFormula::FormulaTypeId()))
+              static_cast<QVariant::Type>(VFormula::FormulaTypeId()))
 #endif
 {
     d_ptr->type = VPE::Property::Complex;
 
-    auto* tmpFormula = new VPE::VStringProperty(tr("Formula"));
+    auto *tmpFormula = new VPE::VStringProperty(tr("Formula"));
     addChild(tmpFormula);
     tmpFormula->setClearButtonEnable(true);
     tmpFormula->setUpdateBehaviour(true, false);
@@ -58,7 +58,7 @@ VFormulaProperty::VFormulaProperty(const QString &name)
 
 //---------------------------------------------------------------------------------------------------------------------
 //! Get the data how it should be displayed
-auto VFormulaProperty::data (int column, int role) const -> QVariant
+auto VFormulaProperty::data(int column, int role) const -> QVariant
 {
     if (column == DPC_Data && (Qt::DisplayRole == role || Qt::EditRole == role))
     {
@@ -81,14 +81,14 @@ auto VFormulaProperty::flags(int column) const -> Qt::ItemFlags
 
 //---------------------------------------------------------------------------------------------------------------------
 //! Returns an editor widget, or NULL if it doesn't supply one
-auto VFormulaProperty::createEditor(QWidget* parent, const QStyleOptionViewItem& options,
-                                    const QAbstractItemDelegate* delegate) -> QWidget*
+auto VFormulaProperty::createEditor(QWidget *parent, const QStyleOptionViewItem &options,
+                                    const QAbstractItemDelegate *delegate) -> QWidget *
 {
     Q_UNUSED(options)
     Q_UNUSED(delegate)
 
     auto formula = VProperty::d_ptr->VariantValue.value<VFormula>();
-    auto* tmpEditor = new VFormulaPropertyEditor(parent);
+    auto *tmpEditor = new VFormulaPropertyEditor(parent);
     tmpEditor->setLocale(parent->locale());
     tmpEditor->SetFormula(formula);
     VProperty::d_ptr->editor = tmpEditor;
@@ -97,10 +97,9 @@ auto VFormulaProperty::createEditor(QWidget* parent, const QStyleOptionViewItem&
 
 //---------------------------------------------------------------------------------------------------------------------
 //! Sets the property's data to the editor (returns false, if the standard delegate should do that)
-auto VFormulaProperty::setEditorData(QWidget* editor) -> bool
+auto VFormulaProperty::setEditorData(QWidget *editor) -> bool
 {
-    auto* tmpWidget = qobject_cast<VFormulaPropertyEditor*>(editor);
-    if (tmpWidget)
+    if (auto *tmpWidget = qobject_cast<VFormulaPropertyEditor *>(editor); tmpWidget != nullptr)
     {
         auto formula = VProperty::d_ptr->VariantValue.value<VFormula>();
         tmpWidget->SetFormula(formula);
@@ -117,8 +116,7 @@ auto VFormulaProperty::setEditorData(QWidget* editor) -> bool
 //! Gets the data from the widget
 auto VFormulaProperty::getEditorData(const QWidget *editor) const -> QVariant
 {
-    const auto* tmpWidget = qobject_cast<const VFormulaPropertyEditor*>(editor);
-    if (tmpWidget)
+    if (const auto *tmpWidget = qobject_cast<const VFormulaPropertyEditor *>(editor); tmpWidget != nullptr)
     {
         QVariant value;
         value.setValue(tmpWidget->GetFormula());
@@ -143,7 +141,7 @@ auto VFormulaProperty::clone(bool include_children, VProperty *container) const 
 
         if (!include_children)
         {
-            const QList<VProperty*> tmpChildren = container->getChildren();
+            const QList<VProperty *> tmpChildren = container->getChildren();
             for (auto *tmpChild : tmpChildren)
             {
                 container->removeChild(tmpChild);
@@ -152,8 +150,7 @@ auto VFormulaProperty::clone(bool include_children, VProperty *container) const 
         }
     }
 
-    return VProperty::clone(false, container);  // Child
-
+    return VProperty::clone(false, container); // Child
 }
 
 //---------------------------------------------------------------------------------------------------------------------

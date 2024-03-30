@@ -380,8 +380,8 @@ void VPLayoutFileWriter::WritePiece(const VPPiecePtr &piece)
     writeEndElement();
 
     QLineF const seamMirrorLine = piece->GetSeamMirrorLine();
-    QLineF const seamAllowenceMirrorLine = piece->GetSeamAllowanceMirrorLine();
-    if (!seamMirrorLine.isNull() || !seamAllowenceMirrorLine.isNull())
+    if (QLineF const seamAllowenceMirrorLine = piece->GetSeamAllowanceMirrorLine();
+        !seamMirrorLine.isNull() || !seamAllowenceMirrorLine.isNull())
     {
         writeStartElement(ML::TagMirrorLine);
 

@@ -204,8 +204,9 @@ void SetPrinterSheetPageSettings(const QSharedPointer<QPrinter> &printer, const 
     qreal const width = FromPixel(imageRect.width() * xScale + margins.left() + margins.right(), Unit::Mm);
     qreal const height = FromPixel(imageRect.height() * yScale + margins.top() + margins.bottom(), Unit::Mm);
 
-    QSizeF const pageSize = sheetOrientation == QPageLayout::Portrait ? QSizeF(width, height) : QSizeF(height, width);
-    if (not printer->setPageSize(QPageSize(pageSize, QPageSize::Millimeter)))
+    if (QSizeF const pageSize =
+            (sheetOrientation == QPageLayout::Portrait ? QSizeF(width, height) : QSizeF(height, width));
+        not printer->setPageSize(QPageSize(pageSize, QPageSize::Millimeter)))
     {
         qWarning() << QObject::tr("Cannot set printer page size");
     }
@@ -470,9 +471,9 @@ auto VPMainWindow::LoadFile(const QString &path) -> bool
 
     // Check if file already opened
     QList<VPMainWindow *> list = VPApplication::VApp()->MainWindows();
-    auto w =
-        std::find_if(list.begin(), list.end(), [path](VPMainWindow *window) { return window->CurrentFile() == path; });
-    if (w != list.end())
+    if (auto w = std::find_if(list.begin(), list.end(),
+                              [path](VPMainWindow *window) { return window->CurrentFile() == path; });
+        w != list.end())
     {
         (*w)->activateWindow();
         if (this != *w)
@@ -520,8 +521,7 @@ auto VPMainWindow::LoadFile(const QString &path) -> bool
         {
             auto *statistic = VGAnalytics::Instance();
 
-            QString clientID = settings->GetClientID();
-            if (clientID.isEmpty())
+            if (QString clientID = settings->GetClientID(); clientID.isEmpty())
             {
                 clientID = QUuid::createUuid().toString();
                 settings->SetClientID(clientID);
@@ -940,8 +940,7 @@ void VPMainWindow::InitPropertyTabCurrentSheet()
     ui->comboBoxLayoutUnit->addItem(tr("Pixels"), QVariant(UnitsToStr(Unit::Px)));
 
     VPSettings *settings = VPApplication::VApp()->PuzzleSettings();
-    const qint32 indexUnit = ui->comboBoxLayoutUnit->findData(UnitsToStr(settings->LayoutUnit()));
-    if (indexUnit != -1)
+    if (const qint32 indexUnit = ui->comboBoxLayoutUnit->findData(UnitsToStr(settings->LayoutUnit())); indexUnit != -1)
     {
         ui->comboBoxLayoutUnit->setCurrentIndex(indexUnit);
     }
@@ -1385,8 +1384,9 @@ void VPMainWindow::SetPropertyTabSheetData()
             SetLineEditValue(ui->lineEditSheetName, sheet->GetName());
 
             ui->groupBoxPaperFormat->setDisabled(false);
-            const qint32 indexUnit = ui->comboBoxLayoutUnit->findData(UnitsToStr(m_layout->LayoutSettings().GetUnit()));
-            if (indexUnit != -1)
+            if (const qint32 indexUnit =
+                    ui->comboBoxLayoutUnit->findData(UnitsToStr(m_layout->LayoutSettings().GetUnit()));
+                indexUnit != -1)
             {
                 ui->comboBoxLayoutUnit->blockSignals(true);
                 ui->comboBoxLayoutUnit->setCurrentIndex(indexUnit);
@@ -1819,9 +1819,8 @@ auto VPMainWindow::MaybeSave() -> bool
 
         messageBox->setWindowModality(Qt::ApplicationModal);
         messageBox->setFixedSize(300, 85);
-        const auto ret = static_cast<QMessageBox::StandardButton>(messageBox->exec());
 
-        switch (ret)
+        switch (static_cast<QMessageBox::StandardButton>(messageBox->exec()))
         {
             case QMessageBox::Yes:
                 if (IsLayoutReadOnly())
@@ -1856,8 +1855,7 @@ void VPMainWindow::CreateWindowMenu(QMenu *menu)
         VPMainWindow *window = windows.at(i);
 
         QString title = QStringLiteral("%1. %2").arg(i + 1).arg(window->windowTitle());
-        const vsizetype index = title.lastIndexOf("[*]"_L1);
-        if (index != -1)
+        if (const vsizetype index = title.lastIndexOf("[*]"_L1); index != -1)
         {
             window->isWindowModified() ? title.replace(index, 3, '*'_L1) : title.replace(index, 3, QString());
         }
@@ -2152,8 +2150,7 @@ void VPMainWindow::FindTemplate(QComboBox *box, qreal width, qreal height)
             VAbstractLayoutDialog::RoundTemplateSize(height, width, paperUnit) == tmplSize)
         {
             box->blockSignals(true);
-            const int index = box->findData(i);
-            if (index != -1)
+            if (const int index = box->findData(i); index != -1)
             {
                 box->setCurrentIndex(index);
             }
@@ -2163,8 +2160,7 @@ void VPMainWindow::FindTemplate(QComboBox *box, qreal width, qreal height)
     }
 
     box->blockSignals(true);
-    const int index = box->findData(max);
-    if (index != -1)
+    if (const int index = box->findData(max); index != -1)
     {
         box->setCurrentIndex(index);
     }
@@ -2875,8 +2871,7 @@ auto VPMainWindow::DrawTilesScheme(QPrinter *printer, QPainter *painter, const V
 
     sheet->SceneData()->Scene()->render(painter, target, source, Qt::KeepAspectRatio);
 
-    VWatermarkData const watermarkData = m_layout->TileFactory()->WatermarkData();
-    if (watermarkData.opacity > 0)
+    if (VWatermarkData const watermarkData = m_layout->TileFactory()->WatermarkData(); watermarkData.opacity > 0)
     {
         if (watermarkData.showImage && not watermarkData.path.isEmpty())
         {
@@ -3126,9 +3121,9 @@ void VPMainWindow::PrintLayoutTiledSheets(QPrinter *printer, const QList<VPSheet
         {
             vsizetype const index =
                 printer->pageOrder() == QPrinter::FirstPageFirst ? firstPageNumber + j : lastPageNumber - j;
-            const VPLayoutPrinterPage &page = pages.at(index);
 
-            if (not PrintLayoutTiledSheetPage(printer, painter, page, firstPage))
+            if (const VPLayoutPrinterPage &page = pages.at(index);
+                not PrintLayoutTiledSheetPage(printer, painter, page, firstPage))
             {
                 return;
             }
@@ -3274,8 +3269,7 @@ void VPMainWindow::ZValueMove(int move)
 auto VPMainWindow::ImportRawLayout(const QString &rawLayout) -> bool
 {
     VRawLayout rawLayoutReader;
-    VRawLayoutData data;
-    if (rawLayoutReader.ReadFile(rawLayout, data))
+    if (VRawLayoutData data; rawLayoutReader.ReadFile(rawLayout, data))
     {
         return AddLayoutPieces(data.pieces);
     }
@@ -3302,8 +3296,7 @@ auto VPMainWindow::AddLayoutPieces(const QVector<VLayoutPiece> &pieces) -> bool
             VPPiecePtr const piece(new VPPiece(rawPiece));
             piece->SetCopyNumber(i);
 
-            QString error;
-            if (not piece->IsValid(error))
+            if (QString error; not piece->IsValid(error))
             {
                 qCCritical(pWindow) << qPrintable(tr("Piece %1 invalid. %2").arg(piece->GetName(), error));
 
@@ -3594,8 +3587,7 @@ auto VPMainWindow::on_actionSave_triggered() -> bool
         return false;
     }
 
-    QString error;
-    if (not SaveLayout(curFile, error))
+    if (QString error; not SaveLayout(curFile, error))
     {
         QMessageBox messageBox;
         messageBox.setIcon(QMessageBox::Warning);
@@ -3638,8 +3630,7 @@ auto VPMainWindow::on_actionSaveAs_triggered() -> bool
         return false;
     }
 
-    QFileInfo const f(fileName);
-    if (f.suffix().isEmpty() && f.suffix() != suffix)
+    if (QFileInfo const f(fileName); f.suffix().isEmpty() && f.suffix() != suffix)
     {
         fileName += '.'_L1 + suffix;
     }
@@ -3667,8 +3658,7 @@ auto VPMainWindow::on_actionSaveAs_triggered() -> bool
     }
 
     QString error;
-    bool const result = SaveLayout(fileName, error);
-    if (not result)
+    if (bool const result = SaveLayout(fileName, error); not result)
     {
         QMessageBox messageBox;
         messageBox.setIcon(QMessageBox::Warning);
@@ -3749,8 +3739,7 @@ void VPMainWindow::on_SheetSizeChanged()
 {
     if (not m_layout.isNull())
     {
-        VPSheetPtr const sheet = m_layout->GetFocusedSheet();
-        if (not sheet.isNull())
+        if (VPSheetPtr const sheet = m_layout->GetFocusedSheet(); not sheet.isNull())
         {
             sheet->SetSheetSizeConverted(ui->doubleSpinBoxSheetPaperWidth->value(),
                                          ui->doubleSpinBoxSheetPaperHeight->value());
@@ -3777,8 +3766,7 @@ void VPMainWindow::on_SheetOrientationChanged(bool checked)
         SetDoubleSpinBoxValue(ui->doubleSpinBoxSheetPaperWidth, height);
         SetDoubleSpinBoxValue(ui->doubleSpinBoxSheetPaperHeight, width);
 
-        VPSheetPtr const sheet = m_layout->GetFocusedSheet();
-        if (not sheet.isNull())
+        if (VPSheetPtr const sheet = m_layout->GetFocusedSheet(); not sheet.isNull())
         {
             sheet->SetSheetSizeConverted(height, width); // NOLINT(readability-suspicious-call-argument)
         }
@@ -3796,8 +3784,7 @@ void VPMainWindow::on_SheetMarginChanged()
 {
     if (not m_layout.isNull())
     {
-        VPSheetPtr const sheet = m_layout->GetFocusedSheet();
-        if (not sheet.isNull())
+        if (VPSheetPtr const sheet = m_layout->GetFocusedSheet(); not sheet.isNull())
         {
             sheet->SetSheetMarginsConverted(
                 ui->doubleSpinBoxSheetMarginLeft->value(), ui->doubleSpinBoxSheetMarginTop->value(),
@@ -4711,8 +4698,7 @@ void VPMainWindow::AskDefaultSettings()
 
         if (settings->IsAskCollectStatistic() || settings->IsAskSendCrashReport())
         {
-            DialogAskCollectStatistic dialog(this);
-            if (dialog.exec() == QDialog::Accepted)
+            if (DialogAskCollectStatistic dialog(this); dialog.exec() == QDialog::Accepted)
             {
                 settings->SetCollectStatistic(dialog.CollectStatistic());
 #if defined(CRASH_REPORTING)
@@ -4730,9 +4716,8 @@ void VPMainWindow::AskDefaultSettings()
             auto *statistic = VGAnalytics::Instance();
             statistic->SetGUILanguage(settings->GetLocale());
 
-            QString clientID = settings->GetClientID();
             bool freshID = false;
-            if (clientID.isEmpty())
+            if (QString clientID = settings->GetClientID(); clientID.isEmpty())
             {
                 clientID = QUuid::createUuid().toString();
                 settings->SetClientID(clientID);

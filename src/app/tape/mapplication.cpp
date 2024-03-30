@@ -189,8 +189,7 @@ inline void noisyFailureMsgHandler(QtMsgType type, const QMessageLogContext &con
     }
 
     QString logMsg = msg;
-    const bool isWarningMessage = VAbstractApplication::VApp()->IsWarningMessage(msg);
-    if (isWarningMessage)
+    if (const bool isWarningMessage = VAbstractApplication::VApp()->IsWarningMessage(msg); isWarningMessage)
     {
         logMsg = logMsg.remove(VAbstractApplication::warningMessageSignature);
     }
@@ -546,8 +545,7 @@ auto MApplication::event(QEvent *e) -> bool
         {
             // NOLINTNEXTLINE(cppcoreguidelines-pro-type-static-cast-downcast)
             auto *fileOpenEvent = static_cast<QFileOpenEvent *>(e);
-            const QString macFileOpen = fileOpenEvent->file();
-            if (not macFileOpen.isEmpty())
+            if (const QString macFileOpen = fileOpenEvent->file(); not macFileOpen.isEmpty())
             {
                 if (macFileOpen.endsWith(".vkm"_L1))
                 {
@@ -665,9 +663,8 @@ void MApplication::ParseCommandLine(const SocketConnection &connection, const QS
     }
 
     const QStringList args = parser.positionalArguments();
-    bool const success = !args.isEmpty() ? StartWithFiles(parser) : SingleStart(parser);
 
-    if (not success)
+    if (bool const success = !args.isEmpty() ? StartWithFiles(parser) : SingleStart(parser); not success)
     {
         return;
     }
@@ -867,8 +864,8 @@ void MApplication::NewLocalSocketConnection()
     }
     socket->waitForReadyRead(1000);
     QTextStream stream(socket);
-    const QString arg = stream.readAll();
-    if (not arg.isEmpty())
+
+    if (const QString arg = stream.readAll(); not arg.isEmpty())
     {
         ParseCommandLine(SocketConnection::Server, arg.split(QStringLiteral(";;")));
     }

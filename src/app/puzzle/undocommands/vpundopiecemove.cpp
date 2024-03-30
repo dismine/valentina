@@ -26,16 +26,16 @@
  **
  *************************************************************************/
 #include "vpundopiecemove.h"
-#include "../vmisc/def.h"
-#include "../layout/vppiece.h"
 #include "../layout/vplayout.h"
+#include "../layout/vppiece.h"
+#include "../vmisc/def.h"
 
 //---------------------------------------------------------------------------------------------------------------------
 VPUndoPieceMove::VPUndoPieceMove(const VPPiecePtr &piece, qreal dx, qreal dy, bool allowMerge, QUndoCommand *parent)
-    : VPUndoCommand(allowMerge, parent),
-      m_piece(piece),
-      m_dx(dx),
-      m_dy(dy)
+  : VPUndoCommand(allowMerge, parent),
+    m_piece(piece),
+    m_dx(dx),
+    m_dy(dy)
 {
     SCASSERT(not piece.isNull())
 
@@ -104,9 +104,8 @@ auto VPUndoPieceMove::mergeWith(const QUndoCommand *command) -> bool
     const auto *moveCommand = dynamic_cast<const VPUndoPieceMove *>(command);
     SCASSERT(moveCommand != nullptr)
 
-    VPPiecePtr const piece = Piece();
-    if (moveCommand->Piece().isNull() || piece.isNull() || moveCommand->Piece() != piece ||
-            not moveCommand->AllowMerge())
+    if (VPPiecePtr const piece = Piece(); moveCommand->Piece().isNull() || piece.isNull() ||
+                                          moveCommand->Piece() != piece || not moveCommand->AllowMerge())
     {
         return false;
     }
@@ -126,13 +125,13 @@ auto VPUndoPieceMove::id() const -> int
 //---------------------------------------------------------------------------------------------------------------------
 VPUndoPiecesMove::VPUndoPiecesMove(const QList<VPPiecePtr> &pieces, qreal dx, qreal dy, bool allowMerge,
                                    QUndoCommand *parent)
-    : VPUndoCommand(allowMerge, parent),
-      m_dx(dx),
-      m_dy(dy)
+  : VPUndoCommand(allowMerge, parent),
+    m_dx(dx),
+    m_dy(dy)
 {
     setText(QObject::tr("move pieces"));
 
-    for (const auto& piece : pieces)
+    for (const auto &piece : pieces)
     {
         if (not piece.isNull())
         {
@@ -156,13 +155,12 @@ void VPUndoPiecesMove::undo()
         return;
     }
 
-    VPSheetPtr const sheet = Sheet();
-    if (layout->GetFocusedSheet() != sheet)
+    if (VPSheetPtr const sheet = Sheet(); layout->GetFocusedSheet() != sheet)
     {
         layout->SetFocusedSheet(sheet);
     }
 
-    for (const auto& piece : qAsConst(m_pieces))
+    for (const auto &piece : qAsConst(m_pieces))
     {
         VPPiecePtr const p = piece.toStrongRef();
         if (not p.isNull())
@@ -190,13 +188,12 @@ void VPUndoPiecesMove::redo()
         return;
     }
 
-    VPSheetPtr const sheet = Sheet();
-    if (layout->GetFocusedSheet() != sheet)
+    if (VPSheetPtr const sheet = Sheet(); layout->GetFocusedSheet() != sheet)
     {
         layout->SetFocusedSheet(sheet);
     }
 
-    for (const auto& piece : qAsConst(m_pieces))
+    for (const auto &piece : qAsConst(m_pieces))
     {
         VPPiecePtr const p = piece.toStrongRef();
         if (not p.isNull())
@@ -244,7 +241,7 @@ auto VPUndoPiecesMove::id() const -> int
 //---------------------------------------------------------------------------------------------------------------------
 auto VPUndoPiecesMove::Layout() const -> VPLayoutPtr
 {
-    for (const auto& piece : m_pieces)
+    for (const auto &piece : m_pieces)
     {
         VPPiecePtr const p = piece.toStrongRef();
         if (not p.isNull())
@@ -257,9 +254,9 @@ auto VPUndoPiecesMove::Layout() const -> VPLayoutPtr
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-auto VPUndoPiecesMove::Sheet() const  -> VPSheetPtr
+auto VPUndoPiecesMove::Sheet() const -> VPSheetPtr
 {
-    for (const auto& piece : m_pieces)
+    for (const auto &piece : m_pieces)
     {
         VPPiecePtr const p = piece.toStrongRef();
         if (not p.isNull())
@@ -275,7 +272,7 @@ auto VPUndoPiecesMove::Sheet() const  -> VPSheetPtr
 inline auto VPUndoPiecesMove::PieceIds() const -> QSet<QString>
 {
     QSet<QString> ids;
-    for (const auto& piece : m_pieces)
+    for (const auto &piece : m_pieces)
     {
         VPPiecePtr const p = piece.toStrongRef();
         if (not p.isNull())

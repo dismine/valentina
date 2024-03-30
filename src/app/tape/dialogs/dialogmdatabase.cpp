@@ -88,8 +88,7 @@ auto DialogMDataBase::GetNewNames() const -> QStringList
                                    QTreeWidgetItemIterator::NoChildren | QTreeWidgetItemIterator::Checked);
         while (*it)
         {
-            const QString name = (*it)->data(0, Qt::UserRole).toString();
-            if (not m_usedMeasurements.contains(name))
+            if (const QString name = (*it)->data(0, Qt::UserRole).toString(); not m_usedMeasurements.contains(name))
             {
                 newNames.append(name);
             }
@@ -305,8 +304,8 @@ void DialogMDataBase::InitDataBase(const QStringList &usedMeasurements)
     VKnownMeasurementsDatabase *db = MApplication::VApp()->KnownMeasurementsDatabase();
     VKnownMeasurements const knownDB = db->KnownMeasurements(m_knownId);
 
-    QMap<int, VKnownMeasurement> const measurements = knownDB.OrderedGroupMeasurements(QString());
-    if (!measurements.isEmpty())
+    if (QMap<int, VKnownMeasurement> const measurements = knownDB.OrderedGroupMeasurements(QString());
+        !measurements.isEmpty())
     {
         m_generalGroup = InitGroup(tr("General", "Measurement section"), measurements, usedMeasurements);
         m_groups.append(m_generalGroup);
