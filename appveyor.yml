@@ -101,8 +101,8 @@ environment:
       BUILD_SYSTEM: "qbs"
       ARCH: x64
       XCODE_VERSION: 15.2.0
-      TARGET_PLATFORM: "macOS_11+"
-      MACOS_DEPLOYMENT_TARGET: 11.0
+      TARGET_PLATFORM: "macOS_12+"
+      MACOS_DEPLOYMENT_TARGET: 12.0
       MULTI_BUNDLE: true
       DEPLOY: true
 
@@ -114,8 +114,8 @@ environment:
       BUILD_SYSTEM: "qbs"
       ARCH: x64
       XCODE_VERSION: 15.2.0
-      TARGET_PLATFORM: "macOS_11+"
-      MACOS_DEPLOYMENT_TARGET: 11.0
+      TARGET_PLATFORM: "macOS_12+"
+      MACOS_DEPLOYMENT_TARGET: 12.0
       MULTI_BUNDLE: false
       DEPLOY: true
 
