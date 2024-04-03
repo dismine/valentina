@@ -74,6 +74,13 @@ Module {
             return "bin";
     }
 
+    readonly property string debugInformationInstallPath: {
+        if (qbs.targetOS.contains("macos"))
+            return installAppPath + "/" + appTarget + "_dSYM"
+        else
+            return product.installDir
+    }
+
     readonly property string installBinaryPath: {
         if (qbs.targetOS.contains("macos"))
             return installAppPath + "/" + appTarget + ".app/Contents/MacOS"

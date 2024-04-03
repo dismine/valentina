@@ -18,6 +18,11 @@ VApp {
     property bool primaryApp: false
 
     Properties {
+        condition: qbs.targetOS.contains("macos") && (buildconfig.useConanPackages && buildconfig.conanCrashReportingEnabled)
+        debugInformationInstallDir: buildconfig.debugInformationInstallPath
+    }
+
+    Properties {
         condition: qbs.targetOS.contains("macos")
         // Breakpoints do not work if debug the app inside of bundle. In debug mode we turn off creating a bundle.
         // Probably it will breake some dependencies. Version for Mac designed to work inside an app bundle.

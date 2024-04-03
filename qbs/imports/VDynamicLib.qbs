@@ -40,6 +40,11 @@ VLib {
     installDebugInformation: qbs.buildVariant !== "release" || (buildconfig.useConanPackages && buildconfig.conanCrashReportingEnabled)
 
     Properties {
+        condition: qbs.targetOS.contains("macos") && (buildconfig.useConanPackages && buildconfig.conanCrashReportingEnabled)
+        debugInformationInstallDir: buildconfig.debugInformationInstallPath
+    }
+
+    Properties {
         condition: !qbs.targetOS.contains("macos") || (qbs.targetOS.contains("macos") && !buildconfig.enableMultiBundle)
         install: true
         installDir: buildconfig.installLibraryPath
