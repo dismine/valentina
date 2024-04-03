@@ -20,7 +20,7 @@ Module {
             product.multibundle.targetApps.forEach(function(targetApp) {
                 artifactNames.push(installRoot + "/" + targetApp + ".app/Contents/Frameworks/" + fileName);
 
-                if (product.installDebugInformation && !(buildconfig.useConanPackages && buildconfig.conanCrashReportingEnabled))
+                if (product.installDebugInformation && !(product.buildconfig.useConanPackages && product.buildconfig.conanCrashReportingEnabled))
                     artifactNames.push(installRoot + "/" + targetApp + ".app/Contents/Frameworks/" + fileName +
                                        product.cpp.debugInfoBundleSuffix);
             });
@@ -48,7 +48,7 @@ Module {
                     "destination": installRoot + "/" + targetApp + ".app/Contents/Frameworks/" + fileName
                 });
 
-                if (product.installDebugInformation && !(buildconfig.useConanPackages && buildconfig.conanCrashReportingEnabled))
+                if (product.installDebugInformation && !(product.buildconfig.useConanPackages && product.buildconfig.conanCrashReportingEnabled))
                     data.push({
                         "source" : product.buildDirectory + "/" + fileName + product.cpp.debugInfoBundleSuffix,
                         "destination": installRoot + "/" + targetApp + ".app/Contents/Frameworks/" + fileName +
@@ -79,7 +79,7 @@ Module {
             product.multibundle.targetApps.forEach(function(targetApp) {
                 artifactNames.push(installRoot + "/" + targetApp + ".app/Contents/MacOS/" + input.fileName);
 
-                if (product.installDebugInformation && !(buildconfig.useConanPackages && buildconfig.conanCrashReportingEnabled))
+                if (product.installDebugInformation && !(product.buildconfig.useConanPackages && product.buildconfig.conanCrashReportingEnabled))
                     artifactNames.push(installRoot + "/" + targetApp + ".app/Contents/MacOS/" + input.fileName + ".app" +
                                        product.cpp.debugInfoBundleSuffix);
             });
@@ -107,7 +107,7 @@ Module {
                     "destination": installRoot + "/" + targetApp + ".app/Contents/MacOS/" + input.fileName
                 });
 
-                if (product.installDebugInformation && !(buildconfig.useConanPackages && buildconfig.conanCrashReportingEnabled))
+                if (product.installDebugInformation && !(product.buildconfig.useConanPackages && product.buildconfig.conanCrashReportingEnabled))
                     data.push({
                         "source" : product.buildDirectory + "/" + input.fileName + ".app" + product.cpp.debugInfoBundleSuffix,
                         "destination": installRoot + "/" + targetApp + ".app/Contents/MacOS/" + fileName +
