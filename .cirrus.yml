@@ -8,16 +8,22 @@ env:
 
 ### Task templates
 
-# https://cirrus-ci.org/guide/tips-and-tricks/#sharing-configuration-between-tasks
-filter_template: &FILTER_TEMPLATE
-  skip: "!changesInclude('.cirrus.yml', '**.{h,hpp,cpp,c,pro,pri,ts,ui,png,qbs,js}')"
+# https://cirrus-ci.org/guide/writing-tasks/#supported-functions
+qbs_task_filter: &QBS_TASK_FILTER
+  skip: "!changesInclude('.cirrus.yml', '**.{h,hpp,cpp,c,ts,ui,png,qbs,js}')"
+
+qmake_task_filter: &QMAKE_TASK_FILTER
+  skip: "!changesInclude('.cirrus.yml', '**.{h,hpp,cpp,c,pro,pri,ts,ui,png}')"
+
+sonar_task_filter: &SONAR_TASK_FILTER
+  skip: "!changesInclude('**.{h,hpp,cpp,c}')"
 
 regular_task_template: &REGULER_TASK_TEMPLATE
-  << : *FILTER_TEMPLATE
   ccache_cache:
     folder: "/tmp/ccache_dir"
 
 linux_qt6_task_template: &LINUX_QT6_TASK_TEMPLATE
+  << : *QBS_TASK_FILTER
   install_script:
     - bash -c "$PACKAGE_MANAGER_INSTALL -y qt6-base-dev qt6-l10n-tools libqt6svg6-dev qt6-base-dev-tools qmake6 libxerces-c-dev poppler-utils libgl1-mesa-dev"
     - git fetch --tags
@@ -44,6 +50,7 @@ linux_qt6_task_template: &LINUX_QT6_TASK_TEMPLATE
     - ccache -s
 
 linux_qt6_sonar_task_template: &LINUX_QT6_TASK_SONAR_TEMPLATE
+  << : *QBS_TASK_FILTER
   install_script:
     - bash -c "$PACKAGE_MANAGER_INSTALL -y qt6-base-dev qt6-l10n-tools libqt6svg6-dev qt6-base-dev-tools qmake6 libxerces-c-dev poppler-utils libgl1-mesa-dev"
     - git fetch --tags
@@ -79,6 +86,7 @@ linux_qt6_sonar_task_template: &LINUX_QT6_TASK_SONAR_TEMPLATE
     - ccache -s
     
 linux_qt5_qmake_task_template: &LINUX_QT5_QMAKE_TASK_TEMPLATE
+  << : *QMAKE_TASK_FILTER
   install_script:
     - bash -c "$PACKAGE_MANAGER_INSTALL qtbase5-dev libqt5svg5-dev qttools5-dev-tools libqt5xmlpatterns5-dev libqt5core5a libqt5gui5 libqt5printsupport5 libqt5svg5 libqt5widgets5 libqt5xml5 libqt5xmlpatterns5 poppler-utils"
     - git fetch --tags
@@ -101,6 +109,7 @@ linux_qt5_qmake_task_template: &LINUX_QT5_QMAKE_TASK_TEMPLATE
     - ccache -s
 
 linux_qt5_qbs_task_template: &LINUX_QT5_QBS_TASK_TEMPLATE
+  << : *QBS_TASK_FILTER
   install_script:
     - bash -c "$PACKAGE_MANAGER_INSTALL qtbase5-dev libqt5svg5-dev qttools5-dev-tools libqt5xmlpatterns5-dev libqt5core5a libqt5gui5 libqt5printsupport5 libqt5svg5 libqt5widgets5 libqt5xml5 libqt5xmlpatterns5 poppler-utils"
     - git fetch --tags
@@ -127,6 +136,7 @@ linux_qt5_qbs_task_template: &LINUX_QT5_QBS_TASK_TEMPLATE
     - ccache -s
 
 appimage_task_template: &APPIMAGE_TASK_TEMPLATE
+  << : *QBS_TASK_FILTER
   pip_cache:
     folder: ${PIP_CACHE_DIR}
   conan_cache:
@@ -192,7 +202,8 @@ linux_task:
         COMPILER_REGEX: clang
       matrix:
         - name: 'latest Clang [Qt5 QMake]'
-          << :  *LINUX_QT5_QMAKE_TASK_TEMPLATE
+          << : *QMAKE_TASK_FILTER
+          << : *LINUX_QT5_QMAKE_TASK_TEMPLATE
           env:
             QT_SELECT: "qt5"
           container:
@@ -223,7 +234,8 @@ linux_task:
         COMPILER_REGEX: "gcc|g\\+\\+"
       matrix:
         - name: 'GCC 13 [Qt5 QMake]'
-          << :  *LINUX_QT5_QMAKE_TASK_TEMPLATE
+          << : *QMAKE_TASK_FILTER
+          << : *LINUX_QT5_QMAKE_TASK_TEMPLATE
           env:
             QT_SELECT: "qt5"
           container:
@@ -238,7 +250,7 @@ linux_task:
         PIP_CACHE_DIR: ${HOME}/.cache/pip
       matrix:
         - name: 'AppImage'
-          << :  *APPIMAGE_TASK_TEMPLATE
+          << : *APPIMAGE_TASK_TEMPLATE
           env:
             ACCESS_TOKEN: ENCRYPTED[81e0b2381ffb628b73f5c94f834010e6631191e0ad03cdd0850d440fb2737a74b68131d842030f010c1bf73ab4cdc1ae]
             DEPLOY: "true"
@@ -288,6 +300,7 @@ linux_task:
             folder: "${HOME}/.sonar/cache"
 
 macos_task_template: &MACOS_TASK_TEMPLATE
+  << : *QBS_TASK_FILTER
   << : *REGULER_TASK_TEMPLATE
   timeout_in: 120m
   env:
