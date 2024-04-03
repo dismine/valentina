@@ -107,7 +107,7 @@ Module {
                     "destination": installRoot + "/" + targetApp + ".app/Contents/MacOS/" + input.fileName
                 });
 
-                if (product.installDebugInformation)
+                if (product.installDebugInformation && !(buildconfig.useConanPackages && buildconfig.conanCrashReportingEnabled))
                     data.push({
                         "source" : product.buildDirectory + "/" + input.fileName + ".app" + product.cpp.debugInfoBundleSuffix,
                         "destination": installRoot + "/" + targetApp + ".app/Contents/MacOS/" + fileName +
