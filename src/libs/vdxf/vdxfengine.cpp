@@ -1166,12 +1166,12 @@ void VDxfEngine::ExportPieceText(const QSharedPointer<dx_ifaceBlock> &detailBloc
         const QFont fnt = LineFont(tl, tm.GetFont());
         QFontMetrics const fm(fnt);
 
-        if (dY + fm.height() > dH)
+        if (dY + fm.height() * scale / 2 > dH)
         {
             break;
         }
 
-        dY += fm.height();
+        dY += fm.height() * scale / 2;
 
         const qreal dX = LineAlign(tl, tl.m_qsText, fm, dW);
         QTransform const lineMatrix = LineMatrix(detail, labelShape.at(0), angle, QPointF(dX, dY), maxLineWidth);
@@ -1183,7 +1183,7 @@ void VDxfEngine::ExportPieceText(const QSharedPointer<dx_ifaceBlock> &detailBloc
             DRW_Coord(FromPixel(pos.x(), m_varInsunits), FromPixel(GetSize().height() - pos.y(), m_varInsunits), 0);
         textLine->secPoint =
             DRW_Coord(FromPixel(pos.x(), m_varInsunits), FromPixel(GetSize().height() - pos.y(), m_varInsunits), 0);
-        textLine->height = FromPixel(fm.ascent() * scale, m_varInsunits);
+        textLine->height = FromPixel(fm.ascent() * scale / 2, m_varInsunits);
         textLine->layer = *layer1;
         textLine->text = tl.m_qsText.toStdString();
         textLine->style = m_input->AddFont(fnt);
@@ -1235,7 +1235,7 @@ void VDxfEngine::ExportAnnotationText(const QSharedPointer<dx_ifaceBlock> &detai
     qreal const width = fm.horizontalAdvance(labelData.label);
 
     QLineF base(pos, QPointF(pos.x() + 100, pos.y()));
-    base.setAngle(base.angle() - 90);
+    base.setAngle(base.angle() - 180);
     base.setLength(height);
     pos = base.p2();
 
@@ -1262,7 +1262,7 @@ void VDxfEngine::ExportAnnotationText(const QSharedPointer<dx_ifaceBlock> &detai
         DRW_Coord(FromPixel(pos.x(), m_varInsunits), FromPixel(GetSize().height() - pos.y(), m_varInsunits), 0);
     text->secPoint =
         DRW_Coord(FromPixel(pos.x(), m_varInsunits), FromPixel(GetSize().height() - pos.y(), m_varInsunits), 0);
-    text->height = FromPixel(height, m_varInsunits);
+    text->height = FromPixel(height / 2, m_varInsunits);
     text->layer = layer;
     text->text = labelData.label.toStdString();
     text->style = m_input->AddFont(labelData.font);
