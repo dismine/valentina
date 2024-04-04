@@ -457,8 +457,7 @@ void DialogLayoutSettings::FindTemplate()
         if (QSizeF(width, height) == tmplSize || QSizeF(height, width) == tmplSize)
         {
             ui->comboBoxTemplates->blockSignals(true);
-            const int index = ui->comboBoxTemplates->findData(i);
-            if (index != -1)
+            if (const int index = ui->comboBoxTemplates->findData(i); index != -1)
             {
                 ui->comboBoxTemplates->setCurrentIndex(index);
             }
@@ -468,8 +467,7 @@ void DialogLayoutSettings::FindTemplate()
     }
 
     ui->comboBoxTemplates->blockSignals(true);
-    const int index = ui->comboBoxTemplates->findData(max);
-    if (index != -1)
+    if (const int index = ui->comboBoxTemplates->findData(max); index != -1)
     {
         ui->comboBoxTemplates->setCurrentIndex(index);
     }
@@ -573,8 +571,7 @@ void DialogLayoutSettings::showEvent(QShowEvent *event)
     }
     // do your init stuff here
 
-    const QSize sz = VAbstractApplication::VApp()->Settings()->GetLayoutSettingsDialogSize();
-    if (not sz.isEmpty())
+    if (const QSize sz = VAbstractApplication::VApp()->Settings()->GetLayoutSettingsDialogSize(); not sz.isEmpty())
     {
         resize(sz);
     }
@@ -689,8 +686,8 @@ void DialogLayoutSettings::DialogAccepted()
     }
     else
     {
-        QPrinterInfo const printer = QPrinterInfo::printerInfo(ui->comboBoxPrinter->currentText());
-        if (printer.isNull())
+        if (QPrinterInfo const printer = QPrinterInfo::printerInfo(ui->comboBoxPrinter->currentText());
+            printer.isNull())
         {
             m_generator->SetPrinterFields(true, GetFields());
         }
@@ -701,11 +698,10 @@ void DialogLayoutSettings::DialogAccepted()
             if (fields.left() < minFields.left() || fields.right() < minFields.right() ||
                 fields.top() < minFields.top() || fields.bottom() < minFields.bottom())
             {
-                QMessageBox::StandardButton answer;
-                answer = QMessageBox::question(this, tr("Wrong fields."),
-                                               tr("Margins go beyond printing. \n\nApply settings anyway?"),
-                                               QMessageBox::Yes | QMessageBox::No, QMessageBox::No);
-                if (answer == QMessageBox::No)
+                if (QMessageBox::StandardButton answer = QMessageBox::question(
+                        this, tr("Wrong fields."), tr("Margins go beyond printing. \n\nApply settings anyway?"),
+                        QMessageBox::Yes | QMessageBox::No, QMessageBox::No);
+                    answer == QMessageBox::No)
                 {
                     SetMinMargins(fields, minFields);
                     m_generator->SetPrinterFields(true, GetFields());
@@ -764,8 +760,8 @@ void DialogLayoutSettings::RestoreDefaults()
 //---------------------------------------------------------------------------------------------------------------------
 void DialogLayoutSettings::PrinterMargins()
 {
-    QPrinterInfo const printer = QPrinterInfo::printerInfo(ui->comboBoxPrinter->currentText());
-    if (not printer.isNull())
+    if (QPrinterInfo const printer = QPrinterInfo::printerInfo(ui->comboBoxPrinter->currentText());
+        not printer.isNull())
     {
         SetFields(GetPrinterFields(QSharedPointer<QPrinter>(new QPrinter(printer))));
     }
@@ -958,8 +954,8 @@ auto DialogLayoutSettings::GetTemplateSize(const PaperSizeTemplate &tmpl, const 
 //---------------------------------------------------------------------------------------------------------------------
 auto DialogLayoutSettings::MinPrinterFields() const -> QMarginsF
 {
-    QPrinterInfo const printer = QPrinterInfo::printerInfo(ui->comboBoxPrinter->currentText());
-    if (not printer.isNull())
+    if (QPrinterInfo const printer = QPrinterInfo::printerInfo(ui->comboBoxPrinter->currentText());
+        not printer.isNull())
     {
         return GetMinPrinterFields(QSharedPointer<QPrinter>(new QPrinter(printer)));
     }
@@ -970,8 +966,8 @@ auto DialogLayoutSettings::MinPrinterFields() const -> QMarginsF
 //---------------------------------------------------------------------------------------------------------------------
 auto DialogLayoutSettings::GetDefPrinterFields() const -> QMarginsF
 {
-    QPrinterInfo const printer = QPrinterInfo::printerInfo(ui->comboBoxPrinter->currentText());
-    if (not printer.isNull())
+    if (QPrinterInfo const printer = QPrinterInfo::printerInfo(ui->comboBoxPrinter->currentText());
+        not printer.isNull())
     {
         return GetPrinterFields(QSharedPointer<QPrinter>(new QPrinter(printer)));
     }

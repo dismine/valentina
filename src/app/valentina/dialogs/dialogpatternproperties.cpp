@@ -101,9 +101,9 @@ DialogPatternProperties::DialogPatternProperties(VPattern *doc, VContainer *patt
         ui->comboBoxLabelLanguage->addItem(QLocale(name).nativeLanguageName(), name);
     }
 
-    int const index =
-        ui->comboBoxLabelLanguage->findData(VAbstractValApplication::VApp()->ValentinaSettings()->GetLabelLanguage());
-    if (index != -1)
+    if (int const index = ui->comboBoxLabelLanguage->findData(
+            VAbstractValApplication::VApp()->ValentinaSettings()->GetLabelLanguage());
+        index != -1)
     {
         ui->comboBoxLabelLanguage->setCurrentIndex(index);
     }
@@ -288,10 +288,10 @@ void DialogPatternProperties::SaveDescription()
         m_doc->SetPassmarkWidthVariable(ui->lineEditPassmarkWidth->text());
         m_doc->SetDefaultPieceLabelPath(ui->lineEditPieceLabelPath->text());
 
-        const bool lengthChanged = m_oldPassmarkLength != ui->lineEditPassmarkLength->text();
         const bool widthChanged = m_oldPassmarkWidth != ui->lineEditPassmarkWidth->text();
 
-        if (lengthChanged || widthChanged)
+        if (const bool lengthChanged = m_oldPassmarkLength != ui->lineEditPassmarkLength->text();
+            lengthChanged || widthChanged)
         {
             emit UpddatePieces();
 

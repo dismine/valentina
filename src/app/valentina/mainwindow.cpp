@@ -310,8 +310,7 @@ void WarningNotUniquePieceName(const QHash<quint32, VPiece> *allDetails)
 
     while (i != allDetails->constEnd())
     {
-        const QString pieceName = i.value().GetName();
-        if (not uniqueNames.contains(pieceName))
+        if (const QString pieceName = i.value().GetName(); not uniqueNames.contains(pieceName))
         {
             uniqueNames.insert(pieceName);
         }
@@ -419,11 +418,11 @@ MainWindow::MainWindow(QWidget *parent)
                         asking = true;
                         m_mChangesAsked = true;
                         m_measurementsSyncTimer->stop();
-                        const auto answer = QMessageBox::question(
-                            this, tr("Measurements"),
-                            tr("Measurements were changed. Do you want to sync measurements now?"),
-                            QMessageBox::Yes | QMessageBox::No, QMessageBox::Yes);
-                        if (answer == QMessageBox::Yes)
+                        if (const auto answer = QMessageBox::question(
+                                this, tr("Measurements"),
+                                tr("Measurements were changed. Do you want to sync measurements now?"),
+                                QMessageBox::Yes | QMessageBox::No, QMessageBox::Yes);
+                            answer == QMessageBox::Yes)
                         {
                             SyncMeasurements();
                         }
@@ -564,8 +563,7 @@ void MainWindow::AddPP(const QString &PPName)
     SetEnableTool(true);
     SetEnableWidgets(true);
 
-    const qint32 index = m_comboBoxDraws->findText(PPName);
-    if (index != -1)
+    if (const qint32 index = m_comboBoxDraws->findText(PPName); index != -1)
     { // -1 for not found
         m_comboBoxDraws->setCurrentIndex(index);
     }
@@ -836,8 +834,8 @@ void MainWindow::SetToolButton(bool checked, Tool t, const QString &cursor, cons
         emit EnableItemMove(false);
         m_currentTool = m_lastUsedTool = t;
 
-        VValentinaSettings *settings = VAbstractValApplication::VApp()->ValentinaSettings();
-        if (settings->GetPointerMode() == VToolPointerMode::ToolIcon)
+        if (VValentinaSettings *settings = VAbstractValApplication::VApp()->ValentinaSettings();
+            settings->GetPointerMode() == VToolPointerMode::ToolIcon)
         {
             const QString resource = QStringLiteral("toolcursor");
             auto cursorResource = VTheme::GetResourceName(resource, cursor);
@@ -2203,8 +2201,7 @@ void MainWindow::ShowMeasurements()
 void MainWindow::MeasurementsChanged(const QString &path)
 {
     m_mChanges = false;
-    QFileInfo const checkFile(path);
-    if (checkFile.exists())
+    if (QFileInfo const checkFile(path); checkFile.exists())
     {
         m_mChanges = true;
         m_mChangesAsked = false;
@@ -2498,8 +2495,7 @@ void MainWindow::SetDimensionBases()
 
             control->blockSignals(true);
 
-            const qint32 i = control->findData(value);
-            if (i != -1)
+            if (const qint32 i = control->findData(value); i != -1)
             {
                 control->setCurrentIndex(i);
             }
@@ -2684,8 +2680,7 @@ auto MainWindow::SavePatternAs(const QString &fileName) -> bool
         return result;
     }
 
-    const QString oldFilePath = VAbstractValApplication::VApp()->GetPatternPath();
-    if (not oldFilePath.isEmpty())
+    if (const QString oldFilePath = VAbstractValApplication::VApp()->GetPatternPath(); not oldFilePath.isEmpty())
     {
         qCDebug(vMainWindow, "Updating restore file list.");
         QStringList restoreFiles = VAbstractValApplication::VApp()->ValentinaSettings()->GetRestoreFileList();
@@ -2941,8 +2936,7 @@ void MainWindow::ToolBarDraws()
             [this]()
             {
                 QString draw = doc->GetNameActivPP();
-                bool const ok = PatternPieceName(draw);
-                if (not ok)
+                if (bool const ok = PatternPieceName(draw); not ok)
                 {
                     return;
                 }
@@ -4251,9 +4245,8 @@ void MainWindow::on_actionCreateManualLayout_triggered()
         DialogLayoutScale layoutScale(false, this);
         layoutScale.SetXScale(1);
         layoutScale.SetYScale(1);
-        int const res = layoutScale.exec();
 
-        if (res == QDialog::Rejected)
+        if (int const res = layoutScale.exec(); res == QDialog::Rejected)
         {
             return;
         }
@@ -4378,8 +4371,7 @@ void MainWindow::ActionExportFontCorrections()
     const QString dirPath = settings->GetPathFontCorrections();
 
     bool usedNotExistedDir = false;
-    QDir const directory(dirPath);
-    if (not directory.exists())
+    if (QDir const directory(dirPath); not directory.exists())
     {
         usedNotExistedDir = directory.mkpath(QChar('.'));
     }
@@ -4503,8 +4495,7 @@ void MainWindow::FileClosedCorrect()
     VAbstractValApplication::VApp()->ValentinaSettings()->SetRestoreFileList(restoreFiles);
 
     // Remove autosave file
-    QFile autofile(VAbstractValApplication::VApp()->GetPatternPath() + *autosavePrefix);
-    if (autofile.exists())
+    if (QFile autofile(VAbstractValApplication::VApp()->GetPatternPath() + *autosavePrefix); autofile.exists())
     {
         autofile.remove();
     }
@@ -4752,8 +4743,7 @@ void MainWindow::on_actionNew_triggered()
         qCDebug(vMainWindow, "Generated PP name: %s", qUtf8Printable(patternPieceName));
 
         qCDebug(vMainWindow, "First PP");
-        DialogNewPattern newPattern(pattern, patternPieceName, this);
-        if (newPattern.exec() == QDialog::Accepted)
+        if (DialogNewPattern newPattern(pattern, patternPieceName, this); newPattern.exec() == QDialog::Accepted)
         {
             patternPieceName = newPattern.name();
             VAbstractValApplication::VApp()->SetPatternUnits(newPattern.PatternUnit());
@@ -4813,8 +4803,7 @@ void MainWindow::DimensionABaseChanged()
 
     if (not VFuzzyComparePossibleNulls(oldValue, m_currentDimensionA))
     {
-        const QList<MeasurementDimension_p> dimensions = m_m->Dimensions().values();
-        if (dimensions.size() > 1)
+        if (const QList<MeasurementDimension_p> dimensions = m_m->Dimensions().values(); dimensions.size() > 1)
         {
             MeasurementDimension_p dimension = dimensions.at(1);
             InitDimensionGradation(1, dimension, m_dimensionB);
@@ -4839,9 +4828,7 @@ void MainWindow::DimensionBBaseChanged()
 
     if (not VFuzzyComparePossibleNulls(oldValue, m_currentDimensionB))
     {
-        const QList<MeasurementDimension_p> dimensions = m_m->Dimensions().values();
-
-        if (dimensions.size() > 2)
+        if (const QList<MeasurementDimension_p> dimensions = m_m->Dimensions().values(); dimensions.size() > 2)
         {
             const MeasurementDimension_p &dimension = dimensions.at(2);
             InitDimensionGradation(2, dimension, m_dimensionC);
@@ -6635,8 +6622,8 @@ auto MainWindow::GetUnlokedRestoreFileList() -> QStringList
 {
     QStringList restoreFiles;
     // Take all files that need to be restored
-    QStringList files = VAbstractValApplication::VApp()->ValentinaSettings()->GetRestoreFileList();
-    if (not files.empty())
+    if (QStringList files = VAbstractValApplication::VApp()->ValentinaSettings()->GetRestoreFileList();
+        not files.empty())
     {
         restoreFiles.reserve(files.size());
         for (auto &file : files)
@@ -6779,8 +6766,7 @@ void MainWindow::ExportDrawAs(bool checked)
         return;
     }
 
-    QFileInfo const f(fileName);
-    if (f.suffix().isEmpty() || f.suffix() != "svg"_L1)
+    if (QFileInfo const f(fileName); f.suffix().isEmpty() || f.suffix() != "svg"_L1)
     {
         fileName += ".svg"_L1;
     }
@@ -6977,9 +6963,10 @@ auto MainWindow::CheckPathToMeasurements(const QString &patternPath, const QStri
     const QString text = tr("The measurements file <br/><br/> <b>%1</b> <br/><br/> could not be found. Do you "
                             "want to update the file location?")
                              .arg(path);
-    QMessageBox::StandardButton const res = QMessageBox::question(this, tr("Loading measurements file"), text,
-                                                                  QMessageBox::Yes | QMessageBox::No, QMessageBox::Yes);
-    if (res == QMessageBox::No)
+
+    if (QMessageBox::StandardButton const res = QMessageBox::question(
+            this, tr("Loading measurements file"), text, QMessageBox::Yes | QMessageBox::No, QMessageBox::Yes);
+        res == QMessageBox::No)
     {
         return {};
     }
@@ -6998,8 +6985,7 @@ auto MainWindow::CheckPathToMeasurements(const QString &patternPath, const QStri
     {
         QString dirPath;
         const QDir patternDir = QFileInfo(patternPath).absoluteDir();
-        QString measurements = table.fileName();
-        if (patternDir.exists(measurements))
+        if (QString measurements = table.fileName(); patternDir.exists(measurements))
         {
             selectedName = measurements;
             dirPath = patternDir.absolutePath();
@@ -7209,8 +7195,7 @@ auto MainWindow::DoExport(const VCommandLinePtr &expParams) -> bool
     }
     listDetails = PrepareDetailsForLayout(details);
 
-    const bool exportOnlyDetails = expParams->IsExportOnlyDetails();
-    if (exportOnlyDetails)
+    if (const bool exportOnlyDetails = expParams->IsExportOnlyDetails(); exportOnlyDetails)
     {
         try
         {
@@ -7314,8 +7299,7 @@ auto MainWindow::DoFMExport(const VCommandLinePtr &expParams) -> bool
         return false;
     }
 
-    QFileInfo const info(filePath);
-    if (info.isRelative())
+    if (QFileInfo const info(filePath); info.isRelative())
     {
         filePath = QDir::currentPath() + '/'_L1 + filePath;
     }
@@ -7496,9 +7480,7 @@ void MainWindow::ProcessCMD()
 
         VAbstractValApplication::VApp()->SetUserMaterials(cmd->OptUserMaterials());
 
-        const bool loaded = LoadPattern(args.constFirst(), cmd->OptMeasurePath());
-
-        if (not loaded)
+        if (const bool loaded = LoadPattern(args.constFirst(), cmd->OptMeasurePath()); not loaded)
         {
             return; // process only one input file
         }

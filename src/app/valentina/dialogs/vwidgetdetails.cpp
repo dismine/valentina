@@ -305,8 +305,7 @@ void VWidgetDetails::ShowContextMenu(const QPoint &pos)
     QAction *actionDeletePiece = nullptr;
     VToolSeamAllowance *toolPiece = nullptr;
 
-    QTableWidgetItem *selectedItem = ui->tableWidget->itemAt(pos);
-    if (selectedItem)
+    if (QTableWidgetItem *selectedItem = ui->tableWidget->itemAt(pos); selectedItem)
     {
         QTableWidgetItem *item = ui->tableWidget->item(selectedItem->row(), PieceColumn::InLayout);
         const quint32 id = item->data(Qt::UserRole).toUInt();

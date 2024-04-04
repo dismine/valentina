@@ -379,8 +379,7 @@ auto DialogIncrements::GetCustomName() const -> QString
 auto DialogIncrements::ClearIncrementName(const QString &name) -> QString
 {
     QString clear = name;
-    const auto index = clear.indexOf(CustomIncrSign);
-    if (index == 0)
+    if (const auto index = clear.indexOf(CustomIncrSign); index == 0)
     {
         clear.remove(0, 1);
     }
@@ -1296,8 +1295,7 @@ void DialogIncrements::InitIncrementUnits(QComboBox *combo)
     combo->addItem(units, QVariant(static_cast<int>(IncrUnits::Pattern)));
     combo->addItem(tr("Degrees"), QVariant(static_cast<int>(IncrUnits::Degrees)));
 
-    int const i = combo->findData(current);
-    if (i != -1)
+    if (int const i = combo->findData(current); i != -1)
     {
         combo->setCurrentIndex(i);
     }
@@ -1787,8 +1785,7 @@ void DialogIncrements::SaveIncrFormula()
     QString const text = textEdit->toPlainText();
     QSharedPointer<VIncrement> const incr = m_data->GetVariable<VIncrement>(nameField->text());
 
-    QTableWidgetItem *formulaField = table->item(row, 2);
-    if (formulaField->text() == text)
+    if (QTableWidgetItem *formulaField = table->item(row, 2); formulaField->text() == text)
     {
         QTableWidgetItem *result = table->item(row, 1);
         if (incr->IsSpecialUnits())
@@ -2065,8 +2062,7 @@ void DialogIncrements::showEvent(QShowEvent *event)
     }
     // do your init stuff here
 
-    const QSize sz = VAbstractApplication::VApp()->Settings()->GetIncrementsDialogSize();
-    if (not sz.isEmpty())
+    if (const QSize sz = VAbstractApplication::VApp()->Settings()->GetIncrementsDialogSize(); not sz.isEmpty())
     {
         resize(sz);
     }

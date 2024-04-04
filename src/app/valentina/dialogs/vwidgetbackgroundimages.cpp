@@ -608,8 +608,8 @@ void VWidgetBackgroundImages::ResetImageTransformationSettings()
     }
     else if (ui->tabWidgetImageTransformation->indexOf(ui->tabScale) == index)
     { // scale
-        int const unitIndex = ui->comboBoxScaleUnit->findData(QVariant(static_cast<int>(ScaleUnit::Percent)));
-        if (unitIndex != -1)
+        if (int const unitIndex = ui->comboBoxScaleUnit->findData(QVariant(static_cast<int>(ScaleUnit::Percent)));
+            unitIndex != -1)
         {
             ui->comboBoxScaleUnit->setCurrentIndex(unitIndex);
         }
@@ -725,8 +725,7 @@ void VWidgetBackgroundImages::ImagePositionChanged(const QUuid &id)
     QTableWidgetItem *item = ui->tableWidget->item(row, 0);
     if (item != nullptr)
     {
-        QUuid const curentId = item->data(Qt::UserRole).toUuid();
-        if (curentId != id)
+        if (QUuid const curentId = item->data(Qt::UserRole).toUuid(); curentId != id)
         {
             return;
         }
@@ -972,8 +971,7 @@ auto VWidgetBackgroundImages::ImageWidth() const -> qreal
 {
     qreal width = 0;
 
-    int const row = ui->tableWidget->currentRow();
-    if (row != -1)
+    if (int const row = ui->tableWidget->currentRow(); row != -1)
     {
         QTableWidgetItem *item = ui->tableWidget->item(row, 0);
         if (item != nullptr)
@@ -992,8 +990,7 @@ auto VWidgetBackgroundImages::ImageHeight() const -> qreal
 {
     qreal height = 0;
 
-    int const row = ui->tableWidget->currentRow();
-    if (row != -1)
+    if (int const row = ui->tableWidget->currentRow(); row != -1)
     {
         QTableWidgetItem *item = ui->tableWidget->item(row, 0);
         if (item != nullptr)

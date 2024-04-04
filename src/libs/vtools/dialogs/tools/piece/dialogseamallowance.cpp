@@ -1070,7 +1070,7 @@ void DialogSeamAllowance::DetailUUIDChanged()
     if (edit)
     {
         static QRegularExpression const re("^$|^{[0-9a-fA-F]{8}\\-[0-9a-fA-F]{4}\\-[0-9a-fA-F]{4}\\-[0-9a-fA-F]{4}\\-"
-                                     "[0-9a-fA-F]{12}}$");
+                                           "[0-9a-fA-F]{12}}$");
         QRegularExpressionMatch const match = re.match(edit->text());
 
         if (match.hasMatch())
@@ -5428,12 +5428,11 @@ void DialogSeamAllowance::EditPatternLabel()
 {
     if (m_patternLabelDataChanged && m_askSavePatternLabelData)
     {
-        QMessageBox::StandardButton const answer = QMessageBox::question(
-            this, tr("Save label data."),
-            tr("Label data were changed. Do you want to save them before editing label template?"),
-            QMessageBox::Yes | QMessageBox::No, QMessageBox::Yes);
-
-        if (answer == QMessageBox::Yes)
+        if (QMessageBox::StandardButton const answer = QMessageBox::question(
+                this, tr("Save label data."),
+                tr("Label data were changed. Do you want to save them before editing label template?"),
+                QMessageBox::Yes | QMessageBox::No, QMessageBox::Yes);
+            answer == QMessageBox::Yes)
         {
             SavePatternLabelData();
         }

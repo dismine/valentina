@@ -499,9 +499,8 @@ void MainWindowsNoGUI::ExportFMeasurementsToCSV()
 //---------------------------------------------------------------------------------------------------------------------
 void MainWindowsNoGUI::ExportData(const QVector<VLayoutPiece> &listDetails)
 {
-    const LayoutExportFormats format = m_dialogSaveLayout->Format();
-
-    if (format == LayoutExportFormats::DXF_AAMA || format == LayoutExportFormats::DXF_ASTM ||
+    if (const LayoutExportFormats format = m_dialogSaveLayout->Format();
+        format == LayoutExportFormats::DXF_AAMA || format == LayoutExportFormats::DXF_ASTM ||
         format == LayoutExportFormats::RLD || format == LayoutExportFormats::HPGL ||
         format == LayoutExportFormats::HPGL2)
     {
@@ -554,9 +553,9 @@ void MainWindowsNoGUI::ExportFlatLayout(const QList<QGraphicsScene *> &scenes, c
     }
 
     VAbstractValApplication::VApp()->ValentinaSettings()->SetPathLayout(path);
-    const LayoutExportFormats format = m_dialogSaveLayout->Format();
 
-    if (format == LayoutExportFormats::PDFTiled && m_dialogSaveLayout->Mode() == Draw::Layout)
+    if (const LayoutExportFormats format = m_dialogSaveLayout->Format();
+        format == LayoutExportFormats::PDFTiled && m_dialogSaveLayout->Mode() == Draw::Layout)
     {
         const QString name = path + '/'_L1 + m_dialogSaveLayout->FileName() + '1'_L1;
         PdfTiledFile(name);
@@ -927,8 +926,8 @@ auto MainWindowsNoGUI::RecentFileList() const -> QStringList
 auto MainWindowsNoGUI::ScenePreview(int i, QSize iconSize, PreviewQuatilty quality) const -> QIcon
 {
     QImage image;
-    auto *paper = qgraphicsitem_cast<QGraphicsRectItem *>(m_layoutSettings->LayoutPapers().at(i));
-    if (paper)
+
+    if (auto *paper = qgraphicsitem_cast<QGraphicsRectItem *>(m_layoutSettings->LayoutPapers().at(i)); paper)
     {
         if (quality == PreviewQuatilty::Fast)
         {

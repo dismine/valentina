@@ -104,8 +104,7 @@ void VWidgetGroups::SetMultipleGroupsVisibility(const QVector<vidtype> &groups, 
                         continue;
                     }
 
-                    QTableWidgetItem *item = ui->tableWidget->item(row, 0);
-                    if (item)
+                    if (QTableWidgetItem *item = ui->tableWidget->item(row, 0); item)
                     {
                         const QString resource = QStringLiteral("icon");
                         item->setIcon(i.value()
@@ -134,8 +133,8 @@ auto VWidgetGroups::FilterGroups(const QMap<quint32, VGroupData> &groups) -> QMa
     while (i != groups.constEnd())
     {
         const VGroupData &data = i.value();
-        QSet<QString> const groupCategories = ConvertToSet<QString>(data.tags);
-        if (filterCategories.intersects(groupCategories))
+        if (QSet<QString> const groupCategories = ConvertToSet<QString>(data.tags);
+            filterCategories.intersects(groupCategories))
         {
             filtered.insert(i.key(), data);
         }

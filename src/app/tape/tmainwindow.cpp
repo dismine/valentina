@@ -4612,8 +4612,7 @@ void TMainWindow::SetDimensionBases()
         {
             SCASSERT(control != nullptr)
 
-            const qint32 i = control->findData(value);
-            if (i != -1)
+            if (const qint32 i = control->findData(value); i != -1)
             {
                 control->setCurrentIndex(i);
             }
