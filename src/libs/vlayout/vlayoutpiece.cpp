@@ -2243,7 +2243,7 @@ auto VLayoutPiece::GetMainPathItem() const -> QGraphicsPathItem *
     QPainterPath path;
 
     // contour
-    QVector<VLayoutPoint> const points = GetMappedContourPoints();
+    QVector<VLayoutPoint> const points = GetMappedFullContourPoints();
 
     path.moveTo(points.at(0));
     for (qint32 i = 1; i < points.count(); ++i)
