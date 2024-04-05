@@ -254,7 +254,7 @@ void VPPiece::RotateToGrainline(const VPTransformationOrigon &origin)
         return;
     }
 
-    QLineF fabricGrainline(grainline.p1().x(), grainline.p1().y(), grainline.p1().x() + 100, grainline.p1().y());
+    QLineF fabricGrainline(grainline.p1().x(), grainline.p1().y(), grainline.p1().x() - 100, grainline.p1().y());
     if (sheet->GrainlineOrientation() == GrainlineType::Vertical)
     {
         fabricGrainline.setAngle(fabricGrainline.angle() - 90);
