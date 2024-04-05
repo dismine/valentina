@@ -174,6 +174,13 @@ void VPPiece::Update(const VPPiecePtr &piece)
     SetFoldLineSVGFontFamily(piece->GetFoldLineSVGFontFamily());
     SetFoldLineHeight(piece->GetFoldLineHeight());
     SetFoldLineWidth(piece->GetFoldLineWidth());
+    SetForceFlipping(piece->IsForceFlipping());
+    SetForbidFlipping(piece->IsForbidFlipping());
+
+    if ((IsForceFlipping() && !IsVerticallyFlipped()) || (IsForbidFlipping() && IsVerticallyFlipped()))
+    {
+        FlipVertically();
+    }
 }
 
 //---------------------------------------------------------------------------------------------------------------------
