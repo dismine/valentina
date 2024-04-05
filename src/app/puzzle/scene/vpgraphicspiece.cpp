@@ -954,7 +954,7 @@ void VPGraphicsPiece::PaintMirrorLine(QPainter *painter, const VPPiecePtr &piece
         if (not piece->IsSeamAllowance() || piece->IsSeamAllowanceBuiltIn())
         {
             QLineF const seamMirrorLine = piece->GetMappedSeamMirrorLine();
-            if (!seamMirrorLine.isNull())
+            if (!seamMirrorLine.isNull() && piece->IsShowMirrorLine())
             {
                 QPainterPath mirrorPath;
                 mirrorPath.moveTo(seamMirrorLine.p1());
@@ -966,7 +966,7 @@ void VPGraphicsPiece::PaintMirrorLine(QPainter *painter, const VPPiecePtr &piece
         else if (not piece->IsSeamAllowanceBuiltIn())
         {
             QLineF const seamAllowanceMirrorLine = piece->GetMappedSeamAllowanceMirrorLine();
-            if (!seamAllowanceMirrorLine.isNull())
+            if (!seamAllowanceMirrorLine.isNull() && piece->IsShowMirrorLine())
             {
                 QPainterPath mirrorPath;
                 mirrorPath.moveTo(seamAllowanceMirrorLine.p1());

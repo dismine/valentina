@@ -1599,6 +1599,18 @@ void VAbstractPiece::SetFoldLineLabelAlignment(int alignment)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+bool VAbstractPiece::IsShowMirrorLine() const
+{
+    return d->m_showMirrorLine;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VAbstractPiece::SetShowMirrorLine(bool show)
+{
+    d->m_showMirrorLine = show;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 auto VAbstractPiece::GetUUID() const -> QUuid
 {
     return d->m_uuid;

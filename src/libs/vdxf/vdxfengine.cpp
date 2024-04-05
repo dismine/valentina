@@ -915,7 +915,7 @@ void VDxfEngine::ExportAAMADraw(const QSharedPointer<dx_ifaceBlock> &detailBlock
     if (detail.IsShowFullPiece())
     {
         const QLineF mirrorLine = detail.GetMappedSeamAllowanceMirrorLine();
-        if (not mirrorLine.isNull())
+        if (not mirrorLine.isNull() && detail.IsShowMirrorLine())
         {
             if (DRW_Entity *e = AAMALine(mirrorLine, *layer8))
             {
@@ -1776,7 +1776,7 @@ void VDxfEngine::ExportASTMMirrorLine(const QSharedPointer<dx_ifaceBlock> &detai
 
     if (DRW_Entity *e = AAMALine(mirrorLine, layer))
     {
-        if (isShowFullPiece)
+        if (isShowFullPiece && detail.IsShowMirrorLine())
         {
             e->lineType = dx_iface::QtPenStyleToString(Qt::DashDotLine);
         }

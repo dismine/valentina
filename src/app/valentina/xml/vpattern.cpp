@@ -152,6 +152,7 @@ struct VPieceFoldLineData
 {
     quint32 p1{NULL_ID};
     quint32 p2{NULL_ID};
+    bool mirrorLineVisible{true};
     QString heightFormula{};
     QString widthFormula{};
     QString centerFormula{};
@@ -173,6 +174,8 @@ auto ParsePieceMirrorLine(const QDomElement &domElement) -> VPieceFoldLineData
 
     data.p1 = VDomDocument::GetParametrUInt(domElement, VAbstractPattern::AttrMirrorLineP1, NULL_ID_STR);
     data.p2 = VDomDocument::GetParametrUInt(domElement, VAbstractPattern::AttrMirrorLineP2, NULL_ID_STR);
+    data.mirrorLineVisible =
+        VDomDocument::GetParametrBool(domElement, VAbstractPattern::AttrMirrorLineVisible, trueStr);
     data.heightFormula = VDomDocument::GetParametrEmptyString(domElement, VAbstractPattern::AttrFoldLineHeightFormula);
     data.widthFormula = VDomDocument::GetParametrEmptyString(domElement, VAbstractPattern::AttrFoldLineWidthFormula);
     data.centerFormula = VDomDocument::GetParametrEmptyString(domElement, VAbstractPattern::AttrFoldLineCenterFormula);
@@ -1173,6 +1176,7 @@ void VPattern::ParseDetailInternals(const QDomElement &domElement, VPiece &detai
         VPieceFoldLineData const data = futureMirrorLine.result();
         detail.SetMirrorLineStartPoint(data.p1);
         detail.SetMirrorLineEndPoint(data.p2);
+        detail.SetShowMirrorLine(data.mirrorLineVisible);
         detail.SetManualFoldHeight(data.manualHeight);
         detail.SetManualFoldWidth(data.manualWidth);
         detail.SetManualFoldCenter(data.manualCenter);

@@ -808,6 +808,25 @@ void VPMainWindow::InitPropertyTabCurrentPiece()
                 }
             });
 
+    connect(ui->checkBoxShowMirrorLine, &QCheckBox::toggled, this,
+            [this](bool checked)
+            {
+                QList<VPPiecePtr> const selectedPieces = SelectedPieces();
+                if (selectedPieces.size() == 1)
+                {
+                    const VPPiecePtr &selectedPiece = selectedPieces.constFirst();
+                    if (not selectedPiece.isNull())
+                    {
+                        if (selectedPiece->IsShowMirrorLine() != checked)
+                        {
+                            selectedPiece->SetShowMirrorLine(checked);
+                            LayoutWasSaved(false);
+                            emit m_layout->PieceTransformationChanged(selectedPiece);
+                        }
+                    }
+                }
+            });
+
     connect(ui->checkBoxCurrentPieceVerticallyFlipped, &QCheckBox::toggled, this,
             [this](bool checked)
             {
@@ -1314,14 +1333,12 @@ void VPMainWindow::SetPropertyTabCurrentPieceData()
 
         ui->groupBoxCurrentPieceInfo->setVisible(false);
         ui->groupBoxPieceTransformation->setVisible(false);
-        ui->groupBoxCurrentPieceSeamline->setVisible(false);
         ui->groupBoxCurrentPieceGeometry->setVisible(false);
     }
     else if (selectedPieces.count() == 1)
     {
         ui->groupBoxCurrentPieceInfo->setVisible(true);
         ui->groupBoxPieceTransformation->setVisible(true);
-        ui->groupBoxCurrentPieceSeamline->setVisible(true);
         ui->groupBoxCurrentPieceGeometry->setVisible(true);
 
         const VPPiecePtr &selectedPiece = selectedPieces.constFirst();
@@ -1338,6 +1355,9 @@ void VPMainWindow::SetPropertyTabCurrentPieceData()
         QLineF const seamMirrorLine = selectedPiece->GetSeamMirrorLine();
         SetCheckBoxValue(ui->checkBoxShowFullPiece, !seamMirrorLine.isNull() ? selectedPiece->IsShowFullPiece() : true);
         ui->checkBoxShowFullPiece->setEnabled(!seamMirrorLine.isNull());
+        SetCheckBoxValue(ui->checkBoxShowMirrorLine,
+                         !seamMirrorLine.isNull() ? selectedPiece->IsShowMirrorLine() : true);
+        ui->checkBoxShowMirrorLine->setEnabled(!seamMirrorLine.isNull());
 
         const bool disableFlipping = selectedPiece->IsForbidFlipping() || selectedPiece->IsForceFlipping();
         ui->checkBoxCurrentPieceVerticallyFlipped->setDisabled(disableFlipping);
@@ -1357,7 +1377,6 @@ void VPMainWindow::SetPropertyTabCurrentPieceData()
         // show the content "multiple pieces selected"
         ui->groupBoxCurrentPieceInfo->setVisible(false);
         ui->groupBoxPieceTransformation->setVisible(true);
-        ui->groupBoxCurrentPieceSeamline->setVisible(false);
         ui->groupBoxCurrentPieceGeometry->setVisible(false);
 
         if (not ui->checkBoxRelativeTranslation->isChecked())

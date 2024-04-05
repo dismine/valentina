@@ -391,6 +391,7 @@ public:
     static const QString AttrDimensionC;
     static const QString AttrMirrorLineP1;
     static const QString AttrMirrorLineP2;
+    static const QString AttrMirrorLineVisible;
     static const QString AttrFoldLineHeightFormula;
     static const QString AttrFoldLineWidthFormula;
     static const QString AttrFoldLineCenterFormula;

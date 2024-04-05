@@ -531,7 +531,8 @@ void VHPGLEngine::PlotPlaceLabels(QTextStream &out, const VLayoutPiece &detail)
             for (auto &points : shape)
             {
                 std::transform(points.begin(), points.end(), points.begin(),
-                               [&matrix](const VLayoutPoint &point) { return VAbstractPiece::MapPoint(point, matrix); });
+                               [&matrix](const VLayoutPoint &point)
+                               { return VAbstractPiece::MapPoint(point, matrix); });
             }
 
             PlotShape(shape);
@@ -603,7 +604,7 @@ void VHPGLEngine::PlotMirrorLine(QTextStream &out, const VLayoutPiece &detail)
     if (detail.IsShowFullPiece())
     {
         const QLineF mirrorLine = detail.GetMappedSeamAllowanceMirrorLine();
-        if (not mirrorLine.isNull())
+        if (not mirrorLine.isNull() && detail.IsShowMirrorLine())
         {
             PlotPath(out, CastToPoint(ConvertPath<QPointF>({mirrorLine.p1(), mirrorLine.p2()})), Qt::DashDotLine);
         }

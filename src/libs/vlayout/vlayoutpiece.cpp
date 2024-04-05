@@ -669,6 +669,7 @@ auto VLayoutPiece::Create(const VPiece &piece, vidtype id, const VContainer *pat
     det.SetShowFullPiece(piece.IsShowFullPiece());
     det.SetSeamMirrorLine(piece.SeamMirrorLine(pattern));
     det.SetSeamAllowanceMirrorLine(piece.SeamAllowanceMirrorLine(pattern));
+    det.SetShowMirrorLine(piece.IsShowMirrorLine());
     det.SetId(id);
 
     if (not futureSeamAllowanceValid.result())

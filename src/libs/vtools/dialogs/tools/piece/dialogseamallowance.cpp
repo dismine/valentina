@@ -763,6 +763,8 @@ void DialogSeamAllowance::InitFold(const VPiece &piece)
         uiTabPaths->checkBoxShowFullPiece->setChecked(piece.IsShowFullPiece());
     }
 
+    uiTabPaths->checkBoxShowMirrorLine->setChecked(piece.IsShowMirrorLine());
+
     InitMirrorLine();
 
     {
@@ -3268,6 +3270,7 @@ auto DialogSeamAllowance::CreatePiece() const -> VPiece
     piece.GetPieceLabelData().SetFontSize(uiTabLabels->comboBoxPieceLabelSize->currentData().toInt());
     piece.SetMirrorLineStartPoint(GetMirrorLineStartPoint());
     piece.SetMirrorLineEndPoint(GetMirrorLineEndPoint());
+    piece.SetShowMirrorLine(uiTabPaths->checkBoxShowMirrorLine->isChecked());
     piece.SetShowFullPiece(
         !piece.SeamAllowanceMirrorLine(data).isNull() ? uiTabPaths->checkBoxShowFullPiece->isChecked() : true);
     piece.SetManualFoldHeight(uiTabFoldLine->groupBoxManualHeight->isChecked());

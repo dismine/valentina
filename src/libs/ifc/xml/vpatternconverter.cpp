@@ -62,8 +62,8 @@ class QDomElement;
  */
 
 const QString VPatternConverter::PatternMinVerStr = QStringLiteral("0.1.4");                     // NOLINT
-const QString VPatternConverter::PatternMaxVerStr = QStringLiteral("0.9.4");                     // NOLINT
-const QString VPatternConverter::CurrentSchema = QStringLiteral("://schema/pattern/v0.9.4.xsd"); // NOLINT
+const QString VPatternConverter::PatternMaxVerStr = QStringLiteral("0.9.5");                     // NOLINT
+const QString VPatternConverter::CurrentSchema = QStringLiteral("://schema/pattern/v0.9.5.xsd"); // NOLINT
 
 // VPatternConverter::PatternMinVer; // <== DON'T FORGET TO UPDATE TOO!!!!
 // VPatternConverter::PatternMaxVer; // <== DON'T FORGET TO UPDATE TOO!!!!
@@ -265,7 +265,8 @@ auto VPatternConverter::XSDSchemas() -> QHash<unsigned int, QString>
         std::make_pair(FormatVersion(0, 9, 1), QStringLiteral("://schema/pattern/v0.9.1.xsd")),
         std::make_pair(FormatVersion(0, 9, 2), QStringLiteral("://schema/pattern/v0.9.2.xsd")),
         std::make_pair(FormatVersion(0, 9, 3), QStringLiteral("://schema/pattern/v0.9.3.xsd")),
-        std::make_pair(FormatVersion(0, 9, 4), CurrentSchema)};
+        std::make_pair(FormatVersion(0, 9, 4), QStringLiteral("://schema/pattern/v0.9.4.xsd")),
+        std::make_pair(FormatVersion(0, 9, 5), CurrentSchema)};
 
     return schemas;
 }
@@ -386,10 +387,11 @@ void VPatternConverter::ApplyPatches()
             Q_FALLTHROUGH();
         case (FormatVersion(0, 9, 2)):
         case (FormatVersion(0, 9, 3)):
-            ToV0_9_4();
+        case (FormatVersion(0, 9, 4)):
+            ToV0_9_5();
             ValidateXML(CurrentSchema);
             Q_FALLTHROUGH();
-        case (FormatVersion(0, 9, 4)):
+        case (FormatVersion(0, 9, 5)):
             break;
         default:
             InvalidVersion(m_ver);
@@ -407,7 +409,7 @@ void VPatternConverter::DowngradeToCurrentMaxVersion()
 auto VPatternConverter::IsReadOnly() const -> bool
 {
     // Check if attribute readOnly was not changed in file format
-    Q_STATIC_ASSERT_X(VPatternConverter::PatternMaxVer == FormatVersion(0, 9, 4), "Check attribute readOnly.");
+    Q_STATIC_ASSERT_X(VPatternConverter::PatternMaxVer == FormatVersion(0, 9, 5), "Check attribute readOnly.");
 
     // Possibly in future attribute readOnly will change position etc.
     // For now position is the same for all supported format versions.
@@ -583,12 +585,12 @@ void VPatternConverter::ToV0_9_2()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VPatternConverter::ToV0_9_4()
+void VPatternConverter::ToV0_9_5()
 {
-    // TODO. Delete if minimal supported version is 0.9.4
-    Q_STATIC_ASSERT_X(VPatternConverter::PatternMinVer < FormatVersion(0, 9, 4), "Time to refactor the code.");
+    // TODO. Delete if minimal supported version is 0.9.5
+    Q_STATIC_ASSERT_X(VPatternConverter::PatternMinVer < FormatVersion(0, 9, 5), "Time to refactor the code.");
 
-    SetVersion(QStringLiteral("0.9.4"));
+    SetVersion(QStringLiteral("0.9.5"));
     Save();
 }
 
@@ -1035,8 +1037,8 @@ auto VPatternConverter::FixIncrementInFormulaToV0_2_0(const QString &formula, co
     // TODO. Delete if minimal supported version is 0.2.0
     Q_STATIC_ASSERT_X(VPatternConverter::PatternMinVer < FormatVersion(0, 2, 0), "Time to refactor the code.");
 
-    auto *cal = new qmu::QmuTokenParser(formula, false, false);                // Eval formula
-    QMap<vsizetype, QString> tokens = cal->GetTokens();                        // Tokens (variables, measurements)
+    auto *cal = new qmu::QmuTokenParser(formula, false, false); // Eval formula
+    QMap<vsizetype, QString> tokens = cal->GetTokens();         // Tokens (variables, measurements)
     delete cal;
 
     QList<vsizetype> tKeys = tokens.keys(); // Take all tokens positions

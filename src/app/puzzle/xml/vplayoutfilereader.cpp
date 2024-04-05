@@ -962,6 +962,7 @@ void VPLayoutFileReader::ReadMirrorLines(const VPPiecePtr &piece)
         ReadAttributeInt(attribs, ML::AttrAlignment, QString::number(static_cast<int>(Qt::AlignHCenter))));
     piece->SetFoldLineLabel(ReadAttributeEmptyString(attribs, ML::AttrFoldLineLabel));
     piece->SetFoldLineOutlineFont(FontFromString(ReadAttributeEmptyString(attribs, ML::AttrFont)));
+    piece->SetShowMirrorLine(ReadAttributeBool(attribs, ML::AttrVisible, trueStr));
 
     if (QStringList const svgFontData = ReadAttributeEmptyString(attribs, ML::AttrSVGFont).split(','_L1);
         !svgFontData.isEmpty())

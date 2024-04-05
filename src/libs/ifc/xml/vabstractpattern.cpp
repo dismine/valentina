@@ -157,6 +157,7 @@ const QString VAbstractPattern::AttrDimensionB = QStringLiteral("dimensionB");
 const QString VAbstractPattern::AttrDimensionC = QStringLiteral("dimensionC");
 const QString VAbstractPattern::AttrMirrorLineP1 = QStringLiteral("p1");
 const QString VAbstractPattern::AttrMirrorLineP2 = QStringLiteral("p2");
+const QString VAbstractPattern::AttrMirrorLineVisible = QStringLiteral("visible");
 const QString VAbstractPattern::AttrFoldLineHeightFormula = QStringLiteral("height");
 const QString VAbstractPattern::AttrFoldLineWidthFormula = QStringLiteral("width");
 const QString VAbstractPattern::AttrFoldLineCenterFormula = QStringLiteral("center");

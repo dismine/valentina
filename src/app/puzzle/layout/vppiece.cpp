@@ -176,6 +176,7 @@ void VPPiece::Update(const VPPiecePtr &piece)
     SetFoldLineWidth(piece->GetFoldLineWidth());
     SetForceFlipping(piece->IsForceFlipping());
     SetForbidFlipping(piece->IsForbidFlipping());
+    SetShowMirrorLine(piece->IsShowMirrorLine());
 
     if ((IsForceFlipping() && !IsVerticallyFlipped()) || (IsForbidFlipping() && IsVerticallyFlipped()))
     {

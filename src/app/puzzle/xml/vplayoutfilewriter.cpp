@@ -406,6 +406,8 @@ void VPLayoutFileWriter::WritePiece(const VPPiecePtr &piece)
             ML::AttrSVGFont,
             QStringLiteral("%1,%2").arg(piece->GetFoldLineSVGFontFamily()).arg(piece->GetFoldLineSvgFontSize()),
             [piece](const QString &) { return piece->GetFoldLineLabel().isEmpty(); });
+        SetAttributeOrRemoveIf<bool>(ML::AttrVisible, piece->IsShowMirrorLine(),
+                                     [](bool visible) noexcept { return visible; });
 
         if (!seamMirrorLine.isNull())
         {

@@ -73,6 +73,7 @@ public:
     bool m_foldLineLabelFontBold{false};                     // NOLINT (misc-non-private-member-variables-in-classes)
     QString m_foldLineLabel{};                               // NOLINT (misc-non-private-member-variables-in-classes)
     int m_foldLineLabelAlignment{Qt::AlignHCenter};          // NOLINT (misc-non-private-member-variables-in-classes)
+    bool m_showMirrorLine{true};                             // NOLINT (misc-non-private-member-variables-in-classes)
 
     // NOLINTNEXTLINE(misc-non-private-member-variables-in-classes)
     FoldLineType m_foldLineType{FoldLineType::TwoArrowsTextAbove};
@@ -81,7 +82,7 @@ private:
     Q_DISABLE_ASSIGN_MOVE(VAbstractPieceData) // NOLINT
 
     static constexpr quint32 streamHeader = 0x05CDD73A; // CRC-32Q string "VAbstractPieceData"
-    static constexpr quint16 classVersion = 6;
+    static constexpr quint16 classVersion = 7;
 };
 
 QT_WARNING_POP
@@ -123,6 +124,9 @@ inline auto operator<<(QDataStream &dataStream, const VAbstractPieceData &piece)
     dataStream << piece.m_foldLineLabelFontBold;
     dataStream << piece.m_foldLineLabel;
     dataStream << piece.m_foldLineLabelAlignment;
+
+    // Added in classVersion = 7
+    dataStream << piece.m_showMirrorLine;
 
     return dataStream;
 }
@@ -195,6 +199,11 @@ inline auto operator>>(QDataStream &dataStream, VAbstractPieceData &piece) -> QD
         dataStream >> piece.m_foldLineLabelFontBold;
         dataStream >> piece.m_foldLineLabel;
         dataStream >> piece.m_foldLineLabelAlignment;
+    }
+
+    if (actualClassVersion >= 7)
+    {
+        dataStream >> piece.m_showMirrorLine;
     }
 
     return dataStream;

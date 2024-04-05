@@ -203,26 +203,40 @@
              <property name="title">
               <string>Mirror line</string>
              </property>
-             <layout class="QFormLayout" name="formLayout">
-              <item row="0" column="0">
-               <widget class="QLabel" name="labelMLStartPoint">
+             <layout class="QVBoxLayout" name="verticalLayout_10">
+              <item>
+               <layout class="QFormLayout" name="formLayout">
+                <item row="0" column="0">
+                 <widget class="QLabel" name="labelMLStartPoint">
+                  <property name="text">
+                   <string>Start point:</string>
+                  </property>
+                 </widget>
+                </item>
+                <item row="0" column="1">
+                 <widget class="QComboBox" name="comboBoxMLStartPoint"/>
+                </item>
+                <item row="1" column="0">
+                 <widget class="QLabel" name="labelMLEndPoint">
+                  <property name="text">
+                   <string>End point:</string>
+                  </property>
+                 </widget>
+                </item>
+                <item row="1" column="1">
+                 <widget class="QComboBox" name="comboBoxMLEndPoint"/>
+                </item>
+               </layout>
+              </item>
+              <item>
+               <widget class="QCheckBox" name="checkBoxShowMirrorLine">
                 <property name="text">
-                 <string>Start point:</string>
+                 <string>Show mirror line</string>
+                </property>
+                <property name="checked">
+                 <bool>true</bool>
                 </property>
                </widget>
-              </item>
-              <item row="0" column="1">
-               <widget class="QComboBox" name="comboBoxMLStartPoint"/>
-              </item>
-              <item row="1" column="0">
-               <widget class="QLabel" name="labelMLEndPoint">
-                <property name="text">
-                 <string>End point:</string>
-                </property>
-               </widget>
-              </item>
-              <item row="1" column="1">
-               <widget class="QComboBox" name="comboBoxMLEndPoint"/>
               </item>
              </layout>
             </widget>

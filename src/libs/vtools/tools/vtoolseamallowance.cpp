@@ -819,6 +819,8 @@ void VToolSeamAllowance::AddMirrorLine(VAbstractPattern *doc, QDomElement &domEl
                                          [](const QString &label) noexcept { return label.isEmpty(); });
     doc->SetAttributeOrRemoveIf<int>(domData, VDomDocument::AttrAlignment, piece.GetFoldLineLabelAlignment(),
                                      [](int alignment) noexcept { return alignment == Qt::AlignHCenter; });
+    doc->SetAttributeOrRemoveIf<bool>(domData, VAbstractPattern::AttrMirrorLineVisible, piece.IsShowMirrorLine(),
+                                      [](bool visible) noexcept { return visible; });
 
     domElement.appendChild(domData);
 }
@@ -1776,7 +1778,7 @@ void VToolSeamAllowance::RefreshGeometry(bool updateChildren)
         [this, detail]()
         {
             QLineF const mirrorLine = detail.SeamAllowanceMirrorLine(getData());
-            if (detail.IsShowFullPiece() && !mirrorLine.isNull())
+            if (detail.IsShowFullPiece() && detail.IsShowMirrorLine() && !mirrorLine.isNull())
             {
                 QPainterPath path;
                 path.moveTo(mirrorLine.p1());

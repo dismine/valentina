@@ -135,6 +135,9 @@ public:
     auto GetFoldLineLabelAlignment() const -> int;
     void SetFoldLineLabelAlignment(int alignment);
 
+    auto IsShowMirrorLine() const -> bool;
+    void SetShowMirrorLine(bool show);
+
     auto GetUUID() const -> QUuid;
     void SetUUID(const QUuid &uuid);
     void SetUUID(const QString &uuid);

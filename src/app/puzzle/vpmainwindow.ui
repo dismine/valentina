@@ -280,7 +280,7 @@
               <x>0</x>
               <y>0</y>
               <width>378</width>
-              <height>736</height>
+              <height>721</height>
              </rect>
             </property>
             <layout class="QVBoxLayout" name="verticalLayout_23">
@@ -597,25 +597,6 @@
                  </widget>
                 </item>
                 <item>
-                 <widget class="QGroupBox" name="groupBoxCurrentPieceSeamline">
-                  <property name="title">
-                   <string>Seamline</string>
-                  </property>
-                  <layout class="QVBoxLayout" name="verticalLayout_8">
-                   <item>
-                    <widget class="QCheckBox" name="checkBoxCurrentPieceShowSeamline">
-                     <property name="text">
-                      <string>Show Seamline</string>
-                     </property>
-                     <property name="checked">
-                      <bool>true</bool>
-                     </property>
-                    </widget>
-                   </item>
-                  </layout>
-                 </widget>
-                </item>
-                <item>
                  <widget class="QGroupBox" name="groupBoxCurrentPieceGeometry">
                   <property name="title">
                    <string>Geometry</string>
@@ -628,6 +609,26 @@
                      </property>
                      <property name="text">
                       <string>Show full piece</string>
+                     </property>
+                     <property name="checked">
+                      <bool>true</bool>
+                     </property>
+                    </widget>
+                   </item>
+                   <item>
+                    <widget class="QCheckBox" name="checkBoxCurrentPieceShowSeamline">
+                     <property name="text">
+                      <string>Show Seamline</string>
+                     </property>
+                     <property name="checked">
+                      <bool>true</bool>
+                     </property>
+                    </widget>
+                   </item>
+                   <item>
+                    <widget class="QCheckBox" name="checkBoxShowMirrorLine">
+                     <property name="text">
+                      <string>Show mirror line</string>
                      </property>
                      <property name="checked">
                       <bool>true</bool>
@@ -2415,7 +2416,6 @@
   <tabstop>scrollAreaTiles</tabstop>
   <tabstop>lineEditCurrentPieceName</tabstop>
   <tabstop>plainTextEditCurrentPieceUUID</tabstop>
-  <tabstop>checkBoxCurrentPieceShowSeamline</tabstop>
   <tabstop>checkBoxCurrentPieceVerticallyFlipped</tabstop>
   <tabstop>doubleSpinBoxCurrentPieceAngle</tabstop>
   <tabstop>doubleSpinBoxCurrentPieceBoxPositionX</tabstop>
