@@ -843,6 +843,11 @@ void VPGraphicsPiece::PaintPassmarks(QPainter *painter, const VPPiecePtr &piece)
     QVector<VLayoutPassmark> const passmarks = piece->GetMappedPassmarks();
     for (const auto &passmark : passmarks)
     {
+        if (piece->IsHideMainPath() && passmark.isBuiltIn)
+        {
+            continue;
+        }
+
         QPainterPath passmarkPath;
         for (const auto &line : passmark.lines)
         {
