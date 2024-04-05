@@ -132,6 +132,7 @@ void VPLayout::AddPiece(const VPPiecePtr &piece)
         if (not oldPiece.isNull())
         {
             oldPiece->Update(piece);
+            emit PieceTransformationChanged(oldPiece);
         }
         else
         {
