@@ -2233,24 +2233,26 @@ void VPMainWindow::RotatePiecesToGrainline()
     QList<VPSheetPtr> const sheets = m_layout->GetAllSheets();
     for (const auto &sheet : sheets)
     {
-        if (not sheet.isNull())
+        if (sheet.isNull())
         {
-            QList<VPPiecePtr> const pieces = sheet->GetPieces();
-            for (const auto &piece : pieces)
+            continue;
+        }
+
+        QList<VPPiecePtr> const pieces = sheet->GetPieces();
+        for (const auto &piece : pieces)
+        {
+            if (not piece.isNull() && piece->IsGrainlineEnabled())
             {
-                if (not piece.isNull() && piece->IsGrainlineEnabled())
-                {
-                    QT_WARNING_PUSH
-                    QT_WARNING_DISABLE_GCC("-Wnoexcept")
+                QT_WARNING_PUSH
+                QT_WARNING_DISABLE_GCC("-Wnoexcept")
 
-                    VPTransformationOrigon origin;
-                    origin.custom = true;
+                VPTransformationOrigon origin;
+                origin.custom = true;
 
-                    QT_WARNING_POP
+                QT_WARNING_POP
 
-                    piece->RotateToGrainline(origin);
-                    emit m_layout->PieceTransformationChanged(piece);
-                }
+                piece->RotateToGrainline(origin);
+                emit m_layout->PieceTransformationChanged(piece);
             }
         }
     }
