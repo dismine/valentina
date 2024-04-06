@@ -141,7 +141,7 @@ QT_WARNING_POP
  */
 inline auto VPosition::FabricGrainline() const -> QLineF
 {
-    return m_data.isOriginPaperOrientationPortrait ? QLineF(10, 10, 10, 100) : QLineF(10, 10, 100, 10);
+    return m_data.isOriginPaperOrientationPortrait ? QLineF(10, 10, 10, -100) : QLineF(10, 10, -100, 10);
 }
 
 #endif // VPOSITION_H
