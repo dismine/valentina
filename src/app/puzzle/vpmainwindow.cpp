@@ -43,6 +43,7 @@
 #include <QtMath>
 #include <chrono>
 #include <thread>
+#include <utility>
 
 #include "../ifc/exception/vexception.h"
 #include "../ifc/xml/vlayoutconverter.h"
@@ -323,10 +324,10 @@ struct VPExportData
 };
 
 //---------------------------------------------------------------------------------------------------------------------
-VPMainWindow::VPMainWindow(const VPCommandLinePtr &cmd, QWidget *parent)
+VPMainWindow::VPMainWindow(VPCommandLinePtr cmd, QWidget *parent)
   : VAbstractMainWindow(parent),
     ui(std::make_unique<Ui::VPMainWindow>()),
-    m_cmd(cmd),
+    m_cmd(std::move(cmd)),
     m_undoStack(new QUndoStack(this)),
     m_layout{VPLayout::CreateLayout(m_undoStack)},
     m_statusLabel(new QLabel(this)),
@@ -770,100 +771,110 @@ void VPMainWindow::InitProperties()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+void VPMainWindow::CurrentPieceShowSeamLineToggled(bool checked)
+{
+    QList<VPPiecePtr> const selectedPieces = SelectedPieces();
+    if (selectedPieces.size() == 1)
+    {
+        const VPPiecePtr &selectedPiece = selectedPieces.constFirst();
+        if (not selectedPiece.isNull())
+        {
+            selectedPiece->SetHideMainPath(not checked);
+            LayoutWasSaved(false);
+            // nothing changed, but will force redraw
+            emit m_layout->PieceTransformationChanged(selectedPiece);
+        }
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VPMainWindow::ShowFullPieceToggled(bool checked)
+{
+
+    QList<VPPiecePtr> const selectedPieces = SelectedPieces();
+    if (selectedPieces.size() == 1)
+    {
+        const VPPiecePtr &selectedPiece = selectedPieces.constFirst();
+        if (not selectedPiece.isNull())
+        {
+            if (selectedPiece->IsShowFullPiece() != checked)
+            {
+                selectedPiece->SetShowFullPiece(checked);
+                LayoutWasSaved(false);
+                emit m_layout->PieceTransformationChanged(selectedPiece);
+            }
+        }
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VPMainWindow::ShowMirrorLineToggled(bool checked)
+{
+    QList<VPPiecePtr> const selectedPieces = SelectedPieces();
+    if (selectedPieces.size() == 1)
+    {
+        const VPPiecePtr &selectedPiece = selectedPieces.constFirst();
+        if (not selectedPiece.isNull())
+        {
+            if (selectedPiece->IsShowMirrorLine() != checked)
+            {
+                selectedPiece->SetShowMirrorLine(checked);
+                LayoutWasSaved(false);
+                emit m_layout->PieceTransformationChanged(selectedPiece);
+            }
+        }
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VPMainWindow::CurrentPieceVerticallyFlippedToggled(bool checked)
+{
+    QList<VPPiecePtr> const selectedPieces = SelectedPieces();
+    if (selectedPieces.size() == 1)
+    {
+        const VPPiecePtr &selectedPiece = selectedPieces.constFirst();
+        if (not selectedPiece.isNull())
+        {
+            if (selectedPiece->IsVerticallyFlipped() != checked)
+            {
+                selectedPiece->FlipVertically();
+                LayoutWasSaved(false);
+                emit m_layout->PieceTransformationChanged(selectedPiece);
+            }
+        }
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VPMainWindow::CurrentPieceHorizontallyFlippedToggled(bool checked)
+{
+    QList<VPPiecePtr> const selectedPieces = SelectedPieces();
+    if (selectedPieces.size() == 1)
+    {
+        const VPPiecePtr &selectedPiece = selectedPieces.constFirst();
+        if (not selectedPiece.isNull())
+        {
+            if (selectedPiece->IsHorizontallyFlipped() != checked)
+            {
+                selectedPiece->FlipHorizontally();
+                LayoutWasSaved(false);
+                emit m_layout->PieceTransformationChanged(selectedPiece);
+            }
+        }
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 void VPMainWindow::InitPropertyTabCurrentPiece()
 {
     connect(ui->checkBoxCurrentPieceShowSeamline, &QCheckBox::toggled, this,
-            [this](bool checked)
-            {
-                QList<VPPiecePtr> const selectedPieces = SelectedPieces();
-                if (selectedPieces.size() == 1)
-                {
-                    const VPPiecePtr &selectedPiece = selectedPieces.constFirst();
-                    if (not selectedPiece.isNull())
-                    {
-                        selectedPiece->SetHideMainPath(not checked);
-                        LayoutWasSaved(false);
-                        // nothing changed, but will force redraw
-                        emit m_layout->PieceTransformationChanged(selectedPiece);
-                    }
-                }
-            });
-
-    connect(ui->checkBoxShowFullPiece, &QCheckBox::toggled, this,
-            [this](bool checked)
-            {
-                QList<VPPiecePtr> const selectedPieces = SelectedPieces();
-                if (selectedPieces.size() == 1)
-                {
-                    const VPPiecePtr &selectedPiece = selectedPieces.constFirst();
-                    if (not selectedPiece.isNull())
-                    {
-                        if (selectedPiece->IsShowFullPiece() != checked)
-                        {
-                            selectedPiece->SetShowFullPiece(checked);
-                            LayoutWasSaved(false);
-                            emit m_layout->PieceTransformationChanged(selectedPiece);
-                        }
-                    }
-                }
-            });
-
-    connect(ui->checkBoxShowMirrorLine, &QCheckBox::toggled, this,
-            [this](bool checked)
-            {
-                QList<VPPiecePtr> const selectedPieces = SelectedPieces();
-                if (selectedPieces.size() == 1)
-                {
-                    const VPPiecePtr &selectedPiece = selectedPieces.constFirst();
-                    if (not selectedPiece.isNull())
-                    {
-                        if (selectedPiece->IsShowMirrorLine() != checked)
-                        {
-                            selectedPiece->SetShowMirrorLine(checked);
-                            LayoutWasSaved(false);
-                            emit m_layout->PieceTransformationChanged(selectedPiece);
-                        }
-                    }
-                }
-            });
-
+            &VPMainWindow::CurrentPieceShowSeamLineToggled);
+    connect(ui->checkBoxShowFullPiece, &QCheckBox::toggled, this, &VPMainWindow::ShowFullPieceToggled);
+    connect(ui->checkBoxShowMirrorLine, &QCheckBox::toggled, this, &VPMainWindow::ShowMirrorLineToggled);
     connect(ui->checkBoxCurrentPieceVerticallyFlipped, &QCheckBox::toggled, this,
-            [this](bool checked)
-            {
-                QList<VPPiecePtr> const selectedPieces = SelectedPieces();
-                if (selectedPieces.size() == 1)
-                {
-                    const VPPiecePtr &selectedPiece = selectedPieces.constFirst();
-                    if (not selectedPiece.isNull())
-                    {
-                        if (selectedPiece->IsVerticallyFlipped() != checked)
-                        {
-                            selectedPiece->FlipVertically();
-                            LayoutWasSaved(false);
-                            emit m_layout->PieceTransformationChanged(selectedPiece);
-                        }
-                    }
-                }
-            });
-
+            &VPMainWindow::CurrentPieceVerticallyFlippedToggled);
     connect(ui->checkBoxCurrentPieceHorizontallyFlipped, &QCheckBox::toggled, this,
-            [this](bool checked)
-            {
-                QList<VPPiecePtr> const selectedPieces = SelectedPieces();
-                if (selectedPieces.size() == 1)
-                {
-                    const VPPiecePtr &selectedPiece = selectedPieces.constFirst();
-                    if (not selectedPiece.isNull())
-                    {
-                        if (selectedPiece->IsHorizontallyFlipped() != checked)
-                        {
-                            selectedPiece->FlipHorizontally();
-                            LayoutWasSaved(false);
-                            emit m_layout->PieceTransformationChanged(selectedPiece);
-                        }
-                    }
-                }
-            });
+            &VPMainWindow::CurrentPieceHorizontallyFlippedToggled);
 
     // Translate
     ui->comboBoxTranslateUnit->addItem(tr("Millimiters"), QVariant(UnitsToStr(Unit::Mm)));
@@ -2174,6 +2185,7 @@ void VPMainWindow::FindTemplate(QComboBox *box, qreal width, qreal height)
         const QSizeF tmplSize =
             VAbstractLayoutDialog::GetTemplateSize(static_cast<VAbstractLayoutDialog::PaperSizeTemplate>(i), paperUnit);
         if (VAbstractLayoutDialog::RoundTemplateSize(width, height, paperUnit) == tmplSize ||
+            // NOLINTNEXTLINE(readability-suspicious-call-argument)
             VAbstractLayoutDialog::RoundTemplateSize(height, width, paperUnit) == tmplSize)
         {
             box->blockSignals(true);

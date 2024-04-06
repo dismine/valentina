@@ -61,7 +61,7 @@ class VPMainWindow : public VAbstractMainWindow
     Q_OBJECT // NOLINT
 
 public:
-    explicit VPMainWindow(const VPCommandLinePtr &cmd, QWidget *parent = nullptr);
+    explicit VPMainWindow(VPCommandLinePtr cmd, QWidget *parent = nullptr);
     ~VPMainWindow() override;
 
     auto CurrentFile() const -> QString;
@@ -300,6 +300,11 @@ private slots:
     void UpdateShortcuts();
 
     void TogetherWithNotchesChanged(bool checked);
+    void CurrentPieceShowSeamLineToggled(bool checked);
+    void ShowFullPieceToggled(bool checked);
+    void ShowMirrorLineToggled(bool checked);
+    void CurrentPieceVerticallyFlippedToggled(bool checked);
+    void CurrentPieceHorizontallyFlippedToggled(bool checked);
 
 private:
     Q_DISABLE_COPY_MOVE(VPMainWindow) // NOLINT
