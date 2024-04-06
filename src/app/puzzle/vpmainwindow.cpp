@@ -1256,6 +1256,9 @@ void VPMainWindow::InitPropertyTabLayout()
     connect(ui->checkBoxFollowGainline, &QCheckBox::toggled, this,
             [this](bool checked)
             {
+                ui->toolButtonGrainlineHorizontalOrientation->setEnabled(ui->checkBoxFollowGainline->isChecked());
+                ui->toolButtonGrainlineVerticalOrientation->setEnabled(ui->checkBoxFollowGainline->isChecked());
+
                 if (not m_layout.isNull())
                 {
                     m_layout->LayoutSettings().SetFollowGrainline(checked);
@@ -1454,7 +1457,9 @@ void VPMainWindow::SetPropertyTabSheetData()
 
             GrainlineType const type = sheet->GetGrainlineType();
             ui->toolButtonGrainlineHorizontalOrientation->setChecked(type == GrainlineType::Horizontal);
+            ui->toolButtonGrainlineHorizontalOrientation->setEnabled(ui->checkBoxFollowGainline->isChecked());
             ui->toolButtonGrainlineVerticalOrientation->setChecked(type == GrainlineType::Vertical);
+            ui->toolButtonGrainlineVerticalOrientation->setEnabled(ui->checkBoxFollowGainline->isChecked());
 
             // set placement grid
             ui->groupBoxSheetGrid->setDisabled(false);
