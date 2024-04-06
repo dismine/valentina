@@ -81,7 +81,7 @@ public:
     auto GetDescription() const -> QString;
 
     void SetStickyEdges(bool state);
-    auto GetStickyEdges() const -> bool;
+    auto IsStickyEdges() const -> bool;
 
     // Piece
 

@@ -1611,7 +1611,7 @@ void VPMainWindow::SetPropertyTabLayoutData()
                          m_layout->LayoutSettings().GetWarningPiecesOutOfBound());
         SetCheckBoxValue(ui->checkBoxLayoutWarningPiecesSuperposition,
                          m_layout->LayoutSettings().GetWarningSuperpositionOfPieces());
-        SetCheckBoxValue(ui->checkBoxSheetStickyEdges, m_layout->LayoutSettings().GetStickyEdges());
+        SetCheckBoxValue(ui->checkBoxSheetStickyEdges, m_layout->LayoutSettings().IsStickyEdges());
         SetCheckBoxValue(ui->checkBoxFollowGainline, m_layout->LayoutSettings().GetFollowGrainline());
         SetCheckBoxValue(ui->checkBoxTogetherWithNotches, m_layout->LayoutSettings().IsBoundaryTogetherWithNotches());
         SetCheckBoxValue(ui->checkBoxCutOnFold, m_layout->LayoutSettings().IsCutOnFold());
@@ -3440,7 +3440,7 @@ void VPMainWindow::TranslatePieceRelatively(const VPPiecePtr &piece, const QRect
         auto *command = new VPUndoPieceMove(piece, pieceDx, pieceDy);
         m_layout->UndoStack()->push(command);
 
-        if (m_layout->LayoutSettings().GetStickyEdges())
+        if (m_layout->LayoutSettings().IsStickyEdges())
         {
             qreal stickyTranslateX = 0;
             qreal stickyTranslateY = 0;

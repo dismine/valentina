@@ -297,7 +297,7 @@ void VPGraphicsPiece::mouseReleaseEvent(QGraphicsSceneMouseEvent *event)
         {
             if (VPLayoutPtr const layout = piece->Layout(); not layout.isNull())
             {
-                if (layout->LayoutSettings().GetStickyEdges() && m_hasStickyPosition)
+                if (layout->LayoutSettings().IsStickyEdges() && m_hasStickyPosition)
                 {
                     auto *command =
                         new VPUndoPieceMove(piece, m_stickyTranslateX, m_stickyTranslateY, m_allowChangeMerge);
@@ -1106,7 +1106,7 @@ void VPGraphicsPiece::GroupMove(const QPointF &pos)
         auto *command = new VPUndoPieceMove(piece, newPos.x(), newPos.y(), m_allowChangeMerge);
         layout->UndoStack()->push(command);
 
-        if (layout->LayoutSettings().GetStickyEdges())
+        if (layout->LayoutSettings().IsStickyEdges())
         {
             QVector<QPointF> path;
             if (not p.isNull() && p->StickyPosition(m_stickyTranslateX, m_stickyTranslateY))

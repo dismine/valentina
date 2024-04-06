@@ -244,7 +244,7 @@ void VPLayoutSettings::SetStickyEdges(bool state)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-auto VPLayoutSettings::GetStickyEdges() const -> bool
+auto VPLayoutSettings::IsStickyEdges() const -> bool
 {
     return m_stickyEdges;
 }

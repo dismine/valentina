@@ -342,7 +342,7 @@ void VPPiece::FlipHorizontally()
 //---------------------------------------------------------------------------------------------------------------------
 auto VPPiece::StickyPosition(qreal &dx, qreal &dy) const -> bool
 {
-    if (VPLayoutPtr const layout = Layout(); layout.isNull() || not layout->LayoutSettings().GetStickyEdges())
+    if (VPLayoutPtr const layout = Layout(); layout.isNull() || not layout->LayoutSettings().IsStickyEdges())
     {
         return false;
     }

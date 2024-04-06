@@ -516,7 +516,7 @@ void VPMainGraphicsView::TranslatePiecesOn(qreal dx, qreal dy)
         auto *command = new VPUndoPieceMove(p, dx, dy, m_allowChangeMerge);
         layout->UndoStack()->push(command);
 
-        if (layout->LayoutSettings().GetStickyEdges())
+        if (layout->LayoutSettings().IsStickyEdges())
         {
             QVector<QPointF> path;
             if (not p.isNull() && p->StickyPosition(m_stickyTranslateX, m_stickyTranslateY))
@@ -677,7 +677,7 @@ void VPMainGraphicsView::MovePiece(QKeyEvent *event)
         if (const QList<VPGraphicsPiece *> &graphicsPieces = sheet->SceneData()->GraphicsPieces();
             m_hasStickyPosition && not graphicsPieces.isEmpty())
         {
-            if (layout->LayoutSettings().GetStickyEdges())
+            if (layout->LayoutSettings().IsStickyEdges())
             {
                 auto PreparePieces = [layout]()
                 {
