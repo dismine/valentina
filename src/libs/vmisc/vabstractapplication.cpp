@@ -35,6 +35,7 @@
 
 #include "QtConcurrent/qtconcurrentrun.h"
 #include <QDir>
+#include <QDirIterator>
 #include <QFileSystemWatcher>
 #include <QFuture>
 #include <QLibraryInfo>
@@ -669,7 +670,13 @@ void VAbstractApplication::ClearOldLogs()
     // Restore working directory
     auto restore = qScopeGuard([workingDirectory] { QDir::setCurrent(workingDirectory); });
 
-    const QStringList allFiles = logsDir.entryList(QDir::NoDotAndDotDot | QDir::Files);
+    QDirIterator it(logsDir.absolutePath(), QDir::Files | QDir::NoDotAndDotDot, QDirIterator::NoIteratorFlags);
+    QStringList allFiles;
+    while (it.hasNext())
+    {
+        allFiles << it.next();
+    }
+
     if (allFiles.isEmpty())
     {
         qDebug("There are no old logs.");
