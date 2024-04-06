@@ -1246,6 +1246,8 @@ void VPMainWindow::InitPropertyTabLayout()
     connect(ui->checkBoxSheetStickyEdges, &QCheckBox::toggled, this,
             [this](bool checked)
             {
+                ui->doubleSpinBoxSheetPiecesGap->setEnabled(checked);
+
                 if (not m_layout.isNull())
                 {
                     m_layout->LayoutSettings().SetStickyEdges(checked);
@@ -1607,6 +1609,7 @@ void VPMainWindow::SetPropertyTabLayoutData()
         SetDoubleSpinBoxValue(ui->doubleSpinBoxSheetPiecesGap, m_layout->LayoutSettings().GetPiecesGapConverted());
 
         ui->doubleSpinBoxSheetPiecesGap->setSuffix(" " + UnitsToStr(LayoutUnit(), true));
+        ui->doubleSpinBoxSheetPiecesGap->setEnabled(ui->checkBoxSheetStickyEdges->isChecked());
 
         ui->groupBoxLayoutScale->setDisabled(false);
 
