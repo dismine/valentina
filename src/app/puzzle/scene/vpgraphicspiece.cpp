@@ -1013,6 +1013,8 @@ void VPGraphicsPiece::PaintFoldLine(QPainter *painter, const VPPiecePtr &piece)
         }
 
         fLine.UpdateFoldLineLabel(m_foldLineLabelText);
+
+        m_foldLineLabelText->setBrush(QBrush(PieceColor()));
     }
     else
     {
@@ -1058,6 +1060,9 @@ void VPGraphicsPiece::PaintFoldLine(QPainter *painter, const VPPiecePtr &piece)
         painter->save();
         QPen pen = painter->pen();
         pen.setWidthF(penWidth * qMin(piece->GetXScale(), piece->GetYScale()));
+        pen.setColor(PieceColor());
+        pen.setCapStyle(Qt::RoundCap);
+        pen.setJoinStyle(Qt::RoundJoin);
         painter->setPen(pen);
         painter->setBrush(singleLineFont ? Qt::NoBrush : Qt::SolidPattern);
         painter->drawPath(m_foldLineLabelPath);
