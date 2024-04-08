@@ -60,8 +60,8 @@ QT_WARNING_POP
 namespace
 {
 constexpr qreal minStickyDistance = MmToPixel(3.);
-constexpr qreal maxStickyDistance = MmToPixel(10.);
-constexpr qreal stickyShift = MmToPixel(1.);
+constexpr qreal maxStickyDistance = MmToPixel(15.);
+constexpr qreal stickyShift = MmToPixel(20.);
 
 //---------------------------------------------------------------------------------------------------------------------
 auto CutEdge(const QLineF &edge) -> QVector<QPointF>
@@ -387,7 +387,11 @@ auto VPPiece::StickyPosition(qreal &dx, qreal &dy) const -> bool
         return false;
     }
 
-    const qreal extraZone = qBound(minStickyDistance, match.m_pieceGap * 50 / 100, maxStickyDistance);
+    qreal extraZone = qBound(minStickyDistance, match.m_pieceGap * 50 / 100, maxStickyDistance);
+    if (qFuzzyIsNull(match.m_pieceGap))
+    {
+        extraZone = maxStickyDistance;
+    }
     const qreal length = match.m_closestDistance.length();
 
     if (length > match.m_pieceGap && length <= match.m_pieceGap + extraZone)
