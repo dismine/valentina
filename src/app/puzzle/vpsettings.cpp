@@ -63,6 +63,8 @@ Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingLayoutTileShowWatermark, ("layou
 // NOLINTNEXTLINE
 Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingLayoutWarningPiecesSuperposition,
                           ("layout/warningPiecesSuperposition"_L1))
+// NOLINTNEXTLINE
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingLayoutWarningPieceGapePosition, ("layout/warningPieceGapePosition"_L1))
 Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingLayoutStickyEdges, ("layout/stickyEdges"_L1)) // NOLINT
 // NOLINTNEXTLINE
 Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingLayoutWarningPiecesOutOfBound, ("layout/warningPiecesOutOfBound"_L1))
@@ -290,6 +292,18 @@ void VPSettings::SetLayoutWarningPiecesSuperposition(bool value)
 auto VPSettings::GetLayoutWarningPiecesSuperposition() const -> bool
 {
     return value(*settingLayoutWarningPiecesSuperposition, true).toBool();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VPSettings::SetLayoutWarningPieceGapePosition(bool value)
+{
+    setValue(*settingLayoutWarningPieceGapePosition, value);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+auto VPSettings::GetLayoutWarningPieceGapePosition() const -> bool
+{
+    return value(*settingLayoutWarningPieceGapePosition, true).toBool();
 }
 
 //---------------------------------------------------------------------------------------------------------------------

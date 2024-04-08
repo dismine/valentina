@@ -61,7 +61,7 @@ namespace
 {
 constexpr qreal minStickyDistance = MmToPixel(3.);
 constexpr qreal maxStickyDistance = MmToPixel(15.);
-constexpr qreal stickyShift = MmToPixel(20.);
+constexpr qreal stickyShift = MmToPixel(1.);
 
 //---------------------------------------------------------------------------------------------------------------------
 auto CutEdge(const QLineF &edge) -> QVector<QPointF>
@@ -94,58 +94,6 @@ auto CutEdge(const QLineF &edge) -> QVector<QPointF>
         }
     }
     return points;
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-auto PrepareStickyPath(const QVector<QPointF> &path) -> QVector<QPointF>
-{
-    if (path.size() < 2)
-    {
-        return path;
-    }
-
-    QVector<QPointF> stickyPath;
-
-    for (int i = 0; i < path.size(); ++i)
-    {
-        stickyPath += CutEdge(QLineF(path.at(i), path.at(i < path.size() - 1 ? i + 1 : 0)));
-    }
-
-    return stickyPath;
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-auto ClosestDistance(const QVector<QPointF> &path1, const QVector<QPointF> &path2) -> QLineF
-{
-    return QtConcurrent::blockingMappedReduced(
-        path1,
-        [path2](const QPointF &p1)
-        {
-            qreal minLocalDistance = std::numeric_limits<qreal>::max();
-            QLineF localClosestDistance;
-
-            for (const auto &p2 : path2)
-            {
-                QLineF const d(p1, p2);
-                qreal const length = d.length();
-                if (length < minLocalDistance)
-                {
-                    minLocalDistance = length;
-                    localClosestDistance = d;
-                }
-            }
-
-            return localClosestDistance;
-        },
-        [](QLineF &result, const QLineF &next)
-        {
-            qreal const dist1 = result.length();
-            qreal const dist2 = next.length();
-            if (result.isNull() || dist2 < dist1)
-            {
-                result = next;
-            }
-        });
 }
 } // namespace
 
@@ -353,6 +301,18 @@ void VPPiece::FlipHorizontally()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+auto VPPiece::HasInvalidPieceGapPosition() const -> bool
+{
+    return m_invalidPieceGapPosition;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VPPiece::SetHasInvalidPieceGapPosition(bool status)
+{
+    m_invalidPieceGapPosition = status;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 auto VPPiece::StickyPosition(qreal &dx, qreal &dy) const -> bool
 {
     if (VPLayoutPtr const layout = Layout(); layout.isNull() || not layout->LayoutSettings().IsStickyEdges())
@@ -434,6 +394,58 @@ auto VPPiece::PathsSuperposition(const QVector<QPointF> &path1, const QVector<QP
     }
 
     return false;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+auto VPPiece::PrepareStickyPath(const QVector<QPointF> &path) -> QVector<QPointF>
+{
+    if (path.size() < 2)
+    {
+        return path;
+    }
+
+    QVector<QPointF> stickyPath;
+
+    for (int i = 0; i < path.size(); ++i)
+    {
+        stickyPath += CutEdge(QLineF(path.at(i), path.at(i < path.size() - 1 ? i + 1 : 0)));
+    }
+
+    return stickyPath;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+auto VPPiece::ClosestDistance(const QVector<QPointF> &path1, const QVector<QPointF> &path2) -> QLineF
+{
+    return QtConcurrent::blockingMappedReduced(
+        path1,
+        [path2](const QPointF &p1)
+        {
+            qreal minLocalDistance = std::numeric_limits<qreal>::max();
+            QLineF localClosestDistance;
+
+            for (const auto &p2 : path2)
+            {
+                QLineF const d(p1, p2);
+                qreal const length = d.length();
+                if (length < minLocalDistance)
+                {
+                    minLocalDistance = length;
+                    localClosestDistance = d;
+                }
+            }
+
+            return localClosestDistance;
+        },
+        [](QLineF &result, const QLineF &next)
+        {
+            qreal const dist1 = result.length();
+            qreal const dist2 = next.length();
+            if (result.isNull() || dist2 < dist1)
+            {
+                result = next;
+            }
+        });
 }
 
 //---------------------------------------------------------------------------------------------------------------------

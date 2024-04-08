@@ -172,6 +172,7 @@ void VPLayoutFileWriter::WriteLayoutProperties(const VPLayoutPtr &layout)
     writeStartElement(ML::TagControl);
     SetAttribute(ML::AttrWarningSuperposition, layout->LayoutSettings().GetWarningSuperpositionOfPieces());
     SetAttribute(ML::AttrWarningOutOfBound, layout->LayoutSettings().GetWarningPiecesOutOfBound());
+    SetAttribute(ML::AttrWarningPieceGape, layout->LayoutSettings().GetWarningPieceGapePosition());
     SetAttribute(ML::AttrStickyEdges, layout->LayoutSettings().IsStickyEdges());
     SetAttribute(ML::AttrPiecesGap, layout->LayoutSettings().GetPiecesGap());
     SetAttribute(ML::AttrFollowGrainline, layout->LayoutSettings().GetFollowGrainline());

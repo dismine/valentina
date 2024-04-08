@@ -12,6 +12,7 @@
                 <xs:complexType>
                   <xs:attribute type="xs:boolean" name="warningSuperposition"/>
                   <xs:attribute type="xs:boolean" name="warningOutOfBound"/>
+                  <xs:attribute type="xs:boolean" name="warningPieceGape"/>
                   <xs:attribute type="xs:boolean" name="stickyEdges"/>
                   <xs:attribute type="xs:boolean" name="followGrainline"/>
                   <xs:attribute type="xs:boolean" name="boundaryTogetherWithNotches"/>

@@ -87,7 +87,7 @@
                <item>
                 <widget class="QToolButton" name="toolButtonSheetPortraitOritation">
                  <property name="text">
-                  <string notr="true"></string>
+                  <string notr="true"/>
                  </property>
                  <property name="icon">
                   <iconset resource="../../../../libs/vmisc/share/resources/icon.qrc">
@@ -107,7 +107,7 @@
                <item>
                 <widget class="QToolButton" name="toolButtonSheetLandscapeOrientation">
                  <property name="text">
-                  <string notr="true"></string>
+                  <string notr="true"/>
                  </property>
                  <property name="icon">
                   <iconset resource="../../../../libs/vmisc/share/resources/icon.qrc">
@@ -310,6 +310,13 @@
          </widget>
         </item>
         <item>
+         <widget class="QCheckBox" name="checkBoxWarningPieceGapePosition">
+          <property name="text">
+           <string>Warning piece gape position</string>
+          </property>
+         </widget>
+        </item>
+        <item>
          <widget class="QCheckBox" name="checkBoxStickyEdges">
           <property name="text">
            <string>Sticky edges</string>
@@ -475,7 +482,7 @@
              <item>
               <widget class="QToolButton" name="toolButtonTilePortraitOrientation">
                <property name="text">
-                <string notr="true"></string>
+                <string notr="true"/>
                </property>
                <property name="icon">
                 <iconset resource="../../../../libs/vmisc/share/resources/icon.qrc">
@@ -495,7 +502,7 @@
              <item>
               <widget class="QToolButton" name="toolButtonTileLandscapeOrientation">
                <property name="text">
-                <string notr="true"></string>
+                <string notr="true"/>
                </property>
                <property name="icon">
                 <iconset resource="../../../../libs/vmisc/share/resources/icon.qrc">

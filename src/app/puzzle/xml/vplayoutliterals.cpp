@@ -71,6 +71,7 @@ const QString TagMirrorLine = QStringLiteral("mirrorLine");         // NOLINT(ce
 
 const QString AttrWarningSuperposition = QStringLiteral("warningSuperposition");               // NOLINT(cert-err58-cpp)
 const QString AttrWarningOutOfBound = QStringLiteral("warningOutOfBound");                     // NOLINT(cert-err58-cpp)
+const QString AttrWarningPieceGape = QStringLiteral("warningPieceGape");                       // NOLINT(cert-err58-cpp)
 const QString AttrStickyEdges = QStringLiteral("stickyEdges");                                 // NOLINT(cert-err58-cpp)
 const QString AttrPiecesGap = QStringLiteral("piecesGap");                                     // NOLINT(cert-err58-cpp)
 const QString AttrVisible = QStringLiteral("visible");                                         // NOLINT(cert-err58-cpp)

@@ -128,6 +128,8 @@ PuzzlePreferencesLayoutPage::PuzzlePreferencesLayoutPage(QWidget *parent)
     connect(ui->checkBoxWarningPiecesOutOfBound, &QCheckBox::stateChanged, this,
             [this]() { m_settingsChanged = true; });
     connect(ui->checkBoxFollowGrainline, &QCheckBox::stateChanged, this, [this]() { m_settingsChanged = true; });
+    connect(ui->checkBoxWarningPieceGapePosition, &QCheckBox::stateChanged, this,
+            [this]() { m_settingsChanged = true; });
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -166,6 +168,7 @@ auto PuzzlePreferencesLayoutPage::Apply() -> QStringList
     settings->SetLayoutStickyEdges(ui->checkBoxStickyEdges->isChecked());
     settings->SetLayoutWarningPiecesOutOfBound(ui->checkBoxWarningPiecesOutOfBound->isChecked());
     settings->SetLayoutFollowGrainline(ui->checkBoxFollowGrainline->isChecked());
+    settings->SetLayoutWarningPieceGapePosition(ui->checkBoxWarningPieceGapePosition->isChecked());
 
     settings->SetLayoutLineWidth(ui->spinBoxLineWidth->value());
 
@@ -661,6 +664,7 @@ void PuzzlePreferencesLayoutPage::ReadSettings()
     ui->checkBoxStickyEdges->setChecked(settings->GetLayoutStickyEdges());
     ui->checkBoxWarningPiecesOutOfBound->setChecked(settings->GetLayoutWarningPiecesOutOfBound());
     ui->checkBoxFollowGrainline->setChecked(settings->GetLayoutFollowGrainline());
+    ui->checkBoxWarningPieceGapePosition->setChecked(settings->GetLayoutWarningPieceGapePosition());
 
     ui->doubleSpinBoxPiecesGap->setMaximum(UnitConvertor(VPSettings::GetMaxLayoutPieceGap(), Unit::Px, LayoutUnit()));
     SetPieceGap(settings->GetLayoutPieceGap());

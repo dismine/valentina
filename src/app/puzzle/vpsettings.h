@@ -89,6 +89,9 @@ public:
     void SetLayoutWarningPiecesSuperposition(bool value);
     auto GetLayoutWarningPiecesSuperposition() const -> bool;
 
+    void SetLayoutWarningPieceGapePosition(bool value);
+    auto GetLayoutWarningPieceGapePosition() const -> bool;
+
     void SetLayoutStickyEdges(bool value);
     auto GetLayoutStickyEdges() const -> bool;
 

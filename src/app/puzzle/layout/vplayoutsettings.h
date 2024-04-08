@@ -91,6 +91,9 @@ public:
     void SetWarningPiecesOutOfBound(bool state);
     auto GetWarningPiecesOutOfBound() const -> bool;
 
+    void SetWarningPieceGapePosition(bool state);
+    auto GetWarningPieceGapePosition() const -> bool;
+
     /**
      * @brief SetFollowGrainline Sets the type of grainline for the pieces to follow
      * @param state the type of grainline
@@ -330,6 +333,7 @@ private:
 
     bool m_warningSuperpositionOfPieces{false};
     bool m_warningPiecesOutOfBound{false};
+    bool m_warningPieceGapePosition{false};
 
     QString m_title{};
     QString m_description{};

@@ -293,6 +293,7 @@ private slots:
     void HorizontalScaleChanged(double value);
     void VerticalScaleChanged(double value);
 
+    void LayoutWarningPieceGapePosition_toggled(bool checked);
     void LayoutWarningPiecesSuperposition_toggled(bool checked);
     void LayoutWarningPiecesOutOfBound_toggled(bool checked);
     void LayoutCutOnFold_toggled(bool checked);
@@ -506,6 +507,7 @@ private:
     auto AskLayoutIsInvalid(const QList<VPSheetPtr> &sheets) -> bool;
     auto CheckPiecesOutOfBound(const VPPiecePtr &piece, bool &outOfBoundChecked) -> bool;
     auto CheckSuperpositionOfPieces(const VPPiecePtr &piece, bool &pieceSuperpositionChecked) -> bool;
+    auto CheckPieceGapePosition(const VPPiecePtr &piece, bool &pieceGapePositionChecked) -> bool;
 
     void PrintLayoutSheets(QPrinter *printer, const QList<VPSheetPtr> &sheets);
     static auto PrintLayoutSheetPage(QPrinter *printer, QPainter &painter, const VPSheetPtr &sheet) -> bool;

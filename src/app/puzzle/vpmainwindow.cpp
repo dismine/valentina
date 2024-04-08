@@ -1250,6 +1250,8 @@ void VPMainWindow::InitPropertyTabLayout()
 
     connect(ui->checkBoxLayoutWarningPiecesSuperposition, &QCheckBox::toggled, this,
             &VPMainWindow::LayoutWarningPiecesSuperposition_toggled);
+    connect(ui->checkBoxLayoutWarningPieceGapePosition, &QCheckBox::toggled, this,
+            &VPMainWindow::LayoutWarningPieceGapePosition_toggled);
     connect(ui->checkBoxLayoutWarningPiecesOutOfBound, &QCheckBox::toggled, this,
             &VPMainWindow::LayoutWarningPiecesOutOfBound_toggled);
     connect(ui->checkBoxCutOnFold, &QCheckBox::toggled, this, &VPMainWindow::LayoutCutOnFold_toggled);
@@ -1611,6 +1613,8 @@ void VPMainWindow::SetPropertyTabLayoutData()
                          m_layout->LayoutSettings().GetWarningPiecesOutOfBound());
         SetCheckBoxValue(ui->checkBoxLayoutWarningPiecesSuperposition,
                          m_layout->LayoutSettings().GetWarningSuperpositionOfPieces());
+        SetCheckBoxValue(ui->checkBoxLayoutWarningPieceGapePosition,
+                         m_layout->LayoutSettings().GetWarningPieceGapePosition());
         SetCheckBoxValue(ui->checkBoxSheetStickyEdges, m_layout->LayoutSettings().IsStickyEdges());
         SetCheckBoxValue(ui->checkBoxFollowGainline, m_layout->LayoutSettings().GetFollowGrainline());
         SetCheckBoxValue(ui->checkBoxTogetherWithNotches, m_layout->LayoutSettings().IsBoundaryTogetherWithNotches());
@@ -2935,7 +2939,8 @@ auto VPMainWindow::DrawTilesScheme(QPrinter *printer, QPainter *painter, const V
 auto VPMainWindow::AskLayoutIsInvalid(const QList<VPSheetPtr> &sheets) -> bool
 {
     if (not m_layout->LayoutSettings().GetWarningPiecesOutOfBound() &&
-        not m_layout->LayoutSettings().GetWarningSuperpositionOfPieces())
+        not m_layout->LayoutSettings().GetWarningSuperpositionOfPieces() &&
+        not m_layout->LayoutSettings().GetWarningPieceGapePosition())
     {
         return true;
     }
@@ -2944,6 +2949,7 @@ auto VPMainWindow::AskLayoutIsInvalid(const QList<VPSheetPtr> &sheets) -> bool
     {
         bool outOfBoundChecked = false;
         bool pieceSuperpositionChecked = false;
+        bool pieceGapePositionChecked = false;
 
         QList<VPPiecePtr> const pieces = sheet->GetPieces();
         for (const auto &piece : pieces)
@@ -2954,6 +2960,11 @@ auto VPMainWindow::AskLayoutIsInvalid(const QList<VPSheetPtr> &sheets) -> bool
             }
 
             if (not CheckSuperpositionOfPieces(piece, pieceSuperpositionChecked))
+            {
+                return false;
+            }
+
+            if (not CheckPieceGapePosition(piece, pieceGapePositionChecked))
             {
                 return false;
             }
@@ -3017,6 +3028,37 @@ auto VPMainWindow::CheckSuperpositionOfPieces(const VPPiecePtr &piece, bool &pie
             }
 
             pieceSuperpositionChecked = true; // no need to ask more
+        }
+    }
+
+    return true;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+auto VPMainWindow::CheckPieceGapePosition(const VPPiecePtr &piece, bool &pieceGapePositionChecked) -> bool
+{
+    if (m_layout->LayoutSettings().GetWarningPieceGapePosition())
+    {
+        if (not pieceGapePositionChecked && not piece.isNull() && piece->HasInvalidPieceGapPosition())
+        {
+            QMessageBox msgBox(this);
+            msgBox.setIcon(QMessageBox::Question);
+            msgBox.setWindowTitle(tr("The layout is invalid."));
+            msgBox.setText(tr("The layout is invalid. One or several pieces are closer than minimally allowed. Do you "
+                              "want to continue export?"));
+            msgBox.setStandardButtons(QMessageBox::Yes | QMessageBox::No);
+            msgBox.setDefaultButton(QMessageBox::No);
+            const int width = 500;
+            auto *horizontalSpacer = new QSpacerItem(width, 0, QSizePolicy::Minimum, QSizePolicy::Expanding);
+            auto *layout = qobject_cast<QGridLayout *>(msgBox.layout());
+            SCASSERT(layout != nullptr)
+            layout->addItem(horizontalSpacer, layout->rowCount(), 0, 1, layout->columnCount());
+            if (msgBox.exec() == QMessageBox::No)
+            {
+                return false;
+            }
+
+            pieceGapePositionChecked = true; // no need to ask more
         }
     }
 
@@ -4824,6 +4866,25 @@ void VPMainWindow::VerticalScaleChanged(double value)
     m_graphicsView->RefreshLayout();
 
     VMainGraphicsView::NewSceneRect(m_graphicsView->scene(), m_graphicsView);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VPMainWindow::LayoutWarningPieceGapePosition_toggled(bool checked)
+{
+    if (not m_layout.isNull())
+    {
+        m_layout->LayoutSettings().SetWarningPieceGapePosition(checked);
+        LayoutWasSaved(false);
+        if (checked)
+        {
+            VPSheetPtr const sheet = m_layout->GetFocusedSheet();
+            if (not sheet.isNull())
+            {
+                sheet->ValidatePieceGapePosition();
+            }
+        }
+        m_graphicsView->RefreshPieces();
+    }
 }
 
 //---------------------------------------------------------------------------------------------------------------------

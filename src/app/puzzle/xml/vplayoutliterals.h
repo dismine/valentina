@@ -70,6 +70,7 @@ extern const QString TagMirrorLine;
 
 extern const QString AttrWarningSuperposition;
 extern const QString AttrWarningOutOfBound;
+extern const QString AttrWarningPieceGape;
 extern const QString AttrStickyEdges;
 extern const QString AttrPiecesGap;
 extern const QString AttrVisible;

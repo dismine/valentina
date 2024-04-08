@@ -1645,8 +1645,8 @@
              <rect>
               <x>0</x>
               <y>0</y>
-              <width>392</width>
-              <height>700</height>
+              <width>378</width>
+              <height>710</height>
              </rect>
             </property>
             <layout class="QVBoxLayout" name="verticalLayout_27">
@@ -1717,6 +1717,13 @@
                  <widget class="QCheckBox" name="checkBoxLayoutWarningPiecesOutOfBound">
                   <property name="text">
                    <string>Warning pieces out of bound</string>
+                  </property>
+                 </widget>
+                </item>
+                <item>
+                 <widget class="QCheckBox" name="checkBoxLayoutWarningPieceGapePosition">
+                  <property name="text">
+                   <string>Warning piece gape position</string>
                   </property>
                  </widget>
                 </item>
@@ -2434,8 +2441,8 @@
  </resources>
  <connections/>
  <buttongroups>
+  <buttongroup name="buttonGroupTileOrientation"/>
   <buttongroup name="buttonGroupRotationDirection"/>
   <buttongroup name="buttonGroupSheetOrientation"/>
-  <buttongroup name="buttonGroupTileOrientation"/>
  </buttongroups>
 </ui>

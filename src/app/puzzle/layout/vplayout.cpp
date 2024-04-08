@@ -90,6 +90,7 @@ auto VPLayout::CreateLayout(QUndoStack *undoStack) -> VPLayoutPtr
 
     layout->LayoutSettings().SetWarningSuperpositionOfPieces(settings->GetLayoutWarningPiecesSuperposition());
     layout->LayoutSettings().SetWarningPiecesOutOfBound(settings->GetLayoutWarningPiecesOutOfBound());
+    layout->LayoutSettings().SetWarningPieceGapePosition(settings->GetLayoutWarningPieceGapePosition());
     layout->LayoutSettings().SetFollowGrainline(settings->GetLayoutFollowGrainline());
     layout->LayoutSettings().SetStickyEdges(settings->GetLayoutStickyEdges());
     layout->LayoutSettings().SetPiecesGap(settings->GetLayoutPieceGap());

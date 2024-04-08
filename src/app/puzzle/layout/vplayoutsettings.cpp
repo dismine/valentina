@@ -67,6 +67,18 @@ auto VPLayoutSettings::GetWarningPiecesOutOfBound() const -> bool
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+void VPLayoutSettings::SetWarningPieceGapePosition(bool state)
+{
+    m_warningPieceGapePosition = state;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+auto VPLayoutSettings::GetWarningPieceGapePosition() const -> bool
+{
+    return m_warningPieceGapePosition;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 void VPLayoutSettings::SetTitle(const QString &title)
 {
     m_title = title;

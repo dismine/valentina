@@ -1164,7 +1164,13 @@ auto VPGraphicsPiece::PieceColor() const -> QColor
         superposition = piece->HasSuperpositionWithPieces();
     }
 
-    if (outOfBound || superposition)
+    bool pieceGape = false;
+    if (layout->LayoutSettings().GetWarningPieceGapePosition())
+    {
+        pieceGape = piece->HasInvalidPieceGapPosition();
+    }
+
+    if (outOfBound || superposition || pieceGape)
     {
         return VSceneStylesheet::ManualLayoutStyle().PieceErrorColor();
     }

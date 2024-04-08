@@ -128,6 +128,7 @@ private:
 
     bool m_outOfBoundTmp{false};
     bool m_pieceSuperpositionTmp{false};
+    bool m_pieceGapePositionTmp{false};
 
     void ConnectPiece(VPGraphicsPiece *piece) const;
 };
@@ -183,6 +184,7 @@ public:
     void SetTrashSheet(bool newTrashSheet);
 
     void ValidateSuperpositionOfPieces() const;
+    void ValidatePieceGapePosition() const;
     void ValidatePieceOutOfBound(const VPPiecePtr &piece) const;
     void ValidatePiecesOutOfBound() const;
 

@@ -333,6 +333,7 @@ void VPLayoutFileReader::ReadControl(const VPLayoutPtr &layout)
     QXmlStreamAttributes const attribs = attributes();
     layout->LayoutSettings().SetWarningSuperpositionOfPieces(
         ReadAttributeBool(attribs, ML::AttrWarningSuperposition, trueStr));
+    layout->LayoutSettings().SetWarningPieceGapePosition(ReadAttributeBool(attribs, ML::AttrWarningPieceGape, trueStr));
     layout->LayoutSettings().SetWarningPiecesOutOfBound(ReadAttributeBool(attribs, ML::AttrWarningOutOfBound, trueStr));
     layout->LayoutSettings().SetStickyEdges(ReadAttributeBool(attribs, ML::AttrStickyEdges, trueStr));
     layout->LayoutSettings().SetPiecesGap(qMax(ReadAttributeDouble(attribs, ML::AttrPiecesGap, QChar('0')), 0.0));

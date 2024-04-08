@@ -110,9 +110,14 @@ public:
     auto HasSuperpositionWithPieces() const -> bool;
     void SetHasSuperpositionWithPieces(bool newHasSuperpositionWithPieces);
 
+    auto HasInvalidPieceGapPosition() const -> bool;
+    void SetHasInvalidPieceGapPosition(bool status);
+
     auto StickyPosition(qreal &dx, qreal &dy) const -> bool;
 
     static auto PathsSuperposition(const QVector<QPointF> &path1, const QVector<QPointF> &path2) -> bool;
+    static auto PrepareStickyPath(const QVector<QPointF> &path) -> QVector<QPointF>;
+    static auto ClosestDistance(const QVector<QPointF> &path1, const QVector<QPointF> &path2) -> QLineF;
     static void CleanPosition(const VPPiecePtr &piece);
 
     auto IsValid(QString &error) const -> bool;
@@ -134,6 +139,7 @@ private:
     bool m_isSelected{false};
     bool m_outOfBound{false};
     bool m_hasSuperpositionWithPieces{false};
+    bool m_invalidPieceGapPosition{false};
 
     quint16 m_copyNumber{1};
 
