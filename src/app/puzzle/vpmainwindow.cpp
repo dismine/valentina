@@ -4873,14 +4873,12 @@ void VPMainWindow::LayoutCutOnFold_toggled(bool checked)
         m_layout->LayoutSettings().SetCutOnFold(checked);
         LayoutWasSaved(false);
 
-        if (checked)
+        VPSheetPtr const sheet = m_layout->GetFocusedSheet();
+        if (not sheet.isNull())
         {
-            VPSheetPtr const sheet = m_layout->GetFocusedSheet();
-            if (not sheet.isNull())
-            {
-                sheet->ValidatePiecesOutOfBound();
-            }
+            sheet->ValidatePiecesOutOfBound();
         }
+
         m_graphicsView->RefreshLayout();
     }
 }
