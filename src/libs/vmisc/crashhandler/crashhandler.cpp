@@ -92,7 +92,13 @@ auto AppCrashVersion() -> QString
     QString const platform = QStringLiteral("unknown");
 #endif
 
-    return QStringLiteral("%1-%2-%3-%4%5").arg(version, VCS_REPO_STATE_REVISION, qtVersion, platform, multibundle);
+    QString revision = QStringLiteral(VCS_REPO_STATE_REVISION);
+    if (!revision.startsWith('g'))
+    { // assume always git
+        revision.prepend('g');
+    }
+
+    return QStringLiteral("%1-%2-%3-%4%5").arg(version, revision, qtVersion, platform, multibundle);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
