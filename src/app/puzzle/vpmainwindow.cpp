@@ -3479,8 +3479,7 @@ void VPMainWindow::TranslatePieceRelatively(const VPPiecePtr &piece, const QRect
             pieceDy += dy * ((pieceRect.topLeft().y() - rect.topLeft().y()) / rect.height()) * 2.;
         }
 
-        auto *command = new VPUndoPieceMove(piece, pieceDx, pieceDy);
-        m_layout->UndoStack()->push(command);
+        m_layout->UndoStack()->push(new VPUndoPieceMove(piece, pieceDx, pieceDy));
 
         if (m_layout->LayoutSettings().IsStickyEdges())
         {
@@ -3488,9 +3487,14 @@ void VPMainWindow::TranslatePieceRelatively(const VPPiecePtr &piece, const QRect
             qreal stickyTranslateY = 0;
             if (piece->StickyPosition(stickyTranslateX, stickyTranslateY))
             {
+                QTime const dieTime = QTime::currentTime().addMSecs(150);
+                while (QTime::currentTime() < dieTime)
+                {
+                    QCoreApplication::processEvents(QEventLoop::AllEvents, 50);
+                }
+
                 bool const allowMerge = selectedPiecesCount == 1;
-                auto *stickyCommand = new VPUndoPieceMove(piece, stickyTranslateX, stickyTranslateY, allowMerge);
-                m_layout->UndoStack()->push(stickyCommand);
+                m_layout->UndoStack()->push(new VPUndoPieceMove(piece, stickyTranslateX, stickyTranslateY, allowMerge));
             }
         }
     }
@@ -3525,8 +3529,7 @@ void VPMainWindow::RotatePieces()
                 origin.origin = rect.center();
                 origin.custom = true;
 
-                auto *command = new VPUndoPieceRotate(piece, origin, angle, angle);
-                m_layout->UndoStack()->push(command);
+                m_layout->UndoStack()->push(new VPUndoPieceRotate(piece, origin, angle, angle));
             }
         }
         m_layout->UndoStack()->endMacro();
