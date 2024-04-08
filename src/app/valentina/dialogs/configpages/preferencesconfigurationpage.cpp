@@ -180,8 +180,9 @@ PreferencesConfigurationPage::PreferencesConfigurationPage(QWidget *parent)
 
 #if !defined(CRASH_REPORTING)
     ui->groupBoxCrashReports->setDisabled(true);
-#endif
-
+    ui->checkBoxSendCrashReports->setChecked(false);
+    ui->lineEditCrashUserEmail->setText(QString());
+#else
     ui->checkBoxSendCrashReports->setChecked(settings->IsSendCrashReport());
     connect(ui->checkBoxSendCrashReports, &QCheckBox::stateChanged, this,
             [this]() { m_sendCrashReportsChanged = true; });
@@ -192,6 +193,7 @@ PreferencesConfigurationPage::PreferencesConfigurationPage(QWidget *parent)
     ui->lineEditCrashUserEmail->setText(settings->GetCrashEmail());
     connect(ui->lineEditCrashUserEmail, &QLineEdit::editingFinished, this,
             [this]() { m_crashUserEmailChanged = true; });
+#endif
 }
 
 //---------------------------------------------------------------------------------------------------------------------

@@ -31,7 +31,9 @@
 #include <QRegularExpression>
 #include <QRegularExpressionValidator>
 
+#if defined(CRASH_REPORTING)
 #include "../vabstractapplication.h"
+#endif
 
 //---------------------------------------------------------------------------------------------------------------------
 DialogAskCollectStatistic::DialogAskCollectStatistic(QWidget *parent)
@@ -42,14 +44,16 @@ DialogAskCollectStatistic::DialogAskCollectStatistic(QWidget *parent)
 
 #if !defined(CRASH_REPORTING)
     ui->groupBoxCrashReports->setDisabled(true);
-#endif
-
+    ui->checkBoxSendCrashReports->setChecked(false);
+    ui->lineEditCrashUserEmail->setText(QString());
+#else
     VCommonSettings *settings = VAbstractApplication::VApp()->Settings();
 
     QRegularExpression const rx(QStringLiteral("\\b[A-Z0-9._%+-]+@[A-Z0-9.-]+\\.[A-Z]{2,4}\\b"),
                                 QRegularExpression::CaseInsensitiveOption);
     ui->lineEditCrashUserEmail->setValidator(new QRegularExpressionValidator(rx, this));
     ui->lineEditCrashUserEmail->setText(settings->GetCrashEmail());
+#endif
 }
 
 //---------------------------------------------------------------------------------------------------------------------
