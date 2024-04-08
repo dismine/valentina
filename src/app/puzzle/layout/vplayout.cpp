@@ -327,6 +327,16 @@ void VPLayout::SetFocusedSheet(const VPSheetPtr &focusedSheet)
         m_focusedSheet = focusedSheet.isNull() ? m_sheets.constFirst() : focusedSheet;
     }
 
+    if (LayoutSettings().GetWarningSuperpositionOfPieces())
+    {
+        m_focusedSheet->ValidateSuperpositionOfPieces();
+    }
+
+    if (LayoutSettings().GetWarningPieceGapePosition())
+    {
+        m_focusedSheet->ValidatePieceGapePosition();
+    }
+
     emit ActiveSheetChanged(m_focusedSheet);
 }
 
