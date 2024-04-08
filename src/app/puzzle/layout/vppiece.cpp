@@ -33,6 +33,7 @@
 #include "../vlayout/vlayoutpiecepath.h"
 #include "../vlayout/vtextmanager.h"
 #include "../vwidgets/vpiecegrainline.h"
+#include "QtConcurrent/qtconcurrentmap.h"
 #include "vplayout.h"
 #include "vpsheet.h"
 
@@ -116,23 +117,35 @@ auto PrepareStickyPath(const QVector<QPointF> &path) -> QVector<QPointF>
 //---------------------------------------------------------------------------------------------------------------------
 auto ClosestDistance(const QVector<QPointF> &path1, const QVector<QPointF> &path2) -> QLineF
 {
-    qreal distance = INT_MAX;
-    QLineF closestDistance;
-
-    for (auto p1 : path1)
-    {
-        for (auto p2 : path2)
+    return QtConcurrent::blockingMappedReduced(
+        path1,
+        [path2](const QPointF &p1)
         {
-            QLineF const d(p1, p2);
-            if (d.length() <= distance)
-            {
-                distance = d.length();
-                closestDistance = d;
-            }
-        }
-    }
+            qreal minLocalDistance = std::numeric_limits<qreal>::max();
+            QLineF localClosestDistance;
 
-    return closestDistance;
+            for (const auto &p2 : path2)
+            {
+                QLineF const d(p1, p2);
+                qreal const length = d.length();
+                if (length < minLocalDistance)
+                {
+                    minLocalDistance = length;
+                    localClosestDistance = d;
+                }
+            }
+
+            return localClosestDistance;
+        },
+        [](QLineF &result, const QLineF &next)
+        {
+            qreal const dist1 = result.length();
+            qreal const dist2 = next.length();
+            if (result.isNull() || dist2 < dist1)
+            {
+                result = next;
+            }
+        });
 }
 } // namespace
 
