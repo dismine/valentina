@@ -555,7 +555,7 @@ void VAbstractApplication::CheckSystemLocale()
 
     auto CheckLanguage = [](QStandardPaths::StandardLocation type, const QStringList &test)
     {
-        const QString path = QStandardPaths::locate(type, QString(), QStandardPaths::LocateDirectory);
+        const QString path = QStandardPaths::writableLocation(type);
         return std::any_of(test.begin(), test.end(), [path](const QString &t) { return path.contains(t); });
     };
 
@@ -635,9 +635,18 @@ void VAbstractApplication::InitHighDpiScaling(int argc, char *argv[])
 //---------------------------------------------------------------------------------------------------------------------
 auto VAbstractApplication::LogDirPath() -> QString
 {
-    const QString logDirPath =
-        QStandardPaths::locate(QStandardPaths::ConfigLocation, QString(), QStandardPaths::LocateDirectory) +
-        QCoreApplication::organizationName();
+    QString logDirPath = QStandardPaths::writableLocation(QStandardPaths::ConfigLocation);
+    if (logDirPath.isEmpty())
+    {
+        QString const logDirName = QCoreApplication::organizationName() + "Logs"_L1;
+#if defined(Q_OS_LINUX) || defined(Q_OS_MACOS)
+        logDirPath =
+            QDir::homePath() + QDir::separator() + logDirName + QDir::separator() + QCoreApplication::applicationName();
+#else
+        logDirPath = QCoreApplication::applicationDirPath() + QDir::separator() + logDirName + QDir::separator() +
+                     QCoreApplication::applicationName();
+#endif
+    }
     return logDirPath;
 }
 

@@ -33,6 +33,12 @@
 #include "../projectversion.h"
 #include "vcrashpaths.h"
 
+#if QT_VERSION < QT_VERSION_CHECK(6, 4, 0)
+#include "../compatibility.h"
+#endif
+
+using namespace Qt::Literals::StringLiterals;
+
 //---------------------------------------------------------------------------------------------------------------------
 VCrashPaths::VCrashPaths(QString exeDir)
   : m_exeDir(std::move(exeDir))
@@ -42,9 +48,18 @@ VCrashPaths::VCrashPaths(QString exeDir)
 //---------------------------------------------------------------------------------------------------------------------
 auto VCrashPaths::GetAttachmentPath(const QString &appName) -> QString
 {
-    const QString logDirPath =
-        QStandardPaths::locate(QStandardPaths::ConfigLocation, QString(), QStandardPaths::LocateDirectory) +
-        QStringLiteral(VER_COMPANYNAME_STR);
+    QString logDirPath = QStandardPaths::writableLocation(QStandardPaths::ConfigLocation);
+    if (logDirPath.isEmpty())
+    {
+        QString const logDirName = VER_COMPANYNAME_STR + "Logs"_L1;
+#if defined(Q_OS_LINUX) || defined(Q_OS_MACOS)
+        logDirPath =
+            QDir::homePath() + QDir::separator() + logDirName + QDir::separator() + QCoreApplication::applicationName();
+#else
+        logDirPath = QCoreApplication::applicationDirPath() + QDir::separator() + logDirName + QDir::separator() +
+                     QCoreApplication::applicationName();
+#endif
+    }
     return QStringLiteral("%1/%2-pid%3.log").arg(logDirPath, appName.toLower()).arg(QCoreApplication::applicationPid());
 }
 
@@ -64,14 +79,14 @@ auto VCrashPaths::GetHandlerPath() const -> QString
 //---------------------------------------------------------------------------------------------------------------------
 auto VCrashPaths::GetReportsPath() -> QString
 {
-    return QStandardPaths::locate(QStandardPaths::AppConfigLocation, QString(), QStandardPaths::LocateDirectory) +
+    return QStandardPaths::writableLocation(QStandardPaths::AppConfigLocation) + QDir::separator() +
            QStringList{VER_COMPANYNAME_STR, "User Data", "Crashpad", "Reports"}.join(QDir::separator());
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 auto VCrashPaths::GetMetricsPath() -> QString
 {
-    return QStandardPaths::locate(QStandardPaths::AppConfigLocation, QString(), QStandardPaths::LocateDirectory) +
+    return QStandardPaths::writableLocation(QStandardPaths::AppConfigLocation) + QDir::separator() +
            QStringList{VER_COMPANYNAME_STR, "User Data", "Crashpad", "Metrics"}.join(QDir::separator());
 }
 
