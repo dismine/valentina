@@ -8,7 +8,7 @@
     "PointColor": "#d9d9d9",
     "LabelColor": "#d9d9d9",
     "LabelHoverColor": "#ffd900",
-    "LabelLineColor": "#80ffd900",
+    "LabelLineColor": [255, 217, 0, 32],
     "AccuracyRadiusColor": "#ffd900",
     "ControlLineColor": "#80ffd900",
     "ControlPointColor": "#ffd900",

@@ -5,7 +5,7 @@
     "PointColor": "black",
     "LabelColor": "black",
     "LabelHoverColor": "green",
-    "LabelLineColor": [0, 0, 0],
+    "LabelLineColor": [0, 0, 0, 16],
     "AccuracyRadiusColor": "blue",
     "ControlLineColor": [0, 0, 0],
     "ControlPointColor": "red",
