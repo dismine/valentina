@@ -160,40 +160,41 @@ inline void noisyFailureMsgHandler(QtMsgType type, const QMessageLogContext &con
 
     {
         QString debugdate = "["_L1 + QDateTime::currentDateTime().toString(QStringLiteral("yyyy.MM.dd hh:mm:ss"));
+        QString const file = VAbstractApplication::ReduceLogContextFilePath(context.file);
 
         switch (type)
         {
             case QtDebugMsg:
                 debugdate += QStringLiteral(":DEBUG:%1(%2)] %3: %4: %5")
-                                 .arg(context.file)
+                                 .arg(file)
                                  .arg(context.line)
                                  .arg(context.function, context.category, msg);
                 vStdOut() << QApplication::translate("mNoisyHandler", "DEBUG:") << msg << "\n";
                 break;
             case QtWarningMsg:
                 debugdate += QStringLiteral(":WARNING:%1(%2)] %3: %4: %5")
-                                 .arg(context.file)
+                                 .arg(file)
                                  .arg(context.line)
                                  .arg(context.function, context.category, msg);
                 vStdErr() << QApplication::translate("mNoisyHandler", "WARNING:") << msg << "\n";
                 break;
             case QtCriticalMsg:
                 debugdate += QStringLiteral(":CRITICAL:%1(%2)] %3: %4: %5")
-                                 .arg(context.file)
+                                 .arg(file)
                                  .arg(context.line)
                                  .arg(context.function, context.category, msg);
                 vStdErr() << QApplication::translate("mNoisyHandler", "CRITICAL:") << msg << "\n";
                 break;
             case QtFatalMsg:
                 debugdate += QStringLiteral(":FATAL:%1(%2)] %3: %4: %5")
-                                 .arg(context.file)
+                                 .arg(file)
                                  .arg(context.line)
                                  .arg(context.function, context.category, msg);
                 vStdErr() << QApplication::translate("mNoisyHandler", "FATAL:") << msg << "\n";
                 break;
             case QtInfoMsg:
                 debugdate += QStringLiteral(":INFO:%1(%2)] %3: %4: %5")
-                                 .arg(context.file)
+                                 .arg(file)
                                  .arg(context.line)
                                  .arg(context.function, context.category, msg);
                 vStdOut() << QApplication::translate("mNoisyHandler", "INFO:") << msg << "\n";

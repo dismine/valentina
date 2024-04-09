@@ -288,6 +288,20 @@ auto VAbstractApplication::QtTranslationsPath(const QString &locale) -> QString
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+auto VAbstractApplication::ReduceLogContextFilePath(QString path) -> QString
+{
+    // Find the position of the 'src' folder in the path
+    vsizetype const srcIndex = path.indexOf(QDir::toNativeSeparators(QStringLiteral("/src/")));
+    if (srcIndex != -1)
+    {
+        // Extract the substring starting from 'src' folder
+        path = path.mid(srcIndex);
+    }
+
+    return path;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 auto VAbstractApplication::getUndoStack() const -> QUndoStack *
 {
     return undoStack;

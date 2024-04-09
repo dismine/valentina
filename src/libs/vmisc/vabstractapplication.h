@@ -78,6 +78,8 @@ public:
     static auto translationsPath(const QString &locale = QString()) -> QString;
     static auto QtTranslationsPath(const QString &locale = QString()) -> QString;
 
+    static auto ReduceLogContextFilePath(QString path) -> QString;
+
     void LoadTranslation(QString locale);
 
     virtual void OpenSettings() = 0;
