@@ -44,7 +44,7 @@ def generate_sym_files(install_root):
         print(f"Generating symbols for: {os.path.basename(debug_file)}")
 
         sym_file = os.path.splitext(debug_file)[0] + ".sym"
-        dump_syms_cmd = ["dump_syms", '-o', sym_file, debug_file]
+        dump_syms_cmd = ["dump_syms", '-o', sym_file, '--inlines', debug_file]
         subprocess.run(dump_syms_cmd, check=True)
 
         sym_files.append((debug_file, zip_sym(sym_file)))
