@@ -515,7 +515,7 @@ void VPSheet::ValidateSuperpositionOfPieces() const
 
     for (const auto &piece : pieces)
     {
-        if (piece.isNull())
+        if (piece.isNull() || piece->OutOfBound())
         {
             continue;
         }
@@ -557,7 +557,7 @@ void VPSheet::ValidateSuperpositionOfPieces() const
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VPSheet::ValidatePieceGapePosition() const
+void VPSheet::ValidatePieceGapePosition(const VPPiecePtr &piece) const
 {
     VPLayoutPtr const layout = GetLayout();
     if (layout.isNull())
@@ -571,52 +571,59 @@ void VPSheet::ValidatePieceGapePosition() const
         return;
     }
 
+    if (piece.isNull() || piece->HasSuperpositionWithPieces() || piece->OutOfBound())
+    {
+        return;
+    }
+
+    const bool oldInvalidPieceGapPosition = piece->HasInvalidPieceGapPosition();
+
+    QVector<QPointF> path1;
+    CastTo(piece->GetMappedExternalContourPoints(), path1);
+    path1 = VPPiece::PrepareStickyPath(path1);
+    bool hasInvalidPieceGapPosition = false;
+
     QList<VPPiecePtr> const pieces = GetPieces();
 
-    for (const auto &piece : pieces)
+    for (const auto &p : pieces)
     {
-        if (piece.isNull())
+        if (p.isNull() || piece == p)
         {
             continue;
         }
 
-        const bool oldInvalidPieceGapPosition = piece->HasInvalidPieceGapPosition();
+        QVector<QPointF> path2;
+        CastTo(p->GetMappedExternalContourPoints(), path2);
+        path2 = VPPiece::PrepareStickyPath(path2);
 
-        QVector<QPointF> path1;
-        CastTo(piece->GetMappedExternalContourPoints(), path1);
-        path1 = VPPiece::PrepareStickyPath(path1);
-        bool hasInvalidPieceGapPosition = false;
+        QLineF const distance = VPPiece::ClosestDistance(path1, path2);
 
-        for (const auto &p : pieces)
+        if (distance.length() < pieceGap - accuracyPointOnLine)
         {
-            if (p.isNull() || piece == p)
-            {
-                continue;
-            }
-
-            QVector<QPointF> path2;
-            CastTo(p->GetMappedExternalContourPoints(), path2);
-            path2 = VPPiece::PrepareStickyPath(path2);
-
-            QLineF const distance = VPPiece::ClosestDistance(path1, path2);
-
-            if (distance.length() < pieceGap - accuracyPointOnLine)
-            {
-                hasInvalidPieceGapPosition = true;
-                break;
-            }
+            hasInvalidPieceGapPosition = true;
+            break;
         }
+    }
 
-        piece->SetHasInvalidPieceGapPosition(hasInvalidPieceGapPosition);
+    piece->SetHasInvalidPieceGapPosition(hasInvalidPieceGapPosition);
 
-        if (oldInvalidPieceGapPosition != piece->HasInvalidPieceGapPosition())
+    if (oldInvalidPieceGapPosition != piece->HasInvalidPieceGapPosition())
+    {
+        VPLayoutPtr const layout = GetLayout();
+        if (not layout.isNull())
         {
-            VPLayoutPtr const layout = GetLayout();
-            if (not layout.isNull())
-            {
-                emit layout->PiecePositionValidityChanged(piece);
-            }
+            emit layout->PiecePositionValidityChanged(piece);
         }
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VPSheet::ValidatePieceGapePosition() const
+{
+    QList<VPPiecePtr> const pieces = GetPieces();
+    for (const auto &piece : pieces)
+    {
+        ValidatePieceGapePosition(piece);
     }
 }
 
@@ -770,7 +777,7 @@ void VPSheet::CheckPiecePositionValidity(const VPPiecePtr &piece) const
 
     if (layout->LayoutSettings().GetWarningPieceGapePosition())
     {
-        ValidatePieceGapePosition();
+        ValidatePieceGapePosition(piece);
     }
 }
 

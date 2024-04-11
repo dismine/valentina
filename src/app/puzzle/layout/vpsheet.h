@@ -184,6 +184,7 @@ public:
     void SetTrashSheet(bool newTrashSheet);
 
     void ValidateSuperpositionOfPieces() const;
+    void ValidatePieceGapePosition(const VPPiecePtr &piece) const;
     void ValidatePieceGapePosition() const;
     void ValidatePieceOutOfBound(const VPPiecePtr &piece) const;
     void ValidatePiecesOutOfBound() const;

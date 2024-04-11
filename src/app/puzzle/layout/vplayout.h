@@ -78,6 +78,7 @@ public:
     void AddTrashSheet(const VPSheetPtr &sheet);
     auto GetTrashSheet() -> VPSheetPtr;
 
+    auto LayoutSettings() const -> const VPLayoutSettings &;
     auto LayoutSettings() -> VPLayoutSettings &;
 
     auto PiecesForSheet(const VPSheetPtr &sheet) const -> QList<VPPiecePtr>;
@@ -90,6 +91,7 @@ public:
     void Clear();
 
     void CheckPiecesPositionValidity() const;
+    void CheckPiecesPositionValidity(const VPSheetPtr &sheet) const;
 
     auto TileFactory() const -> QSharedPointer<VPTileFactory>;
     void SetTileFactory(const QSharedPointer<VPTileFactory> &newTileFactory);

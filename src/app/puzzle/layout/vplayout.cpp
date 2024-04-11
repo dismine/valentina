@@ -123,13 +123,14 @@ void VPLayout::AddPiece(const VPPiecePtr &piece)
 
     VPPiece::CleanPosition(piece);
 
-    if (not m_pieces.contains(piece->GetUniqueID()))
+    const QString uniqueId = piece->GetUniqueID();
+    if (not m_pieces.contains(uniqueId))
     {
-        m_pieces.insert(piece->GetUniqueID(), piece);
+        m_pieces.insert(uniqueId, piece);
     }
     else
     {
-        VPPiecePtr const oldPiece = m_pieces.value(piece->GetUniqueID());
+        VPPiecePtr const oldPiece = m_pieces.value(uniqueId);
         if (not oldPiece.isNull())
         {
             oldPiece->Update(piece);
@@ -137,7 +138,7 @@ void VPLayout::AddPiece(const VPPiecePtr &piece)
         }
         else
         {
-            m_pieces.insert(piece->GetUniqueID(), piece);
+            m_pieces.insert(uniqueId, piece);
         }
     }
 }
@@ -327,15 +328,7 @@ void VPLayout::SetFocusedSheet(const VPSheetPtr &focusedSheet)
         m_focusedSheet = focusedSheet.isNull() ? m_sheets.constFirst() : focusedSheet;
     }
 
-    if (LayoutSettings().GetWarningSuperpositionOfPieces())
-    {
-        m_focusedSheet->ValidateSuperpositionOfPieces();
-    }
-
-    if (LayoutSettings().GetWarningPieceGapePosition())
-    {
-        m_focusedSheet->ValidatePieceGapePosition();
-    }
+    CheckPiecesPositionValidity(m_focusedSheet);
 
     emit ActiveSheetChanged(m_focusedSheet);
 }
@@ -350,6 +343,12 @@ auto VPLayout::GetFocusedSheet() -> VPSheetPtr
 auto VPLayout::GetTrashSheet() -> VPSheetPtr
 {
     return m_trashSheet;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+auto VPLayout::LayoutSettings() const -> const VPLayoutSettings &
+{
+    return m_layoutSettings;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -428,10 +427,30 @@ void VPLayout::CheckPiecesPositionValidity() const
 {
     for (const auto &sheet : m_sheets)
     {
-        if (not sheet.isNull())
+        CheckPiecesPositionValidity(sheet);
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VPLayout::CheckPiecesPositionValidity(const VPSheetPtr &sheet) const
+{
+    if (not sheet.isNull())
+    {
+        const VPLayoutSettings &settings = LayoutSettings();
+
+        if (settings.GetWarningPiecesOutOfBound())
+        {
+            sheet->ValidatePiecesOutOfBound();
+        }
+
+        if (settings.GetWarningSuperpositionOfPieces())
         {
             sheet->ValidateSuperpositionOfPieces();
-            sheet->ValidatePiecesOutOfBound();
+        }
+
+        if (settings.GetWarningPieceGapePosition())
+        {
+            sheet->ValidatePieceGapePosition();
         }
     }
 }
