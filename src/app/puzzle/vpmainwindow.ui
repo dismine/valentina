@@ -280,7 +280,7 @@
               <x>0</x>
               <y>0</y>
               <width>378</width>
-              <height>721</height>
+              <height>752</height>
              </rect>
             </property>
             <layout class="QVBoxLayout" name="verticalLayout_23">
@@ -373,6 +373,20 @@
                    </item>
                    <item row="3" column="1">
                     <widget class="QLineEdit" name="lineEditCurrentPieceGradationId">
+                     <property name="readOnly">
+                      <bool>true</bool>
+                     </property>
+                    </widget>
+                   </item>
+                   <item row="4" column="0">
+                    <widget class="QLabel" name="label_6">
+                     <property name="text">
+                      <string>Copy number:</string>
+                     </property>
+                    </widget>
+                   </item>
+                   <item row="4" column="1">
+                    <widget class="QLineEdit" name="lineEditCopyNumber">
                      <property name="readOnly">
                       <bool>true</bool>
                      </property>
@@ -2442,7 +2456,7 @@
  <connections/>
  <buttongroups>
   <buttongroup name="buttonGroupTileOrientation"/>
-  <buttongroup name="buttonGroupRotationDirection"/>
   <buttongroup name="buttonGroupSheetOrientation"/>
+  <buttongroup name="buttonGroupRotationDirection"/>
  </buttongroups>
 </ui>

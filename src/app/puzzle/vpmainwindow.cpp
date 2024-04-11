@@ -1364,6 +1364,7 @@ void VPMainWindow::SetPropertyTabCurrentPieceData()
         SetLineEditValue(ui->lineEditCurrentPieceName, selectedPiece->GetName());
         SetPlainTextEditValue(ui->plainTextEditCurrentPieceUUID, selectedPiece->GetUUID().toString());
         SetLineEditValue(ui->lineEditCurrentPieceGradationId, selectedPiece->GetGradationId());
+        SetLineEditValue(ui->lineEditCopyNumber, QString::number(selectedPiece->CopyNumber()));
 
         SetCheckBoxValue(ui->checkBoxCurrentPieceShowSeamline, not selectedPiece->IsHideMainPath());
         SetCheckBoxValue(ui->checkBoxCurrentPieceVerticallyFlipped, selectedPiece->IsVerticallyFlipped());
