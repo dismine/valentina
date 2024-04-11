@@ -687,7 +687,14 @@ void VPMainWindow::SetupMenu()
                         const QString filePath = senderAction->data().toString();
                         if (not filePath.isEmpty())
                         {
-                            LoadFile(filePath);
+                            if (curFile.isEmpty() && !this->isWindowModified())
+                            {
+                                VPApplication::VApp()->MainWindow()->LoadFile(filePath);
+                            }
+                            else
+                            {
+                                VPApplication::VApp()->NewMainWindow()->LoadFile(filePath);
+                            }
                         }
                     }
                 });
