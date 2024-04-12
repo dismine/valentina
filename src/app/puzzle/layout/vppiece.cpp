@@ -223,40 +223,62 @@ void VPPiece::RotateToGrainline(const VPTransformationOrigon &origin)
     }
 
     QVector<qreal> angles;
-    angles.reserve(4);
+    angles.reserve(8);
 
     const VPieceGrainline pieceGrainline = GetGrainline();
 
     if (pieceGrainline.IsArrowUpEnabled())
     {
-        angles.append(grainline.angleTo(fabricGrainline));
+        qreal const angle = grainline.angleTo(fabricGrainline);
+        angles.append(angle);
+        angles.append(-(360. - angle));
     }
 
     if (pieceGrainline.IsArrowDownEnabled())
     {
         QLineF arrow = grainline;
         arrow.setAngle(arrow.angle() + 180);
-        angles.append(arrow.angleTo(fabricGrainline));
+
+        qreal const angle = arrow.angleTo(fabricGrainline);
+        angles.append(angle);
+        angles.append(-(360. - angle));
     }
 
     if (pieceGrainline.IsArrowLeftEnabled())
     {
         QLineF arrow = grainline;
         arrow.setAngle(arrow.angle() + 90);
-        angles.append(arrow.angleTo(fabricGrainline));
+
+        qreal const angle = arrow.angleTo(fabricGrainline);
+        angles.append(angle);
+        angles.append(-(360. - angle));
     }
 
     if (pieceGrainline.IsArrowRightEnabled())
     {
         QLineF arrow = grainline;
         arrow.setAngle(arrow.angle() - 90);
-        angles.append(arrow.angleTo(fabricGrainline));
+
+        qreal const angle = arrow.angleTo(fabricGrainline);
+        angles.append(angle);
+        angles.append(-(360. - angle));
     }
 
     qreal degrees = 0;
     if (not angles.isEmpty())
     {
-        degrees = *std::min_element(angles.constBegin(), angles.constEnd());
+        qreal minAbsAngle = qAbs(angles.constFirst());
+        degrees = angles.constFirst();
+
+        for (int i = 1; i < angles.size(); ++i)
+        {
+            qreal const absAngle = qAbs(angles.at(i));
+            if (absAngle < minAbsAngle)
+            {
+                minAbsAngle = absAngle;
+                degrees = angles.at(i);
+            }
+        }
     }
 
     Rotate(origin.custom ? MappedDetailBoundingRect().center() : origin.origin, degrees);

@@ -37,11 +37,12 @@
 class VPUndoPieceRotate : public VPUndoCommand
 {
     Q_OBJECT // NOLINT
+
 public:
-    VPUndoPieceRotate(const VPPiecePtr &piece, const VPTransformationOrigon &origin, qreal angle, qreal angleSum,
+    VPUndoPieceRotate(const VPPiecePtr &piece, const VPTransformationOrigon &origin, qreal angle,
                       bool allowMerge = false, QUndoCommand *parent = nullptr);
 
-    ~VPUndoPieceRotate() override =default;
+    ~VPUndoPieceRotate() override = default;
 
     void undo() override;
     void redo() override;
@@ -58,13 +59,12 @@ public:
 private:
     Q_DISABLE_COPY_MOVE(VPUndoPieceRotate) // NOLINT
 
-    bool           m_firstCall{true};
+    bool m_firstCall{true};
     VPPieceWeakPtr m_piece;
-    QTransform     m_oldTransform{};
+    QTransform m_oldTransform{};
     VPTransformationOrigon m_origin;
-    qreal          m_angle;
-    qreal          m_angleSum;
-    bool           m_followGrainline{false};
+    qreal m_angle;
+    bool m_followGrainline{false};
 };
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -95,10 +95,11 @@ inline auto VPUndoPieceRotate::FollowGrainline() const -> bool
 class VPUndoPiecesRotate : public VPUndoCommand
 {
     Q_OBJECT // NOLINT
+
 public:
     explicit VPUndoPiecesRotate(const QList<VPPiecePtr> &pieces, const VPTransformationOrigon &origin, qreal angle,
-                                qreal angleSum, bool allowMerge = false, QUndoCommand *parent = nullptr);
-    ~VPUndoPiecesRotate() override =default;
+                                bool allowMerge = false, QUndoCommand *parent = nullptr);
+    ~VPUndoPiecesRotate() override = default;
 
     void undo() override;
     void redo() override;
@@ -114,13 +115,12 @@ public:
 private:
     Q_DISABLE_COPY_MOVE(VPUndoPiecesRotate) // NOLINT
 
-    bool                      m_firstCall{true};
-    QVector<VPPieceWeakPtr>   m_pieces{};
+    bool m_firstCall{true};
+    QVector<VPPieceWeakPtr> m_pieces{};
     QMap<QString, QTransform> m_oldTransforms{};
-    VPTransformationOrigon    m_origin;
-    qreal                     m_angle;
-    qreal                     m_angleSum;
-    bool                      m_followGrainline{false};
+    VPTransformationOrigon m_origin;
+    qreal m_angle;
+    bool m_followGrainline{false};
 
     auto Layout() const -> VPLayoutPtr;
     auto Sheet() const -> VPSheetPtr;

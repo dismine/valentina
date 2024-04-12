@@ -29,8 +29,8 @@
 #ifndef VPMAINGRAPHICSVIEW_H
 #define VPMAINGRAPHICSVIEW_H
 
-#include "../vwidgets/vmaingraphicsview.h"
 #include "../layout/layoutdef.h"
+#include "../vwidgets/vmaingraphicsview.h"
 
 class VMainGraphicsScene;
 class VPGraphicsPieceControls;
@@ -45,6 +45,7 @@ class VPPiece;
 class VPMainGraphicsView : public VMainGraphicsView
 {
     Q_OBJECT // NOLINT
+
 public:
     VPMainGraphicsView(const VPLayoutPtr &layout, QWidget *parent);
     ~VPMainGraphicsView() override = default;
@@ -97,8 +98,6 @@ private:
     VPLayoutWeakPtr m_layout;
 
     bool m_allowChangeMerge{false};
-
-    qreal m_rotationSum{0};
 
     bool m_hasStickyPosition{false};
     qreal m_stickyTranslateX{0};

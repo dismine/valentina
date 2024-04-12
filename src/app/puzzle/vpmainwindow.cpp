@@ -3521,6 +3521,25 @@ void VPMainWindow::RotatePieces()
         return;
     }
 
+    auto StickyRotateToGrainline = [this](const VPPiecePtr &piece, const VPTransformationOrigon &origin)
+    {
+        QTime const dieTime = QTime::currentTime().addMSecs(150);
+        while (QTime::currentTime() < dieTime)
+        {
+            QCoreApplication::processEvents(QEventLoop::AllEvents, 50);
+        }
+
+        if (not piece.isNull())
+        {
+            if (m_layout->LayoutSettings().GetFollowGrainline() || piece->IsFollowGrainline())
+            {
+                piece->RotateToGrainline(origin);
+            }
+
+            emit m_layout->PieceTransformationChanged(piece);
+        }
+    };
+
     if (ui->checkBoxTransformSeparately->isChecked())
     {
         m_layout->UndoStack()->beginMacro(tr("rotate pieces"));
@@ -3534,7 +3553,9 @@ void VPMainWindow::RotatePieces()
                 origin.origin = rect.center();
                 origin.custom = true;
 
-                m_layout->UndoStack()->push(new VPUndoPieceRotate(piece, origin, angle, angle));
+                m_layout->UndoStack()->push(new VPUndoPieceRotate(piece, origin, angle));
+
+                StickyRotateToGrainline(piece, origin);
             }
         }
         m_layout->UndoStack()->endMacro();
@@ -3548,8 +3569,12 @@ void VPMainWindow::RotatePieces()
         }
 
         VPTransformationOrigon const origin = sheet->TransformationOrigin();
-        auto *command = new VPUndoPiecesRotate(selectedPieces, origin, angle, angle);
-        m_layout->UndoStack()->push(command);
+        m_layout->UndoStack()->push(new VPUndoPiecesRotate(selectedPieces, origin, angle));
+
+        for (const auto &piece : qAsConst(selectedPieces))
+        {
+            StickyRotateToGrainline(piece, origin);
+        }
     }
 }
 

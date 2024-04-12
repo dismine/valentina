@@ -320,8 +320,6 @@ void VPMainGraphicsView::keyReleaseEvent(QKeyEvent *event)
                 sheet->SceneData()->RotationControls()->on_UpdateControls();
                 sheet->SceneData()->RotationControls()->on_HideHandles(false);
             }
-
-            m_rotationSum = 0;
         }
     }
     VMainGraphicsView::keyReleaseEvent(event);
@@ -439,31 +437,34 @@ void VPMainGraphicsView::RotatePiecesByAngle(qreal angle)
         return pieces;
     };
 
-    if (layout->LayoutSettings().GetFollowGrainline() && not origin.custom)
-    {
-        if (m_rotationSum > 90 || m_rotationSum < -90)
-        {
-            m_rotationSum = angle;
-        }
-        else
-        {
-            m_rotationSum += angle;
-        }
-    }
-    else
-    {
-        m_rotationSum = angle;
-    }
+    QList<VPPiecePtr> const pieces = PreparePieces();
 
-    if (QList<VPPiecePtr> const pieces = PreparePieces(); pieces.size() == 1)
+    if (pieces.size() == 1)
     {
-        auto *command = new VPUndoPieceRotate(pieces.constFirst(), origin, angle, m_rotationSum, m_allowChangeMerge);
-        layout->UndoStack()->push(command);
+        layout->UndoStack()->push(new VPUndoPieceRotate(pieces.constFirst(), origin, angle, m_allowChangeMerge));
     }
     else if (pieces.size() > 1)
     {
-        auto *command = new VPUndoPiecesRotate(pieces, origin, angle, m_rotationSum, m_allowChangeMerge);
-        layout->UndoStack()->push(command);
+        layout->UndoStack()->push(new VPUndoPiecesRotate(pieces, origin, angle, m_allowChangeMerge));
+    }
+
+    QTime const dieTime = QTime::currentTime().addMSecs(150);
+    while (QTime::currentTime() < dieTime)
+    {
+        QCoreApplication::processEvents(QEventLoop::AllEvents, 50);
+    }
+
+    for (const auto &piece : qAsConst(pieces))
+    {
+        if (not piece.isNull())
+        {
+            if (layout->LayoutSettings().GetFollowGrainline() || piece->IsFollowGrainline())
+            {
+                piece->RotateToGrainline(origin);
+            }
+
+            emit layout->PieceTransformationChanged(piece);
+        }
     }
 
     m_allowChangeMerge = true;

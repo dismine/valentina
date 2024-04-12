@@ -109,6 +109,11 @@ void VPGraphicsTransformationOrigin::on_HideHandles(bool hide)
 void VPGraphicsTransformationOrigin::on_ShowOrigin(bool show)
 {
     setVisible(show);
+
+    if (not show)
+    {
+        m_hoverMode = false;
+    }
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -404,7 +409,6 @@ void VPGraphicsPieceControls::mousePressEvent(QGraphicsSceneMouseEvent *event)
     if (event->button() == Qt::LeftButton && event->type() != QEvent::GraphicsSceneMouseDoubleClick)
     {
         m_rotationStartPoint = event->scenePos();
-        m_rotationSum = 0;
         m_controlsVisible = false;
         m_handleCorner = SelectedHandleCorner(event->pos());
         m_ignorePieceTransformation = true;
@@ -433,7 +437,7 @@ void VPGraphicsPieceControls::mousePressEvent(QGraphicsSceneMouseEvent *event)
 //---------------------------------------------------------------------------------------------------------------------
 void VPGraphicsPieceControls::mouseMoveEvent(QGraphicsSceneMouseEvent *event)
 {
-    PrepareTransformationOrigin(event->modifiers() & Qt::ShiftModifier);
+    PrepareTransformationOrigin(event->modifiers() & Qt::ShiftModifier); // NOLINT(readability-implicit-bool-conversion)
 
     QPointF const rotationNewPoint = event->scenePos();
 
@@ -451,24 +455,18 @@ void VPGraphicsPieceControls::mouseMoveEvent(QGraphicsSceneMouseEvent *event)
 
     if (not qFuzzyIsNull(rotateOn))
     {
-        QList<VPPiecePtr> const pieces = SelectedPieces();
-
-        VPLayoutPtr const layout = m_layout.toStrongRef();
-        if (not layout.isNull())
+        if (VPLayoutPtr const layout = m_layout.toStrongRef(); not layout.isNull())
         {
-            CorrectRotationSum(layout, rotationOrigin, rotateOn);
+            QList<VPPiecePtr> const pieces = SelectedPieces();
 
             if (pieces.size() == 1)
             {
-                auto *command = new VPUndoPieceRotate(pieces.constFirst(), rotationOrigin, rotateOn, m_rotationSum,
-                                                      allowChangeMerge);
-                layout->UndoStack()->push(command);
+                layout->UndoStack()->push(
+                    new VPUndoPieceRotate(pieces.constFirst(), rotationOrigin, rotateOn, allowChangeMerge));
             }
             else if (pieces.size() > 1)
             {
-                auto *command =
-                    new VPUndoPiecesRotate(pieces, rotationOrigin, rotateOn, m_rotationSum, allowChangeMerge);
-                layout->UndoStack()->push(command);
+                layout->UndoStack()->push(new VPUndoPiecesRotate(pieces, rotationOrigin, rotateOn, allowChangeMerge));
             }
         }
     }
@@ -490,6 +488,19 @@ void VPGraphicsPieceControls::mouseReleaseEvent(QGraphicsSceneMouseEvent *event)
 {
     if (event->button() == Qt::LeftButton)
     {
+        VPLayoutPtr const layout = m_layout.toStrongRef();
+
+        if (not layout.isNull() && layout->LayoutSettings().GetFollowGrainline())
+        {
+            VPTransformationOrigon const rotationOrigin = TransformationOrigin(m_layout, m_pieceRect);
+            QList<VPPiecePtr> const pieces = SelectedPieces();
+            for (const auto &piece : qAsConst(pieces))
+            {
+                piece->RotateToGrainline(rotationOrigin);
+                emit layout->PieceTransformationChanged(piece);
+            }
+        }
+
         m_controlsVisible = true;
         m_ignorePieceTransformation = false;
 
@@ -505,22 +516,19 @@ void VPGraphicsPieceControls::mouseReleaseEvent(QGraphicsSceneMouseEvent *event)
             }
         }
 
-        if (m_originSaved)
+        if (m_originSaved && not layout.isNull())
         {
-            if (VPLayoutPtr const layout = m_layout.toStrongRef(); not layout.isNull())
+            if (VPSheetPtr const sheet = layout->GetFocusedSheet(); not sheet.isNull())
             {
-                if (VPSheetPtr const sheet = layout->GetFocusedSheet(); not sheet.isNull())
+                if (not m_savedOrigin.custom)
                 {
-                    if (not m_savedOrigin.custom)
-                    {
-                        m_pieceRect = PiecesBoundingRect(m_selectedPieces);
-                        m_savedOrigin.origin = m_pieceRect.center();
-                    }
-                    sheet->SetTransformationOrigin(m_savedOrigin);
-                    emit TransformationOriginChanged();
+                    m_pieceRect = PiecesBoundingRect(m_selectedPieces);
+                    m_savedOrigin.origin = m_pieceRect.center();
                 }
-                m_originSaved = false;
+                sheet->SetTransformationOrigin(m_savedOrigin);
+                emit TransformationOriginChanged();
             }
+            m_originSaved = false;
         }
 
         on_UpdateControls();
@@ -850,32 +858,6 @@ void VPGraphicsPieceControls::PrepareTransformationOrigin(bool shiftPressed)
         sheet->SetTransformationOrigin(m_savedOrigin);
         emit TransformationOriginChanged();
         m_originSaved = false;
-    }
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-void VPGraphicsPieceControls::CorrectRotationSum(const VPLayoutPtr &layout,
-                                                 const VPTransformationOrigon &rotationOrigin, qreal rotateOn)
-{
-    if (layout.isNull())
-    {
-        return;
-    }
-
-    if (layout->LayoutSettings().GetFollowGrainline() && not rotationOrigin.custom)
-    {
-        if (m_rotationSum > 90 || m_rotationSum < -90)
-        {
-            m_rotationSum = rotateOn;
-        }
-        else
-        {
-            m_rotationSum += rotateOn;
-        }
-    }
-    else
-    {
-        m_rotationSum = rotateOn;
     }
 }
 

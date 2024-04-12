@@ -41,12 +41,11 @@ auto RoundAngle(qreal angle) -> qreal
 
 //---------------------------------------------------------------------------------------------------------------------
 VPUndoPieceRotate::VPUndoPieceRotate(const VPPiecePtr &piece, const VPTransformationOrigon &origin, qreal angle,
-                                     qreal angleSum, bool allowMerge, QUndoCommand *parent)
+                                     bool allowMerge, QUndoCommand *parent)
   : VPUndoCommand(allowMerge, parent),
     m_piece(piece),
     m_origin(origin),
-    m_angle(angle),
-    m_angleSum(angleSum)
+    m_angle(angle)
 {
     SCASSERT(not piece.isNull())
 
@@ -81,6 +80,10 @@ void VPUndoPieceRotate::undo()
     }
 
     piece->SetMatrix(m_oldTransform);
+    if (m_followGrainline || piece->IsFollowGrainline())
+    {
+        piece->RotateToGrainline(m_origin);
+    }
     emit layout->PieceTransformationChanged(piece);
 }
 
@@ -104,23 +107,9 @@ void VPUndoPieceRotate::redo()
         layout->SetFocusedSheet(piece->Sheet());
     }
 
-    if (m_firstCall)
-    {
-        if ((m_followGrainline || piece->IsFollowGrainline()) && piece->IsGrainlineEnabled())
-        {
-            piece->Rotate(m_origin.origin, m_angleSum);
-        }
-        else
-        {
-            piece->Rotate(m_origin.origin, m_angle);
-        }
-    }
-    else
-    {
-        piece->Rotate(m_origin.origin, m_angle);
-    }
+    piece->Rotate(m_origin.origin, m_angle);
 
-    if (m_followGrainline || piece->IsFollowGrainline())
+    if (!m_firstCall && (m_followGrainline || piece->IsFollowGrainline()))
     {
         piece->RotateToGrainline(m_origin);
     }
@@ -168,11 +157,10 @@ auto VPUndoPieceRotate::id() const -> int
 // rotate pieces
 //---------------------------------------------------------------------------------------------------------------------
 VPUndoPiecesRotate::VPUndoPiecesRotate(const QList<VPPiecePtr> &pieces, const VPTransformationOrigon &origin,
-                                       qreal angle, qreal angleSum, bool allowMerge, QUndoCommand *parent)
+                                       qreal angle, bool allowMerge, QUndoCommand *parent)
   : VPUndoCommand(allowMerge, parent),
     m_origin(origin),
-    m_angle(angle),
-    m_angleSum(angleSum)
+    m_angle(angle)
 {
     setText(QObject::tr("rotate pieces"));
 
@@ -219,6 +207,10 @@ void VPUndoPiecesRotate::undo()
             if (m_oldTransforms.contains(p->GetUniqueID()))
             {
                 p->SetMatrix(m_oldTransforms.value(p->GetUniqueID()));
+                if (m_followGrainline || p->IsFollowGrainline())
+                {
+                    p->RotateToGrainline(m_origin);
+                }
                 emit layout->PieceTransformationChanged(p);
             }
         }
@@ -249,23 +241,9 @@ void VPUndoPiecesRotate::redo()
         VPPiecePtr const p = piece.toStrongRef();
         if (not p.isNull())
         {
-            if (m_firstCall)
-            {
-                if ((m_followGrainline || p->IsFollowGrainline()) && p->IsGrainlineEnabled())
-                {
-                    p->Rotate(m_origin.origin, m_angleSum);
-                }
-                else
-                {
-                    p->Rotate(m_origin.origin, m_angle);
-                }
-            }
-            else
-            {
-                p->Rotate(m_origin.origin, m_angle);
-            }
+            p->Rotate(m_origin.origin, m_angle);
 
-            if (m_followGrainline || p->IsFollowGrainline())
+            if (!m_firstCall && (m_followGrainline || p->IsFollowGrainline()))
             {
                 p->RotateToGrainline(m_origin);
             }

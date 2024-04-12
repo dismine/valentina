@@ -2298,11 +2298,11 @@ auto VToolSeamAllowance::FindGrainlineGeometry(const VGrainlineData &geom, const
             const auto centerPinPoint = VAbstractTool::data.GeometricObject<VPointF>(centerPin);
 
             const qreal cLength = ToPixel(length, *VDataTool::data.GetPatternUnit());
-            QLineF grainline(centerPinPoint->x(), centerPinPoint->y(), centerPinPoint->x() + cLength / 2.0,
+            QLineF grainline(centerPinPoint->x(), centerPinPoint->y(), centerPinPoint->x() - cLength / 2.0,
                              centerPinPoint->y());
 
             grainline.setAngle(rotationAngle);
-            grainline = QLineF(grainline.p2(), grainline.p1());
+            Swap(grainline);
             grainline.setLength(cLength);
 
             pos = grainline.p2();
