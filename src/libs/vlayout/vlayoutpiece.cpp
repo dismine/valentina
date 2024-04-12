@@ -1857,6 +1857,40 @@ auto VLayoutPiece::MapPassmark(VLayoutPassmark passmark, const QTransform &matri
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+auto VLayoutPiece::LineMatrix(const QPointF &topLeft, qreal angle, const QPointF &linePos, qreal maxLineWidth) const
+    -> QTransform
+{
+    QTransform labelMatrix;
+    labelMatrix.translate(topLeft.x(), topLeft.y());
+
+    if ((IsVerticallyFlipped() && IsHorizontallyFlipped()) || (!IsVerticallyFlipped() && !IsHorizontallyFlipped()))
+    {
+        labelMatrix.rotate(angle);
+    }
+    else if (IsVerticallyFlipped() || IsHorizontallyFlipped())
+    {
+        if (IsVerticallyFlipped() && !IsHorizontallyFlipped())
+        {
+            labelMatrix.scale(-1, 1);
+            labelMatrix.rotate(-angle);
+            labelMatrix.translate(-maxLineWidth, 0);
+        }
+
+        if (IsHorizontallyFlipped() && !IsVerticallyFlipped())
+        {
+            labelMatrix.scale(-1, 1);
+            labelMatrix.rotate(-angle);
+            labelMatrix.translate(-maxLineWidth, 0);
+        }
+    }
+
+    labelMatrix.translate(linePos.x(), linePos.y()); // Each string has own position
+    labelMatrix *= GetMatrix();
+
+    return labelMatrix;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 auto VLayoutPiece::BoundingRect(QVector<QPointF> points) -> QRectF
 {
     points.append(points.constFirst());
@@ -2046,7 +2080,7 @@ void VLayoutPiece::LabelStringsOutlineFont(QGraphicsItem *parent, const QVector<
         {
             labelMatrix.scale(-1, 1);
             labelMatrix.rotate(-angle);
-            labelMatrix.translate(-tm.MaxLineWidthOutlineFont(static_cast<int>(dW)), 0);
+            labelMatrix.translate(-qRound(dW), 0);
         }
         else
         {

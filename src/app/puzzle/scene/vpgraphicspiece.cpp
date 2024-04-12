@@ -73,46 +73,6 @@ QT_WARNING_POP
 namespace
 {
 //---------------------------------------------------------------------------------------------------------------------
-inline auto LineMatrix(const VPPiecePtr &piece, const QPointF &topLeft, qreal angle, const QPointF &linePos,
-                       int maxLineWidth) -> QTransform
-{
-    if (piece.isNull())
-    {
-        return {};
-    }
-
-    QTransform labelMatrix;
-    labelMatrix.translate(topLeft.x(), topLeft.y());
-
-    if ((piece->IsVerticallyFlipped() && piece->IsHorizontallyFlipped()) ||
-        (!piece->IsVerticallyFlipped() && !piece->IsHorizontallyFlipped()))
-    {
-        labelMatrix.rotate(angle);
-    }
-    else if (piece->IsVerticallyFlipped() || piece->IsHorizontallyFlipped())
-    {
-        if (piece->IsVerticallyFlipped() && !piece->IsHorizontallyFlipped())
-        {
-            labelMatrix.scale(-1, 1);
-            labelMatrix.rotate(-angle);
-            labelMatrix.translate(-maxLineWidth, 0);
-        }
-
-        if (piece->IsHorizontallyFlipped() && !piece->IsVerticallyFlipped())
-        {
-            labelMatrix.scale(-1, 1);
-            labelMatrix.rotate(-angle);
-            labelMatrix.translate(-maxLineWidth, 0);
-        }
-    }
-
-    labelMatrix.translate(linePos.x(), linePos.y()); // Each string has own position
-    labelMatrix *= piece->GetMatrix();
-
-    return labelMatrix;
-}
-
-//---------------------------------------------------------------------------------------------------------------------
 inline auto LineFont(const TextLine &tl, const QFont &base) -> QFont
 {
     QFont fnt = base;
@@ -448,7 +408,6 @@ void VPGraphicsPiece::InitPieceLabelSVGFont(const QVector<QPointF> &labelShape, 
     const qreal dH = QLineF(labelShape.at(1), labelShape.at(2)).length();
     const qreal angle = -QLineF(labelShape.at(0), labelShape.at(1)).angle();
     const QColor color = PieceColor();
-    const int maxLineWidth = tm.MaxLineWidthSVGFont(static_cast<int>(dW), penWidth);
 
     qreal dY = penWidth;
 
@@ -467,7 +426,7 @@ void VPGraphicsPiece::InitPieceLabelSVGFont(const QVector<QPointF> &labelShape, 
         const QString qsText = tl.m_qsText;
         const qreal dX = LineAlign(tl, qsText, engine, dW, penWidth);
         // set up the rotation around top-left corner matrix
-        const QTransform lineMatrix = LineMatrix(piece, labelShape.at(0), angle, QPointF(dX, dY), maxLineWidth);
+        const QTransform lineMatrix = piece->LineMatrix(labelShape.at(0), angle, QPointF(dX, dY), dW);
 
         auto *item = new QGraphicsPathItem(this);
         item->setPath(engine.DrawPath(QPointF(), qsText));
@@ -505,7 +464,6 @@ void VPGraphicsPiece::InitPieceLabelOutlineFont(const QVector<QPointF> &labelSha
     const qreal dH = QLineF(labelShape.at(1), labelShape.at(2)).length();
     const qreal angle = -QLineF(labelShape.at(0), labelShape.at(1)).angle();
     const QColor color = PieceColor();
-    const int maxLineWidth = tm.MaxLineWidthOutlineFont(static_cast<int>(dW));
     qreal const penWidth = VPApplication::VApp()->PuzzleSettings()->GetLayoutLineWidth();
 
     qreal dY = 0;
@@ -533,7 +491,7 @@ void VPGraphicsPiece::InitPieceLabelOutlineFont(const QVector<QPointF> &labelSha
 
         const qreal dX = LineAlign(tl, tl.m_qsText, fm, dW);
         // set up the rotation around top-left corner matrix
-        const QTransform lineMatrix = LineMatrix(piece, labelShape.at(0), angle, QPointF(dX, dY), maxLineWidth);
+        const QTransform lineMatrix = piece->LineMatrix(labelShape.at(0), angle, QPointF(dX, dY), dW);
 
         if (textAsPaths)
         {

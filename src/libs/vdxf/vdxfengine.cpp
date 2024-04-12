@@ -153,42 +153,6 @@ inline auto LineAlign(const TextLine &tl, const QString &text, const QFontMetric
 
     return dX;
 }
-
-//---------------------------------------------------------------------------------------------------------------------
-inline auto LineMatrix(const VLayoutPiece &piece, const QPointF &topLeft, qreal angle, const QPointF &linePos,
-                       int maxLineWidth) -> QTransform
-{
-    QTransform labelMatrix;
-    labelMatrix.translate(topLeft.x(), topLeft.y());
-
-    if ((piece.IsVerticallyFlipped() && piece.IsHorizontallyFlipped()) ||
-        (!piece.IsVerticallyFlipped() && !piece.IsHorizontallyFlipped()))
-    {
-        labelMatrix.rotate(-angle);
-    }
-    else if (piece.IsVerticallyFlipped() || piece.IsHorizontallyFlipped())
-    {
-        if (piece.IsVerticallyFlipped())
-        {
-            labelMatrix.scale(-1, 1);
-            labelMatrix.rotate(angle);
-            labelMatrix.translate(-maxLineWidth, 0);
-        }
-
-        if (piece.IsHorizontallyFlipped())
-        {
-            labelMatrix.scale(-1, 1);
-            labelMatrix.rotate(angle);
-            labelMatrix.translate(-maxLineWidth, 0);
-        }
-    }
-
-    labelMatrix.translate(linePos.x(), linePos.y()); // Each string has own position
-
-    labelMatrix *= piece.GetMatrix();
-
-    return labelMatrix;
-}
 } // namespace
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -1159,7 +1123,6 @@ void VDxfEngine::ExportPieceText(const QSharedPointer<dx_ifaceBlock> &detailBloc
 
     VTextManager const tm = detail.GetPieceLabelData();
     const QVector<TextLine> labelLines = tm.GetLabelSourceLines(qFloor(dW), tm.GetFont());
-    const int maxLineWidth = tm.MaxLineWidthOutlineFont(static_cast<int>(dW));
 
     for (const auto &tl : labelLines)
     {
@@ -1174,7 +1137,7 @@ void VDxfEngine::ExportPieceText(const QSharedPointer<dx_ifaceBlock> &detailBloc
         dY += fm.height() * scale / 2;
 
         const qreal dX = LineAlign(tl, tl.m_qsText, fm, dW);
-        QTransform const lineMatrix = LineMatrix(detail, labelShape.at(0), angle, QPointF(dX, dY), maxLineWidth);
+        QTransform const lineMatrix = detail.LineMatrix(labelShape.at(0), angle, QPointF(dX, dY), dW);
 
         QPointF const pos = lineMatrix.map(QPointF());
 

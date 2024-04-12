@@ -787,67 +787,6 @@ auto VTextManager::GetLabelSourceLines(int width, const VSvgFont &font, qreal pe
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-auto VTextManager::MaxLineWidthOutlineFont(int width) const -> int
-{
-    int maxWidth = 0;
-    for (int i = 0; i < m_liLines.count(); ++i)
-    {
-        const TextLine &tl = m_liLines.at(i);
-
-        QFont fnt = m_font;
-        fnt.setPointSize(qMax(fnt.pointSize() + tl.m_iFontSize, 1));
-        fnt.setBold(tl.m_bold);
-        fnt.setItalic(tl.m_italic);
-
-        QFontMetrics const fm(fnt);
-
-        QString qsText = tl.m_qsText;
-
-        if (fm.horizontalAdvance(qsText) > width)
-        {
-            qsText = fm.elidedText(qsText, Qt::ElideMiddle, width);
-        }
-
-        maxWidth = qMax(fm.horizontalAdvance(qsText), maxWidth);
-    }
-
-    return maxWidth;
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-auto VTextManager::MaxLineWidthSVGFont(int width, qreal penWidth) const -> int
-{
-    VSvgFontDatabase *db = VAbstractApplication::VApp()->SVGFontDatabase();
-    VSvgFontEngine engine =
-        db->FontEngine(m_svgFontFamily, SVGFontStyle::Normal, SVGFontWeight::Normal, m_svgFontPointSize);
-    VSvgFont const svgFont = engine.Font();
-
-    int maxWidth = 0;
-    for (int i = 0; i < m_liLines.count(); ++i)
-    {
-        const TextLine &tl = m_liLines.at(i);
-
-        VSvgFont fnt = svgFont;
-        fnt.SetPointSize(fnt.PointSize() + tl.m_iFontSize);
-        fnt.SetBold(tl.m_bold);
-        fnt.SetItalic(tl.m_italic);
-
-        engine = db->FontEngine(fnt);
-
-        QString qsText = tl.m_qsText;
-
-        if (engine.TextWidth(qsText, penWidth) > width)
-        {
-            qsText = engine.ElidedText(qsText, SVGTextElideMode::ElideMiddle, width);
-        }
-
-        maxWidth = qMax(qRound(engine.TextWidth(qsText, penWidth)), maxWidth);
-    }
-
-    return maxWidth;
-}
-
-//---------------------------------------------------------------------------------------------------------------------
 /**
  * @brief VTextManager::Update updates the text lines with detail data
  * @param qsName detail name

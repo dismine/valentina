@@ -240,6 +240,9 @@ public:
 
     static auto MapPassmark(VLayoutPassmark passmark, const QTransform &matrix, bool mirror) -> VLayoutPassmark;
 
+    auto LineMatrix(const QPointF &topLeft, qreal angle, const QPointF &linePos, qreal maxLineWidth) const
+        -> QTransform;
+
 protected:
     void SetGrainline(const VPieceGrainline &grainline);
 

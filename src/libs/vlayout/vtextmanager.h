@@ -104,9 +104,6 @@ public:
     auto GetLabelSourceLines(int width, const QFont &font) const -> QVector<TextLine>;
     auto GetLabelSourceLines(int width, const VSvgFont &font, qreal penWidth) const -> QVector<TextLine>;
 
-    auto MaxLineWidthOutlineFont(int width) const -> int;
-    auto MaxLineWidthSVGFont(int width, qreal penWidth) const -> int;
-
     void Update(const QString &qsName, const VPieceLabelData &data, const VContainer *pattern);
     void Update(VAbstractPattern *pDoc, const VContainer *pattern);
 

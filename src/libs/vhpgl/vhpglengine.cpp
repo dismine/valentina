@@ -159,41 +159,6 @@ inline auto LineAlign(const TextLine &tl, const QString &text, const QFontMetric
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-auto LineMatrix(const VLayoutPiece &piece, const QPointF &topLeft, qreal angle, const QPointF &linePos,
-                int maxLineWidth) -> QTransform
-{
-    QTransform labelMatrix;
-    labelMatrix.translate(topLeft.x(), topLeft.y());
-
-    if ((piece.IsVerticallyFlipped() && piece.IsHorizontallyFlipped()) ||
-        (!piece.IsVerticallyFlipped() && !piece.IsHorizontallyFlipped()))
-    {
-        labelMatrix.rotate(angle);
-    }
-    else if (piece.IsVerticallyFlipped() || piece.IsHorizontallyFlipped())
-    {
-        if (piece.IsVerticallyFlipped())
-        {
-            labelMatrix.scale(-1, 1);
-            labelMatrix.rotate(-angle);
-            labelMatrix.translate(-maxLineWidth, 0);
-        }
-
-        if (piece.IsHorizontallyFlipped())
-        {
-            labelMatrix.scale(-1, 1);
-            labelMatrix.rotate(-angle);
-            labelMatrix.translate(-maxLineWidth, 0);
-        }
-    }
-
-    labelMatrix.translate(linePos.x(), linePos.y()); // Each string has own position
-    labelMatrix *= piece.GetMatrix();
-
-    return labelMatrix;
-}
-
-//---------------------------------------------------------------------------------------------------------------------
 auto OptimizePattern(QVector<int> pattern) -> QVector<int>
 {
     // Extend the pattern if it has an odd number of elements
@@ -751,7 +716,6 @@ void VHPGLEngine::PlotLabelSVGFont(QTextStream &out, const VLayoutPiece &detail,
     const qreal dW = QLineF(labelShape.at(0), labelShape.at(1)).length();
     const qreal dH = QLineF(labelShape.at(1), labelShape.at(2)).length();
     const qreal angle = -QLineF(labelShape.at(0), labelShape.at(1)).angle();
-    const int maxLineWidth = tm.MaxLineWidthSVGFont(static_cast<int>(dW), m_penWidthPx);
 
     qreal dY = m_penWidthPx;
 
@@ -770,7 +734,7 @@ void VHPGLEngine::PlotLabelSVGFont(QTextStream &out, const VLayoutPiece &detail,
         const QString qsText = tl.m_qsText;
         const qreal dX = LineAlign(tl, qsText, engine, dW, m_penWidthPx);
         // set up the rotation around top-left corner matrix
-        const QTransform lineMatrix = LineMatrix(detail, labelShape.at(0), angle, QPointF(dX, dY), maxLineWidth);
+        const QTransform lineMatrix = detail.LineMatrix(labelShape.at(0), angle, QPointF(dX, dY), dW);
 
         QPainterPath const path = lineMatrix.map(engine.DrawPath(QPointF(), qsText));
         PlotPainterPath(out, path, Qt::SolidLine);
@@ -791,7 +755,6 @@ void VHPGLEngine::PlotLabelOutlineFont(QTextStream &out, const VLayoutPiece &det
     const qreal dW = QLineF(labelShape.at(0), labelShape.at(1)).length();
     const qreal dH = QLineF(labelShape.at(1), labelShape.at(2)).length();
     const qreal angle = -QLineF(labelShape.at(0), labelShape.at(1)).angle();
-    const int maxLineWidth = tm.MaxLineWidthOutlineFont(static_cast<int>(dW));
 
     qreal dY = 0;
 
@@ -824,7 +787,7 @@ void VHPGLEngine::PlotLabelOutlineFont(QTextStream &out, const VLayoutPiece &det
         const QString qsText = tl.m_qsText;
         const qreal dX = LineAlign(tl, qsText, fm, dW);
         // set up the rotation around top-left corner matrix
-        const QTransform lineMatrix = LineMatrix(detail, labelShape.at(0), angle, QPointF(dX, dY), maxLineWidth);
+        const QTransform lineMatrix = detail.LineMatrix(labelShape.at(0), angle, QPointF(dX, dY), dW);
 
         QPainterPath path;
 
