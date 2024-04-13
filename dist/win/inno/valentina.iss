@@ -238,7 +238,10 @@ Source: "{#buildDirectory}\*.ini"; DestDir: "{app}"; Flags: ignoreversion
 
 [InstallDelete]
 Type: filesandordirs; Name: "{app}\translations"
-Type: files; Name: "{autoappdata}\ValentinaTeam\*.ini"; Tasks: deletesettings
+Type: files; Name: "{autodocs}\Valentina\common.ini"; Tasks: deletesettings
+Type: files; Name: "{autodocs}\Valentina\Valentina.ini"; Tasks: deletesettings
+Type: files; Name: "{autodocs}\Valentina\Tape.ini"; Tasks: deletesettings
+Type: files; Name: "{autodocs}\Valentina\Puzzle.ini"; Tasks: deletesettings
 
 [Icons]
 Name: "{group}\{#MyAppName}{#MyAppStatus}"; Filename: "{app}\valentina.exe"
@@ -660,14 +663,39 @@ var
 end;
 
 procedure CurUninstallStepChanged(CurUninstallStep: TUninstallStep);
+var
+  CommonIniPath: string;
+  ValentinaIniPath: string;
+  TapeIniPath: string;
+  PuzzleIniPath: string;
 begin
   if CurUninstallStep = usPostUninstall then
   begin
-    if MsgBox(ExpandConstant('{cm:QuestionRemoveAnyExistingSettings}'), mbConfirmation, MB_YESNO or MB_DEFBUTTON2) = IDYES then
-    //this is the msg that will display after uninstall 
+    CommonIniPath := ExpandConstant('{autodocs}\Valentina\common.ini');
+    ValentinaIniPath := ExpandConstant('{autodocs}\Valentina\Valentina.ini');
+    TapeIniPath := ExpandConstant('{autodocs}\Valentina\Tape.ini');
+    PuzzleIniPath := ExpandConstant('{autodocs}\Valentina\Puzzle.ini');
+
+    if FileExists(CommonIniPath) or FileExists(ValentinaIniPath) or FileExists(TapeIniPath) or FileExists(PuzzleIniPath) then
     begin
-        DelTree(ExpandConstant('{autoappdata}\ValentinaTeam'), True, True, True);
+        if MsgBox(ExpandConstant('{cm:QuestionRemoveAnyExistingSettings}'), mbConfirmation, MB_YESNO or MB_DEFBUTTON2) = IDYES then
+        begin
+          if FileExists(CommonIniPath) then
+            if not DeleteFile(CommonIniPath) then
+              MsgBox('Failed to delete common.ini', mbError, MB_OK);
+
+          if FileExists(ValentinaIniPath) then
+            if not DeleteFile(ValentinaIniPath) then
+              MsgBox('Failed to delete Valentina.ini', mbError, MB_OK);
+
+          if FileExists(TapeIniPath) then
+            if not DeleteFile(TapeIniPath) then
+              MsgBox('Failed to delete Tape.ini', mbError, MB_OK);
+
+          if FileExists(PuzzleIniPath) then
+            if not DeleteFile(PuzzleIniPath) then
+              MsgBox('Failed to delete Puzzle.ini', mbError, MB_OK);
+        end;
     end;
-  end;
 end;
 
