@@ -43,13 +43,13 @@ environment:
   VALENTINA_VERSION: 0_7_52
 
   matrix:
-#    - job_name: Windows_Qt_6_5_(GCC_x64)
+#    - job_name: Windows_Qt_6_7_(GCC_x64)
 #      APPVEYOR_BUILD_WORKER_IMAGE: Visual Studio 2022
 #      COMPILER: mingw
 #      COMPILER_CPPSTD: gnu17
 #      COMPILER_LIBCXX: libstdc++11
-#      QT: Qt\6.5\mingw_64
-#      QT_VERSION: Qt6_5
+#      QT: Qt\6.7\mingw_64
+#      QT_VERSION: Qt6_7
 #      BUILD_SYSTEM: "qbs"
 #      QMAKE: qmake.exe
 #      ENABLE_PCH: true
@@ -119,11 +119,11 @@ environment:
       MULTI_BUNDLE: false
       DEPLOY: true
 
-    - job_name: Windows_Qt_6_5_(MSVC_x64)
+    - job_name: Windows_Qt_6_7_(MSVC_x64)
       APPVEYOR_BUILD_WORKER_IMAGE: Visual Studio 2022
       COMPILER: msvc
-      QT: Qt\6.5\msvc2019_64
-      QT_VERSION: Qt6_5
+      QT: Qt\6.7\msvc2019_64
+      QT_VERSION: Qt6_7
       BUILD_SYSTEM: "qbs"
       QMAKE: qmake.exe
       ENABLE_PCH: true
@@ -257,9 +257,9 @@ matrix:
   fast_finish: false
   exclude:
 #    - platform: x86
-#      job_name: Windows_Qt_6_5_(GCC_x64)
+#      job_name: Windows_Qt_6_7_(GCC_x64)
     - platform: x86
-      job_name: Windows_Qt_6_5_(MSVC_x64)
+      job_name: Windows_Qt_6_7_(MSVC_x64)
     - platform: x86
       job_name: Windows_Qt_5_15_(make_GCC_x64)
     - platform: x86
@@ -292,8 +292,8 @@ for:
 -
   matrix:
     only:
-#      - job_name: Windows_Qt_6_5_(GCC_x64)
-      - job_name: Windows_Qt_6_5_(MSVC_x64)
+#      - job_name: Windows_Qt_6_7_(GCC_x64)
+      - job_name: Windows_Qt_6_7_(MSVC_x64)
       - job_name: Windows_Qt_5_15_(qbs_GCC_x64)
       - job_name: Windows_Qt_5_15_(qbs_MSVC_x64)
       - job_name: Windows_Qt_5_15_(qbs_GCC_x86)
