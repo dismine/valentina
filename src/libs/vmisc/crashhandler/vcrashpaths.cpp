@@ -93,15 +93,25 @@ auto VCrashPaths::GetHandlerPath() const -> QString
 //---------------------------------------------------------------------------------------------------------------------
 auto VCrashPaths::GetReportsPath() -> QString
 {
+#if defined(Q_OS_WINDOWS)
+    return QStandardPaths::writableLocation(QStandardPaths::AppConfigLocation) + QDir::separator() +
+           QStringList{"User Data", "Crashpad", "Reports"}.join(QDir::separator());
+#else
     return QStandardPaths::writableLocation(QStandardPaths::AppConfigLocation) + QDir::separator() +
            QStringList{VER_COMPANYNAME_STR, "User Data", "Crashpad", "Reports"}.join(QDir::separator());
+#endif
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 auto VCrashPaths::GetMetricsPath() -> QString
 {
+#if defined(Q_OS_WINDOWS)
+    return QStandardPaths::writableLocation(QStandardPaths::AppConfigLocation) + QDir::separator() +
+           QStringList{"User Data", "Crashpad", "Metrics"}.join(QDir::separator());
+#else
     return QStandardPaths::writableLocation(QStandardPaths::AppConfigLocation) + QDir::separator() +
            QStringList{VER_COMPANYNAME_STR, "User Data", "Crashpad", "Metrics"}.join(QDir::separator());
+#endif
 }
 
 //---------------------------------------------------------------------------------------------------------------------
