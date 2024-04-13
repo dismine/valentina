@@ -39,6 +39,30 @@
 
 using namespace Qt::Literals::StringLiterals;
 
+namespace
+{
+auto LogDirPath(const QString &appName) -> QString
+{
+    const QString logs = QStringLiteral("Logs");
+
+    QString logDirPath = QStandardPaths::writableLocation(QStandardPaths::ConfigLocation);
+    if (logDirPath.isEmpty())
+    {
+#if defined(Q_OS_WINDOWS)
+        return QStringList{QCoreApplication::applicationDirPath(), logs, appName}.join(QDir::separator());
+#else
+        return QStringList{QDir::homePath(), VER_COMPANYNAME_STR, logs, appName}.join(QDir::separator());
+#endif
+    }
+#if defined(Q_OS_WINDOWS)
+    QString path = QStringList{logDirPath, logs}.join(QDir::separator());
+#else
+    QString path = QStringList{logDirPath, VER_COMPANYNAME_STR, logs, appName}.join(QDir::separator());
+#endif
+    return path;
+}
+} // namespace
+
 //---------------------------------------------------------------------------------------------------------------------
 VCrashPaths::VCrashPaths(QString exeDir)
   : m_exeDir(std::move(exeDir))
@@ -48,19 +72,9 @@ VCrashPaths::VCrashPaths(QString exeDir)
 //---------------------------------------------------------------------------------------------------------------------
 auto VCrashPaths::GetAttachmentPath(const QString &appName) -> QString
 {
-    QString logDirPath = QStandardPaths::writableLocation(QStandardPaths::ConfigLocation);
-    if (logDirPath.isEmpty())
-    {
-        QString const logDirName = VER_COMPANYNAME_STR + "Logs"_L1;
-#if defined(Q_OS_LINUX) || defined(Q_OS_MACOS)
-        logDirPath =
-            QDir::homePath() + QDir::separator() + logDirName + QDir::separator() + QCoreApplication::applicationName();
-#else
-        logDirPath = QCoreApplication::applicationDirPath() + QDir::separator() + logDirName + QDir::separator() +
-                     QCoreApplication::applicationName();
-#endif
-    }
-    return QStringLiteral("%1/%2-pid%3.log").arg(logDirPath, appName.toLower()).arg(QCoreApplication::applicationPid());
+    return QStringLiteral("%1/%2-pid%3.log")
+        .arg(LogDirPath(appName), appName.toLower())
+        .arg(QCoreApplication::applicationPid());
 }
 
 //---------------------------------------------------------------------------------------------------------------------

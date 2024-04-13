@@ -649,19 +649,28 @@ void VAbstractApplication::InitHighDpiScaling(int argc, char *argv[])
 //---------------------------------------------------------------------------------------------------------------------
 auto VAbstractApplication::LogDirPath() -> QString
 {
-    QString logDirPath = QStandardPaths::writableLocation(QStandardPaths::ConfigLocation);
+    const QString logs = QStringLiteral("Logs");
+
+    QString const logDirPath = QStandardPaths::writableLocation(QStandardPaths::ConfigLocation);
     if (logDirPath.isEmpty())
     {
-        QString const logDirName = QCoreApplication::organizationName() + "Logs"_L1;
-#if defined(Q_OS_LINUX) || defined(Q_OS_MACOS)
-        logDirPath =
-            QDir::homePath() + QDir::separator() + logDirName + QDir::separator() + QCoreApplication::applicationName();
+#if defined(Q_OS_WINDOWS)
+        return QStringList{QCoreApplication::applicationDirPath(), logs, QCoreApplication::applicationName()}.join(
+            QDir::separator());
 #else
-        logDirPath = QCoreApplication::applicationDirPath() + QDir::separator() + logDirName + QDir::separator() +
-                     QCoreApplication::applicationName();
+        return QStringList{QDir::homePath(), QCoreApplication::organizationName(), logs,
+                           QCoreApplication::applicationName()}
+            .join(QDir::separator());
 #endif
     }
-    return logDirPath;
+#if defined(Q_OS_WINDOWS)
+    QString path = QStringList{logDirPath, logs}.join(QDir::separator());
+#else
+    QString path =
+        QStringList{logDirPath, QCoreApplication::organizationName(), logs, QCoreApplication::applicationName()}.join(
+            QDir::separator());
+#endif
+    return path;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
