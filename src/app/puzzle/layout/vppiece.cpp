@@ -33,7 +33,6 @@
 #include "../vlayout/vlayoutpiecepath.h"
 #include "../vlayout/vtextmanager.h"
 #include "../vwidgets/vpiecegrainline.h"
-#include "QtConcurrent/qtconcurrentmap.h"
 #include "vplayout.h"
 #include "vpsheet.h"
 
@@ -42,6 +41,7 @@
 #include <QLoggingCategory>
 #include <QPainter>
 #include <QPainterPath>
+#include <QtConcurrent>
 
 #if QT_VERSION < QT_VERSION_CHECK(6, 4, 0)
 #include "../vmisc/compatibility.h"
