@@ -347,7 +347,19 @@ void VCommonSettings::SetPathCustomImage(const QString &value)
 //---------------------------------------------------------------------------------------------------------------------
 auto VCommonSettings::GetDefPathSVGFonts() -> QString
 {
-    return QDir::homePath() + QStringLiteral("/valentina/svg fonts");
+    QString const defPath = QStringList{QDir::homePath(), "Valentina"_L1, "Svg fonts"_L1}.join(QDir::separator());
+
+#if defined(Q_OS_WIN)
+    QString const docPath = QStandardPaths::writableLocation(QStandardPaths::DocumentsLocation);
+    if (docPath.isEmpty())
+    {
+        return defPath;
+    }
+
+    return QStringList{docPath, "Valentina"_L1, "Svg fonts"_L1}.join(QDir::separator());
+#else
+    return defPath;
+#endif
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -375,7 +387,20 @@ void VCommonSettings::SetPathSVGFonts(const QString &value)
 //---------------------------------------------------------------------------------------------------------------------
 auto VCommonSettings::GetDefPathFontCorrections() -> QString
 {
-    return QDir::homePath() + "/valentina/font corrections"_L1;
+    QString const defPath =
+        QStringList{QDir::homePath(), "Valentina"_L1, "Font corrections"_L1}.join(QDir::separator());
+
+#if defined(Q_OS_WIN)
+    QString const docPath = QStandardPaths::writableLocation(QStandardPaths::DocumentsLocation);
+    if (docPath.isEmpty())
+    {
+        return defPath;
+    }
+
+    return QStringList{docPath, "Valentina"_L1, "Font corrections"_L1}.join(QDir::separator());
+#else
+    return defPath;
+#endif
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -396,7 +421,20 @@ void VCommonSettings::SetPathFontCorrections(const QString &value)
 //---------------------------------------------------------------------------------------------------------------------
 auto VCommonSettings::GetDefPathKnownMeasurements() -> QString
 {
-    return QDir::homePath() + "/valentina/known measurements"_L1;
+    QString const defPath =
+        QStringList{QDir::homePath(), "Valentina"_L1, "Known measurements"_L1}.join(QDir::separator());
+
+#if defined(Q_OS_WIN)
+    QString const docPath = QStandardPaths::writableLocation(QStandardPaths::DocumentsLocation);
+    if (docPath.isEmpty())
+    {
+        return defPath;
+    }
+
+    return QStringList{docPath, "Valentina"_L1, "Known measurements"_L1}.join(QDir::separator());
+#else
+    return defPath;
+#endif
 }
 
 //---------------------------------------------------------------------------------------------------------------------

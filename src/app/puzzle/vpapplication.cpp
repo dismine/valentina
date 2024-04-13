@@ -492,6 +492,13 @@ auto VPApplication::TrVars() -> const VTranslateVars *
 //---------------------------------------------------------------------------------------------------------------------
 void VPApplication::OpenSettings()
 {
+#if defined(Q_OS_WIN)
+    QString const docPath = QStandardPaths::writableLocation(QStandardPaths::DocumentsLocation);
+    if (!docPath.isEmpty())
+    {
+        QSettings::setPath(QSettings::IniFormat, QSettings::UserScope, docPath);
+    }
+#endif
     settings = new VPSettings(QSettings::IniFormat, QSettings::UserScope, QCoreApplication::organizationName(),
                               QCoreApplication::applicationName(), this);
     connect(settings, &VPSettings::SVGFontsPathChanged, this, &VPApplication::SVGFontsPathChanged);

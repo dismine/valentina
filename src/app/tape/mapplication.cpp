@@ -614,6 +614,13 @@ void MApplication::AboutToQuit()
 //---------------------------------------------------------------------------------------------------------------------
 void MApplication::OpenSettings()
 {
+#if defined(Q_OS_WIN)
+    QString const docPath = QStandardPaths::writableLocation(QStandardPaths::DocumentsLocation);
+    if (!docPath.isEmpty())
+    {
+        QSettings::setPath(QSettings::IniFormat, QSettings::UserScope, docPath);
+    }
+#endif
     settings = new VTapeSettings(QSettings::IniFormat, QSettings::UserScope, QCoreApplication::organizationName(),
                                  QCoreApplication::applicationName(), this);
     connect(settings, &VTapeSettings::SVGFontsPathChanged, this, &MApplication::SVGFontsPathChanged);
