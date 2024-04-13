@@ -439,7 +439,7 @@ auto VPPiece::PrepareStickyPath(const QVector<QPointF> &path) -> QVector<QPointF
 //---------------------------------------------------------------------------------------------------------------------
 auto VPPiece::ClosestDistance(const QVector<QPointF> &path1, const QVector<QPointF> &path2) -> QLineF
 {
-    return QtConcurrent::blockingMappedReduced(
+    return QtConcurrent::blockingMappedReduced<QLineF>(
         path1,
         [path2](const QPointF &p1)
         {
