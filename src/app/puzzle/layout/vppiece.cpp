@@ -27,8 +27,6 @@
  *************************************************************************/
 #include "vppiece.h"
 
-#include <QtMath>
-
 #include "../vgeometry/vlayoutplacelabel.h"
 #include "../vlayout/vlayoutpiecepath.h"
 #include "../vlayout/vtextmanager.h"
@@ -42,6 +40,9 @@
 #include <QPainter>
 #include <QPainterPath>
 #include <QtConcurrent>
+#include <QtMath>
+#include <functional>
+#include <limits>
 
 #if QT_VERSION < QT_VERSION_CHECK(6, 4, 0)
 #include "../vmisc/compatibility.h"
@@ -439,35 +440,36 @@ auto VPPiece::PrepareStickyPath(const QVector<QPointF> &path) -> QVector<QPointF
 //---------------------------------------------------------------------------------------------------------------------
 auto VPPiece::ClosestDistance(const QVector<QPointF> &path1, const QVector<QPointF> &path2) -> QLineF
 {
-    return QtConcurrent::blockingMappedReduced<QLineF>(
-        path1,
-        [path2](const QPointF &p1)
-        {
-            qreal minLocalDistance = std::numeric_limits<qreal>::max();
-            QLineF localClosestDistance;
+    std::function<QLineF(const QPointF &)> const DistanceFunc = [path2](const QPointF &p1)
+    {
+        qreal minLocalDistance = std::numeric_limits<qreal>::max();
+        QLineF localClosestDistance;
 
-            for (const auto &p2 : path2)
-            {
-                QLineF const d(p1, p2);
-                qreal const length = d.length();
-                if (length < minLocalDistance)
-                {
-                    minLocalDistance = length;
-                    localClosestDistance = d;
-                }
-            }
-
-            return localClosestDistance;
-        },
-        [](QLineF &result, const QLineF &next)
+        for (const auto &p2 : path2)
         {
-            qreal const dist1 = result.length();
-            qreal const dist2 = next.length();
-            if (result.isNull() || dist2 < dist1)
+            QLineF const d(p1, p2);
+            qreal const length = d.length();
+            if (length < minLocalDistance)
             {
-                result = next;
+                minLocalDistance = length;
+                localClosestDistance = d;
             }
-        });
+        }
+
+        return localClosestDistance;
+    };
+
+    std::function<void(QLineF &, const QLineF &)> const ReduceFunc = [](QLineF &result, const QLineF &next)
+    {
+        qreal const dist1 = result.length();
+        qreal const dist2 = next.length();
+        if (result.isNull() || dist2 < dist1)
+        {
+            result = next;
+        }
+    };
+
+    return QtConcurrent::blockingMappedReduced<QLineF>(path1, DistanceFunc, ReduceFunc);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
