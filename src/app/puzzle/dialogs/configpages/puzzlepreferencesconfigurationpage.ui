@@ -598,12 +598,6 @@ This option will take an affect after restart.</string>
          <property name="orientation">
           <enum>Qt::Vertical</enum>
          </property>
-         <property name="sizeHint" stdset="0">
-          <size>
-           <width>20</width>
-           <height>540</height>
-          </size>
-         </property>
         </spacer>
        </item>
       </layout>
