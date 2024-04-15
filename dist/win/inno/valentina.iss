@@ -678,24 +678,25 @@ begin
 
     if FileExists(CommonIniPath) or FileExists(ValentinaIniPath) or FileExists(TapeIniPath) or FileExists(PuzzleIniPath) then
     begin
-        if MsgBox(ExpandConstant('{cm:QuestionRemoveAnyExistingSettings}'), mbConfirmation, MB_YESNO or MB_DEFBUTTON2) = IDYES then
-        begin
-          if FileExists(CommonIniPath) then
-            if not DeleteFile(CommonIniPath) then
-              MsgBox('Failed to delete common.ini', mbError, MB_OK);
+      if MsgBox(ExpandConstant('{cm:QuestionRemoveAnyExistingSettings}'), mbConfirmation, MB_YESNO or MB_DEFBUTTON2) = IDYES then
+      begin
+        if FileExists(CommonIniPath) then
+          if not DeleteFile(CommonIniPath) then
+            MsgBox('Failed to delete common.ini', mbError, MB_OK);
 
-          if FileExists(ValentinaIniPath) then
-            if not DeleteFile(ValentinaIniPath) then
-              MsgBox('Failed to delete Valentina.ini', mbError, MB_OK);
+        if FileExists(ValentinaIniPath) then
+          if not DeleteFile(ValentinaIniPath) then
+            MsgBox('Failed to delete Valentina.ini', mbError, MB_OK);
 
-          if FileExists(TapeIniPath) then
-            if not DeleteFile(TapeIniPath) then
-              MsgBox('Failed to delete Tape.ini', mbError, MB_OK);
+        if FileExists(TapeIniPath) then
+          if not DeleteFile(TapeIniPath) then
+            MsgBox('Failed to delete Tape.ini', mbError, MB_OK);
 
-          if FileExists(PuzzleIniPath) then
-            if not DeleteFile(PuzzleIniPath) then
-              MsgBox('Failed to delete Puzzle.ini', mbError, MB_OK);
-        end;
+        if FileExists(PuzzleIniPath) then
+          if not DeleteFile(PuzzleIniPath) then
+            MsgBox('Failed to delete Puzzle.ini', mbError, MB_OK);
+      end;
     end;
+  end;
 end;
 
