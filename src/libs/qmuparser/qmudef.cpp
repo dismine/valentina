@@ -408,11 +408,12 @@ auto FindFirstNotOf(const QString &string, const QString &chars, qmusizetype pos
 auto SupportedLocale(const QLocale &locale) -> bool
 {
 #if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
-    return locale.positiveSign().size() == 1 && locale.negativeSign().size() == 1 && locale.toString(0).size() == 1 &&
-           locale.toString(1).size() == 1 && locale.toString(2).size() == 1 && locale.toString(3).size() == 1 &&
-           locale.toString(4).size() == 1 && locale.toString(5).size() == 1 && locale.toString(6).size() == 1 &&
-           locale.toString(7).size() == 1 && locale.toString(8).size() == 1 && locale.toString(9).size() == 1 &&
-           locale.exponential().size() == 1 && locale.decimalPoint().size() == 1 && locale.groupSeparator().size() == 1;
+    return locale.name() != QStringLiteral("tok_001") && locale.positiveSign().size() == 1 &&
+           locale.negativeSign().size() == 1 && locale.toString(0).size() == 1 && locale.toString(1).size() == 1 &&
+           locale.toString(2).size() == 1 && locale.toString(3).size() == 1 && locale.toString(4).size() == 1 &&
+           locale.toString(5).size() == 1 && locale.toString(6).size() == 1 && locale.toString(7).size() == 1 &&
+           locale.toString(8).size() == 1 && locale.toString(9).size() == 1 && locale.exponential().size() == 1 &&
+           locale.decimalPoint().size() == 1 && locale.groupSeparator().size() == 1;
 #else
     Q_UNUSED(locale)
     return true;
