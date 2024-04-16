@@ -570,7 +570,8 @@ void VAbstractApplication::CheckSystemLocale()
     auto CheckLanguage = [](QStandardPaths::StandardLocation type, const QStringList &test)
     {
         const QString path = QStandardPaths::writableLocation(type);
-        return std::any_of(test.begin(), test.end(), [path](const QString &t) { return path.contains(t); });
+        bool const res = std::any_of(test.begin(), test.end(), [path](const QString &t) { return path.contains(t); });
+        return static_cast<int>(res);
     };
 
     int match = 0;
