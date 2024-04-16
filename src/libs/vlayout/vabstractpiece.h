@@ -221,18 +221,18 @@ template <class T>
 inline auto VAbstractPiece::CheckPointOnLine(QVector<T> &points, const T &iPoint, const T &prevPoint,
                                              const T &nextPoint) -> bool
 {
-    if (not IsEkvPointOnLine(iPoint, prevPoint, nextPoint))
+    if (!IsEkvPointOnLine(iPoint, prevPoint, nextPoint))
     {
         points.append(iPoint);
         return false;
     }
 
-    if (not points.isEmpty() && iPoint.TurnPoint())
+    if (!points.isEmpty() && iPoint.TurnPoint())
     {
         points.last().SetTurnPoint(true);
     }
 
-    if (not points.isEmpty() && iPoint.CurvePoint())
+    if (!points.isEmpty() && iPoint.CurvePoint())
     {
         points.last().SetCurvePoint(true);
     }
@@ -245,7 +245,7 @@ template <>
 inline auto VAbstractPiece::CheckPointOnLine<QPointF>(QVector<QPointF> &points, const QPointF &iPoint,
                                                       const QPointF &prevPoint, const QPointF &nextPoint) -> bool
 {
-    if (not IsEkvPointOnLine(iPoint, prevPoint, nextPoint))
+    if (!IsEkvPointOnLine(iPoint, prevPoint, nextPoint))
     {
         points.append(iPoint);
         return false;
