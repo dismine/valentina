@@ -38,7 +38,6 @@
 #include <QMenu>
 #include <QTimer>
 #include <QUndoStack>
-#include <chrono>
 
 using namespace std::chrono_literals;
 

@@ -76,6 +76,7 @@
 #include <QWinTaskbarProgress>
 #endif
 
+using namespace std::chrono_literals;
 using namespace Qt::Literals::StringLiterals;
 
 QT_WARNING_PUSH
@@ -234,7 +235,7 @@ auto MainWindowsNoGUI::GenerateLayout(VLayoutGenerator &lGenerator) -> bool
                         progressTimer->deleteLater();
                     }
                 });
-        progressTimer->start(1000);
+        progressTimer->start(1s);
     }
 
     LayoutErrors nestingState = LayoutErrors::NoError;

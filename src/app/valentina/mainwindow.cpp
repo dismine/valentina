@@ -6256,7 +6256,7 @@ void MainWindow::InitAutoSave()
     if (VAbstractValApplication::VApp()->ValentinaSettings()->GetAutosaveState())
     {
         const qint32 autoTime = VAbstractValApplication::VApp()->ValentinaSettings()->GetAutosaveTime();
-        m_autoSaveTimer->start(autoTime * 60000);
+        m_autoSaveTimer->start(std::chrono::minutes{autoTime});
         qCDebug(vMainWindow, "Autosaving each %d minutes.", autoTime);
     }
     VApplication::VApp()->setAutoSaveTimer(m_autoSaveTimer);

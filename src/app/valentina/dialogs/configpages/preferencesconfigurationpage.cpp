@@ -214,7 +214,8 @@ auto PreferencesConfigurationPage::Apply() -> QStringList
     QTimer *autoSaveTimer = VApplication::VApp()->getAutoSaveTimer();
     SCASSERT(autoSaveTimer)
 
-    ui->autoSaveCheck->isChecked() ? autoSaveTimer->start(ui->autoTime->value() * 60000) : autoSaveTimer->stop();
+    ui->autoSaveCheck->isChecked() ? autoSaveTimer->start(std::chrono::minutes{ui->autoTime->value()})
+                                   : autoSaveTimer->stop();
 
     settings->SetOsSeparator(ui->osOptionCheck->isChecked());
     settings->SetToolBarStyle(ui->toolBarStyleCheck->isChecked());

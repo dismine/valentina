@@ -257,9 +257,9 @@ void DialogPlaceLabel::ChosenObject(quint32 id, const SceneObject &type)
                 CheckPoint();
                 prepare = true;
 
-                timerWidth->setSingleShot(formulaTimerTimeout);
-                timerHeight->setSingleShot(formulaTimerTimeout);
-                timerAngle->setSingleShot(formulaTimerTimeout);
+                timerWidth->setSingleShot(formulaTimerTimeout.count());
+                timerHeight->setSingleShot(formulaTimerTimeout.count());
+                timerAngle->setSingleShot(formulaTimerTimeout.count());
 
                 this->setModal(true);
                 this->show();

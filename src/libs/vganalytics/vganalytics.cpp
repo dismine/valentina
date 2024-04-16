@@ -301,9 +301,8 @@ void VGAnalytics::SendAppCloseEvent(qint64 engagementTimeMsec)
     if (QNetworkReply *reply = d->SendAnalytics())
     {
         QTimer timer;
-        const int timeoutSeconds = 3; // Wait for 3 seconds
         timer.setSingleShot(true);
-        timer.start(timeoutSeconds * 1000);
+        timer.start(3s);
 
         QEventLoop loop;
         connect(&timer, &QTimer::timeout, &loop, &QEventLoop::quit);

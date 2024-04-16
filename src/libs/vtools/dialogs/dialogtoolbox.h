@@ -31,6 +31,7 @@
 #include <QSharedPointer>
 #include <QString>
 #include <QtGlobal>
+#include <chrono>
 
 #include "../vgeometry/vgeometrydef.h"
 #include "../vmisc/typedef.h"
@@ -50,7 +51,7 @@ class QListWidget;
 class VPieceNode;
 class QDialogButtonBox;
 
-constexpr int formulaTimerTimeout = 300;
+constexpr std::chrono::milliseconds formulaTimerTimeout = std::chrono::milliseconds(300);
 
 extern const QColor errorColor;
 
