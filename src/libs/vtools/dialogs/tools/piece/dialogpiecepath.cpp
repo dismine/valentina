@@ -1997,7 +1997,7 @@ void DialogPiecePath::SetFormulaPassmarkWidth(const QString &formula)
 //---------------------------------------------------------------------------------------------------------------------
 auto DialogPiecePath::GetFormulaPassmarkAngle() const -> QString
 {
-    QString const formula = ui->plainTextEditPassmarkWidth->toPlainText();
+    QString const formula = ui->plainTextEditPassmarkAngle->toPlainText();
     return VTranslateVars::TryFormulaFromUser(formula, VAbstractApplication::VApp()->Settings()->GetOsSeparator());
 }
 
