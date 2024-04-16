@@ -91,8 +91,8 @@ public:
     void Enable(bool state);
 
 public slots:
-    QNetworkReply *PostMessage(); // NOLINT(modernize-use-trailing-return-type)
-    void PostMessageFinished();
+    QNetworkReply *SendAnalytics(); // NOLINT(modernize-use-trailing-return-type)
+    void SendAnalyticsFinished();
 
 private:
     Q_DISABLE_COPY_MOVE(VGAnalyticsWorker) // NOLINT

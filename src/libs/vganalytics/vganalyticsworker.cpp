@@ -78,7 +78,7 @@ VGAnalyticsWorker::VGAnalyticsWorker(QObject *parent)
     m_screenScaleFactor = screen->logicalDotsPerInchX() / 96.0;
 
     m_timer.setInterval(m_timerInterval);
-    connect(&m_timer, &QTimer::timeout, this, &VGAnalyticsWorker::PostMessage);
+    connect(&m_timer, &QTimer::timeout, this, &VGAnalyticsWorker::SendAnalytics);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -203,7 +203,7 @@ void VGAnalyticsWorker::EnqueQueryWithCurrentTime(const QJsonObject &query)
  * The message POST is asyncroniously when the server
  * answered a signal will be emitted.
  */
-auto VGAnalyticsWorker::PostMessage() -> QNetworkReply *
+auto VGAnalyticsWorker::SendAnalytics() -> QNetworkReply *
 {
     if (m_messageQueue.isEmpty())
     {
@@ -229,7 +229,7 @@ auto VGAnalyticsWorker::PostMessage() -> QNetworkReply *
     {
         // too old.
         m_messageQueue.dequeue();
-        return PostMessage();
+        return SendAnalytics();
     }
 
     QByteArray const requestJson = QJsonDocument(buffer.postQuery).toJson(QJsonDocument::Compact);
@@ -258,7 +258,7 @@ auto VGAnalyticsWorker::PostMessage() -> QNetworkReply *
     }
 
     QNetworkReply *reply = networkManager->post(m_request, requestJson);
-    connect(reply, &QNetworkReply::finished, this, &VGAnalyticsWorker::PostMessageFinished);
+    connect(reply, &QNetworkReply::finished, this, &VGAnalyticsWorker::SendAnalyticsFinished);
     return reply;
 }
 
@@ -272,7 +272,7 @@ auto VGAnalyticsWorker::PostMessage() -> QNetworkReply *
  * If message couldn't be send then next try is when the
  * timer emits its signal.
  */
-void VGAnalyticsWorker::PostMessageFinished()
+void VGAnalyticsWorker::SendAnalyticsFinished()
 {
     auto *reply = qobject_cast<QNetworkReply *>(sender());
 
@@ -289,6 +289,6 @@ void VGAnalyticsWorker::PostMessageFinished()
     LogMessage(VGAnalytics::Debug, QStringLiteral("Message sent"));
 
     m_messageQueue.dequeue();
-    PostMessage();
+    SendAnalytics();
     reply->deleteLater();
 }
