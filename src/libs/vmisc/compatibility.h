@@ -67,13 +67,13 @@ QT_WARNING_PUSH
 QT_WARNING_DISABLE_CLANG("-Wreserved-identifier")
 
 //---------------------------------------------------------------------------------------------------------------------
-Q_DECL_CONSTEXPR inline auto operator""_L1(char ch)Q_DECL_NOEXCEPT->QLatin1Char
+Q_DECL_CONSTEVAL inline auto operator""_L1(char ch)Q_DECL_NOEXCEPT->QLatin1Char
 {
     return QLatin1Char(ch);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-Q_DECL_CONSTEXPR inline auto operator""_L1(const char *str, size_t size)Q_DECL_NOEXCEPT->QLatin1String
+Q_DECL_CONSTEVAL inline auto operator""_L1(const char *str, size_t size)Q_DECL_NOEXCEPT->QLatin1String
 {
     return QLatin1String(str, static_cast<vsizetype>(size));
 }

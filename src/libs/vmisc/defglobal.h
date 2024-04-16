@@ -59,4 +59,10 @@ class QTextCodec;
 using VTextCodec = QTextCodec;
 #endif
 
+#if __cplusplus >= 202002L && defined(__cpp_consteval) && __cpp_consteval >= 201811L
+#define Q_DECL_CONSTEVAL consteval
+#else
+#define Q_DECL_CONSTEVAL constexpr
+#endif
+
 #endif // DEFGLOBAL_H
