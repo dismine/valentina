@@ -52,11 +52,9 @@ public:
 
     auto boundingRect() const -> QRectF override;
     auto shape() const -> QPainterPath override;
-    auto contains(const QPointF &point) const -> bool override;
 
     void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget) override;
 
-    auto isObscuredBy(const QGraphicsItem *item) const -> bool override;
     auto opaqueArea() const -> QPainterPath override;
 
     auto GetShapeMode() const -> ShapeMode;

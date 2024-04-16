@@ -42,13 +42,14 @@ auto InvalidImage() -> QPixmap
     QImageReader imageReader(VBackgroundPatternImage::brokenImage);
     return QPixmap::fromImageReader(&imageReader);
 }
-}
+} // namespace
 
 //---------------------------------------------------------------------------------------------------------------------
 VBackgroundPixmapItem::VBackgroundPixmapItem(const VBackgroundPatternImage &image, VAbstractPattern *doc,
                                              QGraphicsItem *parent)
-    : VBackgroundImageItem(image, doc, parent)
-{}
+  : VBackgroundImageItem(image, doc, parent)
+{
+}
 
 //---------------------------------------------------------------------------------------------------------------------
 void VBackgroundPixmapItem::SetTransformationMode(Qt::TransformationMode mode)
@@ -81,12 +82,6 @@ auto VBackgroundPixmapItem::shape() const -> QPainterPath
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-auto VBackgroundPixmapItem::contains(const QPointF &point) const -> bool
-{
-    return QGraphicsItem::contains(point);
-}
-
-//---------------------------------------------------------------------------------------------------------------------
 void VBackgroundPixmapItem::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget)
 {
     painter->setRenderHint(QPainter::SmoothPixmapTransform, (m_transformationMode == Qt::SmoothTransformation));
@@ -100,12 +95,6 @@ void VBackgroundPixmapItem::paint(QPainter *painter, const QStyleOptionGraphicsI
     painter->restore();
 
     VBackgroundImageItem::paint(painter, option, widget);
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-auto VBackgroundPixmapItem::isObscuredBy(const QGraphicsItem *item) const -> bool
-{
-    return QGraphicsItem::isObscuredBy(item);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -219,8 +208,7 @@ auto VBackgroundPixmapItem::Pixmap() const -> QPixmap
             const double ratioX = PrintDPI / (image.dotsPerMeterX() / 100. * 2.54);
             const double ratioY = PrintDPI / (image.dotsPerMeterY() / 100. * 2.54);
             const QSize imageSize = image.size();
-            return image.scaled(qRound(imageSize.width()*ratioX),
-                                qRound(imageSize.height()*ratioY),
+            return image.scaled(qRound(imageSize.width() * ratioX), qRound(imageSize.height() * ratioY),
                                 Qt::IgnoreAspectRatio, Qt::SmoothTransformation);
         };
 

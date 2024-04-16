@@ -54,10 +54,8 @@ public:
     virtual void drawPath(const QPainterPath &path) override;
     virtual auto type() const -> Type override;
     virtual void drawPoints(const QPointF *points, int pointCount) override;
-    virtual void drawPoints(const QPoint *points, int pointCount) override;
     virtual void drawPixmap(const QRectF &r, const QPixmap &pm, const QRectF &sr) override;
     virtual void drawPolygon(const QPointF *points, int pointCount, PolygonDrawMode mode) override;
-    virtual void drawPolygon(const QPoint *points, int pointCount, PolygonDrawMode mode) override;
 
     auto getSize() const -> QSize;
     void setSize(const QSize &value);

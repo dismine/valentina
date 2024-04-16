@@ -675,12 +675,6 @@ public:
         flags = 0;
         name = "";
     }
-
-protected:
-    auto parseCode(int code, const std::unique_ptr<dxfReader> &reader) -> bool override
-    {
-        return DRW_TableEntry::parseCode(code, reader);
-    }
 };
 
 namespace DRW

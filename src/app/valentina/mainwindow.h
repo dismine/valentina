@@ -121,7 +121,9 @@ protected:
     void CleanLayout() override;
     void PrepareSceneList(PreviewQuatilty quality) override;
     void ExportToCSVData(const QString &fileName, bool withHeader, int mib, const QChar &separator) override;
+#if defined(Q_OS_MAC)
     void ToolBarStyle(QToolBar *bar) const override;
+#endif
 private slots:
     void ScaleChanged(qreal scale);
     void MouseMove(const QPointF &scenePos);

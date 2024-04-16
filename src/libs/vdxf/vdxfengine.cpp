@@ -310,12 +310,6 @@ void VDxfEngine::drawLines(const QLineF *lines, int lineCount)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VDxfEngine::drawLines(const QLine *lines, int lineCount)
-{
-    QPaintEngine::drawLines(lines, lineCount);
-}
-
-//---------------------------------------------------------------------------------------------------------------------
 void VDxfEngine::drawPolygon(const QPointF *points, int pointCount, PolygonDrawMode mode)
 {
     Q_UNUSED(mode)
@@ -378,12 +372,6 @@ void VDxfEngine::drawPolygon(const QPointF *points, int pointCount, PolygonDrawM
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VDxfEngine::drawPolygon(const QPoint *points, int pointCount, QPaintEngine::PolygonDrawMode mode)
-{
-    QPaintEngine::drawPolygon(points, pointCount, mode);
-}
-
-//---------------------------------------------------------------------------------------------------------------------
 void VDxfEngine::drawEllipse(const QRectF &rect)
 {
     const QRectF newRect = m_matrix.mapRect(rect);
@@ -422,12 +410,6 @@ void VDxfEngine::drawEllipse(const QRectF &rect)
     ellipse->lineType = GetPenStyle();
 
     m_input->AddEntity(ellipse);
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-void VDxfEngine::drawEllipse(const QRect &rect)
-{
-    QPaintEngine::drawEllipse(rect);
 }
 
 //---------------------------------------------------------------------------------------------------------------------

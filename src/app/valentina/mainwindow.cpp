@@ -1989,20 +1989,20 @@ void MainWindow::ExportToCSVData(const QString &fileName, bool withHeader, int m
     csv.toCSV(fileName, error, withHeader, separator, VTextCodec::codecForMib(mib));
 }
 
+#if defined(Q_OS_MAC)
 //---------------------------------------------------------------------------------------------------------------------
 void MainWindow::ToolBarStyle(QToolBar *bar) const
 {
     MainWindowsNoGUI::ToolBarStyle(bar);
 
-#if defined(Q_OS_MAC)
     // Temporary fix issue with toolbar black background on mac with OpenGL render
     if (VAbstractValApplication::VApp()->getSceneView() &&
         VAbstractValApplication::VApp()->getSceneView()->IsOpenGLRender())
     {
         bar->setStyle(QStyleFactory::create("fusion"));
     }
-#endif
 }
+#endif
 
 //---------------------------------------------------------------------------------------------------------------------
 void MainWindow::ScaleChanged(qreal scale)

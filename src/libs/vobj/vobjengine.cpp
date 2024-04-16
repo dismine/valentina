@@ -247,12 +247,6 @@ void VObjEngine::drawPolygon(const QPointF *points, int pointCount, PolygonDrawM
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VObjEngine::drawPolygon(const QPoint *points, int pointCount, QPaintEngine::PolygonDrawMode mode)
-{
-    QPaintEngine::drawPolygon(points, pointCount, mode);
-}
-
-//---------------------------------------------------------------------------------------------------------------------
 auto VObjEngine::type() const -> QPaintEngine::Type
 {
     return QPaintEngine::User;
@@ -271,12 +265,6 @@ void VObjEngine::drawPoints(const QPointF *points, int pointCount)
                 << "0.000000" << Qt::endl;
         ++globalPointsCount;
     }
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-void VObjEngine::drawPoints(const QPoint *points, int pointCount)
-{
-    QPaintEngine::drawPoints(points, pointCount);
 }
 
 //---------------------------------------------------------------------------------------------------------------------

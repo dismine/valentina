@@ -79,11 +79,8 @@ public:
 
     void drawPath(const QPainterPath &path) override;
     void drawLines(const QLineF *lines, int lineCount) override;
-    void drawLines(const QLine *lines, int lineCount) override;
     void drawPolygon(const QPointF *points, int pointCount, PolygonDrawMode mode) override;
-    void drawPolygon(const QPoint *points, int pointCount, PolygonDrawMode mode) override;
     void drawEllipse(const QRectF &rect) override;
-    void drawEllipse(const QRect &rect) override;
     void drawTextItem(const QPointF &p, const QTextItem &textItem) override;
     void drawPixmap(const QRectF &r, const QPixmap &pm, const QRectF &sr) override;
 

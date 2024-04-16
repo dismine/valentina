@@ -63,12 +63,6 @@ VToolCut::VToolCut(const VToolCutInitData &initData, QGraphicsItem *parent)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VToolCut::Disable(bool disable, const QString &namePP)
-{
-    VToolSinglePoint::Disable(disable, namePP);
-}
-
-//---------------------------------------------------------------------------------------------------------------------
 void VToolCut::SetDetailsMode(bool mode)
 {
     detailsMode = mode;

@@ -79,7 +79,6 @@ public:
     auto CurveName() const -> QString;
 
 public slots:
-    void Disable(bool disable, const QString &namePP) override;
     void SetDetailsMode(bool mode) override;
     void FullUpdateFromFile() override;
 
