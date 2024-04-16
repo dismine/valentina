@@ -91,10 +91,10 @@ private:
     /** @brief number number of handled objects */
     qint32 number{0};
 
-    auto GetP1() const -> const QSharedPointer<VPointF>;
-    auto GetP2() const -> const QSharedPointer<VPointF>;
-    auto GetP3() const -> const QSharedPointer<VPointF>;
-    auto GetP4() const -> const QSharedPointer<VPointF>;
+    auto GetP1() const -> QSharedPointer<VPointF>;
+    auto GetP2() const -> QSharedPointer<VPointF>;
+    auto GetP3() const -> QSharedPointer<VPointF>;
+    auto GetP4() const -> QSharedPointer<VPointF>;
 };
 
 //---------------------------------------------------------------------------------------------------------------------

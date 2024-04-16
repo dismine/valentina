@@ -369,13 +369,13 @@ void DialogSpline::FXLength2()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-auto DialogSpline::GetP1() const -> const QSharedPointer<VPointF>
+auto DialogSpline::GetP1() const -> QSharedPointer<VPointF>
 {
     return data->GeometricObject<VPointF>(getCurrentObjectId(ui->comboBoxP1));
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-auto DialogSpline::GetP4() const -> const QSharedPointer<VPointF>
+auto DialogSpline::GetP4() const -> QSharedPointer<VPointF>
 {
     return data->GeometricObject<VPointF>(getCurrentObjectId(ui->comboBoxP4));
 }

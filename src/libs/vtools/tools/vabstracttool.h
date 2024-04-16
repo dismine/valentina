@@ -97,7 +97,7 @@ public:
 
     static auto CheckFormula(const quint32 &toolId, QString &formula, VContainer *data) -> qreal;
 
-    static auto Colors() -> const QStringList;
+    static auto Colors() -> QStringList;
     static auto ColorsList() -> QMap<QString, QString>;
 
     static auto GetRecord(const quint32 id, const Tool &toolType, VAbstractPattern *doc) -> VToolRecord;

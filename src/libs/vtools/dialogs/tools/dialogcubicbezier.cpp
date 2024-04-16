@@ -284,25 +284,25 @@ void DialogCubicBezier::ValidateAlias()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-auto DialogCubicBezier::GetP1() const -> const QSharedPointer<VPointF>
+auto DialogCubicBezier::GetP1() const -> QSharedPointer<VPointF>
 {
     return data->GeometricObject<VPointF>(getCurrentObjectId(ui->comboBoxP1));
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-auto DialogCubicBezier::GetP2() const -> const QSharedPointer<VPointF>
+auto DialogCubicBezier::GetP2() const -> QSharedPointer<VPointF>
 {
     return data->GeometricObject<VPointF>(getCurrentObjectId(ui->comboBoxP2));
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-auto DialogCubicBezier::GetP3() const -> const QSharedPointer<VPointF>
+auto DialogCubicBezier::GetP3() const -> QSharedPointer<VPointF>
 {
     return data->GeometricObject<VPointF>(getCurrentObjectId(ui->comboBoxP3));
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-auto DialogCubicBezier::GetP4() const -> const QSharedPointer<VPointF>
+auto DialogCubicBezier::GetP4() const -> QSharedPointer<VPointF>
 {
     return data->GeometricObject<VPointF>(getCurrentObjectId(ui->comboBoxP4));
 }

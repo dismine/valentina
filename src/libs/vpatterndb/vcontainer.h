@@ -126,9 +126,9 @@ public:
 
     static auto UniqueNamespace() -> QString;
 
-    template <typename T> auto GeometricObject(const quint32 &id) const -> const QSharedPointer<T>;
-    auto GetGObject(quint32 id) const -> const QSharedPointer<VGObject>;
-    static auto GetFakeGObject(quint32 id) -> const QSharedPointer<VGObject>;
+    template <typename T> auto GeometricObject(const quint32 &id) const -> QSharedPointer<T>;
+    auto GetGObject(quint32 id) const -> QSharedPointer<VGObject>;
+    static auto GetFakeGObject(quint32 id) -> QSharedPointer<VGObject>;
     auto GetPiece(quint32 id) const -> VPiece;
     auto GetPiecePath(quint32 id) const -> VPiecePath;
     auto GetPieceForPiecePath(quint32 id) const -> quint32;
@@ -178,20 +178,20 @@ public:
     void FillPiecesAreas(Unit unit);
 
     auto CalculationGObjects() const -> const QHash<quint32, QSharedPointer<VGObject>> *;
-    auto DataPieces() const -> const QHash<quint32, VPiece> *;
+    auto DataPieces() const -> QHash<quint32, VPiece> *;
     auto DataVariables() const -> const QHash<QString, QSharedPointer<VInternalVariable>> *;
 
-    auto DataMeasurements() const -> const QMap<QString, QSharedPointer<VMeasurement>>;
-    auto DataMeasurementsWithSeparators() const -> const QMap<QString, QSharedPointer<VMeasurement>>;
-    auto DataIncrements() const -> const QMap<QString, QSharedPointer<VIncrement>>;
-    auto DataIncrementsWithSeparators() const -> const QMap<QString, QSharedPointer<VIncrement>>;
-    auto DataLengthLines() const -> const QMap<QString, QSharedPointer<VLengthLine>>;
-    auto DataLengthCurves() const -> const QMap<QString, QSharedPointer<VCurveLength>>;
-    auto DataCurvesCLength() const -> const QMap<QString, QSharedPointer<VCurveCLength>>;
-    auto DataAngleLines() const -> const QMap<QString, QSharedPointer<VLineAngle>>;
-    auto DataRadiusesArcs() const -> const QMap<QString, QSharedPointer<VArcRadius>>;
-    auto DataAnglesCurves() const -> const QMap<QString, QSharedPointer<VCurveAngle>>;
-    auto DataPieceArea() const -> const QMap<QString, QSharedPointer<VPieceArea>>;
+    auto DataMeasurements() const -> QMap<QString, QSharedPointer<VMeasurement>>;
+    auto DataMeasurementsWithSeparators() const -> QMap<QString, QSharedPointer<VMeasurement>>;
+    auto DataIncrements() const -> QMap<QString, QSharedPointer<VIncrement>>;
+    auto DataIncrementsWithSeparators() const -> QMap<QString, QSharedPointer<VIncrement>>;
+    auto DataLengthLines() const -> QMap<QString, QSharedPointer<VLengthLine>>;
+    auto DataLengthCurves() const -> QMap<QString, QSharedPointer<VCurveLength>>;
+    auto DataCurvesCLength() const -> QMap<QString, QSharedPointer<VCurveCLength>>;
+    auto DataAngleLines() const -> QMap<QString, QSharedPointer<VLineAngle>>;
+    auto DataRadiusesArcs() const -> QMap<QString, QSharedPointer<VArcRadius>>;
+    auto DataAnglesCurves() const -> QMap<QString, QSharedPointer<VCurveAngle>>;
+    auto DataPieceArea() const -> QMap<QString, QSharedPointer<VPieceArea>>;
 
     auto IsUnique(const QString &name) const -> bool;
     static auto IsUnique(const QString &name, const QString &nspace) -> bool;
@@ -224,7 +224,7 @@ private:
 
     template <typename T> void UpdateObject(const quint32 &id, const QSharedPointer<T> &point);
 
-    template <typename T> auto DataVar(const VarType &type) const -> const QMap<QString, QSharedPointer<T>>;
+    template <typename T> auto DataVar(const VarType &type) const -> QMap<QString, QSharedPointer<T>>;
 
     static void ClearNamespace(const QString &nspace);
 };
@@ -236,7 +236,7 @@ Q_DECLARE_TYPEINFO(VContainer, Q_MOVABLE_TYPE); // NOLINT
  */
 
 //---------------------------------------------------------------------------------------------------------------------
-template <typename T> auto VContainer::GeometricObject(const quint32 &id) const -> const QSharedPointer<T>
+template <typename T> auto VContainer::GeometricObject(const quint32 &id) const -> QSharedPointer<T>
 {
     if (id == NULL_ID)
     {

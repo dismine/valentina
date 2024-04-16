@@ -247,7 +247,7 @@ void VAbstractTool::PerformDelete()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-auto VAbstractTool::Colors() -> const QStringList
+auto VAbstractTool::Colors() -> QStringList
 {
     return QStringList{ColorBlack,       ColorGreen,         ColorBlue,        ColorDarkRed,        ColorDarkGreen,
                        ColorDarkBlue,    ColorYellow,        ColorLightSalmon, ColorGoldenRod,      ColorOrange,

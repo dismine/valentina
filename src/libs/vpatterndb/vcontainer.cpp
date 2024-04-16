@@ -170,7 +170,7 @@ void VContainer::ClearNamespace(const QString &nspace)
  * @return point
  */
 // cppcheck-suppress unusedFunction
-auto VContainer::GetGObject(quint32 id) const -> const QSharedPointer<VGObject>
+auto VContainer::GetGObject(quint32 id) const -> QSharedPointer<VGObject>
 {
     if (d->calculationObjects.contains(id))
     {
@@ -186,7 +186,7 @@ auto VContainer::GetGObject(quint32 id) const -> const QSharedPointer<VGObject>
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-auto VContainer::GetFakeGObject(quint32 id) -> const QSharedPointer<VGObject>
+auto VContainer::GetFakeGObject(quint32 id) -> QSharedPointer<VGObject>
 {
     auto *obj = new VGObject();
     obj->setId(id);
@@ -575,13 +575,13 @@ void VContainer::FillPiecesAreas(Unit unit)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-auto VContainer::DataMeasurements() const -> const QMap<QString, QSharedPointer<VMeasurement>>
+auto VContainer::DataMeasurements() const -> QMap<QString, QSharedPointer<VMeasurement>>
 {
     return DataVar<VMeasurement>(VarType::Measurement);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-auto VContainer::DataMeasurementsWithSeparators() const -> const QMap<QString, QSharedPointer<VMeasurement>>
+auto VContainer::DataMeasurementsWithSeparators() const -> QMap<QString, QSharedPointer<VMeasurement>>
 {
     QMap<QString, QSharedPointer<VMeasurement>> measurements = DataVar<VMeasurement>(VarType::Measurement);
     QMap<QString, QSharedPointer<VMeasurement>> const separators = DataVar<VMeasurement>(VarType::MeasurementSeparator);
@@ -592,13 +592,13 @@ auto VContainer::DataMeasurementsWithSeparators() const -> const QMap<QString, Q
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-auto VContainer::DataIncrements() const -> const QMap<QString, QSharedPointer<VIncrement>>
+auto VContainer::DataIncrements() const -> QMap<QString, QSharedPointer<VIncrement>>
 {
     return DataVar<VIncrement>(VarType::Increment);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-auto VContainer::DataIncrementsWithSeparators() const -> const QMap<QString, QSharedPointer<VIncrement>>
+auto VContainer::DataIncrementsWithSeparators() const -> QMap<QString, QSharedPointer<VIncrement>>
 {
     QMap<QString, QSharedPointer<VIncrement>> increments = DataVar<VIncrement>(VarType::Increment);
     QMap<QString, QSharedPointer<VIncrement>> const separators = DataVar<VIncrement>(VarType::IncrementSeparator);
@@ -609,43 +609,43 @@ auto VContainer::DataIncrementsWithSeparators() const -> const QMap<QString, QSh
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-auto VContainer::DataLengthLines() const -> const QMap<QString, QSharedPointer<VLengthLine>>
+auto VContainer::DataLengthLines() const -> QMap<QString, QSharedPointer<VLengthLine>>
 {
     return DataVar<VLengthLine>(VarType::LineLength);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-auto VContainer::DataLengthCurves() const -> const QMap<QString, QSharedPointer<VCurveLength>>
+auto VContainer::DataLengthCurves() const -> QMap<QString, QSharedPointer<VCurveLength>>
 {
     return DataVar<VCurveLength>(VarType::CurveLength);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-auto VContainer::DataCurvesCLength() const -> const QMap<QString, QSharedPointer<VCurveCLength>>
+auto VContainer::DataCurvesCLength() const -> QMap<QString, QSharedPointer<VCurveCLength>>
 {
     return DataVar<VCurveCLength>(VarType::CurveCLength);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-auto VContainer::DataAngleLines() const -> const QMap<QString, QSharedPointer<VLineAngle>>
+auto VContainer::DataAngleLines() const -> QMap<QString, QSharedPointer<VLineAngle>>
 {
     return DataVar<VLineAngle>(VarType::LineAngle);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-auto VContainer::DataRadiusesArcs() const -> const QMap<QString, QSharedPointer<VArcRadius>>
+auto VContainer::DataRadiusesArcs() const -> QMap<QString, QSharedPointer<VArcRadius>>
 {
     return DataVar<VArcRadius>(VarType::ArcRadius);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-auto VContainer::DataAnglesCurves() const -> const QMap<QString, QSharedPointer<VCurveAngle>>
+auto VContainer::DataAnglesCurves() const -> QMap<QString, QSharedPointer<VCurveAngle>>
 {
     return DataVar<VCurveAngle>(VarType::CurveAngle);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-auto VContainer::DataPieceArea() const -> const QMap<QString, QSharedPointer<VPieceArea>>
+auto VContainer::DataPieceArea() const -> QMap<QString, QSharedPointer<VPieceArea>>
 {
     QMap<QString, QSharedPointer<VPieceArea>> externalAreas = DataVar<VPieceArea>(VarType::PieceExternalArea);
     QMap<QString, QSharedPointer<VPieceArea>> const seamLineAreas = DataVar<VPieceArea>(VarType::PieceSeamLineArea);
@@ -708,7 +708,7 @@ auto VContainer::GetTrVars() const -> const VTranslateVars *
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-template <typename T> auto VContainer::DataVar(const VarType &type) const -> const QMap<QString, QSharedPointer<T>>
+template <typename T> auto VContainer::DataVar(const VarType &type) const -> QMap<QString, QSharedPointer<T>>
 {
     QMap<QString, QSharedPointer<T>> map;
     // Sorting QHash by id
@@ -771,7 +771,7 @@ auto VContainer::CalculationGObjects() const -> const QHash<quint32, QSharedPoin
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-auto VContainer::DataPieces() const -> const QHash<quint32, VPiece> *
+auto VContainer::DataPieces() const -> QHash<quint32, VPiece> *
 {
     return d->pieces.data();
 }
