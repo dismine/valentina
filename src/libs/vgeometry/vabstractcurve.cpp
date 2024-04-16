@@ -611,7 +611,7 @@ auto VAbstractCurve::ShowDirection(const QVector<DirectionArrow> &arrows, qreal 
 {
     QPainterPath path;
 
-    for (auto arrow : arrows)
+    for (const auto &arrow : arrows)
     {
         if (not arrow.first.isNull() && not arrow.second.isNull())
         {

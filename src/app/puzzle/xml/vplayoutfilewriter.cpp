@@ -95,7 +95,7 @@ auto LinesToString(const QVector<QLineF> &lines) -> QString
 {
     QStringList l;
     l.reserve(lines.size());
-    for (auto line : lines)
+    for (const auto &line : lines)
     {
         l.append(LineToString(line));
     }

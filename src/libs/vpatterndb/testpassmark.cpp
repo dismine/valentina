@@ -44,7 +44,7 @@ namespace
 auto PassmarkShapeToJson(const QVector<QLineF> &shape) -> QJsonArray
 {
     QJsonArray shapeArray;
-    for (auto line : shape)
+    for (const auto &line : shape)
     {
         QJsonObject const lineObject{
             {"type", "QLineF"},

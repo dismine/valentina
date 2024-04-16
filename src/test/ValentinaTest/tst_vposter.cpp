@@ -35,8 +35,8 @@
 #include <QtTest>
 
 //---------------------------------------------------------------------------------------------------------------------
-TST_VPoster::TST_VPoster(QObject *parent) :
-    QObject(parent)
+TST_VPoster::TST_VPoster(QObject *parent)
+  : QObject(parent)
 {
 }
 
@@ -45,12 +45,12 @@ TST_VPoster::TST_VPoster(QObject *parent) :
 void TST_VPoster::BigPoster()
 {
     QPrinter printer;
-    printer.setResolution(static_cast<int>(PrintDPI));// By default
+    printer.setResolution(static_cast<int>(PrintDPI)); // By default
     printer.setPageSize(QPageSize(QPageSize::A4));
     printer.setFullPage(true);
     // We need to set full page because otherwise QPrinter->pageRect returns different values in Windows and Linux
 
-    //sets the margins to 0 to perform the test.
+    // sets the margins to 0 to perform the test.
     printer.setPageMargins(QMarginsF(), QPageLayout::Millimeter);
 
     const QSize image(2622, 3178); // Little bit bigger than A1
@@ -59,7 +59,7 @@ void TST_VPoster::BigPoster()
 
     QCOMPARE(poster.size(), 12);
 
-    for (auto p : poster)
+    for (const auto &p : poster)
     {
         QCOMPARE(p.rect.size(), PageRect(printer).size());
     }
@@ -70,7 +70,7 @@ void TST_VPoster::BigPoster()
 void TST_VPoster::SmallPoster()
 {
     QPrinter printer;
-    printer.setResolution(96);// By default
+    printer.setResolution(96); // By default
     printer.setPageSize(QPageSize(QPageSize::A4));
 
     const QSize image(700, 1000); // Little bit less than A4
@@ -89,8 +89,8 @@ auto TST_VPoster::PageRect(const QPrinter &printer) const -> QRect
     // we can't use method pageRect(QPrinter::Point). Our dpi different can be different.
     // We convert value yourself to pixels.
     const QRectF rect = printer.pageRect(QPrinter::Millimeter);
-    QRect pageRect(qFloor(ToPixel(rect.x())), qFloor(ToPixel(rect.y())),
-                   qFloor(ToPixel(rect.width())), qFloor(ToPixel(rect.height())));
+    QRect pageRect(qFloor(ToPixel(rect.x())), qFloor(ToPixel(rect.y())), qFloor(ToPixel(rect.width())),
+                   qFloor(ToPixel(rect.height())));
     return pageRect;
 }
 

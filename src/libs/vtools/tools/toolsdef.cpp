@@ -51,7 +51,7 @@ auto SourceToObjects(const QVector<SourceItem> &source) -> QVector<quint32>
     QVector<quint32> ids;
     ids.reserve(source.size());
 
-    for (auto s : source)
+    for (const auto &s : source)
     {
         ids.append(s.id);
     }
