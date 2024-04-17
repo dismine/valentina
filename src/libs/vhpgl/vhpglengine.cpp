@@ -72,7 +72,7 @@ Q_GLOBAL_STATIC_WITH_ARGS(const QString, mCI, ("CI"_L1)) // NOLINT circle
 QT_WARNING_POP
 
 //---------------------------------------------------------------------------------------------------------------------
-constexpr inline auto ConvertPixels(qreal pix) -> qreal
+constexpr auto ConvertPixels(qreal pix) -> qreal
 {
     // Default plating measurement in the HP-GL(HP-GL/2) graphics mode is 1/1016"(0.025mm).
     // 40 plotter units = 1 mm

@@ -37,12 +37,12 @@ constexpr unsigned DEBUG_VERSION = 52;
 
 auto AppVersionStr() -> const QString &;
 
-constexpr inline auto FormatVersion(unsigned major, unsigned minor, unsigned patch) -> unsigned
+constexpr auto FormatVersion(unsigned major, unsigned minor, unsigned patch) -> unsigned
 {
     return ((major << 16u) | (minor << 8u) | patch);
 }
 
-constexpr inline auto AppVersion() -> unsigned
+constexpr auto AppVersion() -> unsigned
 {
     return FormatVersion(MAJOR_VERSION, MINOR_VERSION, DEBUG_VERSION);
 }

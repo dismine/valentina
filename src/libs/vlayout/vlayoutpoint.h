@@ -104,37 +104,37 @@ auto operator>>(QDataStream &, VLayoutPoint &) -> QDataStream &;
 #endif
 
 //---------------------------------------------------------------------------------------------------------------------
-constexpr inline VLayoutPoint::VLayoutPoint(qreal xpos, qreal ypos)
+constexpr VLayoutPoint::VLayoutPoint(qreal xpos, qreal ypos)
   : QPointF(xpos, ypos)
 {
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-constexpr inline VLayoutPoint::VLayoutPoint(QPointF p)
+constexpr VLayoutPoint::VLayoutPoint(QPointF p)
   : QPointF(p)
 {
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-constexpr inline auto VLayoutPoint::TurnPoint() const -> bool
+constexpr auto VLayoutPoint::TurnPoint() const -> bool
 {
     return m_turnPoint;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-constexpr inline void VLayoutPoint::SetTurnPoint(bool newTurnPoint)
+constexpr void VLayoutPoint::SetTurnPoint(bool newTurnPoint)
 {
     m_turnPoint = newTurnPoint;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-constexpr inline auto VLayoutPoint::CurvePoint() const -> bool
+constexpr auto VLayoutPoint::CurvePoint() const -> bool
 {
     return m_curvePoint;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-constexpr inline void VLayoutPoint::SetCurvePoint(bool newCurvePoint)
+constexpr void VLayoutPoint::SetCurvePoint(bool newCurvePoint)
 {
     m_curvePoint = newCurvePoint;
 }
