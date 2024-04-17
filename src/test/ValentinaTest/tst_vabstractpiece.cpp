@@ -948,6 +948,10 @@ void TST_VAbstractPiece::BrokenDetailEquidistant_data()
     ASSERT_TEST_CASE("Piece 2. CSA Exclude", QStringLiteral("://custom_seam_allwance_exclude_p2/input.json"),
                      QStringLiteral("://custom_seam_allwance_exclude_p2/output.json"),
                      37.795275590551185 /*seam allowance width 1 cm*/);
+
+    // See the file "valentina_private_collection/bugs/25L Knitting Bag.val"
+    ASSERT_TEST_CASE("Base", QStringLiteral("://25L_Knitting_Bag/input.json"),
+                     QStringLiteral("://25L_Knitting_Bag/output.json"), 36 /*seam allowance width*/);
 }
 
 //---------------------------------------------------------------------------------------------------------------------

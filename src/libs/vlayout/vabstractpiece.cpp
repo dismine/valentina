@@ -1258,6 +1258,12 @@ auto VAbstractPiece::EkvPoint(QVector<VRawSAPoint> points, const VSAPoint &p1Lin
         }
         return points;
     }
+    else if (a > 345)
+    {
+        points.append(VRawSAPoint(bigLine1.p2(), p2Line1.CurvePoint(), p2Line1.TurnPoint()));
+        points.append(VRawSAPoint(bigLine2.p1(), p2Line1.CurvePoint(), p2Line1.TurnPoint()));
+        return points;
+    }
 
     QPointF crosPoint;
     const QLineF::IntersectType type = bigLine1.intersects(bigLine2, &crosPoint);

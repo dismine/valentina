@@ -221,7 +221,8 @@ template <class T>
 inline auto VAbstractPiece::CheckPointOnLine(QVector<T> &points, const T &iPoint, const T &prevPoint,
                                              const T &nextPoint) -> bool
 {
-    if (!IsEkvPointOnLine(iPoint, prevPoint, nextPoint))
+    if (!VGObject::IsPointOnLineSegment(iPoint, prevPoint, nextPoint) ||
+        !IsEkvPointOnLine(iPoint, prevPoint, nextPoint))
     {
         points.append(iPoint);
         return false;
@@ -245,7 +246,7 @@ template <>
 inline auto VAbstractPiece::CheckPointOnLine<QPointF>(QVector<QPointF> &points, const QPointF &iPoint,
                                                       const QPointF &prevPoint, const QPointF &nextPoint) -> bool
 {
-    if (!IsEkvPointOnLine(iPoint, prevPoint, nextPoint))
+    if (!VGObject::IsPointOnLineSegment(iPoint, prevPoint, nextPoint, accuracyPointOnLine / 4.))
     {
         points.append(iPoint);
         return false;
