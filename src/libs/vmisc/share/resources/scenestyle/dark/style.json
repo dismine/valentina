@@ -24,7 +24,7 @@
     "PointColor": "#ffd900",
     "NodeLabelColor": "#d9d9d9",
     "NodeLabelHoverColor": "#ffd900",
-    "NodeLabelLineColor": "#80ffd900",
+    "NodeLabelLineColor": [255, 217, 0, 32],
     "LabelBackgroundColor": "#80ffd900",
     "LabelTextColor": "#d9d9d9",
     "LabelModeColor": "white"

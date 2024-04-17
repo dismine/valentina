@@ -21,7 +21,7 @@
     "PointColor": "black",
     "NodeLabelColor": "black",
     "NodeLabelHoverColor": "green",
-    "NodeLabelLineColor": [0, 0, 0],
+    "NodeLabelLineColor": [0, 0, 0, 16],
     "LabelBackgroundColor": [251, 251, 175, 128],
     "LabelTextColor": "black",
     "LabelModeColor": "black"
