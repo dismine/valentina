@@ -40,8 +40,8 @@ public:
 
     static const QString LabelTemplateMaxVerStr;
     static const QString CurrentSchema;
-    static Q_DECL_CONSTEXPR const unsigned LabelTemplateMinVer = FormatVersion(1, 0, 0);
-    static Q_DECL_CONSTEXPR const unsigned LabelTemplateMaxVer = FormatVersion(1, 0, 0);
+    static constexpr const unsigned LabelTemplateMinVer = FormatVersion(1, 0, 0);
+    static constexpr const unsigned LabelTemplateMaxVer = FormatVersion(1, 0, 0);
 
     static auto XSDSchemas() -> QHash <unsigned, QString>;
 

@@ -46,8 +46,8 @@ public:
 
     static const QString LayoutMaxVerStr;
     static const QString CurrentSchema;
-    static Q_DECL_CONSTEXPR const unsigned LayoutMinVer = FormatVersion(0, 1, 0);
-    static Q_DECL_CONSTEXPR const unsigned LayoutMaxVer = FormatVersion(0, 1, 9);
+    static constexpr const unsigned LayoutMinVer = FormatVersion(0, 1, 0);
+    static constexpr const unsigned LayoutMaxVer = FormatVersion(0, 1, 9);
 
     static auto XSDSchemas() -> QHash<unsigned, QString>;
 

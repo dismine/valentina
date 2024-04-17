@@ -53,8 +53,8 @@ public:
 
     static const QString PatternMaxVerStr;
     static const QString CurrentSchema;
-    static Q_DECL_CONSTEXPR const unsigned PatternMinVer = FormatVersion(0, 1, 4);
-    static Q_DECL_CONSTEXPR const unsigned PatternMaxVer = FormatVersion(0, 9, 5);
+    static constexpr const unsigned PatternMinVer = FormatVersion(0, 1, 4);
+    static constexpr const unsigned PatternMaxVer = FormatVersion(0, 9, 5);
 
     static auto XSDSchemas() -> QHash<unsigned, QString>;
 

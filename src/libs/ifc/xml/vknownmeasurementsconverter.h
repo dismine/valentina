@@ -43,8 +43,8 @@ public:
 
     static const QString KnownMeasurementsMaxVerStr;
     static const QString CurrentSchema;
-    static Q_DECL_CONSTEXPR const unsigned KnownMeasurementsMinVer = FormatVersion(1, 0, 0);
-    static Q_DECL_CONSTEXPR const unsigned KnownMeasurementsMaxVer = FormatVersion(1, 0, 0);
+    static constexpr const unsigned KnownMeasurementsMinVer = FormatVersion(1, 0, 0);
+    static constexpr const unsigned KnownMeasurementsMaxVer = FormatVersion(1, 0, 0);
 
     static auto XSDSchemas() -> QHash<unsigned, QString>;
 

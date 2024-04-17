@@ -46,46 +46,46 @@ QT_WARNING_DISABLE_CLANG("-Wnon-virtual-dtor")
 class VSAPoint final : public VLayoutPoint
 {
 public:
-    Q_DECL_CONSTEXPR VSAPoint() noexcept;
+    constexpr VSAPoint() noexcept;
 
-    Q_DECL_CONSTEXPR VSAPoint(qreal xpos, qreal ypos);
-    Q_DECL_CONSTEXPR explicit VSAPoint(QPointF p);
-    Q_DECL_CONSTEXPR explicit VSAPoint(const VLayoutPoint &p);
+    constexpr VSAPoint(qreal xpos, qreal ypos);
+    constexpr explicit VSAPoint(QPointF p);
+    constexpr explicit VSAPoint(const VLayoutPoint &p);
 
-    Q_DECL_CONSTEXPR auto GetSABefore() const -> qreal;
-    Q_DECL_CONSTEXPR auto GetSAAfter() const -> qreal;
+    constexpr auto GetSABefore() const -> qreal;
+    constexpr auto GetSAAfter() const -> qreal;
 
-    Q_DECL_CONSTEXPR auto GetAngleType() const -> PieceNodeAngle;
+    constexpr auto GetAngleType() const -> PieceNodeAngle;
 
-    Q_DECL_CONSTEXPR auto IsManualPasskmarkLength() const -> bool;
-    Q_DECL_CONSTEXPR auto IsManualPasskmarkWidth() const -> bool;
-    Q_DECL_CONSTEXPR auto IsManualPasskmarkAngle() const -> bool;
+    constexpr auto IsManualPasskmarkLength() const -> bool;
+    constexpr auto IsManualPasskmarkWidth() const -> bool;
+    constexpr auto IsManualPasskmarkAngle() const -> bool;
 
-    Q_DECL_CONSTEXPR auto GetPasskmarkLength() const -> qreal;
-    Q_DECL_CONSTEXPR auto GetPasskmarkWidth() const -> qreal;
-    Q_DECL_CONSTEXPR auto GetPasskmarkAngle() const -> qreal;
+    constexpr auto GetPasskmarkLength() const -> qreal;
+    constexpr auto GetPasskmarkWidth() const -> qreal;
+    constexpr auto GetPasskmarkAngle() const -> qreal;
 
-    Q_DECL_RELAXED_CONSTEXPR auto GetSABefore(qreal width) const -> qreal;
-    Q_DECL_RELAXED_CONSTEXPR auto GetSAAfter(qreal width) const -> qreal;
+    constexpr auto GetSABefore(qreal width) const -> qreal;
+    constexpr auto GetSAAfter(qreal width) const -> qreal;
 
-    Q_DECL_RELAXED_CONSTEXPR void SetSABefore(qreal value);
-    Q_DECL_RELAXED_CONSTEXPR void SetSAAfter(qreal value);
+    constexpr void SetSABefore(qreal value);
+    constexpr void SetSAAfter(qreal value);
 
-    Q_DECL_RELAXED_CONSTEXPR void SetAngleType(PieceNodeAngle value);
+    constexpr void SetAngleType(PieceNodeAngle value);
 
-    Q_DECL_RELAXED_CONSTEXPR void SetManualPasskmarkLength(bool value);
-    Q_DECL_RELAXED_CONSTEXPR void SetManualPasskmarkWidth(bool value);
-    Q_DECL_RELAXED_CONSTEXPR void SetManualPasskmarkAngle(bool value);
+    constexpr void SetManualPasskmarkLength(bool value);
+    constexpr void SetManualPasskmarkWidth(bool value);
+    constexpr void SetManualPasskmarkAngle(bool value);
 
-    Q_DECL_RELAXED_CONSTEXPR void SetPasskmarkLength(qreal value);
-    Q_DECL_RELAXED_CONSTEXPR void SetPasskmarkWidth(qreal value);
-    Q_DECL_RELAXED_CONSTEXPR void SetPasskmarkAngle(qreal value);
+    constexpr void SetPasskmarkLength(qreal value);
+    constexpr void SetPasskmarkWidth(qreal value);
+    constexpr void SetPasskmarkAngle(qreal value);
 
-    Q_DECL_RELAXED_CONSTEXPR auto MaxLocalSA(qreal width) const -> qreal;
-    Q_DECL_RELAXED_CONSTEXPR auto PassmarkLength(qreal width) const -> qreal;
+    constexpr auto MaxLocalSA(qreal width) const -> qreal;
+    constexpr auto PassmarkLength(qreal width) const -> qreal;
 
-    Q_DECL_CONSTEXPR auto IsPassmarkClockwiseOpening() const -> bool;
-    Q_DECL_RELAXED_CONSTEXPR void SetPassmarkClockwiseOpening(bool clockwise);
+    constexpr auto IsPassmarkClockwiseOpening() const -> bool;
+    constexpr void SetPassmarkClockwiseOpening(bool clockwise);
 
     auto toJson() const -> QJsonObject;
 
@@ -110,36 +110,36 @@ Q_DECLARE_METATYPE(VSAPoint)                  // NOLINT
 Q_DECLARE_TYPEINFO(VSAPoint, Q_MOVABLE_TYPE); // NOLINT
 
 //---------------------------------------------------------------------------------------------------------------------
-Q_DECL_CONSTEXPR inline VSAPoint::VSAPoint() noexcept // NOLINT(hicpp-use-equals-default)
+constexpr inline VSAPoint::VSAPoint() noexcept // NOLINT(hicpp-use-equals-default)
 {
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-Q_DECL_CONSTEXPR inline VSAPoint::VSAPoint(qreal xpos, qreal ypos)
+constexpr inline VSAPoint::VSAPoint(qreal xpos, qreal ypos)
   : VLayoutPoint(xpos, ypos)
 {
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-Q_DECL_CONSTEXPR inline VSAPoint::VSAPoint(QPointF p)
+constexpr inline VSAPoint::VSAPoint(QPointF p)
   : VLayoutPoint(p)
 {
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-Q_DECL_CONSTEXPR inline VSAPoint::VSAPoint(const VLayoutPoint &p)
+constexpr inline VSAPoint::VSAPoint(const VLayoutPoint &p)
   : VLayoutPoint(p)
 {
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-Q_DECL_CONSTEXPR inline auto VSAPoint::GetSABefore() const -> qreal
+constexpr inline auto VSAPoint::GetSABefore() const -> qreal
 {
     return m_before;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-Q_DECL_RELAXED_CONSTEXPR inline auto VSAPoint::GetSABefore(qreal width) const -> qreal
+constexpr inline auto VSAPoint::GetSABefore(qreal width) const -> qreal
 {
     if (m_before < 0)
     {
@@ -149,19 +149,19 @@ Q_DECL_RELAXED_CONSTEXPR inline auto VSAPoint::GetSABefore(qreal width) const ->
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-Q_DECL_RELAXED_CONSTEXPR inline void VSAPoint::SetSABefore(qreal value)
+constexpr inline void VSAPoint::SetSABefore(qreal value)
 {
     value < 0 ? m_before = -1 : m_before = value;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-Q_DECL_CONSTEXPR inline auto VSAPoint::GetSAAfter() const -> qreal
+constexpr inline auto VSAPoint::GetSAAfter() const -> qreal
 {
     return m_after;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-Q_DECL_RELAXED_CONSTEXPR inline auto VSAPoint::GetSAAfter(qreal width) const -> qreal
+constexpr inline auto VSAPoint::GetSAAfter(qreal width) const -> qreal
 {
     if (m_after < 0)
     {
@@ -171,103 +171,103 @@ Q_DECL_RELAXED_CONSTEXPR inline auto VSAPoint::GetSAAfter(qreal width) const -> 
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-Q_DECL_RELAXED_CONSTEXPR inline void VSAPoint::SetSAAfter(qreal value)
+constexpr inline void VSAPoint::SetSAAfter(qreal value)
 {
     value < 0 ? m_after = -1 : m_after = value;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-Q_DECL_CONSTEXPR inline auto VSAPoint::GetAngleType() const -> PieceNodeAngle
+constexpr inline auto VSAPoint::GetAngleType() const -> PieceNodeAngle
 {
     return m_angle;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-Q_DECL_RELAXED_CONSTEXPR inline void VSAPoint::SetAngleType(PieceNodeAngle value)
+constexpr inline void VSAPoint::SetAngleType(PieceNodeAngle value)
 {
     m_angle = value;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-Q_DECL_CONSTEXPR inline auto VSAPoint::IsManualPasskmarkLength() const -> bool
+constexpr inline auto VSAPoint::IsManualPasskmarkLength() const -> bool
 {
     return m_manualPassmarkLength;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-Q_DECL_CONSTEXPR inline auto VSAPoint::IsManualPasskmarkWidth() const -> bool
+constexpr inline auto VSAPoint::IsManualPasskmarkWidth() const -> bool
 {
     return m_manualPassmarkWidth;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-Q_DECL_CONSTEXPR inline auto VSAPoint::IsManualPasskmarkAngle() const -> bool
+constexpr inline auto VSAPoint::IsManualPasskmarkAngle() const -> bool
 {
     return m_manualPassmarkAngle;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-Q_DECL_RELAXED_CONSTEXPR inline void VSAPoint::SetManualPasskmarkLength(bool value)
+constexpr inline void VSAPoint::SetManualPasskmarkLength(bool value)
 {
     m_manualPassmarkLength = value;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-Q_DECL_RELAXED_CONSTEXPR inline void VSAPoint::SetManualPasskmarkWidth(bool value)
+constexpr inline void VSAPoint::SetManualPasskmarkWidth(bool value)
 {
     m_manualPassmarkWidth = value;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-Q_DECL_RELAXED_CONSTEXPR inline void VSAPoint::SetManualPasskmarkAngle(bool value)
+constexpr inline void VSAPoint::SetManualPasskmarkAngle(bool value)
 {
     m_manualPassmarkAngle = value;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-Q_DECL_CONSTEXPR inline auto VSAPoint::GetPasskmarkLength() const -> qreal
+constexpr inline auto VSAPoint::GetPasskmarkLength() const -> qreal
 {
     return m_passmarkLength;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-Q_DECL_CONSTEXPR inline auto VSAPoint::GetPasskmarkWidth() const -> qreal
+constexpr inline auto VSAPoint::GetPasskmarkWidth() const -> qreal
 {
     return m_passmarkWidth;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-Q_DECL_CONSTEXPR inline auto VSAPoint::GetPasskmarkAngle() const -> qreal
+constexpr inline auto VSAPoint::GetPasskmarkAngle() const -> qreal
 {
     return m_passmarkAngle;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-Q_DECL_RELAXED_CONSTEXPR inline void VSAPoint::SetPasskmarkLength(qreal value)
+constexpr inline void VSAPoint::SetPasskmarkLength(qreal value)
 {
     m_passmarkLength = value;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-Q_DECL_RELAXED_CONSTEXPR inline void VSAPoint::SetPasskmarkWidth(qreal value)
+constexpr inline void VSAPoint::SetPasskmarkWidth(qreal value)
 {
     m_passmarkWidth = value;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-Q_DECL_RELAXED_CONSTEXPR inline void VSAPoint::SetPasskmarkAngle(qreal value)
+constexpr inline void VSAPoint::SetPasskmarkAngle(qreal value)
 {
     m_passmarkAngle = value;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-Q_DECL_RELAXED_CONSTEXPR inline auto VSAPoint::MaxLocalSA(qreal width) const -> qreal
+constexpr inline auto VSAPoint::MaxLocalSA(qreal width) const -> qreal
 {
     return qMax(GetSAAfter(width), GetSABefore(width));
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-Q_DECL_RELAXED_CONSTEXPR inline auto VSAPoint::PassmarkLength(qreal width) const -> qreal
+constexpr inline auto VSAPoint::PassmarkLength(qreal width) const -> qreal
 {
     if (not m_manualPassmarkLength)
     {
@@ -280,13 +280,13 @@ Q_DECL_RELAXED_CONSTEXPR inline auto VSAPoint::PassmarkLength(qreal width) const
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-Q_DECL_CONSTEXPR inline auto VSAPoint::IsPassmarkClockwiseOpening() const -> bool
+constexpr inline auto VSAPoint::IsPassmarkClockwiseOpening() const -> bool
 {
     return m_passmarkClockwiseOpening;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-Q_DECL_RELAXED_CONSTEXPR inline void VSAPoint::SetPassmarkClockwiseOpening(bool clockwise)
+constexpr inline void VSAPoint::SetPassmarkClockwiseOpening(bool clockwise)
 {
     m_passmarkClockwiseOpening = clockwise;
 }

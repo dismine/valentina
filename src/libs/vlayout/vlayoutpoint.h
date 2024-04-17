@@ -41,15 +41,15 @@ QT_WARNING_DISABLE_CLANG("-Wnon-virtual-dtor")
 class VLayoutPoint : public QPointF
 {
 public:
-    Q_DECL_CONSTEXPR VLayoutPoint() = default;
-    Q_DECL_CONSTEXPR VLayoutPoint(qreal xpos, qreal ypos);
-    Q_DECL_CONSTEXPR explicit VLayoutPoint(QPointF p);
+    constexpr VLayoutPoint() = default;
+    constexpr VLayoutPoint(qreal xpos, qreal ypos);
+    constexpr explicit VLayoutPoint(QPointF p);
 
-    Q_DECL_CONSTEXPR auto TurnPoint() const -> bool;
-    Q_DECL_CONSTEXPR auto CurvePoint() const -> bool;
+    constexpr auto TurnPoint() const -> bool;
+    constexpr auto CurvePoint() const -> bool;
 
-    Q_DECL_RELAXED_CONSTEXPR void SetTurnPoint(bool newTurnPoint);
-    Q_DECL_RELAXED_CONSTEXPR void SetCurvePoint(bool newCurvePoint);
+    constexpr void SetTurnPoint(bool newTurnPoint);
+    constexpr void SetCurvePoint(bool newCurvePoint);
 
     auto toJson() const -> QJsonObject;
     auto ToQPointF() const -> QPointF;
@@ -104,37 +104,37 @@ auto operator>>(QDataStream &, VLayoutPoint &) -> QDataStream &;
 #endif
 
 //---------------------------------------------------------------------------------------------------------------------
-Q_DECL_CONSTEXPR inline VLayoutPoint::VLayoutPoint(qreal xpos, qreal ypos)
+constexpr inline VLayoutPoint::VLayoutPoint(qreal xpos, qreal ypos)
   : QPointF(xpos, ypos)
 {
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-Q_DECL_CONSTEXPR inline VLayoutPoint::VLayoutPoint(QPointF p)
+constexpr inline VLayoutPoint::VLayoutPoint(QPointF p)
   : QPointF(p)
 {
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-Q_DECL_CONSTEXPR inline auto VLayoutPoint::TurnPoint() const -> bool
+constexpr inline auto VLayoutPoint::TurnPoint() const -> bool
 {
     return m_turnPoint;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-Q_DECL_RELAXED_CONSTEXPR inline void VLayoutPoint::SetTurnPoint(bool newTurnPoint)
+constexpr inline void VLayoutPoint::SetTurnPoint(bool newTurnPoint)
 {
     m_turnPoint = newTurnPoint;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-Q_DECL_CONSTEXPR inline auto VLayoutPoint::CurvePoint() const -> bool
+constexpr inline auto VLayoutPoint::CurvePoint() const -> bool
 {
     return m_curvePoint;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-Q_DECL_RELAXED_CONSTEXPR inline void VLayoutPoint::SetCurvePoint(bool newCurvePoint)
+constexpr inline void VLayoutPoint::SetCurvePoint(bool newCurvePoint)
 {
     m_curvePoint = newCurvePoint;
 }

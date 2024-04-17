@@ -48,8 +48,8 @@ public:
 
     static const QString MeasurementMaxVerStr;
     static const QString CurrentSchema;
-    static Q_DECL_CONSTEXPR const unsigned MeasurementMinVer = FormatVersion(0, 2, 0);
-    static Q_DECL_CONSTEXPR const unsigned MeasurementMaxVer = FormatVersion(0, 6, 1);
+    static constexpr const unsigned MeasurementMinVer = FormatVersion(0, 2, 0);
+    static constexpr const unsigned MeasurementMaxVer = FormatVersion(0, 6, 1);
 
     static auto XSDSchemas() -> QHash<unsigned, QString>;
 

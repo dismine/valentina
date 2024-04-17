@@ -70,7 +70,7 @@ using namespace Qt::Literals::StringLiterals;
 
 namespace
 {
-Q_DECL_CONSTEXPR auto DAYS_TO_KEEP_LOGS = 3;
+constexpr auto DAYS_TO_KEEP_LOGS = 3;
 
 auto FilterLocales(const QStringList &locales) -> QStringList
 {

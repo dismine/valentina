@@ -902,7 +902,7 @@ void TST_VSpline::TestCutSpline()
     VSpline spline1(spl.GetP1(), spl1p2, spl1p3, p);
     spline1.SetApproximationScale(0.5);
 
-    Q_DECL_RELAXED_CONSTEXPR qreal eps = ToPixel(0.0001, Unit::Mm);
+    constexpr qreal eps = ToPixel(0.0001, Unit::Mm);
     QVERIFY(UnitConvertor(spline1.GetLength(), Unit::Px, Unit::Cm) - result < eps);
 }
 

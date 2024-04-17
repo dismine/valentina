@@ -41,18 +41,18 @@ QT_WARNING_DISABLE_CLANG("-Wnon-virtual-dtor")
 class VRawSAPoint final : public VLayoutPoint
 {
 public:
-    Q_DECL_CONSTEXPR VRawSAPoint() = default;
-    Q_DECL_CONSTEXPR VRawSAPoint(qreal xpos, qreal ypos);
-    Q_DECL_CONSTEXPR explicit VRawSAPoint(QPointF p);
-    Q_DECL_CONSTEXPR explicit VRawSAPoint(const VLayoutPoint &p);
-    Q_DECL_RELAXED_CONSTEXPR VRawSAPoint(QPointF p, bool curvePoint, bool turnPoint);
-    Q_DECL_RELAXED_CONSTEXPR VRawSAPoint(QPointF p, bool curvePoint, bool turnPoint, bool loopPoint);
+    constexpr VRawSAPoint() = default;
+    constexpr VRawSAPoint(qreal xpos, qreal ypos);
+    constexpr explicit VRawSAPoint(QPointF p);
+    constexpr explicit VRawSAPoint(const VLayoutPoint &p);
+    constexpr VRawSAPoint(QPointF p, bool curvePoint, bool turnPoint);
+    constexpr VRawSAPoint(QPointF p, bool curvePoint, bool turnPoint, bool loopPoint);
 
-    Q_DECL_CONSTEXPR auto LoopPoint() const -> bool;
-    Q_DECL_RELAXED_CONSTEXPR void SetLoopPoint(bool loopPoint);
+    constexpr auto LoopPoint() const -> bool;
+    constexpr void SetLoopPoint(bool loopPoint);
 
-    Q_DECL_CONSTEXPR auto Primary() const -> bool;
-    Q_DECL_RELAXED_CONSTEXPR void SetPrimary(bool primary);
+    constexpr auto Primary() const -> bool;
+    constexpr void SetPrimary(bool primary);
 
     auto toJson() const -> QJsonObject;
 
@@ -65,25 +65,25 @@ Q_DECLARE_METATYPE(VRawSAPoint)                  // NOLINT
 Q_DECLARE_TYPEINFO(VRawSAPoint, Q_MOVABLE_TYPE); // NOLINT
 
 //---------------------------------------------------------------------------------------------------------------------
-Q_DECL_CONSTEXPR inline VRawSAPoint::VRawSAPoint(qreal xpos, qreal ypos)
+constexpr inline VRawSAPoint::VRawSAPoint(qreal xpos, qreal ypos)
   : VLayoutPoint(xpos, ypos)
 {
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-Q_DECL_CONSTEXPR inline VRawSAPoint::VRawSAPoint(QPointF p)
+constexpr inline VRawSAPoint::VRawSAPoint(QPointF p)
   : VLayoutPoint(p)
 {
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-Q_DECL_CONSTEXPR inline VRawSAPoint::VRawSAPoint(const VLayoutPoint &p)
+constexpr inline VRawSAPoint::VRawSAPoint(const VLayoutPoint &p)
   : VLayoutPoint(p)
 {
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-Q_DECL_RELAXED_CONSTEXPR inline VRawSAPoint::VRawSAPoint(QPointF p, bool curvePoint, bool turnPoint)
+constexpr inline VRawSAPoint::VRawSAPoint(QPointF p, bool curvePoint, bool turnPoint)
   : VLayoutPoint(p)
 {
     SetCurvePoint(curvePoint);
@@ -91,7 +91,7 @@ Q_DECL_RELAXED_CONSTEXPR inline VRawSAPoint::VRawSAPoint(QPointF p, bool curvePo
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-Q_DECL_RELAXED_CONSTEXPR inline VRawSAPoint::VRawSAPoint(QPointF p, bool curvePoint, bool turnPoint, bool loopPoint)
+constexpr inline VRawSAPoint::VRawSAPoint(QPointF p, bool curvePoint, bool turnPoint, bool loopPoint)
   : VLayoutPoint(p),
     m_loopPoint(loopPoint)
 {
@@ -100,25 +100,25 @@ Q_DECL_RELAXED_CONSTEXPR inline VRawSAPoint::VRawSAPoint(QPointF p, bool curvePo
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-Q_DECL_CONSTEXPR inline auto VRawSAPoint::LoopPoint() const -> bool
+constexpr inline auto VRawSAPoint::LoopPoint() const -> bool
 {
     return m_loopPoint;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-Q_DECL_RELAXED_CONSTEXPR inline void VRawSAPoint::SetLoopPoint(bool loopPoint)
+constexpr inline void VRawSAPoint::SetLoopPoint(bool loopPoint)
 {
     m_loopPoint = loopPoint;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-Q_DECL_CONSTEXPR inline auto VRawSAPoint::Primary() const -> bool
+constexpr inline auto VRawSAPoint::Primary() const -> bool
 {
     return m_primary;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-Q_DECL_RELAXED_CONSTEXPR inline void VRawSAPoint::SetPrimary(bool primary)
+constexpr inline void VRawSAPoint::SetPrimary(bool primary)
 {
     m_primary = primary;
 }

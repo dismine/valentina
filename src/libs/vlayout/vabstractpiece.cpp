@@ -75,7 +75,7 @@ inline auto IsOutsidePoint(QPointF p1, QPointF p2, QPointF px) -> bool
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-Q_DECL_CONSTEXPR auto PointPosition(const QPointF &p, const QLineF &line) -> qreal
+constexpr auto PointPosition(const QPointF &p, const QLineF &line) -> qreal
 {
     return (line.p2().x() - line.p1().x()) * (p.y() - line.p1().y()) -
            (line.p2().y() - line.p1().y()) * (p.x() - line.p1().x());

@@ -39,8 +39,8 @@ public:
 
     static const QString WatermarkMaxVerStr;
     static const QString CurrentSchema;
-    static Q_DECL_CONSTEXPR const unsigned WatermarkMinVer = FormatVersion(1, 0, 0);
-    static Q_DECL_CONSTEXPR const unsigned WatermarkMaxVer = FormatVersion(1, 1, 0);
+    static constexpr const unsigned WatermarkMinVer = FormatVersion(1, 0, 0);
+    static constexpr const unsigned WatermarkMaxVer = FormatVersion(1, 1, 0);
 
     static auto XSDSchemas() -> QHash <unsigned, QString>;
 

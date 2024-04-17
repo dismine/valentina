@@ -489,7 +489,7 @@ template <typename T> constexpr inline auto InchToPixel(T val) noexcept -> T
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-Q_DECL_RELAXED_CONSTEXPR inline auto ToPixel(double val, const Unit &unit) noexcept -> double
+constexpr inline auto ToPixel(double val, const Unit &unit) noexcept -> double
 {
     switch (unit)
     {
@@ -526,7 +526,7 @@ template <typename T> constexpr inline auto PixelToCm(T pix) -> T
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-Q_DECL_RELAXED_CONSTEXPR inline auto FromPixel(double pix, const Unit &unit) -> double
+constexpr inline auto FromPixel(double pix, const Unit &unit) -> double
 {
     switch (unit)
     {
@@ -565,7 +565,7 @@ template <typename T> constexpr inline auto Cm2ToPixel2(T val) -> T
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-Q_DECL_RELAXED_CONSTEXPR inline auto ToPixel2(double val, const Unit &unit) -> double
+constexpr inline auto ToPixel2(double val, const Unit &unit) -> double
 {
     switch (unit)
     {
@@ -604,7 +604,7 @@ template <typename T> constexpr inline auto Pixel2ToCm2(T pix) -> T
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-Q_DECL_RELAXED_CONSTEXPR inline auto FromPixel2(double pix, const Unit &unit) -> double
+constexpr inline auto FromPixel2(double pix, const Unit &unit) -> double
 {
     switch (unit)
     {
@@ -623,7 +623,7 @@ Q_DECL_RELAXED_CONSTEXPR inline auto FromPixel2(double pix, const Unit &unit) ->
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-Q_DECL_RELAXED_CONSTEXPR inline auto UnitConvertor(qreal value, const Unit &from, const Unit &to) -> qreal
+constexpr inline auto UnitConvertor(qreal value, const Unit &from, const Unit &to) -> qreal
 {
     switch (from)
     {
@@ -698,7 +698,7 @@ Q_DECL_RELAXED_CONSTEXPR inline auto UnitConvertor(qreal value, const Unit &from
  * @brief UnitConvertor Converts the values of the given margin from given unit to the new unit.
  * returns a new instand of QMarginsF.
  */
-Q_DECL_RELAXED_CONSTEXPR inline auto UnitConvertor(const QMarginsF &margins, const Unit &from, const Unit &to)
+constexpr inline auto UnitConvertor(const QMarginsF &margins, const Unit &from, const Unit &to)
     -> QMarginsF
 {
     const qreal left = UnitConvertor(margins.left(), from, to);
@@ -725,8 +725,8 @@ Q_REQUIRED_RESULT auto darkenPixmap(const QPixmap &pixmap) -> QPixmap;
 
 void ShowInGraphicalShell(const QString &filePath);
 
-Q_REQUIRED_RESULT Q_DECL_RELAXED_CONSTEXPR static inline auto VFuzzyComparePossibleNulls(double p1, double p2) -> bool;
-Q_DECL_RELAXED_CONSTEXPR static inline auto VFuzzyComparePossibleNulls(double p1, double p2) -> bool
+Q_REQUIRED_RESULT constexpr static inline auto VFuzzyComparePossibleNulls(double p1, double p2) -> bool;
+constexpr static inline auto VFuzzyComparePossibleNulls(double p1, double p2) -> bool
 {
     if (qFuzzyIsNull(p1))
     {

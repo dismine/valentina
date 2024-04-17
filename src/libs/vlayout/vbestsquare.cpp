@@ -33,7 +33,7 @@
 namespace
 {
 //---------------------------------------------------------------------------------------------------------------------
-Q_DECL_CONSTEXPR inline auto Square(QSizeF size) -> qint64
+constexpr inline auto Square(QSizeF size) -> qint64
 {
     return static_cast<qint64>(size.width() * size.height());
 }

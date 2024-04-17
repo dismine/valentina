@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <pattern labelPrefix="en" passmarkLength="">
     <!--Pattern created with Valentina v0.7.52.0 (https://smart-pattern.com.ua/).-->
-    <version>0.9.2</version>
+    <version>0.9.1</version>
     <unit>cm</unit>
     <description>Jeans mit gerader Seitennaht
 Müller u. Sohn Zeitschrift Ausgabe 10.20 , Seite 47-50 vom PDf (bzw. 14 - 17 vom Herrenteil)</description>
