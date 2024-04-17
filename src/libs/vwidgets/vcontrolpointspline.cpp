@@ -82,10 +82,10 @@ VControlPointSpline::VControlPointSpline(const vsizetype &indexSpline, SplinePoi
 {
     Init();
 
+    this->setPos(controlPoint);
     this->setFlag(QGraphicsItem::ItemIsMovable, true);
     this->setFlag(QGraphicsItem::ItemSendsGeometryChanges, true);
     this->setAcceptHoverEvents(true);
-    this->setPos(controlPoint);
 
     // Do not draw control point in constructor. It creates artefacts if they enabled from start.
 }
