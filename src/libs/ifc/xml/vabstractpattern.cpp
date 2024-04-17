@@ -2612,6 +2612,8 @@ auto VAbstractPattern::GetGroups(const QString &patternPieceName) -> QMap<quint3
         QDomElement const groups = CreateGroups(patternPieceName);
         if (not groups.isNull())
         {
+            QVector<QPair<quint32, quint32>> items;
+
             QDomNode domNode = groups.firstChild();
             while (not domNode.isNull())
             {
@@ -2630,7 +2632,7 @@ auto VAbstractPattern::GetGroups(const QString &patternPieceName) -> QMap<quint3
                             groupData.tags = FilterGroupTags(GetParametrEmptyString(group, AttrTags));
                             groupData.tool = GetParametrUInt(group, AttrTool, NULL_ID_STR);
 
-                            QVector<QPair<quint32, quint32>> items;
+                            items.resize(0);
 
                             const QDomNodeList nodeList = group.childNodes();
                             const qint32 num = nodeList.size();

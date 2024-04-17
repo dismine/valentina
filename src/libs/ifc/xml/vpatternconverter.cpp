@@ -1186,13 +1186,15 @@ void VPatternConverter::ParseModelingToV0_2_4(const QDomElement &modeling)
     // TODO. Delete if minimal supported version is 0.2.4
     Q_STATIC_ASSERT_X(VPatternConverter::PatternMinVer < FormatVersion(0, 2, 4), "Time to refactor the code.");
 
+    QVector<quint32> children;
+
     QDomElement node = modeling.firstChild().toElement();
     while (not node.isNull())
     {
         if (node.tagName() == *strTools)
         {
             const quint32 toolId = node.attribute(*strId).toUInt();
-            QVector<quint32> children;
+            children.resize(0);
             QDomElement childNode = node.nextSibling().toElement();
             while (not childNode.isNull())
             {
@@ -2221,6 +2223,8 @@ void VPatternConverter::TagUnionDetailsToV0_4_0()
     // TODO. Delete if minimal supported version is 0.4.0
     Q_STATIC_ASSERT_X(VPatternConverter::PatternMinVer < FormatVersion(0, 4, 0), "Time to refactor the code.");
 
+    QVector<QDomElement> nodes;
+
     const QDomNodeList list = elementsByTagName(*strTools);
     for (int i = 0; i < list.size(); ++i)
     {
@@ -2230,7 +2234,7 @@ void VPatternConverter::TagUnionDetailsToV0_4_0()
         {
             const QStringList tags = QStringList() << *strDet << *strChildren;
 
-            QVector<QDomElement> nodes;
+            nodes.resize(0);
             QDomElement tagChildrenNodes = createElement(*strChildren);
 
             const QDomNodeList childList = toolDOM.childNodes();
