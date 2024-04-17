@@ -1149,8 +1149,9 @@ void VDomDocument::SetLabelTemplate(QDomElement &element, const QVector<VLabelTe
 //---------------------------------------------------------------------------------------------------------------------
 void VDomDocument::ValidateVersion(const QString &version)
 {
-    const QRegularExpression rx(QStringLiteral("^([0-9]|[1-9][0-9]|[1-2][0-5][0-5]).([0-9]|[1-9][0-9]|[1-2][0-5][0-5])"
-                                               ".([0-9]|[1-9][0-9]|[1-2][0-5][0-5])$"));
+    static const QRegularExpression rx(
+        QStringLiteral("^([0-9]|[1-9][0-9]|[1-2][0-5][0-5]).([0-9]|[1-9][0-9]|[1-2][0-5][0-5])"
+                       ".([0-9]|[1-9][0-9]|[1-2][0-5][0-5])$"));
 
     if (!rx.match(version).hasMatch())
     {
