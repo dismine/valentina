@@ -45,6 +45,9 @@ class QTextStream;
 class VObjEngine final : public QPaintEngine
 {
 public:
+    using QPaintEngine::drawPoints;
+    using QPaintEngine::drawPolygon;
+
     VObjEngine();
     ~VObjEngine() override = default;
 

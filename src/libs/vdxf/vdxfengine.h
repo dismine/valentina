@@ -67,6 +67,10 @@ class VDxfEngine final : public QPaintEngine
     friend class VDxfPaintDevice;
 
 public:
+    using QPaintEngine::drawEllipse;
+    using QPaintEngine::drawLines;
+    using QPaintEngine::drawPolygon;
+
     VDxfEngine();
     ~VDxfEngine() override;
 
