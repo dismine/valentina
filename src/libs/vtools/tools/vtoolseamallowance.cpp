@@ -1213,7 +1213,6 @@ void VToolSeamAllowance::SaveRotationPattern(qreal dRot)
     VPiece newDet = oldDet;
 
     newDet.GetPatternLabelData().SetPos(m_patternInfo->pos());
-    newDet.GetPatternLabelData().SetFontSize(m_patternInfo->GetFontSize());
 
     // Tranform angle to anticlockwise
     QLineF line(0, 0, 100, 0);
