@@ -149,7 +149,6 @@ Module {
 
         if (enableAppImage && qbs.targetOS.contains("unix") && !qbs.targetOS.contains("macos"))
             defines.push('APPIMAGE');
-            defines.push('APPIMAGE_QT_TRANSLATIONS="' + FileInfo.joinPaths(qbs.installPrefix, "translations") + '"');
 
         if (enableMultiBundle)
             defines.push('MULTI_BUNDLE');

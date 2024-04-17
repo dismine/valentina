@@ -278,7 +278,7 @@ auto VAbstractApplication::QtTranslationsPath(const QString &locale) -> QString
 #if defined(APPIMAGE)
     Q_UNUSED(locale)
     /* Fix path to translations when run inside AppImage. */
-    return AppImageRoot() + APPIMAGE_QT_TRANSLATIONS;
+    return AppImageRoot() + QLibraryPath(QLibraryInfo::TranslationsPath);
 #else
     return translationsPath(locale);
 #endif // defined(APPIMAGE)
@@ -371,7 +371,7 @@ void VAbstractApplication::LoadTranslation(QString locale)
     LoadQM(qtTranslator, QStringLiteral("qt_"), locale, qtQmDir);
     installTranslator(qtTranslator);
 
-#if defined(Q_OS_WIN) && !defined(QBS_BUILD)
+#if (defined(Q_OS_WIN) && !defined(QBS_BUILD)) || defined(APPIMAGE)
     qtxmlTranslator = new QTranslator(this);
     LoadQM(qtxmlTranslator, QStringLiteral("qtxmlpatterns_"), locale, qtQmDir);
     installTranslator(qtxmlTranslator);
