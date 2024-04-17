@@ -213,6 +213,7 @@ void VObjEngine::drawPath(const QPainterPath &path)
         if (skipFace == false)
         {
             QPolygonF face;
+            face.reserve(num_verts);
             for (int ind = 0; ind < num_verts; ind++)
             {
                 face << QPointF(pf[ind]);
@@ -334,12 +335,15 @@ auto VObjEngine::MakePointsUnique(const QPolygonF &polygon) const -> QPolygonF
 //---------------------------------------------------------------------------------------------------------------------
 auto VObjEngine::Square(const QPolygonF &poly) const -> qint64
 {
-    QVector<qreal> x;
-    QVector<qreal> y;
-
     vsizetype const n = poly.count();
     qreal s, res = 0;
     qint64 sq = 0;
+
+    QVector<qreal> x;
+    QVector<qreal> y;
+
+    x.reserve(n);
+    y.reserve(n);
 
     for (int i = 0; i < n; i++)
     {

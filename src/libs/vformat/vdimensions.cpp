@@ -33,16 +33,18 @@
 
 //---------------------------------------------------------------------------------------------------------------------
 VAbstartMeasurementDimension::VAbstartMeasurementDimension(Unit units)
-    : m_units(units)
-{}
+  : m_units(units)
+{
+}
 
 //---------------------------------------------------------------------------------------------------------------------
 VAbstartMeasurementDimension::VAbstartMeasurementDimension(Unit units, qreal min, qreal max, qreal step)
-    : m_units(units),
-      m_minValue(min),
-      m_maxValue(max),
-      m_step(step)
-{}
+  : m_units(units),
+    m_minValue(min),
+    m_maxValue(max),
+    m_step(step)
+{
+}
 
 //---------------------------------------------------------------------------------------------------------------------
 auto VAbstartMeasurementDimension::IsValid() -> bool
@@ -60,7 +62,7 @@ auto VAbstartMeasurementDimension::RangeMin() const -> int
         const int rangeMinMm = 200;
         const int rangeMinInch = 8;
 
-        switch(Units())
+        switch (Units())
         {
             case Unit::Cm:
                 return rangeMinCm;
@@ -85,7 +87,7 @@ auto VAbstartMeasurementDimension::RangeMax() const -> int
         const int rangeMaxMm = 2720;
         const int rangeMaxInch = 107;
 
-        switch(Units())
+        switch (Units())
         {
             case Unit::Cm:
                 return rangeMaxCm;
@@ -135,8 +137,7 @@ auto VAbstartMeasurementDimension::ValidSteps() const -> QVector<qreal>
             }
             candidate = 1 + s * i;
             ++i;
-        }
-        while(candidate < stepBarrier);
+        } while (candidate < stepBarrier);
     }
 
     return steps;
@@ -159,12 +160,11 @@ auto VAbstartMeasurementDimension::ValidBasesList() const -> QStringList
         list.append(QString::number(base));
     }
     return list;
-
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-auto VAbstartMeasurementDimension::ValidBases(qreal min, qreal max, qreal step,
-                                              const QSet<qreal> &exclude) -> QVector<qreal>
+auto VAbstartMeasurementDimension::ValidBases(qreal min, qreal max, qreal step, const QSet<qreal> &exclude)
+    -> QVector<qreal>
 {
     QVector<qreal> validBases;
 
@@ -190,8 +190,7 @@ auto VAbstartMeasurementDimension::ValidBases(qreal min, qreal max, qreal step,
         }
         value = min + step * i;
         ++i;
-    }
-    while(value < max + step);
+    } while (value < max + step);
 
     if (validBases.isEmpty())
     {
@@ -202,8 +201,7 @@ auto VAbstartMeasurementDimension::ValidBases(qreal min, qreal max, qreal step,
             validBases.append(value);
             value = min + step * i;
             ++i;
-        }
-        while(value < max + step);
+        } while (value < max + step);
     }
 
     return validBases;
@@ -265,7 +263,7 @@ auto VAbstartMeasurementDimension::IsUnitsValid() const -> bool
 //---------------------------------------------------------------------------------------------------------------------
 auto VAbstartMeasurementDimension::DimensionName(MeasurementDimension type) -> QString
 {
-    switch(type)
+    switch (type)
     {
         case MeasurementDimension::X:
             return QCoreApplication::translate("VAbstartMeasurementDimension", "Height", "dimension");
@@ -288,7 +286,7 @@ auto VAbstartMeasurementDimension::DimensionToolTip(const MeasurementDimension_p
         return {};
     }
 
-    switch(dimension->Type())
+    switch (dimension->Type())
     {
         case MeasurementDimension::Y:
             if (dimension->CustomName().isEmpty() && dimension->IsBodyMeasurement())
@@ -326,51 +324,59 @@ auto VAbstartMeasurementDimension::DimensionToolTip(const MeasurementDimension_p
 // VXMeasurementDimension
 //---------------------------------------------------------------------------------------------------------------------
 VXMeasurementDimension::VXMeasurementDimension(Unit units)
-    : VAbstartMeasurementDimension(units)
-{}
+  : VAbstartMeasurementDimension(units)
+{
+}
 
 //---------------------------------------------------------------------------------------------------------------------
 VXMeasurementDimension::VXMeasurementDimension(Unit units, qreal min, qreal max, qreal step)
-    : VAbstartMeasurementDimension(units, min, max, step)
-{}
+  : VAbstartMeasurementDimension(units, min, max, step)
+{
+}
 
 // VYMeasurementDimension
 //---------------------------------------------------------------------------------------------------------------------
 VYMeasurementDimension::VYMeasurementDimension(Unit units)
-    : VAbstartMeasurementDimension(units)
-{}
+  : VAbstartMeasurementDimension(units)
+{
+}
 
 //---------------------------------------------------------------------------------------------------------------------
 VYMeasurementDimension::VYMeasurementDimension(Unit units, qreal min, qreal max, qreal step)
-    : VAbstartMeasurementDimension(units, min, max, step)
-{}
+  : VAbstartMeasurementDimension(units, min, max, step)
+{
+}
 
 // VWMeasurementDimension
 //---------------------------------------------------------------------------------------------------------------------
 VWMeasurementDimension::VWMeasurementDimension(Unit units)
-    : VAbstartMeasurementDimension(units)
-{}
+  : VAbstartMeasurementDimension(units)
+{
+}
 
 //---------------------------------------------------------------------------------------------------------------------
 VWMeasurementDimension::VWMeasurementDimension(Unit units, qreal min, qreal max, qreal step)
-    : VAbstartMeasurementDimension(units, min, max, step)
-{}
+  : VAbstartMeasurementDimension(units, min, max, step)
+{
+}
 
 // VZMeasurementDimension
 //---------------------------------------------------------------------------------------------------------------------
 VZMeasurementDimension::VZMeasurementDimension(Unit units)
-    : VAbstartMeasurementDimension(units)
-{}
+  : VAbstartMeasurementDimension(units)
+{
+}
 
 //---------------------------------------------------------------------------------------------------------------------
 VZMeasurementDimension::VZMeasurementDimension(Unit units, qreal min, qreal max, qreal step)
-    : VAbstartMeasurementDimension(units, min, max, step)
-{}
+  : VAbstartMeasurementDimension(units, min, max, step)
+{
+}
 
 // VDimensionRestriction
 //---------------------------------------------------------------------------------------------------------------------
-VDimensionRestriction::VDimensionRestriction(qreal min, qreal max, const QString &exclude) :
-    m_min(min),
+VDimensionRestriction::VDimensionRestriction(qreal min, qreal max, const QString &exclude)
+  : m_min(min),
     m_max(max)
 {
     SetExcludeString(exclude);
@@ -399,6 +405,7 @@ auto VDimensionRestriction::GetExcludeString() const -> QString
 {
     QList<qreal> const list = m_exclude.values();
     QStringList excludeList;
+    excludeList.reserve(list.size());
 
     for (const auto &value : list)
     {

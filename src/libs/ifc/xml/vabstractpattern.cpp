@@ -414,6 +414,7 @@ auto VAbstractPattern::GetActivDrawElement(QDomElement &element) const -> bool
 auto VAbstractPattern::getLocalHistory(const QString &draw) const -> QVector<VToolRecord>
 {
     QVector<VToolRecord> historyPP;
+    historyPP.reserve(history.size());
     for (qint32 i = 0; i < history.size(); ++i)
     {
         const VToolRecord &tool = history.at(i);
@@ -733,8 +734,9 @@ auto VAbstractPattern::ParsePieceNodes(const QDomElement &domElement) -> VPieceP
 //---------------------------------------------------------------------------------------------------------------------
 auto VAbstractPattern::ParsePieceCSARecords(const QDomElement &domElement) -> QVector<CustomSARecord>
 {
-    QVector<CustomSARecord> records;
     const QDomNodeList nodeList = domElement.childNodes();
+    QVector<CustomSARecord> records;
+    records.reserve(nodeList.size());
     for (qint32 i = 0; i < nodeList.size(); ++i)
     {
         const QDomElement element = nodeList.at(i).toElement();
@@ -756,8 +758,9 @@ auto VAbstractPattern::ParsePieceCSARecords(const QDomElement &domElement) -> QV
 //---------------------------------------------------------------------------------------------------------------------
 auto VAbstractPattern::ParsePieceInternalPaths(const QDomElement &domElement) -> QVector<quint32>
 {
-    QVector<quint32> records;
     const QDomNodeList nodeList = domElement.childNodes();
+    QVector<quint32> records;
+    records.reserve(nodeList.size());
     for (qint32 i = 0; i < nodeList.size(); ++i)
     {
         const QDomElement element = nodeList.at(i).toElement();
@@ -1759,6 +1762,7 @@ auto VAbstractPattern::ListIncrements() const -> QStringList
     auto GetExpressions = [&increments, this](const QString &type)
     {
         const QDomNodeList list = elementsByTagName(type);
+        increments.reserve(list.size());
         for (int i = 0; i < list.size(); ++i)
         {
             const QString name = GetParametrEmptyString(list.at(i).toElement(), AttrName);
@@ -2636,6 +2640,7 @@ auto VAbstractPattern::GetGroups(const QString &patternPieceName) -> QMap<quint3
 
                             const QDomNodeList nodeList = group.childNodes();
                             const qint32 num = nodeList.size();
+                            items.reserve(num);
                             for (qint32 i = 0; i < num; ++i)
                             {
                                 const QDomElement element = nodeList.at(i).toElement();

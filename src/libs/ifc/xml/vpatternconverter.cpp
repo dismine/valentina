@@ -2238,6 +2238,7 @@ void VPatternConverter::TagUnionDetailsToV0_4_0()
             QDomElement tagChildrenNodes = createElement(*strChildren);
 
             const QDomNodeList childList = toolDOM.childNodes();
+            nodes.reserve(childList.size());
             for (qint32 i = 0; i < childList.size(); ++i)
             {
                 const QDomElement element = childList.at(i).toElement();

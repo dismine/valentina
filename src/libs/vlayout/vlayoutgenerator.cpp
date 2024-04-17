@@ -680,6 +680,7 @@ auto VLayoutGenerator::MoveDetails(qreal length, const QVector<VLayoutPiece> &de
     }
 
     QList<VLayoutPiece> newDetails;
+    newDetails.reserve(details.size());
     for (auto d : details)
     {
         IsPortrait() ? d.Translate(0, length) : d.Translate(length, 0);
