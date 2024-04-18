@@ -76,9 +76,26 @@ void VPUndoMovePieceOnSheet::undo()
         piece->SetSheet(sourceSheet);
         piece->SetSelected(false);
 
+        if ((m_followGrainline || piece->IsFollowGrainline()) && !sourceSheet.isNull())
+        {
+            QT_WARNING_PUSH
+            QT_WARNING_DISABLE_GCC("-Wnoexcept")
+
+            VPTransformationOrigon origin;
+            origin.custom = true;
+
+            QT_WARNING_POP
+
+            piece->RotateToGrainline(origin);
+        }
+
         if (not layout.isNull())
         {
             emit layout->PieceSheetChanged(piece);
+            if (!sourceSheet.isNull())
+            {
+                emit layout->PieceTransformationChanged(piece);
+            }
             emit layout->PieceSelectionChanged(piece);
         }
     }
@@ -115,7 +132,7 @@ void VPUndoMovePieceOnSheet::redo()
             piece->SetSelected(false);
         }
 
-        if (m_followGrainline || piece->IsFollowGrainline())
+        if ((m_followGrainline || piece->IsFollowGrainline()) && !sourceSheet.isNull())
         {
             QT_WARNING_PUSH
             QT_WARNING_DISABLE_GCC("-Wnoexcept")
@@ -131,7 +148,10 @@ void VPUndoMovePieceOnSheet::redo()
         if (not layout.isNull())
         {
             emit layout->PieceSheetChanged(piece);
-            emit layout->PieceTransformationChanged(piece);
+            if (!sourceSheet.isNull())
+            {
+                emit layout->PieceTransformationChanged(piece);
+            }
             emit layout->LayoutChanged();
         }
     }

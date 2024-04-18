@@ -639,6 +639,10 @@ void VPMainGraphicsView::RemovePiece() const
     }
 
     const QList<VPGraphicsPiece *> &graphicsPieces = sheet->SceneData()->GraphicsPieces();
+
+    QVector<VPUndoMovePieceOnSheet *> commands;
+    commands.reserve(graphicsPieces.size());
+
     for (auto *graphicsPiece : graphicsPieces)
     {
         VPPiecePtr const piece = graphicsPiece->GetPiece();
@@ -646,14 +650,25 @@ void VPMainGraphicsView::RemovePiece() const
         if (not piece.isNull() && piece->IsSelected())
         {
             piece->SetSelected(false);
+            emit layout->PieceSelectionChanged(piece);
 
-            VPLayoutPtr const layout = m_layout.toStrongRef();
-            if (not layout.isNull())
-            {
-                emit layout->PieceSelectionChanged(piece);
-                layout->UndoStack()->push(new VPUndoMovePieceOnSheet(VPSheetPtr(), piece));
-            }
+            commands.append(new VPUndoMovePieceOnSheet(VPSheetPtr(), piece));
         }
+    }
+
+    if (commands.size() > 1)
+    {
+        layout->UndoStack()->beginMacro(tr("Remove pieces"));
+    }
+
+    for (auto *command : commands)
+    {
+        layout->UndoStack()->push(command);
+    }
+
+    if (commands.size() > 1)
+    {
+        layout->UndoStack()->endMacro();
     }
 }
 
