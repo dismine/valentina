@@ -19,6 +19,10 @@ branches:
     - develop
     - master
 
+skip_commits:
+  files:
+    - ".cirrus.yml"
+
 # Do not build on tags (GitHub and BitBucket)
 skip_tags: true
 
