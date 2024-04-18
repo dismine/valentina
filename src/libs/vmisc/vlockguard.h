@@ -149,9 +149,11 @@ template <typename Guarded> auto VLockGuard<Guarded>::TryLock(const QString &loc
     bool res = true;
 
     lockFile = lockName + QLatin1String(".lock");
-#if defined(Q_OS_UNIX)
-    QFileInfo info(lockFile);
-    lockFile = info.absolutePath() + QLatin1String("/.") + info.fileName();
+#if defined(Q_OS_UNIX) || defined(Q_OS_MACOS)
+    {
+        QFileInfo info(lockFile);
+        lockFile = info.absolutePath() + QLatin1String("/.") + info.fileName();
+    }
 #endif
     lock.reset(new QLockFile(lockFile));
 
