@@ -273,7 +273,7 @@ void TST_TSLocaleTranslation::TestHTMLTags_data()
     for (qint32 i = 0, num = messages.size(); i < num; ++i)
     {
         const QDomElement message = messages.at(i).toElement();
-        if (message.isNull() == false)
+        if (!message.isNull())
         {
             const QString source = message.firstChildElement(TagSource).text();
             if (source.isEmpty())
@@ -313,22 +313,22 @@ void TST_TSLocaleTranslation::TestHTMLTags()
     QFETCH(QString, source);
     QFETCH(QString, translation);
 
-    static const QStringList tags = QStringList() << "p"_L1
-                                                  << "html"_L1
-                                                  << "body"_L1;
-    static const QString pattern("{1}.*>");
-    for (const auto &tag : tags)
+    QRegularExpression::PatternOptions const patternOption = QRegularExpression::DotMatchesEverythingOption;
+    static const QVector<std::pair<QRegularExpression, QRegularExpression>> regexes{
+        std::make_pair(QRegularExpression(QStringLiteral("<p{1}.*>"), patternOption),
+                       QRegularExpression(QStringLiteral("</p{1}.*>"), patternOption)),
+        std::make_pair(QRegularExpression(QStringLiteral("<html{1}.*>"), patternOption),
+                       QRegularExpression(QStringLiteral("</html{1}.*>"), patternOption)),
+        std::make_pair(QRegularExpression(QStringLiteral("<body{1}.*>"), patternOption),
+                       QRegularExpression(QStringLiteral("</body{1}.*>"), patternOption))};
+
+    for (const auto &regex : regexes)
     {
-        const QRegularExpression openRegex("<"_L1 + tag + pattern, QRegularExpression::DotMatchesEverythingOption);
-        if (source.contains(openRegex))
+        if (source.contains(regex.first))
         {
-            const auto countOpenTag = source.count(openRegex);
-            const QRegularExpression closeRegex("</"_L1 + tag + pattern,
-                                                QRegularExpression::DotMatchesEverythingOption);
-            const auto countCloseTag = translation.count(closeRegex);
-            if (not translation.contains(closeRegex) || countCloseTag != countOpenTag)
+            if (not translation.contains(regex.second) || translation.count(regex.second) != source.count(regex.first))
             {
-                const QString message = u"Tag mismatch. Tag: '<%1>'. "_s.arg(tag) +
+                const QString message = u"Tag mismatch. Pattern: '<%1>'. "_s.arg(regex.first.pattern()) +
                                         u"Original name:'%1'"_s.arg(source) +
                                         u", translated name:'%1'"_s.arg(translation);
                 QFAIL(qUtf8Printable(message));
