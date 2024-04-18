@@ -397,7 +397,7 @@ void VAbstractApplication::ClearTranslation()
         delete qtTranslator;
     }
 
-#if defined(Q_OS_WIN) && !defined(QBS_BUILD)
+#if (defined(Q_OS_WIN) && !defined(QBS_BUILD)) || defined(APPIMAGE)
     if (not qtxmlTranslator.isNull())
     {
         removeTranslator(qtxmlTranslator);
