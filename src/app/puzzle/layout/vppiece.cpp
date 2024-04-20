@@ -62,7 +62,7 @@ namespace
 {
 constexpr qreal minStickyDistance = MmToPixel(3.);
 constexpr qreal maxStickyDistance = MmToPixel(15.);
-constexpr qreal stickyShift = MmToPixel(1.);
+constexpr qreal stickyShift = MmToPixel(5.);
 
 //---------------------------------------------------------------------------------------------------------------------
 auto CutEdge(const QLineF &edge) -> QVector<QPointF>
@@ -440,24 +440,15 @@ auto VPPiece::PrepareStickyPath(const QVector<QPointF> &path) -> QVector<QPointF
 //---------------------------------------------------------------------------------------------------------------------
 auto VPPiece::ClosestDistance(const QVector<QPointF> &path1, const QVector<QPointF> &path2) -> QLineF
 {
-    std::function<QLineF(const QPointF &)> const DistanceFunc = [path2](const QPointF &p1)
+    const int maxThreads = QThread::idealThreadCount();
+
+    QVector<QVector<QPointF>> path1Chunks;
+    path1Chunks.reserve(maxThreads);
+    const vsizetype chunkSize = (path1.size() + maxThreads - 1) / maxThreads; // Round up
+    for (vsizetype i = 0; i < path1.size(); i += chunkSize)
     {
-        qreal minLocalDistance = std::numeric_limits<qreal>::max();
-        QLineF localClosestDistance;
-
-        for (const auto &p2 : path2)
-        {
-            QLineF const d(p1, p2);
-            qreal const length = d.length();
-            if (length < minLocalDistance)
-            {
-                minLocalDistance = length;
-                localClosestDistance = d;
-            }
-        }
-
-        return localClosestDistance;
-    };
+        path1Chunks.append(path1.mid(i, chunkSize));
+    }
 
     std::function<void(QLineF &, const QLineF &)> const ReduceFunc = [](QLineF &result, const QLineF &next)
     {
@@ -469,7 +460,29 @@ auto VPPiece::ClosestDistance(const QVector<QPointF> &path1, const QVector<QPoin
         }
     };
 
-    return QtConcurrent::blockingMappedReduced<QLineF>(path1, DistanceFunc, ReduceFunc);
+    auto CalculateClosestDistanceForChunk = [&](const QVector<QPointF> &chunk) -> QLineF
+    {
+        qreal minLocalDistance = std::numeric_limits<qreal>::max();
+        QLineF localClosestDistance;
+
+        for (const auto &c : chunk)
+        {
+            for (const auto &p2 : path2)
+            {
+                QLineF const d(c, p2);
+                qreal const length = d.length();
+                if (length < minLocalDistance)
+                {
+                    minLocalDistance = length;
+                    localClosestDistance = d;
+                }
+            }
+        }
+
+        return localClosestDistance;
+    };
+
+    return QtConcurrent::blockingMappedReduced<QLineF>(path1Chunks, CalculateClosestDistanceForChunk, ReduceFunc);
 }
 
 //---------------------------------------------------------------------------------------------------------------------

@@ -276,7 +276,7 @@ auto VPLayout::AddSheet(const VPSheetPtr &sheet) -> VPSheetPtr
     if (not sheet.isNull() && GetSheet(sheet->Uuid()).isNull())
     {
         m_sheets.append(sheet);
-        connect(this, &VPLayout::PieceTransformationChanged, sheet.data(), &VPSheet::CheckPiecePositionValidity);
+        connect(this, &VPLayout::PieceTransformationChanged, sheet.data(), &VPSheet::CheckPiecesPositionValidity);
     }
     return sheet;
 }
@@ -328,7 +328,7 @@ void VPLayout::SetFocusedSheet(const VPSheetPtr &focusedSheet)
         m_focusedSheet = focusedSheet.isNull() ? m_sheets.constFirst() : focusedSheet;
     }
 
-    CheckPiecesPositionValidity(m_focusedSheet);
+    m_focusedSheet->CheckPiecesPositionValidity();
 
     emit ActiveSheetChanged(m_focusedSheet);
 }
@@ -427,30 +427,9 @@ void VPLayout::CheckPiecesPositionValidity() const
 {
     for (const auto &sheet : m_sheets)
     {
-        CheckPiecesPositionValidity(sheet);
-    }
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-void VPLayout::CheckPiecesPositionValidity(const VPSheetPtr &sheet) const
-{
-    if (not sheet.isNull())
-    {
-        const VPLayoutSettings &settings = LayoutSettings();
-
-        if (settings.GetWarningPiecesOutOfBound())
+        if (not sheet.isNull())
         {
-            sheet->ValidatePiecesOutOfBound();
-        }
-
-        if (settings.GetWarningSuperpositionOfPieces())
-        {
-            sheet->ValidateSuperpositionOfPieces();
-        }
-
-        if (settings.GetWarningPieceGapePosition())
-        {
-            sheet->ValidatePieceGapePosition();
+            sheet->CheckPiecesPositionValidity();
         }
     }
 }

@@ -38,6 +38,205 @@
 #include "vplayout.h"
 #include "vppiece.h"
 
+#include <QtConcurrent>
+
+namespace
+{
+struct VSheetPiece
+{
+    QString m_id{};
+    bool m_showFullPiece{false};
+    QLineF m_seamMirrorLine{};
+    QLineF m_seamAllowanceMirrorLine{};
+    QVector<QPointF> m_externalContourPoints{};
+};
+
+struct VPiecesValidationData
+{
+    bool m_warnPiecesOutOfBound{false};
+    bool m_warnSuperpositionOfPieces{false};
+    bool m_warnPieceGapePosition{false};
+    bool m_cutOnFold{false};
+    QRectF m_sheetRect{};
+    qreal m_pieceGap{0};
+    QVector<VSheetPiece> m_pieces{};
+};
+
+//---------------------------------------------------------------------------------------------------------------------
+void ValidatePiecesOutOfBound(const VPiecesValidationData &data, QHash<QString, VPiecePositionValidity> &validations)
+{
+
+    for (const auto &piece : data.m_pieces)
+    {
+        VPiecePositionValidity validation = validations.value(piece.m_id);
+
+        if (data.m_cutOnFold && not piece.m_showFullPiece && !piece.m_seamMirrorLine.isNull())
+        {
+            QLineF const foldLine = data.m_sheetRect.width() >= data.m_sheetRect.height()
+                                        ? QLineF(data.m_sheetRect.topLeft(), data.m_sheetRect.topRight())
+                                        : QLineF(data.m_sheetRect.topRight(), data.m_sheetRect.bottomRight());
+
+            validation.m_outOfBound =
+                not VGObject::IsLineSegmentOnLineSegment(foldLine, piece.m_seamAllowanceMirrorLine, MmToPixel(0.5));
+        }
+        else
+        {
+            QRectF const pieceRect = VLayoutPiece::BoundingRect(piece.m_externalContourPoints);
+            validation.m_outOfBound = not data.m_sheetRect.contains(pieceRect);
+        }
+
+        validations.insert(piece.m_id, validation);
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void ValidateSuperpositionOfPieces(const VPiecesValidationData &data,
+                                   QHash<QString, VPiecePositionValidity> &validations)
+{
+    QSet<QString> invalidPieces;
+    invalidPieces.reserve(data.m_pieces.size());
+
+    for (const auto &piece : data.m_pieces)
+    {
+        if (invalidPieces.contains(piece.m_id))
+        {
+            continue;
+        }
+
+        bool hasSuperposition = false;
+        VSheetPiece invalidPiece;
+
+        for (const auto &p : data.m_pieces)
+        {
+            if (piece.m_id == p.m_id)
+            {
+                continue;
+            }
+
+            if (VPPiece::PathsSuperposition(piece.m_externalContourPoints, p.m_externalContourPoints))
+            {
+                hasSuperposition = true;
+                invalidPiece = p;
+                break;
+            }
+        }
+
+        auto UpdateValidity = [&validations, hasSuperposition, &invalidPieces](const QString &id)
+        {
+            VPiecePositionValidity validation = validations.value(id);
+            validation.m_superposition = hasSuperposition;
+            validations.insert(id, validation);
+            if (hasSuperposition)
+            {
+                invalidPieces.insert(id);
+            }
+        };
+
+        UpdateValidity(piece.m_id);
+
+        if (!invalidPiece.m_id.isEmpty())
+        {
+            UpdateValidity(invalidPiece.m_id);
+        }
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void ValidatePiecesGapePosition(const VPiecesValidationData &data, QHash<QString, VPiecePositionValidity> &validations)
+{
+    if (data.m_pieceGap <= 0)
+    {
+        return;
+    }
+
+    QSet<QString> invalidPieces;
+    invalidPieces.reserve(data.m_pieces.size());
+
+    for (const auto &piece : data.m_pieces)
+    {
+        if (invalidPieces.contains(piece.m_id))
+        {
+            continue;
+        }
+
+        QRectF const path1Rect = VLayoutPiece::BoundingRect(piece.m_externalContourPoints)
+                                     .adjusted(-data.m_pieceGap, -data.m_pieceGap, data.m_pieceGap, data.m_pieceGap);
+        QVector<QPointF> const path1 = VPPiece::PrepareStickyPath(piece.m_externalContourPoints);
+        bool hasInvalidPieceGapPosition = false;
+        VSheetPiece invalidPiece;
+
+        for (const auto &p : data.m_pieces)
+        {
+            if (piece.m_id == p.m_id)
+            {
+                continue;
+            }
+
+            QRectF const path2Rect =
+                VLayoutPiece::BoundingRect(p.m_externalContourPoints)
+                    .adjusted(-data.m_pieceGap, -data.m_pieceGap, data.m_pieceGap, data.m_pieceGap);
+
+            if (!path1Rect.intersects(path2Rect) && !path1Rect.contains(path2Rect) && !path2Rect.contains(path1Rect))
+            {
+                continue;
+            }
+
+            QVector<QPointF> const path2 = VPPiece::PrepareStickyPath(p.m_externalContourPoints);
+
+            QLineF const distance = VPPiece::ClosestDistance(path1, path2);
+
+            if (distance.length() < data.m_pieceGap - accuracyPointOnLine)
+            {
+                hasInvalidPieceGapPosition = true;
+                invalidPiece = p;
+                break;
+            }
+        }
+
+        auto UpdateValidity = [&validations, hasInvalidPieceGapPosition, &invalidPieces](const QString &id)
+        {
+            VPiecePositionValidity validation = validations.value(id);
+            validation.m_gap = hasInvalidPieceGapPosition;
+            validations.insert(id, validation);
+            if (hasInvalidPieceGapPosition)
+            {
+                invalidPieces.insert(id);
+            }
+        };
+
+        UpdateValidity(piece.m_id);
+
+        if (!invalidPiece.m_id.isEmpty())
+        {
+            UpdateValidity(invalidPiece.m_id);
+        }
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+auto ValidatePiecesPositions(const VPiecesValidationData &data) -> QHash<QString, VPiecePositionValidity>
+{
+    QHash<QString, VPiecePositionValidity> validations;
+
+    if (data.m_warnPiecesOutOfBound)
+    {
+        ValidatePiecesOutOfBound(data, validations);
+    }
+
+    if (data.m_warnSuperpositionOfPieces)
+    {
+        ValidateSuperpositionOfPieces(data, validations);
+    }
+
+    if (data.m_warnPieceGapePosition)
+    {
+        ValidatePiecesGapePosition(data, validations);
+    }
+
+    return validations;
+}
+} // namespace
+
 // VPSheetSceneData
 //---------------------------------------------------------------------------------------------------------------------
 VPSheetSceneData::VPSheetSceneData(const VPLayoutPtr &layout, const QUuid &sheetUuid)
@@ -339,7 +538,8 @@ void VPSheetSceneData::ConnectPiece(VPGraphicsPiece *piece) const
 VPSheet::VPSheet(const VPLayoutPtr &layout, QObject *parent)
   : QObject(parent),
     m_layout(layout),
-    m_sceneData(QSharedPointer<VPSheetSceneData>::create(layout, Uuid()))
+    m_sceneData(QSharedPointer<VPSheetSceneData>::create(layout, Uuid())),
+    m_validityWatcher(new QFutureWatcher<QHash<QString, VPiecePositionValidity>>(this))
 {
     SCASSERT(not layout.isNull())
 
@@ -347,10 +547,16 @@ VPSheet::VPSheet(const VPLayoutPtr &layout, QObject *parent)
     SetIgnoreMargins(settings->GetLayoutSheetIgnoreMargins());
     SetSheetMargins(settings->GetLayoutSheetMargins());
     SetSheetSize(QSizeF(settings->GetLayoutSheetPaperWidth(), settings->GetLayoutSheetPaperHeight()));
+
+    connect(m_validityWatcher, &QFutureWatcher<QHash<QString, VPiecePositionValidity>>::finished, this,
+            &VPSheet::UpdatePiecesValidity);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-VPSheet::~VPSheet() = default;
+VPSheet::~VPSheet()
+{
+    m_validityWatcher->cancel();
+}
 
 //---------------------------------------------------------------------------------------------------------------------
 auto VPSheet::GetLayout() const -> VPLayoutPtr
@@ -509,171 +715,6 @@ void VPSheet::SetTrashSheet(bool newTrashSheet)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VPSheet::ValidateSuperpositionOfPieces() const
-{
-    QList<VPPiecePtr> const pieces = GetPieces();
-
-    for (const auto &piece : pieces)
-    {
-        if (piece.isNull() || piece->OutOfBound())
-        {
-            continue;
-        }
-
-        const bool oldSuperpositionOfPieces = piece->HasSuperpositionWithPieces();
-        QVector<QPointF> path1;
-        CastTo(piece->GetMappedExternalContourPoints(), path1);
-        bool hasSuperposition = false;
-
-        for (const auto &p : pieces)
-        {
-            if (p.isNull() || piece == p)
-            {
-                continue;
-            }
-
-            QVector<QPointF> path2;
-            CastTo(p->GetMappedExternalContourPoints(), path2);
-
-            bool const superposition = VPPiece::PathsSuperposition(path1, path2);
-            if (superposition)
-            {
-                hasSuperposition = superposition;
-                break;
-            }
-        }
-
-        piece->SetHasSuperpositionWithPieces(hasSuperposition);
-
-        if (oldSuperpositionOfPieces != piece->HasSuperpositionWithPieces())
-        {
-            VPLayoutPtr const layout = GetLayout();
-            if (not layout.isNull())
-            {
-                emit layout->PiecePositionValidityChanged(piece);
-            }
-        }
-    }
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-void VPSheet::ValidatePieceGapePosition(const VPPiecePtr &piece) const
-{
-    VPLayoutPtr const layout = GetLayout();
-    if (layout.isNull())
-    {
-        return;
-    }
-
-    const qreal pieceGap = layout->LayoutSettings().GetPiecesGap();
-    if (pieceGap <= 0)
-    {
-        return;
-    }
-
-    if (piece.isNull() || piece->HasSuperpositionWithPieces() || piece->OutOfBound())
-    {
-        return;
-    }
-
-    const bool oldInvalidPieceGapPosition = piece->HasInvalidPieceGapPosition();
-
-    QVector<QPointF> path1;
-    CastTo(piece->GetMappedExternalContourPoints(), path1);
-    path1 = VPPiece::PrepareStickyPath(path1);
-    bool hasInvalidPieceGapPosition = false;
-
-    QList<VPPiecePtr> const pieces = GetPieces();
-
-    for (const auto &p : pieces)
-    {
-        if (p.isNull() || piece == p)
-        {
-            continue;
-        }
-
-        QVector<QPointF> path2;
-        CastTo(p->GetMappedExternalContourPoints(), path2);
-        path2 = VPPiece::PrepareStickyPath(path2);
-
-        QLineF const distance = VPPiece::ClosestDistance(path1, path2);
-
-        if (distance.length() < pieceGap - accuracyPointOnLine)
-        {
-            hasInvalidPieceGapPosition = true;
-            break;
-        }
-    }
-
-    piece->SetHasInvalidPieceGapPosition(hasInvalidPieceGapPosition);
-
-    if (oldInvalidPieceGapPosition != piece->HasInvalidPieceGapPosition())
-    {
-        VPLayoutPtr const layout = GetLayout();
-        if (not layout.isNull())
-        {
-            emit layout->PiecePositionValidityChanged(piece);
-        }
-    }
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-void VPSheet::ValidatePieceGapePosition() const
-{
-    QList<VPPiecePtr> const pieces = GetPieces();
-    for (const auto &piece : pieces)
-    {
-        ValidatePieceGapePosition(piece);
-    }
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-void VPSheet::ValidatePieceOutOfBound(const VPPiecePtr &piece) const
-{
-    if (piece.isNull())
-    {
-        return;
-    }
-
-    const bool oldOutOfBound = piece->OutOfBound();
-    QRectF const sheetRect = GetMarginsRect();
-
-    VPLayoutPtr const layout = GetLayout();
-    if (not layout.isNull() && layout->LayoutSettings().IsCutOnFold() && not piece->IsShowFullPiece() &&
-        !piece->GetSeamMirrorLine().isNull())
-    {
-        QLineF const foldLine = sheetRect.width() >= sheetRect.height()
-                                    ? QLineF(sheetRect.topLeft(), sheetRect.topRight())
-                                    : QLineF(sheetRect.topRight(), sheetRect.bottomRight());
-        piece->SetOutOfBound(not VGObject::IsLineSegmentOnLineSegment(
-            foldLine, piece->GetMappedSeamAllowanceMirrorLine(), MmToPixel(0.5)));
-    }
-    else
-    {
-        QRectF const pieceRect = piece->MappedDetailBoundingRect();
-        piece->SetOutOfBound(not sheetRect.contains(pieceRect));
-    }
-
-    if (oldOutOfBound != piece->OutOfBound())
-    {
-        if (not layout.isNull())
-        {
-            emit layout->PiecePositionValidityChanged(piece);
-        }
-    }
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-void VPSheet::ValidatePiecesOutOfBound() const
-{
-    QList<VPPiecePtr> const pieces = GetPieces();
-    for (const auto &piece : pieces)
-    {
-        ValidatePieceOutOfBound(piece);
-    }
-}
-
-//---------------------------------------------------------------------------------------------------------------------
 auto VPSheet::GetSheetRect() const -> QRectF
 {
     return {QPoint(0, 0), m_size};
@@ -752,32 +793,91 @@ void VPSheet::RemoveUnusedLength()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VPSheet::CheckPiecePositionValidity(const VPPiecePtr &piece) const
+void VPSheet::CheckPiecesPositionValidity() const
 {
+    if (m_validityWatcher->isFinished())
+    {
+        VPLayoutPtr const layout = GetLayout();
+        if (layout.isNull())
+        {
+            return;
+        }
+
+        VPiecesValidationData data;
+        data.m_warnPiecesOutOfBound = layout->LayoutSettings().GetWarningPiecesOutOfBound();
+        data.m_warnSuperpositionOfPieces = layout->LayoutSettings().GetWarningSuperpositionOfPieces();
+        data.m_warnPieceGapePosition = layout->LayoutSettings().GetWarningPieceGapePosition();
+        data.m_cutOnFold = layout->LayoutSettings().IsCutOnFold();
+        data.m_sheetRect = GetMarginsRect();
+        data.m_pieceGap = layout->LayoutSettings().GetPiecesGap();
+
+        QList<VPPiecePtr> const pieces = GetPieces();
+        QVector<VSheetPiece> sheetPieces;
+        sheetPieces.reserve(pieces.size());
+
+        for (const auto &piece : pieces)
+        {
+            VSheetPiece data;
+            data.m_showFullPiece = piece->IsShowFullPiece();
+            data.m_id = piece->GetUniqueID();
+            data.m_seamMirrorLine = piece->GetMappedSeamMirrorLine();
+            data.m_seamAllowanceMirrorLine = piece->GetMappedSeamAllowanceMirrorLine();
+
+            QVector<QPointF> points;
+            CastTo(piece->GetMappedExternalContourPoints(), points);
+            data.m_externalContourPoints = points;
+
+            sheetPieces.append(data);
+        }
+
+        data.m_pieces = sheetPieces;
+
+        m_validationStale = false;
+        m_validityWatcher->setFuture(QtConcurrent::run([data]() { return ValidatePiecesPositions(data); }));
+    }
+    else
+    {
+        m_validationStale = true;
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VPSheet::UpdatePiecesValidity()
+{
+    QHash<QString, VPiecePositionValidity> const newValidations = m_validityWatcher->future().result();
+
+    QList<VPPiecePtr> const pieces = GetPieces();
+    QHash<QString, VPPiecePtr> sortedPieces;
+    sortedPieces.reserve(pieces.size());
+
+    for (const auto &piece : pieces)
+    {
+        sortedPieces.insert(piece->GetUniqueID(), piece);
+    }
+
     VPLayoutPtr const layout = GetLayout();
     if (layout.isNull())
     {
         return;
     }
 
-    if (QList<VPPiecePtr> const pieces = GetPieces(); piece.isNull() || not pieces.contains(piece))
+    for (auto i = newValidations.cbegin(), end = newValidations.cend(); i != end; ++i)
     {
-        return;
+        if (sortedPieces.contains(i.key()))
+        {
+            VPPiecePtr const piece = sortedPieces.value(i.key());
+            piece->SetOutOfBound(i.value().m_outOfBound);
+            piece->SetHasSuperpositionWithPieces(i.value().m_superposition);
+            piece->SetHasInvalidPieceGapPosition(i.value().m_gap);
+
+            emit layout->PiecePositionValidityChanged(piece);
+        }
     }
 
-    if (layout->LayoutSettings().GetWarningPiecesOutOfBound())
+    if (m_validationStale)
     {
-        ValidatePieceOutOfBound(piece);
-    }
-
-    if (layout->LayoutSettings().GetWarningSuperpositionOfPieces())
-    {
-        ValidateSuperpositionOfPieces();
-    }
-
-    if (layout->LayoutSettings().GetWarningPieceGapePosition())
-    {
-        ValidatePieceGapePosition(piece);
+        m_validationStale = false;
+        CheckPiecesPositionValidity();
     }
 }
 

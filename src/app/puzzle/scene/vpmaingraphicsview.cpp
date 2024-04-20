@@ -650,9 +650,7 @@ void VPMainGraphicsView::RemovePiece() const
             if (not layout.isNull())
             {
                 emit layout->PieceSelectionChanged(piece);
-
-                auto *command = new VPUndoMovePieceOnSheet(VPSheetPtr(), piece);
-                layout->UndoStack()->push(command);
+                layout->UndoStack()->push(new VPUndoMovePieceOnSheet(VPSheetPtr(), piece));
             }
         }
     }

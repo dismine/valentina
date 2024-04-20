@@ -1119,7 +1119,7 @@ void VPMainWindow::InitMarginsData(const QString &suffix)
                         LayoutWasSaved(false);
                         m_layout->TileFactory()->RefreshTileInfos();
                         m_graphicsView->RefreshLayout();
-                        m_layout->CheckPiecesPositionValidity(sheet);
+                        sheet->CheckPiecesPositionValidity();
                     }
                 }
             });
@@ -2140,7 +2140,10 @@ void VPMainWindow::SheetPaperSizeChanged()
         }
         else
         {
-            m_layout->CheckPiecesPositionValidity(m_layout->GetFocusedSheet());
+            if (VPSheetPtr sheet = m_layout->GetFocusedSheet(); !sheet.isNull())
+            {
+                sheet->CheckPiecesPositionValidity();
+            }
         }
     }
 
@@ -3908,7 +3911,7 @@ void VPMainWindow::on_SheetMarginChanged()
 
             LayoutWasSaved(false);
 
-            m_layout->CheckPiecesPositionValidity(sheet);
+            sheet->CheckPiecesPositionValidity();
         }
 
         m_graphicsView->RefreshLayout();
@@ -4910,7 +4913,10 @@ void VPMainWindow::LayoutWarningPieceGapePosition_toggled(bool checked)
         LayoutWasSaved(false);
         if (checked)
         {
-            m_layout->CheckPiecesPositionValidity(m_layout->GetFocusedSheet());
+            if (VPSheetPtr sheet = m_layout->GetFocusedSheet(); !sheet.isNull())
+            {
+                sheet->CheckPiecesPositionValidity();
+            }
         }
         m_graphicsView->RefreshPieces();
     }
@@ -4925,7 +4931,11 @@ void VPMainWindow::LayoutWarningPiecesSuperposition_toggled(bool checked)
         LayoutWasSaved(false);
         if (checked)
         {
-            m_layout->CheckPiecesPositionValidity(m_layout->GetFocusedSheet());
+
+            if (VPSheetPtr sheet = m_layout->GetFocusedSheet(); !sheet.isNull())
+            {
+                sheet->CheckPiecesPositionValidity();
+            }
         }
         m_graphicsView->RefreshPieces();
     }
@@ -4941,7 +4951,10 @@ void VPMainWindow::LayoutWarningPiecesOutOfBound_toggled(bool checked)
 
         if (checked)
         {
-            m_layout->CheckPiecesPositionValidity(m_layout->GetFocusedSheet());
+            if (VPSheetPtr sheet = m_layout->GetFocusedSheet(); !sheet.isNull())
+            {
+                sheet->CheckPiecesPositionValidity();
+            }
         }
         m_graphicsView->RefreshPieces();
     }
@@ -4954,7 +4967,10 @@ void VPMainWindow::LayoutCutOnFold_toggled(bool checked)
     {
         m_layout->LayoutSettings().SetCutOnFold(checked);
         LayoutWasSaved(false);
-        m_layout->CheckPiecesPositionValidity(m_layout->GetFocusedSheet());
+        if (VPSheetPtr sheet = m_layout->GetFocusedSheet(); !sheet.isNull())
+        {
+            sheet->CheckPiecesPositionValidity();
+        }
         m_graphicsView->RefreshLayout();
     }
 }

@@ -29,6 +29,7 @@
 #define VPSHEET_H
 
 #include <QComboBox>
+#include <QFutureWatcher>
 #include <QList>
 #include <QMarginsF>
 #include <QPageLayout>
@@ -49,6 +50,13 @@ class VPGraphicsTileGrid;
 class VPGraphicsSheet;
 class VLayoutPiece;
 class QGraphicsItem;
+
+struct VPiecePositionValidity
+{
+    bool m_outOfBound{false};
+    bool m_superposition{false};
+    bool m_gap{false};
+};
 
 class VPSheetSceneData
 {
@@ -183,12 +191,6 @@ public:
     auto TrashSheet() const -> bool;
     void SetTrashSheet(bool newTrashSheet);
 
-    void ValidateSuperpositionOfPieces() const;
-    void ValidatePieceGapePosition(const VPPiecePtr &piece) const;
-    void ValidatePieceGapePosition() const;
-    void ValidatePieceOutOfBound(const VPPiecePtr &piece) const;
-    void ValidatePiecesOutOfBound() const;
-
     auto GetSheetRect() const -> QRectF;
     auto GetMarginsRect() const -> QRectF;
 
@@ -283,7 +285,10 @@ public:
     auto GetSheetOrientation() const -> QPageLayout::Orientation;
 
 public slots:
-    void CheckPiecePositionValidity(const VPPiecePtr &piece) const;
+    void CheckPiecesPositionValidity() const;
+
+private slots:
+    void UpdatePiecesValidity();
 
 private:
     Q_DISABLE_COPY_MOVE(VPSheet) // NOLINT
@@ -315,6 +320,9 @@ private:
     GrainlineType m_grainlineType{GrainlineType::NotFixed};
 
     QSharedPointer<VPSheetSceneData> m_sceneData{nullptr};
+
+    QFutureWatcher<QHash<QString, VPiecePositionValidity>> *m_validityWatcher;
+    mutable bool m_validationStale{false};
 
     auto SheetUnits() const -> Unit;
 };

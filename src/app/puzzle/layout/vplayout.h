@@ -91,7 +91,6 @@ public:
     void Clear();
 
     void CheckPiecesPositionValidity() const;
-    void CheckPiecesPositionValidity(const VPSheetPtr &sheet) const;
 
     auto TileFactory() const -> QSharedPointer<VPTileFactory>;
     void SetTileFactory(const QSharedPointer<VPTileFactory> &newTileFactory);
