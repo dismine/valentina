@@ -47,7 +47,30 @@ environment:
   VALENTINA_VERSION: 0_7_52
 
   matrix:
+    - job_name: Windows_Qt_6_7_(MSVC_x64)
+      job_group: 'Windows (qbs)'
+      APPVEYOR_BUILD_WORKER_IMAGE: Visual Studio 2022
+      COMPILER: msvc
+      QT: Qt\6.7\msvc2019_64
+      QT_VERSION: Qt6_7
+      BUILD_SYSTEM: "qbs"
+      QMAKE: qmake.exe
+      ENABLE_PCH: true
+      MSVC_PATH: "C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.39.33519\\bin\\Hostx64\\x64"
+      VSINSTALLDIR: "C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\"
+      ARCH: x64
+      PYTHON: "C:\\Python311-x64"
+      TARGET_PLATFORM: "Windows10+"
+      CHOCOLATEY_PACKAGES: false
+      WINDEPLOYQT_BIN_PATH: "undefined"
+      WINDEPLOYQT_COMPILER_RUNTIME: "true"
+      WINDEPLOYQT_NO_COMPILER_RUNTIME: "false"
+      DEPLOY: true
+      RUN_TESTS: true
+      WITH_CRASH_REPORTING: True
+
 #    - job_name: Windows_Qt_6_7_(GCC_x64)
+#      job_group: 'Windows (qbs)'
 #      APPVEYOR_BUILD_WORKER_IMAGE: Visual Studio 2022
 #      COMPILER: mingw
 #      COMPILER_CPPSTD: gnu17
@@ -72,6 +95,7 @@ environment:
 #      WITH_CRASH_REPORTING: False   
 
     - job_name: MacOS_12_Qt_5_15 (qbs, multibundle)
+      job_group: 'MacOS_12 (qbs)'
       APPVEYOR_BUILD_WORKER_IMAGE: macos-monterey
       COMPILER: clang
       QT: Qt/5.15/clang_64
@@ -85,6 +109,7 @@ environment:
       DEPLOY: true
 
     - job_name: MacOS_12_Qt_5_15 (qbs, singlebundle)
+      job_group: 'MacOS_12 (qbs)'
       APPVEYOR_BUILD_WORKER_IMAGE: macos-monterey
       COMPILER: clang
       QT: Qt/5.15/clang_64
@@ -98,6 +123,7 @@ environment:
       DEPLOY: true
 
     - job_name: MacOS_14_Qt_6_6 (multibundle)
+      job_group: 'MacOS_14'
       APPVEYOR_BUILD_WORKER_IMAGE: macos-sonoma
       COMPILER: clang
       QT: Qt/6.6/macos
@@ -111,6 +137,7 @@ environment:
       DEPLOY: true
 
     - job_name: MacOS_14_Qt_6_6 (singlebundle)
+      job_group: 'MacOS_14'
       APPVEYOR_BUILD_WORKER_IMAGE: macos-sonoma
       COMPILER: clang
       QT: Qt/6.6/macos
@@ -123,28 +150,8 @@ environment:
       MULTI_BUNDLE: false
       DEPLOY: true
 
-    - job_name: Windows_Qt_6_7_(MSVC_x64)
-      APPVEYOR_BUILD_WORKER_IMAGE: Visual Studio 2022
-      COMPILER: msvc
-      QT: Qt\6.7\msvc2019_64
-      QT_VERSION: Qt6_7
-      BUILD_SYSTEM: "qbs"
-      QMAKE: qmake.exe
-      ENABLE_PCH: true
-      MSVC_PATH: "C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.30.30705\\bin\\Hostx64\\x64"
-      VSINSTALLDIR: "C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\"
-      ARCH: x64
-      PYTHON: "C:\\Python311-x64"
-      TARGET_PLATFORM: "Windows10+"
-      CHOCOLATEY_PACKAGES: false
-      WINDEPLOYQT_BIN_PATH: "undefined"
-      WINDEPLOYQT_COMPILER_RUNTIME: "true"
-      WINDEPLOYQT_NO_COMPILER_RUNTIME: "false"
-      DEPLOY: true
-      RUN_TESTS: true
-      WITH_CRASH_REPORTING: True
-
     - job_name: Windows_Qt_5_15_(qbs_GCC_x86)
+      job_group: 'Windows (qbs)'
       APPVEYOR_BUILD_WORKER_IMAGE: Visual Studio 2019
       COMPILER: mingw
       COMPILER_CPPSTD: gnu17
@@ -168,6 +175,7 @@ environment:
       WITH_CRASH_REPORTING: False
 
     - job_name: Windows_Qt_5_15_(make_GCC_x86)
+      job_group: 'Windows (make)'
       APPVEYOR_BUILD_WORKER_IMAGE: Visual Studio 2019
       COMPILER: mingw
       QT: Qt\5.15\mingw81_32
@@ -180,6 +188,7 @@ environment:
       DEPLOY: false
 
     - job_name: Windows_Qt_5_15_(qbs_GCC_x64)
+      job_group: 'Windows (qbs)'
       APPVEYOR_BUILD_WORKER_IMAGE: Visual Studio 2019
       COMPILER: mingw
       COMPILER_CPPSTD: gnu17
@@ -203,6 +212,7 @@ environment:
       WITH_CRASH_REPORTING: False
 
     - job_name: Windows_Qt_5_15_(qbs_MSVC_x64)
+      job_group: 'Windows (qbs)'
       APPVEYOR_BUILD_WORKER_IMAGE: Visual Studio 2019
       COMPILER: msvc
       QT: Qt\5.15\msvc2019_64
@@ -224,6 +234,7 @@ environment:
       WITH_CRASH_REPORTING: False
 
     - job_name: Windows_Qt_5_15_(make_GCC_x64)
+      job_group: 'Windows (make)'
       APPVEYOR_BUILD_WORKER_IMAGE: Visual Studio 2019
       COMPILER: mingw
       QT: Qt\5.15\mingw81_64
@@ -236,6 +247,7 @@ environment:
       DEPLOY: false
 
     - job_name: Windows_Qt_5_15_(nmake_MSVC_x64)
+      job_group: 'Windows (make)'
       APPVEYOR_BUILD_WORKER_IMAGE: Visual Studio 2019
       COMPILER: msvc
       QT: Qt\5.15\msvc2019_64
@@ -247,6 +259,7 @@ environment:
       DEPLOY: false
 
     - job_name: MacOS_12_Qt_5_15 (make)
+      job_group: 'MacOS (make)'
       APPVEYOR_BUILD_WORKER_IMAGE: macos-monterey
       COMPILER: clang
       QT: Qt/5.15/clang_64
@@ -296,11 +309,7 @@ for:
 -
   matrix:
     only:
-#      - job_name: Windows_Qt_6_7_(GCC_x64)
-      - job_name: Windows_Qt_6_7_(MSVC_x64)
-      - job_name: Windows_Qt_5_15_(qbs_GCC_x64)
-      - job_name: Windows_Qt_5_15_(qbs_MSVC_x64)
-      - job_name: Windows_Qt_5_15_(qbs_GCC_x86)
+      - job_group: 'Windows (qbs)'
 
   # clone directory
   clone_folder: c:\projects\valentina
@@ -438,9 +447,7 @@ for:
 -
   matrix:
     only:
-      - job_name: Windows_Qt_5_15_(make_GCC_x86)
-      - job_name: Windows_Qt_5_15_(make_GCC_x64)
-      - job_name: Windows_Qt_5_15_(nmake_MSVC_x64)
+      - job_group: 'Windows (make)'
 
   # clone directory
   clone_folder: c:\projects\valentina
@@ -529,8 +536,7 @@ for:
 -
   matrix:
     only:
-      - job_name: MacOS_14_Qt_6_6 (multibundle)
-      - job_name: MacOS_14_Qt_6_6 (singlebundle)
+      - job_group: 'MacOS_14'
 
   environment:
     CONAN_USER_HOME: /Users/appveyor
@@ -731,8 +737,7 @@ for:
 -
   matrix:
     only:
-      - job_name: MacOS_12_Qt_5_15 (qbs, multibundle)
-      - job_name: MacOS_12_Qt_5_15 (qbs, singlebundle)
+      - job_group: 'MacOS_12 (qbs)'
 
   environment:
     CONAN_USER_HOME: /Users/appveyor
@@ -931,7 +936,7 @@ for:
 -
   matrix:
     only:
-      - job_name: MacOS_12_Qt_5_15 (make)
+      - job_group: 'MacOS (make)'
 
   init:
     - find /Applications -maxdepth 1 -type d -name 'Xcode*.app'
