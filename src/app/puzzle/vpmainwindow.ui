@@ -279,8 +279,8 @@
              <rect>
               <x>0</x>
               <y>0</y>
-              <width>378</width>
-              <height>752</height>
+              <width>385</width>
+              <height>865</height>
              </rect>
             </property>
             <layout class="QVBoxLayout" name="verticalLayout_23">
@@ -389,6 +389,57 @@
                     <widget class="QLineEdit" name="lineEditCopyNumber">
                      <property name="readOnly">
                       <bool>true</bool>
+                     </property>
+                    </widget>
+                   </item>
+                  </layout>
+                 </widget>
+                </item>
+                <item>
+                 <widget class="QGroupBox" name="groupBoxCurrentPieceStatus">
+                  <property name="title">
+                   <string>Status</string>
+                  </property>
+                  <layout class="QFormLayout" name="formLayout">
+                   <item row="0" column="0">
+                    <widget class="QLabel" name="labelWarningOutOfBound">
+                     <property name="text">
+                      <string notr="true">Warning!</string>
+                     </property>
+                    </widget>
+                   </item>
+                   <item row="0" column="1">
+                    <widget class="QLabel" name="label_8">
+                     <property name="text">
+                      <string>Out of bound</string>
+                     </property>
+                    </widget>
+                   </item>
+                   <item row="1" column="0">
+                    <widget class="QLabel" name="labelWarningSuperpositionOfPieces">
+                     <property name="text">
+                      <string notr="true">Warning!</string>
+                     </property>
+                    </widget>
+                   </item>
+                   <item row="1" column="1">
+                    <widget class="QLabel" name="label_10">
+                     <property name="text">
+                      <string>Superposition of pieces</string>
+                     </property>
+                    </widget>
+                   </item>
+                   <item row="2" column="0">
+                    <widget class="QLabel" name="labelWarningPieceGape">
+                     <property name="text">
+                      <string notr="true">Warning!</string>
+                     </property>
+                    </widget>
+                   </item>
+                   <item row="2" column="1">
+                    <widget class="QLabel" name="label_16">
+                     <property name="text">
+                      <string>Piece gape</string>
                      </property>
                     </widget>
                    </item>
@@ -752,7 +803,7 @@
              <rect>
               <x>0</x>
               <y>0</y>
-              <width>378</width>
+              <width>385</width>
               <height>829</height>
              </rect>
             </property>
@@ -1276,7 +1327,7 @@
              <rect>
               <x>0</x>
               <y>0</y>
-              <width>392</width>
+              <width>399</width>
               <height>700</height>
              </rect>
             </property>
@@ -1659,7 +1710,7 @@
              <rect>
               <x>0</x>
               <y>0</y>
-              <width>378</width>
+              <width>385</width>
               <height>710</height>
              </rect>
             </property>
@@ -2455,8 +2506,8 @@
  </resources>
  <connections/>
  <buttongroups>
+  <buttongroup name="buttonGroupRotationDirection"/>
   <buttongroup name="buttonGroupTileOrientation"/>
   <buttongroup name="buttonGroupSheetOrientation"/>
-  <buttongroup name="buttonGroupRotationDirection"/>
  </buttongroups>
 </ui>

@@ -615,7 +615,7 @@ auto DialogWarningIcon() -> QString
     QByteArray byteArray;
     QBuffer buffer(&byteArray);
     pixmap.save(&buffer, "PNG");
-    return QStringLiteral("<img src=\"data:image/png;base64,") + byteArray.toBase64() + QStringLiteral("\"/> ");
+    return QStringLiteral("<img src=\"data:image/png;base64,") + byteArray.toBase64() + "\"/> "_L1;
 }
 
 //---------------------------------------------------------------------------------------------------------------------

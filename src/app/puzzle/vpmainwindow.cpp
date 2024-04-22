@@ -883,6 +883,17 @@ void VPMainWindow::InitPropertyTabCurrentPiece()
     connect(ui->checkBoxCurrentPieceHorizontallyFlipped, &QCheckBox::toggled, this,
             &VPMainWindow::CurrentPieceHorizontallyFlippedToggled);
 
+    const QIcon warningIcon = QIcon::fromTheme(QStringLiteral("dialog-warning"));
+    auto WarningIcon = [warningIcon](QLabel *label)
+    {
+        const int size = qRound(16 * label->devicePixelRatio());
+        label->setPixmap(warningIcon.pixmap(size, size));
+    };
+
+    WarningIcon(ui->labelWarningOutOfBound);
+    WarningIcon(ui->labelWarningSuperpositionOfPieces);
+    WarningIcon(ui->labelWarningPieceGape);
+
     // Translate
     ui->comboBoxTranslateUnit->addItem(tr("Millimiters"), QVariant(UnitsToStr(Unit::Mm)));
     ui->comboBoxTranslateUnit->addItem(tr("Centimeters"), QVariant(UnitsToStr(Unit::Cm)));
@@ -1356,12 +1367,14 @@ void VPMainWindow::SetPropertyTabCurrentPieceData()
         ui->labelCurrentPieceNoPieceSelected->setVisible(true);
 
         ui->groupBoxCurrentPieceInfo->setVisible(false);
+        ui->groupBoxCurrentPieceStatus->setVisible(false);
         ui->groupBoxPieceTransformation->setVisible(false);
         ui->groupBoxCurrentPieceGeometry->setVisible(false);
     }
     else if (selectedPieces.count() == 1)
     {
         ui->groupBoxCurrentPieceInfo->setVisible(true);
+        ui->groupBoxCurrentPieceStatus->setVisible(true);
         ui->groupBoxPieceTransformation->setVisible(true);
         ui->groupBoxCurrentPieceGeometry->setVisible(true);
 
@@ -1372,6 +1385,10 @@ void VPMainWindow::SetPropertyTabCurrentPieceData()
         SetPlainTextEditValue(ui->plainTextEditCurrentPieceUUID, selectedPiece->GetUUID().toString());
         SetLineEditValue(ui->lineEditCurrentPieceGradationId, selectedPiece->GetGradationId());
         SetLineEditValue(ui->lineEditCopyNumber, QString::number(selectedPiece->CopyNumber()));
+
+        ui->labelWarningOutOfBound->setEnabled(selectedPiece->OutOfBound());
+        ui->labelWarningSuperpositionOfPieces->setEnabled(selectedPiece->HasSuperpositionWithPieces());
+        ui->labelWarningPieceGape->setEnabled(selectedPiece->HasInvalidPieceGapPosition());
 
         SetCheckBoxValue(ui->checkBoxCurrentPieceShowSeamline, not selectedPiece->IsHideMainPath());
         SetCheckBoxValue(ui->checkBoxCurrentPieceVerticallyFlipped, selectedPiece->IsVerticallyFlipped());
@@ -1401,6 +1418,7 @@ void VPMainWindow::SetPropertyTabCurrentPieceData()
     {
         // show the content "multiple pieces selected"
         ui->groupBoxCurrentPieceInfo->setVisible(false);
+        ui->groupBoxCurrentPieceStatus->setVisible(false);
         ui->groupBoxPieceTransformation->setVisible(true);
         ui->groupBoxCurrentPieceGeometry->setVisible(false);
 
