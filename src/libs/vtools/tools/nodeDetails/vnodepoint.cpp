@@ -331,9 +331,9 @@ auto VNodePoint::InitContextMenu(QMenu *menu, vidtype pieceId, quint32 referens)
     separatorAct->setSeparator(true);
     menu->addAction(separatorAct);
 
-    contextMenu.insert(static_cast<int>(ContextMenuOption::Option),
-                       menu->addAction(QIcon::fromTheme(QStringLiteral("preferences-other")),
-                                       QCoreApplication::translate("VNodePoint", "Options")));
+    contextMenu.insert(
+        static_cast<int>(ContextMenuOption::Option),
+        menu->addAction(FromTheme(VThemeIcon::PreferencesOther), QCoreApplication::translate("VNodePoint", "Options")));
 
     const VPiece detail = VAbstractTool::data.GetPiece(pieceId);
 
@@ -370,8 +370,8 @@ auto VNodePoint::InitContextMenu(QMenu *menu, vidtype pieceId, quint32 referens)
     reseteLabelTemplateOption->setEnabled(not doc->GetDefaultPieceLabelPath().isEmpty());
     contextMenu.insert(static_cast<int>(ContextMenuOption::ResetLabelTemplate), reseteLabelTemplateOption);
 
-    QAction *actionRemove = menu->addAction(QIcon::fromTheme(QStringLiteral("edit-delete")),
-                                            QCoreApplication::translate("VNodePoint", "Delete"));
+    QAction *actionRemove =
+        menu->addAction(FromTheme(VThemeIcon::EditDelete), QCoreApplication::translate("VNodePoint", "Delete"));
     referens > 1 ? actionRemove->setEnabled(false) : actionRemove->setEnabled(true);
     contextMenu.insert(static_cast<int>(ContextMenuOption::Remove), actionRemove);
 

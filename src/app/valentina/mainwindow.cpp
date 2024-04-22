@@ -5793,14 +5793,14 @@ void MainWindow::CreateMenus()
     undoAction = VAbstractApplication::VApp()->getUndoStack()->createUndoAction(this, tr("&Undo"));
     connect(undoAction, &QAction::triggered, m_toolOptions, &VToolOptionsPropertyBrowser::RefreshOptions);
     m_shortcutActions.insert(VShortcutAction::Undo, undoAction);
-    undoAction->setIcon(QIcon::fromTheme(QStringLiteral("edit-undo")));
+    undoAction->setIcon(FromTheme(VThemeIcon::EditUndo));
     ui->menuPatternPiece->insertAction(ui->actionLast_tool, undoAction);
     ui->toolBarTools->addAction(undoAction);
 
     redoAction = VAbstractApplication::VApp()->getUndoStack()->createRedoAction(this, tr("&Redo"));
     connect(redoAction, &QAction::triggered, m_toolOptions, &VToolOptionsPropertyBrowser::RefreshOptions);
     m_shortcutActions.insert(VShortcutAction::Redo, redoAction);
-    redoAction->setIcon(QIcon::fromTheme(QStringLiteral("edit-redo")));
+    redoAction->setIcon(FromTheme(VThemeIcon::EditRedo));
     ui->menuPatternPiece->insertAction(ui->actionLast_tool, redoAction);
     ui->toolBarTools->addAction(redoAction);
 

@@ -217,15 +217,13 @@ void VWidgetDetails::ToggledPieceItem(QTableWidgetItem *item)
         const bool inLayout = details->value(id).IsInLayout();
         if (inLayout)
         {
-            item->setIcon(
-                QIcon::fromTheme(QStringLiteral("gtk-ok"),
-                                 VTheme::GetFallbackThemeIcon(QStringLiteral("16/actions/gtk-ok"), QSize(16, 16))));
+            item->setIcon(FromTheme(VThemeIcon::GtkOk,
+                                    VTheme::GetFallbackThemeIcon(QStringLiteral("16/actions/gtk-ok"), QSize(16, 16))));
         }
         else
         {
-            item->setIcon(
-                QIcon::fromTheme(QStringLiteral("gtk-no"),
-                                 VTheme::GetFallbackThemeIcon(QStringLiteral("16/actions/gtk-no"), QSize(16, 16))));
+            item->setIcon(FromTheme(VThemeIcon::GtkNo,
+                                    VTheme::GetFallbackThemeIcon(QStringLiteral("16/actions/gtk-no"), QSize(16, 16))));
         }
 
         VToolSeamAllowance *tool = nullptr;
@@ -249,15 +247,13 @@ auto VWidgetDetails::PrepareInLayoutColumnCell(const VPiece &det, quint32 id) ->
 
     if (det.IsInLayout())
     {
-        item->setIcon(
-            QIcon::fromTheme(QStringLiteral("gtk-ok"),
-                             VTheme::GetFallbackThemeIcon(QStringLiteral("16/actions/gtk-ok"), QSize(16, 16))));
+        item->setIcon(FromTheme(VThemeIcon::GtkOk,
+                                VTheme::GetFallbackThemeIcon(QStringLiteral("16/actions/gtk-ok"), QSize(16, 16))));
     }
     else
     {
-        item->setIcon(
-            QIcon::fromTheme(QStringLiteral("gtk-no"),
-                             VTheme::GetFallbackThemeIcon(QStringLiteral("16/actions/gtk-no"), QSize(16, 16))));
+        item->setIcon(FromTheme(VThemeIcon::GtkNo,
+                                VTheme::GetFallbackThemeIcon(QStringLiteral("16/actions/gtk-no"), QSize(16, 16))));
     }
 
     item->setData(Qt::UserRole, id);
@@ -312,16 +308,14 @@ void VWidgetDetails::ShowContextMenu(const QPoint &pos)
         try
         {
             toolPiece = qobject_cast<VToolSeamAllowance *>(VAbstractPattern::getTool(id));
-            if (toolPiece)
+            if (toolPiece != nullptr)
             {
                 pieceMode = true;
                 menu->addSeparator();
 
-                actionPieceOptions =
-                    menu->addAction(QIcon::fromTheme(QStringLiteral("preferences-other")), tr("Piece options"));
+                actionPieceOptions = menu->addAction(FromTheme(VThemeIcon::PreferencesOther), tr("Piece options"));
 
-                actionDeletePiece =
-                    menu->addAction(QIcon::fromTheme(QStringLiteral("edit-delete")), tr("Delete piece"));
+                actionDeletePiece = menu->addAction(FromTheme(VThemeIcon::EditDelete), tr("Delete piece"));
                 actionDeletePiece->setDisabled(toolPiece->referens() > 0);
             }
         }

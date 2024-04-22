@@ -41,8 +41,6 @@ class QStringList;
 
 extern const QString LONG_OPTION_NO_HDPI_SCALING;
 
-extern const QString editDeleteIcon;
-extern const QString preferencesOtherIcon;
 extern const QString degreeSymbol;
 extern const QString trueStr;
 extern const QString falseStr;

@@ -1538,7 +1538,7 @@ void VToolSeamAllowance::contextMenuEvent(QGraphicsSceneContextMenuEvent *event)
     }
 
     QMenu menu;
-    QAction *actionOption = menu.addAction(QIcon::fromTheme(QStringLiteral("preferences-other")), tr("Options"));
+    QAction *actionOption = menu.addAction(FromTheme(VThemeIcon::PreferencesOther), tr("Options"));
 
     const VPiece detail = VAbstractTool::data.GetPiece(m_id);
 
@@ -1573,7 +1573,7 @@ void VToolSeamAllowance::contextMenuEvent(QGraphicsSceneContextMenuEvent *event)
     QAction *reseteLabelTemplateOption = menu.addAction(tr("Reset piece label template"));
     reseteLabelTemplateOption->setEnabled(not doc->GetDefaultPieceLabelPath().isEmpty());
 
-    QAction *actionRemove = menu.addAction(QIcon::fromTheme(QStringLiteral("edit-delete")), tr("Delete"));
+    QAction *actionRemove = menu.addAction(FromTheme(VThemeIcon::EditDelete), tr("Delete"));
     actionRemove->setDisabled(_referens > 0);
 
     QAction *selectedAction = menu.exec(event->screenPos());

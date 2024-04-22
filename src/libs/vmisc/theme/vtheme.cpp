@@ -334,8 +334,7 @@ void VTheme::InitApplicationStyle()
 //---------------------------------------------------------------------------------------------------------------------
 void VTheme::SetIconTheme()
 {
-    static const char *GENERIC_ICON_TO_CHECK = "document-open";
-    if (not QIcon::hasThemeIcon(GENERIC_ICON_TO_CHECK))
+    if (not HasThemeIcon(VThemeIcon::DocumentOpen))
     {
         // If there is no default working icon theme then we should
         // use an icon theme that we provide via a .qrc file

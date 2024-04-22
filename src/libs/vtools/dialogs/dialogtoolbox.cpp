@@ -37,6 +37,7 @@
 #include "../vgeometry/vspline.h"
 #include "../vgeometry/vsplinepath.h"
 #include "../vmisc/def.h"
+#include "../vmisc/theme/themeDef.h"
 #include "../vmisc/vabstractapplication.h"
 #include "../vpatterndb/calculator.h"
 #include "../vpatterndb/variables/vcurvelength.h"
@@ -223,13 +224,13 @@ void DeployFormula(QDialog *dialog, QPlainTextEdit *formula, QPushButton *button
     {
         formula->setFixedHeight(dialogMaxFormulaHeight);
         // Set icon from theme (internal for Windows system)
-        buttonGrowLength->setIcon(QIcon::fromTheme(QStringLiteral("go-next")));
+        buttonGrowLength->setIcon(FromTheme(VThemeIcon::GoNext));
     }
     else
     {
         formula->setFixedHeight(formulaBaseHeight);
         // Set icon from theme (internal for Windows system)
-        buttonGrowLength->setIcon(QIcon::fromTheme(QStringLiteral("go-down")));
+        buttonGrowLength->setIcon(FromTheme(VThemeIcon::GoDown));
     }
 
     // I found that after change size of formula field, it was filed for angle formula, field for formula became black.
@@ -609,7 +610,7 @@ auto EachPointLabelIsUnique(QListWidget *listWidget) -> bool
 //---------------------------------------------------------------------------------------------------------------------
 auto DialogWarningIcon() -> QString
 {
-    const QIcon icon = QIcon::fromTheme(QStringLiteral("dialog-warning"));
+    const QIcon icon = FromTheme(VThemeIcon::DialogWarning);
 
     const QPixmap pixmap = icon.pixmap(QSize(16, 16));
     QByteArray byteArray;

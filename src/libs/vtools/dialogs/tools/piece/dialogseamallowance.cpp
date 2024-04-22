@@ -603,7 +603,7 @@ void DialogSeamAllowance::CheckTabPathsState()
     m_ftb->SetTabText(TabOrder::Paths,
                       (isValid && flagMainPathIsValid && isNameAndUUIDValid) ? tr("Paths") : tr("Paths") + '*'_L1);
 
-    const QIcon warningIcon = QIcon::fromTheme(QStringLiteral("dialog-warning"));
+    const QIcon warningIcon = FromTheme(VThemeIcon::DialogWarning);
 
     uiTabPaths->tabWidget->setTabIcon(uiTabPaths->tabWidget->indexOf(uiTabPaths->tabSeamAllowance),
                                       isValid ? QIcon() : warningIcon);
@@ -641,7 +641,7 @@ void DialogSeamAllowance::CheckTabPassmarksState()
 
     m_ftb->SetTabText(TabOrder::Passmarks, tr("Passmarks") + (allFormulasValid ? QString() : QChar('*')));
 
-    const QIcon icon = QIcon::fromTheme(QStringLiteral("dialog-warning"));
+    const QIcon icon = FromTheme(VThemeIcon::DialogWarning);
     uiTabPassmarks->tabWidget->setTabIcon(uiTabPassmarks->tabWidget->indexOf(uiTabPassmarks->tabManualShape),
                                           allFormulasValid ? QIcon() : icon);
 
@@ -670,7 +670,7 @@ void DialogSeamAllowance::CheckTabFoldLineState()
 
     m_ftb->SetTabText(TabOrder::FoldLine, tr("Fold line") + (allFormulasValid ? QString() : QChar('*')));
 
-    const QIcon icon = QIcon::fromTheme(QStringLiteral("dialog-warning"));
+    const QIcon icon = FromTheme(VThemeIcon::DialogWarning);
     uiTabFoldLine->tabWidget->setTabIcon(uiTabFoldLine->tabWidget->indexOf(uiTabFoldLine->tabShape),
                                          allFormulasValid ? QIcon() : icon);
 }
@@ -1205,7 +1205,7 @@ void DialogSeamAllowance::ShowCustomSAContextMenu(const QPoint &pos)
     }
 
     QScopedPointer<QMenu> const menu(new QMenu());
-    QAction *actionOption = menu->addAction(QIcon::fromTheme(preferencesOtherIcon), tr("Options"));
+    QAction *actionOption = menu->addAction(FromTheme(VThemeIcon::PreferencesOther), tr("Options"));
 
     QListWidgetItem *rowItem = uiTabPaths->listWidgetCustomSA->item(row);
     SCASSERT(rowItem != nullptr);
@@ -1215,7 +1215,7 @@ void DialogSeamAllowance::ShowCustomSAContextMenu(const QPoint &pos)
     actionReverse->setCheckable(true);
     actionReverse->setChecked(record.reverse);
 
-    QAction *actionDelete = menu->addAction(QIcon::fromTheme(editDeleteIcon), tr("Delete"));
+    QAction *actionDelete = menu->addAction(FromTheme(VThemeIcon::EditDelete), tr("Delete"));
 
     QAction *selectedAction = menu->exec(uiTabPaths->listWidgetCustomSA->viewport()->mapToGlobal(pos));
     if (selectedAction == actionDelete)
@@ -1257,8 +1257,8 @@ void DialogSeamAllowance::ShowInternalPathsContextMenu(const QPoint &pos)
     }
 
     QScopedPointer<QMenu> const menu(new QMenu());
-    QAction *actionOption = menu->addAction(QIcon::fromTheme(preferencesOtherIcon), tr("Options"));
-    QAction *actionDelete = menu->addAction(QIcon::fromTheme(editDeleteIcon), tr("Delete"));
+    QAction *actionOption = menu->addAction(FromTheme(VThemeIcon::PreferencesOther), tr("Options"));
+    QAction *actionDelete = menu->addAction(FromTheme(VThemeIcon::EditDelete), tr("Delete"));
 
     QAction *selectedAction = menu->exec(uiTabPaths->listWidgetInternalPaths->viewport()->mapToGlobal(pos));
     if (selectedAction == actionDelete)
@@ -1292,7 +1292,7 @@ void DialogSeamAllowance::ShowPinsContextMenu(const QPoint &pos)
     }
 
     QScopedPointer<QMenu> const menu(new QMenu());
-    QAction *actionDelete = menu->addAction(QIcon::fromTheme(editDeleteIcon), tr("Delete"));
+    QAction *actionDelete = menu->addAction(FromTheme(VThemeIcon::EditDelete), tr("Delete"));
 
     QAction *selectedAction = menu->exec(uiTabPins->listWidgetPins->viewport()->mapToGlobal(pos));
     if (selectedAction == actionDelete)
@@ -1341,7 +1341,7 @@ void DialogSeamAllowance::ShowPlaceLabelsContextMenu(const QPoint &pos)
         UpdateCurrentPlaceLabelRecords();
     };
 
-    QAction *actionOption = menu->addAction(QIcon::fromTheme(preferencesOtherIcon), tr("Options"));
+    QAction *actionOption = menu->addAction(FromTheme(VThemeIcon::PreferencesOther), tr("Options"));
     menu->addSeparator();
     QAction *actionSegment = InitAction(tr("Segment"), PlaceLabelType::Segment);
     QAction *actionRectangle = InitAction(tr("Rectangle"), PlaceLabelType::Rectangle);
@@ -1354,7 +1354,7 @@ void DialogSeamAllowance::ShowPlaceLabelsContextMenu(const QPoint &pos)
     QAction *actionButton = InitAction(tr("Button"), PlaceLabelType::Button);
     QAction *actionCircle = InitAction(tr("Circle"), PlaceLabelType::Circle);
     menu->addSeparator();
-    QAction *actionDelete = menu->addAction(QIcon::fromTheme(editDeleteIcon), tr("Delete"));
+    QAction *actionDelete = menu->addAction(FromTheme(VThemeIcon::EditDelete), tr("Delete"));
 
     QAction *selectedAction = menu->exec(uiTabPlaceLabels->listWidgetPlaceLabels->viewport()->mapToGlobal(pos));
     if (selectedAction == actionDelete)
@@ -2210,7 +2210,7 @@ void DialogSeamAllowance::UpdateDetailLabelValues()
     if (not flagDLAngle || not(flagDLFormulas || flagDPin) || not flagPLAngle || not(flagPLFormulas || flagPPin))
     {
         m_ftb->SetTabText(TabOrder::Labels, tr("Labels") + '*');
-        const QIcon icon = QIcon::fromTheme(QStringLiteral("dialog-warning"));
+        const QIcon icon = FromTheme(VThemeIcon::DialogWarning);
         uiTabLabels->tabWidget->setTabIcon(uiTabLabels->tabWidget->indexOf(uiTabLabels->tabLabels), icon);
     }
     else
@@ -2293,7 +2293,7 @@ void DialogSeamAllowance::UpdatePatternLabelValues()
     if (not flagDLAngle || not(flagDLFormulas || flagDPin) || not flagPLAngle || not(flagPLFormulas || flagPPin))
     {
         m_ftb->SetTabText(TabOrder::Labels, tr("Labels") + '*');
-        const QIcon icon = QIcon::fromTheme(QStringLiteral("dialog-warning"));
+        const QIcon icon = FromTheme(VThemeIcon::DialogWarning);
         uiTabLabels->tabWidget->setTabIcon(uiTabLabels->tabWidget->indexOf(uiTabLabels->tabLabels), icon);
     }
     else
@@ -3177,7 +3177,7 @@ void DialogSeamAllowance::DetailPinPointChanged()
         topPinId == NULL_ID &&bottomPinId == NULL_ID ? color = OkColor(this) : color = errorColor;
 
         m_ftb->SetTabText(TabOrder::Labels, tr("Labels") + '*');
-        const QIcon icon = QIcon::fromTheme(QStringLiteral("dialog-warning"));
+        const QIcon icon = FromTheme(VThemeIcon::DialogWarning);
         uiTabLabels->tabWidget->setTabIcon(uiTabLabels->tabWidget->indexOf(uiTabLabels->tabLabels), icon);
     }
     EnableDetailLabelFormulaControls(not flagDPin);
@@ -3210,7 +3210,7 @@ void DialogSeamAllowance::PatternPinPointChanged()
         topPinId == NULL_ID &&bottomPinId == NULL_ID ? color = OkColor(this) : color = errorColor;
 
         m_ftb->SetTabText(TabOrder::Labels, tr("Labels") + '*');
-        const QIcon icon = QIcon::fromTheme(QStringLiteral("dialog-warning"));
+        const QIcon icon = FromTheme(VThemeIcon::DialogWarning);
         uiTabLabels->tabWidget->setTabIcon(uiTabLabels->tabWidget->indexOf(uiTabLabels->tabLabels), icon);
     }
     EnablePatternLabelFormulaControls(not flagPPin);
@@ -5383,7 +5383,7 @@ auto DialogSeamAllowance::InitMainPathContextMenu(QMenu *menu, const VPieceNode 
     contextMenu.insert(static_cast<int>(MainPathContextMenuOption::Excluded), actionExcluded);
 
     QAction *actionDelete =
-        menu->addAction(QIcon::fromTheme(editDeleteIcon), QApplication::translate("DialogSeamAllowance", "Delete"));
+        menu->addAction(FromTheme(VThemeIcon::EditDelete), QApplication::translate("DialogSeamAllowance", "Delete"));
     contextMenu.insert(static_cast<int>(MainPathContextMenuOption::Delete), actionDelete);
 
     return contextMenu;

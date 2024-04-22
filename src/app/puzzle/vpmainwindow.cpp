@@ -57,6 +57,7 @@
 #include "../vmisc/dialogs/dialogselectlanguage.h"
 #include "../vmisc/lambdaconstants.h"
 #include "../vmisc/projectversion.h"
+#include "../vmisc/theme/themeDef.h"
 #include "../vmisc/theme/vtheme.h"
 #include "../vmisc/vsysexits.h"
 #include "../vwidgets/vmaingraphicsscene.h"
@@ -728,13 +729,13 @@ void VPMainWindow::SetupMenu()
     // Add Undo/Redo actions.
     undoAction = m_layout->UndoStack()->createUndoAction(this, tr("&Undo"));
     m_actionShortcuts.insert(VShortcutAction::Undo, undoAction);
-    undoAction->setIcon(QIcon::fromTheme(QStringLiteral("edit-undo")));
+    undoAction->setIcon(FromTheme(VThemeIcon::EditUndo));
     ui->menuSheet->addAction(undoAction);
     ui->toolBarUndoCommands->addAction(undoAction);
 
     redoAction = m_layout->UndoStack()->createRedoAction(this, tr("&Redo"));
     m_actionShortcuts.insert(VShortcutAction::Redo, redoAction);
-    redoAction->setIcon(QIcon::fromTheme(QStringLiteral("edit-redo")));
+    redoAction->setIcon(FromTheme(VThemeIcon::EditRedo));
     ui->menuSheet->addAction(redoAction);
     ui->toolBarUndoCommands->addAction(redoAction);
 
@@ -883,7 +884,7 @@ void VPMainWindow::InitPropertyTabCurrentPiece()
     connect(ui->checkBoxCurrentPieceHorizontallyFlipped, &QCheckBox::toggled, this,
             &VPMainWindow::CurrentPieceHorizontallyFlippedToggled);
 
-    const QIcon warningIcon = QIcon::fromTheme(QStringLiteral("dialog-warning"));
+    const QIcon warningIcon = FromTheme(VThemeIcon::DialogWarning);
     auto WarningIcon = [warningIcon](QLabel *label)
     {
         const int size = qRound(16 * label->devicePixelRatio());

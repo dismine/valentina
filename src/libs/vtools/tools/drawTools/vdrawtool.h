@@ -183,16 +183,14 @@ void VDrawTool::ContextMenu(QGraphicsSceneContextMenuEvent *event, quint32 itemI
 
     qCDebug(vTool, "Creating tool context menu.");
     QMenu menu;
-    QAction *actionOption =
-        menu.addAction(QIcon::fromTheme(QStringLiteral("preferences-other")), VDrawTool::tr("Options"));
+    QAction *actionOption = menu.addAction(FromTheme(VThemeIcon::PreferencesOther), VDrawTool::tr("Options"));
 
     // add the menu "add to group" to the context menu
     QMap<quint32, QString> groupsNotContainingItem = doc->GetGroupsContainingItem(this->getId(), itemId, false);
     auto *actionsAddToGroup = new QActionGroup(this);
     if (not groupsNotContainingItem.empty())
     {
-        QMenu *menuAddToGroup =
-            menu.addMenu(QIcon::fromTheme(QStringLiteral("list-add")), VDrawTool::tr("Add to group"));
+        QMenu *menuAddToGroup = menu.addMenu(FromTheme(VThemeIcon::ListAdd), VDrawTool::tr("Add to group"));
 
         QStringList list = QStringList(groupsNotContainingItem.values());
         list.sort(Qt::CaseInsensitive);
@@ -216,7 +214,7 @@ void VDrawTool::ContextMenu(QGraphicsSceneContextMenuEvent *event, quint32 itemI
     if (not groupsContainingItem.empty())
     {
         QMenu *menuRemoveFromGroup =
-            menu.addMenu(QIcon::fromTheme(QStringLiteral("list-remove")), VDrawTool::tr("Remove from group"));
+            menu.addMenu(FromTheme(VThemeIcon::ListRemove), VDrawTool::tr("Remove from group"));
 
         QStringList list = QStringList(groupsContainingItem.values());
         list.sort(Qt::CaseInsensitive);
@@ -246,7 +244,7 @@ void VDrawTool::ContextMenu(QGraphicsSceneContextMenuEvent *event, quint32 itemI
     QAction *actionRestoreLabelPosition = menu.addAction(VDrawTool::tr("Restore label position"));
     actionRestoreLabelPosition->setVisible(itemType == GOType::Point);
 
-    QAction *actionRemove = menu.addAction(QIcon::fromTheme(QStringLiteral("edit-delete")), VDrawTool::tr("Delete"));
+    QAction *actionRemove = menu.addAction(FromTheme(VThemeIcon::EditDelete), VDrawTool::tr("Delete"));
     if (showRemove == RemoveOption::Enable)
     {
         if (ref == Referens::Follow)

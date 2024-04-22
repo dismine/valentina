@@ -142,6 +142,7 @@ VLib {
         name: "theme"
         prefix: "theme/"
         files: [
+            "themeDef.cpp",
             "themeDef.h",
             "vapplicationstyle.cpp",
             "vapplicationstyle.h",

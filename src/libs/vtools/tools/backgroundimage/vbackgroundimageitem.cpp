@@ -27,34 +27,35 @@
  *************************************************************************/
 
 #include "vbackgroundimageitem.h"
-#include "../vmisc/vabstractvalapplication.h"
-#include "../vwidgets/vmaingraphicsview.h"
-#include "../ifc/xml/vabstractpattern.h"
-#include "../../undocommands/image/movebackgroundimage.h"
+#include "../../undocommands/image/hidebackgroundimage.h"
 #include "../../undocommands/image/holdbackgroundimage.h"
+#include "../../undocommands/image/movebackgroundimage.h"
+#include "../../undocommands/image/opaquebackgroundimage.h"
+#include "../../undocommands/image/renamebackgroundimage.h"
+#include "../../undocommands/image/resetbackgroundimage.h"
 #include "../../undocommands/image/rotatebackgroundimage.h"
 #include "../../undocommands/image/scalebackgroundimage.h"
-#include "../../undocommands/image/renamebackgroundimage.h"
-#include "../../undocommands/image/hidebackgroundimage.h"
-#include "../../undocommands/image/resetbackgroundimage.h"
-#include "../../undocommands/image/opaquebackgroundimage.h"
 #include "../../undocommands/image/zvaluemovebackgroundimage.h"
+#include "../ifc/xml/vabstractpattern.h"
 #include "../toolsdef.h"
+#include "../vmisc/theme/themeDef.h"
+#include "../vmisc/vabstractvalapplication.h"
+#include "../vwidgets/vmaingraphicsview.h"
 
-#include <QUndoStack>
-#include <QGraphicsView>
-#include <QGraphicsSceneMouseEvent>
-#include <QMenu>
 #include <QGraphicsDropShadowEffect>
-#include <QMessageBox>
+#include <QGraphicsSceneMouseEvent>
+#include <QGraphicsView>
 #include <QKeyEvent>
+#include <QMenu>
+#include <QMessageBox>
+#include <QUndoStack>
 
 //---------------------------------------------------------------------------------------------------------------------
 VBackgroundImageItem::VBackgroundImageItem(const VBackgroundPatternImage &image, VAbstractPattern *doc,
                                            QGraphicsItem *parent)
-    : QGraphicsObject{parent},
-      m_image(image),
-      m_doc(doc)
+  : QGraphicsObject{parent},
+    m_image(image),
+    m_doc(doc)
 {
     SCASSERT(doc != nullptr)
 
@@ -176,7 +177,7 @@ void VBackgroundImageItem::PositionChanged(QUuid id)
     QTransform const newMatrix = m_image.Matrix();
 
     if (not VFuzzyComparePossibleNulls(oldMatrix.m31(), newMatrix.m31()) ||
-            not VFuzzyComparePossibleNulls(oldMatrix.m32(), newMatrix.m32()))
+        not VFuzzyComparePossibleNulls(oldMatrix.m32(), newMatrix.m32()))
     {
         prepareGeometryChange();
         update();
@@ -352,7 +353,7 @@ void VBackgroundImageItem::mouseMoveEvent(QGraphicsSceneMouseEvent *event)
 void VBackgroundImageItem::mouseReleaseEvent(QGraphicsSceneMouseEvent *event)
 {
     if (event->button() == Qt::LeftButton && event->type() != QEvent::GraphicsSceneMouseDoubleClick &&
-            (flags() & QGraphicsItem::ItemIsMovable))
+        (flags() & QGraphicsItem::ItemIsMovable))
     {
         m_lastMoveDistance = QPointF();
         SetItemOverrideCursor(this, cursorArrowOpenHand, 1, 1);
@@ -422,16 +423,16 @@ void VBackgroundImageItem::contextMenuEvent(QGraphicsSceneContextMenuEvent *even
     actionVisible->setCheckable(true);
     actionVisible->setChecked(m_image.Visible());
 
- #if defined(Q_OS_MAC)
+#if defined(Q_OS_MAC)
     const QString actionShowTitle = tr("Show in Finder");
 #else
     const QString actionShowTitle = tr("Show in Explorer");
 #endif
-    QAction *actionShow = menu.addAction(QIcon::fromTheme(QStringLiteral("system-search")), actionShowTitle);
+    QAction *actionShow = menu.addAction(FromTheme(VThemeIcon::SystemSearch), actionShowTitle);
     actionShow->setVisible(false);
     actionShow->setEnabled(QFileInfo::exists(m_image.FilePath()));
 
-    QAction *actionSaveAs = menu.addAction(QIcon::fromTheme(QStringLiteral("document-save-as")), tr("Save as …"));
+    QAction *actionSaveAs = menu.addAction(FromTheme(VThemeIcon::DocumentSaveAs), tr("Save as …"));
     actionSaveAs->setVisible(false);
 
     if (not m_image.FilePath().isEmpty())
@@ -446,7 +447,7 @@ void VBackgroundImageItem::contextMenuEvent(QGraphicsSceneContextMenuEvent *even
     QAction *actionReset = menu.addAction(tr("Reset transformation"));
     actionReset->setEnabled(not m_image.Hold());
 
-    QAction *actionRemove = menu.addAction(QIcon::fromTheme(QStringLiteral("edit-delete")), tr("Delete"));
+    QAction *actionRemove = menu.addAction(FromTheme(VThemeIcon::EditDelete), tr("Delete"));
 
     QAction *selectedAction = menu.exec(event->screenPos());
     if (selectedAction == holdOption)
@@ -481,16 +482,16 @@ void VBackgroundImageItem::keyPressEvent(QKeyEvent *event)
     const int move = (event->modifiers() & Qt::ShiftModifier) ? 10 : 1;
 
     int angle = 15;
-    if(event->modifiers() & Qt::ControlModifier)
+    if (event->modifiers() & Qt::ControlModifier)
     {
         angle = 90;
     }
-    else if(event->modifiers() & Qt::AltModifier)
+    else if (event->modifiers() & Qt::AltModifier)
     {
         angle = 1;
     }
 
-    switch(event->key())
+    switch (event->key())
     {
         case Qt::Key_Left:
             TranslateImageOn(-move, 0);
@@ -557,16 +558,10 @@ void VBackgroundImageItem::keyReleaseEvent(QKeyEvent *event)
                 return;
             }
         }
-        else if (event->key() == Qt::Key_Left ||
-                 event->key() == Qt::Key_Right ||
-                 event->key() == Qt::Key_Up ||
-                 event->key() == Qt::Key_Down ||
-                 event->key() == Qt::Key_BracketLeft ||
-                 event->key() == Qt::Key_BracketRight ||
-                 event->key() == Qt::Key_Period ||
-                 event->key() == Qt::Key_Greater ||
-                 event->key() == Qt::Key_Comma ||
-                 event->key() == Qt::Key_Less)
+        else if (event->key() == Qt::Key_Left || event->key() == Qt::Key_Right || event->key() == Qt::Key_Up ||
+                 event->key() == Qt::Key_Down || event->key() == Qt::Key_BracketLeft ||
+                 event->key() == Qt::Key_BracketRight || event->key() == Qt::Key_Period ||
+                 event->key() == Qt::Key_Greater || event->key() == Qt::Key_Comma || event->key() == Qt::Key_Less)
         {
             if (not event->isAutoRepeat())
             {
@@ -612,7 +607,7 @@ void VBackgroundImageItem::UpdateHoldState()
     m_image = m_doc->GetBackgroundImage(m_image.Id());
     setFlag(QGraphicsItem::ItemIsMovable, not m_image.Hold());
     setFlag(QGraphicsItem::ItemSendsGeometryChanges, not m_image.Hold());
-    setFlag(QGraphicsItem::ItemIsFocusable, not m_image.Hold());// For keyboard input focus
+    setFlag(QGraphicsItem::ItemIsFocusable, not m_image.Hold()); // For keyboard input focus
     emit UpdateControls();
 }
 
@@ -644,7 +639,7 @@ void VBackgroundImageItem::InitImage()
 
     setFlag(QGraphicsItem::ItemIsMovable, not m_image.Hold());
     setFlag(QGraphicsItem::ItemSendsGeometryChanges, not m_image.Hold());
-    setFlag(QGraphicsItem::ItemIsFocusable, not m_image.Hold());// For keyboard input focus
+    setFlag(QGraphicsItem::ItemIsFocusable, not m_image.Hold()); // For keyboard input focus
 
     setVisible(m_image.Visible());
 }

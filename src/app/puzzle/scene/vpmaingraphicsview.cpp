@@ -38,6 +38,7 @@
 #include "../layout/vplayout.h"
 #include "../layout/vppiece.h"
 #include "../layout/vpsheet.h"
+#include "../vmisc/theme/themeDef.h"
 #include "../vwidgets/vmaingraphicsscene.h"
 #include "undocommands/vpundopiecezvaluemove.h"
 #include "vpgraphicspiece.h"
@@ -348,7 +349,7 @@ void VPMainGraphicsView::contextMenuEvent(QContextMenuEvent *event)
     restoreOriginAction->setShortcut(*restoreOriginShortcut);
     restoreOriginAction->setEnabled(not sheet.isNull() && sheet->TransformationOrigin().custom);
 
-    QAction *removeSheetAction = menu.addAction(QIcon::fromTheme(QStringLiteral("edit-delete")), tr("Remove sheet"));
+    QAction *removeSheetAction = menu.addAction(FromTheme(VThemeIcon::EditDelete), tr("Remove sheet"));
     removeSheetAction->setEnabled(not sheet.isNull() && layout->GetSheets().size() > 1);
 
     QAction *selectedAction = menu.exec(event->globalPos());

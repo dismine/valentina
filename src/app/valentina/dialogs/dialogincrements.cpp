@@ -1886,13 +1886,13 @@ void DialogIncrements::DeployFormula()
     {
         plainTextEditFormula->setFixedHeight(DIALOG_MAX_FORMULA_HEIGHT);
         // Set icon from theme (internal for Windows system)
-        pushButtonGrow->setIcon(QIcon::fromTheme(QStringLiteral("go-next")));
+        pushButtonGrow->setIcon(FromTheme(VThemeIcon::GoNext));
     }
     else
     {
         plainTextEditFormula->setFixedHeight(baseHeight);
         // Set icon from theme (internal for Windows system)
-        pushButtonGrow->setIcon(QIcon::fromTheme(QStringLiteral("go-down")));
+        pushButtonGrow->setIcon(FromTheme(VThemeIcon::GoDown));
     }
 
     // I found that after change size of formula field, it was filed for angle formula, field for formula became black.

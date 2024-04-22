@@ -293,8 +293,8 @@ void VWidgetGroups::CtxMenu(const QPoint &pos)
             ? menu->addAction(VTheme::GetIconResource(resource, QStringLiteral("16x16/closed_eye.png")), tr("Hide"))
             : menu->addAction(VTheme::GetIconResource(resource, QStringLiteral("16x16/open_eye.png")), tr("Show"));
 
-    QAction *actionPreferences = menu->addAction(QIcon::fromTheme(preferencesOtherIcon), tr("Preferences"));
-    QAction *actionDelete = menu->addAction(QIcon::fromTheme(editDeleteIcon), tr("Delete"));
+    QAction *actionPreferences = menu->addAction(FromTheme(VThemeIcon::PreferencesOther), tr("Preferences"));
+    QAction *actionDelete = menu->addAction(FromTheme(VThemeIcon::EditDelete), tr("Delete"));
     menu->addSeparator();
     QAction *actionHideAll = menu->addAction(tr("Hide All"));
     actionHideAll->setEnabled(MultipleChangeVisibilityTo(false));

@@ -38,6 +38,7 @@
 #include "../vmisc/dialogs/dialogexporttocsv.h"
 #include "../vmisc/dialogs/dialogselectlanguage.h"
 #include "../vmisc/qxtcsvmodel.h"
+#include "../vmisc/theme/themeDef.h"
 #include "../vmisc/theme/vtheme.h"
 #include "../vmisc/vsysexits.h"
 #include "dialogs/dialogabouttape.h"
@@ -1199,13 +1200,13 @@ void TKMMainWindow::DeployFormula()
     {
         ui->plainTextEditFormula->setFixedHeight(DIALOG_MAX_FORMULA_HEIGHT);
         // Set icon from theme (internal for Windows system)
-        ui->pushButtonGrow->setIcon(QIcon::fromTheme(QStringLiteral("go-next")));
+        ui->pushButtonGrow->setIcon(FromTheme(VThemeIcon::GoNext));
     }
     else
     {
         ui->plainTextEditFormula->setFixedHeight(m_formulaBaseHeight);
         // Set icon from theme (internal for Windows system)
-        ui->pushButtonGrow->setIcon(QIcon::fromTheme(QStringLiteral("go-down")));
+        ui->pushButtonGrow->setIcon(FromTheme(VThemeIcon::GoDown));
     }
 
     // I found that after change size of formula field, it was filed for angle formula, field for formula became black.

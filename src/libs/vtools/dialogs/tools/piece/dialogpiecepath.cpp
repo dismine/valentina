@@ -263,7 +263,7 @@ void DialogPiecePath::CheckState()
     }
     else
     {
-        const QIcon icon = QIcon::fromTheme(QStringLiteral("dialog-warning"));
+        const QIcon icon = FromTheme(VThemeIcon::DialogWarning);
         ui->tabWidget->setTabIcon(tabSeamAllowanceIndex, icon);
     }
 
@@ -276,7 +276,7 @@ void DialogPiecePath::CheckState()
     }
     else
     {
-        const QIcon icon = QIcon::fromTheme(QStringLiteral("dialog-warning"));
+        const QIcon icon = FromTheme(VThemeIcon::DialogWarning);
         ui->tabWidget->setTabIcon(tabControlIndex, icon);
     }
 
@@ -292,7 +292,7 @@ void DialogPiecePath::CheckState()
     }
     else
     {
-        const QIcon icon = QIcon::fromTheme(QStringLiteral("dialog-warning"));
+        const QIcon icon = FromTheme(VThemeIcon::DialogWarning);
         ui->tabWidget->setTabIcon(tabPassmarksIndex, icon);
     }
 
@@ -2348,8 +2348,8 @@ auto DialogPiecePath::InitContextMenu(QMenu *menu, const VPieceNode &rowNode) ->
     actionExcluded->setChecked(rowNode.IsExcluded());
     contextMenu.insert(static_cast<int>(ContextMenuOption::Excluded), actionExcluded);
 
-    QAction *actionDelete = menu->addAction(QIcon::fromTheme(QStringLiteral("edit-delete")),
-                                            QApplication::translate("DialogSeamAllowance", "Delete"));
+    QAction *actionDelete =
+        menu->addAction(FromTheme(VThemeIcon::EditDelete), QApplication::translate("DialogSeamAllowance", "Delete"));
     contextMenu.insert(static_cast<int>(ContextMenuOption::Delete), actionDelete);
 
     return contextMenu;

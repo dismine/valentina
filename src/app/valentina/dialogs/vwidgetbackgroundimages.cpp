@@ -30,6 +30,7 @@
 #include "../ifc/xml/vbackgroundpatternimage.h"
 #include "../vmisc/def.h"
 #include "../vmisc/lambdaconstants.h"
+#include "../vmisc/theme/themeDef.h"
 #include "../vmisc/theme/vtheme.h"
 #include "../vmisc/vabstractapplication.h"
 #include "../vtools/undocommands/image/hideallbackgroundimages.h"
@@ -355,7 +356,7 @@ void VWidgetBackgroundImages::ContextMenu(const QPoint &pos)
     QAction *actionReset = menu.addAction(tr("Reset transformation"));
     actionReset->setEnabled(not image.Hold());
 
-    QAction *actionDelete = menu.addAction(QIcon::fromTheme(editDeleteIcon), tr("Delete"));
+    QAction *actionDelete = menu.addAction(FromTheme(VThemeIcon::EditDelete), tr("Delete"));
 
     menu.addSeparator();
     QAction *actionHoldAll = menu.addAction(tr("Hold All"));
