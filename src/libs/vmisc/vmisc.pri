@@ -13,6 +13,7 @@ SOURCES += \
     $$PWD/svgfont/vsvgglyph.cpp \
     $$PWD/svgfont/vsvgpathtokenizer.cpp \
     $$PWD/testpath.cpp \
+    $$PWD/theme/themeDef.cpp \
     $$PWD/theme/vapplicationstyle.cpp \
     $$PWD/theme/vmanuallayoutstyle.cpp \
     $$PWD/theme/vpatternpiecestyle.cpp \
@@ -102,17 +103,6 @@ HEADERS += \
 contains(DEFINES, APPIMAGE) {
     SOURCES += \
         $$PWD/appimage.h
-}
-
-# Qt's versions
-# 5.2.0, 5.2.1
-# 5.3.0, 5.3.1, 5.3.2
-
-
-contains(QT_VERSION, ^5\\.[0-2]\\.[0-2]$) { # Since Qt 5.3.0
-    HEADERS +=
-
-    SOURCES +=
 }
 
 FORMS    += \
