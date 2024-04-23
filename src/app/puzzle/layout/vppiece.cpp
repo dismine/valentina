@@ -460,7 +460,8 @@ auto VPPiece::ClosestDistance(const QVector<QPointF> &path1, const QVector<QPoin
         }
     };
 
-    auto CalculateClosestDistanceForChunk = [&](const QVector<QPointF> &chunk) -> QLineF
+    std::function<QLineF(const QVector<QPointF> &)> const CalculateClosestDistanceForChunk =
+        [&](const QVector<QPointF> &chunk)
     {
         qreal minLocalDistance = std::numeric_limits<qreal>::max();
         QLineF localClosestDistance;

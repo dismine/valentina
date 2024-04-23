@@ -887,7 +887,7 @@ void VPMainWindow::InitPropertyTabCurrentPiece()
     const QIcon warningIcon = FromTheme(VThemeIcon::DialogWarning);
     auto WarningIcon = [warningIcon](QLabel *label)
     {
-        const int size = qRound(16 * label->devicePixelRatio());
+        const int size = qRound(16. * label->devicePixelRatio());
         label->setPixmap(warningIcon.pixmap(size, size));
     };
 
