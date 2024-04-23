@@ -90,20 +90,20 @@ AppDir:
     - opt/qt515/plugins/egldeviceintegrations
     - opt/qt515/plugins/platforminputcontexts
     - opt/qt515/plugins/sqldrivers
-    - /opt/qt515/translations/assistant*.qm
-    - /opt/qt515/translations/designer*.qm
-    - /opt/qt515/translations/linguist*.qm
-    - /opt/qt515/translations/qt_help*.qm
-    - /opt/qt515/translations/qtconnectivity*.qm
-    - /opt/qt515/translations/qtdeclarative*.qm
-    - /opt/qt515/translations/qtlocation*.qm
-    - /opt/qt515/translations/qtmultimedia*.qm
-    - /opt/qt515/translations/qtquickcontrols2*.qm
-    - /opt/qt515/translations/qtquickcontrols*.qm
-    - /opt/qt515/translations/qtscript*.qm
-    - /opt/qt515/translations/qtserialport*.qm
-    - /opt/qt515/translations/qtwebengine*.qm
-    - /opt/qt515/translations/qtwebsockets*.qm
+    - opt/qt515/translations/assistant*.qm
+    - opt/qt515/translations/designer*.qm
+    - opt/qt515/translations/linguist*.qm
+    - opt/qt515/translations/qt_help*.qm
+    - opt/qt515/translations/qtconnectivity*.qm
+    - opt/qt515/translations/qtdeclarative*.qm
+    - opt/qt515/translations/qtlocation*.qm
+    - opt/qt515/translations/qtmultimedia*.qm
+    - opt/qt515/translations/qtquickcontrols2*.qm
+    - opt/qt515/translations/qtquickcontrols*.qm
+    - opt/qt515/translations/qtscript*.qm
+    - opt/qt515/translations/qtserialport*.qm
+    - opt/qt515/translations/qtwebengine*.qm
+    - opt/qt515/translations/qtwebsockets*.qm
   runtime:
     env:
       APPDIR_LIBRARY_PATH: "$APPDIR:$APPDIR/runtime/compat/:$APPDIR/opt/qt515/lib:$APPDIR/usr/lib/x86_64-linux-gnu:$APPDIR/lib/x86_64-linux-gnu:$APPDIR/usr/lib:$APPDIR/usr/lib/x86_64-linux-gnu/gdk-pixbuf-2.0/2.10.0/loaders:$APPDIR/usr/local/lib/valentina"
