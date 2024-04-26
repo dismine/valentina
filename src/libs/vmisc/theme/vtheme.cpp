@@ -135,7 +135,16 @@ void ActivateCustomDarkTheme()
 void ActivateDefaultThemeWin()
 {
 #if QT_VERSION >= QT_VERSION_CHECK(6, 5, 0)
+// Fix for issue QTBUG-123722
+#if QT_VERSION == QT_VERSION_CHECK(6, 7, 0)
+    if (!VTheme::IsInDarkTheme())
+    {
+        // NOLINTNEXTLINE(cppcoreguidelines-pro-type-static-cast-downcast)
+        qApp->setStyleSheet(QStringLiteral("QComboBox QAbstractItemView {background-color: white}"));
+    }
+#else
     qApp->setStyleSheet(QString()); // NOLINT(cppcoreguidelines-pro-type-static-cast-downcast)
+#endif
 #else
     if (VTheme::IsInDarkTheme())
     {
@@ -357,7 +366,16 @@ void VTheme::SetIconTheme()
 //---------------------------------------------------------------------------------------------------------------------
 void VTheme::SetToAutoTheme() const
 {
+// Fix for issue QTBUG-123722
+#if defined(Q_OS_WIN) && QT_VERSION == QT_VERSION_CHECK(6, 7, 0)
+    if (!IsInDarkTheme())
+    {
+        // NOLINTNEXTLINE(cppcoreguidelines-pro-type-static-cast-downcast)
+        qApp->setStyleSheet(QStringLiteral("QComboBox QAbstractItemView {background-color: white}"));
+    }
+#else
     qApp->setStyleSheet(QString()); // NOLINT(cppcoreguidelines-pro-type-static-cast-downcast)
+#endif
     QIcon::setThemeName(m_defaultThemeName);
 }
 
