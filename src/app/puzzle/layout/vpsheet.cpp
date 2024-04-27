@@ -725,8 +725,8 @@ auto VPSheet::GetMarginsRect() const -> QRectF
 {
     if (not m_ignoreMargins)
     {
-        QRectF rect = QRectF(QPointF(m_margins.left(), m_margins.top()),
-                             QPointF(m_size.width() - m_margins.right(), m_size.height() - m_margins.bottom()));
+        auto rect = QRectF(QPointF(m_margins.left(), m_margins.top()),
+                           QPointF(m_size.width() - m_margins.right(), m_size.height() - m_margins.bottom()));
         return rect;
     }
 
@@ -984,7 +984,7 @@ auto VPSheet::GetSheetSize() const -> QSizeF
 auto VPSheet::GetSheetSizeConverted() const -> QSizeF
 {
     Unit const unit = SheetUnits();
-    QSizeF convertedSize =
+    auto convertedSize =
         QSizeF(UnitConvertor(m_size.width(), Unit::Px, unit), UnitConvertor(m_size.height(), Unit::Px, unit));
 
     return convertedSize;

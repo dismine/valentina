@@ -49,11 +49,11 @@ auto WatermarkImageFromCache(const VWatermarkData &watermarkData, const QString 
     QPixmap pixmap;
     QString const imagePath = AbsoluteMPath(watermarkPath, watermarkData.path);
 
-    if (QString const imageCacheKey = QStringLiteral("puzzle=path%1+rotation%3+grayscale%4+xscale%5+yxcale%6")
-                                          .arg(imagePath, QString::number(watermarkData.imageRotation),
-                                               watermarkData.grayscale ? trueStr : falseStr)
-                                          .arg(xScale)
-                                          .arg(yScale);
+    if (auto const imageCacheKey = QStringLiteral("puzzle=path%1+rotation%3+grayscale%4+xscale%5+yxcale%6")
+                                       .arg(imagePath, QString::number(watermarkData.imageRotation),
+                                            watermarkData.grayscale ? trueStr : falseStr)
+                                       .arg(xScale)
+                                       .arg(yScale);
         not QPixmapCache::find(imageCacheKey, &pixmap))
     {
         QImageReader imageReader(imagePath);
@@ -91,8 +91,8 @@ auto WatermarkImageFromCache(const VWatermarkData &watermarkData, const QString 
 auto TriangleBasic() -> QPainterPath
 {
     // ------------- prepare triangles for position marks
-    QRectF const rectBasic = QRectF(-UnitConvertor(0.5, Unit::Cm, Unit::Px), 0, UnitConvertor(1, Unit::Cm, Unit::Px),
-                                    UnitConvertor(0.5, Unit::Cm, Unit::Px));
+    auto const rectBasic = QRectF(-UnitConvertor(0.5, Unit::Cm, Unit::Px), 0, UnitConvertor(1, Unit::Cm, Unit::Px),
+                                  UnitConvertor(0.5, Unit::Cm, Unit::Px));
     QPainterPath triangleBasic;
     triangleBasic.moveTo(rectBasic.topLeft());
     triangleBasic.lineTo(rectBasic.topRight());
@@ -408,7 +408,7 @@ void VPTileFactory::DrawTilePageContent(QPainter *painter, const VPSheetPtr &she
         sheetMargins = sheet->GetSheetMargins();
     }
 
-    QPen const penTileDrawing =
+    auto const penTileDrawing =
         QPen(Qt::black, m_commonSettings->WidthMainLine(), Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin);
 
     painter->setPen(penTileDrawing);
@@ -416,11 +416,11 @@ void VPTileFactory::DrawTilePageContent(QPainter *painter, const VPSheetPtr &she
     // paint the content of the page
     const qreal xScale = layout->LayoutSettings().HorizontalScale();
     const qreal yScale = layout->LayoutSettings().VerticalScale();
-    QRectF const source = QRectF(sheetMargins.left() + col * (m_drawingAreaWidth - tileStripeWidth) / xScale,
-                                 sheetMargins.top() + row * (m_drawingAreaHeight - tileStripeWidth) / yScale,
-                                 m_drawingAreaWidth / xScale, m_drawingAreaHeight / yScale);
+    auto const source = QRectF(sheetMargins.left() + col * (m_drawingAreaWidth - tileStripeWidth) / xScale,
+                               sheetMargins.top() + row * (m_drawingAreaHeight - tileStripeWidth) / yScale,
+                               m_drawingAreaWidth / xScale, m_drawingAreaHeight / yScale);
 
-    QRectF const target = QRectF(0, 0, m_drawingAreaWidth, m_drawingAreaHeight);
+    auto const target = QRectF(0, 0, m_drawingAreaWidth, m_drawingAreaHeight);
     sheet->SceneData()->Scene()->render(painter, VPrintLayout::SceneTargetRect(printer, target), source,
                                         Qt::IgnoreAspectRatio);
 }
@@ -616,7 +616,7 @@ void VPTileFactory::DrawTextInformation(QPainter *painter, int row, int col, int
 
     td.setPageSize(QSizeF(m_drawingAreaHeight - UnitConvertor(2, Unit::Cm, Unit::Px), m_drawingAreaWidth));
 
-    QFontMetrics const metrix = QFontMetrics(td.defaultFont());
+    auto const metrix = QFontMetrics(td.defaultFont());
     int const maxWidth = metrix.horizontalAdvance(QString().fill('z', 50));
     QString const clippedSheetName = metrix.elidedText(sheetName, Qt::ElideMiddle, maxWidth);
 
@@ -683,7 +683,7 @@ void VPTileFactory::PaintWatermarkImage(QPainter *painter, const QRectF &img, co
     const qreal opacity = watermarkData.opacity / 100.;
     auto BrokenImage = [&img, &watermarkData, watermarkPath, opacity, folowColorScheme]()
     {
-        QString colorScheme = QStringLiteral("light");
+        auto colorScheme = QStringLiteral("light");
 
         if (folowColorScheme)
         {

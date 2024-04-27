@@ -196,7 +196,7 @@ void VVITConverter::ConvertMeasurementsToV0_3_0()
     // TODO. Delete if minimal supported version is 0.3.0
     Q_STATIC_ASSERT_X(VVITConverter::MeasurementMinVer < FormatVersion(0, 3, 0), "Time to refactor the code.");
 
-    const QString tagBM = QStringLiteral("body-measurements");
+    const auto tagBM = QStringLiteral("body-measurements");
 
     QDomElement bm = createElement(tagBM);
 
@@ -293,7 +293,7 @@ void VVITConverter::ConvertMeasurementsToV0_3_3()
 
         for (int ii = 0; ii < nodeList.size(); ++ii)
         {
-            const QString attrName = QStringLiteral("name");
+            const auto attrName = QStringLiteral("name");
             QDomElement element = nodeList.at(ii).toElement();
             const QString name = GetParametrString(element, attrName);
             if (name == i.value())

@@ -2150,7 +2150,7 @@ auto VAbstractPattern::GetMaterials(const QDomElement &element) const -> QMap<in
         {
             if (tagMaterial.tagName() == TagMaterial)
             {
-                const int number = static_cast<int>(GetParametrUInt(tagMaterial, AttrNumber, QChar('0')));
+                const auto number = static_cast<int>(GetParametrUInt(tagMaterial, AttrNumber, QChar('0')));
                 const QString name = GetParametrEmptyString(tagMaterial, AttrName);
 
                 if (number > 0 && number <= userMaterialPlaceholdersQuantity)

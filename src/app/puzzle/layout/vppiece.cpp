@@ -559,7 +559,7 @@ auto VPPiece::StickySheet(VStickyDistance &match) const -> bool
     }
 
     const qreal stickyDistance = maxStickyDistance;
-    if (QRectF const stickyZone =
+    if (auto const stickyZone =
             QRectF(boundingRect.topLeft().x() - stickyDistance, boundingRect.topLeft().y() - stickyDistance,
                    boundingRect.width() + stickyDistance * 2, boundingRect.height() + stickyDistance * 2);
         !stickyZone.intersects(sheetRect))
@@ -664,7 +664,7 @@ auto VPPiece::StickyPieces(VStickyDistance &match) const -> bool
     CastTo(GetMappedExternalContourPoints(), path);
     QRectF const boundingRect = VLayoutPiece::BoundingRect(path);
     const qreal stickyDistance = pieceGap + minStickyDistance;
-    QRectF const stickyZone =
+    auto const stickyZone =
         QRectF(boundingRect.topLeft().x() - stickyDistance, boundingRect.topLeft().y() - stickyDistance,
                boundingRect.width() + stickyDistance * 2, boundingRect.height() + stickyDistance * 2);
 

@@ -512,8 +512,8 @@ void VTheme::ResetThemeSettings() const
 auto VTheme::GetFallbackThemeIcon(const QString &iconName, QSize iconSize) -> QIcon
 {
     const QString themePrefix = (ColorSheme() == VColorSheme::Light ? QStringLiteral("Light") : QStringLiteral("Dark"));
-    const QString themeName = QStringLiteral("Eleven-%1").arg(themePrefix);
-    const QString filePath = QStringLiteral(":icons/%1/%2.svg").arg(themeName, iconName);
+    const auto themeName = QStringLiteral("Eleven-%1").arg(themePrefix);
+    const auto filePath = QStringLiteral(":icons/%1/%2.svg").arg(themeName, iconName);
 
     QIcon icon;
     icon.addFile(filePath, iconSize, QIcon::Normal, QIcon::On);

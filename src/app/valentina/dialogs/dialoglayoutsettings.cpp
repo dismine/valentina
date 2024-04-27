@@ -450,7 +450,7 @@ void DialogLayoutSettings::FindTemplate()
 
     const Unit paperUnit = PaperUnit();
 
-    const int max = static_cast<int>(PaperSizeTemplate::Custom);
+    const auto max = static_cast<int>(PaperSizeTemplate::Custom);
     for (int i = 0; i < max; ++i)
     {
         const QSizeF tmplSize = GetTemplateSize(static_cast<PaperSizeTemplate>(i), paperUnit);

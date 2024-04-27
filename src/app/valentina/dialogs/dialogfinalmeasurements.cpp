@@ -551,14 +551,14 @@ void DialogFinalMeasurements::ShowUnits()
     {
         // calculated value
         const QString header = ui->tableWidget->horizontalHeaderItem(1)->text();
-        const QString unitHeader = QStringLiteral("%1 (%2)").arg(header, unit);
+        const auto unitHeader = QStringLiteral("%1 (%2)").arg(header, unit);
         ui->tableWidget->horizontalHeaderItem(1)->setText(unitHeader);
     }
 
     {
         // formula
         const QString header = ui->tableWidget->horizontalHeaderItem(2)->text();
-        const QString unitHeader = QStringLiteral("%1 (%2)").arg(header, unit);
+        const auto unitHeader = QStringLiteral("%1 (%2)").arg(header, unit);
         ui->tableWidget->horizontalHeaderItem(2)->setText(unitHeader);
     }
 }
@@ -960,7 +960,7 @@ void DialogFinalMeasurements::UpdateSearchControlsTooltips()
 //---------------------------------------------------------------------------------------------------------------------
 void DialogFinalMeasurements::InitIcons()
 {
-    QString const resource = QStringLiteral("icon");
+    auto const resource = QStringLiteral("icon");
 
     ui->toolButtonExpr->setIcon(VTheme::GetIconResource(resource, QStringLiteral("24x24/fx.png")));
 }

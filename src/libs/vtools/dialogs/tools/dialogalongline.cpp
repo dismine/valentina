@@ -341,7 +341,7 @@ void DialogAlongLine::FinishCreating()
 //---------------------------------------------------------------------------------------------------------------------
 void DialogAlongLine::InitIcons()
 {
-    const QString resource = QStringLiteral("icon");
+    const auto resource = QStringLiteral("icon");
 
     ui->toolButtonExprLength->setIcon(VTheme::GetIconResource(resource, QStringLiteral("24x24/fx.png")));
     ui->labelEqual->setPixmap(VTheme::GetPixmapResource(resource, QStringLiteral("24x24/equal.png")));

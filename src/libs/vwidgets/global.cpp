@@ -65,7 +65,7 @@ auto SceneScale(QGraphicsScene *scene) -> qreal
 //---------------------------------------------------------------------------------------------------------------------
 auto PointRect(qreal radius) -> QRectF
 {
-    QRectF rec = QRectF(0, 0, radius * 2, radius * 2);
+    auto rec = QRectF(0, 0, radius * 2, radius * 2);
     rec.translate(-rec.center().x(), -rec.center().y());
     return rec;
 }

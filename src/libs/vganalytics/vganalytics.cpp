@@ -478,7 +478,7 @@ auto VGAnalytics::CountryCode() -> QString
 
     eventLoop.exec();
 
-    QString country = QStringLiteral("Unknown");
+    auto country = QStringLiteral("Unknown");
 
     if (timer.isActive())
     {

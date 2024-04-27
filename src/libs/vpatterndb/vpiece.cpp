@@ -1678,7 +1678,7 @@ auto VPiece::SeamAllowanceMirrorLine(const VContainer *data) const -> QLineF
         return seamMirrorLine;
     }
 
-    QRectF rec = QRectF(0, 0, INT_MAX, INT_MAX);
+    auto rec = QRectF(0, 0, INT_MAX, INT_MAX);
     rec.translate(-INT_MAX / 2.0, -INT_MAX / 2.0);
 
     QLineF axis =

@@ -119,7 +119,7 @@ void InitLanguageList(QComboBox *combobox)
     // English language is internal and doesn't have own *.qm file.
     // Since Qt 5.12 country names have spaces
     QIcon const ico(u"://flags/%1.png"_s.arg(TerritoryToString(QLocale::UnitedStates)));
-    const QString en_US = QStringLiteral("en_US");
+    const auto en_US = QStringLiteral("en_US");
     QString const lang = QLocale(en_US).nativeLanguageName();
     combobox->addItem(ico, lang, en_US);
 }
@@ -265,11 +265,11 @@ void ShowInGraphicalShell(const QString &filePath)
     QProcess::startDetached(QStringLiteral("explorer"), QStringList{"/select", QDir::toNativeSeparators(filePath)});
 #else
     const int timeout = 1000; // ms
-    QString const command = QStringLiteral("dbus-send --reply-timeout=%1 --session --dest=org.freedesktop.FileManager1 "
-                                           "--type=method_call /org/freedesktop/FileManager1 "
-                                           "org.freedesktop.FileManager1.ShowItems array:string:\"%2\" string:\"\"")
-                                .arg(timeout)
-                                .arg(QUrl::fromLocalFile(filePath).toString());
+    auto const command = QStringLiteral("dbus-send --reply-timeout=%1 --session --dest=org.freedesktop.FileManager1 "
+                                        "--type=method_call /org/freedesktop/FileManager1 "
+                                        "org.freedesktop.FileManager1.ShowItems array:string:\"%2\" string:\"\"")
+                             .arg(timeout)
+                             .arg(QUrl::fromLocalFile(filePath).toString());
 
     // Sending message through dbus will highlighting file
     QProcess dbus;

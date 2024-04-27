@@ -92,7 +92,7 @@ auto VPCarrouselPiece::CreatePieceIcon(const QSize &size, bool isDragIcon) const
 
     QRectF const boundingRect = piece->DetailBoundingRect();
     qreal const canvasSize = qMax(boundingRect.height(), boundingRect.width());
-    QRectF const canvas = QRectF(0, 0, canvasSize, canvasSize);
+    auto const canvas = QRectF(0, 0, canvasSize, canvasSize);
 
     qreal const dx = canvas.center().x() - boundingRect.center().x();
     qreal const dy = canvas.center().y() - boundingRect.center().y();

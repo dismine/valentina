@@ -167,7 +167,7 @@ void TST_VTranslateVars::PrepareVal(const QString &inputFormula, const QString &
 
     auto PREPARE_CASE = [locale](const QString &inputString, const QString &outputString)
     {
-        QString const tag = QStringLiteral("%1. String '%2'").arg(locale.name(), inputString);
+        auto const tag = QStringLiteral("%1. String '%2'").arg(locale.name(), inputString);
         QTest::newRow(qUtf8Printable(tag)) << inputString << outputString << locale;
     };
 

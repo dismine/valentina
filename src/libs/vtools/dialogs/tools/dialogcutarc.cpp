@@ -308,7 +308,7 @@ void DialogCutArc::FinishCreating()
 //---------------------------------------------------------------------------------------------------------------------
 void DialogCutArc::InitIcons()
 {
-    QString const resource = QStringLiteral("icon");
+    auto const resource = QStringLiteral("icon");
 
     ui->toolButtonExprLength->setIcon(VTheme::GetIconResource(resource, QStringLiteral("24x24/fx.png")));
     ui->label_4->setPixmap(VTheme::GetPixmapResource(resource, QStringLiteral("24x24/equal.png")));

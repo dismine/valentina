@@ -837,7 +837,7 @@ void MainWindow::SetToolButton(bool checked, Tool t, const QString &cursor, cons
         if (VValentinaSettings *settings = VAbstractValApplication::VApp()->ValentinaSettings();
             settings->GetPointerMode() == VToolPointerMode::ToolIcon)
         {
-            const QString resource = QStringLiteral("toolcursor");
+            const auto resource = QStringLiteral("toolcursor");
             auto cursorResource = VTheme::GetResourceName(resource, cursor);
             if (qApp->devicePixelRatio() >= 2) // NOLINT(cppcoreguidelines-pro-type-static-cast-downcast)
             {
@@ -2904,7 +2904,7 @@ void MainWindow::ToolBarOption()
 //---------------------------------------------------------------------------------------------------------------------
 void MainWindow::ToolBarStages()
 {
-    const QString resource = QStringLiteral("icon");
+    const auto resource = QStringLiteral("icon");
 
     m_leftGoToStage = new QLabel(this);
     m_leftGoToStage->setPixmap(VTheme::GetPixmapResource(resource, QStringLiteral("24x24/go-next-skip.png")));
@@ -3648,7 +3648,7 @@ void MainWindow::CancelTool()
 //---------------------------------------------------------------------------------------------------------------------
 void MainWindow::SetupDrawToolsIcons()
 {
-    const QString resource = QStringLiteral("toolicon");
+    const auto resource = QStringLiteral("toolicon");
 
     // This check helps to find missed tools
     Q_STATIC_ASSERT_X(static_cast<int>(Tool::LAST_ONE_DO_NOT_USE) == 61, "Not all tools were handled.");
@@ -3840,7 +3840,7 @@ void MainWindow::ActionDraw(bool checked)
         qCDebug(vMainWindow, "Show draw scene");
         ArrowTool(true);
 
-        const QString resource = QStringLiteral("icon");
+        const auto resource = QStringLiteral("icon");
 
         m_leftGoToStage->setPixmap(VTheme::GetPixmapResource(resource, QStringLiteral("24x24/go-next-skip.png")));
         m_rightGoToStage->setPixmap(VTheme::GetPixmapResource(resource, QStringLiteral("24x24/go-next.png")));
@@ -3900,7 +3900,7 @@ void MainWindow::ActionDetails(bool checked)
         }
         m_comboBoxDraws->setCurrentIndex(m_comboBoxDraws->count() - 1); // Need to get data about all details
 
-        const QString resource = QStringLiteral("icon");
+        const auto resource = QStringLiteral("icon");
         m_leftGoToStage->setPixmap(VTheme::GetPixmapResource(resource, QStringLiteral("24x24/go-previous.png")));
         m_rightGoToStage->setPixmap(VTheme::GetPixmapResource(resource, QStringLiteral("24x24/go-next.png")));
 
@@ -3982,7 +3982,7 @@ void MainWindow::ActionLayout(bool checked)
     }
     m_comboBoxDraws->setCurrentIndex(m_comboBoxDraws->count() - 1); // Need to get data about all details
 
-    const QString resource = QStringLiteral("icon");
+    const auto resource = QStringLiteral("icon");
     m_leftGoToStage->setPixmap(VTheme::GetPixmapResource(resource, QStringLiteral("24x24/go-previous.png")));
     m_rightGoToStage->setPixmap(VTheme::GetPixmapResource(resource, QStringLiteral("24x24/go-previous-skip.png")));
 
@@ -6478,7 +6478,7 @@ auto MainWindow::LoadPattern(QString fileName, const QString &customMeasureFile)
         // See issue #976. Pattern can lost link to measurements
         if (path.isEmpty() && doc->RequiresMeasurements())
         {
-            const QString fakeName = QStringLiteral("unknown_measurements.vit");
+            const auto fakeName = QStringLiteral("unknown_measurements.vit");
             // Check if exist
             fixedMPath = CheckPathToMeasurements(fileName, fakeName);
             if (fixedMPath.isEmpty())
@@ -7546,7 +7546,7 @@ auto MainWindow::GetMeasurementFileName() -> QString
         return {};
     }
 
-    QString shownName = QStringLiteral(" [");
+    auto shownName = QStringLiteral(" [");
     shownName += QFileInfo(AbsoluteMPath(VAbstractValApplication::VApp()->GetPatternPath(), doc->MPath())).fileName();
 
     if (m_mChanges)
@@ -7903,7 +7903,7 @@ void MainWindow::PrintPatternMessage(QEvent *event)
     }
 
     const QString time = QDateTime::currentDateTime().toString(QStringLiteral("hh:mm:ss"));
-    const QString message = QStringLiteral("%1: [%2] %3").arg(time, severity, patternMessage->Message());
+    const auto message = QStringLiteral("%1: [%2] %3").arg(time, severity, patternMessage->Message());
     ui->plainTextEditPatternMessages->appendPlainText(message);
     if (not m_unreadPatternMessage.isNull())
     {

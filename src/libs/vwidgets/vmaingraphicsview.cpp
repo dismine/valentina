@@ -331,7 +331,7 @@ void GraphicsViewZoom::FictiveSceneRect(QGraphicsScene *sc, QGraphicsView *view)
     // to receive the currently visible area, map the widgets bounds to the scene
     const QPointF a = view->mapToScene(0, 0);
     const QPointF b = view->mapToScene(view->viewport()->width(), view->viewport()->height());
-    QRectF viewRect = QRectF(a, b);
+    auto viewRect = QRectF(a, b);
 
     // Scale view
     QLineF topLeftRay(viewRect.center(), viewRect.topLeft());

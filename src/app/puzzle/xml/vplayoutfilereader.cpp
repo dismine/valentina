@@ -999,7 +999,7 @@ void VPLayoutFileReader::ReadLayoutMargins(const VPLayoutPtr &layout)
 {
     QXmlStreamAttributes const attribs = attributes();
 
-    QMarginsF margins = QMarginsF();
+    QMarginsF margins;
     margins.setLeft(ReadAttributeDouble(attribs, ML::AttrLeft, QChar('0')));
     margins.setTop(ReadAttributeDouble(attribs, ML::AttrTop, QChar('0')));
     margins.setRight(ReadAttributeDouble(attribs, ML::AttrRight, QChar('0')));
@@ -1016,7 +1016,7 @@ void VPLayoutFileReader::ReadSheetMargins(const VPSheetPtr &sheet)
 {
     QXmlStreamAttributes const attribs = attributes();
 
-    QMarginsF margins = QMarginsF();
+    QMarginsF margins;
     margins.setLeft(ReadAttributeDouble(attribs, ML::AttrLeft, QChar('0')));
     margins.setTop(ReadAttributeDouble(attribs, ML::AttrTop, QChar('0')));
     margins.setRight(ReadAttributeDouble(attribs, ML::AttrRight, QChar('0')));

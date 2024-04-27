@@ -565,14 +565,14 @@ void DialogArc::FinishCreating()
 //---------------------------------------------------------------------------------------------------------------------
 void DialogArc::InitIcons()
 {
-    const QString resource = QStringLiteral("icon");
+    const auto resource = QStringLiteral("icon");
 
-    const QString fxIcon = QStringLiteral("24x24/fx.png");
+    const auto fxIcon = QStringLiteral("24x24/fx.png");
     ui->toolButtonExprRadius->setIcon(VTheme::GetIconResource(resource, fxIcon));
     ui->toolButtonExprF1->setIcon(VTheme::GetIconResource(resource, fxIcon));
     ui->toolButtonExprF2->setIcon(VTheme::GetIconResource(resource, fxIcon));
 
-    const QString equalIcon = QStringLiteral("24x24/equal.png");
+    const auto equalIcon = QStringLiteral("24x24/equal.png");
     ui->label_2->setPixmap(VTheme::GetPixmapResource(resource, equalIcon));
     ui->label_3->setPixmap(VTheme::GetPixmapResource(resource, equalIcon));
     ui->label_5->setPixmap(VTheme::GetPixmapResource(resource, equalIcon));

@@ -689,7 +689,7 @@ void PuzzlePreferencesLayoutPage::FindTemplate(QComboBox *box, qreal width, qrea
     SCASSERT(box != nullptr)
     const Unit paperUnit = LayoutUnit();
 
-    const int max = static_cast<int>(VAbstractLayoutDialog::PaperSizeTemplate::Custom);
+    const auto max = static_cast<int>(VAbstractLayoutDialog::PaperSizeTemplate::Custom);
     for (int i = 0; i < max; ++i)
     {
         const QSizeF tmplSize =

@@ -59,8 +59,7 @@ void DialogDimensionLabels::changeEvent(QEvent *event)
         // retranslate designer form (single inheritance approach)
         ui->retranslateUi(this);
 
-        MeasurementDimension const type =
-            static_cast<MeasurementDimension>(ui->comboBoxDimensionLabels->currentData().toInt());
+        auto const type = static_cast<MeasurementDimension>(ui->comboBoxDimensionLabels->currentData().toInt());
 
         InitDimensions();
 
@@ -94,8 +93,7 @@ void DialogDimensionLabels::LabelChanged(QTableWidgetItem *item)
 {
     if (item != nullptr)
     {
-        MeasurementDimension const type =
-            static_cast<MeasurementDimension>(ui->comboBoxDimensionLabels->currentData().toInt());
+        auto const type = static_cast<MeasurementDimension>(ui->comboBoxDimensionLabels->currentData().toInt());
         qreal const value = item->data(Qt::UserRole).toDouble();
 
         DimesionLabels labels = m_labels.value(type);
@@ -138,8 +136,7 @@ void DialogDimensionLabels::InitTable()
     ui->tableWidget->blockSignals(true);
     ui->tableWidget->clearContents();
 
-    const MeasurementDimension type =
-        static_cast<MeasurementDimension>(ui->comboBoxDimensionLabels->currentData().toInt());
+    const auto type = static_cast<MeasurementDimension>(ui->comboBoxDimensionLabels->currentData().toInt());
 
     MeasurementDimension_p dimension;
 

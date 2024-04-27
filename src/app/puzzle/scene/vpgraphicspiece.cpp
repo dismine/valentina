@@ -396,7 +396,7 @@ void VPGraphicsPiece::InitPieceLabelSVGFont(const QVector<QPointF> &labelShape, 
     VSvgFont const svgFont = engine.Font();
     if (!svgFont.IsValid())
     {
-        QString const errorMsg = QStringLiteral("Invalid SVG font '%1'. Fallback to outline font.").arg(svgFont.Name());
+        auto const errorMsg = QStringLiteral("Invalid SVG font '%1'. Fallback to outline font.").arg(svgFont.Name());
         qDebug() << errorMsg;
         InitPieceLabelOutlineFont(labelShape, tm);
         return;

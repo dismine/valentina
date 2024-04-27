@@ -1922,7 +1922,7 @@ void VPMainWindow::CreateWindowMenu(QMenu *menu)
     {
         VPMainWindow *window = windows.at(i);
 
-        QString title = QStringLiteral("%1. %2").arg(i + 1).arg(window->windowTitle());
+        auto title = QStringLiteral("%1. %2").arg(i + 1).arg(window->windowTitle());
         if (const vsizetype index = title.lastIndexOf("[*]"_L1); index != -1)
         {
             window->isWindowModified() ? title.replace(index, 3, '*'_L1) : title.replace(index, 3, QString());
@@ -2210,7 +2210,7 @@ void VPMainWindow::FindTemplate(QComboBox *box, qreal width, qreal height)
     SCASSERT(box != nullptr)
     const Unit paperUnit = LayoutUnit();
 
-    const int max = static_cast<int>(VAbstractLayoutDialog::PaperSizeTemplate::Custom);
+    const auto max = static_cast<int>(VAbstractLayoutDialog::PaperSizeTemplate::Custom);
     for (int i = 0; i < max; ++i)
     {
         const QSizeF tmplSize =
@@ -2907,7 +2907,7 @@ auto VPMainWindow::DrawTilesScheme(QPrinter *printer, QPainter *painter, const V
 
         if (sheet->GetSheetOrientation() == QPageLayout::Landscape)
         {
-            QPointF const shift = QPointF(0, textHeight);
+            auto const shift = QPointF(0, textHeight);
             source = QRectF(sheetRect.topLeft() - shift, QSizeF(tilesWidth, tilesHeight + textHeight));
         }
         else
@@ -3603,7 +3603,7 @@ void VPMainWindow::RotatePieces()
 //---------------------------------------------------------------------------------------------------------------------
 void VPMainWindow::InitIcons()
 {
-    const QString resource = QStringLiteral("puzzleicon");
+    const auto resource = QStringLiteral("puzzleicon");
 
     auto SetTabIcon = [resource, this](QWidget *tab, const QString &iconName)
     {
@@ -3747,7 +3747,7 @@ auto VPMainWindow::on_actionSave_triggered() -> bool
 auto VPMainWindow::on_actionSaveAs_triggered() -> bool
 {
     QString const filters = tr("Layout files") + QStringLiteral(" (*.vlt)");
-    QString const suffix = QStringLiteral("vlt");
+    auto const suffix = QStringLiteral("vlt");
     QString const fName = tr("layout") + '.'_L1 + suffix;
 
     QString dir;

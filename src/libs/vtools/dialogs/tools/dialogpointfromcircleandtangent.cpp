@@ -404,7 +404,7 @@ void DialogPointFromCircleAndTangent::FinishCreating()
 //---------------------------------------------------------------------------------------------------------------------
 void DialogPointFromCircleAndTangent::InitIcons()
 {
-    const QString resource = QStringLiteral("icon");
+    const auto resource = QStringLiteral("icon");
 
     ui->toolButtonExprRadius->setIcon(VTheme::GetIconResource(resource, QStringLiteral("24x24/fx.png")));
     ui->label_3->setPixmap(VTheme::GetPixmapResource(resource, QStringLiteral("24x24/equal.png")));

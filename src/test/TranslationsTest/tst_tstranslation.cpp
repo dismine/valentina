@@ -151,7 +151,7 @@ void TST_TSTranslation::PrepareOriginalStrings()
     QTest::addColumn<QString>("source");
     QTest::addColumn<QDomElement>("message");
 
-    const QString fileName = QStringLiteral("valentina.ts");
+    const auto fileName = QStringLiteral("valentina.ts");
     const QDomNodeList messages = LoadTSFile(fileName);
     if (messages.isEmpty())
     {
@@ -169,13 +169,12 @@ void TST_TSTranslation::PrepareOriginalStrings()
                 continue;
             }
 
-            const QString tag =
-                QStringLiteral("File '%1'. Check modification source message '%2'.").arg(fileName, source);
+            const auto tag = QStringLiteral("File '%1'. Check modification source message '%2'.").arg(fileName, source);
             QTest::newRow(qUtf8Printable(tag)) << source << message;
         }
         else
         {
-            const QString errorMessage = QStringLiteral("Message %1 is null.").arg(i);
+            const auto errorMessage = QStringLiteral("Message %1 is null.").arg(i);
             QFAIL(qUtf8Printable(errorMessage));
         }
     }

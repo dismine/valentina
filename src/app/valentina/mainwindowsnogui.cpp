@@ -226,7 +226,7 @@ auto MainWindowsNoGUI::GenerateLayout(VLayoutGenerator &lGenerator) -> bool
         connect(progressTimer, &QTimer::timeout, this,
                 [timer, &lGenerator, progressTimer]()
                 {
-                    const int timeout = static_cast<int>(lGenerator.GetNestingTimeMSecs() - timer.elapsed());
+                    const auto timeout = static_cast<int>(lGenerator.GetNestingTimeMSecs() - timer.elapsed());
 
                     if (timeout <= 1000)
                     {

@@ -287,7 +287,7 @@ void DialogExportToCSV::ShowFilePreview(const QString &fileName)
 //---------------------------------------------------------------------------------------------------------------------
 auto DialogExportToCSV::MakeHelpCodecsList() -> QString
 {
-    QString out = QStringLiteral("\n");
+    auto out = QStringLiteral("\n");
     const QList<int> list = VTextCodec::availableMibs();
     for (int i = 0; i < list.size(); ++i)
     {

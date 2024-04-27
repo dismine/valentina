@@ -79,7 +79,7 @@ void VWidgetGroups::SetGroupVisibility(vidtype id, bool visible) const
                 QTableWidgetItem *item = ui->tableWidget->item(row, 0);
                 if (item)
                 {
-                    const QString resource = QStringLiteral("icon");
+                    const auto resource = QStringLiteral("icon");
                     item->setIcon(visible ? VTheme::GetIconResource(resource, QStringLiteral("16x16/open_eye.png"))
                                           : VTheme::GetIconResource(resource, QStringLiteral("16x16/closed_eye.png")));
                 }
@@ -106,7 +106,7 @@ void VWidgetGroups::SetMultipleGroupsVisibility(const QVector<vidtype> &groups, 
 
                     if (QTableWidgetItem *item = ui->tableWidget->item(row, 0); item)
                     {
-                        const QString resource = QStringLiteral("icon");
+                        const auto resource = QStringLiteral("icon");
                         item->setIcon(i.value()
                                           ? VTheme::GetIconResource(resource, QStringLiteral("16x16/open_eye.png"))
                                           : VTheme::GetIconResource(resource, QStringLiteral("16x16/closed_eye.png")));
@@ -287,7 +287,7 @@ void VWidgetGroups::CtxMenu(const QPoint &pos)
     };
 
     QScopedPointer<QMenu> const menu(new QMenu());
-    const QString resource = QStringLiteral("icon");
+    const auto resource = QStringLiteral("icon");
     QAction *triggerVisibilityMenu =
         m_doc->GetGroupVisibility(id)
             ? menu->addAction(VTheme::GetIconResource(resource, QStringLiteral("16x16/closed_eye.png")), tr("Hide"))
@@ -352,7 +352,7 @@ void VWidgetGroups::FillTable(QMap<quint32, VGroupData> groups)
         ++currentRow;
         const VGroupData data = i.value();
 
-        const QString resource = QStringLiteral("icon");
+        const auto resource = QStringLiteral("icon");
         auto *item = new QTableWidgetItem();
         item->setTextAlignment(Qt::AlignHCenter);
         (data.visible) ? item->setIcon(VTheme::GetIconResource(resource, QStringLiteral("16x16/open_eye.png")))

@@ -911,14 +911,14 @@ void DialogMove::SetAliasValid(quint32 id, bool valid)
 //---------------------------------------------------------------------------------------------------------------------
 void DialogMove::InitIcons()
 {
-    const QString resource = QStringLiteral("icon");
+    const auto resource = QStringLiteral("icon");
 
-    const QString fxIcon = QStringLiteral("24x24/fx.png");
+    const auto fxIcon = QStringLiteral("24x24/fx.png");
     ui->toolButtonExprAngle->setIcon(VTheme::GetIconResource(resource, fxIcon));
     ui->toolButtonExprLength->setIcon(VTheme::GetIconResource(resource, fxIcon));
     ui->toolButtonExprRotationAngle->setIcon(VTheme::GetIconResource(resource, fxIcon));
 
-    const QString equalIcon = QStringLiteral("24x24/equal.png");
+    const auto equalIcon = QStringLiteral("24x24/equal.png");
     ui->label_2->setPixmap(VTheme::GetPixmapResource(resource, equalIcon));
     ui->label_3->setPixmap(VTheme::GetPixmapResource(resource, equalIcon));
     ui->label_4->setPixmap(VTheme::GetPixmapResource(resource, equalIcon));

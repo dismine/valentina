@@ -1262,7 +1262,7 @@ auto VPatternConverter::OldNamesToNewNames_InV0_2_0() -> QMap<QString, QString>
     names.insert(QStringLiteral("front_waist_to_floor"), QStringLiteral("height_waist_front"));
     names.insert(QStringLiteral("height_nipple_point"), QStringLiteral("height_bustpoint"));
 
-    QString name = QStringLiteral("height_shoulder_tip");
+    auto name = QStringLiteral("height_shoulder_tip");
     names.insert(QStringLiteral("shoulder_height"), name);
     names.insert(QStringLiteral("height_shoulder_point"), name);
 
@@ -1965,7 +1965,7 @@ void VPatternConverter::PortPieceLabelstoV0_6_0()
 
             QString line;
 
-            const int material = static_cast<int>(GetParametrUInt(domMCP, *strMaterial, QChar('0')));
+            const auto material = static_cast<int>(GetParametrUInt(domMCP, *strMaterial, QChar('0')));
             switch (material)
             {
                 case 0:
@@ -1988,7 +1988,7 @@ void VPatternConverter::PortPieceLabelstoV0_6_0()
 
             line.append(", %wCut% ");
 
-            const int cutNumber = static_cast<int>(GetParametrUInt(domMCP, *strCutNumber, QChar('1')));
+            const auto cutNumber = static_cast<int>(GetParametrUInt(domMCP, *strCutNumber, QChar('1')));
 
             if (firstLine)
             {

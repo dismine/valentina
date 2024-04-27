@@ -387,7 +387,7 @@ void VPGraphicsSheet::PaintGrid(QPainter *painter) const
             qreal colX = colWidth;
             while (colX < sheetRect.right())
             {
-                QLineF const line = QLineF(colX, 0, colX, sheetRect.bottom());
+                auto const line = QLineF(colX, 0, colX, sheetRect.bottom());
                 painter->drawLine(line);
                 colX += colWidth;
             }
@@ -399,7 +399,7 @@ void VPGraphicsSheet::PaintGrid(QPainter *painter) const
 
             while (rowY < sheetRect.bottom())
             {
-                QLineF const line = QLineF(0, rowY, sheetRect.right(), rowY);
+                auto const line = QLineF(0, rowY, sheetRect.right(), rowY);
                 painter->drawLine(line);
                 rowY += rowHeight;
             }

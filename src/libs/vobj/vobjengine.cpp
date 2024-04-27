@@ -203,11 +203,11 @@ void VObjEngine::drawPath(const QPainterPath &path)
         {
             skipFace = false;
         }
-        int const num_verts = static_cast<int>(res->faces[offset]);
+        auto const num_verts = static_cast<int>(res->faces[offset]);
         offset++;
         for (int j = 0; j < num_verts; j++)
         {
-            int const p0 = static_cast<int>(res->faces[offset + j]);
+            auto const p0 = static_cast<int>(res->faces[offset + j]);
             pf[j] = QPointF(points[p0].x, points[p0].y);
         }
         if (skipFace == false)

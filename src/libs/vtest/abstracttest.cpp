@@ -106,9 +106,9 @@ void AbstractTest::PieceFromJson(const QString &json, VPiece &piece, QSharedPoin
     PrepareDocument(json, saveData);
     QJsonDocument const loadDoc(QJsonDocument::fromJson(saveData));
 
-    const QString testCaseKey = QStringLiteral("testCase");
-    const QString bdKey = QStringLiteral("bd");
-    const QString pieceKey = QStringLiteral("piece");
+    const auto testCaseKey = QStringLiteral("testCase");
+    const auto bdKey = QStringLiteral("bd");
+    const auto pieceKey = QStringLiteral("piece");
 
     QJsonObject testCaseObject = loadDoc.object();
     TestRoot(testCaseObject, testCaseKey, json);
@@ -121,7 +121,7 @@ void AbstractTest::PieceFromJson(const QString &json, VPiece &piece, QSharedPoin
     }
     else
     {
-        const QString error = QStringLiteral("Test case json object does not contain db data.");
+        const auto error = QStringLiteral("Test case json object does not contain db data.");
         QFAIL(qUtf8Printable(error));
     }
 
@@ -131,7 +131,7 @@ void AbstractTest::PieceFromJson(const QString &json, VPiece &piece, QSharedPoin
     }
     else
     {
-        const QString error = QStringLiteral("Test case json object does not contain piece data.");
+        const auto error = QStringLiteral("Test case json object does not contain piece data.");
         QFAIL(qUtf8Printable(error));
     }
 }
@@ -143,7 +143,7 @@ void AbstractTest::PassmarkDataFromJson(const QString &json, VPiecePassmarkData 
     PrepareDocument(json, saveData);
     QJsonDocument const loadDoc(QJsonDocument::fromJson(saveData));
 
-    const QString dataKey = QStringLiteral("data");
+    const auto dataKey = QStringLiteral("data");
 
     QJsonObject dataObject = loadDoc.object();
     TestRoot(dataObject, dataKey, json);
@@ -166,7 +166,7 @@ void AbstractTest::PassmarkDataFromJson(const QString &json, VPiecePassmarkData 
     }
     catch (const VException &e)
     {
-        const QString error = QStringLiteral("Invalid json file '%1'. %2").arg(json, e.ErrorMessage());
+        const auto error = QStringLiteral("Invalid json file '%1'. %2").arg(json, e.ErrorMessage());
         QFAIL(qUtf8Printable(error));
     }
 
@@ -226,8 +226,8 @@ void AbstractTest::PassmarkShapeFromJson(const QString &json, QVector<QLineF> &s
     PrepareDocument(json, saveData);
     QJsonDocument const loadDoc(QJsonDocument::fromJson(saveData));
 
-    const QString shapeKey = QStringLiteral("shape");
-    const QString typeKey = QStringLiteral("type");
+    const auto shapeKey = QStringLiteral("shape");
+    const auto typeKey = QStringLiteral("type");
 
     QJsonObject shapeObject = loadDoc.object();
     TestRoot(shapeObject, shapeKey, json);
@@ -242,8 +242,8 @@ void AbstractTest::PassmarkShapeFromJson(const QString &json, QVector<QLineF> &s
 
         if (type != "QLineF"_L1)
         {
-            const QString error = QStringLiteral("Invalid json file '%1'. Unexpected class '%2'.")
-                                      .arg(json, lineObject[typeKey].toString());
+            const auto error = QStringLiteral("Invalid json file '%1'. Unexpected class '%2'.")
+                                   .arg(json, lineObject[typeKey].toString());
             QFAIL(qUtf8Printable(error));
         }
 
@@ -299,12 +299,12 @@ void AbstractTest::ComparePathsDistance(const QVector<QPointF> &ekv, const QVect
 //---------------------------------------------------------------------------------------------------------------------
 void AbstractTest::ComparePointsDistance(const QPointF &result, const QPointF &expected, qreal testAccuracy) const
 {
-    const QString msg = QStringLiteral("Actual '%1;%2', Expected '%3;%4'. Distance between points %5 mm.")
-                            .arg(result.x())
-                            .arg(result.y())
-                            .arg(expected.x())
-                            .arg(expected.y())
-                            .arg(UnitConvertor(QLineF(result, expected).length(), Unit::Px, Unit::Mm));
+    const auto msg = QStringLiteral("Actual '%1;%2', Expected '%3;%4'. Distance between points %5 mm.")
+                         .arg(result.x())
+                         .arg(result.y())
+                         .arg(expected.x())
+                         .arg(expected.y())
+                         .arg(UnitConvertor(QLineF(result, expected).length(), Unit::Px, Unit::Mm));
     // Check each point. Don't use comparison float values
     QVERIFY2(VFuzzyComparePoints(result, expected, testAccuracy), qUtf8Printable(msg));
 }
@@ -341,7 +341,7 @@ auto AbstractTest::PuzzlePath() const -> QString
 #ifdef QBS_BUILD
     return QStringLiteral(PUZZLE_BUILDDIR);
 #else
-    const QString path = QStringLiteral("/../../../app/puzzle/bin/puzzle");
+    const auto path = QStringLiteral("/../../../app/puzzle/bin/puzzle");
 #ifdef Q_OS_WIN
     return QCoreApplication::applicationDirPath() + path + ".exe"_L1;
 #else
@@ -356,7 +356,7 @@ auto AbstractTest::ValentinaPath() const -> QString
 #ifdef QBS_BUILD
     return QStringLiteral(VALENTINA_BUILDDIR);
 #else
-    const QString path = QStringLiteral("/../../../app/valentina/bin/valentina");
+    const auto path = QStringLiteral("/../../../app/valentina/bin/valentina");
 #ifdef Q_OS_WIN
     return QCoreApplication::applicationDirPath() + path + ".exe"_L1;
 #else
@@ -371,7 +371,7 @@ auto AbstractTest::TapePath() const -> QString
 #ifdef QBS_BUILD
     return QStringLiteral(TAPE_BUILDDIR);
 #else
-    const QString path = QStringLiteral("/../../../app/tape/bin/tape");
+    const auto path = QStringLiteral("/../../../app/tape/bin/tape");
 #ifdef Q_OS_WIN
     return QCoreApplication::applicationDirPath() + path + ".exe"_L1;
 #else
@@ -522,7 +522,7 @@ void AbstractTest::PrepareDocument(const QString &json, QByteArray &data)
     QFile loadFile(json);
     if (not loadFile.open(QIODevice::ReadOnly))
     {
-        const QString error = QStringLiteral("Couldn't open json file. %1").arg(loadFile.errorString());
+        const auto error = QStringLiteral("Couldn't open json file. %1").arg(loadFile.errorString());
         QFAIL(qUtf8Printable(error));
     }
 
@@ -534,7 +534,7 @@ void AbstractTest::TestRoot(const QJsonObject &root, const QString &attribute, c
 {
     if (not root.contains(attribute))
     {
-        const QString error = QStringLiteral("Invalid json file '%1'. File doesn't contain root object.").arg(file);
+        const auto error = QStringLiteral("Invalid json file '%1'. File doesn't contain root object.").arg(file);
         QFAIL(qUtf8Printable(error));
     }
 }
@@ -552,7 +552,7 @@ void AbstractTest::ReadStringValue(const QJsonObject &itemObject, const QString 
         }
         else
         {
-            const QString error = QStringLiteral("%1 is not string '%2'.").arg(attribute, attributeValue.toString());
+            const auto error = QStringLiteral("%1 is not string '%2'.").arg(attribute, attributeValue.toString());
             QFAIL(qUtf8Printable(error));
         }
     }
@@ -564,7 +564,7 @@ void AbstractTest::ReadStringValue(const QJsonObject &itemObject, const QString 
         }
         else
         {
-            const QString error = QStringLiteral("Json object does not contain attribute '%1'.").arg(attribute);
+            const auto error = QStringLiteral("Json object does not contain attribute '%1'.").arg(attribute);
             QFAIL(qUtf8Printable(error));
         }
     }
@@ -583,7 +583,7 @@ void AbstractTest::ReadBooleanValue(const QJsonObject &itemObject, const QString
         }
         else
         {
-            const QString error =
+            const auto error =
                 QStringLiteral("%1 is not boolean value '%2'.").arg(attribute, attributeValue.toString());
             QFAIL(qUtf8Printable(error));
         }
@@ -597,7 +597,7 @@ void AbstractTest::ReadBooleanValue(const QJsonObject &itemObject, const QString
 
             if (not ok)
             {
-                const QString error = QStringLiteral("Cannot convert default value '%1' to int.").arg(defaultValue);
+                const auto error = QStringLiteral("Cannot convert default value '%1' to int.").arg(defaultValue);
                 QFAIL(qUtf8Printable(error));
             }
 
@@ -605,7 +605,7 @@ void AbstractTest::ReadBooleanValue(const QJsonObject &itemObject, const QString
         }
         else
         {
-            const QString error = QStringLiteral("Json object does not contain attribute '%1'.").arg(attribute);
+            const auto error = QStringLiteral("Json object does not contain attribute '%1'.").arg(attribute);
             QFAIL(qUtf8Printable(error));
         }
     }
@@ -620,7 +620,7 @@ void AbstractTest::ReadPointValue(const QJsonObject &itemObject, const QString &
     }
     else
     {
-        const QString error = QStringLiteral("Json object does not contain attribute '%1'.").arg(attribute);
+        const auto error = QStringLiteral("Json object does not contain attribute '%1'.").arg(attribute);
         QFAIL(qUtf8Printable(error));
     }
 }
@@ -643,7 +643,7 @@ void AbstractTest::ReadSplinePointValues(const QJsonObject &itemObject, const QS
     }
     else
     {
-        const QString error = QStringLiteral("Json object does not contain attribute '%1'.").arg(attribute);
+        const auto error = QStringLiteral("Json object does not contain attribute '%1'.").arg(attribute);
         QFAIL(qUtf8Printable(error));
     }
 }
@@ -711,7 +711,7 @@ void AbstractTest::ReadDoubleValue(const QJsonObject &itemObject, const QString 
         }
         else
         {
-            const QString error = QStringLiteral("%1 is not double '%2'.").arg(attribute, attributeValue.toString());
+            const auto error = QStringLiteral("%1 is not double '%2'.").arg(attribute, attributeValue.toString());
             QFAIL(qUtf8Printable(error));
         }
     }
@@ -724,13 +724,13 @@ void AbstractTest::ReadDoubleValue(const QJsonObject &itemObject, const QString 
 
             if (not ok)
             {
-                const QString error = QStringLiteral("Cannot convert default value '%1' to double.").arg(defaultValue);
+                const auto error = QStringLiteral("Cannot convert default value '%1' to double.").arg(defaultValue);
                 QFAIL(qUtf8Printable(error));
             }
         }
         else
         {
-            const QString error = QStringLiteral("Json object does not contain attribute '%1'.").arg(attribute);
+            const auto error = QStringLiteral("Json object does not contain attribute '%1'.").arg(attribute);
             QFAIL(qUtf8Printable(error));
         }
     }
@@ -750,7 +750,7 @@ void AbstractTest::ReadDoubleValue(const QJsonObject &itemObject, const QString 
         }
         else
         {
-            const QString error = QStringLiteral("%1 is not double '%2'.").arg(attribute, attributeValue.toString());
+            const auto error = QStringLiteral("%1 is not double '%2'.").arg(attribute, attributeValue.toString());
             QFAIL(qUtf8Printable(error));
         }
     }
@@ -763,13 +763,13 @@ void AbstractTest::ReadDoubleValue(const QJsonObject &itemObject, const QString 
 
             if (not ok)
             {
-                const QString error = QStringLiteral("Cannot convert default value '%1' to int.").arg(defaultValue);
+                const auto error = QStringLiteral("Cannot convert default value '%1' to int.").arg(defaultValue);
                 QFAIL(qUtf8Printable(error));
             }
         }
         else
         {
-            const QString error = QStringLiteral("Json object does not contain attribute '%1'.").arg(attribute);
+            const auto error = QStringLiteral("Json object does not contain attribute '%1'.").arg(attribute);
             QFAIL(qUtf8Printable(error));
         }
     }
@@ -789,7 +789,7 @@ void AbstractTest::ReadDoubleValue(const QJsonObject &itemObject, const QString 
         }
         else
         {
-            const QString error = QStringLiteral("%1 is not double '%2'.").arg(attribute, attributeValue.toString());
+            const auto error = QStringLiteral("%1 is not double '%2'.").arg(attribute, attributeValue.toString());
             QFAIL(qUtf8Printable(error));
         }
     }
@@ -802,13 +802,13 @@ void AbstractTest::ReadDoubleValue(const QJsonObject &itemObject, const QString 
 
             if (not ok)
             {
-                const QString error = QStringLiteral("Cannot convert default value '%1' to int.").arg(defaultValue);
+                const auto error = QStringLiteral("Cannot convert default value '%1' to int.").arg(defaultValue);
                 QFAIL(qUtf8Printable(error));
             }
         }
         else
         {
-            const QString error = QStringLiteral("Json object does not contain attribute '%1'.").arg(attribute);
+            const auto error = QStringLiteral("Json object does not contain attribute '%1'.").arg(attribute);
             QFAIL(qUtf8Printable(error));
         }
     }
@@ -895,7 +895,7 @@ void AbstractTest::SplinePathFromJson(const QJsonObject &itemObject, QSharedPoin
 //---------------------------------------------------------------------------------------------------------------------
 void AbstractTest::DBFromJson(const QJsonObject &dbObject, QSharedPointer<VContainer> &data)
 {
-    const QString itemsKey = QStringLiteral("items");
+    const auto itemsKey = QStringLiteral("items");
 
     if (dbObject.contains(itemsKey))
     {
@@ -932,7 +932,7 @@ void AbstractTest::DBFromJson(const QJsonObject &dbObject, QSharedPointer<VConta
     }
     else
     {
-        const QString error = QStringLiteral("DB json object does not contain items.");
+        const auto error = QStringLiteral("DB json object does not contain items.");
         QFAIL(qUtf8Printable(error));
     }
 }
@@ -951,7 +951,7 @@ void AbstractTest::MainPathFromJson(const QJsonObject &pieceObject, VPiece &piec
 
     piece.GetPath().Clear();
 
-    const QString nodesKey = QStringLiteral("nodes");
+    const auto nodesKey = QStringLiteral("nodes");
 
     if (pieceObject.contains(nodesKey))
     {
@@ -967,7 +967,7 @@ void AbstractTest::MainPathFromJson(const QJsonObject &pieceObject, VPiece &piec
     }
     else
     {
-        const QString error = QStringLiteral("Piece json object does not contain nodes.");
+        const auto error = QStringLiteral("Piece json object does not contain nodes.");
         QFAIL(qUtf8Printable(error));
     }
 }

@@ -435,7 +435,7 @@ auto VArc::OptimalApproximationScale(qreal radius, qreal f1, qreal f2, qreal tol
 void VArc::CreateName()
 {
     QString name = ARC_ + this->GetCenter().name();
-    const QString nameStr = QStringLiteral("_%1");
+    const auto nameStr = QStringLiteral("_%1");
 
     if (getMode() == Draw::Modeling && getIdObject() != NULL_ID)
     {

@@ -43,7 +43,7 @@ namespace
 {
 auto LogDirPath(const QString &appName) -> QString
 {
-    const QString logs = QStringLiteral("Logs");
+    const auto logs = QStringLiteral("Logs");
 
     QString logDirPath = QStandardPaths::writableLocation(QStandardPaths::ConfigLocation);
     if (logDirPath.isEmpty())
@@ -81,9 +81,9 @@ auto VCrashPaths::GetAttachmentPath(const QString &appName) -> QString
 auto VCrashPaths::GetHandlerPath() const -> QString
 {
 #if defined(Q_OS_WINDOWS)
-    const QString handler = QStringLiteral("crashpad_handler.exe");
+    const auto handler = QStringLiteral("crashpad_handler.exe");
 #elif defined(Q_OS_MAC) || defined(Q_OS_LINUX)
-    const QString handler = QStringLiteral("crashpad_handler");
+    const auto handler = QStringLiteral("crashpad_handler");
 #else
 #error GetHandlerPath not implemented on this platform
 #endif

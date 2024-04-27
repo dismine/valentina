@@ -492,7 +492,7 @@ auto VAbstractCurve::CurveIntersectAxis(const QPointF &point, qreal angle, const
         angle = line.angle();
     }
 
-    QRectF rec = QRectF(0, 0, INT_MAX, INT_MAX);
+    auto rec = QRectF(0, 0, INT_MAX, INT_MAX);
     rec.translate(-INT_MAX / 2.0, -INT_MAX / 2.0);
 
     // Instead of using axis compare two rays. See issue #963.

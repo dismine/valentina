@@ -187,7 +187,7 @@ VAbstractApplication::~VAbstractApplication()
  */
 auto VAbstractApplication::translationsPath(const QString &locale) -> QString
 {
-    const QString trPath = QStringLiteral("/translations");
+    const auto trPath = QStringLiteral("/translations");
 #ifdef Q_OS_WIN
     Q_UNUSED(locale)
     return QCoreApplication::applicationDirPath() + trPath;
@@ -255,7 +255,7 @@ auto VAbstractApplication::translationsPath(const QString &locale) -> QString
 auto VAbstractApplication::QtTranslationsPath(const QString &locale) -> QString
 {
 #if defined(Q_OS_LINUX)
-    const QString trPath = QStringLiteral("/translations");
+    const auto trPath = QStringLiteral("/translations");
 
     QDir dir(QCoreApplication::applicationDirPath() + trPath);
     if (dir.exists())
@@ -650,7 +650,7 @@ void VAbstractApplication::InitHighDpiScaling(int argc, char *argv[])
 //---------------------------------------------------------------------------------------------------------------------
 auto VAbstractApplication::LogDirPath() -> QString
 {
-    const QString logs = QStringLiteral("Logs");
+    const auto logs = QStringLiteral("Logs");
 
     QString const logDirPath = QStandardPaths::writableLocation(QStandardPaths::ConfigLocation);
     if (logDirPath.isEmpty())

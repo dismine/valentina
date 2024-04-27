@@ -575,7 +575,7 @@ auto TKMMainWindow::FileSaveAs() -> bool
     QString const filters = tr("Known measurements") + QStringLiteral(" (*.vkm)");
 
     QString fName = tr("known measurements");
-    QString const suffix = QStringLiteral("vkm");
+    auto const suffix = QStringLiteral("vkm");
 
     fName += '.'_L1 + suffix;
 
@@ -693,7 +693,7 @@ void TKMMainWindow::ImportDataFromCSV()
     }
 
     const QString filters = tr("Comma-Separated Values") + QStringLiteral(" (*.csv)");
-    const QString suffix = QStringLiteral("csv");
+    const auto suffix = QStringLiteral("csv");
 
     QString fileName = QFileDialog::getOpenFileName(this, tr("Import from CSV"), QDir::homePath(), filters, nullptr,
                                                     VAbstractApplication::VApp()->NativeFileDialog());
@@ -2033,7 +2033,7 @@ void TKMMainWindow::WriteSettings()
 //---------------------------------------------------------------------------------------------------------------------
 void TKMMainWindow::InitIcons()
 {
-    QString const iconResource = QStringLiteral("icon");
+    auto const iconResource = QStringLiteral("icon");
     ui->toolButtonAddImage->setIcon(VTheme::GetIconResource(iconResource, QStringLiteral("16x16/insert-image.png")));
     ui->toolButtonRemoveImage->setIcon(VTheme::GetIconResource(iconResource, QStringLiteral("16x16/remove-image.png")));
 
@@ -2042,7 +2042,7 @@ void TKMMainWindow::InitIcons()
         ui->tabWidget->setTabIcon(index, VTheme::GetIconResource(iconResource, QStringLiteral("16x16/viewimage.png")));
     }
 
-    QString const tapeIconResource = QStringLiteral("tapeicon");
+    auto const tapeIconResource = QStringLiteral("tapeicon");
     ui->actionMeasurementDiagram->setIcon(
         VTheme::GetIconResource(tapeIconResource, QStringLiteral("24x24/mannequin.png")));
 }
@@ -2150,7 +2150,7 @@ void TKMMainWindow::CreateWindowMenu(QMenu *menu)
     {
         TKMMainWindow *window = windows.at(i);
 
-        QString title = QStringLiteral("%1. %2").arg(i + 1).arg(window->windowTitle());
+        auto title = QStringLiteral("%1. %2").arg(i + 1).arg(window->windowTitle());
         if (const auto index = title.lastIndexOf("[*]"_L1); index != -1)
         {
             window->isWindowModified() ? title.replace(index, 3, '*'_L1) : title.replace(index, 3, QString());

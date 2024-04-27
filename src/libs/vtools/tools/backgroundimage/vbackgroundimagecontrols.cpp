@@ -482,16 +482,16 @@ void VBackgroundImageControls::InitPixmaps()
 
     auto InitPixmap = [this](BIHandleCornerType type, const QString &imageName)
     {
-        const QString resource = QStringLiteral("icon");
+        const auto resource = QStringLiteral("icon");
 
-        const QString fileName = QStringLiteral("32x32/%1.png").arg(imageName);
+        const auto fileName = QStringLiteral("32x32/%1.png").arg(imageName);
         QPixmap const handlePixmap = VTheme::GetPixmapResource(resource, fileName);
 
         if (QGuiApplication::primaryScreen()->devicePixelRatio() >= 2)
         {
-            const QString fileName2x = QStringLiteral("32x32/%1@2x.png").arg(imageName);
-            const QString fileName2xHover = QStringLiteral("32x32/%1-hover@2x.png").arg(imageName);
-            const QString fileName2xDisabled = QStringLiteral("32x32/%1-disabled@2x.png").arg(imageName);
+            const auto fileName2x = QStringLiteral("32x32/%1@2x.png").arg(imageName);
+            const auto fileName2xHover = QStringLiteral("32x32/%1-hover@2x.png").arg(imageName);
+            const auto fileName2xDisabled = QStringLiteral("32x32/%1-disabled@2x.png").arg(imageName);
 
             m_handlePixmaps.insert(type, VTheme::GetPixmapResource(resource, fileName2x));
             m_handleHoverPixmaps.insert(type, VTheme::GetPixmapResource(resource, fileName2xHover));
@@ -499,8 +499,8 @@ void VBackgroundImageControls::InitPixmaps()
         }
         else
         {
-            const QString fileNameHover = QStringLiteral("32x32/%1-hover.png").arg(imageName);
-            const QString fileNameDisabled = QStringLiteral("32x32/%1-disabled.png").arg(imageName);
+            const auto fileNameHover = QStringLiteral("32x32/%1-hover.png").arg(imageName);
+            const auto fileNameDisabled = QStringLiteral("32x32/%1-disabled.png").arg(imageName);
 
             m_handlePixmaps.insert(type, handlePixmap);
             m_handleHoverPixmaps.insert(type, VTheme::GetPixmapResource(resource, fileNameHover));

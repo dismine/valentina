@@ -596,7 +596,7 @@ void DialogEditWrongFormula::SetDescription(const QString &name, qreal value, bo
     }
 
     const QString unit = specialUnits ? degreeSymbol : ' ' + unitName;
-    const QString desc = QStringLiteral("%1(%2%3) - %4").arg(name).arg(value).arg(unit, description);
+    const auto desc = QStringLiteral("%1(%2%3) - %4").arg(name).arg(value).arg(unit, description);
     ui->labelDescription->setText(desc);
 }
 
@@ -611,7 +611,7 @@ auto DialogEditWrongFormula::Eval(const FormulaData &formulaData, bool &flag) ->
 //---------------------------------------------------------------------------------------------------------------------
 void DialogEditWrongFormula::InitIcons()
 {
-    const QString resource = QStringLiteral("icon");
+    const auto resource = QStringLiteral("icon");
 
     ui->label->setPixmap(VTheme::GetPixmapResource(resource, QStringLiteral("24x24/equal.png")));
 }

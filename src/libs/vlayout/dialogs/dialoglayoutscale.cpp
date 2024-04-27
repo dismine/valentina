@@ -84,8 +84,8 @@ void DialogLayoutScale::SetTiledMargins(QMarginsF margins)
 //---------------------------------------------------------------------------------------------------------------------
 auto DialogLayoutScale::GetTiledMargins() const -> QMarginsF
 {
-    QMarginsF const margins = QMarginsF(ui->doubleSpinBoxLeftField->value(), ui->doubleSpinBoxTopField->value(),
-                                        ui->doubleSpinBoxRightField->value(), ui->doubleSpinBoxBottomField->value());
+    auto const margins = QMarginsF(ui->doubleSpinBoxLeftField->value(), ui->doubleSpinBoxTopField->value(),
+                                   ui->doubleSpinBoxRightField->value(), ui->doubleSpinBoxBottomField->value());
 
     return UnitConvertor(margins, VAbstractValApplication::VApp()->patternUnits(), Unit::Mm);
 }
@@ -202,7 +202,7 @@ void DialogLayoutScale::WriteSettings() const
     const Unit unit = VAbstractValApplication::VApp()->patternUnits();
 
     // write Margins top, right, bottom, left
-    QMarginsF const margins = QMarginsF(ui->doubleSpinBoxLeftField->value(), ui->doubleSpinBoxTopField->value(),
-                                        ui->doubleSpinBoxRightField->value(), ui->doubleSpinBoxBottomField->value());
+    auto const margins = QMarginsF(ui->doubleSpinBoxLeftField->value(), ui->doubleSpinBoxTopField->value(),
+                                   ui->doubleSpinBoxRightField->value(), ui->doubleSpinBoxBottomField->value());
     settings->SetTiledPDFMargins(margins, unit);
 }

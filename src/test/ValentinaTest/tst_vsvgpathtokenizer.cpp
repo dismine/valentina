@@ -42,7 +42,7 @@ void CompareCommands(const VSVGPathCommand &actual, const VSVGPathCommand &expec
         QStringLiteral("Commands mismatch. Expected: %1, actual: %2").arg(expected.m_command).arg(actual.m_command);
     QVERIFY2(actual.m_command == expected.m_command, qUtf8Printable(msg));
 
-    const QString msg2 = QStringLiteral("Commands %1 arguments mismatch.").arg(actual.m_command);
+    const auto msg2 = QStringLiteral("Commands %1 arguments mismatch.").arg(actual.m_command);
     QVERIFY2(actual.m_arguments.size() == expected.m_arguments.size(),
              qUtf8Printable(msg2)); // First check if sizes are equal
 

@@ -101,9 +101,9 @@ void VTranslateVars::InitVariables()
 //---------------------------------------------------------------------------------------------------------------------
 void VTranslateVars::InitFunctions()
 {
-    const QString oneArgument = QStringLiteral("()");
-    const QString twoArguments = QStringLiteral("(;)");
-    const QString threeArguments = QStringLiteral("(;;)");
+    const auto oneArgument = QStringLiteral("()");
+    const auto twoArguments = QStringLiteral("(;)");
+    const auto threeArguments = QStringLiteral("(;;)");
 
     functions.insert(degTorad_F, translate("VTranslateVars", "degTorad", "converts degrees to radian"));
     functionsDescriptions.insert(degTorad_F,

@@ -63,7 +63,7 @@ void SetImageHold(QTableWidgetItem *item, const VBackgroundPatternImage &image)
 {
     if (item)
     {
-        const QString resource = QStringLiteral("icon");
+        const auto resource = QStringLiteral("icon");
         (image.Hold()) ? item->setIcon(VTheme::GetIconResource(resource, QStringLiteral("16x16/hold_image.png")))
                        : item->setIcon(VTheme::GetIconResource(resource, QStringLiteral("16x16/not_hold_image.png")));
     }
@@ -74,7 +74,7 @@ void SetImageVisibility(QTableWidgetItem *item, const VBackgroundPatternImage &i
 {
     if (item)
     {
-        const QString resource = QStringLiteral("icon");
+        const auto resource = QStringLiteral("icon");
         item->setIcon(image.Visible() ? VTheme::GetIconResource(resource, QStringLiteral("16x16/open_eye.png"))
                                       : VTheme::GetIconResource(resource, QStringLiteral("16x16/closed_eye.png")));
     }

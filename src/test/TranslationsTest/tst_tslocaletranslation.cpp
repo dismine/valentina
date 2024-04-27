@@ -50,7 +50,7 @@ void TST_TSLocaleTranslation::CheckPlaceMarkerExist_data()
     QTest::addColumn<QString>("translation");
     QTest::addColumn<Qt::LayoutDirection>("direction");
 
-    const QString filename = QStringLiteral("valentina_%1.ts").arg(m_locale);
+    const auto filename = QStringLiteral("valentina_%1.ts").arg(m_locale);
     QLocale const locale(m_locale);
 
     const QDomNodeList messages = LoadTSFile(filename);
@@ -91,7 +91,7 @@ void TST_TSLocaleTranslation::CheckPlaceMarkerExist_data()
         }
         else
         {
-            const QString caseName = QStringLiteral("File '%2'. Message %1 is null.").arg(i).arg(filename);
+            const auto caseName = QStringLiteral("File '%2'. Message %1 is null.").arg(i).arg(filename);
             QFAIL(qUtf8Printable(caseName));
         }
     }
@@ -187,12 +187,12 @@ void TST_TSLocaleTranslation::TestPunctuation_data()
                 continue;
             }
 
-            const QString caseName = QStringLiteral("File '%1'.").arg(filename);
+            const auto caseName = QStringLiteral("File '%1'.").arg(filename);
             QTest::newRow(qUtf8Printable(caseName)) << m_locale << source << translation;
         }
         else
         {
-            const QString caseName = QStringLiteral("File '%2'. Message %1 is null.").arg(i).arg(filename);
+            const auto caseName = QStringLiteral("File '%2'. Message %1 is null.").arg(i).arg(filename);
             QFAIL(qUtf8Printable(caseName));
         }
     }
@@ -296,12 +296,12 @@ void TST_TSLocaleTranslation::TestHTMLTags_data()
                 continue;
             }
 
-            const QString caseName = QStringLiteral("File '%1'.").arg(filename);
+            const auto caseName = QStringLiteral("File '%1'.").arg(filename);
             QTest::newRow(qUtf8Printable(caseName)) << source << translation;
         }
         else
         {
-            const QString caseName = QStringLiteral("File '%2'. Message %1 is null.").arg(i).arg(filename);
+            const auto caseName = QStringLiteral("File '%2'. Message %1 is null.").arg(i).arg(filename);
             QFAIL(qUtf8Printable(caseName));
         }
     }

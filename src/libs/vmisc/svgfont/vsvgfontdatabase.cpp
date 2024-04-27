@@ -205,7 +205,7 @@ auto VSvgFontDatabase::Italic(const QString &family, SVGFontStyle style) const -
 //---------------------------------------------------------------------------------------------------------------------
 auto VSvgFontDatabase::SystemSVGFontPath() -> QString
 {
-    const QString fontPath = QStringLiteral("/svgfonts");
+    const auto fontPath = QStringLiteral("/svgfonts");
 #ifdef Q_OS_WIN
     return QCoreApplication::applicationDirPath() + fontPath;
 #elif defined(Q_OS_MAC)

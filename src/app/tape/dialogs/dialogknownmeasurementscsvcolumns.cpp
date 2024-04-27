@@ -519,7 +519,7 @@ void DialogKnownMeasurementsCSVColumns::CheckStatus()
 //---------------------------------------------------------------------------------------------------------------------
 template <class T> auto DialogKnownMeasurementsCSVColumns::ColumnValid(T column) const -> bool
 {
-    const int columnNumber = static_cast<int>(column);
+    const auto columnNumber = static_cast<int>(column);
     int const value = m_columnsMap.at(columnNumber);
 
     if (value == -1 && not ColumnMandatory(columnNumber))
@@ -548,7 +548,7 @@ template <class T> void DialogKnownMeasurementsCSVColumns::SaveColum(QComboBox *
 {
     SCASSERT(control != nullptr)
 
-    const int columnNumber = static_cast<int>(column);
+    const auto columnNumber = static_cast<int>(column);
     m_columnsMap[columnNumber] = control->currentData().toInt();
     ShowImportPreview();
     CheckStatus();

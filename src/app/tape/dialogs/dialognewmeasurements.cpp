@@ -33,9 +33,9 @@
 
 //---------------------------------------------------------------------------------------------------------------------
 DialogNewMeasurements::DialogNewMeasurements(QWidget *parent)
-    :QDialog(parent),
-      ui(new Ui::DialogNewMeasurements),
-      m_isInitialized(false)
+  : QDialog(parent),
+    ui(new Ui::DialogNewMeasurements),
+    m_isInitialized(false)
 {
     ui->setupUi(this);
 
@@ -79,8 +79,8 @@ void DialogNewMeasurements::changeEvent(QEvent *event)
 //---------------------------------------------------------------------------------------------------------------------
 void DialogNewMeasurements::showEvent(QShowEvent *event)
 {
-    QDialog::showEvent( event );
-    if ( event->spontaneous() )
+    QDialog::showEvent(event);
+    if (event->spontaneous())
     {
         return;
     }
@@ -94,13 +94,13 @@ void DialogNewMeasurements::showEvent(QShowEvent *event)
     setMaximumSize(size());
     setMinimumSize(size());
 
-    m_isInitialized = true;//first show windows are held
+    m_isInitialized = true; // first show windows are held
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 void DialogNewMeasurements::InitMTypes()
 {
-    int val = static_cast<int>(MeasurementsType::Unknown);
+    auto val = static_cast<int>(MeasurementsType::Unknown);
     if (ui->comboBoxMType->currentIndex() != -1)
     {
         val = ui->comboBoxMType->currentData().toInt();
@@ -122,7 +122,7 @@ void DialogNewMeasurements::InitMTypes()
 //---------------------------------------------------------------------------------------------------------------------
 void DialogNewMeasurements::InitUnits()
 {
-    int val = static_cast<int>(Unit::Cm);
+    auto val = static_cast<int>(Unit::Cm);
     if (ui->comboBoxUnit->currentIndex() != -1)
     {
         val = ui->comboBoxUnit->currentData().toInt();

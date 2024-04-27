@@ -156,7 +156,7 @@ auto VRawLayout::ReadFile(QIODevice *ioDevice, VRawLayoutData &data) -> bool
         // bytes of the stream will be the size of the array, we might end up attempting to allocate
         // a large amount of memory if the wrong file type was read. Instead, we'll just read the
         // same number of bytes that are in the array we are comparing it to. No size was written.
-        const int len = static_cast<int>(fileHeaderByteArray.size());
+        const auto len = static_cast<int>(fileHeaderByteArray.size());
         QByteArray actualFileHeaderByteArray(len, '\0');
         dataStream.readRawData(actualFileHeaderByteArray.data(), len);
 

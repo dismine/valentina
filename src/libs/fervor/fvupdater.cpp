@@ -429,7 +429,7 @@ auto FvUpdater::xmlParseFeed() -> bool
             else if (m_xml.name() == "enclosure"_L1)
             {
                 const QXmlStreamAttributes attribs = m_xml.attributes();
-                const QString fervorPlatform = QStringLiteral("fervor:platform");
+                const auto fervorPlatform = QStringLiteral("fervor:platform");
 
                 if (attribs.hasAttribute(fervorPlatform))
                 {
@@ -437,7 +437,7 @@ auto FvUpdater::xmlParseFeed() -> bool
                     {
                         xmlEnclosurePlatform = attribs.value(fervorPlatform).toString().trimmed();
 
-                        const QString attributeUrl = QStringLiteral("url");
+                        const auto attributeUrl = QStringLiteral("url");
                         if (attribs.hasAttribute(attributeUrl))
                         {
                             xmlEnclosureUrl = attribs.value(attributeUrl).toString().trimmed();
@@ -447,7 +447,7 @@ auto FvUpdater::xmlParseFeed() -> bool
                             xmlEnclosureUrl.clear();
                         }
 
-                        const QString fervorVersion = QStringLiteral("fervor:version");
+                        const auto fervorVersion = QStringLiteral("fervor:version");
                         if (attribs.hasAttribute(fervorVersion))
                         {
                             const QString candidateVersion = attribs.value(fervorVersion).toString().trimmed();

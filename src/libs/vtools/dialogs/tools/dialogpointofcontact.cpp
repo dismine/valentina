@@ -343,7 +343,7 @@ void DialogPointOfContact::FinishCreating()
 //---------------------------------------------------------------------------------------------------------------------
 void DialogPointOfContact::InitIcons()
 {
-    const QString resource = QStringLiteral("icon");
+    const auto resource = QStringLiteral("icon");
 
     ui->toolButtonExprRadius->setIcon(VTheme::GetIconResource(resource, QStringLiteral("24x24/fx.png")));
     ui->label->setPixmap(VTheme::GetPixmapResource(resource, QStringLiteral("24x24/equal.png")));

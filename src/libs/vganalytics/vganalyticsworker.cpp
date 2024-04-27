@@ -215,7 +215,7 @@ auto VGAnalyticsWorker::SendAnalytics() -> QNetworkReply *
     // queue has messages -> stop timer and start sending
     m_timer.stop();
 
-    QString connection = QStringLiteral("close");
+    auto connection = QStringLiteral("close");
     if (m_messageQueue.count() > 1)
     {
         connection = "keep-alive"_L1;
@@ -245,7 +245,7 @@ auto VGAnalyticsWorker::SendAnalytics() -> QNetworkReply *
         LogMessage(VGAnalytics::Error, QStringLiteral("google analytics api seceret was not set!"));
     }
 
-    QString requestUrl = QStringLiteral("https://www.google-analytics.com/mp/collect?measurement_id=%1&api_secret=%2");
+    auto requestUrl = QStringLiteral("https://www.google-analytics.com/mp/collect?measurement_id=%1&api_secret=%2");
     requestUrl = requestUrl.arg(m_measurementId, m_apiSecret);
     m_request.setUrl(QUrl(requestUrl));
 

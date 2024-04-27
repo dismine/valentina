@@ -613,7 +613,7 @@ auto VEllipticalArc::CutArc(qreal length, const QString &pointName) const -> QPo
 void VEllipticalArc::CreateName()
 {
     QString name = ELARC_ + this->GetCenter().name();
-    const QString nameStr = QStringLiteral("_%1");
+    const auto nameStr = QStringLiteral("_%1");
 
     if (getMode() == Draw::Modeling && getIdObject() != NULL_ID)
     {

@@ -214,7 +214,7 @@ void VVSTConverter::ConvertMeasurementsToV0_4_0()
     // TODO. Delete if minimal supported version is 0.4.0
     Q_STATIC_ASSERT_X(VVSTConverter::MeasurementMinVer < FormatVersion(0, 4, 0), "Time to refactor the code.");
 
-    const QString tagBM = QStringLiteral("body-measurements");
+    const auto tagBM = QStringLiteral("body-measurements");
 
     QDomElement bm = createElement(tagBM);
 
@@ -309,7 +309,7 @@ void VVSTConverter::ConvertMeasurementsToV0_4_2()
 
         for (int ii = 0; ii < nodeList.size(); ++ii)
         {
-            const QString attrName = QStringLiteral("name");
+            const auto attrName = QStringLiteral("name");
             QDomElement element = nodeList.at(ii).toElement();
             const QString name = GetParametrString(element, attrName);
             if (name == i.value())
@@ -352,9 +352,9 @@ void VVSTConverter::AddNewTagsForV0_5_0()
     const Unit units = Units();
 
     {
-        const int step = static_cast<int>(UnitConvertor(6, Unit::Cm, units));
-        const int min = static_cast<int>(UnitConvertor(50, Unit::Cm, units));
-        const int max = static_cast<int>(UnitConvertor(200, Unit::Cm, units));
+        const auto step = static_cast<int>(UnitConvertor(6, Unit::Cm, units));
+        const auto min = static_cast<int>(UnitConvertor(50, Unit::Cm, units));
+        const auto max = static_cast<int>(UnitConvertor(200, Unit::Cm, units));
 
         QDomElement dimensionX = createElement(QStringLiteral("dimension"));
         SetAttribute(dimensionX, QStringLiteral("type"), QChar('x'));
@@ -366,9 +366,9 @@ void VVSTConverter::AddNewTagsForV0_5_0()
     }
 
     {
-        const int step = static_cast<int>(UnitConvertor(2, Unit::Cm, units));
-        const int min = static_cast<int>(UnitConvertor(22, Unit::Cm, units));
-        const int max = static_cast<int>(UnitConvertor(72, Unit::Cm, units));
+        const auto step = static_cast<int>(UnitConvertor(2, Unit::Cm, units));
+        const auto min = static_cast<int>(UnitConvertor(22, Unit::Cm, units));
+        const auto max = static_cast<int>(UnitConvertor(72, Unit::Cm, units));
 
         QDomElement dimensionY = createElement(QStringLiteral("dimension"));
         SetAttribute(dimensionY, QStringLiteral("type"), QChar('y'));

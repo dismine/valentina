@@ -628,8 +628,8 @@ void DialogSaveLayout::SetTiledMargins(QMarginsF margins)
 //---------------------------------------------------------------------------------------------------------------------
 auto DialogSaveLayout::GetTiledMargins() const -> QMarginsF
 {
-    QMarginsF const margins = QMarginsF(ui->doubleSpinBoxLeftField->value(), ui->doubleSpinBoxTopField->value(),
-                                        ui->doubleSpinBoxRightField->value(), ui->doubleSpinBoxBottomField->value());
+    auto const margins = QMarginsF(ui->doubleSpinBoxLeftField->value(), ui->doubleSpinBoxTopField->value(),
+                                   ui->doubleSpinBoxRightField->value(), ui->doubleSpinBoxBottomField->value());
 
     return UnitConvertor(margins, VAbstractValApplication::VApp()->patternUnits(), Unit::Mm);
 }
@@ -821,7 +821,7 @@ void DialogSaveLayout::ReadSettings()
     const QSizeF size = VAbstractLayoutDialog::RoundTemplateSize(settings->GetTiledPDFPaperWidth(Unit::Mm),
                                                                  settings->GetTiledPDFPaperHeight(Unit::Mm), Unit::Mm);
 
-    const int max = static_cast<int>(PaperSizeTemplate::Custom);
+    const auto max = static_cast<int>(PaperSizeTemplate::Custom);
     for (int i = 0; i < max; ++i)
     {
 
@@ -886,8 +886,8 @@ void DialogSaveLayout::WriteSettings() const
     const Unit unit = VAbstractValApplication::VApp()->patternUnits();
 
     // write Margins top, right, bottom, left
-    QMarginsF const margins = QMarginsF(ui->doubleSpinBoxLeftField->value(), ui->doubleSpinBoxTopField->value(),
-                                        ui->doubleSpinBoxRightField->value(), ui->doubleSpinBoxBottomField->value());
+    auto const margins = QMarginsF(ui->doubleSpinBoxLeftField->value(), ui->doubleSpinBoxTopField->value(),
+                                   ui->doubleSpinBoxRightField->value(), ui->doubleSpinBoxBottomField->value());
     settings->SetTiledPDFMargins(margins, unit);
 
     // write Template

@@ -34,7 +34,7 @@
 
 //---------------------------------------------------------------------------------------------------------------------
 VAbstractMConverter::VAbstractMConverter(const QString &fileName)
-    :VAbstractConverter(fileName)
+  : VAbstractConverter(fileName)
 {
     m_ver = GetFormatVersion(GetFormatVersionStr());
 }
@@ -55,8 +55,7 @@ auto VAbstractMConverter::Units() const -> Unit
 //---------------------------------------------------------------------------------------------------------------------
 void VAbstractMConverter::AddRootComment()
 {
-    const QString rootComment =
-            QStringLiteral("Measurements created with Valentina (https://smart-pattern.com.ua/).");
+    const auto rootComment = QStringLiteral("Measurements created with Valentina (https://smart-pattern.com.ua/).");
 
     QDomElement rootElement = this->documentElement();
     rootElement.insertBefore(createComment(rootComment), rootElement.firstChild());
@@ -79,7 +78,7 @@ auto VAbstractMConverter::OldNamesToNewNames_InV0_3_0() -> QMultiMap<QString, QS
     names.insert(QStringLiteral("height_waist_front"), QStringLiteral("front_waist_to_floor"));
     names.insert(QStringLiteral("height_bustpoint"), QStringLiteral("height_nipple_point"));
 
-    QString name = QStringLiteral("height_shoulder_tip");
+    auto name = QStringLiteral("height_shoulder_tip");
     names.insert(name, QStringLiteral("shoulder_height"));
     names.insert(name, QStringLiteral("height_shoulder_point"));
 

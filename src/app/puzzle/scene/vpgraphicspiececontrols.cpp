@@ -283,8 +283,8 @@ auto VPGraphicsTransformationOrigin::Center2() const -> QPainterPath
     const qreal scale = SceneScale(scene());
     qreal const radius = centerRadius2 / scale;
     VPTransformationOrigon const transformationOrigin = TransformationOrigin(m_layout, QRectF());
-    QRectF const rect = QRectF(transformationOrigin.origin.x() - radius, transformationOrigin.origin.y() - radius,
-                               radius * 2., radius * 2.);
+    auto const rect = QRectF(transformationOrigin.origin.x() - radius, transformationOrigin.origin.y() - radius,
+                             radius * 2., radius * 2.);
 
     QPainterPath center2;
     center2.addEllipse(rect);
@@ -567,22 +567,22 @@ void VPGraphicsPieceControls::InitPixmaps()
 
     auto InitPixmap = [this](VPHandleCornerType type, const QString &imageName)
     {
-        const QString resource = QStringLiteral("icon");
+        const auto resource = QStringLiteral("icon");
 
-        const QString fileName = QStringLiteral("32x32/%1.png").arg(imageName);
+        const auto fileName = QStringLiteral("32x32/%1.png").arg(imageName);
         QPixmap const handlePixmap = VTheme::GetPixmapResource(resource, fileName);
 
         if (QGuiApplication::primaryScreen()->devicePixelRatio() >= 2)
         {
-            const QString fileName2x = QStringLiteral("32x32/%1@2x.png").arg(imageName);
-            const QString fileName2xHover = QStringLiteral("32x32/%1-hover@2x.png").arg(imageName);
+            const auto fileName2x = QStringLiteral("32x32/%1@2x.png").arg(imageName);
+            const auto fileName2xHover = QStringLiteral("32x32/%1-hover@2x.png").arg(imageName);
 
             m_handlePixmaps.insert(type, VTheme::GetPixmapResource(resource, fileName2x));
             m_handleHoverPixmaps.insert(type, VTheme::GetPixmapResource(resource, fileName2xHover));
         }
         else
         {
-            const QString fileNameHover = QStringLiteral("32x32/%1-hover.png").arg(imageName);
+            const auto fileNameHover = QStringLiteral("32x32/%1-hover.png").arg(imageName);
 
             m_handlePixmaps.insert(type, handlePixmap);
             m_handleHoverPixmaps.insert(type, VTheme::GetPixmapResource(resource, fileNameHover));

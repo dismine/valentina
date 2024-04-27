@@ -1566,52 +1566,52 @@ auto VPattern::GetLabelBase(quint32 index) const -> QString
     {
         case 0: // de
         {
-            const QString al = QStringLiteral("A,Ä,B,C,D,E,F,G,H,I,J,K,L,M,N,O,Ö,P,Q,R,S,ß,T,U,Ü,V,W,X,Y,Z");
+            const auto al = QStringLiteral("A,Ä,B,C,D,E,F,G,H,I,J,K,L,M,N,O,Ö,P,Q,R,S,ß,T,U,Ü,V,W,X,Y,Z");
             alphabet = al.split(','_L1);
             break;
         }
         case 2: // fr
         {
-            const QString al = QStringLiteral("A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,R,S,T,U,V,W,X,Y,Z");
+            const auto al = QStringLiteral("A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,R,S,T,U,V,W,X,Y,Z");
             alphabet = al.split(','_L1);
             break;
         }
         case 3: // ru
         {
-            const QString al = QStringLiteral("А,Б,В,Г,Д,Е,Ж,З,И,К,Л,М,Н,О,П,Р,С,Т,У,Ф,Х,Ц,Ч,Ш,Щ,Э,Ю,Я");
+            const auto al = QStringLiteral("А,Б,В,Г,Д,Е,Ж,З,И,К,Л,М,Н,О,П,Р,С,Т,У,Ф,Х,Ц,Ч,Ш,Щ,Э,Ю,Я");
             alphabet = al.split(','_L1);
             break;
         }
         case 4: // uk
         {
-            const QString al = QStringLiteral("А,Б,В,Г,Д,Е,Ж,З,І,Ї,Й,К,Л,М,Н,О,П,Р,С,Т,У,Ф,Х,Ц,Ч,Ш,Щ,Є,Ю,Я");
+            const auto al = QStringLiteral("А,Б,В,Г,Д,Е,Ж,З,І,Ї,Й,К,Л,М,Н,О,П,Р,С,Т,У,Ф,Х,Ц,Ч,Ш,Щ,Є,Ю,Я");
             alphabet = al.split(','_L1);
             break;
         }
         case 5: // hr
         case 7: // bs
         {
-            const QString al = QStringLiteral("A,B,C,Č,Ć,D,Dž,Ð,E,F,G,H,I,J,K,L,Lj,M,N,Nj,O,P,R,S,Š,T,U,V,Z,Ž");
+            const auto al = QStringLiteral("A,B,C,Č,Ć,D,Dž,Ð,E,F,G,H,I,J,K,L,Lj,M,N,Nj,O,P,R,S,Š,T,U,V,Z,Ž");
             alphabet = al.split(','_L1);
             break;
         }
         case 6: // sr
         {
-            const QString al = QStringLiteral("А,Б,В,Г,Д,Ђ,Е,Ж,З,И,Ј,К,Л,Љ,М,Н,Њ,О,П,Р,С,Т,Ћ,У,Ф,Х,Ц,Ч,Џ,Ш");
+            const auto al = QStringLiteral("А,Б,В,Г,Д,Ђ,Е,Ж,З,И,Ј,К,Л,Љ,М,Н,Њ,О,П,Р,С,Т,Ћ,У,Ф,Х,Ц,Ч,Џ,Ш");
             alphabet = al.split(','_L1);
             break;
         }
         case 8: // cs
         {
-            const QString al = QStringLiteral("a,á,b,c,č,d,ď,e,é,ě,f,g,h,ch,i,í,j,k,l,m,n,ň,o,ó,p,q,r,ř,s,š,t,ť,u,ú,ů,"
-                                              "v,w,x,y,ý,z,ž");
+            const auto al = QStringLiteral("a,á,b,c,č,d,ď,e,é,ě,f,g,h,ch,i,í,j,k,l,m,n,ň,o,ó,p,q,r,ř,s,š,t,ť,u,ú,ů,"
+                                           "v,w,x,y,ý,z,ž");
             alphabet = al.split(','_L1);
             break;
         }
         case 1:  // en
         default: // en
         {
-            const QString al = QStringLiteral("A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,R,S,T,U,V,W,X,Y,Z");
+            const auto al = QStringLiteral("A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,R,S,T,U,V,W,X,Y,Z");
             alphabet = al.split(','_L1);
             break;
         }
@@ -1619,7 +1619,7 @@ auto VPattern::GetLabelBase(quint32 index) const -> QString
 
     QString base;
     const int count = qFloor(index / static_cast<quint32>(alphabet.size()));
-    const int number = static_cast<int>(index) - static_cast<int>(alphabet.size()) * count;
+    const auto number = static_cast<int>(index) - static_cast<int>(alphabet.size()) * count;
     int i = 0;
     do
     {

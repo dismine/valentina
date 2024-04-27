@@ -92,7 +92,7 @@ void QmuFormulaBase::InitCharSets()
     };
 
     // Defining identifier character sets
-    QString nameChars = QStringLiteral("0123456789\\_@#'") + symbolsStr;
+    auto nameChars = QStringLiteral("0123456789\\_@#'") + symbolsStr;
 
     AddNotCanonical(nameChars, sign0, '0');
     AddNotCanonical(nameChars, sign1, '1');
@@ -107,7 +107,7 @@ void QmuFormulaBase::InitCharSets()
 
     DefineNameChars(nameChars);
 
-    const QString opChars = QStringLiteral("+-*^/?<>=!$%&|~'_");
+    const auto opChars = QStringLiteral("+-*^/?<>=!$%&|~'_");
 
     QString oprtChars = symbolsStr + opChars;
     AddNotCanonical(oprtChars, positiveSign, '+');

@@ -214,7 +214,7 @@ void TST_ValentinaCommandLine::TestOpenCollection_data() const
 
     const QString tmp = QCoreApplication::applicationDirPath() + QDir::separator() + *tmpTestCollectionFolder;
     const QString testGOST = u"--test;;-m;;%1"_s.arg(tmp + QDir::separator() + "GOST_man_ru.vst"_L1);
-    const QString keyTest = QStringLiteral("--test");
+    const auto keyTest = QStringLiteral("--test");
 
     QTest::newRow("bra") << "bra.val" << keyTest << V_EX_OK;
 #ifdef Q_OS_WIN

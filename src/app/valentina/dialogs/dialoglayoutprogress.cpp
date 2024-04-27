@@ -75,7 +75,7 @@ DialogLayoutProgress::DialogLayoutProgress(QElapsedTimer timer, qint64 timeout, 
             [this]()
             {
                 const qint64 elapsed = m_timer.elapsed();
-                const int timeout = static_cast<int>(m_timeout - elapsed);
+                const auto timeout = static_cast<int>(m_timeout - elapsed);
                 QTime t(0, 0);
                 t = t.addMSecs(timeout);
                 ui->labelTimeLeft->setText(tr("Time left: %1").arg(t.toString()));

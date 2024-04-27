@@ -31,10 +31,10 @@
 
 //---------------------------------------------------------------------------------------------------------------------
 VComboBoxDelegate::VComboBoxDelegate(const QStringList &items, QObject *parent)
-    : QItemDelegate(parent),
-      m_items(items)
+  : QItemDelegate(parent),
+    m_items(items)
 {
-    const QString dashDash = QStringLiteral("--");
+    const auto dashDash = QStringLiteral("--");
     m_items.prepend(dashDash + tr("Select material") + dashDash);
 }
 

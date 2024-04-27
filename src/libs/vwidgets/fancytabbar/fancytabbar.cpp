@@ -528,7 +528,7 @@ void FancyTabBar::PaintTab(QPainter *painter, int tabIndex) const
     if (!selected && enabled)
     {
         painter->save();
-        int const fader = static_cast<int>(m_attachedTabs[tabIndex]->fader());
+        auto const fader = static_cast<int>(m_attachedTabs[tabIndex]->fader());
         QLinearGradient grad(GetCorner(rect, OutsideBeginning), GetCorner(rect, InsideBeginning));
 
         grad.setColorAt(0, Qt::transparent);

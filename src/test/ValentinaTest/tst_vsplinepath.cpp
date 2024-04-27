@@ -194,7 +194,7 @@ void TST_VSplinePath::TestFlip()
     const VSplinePath res = splPath.Flip(axis, prefix);
 
     // cppcheck-suppress unreadVariable
-    const QString errorMsg = QStringLiteral("The name doesn't contain the prefix '%1'.").arg(prefix);
+    const auto errorMsg = QStringLiteral("The name doesn't contain the prefix '%1'.").arg(prefix);
     QVERIFY2(res.name().endsWith(prefix), qUtf8Printable(errorMsg));
 
     QCOMPARE(splPath.GetLength(), res.GetLength());

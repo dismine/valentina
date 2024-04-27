@@ -98,7 +98,7 @@ auto SplitTextByWidth(const QString &text, const QFont &font, int maxWidth) -> Q
     QStringList substrings;
     substrings.reserve(2);
 
-    const int textLength = static_cast<int>(text.length());
+    const auto textLength = static_cast<int>(text.length());
     int lineWidth = 0;
 
     for (int endIndex = 0; endIndex < textLength; ++endIndex)
@@ -141,7 +141,7 @@ auto SplitTextByWidth(const QString &text, const VSvgFont &font, int maxWidth, q
     QStringList substrings;
     substrings.reserve(2);
 
-    const int textLength = static_cast<int>(text.length());
+    const auto textLength = static_cast<int>(text.length());
     qreal lineWidth = 0;
 
     for (int endIndex = 0; endIndex < textLength; ++endIndex)

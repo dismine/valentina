@@ -97,7 +97,7 @@ namespace
 auto AppFilePath(const QString &appName) -> QString
 {
 #ifdef Q_OS_WIN
-    const QString executableSuffix = QStringLiteral(".exe");
+    const auto executableSuffix = QStringLiteral(".exe");
 #else
     const QString executableSuffix;
 #endif
@@ -416,7 +416,7 @@ void VApplication::NewValentina(const QString &fileName)
     }
     else
     {
-        const QString run = QStringLiteral("\"%1\" \"%2\"").arg(QCoreApplication::applicationFilePath(), fileName);
+        const auto run = QStringLiteral("\"%1\" \"%2\"").arg(QCoreApplication::applicationFilePath(), fileName);
         qCDebug(vApp, "New process with arguments. program = %s", qUtf8Printable(run));
         if (QProcess::startDetached(QCoreApplication::applicationFilePath(), QStringList{fileName}))
         {
@@ -518,9 +518,9 @@ auto VApplication::notify(QObject *receiver, QEvent *event) -> bool
 auto VApplication::TapeFilePath() -> QString
 {
 #ifdef Q_OS_MACOS
-    const QString appName = QStringLiteral("Tape");
+    const auto appName = QStringLiteral("Tape");
 #else
-    const QString appName = QStringLiteral("tape");
+    const auto appName = QStringLiteral("tape");
 #endif
     return AppFilePath(appName);
 }
@@ -529,9 +529,9 @@ auto VApplication::TapeFilePath() -> QString
 auto VApplication::PuzzleFilePath() -> QString
 {
 #ifdef Q_OS_MACOS
-    const QString appName = QStringLiteral("Puzzle");
+    const auto appName = QStringLiteral("Puzzle");
 #else
-    const QString appName = QStringLiteral("puzzle");
+    const auto appName = QStringLiteral("puzzle");
 #endif
     return AppFilePath(appName);
 }

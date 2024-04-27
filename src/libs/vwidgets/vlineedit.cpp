@@ -123,7 +123,7 @@ void VLineEdit::focusInEvent(QFocusEvent *e)
 void VLineEdit::focusOutEvent(QFocusEvent *e)
 {
     const int start = selectionStart();
-    const int selectionLength = static_cast<int>(selectedText().length());
+    const auto selectionLength = static_cast<int>(selectedText().length());
     const bool wasTextSelected = hasSelectedText();
 
     QLineEdit::focusOutEvent(e);

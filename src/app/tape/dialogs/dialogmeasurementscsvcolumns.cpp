@@ -253,7 +253,7 @@ auto DialogMeasurementsCSVColumns::ColumnHeader(int column) const -> QString
     }
     else
     {
-        const QString suffix = QStringLiteral(" (%1):");
+        const auto suffix = QStringLiteral(" (%1):");
         const auto multisizeColumn = static_cast<MultisizeMeasurementsColumns>(column);
         switch (multisizeColumn)
         {
@@ -746,7 +746,7 @@ void DialogMeasurementsCSVColumns::RetranslateLabels()
         ui->labelValue->setText(
             QCoreApplication::translate("DialogMeasurementsCSVColumns", "Base value", "measurement column") + "*:"_L1);
 
-        const QString suffix = QStringLiteral(" (%1)");
+        const auto suffix = QStringLiteral(" (%1)");
 
         if (not m_dimensions.empty())
         {
@@ -878,7 +878,7 @@ template <class T> void DialogMeasurementsCSVColumns::HackWidget(T **widget)
 //---------------------------------------------------------------------------------------------------------------------
 template <class T> auto DialogMeasurementsCSVColumns::ColumnValid(T column) const -> bool
 {
-    const int columnNumber = static_cast<int>(column);
+    const auto columnNumber = static_cast<int>(column);
     int const value = m_columnsMap.at(columnNumber);
 
     if (value == -1 && not ColumnMandatory(columnNumber))
@@ -907,7 +907,7 @@ template <class T> void DialogMeasurementsCSVColumns::SaveColum(QComboBox *contr
 {
     SCASSERT(control != nullptr)
 
-    const int columnNumber = static_cast<int>(column);
+    const auto columnNumber = static_cast<int>(column);
     m_columnsMap[columnNumber] = control->currentData().toInt();
     ShowImportPreview();
     CheckStatus();

@@ -191,11 +191,11 @@ void TST_AbstractRegExp::CallTestForValidCharacters()
     const vsizetype pos = FindFirstNotOf(translated, validNameChars);
     if (pos != -1)
     {
-        const QString message = QStringLiteral("Translated string '%1' contains invalid character '%2' at "
-                                               "position '%3'.")
-                                    .arg(translated)
-                                    .arg(translated.at(pos))
-                                    .arg(pos);
+        const auto message = QStringLiteral("Translated string '%1' contains invalid character '%2' at "
+                                            "position '%3'.")
+                                 .arg(translated)
+                                 .arg(translated.at(pos))
+                                 .arg(pos);
         QFAIL(qUtf8Printable(message));
     }
 }

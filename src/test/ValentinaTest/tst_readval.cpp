@@ -131,7 +131,7 @@ void TST_ReadVal::PrepareVal(qreal val, const QLocale &locale)
 //---------------------------------------------------------------------------------------------------------------------
 void TST_ReadVal::PrepareString(const QString &str, const QLocale &locale, qreal val, vsizetype count)
 {
-    const QString tag = QStringLiteral("%1. String '%2'").arg(locale.name(), str);
+    const auto tag = QStringLiteral("%1. String '%2'").arg(locale.name(), str);
     QTest::newRow(qUtf8Printable(tag)) << str << count << val << locale;
 }
 
@@ -150,7 +150,7 @@ void TST_ReadVal::TestVal()
         ReadVal(formula, resVal, locale, LocaleDecimalPoint(locale), LocaleGroupSeparator(locale));
 
     // cppcheck-suppress unreadVariable
-    QString errorMsg = QStringLiteral("Conversion failed. Locale: '%1'.").arg(locale.name());
+    auto errorMsg = QStringLiteral("Conversion failed. Locale: '%1'.").arg(locale.name());
     QVERIFY2(resCount == expCount, qUtf8Printable(errorMsg));
 
     if (resCount != -1)

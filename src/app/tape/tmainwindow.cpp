@@ -1090,7 +1090,7 @@ void TMainWindow::ImportDataFromCSV()
     }
 
     const QString filters = tr("Comma-Separated Values") + QStringLiteral(" (*.csv)");
-    const QString suffix = QStringLiteral("csv");
+    const auto suffix = QStringLiteral("csv");
 
     QString fileName = QFileDialog::getOpenFileName(this, tr("Import from CSV"), QDir::homePath(), filters, nullptr,
                                                     VAbstractApplication::VApp()->NativeFileDialog());
@@ -2596,7 +2596,7 @@ void TMainWindow::ExportToIndividual()
         return;
     }
 
-    QString const suffix = QStringLiteral("vit");
+    auto const suffix = QStringLiteral("vit");
     if (QFileInfo const f(fileName); f.suffix().isEmpty() && f.suffix() != suffix)
     {
         fileName += '.'_L1 + suffix;
@@ -3370,7 +3370,7 @@ void TMainWindow::ShowHeaderUnits(QTableWidget *table, int column, const QString
     {
         header.remove(index - 1, 100);
     }
-    const QString unitHeader = QStringLiteral("%1 (%2)").arg(header, unit);
+    const auto unitHeader = QStringLiteral("%1 (%2)").arg(header, unit);
     table->horizontalHeaderItem(column)->setText(unitHeader);
 }
 
@@ -4197,7 +4197,7 @@ void TMainWindow::CreateWindowMenu(QMenu *menu)
     {
         TMainWindow *window = windows.at(i);
 
-        QString title = QStringLiteral("%1. %2").arg(i + 1).arg(window->windowTitle());
+        auto title = QStringLiteral("%1. %2").arg(i + 1).arg(window->windowTitle());
         if (const auto index = title.lastIndexOf("[*]"_L1); index != -1)
         {
             window->isWindowModified() ? title.replace(index, 3, '*'_L1) : title.replace(index, 3, QString());
@@ -4697,12 +4697,12 @@ auto TMainWindow::OrderedMeasurements() const -> QMap<int, QSharedPointer<VMeasu
 //---------------------------------------------------------------------------------------------------------------------
 void TMainWindow::InitIcons()
 {
-    QString const iconResource = QStringLiteral("icon");
+    auto const iconResource = QStringLiteral("icon");
     ui->toolButtonExpr->setIcon(VTheme::GetIconResource(iconResource, QStringLiteral("24x24/fx.png")));
     ui->toolButtonAddImage->setIcon(VTheme::GetIconResource(iconResource, QStringLiteral("16x16/insert-image.png")));
     ui->toolButtonRemoveImage->setIcon(VTheme::GetIconResource(iconResource, QStringLiteral("16x16/remove-image.png")));
 
-    QString const tapeIconResource = QStringLiteral("tapeicon");
+    auto const tapeIconResource = QStringLiteral("tapeicon");
     ui->actionMeasurementDiagram->setIcon(
         VTheme::GetIconResource(tapeIconResource, QStringLiteral("24x24/mannequin.png")));
 }
@@ -4846,7 +4846,7 @@ auto TMainWindow::CSVColumnHeader(int column) const -> QString
     }
 
     const QList<MeasurementDimension_p> dimensions = m_m->Dimensions().values();
-    const QString suffix = QStringLiteral(" (%1):");
+    const auto suffix = QStringLiteral(" (%1):");
 
     if (column == 4)
     {

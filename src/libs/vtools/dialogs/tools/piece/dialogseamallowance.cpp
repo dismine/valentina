@@ -5264,9 +5264,9 @@ void DialogSeamAllowance::InitPassmarkAngleType(const VPieceNode &node)
 //---------------------------------------------------------------------------------------------------------------------
 void DialogSeamAllowance::InitIcons()
 {
-    const QString resource = QStringLiteral("icon");
+    const auto resource = QStringLiteral("icon");
 
-    const QString fxIcon = QStringLiteral("24x24/fx.png");
+    const auto fxIcon = QStringLiteral("24x24/fx.png");
     uiTabGrainline->pushButtonRot->setIcon(VTheme::GetIconResource(resource, fxIcon));
     uiTabGrainline->pushButtonLen->setIcon(VTheme::GetIconResource(resource, fxIcon));
     uiTabLabels->pushButtonDLWidth->setIcon(VTheme::GetIconResource(resource, fxIcon));
@@ -5282,7 +5282,7 @@ void DialogSeamAllowance::InitIcons()
     uiTabPaths->toolButtonExprBefore->setIcon(VTheme::GetIconResource(resource, fxIcon));
     uiTabPaths->toolButtonExprAfter->setIcon(VTheme::GetIconResource(resource, fxIcon));
 
-    const QString equalIcon = QStringLiteral("24x24/equal.png");
+    const auto equalIcon = QStringLiteral("24x24/equal.png");
     uiTabGrainline->labelEqual->setPixmap(VTheme::GetPixmapResource(resource, equalIcon));
     uiTabGrainline->labelEqual_2->setPixmap(VTheme::GetPixmapResource(resource, equalIcon));
     uiTabLabels->labelEqual_3->setPixmap(VTheme::GetPixmapResource(resource, equalIcon));

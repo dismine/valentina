@@ -317,7 +317,7 @@ void DialogIncrements::ShowHeaderUnits(QTableWidget *table, int column, const QS
     SCASSERT(table != nullptr)
 
     const QString header = table->horizontalHeaderItem(column)->text();
-    const QString unitHeader = QStringLiteral("%1 (%2)").arg(header, unit);
+    const auto unitHeader = QStringLiteral("%1 (%2)").arg(header, unit);
     table->horizontalHeaderItem(column)->setText(unitHeader);
 }
 
@@ -1306,8 +1306,8 @@ void DialogIncrements::InitIncrementUnits(QComboBox *combo)
 //---------------------------------------------------------------------------------------------------------------------
 void DialogIncrements::InitIcons()
 {
-    const QString resource = QStringLiteral("icon");
-    const QString fxIcon = QStringLiteral("24x24/fx.png");
+    const auto resource = QStringLiteral("icon");
+    const auto fxIcon = QStringLiteral("24x24/fx.png");
 
     ui->toolButtonExpr->setIcon(VTheme::GetIconResource(resource, fxIcon));
     ui->toolButtonExprPC->setIcon(VTheme::GetIconResource(resource, fxIcon));

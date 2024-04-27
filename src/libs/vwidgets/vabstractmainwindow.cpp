@@ -243,7 +243,7 @@ void VAbstractMainWindow::UpdateRecentFileActions()
         const QString &recent = recentFiles.at(i);
         if (not recent.isEmpty())
         {
-            const QString text = QStringLiteral("&%1. %2").arg(i + 1).arg(recentFiles.at(i));
+            const auto text = QStringLiteral("&%1. %2").arg(i + 1).arg(recentFiles.at(i));
             m_recentFileActs.at(i)->setText(text);
             m_recentFileActs.at(i)->setData(files.at(i));
             m_recentFileActs.at(i)->setVisible(true);

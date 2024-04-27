@@ -418,7 +418,7 @@ auto VSvgFontEngine::ElidedText(const QString &text, SVGTextElideMode mode, int 
         // Perform middle ellipsis by splitting the text and keeping the first and last characters
         qreal remainingWidth = availableWidth;
         int leftIndex = 1;
-        int rightIndex = static_cast<int>(elidedText.length() - 2);
+        auto rightIndex = static_cast<int>(elidedText.length() - 2);
 
         while (leftIndex < rightIndex && remainingWidth > 0)
         {

@@ -523,13 +523,13 @@ void DialogPointOfIntersectionCircles::FinishCreating()
 //---------------------------------------------------------------------------------------------------------------------
 void DialogPointOfIntersectionCircles::InitIcons()
 {
-    const QString resource = QStringLiteral("icon");
+    const auto resource = QStringLiteral("icon");
 
-    const QString fxIcon = QStringLiteral("24x24/fx.png");
+    const auto fxIcon = QStringLiteral("24x24/fx.png");
     ui->toolButtonExprCircle1Radius->setIcon(VTheme::GetIconResource(resource, fxIcon));
     ui->toolButtonExprCircle2Radius->setIcon(VTheme::GetIconResource(resource, fxIcon));
 
-    const QString equalIcon = QStringLiteral("24x24/equal.png");
+    const auto equalIcon = QStringLiteral("24x24/equal.png");
     ui->label_2->setPixmap(VTheme::GetPixmapResource(resource, equalIcon));
     ui->label_3->setPixmap(VTheme::GetPixmapResource(resource, equalIcon));
 }

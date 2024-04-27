@@ -50,7 +50,7 @@ void VAbstractLayoutDialog::InitTemplates(QComboBox *comboBoxTemplates)
     SCASSERT(comboBoxTemplates != nullptr)
     const QIcon icoPaper("://icon/16x16/template.png"_L1);
     const QIcon icoRoll("://icon/16x16/roll.png"_L1);
-    const QString pdi = QStringLiteral("(%1ppi)").arg(PrintDPI);
+    const auto pdi = QStringLiteral("(%1ppi)").arg(PrintDPI);
 
     auto cntr = static_cast<VIndexType>(PaperSizeTemplate::A0);
     for (const auto &v : PageFormatNames())
@@ -79,7 +79,7 @@ void VAbstractLayoutDialog::InitTileTemplates(QComboBox *comboBoxTemplates, bool
     InitTemplates(comboBoxTemplates);
 
     // remove unused formats
-    for (int i = static_cast<int>(PaperSizeTemplate::Roll24in); i <= static_cast<int>(PaperSizeTemplate::Custom); ++i)
+    for (auto i = static_cast<int>(PaperSizeTemplate::Roll24in); i <= static_cast<int>(PaperSizeTemplate::Custom); ++i)
     {
         if (keepCustom && i == static_cast<int>(PaperSizeTemplate::Custom))
         {

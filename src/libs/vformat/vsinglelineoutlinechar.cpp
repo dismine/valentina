@@ -140,7 +140,7 @@ void VSingleLineOutlineChar::ExportCorrections(const QString &dirPath) const
         }
     }
 
-    QString const filename = QStringLiteral("%1/%2.json").arg(dirPath, m_font.family());
+    auto const filename = QStringLiteral("%1/%2.json").arg(dirPath, m_font.family());
     QFile jsonFile(filename);
     if (!jsonFile.open(QIODevice::WriteOnly | QIODevice::Text))
     {
@@ -158,7 +158,7 @@ void VSingleLineOutlineChar::ExportCorrections(const QString &dirPath) const
 //---------------------------------------------------------------------------------------------------------------------
 void VSingleLineOutlineChar::LoadCorrections(const QString &dirPath) const
 {
-    QString const fileName = QStringLiteral("%1.json").arg(m_font.family());
+    auto const fileName = QStringLiteral("%1.json").arg(m_font.family());
 
     QDir directory(dirPath);
     directory.setNameFilters(QStringList(fileName));

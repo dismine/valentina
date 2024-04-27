@@ -53,7 +53,7 @@ void TST_VPointF::TestFlip_data()
 
     VPointF const originPoint;
     QLineF axis = QLineF(QPointF(5, 0), QPointF(5, 10));
-    QPointF flipped = QPointF(10, 0);
+    auto flipped = QPointF(10, 0);
 
     QTest::newRow("Vertical axis") << originPoint << axis << flipped << "a2";
 

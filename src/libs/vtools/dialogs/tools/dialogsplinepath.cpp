@@ -1100,15 +1100,15 @@ void DialogSplinePath::ShowPointIssue(const QString &pName)
 //---------------------------------------------------------------------------------------------------------------------
 void DialogSplinePath::InitIcons()
 {
-    const QString resource = QStringLiteral("icon");
+    const auto resource = QStringLiteral("icon");
 
-    const QString fxIcon = QStringLiteral("24x24/fx.png");
+    const auto fxIcon = QStringLiteral("24x24/fx.png");
     ui->toolButtonExprLength1->setIcon(VTheme::GetIconResource(resource, fxIcon));
     ui->toolButtonExprAngle1->setIcon(VTheme::GetIconResource(resource, fxIcon));
     ui->toolButtonExprLength2->setIcon(VTheme::GetIconResource(resource, fxIcon));
     ui->toolButtonExprAngle2->setIcon(VTheme::GetIconResource(resource, fxIcon));
 
-    const QString equalIcon = QStringLiteral("24x24/equal.png");
+    const auto equalIcon = QStringLiteral("24x24/equal.png");
     ui->label_8->setPixmap(VTheme::GetPixmapResource(resource, equalIcon));
     ui->label_9->setPixmap(VTheme::GetPixmapResource(resource, equalIcon));
     ui->label_10->setPixmap(VTheme::GetPixmapResource(resource, equalIcon));

@@ -256,7 +256,7 @@ auto VApplicationStyle::StylesheetIcon(StandardPixmap standardIcon, const QStyle
                                        const QWidget *widget) const -> QIcon
 {
     static QHash<QStyle::StandardPixmap, QString> const icons = StandardIconPaths();
-    QString const resource = QStringLiteral("://%1/%2").arg(VTheme::ThemeStylesheet(), icons.value(standardIcon));
+    auto const resource = QStringLiteral("://%1/%2").arg(VTheme::ThemeStylesheet(), icons.value(standardIcon));
     if (QFileInfo::exists(resource))
     {
         return QIcon(resource);

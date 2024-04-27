@@ -231,7 +231,7 @@ void TST_BuitInRegExp::TestCheckInternalVaribleRegExp()
     QFETCH(QString, var);
     QFETCH(QString, originalName);
 
-    static const QString regex = QStringLiteral("(.){1,}_(.){1,}$");
+    static const auto regex = QStringLiteral("(.){1,}_(.){1,}$");
 
     const QString sourceRegex = '^'_L1 + var + regex;
     const QRegularExpression sourceRe(sourceRegex);
@@ -243,14 +243,14 @@ void TST_BuitInRegExp::TestCheckInternalVaribleRegExp()
     {
         if (sourceRe.match(originalName).hasMatch() || translationRe.match(originalName).hasMatch())
         {
-            const QString message = QStringLiteral("Invalid original string '%1'").arg(originalName);
+            const auto message = QStringLiteral("Invalid original string '%1'").arg(originalName);
             QFAIL(qUtf8Printable(message));
         }
 
         const QString translatedMessage = m_trMs->VarToUser(originalName);
         if (sourceRe.match(translatedMessage).hasMatch() || translationRe.match(translatedMessage).hasMatch())
         {
-            const QString message = QStringLiteral("Invalid translation string '%1'").arg(translatedMessage);
+            const auto message = QStringLiteral("Invalid translation string '%1'").arg(translatedMessage);
             QFAIL(qUtf8Printable(message));
         }
     }

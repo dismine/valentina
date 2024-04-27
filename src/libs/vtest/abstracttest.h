@@ -153,7 +153,7 @@ template <class T> inline auto AbstractTest::VectorFromJson(const QString &json)
     PrepareDocument(json, saveData);
     QJsonDocument const loadDoc(QJsonDocument::fromJson(saveData));
 
-    const QString vectorKey = QStringLiteral("vector");
+    const auto vectorKey = QStringLiteral("vector");
 
     QJsonObject vectorObject = loadDoc.object();
     TestRoot(vectorObject, vectorKey, json);
@@ -182,7 +182,7 @@ template <class T> inline auto AbstractTest::VectorFromJson(const QString &json)
 //---------------------------------------------------------------------------------------------------------------------
 template <class T> inline void AbstractTest::CheckClassType(const QJsonObject &itemObject)
 {
-    const QString typeKey = QStringLiteral("type");
+    const auto typeKey = QStringLiteral("type");
 
     QString type;
     AbstractTest::ReadStringValue(itemObject, typeKey, type);

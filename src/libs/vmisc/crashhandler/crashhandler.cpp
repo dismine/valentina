@@ -75,24 +75,24 @@ Q_REQUIRED_RESULT auto AppSettings(const QString &appName) -> VCommonSettings *
 //---------------------------------------------------------------------------------------------------------------------
 auto AppCrashVersion() -> QString
 {
-    QString const version = QStringLiteral("%1_%2_%3").arg(MAJOR_VERSION).arg(MINOR_VERSION).arg(DEBUG_VERSION);
-    QString const qtVersion = QStringLiteral("Qt_%1_%2").arg(QT_VERSION_MAJOR).arg(QT_VERSION_MINOR);
+    auto const version = QStringLiteral("%1_%2_%3").arg(MAJOR_VERSION).arg(MINOR_VERSION).arg(DEBUG_VERSION);
+    auto const qtVersion = QStringLiteral("Qt_%1_%2").arg(QT_VERSION_MAJOR).arg(QT_VERSION_MINOR);
     QString multibundle; // NOLINT(misc-const-correctness)
 
 #if defined(Q_OS_MACOS)
-    QString const platform = QStringLiteral("macos");
+    auto const platform = QStringLiteral("macos");
 #if defined(MULTI_BUNDLE)
     multibundle = QStringLiteral("-multibundle");
 #endif
 #elif defined(Q_OS_WIN)
-    QString const platform = QStringLiteral("windows");
+    auto const platform = QStringLiteral("windows");
 #elif defined(Q_OS_LINUX)
-    QString const platform = QStringLiteral("linux");
+    auto const platform = QStringLiteral("linux");
 #else
-    QString const platform = QStringLiteral("unknown");
+    auto const platform = QStringLiteral("unknown");
 #endif
 
-    QString revision = QStringLiteral(VCS_REPO_STATE_REVISION);
+    auto revision = QStringLiteral(VCS_REPO_STATE_REVISION);
     if (!revision.startsWith('g'))
     { // assume always git
         revision.prepend('g');
@@ -226,9 +226,9 @@ auto InitializeCrashpad(const QString &appName) -> bool
     MakeDir(metricsPath);
     base::FilePath const metricsDir(VCrashPaths::GetPlatformString(metricsPath));
 
-    QString const dbName = QStringLiteral("valentina");
+    auto const dbName = QStringLiteral("valentina");
     // Configure url with your BugSplat database
-    QString const url = QStringLiteral("https://%1.bugsplat.com/post/bp/crash/crashpad.php").arg(dbName);
+    auto const url = QStringLiteral("https://%1.bugsplat.com/post/bp/crash/crashpad.php").arg(dbName);
 
     // Metadata that will be posted to BugSplat
     QMap<std::string, std::string> annotations;
