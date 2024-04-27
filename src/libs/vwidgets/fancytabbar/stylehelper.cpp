@@ -39,6 +39,12 @@
 #include <QWidget>
 #include <QtMath>
 
+namespace
+{
+QColor m_baseColor;
+QColor m_requestedBaseColor;
+} // namespace
+
 //---------------------------------------------------------------------------------------------------------------------
 auto StyleHelper::sidebarFontSize() -> qreal
 {
@@ -62,11 +68,6 @@ auto StyleHelper::panelTextColor(bool lightColored) -> QColor
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-// Invalid by default, setBaseColor needs to be called at least once
-QColor StyleHelper::m_baseColor;
-QColor StyleHelper::m_requestedBaseColor;
-
-//---------------------------------------------------------------------------------------------------------------------
 auto StyleHelper::baseColor(bool lightColored) -> QColor
 {
     if (!lightColored)
@@ -88,7 +89,7 @@ auto StyleHelper::borderColor(bool lightColored) -> QColor
 //---------------------------------------------------------------------------------------------------------------------
 auto StyleHelper::sidebarHighlight() -> QColor
 {
-    return QColor(255, 255, 255, 40);
+    return {255, 255, 255, 40};
 }
 
 //---------------------------------------------------------------------------------------------------------------------

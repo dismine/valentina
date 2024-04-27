@@ -42,8 +42,9 @@ class FancyTab final : public QObject
 
 public:
     explicit FancyTab(QWidget *tabbar);
+    ~FancyTab() override = default;
 
-    auto fader() -> double;
+    auto fader() const -> double;
     void setFader(double value);
 
     void fadeIn();
@@ -52,13 +53,13 @@ public:
 private:
     // cppcheck-suppress unknownMacro
     Q_DISABLE_COPY_MOVE(FancyTab) // NOLINT
-    QIcon m_icon;
-    QString m_text;
-    QString m_toolTip;
-    bool m_enabled;
-    QPropertyAnimation m_Animator;
+    QIcon m_icon{};
+    QString m_text{};
+    QString m_toolTip{};
+    bool m_enabled{false};
+    QPropertyAnimation m_Animator{};
     QWidget *m_TabBar;
-    double m_Fader;
+    double m_Fader{0};
 };
 
 #endif // FANCYTAB_H

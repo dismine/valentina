@@ -53,13 +53,13 @@ public:
         Right
     };
 
-    explicit FancyTabBar(const TabBarPosition position, QWidget *parent = nullptr);
-    virtual ~FancyTabBar() = default;
+    explicit FancyTabBar(TabBarPosition position, QWidget *parent = nullptr);
+    ~FancyTabBar() override = default;
 
-    virtual auto sizeHint() const -> QSize override;
-    virtual auto minimumSizeHint() const -> QSize override;
+    auto sizeHint() const -> QSize override;
+    auto minimumSizeHint() const -> QSize override;
 
-    void SetOrientation(const TabBarPosition p);
+    void SetOrientation(TabBarPosition p);
 
     void SetTabEnabled(int index, bool enable);
     auto IsTabEnabled(int index) const -> bool;
@@ -85,16 +85,16 @@ signals:
     void CurrentChanged(int);
 
 protected:
-    virtual auto event(QEvent *event) -> bool override;
-    virtual void paintEvent(QPaintEvent *event) override;
-    virtual void mousePressEvent(QMouseEvent *) override;
-    virtual void mouseMoveEvent(QMouseEvent *) override;
+    auto event(QEvent *event) -> bool override;
+    void paintEvent(QPaintEvent *event) override;
+    void mousePressEvent(QMouseEvent *e) override;
+    void mouseMoveEvent(QMouseEvent *e) override;
 #if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
-    virtual void enterEvent(QEnterEvent *) override;
+    void enterEvent(QEnterEvent *e) override;
 #else
-    virtual void enterEvent(QEvent *) override;
+    void enterEvent(QEvent *e) override;
 #endif
-    virtual void leaveEvent(QEvent *) override;
+    void leaveEvent(QEvent *e) override;
 
 private slots:
     void EmitCurrentIndex();
@@ -113,20 +113,19 @@ private:
     static const int m_rounding;
 
     TabBarPosition m_position;
-    QRect m_hoverRect;
-    int m_hoverIndex;
-    int m_currentIndex;
-    QList<FancyTab *> m_attachedTabs;
-    QTimer m_timerTriggerChangedSignal;
+    QRect m_hoverRect{};
+    int m_hoverIndex{-1};
+    int m_currentIndex{-1};
+    QList<FancyTab *> m_attachedTabs{};
+    QTimer m_timerTriggerChangedSignal{};
 
-    auto GetCorner(const QRect &rect, const Corner corner) const -> QPoint;
+    auto GetCorner(const QRect &rect, Corner corner) const -> QPoint;
 
-    auto AdjustRect(const QRect &rect, const qint8 offsetOutside, const qint8 offsetInside, const qint8 offsetBeginning,
-                    const qint8 offsetEnd) const -> QRect;
+    auto AdjustRect(const QRect &rect, qint8 offsetOutside, qint8 offsetInside, qint8 offsetBeginning,
+                    qint8 offsetEnd) const -> QRect;
 
     // Same with a point. + means towards Outside/End, - means towards Inside/Beginning
-    auto AdjustPoint(const QPoint &point, const qint8 offsetInsideOutside, const qint8 offsetBeginningEnd) const
-        -> QPoint;
+    auto AdjustPoint(const QPoint &point, qint8 offsetInsideOutside, qint8 offsetBeginningEnd) const -> QPoint;
 
     auto TabSizeHint(bool minimum = false) const -> QSize;
     void PaintTab(QPainter *painter, int tabIndex) const;

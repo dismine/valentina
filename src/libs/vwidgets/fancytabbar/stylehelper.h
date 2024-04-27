@@ -59,10 +59,6 @@ public:
     static void drawIconWithShadow(const QIcon &icon, const QRect &rect, QPainter *p, QIcon::Mode iconMode,
                                    int dipRadius = 3, const QColor &color = QColor(0, 0, 0, 130),
                                    const QPoint &dipOffset = QPoint(1, -2));
-
-private:
-    static QColor m_baseColor;
-    static QColor m_requestedBaseColor;
 };
 
 #endif // STYLEHELPER_H

@@ -33,20 +33,14 @@
 
 //---------------------------------------------------------------------------------------------------------------------
 FancyTab::FancyTab(QWidget *tabbar)
-    : m_icon(),
-      m_text(),
-      m_toolTip(),
-      m_enabled(false),
-      m_Animator(),
-      m_TabBar(tabbar),
-      m_Fader(0)
+  : m_TabBar(tabbar)
 {
     m_Animator.setPropertyName("fader");
     m_Animator.setTargetObject(this);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-auto FancyTab::fader() -> double
+auto FancyTab::fader() const -> double
 {
     return m_Fader;
 }
