@@ -896,6 +896,7 @@ void MainWindow::SetToolButton(bool checked, Tool t, const QString &cursor, cons
         connect(scene, &VMainGraphicsScene::SelectedObject, m_dialogTool.data(), &DialogTool::SelectedObject);
         connect(m_dialogTool.data(), &DialogTool::DialogClosed, this, closeDialogSlot);
         connect(m_dialogTool.data(), &DialogTool::ToolTip, this, &MainWindow::ShowToolTip);
+        connect(m_dialogTool.data(), &DialogTool::destroyed, this, [this] { ShowToolTip(QString()); });
         emit ui->view->itemClicked(nullptr);
     }
     else

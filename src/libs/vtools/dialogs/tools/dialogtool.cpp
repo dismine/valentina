@@ -108,8 +108,6 @@ DialogTool::DialogTool(const VContainer *data, VAbstractPattern *doc, quint32 to
 //---------------------------------------------------------------------------------------------------------------------
 DialogTool::~DialogTool()
 {
-    emit ToolTip(QString());
-
     if (not vis.isNull())
     {
         delete vis;
