@@ -23,12 +23,6 @@ def debug_extension():
 
     return debug_ext
 
-def zip_sym(sym_file):
-  zip_sym_file = sym_file + ".zip"
-  with zipfile.ZipFile(zip_sym_file, 'w', zipfile.ZIP_DEFLATED) as zipf:
-      zipf.write(sym_file, os.path.basename(sym_file))
-  return zip_sym_file
-
 def generate_sym_files(install_root):
     sym_files = []
 
@@ -47,12 +41,7 @@ def generate_sym_files(install_root):
         dump_syms_cmd = ["dump_syms", '-o', sym_file, '--inlines', debug_file]
         subprocess.run(dump_syms_cmd, check=True)
 
-        sym_files.append((debug_file, zip_sym(sym_file)))
-        
-        try:
-            os.remove(sym_file)
-        except PermissionError as e:
-            print(f"PermissionError removing '{sym_file}': {e}")
+        sym_files.append((debug_file, sym_file))
 
     return sym_files
 
