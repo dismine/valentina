@@ -150,38 +150,32 @@ void DialogPointOfIntersectionArcs::SetCrossArcPoint(CrossCirclesPoint p)
 //---------------------------------------------------------------------------------------------------------------------
 void DialogPointOfIntersectionArcs::ChosenObject(quint32 id, const SceneObject &type)
 {
-    if (prepare == false) // After first choose we ignore all objects
+    if (prepare == false && type == SceneObject::Arc) // After first choose we ignore all objects
     {
-        if (type == SceneObject::Arc)
-        {
-            auto *point = qobject_cast<VisToolPointOfIntersectionArcs *>(vis);
-            SCASSERT(point != nullptr)
+        auto *point = qobject_cast<VisToolPointOfIntersectionArcs *>(vis);
+        SCASSERT(point != nullptr)
 
-            switch (number)
-            {
-                case 0:
-                    if (SetObject(id, ui->comboBoxArc1, tr("Select second an arc")))
-                    {
-                        number++;
-                        point->VisualMode(id);
-                    }
-                    break;
-                case 1:
-                    if (getCurrentObjectId(ui->comboBoxArc1) != id)
-                    {
-                        if (SetObject(id, ui->comboBoxArc2, QString()))
-                        {
-                            number = 0;
-                            point->SetArc2Id(id);
-                            point->RefreshGeometry();
-                            prepare = true;
-                            DialogAccepted();
-                        }
-                    }
-                    break;
-                default:
-                    break;
-            }
+        switch (number)
+        {
+            case 0:
+                if (SetObject(id, ui->comboBoxArc1, tr("Select second an arc")))
+                {
+                    number++;
+                    point->VisualMode(id);
+                }
+                break;
+            case 1:
+                if (getCurrentObjectId(ui->comboBoxArc1) != id && SetObject(id, ui->comboBoxArc2, QString()))
+                {
+                    number = 0;
+                    point->SetArc2Id(id);
+                    point->RefreshGeometry();
+                    prepare = true;
+                    DialogAccepted();
+                }
+                break;
+            default:
+                break;
         }
     }
 }

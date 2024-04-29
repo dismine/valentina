@@ -218,23 +218,21 @@ void DialogNormal::ChosenObject(quint32 id, const SceneObject &type)
                 }
                 break;
             case 1:
-                if (getCurrentObjectId(ui->comboBoxFirstPoint) != id)
+                if (getCurrentObjectId(ui->comboBoxFirstPoint) != id &&
+                    SetObject(id, ui->comboBoxSecondPoint, QString()))
                 {
-                    if (SetObject(id, ui->comboBoxSecondPoint, QString()))
+                    line->SetPoint2Id(id);
+                    line->RefreshGeometry();
+                    prepare = true;
+
+                    auto *window =
+                        qobject_cast<VAbstractMainWindow *>(VAbstractValApplication::VApp()->getMainWindow());
+                    SCASSERT(window != nullptr)
+                    connect(line, &Visualization::ToolTip, window, &VAbstractMainWindow::ShowToolTip);
+
+                    if (not VAbstractValApplication::VApp()->Settings()->IsInteractiveTools())
                     {
-                        line->SetPoint2Id(id);
-                        line->RefreshGeometry();
-                        prepare = true;
-
-                        auto *window =
-                            qobject_cast<VAbstractMainWindow *>(VAbstractValApplication::VApp()->getMainWindow());
-                        SCASSERT(window != nullptr)
-                        connect(line, &Visualization::ToolTip, window, &VAbstractMainWindow::ShowToolTip);
-
-                        if (not VAbstractValApplication::VApp()->Settings()->IsInteractiveTools())
-                        {
-                            FinishCreating();
-                        }
+                        FinishCreating();
                     }
                 }
                 break;

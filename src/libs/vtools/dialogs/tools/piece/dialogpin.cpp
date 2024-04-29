@@ -122,22 +122,16 @@ void DialogPin::SetPiecesList(const QVector<quint32> &list)
 //---------------------------------------------------------------------------------------------------------------------
 void DialogPin::ChosenObject(quint32 id, const SceneObject &type)
 {
-    if (not prepare)
+    if (not prepare && type == SceneObject::Point && SetObject(id, ui->comboBoxPoint, QString()))
     {
-        if (type == SceneObject::Point)
+        if (vis != nullptr)
         {
-            if (SetObject(id, ui->comboBoxPoint, QString()))
-            {
-                if (vis != nullptr)
-                {
-                    vis->VisualMode(id);
-                }
-                CheckPoint();
-                prepare = true;
-                this->setModal(true);
-                this->show();
-            }
+            vis->VisualMode(id);
         }
+        CheckPoint();
+        prepare = true;
+        this->setModal(true);
+        this->show();
     }
 }
 

@@ -217,94 +217,80 @@ void DialogTrueDarts::SetChildrenId(const quint32 &ch1, const quint32 &ch2)
 //---------------------------------------------------------------------------------------------------------------------
 void DialogTrueDarts::ChosenObject(quint32 id, const SceneObject &type)
 {
-    if (prepare == false) // After first choose we ignore all objects
+    if (prepare == false && type == SceneObject::Point) // After first choose we ignore all objects
     {
-        if (type == SceneObject::Point)
+        auto *points = qobject_cast<VisToolTrueDarts *>(vis);
+        SCASSERT(points != nullptr)
+
+        switch (number)
         {
-            auto *points = qobject_cast<VisToolTrueDarts *>(vis);
-            SCASSERT(points != nullptr)
-
-            switch (number)
+            case 0:
+                if (SetObject(id, ui->comboBoxFirstBasePoint, tr("Select the second base point")))
+                {
+                    number++;
+                    points->VisualMode(id);
+                }
+                break;
+            case 1:
+                if (getCurrentObjectId(ui->comboBoxFirstBasePoint) != id &&
+                    SetObject(id, ui->comboBoxSecondBasePoint, tr("Select the first dart point")))
+                {
+                    number++;
+                    points->SetBaseLineP2Id(id);
+                    points->RefreshGeometry();
+                }
+                break;
+            case 2:
             {
-                case 0:
-                    if (SetObject(id, ui->comboBoxFirstBasePoint, tr("Select the second base point")))
-                    {
-                        number++;
-                        points->VisualMode(id);
-                    }
-                    break;
-                case 1:
-                    if (getCurrentObjectId(ui->comboBoxFirstBasePoint) != id)
-                    {
-                        if (SetObject(id, ui->comboBoxSecondBasePoint, tr("Select the first dart point")))
-                        {
-                            number++;
-                            points->SetBaseLineP2Id(id);
-                            points->RefreshGeometry();
-                        }
-                    }
-                    break;
-                case 2:
-                {
-                    QSet<quint32> set;
-                    set.insert(getCurrentObjectId(ui->comboBoxFirstBasePoint));
-                    set.insert(getCurrentObjectId(ui->comboBoxSecondBasePoint));
-                    set.insert(id);
+                QSet<quint32> set;
+                set.insert(getCurrentObjectId(ui->comboBoxFirstBasePoint));
+                set.insert(getCurrentObjectId(ui->comboBoxSecondBasePoint));
+                set.insert(id);
 
-                    if (set.size() == 3)
-                    {
-                        if (SetObject(id, ui->comboBoxFirstDartPoint, tr("Select the second dart point")))
-                        {
-                            number++;
-                            points->SetD1PointId(id);
-                            points->RefreshGeometry();
-                        }
-                    }
-                    break;
-                }
-                case 3:
+                if (set.size() == 3 && SetObject(id, ui->comboBoxFirstDartPoint, tr("Select the second dart point")))
                 {
-                    QSet<quint32> set;
-                    set.insert(getCurrentObjectId(ui->comboBoxFirstBasePoint));
-                    set.insert(getCurrentObjectId(ui->comboBoxSecondBasePoint));
-                    set.insert(getCurrentObjectId(ui->comboBoxFirstDartPoint));
-                    set.insert(id);
-
-                    if (set.size() == 4)
-                    {
-                        if (SetObject(id, ui->comboBoxSecondDartPoint, tr("Select the third dart point")))
-                        {
-                            number++;
-                            points->SetD2PointId(id);
-                            points->RefreshGeometry();
-                        }
-                    }
-                    break;
+                    number++;
+                    points->SetD1PointId(id);
+                    points->RefreshGeometry();
                 }
-                case 4:
-                {
-                    QSet<quint32> set;
-                    set.insert(getCurrentObjectId(ui->comboBoxFirstBasePoint));
-                    set.insert(getCurrentObjectId(ui->comboBoxSecondBasePoint));
-                    set.insert(getCurrentObjectId(ui->comboBoxFirstDartPoint));
-                    set.insert(getCurrentObjectId(ui->comboBoxSecondDartPoint));
-                    set.insert(id);
-
-                    if (set.size() == 5)
-                    {
-                        if (SetObject(id, ui->comboBoxThirdDartPoint, QString()))
-                        {
-                            points->SetD3PointId(id);
-                            points->RefreshGeometry();
-                            prepare = true;
-                            DialogAccepted();
-                        }
-                    }
-                    break;
-                }
-                default:
-                    break;
+                break;
             }
+            case 3:
+            {
+                QSet<quint32> set;
+                set.insert(getCurrentObjectId(ui->comboBoxFirstBasePoint));
+                set.insert(getCurrentObjectId(ui->comboBoxSecondBasePoint));
+                set.insert(getCurrentObjectId(ui->comboBoxFirstDartPoint));
+                set.insert(id);
+
+                if (set.size() == 4 && SetObject(id, ui->comboBoxSecondDartPoint, tr("Select the third dart point")))
+                {
+                    number++;
+                    points->SetD2PointId(id);
+                    points->RefreshGeometry();
+                }
+                break;
+            }
+            case 4:
+            {
+                QSet<quint32> set;
+                set.insert(getCurrentObjectId(ui->comboBoxFirstBasePoint));
+                set.insert(getCurrentObjectId(ui->comboBoxSecondBasePoint));
+                set.insert(getCurrentObjectId(ui->comboBoxFirstDartPoint));
+                set.insert(getCurrentObjectId(ui->comboBoxSecondDartPoint));
+                set.insert(id);
+
+                if (set.size() == 5 && SetObject(id, ui->comboBoxThirdDartPoint, QString()))
+                {
+                    points->SetD3PointId(id);
+                    points->RefreshGeometry();
+                    prepare = true;
+                    DialogAccepted();
+                }
+                break;
+            }
+            default:
+                break;
         }
     }
 }

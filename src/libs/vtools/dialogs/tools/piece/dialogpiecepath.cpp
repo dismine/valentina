@@ -211,23 +211,20 @@ void DialogPiecePath::ChosenObject(quint32 id, const SceneObject &type)
 //---------------------------------------------------------------------------------------------------------------------
 void DialogPiecePath::ShowDialog(bool click)
 {
-    if (not click)
+    if (not click && CreatePath().CountNodes() > 0)
     {
-        if (CreatePath().CountNodes() > 0)
-        {
-            emit ToolTip(QString());
-            prepare = true;
+        emit ToolTip(QString());
+        prepare = true;
 
-            if (not m_showMode)
-            {
-                auto *visPath = qobject_cast<VisToolPiecePath *>(vis);
-                SCASSERT(visPath != nullptr);
-                visPath->SetMode(Mode::Show);
-                visPath->RefreshGeometry();
-            }
-            setModal(true);
-            show();
+        if (not m_showMode)
+        {
+            auto *visPath = qobject_cast<VisToolPiecePath *>(vis);
+            SCASSERT(visPath != nullptr);
+            visPath->SetMode(Mode::Show);
+            visPath->RefreshGeometry();
         }
+        setModal(true);
+        show();
     }
 }
 

@@ -178,39 +178,31 @@ void DialogLine::SaveData()
  */
 void DialogLine::ChosenObject(quint32 id, const SceneObject &type)
 {
-    if (prepare == false) // After first choose we ignore all objects
+    if (prepare == false && type == SceneObject::Point) // After first choose we ignore all objects
     {
-        if (type == SceneObject::Point)
+        switch (number)
         {
-            switch (number)
-            {
-                case 0:
-                    if (SetObject(id, ui->comboBoxFirstPoint, tr("Select second point")))
+            case 0:
+                if (SetObject(id, ui->comboBoxFirstPoint, tr("Select second point")))
+                {
+                    number++;
+                    if (vis != nullptr)
                     {
-                        number++;
-                        if (vis != nullptr)
-                        {
-                            vis->VisualMode(id);
-                        }
+                        vis->VisualMode(id);
                     }
-                    break;
-                case 1:
-                    if (getCurrentObjectId(ui->comboBoxFirstPoint) != id)
-                    {
-                        if (SetObject(id, ui->comboBoxSecondPoint, QString()))
-                        {
-                            if (flagError)
-                            {
-                                number = 0;
-                                prepare = true;
-                                DialogAccepted();
-                            }
-                        }
-                    }
-                    break;
-                default:
-                    break;
-            }
+                }
+                break;
+            case 1:
+                if (getCurrentObjectId(ui->comboBoxFirstPoint) != id &&
+                    SetObject(id, ui->comboBoxSecondPoint, QString()) && flagError)
+                {
+                    number = 0;
+                    prepare = true;
+                    DialogAccepted();
+                }
+                break;
+            default:
+                break;
         }
     }
 }

@@ -253,57 +253,49 @@ void DialogFlippingByLine::SetSourceObjects(const QVector<SourceItem> &value)
 //---------------------------------------------------------------------------------------------------------------------
 void DialogFlippingByLine::ChosenObject(quint32 id, const SceneObject &type)
 {
-    if (not stage1 && not prepare) // After first choose we ignore all objects
+    if (not stage1 && not prepare && type == SceneObject::Point) // After first choose we ignore all objects
     {
-        if (type == SceneObject::Point)
+        auto obj = std::find_if(sourceObjects.begin(), sourceObjects.end(),
+                                [id](const SourceItem &sItem) { return sItem.id == id; });
+        switch (number)
         {
-            auto obj = std::find_if(sourceObjects.begin(), sourceObjects.end(),
-                                    [id](const SourceItem &sItem) { return sItem.id == id; });
-            switch (number)
-            {
-                case 0:
-                    if (obj != sourceObjects.end())
-                    {
-                        emit ToolTip(tr("Select first line point that is not part of the list of objects"));
-                        return;
-                    }
+            case 0:
+                if (obj != sourceObjects.end())
+                {
+                    emit ToolTip(tr("Select first line point that is not part of the list of objects"));
+                    return;
+                }
 
-                    if (SetObject(id, ui->comboBoxFirstLinePoint, tr("Select second line point")))
-                    {
-                        number++;
-                        auto *operation = qobject_cast<VisToolFlippingByLine *>(vis);
-                        SCASSERT(operation != nullptr)
-                        operation->SetFirstLinePointId(id);
-                        operation->RefreshGeometry();
-                    }
-                    break;
-                case 1:
-                    if (obj != sourceObjects.end())
-                    {
-                        emit ToolTip(tr("Select second line point that is not part of the list of objects"));
-                        return;
-                    }
+                if (SetObject(id, ui->comboBoxFirstLinePoint, tr("Select second line point")))
+                {
+                    number++;
+                    auto *operation = qobject_cast<VisToolFlippingByLine *>(vis);
+                    SCASSERT(operation != nullptr)
+                    operation->SetFirstLinePointId(id);
+                    operation->RefreshGeometry();
+                }
+                break;
+            case 1:
+                if (obj != sourceObjects.end())
+                {
+                    emit ToolTip(tr("Select second line point that is not part of the list of objects"));
+                    return;
+                }
 
-                    if (getCurrentObjectId(ui->comboBoxFirstLinePoint) != id)
-                    {
-                        if (SetObject(id, ui->comboBoxSecondLinePoint, QString()))
-                        {
-                            if (flagError)
-                            {
-                                number = 0;
-                                prepare = true;
+                if (getCurrentObjectId(ui->comboBoxFirstLinePoint) != id &&
+                    SetObject(id, ui->comboBoxSecondLinePoint, QString()) && flagError)
+                {
+                    number = 0;
+                    prepare = true;
 
-                                auto *operation = qobject_cast<VisToolFlippingByLine *>(vis);
-                                SCASSERT(operation != nullptr)
-                                operation->SetSecondLinePointId(id);
-                                operation->RefreshGeometry();
-                            }
-                        }
-                    }
-                    break;
-                default:
-                    break;
-            }
+                    auto *operation = qobject_cast<VisToolFlippingByLine *>(vis);
+                    SCASSERT(operation != nullptr)
+                    operation->SetSecondLinePointId(id);
+                    operation->RefreshGeometry();
+                }
+                break;
+            default:
+                break;
         }
     }
 }

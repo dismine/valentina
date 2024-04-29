@@ -316,16 +316,13 @@ void FancyTabBar::mouseMoveEvent(QMouseEvent *e)
 //---------------------------------------------------------------------------------------------------------------------
 auto FancyTabBar::event(QEvent *event) -> bool
 {
-    if (event->type() == QEvent::ToolTip)
+    if (event->type() == QEvent::ToolTip && ValidIndex(m_hoverIndex))
     {
-        if (ValidIndex(m_hoverIndex))
+        QString const tt = TabToolTip(m_hoverIndex);
+        if (!tt.isEmpty())
         {
-            QString const tt = TabToolTip(m_hoverIndex);
-            if (!tt.isEmpty())
-            {
-                QToolTip::showText(static_cast<QHelpEvent *>(event)->globalPos(), tt, this);
-                return true;
-            }
+            QToolTip::showText(static_cast<QHelpEvent *>(event)->globalPos(), tt, this);
+            return true;
         }
     }
     return QWidget::event(event);

@@ -163,13 +163,10 @@ void VPUndoPiecesMove::undo()
     for (const auto &piece : qAsConst(m_pieces))
     {
         VPPiecePtr const p = piece.toStrongRef();
-        if (not p.isNull())
+        if (not p.isNull() && m_oldTransforms.contains(p->GetUniqueID()))
         {
-            if (m_oldTransforms.contains(p->GetUniqueID()))
-            {
-                p->SetMatrix(m_oldTransforms.value(p->GetUniqueID()));
-                emit layout->PieceTransformationChanged(p);
-            }
+            p->SetMatrix(m_oldTransforms.value(p->GetUniqueID()));
+            emit layout->PieceTransformationChanged(p);
         }
     }
 }

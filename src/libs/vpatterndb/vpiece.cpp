@@ -365,18 +365,15 @@ auto VPiece::PassmarksPath(const VContainer *data) const -> QPainterPath
     QPainterPath path;
 
     // seam allowence
-    if (IsSeamAllowance())
+    if (IsSeamAllowance() && not passmarks.isEmpty())
     {
-        if (not passmarks.isEmpty())
+        for (qint32 i = 0; i < passmarks.count(); ++i)
         {
-            for (qint32 i = 0; i < passmarks.count(); ++i)
-            {
-                path.moveTo(passmarks.at(i).p1());
-                path.lineTo(passmarks.at(i).p2());
-            }
-
-            path.setFillRule(Qt::WindingFill);
+            path.moveTo(passmarks.at(i).p1());
+            path.lineTo(passmarks.at(i).p2());
         }
+
+        path.setFillRule(Qt::WindingFill);
     }
 
     return path;

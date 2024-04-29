@@ -408,15 +408,8 @@ auto VPPiece::PathsSuperposition(const QVector<QPointF> &path1, const QVector<QP
     const QRectF path2Rect = VLayoutPiece::BoundingRect(path2);
     const QPainterPath path2Path = VGObject::PainterPath(path2);
 
-    if (path1Rect.intersects(path2Rect) || path2Rect.contains(path1Rect) || path1Rect.contains(path2Rect))
-    {
-        if (path1Path.contains(path2Path) || path2Path.contains(path1Path) || path1Path.intersects(path2Path))
-        {
-            return true;
-        }
-    }
-
-    return false;
+    return (path1Rect.intersects(path2Rect) || path2Rect.contains(path1Rect) || path1Rect.contains(path2Rect)) &&
+           (path1Path.contains(path2Path) || path2Path.contains(path1Path) || path1Path.intersects(path2Path));
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -681,18 +674,17 @@ auto VPPiece::StickyPieces(VStickyDistance &match) const -> bool
         CastTo(piece->GetMappedExternalContourPoints(), piecePath);
         QRectF const pieceBoundingRect = VLayoutPiece::BoundingRect(piecePath);
 
-        if (stickyZone.intersects(pieceBoundingRect) || pieceBoundingRect.contains(stickyZone) ||
-            stickyZone.contains(pieceBoundingRect))
+        if ((stickyZone.intersects(pieceBoundingRect) || pieceBoundingRect.contains(stickyZone) ||
+             stickyZone.contains(pieceBoundingRect)) &&
+            not VPPiece::PathsSuperposition(path, piecePath))
         {
-            if (not VPPiece::PathsSuperposition(path, piecePath))
+
+            QVector<QPointF> const pieceStickyPath = PrepareStickyPath(piecePath);
+            if (QLineF const distance = ClosestDistance(stickyPath, pieceStickyPath);
+                match.m_closestDistance.isNull() || distance.length() < match.m_closestDistance.length())
             {
-                QVector<QPointF> const pieceStickyPath = PrepareStickyPath(piecePath);
-                if (QLineF const distance = ClosestDistance(stickyPath, pieceStickyPath);
-                    match.m_closestDistance.isNull() || distance.length() < match.m_closestDistance.length())
-                {
-                    match.m_closestDistance = distance;
-                    match.m_pieceGap = pieceGap;
-                }
+                match.m_closestDistance = distance;
+                match.m_pieceGap = pieceGap;
             }
         }
     }

@@ -358,12 +358,9 @@ MainWindow::MainWindow(QWidget *parent)
     connect(doc, &VPattern::CheckLayout, this,
             [this]()
             {
-                if (pattern->DataPieces()->isEmpty())
+                if (pattern->DataPieces()->isEmpty() && not ui->actionDraw->isChecked())
                 {
-                    if (not ui->actionDraw->isChecked())
-                    {
-                        ActionDraw(true);
-                    }
+                    ActionDraw(true);
                 }
             });
     connect(doc, &VPattern::SetCurrentPP, this, &MainWindow::GlobalChangePP);
@@ -2334,28 +2331,19 @@ void MainWindow::StoreMultisizeMDimensions()
 
     QList<MeasurementDimension_p> const dimensions = m_m->Dimensions().values();
 
-    if (not dimensions.isEmpty())
+    if (not dimensions.isEmpty() && not m_dimensionALabel.isNull())
     {
-        if (not m_dimensionALabel.isNull())
-        {
-            m_dimensionALabel->setText(dimensions.at(0)->Name() + ':'_L1);
-        }
+        m_dimensionALabel->setText(dimensions.at(0)->Name() + ':'_L1);
     }
 
-    if (dimensions.size() > 1)
+    if (dimensions.size() > 1 && not m_dimensionBLabel.isNull())
     {
-        if (not m_dimensionBLabel.isNull())
-        {
-            m_dimensionBLabel->setText(dimensions.at(1)->Name() + ':'_L1);
-        }
+        m_dimensionBLabel->setText(dimensions.at(1)->Name() + ':'_L1);
     }
 
-    if (dimensions.size() > 2)
+    if (dimensions.size() > 2 && not m_dimensionCLabel.isNull())
     {
-        if (not m_dimensionCLabel.isNull())
-        {
-            m_dimensionCLabel->setText(dimensions.at(2)->Name() + ':'_L1);
-        }
+        m_dimensionCLabel->setText(dimensions.at(2)->Name() + ':'_L1);
     }
 
     StoreMultisizeMDimension(dimensions, 0, m_currentDimensionA);
@@ -3909,17 +3897,14 @@ void MainWindow::ActionDetails(bool checked)
         ui->actionDetails->setChecked(true);
         ui->actionLayout->setChecked(false);
 
-        if (not VAbstractValApplication::VApp()->getOpeningPattern())
+        if (not VAbstractValApplication::VApp()->getOpeningPattern() && pattern->DataPieces()->isEmpty())
         {
-            if (pattern->DataPieces()->isEmpty())
-            {
-                QMessageBox::information(this, tr("Detail mode"),
-                                         tr("You can't use Detail mode yet. "
-                                            "Please, create at least one workpiece."),
-                                         QMessageBox::Ok, QMessageBox::Ok);
-                ActionDraw(true);
-                return;
-            }
+            QMessageBox::information(this, tr("Detail mode"),
+                                     tr("You can't use Detail mode yet. "
+                                        "Please, create at least one workpiece."),
+                                     QMessageBox::Ok, QMessageBox::Ok);
+            ActionDraw(true);
+            return;
         }
 
         m_detailsWidget->UpdateList();
@@ -6782,12 +6767,9 @@ void MainWindow::ExportLayoutAs(bool checked)
 
     auto Uncheck = qScopeGuard([this] { ui->actionLayoutExportAs->setChecked(false); });
 
-    if (m_layoutSettings->IsLayoutStale())
+    if (m_layoutSettings->IsLayoutStale() && VPrintLayout::ContinueIfLayoutStale(this) == QMessageBox::No)
     {
-        if (VPrintLayout::ContinueIfLayoutStale(this) == QMessageBox::No)
-        {
-            return;
-        }
+        return;
     }
 
     try

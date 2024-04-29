@@ -455,15 +455,13 @@ auto VPosition::Crossing(const VLayoutPiece &detail) const -> VPosition::Crossin
 
     for (const auto &position : m_data.positionsCache)
     {
-        if (position.boundingRect.intersects(layoutBoundingRect) ||
-            position.boundingRect.contains(detailBoundingRect) || detailBoundingRect.contains(position.boundingRect))
+        if ((position.boundingRect.intersects(layoutBoundingRect) ||
+             position.boundingRect.contains(detailBoundingRect) ||
+             detailBoundingRect.contains(position.boundingRect)) &&
+            (position.layoutAllowancePath.contains(contourPath) || contourPath.contains(position.layoutAllowancePath) ||
+             position.layoutAllowancePath.intersects(layoutAllowancePath)))
         {
-            if (position.layoutAllowancePath.contains(contourPath) ||
-                contourPath.contains(position.layoutAllowancePath) ||
-                position.layoutAllowancePath.intersects(layoutAllowancePath))
-            {
-                return CrossingType::Intersection;
-            }
+            return CrossingType::Intersection;
         }
     }
 

@@ -321,43 +321,40 @@ void DialogRotation::SetSourceObjects(const QVector<SourceItem> &value)
 //---------------------------------------------------------------------------------------------------------------------
 void DialogRotation::ChosenObject(quint32 id, const SceneObject &type)
 {
-    if (not stage1 && not prepare) // After first choose we ignore all objects
+    if (not stage1 && not prepare && type == SceneObject::Point) // After first choose we ignore all objects
     {
-        if (type == SceneObject::Point)
+        auto *operation = qobject_cast<VisToolRotation *>(vis);
+        SCASSERT(operation != nullptr)
+
+        auto obj = std::find_if(sourceObjects.begin(), sourceObjects.end(),
+                                [id](const SourceItem &sItem) { return sItem.id == id; });
+
+        if (obj != sourceObjects.end())
         {
-            auto *operation = qobject_cast<VisToolRotation *>(vis);
-            SCASSERT(operation != nullptr)
-
-            auto obj = std::find_if(sourceObjects.begin(), sourceObjects.end(),
-                                    [id](const SourceItem &sItem) { return sItem.id == id; });
-
-            if (obj != sourceObjects.end())
+            if (sourceObjects.size() > 1)
             {
-                if (sourceObjects.size() > 1)
-                {
-                    // It's not really logical for a user that a center of rotation no need to select.
-                    // To fix this issue we just silently remove it from the list.
-                    sourceObjects.erase(obj);
-                    operation->SetObjects(SourceToObjects(sourceObjects));
-                }
-                else
-                {
-                    emit ToolTip(tr("This point cannot be origin point. Please, select another origin point"));
-                    return;
-                }
+                // It's not really logical for a user that a center of rotation no need to select.
+                // To fix this issue we just silently remove it from the list.
+                sourceObjects.erase(obj);
+                operation->SetObjects(SourceToObjects(sourceObjects));
             }
-
-            if (SetObject(id, ui->comboBoxOriginPoint, QString()))
+            else
             {
-                auto *window = qobject_cast<VAbstractMainWindow *>(VAbstractValApplication::VApp()->getMainWindow());
-                SCASSERT(window != nullptr)
-                connect(operation, &Visualization::ToolTip, window, &VAbstractMainWindow::ShowToolTip);
-
-                operation->SetOriginPointId(id);
-                operation->RefreshGeometry();
-
-                prepare = true;
+                emit ToolTip(tr("This point cannot be origin point. Please, select another origin point"));
+                return;
             }
+        }
+
+        if (SetObject(id, ui->comboBoxOriginPoint, QString()))
+        {
+            auto *window = qobject_cast<VAbstractMainWindow *>(VAbstractValApplication::VApp()->getMainWindow());
+            SCASSERT(window != nullptr)
+            connect(operation, &Visualization::ToolTip, window, &VAbstractMainWindow::ShowToolTip);
+
+            operation->SetOriginPointId(id);
+            operation->RefreshGeometry();
+
+            prepare = true;
         }
     }
 }

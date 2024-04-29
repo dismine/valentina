@@ -277,65 +277,57 @@ void DialogLineIntersectAxis::ShowDialog(bool click)
 //---------------------------------------------------------------------------------------------------------------------
 void DialogLineIntersectAxis::ChosenObject(quint32 id, const SceneObject &type)
 {
-    if (prepare == false) // After first choose we ignore all objects
+    if (prepare == false && type == SceneObject::Point) // After first choose we ignore all objects
     {
-        if (type == SceneObject::Point)
+        auto *line = qobject_cast<VisToolLineIntersectAxis *>(vis);
+        SCASSERT(line != nullptr)
+
+        switch (number)
         {
-            auto *line = qobject_cast<VisToolLineIntersectAxis *>(vis);
-            SCASSERT(line != nullptr)
-
-            switch (number)
-            {
-                case (0):
-                    if (SetObject(id, ui->comboBoxFirstLinePoint, tr("Select second point of line")))
-                    {
-                        number++;
-                        line->VisualMode(id);
-                        auto *window =
-                            qobject_cast<VAbstractMainWindow *>(VAbstractValApplication::VApp()->getMainWindow());
-                        SCASSERT(window != nullptr)
-                        connect(line, &VisToolLineIntersectAxis::ToolTip, window, &VAbstractMainWindow::ShowToolTip);
-                    }
-                    break;
-                case (1):
-                    if (getCurrentObjectId(ui->comboBoxFirstLinePoint) != id)
-                    {
-                        if (SetObject(id, ui->comboBoxSecondLinePoint, tr("Select axis point")))
-                        {
-                            number++;
-                            line->SetPoint2Id(id);
-                            line->RefreshGeometry();
-                        }
-                    }
-                    break;
-                case (2):
+            case (0):
+                if (SetObject(id, ui->comboBoxFirstLinePoint, tr("Select second point of line")))
                 {
-                    QSet<quint32> set;
-                    set.insert(getCurrentObjectId(ui->comboBoxFirstLinePoint));
-                    set.insert(getCurrentObjectId(ui->comboBoxSecondLinePoint));
-                    set.insert(id);
-
-                    if (set.size() == 3)
-                    {
-                        if (SetObject(id, ui->comboBoxAxisPoint, QString()))
-                        {
-                            line->SetAxisPointId(id);
-                            line->RefreshGeometry();
-                            prepare = true;
-
-                            if (not VAbstractValApplication::VApp()->Settings()->IsInteractiveTools())
-                            {
-                                vis->SetMode(Mode::Show);
-                                emit ToolTip(QString());
-                                show();
-                            }
-                        }
-                    }
+                    number++;
+                    line->VisualMode(id);
+                    auto *window =
+                        qobject_cast<VAbstractMainWindow *>(VAbstractValApplication::VApp()->getMainWindow());
+                    SCASSERT(window != nullptr)
+                    connect(line, &VisToolLineIntersectAxis::ToolTip, window, &VAbstractMainWindow::ShowToolTip);
                 }
                 break;
-                default:
-                    break;
+            case (1):
+                if (getCurrentObjectId(ui->comboBoxFirstLinePoint) != id &&
+                    SetObject(id, ui->comboBoxSecondLinePoint, tr("Select axis point")))
+                {
+                    number++;
+                    line->SetPoint2Id(id);
+                    line->RefreshGeometry();
+                }
+                break;
+            case (2):
+            {
+                QSet<quint32> set;
+                set.insert(getCurrentObjectId(ui->comboBoxFirstLinePoint));
+                set.insert(getCurrentObjectId(ui->comboBoxSecondLinePoint));
+                set.insert(id);
+
+                if (set.size() == 3 && SetObject(id, ui->comboBoxAxisPoint, QString()))
+                {
+                    line->SetAxisPointId(id);
+                    line->RefreshGeometry();
+                    prepare = true;
+
+                    if (not VAbstractValApplication::VApp()->Settings()->IsInteractiveTools())
+                    {
+                        vis->SetMode(Mode::Show);
+                        emit ToolTip(QString());
+                        show();
+                    }
+                }
             }
+            break;
+            default:
+                break;
         }
     }
 }

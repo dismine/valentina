@@ -431,45 +431,40 @@ auto FvUpdater::xmlParseFeed() -> bool
                 const QXmlStreamAttributes attribs = m_xml.attributes();
                 const auto fervorPlatform = QStringLiteral("fervor:platform");
 
-                if (attribs.hasAttribute(fervorPlatform))
+                if (attribs.hasAttribute(fervorPlatform) &&
+                    CurrentlyRunningOnPlatform(attribs.value(fervorPlatform).toString().trimmed()))
                 {
-                    if (CurrentlyRunningOnPlatform(attribs.value(fervorPlatform).toString().trimmed()))
+                    xmlEnclosurePlatform = attribs.value(fervorPlatform).toString().trimmed();
+
+                    const auto attributeUrl = QStringLiteral("url");
+                    if (attribs.hasAttribute(attributeUrl))
                     {
-                        xmlEnclosurePlatform = attribs.value(fervorPlatform).toString().trimmed();
+                        xmlEnclosureUrl = attribs.value(attributeUrl).toString().trimmed();
+                    }
+                    else
+                    {
+                        xmlEnclosureUrl.clear();
+                    }
 
-                        const auto attributeUrl = QStringLiteral("url");
-                        if (attribs.hasAttribute(attributeUrl))
+                    const auto fervorVersion = QStringLiteral("fervor:version");
+                    if (attribs.hasAttribute(fervorVersion))
+                    {
+                        const QString candidateVersion = attribs.value(fervorVersion).toString().trimmed();
+                        if (not candidateVersion.isEmpty())
                         {
-                            xmlEnclosureUrl = attribs.value(attributeUrl).toString().trimmed();
-                        }
-                        else
-                        {
-                            xmlEnclosureUrl.clear();
-                        }
-
-                        const auto fervorVersion = QStringLiteral("fervor:version");
-                        if (attribs.hasAttribute(fervorVersion))
-                        {
-                            const QString candidateVersion = attribs.value(fervorVersion).toString().trimmed();
-                            if (not candidateVersion.isEmpty())
-                            {
-                                xmlEnclosureVersion = candidateVersion;
-                            }
+                            xmlEnclosureVersion = candidateVersion;
                         }
                     }
                 }
             }
         }
-        else if (m_xml.isEndElement())
+        else if (m_xml.isEndElement() && m_xml.name() == "item"_L1)
         {
-            if (m_xml.name() == "item"_L1)
-            {
-                // That's it - we have analyzed a single <item> and we'll stop
-                // here (because the topmost is the most recent one, and thus
-                // the newest version.
+            // That's it - we have analyzed a single <item> and we'll stop
+            // here (because the topmost is the most recent one, and thus
+            // the newest version.
 
-                return searchDownloadedFeedForUpdates(xmlEnclosureUrl, xmlEnclosureVersion, xmlEnclosurePlatform);
-            }
+            return searchDownloadedFeedForUpdates(xmlEnclosureUrl, xmlEnclosureVersion, xmlEnclosurePlatform);
         }
 
         if (m_xml.error() && m_xml.error() != QXmlStreamReader::PrematureEndOfDocumentError)
@@ -555,13 +550,10 @@ auto FvUpdater::VersionIsIgnored(const QString &version) -> bool
     }
 
     const unsigned lastSkippedVersion = VAbstractApplication::VApp()->Settings()->GetLatestSkippedVersion();
-    if (lastSkippedVersion != 0x0)
+    if (lastSkippedVersion != 0x0 && decVersion == lastSkippedVersion)
     {
-        if (decVersion == lastSkippedVersion)
-        {
-            // Implicitly skipped version - skip
-            return true;
-        }
+        // Implicitly skipped version - skip
+        return true;
     }
 
     if (decVersion > AppVersion())
@@ -635,13 +627,10 @@ auto FvUpdater::CurrentlyRunningOnPlatform(const QString &platform) -> bool
 //---------------------------------------------------------------------------------------------------------------------
 void FvUpdater::showErrorDialog(const QString &message, bool showEvenInSilentMode)
 {
-    if (m_silentAsMuchAsItCouldGet)
+    if (m_silentAsMuchAsItCouldGet && not showEvenInSilentMode)
     {
-        if (not showEvenInSilentMode)
-        {
-            // Don't show errors in the silent mode
-            return;
-        }
+        // Don't show errors in the silent mode
+        return;
     }
 
     QMessageBox dlFailedMsgBox;
@@ -653,13 +642,10 @@ void FvUpdater::showErrorDialog(const QString &message, bool showEvenInSilentMod
 //---------------------------------------------------------------------------------------------------------------------
 void FvUpdater::showInformationDialog(const QString &message, bool showEvenInSilentMode)
 {
-    if (m_silentAsMuchAsItCouldGet)
+    if (m_silentAsMuchAsItCouldGet && not showEvenInSilentMode)
     {
-        if (not showEvenInSilentMode)
-        {
-            // Don't show information dialogs in the silent mode
-            return;
-        }
+        // Don't show information dialogs in the silent mode
+        return;
     }
 
     QMessageBox dlInformationMsgBox;

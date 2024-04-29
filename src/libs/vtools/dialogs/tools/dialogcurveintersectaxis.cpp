@@ -261,36 +261,31 @@ void DialogCurveIntersectAxis::ChosenObject(quint32 id, const SceneObject &type)
         switch (number)
         {
             case (0):
-                if (type == SceneObject::Spline || type == SceneObject::Arc || type == SceneObject::ElArc ||
-                    type == SceneObject::SplinePath)
+                if ((type == SceneObject::Spline || type == SceneObject::Arc || type == SceneObject::ElArc ||
+                     type == SceneObject::SplinePath) &&
+                    SetObject(id, ui->comboBoxCurve, tr("Select axis point")))
                 {
-                    if (SetObject(id, ui->comboBoxCurve, tr("Select axis point")))
-                    {
-                        number++;
-                        line->VisualMode(id);
-                        auto *window =
-                            qobject_cast<VAbstractMainWindow *>(VAbstractValApplication::VApp()->getMainWindow());
-                        SCASSERT(window != nullptr)
-                        connect(line, &VisToolCurveIntersectAxis::ToolTip, window, &VAbstractMainWindow::ShowToolTip);
-                    }
+                    number++;
+                    line->VisualMode(id);
+                    auto *window =
+                        qobject_cast<VAbstractMainWindow *>(VAbstractValApplication::VApp()->getMainWindow());
+                    SCASSERT(window != nullptr)
+                    connect(line, &VisToolCurveIntersectAxis::ToolTip, window, &VAbstractMainWindow::ShowToolTip);
                 }
                 break;
             case (1):
-                if (type == SceneObject::Point)
+                if (type == SceneObject::Point && SetObject(id, ui->comboBoxAxisPoint, QString()))
                 {
-                    if (SetObject(id, ui->comboBoxAxisPoint, QString()))
+                    line->setAxisPointId(id);
+                    line->RefreshGeometry();
+                    prepare = true;
+
+                    if (not VAbstractValApplication::VApp()->Settings()->IsInteractiveTools())
                     {
-                        line->setAxisPointId(id);
-                        line->RefreshGeometry();
-                        prepare = true;
+                        emit ToolTip(QString());
 
-                        if (not VAbstractValApplication::VApp()->Settings()->IsInteractiveTools())
-                        {
-                            emit ToolTip(QString());
-
-                            setModal(true);
-                            show();
-                        }
+                        setModal(true);
+                        show();
                     }
                 }
                 break;

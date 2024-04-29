@@ -854,13 +854,10 @@ auto VMeasurements::MeasurementForDimension(IMD type) const -> QString
 
     for (int i = 0; i < list.size(); ++i)
     {
-        const QDomElement domElement = list.at(i).toElement();
-        if (!domElement.isNull())
+        if (const QDomElement domElement = list.at(i).toElement();
+            !domElement.isNull() && domElement.attribute(AttrDimension) == d)
         {
-            if (domElement.attribute(AttrDimension) == d)
-            {
-                return domElement.attribute(AttrName);
-            }
+            return domElement.attribute(AttrName);
         }
     }
     return {};
@@ -1619,13 +1616,10 @@ void VMeasurements::ClearDimension(IMD type)
 
     for (int i = 0; i < list.size(); ++i)
     {
-        QDomElement domElement = list.at(i).toElement();
-        if (!domElement.isNull())
+        if (QDomElement domElement = list.at(i).toElement();
+            !domElement.isNull() && domElement.attribute(AttrDimension) == d)
         {
-            if (domElement.attribute(AttrDimension) == d)
-            {
-                domElement.removeAttribute(AttrDimension);
-            }
+            domElement.removeAttribute(AttrDimension);
         }
     }
 }

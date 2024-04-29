@@ -275,25 +275,20 @@ inline void noisyFailureMsgHandler(QtMsgType type, const QMessageLogContext &con
                 break;
         }
 
-        if (type == QtWarningMsg || type == QtCriticalMsg || type == QtFatalMsg)
+        if ((type == QtWarningMsg || type == QtCriticalMsg || type == QtFatalMsg) &&
+            not MApplication::VApp()->IsTestMode() && topWinAllowsPop)
         {
-            if (not MApplication::VApp()->IsTestMode())
-            {
-                if (topWinAllowsPop)
-                {
-                    messageBox.setText(VAbstractApplication::ClearMessage(logMsg));
-                    messageBox.setStandardButtons(QMessageBox::Ok);
-                    messageBox.setWindowModality(Qt::ApplicationModal);
-                    messageBox.setModal(true);
+            messageBox.setText(VAbstractApplication::ClearMessage(logMsg));
+            messageBox.setStandardButtons(QMessageBox::Ok);
+            messageBox.setWindowModality(Qt::ApplicationModal);
+            messageBox.setModal(true);
 #ifndef QT_NO_CURSOR
-                    QGuiApplication::setOverrideCursor(Qt::ArrowCursor);
+            QGuiApplication::setOverrideCursor(Qt::ArrowCursor);
 #endif
-                    messageBox.exec();
+            messageBox.exec();
 #ifndef QT_NO_CURSOR
-                    QGuiApplication::restoreOverrideCursor();
+            QGuiApplication::restoreOverrideCursor();
 #endif
-                }
-            }
         }
 
         if (QtFatalMsg == type)
@@ -898,13 +893,10 @@ void MApplication::RepopulateMeasurementsDatabase(const QString &path)
 //---------------------------------------------------------------------------------------------------------------------
 void MApplication::KnownMeasurementsPathChanged(const QString &oldPath, const QString &newPath)
 {
-    if (oldPath != newPath)
+    if (oldPath != newPath && m_knownMeasurementsDatabase != nullptr)
     {
-        if (m_knownMeasurementsDatabase != nullptr)
-        {
-            RestartKnownMeasurementsDatabaseWatcher();
-            RepopulateMeasurementsDatabase(newPath);
-        }
+        RestartKnownMeasurementsDatabaseWatcher();
+        RepopulateMeasurementsDatabase(newPath);
     }
 }
 

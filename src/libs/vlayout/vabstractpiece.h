@@ -370,14 +370,11 @@ inline auto VAbstractPiece::RemoveDublicates(const QVector<T> &points, bool remo
         }
     }
 
-    if (removeFirstAndLast)
+    if (removeFirstAndLast && not p.isEmpty() && p.size() > 1)
     {
-        if (not p.isEmpty() && p.size() > 1)
-        {
-            // Path can't be closed
-            // See issue #686
-            CompareFirstAndLastPoints(p, accuracy);
-        }
+        // Path can't be closed
+        // See issue #686
+        CompareFirstAndLastPoints(p, accuracy);
     }
 
     return p;

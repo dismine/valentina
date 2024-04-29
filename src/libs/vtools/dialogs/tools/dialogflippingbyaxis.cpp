@@ -260,28 +260,25 @@ void DialogFlippingByAxis::SetSourceObjects(const QVector<SourceItem> &value)
 //---------------------------------------------------------------------------------------------------------------------
 void DialogFlippingByAxis::ChosenObject(quint32 id, const SceneObject &type)
 {
-    if (not stage1 && not prepare) // After first choose we ignore all objects
+    if (not stage1 && not prepare && type == SceneObject::Point) // After first choose we ignore all objects
     {
-        if (type == SceneObject::Point)
+        auto obj = std::find_if(sourceObjects.begin(), sourceObjects.end(),
+                                [id](const SourceItem &sItem) { return sItem.id == id; });
+
+        if (obj != sourceObjects.end())
         {
-            auto obj = std::find_if(sourceObjects.begin(), sourceObjects.end(),
-                                    [id](const SourceItem &sItem) { return sItem.id == id; });
+            emit ToolTip(tr("Select origin point that is not part of the list of objects"));
+            return;
+        }
 
-            if (obj != sourceObjects.end())
-            {
-                emit ToolTip(tr("Select origin point that is not part of the list of objects"));
-                return;
-            }
+        if (SetObject(id, ui->comboBoxOriginPoint, QString()))
+        {
+            auto *operation = qobject_cast<VisToolFlippingByAxis *>(vis);
+            SCASSERT(operation != nullptr)
+            operation->SetOriginPointId(id);
+            operation->RefreshGeometry();
 
-            if (SetObject(id, ui->comboBoxOriginPoint, QString()))
-            {
-                auto *operation = qobject_cast<VisToolFlippingByAxis *>(vis);
-                SCASSERT(operation != nullptr)
-                operation->SetOriginPointId(id);
-                operation->RefreshGeometry();
-
-                prepare = true;
-            }
+            prepare = true;
         }
     }
 }

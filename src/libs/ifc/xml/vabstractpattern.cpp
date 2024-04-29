@@ -443,12 +443,9 @@ auto VAbstractPattern::CheckExistNamePP(const QString &name) const -> bool
     for (qint32 i = 0; i < elements.count(); i++)
     {
         const QDomElement elem = elements.at(i).toElement();
-        if (elem.isNull() == false)
+        if (elem.isNull() == false && GetParametrString(elem, AttrName) == name)
         {
-            if (GetParametrString(elem, AttrName) == name)
-            {
-                return true;
-            }
+            return true;
         }
     }
     return false;
@@ -498,27 +495,24 @@ void VAbstractPattern::ParseGroups(const QDomElement &domElement)
     {
         if (domNode.isElement())
         {
-            const QDomElement domElement = domNode.toElement();
-            if (not domElement.isNull())
+            if (const QDomElement domElement = domNode.toElement();
+                not domElement.isNull() && domElement.tagName() == TagGroup)
             {
-                if (domElement.tagName() == TagGroup)
+                VContainer::UpdateId(GetParametrUInt(domElement, AttrId, NULL_ID_STR), valentinaNamespace);
+
+                const QPair<bool, QMap<quint32, quint32>> groupData = ParseItemElement(domElement);
+                const QMap<quint32, quint32> group = groupData.second;
+                auto i = group.constBegin();
+                while (i != group.constEnd())
                 {
-                    VContainer::UpdateId(GetParametrUInt(domElement, AttrId, NULL_ID_STR), valentinaNamespace);
-
-                    const QPair<bool, QMap<quint32, quint32>> groupData = ParseItemElement(domElement);
-                    const QMap<quint32, quint32> group = groupData.second;
-                    auto i = group.constBegin();
-                    while (i != group.constEnd())
+                    if (not itemTool.contains(i.key()))
                     {
-                        if (not itemTool.contains(i.key()))
-                        {
-                            itemTool.insert(i.key(), i.value());
-                        }
-
-                        const bool previous = itemVisibility.value(i.key(), false);
-                        itemVisibility.insert(i.key(), previous || groupData.first);
-                        ++i;
+                        itemTool.insert(i.key(), i.value());
                     }
+
+                    const bool previous = itemVisibility.value(i.key(), false);
+                    itemVisibility.insert(i.key(), previous || groupData.first);
+                    ++i;
                 }
             }
         }
@@ -562,13 +556,10 @@ auto VAbstractPattern::GetPPElement(const QString &name) -> QDomElement
 
         for (qint32 i = 0; i < elements.count(); i++)
         {
-            QDomElement const element = elements.at(i).toElement();
-            if (not element.isNull())
+            if (QDomElement const element = elements.at(i).toElement();
+                not element.isNull() && element.attribute(AttrName) == name)
             {
-                if (element.attribute(AttrName) == name)
-                {
-                    return element;
-                }
+                return element;
             }
         }
     }
@@ -2623,40 +2614,37 @@ auto VAbstractPattern::GetGroups(const QString &patternPieceName) -> QMap<quint3
             {
                 if (domNode.isElement())
                 {
-                    const QDomElement group = domNode.toElement();
-                    if (not group.isNull())
+                    if (const QDomElement group = domNode.toElement();
+                        not group.isNull() && group.tagName() == TagGroup)
                     {
-                        if (group.tagName() == TagGroup)
+                        VGroupData groupData;
+                        const quint32 id = GetParametrUInt(group, AttrId, QChar('0'));
+                        groupData.visible = GetParametrBool(group, AttrVisible, trueStr);
+                        groupData.name = GetParametrString(
+                            group, AttrName, QCoreApplication::translate("VAbstractPattern", "New group"));
+                        groupData.tags = FilterGroupTags(GetParametrEmptyString(group, AttrTags));
+                        groupData.tool = GetParametrUInt(group, AttrTool, NULL_ID_STR);
+
+                        items.resize(0);
+
+                        const QDomNodeList nodeList = group.childNodes();
+                        const qint32 num = nodeList.size();
+                        items.reserve(num);
+                        for (qint32 i = 0; i < num; ++i)
                         {
-                            VGroupData groupData;
-                            const quint32 id = GetParametrUInt(group, AttrId, QChar('0'));
-                            groupData.visible = GetParametrBool(group, AttrVisible, trueStr);
-                            groupData.name = GetParametrString(
-                                group, AttrName, QCoreApplication::translate("VAbstractPattern", "New group"));
-                            groupData.tags = FilterGroupTags(GetParametrEmptyString(group, AttrTags));
-                            groupData.tool = GetParametrUInt(group, AttrTool, NULL_ID_STR);
-
-                            items.resize(0);
-
-                            const QDomNodeList nodeList = group.childNodes();
-                            const qint32 num = nodeList.size();
-                            items.reserve(num);
-                            for (qint32 i = 0; i < num; ++i)
+                            const QDomElement element = nodeList.at(i).toElement();
+                            if (not element.isNull() && element.tagName() == TagGroupItem)
                             {
-                                const QDomElement element = nodeList.at(i).toElement();
-                                if (not element.isNull() && element.tagName() == TagGroupItem)
-                                {
-                                    const quint32 tool = GetParametrUInt(element, AttrTool, NULL_ID_STR);
-                                    const quint32 object = GetParametrUInt(element, AttrObject, QString::number(tool));
+                                const quint32 tool = GetParametrUInt(element, AttrTool, NULL_ID_STR);
+                                const quint32 object = GetParametrUInt(element, AttrObject, QString::number(tool));
 
-                                    items.append(QPair<quint32, quint32>(object, tool));
-                                }
+                                items.append(QPair<quint32, quint32>(object, tool));
                             }
-
-                            groupData.items = items;
-
-                            data.insert(id, groupData);
                         }
+
+                        groupData.items = items;
+
+                        data.insert(id, groupData);
                     }
                 }
                 domNode = domNode.nextSibling();
@@ -2703,19 +2691,16 @@ auto VAbstractPattern::GetGroupsContainingItem(quint32 toolId, quint32 objectId,
         {
             if (domNode.isElement())
             {
-                const QDomElement group = domNode.toElement();
-                if (group.isNull() == false)
+                if (const QDomElement group = domNode.toElement();
+                    group.isNull() == false && group.tagName() == TagGroup)
                 {
-                    if (group.tagName() == TagGroup)
+                    bool const groupHasItem = GroupHasItem(group, toolId, objectId);
+                    if ((containItem && groupHasItem) || (not containItem && not groupHasItem))
                     {
-                        bool const groupHasItem = GroupHasItem(group, toolId, objectId);
-                        if ((containItem && groupHasItem) || (not containItem && not groupHasItem))
-                        {
-                            const quint32 groupId = GetParametrUInt(group, AttrId, QChar('0'));
-                            const QString name = GetParametrString(
-                                group, AttrName, QCoreApplication::translate("VAbstractPattern", "New group"));
-                            data.insert(groupId, name);
-                        }
+                        const quint32 groupId = GetParametrUInt(group, AttrId, QChar('0'));
+                        const QString name = GetParametrString(
+                            group, AttrName, QCoreApplication::translate("VAbstractPattern", "New group"));
+                        data.insert(groupId, name);
                     }
                 }
             }

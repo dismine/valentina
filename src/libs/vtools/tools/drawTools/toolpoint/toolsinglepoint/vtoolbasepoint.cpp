@@ -295,13 +295,11 @@ void VToolBasePoint::hoverEnterEvent(QGraphicsSceneHoverEvent *event)
 //---------------------------------------------------------------------------------------------------------------------
 void VToolBasePoint::mousePressEvent(QGraphicsSceneMouseEvent *event)
 {
-    if (flags() & QGraphicsItem::ItemIsMovable)
+    if (flags() & QGraphicsItem::ItemIsMovable && event->button() == Qt::LeftButton &&
+        event->type() != QEvent::GraphicsSceneMouseDoubleClick)
     {
-        if (event->button() == Qt::LeftButton && event->type() != QEvent::GraphicsSceneMouseDoubleClick)
-        {
-            SetItemOverrideCursor(this, cursorArrowCloseHand, 1, 1);
-            event->accept();
-        }
+        SetItemOverrideCursor(this, cursorArrowCloseHand, 1, 1);
+        event->accept();
     }
     VToolSinglePoint::mousePressEvent(event);
 }
@@ -309,12 +307,10 @@ void VToolBasePoint::mousePressEvent(QGraphicsSceneMouseEvent *event)
 //---------------------------------------------------------------------------------------------------------------------
 void VToolBasePoint::mouseReleaseEvent(QGraphicsSceneMouseEvent *event)
 {
-    if (flags() & QGraphicsItem::ItemIsMovable)
+    if (flags() & QGraphicsItem::ItemIsMovable && event->button() == Qt::LeftButton &&
+        event->type() != QEvent::GraphicsSceneMouseDoubleClick)
     {
-        if (event->button() == Qt::LeftButton && event->type() != QEvent::GraphicsSceneMouseDoubleClick)
-        {
-            SetItemOverrideCursor(this, cursorArrowOpenHand, 1, 1);
-        }
+        SetItemOverrideCursor(this, cursorArrowOpenHand, 1, 1);
     }
     VToolSinglePoint::mouseReleaseEvent(event);
 }

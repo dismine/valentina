@@ -605,13 +605,10 @@ auto QxtCsvModel::toCSV(QIODevice *dest, QString &error, bool withHeader, QChar 
     rows = rowCount();
     cols = columnCount();
     QString data;
-    if (not dest->isOpen())
+    if (not dest->isOpen() && not dest->open(QIODevice::WriteOnly | QIODevice::Truncate))
     {
-        if (not dest->open(QIODevice::WriteOnly | QIODevice::Truncate))
-        {
-            error = dest->errorString();
-            return false;
-        }
+        error = dest->errorString();
+        return false;
     }
     QTextStream stream(dest);
 

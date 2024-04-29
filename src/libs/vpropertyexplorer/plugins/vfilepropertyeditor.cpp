@@ -156,13 +156,10 @@ auto VPE::VFileEditWidget::eventFilter(QObject *obj, QEvent *ev) -> bool
         ev->ignore();
         return true;
     }
-    else if (obj == FileLineEdit)
+    else if (obj == FileLineEdit && ev->type() == QEvent::FocusOut)
     {
-        if (ev->type() == QEvent::FocusOut)
-        {
-            setFile(FileLineEdit->text(), true);
-            // We don't return true here because we still want the line edit to catch the event as well
-        }
+        setFile(FileLineEdit->text(), true);
+        // We don't return true here because we still want the line edit to catch the event as well
     }
 
     // forward the signal to the parent class

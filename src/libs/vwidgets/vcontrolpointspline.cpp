@@ -209,13 +209,11 @@ void VControlPointSpline::mousePressEvent(QGraphicsSceneMouseEvent *event)
 //---------------------------------------------------------------------------------------------------------------------
 void VControlPointSpline::mouseReleaseEvent(QGraphicsSceneMouseEvent *event)
 {
-    if (event->button() == Qt::LeftButton && event->type() != QEvent::GraphicsSceneMouseDoubleClick)
+    if (event->button() == Qt::LeftButton && event->type() != QEvent::GraphicsSceneMouseDoubleClick &&
+        (freeAngle || freeLength))
     {
-        if (freeAngle || freeLength)
-        {
-            SetItemOverrideCursor(this, cursorArrowOpenHand, 1, 1);
-            emit Released();
-        }
+        SetItemOverrideCursor(this, cursorArrowOpenHand, 1, 1);
+        emit Released();
     }
     VScenePoint::mouseReleaseEvent(event);
 }

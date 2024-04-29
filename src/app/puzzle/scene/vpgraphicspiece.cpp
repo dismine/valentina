@@ -255,16 +255,13 @@ void VPGraphicsPiece::mouseReleaseEvent(QGraphicsSceneMouseEvent *event)
 
         if (VPPiecePtr const piece = m_piece.toStrongRef(); not piece.isNull())
         {
-            if (VPLayoutPtr const layout = piece->Layout(); not layout.isNull())
+            if (VPLayoutPtr const layout = piece->Layout();
+                not layout.isNull() && (layout->LayoutSettings().IsStickyEdges() && m_hasStickyPosition))
             {
-                if (layout->LayoutSettings().IsStickyEdges() && m_hasStickyPosition)
-                {
-                    auto *command =
-                        new VPUndoPieceMove(piece, m_stickyTranslateX, m_stickyTranslateY, m_allowChangeMerge);
-                    layout->UndoStack()->push(command);
+                auto *command = new VPUndoPieceMove(piece, m_stickyTranslateX, m_stickyTranslateY, m_allowChangeMerge);
+                layout->UndoStack()->push(command);
 
-                    SetStickyPoints(QVector<QPointF>());
-                }
+                SetStickyPoints(QVector<QPointF>());
             }
         }
 
@@ -1184,20 +1181,17 @@ void VPGraphicsPiece::PieceZValueChanged(const VPPiecePtr &piece)
 //---------------------------------------------------------------------------------------------------------------------
 auto VPGraphicsPiece::itemChange(GraphicsItemChange change, const QVariant &value) -> QVariant
 {
-    if (scene() != nullptr)
+    if (scene() != nullptr && change == ItemSelectedHasChanged)
     {
-        if (change == ItemSelectedHasChanged)
+        VPPiecePtr const piece = m_piece.toStrongRef();
+        if (not piece.isNull())
         {
-            VPPiecePtr const piece = m_piece.toStrongRef();
-            if (not piece.isNull())
-            {
-                piece->SetSelected(value.toBool());
+            piece->SetSelected(value.toBool());
 
-                VPLayoutPtr const layout = piece->Layout();
-                if (not layout.isNull())
-                {
-                    emit layout->PieceSelectionChanged(piece);
-                }
+            VPLayoutPtr const layout = piece->Layout();
+            if (not layout.isNull())
+            {
+                emit layout->PieceSelectionChanged(piece);
             }
         }
     }

@@ -240,27 +240,25 @@ auto VNodeDetail::Convert(const VContainer *data, const QVector<VNodeDetail> &no
         for (int i = 0; i < nodes.size(); ++i)
         {
             const VNodeDetail &node = nodes.at(i);
-            if (node.getTypeTool() == Tool::NodePoint)
+            if (node.getTypeTool() == Tool::NodePoint &&
+                (not qFuzzyIsNull(node.getMx()) || not qFuzzyIsNull(node.getMy())))
             {
-                if (not qFuzzyIsNull(node.getMx()) || not qFuzzyIsNull(node.getMy()))
-                {
-                    const QPointF previosPoint = path.NodePreviousPoint(data, i);
-                    const QPointF nextPoint = path.NodeNextPoint(data, i);
+                const QPointF previosPoint = path.NodePreviousPoint(data, i);
+                const QPointF nextPoint = path.NodeNextPoint(data, i);
 
-                    const QPointF point = data->GeometricObject<VPointF>(node.getId())->toQPointF();
+                const QPointF point = data->GeometricObject<VPointF>(node.getId())->toQPointF();
 
-                    QLineF lineBefore(point, previosPoint);
-                    lineBefore.setAngle(lineBefore.angle() - 90);
-                    lineBefore.setLength(width);
+                QLineF lineBefore(point, previosPoint);
+                lineBefore.setAngle(lineBefore.angle() - 90);
+                lineBefore.setLength(width);
 
-                    ConvertBefore(path[i], lineBefore, node.getMx(), node.getMy());
+                ConvertBefore(path[i], lineBefore, node.getMx(), node.getMy());
 
-                    QLineF lineAfter(point, nextPoint);
-                    lineAfter.setAngle(lineAfter.angle() + 90);
-                    lineAfter.setLength(width);
+                QLineF lineAfter(point, nextPoint);
+                lineAfter.setAngle(lineAfter.angle() + 90);
+                lineAfter.setLength(width);
 
-                    ConvertAfter(path[i], lineAfter, node.getMx(), node.getMy());
-                }
+                ConvertAfter(path[i], lineAfter, node.getMx(), node.getMy());
             }
         }
     }

@@ -221,18 +221,16 @@ template <class T> inline auto VPiece::SeamAllowancePath(const QVector<T> &point
     QPainterPath ekv;
 
     // seam allowence
-    if (IsSeamAllowance() && not IsSeamAllowanceBuiltIn())
+    if (IsSeamAllowance() && not IsSeamAllowanceBuiltIn() && not points.isEmpty())
     {
-        if (not points.isEmpty())
+        ekv.moveTo(points.at(0));
+        for (qint32 i = 1; i < points.count(); ++i)
         {
-            ekv.moveTo(points.at(0));
-            for (qint32 i = 1; i < points.count(); ++i)
-            {
-                ekv.lineTo(points.at(i));
-            }
+            ekv.lineTo(points.at(i));
+        }
 
 #if !defined(V_NO_ASSERT)
-            // uncomment for debug
+        // uncomment for debug
 //            QFont font;
 //            font.setPixelSize(1);
 //            for (qint32 i = 0; i < points.count(); ++i)
@@ -248,8 +246,7 @@ template <class T> inline auto VPiece::SeamAllowancePath(const QVector<T> &point
 //            }
 #endif
 
-            ekv.setFillRule(Qt::WindingFill);
-        }
+        ekv.setFillRule(Qt::WindingFill);
     }
 
     return ekv;

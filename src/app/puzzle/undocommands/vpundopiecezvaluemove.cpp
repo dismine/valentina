@@ -109,13 +109,10 @@ void VPUndoPieceZValueMove::undo()
 
     for (const auto &p : pieces)
     {
-        if (not p.isNull())
+        if (not p.isNull() && m_oldValues.contains(p->GetUniqueID()))
         {
-            if (m_oldValues.contains(p->GetUniqueID()))
-            {
-                p->SetZValue(m_oldValues.value(p->GetUniqueID()));
-                emit layout->PieceZValueChanged(p);
-            }
+            p->SetZValue(m_oldValues.value(p->GetUniqueID()));
+            emit layout->PieceZValueChanged(p);
         }
     }
 }
@@ -326,13 +323,10 @@ void VPUndoPiecesZValueMove::undo()
 
     for (const auto &p : pieces)
     {
-        if (not p.isNull())
+        if (not p.isNull() && m_oldValues.contains(p->GetUniqueID()))
         {
-            if (m_oldValues.contains(p->GetUniqueID()))
-            {
-                p->SetZValue(m_oldValues.value(p->GetUniqueID()));
-                emit layout->PieceZValueChanged(p);
-            }
+            p->SetZValue(m_oldValues.value(p->GetUniqueID()));
+            emit layout->PieceZValueChanged(p);
         }
     }
 }

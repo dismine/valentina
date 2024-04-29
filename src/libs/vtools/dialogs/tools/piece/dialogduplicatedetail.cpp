@@ -55,50 +55,44 @@ DialogDuplicateDetail::~DialogDuplicateDetail()
 //---------------------------------------------------------------------------------------------------------------------
 void DialogDuplicateDetail::ShowDialog(bool click)
 {
-    if (prepare)
+    if (prepare && click)
     {
-        if (click)
+        // The check need to ignore first release of mouse button.
+        // User should have chance to place piece.
+        if (not m_firstRelease)
         {
-            // The check need to ignore first release of mouse button.
-            // User should have chance to place piece.
-            if (not m_firstRelease)
-            {
-                m_firstRelease = true;
-                return;
-            }
-
-            auto *piece = qobject_cast<VisToolDuplicateDetail *>(vis);
-            SCASSERT(piece != nullptr)
-
-            m_mx = piece->Mx();
-            m_my = piece->My();
-            emit ToolTip(QString());
-            DialogAccepted();
+            m_firstRelease = true;
+            return;
         }
+
+        auto *piece = qobject_cast<VisToolDuplicateDetail *>(vis);
+        SCASSERT(piece != nullptr)
+
+        m_mx = piece->Mx();
+        m_my = piece->My();
+        emit ToolTip(QString());
+        DialogAccepted();
     }
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 void DialogDuplicateDetail::ChosenObject(quint32 id, const SceneObject &type)
 {
-    if (prepare == false) // After first choose we ignore all objects
+    if (prepare == false && type == SceneObject::Detail && id > NULL_ID) // After first choose we ignore all objects
     {
-        if (type == SceneObject::Detail && id > NULL_ID)
+        m_idDetail = id;
+
+        auto *tool = qobject_cast<VAbstractTool *>(VAbstractPattern::getTool(m_idDetail));
+        if (tool)
         {
-            m_idDetail = id;
-
-            auto *tool = qobject_cast<VAbstractTool *>(VAbstractPattern::getTool(m_idDetail));
-            if (tool)
-            {
-                vis->SetData(tool->getData()); // Includes currentSeamAllowance variable we need
-            }
-
-            emit ToolTip(tr("Click to place duplicate"));
-            if (vis != nullptr)
-            {
-                vis->VisualMode(id);
-            }
-            prepare = true;
+            vis->SetData(tool->getData()); // Includes currentSeamAllowance variable we need
         }
+
+        emit ToolTip(tr("Click to place duplicate"));
+        if (vis != nullptr)
+        {
+            vis->VisualMode(id);
+        }
+        prepare = true;
     }
 }

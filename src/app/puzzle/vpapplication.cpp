@@ -239,25 +239,20 @@ inline void noisyFailureMsgHandler(QtMsgType type, const QMessageLogContext &con
                 break;
         }
 
-        if (type == QtWarningMsg || type == QtCriticalMsg || type == QtFatalMsg)
+        if ((type == QtWarningMsg || type == QtCriticalMsg || type == QtFatalMsg) &&
+            VPApplication::VApp()->IsAppInGUIMode() && topWinAllowsPop)
         {
-            if (VPApplication::VApp()->IsAppInGUIMode())
-            {
-                if (topWinAllowsPop)
-                {
-                    messageBox.setText(msg);
-                    messageBox.setStandardButtons(QMessageBox::Ok);
-                    messageBox.setWindowModality(Qt::ApplicationModal);
-                    messageBox.setModal(true);
+            messageBox.setText(msg);
+            messageBox.setStandardButtons(QMessageBox::Ok);
+            messageBox.setWindowModality(Qt::ApplicationModal);
+            messageBox.setModal(true);
 #ifndef QT_NO_CURSOR
-                    QGuiApplication::setOverrideCursor(Qt::ArrowCursor);
+            QGuiApplication::setOverrideCursor(Qt::ArrowCursor);
 #endif
-                    messageBox.exec();
+            messageBox.exec();
 #ifndef QT_NO_CURSOR
-                    QGuiApplication::restoreOverrideCursor();
+            QGuiApplication::restoreOverrideCursor();
 #endif
-                }
-            }
         }
 
         if (QtFatalMsg == type)

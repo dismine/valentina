@@ -324,15 +324,12 @@ void TST_TSLocaleTranslation::TestHTMLTags()
 
     for (const auto &regex : regexes)
     {
-        if (source.contains(regex.first))
+        if (source.contains(regex.first) &&
+            (not translation.contains(regex.second) || translation.count(regex.second) != source.count(regex.first)))
         {
-            if (not translation.contains(regex.second) || translation.count(regex.second) != source.count(regex.first))
-            {
-                const QString message = u"Tag mismatch. Pattern: '<%1>'. "_s.arg(regex.first.pattern()) +
-                                        u"Original name:'%1'"_s.arg(source) +
-                                        u", translated name:'%1'"_s.arg(translation);
-                QFAIL(qUtf8Printable(message));
-            }
+            const QString message = u"Tag mismatch. Pattern: '<%1>'. "_s.arg(regex.first.pattern()) +
+                                    u"Original name:'%1'"_s.arg(source) + u", translated name:'%1'"_s.arg(translation);
+            QFAIL(qUtf8Printable(message));
         }
     }
 }

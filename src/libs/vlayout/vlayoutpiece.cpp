@@ -1754,16 +1754,13 @@ auto VLayoutPiece::GetItem(bool textAsPaths, bool togetherWithNotches, bool show
                 mirrorFlag = true;
             }
         }
-        else if (not IsSeamAllowanceBuiltIn())
+        else if (not IsSeamAllowanceBuiltIn() && !d->m_seamAllowanceMirrorLine.isNull())
         {
-            if (!d->m_seamAllowanceMirrorLine.isNull())
-            {
-                QPainterPath mirrorPath;
-                mirrorPath.moveTo(d->m_matrix.map(d->m_seamAllowanceMirrorLine.p1()));
-                mirrorPath.lineTo(d->m_matrix.map(d->m_seamAllowanceMirrorLine.p2()));
-                mirrorLinePath.addPath(mirrorPath);
-                mirrorFlag = true;
-            }
+            QPainterPath mirrorPath;
+            mirrorPath.moveTo(d->m_matrix.map(d->m_seamAllowanceMirrorLine.p1()));
+            mirrorPath.lineTo(d->m_matrix.map(d->m_seamAllowanceMirrorLine.p2()));
+            mirrorLinePath.addPath(mirrorPath);
+            mirrorFlag = true;
         }
 
         if (mirrorFlag)

@@ -117,38 +117,33 @@ void DialogPointOfIntersection::SetSecondPointId(quint32 value)
  */
 void DialogPointOfIntersection::ChosenObject(quint32 id, const SceneObject &type)
 {
-    if (prepare == false) // After first choose we ignore all objects
+    if (prepare == false && type == SceneObject::Point) // After first choose we ignore all objects
     {
-        if (type == SceneObject::Point)
-        {
-            auto *line = qobject_cast<VisToolPointOfIntersection *>(vis);
-            SCASSERT(line != nullptr)
+        auto *line = qobject_cast<VisToolPointOfIntersection *>(vis);
+        SCASSERT(line != nullptr)
 
-            switch (number)
-            {
-                case 0:
-                    if (SetObject(id, ui->comboBoxFirstPoint, tr("Select point for Y value (horizontal)")))
-                    {
-                        number++;
-                        line->SetPoint1Id(id);
-                        line->RefreshGeometry();
-                    }
-                    break;
-                case 1:
-                    if (getCurrentObjectId(ui->comboBoxFirstPoint) != id)
-                    {
-                        if (SetObject(id, ui->comboBoxSecondPoint, QString()))
-                        {
-                            line->SetPoint2Id(id);
-                            line->RefreshGeometry();
-                            prepare = true;
-                            DialogAccepted();
-                        }
-                    }
-                    break;
-                default:
-                    break;
-            }
+        switch (number)
+        {
+            case 0:
+                if (SetObject(id, ui->comboBoxFirstPoint, tr("Select point for Y value (horizontal)")))
+                {
+                    number++;
+                    line->SetPoint1Id(id);
+                    line->RefreshGeometry();
+                }
+                break;
+            case 1:
+                if (getCurrentObjectId(ui->comboBoxFirstPoint) != id &&
+                    SetObject(id, ui->comboBoxSecondPoint, QString()))
+                {
+                    line->SetPoint2Id(id);
+                    line->RefreshGeometry();
+                    prepare = true;
+                    DialogAccepted();
+                }
+                break;
+            default:
+                break;
         }
     }
 }

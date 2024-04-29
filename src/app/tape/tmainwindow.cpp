@@ -433,12 +433,10 @@ auto TMainWindow::LoadFile(const QString &path) -> bool
 
     VlpCreateLock(m_lock, path);
 
-    if (not m_lock->IsLocked())
+    if (not m_lock->IsLocked() &&
+        not IgnoreLocking(m_lock->GetLockError(), path, MApplication::VApp()->IsAppInGUIMode()))
     {
-        if (not IgnoreLocking(m_lock->GetLockError(), path, MApplication::VApp()->IsAppInGUIMode()))
-        {
-            return false;
-        }
+        return false;
     }
 
     try
@@ -4097,12 +4095,10 @@ auto TMainWindow::LoadFromExistingFile(const QString &path) -> bool
 
     VlpCreateLock(m_lock, path);
 
-    if (not m_lock->IsLocked())
+    if (not m_lock->IsLocked() &&
+        not IgnoreLocking(m_lock->GetLockError(), path, MApplication::VApp()->IsAppInGUIMode()))
     {
-        if (not IgnoreLocking(m_lock->GetLockError(), path, MApplication::VApp()->IsAppInGUIMode()))
-        {
-            return false;
-        }
+        return false;
     }
 
     try

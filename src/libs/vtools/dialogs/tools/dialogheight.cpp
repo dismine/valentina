@@ -208,14 +208,12 @@ void DialogHeight::ChosenObject(quint32 id, const SceneObject &type)
                 }
                 break;
             case (1):
-                if (getCurrentObjectId(ui->comboBoxBasePoint) != id)
+                if (getCurrentObjectId(ui->comboBoxBasePoint) != id &&
+                    SetObject(id, ui->comboBoxP1Line, tr("Select second point of line")))
                 {
-                    if (SetObject(id, ui->comboBoxP1Line, tr("Select second point of line")))
-                    {
-                        m_number++;
-                        line->SetLineP1Id(id);
-                        line->RefreshGeometry();
-                    }
+                    m_number++;
+                    line->SetLineP1Id(id);
+                    line->RefreshGeometry();
                 }
                 break;
             case (2):
@@ -225,15 +223,12 @@ void DialogHeight::ChosenObject(quint32 id, const SceneObject &type)
                 set.insert(getCurrentObjectId(ui->comboBoxP1Line));
                 set.insert(id);
 
-                if (set.size() == 3)
+                if (set.size() == 3 && SetObject(id, ui->comboBoxP2Line, QString()))
                 {
-                    if (SetObject(id, ui->comboBoxP2Line, QString()))
-                    {
-                        line->SetLineP2Id(id);
-                        line->RefreshGeometry();
-                        prepare = true;
-                        DialogAccepted();
-                    }
+                    line->SetLineP2Id(id);
+                    line->RefreshGeometry();
+                    prepare = true;
+                    DialogAccepted();
                 }
             }
             break;

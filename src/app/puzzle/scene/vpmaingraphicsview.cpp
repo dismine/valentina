@@ -305,22 +305,19 @@ void VPMainGraphicsView::keyReleaseEvent(QKeyEvent *event)
             break;
     }
 
-    if (event->key() == Qt::Key_BracketLeft || event->key() == Qt::Key_BracketRight)
+    if ((event->key() == Qt::Key_BracketLeft || event->key() == Qt::Key_BracketRight) && not event->isAutoRepeat())
     {
-        if (not event->isAutoRepeat())
+        VPLayoutPtr const layout = m_layout.toStrongRef();
+        if (layout.isNull())
         {
-            VPLayoutPtr const layout = m_layout.toStrongRef();
-            if (layout.isNull())
-            {
-                return;
-            }
+            return;
+        }
 
-            if (VPSheetPtr const sheet = layout->GetFocusedSheet(); not sheet.isNull())
-            {
-                sheet->SceneData()->RotationControls()->SetIgnorePieceTransformation(false);
-                sheet->SceneData()->RotationControls()->on_UpdateControls();
-                sheet->SceneData()->RotationControls()->on_HideHandles(false);
-            }
+        if (VPSheetPtr const sheet = layout->GetFocusedSheet(); not sheet.isNull())
+        {
+            sheet->SceneData()->RotationControls()->SetIgnorePieceTransformation(false);
+            sheet->SceneData()->RotationControls()->on_UpdateControls();
+            sheet->SceneData()->RotationControls()->on_HideHandles(false);
         }
     }
     VMainGraphicsView::keyReleaseEvent(event);
@@ -690,32 +687,29 @@ void VPMainGraphicsView::MovePiece(QKeyEvent *event)
         }
 
         if (const QList<VPGraphicsPiece *> &graphicsPieces = sheet->SceneData()->GraphicsPieces();
-            m_hasStickyPosition && not graphicsPieces.isEmpty())
+            m_hasStickyPosition && not graphicsPieces.isEmpty() && layout->LayoutSettings().IsStickyEdges())
         {
-            if (layout->LayoutSettings().IsStickyEdges())
+            auto PreparePieces = [layout]()
             {
-                auto PreparePieces = [layout]()
+                QList<VPPiecePtr> pieces;
+                if (VPSheetPtr const sheet = layout->GetFocusedSheet(); not sheet.isNull())
                 {
-                    QList<VPPiecePtr> pieces;
-                    if (VPSheetPtr const sheet = layout->GetFocusedSheet(); not sheet.isNull())
-                    {
-                        pieces = sheet->GetSelectedPieces();
-                    }
+                    pieces = sheet->GetSelectedPieces();
+                }
 
-                    return pieces;
-                };
+                return pieces;
+            };
 
-                if (QList<VPPiecePtr> const pieces = PreparePieces(); pieces.size() == 1)
+            if (QList<VPPiecePtr> const pieces = PreparePieces(); pieces.size() == 1)
+            {
+                const VPPiecePtr &p = pieces.constFirst();
+
+                auto *command = new VPUndoPieceMove(p, m_stickyTranslateX, m_stickyTranslateY, m_allowChangeMerge);
+                layout->UndoStack()->push(command);
+
+                if (VPGraphicsPiece *gPiece = sheet->SceneData()->ScenePiece(p); gPiece != nullptr)
                 {
-                    const VPPiecePtr &p = pieces.constFirst();
-
-                    auto *command = new VPUndoPieceMove(p, m_stickyTranslateX, m_stickyTranslateY, m_allowChangeMerge);
-                    layout->UndoStack()->push(command);
-
-                    if (VPGraphicsPiece *gPiece = sheet->SceneData()->ScenePiece(p); gPiece != nullptr)
-                    {
-                        gPiece->SetStickyPoints(QVector<QPointF>());
-                    }
+                    gPiece->SetStickyPoints(QVector<QPointF>());
                 }
             }
         }

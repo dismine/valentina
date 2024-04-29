@@ -729,12 +729,9 @@ auto Rollback(QVector<VRawSAPoint> &points, const QLineF &edge) -> bool
         points.removeLast();
         points = VAbstractPiece::RollbackSeamAllowance(points, edge, &success);
 
-        if (not points.isEmpty())
+        if (not points.isEmpty() && points.constLast().toPoint() != points.constFirst().toPoint())
         {
-            if (points.constLast().toPoint() != points.constFirst().toPoint())
-            {
-                points.append(points.constFirst()); // Should be always closed
-            }
+            points.append(points.constFirst()); // Should be always closed
         }
     }
     return success;
@@ -866,12 +863,9 @@ void RollbackBySecondEdgeRightAngle(QVector<VRawSAPoint> &ekvPoints, const QVect
             }
         }
 
-        if (not ekvPoints.isEmpty())
+        if (not ekvPoints.isEmpty() && ekvPoints.constLast().toPoint() != ekvPoints.constFirst().toPoint())
         {
-            if (ekvPoints.constLast().toPoint() != ekvPoints.constFirst().toPoint())
-            {
-                ekvPoints.append(ekvPoints.constFirst()); // Should be always closed
-            }
+            ekvPoints.append(ekvPoints.constFirst()); // Should be always closed
         }
     }
 }

@@ -369,30 +369,24 @@ void DialogArc::SetRadius(const QString &value)
  */
 void DialogArc::ChosenObject(quint32 id, const SceneObject &type)
 {
-    if (not prepare) // After first choose we ignore all objects
+    if (not prepare && type == SceneObject::Point &&
+        SetObject(id, ui->comboBoxBasePoint, QString())) // After first choose we ignore all objects
     {
-        if (type == SceneObject::Point)
+        if (vis != nullptr)
         {
-            if (SetObject(id, ui->comboBoxBasePoint, QString()))
-            {
-                if (vis != nullptr)
-                {
-                    auto *window =
-                        qobject_cast<VAbstractMainWindow *>(VAbstractValApplication::VApp()->getMainWindow());
-                    SCASSERT(window != nullptr)
-                    connect(vis.data(), &Visualization::ToolTip, window, &VAbstractMainWindow::ShowToolTip);
+            auto *window = qobject_cast<VAbstractMainWindow *>(VAbstractValApplication::VApp()->getMainWindow());
+            SCASSERT(window != nullptr)
+            connect(vis.data(), &Visualization::ToolTip, window, &VAbstractMainWindow::ShowToolTip);
 
-                    vis->VisualMode(id);
-                    vis->RefreshToolTip();
-                }
+            vis->VisualMode(id);
+            vis->RefreshToolTip();
+        }
 
-                prepare = true;
+        prepare = true;
 
-                if (not VAbstractValApplication::VApp()->Settings()->IsInteractiveTools())
-                {
-                    FinishCreating();
-                }
-            }
+        if (not VAbstractValApplication::VApp()->Settings()->IsInteractiveTools())
+        {
+            FinishCreating();
         }
     }
 }

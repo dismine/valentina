@@ -1047,14 +1047,12 @@ void VDxfEngine::ExportAAMANotch(const QSharedPointer<dx_ifaceBlock> &detailBloc
         {
             ExportNotch(passmark.baseLine.p1(), passmark.baseLine.length(), passmark.baseLine.angle());
 
-            if (!mirrorLine.isNull() && detail.IsShowFullPiece())
+            if (!mirrorLine.isNull() && detail.IsShowFullPiece() &&
+                !VGObject::IsPointOnLineviaPDP(passmark.baseLine.p1(), mirrorLine.p1(), mirrorLine.p2()))
             {
-                if (!VGObject::IsPointOnLineviaPDP(passmark.baseLine.p1(), mirrorLine.p1(), mirrorLine.p2()))
-                {
-                    const QTransform matrix = VGObject::FlippingMatrix(mirrorLine);
-                    QLineF const baseLine = matrix.map(passmark.baseLine);
-                    ExportNotch(baseLine.p1(), baseLine.length(), baseLine.angle());
-                }
+                const QTransform matrix = VGObject::FlippingMatrix(mirrorLine);
+                QLineF const baseLine = matrix.map(passmark.baseLine);
+                ExportNotch(baseLine.p1(), baseLine.length(), baseLine.angle());
             }
         }
     }
@@ -1694,15 +1692,13 @@ void VDxfEngine::ExportASTMNotches(const QSharedPointer<dx_ifaceBlock> &detailBl
         ExportPassmark(passmark);
 
         const QLineF mirrorLine = detail.GetMappedSeamMirrorLine();
-        if (!mirrorLine.isNull() && detail.IsShowFullPiece())
+        if (!mirrorLine.isNull() && detail.IsShowFullPiece() &&
+            !VGObject::IsPointOnLineviaPDP(passmark.baseLine.p1(), mirrorLine.p1(), mirrorLine.p2()))
         {
-            if (!VGObject::IsPointOnLineviaPDP(passmark.baseLine.p1(), mirrorLine.p1(), mirrorLine.p2()))
-            {
-                const QTransform matrix = VGObject::FlippingMatrix(mirrorLine);
-                const VLayoutPassmark mirroredPassmark = VLayoutPiece::MapPassmark(passmark, matrix, false);
+            const QTransform matrix = VGObject::FlippingMatrix(mirrorLine);
+            const VLayoutPassmark mirroredPassmark = VLayoutPiece::MapPassmark(passmark, matrix, false);
 
-                ExportPassmark(mirroredPassmark);
-            }
+            ExportPassmark(mirroredPassmark);
         }
     }
 }
@@ -1776,14 +1772,12 @@ auto VDxfEngine::ExportASTMNotch(const VLayoutPassmark &passmark) -> DRW_ASTMNot
     notch->angle = passmark.baseLine.angle();
 
     PassmarkLineType type = passmark.type;
-    if (m_compatibilityMode == DXFApparelCompatibility::RPCADV08 ||
-        m_compatibilityMode == DXFApparelCompatibility::RPCADV09 ||
-        m_compatibilityMode == DXFApparelCompatibility::RPCADV10)
+    if ((m_compatibilityMode == DXFApparelCompatibility::RPCADV08 ||
+         m_compatibilityMode == DXFApparelCompatibility::RPCADV09 ||
+         m_compatibilityMode == DXFApparelCompatibility::RPCADV10) &&
+        (type == PassmarkLineType::ExternalVMark || type == PassmarkLineType::InternalVMark))
     {
-        if (type == PassmarkLineType::ExternalVMark || type == PassmarkLineType::InternalVMark)
-        {
-            type = PassmarkLineType::CheckMark;
-        }
+        type = PassmarkLineType::CheckMark;
     }
 
     switch (type)

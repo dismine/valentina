@@ -99,74 +99,63 @@ DialogTriangle::~DialogTriangle()
  */
 void DialogTriangle::ChosenObject(quint32 id, const SceneObject &type)
 {
-    if (prepare == false) // After first choose we ignore all objects
+    if (prepare == false && type == SceneObject::Point) // After first choose we ignore all objects
     {
-        if (type == SceneObject::Point)
+        auto *line = qobject_cast<VisToolTriangle *>(vis);
+        SCASSERT(line != nullptr)
+
+        switch (number)
         {
-            auto *line = qobject_cast<VisToolTriangle *>(vis);
-            SCASSERT(line != nullptr)
-
-            switch (number)
+            case (0):
+                if (SetObject(id, ui->comboBoxAxisP1, tr("Select second point of axis")))
+                {
+                    number++;
+                    line->VisualMode(id);
+                }
+                break;
+            case (1):
+                if (getCurrentObjectId(ui->comboBoxAxisP1) != id &&
+                    SetObject(id, ui->comboBoxAxisP2, tr("Select first point")))
+                {
+                    number++;
+                    line->SetObject2Id(id);
+                    line->RefreshGeometry();
+                }
+                break;
+            case (2):
             {
-                case (0):
-                    if (SetObject(id, ui->comboBoxAxisP1, tr("Select second point of axis")))
-                    {
-                        number++;
-                        line->VisualMode(id);
-                    }
-                    break;
-                case (1):
-                    if (getCurrentObjectId(ui->comboBoxAxisP1) != id)
-                    {
-                        if (SetObject(id, ui->comboBoxAxisP2, tr("Select first point")))
-                        {
-                            number++;
-                            line->SetObject2Id(id);
-                            line->RefreshGeometry();
-                        }
-                    }
-                    break;
-                case (2):
-                {
-                    QSet<quint32> set;
-                    set.insert(getCurrentObjectId(ui->comboBoxAxisP1));
-                    set.insert(getCurrentObjectId(ui->comboBoxAxisP2));
-                    set.insert(id);
+                QSet<quint32> set;
+                set.insert(getCurrentObjectId(ui->comboBoxAxisP1));
+                set.insert(getCurrentObjectId(ui->comboBoxAxisP2));
+                set.insert(id);
 
-                    if (set.size() == 3)
-                    {
-                        if (SetObject(id, ui->comboBoxFirstPoint, tr("Select second point")))
-                        {
-                            number++;
-                            line->SetHypotenuseP1Id(id);
-                            line->RefreshGeometry();
-                        }
-                    }
-                }
-                break;
-                case (3):
+                if (set.size() == 3 && SetObject(id, ui->comboBoxFirstPoint, tr("Select second point")))
                 {
-                    QSet<quint32> set;
-                    set.insert(getCurrentObjectId(ui->comboBoxAxisP1));
-                    set.insert(getCurrentObjectId(ui->comboBoxAxisP2));
-                    set.insert(getCurrentObjectId(ui->comboBoxFirstPoint));
-                    set.insert(id);
-
-                    if (set.size() == 4)
-                    {
-                        if (SetObject(id, ui->comboBoxSecondPoint, QString()))
-                        {
-                            line->SetHypotenuseP2Id(id);
-                            line->RefreshGeometry();
-                            prepare = true;
-                            DialogAccepted();
-                        }
-                    }
+                    number++;
+                    line->SetHypotenuseP1Id(id);
+                    line->RefreshGeometry();
                 }
-                break;
-                default:
-                    break;
             }
+            break;
+            case (3):
+            {
+                QSet<quint32> set;
+                set.insert(getCurrentObjectId(ui->comboBoxAxisP1));
+                set.insert(getCurrentObjectId(ui->comboBoxAxisP2));
+                set.insert(getCurrentObjectId(ui->comboBoxFirstPoint));
+                set.insert(id);
+
+                if (set.size() == 4 && SetObject(id, ui->comboBoxSecondPoint, QString()))
+                {
+                    line->SetHypotenuseP2Id(id);
+                    line->RefreshGeometry();
+                    prepare = true;
+                    DialogAccepted();
+                }
+            }
+            break;
+            default:
+                break;
         }
     }
 }

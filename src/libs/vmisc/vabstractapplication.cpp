@@ -591,14 +591,11 @@ void VAbstractApplication::CheckSystemLocale()
 //---------------------------------------------------------------------------------------------------------------------
 void VAbstractApplication::SVGFontsPathChanged(const QString &oldPath, const QString &newPath)
 {
-    if (oldPath != newPath)
+    if (oldPath != newPath && m_svgFontDatabase != nullptr)
     {
-        if (m_svgFontDatabase != nullptr)
-        {
-            RestartSVGFontDatabaseWatcher();
-            m_svgFontDatabase->InvalidatePath(oldPath);
-            RepopulateFontDatabase(newPath);
-        }
+        RestartSVGFontDatabaseWatcher();
+        m_svgFontDatabase->InvalidatePath(oldPath);
+        RepopulateFontDatabase(newPath);
     }
 }
 

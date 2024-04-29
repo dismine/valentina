@@ -244,14 +244,12 @@ void DialogPointOfContact::ChosenObject(quint32 id, const SceneObject &type)
             }
             break;
         case 1:
-            if (getCurrentObjectId(ui->comboBoxFirstPoint) != id)
+            if (getCurrentObjectId(ui->comboBoxFirstPoint) != id &&
+                SetObject(id, ui->comboBoxSecondPoint, tr("Select point of center of arc")))
             {
-                if (SetObject(id, ui->comboBoxSecondPoint, tr("Select point of center of arc")))
-                {
-                    m_number++;
-                    line->SetLineP2Id(id);
-                    line->RefreshGeometry();
-                }
+                m_number++;
+                line->SetLineP2Id(id);
+                line->RefreshGeometry();
             }
             break;
         case 2:
@@ -261,23 +259,19 @@ void DialogPointOfContact::ChosenObject(quint32 id, const SceneObject &type)
             set.insert(getCurrentObjectId(ui->comboBoxSecondPoint));
             set.insert(id);
 
-            if (set.size() == 3)
+            if (set.size() == 3 && SetObject(id, ui->comboBoxCenter, QString()))
             {
-                if (SetObject(id, ui->comboBoxCenter, QString()))
+                auto *window = qobject_cast<VAbstractMainWindow *>(VAbstractValApplication::VApp()->getMainWindow());
+                SCASSERT(window != nullptr)
+                connect(line, &Visualization::ToolTip, window, &VAbstractMainWindow::ShowToolTip);
+
+                line->SetRadiusId(id);
+                line->RefreshGeometry();
+                prepare = true;
+
+                if (not VAbstractValApplication::VApp()->Settings()->IsInteractiveTools())
                 {
-                    auto *window =
-                        qobject_cast<VAbstractMainWindow *>(VAbstractValApplication::VApp()->getMainWindow());
-                    SCASSERT(window != nullptr)
-                    connect(line, &Visualization::ToolTip, window, &VAbstractMainWindow::ShowToolTip);
-
-                    line->SetRadiusId(id);
-                    line->RefreshGeometry();
-                    prepare = true;
-
-                    if (not VAbstractValApplication::VApp()->Settings()->IsInteractiveTools())
-                    {
-                        FinishCreating();
-                    }
+                    FinishCreating();
                 }
             }
         }

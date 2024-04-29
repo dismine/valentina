@@ -287,53 +287,50 @@ inline void noisyFailureMsgHandler(QtMsgType type, const QMessageLogContext &con
 
     if (isGuiThread)
     {
-        if (type == QtWarningMsg || type == QtCriticalMsg || type == QtFatalMsg)
+        if ((type == QtWarningMsg || type == QtCriticalMsg || type == QtFatalMsg) && VApplication::IsGUIMode())
         {
-            if (VApplication::IsGUIMode())
+            // fixme: trying to make sure there are no save/load dialogs are opened, because error message during
+            //  them will lead to crash
+            const bool topWinAllowsPop = (QApplication::activeModalWidget() == nullptr) ||
+                                         !QApplication::activeModalWidget()->inherits("QFileDialog");
+
+            if (topWinAllowsPop && (not isPatternMessage || (type == QtCriticalMsg || type == QtFatalMsg)))
             {
-                // fixme: trying to make sure there are no save/load dialogs are opened, because error message during
-                //  them will lead to crash
-                const bool topWinAllowsPop = (QApplication::activeModalWidget() == nullptr) ||
-                                             !QApplication::activeModalWidget()->inherits("QFileDialog");
-
-                if (topWinAllowsPop && (not isPatternMessage || (type == QtCriticalMsg || type == QtFatalMsg)))
+                QMessageBox messageBox;
+                switch (type)
                 {
-                    QMessageBox messageBox;
-                    switch (type)
-                    {
-                        case QtWarningMsg:
-                            messageBox.setWindowTitle(QApplication::translate("vNoisyHandler", "Warning"));
-                            messageBox.setIcon(QMessageBox::Warning);
-                            break;
-                        case QtCriticalMsg:
-                            messageBox.setWindowTitle(QApplication::translate("vNoisyHandler", "Critical error"));
-                            messageBox.setIcon(QMessageBox::Critical);
-                            break;
-                        case QtFatalMsg:
-                            messageBox.setWindowTitle(QApplication::translate("vNoisyHandler", "Fatal error"));
-                            messageBox.setIcon(QMessageBox::Critical);
-                            break;
-                        case QtInfoMsg:
-                            messageBox.setWindowTitle(QApplication::translate("vNoisyHandler", "Information"));
-                            messageBox.setIcon(QMessageBox::Information);
-                            break;
-                        case QtDebugMsg:
-                        default:
-                            break;
-                    }
-
-                    messageBox.setText(VAbstractValApplication::ClearMessage(logMsg));
-                    messageBox.setStandardButtons(QMessageBox::Ok);
-                    messageBox.setWindowModality(Qt::ApplicationModal);
-                    messageBox.setModal(true);
-#ifndef QT_NO_CURSOR
-                    QGuiApplication::setOverrideCursor(Qt::ArrowCursor);
-#endif
-                    messageBox.exec();
-#ifndef QT_NO_CURSOR
-                    QGuiApplication::restoreOverrideCursor();
-#endif
+                    case QtWarningMsg:
+                        messageBox.setWindowTitle(QApplication::translate("vNoisyHandler", "Warning"));
+                        messageBox.setIcon(QMessageBox::Warning);
+                        break;
+                    case QtCriticalMsg:
+                        messageBox.setWindowTitle(QApplication::translate("vNoisyHandler", "Critical error"));
+                        messageBox.setIcon(QMessageBox::Critical);
+                        break;
+                    case QtFatalMsg:
+                        messageBox.setWindowTitle(QApplication::translate("vNoisyHandler", "Fatal error"));
+                        messageBox.setIcon(QMessageBox::Critical);
+                        break;
+                    case QtInfoMsg:
+                        messageBox.setWindowTitle(QApplication::translate("vNoisyHandler", "Information"));
+                        messageBox.setIcon(QMessageBox::Information);
+                        break;
+                    case QtDebugMsg:
+                    default:
+                        break;
                 }
+
+                messageBox.setText(VAbstractValApplication::ClearMessage(logMsg));
+                messageBox.setStandardButtons(QMessageBox::Ok);
+                messageBox.setWindowModality(Qt::ApplicationModal);
+                messageBox.setModal(true);
+#ifndef QT_NO_CURSOR
+                QGuiApplication::setOverrideCursor(Qt::ArrowCursor);
+#endif
+                messageBox.exec();
+#ifndef QT_NO_CURSOR
+                QGuiApplication::restoreOverrideCursor();
+#endif
             }
         }
 
@@ -783,13 +780,10 @@ void VApplication::RepopulateMeasurementsDatabase(const QString &path)
 //---------------------------------------------------------------------------------------------------------------------
 void VApplication::KnownMeasurementsPathChanged(const QString &oldPath, const QString &newPath)
 {
-    if (oldPath != newPath)
+    if (oldPath != newPath && m_knownMeasurementsDatabase != nullptr)
     {
-        if (m_knownMeasurementsDatabase != nullptr)
-        {
-            RestartKnownMeasurementsDatabaseWatcher();
-            RepopulateMeasurementsDatabase(newPath);
-        }
+        RestartKnownMeasurementsDatabaseWatcher();
+        RepopulateMeasurementsDatabase(newPath);
     }
 }
 

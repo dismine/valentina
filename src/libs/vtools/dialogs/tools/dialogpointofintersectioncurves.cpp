@@ -178,39 +178,33 @@ void DialogPointOfIntersectionCurves::SetHCrossPoint(HCrossCurvesPoint hP)
 //---------------------------------------------------------------------------------------------------------------------
 void DialogPointOfIntersectionCurves::ChosenObject(quint32 id, const SceneObject &type)
 {
-    if (prepare == false) // After first choose we ignore all objects
+    if (prepare == false && (type == SceneObject::Spline || type == SceneObject::Arc || type == SceneObject::ElArc ||
+                             type == SceneObject::SplinePath)) // After first choose we ignore all objects
     {
-        if (type == SceneObject::Spline || type == SceneObject::Arc || type == SceneObject::ElArc ||
-            type == SceneObject::SplinePath)
-        {
-            auto *point = qobject_cast<VisToolPointOfIntersectionCurves *>(vis);
-            SCASSERT(point != nullptr)
+        auto *point = qobject_cast<VisToolPointOfIntersectionCurves *>(vis);
+        SCASSERT(point != nullptr)
 
-            switch (number)
-            {
-                case 0:
-                    if (SetObject(id, ui->comboBoxCurve1, tr("Select second curve")))
-                    {
-                        number++;
-                        point->VisualMode(id);
-                    }
-                    break;
-                case 1:
-                    if (getCurrentObjectId(ui->comboBoxCurve1) != id)
-                    {
-                        if (SetObject(id, ui->comboBoxCurve2, QString()))
-                        {
-                            number = 0;
-                            point->SetCurve2Id(id);
-                            point->RefreshGeometry();
-                            prepare = true;
-                            DialogAccepted();
-                        }
-                    }
-                    break;
-                default:
-                    break;
-            }
+        switch (number)
+        {
+            case 0:
+                if (SetObject(id, ui->comboBoxCurve1, tr("Select second curve")))
+                {
+                    number++;
+                    point->VisualMode(id);
+                }
+                break;
+            case 1:
+                if (getCurrentObjectId(ui->comboBoxCurve1) != id && SetObject(id, ui->comboBoxCurve2, QString()))
+                {
+                    number = 0;
+                    point->SetCurve2Id(id);
+                    point->RefreshGeometry();
+                    prepare = true;
+                    DialogAccepted();
+                }
+                break;
+            default:
+                break;
         }
     }
 }

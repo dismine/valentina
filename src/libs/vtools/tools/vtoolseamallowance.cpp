@@ -965,27 +965,18 @@ void VToolSeamAllowance::ResetChildren(QGraphicsItem *pItem)
     const bool selected = isSelected();
     const VPiece detail = VAbstractTool::data.GetPiece(m_id);
     auto *pVGI = qgraphicsitem_cast<VTextGraphicsItem *>(pItem);
-    if (pVGI != m_dataLabel)
+    if (pVGI != m_dataLabel && detail.GetPieceLabelData().IsVisible())
     {
-        if (detail.GetPieceLabelData().IsVisible())
-        {
-            m_dataLabel->Reset();
-        }
+        m_dataLabel->Reset();
     }
-    if (pVGI != m_patternInfo)
+    if (pVGI != m_patternInfo && detail.GetPatternLabelData().IsVisible())
     {
-        if (detail.GetPatternLabelData().IsVisible())
-        {
-            m_patternInfo->Reset();
-        }
+        m_patternInfo->Reset();
     }
     auto *pGLI = qgraphicsitem_cast<VGrainlineItem *>(pItem);
-    if (pGLI != m_grainLine)
+    if (pGLI != m_grainLine && detail.GetGrainlineGeometry().IsVisible())
     {
-        if (detail.GetGrainlineGeometry().IsVisible())
-        {
-            m_grainLine->Reset();
-        }
+        m_grainLine->Reset();
     }
 
     setSelected(selected);
@@ -1456,12 +1447,10 @@ void VToolSeamAllowance::mousePressEvent(QGraphicsSceneMouseEvent *event)
         scene()->clearSelection();
     }
 
-    if (flags() & QGraphicsItem::ItemIsMovable)
+    if (flags() & QGraphicsItem::ItemIsMovable && event->button() == Qt::LeftButton &&
+        event->type() != QEvent::GraphicsSceneMouseDoubleClick)
     {
-        if (event->button() == Qt::LeftButton && event->type() != QEvent::GraphicsSceneMouseDoubleClick)
-        {
-            SetItemOverrideCursor(this, cursorArrowCloseHand, 1, 1);
-        }
+        SetItemOverrideCursor(this, cursorArrowCloseHand, 1, 1);
     }
 
     if (selectionType == SelectionType::ByMouseRelease)
@@ -1488,13 +1477,10 @@ void VToolSeamAllowance::mouseReleaseEvent(QGraphicsSceneMouseEvent *event)
         SetItemOverrideCursor(this, cursorArrowOpenHand, 1, 1);
     }
 
-    if (selectionType == SelectionType::ByMouseRelease)
+    if (selectionType == SelectionType::ByMouseRelease && IsSelectedByReleaseEvent(this, event))
     {
-        if (IsSelectedByReleaseEvent(this, event))
-        {
-            doc->SelectedDetail(m_id);
-            emit ChoosedTool(m_id, SceneObject::Detail);
-        }
+        doc->SelectedDetail(m_id);
+        emit ChoosedTool(m_id, SceneObject::Detail);
     }
     QGraphicsPathItem::mouseReleaseEvent(event);
 }
@@ -2433,12 +2419,9 @@ void VToolSeamAllowance::InitSpecialPoints(const QVector<quint32> &points) const
 void VToolSeamAllowance::DeleteToolWithConfirm(bool ask)
 {
     std::unique_ptr<DeletePiece> delDet(new DeletePiece(doc, m_id, VAbstractTool::data, m_sceneDetails));
-    if (ask)
+    if (ask && ConfirmDeletion() == QMessageBox::No)
     {
-        if (ConfirmDeletion() == QMessageBox::No)
-        {
-            return;
-        }
+        return;
     }
 
     VAbstractApplication::VApp()->getUndoStack()->push(delDet.release());

@@ -216,12 +216,10 @@ void SetPrinterSheetPageSettings(const QSharedPointer<QPrinter> &printer, const 
     printer->setPageOrientation(sheetOrientation);
     printer->setFullPage(sheet->IgnoreMargins());
 
-    if (not sheet->IgnoreMargins())
+    if (not sheet->IgnoreMargins() &&
+        not printer->setPageMargins(UnitConvertor(margins, Unit::Px, Unit::Mm), QPageLayout::Millimeter))
     {
-        if (not printer->setPageMargins(UnitConvertor(margins, Unit::Px, Unit::Mm), QPageLayout::Millimeter))
-        {
-            qWarning() << QObject::tr("Cannot set printer margins");
-        }
+        qWarning() << QObject::tr("Cannot set printer margins");
     }
 }
 
@@ -266,12 +264,10 @@ void SetPrinterTiledPageSettings(const QSharedPointer<QPrinter> &printer, const 
     printer->setPageOrientation(orientation);
     printer->setFullPage(layout->LayoutSettings().IgnoreTilesMargins());
 
-    if (not layout->LayoutSettings().IgnoreTilesMargins())
+    if (not layout->LayoutSettings().IgnoreTilesMargins() &&
+        not printer->setPageMargins(layout->LayoutSettings().GetTilesMargins(Unit::Mm), QPageLayout::Millimeter))
     {
-        if (not printer->setPageMargins(layout->LayoutSettings().GetTilesMargins(Unit::Mm), QPageLayout::Millimeter))
-        {
-            qWarning() << QObject::tr("Cannot set printer margins");
-        }
+        qWarning() << QObject::tr("Cannot set printer margins");
     }
 }
 
@@ -488,12 +484,9 @@ auto VPMainWindow::LoadFile(const QString &path) -> bool
 
     VlpCreateLock(lock, path);
 
-    if (not lock->IsLocked())
+    if (not lock->IsLocked() && not IgnoreLocking(lock->GetLockError(), path, m_cmd->IsGuiEnabled()))
     {
-        if (not IgnoreLocking(lock->GetLockError(), path, m_cmd->IsGuiEnabled()))
-        {
-            return false;
-        }
+        return false;
     }
 
     try
@@ -803,14 +796,11 @@ void VPMainWindow::ShowFullPieceToggled(bool checked)
     if (selectedPieces.size() == 1)
     {
         const VPPiecePtr &selectedPiece = selectedPieces.constFirst();
-        if (not selectedPiece.isNull())
+        if (not selectedPiece.isNull() && selectedPiece->IsShowFullPiece() != checked)
         {
-            if (selectedPiece->IsShowFullPiece() != checked)
-            {
-                selectedPiece->SetShowFullPiece(checked);
-                LayoutWasSaved(false);
-                emit m_layout->PieceTransformationChanged(selectedPiece);
-            }
+            selectedPiece->SetShowFullPiece(checked);
+            LayoutWasSaved(false);
+            emit m_layout->PieceTransformationChanged(selectedPiece);
         }
     }
 }
@@ -822,14 +812,11 @@ void VPMainWindow::ShowMirrorLineToggled(bool checked)
     if (selectedPieces.size() == 1)
     {
         const VPPiecePtr &selectedPiece = selectedPieces.constFirst();
-        if (not selectedPiece.isNull())
+        if (not selectedPiece.isNull() && selectedPiece->IsShowMirrorLine() != checked)
         {
-            if (selectedPiece->IsShowMirrorLine() != checked)
-            {
-                selectedPiece->SetShowMirrorLine(checked);
-                LayoutWasSaved(false);
-                emit m_layout->PieceTransformationChanged(selectedPiece);
-            }
+            selectedPiece->SetShowMirrorLine(checked);
+            LayoutWasSaved(false);
+            emit m_layout->PieceTransformationChanged(selectedPiece);
         }
     }
 }
@@ -841,14 +828,11 @@ void VPMainWindow::CurrentPieceVerticallyFlippedToggled(bool checked)
     if (selectedPieces.size() == 1)
     {
         const VPPiecePtr &selectedPiece = selectedPieces.constFirst();
-        if (not selectedPiece.isNull())
+        if (not selectedPiece.isNull() && selectedPiece->IsVerticallyFlipped() != checked)
         {
-            if (selectedPiece->IsVerticallyFlipped() != checked)
-            {
-                selectedPiece->FlipVertically();
-                LayoutWasSaved(false);
-                emit m_layout->PieceTransformationChanged(selectedPiece);
-            }
+            selectedPiece->FlipVertically();
+            LayoutWasSaved(false);
+            emit m_layout->PieceTransformationChanged(selectedPiece);
         }
     }
 }
@@ -860,14 +844,11 @@ void VPMainWindow::CurrentPieceHorizontallyFlippedToggled(bool checked)
     if (selectedPieces.size() == 1)
     {
         const VPPiecePtr &selectedPiece = selectedPieces.constFirst();
-        if (not selectedPiece.isNull())
+        if (not selectedPiece.isNull() && selectedPiece->IsHorizontallyFlipped() != checked)
         {
-            if (selectedPiece->IsHorizontallyFlipped() != checked)
-            {
-                selectedPiece->FlipHorizontally();
-                LayoutWasSaved(false);
-                emit m_layout->PieceTransformationChanged(selectedPiece);
-            }
+            selectedPiece->FlipHorizontally();
+            LayoutWasSaved(false);
+            emit m_layout->PieceTransformationChanged(selectedPiece);
         }
     }
 }
@@ -3004,28 +2985,26 @@ auto VPMainWindow::AskLayoutIsInvalid(const QList<VPSheetPtr> &sheets) -> bool
 //---------------------------------------------------------------------------------------------------------------------
 auto VPMainWindow::CheckPiecesOutOfBound(const VPPiecePtr &piece, bool &outOfBoundChecked) -> bool
 {
-    if (m_layout->LayoutSettings().GetWarningPiecesOutOfBound())
+    if (m_layout->LayoutSettings().GetWarningPiecesOutOfBound() && not outOfBoundChecked && not piece.isNull() &&
+        piece->OutOfBound())
     {
-        if (not outOfBoundChecked && not piece.isNull() && piece->OutOfBound())
+        QMessageBox msgBox(this);
+        msgBox.setIcon(QMessageBox::Question);
+        msgBox.setWindowTitle(tr("The layout is invalid."));
+        msgBox.setText(tr("The layout is invalid. Piece out of bound. Do you want to continue export?"));
+        msgBox.setStandardButtons(QMessageBox::Yes | QMessageBox::No);
+        msgBox.setDefaultButton(QMessageBox::No);
+        const int width = 500;
+        auto *horizontalSpacer = new QSpacerItem(width, 0, QSizePolicy::Minimum, QSizePolicy::Expanding);
+        auto *layout = qobject_cast<QGridLayout *>(msgBox.layout());
+        SCASSERT(layout != nullptr)
+        layout->addItem(horizontalSpacer, layout->rowCount(), 0, 1, layout->columnCount());
+        if (msgBox.exec() == QMessageBox::No)
         {
-            QMessageBox msgBox(this);
-            msgBox.setIcon(QMessageBox::Question);
-            msgBox.setWindowTitle(tr("The layout is invalid."));
-            msgBox.setText(tr("The layout is invalid. Piece out of bound. Do you want to continue export?"));
-            msgBox.setStandardButtons(QMessageBox::Yes | QMessageBox::No);
-            msgBox.setDefaultButton(QMessageBox::No);
-            const int width = 500;
-            auto *horizontalSpacer = new QSpacerItem(width, 0, QSizePolicy::Minimum, QSizePolicy::Expanding);
-            auto *layout = qobject_cast<QGridLayout *>(msgBox.layout());
-            SCASSERT(layout != nullptr)
-            layout->addItem(horizontalSpacer, layout->rowCount(), 0, 1, layout->columnCount());
-            if (msgBox.exec() == QMessageBox::No)
-            {
-                return false;
-            }
-
-            outOfBoundChecked = true; // no need to ask more
+            return false;
         }
+
+        outOfBoundChecked = true; // no need to ask more
     }
     return true;
 }
@@ -3033,29 +3012,27 @@ auto VPMainWindow::CheckPiecesOutOfBound(const VPPiecePtr &piece, bool &outOfBou
 //---------------------------------------------------------------------------------------------------------------------
 auto VPMainWindow::CheckSuperpositionOfPieces(const VPPiecePtr &piece, bool &pieceSuperpositionChecked) -> bool
 {
-    if (m_layout->LayoutSettings().GetWarningSuperpositionOfPieces())
+    if (m_layout->LayoutSettings().GetWarningSuperpositionOfPieces() && not pieceSuperpositionChecked &&
+        not piece.isNull() && piece->HasSuperpositionWithPieces())
     {
-        if (not pieceSuperpositionChecked && not piece.isNull() && piece->HasSuperpositionWithPieces())
+        QMessageBox msgBox(this);
+        msgBox.setIcon(QMessageBox::Question);
+        msgBox.setWindowTitle(tr("The layout is invalid."));
+        msgBox.setText(tr("The layout is invalid. Pieces superposition. Do you want to continue "
+                          "export?"));
+        msgBox.setStandardButtons(QMessageBox::Yes | QMessageBox::No);
+        msgBox.setDefaultButton(QMessageBox::No);
+        const int width = 500;
+        auto *horizontalSpacer = new QSpacerItem(width, 0, QSizePolicy::Minimum, QSizePolicy::Expanding);
+        auto *layout = qobject_cast<QGridLayout *>(msgBox.layout());
+        SCASSERT(layout != nullptr)
+        layout->addItem(horizontalSpacer, layout->rowCount(), 0, 1, layout->columnCount());
+        if (msgBox.exec() == QMessageBox::No)
         {
-            QMessageBox msgBox(this);
-            msgBox.setIcon(QMessageBox::Question);
-            msgBox.setWindowTitle(tr("The layout is invalid."));
-            msgBox.setText(tr("The layout is invalid. Pieces superposition. Do you want to continue "
-                              "export?"));
-            msgBox.setStandardButtons(QMessageBox::Yes | QMessageBox::No);
-            msgBox.setDefaultButton(QMessageBox::No);
-            const int width = 500;
-            auto *horizontalSpacer = new QSpacerItem(width, 0, QSizePolicy::Minimum, QSizePolicy::Expanding);
-            auto *layout = qobject_cast<QGridLayout *>(msgBox.layout());
-            SCASSERT(layout != nullptr)
-            layout->addItem(horizontalSpacer, layout->rowCount(), 0, 1, layout->columnCount());
-            if (msgBox.exec() == QMessageBox::No)
-            {
-                return false;
-            }
-
-            pieceSuperpositionChecked = true; // no need to ask more
+            return false;
         }
+
+        pieceSuperpositionChecked = true; // no need to ask more
     }
 
     return true;
@@ -3064,29 +3041,27 @@ auto VPMainWindow::CheckSuperpositionOfPieces(const VPPiecePtr &piece, bool &pie
 //---------------------------------------------------------------------------------------------------------------------
 auto VPMainWindow::CheckPieceGapePosition(const VPPiecePtr &piece, bool &pieceGapePositionChecked) -> bool
 {
-    if (m_layout->LayoutSettings().GetWarningPieceGapePosition())
+    if (m_layout->LayoutSettings().GetWarningPieceGapePosition() && not pieceGapePositionChecked &&
+        not piece.isNull() && piece->HasInvalidPieceGapPosition())
     {
-        if (not pieceGapePositionChecked && not piece.isNull() && piece->HasInvalidPieceGapPosition())
+        QMessageBox msgBox(this);
+        msgBox.setIcon(QMessageBox::Question);
+        msgBox.setWindowTitle(tr("The layout is invalid."));
+        msgBox.setText(tr("The layout is invalid. One or several pieces are closer than minimally allowed. Do you "
+                          "want to continue export?"));
+        msgBox.setStandardButtons(QMessageBox::Yes | QMessageBox::No);
+        msgBox.setDefaultButton(QMessageBox::No);
+        const int width = 500;
+        auto *horizontalSpacer = new QSpacerItem(width, 0, QSizePolicy::Minimum, QSizePolicy::Expanding);
+        auto *layout = qobject_cast<QGridLayout *>(msgBox.layout());
+        SCASSERT(layout != nullptr)
+        layout->addItem(horizontalSpacer, layout->rowCount(), 0, 1, layout->columnCount());
+        if (msgBox.exec() == QMessageBox::No)
         {
-            QMessageBox msgBox(this);
-            msgBox.setIcon(QMessageBox::Question);
-            msgBox.setWindowTitle(tr("The layout is invalid."));
-            msgBox.setText(tr("The layout is invalid. One or several pieces are closer than minimally allowed. Do you "
-                              "want to continue export?"));
-            msgBox.setStandardButtons(QMessageBox::Yes | QMessageBox::No);
-            msgBox.setDefaultButton(QMessageBox::No);
-            const int width = 500;
-            auto *horizontalSpacer = new QSpacerItem(width, 0, QSizePolicy::Minimum, QSizePolicy::Expanding);
-            auto *layout = qobject_cast<QGridLayout *>(msgBox.layout());
-            SCASSERT(layout != nullptr)
-            layout->addItem(horizontalSpacer, layout->rowCount(), 0, 1, layout->columnCount());
-            if (msgBox.exec() == QMessageBox::No)
-            {
-                return false;
-            }
-
-            pieceGapePositionChecked = true; // no need to ask more
+            return false;
         }
+
+        pieceGapePositionChecked = true; // no need to ask more
     }
 
     return true;
@@ -3166,8 +3141,8 @@ auto VPMainWindow::PrintLayoutSheetPage(QPrinter *printer, QPainter &painter, co
 
     if (not sheet->IgnoreMargins())
     {
-        QMarginsF const margins = sheet->GetSheetMargins();
-        if (not printer->setPageMargins(UnitConvertor(margins, Unit::Px, Unit::Mm), QPageLayout::Millimeter))
+        if (QMarginsF const margins = sheet->GetSheetMargins();
+            not printer->setPageMargins(UnitConvertor(margins, Unit::Px, Unit::Mm), QPageLayout::Millimeter))
         {
             qWarning() << QObject::tr("Cannot set printer margins");
         }

@@ -446,13 +446,10 @@ auto VPattern::SPointActiveDraw() -> quint32
         if (not domNode.isNull() && domNode.isElement())
         {
             const QDomElement domElement = domNode.toElement();
-            if (not domElement.isNull())
+            if (not domElement.isNull() && domElement.tagName() == TagPoint &&
+                domElement.attribute(AttrType, QString()) == VToolBasePoint::ToolType)
             {
-                if (domElement.tagName() == TagPoint &&
-                    domElement.attribute(AttrType, QString()) == VToolBasePoint::ToolType)
-                {
-                    return GetParametrId(domElement);
-                }
+                return GetParametrId(domElement);
             }
         }
     }
@@ -1332,12 +1329,9 @@ void VPattern::ParseDetails(const QDomElement &domElement, const Document &parse
         if (domNode.isElement())
         {
             QDomElement domElement = domNode.toElement();
-            if (domElement.isNull() == false)
+            if (domElement.isNull() == false && domElement.tagName() == TagDetail)
             {
-                if (domElement.tagName() == TagDetail)
-                {
-                    ParseDetailElement(domElement, parse);
-                }
+                ParseDetailElement(domElement, parse);
             }
         }
         domNode = domNode.nextSibling();
@@ -2903,25 +2897,22 @@ void VPattern::ParseOldToolSplinePath(VMainGraphicsScene *scene, QDomElement &do
         for (qint32 i = 0; i < num; ++i)
         {
             const QDomElement element = nodeList.at(i).toElement();
-            if (element.isNull() == false)
+            if (element.isNull() == false && element.tagName() == AttrPathPoint)
             {
-                if (element.tagName() == AttrPathPoint)
+                const qreal kAsm1 = GetParametrDouble(element, AttrKAsm1, QStringLiteral("1.0"));
+                const qreal angle = GetParametrDouble(element, AttrAngle, QChar('0'));
+                const qreal kAsm2 = GetParametrDouble(element, AttrKAsm2, QStringLiteral("1.0"));
+                const quint32 pSpline = GetParametrUInt(element, AttrPSpline, NULL_ID_STR);
+                const VPointF p = *data->GeometricObject<VPointF>(pSpline);
+
+                QLineF line(0, 0, 100, 0);
+                line.setAngle(angle + 180);
+
+                VFSplinePoint const splPoint(p, kAsm1, line.angle(), kAsm2, angle);
+                points.append(splPoint);
+                if (parse == Document::FullParse)
                 {
-                    const qreal kAsm1 = GetParametrDouble(element, AttrKAsm1, QStringLiteral("1.0"));
-                    const qreal angle = GetParametrDouble(element, AttrAngle, QChar('0'));
-                    const qreal kAsm2 = GetParametrDouble(element, AttrKAsm2, QStringLiteral("1.0"));
-                    const quint32 pSpline = GetParametrUInt(element, AttrPSpline, NULL_ID_STR);
-                    const VPointF p = *data->GeometricObject<VPointF>(pSpline);
-
-                    QLineF line(0, 0, 100, 0);
-                    line.setAngle(angle + 180);
-
-                    VFSplinePoint const splPoint(p, kAsm1, line.angle(), kAsm2, angle);
-                    points.append(splPoint);
-                    if (parse == Document::FullParse)
-                    {
-                        IncrementReferens(p.getIdTool());
-                    }
+                    IncrementReferens(p.getIdTool());
                 }
             }
         }
@@ -3069,17 +3060,14 @@ void VPattern::ParseToolCubicBezierPath(VMainGraphicsScene *scene, const QDomEle
         for (qint32 i = 0; i < num; ++i)
         {
             const QDomElement element = nodeList.at(i).toElement();
-            if (element.isNull() == false)
+            if (element.isNull() == false && element.tagName() == AttrPathPoint)
             {
-                if (element.tagName() == AttrPathPoint)
+                const quint32 pSpline = GetParametrUInt(element, AttrPSpline, NULL_ID_STR);
+                const VPointF p = *data->GeometricObject<VPointF>(pSpline);
+                points.append(p);
+                if (parse == Document::FullParse)
                 {
-                    const quint32 pSpline = GetParametrUInt(element, AttrPSpline, NULL_ID_STR);
-                    const VPointF p = *data->GeometricObject<VPointF>(pSpline);
-                    points.append(p);
-                    if (parse == Document::FullParse)
-                    {
-                        IncrementReferens(p.getIdTool());
-                    }
+                    IncrementReferens(p.getIdTool());
                 }
             }
         }
@@ -4187,31 +4175,28 @@ void VPattern::ParseIncrementsElement(const QDomNode &node, const Document &pars
     {
         if (domNode.isElement())
         {
-            const QDomElement domElement = domNode.toElement();
-            if (not domElement.isNull())
+            if (const QDomElement domElement = domNode.toElement();
+                not domElement.isNull() && domElement.tagName() == TagIncrement)
             {
-                if (domElement.tagName() == TagIncrement)
-                {
-                    const QString name = GetParametrString(domElement, AttrName, QString()).simplified();
-                    const QString desc = GetParametrEmptyString(domElement, AttrDescription);
-                    const IncrementType type =
-                        StringToIncrementType(GetParametrString(domElement, AttrType, strTypeIncrement));
-                    const QString formula = (type == IncrementType::Separator)
-                                                ? QChar('0')
-                                                : GetParametrString(domElement, AttrFormula, QChar('0'));
-                    const bool specialUnits = GetParametrBool(domElement, AttrSpecialUnits, falseStr);
+                const QString name = GetParametrString(domElement, AttrName, QString()).simplified();
+                const QString desc = GetParametrEmptyString(domElement, AttrDescription);
+                const IncrementType type =
+                    StringToIncrementType(GetParametrString(domElement, AttrType, strTypeIncrement));
+                const QString formula = (type == IncrementType::Separator)
+                                            ? QChar('0')
+                                            : GetParametrString(domElement, AttrFormula, QChar('0'));
+                const bool specialUnits = GetParametrBool(domElement, AttrSpecialUnits, falseStr);
 
-                    bool ok = false;
-                    const qreal value = EvalFormula(data, formula, &ok);
+                bool ok = false;
+                const qreal value = EvalFormula(data, formula, &ok);
 
-                    auto *increment = new VIncrement(data, name, type);
-                    increment->SetIndex(static_cast<quint32>(index++));
-                    increment->SetFormula(value, formula, ok);
-                    increment->SetDescription(desc);
-                    increment->SetSpecialUnits(specialUnits);
-                    increment->SetPreviewCalculation(node.toElement().tagName() == TagPreviewCalculations);
-                    data->AddUniqueVariable(increment);
-                }
+                auto *increment = new VIncrement(data, name, type);
+                increment->SetIndex(static_cast<quint32>(index++));
+                increment->SetFormula(value, formula, ok);
+                increment->SetDescription(desc);
+                increment->SetSpecialUnits(specialUnits);
+                increment->SetPreviewCalculation(node.toElement().tagName() == TagPreviewCalculations);
+                data->AddUniqueVariable(increment);
             }
         }
         domNode = domNode.nextSibling();
@@ -4514,13 +4499,10 @@ void VPattern::SetLabelPrefix(const QString &prefix)
 {
     QDomElement pattern = documentElement();
 
-    if (not pattern.isNull())
+    if (not pattern.isNull() && ConvertToSet<QString>(VApplication::LabelLanguages()).contains(prefix))
     {
-        if (ConvertToSet<QString>(VApplication::LabelLanguages()).contains(prefix))
-        {
-            SetAttribute(pattern, AttrLabelPrefix, prefix);
-            modified = true;
-        }
+        SetAttribute(pattern, AttrLabelPrefix, prefix);
+        modified = true;
     }
 }
 

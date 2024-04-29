@@ -162,14 +162,11 @@ void TST_AbstractRegExp::CallTestCheckNoOriginalNamesInTranslation()
     static const auto names = ConvertToSet<QString>(originalNames);
 
     const QString translated = m_trMs->VarToUser(originalName);
-    if (names.contains(translated))
+    if (names.contains(translated) && originalName != translated)
     {
-        if (originalName != translated)
-        {
-            const QString message = u"Translation repeat original name from other place. "
-                                    "Original name:'%1', translated name:'%2'"_s.arg(originalName, translated);
-            QFAIL(qUtf8Printable(message));
-        }
+        const QString message = u"Translation repeat original name from other place. "
+                                "Original name:'%1', translated name:'%2'"_s.arg(originalName, translated);
+        QFAIL(qUtf8Printable(message));
     }
 }
 

@@ -122,57 +122,51 @@ void DialogCubicBezier::SetSpline(const VCubicBezier &spline)
 //---------------------------------------------------------------------------------------------------------------------
 void DialogCubicBezier::ChosenObject(quint32 id, const SceneObject &type)
 {
-    if (prepare == false) // After first choose we ignore all objects
+    if (prepare == false && type == SceneObject::Point) // After first choose we ignore all objects
     {
-        if (type == SceneObject::Point)
+        auto *path = qobject_cast<VisToolCubicBezier *>(vis);
+        SCASSERT(path != nullptr)
+
+        switch (number)
         {
-            auto *path = qobject_cast<VisToolCubicBezier *>(vis);
-            SCASSERT(path != nullptr)
+            case 0:
+                if (SetObject(id, ui->comboBoxP1, tr("Select the second point of curve")))
+                {
+                    ++number;
+                    path->VisualMode(id);
+                }
+                break;
+            case 1:
+                if (SetObject(id, ui->comboBoxP2, tr("Select the third point of curve")))
+                {
+                    ++number;
 
-            switch (number)
-            {
-                case 0:
-                    if (SetObject(id, ui->comboBoxP1, tr("Select the second point of curve")))
-                    {
-                        ++number;
-                        path->VisualMode(id);
-                    }
-                    break;
-                case 1:
-                    if (SetObject(id, ui->comboBoxP2, tr("Select the third point of curve")))
-                    {
-                        ++number;
+                    path->SetPoint2Id(id);
+                    path->RefreshGeometry();
+                }
+                break;
+            case 2:
+                if (SetObject(id, ui->comboBoxP3, tr("Select the fourth point of curve")))
+                {
+                    ++number;
 
-                        path->SetPoint2Id(id);
-                        path->RefreshGeometry();
-                    }
-                    break;
-                case 2:
-                    if (SetObject(id, ui->comboBoxP3, tr("Select the fourth point of curve")))
-                    {
-                        ++number;
+                    path->SetPoint3Id(id);
+                    path->RefreshGeometry();
+                }
+                break;
+            case 3:
+                if (getCurrentObjectId(ui->comboBoxP1) != id && SetObject(id, ui->comboBoxP4, QString()))
+                {
+                    ++number;
 
-                        path->SetPoint3Id(id);
-                        path->RefreshGeometry();
-                    }
-                    break;
-                case 3:
-                    if (getCurrentObjectId(ui->comboBoxP1) != id)
-                    {
-                        if (SetObject(id, ui->comboBoxP4, QString()))
-                        {
-                            ++number;
-
-                            path->SetPoint4Id(id);
-                            path->RefreshGeometry();
-                            prepare = true;
-                            DialogAccepted();
-                        }
-                    }
-                    break;
-                default:
-                    break;
-            }
+                    path->SetPoint4Id(id);
+                    path->RefreshGeometry();
+                    prepare = true;
+                    DialogAccepted();
+                }
+                break;
+            default:
+                break;
         }
     }
 }

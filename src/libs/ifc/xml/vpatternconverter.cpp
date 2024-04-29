@@ -643,31 +643,28 @@ auto VPatternConverter::FixIncrementsToV0_2_0() -> QSet<QString>
     {
         if (domNode.isElement())
         {
-            QDomElement domElement = domNode.toElement();
-            if (not domElement.isNull())
+            if (QDomElement domElement = domNode.toElement();
+                not domElement.isNull() && domElement.tagName() == *strIncrement)
             {
-                if (domElement.tagName() == *strIncrement)
+                try
                 {
-                    try
-                    {
-                        const QString name = GetParametrString(domElement, *strName);
-                        names.insert(name);
-                        domElement.setAttribute(*strName, '#'_L1 + name);
+                    const QString name = GetParametrString(domElement, *strName);
+                    names.insert(name);
+                    domElement.setAttribute(*strName, '#'_L1 + name);
 
-                        const QString base = GetParametrString(domElement, *strBase);
-                        domElement.setAttribute(*strFormula, base);
-                    }
-                    catch (VExceptionEmptyParameter &e)
-                    {
-                        VException excep("Can't get increment.");
-                        excep.AddMoreInformation(e.ErrorMessage());
-                        throw excep;
-                    }
-                    domElement.removeAttribute(*strId);
-                    domElement.removeAttribute(*strKGrowth);
-                    domElement.removeAttribute(*strKSize);
-                    domElement.removeAttribute(*strBase);
+                    const QString base = GetParametrString(domElement, *strBase);
+                    domElement.setAttribute(*strFormula, base);
                 }
+                catch (VExceptionEmptyParameter &e)
+                {
+                    VException excep("Can't get increment.");
+                    excep.AddMoreInformation(e.ErrorMessage());
+                    throw excep;
+                }
+                domElement.removeAttribute(*strId);
+                domElement.removeAttribute(*strKGrowth);
+                domElement.removeAttribute(*strKSize);
+                domElement.removeAttribute(*strBase);
             }
         }
         domNode = domNode.nextSibling();
@@ -1627,13 +1624,10 @@ void VPatternConverter::TagRemoveAttributeTypeObjectInV0_4_0()
             QDomNode domNode = modeling.firstChild();
             while (not domNode.isNull())
             {
-                QDomElement domElement = domNode.toElement();
-                if (not domElement.isNull())
+                if (QDomElement domElement = domNode.toElement();
+                    not domElement.isNull() && domElement.hasAttribute(*strTypeObject))
                 {
-                    if (domElement.hasAttribute(*strTypeObject))
-                    {
-                        domElement.removeAttribute(*strTypeObject);
-                    }
+                    domElement.removeAttribute(*strTypeObject);
                 }
                 domNode = domNode.nextSibling();
             }

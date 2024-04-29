@@ -204,13 +204,10 @@ auto dxfRW::writeEntity(DRW_Entity *ent) -> bool
     if (version < DRW::AC1012)
     {
         int varInt = 0;
-        if (header.getInt("$HANDLING", &varInt))
+        if (header.getInt("$HANDLING", &varInt) && varInt != 0)
         {
-            if (varInt != 0)
-            {
-                ent->handle = static_cast<duint32>(++entCount);
-                writer->writeString(5, toHexStr(static_cast<int>(ent->handle)));
-            }
+            ent->handle = static_cast<duint32>(++entCount);
+            writer->writeString(5, toHexStr(static_cast<int>(ent->handle)));
         }
     }
     else
@@ -410,16 +407,13 @@ auto dxfRW::writeTextstyle(DRW_Textstyle *ent) -> bool
     // stringstream cause crash in OS/X, bug#3597944
     std::string name = ent->name;
     transform(name.begin(), name.end(), name.begin(), toupper);
-    if (!dimstyleStd)
+    if (!dimstyleStd && name == "STANDARD")
     {
+        // stringstream cause crash in OS/X, bug#3597944
+        std::string name = ent->name;
+        transform(name.begin(), name.end(), name.begin(), toupper);
         if (name == "STANDARD")
-        {
-            // stringstream cause crash in OS/X, bug#3597944
-            std::string name = ent->name;
-            transform(name.begin(), name.end(), name.begin(), toupper);
-            if (name == "STANDARD")
-                dimstyleStd = true;
-        }
+            dimstyleStd = true;
     }
     if (version > DRW::AC1009)
     {
@@ -679,15 +673,12 @@ auto dxfRW::writeDimstyle(DRW_Dimstyle *ent) -> bool
             writer->writeUtf8String(340, toHexStr(txstyHandle));
         }
     }
-    if (version > DRW::AC1014)
+    if (version > DRW::AC1014 && blockMap.count(ent->dimldrblk) > 0)
     {
-        if (blockMap.count(ent->dimldrblk) > 0)
-        {
-            int const blkHandle = (*(blockMap.find(ent->dimldrblk))).second;
-            writer->writeUtf8String(341, toHexStr(blkHandle));
-            writer->writeInt16(371, ent->dimlwd);
-            writer->writeInt16(372, ent->dimlwe);
-        }
+        int const blkHandle = (*(blockMap.find(ent->dimldrblk))).second;
+        writer->writeUtf8String(341, toHexStr(blkHandle));
+        writer->writeInt16(371, ent->dimlwd);
+        writer->writeInt16(372, ent->dimlwe);
     }
     return true;
 }
@@ -2639,12 +2630,9 @@ auto dxfRW::processLType() -> bool
                 return true; // found ENDTAB terminate
             }
         }
-        else if (reading)
+        else if (reading && !ltype.parseCode(code, reader))
         {
-            if (!ltype.parseCode(code, reader))
-            {
-                return setError(DRW::BAD_CODE_PARSED);
-            }
+            return setError(DRW::BAD_CODE_PARSED);
         }
     }
 
@@ -2679,12 +2667,9 @@ auto dxfRW::processLayer() -> bool
                 return true; // found ENDTAB terminate
             }
         }
-        else if (reading)
+        else if (reading && !layer.parseCode(code, reader))
         {
-            if (!layer.parseCode(code, reader))
-            {
-                return setError(DRW::BAD_CODE_PARSED);
-            }
+            return setError(DRW::BAD_CODE_PARSED);
         }
     }
 
@@ -2719,12 +2704,9 @@ auto dxfRW::processDimStyle() -> bool
                 return true; // found ENDTAB terminate
             }
         }
-        else if (reading)
+        else if (reading && !dimSty.parseCode(code, reader))
         {
-            if (!dimSty.parseCode(code, reader))
-            {
-                return setError(DRW::BAD_CODE_PARSED);
-            }
+            return setError(DRW::BAD_CODE_PARSED);
         }
     }
 
@@ -2759,12 +2741,9 @@ auto dxfRW::processTextStyle() -> bool
                 return true; // found ENDTAB terminate
             }
         }
-        else if (reading)
+        else if (reading && !TxtSty.parseCode(code, reader))
         {
-            if (!TxtSty.parseCode(code, reader))
-            {
-                return setError(DRW::BAD_CODE_PARSED);
-            }
+            return setError(DRW::BAD_CODE_PARSED);
         }
     }
 
@@ -2799,12 +2778,9 @@ auto dxfRW::processVports() -> bool
                 return true; // found ENDTAB terminate
             }
         }
-        else if (reading)
+        else if (reading && !vp.parseCode(code, reader))
         {
-            if (!vp.parseCode(code, reader))
-            {
-                return setError(DRW::BAD_CODE_PARSED);
-            }
+            return setError(DRW::BAD_CODE_PARSED);
         }
     }
 
@@ -2839,12 +2815,9 @@ auto dxfRW::processAppId() -> bool
                 return true; // found ENDTAB terminate
             }
         }
-        else if (reading)
+        else if (reading && !vp.parseCode(code, reader))
         {
-            if (!vp.parseCode(code, reader))
-            {
-                return setError(DRW::BAD_CODE_PARSED);
-            }
+            return setError(DRW::BAD_CODE_PARSED);
         }
     }
 

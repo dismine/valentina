@@ -405,13 +405,10 @@ void DialogSetupMultisize::CheckDimension(QGroupBox *group, QGroupBox *nameGroup
             return;
         }
 
-        if (nameGroup->isChecked() && lineEdit->text().isEmpty())
+        if (nameGroup->isChecked() && lineEdit->text().isEmpty() && ui->labelError->text().isEmpty())
         {
-            if (ui->labelError->text().isEmpty())
-            {
-                ui->labelError->setText(tr("Please, provide custom name for dimension %1").arg(dimension->Axis()));
-                return;
-            }
+            ui->labelError->setText(tr("Please, provide custom name for dimension %1").arg(dimension->Axis()));
+            return;
         }
     }
 }

@@ -925,14 +925,11 @@ void ColorPickerPopup::showEvent(QShowEvent *)
         for (int j = 0; j < grid->rowCount(); ++j)
         {
             QWidget *w = widgetAt[j][i];
-            if (w && w->inherits("ColorPickerItem"))
+            if (w && w->inherits("ColorPickerItem") && static_cast<ColorPickerItem *>(w)->isSelected())
             {
-                if (static_cast<ColorPickerItem *>(w)->isSelected())
-                {
-                    w->setFocus();
-                    foundSelected = true;
-                    break;
-                }
+                w->setFocus();
+                foundSelected = true;
+                break;
             }
         }
     }

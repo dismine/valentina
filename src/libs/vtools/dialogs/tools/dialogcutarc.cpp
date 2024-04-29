@@ -172,38 +172,35 @@ void DialogCutArc::ChosenObject(quint32 id, const SceneObject &type)
         return;
     }
 
-    if (type == SceneObject::Arc)
+    if (type == SceneObject::Arc && SetObject(id, ui->comboBoxArc, QString()))
     {
-        if (SetObject(id, ui->comboBoxArc, QString()))
+        if (vis != nullptr)
         {
-            if (vis != nullptr)
-            {
-                vis->VisualMode(id);
-            }
-            prepare = true;
+            vis->VisualMode(id);
+        }
+        prepare = true;
 
-            auto *window = qobject_cast<VAbstractMainWindow *>(VAbstractValApplication::VApp()->getMainWindow());
-            SCASSERT(window != nullptr)
-            connect(vis.data(), &Visualization::ToolTip, window, &VAbstractMainWindow::ShowToolTip);
+        auto *window = qobject_cast<VAbstractMainWindow *>(VAbstractValApplication::VApp()->getMainWindow());
+        SCASSERT(window != nullptr)
+        connect(vis.data(), &Visualization::ToolTip, window, &VAbstractMainWindow::ShowToolTip);
 
-            if (m_buildStartPoint)
-            {
-                SetFormula("0"_L1);
-                FinishCreating();
-                return;
-            }
+        if (m_buildStartPoint)
+        {
+            SetFormula("0"_L1);
+            FinishCreating();
+            return;
+        }
 
-            if (m_buildEndPoint)
-            {
-                SetFormula(currentLength);
-                FinishCreating();
-                return;
-            }
+        if (m_buildEndPoint)
+        {
+            SetFormula(currentLength);
+            FinishCreating();
+            return;
+        }
 
-            if (not VAbstractValApplication::VApp()->Settings()->IsInteractiveTools())
-            {
-                FinishCreating();
-            }
+        if (not VAbstractValApplication::VApp()->Settings()->IsInteractiveTools())
+        {
+            FinishCreating();
         }
     }
 }

@@ -677,10 +677,9 @@ void DRW_Header::write(const std::unique_ptr<dxfWriter> &writer, DRW::Version ve
         else
             writer->writeString(1, "STANDARD");
         // verify if exist "$DIMLUNIT" or obsolete "$DIMUNIT" (pre v2000)
-        if (!getInt("$DIMLUNIT", &varInt))
+        if (!getInt("$DIMLUNIT", &varInt) && !getInt("$DIMUNIT", &varInt))
         {
-            if (!getInt("$DIMUNIT", &varInt))
-                varInt = 2;
+            varInt = 2;
         }
         // verify valid values from 1 to 6
         if (varInt < 1 || varInt > 6)

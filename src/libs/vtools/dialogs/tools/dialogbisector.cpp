@@ -213,14 +213,12 @@ void DialogBisector::ChosenObject(quint32 id, const SceneObject &type)
                 }
                 break;
             case 1:
-                if (getCurrentObjectId(ui->comboBoxFirstPoint) != id)
+                if (getCurrentObjectId(ui->comboBoxFirstPoint) != id &&
+                    SetObject(id, ui->comboBoxSecondPoint, tr("Select third point of angle")))
                 {
-                    if (SetObject(id, ui->comboBoxSecondPoint, tr("Select third point of angle")))
-                    {
-                        m_number++;
-                        line->SetPoint2Id(id);
-                        line->RefreshGeometry();
-                    }
+                    m_number++;
+                    line->SetPoint2Id(id);
+                    line->RefreshGeometry();
                 }
                 break;
             case 2:
@@ -439,25 +437,22 @@ void DialogBisector::ChosenThirdPoint(quint32 id)
     set.insert(getCurrentObjectId(ui->comboBoxSecondPoint));
     set.insert(id);
 
-    if (set.size() == 3)
+    if (set.size() == 3 && SetObject(id, ui->comboBoxThirdPoint, QString()))
     {
-        if (SetObject(id, ui->comboBoxThirdPoint, QString()))
+        auto *window = qobject_cast<VAbstractMainWindow *>(VAbstractValApplication::VApp()->getMainWindow());
+        SCASSERT(window != nullptr)
+
+        auto *line = qobject_cast<VisToolBisector *>(vis);
+        SCASSERT(line != nullptr)
+        connect(line, &Visualization::ToolTip, window, &VAbstractMainWindow::ShowToolTip);
+
+        line->SetPoint3Id(id);
+        line->RefreshGeometry();
+        prepare = true;
+
+        if (not VAbstractValApplication::VApp()->Settings()->IsInteractiveTools())
         {
-            auto *window = qobject_cast<VAbstractMainWindow *>(VAbstractValApplication::VApp()->getMainWindow());
-            SCASSERT(window != nullptr)
-
-            auto *line = qobject_cast<VisToolBisector *>(vis);
-            SCASSERT(line != nullptr)
-            connect(line, &Visualization::ToolTip, window, &VAbstractMainWindow::ShowToolTip);
-
-            line->SetPoint3Id(id);
-            line->RefreshGeometry();
-            prepare = true;
-
-            if (not VAbstractValApplication::VApp()->Settings()->IsInteractiveTools())
-            {
-                FinishCreating();
-            }
+            FinishCreating();
         }
     }
 }

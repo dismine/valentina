@@ -139,13 +139,10 @@ auto VCommandLine::DefaultGenerator() const -> VLayoutGeneratorPtr
         }
     }
 
-    if (IsOptionSet(LONG_OPTION_SHIFTUNITS))
+    if (IsOptionSet(LONG_OPTION_SHIFTUNITS) && !diag.SelectLayoutUnit(OptionValue(LONG_OPTION_SHIFTUNITS)))
     {
-        if (!diag.SelectLayoutUnit(OptionValue(LONG_OPTION_SHIFTUNITS)))
-        {
-            qCritical() << translate("VCommandLine", "Unsupported layout units.") << "\n";
-            const_cast<VCommandLine *>(this)->parser.showHelp(V_EX_USAGE);
-        }
+        qCritical() << translate("VCommandLine", "Unsupported layout units.") << "\n";
+        const_cast<VCommandLine *>(this)->parser.showHelp(V_EX_USAGE);
     }
 
     if (IsOptionSet(LONG_OPTION_GAPWIDTH))

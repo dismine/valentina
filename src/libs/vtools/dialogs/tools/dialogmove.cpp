@@ -402,20 +402,16 @@ void DialogMove::ShowDialog(bool click)
 //---------------------------------------------------------------------------------------------------------------------
 void DialogMove::ChosenObject(quint32 id, const SceneObject &type)
 {
-    if (not stage1 && stage2 && prepare) // After first choose we ignore all objects
+    if (not stage1 && stage2 && prepare && type == SceneObject::Point &&
+        QGuiApplication::keyboardModifiers() == Qt::ControlModifier &&
+        SetObject(id, ui->comboBoxRotationOriginPoint, QString())) // After first choose we ignore all objects
     {
-        if (type == SceneObject::Point && QGuiApplication::keyboardModifiers() == Qt::ControlModifier)
-        {
-            if (SetObject(id, ui->comboBoxRotationOriginPoint, QString()))
-            {
-                auto *operation = qobject_cast<VisToolMove *>(vis);
-                SCASSERT(operation != nullptr)
+        auto *operation = qobject_cast<VisToolMove *>(vis);
+        SCASSERT(operation != nullptr)
 
-                operation->SetRotationOriginPointId(id);
-                operation->RefreshGeometry();
-                optionalRotationOrigin = true;
-            }
-        }
+        operation->SetRotationOriginPointId(id);
+        operation->RefreshGeometry();
+        optionalRotationOrigin = true;
     }
 }
 

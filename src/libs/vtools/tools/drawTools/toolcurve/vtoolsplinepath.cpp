@@ -594,18 +594,16 @@ void VToolSplinePath::SaveOptions(QDomElement &tag, QSharedPointer<VGObject> &ob
 //---------------------------------------------------------------------------------------------------------------------
 void VToolSplinePath::mousePressEvent(QGraphicsSceneMouseEvent *event)
 {
-    if (flags() & QGraphicsItem::ItemIsMovable)
+    if (flags() & QGraphicsItem::ItemIsMovable && event->button() == Qt::LeftButton &&
+        event->type() != QEvent::GraphicsSceneMouseDoubleClick)
     {
-        if (event->button() == Qt::LeftButton && event->type() != QEvent::GraphicsSceneMouseDoubleClick)
+        oldPosition = event->scenePos();
+        const auto splPath = VAbstractTool::data.GeometricObject<VSplinePath>(m_id);
+        splIndex = splPath->Segment(oldPosition);
+        if (IsMovable(splIndex))
         {
-            oldPosition = event->scenePos();
-            const auto splPath = VAbstractTool::data.GeometricObject<VSplinePath>(m_id);
-            splIndex = splPath->Segment(oldPosition);
-            if (IsMovable(splIndex))
-            {
-                SetItemOverrideCursor(this, cursorArrowCloseHand, 1, 1);
-                event->accept();
-            }
+            SetItemOverrideCursor(this, cursorArrowCloseHand, 1, 1);
+            event->accept();
         }
     }
     VAbstractSpline::mousePressEvent(event);
@@ -614,15 +612,13 @@ void VToolSplinePath::mousePressEvent(QGraphicsSceneMouseEvent *event)
 //---------------------------------------------------------------------------------------------------------------------
 void VToolSplinePath::mouseReleaseEvent(QGraphicsSceneMouseEvent *event)
 {
-    if (flags() & QGraphicsItem::ItemIsMovable)
+    if (flags() & QGraphicsItem::ItemIsMovable && event->button() == Qt::LeftButton &&
+        event->type() != QEvent::GraphicsSceneMouseDoubleClick)
     {
-        if (event->button() == Qt::LeftButton && event->type() != QEvent::GraphicsSceneMouseDoubleClick)
-        {
-            oldPosition = event->scenePos();
-            SetItemOverrideCursor(this, cursorArrowOpenHand, 1, 1);
+        oldPosition = event->scenePos();
+        SetItemOverrideCursor(this, cursorArrowOpenHand, 1, 1);
 
-            CurveReleased();
-        }
+        CurveReleased();
     }
     VAbstractSpline::mouseReleaseEvent(event);
 }

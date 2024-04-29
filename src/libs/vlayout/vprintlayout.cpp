@@ -192,12 +192,9 @@ void VPrintLayout::PdfTiledFile(const QString &name)
 {
     m_isTiled = true;
 
-    if (m_isLayoutStale)
+    if (m_isLayoutStale && ContinueIfLayoutStale(m_parentWidget) == QMessageBox::No)
     {
-        if (ContinueIfLayoutStale(m_parentWidget) == QMessageBox::No)
-        {
-            return;
-        }
+        return;
     }
     QPrinter printer;
     SetPrinterSettings(&printer, PrintType::PrintPDF, name);
@@ -224,12 +221,9 @@ void VPrintLayout::CleanLayout()
 //---------------------------------------------------------------------------------------------------------------------
 void VPrintLayout::PrintLayout()
 {
-    if (m_isLayoutStale)
+    if (m_isLayoutStale && ContinueIfLayoutStale(m_parentWidget) == QMessageBox::No)
     {
-        if (ContinueIfLayoutStale(m_parentWidget) == QMessageBox::No)
-        {
-            return;
-        }
+        return;
     }
     // display print dialog and if accepted print
     QPrinterInfo info = QPrinterInfo::printerInfo(m_layoutPrinterName);
@@ -269,12 +263,9 @@ void VPrintLayout::PrintLayout()
 //---------------------------------------------------------------------------------------------------------------------
 void VPrintLayout::PrintPreview()
 {
-    if (m_isLayoutStale)
+    if (m_isLayoutStale && ContinueIfLayoutStale(m_parentWidget) == QMessageBox::No)
     {
-        if (ContinueIfLayoutStale(m_parentWidget) == QMessageBox::No)
-        {
-            return;
-        }
+        return;
     }
 
     QPrinterInfo info = QPrinterInfo::printerInfo(m_layoutPrinterName);
@@ -390,13 +381,10 @@ void VPrintLayout::PrintPages(QPrinter *printer)
     {
         for (int j = 0; j < numPages; ++j)
         {
-            if (i != 0 || j != 0)
+            if ((i != 0 || j != 0) && not printer->newPage())
             {
-                if (not printer->newPage())
-                {
-                    qCritical() << tr("Failed in flushing page to disk, disk full?");
-                    return;
-                }
+                qCritical() << tr("Failed in flushing page to disk, disk full?");
+                return;
             }
             vsizetype index;
             if (printer->pageOrder() == QPrinter::FirstPageFirst)

@@ -145,41 +145,33 @@ void DialogPointFromArcAndTangent::SetCrossCirclesPoint(CrossCirclesPoint p)
 //---------------------------------------------------------------------------------------------------------------------
 void DialogPointFromArcAndTangent::ChosenObject(quint32 id, const SceneObject &type)
 {
-    if (prepare == false) // After first choose we ignore all objects
+    if (prepare == false &&
+        (type == SceneObject::Point || type == SceneObject::Arc)) // After first choose we ignore all objects
     {
-        if (type == SceneObject::Point || type == SceneObject::Arc)
-        {
-            auto *point = qobject_cast<VisToolPointFromArcAndTangent *>(vis);
-            SCASSERT(point != nullptr)
+        auto *point = qobject_cast<VisToolPointFromArcAndTangent *>(vis);
+        SCASSERT(point != nullptr)
 
-            switch (number)
-            {
-                case 0:
-                    if (type == SceneObject::Point)
-                    {
-                        if (SetObject(id, ui->comboBoxTangentPoint, tr("Select an arc")))
-                        {
-                            number++;
-                            point->VisualMode(id);
-                        }
-                    }
-                    break;
-                case 1:
-                    if (type == SceneObject::Arc)
-                    {
-                        if (SetObject(id, ui->comboBoxArc, QString()))
-                        {
-                            number = 0;
-                            point->SetArcId(id);
-                            point->RefreshGeometry();
-                            prepare = true;
-                            DialogAccepted();
-                        }
-                    }
-                    break;
-                default:
-                    break;
-            }
+        switch (number)
+        {
+            case 0:
+                if (type == SceneObject::Point && SetObject(id, ui->comboBoxTangentPoint, tr("Select an arc")))
+                {
+                    number++;
+                    point->VisualMode(id);
+                }
+                break;
+            case 1:
+                if (type == SceneObject::Arc && SetObject(id, ui->comboBoxArc, QString()))
+                {
+                    number = 0;
+                    point->SetArcId(id);
+                    point->RefreshGeometry();
+                    prepare = true;
+                    DialogAccepted();
+                }
+                break;
+            default:
+                break;
         }
     }
 }

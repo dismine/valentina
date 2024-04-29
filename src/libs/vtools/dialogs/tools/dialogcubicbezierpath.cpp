@@ -190,19 +190,17 @@ void DialogCubicBezierPath::ShowDialog(bool click)
     }
 
     const auto size = path.CountPoints();
-    if (size >= 7)
+    if (size >= 7 && size - VCubicBezierPath::SubSplPointsCount(path.CountSubSpl()) == 0)
     {
-        if (size - VCubicBezierPath::SubSplPointsCount(path.CountSubSpl()) == 0)
-        { // Accept only if all subpaths are completed
-            emit ToolTip(QString());
+        // Accept only if all subpaths are completed
+        emit ToolTip(QString());
 
-            if (not data->IsUnique(path.name()))
-            {
-                path.SetDuplicate(DNumber(path.name()));
-            }
-
-            DialogAccepted();
+        if (not data->IsUnique(path.name()))
+        {
+            path.SetDuplicate(DNumber(path.name()));
         }
+
+        DialogAccepted();
     }
 }
 

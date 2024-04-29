@@ -239,13 +239,10 @@ auto PointBezier_r(qreal x1, qreal y1, qreal x2, qreal y2, qreal x3, qreal y3, q
                     return points;
                 }
 
-                if (m_cusp_limit > 0.0 || m_cusp_limit < 0.0)
+                if ((m_cusp_limit > 0.0 || m_cusp_limit < 0.0) && da1 > m_cusp_limit)
                 {
-                    if (da1 > m_cusp_limit)
-                    {
-                        points.append(QPointF(x3, y3));
-                        return points;
-                    }
+                    points.append(QPointF(x3, y3));
+                    return points;
                 }
             }
             break;
@@ -278,13 +275,10 @@ auto PointBezier_r(qreal x1, qreal y1, qreal x2, qreal y2, qreal x3, qreal y3, q
                     return points;
                 }
 
-                if (m_cusp_limit > 0.0 || m_cusp_limit < 0.0)
+                if ((m_cusp_limit > 0.0 || m_cusp_limit < 0.0) && da1 > m_cusp_limit)
                 {
-                    if (da1 > m_cusp_limit)
-                    {
-                        points.append(QPointF(x2, y2));
-                        return points;
-                    }
+                    points.append(QPointF(x2, y2));
+                    return points;
                 }
             }
             break;

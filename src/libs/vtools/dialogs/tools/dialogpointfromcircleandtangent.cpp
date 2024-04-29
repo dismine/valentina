@@ -254,24 +254,22 @@ void DialogPointFromCircleAndTangent::ChosenObject(quint32 id, const SceneObject
                 }
                 break;
             case 1:
-                if (getCurrentObjectId(ui->comboBoxTangentPoint) != id)
+                if (getCurrentObjectId(ui->comboBoxTangentPoint) != id &&
+                    SetObject(id, ui->comboBoxCircleCenter, QString()))
                 {
-                    if (SetObject(id, ui->comboBoxCircleCenter, QString()))
+                    auto *window =
+                        qobject_cast<VAbstractMainWindow *>(VAbstractValApplication::VApp()->getMainWindow());
+                    SCASSERT(window != nullptr)
+                    connect(vis.data(), &Visualization::ToolTip, window, &VAbstractMainWindow::ShowToolTip);
+
+                    m_number = 0;
+                    point->SetCenterId(id);
+                    point->RefreshGeometry();
+                    prepare = true;
+
+                    if (not VAbstractValApplication::VApp()->Settings()->IsInteractiveTools())
                     {
-                        auto *window =
-                            qobject_cast<VAbstractMainWindow *>(VAbstractValApplication::VApp()->getMainWindow());
-                        SCASSERT(window != nullptr)
-                        connect(vis.data(), &Visualization::ToolTip, window, &VAbstractMainWindow::ShowToolTip);
-
-                        m_number = 0;
-                        point->SetCenterId(id);
-                        point->RefreshGeometry();
-                        prepare = true;
-
-                        if (not VAbstractValApplication::VApp()->Settings()->IsInteractiveTools())
-                        {
-                            FinishCreating();
-                        }
+                        FinishCreating();
                     }
                 }
                 break;

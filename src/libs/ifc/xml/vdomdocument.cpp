@@ -382,13 +382,9 @@ auto VDomDocument::find(QHash<quint32, QDomElement> &cache, const QDomElement &n
 
     for (qint32 i = 0; i < node.childNodes().length(); ++i)
     {
-        const QDomNode n = node.childNodes().at(i);
-        if (n.isElement())
+        if (const QDomNode n = node.childNodes().at(i); n.isElement() && VDomDocument::find(cache, n.toElement(), id))
         {
-            if (VDomDocument::find(cache, n.toElement(), id))
-            {
-                return true;
-            }
+            return true;
         }
     }
     return false;

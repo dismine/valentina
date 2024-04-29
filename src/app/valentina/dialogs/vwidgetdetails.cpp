@@ -192,14 +192,11 @@ void VWidgetDetails::ToggleSectionDetails(bool select)
     for (int i = 0; i < ui->tableWidget->rowCount(); ++i)
     {
         const quint32 id = ui->tableWidget->item(i, PieceColumn::InLayout)->data(Qt::UserRole).toUInt();
-        if (allDetails->contains(id))
+        if (allDetails->contains(id) && not(select == allDetails->value(id).IsInLayout()))
         {
-            if (not(select == allDetails->value(id).IsInLayout()))
-            {
-                auto *togglePrint = new TogglePieceInLayout(id, select, m_data, m_doc);
-                connect(togglePrint, &TogglePieceInLayout::Toggled, this, &VWidgetDetails::ToggledPiece);
-                VAbstractApplication::VApp()->getUndoStack()->push(togglePrint);
-            }
+            auto *togglePrint = new TogglePieceInLayout(id, select, m_data, m_doc);
+            connect(togglePrint, &TogglePieceInLayout::Toggled, this, &VWidgetDetails::ToggledPiece);
+            VAbstractApplication::VApp()->getUndoStack()->push(togglePrint);
         }
     }
 }

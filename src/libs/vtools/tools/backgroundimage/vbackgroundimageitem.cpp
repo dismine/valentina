@@ -312,12 +312,10 @@ void VBackgroundImageItem::mousePressEvent(QGraphicsSceneMouseEvent *event)
 
     if (not Image().Hold())
     {
-        if (flags() & QGraphicsItem::ItemIsMovable)
+        if (flags() & QGraphicsItem::ItemIsMovable && event->button() == Qt::LeftButton &&
+            event->type() != QEvent::GraphicsSceneMouseDoubleClick)
         {
-            if (event->button() == Qt::LeftButton && event->type() != QEvent::GraphicsSceneMouseDoubleClick)
-            {
-                SetItemOverrideCursor(this, cursorArrowCloseHand, 1, 1);
-            }
+            SetItemOverrideCursor(this, cursorArrowCloseHand, 1, 1);
         }
 
         if (event->button() == Qt::LeftButton && event->type() != QEvent::GraphicsSceneMouseDoubleClick)
@@ -589,12 +587,9 @@ void VBackgroundImageItem::MakeFresh() const
 //---------------------------------------------------------------------------------------------------------------------
 void VBackgroundImageItem::DeleteToolWithConfirm(bool ask)
 {
-    if (ask)
+    if (ask && ConfirmDeletion() == QMessageBox::No)
     {
-        if (ConfirmDeletion() == QMessageBox::No)
-        {
-            return;
-        }
+        return;
     }
 
     emit ActivateControls(QUuid());

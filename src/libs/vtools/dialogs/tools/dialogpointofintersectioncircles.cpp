@@ -330,20 +330,18 @@ void DialogPointOfIntersectionCircles::ChosenObject(quint32 id, const SceneObjec
                 }
                 break;
             case 2:
-                if (getCurrentObjectId(ui->comboBoxCircle1Center) != id)
+                if (getCurrentObjectId(ui->comboBoxCircle1Center) != id &&
+                    SetObject(id, ui->comboBoxCircle2Center, QString()))
                 {
-                    if (SetObject(id, ui->comboBoxCircle2Center, QString()))
-                    {
-                        point->SetCircle2Id(id);
-                        point->RefreshGeometry();
-                        ++m_stage;
-                        prepare = true;
+                    point->SetCircle2Id(id);
+                    point->RefreshGeometry();
+                    ++m_stage;
+                    prepare = true;
 
-                        if (not VAbstractValApplication::VApp()->Settings()->IsInteractiveTools())
-                        {
-                            FinishCreating();
-                            return;
-                        }
+                    if (not VAbstractValApplication::VApp()->Settings()->IsInteractiveTools())
+                    {
+                        FinishCreating();
+                        return;
                     }
                 }
                 break;

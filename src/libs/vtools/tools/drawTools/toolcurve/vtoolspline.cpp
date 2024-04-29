@@ -388,17 +388,12 @@ void VToolSpline::SaveOptions(QDomElement &tag, QSharedPointer<VGObject> &obj)
 //---------------------------------------------------------------------------------------------------------------------
 void VToolSpline::mousePressEvent(QGraphicsSceneMouseEvent *event)
 {
-    if (flags() & QGraphicsItem::ItemIsMovable)
+    if (flags() & QGraphicsItem::ItemIsMovable && event->button() == Qt::LeftButton &&
+        event->type() != QEvent::GraphicsSceneMouseDoubleClick && IsMovable())
     {
-        if (event->button() == Qt::LeftButton && event->type() != QEvent::GraphicsSceneMouseDoubleClick)
-        {
-            if (IsMovable())
-            {
-                SetItemOverrideCursor(this, cursorArrowCloseHand, 1, 1);
-                oldPosition = event->scenePos();
-                event->accept();
-            }
-        }
+        SetItemOverrideCursor(this, cursorArrowCloseHand, 1, 1);
+        oldPosition = event->scenePos();
+        event->accept();
     }
     VAbstractSpline::mousePressEvent(event);
 }
@@ -406,17 +401,12 @@ void VToolSpline::mousePressEvent(QGraphicsSceneMouseEvent *event)
 //---------------------------------------------------------------------------------------------------------------------
 void VToolSpline::mouseReleaseEvent(QGraphicsSceneMouseEvent *event)
 {
-    if (flags() & QGraphicsItem::ItemIsMovable)
+    if (flags() & QGraphicsItem::ItemIsMovable && event->button() == Qt::LeftButton &&
+        event->type() != QEvent::GraphicsSceneMouseDoubleClick && IsMovable())
     {
-        if (event->button() == Qt::LeftButton && event->type() != QEvent::GraphicsSceneMouseDoubleClick)
-        {
-            if (IsMovable())
-            {
-                SetItemOverrideCursor(this, cursorArrowOpenHand, 1, 1);
+        SetItemOverrideCursor(this, cursorArrowOpenHand, 1, 1);
 
-                CurveReleased();
-            }
-        }
+        CurveReleased();
     }
     VAbstractSpline::mouseReleaseEvent(event);
 }

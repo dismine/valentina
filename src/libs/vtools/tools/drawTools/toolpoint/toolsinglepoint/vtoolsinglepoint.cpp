@@ -242,12 +242,9 @@ void VToolSinglePoint::FullUpdateFromFile()
  */
 void VToolSinglePoint::mouseReleaseEvent(QGraphicsSceneMouseEvent *event)
 {
-    if (selectionType == SelectionType::ByMouseRelease)
+    if (selectionType == SelectionType::ByMouseRelease && IsSelectedByReleaseEvent(this, event))
     {
-        if (IsSelectedByReleaseEvent(this, event))
-        {
-            PointChoosed();
-        }
+        PointChoosed();
     }
     VScenePoint::mouseReleaseEvent(event);
 }

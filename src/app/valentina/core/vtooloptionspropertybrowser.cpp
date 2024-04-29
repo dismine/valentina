@@ -554,12 +554,9 @@ auto VToolOptionsPropertyBrowser::ComboBoxPalette() const -> QPalette
 //---------------------------------------------------------------------------------------------------------------------
 void VToolOptionsPropertyBrowser::itemClicked(QGraphicsItem *item)
 {
-    if (item != nullptr)
+    if (item != nullptr && not item->isEnabled())
     {
-        if (not item->isEnabled())
-        {
-            return;
-        }
+        return;
     }
 
     if (m_currentItem == item && item != nullptr)

@@ -302,22 +302,19 @@ void DRW_Arc::applyExtrusion()
 {
     DRW_Circle::applyExtrusion();
 
-    if (haveExtrusion)
+    // If the extrusion vector has a z value less than 0, the angles for the arc
+    // have to be mirrored since DXF files use the right hand rule.
+    // Note that the following code only handles the special case where there is a 2D
+    // drawing with the z axis heading into the paper (or rather screen). An arbitrary
+    // extrusion axis (with x and y values greater than 1/64) may still have issues.
+    if (haveExtrusion && fabs(extPoint.x) < 0.015625 && fabs(extPoint.y) < 0.015625 && extPoint.z < 0.0)
     {
-        // If the extrusion vector has a z value less than 0, the angles for the arc
-        // have to be mirrored since DXF files use the right hand rule.
-        // Note that the following code only handles the special case where there is a 2D
-        // drawing with the z axis heading into the paper (or rather screen). An arbitrary
-        // extrusion axis (with x and y values greater than 1/64) may still have issues.
-        if (fabs(extPoint.x) < 0.015625 && fabs(extPoint.y) < 0.015625 && extPoint.z < 0.0)
-        {
-            staangle = M_PI - staangle;
-            endangle = M_PI - endangle;
+        staangle = M_PI - staangle;
+        endangle = M_PI - endangle;
 
-            double const temp = staangle;
-            staangle = endangle;
-            endangle = temp;
-        }
+        double const temp = staangle;
+        staangle = endangle;
+        endangle = temp;
     }
 }
 

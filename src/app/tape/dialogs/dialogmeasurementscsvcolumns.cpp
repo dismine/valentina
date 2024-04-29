@@ -367,31 +367,22 @@ auto DialogMeasurementsCSVColumns::ColumnsValid() -> bool
 
     if (m_type == MeasurementsType::Multisize)
     {
-        if (not m_dimensions.empty())
+        if (not m_dimensions.empty() && not ColumnValid(MultisizeMeasurementsColumns::ShiftA))
         {
-            if (not ColumnValid(MultisizeMeasurementsColumns::ShiftA))
-            {
-                ChangeColor(ui->labelShiftA, errorColor);
-                columnShiftAFlag = false;
-            }
+            ChangeColor(ui->labelShiftA, errorColor);
+            columnShiftAFlag = false;
         }
 
-        if (m_dimensions.size() > 1)
+        if (m_dimensions.size() > 1 && not ColumnValid(MultisizeMeasurementsColumns::ShiftB))
         {
-            if (not ColumnValid(MultisizeMeasurementsColumns::ShiftB))
-            {
-                ChangeColor(ui->labelShiftB, errorColor);
-                columnShiftBFlag = false;
-            }
+            ChangeColor(ui->labelShiftB, errorColor);
+            columnShiftBFlag = false;
         }
 
-        if (m_dimensions.size() > 2)
+        if (m_dimensions.size() > 2 && not ColumnValid(MultisizeMeasurementsColumns::ShiftC))
         {
-            if (not ColumnValid(MultisizeMeasurementsColumns::ShiftC))
-            {
-                ChangeColor(ui->labelShiftC, errorColor);
-                columnShiftCFlag = false;
-            }
+            ChangeColor(ui->labelShiftC, errorColor);
+            columnShiftCFlag = false;
         }
     }
 

@@ -212,14 +212,12 @@ void DialogShoulderPoint::ChosenObject(quint32 id, const SceneObject &type)
                 }
                 break;
             case 1:
-                if (getCurrentObjectId(ui->comboBoxP3) != id)
+                if (getCurrentObjectId(ui->comboBoxP3) != id &&
+                    SetObject(id, ui->comboBoxP1Line, tr("Select second point of line")))
                 {
-                    if (SetObject(id, ui->comboBoxP1Line, tr("Select second point of line")))
-                    {
-                        m_number++;
-                        line->SetLineP1Id(id);
-                        line->RefreshGeometry();
-                    }
+                    m_number++;
+                    line->SetLineP1Id(id);
+                    line->RefreshGeometry();
                 }
                 break;
             case 2:
@@ -281,25 +279,22 @@ void DialogShoulderPoint::ChosenThirdPoint(quint32 id)
     set.insert(getCurrentObjectId(ui->comboBoxP1Line));
     set.insert(id);
 
-    if (set.size() == 3)
+    if (set.size() == 3 && SetObject(id, ui->comboBoxP2Line, QString()))
     {
-        if (SetObject(id, ui->comboBoxP2Line, QString()))
+        auto *window = qobject_cast<VAbstractMainWindow *>(VAbstractValApplication::VApp()->getMainWindow());
+        SCASSERT(window != nullptr)
+
+        auto *line = qobject_cast<VisToolShoulderPoint *>(vis);
+        SCASSERT(line != nullptr)
+        connect(line, &Visualization::ToolTip, window, &VAbstractMainWindow::ShowToolTip);
+
+        line->SetLineP2Id(id);
+        line->RefreshGeometry();
+        prepare = true;
+
+        if (not VAbstractValApplication::VApp()->Settings()->IsInteractiveTools())
         {
-            auto *window = qobject_cast<VAbstractMainWindow *>(VAbstractValApplication::VApp()->getMainWindow());
-            SCASSERT(window != nullptr)
-
-            auto *line = qobject_cast<VisToolShoulderPoint *>(vis);
-            SCASSERT(line != nullptr)
-            connect(line, &Visualization::ToolTip, window, &VAbstractMainWindow::ShowToolTip);
-
-            line->SetLineP2Id(id);
-            line->RefreshGeometry();
-            prepare = true;
-
-            if (not VAbstractValApplication::VApp()->Settings()->IsInteractiveTools())
-            {
-                FinishCreating();
-            }
+            FinishCreating();
         }
     }
 }

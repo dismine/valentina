@@ -202,17 +202,14 @@ void VPUndoPiecesRotate::undo()
     for (const auto &piece : qAsConst(m_pieces))
     {
         VPPiecePtr const p = piece.toStrongRef();
-        if (not p.isNull())
+        if (not p.isNull() && m_oldTransforms.contains(p->GetUniqueID()))
         {
-            if (m_oldTransforms.contains(p->GetUniqueID()))
+            p->SetMatrix(m_oldTransforms.value(p->GetUniqueID()));
+            if (m_followGrainline || p->IsFollowGrainline())
             {
-                p->SetMatrix(m_oldTransforms.value(p->GetUniqueID()));
-                if (m_followGrainline || p->IsFollowGrainline())
-                {
-                    p->RotateToGrainline(m_origin);
-                }
-                emit layout->PieceTransformationChanged(p);
+                p->RotateToGrainline(m_origin);
             }
+            emit layout->PieceTransformationChanged(p);
         }
     }
 }

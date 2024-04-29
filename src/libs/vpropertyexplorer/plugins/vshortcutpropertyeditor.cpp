@@ -53,21 +53,18 @@ VPE::VShortcutEditWidget::~VShortcutEditWidget()
 
 auto VPE::VShortcutEditWidget::eventFilter(QObject *obj, QEvent *event) -> bool
 {
-    if (obj == LineEdit)
+    if (obj == LineEdit && event->type() == QEvent::KeyPress)
     {
-        if (event->type() == QEvent::KeyPress)
+        auto *keyEvent = static_cast<QKeyEvent *>(event);
+
+        int keys = keyEvent->key();
+
+        if (keys != Qt::Key_Shift && keys != Qt::Key_Control && keys != Qt::Key_Meta && keys != Qt::Key_AltGr &&
+            keys != Qt::Key_Alt)
         {
-            auto *keyEvent = static_cast<QKeyEvent *>(event);
-
-            int keys = keyEvent->key();
-
-            if (keys != Qt::Key_Shift && keys != Qt::Key_Control && keys != Qt::Key_Meta && keys != Qt::Key_AltGr &&
-                keys != Qt::Key_Alt)
-            {
-                keys += keyEvent->modifiers();
-                setShortcut(QKeySequence(keys), true);
-                return true;
-            }
+            keys += keyEvent->modifiers();
+            setShortcut(QKeySequence(keys), true);
+            return true;
         }
     }
 

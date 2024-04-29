@@ -207,12 +207,9 @@ void DialogTool::FillComboBoxSplines(QComboBox *box) const
     QMap<QString, quint32> list;
     for (i = objs->constBegin(); i != objs->constEnd(); ++i)
     {
-        if (i.key() != toolId)
+        if (i.key() != toolId && IsSpline(i.value()))
         {
-            if (IsSpline(i.value()))
-            {
-                PrepareList<VAbstractCurve>(list, i.key());
-            }
+            PrepareList<VAbstractCurve>(list, i.key());
         }
     }
     FillList(box, list);
@@ -231,12 +228,9 @@ void DialogTool::FillComboBoxSplinesPath(QComboBox *box) const
     QMap<QString, quint32> list;
     for (i = objs->constBegin(); i != objs->constEnd(); ++i)
     {
-        if (i.key() != toolId)
+        if (i.key() != toolId && IsSplinePath(i.value()))
         {
-            if (IsSplinePath(i.value()))
-            {
-                PrepareList<VAbstractCurve>(list, i.key());
-            }
+            PrepareList<VAbstractCurve>(list, i.key());
         }
     }
     FillList(box, list);

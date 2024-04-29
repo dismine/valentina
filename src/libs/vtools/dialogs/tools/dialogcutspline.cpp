@@ -175,24 +175,21 @@ void DialogCutSpline::ChosenObject(quint32 id, const SceneObject &type)
         return;
     }
 
-    if (type == SceneObject::Spline)
+    if (type == SceneObject::Spline && SetObject(id, ui->comboBoxSpline, QString()))
     {
-        if (SetObject(id, ui->comboBoxSpline, QString()))
+        if (vis != nullptr)
         {
-            if (vis != nullptr)
-            {
-                vis->VisualMode(id);
-            }
-            prepare = true;
+            vis->VisualMode(id);
+        }
+        prepare = true;
 
-            auto *window = qobject_cast<VAbstractMainWindow *>(VAbstractValApplication::VApp()->getMainWindow());
-            SCASSERT(window != nullptr)
-            connect(vis.data(), &Visualization::ToolTip, window, &VAbstractMainWindow::ShowToolTip);
+        auto *window = qobject_cast<VAbstractMainWindow *>(VAbstractValApplication::VApp()->getMainWindow());
+        SCASSERT(window != nullptr)
+        connect(vis.data(), &Visualization::ToolTip, window, &VAbstractMainWindow::ShowToolTip);
 
-            if (not VAbstractValApplication::VApp()->Settings()->IsInteractiveTools())
-            {
-                FinishCreating();
-            }
+        if (not VAbstractValApplication::VApp()->Settings()->IsInteractiveTools())
+        {
+            FinishCreating();
         }
     }
 }

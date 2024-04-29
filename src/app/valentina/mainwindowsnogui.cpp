@@ -400,12 +400,10 @@ auto MainWindowsNoGUI::GenerateLayout(VLayoutGenerator &lGenerator) -> bool
         }
 
         if (nestingState == LayoutErrors::NoError && not qFuzzyIsNull(lGenerator.GetEfficiencyCoefficient()) &&
-            efficiency >= lGenerator.GetEfficiencyCoefficient())
+            efficiency >= lGenerator.GetEfficiencyCoefficient() &&
+            (not lGenerator.IsPreferOneSheetSolution() || lGenerator.PapersCount() == 1))
         {
-            if (not lGenerator.IsPreferOneSheetSolution() || lGenerator.PapersCount() == 1)
-            {
-                break;
-            }
+            break;
         }
 
         if (IsTimeout())
