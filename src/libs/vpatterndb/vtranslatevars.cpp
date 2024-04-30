@@ -375,7 +375,7 @@ void VTranslateVars::TranslateVarsFromUser(QString &newFormula, QMap<vsizetype, 
 void VTranslateVars::TranslateNumbersFromUser(QString &newFormula, QMap<vsizetype, QString> &tokens,
                                               QMap<vsizetype, QString> &numbers, bool osSeparator)
 {
-    QLocale loc = QLocale(); // User locale
+    QLocale loc; // User locale
     if (loc != QLocale::c() && osSeparator)
     {                                            // User want use Os separator
         QList<vsizetype> nKeys = numbers.keys(); // Positions for all numbers in expression
@@ -453,7 +453,7 @@ void VTranslateVars::TranslateVarsToUser(QString &newFormula, QMap<vsizetype, QS
 void VTranslateVars::TranslateNumbersToUser(QString &newFormula, QMap<vsizetype, QString> &tokens,
                                             QMap<vsizetype, QString> &numbers, bool osSeparator)
 {
-    QLocale loc = QLocale(); // User locale
+    QLocale loc; // User locale
     if (loc != QLocale::C && osSeparator)
     {                                            // User want use Os separator
         QList<vsizetype> nKeys = numbers.keys(); // Positions for all numbers in expression

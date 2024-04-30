@@ -45,7 +45,7 @@ Q_GLOBAL_STATIC(QMutex, svgPathTokenizerMutex) // NOLINT
 
 QT_WARNING_POP
 
-const qreal V_PI = static_cast<qreal>(M_PI); // pi
+const auto V_PI = static_cast<qreal>(M_PI); // pi
 
 //---------------------------------------------------------------------------------------------------------------------
 auto IsCommand(const QChar &ch) -> bool

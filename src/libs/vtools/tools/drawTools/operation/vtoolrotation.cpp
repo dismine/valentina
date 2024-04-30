@@ -135,7 +135,7 @@ auto VToolRotation::Create(VToolRotationInitData &initData) -> VToolRotation *
     calcAngle = CheckFormula(initData.id, initData.angle, initData.data);
 
     const auto originPoint = *initData.data->GeometricObject<VPointF>(initData.origin);
-    const QPointF oPoint = static_cast<QPointF>(originPoint);
+    const auto oPoint = static_cast<QPointF>(originPoint);
 
     if (initData.typeCreation == Source::FromGui)
     {

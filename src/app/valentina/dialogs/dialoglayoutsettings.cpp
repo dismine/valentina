@@ -900,7 +900,7 @@ auto DialogLayoutSettings::MakeHelpTiledPdfTemplateList() -> QString
 //---------------------------------------------------------------------------------------------------------------------
 auto DialogLayoutSettings::Template() -> QSizeF
 {
-    const PaperSizeTemplate temp = static_cast<PaperSizeTemplate>(ui->comboBoxTemplates->currentData().toInt());
+    const auto temp = static_cast<PaperSizeTemplate>(ui->comboBoxTemplates->currentData().toInt());
 
     const Unit paperUnit = PaperUnit();
 

@@ -103,7 +103,7 @@ void InitMinMax(qreal &min, qreal &max, const MeasurementDimension_p &dimension,
 void SetCellIcon(QTableWidgetItem *item, const QVector<qreal> &validRows, qreal rowValue, qreal columnValue,
                  const VDimensionRestriction &restriction, qreal min, qreal max)
 {
-    const QIcon closeIcon = QIcon(QStringLiteral("://icon/24x24/close.png"));
+    const auto closeIcon = QIcon(QStringLiteral("://icon/24x24/close.png"));
 
     if (VFuzzyContains(validRows, rowValue))
     {

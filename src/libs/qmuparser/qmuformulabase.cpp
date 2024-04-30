@@ -144,7 +144,7 @@ void QmuFormulaBase::SetSepForTr(bool osSeparator, bool fromUser)
 {
     if (fromUser)
     {
-        const QLocale loc = QLocale();
+        const QLocale loc;
         setLocale(loc);
         SetArgSep(';');
         setCNumbers(not osSeparator);

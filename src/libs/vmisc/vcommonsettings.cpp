@@ -1051,7 +1051,7 @@ void VCommonSettings::SetCSVSeparator(const QChar &separator)
 auto VCommonSettings::GetCSVSeparator() const -> QChar
 {
     QSettings const settings(this->format(), this->scope(), this->organizationName(), *commonIniFilename);
-    const quint8 separator = static_cast<quint8>(settings.value(*settingCSVSeparator, 3).toUInt());
+    const auto separator = static_cast<quint8>(settings.value(*settingCSVSeparator, 3).toUInt());
     switch (separator)
     {
         case 0:
@@ -1596,7 +1596,7 @@ void VCommonSettings::SetTiledPDFMargins(const QMarginsF &value, const Unit &uni
 //---------------------------------------------------------------------------------------------------------------------
 auto VCommonSettings::GetTiledPDFOrientation() const -> PageOrientation
 {
-    bool const defaultValue = static_cast<bool>(PageOrientation::Portrait);
+    auto const defaultValue = static_cast<bool>(PageOrientation::Portrait);
     bool const result = value(*settingTiledPDFOrientation, defaultValue).toBool();
     return static_cast<PageOrientation>(result);
 }

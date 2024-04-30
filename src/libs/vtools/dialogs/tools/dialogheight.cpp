@@ -269,9 +269,9 @@ void DialogHeight::PointNameChanged()
 
     try
     {
-        const QPointF basePoint = static_cast<QPointF>(*data->GeometricObject<VPointF>(basePointId));
-        const QPointF p1Line = static_cast<QPointF>(*data->GeometricObject<VPointF>(p1LineId));
-        const QPointF p2Line = static_cast<QPointF>(*data->GeometricObject<VPointF>(p2LineId));
+        const auto basePoint = static_cast<QPointF>(*data->GeometricObject<VPointF>(basePointId));
+        const auto p1Line = static_cast<QPointF>(*data->GeometricObject<VPointF>(p1LineId));
+        const auto p2Line = static_cast<QPointF>(*data->GeometricObject<VPointF>(p2LineId));
 
         if (set.size() != 3 || VGObject::ClosestPoint(QLineF(p1Line, p2Line), basePoint) == QPointF())
         {

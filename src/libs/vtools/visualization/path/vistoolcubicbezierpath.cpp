@@ -239,7 +239,7 @@ void VisToolCubicBezierPath::Creating(const QVector<VPointF> &pathPoints, vsizet
         {
             const VPointF &p1 = pathPoints.at(subSplPoints + pointsLeft - 2);
             auto p2 = static_cast<QPointF>(pathPoints.at(subSplPoints + pointsLeft - 1));
-            const QPointF p3 = static_cast<QPointF>(pathPoints.at(subSplPoints + pointsLeft));
+            const auto p3 = static_cast<QPointF>(pathPoints.at(subSplPoints + pointsLeft));
 
             if (subSplCount >= 1)
             {

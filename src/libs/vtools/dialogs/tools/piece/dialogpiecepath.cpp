@@ -1436,7 +1436,7 @@ void DialogPiecePath::NodeAngleChanged(int index)
         QListWidgetItem *rowItem = GetItemById(ui->comboBoxNodes->currentData().toUInt());
         if (rowItem)
         {
-            const PieceNodeAngle angle = static_cast<PieceNodeAngle>(ui->comboBoxAngle->currentData().toUInt());
+            const auto angle = static_cast<PieceNodeAngle>(ui->comboBoxAngle->currentData().toUInt());
             auto rowNode = qvariant_cast<VPieceNode>(rowItem->data(Qt::UserRole));
             rowNode.SetAngleType(angle);
             rowItem->setData(Qt::UserRole, QVariant::fromValue(rowNode));

@@ -97,7 +97,7 @@ auto GetSystemMemorySize() -> qint64
 
     host_statistics64(machPort, HOST_VM_INFO, reinterpret_cast<host_info64_t>(&vmStats), &count);
 
-    qulonglong freeMemory = static_cast<qulonglong>(vmStats.free_count) * static_cast<qulonglong>(pageSize);
+    auto freeMemory = static_cast<qulonglong>(vmStats.free_count) * static_cast<qulonglong>(pageSize);
     qulonglong totalMemoryUsed =
         (static_cast<qulonglong>(vmStats.active_count) + static_cast<qulonglong>(vmStats.inactive_count) +
          static_cast<qulonglong>(vmStats.wire_count)) *

@@ -111,7 +111,7 @@ auto VToolFlippingByAxis::Create(const QPointer<DialogTool> &dialog, VMainGraphi
 auto VToolFlippingByAxis::Create(VToolFlippingByAxisInitData initData) -> VToolFlippingByAxis *
 {
     const auto originPoint = *initData.data->GeometricObject<VPointF>(initData.originPointId);
-    const QPointF fPoint = static_cast<QPointF>(originPoint);
+    const auto fPoint = static_cast<QPointF>(originPoint);
 
     QPointF sPoint;
     if (initData.axisType == AxisType::VerticalAxis)

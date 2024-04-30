@@ -46,7 +46,7 @@ auto CurvePoint(VSAPoint candidate, const VContainer *data, const VPieceNode &no
 {
     if (node.GetTypeTool() == Tool::NodePoint)
     {
-        const QPointF p = static_cast<QPointF>(*data->GeometricObject<VPointF>(node.GetId()));
+        const auto p = static_cast<QPointF>(*data->GeometricObject<VPointF>(node.GetId()));
         if (VAbstractCurve::IsPointOnCurve(curvePoints, p))
         {
             candidate = VSAPoint(p);
@@ -864,7 +864,7 @@ auto VPiecePath::RemoveEdge(quint32 index) const -> VPiecePath
     path.Clear();
 
     // Edge can be only segment. We ignore all curves inside segments.
-    const quint32 edges = static_cast<quint32>(ListNodePoint().size());
+    const auto edges = static_cast<quint32>(ListNodePoint().size());
     for (quint32 i = 0; i < edges; ++i)
     {
         VPieceNode p1;

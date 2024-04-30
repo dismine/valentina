@@ -107,7 +107,7 @@ PreferencesPatternPage::PreferencesPatternPage(QWidget *parent)
     connect(ui->comboBoxLineWidthUnit, QOverload<int>::of(&QComboBox::currentIndexChanged), this,
             [this]()
             {
-                const Unit lineUnit = static_cast<Unit>(ui->comboBoxLineWidthUnit->currentData().toInt());
+                const auto lineUnit = static_cast<Unit>(ui->comboBoxLineWidthUnit->currentData().toInt());
                 const qreal value = UnitConvertor(ui->doubleSpinBoxLineWidth->value(), m_oldLineUnit, lineUnit);
                 ui->doubleSpinBoxLineWidth->setDecimals(lineUnit == Unit::Mm ? 1 : 6);
                 ui->doubleSpinBoxLineWidth->setMinimum(

@@ -1700,7 +1700,7 @@ void DialogIncrements::SaveIncrUnits()
 
     const QTableWidgetItem *nameField = table->item(row, 0);
 
-    const IncrUnits units = static_cast<IncrUnits>(combo->currentData().toInt());
+    const auto units = static_cast<IncrUnits>(combo->currentData().toInt());
     m_doc->SetIncrementSpecialUnits(nameField->text(), units == IncrUnits::Degrees);
     LocalUpdateTree();
 

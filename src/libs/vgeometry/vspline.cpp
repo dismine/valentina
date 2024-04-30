@@ -564,10 +564,10 @@ auto VSpline::ParamT(const QPointF &pBt) const -> qreal
     // Here we try find closest to our point.
     for (auto t : qAsConst(ts))
     {
-        const QPointF p0 = static_cast<QPointF>(GetP1());
-        const QPointF p1 = static_cast<QPointF>(GetP2());
-        const QPointF p2 = static_cast<QPointF>(GetP3());
-        const QPointF p3 = static_cast<QPointF>(GetP4());
+        const auto p0 = static_cast<QPointF>(GetP1());
+        const auto p1 = static_cast<QPointF>(GetP2());
+        const auto p2 = static_cast<QPointF>(GetP3());
+        const auto p3 = static_cast<QPointF>(GetP4());
         // The explicit form of the Cubic Bézier curve
         const qreal pointX = pow(1 - t, 3) * p0.x() + 3 * pow(1 - t, 2) * t * p1.x() +
                              3 * (1 - t) * pow(t, 2) * p2.x() + pow(t, 3) * p3.x();

@@ -1207,7 +1207,7 @@ void TMainWindow::SaveEmail()
 //---------------------------------------------------------------------------------------------------------------------
 void TMainWindow::SaveGender(int index)
 {
-    const GenderType type = static_cast<GenderType>(ui->comboBoxGender->itemData(index).toInt());
+    const auto type = static_cast<GenderType>(ui->comboBoxGender->itemData(index).toInt());
     if (m_m->Gender() != type)
     {
         m_m->SetGender(type);
@@ -2521,7 +2521,7 @@ void TMainWindow::SaveMUnits()
     }
 
     const QTableWidgetItem *nameField = ui->tableWidget->item(ui->tableWidget->currentRow(), ColumnName);
-    const MUnits units = static_cast<MUnits>(ui->comboBoxMUnits->currentData().toInt());
+    const auto units = static_cast<MUnits>(ui->comboBoxMUnits->currentData().toInt());
     m_m->SetMSpecialUnits(nameField->data(Qt::UserRole).toString(), units == MUnits::Degrees);
 
     MeasurementsWereSaved(false);
@@ -2547,7 +2547,7 @@ void TMainWindow::SaveMDimension()
     }
 
     const QTableWidgetItem *nameField = ui->tableWidget->item(ui->tableWidget->currentRow(), ColumnName);
-    const IMD dimension = static_cast<IMD>(ui->comboBoxDimension->currentData().toInt());
+    const auto dimension = static_cast<IMD>(ui->comboBoxDimension->currentData().toInt());
     m_m->SetMDimension(nameField->data(Qt::UserRole).toString(), dimension);
 
     MeasurementsWereSaved(false);
@@ -3013,7 +3013,7 @@ void TMainWindow::InitWindow()
         ui->comboBoxGender->setCurrentIndex(index);
 
         {
-            const QLocale dateLocale = QLocale(VAbstractApplication::VApp()->Settings()->GetLocale());
+            const auto dateLocale = QLocale(VAbstractApplication::VApp()->Settings()->GetLocale());
             ui->dateEditBirthDate->setLocale(dateLocale);
             ui->dateEditBirthDate->setDisplayFormat(dateLocale.dateFormat());
             ui->dateEditBirthDate->setDate(m_m->BirthDate());
@@ -3801,7 +3801,7 @@ void TMainWindow::UpdateWindowTitle()
     setWindowFilePath(m_curFile);
 
 #if defined(Q_OS_MAC)
-    static QIcon fileIcon = QIcon(QCoreApplication::applicationDirPath() + "/../Resources/measurements.icns"_L1);
+    static auto fileIcon = QIcon(QCoreApplication::applicationDirPath() + "/../Resources/measurements.icns"_L1);
     QIcon icon;
     if (not m_curFile.isEmpty())
     {

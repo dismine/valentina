@@ -315,7 +315,7 @@ void TKMMainWindow::UpdateWindowTitle()
     setWindowFilePath(m_curFile);
 
 #if defined(Q_OS_MAC)
-    static QIcon fileIcon = QIcon(QCoreApplication::applicationDirPath() + "/../Resources/measurements.icns"_L1);
+    static auto fileIcon = QIcon(QCoreApplication::applicationDirPath() + "/../Resources/measurements.icns"_L1);
     QIcon icon;
     if (not m_curFile.isEmpty())
     {
@@ -1346,7 +1346,7 @@ void TKMMainWindow::SaveMUnits()
     }
 
     const QTableWidgetItem *nameField = ui->tableWidget->item(ui->tableWidget->currentRow(), ColumnName);
-    const MUnits units = static_cast<MUnits>(ui->comboBoxMUnits->currentData().toInt());
+    const auto units = static_cast<MUnits>(ui->comboBoxMUnits->currentData().toInt());
     m_m->SetMSpecialUnits(nameField->data(Qt::UserRole).toString(), units == MUnits::Degrees);
 
     MeasurementsWereSaved(false);
@@ -2234,8 +2234,8 @@ void TKMMainWindow::RefreshImages()
             QSize const size = i.value().Size();
             QSize const targetSize = ui->listWidget->iconSize();
 
-            double const scalingFactorWidth = static_cast<double>(targetSize.width()) / size.width();
-            double const scalingFactorHeight = static_cast<double>(targetSize.height()) / size.height();
+            auto const scalingFactorWidth = static_cast<double>(targetSize.width()) / size.width();
+            auto const scalingFactorHeight = static_cast<double>(targetSize.height()) / size.height();
 
             int newWidth;
             int newHeight;

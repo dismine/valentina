@@ -104,7 +104,7 @@ void VPlainTextEdit::MatchParentheses()
     QList<QTextEdit::ExtraSelection> const selections;
     setExtraSelections(selections);
 
-    VTextBlockData *data = static_cast<VTextBlockData *>(textCursor().block().userData());
+    auto *data = static_cast<VTextBlockData *>(textCursor().block().userData());
 
     if (data)
     {

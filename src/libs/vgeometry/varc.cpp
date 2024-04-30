@@ -308,7 +308,7 @@ auto VArc::GetPoints() const -> QVector<QPointF>
     {
         const qreal lDistance = qAbs(d->radius) * 4.0 / 3.0 * qTan(qDegreesToRadians(sectionAngle.at(i)) * 0.25);
 
-        const QPointF center = static_cast<QPointF>(GetCenter());
+        const auto center = static_cast<QPointF>(GetCenter());
 
         QLineF lineP1P2(pStart, center);
         lineP1P2.setAngle(lineP1P2.angle() - 90.0);

@@ -147,7 +147,7 @@ void StyleHelper::drawIconWithShadow(const QIcon &icon, const QRect &rect, QPain
                 for (int x = 0; x < im.width(); ++x)
                 {
                     QRgb const pixel = *scanLine;
-                    char const intensity = static_cast<char>(qGray(pixel));
+                    auto const intensity = static_cast<char>(qGray(pixel));
                     *scanLine = qRgba(intensity, intensity, intensity, qAlpha(pixel));
                     ++scanLine;
                 }

@@ -584,7 +584,7 @@ void VNodePoint::contextMenuEvent(QGraphicsSceneContextMenuEvent *event)
     };
 
     QAction *selectedAction = menu.exec(event->screenPos());
-    ContextMenuOption const selectedOption = static_cast<ContextMenuOption>(
+    auto const selectedOption = static_cast<ContextMenuOption>(
         contextMenu.key(selectedAction, static_cast<int>(ContextMenuOption::NoSelection)));
 
     Q_STATIC_ASSERT_X(static_cast<int>(ContextMenuOption::LAST_ONE_DO_NOT_USE) == 35, "Not all options were handled.");

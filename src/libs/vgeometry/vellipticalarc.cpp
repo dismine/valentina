@@ -126,7 +126,7 @@ auto EllipseCore(fpm::fixed_16_16 xC, fpm::fixed_16_16 yC, fpm::fixed_16_16 xP, 
     -> QVector<QPointF>
 {
     uint const k = qMin(static_cast<uint>(AngularInc(xP, yP, xQ, yQ, flatness)), 16U);
-    const uint count = static_cast<std::uint32_t>(sweep.raw_value()) >> (16 - k);
+    const auto count = static_cast<std::uint32_t>(sweep.raw_value()) >> (16 - k);
 
     QVector<QPointF> arc;
     arc.reserve(static_cast<int>(count) + 1);

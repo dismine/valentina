@@ -88,7 +88,7 @@ void VisToolPointFromArcAndTangent::VisualMode(quint32 id)
 void VisToolPointFromArcAndTangent::FindRays(const QPointF &p, const VArc *arc)
 {
     QPointF p1, p2;
-    const QPointF center = static_cast<QPointF>(arc->GetCenter());
+    const auto center = static_cast<QPointF>(arc->GetCenter());
     const qreal radius = arc->GetRadius();
     const int res = VGObject::ContactPoints(p, center, radius, p1, p2);
 

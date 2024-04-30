@@ -1768,7 +1768,7 @@ void VPMainWindow::UpdateWindowTitle()
     setWindowFilePath(curFile);
 
 #if defined(Q_OS_MAC)
-    static QIcon fileIcon = QIcon(QCoreApplication::applicationDirPath() + "/../Resources/layout.icns"_L1);
+    static auto fileIcon = QIcon(QCoreApplication::applicationDirPath() + "/../Resources/layout.icns"_L1);
     QIcon icon;
     if (not curFile.isEmpty())
     {

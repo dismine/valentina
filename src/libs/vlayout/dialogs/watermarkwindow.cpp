@@ -552,7 +552,7 @@ void WatermarkWindow::UpdateWindowTitle()
     setWindowFilePath(m_curFile);
 
 #if defined(Q_OS_MAC)
-    static QIcon fileIcon = QIcon(QCoreApplication::applicationDirPath() + "/../Resources/Valentina.icns"_L1);
+    static auto fileIcon = QIcon(QCoreApplication::applicationDirPath() + "/../Resources/Valentina.icns"_L1);
     QIcon icon;
     if (not m_curFile.isEmpty())
     {

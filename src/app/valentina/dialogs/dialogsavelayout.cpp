@@ -330,7 +330,7 @@ auto DialogSaveLayout::IsShowGrainline() const -> bool
 //---------------------------------------------------------------------------------------------------------------------
 auto DialogSaveLayout::MakeHelpFormatList() -> QString
 {
-    QString out(QStringLiteral("\n"));
+    auto out = QStringLiteral("\n");
     const auto formats = InitFormats();
     for (int i = 0; i < formats.size(); ++i)
     {
@@ -891,7 +891,7 @@ void DialogSaveLayout::WriteSettings() const
     settings->SetTiledPDFMargins(margins, unit);
 
     // write Template
-    const PaperSizeTemplate temp = static_cast<PaperSizeTemplate>(ui->comboBoxTemplates->currentData().toInt());
+    const auto temp = static_cast<PaperSizeTemplate>(ui->comboBoxTemplates->currentData().toInt());
     const QSizeF size = GetTemplateSize(temp, Unit::Mm);
 
     settings->SetTiledPDFPaperHeight(size.height(), Unit::Mm);

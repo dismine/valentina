@@ -104,7 +104,7 @@ void InitLanguageList(QComboBox *combobox)
             continue;
         }
 
-        QLocale const loc = QLocale(locale);
+        auto const loc = QLocale(locale);
         QString const lang = loc.nativeLanguageName();
         QString country = TerritoryToString(loc);
         if (country == "Czechia"_L1)

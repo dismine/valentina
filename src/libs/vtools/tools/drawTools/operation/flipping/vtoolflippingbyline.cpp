@@ -111,10 +111,10 @@ auto VToolFlippingByLine::Create(const QPointer<DialogTool> &dialog, VMainGraphi
 auto VToolFlippingByLine::Create(VToolFlippingByLineInitData initData) -> VToolFlippingByLine *
 {
     const auto firstPoint = *initData.data->GeometricObject<VPointF>(initData.firstLinePointId);
-    const QPointF fPoint = static_cast<QPointF>(firstPoint);
+    const auto fPoint = static_cast<QPointF>(firstPoint);
 
     const auto secondPoint = *initData.data->GeometricObject<VPointF>(initData.secondLinePointId);
-    const QPointF sPoint = static_cast<QPointF>(secondPoint);
+    const auto sPoint = static_cast<QPointF>(secondPoint);
 
     CreateDestination(initData, fPoint, sPoint);
 

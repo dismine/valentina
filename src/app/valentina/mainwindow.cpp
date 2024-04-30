@@ -7567,7 +7567,7 @@ void MainWindow::UpdateWindowTitle()
     setWindowFilePath(VAbstractValApplication::VApp()->GetPatternPath());
 
 #if defined(Q_OS_MAC)
-    static QIcon fileIcon = QIcon(QCoreApplication::applicationDirPath() + "/../Resources/Valentina.icns"_L1);
+    static auto fileIcon = QIcon(QCoreApplication::applicationDirPath() + "/../Resources/Valentina.icns"_L1);
     QIcon icon;
     if (not VAbstractValApplication::VApp()->GetPatternPath().isEmpty())
     {

@@ -676,8 +676,8 @@ void VToolSplinePath::mouseMoveEvent(QGraphicsSceneMouseEvent *event)
         const QPointF offset0 = ((1 - weight) / (3 * t * (1 - t) * (1 - t))) * delta;
         const QPointF offset1 = (weight / (3 * t * t * (1 - t))) * delta;
 
-        const QPointF p2 = static_cast<QPointF>(spline.GetP2()) + offset0;
-        const QPointF p3 = static_cast<QPointF>(spline.GetP3()) + offset1;
+        const auto p2 = static_cast<QPointF>(spline.GetP2()) + offset0;
+        const auto p3 = static_cast<QPointF>(spline.GetP3()) + offset1;
 
         oldPosition = event->scenePos(); // Now mouse here
 
