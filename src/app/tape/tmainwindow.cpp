@@ -3533,7 +3533,7 @@ void TMainWindow::RefreshData(bool freshCall)
 void TMainWindow::RefreshTable(bool freshCall)
 {
     ui->tableWidget->blockSignals(true);
-    ui->tableWidget->clearContents();
+    ui->tableWidget->setRowCount(0);
 
     ShowUnits();
 
