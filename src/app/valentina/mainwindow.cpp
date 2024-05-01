@@ -3070,7 +3070,7 @@ void MainWindow::ToolBarDrawTools()
             auto *lineIntersectionPointTool = new VToolButtonPopup(this);
             lineIntersectionPointTool->setMenu(lineIntersectionPointToolMenu);
             lineIntersectionPointTool->setDefaultAction(ui->actionPointOfIntersectionTool);
-            lineIntersectionPointTool->SetToolGroupTooltip(tr("Point at the intersections of lins/axis tools"));
+            lineIntersectionPointTool->SetToolGroupTooltip(tr("Point at the intersections of lines/axis tools"));
 
             ui->toolBarPointTools->addWidget(lineIntersectionPointTool);
         }
@@ -3113,7 +3113,7 @@ void MainWindow::ToolBarDrawTools()
             auto *curveSegmentPointTool = new VToolButtonPopup(this);
             curveSegmentPointTool->setMenu(curveSegmentPointToolMenu);
             curveSegmentPointTool->setDefaultAction(ui->actionSplineCutPointTool);
-            curveSegmentPointTool->SetToolGroupTooltip(tr("Point segementing curves/arcs tools"));
+            curveSegmentPointTool->SetToolGroupTooltip(tr("Point segmenting curves/arcs tools"));
 
             ui->toolBarPointTools->addWidget(curveSegmentPointTool);
         }
@@ -3127,7 +3127,7 @@ void MainWindow::ToolBarDrawTools()
             auto *curveIntersectionPointTool = new VToolButtonPopup(this);
             curveIntersectionPointTool->setMenu(curveIntersectionPointToolMenu);
             curveIntersectionPointTool->setDefaultAction(ui->actionIntersectionCurvesTool);
-            curveIntersectionPointTool->SetToolGroupTooltip(tr("Points interecting with 2 curves/arcs/circles tools"));
+            curveIntersectionPointTool->SetToolGroupTooltip(tr("Points intersecting with 2 curves/arcs/circles tools"));
 
             ui->toolBarPointTools->addWidget(curveIntersectionPointTool);
         }
