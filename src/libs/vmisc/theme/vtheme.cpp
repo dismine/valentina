@@ -360,6 +360,10 @@ void VTheme::SetIconTheme()
         {
             QIcon::setThemeName(DefaultThemeName());
         }
+        else
+        {
+            QIcon::setFallbackThemeName(VTheme::DefaultThemeName());
+        }
     }
 }
 
