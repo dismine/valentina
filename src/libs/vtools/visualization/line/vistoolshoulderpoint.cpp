@@ -92,7 +92,7 @@ void VisToolShoulderPoint::RefreshGeometry()
                     QPointF const fPoint =
                         VToolShoulderPoint::FindPoint(static_cast<QPointF>(*second), static_cast<QPointF>(*third),
                                                       static_cast<QPointF>(*first), m_length);
-                    QLineF const mainLine = QLineF(static_cast<QPointF>(*second), fPoint);
+                    auto const mainLine = QLineF(static_cast<QPointF>(*second), fPoint);
                     DrawLine(this, mainLine, LineStyle());
 
                     DrawPoint(m_point, mainLine.p2());
@@ -105,7 +105,7 @@ void VisToolShoulderPoint::RefreshGeometry()
                     qreal const len = cursorLine.length();
                     QPointF const fPoint = VToolShoulderPoint::FindPoint(
                         static_cast<QPointF>(*second), static_cast<QPointF>(*third), static_cast<QPointF>(*first), len);
-                    QLineF const mainLine = QLineF(static_cast<QPointF>(*second), fPoint);
+                    auto const mainLine = QLineF(static_cast<QPointF>(*second), fPoint);
                     DrawLine(this, mainLine, LineStyle());
 
                     DrawPoint(m_point, mainLine.p2());

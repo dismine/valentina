@@ -662,9 +662,9 @@ auto VAbstractApplication::LogDirPath() -> QString
 #endif
     }
 #if defined(Q_OS_WINDOWS)
-    QString path = QStringList{logDirPath, logs}.join(QDir::separator());
+    auto path = QStringList{logDirPath, logs}.join(QDir::separator());
 #else
-    QString path =
+    auto path =
         QStringList{logDirPath, QCoreApplication::organizationName(), logs, QCoreApplication::applicationName()}.join(
             QDir::separator());
 #endif

@@ -82,7 +82,7 @@ auto PointsToSegments(const QVector<QPointF> &points) -> QVector<QLineF>
         lines.reserve(points.size() - 1);
         for (int i = 0; i < points.size() - 1; ++i)
         {
-            QLineF const segment = QLineF(points.at(i), points.at(i + 1));
+            auto const segment = QLineF(points.at(i), points.at(i + 1));
             if (segment.length() > 0)
             {
                 lines.append(segment);
@@ -183,7 +183,7 @@ auto PassmarkWidth(const VPiecePassmarkData &passmarkData, qreal width) -> qreal
 //---------------------------------------------------------------------------------------------------------------------
 auto FixNotchPoint(const QVector<QPointF> &seamAllowance, const VPiecePassmarkData &data, QPointF *notch) -> bool
 {
-    QLineF axis = QLineF(data.passmarkSAPoint, *notch);
+    auto axis = QLineF(data.passmarkSAPoint, *notch);
 
     if (data.passmarkAngleType == PassmarkAngleType::Straightforward)
     {
@@ -274,7 +274,7 @@ auto CreateTwoPassmarkLines(const VPiecePassmarkData &passmarkData, const QLineF
 
     QPointF l1p2;
     {
-        QLineF line1 = QLineF(line.p2(), line.p1());
+        auto line1 = QLineF(line.p2(), line.p1());
         line1.setAngle(line1.angle() - 90);
         line1.setLength(width / 2.);
         l1p2 = line1.p2();
@@ -282,7 +282,7 @@ auto CreateTwoPassmarkLines(const VPiecePassmarkData &passmarkData, const QLineF
 
     QPointF l2p2;
     {
-        QLineF line2 = QLineF(line.p2(), line.p1());
+        auto line2 = QLineF(line.p2(), line.p1());
         line2.setAngle(line2.angle() + 90);
         line2.setLength(width / 2.);
         l2p2 = line2.p2();
@@ -321,7 +321,7 @@ auto CreateThreePassmarkLines(const VPiecePassmarkData &passmarkData, const QLin
 
     QPointF l1p2;
     {
-        QLineF line1 = QLineF(line.p2(), line.p1());
+        auto line1 = QLineF(line.p2(), line.p1());
         line1.setAngle(line1.angle() - 90);
         line1.setLength(width / 2.);
         l1p2 = line1.p2();
@@ -329,7 +329,7 @@ auto CreateThreePassmarkLines(const VPiecePassmarkData &passmarkData, const QLin
 
     QPointF l2p2;
     {
-        QLineF line2 = QLineF(line.p2(), line.p1());
+        auto line2 = QLineF(line.p2(), line.p1());
         line2.setAngle(line2.angle() + 90);
         line2.setLength(width / 2.);
         l2p2 = line2.p2();
@@ -353,7 +353,7 @@ auto CreateTMarkPassmark(const VPiecePassmarkData &passmarkData, const QLineF &l
 
     QPointF p1;
     {
-        QLineF tmpLine = QLineF(line.p2(), line.p1());
+        auto tmpLine = QLineF(line.p2(), line.p1());
         tmpLine.setAngle(tmpLine.angle() - 90);
         tmpLine.setLength(width / 2.);
         p1 = tmpLine.p2();
@@ -361,7 +361,7 @@ auto CreateTMarkPassmark(const VPiecePassmarkData &passmarkData, const QLineF &l
 
     QPointF p2;
     {
-        QLineF tmpLine = QLineF(line.p2(), line.p1());
+        auto tmpLine = QLineF(line.p2(), line.p1());
         tmpLine.setAngle(tmpLine.angle() + 90);
         tmpLine.setLength(width / 2.);
         p2 = tmpLine.p2();
@@ -396,11 +396,11 @@ auto CreateInternalVMarkPassmark(const VPiecePassmarkData &passmarkData, const Q
     const qreal width = PassmarkWidth(passmarkData, defWidth * 2.);
     const qreal angle = qRadiansToDegrees(qAtan(qAbs(width) / 2. / line.length()));
 
-    QLineF l1 = QLineF(line.p2(), line.p1());
+    auto l1 = QLineF(line.p2(), line.p1());
     l1.setAngle(l1.angle() + angle);
     l1 = VPassmark::FindIntersection(l1, seamAllowance);
 
-    QLineF l2 = QLineF(line.p2(), line.p1());
+    auto l2 = QLineF(line.p2(), line.p1());
     l2.setAngle(l2.angle() - angle);
 
     return {{l1.p2(), l1.p1()}, VPassmark::FindIntersection(l2, seamAllowance)};
@@ -439,7 +439,7 @@ auto CreateUMarkPassmark(const VPiecePassmarkData &passmarkData, const QLineF &l
 
         QPointF l1p2;
         {
-            QLineF line = QLineF(baseLine.p2(), baseLine.p1());
+            auto line = QLineF(baseLine.p2(), baseLine.p1());
             line.setAngle(line.angle() + 90);
             line.setLength(radius);
             l1p2 = line.p2();
@@ -447,7 +447,7 @@ auto CreateUMarkPassmark(const VPiecePassmarkData &passmarkData, const QLineF &l
 
         QPointF l2p2;
         {
-            QLineF line = QLineF(baseLine.p2(), baseLine.p1());
+            auto line = QLineF(baseLine.p2(), baseLine.p1());
             line.setAngle(line.angle() - 90);
             line.setLength(radius);
             l2p2 = line.p2();
@@ -497,7 +497,7 @@ auto CreateBoxMarkPassmark(const VPiecePassmarkData &passmarkData, const QLineF 
 
     QPointF l1p2;
     {
-        QLineF tmp = QLineF(line.p2(), line.p1());
+        auto tmp = QLineF(line.p2(), line.p1());
         tmp.setAngle(tmp.angle() + 90);
         tmp.setLength(width / 2.);
         l1p2 = tmp.p2();
@@ -513,7 +513,7 @@ auto CreateBoxMarkPassmark(const VPiecePassmarkData &passmarkData, const QLineF 
 
     QPointF l2p2;
     {
-        QLineF tmp = QLineF(line.p2(), line.p1());
+        auto tmp = QLineF(line.p2(), line.p1());
         tmp.setAngle(tmp.angle() - 90);
         tmp.setLength(width / 2.);
         l2p2 = tmp.p2();
@@ -783,7 +783,7 @@ auto VPassmark::PassmarkStraightforwardBaseLine(const QPointF &seamPassmarkSAPoi
         return {};
     }
 
-    QLineF line = QLineF(seamPassmarkSAPoint, m_data.passmarkSAPoint);
+    auto line = QLineF(seamPassmarkSAPoint, m_data.passmarkSAPoint);
     line.setLength(length);
     return {line};
 }
@@ -952,8 +952,8 @@ auto VPassmark::BuiltInSAPassmarkBaseLine(const VPiece &piece) const -> QVector<
         }
     }
 
-    QLineF edge1 = QLineF(m_data.passmarkSAPoint, m_data.previousSAPoint);
-    QLineF const edge2 = QLineF(m_data.passmarkSAPoint, m_data.nextSAPoint);
+    auto edge1 = QLineF(m_data.passmarkSAPoint, m_data.previousSAPoint);
+    auto const edge2 = QLineF(m_data.passmarkSAPoint, m_data.nextSAPoint);
 
     edge1.setAngle(edge1.angle() + edge1.angleTo(edge2) / 2.);
     edge1.setLength(length);

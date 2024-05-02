@@ -1017,7 +1017,7 @@ auto VMeasurements::DimensionTypeToStr(const MeasurementDimension &type) -> QStr
 //---------------------------------------------------------------------------------------------------------------------
 auto VMeasurements::StrToDimensionType(const QString &type) -> MeasurementDimension
 {
-    const QStringList dimensions = QStringList{DimensionX, DimensionY, DimensionW, DimensionZ};
+    const auto dimensions = QStringList{DimensionX, DimensionY, DimensionW, DimensionZ};
     switch (dimensions.indexOf(type))
     {
         case 1: // DimensionY

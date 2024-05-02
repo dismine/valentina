@@ -799,8 +799,7 @@ auto VAbstractPattern::ParseSANode(const QDomElement &domElement) -> VPieceNode
         VDomDocument::GetParametrString(domElement, VAbstractPattern::AttrSABefore, currentSeamAllowance);
     const QString saAfter =
         VDomDocument::GetParametrString(domElement, VAbstractPattern::AttrSAAfter, currentSeamAllowance);
-    const PieceNodeAngle angle =
-        static_cast<PieceNodeAngle>(VDomDocument::GetParametrUInt(domElement, AttrAngle, QChar('0')));
+    const auto angle = static_cast<PieceNodeAngle>(VDomDocument::GetParametrUInt(domElement, AttrAngle, QChar('0')));
 
     const bool passmark = VDomDocument::GetParametrBool(domElement, VAbstractPattern::AttrNodePassmark, falseStr);
     const PassmarkLineType passmarkLine = StringToPassmarkLineType(
@@ -1510,7 +1509,7 @@ void VAbstractPattern::DeleteBackgroundImage(const QUuid &id)
             const QDomElement imageElement = imageNode.toElement();
             if (not imageElement.isNull())
             {
-                QUuid const imageId = QUuid(GetParametrEmptyString(imageElement, AttrImageId));
+                auto const imageId = QUuid(GetParametrEmptyString(imageElement, AttrImageId));
                 if (imageId == id)
                 {
                     imagesTag.removeChild(imageElement);
@@ -2272,7 +2271,7 @@ auto VAbstractPattern::GetBackgroundImageElement(const QUuid &id) const -> QDomE
                     const QDomElement imageElement = imageNode.toElement();
                     if (not imageElement.isNull())
                     {
-                        QUuid const imageId = QUuid(GetParametrEmptyString(imageElement, AttrImageId));
+                        auto const imageId = QUuid(GetParametrEmptyString(imageElement, AttrImageId));
                         if (imageId == id)
                         {
                             return imageElement;

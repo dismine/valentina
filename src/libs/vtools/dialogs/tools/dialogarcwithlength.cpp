@@ -296,7 +296,7 @@ void DialogArcWithLength::ShowDialog(bool click)
             auto *scene = qobject_cast<VMainGraphicsScene *>(VAbstractValApplication::VApp()->getCurrentScene());
             SCASSERT(scene != nullptr)
             const QSharedPointer<VPointF> point = data->GeometricObject<VPointF>(GetCenter());
-            QLineF const line = QLineF(static_cast<QPointF>(*point), scene->getScenePos());
+            auto const line = QLineF(static_cast<QPointF>(*point), scene->getScenePos());
 
             auto Angle = [&line]()
             {

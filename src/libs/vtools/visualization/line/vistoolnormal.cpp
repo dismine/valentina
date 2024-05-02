@@ -82,7 +82,7 @@ void VisToolNormal::RefreshGeometry()
             {
                 QPointF const fPoint = VToolNormal::FindPoint(static_cast<QPointF>(*first),
                                                               static_cast<QPointF>(*second), m_length, m_angle);
-                QLineF const mainLine = QLineF(static_cast<QPointF>(*first), fPoint);
+                auto const mainLine = QLineF(static_cast<QPointF>(*first), fPoint);
                 DrawLine(this, mainLine, LineStyle());
 
                 DrawPoint(m_point, mainLine.p2());
@@ -101,7 +101,7 @@ void VisToolNormal::RefreshGeometry()
 
                 QPointF const fPoint =
                     VToolNormal::FindPoint(static_cast<QPointF>(*first), static_cast<QPointF>(*second), len, m_angle);
-                QLineF const mainLine = QLineF(static_cast<QPointF>(*first), fPoint);
+                auto const mainLine = QLineF(static_cast<QPointF>(*first), fPoint);
                 DrawLine(this, mainLine, LineStyle());
 
                 DrawPoint(m_point, mainLine.p2());

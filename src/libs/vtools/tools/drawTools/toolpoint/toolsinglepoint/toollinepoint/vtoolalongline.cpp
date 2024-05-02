@@ -272,7 +272,7 @@ auto VToolAlongLine::Create(VToolAlongLineInitData &initData) -> VToolAlongLine 
 {
     const QSharedPointer<VPointF> firstPoint = initData.data->GeometricObject<VPointF>(initData.firstPointId);
     const QSharedPointer<VPointF> secondPoint = initData.data->GeometricObject<VPointF>(initData.secondPointId);
-    QLineF line = QLineF(static_cast<QPointF>(*firstPoint), static_cast<QPointF>(*secondPoint));
+    auto line = QLineF(static_cast<QPointF>(*firstPoint), static_cast<QPointF>(*secondPoint));
 
     // Declare special variable "CurrentLength"
     auto *length = new VLengthLine(firstPoint.data(), initData.firstPointId, secondPoint.data(), initData.secondPointId,

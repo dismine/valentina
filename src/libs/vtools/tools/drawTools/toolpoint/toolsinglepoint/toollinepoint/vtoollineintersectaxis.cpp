@@ -120,7 +120,7 @@ auto VToolLineIntersectAxis::Create(const QPointer<DialogTool> &dialog, VMainGra
 auto VToolLineIntersectAxis::Create(VToolLineIntersectAxisInitData &initData) -> VToolLineIntersectAxis *
 {
     const QSharedPointer<VPointF> basePoint = initData.data->GeometricObject<VPointF>(initData.basePointId);
-    QLineF axis = QLineF(static_cast<QPointF>(*basePoint), QPointF(basePoint->x() + 100, basePoint->y()));
+    auto axis = QLineF(static_cast<QPointF>(*basePoint), QPointF(basePoint->x() + 100, basePoint->y()));
     axis.setAngle(CheckFormula(initData.id, initData.formulaAngle, initData.data));
 
     const QSharedPointer<VPointF> firstPoint = initData.data->GeometricObject<VPointF>(initData.firstPointId);

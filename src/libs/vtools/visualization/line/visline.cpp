@@ -83,7 +83,7 @@ auto VisLine::Ray(const QPointF &firstPoint, const qreal &angle) const -> QPoint
 {
     if (this->scene() == nullptr)
     {
-        QLineF line = QLineF(firstPoint, ScenePos());
+        auto line = QLineF(firstPoint, ScenePos());
         line.setAngle(angle);
         return line.p2(); // We can't find ray because item doesn't have scene. We will return cursor position on scene.
     }
@@ -91,10 +91,10 @@ auto VisLine::Ray(const QPointF &firstPoint, const qreal &angle) const -> QPoint
     QRectF scRect = this->scene()->sceneRect();
 
     // Limit size of the scene rect. Axis that has same size as scene rect cause scene size growth.
-    QLineF line1 = QLineF(scRect.topLeft(), scRect.bottomRight());
+    auto line1 = QLineF(scRect.topLeft(), scRect.bottomRight());
     line1.setLength(2);
 
-    QLineF line2 = QLineF(scRect.bottomRight(), scRect.topLeft());
+    auto line2 = QLineF(scRect.bottomRight(), scRect.topLeft());
     line2.setLength(2);
 
     scRect = QRectF(line1.p2(), line2.p2());
@@ -110,7 +110,7 @@ auto VisLine::Ray(const QPointF &firstPoint, const qreal &angle) const -> QPoint
 //---------------------------------------------------------------------------------------------------------------------
 auto VisLine::Ray(const QPointF &firstPoint) const -> QPointF
 {
-    QLineF const line = QLineF(firstPoint, ScenePos());
+    auto const line = QLineF(firstPoint, ScenePos());
     return Ray(firstPoint, line.angle());
 }
 

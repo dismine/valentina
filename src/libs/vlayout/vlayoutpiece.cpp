@@ -1269,7 +1269,7 @@ void VLayoutPiece::Mirror(const QLineF &edge)
         return;
     }
 
-    const QLineF axis = QLineF(edge.x2(), edge.y2(), edge.x2() + 100, edge.y2()); // Ox axis
+    const auto axis = QLineF(edge.x2(), edge.y2(), edge.x2() + 100, edge.y2()); // Ox axis
 
     const qreal angle = edge.angleTo(axis);
     const QPointF p2 = edge.p2();

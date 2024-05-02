@@ -277,7 +277,7 @@ void DialogRotation::ShowDialog(bool click)
         try
         {
             const QSharedPointer<VPointF> point = data->GeometricObject<VPointF>(GetOrigPointId());
-            const QLineF line = QLineF(static_cast<QPointF>(*point), scene->getScenePos());
+            const auto line = QLineF(static_cast<QPointF>(*point), scene->getScenePos());
 
             // Radius of point circle, but little bigger. Need handle with hover sizes.
             if (line.length() <= ScaledRadius(SceneScale(VAbstractValApplication::VApp()->getCurrentScene())) * 1.5)

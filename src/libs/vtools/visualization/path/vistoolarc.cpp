@@ -65,7 +65,7 @@ void VisToolArc::RefreshGeometry()
 
         if (GetMode() == Mode::Creation)
         {
-            QLineF const r = QLineF(static_cast<QPointF>(*first), ScenePos());
+            auto const r = QLineF(static_cast<QPointF>(*first), ScenePos());
 
             auto Angle = [&r]()
             {

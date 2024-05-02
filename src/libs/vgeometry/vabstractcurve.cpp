@@ -496,7 +496,7 @@ auto VAbstractCurve::CurveIntersectAxis(const QPointF &point, qreal angle, const
     rec.translate(-INT_MAX / 2.0, -INT_MAX / 2.0);
 
     // Instead of using axis compare two rays. See issue #963.
-    QLineF axis = QLineF(point, VGObject::BuildRay(point, angle, rec));
+    auto axis = QLineF(point, VGObject::BuildRay(point, angle, rec));
     QVector<QPointF> points = VAbstractCurve::CurveIntersectLine(curvePoints, axis);
 
     axis = QLineF(point, VGObject::BuildRay(point, angle + 180, rec));

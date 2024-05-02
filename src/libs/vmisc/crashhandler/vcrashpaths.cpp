@@ -55,9 +55,9 @@ auto LogDirPath(const QString &appName) -> QString
 #endif
     }
 #if defined(Q_OS_WINDOWS)
-    QString path = QStringList{logDirPath, logs}.join(QDir::separator());
+    auto path = QStringList{logDirPath, logs}.join(QDir::separator());
 #else
-    QString path = QStringList{logDirPath, VER_COMPANYNAME_STR, logs, appName}.join(QDir::separator());
+    auto path = QStringList{logDirPath, VER_COMPANYNAME_STR, logs, appName}.join(QDir::separator());
 #endif
     return path;
 }

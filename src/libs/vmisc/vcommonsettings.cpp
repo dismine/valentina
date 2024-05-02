@@ -347,7 +347,7 @@ void VCommonSettings::SetPathCustomImage(const QString &value)
 //---------------------------------------------------------------------------------------------------------------------
 auto VCommonSettings::GetDefPathSVGFonts() -> QString
 {
-    QString const defPath = QStringList{QDir::homePath(), "Valentina"_L1, "Svg fonts"_L1}.join(QDir::separator());
+    auto const defPath = QStringList{QDir::homePath(), "Valentina"_L1, "Svg fonts"_L1}.join(QDir::separator());
 
 #if defined(Q_OS_WIN)
     QString const docPath = QStandardPaths::writableLocation(QStandardPaths::DocumentsLocation);

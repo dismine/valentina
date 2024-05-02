@@ -52,7 +52,7 @@ void TST_VPointF::TestFlip_data()
     QTest::addColumn<QString>("prefix");
 
     VPointF const originPoint;
-    QLineF axis = QLineF(QPointF(5, 0), QPointF(5, 10));
+    auto axis = QLineF(QPointF(5, 0), QPointF(5, 10));
     auto flipped = QPointF(10, 0);
 
     QTest::newRow("Vertical axis") << originPoint << axis << flipped << "a2";
@@ -62,7 +62,7 @@ void TST_VPointF::TestFlip_data()
 
     QTest::newRow("Horizontal axis") << originPoint << axis << flipped << "a2";
 
-    QLineF l = QLineF(QPointF(), QPointF(10, 0));
+    auto l = QLineF(QPointF(), QPointF(10, 0));
     l.setAngle(315);
     flipped = l.p2();
     l.setLength(l.length() / 2.0);

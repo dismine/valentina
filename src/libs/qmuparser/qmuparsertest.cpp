@@ -504,7 +504,7 @@ auto QmuParserTester::TestVarConst() -> int
         // 4 used variables
         p.SetExpr("a+b+c+d");
         qmu::varmap_type UsedVar = p.GetUsedVar();
-        int iCount = static_cast<int>(UsedVar.size());
+        auto iCount = static_cast<int>(UsedVar.size());
         if (iCount != 4)
         {
             throw false;

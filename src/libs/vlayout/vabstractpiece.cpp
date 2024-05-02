@@ -327,7 +327,7 @@ auto AngleByFirstSymmetry(const QVector<VRawSAPoint> &points, QPointF p1, QPoint
         *needRollback = false;
     }
 
-    const QLineF axis = QLineF(p1, p2);
+    const auto axis = QLineF(p1, p2);
 
     QLineF const sEdge(VPointF::FlipPF(axis, bigLine2.p1()), VPointF::FlipPF(axis, bigLine2.p2()));
 
@@ -408,7 +408,7 @@ auto AngleBySecondSymmetry(const QVector<VRawSAPoint> &points, QPointF p1, QPoin
         *needRollback = false;
     }
 
-    const QLineF axis = QLineF(p3, p2);
+    const auto axis = QLineF(p3, p2);
 
     QLineF const sEdge(VPointF::FlipPF(axis, bigLine1.p1()), VPointF::FlipPF(axis, bigLine1.p2()));
 
@@ -755,7 +755,7 @@ void RollbackByLength(QVector<VRawSAPoint> &ekvPoints, const QVector<VSAPoint> &
 //---------------------------------------------------------------------------------------------------------------------
 void RollbackBySecondEdgeSymmetry(QVector<VRawSAPoint> &ekvPoints, const QVector<VSAPoint> &points, qreal width)
 {
-    const QLineF axis = QLineF(points.at(points.size() - 1), points.at(1));
+    const auto axis = QLineF(points.at(points.size() - 1), points.at(1));
     const QLineF bigLine1 = VAbstractPiece::ParallelLine(points.at(points.size() - 2), points.at(0), width);
     QLineF const sEdge(VPointF::FlipPF(axis, bigLine1.p1()), VPointF::FlipPF(axis, bigLine1.p2()));
 
@@ -772,7 +772,7 @@ void RollbackBySecondEdgeSymmetry(QVector<VRawSAPoint> &ekvPoints, const QVector
 //---------------------------------------------------------------------------------------------------------------------
 void RollbackByFirstEdgeSymmetry(QVector<VRawSAPoint> &ekvPoints, const QVector<VSAPoint> &points, qreal width)
 {
-    const QLineF axis = QLineF(points.at(points.size() - 2), points.at(points.size() - 1));
+    const auto axis = QLineF(points.at(points.size() - 2), points.at(points.size() - 1));
     const QLineF bigLine2 = VAbstractPiece::ParallelLine(points.at(points.size() - 1), points.at(1), width);
     QLineF const sEdge(VPointF::FlipPF(axis, bigLine2.p1()), VPointF::FlipPF(axis, bigLine2.p2()));
     const QLineF bigLine1 = VAbstractPiece::ParallelLine(points.at(points.size() - 2), points.at(0), width);
@@ -1625,7 +1625,7 @@ void VAbstractPiece::SetUUID(const QUuid &uuid)
 //---------------------------------------------------------------------------------------------------------------------
 void VAbstractPiece::SetUUID(const QString &uuid)
 {
-    const QUuid temp = QUuid(uuid);
+    const auto temp = QUuid(uuid);
     d->m_uuid = temp.isNull() ? QUuid::createUuid() : temp;
 }
 

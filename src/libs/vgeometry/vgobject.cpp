@@ -299,7 +299,7 @@ auto VGObject::ToJson() const -> QJsonObject
 //---------------------------------------------------------------------------------------------------------------------
 auto VGObject::BuildLine(const QPointF &p1, const qreal &length, const qreal &angle) -> QLineF
 {
-    QLineF line = QLineF();
+    QLineF line;
     line.setP1(p1);
     line.setAngle(angle); // First set angle then length. Length can have negative value.
     line.setLength(length);
@@ -696,7 +696,7 @@ auto VGObject::FlippingMatrix(const QLineF &axis) -> QTransform
         return matrix;
     }
 
-    const QLineF axisOX = QLineF(axis.x2(), axis.y2(), axis.x2() + 100, axis.y2()); // Ox axis
+    const auto axisOX = QLineF(axis.x2(), axis.y2(), axis.x2() + 100, axis.y2()); // Ox axis
 
     const qreal angle = axis.angleTo(axisOX);
     const QPointF p2 = axis.p2();

@@ -590,7 +590,7 @@ void DialogEllipticalArc::ShowDialog(bool click)
         SCASSERT(scene != nullptr)
 
         const QSharedPointer<VPointF> center = data->GeometricObject<VPointF>(GetCenter());
-        QLineF line = QLineF(static_cast<QPointF>(*center), scene->getScenePos());
+        auto line = QLineF(static_cast<QPointF>(*center), scene->getScenePos());
 
         auto Angle = [&line]()
         {

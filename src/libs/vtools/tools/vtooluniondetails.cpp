@@ -375,8 +375,8 @@ void UnionInitParameters(const VToolUnionDetailsInitData &initData, const VPiece
     point4.setX(point4.x() + dx);
     point4.setY(point4.y() + dy);
 
-    const QLineF p4p3 = QLineF(static_cast<QPointF>(point4), static_cast<QPointF>(point3));
-    const QLineF p1p2 = QLineF(static_cast<QPointF>(point1), static_cast<QPointF>(point2));
+    const auto p4p3 = QLineF(static_cast<QPointF>(point4), static_cast<QPointF>(point3));
+    const auto p1p2 = QLineF(static_cast<QPointF>(point1), static_cast<QPointF>(point2));
 
     angle = p4p3.angleTo(p1p2);
 }

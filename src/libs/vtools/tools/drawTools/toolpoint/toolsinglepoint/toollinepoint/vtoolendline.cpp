@@ -133,7 +133,7 @@ auto VToolEndLine::Create(const QPointer<DialogTool> &dialog, VMainGraphicsScene
 auto VToolEndLine::Create(VToolEndLineInitData &initData) -> VToolEndLine *
 {
     const QSharedPointer<VPointF> basePoint = initData.data->GeometricObject<VPointF>(initData.basePointId);
-    QLineF line = QLineF(static_cast<QPointF>(*basePoint), QPointF(basePoint->x() + 100, basePoint->y()));
+    auto line = QLineF(static_cast<QPointF>(*basePoint), QPointF(basePoint->x() + 100, basePoint->y()));
 
     line.setAngle(CheckFormula(initData.id, initData.formulaAngle, initData.data)); // First set angle.
     line.setLength(

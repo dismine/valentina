@@ -114,7 +114,7 @@ auto VToolShoulderPoint::FindPoint(const QPointF &p1Line, const QPointF &p2Line,
         return shoulderPoint;
     }
 
-    QLineF line = QLineF(p1Line, p2Line);
+    auto line = QLineF(p1Line, p2Line);
     const qreal baseLength = line.length();
     const int baseAngle = qRound(line.angle());
     line.setLength(length * 2);
@@ -126,8 +126,8 @@ auto VToolShoulderPoint::FindPoint(const QPointF &p1Line, const QPointF &p2Line,
 
     if (res == 1 || res == 2)
     {
-        const QLineF line1 = QLineF(p1Line, p1);
-        const QLineF line2 = QLineF(p1Line, p2);
+        const auto line1 = QLineF(p1Line, p1);
+        const auto line2 = QLineF(p1Line, p2);
         if (line1.length() > baseLength && baseAngle == qRound(line1.angle()))
         {
             shoulderPoint = p1;

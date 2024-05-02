@@ -223,7 +223,7 @@ void DialogPointFromCircleAndTangent::ShowDialog(bool click)
         auto *scene = qobject_cast<VMainGraphicsScene *>(VAbstractValApplication::VApp()->getCurrentScene());
         SCASSERT(scene != nullptr)
         const QSharedPointer<VPointF> center = data->GeometricObject<VPointF>(GetCircleCenterId());
-        QLineF const line = QLineF(static_cast<QPointF>(*center), scene->getScenePos());
+        auto const line = QLineF(static_cast<QPointF>(*center), scene->getScenePos());
 
         SetCircleRadius(QString::number(FromPixel(line.length(), *data->GetPatternUnit())));
     }
