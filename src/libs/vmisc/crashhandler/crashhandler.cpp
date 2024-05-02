@@ -213,10 +213,7 @@ auto InitializeCrashpad(const QString &appName) -> bool
     // Attachments to be uploaded alongside the crash - default bundle size limit is 20MB
     std::vector<base::FilePath> attachments;
     base::FilePath const attachment(VCrashPaths::GetPlatformString(VCrashPaths::GetAttachmentPath(appName)));
-#if defined(Q_OS_WINDOWS) || defined(Q_OS_LINUX)
-    // Crashpad hasn't implemented attachments on OS X yet
     attachments.push_back(attachment);
-#endif
 
     // Ensure that crashpad_handler is shipped with your application
     base::FilePath const handler(VCrashPaths::GetPlatformString(crashpadPaths.GetHandlerPath()));
