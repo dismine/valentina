@@ -22,7 +22,74 @@ QT_WARNING_DISABLE_CLANG("-Wunused-member-function")
 Q_GLOBAL_STATIC_WITH_ARGS(QColor, tileColor, (180, 180, 180))            // NOLINT
 Q_GLOBAL_STATIC_WITH_ARGS(QBrush, triangleBush, (QColor(200, 200, 200))) // NOLINT
 
+struct WatermarkScaledImageInfo
+{
+    qint64 scaledImageSize{-1};
+    int width{0};
+    int height{0};
+};
+
+using WatermarkScaledSize = QCache<QString, WatermarkScaledImageInfo>;
+Q_GLOBAL_STATIC(WatermarkScaledSize, watermarkSizeCache) // NOLINT
+
 QT_WARNING_POP
+
+//---------------------------------------------------------------------------------------------------------------------
+inline auto GenerateWatermarkScaledSizeCacheKey(const QString &watermarkPath, qreal xScale, qreal yScale) -> QString
+{
+    return QStringLiteral("path%1+xscale%2+yscale%3")
+        .arg(watermarkPath, QString::number(xScale), QString::number(yScale));
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void CalculateAndCacheWatermarkScaledImageSize(const VWatermarkData &watermarkData, const QString &watermarkPath,
+                                               qreal xScale, qreal yScale)
+{
+    QString const imagePath = AbsoluteMPath(watermarkPath, watermarkData.path);
+    QImageReader imageReader(imagePath);
+    QImage const watermarkImage = imageReader.read();
+
+    qint64 scaledImageSize = -1;
+    if (!watermarkImage.isNull())
+    {
+        qint64 const fileSize = watermarkImage.sizeInBytes();
+        qint64 const pixelSize = fileSize / watermarkImage.height() / watermarkImage.width();
+        QSize const scaledSize(qRound(watermarkImage.width() / xScale), qRound(watermarkImage.height() / yScale));
+        scaledImageSize = pixelSize * scaledSize.width() * scaledSize.height() / 1024;
+    }
+
+    auto *info = new WatermarkScaledImageInfo;
+    info->scaledImageSize = scaledImageSize;
+    info->width = watermarkImage.width();
+    info->height = watermarkImage.height();
+
+    // Insert into the cache
+    watermarkSizeCache->insert(GenerateWatermarkScaledSizeCacheKey(watermarkPath, xScale, yScale), info);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+auto GetWatermarkScaledImageInfo(const VWatermarkData &watermarkData, const QString &watermarkPath, qreal xScale,
+                                 qreal yScale) -> WatermarkScaledImageInfo
+{
+    // Check if the value is already cached
+    WatermarkScaledImageInfo *info =
+        watermarkSizeCache->object(GenerateWatermarkScaledSizeCacheKey(watermarkPath, xScale, yScale));
+    if (info != nullptr)
+    {
+        return *info;
+    }
+
+    // If not cached, calculate and cache the value
+    CalculateAndCacheWatermarkScaledImageSize(watermarkData, watermarkPath, xScale, yScale);
+    // Retrieve the calculated value from the cache
+    info = watermarkSizeCache->object(GenerateWatermarkScaledSizeCacheKey(watermarkPath, xScale, yScale));
+    if (info != nullptr)
+    {
+        return *info;
+    }
+
+    return {}; // Return an error value if caching failed
+}
 
 //---------------------------------------------------------------------------------------------------------------------
 auto Grayscale(QImage image) -> QImage
@@ -718,13 +785,10 @@ void VPTileFactory::PaintWatermarkImage(QPainter *painter, const QRectF &img, co
         return watermark;
     };
 
-    QString const imagePath = AbsoluteMPath(watermarkPath, watermarkData.path);
-    QFileInfo const f(imagePath);
+    WatermarkScaledImageInfo const watermarkImageInfo =
+        GetWatermarkScaledImageInfo(watermarkData, watermarkPath, xScale, yScale);
 
-    QImageReader imageReader(imagePath);
-    QImage const watermarkImage = imageReader.read();
-
-    if (watermarkImage.isNull())
+    if (watermarkImageInfo.scaledImageSize == -1)
     {
         if (QPixmap const watermarkPixmap = BrokenImage();
             watermarkPixmap.width() < img.width() && watermarkPixmap.height() < img.height())
@@ -741,12 +805,8 @@ void VPTileFactory::PaintWatermarkImage(QPainter *painter, const QRectF &img, co
         return;
     }
 
-    qint64 const fileSize = watermarkImage.sizeInBytes();
-    qint64 const pixelSize = fileSize / watermarkImage.height() / watermarkImage.width();
-    QSize const scaledSize(qRound(watermarkImage.width() / xScale), qRound(watermarkImage.height() / yScale));
-    qint64 const scaledImageSize = pixelSize * scaledSize.width() * scaledSize.height() / 1024;
-
-    if (int const limit = QPixmapCache::cacheLimit(); scaledImageSize > limit && (xScale < 1 || yScale < 1))
+    if (int const limit = QPixmapCache::cacheLimit();
+        watermarkImageInfo.scaledImageSize > limit && (xScale < 1 || yScale < 1))
     {
         QScopedPointer<QSvgRenderer> const svgRenderer(new QSvgRenderer());
 
@@ -756,12 +816,13 @@ void VPTileFactory::PaintWatermarkImage(QPainter *painter, const QRectF &img, co
 
         QString const grayscale = watermarkData.grayscale ? QStringLiteral("_grayscale") : QString();
         svgRenderer->load(QStringLiteral("://puzzleicon/svg/watermark_placeholder%1.svg").arg(grayscale));
-        QRect imageRect(0, 0, qRound(watermarkImage.width() / xScale), qRound(watermarkImage.height() / yScale));
+        QRect imageRect(0, 0, qRound(watermarkImageInfo.width / xScale), qRound(watermarkImageInfo.height / yScale));
         imageRect.translate(img.center().toPoint() - imageRect.center());
         svgRenderer->render(painter, imageRect);
         return;
     }
 
+    QFileInfo const f(AbsoluteMPath(watermarkPath, watermarkData.path));
     QPixmap watermark;
     if (f.suffix() == "png"_L1 || f.suffix() == "jpg"_L1 || f.suffix() == "jpeg"_L1 || f.suffix() == "bmp"_L1)
     {
