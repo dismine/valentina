@@ -1616,20 +1616,18 @@ auto VLayoutPiece::ContourPath(bool togetherWithNotches, bool showLayoutAllowanc
                 }
                 path.addPath(passmaksPath);
 
-                if (!d->m_seamAllowanceMirrorLine.isNull() && IsShowFullPiece())
+                if (!d->m_seamAllowanceMirrorLine.isNull() && IsShowFullPiece() &&
+                    !VGObject::IsPointOnLineviaPDP(passmark.baseLine.p1(), d->m_seamAllowanceMirrorLine.p1(),
+                                                   d->m_seamAllowanceMirrorLine.p2()))
                 {
-                    if (!VGObject::IsPointOnLineviaPDP(passmark.baseLine.p1(), d->m_seamAllowanceMirrorLine.p1(),
-                                                       d->m_seamAllowanceMirrorLine.p2()))
+                    QPainterPath mirroredPassmaksPath;
+                    for (const auto &line : passmark.lines)
                     {
-                        QPainterPath mirroredPassmaksPath;
-                        for (const auto &line : passmark.lines)
-                        {
-                            mirroredPassmaksPath.moveTo(line.p1());
-                            mirroredPassmaksPath.lineTo(line.p2());
-                        }
-                        const QTransform matrix = VGObject::FlippingMatrix(d->m_seamAllowanceMirrorLine);
-                        path.addPath(matrix.map(mirroredPassmaksPath));
+                        mirroredPassmaksPath.moveTo(line.p1());
+                        mirroredPassmaksPath.lineTo(line.p2());
                     }
+                    const QTransform matrix = VGObject::FlippingMatrix(d->m_seamAllowanceMirrorLine);
+                    path.addPath(matrix.map(mirroredPassmaksPath));
                 }
             }
         }
