@@ -500,8 +500,8 @@ void VAbstractPattern::ParseGroups(const QDomElement &domElement)
             {
                 VContainer::UpdateId(GetParametrUInt(domElement, AttrId, NULL_ID_STR), valentinaNamespace);
 
-                const QPair<bool, QMap<quint32, quint32>> groupData = ParseItemElement(domElement);
-                const QMap<quint32, quint32> group = groupData.second;
+                const auto [groupDataFirst, groupDataSecond] = ParseItemElement(domElement);
+                const QMap<quint32, quint32> group = groupDataSecond;
                 auto i = group.constBegin();
                 while (i != group.constEnd())
                 {
@@ -511,7 +511,7 @@ void VAbstractPattern::ParseGroups(const QDomElement &domElement)
                     }
 
                     const bool previous = itemVisibility.value(i.key(), false);
-                    itemVisibility.insert(i.key(), previous || groupData.first);
+                    itemVisibility.insert(i.key(), previous || groupDataFirst);
                     ++i;
                 }
             }

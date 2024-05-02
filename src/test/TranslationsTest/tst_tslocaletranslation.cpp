@@ -322,12 +322,11 @@ void TST_TSLocaleTranslation::TestHTMLTags()
         std::make_pair(QRegularExpression(QStringLiteral("<body{1}.*>"), patternOption),
                        QRegularExpression(QStringLiteral("</body{1}.*>"), patternOption))};
 
-    for (const auto &regex : regexes)
+    for (const auto &[start, end] : regexes)
     {
-        if (source.contains(regex.first) &&
-            (not translation.contains(regex.second) || translation.count(regex.second) != source.count(regex.first)))
+        if (source.contains(start) && (not translation.contains(end) || translation.count(end) != source.count(start)))
         {
-            const QString message = u"Tag mismatch. Pattern: '<%1>'. "_s.arg(regex.first.pattern()) +
+            const QString message = u"Tag mismatch. Pattern: '<%1>'. "_s.arg(start.pattern()) +
                                     u"Original name:'%1'"_s.arg(source) + u", translated name:'%1'"_s.arg(translation);
             QFAIL(qUtf8Printable(message));
         }

@@ -758,9 +758,9 @@ auto VPrintLayout::SceneTargetRect(QPrinter *printer, const QRectF &source) -> Q
         y = 0;
     }
 
-    QPair<qreal, qreal> const scaleDiff = PrinterScaleDiff(printer);
-    const double xscale = scaleDiff.first;
-    const double yscale = scaleDiff.second;
+    auto const [scaleDiffFirst, scaleDiffSecond] = PrinterScaleDiff(printer);
+    const double xscale = scaleDiffFirst;
+    const double yscale = scaleDiffSecond;
 
     return {x * xscale, y * yscale, source.width() * xscale, source.height() * yscale};
 }

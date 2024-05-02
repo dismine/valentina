@@ -81,12 +81,12 @@ void DRW_TextCodec::setVersion(DRW::Version v, bool dxfFormat)
 void DRW_TextCodec::setVersion(const std::string &v, bool dxfFormat)
 {
     version = DRW::UNKNOWNV;
-    for (auto dwgVersionString : DRW::dwgVersionStrings)
+    for (auto [first, second] : DRW::dwgVersionStrings)
     {
-        if (std::strcmp(v.c_str(), dwgVersionString.first) == 0)
+        if (std::strcmp(v.c_str(), first) == 0)
         {
-            version = dwgVersionString.second;
-            setVersion(dwgVersionString.second, dxfFormat);
+            version = second;
+            setVersion(second, dxfFormat);
             break;
         }
     }

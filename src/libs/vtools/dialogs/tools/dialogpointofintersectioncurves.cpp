@@ -255,11 +255,11 @@ void DialogPointOfIntersectionCurves::ValidateAlias()
     QRegularExpression const rx(NameRegExp());
 
     const QSharedPointer<VAbstractCurve> curve1 = data->GeometricObject<VAbstractCurve>(GetFirstCurveId());
-    QPair<QString, QString> const curve1Alias =
+    auto const [curve1AliasFirst, curve1AliasSecond] =
         SegmentAliases(curve1->getType(), GetCurve1AliasSuffix1(), GetCurve1AliasSuffix2());
 
     const QSharedPointer<VAbstractCurve> curve2 = data->GeometricObject<VAbstractCurve>(GetSecondCurveId());
-    QPair<QString, QString> const curve2Alias =
+    auto const [curve2AliasFirst, curve2AliasSecond] =
         SegmentAliases(curve2->getType(), GetCurve2AliasSuffix1(), GetCurve2AliasSuffix2());
 
     QSet<QString> uniqueAliases;
@@ -274,10 +274,10 @@ void DialogPointOfIntersectionCurves::ValidateAlias()
         }
     };
 
-    CountUniqueAliases(curve1Alias.first);
-    CountUniqueAliases(curve1Alias.second);
-    CountUniqueAliases(curve2Alias.first);
-    CountUniqueAliases(curve2Alias.second);
+    CountUniqueAliases(curve1AliasFirst);
+    CountUniqueAliases(curve1AliasSecond);
+    CountUniqueAliases(curve2AliasFirst);
+    CountUniqueAliases(curve2AliasSecond);
 
     auto Validate = [countAliases, uniqueAliases, rx, this](const QString &originalSuffix, const QString &suffix,
                                                             const QString &alias, bool &flagAlias, QLabel *label)
@@ -296,13 +296,13 @@ void DialogPointOfIntersectionCurves::ValidateAlias()
         }
     };
 
-    Validate(originCurve1AliasSuffix1, GetCurve1AliasSuffix1(), curve1Alias.first, flagCurve1Alias1,
+    Validate(originCurve1AliasSuffix1, GetCurve1AliasSuffix1(), curve1AliasFirst, flagCurve1Alias1,
              ui->labelCurve1Alias1);
-    Validate(originCurve1AliasSuffix2, GetCurve1AliasSuffix2(), curve1Alias.second, flagCurve1Alias2,
+    Validate(originCurve1AliasSuffix2, GetCurve1AliasSuffix2(), curve1AliasSecond, flagCurve1Alias2,
              ui->labelCurve1Alias2);
-    Validate(originCurve2AliasSuffix1, GetCurve2AliasSuffix1(), curve2Alias.first, flagCurve2Alias1,
+    Validate(originCurve2AliasSuffix1, GetCurve2AliasSuffix1(), curve2AliasFirst, flagCurve2Alias1,
              ui->labelCurve2Alias1);
-    Validate(originCurve2AliasSuffix2, GetCurve2AliasSuffix2(), curve2Alias.second, flagCurve2Alias2,
+    Validate(originCurve2AliasSuffix2, GetCurve2AliasSuffix2(), curve2AliasSecond, flagCurve2Alias2,
              ui->labelCurve2Alias2);
 
     CheckState();

@@ -244,8 +244,8 @@ void VPTileFactory::drawTile(QPainter *painter, QPrinter *printer, const VPSheet
 
     painter->save();
 
-    const QPair<qreal, qreal> scale = VPrintLayout::PrinterScaleDiff(printer);
-    painter->scale(scale.first, scale.second);
+    const auto [xscale, yscale] = VPrintLayout::PrinterScaleDiff(printer);
+    painter->scale(xscale, yscale);
 
     if (row > 0)
     {
@@ -290,7 +290,7 @@ void VPTileFactory::drawTile(QPainter *painter, QPrinter *printer, const VPSheet
         DrawSolidBottomLine(painter, col, nbCol);
     }
 
-    DrawRuler(painter, scale.first);
+    DrawRuler(painter, xscale);
     DrawWatermark(painter);
 
     if (col < nbCol - 1)

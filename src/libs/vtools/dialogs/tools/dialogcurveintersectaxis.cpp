@@ -381,11 +381,11 @@ void DialogCurveIntersectAxis::ValidateAlias()
     QRegularExpression const rx(NameRegExp());
 
     const QSharedPointer<VAbstractCurve> curve = data->GeometricObject<VAbstractCurve>(getCurveId());
-    QPair<QString, QString> const alias = SegmentAliases(curve->getType(), GetAliasSuffix1(), GetAliasSuffix2());
+    auto const [aliasFirst, aliasSecond] = SegmentAliases(curve->getType(), GetAliasSuffix1(), GetAliasSuffix2());
 
     if (not GetAliasSuffix1().isEmpty() &&
-        (not rx.match(alias.first).hasMatch() ||
-         (originAliasSuffix1 != GetAliasSuffix1() && not data->IsUnique(alias.first)) || alias.first == alias.second))
+        (not rx.match(aliasFirst).hasMatch() ||
+         (originAliasSuffix1 != GetAliasSuffix1() && not data->IsUnique(aliasFirst)) || aliasFirst == aliasSecond))
     {
         flagAlias1 = false;
         ChangeColor(ui->labelAlias1, errorColor);
@@ -397,8 +397,8 @@ void DialogCurveIntersectAxis::ValidateAlias()
     }
 
     if (not GetAliasSuffix2().isEmpty() &&
-        (not rx.match(alias.second).hasMatch() ||
-         (originAliasSuffix2 != GetAliasSuffix2() && not data->IsUnique(alias.second)) || alias.first == alias.second))
+        (not rx.match(aliasSecond).hasMatch() ||
+         (originAliasSuffix2 != GetAliasSuffix2() && not data->IsUnique(aliasSecond)) || aliasFirst == aliasSecond))
     {
         flagAlias2 = false;
         ChangeColor(ui->labelAlias2, errorColor);

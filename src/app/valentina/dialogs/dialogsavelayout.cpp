@@ -105,9 +105,9 @@ DialogSaveLayout::DialogSaveLayout(int count, Draw mode, const QString &fileName
         }
     }
 
-    for (auto &v : InitFormats())
+    for (auto &[first, second] : InitFormats())
     {
-        ui->comboBoxFormat->addItem(v.first, QVariant(static_cast<int>(v.second)));
+        ui->comboBoxFormat->addItem(first, QVariant(static_cast<int>(second)));
     }
 #ifdef V_NO_ASSERT // Temporarily unavailable
     RemoveFormatFromList(LayoutExportFormats::OBJ);

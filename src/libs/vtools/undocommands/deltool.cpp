@@ -145,9 +145,9 @@ void DelTool::UpdateGroups(const QMap<quint32, VGroupData> &groups) const
         while (i != groups.constEnd())
         {
             QMap<vidtype, vidtype> groupMap;
-            for (auto record : i.value().items)
+            for (auto [first, second] : i.value().items)
             {
-                groupMap.insert(record.first, record.second);
+                groupMap.insert(first, second);
             }
 
             QDomElement group = doc->CreateGroup(i.key(), i.value().name, i.value().tags, groupMap, i.value().tool);

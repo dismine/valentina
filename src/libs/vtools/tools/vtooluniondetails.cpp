@@ -1120,15 +1120,15 @@ void CreateUnitedNodes(VPiece &newDetail, const VPiece &d1, const VPiece &d2, co
     QVector<quint32> children;
     VPiecePath newPath;
 
-    for (const auto &path : unitedPath)
+    for (const auto &[first, second] : unitedPath)
     {
-        if (path.first)
+        if (first)
         { // first piece
-            AddNodeToNewPath(initData, newPath, path.second, children, drawName);
+            AddNodeToNewPath(initData, newPath, second, children, drawName);
         }
         else
         { // second piece
-            AddNodeToNewPath(initData, newPath, path.second, children, drawName, dx, dy, pRotate, angle);
+            AddNodeToNewPath(initData, newPath, second, children, drawName, dx, dy, pRotate, angle);
         }
     }
 
@@ -1325,15 +1325,15 @@ void UpdateUnitedNodes(const VToolUnionDetailsInitData &initData, qreal dx, qrea
     {
         const auto unitedPath = VToolUnionDetails::CalcUnitedPath(d1REPath, d2REPath, initData.indexD2, pRotate);
 
-        for (const auto &path : unitedPath)
+        for (const auto &[first, second] : unitedPath)
         {
-            if (path.first)
+            if (first)
             { // first piece
-                UpdatePathNode(initData.data, path.second, children);
+                UpdatePathNode(initData.data, second, children);
             }
             else
             { // second piece
-                UpdatePathNode(initData.data, path.second, children, dx, dy, pRotate, angle);
+                UpdatePathNode(initData.data, second, children, dx, dy, pRotate, angle);
             }
         }
     }

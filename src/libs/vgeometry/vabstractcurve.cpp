@@ -611,18 +611,18 @@ auto VAbstractCurve::ShowDirection(const QVector<DirectionArrow> &arrows, qreal 
 {
     QPainterPath path;
 
-    for (const auto &arrow : arrows)
+    for (const auto &[first, second] : arrows)
     {
-        if (not arrow.first.isNull() && not arrow.second.isNull())
+        if (not first.isNull() && not second.isNull())
         {
             QPainterPath arrowPath;
 
-            QLineF line = arrow.first;
+            QLineF line = first;
             line.setLength(width);
             arrowPath.moveTo(line.p1());
             arrowPath.lineTo(line.p2());
 
-            line = arrow.second;
+            line = second;
             line.setLength(width);
             arrowPath.moveTo(line.p1());
             arrowPath.lineTo(line.p2());

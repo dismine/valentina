@@ -715,11 +715,11 @@ auto DialogIncrements::IncrementUsed(const QString &name) const -> bool
 //---------------------------------------------------------------------------------------------------------------------
 void DialogIncrements::CacheRename(const QString &name, const QString &newName)
 {
-    for (auto &i : m_renameList)
+    for (auto &[first, second] : m_renameList)
     {
-        if (i.second == name)
+        if (second == name)
         {
-            i.second = newName;
+            second = newName;
             return;
         }
     }
@@ -1354,9 +1354,9 @@ void DialogIncrements::RefreshPattern()
     if (m_hasChanges)
     {
         QVector<VFormulaField> expressions = m_doc->ListExpressions();
-        for (auto &item : m_renameList)
+        for (auto &[first, second] : m_renameList)
         {
-            m_doc->ReplaceNameInFormula(expressions, item.first, item.second);
+            m_doc->ReplaceNameInFormula(expressions, first, second);
         }
         m_renameList.clear();
 
