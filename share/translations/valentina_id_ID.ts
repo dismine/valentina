@@ -16806,29 +16806,29 @@ This option will take an affect after restart.</source>
 <context>
     <name>VAbstractPattern</name>
     <message>
-        <location filename="../../src/libs/ifc/xml/vabstractpattern.cpp" line="1595"/>
+        <location filename="../../src/libs/ifc/xml/vabstractpattern.cpp" line="1594"/>
         <source>Can&apos;t find tool in table.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/libs/ifc/xml/vabstractpattern.cpp" line="2125"/>
+        <location filename="../../src/libs/ifc/xml/vabstractpattern.cpp" line="2124"/>
         <source>Error creating or updating group</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/libs/ifc/xml/vabstractpattern.cpp" line="2193"/>
+        <location filename="../../src/libs/ifc/xml/vabstractpattern.cpp" line="2192"/>
         <source>measurement</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/libs/ifc/xml/vabstractpattern.cpp" line="2446"/>
-        <location filename="../../src/libs/ifc/xml/vabstractpattern.cpp" line="2624"/>
-        <location filename="../../src/libs/ifc/xml/vabstractpattern.cpp" line="2702"/>
+        <location filename="../../src/libs/ifc/xml/vabstractpattern.cpp" line="2445"/>
+        <location filename="../../src/libs/ifc/xml/vabstractpattern.cpp" line="2623"/>
+        <location filename="../../src/libs/ifc/xml/vabstractpattern.cpp" line="2701"/>
         <source>New group</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/libs/ifc/xml/vabstractpattern.cpp" line="855"/>
+        <location filename="../../src/libs/ifc/xml/vabstractpattern.cpp" line="854"/>
         <source>Wrong tag name &apos;%1&apos;.</source>
         <translation type="unfinished"></translation>
     </message>
@@ -18668,7 +18668,7 @@ This option will take an affect after restart.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/libs/vlayout/vlayoutpiece.cpp" line="1932"/>
+        <location filename="../../src/libs/vlayout/vlayoutpiece.cpp" line="1930"/>
         <source>Invalid SVG font &apos;%1&apos;. Fallback to outline font.</source>
         <translation type="unfinished"></translation>
     </message>
@@ -20075,23 +20075,23 @@ This option will take an affect after restart.</source>
 <context>
     <name>VPTileFactory</name>
     <message>
-        <location filename="../../src/app/puzzle/vptilefactory.cpp" line="599"/>
+        <location filename="../../src/app/puzzle/vptilefactory.cpp" line="666"/>
         <source>Grid ( %1 , %2 )</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/vptilefactory.cpp" line="615"/>
+        <location filename="../../src/app/puzzle/vptilefactory.cpp" line="682"/>
         <source>Page %1 of %2</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/vptilefactory.cpp" line="348"/>
+        <location filename="../../src/app/puzzle/vptilefactory.cpp" line="415"/>
         <source>cm</source>
         <comment>unit</comment>
         <translation type="unfinished">cm</translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/vptilefactory.cpp" line="348"/>
+        <location filename="../../src/app/puzzle/vptilefactory.cpp" line="415"/>
         <source>in</source>
         <comment>unit</comment>
         <translation type="unfinished"></translation>

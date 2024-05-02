@@ -12315,17 +12315,17 @@ Do you want to save your changes?</source>
     <message>
         <location filename="../../src/app/valentina/mainwindow.cpp" line="3073"/>
         <source>Point at the intersections of lines/axis tools</source>
-        <translation type="unfinished"></translation>
+        <translation>Інструменти визначення точок перетину ліній/осей</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.cpp" line="3116"/>
         <source>Point segmenting curves/arcs tools</source>
-        <translation type="unfinished"></translation>
+        <translation>Інструменти для визначення точки сегментування кривих/дуг</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.cpp" line="3130"/>
         <source>Points intersecting with 2 curves/arcs/circles tools</source>
-        <translation type="unfinished"></translation>
+        <translation>Інструменти для визначення точок перетину за 2 кривими/дугами/колами</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.cpp" line="3903"/>
@@ -12862,10 +12862,6 @@ Do you want to save your changes?</source>
         <translation>Інструменти Перпендикуляр/Бісектриса</translation>
     </message>
     <message>
-        <source>Point at the intersections of lins/axis tools</source>
-        <translation type="vanished">Інструменти визначення точок перетину ліній/осей</translation>
-    </message>
-    <message>
         <location filename="../../src/app/valentina/mainwindow.cpp" line="3086"/>
         <source>Triangular tools</source>
         <translation>Інструменти типу &quot;трикутник&quot;</translation>
@@ -12874,14 +12870,6 @@ Do you want to save your changes?</source>
         <location filename="../../src/app/valentina/mainwindow.cpp" line="3100"/>
         <source>Point intersecting with axis tools</source>
         <translation>Інструменти для визначення точки перетину з віссю</translation>
-    </message>
-    <message>
-        <source>Point segementing curves/arcs tools</source>
-        <translation type="vanished">Інструменти для визначення точки сегментування кривих/дуг</translation>
-    </message>
-    <message>
-        <source>Points interecting with 2 curves/arcs/circles tools</source>
-        <translation type="vanished">Інструменти для визначення точок перетину за 2 кривими/дугами/колами</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.cpp" line="3145"/>
@@ -19304,29 +19292,29 @@ Do you want to save your changes?</source>
 <context>
     <name>VAbstractPattern</name>
     <message>
-        <location filename="../../src/libs/ifc/xml/vabstractpattern.cpp" line="1595"/>
+        <location filename="../../src/libs/ifc/xml/vabstractpattern.cpp" line="1594"/>
         <source>Can&apos;t find tool in table.</source>
         <translation>Не можу знайти інструмент в таблиці.</translation>
     </message>
     <message>
-        <location filename="../../src/libs/ifc/xml/vabstractpattern.cpp" line="2125"/>
+        <location filename="../../src/libs/ifc/xml/vabstractpattern.cpp" line="2124"/>
         <source>Error creating or updating group</source>
         <translation>Помилка створення чи оновлення групи</translation>
     </message>
     <message>
-        <location filename="../../src/libs/ifc/xml/vabstractpattern.cpp" line="2193"/>
+        <location filename="../../src/libs/ifc/xml/vabstractpattern.cpp" line="2192"/>
         <source>measurement</source>
         <translation>мірка</translation>
     </message>
     <message>
-        <location filename="../../src/libs/ifc/xml/vabstractpattern.cpp" line="2446"/>
-        <location filename="../../src/libs/ifc/xml/vabstractpattern.cpp" line="2624"/>
-        <location filename="../../src/libs/ifc/xml/vabstractpattern.cpp" line="2702"/>
+        <location filename="../../src/libs/ifc/xml/vabstractpattern.cpp" line="2445"/>
+        <location filename="../../src/libs/ifc/xml/vabstractpattern.cpp" line="2623"/>
+        <location filename="../../src/libs/ifc/xml/vabstractpattern.cpp" line="2701"/>
         <source>New group</source>
         <translation>Нова група</translation>
     </message>
     <message>
-        <location filename="../../src/libs/ifc/xml/vabstractpattern.cpp" line="855"/>
+        <location filename="../../src/libs/ifc/xml/vabstractpattern.cpp" line="854"/>
         <source>Wrong tag name &apos;%1&apos;.</source>
         <translation>Неправильна назва тегу &apos;%1&apos;.</translation>
     </message>
@@ -21377,7 +21365,7 @@ Do you want to save your changes?</source>
         <translation>Деталь %1 не має форми.</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vlayout/vlayoutpiece.cpp" line="1932"/>
+        <location filename="../../src/libs/vlayout/vlayoutpiece.cpp" line="1930"/>
         <source>Invalid SVG font &apos;%1&apos;. Fallback to outline font.</source>
         <translation>Неправильний SVG-шрифт &apos;%1&apos;. Відбудеться перехід до контурного шрифту.</translation>
     </message>
@@ -22783,23 +22771,23 @@ Do you want to save your changes?</source>
 <context>
     <name>VPTileFactory</name>
     <message>
-        <location filename="../../src/app/puzzle/vptilefactory.cpp" line="599"/>
+        <location filename="../../src/app/puzzle/vptilefactory.cpp" line="666"/>
         <source>Grid ( %1 , %2 )</source>
         <translation>Сітка ( %1 , %2 )</translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/vptilefactory.cpp" line="615"/>
+        <location filename="../../src/app/puzzle/vptilefactory.cpp" line="682"/>
         <source>Page %1 of %2</source>
         <translation>Сторінка %1 з %2</translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/vptilefactory.cpp" line="348"/>
+        <location filename="../../src/app/puzzle/vptilefactory.cpp" line="415"/>
         <source>cm</source>
         <comment>unit</comment>
         <translation>см</translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/vptilefactory.cpp" line="348"/>
+        <location filename="../../src/app/puzzle/vptilefactory.cpp" line="415"/>
         <source>in</source>
         <comment>unit</comment>
         <translation>дюйм</translation>

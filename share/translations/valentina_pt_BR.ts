@@ -12863,10 +12863,6 @@ Você quer salvar suas mudanças?</translation>
         <translation>Ferramentas Perpendicular/Bissetriz</translation>
     </message>
     <message>
-        <source>Point at the intersections of lins/axis tools</source>
-        <translation type="vanished">Ferramentas de ponto para as interseções de linhas/eixos</translation>
-    </message>
-    <message>
         <location filename="../../src/app/valentina/mainwindow.cpp" line="3086"/>
         <source>Triangular tools</source>
         <translation>Ferramentas de triângulos</translation>
@@ -12875,14 +12871,6 @@ Você quer salvar suas mudanças?</translation>
         <location filename="../../src/app/valentina/mainwindow.cpp" line="3100"/>
         <source>Point intersecting with axis tools</source>
         <translation>Ferramentas de pontos de interseções de eixos</translation>
-    </message>
-    <message>
-        <source>Point segementing curves/arcs tools</source>
-        <translation type="vanished">Ferramentas de segmentação de curvas/arcos</translation>
-    </message>
-    <message>
-        <source>Points interecting with 2 curves/arcs/circles tools</source>
-        <translation type="vanished">Ferramentas de interseções entre 2 curvas/arcos/círculos</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.cpp" line="3145"/>
@@ -19308,29 +19296,29 @@ O significado das classes de caracteres \w, \d, etc., bem como o significado de 
 <context>
     <name>VAbstractPattern</name>
     <message>
-        <location filename="../../src/libs/ifc/xml/vabstractpattern.cpp" line="1595"/>
+        <location filename="../../src/libs/ifc/xml/vabstractpattern.cpp" line="1594"/>
         <source>Can&apos;t find tool in table.</source>
         <translation>Impossível encontrar a ferramenta na tabela.</translation>
     </message>
     <message>
-        <location filename="../../src/libs/ifc/xml/vabstractpattern.cpp" line="2125"/>
+        <location filename="../../src/libs/ifc/xml/vabstractpattern.cpp" line="2124"/>
         <source>Error creating or updating group</source>
         <translation>Erro ao criar ou atualizar o grupo</translation>
     </message>
     <message>
-        <location filename="../../src/libs/ifc/xml/vabstractpattern.cpp" line="2193"/>
+        <location filename="../../src/libs/ifc/xml/vabstractpattern.cpp" line="2192"/>
         <source>measurement</source>
         <translation>medida</translation>
     </message>
     <message>
-        <location filename="../../src/libs/ifc/xml/vabstractpattern.cpp" line="2446"/>
-        <location filename="../../src/libs/ifc/xml/vabstractpattern.cpp" line="2624"/>
-        <location filename="../../src/libs/ifc/xml/vabstractpattern.cpp" line="2702"/>
+        <location filename="../../src/libs/ifc/xml/vabstractpattern.cpp" line="2445"/>
+        <location filename="../../src/libs/ifc/xml/vabstractpattern.cpp" line="2623"/>
+        <location filename="../../src/libs/ifc/xml/vabstractpattern.cpp" line="2701"/>
         <source>New group</source>
         <translation>Novo grupo</translation>
     </message>
     <message>
-        <location filename="../../src/libs/ifc/xml/vabstractpattern.cpp" line="855"/>
+        <location filename="../../src/libs/ifc/xml/vabstractpattern.cpp" line="854"/>
         <source>Wrong tag name &apos;%1&apos;.</source>
         <translation>Nome da etiqueta errada &apos;%1&apos;.</translation>
     </message>
@@ -21381,7 +21369,7 @@ O significado das classes de caracteres \w, \d, etc., bem como o significado de 
         <translation>Peça %1 não possui forma.</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vlayout/vlayoutpiece.cpp" line="1932"/>
+        <location filename="../../src/libs/vlayout/vlayoutpiece.cpp" line="1930"/>
         <source>Invalid SVG font &apos;%1&apos;. Fallback to outline font.</source>
         <translation>Fonte SVG inválida &apos;%1&apos;. Utilizar para fonte de contorno.</translation>
     </message>
@@ -22787,23 +22775,23 @@ O significado das classes de caracteres \w, \d, etc., bem como o significado de 
 <context>
     <name>VPTileFactory</name>
     <message>
-        <location filename="../../src/app/puzzle/vptilefactory.cpp" line="599"/>
+        <location filename="../../src/app/puzzle/vptilefactory.cpp" line="666"/>
         <source>Grid ( %1 , %2 )</source>
         <translation>Grade ( %1, %2 )</translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/vptilefactory.cpp" line="615"/>
+        <location filename="../../src/app/puzzle/vptilefactory.cpp" line="682"/>
         <source>Page %1 of %2</source>
         <translation>Página %1 de %2</translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/vptilefactory.cpp" line="348"/>
+        <location filename="../../src/app/puzzle/vptilefactory.cpp" line="415"/>
         <source>cm</source>
         <comment>unit</comment>
         <translation>cm</translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/vptilefactory.cpp" line="348"/>
+        <location filename="../../src/app/puzzle/vptilefactory.cpp" line="415"/>
         <source>in</source>
         <comment>unit</comment>
         <translation>em</translation>
