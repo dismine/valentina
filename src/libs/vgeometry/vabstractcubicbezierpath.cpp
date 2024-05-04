@@ -155,8 +155,8 @@ auto VAbstractCubicBezierPath::Segment(const QPointF &p) const -> int
  *
  * VSplinePoint splP1 = splPath->at(p1);
  * VSplinePoint splP2 = splPath->at(p2);
- * VSpline spl1 = VSpline(splP1.P(), spl1p2, spl1p3, *p, splPath->GetKCurve());
- * VSpline spl2 = VSpline(*p, spl2p2, spl2p3, splP2.P(), splPath->GetKCurve());
+ * auto spl1 = VSpline(splP1.P(), spl1p2, spl1p3, *p, splPath->GetKCurve());
+ * auto spl2 = VSpline(*p, spl2p2, spl2p3, splP2.P(), splPath->GetKCurve());
  * @param length length first spline path.
  * @param p1 index first spline point in list.
  * @param p2 index second spline point in list.

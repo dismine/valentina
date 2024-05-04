@@ -217,7 +217,7 @@ void TST_VEllipticalArc::ArcByLength()
 
     Q_RELAXED_CONSTEXPR qreal eps = ToPixel(0.45, Unit::Mm); // computing error
     // cppcheck-suppress unreadVariable
-    const QString errorMsg =
+    const auto errorMsg =
         QStringLiteral("Difference between real and computing lengthes bigger than eps = %1.  v1 = %2; v2 = %3");
 
     QVERIFY2(qAbs(arc.GetLength() - length) <= eps, qUtf8Printable(errorMsg.arg(eps).arg(arc.GetLength()).arg(length)));

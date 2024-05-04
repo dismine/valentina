@@ -299,10 +299,10 @@ auto VToolCutSpline::MakeToolTip() const -> QString
     QPointF const point =
         spl->CutSpline(VAbstractValApplication::VApp()->toPixel(length), spl1p2, spl1p3, spl2p2, spl2p3, p->name());
 
-    VSpline spline1 = VSpline(spl->GetP1(), spl1p2, spl1p3, VPointF(point));
+    auto spline1 = VSpline(spl->GetP1(), spl1p2, spl1p3, VPointF(point));
     spline1.SetAliasSuffix(m_aliasSuffix1);
 
-    VSpline spline2 = VSpline(VPointF(point), spl2p2, spl2p3, spl->GetP4());
+    auto spline2 = VSpline(VPointF(point), spl2p2, spl2p3, spl->GetP4());
     spline2.SetAliasSuffix(m_aliasSuffix2);
 
     const QString curveStr = QCoreApplication::translate("VToolCutSpline", "Curve");

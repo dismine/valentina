@@ -143,7 +143,7 @@ void StyleHelper::drawIconWithShadow(const QIcon &icon, const QRect &rect, QPain
             QImage im = px.toImage().convertToFormat(QImage::Format_ARGB32);
             for (int y = 0; y < im.height(); ++y)
             {
-                QRgb *scanLine = reinterpret_cast<QRgb *>(im.scanLine(y));
+                auto *scanLine = reinterpret_cast<QRgb *>(im.scanLine(y));
                 for (int x = 0; x < im.width(); ++x)
                 {
                     QRgb const pixel = *scanLine;

@@ -81,7 +81,7 @@ void VisToolArcWithLength::RefreshGeometry()
 
             if (qFuzzyIsNull(m_radius))
             {
-                VArc arc = VArc(*first, r.length(), r.angle(), r.angle());
+                auto arc = VArc(*first, r.length(), r.angle(), r.angle());
                 arc.SetApproximationScale(ApproximationScale());
                 DrawPath(this, arc.GetPath(), QVector<DirectionArrow>(), Qt::DashLine, Qt::RoundCap);
 
@@ -93,7 +93,7 @@ void VisToolArcWithLength::RefreshGeometry()
             else if (m_f1 < 0)
             {
                 qreal const f1Angle = Angle();
-                VArc arc = VArc(*first, m_radius, f1Angle, f1Angle);
+                auto arc = VArc(*first, m_radius, f1Angle, f1Angle);
                 arc.SetApproximationScale(ApproximationScale());
                 DrawPath(this, arc.GetPath(), QVector<DirectionArrow>(), Qt::DashLine, Qt::RoundCap);
 
@@ -112,7 +112,7 @@ void VisToolArcWithLength::RefreshGeometry()
             }
             else if (m_f1 >= 0)
             {
-                VArc arc = VArc(*first, m_radius, m_f1, r.angle());
+                auto arc = VArc(*first, m_radius, m_f1, r.angle());
                 arc.SetApproximationScale(ApproximationScale());
                 DrawPath(this, arc.GetPath(), arc.DirectionArrows(), LineStyle(), Qt::RoundCap);
 
@@ -127,7 +127,7 @@ void VisToolArcWithLength::RefreshGeometry()
         {
             if (not qFuzzyIsNull(m_radius) && m_f1 >= 0 && not qFuzzyIsNull(m_length))
             {
-                VArc arc = VArc(m_length, *first, m_radius, m_f1);
+                auto arc = VArc(m_length, *first, m_radius, m_f1);
                 arc.SetApproximationScale(ApproximationScale());
                 DrawPath(this, arc.GetPath(), arc.DirectionArrows(), LineStyle(), Qt::RoundCap);
             }

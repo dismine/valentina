@@ -1330,7 +1330,7 @@ void DialogSeamAllowance::ShowPlaceLabelsContextMenu(const QPoint &pos)
 
     auto SaveType = [this, &currentLabel, labelId](PlaceLabelType type)
     {
-        VPlaceLabelItem newLabel = VPlaceLabelItem(currentLabel);
+        auto newLabel = VPlaceLabelItem(currentLabel);
         newLabel.SetLabelType(type);
         m_newPlaceLabels.insert(labelId, newLabel);
 
@@ -1798,7 +1798,7 @@ void DialogSeamAllowance::PlaceLabelDialogClosed(int result)
             const qreal v = Visualization::FindValFromUser(dialogTool->GetFormulaVisible(), vars, false);
             qDebug() << w << h << a << v;
 
-            VPlaceLabelItem newLabel = VPlaceLabelItem();
+            auto newLabel = VPlaceLabelItem();
             newLabel.setName(currentLabel.name());
             newLabel.setX(currentLabel.x());
             newLabel.setY(currentLabel.y());

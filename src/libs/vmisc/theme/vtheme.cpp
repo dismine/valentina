@@ -195,7 +195,7 @@ auto GetResourceName(const QString &root, const QString &iconName, bool dark) ->
 auto GetPixmapResource(const QString &root, const QString &iconName, bool dark) -> QPixmap
 {
     QString const resourceName = GetResourceName(root, iconName, dark);
-    QPixmap pixmap = QPixmap(resourceName);
+    auto pixmap = QPixmap(resourceName);
     Q_ASSERT(!pixmap.isNull());
     return pixmap;
 }

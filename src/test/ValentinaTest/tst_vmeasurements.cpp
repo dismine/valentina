@@ -54,8 +54,7 @@ void TST_VMeasurements::CreateEmptyMultisizeFile()
 {
     Unit const mUnit = Unit::Cm;
 
-    QSharedPointer<VContainer> const data =
-        QSharedPointer<VContainer>(new VContainer(nullptr, &mUnit, VContainer::UniqueNamespace()));
+    auto const data = QSharedPointer<VContainer>(new VContainer(nullptr, &mUnit, VContainer::UniqueNamespace()));
     auto m_xDimension = QSharedPointer<VXMeasurementDimension>::create(mUnit, 50, 200, 6);
     m_xDimension->SetBaseValue(176);
 
@@ -65,8 +64,7 @@ void TST_VMeasurements::CreateEmptyMultisizeFile()
 
     QVector<MeasurementDimension_p> const dimensions{m_xDimension, m_yDimension};
 
-    QSharedPointer<VMeasurements> const m =
-        QSharedPointer<VMeasurements>(new VMeasurements(mUnit, dimensions, data.data()));
+    auto const m = QSharedPointer<VMeasurements>(new VMeasurements(mUnit, dimensions, data.data()));
 
     QTemporaryFile file;
     QString fileName;
@@ -106,10 +104,9 @@ void TST_VMeasurements::CreateEmptyIndividualFile()
 {
     Unit const mUnit = Unit::Cm;
 
-    QSharedPointer<VContainer> const data =
-        QSharedPointer<VContainer>(new VContainer(nullptr, &mUnit, VContainer::UniqueNamespace()));
+    auto const data = QSharedPointer<VContainer>(new VContainer(nullptr, &mUnit, VContainer::UniqueNamespace()));
 
-    QSharedPointer<VMeasurements> const m = QSharedPointer<VMeasurements>(new VMeasurements(mUnit, data.data()));
+    auto const m = QSharedPointer<VMeasurements>(new VMeasurements(mUnit, data.data()));
 
     QTemporaryFile file;
     QString fileName;

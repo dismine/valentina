@@ -592,9 +592,9 @@ void FvUpdater::IgnoreVersion(const QString &version)
 //---------------------------------------------------------------------------------------------------------------------
 auto FvUpdater::CurrentlyRunningOnPlatform(const QString &platform) -> bool
 {
-    const QStringList platforms = QStringList() << "Q_OS_LINUX"
-                                                << "Q_OS_MAC"
-                                                << "Q_OS_WIN32";
+    const auto platforms = QStringList() << "Q_OS_LINUX"
+                                         << "Q_OS_MAC"
+                                         << "Q_OS_WIN32";
 
     switch (platforms.indexOf(platform.toUpper().trimmed()))
     {

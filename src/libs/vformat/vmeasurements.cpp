@@ -984,7 +984,7 @@ auto VMeasurements::GenderToStr(const GenderType &sex) -> QString
 //---------------------------------------------------------------------------------------------------------------------
 auto VMeasurements::StrToGender(const QString &sex) -> GenderType
 {
-    const QStringList genders = QStringList() << GenderMale << GenderFemale << GenderUnknown;
+    const auto genders = QStringList() << GenderMale << GenderFemale << GenderUnknown;
     switch (genders.indexOf(sex))
     {
         case 0: // GenderMale
@@ -1054,7 +1054,7 @@ auto VMeasurements::IMDToStr(const IMD &type) -> QString
 //---------------------------------------------------------------------------------------------------------------------
 auto VMeasurements::StrToIMD(const QString &type) -> IMD
 {
-    const QStringList dimensions = QStringList{DimensionN, DimensionX, DimensionY, DimensionW, DimensionZ};
+    const auto dimensions = QStringList{DimensionN, DimensionX, DimensionY, DimensionW, DimensionZ};
     switch (dimensions.indexOf(type))
     {
         case 1: // DimensionX

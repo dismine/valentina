@@ -2150,7 +2150,7 @@ auto VToolSeamAllowance::FindLabelGeometry(const VPatternLabelData &labelData, c
             const auto topLeftPinPoint = VAbstractTool::data.GeometricObject<VPointF>(topLeftPin);
             const auto bottomRightPinPoint = VAbstractTool::data.GeometricObject<VPointF>(bottomRightPin);
 
-            const QRectF labelRect =
+            const auto labelRect =
                 QRectF(static_cast<QPointF>(*topLeftPinPoint), static_cast<QPointF>(*bottomRightPinPoint));
             labelWidth = FromPixel(qAbs(labelRect.width()), *VDataTool::data.GetPatternUnit());
             labelHeight = FromPixel(qAbs(labelRect.height()), *VDataTool::data.GetPatternUnit());

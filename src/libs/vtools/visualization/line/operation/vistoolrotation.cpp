@@ -72,7 +72,7 @@ void VisToolRotation::RefreshGeometry()
         return;
     }
 
-    QSharedPointer<VPointF> origin = QSharedPointer<VPointF>(new VPointF());
+    auto origin = QSharedPointer<VPointF>(new VPointF());
 
     qreal tempAngle = 0;
 

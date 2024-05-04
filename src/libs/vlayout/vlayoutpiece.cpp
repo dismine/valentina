@@ -134,7 +134,7 @@ auto FindLabelGeometry(const VPatternLabelData &labelData, const VContainer *pat
             const auto topLeftPinPoint = pattern->GeometricObject<VPointF>(topLeftPin);
             const auto bottomRightPinPoint = pattern->GeometricObject<VPointF>(bottomRightPin);
 
-            const QRectF labelRect =
+            const auto labelRect =
                 QRectF(static_cast<QPointF>(*topLeftPinPoint), static_cast<QPointF>(*bottomRightPinPoint));
             labelWidth = qAbs(labelRect.width());
             labelHeight = qAbs(labelRect.height());

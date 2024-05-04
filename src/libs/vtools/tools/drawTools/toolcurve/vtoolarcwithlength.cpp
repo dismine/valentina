@@ -131,7 +131,7 @@ auto VToolArcWithLength::Create(VToolArcWithLengthInitData &initData) -> VToolAr
     calcF1 = CheckFormula(initData.id, initData.f1, initData.data);
 
     const VPointF c = *initData.data->GeometricObject<VPointF>(initData.center);
-    VArc *arc = new VArc(calcLength, initData.length, c, calcRadius, initData.radius, calcF1, initData.f1);
+    auto *arc = new VArc(calcLength, initData.length, c, calcRadius, initData.radius, calcF1, initData.f1);
     arc->SetColor(initData.color);
     arc->SetPenStyle(initData.penStyle);
     arc->SetApproximationScale(initData.approximationScale);

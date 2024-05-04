@@ -520,7 +520,7 @@ auto VSpline::CalcT(qreal curveCoord1, qreal curveCoord2, qreal curveCoord3, qre
     const qreal c = -3 * curveCoord1 + 3 * curveCoord2;
     const qreal d = -pointCoord + curveCoord1;
 
-    QVector<qreal> t = QVector<qreal>(3, -1);
+    auto t = QVector<qreal>(3, -1);
     Cubic(t, b / a, c / a, d / a);
 
     QVector<qreal> retT;

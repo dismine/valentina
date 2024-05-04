@@ -1678,7 +1678,7 @@ auto VPiece::SeamAllowanceMirrorLine(const VContainer *data) const -> QLineF
     auto rec = QRectF(0, 0, INT_MAX, INT_MAX);
     rec.translate(-INT_MAX / 2.0, -INT_MAX / 2.0);
 
-    QLineF axis =
+    auto axis =
         QLineF(seamMirrorLine.center(), VGObject::BuildRay(seamMirrorLine.center(), seamMirrorLine.angle() + 180, rec));
 
     QVector<QPointF> points;

@@ -557,7 +557,7 @@ void VPrintLayout::SetPrinterPageSize(QPrinter *printer)
             }
         }
 
-        QSizeF size = QSizeF(width, height);
+        auto size = QSizeF(width, height);
 
         if (not m_isLayoutPortrait)
         {

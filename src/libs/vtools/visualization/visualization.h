@@ -154,7 +154,7 @@ template <typename Item> inline void Visualization::AddItem(Item *item)
 //---------------------------------------------------------------------------------------------------------------------
 template <class Item> inline auto Visualization::InitItem(VColorRole role, QGraphicsItem *parent) -> Item *
 {
-    Item *item = new Item(role, parent);
+    auto *item = new Item(role, parent);
     item->setZValue(1);
     item->setFlags(QGraphicsItem::ItemStacksBehindParent);
     item->setVisible(false);

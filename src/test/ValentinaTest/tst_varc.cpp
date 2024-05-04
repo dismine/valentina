@@ -482,7 +482,7 @@ void TST_VArc::TestCutArcByLength_data()
     QTest::newRow("Arc 10 cm length, cut length 3 cm")
         << center << radius << 135. << length << ToPixel(3, Unit::Cm) << cutPoint;
 
-    QLineF l = QLineF(center, QPointF(center.x() + radius, center.y()));
+    auto l = QLineF(center, QPointF(center.x() + radius, center.y()));
     l.setAngle(135);
 
     QTest::newRow("Arc 10 cm length, cut length 0 cm") << center << radius << 135. << length << 0. << l.p2();

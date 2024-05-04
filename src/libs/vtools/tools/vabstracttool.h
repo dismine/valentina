@@ -210,7 +210,7 @@ inline auto VAbstractTool::getData() const -> const VContainer *
 //---------------------------------------------------------------------------------------------------------------------
 template <typename T> inline void VAbstractTool::AddVisualization()
 {
-    T *visual = new T(getData());
+    auto *visual = new T(getData());
     auto *scene = qobject_cast<VMainGraphicsScene *>(VAbstractValApplication::VApp()->getCurrentScene());
     // cppcheck-suppress unknownMacro
     SCASSERT(scene != nullptr)
@@ -231,7 +231,7 @@ template <typename T>
 auto VAbstractTool::CreateNode(VContainer *data, quint32 id) -> quint32
 {
     // We can't use exist object. Need create new.
-    T *node = new T(*data->GeometricObject<T>(id).data());
+    auto *node = new T(*data->GeometricObject<T>(id).data());
     node->setMode(Draw::Modeling);
     node->setIdObject(id);
     return data->AddGObject(node);

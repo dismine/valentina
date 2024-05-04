@@ -526,7 +526,7 @@ auto VAbstractApplication::GetPlaceholderTranslator() -> QSharedPointer<VTransla
         return QSharedPointer<VTranslator>(new VTranslator);
     }
 
-    QSharedPointer<VTranslator> translator = QSharedPointer<VTranslator>(new VTranslator);
+    auto translator = QSharedPointer<VTranslator>(new VTranslator);
     const QString appQmDir = VAbstractApplication::translationsPath(settings->GetLocale());
     if (translator->load(QStringLiteral("valentina_") + pieceLabelLocale, appQmDir))
     {

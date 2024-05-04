@@ -69,7 +69,7 @@ auto Grayscale(QImage image) -> QImage
         int const depth = 4;
         for (int jj = 0; jj < image.width(); jj++)
         {
-            QRgb *rgbpixel = reinterpret_cast<QRgb *>(scan + jj * depth);
+            auto *rgbpixel = reinterpret_cast<QRgb *>(scan + jj * depth);
             int const gray = qGray(*rgbpixel);
             *rgbpixel = QColor(gray, gray, gray, qAlpha(*rgbpixel)).rgba();
         }

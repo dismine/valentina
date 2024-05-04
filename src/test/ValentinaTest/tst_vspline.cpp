@@ -863,7 +863,7 @@ void TST_VSpline::TestCutSpline_data()
                     QStringLiteral("Line_Г3_Г6*1.1"), 226.7716535433071, QStringLiteral("6"));
         spl.SetApproximationScale(0.5);
 
-        QString const name(QStringLiteral("з"));
+        auto const name(QStringLiteral("з"));
         qreal const result = 1.35; // Correct distance in cm.
 
         // See file valentina_private_collection/bugs/men_jacket/issue_cut_spline.val (private collection)
@@ -879,7 +879,7 @@ void TST_VSpline::TestCutSpline_data()
         VSpline const spl(p1, p4, 175.0, QStringLiteral("175"), 5.0, QStringLiteral("5"), 151.18110236220474,
                           QStringLiteral("4"), 151.18110236220474, QStringLiteral("4"));
 
-        QString const name(QStringLiteral("А193"));
+        auto const name(QStringLiteral("А193"));
         const qreal result = 4.5090698038574057; // Correct distance in cm.
         // See file valentina_private_collection/bugs/coat/coat.val (private collection)
         QTest::newRow("Half of a curve") << spl << result << name;

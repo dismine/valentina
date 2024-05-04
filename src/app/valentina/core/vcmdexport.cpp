@@ -529,7 +529,7 @@ auto VCommandLine::TiledPageMargins() const -> QMarginsF
     if (IsOptionSet(LONG_OPTION_SHIFTUNITS))
     {
         const QString value = OptionValue(LONG_OPTION_SHIFTUNITS);
-        if (const QStringList supportedUnits = QStringList() << unitMM << unitCM << unitINCH;
+        if (const auto supportedUnits = QStringList() << unitMM << unitCM << unitINCH;
             not supportedUnits.contains(value))
         {
             qCritical() << translate("VCommandLine", "Unsupported paper units.") << "\n";

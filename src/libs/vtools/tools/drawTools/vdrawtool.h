@@ -192,7 +192,7 @@ void VDrawTool::ContextMenu(QGraphicsSceneContextMenuEvent *event, quint32 itemI
     {
         QMenu *menuAddToGroup = menu.addMenu(FromTheme(VThemeIcon::ListAdd), VDrawTool::tr("Add to group"));
 
-        QStringList list = QStringList(groupsNotContainingItem.values());
+        auto list = QStringList(groupsNotContainingItem.values());
         list.sort(Qt::CaseInsensitive);
 
         for (int i = 0; i < list.count(); ++i)
@@ -216,7 +216,7 @@ void VDrawTool::ContextMenu(QGraphicsSceneContextMenuEvent *event, quint32 itemI
         QMenu *menuRemoveFromGroup =
             menu.addMenu(FromTheme(VThemeIcon::ListRemove), VDrawTool::tr("Remove from group"));
 
-        QStringList list = QStringList(groupsContainingItem.values());
+        auto list = QStringList(groupsContainingItem.values());
         list.sort(Qt::CaseInsensitive);
 
         for (int i = 0; i < list.count(); ++i)

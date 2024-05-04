@@ -284,7 +284,7 @@ void VToolLine::contextMenuEvent(QGraphicsSceneContextMenuEvent *event)
 void VToolLine::AddToFile()
 {
     QDomElement domElement = doc->createElement(getTagName());
-    QSharedPointer<VGObject> obj = QSharedPointer<VGObject>();
+    auto obj = QSharedPointer<VGObject>();
     SaveOptions(domElement, obj);
     AddToCalculation(domElement);
 }

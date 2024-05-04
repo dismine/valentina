@@ -3959,9 +3959,9 @@ void VPattern::ParseArcElement(VMainGraphicsScene *scene, QDomElement &domElemen
     Q_ASSERT_X(not domElement.isNull(), Q_FUNC_INFO, "domElement is null");
     Q_ASSERT_X(not type.isEmpty(), Q_FUNC_INFO, "type of arc is empty");
 
-    QStringList const arcs = QStringList() << VToolArc::ToolType            /*0*/
-                                           << VNodeArc::ToolType            /*1*/
-                                           << VToolArcWithLength::ToolType; /*2*/
+    auto const arcs = QStringList() << VToolArc::ToolType            /*0*/
+                                    << VNodeArc::ToolType            /*1*/
+                                    << VToolArcWithLength::ToolType; /*2*/
 
     switch (arcs.indexOf(type))
     {
@@ -3995,8 +3995,8 @@ void VPattern::ParseEllipticalArcElement(VMainGraphicsScene *scene, QDomElement 
     Q_ASSERT_X(not domElement.isNull(), Q_FUNC_INFO, "domElement is null");
     Q_ASSERT_X(not type.isEmpty(), Q_FUNC_INFO, "type of elliptical arc is empty");
 
-    const QStringList arcs = QStringList() << VToolEllipticalArc::ToolType  /*0*/
-                                           << VNodeEllipticalArc::ToolType; /*1*/
+    const auto arcs = QStringList() << VToolEllipticalArc::ToolType  /*0*/
+                                    << VNodeEllipticalArc::ToolType; /*1*/
 
     switch (arcs.indexOf(type))
     {
@@ -4027,7 +4027,7 @@ void VPattern::ParseToolsElement(VMainGraphicsScene *scene, const QDomElement &d
     Q_ASSERT_X(domElement.isNull() == false, Q_FUNC_INFO, "domElement is null");
     Q_ASSERT_X(type.isEmpty() == false, Q_FUNC_INFO, "type of spline is empty");
 
-    const QStringList tools = QStringList() << VToolUnionDetails::ToolType;
+    const auto tools = QStringList() << VToolUnionDetails::ToolType;
     switch (tools.indexOf(type))
     {
         case 0: // VToolUnionDetails::ToolType
@@ -4068,10 +4068,10 @@ void VPattern::ParseOperationElement(VMainGraphicsScene *scene, QDomElement &dom
     Q_ASSERT_X(not domElement.isNull(), Q_FUNC_INFO, "domElement is null");
     Q_ASSERT_X(not type.isEmpty(), Q_FUNC_INFO, "type of operation is empty");
 
-    const QStringList opers = QStringList() << VToolRotation::ToolType       /*0*/
-                                            << VToolFlippingByLine::ToolType /*1*/
-                                            << VToolFlippingByAxis::ToolType /*2*/
-                                            << VToolMove::ToolType;          /*3*/
+    const auto opers = QStringList() << VToolRotation::ToolType       /*0*/
+                                     << VToolFlippingByLine::ToolType /*1*/
+                                     << VToolFlippingByAxis::ToolType /*2*/
+                                     << VToolMove::ToolType;          /*3*/
 
     switch (opers.indexOf(type))
     {

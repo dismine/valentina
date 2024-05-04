@@ -94,7 +94,7 @@ VBackgroundImageControls::VBackgroundImageControls(VAbstractPattern *doc, QGraph
 
     InitPixmaps();
 
-    QGuiApplication *guiApp = qGuiApp;
+    auto *guiApp = qGuiApp;
     if (guiApp != nullptr)
     {
         connect(guiApp, &QGuiApplication::primaryScreenChanged, this, &VBackgroundImageControls::ScreenChanged);

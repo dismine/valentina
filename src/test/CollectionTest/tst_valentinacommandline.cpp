@@ -154,7 +154,7 @@ void TST_ValentinaCommandLine::ExportMode()
 
     QString error;
     const QString tmp = QCoreApplication::applicationDirPath() + QDir::separator() + *tmpTestFolder;
-    const QStringList arg = QStringList() << tmp + QDir::separator() + file << arguments.split(";;");
+    const auto arg = QStringList() << tmp + QDir::separator() + file << arguments.split(";;");
     const int exit = Run(exitCode, ValentinaPath(), arg, error);
 
     QVERIFY2(exit == exitCode, qUtf8Printable(error.right(350)));
@@ -199,7 +199,7 @@ void TST_ValentinaCommandLine::TestMode()
 
     QString error;
     const QString tmp = QCoreApplication::applicationDirPath() + QDir::separator() + *tmpTestFolder;
-    const QStringList arg = QStringList() << tmp + QDir::separator() + file << arguments.split(";;"_L1);
+    const auto arg = QStringList() << tmp + QDir::separator() + file << arguments.split(";;"_L1);
     const int exit = Run(exitCode, ValentinaPath(), arg, error);
 
     QVERIFY2(exit == exitCode, qUtf8Printable(error.right(350)));
@@ -260,7 +260,7 @@ void TST_ValentinaCommandLine::TestOpenCollection()
 
     QString error;
     const QString tmp = QCoreApplication::applicationDirPath() + QDir::separator() + *tmpTestCollectionFolder;
-    const QStringList arg = QStringList() << tmp + QDir::separator() + file << arguments.split(";;");
+    const auto arg = QStringList() << tmp + QDir::separator() + file << arguments.split(";;");
     const int exit = Run(exitCode, ValentinaPath(), arg, error);
 
     QVERIFY2(exit == exitCode, qUtf8Printable(error.right(350)));

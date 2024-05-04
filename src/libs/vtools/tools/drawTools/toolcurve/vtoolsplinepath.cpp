@@ -231,7 +231,7 @@ void VToolSplinePath::ControlPointChangePosition(const qint32 &indexSpline, cons
         moved = true;
     }
 
-    QSharedPointer<VSplinePath> newSplPath = QSharedPointer<VSplinePath>::create(*oldSplPath);
+    auto newSplPath = QSharedPointer<VSplinePath>::create(*oldSplPath);
     const VSpline spl = CorrectedSpline(newSplPath->GetSpline(indexSpline), position, pos);
 
     UpdateControlPoints(spl, newSplPath, indexSpline);
@@ -681,7 +681,7 @@ void VToolSplinePath::mouseMoveEvent(QGraphicsSceneMouseEvent *event)
 
         oldPosition = event->scenePos(); // Now mouse here
 
-        const VSpline spl = VSpline(spline.GetP1(), p2, p3, spline.GetP4());
+        const auto spl = VSpline(spline.GetP1(), p2, p3, spline.GetP4());
 
         UpdateControlPoints(spl, newMoveSplinePath, splIndex);
 

@@ -497,8 +497,8 @@ auto AddNodeArc(const VPieceNode &node, const VToolUnionDetailsInitData &initDat
                 const QString &drawName, qreal dx, qreal dy, quint32 pRotate, qreal angle) -> quint32
 {
     const QSharedPointer<VArc> arc = initData.data->GeometricObject<VArc>(node.GetId());
-    VPointF p1 = VPointF(arc->GetP1(), QChar('A'), 0, 0);
-    VPointF p2 = VPointF(arc->GetP2(), QChar('A'), 0, 0);
+    auto p1 = VPointF(arc->GetP1(), QChar('A'), 0, 0);
+    auto p2 = VPointF(arc->GetP2(), QChar('A'), 0, 0);
     std::unique_ptr<VPointF> center(new VPointF(arc->GetCenter()));
 
     if (not qFuzzyIsNull(dx) || not qFuzzyIsNull(dy) || pRotate != NULL_ID)
@@ -548,8 +548,8 @@ auto AddNodeElArc(const VPieceNode &node, const VToolUnionDetailsInitData &initD
                   const QString &drawName, qreal dx, qreal dy, quint32 pRotate, qreal angle) -> quint32
 {
     const QSharedPointer<VEllipticalArc> arc = initData.data->GeometricObject<VEllipticalArc>(node.GetId());
-    VPointF p1 = VPointF(arc->GetP1(), QChar('A'), 0, 0);
-    VPointF p2 = VPointF(arc->GetP2(), QChar('A'), 0, 0);
+    auto p1 = VPointF(arc->GetP1(), QChar('A'), 0, 0);
+    auto p2 = VPointF(arc->GetP2(), QChar('A'), 0, 0);
     std::unique_ptr<VPointF> center(new VPointF(arc->GetCenter()));
 
     if (not qFuzzyIsNull(dx) || not qFuzzyIsNull(dy) || pRotate != NULL_ID)
@@ -666,7 +666,7 @@ auto AddNodeSplinePath(const VPieceNode &node, const VToolUnionDetailsInitData &
             BiasRotatePoint(p4.data(), dx, dy, p, angle);
         }
 
-        VSpline const spl = VSpline(*p1, static_cast<QPointF>(p2), static_cast<QPointF>(p3), *p4);
+        auto const spl = VSpline(*p1, static_cast<QPointF>(p2), static_cast<QPointF>(p3), *p4);
         if (i == 1)
         {
             const qreal angle1 = spl.GetStartAngle() + 180;
@@ -937,8 +937,8 @@ void UpdateNodeArc(VContainer *data, const VPieceNode &node, QVector<quint32> &c
                    quint32 pRotate, qreal angle)
 {
     const QSharedPointer<VArc> arc = data->GeometricObject<VArc>(node.GetId());
-    VPointF p1 = VPointF(arc->GetP1());
-    VPointF p2 = VPointF(arc->GetP2());
+    auto p1 = VPointF(arc->GetP1());
+    auto p2 = VPointF(arc->GetP2());
     QScopedPointer<VPointF> const center(new VPointF(arc->GetCenter()));
 
     if (not qFuzzyIsNull(dx) || not qFuzzyIsNull(dy) || pRotate != NULL_ID)
@@ -964,8 +964,8 @@ void UpdateNodeElArc(VContainer *data, const VPieceNode &node, QVector<quint32> 
                      quint32 pRotate, qreal angle)
 {
     const QSharedPointer<VEllipticalArc> arc = data->GeometricObject<VEllipticalArc>(node.GetId());
-    VPointF p1 = VPointF(arc->GetP1());
-    VPointF p2 = VPointF(arc->GetP2());
+    auto p1 = VPointF(arc->GetP1());
+    auto p2 = VPointF(arc->GetP2());
     QScopedPointer<VPointF> const center(new VPointF(arc->GetCenter()));
 
     if (not qFuzzyIsNull(dx) || not qFuzzyIsNull(dy) || pRotate != NULL_ID)
@@ -1041,7 +1041,7 @@ void UpdateNodeSplinePath(VContainer *data, const VPieceNode &node, QVector<quin
             BiasRotatePoint(p4.data(), dx, dy, p, angle);
         }
 
-        VSpline const spl = VSpline(*p1, static_cast<QPointF>(p2), static_cast<QPointF>(p3), *p4);
+        auto const spl = VSpline(*p1, static_cast<QPointF>(p2), static_cast<QPointF>(p3), *p4);
         if (i == 1)
         {
             const qreal angle1 = spl.GetStartAngle() + 180;
@@ -1861,11 +1861,11 @@ auto VToolUnionDetails::GetReferenceObjects() const -> QVector<quint32>
         return list;
     }
 
-    const QStringList parts = QStringList() << VAbstractPattern::TagNodes          /*0*/
-                                            << VToolSeamAllowance::TagCSA          /*1*/
-                                            << VToolSeamAllowance::TagIPaths       /*2*/
-                                            << VToolSeamAllowance::TagPins         /*3*/
-                                            << VToolSeamAllowance::TagPlaceLabels; /*4*/
+    const auto parts = QStringList() << VAbstractPattern::TagNodes          /*0*/
+                                     << VToolSeamAllowance::TagCSA          /*1*/
+                                     << VToolSeamAllowance::TagIPaths       /*2*/
+                                     << VToolSeamAllowance::TagPins         /*3*/
+                                     << VToolSeamAllowance::TagPlaceLabels; /*4*/
 
     const QDomNodeList nodesList = tool.childNodes();
     for (qint32 i = 0; i < nodesList.size(); ++i)

@@ -1436,7 +1436,7 @@ auto VPatternConverter::OldNamesToNewNames_InV0_2_1() -> QMap<QString, QString>
 //---------------------------------------------------------------------------------------------------------------------
 void VPatternConverter::FixCutPoint()
 {
-    const QStringList types = QStringList() << *strCutSplinePath << *strCutSpline << *strCutArc;
+    const auto types = QStringList() << *strCutSplinePath << *strCutSpline << *strCutArc;
 
     const QDomNodeList list = elementsByTagName(*strPoint);
     for (int i = 0; i < list.size(); ++i)
@@ -1478,9 +1478,9 @@ void VPatternConverter::FixCutPoint()
 //---------------------------------------------------------------------------------------------------------------------
 void VPatternConverter::FixSubPaths(int i, quint32 id, quint32 baseCurve)
 {
-    const QStringList pointTypes = QStringList() << *strCutSplinePath << *strCutSpline << *strPointOfIntersectionCurves
-                                                 << *strCurveIntersectAxis << *strPointFromArcAndTangent
-                                                 << *strPointOfIntersectionArcs;
+    const auto pointTypes = QStringList()
+                            << *strCutSplinePath << *strCutSpline << *strPointOfIntersectionCurves
+                            << *strCurveIntersectAxis << *strPointFromArcAndTangent << *strPointOfIntersectionArcs;
 
     const QDomNodeList listPoints = elementsByTagName(*strPoint);
     for (int j = i + 1; j < listPoints.size(); ++j)
@@ -1563,7 +1563,7 @@ void VPatternConverter::FixSubPaths(int i, quint32 id, quint32 baseCurve)
         }
     }
 
-    const QStringList splTypes = QStringList() << *strModelingPath << *strModelingSpline;
+    const auto splTypes = QStringList() << *strModelingPath << *strModelingSpline;
 
     const QDomNodeList listSplines = elementsByTagName(*strSpline);
     for (int j = 0; j < listSplines.size(); ++j)
@@ -1653,7 +1653,7 @@ void VPatternConverter::TagDetailToV0_4_0()
 
             dom.setAttribute(*strVersion, QChar('1'));
 
-            const QStringList tags = QStringList() << *strNode << *strData << *strPatternInfo << *strGrainline;
+            const auto tags = QStringList() << *strNode << *strData << *strPatternInfo << *strGrainline;
 
             QDomElement tagData;
             QDomElement tagPatternInfo;
@@ -1781,9 +1781,9 @@ void VPatternConverter::LabelTagToV0_4_4(const QString &tagName)
     Q_STATIC_ASSERT_X(VPatternConverter::PatternMinVer < FormatVersion(0, 4, 4), "Time to refactor the code.");
 
     Unit unit = Unit::Cm;
-    const QStringList units = QStringList() << "mm"
-                                            << "cm"
-                                            << "inch";
+    const auto units = QStringList() << "mm"
+                                     << "cm"
+                                     << "inch";
     switch (units.indexOf(UniqueTagText(*strUnit)))
     {
         case 0: // mm
@@ -1836,9 +1836,9 @@ auto VPatternConverter::AddTagPatternLabelV0_5_1() -> QDomElement
     const QDomNodeList list = elementsByTagName(*strPatternLabel);
     if (list.isEmpty())
     {
-        const QStringList tags = QStringList() << *strUnit << *strImage << *strAuthor << *strDescription << *strNotes
-                                               << *strGradation << *strPatternName << *strPatternNum << *strCompanyName
-                                               << *strCustomerName << *strPatternLabel;
+        const auto tags = QStringList() << *strUnit << *strImage << *strAuthor << *strDescription << *strNotes
+                                        << *strGradation << *strPatternName << *strPatternNum << *strCompanyName
+                                        << *strCustomerName << *strPatternLabel;
 
         QDomElement const element = createElement(*strPatternLabel);
         QDomElement pattern = documentElement();
@@ -2226,7 +2226,7 @@ void VPatternConverter::TagUnionDetailsToV0_4_0()
         QDomElement toolDOM = list.at(i).toElement();
         if (not toolDOM.isNull())
         {
-            const QStringList tags = QStringList() << *strDet << *strChildren;
+            const auto tags = QStringList() << *strDet << *strChildren;
 
             nodes.resize(0);
             QDomElement tagChildrenNodes = createElement(*strChildren);
