@@ -115,8 +115,10 @@ DialogEditLabel::DialogEditLabel(const VAbstractPattern *doc, const VContainer *
     connect(ui->toolButtonBottom, &QToolButton::clicked, this,
             [this]() { DialogTool::MoveListRowBottom(ui->listWidgetEdit); });
 
+    QApplication::setOverrideCursor(Qt::WaitCursor);
     InitPlaceholders();
     InitPlaceholdersMenu();
+    QApplication::restoreOverrideCursor();
 
     m_placeholdersMenu->setStyleSheet(QStringLiteral("QMenu { menu-scrollable: 1; }"));
     m_placeholdersMenu->setToolTipsVisible(true);
@@ -763,7 +765,7 @@ auto DialogEditLabel::GetTemplate() const -> QVector<VLabelTemplateLine>
     for (int i = 0; i < ui->listWidgetEdit->count(); ++i)
     {
         const QListWidgetItem *lineItem = ui->listWidgetEdit->item(i);
-        if (lineItem)
+        if (lineItem != nullptr)
         {
             VLabelTemplateLine line;
             line.line = lineItem->text();
@@ -815,6 +817,8 @@ void DialogEditLabel::SetTemplate(const QVector<VLabelTemplateLine> &lines)
 //---------------------------------------------------------------------------------------------------------------------
 void DialogEditLabel::SetPiece(const VPiece &piece)
 {
+    QApplication::setOverrideCursor(Qt::WaitCursor);
+
     const VPieceLabelData &pieceData = piece.GetPieceLabelData();
     m_placeholders[pl_pLetter].second = pieceData.GetLetter();
     m_placeholders[pl_pAnnotation].second = pieceData.GetAnnotation();
@@ -862,6 +866,8 @@ void DialogEditLabel::SetPiece(const VPiece &piece)
             ? throw VException(errorMsg)
             : qWarning() << VAbstractValApplication::warningMessageSignature + errorMsg;
     }
+
+    QApplication::restoreOverrideCursor();
 }
 
 //---------------------------------------------------------------------------------------------------------------------

@@ -698,7 +698,8 @@ auto VLayoutPiece::Create(const VPiece &piece, vidtype id, const VContainer *pat
     det.SetQuantity(data.GetQuantity());
     if (data.IsVisible())
     {
-        det.SetPieceText(piece.GetName(), data, settings->GetLabelFont(), settings->GetLabelSVGFont(), pattern);
+        VAbstractPattern *pDoc = VAbstractValApplication::VApp()->getCurrentDocument();
+        det.SetPieceText(pDoc, piece.GetName(), data, settings->GetLabelFont(), settings->GetLabelSVGFont(), pattern);
     }
 
     const VPatternLabelData &geom = piece.GetPatternLabelData();
@@ -890,8 +891,8 @@ auto VLayoutPiece::GetPieceText() const -> QStringList
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VLayoutPiece::SetPieceText(const QString &qsName, const VPieceLabelData &data, const QFont &font,
-                                const QString &SVGFontFamily, const VContainer *pattern)
+void VLayoutPiece::SetPieceText(VAbstractPattern *pDoc, const QString &qsName, const VPieceLabelData &data,
+                                const QFont &font, const QString &SVGFontFamily, const VContainer *pattern)
 {
     QPointF ptPos;
     qreal labelWidth = 0;
@@ -929,7 +930,10 @@ void VLayoutPiece::SetPieceText(const QString &qsName, const VPieceLabelData &da
     d->m_tmDetail.SetFontSize(fntSize);
     d->m_tmDetail.SetSVGFontPointSize(fntSize);
 
-    d->m_tmDetail.Update(qsName, data, pattern);
+    VPieceLabelInfo info = VTextManager::PrepareLabelInfo(pDoc, pattern, true);
+    info.pieceName = qsName;
+    info.labelData = data;
+    d->m_tmDetail.UpdatePieceLabelInfo(info);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -1000,7 +1004,8 @@ void VLayoutPiece::SetPatternInfo(VAbstractPattern *pDoc, const VPatternLabelDat
     d->m_tmPattern.SetFontSize(fntSize);
     d->m_tmPattern.SetSVGFontPointSize(fntSize);
 
-    d->m_tmPattern.Update(pDoc, pattern);
+    VPieceLabelInfo const info = VTextManager::PrepareLabelInfo(pDoc, pattern, false);
+    d->m_tmPattern.UpdatePatternLabelInfo(info);
 }
 
 //---------------------------------------------------------------------------------------------------------------------

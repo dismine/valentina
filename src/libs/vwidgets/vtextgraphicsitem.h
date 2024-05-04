@@ -80,8 +80,8 @@ public:
     auto GetFontSize() const -> int;
     void SetSize(qreal fW, qreal fH);
     auto IsContained(QRectF rectBB, qreal dRot, qreal &dX, qreal &dY) const -> bool;
-    void UpdateData(const QString &qsName, const VPieceLabelData &data, const VContainer *pattern);
-    void UpdateData(VAbstractPattern *pDoc, const VContainer *pattern);
+    void UpdatePieceLabelData(const VPieceLabelInfo &info);
+    void UpdatePatternLabelData(const VPieceLabelInfo &info);
     auto GetTextLines() const -> vsizetype;
     void SetPieceName(const QString &name);
 

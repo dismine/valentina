@@ -204,6 +204,18 @@ private:
     /** @brief m_geometryIsReady is true when a piece's geometry is ready and checks for validity can be enabled. */
     bool m_geometryIsReady{false};
 
+    QPointF m_patternLabelPos{};
+    qreal m_patternLabelAngle{0};
+
+    QPointF m_pieceLabelPos{};
+    qreal m_pieceLabelAngle{0};
+
+    QFutureWatcher<void> *m_patternUpdateInfoWatcher;
+    QFutureWatcher<void> *m_pieceUpdateInfoWatcher;
+
+    bool m_patternLabelInfoStale{false};
+    bool m_pieceLabelInfoStale{false};
+
     explicit VToolSeamAllowance(const VToolSeamAllowanceInitData &initData, QGraphicsItem *parent = nullptr);
 
     void UpdateExcludeState();

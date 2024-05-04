@@ -7,7 +7,7 @@
 # File with common stuff for whole project
 include(../../../common.pri)
 
-QT       += core widgets xml printsupport svg
+QT       += core widgets xml printsupport svg concurrent
 
 # Name of the library
 TARGET = vtools

@@ -293,22 +293,19 @@ auto VTextGraphicsItem::IsContained(QRectF rectBB, qreal dRot, qreal &dX, qreal 
 //---------------------------------------------------------------------------------------------------------------------
 /**
  * @brief VTextGraphicsItem::UpdateData Updates the detail label
- * @param qsName name of detail
- * @param data reference to VPatternPieceData
  */
-void VTextGraphicsItem::UpdateData(const QString &qsName, const VPieceLabelData &data, const VContainer *pattern)
+void VTextGraphicsItem::UpdatePieceLabelData(const VPieceLabelInfo &info)
 {
-    m_tm.Update(qsName, data, pattern);
+    m_tm.UpdatePieceLabelInfo(info);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 /**
  * @brief VTextGraphicsItem::UpdateData Updates the pattern label
- * @param pDoc pointer to the pattern object
  */
-void VTextGraphicsItem::UpdateData(VAbstractPattern *pDoc, const VContainer *pattern)
+void VTextGraphicsItem::UpdatePatternLabelData(const VPieceLabelInfo &info)
 {
-    m_tm.Update(pDoc, pattern);
+    m_tm.UpdatePatternLabelInfo(info);
 }
 
 //---------------------------------------------------------------------------------------------------------------------

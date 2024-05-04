@@ -76,6 +76,7 @@
 #include "toolsdef.h"
 
 #include <QFuture>
+#include <QFutureWatcher>
 #include <QGraphicsSceneMouseEvent>
 #include <QGraphicsView>
 #include <QKeyEvent>
@@ -1009,26 +1010,41 @@ void VToolSeamAllowance::Highlight(quint32 id)
  */
 void VToolSeamAllowance::UpdateDetailLabel()
 {
-    VPiece detail = VAbstractTool::data.GetPiece(m_id);
-    detail.SetPieceLabelData(detail.GetPieceLabelData()); // Refresh translation
-    const VPieceLabelData &labelData = detail.GetPieceLabelData();
-    const QVector<quint32> &pins = detail.GetPins();
-
-    if (labelData.IsVisible())
+    if (m_pieceUpdateInfoWatcher->isFinished())
     {
-        QPointF pos;
-        qreal labelAngle = 0;
+        VPiece detail = VAbstractTool::data.GetPiece(m_id);
+        detail.SetPieceLabelData(detail.GetPieceLabelData()); // Refresh translation
+        const VPieceLabelData &labelData = detail.GetPieceLabelData();
+        const QVector<quint32> &pins = detail.GetPins();
 
-        if (PrepareLabelData(labelData, pins, m_dataLabel, pos, labelAngle))
+        if (labelData.IsVisible())
         {
-            m_dataLabel->SetPieceName(detail.GetName());
-            m_dataLabel->UpdateData(detail.GetName(), labelData, getData());
-            UpdateLabelItem(m_dataLabel, pos, labelAngle);
+            m_pieceLabelPos = QPointF();
+            m_pieceLabelAngle = 0;
+            if (PrepareLabelData(labelData, pins, m_dataLabel, m_pieceLabelPos, m_pieceLabelAngle))
+            {
+
+                VPieceLabelInfo info = VTextManager::PrepareLabelInfo(doc, getData(), true);
+                info.pieceName = detail.GetName();
+                info.labelData = detail.GetPieceLabelData();
+
+                m_pieceLabelInfoStale = false;
+                m_pieceUpdateInfoWatcher->setFuture(QtConcurrent::run(
+                    [this, info, detail]()
+                    {
+                        m_dataLabel->SetPieceName(detail.GetName());
+                        m_dataLabel->UpdatePieceLabelData(info);
+                    }));
+            }
+        }
+        else
+        {
+            m_dataLabel->hide();
         }
     }
     else
     {
-        m_dataLabel->hide();
+        m_pieceLabelInfoStale = true;
     }
 }
 
@@ -1038,25 +1054,37 @@ void VToolSeamAllowance::UpdateDetailLabel()
  */
 void VToolSeamAllowance::UpdatePatternInfo()
 {
-    const VPiece detail = VAbstractTool::data.GetPiece(m_id);
-    const VPatternLabelData &geom = detail.GetPatternLabelData();
-    const QVector<quint32> &pins = detail.GetPins();
-
-    if (geom.IsVisible())
+    if (m_patternUpdateInfoWatcher->isFinished())
     {
-        QPointF pos;
-        qreal labelAngle = 0;
+        const VPiece detail = VAbstractTool::data.GetPiece(m_id);
+        const VPatternLabelData &geom = detail.GetPatternLabelData();
+        const QVector<quint32> &pins = detail.GetPins();
 
-        if (PrepareLabelData(geom, pins, m_patternInfo, pos, labelAngle))
+        if (geom.IsVisible())
         {
-            m_patternInfo->SetPieceName(detail.GetName());
-            m_patternInfo->UpdateData(doc, getData());
-            UpdateLabelItem(m_patternInfo, pos, labelAngle);
+            m_patternLabelPos = QPointF();
+            m_patternLabelAngle = 0;
+            if (PrepareLabelData(geom, pins, m_patternInfo, m_patternLabelPos, m_patternLabelAngle))
+            {
+                VPieceLabelInfo const info = VTextManager::PrepareLabelInfo(doc, getData(), false);
+
+                m_patternLabelInfoStale = false;
+                m_patternUpdateInfoWatcher->setFuture(QtConcurrent::run(
+                    [this, info, detail]()
+                    {
+                        m_patternInfo->SetPieceName(detail.GetName());
+                        m_patternInfo->UpdatePatternLabelData(info);
+                    }));
+            }
+        }
+        else
+        {
+            m_patternInfo->hide();
         }
     }
     else
     {
-        m_patternInfo->hide();
+        m_patternLabelInfoStale = true;
     }
 }
 
@@ -1672,8 +1700,13 @@ VToolSeamAllowance::VToolSeamAllowance(const VToolSeamAllowanceInitData &initDat
     m_mirrorLine(new QGraphicsPathItem(this)),
     m_foldLineMark(new QGraphicsPathItem(this)),
     m_foldLineLabel(new QGraphicsPathItem(this)),
-    m_foldLineLabelText(new QGraphicsSimpleTextItem(this))
+    m_foldLineLabelText(new QGraphicsSimpleTextItem(this)),
+    m_patternUpdateInfoWatcher(new QFutureWatcher<void>(this)),
+    m_pieceUpdateInfoWatcher(new QFutureWatcher<void>(this))
 {
+    m_dataLabel->setVisible(false);
+    m_patternInfo->setVisible(false);
+
     VPiece const detail = initData.data->GetPiece(initData.id);
     ReinitInternals(detail, m_sceneDetails);
     VToolSeamAllowance::AllowSelecting(true);
@@ -1694,6 +1727,33 @@ VToolSeamAllowance::VToolSeamAllowance(const VToolSeamAllowanceInitData &initDat
     ConnectOutsideSignals();
 
     m_foldLineMark->setBrush(Qt::SolidPattern);
+
+    connect(m_patternUpdateInfoWatcher, &QFutureWatcher<void>::finished, this,
+            [this]()
+            {
+                setFlag(QGraphicsItem::ItemSendsGeometryChanges, false);
+                m_patternInfo->show();
+                UpdateLabelItem(m_patternInfo, m_patternLabelPos, m_patternLabelAngle);
+                setFlag(QGraphicsItem::ItemSendsGeometryChanges, true);
+                if (m_patternLabelInfoStale)
+                {
+                    m_patternLabelInfoStale = false;
+                    UpdatePatternInfo();
+                }
+            });
+    connect(m_pieceUpdateInfoWatcher, &QFutureWatcher<void>::finished, this,
+            [this]()
+            {
+                setFlag(QGraphicsItem::ItemSendsGeometryChanges, false);
+                m_dataLabel->show();
+                UpdateLabelItem(m_dataLabel, m_pieceLabelPos, m_pieceLabelAngle);
+                setFlag(QGraphicsItem::ItemSendsGeometryChanges, true);
+                if (m_pieceLabelInfoStale)
+                {
+                    m_pieceLabelInfoStale = false;
+                    UpdateDetailLabel();
+                }
+            });
 }
 
 //---------------------------------------------------------------------------------------------------------------------

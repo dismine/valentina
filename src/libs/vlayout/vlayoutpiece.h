@@ -116,7 +116,7 @@ public:
     void SetInternalPaths(const QVector<VLayoutPiecePath> &internalPaths);
 
     auto GetPieceText() const -> QStringList;
-    void SetPieceText(const QString &qsName, const VPieceLabelData &data, const QFont &font,
+    void SetPieceText(VAbstractPattern *pDoc, const QString &qsName, const VPieceLabelData &data, const QFont &font,
                       const QString &SVGFontFamily, const VContainer *pattern);
 
     auto GetPatternText() const -> QStringList;
