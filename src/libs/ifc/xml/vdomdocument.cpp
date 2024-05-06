@@ -276,6 +276,12 @@ VDomDocument::VDomDocument(QObject *parent)
     m_elementIdCache(),
     m_watcher(new QFutureWatcher<QHash<quint32, QDomElement>>(this))
 {
+    connect(qApp, &QCoreApplication::aboutToQuit, m_watcher,
+            [this]()
+            {
+                m_watcher->cancel();
+                m_watcher->waitForFinished();
+            });
     connect(m_watcher, &QFutureWatcher<QHash<quint32, QDomElement>>::finished, this, &VDomDocument::CacheRefreshed);
 }
 
@@ -724,6 +730,11 @@ auto VDomDocument::Compare(const QDomElement &element1, const QDomElement &eleme
 //---------------------------------------------------------------------------------------------------------------------
 void VDomDocument::CacheRefreshed()
 {
+    if (m_watcher->isCanceled())
+    {
+        return;
+    }
+
     m_elementIdCache = m_watcher->future().result();
 }
 

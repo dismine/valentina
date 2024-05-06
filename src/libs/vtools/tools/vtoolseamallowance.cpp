@@ -1729,9 +1729,20 @@ VToolSeamAllowance::VToolSeamAllowance(const VToolSeamAllowanceInitData &initDat
 
     m_foldLineMark->setBrush(Qt::SolidPattern);
 
+    connect(qApp, &QCoreApplication::aboutToQuit, m_patternUpdateInfoWatcher,
+            [this]()
+            {
+                m_patternUpdateInfoWatcher->cancel();
+                m_patternUpdateInfoWatcher->waitForFinished();
+            });
     connect(m_patternUpdateInfoWatcher, &QFutureWatcher<void>::finished, this,
             [this]()
             {
+                if (m_patternUpdateInfoWatcher->isCanceled())
+                {
+                    return;
+                }
+
                 setFlag(QGraphicsItem::ItemSendsGeometryChanges, false);
                 m_patternInfo->show();
                 UpdateLabelItem(m_patternInfo, m_patternLabelPos, m_patternLabelAngle);
@@ -1742,9 +1753,20 @@ VToolSeamAllowance::VToolSeamAllowance(const VToolSeamAllowanceInitData &initDat
                     UpdatePatternInfo();
                 }
             });
+    connect(qApp, &QCoreApplication::aboutToQuit, m_pieceUpdateInfoWatcher,
+            [this]()
+            {
+                m_pieceUpdateInfoWatcher->cancel();
+                m_pieceUpdateInfoWatcher->waitForFinished();
+            });
     connect(m_pieceUpdateInfoWatcher, &QFutureWatcher<void>::finished, this,
             [this]()
             {
+                if (m_pieceUpdateInfoWatcher->isCanceled())
+                {
+                    return;
+                }
+
                 setFlag(QGraphicsItem::ItemSendsGeometryChanges, false);
                 m_dataLabel->show();
                 UpdateLabelItem(m_dataLabel, m_pieceLabelPos, m_pieceLabelAngle);

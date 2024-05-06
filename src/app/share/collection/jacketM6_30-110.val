@@ -187,7 +187,7 @@
                 <node type="NodeSpline" reverse="1" nodeType="Contour" idObject="122" mx="0" my="0"/>
                 <node type="NodePoint" nodeType="Contour" idObject="123" mx="0" my="0"/>
             </detail>
-            <detail closed="0" id="303" name="Деталь" supplement="1" width="7" mx="10.0402" my="-26.0133">
+            <detail closed="0" id="303" name="Деталь 1" supplement="1" width="7" mx="10.0402" my="-26.0133">
                 <node type="NodePoint" nodeType="Contour" idObject="296" mx="0" my="0"/>
                 <node type="NodeSplinePath" nodeType="Contour" idObject="297" mx="0" my="0"/>
                 <node type="NodePoint" nodeType="Contour" idObject="298" mx="0" my="0"/>
@@ -196,9 +196,9 @@
                 <node type="NodePoint" nodeType="Contour" idObject="301" mx="0" my="0"/>
                 <node type="NodePoint" nodeType="Contour" idObject="302" mx="0" my="0"/>
             </detail>
-            <detail closed="0" id="312" name="Деталь" forbidFlipping="1" supplement="1" width="7" mx="0" my="0">
-                <data rotation="0" letter="" fontSize="12" visible="true" mx="0" width="0" my="0" height="0"/>
-                <patternInfo rotation="0" fontSize="12" visible="true" mx="0" width="0" my="0" height="0"/>
+            <detail closed="0" id="312" name="Деталь 2" forbidFlipping="1" supplement="1" width="7" mx="0" my="0">
+                <data rotation="0" letter="" fontSize="12" visible="true" mx="0" width="1" my="0" height="1"/>
+                <patternInfo rotation="0" fontSize="12" visible="true" mx="0" width="1" my="0" height="1"/>
                 <grainline arrows="0" rotation="" visible="false" mx="0" my="0" length=""/>
                 <node type="NodePoint" nodeType="Contour" idObject="304" mx="0" my="0"/>
                 <node type="NodePoint" nodeType="Contour" idObject="305" mx="0" my="0"/>
@@ -209,9 +209,9 @@
                 <node type="NodePoint" nodeType="Contour" idObject="310" mx="0" my="0"/>
                 <node type="NodePoint" nodeType="Contour" idObject="311" mx="0" my="0"/>
             </detail>
-            <detail closed="1" id="320" name="Деталь" forbidFlipping="1" supplement="1" width="7" mx="-41.9497" my="-160.593">
-                <data rotation="0" letter="" fontSize="12" visible="true" mx="0" width="0" my="0" height="0"/>
-                <patternInfo rotation="0" fontSize="12" visible="true" mx="0" width="0" my="0" height="0"/>
+            <detail closed="1" id="320" name="Деталь 3" forbidFlipping="1" supplement="1" width="7" mx="-41.9497" my="-160.593">
+                <data rotation="0" letter="" fontSize="12" visible="true" mx="0" width="1" my="0" height="1"/>
+                <patternInfo rotation="0" fontSize="12" visible="true" mx="0" width="1" my="0" height="1"/>
                 <grainline arrows="0" rotation="" visible="false" mx="0" my="0" length=""/>
                 <node type="NodePoint" nodeType="Contour" idObject="313" mx="0" my="0"/>
                 <node type="NodePoint" nodeType="Contour" idObject="314" mx="0" my="0"/>
@@ -221,7 +221,7 @@
                 <node type="NodePoint" nodeType="Contour" idObject="318" mx="0" my="0"/>
                 <node type="NodeSplinePath" reverse="1" nodeType="Contour" idObject="319" mx="0" my="0"/>
             </detail>
-            <detail closed="1" id="329" name="Деталь" supplement="1" width="7" mx="52.483" my="-2.73825">
+            <detail closed="1" id="329" name="Деталь 4" supplement="1" width="7" mx="52.483" my="-2.73825">
                 <node type="NodePoint" nodeType="Contour" idObject="321" mx="3" my="0"/>
                 <node type="NodePoint" nodeType="Contour" idObject="322" mx="3" my="0"/>
                 <node type="NodePoint" nodeType="Contour" idObject="323" mx="0" my="0"/>
@@ -304,7 +304,7 @@
             <point type="modeling" inUse="true" id="338" idObject="130" mx="1.32292" my="2.64583"/>
         </modeling>
         <details>
-            <detail closed="1" id="339" name="Деталь" supplement="1" width="7" mx="-151.4" my="6.83743">
+            <detail closed="1" id="339" name="Деталь 5" supplement="1" width="7" mx="-151.4" my="6.83743">
                 <node type="NodePoint" nodeType="Contour" idObject="330" mx="0" my="0"/>
                 <node type="NodeSpline" reverse="0" nodeType="Contour" idObject="331" mx="0" my="0"/>
                 <node type="NodePoint" nodeType="Contour" idObject="332" mx="0" my="0"/>
@@ -378,9 +378,9 @@
             <spline type="modelingPath" inUse="true" id="284" idObject="263"/>
         </modeling>
         <details>
-            <detail closed="1" id="285" name="Деталь" forbidFlipping="1" supplement="1" width="7" mx="-49.2726" my="-53.1166">
-                <data rotation="0" letter="" fontSize="12" visible="true" mx="0" width="0" my="0" height="0"/>
-                <patternInfo rotation="0" fontSize="12" visible="true" mx="0" width="0" my="0" height="0"/>
+            <detail closed="1" id="285" name="Деталь 6" forbidFlipping="1" supplement="1" width="7" mx="-49.2726" my="-53.1166">
+                <data rotation="0" letter="" fontSize="12" visible="true" mx="0" width="1" my="0" height="1"/>
+                <patternInfo rotation="0" fontSize="12" visible="true" mx="0" width="1" my="0" height="1"/>
                 <grainline arrows="0" rotation="90" visible="false" mx="0" my="0" length="0"/>
                 <node type="NodePoint" nodeType="Contour" idObject="276" mx="0" my="0"/>
                 <node type="NodeSpline" reverse="0" nodeType="Contour" idObject="277" mx="0" my="0"/>

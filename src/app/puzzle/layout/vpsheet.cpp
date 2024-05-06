@@ -548,6 +548,12 @@ VPSheet::VPSheet(const VPLayoutPtr &layout, QObject *parent)
     SetSheetMargins(settings->GetLayoutSheetMargins());
     SetSheetSize(QSizeF(settings->GetLayoutSheetPaperWidth(), settings->GetLayoutSheetPaperHeight()));
 
+    connect(qApp, &QCoreApplication::aboutToQuit, m_validityWatcher,
+            [this]()
+            {
+                m_validityWatcher->cancel();
+                m_validityWatcher->waitForFinished();
+            });
     connect(m_validityWatcher, &QFutureWatcher<QHash<QString, VPiecePositionValidity>>::finished, this,
             &VPSheet::UpdatePiecesValidity);
 }
@@ -844,6 +850,11 @@ void VPSheet::CheckPiecesPositionValidity() const
 //---------------------------------------------------------------------------------------------------------------------
 void VPSheet::UpdatePiecesValidity()
 {
+    if (m_validityWatcher->isCanceled())
+    {
+        return;
+    }
+
     QHash<QString, VPiecePositionValidity> const newValidations = m_validityWatcher->future().result();
 
     QList<VPPiecePtr> const pieces = GetPieces();

@@ -883,10 +883,24 @@ void MApplication::RepopulateMeasurementsDatabase(const QString &path)
     Q_UNUSED(path)
     if (m_knownMeasurementsDatabase != nullptr)
     {
+        connect(qApp, &QCoreApplication::aboutToQuit, m_knownMeasurementsRepopulateWatcher,
+                [this]()
+                {
+                    m_knownMeasurementsRepopulateWatcher->cancel();
+                    m_knownMeasurementsRepopulateWatcher->waitForFinished();
+                });
         QObject::connect(m_knownMeasurementsRepopulateWatcher, &QFutureWatcher<void>::finished, this,
                          &MApplication::SyncKnownMeasurements);
-        m_knownMeasurementsRepopulateWatcher->setFuture(
-            QtConcurrent::run([this]() { m_knownMeasurementsDatabase->PopulateMeasurementsDatabase(); }));
+        m_knownMeasurementsRepopulateWatcher->setFuture(QtConcurrent::run(
+            [this]()
+            {
+                if (m_knownMeasurementsRepopulateWatcher->isCanceled())
+                {
+                    return;
+                }
+
+                m_knownMeasurementsDatabase->PopulateMeasurementsDatabase();
+            }));
     }
 }
 
