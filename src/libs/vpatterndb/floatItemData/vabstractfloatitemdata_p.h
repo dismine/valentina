@@ -47,8 +47,8 @@ public:
 
     /** @brief m_ptPos position of label's top left corner */
     QPointF m_ptPos{}; // NOLINT(misc-non-private-member-variables-in-classes)
-    /** @brief m_bVisible visibility flag */
-    bool m_bVisible{false}; // NOLINT(misc-non-private-member-variables-in-classes)
+    /** @brief m_bEnabled activity flag */
+    bool m_bEnabled{false}; // NOLINT(misc-non-private-member-variables-in-classes)
 
 private:
     Q_DISABLE_ASSIGN_MOVE(VAbstractFloatItemDataPrivate) // NOLINT

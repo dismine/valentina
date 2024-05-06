@@ -64,6 +64,9 @@ public:
     auto IsEnabled() const -> bool;
     void SetEnabled(bool enabled);
 
+    auto IsVisible() const -> bool;
+    void SetVisible(bool visible);
+
     auto SecondaryLine() const -> QLineF;
 
     auto IsFourWays() const -> bool;

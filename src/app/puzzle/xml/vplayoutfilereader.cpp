@@ -648,6 +648,8 @@ void VPLayoutFileReader::ReadGrainline(const VPPiecePtr &piece)
 
     if (enabled)
     {
+        grainline.SetVisible(ReadAttributeBool(attribs, ML::AttrVisible, trueStr));
+
         QString const arrowDirection = ReadAttributeEmptyString(attribs, ML::AttrArrowDirection);
         grainline.SetArrowType(StringToGrainlineArrowDirrection(arrowDirection));
 

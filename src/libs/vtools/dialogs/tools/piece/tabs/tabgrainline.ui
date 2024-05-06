@@ -36,7 +36,7 @@
        <item>
         <widget class="QGroupBox" name="groupBoxGrainline">
          <property name="title">
-          <string>Grainline visible</string>
+          <string>Grainline enabled</string>
          </property>
          <property name="checkable">
           <bool>true</bool>
@@ -116,7 +116,7 @@
                <string>Formula wizard</string>
               </property>
               <property name="text">
-               <string notr="true"></string>
+               <string notr="true"/>
               </property>
               <property name="icon">
                <iconset resource="../../../../../vmisc/share/resources/icon.qrc">
@@ -305,7 +305,7 @@
                <string>Formula wizard</string>
               </property>
               <property name="text">
-               <string notr="true"></string>
+               <string notr="true"/>
               </property>
               <property name="icon">
                <iconset resource="../../../../../vmisc/share/resources/icon.qrc">
@@ -503,6 +503,19 @@
              <widget class="QComboBox" name="comboBoxArrow"/>
             </item>
            </layout>
+          </item>
+          <item>
+           <widget class="QCheckBox" name="checkBoxGrainlineVisible">
+            <property name="enabled">
+             <bool>true</bool>
+            </property>
+            <property name="text">
+             <string>Visible</string>
+            </property>
+            <property name="checked">
+             <bool>true</bool>
+            </property>
+           </widget>
           </item>
           <item>
            <spacer name="verticalSpacer_2">

@@ -888,7 +888,7 @@ auto MainWindowsNoGUI::PrepareDetailsForLayout(const QVector<DetailForLayout> &d
 
     futureWatcher.setFuture(QtConcurrent::mapped(details, PrepareDetail));
 
-    if (VApplication::VApp()->IsGUIMode())
+    if (VApplication::IsGUIMode())
     {
         progress.exec();
     }

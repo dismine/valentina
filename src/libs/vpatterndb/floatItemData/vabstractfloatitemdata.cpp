@@ -84,13 +84,13 @@ void VAbstractFloatItemData::SetPos(const QPointF &ptPos)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-auto VAbstractFloatItemData::IsVisible() const -> bool
+auto VAbstractFloatItemData::IsEnabled() const -> bool
 {
-    return d->m_bVisible;
+    return d->m_bEnabled;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VAbstractFloatItemData::SetVisible(bool bVisible)
+void VAbstractFloatItemData::SetEnabled(bool bEnabled)
 {
-    d->m_bVisible = bVisible;
+    d->m_bEnabled = bEnabled;
 }

@@ -342,6 +342,7 @@ public:
     static const QString TagPieceLabel;
 
     static const QString AttrName;
+    static const QString AttrEnabled;
     static const QString AttrVisible;
     static const QString AttrObject;
     static const QString AttrTool;

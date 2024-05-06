@@ -73,6 +73,9 @@ public:
     auto BottomPin() const -> quint32;
     void SetBottomPin(quint32 bottomPin);
 
+    auto IsVisible() const -> bool;
+    void SetVisible(bool visible);
+
 private:
     QSharedDataPointer<VGrainlineDataPrivate> d;
 };

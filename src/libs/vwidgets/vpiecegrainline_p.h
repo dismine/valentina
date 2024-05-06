@@ -55,12 +55,13 @@ public:
     // NOLINTNEXTLINE(misc-non-private-member-variables-in-classes)
     GrainlineArrowDirection m_arrowType{GrainlineArrowDirection::oneWayUp};
     bool m_enabled{false}; // NOLINT(misc-non-private-member-variables-in-classes)
+    bool m_visible{true};  // NOLINT(misc-non-private-member-variables-in-classes)
 
 private:
     Q_DISABLE_ASSIGN_MOVE(VPieceGrainlinePrivate) // NOLINT
 
     static constexpr quint32 streamHeader{0x5C5D5B3B}; // CRC-32Q string "VGrainlineData"
-    static constexpr quint16 classVersion{1};
+    static constexpr quint16 classVersion{2};
 };
 
 QT_WARNING_POP
@@ -83,6 +84,9 @@ inline auto operator<<(QDataStream &dataStream, const VPieceGrainlinePrivate &da
     dataStream << data.m_enabled;
     dataStream << data.m_arrowType;
     dataStream << data.m_mainLine;
+
+    // Added in classVersion = 2
+    dataStream << data.m_visible;
 
     return dataStream;
 }
@@ -119,6 +123,11 @@ inline auto operator>>(QDataStream &dataStream, VPieceGrainlinePrivate &data) ->
     dataStream >> data.m_enabled;
     dataStream >> data.m_arrowType;
     dataStream >> data.m_mainLine;
+
+    if (actualClassVersion >= 2)
+    {
+        dataStream >> data.m_visible;
+    }
 
     return dataStream;
 }

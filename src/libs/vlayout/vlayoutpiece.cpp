@@ -696,21 +696,21 @@ auto VLayoutPiece::Create(const VPiece &piece, vidtype id, const VContainer *pat
 
     const VPieceLabelData &data = piece.GetPieceLabelData();
     det.SetQuantity(data.GetQuantity());
-    if (data.IsVisible())
+    if (data.IsEnabled())
     {
         VAbstractPattern *pDoc = VAbstractValApplication::VApp()->getCurrentDocument();
         det.SetPieceText(pDoc, piece.GetName(), data, settings->GetLabelFont(), settings->GetLabelSVGFont(), pattern);
     }
 
     const VPatternLabelData &geom = piece.GetPatternLabelData();
-    if (geom.IsVisible())
+    if (geom.IsEnabled())
     {
         VAbstractPattern *pDoc = VAbstractValApplication::VApp()->getCurrentDocument();
         det.SetPatternInfo(pDoc, geom, settings->GetLabelFont(), settings->GetLabelSVGFont(), pattern);
     }
 
     const VGrainlineData &grainlineGeom = piece.GetGrainlineGeometry();
-    if (grainlineGeom.IsVisible())
+    if (grainlineGeom.IsEnabled())
     {
         det.SetGrainline(grainlineGeom, pattern);
     }
@@ -1145,10 +1145,17 @@ void VLayoutPiece::SetGrainline(const VGrainlineData &geom, const VContainer *pa
         return;
     }
     d->m_grainline = VPieceGrainline(mainLine, geom.GetArrowType());
+    d->m_grainline.SetVisible(geom.IsVisible());
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 auto VLayoutPiece::GetGrainline() const -> VPieceGrainline
+{
+    return d->m_grainline;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+auto VLayoutPiece::GetGrainline() -> VPieceGrainline &
 {
     return d->m_grainline;
 }
@@ -1181,6 +1188,12 @@ auto VLayoutPiece::GetGrainlineMainLine() const -> QLineF
 auto VLayoutPiece::IsGrainlineEnabled() const -> bool
 {
     return d->m_grainline.IsEnabled();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+auto VLayoutPiece::IsGrainlineVisible() const -> bool
+{
+    return d->m_grainline.IsVisible();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -2154,7 +2167,7 @@ void VLayoutPiece::CreateGrainlineItem(QGraphicsItem *parent) const
 {
     SCASSERT(parent != nullptr)
 
-    if (not d->m_grainline.IsEnabled())
+    if (!d->m_grainline.IsEnabled() || !d->m_grainline.IsVisible())
     {
         return;
     }

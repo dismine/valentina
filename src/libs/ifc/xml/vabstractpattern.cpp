@@ -108,6 +108,7 @@ const QString VAbstractPattern::TagBackgroundImage = QStringLiteral("backgroudIm
 const QString VAbstractPattern::TagPieceLabel = QStringLiteral("pieceLabel");
 
 const QString VAbstractPattern::AttrName = QStringLiteral("name");
+const QString VAbstractPattern::AttrEnabled = QStringLiteral("enabled");
 const QString VAbstractPattern::AttrVisible = QStringLiteral("visible");
 const QString VAbstractPattern::AttrObject = QStringLiteral("object");
 const QString VAbstractPattern::AttrTool = QStringLiteral("tool");

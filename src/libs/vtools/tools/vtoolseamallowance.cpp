@@ -720,7 +720,7 @@ void VToolSeamAllowance::AddPatternPieceData(VAbstractPattern *doc, QDomElement 
     doc->SetAttribute(domData, VAbstractPattern::AttrTilt, data.GetTilt());
     doc->SetAttribute(domData, VAbstractPattern::AttrFoldPosition, data.GetFoldPosition());
     doc->SetAttribute(domData, VAbstractPattern::AttrQuantity, data.GetQuantity());
-    doc->SetAttribute(domData, VAbstractPattern::AttrVisible, data.IsVisible());
+    doc->SetAttribute(domData, VAbstractPattern::AttrVisible, data.IsEnabled());
     doc->SetAttribute(domData, VAbstractPattern::AttrOnFold, data.IsOnFold());
     doc->SetAttribute(domData, AttrMx, data.GetPos().x());
     doc->SetAttribute(domData, AttrMy, data.GetPos().y());
@@ -745,7 +745,7 @@ void VToolSeamAllowance::AddPatternInfo(VAbstractPattern *doc, QDomElement &domE
 {
     QDomElement domData = doc->createElement(VAbstractPattern::TagPatternInfo);
     const VPatternLabelData &geom = piece.GetPatternLabelData();
-    doc->SetAttribute(domData, VAbstractPattern::AttrVisible, geom.IsVisible());
+    doc->SetAttribute(domData, VAbstractPattern::AttrVisible, geom.IsEnabled());
     doc->SetAttribute(domData, AttrMx, geom.GetPos().x());
     doc->SetAttribute(domData, AttrMy, geom.GetPos().y());
     doc->SetAttribute(domData, AttrWidth, geom.GetLabelWidth());
@@ -769,6 +769,7 @@ void VToolSeamAllowance::AddGrainline(VAbstractPattern *doc, QDomElement &domEle
     // grainline
     QDomElement domData = doc->createElement(VAbstractPattern::TagGrainline);
     const VGrainlineData &glGeom = piece.GetGrainlineGeometry();
+    doc->SetAttribute(domData, VAbstractPattern::AttrEnabled, glGeom.IsEnabled());
     doc->SetAttribute(domData, VAbstractPattern::AttrVisible, glGeom.IsVisible());
     doc->SetAttribute(domData, AttrMx, glGeom.GetPos().x());
     doc->SetAttribute(domData, AttrMy, glGeom.GetPos().y());
@@ -966,16 +967,16 @@ void VToolSeamAllowance::ResetChildren(QGraphicsItem *pItem)
     const bool selected = isSelected();
     const VPiece detail = VAbstractTool::data.GetPiece(m_id);
     auto *pVGI = qgraphicsitem_cast<VTextGraphicsItem *>(pItem);
-    if (pVGI != m_dataLabel && detail.GetPieceLabelData().IsVisible())
+    if (pVGI != m_dataLabel && detail.GetPieceLabelData().IsEnabled())
     {
         m_dataLabel->Reset();
     }
-    if (pVGI != m_patternInfo && detail.GetPatternLabelData().IsVisible())
+    if (pVGI != m_patternInfo && detail.GetPatternLabelData().IsEnabled())
     {
         m_patternInfo->Reset();
     }
     auto *pGLI = qgraphicsitem_cast<VGrainlineItem *>(pItem);
-    if (pGLI != m_grainLine && detail.GetGrainlineGeometry().IsVisible())
+    if (pGLI != m_grainLine && detail.GetGrainlineGeometry().IsEnabled())
     {
         m_grainLine->Reset();
     }
@@ -1017,7 +1018,7 @@ void VToolSeamAllowance::UpdateDetailLabel()
         const VPieceLabelData &labelData = detail.GetPieceLabelData();
         const QVector<quint32> &pins = detail.GetPins();
 
-        if (labelData.IsVisible())
+        if (labelData.IsEnabled())
         {
             m_pieceLabelPos = QPointF();
             m_pieceLabelAngle = 0;
@@ -1060,7 +1061,7 @@ void VToolSeamAllowance::UpdatePatternInfo()
         const VPatternLabelData &geom = detail.GetPatternLabelData();
         const QVector<quint32> &pins = detail.GetPins();
 
-        if (geom.IsVisible())
+        if (geom.IsEnabled())
         {
             m_patternLabelPos = QPointF();
             m_patternLabelAngle = 0;
@@ -1105,7 +1106,7 @@ void VToolSeamAllowance::UpdateGrainline()
     const VGrainlineData &geom = detail.GetGrainlineGeometry();
     const QVector<quint32> &pins = detail.GetPins();
 
-    if (geom.IsVisible())
+    if (geom.IsEnabled() && geom.IsVisible())
     {
         QPointF pos;
         qreal dRotation = 0;

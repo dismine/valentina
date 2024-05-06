@@ -1210,7 +1210,7 @@ auto VPattern::ParseDetailNodes(const QDomElement &domElement, qreal width, bool
 //---------------------------------------------------------------------------------------------------------------------
 auto VPattern::ParsePieceDataTag(const QDomElement &domElement, VPieceLabelData ppData) const -> VPieceLabelData
 {
-    ppData.SetVisible(GetParametrBool(domElement, AttrVisible, trueStr));
+    ppData.SetEnabled(GetParametrBool(domElement, AttrVisible, trueStr));
     ppData.SetLetter(GetParametrEmptyString(domElement, AttrLetter));
     ppData.SetAnnotation(GetParametrEmptyString(domElement, AttrAnnotation));
     ppData.SetOrientation(GetParametrEmptyString(domElement, AttrOrientation));
@@ -1252,7 +1252,7 @@ auto VPattern::ParsePieceDataTag(const QDomElement &domElement, VPieceLabelData 
 auto VPattern::ParsePiecePatternInfo(const QDomElement &domElement, VPatternLabelData patternInfo) const
     -> VPatternLabelData
 {
-    patternInfo.SetVisible(GetParametrBool(domElement, AttrVisible, trueStr));
+    patternInfo.SetEnabled(GetParametrBool(domElement, AttrVisible, trueStr));
     patternInfo.SetPos(
         QPointF(GetParametrDouble(domElement, AttrMx, QChar('0')), GetParametrDouble(domElement, AttrMy, QChar('0'))));
     patternInfo.SetFontSize(static_cast<int>(GetParametrUInt(domElement, VToolSeamAllowance::AttrFont, QChar('0'))));
@@ -1284,7 +1284,8 @@ auto VPattern::ParsePiecePatternInfo(const QDomElement &domElement, VPatternLabe
 //---------------------------------------------------------------------------------------------------------------------
 auto VPattern::ParsePieceGrainline(const QDomElement &domElement, VGrainlineData gGeometry) const -> VGrainlineData
 {
-    gGeometry.SetVisible(GetParametrBool(domElement, AttrVisible, falseStr));
+    gGeometry.SetEnabled(GetParametrBool(domElement, AttrEnabled, falseStr));
+    gGeometry.SetVisible(GetParametrBool(domElement, AttrVisible, trueStr));
     gGeometry.SetPos(
         QPointF(GetParametrDouble(domElement, AttrMx, QChar('0')), GetParametrDouble(domElement, AttrMy, QChar('0'))));
     gGeometry.SetArrowType(static_cast<GrainlineArrowDirection>(GetParametrUInt(domElement, AttrArrows, QChar('0'))));

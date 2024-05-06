@@ -140,6 +140,18 @@ void VPieceGrainline::SetEnabled(bool enabled)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+auto VPieceGrainline::IsVisible() const -> bool
+{
+    return d->m_visible;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VPieceGrainline::SetVisible(bool visible)
+{
+    d->m_visible = visible;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 auto VPieceGrainline::SecondaryLine() const -> QLineF
 {
     const QLineF mainLine = GetMainLine();

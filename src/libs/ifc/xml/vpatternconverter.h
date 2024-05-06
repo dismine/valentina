@@ -49,28 +49,28 @@ class VPatternConverter final : public VAbstractConverter
 
 public:
     explicit VPatternConverter(const QString &fileName);
-    virtual ~VPatternConverter() = default;
+    ~VPatternConverter() override = default;
 
     static const QString PatternMaxVerStr;
     static const QString CurrentSchema;
     static constexpr const unsigned PatternMinVer = FormatVersion(0, 1, 4);
-    static constexpr const unsigned PatternMaxVer = FormatVersion(0, 9, 5);
+    static constexpr const unsigned PatternMaxVer = FormatVersion(0, 9, 6);
 
     static auto XSDSchemas() -> QHash<unsigned, QString>;
 
 protected:
     void Save() override;
 
-    virtual auto MinVer() const -> unsigned override;
-    virtual auto MaxVer() const -> unsigned override;
+    auto MinVer() const -> unsigned override;
+    auto MaxVer() const -> unsigned override;
 
-    virtual auto MinVerStr() const -> QString override;
-    virtual auto MaxVerStr() const -> QString override;
+    auto MinVerStr() const -> QString override;
+    auto MaxVerStr() const -> QString override;
 
-    virtual void ApplyPatches() override;
-    virtual void DowngradeToCurrentMaxVersion() override;
+    void ApplyPatches() override;
+    void DowngradeToCurrentMaxVersion() override;
 
-    virtual auto IsReadOnly() const -> bool override;
+    auto IsReadOnly() const -> bool override;
 
     auto Schemas() const -> QHash<unsigned, QString> override;
 
@@ -91,7 +91,7 @@ private:
     void ToV0_9_0();
     void ToV0_9_1();
     void ToV0_9_2();
-    void ToV0_9_5();
+    void ToV0_9_6();
 
     void TagUnitToV0_2_0();
     void TagIncrementToV0_2_0();
@@ -153,6 +153,8 @@ private:
     void ConvertMeasurementsPathToV0_9_1();
 
     void ConvertPathAttributesToV0_9_2();
+
+    void ConvertGrainlineToV0_9_6();
 };
 
 //---------------------------------------------------------------------------------------------------------------------

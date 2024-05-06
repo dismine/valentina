@@ -434,7 +434,7 @@ void DialogSeamAllowance::SetPiece(const VPiece &piece)
     }
     uiTabGrainline->comboBoxArrow->setCurrentIndex(index);
 
-    uiTabLabels->groupBoxDetailLabel->setChecked(ppData.IsVisible());
+    uiTabLabels->groupBoxDetailLabel->setChecked(ppData.IsEnabled());
     ChangeCurrentData(uiTabLabels->comboBoxDLCenterPin, ppData.CenterPin());
     ChangeCurrentData(uiTabLabels->comboBoxDLTopLeftPin, ppData.TopLeftPin());
     ChangeCurrentData(uiTabLabels->comboBoxDLBottomRightPin, ppData.BottomRightPin());
@@ -444,7 +444,7 @@ void DialogSeamAllowance::SetPiece(const VPiece &piece)
 
     const VPatternLabelData &patternInfo = piece.GetPatternLabelData();
     uiTabLabels->groupBoxPatternLabel->setEnabled(not m_doc->GetPatternLabelTemplate().isEmpty());
-    uiTabLabels->groupBoxPatternLabel->setChecked(patternInfo.IsVisible());
+    uiTabLabels->groupBoxPatternLabel->setChecked(patternInfo.IsEnabled());
     ChangeCurrentData(uiTabLabels->comboBoxPLCenterPin, patternInfo.CenterPin());
     ChangeCurrentData(uiTabLabels->comboBoxPLTopLeftPin, patternInfo.TopLeftPin());
     ChangeCurrentData(uiTabLabels->comboBoxPLBottomRightPin, patternInfo.BottomRightPin());
@@ -458,12 +458,13 @@ void DialogSeamAllowance::SetPiece(const VPiece &piece)
     }
 
     const VGrainlineData &grainlineGeometry = piece.GetGrainlineGeometry();
-    uiTabGrainline->groupBoxGrainline->setChecked(grainlineGeometry.IsVisible());
+    uiTabGrainline->groupBoxGrainline->setChecked(grainlineGeometry.IsEnabled());
     ChangeCurrentData(uiTabGrainline->comboBoxGrainlineCenterPin, grainlineGeometry.CenterPin());
     ChangeCurrentData(uiTabGrainline->comboBoxGrainlineTopPin, grainlineGeometry.TopPin());
     ChangeCurrentData(uiTabGrainline->comboBoxGrainlineBottomPin, grainlineGeometry.BottomPin());
     SetGrainlineAngle(grainlineGeometry.GetRotation());
     SetGrainlineLength(grainlineGeometry.GetLength());
+    uiTabGrainline->checkBoxGrainlineVisible->setChecked(grainlineGeometry.IsVisible());
 
     ValidObjects(MainPathIsValid());
     EnabledGrainline();
@@ -3266,7 +3267,7 @@ auto DialogSeamAllowance::CreatePiece() const -> VPiece
     piece.GetPieceLabelData().SetOnFold(uiTabLabels->checkBoxFold->isChecked());
     piece.GetPieceLabelData().SetLabelTemplate(m_templateLines);
     piece.GetPieceLabelData().SetRotation(GetFormulaFromUser(uiTabLabels->lineEditDLAngleFormula));
-    piece.GetPieceLabelData().SetVisible(uiTabLabels->groupBoxDetailLabel->isChecked());
+    piece.GetPieceLabelData().SetEnabled(uiTabLabels->groupBoxDetailLabel->isChecked());
     piece.GetPieceLabelData().SetFontSize(uiTabLabels->comboBoxPieceLabelSize->currentData().toInt());
     piece.SetMirrorLineStartPoint(GetMirrorLineStartPoint());
     piece.SetMirrorLineEndPoint(GetMirrorLineEndPoint());
@@ -3321,7 +3322,7 @@ auto DialogSeamAllowance::CreatePiece() const -> VPiece
         piece.GetPieceLabelData().SetBottomRightPin(getCurrentObjectId(uiTabLabels->comboBoxDLBottomRightPin));
     }
 
-    piece.GetPatternLabelData().SetVisible(uiTabLabels->groupBoxPatternLabel->isChecked());
+    piece.GetPatternLabelData().SetEnabled(uiTabLabels->groupBoxPatternLabel->isChecked());
     piece.GetPatternLabelData().SetRotation(GetFormulaFromUser(uiTabLabels->lineEditPLAngleFormula));
     piece.GetPatternLabelData().SetFontSize(uiTabLabels->comboBoxPatternLabelSize->currentData().toInt());
 
@@ -3342,9 +3343,10 @@ auto DialogSeamAllowance::CreatePiece() const -> VPiece
         piece.GetPatternLabelData().SetLabelHeight(m_defLabelValue);
     }
 
-    piece.GetGrainlineGeometry().SetVisible(uiTabGrainline->groupBoxGrainline->isChecked());
+    piece.GetGrainlineGeometry().SetEnabled(uiTabGrainline->groupBoxGrainline->isChecked());
     piece.GetGrainlineGeometry().SetArrowType(
         static_cast<GrainlineArrowDirection>(uiTabGrainline->comboBoxArrow->currentData().toInt()));
+    piece.GetGrainlineGeometry().SetVisible(uiTabGrainline->checkBoxGrainlineVisible->isChecked());
 
     if (not flagGPin)
     {

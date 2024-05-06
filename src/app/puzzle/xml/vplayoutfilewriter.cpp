@@ -318,6 +318,8 @@ void VPLayoutFileWriter::WritePiece(const VPPiecePtr &piece)
     writeStartElement(ML::TagGrainline);
     SetAttributeOrRemoveIf<bool>(ML::AttrEnabled, piece->IsGrainlineEnabled(),
                                  [](bool enabled) noexcept { return not enabled; });
+    SetAttributeOrRemoveIf<bool>(ML::AttrVisible, piece->IsGrainlineVisible(),
+                                 [](bool visible) noexcept { return visible; });
     if (piece->IsGrainlineEnabled())
     {
         SetAttribute(ML::AttrArrowDirection, GrainlineArrowDirrectionToString(piece->GetGrainline().GetArrowType()));

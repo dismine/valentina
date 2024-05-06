@@ -143,3 +143,15 @@ void VGrainlineData::SetBottomPin(quint32 bottomPin)
 {
     d->m_bottomPin = bottomPin;
 }
+
+//---------------------------------------------------------------------------------------------------------------------
+auto VGrainlineData::IsVisible() const -> bool
+{
+    return d->m_visible;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VGrainlineData::SetVisible(bool visible)
+{
+    d->m_visible = visible;
+}

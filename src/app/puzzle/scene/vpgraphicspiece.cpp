@@ -560,7 +560,10 @@ void VPGraphicsPiece::InitPieceLabel(const QVector<QPointF> &labelShape, const V
 //---------------------------------------------------------------------------------------------------------------------
 void VPGraphicsPiece::InitGrainlineItem()
 {
-    delete m_grainlineItem;
+    if (m_grainlineItem != nullptr)
+    {
+        m_grainlineItem->hide();
+    }
 
     VPPiecePtr const piece = m_piece.toStrongRef();
     if (piece.isNull())
@@ -568,15 +571,19 @@ void VPGraphicsPiece::InitGrainlineItem()
         return;
     }
 
-    if (piece->IsGrainlineEnabled())
+    if (piece->IsGrainlineEnabled() && piece->IsGrainlineVisible())
     {
-        m_grainlineItem = new VGraphicsFillItem(this);
+        if (m_grainlineItem == nullptr)
+        {
+            m_grainlineItem = new VGraphicsFillItem(this);
+        }
         m_grainlineItem->setPath(VLayoutPiece::GrainlinePath(piece->GetMappedGrainlineShape()));
 
         VPSettings *settings = VPApplication::VApp()->PuzzleSettings();
         QPen const pen(PieceColor(), settings->GetLayoutLineWidth(), Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin);
         m_grainlineItem->SetCustomPen(true);
         m_grainlineItem->setPen(pen);
+        m_grainlineItem->show();
     }
 }
 
@@ -1143,17 +1150,14 @@ auto VPGraphicsPiece::NoBrush() const -> QBrush
 void VPGraphicsPiece::on_RefreshPiece(const VPPiecePtr &piece)
 {
     VPPiecePtr const p = m_piece.toStrongRef();
-    if (p.isNull())
+    if (p.isNull() || piece.isNull())
     {
         return;
     }
 
     if (p->GetUniqueID() == piece->GetUniqueID())
     {
-        if (not piece.isNull())
-        {
-            setZValue(piece->ZValue());
-        }
+        setZValue(piece->ZValue());
 
         prepareGeometryChange();
         PaintPiece(); // refresh shapes

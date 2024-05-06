@@ -278,9 +278,9 @@
             <property name="geometry">
              <rect>
               <x>0</x>
-              <y>0</y>
+              <y>-165</y>
               <width>385</width>
-              <height>865</height>
+              <height>894</height>
              </rect>
             </property>
             <layout class="QVBoxLayout" name="verticalLayout_23">
@@ -694,6 +694,16 @@
                     <widget class="QCheckBox" name="checkBoxShowMirrorLine">
                      <property name="text">
                       <string>Show mirror line</string>
+                     </property>
+                     <property name="checked">
+                      <bool>true</bool>
+                     </property>
+                    </widget>
+                   </item>
+                   <item>
+                    <widget class="QCheckBox" name="checkBoxShowGrainline">
+                     <property name="text">
+                      <string>Show grainline</string>
                      </property>
                      <property name="checked">
                       <bool>true</bool>
@@ -2506,8 +2516,8 @@
  </resources>
  <connections/>
  <buttongroups>
-  <buttongroup name="buttonGroupRotationDirection"/>
   <buttongroup name="buttonGroupTileOrientation"/>
   <buttongroup name="buttonGroupSheetOrientation"/>
+  <buttongroup name="buttonGroupRotationDirection"/>
  </buttongroups>
 </ui>

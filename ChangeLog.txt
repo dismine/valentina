@@ -67,6 +67,7 @@
 - Automatic crash reports.
 - Improve compatibility with Richpeace CAD.
 - New warning "Piece gape position".
+- New feature. Hide/Show enabled grainline.
 
 # Valentina 0.7.52 September 12, 2022
 - Fix crash when default locale is ru.

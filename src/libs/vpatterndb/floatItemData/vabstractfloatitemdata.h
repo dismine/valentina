@@ -51,8 +51,8 @@ public:
     auto GetPos() const -> QPointF;
     void SetPos(const QPointF &ptPos);
 
-    auto IsVisible() const -> bool;
-    void SetVisible(bool bVisible);
+    auto IsEnabled() const -> bool;
+    void SetEnabled(bool bEnabled);
 
 private:
     QSharedDataPointer<VAbstractFloatItemDataPrivate> d;

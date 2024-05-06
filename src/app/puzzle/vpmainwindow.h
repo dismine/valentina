@@ -304,6 +304,7 @@ private slots:
     void CurrentPieceShowSeamLineToggled(bool checked);
     void ShowFullPieceToggled(bool checked);
     void ShowMirrorLineToggled(bool checked);
+    void ShowGrainlineToggled(bool checked);
     void CurrentPieceVerticallyFlippedToggled(bool checked);
     void CurrentPieceHorizontallyFlippedToggled(bool checked);
 

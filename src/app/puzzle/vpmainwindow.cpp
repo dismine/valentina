@@ -822,6 +822,22 @@ void VPMainWindow::ShowMirrorLineToggled(bool checked)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+void VPMainWindow::ShowGrainlineToggled(bool checked)
+{
+    QList<VPPiecePtr> const selectedPieces = SelectedPieces();
+    if (selectedPieces.size() == 1)
+    {
+        const VPPiecePtr &selectedPiece = selectedPieces.constFirst();
+        if (not selectedPiece.isNull() && selectedPiece->IsGrainlineVisible() != checked)
+        {
+            selectedPiece->GetGrainline().SetVisible(checked);
+            LayoutWasSaved(false);
+            emit m_layout->PieceTransformationChanged(selectedPiece);
+        }
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 void VPMainWindow::CurrentPieceVerticallyFlippedToggled(bool checked)
 {
     QList<VPPiecePtr> const selectedPieces = SelectedPieces();
@@ -860,6 +876,7 @@ void VPMainWindow::InitPropertyTabCurrentPiece()
             &VPMainWindow::CurrentPieceShowSeamLineToggled);
     connect(ui->checkBoxShowFullPiece, &QCheckBox::toggled, this, &VPMainWindow::ShowFullPieceToggled);
     connect(ui->checkBoxShowMirrorLine, &QCheckBox::toggled, this, &VPMainWindow::ShowMirrorLineToggled);
+    connect(ui->checkBoxShowGrainline, &QCheckBox::toggled, this, &VPMainWindow::ShowGrainlineToggled);
     connect(ui->checkBoxCurrentPieceVerticallyFlipped, &QCheckBox::toggled, this,
             &VPMainWindow::CurrentPieceVerticallyFlippedToggled);
     connect(ui->checkBoxCurrentPieceHorizontallyFlipped, &QCheckBox::toggled, this,
@@ -1382,6 +1399,17 @@ void VPMainWindow::SetPropertyTabCurrentPieceData()
         SetCheckBoxValue(ui->checkBoxShowMirrorLine,
                          !seamMirrorLine.isNull() ? selectedPiece->IsShowMirrorLine() : true);
         ui->checkBoxShowMirrorLine->setEnabled(!seamMirrorLine.isNull());
+
+        if (selectedPiece->IsGrainlineEnabled())
+        {
+            ui->checkBoxShowGrainline->setEnabled(true);
+            SetCheckBoxValue(ui->checkBoxShowGrainline, selectedPiece->IsGrainlineVisible());
+        }
+        else
+        {
+            ui->checkBoxShowGrainline->setEnabled(false);
+            SetCheckBoxValue(ui->checkBoxShowGrainline, false);
+        }
 
         const bool disableFlipping = selectedPiece->IsForbidFlipping() || selectedPiece->IsForceFlipping();
         ui->checkBoxCurrentPieceVerticallyFlipped->setDisabled(disableFlipping);

@@ -125,11 +125,13 @@ public:
 
     void SetGrainline(const VGrainlineData &geom, const VContainer *pattern);
     auto GetGrainline() const -> VPieceGrainline;
+    auto GetGrainline() -> VPieceGrainline &;
     auto GetMappedGrainlineShape() const -> GrainlineShape;
     auto GetGrainlineShape() const -> GrainlineShape;
     auto GetMappedGrainlineMainLine() const -> QLineF;
     auto GetGrainlineMainLine() const -> QLineF;
     auto IsGrainlineEnabled() const -> bool;
+    auto IsGrainlineVisible() const -> bool;
 
     auto GetMatrix() const -> QTransform;
     void SetMatrix(const QTransform &matrix);
