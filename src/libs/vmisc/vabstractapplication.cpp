@@ -609,6 +609,7 @@ void VAbstractApplication::RepopulateFontDatabase(const QString &path)
     }
 }
 
+#if QT_VERSION < QT_VERSION_CHECK(6, 0, 0)
 //---------------------------------------------------------------------------------------------------------------------
 // NOLINTNEXTLINE(cppcoreguidelines-avoid-c-arrays, hicpp-avoid-c-arrays, modernize-avoid-c-arrays)
 auto VAbstractApplication::IsOptionSet(int argc, char *argv[], const char *option) -> bool
@@ -628,7 +629,6 @@ auto VAbstractApplication::IsOptionSet(int argc, char *argv[], const char *optio
 // NOLINTNEXTLINE(cppcoreguidelines-avoid-c-arrays, hicpp-avoid-c-arrays, modernize-avoid-c-arrays)
 void VAbstractApplication::InitHighDpiScaling(int argc, char *argv[])
 {
-#if QT_VERSION < QT_VERSION_CHECK(6, 0, 0)
     /* For more info see: http://doc.qt.io/qt-5/highdpi.html */
     if (IsOptionSet(argc, argv, qPrintable("--"_L1 + LONG_OPTION_NO_HDPI_SCALING)))
     {
@@ -638,11 +638,8 @@ void VAbstractApplication::InitHighDpiScaling(int argc, char *argv[])
     {
         QApplication::setAttribute(Qt::AA_EnableHighDpiScaling); // DPI support
     }
-#else
-    Q_UNUSED(argc);
-    Q_UNUSED(argv);
-#endif
 }
+#endif
 
 //---------------------------------------------------------------------------------------------------------------------
 auto VAbstractApplication::LogDirPath() -> QString

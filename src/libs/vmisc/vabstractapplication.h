@@ -120,10 +120,12 @@ public:
 
     auto GetPlaceholderTranslator() -> QSharedPointer<VTranslator>;
 
+#if QT_VERSION < QT_VERSION_CHECK(6, 0, 0)
     // NOLINTNEXTLINE(cppcoreguidelines-avoid-c-arrays, hicpp-avoid-c-arrays, modernize-avoid-c-arrays)
     static auto IsOptionSet(int argc, char *argv[], const char *option) -> bool;
     // NOLINTNEXTLINE(cppcoreguidelines-avoid-c-arrays, hicpp-avoid-c-arrays, modernize-avoid-c-arrays)
     static void InitHighDpiScaling(int argc, char *argv[]);
+#endif
 
     static auto LogDirPath() -> QString;
     static auto CreateLogDir() -> bool;

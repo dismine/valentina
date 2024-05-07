@@ -29,7 +29,6 @@
 #ifndef VEXCEPTIONUNDO_H
 #define VEXCEPTIONUNDO_H
 
-
 #include <QString>
 
 #include "../ifcdef.h"
@@ -38,13 +37,16 @@
 class VExceptionUndo : public VException
 {
 public:
-    explicit VExceptionUndo(const QString &what) V_NOEXCEPT_EXPR (true);
-    VExceptionUndo(const VExceptionUndo &e) V_NOEXCEPT_EXPR (true);
-    virtual ~VExceptionUndo() V_NOEXCEPT_EXPR (true) = default;
+    explicit VExceptionUndo(const QString &what) V_NOEXCEPT_EXPR(true);
+    VExceptionUndo(const VExceptionUndo &e) V_NOEXCEPT_EXPR(true);
+    ~VExceptionUndo() V_NOEXCEPT_EXPR(true) override = default;
 
-    Q_NORETURN virtual void raise() const override { throw *this; }
+    VExceptionUndo(VExceptionUndo &&) noexcept = default;
+    auto operator=(VExceptionUndo &&) noexcept -> VExceptionUndo & = default;
 
-    Q_REQUIRED_RESULT virtual auto clone() const -> VExceptionUndo * override { return new VExceptionUndo(*this); }
+    Q_NORETURN void raise() const override { throw *this; }
+
+    Q_REQUIRED_RESULT auto clone() const -> VExceptionUndo * override { return new VExceptionUndo(*this); }
 };
 
 #endif // VEXCEPTIONUNDO_H

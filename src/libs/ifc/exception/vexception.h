@@ -50,12 +50,15 @@ public:
     explicit VException(const QString &error) V_NOEXCEPT_EXPR(true);
     VException(const VException &e) V_NOEXCEPT_EXPR(true);
     auto operator=(const VException &e) V_NOEXCEPT_EXPR(true) -> VException &;
-    virtual ~VException() V_NOEXCEPT_EXPR(true) = default;
+    ~VException() V_NOEXCEPT_EXPR(true) override = default;
 
-    Q_NORETURN virtual void raise() const override;
+    VException(VException &&) noexcept = default;
+    auto operator=(VException &&) noexcept -> VException & = default;
+
+    Q_NORETURN void raise() const override;
 
     // cppcheck-suppress unusedFunction
-    Q_REQUIRED_RESULT virtual auto clone() const -> VException * override;
+    Q_REQUIRED_RESULT auto clone() const -> VException * override;
 
     virtual auto ErrorMessage() const -> QString;
     virtual auto DetailedInformation() const -> QString;
