@@ -37,6 +37,7 @@
 #include <QStringList>
 #include <QVector>
 #include <QtGlobal>
+#include <utility>
 
 #include "../ifc/xml/vabstractpattern.h"
 #include "../vmisc/def.h"
@@ -70,10 +71,18 @@ private:
 
 struct VPieceLabelInfo
 {
-    explicit VPieceLabelInfo(const VContainer &data)
-      : completeData(data)
+    explicit VPieceLabelInfo(VContainer data)
+      : completeData(std::move(data))
     {
     }
+
+    ~VPieceLabelInfo() = default;
+
+    VPieceLabelInfo(const VPieceLabelInfo &) = default;
+    VPieceLabelInfo(VPieceLabelInfo &&) noexcept = default;
+
+    auto operator=(const VPieceLabelInfo &) -> VPieceLabelInfo & = default;
+    auto operator=(VPieceLabelInfo &&) noexcept -> VPieceLabelInfo & = default;
 
     QString pieceName{};                                        // NOLINT(misc-non-private-member-variables-in-classes)
     VPieceLabelData labelData{};                                // NOLINT(misc-non-private-member-variables-in-classes)
@@ -91,8 +100,8 @@ struct VPieceLabelInfo
     Unit measurementsUnits{Unit::Cm};                           // NOLINT(misc-non-private-member-variables-in-classes)
     Unit dimensionSizeUnits{Unit::Cm};                          // NOLINT(misc-non-private-member-variables-in-classes)
     QString measurementsPath{};                                 // NOLINT(misc-non-private-member-variables-in-classes)
-    MeasurementsType measurementsType{
-        MeasurementsType::Individual};                   // NOLINT(misc-non-private-member-variables-in-classes)
+    // NOLINTNEXTLINE(misc-non-private-member-variables-in-classes)
+    MeasurementsType measurementsType{MeasurementsType::Individual};
     QSharedPointer<VTranslator> placeholderTranslator{}; // NOLINT(misc-non-private-member-variables-in-classes)
     QDate customerBirthDate{};                           // NOLINT(misc-non-private-member-variables-in-classes)
     QString dimensionHeight{};                           // NOLINT(misc-non-private-member-variables-in-classes)
