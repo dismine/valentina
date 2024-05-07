@@ -10660,7 +10660,7 @@ Apply settings anyway?</source>
         <translation>Редактор мірок.</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/mapplication.cpp" line="944"/>
+        <location filename="../../src/app/tape/mapplication.cpp" line="958"/>
         <source>The measurement file.</source>
         <translation>Файл мірок.</translation>
     </message>
@@ -10685,12 +10685,12 @@ Apply settings anyway?</source>
         <translation type="vanished">Використовується для тестування. Запускає програму і відкриває файл без показу основного вікна.</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/mapplication.cpp" line="1194"/>
+        <location filename="../../src/app/tape/mapplication.cpp" line="1208"/>
         <source>Invalid base size argument. Must be cm, mm or inch.</source>
         <translation>Недійсний аргумент базового розміру. Має бути cm, mm, inch.</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/mapplication.cpp" line="990"/>
+        <location filename="../../src/app/tape/mapplication.cpp" line="1004"/>
         <source>Can&apos;t begin to listen for incoming connections on name &apos;%1&apos;</source>
         <translation>Не вдається почати слухати вхідні з&apos;єднання за іменем &apos;%1&apos;</translation>
     </message>
@@ -10699,7 +10699,7 @@ Apply settings anyway?</source>
         <translation type="vanished">Тестовий режим не підтримує одночасного відкриття кількох файлів.</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/mapplication.cpp" line="1110"/>
+        <location filename="../../src/app/tape/mapplication.cpp" line="1124"/>
         <source>Please, provide one input file.</source>
         <translation>Будь ласка, надайте один вхідний файл.</translation>
     </message>
@@ -10720,72 +10720,72 @@ Apply settings anyway?</source>
         <translation type="vanished">Відкрити з базовим розміром. Дійсні значення: %1 см.</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/mapplication.cpp" line="966"/>
+        <location filename="../../src/app/tape/mapplication.cpp" line="980"/>
         <source>Use for unit testing. Run the program and open a file without showing the main window.</source>
         <translation>Використовується для тестування. Запускає програму і відкриває файл без показу головного вікна.</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/mapplication.cpp" line="969"/>
+        <location filename="../../src/app/tape/mapplication.cpp" line="983"/>
         <source>Disable high dpi scaling. Call this option if has problem with scaling (by default scaling enabled). Alternatively you can use the %1 environment variable.</source>
         <translation>Вимкнути масштабування з високим розширенням. Викличте цю функцію якщо маєте проблему з масштабуванням (за замовчуванням масштабування увімкнено). Альтернативно ви можете використовувати змінну середовища %1.</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/mapplication.cpp" line="948"/>
+        <location filename="../../src/app/tape/mapplication.cpp" line="962"/>
         <source>Set base for dimension A in the table units.</source>
         <translation>Установіть базу для виміру А в одиницях вимірювання таблиці.</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/mapplication.cpp" line="949"/>
+        <location filename="../../src/app/tape/mapplication.cpp" line="963"/>
         <source>The dimension A base</source>
         <translation>База виміру А</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/mapplication.cpp" line="952"/>
+        <location filename="../../src/app/tape/mapplication.cpp" line="966"/>
         <source>Set base for dimension B in the table units.</source>
         <translation>Установіть базу для виміру B в одиницях вимірювання таблиці.</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/mapplication.cpp" line="953"/>
+        <location filename="../../src/app/tape/mapplication.cpp" line="967"/>
         <source>The dimension B base</source>
         <translation>База виміру B</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/mapplication.cpp" line="956"/>
+        <location filename="../../src/app/tape/mapplication.cpp" line="970"/>
         <source>Set base for dimension C in the table units.</source>
         <translation>Установіть базу для виміру C в одиницях вимірювання таблиці.</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/mapplication.cpp" line="957"/>
+        <location filename="../../src/app/tape/mapplication.cpp" line="971"/>
         <source>The dimension C base</source>
         <translation>База виміру C</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/mapplication.cpp" line="960"/>
+        <location filename="../../src/app/tape/mapplication.cpp" line="974"/>
         <source>Set pattern file units: cm, mm, inch.</source>
         <translation>Встановити одиниці виміру файлу лекала: см, мм, дюйми.</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/mapplication.cpp" line="961"/>
+        <location filename="../../src/app/tape/mapplication.cpp" line="975"/>
         <source>The pattern units</source>
         <translation>Одиниці виміру лекала</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/mapplication.cpp" line="963"/>
+        <location filename="../../src/app/tape/mapplication.cpp" line="977"/>
         <source>Activate known measurements mode.</source>
         <translation>Активувати режим відомих вимірів.</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/mapplication.cpp" line="1133"/>
+        <location filename="../../src/app/tape/mapplication.cpp" line="1147"/>
         <source>Invalid dimension A base value.</source>
         <translation>Недійсне базове значення виміру A.</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/mapplication.cpp" line="1154"/>
+        <location filename="../../src/app/tape/mapplication.cpp" line="1168"/>
         <source>Invalid dimension B base value.</source>
         <translation>Недійсне базове значення виміру B.</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/mapplication.cpp" line="1175"/>
+        <location filename="../../src/app/tape/mapplication.cpp" line="1189"/>
         <source>Invalid dimension C base value.</source>
         <translation>Недійсне базове значення виміру C.</translation>
     </message>
@@ -10795,7 +10795,7 @@ Apply settings anyway?</source>
         <translation>Попередження у формулі: %1. Програму буде завершено.</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/mapplication.cpp" line="1008"/>
+        <location filename="../../src/app/tape/mapplication.cpp" line="1022"/>
         <source>Test mode doesn&apos;t support opening several files.</source>
         <translation>Тестовий режим не підтримує одночасного відкриття кількох файлів.</translation>
     </message>
@@ -12982,7 +12982,7 @@ Do you want to save your changes?</source>
         <translation type="vanished">Неможливо виконати, тому що не знайдено доступних принтерів у вашій системі.</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindowsnogui.cpp" line="1203"/>
+        <location filename="../../src/app/valentina/mainwindowsnogui.cpp" line="1209"/>
         <source>unnamed</source>
         <translation>неназваний</translation>
     </message>
@@ -12995,7 +12995,7 @@ Do you want to save your changes?</source>
         <translation type="vanished">Розкладка не була оновлена з часу останніх змін креслення. Хочете продовжити?</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindowsnogui.cpp" line="455"/>
+        <location filename="../../src/app/valentina/mainwindowsnogui.cpp" line="461"/>
         <source>Couldn&apos;t prepare data for creation layout</source>
         <translation>Не вдалося підготувати дані для створення розкладки</translation>
     </message>
@@ -13036,90 +13036,90 @@ Do you want to save your changes?</source>
         <translation type="vanished">Не вдалося встановити поля принтера</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindowsnogui.cpp" line="550"/>
-        <location filename="../../src/app/valentina/mainwindowsnogui.cpp" line="654"/>
+        <location filename="../../src/app/valentina/mainwindowsnogui.cpp" line="556"/>
+        <location filename="../../src/app/valentina/mainwindowsnogui.cpp" line="660"/>
         <source>Can&apos;t create a path</source>
         <translation>Не вдається створити шлях</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindowsnogui.cpp" line="878"/>
+        <location filename="../../src/app/valentina/mainwindowsnogui.cpp" line="884"/>
         <source>Preparing details for layout</source>
         <translation>Підготовка деталей для розкладки</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindowsnogui.cpp" line="1068"/>
+        <location filename="../../src/app/valentina/mainwindowsnogui.cpp" line="1074"/>
         <source>Pattern</source>
         <translation>Лекало</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindowsnogui.cpp" line="1220"/>
+        <location filename="../../src/app/valentina/mainwindowsnogui.cpp" line="1226"/>
         <source>Name</source>
         <translation>Ім&apos;я</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindowsnogui.cpp" line="1221"/>
+        <location filename="../../src/app/valentina/mainwindowsnogui.cpp" line="1227"/>
         <source>Value</source>
         <translation>Значення</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindowsnogui.cpp" line="1248"/>
-        <location filename="../../src/app/valentina/mainwindowsnogui.cpp" line="1260"/>
-        <location filename="../../src/app/valentina/mainwindowsnogui.cpp" line="1278"/>
+        <location filename="../../src/app/valentina/mainwindowsnogui.cpp" line="1254"/>
+        <location filename="../../src/app/valentina/mainwindowsnogui.cpp" line="1266"/>
+        <location filename="../../src/app/valentina/mainwindowsnogui.cpp" line="1284"/>
         <source>Export final measurements error.</source>
         <translation>Помилка експорту фінальних вимірів.</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindowsnogui.cpp" line="1250"/>
+        <location filename="../../src/app/valentina/mainwindowsnogui.cpp" line="1256"/>
         <source>Value in line %1 is infinite or NaN. Please, check your calculations.</source>
         <translation>Значення у рядку %1 є нескінченністю або NaN. Будь ласка, перевірте свої обчислення.</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindowsnogui.cpp" line="1261"/>
+        <location filename="../../src/app/valentina/mainwindowsnogui.cpp" line="1267"/>
         <source>Parser error at line %1: %2.</source>
         <translation>Помилка синтаксичного аналізатора в рядку %1: %2.</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindowsnogui.cpp" line="1279"/>
+        <location filename="../../src/app/valentina/mainwindowsnogui.cpp" line="1285"/>
         <source>File error %1.</source>
         <translation>Помилка файлу %1.</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindowsnogui.cpp" line="458"/>
+        <location filename="../../src/app/valentina/mainwindowsnogui.cpp" line="464"/>
         <source>One or more pattern pieces are bigger than the paper format you selected. Please, select a bigger paper format.</source>
         <translation>Одна або кілька деталей більше, ніж вибраний формат паперу. Виберіть більший формат паперу.</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindowsnogui.cpp" line="1222"/>
+        <location filename="../../src/app/valentina/mainwindowsnogui.cpp" line="1228"/>
         <source>Description</source>
         <translation>Опис</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindowsnogui.cpp" line="1305"/>
+        <location filename="../../src/app/valentina/mainwindowsnogui.cpp" line="1311"/>
         <source>Measurement file has unknown format.</source>
         <translation>Файл мірок має невідомий формат.</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindowsnogui.cpp" line="1360"/>
+        <location filename="../../src/app/valentina/mainwindowsnogui.cpp" line="1366"/>
         <source>File error.</source>
         <translation>Помилка файла.</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindowsnogui.cpp" line="1385"/>
+        <location filename="../../src/app/valentina/mainwindowsnogui.cpp" line="1391"/>
         <source>Measurement file doesn&apos;t include all required measurements.</source>
         <translation>Файл мірок містить не всі необхідні мірки.</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindowsnogui.cpp" line="1386"/>
+        <location filename="../../src/app/valentina/mainwindowsnogui.cpp" line="1392"/>
         <source>Please, additionally provide: %1</source>
         <translation>Будь ласка, додатково вкажіть: %1</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindowsnogui.cpp" line="462"/>
+        <location filename="../../src/app/valentina/mainwindowsnogui.cpp" line="468"/>
         <source>Timeout.</source>
         <translation>Час очікування.</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindowsnogui.cpp" line="465"/>
+        <location filename="../../src/app/valentina/mainwindowsnogui.cpp" line="471"/>
         <source>Process has been stoped because of exception.</source>
         <translation>Процес було зупинено через винятки.</translation>
     </message>
@@ -14725,31 +14725,31 @@ This option will take an affect after restart.</source>
     </message>
     <message>
         <location filename="../../src/app/puzzle/xml/vplayoutfilereader.cpp" line="1148"/>
-        <location filename="../../src/libs/ifc/xml/vdomdocument.cpp" line="455"/>
-        <location filename="../../src/libs/ifc/xml/vdomdocument.cpp" line="460"/>
+        <location filename="../../src/libs/ifc/xml/vdomdocument.cpp" line="461"/>
+        <location filename="../../src/libs/ifc/xml/vdomdocument.cpp" line="466"/>
         <source>Can&apos;t convert toUInt parameter</source>
         <translation>Не можу конвертувати toUInt параметр</translation>
     </message>
     <message>
         <location filename="../../src/app/puzzle/xml/vplayoutfilereader.cpp" line="1085"/>
-        <location filename="../../src/libs/ifc/xml/vdomdocument.cpp" line="506"/>
+        <location filename="../../src/libs/ifc/xml/vdomdocument.cpp" line="512"/>
         <source>Can&apos;t convert toBool parameter</source>
         <translation>Не вдається перетворити параметр toBool</translation>
     </message>
     <message>
-        <location filename="../../src/libs/ifc/xml/vdomdocument.cpp" line="578"/>
+        <location filename="../../src/libs/ifc/xml/vdomdocument.cpp" line="584"/>
         <source>Got empty parameter</source>
         <translation>Отримано порожній параметр</translation>
     </message>
     <message>
         <location filename="../../src/app/puzzle/xml/vplayoutfilereader.cpp" line="1122"/>
-        <location filename="../../src/libs/ifc/xml/vdomdocument.cpp" line="615"/>
-        <location filename="../../src/libs/ifc/xml/vdomdocument.cpp" line="620"/>
+        <location filename="../../src/libs/ifc/xml/vdomdocument.cpp" line="621"/>
+        <location filename="../../src/libs/ifc/xml/vdomdocument.cpp" line="626"/>
         <source>Can&apos;t convert toDouble parameter</source>
         <translation>Не можу конвертувати toDouble параметру</translation>
     </message>
     <message>
-        <location filename="../../src/libs/ifc/xml/vdomdocument.cpp" line="639"/>
+        <location filename="../../src/libs/ifc/xml/vdomdocument.cpp" line="645"/>
         <source>Got wrong parameter id. Need only id &gt; 0.</source>
         <translation>Отримано неправильний id. Допускаються тільки id &gt; 0.</translation>
     </message>
@@ -14821,7 +14821,7 @@ This option will take an affect after restart.</source>
     </message>
     <message>
         <location filename="../../src/libs/vlayout/vlayoutpiece.cpp" line="677"/>
-        <location filename="../../src/libs/vtools/tools/vtoolseamallowance.cpp" line="1876"/>
+        <location filename="../../src/libs/vtools/tools/vtoolseamallowance.cpp" line="1898"/>
         <source>Piece &apos;%1&apos;. Seam allowance is not valid.</source>
         <translation>Деталь &apos;%1&apos;. Припуск на шви недійсний.</translation>
     </message>
@@ -14882,8 +14882,8 @@ This option will take an affect after restart.</source>
     </message>
     <message>
         <location filename="../../src/app/puzzle/xml/vplayoutfilereader.cpp" line="1174"/>
-        <location filename="../../src/libs/ifc/xml/vdomdocument.cpp" line="484"/>
-        <location filename="../../src/libs/ifc/xml/vdomdocument.cpp" line="489"/>
+        <location filename="../../src/libs/ifc/xml/vdomdocument.cpp" line="490"/>
+        <location filename="../../src/libs/ifc/xml/vdomdocument.cpp" line="495"/>
         <source>Can&apos;t convert toInt parameter</source>
         <translation>Не вдається перетворити параметр toInt</translation>
     </message>
@@ -15001,7 +15001,7 @@ This option will take an affect after restart.</source>
     </message>
     <message>
         <location filename="../../src/libs/vtools/tools/vtoolseamallowance.cpp" line="427"/>
-        <location filename="../../src/libs/vtools/tools/vtoolseamallowance.cpp" line="2171"/>
+        <location filename="../../src/libs/vtools/tools/vtoolseamallowance.cpp" line="2193"/>
         <source>Piece &apos;%1&apos;. Unable to load default piece label template.
 %2
 %3</source>
@@ -15015,7 +15015,7 @@ This option will take an affect after restart.</source>
         <translation>Деталь &quot;%1&quot;. Нитка основи недійсна.</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/tools/vtoolseamallowance.cpp" line="2824"/>
+        <location filename="../../src/libs/vtools/tools/vtoolseamallowance.cpp" line="2846"/>
         <source>Piece &apos;%1&apos;. Fold line is not valid.</source>
         <translation>Деталь &apos;%1&apos;. Лінія згину не дійсна.</translation>
     </message>
@@ -17623,13 +17623,9 @@ Do you want to save your changes?</source>
 <context>
     <name>TabGrainline</name>
     <message>
-        <source>Grainline visible</source>
-        <translation type="vanished">Нитка основи видима</translation>
-    </message>
-    <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabgrainline.ui" line="39"/>
         <source>Grainline enabled</source>
-        <translation type="unfinished"></translation>
+        <translation>Нитка основи ввімкнена</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabgrainline.ui" line="96"/>
@@ -17688,7 +17684,7 @@ Do you want to save your changes?</source>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabgrainline.ui" line="513"/>
         <source>Visible</source>
-        <translation type="unfinished">Видимий</translation>
+        <translation>Видимий</translation>
     </message>
 </context>
 <context>
@@ -20992,7 +20988,7 @@ Do you want to save your changes?</source>
         <translation type="vanished">Не можу конвертувати toDouble параметру</translation>
     </message>
     <message>
-        <location filename="../../src/libs/ifc/xml/vdomdocument.cpp" line="736"/>
+        <location filename="../../src/libs/ifc/xml/vdomdocument.cpp" line="747"/>
         <source>Can&apos;t open file %1:
 %2.</source>
         <translation>Не можу відкрити файл %1: 
@@ -21013,12 +21009,12 @@ Do you want to save your changes?</source>
         <translation type="vanished">Помилка валідації файлу %3 в рядку %1 стовпчику %2</translation>
     </message>
     <message>
-        <location filename="../../src/libs/ifc/xml/vdomdocument.cpp" line="748"/>
+        <location filename="../../src/libs/ifc/xml/vdomdocument.cpp" line="759"/>
         <source>Parsing error file %3 in line %1 column %2</source>
         <translation>Помилка розбору файлу %3 в рядку %1 стовпчику %2</translation>
     </message>
     <message>
-        <location filename="../../src/libs/ifc/xml/vdomdocument.cpp" line="1021"/>
+        <location filename="../../src/libs/ifc/xml/vdomdocument.cpp" line="1032"/>
         <source>Couldn&apos;t get node</source>
         <translation>Не вдалося отримати вузол</translation>
     </message>
@@ -21043,42 +21039,42 @@ Do you want to save your changes?</source>
         <translation type="vanished">Не вдалося завантажити файл схеми &apos;%1&apos;.</translation>
     </message>
     <message>
-        <location filename="../../src/libs/ifc/xml/vdomdocument.cpp" line="426"/>
+        <location filename="../../src/libs/ifc/xml/vdomdocument.cpp" line="432"/>
         <source>Fail to write Canonical XML.</source>
         <translation>Не вдалося записати канонічний XML.</translation>
     </message>
     <message>
-        <location filename="../../src/libs/ifc/xml/vdomdocument.cpp" line="368"/>
+        <location filename="../../src/libs/ifc/xml/vdomdocument.cpp" line="374"/>
         <source>Not unique id (%1)</source>
         <translation>Не унікальний id (%1)</translation>
     </message>
     <message>
-        <location filename="../../src/libs/ifc/xml/vdomdocument.cpp" line="693"/>
+        <location filename="../../src/libs/ifc/xml/vdomdocument.cpp" line="699"/>
         <source>This id (%1) is not unique.</source>
         <translation>Цей id (%1) не є унікальним.</translation>
     </message>
     <message>
-        <location filename="../../src/libs/ifc/xml/vdomdocument.cpp" line="861"/>
+        <location filename="../../src/libs/ifc/xml/vdomdocument.cpp" line="872"/>
         <source>Couldn&apos;t get version information.</source>
         <translation>Не вдалося отримати інформацію про версію.</translation>
     </message>
     <message>
-        <location filename="../../src/libs/ifc/xml/vdomdocument.cpp" line="867"/>
+        <location filename="../../src/libs/ifc/xml/vdomdocument.cpp" line="878"/>
         <source>Too many tags &lt;%1&gt; in file.</source>
         <translation>Забагато тегів &lt;%1&gt; у файлі.</translation>
     </message>
     <message>
-        <location filename="../../src/libs/ifc/xml/vdomdocument.cpp" line="1111"/>
+        <location filename="../../src/libs/ifc/xml/vdomdocument.cpp" line="1122"/>
         <source>&lt;empty&gt;</source>
         <translation>&lt;empty&gt;</translation>
     </message>
     <message>
-        <location filename="../../src/libs/ifc/xml/vdomdocument.cpp" line="1154"/>
+        <location filename="../../src/libs/ifc/xml/vdomdocument.cpp" line="1165"/>
         <source>Version &quot;%1&quot; invalid.</source>
         <translation>Версія &quot;%1&quot; має неправильне значення.</translation>
     </message>
     <message>
-        <location filename="../../src/libs/ifc/xml/vdomdocument.cpp" line="1160"/>
+        <location filename="../../src/libs/ifc/xml/vdomdocument.cpp" line="1171"/>
         <source>Version &quot;0.0.0&quot; invalid.</source>
         <translation>Версія &quot;0.0.0&quot; не дійсна.</translation>
     </message>
@@ -22418,7 +22414,7 @@ Do you want to save your changes?</source>
     <message>
         <location filename="../../src/app/puzzle/vpmainwindow.ui" line="706"/>
         <source>Show grainline</source>
-        <translation type="unfinished">Показати нитку основи</translation>
+        <translation>Показати нитку основи</translation>
     </message>
     <message>
         <location filename="../../src/app/puzzle/vpmainwindow.ui" line="716"/>
@@ -25129,7 +25125,7 @@ Raw layout format compatibility error: actualFileVersion = %1 and fileVersion = 
         <translation>Цей id (%1) не унікальний.</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/tools/vtoolseamallowance.cpp" line="2491"/>
+        <location filename="../../src/libs/vtools/tools/vtoolseamallowance.cpp" line="2513"/>
         <source>Tool was used after deleting.</source>
         <translation>Інструмент був використаний після видалення.</translation>
     </message>

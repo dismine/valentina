@@ -10660,7 +10660,7 @@ Aplicar configurações de qualquer forma?</translation>
         <translation>Editor de medidas de Valentina.</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/mapplication.cpp" line="944"/>
+        <location filename="../../src/app/tape/mapplication.cpp" line="958"/>
         <source>The measurement file.</source>
         <translation>O arquivo de medidas.</translation>
     </message>
@@ -10685,12 +10685,12 @@ Aplicar configurações de qualquer forma?</translation>
         <translation type="vanished">Uso para teste de unidade. Execute o programa e abra um arquivo sem mostrar uma janela.</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/mapplication.cpp" line="1194"/>
+        <location filename="../../src/app/tape/mapplication.cpp" line="1208"/>
         <source>Invalid base size argument. Must be cm, mm or inch.</source>
         <translation>Argumento do tamanho da base inválido. Deve ser cm, mm ou polegada.</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/mapplication.cpp" line="990"/>
+        <location filename="../../src/app/tape/mapplication.cpp" line="1004"/>
         <source>Can&apos;t begin to listen for incoming connections on name &apos;%1&apos;</source>
         <translation>Não é possível começar a ouvir conexões recebidas no nome &apos;%1&apos;</translation>
     </message>
@@ -10699,7 +10699,7 @@ Aplicar configurações de qualquer forma?</translation>
         <translation type="vanished">O modo de teste não suporta a abertura de vários arquivos.</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/mapplication.cpp" line="1110"/>
+        <location filename="../../src/app/tape/mapplication.cpp" line="1124"/>
         <source>Please, provide one input file.</source>
         <translation>Por favor, forneça um arquivo de entrada.</translation>
     </message>
@@ -10720,72 +10720,72 @@ Aplicar configurações de qualquer forma?</translation>
         <translation type="vanished">Abra com a altura da base.Valores válidos: %1cm.</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/mapplication.cpp" line="966"/>
+        <location filename="../../src/app/tape/mapplication.cpp" line="980"/>
         <source>Use for unit testing. Run the program and open a file without showing the main window.</source>
         <translation>Uso para teste de unidade. Execute o programa e abra um arquivo sem mostrar a janela principal.</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/mapplication.cpp" line="969"/>
+        <location filename="../../src/app/tape/mapplication.cpp" line="983"/>
         <source>Disable high dpi scaling. Call this option if has problem with scaling (by default scaling enabled). Alternatively you can use the %1 environment variable.</source>
         <translation>Desabilite dimensionamento de dpi alta. Ligue está opção se tiver problema com o dimensionamento (por padrão dimensionamento habilitado). Alternativamente, você pode usar a variável de ambiente %1.</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/mapplication.cpp" line="948"/>
+        <location filename="../../src/app/tape/mapplication.cpp" line="962"/>
         <source>Set base for dimension A in the table units.</source>
         <translation>Defina a base para a dimensão A na tabela unidades.</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/mapplication.cpp" line="949"/>
+        <location filename="../../src/app/tape/mapplication.cpp" line="963"/>
         <source>The dimension A base</source>
         <translation>A dimensão A base</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/mapplication.cpp" line="952"/>
+        <location filename="../../src/app/tape/mapplication.cpp" line="966"/>
         <source>Set base for dimension B in the table units.</source>
         <translation>Defina a base para a dimensão B na tabela unidades.</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/mapplication.cpp" line="953"/>
+        <location filename="../../src/app/tape/mapplication.cpp" line="967"/>
         <source>The dimension B base</source>
         <translation>A dimensão B base</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/mapplication.cpp" line="956"/>
+        <location filename="../../src/app/tape/mapplication.cpp" line="970"/>
         <source>Set base for dimension C in the table units.</source>
         <translation>Defina a base para a dimensão C na tabela unidades.</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/mapplication.cpp" line="957"/>
+        <location filename="../../src/app/tape/mapplication.cpp" line="971"/>
         <source>The dimension C base</source>
         <translation>A dimensão C base</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/mapplication.cpp" line="960"/>
+        <location filename="../../src/app/tape/mapplication.cpp" line="974"/>
         <source>Set pattern file units: cm, mm, inch.</source>
         <translation>Configurar unidade de medida do arquivo do molde: cm, mm, pol.</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/mapplication.cpp" line="961"/>
+        <location filename="../../src/app/tape/mapplication.cpp" line="975"/>
         <source>The pattern units</source>
         <translation>Unidade de medidas do molde</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/mapplication.cpp" line="963"/>
+        <location filename="../../src/app/tape/mapplication.cpp" line="977"/>
         <source>Activate known measurements mode.</source>
         <translation>Ativar modo de medidas conhecidas.</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/mapplication.cpp" line="1133"/>
+        <location filename="../../src/app/tape/mapplication.cpp" line="1147"/>
         <source>Invalid dimension A base value.</source>
         <translation>Dimensão inválida Um valor base.</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/mapplication.cpp" line="1154"/>
+        <location filename="../../src/app/tape/mapplication.cpp" line="1168"/>
         <source>Invalid dimension B base value.</source>
         <translation>Dimensão inválida Um valor base.</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/mapplication.cpp" line="1175"/>
+        <location filename="../../src/app/tape/mapplication.cpp" line="1189"/>
         <source>Invalid dimension C base value.</source>
         <translation>Dimensão inválida valor base C.</translation>
     </message>
@@ -10795,7 +10795,7 @@ Aplicar configurações de qualquer forma?</translation>
         <translation>Aviso de fórmula: %1. O programa será encerrado.</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/mapplication.cpp" line="1008"/>
+        <location filename="../../src/app/tape/mapplication.cpp" line="1022"/>
         <source>Test mode doesn&apos;t support opening several files.</source>
         <translation>O modo de teste não suporta a abertura de vários arquivos.</translation>
     </message>
@@ -12983,7 +12983,7 @@ Você quer salvar suas mudanças?</translation>
         <translation type="vanished">Impossível continuar porque não existem impressoras disponíveis no seu sistema.</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindowsnogui.cpp" line="1203"/>
+        <location filename="../../src/app/valentina/mainwindowsnogui.cpp" line="1209"/>
         <source>unnamed</source>
         <translation>não nomeado</translation>
     </message>
@@ -12996,7 +12996,7 @@ Você quer salvar suas mudanças?</translation>
         <translation type="vanished">O layout não foi atualizado desde a última modificação do molde. Você deseja continuar?</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindowsnogui.cpp" line="455"/>
+        <location filename="../../src/app/valentina/mainwindowsnogui.cpp" line="461"/>
         <source>Couldn&apos;t prepare data for creation layout</source>
         <translation>Não foi possível preparar dados para layout</translation>
     </message>
@@ -13037,90 +13037,90 @@ Você quer salvar suas mudanças?</translation>
         <translation type="vanished">Impossível definir as margens da impressora</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindowsnogui.cpp" line="550"/>
-        <location filename="../../src/app/valentina/mainwindowsnogui.cpp" line="654"/>
+        <location filename="../../src/app/valentina/mainwindowsnogui.cpp" line="556"/>
+        <location filename="../../src/app/valentina/mainwindowsnogui.cpp" line="660"/>
         <source>Can&apos;t create a path</source>
         <translation>Impossível criar um caminho</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindowsnogui.cpp" line="878"/>
+        <location filename="../../src/app/valentina/mainwindowsnogui.cpp" line="884"/>
         <source>Preparing details for layout</source>
         <translation>Preparando moldes para o layout</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindowsnogui.cpp" line="1068"/>
+        <location filename="../../src/app/valentina/mainwindowsnogui.cpp" line="1074"/>
         <source>Pattern</source>
         <translation>Molde</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindowsnogui.cpp" line="1220"/>
+        <location filename="../../src/app/valentina/mainwindowsnogui.cpp" line="1226"/>
         <source>Name</source>
         <translation>Nome</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindowsnogui.cpp" line="1221"/>
+        <location filename="../../src/app/valentina/mainwindowsnogui.cpp" line="1227"/>
         <source>Value</source>
         <translation>Valor</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindowsnogui.cpp" line="1248"/>
-        <location filename="../../src/app/valentina/mainwindowsnogui.cpp" line="1260"/>
-        <location filename="../../src/app/valentina/mainwindowsnogui.cpp" line="1278"/>
+        <location filename="../../src/app/valentina/mainwindowsnogui.cpp" line="1254"/>
+        <location filename="../../src/app/valentina/mainwindowsnogui.cpp" line="1266"/>
+        <location filename="../../src/app/valentina/mainwindowsnogui.cpp" line="1284"/>
         <source>Export final measurements error.</source>
         <translation>Exportar o erro da medição final.</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindowsnogui.cpp" line="1250"/>
+        <location filename="../../src/app/valentina/mainwindowsnogui.cpp" line="1256"/>
         <source>Value in line %1 is infinite or NaN. Please, check your calculations.</source>
         <translation>O valor na linha %1 é infinito ou não é um número. Por favor, verifique seus cálculos.</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindowsnogui.cpp" line="1261"/>
+        <location filename="../../src/app/valentina/mainwindowsnogui.cpp" line="1267"/>
         <source>Parser error at line %1: %2.</source>
         <translation>Erro de análise na linha %1: %2.</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindowsnogui.cpp" line="1279"/>
+        <location filename="../../src/app/valentina/mainwindowsnogui.cpp" line="1285"/>
         <source>File error %1.</source>
         <translation>Erro de arquivo %1.</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindowsnogui.cpp" line="458"/>
+        <location filename="../../src/app/valentina/mainwindowsnogui.cpp" line="464"/>
         <source>One or more pattern pieces are bigger than the paper format you selected. Please, select a bigger paper format.</source>
         <translation>Uma ou mais peças de modelagem são maiores do que o formato de papel que você selecionou. Por favor, selecione um formato de papel maior.</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindowsnogui.cpp" line="1222"/>
+        <location filename="../../src/app/valentina/mainwindowsnogui.cpp" line="1228"/>
         <source>Description</source>
         <translation>Descrição</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindowsnogui.cpp" line="1305"/>
+        <location filename="../../src/app/valentina/mainwindowsnogui.cpp" line="1311"/>
         <source>Measurement file has unknown format.</source>
         <translation>Arquivo de medidas tem formato desconhecido.</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindowsnogui.cpp" line="1360"/>
+        <location filename="../../src/app/valentina/mainwindowsnogui.cpp" line="1366"/>
         <source>File error.</source>
         <translation>Erro de arquivo.</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindowsnogui.cpp" line="1385"/>
+        <location filename="../../src/app/valentina/mainwindowsnogui.cpp" line="1391"/>
         <source>Measurement file doesn&apos;t include all required measurements.</source>
         <translation>O arquivo de medidas não inclui todas as medidas necessárias.</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindowsnogui.cpp" line="1386"/>
+        <location filename="../../src/app/valentina/mainwindowsnogui.cpp" line="1392"/>
         <source>Please, additionally provide: %1</source>
         <translation>Por favor, forneça adicionalmente: %1</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindowsnogui.cpp" line="462"/>
+        <location filename="../../src/app/valentina/mainwindowsnogui.cpp" line="468"/>
         <source>Timeout.</source>
         <translation>Timeout.</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindowsnogui.cpp" line="465"/>
+        <location filename="../../src/app/valentina/mainwindowsnogui.cpp" line="471"/>
         <source>Process has been stoped because of exception.</source>
         <translation>O processo foi interrompido devido a uma exceção.</translation>
     </message>
@@ -14726,31 +14726,31 @@ Esta opção terá um efeito após o reinício.</translation>
     </message>
     <message>
         <location filename="../../src/app/puzzle/xml/vplayoutfilereader.cpp" line="1148"/>
-        <location filename="../../src/libs/ifc/xml/vdomdocument.cpp" line="455"/>
-        <location filename="../../src/libs/ifc/xml/vdomdocument.cpp" line="460"/>
+        <location filename="../../src/libs/ifc/xml/vdomdocument.cpp" line="461"/>
+        <location filename="../../src/libs/ifc/xml/vdomdocument.cpp" line="466"/>
         <source>Can&apos;t convert toUInt parameter</source>
         <translation>Impossível converter o parâmetro toUInt</translation>
     </message>
     <message>
         <location filename="../../src/app/puzzle/xml/vplayoutfilereader.cpp" line="1085"/>
-        <location filename="../../src/libs/ifc/xml/vdomdocument.cpp" line="506"/>
+        <location filename="../../src/libs/ifc/xml/vdomdocument.cpp" line="512"/>
         <source>Can&apos;t convert toBool parameter</source>
         <translation>Impossível converter o parâmetro toBool</translation>
     </message>
     <message>
-        <location filename="../../src/libs/ifc/xml/vdomdocument.cpp" line="578"/>
+        <location filename="../../src/libs/ifc/xml/vdomdocument.cpp" line="584"/>
         <source>Got empty parameter</source>
         <translation>Obteve parâmetro vazio</translation>
     </message>
     <message>
         <location filename="../../src/app/puzzle/xml/vplayoutfilereader.cpp" line="1122"/>
-        <location filename="../../src/libs/ifc/xml/vdomdocument.cpp" line="615"/>
-        <location filename="../../src/libs/ifc/xml/vdomdocument.cpp" line="620"/>
+        <location filename="../../src/libs/ifc/xml/vdomdocument.cpp" line="621"/>
+        <location filename="../../src/libs/ifc/xml/vdomdocument.cpp" line="626"/>
         <source>Can&apos;t convert toDouble parameter</source>
         <translation>Impossível converter o parâmetro toDouble</translation>
     </message>
     <message>
-        <location filename="../../src/libs/ifc/xml/vdomdocument.cpp" line="639"/>
+        <location filename="../../src/libs/ifc/xml/vdomdocument.cpp" line="645"/>
         <source>Got wrong parameter id. Need only id &gt; 0.</source>
         <translation>Obteve parâmetro de identidade errado. Permitido somente Identidade &gt; 0.</translation>
     </message>
@@ -14822,7 +14822,7 @@ Esta opção terá um efeito após o reinício.</translation>
     </message>
     <message>
         <location filename="../../src/libs/vlayout/vlayoutpiece.cpp" line="677"/>
-        <location filename="../../src/libs/vtools/tools/vtoolseamallowance.cpp" line="1876"/>
+        <location filename="../../src/libs/vtools/tools/vtoolseamallowance.cpp" line="1898"/>
         <source>Piece &apos;%1&apos;. Seam allowance is not valid.</source>
         <translation>Peça &apos;%1&apos;. Margem de costura inválida.</translation>
     </message>
@@ -14883,8 +14883,8 @@ Esta opção terá um efeito após o reinício.</translation>
     </message>
     <message>
         <location filename="../../src/app/puzzle/xml/vplayoutfilereader.cpp" line="1174"/>
-        <location filename="../../src/libs/ifc/xml/vdomdocument.cpp" line="484"/>
-        <location filename="../../src/libs/ifc/xml/vdomdocument.cpp" line="489"/>
+        <location filename="../../src/libs/ifc/xml/vdomdocument.cpp" line="490"/>
+        <location filename="../../src/libs/ifc/xml/vdomdocument.cpp" line="495"/>
         <source>Can&apos;t convert toInt parameter</source>
         <translation>Impossível converter o parâmetro toInt</translation>
     </message>
@@ -15002,7 +15002,7 @@ Esta opção terá um efeito após o reinício.</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/tools/vtoolseamallowance.cpp" line="427"/>
-        <location filename="../../src/libs/vtools/tools/vtoolseamallowance.cpp" line="2171"/>
+        <location filename="../../src/libs/vtools/tools/vtoolseamallowance.cpp" line="2193"/>
         <source>Piece &apos;%1&apos;. Unable to load default piece label template.
 %2
 %3</source>
@@ -15016,7 +15016,7 @@ Esta opção terá um efeito após o reinício.</translation>
         <translation>Peça &apos;%1&apos;. Sentido do fio é inválido.</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/tools/vtoolseamallowance.cpp" line="2824"/>
+        <location filename="../../src/libs/vtools/tools/vtoolseamallowance.cpp" line="2846"/>
         <source>Piece &apos;%1&apos;. Fold line is not valid.</source>
         <translation>Peça &apos;%1&apos;. Linha de dobra é inválida.</translation>
     </message>
@@ -17626,10 +17626,6 @@ O significado das classes de caracteres \w, \d, etc., bem como o significado de 
 <context>
     <name>TabGrainline</name>
     <message>
-        <source>Grainline visible</source>
-        <translation type="vanished">Fio visível</translation>
-    </message>
-    <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabgrainline.ui" line="39"/>
         <source>Grainline enabled</source>
         <translation type="unfinished"></translation>
@@ -17691,7 +17687,7 @@ O significado das classes de caracteres \w, \d, etc., bem como o significado de 
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabgrainline.ui" line="513"/>
         <source>Visible</source>
-        <translation type="unfinished">Visibilidade</translation>
+        <translation>Visibilidade</translation>
     </message>
 </context>
 <context>
@@ -20996,7 +20992,7 @@ O significado das classes de caracteres \w, \d, etc., bem como o significado de 
         <translation type="vanished">Impossível converter o parâmetro toDouble</translation>
     </message>
     <message>
-        <location filename="../../src/libs/ifc/xml/vdomdocument.cpp" line="736"/>
+        <location filename="../../src/libs/ifc/xml/vdomdocument.cpp" line="747"/>
         <source>Can&apos;t open file %1:
 %2.</source>
         <translation>Impossível abrir o arquivo %1:
@@ -21017,12 +21013,12 @@ O significado das classes de caracteres \w, \d, etc., bem como o significado de 
         <translation type="vanished">Arquivo de erro de validação %3 na linha %1 coluna %2</translation>
     </message>
     <message>
-        <location filename="../../src/libs/ifc/xml/vdomdocument.cpp" line="748"/>
+        <location filename="../../src/libs/ifc/xml/vdomdocument.cpp" line="759"/>
         <source>Parsing error file %3 in line %1 column %2</source>
         <translation>Erro de análise do arquivo %3 na linha %1 coluna %2</translation>
     </message>
     <message>
-        <location filename="../../src/libs/ifc/xml/vdomdocument.cpp" line="1021"/>
+        <location filename="../../src/libs/ifc/xml/vdomdocument.cpp" line="1032"/>
         <source>Couldn&apos;t get node</source>
         <translation>Não foi possível obter o nó</translation>
     </message>
@@ -21047,42 +21043,42 @@ O significado das classes de caracteres \w, \d, etc., bem como o significado de 
         <translation type="vanished">Impossível carregar o arquivo de esquema &apos;%1&apos;.</translation>
     </message>
     <message>
-        <location filename="../../src/libs/ifc/xml/vdomdocument.cpp" line="426"/>
+        <location filename="../../src/libs/ifc/xml/vdomdocument.cpp" line="432"/>
         <source>Fail to write Canonical XML.</source>
         <translation>Fail to write Canonical XML.</translation>
     </message>
     <message>
-        <location filename="../../src/libs/ifc/xml/vdomdocument.cpp" line="368"/>
+        <location filename="../../src/libs/ifc/xml/vdomdocument.cpp" line="374"/>
         <source>Not unique id (%1)</source>
         <translation>Não é um ID único (%1)</translation>
     </message>
     <message>
-        <location filename="../../src/libs/ifc/xml/vdomdocument.cpp" line="693"/>
+        <location filename="../../src/libs/ifc/xml/vdomdocument.cpp" line="699"/>
         <source>This id (%1) is not unique.</source>
         <translation>Esta id (%1) não é única.</translation>
     </message>
     <message>
-        <location filename="../../src/libs/ifc/xml/vdomdocument.cpp" line="861"/>
+        <location filename="../../src/libs/ifc/xml/vdomdocument.cpp" line="872"/>
         <source>Couldn&apos;t get version information.</source>
         <translation>Impossível obter informações sobre a versão.</translation>
     </message>
     <message>
-        <location filename="../../src/libs/ifc/xml/vdomdocument.cpp" line="867"/>
+        <location filename="../../src/libs/ifc/xml/vdomdocument.cpp" line="878"/>
         <source>Too many tags &lt;%1&gt; in file.</source>
         <translation>Muitas tags &lt;%1&gt; no arquivo.</translation>
     </message>
     <message>
-        <location filename="../../src/libs/ifc/xml/vdomdocument.cpp" line="1111"/>
+        <location filename="../../src/libs/ifc/xml/vdomdocument.cpp" line="1122"/>
         <source>&lt;empty&gt;</source>
         <translation>&lt;empty&gt;</translation>
     </message>
     <message>
-        <location filename="../../src/libs/ifc/xml/vdomdocument.cpp" line="1154"/>
+        <location filename="../../src/libs/ifc/xml/vdomdocument.cpp" line="1165"/>
         <source>Version &quot;%1&quot; invalid.</source>
         <translation>Versão &quot;%1&quot; inválida.</translation>
     </message>
     <message>
-        <location filename="../../src/libs/ifc/xml/vdomdocument.cpp" line="1160"/>
+        <location filename="../../src/libs/ifc/xml/vdomdocument.cpp" line="1171"/>
         <source>Version &quot;0.0.0&quot; invalid.</source>
         <translation>Versão &quot;0.0.0&quot; inválida.</translation>
     </message>
@@ -22422,7 +22418,7 @@ O significado das classes de caracteres \w, \d, etc., bem como o significado de 
     <message>
         <location filename="../../src/app/puzzle/vpmainwindow.ui" line="706"/>
         <source>Show grainline</source>
-        <translation type="unfinished">Mostrar sentido do fio</translation>
+        <translation>Mostrar sentido do fio</translation>
     </message>
     <message>
         <location filename="../../src/app/puzzle/vpmainwindow.ui" line="716"/>
@@ -25133,7 +25129,7 @@ Raw layout format compatibility error: actualFileVersion = %1 and fileVersion = 
         <translation>Esta id (%1) não é única.</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/tools/vtoolseamallowance.cpp" line="2491"/>
+        <location filename="../../src/libs/vtools/tools/vtoolseamallowance.cpp" line="2513"/>
         <source>Tool was used after deleting.</source>
         <translation>Ferramenta foi utilizada após apagar.</translation>
     </message>

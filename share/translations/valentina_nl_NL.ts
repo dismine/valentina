@@ -10657,7 +10657,7 @@ Toch de instellingen aanpassen?</translation>
         <translation>Valentina&apos;s maten editor.</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/mapplication.cpp" line="944"/>
+        <location filename="../../src/app/tape/mapplication.cpp" line="958"/>
         <source>The measurement file.</source>
         <translation>Het maten bestand.</translation>
     </message>
@@ -10682,12 +10682,12 @@ Toch de instellingen aanpassen?</translation>
         <translation type="vanished">Gebruik voor eenheid testing. Laat het programma lopen en open een bestand zonder het te vertonen in een venster.</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/mapplication.cpp" line="1194"/>
+        <location filename="../../src/app/tape/mapplication.cpp" line="1208"/>
         <source>Invalid base size argument. Must be cm, mm or inch.</source>
         <translation>Ongeldig basis maat argument. Moet bestaan uit: cm, mm, of inches.</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/mapplication.cpp" line="990"/>
+        <location filename="../../src/app/tape/mapplication.cpp" line="1004"/>
         <source>Can&apos;t begin to listen for incoming connections on name &apos;%1&apos;</source>
         <translation>Kan niet beginnen met verwerken van inkomende connecties op naam &apos;%1&apos;</translation>
     </message>
@@ -10696,7 +10696,7 @@ Toch de instellingen aanpassen?</translation>
         <translation type="vanished">Test modus ondersteunt niet het openen van verschillende bestanden.</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/mapplication.cpp" line="1110"/>
+        <location filename="../../src/app/tape/mapplication.cpp" line="1124"/>
         <source>Please, provide one input file.</source>
         <translation>Alsublieft, verstrek één invoer bestand.</translation>
     </message>
@@ -10717,72 +10717,72 @@ Toch de instellingen aanpassen?</translation>
         <translation type="vanished">Open met de basis hoogte. Geldige waardes: %1cm.</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/mapplication.cpp" line="966"/>
+        <location filename="../../src/app/tape/mapplication.cpp" line="980"/>
         <source>Use for unit testing. Run the program and open a file without showing the main window.</source>
         <translation>Gebruik voor eenheid testing. Laat het programma lopen en open een bestand zonder het hoofdvenster te vertonen.</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/mapplication.cpp" line="969"/>
+        <location filename="../../src/app/tape/mapplication.cpp" line="983"/>
         <source>Disable high dpi scaling. Call this option if has problem with scaling (by default scaling enabled). Alternatively you can use the %1 environment variable.</source>
         <translation>Schakel hoog-dpi-schaling uit. Gebruik deze optie als je problemen hebt met schaalverandering (als default is ingeschakeld). Als alternatief kun je %1 omgevingsvariabele gebruiken.</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/mapplication.cpp" line="948"/>
+        <location filename="../../src/app/tape/mapplication.cpp" line="962"/>
         <source>Set base for dimension A in the table units.</source>
         <translation>Zet de basis voor dimensie A in de tabel eenheden.</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/mapplication.cpp" line="949"/>
+        <location filename="../../src/app/tape/mapplication.cpp" line="963"/>
         <source>The dimension A base</source>
         <translation>Dimensie A basis</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/mapplication.cpp" line="952"/>
+        <location filename="../../src/app/tape/mapplication.cpp" line="966"/>
         <source>Set base for dimension B in the table units.</source>
         <translation>Zet de basis voor dimensie B in de tabel eenheden.</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/mapplication.cpp" line="953"/>
+        <location filename="../../src/app/tape/mapplication.cpp" line="967"/>
         <source>The dimension B base</source>
         <translation>Dimensie B basis</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/mapplication.cpp" line="956"/>
+        <location filename="../../src/app/tape/mapplication.cpp" line="970"/>
         <source>Set base for dimension C in the table units.</source>
         <translation>Zet de basis voor dimensie C in de tabel eenheden.</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/mapplication.cpp" line="957"/>
+        <location filename="../../src/app/tape/mapplication.cpp" line="971"/>
         <source>The dimension C base</source>
         <translation>Dimensie C basis</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/mapplication.cpp" line="960"/>
+        <location filename="../../src/app/tape/mapplication.cpp" line="974"/>
         <source>Set pattern file units: cm, mm, inch.</source>
         <translation>Stel patroon bestand eenheid in: cm, mm, inches.</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/mapplication.cpp" line="961"/>
+        <location filename="../../src/app/tape/mapplication.cpp" line="975"/>
         <source>The pattern units</source>
         <translation>Patroon eenheden</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/mapplication.cpp" line="963"/>
+        <location filename="../../src/app/tape/mapplication.cpp" line="977"/>
         <source>Activate known measurements mode.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/mapplication.cpp" line="1133"/>
+        <location filename="../../src/app/tape/mapplication.cpp" line="1147"/>
         <source>Invalid dimension A base value.</source>
         <translation>Ongeldige waarde voor dimensie A basis.</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/mapplication.cpp" line="1154"/>
+        <location filename="../../src/app/tape/mapplication.cpp" line="1168"/>
         <source>Invalid dimension B base value.</source>
         <translation>Ongeldige waarde voor dimensie B basis.</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/mapplication.cpp" line="1175"/>
+        <location filename="../../src/app/tape/mapplication.cpp" line="1189"/>
         <source>Invalid dimension C base value.</source>
         <translation>Ongeldige waarde voor dimensie C basis.</translation>
     </message>
@@ -10792,7 +10792,7 @@ Toch de instellingen aanpassen?</translation>
         <translation>Formule waarschuwing: %1. Programma wordt gestopt.</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/mapplication.cpp" line="1008"/>
+        <location filename="../../src/app/tape/mapplication.cpp" line="1022"/>
         <source>Test mode doesn&apos;t support opening several files.</source>
         <translation type="unfinished"></translation>
     </message>
@@ -12979,7 +12979,7 @@ Do you want to save your changes?</source>
         <translation type="vanished">Kan niet verder gaan omdat er geen beschikbare printers in het systeem zijn.</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindowsnogui.cpp" line="1203"/>
+        <location filename="../../src/app/valentina/mainwindowsnogui.cpp" line="1209"/>
         <source>unnamed</source>
         <translation>naamloos</translation>
     </message>
@@ -12992,7 +12992,7 @@ Do you want to save your changes?</source>
         <translation type="vanished">De opmaak is niet meer bijgewerkt sinds de laatste veranderingen. Wilt u verder gaan?</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindowsnogui.cpp" line="455"/>
+        <location filename="../../src/app/valentina/mainwindowsnogui.cpp" line="461"/>
         <source>Couldn&apos;t prepare data for creation layout</source>
         <translation>Kon geen data voorbereiden om opmaak te creëren</translation>
     </message>
@@ -13033,90 +13033,90 @@ Do you want to save your changes?</source>
         <translation type="vanished">Kan de printer marges niet bepalen</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindowsnogui.cpp" line="550"/>
-        <location filename="../../src/app/valentina/mainwindowsnogui.cpp" line="654"/>
+        <location filename="../../src/app/valentina/mainwindowsnogui.cpp" line="556"/>
+        <location filename="../../src/app/valentina/mainwindowsnogui.cpp" line="660"/>
         <source>Can&apos;t create a path</source>
         <translation>Kan geen pad maken</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindowsnogui.cpp" line="878"/>
+        <location filename="../../src/app/valentina/mainwindowsnogui.cpp" line="884"/>
         <source>Preparing details for layout</source>
         <translation>Details voorbereiden voor opmaak</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindowsnogui.cpp" line="1068"/>
+        <location filename="../../src/app/valentina/mainwindowsnogui.cpp" line="1074"/>
         <source>Pattern</source>
         <translation>Patroon</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindowsnogui.cpp" line="1220"/>
+        <location filename="../../src/app/valentina/mainwindowsnogui.cpp" line="1226"/>
         <source>Name</source>
         <translation>Naam</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindowsnogui.cpp" line="1221"/>
+        <location filename="../../src/app/valentina/mainwindowsnogui.cpp" line="1227"/>
         <source>Value</source>
         <translation>Waarde</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindowsnogui.cpp" line="1248"/>
-        <location filename="../../src/app/valentina/mainwindowsnogui.cpp" line="1260"/>
-        <location filename="../../src/app/valentina/mainwindowsnogui.cpp" line="1278"/>
+        <location filename="../../src/app/valentina/mainwindowsnogui.cpp" line="1254"/>
+        <location filename="../../src/app/valentina/mainwindowsnogui.cpp" line="1266"/>
+        <location filename="../../src/app/valentina/mainwindowsnogui.cpp" line="1284"/>
         <source>Export final measurements error.</source>
         <translation>Exporteer uiteindelijke maten fout.</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindowsnogui.cpp" line="1250"/>
+        <location filename="../../src/app/valentina/mainwindowsnogui.cpp" line="1256"/>
         <source>Value in line %1 is infinite or NaN. Please, check your calculations.</source>
         <translation>Waarde in lijn %1 is oneindig of NaN.  A.u.b., controleer uw berekeningen.</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindowsnogui.cpp" line="1261"/>
+        <location filename="../../src/app/valentina/mainwindowsnogui.cpp" line="1267"/>
         <source>Parser error at line %1: %2.</source>
         <translation>Opsplitsfout op lijn %1: %2.</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindowsnogui.cpp" line="1279"/>
+        <location filename="../../src/app/valentina/mainwindowsnogui.cpp" line="1285"/>
         <source>File error %1.</source>
         <translation>Bestandsfout %1.</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindowsnogui.cpp" line="458"/>
+        <location filename="../../src/app/valentina/mainwindowsnogui.cpp" line="464"/>
         <source>One or more pattern pieces are bigger than the paper format you selected. Please, select a bigger paper format.</source>
         <translation>Een of meer patroondeel zijn groter dan het papierformaat welke je hebt geselecteerd. Kies a.u.b. een groter formaat papier.</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindowsnogui.cpp" line="1222"/>
+        <location filename="../../src/app/valentina/mainwindowsnogui.cpp" line="1228"/>
         <source>Description</source>
         <translation>Beschrijving</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindowsnogui.cpp" line="1305"/>
+        <location filename="../../src/app/valentina/mainwindowsnogui.cpp" line="1311"/>
         <source>Measurement file has unknown format.</source>
         <translation>Maten bestand heeft een onbekende indeling.</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindowsnogui.cpp" line="1360"/>
+        <location filename="../../src/app/valentina/mainwindowsnogui.cpp" line="1366"/>
         <source>File error.</source>
         <translation>Bestandsfout.</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindowsnogui.cpp" line="1385"/>
+        <location filename="../../src/app/valentina/mainwindowsnogui.cpp" line="1391"/>
         <source>Measurement file doesn&apos;t include all required measurements.</source>
         <translation>Maten bestand bevat niet alle benodigde maten.</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindowsnogui.cpp" line="1386"/>
+        <location filename="../../src/app/valentina/mainwindowsnogui.cpp" line="1392"/>
         <source>Please, additionally provide: %1</source>
         <translation>Alstublieft, verstrek extra: %1</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindowsnogui.cpp" line="462"/>
+        <location filename="../../src/app/valentina/mainwindowsnogui.cpp" line="468"/>
         <source>Timeout.</source>
         <translation>Time-out.</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindowsnogui.cpp" line="465"/>
+        <location filename="../../src/app/valentina/mainwindowsnogui.cpp" line="471"/>
         <source>Process has been stoped because of exception.</source>
         <translation>Proces werd onderbroken ten gevolge van een uitzondering.</translation>
     </message>
@@ -14722,31 +14722,31 @@ Deze optie wordt actief na een herstart..</translation>
     </message>
     <message>
         <location filename="../../src/app/puzzle/xml/vplayoutfilereader.cpp" line="1148"/>
-        <location filename="../../src/libs/ifc/xml/vdomdocument.cpp" line="455"/>
-        <location filename="../../src/libs/ifc/xml/vdomdocument.cpp" line="460"/>
+        <location filename="../../src/libs/ifc/xml/vdomdocument.cpp" line="461"/>
+        <location filename="../../src/libs/ifc/xml/vdomdocument.cpp" line="466"/>
         <source>Can&apos;t convert toUInt parameter</source>
         <translation>Kan parameter toUlnt niet converteren</translation>
     </message>
     <message>
         <location filename="../../src/app/puzzle/xml/vplayoutfilereader.cpp" line="1085"/>
-        <location filename="../../src/libs/ifc/xml/vdomdocument.cpp" line="506"/>
+        <location filename="../../src/libs/ifc/xml/vdomdocument.cpp" line="512"/>
         <source>Can&apos;t convert toBool parameter</source>
         <translation>Kan de parameter toBool niet converteren</translation>
     </message>
     <message>
-        <location filename="../../src/libs/ifc/xml/vdomdocument.cpp" line="578"/>
+        <location filename="../../src/libs/ifc/xml/vdomdocument.cpp" line="584"/>
         <source>Got empty parameter</source>
         <translation>Kreeg een lege parameter</translation>
     </message>
     <message>
         <location filename="../../src/app/puzzle/xml/vplayoutfilereader.cpp" line="1122"/>
-        <location filename="../../src/libs/ifc/xml/vdomdocument.cpp" line="615"/>
-        <location filename="../../src/libs/ifc/xml/vdomdocument.cpp" line="620"/>
+        <location filename="../../src/libs/ifc/xml/vdomdocument.cpp" line="621"/>
+        <location filename="../../src/libs/ifc/xml/vdomdocument.cpp" line="626"/>
         <source>Can&apos;t convert toDouble parameter</source>
         <translation>Kan niet naar toDouble parameter converteren</translation>
     </message>
     <message>
-        <location filename="../../src/libs/ifc/xml/vdomdocument.cpp" line="639"/>
+        <location filename="../../src/libs/ifc/xml/vdomdocument.cpp" line="645"/>
         <source>Got wrong parameter id. Need only id &gt; 0.</source>
         <translation>Kreeg de verkeerde parameter id. Alleen nodig id&gt;0.</translation>
     </message>
@@ -14818,7 +14818,7 @@ Deze optie wordt actief na een herstart..</translation>
     </message>
     <message>
         <location filename="../../src/libs/vlayout/vlayoutpiece.cpp" line="677"/>
-        <location filename="../../src/libs/vtools/tools/vtoolseamallowance.cpp" line="1876"/>
+        <location filename="../../src/libs/vtools/tools/vtoolseamallowance.cpp" line="1898"/>
         <source>Piece &apos;%1&apos;. Seam allowance is not valid.</source>
         <translation>Naadtoslag van patroondeel &apos;%1&apos; is niet geldig.</translation>
     </message>
@@ -14879,8 +14879,8 @@ Deze optie wordt actief na een herstart..</translation>
     </message>
     <message>
         <location filename="../../src/app/puzzle/xml/vplayoutfilereader.cpp" line="1174"/>
-        <location filename="../../src/libs/ifc/xml/vdomdocument.cpp" line="484"/>
-        <location filename="../../src/libs/ifc/xml/vdomdocument.cpp" line="489"/>
+        <location filename="../../src/libs/ifc/xml/vdomdocument.cpp" line="490"/>
+        <location filename="../../src/libs/ifc/xml/vdomdocument.cpp" line="495"/>
         <source>Can&apos;t convert toInt parameter</source>
         <translation>Kan toInt parameter niet omzetten</translation>
     </message>
@@ -14998,7 +14998,7 @@ Deze optie wordt actief na een herstart..</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/tools/vtoolseamallowance.cpp" line="427"/>
-        <location filename="../../src/libs/vtools/tools/vtoolseamallowance.cpp" line="2171"/>
+        <location filename="../../src/libs/vtools/tools/vtoolseamallowance.cpp" line="2193"/>
         <source>Piece &apos;%1&apos;. Unable to load default piece label template.
 %2
 %3</source>
@@ -15010,7 +15010,7 @@ Deze optie wordt actief na een herstart..</translation>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/tools/vtoolseamallowance.cpp" line="2824"/>
+        <location filename="../../src/libs/vtools/tools/vtoolseamallowance.cpp" line="2846"/>
         <source>Piece &apos;%1&apos;. Fold line is not valid.</source>
         <translation type="unfinished"></translation>
     </message>
@@ -17618,10 +17618,6 @@ Wil je deze veranderingen opslaan?</translation>
 <context>
     <name>TabGrainline</name>
     <message>
-        <source>Grainline visible</source>
-        <translation type="vanished">Recht-van-draad zichtbaar</translation>
-    </message>
-    <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabgrainline.ui" line="39"/>
         <source>Grainline enabled</source>
         <translation type="unfinished"></translation>
@@ -17683,7 +17679,7 @@ Wil je deze veranderingen opslaan?</translation>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabgrainline.ui" line="513"/>
         <source>Visible</source>
-        <translation type="unfinished">Zichtbaar</translation>
+        <translation>Zichtbaar</translation>
     </message>
 </context>
 <context>
@@ -20988,7 +20984,7 @@ Wil je deze veranderingen opslaan?</translation>
         <translation type="vanished">Kan niet omzetten naar toDouble parameter</translation>
     </message>
     <message>
-        <location filename="../../src/libs/ifc/xml/vdomdocument.cpp" line="736"/>
+        <location filename="../../src/libs/ifc/xml/vdomdocument.cpp" line="747"/>
         <source>Can&apos;t open file %1:
 %2.</source>
         <translation>kan bestand niet openen %1:
@@ -21009,12 +21005,12 @@ Wil je deze veranderingen opslaan?</translation>
         <translation type="vanished">Validatie fout bestand %3 op lijn %1 kolom %2</translation>
     </message>
     <message>
-        <location filename="../../src/libs/ifc/xml/vdomdocument.cpp" line="748"/>
+        <location filename="../../src/libs/ifc/xml/vdomdocument.cpp" line="759"/>
         <source>Parsing error file %3 in line %1 column %2</source>
         <translation>Fout bij opsplitsen bestand %3 op lijn %1 kolom %2</translation>
     </message>
     <message>
-        <location filename="../../src/libs/ifc/xml/vdomdocument.cpp" line="1021"/>
+        <location filename="../../src/libs/ifc/xml/vdomdocument.cpp" line="1032"/>
         <source>Couldn&apos;t get node</source>
         <translation>Krijg het knooppunt niet</translation>
     </message>
@@ -21039,42 +21035,42 @@ Wil je deze veranderingen opslaan?</translation>
         <translation type="vanished">Kan schema bestand niet laden &apos;%1&quot;.</translation>
     </message>
     <message>
-        <location filename="../../src/libs/ifc/xml/vdomdocument.cpp" line="426"/>
+        <location filename="../../src/libs/ifc/xml/vdomdocument.cpp" line="432"/>
         <source>Fail to write Canonical XML.</source>
         <translation>Het is mislukt om Conanical XML te schrijven.</translation>
     </message>
     <message>
-        <location filename="../../src/libs/ifc/xml/vdomdocument.cpp" line="368"/>
+        <location filename="../../src/libs/ifc/xml/vdomdocument.cpp" line="374"/>
         <source>Not unique id (%1)</source>
         <translation>Geen uniek id (%1)</translation>
     </message>
     <message>
-        <location filename="../../src/libs/ifc/xml/vdomdocument.cpp" line="693"/>
+        <location filename="../../src/libs/ifc/xml/vdomdocument.cpp" line="699"/>
         <source>This id (%1) is not unique.</source>
         <translation>De id (%1) is niet uniek.</translation>
     </message>
     <message>
-        <location filename="../../src/libs/ifc/xml/vdomdocument.cpp" line="861"/>
+        <location filename="../../src/libs/ifc/xml/vdomdocument.cpp" line="872"/>
         <source>Couldn&apos;t get version information.</source>
         <translation>Kon geen versie informatie krijgen.</translation>
     </message>
     <message>
-        <location filename="../../src/libs/ifc/xml/vdomdocument.cpp" line="867"/>
+        <location filename="../../src/libs/ifc/xml/vdomdocument.cpp" line="878"/>
         <source>Too many tags &lt;%1&gt; in file.</source>
         <translation>Te veel etiketten &lt;%1&gt; in bestand.</translation>
     </message>
     <message>
-        <location filename="../../src/libs/ifc/xml/vdomdocument.cpp" line="1111"/>
+        <location filename="../../src/libs/ifc/xml/vdomdocument.cpp" line="1122"/>
         <source>&lt;empty&gt;</source>
         <translation>&lt;empty&gt;</translation>
     </message>
     <message>
-        <location filename="../../src/libs/ifc/xml/vdomdocument.cpp" line="1154"/>
+        <location filename="../../src/libs/ifc/xml/vdomdocument.cpp" line="1165"/>
         <source>Version &quot;%1&quot; invalid.</source>
         <translation>Versie &quot;%1&quot; ongeldig.</translation>
     </message>
     <message>
-        <location filename="../../src/libs/ifc/xml/vdomdocument.cpp" line="1160"/>
+        <location filename="../../src/libs/ifc/xml/vdomdocument.cpp" line="1171"/>
         <source>Version &quot;0.0.0&quot; invalid.</source>
         <translation>Versie &quot;0.0.0&quot; ongeldig.</translation>
     </message>
@@ -25124,7 +25120,7 @@ Raw layout format compatibility error: actualFileVersion = %1 and fileVersion = 
         <translation>De id (%1) is niet uniek.</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/tools/vtoolseamallowance.cpp" line="2491"/>
+        <location filename="../../src/libs/vtools/tools/vtoolseamallowance.cpp" line="2513"/>
         <source>Tool was used after deleting.</source>
         <translation>Gereedschap werd gebruikt na verwijdering.</translation>
     </message>
