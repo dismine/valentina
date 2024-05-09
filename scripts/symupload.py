@@ -6,6 +6,7 @@ import glob
 import zipfile
 import requests
 import shutil
+import re
 
 database = "valentina"
 
@@ -35,11 +36,33 @@ def generate_sym_files(install_root):
         print("No debug files found.")
 
     for debug_file in debug_files:
-        print(f"Generating symbols for: {os.path.basename(debug_file)}")
+        corrected_debug_name = os.path.basename(debug_file)
+        debug_dir = os.path.dirname(debug_file)
 
-        sym_file = os.path.splitext(debug_file)[0] + ".sym"
-        dump_syms_cmd = ["dump_syms", '-o', sym_file, '--inlines', debug_file]
+        if sys.platform == "darwin":
+            # Remove ".app" if present
+            corrected_debug_name = corrected_debug_name.replace(".app", "")
+            # Remove ".framework" if present
+            corrected_debug_name = corrected_debug_name.replace(".framework", "")
+        elif platform == "linux":
+            # Remove .so + version numbers if present (e.g., .so.1.0.0 or .so.2.7.0)
+            corrected_debug_name = re.sub(r'\.so\.\d+(\.\d+)*', '', corrected_debug_name)
+
+        # Convert to lowercase
+        corrected_debug_name = corrected_debug_name.lower()
+
+        print(f"Generating symbols for: {corrected_debug_name}")
+
+        # Copy debug file with corrected name
+        corrected_debug_path = os.path.join(debug_dir, corrected_debug_name)
+        shutil.copy(debug_file, corrected_debug_path)
+
+        sym_file = os.path.splitext(corrected_debug_name)[0] + ".sym"
+        dump_syms_cmd = ["dump_syms", '-o', sym_file, '--inlines', corrected_debug_path]
         subprocess.run(dump_syms_cmd, check=True)
+
+        # Remove temporary debug file
+        os.remove(corrected_debug_path)
 
         sym_files.append((debug_file, sym_file))
 
