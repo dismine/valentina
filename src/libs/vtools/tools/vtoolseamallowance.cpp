@@ -270,35 +270,35 @@ auto RenderSeamAllowancePath(const VPiece &detail, bool combineTogether, const V
 //---------------------------------------------------------------------------------------------------------------------
 auto RenderPassmarks(const VPiece &detail, const VContainer *data) -> QPainterPath
 {
-    const QLineF mirrorLine = detail.SeamMirrorLine(data);
-    if (!mirrorLine.isNull() && detail.IsShowFullPiece())
+    if (const QLineF mirrorLine = detail.SeamMirrorLine(data); !mirrorLine.isNull() && detail.IsShowFullPiece())
     {
-        QPainterPath path;
-
-        if (detail.IsSeamAllowance())
+        if (!detail.IsSeamAllowance())
         {
-            const QTransform matrix = VGObject::FlippingMatrix(mirrorLine);
-            const QVector<VLayoutPassmark> passmarks = VLayoutPiece::ConvertPassmarks(detail, data);
-            for (const auto &passmark : passmarks)
+            return {};
+        }
+
+        QPainterPath path;
+        const QTransform matrix = VGObject::FlippingMatrix(mirrorLine);
+        const QVector<VLayoutPassmark> passmarks = VLayoutPiece::ConvertPassmarks(detail, data);
+        for (const auto &passmark : passmarks)
+        {
+            QPainterPath passmaksPath;
+            for (const auto &line : passmark.lines)
             {
-                QPainterPath passmaksPath;
+                passmaksPath.moveTo(line.p1());
+                passmaksPath.lineTo(line.p2());
+            }
+            path.addPath(passmaksPath);
+
+            if (!VGObject::IsPointOnLineviaPDP(passmark.baseLine.p1(), mirrorLine.p1(), mirrorLine.p2()))
+            {
+                QPainterPath mirroredPassmaksPath;
                 for (const auto &line : passmark.lines)
                 {
-                    passmaksPath.moveTo(line.p1());
-                    passmaksPath.lineTo(line.p2());
+                    mirroredPassmaksPath.moveTo(line.p1());
+                    mirroredPassmaksPath.lineTo(line.p2());
                 }
-                path.addPath(passmaksPath);
-
-                if (!VGObject::IsPointOnLineviaPDP(passmark.baseLine.p1(), mirrorLine.p1(), mirrorLine.p2()))
-                {
-                    QPainterPath mirroredPassmaksPath;
-                    for (const auto &line : passmark.lines)
-                    {
-                        mirroredPassmaksPath.moveTo(line.p1());
-                        mirroredPassmaksPath.lineTo(line.p2());
-                    }
-                    path.addPath(matrix.map(mirroredPassmaksPath));
-                }
+                path.addPath(matrix.map(mirroredPassmaksPath));
             }
         }
 
@@ -1093,7 +1093,7 @@ void VToolSeamAllowance::UpdatePatternInfo()
 void VToolSeamAllowance::UpdatePassmarks()
 {
     const VPiece detail = VAbstractTool::data.GetPiece(m_id);
-    m_passmarks->setPath(detail.PassmarksPath(getData()));
+    m_passmarks->setPath(RenderPassmarks(detail, getData()));
 }
 
 //---------------------------------------------------------------------------------------------------------------------
