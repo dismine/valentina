@@ -1274,7 +1274,7 @@ void TST_VAbstractPiece::IsAllowanceValid() const
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void TST_VAbstractPiece::TestFullPath_data() const
+void TST_VAbstractPiece::TestFullSeamPath_data() const
 {
     QTest::addColumn<QVector<VLayoutPoint>>("base");
     QTest::addColumn<QVector<VLayoutPoint>>("fullPath");
@@ -1288,32 +1288,90 @@ void TST_VAbstractPiece::TestFullPath_data() const
         QTest::newRow(title) << basePoints << fullPathPoints << mirrorLine;
     };
 
-    QLineF const mirrorLine(QPointF(785.9055118110236, 417.95262992125987),
-                            QPointF(29.9999999999999, 606.9290078740157));
+    QLineF mirrorLine(QPointF(29.9999999999999, 606.9290078740157), QPointF(785.9055118110236, 417.95262992125987));
 
-    // See file src/app/share/collection/fold_line.val
-    ASSERT_TEST_CASE("Piece full path. Case 1", QStringLiteral("://full_path_case_1/input.json"),
-                     QStringLiteral("://full_path_case_1/output.json"), mirrorLine);
+    // See file src/app/share/collection/bugs/fold_line.val
+    ASSERT_TEST_CASE("Piece full path. Case 1", QStringLiteral("://full_seam_path_case_1/input.json"),
+                     QStringLiteral("://full_seam_path_case_1/output.json"), mirrorLine);
 
-    ASSERT_TEST_CASE("Piece full path. Case 2", QStringLiteral("://full_path_case_2/input.json"),
-                     QStringLiteral("://full_path_case_2/output.json"), mirrorLine);
+    ASSERT_TEST_CASE("Piece full path. Case 2", QStringLiteral("://full_seam_path_case_2/input.json"),
+                     QStringLiteral("://full_seam_path_case_2/output.json"), mirrorLine);
 
-    ASSERT_TEST_CASE("Piece full path. Case 3", QStringLiteral("://full_path_case_3/input.json"),
-                     QStringLiteral("://full_path_case_3/output.json"), mirrorLine);
+    ASSERT_TEST_CASE("Piece full path. Case 3", QStringLiteral("://full_seam_path_case_3/input.json"),
+                     QStringLiteral("://full_seam_path_case_3/output.json"), mirrorLine);
 
-    ASSERT_TEST_CASE("Piece full path. Case 4", QStringLiteral("://full_path_case_4/input.json"),
-                     QStringLiteral("://full_path_case_4/output.json"), mirrorLine);
+    ASSERT_TEST_CASE("Piece full path. Case 4", QStringLiteral("://full_seam_path_case_4/input.json"),
+                     QStringLiteral("://full_seam_path_case_4/output.json"), mirrorLine);
+
+    // See file valentina_private_collection/bugs/full_piece/Basic_Darted_Bodice_Block.val (private collection)
+    mirrorLine = QLineF(QPointF(37.795275590551185, 655.1181102362208), QPointF(37.79527559055022, 4578.897637795276));
+
+    ASSERT_TEST_CASE("Basic Darted Bodice Block", QStringLiteral("://full_seam_path_case_5/input.json"),
+                     QStringLiteral("://full_seam_path_case_5/output.json"), mirrorLine);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void TST_VAbstractPiece::TestFullPath() const
+void TST_VAbstractPiece::TestFullSeamPath() const
 {
     QFETCH(QVector<VLayoutPoint>, base);
     QFETCH(QVector<VLayoutPoint>, fullPath);
     QFETCH(QLineF, mirrorLine);
 
     QVector<QPointF> res;
-    CastTo(VAbstractPiece::FullPath(base, mirrorLine), res);
+    CastTo(VAbstractPiece::FullSeamPath(base, mirrorLine, QStringLiteral("Test")), res);
+
+    QVector<QPointF> expected;
+    CastTo(fullPath, expected);
+
+    ComparePaths(res, expected);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void TST_VAbstractPiece::TestFullSeamAllowancePath_data() const
+{
+    QTest::addColumn<QVector<VLayoutPoint>>("base");
+    QTest::addColumn<QVector<VLayoutPoint>>("fullPath");
+    QTest::addColumn<QLineF>("mirrorLine");
+
+    auto ASSERT_TEST_CASE =
+        [](const char *title, const QString &base, const QString &fullPath, const QLineF &mirrorLine)
+    {
+        QVector<VLayoutPoint> const basePoints = AbstractTest::VectorFromJson<VLayoutPoint>(base);
+        QVector<VLayoutPoint> const fullPathPoints = AbstractTest::VectorFromJson<VLayoutPoint>(fullPath);
+        QTest::newRow(title) << basePoints << fullPathPoints << mirrorLine;
+    };
+
+    QLineF mirrorLine(QPointF(-7.795275590551569, 616.3778267716535), QPointF(823.7007874015749, 408.503811023622));
+
+    // See file src/app/share/collection/bugs/fold_line.val
+    ASSERT_TEST_CASE("Piece full path. Case 1", QStringLiteral("://full_seam_allowance_path_case_1/input.json"),
+                     QStringLiteral("://full_seam_allowance_path_case_1/output.json"), mirrorLine);
+
+    ASSERT_TEST_CASE("Piece full path. Case 2", QStringLiteral("://full_seam_allowance_path_case_2/input.json"),
+                     QStringLiteral("://full_seam_allowance_path_case_2/output.json"), mirrorLine);
+
+    ASSERT_TEST_CASE("Piece full path. Case 3", QStringLiteral("://full_seam_allowance_path_case_3/input.json"),
+                     QStringLiteral("://full_seam_allowance_path_case_3/output.json"), mirrorLine);
+
+    ASSERT_TEST_CASE("Piece full path. Case 4", QStringLiteral("://full_seam_allowance_path_case_4/input.json"),
+                     QStringLiteral("://full_seam_allowance_path_case_4/output.json"), mirrorLine);
+
+    // See file valentina_private_collection/bugs/full_piece/Basic_Darted_Bodice_Block.val (private collection)
+    mirrorLine = QLineF(QPointF(37.79527559055132, 604.4628631137784), QPointF(37.79527559055033, 4616.693036243291));
+
+    ASSERT_TEST_CASE("Basic Darted Bodice Block", QStringLiteral("://full_seam_allowance_path_case_5/input.json"),
+                     QStringLiteral("://full_seam_allowance_path_case_5/output.json"), mirrorLine);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void TST_VAbstractPiece::TestFullSeamAllowancePath() const
+{
+    QFETCH(QVector<VLayoutPoint>, base);
+    QFETCH(QVector<VLayoutPoint>, fullPath);
+    QFETCH(QLineF, mirrorLine);
+
+    QVector<QPointF> res;
+    CastTo(VAbstractPiece::FullSeamAllowancePath(base, mirrorLine, QStringLiteral("Test")), res);
 
     QVector<QPointF> expected;
     CastTo(fullPath, expected);

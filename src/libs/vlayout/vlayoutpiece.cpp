@@ -790,7 +790,7 @@ auto VLayoutPiece::GetFullContourPoints() const -> QVector<VLayoutPoint>
     points.reserve(d->m_contour.size());
     if (!d->m_seamMirrorLine.isNull() && IsShowFullPiece())
     {
-        points = VAbstractPiece::FullPath(d->m_contour, d->m_seamMirrorLine);
+        points = VAbstractPiece::FullSeamPath(d->m_contour, d->m_seamMirrorLine, GetName());
         points = CheckLoops(CorrectEquidistantPoints(points)); // A path can contains loops
     }
     else
@@ -834,7 +834,7 @@ auto VLayoutPiece::GetFullSeamAllowancePoints() const -> QVector<VLayoutPoint>
     points.reserve(d->m_seamAllowance.size());
     if (!d->m_seamAllowanceMirrorLine.isNull() && IsShowFullPiece())
     {
-        points = VAbstractPiece::FullPath(d->m_seamAllowance, d->m_seamAllowanceMirrorLine);
+        points = VAbstractPiece::FullSeamAllowancePath(d->m_seamAllowance, d->m_seamAllowanceMirrorLine, GetName());
         points = CheckLoops(CorrectEquidistantPoints(points)); // A path can contains loops
     }
     else
@@ -1378,7 +1378,8 @@ auto VLayoutPiece::Diagonal() const -> qreal
 //---------------------------------------------------------------------------------------------------------------------
 auto VLayoutPiece::FoldLine() const -> VFoldLine
 {
-    QLineF const foldLine = IsHideMainPath() ? GetSeamAllowanceMirrorLine() : GetSeamMirrorLine();
+    QLineF foldLine = IsHideMainPath() ? GetSeamAllowanceMirrorLine() : GetSeamMirrorLine();
+    Swap(foldLine);
     VFoldLine fLine(foldLine, GetFoldLineType());
     fLine.SetLabelSvgFontSize(GetFoldLineSvgFontSize());
     fLine.SetLabelFontItalic(IsFoldLineLabelFontItalic());

@@ -310,8 +310,8 @@ auto RenderPassmarks(const VPiece &detail, const VContainer *data) -> QPainterPa
 //---------------------------------------------------------------------------------------------------------------------
 auto RenderFoldLine(const VPiece &detail, const VContainer *data) -> VFoldLine
 {
-    QLineF const foldLine =
-        detail.IsHideMainPath() ? detail.SeamAllowanceMirrorLine(data) : detail.SeamMirrorLine(data);
+    QLineF foldLine = detail.IsHideMainPath() ? detail.SeamAllowanceMirrorLine(data) : detail.SeamMirrorLine(data);
+    Swap(foldLine);
     VFoldLine fLine(foldLine, detail.GetFoldLineType());
     fLine.SetLabelSvgFontSize(detail.GetFoldLineSvgFontSize());
     fLine.SetLabelFontItalic(detail.IsFoldLineLabelFontItalic());
@@ -1845,8 +1845,8 @@ void VToolSeamAllowance::RefreshGeometry(bool updateChildren)
     QFuture<QPainterPath> const futureMirrorLine = QtConcurrent::run(
         [this, detail]()
         {
-            QLineF const mirrorLine = detail.SeamAllowanceMirrorLine(getData());
-            if (detail.IsShowFullPiece() && detail.IsShowMirrorLine() && !mirrorLine.isNull())
+            if (QLineF const mirrorLine = detail.SeamAllowanceMirrorLine(getData());
+                detail.IsShowFullPiece() && detail.IsShowMirrorLine() && !mirrorLine.isNull())
             {
                 QPainterPath path;
                 path.moveTo(mirrorLine.p1());

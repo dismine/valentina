@@ -699,21 +699,8 @@ auto DialogSeamAllowance::GetMirrorLineStartPoint() const -> quint32
         nextIndex = 0;
     }
 
-    int prevIndex = index - 1;
-    if (prevIndex < 0)
-    {
-        prevIndex = uiTabPaths->listWidgetMainPath->count() - 1;
-    }
-
-    const int next = FindNotExcludedNeighborNodeDown(uiTabPaths->listWidgetMainPath, nextIndex);
-    const int prev = FindNotExcludedNeighborNodeUp(uiTabPaths->listWidgetMainPath, prevIndex);
-
-    if (next >= 0 && RowNode(uiTabPaths->listWidgetMainPath, next).GetId() == endPoint)
-    {
-        return startPoint;
-    }
-
-    if (prev >= 0 && RowNode(uiTabPaths->listWidgetMainPath, prev).GetId() == endPoint)
+    if (const int next = FindNotExcludedNeighborNodeDown(uiTabPaths->listWidgetMainPath, nextIndex);
+        next >= 0 && RowNode(uiTabPaths->listWidgetMainPath, next).GetId() == endPoint)
     {
         return endPoint;
     }
@@ -738,14 +725,14 @@ auto DialogSeamAllowance::GetMirrorLineEndPoint() const -> quint32
         return endPoint;
     }
 
-    int nextIndex = index + 1;
-    if (nextIndex >= uiTabPaths->listWidgetMainPath->count())
+    int prevIndex = index - 1;
+    if (prevIndex < 0)
     {
-        nextIndex = 0;
+        prevIndex = uiTabPaths->listWidgetMainPath->count() - 1;
     }
 
-    if (const int next = FindNotExcludedNeighborNodeDown(uiTabPaths->listWidgetMainPath, nextIndex);
-        next >= 0 && RowNode(uiTabPaths->listWidgetMainPath, next).GetId() == startPoint)
+    if (const int prev = FindNotExcludedNeighborNodeUp(uiTabPaths->listWidgetMainPath, prevIndex);
+        prev >= 0 && RowNode(uiTabPaths->listWidgetMainPath, prev).GetId() == startPoint)
     {
         return startPoint;
     }

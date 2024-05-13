@@ -203,7 +203,7 @@ auto VPiece::FullMainPathPoints(const VContainer *data) const -> QVector<VLayout
     QLineF const mirrorLine = SeamMirrorLine(data);
     if (!mirrorLine.isNull() && IsShowFullPiece())
     {
-        points = VAbstractPiece::FullPath(points, mirrorLine);
+        points = VAbstractPiece::FullSeamPath(points, mirrorLine, GetName());
     }
 
     points = CheckLoops(CorrectEquidistantPoints(points)); // A path can contains loops
@@ -240,7 +240,7 @@ auto VPiece::FullSeamAllowancePoints(const VContainer *data) const -> QVector<VL
     QLineF const mirrorLine = SeamAllowanceMirrorLine(data);
     if (!mirrorLine.isNull() && IsShowFullPiece())
     {
-        points = VAbstractPiece::FullPath(points, mirrorLine);
+        points = VAbstractPiece::FullSeamAllowancePath(points, mirrorLine, GetName());
         points = CheckLoops(CorrectEquidistantPoints(points)); // A path can contains loops
     }
 
@@ -778,11 +778,11 @@ auto VPiece::SeamAllowancePointsWithRotation(const VContainer *data, vsizetype m
                         {
                             if (VFuzzyComparePoints(ekvPoint, mirrorLine.p1()))
                             {
-                                ekvPoint.SetSAAfter(0);
+                                ekvPoint.SetSABefore(0);
                             }
                             else if (VFuzzyComparePoints(ekvPoint, mirrorLine.p2()))
                             {
-                                ekvPoint.SetSABefore(0);
+                                ekvPoint.SetSAAfter(0);
                             }
                         }
 

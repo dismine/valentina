@@ -66,8 +66,10 @@ private slots:
     void PossibleInfiniteClearLoops() const;
     void IsAllowanceValid_data() const;
     void IsAllowanceValid() const;
-    void TestFullPath_data() const;
-    void TestFullPath() const;
+    void TestFullSeamPath_data() const;
+    void TestFullSeamPath() const;
+    void TestFullSeamAllowancePath_data() const;
+    void TestFullSeamAllowancePath() const;
 
 private:
     auto InputPointsCase3() const -> QVector<VSAPoint>;

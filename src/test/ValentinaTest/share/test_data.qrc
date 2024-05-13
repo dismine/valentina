@@ -172,15 +172,27 @@
         <file>incorrect_notch/passmarkShape.json</file>
         <file>incorrect_notch/rotatedSeamAllowance.json</file>
         <file>incorrect_notch/seamAllowance.json</file>
-        <file>full_path_case_1/output.json</file>
-        <file>full_path_case_1/input.json</file>
-        <file>full_path_case_2/output.json</file>
-        <file>full_path_case_2/input.json</file>
-        <file>full_path_case_3/output.json</file>
-        <file>full_path_case_3/input.json</file>
-        <file>full_path_case_4/output.json</file>
-        <file>full_path_case_4/input.json</file>
+        <file>full_seam_path_case_1/output.json</file>
+        <file>full_seam_path_case_1/input.json</file>
+        <file>full_seam_path_case_2/output.json</file>
+        <file>full_seam_path_case_2/input.json</file>
+        <file>full_seam_path_case_3/output.json</file>
+        <file>full_seam_path_case_3/input.json</file>
+        <file>full_seam_path_case_4/output.json</file>
+        <file>full_seam_path_case_4/input.json</file>
+        <file>full_seam_allowance_path_case_1/output.json</file>
+        <file>full_seam_allowance_path_case_1/input.json</file>
+        <file>full_seam_allowance_path_case_2/output.json</file>
+        <file>full_seam_allowance_path_case_2/input.json</file>
+        <file>full_seam_allowance_path_case_3/output.json</file>
+        <file>full_seam_allowance_path_case_3/input.json</file>
+        <file>full_seam_allowance_path_case_4/output.json</file>
+        <file>full_seam_allowance_path_case_4/input.json</file>
         <file>25L_Knitting_Bag/input.json</file>
         <file>25L_Knitting_Bag/output.json</file>
+        <file>full_seam_path_case_5/output.json</file>
+        <file>full_seam_path_case_5/input.json</file>
+        <file>full_seam_allowance_path_case_5/output.json</file>
+        <file>full_seam_allowance_path_case_5/input.json</file>
     </qresource>
 </RCC>

@@ -37,10 +37,13 @@
 #include <QtGlobal>
 #include <algorithm>
 
+#include "../ifc/exception/vexception.h"
+#include "../vgeometry/vabstractcurve.h"
 #include "../vgeometry/vgeometrydef.h"
 #include "../vgeometry/vgobject.h"
 #include "../vmisc/compatibility.h"
 #include "../vmisc/testpath.h"
+#include "../vmisc/vabstractapplication.h"
 #include "vrawsapoint.h"
 #include "vsapoint.h"
 
@@ -184,7 +187,12 @@ public:
 
     template <class T> static auto MirrorPath(const QVector<T> &points, const QLineF &mirrorLine) -> QVector<T>;
 
-    template <class T> static auto FullPath(const QVector<T> &points, const QLineF &mirrorLine) -> QVector<T>;
+    template <class T>
+    static auto FullSeamPath(const QVector<T> &points, const QLineF &mirrorLine, const QString &pieceName)
+        -> QVector<T>;
+    template <class T>
+    static auto FullSeamAllowancePath(const QVector<T> &points, const QLineF &mirrorLine, const QString &pieceName)
+        -> QVector<T>;
 
     template <class T>
     static auto MapVector(QVector<T> points, const QTransform &matrix, bool mirror = false) -> QVector<T>;
@@ -859,7 +867,8 @@ inline auto VAbstractPiece::MirrorPath<VLayoutPoint>(const QVector<VLayoutPoint>
 
 //---------------------------------------------------------------------------------------------------------------------
 template <class T>
-inline auto VAbstractPiece::FullPath(const QVector<T> &points, const QLineF &mirrorLine) -> QVector<T>
+inline auto VAbstractPiece::FullSeamPath(const QVector<T> &points, const QLineF &mirrorLine, const QString &pieceName)
+    -> QVector<T>
 {
     // DumpVector(points, QStringLiteral("input.json.XXXXXX")); // Uncomment for dumping test data
 
@@ -873,62 +882,122 @@ inline auto VAbstractPiece::FullPath(const QVector<T> &points, const QLineF &mir
         return points;
     }
 
-    // points = CorrectFullPathInput(points, mirrorLine);
-
-    bool closedPath = (points.constFirst() == points.constLast());
-    bool pathReady = false;
     QVector<T> base;
+    base.reserve(points.size());
 
-    if (VFuzzyComparePoints(points.constFirst(), mirrorLine.p2()))
+    if (VFuzzyComparePoints(points.constFirst(), mirrorLine.p1()) &&
+        VFuzzyComparePoints(points.constLast(), mirrorLine.p2()))
     {
-        if (closedPath)
-        {
-            if (VFuzzyComparePoints(points.at(points.size() - 2), mirrorLine.p1()))
-            {
-                base = points;
-                base.removeLast();
-                pathReady = true;
-            }
-        }
-        else
-        {
-            if (VFuzzyComparePoints(points.constLast(), mirrorLine.p1()))
-            {
-                base = points;
-                pathReady = true;
-            }
-        }
+        base = points;
     }
-
-    if (!pathReady)
+    else
     {
         QVector<T> sub1;
         QVector<T> sub2;
         if (!VAbstractPiece::SubdividePath(points, mirrorLine.p1(), sub1, sub2))
         {
+            const QString errorMsg = QObject::tr("Piece '%1'. Unable to generate full seam path.").arg(pieceName);
+            VAbstractApplication::VApp()->IsPedantic()
+                ? throw VException(errorMsg)
+                : qWarning() << VAbstractApplication::warningMessageSignature + errorMsg;
             return points;
         }
 
-        QVector<T> reversed = points;
-        std::reverse(reversed.begin(), reversed.end());
+        sub2 += points.constFirst();
 
         QVector<T> sub3;
         QVector<T> sub4;
-        if (!VAbstractPiece::SubdividePath(reversed, mirrorLine.p2(), sub3, sub4))
+        if (!VAbstractPiece::SubdividePath(points, mirrorLine.p2(), sub3, sub4))
+        {
+            const QString errorMsg = QObject::tr("Piece '%1'. Unable to generate full seam path.").arg(pieceName);
+            VAbstractApplication::VApp()->IsPedantic()
+                ? throw VException(errorMsg)
+                : qWarning() << VAbstractApplication::warningMessageSignature + errorMsg;
+            return points;
+        }
+
+        base = sub2 + sub3;
+    }
+
+    QVector<T> fullPath = MirrorPath(base, mirrorLine);
+    std::reverse(fullPath.begin(), fullPath.end());
+    fullPath += base;
+
+    // DumpVector(fullPath, QStringLiteral("output.json.XXXXXX")); // Uncomment for dumping test data
+
+    return fullPath;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+template <class T>
+inline auto VAbstractPiece::FullSeamAllowancePath(const QVector<T> &points, const QLineF &mirrorLine,
+                                                  const QString &pieceName) -> QVector<T>
+{
+    // DumpVector(points, QStringLiteral("input.json.XXXXXX")); // Uncomment for dumping test data
+
+    if (mirrorLine.isNull())
+    {
+        return points;
+    }
+
+    if (points.size() <= 3)
+    {
+        return points;
+    }
+
+    QVector<T> base;
+    base.reserve(points.size());
+
+    QVector<T> sub1;
+    QVector<T> sub2;
+    if (!VAbstractPiece::SubdividePath(points, mirrorLine.p1(), sub1, sub2))
+    {
+        const QString errorMsg = QObject::tr("Piece '%1'. Unable to generate full seam allowance path.").arg(pieceName);
+        VAbstractApplication::VApp()->IsPedantic()
+            ? throw VException(errorMsg)
+            : qWarning() << VAbstractApplication::warningMessageSignature + errorMsg;
+        return points;
+    }
+
+    QVector<QPointF> subPath;
+    CastTo(sub2, subPath);
+    if (VAbstractCurve::IsPointOnCurve(subPath, mirrorLine.p2()))
+    {
+        std::reverse(sub2.begin(), sub2.end());
+
+        QVector<T> sub3;
+        QVector<T> sub4;
+        if (!VAbstractPiece::SubdividePath(sub2, mirrorLine.p2(), sub3, sub4))
+        {
+            const QString errorMsg =
+                QObject::tr("Piece '%1'. Unable to generate full seam allowance path.").arg(pieceName);
+            VAbstractApplication::VApp()->IsPedantic()
+                ? throw VException(errorMsg)
+                : qWarning() << VAbstractApplication::warningMessageSignature + errorMsg;
+            return points;
+        }
+
+        std::reverse(sub4.begin(), sub4.end());
+        base = sub4;
+    }
+    else
+    {
+        std::reverse(sub1.begin(), sub1.end());
+
+        QVector<T> sub3;
+        QVector<T> sub4;
+        if (!VAbstractPiece::SubdividePath(sub1, mirrorLine.p2(), sub3, sub4))
         {
             return points;
         }
 
-        base = sub3;
-        std::reverse(base.begin(), base.end());
-        base += sub1;
-        pathReady = true;
+        std::reverse(sub4.begin(), sub4.end());
+
+        base = sub2 + sub4;
     }
 
     QVector<T> fullPath = MirrorPath(base, mirrorLine);
-
     std::reverse(fullPath.begin(), fullPath.end());
-
     fullPath += base;
 
     // DumpVector(fullPath, QStringLiteral("output.json.XXXXXX")); // Uncomment for dumping test data
