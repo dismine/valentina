@@ -1347,6 +1347,16 @@ auto VToolSeamAllowance::shape() const -> QPainterPath
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+void VToolSeamAllowance::CancelLabelRendering()
+{
+    m_patternUpdateInfoWatcher->cancel();
+    m_pieceUpdateInfoWatcher->cancel();
+
+    m_patternUpdateInfoWatcher->waitForFinished();
+    m_pieceUpdateInfoWatcher->waitForFinished();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 void VToolSeamAllowance::FullUpdateFromGuiApply()
 {
     SaveDialogChange(tr("apply save detail options"));

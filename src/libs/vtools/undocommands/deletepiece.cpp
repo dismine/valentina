@@ -34,24 +34,24 @@
 #include "../ifc/ifcdef.h"
 #include "../ifc/xml/vabstractpattern.h"
 #include "../ifc/xml/vdomdocument.h"
-#include "../vmisc/def.h"
 #include "../tools/vdatatool.h"
-#include "vundocommand.h"
+#include "../vmisc/def.h"
 #include "../vpatterndb/vpiecenode.h"
 #include "../vpatterndb/vpiecepath.h"
 #include "../vwidgets/vmaingraphicsview.h"
+#include "vundocommand.h"
 
 //---------------------------------------------------------------------------------------------------------------------
 DeletePiece::DeletePiece(VAbstractPattern *doc, quint32 id, const VContainer &data, VMainGraphicsScene *scene,
                          QUndoCommand *parent)
-    : VUndoCommand(QDomElement(), doc, parent),
-      m_parentNode(),
-      m_siblingId(NULL_ID),
-      m_detail(data.GetPiece(id)),
-      m_data(data),
-      m_scene(scene),
-      m_tool(),
-      m_record(VAbstractTool::GetRecord(id, Tool::Piece, doc))
+  : VUndoCommand(QDomElement(), doc, parent),
+    m_parentNode(),
+    m_siblingId(NULL_ID),
+    m_detail(data.GetPiece(id)),
+    m_data(data),
+    m_scene(scene),
+    m_tool(),
+    m_record(VAbstractTool::GetRecord(id, Tool::Piece, doc))
 {
     setText(tr("delete tool"));
     nodeId = id;
@@ -117,11 +117,12 @@ void DeletePiece::redo()
     {
         m_parentNode.removeChild(domElement);
 
-        m_tool = qobject_cast<VToolSeamAllowance*>(VAbstractPattern::getTool(nodeId));
+        m_tool = qobject_cast<VToolSeamAllowance *>(VAbstractPattern::getTool(nodeId));
         SCASSERT(not m_tool.isNull());
         m_tool->DisconnectOutsideSignals();
         m_tool->EnableToolMove(true);
         m_tool->hide();
+        m_tool->CancelLabelRendering();
 
         m_scene->removeItem(m_tool);
 

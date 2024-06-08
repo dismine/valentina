@@ -75,6 +75,7 @@ void AddPiece::undo()
             SCASSERT(not m_tool.isNull());
             m_tool->DisconnectOutsideSignals();
             m_tool->hide();
+            m_tool->CancelLabelRendering();
 
             m_scene->removeItem(m_tool);
 

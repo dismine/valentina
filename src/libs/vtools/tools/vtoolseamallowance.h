@@ -121,6 +121,8 @@ public:
     void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget) override;
     auto boundingRect() const -> QRectF override;
     auto shape() const -> QPainterPath override;
+
+    void CancelLabelRendering();
 public slots:
     void FullUpdateFromGuiApply() override;
     void FullUpdateFromFile() override;
