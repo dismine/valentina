@@ -473,6 +473,8 @@ signals:
     void BackgroundImagePositionChanged(const QUuid &id);
     void BackgroundImageOpacityChanged(const QUuid &id);
 
+    void CancelLabelRendering();
+
 public slots:
     virtual void LiteParseTree(const Document &parse) = 0;
     void haveLiteChange();

@@ -396,6 +396,12 @@ auto RenderFoldLine(const VPiece &detail, const VContainer *data) -> VFoldLine
 } // namespace
 
 //---------------------------------------------------------------------------------------------------------------------
+VToolSeamAllowance::~VToolSeamAllowance()
+{
+    CancelLabelRendering();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 auto VToolSeamAllowance::Create(const QPointer<DialogTool> &dialog, VMainGraphicsScene *scene, VAbstractPattern *doc,
                                 VContainer *data) -> VToolSeamAllowance *
 {
@@ -1734,6 +1740,7 @@ VToolSeamAllowance::VToolSeamAllowance(const VToolSeamAllowanceInitData &initDat
     connect(m_sceneDetails, &VMainGraphicsScene::EnableToolMove, this, &VToolSeamAllowance::EnableToolMove);
     connect(m_sceneDetails, &VMainGraphicsScene::ItemSelection, this, &VToolSeamAllowance::ToolSelectionType);
     connect(m_sceneDetails, &VMainGraphicsScene::UpdatePassmarks, this, &VToolSeamAllowance::UpdatePassmarks);
+    connect(doc, &VAbstractPattern::CancelLabelRendering, this, &VToolSeamAllowance::CancelLabelRendering);
 
     ConnectOutsideSignals();
 
@@ -1972,6 +1979,8 @@ void VToolSeamAllowance::SaveDialogChange(const QString &undoText)
     SCASSERT(dialogTool != nullptr);
     const VPiece newDet = dialogTool->GetPiece();
     const VPiece oldDet = VAbstractTool::data.GetPiece(m_id);
+
+    CancelLabelRendering();
 
     QVector<QPointer<VUndoCommand>> &undocommands = dialogTool->UndoStack();
     const bool groupChange = not undocommands.isEmpty();

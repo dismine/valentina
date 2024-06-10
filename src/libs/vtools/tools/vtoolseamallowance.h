@@ -55,7 +55,7 @@ class VToolSeamAllowance final : public VInteractiveTool, public QGraphicsPathIt
     Q_OBJECT // NOLINT
 
 public:
-    ~VToolSeamAllowance() override = default;
+    ~VToolSeamAllowance() override;
 
     static auto Create(const QPointer<DialogTool> &dialog, VMainGraphicsScene *scene, VAbstractPattern *doc,
                        VContainer *data) -> VToolSeamAllowance *;
@@ -122,7 +122,6 @@ public:
     auto boundingRect() const -> QRectF override;
     auto shape() const -> QPainterPath override;
 
-    void CancelLabelRendering();
 public slots:
     void FullUpdateFromGuiApply() override;
     void FullUpdateFromFile() override;
@@ -138,6 +137,8 @@ public slots:
     void UpdatePassmarks();
     void ShowOptions();
     void DeleteFromMenu();
+    void CancelLabelRendering();
+
 protected slots:
     void UpdateGrainline();
     void SaveMoveDetail(const QPointF &ptPos);

@@ -30,8 +30,8 @@
 #define VPATTERN_H
 
 #include "../ifc/xml/vabstractpattern.h"
-#include "../vpatterndb/vcontainer.h"
 #include "../ifc/xml/vpatternconverter.h"
+#include "../vpatterndb/vcontainer.h"
 
 class VMainGraphicsScene;
 class VNodeDetail;
@@ -45,6 +45,7 @@ class VToolSeamAllowance;
 class VPattern : public VAbstractPattern
 {
     Q_OBJECT // NOLINT
+
 public:
     VPattern(VContainer *data, VMainGraphicsScene *sceneDraw, VMainGraphicsScene *sceneDetail,
              QObject *parent = nullptr);
@@ -130,7 +131,7 @@ private:
     Q_DISABLE_COPY_MOVE(VPattern) // NOLINT
 
     /** @brief data container with data. */
-    VContainer     *data;
+    VContainer *data;
 
     VMainGraphicsScene *sceneDraw;
     VMainGraphicsScene *sceneDetail;
@@ -144,8 +145,8 @@ private:
     static auto ParseDetailNode(const QDomElement &domElement) -> VNodeDetail;
 
     void ParseRootElement(const Document &parse, const QDomNode &node);
-    void ParseDrawElement(const QDomNode& node, const Document &parse);
-    void ParseDrawMode(const QDomNode& node, const Document &parse, const Draw &mode);
+    void ParseDrawElement(const QDomNode &node, const Document &parse);
+    void ParseDrawMode(const QDomNode &node, const Document &parse, const Draw &mode);
     void ParseDrawModeElement(QDomElement &domElement, const Document &parse, const Draw &mode);
     void ParseDetailElement(QDomElement &domElement, const Document &parse);
     void ParseDetailInternals(const QDomElement &domElement, VPiece &detail) const;
@@ -205,23 +206,20 @@ private:
                                           const Document &parse);
     void ParseToolPointOfIntersectionCircles(VMainGraphicsScene *scene, QDomElement &domElement, const Document &parse);
     void ParseToolPointOfIntersectionCurves(VMainGraphicsScene *scene, QDomElement &domElement, const Document &parse);
-    void ParseToolPointFromCircleAndTangent(VMainGraphicsScene *scene, QDomElement &domElement,
-                                            const Document &parse);
+    void ParseToolPointFromCircleAndTangent(VMainGraphicsScene *scene, QDomElement &domElement, const Document &parse);
     void ParseToolPointFromArcAndTangent(VMainGraphicsScene *scene, const QDomElement &domElement,
                                          const Document &parse);
     void ParseToolTrueDarts(VMainGraphicsScene *scene, const QDomElement &domElement, const Document &parse);
 
     // TODO. Delete if minimal supported version is 0.2.7
-    Q_STATIC_ASSERT_X(VPatternConverter::PatternMinVer < FormatVersion(0, 2, 7),
-                      "Time to refactor the code.");
+    Q_STATIC_ASSERT_X(VPatternConverter::PatternMinVer < FormatVersion(0, 2, 7), "Time to refactor the code.");
     void ParseOldToolSpline(VMainGraphicsScene *scene, QDomElement &domElement, const Document &parse);
 
     void ParseToolSpline(VMainGraphicsScene *scene, QDomElement &domElement, const Document &parse);
     void ParseToolCubicBezier(VMainGraphicsScene *scene, const QDomElement &domElement, const Document &parse);
 
     // TODO. Delete if minimal supported version is 0.2.7
-    Q_STATIC_ASSERT_X(VPatternConverter::PatternMinVer < FormatVersion(0, 2, 7),
-                      "Time to refactor the code.");
+    Q_STATIC_ASSERT_X(VPatternConverter::PatternMinVer < FormatVersion(0, 2, 7), "Time to refactor the code.");
     void ParseOldToolSplinePath(VMainGraphicsScene *scene, QDomElement &domElement, const Document &parse);
 
     void ParseToolSplinePath(VMainGraphicsScene *scene, const QDomElement &domElement, const Document &parse);

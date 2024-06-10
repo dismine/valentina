@@ -4512,6 +4512,9 @@ void VPattern::PrepareForParse(const Document &parse)
 {
     SCASSERT(sceneDraw != nullptr)
     SCASSERT(sceneDetail != nullptr)
+
+    emit CancelLabelRendering();
+
     if (parse == Document::FullParse)
     {
         RefreshElementIdCache();
