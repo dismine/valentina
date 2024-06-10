@@ -55,14 +55,22 @@ def generate_sym_files(install_root):
 
         # Copy debug file with corrected name
         corrected_debug_path = os.path.join(debug_dir, corrected_debug_name)
-        shutil.copy(debug_file, corrected_debug_path)
+        if debug_file != corrected_debug_path:
+          if sys.platform == "darwin":
+            shutil.copytree(debug_file, corrected_debug_path)
+          else:
+            shutil.copy(debug_file, corrected_debug_path)
 
         sym_file = os.path.splitext(corrected_debug_name)[0] + ".sym"
         dump_syms_cmd = ["dump_syms", '-o', sym_file, '--inlines', corrected_debug_path]
         subprocess.run(dump_syms_cmd, check=True)
 
-        # Remove temporary debug file
-        os.remove(corrected_debug_path)
+        if debug_file != corrected_debug_path:
+          # Remove temporary debug file
+          if sys.platform == "darwin":
+            os.rmtree(corrected_debug_path)
+          else:
+            os.remove(corrected_debug_path)
 
         sym_files.append((debug_file, sym_file))
 
