@@ -68,7 +68,7 @@ def generate_sym_files(install_root):
         if debug_file != corrected_debug_path:
           # Remove temporary debug file
           if sys.platform == "darwin":
-            os.rmtree(corrected_debug_path)
+            shutil.rmtree(corrected_debug_path)
           else:
             os.remove(corrected_debug_path)
 
