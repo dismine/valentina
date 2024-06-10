@@ -607,26 +607,26 @@ void DialogEditLabel::InitPlaceholders()
         QString label = VAbstractValApplication::VApp()->GetDimensionHeightLabel();
         m_placeholders.insert(pl_heightLabel,
                               qMakePair(tr("Height label", "dimension"), not label.isEmpty() ? label : heightValue));
-        m_placeholders.insert(
-            pl_dimensionX, qMakePair(tr("Dimension X label", "dimension"), not label.isEmpty() ? label : heightValue));
+        m_placeholders.insert(pl_dimensionXLabel, qMakePair(tr("Dimension X label", "dimension"),
+                                                            not label.isEmpty() ? label : heightValue));
 
         label = VAbstractValApplication::VApp()->GetDimensionSizeLabel();
         m_placeholders.insert(pl_sizeLabel,
                               qMakePair(tr("Size label", "dimension"), not label.isEmpty() ? label : sizeValue));
-        m_placeholders.insert(pl_dimensionY,
+        m_placeholders.insert(pl_dimensionYLabel,
                               qMakePair(tr("Dimension Y label", "dimension"), not label.isEmpty() ? label : sizeValue));
 
         label = VAbstractValApplication::VApp()->GetDimensionHipLabel();
         m_placeholders.insert(pl_hipLabel,
                               qMakePair(tr("Hip label", "dimension"), not label.isEmpty() ? label : hipValue));
-        m_placeholders.insert(pl_dimensionZ,
+        m_placeholders.insert(pl_dimensionZLabel,
                               qMakePair(tr("Dimension Z label", "dimension"), not label.isEmpty() ? label : hipValue));
 
         label = VAbstractValApplication::VApp()->GetDimensionWaistLabel();
         m_placeholders.insert(pl_waistLabel,
                               qMakePair(tr("Waist label", "dimension"), not label.isEmpty() ? label : waistValue));
-        m_placeholders.insert(
-            pl_dimensionW, qMakePair(tr("Dimension W label", "dimension"), not label.isEmpty() ? label : waistValue));
+        m_placeholders.insert(pl_dimensionWLabel, qMakePair(tr("Dimension W label", "dimension"),
+                                                            not label.isEmpty() ? label : waistValue));
     }
 
     m_placeholders.insert(

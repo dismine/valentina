@@ -362,9 +362,17 @@ void PrepareDimensionPlaceholders(const VPieceLabelInfo &info, QMap<QString, QSt
 
     AddPlaceholder(pl_heightLabel,
                    not info.dimensionHeightLabel.isEmpty() ? info.dimensionHeightLabel : info.dimensionHeight);
+    AddPlaceholder(pl_dimensionXLabel,
+                   not info.dimensionHeightLabel.isEmpty() ? info.dimensionHeightLabel : info.dimensionHeight);
     AddPlaceholder(pl_sizeLabel, not info.dimensionSizeLabel.isEmpty() ? info.dimensionSizeLabel : info.dimensionSize);
+    AddPlaceholder(pl_dimensionYLabel,
+                   not info.dimensionSizeLabel.isEmpty() ? info.dimensionSizeLabel : info.dimensionSize);
     AddPlaceholder(pl_hipLabel, not info.dimensionHipLabel.isEmpty() ? info.dimensionHipLabel : info.dimensionHip);
+    AddPlaceholder(pl_dimensionZLabel,
+                   not info.dimensionHipLabel.isEmpty() ? info.dimensionHipLabel : info.dimensionHip);
     AddPlaceholder(pl_waistLabel,
+                   not info.dimensionWaistLabel.isEmpty() ? info.dimensionWaistLabel : info.dimensionWaist);
+    AddPlaceholder(pl_dimensionWLabel,
                    not info.dimensionWaistLabel.isEmpty() ? info.dimensionWaistLabel : info.dimensionWaist);
 }
 
