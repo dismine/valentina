@@ -835,7 +835,10 @@ void DialogEditLabel::SetPiece(const VPiece &piece)
     }
 
     VContainer completeData = m_doc->GetCompleteData();
-    completeData.FillPiecesAreas(VAbstractValApplication::VApp()->patternUnits());
+    completeData.AddVariable(QSharedPointer<VPieceArea>::create(PieceAreaType::External, 0, piece, &completeData,
+                                                                VAbstractValApplication::VApp()->patternUnits()));
+    completeData.AddVariable(QSharedPointer<VPieceArea>::create(PieceAreaType::SeamLine, 0, piece, &completeData,
+                                                                VAbstractValApplication::VApp()->patternUnits()));
 
     QScopedPointer<Calculator> const cal(new Calculator());
 

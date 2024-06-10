@@ -36,6 +36,7 @@
 #include <QRegularExpression>
 #include <QtMath>
 
+#include "../qmuparser/qmutokenparser.h"
 #include "../vmisc/svgfont/vsvgfont.h"
 #include "../vmisc/svgfont/vsvgfontdatabase.h"
 #include "../vmisc/svgfont/vsvgfontengine.h"
@@ -44,6 +45,7 @@
 #include "../vmisc/vtranslator.h"
 #include "../vpatterndb/calculator.h"
 #include "../vpatterndb/variables/vmeasurement.h"
+#include "../vpatterndb/variables/vpiecearea.h"
 #include "vtextmanager.h"
 
 using namespace Qt::Literals::StringLiterals;
@@ -156,6 +158,36 @@ auto SplitTextByWidth(const QString &text, const VSvgFont &font, int maxWidth, q
     }
 
     return substrings;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+auto LinePlaceholders(const QString &line) -> QSet<QString>
+{
+    QSet<QString> placeholders;
+
+    static const QRegularExpression pattern(QStringLiteral("(%[^%]+%)"));
+
+    QRegularExpressionMatchIterator matches = pattern.globalMatch(line);
+    while (matches.hasNext())
+    {
+        QRegularExpressionMatch const match = matches.next();
+        placeholders.insert(match.captured(1));
+    }
+
+    return placeholders;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+auto UniquePlaceholders(const QVector<VLabelTemplateLine> &lines) -> QSet<QString>
+{
+    QSet<QString> placeholders;
+
+    for (const auto &line : lines)
+    {
+        placeholders |= LinePlaceholders(line.line);
+    }
+
+    return placeholders;
 }
 } // namespace
 
@@ -284,44 +316,70 @@ auto operator>>(QDataStream &dataStream, VTextManager &data) -> QDataStream &
 namespace
 {
 //---------------------------------------------------------------------------------------------------------------------
-void PrepareMeasurementsPlaceholders(const VPieceLabelInfo &info, QMap<QString, QString> &placeholders)
+void PrepareMeasurementsPlaceholders(const VPieceLabelInfo &info, QMap<QString, QString> &placeholders,
+                                     const QSet<QString> &uniquePlaceholders)
 {
+    auto AddPlaceholder = [&placeholders, uniquePlaceholders](const QString &name, const QString &value)
+    {
+        if (uniquePlaceholders.contains('%' + name + '%'))
+        {
+            placeholders.insert(name, value);
+        }
+    };
+
     const QMap<QString, QSharedPointer<VMeasurement>> measurements = info.measurements;
     auto i = measurements.constBegin();
     while (i != measurements.constEnd())
     {
-        placeholders.insert(pl_measurement + i.key(), QString::number(*i.value()->GetValue()));
+        AddPlaceholder(pl_measurement + i.key(), QString::number(*i.value()->GetValue()));
         ++i;
     }
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void PrepareDimensionPlaceholders(const VPieceLabelInfo &info, QMap<QString, QString> &placeholders)
+void PrepareDimensionPlaceholders(const VPieceLabelInfo &info, QMap<QString, QString> &placeholders,
+                                  const QSet<QString> &uniquePlaceholders)
 {
-    placeholders.insert(pl_height, info.dimensionHeight);
-    placeholders.insert(pl_dimensionX, info.dimensionHeight);
+    auto AddPlaceholder = [&placeholders, uniquePlaceholders](const QString &name, const QString &value)
+    {
+        if (uniquePlaceholders.contains('%' + name + '%'))
+        {
+            placeholders.insert(name, value);
+        }
+    };
 
-    placeholders.insert(pl_size, info.dimensionSize);
-    placeholders.insert(pl_dimensionY, info.dimensionSize);
+    AddPlaceholder(pl_height, info.dimensionHeight);
+    AddPlaceholder(pl_dimensionX, info.dimensionHeight);
 
-    placeholders.insert(pl_hip, info.dimensionHip);
-    placeholders.insert(pl_dimensionZ, info.dimensionHip);
+    AddPlaceholder(pl_size, info.dimensionSize);
+    AddPlaceholder(pl_dimensionY, info.dimensionSize);
 
-    placeholders.insert(pl_waist, info.dimensionWaist);
-    placeholders.insert(pl_dimensionW, info.dimensionWaist);
+    AddPlaceholder(pl_hip, info.dimensionHip);
+    AddPlaceholder(pl_dimensionZ, info.dimensionHip);
 
-    placeholders.insert(pl_heightLabel,
-                        not info.dimensionHeightLabel.isEmpty() ? info.dimensionHeightLabel : info.dimensionHeight);
-    placeholders.insert(pl_sizeLabel,
-                        not info.dimensionSizeLabel.isEmpty() ? info.dimensionSizeLabel : info.dimensionSize);
-    placeholders.insert(pl_hipLabel, not info.dimensionHipLabel.isEmpty() ? info.dimensionHipLabel : info.dimensionHip);
-    placeholders.insert(pl_waistLabel,
-                        not info.dimensionWaistLabel.isEmpty() ? info.dimensionWaistLabel : info.dimensionWaist);
+    AddPlaceholder(pl_waist, info.dimensionWaist);
+    AddPlaceholder(pl_dimensionW, info.dimensionWaist);
+
+    AddPlaceholder(pl_heightLabel,
+                   not info.dimensionHeightLabel.isEmpty() ? info.dimensionHeightLabel : info.dimensionHeight);
+    AddPlaceholder(pl_sizeLabel, not info.dimensionSizeLabel.isEmpty() ? info.dimensionSizeLabel : info.dimensionSize);
+    AddPlaceholder(pl_hipLabel, not info.dimensionHipLabel.isEmpty() ? info.dimensionHipLabel : info.dimensionHip);
+    AddPlaceholder(pl_waistLabel,
+                   not info.dimensionWaistLabel.isEmpty() ? info.dimensionWaistLabel : info.dimensionWaist);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void PrepareUserMaterialsPlaceholders(const VPieceLabelInfo &info, QMap<QString, QString> &placeholders)
+void PrepareUserMaterialsPlaceholders(const VPieceLabelInfo &info, QMap<QString, QString> &placeholders,
+                                      const QSet<QString> &uniquePlaceholders)
 {
+    auto AddPlaceholder = [&placeholders, uniquePlaceholders](const QString &name, const QString &value)
+    {
+        if (uniquePlaceholders.contains('%' + name + '%'))
+        {
+            placeholders.insert(name, value);
+        }
+    };
+
     for (int i = 0; i < userMaterialPlaceholdersQuantity; ++i)
     {
         const QString number = QString::number(i + 1);
@@ -332,162 +390,240 @@ void PrepareUserMaterialsPlaceholders(const VPieceLabelInfo &info, QMap<QString,
             value = info.patternMaterials.value(i + 1);
         }
 
-        placeholders.insert(pl_userMaterial + number, value);
+        AddPlaceholder(pl_userMaterial + number, value);
     }
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 void PrepareFinalMeasurementsPlaceholders(bool pieceLabel, const VPieceLabelInfo &info,
-                                          QMap<QString, QString> &placeholders)
+                                          QMap<QString, QString> &placeholders, const QSet<QString> &uniquePlaceholders)
 {
+    QSet<QString> uniquePieceNames;
+    if (uniquePlaceholders.contains('%' + pieceArea_ + info.labelData.GetAreaShortName() + '%') ||
+        uniquePlaceholders.contains('%' + pieceSeamLineArea_ + info.labelData.GetAreaShortName() + '%'))
+    {
+        uniquePieceNames.insert(info.labelData.GetAreaShortName());
+    }
+
+    const QVector<VFinalMeasurement> measurements = info.finalMeasurements;
+    for (const auto &m : measurements)
+    {
+        if (uniquePlaceholders.contains('%' + pl_finalMeasurement + m.name + '%'))
+        {
+            QMap<vsizetype, QString> tokens;
+            try
+            {
+                QScopedPointer<qmu::QmuTokenParser> const cal(
+                    new qmu::QmuTokenParser(m.formula, false, false)); // Eval formula
+                tokens = cal->GetTokens();                             // Tokens (variables, measurements)
+            }
+            catch (qmu::QmuParserError &)
+            {
+                // skip formula
+            }
+
+            QMapIterator<vsizetype, QString> i(tokens);
+            while (i.hasNext())
+            {
+                i.next();
+                if (i.value().startsWith(pieceArea_))
+                {
+                    QString name = i.value();
+                    uniquePieceNames.insert(name.remove(0, pieceArea_.length()));
+                }
+                else if (i.value().startsWith(pieceSeamLineArea_))
+                {
+                    QString name = i.value();
+                    uniquePieceNames.insert(name.remove(0, pieceSeamLineArea_.length()));
+                }
+            }
+        }
+    }
+
     VContainer completeData = info.completeData;
-    completeData.FillPiecesAreas(VAbstractValApplication::VApp()->patternUnits());
+    QHash<quint32, VPiece> *pieces = completeData.DataPieces();
+    Unit const patternUnits = VAbstractValApplication::VApp()->patternUnits();
+    QSet<QString> processedNames;
+
+    auto i = pieces->constBegin();
+    while (i != pieces->constEnd())
+    {
+        if (uniquePieceNames.contains(i.value().GetShortName()) && !processedNames.contains(i.value().GetShortName()))
+        {
+            completeData.AddVariable(QSharedPointer<VPieceArea>::create(PieceAreaType::External, i.key(), i.value(),
+                                                                        &completeData, patternUnits));
+            completeData.AddVariable(QSharedPointer<VPieceArea>::create(PieceAreaType::SeamLine, i.key(), i.value(),
+                                                                        &completeData, patternUnits));
+            processedNames.insert(i.value().GetShortName());
+        }
+        ++i;
+    }
 
     if (pieceLabel)
     {
         QScopedPointer<Calculator> const cal(new Calculator());
 
-        try
+        if (uniquePlaceholders.contains('%' + pl_currentArea + '%'))
         {
-            const QString formula = pieceArea_ + info.labelData.GetAreaShortName();
-            const qreal result = cal->EvalFormula(completeData.DataVariables(), formula);
-            placeholders[pl_currentArea] = QString::number(result);
-        }
-        catch (qmu::QmuParserError &e)
-        {
-            const QString errorMsg = QObject::tr("Failed to prepare full piece area placeholder. %1.").arg(e.GetMsg());
-            VAbstractApplication::VApp()->IsPedantic()
-                ? throw VException(errorMsg)
-                : qWarning() << VAbstractValApplication::warningMessageSignature + errorMsg;
+            try
+            {
+                const QString formula = pieceArea_ + info.labelData.GetAreaShortName();
+                const qreal result = cal->EvalFormula(completeData.DataVariables(), formula);
+                placeholders.insert(pl_currentArea, QString::number(result));
+            }
+            catch (qmu::QmuParserError &e)
+            {
+                const QString errorMsg =
+                    QObject::tr("Failed to prepare full piece area placeholder. %1.").arg(e.GetMsg());
+                VAbstractApplication::VApp()->IsPedantic()
+                    ? throw VException(errorMsg)
+                    : qWarning() << VAbstractValApplication::warningMessageSignature + errorMsg;
+            }
         }
 
-        try
+        if (uniquePlaceholders.contains('%' + pl_currentSeamLineArea + '%'))
         {
-            const QString formula = pieceSeamLineArea_ + info.labelData.GetAreaShortName();
-            const qreal result = cal->EvalFormula(completeData.DataVariables(), formula);
-            placeholders[pl_currentSeamLineArea] = QString::number(result);
-        }
-        catch (qmu::QmuParserError &e)
-        {
-            const QString errorMsg =
-                QObject::tr("Failed to prepare piece seam line area placeholder. %1.").arg(e.GetMsg());
-            VAbstractApplication::VApp()->IsPedantic()
-                ? throw VException(errorMsg)
-                : qWarning() << VAbstractValApplication::warningMessageSignature + errorMsg;
+            try
+            {
+                const QString formula = pieceSeamLineArea_ + info.labelData.GetAreaShortName();
+                const qreal result = cal->EvalFormula(completeData.DataVariables(), formula);
+                placeholders.insert(pl_currentSeamLineArea, QString::number(result));
+            }
+            catch (qmu::QmuParserError &e)
+            {
+                const QString errorMsg =
+                    QObject::tr("Failed to prepare piece seam line area placeholder. %1.").arg(e.GetMsg());
+                VAbstractApplication::VApp()->IsPedantic()
+                    ? throw VException(errorMsg)
+                    : qWarning() << VAbstractValApplication::warningMessageSignature + errorMsg;
+            }
         }
     }
     else
     {
-        placeholders.insert(pl_currentArea, QString());
-        placeholders.insert(pl_currentSeamLineArea, QString());
+        if (uniquePlaceholders.contains('%' + pl_currentArea + '%'))
+        {
+            placeholders.insert(pl_currentArea, QString());
+        }
+
+        if (uniquePlaceholders.contains('%' + pl_currentSeamLineArea + '%'))
+        {
+            placeholders.insert(pl_currentSeamLineArea, QString());
+        }
     }
 
-    const QVector<VFinalMeasurement> measurements = info.finalMeasurements;
     for (int i = 0; i < measurements.size(); ++i)
     {
         const VFinalMeasurement &m = measurements.at(i);
 
-        try
+        if (uniquePlaceholders.contains('%' + pl_finalMeasurement + m.name + '%'))
         {
-            QScopedPointer<Calculator> const cal(new Calculator());
-            const qreal result = cal->EvalFormula(completeData.DataVariables(), m.formula);
+            try
+            {
+                QScopedPointer<Calculator> const cal(new Calculator());
+                const qreal result = cal->EvalFormula(completeData.DataVariables(), m.formula);
 
-            placeholders.insert(pl_finalMeasurement + m.name, QString::number(result));
-        }
-        catch (qmu::QmuParserError &e)
-        {
-            const QString errorMsg = QObject::tr("Failed to prepare final measurement placeholder. Parser error at "
-                                                 "line %1: %2.")
-                                         .arg(i + 1)
-                                         .arg(e.GetMsg());
-            VAbstractApplication::VApp()->IsPedantic()
-                ? throw VException(errorMsg)
-                : qWarning() << VAbstractValApplication::warningMessageSignature + errorMsg;
+                placeholders.insert(pl_finalMeasurement + m.name, QString::number(result));
+            }
+            catch (qmu::QmuParserError &e)
+            {
+                const QString errorMsg = QObject::tr("Failed to prepare final measurement placeholder. Parser error at "
+                                                     "line %1: %2.")
+                                             .arg(i + 1)
+                                             .arg(e.GetMsg());
+                VAbstractApplication::VApp()->IsPedantic()
+                    ? throw VException(errorMsg)
+                    : qWarning() << VAbstractValApplication::warningMessageSignature + errorMsg;
+            }
         }
     }
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-auto PreparePlaceholders(const VPieceLabelInfo &info, bool pieceLabel = false) -> QMap<QString, QString>
+auto PreparePlaceholders(const VPieceLabelInfo &info, const QSet<QString> &uniquePlaceholders, bool pieceLabel = false)
+    -> QMap<QString, QString>
 {
     QMap<QString, QString> placeholders;
 
+    auto AddPlaceholder = [&placeholders, uniquePlaceholders](const QString &name, const QString &value)
+    {
+        if (uniquePlaceholders.contains('%' + name + '%'))
+        {
+            placeholders.insert(name, value);
+        }
+    };
+
     // Pattern tags
-    const QString date = info.locale.toString(QDate::currentDate(), info.labelDateFormat);
-    placeholders.insert(pl_date, date);
+    AddPlaceholder(pl_date, info.locale.toString(QDate::currentDate(), info.labelDateFormat));
+    AddPlaceholder(pl_time, info.locale.toString(QTime::currentTime(), info.LabelTimeFormat));
+    AddPlaceholder(pl_patternName, info.patternName);
+    AddPlaceholder(pl_patternNumber, info.patternNumber);
+    AddPlaceholder(pl_author, info.companyName);
 
-    const QString time = info.locale.toString(QTime::currentTime(), info.LabelTimeFormat);
-    placeholders.insert(pl_time, time);
-
-    placeholders.insert(pl_patternName, info.patternName);
-    placeholders.insert(pl_patternNumber, info.patternNumber);
-    placeholders.insert(pl_author, info.companyName);
-
-    placeholders.insert(pl_mUnits, UnitsToStr(info.measurementsUnits, true));
+    AddPlaceholder(pl_mUnits, UnitsToStr(info.measurementsUnits, true));
     const QString pUnits = UnitsToStr(VAbstractValApplication::VApp()->patternUnits(), true);
-    placeholders.insert(pl_pUnits, pUnits);
-    placeholders.insert(pl_mSizeUnits, UnitsToStr(info.dimensionSizeUnits, true));
-    placeholders.insert(pl_areaUnits, pUnits + QStringLiteral("²"));
+    AddPlaceholder(pl_pUnits, pUnits);
+    AddPlaceholder(pl_mSizeUnits, UnitsToStr(info.dimensionSizeUnits, true));
+    AddPlaceholder(pl_areaUnits, pUnits + QStringLiteral("²"));
 
-    placeholders.insert(pl_customer, info.customerName);
-    placeholders.insert(pl_birthDate, info.locale.toString(info.customerBirthDate, info.labelDateFormat));
-    placeholders.insert(pl_email, info.customerEmail);
+    AddPlaceholder(pl_customer, info.customerName);
+    AddPlaceholder(pl_birthDate, info.locale.toString(info.customerBirthDate, info.labelDateFormat));
+    AddPlaceholder(pl_email, info.customerEmail);
 
-    placeholders.insert(pl_pExt, QStringLiteral("val"));
-    placeholders.insert(pl_pFileName, FileBaseName(VAbstractValApplication::VApp()->GetPatternPath()));
-    placeholders.insert(pl_mFileName, FileBaseName(info.measurementsPath));
+    AddPlaceholder(pl_pExt, QStringLiteral("val"));
+    AddPlaceholder(pl_pFileName, FileBaseName(VAbstractValApplication::VApp()->GetPatternPath()));
+    AddPlaceholder(pl_mFileName, FileBaseName(info.measurementsPath));
 
-    PrepareDimensionPlaceholders(info, placeholders);
+    PrepareDimensionPlaceholders(info, placeholders, uniquePlaceholders);
 
-    placeholders.insert(pl_mExt, info.measurementsType == MeasurementsType::Multisize ? QStringLiteral("vst")
-                                                                                      : QStringLiteral("vit"));
+    AddPlaceholder(pl_mExt, info.measurementsType == MeasurementsType::Multisize ? QStringLiteral("vst")
+                                                                                 : QStringLiteral("vit"));
 
-    PrepareUserMaterialsPlaceholders(info, placeholders);
-    PrepareMeasurementsPlaceholders(info, placeholders);
-    PrepareFinalMeasurementsPlaceholders(pieceLabel, info, placeholders);
+    PrepareUserMaterialsPlaceholders(info, placeholders, uniquePlaceholders);
+    PrepareMeasurementsPlaceholders(info, placeholders, uniquePlaceholders);
+    PrepareFinalMeasurementsPlaceholders(pieceLabel, info, placeholders, uniquePlaceholders);
 
     // Piece tags
-    placeholders.insert(pl_pLetter, QString());
-    placeholders.insert(pl_pAnnotation, QString());
-    placeholders.insert(pl_pOrientation, QString());
-    placeholders.insert(pl_pRotation, QString());
-    placeholders.insert(pl_pTilt, QString());
-    placeholders.insert(pl_pFoldPosition, QString());
-    placeholders.insert(pl_pName, QString());
-    placeholders.insert(pl_pQuantity, QString());
-    placeholders.insert(pl_wOnFold, QString());
-
     if (QSharedPointer<VTranslator> const phTr = info.placeholderTranslator; !phTr.isNull())
     {
-        placeholders.insert(pl_mFabric, phTr->translate("Placeholder", "Fabric"));
-        placeholders.insert(pl_mLining, phTr->translate("Placeholder", "Lining"));
-        placeholders.insert(pl_mInterfacing, phTr->translate("Placeholder", "Interfacing"));
-        placeholders.insert(pl_mInterlining, phTr->translate("Placeholder", "Interlining"));
-        placeholders.insert(pl_wCut, phTr->translate("Placeholder", "Cut"));
+        AddPlaceholder(pl_mFabric, phTr->translate("Placeholder", "Fabric"));
+        AddPlaceholder(pl_mLining, phTr->translate("Placeholder", "Lining"));
+        AddPlaceholder(pl_mInterfacing, phTr->translate("Placeholder", "Interfacing"));
+        AddPlaceholder(pl_mInterlining, phTr->translate("Placeholder", "Interlining"));
+        AddPlaceholder(pl_wCut, phTr->translate("Placeholder", "Cut"));
     }
 
     return placeholders;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void InitPiecePlaceholders(QMap<QString, QString> &placeholders, const VPieceLabelInfo &info)
+void InitPiecePlaceholders(QMap<QString, QString> &placeholders, const VPieceLabelInfo &info,
+                           const QSet<QString> &uniquePlaceholders)
 {
     const VPieceLabelData data = info.labelData;
 
-    placeholders[pl_pLetter] = data.GetLetter();
-    placeholders[pl_pAnnotation] = data.GetAnnotation();
-    placeholders[pl_pOrientation] = data.GetOrientation();
-    placeholders[pl_pRotation] = data.GetRotationWay();
-    placeholders[pl_pTilt] = data.GetTilt();
-    placeholders[pl_pFoldPosition] = data.GetFoldPosition();
-    placeholders[pl_pName] = info.pieceName;
-    placeholders[pl_pQuantity] = QString::number(data.GetQuantity());
+    auto AddPlaceholder = [&placeholders, uniquePlaceholders](const QString &name, const QString &value)
+    {
+        if (uniquePlaceholders.contains('%' + name + '%'))
+        {
+            placeholders.insert(name, value);
+        }
+    };
 
-    if (data.IsOnFold())
+    AddPlaceholder(pl_pLetter, data.GetLetter());
+    AddPlaceholder(pl_pAnnotation, data.GetAnnotation());
+    AddPlaceholder(pl_pOrientation, data.GetOrientation());
+    AddPlaceholder(pl_pRotation, data.GetRotationWay());
+    AddPlaceholder(pl_pTilt, data.GetTilt());
+    AddPlaceholder(pl_pFoldPosition, data.GetFoldPosition());
+    AddPlaceholder(pl_pName, info.pieceName);
+    AddPlaceholder(pl_pQuantity, QString::number(data.GetQuantity()));
+
+    if (data.IsOnFold() && uniquePlaceholders.contains('%' + pl_wOnFold + '%'))
     {
         if (QSharedPointer<VTranslator> const phTr = info.placeholderTranslator; !phTr.isNull())
         {
-            placeholders[pl_wOnFold] = phTr->translate("Placeholder", "on fold");
+            placeholders.insert(pl_wOnFold, phTr->translate("Placeholder", "on fold"));
         }
     }
 }
@@ -743,8 +879,10 @@ void VTextManager::UpdatePieceLabelInfo(const VPieceLabelInfo &info)
 {
     m_liLines.clear();
 
-    QMap<QString, QString> placeholders = PreparePlaceholders(info, true);
-    InitPiecePlaceholders(placeholders, info);
+    QSet<QString> const uniquePlaceholders = UniquePlaceholders(info.labelData.GetLabelTemplate());
+
+    QMap<QString, QString> placeholders = PreparePlaceholders(info, uniquePlaceholders, true);
+    InitPiecePlaceholders(placeholders, info, uniquePlaceholders);
 
     QVector<VLabelTemplateLine> lines = info.labelData.GetLabelTemplate();
 
@@ -770,7 +908,9 @@ void VTextManager::UpdatePatternLabelInfo(const VPieceLabelInfo &info)
         return; // Nothing to parse
     }
 
-    const QMap<QString, QString> placeholders = PreparePlaceholders(info);
+    QSet<QString> const uniquePlaceholders = UniquePlaceholders(info.labelData.GetLabelTemplate());
+
+    const QMap<QString, QString> placeholders = PreparePlaceholders(info, uniquePlaceholders);
 
     for (auto &line : lines)
     {
