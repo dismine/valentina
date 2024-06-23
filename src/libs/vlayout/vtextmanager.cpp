@@ -627,11 +627,18 @@ void InitPiecePlaceholders(QMap<QString, QString> &placeholders, const VPieceLab
     AddPlaceholder(pl_pName, info.pieceName);
     AddPlaceholder(pl_pQuantity, QString::number(data.GetQuantity()));
 
-    if (data.IsOnFold() && uniquePlaceholders.contains('%' + pl_wOnFold + '%'))
+    if (uniquePlaceholders.contains('%' + pl_wOnFold + '%'))
     {
-        if (QSharedPointer<VTranslator> const phTr = info.placeholderTranslator; !phTr.isNull())
+        if (data.IsOnFold())
         {
-            placeholders.insert(pl_wOnFold, phTr->translate("Placeholder", "on fold"));
+            if (QSharedPointer<VTranslator> const phTr = info.placeholderTranslator; !phTr.isNull())
+            {
+                placeholders.insert(pl_wOnFold, phTr->translate("Placeholder", "on fold"));
+            }
+        }
+        else
+        {
+            placeholders.insert(pl_wOnFold, QString());
         }
     }
 }
@@ -916,9 +923,40 @@ void VTextManager::UpdatePatternLabelInfo(const VPieceLabelInfo &info)
         return; // Nothing to parse
     }
 
-    QSet<QString> const uniquePlaceholders = UniquePlaceholders(info.labelData.GetLabelTemplate());
+    QSet<QString> const uniquePlaceholders = UniquePlaceholders(lines);
 
-    const QMap<QString, QString> placeholders = PreparePlaceholders(info, uniquePlaceholders);
+    QMap<QString, QString> placeholders = PreparePlaceholders(info, uniquePlaceholders);
+
+    if (QSharedPointer<VTranslator> const phTr = info.placeholderTranslator; !phTr.isNull())
+    {
+        // These placeholders must be available only in piece label
+        const QString errorValue = '<' + phTr->translate("Placeholder", "Error") + '>';
+        auto AddPlaceholder = [&placeholders, uniquePlaceholders, errorValue](const QString &name, const QString &value)
+        {
+            const QString placeholder = '%' + name + '%';
+            if (uniquePlaceholders.contains(placeholder))
+            {
+                const QString errorMsg =
+                    QObject::tr("Incorrect use of placeholder %1. This placeholder is not available in pattern label.")
+                        .arg(placeholder);
+                VAbstractApplication::VApp()->IsPedantic()
+                    ? throw VException(errorMsg)
+                    : qWarning() << VAbstractValApplication::warningMessageSignature + errorMsg;
+
+                placeholders.insert(name, value);
+            }
+        };
+
+        AddPlaceholder(pl_pLetter, errorValue);
+        AddPlaceholder(pl_pAnnotation, errorValue);
+        AddPlaceholder(pl_pOrientation, errorValue);
+        AddPlaceholder(pl_pRotation, errorValue);
+        AddPlaceholder(pl_pTilt, errorValue);
+        AddPlaceholder(pl_pFoldPosition, errorValue);
+        AddPlaceholder(pl_pName, errorValue);
+        AddPlaceholder(pl_pQuantity, errorValue);
+        AddPlaceholder(pl_wOnFold, errorValue);
+    }
 
     for (auto &line : lines)
     {
