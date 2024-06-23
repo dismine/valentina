@@ -24,7 +24,7 @@ def debug_extension():
 
     return debug_ext
 
-def rename_debug_file(debug_file, corrected_debug_name):
+def rename_debug_file(debug_file, corrected_debug_path):
   if sys.platform == "darwin":  
     suffix = "_tmp"
   else:
@@ -69,7 +69,7 @@ def generate_sym_files(install_root):
           if os.path.exists(debug_file) and os.path.exists(corrected_debug_path):
             # case-insensitive file system
             rename = True
-            rename_debug_file(debug_file, corrected_debug_name)
+            rename_debug_file(debug_file, corrected_debug_path)
           else:
             if sys.platform == "darwin":
               shutil.copytree(debug_file, corrected_debug_path)
