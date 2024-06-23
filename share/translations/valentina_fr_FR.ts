@@ -13347,10 +13347,15 @@ Do you want to save your changes?</source>
         <translation>Couper</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vlayout/vtextmanager.cpp" line="634"/>
+        <location filename="../../src/libs/vlayout/vtextmanager.cpp" line="636"/>
         <location filename="../../src/libs/vtools/dialogs/support/dialogeditlabel.cpp" line="834"/>
         <source>on fold</source>
         <translation>au pli</translation>
+    </message>
+    <message>
+        <location filename="../../src/libs/vlayout/vtextmanager.cpp" line="933"/>
+        <source>Error</source>
+        <translation type="unfinished">Erreur</translation>
     </message>
 </context>
 <context>
@@ -14962,26 +14967,31 @@ This option will take an affect after restart.</source>
         <translation>Impossible de préparer l&apos;emplacement réservé à la surface de la ligne de couture de la pièce. %1.</translation>
     </message>
     <message>
+        <location filename="../../src/libs/vlayout/vtextmanager.cpp" line="940"/>
+        <source>Incorrect use of placeholder %1. This placeholder is not available in pattern label.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <location filename="../../src/libs/vlayout/vlayoutpiece.cpp" line="452"/>
-        <location filename="../../src/libs/vlayout/vtextmanager.cpp" line="654"/>
+        <location filename="../../src/libs/vlayout/vtextmanager.cpp" line="661"/>
         <source>No data for the height dimension.</source>
         <translation>Absence de données pour la dimension stature.</translation>
     </message>
     <message>
         <location filename="../../src/libs/vlayout/vlayoutpiece.cpp" line="453"/>
-        <location filename="../../src/libs/vlayout/vtextmanager.cpp" line="655"/>
+        <location filename="../../src/libs/vlayout/vtextmanager.cpp" line="662"/>
         <source>No data for the size dimension.</source>
         <translation>Absence de données pour la dimension taille commerciale.</translation>
     </message>
     <message>
         <location filename="../../src/libs/vlayout/vlayoutpiece.cpp" line="454"/>
-        <location filename="../../src/libs/vlayout/vtextmanager.cpp" line="656"/>
+        <location filename="../../src/libs/vlayout/vtextmanager.cpp" line="663"/>
         <source>No data for the hip dimension.</source>
         <translation>Absence de données pour la dimension tour de hanches.</translation>
     </message>
     <message>
         <location filename="../../src/libs/vlayout/vlayoutpiece.cpp" line="455"/>
-        <location filename="../../src/libs/vlayout/vtextmanager.cpp" line="657"/>
+        <location filename="../../src/libs/vlayout/vtextmanager.cpp" line="664"/>
         <source>No data for the waist dimension.</source>
         <translation>Absence de données pour la dimension tour de taille.</translation>
     </message>
@@ -15104,25 +15114,25 @@ This option will take an affect after restart.</source>
     </message>
     <message>
         <location filename="../../src/libs/vlayout/vlayoutpiece.cpp" line="457"/>
-        <location filename="../../src/libs/vlayout/vtextmanager.cpp" line="659"/>
+        <location filename="../../src/libs/vlayout/vtextmanager.cpp" line="666"/>
         <source>No data for the X dimension.</source>
         <translation>Pas de données pour la dimension X.</translation>
     </message>
     <message>
         <location filename="../../src/libs/vlayout/vlayoutpiece.cpp" line="458"/>
-        <location filename="../../src/libs/vlayout/vtextmanager.cpp" line="660"/>
+        <location filename="../../src/libs/vlayout/vtextmanager.cpp" line="667"/>
         <source>No data for the Y dimension.</source>
         <translation>Pas de données pour la dimension Y.</translation>
     </message>
     <message>
         <location filename="../../src/libs/vlayout/vlayoutpiece.cpp" line="459"/>
-        <location filename="../../src/libs/vlayout/vtextmanager.cpp" line="661"/>
+        <location filename="../../src/libs/vlayout/vtextmanager.cpp" line="668"/>
         <source>No data for the Z dimension.</source>
         <translation>Pas de données pour la dimension Z.</translation>
     </message>
     <message>
         <location filename="../../src/libs/vlayout/vlayoutpiece.cpp" line="460"/>
-        <location filename="../../src/libs/vlayout/vtextmanager.cpp" line="662"/>
+        <location filename="../../src/libs/vlayout/vtextmanager.cpp" line="669"/>
         <source>No data for the W dimension.</source>
         <translation>Pas de données pour la dimension W.</translation>
     </message>
