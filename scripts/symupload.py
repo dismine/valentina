@@ -24,6 +24,15 @@ def debug_extension():
 
     return debug_ext
 
+def rename_debug_file(debug_file, corrected_debug_name):
+  if sys.platform == "darwin":  
+    suffix = "_tmp"
+  else:
+    suffix = ".tmp"
+
+  os.rename(debug_file, corrected_debug_path + suffix)
+  os.rename(corrected_debug_path + suffix, corrected_debug_path)
+
 def generate_sym_files(install_root):
     sym_files = []
 
@@ -50,27 +59,36 @@ def generate_sym_files(install_root):
 
         # Convert to lowercase
         corrected_debug_name = corrected_debug_name.lower()
+        rename = False
 
         print(f"Generating symbols for: {corrected_debug_name}")
 
         # Copy debug file with corrected name
         corrected_debug_path = os.path.join(debug_dir, corrected_debug_name)
         if debug_file != corrected_debug_path:
-          if sys.platform == "darwin":
-            shutil.copytree(debug_file, corrected_debug_path)
+          if os.path.exists(debug_file) and os.path.exists(corrected_debug_path):
+            # case-insensitive file system
+            rename = True
+            rename_debug_file(debug_file, corrected_debug_name)
           else:
-            shutil.copy(debug_file, corrected_debug_path)
+            if sys.platform == "darwin":
+              shutil.copytree(debug_file, corrected_debug_path)
+            else:
+              shutil.copy(debug_file, corrected_debug_path)
 
         sym_file = os.path.splitext(corrected_debug_name)[0] + ".sym"
         dump_syms_cmd = ["dump_syms", '-o', sym_file, '--inlines', corrected_debug_path]
         subprocess.run(dump_syms_cmd, check=True)
 
         if debug_file != corrected_debug_path:
-          # Remove temporary debug file
-          if sys.platform == "darwin":
-            shutil.rmtree(corrected_debug_path)
+          if not rename:
+            # Remove temporary debug file
+            if sys.platform == "darwin":
+              shutil.rmtree(corrected_debug_path)
+            else:
+              os.remove(corrected_debug_path)
           else:
-            os.remove(corrected_debug_path)
+            rename_debug_file(corrected_debug_path, debug_file)
 
         sym_files.append((debug_file, sym_file))
 
