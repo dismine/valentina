@@ -892,6 +892,9 @@ void DialogSeamAllowance::InitFoldWidthFormula(const VPiece &piece)
 //---------------------------------------------------------------------------------------------------------------------
 void DialogSeamAllowance::InitFoldCenterFormula(const VPiece &piece)
 {
+    const QString defCenterFormula = VTranslateVars::TryFormulaToUser(
+        QString::number(0.5), VAbstractApplication::VApp()->Settings()->GetOsSeparator());
+
     if (piece.IsManualFoldCenter())
     {
         uiTabFoldLine->groupBoxManualCenter->setChecked(true);
@@ -910,11 +913,12 @@ void DialogSeamAllowance::InitFoldCenterFormula(const VPiece &piece)
             this->DeployPassmarkAngle();
         }
 
-        uiTabFoldLine->plainTextEditCenter->setPlainText(foldCenter.isEmpty() ? QString::number(0.5) : foldCenter);
+        uiTabFoldLine->plainTextEditCenter->setPlainText(foldCenter.isEmpty() ? defCenterFormula : foldCenter);
     }
     else
     {
-        uiTabFoldLine->plainTextEditCenter->setPlainText(QString::number(0.5));
+
+        uiTabFoldLine->plainTextEditCenter->setPlainText(defCenterFormula);
     }
 
     MoveCursorToEnd(uiTabFoldLine->plainTextEditCenter);
