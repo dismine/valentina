@@ -36,7 +36,14 @@ jobs:
       - name: Checkout repo
         uses: actions/checkout@v4
         with:
-          fetch-tags: true
+          fetch-depth: 1
+          #-- done manually in bash below, because https://github.com/actions/checkout/issues/1467
+          #fetch-tags: true
+
+      - name: Setup variables -- changelog from tag annotation message
+        if: startsWith(github.ref, 'refs/tags/')
+        run: |
+          git fetch origin --deepen=1 +refs/tags/$TAG:refs/tags/$TAG
 
       - name: Install Qt
         uses: jurplel/install-qt-action@v3
