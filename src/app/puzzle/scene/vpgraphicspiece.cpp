@@ -953,8 +953,13 @@ void VPGraphicsPiece::PaintMirrorLine(QPainter *painter, const VPPiecePtr &piece
 //---------------------------------------------------------------------------------------------------------------------
 void VPGraphicsPiece::PaintFoldLine(QPainter *painter, const VPPiecePtr &piece)
 {
-    if (piece->GetFoldLineType() == FoldLineType::None)
+    if (piece->GetFoldLineType() == FoldLineType::None || (piece->IsShowFullPiece() && !piece->IsShowMirrorLine()))
     {
+        if (m_foldLineLabelText != nullptr)
+        {
+            m_foldLineLabelText->setVisible(false);
+        }
+
         return;
     }
 

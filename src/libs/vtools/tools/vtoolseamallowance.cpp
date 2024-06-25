@@ -2809,8 +2809,17 @@ auto VToolSeamAllowance::DuplicatePlaceLabels(const QVector<quint32> &placeLabel
 //---------------------------------------------------------------------------------------------------------------------
 void VToolSeamAllowance::UpdateFoldLine(const VFoldLine &foldLine)
 {
-    VValentinaSettings *settings = VAbstractValApplication::VApp()->ValentinaSettings();
     const VPiece detail = VAbstractTool::data.GetPiece(m_id);
+
+    if (detail.GetFoldLineType() == FoldLineType::None || (detail.IsShowFullPiece() && !detail.IsShowMirrorLine()))
+    {
+        m_foldLineLabelText->setVisible(false);
+        m_foldLineMark->setPath(QPainterPath());
+        m_foldLineLabel->setPath(QPainterPath());
+        return;
+    }
+
+    VValentinaSettings *settings = VAbstractValApplication::VApp()->ValentinaSettings();
 
     if (settings->GetSingleStrokeOutlineFont() || settings->GetSingleLineFonts())
     {
@@ -2840,11 +2849,6 @@ void VToolSeamAllowance::UpdateFoldLine(const VFoldLine &foldLine)
         {
             m_foldLineLabel->setPath(QPainterPath());
         }
-    }
-    else if (detail.GetFoldLineType() == FoldLineType::None)
-    {
-        m_foldLineMark->setPath(QPainterPath());
-        m_foldLineLabel->setPath(QPainterPath());
     }
     else
     {

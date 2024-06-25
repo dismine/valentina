@@ -1266,6 +1266,11 @@ void VDxfEngine::ExportAAMADrill(const QSharedPointer<dx_ifaceBlock> &detailBloc
 //---------------------------------------------------------------------------------------------------------------------
 void VDxfEngine::ExportAAMADrawFoldLine(const QSharedPointer<dx_ifaceBlock> &detailBlock, const VLayoutPiece &detail)
 {
+    if (detail.IsShowFullPiece() && !detail.IsShowMirrorLine())
+    {
+        return;
+    }
+
     VFoldLine const fLine = detail.FoldLine();
     QVector<QVector<QPointF>> points = fLine.FoldLineMarkPoints();
     if (points.isEmpty())
@@ -1728,6 +1733,11 @@ void VDxfEngine::ExportASTMMirrorLine(const QSharedPointer<dx_ifaceBlock> &detai
 //---------------------------------------------------------------------------------------------------------------------
 void VDxfEngine::ExportASTMDrawFoldLine(const QSharedPointer<dx_ifaceBlock> &detailBlock, const VLayoutPiece &detail)
 {
+    if (detail.IsShowFullPiece() && !detail.IsShowMirrorLine())
+    {
+        return;
+    }
+
     VFoldLine const fLine = detail.FoldLine();
     QVector<QVector<QPointF>> points = fLine.FoldLineMarkPoints();
     if (points.isEmpty())

@@ -577,6 +577,11 @@ void VHPGLEngine::PlotMirrorLine(QTextStream &out, const VLayoutPiece &detail)
 //---------------------------------------------------------------------------------------------------------------------
 void VHPGLEngine::PlotFoldLine(QTextStream &out, const VLayoutPiece &detail)
 {
+    if (detail.IsShowFullPiece() && !detail.IsShowMirrorLine())
+    {
+        return;
+    }
+
     VFoldLine const fLine = detail.FoldLine();
 
     switch (detail.GetFoldLineType())

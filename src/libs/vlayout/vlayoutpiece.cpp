@@ -2187,7 +2187,7 @@ void VLayoutPiece::CreateFoldLineItem(QGraphicsItem *parent, bool textAsPaths) c
 {
     SCASSERT(parent != nullptr)
 
-    if (GetFoldLineType() == FoldLineType::None)
+    if (GetFoldLineType() == FoldLineType::None || (IsShowFullPiece() && !IsShowMirrorLine()))
     {
         return;
     }
