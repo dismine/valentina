@@ -33,7 +33,7 @@ class QString;
 
 constexpr unsigned MAJOR_VERSION = 0;
 constexpr unsigned MINOR_VERSION = 7;
-constexpr unsigned DEBUG_VERSION = 52;
+constexpr unsigned DEBUG_VERSION = 53;
 
 auto AppVersionStr() -> const QString &;
 
@@ -50,8 +50,8 @@ constexpr auto AppVersion() -> unsigned
 // Change version number in projectversion.cpp too.
 // Synchronize valentina.nsi
 
-#define VER_FILEVERSION 0, 7, 52
-#define VER_FILEVERSION_STR "0.7.52\0"
+#define VER_FILEVERSION 0, 7, 53
+#define VER_FILEVERSION_STR "0.7.53\0"
 
 #define V_PRERELEASE // Mark prerelease builds
 
@@ -61,7 +61,7 @@ constexpr auto AppVersion() -> unsigned
 #define VER_COMPANYNAME_STR "Valentina"
 // #define VER_FILEDESCRIPTION_STR   "Patternmaking program." // Defined in program
 // #define VER_INTERNALNAME_STR      "Valentina" // Defined in program
-#define VER_LEGALCOPYRIGHT_STR "Copyright © 2014-2022 Valentina Team"
+#define VER_LEGALCOPYRIGHT_STR "Copyright © 2014-2024 Valentina Team"
 #define VER_LEGALTRADEMARKS1_STR "All Rights Reserved"
 #define VER_LEGALTRADEMARKS2_STR VER_LEGALTRADEMARKS1_STR
 // #define VER_ORIGINALFILENAME_STR  "valentina.exe" // Defined in program

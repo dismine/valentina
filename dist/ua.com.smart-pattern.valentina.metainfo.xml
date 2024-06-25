@@ -48,11 +48,69 @@
           <li>New option Interactive tools.</li>
           <li>Improve error messages while import CSV data.</li>
           <li>Fix regression in dialog Known measurements.</li>
+          <li>New option. Default piece label template for new pieces.</li>
+          <li>Shortcut to quickly enable/disable Interactive tools mode.</li>
+          <li>Improve labels for V notch.</li>
+          <li>Fix QT issue on MacOS version 11.0 "Big Sur".</li>
+          <li>Fix excluding objects in internal path.</li>
+          <li>Fix float-point accuracy issue in multisize measurements dimensions.</li>
+          <li>Fix compatibility with Richpeace DXF-AAMA/ASTM R12.</li>
+          <li>Fix seam allowance. Loose requirements to case with prong.</li>
+          <li>Fix list of dimension popup list. Make sure it will always has enough space for values.</li>
+          <li>New grainline type: Four way.</li>
+          <li>Show/hide grainline when export.</li>
+          <li>Improve calculating notches.</li>
+          <li>Simplify number of versions for DXF AAMA/ASTM.</li>
+          <li>New notch type - Check Notch.</li>
+          <li>Control a notch width and angle with formulas.</li>
+          <li>Independent translation for piece labels.</li>
+          <li>Piece labels line break.</li>
+          <li>Support for single-line fonts.</li>
+          <li>Export to HP-GL format.</li>
+          <li>Fix crash after using tool Union of details.</li>
+          <li>Tool box redesign.</li>
+          <li>Increased requirement for minimal Qt version.</li>
+          <li>Support for Dark mode.</li>
+          <li>Fix issue with passing incorrect number of dimension to Tape.</li>
+          <li>New option: Pointer mode.</li>
+          <li>Fix GUI freezing while nesting.</li>
+          <li>New option: Use Tool Groups.</li>
+          <li>Redesign notch context menu to allow quick selection of the notch type.</li>
+          <li>Redesign standard path system.</li>
+          <li>New option: Translate formula.</li>
+          <li>Fix filling piece label data.</li>
+          <li>New piece option Follow grainline.</li>
+          <li>Validate sheet and layout names before proposing file name.</li>
+          <li>Puzzle app. Fix piece position move when update layout data.</li>
+          <li>Puzzle app. Fix losing selection by piece.</li>
+          <li>Puzzle app. Fix updating layout when file already opened.</li>
+          <li>Tape app. Custom measurement name.</li>
+          <li>Tape app. Show variables in order they were added.</li>
+          <li>Shortcuts manager.</li>
+          <li>Support for custom known measurements.</li>
+          <li>Allow negative values.</li>
+          <li>Tape app. New feature: Always keep on top.</li>
+          <li>Label %mFileName% file name punctuation.</li>
+          <li>Adding removing nodes of curved path.</li>
+          <li>New tools: Arc start point, Arc end point.</li>
+          <li>Optimize U-notch shape.</li>
+          <li>New feature. Boundary together with notches.</li>
+          <li>Puzzle app. Horizontal piece flipping.</li>
+          <li>Mirror line.</li>
+          <li>Fold line.</li>
+          <li>Minimal Qt version increased to Qt 5.15. Minimal C++ standard to C++17.</li>
+          <li>Updated Windows installer.</li>
+          <li>Automatic crash reports.</li>
+          <li>Improve compatibility with Richpeace CAD.</li>
+          <li>New warning "Piece gape position".</li>
+          <li>New feature. Hide/Show enabled grainline.</li>
         </ul>
       </description>
       <issues>
       <issue url="https://gitlab.com/smart-pattern/valentina/-/issues/187">valentina#187</issue>
       <issue url="https://gitlab.com/smart-pattern/valentina/-/issues/189">valentina#189</issue>
+      <issue url="https://gitlab.com/smart-pattern/valentina/-/issues/163">valentina#163</issue>
+      <issue url="https://gitlab.com/smart-pattern/valentina/-/issues/188">valentina#188</issue>
     </issues>
     </release>
   </releases>
