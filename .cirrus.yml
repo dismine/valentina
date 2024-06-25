@@ -446,7 +446,7 @@ macos_task_template: &MACOS_TASK_TEMPLATE
 
 macos_task:
   macos_instance:
-    image: ghcr.io/cirruslabs/macos-sonoma-xcode:latest
+    image: ghcr.io/cirruslabs/macos-sonoma:latest
   << : *MACOS_TASK_TEMPLATE
   env:
     DEPLOY: "true"
