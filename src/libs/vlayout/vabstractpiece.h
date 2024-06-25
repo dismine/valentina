@@ -188,8 +188,7 @@ public:
     template <class T> static auto MirrorPath(const QVector<T> &points, const QLineF &mirrorLine) -> QVector<T>;
 
     template <class T>
-    static auto FullSeamPath(const QVector<T> &points, const QLineF &mirrorLine, const QString &pieceName)
-        -> QVector<T>;
+    static auto FullSeamPath(QVector<T> points, const QLineF &mirrorLine, const QString &pieceName) -> QVector<T>;
     template <class T>
     static auto FullSeamAllowancePath(const QVector<T> &points, const QLineF &mirrorLine, const QString &pieceName)
         -> QVector<T>;
@@ -867,7 +866,7 @@ inline auto VAbstractPiece::MirrorPath<VLayoutPoint>(const QVector<VLayoutPoint>
 
 //---------------------------------------------------------------------------------------------------------------------
 template <class T>
-inline auto VAbstractPiece::FullSeamPath(const QVector<T> &points, const QLineF &mirrorLine, const QString &pieceName)
+inline auto VAbstractPiece::FullSeamPath(QVector<T> points, const QLineF &mirrorLine, const QString &pieceName)
     -> QVector<T>
 {
     // DumpVector(points, QStringLiteral("input.json.XXXXXX")); // Uncomment for dumping test data
@@ -880,6 +879,12 @@ inline auto VAbstractPiece::FullSeamPath(const QVector<T> &points, const QLineF 
     if (points.size() <= 3)
     {
         return points;
+    }
+
+    // Function expects not closed path
+    if (points.constFirst() == points.constLast())
+    {
+        points.removeLast();
     }
 
     QVector<T> base;
