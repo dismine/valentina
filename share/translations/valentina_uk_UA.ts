@@ -15059,7 +15059,7 @@ This option will take an affect after restart.</source>
     <message>
         <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="222"/>
         <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="270"/>
-        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="3175"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="3180"/>
         <source>Cannot set printer margins</source>
         <translation>Не вдалося встановити поля принтера</translation>
     </message>
@@ -22203,146 +22203,146 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <location filename="../../src/app/puzzle/vpmainwindow.ui" line="2290"/>
-        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="5052"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="5057"/>
         <source>Preferences</source>
         <translation>Властивості</translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="466"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="471"/>
         <source>File &apos;%1&apos; doesn&apos;t exist!</source>
         <translation>Файл &apos;%1&apos; не існує!</translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="508"/>
-        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="534"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="513"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="539"/>
         <source>File error.</source>
         <translation>Помилка файла.</translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="620"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="625"/>
         <source>Fail to create layout.</source>
         <translation>Не вдалося створити розкладку.</translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="3392"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="3397"/>
         <source>Could not extract data from file &apos;%1&apos;. %2</source>
         <translation>Не вдалося витягти дані з файлу &quot;%1&quot;. %2</translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="898"/>
-        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="985"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="903"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="990"/>
         <source>Centimeters</source>
         <translation>Сантиметри</translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="897"/>
-        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="984"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="902"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="989"/>
         <source>Millimiters</source>
         <translation>Міліметри</translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="899"/>
-        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="986"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="904"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="991"/>
         <source>Inches</source>
         <translation>Дюйми</translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="1747"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="1752"/>
         <source>Scale:</source>
         <translation>Масштаб:</translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="1780"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="1785"/>
         <source>untitled %1.vlt</source>
         <translation>безіменний %1.vlt</translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="1784"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="1789"/>
         <source>untitled.vlt</source>
         <translation>безіменний.vlt</translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="1792"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="1797"/>
         <source>read only</source>
         <translation>тільки читання</translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="1852"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="1857"/>
         <source>Cannot read settings from a malformed .INI file.</source>
         <translation>Неможливо прочитати налаштування з файлу .INI неправильного формату.</translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="1869"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="1874"/>
         <source>Cannot save settings. Access denied.</source>
         <translation>Не вдається зберегти налаштування. Доступ заборонено.</translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="2779"/>
-        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="3131"/>
-        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="3312"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="2784"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="3136"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="3317"/>
         <source>Failed to open file, is it writable?</source>
         <translation>Не вдалося відкрити файл, чи доступний він для запису?</translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="1924"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="1929"/>
         <source>&amp;New Window</source>
         <translation>&amp;Нове вікно</translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="1881"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="1886"/>
         <source>Layout has been modified. Do you want to save your changes?</source>
         <translation>Розкладку було змінено. Бажаєте зберегти зміни?</translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="3690"/>
-        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="3752"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="3695"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="3757"/>
         <source>Layout files</source>
         <translation>Файли розкладки</translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="3694"/>
-        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="3842"/>
-        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="4784"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="3699"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="3847"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="4789"/>
         <source>Open file</source>
         <translation>Відкрити файл</translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="3735"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="3740"/>
         <source>Could not save the file</source>
         <translation>Не вдалося зберегти файл</translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="3754"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="3759"/>
         <source>layout</source>
         <translation>розкладка</translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="3766"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="3771"/>
         <source>Save as</source>
         <translation>Зберегти як</translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="3796"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="3801"/>
         <source>Failed to lock. This file already opened in another window.</source>
         <translation>Неможливо заблокувати. Цей файл вже був відкритий в іншому вікні.</translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="3806"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="3811"/>
         <source>Could not save file</source>
         <translation>Не вдалося зберегти файл</translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="3827"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="3832"/>
         <source>Failed to lock. This file already opened in another window. Expect collissions when run 2 copies of the program.</source>
         <translation>Неможливо заблокувати. Цей файл вже був відкритий в іншому вікні. Можливі конфлікти, якщо одночасно запущено 2 екземпляри програми.</translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="3837"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="3842"/>
         <source>Raw Layout files</source>
         <translation>Необроблені файли розкладки</translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="3855"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="3860"/>
         <source>About Qt</source>
         <translation>Про Qt</translation>
     </message>
@@ -22602,142 +22602,142 @@ Do you want to save your changes?</source>
         <translation>Видалити</translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="509"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="514"/>
         <source>Unable to read a layout file. %1</source>
         <translation>Не вдається прочитати файл розкладки. %1</translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="723"/>
-        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="3663"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="728"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="3668"/>
         <source>&amp;Undo</source>
         <translation>&amp;Скасувати дію</translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="729"/>
-        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="3664"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="734"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="3669"/>
         <source>&amp;Redo</source>
         <translation>&amp;Повторити</translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="900"/>
-        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="987"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="905"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="992"/>
         <source>Pixels</source>
         <translation>Пікселі</translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="1880"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="1885"/>
         <source>Unsaved changes</source>
         <translation>Незбереженні зміни</translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="1889"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="1894"/>
         <source>Save…</source>
         <translation>Зберегти…</translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="1889"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="1894"/>
         <source>Save</source>
         <translation>Зберегти</translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="1894"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="1899"/>
         <source>Don&apos;t Save</source>
         <translation>Не зберігати</translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="2379"/>
-        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="2442"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="2384"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="2447"/>
         <source>Can&apos;t create a path</source>
         <translation>Не вдається створити шлях</translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="2662"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="2667"/>
         <source>Can&apos;t open file &apos;%1&apos;</source>
         <translation>Не вдається відкрити файл &quot;%1&quot;</translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="2676"/>
-        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="3181"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="2681"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="3186"/>
         <source>Failed in flushing page to disk, disk full?</source>
         <translation>Не вдалося скинути сторінку на диск, чи переповнений диск?</translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="3021"/>
-        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="3048"/>
-        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="3077"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="3026"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="3053"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="3082"/>
         <source>The layout is invalid.</source>
         <translation>Розкладка недійсна.</translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="3022"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="3027"/>
         <source>The layout is invalid. Piece out of bound. Do you want to continue export?</source>
         <translation>Розкладка недійсна. Деталь поза межами аркуша. Ви хочете продовжити експорт?</translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="3049"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="3054"/>
         <source>The layout is invalid. Pieces superposition. Do you want to continue export?</source>
         <translation>Розкладка недійсна. Деталі перетинаються. Ви хочете продовжити експорт?</translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="3078"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="3083"/>
         <source>The layout is invalid. One or several pieces are closer than minimally allowed. Do you want to continue export?</source>
         <translation>Розкладка є невірною. Один або кілька елементів розташовані ближче, ніж мінімально допустимо. Ви хочете продовжити експорт?</translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="4125"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="4130"/>
         <source>Sheet %1</source>
         <translation>Аркуш %1</translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="3453"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="3458"/>
         <source>translate pieces</source>
         <translation>перемістити деталі</translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="3570"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="3575"/>
         <source>rotate pieces</source>
         <translation>обертання деталей</translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="4413"/>
-        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="4464"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="4418"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="4469"/>
         <source>For printing multipages document all sheet should have the same size.</source>
         <translation>Для друку багатосторінкового документа всі сторінки мають бути одного розміру.</translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="4425"/>
-        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="4476"/>
-        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="4511"/>
-        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="4549"/>
-        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="4604"/>
-        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="4648"/>
-        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="4681"/>
-        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="4717"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="4430"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="4481"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="4516"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="4554"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="4609"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="4653"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="4686"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="4722"/>
         <source>Print error</source>
         <translation>Помилка друку</translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="4426"/>
-        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="4477"/>
-        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="4512"/>
-        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="4550"/>
-        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="4605"/>
-        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="4649"/>
-        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="4682"/>
-        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="4718"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="4431"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="4482"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="4517"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="4555"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="4610"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="4654"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="4687"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="4723"/>
         <source>Cannot proceed because there are no available printers in your system.</source>
         <translation>Неможливо виконати, тому що не знайдено доступних принтерів у вашій системі.</translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="4781"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="4786"/>
         <source>Watermark files</source>
         <translation>Файли з водяними знаками</translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="4437"/>
-        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="4488"/>
-        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="4523"/>
-        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="4561"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="4442"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="4493"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="4528"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="4566"/>
         <source>Unable to get sheet page settings</source>
         <translation>Не вдається отримати налаштування сторінки аркуша</translation>
     </message>
@@ -22777,12 +22777,12 @@ Do you want to save your changes?</source>
         <translation>Впливає тільки на друку в застосунку. Для експорту зі схемою плитки використовуйте окреме налаштування</translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="4376"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="4381"/>
         <source>sheet</source>
         <translation>аркуш</translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="3414"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="3419"/>
         <source>Piece %1 invalid. %2</source>
         <translation>Деталь %1 невірна. %2</translation>
     </message>
