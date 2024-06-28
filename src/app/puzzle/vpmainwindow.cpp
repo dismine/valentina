@@ -450,7 +450,12 @@ VPMainWindow::VPMainWindow(VPCommandLinePtr cmd, QWidget *parent)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-VPMainWindow::~VPMainWindow() = default;
+VPMainWindow::~VPMainWindow()
+{
+    // Preventing crash. Deleting QUndoStack can trigger QUndoStack::cleanChanged which will call LayoutWasSaved method
+    // after deleting VPMainWindow.
+    m_undoStack->blockSignals(true);
+}
 
 //---------------------------------------------------------------------------------------------------------------------
 auto VPMainWindow::CurrentFile() const -> QString
