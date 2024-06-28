@@ -167,6 +167,10 @@ Module {
 
         // Check which minimal OSX version supports current Qt version
         if (Qt.core.versionMajor >= 6) {
+            // For Qt 6.8 https://doc-snapshots.qt.io/qt6-6.8/supported-platforms.html
+            if (Qt.core.versionMinor >= 8) // Qt 6.8
+                return "12.0";
+
             // For Qt 6.5 https://doc-snapshots.qt.io/qt6-6.5/supported-platforms.html
             if (Qt.core.versionMinor >= 5) // Qt 6.5
                 return "11.0";
