@@ -204,6 +204,10 @@ DialogIncrements::DialogIncrements(VContainer *data, VPattern *doc, QWidget *par
         connect(manager, &VAbstractShortcutManager::ShortcutsUpdated, this, &DialogIncrements::UpdateShortcuts);
         UpdateShortcuts();
     }
+
+    QPushButton *bClose = ui->buttonBox->button(QDialogButtonBox::Close);
+    SCASSERT(bClose != nullptr)
+    connect(bClose, &QPushButton::clicked, this, &DialogIncrements::accept);
 }
 
 //---------------------------------------------------------------------------------------------------------------------

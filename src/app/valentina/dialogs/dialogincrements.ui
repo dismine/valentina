@@ -66,8 +66,7 @@
             <string notr="true"/>
            </property>
            <property name="icon">
-            <iconset theme="system-search">
-             <normaloff>.</normaloff>.</iconset>
+            <iconset theme="system-search"/>
            </property>
            <property name="shortcut">
             <string>Alt+Down</string>
@@ -249,11 +248,10 @@
             <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Find Previous &lt;span style=&quot; color:#888a85;&quot;&gt;%1&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
            </property>
            <property name="text">
-            <string notr="true"></string>
+            <string notr="true"/>
            </property>
            <property name="icon">
-            <iconset theme="go-up">
-             <normaloff>.</normaloff>.</iconset>
+            <iconset theme="go-up"/>
            </property>
            <property name="shortcut">
             <string>Shift+F3</string>
@@ -269,11 +267,10 @@
             <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Find Next %1&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
            </property>
            <property name="text">
-            <string notr="true"></string>
+            <string notr="true"/>
            </property>
            <property name="icon">
-            <iconset theme="go-down">
-             <normaloff>.</normaloff>.</iconset>
+            <iconset theme="go-down"/>
            </property>
            <property name="shortcut">
             <string>F3</string>
@@ -392,7 +389,7 @@
                 <string>Move measurement up</string>
                </property>
                <property name="text">
-                <string notr="true"></string>
+                <string notr="true"/>
                </property>
                <property name="icon">
                 <iconset theme="go-up">
@@ -409,7 +406,7 @@
                 <string>Move measurement down</string>
                </property>
                <property name="text">
-                <string notr="true"></string>
+                <string notr="true"/>
                </property>
                <property name="icon">
                 <iconset theme="go-down">
@@ -459,11 +456,10 @@
                 </sizepolicy>
                </property>
                <property name="text">
-                <string notr="true"></string>
+                <string notr="true"/>
                </property>
                <property name="icon">
-                <iconset theme="list-add">
-                 <normaloff>.</normaloff>.</iconset>
+                <iconset theme="list-add"/>
                </property>
                <property name="popupMode">
                 <enum>QToolButton::MenuButtonPopup</enum>
@@ -476,11 +472,10 @@
                 <bool>false</bool>
                </property>
                <property name="text">
-                <string notr="true"></string>
+                <string notr="true"/>
                </property>
                <property name="icon">
-                <iconset theme="list-remove">
-                 <normaloff>.</normaloff>.</iconset>
+                <iconset theme="list-remove"/>
                </property>
               </widget>
              </item>
@@ -611,7 +606,7 @@
                 <string>Formula wizard</string>
                </property>
                <property name="text">
-                <string notr="true"></string>
+                <string notr="true"/>
                </property>
                <property name="icon">
                 <iconset resource="../../../libs/vmisc/share/resources/icon.qrc">
@@ -656,6 +651,19 @@
            <item row="13" column="1">
             <layout class="QHBoxLayout" name="horizontalLayout_5">
              <item>
+              <widget class="QPushButton" name="pushButtonRefresh">
+               <property name="toolTip">
+                <string>Refresh a pattern with all changes you made</string>
+               </property>
+               <property name="text">
+                <string>Refresh</string>
+               </property>
+               <property name="icon">
+                <iconset theme="view-refresh"/>
+               </property>
+              </widget>
+             </item>
+             <item>
               <spacer name="horizontalSpacer_3">
                <property name="orientation">
                 <enum>Qt::Horizontal</enum>
@@ -669,12 +677,9 @@
               </spacer>
              </item>
              <item>
-              <widget class="QPushButton" name="pushButtonRefresh">
-               <property name="toolTip">
-                <string>Refresh a pattern with all changes you made</string>
-               </property>
-               <property name="text">
-                <string>Refresh</string>
+              <widget class="QDialogButtonBox" name="buttonBox">
+               <property name="standardButtons">
+                <set>QDialogButtonBox::Close</set>
                </property>
               </widget>
              </item>
@@ -721,8 +726,7 @@
             <string notr="true"/>
            </property>
            <property name="icon">
-            <iconset theme="system-search">
-             <normaloff>.</normaloff>.</iconset>
+            <iconset theme="system-search"/>
            </property>
            <property name="shortcut">
             <string>Alt+Down</string>
@@ -904,11 +908,10 @@
             <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Find Previous &lt;span style=&quot; color:#888a85;&quot;&gt;%1&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
            </property>
            <property name="text">
-            <string notr="true"></string>
+            <string notr="true"/>
            </property>
            <property name="icon">
-            <iconset theme="go-up">
-             <normaloff>.</normaloff>.</iconset>
+            <iconset theme="go-up"/>
            </property>
            <property name="shortcut">
             <string>Shift+F3</string>
@@ -924,11 +927,10 @@
             <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Find Next %1&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
            </property>
            <property name="text">
-            <string notr="true"></string>
+            <string notr="true"/>
            </property>
            <property name="icon">
-            <iconset theme="go-down">
-             <normaloff>.</normaloff>.</iconset>
+            <iconset theme="go-down"/>
            </property>
            <property name="shortcut">
             <string>F3</string>
@@ -1047,7 +1049,7 @@
                 <string>Move measurement up</string>
                </property>
                <property name="text">
-                <string notr="true"></string>
+                <string notr="true"/>
                </property>
                <property name="icon">
                 <iconset theme="go-up">
@@ -1064,7 +1066,7 @@
                 <string>Move measurement down</string>
                </property>
                <property name="text">
-                <string notr="true"></string>
+                <string notr="true"/>
                </property>
                <property name="icon">
                 <iconset theme="go-down">
@@ -1114,11 +1116,10 @@
                 </sizepolicy>
                </property>
                <property name="text">
-                <string notr="true"></string>
+                <string notr="true"/>
                </property>
                <property name="icon">
-                <iconset theme="list-add">
-                 <normaloff>.</normaloff>.</iconset>
+                <iconset theme="list-add"/>
                </property>
                <property name="popupMode">
                 <enum>QToolButton::MenuButtonPopup</enum>
@@ -1131,11 +1132,10 @@
                 <bool>false</bool>
                </property>
                <property name="text">
-                <string notr="true"></string>
+                <string notr="true"/>
                </property>
                <property name="icon">
-                <iconset theme="list-remove">
-                 <normaloff>.</normaloff>.</iconset>
+                <iconset theme="list-remove"/>
                </property>
               </widget>
              </item>
@@ -1259,7 +1259,7 @@
                 <string>Formula wizard</string>
                </property>
                <property name="text">
-                <string notr="true"></string>
+                <string notr="true"/>
                </property>
                <property name="icon">
                 <iconset resource="../../../libs/vmisc/share/resources/icon.qrc">
