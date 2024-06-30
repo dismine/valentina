@@ -564,7 +564,9 @@ void VAbstractApplication::CheckSystemLocale()
     const QString defLocale = QLocale::system().name();
     if (defLocale.startsWith("ru"_L1))
     {
-        qFatal("Incompatible locale \"%s\"", qPrintable(defLocale));
+        qCritical("Incompatible locale \"%s\"", qPrintable(defLocale));
+        ::exit(0);
+        return;
     }
 
     auto CheckLanguage = [](QStandardPaths::StandardLocation type, const QStringList &test)
@@ -584,7 +586,9 @@ void VAbstractApplication::CheckSystemLocale()
 
     if (match >= 4)
     {
-        qFatal("russian language detected");
+        qCritical("russian language detected");
+        ::exit(0);
+        return;
     }
 }
 
