@@ -1377,15 +1377,13 @@ auto VAbstractPiece::EkvPoint(QVector<VRawSAPoint> points, const VSAPoint &p1Lin
                     { // Just an acute angle with big seam allowance
                         if (IsSameDirection(bigLine2.p1(), bigLine2.p2(), crosPoint))
                         {
-                            QLineF loop(crosPoint, bigLine1.p1());
+                            points.append(VRawSAPoint(bigLine1.p2(), p2Line1.CurvePoint(), p2Line1.TurnPoint()));
+                            points.append(VRawSAPoint(bigLine2.p1(), p2Line1.CurvePoint(), p2Line1.TurnPoint()));
+
+                            QLineF loop(crosPoint, bigLine2.p1());
                             loop.setAngle(loop.angle() + 180);
                             loop.setLength(accuracyPointOnLine * 2.);
                             points.append(VRawSAPoint(loop.p2(), p2Line1.CurvePoint(), p2Line1.TurnPoint()));
-                            points.append(VRawSAPoint(crosPoint, p2Line1.CurvePoint(), p2Line1.TurnPoint()));
-
-                            loop = QLineF(crosPoint, bigLine1.p1());
-                            loop.setLength(loop.length() + localWidth * 2.);
-                            points.append(VRawSAPoint(loop.p2(), p2Line1.CurvePoint(), p2Line1.TurnPoint(), true));
                         }
 
                         return points;
