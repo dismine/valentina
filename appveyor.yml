@@ -83,7 +83,7 @@ environment:
       QT_VERSION: Qt6
       BUILD_SYSTEM: "qbs"
       ARCH: x64
-      XCODE_VERSION: 15.2.0
+      XCODE_VERSION: 13.4.1
       TARGET_PLATFORM: "macOS_12+"
       MACOS_DEPLOYMENT_TARGET: 12.0
       MULTI_BUNDLE: true
@@ -97,7 +97,7 @@ environment:
       QT_VERSION: Qt6
       BUILD_SYSTEM: "qbs"
       ARCH: x64
-      XCODE_VERSION: 15.2.0
+      XCODE_VERSION: 13.4.1
       TARGET_PLATFORM: "macOS_12+"
       MACOS_DEPLOYMENT_TARGET: 12.0
       MULTI_BUNDLE: false

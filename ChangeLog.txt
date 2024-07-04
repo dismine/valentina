@@ -3,6 +3,7 @@
 - Dialog Table of variables. Added button Close.
 - Fix incorrect seam allowance.
 - Duplicate controls for main path nodes.
+- Fix compatibility with macOS 12+.
 
 # Valentina 0.7.53 June 25, 2024
 - Fix layout sheet export with empty name.
