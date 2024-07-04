@@ -57,8 +57,6 @@ def generate_sym_files(install_root):
             # Remove .so + version numbers if present (e.g., .so.1.0.0 or .so.2.7.0)
             corrected_debug_name = re.sub(r'\.so\.\d+(\.\d+)*', '', corrected_debug_name)
 
-        # Convert to lowercase
-        corrected_debug_name = corrected_debug_name.lower()
         rename = False
 
         print(f"Generating symbols for: {corrected_debug_name}")
