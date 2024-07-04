@@ -227,7 +227,10 @@ enum class VThemeIcon
     // Not supported by Qt
     PreferencesOther,
     GtkOk,
-    GtkNo
+    GtkNo,
+    SnapNodesRotationCenter,
+    DrawStar,
+    AddPlacemark
 };
 
 #if QT_VERSION < QT_VERSION_CHECK(6, 0, 0)

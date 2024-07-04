@@ -245,7 +245,7 @@
         <!-- <file>icons/Eleven-Dark/16/actions/draw-spiral.svg</file> -->
         <!-- <file>icons/Eleven-Dark/16/actions/draw-square-inverted-corners.svg</file> -->
         <!-- <file>icons/Eleven-Dark/16/actions/draw-star-outline.svg</file> -->
-        <!-- <file>icons/Eleven-Dark/16/actions/draw-star.svg</file> -->
+        <file>icons/Eleven-Dark/16/actions/draw-star.svg</file>
         <!-- <file>icons/Eleven-Dark/16/actions/draw-text.svg</file> -->
         <!-- <file>icons/Eleven-Dark/16/actions/draw-trace-background.svg</file> -->
         <!-- <file>icons/Eleven-Dark/16/actions/draw-triangle.svg</file> -->
@@ -427,7 +427,7 @@
         <!-- <file>icons/Eleven-Dark/16/actions/format-text-direction-vertical.svg</file> -->
         <file>icons/Eleven-Dark/16/actions/format-text-italic.svg</file>
         <!-- <file>icons/Eleven-Dark/16/actions/format-text-lowercase.svg</file> -->
-        <!-- <file>icons/Eleven-Dark/16/actions/format-text-strikethrough.svg</file> -->
+        <file>icons/Eleven-Dark/16/actions/format-text-strikethrough.svg</file>
         <!-- <file>icons/Eleven-Dark/16/actions/format-text-subscript.svg</file> -->
         <!-- <file>icons/Eleven-Dark/16/actions/format-text-superscript.svg</file> -->
         <!-- <file>icons/Eleven-Dark/16/actions/format-text-symbol.svg</file> -->
@@ -852,7 +852,7 @@
         <!-- <file>icons/Eleven-Dark/16/actions/snap-nodes-intersection.svg</file> -->
         <!-- <file>icons/Eleven-Dark/16/actions/snap-nodes-midpoint.svg</file> -->
         <!-- <file>icons/Eleven-Dark/16/actions/snap-nodes-path.svg</file> -->
-        <!-- <file>icons/Eleven-Dark/16/actions/snap-nodes-rotation-center.svg</file> -->
+        <file>icons/Eleven-Dark/16/actions/snap-nodes-rotation-center.svg</file>
         <!-- <file>icons/Eleven-Dark/16/actions/snap-nodes-smooth.svg</file> -->
         <!-- <file>icons/Eleven-Dark/16/actions/snap-nodes.svg</file> -->
         <!-- <file>icons/Eleven-Dark/16/actions/snap-orthogonal.svg</file> -->
@@ -1131,7 +1131,7 @@
         <!-- <file>icons/Eleven-Dark/16/actions/actor.svg</file> -->
         <!-- <file>icons/Eleven-Dark/16/actions/add-files-to-archive.svg</file> -->
         <!-- <file>icons/Eleven-Dark/16/actions/add-folder-to-archive.svg</file> -->
-        <!-- <file>icons/Eleven-Dark/16/actions/add-placemark.svg</file> -->
+        <file>icons/Eleven-Dark/16/actions/add-placemark.svg</file>
         <!-- <file>icons/Eleven-Dark/16/actions/add.svg</file> -->
         <!-- <file>icons/Eleven-Dark/16/actions/addressbook-details.svg</file> -->
         <!-- <file>icons/Eleven-Dark/16/actions/adress-book-new.svg</file> -->
@@ -8180,7 +8180,7 @@
         <!-- <file>icons/Eleven-Dark/16@2x/actions/draw-spiral.svg</file> -->
         <!-- <file>icons/Eleven-Dark/16@2x/actions/draw-square-inverted-corners.svg</file> -->
         <!-- <file>icons/Eleven-Dark/16@2x/actions/draw-star-outline.svg</file> -->
-        <!-- <file>icons/Eleven-Dark/16@2x/actions/draw-star.svg</file> -->
+        <file>icons/Eleven-Dark/16@2x/actions/draw-star.svg</file>
         <!-- <file>icons/Eleven-Dark/16@2x/actions/draw-text.svg</file> -->
         <!-- <file>icons/Eleven-Dark/16@2x/actions/draw-trace-background.svg</file> -->
         <!-- <file>icons/Eleven-Dark/16@2x/actions/draw-triangle.svg</file> -->
@@ -8362,7 +8362,7 @@
         <!-- <file>icons/Eleven-Dark/16@2x/actions/format-text-direction-vertical.svg</file> -->
         <file>icons/Eleven-Dark/16@2x/actions/format-text-italic.svg</file>
         <!-- <file>icons/Eleven-Dark/16@2x/actions/format-text-lowercase.svg</file> -->
-        <!-- <file>icons/Eleven-Dark/16@2x/actions/format-text-strikethrough.svg</file> -->
+        <file>icons/Eleven-Dark/16@2x/actions/format-text-strikethrough.svg</file>
         <!-- <file>icons/Eleven-Dark/16@2x/actions/format-text-subscript.svg</file> -->
         <!-- <file>icons/Eleven-Dark/16@2x/actions/format-text-superscript.svg</file> -->
         <!-- <file>icons/Eleven-Dark/16@2x/actions/format-text-symbol.svg</file> -->
@@ -8787,7 +8787,7 @@
         <!-- <file>icons/Eleven-Dark/16@2x/actions/snap-nodes-intersection.svg</file> -->
         <!-- <file>icons/Eleven-Dark/16@2x/actions/snap-nodes-midpoint.svg</file> -->
         <!-- <file>icons/Eleven-Dark/16@2x/actions/snap-nodes-path.svg</file> -->
-        <!-- <file>icons/Eleven-Dark/16@2x/actions/snap-nodes-rotation-center.svg</file> -->
+        <file>icons/Eleven-Dark/16@2x/actions/snap-nodes-rotation-center.svg</file>
         <!-- <file>icons/Eleven-Dark/16@2x/actions/snap-nodes-smooth.svg</file> -->
         <!-- <file>icons/Eleven-Dark/16@2x/actions/snap-nodes.svg</file> -->
         <!-- <file>icons/Eleven-Dark/16@2x/actions/snap-orthogonal.svg</file> -->
@@ -9066,7 +9066,7 @@
         <!-- <file>icons/Eleven-Dark/16@2x/actions/actor.svg</file> -->
         <!-- <file>icons/Eleven-Dark/16@2x/actions/add-files-to-archive.svg</file> -->
         <!-- <file>icons/Eleven-Dark/16@2x/actions/add-folder-to-archive.svg</file> -->
-        <!-- <file>icons/Eleven-Dark/16@2x/actions/add-placemark.svg</file> -->
+        <file>icons/Eleven-Dark/16@2x/actions/add-placemark.svg</file>
         <!-- <file>icons/Eleven-Dark/16@2x/actions/add.svg</file> -->
         <!-- <file>icons/Eleven-Dark/16@2x/actions/addressbook-details.svg</file> -->
         <!-- <file>icons/Eleven-Dark/16@2x/actions/adress-book-new.svg</file> -->

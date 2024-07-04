@@ -179,6 +179,7 @@ private slots:
 
     void EditPieceLabel();
     void SetMoveControls();
+    void SetOptionControls();
 
     void PatternLabelDataChanged();
     void EditPatternLabel();

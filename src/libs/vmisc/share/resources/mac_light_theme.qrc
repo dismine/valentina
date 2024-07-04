@@ -386,7 +386,7 @@
         <!-- <file>icons/La-Sierra-Light/actions/22x22/draw-rectangle.svg</file> -->
         <!-- <file>icons/La-Sierra-Light/actions/22x22/draw-spiral.svg</file> -->
         <!-- <file>icons/La-Sierra-Light/actions/22x22/draw-square-inverted-corners.svg</file> -->
-        <!-- <file>icons/La-Sierra-Light/actions/22x22/draw-star.svg</file> -->
+        <file>icons/La-Sierra-Light/actions/22x22/draw-star.svg</file>
         <!-- <file>icons/La-Sierra-Light/actions/22x22/draw-text.svg</file> -->
         <!-- <file>icons/La-Sierra-Light/actions/22x22/draw-triangle.svg</file> -->
         <!-- <file>icons/La-Sierra-Light/actions/22x22/draw-triangle1.svg</file> -->
@@ -491,7 +491,7 @@
         <!-- <file>icons/La-Sierra-Light/actions/22x22/format-text-direction-rtl.svg</file> -->
         <!-- <file>icons/La-Sierra-Light/actions/22x22/format-text-direction-vertical.svg</file> -->
         <file>icons/La-Sierra-Light/actions/22x22/format-text-italic.svg</file>
-        <!-- <file>icons/La-Sierra-Light/actions/22x22/format-text-strikethrough.svg</file> -->
+        <file>icons/La-Sierra-Light/actions/22x22/format-text-strikethrough.svg</file>
         <!-- <file>icons/La-Sierra-Light/actions/22x22/format-text-subscript.svg</file> -->
         <!-- <file>icons/La-Sierra-Light/actions/22x22/format-text-superscript.svg</file> -->
         <!-- <file>icons/La-Sierra-Light/actions/22x22/format-text-symbol.svg</file> -->
@@ -1894,7 +1894,7 @@
         <!-- <file>icons/La-Sierra-Light/actions/22x22@2x/draw-rectangle.svg</file> -->
         <!-- <file>icons/La-Sierra-Light/actions/22x22@2x/draw-spiral.svg</file> -->
         <!-- <file>icons/La-Sierra-Light/actions/22x22@2x/draw-square-inverted-corners.svg</file> -->
-        <!-- <file>icons/La-Sierra-Light/actions/22x22@2x/draw-star.svg</file> -->
+        <file>icons/La-Sierra-Light/actions/22x22@2x/draw-star.svg</file>
         <!-- <file>icons/La-Sierra-Light/actions/22x22@2x/draw-text.svg</file> -->
         <!-- <file>icons/La-Sierra-Light/actions/22x22@2x/draw-triangle.svg</file> -->
         <!-- <file>icons/La-Sierra-Light/actions/22x22@2x/draw-triangle1.svg</file> -->
@@ -1999,7 +1999,7 @@
         <!-- <file>icons/La-Sierra-Light/actions/22x22@2x/format-text-direction-rtl.svg</file> -->
         <!-- <file>icons/La-Sierra-Light/actions/22x22@2x/format-text-direction-vertical.svg</file> -->
         <file>icons/La-Sierra-Light/actions/22x22@2x/format-text-italic.svg</file>
-        <!-- <file>icons/La-Sierra-Light/actions/22x22@2x/format-text-strikethrough.svg</file> -->
+        <file>icons/La-Sierra-Light/actions/22x22@2x/format-text-strikethrough.svg</file>
         <!-- <file>icons/La-Sierra-Light/actions/22x22@2x/format-text-subscript.svg</file> -->
         <!-- <file>icons/La-Sierra-Light/actions/22x22@2x/format-text-superscript.svg</file> -->
         <!-- <file>icons/La-Sierra-Light/actions/22x22@2x/format-text-symbol.svg</file> -->
@@ -4271,5 +4271,9 @@
         <!-- <file>icons/La-Sierra-Light/status/symbolic@2x/notifications-symbolic.svg</file> -->
         <!-- <file>icons/La-Sierra-Light/status/symbolic@2x/view-wrapped-symbolic-rtl.svg</file> -->
         <file>icons/La-Sierra-Light/index.theme</file>
+        <file>icons/La-Sierra-Light/actions/22x22/snap-nodes-rotation-center.svg</file>
+        <file>icons/La-Sierra-Light/actions/22x22/add-placemark.svg</file>
+        <file>icons/La-Sierra-Light/actions/22x22@2x/snap-nodes-rotation-center.svg</file>
+        <file>icons/La-Sierra-Light/actions/22x22@2x/add-placemark.svg</file>
     </qresource>
 </RCC>

@@ -357,7 +357,10 @@ Q_GLOBAL_STATIC_WITH_ARGS(const ThemeIconStringHash, themeIconStringMapping,
 
                             {VThemeIcon::PreferencesOther, "preferences-other"_L1},
                             {VThemeIcon::GtkOk, "gtk-ok"_L1},
-                            {VThemeIcon::GtkNo, "gtk-no"_L1}}))
+                            {VThemeIcon::GtkNo, "gtk-no"_L1},
+                            {VThemeIcon::SnapNodesRotationCenter, "snap-nodes-rotation-center"_L1},
+                            {VThemeIcon::DrawStar, "draw-star"_L1},
+                            {VThemeIcon::AddPlacemark, "add-placemark"_L1}}))
 QT_WARNING_POP
 } // namespace
 

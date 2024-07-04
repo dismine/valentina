@@ -2,6 +2,7 @@
 - Fix Puzzle app crash when application closing.
 - Dialog Table of variables. Added button Close.
 - Fix incorrect seam allowance.
+- Duplicate controls for main path nodes.
 
 # Valentina 0.7.53 June 25, 2024
 - Fix layout sheet export with empty name.
