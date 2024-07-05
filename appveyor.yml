@@ -79,7 +79,7 @@ environment:
       job_group: 'MacOS_14'
       APPVEYOR_BUILD_WORKER_IMAGE: macos-sonoma
       COMPILER: clang
-      QT: Qt/6.6/macos
+      QT: Qt/6.5/macos
       QT_VERSION: Qt6
       BUILD_SYSTEM: "qbs"
       ARCH: x64
@@ -93,7 +93,7 @@ environment:
       job_group: 'MacOS_14'
       APPVEYOR_BUILD_WORKER_IMAGE: macos-sonoma
       COMPILER: clang
-      QT: Qt/6.6/macos
+      QT: Qt/6.5/macos
       QT_VERSION: Qt6
       BUILD_SYSTEM: "qbs"
       ARCH: x64
