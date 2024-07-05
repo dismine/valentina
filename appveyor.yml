@@ -75,29 +75,29 @@ environment:
       MULTI_BUNDLE: false
       DEPLOY: true
 
-    - job_name: MacOS_14_Qt_6_6 (multibundle)
-      job_group: 'MacOS_14'
-      APPVEYOR_BUILD_WORKER_IMAGE: macos-sonoma
+    - job_name: MacOS_12_Qt_6_5 (multibundle)
+      job_group: 'MacOS_12 (Qt6)'
+      APPVEYOR_BUILD_WORKER_IMAGE: macos-monterey
       COMPILER: clang
       QT: Qt/6.5/macos
       QT_VERSION: Qt6
       BUILD_SYSTEM: "qbs"
       ARCH: x64
-      XCODE_VERSION: 13.4.1
+      XCODE_VERSION: 14.2.0
       TARGET_PLATFORM: "macOS_12+"
       MACOS_DEPLOYMENT_TARGET: 12.0
       MULTI_BUNDLE: true
       DEPLOY: true
 
-    - job_name: MacOS_14_Qt_6_6 (singlebundle)
-      job_group: 'MacOS_14'
-      APPVEYOR_BUILD_WORKER_IMAGE: macos-sonoma
+    - job_name: MacOS_12_Qt_6_5 (singlebundle)
+      job_group: 'MacOS_12 (Qt6)'
+      APPVEYOR_BUILD_WORKER_IMAGE: macos-monterey
       COMPILER: clang
       QT: Qt/6.5/macos
       QT_VERSION: Qt6
       BUILD_SYSTEM: "qbs"
       ARCH: x64
-      XCODE_VERSION: 13.4.1
+      XCODE_VERSION: 14.2.0
       TARGET_PLATFORM: "macOS_12+"
       MACOS_DEPLOYMENT_TARGET: 12.0
       MULTI_BUNDLE: false
@@ -235,9 +235,9 @@ matrix:
     - platform: x86
       job_name: Windows_Qt_5_15_(qbs_MSVC_x64)
     - platform: x86
-      job_name: MacOS_14_Qt_6_6 (multibundle)
+      job_name: MacOS_12_Qt_6_5(multibundle)
     - platform: x86
-      job_name: MacOS_14_Qt_6_6 (singlebundle)
+      job_name: MacOS_12_Qt_6_5 (singlebundle)
     - platform: x86
       job_name: MacOS_12_Qt_5_15 (qbs, multibundle)
     - platform: x86
@@ -486,7 +486,7 @@ for:
 -
   matrix:
     only:
-      - job_group: 'MacOS_14'
+      - job_group: 'MacOS_12 (Qt6)'
 
   environment:
     CONAN_USER_HOME: /Users/appveyor
