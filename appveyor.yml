@@ -235,7 +235,7 @@ matrix:
     - platform: x86
       job_name: Windows_Qt_5_15_(qbs_MSVC_x64)
     - platform: x86
-      job_name: MacOS_12_Qt_6_5(multibundle)
+      job_name: MacOS_12_Qt_6_5 (multibundle)
     - platform: x86
       job_name: MacOS_12_Qt_6_5 (singlebundle)
     - platform: x86
@@ -574,7 +574,7 @@ for:
 
       sudo ln -s /usr/local /opt/local;
 
-      cache_tag=usr_local # this can be modified to rebuild deps
+      cache_tag=usr_local_1 # this can be modified to rebuild deps
 
       cdir=$HOME/brew_cache_dir
       cache_tar=$cdir/$cache_tag.tar
