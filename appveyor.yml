@@ -620,7 +620,6 @@ for:
         ) 2>&1 | sed 's/^/CACHE: /' &
 
       fi
-    - sudo -H python3 -m pip install --upgrade pip
     - pip3 install --user --upgrade pip dropbox py7zr 'urllib3<2.0' conan==1.63.0 requests
     - export QTDIR=$(brew --prefix qt6)
     - export PATH="$PATH:`python3 -m site --user-base`/bin:$QTDIR/bin"
