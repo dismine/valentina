@@ -56,6 +56,7 @@
 #include <QPlainTextEdit>
 #include <QPushButton>
 #include <QRegularExpression>
+#include <QScreen>
 #include <QTextCursor>
 #include <QTimer>
 #include <qnumeric.h>
