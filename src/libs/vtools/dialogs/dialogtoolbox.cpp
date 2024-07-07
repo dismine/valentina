@@ -608,11 +608,20 @@ auto EachPointLabelIsUnique(QListWidget *listWidget) -> bool
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-auto DialogWarningIcon() -> QString
+auto DialogWarningIcon(QWidget *w) -> QString
 {
     const QIcon icon = FromTheme(VThemeIcon::DialogWarning);
 
-    const QPixmap pixmap = icon.pixmap(QSize(16, 16));
+    qreal scaleFactor = 1;
+    if (w != nullptr)
+    {
+        if (QScreen *wScreen = w->screen())
+        {
+            scaleFactor = wScreen->devicePixelRatio();
+        }
+    }
+
+    const QPixmap pixmap = icon.pixmap(QSize(qRound(16 / scaleFactor), qRound(16 / scaleFactor)));
     QByteArray byteArray;
     QBuffer buffer(&byteArray);
     pixmap.save(&buffer, "PNG");

@@ -7890,7 +7890,7 @@ void MainWindow::PrintPatternMessage(QEvent *event)
     ui->plainTextEditPatternMessages->appendPlainText(message);
     if (not m_unreadPatternMessage.isNull())
     {
-        m_unreadPatternMessage->setText(DialogWarningIcon() + tr("Pattern messages"));
+        m_unreadPatternMessage->setText(DialogWarningIcon(m_unreadPatternMessage) + tr("Pattern messages"));
     }
 }
 

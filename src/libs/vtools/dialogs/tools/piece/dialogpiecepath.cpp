@@ -1842,7 +1842,7 @@ auto DialogPiecePath::PathIsValid() const -> bool
 {
     if (CreatePath().PathPoints(data).count() < 2)
     {
-        ui->helpLabel->setText(DialogWarningIcon() + tr("You need more points!"));
+        ui->helpLabel->setText(DialogWarningIcon(ui->helpLabel) + tr("You need more points!"));
         return false;
     }
 
@@ -1850,8 +1850,8 @@ auto DialogPiecePath::PathIsValid() const -> bool
     if (GetType() == PiecePathType::CustomSeamAllowance && FirstPointEqualLast(ui->listWidget, data, error))
     {
         ui->helpLabel->setText(QStringLiteral("%1%2 %3").arg(
-            DialogWarningIcon(), tr("First point of <b>custom seam allowance</b> cannot be equal to the last point!"),
-            error));
+            DialogWarningIcon(ui->helpLabel),
+            tr("First point of <b>custom seam allowance</b> cannot be equal to the last point!"), error));
         return false;
     }
 
@@ -1859,41 +1859,42 @@ auto DialogPiecePath::PathIsValid() const -> bool
     if (DoublePoints(ui->listWidget, data, error))
     {
         ui->helpLabel->setText(
-            QStringLiteral("%1%2 %3").arg(DialogWarningIcon(), tr("You have double points!"), error));
+            QStringLiteral("%1%2 %3").arg(DialogWarningIcon(ui->helpLabel), tr("You have double points!"), error));
         return false;
     }
 
     error.clear();
     if (DoubleCurves(ui->listWidget, data, error))
     {
-        ui->helpLabel->setText(
-            QStringLiteral("%1%2 %3").arg(DialogWarningIcon(), tr("The same curve repeats twice!"), error));
+        ui->helpLabel->setText(QStringLiteral("%1%2 %3").arg(DialogWarningIcon(ui->helpLabel),
+                                                             tr("The same curve repeats twice!"), error));
         return false;
     }
 
     if (GetType() == PiecePathType::CustomSeamAllowance && not EachPointLabelIsUnique(ui->listWidget))
     {
-        ui->helpLabel->setText(DialogWarningIcon() +
+        ui->helpLabel->setText(DialogWarningIcon(ui->helpLabel) +
                                tr("Each point in the <b>custom seam allowance</b> path must be unique!"));
         return false;
     }
 
     if (not m_showMode && ui->comboBoxPiece->count() <= 0)
     {
-        ui->helpLabel->setText(DialogWarningIcon() + tr("List of details is empty!"));
+        ui->helpLabel->setText(DialogWarningIcon(ui->helpLabel) + tr("List of details is empty!"));
         return false;
     }
 
     if (not m_showMode && ui->comboBoxPiece->currentIndex() == -1)
     {
-        ui->helpLabel->setText(DialogWarningIcon() + tr("Please, select a detail to insert into!"));
+        ui->helpLabel->setText(DialogWarningIcon(ui->helpLabel) + tr("Please, select a detail to insert into!"));
         return false;
     }
 
     error.clear();
     if (InvalidSegment(ui->listWidget, data, error))
     {
-        ui->helpLabel->setText(QStringLiteral("%1%2 %3").arg(DialogWarningIcon(), tr("Invalid segment!"), error));
+        ui->helpLabel->setText(
+            QStringLiteral("%1%2 %3").arg(DialogWarningIcon(ui->helpLabel), tr("Invalid segment!"), error));
         return false;
     }
 

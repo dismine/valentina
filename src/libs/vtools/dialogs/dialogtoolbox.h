@@ -92,7 +92,7 @@ auto DoublePoints(QListWidget *listWidget, const VContainer *data, QString &erro
 auto DoubleCurves(QListWidget *listWidget, const VContainer *data, QString &error) -> bool;
 auto EachPointLabelIsUnique(QListWidget *listWidget) -> bool;
 auto InvalidSegment(QListWidget *listWidget, const VContainer *data, QString &error) -> bool;
-auto DialogWarningIcon() -> QString;
+auto DialogWarningIcon(QWidget* w) -> QString;
 auto NodeFont(QFont font, bool nodeExcluded = false) -> QFont;
 void CurrentCurveLength(vidtype curveId, VContainer *data);
 void SetTabStopDistance(QPlainTextEdit *edit, int tabWidthChar = 4);

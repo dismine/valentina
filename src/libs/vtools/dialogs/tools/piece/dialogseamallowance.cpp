@@ -3388,13 +3388,14 @@ auto DialogSeamAllowance::MainPathIsValid() const -> bool
 {
     if (CreatePiece().MainPathPoints(data).count() < 3)
     {
-        uiTabPaths->helpLabel->setText(DialogWarningIcon() + tr("You need more points!"));
+        uiTabPaths->helpLabel->setText(DialogWarningIcon(uiTabPaths->helpLabel) + tr("You need more points!"));
         return false;
     }
 
     if (not MainPathIsClockwise())
     {
-        uiTabPaths->helpLabel->setText(DialogWarningIcon() + tr("You have to choose points in a clockwise direction!"));
+        uiTabPaths->helpLabel->setText(DialogWarningIcon(uiTabPaths->helpLabel) +
+                                       tr("You have to choose points in a clockwise direction!"));
         return false;
     }
 
@@ -3402,29 +3403,30 @@ auto DialogSeamAllowance::MainPathIsValid() const -> bool
     if (FirstPointEqualLast(uiTabPaths->listWidgetMainPath, data, error))
     {
         uiTabPaths->helpLabel->setText(QStringLiteral("%1%2 %3").arg(
-            DialogWarningIcon(), tr("First point cannot be equal to the last point!"), error));
+            DialogWarningIcon(uiTabPaths->helpLabel), tr("First point cannot be equal to the last point!"), error));
         return false;
     }
 
     error.clear();
     if (DoublePoints(uiTabPaths->listWidgetMainPath, data, error))
     {
-        uiTabPaths->helpLabel->setText(
-            QStringLiteral("%1%2 %3").arg(DialogWarningIcon(), tr("You have double points!"), error));
+        uiTabPaths->helpLabel->setText(QStringLiteral("%1%2 %3").arg(DialogWarningIcon(uiTabPaths->helpLabel),
+                                                                     tr("You have double points!"), error));
         return false;
     }
 
     error.clear();
     if (DoubleCurves(uiTabPaths->listWidgetMainPath, data, error))
     {
-        uiTabPaths->helpLabel->setText(
-            QStringLiteral("%1%2 %3").arg(DialogWarningIcon(), tr("The same curve repeats twice!"), error));
+        uiTabPaths->helpLabel->setText(QStringLiteral("%1%2 %3").arg(DialogWarningIcon(uiTabPaths->helpLabel),
+                                                                     tr("The same curve repeats twice!"), error));
         return false;
     }
 
     if (not EachPointLabelIsUnique(uiTabPaths->listWidgetMainPath))
     {
-        uiTabPaths->helpLabel->setText(DialogWarningIcon() + tr("Each point in the path must be unique!"));
+        uiTabPaths->helpLabel->setText(DialogWarningIcon(uiTabPaths->helpLabel) +
+                                       tr("Each point in the path must be unique!"));
         return false;
     }
 
@@ -3432,7 +3434,7 @@ auto DialogSeamAllowance::MainPathIsValid() const -> bool
     if (InvalidSegment(uiTabPaths->listWidgetMainPath, data, error))
     {
         uiTabPaths->helpLabel->setText(
-            QStringLiteral("%1%2 %3").arg(DialogWarningIcon(), tr("Invalid segment!"), error));
+            QStringLiteral("%1%2 %3").arg(DialogWarningIcon(uiTabPaths->helpLabel), tr("Invalid segment!"), error));
         return false;
     }
 
@@ -3456,14 +3458,15 @@ auto DialogSeamAllowance::MirrorLineIsValid() const -> bool
     if (startPoint == NULL_ID && endPoint != NULL_ID)
     {
         ChangeColor(uiTabPaths->labelMLStartPoint, errorColor);
-        uiTabPaths->helpLabel->setText(DialogWarningIcon() + tr("Invalid mirror line start point!"));
+        uiTabPaths->helpLabel->setText(DialogWarningIcon(uiTabPaths->helpLabel) +
+                                       tr("Invalid mirror line start point!"));
         return false;
     }
 
     if (startPoint != NULL_ID && endPoint == NULL_ID)
     {
         ChangeColor(uiTabPaths->labelMLEndPoint, errorColor);
-        uiTabPaths->helpLabel->setText(DialogWarningIcon() + tr("Invalid mirror line end point!"));
+        uiTabPaths->helpLabel->setText(DialogWarningIcon(uiTabPaths->helpLabel) + tr("Invalid mirror line end point!"));
         return false;
     }
 
@@ -3471,7 +3474,8 @@ auto DialogSeamAllowance::MirrorLineIsValid() const -> bool
     {
         ChangeColor(uiTabPaths->labelMLStartPoint, errorColor);
         ChangeColor(uiTabPaths->labelMLEndPoint, errorColor);
-        uiTabPaths->helpLabel->setText(DialogWarningIcon() + tr("Start and end mirror line points must be unique!"));
+        uiTabPaths->helpLabel->setText(DialogWarningIcon(uiTabPaths->helpLabel) +
+                                       tr("Start and end mirror line points must be unique!"));
         return false;
     }
 
@@ -3490,14 +3494,15 @@ auto DialogSeamAllowance::MirrorLineIsValid() const -> bool
     if (!uniquePoints.contains(startPoint))
     {
         ChangeColor(uiTabPaths->labelMLStartPoint, errorColor);
-        uiTabPaths->helpLabel->setText(DialogWarningIcon() + tr("Invalid mirror line start point!"));
+        uiTabPaths->helpLabel->setText(DialogWarningIcon(uiTabPaths->helpLabel) +
+                                       tr("Invalid mirror line start point!"));
         return false;
     }
 
     if (!uniquePoints.contains(endPoint))
     {
         ChangeColor(uiTabPaths->labelMLEndPoint, errorColor);
-        uiTabPaths->helpLabel->setText(DialogWarningIcon() + tr("Invalid mirror line end point!"));
+        uiTabPaths->helpLabel->setText(DialogWarningIcon(uiTabPaths->helpLabel) + tr("Invalid mirror line end point!"));
         return false;
     }
 
@@ -3505,7 +3510,8 @@ auto DialogSeamAllowance::MirrorLineIsValid() const -> bool
     {
         ChangeColor(uiTabPaths->labelMLStartPoint, errorColor);
         ChangeColor(uiTabPaths->labelMLEndPoint, errorColor);
-        uiTabPaths->helpLabel->setText(DialogWarningIcon() + tr("Mirror points must be neighbors!"));
+        uiTabPaths->helpLabel->setText(DialogWarningIcon(uiTabPaths->helpLabel) +
+                                       tr("Mirror points must be neighbors!"));
         return false;
     }
 
