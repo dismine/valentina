@@ -45,7 +45,7 @@ auto LogDirPath(const QString &appName) -> QString
 {
     const auto logs = QStringLiteral("Logs");
 
-    QString logDirPath = QStandardPaths::writableLocation(QStandardPaths::ConfigLocation);
+    QString const logDirPath = QStandardPaths::writableLocation(QStandardPaths::ConfigLocation);
     if (logDirPath.isEmpty())
     {
 #if defined(Q_OS_WINDOWS)
@@ -55,7 +55,7 @@ auto LogDirPath(const QString &appName) -> QString
 #endif
     }
 #if defined(Q_OS_WINDOWS)
-    auto path = QStringList{logDirPath, logs}.join(QDir::separator());
+    auto path = QStringList{logDirPath, VER_COMPANYNAME_STR, appName, logs}.join(QDir::separator());
 #else
     auto path = QStringList{logDirPath, VER_COMPANYNAME_STR, logs, appName}.join(QDir::separator());
 #endif
@@ -72,9 +72,12 @@ VCrashPaths::VCrashPaths(QString exeDir)
 //---------------------------------------------------------------------------------------------------------------------
 auto VCrashPaths::GetAttachmentPath(const QString &appName) -> QString
 {
-    return QStringLiteral("%1/%2-pid%3.log")
-        .arg(LogDirPath(appName), appName.toLower())
-        .arg(QCoreApplication::applicationPid());
+    QString path = QStringLiteral("%1/%2-pid%3.log")
+                       .arg(LogDirPath(appName), appName.toLower())
+                       .arg(QCoreApplication::applicationPid());
+    path = QDir::toNativeSeparators(path);
+    qDebug() << "Crashpad attachment path:" << path;
+    return path;
 }
 
 //---------------------------------------------------------------------------------------------------------------------

@@ -165,7 +165,7 @@ auto GetExecutableDir() -> QString
 //---------------------------------------------------------------------------------------------------------------------
 auto InitializeCrashpad(const QString &appName) -> bool
 {
-    QScopedPointer<VCommonSettings> const appSettings(AppSettings(appName));
+    QScopedPointer<VCommonSettings> const appSettings(AppSettings(appName.toLower()));
 
     if (!appSettings->IsSendCrashReport())
     {
@@ -231,7 +231,7 @@ auto InitializeCrashpad(const QString &appName) -> bool
     QMap<std::string, std::string> annotations;
     annotations["format"] = "minidump";                       // Required: Crashpad setting to save crash as a
     annotations["database"] = dbName.toStdString();           // Required: BugSplat database
-    annotations["product"] = appName.toStdString();           // Required: BugSplat appName
+    annotations["product"] = appName.toLower().toStdString(); // Required: BugSplat appName
     annotations["version"] = AppCrashVersion().toStdString(); // Required: BugSplat appVersion
 
     QString clientID = appSettings->GetClientID();
