@@ -91,12 +91,13 @@ Module {
         property string repoStateRevision
 
         configure: {
+            console.info("Reading the repo state.");
             var commitsProbe = new Process();
             try {
                 commitsProbe.setWorkingDirectory(theRepoDir);
                 var exitCode = commitsProbe.exec(tool, ["rev-list", "HEAD", "--count"], false);
                 if (exitCode !== 0) {
-                    console.info("Cannot read repo state.");
+                    console.info("Cannot read the repo state.");
                     return;
                 }
 
@@ -119,6 +120,7 @@ Module {
                 proc.exec(tool, ["describe", "--always", "HEAD"], true);
                 repoState = proc.readStdOut().trim();
                 if (repoState) {
+                    console.info("Repo state:" + repoState);
                     found = true;
 
                     const tagSections = repoState.split("-");
@@ -130,6 +132,8 @@ Module {
                     } else  {
                         repoStateRevision = tagSections[0];
                     }
+                } else {
+                    console.info("Unable to get the repo state. " + repoState);
                 }
             } finally {
                 proc.close();
