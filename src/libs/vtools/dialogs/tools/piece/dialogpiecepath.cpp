@@ -351,7 +351,7 @@ void DialogPiecePath::ShowContextMenu(const QPoint &pos)
     }
 
     QListWidgetItem *rowItem = ui->listWidget->item(row);
-    SCASSERT(rowItem != nullptr);
+    SCASSERT(rowItem != nullptr)
     auto rowNode = qvariant_cast<VPieceNode>(rowItem->data(Qt::UserRole));
 
     QMenu menu;

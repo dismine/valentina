@@ -192,7 +192,7 @@ auto RowNode(QListWidget *listWidget, int i) -> VPieceNode
     }
 
     const QListWidgetItem *rowItem = listWidget->item(i);
-    SCASSERT(rowItem != nullptr);
+    SCASSERT(rowItem != nullptr)
     return qvariant_cast<VPieceNode>(rowItem->data(Qt::UserRole));
 }
 
@@ -403,7 +403,7 @@ auto FindNotExcludedNeighborNodeDown(QListWidget *listWidget, int candidate) -> 
     do
     {
         const QListWidgetItem *rowItem = listWidget->item(i);
-        SCASSERT(rowItem != nullptr);
+        SCASSERT(rowItem != nullptr)
         rowNode = qvariant_cast<VPieceNode>(rowItem->data(Qt::UserRole));
 
         if (not rowNode.IsExcluded())
@@ -449,7 +449,7 @@ auto FindNotExcludedNeighborNodeUp(QListWidget *listWidget, int candidate) -> in
     do
     {
         const QListWidgetItem *rowItem = listWidget->item(i);
-        SCASSERT(rowItem != nullptr);
+        SCASSERT(rowItem != nullptr)
         rowNode = qvariant_cast<VPieceNode>(rowItem->data(Qt::UserRole));
 
         if (not rowNode.IsExcluded())
@@ -493,7 +493,7 @@ auto FindNotExcludedNodeDown(QListWidget *listWidget, int candidate) -> int
     do
     {
         const QListWidgetItem *rowItem = listWidget->item(i);
-        SCASSERT(rowItem != nullptr);
+        SCASSERT(rowItem != nullptr)
         rowNode = qvariant_cast<VPieceNode>(rowItem->data(Qt::UserRole));
 
         if (not rowNode.IsExcluded())
@@ -523,7 +523,7 @@ auto FindNotExcludedNodeUp(QListWidget *listWidget, int candidate) -> int
     do
     {
         const QListWidgetItem *rowItem = listWidget->item(i);
-        SCASSERT(rowItem != nullptr);
+        SCASSERT(rowItem != nullptr)
         rowNode = qvariant_cast<VPieceNode>(rowItem->data(Qt::UserRole));
 
         if (not rowNode.IsExcluded())
@@ -596,7 +596,7 @@ auto EachPointLabelIsUnique(QListWidget *listWidget) -> bool
     for (int i = 0; i < listWidget->count(); ++i)
     {
         const QListWidgetItem *rowItem = listWidget->item(i);
-        SCASSERT(rowItem != nullptr);
+        SCASSERT(rowItem != nullptr)
         const auto rowNode = qvariant_cast<VPieceNode>(rowItem->data(Qt::UserRole));
         if (rowNode.GetTypeTool() == Tool::NodePoint && not rowNode.IsExcluded())
         {
@@ -802,7 +802,7 @@ auto FindNotExcludedPointDown(QListWidget *listWidget, int start) -> int
     do
     {
         const QListWidgetItem *rowItem = listWidget->item(i);
-        SCASSERT(rowItem != nullptr);
+        SCASSERT(rowItem != nullptr)
         auto rowNode = qvariant_cast<VPieceNode>(rowItem->data(Qt::UserRole));
 
         if (not rowNode.IsExcluded() && rowNode.GetTypeTool() == Tool::NodePoint && rowNode.GetId() != NULL_ID)
@@ -839,7 +839,7 @@ auto FindNotExcludedCurveDown(QListWidget *listWidget, int start) -> int
     do
     {
         const QListWidgetItem *rowItem = listWidget->item(i);
-        SCASSERT(rowItem != nullptr);
+        SCASSERT(rowItem != nullptr)
         auto rowNode = qvariant_cast<VPieceNode>(rowItem->data(Qt::UserRole));
 
         if (not rowNode.IsExcluded() && rowNode.GetTypeTool() != Tool::NodePoint && rowNode.GetId() != NULL_ID)
@@ -1007,7 +1007,7 @@ auto NodeRowIndex(QListWidget *listWidget, quint32 id) -> int
     for (int i = 0, sz = listWidget->count(); i < sz; ++i)
     {
         const QListWidgetItem *rowItem = listWidget->item(i);
-        SCASSERT(rowItem != nullptr);
+        SCASSERT(rowItem != nullptr)
         auto rowNode = qvariant_cast<VPieceNode>(rowItem->data(Qt::UserRole));
 
         if (id == rowNode.GetId())

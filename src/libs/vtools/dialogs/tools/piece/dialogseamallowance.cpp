@@ -1091,7 +1091,7 @@ void DialogSeamAllowance::ShowMainPathContextMenu(const QPoint &pos)
     }
 
     QListWidgetItem *rowItem = uiTabPaths->listWidgetMainPath->item(row);
-    SCASSERT(rowItem != nullptr);
+    SCASSERT(rowItem != nullptr)
     auto rowNode = qvariant_cast<VPieceNode>(rowItem->data(Qt::UserRole));
 
     QMenu menu;
@@ -1200,7 +1200,7 @@ void DialogSeamAllowance::ShowCustomSAContextMenu(const QPoint &pos)
     QAction *actionOption = menu->addAction(FromTheme(VThemeIcon::PreferencesOther), tr("Options"));
 
     QListWidgetItem *rowItem = uiTabPaths->listWidgetCustomSA->item(row);
-    SCASSERT(rowItem != nullptr);
+    SCASSERT(rowItem != nullptr)
     auto record = qvariant_cast<CustomSARecord>(rowItem->data(Qt::UserRole));
 
     QAction *actionReverse = menu->addAction(tr("Reverse"));
@@ -1260,7 +1260,7 @@ void DialogSeamAllowance::ShowInternalPathsContextMenu(const QPoint &pos)
     else if (selectedAction == actionOption)
     {
         QListWidgetItem *rowItem = uiTabPaths->listWidgetInternalPaths->item(row);
-        SCASSERT(rowItem != nullptr);
+        SCASSERT(rowItem != nullptr)
         const auto pathId = qvariant_cast<quint32>(rowItem->data(Qt::UserRole));
 
         auto *dialog = new DialogPiecePath(data, m_doc, pathId, this);
@@ -1306,7 +1306,7 @@ void DialogSeamAllowance::ShowPlaceLabelsContextMenu(const QPoint &pos)
     }
 
     QListWidgetItem *rowItem = uiTabPlaceLabels->listWidgetPlaceLabels->item(row);
-    SCASSERT(rowItem != nullptr);
+    SCASSERT(rowItem != nullptr)
     const auto labelId = qvariant_cast<quint32>(rowItem->data(Qt::UserRole));
     VPlaceLabelItem currentLabel = CurrentPlaceLabel(labelId);
 
@@ -1589,7 +1589,7 @@ void DialogSeamAllowance::CSAStartPointChanged(int index)
     }
 
     QListWidgetItem *rowItem = uiTabPaths->listWidgetCustomSA->item(row);
-    SCASSERT(rowItem != nullptr);
+    SCASSERT(rowItem != nullptr)
     auto record = qvariant_cast<CustomSARecord>(rowItem->data(Qt::UserRole));
     record.startPoint = uiTabPaths->comboBoxStartPoint->currentData().toUInt();
     rowItem->setData(Qt::UserRole, QVariant::fromValue(record));
@@ -1607,7 +1607,7 @@ void DialogSeamAllowance::CSAEndPointChanged(int index)
     }
 
     QListWidgetItem *rowItem = uiTabPaths->listWidgetCustomSA->item(row);
-    SCASSERT(rowItem != nullptr);
+    SCASSERT(rowItem != nullptr)
     auto record = qvariant_cast<CustomSARecord>(rowItem->data(Qt::UserRole));
     record.endPoint = uiTabPaths->comboBoxEndPoint->currentData().toUInt();
     rowItem->setData(Qt::UserRole, QVariant::fromValue(record));
@@ -1635,7 +1635,7 @@ void DialogSeamAllowance::CSAIncludeTypeChanged(int index)
     }
 
     QListWidgetItem *rowItem = uiTabPaths->listWidgetCustomSA->item(row);
-    SCASSERT(rowItem != nullptr);
+    SCASSERT(rowItem != nullptr)
     auto record = qvariant_cast<CustomSARecord>(rowItem->data(Qt::UserRole));
     record.includeType = static_cast<PiecePathIncludeType>(uiTabPaths->comboBoxIncludeType->currentData().toUInt());
     rowItem->setData(Qt::UserRole, QVariant::fromValue(record));
@@ -3483,7 +3483,7 @@ auto DialogSeamAllowance::MirrorLineIsValid() const -> bool
     for (int i = 0; i < uiTabPaths->listWidgetMainPath->count(); ++i)
     {
         const QListWidgetItem *rowItem = uiTabPaths->listWidgetMainPath->item(i);
-        SCASSERT(rowItem != nullptr);
+        SCASSERT(rowItem != nullptr)
         const auto rowNode = qvariant_cast<VPieceNode>(rowItem->data(Qt::UserRole));
         if (rowNode.GetTypeTool() == Tool::NodePoint && not rowNode.IsExcluded())
         {
@@ -3836,7 +3836,7 @@ void DialogSeamAllowance::InitMainPathTab()
                 }
 
                 QListWidgetItem *rowItem = uiTabPaths->listWidgetMainPath->item(row);
-                SCASSERT(rowItem != nullptr);
+                SCASSERT(rowItem != nullptr)
                 auto rowNode = qvariant_cast<VPieceNode>(rowItem->data(Qt::UserRole));
 
                 rowNode.SetReverse(not rowNode.GetReverse());
@@ -3855,7 +3855,7 @@ void DialogSeamAllowance::InitMainPathTab()
                 }
 
                 QListWidgetItem *rowItem = uiTabPaths->listWidgetMainPath->item(row);
-                SCASSERT(rowItem != nullptr);
+                SCASSERT(rowItem != nullptr)
                 auto rowNode = qvariant_cast<VPieceNode>(rowItem->data(Qt::UserRole));
 
                 rowNode.SetExcluded(not rowNode.IsExcluded());
@@ -3875,7 +3875,7 @@ void DialogSeamAllowance::InitMainPathTab()
                 }
 
                 QListWidgetItem *rowItem = uiTabPaths->listWidgetMainPath->item(row);
-                SCASSERT(rowItem != nullptr);
+                SCASSERT(rowItem != nullptr)
                 auto rowNode = qvariant_cast<VPieceNode>(rowItem->data(Qt::UserRole));
 
                 rowNode.SetTurnPoint(not rowNode.IsTurnPoint());
@@ -3894,7 +3894,7 @@ void DialogSeamAllowance::InitMainPathTab()
                 }
 
                 QListWidgetItem *rowItem = uiTabPaths->listWidgetMainPath->item(row);
-                SCASSERT(rowItem != nullptr);
+                SCASSERT(rowItem != nullptr)
                 auto rowNode = qvariant_cast<VPieceNode>(rowItem->data(Qt::UserRole));
 
                 rowNode.SetCheckUniqueness(not rowNode.IsCheckUniqueness());
@@ -3913,7 +3913,7 @@ void DialogSeamAllowance::InitMainPathTab()
                 }
 
                 QListWidgetItem *rowItem = uiTabPaths->listWidgetMainPath->item(row);
-                SCASSERT(rowItem != nullptr);
+                SCASSERT(rowItem != nullptr)
                 auto rowNode = qvariant_cast<VPieceNode>(rowItem->data(Qt::UserRole));
 
                 rowNode.SetPassmark(checked);
@@ -5565,7 +5565,7 @@ void DialogSeamAllowance::SetOptionControls()
     }
 
     QListWidgetItem *rowItem = uiTabPaths->listWidgetMainPath->item(row);
-    SCASSERT(rowItem != nullptr);
+    SCASSERT(rowItem != nullptr)
     auto rowNode = qvariant_cast<VPieceNode>(rowItem->data(Qt::UserRole));
 
     if (rowNode.GetTypeTool() != Tool::NodePoint)

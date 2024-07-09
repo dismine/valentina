@@ -216,7 +216,7 @@ void DialogInsertNode::ShowContextMenu(const QPoint &pos)
     QScopedPointer<QMenu> const menu(new QMenu());
 
     QListWidgetItem *rowItem = ui->listWidget->item(row);
-    SCASSERT(rowItem != nullptr);
+    SCASSERT(rowItem != nullptr)
 
     QAction *actionDelete = menu->addAction(FromTheme(VThemeIcon::EditDelete), tr("Delete"));
 
