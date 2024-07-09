@@ -4668,15 +4668,19 @@ template <typename T> auto VPattern::ToolBoundingRect(const QRectF &rec, quint32
     QRectF recTool = rec;
     if (tools.contains(id))
     {
-        const T *vTool = qobject_cast<T *>(tools.value(id));
-        SCASSERT(vTool != nullptr)
+        if (const T *vTool = qobject_cast<T *>(tools.value(id)); vTool != nullptr)
+        {
+            QRectF childrenRect = vTool->childrenBoundingRect();
+            // map to scene coordinate.
+            childrenRect.translate(vTool->scenePos());
 
-        QRectF childrenRect = vTool->childrenBoundingRect();
-        // map to scene coordinate.
-        childrenRect.translate(vTool->scenePos());
-
-        recTool = recTool.united(vTool->sceneBoundingRect());
-        recTool = recTool.united(childrenRect);
+            recTool = recTool.united(vTool->sceneBoundingRect());
+            recTool = recTool.united(childrenRect);
+        }
+        else
+        {
+            qDebug() << "qobject_cast failed for tool with id=" << id;
+        }
     }
     else
     {
