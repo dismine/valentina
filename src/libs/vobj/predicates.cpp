@@ -446,7 +446,6 @@ auto scale_expansion_zeroelim(int elen, qreal *e, qreal b, qreal *h) -> int /* e
     qreal hh;
     INEXACT qreal product1;
     qreal product0;
-    int eindex, hindex;
     qreal enow;
     INEXACT qreal bvirt;
     qreal avirt, bround, around;
@@ -457,12 +456,12 @@ auto scale_expansion_zeroelim(int elen, qreal *e, qreal b, qreal *h) -> int /* e
 
     Split(b, bhi, blo);
     Two_Product_Presplit(e[0], b, bhi, blo, Q, hh);
-    hindex = 0;
+    int hindex = 0;
     if (hh != 0)
     {
         h[hindex++] = hh;
     }
-    for (eindex = 1; eindex < elen; eindex++)
+    for (int eindex = 1; eindex < elen; eindex++)
     {
         enow = e[eindex];
         Two_Product_Presplit(enow, b, bhi, blo, product1, product0);
@@ -495,10 +494,9 @@ auto scale_expansion_zeroelim(int elen, qreal *e, qreal b, qreal *h) -> int /* e
 auto estimate(int elen, qreal *e) -> qreal
 {
     qreal Q;
-    int eindex;
 
     Q = e[0];
-    for (eindex = 1; eindex < elen; eindex++)
+    for (int eindex = 1; eindex < elen; eindex++)
     {
         Q += e[eindex];
     }

@@ -178,14 +178,13 @@ static void halfedge_free(halfedge_t *d)
 void del_free_halfedges(delaunay_t *del);
 void del_free_halfedges(delaunay_t *del)
 {
-    quint32 i;
     halfedge_t *d, *sig;
 
     /* if there is nothing to do */
     if (del->points == nullptr)
         return;
 
-    for (i = 0; i <= (del->end_point - del->start_point); i++)
+    for (quint32 i = 0; i <= (del->end_point - del->start_point); i++)
     {
         /* free all the halfedges around the point */
         d = del->points[i]->he;
@@ -985,7 +984,6 @@ static void build_halfedge_face(delaunay_t *del, halfedge_t *d)
 void del_build_faces(delaunay_t *del);
 void del_build_faces(delaunay_t *del)
 {
-    quint32 i;
     halfedge_t *curr;
 
     del->num_faces = 0;
@@ -994,7 +992,7 @@ void del_build_faces(delaunay_t *del)
     /* build external face first */
     build_halfedge_face(del, del->rightmost_he->pair);
 
-    for (i = del->start_point; i <= del->end_point; i++)
+    for (quint32 i = del->start_point; i <= del->end_point; i++)
     {
         curr = del->points[i]->he;
 

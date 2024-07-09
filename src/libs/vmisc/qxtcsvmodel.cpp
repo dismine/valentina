@@ -601,9 +601,8 @@ auto QxtCsvModel::toCSV(QIODevice *dest, QString &error, bool withHeader, QChar 
     -> bool
 {
     const QxtCsvModelPrivate &d_ptr = qxt_d();
-    int row, col, rows, cols;
-    rows = rowCount();
-    cols = columnCount();
+    int rows = rowCount();
+    int cols = columnCount();
     QString data;
     if (not dest->isOpen() && not dest->open(QIODevice::WriteOnly | QIODevice::Truncate))
     {
@@ -624,7 +623,7 @@ auto QxtCsvModel::toCSV(QIODevice *dest, QString &error, bool withHeader, QChar 
     if (withHeader)
     {
         data = QString();
-        for (col = 0; col < cols; ++col)
+        for (int col = 0; col < cols; ++col)
         {
             if (col > 0)
             {
@@ -634,11 +633,11 @@ auto QxtCsvModel::toCSV(QIODevice *dest, QString &error, bool withHeader, QChar 
         }
         stream << data << Qt::endl;
     }
-    for (row = 0; row < rows; ++row)
+    for (int row = 0; row < rows; ++row)
     {
         const QStringList &rowData = d_ptr.csvData[row];
         data = QString();
-        for (col = 0; col < cols; ++col)
+        for (int col = 0; col < cols; ++col)
         {
             if (col > 0)
             {

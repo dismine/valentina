@@ -1950,10 +1950,9 @@ void MainWindow::ExportToCSVData(const QString &fileName, bool withHeader, int m
 
     auto SavePreviewCalculation = [&currentRow, &csv, increments](bool save)
     {
-        QMap<QString, QSharedPointer<VIncrement>>::const_iterator i;
         QMap<quint32, QString> map;
         // Sorting QHash by id
-        for (i = increments.constBegin(); i != increments.constEnd(); ++i)
+        for (auto i = increments.constBegin(); i != increments.constEnd(); ++i)
         {
             const QSharedPointer<VIncrement> &incr = i.value();
             if (incr->IsPreviewCalculation() == save)

@@ -163,7 +163,6 @@ void PathArc(QPainterPath &path, qreal rx, qreal ry, qreal x_axis_rotation, int 
     qreal x0, y0, x1, y1, xc, yc;
     qreal d, sfactor, sfactor_sq;
     qreal th0, th1, th_arc;
-    int i, n_segs;
     qreal dx, dy, dx1, dy1, Px, Py, check;
     rx = qAbs(rx);
     ry = qAbs(ry);
@@ -223,8 +222,8 @@ void PathArc(QPainterPath &path, qreal rx, qreal ry, qreal x_axis_rotation, int 
     {
         th_arc -= 2 * V_PI;
     }
-    n_segs = qCeil(qAbs(th_arc / (V_PI * 0.5 + 0.001)));
-    for (i = 0; i < n_segs; i++)
+    int n_segs = qCeil(qAbs(th_arc / (V_PI * 0.5 + 0.001)));
+    for (int i = 0; i < n_segs; i++)
     {
         PathArcSegment(path, xc, yc, th0 + i * th_arc / n_segs, th0 + (i + 1) * th_arc / n_segs, rx, ry,
                        x_axis_rotation);

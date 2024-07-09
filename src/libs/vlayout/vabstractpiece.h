@@ -620,10 +620,9 @@ template <class T> inline auto VAbstractPiece::CheckLoops(QVector<T> points) -> 
     }
 
     bool loopFound = false;
-    qint32 i;
     const int maxLoops = 10000; // limit number of loops to be removed
 
-    for (i = 0; i < maxLoops; ++i)
+    for (qint32 i = 0; i < maxLoops; ++i)
     {
         points = CheckLoop(points, loopFound);
         if (not loopFound)
@@ -646,8 +645,7 @@ template <class T> inline auto VAbstractPiece::CheckLoop(const QVector<T> &point
     QVector<T> ekvPoints;
     ekvPoints.reserve(points.size());
 
-    qint32 i;
-    for (i = 0; i < points.size(); ++i)
+    for (qint32 i = 0; i < points.size(); ++i)
     {
         /*Last three points no need to check.*/
         /*Triangle can not contain a loop*/

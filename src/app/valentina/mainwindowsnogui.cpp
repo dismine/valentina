@@ -905,8 +905,7 @@ auto MainWindowsNoGUI::PrepareDetailsForLayout(const QVector<DetailForLayout> &d
     layoutDetails.reserve(details.size());
     const QFuture<VLayoutPiece> future = futureWatcher.future();
 
-    QFuture<VLayoutPiece>::const_iterator i;
-    for (i = future.constBegin(); i != future.constEnd(); ++i)
+    for (auto i = future.constBegin(); i != future.constEnd(); ++i)
     {
         layoutDetails.append(*i);
     }

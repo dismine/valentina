@@ -234,8 +234,7 @@ auto DRW_Converter::toUtf8(const std::string &s) -> std::string
 {
     std::string result;
     unsigned int j = 0;
-    unsigned int i = 0;
-    for (i = 0; i < s.length(); i++)
+    for (unsigned int i = 0; i < s.length(); i++)
     {
         auto c = static_cast<unsigned char>(s.at(i));
         if (c < 0x80)

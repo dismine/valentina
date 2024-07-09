@@ -27,14 +27,14 @@
 
 #include "../vproperty_p.h"
 
-VPE::VObjectProperty::VObjectProperty(const QString& name)
-    : VProperty(name,
+VPE::VObjectProperty::VObjectProperty(const QString &name)
+  : VProperty(name,
 #if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
-                QMetaType::UInt),
+              QMetaType::UInt),
 #else
-                QVariant::UInt),
+              QVariant::UInt),
 #endif
-      objects()
+    objects()
 {
     VProperty::d_ptr->VariantValue = 0;
 #if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
@@ -58,7 +58,7 @@ auto VPE::VObjectProperty::data(int column, int role) const -> QVariant
     {
         return VProperty::d_ptr->VariantValue;
     }
-    
+
     if (column == DPC_Data && Qt::EditRole == role)
     {
         return tmpEditor->currentIndex();
@@ -78,7 +78,7 @@ auto VPE::VObjectProperty::createEditor(QWidget *parent, const QStyleOptionViewI
     FillList(tmpEditor, objects);
     tmpEditor->setCurrentIndex(tmpEditor->findData(VProperty::d_ptr->VariantValue.toUInt()));
     connect(tmpEditor, QOverload<int>::of(&QComboBox::currentIndexChanged), this,
-                     &VObjectProperty::currentIndexChanged);
+            &VObjectProperty::currentIndexChanged);
 
     VProperty::d_ptr->editor = tmpEditor;
     return VProperty::d_ptr->editor;
@@ -137,7 +137,7 @@ auto VPE::VObjectProperty::getObjects() const -> QMap<QString, quint32>
 }
 
 //! Sets the value of the property
-void VPE::VObjectProperty::setValue(const QVariant& value)
+void VPE::VObjectProperty::setValue(const QVariant &value)
 {
     VProperty::d_ptr->VariantValue = value;
 #if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
@@ -166,15 +166,14 @@ void VPE::VObjectProperty::currentIndexChanged(int index)
 {
     Q_UNUSED(index)
     auto *event = new UserChangeEvent();
-    QCoreApplication::postEvent ( VProperty::d_ptr->editor, event );
+    QCoreApplication::postEvent(VProperty::d_ptr->editor, event);
 }
 
 void VPE::VObjectProperty::FillList(QComboBox *box, const QMap<QString, quint32> &list) const
 {
     box->clear();
 
-    QMap<QString, quint32>::const_iterator i;
-    for (i = list.constBegin(); i != list.constEnd(); ++i)
+    for (auto i = list.constBegin(); i != list.constEnd(); ++i)
     {
         box->addItem(i.key(), i.value());
     }

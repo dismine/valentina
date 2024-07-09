@@ -2611,8 +2611,7 @@ void TMainWindow::ExportToIndividual()
     VMeasurements individualMeasurements(m_mUnit, tmpData.data());
 
     const QMap<int, QSharedPointer<VMeasurement>> orderedTable = OrderedMeasurements();
-    QMap<int, QSharedPointer<VMeasurement>>::const_iterator iMap;
-    for (iMap = orderedTable.constBegin(); iMap != orderedTable.constEnd(); ++iMap)
+    for (auto iMap = orderedTable.constBegin(); iMap != orderedTable.constEnd(); ++iMap)
     {
         const QSharedPointer<VMeasurement> &meash = iMap.value();
         individualMeasurements.AddEmpty(meash->GetName());
@@ -4680,8 +4679,7 @@ auto TMainWindow::OrderedMeasurements() const -> QMap<int, QSharedPointer<VMeasu
 {
     const QMap<QString, QSharedPointer<VMeasurement>> table = m_data->DataMeasurementsWithSeparators();
     QMap<int, QSharedPointer<VMeasurement>> orderedTable;
-    QMap<QString, QSharedPointer<VMeasurement>>::const_iterator iterMap;
-    for (iterMap = table.constBegin(); iterMap != table.constEnd(); ++iterMap)
+    for (auto iterMap = table.constBegin(); iterMap != table.constEnd(); ++iterMap)
     {
         const QSharedPointer<VMeasurement> &meash = iterMap.value();
         orderedTable.insert(meash->Index(), meash);

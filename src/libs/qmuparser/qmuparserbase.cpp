@@ -1910,8 +1910,6 @@ void QmuParserBase::Eval(qreal *results, int nBulkSize) const
 {
     CreateRPN();
 
-    int i = 0;
-
 #ifdef QMUP_USE_OPENMP
 // #define DEBUG_OMP_STUFF
 #ifdef DEBUG_OMP_STUFF
@@ -1924,7 +1922,7 @@ void QmuParserBase::Eval(qreal *results, int nBulkSize) const
     omp_set_num_threads(nMaxThreads);
 
 #pragma omp parallel for schedule(static, nBulkSize / nMaxThreads) private(nThreadID)
-    for (i = 0; i < nBulkSize; ++i)
+    for (int i = 0; i < nBulkSize; ++i)
     {
         int nThreadID = omp_get_thread_num();
         results[i] = ParseCmdCodeBulk(i, nThreadID);
@@ -1953,7 +1951,7 @@ void QmuParserBase::Eval(qreal *results, int nBulkSize) const
 #endif
 
 #else
-    for (i = 0; i < nBulkSize; ++i)
+    for (int i = 0; i < nBulkSize; ++i)
     {
         results[i] = ParseCmdCodeBulk(i, 0);
     }

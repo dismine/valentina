@@ -203,9 +203,8 @@ void DialogTool::FillComboBoxSplines(QComboBox *box) const
     box->blockSignals(true);
 
     const auto *const objs = data->CalculationGObjects();
-    QHash<quint32, QSharedPointer<VGObject>>::const_iterator i;
     QMap<QString, quint32> list;
-    for (i = objs->constBegin(); i != objs->constEnd(); ++i)
+    for (auto i = objs->constBegin(); i != objs->constEnd(); ++i)
     {
         if (i.key() != toolId && IsSpline(i.value()))
         {
@@ -224,9 +223,8 @@ void DialogTool::FillComboBoxSplinesPath(QComboBox *box) const
     box->blockSignals(true);
 
     const auto *const objs = data->CalculationGObjects();
-    QHash<quint32, QSharedPointer<VGObject>>::const_iterator i;
     QMap<QString, quint32> list;
-    for (i = objs->constBegin(); i != objs->constEnd(); ++i)
+    for (auto i = objs->constBegin(); i != objs->constEnd(); ++i)
     {
         if (i.key() != toolId && IsSplinePath(i.value()))
         {
@@ -244,8 +242,7 @@ void DialogTool::FillComboBoxCurves(QComboBox *box) const
     SCASSERT(box != nullptr)
     const auto *const objs = data->CalculationGObjects();
     QMap<QString, quint32> list;
-    QHash<quint32, QSharedPointer<VGObject>>::const_iterator i;
-    for (i = objs->constBegin(); i != objs->constEnd(); ++i)
+    for (auto i = objs->constBegin(); i != objs->constEnd(); ++i)
     {
         if (i.key() != toolId)
         {
@@ -780,9 +777,8 @@ void DialogTool::FillCombo(QComboBox *box, GOType gType, FillComboBox rule, cons
     box->blockSignals(true);
 
     const QHash<quint32, QSharedPointer<VGObject>> *objs = data->CalculationGObjects();
-    QHash<quint32, QSharedPointer<VGObject>>::const_iterator i;
     QMap<QString, quint32> list;
-    for (i = objs->constBegin(); i != objs->constEnd(); ++i)
+    for (auto i = objs->constBegin(); i != objs->constEnd(); ++i)
     {
         if (rule == FillComboBox::NoChildren)
         {

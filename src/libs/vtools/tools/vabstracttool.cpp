@@ -331,8 +331,7 @@ auto VAbstractTool::PointsList() const -> QMap<QString, quint32>
 {
     const QHash<quint32, QSharedPointer<VGObject>> *objs = data.CalculationGObjects();
     QMap<QString, quint32> list;
-    QHash<quint32, QSharedPointer<VGObject>>::const_iterator i;
-    for (i = objs->constBegin(); i != objs->constEnd(); ++i)
+    for (auto i = objs->constBegin(); i != objs->constEnd(); ++i)
     {
         if (i.key() != m_id)
         {
