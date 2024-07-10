@@ -62,10 +62,6 @@ public slots:
     bool CheckForUpdatesSilent();    // NOLINT(modernize-use-trailing-return-type)
     bool CheckForUpdatesNotSilent(); // NOLINT(modernize-use-trailing-return-type)
 
-protected:
-    friend class FvUpdateWindow; // Uses GetProposedUpdate() and others
-    auto GetProposedUpdate() -> QPointer<FvAvailableUpdate>;
-
 protected slots:
     // Update window button slots
     void InstallUpdate();
@@ -83,8 +79,8 @@ private:
     // Singleton business
     //
     Q_DISABLE_COPY_MOVE(FvUpdater) // NOLINT
-    FvUpdater();		  // Hide main constructor
-    virtual ~FvUpdater(); // Hide main destructor
+    FvUpdater();                   // Hide main constructor
+    virtual ~FvUpdater();          // Hide main destructor
 
     static QPointer<FvUpdater> m_Instance; // Singleton instance
 
@@ -101,19 +97,19 @@ private:
     //
     // HTTP feed fetcher infrastructure
     //
-    QUrl                    m_feedURL;		    // Feed URL that will be fetched
-    QNetworkAccessManager   m_qnam;
+    QUrl m_feedURL; // Feed URL that will be fetched
+    QNetworkAccessManager m_qnam;
     QPointer<QNetworkReply> m_reply;
-    bool                    m_httpRequestAborted;
-    bool                    m_dropOnFinnish;
+    bool m_httpRequestAborted;
+    bool m_dropOnFinnish;
 
-    QXmlStreamReader m_xml;	// XML data collector and parser
+    QXmlStreamReader m_xml; // XML data collector and parser
 
-    void showUpdaterWindowUpdatedWithCurrentUpdateProposal();		// Show updater window
-    void hideUpdaterWindow();										// Hide + destroy m_updaterWindow
+    void showUpdaterWindowUpdatedWithCurrentUpdateProposal(); // Show updater window
+    void hideUpdaterWindow();                                 // Hide + destroy m_updaterWindow
 
     void startDownloadFeed(const QUrl &url); // Start downloading feed
-    void cancelDownloadFeed();			     // Stop downloading the current feed
+    void cancelDownloadFeed();               // Stop downloading the current feed
 
     // Dialogs (notifications)
     // Show an error message
@@ -128,6 +124,9 @@ private:
     static auto VersionIsIgnored(const QString &version) -> bool;
     static void IgnoreVersion(const QString &version);
     static auto CurrentlyRunningOnPlatform(const QString &platform) -> bool;
+
+    friend class FvUpdateWindow; // Uses GetProposedUpdate() and others
+    auto GetProposedUpdate() -> QPointer<FvAvailableUpdate>;
 };
 
 #endif // FVUPDATER_H

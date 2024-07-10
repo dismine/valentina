@@ -64,13 +64,6 @@ public:
 public slots:
     void ToolBarStyles();
 
-protected:
-    void closeEvent(QCloseEvent *event) override;
-    void changeEvent(QEvent *event) override;
-    auto eventFilter(QObject *object, QEvent *event) -> bool override;
-    void ExportToCSVData(const QString &fileName, bool withHeader, int mib, const QChar &separator) override;
-    auto RecentFileList() const -> QStringList override;
-
 private slots:
     void FileNew();
     void OpenKnownMeasurements();
@@ -191,6 +184,12 @@ private:
     auto CSVColumnHeader(int column) const -> QString;
     auto ReadCSV(const QxtCsvModel &csv, const QVector<int> &map, bool withHeader) -> QVector<VKnownMeasurement>;
     void ImportKnownMeasurements(const QxtCsvModel &csv, const QVector<int> &map, bool withHeader);
+
+    void closeEvent(QCloseEvent *event) override;
+    void changeEvent(QEvent *event) override;
+    auto eventFilter(QObject *object, QEvent *event) -> bool override;
+    void ExportToCSVData(const QString &fileName, bool withHeader, int mib, const QChar &separator) override;
+    auto RecentFileList() const -> QStringList override;
 };
 
 #endif // TKMMAINWINDOW_H

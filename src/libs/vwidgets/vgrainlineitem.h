@@ -64,20 +64,6 @@ signals:
     void SignalResized(qreal dLength);
     void SignalRotated(qreal dRot, const QPointF &ptNewPos);
 
-protected:
-    void mousePressEvent(QGraphicsSceneMouseEvent *pME) override;
-    void mouseMoveEvent(QGraphicsSceneMouseEvent *pME) override;
-    void mouseReleaseEvent(QGraphicsSceneMouseEvent *pME) override;
-    void hoverEnterEvent(QGraphicsSceneHoverEvent *pME) override;
-    void hoverLeaveEvent(QGraphicsSceneHoverEvent *pME) override;
-    void Update() override;
-    void UpdateRectangle();
-
-    auto GetAngle(const QPointF &pt) const -> double override;
-
-    static auto Rotate(const QPointF &pt, const QPointF &ptCenter, qreal dAng) -> QPointF;
-    auto GetInsideCorner(int i, qreal dDist) const -> QPointF;
-
 private:
     Q_DISABLE_COPY_MOVE(VGrainlineItem) // NOLINT
     qreal m_dRotation{0};
@@ -106,6 +92,19 @@ private:
     void UserMoveAndResize(const QPointF &pos);
 
     void UpdatePolyResize();
+
+    void mousePressEvent(QGraphicsSceneMouseEvent *pME) override;
+    void mouseMoveEvent(QGraphicsSceneMouseEvent *pME) override;
+    void mouseReleaseEvent(QGraphicsSceneMouseEvent *pME) override;
+    void hoverEnterEvent(QGraphicsSceneHoverEvent *pME) override;
+    void hoverLeaveEvent(QGraphicsSceneHoverEvent *pME) override;
+    void Update() override;
+    void UpdateRectangle();
+
+    auto GetAngle(const QPointF &pt) const -> double override;
+
+    static auto Rotate(const QPointF &pt, const QPointF &ptCenter, qreal dAng) -> QPointF;
+    auto GetInsideCorner(int i, qreal dDist) const -> QPointF;
 };
 
 //---------------------------------------------------------------------------------------------------------------------

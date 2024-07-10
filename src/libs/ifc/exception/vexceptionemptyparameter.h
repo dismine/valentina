@@ -29,7 +29,6 @@
 #ifndef VEXCEPTIONEMPTYPARAMETER_H
 #define VEXCEPTIONEMPTYPARAMETER_H
 
-
 #include <QString>
 #include <QtGlobal>
 
@@ -44,16 +43,18 @@ class QDomElement;
 class VExceptionEmptyParameter final : public VException
 {
 public:
-    VExceptionEmptyParameter(const QString &what, const QString &name,
-                             const QDomElement &domElement) V_NOEXCEPT_EXPR (true);
-    VExceptionEmptyParameter(const VExceptionEmptyParameter &e) V_NOEXCEPT_EXPR (true);
+    VExceptionEmptyParameter(const QString &what, const QString &name, const QDomElement &domElement)
+        V_NOEXCEPT_EXPR(true);
+    VExceptionEmptyParameter(const VExceptionEmptyParameter &e) V_NOEXCEPT_EXPR(true);
     auto operator=(const VExceptionEmptyParameter &e) V_NOEXCEPT_EXPR(true) -> VExceptionEmptyParameter &;
-    virtual         ~VExceptionEmptyParameter() V_NOEXCEPT_EXPR (true) = default;
+    virtual ~VExceptionEmptyParameter() V_NOEXCEPT_EXPR(true) = default;
 
     Q_NORETURN virtual void raise() const override { throw *this; }
 
     Q_REQUIRED_RESULT virtual auto clone() const -> VExceptionEmptyParameter * override
-    { return new VExceptionEmptyParameter(*this); }
+    {
+        return new VExceptionEmptyParameter(*this);
+    }
 
     virtual auto ErrorMessage() const -> QString override;
     virtual auto DetailedInformation() const -> QString override;
@@ -62,18 +63,18 @@ public:
     auto TagName() const -> QString;
     auto LineNumber() const -> qint32;
 
-protected:
+private:
     /** @brief name name attribute */
-    QString         name;
+    QString name;
 
     /** @brief tagText tag text */
-    QString         tagText;
+    QString tagText;
 
     /** @brief tagName tag name */
-    QString         tagName;
+    QString tagName;
 
     /** @brief lineNumber line number */
-    qint32          lineNumber;
+    qint32 lineNumber;
 };
 
 //---------------------------------------------------------------------------------------------------------------------

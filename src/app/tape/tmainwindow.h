@@ -76,13 +76,6 @@ public:
 public slots:
     void ToolBarStyles();
 
-protected:
-    void closeEvent(QCloseEvent *event) override;
-    void changeEvent(QEvent *event) override;
-    auto eventFilter(QObject *object, QEvent *event) -> bool override;
-    void ExportToCSVData(const QString &fileName, bool withHeader, int mib, const QChar &separator) override;
-    auto RecentFileList() const -> QStringList override;
-
 private slots:
     void FileNew();
     void OpenIndividual();
@@ -312,6 +305,12 @@ private:
     auto CSVColumnHeader(int column) const -> QString;
     void ExportRowToCSV(QxtCsvModel &csv, int row, const QSharedPointer<VMeasurement> &meash,
                         const VKnownMeasurements &knownDB) const;
+
+    void closeEvent(QCloseEvent *event) override;
+    void changeEvent(QEvent *event) override;
+    auto eventFilter(QObject *object, QEvent *event) -> bool override;
+    void ExportToCSVData(const QString &fileName, bool withHeader, int mib, const QChar &separator) override;
+    auto RecentFileList() const -> QStringList override;
 };
 
 #endif // TMAINWINDOW_H

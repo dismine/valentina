@@ -71,17 +71,6 @@ public slots:
     void ChosenObject(quint32 id, const SceneObject &type) override;
     void ShowDialog(bool click) override;
 
-protected:
-    /** @brief SaveData Put dialog data in local variables */
-    void SaveData() override;
-    void CheckState() override;
-    void closeEvent(QCloseEvent *event) override;
-    void showEvent(QShowEvent *event) override;
-    void resizeEvent(QResizeEvent *event) override;
-    void changeEvent(QEvent *event) override;
-    auto IsValid() const -> bool override;
-    void SetPatternDoc(VAbstractPattern *doc) override;
-
 private slots:
     void NameDetailChanged();
     void DetailUUIDChanged();
@@ -393,6 +382,16 @@ private:
     void InitFoldHeightFormula(const VPiece &piece);
     void InitFoldWidthFormula(const VPiece &piece);
     void InitFoldCenterFormula(const VPiece &piece);
+
+    /** @brief SaveData Put dialog data in local variables */
+    void SaveData() override;
+    void CheckState() override;
+    void closeEvent(QCloseEvent *event) override;
+    void showEvent(QShowEvent *event) override;
+    void resizeEvent(QResizeEvent *event) override;
+    void changeEvent(QEvent *event) override;
+    auto IsValid() const -> bool override;
+    void SetPatternDoc(VAbstractPattern *doc) override;
 };
 
 //---------------------------------------------------------------------------------------------------------------------

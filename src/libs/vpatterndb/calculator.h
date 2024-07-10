@@ -64,14 +64,13 @@ public:
 
     auto EvalFormula(const QHash<QString, QSharedPointer<VInternalVariable>> *vars, const QString &formula) -> qreal;
 
-protected:
-    static auto VarFactory(const QString &a_szName, void *a_pUserData) -> qreal *;
-    static auto Warning(const QString &warningMsg, qreal value) -> qreal;
-
 private:
     Q_DISABLE_COPY_MOVE(Calculator) // NOLINT
     QVector<QSharedPointer<qreal>> m_varsValues{};
     const QHash<QString, QSharedPointer<VInternalVariable>> *m_vars{nullptr};
+
+    static auto VarFactory(const QString &a_szName, void *a_pUserData) -> qreal *;
+    static auto Warning(const QString &warningMsg, qreal value) -> qreal;
 };
 
 #endif // CALCULATOR_H

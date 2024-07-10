@@ -55,7 +55,7 @@ public:
     auto BadId() const -> quint32;
     auto BadKey() const -> QString;
 
-protected:
+private:
     /** @brief id id */
     quint32 id;
 

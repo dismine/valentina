@@ -104,14 +104,6 @@ signals:
      */
     void DialogApplied();
 
-protected:
-    virtual auto IsValid() const -> bool;
-    void closeEvent(QCloseEvent *event) override;
-    void showEvent(QShowEvent *event) override;
-    void resizeEvent(QResizeEvent *event) override;
-    void changeEvent(QEvent *event) override;
-    virtual void CheckState();
-
 private slots:
     void FilterVariablesEdited(const QString &filter);
 
@@ -158,6 +150,13 @@ private:
     auto Eval(const FormulaData &formulaData, bool &flag) -> qreal;
 
     void InitIcons();
+
+    virtual auto IsValid() const -> bool;
+    void closeEvent(QCloseEvent *event) override;
+    void showEvent(QShowEvent *event) override;
+    void resizeEvent(QResizeEvent *event) override;
+    void changeEvent(QEvent *event) override;
+    virtual void CheckState();
 };
 
 //---------------------------------------------------------------------------------------------------------------------

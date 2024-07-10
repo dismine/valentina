@@ -388,10 +388,6 @@ public:
         DRW_TableEntry::reset();
     }
 
-protected:
-    auto parseCode(int code, const std::unique_ptr<dxfReader> &reader) -> bool override;
-
-public:
     UTF8STRING lineType;            /*!< line type, code 6 */
     int color;                      /*!< layer color, code 62 */
     int color24;                    /*!< 24-bit color, code 420 */
@@ -399,6 +395,9 @@ public:
     DRW_LW_Conv::lineWidth lWeight; /*!< layer lineweight, code 370 */
     std::string handlePlotS;        /*!< Hard-pointer ID/handle of plotstyle, code 390 */
     std::string handleMaterialS;    /*!< Hard-pointer ID/handle of materialstyle, code 347 */
+
+private:
+    auto parseCode(int code, const std::unique_ptr<dxfReader> &reader) -> bool override;
 };
 
 //! Class to handle block record entries

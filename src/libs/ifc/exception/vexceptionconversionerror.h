@@ -29,7 +29,6 @@
 #ifndef VEXCEPTIONCONVERSIONERROR_H
 #define VEXCEPTIONCONVERSIONERROR_H
 
-
 #include <QString>
 
 #include "../ifcdef.h"
@@ -41,22 +40,24 @@
 class VExceptionConversionError final : public VException
 {
 public:
-    VExceptionConversionError(const QString &error, const QString &str) V_NOEXCEPT_EXPR (true);
-    VExceptionConversionError(const VExceptionConversionError &e) V_NOEXCEPT_EXPR (true);
+    VExceptionConversionError(const QString &error, const QString &str) V_NOEXCEPT_EXPR(true);
+    VExceptionConversionError(const VExceptionConversionError &e) V_NOEXCEPT_EXPR(true);
     auto operator=(const VExceptionConversionError &e) V_NOEXCEPT_EXPR(true) -> VExceptionConversionError &;
-    virtual         ~VExceptionConversionError() V_NOEXCEPT_EXPR (true) = default;
+    virtual ~VExceptionConversionError() V_NOEXCEPT_EXPR(true) = default;
 
     Q_NORETURN virtual void raise() const override { throw *this; }
 
     Q_REQUIRED_RESULT virtual auto clone() const -> VExceptionConversionError * override
-    { return new VExceptionConversionError(*this); }
+    {
+        return new VExceptionConversionError(*this);
+    }
 
     virtual auto ErrorMessage() const -> QString override;
     auto String() const -> QString;
 
-protected:
+private:
     /** @brief str string, where happend error */
-    QString         str;
+    QString str;
 };
 
 //---------------------------------------------------------------------------------------------------------------------

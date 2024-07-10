@@ -85,16 +85,6 @@ public:
     auto GetTextLines() const -> vsizetype;
     void SetPieceName(const QString &name);
 
-protected:
-    void mousePressEvent(QGraphicsSceneMouseEvent *pME) override;
-    void mouseMoveEvent(QGraphicsSceneMouseEvent *pME) override;
-    void mouseReleaseEvent(QGraphicsSceneMouseEvent *pME) override;
-    void hoverEnterEvent(QGraphicsSceneHoverEvent *pME) override;
-    void hoverMoveEvent(QGraphicsSceneHoverEvent *pHE) override;
-
-    void UpdateBox();
-    void CorrectLabel();
-
 signals:
     void SignalResized(qreal iTW);
     void SignalRotated(qreal dAng);
@@ -125,6 +115,15 @@ private:
     void PaintLabelSVGFont(QPainter *painter);
 
     void NotEnoughSpace() const;
+
+    void mousePressEvent(QGraphicsSceneMouseEvent *pME) override;
+    void mouseMoveEvent(QGraphicsSceneMouseEvent *pME) override;
+    void mouseReleaseEvent(QGraphicsSceneMouseEvent *pME) override;
+    void hoverEnterEvent(QGraphicsSceneHoverEvent *pME) override;
+    void hoverMoveEvent(QGraphicsSceneHoverEvent *pHE) override;
+
+    void UpdateBox();
+    void CorrectLabel();
 };
 
 #endif // VTEXTGRAPHICSITEM_H
