@@ -488,7 +488,6 @@ class DRW_Solid : public DRW_Trace
 public:
     DRW_Solid() { eType = DRW::SOLID; }
 
-public:
     //! first corner (2D)
     auto firstCorner() const -> const DRW_Coord & { return basePoint; }
     //! second corner (2D)
@@ -917,7 +916,7 @@ public:
         for (DRW_Vertex *item : vertlist)
             delete item;
     }
-    void addVertex(const DRW_Vertex& v)
+    void addVertex(const DRW_Vertex &v)
     {
         auto *vert = new DRW_Vertex();
         vert->basePoint.x = v.basePoint.x;

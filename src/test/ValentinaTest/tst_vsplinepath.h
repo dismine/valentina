@@ -37,6 +37,7 @@ class TST_VSplinePath : public QObject
 
 public:
     explicit TST_VSplinePath(QObject *parent = nullptr);
+
 private slots:
     void TestRotation_data();
     void TestRotation();

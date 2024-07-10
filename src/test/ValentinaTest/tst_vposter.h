@@ -40,8 +40,6 @@ class TST_VPoster : public QObject
 public:
     explicit TST_VPoster(QObject *parent = nullptr);
 
-signals:
-
 private slots:
     void BigPoster();
     void SmallPoster();

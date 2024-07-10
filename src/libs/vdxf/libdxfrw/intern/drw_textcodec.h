@@ -28,14 +28,13 @@ public:
     auto getCodePage() const -> std::string { return cp; }
 
 private:
-    static auto correctCodePage(const std::string &s) -> std::string;
-
-private:
     // cppcheck-suppress unknownMacro
     Q_DISABLE_COPY_MOVE(DRW_TextCodec) // NOLINT
     DRW::Version version{DRW::UNKNOWNV};
     std::string cp{};
     std::unique_ptr<DRW_Converter> conv;
+
+    static auto correctCodePage(const std::string &s) -> std::string;
 };
 
 class DRW_Converter

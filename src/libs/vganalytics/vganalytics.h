@@ -95,10 +95,9 @@ public slots:
 private:
     Q_DISABLE_COPY_MOVE(VGAnalytics) // NOLINT
 
-    explicit VGAnalytics(QObject *parent = nullptr);
-
-private:
     VGAnalyticsWorker *d;
+
+    explicit VGAnalytics(QObject *parent = nullptr);
 
     void SendEvent(const QString &eventName, const QHash<QString, QJsonValue> &params);
 

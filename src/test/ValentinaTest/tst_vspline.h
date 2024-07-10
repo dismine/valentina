@@ -40,8 +40,6 @@ class TST_VSpline : public AbstractTest
 public:
     explicit TST_VSpline(QObject *parent = nullptr);
 
-signals:
-
 private slots:
     void GetSegmentPoints();
     void GetSegmentPoints_issue412();

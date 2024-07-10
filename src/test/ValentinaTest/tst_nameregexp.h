@@ -38,8 +38,6 @@ class TST_NameRegExp : public QObject
 public:
     explicit TST_NameRegExp(QObject *parent = nullptr);
 
-signals:
-
 private slots:
     void TestNameRegExp_data();
     void TestNameRegExp();
