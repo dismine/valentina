@@ -181,7 +181,7 @@ auto WatermarkWindow::Open(QString path) -> bool
     QFuture<VWatermarkConverter *> const futureConverter = QtConcurrent::run(
         [path]()
         {
-            std::unique_ptr<VWatermarkConverter> converter(new VWatermarkConverter(path));
+            auto converter = std::make_unique<VWatermarkConverter>(path);
             return converter.release();
         });
 

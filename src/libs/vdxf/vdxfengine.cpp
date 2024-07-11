@@ -798,7 +798,7 @@ auto VDxfEngine::ExportToAAMA(const QVector<VLayoutPiece> &details) -> bool
 
         m_input->AddBlock(detailBlock.data());
 
-        std::unique_ptr<DRW_Insert> insert(new DRW_Insert());
+        auto insert = std::make_unique<DRW_Insert>();
         insert->name = blockName.toStdString();
         insert->layer = *layer1;
 
@@ -1028,7 +1028,7 @@ void VDxfEngine::ExportAAMANotch(const QSharedPointer<dx_ifaceBlock> &detailBloc
 {
     auto ExportNotch = [this, detailBlock](QPointF center, qreal length, qreal angle)
     {
-        std::unique_ptr<DRW_ASTMNotch> notch(new DRW_ASTMNotch());
+        auto notch = std::make_unique<DRW_ASTMNotch>();
 
         notch->basePoint =
             DRW_Coord(FromPixel(center.x(), m_varInsunits), FromPixel(GetSize().height() - center.y(), m_varInsunits),
@@ -1363,7 +1363,7 @@ auto VDxfEngine::ExportToASTM(const QVector<VLayoutPiece> &details) -> bool
 
         m_input->AddBlock(detailBlock.data());
 
-        std::unique_ptr<DRW_Insert> insert(new DRW_Insert());
+        auto insert = std::make_unique<DRW_Insert>();
         insert->name = blockName.toStdString();
         insert->layer = *layer1;
 
@@ -1639,7 +1639,7 @@ void VDxfEngine::ExportASTMDrill(const QSharedPointer<dx_ifaceBlock> &detailBloc
 
     auto ExportPoint = [this, detailBlock](QPointF center, qreal diameter)
     {
-        std::unique_ptr<DRW_Point> point(new DRW_Point());
+        auto point = std::make_unique<DRW_Point>();
         point->basePoint =
             DRW_Coord(FromPixel(center.x(), m_varInsunits), FromPixel(GetSize().height() - center.y(), m_varInsunits),
                       FromPixel(diameter, m_varInsunits));

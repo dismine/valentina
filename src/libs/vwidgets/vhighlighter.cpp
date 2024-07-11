@@ -30,7 +30,7 @@
 
 //---------------------------------------------------------------------------------------------------------------------
 VTextBlockData::VTextBlockData()
-    : m_parentheses()
+  : m_parentheses()
 {
     // Nothing to do
 }
@@ -55,19 +55,19 @@ void VTextBlockData::insert(ParenthesisInfo *info)
 
 //---------------------------------------------------------------------------------------------------------------------
 VHighlighter::VHighlighter(QTextDocument *document)
-    : QSyntaxHighlighter(document)
+  : QSyntaxHighlighter(document)
 {
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 void VHighlighter::highlightBlock(const QString &text)
 {
-    std::unique_ptr<VTextBlockData> data(new VTextBlockData);
+    auto data = std::make_unique<VTextBlockData>();
 
     vsizetype leftPos = text.indexOf('(');
     while (leftPos != -1)
     {
-        std::unique_ptr<ParenthesisInfo> info(new ParenthesisInfo);
+        auto info = std::make_unique<ParenthesisInfo>();
         info->character = '(';
         info->position = leftPos;
 
@@ -78,13 +78,13 @@ void VHighlighter::highlightBlock(const QString &text)
     vsizetype rightPos = text.indexOf(')');
     while (rightPos != -1)
     {
-        std::unique_ptr<ParenthesisInfo> info(new ParenthesisInfo);
+        auto info = std::make_unique<ParenthesisInfo>();
         info->character = ')';
         info->position = rightPos;
 
         data->insert(info.release());
 
-        rightPos = text.indexOf(')', rightPos +1);
+        rightPos = text.indexOf(')', rightPos + 1);
     }
 
     setCurrentBlockUserData(data.release());

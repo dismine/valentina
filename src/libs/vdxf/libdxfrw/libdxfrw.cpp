@@ -3419,7 +3419,7 @@ auto dxfRW::processVertex(DRW_Polyline *pl) -> bool
 {
     DRW_DBG("dxfRW::processVertex");
     int code;
-    std::unique_ptr<DRW_Vertex> v(new DRW_Vertex());
+    auto v = std::make_unique<DRW_Vertex>();
     while (reader->readRec(&code))
     {
         DRW_DBG(code);

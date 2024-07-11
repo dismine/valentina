@@ -385,7 +385,7 @@ void UnionInitParameters(const VToolUnionDetailsInitData &initData, const VPiece
 auto AddNodePoint(const VPieceNode &node, const VToolUnionDetailsInitData &initData, QVector<quint32> &children,
                   const QString &drawName, qreal dx, qreal dy, quint32 pRotate, qreal angle) -> quint32
 {
-    std::unique_ptr<VPointF> point(new VPointF(*initData.data->GeometricObject<VPointF>(node.GetId())));
+    auto point = std::make_unique<VPointF>(*initData.data->GeometricObject<VPointF>(node.GetId()));
     point->setMode(Draw::Modeling);
 
     if (not qFuzzyIsNull(dx) || not qFuzzyIsNull(dy) || pRotate != NULL_ID)
@@ -394,7 +394,7 @@ auto AddNodePoint(const VPieceNode &node, const VToolUnionDetailsInitData &initD
                         angle);
     }
 
-    std::unique_ptr<VPointF> point1(new VPointF(*point));
+    auto point1 = std::make_unique<VPointF>(*point);
 
     const quint32 idObject = initData.data->AddGObject(point.release());
     children.append(idObject);
@@ -421,7 +421,7 @@ auto AddNodePoint(const VPieceNode &node, const VToolUnionDetailsInitData &initD
 auto AddPin(quint32 id, const VToolUnionDetailsInitData &initData, QVector<quint32> &children, const QString &drawName,
             qreal dx, qreal dy, quint32 pRotate, qreal angle) -> quint32
 {
-    std::unique_ptr<VPointF> point(new VPointF(*initData.data->GeometricObject<VPointF>(id)));
+    auto point = std::make_unique<VPointF>(*initData.data->GeometricObject<VPointF>(id));
     point->setMode(Draw::Modeling);
 
     if (not qFuzzyIsNull(dx) || not qFuzzyIsNull(dy) || pRotate != NULL_ID)
@@ -430,7 +430,7 @@ auto AddPin(quint32 id, const VToolUnionDetailsInitData &initData, QVector<quint
                         angle);
     }
 
-    std::unique_ptr<VPointF> point1(new VPointF(*point));
+    auto point1 = std::make_unique<VPointF>(*point);
 
     const quint32 idObject = initData.data->AddGObject(point.release());
     children.append(idObject);
@@ -456,7 +456,7 @@ auto AddPin(quint32 id, const VToolUnionDetailsInitData &initData, QVector<quint
 auto AddPlaceLabel(quint32 id, const VToolUnionDetailsInitData &initData, QVector<quint32> &children,
                    const QString &drawName, qreal dx, qreal dy, quint32 pRotate, qreal angle) -> quint32
 {
-    std::unique_ptr<VPlaceLabelItem> label(new VPlaceLabelItem(*initData.data->GeometricObject<VPlaceLabelItem>(id)));
+    auto label = std::make_unique<VPlaceLabelItem>(*initData.data->GeometricObject<VPlaceLabelItem>(id));
 
     if (not qFuzzyIsNull(dx) || not qFuzzyIsNull(dy) || pRotate != NULL_ID)
     {
@@ -480,7 +480,7 @@ auto AddPlaceLabel(quint32 id, const VToolUnionDetailsInitData &initData, QVecto
     initNodeData.visibilityTrigger = label->GetVisibilityTrigger();
     initNodeData.type = label->GetLabelType();
 
-    std::unique_ptr<VPlaceLabelItem> label1(new VPlaceLabelItem(*label));
+    auto label1 = std::make_unique<VPlaceLabelItem>(*label);
 
     initNodeData.centerPoint = initData.data->AddGObject(label.release());
     children.append(initNodeData.centerPoint);
@@ -499,7 +499,7 @@ auto AddNodeArc(const VPieceNode &node, const VToolUnionDetailsInitData &initDat
     const QSharedPointer<VArc> arc = initData.data->GeometricObject<VArc>(node.GetId());
     auto p1 = VPointF(arc->GetP1(), QChar('A'), 0, 0);
     auto p2 = VPointF(arc->GetP2(), QChar('A'), 0, 0);
-    std::unique_ptr<VPointF> center(new VPointF(arc->GetCenter()));
+    auto center = std::make_unique<VPointF>(arc->GetCenter());
 
     if (not qFuzzyIsNull(dx) || not qFuzzyIsNull(dy) || pRotate != NULL_ID)
     {
@@ -516,11 +516,11 @@ auto AddNodeArc(const VPieceNode &node, const VToolUnionDetailsInitData &initDat
     VPointF *tmpCenter = center.release();
     const quint32 idCenter = initData.data->AddGObject(tmpCenter);
     Q_UNUSED(idCenter)
-    std::unique_ptr<VArc> arc1(new VArc(*tmpCenter, arc->GetRadius(), arc->GetFormulaRadius(), l1.angle(),
-                                        QString().setNum(l1.angle()), l2.angle(), QString().setNum(l2.angle())));
+    auto arc1 = std::make_unique<VArc>(*tmpCenter, arc->GetRadius(), arc->GetFormulaRadius(), l1.angle(),
+                                       QString().setNum(l1.angle()), l2.angle(), QString().setNum(l2.angle()));
     arc1->setMode(Draw::Modeling);
 
-    std::unique_ptr<VArc> arc2(new VArc(*arc1));
+    auto arc2 = std::make_unique<VArc>(*arc1);
 
     const quint32 idObject = initData.data->AddGObject(arc1.release());
     children.append(idObject);
@@ -550,7 +550,7 @@ auto AddNodeElArc(const VPieceNode &node, const VToolUnionDetailsInitData &initD
     const QSharedPointer<VEllipticalArc> arc = initData.data->GeometricObject<VEllipticalArc>(node.GetId());
     auto p1 = VPointF(arc->GetP1(), QChar('A'), 0, 0);
     auto p2 = VPointF(arc->GetP2(), QChar('A'), 0, 0);
-    std::unique_ptr<VPointF> center(new VPointF(arc->GetCenter()));
+    auto center = std::make_unique<VPointF>(arc->GetCenter());
 
     if (not qFuzzyIsNull(dx) || not qFuzzyIsNull(dy) || pRotate != NULL_ID)
     {
@@ -567,12 +567,12 @@ auto AddNodeElArc(const VPieceNode &node, const VToolUnionDetailsInitData &initD
     VPointF *tmpCenter = center.release();
     quint32 const idCenter = initData.data->AddGObject(tmpCenter);
     Q_UNUSED(idCenter)
-    std::unique_ptr<VEllipticalArc> arc1(new VEllipticalArc(
+    auto arc1 = std::make_unique<VEllipticalArc>(
         *tmpCenter, arc->GetRadius1(), arc->GetRadius2(), arc->GetFormulaRadius1(), arc->GetFormulaRadius2(),
-        l1.angle(), QString().setNum(l1.angle()), l2.angle(), QString().setNum(l2.angle()), 0, QChar('0')));
+        l1.angle(), QString().setNum(l1.angle()), l2.angle(), QString().setNum(l2.angle()), 0, QChar('0'));
     arc1->setMode(Draw::Modeling);
 
-    std::unique_ptr<VEllipticalArc> arc2(new VEllipticalArc(*arc1));
+    auto arc2 = std::make_unique<VEllipticalArc>(*arc1);
 
     const quint32 idObject = initData.data->AddGObject(arc1.release());
     children.append(idObject);
@@ -644,7 +644,7 @@ auto AddNodeSpline(const VPieceNode &node, const VToolUnionDetailsInitData &init
 auto AddNodeSplinePath(const VPieceNode &node, const VToolUnionDetailsInitData &initData, QVector<quint32> &children,
                        const QString &drawName, qreal dx, qreal dy, quint32 pRotate, qreal angle) -> quint32
 {
-    std::unique_ptr<VSplinePath> path(new VSplinePath());
+    auto path = std::make_unique<VSplinePath>();
     path->setMode(Draw::Modeling);
     const QSharedPointer<VAbstractCubicBezierPath> splinePath =
         initData.data->GeometricObject<VAbstractCubicBezierPath>(node.GetId());
@@ -690,7 +690,7 @@ auto AddNodeSplinePath(const VPieceNode &node, const VToolUnionDetailsInitData &
         path->append(VSplinePoint(*p4, spl.GetEndAngle(), spl.GetEndAngleFormula(), angle2, angle2F,
                                   spline.GetC2Length(), spline.GetC2LengthFormula(), pL2, pL2F));
     }
-    std::unique_ptr<VSplinePath> path1(new VSplinePath(*path));
+    auto path1 = std::make_unique<VSplinePath>(*path);
 
     const quint32 idObject = initData.data->AddGObject(path.release());
     children.append(idObject);
@@ -923,7 +923,7 @@ auto TakeNextId(QVector<quint32> &children) -> quint32
 void UpdateNodePoint(VContainer *data, const VPieceNode &node, QVector<quint32> &children, qreal dx, qreal dy,
                      quint32 pRotate, qreal angle)
 {
-    std::unique_ptr<VPointF> point(new VPointF(*data->GeometricObject<VPointF>(node.GetId())));
+    auto point = std::make_unique<VPointF>(*data->GeometricObject<VPointF>(node.GetId()));
     point->setMode(Draw::Modeling);
     if (not qFuzzyIsNull(dx) || not qFuzzyIsNull(dy) || pRotate != NULL_ID)
     {
@@ -953,8 +953,8 @@ void UpdateNodeArc(VContainer *data, const VPieceNode &node, QVector<quint32> &c
     QLineF const l1(static_cast<QPointF>(*center), static_cast<QPointF>(p1));
     QLineF const l2(static_cast<QPointF>(*center), static_cast<QPointF>(p2));
 
-    std::unique_ptr<VArc> arc1(new VArc(*center, arc->GetRadius(), arc->GetFormulaRadius(), l1.angle(),
-                                        QString().setNum(l1.angle()), l2.angle(), QString().setNum(l2.angle())));
+    auto arc1 = std::make_unique<VArc>(*center, arc->GetRadius(), arc->GetFormulaRadius(), l1.angle(),
+                                       QString().setNum(l1.angle()), l2.angle(), QString().setNum(l2.angle()));
     arc1->setMode(Draw::Modeling);
     data->UpdateGObject(TakeNextId(children), arc1.release());
 }
@@ -980,9 +980,9 @@ void UpdateNodeElArc(VContainer *data, const VPieceNode &node, QVector<quint32> 
     QLineF const l1(static_cast<QPointF>(*center), static_cast<QPointF>(p1));
     QLineF const l2(static_cast<QPointF>(*center), static_cast<QPointF>(p2));
 
-    std::unique_ptr<VEllipticalArc> arc1(new VEllipticalArc(
+    auto arc1 = std::make_unique<VEllipticalArc>(
         *center, arc->GetRadius1(), arc->GetRadius2(), arc->GetFormulaRadius1(), arc->GetFormulaRadius2(), l1.angle(),
-        QString().setNum(l1.angle()), l2.angle(), QString().setNum(l2.angle()), 0, QChar('0')));
+        QString().setNum(l1.angle()), l2.angle(), QString().setNum(l2.angle()), 0, QChar('0'));
     arc1->setMode(Draw::Modeling);
     data->UpdateGObject(TakeNextId(children), arc1.release());
 }
@@ -1008,8 +1008,8 @@ void UpdateNodeSpline(VContainer *data, const VPieceNode &node, QVector<quint32>
         BiasRotatePoint(p4.data(), dx, dy, p, angle);
     }
 
-    std::unique_ptr<VSpline> spl(
-        new VSpline(*p1, static_cast<QPointF>(p2), static_cast<QPointF>(p3), *p4, 0, Draw::Modeling));
+    auto spl =
+        std::make_unique<VSpline>(*p1, static_cast<QPointF>(p2), static_cast<QPointF>(p3), *p4, 0, Draw::Modeling);
     data->UpdateGObject(TakeNextId(children), spl.release());
 }
 
@@ -1017,7 +1017,7 @@ void UpdateNodeSpline(VContainer *data, const VPieceNode &node, QVector<quint32>
 void UpdateNodeSplinePath(VContainer *data, const VPieceNode &node, QVector<quint32> &children, qreal dx, qreal dy,
                           quint32 pRotate, qreal angle)
 {
-    std::unique_ptr<VSplinePath> path(new VSplinePath());
+    auto path = std::make_unique<VSplinePath>();
     path->setMode(Draw::Modeling);
     const QSharedPointer<VAbstractCubicBezierPath> splinePath =
         data->GeometricObject<VAbstractCubicBezierPath>(node.GetId());
@@ -1482,7 +1482,7 @@ void UpdateUnitedDetailPins(const VToolUnionDetailsInitData &initData, qreal dx,
 
     for (auto record : records)
     {
-        std::unique_ptr<VPointF> point(new VPointF(*initData.data->GeometricObject<VPointF>(record)));
+        auto point = std::make_unique<VPointF>(*initData.data->GeometricObject<VPointF>(record));
         point->setMode(Draw::Modeling);
         if (not qFuzzyIsNull(dx) || not qFuzzyIsNull(dy) || pRotate != NULL_ID)
         {
@@ -1507,7 +1507,7 @@ void UpdateUnitedDetailPlaceLabels(const VToolUnionDetailsInitData &initData, qr
             BiasRotatePoint(parentLabel.data(), dx, dy,
                             static_cast<QPointF>(*initData.data->GeometricObject<VPointF>(pRotate)), angle);
         }
-        std::unique_ptr<VPlaceLabelItem> label(new VPlaceLabelItem());
+        auto label = std::make_unique<VPlaceLabelItem>();
         label->setName(parentLabel->name());
         label->setX(parentLabel->x());
         label->setY(parentLabel->y());

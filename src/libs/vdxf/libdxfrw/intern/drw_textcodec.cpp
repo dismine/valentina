@@ -17,7 +17,7 @@
 
 DRW_TextCodec::DRW_TextCodec()
   : version(DRW::AC1021),
-    conv(new DRW_Converter())
+    conv(std::make_unique<DRW_Converter>())
 {
 }
 

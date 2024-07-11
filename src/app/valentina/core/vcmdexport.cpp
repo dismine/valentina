@@ -90,7 +90,7 @@ auto VCommandLine::DefaultGenerator() const -> VLayoutGeneratorPtr
 {
     // this functions covers all options found into layout setup dialog, nothing to add here, unless dialog extended
 
-    VLayoutGeneratorPtr res(new VLayoutGenerator());
+    auto res = std::make_shared<VLayoutGenerator>();
     DialogLayoutSettings diag(res.get(), nullptr, true);
 
     TestPageformat();

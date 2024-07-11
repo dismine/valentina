@@ -6310,7 +6310,7 @@ auto MainWindow::LoadPattern(QString fileName, const QString &customMeasureFile)
     QFuture<VPatternConverter *> const futureConverter = QtConcurrent::run(
         [fileName]()
         {
-            std::unique_ptr<VPatternConverter> converter(new VPatternConverter(fileName));
+            auto converter = std::make_unique<VPatternConverter>(fileName);
             return converter.release();
         });
 

@@ -2520,12 +2520,12 @@ void VToolSeamAllowance::InitSpecialPoints(const QVector<quint32> &points) const
 //---------------------------------------------------------------------------------------------------------------------
 void VToolSeamAllowance::DeleteToolWithConfirm(bool ask)
 {
-    std::unique_ptr<DeletePiece> delDet(new DeletePiece(doc, m_id, VAbstractTool::data, m_sceneDetails));
     if (ask && ConfirmDeletion() == QMessageBox::No)
     {
         return;
     }
 
+    auto delDet = std::make_unique<DeletePiece>(doc, m_id, VAbstractTool::data, m_sceneDetails);
     VAbstractApplication::VApp()->getUndoStack()->push(delDet.release());
 
     // Throw exception, this will help prevent case when we forget to immediately quit function.
