@@ -628,6 +628,8 @@ template <class T> void DialogEditWrongFormula::ShowVariable(const QList<T> &var
 
     const VTranslateVars *trVars = VAbstractApplication::VApp()->TrVars();
 
+    QSet<QString> processedNames;
+
     for (const auto &var : vars)
     {
         if (ui->checkBoxHideEmpty->isEnabled() && ui->checkBoxHideEmpty->isChecked() && var->IsNotUsed())
@@ -637,8 +639,20 @@ template <class T> void DialogEditWrongFormula::ShowVariable(const QList<T> &var
 
         if (!var->Filter(m_toolId))
         { // If we create this variable don't show
+            QString name = var->GetName();
+            if (processedNames.contains(name))
+            {
+                name = var->GetAlias();
+                if (name.isEmpty() || processedNames.contains(name))
+                {
+                    continue;
+                }
+            }
+
+            processedNames.insert(name);
+
             ui->tableWidget->setRowCount(ui->tableWidget->rowCount() + 1);
-            auto *item = new QTableWidgetItem(trVars->VarToUser(var->GetName()));
+            auto *item = new QTableWidgetItem(trVars->VarToUser(name));
             QFont font = item->font();
             font.setBold(true);
             item->setFont(font);
