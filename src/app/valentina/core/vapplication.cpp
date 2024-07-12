@@ -592,7 +592,7 @@ void VApplication::InitOptions()
                            QString const country = VGAnalytics::CountryCode();
                            if (country == "ru"_L1 || country == "by"_L1)
                            {
-                               qFatal("country not detected");
+                               QCoreApplication::exit();
                            }
                        });
 

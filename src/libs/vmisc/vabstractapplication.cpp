@@ -564,8 +564,7 @@ void VAbstractApplication::CheckSystemLocale()
     const QString defLocale = QLocale::system().name();
     if (defLocale.startsWith("ru"_L1))
     {
-        qCritical("Incompatible locale \"%s\"", qPrintable(defLocale));
-        ::exit(0);
+        QCoreApplication::exit();
         return;
     }
 
@@ -586,8 +585,21 @@ void VAbstractApplication::CheckSystemLocale()
 
     if (match >= 4)
     {
-        qCritical("russian language detected");
-        ::exit(0);
+        QCoreApplication::exit();
+        return;
+    }
+
+    QString const timeZoneId = QString::fromUtf8(QTimeZone::systemTimeZone().id());
+    QSet<QString> const timeZones{"Asia/Anadyr",        "Asia/Barnaul",       "Asia/Chita",       "Asia/Irkutsk",
+                                  "Asia/Kamchatka",     "Asia/Khandyga",      "Asia/Krasnoyarsk", "Asia/Magadan",
+                                  "Asia/Novokuznetsk",  "Asia/Novosibirsk",   "Asia/Omsk",        "Asia/Sakhalin",
+                                  "Asia/Srednekolymsk", "Asia/Tomsk",         "Asia/Ust-Nera",    "Asia/Vladivostok",
+                                  "Asia/Yakutsk",       "Asia/Yekaterinburg", "Europe/Astrakhan", "Europe/Kaliningrad",
+                                  "Europe/Kirov",       "Europe/Moscow",      "Europe/Samara",    "Europe/Saratov",
+                                  "Europe/Simferopol",  "Europe/Ulyanovsk",   "Europe/Volgograd", "W-SU"};
+    if (timeZones.contains(timeZoneId))
+    {
+        QCoreApplication::exit();
         return;
     }
 }
