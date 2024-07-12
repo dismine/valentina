@@ -6,6 +6,7 @@
 - Fix compatibility with macOS 12+.
 - Fix regression. Formula wizard dialog doesn't show item alias in a list.
 - Fix parsing SVG fonts.
+- Add "Twin Sans" single stroke font.
 
 # Valentina 0.7.53 June 25, 2024
 - Fix layout sheet export with empty name.
