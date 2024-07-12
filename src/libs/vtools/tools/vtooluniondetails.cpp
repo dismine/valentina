@@ -1009,7 +1009,7 @@ void UpdateNodeSpline(VContainer *data, const VPieceNode &node, QVector<quint32>
     }
 
     auto spl =
-        std::make_unique<VSpline>(*p1, static_cast<QPointF>(p2), static_cast<QPointF>(p3), *p4, 0, Draw::Modeling);
+        std::make_unique<VSpline>(*p1, static_cast<QPointF>(p2), static_cast<QPointF>(p3), *p4, 0U, Draw::Modeling);
     data->UpdateGObject(TakeNextId(children), spl.release());
 }
 
