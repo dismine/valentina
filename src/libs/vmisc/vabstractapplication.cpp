@@ -43,6 +43,7 @@
 #include <QMessageLogger>
 #include <QScopeGuard>
 #include <QStandardPaths>
+#include <QTimeZone>
 #include <QTranslator>
 #include <QUndoStack>
 #include <QWidget>
