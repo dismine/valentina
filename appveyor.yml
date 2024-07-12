@@ -34,8 +34,8 @@ platform:
 #        environment setup        #
 #---------------------------------#
 
-# set clone depth
-clone_depth: 1                       # clone entire repository history if not defined
+# Do not set clone depth, we need all the tags to automatically detect the version based on git describe
+# clone_depth: 1                      
 
 # fetch repository as zip archive
 shallow_clone: false                 # default is "false"
