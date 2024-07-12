@@ -298,15 +298,7 @@ auto VSvgFontReader::ReadFont() -> VSvgFontEngine
             SetFontFace(&font);
             engine = VSvgFontEngine(font);
         }
-        else
-        {
-            skipCurrentElement();
-        }
-    }
-
-    while (readNextStartElement())
-    {
-        if (name() == "missing-glyph"_L1 || name() == "glyph"_L1)
+        else if (name() == "missing-glyph"_L1 || name() == "glyph"_L1)
         {
             ParseSvgGlyph(&engine, attributes());
         }
@@ -362,7 +354,7 @@ void VSvgFontReader::SetFontFace(VSvgFont *font)
 
     QString const fontStyle = fontFaceAttr.value("font-style"_L1).toString();
     QString const fontWeight = fontFaceAttr.value("font-weight"_L1).toString();
-    QString fontName;
+    QString fontName = fontFamily;
 
     while (readNextStartElement())
     {
@@ -373,12 +365,15 @@ void VSvgFontReader::SetFontFace(VSvgFont *font)
                 if (name() == "font-face-name"_L1)
                 {
                     fontName = attributes().value("name"_L1).toString();
+                    readElementText();
                 }
                 else
                 {
                     skipCurrentElement();
                 }
             }
+
+            readElementText();
         }
         else
         {
@@ -393,6 +388,8 @@ void VSvgFontReader::SetFontFace(VSvgFont *font)
     font->SetDescent(descent);
     font->SetStyle(ParseFontStyle(fontStyle));
     font->SetWeight(ParseFontWeight(fontWeight));
+
+    readElementText();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
