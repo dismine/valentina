@@ -367,7 +367,6 @@ for:
   build_script:
     - conan profile list
     - conan install . -s os=Windows --build=missing -o with_crash_reporting=%WITH_CRASH_REPORTING% -o with_xerces=True -pr=valentina
-    - git fetch --tags
     - set VALENTINA_BUILD_FOLDER=%APPVEYOR_BUILD_FOLDER%\build
     - qbs build -f valentina.qbs -d %VALENTINA_BUILD_FOLDER% --jobs %NUMBER_OF_PROCESSORS% config:release qbs.installRoot:%VALENTINA_BUILD_FOLDER%\install-root\valentina profile:qt6 project.enableConan:true project.conanWithCrashReporting:%WITH_CRASH_REPORTING% project.conanWithXerces:true modules.buildconfig.enableCcache:false project.conanProfiles:valentina modules.buildconfig.enablePCH:%ENABLE_PCH% modules.windeployqt.windeployqtProgramBinPath:%WINDEPLOYQT_BIN_PATH% modules.windeployqt.compilerRuntime:%WINDEPLOYQT_COMPILER_RUNTIME% modules.windeployqt.noCompilerRuntime:%WINDEPLOYQT_NO_COMPILER_RUNTIME%
   
@@ -643,7 +642,6 @@ for:
 
   build_script:
     - pwd
-    - git describe --always HEAD
     - conan profile new valentina
     - conan profile update settings.build_type=Release valentina
     - conan profile update settings.os=Macos valentina
@@ -660,8 +658,6 @@ for:
     - qbs config defaultProfile qt6
     - qbs config profiles.qt6.baseProfile clang
     - conan install . -s os=Macos --build=missing -o with_crash_reporting=True -pr=valentina
-    - git fetch --all --tags
-    - git describe --tags --always --long HEAD
     - qbs build -f valentina.qbs -d ${APPVEYOR_BUILD_FOLDER}/build --jobs $(nproc) config:release modules.buildconfig.enableUnitTests:false modules.buildconfig.enableMultiBundle:${MULTI_BUNDLE} qbs.installRoot:${APPVEYOR_BUILD_FOLDER}/build/install-root profile:qt6 project.minimumMacosVersion:${MACOS_DEPLOYMENT_TARGET} modules.buildconfig.enableCcache:true moduleProviders.qbspkgconfig.extraPaths:$(brew --prefix xerces-c)/lib/pkgconfig,$(brew --prefix qt6)/lib/pkgconfig,$(brew --prefix openssl@1.1)/lib/pkgconfig "modules.buildconfig.signingIdentity:$MACOS_CERTIFICATE_NAME" modules.macdeployqt.libpath:$(brew --prefix qt6)/lib,$(brew --prefix poppler)/lib modules.macdeployqt.macdeployqtProgramBinPath:${HOME}/macdeployqt-install-dir project.enableConan:true project.conanWithCrashReporting:true project.conanProfiles:valentina
     - export QTDIR=$(brew --prefix qt6)
     - export CRASH_QT_VERSION=$($QTDIR/bin/qmake -query QT_VERSION | awk -F. '{print $1 "_" $2}')
@@ -864,8 +860,6 @@ for:
     - qbs config defaultProfile qt5
     - qbs config profiles.qt5.baseProfile clang
     - conan install . -s os=Macos --build=missing -o with_crash_reporting=True -pr=valentina
-    - git fetch --all --tags
-    - git describe --always HEAD
     - qbs build -f valentina.qbs -d ${APPVEYOR_BUILD_FOLDER}/build --jobs $(nproc) config:release modules.buildconfig.enableUnitTests:false modules.buildconfig.enableMultiBundle:${MULTI_BUNDLE} qbs.installRoot:${APPVEYOR_BUILD_FOLDER}/build/install-root profile:qt5 project.minimumMacosVersion:${MACOS_DEPLOYMENT_TARGET} modules.buildconfig.enableCcache:true "modules.buildconfig.signingIdentity:$MACOS_CERTIFICATE_NAME" modules.macdeployqt.libpath:${QTDIR}/lib modules.macdeployqt.pluginspath:${QTDIR}/plugins modules.macdeployqt.macdeployqtProgramBinPath:${HOME}/macdeployqt-install-dir project.enableConan:true project.conanWithCrashReporting:true project.conanProfiles:valentina
     - export CRASH_QT_VERSION=$($QTDIR/bin/qmake -query QT_VERSION | awk -F. '{print $1 "_" $2}')
     - export CRASH_SHORT_SHA=$(git log --pretty=format:%h -n 1)

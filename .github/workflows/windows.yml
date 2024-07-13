@@ -35,8 +35,9 @@ jobs:
     steps:
       - name: Checkout repo
         uses: actions/checkout@v4
-        with:
-          fetch-tags: true
+
+      - name: Fetch tags
+        run: git fetch --prune --unshallow --tags
 
       - name: Install Qt
         uses: jurplel/install-qt-action@v3
@@ -136,6 +137,7 @@ jobs:
 
       - name: Before build
         run: |
+          git fetch --tags
           qbs-setup-toolchains --detect
           qbs-setup-qt %Qt6_DIR%\bin\qmake.exe qt6
           qbs-config defaultProfile qt6
