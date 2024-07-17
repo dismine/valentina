@@ -137,10 +137,7 @@ void FvUpdater::showUpdaterWindowUpdatedWithCurrentUpdateProposal()
     // Create a new window
     m_updaterWindow = new FvUpdateWindow(VAbstractValApplication::VApp()->getMainWindow());
     m_updaterWindow->UpdateWindowWithCurrentProposedUpdate();
-    if (m_updaterWindow != nullptr)
-    {
-        m_updaterWindow->exec();
-    }
+    m_updaterWindow->exec();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
