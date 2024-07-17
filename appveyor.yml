@@ -55,7 +55,7 @@ environment:
       QT_VERSION: Qt5_15
       BUILD_SYSTEM: "qbs"
       ARCH: x64
-      XCODE_VERSION: 14.2.0
+      XCODE_VERSION: 13.4.1
       TARGET_PLATFORM: "macOS_10.13+"
       MACOS_DEPLOYMENT_TARGET: 10.13
       MULTI_BUNDLE: true
@@ -69,7 +69,7 @@ environment:
       QT_VERSION: Qt5_15
       BUILD_SYSTEM: "qbs"
       ARCH: x64
-      XCODE_VERSION: 14.2.0
+      XCODE_VERSION: 13.4.1
       TARGET_PLATFORM: "macOS_10.13+"
       MACOS_DEPLOYMENT_TARGET: 10.13
       MULTI_BUNDLE: false
