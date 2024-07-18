@@ -834,7 +834,19 @@ auto VLayoutPiece::GetFullSeamAllowancePoints() const -> QVector<VLayoutPoint>
     points.reserve(d->m_seamAllowance.size());
     if (!d->m_seamAllowanceMirrorLine.isNull() && IsShowFullPiece())
     {
-        points = VAbstractPiece::FullSeamAllowancePath(d->m_seamAllowance, d->m_seamAllowanceMirrorLine, GetName());
+        QLineF seamAllowanceMirrorLine = d->m_seamAllowanceMirrorLine;
+        { // Trying to correct a seam allowance mirror line based on seam mirror line
+            QVector<QPointF> seamAllowance;
+            CastTo(d->m_seamAllowance, seamAllowance);
+
+            if (!VAbstractCurve::IsPointOnCurve(seamAllowance, seamAllowanceMirrorLine.p1()) ||
+                !VAbstractCurve::IsPointOnCurve(seamAllowance, seamAllowanceMirrorLine.p2()))
+            {
+                seamAllowanceMirrorLine = SeamAllowanceMirrorLine(d->m_seamMirrorLine, seamAllowance);
+            }
+        }
+
+        points = VAbstractPiece::FullSeamAllowancePath(d->m_seamAllowance, seamAllowanceMirrorLine, GetName());
         points = CheckLoops(CorrectEquidistantPoints(points)); // A path can contains loops
     }
     else

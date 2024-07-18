@@ -198,6 +198,9 @@ public:
 
     template <typename T> static auto MapPoint(T obj, const QTransform &matrix) -> T;
 
+    auto SeamAllowanceMirrorLine(const QLineF &seamMirrorLine, const QVector<QPointF> &seamAllowancePoints) const
+        -> QLineF;
+
 protected:
     static auto IsEkvPointOnLine(const QPointF &iPoint, const QPointF &prevPoint, const QPointF &nextPoint) -> bool;
     static auto IsEkvPointOnLine(const VSAPoint &iPoint, const VSAPoint &prevPoint, const VSAPoint &nextPoint) -> bool;

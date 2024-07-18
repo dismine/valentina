@@ -2132,3 +2132,39 @@ auto VAbstractPiece::LabelShapePath(const PlaceLabelImg &shape) -> QPainterPath
     }
     return path;
 }
+
+//---------------------------------------------------------------------------------------------------------------------
+auto VAbstractPiece::SeamAllowanceMirrorLine(const QLineF &seamMirrorLine,
+                                             const QVector<QPointF> &seamAllowancePoints) const -> QLineF
+{
+    if (!IsSeamAllowance() || (IsSeamAllowance() && IsSeamAllowanceBuiltIn()))
+    {
+        return seamMirrorLine;
+    }
+
+    auto rec = QRectF(0, 0, INT_MAX, INT_MAX);
+    rec.translate(-INT_MAX / 2.0, -INT_MAX / 2.0);
+
+    auto axis =
+        QLineF(seamMirrorLine.center(), VGObject::BuildRay(seamMirrorLine.center(), seamMirrorLine.angle() + 180, rec));
+
+    QVector<QPointF> points = seamAllowancePoints;
+
+    QVector<QPointF> intersections = VAbstractCurve::CurveIntersectLine(points, axis);
+    if (intersections.isEmpty())
+    {
+        return {};
+    }
+
+    const QPointF startPoint = intersections.constFirst();
+
+    std::reverse(points.begin(), points.end());
+    axis = QLineF(seamMirrorLine.center(), VGObject::BuildRay(seamMirrorLine.center(), seamMirrorLine.angle(), rec));
+    intersections = VAbstractCurve::CurveIntersectLine(points, axis);
+    if (intersections.isEmpty())
+    {
+        return {};
+    }
+
+    return {startPoint, intersections.constFirst()};
+}
