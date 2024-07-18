@@ -704,6 +704,8 @@ auto VTranslateVars::FormulaFromUser(const QString &formula, bool osSeparator) c
         return formula;
     }
 
+    qDebug() << "Formula:" << formula;
+
     // Eval formula
     QScopedPointer<qmu::QmuTokenParser> cal(
         new qmu::QmuTokenParser(formula, osSeparator, true, GetTranslatedFunctions()));
@@ -752,6 +754,8 @@ auto VTranslateVars::FormulaToUser(const QString &formula, bool osSeparator) con
     {
         return formula;
     }
+
+    qDebug() << "Formula:" << formula;
 
     QString newFormula = formula; // Local copy for making changes
 
