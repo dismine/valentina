@@ -182,6 +182,7 @@ auto VPGraphicsPiece::boundingRect() const -> QRectF
     shape.addPath(m_stickyPath);
     shape.addPath(m_foldLineMarkPath);
     shape.addPath(m_foldLineLabelPath);
+    shape.addPath(m_mirrorLinePath);
 
     VPSettings *settings = VPApplication::VApp()->PuzzleSettings();
     const qreal halfPenWidth = settings->GetLayoutLineWidth() / 2.;
@@ -598,6 +599,7 @@ void VPGraphicsPiece::PaintPiece(QPainter *painter)
     m_stickyPath = QPainterPath();
     m_foldLineMarkPath = QPainterPath();
     m_foldLineLabelPath = QPainterPath();
+    m_mirrorLinePath = QPainterPath();
 
     VPPiecePtr const piece = m_piece.toStrongRef();
     if (piece.isNull())
@@ -907,58 +909,59 @@ void VPGraphicsPiece::PaintStickyPath(QPainter *painter)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VPGraphicsPiece::PaintMirrorLine(QPainter *painter, const VPPiecePtr &piece) const
+void VPGraphicsPiece::PaintMirrorLine(QPainter *painter, const VPPiecePtr &piece)
 {
-    if (piece->IsShowFullPiece())
+    if (!piece->IsShowFullPiece())
     {
-        bool mirrorFlag = false;
-        QPainterPath mirrorLinePath;
-        if (not piece->IsSeamAllowance() || piece->IsSeamAllowanceBuiltIn())
-        {
-            QLineF const seamMirrorLine = piece->GetMappedSeamMirrorLine();
-            if (!seamMirrorLine.isNull() && piece->IsShowMirrorLine())
-            {
-                QPainterPath mirrorPath;
-                mirrorPath.moveTo(seamMirrorLine.p1());
-                mirrorPath.lineTo(seamMirrorLine.p2());
-                mirrorLinePath.addPath(mirrorPath);
-                mirrorFlag = true;
-            }
-        }
-        else if (not piece->IsSeamAllowanceBuiltIn())
-        {
-            QLineF seamAllowanceMirrorLine = piece->GetMappedSeamAllowanceMirrorLine();
-            if (!seamAllowanceMirrorLine.isNull() && piece->IsShowMirrorLine())
-            {
-                { // Trying to correct a seam allowance mirror line based on seam mirror line
-                    QVector<QPointF> seamAllowance;
-                    CastTo(piece->GetMappedContourPoints(), seamAllowance);
+        return;
+    }
 
-                    if (!VAbstractCurve::IsPointOnCurve(seamAllowance, seamAllowanceMirrorLine.p1()) ||
-                        !VAbstractCurve::IsPointOnCurve(seamAllowance, seamAllowanceMirrorLine.p2()))
-                    {
-                        seamAllowanceMirrorLine =
-                            piece->SeamAllowanceMirrorLine(piece->GetMappedSeamMirrorLine(), seamAllowance);
-                    }
+    bool mirrorFlag = false;
+    if (not piece->IsSeamAllowance() || piece->IsSeamAllowanceBuiltIn())
+    {
+        QLineF const seamMirrorLine = piece->GetMappedSeamMirrorLine();
+        if (!seamMirrorLine.isNull() && piece->IsShowMirrorLine())
+        {
+            QPainterPath mirrorPath;
+            mirrorPath.moveTo(seamMirrorLine.p1());
+            mirrorPath.lineTo(seamMirrorLine.p2());
+            m_mirrorLinePath.addPath(mirrorPath);
+            mirrorFlag = true;
+        }
+    }
+    else if (not piece->IsSeamAllowanceBuiltIn())
+    {
+        QLineF seamAllowanceMirrorLine = piece->GetMappedSeamAllowanceMirrorLine();
+        if (!seamAllowanceMirrorLine.isNull() && piece->IsShowMirrorLine())
+        {
+            { // Trying to correct a seam allowance mirror line based on seam mirror line
+                QVector<QPointF> seamAllowance;
+                CastTo(piece->GetMappedContourPoints(), seamAllowance);
+
+                if (!VAbstractCurve::IsPointOnCurve(seamAllowance, seamAllowanceMirrorLine.p1()) ||
+                    !VAbstractCurve::IsPointOnCurve(seamAllowance, seamAllowanceMirrorLine.p2()))
+                {
+                    seamAllowanceMirrorLine =
+                        piece->SeamAllowanceMirrorLine(piece->GetMappedSeamMirrorLine(), seamAllowance);
                 }
-
-                QPainterPath mirrorPath;
-                mirrorPath.moveTo(seamAllowanceMirrorLine.p1());
-                mirrorPath.lineTo(seamAllowanceMirrorLine.p2());
-                mirrorLinePath.addPath(mirrorPath);
-                mirrorFlag = true;
             }
-        }
 
-        if (mirrorFlag && painter != nullptr)
-        {
-            painter->save();
-            QPen pen = painter->pen();
-            pen.setStyle(Qt::DashDotLine);
-            painter->setPen(pen);
-            painter->drawPath(mirrorLinePath);
-            painter->restore();
+            QPainterPath mirrorPath;
+            mirrorPath.moveTo(seamAllowanceMirrorLine.p1());
+            mirrorPath.lineTo(seamAllowanceMirrorLine.p2());
+            m_mirrorLinePath.addPath(mirrorPath);
+            mirrorFlag = true;
         }
+    }
+
+    if (mirrorFlag && painter != nullptr)
+    {
+        painter->save();
+        QPen pen = painter->pen();
+        pen.setStyle(Qt::DashDotLine);
+        painter->setPen(pen);
+        painter->drawPath(m_mirrorLinePath);
+        painter->restore();
     }
 }
 

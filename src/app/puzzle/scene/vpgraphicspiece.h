@@ -96,6 +96,7 @@ private:
     QPainterPath m_internalPaths{};
     QPainterPath m_passmarks{};
     QPainterPath m_placeLabels{};
+    QPainterPath m_mirrorLinePath{};
 
     QPointF m_moveStartPoint{};
     QPointF m_rotationStartPoint{};
@@ -133,7 +134,7 @@ private:
     void PaintPassmarks(QPainter *painter, const VPPiecePtr &piece);
     void PaintPlaceLabels(QPainter *painter, const VPPiecePtr &piece);
     void PaintStickyPath(QPainter *painter);
-    void PaintMirrorLine(QPainter *painter, const VPPiecePtr &piece) const;
+    void PaintMirrorLine(QPainter *painter, const VPPiecePtr &piece);
     void PaintFoldLine(QPainter *painter, const VPPiecePtr &piece);
 
     void GroupMove(const QPointF &pos);
