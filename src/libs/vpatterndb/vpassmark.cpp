@@ -896,19 +896,20 @@ auto VPassmark::BuiltInSAPassmark(const VPiece &piece, const VContainer *data) c
         return {};
     }
 
-    const QVector<QLineF> lines = BuiltInSAPassmarkBaseLine(piece);
+    const QVector<QLineF> lines = BuiltInSAPassmarkBaseLine(piece, piece.SeamMirrorLine(data));
     if (lines.isEmpty())
     {
         return {};
     }
 
     QVector<QPointF> points;
-    CastTo(piece.MainPathPoints(data), points);
+    CastTo(piece.FullMainPathPoints(data), points);
+
     return CreatePassmarkLines(lines, points, PassmarkSide::All);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-auto VPassmark::BuiltInSAPassmarkBaseLine(const VPiece &piece) const -> QVector<QLineF>
+auto VPassmark::BuiltInSAPassmarkBaseLine(const VPiece &piece, const QLineF &mirrorLine) const -> QVector<QLineF>
 {
     if (m_null)
     {
@@ -952,8 +953,44 @@ auto VPassmark::BuiltInSAPassmarkBaseLine(const VPiece &piece) const -> QVector<
         }
     }
 
-    auto edge1 = QLineF(m_data.passmarkSAPoint, m_data.previousSAPoint);
-    auto const edge2 = QLineF(m_data.passmarkSAPoint, m_data.nextSAPoint);
+    QLineF edge1;
+    QLineF edge2;
+
+    if (!m_data.passmarkSAPoint.IsManualPasskmarkAngle() && !mirrorLine.isNull() && piece.IsShowFullPiece())
+    {
+        if (VFuzzyComparePoints(m_data.passmarkSAPoint, mirrorLine.p1()))
+        {
+            edge1 = QLineF(m_data.passmarkSAPoint, m_data.previousSAPoint);
+            qreal angle = edge1.angleTo(mirrorLine);
+            if (angle > 180)
+            {
+                angle = (360 - angle) * -1;
+            }
+            edge2 = edge1;
+            edge2.setAngle(edge2.angle() + angle * 2);
+        }
+        else if (VFuzzyComparePoints(m_data.passmarkSAPoint, mirrorLine.p2()))
+        {
+            edge2 = QLineF(m_data.passmarkSAPoint, m_data.nextSAPoint);
+            qreal angle = edge2.angleTo(QLineF(mirrorLine.p2(), mirrorLine.p1()));
+            if (angle > 180)
+            {
+                angle = (360 - angle) * -1;
+            }
+            edge1 = edge2;
+            edge1.setAngle(edge1.angle() + angle * 2);
+        }
+        else
+        {
+            edge1 = QLineF(m_data.passmarkSAPoint, m_data.previousSAPoint);
+            edge2 = QLineF(m_data.passmarkSAPoint, m_data.nextSAPoint);
+        }
+    }
+    else
+    {
+        edge1 = QLineF(m_data.passmarkSAPoint, m_data.previousSAPoint);
+        edge2 = QLineF(m_data.passmarkSAPoint, m_data.nextSAPoint);
+    }
 
     edge1.setAngle(edge1.angle() + edge1.angleTo(edge2) / 2.);
     edge1.setLength(length);

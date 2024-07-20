@@ -356,7 +356,8 @@ auto PreapreBuiltInSAPassmark(const VPiece &piece, const VContainer *pattern, co
 
     layoutPassmark.lines = lines;
 
-    const QVector<QLineF> baseLines = passmark.BuiltInSAPassmarkBaseLine(piece);
+    const QLineF mirrorLine = piece.SeamMirrorLine(pattern);
+    const QVector<QLineF> baseLines = passmark.BuiltInSAPassmarkBaseLine(piece, mirrorLine);
     if (baseLines.isEmpty())
     {
         const QString errorMsg =

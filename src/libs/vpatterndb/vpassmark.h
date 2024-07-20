@@ -92,7 +92,7 @@ public:
                     PassmarkSide side) const -> QVector<QLineF>;
     auto BuiltInSAPassmark(const VPiece &piece, const VContainer *data) const -> QVector<QLineF>;
 
-    auto BuiltInSAPassmarkBaseLine(const VPiece &piece) const -> QVector<QLineF>;
+    auto BuiltInSAPassmarkBaseLine(const VPiece &piece, const QLineF& mirrorLine) const -> QVector<QLineF>;
     auto SAPassmarkBaseLine(const VPiece &piece, const VContainer *data, PassmarkSide side) const -> QVector<QLineF>;
     auto SAPassmarkBaseLine(const QVector<QPointF> &seamAllowance, const QVector<QPointF> &rotatedSeamAllowance,
                             PassmarkSide side) const -> QVector<QLineF>;
