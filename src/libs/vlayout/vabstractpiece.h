@@ -190,7 +190,7 @@ public:
     template <class T>
     static auto FullSeamPath(QVector<T> points, const QLineF &mirrorLine, const QString &pieceName) -> QVector<T>;
     template <class T>
-    static auto FullSeamAllowancePath(const QVector<T> &points, const QLineF &mirrorLine, const QString &pieceName)
+    static auto FullSeamAllowancePath(const QVector<T> &points, QLineF mirrorLine, const QString &pieceName)
         -> QVector<T>;
 
     template <class T>
@@ -222,6 +222,9 @@ private:
     QSharedDataPointer<VAbstractPieceData> d;
 
     template <typename T> static auto MakeTurnPoint(const QPointF &p) -> T;
+
+    template <class T>
+    static auto CorrectSAMirrolLine(const QVector<T> &points, const QLineF &mirrorLine, bool &reverse) -> QLineF;
 };
 
 Q_DECLARE_TYPEINFO(VAbstractPiece, Q_MOVABLE_TYPE); // NOLINT
@@ -877,6 +880,8 @@ inline auto VAbstractPiece::FullSeamPath(QVector<T> points, const QLineF &mirror
         return points;
     }
 
+    points = RemoveDublicates(points, false);
+
     if (points.size() <= 3)
     {
         return points;
@@ -909,8 +914,6 @@ inline auto VAbstractPiece::FullSeamPath(QVector<T> points, const QLineF &mirror
             return points;
         }
 
-        sub2 += points.constFirst();
-
         QVector<T> sub3;
         QVector<T> sub4;
         if (!VAbstractPiece::SubdividePath(points, mirrorLine.p2(), sub3, sub4))
@@ -922,7 +925,7 @@ inline auto VAbstractPiece::FullSeamPath(QVector<T> points, const QLineF &mirror
             return points;
         }
 
-        base = sub2 + sub3;
+        base = sub4 + sub1;
     }
 
     QVector<T> fullPath = MirrorPath(base, mirrorLine);
@@ -936,8 +939,8 @@ inline auto VAbstractPiece::FullSeamPath(QVector<T> points, const QLineF &mirror
 
 //---------------------------------------------------------------------------------------------------------------------
 template <class T>
-inline auto VAbstractPiece::FullSeamAllowancePath(const QVector<T> &points, const QLineF &mirrorLine,
-                                                  const QString &pieceName) -> QVector<T>
+inline auto VAbstractPiece::FullSeamAllowancePath(const QVector<T> &points, QLineF mirrorLine, const QString &pieceName)
+    -> QVector<T>
 {
     // DumpVector(points, QStringLiteral("input.json.XXXXXX")); // Uncomment for dumping test data
 
@@ -954,6 +957,9 @@ inline auto VAbstractPiece::FullSeamAllowancePath(const QVector<T> &points, cons
     QVector<T> base;
     base.reserve(points.size());
 
+    bool reverse = false;
+    mirrorLine = CorrectSAMirrolLine(points, mirrorLine, reverse);
+
     QVector<T> sub1;
     QVector<T> sub2;
     if (!VAbstractPiece::SubdividePath(points, mirrorLine.p1(), sub1, sub2))
@@ -967,39 +973,29 @@ inline auto VAbstractPiece::FullSeamAllowancePath(const QVector<T> &points, cons
 
     QVector<QPointF> subPath;
     CastTo(sub2, subPath);
-    if (VAbstractCurve::IsPointOnCurve(subPath, mirrorLine.p2()))
+
+    std::reverse(sub2.begin(), sub2.end());
+
+    QVector<T> sub3;
+    QVector<T> sub4;
+    if (!VAbstractPiece::SubdividePath(sub2, mirrorLine.p2(), sub3, sub4))
     {
-        std::reverse(sub2.begin(), sub2.end());
+        const QString errorMsg = QObject::tr("Piece '%1'. Unable to generate full seam allowance path.").arg(pieceName);
+        VAbstractApplication::VApp()->IsPedantic()
+            ? throw VException(errorMsg)
+            : qWarning() << VAbstractApplication::warningMessageSignature + errorMsg;
+        return points;
+    }
 
-        QVector<T> sub3;
-        QVector<T> sub4;
-        if (!VAbstractPiece::SubdividePath(sub2, mirrorLine.p2(), sub3, sub4))
-        {
-            const QString errorMsg =
-                QObject::tr("Piece '%1'. Unable to generate full seam allowance path.").arg(pieceName);
-            VAbstractApplication::VApp()->IsPedantic()
-                ? throw VException(errorMsg)
-                : qWarning() << VAbstractApplication::warningMessageSignature + errorMsg;
-            return points;
-        }
-
-        std::reverse(sub4.begin(), sub4.end());
-        base = sub4;
+    if (!reverse)
+    {
+        std::reverse(sub3.begin(), sub3.end());
+        base = sub3 + sub1;
     }
     else
     {
-        std::reverse(sub1.begin(), sub1.end());
-
-        QVector<T> sub3;
-        QVector<T> sub4;
-        if (!VAbstractPiece::SubdividePath(sub1, mirrorLine.p2(), sub3, sub4))
-        {
-            return points;
-        }
-
         std::reverse(sub4.begin(), sub4.end());
-
-        base = sub2 + sub4;
+        base = sub4;
     }
 
     QVector<T> fullPath = MirrorPath(base, mirrorLine);
@@ -1038,6 +1034,36 @@ template <typename T> auto VAbstractPiece::MapPoint(T obj, const QTransform &mat
         obj.setY(p.y());
         return obj;
     }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+template <class T>
+inline auto VAbstractPiece::CorrectSAMirrolLine(const QVector<T> &points, const QLineF &mirrorLine, bool &reverse)
+    -> QLineF
+{
+    if (points.isEmpty() || points.size() < 2)
+    {
+        reverse = false;
+        return mirrorLine;
+    }
+
+    for (qint32 i = 0; i < points.count() - 1; ++i)
+    {
+        if (VGObject::IsPointOnLineSegment(mirrorLine.p1(), points.at(i), points.at(i + 1)))
+        {
+            reverse = false;
+            return mirrorLine;
+        }
+
+        if (VGObject::IsPointOnLineSegment(mirrorLine.p2(), points.at(i), points.at(i + 1)))
+        {
+            reverse = true;
+            return {mirrorLine.p2(), mirrorLine.p1()};
+        }
+    }
+
+    reverse = false;
+    return mirrorLine;
 }
 
 #endif // VABSTRACTPIECE_H

@@ -702,10 +702,10 @@ auto DialogSeamAllowance::GetMirrorLineStartPoint() const -> quint32
     if (const int next = FindNotExcludedNeighborNodeDown(uiTabPaths->listWidgetMainPath, nextIndex);
         next >= 0 && RowNode(uiTabPaths->listWidgetMainPath, next).GetId() == endPoint)
     {
-        return endPoint;
+        return startPoint;
     }
 
-    return startPoint;
+    return endPoint;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -734,10 +734,10 @@ auto DialogSeamAllowance::GetMirrorLineEndPoint() const -> quint32
     if (const int prev = FindNotExcludedNeighborNodeUp(uiTabPaths->listWidgetMainPath, prevIndex);
         prev >= 0 && RowNode(uiTabPaths->listWidgetMainPath, prev).GetId() == startPoint)
     {
-        return startPoint;
+        return endPoint;
     }
 
-    return endPoint;
+    return startPoint;
 }
 
 //---------------------------------------------------------------------------------------------------------------------

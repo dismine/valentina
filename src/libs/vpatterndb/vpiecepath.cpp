@@ -1159,11 +1159,11 @@ auto VPiecePath::CurveSeamAllowanceSegment(const VContainer *data, const QVector
     {
         if (VFuzzyComparePoints(begin, mirrorLine.p1()))
         {
-            begin.SetSABefore(0);
+            begin.SetSAAfter(0);
         }
         else if (VFuzzyComparePoints(begin, mirrorLine.p2()))
         {
-            begin.SetSAAfter(0);
+            begin.SetSABefore(0);
         }
     }
 
@@ -1172,11 +1172,11 @@ auto VPiecePath::CurveSeamAllowanceSegment(const VContainer *data, const QVector
     {
         if (VFuzzyComparePoints(end, mirrorLine.p1()))
         {
-            end.SetSABefore(0);
+            end.SetSAAfter(0);
         }
         else if (VFuzzyComparePoints(end, mirrorLine.p2()))
         {
-            end.SetSAAfter(0);
+            end.SetSABefore(0);
         }
     }
 

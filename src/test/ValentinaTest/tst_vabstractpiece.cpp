@@ -1293,7 +1293,7 @@ void TST_VAbstractPiece::TestFullSeamPath_data() const
         QTest::newRow(title) << basePoints << fullPathPoints << mirrorLine;
     };
 
-    QLineF mirrorLine(QPointF(29.9999999999999, 606.9290078740157), QPointF(785.9055118110236, 417.95262992125987));
+    QLineF mirrorLine(QPointF(785.9055118110236, 417.95262992125987), QPointF(29.9999999999999, 606.9290078740157));
 
     // See file src/app/share/collection/bugs/fold_line.val
     ASSERT_TEST_CASE("Piece full path. Case 1", QStringLiteral("://full_seam_path_case_1/input.json"),
@@ -1309,10 +1309,35 @@ void TST_VAbstractPiece::TestFullSeamPath_data() const
                      QStringLiteral("://full_seam_path_case_4/output.json"), mirrorLine);
 
     // See file valentina_private_collection/bugs/full_piece/Basic_Darted_Bodice_Block.val (private collection)
-    mirrorLine = QLineF(QPointF(37.795275590551185, 655.1181102362208), QPointF(37.79527559055022, 4578.897637795276));
+    mirrorLine = QLineF(QPointF(37.79527559055022, 4578.897637795276), QPointF(37.795275590551185, 655.1181102362208));
 
     ASSERT_TEST_CASE("Basic Darted Bodice Block", QStringLiteral("://full_seam_path_case_5/input.json"),
                      QStringLiteral("://full_seam_path_case_5/output.json"), mirrorLine);
+
+    // See file valentina_private_collection/bugs/blazer_for_women_with_one_button/Blazer for women with one button.val
+    // (private collection)
+    mirrorLine =
+        QLineF(QPointF(-2214.4917699559637, 2232.951572921326), QPointF(-1914.963009612374, 2349.0997891917677));
+
+    ASSERT_TEST_CASE("Blazer for women with one button. Full seam path case 1",
+                     QStringLiteral("://full_seam_path_blazer_for_women_with_one_button_case_1/input.json"),
+                     QStringLiteral("://full_seam_path_blazer_for_women_with_one_button_case_1/output.json"),
+                     mirrorLine);
+
+    ASSERT_TEST_CASE("Blazer for women with one button. Full seam path case 2",
+                     QStringLiteral("://full_seam_path_blazer_for_women_with_one_button_case_2/input.json"),
+                     QStringLiteral("://full_seam_path_blazer_for_women_with_one_button_case_2/output.json"),
+                     mirrorLine);
+
+    ASSERT_TEST_CASE("Blazer for women with one button. Full seam path case 3",
+                     QStringLiteral("://full_seam_path_blazer_for_women_with_one_button_case_3/input.json"),
+                     QStringLiteral("://full_seam_path_blazer_for_women_with_one_button_case_3/output.json"),
+                     mirrorLine);
+
+    ASSERT_TEST_CASE("Blazer for women with one button. Full seam path case 4",
+                     QStringLiteral("://full_seam_path_blazer_for_women_with_one_button_case_4/input.json"),
+                     QStringLiteral("://full_seam_path_blazer_for_women_with_one_button_case_4/output.json"),
+                     mirrorLine);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -1346,7 +1371,7 @@ void TST_VAbstractPiece::TestFullSeamAllowancePath_data() const
         QTest::newRow(title) << basePoints << fullPathPoints << mirrorLine;
     };
 
-    QLineF mirrorLine(QPointF(-7.795275590551569, 616.3778267716535), QPointF(823.7007874015749, 408.503811023622));
+    QLineF mirrorLine(QPointF(823.7007874015749, 408.503811023622), QPointF(-7.795275590551569, 616.3778267716535));
 
     // See file src/app/share/collection/bugs/fold_line.val
     ASSERT_TEST_CASE("Piece full path. Case 1", QStringLiteral("://full_seam_allowance_path_case_1/input.json"),
@@ -1362,10 +1387,34 @@ void TST_VAbstractPiece::TestFullSeamAllowancePath_data() const
                      QStringLiteral("://full_seam_allowance_path_case_4/output.json"), mirrorLine);
 
     // See file valentina_private_collection/bugs/full_piece/Basic_Darted_Bodice_Block.val (private collection)
-    mirrorLine = QLineF(QPointF(37.79527559055132, 604.4628631137784), QPointF(37.79527559055033, 4616.693036243291));
+    mirrorLine = QLineF(QPointF(37.79527559055033, 4616.693036243291), QPointF(37.79527559055132, 604.4628631137784));
 
     ASSERT_TEST_CASE("Basic Darted Bodice Block", QStringLiteral("://full_seam_allowance_path_case_5/input.json"),
                      QStringLiteral("://full_seam_allowance_path_case_5/output.json"), mirrorLine);
+
+    // See file valentina_private_collection/bugs/blazer_for women_with_one_button/Blazer for women with one button.val
+    mirrorLine =
+        QLineF(QPointF(-2242.6828986255887, 2222.0199037691837), QPointF(-1886.7717217796137, 2360.0315200625723));
+
+    ASSERT_TEST_CASE("Blazer for women with one button. Full seam allowance path case 1",
+                     QStringLiteral("://full_seam_allowance_path_blazer_for_women_with_one_button_case_1/input.json"),
+                     QStringLiteral("://full_seam_allowance_path_blazer_for_women_with_one_button_case_1/output.json"),
+                     mirrorLine);
+
+    ASSERT_TEST_CASE("Blazer for women with one button. Full seam allowance path case 2",
+                     QStringLiteral("://full_seam_allowance_path_blazer_for_women_with_one_button_case_2/input.json"),
+                     QStringLiteral("://full_seam_allowance_path_blazer_for_women_with_one_button_case_2/output.json"),
+                     mirrorLine);
+
+    ASSERT_TEST_CASE("Blazer for women with one button. Full seam allowance path case 3",
+                     QStringLiteral("://full_seam_allowance_path_blazer_for_women_with_one_button_case_3/input.json"),
+                     QStringLiteral("://full_seam_allowance_path_blazer_for_women_with_one_button_case_3/output.json"),
+                     mirrorLine);
+
+    ASSERT_TEST_CASE("Blazer for women with one button. Full seam allowance path case 4",
+                     QStringLiteral("://full_seam_allowance_path_blazer_for_women_with_one_button_case_4/input.json"),
+                     QStringLiteral("://full_seam_allowance_path_blazer_for_women_with_one_button_case_4/output.json"),
+                     mirrorLine);
 }
 
 //---------------------------------------------------------------------------------------------------------------------

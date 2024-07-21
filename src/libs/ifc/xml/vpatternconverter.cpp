@@ -62,8 +62,8 @@ class QDomElement;
  */
 
 const QString VPatternConverter::PatternMinVerStr = QStringLiteral("0.1.4");                     // NOLINT
-const QString VPatternConverter::PatternMaxVerStr = QStringLiteral("0.9.6");                     // NOLINT
-const QString VPatternConverter::CurrentSchema = QStringLiteral("://schema/pattern/v0.9.6.xsd"); // NOLINT
+const QString VPatternConverter::PatternMaxVerStr = QStringLiteral("0.9.7");                     // NOLINT
+const QString VPatternConverter::CurrentSchema = QStringLiteral("://schema/pattern/v0.9.7.xsd"); // NOLINT
 
 // VPatternConverter::PatternMinVer; // <== DON'T FORGET TO UPDATE TOO!!!!
 // VPatternConverter::PatternMaxVer; // <== DON'T FORGET TO UPDATE TOO!!!!
@@ -137,6 +137,7 @@ Q_GLOBAL_STATIC_WITH_ARGS(const QString, strNodes, ("nodes"_L1))             // 
 Q_GLOBAL_STATIC_WITH_ARGS(const QString, strData, ("data"_L1))               // NOLINT
 Q_GLOBAL_STATIC_WITH_ARGS(const QString, strPatternInfo, ("patternInfo"_L1)) // NOLINT
 Q_GLOBAL_STATIC_WITH_ARGS(const QString, strGrainline, ("grainline"_L1))     // NOLINT
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, strMirrorLine, ("mirrorLine"_L1))   // NOLINT
 Q_GLOBAL_STATIC_WITH_ARGS(const QString, strReverse, ("reverse"_L1))         // NOLINT
 Q_GLOBAL_STATIC_WITH_ARGS(const QString, strMx, ("mx"_L1))                   // NOLINT
 Q_GLOBAL_STATIC_WITH_ARGS(const QString, strMy, ("my"_L1))                   // NOLINT
@@ -182,6 +183,8 @@ Q_GLOBAL_STATIC_WITH_ARGS(const QString, strLastToCountour, ("lastToCountour"_L1
 Q_GLOBAL_STATIC_WITH_ARGS(const QString, strLastToContour, ("lastToContour"_L1))       // NOLINT
 Q_GLOBAL_STATIC_WITH_ARGS(const QString, strVisible, ("visible"_L1))                   // NOLINT
 Q_GLOBAL_STATIC_WITH_ARGS(const QString, strEnabled, ("enabled"_L1))                   // NOLINT
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, strP1, ("p1"_L1))                             // NOLINT
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, strP2, ("p2"_L1))                             // NOLINT
 
 QT_WARNING_POP
 } // anonymous namespace
@@ -269,7 +272,8 @@ auto VPatternConverter::XSDSchemas() -> QHash<unsigned int, QString>
         std::make_pair(FormatVersion(0, 9, 3), QStringLiteral("://schema/pattern/v0.9.3.xsd")),
         std::make_pair(FormatVersion(0, 9, 4), QStringLiteral("://schema/pattern/v0.9.4.xsd")),
         std::make_pair(FormatVersion(0, 9, 5), QStringLiteral("://schema/pattern/v0.9.5.xsd")),
-        std::make_pair(FormatVersion(0, 9, 6), CurrentSchema)};
+        std::make_pair(FormatVersion(0, 9, 6), QStringLiteral("://schema/pattern/v0.9.6.xsd")),
+        std::make_pair(FormatVersion(0, 9, 7), CurrentSchema)};
 
     return schemas;
 }
@@ -393,9 +397,12 @@ void VPatternConverter::ApplyPatches()
         case (FormatVersion(0, 9, 4)):
         case (FormatVersion(0, 9, 5)):
             ToV0_9_6();
-            ValidateXML(CurrentSchema);
             Q_FALLTHROUGH();
         case (FormatVersion(0, 9, 6)):
+            ToV0_9_7();
+            ValidateXML(CurrentSchema);
+            Q_FALLTHROUGH();
+        case (FormatVersion(0, 9, 7)):
             break;
         default:
             InvalidVersion(m_ver);
@@ -413,7 +420,7 @@ void VPatternConverter::DowngradeToCurrentMaxVersion()
 auto VPatternConverter::IsReadOnly() const -> bool
 {
     // Check if attribute readOnly was not changed in file format
-    Q_STATIC_ASSERT_X(VPatternConverter::PatternMaxVer == FormatVersion(0, 9, 6), "Check attribute readOnly.");
+    Q_STATIC_ASSERT_X(VPatternConverter::PatternMaxVer == FormatVersion(0, 9, 7), "Check attribute readOnly.");
 
     // Possibly in future attribute readOnly will change position etc.
     // For now position is the same for all supported format versions.
@@ -597,6 +604,18 @@ void VPatternConverter::ToV0_9_6()
     ConvertGrainlineToV0_9_6();
 
     SetVersion(QStringLiteral("0.9.6"));
+    Save();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VPatternConverter::ToV0_9_7()
+{
+    // TODO. Delete if minimal supported version is 0.9.7
+    Q_STATIC_ASSERT_X(VPatternConverter::PatternMinVer < FormatVersion(0, 9, 7), "Time to refactor the code.");
+
+    ConvertMirrorLineToV0_9_7();
+
+    SetVersion(QStringLiteral("0.9.7"));
     Save();
 }
 
@@ -2237,6 +2256,31 @@ void VPatternConverter::ConvertGrainlineToV0_9_6()
         {
             domElement.setAttribute(*strEnabled, domElement.attribute(*strVisible));
             domElement.removeAttribute(*strVisible);
+        }
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VPatternConverter::ConvertMirrorLineToV0_9_7()
+{
+    // TODO. Delete if minimal supported version is 0.9.7
+    Q_STATIC_ASSERT_X(VPatternConverter::PatternMinVer < FormatVersion(0, 9, 7), "Time to refactor the code.");
+
+    const QDomNodeList mirrorLines = this->elementsByTagName(*strMirrorLine);
+    for (int i = 0; i < mirrorLines.size(); ++i)
+    {
+        QDomElement domElement = mirrorLines.at(i).toElement();
+
+        if (domElement.isNull())
+        {
+            continue;
+        }
+
+        if (domElement.hasAttribute(*strP1) && domElement.hasAttribute(*strP2))
+        {
+            QString const p1 = domElement.attribute(*strP1);
+            domElement.setAttribute(*strP1, domElement.attribute(*strP2));
+            domElement.setAttribute(*strP2, p1);
         }
     }
 }

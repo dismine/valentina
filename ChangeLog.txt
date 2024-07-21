@@ -7,6 +7,7 @@
 - Fix regression. Formula wizard dialog doesn't show item alias in a list.
 - Fix parsing SVG fonts.
 - Add "Twin Sans" single stroke font.
+- Fixed generation of mirror side of piece based on fold line. 
 
 # Valentina 0.7.53 June 25, 2024
 - Fix layout sheet export with empty name.

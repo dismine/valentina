@@ -778,11 +778,11 @@ auto VPiece::SeamAllowancePointsWithRotation(const VContainer *data, vsizetype m
                         {
                             if (VFuzzyComparePoints(ekvPoint, mirrorLine.p1()))
                             {
-                                ekvPoint.SetSABefore(0);
+                                ekvPoint.SetSAAfter(0);
                             }
                             else if (VFuzzyComparePoints(ekvPoint, mirrorLine.p2()))
                             {
-                                ekvPoint.SetSAAfter(0);
+                                ekvPoint.SetSABefore(0);
                             }
                         }
 
