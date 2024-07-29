@@ -409,6 +409,7 @@ void VPGraphicsPieceControls::mousePressEvent(QGraphicsSceneMouseEvent *event)
     if (event->button() == Qt::LeftButton && event->type() != QEvent::GraphicsSceneMouseDoubleClick)
     {
         m_rotationStartPoint = event->scenePos();
+        m_rotationSum = 0;
         m_controlsVisible = false;
         m_handleCorner = SelectedHandleCorner(event->pos());
         m_ignorePieceTransformation = true;
@@ -451,6 +452,16 @@ void VPGraphicsPieceControls::mouseMoveEvent(QGraphicsSceneMouseEvent *event)
     if (rotateOn > 180)
     {
         rotateOn = rotateOn - 360.;
+    }
+
+    m_rotationSum += rotateOn;
+
+    if (event->modifiers() & Qt::ControlModifier)
+    {
+        const qreal sign = std::copysign(1.0, m_rotationSum);
+        const int steps = qFloor(qAbs(m_rotationSum / 15));
+        rotateOn = 15 * steps * sign;
+        m_rotationSum -= rotateOn;
     }
 
     if (not qFuzzyIsNull(rotateOn))

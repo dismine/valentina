@@ -151,6 +151,7 @@ private:
     bool allowChangeMerge{false};
     QList<VPPiecePtr> m_selectedPieces{};
     bool m_ignorePieceTransformation{false};
+    qreal m_rotationSum{0};
 
     QMap<VPHandleCornerType, QPixmap> m_handlePixmaps{};
     QMap<VPHandleCornerType, QPixmap> m_handleHoverPixmaps{};

@@ -8,6 +8,7 @@
 - Fix parsing SVG fonts.
 - Add "Twin Sans" single stroke font.
 - Fixed generation of mirror side of piece based on fold line. 
+- Puzzle app. Piece rotation with step 15 degrees by holding Ctrl key.
 
 # Valentina 0.7.53 June 25, 2024
 - Fix layout sheet export with empty name.
