@@ -205,6 +205,12 @@ auto VPlainTextEdit::MatchRightParenthesis(QTextBlock currentBlock, int i, int n
 //---------------------------------------------------------------------------------------------------------------------
 void VPlainTextEdit::CreateParenthesisSelection(int pos, bool match)
 {
+    if (pos < 0 || pos >= toPlainText().length())
+    {
+        qDebug() << "String:" << toPlainText() << "Position '" << pos << "' out of range";
+        return;
+    }
+
     QList<QTextEdit::ExtraSelection> selections = extraSelections();
 
     QTextEdit::ExtraSelection selection;
