@@ -89,4 +89,22 @@ template <class T> void VectorToJson(const QVector<T> &points, QJsonObject &json
     json[QLatin1String("vector")] = pointsArray;
 }
 #endif // !defined(V_NO_ASSERT)
+
+//---------------------------------------------------------------------------------------------------------------------
+template <class T> auto TurnPointList(const QVector<T> &points) -> QVector<T>
+{
+    QVector<T> list;
+    list.reserve(points.size());
+
+    for (const auto &p : qAsConst(points))
+    {
+        if (p.TurnPoint())
+        {
+            list.append(p);
+        }
+    }
+
+    return list;
+}
+
 #endif // TESTPATH_H

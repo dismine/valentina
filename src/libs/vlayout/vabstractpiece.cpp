@@ -1153,6 +1153,8 @@ auto VAbstractPiece::Equidistant(QVector<VSAPoint> points, qreal width, const QS
     cleaned = CorrectEquidistantPoints(cleaned, removeFirstAndLast);
     cleaned = CorrectPathDistortion(cleaned);
 
+    //    DumpVector(TurnPointList(cleaned), QStringLiteral("output.json.XXXXXX")); // Uncomment for dumping test data
+
     //    QVector<QPointF> dump;
     //    CastTo(cleaned, dump);
     //    DumpVector(dump, QStringLiteral("output.json.XXXXXX")); // Uncomment for dumping test data

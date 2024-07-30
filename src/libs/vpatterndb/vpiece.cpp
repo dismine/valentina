@@ -186,6 +186,8 @@ auto VPiece::MainPathPoints(const VContainer *data) const -> QVector<VLayoutPoin
     QVector<VLayoutPoint> points = mainPath.PathPoints(data);
     points = CheckLoops(CorrectEquidistantPoints(points)); // A path can contains loops
 
+    //    DumpVector(TurnPointList(points), QStringLiteral("output.json.XXXXXX")); // Uncomment for dumping test data
+
     //    DumpVector(points, QStringLiteral("output.json.XXXXXX")); // Uncomment for dumping test data
     return points;
 }

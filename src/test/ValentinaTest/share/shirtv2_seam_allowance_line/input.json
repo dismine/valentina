@@ -1,0 +1,783 @@
+{
+    "vector": [
+        {
+            "passmarkClockwiseOpening": false,
+            "saAfter": 56.69291338582678,
+            "saBefore": 26.45669291338583,
+            "turnPoint": true,
+            "type": "VSAPoint",
+            "x": -1695.8740157480315,
+            "y": -1001.9900661931171
+        },
+        {
+            "passmarkClockwiseOpening": false,
+            "saAfter": 56.69291338582678,
+            "saBefore": 56.69291338582678,
+            "turnPoint": true,
+            "type": "VSAPoint",
+            "x": -1223.4330708661416,
+            "y": -1001.9900661931171
+        },
+        {
+            "passmarkClockwiseOpening": false,
+            "saAfter": 26.45669291338583,
+            "saBefore": 56.69291338582678,
+            "turnPoint": true,
+            "type": "VSAPoint",
+            "x": -750.9921259842519,
+            "y": -1001.9900661931171
+        },
+        {
+            "passmarkClockwiseOpening": false,
+            "saAfter": 26.45669291338583,
+            "saBefore": 26.45669291338583,
+            "turnPoint": true,
+            "type": "VSAPoint",
+            "x": -750.9921259842519,
+            "y": -888.6042394214635
+        },
+        {
+            "passmarkClockwiseOpening": false,
+            "saAfter": 26.45669291338583,
+            "saBefore": 26.45669291338583,
+            "turnPoint": true,
+            "type": "VSAPoint",
+            "x": -750.9921259842519,
+            "y": -850.8089638309123
+        },
+        {
+            "curvePoint": true,
+            "passmarkClockwiseOpening": false,
+            "saAfter": 26.45669291338583,
+            "saBefore": 26.45669291338583,
+            "turnPoint": true,
+            "type": "VSAPoint",
+            "x": -750.9921259842519,
+            "y": -850.8089638309123
+        },
+        {
+            "angle": 6,
+            "curvePoint": true,
+            "passmarkClockwiseOpening": false,
+            "saAfter": 26.45669291338583,
+            "saBefore": 26.45669291338583,
+            "type": "VSAPoint",
+            "x": -751.0105230352001,
+            "y": -848.6904032907711
+        },
+        {
+            "angle": 6,
+            "curvePoint": true,
+            "passmarkClockwiseOpening": false,
+            "saAfter": 26.45669291338583,
+            "saBefore": 26.45669291338583,
+            "type": "VSAPoint",
+            "x": -751.192819858519,
+            "y": -844.5288493300338
+        },
+        {
+            "angle": 6,
+            "curvePoint": true,
+            "passmarkClockwiseOpening": false,
+            "saAfter": 26.45669291338583,
+            "saBefore": 26.45669291338583,
+            "type": "VSAPoint",
+            "x": -751.5472676602066,
+            "y": -840.4604282000892
+        },
+        {
+            "angle": 6,
+            "curvePoint": true,
+            "passmarkClockwiseOpening": false,
+            "saAfter": 26.45669291338583,
+            "saBefore": 26.45669291338583,
+            "type": "VSAPoint",
+            "x": -752.0711416765532,
+            "y": -836.4878646646468
+        },
+        {
+            "angle": 6,
+            "curvePoint": true,
+            "passmarkClockwiseOpening": false,
+            "saAfter": 26.45669291338583,
+            "saBefore": 26.45669291338583,
+            "type": "VSAPoint",
+            "x": -752.7617171438496,
+            "y": -832.6138834874159
+        },
+        {
+            "angle": 6,
+            "curvePoint": true,
+            "passmarkClockwiseOpening": false,
+            "saAfter": 26.45669291338583,
+            "saBefore": 26.45669291338583,
+            "type": "VSAPoint",
+            "x": -753.6162692983859,
+            "y": -828.8412094321063
+        },
+        {
+            "angle": 6,
+            "curvePoint": true,
+            "passmarkClockwiseOpening": false,
+            "saAfter": 26.45669291338583,
+            "saBefore": 26.45669291338583,
+            "type": "VSAPoint",
+            "x": -754.6320733764528,
+            "y": -825.1725672624273
+        },
+        {
+            "angle": 6,
+            "curvePoint": true,
+            "passmarkClockwiseOpening": false,
+            "saAfter": 26.45669291338583,
+            "saBefore": 26.45669291338583,
+            "type": "VSAPoint",
+            "x": -755.8064046143406,
+            "y": -821.6106817420884
+        },
+        {
+            "angle": 6,
+            "curvePoint": true,
+            "passmarkClockwiseOpening": false,
+            "saAfter": 26.45669291338583,
+            "saBefore": 26.45669291338583,
+            "type": "VSAPoint",
+            "x": -757.1365382483402,
+            "y": -818.1582776347991
+        },
+        {
+            "angle": 6,
+            "curvePoint": true,
+            "passmarkClockwiseOpening": false,
+            "saAfter": 26.45669291338583,
+            "saBefore": 26.45669291338583,
+            "type": "VSAPoint",
+            "x": -758.6197495147417,
+            "y": -814.8180797042692
+        },
+        {
+            "angle": 6,
+            "curvePoint": true,
+            "passmarkClockwiseOpening": false,
+            "saAfter": 26.45669291338583,
+            "saBefore": 26.45669291338583,
+            "type": "VSAPoint",
+            "x": -760.2533136498355,
+            "y": -811.5928127142079
+        },
+        {
+            "angle": 6,
+            "curvePoint": true,
+            "passmarkClockwiseOpening": false,
+            "saAfter": 26.45669291338583,
+            "saBefore": 26.45669291338583,
+            "type": "VSAPoint",
+            "x": -762.0345058899125,
+            "y": -808.485201428325
+        },
+        {
+            "angle": 6,
+            "curvePoint": true,
+            "passmarkClockwiseOpening": false,
+            "saAfter": 26.45669291338583,
+            "saBefore": 26.45669291338583,
+            "type": "VSAPoint",
+            "x": -763.9606014712626,
+            "y": -805.4979706103297
+        },
+        {
+            "angle": 6,
+            "curvePoint": true,
+            "passmarkClockwiseOpening": false,
+            "saAfter": 26.45669291338583,
+            "saBefore": 26.45669291338583,
+            "type": "VSAPoint",
+            "x": -766.028875630177,
+            "y": -802.633845023932
+        },
+        {
+            "angle": 6,
+            "curvePoint": true,
+            "passmarkClockwiseOpening": false,
+            "saAfter": 26.45669291338583,
+            "saBefore": 26.45669291338583,
+            "type": "VSAPoint",
+            "x": -768.2366036029457,
+            "y": -799.8955494328409
+        },
+        {
+            "angle": 6,
+            "curvePoint": true,
+            "passmarkClockwiseOpening": false,
+            "saAfter": 26.45669291338583,
+            "saBefore": 26.45669291338583,
+            "type": "VSAPoint",
+            "x": -770.5810606258592,
+            "y": -797.2858086007661
+        },
+        {
+            "angle": 6,
+            "curvePoint": true,
+            "passmarkClockwiseOpening": false,
+            "saAfter": 26.45669291338583,
+            "saBefore": 26.45669291338583,
+            "type": "VSAPoint",
+            "x": -773.0595219352081,
+            "y": -794.8073472914173
+        },
+        {
+            "angle": 6,
+            "curvePoint": true,
+            "passmarkClockwiseOpening": false,
+            "saAfter": 26.45669291338583,
+            "saBefore": 26.45669291338583,
+            "type": "VSAPoint",
+            "x": -775.6692627672828,
+            "y": -792.4628902685038
+        },
+        {
+            "angle": 6,
+            "curvePoint": true,
+            "passmarkClockwiseOpening": false,
+            "saAfter": 26.45669291338583,
+            "saBefore": 26.45669291338583,
+            "type": "VSAPoint",
+            "x": -778.407558358374,
+            "y": -790.2551622957351
+        },
+        {
+            "angle": 6,
+            "curvePoint": true,
+            "passmarkClockwiseOpening": false,
+            "saAfter": 26.45669291338583,
+            "saBefore": 26.45669291338583,
+            "type": "VSAPoint",
+            "x": -781.2716839447717,
+            "y": -788.1868881368207
+        },
+        {
+            "angle": 6,
+            "curvePoint": true,
+            "passmarkClockwiseOpening": false,
+            "saAfter": 26.45669291338583,
+            "saBefore": 26.45669291338583,
+            "type": "VSAPoint",
+            "x": -784.258914762767,
+            "y": -786.2607925554705
+        },
+        {
+            "angle": 6,
+            "curvePoint": true,
+            "passmarkClockwiseOpening": false,
+            "saAfter": 26.45669291338583,
+            "saBefore": 26.45669291338583,
+            "type": "VSAPoint",
+            "x": -787.3665260486498,
+            "y": -784.4796003153936
+        },
+        {
+            "angle": 6,
+            "curvePoint": true,
+            "passmarkClockwiseOpening": false,
+            "saAfter": 26.45669291338583,
+            "saBefore": 26.45669291338583,
+            "type": "VSAPoint",
+            "x": -790.5917930387111,
+            "y": -782.8460361802997
+        },
+        {
+            "angle": 6,
+            "curvePoint": true,
+            "passmarkClockwiseOpening": false,
+            "saAfter": 26.45669291338583,
+            "saBefore": 26.45669291338583,
+            "type": "VSAPoint",
+            "x": -793.931990969241,
+            "y": -781.3628249138983
+        },
+        {
+            "angle": 6,
+            "curvePoint": true,
+            "passmarkClockwiseOpening": false,
+            "saAfter": 26.45669291338583,
+            "saBefore": 26.45669291338583,
+            "type": "VSAPoint",
+            "x": -797.3843950765304,
+            "y": -780.0326912798987
+        },
+        {
+            "angle": 6,
+            "curvePoint": true,
+            "passmarkClockwiseOpening": false,
+            "saAfter": 26.45669291338583,
+            "saBefore": 26.45669291338583,
+            "type": "VSAPoint",
+            "x": -800.9462805968692,
+            "y": -778.8583600420109
+        },
+        {
+            "angle": 6,
+            "curvePoint": true,
+            "passmarkClockwiseOpening": false,
+            "saAfter": 26.45669291338583,
+            "saBefore": 26.45669291338583,
+            "type": "VSAPoint",
+            "x": -804.6149227665483,
+            "y": -777.8425559639439
+        },
+        {
+            "angle": 6,
+            "curvePoint": true,
+            "passmarkClockwiseOpening": false,
+            "saAfter": 26.45669291338583,
+            "saBefore": 26.45669291338583,
+            "type": "VSAPoint",
+            "x": -808.3875968218579,
+            "y": -776.9880038094077
+        },
+        {
+            "angle": 6,
+            "curvePoint": true,
+            "passmarkClockwiseOpening": false,
+            "saAfter": 26.45669291338583,
+            "saBefore": 26.45669291338583,
+            "type": "VSAPoint",
+            "x": -812.2615779990888,
+            "y": -776.2974283421113
+        },
+        {
+            "angle": 6,
+            "curvePoint": true,
+            "passmarkClockwiseOpening": false,
+            "saAfter": 26.45669291338583,
+            "saBefore": 26.45669291338583,
+            "type": "VSAPoint",
+            "x": -816.2341415345311,
+            "y": -775.7735543257646
+        },
+        {
+            "angle": 6,
+            "curvePoint": true,
+            "passmarkClockwiseOpening": false,
+            "saAfter": 26.45669291338583,
+            "saBefore": 26.45669291338583,
+            "type": "VSAPoint",
+            "x": -820.3025626644758,
+            "y": -775.419106524077
+        },
+        {
+            "angle": 6,
+            "curvePoint": true,
+            "passmarkClockwiseOpening": false,
+            "saAfter": 26.45669291338583,
+            "saBefore": 26.45669291338583,
+            "type": "VSAPoint",
+            "x": -824.464116625213,
+            "y": -775.2368097007582
+        },
+        {
+            "curvePoint": true,
+            "passmarkClockwiseOpening": false,
+            "saAfter": 26.45669291338583,
+            "saBefore": 26.45669291338583,
+            "turnPoint": true,
+            "type": "VSAPoint",
+            "x": -826.5826771653542,
+            "y": -775.2184126498099
+        },
+        {
+            "passmarkClockwiseOpening": false,
+            "saAfter": 26.45669291338583,
+            "saBefore": 26.45669291338583,
+            "turnPoint": true,
+            "type": "VSAPoint",
+            "x": -826.5826771653542,
+            "y": -775.2184126498099
+        },
+        {
+            "passmarkClockwiseOpening": false,
+            "saAfter": 26.45669291338583,
+            "saBefore": 26.45669291338583,
+            "turnPoint": true,
+            "type": "VSAPoint",
+            "x": -845.4803149606298,
+            "y": -775.2184126498099
+        },
+        {
+            "passmarkClockwiseOpening": false,
+            "saAfter": 26.45669291338583,
+            "saBefore": 26.45669291338583,
+            "turnPoint": true,
+            "type": "VSAPoint",
+            "x": -1601.3858267716535,
+            "y": -775.2184126498099
+        },
+        {
+            "passmarkClockwiseOpening": false,
+            "saAfter": 26.45669291338583,
+            "saBefore": 26.45669291338583,
+            "turnPoint": true,
+            "type": "VSAPoint",
+            "x": -1620.283464566929,
+            "y": -775.2184126498099
+        },
+        {
+            "curvePoint": true,
+            "passmarkClockwiseOpening": false,
+            "saAfter": 26.45669291338583,
+            "saBefore": 26.45669291338583,
+            "turnPoint": true,
+            "type": "VSAPoint",
+            "x": -1620.283464566929,
+            "y": -775.2184126498099
+        },
+        {
+            "angle": 6,
+            "curvePoint": true,
+            "passmarkClockwiseOpening": false,
+            "saAfter": 26.45669291338583,
+            "saBefore": 26.45669291338583,
+            "type": "VSAPoint",
+            "x": -1622.4020251070701,
+            "y": -775.2368097007582
+        },
+        {
+            "angle": 6,
+            "curvePoint": true,
+            "passmarkClockwiseOpening": false,
+            "saAfter": 26.45669291338583,
+            "saBefore": 26.45669291338583,
+            "type": "VSAPoint",
+            "x": -1626.5635790678075,
+            "y": -775.419106524077
+        },
+        {
+            "angle": 6,
+            "curvePoint": true,
+            "passmarkClockwiseOpening": false,
+            "saAfter": 26.45669291338583,
+            "saBefore": 26.45669291338583,
+            "type": "VSAPoint",
+            "x": -1630.632000197752,
+            "y": -775.7735543257646
+        },
+        {
+            "angle": 6,
+            "curvePoint": true,
+            "passmarkClockwiseOpening": false,
+            "saAfter": 26.45669291338583,
+            "saBefore": 26.45669291338583,
+            "type": "VSAPoint",
+            "x": -1634.6045637331945,
+            "y": -776.2974283421113
+        },
+        {
+            "angle": 6,
+            "curvePoint": true,
+            "passmarkClockwiseOpening": false,
+            "saAfter": 26.45669291338583,
+            "saBefore": 26.45669291338583,
+            "type": "VSAPoint",
+            "x": -1638.4785449104254,
+            "y": -776.9880038094077
+        },
+        {
+            "angle": 6,
+            "curvePoint": true,
+            "passmarkClockwiseOpening": false,
+            "saAfter": 26.45669291338583,
+            "saBefore": 26.45669291338583,
+            "type": "VSAPoint",
+            "x": -1642.251218965735,
+            "y": -777.8425559639439
+        },
+        {
+            "angle": 6,
+            "curvePoint": true,
+            "passmarkClockwiseOpening": false,
+            "saAfter": 26.45669291338583,
+            "saBefore": 26.45669291338583,
+            "type": "VSAPoint",
+            "x": -1645.9198611354138,
+            "y": -778.8583600420109
+        },
+        {
+            "angle": 6,
+            "curvePoint": true,
+            "passmarkClockwiseOpening": false,
+            "saAfter": 26.45669291338583,
+            "saBefore": 26.45669291338583,
+            "type": "VSAPoint",
+            "x": -1649.4817466557527,
+            "y": -780.0326912798987
+        },
+        {
+            "angle": 6,
+            "curvePoint": true,
+            "passmarkClockwiseOpening": false,
+            "saAfter": 26.45669291338583,
+            "saBefore": 26.45669291338583,
+            "type": "VSAPoint",
+            "x": -1652.9341507630422,
+            "y": -781.3628249138983
+        },
+        {
+            "angle": 6,
+            "curvePoint": true,
+            "passmarkClockwiseOpening": false,
+            "saAfter": 26.45669291338583,
+            "saBefore": 26.45669291338583,
+            "type": "VSAPoint",
+            "x": -1656.2743486935722,
+            "y": -782.8460361802997
+        },
+        {
+            "angle": 6,
+            "curvePoint": true,
+            "passmarkClockwiseOpening": false,
+            "saAfter": 26.45669291338583,
+            "saBefore": 26.45669291338583,
+            "type": "VSAPoint",
+            "x": -1659.4996156836335,
+            "y": -784.4796003153936
+        },
+        {
+            "angle": 6,
+            "curvePoint": true,
+            "passmarkClockwiseOpening": false,
+            "saAfter": 26.45669291338583,
+            "saBefore": 26.45669291338583,
+            "type": "VSAPoint",
+            "x": -1662.6072269695164,
+            "y": -786.2607925554705
+        },
+        {
+            "angle": 6,
+            "curvePoint": true,
+            "passmarkClockwiseOpening": false,
+            "saAfter": 26.45669291338583,
+            "saBefore": 26.45669291338583,
+            "type": "VSAPoint",
+            "x": -1665.5944577875116,
+            "y": -788.1868881368207
+        },
+        {
+            "angle": 6,
+            "curvePoint": true,
+            "passmarkClockwiseOpening": false,
+            "saAfter": 26.45669291338583,
+            "saBefore": 26.45669291338583,
+            "type": "VSAPoint",
+            "x": -1668.4585833739093,
+            "y": -790.2551622957351
+        },
+        {
+            "angle": 6,
+            "curvePoint": true,
+            "passmarkClockwiseOpening": false,
+            "saAfter": 26.45669291338583,
+            "saBefore": 26.45669291338583,
+            "type": "VSAPoint",
+            "x": -1671.1968789650005,
+            "y": -792.4628902685038
+        },
+        {
+            "angle": 6,
+            "curvePoint": true,
+            "passmarkClockwiseOpening": false,
+            "saAfter": 26.45669291338583,
+            "saBefore": 26.45669291338583,
+            "type": "VSAPoint",
+            "x": -1673.8066197970752,
+            "y": -794.8073472914173
+        },
+        {
+            "angle": 6,
+            "curvePoint": true,
+            "passmarkClockwiseOpening": false,
+            "saAfter": 26.45669291338583,
+            "saBefore": 26.45669291338583,
+            "type": "VSAPoint",
+            "x": -1676.2850811064245,
+            "y": -797.2858086007661
+        },
+        {
+            "angle": 6,
+            "curvePoint": true,
+            "passmarkClockwiseOpening": false,
+            "saAfter": 26.45669291338583,
+            "saBefore": 26.45669291338583,
+            "type": "VSAPoint",
+            "x": -1678.6295381293378,
+            "y": -799.8955494328409
+        },
+        {
+            "angle": 6,
+            "curvePoint": true,
+            "passmarkClockwiseOpening": false,
+            "saAfter": 26.45669291338583,
+            "saBefore": 26.45669291338583,
+            "type": "VSAPoint",
+            "x": -1680.8372661021065,
+            "y": -802.633845023932
+        },
+        {
+            "angle": 6,
+            "curvePoint": true,
+            "passmarkClockwiseOpening": false,
+            "saAfter": 26.45669291338583,
+            "saBefore": 26.45669291338583,
+            "type": "VSAPoint",
+            "x": -1682.9055402610206,
+            "y": -805.4979706103297
+        },
+        {
+            "angle": 6,
+            "curvePoint": true,
+            "passmarkClockwiseOpening": false,
+            "saAfter": 26.45669291338583,
+            "saBefore": 26.45669291338583,
+            "type": "VSAPoint",
+            "x": -1684.8316358423713,
+            "y": -808.485201428325
+        },
+        {
+            "angle": 6,
+            "curvePoint": true,
+            "passmarkClockwiseOpening": false,
+            "saAfter": 26.45669291338583,
+            "saBefore": 26.45669291338583,
+            "type": "VSAPoint",
+            "x": -1686.612828082448,
+            "y": -811.5928127142079
+        },
+        {
+            "angle": 6,
+            "curvePoint": true,
+            "passmarkClockwiseOpening": false,
+            "saAfter": 26.45669291338583,
+            "saBefore": 26.45669291338583,
+            "type": "VSAPoint",
+            "x": -1688.2463922175418,
+            "y": -814.8180797042692
+        },
+        {
+            "angle": 6,
+            "curvePoint": true,
+            "passmarkClockwiseOpening": false,
+            "saAfter": 26.45669291338583,
+            "saBefore": 26.45669291338583,
+            "type": "VSAPoint",
+            "x": -1689.7296034839433,
+            "y": -818.1582776347993
+        },
+        {
+            "angle": 6,
+            "curvePoint": true,
+            "passmarkClockwiseOpening": false,
+            "saAfter": 26.45669291338583,
+            "saBefore": 26.45669291338583,
+            "type": "VSAPoint",
+            "x": -1691.0597371179429,
+            "y": -821.6106817420884
+        },
+        {
+            "angle": 6,
+            "curvePoint": true,
+            "passmarkClockwiseOpening": false,
+            "saAfter": 26.45669291338583,
+            "saBefore": 26.45669291338583,
+            "type": "VSAPoint",
+            "x": -1692.234068355831,
+            "y": -825.1725672624273
+        },
+        {
+            "angle": 6,
+            "curvePoint": true,
+            "passmarkClockwiseOpening": false,
+            "saAfter": 26.45669291338583,
+            "saBefore": 26.45669291338583,
+            "type": "VSAPoint",
+            "x": -1693.2498724338975,
+            "y": -828.8412094321063
+        },
+        {
+            "angle": 6,
+            "curvePoint": true,
+            "passmarkClockwiseOpening": false,
+            "saAfter": 26.45669291338583,
+            "saBefore": 26.45669291338583,
+            "type": "VSAPoint",
+            "x": -1694.1044245884339,
+            "y": -832.6138834874159
+        },
+        {
+            "angle": 6,
+            "curvePoint": true,
+            "passmarkClockwiseOpening": false,
+            "saAfter": 26.45669291338583,
+            "saBefore": 26.45669291338583,
+            "type": "VSAPoint",
+            "x": -1694.79500005573,
+            "y": -836.4878646646468
+        },
+        {
+            "angle": 6,
+            "curvePoint": true,
+            "passmarkClockwiseOpening": false,
+            "saAfter": 26.45669291338583,
+            "saBefore": 26.45669291338583,
+            "type": "VSAPoint",
+            "x": -1695.318874072077,
+            "y": -840.4604282000892
+        },
+        {
+            "angle": 6,
+            "curvePoint": true,
+            "passmarkClockwiseOpening": false,
+            "saAfter": 26.45669291338583,
+            "saBefore": 26.45669291338583,
+            "type": "VSAPoint",
+            "x": -1695.6733218737645,
+            "y": -844.5288493300338
+        },
+        {
+            "angle": 6,
+            "curvePoint": true,
+            "passmarkClockwiseOpening": false,
+            "saAfter": 26.45669291338583,
+            "saBefore": 26.45669291338583,
+            "type": "VSAPoint",
+            "x": -1695.8556186970836,
+            "y": -848.6904032907711
+        },
+        {
+            "curvePoint": true,
+            "passmarkClockwiseOpening": false,
+            "saAfter": 26.45669291338583,
+            "saBefore": 26.45669291338583,
+            "turnPoint": true,
+            "type": "VSAPoint",
+            "x": -1695.8740157480315,
+            "y": -850.8089638309123
+        },
+        {
+            "passmarkClockwiseOpening": false,
+            "saAfter": 26.45669291338583,
+            "saBefore": 26.45669291338583,
+            "turnPoint": true,
+            "type": "VSAPoint",
+            "x": -1695.8740157480315,
+            "y": -850.8089638309123
+        },
+        {
+            "passmarkClockwiseOpening": false,
+            "saAfter": 26.45669291338583,
+            "saBefore": 26.45669291338583,
+            "turnPoint": true,
+            "type": "VSAPoint",
+            "x": -1695.8740157480315,
+            "y": -888.6042394214635
+        }
+    ]
+}

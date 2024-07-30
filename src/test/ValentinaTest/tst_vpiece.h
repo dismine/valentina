@@ -42,6 +42,7 @@ private slots:
     void Issue620();
     void TestSAPassmark_data();
     void TestSAPassmark();
+    void TestSeamLineTurnPoints();
 
 private:
     Q_DISABLE_COPY_MOVE(TST_VPiece) // NOLINT

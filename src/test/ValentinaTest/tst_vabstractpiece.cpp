@@ -1434,6 +1434,50 @@ void TST_VAbstractPiece::TestFullSeamAllowancePath() const
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+void TST_VAbstractPiece::TestSeamLineTurnPoints_data() const
+{
+    QTest::addColumn<QVector<VSAPoint>>("points");
+    QTest::addColumn<qreal>("width");
+    QTest::addColumn<QVector<QPointF>>("turnPoints");
+
+    auto ASSERT_TEST_CASE = [](const char *title, const QString &input, const QString &output, qreal width)
+    {
+        try
+        {
+            QVector<VSAPoint> const inputPoints = AbstractTest::VectorFromJson<VSAPoint>(input);
+            QVector<VLayoutPoint> const turnPoints = AbstractTest::VectorFromJson<VLayoutPoint>(output);
+            QVector<QPointF> outputPoints;
+            CastTo(turnPoints, outputPoints);
+            QTest::newRow(title) << inputPoints << width << outputPoints;
+        }
+        catch (const VException &e)
+        {
+            QFAIL(qUtf8Printable(e.ErrorMessage()));
+        }
+    };
+
+    // See file valentina_private_collection/bugs/shirtv2/shirtv2.val
+    ASSERT_TEST_CASE("fabric_cuff_L", QStringLiteral("://shirtv2_seam_allowance_line/input.json"),
+                     QStringLiteral("://shirtv2_seam_allowance_line/output.json"),
+                     37.795275590551185 /*seam allowance width*/);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void TST_VAbstractPiece::TestSeamLineTurnPoints() const
+{
+    QFETCH(QVector<VSAPoint>, points);
+    QFETCH(qreal, width);
+    QFETCH(QVector<QPointF>, turnPoints);
+
+    QVector<VLayoutPoint> const ekv = VAbstractPiece::Equidistant(points, width, QString());
+    QVector<QPointF> tPoints;
+    CastTo(TurnPointList(ekv), tPoints); // Take result
+
+    // Begin comparison
+    ComparePaths(tPoints, turnPoints);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 void TST_VAbstractPiece::Case3() const
 {
     const QVector<QPointF> points = InputPointsCase3a(); // Input points.

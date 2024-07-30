@@ -27,17 +27,17 @@
  *************************************************************************/
 
 #include "tst_vpiece.h"
-#include "../vpatterndb/vcontainer.h"
-#include "../vpatterndb/vpiece.h"
-#include "../vpatterndb/vpassmark.h"
 #include "../vmisc/vabstractvalapplication.h"
-
-#include <QtTest>
+#include "../vpatterndb/vcontainer.h"
+#include "../vpatterndb/vpassmark.h"
 #include "../vpatterndb/vpiece.h"
+
+#include "../vpatterndb/vpiece.h"
+#include <QtTest>
 
 //---------------------------------------------------------------------------------------------------------------------
 TST_VPiece::TST_VPiece(QObject *parent)
-    :AbstractTest(parent)
+  : AbstractTest(parent)
 {
 }
 
@@ -99,22 +99,19 @@ void TST_VPiece::TestSAPassmark_data()
     };
 
     // See file src/app/share/collection/bugs/Issue_#924.val
-    ASSERT_TEST_CASE("Test 1.",
-                     QStringLiteral("://Issue_924_Test_1/passmarkData.json"),
+    ASSERT_TEST_CASE("Test 1.", QStringLiteral("://Issue_924_Test_1/passmarkData.json"),
                      QStringLiteral("://Issue_924_Test_1/seamAllowance.json"),
                      QStringLiteral("://Issue_924_Test_1/rotatedSeamAllowance.json"),
                      QStringLiteral("://Issue_924_Test_1/passmarkShape.json"));
 
     // See file src/app/share/collection/bugs/Issue_#924.val
-    ASSERT_TEST_CASE("Test 2.",
-                     QStringLiteral("://Issue_924_Test_2/passmarkData.json"),
+    ASSERT_TEST_CASE("Test 2.", QStringLiteral("://Issue_924_Test_2/passmarkData.json"),
                      QStringLiteral("://Issue_924_Test_2/seamAllowance.json"),
                      QStringLiteral("://Issue_924_Test_2/rotatedSeamAllowance.json"),
                      QStringLiteral("://Issue_924_Test_2/passmarkShape.json"));
 
     // See file src/app/share/collection/bugs/incorrect_notch.val
-    ASSERT_TEST_CASE("Piece.",
-                     QStringLiteral("://incorrect_notch/passmarkData.json"),
+    ASSERT_TEST_CASE("Piece.", QStringLiteral("://incorrect_notch/passmarkData.json"),
                      QStringLiteral("://incorrect_notch/seamAllowance.json"),
                      QStringLiteral("://incorrect_notch/rotatedSeamAllowance.json"),
                      QStringLiteral("://incorrect_notch/passmarkShape.json"));
@@ -131,4 +128,34 @@ void TST_VPiece::TestSAPassmark()
     VPassmark const passmark(passmarkData);
 
     CompareLinesDistance(passmark.SAPassmark(seamAllowance, rotatedSeamAllowance, PassmarkSide::All), expectedResult);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void TST_VPiece::TestSeamLineTurnPoints()
+{
+    try
+    {
+        // See file valentina_private_collection/bugs/shirtv2.val
+        const Unit unit = Unit::Cm;
+        QSharedPointer<VContainer> data(new VContainer(nullptr, &unit, VContainer::UniqueNamespace()));
+        VAbstractValApplication::VApp()->SetPatternUnits(unit);
+
+        VPiece detail;
+        AbstractTest::PieceFromJson(QStringLiteral("://shirtv2_seam_line/input.json"), detail, data);
+
+        QVector<VLayoutPoint> const seamLine = detail.MainPathPoints(data.data());
+        QVector<QPointF> pointsEkv;
+        CastTo(TurnPointList(seamLine), pointsEkv);
+        QVector<VLayoutPoint> const turnPoints =
+            AbstractTest::VectorFromJson<VLayoutPoint>(QStringLiteral("://shirtv2_seam_line/output.json"));
+        QVector<QPointF> origPoints;
+        CastTo(turnPoints, origPoints);
+
+        // Begin comparison
+        ComparePaths(pointsEkv, origPoints);
+    }
+    catch (const VException &e)
+    {
+        QFAIL(qUtf8Printable(e.ErrorMessage()));
+    }
 }
