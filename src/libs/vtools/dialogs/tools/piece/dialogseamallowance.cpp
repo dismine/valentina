@@ -1428,6 +1428,7 @@ void DialogSeamAllowance::ListChanged()
     InitMirrorLine();
     CustomSAChanged(uiTabPaths->listWidgetCustomSA->currentRow());
     SetMoveControls();
+    SetOptionControls();
 }
 
 //---------------------------------------------------------------------------------------------------------------------

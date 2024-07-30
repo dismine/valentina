@@ -779,7 +779,7 @@ auto GetNodeName(const VContainer *data, const VPieceNode &node, bool showPassma
 
         if (not node.IsTurnPoint())
         {
-            name += QStringLiteral(" ⦿");
+            name += QStringLiteral(" ⊙");
         }
     }
 
