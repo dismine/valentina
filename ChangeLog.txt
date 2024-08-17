@@ -12,6 +12,7 @@
 - Fix export of turn points.
 - Remove legacy build system.
 - Tape and Puzzle crash when check for update.
+- Improvements for Windows installer. Automatically install latest Microsoft Visual C++ Redistributable Version if build with MSVC.
 
 # Valentina 0.7.53 June 25, 2024
 - Fix layout sheet export with empty name.

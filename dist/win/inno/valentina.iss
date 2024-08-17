@@ -7,6 +7,9 @@
 ; #define MyAppArchitecture
 ; #define MyAppMinWinVersion
 ; #define buildDirectory
+; #define DependencyVCRedist
+
+#include "CodeDependencies.iss"
 
 #define MyAppName "Valentina"
 #define MyAppPublisher "Roman Telezhynskyi"
@@ -593,6 +596,10 @@ var
  InstallationCanceledMessage : String;
 
  begin
+  #if DependencyVCRedist == "true"
+    Dependency_AddVC2015To2022;
+  #endif
+
   // Create a mutex for the installer and if it's already running then show a message and stop installation
   if CheckForMutexes(installer_mutex_name) then begin
     SuppressibleMsgBox(ExpandConstant('{cm:SetupIsRunningWarning}'), mbError, MB_OK, MB_OK);

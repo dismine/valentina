@@ -62,13 +62,23 @@ InnoSetup {
 
     }
 
+    property string vc_redist: {
+        if (qbs.toolchain.contains("msvc"))
+        {
+            return "true"
+        }
+
+        return "false";
+    }
+
     innosetup.verboseOutput: true
     innosetup.defines: [
         "MyAppVersion=" + version,
         "MyAppCopyright=" + buildconfig.valentina_copyright_string,
         "MyAppArchitecture=" + arhitecture,
         "MyAppMinWinVersion=" + minVersion,
-        "buildDirectory=" + project.qbs.installRoot
+        "buildDirectory=" + project.qbs.installRoot,
+        "DependencyVCRedist=" + vc_redist
     ]
     innosetup.compilerFlags: ["/V9"]
 
