@@ -84,29 +84,6 @@ linux_qt6_sonar_task_template: &LINUX_QT6_TASK_SONAR_TEMPLATE
     - cd $CIRRUS_WORKING_DIR
     - sonar-scanner -Dsonar.scm.revision=${CIRRUS_CHANGE_IN_REPO} -Dsonar.links.ci=https://cirrus-ci.com/task/${CIRRUS_TASK_ID} -Dsonar.branch.name=${CIRRUS_BRANCH} -Dsonar.cfamily.gcov.reportsPath="${CIRRUS_WORKING_DIR}/build/coverage-dir"
     - ccache -s
-    
-linux_qt5_qmake_task_template: &LINUX_QT5_QMAKE_TASK_TEMPLATE
-  << : *QMAKE_TASK_FILTER
-  install_script:
-    - bash -c "$PACKAGE_MANAGER_INSTALL qtbase5-dev libqt5svg5-dev qttools5-dev-tools libqt5xmlpatterns5-dev libqt5core5a libqt5gui5 libqt5printsupport5 libqt5svg5 libqt5widgets5 libqt5xml5 libqt5xmlpatterns5 poppler-utils"
-    - git fetch --tags
-  build_script:
-    - uname -a
-    - echo $PATH
-    - which qmake
-    - mkdir build
-    - cd build
-    - pwd
-    - ls -l /usr/bin/ | grep -E "${COMPILER_REGEX}"
-    - ${COMPILER} --version
-    - strings /usr/lib/x86_64-linux-gnu/libstdc++.so.6 | grep GLIBCXX
-    - ccache --set-config max_size="$CCACHE_SIZE"
-    - qmake --version
-    - qmake ../Valentina.pro -r -spec ${QMAKE_SPEC} CONFIG+=noDebugSymbols CONFIG+=checkWarnings
-    - make -j$(nproc)
-    - export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:"$CIRRUS_WORKING_DIR/build/src/libs/vpropertyexplorer/bin:$CIRRUS_WORKING_DIR/build/src/libs/qmuparser/bin"
-    - xvfb-run -a make --silent check TESTARGS="-silent"
-    - ccache -s
 
 linux_qt5_qbs_task_template: &LINUX_QT5_QBS_TASK_TEMPLATE
   << : *QBS_TASK_FILTER
@@ -198,17 +175,8 @@ linux_task:
         image: dismine/clang-ubuntu:latest
       env:
         COMPILER: clang
-        QMAKE_SPEC: "linux-clang"
         COMPILER_REGEX: clang
       matrix:
-        - name: 'latest Clang [Qt5 QMake]'
-          << : *QMAKE_TASK_FILTER
-          << : *LINUX_QT5_QMAKE_TASK_TEMPLATE
-          env:
-            QT_SELECT: "qt5"
-          container:
-            cpu: 2
-            memory: 6G  # Set to 6GB to avoid OOM. https://cirrus-ci.org/guide/linux/#linux-container
         - name: 'latest Clang [Qt5 QBS]'
           << : *LINUX_QT5_QBS_TASK_TEMPLATE
           env:
@@ -226,26 +194,9 @@ linux_task:
             cpu: 8
             memory: 8G  # Set to 8GB to avoid OOM. https://cirrus-ci.org/guide/linux/#linux-container
     - container:
-        image: dismine/gcc-ubuntu:13
-      env:
-        COMPILER: gcc
-        QMAKE_SPEC: "linux-g++"
-        GCC_COLORS: 'error=01;31:warning=01;35:note=01;36:caret=01;32:locus=01:quote=01'
-        COMPILER_REGEX: "gcc|g\\+\\+"
-      matrix:
-        - name: 'GCC 13 [Qt5 QMake]'
-          << : *QMAKE_TASK_FILTER
-          << : *LINUX_QT5_QMAKE_TASK_TEMPLATE
-          env:
-            QT_SELECT: "qt5"
-          container:
-            cpu: 2 
-            memory: 8G  # Set to 8GB to avoid OOM. https://cirrus-ci.org/guide/linux/#linux-container
-    - container:
         image: dismine/appimage-builder:latest
       env:
         COMPILER: clang
-        QMAKE_SPEC: "linux-clang"
         COMPILER_REGEX: clang
         PIP_CACHE_DIR: ${HOME}/.cache/pip
       matrix:
@@ -268,7 +219,6 @@ linux_task:
         image: dismine/gcc-ubuntu:latest
       env:
         COMPILER: gcc
-        QMAKE_SPEC: "linux-g++"
         GCC_COLORS: 'error=01;31:warning=01;35:note=01;36:caret=01;32:locus=01:quote=01'
         COMPILER_REGEX: "gcc|g\\+\\+"
       matrix:

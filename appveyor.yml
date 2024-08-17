@@ -99,19 +99,6 @@ environment:
       RUN_TESTS: true
       WITH_CRASH_REPORTING: False
 
-    - job_name: Windows_Qt_5_15_(make_GCC_x86)
-      job_group: 'Windows (make)'
-      APPVEYOR_BUILD_WORKER_IMAGE: Visual Studio 2019
-      COMPILER: mingw
-      QT: Qt\5.15\mingw81_32
-      QT_VERSION: Qt5_15
-      BUILD_SYSTEM: "make"
-      MINGW_PATH: C:\Qt\Tools\mingw810_32\bin
-      ARCH: x86
-      PYTHON: "C:\\Python311"
-      TARGET_PLATFORM: "Windows7+"
-      DEPLOY: false
-
     - job_name: Windows_Qt_5_15_(qbs_GCC_x64)
       job_group: 'Windows (qbs)'
       APPVEYOR_BUILD_WORKER_IMAGE: Visual Studio 2019
@@ -158,50 +145,9 @@ environment:
       RUN_TESTS: true 
       WITH_CRASH_REPORTING: False
 
-    - job_name: Windows_Qt_5_15_(make_GCC_x64)
-      job_group: 'Windows (make)'
-      APPVEYOR_BUILD_WORKER_IMAGE: Visual Studio 2019
-      COMPILER: mingw
-      QT: Qt\5.15\mingw81_64
-      QT_VERSION: Qt5_15
-      BUILD_SYSTEM: "make"
-      MINGW_PATH: C:\Qt\Tools\mingw810_64\bin
-      ARCH: x64
-      PYTHON: "C:\\Python311-x64"
-      TARGET_PLATFORM: "Windows7+"
-      DEPLOY: false
-
-    - job_name: Windows_Qt_5_15_(nmake_MSVC_x64)
-      job_group: 'Windows (make)'
-      APPVEYOR_BUILD_WORKER_IMAGE: Visual Studio 2019
-      COMPILER: msvc
-      QT: Qt\5.15\msvc2019_64
-      BUILD_SYSTEM: "nmake"
-      VSVER: 16
-      ARCH: x64
-      PYTHON: "C:\\Python311-x64"
-      TARGET_PLATFORM: "Windows7+"
-      DEPLOY: false
-
-    - job_name: MacOS_12_Qt_5_15 (make)
-      job_group: 'MacOS (make)'
-      APPVEYOR_BUILD_WORKER_IMAGE: macos-monterey
-      COMPILER: clang
-      QT: Qt/5.15/clang_64
-      QT_VERSION: Qt5_15
-      BUILD_SYSTEM: "make"
-      ARCH: x64
-      XCODE_VERSION: 13.4.1
-      TARGET_PLATFORM: "macOS_10.13+"
-      DEPLOY: false 
-
 matrix:
   fast_finish: false
   exclude:
-    - platform: x86
-      job_name: Windows_Qt_5_15_(make_GCC_x64)
-    - platform: x86
-      job_name: Windows_Qt_5_15_(nmake_MSVC_x64)
     - platform: x86
       job_name: Windows_Qt_5_15_(qbs_GCC_x64)
     - platform: x86
@@ -210,10 +156,6 @@ matrix:
       job_name: MacOS_12_Qt_6_5 (multibundle)
     - platform: x86
       job_name: MacOS_12_Qt_6_5 (singlebundle)
-    - platform: x86
-      job_name: MacOS_12_Qt_5_15 (make)
-    - platform: x64
-      job_name: Windows_Qt_5_15_(make_GCC_x86)
     - platform: x64
       job_name: Windows_Qt_5_15_(qbs_GCC_x86)   
 
@@ -359,92 +301,6 @@ for:
   on_finish:
     # Uncomment if need access through RDP
     # - ps: $blockRdp = $true; iex ((new-object net.webclient).DownloadString('https://raw.githubusercontent.com/appveyor/ci/master/scripts/enable-rdp.ps1'))
-
-# Legacy
--
-  matrix:
-    only:
-      - job_group: 'Windows (make)'
-
-  # clone directory
-  clone_folder: c:\projects\valentina
-
-  # scripts that are called at very beginning, before repo cloning
-  init:
-    # Uncomment if need access through RDP
-    #  - ps: iex ((new-object net.webclient).DownloadString('https://raw.githubusercontent.com/appveyor/ci/master/scripts/enable-rdp.ps1'))
-    - ver
-    # Path before 
-    - path
-    - set QTDIR=C:\%QT%
-    - set PATH=%QTDIR%\bin;%QTDIR%\include;C:\Tools\PsTools;C:\Program Files\Git\cmd;C:\Program Files\Git\usr\bin;C:\Program Files\Git LFS;C:\Tools\GitVersion;C:\Windows\system32;C:\Windows;C:\Windows\System32\WindowsPowerShell\v1.0\;C:\Program Files (x86)\Inno Setup 6
-    - if NOT "%BUILD_SYSTEM%" == "make" echo "Using Visual Studio %VSVER%.0"
-    - if "%BUILD_SYSTEM%" == "make" echo "Using MinGW"
-    # Set VC variables for the platform
-    - ps: |
-        if ($env:COMPILER -eq "msvc") {
-          if ($env:APPVEYOR_BUILD_WORKER_IMAGE -eq "Visual Studio 2022") {
-            if ($env:ARCH -eq "x64") {
-              cmd.exe /c "call `"C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Auxiliary\Build\vcvars64.bat`" && set > %temp%\vcvars.txt"
-            } else {
-              cmd.exe /c "call `"C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Auxiliary\Build\vcvars32.bat`" && set > %temp%\vcvars.txt"
-            }
-          } elseif ($env:APPVEYOR_BUILD_WORKER_IMAGE -eq "Visual Studio 2019") {
-            if ($env:ARCH -eq "x64") {
-              cmd.exe /c "call `"C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Auxiliary\Build\vcvars64.bat`" && set > %temp%\vcvars.txt"
-            } else {
-              cmd.exe /c "call `"C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Auxiliary\Build\vcvars32.bat`" && set > %temp%\vcvars.txt"
-            }
-          } elseif ($env:APPVEYOR_BUILD_WORKER_IMAGE -eq "Visual Studio 2017") {
-            if ($env:ARCH -eq "x64") {
-              cmd.exe /c "call `"C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\VC\Auxiliary\Build\vcvars64.bat`" && set > %temp%\vcvars.txt"
-            } else {
-              cmd.exe /c "call `"C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\VC\Auxiliary\Build\vcvars32.bat`" && set > %temp%\vcvars.txt"
-            }
-          } elseif ($env:APPVEYOR_BUILD_WORKER_IMAGE -eq "Visual Studio 2015") {
-            if ($env:ARCH -eq "x64") {
-              cmd.exe /c "call `"C:\Program Files\Microsoft SDKs\Windows\v7.1\Bin\SetEnv.cmd`" /x64 && call `"C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\vcvarsall.bat`" x86_amd64 && set > %temp%\vcvars.txt"
-            } else {
-              cmd.exe /c "call `"C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\VC\Auxiliary\Build\vcvars64.bat`" && set > %temp%\vcvars.txt"
-            }
-          }
-
-          Get-Content "$env:temp\vcvars.txt" | Foreach-Object {
-            if ($_ -match "^(.*?)=(.*)$") {
-              Set-Content "env:\$($matches[1])" $matches[2]
-            }
-          }  
-        }
-    - if "%BUILD_SYSTEM%" == "make" set PATH=%MINGW_PATH%;%PATH%
-    - if "%BUILD_SYSTEM%" == "nmake" set PATH=C:\Qt\Tools\QtCreator\bin;%PATH%
-    - if "%DEPLOY%" == "true" set PATH=%PYTHON%;%PYTHON%\Scripts;%PATH%
-    # Set paths to libraries
-    - set PATH=%APPVEYOR_BUILD_FOLDER%\build\src\libs\vpropertyexplorer\bin;%APPVEYOR_BUILD_FOLDER%\build\src\libs\qmuparser\bin;%PATH%
-    # Path after
-    - path
-    # Check that we have the expected version for Python
-    - if "%DEPLOY%" == "true" (python --version)
-    # Install the build dependencies of the project.
-    - if "%DEPLOY%" == "true" (python -m pip install --upgrade pip)
-    - if "%DEPLOY%" == "true" (python -m pip install dropbox py7zr)
-    # Trick qmake to not work through MSYS
-    - del /F "C:\Program Files\Git\usr\bin\sh.exe"
-    - del /F "C:\Program Files\Git\bin\sh.exe"
-    - qmake -v
-
-  before_build:
-  - cd %APPVEYOR_BUILD_FOLDER%
-  - md build
-
-  # to run your custom scripts instead of automatic MSBuild
-  build_script:
-    - cd build
-    - if "%DEPLOY%" == "true" (qmake ..\Valentina.pro -r CONFIG+=no_ccache CONFIG+=checkWarnings CONFIG+=noDebugSymbols CONFIG+=noWindowsInstaller) else (qmake ..\Valentina.pro -r CONFIG+=noDebugSymbols CONFIG+=no_ccache CONFIG+=checkWarnings)
-    - if not "%BUILD_SYSTEM%" == "make" (nmake -s) else (mingw32-make -j%NUMBER_OF_PROCESSORS%)
-
-  # to run your custom scripts instead of automatic tests
-  test_script:
-    - if "%BUILD_SYSTEM%" == "make" (mingw32-make -s check TESTARGS="-silent")
 
 #---------------------------------#
 #             MacOS               #
@@ -650,33 +506,6 @@ for:
 
   deploy_script:
     - CIRRUS_WORKING_DIR=${APPVEYOR_BUILD_FOLDER} CIRRUS_CHANGE_IN_REPO=${APPVEYOR_REPO_COMMIT} CIRRUS_BRANCH=${APPVEYOR_REPO_BRANCH} ${APPVEYOR_BUILD_FOLDER}/scripts/cirrus-deploy.sh
-
--
-  matrix:
-    only:
-      - job_group: 'MacOS (make)'
-
-  init:
-    - find /Applications -maxdepth 1 -type d -name 'Xcode*.app'
-    - sudo xcode-select -p
-    - sudo xcode-select -s /Applications/Xcode-$XCODE_VERSION.app
-    - sudo xcode-select -p
-
-  before_build:
-    - export QTDIR="${HOME}/${QT}"
-    - export PATH="$QTDIR/bin:$PATH"
-    - echo $PATH
-    - clang --version
-    - qmake --version
-    - which qmake
-    - cd ${APPVEYOR_BUILD_FOLDER}
-    - mkdir build
-    - cd build
-
-  build_script:
-    - pwd
-    - qmake ../Valentina.pro -r CONFIG+=noDebugSymbols CONFIG+=checkWarnings CONFIG+=noTests CONFIG+=no_ccache
-    - make -j$(nproc)
 
 #---------------------------------#
 #         notifications           #
