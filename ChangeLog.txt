@@ -11,6 +11,7 @@
 - Puzzle app. Piece rotation with step 15 degrees by holding Ctrl key.
 - Fix export of turn points.
 - Remove legacy build system.
+- Tape and Puzzle crash when check for update.
 
 # Valentina 0.7.53 June 25, 2024
 - Fix layout sheet export with empty name.

@@ -44,7 +44,7 @@
 #include "../ifc/exception/vexception.h"
 #include "../ifc/xml/vabstractconverter.h"
 #include "../vmisc/projectversion.h"
-#include "../vmisc/vabstractvalapplication.h"
+#include "../vmisc/vabstractapplication.h"
 #include "../vmisc/vcommonsettings.h"
 #include "fvavailableupdate.h"
 #include "fvupdatewindow.h"
@@ -106,26 +106,11 @@ auto FvUpdater::IsTestBuild() -> bool
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-FvUpdater::FvUpdater()
-  : QObject(nullptr),
-    m_updaterWindow(nullptr),
-    m_proposedUpdate(nullptr),
-    m_silentAsMuchAsItCouldGet(true),
-    m_feedURL(),
-    m_qnam(),
-    m_reply(nullptr),
-    m_httpRequestAborted(false),
-    m_dropOnFinnish(true),
-    m_xml()
-{
-    // noop
-}
-
-//---------------------------------------------------------------------------------------------------------------------
 FvUpdater::~FvUpdater()
 {
     hideUpdaterWindow();
     delete m_reply;
+    delete m_updaterWindow;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -135,7 +120,7 @@ void FvUpdater::showUpdaterWindowUpdatedWithCurrentUpdateProposal()
     hideUpdaterWindow();
 
     // Create a new window
-    m_updaterWindow = new FvUpdateWindow(VAbstractValApplication::VApp()->getMainWindow());
+    m_updaterWindow = new FvUpdateWindow(m_mainWindow);
     m_updaterWindow->UpdateWindowWithCurrentProposedUpdate();
     m_updaterWindow->exec();
 }
@@ -165,6 +150,12 @@ void FvUpdater::SetFeedURL(const QString &feedURL)
 auto FvUpdater::GetFeedURL() const -> QString
 {
     return m_feedURL.toString();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void FvUpdater::SetMainWindow(QWidget *mainWindow)
+{
+    m_mainWindow = mainWindow;
 }
 
 //---------------------------------------------------------------------------------------------------------------------

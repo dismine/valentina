@@ -51,6 +51,8 @@ public:
     void SetFeedURL(const QString &feedURL);
     auto GetFeedURL() const -> QString;
 
+    void SetMainWindow(QWidget *mainWindow);
+
     auto IsDropOnFinnish() const -> bool;
     void SetDropOnFinnish(bool value);
 
@@ -79,31 +81,32 @@ private:
     // Singleton business
     //
     Q_DISABLE_COPY_MOVE(FvUpdater) // NOLINT
-    FvUpdater();                   // Hide main constructor
+    FvUpdater() = default;         // Hide main constructor
     virtual ~FvUpdater();          // Hide main destructor
 
     static QPointer<FvUpdater> m_Instance; // Singleton instance
 
-    QPointer<FvUpdateWindow> m_updaterWindow; // Updater window (NULL if not shown)
+    QPointer<FvUpdateWindow> m_updaterWindow{nullptr}; // Updater window (NULL if not shown)
 
     // Available update (NULL if not fetched)
-    QPointer<FvAvailableUpdate> m_proposedUpdate;
+    QPointer<FvAvailableUpdate> m_proposedUpdate{nullptr};
 
     // If true, don't show the error dialogs and the "no updates." dialog
     // (silentAsMuchAsItCouldGet from CheckForUpdates() goes here)
     // Useful for automatic update checking upon application startup.
-    bool m_silentAsMuchAsItCouldGet;
+    bool m_silentAsMuchAsItCouldGet{true};
 
     //
     // HTTP feed fetcher infrastructure
     //
-    QUrl m_feedURL; // Feed URL that will be fetched
-    QNetworkAccessManager m_qnam;
-    QPointer<QNetworkReply> m_reply;
-    bool m_httpRequestAborted;
-    bool m_dropOnFinnish;
+    QUrl m_feedURL{}; // Feed URL that will be fetched
+    QWidget *m_mainWindow{nullptr};
+    QNetworkAccessManager m_qnam{};
+    QPointer<QNetworkReply> m_reply{nullptr};
+    bool m_httpRequestAborted{false};
+    bool m_dropOnFinnish{true};
 
-    QXmlStreamReader m_xml; // XML data collector and parser
+    QXmlStreamReader m_xml{}; // XML data collector and parser
 
     void showUpdaterWindowUpdatedWithCurrentUpdateProposal(); // Show updater window
     void hideUpdaterWindow();                                 // Hide + destroy m_updaterWindow

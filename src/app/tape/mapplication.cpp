@@ -852,6 +852,17 @@ void MApplication::ProcessCMD()
         // Set feed URL before doing anything else
         FvUpdater::sharedUpdater()->SetFeedURL(FvUpdater::CurrentFeedURL());
 
+        QWidget *mainWindow = nullptr;
+        if (!m_knownMeasurementsMode)
+        {
+            mainWindow = MainTapeWindow();
+        }
+        else
+        {
+            mainWindow = MainKMWindow();
+        }
+        FvUpdater::sharedUpdater()->SetMainWindow(mainWindow);
+
         // Check for updates automatically
         FvUpdater::sharedUpdater()->CheckForUpdatesSilent();
     }

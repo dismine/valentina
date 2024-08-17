@@ -131,20 +131,22 @@ auto main(int argc, char *argv[]) -> int
 
     VApplication::setDesktopFileName(QStringLiteral("ua.com.smart-pattern.valentina.desktop"));
 
-    if (VApplication::IsGUIMode() && VAbstractApplication::VApp()->Settings()->IsAutomaticallyCheckUpdates())
-    {
-        // Set feed URL before doing anything else
-        FvUpdater::sharedUpdater()->SetFeedURL(FvUpdater::CurrentFeedURL());
-
-        // Check for updates automatically
-        FvUpdater::sharedUpdater()->CheckForUpdatesSilent();
-    }
-
     MainWindow w;
 #if !defined(Q_OS_MAC)
     VApplication::setWindowIcon(QIcon(":/icon/64x64/icon64x64.png"));
 #endif // !defined(Q_OS_MAC)
     app.setMainWindow(&w);
+
+    if (VApplication::IsGUIMode() && VAbstractApplication::VApp()->Settings()->IsAutomaticallyCheckUpdates())
+    {
+        // Set feed URL before doing anything else
+        FvUpdater::sharedUpdater()->SetFeedURL(FvUpdater::CurrentFeedURL());
+
+        FvUpdater::sharedUpdater()->SetMainWindow(&w);
+
+        // Check for updates automatically
+        FvUpdater::sharedUpdater()->CheckForUpdatesSilent();
+    }
 
     int msec = 0;
     // Before we load pattern show window.

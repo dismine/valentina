@@ -386,7 +386,7 @@ auto VPApplication::MainWindow() -> VPMainWindow *
     {
         NewMainWindow();
     }
-    return m_mainWindows[0];
+    return m_mainWindows.first();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -563,6 +563,8 @@ void VPApplication::ProcessCMD()
     {
         // Set feed URL before doing anything else
         FvUpdater::sharedUpdater()->SetFeedURL(FvUpdater::CurrentFeedURL());
+
+        FvUpdater::sharedUpdater()->SetMainWindow(MainWindow());
 
         // Check for updates automatically
         FvUpdater::sharedUpdater()->CheckForUpdatesSilent();
