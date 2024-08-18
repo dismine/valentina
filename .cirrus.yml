@@ -394,6 +394,9 @@ macos_task_template: &MACOS_TASK_TEMPLATE
     - ccache -s
   deploy_script:
     - pwd
+    - echo $CIRRUS_WORKING_DIR
+    - export VALENTINA_WORKING_DIR=/private${CIRRUS_WORKING_DIR}
+    - echo $VALENTINA_WORKING_DIR
     - $VALENTINA_WORKING_DIR/scripts/cirrus-deploy.sh
   before_cache_script:
     - brew cleanup
