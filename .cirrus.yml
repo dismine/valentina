@@ -152,6 +152,7 @@ appimage_task_template: &APPIMAGE_TASK_TEMPLATE
     - qbs config defaultProfile qt5
     - qbs config profiles.qt5.baseProfile ${COMPILER}
     - conan install . -s os=Linux --build=missing -o with_crash_reporting=True -pr=valentina
+    - echo $CIRRUS_WORKING_DIR
     - qbs build -f valentina.qbs -d $CIRRUS_WORKING_DIR/build --jobs $(nproc) profile:qt5 config:release modules.buildconfig.enableCcache:${ENABLE_CCACHE} qbs.installRoot:$CIRRUS_WORKING_DIR/build/AppDir modules.buildconfig.enableAppImage:true modules.buildconfig.enableRPath:false project.conanWithCrashReporting:true project.enableConan:true project.conanProfiles:valentina
     - qbs -p autotest-runner -d build profile:qt5 config:release
     - export CRASH_QT_VERSION=$(/opt/qt515/bin/qmake -query QT_VERSION | awk -F. '{print $1 "_" $2}')
@@ -367,6 +368,7 @@ macos_task_template: &MACOS_TASK_TEMPLATE
     - qbs config defaultProfile qt6
     - qbs config profiles.qt6.baseProfile clang
     - conan install . -s os=Macos --build=missing -o with_crash_reporting=True -pr=valentina
+    - echo $CIRRUS_WORKING_DIR
     - qbs build -f valentina.qbs -d $CIRRUS_WORKING_DIR/build --jobs $(nproc) config:release modules.buildconfig.enableUnitTests:false modules.buildconfig.enableMultiBundle:${MULTI_BUNDLE} qbs.installRoot:$CIRRUS_WORKING_DIR/build/release/install-root profile:qt6 project.minimumMacosVersion:${MACOS_DEPLOYMENT_TARGET} modules.buildconfig.enableCcache:${ENABLE_CCACHE} moduleProviders.qbspkgconfig.extraPaths:$(brew --prefix xerces-c)/lib/pkgconfig,$(brew --prefix qt6)/lib/pkgconfig,$(brew --prefix openssl@1.1)/lib/pkgconfig "modules.buildconfig.signingIdentity:$MACOS_CERTIFICATE_NAME" modules.macdeployqt.libpath:$(brew --prefix qt6)/lib,$(brew --prefix poppler)/lib modules.macdeployqt.macdeployqtProgramBinPath:${HOME}/macdeployqt-install-dir project.enableConan:true project.conanWithCrashReporting:true project.conanProfiles:valentina
     - export CRASH_QT_VERSION=$(/opt/homebrew/opt/qt6/bin/qmake -query QT_VERSION | awk -F. '{print $1 "_" $2}')
     - export CRASH_SHORT_SHA=$(git log --pretty=format:%h -n 1)
