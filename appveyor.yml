@@ -278,7 +278,7 @@ for:
     - conan profile list
     - conan install . -s os=Windows --build=missing -o with_crash_reporting=%WITH_CRASH_REPORTING% -o with_xerces=True -pr=valentina
     - set VALENTINA_BUILD_FOLDER=%APPVEYOR_BUILD_FOLDER%\build
-    - qbs build -f valentina.qbs -d %VALENTINA_BUILD_FOLDER% --jobs %NUMBER_OF_PROCESSORS% config:release qbs.installRoot:%VALENTINA_BUILD_FOLDER%\install-root\valentina profile:qt6 project.enableConan:true project.conanWithCrashReporting:%WITH_CRASH_REPORTING% project.conanWithXerces:true modules.buildconfig.enableCcache:false project.conanProfiles:valentina modules.buildconfig.enablePCH:%ENABLE_PCH% modules.windeployqt.windeployqtProgramBinPath:%WINDEPLOYQT_BIN_PATH% modules.windeployqt.compilerRuntime:%WINDEPLOYQT_COMPILER_RUNTIME% modules.windeployqt.noCompilerRuntime:%WINDEPLOYQT_NO_COMPILER_RUNTIME%
+    - qbs build -f valentina.qbs -d %VALENTINA_BUILD_FOLDER% --jobs %NUMBER_OF_PROCESSORS% config:release qbs.installRoot:%VALENTINA_BUILD_FOLDER%\release\install-root\valentina profile:qt6 project.enableConan:true project.conanWithCrashReporting:%WITH_CRASH_REPORTING% project.conanWithXerces:true modules.buildconfig.enableCcache:false project.conanProfiles:valentina modules.buildconfig.enablePCH:%ENABLE_PCH% modules.windeployqt.windeployqtProgramBinPath:%WINDEPLOYQT_BIN_PATH% modules.windeployqt.compilerRuntime:%WINDEPLOYQT_COMPILER_RUNTIME% modules.windeployqt.noCompilerRuntime:%WINDEPLOYQT_NO_COMPILER_RUNTIME%
   
   test_script:
     - path
@@ -294,8 +294,8 @@ for:
           $env:CRASH_SHORT_SHA = git log --pretty=format:%h -n 1
         }
     - ps: scripts/install_dump_sysms.ps1
-    - if "%WITH_CRASH_REPORTING%" == "True" (python scripts/symupload.py %VALENTINA_BUILD_FOLDER%\install-root\valentina %VALENTINA_VERSION% g%CRASH_SHORT_SHA% %CRASH_QT_VERSION% --clean)
-    - if "%DEPLOY%" == "true" (qbs build -f valentina.qbs -d %VALENTINA_BUILD_FOLDER% -p ValentinaSetup --jobs %NUMBER_OF_PROCESSORS% config:release qbs.installRoot:%VALENTINA_BUILD_FOLDER%\install-root\valentina profile:qt6 project.enableConan:true project.conanWithCrashReporting:%WITH_CRASH_REPORTING% project.conanWithXerces:true modules.buildconfig.enableCcache:false project.conanProfiles:valentina modules.buildconfig.enablePCH:%ENABLE_PCH% modules.windeployqt.windeployqtProgramBinPath:%WINDEPLOYQT_BIN_PATH% modules.windeployqt.compilerRuntime:%WINDEPLOYQT_COMPILER_RUNTIME% modules.windeployqt.noCompilerRuntime:%WINDEPLOYQT_NO_COMPILER_RUNTIME%)
+    - if "%WITH_CRASH_REPORTING%" == "True" (python scripts/symupload.py %VALENTINA_BUILD_FOLDER%\release\install-root\valentina %VALENTINA_VERSION% g%CRASH_SHORT_SHA% %CRASH_QT_VERSION% --clean)
+    - if "%DEPLOY%" == "true" (qbs build -f valentina.qbs -d %VALENTINA_BUILD_FOLDER% -p ValentinaSetup --jobs %NUMBER_OF_PROCESSORS% config:release qbs.installRoot:%VALENTINA_BUILD_FOLDER%\release\install-root\valentina profile:qt6 project.enableConan:true project.conanWithCrashReporting:%WITH_CRASH_REPORTING% project.conanWithXerces:true modules.buildconfig.enableCcache:false project.conanProfiles:valentina modules.buildconfig.enablePCH:%ENABLE_PCH% modules.windeployqt.windeployqtProgramBinPath:%WINDEPLOYQT_BIN_PATH% modules.windeployqt.compilerRuntime:%WINDEPLOYQT_COMPILER_RUNTIME% modules.windeployqt.noCompilerRuntime:%WINDEPLOYQT_NO_COMPILER_RUNTIME%)
     - ps: scripts/appveyor-deploy.ps1
 
   on_finish:
@@ -505,7 +505,7 @@ for:
     - xcrun stapler staple ${APPVEYOR_BUILD_FOLDER}/build/release/install-root/share/valentina.dmg || true
 
   deploy_script:
-    - CIRRUS_WORKING_DIR=${APPVEYOR_BUILD_FOLDER} CIRRUS_CHANGE_IN_REPO=${APPVEYOR_REPO_COMMIT} CIRRUS_BRANCH=${APPVEYOR_REPO_BRANCH} ${APPVEYOR_BUILD_FOLDER}/scripts/cirrus-deploy.sh
+    - VALENTINA_WORKING_DIR=${APPVEYOR_BUILD_FOLDER} CIRRUS_CHANGE_IN_REPO=${APPVEYOR_REPO_COMMIT} CIRRUS_BRANCH=${APPVEYOR_REPO_BRANCH} ${APPVEYOR_BUILD_FOLDER}/scripts/cirrus-deploy.sh
 
 #---------------------------------#
 #         notifications           #

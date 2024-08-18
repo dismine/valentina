@@ -1,4 +1,4 @@
-$INSTALL_ROOT = "$env:VALENTINA_BUILD_FOLDER\install-root\valentina";
+$INSTALL_ROOT = "$env:VALENTINA_BUILD_FOLDER\release\install-root\valentina";
 
 $type = "$env:TARGET_PLATFORM-$env:COMPILER-$env:ARCH-$env:QT_VERSION-$env:APPVEYOR_REPO_BRANCH-$env:APPVEYOR_REPO_COMMIT";
 $file_name = "valentina-${type}.exe";
@@ -32,7 +32,7 @@ if($env:DEPLOY -eq "true") {
 
     Write-Host "[CI] Starting packing." -ForegroundColor Green;
     Remove-Item -Path "$INSTALL_ROOT\ValentinaInstaller.exe";
-    & $env:PYTHON\python.exe "$env:APPVEYOR_BUILD_FOLDER\scripts\deploy.py" pack "$INSTALL_ROOT" "$env:VALENTINA_BUILD_FOLDER\install-root\$portable_file_name";
+    & $env:PYTHON\python.exe "$env:APPVEYOR_BUILD_FOLDER\scripts\deploy.py" pack "$INSTALL_ROOT" "$env:VALENTINA_BUILD_FOLDER\release\install-root\$portable_file_name";
     if ($LastExitCode -ne 0) {
         Write-Error -Message "[CI] Error creating an archive." -Category InvalidResult;
         exit 1;
@@ -41,7 +41,7 @@ if($env:DEPLOY -eq "true") {
     }
 
     Write-Host "[CI] Uploading portable bundle." -ForegroundColor Green;
-    & $env:PYTHON\python.exe "$env:APPVEYOR_BUILD_FOLDER\scripts\deploy.py" upload $env:ACCESS_TOKEN "$env:VALENTINA_BUILD_FOLDER\install-root\$portable_file_name" "/0.7.x/Windows/$portable_file_name";
+    & $env:PYTHON\python.exe "$env:APPVEYOR_BUILD_FOLDER\scripts\deploy.py" upload $env:ACCESS_TOKEN "$env:VALENTINA_BUILD_FOLDER\release\install-root\$portable_file_name" "/0.7.x/Windows/$portable_file_name";
     if ($LastExitCode -ne 0) {
         Write-Error -Message "[CI] Error uploading an artifact." -Category InvalidResult;
         exit 1;
