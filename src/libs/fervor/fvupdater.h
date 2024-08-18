@@ -25,6 +25,7 @@
 #include <QMetaObject>
 #include <QMutex>
 #include <QNetworkAccessManager>
+#include <QNetworkReply>
 #include <QObject>
 #include <QPointer>
 #include <QString>
