@@ -482,13 +482,13 @@ for:
     - qbs config defaultProfile qt6
     - qbs config profiles.qt6.baseProfile clang
     - conan install . -s os=Macos --build=missing -o with_crash_reporting=True -pr=valentina
-    - qbs build -f valentina.qbs -d ${APPVEYOR_BUILD_FOLDER}/build --jobs $(nproc) config:release modules.buildconfig.enableUnitTests:false modules.buildconfig.enableMultiBundle:${MULTI_BUNDLE} qbs.installRoot:${APPVEYOR_BUILD_FOLDER}/build/install-root profile:qt6 project.minimumMacosVersion:${MACOS_DEPLOYMENT_TARGET} modules.buildconfig.enableCcache:true moduleProviders.qbspkgconfig.extraPaths:$(brew --prefix xerces-c)/lib/pkgconfig,$(brew --prefix qt6)/lib/pkgconfig,$(brew --prefix openssl@1.1)/lib/pkgconfig "modules.buildconfig.signingIdentity:$MACOS_CERTIFICATE_NAME" modules.macdeployqt.libpath:$(brew --prefix qt6)/lib,$(brew --prefix poppler)/lib modules.macdeployqt.macdeployqtProgramBinPath:${HOME}/macdeployqt-install-dir project.enableConan:true project.conanWithCrashReporting:true project.conanProfiles:valentina
+    - qbs build -f valentina.qbs -d ${APPVEYOR_BUILD_FOLDER}/build --jobs $(nproc) config:release modules.buildconfig.enableUnitTests:false modules.buildconfig.enableMultiBundle:${MULTI_BUNDLE} qbs.installRoot:${APPVEYOR_BUILD_FOLDER}/build/release/install-root profile:qt6 project.minimumMacosVersion:${MACOS_DEPLOYMENT_TARGET} modules.buildconfig.enableCcache:true moduleProviders.qbspkgconfig.extraPaths:$(brew --prefix xerces-c)/lib/pkgconfig,$(brew --prefix qt6)/lib/pkgconfig,$(brew --prefix openssl@1.1)/lib/pkgconfig "modules.buildconfig.signingIdentity:$MACOS_CERTIFICATE_NAME" modules.macdeployqt.libpath:$(brew --prefix qt6)/lib,$(brew --prefix poppler)/lib modules.macdeployqt.macdeployqtProgramBinPath:${HOME}/macdeployqt-install-dir project.enableConan:true project.conanWithCrashReporting:true project.conanProfiles:valentina
     - export QTDIR=$(brew --prefix qt6)
     - export CRASH_QT_VERSION=$($QTDIR/bin/qmake -query QT_VERSION | awk -F. '{print $1 "_" $2}')
     - export CRASH_SHORT_SHA=$(git log --pretty=format:%h -n 1)
     - curl --proto '=https' --tlsv1.2 -LsSf https://github.com/mozilla/dump_syms/releases/download/v2.3.3/dump_syms-installer.sh | sh
-    - python3 scripts/symupload.py ${APPVEYOR_BUILD_FOLDER}/build/install-root $VALENTINA_VERSION g$CRASH_SHORT_SHA $CRASH_QT_VERSION --multibundle=$MULTI_BUNDLE --clean
-    - qbs build -f valentina.qbs -d ${APPVEYOR_BUILD_FOLDER}/build -p 'Valentina DMG' --force-probe-execution --jobs $(nproc) config:release modules.buildconfig.enableUnitTests:false modules.buildconfig.enableMultiBundle:${MULTI_BUNDLE} qbs.installRoot:${APPVEYOR_BUILD_FOLDER}/build/install-root profile:qt6 project.minimumMacosVersion:${MACOS_DEPLOYMENT_TARGET} modules.buildconfig.enableCcache:true  moduleProviders.qbspkgconfig.extraPaths:$(brew --prefix xerces-c)/lib/pkgconfig,$(brew --prefix qt6)/lib/pkgconfig,$(brew --prefix openssl@1.1)/lib/pkgconfig "modules.buildconfig.signingIdentity:$MACOS_CERTIFICATE_NAME" modules.macdeployqt.libpath:$(brew --prefix qt6)/lib,$(brew --prefix poppler)/lib modules.macdeployqt.macdeployqtProgramBinPath:${HOME}/macdeployqt-install-dir project.enableConan:true project.conanWithCrashReporting:true project.conanProfiles:valentina
+    - python3 scripts/symupload.py ${APPVEYOR_BUILD_FOLDER}/build/release/install-root $VALENTINA_VERSION g$CRASH_SHORT_SHA $CRASH_QT_VERSION --multibundle=$MULTI_BUNDLE --clean
+    - qbs build -f valentina.qbs -d ${APPVEYOR_BUILD_FOLDER}/build -p 'Valentina DMG' --force-probe-execution --jobs $(nproc) config:release modules.buildconfig.enableUnitTests:false modules.buildconfig.enableMultiBundle:${MULTI_BUNDLE} qbs.installRoot:${APPVEYOR_BUILD_FOLDER}/build/release/install-root profile:qt6 project.minimumMacosVersion:${MACOS_DEPLOYMENT_TARGET} modules.buildconfig.enableCcache:true  moduleProviders.qbspkgconfig.extraPaths:$(brew --prefix xerces-c)/lib/pkgconfig,$(brew --prefix qt6)/lib/pkgconfig,$(brew --prefix openssl@1.1)/lib/pkgconfig "modules.buildconfig.signingIdentity:$MACOS_CERTIFICATE_NAME" modules.macdeployqt.libpath:$(brew --prefix qt6)/lib,$(brew --prefix poppler)/lib modules.macdeployqt.macdeployqtProgramBinPath:${HOME}/macdeployqt-install-dir project.enableConan:true project.conanWithCrashReporting:true project.conanProfiles:valentina
     # Store the notarization credentials so that we can prevent a UI password dialog
     # from blocking the CI
     - echo "Create keychain profile"
@@ -498,11 +498,11 @@ for:
     # characteristics. Visit the Notarization docs for more information and strategies on how to optimize it if
     # you're curious
     - echo "Notarize app"
-    - xcrun notarytool submit "${APPVEYOR_BUILD_FOLDER}/build/install-root/share/valentina.dmg" --keychain-profile "notarytool-profile" --wait --timeout 5m || true
+    - xcrun notarytool submit "${APPVEYOR_BUILD_FOLDER}/build/release/install-root/share/valentina.dmg" --keychain-profile "notarytool-profile" --wait --timeout 5m || true
     # Finally, we need to "attach the staple" to our executable, which will allow our app to be
     # validated by macOS even when an internet connection is not available.
     - echo "Attach staple"
-    - xcrun stapler staple ${APPVEYOR_BUILD_FOLDER}/build/install-root/share/valentina.dmg || true
+    - xcrun stapler staple ${APPVEYOR_BUILD_FOLDER}/build/release/install-root/share/valentina.dmg || true
 
   deploy_script:
     - CIRRUS_WORKING_DIR=${APPVEYOR_BUILD_FOLDER} CIRRUS_CHANGE_IN_REPO=${APPVEYOR_REPO_COMMIT} CIRRUS_BRANCH=${APPVEYOR_REPO_BRANCH} ${APPVEYOR_BUILD_FOLDER}/scripts/cirrus-deploy.sh
