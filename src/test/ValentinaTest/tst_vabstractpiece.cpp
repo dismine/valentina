@@ -1338,6 +1338,11 @@ void TST_VAbstractPiece::TestFullSeamPath_data() const
                      QStringLiteral("://full_seam_path_blazer_for_women_with_one_button_case_4/input.json"),
                      QStringLiteral("://full_seam_path_blazer_for_women_with_one_button_case_4/output.json"),
                      mirrorLine);
+
+    // See file valentina_private_collection/bugs/capa_over/capa_over.val (private collection)
+    ASSERT_TEST_CASE(
+        "Molde", QStringLiteral("://capa_over/input.json"), QStringLiteral("://capa_over/output.json"),
+        QLineF(QPointF(30.000000000000068, 101.31401574803158), QPointF(1367.9527559055118, 101.31401574803158)));
 }
 
 //---------------------------------------------------------------------------------------------------------------------

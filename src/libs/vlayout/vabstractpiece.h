@@ -887,8 +887,8 @@ inline auto VAbstractPiece::FullSeamPath(QVector<T> points, const QLineF &mirror
     QVector<T> base;
     base.reserve(points.size());
 
-    if (VFuzzyComparePoints(points.constFirst(), mirrorLine.p1()) &&
-        VFuzzyComparePoints(points.constLast(), mirrorLine.p2()))
+    if (VFuzzyComparePoints(points.constFirst(), mirrorLine.p2()) &&
+        VFuzzyComparePoints(points.constLast(), mirrorLine.p1()))
     {
         base = points;
     }

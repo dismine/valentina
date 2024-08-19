@@ -216,5 +216,7 @@
         <file>shirtv2_seam_line/output.json</file>
         <file>shirtv2_seam_allowance_line/input.json</file>
         <file>shirtv2_seam_allowance_line/output.json</file>
+        <file>capa_over/input.json</file>
+        <file>capa_over/output.json</file>
     </qresource>
 </RCC>
