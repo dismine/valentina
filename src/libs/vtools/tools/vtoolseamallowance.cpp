@@ -312,7 +312,6 @@ auto RenderPassmarks(const VPiece &detail, const VContainer *data) -> QPainterPa
 auto RenderFoldLine(const VPiece &detail, const VContainer *data) -> VFoldLine
 {
     QLineF foldLine = detail.IsHideMainPath() ? detail.SeamAllowanceMirrorLine(data) : detail.SeamMirrorLine(data);
-    Swap(foldLine);
     VFoldLine fLine(foldLine, detail.GetFoldLineType());
     fLine.SetLabelSvgFontSize(detail.GetFoldLineSvgFontSize());
     fLine.SetLabelFontItalic(detail.IsFoldLineLabelFontItalic());

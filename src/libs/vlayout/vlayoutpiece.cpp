@@ -1392,7 +1392,6 @@ auto VLayoutPiece::Diagonal() const -> qreal
 auto VLayoutPiece::FoldLine() const -> VFoldLine
 {
     QLineF foldLine = IsHideMainPath() ? GetSeamAllowanceMirrorLine() : GetSeamMirrorLine();
-    Swap(foldLine);
     VFoldLine fLine(foldLine, GetFoldLineType());
     fLine.SetLabelSvgFontSize(GetFoldLineSvgFontSize());
     fLine.SetLabelFontItalic(IsFoldLineLabelFontItalic());
