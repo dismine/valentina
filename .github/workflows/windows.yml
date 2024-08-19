@@ -166,7 +166,7 @@ jobs:
           -f valentina.qbs
           -d ${{ runner.temp }}\build
           config:release
-          qbs.installRoot:${{ runner.temp }}\build\install-root\valentina
+          qbs.installRoot:${{ runner.temp }}\build\release\install-root\valentina
           profile:qt6
           project.enableConan:true
           project.conanWithCrashReporting:${{ env.WITH_CRASH_REPORTING }}
@@ -192,7 +192,7 @@ jobs:
 
           ./scripts/install_dump_sysms.ps1
 
-          & python ./scripts/symupload.py ${{ runner.temp }}\build\install-root\valentina $env:VALENTINA_VERSION g$env:CRASH_SHORT_SHA $env:CRASH_QT_VERSION --clean
+          & python ./scripts/symupload.py ${{ runner.temp }}\build\release\install-root\valentina $env:VALENTINA_VERSION g$env:CRASH_SHORT_SHA $env:CRASH_QT_VERSION --clean
 
       - name: Create installer
         if: github.event_name != 'pull_request' && env.DEPLOY == 'true'
@@ -202,7 +202,7 @@ jobs:
           -d ${{ runner.temp }}\build
           -p ValentinaSetup
           config:release
-          qbs.installRoot:${{ runner.temp }}\build\install-root\valentina
+          qbs.installRoot:${{ runner.temp }}\build\release\install-root\valentina
           profile:qt6
           project.enableConan:true
           project.conanWithCrashReporting:${{ env.WITH_CRASH_REPORTING }}
