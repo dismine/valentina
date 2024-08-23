@@ -14,7 +14,8 @@
 - Tape and Puzzle crash when check for update.
 - Improvements for Windows installer. Automatically install latest Microsoft Visual C++ Redistributable Version if build with MSVC.
 - Fix position of fold line.
-- Fix an incorrect symmetrical seam line. 
+- Fix an incorrect symmetrical seam line.
+- Fix incorrect position of Tape app menu items on Mac OS. 
 
 # Valentina 0.7.53 June 25, 2024
 - Fix layout sheet export with empty name.

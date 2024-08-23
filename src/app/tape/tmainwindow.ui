@@ -401,8 +401,7 @@
                  <string notr="true"/>
                 </property>
                 <property name="icon">
-                 <iconset theme="go-top">
-                  <normaloff>.</normaloff>.</iconset>
+                 <iconset theme="go-top"/>
                 </property>
                </widget>
               </item>
@@ -418,8 +417,7 @@
                  <string notr="true"/>
                 </property>
                 <property name="icon">
-                 <iconset theme="go-up">
-                  <normaloff>.</normaloff>.</iconset>
+                 <iconset theme="go-up"/>
                 </property>
                </widget>
               </item>
@@ -435,8 +433,7 @@
                  <string notr="true"/>
                 </property>
                 <property name="icon">
-                 <iconset theme="go-down">
-                  <normaloff>.</normaloff>.</iconset>
+                 <iconset theme="go-down"/>
                 </property>
                </widget>
               </item>
@@ -452,8 +449,7 @@
                  <string notr="true"/>
                 </property>
                 <property name="icon">
-                 <iconset theme="go-bottom">
-                  <normaloff>.</normaloff>.</iconset>
+                 <iconset theme="go-bottom"/>
                 </property>
                </widget>
               </item>
@@ -482,8 +478,7 @@
                  <string notr="true"/>
                 </property>
                 <property name="icon">
-                 <iconset theme="list-remove">
-                  <normaloff>.</normaloff>.</iconset>
+                 <iconset theme="list-remove"/>
                 </property>
                </widget>
               </item>
@@ -830,8 +825,7 @@
       </widget>
       <widget class="QWidget" name="tabInformation">
        <attribute name="icon">
-        <iconset theme="documentinfo">
-         <normaloff>.</normaloff>.</iconset>
+        <iconset theme="documentinfo"/>
        </attribute>
        <attribute name="title">
         <string>Information</string>
@@ -1333,8 +1327,7 @@
           <string notr="true">...</string>
          </property>
          <property name="icon">
-          <iconset theme="document-save-as">
-           <normaloff>.</normaloff>.</iconset>
+          <iconset theme="document-save-as"/>
          </property>
         </widget>
        </item>
@@ -1374,8 +1367,7 @@
   </widget>
   <action name="actionOpenIndividual">
    <property name="icon">
-    <iconset theme="document-open">
-     <normaloff>.</normaloff>.</iconset>
+    <iconset theme="document-open"/>
    </property>
    <property name="text">
     <string>&amp;Open individual …</string>
@@ -1389,8 +1381,7 @@
     <bool>false</bool>
    </property>
    <property name="icon">
-    <iconset theme="document-save">
-     <normaloff>.</normaloff>.</iconset>
+    <iconset theme="document-save"/>
    </property>
    <property name="text">
     <string>&amp;Save</string>
@@ -1404,8 +1395,7 @@
     <bool>false</bool>
    </property>
    <property name="icon">
-    <iconset theme="document-save-as">
-     <normaloff>.</normaloff>.</iconset>
+    <iconset theme="document-save-as"/>
    </property>
    <property name="text">
     <string>Save &amp;As …</string>
@@ -1416,8 +1406,7 @@
   </action>
   <action name="actionQuit">
    <property name="icon">
-    <iconset theme="application-exit">
-     <normaloff>.</normaloff>.</iconset>
+    <iconset theme="application-exit"/>
    </property>
    <property name="text">
     <string>&amp;Quit</string>
@@ -1436,8 +1425,7 @@
   </action>
   <action name="actionAboutTape">
    <property name="icon">
-    <iconset theme="help-about">
-     <normaloff>.</normaloff>.</iconset>
+    <iconset theme="help-about"/>
    </property>
    <property name="text">
     <string>&amp;About Tape</string>
@@ -1448,8 +1436,7 @@
   </action>
   <action name="actionNew">
    <property name="icon">
-    <iconset theme="document-new">
-     <normaloff>.</normaloff>.</iconset>
+    <iconset theme="document-new"/>
    </property>
    <property name="text">
     <string>&amp;New</string>
@@ -1508,8 +1495,7 @@
   </action>
   <action name="actionOpenMultisize">
    <property name="icon">
-    <iconset theme="document-open">
-     <normaloff>.</normaloff>.</iconset>
+    <iconset theme="document-open"/>
    </property>
    <property name="text">
     <string>Open multisize …</string>
@@ -1520,8 +1506,7 @@
   </action>
   <action name="actionOpenTemplate">
    <property name="icon">
-    <iconset theme="document-open">
-     <normaloff>.</normaloff>.</iconset>
+    <iconset theme="document-open"/>
    </property>
    <property name="text">
     <string>Open template</string>
@@ -1648,7 +1633,7 @@
     <bool>false</bool>
    </property>
    <property name="menuRole">
-    <enum>QAction::ApplicationSpecificRole</enum>
+    <enum>QAction::NoRole</enum>
    </property>
   </action>
   <action name="actionRestrictThirdDimension">
@@ -1662,7 +1647,7 @@
     <bool>false</bool>
    </property>
    <property name="menuRole">
-    <enum>QAction::ApplicationSpecificRole</enum>
+    <enum>QAction::NoRole</enum>
    </property>
   </action>
   <action name="actionDimensionLabels">
@@ -1687,7 +1672,7 @@
     <bool>false</bool>
    </property>
    <property name="menuRole">
-    <enum>QAction::ApplicationSpecificRole</enum>
+    <enum>QAction::NoRole</enum>
    </property>
   </action>
   <action name="actionAddSeparator">
