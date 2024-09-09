@@ -297,74 +297,24 @@ VToolApp {
         return (desktopKeys);
     }
 
-    Group {
-        name: "48x48/apps"
-        prefix: project.sourceDirectory + "/share/icons/48x48/apps/"
-        files: "valentina.png"
-        fileTags: "freedesktop.48x48AppsIcons"
-    }
+    freedesktop2.hicolorRoot: project.sourceDirectory + "/share/icons/"
 
     Group {
-        name: "64x64/apps"
-        prefix: project.sourceDirectory + "/share/icons/64x64/apps/"
-        files: "valentina.png"
-        fileTags: "freedesktop.64x64AppsIcons"
-    }
-
-    Group {
-        name: "128x128/apps"
-        prefix: project.sourceDirectory + "/share/icons/128x128/apps/"
-        files: "valentina.png"
-        fileTags: "freedesktop.128x128AppsIcons"
-    }
-
-    Group {
-        name: "256x256/apps"
-        prefix: project.sourceDirectory + "/share/icons/256x256/apps/"
-        files: "valentina.png"
-        fileTags: "freedesktop.256x256AppsIcons"
-    }
-
-    Group {
-        name: "512x512/apps"
-        prefix: project.sourceDirectory + "/share/icons/512x512/apps/"
-        files: "valentina.png"
-        fileTags: "freedesktop.512x512AppsIcons"
-    }
-
-    Group {
-        name: "apps48x48/mimetypes"
-        prefix: project.sourceDirectory + "/share/icons/48x48/mimetypes/"
-        files: "application-x-valentina-pattern.png"
-        fileTags: "freedesktop.48x48MimetypesIcons"
-    }
-
-    Group {
-        name: "apps64x64/mimetypes"
-        prefix: project.sourceDirectory + "/share/icons/64x64/mimetypes/"
-        files: "application-x-valentina-pattern.png"
-        fileTags: "freedesktop.64x64MimetypesIcons"
-    }
-
-    Group {
-        name: "apps128x128/mimetypes"
-        prefix: project.sourceDirectory + "/share/icons/128x128/mimetypes/"
-        files: "application-x-valentina-pattern.png"
-        fileTags: "freedesktop.128x128MimetypesIcons"
-    }
-
-    Group {
-        name: "apps256x256/mimetypes"
-        prefix: project.sourceDirectory + "/share/icons/256x256/mimetypes/"
-        files: "application-x-valentina-pattern.png"
-        fileTags: "freedesktop.256x256MimetypesIcons"
-    }
-
-    Group {
-        name: "apps512x512/mimetypes"
-        prefix: project.sourceDirectory + "/share/icons/512x512/mimetypes/"
-        files: "application-x-valentina-pattern.png"
-        fileTags: "freedesktop.512x512MimetypesIcons"
+        name: "hicolor"
+        prefix: project.sourceDirectory + "/share/icons/"
+        files: [
+            "48x48/apps/valentina.png",
+            "64x64/apps/valentina.png",
+            "128x128/apps/valentina.png",
+            "256x256/apps/valentina.png",
+            "512x512/apps/valentina.png",
+            "48x48/mimetypes/application-x-valentina-pattern.png",
+            "64x64/mimetypes/application-x-valentina-pattern.png",
+            "128x128/mimetypes/application-x-valentina-pattern.png",
+            "256x256/mimetypes/application-x-valentina-pattern.png",
+            "512x512/mimetypes/application-x-valentina-pattern.png",
+        ]
+        fileTags: "freedesktop.appIcon"
     }
 
     Group {
