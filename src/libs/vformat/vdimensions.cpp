@@ -58,9 +58,9 @@ auto VAbstartMeasurementDimension::RangeMin() const -> int
 {
     if (m_measurement)
     {
-        const int rangeMinCm = 20;
-        const int rangeMinMm = 200;
-        const int rangeMinInch = 8;
+        const int rangeMinCm = 10;
+        const int rangeMinMm = 100;
+        const int rangeMinInch = 4;
 
         switch (Units())
         {
@@ -112,11 +112,7 @@ auto VAbstartMeasurementDimension::Name() const -> QString
 //---------------------------------------------------------------------------------------------------------------------
 auto VAbstartMeasurementDimension::ValidSteps() const -> QVector<qreal>
 {
-    const qreal stepBarrier = 50;
-    const qreal s = 0.1;
-
     QVector<qreal> steps;
-    steps.reserve(qRound((stepBarrier - s) * 2 - 1));
 
     const qreal diff = m_maxValue - m_minValue;
     if (qFuzzyIsNull(diff))
@@ -125,19 +121,20 @@ auto VAbstartMeasurementDimension::ValidSteps() const -> QVector<qreal>
     }
     else if (diff > 0)
     {
-        qreal candidate = 1;
-        int i = 1;
-        do
+        const qreal step = (m_units == Unit::Mm ? 1 : 0.1);
+        const int stepsCount = qRound(diff / step);
+        steps.reserve(stepsCount);
+
+        for (int i = 1; i <= stepsCount; ++i)
         {
-            const qreal step = (m_units == Unit::Mm ? candidate * 10 : candidate);
-            qreal intpart;
-            if (qFuzzyIsNull(std::modf(diff / step, &intpart)))
+            const qreal currentStep = i * step;
+
+            qreal intpart = NAN;
+            if (qFuzzyIsNull(std::modf(diff / currentStep, &intpart)))
             {
-                steps.append(step);
+                steps.append(currentStep);
             }
-            candidate = 1 + s * i;
-            ++i;
-        } while (candidate < stepBarrier);
+        }
     }
 
     return steps;
