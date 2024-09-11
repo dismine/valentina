@@ -8601,112 +8601,112 @@ Přesto použít nastavení?</translation>
         <translation>Připraven!</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="2082"/>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="2162"/>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="2246"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="2083"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="2163"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="2247"/>
         <source>Value</source>
         <translation>Hodnota</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="4572"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="4573"/>
         <source>Default</source>
         <translation>Výchozí</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="4985"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="4986"/>
         <source>Detail</source>
         <translation>Jednotlivost (díl střihu)</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="2122"/>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="2681"/>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="3139"/>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="3739"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="2123"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="2682"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="3140"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="3740"/>
         <source>Grainline</source>
         <translation>Dráha nitě</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.cpp" line="2273"/>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="1206"/>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="5421"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="5422"/>
         <source>Reverse</source>
         <translation>Převrátit</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.cpp" line="2283"/>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="5431"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="5432"/>
         <source>Passmark</source>
         <translation>Značka sestavení</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.cpp" line="2303"/>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="5451"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="5452"/>
         <source>One line</source>
         <translation>Jedna čára</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.cpp" line="2306"/>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="5454"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="5455"/>
         <source>Two lines</source>
         <translation>Dvě čáry</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.cpp" line="2309"/>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="5457"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="5458"/>
         <source>Three lines</source>
         <translation>Tři čáry</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.cpp" line="2312"/>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="5460"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="5461"/>
         <source>T mark</source>
         <translation>Značka T</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.cpp" line="2316"/>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="5464"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="5465"/>
         <source>External V mark</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.cpp" line="2320"/>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="5468"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="5469"/>
         <source>Internal V mark</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.cpp" line="2323"/>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="5471"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="5472"/>
         <source>U mark</source>
         <translation>Značka U</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.cpp" line="2326"/>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="5474"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="5475"/>
         <source>Box mark</source>
         <translation>Značka okénko</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.cpp" line="2329"/>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="5477"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="5478"/>
         <source>Check mark</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.cpp" line="2333"/>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="5482"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="5483"/>
         <source>Check uniqueness</source>
         <translation>Ověřit jedinečnost</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.cpp" line="2338"/>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="5488"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="5489"/>
         <source>Turn point</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.cpp" line="2344"/>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="5495"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="5496"/>
         <source>Excluded</source>
         <translation>Vyloučeno</translation>
     </message>
@@ -8716,7 +8716,7 @@ Přesto použít nastavení?</translation>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="1253"/>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="1287"/>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="1349"/>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="5501"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="5502"/>
         <source>Delete</source>
         <translation>Smazat</translation>
     </message>
@@ -8728,172 +8728,172 @@ Přesto použít nastavení?</translation>
         <translation>Volby</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="1766"/>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="1818"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="1767"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="1819"/>
         <source>Error. Can&apos;t save piece path.</source>
         <translation>Chyba. Nelze uložit cestu dílu.</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="2094"/>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="2175"/>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="2258"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="2095"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="2176"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="2259"/>
         <source>Infinite/undefined result</source>
         <translation>Nekonečný/Nevymezený výsledek</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="2098"/>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="2179"/>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="2262"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="2099"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="2180"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="2263"/>
         <source>Length should be positive</source>
         <translation>Délka má být kladná</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="2109"/>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="2190"/>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="2273"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="2110"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="2191"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="2274"/>
         <source>Parser error: %1</source>
         <translation>Chyba při zpracování: %1</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="2714"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="2715"/>
         <source>Current seam allowance</source>
         <translation>Nynější švová záložka</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="2936"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="2937"/>
         <source>Edit seam allowance width</source>
         <translation>Upravit šířku švové záložky</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="2950"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="2951"/>
         <source>Edit seam allowance width before</source>
         <translation>Upravit šířku švové záložky před</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="2964"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="2965"/>
         <source>Edit seam allowance width after</source>
         <translation>Upravit šířku švové záložky po</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="2993"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="2994"/>
         <source>Edit passmark width</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="3007"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="3008"/>
         <source>Edit passmark angle</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="3391"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="3392"/>
         <source>You need more points!</source>
         <translation>Potřebujete více bodů!</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="3398"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="3399"/>
         <source>You have to choose points in a clockwise direction!</source>
         <translation>Musíte vybrat body po směru otáčení hodinových ručiček!</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="3406"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="3407"/>
         <source>First point cannot be equal to the last point!</source>
         <translation>První bod nemůže být stejný s posledním bodem!</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="3414"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="3415"/>
         <source>You have double points!</source>
         <translation>Máte zdvojené body!</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="4085"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="4086"/>
         <source>Empty</source>
         <translation>Prázdný</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="4171"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="4172"/>
         <source>main path</source>
         <translation>Hlavní cesta</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="4173"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="4174"/>
         <source>custom seam allowance</source>
         <translation>Vlastní švová záložka</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.cpp" line="2286"/>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="4151"/>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="4540"/>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="5434"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="4152"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="4541"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="5435"/>
         <source>None</source>
         <translation>Žádný</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="3737"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="3738"/>
         <source>Pins</source>
         <translation>Špendlíky</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="4111"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="4112"/>
         <source>no pin</source>
         <translation>Žádný špendlík</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="2204"/>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="2287"/>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="2690"/>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="3162"/>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="3171"/>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="3195"/>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="3204"/>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="3738"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="2205"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="2288"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="2691"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="3163"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="3172"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="3196"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="3205"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="3739"/>
         <source>Labels</source>
         <translation>Popisy</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="2106"/>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="2187"/>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="2270"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="2107"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="2188"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="2271"/>
         <source>Error</source>
         <translation>Chyba</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="2466"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="2467"/>
         <source>Edit length</source>
         <translation>Upravit délku</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="2472"/>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="2529"/>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="2589"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="2473"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="2530"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="2590"/>
         <source>Edit angle</source>
         <translation>Upravit úhel</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="2517"/>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="2577"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="2518"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="2578"/>
         <source>Edit height</source>
         <translation>Upravit výšku</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="2523"/>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="2583"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="2524"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="2584"/>
         <source>Edit width</source>
         <translation>Upravit šířku</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="605"/>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="3736"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="3737"/>
         <source>Paths</source>
         <translation>Cesty</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="3429"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="3430"/>
         <source>Each point in the path must be unique!</source>
         <translation>Každý bod v cestě musí být jedinečný!</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="643"/>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="3740"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="3741"/>
         <source>Passmarks</source>
         <translation>Značky sestavení</translation>
     </message>
@@ -8948,7 +8948,7 @@ Přesto použít nastavení?</translation>
         <translation>Tlačítko</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="3741"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="3742"/>
         <source>Place label</source>
         <translation>Umístit popis</translation>
     </message>
@@ -8958,16 +8958,16 @@ Přesto použít nastavení?</translation>
         <translation>Pro otevření všech vlastností jednotlivosti (dílu střihu) dokončete vytvoření hlavní cesty. Stiskněte, prosím, OK.</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="3422"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="3423"/>
         <source>The same curve repeats twice!</source>
         <translation>Tatáž křivka se opakuje dvakrát!</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="2747"/>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="2777"/>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="2806"/>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="2834"/>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="2861"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="2748"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="2778"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="2807"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="2835"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="2862"/>
         <source>&lt;Empty&gt;</source>
         <translation>&lt;prázdné&gt;</translation>
     </message>
@@ -8978,7 +8978,7 @@ Přesto použít nastavení?</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="672"/>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="3742"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="3743"/>
         <source>Fold line</source>
         <translation type="unfinished"></translation>
     </message>
@@ -8988,276 +8988,276 @@ Přesto použít nastavení?</translation>
         <translation>Kruh</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="2978"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="2979"/>
         <source>Edit passmark length</source>
         <translation>Upravit délku značky sestavení</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="3020"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="3021"/>
         <source>Edit fold line height</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="3035"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="3036"/>
         <source>Edit fold line width</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="3050"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="3051"/>
         <source>Edit fold line center position</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="3462"/>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="3498"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="3463"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="3499"/>
         <source>Invalid mirror line start point!</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="3469"/>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="3505"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="3470"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="3506"/>
         <source>Invalid mirror line end point!</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="3478"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="3479"/>
         <source>Start and end mirror line points must be unique!</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="3514"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="3515"/>
         <source>Mirror points must be neighbors!</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="4278"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="4279"/>
         <source>The customer name from individual measurements</source>
         <translation>Jméno zákazníka z jednotlivých měr</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="4282"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="4283"/>
         <source>The customer email from individual measurements</source>
         <translation>Adresa elektronické pošty zákazníka z jednotlivých měr</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="4286"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="4287"/>
         <source>The customer birth date from individual measurements</source>
         <translation>Datum narození zákazníka z jednotlivých měr</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="4340"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="4341"/>
         <source>Two ways (Up/Down)</source>
         <comment>grainline direction</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="4342"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="4343"/>
         <source>One way (Up)</source>
         <comment>grainline direction</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="4344"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="4345"/>
         <source>One way (Down)</source>
         <comment>grainline direction</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="4346"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="4347"/>
         <source>Four ways</source>
         <comment>grainline direction</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="4348"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="4349"/>
         <source>Two ways (Up/Left)</source>
         <comment>grainline direction</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="4350"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="4351"/>
         <source>Two ways (Up/Right)</source>
         <comment>grainline direction</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="4352"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="4353"/>
         <source>Two ways (Down/Left)</source>
         <comment>grainline direction</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="4354"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="4355"/>
         <source>Two ways (Down/Right)</source>
         <comment>grainline direction</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="4356"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="4357"/>
         <source>Three ways (Up/Down/Left)</source>
         <comment>grainline direction</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="4358"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="4359"/>
         <source>Three ways (Up/Down/Right)</source>
         <comment>grainline direction</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="4360"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="4361"/>
         <source>Three ways (Up/Left/Right)</source>
         <comment>grainline direction</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="4362"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="4363"/>
         <source>Three ways (Down/Left/Right)</source>
         <comment>grainline direction</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="4532"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="4533"/>
         <source>Two arrows (text above)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="4534"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="4535"/>
         <source>Two arrows (text under)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="4536"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="4537"/>
         <source>Two arrows</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="4537"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="4538"/>
         <source>Text</source>
         <translation>Text</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="4538"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="4539"/>
         <source>Three dots</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="4539"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="4540"/>
         <source>Three X</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="5607"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="5608"/>
         <source>Save label data.</source>
         <translation>Uložit data popisu.</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="5608"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="5609"/>
         <source>Label data were changed. Do you want to save them before editing label template?</source>
         <translation>Popisy byly změněny. Chcete je uložit, předtím než upravíte předlohu popisu?</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="5100"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="5101"/>
         <source>Height</source>
         <comment>dimension</comment>
         <translation>Výška</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="5104"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="5105"/>
         <source>Size</source>
         <comment>dimension</comment>
         <translation>Velikost</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="5108"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="5109"/>
         <source>Hip</source>
         <comment>dimension</comment>
         <translation>Kyčel</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="5112"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="5113"/>
         <source>Waist</source>
         <comment>dimension</comment>
         <translation>Pas</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="5118"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="5119"/>
         <source>Height label</source>
         <comment>dimension</comment>
         <translation>Popis výšky</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="5124"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="5125"/>
         <source>Size label</source>
         <comment>dimension</comment>
         <translation>Popis velikosti</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="5130"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="5131"/>
         <source>Hip label</source>
         <comment>dimension</comment>
         <translation>Popis kyčle</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="5136"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="5137"/>
         <source>Waist label</source>
         <comment>dimension</comment>
         <translation>Popis pasu</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="5149"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="5150"/>
         <source>Measurement: %1</source>
         <translation>Míry: %1</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="3437"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="3438"/>
         <source>Invalid segment!</source>
         <translation>Neplatná část!</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="5101"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="5102"/>
         <source>Dimension X</source>
         <comment>dimension</comment>
         <translation>Rozměr X</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="5105"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="5106"/>
         <source>Dimension Y</source>
         <comment>dimension</comment>
         <translation>Rozměr Y</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="5109"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="5110"/>
         <source>Dimension Z</source>
         <comment>dimension</comment>
         <translation>Rozměr Z</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="5113"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="5114"/>
         <source>Dimension W</source>
         <comment>dimension</comment>
         <translation>Rozměr W</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="5119"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="5120"/>
         <source>Dimension X label</source>
         <comment>dimension</comment>
         <translation>Popisek rozměru X</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="5125"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="5126"/>
         <source>Dimension Y label</source>
         <comment>dimension</comment>
         <translation>Popisek rozměru Y</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="5131"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="5132"/>
         <source>Dimension Z label</source>
         <comment>dimension</comment>
         <translation>Popisek rozměru Z</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="5137"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="5138"/>
         <source>Dimension W label</source>
         <comment>dimension</comment>
         <translation>Popisek rozměru W</translation>
@@ -10514,28 +10514,28 @@ Přesto použít nastavení?</translation>
 <context>
     <name>FvUpdater</name>
     <message>
-        <location filename="../../src/libs/fervor/fvupdater.cpp" line="239"/>
+        <location filename="../../src/libs/fervor/fvupdater.cpp" line="230"/>
         <source>Cannot open your default browser.</source>
         <translation>Nelze otevřít výchozí prohlížeč.</translation>
     </message>
     <message>
-        <location filename="../../src/libs/fervor/fvupdater.cpp" line="382"/>
+        <location filename="../../src/libs/fervor/fvupdater.cpp" line="373"/>
         <source>Feed download failed: %1.</source>
         <translation>Tok stahování přerušen: %1.</translation>
     </message>
     <message>
-        <location filename="../../src/libs/fervor/fvupdater.cpp" line="470"/>
+        <location filename="../../src/libs/fervor/fvupdater.cpp" line="461"/>
         <source>Feed parsing failed: %1 %2.</source>
         <translation>Zpracování stahování přerušeno: %1 %2.</translation>
     </message>
     <message>
-        <location filename="../../src/libs/fervor/fvupdater.cpp" line="477"/>
-        <location filename="../../src/libs/fervor/fvupdater.cpp" line="502"/>
+        <location filename="../../src/libs/fervor/fvupdater.cpp" line="468"/>
+        <location filename="../../src/libs/fervor/fvupdater.cpp" line="493"/>
         <source>No updates were found.</source>
         <translation>Nebyly nalezeny žádné aktualizace.</translation>
     </message>
     <message>
-        <location filename="../../src/libs/fervor/fvupdater.cpp" line="493"/>
+        <location filename="../../src/libs/fervor/fvupdater.cpp" line="484"/>
         <source>Feed error: invalid &quot;enclosure&quot; with the download link</source>
         <translation>Chyba při stahování: neplatné &quot;ohrazení&quot; s odkazem na stahování</translation>
     </message>
@@ -10666,7 +10666,7 @@ Přesto použít nastavení?</translation>
         <translation>Editor velikostí ve Valentině.</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/mapplication.cpp" line="958"/>
+        <location filename="../../src/app/tape/mapplication.cpp" line="969"/>
         <source>The measurement file.</source>
         <translation>Soubor s mírami.</translation>
     </message>
@@ -10691,12 +10691,12 @@ Přesto použít nastavení?</translation>
         <translation type="vanished">Použít ke zkoušení jednotek. Spusťte program a otevřete soubor bez zobrazení okna.</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/mapplication.cpp" line="1208"/>
+        <location filename="../../src/app/tape/mapplication.cpp" line="1219"/>
         <source>Invalid base size argument. Must be cm, mm or inch.</source>
         <translation>Neplatná základní velikost. Musí být cm, mm nebo palec.</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/mapplication.cpp" line="1004"/>
+        <location filename="../../src/app/tape/mapplication.cpp" line="1015"/>
         <source>Can&apos;t begin to listen for incoming connections on name &apos;%1&apos;</source>
         <translation>Nelze začít naslouchat příchozímu spojení &apos;%1&apos;</translation>
     </message>
@@ -10705,7 +10705,7 @@ Přesto použít nastavení?</translation>
         <translation type="vanished">Zkušební režim nepodporuje otevření více souborů.</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/mapplication.cpp" line="1124"/>
+        <location filename="../../src/app/tape/mapplication.cpp" line="1135"/>
         <source>Please, provide one input file.</source>
         <translation>Poskytněte, prosím, jeden vstupní soubor.</translation>
     </message>
@@ -10726,72 +10726,72 @@ Přesto použít nastavení?</translation>
         <translation type="vanished">Otevřeno se základní výškou. Platné hodnoty: %1 cm.</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/mapplication.cpp" line="980"/>
+        <location filename="../../src/app/tape/mapplication.cpp" line="991"/>
         <source>Use for unit testing. Run the program and open a file without showing the main window.</source>
         <translation>Použít ke zkoušení jednotek. Spusťte program a otevřete soubor bez zobrazení okna.</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/mapplication.cpp" line="983"/>
+        <location filename="../../src/app/tape/mapplication.cpp" line="994"/>
         <source>Disable high dpi scaling. Call this option if has problem with scaling (by default scaling enabled). Alternatively you can use the %1 environment variable.</source>
         <translation>Zakázat škálování pro obrazovky s velkým rozlišením. Tuto volbu zvolte, pokud máte potíže se škálováním (ve výchozím nastavení je škálování povoleno). Jinou možností je použít proměnnou prostředí %1.</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/mapplication.cpp" line="962"/>
+        <location filename="../../src/app/tape/mapplication.cpp" line="973"/>
         <source>Set base for dimension A in the table units.</source>
         <translation>Nastavte základ pro rozměr A v jednotkách tabulky.</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/mapplication.cpp" line="963"/>
+        <location filename="../../src/app/tape/mapplication.cpp" line="974"/>
         <source>The dimension A base</source>
         <translation>Základní hodnota rozměru A</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/mapplication.cpp" line="966"/>
+        <location filename="../../src/app/tape/mapplication.cpp" line="977"/>
         <source>Set base for dimension B in the table units.</source>
         <translation>Nastavte základ pro rozměr B v jednotkách tabulky.</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/mapplication.cpp" line="967"/>
+        <location filename="../../src/app/tape/mapplication.cpp" line="978"/>
         <source>The dimension B base</source>
         <translation>Základní hodnota rozměru B</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/mapplication.cpp" line="970"/>
+        <location filename="../../src/app/tape/mapplication.cpp" line="981"/>
         <source>Set base for dimension C in the table units.</source>
         <translation>Nastavte základ pro rozměr C v jednotkách tabulky.</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/mapplication.cpp" line="971"/>
+        <location filename="../../src/app/tape/mapplication.cpp" line="982"/>
         <source>The dimension C base</source>
         <translation>Základní hodnota rozměru C</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/mapplication.cpp" line="974"/>
+        <location filename="../../src/app/tape/mapplication.cpp" line="985"/>
         <source>Set pattern file units: cm, mm, inch.</source>
         <translation>Nastavit jednotky střihu: cm, mm, palec.</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/mapplication.cpp" line="975"/>
+        <location filename="../../src/app/tape/mapplication.cpp" line="986"/>
         <source>The pattern units</source>
         <translation>Jednotky střihu</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/mapplication.cpp" line="977"/>
+        <location filename="../../src/app/tape/mapplication.cpp" line="988"/>
         <source>Activate known measurements mode.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/mapplication.cpp" line="1147"/>
+        <location filename="../../src/app/tape/mapplication.cpp" line="1158"/>
         <source>Invalid dimension A base value.</source>
         <translation>Neplatná základní hodnota rozměru A.</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/mapplication.cpp" line="1168"/>
+        <location filename="../../src/app/tape/mapplication.cpp" line="1179"/>
         <source>Invalid dimension B base value.</source>
         <translation>Neplatná základní hodnota rozměru B.</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/mapplication.cpp" line="1189"/>
+        <location filename="../../src/app/tape/mapplication.cpp" line="1200"/>
         <source>Invalid dimension C base value.</source>
         <translation>Neplatná základní hodnota rozměru C.</translation>
     </message>
@@ -10801,7 +10801,7 @@ Přesto použít nastavení?</translation>
         <translation>Upozornění na vzorec: %1. Program bude ukončen.</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/mapplication.cpp" line="1022"/>
+        <location filename="../../src/app/tape/mapplication.cpp" line="1033"/>
         <source>Test mode doesn&apos;t support opening several files.</source>
         <translation>Zkušební režim nepodporuje otevření více souborů.</translation>
     </message>
@@ -14833,7 +14833,7 @@ Tato volba se projeví po opětovném spuštění.</translation>
     </message>
     <message>
         <location filename="../../src/libs/vlayout/vlayoutpiece.cpp" line="678"/>
-        <location filename="../../src/libs/vtools/tools/vtoolseamallowance.cpp" line="1916"/>
+        <location filename="../../src/libs/vtools/tools/vtoolseamallowance.cpp" line="1915"/>
         <source>Piece &apos;%1&apos;. Seam allowance is not valid.</source>
         <translation>Díl &apos;%1&apos;. Švová záložka není platná.</translation>
     </message>
@@ -15002,40 +15002,40 @@ Tato volba se projeví po opětovném spuštění.</translation>
         <translation>Žádná data pro rozměr pasu.</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/tools/vtoolseamallowance.cpp" line="340"/>
+        <location filename="../../src/libs/vtools/tools/vtoolseamallowance.cpp" line="339"/>
         <source>Cannot calculate fold line height for piece &apos;%1&apos;. Reason: %2.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/tools/vtoolseamallowance.cpp" line="361"/>
+        <location filename="../../src/libs/vtools/tools/vtoolseamallowance.cpp" line="360"/>
         <source>Cannot calculate fold line width for piece &apos;%1&apos;. Reason: %2.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/tools/vtoolseamallowance.cpp" line="383"/>
+        <location filename="../../src/libs/vtools/tools/vtoolseamallowance.cpp" line="382"/>
         <source>Cannot calculate fold line center position for piece &apos;%1&apos;. Reason: %2.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/tools/vtoolseamallowance.cpp" line="434"/>
-        <location filename="../../src/libs/vtools/tools/vtoolseamallowance.cpp" line="2213"/>
+        <location filename="../../src/libs/vtools/tools/vtoolseamallowance.cpp" line="433"/>
+        <location filename="../../src/libs/vtools/tools/vtoolseamallowance.cpp" line="2212"/>
         <source>Piece &apos;%1&apos;. Unable to load default piece label template.
 %2
 %3</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/tools/vtoolseamallowance.cpp" line="1136"/>
+        <location filename="../../src/libs/vtools/tools/vtoolseamallowance.cpp" line="1135"/>
         <source>Piece &apos;%1&apos;. Grainline is not valid.</source>
         <translation>Díl &apos;%1&apos;. Dráha nitě není platná.</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/tools/vtoolseamallowance.cpp" line="2870"/>
+        <location filename="../../src/libs/vtools/tools/vtoolseamallowance.cpp" line="2869"/>
         <source>Piece &apos;%1&apos;. Fold line is not valid.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/libs/vpatterndb/vpiece.cpp" line="1365"/>
+        <location filename="../../src/libs/vpatterndb/vpiece.cpp" line="1367"/>
         <source>Invalid global value for a passmark length. Piece &apos;%1&apos;. Length is less than minimal allowed.</source>
         <translation>Neplatná celková hodnota délky značky sestavení. Díl &apos;%1&apos;. Délka je menší než nejmenší povolená délka.</translation>
     </message>
@@ -15163,22 +15163,22 @@ Tato volba se projeví po opětovném spuštění.</translation>
         <translation>Křivka &apos;%1&apos;. Délka vyjmuté části (%2) je příliš velká. Vylaďte ji na největší hodnotu.</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vpatterndb/vpiece.cpp" line="1612"/>
+        <location filename="../../src/libs/vpatterndb/vpiece.cpp" line="1614"/>
         <source>Piece &apos;%1&apos;. Internal path &apos;%2&apos; intersects with internal path &apos;%3&apos;.</source>
         <translation>Díl &apos;%1&apos;. Vnitřní cesta &apos;%2&apos; se protíná s vnitřní cestou &apos;%3&apos;.</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vpatterndb/vpiece.cpp" line="1527"/>
+        <location filename="../../src/libs/vpatterndb/vpiece.cpp" line="1529"/>
         <source>Piece &apos;%1&apos;. Internal path &apos;%2&apos; intersects with cutting contour.</source>
         <translation>Díl &apos;%1&apos;. Vnitřní cesta &apos;%2&apos; se protíná s řezným obrysem.</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vpatterndb/vpiece.cpp" line="1400"/>
+        <location filename="../../src/libs/vpatterndb/vpiece.cpp" line="1402"/>
         <source>Invalid global value for a passmark width. Piece &apos;%1&apos;. Width is less than minimal allowed.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/libs/vpatterndb/vpiece.cpp" line="1538"/>
+        <location filename="../../src/libs/vpatterndb/vpiece.cpp" line="1540"/>
         <source>Piece &apos;%1&apos;. Internal path &apos;%2&apos; not inside of cutting contour.</source>
         <translation>Díl &apos;%1&apos;. Vnitřní cesta &apos;%2&apos; není uvnitř řezného obrysu.</translation>
     </message>
@@ -15199,14 +15199,14 @@ Tato volba se projeví po opětovném spuštění.</translation>
         <translation>Neznámý</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vlayout/vabstractpiece.h" line="910"/>
-        <location filename="../../src/libs/vlayout/vabstractpiece.h" line="921"/>
+        <location filename="../../src/libs/vlayout/vabstractpiece.h" line="901"/>
+        <location filename="../../src/libs/vlayout/vabstractpiece.h" line="912"/>
         <source>Piece &apos;%1&apos;. Unable to generate full seam path.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/libs/vlayout/vabstractpiece.h" line="967"/>
-        <location filename="../../src/libs/vlayout/vabstractpiece.h" line="983"/>
+        <location filename="../../src/libs/vlayout/vabstractpiece.h" line="958"/>
+        <location filename="../../src/libs/vlayout/vabstractpiece.h" line="974"/>
         <source>Piece &apos;%1&apos;. Unable to generate full seam allowance path.</source>
         <translation type="unfinished"></translation>
     </message>
@@ -16280,7 +16280,7 @@ Tato volba se projeví po opětovném spuštění.</translation>
         <translation type="vanished">Název</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.ui" line="550"/>
+        <location filename="../../src/app/tape/tmainwindow.ui" line="545"/>
         <source>Calculated value</source>
         <translation>Vypočítaná hodnota</translation>
     </message>
@@ -16307,22 +16307,22 @@ Tato volba se projeví po opětovném spuštění.</translation>
         <translation>Jednotlivosti</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.ui" line="520"/>
+        <location filename="../../src/app/tape/tmainwindow.ui" line="515"/>
         <source>Name:</source>
         <translation>Název:</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.ui" line="560"/>
+        <location filename="../../src/app/tape/tmainwindow.ui" line="555"/>
         <source>Formula:</source>
         <translation>Vzorec:</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.ui" line="606"/>
+        <location filename="../../src/app/tape/tmainwindow.ui" line="601"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Show full calculation in message box&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
         <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Ukázat celý výpočet v okně se zprávami&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.ui" line="654"/>
+        <location filename="../../src/app/tape/tmainwindow.ui" line="649"/>
         <source>Base value:</source>
         <translation>Základní hodnota:</translation>
     </message>
@@ -16335,47 +16335,47 @@ Tato volba se projeví po opětovném spuštění.</translation>
         <translation type="vanished">Ve výškách:</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.ui" line="777"/>
+        <location filename="../../src/app/tape/tmainwindow.ui" line="772"/>
         <source>Description:</source>
         <translation>Popis:</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.ui" line="415"/>
+        <location filename="../../src/app/tape/tmainwindow.ui" line="414"/>
         <source>Move measurement up</source>
         <translation>Posunout míru nahoru</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.ui" line="432"/>
+        <location filename="../../src/app/tape/tmainwindow.ui" line="430"/>
         <source>Move measurement down</source>
         <translation>Posunout míru dolů</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.ui" line="543"/>
+        <location filename="../../src/app/tape/tmainwindow.ui" line="538"/>
         <source>Calculated value:</source>
         <translation>Vypočítaná hodnota:</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.ui" line="754"/>
+        <location filename="../../src/app/tape/tmainwindow.ui" line="749"/>
         <source>Full name:</source>
         <translation>Plný název:</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.ui" line="837"/>
+        <location filename="../../src/app/tape/tmainwindow.ui" line="831"/>
         <source>Information</source>
         <translation>Informace</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.ui" line="846"/>
+        <location filename="../../src/app/tape/tmainwindow.ui" line="840"/>
         <source>Type:</source>
         <translation>Typ:</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.ui" line="853"/>
+        <location filename="../../src/app/tape/tmainwindow.ui" line="847"/>
         <source>Measurement type</source>
         <translation>Druh míry</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.ui" line="860"/>
+        <location filename="../../src/app/tape/tmainwindow.ui" line="854"/>
         <source>Path:</source>
         <translation>Cesta:</translation>
     </message>
@@ -16384,7 +16384,7 @@ Tato volba se projeví po opětovném spuštění.</translation>
         <translation type="vanished">Cesta k souboru</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.ui" line="903"/>
+        <location filename="../../src/app/tape/tmainwindow.ui" line="897"/>
         <source>Show in Explorer</source>
         <translation>Ukázat ve správci souborů</translation>
     </message>
@@ -16413,7 +16413,7 @@ Tato volba se projeví po opětovném spuštění.</translation>
         <translation type="vanished">Příjmení:</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.ui" line="1037"/>
+        <location filename="../../src/app/tape/tmainwindow.ui" line="1031"/>
         <source>Birth date:</source>
         <translation>Datum narození:</translation>
     </message>
@@ -16422,12 +16422,12 @@ Tato volba se projeví po opětovném spuštění.</translation>
         <translation type="vanished">rrrr mm dd</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.ui" line="1099"/>
+        <location filename="../../src/app/tape/tmainwindow.ui" line="1093"/>
         <source>Email:</source>
         <translation>E-mail:</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.ui" line="1125"/>
+        <location filename="../../src/app/tape/tmainwindow.ui" line="1119"/>
         <source>Notes:</source>
         <translation>Poznámky:</translation>
     </message>
@@ -16451,12 +16451,12 @@ Tato volba se projeví po opětovném spuštění.</translation>
         <translation>Míry</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.ui" line="1224"/>
+        <location filename="../../src/app/tape/tmainwindow.ui" line="1218"/>
         <source>Menu</source>
         <translation>Nabídka</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.ui" line="1249"/>
+        <location filename="../../src/app/tape/tmainwindow.ui" line="1243"/>
         <source>Gradation</source>
         <translation>Odstupňování</translation>
     </message>
@@ -16478,7 +16478,7 @@ Tato volba se projeví po opětovném spuštění.</translation>
         <translation type="vanished">Ukončit</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.ui" line="1431"/>
+        <location filename="../../src/app/tape/tmainwindow.ui" line="1420"/>
         <source>About &amp;Qt</source>
         <translation>O &amp;Qt</translation>
     </message>
@@ -16491,17 +16491,17 @@ Tato volba se projeví po opětovném spuštění.</translation>
         <translation type="vanished">Nový</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.ui" line="1470"/>
+        <location filename="../../src/app/tape/tmainwindow.ui" line="1457"/>
         <source>Add known</source>
         <translation>Přidat známé</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.ui" line="1485"/>
+        <location filename="../../src/app/tape/tmainwindow.ui" line="1472"/>
         <source>Add custom</source>
         <translation>Přidat vlastní</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.ui" line="1503"/>
+        <location filename="../../src/app/tape/tmainwindow.ui" line="1490"/>
         <source>Read only</source>
         <translation>Pouze pro čtení</translation>
     </message>
@@ -16510,7 +16510,7 @@ Tato volba se projeví po opětovném spuštění.</translation>
         <translation type="vanished">Otevřít standardní...</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.ui" line="1527"/>
+        <location filename="../../src/app/tape/tmainwindow.ui" line="1512"/>
         <source>Open template</source>
         <translation>Otevřít předlohu</translation>
     </message>
@@ -16523,7 +16523,7 @@ Tato volba se projeví po opětovném spuštění.</translation>
         <translation type="vanished">Ukázat údaje o všech známých rozměrech</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.ui" line="1535"/>
+        <location filename="../../src/app/tape/tmainwindow.ui" line="1520"/>
         <location filename="../../src/app/tape/tmainwindow.cpp" line="1167"/>
         <source>Preferences</source>
         <translation>Nastavení</translation>
@@ -16661,7 +16661,7 @@ Chcete uložit změny?</translation>
         <translation>Otevřít soubor</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.ui" line="1546"/>
+        <location filename="../../src/app/tape/tmainwindow.ui" line="1531"/>
         <location filename="../../src/app/tape/tmainwindow.cpp" line="1801"/>
         <source>Import from a pattern</source>
         <translation>Zavést ze střihu</translation>
@@ -16774,7 +16774,7 @@ Chcete uložit změny?</translation>
         <translation type="vanished">Název ve vzorci</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.ui" line="632"/>
+        <location filename="../../src/app/tape/tmainwindow.ui" line="627"/>
         <source>Function Wizard</source>
         <translation>Průvodce funkcí</translation>
     </message>
@@ -16784,12 +16784,12 @@ Chcete uložit změny?</translation>
         <translation>Posunout míru úplně nahoru</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.ui" line="449"/>
+        <location filename="../../src/app/tape/tmainwindow.ui" line="446"/>
         <source>Move measurement bottom</source>
         <translation>Posunout míru úplně dolů</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.ui" line="479"/>
+        <location filename="../../src/app/tape/tmainwindow.ui" line="475"/>
         <source>Delete measurement</source>
         <translation>Smazat míru</translation>
     </message>
@@ -16812,7 +16812,7 @@ Chcete uložit změny?</translation>
         <translation>žena</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.ui" line="1079"/>
+        <location filename="../../src/app/tape/tmainwindow.ui" line="1073"/>
         <source>Gender:</source>
         <translation>Pohlaví:</translation>
     </message>
@@ -16825,7 +16825,7 @@ Chcete uložit změny?</translation>
         <translation type="vanished">Vytvořit ze stávajícího...</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.ui" line="1557"/>
+        <location filename="../../src/app/tape/tmainwindow.ui" line="1542"/>
         <source>Create from existing file</source>
         <translation>Vytvořit ze stávajícího souboru</translation>
     </message>
@@ -16839,8 +16839,8 @@ Chcete uložit změny?</translation>
         <translation type="vanished">Vyvedení obvyklých měr nepodporováno.</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.ui" line="1275"/>
-        <location filename="../../src/app/tape/tmainwindow.ui" line="1603"/>
+        <location filename="../../src/app/tape/tmainwindow.ui" line="1269"/>
+        <location filename="../../src/app/tape/tmainwindow.ui" line="1588"/>
         <source>Measurement diagram</source>
         <translation>Diagram míry</translation>
     </message>
@@ -16868,17 +16868,17 @@ Chcete uložit změny?</translation>
         <translation>Hledání</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.ui" line="530"/>
+        <location filename="../../src/app/tape/tmainwindow.ui" line="525"/>
         <source>Measurement&apos;s name in a formula</source>
         <translation>Název míry ve vzorci</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.ui" line="533"/>
+        <location filename="../../src/app/tape/tmainwindow.ui" line="528"/>
         <source>Measurement&apos;s name in a formula.</source>
         <translation>Název míry ve vzorci.</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.ui" line="767"/>
+        <location filename="../../src/app/tape/tmainwindow.ui" line="762"/>
         <source>Measurement&apos;s human-readable name.</source>
         <translation>Název míry čitelný pro člověka.</translation>
     </message>
@@ -16928,7 +16928,7 @@ Chcete uložit změny?</translation>
         <translation type="vanished">Vyskytla se neznámá chyba. Například plný disk zabránil tomu, aby byl soubor se zámkem zapsán.</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.ui" line="1571"/>
+        <location filename="../../src/app/tape/tmainwindow.ui" line="1556"/>
         <source>Export to CSV</source>
         <translation>Vyvést do CSV</translation>
     </message>
@@ -16951,7 +16951,7 @@ Chcete uložit změny?</translation>
         <translation>Čárkou oddělené hodnoty</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.ui" line="1027"/>
+        <location filename="../../src/app/tape/tmainwindow.ui" line="1021"/>
         <source>Customer&apos;s name</source>
         <translation>Jméno zákazníka</translation>
     </message>
@@ -16960,7 +16960,7 @@ Chcete uložit změny?</translation>
         <translation type="vanished">Jméno zákazníkovy rodiny</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.ui" line="1115"/>
+        <location filename="../../src/app/tape/tmainwindow.ui" line="1109"/>
         <source>Customer&apos;s email address</source>
         <translation>Adresa elektronické pošty zákazníka</translation>
     </message>
@@ -17011,17 +17011,17 @@ Chcete uložit změny?</translation>
         <translation>Prázdný</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.ui" line="1011"/>
+        <location filename="../../src/app/tape/tmainwindow.ui" line="1005"/>
         <source>Customer name:</source>
         <translation>Jméno zákazníka:</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.ui" line="1515"/>
+        <location filename="../../src/app/tape/tmainwindow.ui" line="1501"/>
         <source>Open multisize …</source>
         <translation>Otevřít více velikostí…</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.ui" line="1554"/>
+        <location filename="../../src/app/tape/tmainwindow.ui" line="1539"/>
         <source>Create from existing …</source>
         <translation>Vytvořit ze stávajícího…</translation>
     </message>
@@ -17031,8 +17031,8 @@ Chcete uložit změny?</translation>
         <translation>Uložit…</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.ui" line="1582"/>
-        <location filename="../../src/app/tape/tmainwindow.ui" line="1585"/>
+        <location filename="../../src/app/tape/tmainwindow.ui" line="1567"/>
+        <location filename="../../src/app/tape/tmainwindow.ui" line="1570"/>
         <location filename="../../src/app/tape/tmainwindow.cpp" line="1093"/>
         <source>Import from CSV</source>
         <translation>Zavést z CSV</translation>
@@ -17058,52 +17058,52 @@ Chcete uložit změny?</translation>
         <translation>Nelze uložit nastavení. Přístup odepřen.</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.ui" line="1162"/>
+        <location filename="../../src/app/tape/tmainwindow.ui" line="1156"/>
         <source>&amp;File</source>
         <translation>&amp;Soubor</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.ui" line="1185"/>
+        <location filename="../../src/app/tape/tmainwindow.ui" line="1179"/>
         <source>&amp;Window</source>
         <translation>&amp;Okno</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.ui" line="1190"/>
+        <location filename="../../src/app/tape/tmainwindow.ui" line="1184"/>
         <source>&amp;Help</source>
         <translation>&amp;Nápověda</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.ui" line="1197"/>
+        <location filename="../../src/app/tape/tmainwindow.ui" line="1191"/>
         <source>&amp;Measurements</source>
         <translation>&amp;Míry</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.ui" line="1381"/>
+        <location filename="../../src/app/tape/tmainwindow.ui" line="1373"/>
         <source>&amp;Open individual …</source>
         <translation>&amp;Otevřít individuální…</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.ui" line="1396"/>
+        <location filename="../../src/app/tape/tmainwindow.ui" line="1387"/>
         <source>&amp;Save</source>
         <translation>&amp;Uložit</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.ui" line="1411"/>
+        <location filename="../../src/app/tape/tmainwindow.ui" line="1401"/>
         <source>Save &amp;As …</source>
         <translation>Uložit j&amp;ako…</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.ui" line="1423"/>
+        <location filename="../../src/app/tape/tmainwindow.ui" line="1412"/>
         <source>&amp;Quit</source>
         <translation>&amp;Ukončit</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.ui" line="1443"/>
+        <location filename="../../src/app/tape/tmainwindow.ui" line="1431"/>
         <source>&amp;About Tape</source>
         <translation>&amp;O programu Tape</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.ui" line="1455"/>
+        <location filename="../../src/app/tape/tmainwindow.ui" line="1442"/>
         <source>&amp;New</source>
         <translation>&amp;Nový</translation>
     </message>
@@ -17157,108 +17157,108 @@ Chcete uložit změny?</translation>
         <translation>Oprava</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.ui" line="500"/>
+        <location filename="../../src/app/tape/tmainwindow.ui" line="495"/>
         <source>Units:</source>
         <translation>Jednotky:</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.ui" line="694"/>
+        <location filename="../../src/app/tape/tmainwindow.ui" line="689"/>
         <source>Shift B</source>
         <translation>Shift B</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.ui" line="714"/>
+        <location filename="../../src/app/tape/tmainwindow.ui" line="709"/>
         <source>Shift C</source>
         <translation>Shift C</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.ui" line="734"/>
+        <location filename="../../src/app/tape/tmainwindow.ui" line="729"/>
         <source>Correction:</source>
         <translation>Oprava:</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.ui" line="803"/>
+        <location filename="../../src/app/tape/tmainwindow.ui" line="798"/>
         <source>Dimension:</source>
         <translation>Rozměr:</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.ui" line="819"/>
+        <location filename="../../src/app/tape/tmainwindow.ui" line="814"/>
         <source>Select one of the dimensions to later use the measurement value in piece label</source>
         <translation>Vyberte jeden z rozměrů, abyste mohli později použít naměřenou hodnotu v popisu dílu</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.ui" line="912"/>
+        <location filename="../../src/app/tape/tmainwindow.ui" line="906"/>
         <source>Known measurements:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.ui" line="944"/>
+        <location filename="../../src/app/tape/tmainwindow.ui" line="938"/>
         <source>Base Values:</source>
         <translation>Základní hodnoty:</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.ui" line="1296"/>
+        <location filename="../../src/app/tape/tmainwindow.ui" line="1290"/>
         <source>Add image</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.ui" line="1313"/>
+        <location filename="../../src/app/tape/tmainwindow.ui" line="1307"/>
         <source>Remove image</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.ui" line="1330"/>
+        <location filename="../../src/app/tape/tmainwindow.ui" line="1324"/>
         <source>Save image</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.ui" line="1617"/>
+        <location filename="../../src/app/tape/tmainwindow.ui" line="1602"/>
         <location filename="../../src/app/tape/tmainwindow.cpp" line="2589"/>
         <source>Export to individual</source>
         <translation>Vyvést do individuálního</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.ui" line="1620"/>
+        <location filename="../../src/app/tape/tmainwindow.ui" line="1605"/>
         <source>Export to individual measurements</source>
         <translation>Vyvést do individuálních měr</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.ui" line="1634"/>
+        <location filename="../../src/app/tape/tmainwindow.ui" line="1619"/>
         <source>Use full circumference</source>
         <translation>Použít celý obvod</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.ui" line="1645"/>
+        <location filename="../../src/app/tape/tmainwindow.ui" line="1630"/>
         <source>Restrict second dimension</source>
         <translation>Omezit druhý rozměr</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.ui" line="1659"/>
+        <location filename="../../src/app/tape/tmainwindow.ui" line="1644"/>
         <source>Restrict third dimension</source>
         <translation>Omezit třetí rozměr</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.ui" line="1673"/>
+        <location filename="../../src/app/tape/tmainwindow.ui" line="1658"/>
         <source>Dimension labels</source>
         <translation>Popisky rozměrů</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.ui" line="1718"/>
+        <location filename="../../src/app/tape/tmainwindow.ui" line="1703"/>
         <source>Create Known Measurements</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.ui" line="1726"/>
+        <location filename="../../src/app/tape/tmainwindow.ui" line="1711"/>
         <source>Edit current Known Measurements</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.ui" line="1734"/>
+        <location filename="../../src/app/tape/tmainwindow.ui" line="1719"/>
         <source>Always on top</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.ui" line="1737"/>
+        <location filename="../../src/app/tape/tmainwindow.ui" line="1722"/>
         <source>Keep window always on top</source>
         <translation type="unfinished"></translation>
     </message>
@@ -17419,7 +17419,7 @@ Chcete uložit změny?</translation>
         <translation>Stupně</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.ui" line="1684"/>
+        <location filename="../../src/app/tape/tmainwindow.ui" line="1669"/>
         <source>Restrict first dimension</source>
         <translation>Omezit první rozměr</translation>
     </message>
@@ -17490,12 +17490,12 @@ Chcete uložit změny?</translation>
         <translation>F3</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.ui" line="1702"/>
+        <location filename="../../src/app/tape/tmainwindow.ui" line="1687"/>
         <source>Add separator</source>
         <translation>Přidat oddělovač</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.ui" line="1710"/>
+        <location filename="../../src/app/tape/tmainwindow.ui" line="1695"/>
         <source>Dimension custom names</source>
         <translation>Vlastní názvy rozměrů</translation>
     </message>
@@ -18941,81 +18941,81 @@ Chcete uložit změny?</translation>
 <context>
     <name>VAbstartMeasurementDimension</name>
     <message>
-        <location filename="../../src/libs/vformat/vdimensions.cpp" line="220"/>
+        <location filename="../../src/libs/vformat/vdimensions.cpp" line="217"/>
         <source>Invalid min/max range</source>
         <translation>Neplatný nejmenší/největší rozsah</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vformat/vdimensions.cpp" line="232"/>
+        <location filename="../../src/libs/vformat/vdimensions.cpp" line="229"/>
         <source>Invalid step</source>
         <translation>Neplatný krok</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vformat/vdimensions.cpp" line="244"/>
+        <location filename="../../src/libs/vformat/vdimensions.cpp" line="241"/>
         <source>Base value invalid</source>
         <translation>Neplatná základní hodnota</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vformat/vdimensions.cpp" line="257"/>
+        <location filename="../../src/libs/vformat/vdimensions.cpp" line="254"/>
         <source>Units are invalid</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/libs/vformat/vdimensions.cpp" line="269"/>
+        <location filename="../../src/libs/vformat/vdimensions.cpp" line="266"/>
         <source>Height</source>
         <comment>dimension</comment>
         <translation>Výška</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vformat/vdimensions.cpp" line="271"/>
+        <location filename="../../src/libs/vformat/vdimensions.cpp" line="268"/>
         <source>Size</source>
         <comment>dimension</comment>
         <translation>Velikost</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vformat/vdimensions.cpp" line="273"/>
+        <location filename="../../src/libs/vformat/vdimensions.cpp" line="270"/>
         <source>Waist</source>
         <comment>dimension</comment>
         <translation>Pas</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vformat/vdimensions.cpp" line="275"/>
+        <location filename="../../src/libs/vformat/vdimensions.cpp" line="272"/>
         <source>Hip</source>
         <comment>dimension</comment>
         <translation>Kyčel</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vformat/vdimensions.cpp" line="294"/>
+        <location filename="../../src/libs/vformat/vdimensions.cpp" line="291"/>
         <source>Chest full circumference</source>
         <comment>dimension</comment>
         <translation>Celý obvod hrudníku</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vformat/vdimensions.cpp" line="296"/>
+        <location filename="../../src/libs/vformat/vdimensions.cpp" line="293"/>
         <source>Chest half circumference</source>
         <comment>dimension</comment>
         <translation>Polovina obvodu hrudníku</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vformat/vdimensions.cpp" line="303"/>
+        <location filename="../../src/libs/vformat/vdimensions.cpp" line="300"/>
         <source>Waist full circumference</source>
         <comment>dimension</comment>
         <translation>Celý obvod pasu</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vformat/vdimensions.cpp" line="305"/>
+        <location filename="../../src/libs/vformat/vdimensions.cpp" line="302"/>
         <source>Waist half circumference</source>
         <comment>dimension</comment>
         <translation>Polovina obvodu pasu</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vformat/vdimensions.cpp" line="312"/>
+        <location filename="../../src/libs/vformat/vdimensions.cpp" line="309"/>
         <source>Hip full circumference</source>
         <comment>dimension</comment>
         <translation>Celý obvod kyčle (boků)</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vformat/vdimensions.cpp" line="314"/>
+        <location filename="../../src/libs/vformat/vdimensions.cpp" line="311"/>
         <source>Hip half circumference</source>
         <comment>dimension</comment>
         <translation>Polovina obvodu kyčle (boků)</translation>
@@ -21428,7 +21428,7 @@ Chcete uložit změny?</translation>
         <translation>Díl %1 nemá tvar.</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vlayout/vlayoutpiece.cpp" line="1962"/>
+        <location filename="../../src/libs/vlayout/vlayoutpiece.cpp" line="1961"/>
         <source>Invalid SVG font &apos;%1&apos;. Fallback to outline font.</source>
         <translation type="unfinished"></translation>
     </message>
@@ -21713,17 +21713,17 @@ Chcete uložit změny?</translation>
         <translation>Způsobena chyba: %1. Program bude ukončen.</translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/vpapplication.cpp" line="686"/>
+        <location filename="../../src/app/puzzle/vpapplication.cpp" line="688"/>
         <source>Can&apos;t begin to listen for incoming connections on name &apos;%1&apos;</source>
         <translation>Nelze začít naslouchat příchozímu spojení &apos;%1&apos;</translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/vpapplication.cpp" line="705"/>
+        <location filename="../../src/app/puzzle/vpapplication.cpp" line="707"/>
         <source>Export mode doesn&apos;t support opening several files.</source>
         <translation>Režim vyvedení nepodporuje otevření více souborů.</translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/vpapplication.cpp" line="712"/>
+        <location filename="../../src/app/puzzle/vpapplication.cpp" line="714"/>
         <source>Import raw layout data does not support opening several layout files.</source>
         <translation>Zavedení nezpracovaných dat rozvržení nepodporuje otevření více souborů rozvržení.</translation>
     </message>
@@ -23381,19 +23381,19 @@ Chcete uložit změny?</translation>
     <name>VPiece</name>
     <message>
         <location filename="../../src/libs/vpatterndb/vpiece.cpp" line="184"/>
-        <location filename="../../src/libs/vpatterndb/vpiece.cpp" line="199"/>
+        <location filename="../../src/libs/vpatterndb/vpiece.cpp" line="201"/>
         <source>Main path of piece %1</source>
         <translation>Hlavní cesta dílu %1</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vpatterndb/vpiece.cpp" line="1115"/>
-        <location filename="../../src/libs/vpatterndb/vpiece.cpp" line="1155"/>
-        <location filename="../../src/libs/vpatterndb/vpiece.cpp" line="1240"/>
+        <location filename="../../src/libs/vpatterndb/vpiece.cpp" line="1117"/>
+        <location filename="../../src/libs/vpatterndb/vpiece.cpp" line="1157"/>
+        <location filename="../../src/libs/vpatterndb/vpiece.cpp" line="1242"/>
         <source>Cannot calculate a notch for point &apos;%1&apos; in piece &apos;%2&apos;.</source>
         <translation>Nelze spočítat zářez pro bod &apos;%1&apos; v dílu &apos;%2&apos;.</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vpatterndb/vpiece.cpp" line="1269"/>
+        <location filename="../../src/libs/vpatterndb/vpiece.cpp" line="1271"/>
         <source>Notch for point &apos;%1&apos; in piece &apos;%2&apos; will be disabled. Manual length is less than allowed value.</source>
         <translation>Zářez pro bod &apos;%1&apos; v části &apos;%2&apos; bude zakázán. Ruční délka je menší než povolená hodnota.</translation>
     </message>
@@ -25077,113 +25077,113 @@ Chyba kompatibility formátu nezpracovaného rozvržení: ActualFileVersion = %1
 <context>
     <name>VToolSeamAllowance</name>
     <message>
-        <location filename="../../src/libs/vtools/tools/vtoolseamallowance.cpp" line="465"/>
-        <location filename="../../src/libs/vtools/tools/vtoolseamallowance.cpp" line="477"/>
+        <location filename="../../src/libs/vtools/tools/vtoolseamallowance.cpp" line="464"/>
+        <location filename="../../src/libs/vtools/tools/vtoolseamallowance.cpp" line="476"/>
         <source>Current seam allowance</source>
         <translation>Nynější švová záložka</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/tools/vtoolseamallowance.cpp" line="1159"/>
+        <location filename="../../src/libs/vtools/tools/vtoolseamallowance.cpp" line="1158"/>
         <source>move pattern piece label</source>
         <translation>Posunout popis dílu střihu</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/tools/vtoolseamallowance.cpp" line="1178"/>
+        <location filename="../../src/libs/vtools/tools/vtoolseamallowance.cpp" line="1177"/>
         <source>resize pattern piece label</source>
         <translation>Změnit velikost popisu dílu střihu</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/tools/vtoolseamallowance.cpp" line="1198"/>
+        <location filename="../../src/libs/vtools/tools/vtoolseamallowance.cpp" line="1197"/>
         <source>rotate pattern piece label</source>
         <translation>Otočit velikost popisu dílu střihu</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/tools/vtoolseamallowance.cpp" line="1213"/>
+        <location filename="../../src/libs/vtools/tools/vtoolseamallowance.cpp" line="1212"/>
         <source>move pattern info label</source>
         <translation>Posunout popis s údaji ke střihu</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/tools/vtoolseamallowance.cpp" line="1232"/>
+        <location filename="../../src/libs/vtools/tools/vtoolseamallowance.cpp" line="1231"/>
         <source>resize pattern info label</source>
         <translation>Změnit velikost popisu s údaji ke střihu</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/tools/vtoolseamallowance.cpp" line="1250"/>
+        <location filename="../../src/libs/vtools/tools/vtoolseamallowance.cpp" line="1249"/>
         <source>rotate pattern info label</source>
         <translation>Otočit popis s údaji ke střihu</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/tools/vtoolseamallowance.cpp" line="1263"/>
+        <location filename="../../src/libs/vtools/tools/vtoolseamallowance.cpp" line="1262"/>
         <source>move grainline</source>
         <translation>Posunout dráhu nitě</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/tools/vtoolseamallowance.cpp" line="1278"/>
+        <location filename="../../src/libs/vtools/tools/vtoolseamallowance.cpp" line="1277"/>
         <source>resize grainline</source>
         <translation>Změnit velikost dráhy nitě</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/tools/vtoolseamallowance.cpp" line="1292"/>
+        <location filename="../../src/libs/vtools/tools/vtoolseamallowance.cpp" line="1291"/>
         <source>rotate grainline</source>
         <translation>Otočit dráhu nitě</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/tools/vtoolseamallowance.cpp" line="1573"/>
+        <location filename="../../src/libs/vtools/tools/vtoolseamallowance.cpp" line="1572"/>
         <source>Options</source>
         <translation>Volby</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/tools/vtoolseamallowance.cpp" line="1577"/>
+        <location filename="../../src/libs/vtools/tools/vtoolseamallowance.cpp" line="1576"/>
         <source>In layout</source>
         <translation>V rozvržení</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/tools/vtoolseamallowance.cpp" line="1581"/>
+        <location filename="../../src/libs/vtools/tools/vtoolseamallowance.cpp" line="1580"/>
         <source>Hide main path</source>
         <translation>Skrýt hlavní cestu</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/tools/vtoolseamallowance.cpp" line="1593"/>
+        <location filename="../../src/libs/vtools/tools/vtoolseamallowance.cpp" line="1592"/>
         <source>Show full piece</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/tools/vtoolseamallowance.cpp" line="1605"/>
+        <location filename="../../src/libs/vtools/tools/vtoolseamallowance.cpp" line="1604"/>
         <source>Reset piece label template</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/tools/vtoolseamallowance.cpp" line="1608"/>
+        <location filename="../../src/libs/vtools/tools/vtoolseamallowance.cpp" line="1607"/>
         <source>Delete</source>
         <translation>Smazat</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/tools/vtoolseamallowance.cpp" line="1369"/>
+        <location filename="../../src/libs/vtools/tools/vtoolseamallowance.cpp" line="1368"/>
         <source>apply save detail options</source>
         <translation>Použít uložit volby pro jednotlivosti (díly střihu)</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/tools/vtoolseamallowance.cpp" line="1669"/>
+        <location filename="../../src/libs/vtools/tools/vtoolseamallowance.cpp" line="1668"/>
         <source>multi deletion</source>
         <translation>Vícenásobné smazání</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/tools/vtoolseamallowance.cpp" line="1585"/>
+        <location filename="../../src/libs/vtools/tools/vtoolseamallowance.cpp" line="1584"/>
         <source>Forbid flipping</source>
         <translation>Zakázat přetočení</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/tools/vtoolseamallowance.cpp" line="1589"/>
+        <location filename="../../src/libs/vtools/tools/vtoolseamallowance.cpp" line="1588"/>
         <source>Force flipping</source>
         <translation>Vynutit přetočení</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/tools/vtoolseamallowance.cpp" line="1378"/>
+        <location filename="../../src/libs/vtools/tools/vtoolseamallowance.cpp" line="1377"/>
         <source>This id (%1) is not unique.</source>
         <translation>Tento identifikátor (%1) není jedinečný.</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/tools/vtoolseamallowance.cpp" line="2533"/>
+        <location filename="../../src/libs/vtools/tools/vtoolseamallowance.cpp" line="2532"/>
         <source>Tool was used after deleting.</source>
         <translation>Nástroj byl použit po smazání.</translation>
     </message>
