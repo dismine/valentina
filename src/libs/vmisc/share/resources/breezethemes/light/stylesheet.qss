@@ -211,6 +211,7 @@ QGroupBox:flat
 
 QCheckBox::indicator,
 QTreeView::indicator,
+QTableWidget::indicator,
 QGroupBox::indicator
 {
     width: 1em;
@@ -1393,6 +1394,18 @@ QTabBar::tab:top:only-one
     border-bottom-right-radius: 0em;
 }
 
+QTabBar::tab:top:first,
+QTabBar::tab:top:only-one
+{
+    margin-left: 0.04em;
+}
+
+QTabBar::tab:top:last,
+QTabBar::tab:top:only-one
+{
+    margin-right: 0.04em;
+}
+
 QTabBar::tab:top:!selected
 {
     color: #31363b;
@@ -1444,6 +1457,18 @@ QTabBar::tab:bottom:only-one
     border-radius: 0.09em;
     border-top-left-radius: 0em;
     border-top-right-radius: 0em;
+}
+
+QTabBar::tab:bottom:first,
+QTabBar::tab:bottom:only-one
+{
+    margin-left: 0.08em;
+}
+
+QTabBar::tab:bottom:last,
+QTabBar::tab:bottom:only-one
+{
+    margin-right: 0.08em;
 }
 
 QTabBar::tab:bottom:!selected
@@ -1499,6 +1524,18 @@ QTabBar::tab:left:only-one
     border-bottom-right-radius: 0em;
 }
 
+QTabBar::tab:left:first,
+QTabBar::tab:left:only-one
+{
+    margin-top: 0.08em;
+}
+
+QTabBar::tab:left:last,
+QTabBar::tab:left:only-one
+{
+    margin-bottom: 0.08em;
+}
+
 QTabBar::tab:left:!selected
 {
     color: #31363b;
@@ -1550,6 +1587,18 @@ QTabBar::tab:right:only-one
     border-radius: 0.09em;
     border-top-left-radius: 0em;
     border-bottom-left-radius: 0em;
+}
+
+QTabBar::tab:right:first,
+QTabBar::tab:right:only-one
+{
+    margin-top: 0.08em;
+}
+
+QTabBar::tab:right:last,
+QTabBar::tab:right:only-one
+{
+    margin-bottom: 0.08em;
 }
 
 QTabBar::tab:right:!selected
@@ -1713,8 +1762,8 @@ QDockWidget
  *  around the rest of the dock widget, which the remaining border
  *  cannot be removed.
  *
- *  There is a bug in non-Breeze styles, where the icons are small. It 
- *  doesn't change if we use `image` instead of `border-image`, nor if 
+ *  There is a bug in non-Breeze styles, where the icons are small. It
+ *  doesn't change if we use `image` instead of `border-image`, nor if
  *  we use `qproperty-icon`, etc. The icon seem to be half the size
  *  of our desired values.
  */
@@ -2507,7 +2556,7 @@ QWidget[isTitlebar="true"] *
 }
 
 /**
- *  Special rules for creating a border around a top-level frame of a window. 
+ *  Special rules for creating a border around a top-level frame of a window.
  *  This can only work when setting the Qt property `isWindow` to `true`.
  *  We've manually enumerated border widths from 1-5 below.
  */
