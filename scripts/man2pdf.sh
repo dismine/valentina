@@ -6,3 +6,4 @@
 
 man -t ../dist/debian/valentina.1 | ps2pdf - valentina.pdf
 man -t ../dist/debian/tape.1 | ps2pdf - tape.pdf
+man -t ../dist/debian/puzzle.1 | ps2pdf - puzzle.pdf
