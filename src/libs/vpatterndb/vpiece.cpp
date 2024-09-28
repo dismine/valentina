@@ -1210,19 +1210,17 @@ auto VPiece::IsPassmarkVisible(const QVector<VPieceNode> &path, vsizetype passma
         return true;
     }
 
-    for (const auto &record : records)
-    {
-        if (record.includeType == PiecePathIncludeType::AsCustomSA)
-        {
-            const int indexStartPoint = VPiecePath::indexOfNode(path, record.startPoint);
-            const int indexEndPoint = VPiecePath::indexOfNode(path, record.endPoint);
-            if (passmarkIndex > indexStartPoint && passmarkIndex < indexEndPoint)
-            {
-                return false;
-            }
-        }
-    }
-    return true;
+    return std::all_of(records.begin(), records.end(),
+                       [&](const auto &record)
+                       {
+                           if (record.includeType == PiecePathIncludeType::AsCustomSA)
+                           {
+                               const int indexStartPoint = VPiecePath::indexOfNode(path, record.startPoint);
+                               const int indexEndPoint = VPiecePath::indexOfNode(path, record.endPoint);
+                               return !(passmarkIndex > indexStartPoint && passmarkIndex < indexEndPoint);
+                           }
+                           return true;
+                       });
 }
 
 //---------------------------------------------------------------------------------------------------------------------
