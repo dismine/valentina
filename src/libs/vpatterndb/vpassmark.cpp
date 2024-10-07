@@ -660,10 +660,10 @@ auto VPassmark::SAPassmark(const VPiece &piece, const VContainer *data, Passmark
     {
         // Because rollback cannot be calulated if passmark is not first point in main path we rotate it.
         QVector<QPointF> rotatedSeamAllowance;
-        CastTo(piece.SeamAllowancePointsWithRotation(data, m_data.passmarkIndex), rotatedSeamAllowance);
+        CastTo(piece.FullSeamAllowancePointsWithRotation(data, m_data.passmarkIndex), rotatedSeamAllowance);
 
         QVector<QPointF> seamAllowance;
-        CastTo(piece.SeamAllowancePoints(data), seamAllowance);
+        CastTo(piece.FullSeamAllowancePoints(data), seamAllowance);
 
         return SAPassmark(seamAllowance, rotatedSeamAllowance, side);
     }
@@ -1011,10 +1011,10 @@ auto VPassmark::SAPassmarkBaseLine(const VPiece &piece, const VContainer *data, 
     {
         // Because rollback cannot be calulated if passmark is not first point in main path we rotate it.
         QVector<QPointF> rotatedSeamAllowance;
-        CastTo(piece.SeamAllowancePointsWithRotation(data, m_data.passmarkIndex), rotatedSeamAllowance);
+        CastTo(piece.FullSeamAllowancePointsWithRotation(data, m_data.passmarkIndex), rotatedSeamAllowance);
 
         QVector<QPointF> seamAllowance;
-        CastTo(piece.SeamAllowancePoints(data), seamAllowance);
+        CastTo(piece.FullSeamAllowancePoints(data), seamAllowance);
 
         return SAPassmarkBaseLine(seamAllowance, rotatedSeamAllowance, side);
     }

@@ -251,8 +251,7 @@ auto PrepareSAPassmark(const VPiece &piece, const VContainer *pattern, const VPa
                        bool &ok) -> VLayoutPassmark
 {
     VPiecePassmarkData const pData = passmark.Data();
-    const QVector<VPieceNode> path = piece.GetUnitedPath(pattern);
-    const int nodeIndex = VPiecePath::indexOfNode(path, pData.id);
+    const int nodeIndex = VPiecePath::indexOfNode(piece.GetUnitedPath(pattern), pData.id);
     if (nodeIndex == -1)
     {
         const QString errorMsg =

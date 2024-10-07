@@ -145,6 +145,8 @@ public:
     auto GetUnitedPath(const VContainer *data) const -> QVector<VPieceNode>;
 
     auto SeamAllowancePointsWithRotation(const VContainer *data, vsizetype makeFirst) const -> QVector<VLayoutPoint>;
+    auto FullSeamAllowancePointsWithRotation(const VContainer *data, vsizetype makeFirst) const
+        -> QVector<VLayoutPoint>;
 
     void SetGradationLabel(const QString &label);
     auto GetGradationLabel() const -> QString;
