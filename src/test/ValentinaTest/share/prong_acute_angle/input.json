@@ -1,0 +1,27 @@
+{
+    "vector": [
+        {
+            "passmarkClockwiseOpening": false,
+            "turnPoint": true,
+            "type": "VSAPoint",
+            "x": -336.6263021751898,
+            "y": 259.81246020417046
+        },
+        {
+            "passmarkClockwiseOpening": false,
+            "saAfter": 113.38582677165356,
+            "turnPoint": true,
+            "type": "VSAPoint",
+            "x": 30,
+            "y": 39.999874015748034
+        },
+        {
+            "passmarkClockwiseOpening": false,
+            "saBefore": 113.38582677165356,
+            "turnPoint": true,
+            "type": "VSAPoint",
+            "x": 412.91925465217395,
+            "y": 239.1906404951128
+        }
+    ]
+}

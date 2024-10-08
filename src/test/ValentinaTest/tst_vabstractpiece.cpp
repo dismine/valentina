@@ -957,6 +957,14 @@ void TST_VAbstractPiece::BrokenDetailEquidistant_data()
     // See the file "valentina_private_collection/bugs/25L Knitting Bag.val"
     ASSERT_TEST_CASE("Base", QStringLiteral("://25L_Knitting_Bag/input.json"),
                      QStringLiteral("://25L_Knitting_Bag/output.json"), 36 /*seam allowance width*/);
+
+    // See the file "valentina_private_collection/bugs/prong/650b.val"
+    ASSERT_TEST_CASE("Coat", QStringLiteral("://prong/input.json"), QStringLiteral("://prong/output.json"),
+                     37.795275590551185 /*seam allowance width*/);
+
+    // See the file "collection/bugs/prong_acute_angle.val"
+    ASSERT_TEST_CASE("Coat", QStringLiteral("://prong_acute_angle/input.json"),
+                     QStringLiteral("://prong_acute_angle/output.json"), 37.795275590551185 /*seam allowance width*/);
 }
 
 //---------------------------------------------------------------------------------------------------------------------

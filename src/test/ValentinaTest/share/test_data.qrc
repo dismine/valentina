@@ -218,5 +218,9 @@
         <file>shirtv2_seam_allowance_line/output.json</file>
         <file>capa_over/input.json</file>
         <file>capa_over/output.json</file>
+        <file>prong/input.json</file>
+        <file>prong/output.json</file>
+        <file>prong_acute_angle/input.json</file>
+        <file>prong_acute_angle/output.json</file>
     </qresource>
 </RCC>

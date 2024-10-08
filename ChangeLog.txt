@@ -17,7 +17,8 @@
 - Fix an incorrect symmetrical seam line.
 - Fix incorrect position of Tape app menu items on Mac OS.
 - Change minimal dimension value and minimal step for multisize measurements table.
-- Fix a notch on mirror line. 
+- Fix a notch on mirror line.
+- Fix seam allowance. Prong shape case. 
 
 # Valentina 0.7.53 June 25, 2024
 - Fix layout sheet export with empty name.

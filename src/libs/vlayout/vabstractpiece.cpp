@@ -869,6 +869,62 @@ void RollbackBySecondEdgeRightAngle(QVector<VRawSAPoint> &ekvPoints, const QVect
         }
     }
 }
+
+//---------------------------------------------------------------------------------------------------------------------
+auto FoundProng(QLineF bigLine1, QLineF bigLine2, const VSAPoint &ekvPoint, qreal width, qreal caseAngle,
+                QPointF crosPoint, QVector<VRawSAPoint> &points) -> bool
+{
+    if (not VFuzzyComparePossibleNulls(ekvPoint.GetSABefore(width), ekvPoint.GetSAAfter(width)) &&
+        ekvPoint.GetAngleType() == PieceNodeAngle::ByLength)
+    {
+        if (VFuzzyComparePossibleNulls(caseAngle, 180))
+        {
+            points.append(VRawSAPoint(bigLine1.p2(), ekvPoint.CurvePoint(), ekvPoint.TurnPoint()));
+            points.append(VRawSAPoint(bigLine2.p1(), ekvPoint.CurvePoint(), ekvPoint.TurnPoint()));
+            return true;
+        }
+        else if (caseAngle > 180 && caseAngle <= 225)
+        {
+            QPointF intersectPoint;
+            QLineF::IntersectType type = bigLine1.intersects(QLineF(ekvPoint, bigLine2.p1()), &intersectPoint);
+            if (type == QLineF::BoundedIntersection)
+            {
+                points.append(VRawSAPoint(intersectPoint, ekvPoint.CurvePoint(), ekvPoint.TurnPoint()));
+                points.append(VRawSAPoint(bigLine2.p1(), ekvPoint.CurvePoint(), ekvPoint.TurnPoint()));
+                return true;
+            }
+
+            type = bigLine2.intersects(QLineF(ekvPoint, bigLine1.p2()), &intersectPoint);
+            if (type == QLineF::BoundedIntersection)
+            {
+                points.append(VRawSAPoint(bigLine1.p2(), ekvPoint.CurvePoint(), ekvPoint.TurnPoint()));
+                points.append(VRawSAPoint(intersectPoint, ekvPoint.CurvePoint(), ekvPoint.TurnPoint()));
+                return true;
+            }
+        }
+        else
+        {
+            QPointF intersectPoint;
+            QLineF::IntersectType type =
+                QLineF(bigLine1.p2(), crosPoint).intersects(QLineF(ekvPoint, bigLine2.p1()), &intersectPoint);
+            if (type == QLineF::BoundedIntersection)
+            {
+                points.append(VRawSAPoint(intersectPoint, ekvPoint.CurvePoint(), ekvPoint.TurnPoint()));
+                points.append(VRawSAPoint(bigLine2.p1(), ekvPoint.CurvePoint(), ekvPoint.TurnPoint()));
+                return true;
+            }
+
+            type = QLineF(crosPoint, bigLine2.p1()).intersects(QLineF(bigLine1.p2(), ekvPoint), &intersectPoint);
+            if (type == QLineF::BoundedIntersection)
+            {
+                points.append(VRawSAPoint(bigLine1.p2(), ekvPoint.CurvePoint(), ekvPoint.TurnPoint()));
+                points.append(VRawSAPoint(intersectPoint, ekvPoint.CurvePoint(), ekvPoint.TurnPoint()));
+                return true;
+            }
+        }
+    }
+    return false;
+}
 } // namespace
 
 // Friend functions
@@ -1274,25 +1330,8 @@ auto VAbstractPiece::EkvPoint(QVector<VRawSAPoint> points, const VSAPoint &p1Lin
         { // Most common case
             /* Case when a path has point on line (both segments lie on the same line) and seam allowance creates
              * prong. */
-            auto IsOnLine = [](const QPointF &base, const QPointF &sp1, const QPointF &sp2, qreal accuracy)
+            if (FoundProng(bigLine1, bigLine2, p2Line1, width, a, crosPoint, points))
             {
-                if (not VFuzzyComparePoints(base, sp1))
-                {
-                    return VGObject::IsPointOnLineviaPDP(sp2, base, sp1, accuracy);
-                }
-
-                if (not VFuzzyComparePoints(base, sp2))
-                {
-                    return VGObject::IsPointOnLineviaPDP(sp1, base, sp2, accuracy);
-                }
-                return true;
-            };
-            if (VGObject::IsPointOnLineSegment(p2Line1, p1Line1, p1Line2, ToPixel(0.5, Unit::Mm)) &&
-                IsOnLine(p2Line1, bigLine1.p2(), bigLine2.p1(), ToPixel(0.5, Unit::Mm)) &&
-                p2Line1.GetAngleType() == PieceNodeAngle::ByLength)
-            {
-                points.append(VRawSAPoint(bigLine1.p2(), p2Line1.CurvePoint(), p2Line1.TurnPoint()));
-                points.append(VRawSAPoint(bigLine2.p1(), p2Line1.CurvePoint(), p2Line1.TurnPoint()));
                 return points;
             }
 
