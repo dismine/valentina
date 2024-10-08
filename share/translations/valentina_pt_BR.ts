@@ -14783,7 +14783,7 @@ Esta opção terá um efeito após o reinício.</translation>
         <translation>O número de material do usuário %1 não foi definido neste molde.</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vpatterndb/vpassmark.cpp" line="160"/>
+        <location filename="../../src/libs/vpatterndb/vpassmark.cpp" line="180"/>
         <source>Error: notch for point &apos;%1&apos; in piece &apos;%2&apos;. Width is less than minimal allowed.</source>
         <translation>Erro: pique para o ponto &apos;%1&apos; na peça &apos;%2&apos;. A largura é menor do que o mínimo permitido.</translation>
     </message>
@@ -14832,13 +14832,13 @@ Esta opção terá um efeito após o reinício.</translation>
         <translation>A peça &apos;%1&apos; possui uma margem de layout inválida. Por favor, verifique a margem de costura para verificar como a margem de costura se comporta.</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vlayout/vlayoutpiece.cpp" line="678"/>
+        <location filename="../../src/libs/vlayout/vlayoutpiece.cpp" line="677"/>
         <location filename="../../src/libs/vtools/tools/vtoolseamallowance.cpp" line="1915"/>
         <source>Piece &apos;%1&apos;. Seam allowance is not valid.</source>
         <translation>Peça &apos;%1&apos;. Margem de costura inválida.</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vpatterndb/vpassmark.cpp" line="102"/>
+        <location filename="../../src/libs/vpatterndb/vpassmark.cpp" line="122"/>
         <source>Found null notch for point &apos;%1&apos; in piece &apos;%2&apos;. Length is less than minimal allowed.</source>
         <translation>Encontrado pique nulo para o ponto &apos;%1&apos; na peça &apos;%2&apos;. O comprimento é menor do que o mínimo permitido.</translation>
     </message>
@@ -14870,8 +14870,8 @@ Esta opção terá um efeito após o reinício.</translation>
         <translation>Impossível calcular tamanho do pique para ponto &apos;%1&apos;. Motivo: %2.</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vlayout/vlayoutpiece.cpp" line="259"/>
-        <location filename="../../src/libs/vlayout/vlayoutpiece.cpp" line="337"/>
+        <location filename="../../src/libs/vlayout/vlayoutpiece.cpp" line="258"/>
+        <location filename="../../src/libs/vlayout/vlayoutpiece.cpp" line="336"/>
         <source>Passmark &apos;%1&apos; is not part of piece &apos;%2&apos;.</source>
         <translation>Pique &apos;%1&apos; não é parte da peça &apos;%2&apos;.</translation>
     </message>
@@ -14930,22 +14930,22 @@ Esta opção terá um efeito após o reinício.</translation>
         <translation>Erro no caminho &apos;%1&apos;. O cálculo do segmento para a curva &apos;%2&apos; falhou. %3</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vlayout/vlayoutpiece.cpp" line="348"/>
+        <location filename="../../src/libs/vlayout/vlayoutpiece.cpp" line="347"/>
         <source>Cannot prepare builtin passmark &apos;%1&apos; for piece &apos;%2&apos;. Passmark is empty.</source>
         <translation>Não é possível preparar o pique embutido &apos;%1&apos; para a peça &apos;%2&apos;. O pique está vazio.</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vlayout/vlayoutpiece.cpp" line="364"/>
+        <location filename="../../src/libs/vlayout/vlayoutpiece.cpp" line="363"/>
         <source>Cannot prepare builtin  passmark &apos;%1&apos; for piece &apos;%2&apos;. Passmark base line is empty.</source>
         <translation>Não é possível preparar o pique embutido &apos;%1&apos; para a peça &apos;%2&apos;. A linha de base do pique está vazia.</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vlayout/vlayoutpiece.cpp" line="271"/>
+        <location filename="../../src/libs/vlayout/vlayoutpiece.cpp" line="270"/>
         <source>Cannot prepare passmark &apos;%1&apos; for piece &apos;%2&apos;. Passmark base line is empty.</source>
         <translation>Não é possível preparar o pique &apos;%1&apos; para a peça &apos;%2&apos;. A linha de base do pique está vazia.</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vlayout/vlayoutpiece.cpp" line="300"/>
+        <location filename="../../src/libs/vlayout/vlayoutpiece.cpp" line="299"/>
         <source>Cannot prepare passmark &apos;%1&apos; for piece &apos;%2&apos;. Passmark is empty.</source>
         <translation>Não é possível preparar o pique &apos;%1&apos; para a peça &apos;%2&apos;. O pique está vazio.</translation>
     </message>
@@ -14978,25 +14978,25 @@ Esta opção terá um efeito após o reinício.</translation>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/libs/vlayout/vlayoutpiece.cpp" line="453"/>
+        <location filename="../../src/libs/vlayout/vlayoutpiece.cpp" line="452"/>
         <location filename="../../src/libs/vlayout/vtextmanager.cpp" line="661"/>
         <source>No data for the height dimension.</source>
         <translation>Sem dados para dimensão altura.</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vlayout/vlayoutpiece.cpp" line="454"/>
+        <location filename="../../src/libs/vlayout/vlayoutpiece.cpp" line="453"/>
         <location filename="../../src/libs/vlayout/vtextmanager.cpp" line="662"/>
         <source>No data for the size dimension.</source>
         <translation>Sem dados para dimensão tamanho.</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vlayout/vlayoutpiece.cpp" line="455"/>
+        <location filename="../../src/libs/vlayout/vlayoutpiece.cpp" line="454"/>
         <location filename="../../src/libs/vlayout/vtextmanager.cpp" line="663"/>
         <source>No data for the hip dimension.</source>
         <translation>Sem dados para dimensão quadril.</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vlayout/vlayoutpiece.cpp" line="456"/>
+        <location filename="../../src/libs/vlayout/vlayoutpiece.cpp" line="455"/>
         <location filename="../../src/libs/vlayout/vtextmanager.cpp" line="664"/>
         <source>No data for the waist dimension.</source>
         <translation>Sem dados para dimensão cintura.</translation>
@@ -15037,7 +15037,7 @@ Esta opção terá um efeito após o reinício.</translation>
         <translation>Peça &apos;%1&apos;. Linha de dobra é inválida.</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vpatterndb/vpiece.cpp" line="1367"/>
+        <location filename="../../src/libs/vpatterndb/vpiece.cpp" line="1400"/>
         <source>Invalid global value for a passmark length. Piece &apos;%1&apos;. Length is less than minimal allowed.</source>
         <translation>Valor global inválido para a largura de um pique. Peça &apos;%1&apos;. A largura é menor que o mínimo permitido.</translation>
     </message>
@@ -15119,25 +15119,25 @@ Esta opção terá um efeito após o reinício.</translation>
         <translation>Você realmente deseja excluir?</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vlayout/vlayoutpiece.cpp" line="458"/>
+        <location filename="../../src/libs/vlayout/vlayoutpiece.cpp" line="457"/>
         <location filename="../../src/libs/vlayout/vtextmanager.cpp" line="666"/>
         <source>No data for the X dimension.</source>
         <translation>Sem dados para a dimensão X.</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vlayout/vlayoutpiece.cpp" line="459"/>
+        <location filename="../../src/libs/vlayout/vlayoutpiece.cpp" line="458"/>
         <location filename="../../src/libs/vlayout/vtextmanager.cpp" line="667"/>
         <source>No data for the Y dimension.</source>
         <translation>Sem dados para a dimensão Y.</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vlayout/vlayoutpiece.cpp" line="460"/>
+        <location filename="../../src/libs/vlayout/vlayoutpiece.cpp" line="459"/>
         <location filename="../../src/libs/vlayout/vtextmanager.cpp" line="668"/>
         <source>No data for the Z dimension.</source>
         <translation>Sem dados para a dimensão Z.</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vlayout/vlayoutpiece.cpp" line="461"/>
+        <location filename="../../src/libs/vlayout/vlayoutpiece.cpp" line="460"/>
         <location filename="../../src/libs/vlayout/vtextmanager.cpp" line="669"/>
         <source>No data for the W dimension.</source>
         <translation>Sem dados para a dimensão W.</translation>
@@ -15165,22 +15165,22 @@ Esta opção terá um efeito após o reinício.</translation>
         <translation>Curva &apos;%1&apos;. O comprimento de um segmento de corte (%2) é muito grande. Otimize-o para o valor máximo.</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vpatterndb/vpiece.cpp" line="1614"/>
+        <location filename="../../src/libs/vpatterndb/vpiece.cpp" line="1647"/>
         <source>Piece &apos;%1&apos;. Internal path &apos;%2&apos; intersects with internal path &apos;%3&apos;.</source>
         <translation>Peça &apos;%1&apos;. Caminho interno &apos;%2&apos; intersecta com caminho interno &apos;%3&apos;.</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vpatterndb/vpiece.cpp" line="1529"/>
+        <location filename="../../src/libs/vpatterndb/vpiece.cpp" line="1562"/>
         <source>Piece &apos;%1&apos;. Internal path &apos;%2&apos; intersects with cutting contour.</source>
         <translation>Peça &apos;%1&apos;. O caminho interno &apos;%2&apos; intersecta com o contorno de corte.</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vpatterndb/vpiece.cpp" line="1402"/>
+        <location filename="../../src/libs/vpatterndb/vpiece.cpp" line="1435"/>
         <source>Invalid global value for a passmark width. Piece &apos;%1&apos;. Width is less than minimal allowed.</source>
         <translation>Valor global inválido para a largura de um pique. Peça &apos;%1&apos;. A largura é menor que o mínimo permitido.</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vpatterndb/vpiece.cpp" line="1540"/>
+        <location filename="../../src/libs/vpatterndb/vpiece.cpp" line="1573"/>
         <source>Piece &apos;%1&apos;. Internal path &apos;%2&apos; not inside of cutting contour.</source>
         <translation>Peça &apos;%1&apos;. Caminho interno &apos;%2&apos; não está dentro do contorno de corte.</translation>
     </message>
@@ -19389,7 +19389,7 @@ O significado das classes de caracteres \w, \d, etc., bem como o significado de 
 <context>
     <name>VAbstractPiece</name>
     <message>
-        <location filename="../../src/libs/vlayout/vabstractpiece.cpp" line="1074"/>
+        <location filename="../../src/libs/vlayout/vabstractpiece.cpp" line="1130"/>
         <source>Piece &apos;%1&apos;. Not enough points to build seam allowance.</source>
         <translation>Peça &apos;%1&apos;. Sem pontos suficientes para criar margem de costura.</translation>
     </message>
@@ -21427,12 +21427,12 @@ O significado das classes de caracteres \w, \d, etc., bem como o significado de 
 <context>
     <name>VLayoutPiece</name>
     <message>
-        <location filename="../../src/libs/vlayout/vlayoutpiece.cpp" line="695"/>
+        <location filename="../../src/libs/vlayout/vlayoutpiece.cpp" line="694"/>
         <source>Piece %1 doesn&apos;t have shape.</source>
         <translation>Peça %1 não possui forma.</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vlayout/vlayoutpiece.cpp" line="1961"/>
+        <location filename="../../src/libs/vlayout/vlayoutpiece.cpp" line="1960"/>
         <source>Invalid SVG font &apos;%1&apos;. Fallback to outline font.</source>
         <translation>Fonte SVG inválida &apos;%1&apos;. Utilizar para fonte de contorno.</translation>
     </message>
@@ -21504,7 +21504,7 @@ O significado das classes de caracteres \w, \d, etc., bem como o significado de 
         <translation>No layout</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/tools/nodeDetails/vnodepoint.cpp" line="374"/>
+        <location filename="../../src/libs/vtools/tools/nodeDetails/vnodepoint.cpp" line="376"/>
         <source>Delete</source>
         <translation>Excluir</translation>
     </message>
@@ -21514,37 +21514,37 @@ O significado das classes de caracteres \w, \d, etc., bem como o significado de 
         <translation>Proibido girar</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/tools/nodeDetails/vnodepoint.cpp" line="468"/>
+        <location filename="../../src/libs/vtools/tools/nodeDetails/vnodepoint.cpp" line="470"/>
         <source>by length</source>
         <translation>por comprimento</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/tools/nodeDetails/vnodepoint.cpp" line="470"/>
+        <location filename="../../src/libs/vtools/tools/nodeDetails/vnodepoint.cpp" line="472"/>
         <source>by points intersetions</source>
         <translation>por pontos interseções</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/tools/nodeDetails/vnodepoint.cpp" line="472"/>
+        <location filename="../../src/libs/vtools/tools/nodeDetails/vnodepoint.cpp" line="474"/>
         <source>by first edge symmetry</source>
         <translation>pela simetria da primeira aresta</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/tools/nodeDetails/vnodepoint.cpp" line="474"/>
+        <location filename="../../src/libs/vtools/tools/nodeDetails/vnodepoint.cpp" line="476"/>
         <source>by second edge symmetry</source>
         <translation>pela simetria da segunda aresta</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/tools/nodeDetails/vnodepoint.cpp" line="476"/>
+        <location filename="../../src/libs/vtools/tools/nodeDetails/vnodepoint.cpp" line="478"/>
         <source>by first edge right angle</source>
         <translation>pelo ângulo reto da primeira aresta</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/tools/nodeDetails/vnodepoint.cpp" line="478"/>
+        <location filename="../../src/libs/vtools/tools/nodeDetails/vnodepoint.cpp" line="480"/>
         <source>by second edge right angle</source>
         <translation>pelo ângulo reto da segunda aresta</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/tools/nodeDetails/vnodepoint.cpp" line="396"/>
+        <location filename="../../src/libs/vtools/tools/nodeDetails/vnodepoint.cpp" line="398"/>
         <source>Passmark</source>
         <translation>Pique</translation>
     </message>
@@ -21569,112 +21569,112 @@ O significado das classes de caracteres \w, \d, etc., bem como o significado de 
         <translation>Mostrar peça inteira</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/tools/nodeDetails/vnodepoint.cpp" line="369"/>
+        <location filename="../../src/libs/vtools/tools/nodeDetails/vnodepoint.cpp" line="371"/>
         <source>Reset piece label template</source>
         <translation>Resetar modelo de etiqueta de peça</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/tools/nodeDetails/vnodepoint.cpp" line="398"/>
+        <location filename="../../src/libs/vtools/tools/nodeDetails/vnodepoint.cpp" line="400"/>
         <source>None</source>
         <translation>Nenhum</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/tools/nodeDetails/vnodepoint.cpp" line="441"/>
+        <location filename="../../src/libs/vtools/tools/nodeDetails/vnodepoint.cpp" line="443"/>
         <source>Seam allowance angle</source>
         <translation>Ângulo margem de costura</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/tools/nodeDetails/vnodepoint.cpp" line="494"/>
+        <location filename="../../src/libs/vtools/tools/nodeDetails/vnodepoint.cpp" line="496"/>
         <source>Passmark angle</source>
         <translation>ângulo do pique</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/tools/nodeDetails/vnodepoint.cpp" line="507"/>
+        <location filename="../../src/libs/vtools/tools/nodeDetails/vnodepoint.cpp" line="509"/>
         <source>Straightforward</source>
         <translation>Reto</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/tools/nodeDetails/vnodepoint.cpp" line="509"/>
+        <location filename="../../src/libs/vtools/tools/nodeDetails/vnodepoint.cpp" line="511"/>
         <source>Bisector</source>
         <translation>Bissetriz</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/tools/nodeDetails/vnodepoint.cpp" line="511"/>
+        <location filename="../../src/libs/vtools/tools/nodeDetails/vnodepoint.cpp" line="513"/>
         <source>Intersection</source>
         <translation>Interseção</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/tools/nodeDetails/vnodepoint.cpp" line="514"/>
+        <location filename="../../src/libs/vtools/tools/nodeDetails/vnodepoint.cpp" line="516"/>
         <source>Intersection (only left)</source>
         <translation>Interseção (apenas à esquerda)</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/tools/nodeDetails/vnodepoint.cpp" line="517"/>
+        <location filename="../../src/libs/vtools/tools/nodeDetails/vnodepoint.cpp" line="519"/>
         <source>Intersection (only right)</source>
         <translation>Interseção (apenas à direita)</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/tools/nodeDetails/vnodepoint.cpp" line="519"/>
+        <location filename="../../src/libs/vtools/tools/nodeDetails/vnodepoint.cpp" line="521"/>
         <source>Intersection 2</source>
         <translation>Interseção 2</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/tools/nodeDetails/vnodepoint.cpp" line="522"/>
+        <location filename="../../src/libs/vtools/tools/nodeDetails/vnodepoint.cpp" line="524"/>
         <source>Intersection 2 (only left)</source>
         <translation>Interseção 2 (apenas à esquerda)</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/tools/nodeDetails/vnodepoint.cpp" line="525"/>
+        <location filename="../../src/libs/vtools/tools/nodeDetails/vnodepoint.cpp" line="527"/>
         <source>Intersection 2 (only right)</source>
         <translation>Interseção 2 (apenas à direita)</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/tools/nodeDetails/vnodepoint.cpp" line="414"/>
+        <location filename="../../src/libs/vtools/tools/nodeDetails/vnodepoint.cpp" line="416"/>
         <source>One line</source>
         <translation>Uma linha</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/tools/nodeDetails/vnodepoint.cpp" line="416"/>
+        <location filename="../../src/libs/vtools/tools/nodeDetails/vnodepoint.cpp" line="418"/>
         <source>Two lines</source>
         <translation>Duas linhas</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/tools/nodeDetails/vnodepoint.cpp" line="418"/>
+        <location filename="../../src/libs/vtools/tools/nodeDetails/vnodepoint.cpp" line="420"/>
         <source>Three lines</source>
         <translation>Três linhas</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/tools/nodeDetails/vnodepoint.cpp" line="420"/>
+        <location filename="../../src/libs/vtools/tools/nodeDetails/vnodepoint.cpp" line="422"/>
         <source>T mark</source>
         <translation>Marcação T</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/tools/nodeDetails/vnodepoint.cpp" line="422"/>
+        <location filename="../../src/libs/vtools/tools/nodeDetails/vnodepoint.cpp" line="424"/>
         <source>External V mark</source>
         <translation>Marcação V externa</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/tools/nodeDetails/vnodepoint.cpp" line="424"/>
+        <location filename="../../src/libs/vtools/tools/nodeDetails/vnodepoint.cpp" line="426"/>
         <source>Internal V mark</source>
         <translation>Marcação V interna</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/tools/nodeDetails/vnodepoint.cpp" line="430"/>
+        <location filename="../../src/libs/vtools/tools/nodeDetails/vnodepoint.cpp" line="432"/>
         <source>Check mark</source>
         <translation>Marca de seleção</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/tools/nodeDetails/vnodepoint.cpp" line="426"/>
+        <location filename="../../src/libs/vtools/tools/nodeDetails/vnodepoint.cpp" line="428"/>
         <source>U mark</source>
         <translation>Marcação U</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/tools/nodeDetails/vnodepoint.cpp" line="428"/>
+        <location filename="../../src/libs/vtools/tools/nodeDetails/vnodepoint.cpp" line="430"/>
         <source>Box mark</source>
         <translation>Marcação quadrada</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/tools/nodeDetails/vnodepoint.cpp" line="432"/>
+        <location filename="../../src/libs/vtools/tools/nodeDetails/vnodepoint.cpp" line="434"/>
         <source>Turn point</source>
         <translation>Turn point</translation>
     </message>
@@ -22916,32 +22916,32 @@ O significado das classes de caracteres \w, \d, etc., bem como o significado de 
 <context>
     <name>VPassmark</name>
     <message>
-        <location filename="../../src/libs/vpatterndb/vpassmark.cpp" line="754"/>
+        <location filename="../../src/libs/vpatterndb/vpassmark.cpp" line="774"/>
         <source>Cannot calculate a notch for point &apos;%1&apos; in piece &apos;%2&apos;. Notch collapse.</source>
         <translation>Não é possível calcular um pique para o ponto &apos;%1&apos; na peça &apos;%2&apos;. Colapso do pique.</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vpatterndb/vpassmark.cpp" line="763"/>
+        <location filename="../../src/libs/vpatterndb/vpassmark.cpp" line="783"/>
         <source>Cannot calculate a notch for point &apos;%1&apos; in piece &apos;%2&apos;. Cannot find intersection.</source>
         <translation>Não foi possível calcular pique para ponto &apos;%1&apos; na peça &apos;%2&apos;. Interseção não encontrada.</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vpatterndb/vpassmark.cpp" line="944"/>
+        <location filename="../../src/libs/vpatterndb/vpassmark.cpp" line="964"/>
         <source>Cannot calculate a notch for point &apos;%1&apos; in piece &apos;%2&apos; with built in seam allowance. User must manually provide length.</source>
         <translation>Não é possível calcular um pique para o ponto &apos;%1&apos; na peça &apos;%2&apos; com margem de costura embutida. O usuário deve fornecer manualmente o comprimento.</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vpatterndb/vpassmark.cpp" line="1037"/>
+        <location filename="../../src/libs/vpatterndb/vpassmark.cpp" line="1057"/>
         <source>Cannot calculate a notch for point &apos;%1&apos; in piece &apos;%2&apos;. Seam allowance is empty.</source>
         <translation>Não foi possível calcular pique para ponto &apos;%1&apos; na peça &apos;%2&apos;. Margem de costura vazia.</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vpatterndb/vpassmark.cpp" line="1051"/>
+        <location filename="../../src/libs/vpatterndb/vpassmark.cpp" line="1071"/>
         <source>Cannot calculate a notch for point &apos;%1&apos; in piece &apos;%2&apos;. Cannot find position for a notch.</source>
         <translation>Não foi possível calcular pique para ponto &apos;%1&apos; na peça &apos;%2&apos;. Posição do pique não encontrada.</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vpatterndb/vpassmark.cpp" line="1069"/>
+        <location filename="../../src/libs/vpatterndb/vpassmark.cpp" line="1089"/>
         <source>Cannot calculate a notch for point &apos;%1&apos; in piece &apos;%2&apos;. Unable to fix a notch position.</source>
         <translation>Não é possível calcular um pique para o ponto &apos;%1&apos; na peça &apos;%2&apos;. Não é possível corrigir a posição do pique.</translation>
     </message>
@@ -23390,14 +23390,14 @@ O significado das classes de caracteres \w, \d, etc., bem como o significado de 
         <translation>Caminho principal da peça %1</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vpatterndb/vpiece.cpp" line="1117"/>
-        <location filename="../../src/libs/vpatterndb/vpiece.cpp" line="1157"/>
-        <location filename="../../src/libs/vpatterndb/vpiece.cpp" line="1242"/>
+        <location filename="../../src/libs/vpatterndb/vpiece.cpp" line="1124"/>
+        <location filename="../../src/libs/vpatterndb/vpiece.cpp" line="1164"/>
+        <location filename="../../src/libs/vpatterndb/vpiece.cpp" line="1247"/>
         <source>Cannot calculate a notch for point &apos;%1&apos; in piece &apos;%2&apos;.</source>
         <translation>Não foi possível calcular pique para ponto &apos;%1&apos; na peça &apos;%2&apos;.</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vpatterndb/vpiece.cpp" line="1271"/>
+        <location filename="../../src/libs/vpatterndb/vpiece.cpp" line="1304"/>
         <source>Notch for point &apos;%1&apos; in piece &apos;%2&apos; will be disabled. Manual length is less than allowed value.</source>
         <translation>Pique para ponto &apos;%1&apos; em peça &apos;%2&apos; será desabilitado. Comprimento manual é menor que o valor permitido.</translation>
     </message>

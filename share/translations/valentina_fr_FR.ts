@@ -14777,7 +14777,7 @@ This option will take an affect after restart.</source>
         <translation>La matière numéro %1 n&apos;a pas été définie dans ce patron.</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vpatterndb/vpassmark.cpp" line="160"/>
+        <location filename="../../src/libs/vpatterndb/vpassmark.cpp" line="180"/>
         <source>Error: notch for point &apos;%1&apos; in piece &apos;%2&apos;. Width is less than minimal allowed.</source>
         <translation>Erreur pour le cran au point &apos;%1&apos; de la pièce &apos;%2&apos;. Son épaisseur est inférieure à la largeur minimale autorisée.</translation>
     </message>
@@ -14826,13 +14826,13 @@ This option will take an affect after restart.</source>
         <translation>La pièce &apos;%1&apos; a une valeur de marge invalide dans le plan de coupe. Merci de vérifier la marge de couture pour vérifier son comportement.</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vlayout/vlayoutpiece.cpp" line="678"/>
+        <location filename="../../src/libs/vlayout/vlayoutpiece.cpp" line="677"/>
         <location filename="../../src/libs/vtools/tools/vtoolseamallowance.cpp" line="1915"/>
         <source>Piece &apos;%1&apos;. Seam allowance is not valid.</source>
         <translation>Pièce &apos;%1&apos;. La marge de couture est invalide.</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vpatterndb/vpassmark.cpp" line="102"/>
+        <location filename="../../src/libs/vpatterndb/vpassmark.cpp" line="122"/>
         <source>Found null notch for point &apos;%1&apos; in piece &apos;%2&apos;. Length is less than minimal allowed.</source>
         <translation>Cran d&apos;assemblage nul pour le point &apos;%1&apos; dans la pièce &apos;%2&apos;. La longueur est inférieure à la longueur minimale autorisée.</translation>
     </message>
@@ -14864,8 +14864,8 @@ This option will take an affect after restart.</source>
         <translation>Impossible de calculer une longueur de cran d&apos;assemblage pour le point &apos;%1&apos;. Raison : %2.</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vlayout/vlayoutpiece.cpp" line="259"/>
-        <location filename="../../src/libs/vlayout/vlayoutpiece.cpp" line="337"/>
+        <location filename="../../src/libs/vlayout/vlayoutpiece.cpp" line="258"/>
+        <location filename="../../src/libs/vlayout/vlayoutpiece.cpp" line="336"/>
         <source>Passmark &apos;%1&apos; is not part of piece &apos;%2&apos;.</source>
         <translation>Le cran d&apos;assemblage &apos;%1&apos; ne fait pas partie de la pièce &apos;%2&apos;.</translation>
     </message>
@@ -14924,22 +14924,22 @@ This option will take an affect after restart.</source>
         <translation>Erreur dans le chemin &apos;%1&apos;. Le calcul du segment pour la courbe &apos;%2&apos; a échoué. %3</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vlayout/vlayoutpiece.cpp" line="348"/>
+        <location filename="../../src/libs/vlayout/vlayoutpiece.cpp" line="347"/>
         <source>Cannot prepare builtin passmark &apos;%1&apos; for piece &apos;%2&apos;. Passmark is empty.</source>
         <translation>Impossible de configurer le cran d&apos;assemblage &apos;%1&apos; dans la pièce &apos;%2&apos;. Le cran d&apos;assemblage est absent.</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vlayout/vlayoutpiece.cpp" line="364"/>
+        <location filename="../../src/libs/vlayout/vlayoutpiece.cpp" line="363"/>
         <source>Cannot prepare builtin  passmark &apos;%1&apos; for piece &apos;%2&apos;. Passmark base line is empty.</source>
         <translation>Impossible de configurer le cran d&apos;assemblage &apos;%1&apos; dans la pièce &apos;%2&apos;. La ligne de base du cran d&apos;assemblage est absente.</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vlayout/vlayoutpiece.cpp" line="271"/>
+        <location filename="../../src/libs/vlayout/vlayoutpiece.cpp" line="270"/>
         <source>Cannot prepare passmark &apos;%1&apos; for piece &apos;%2&apos;. Passmark base line is empty.</source>
         <translation>Impossible de configurer le cran d&apos;assemblage &apos;%1&apos; dans la pièce &apos;%2&apos;. La ligne de base du cran d&apos;assemblage est absente.</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vlayout/vlayoutpiece.cpp" line="300"/>
+        <location filename="../../src/libs/vlayout/vlayoutpiece.cpp" line="299"/>
         <source>Cannot prepare passmark &apos;%1&apos; for piece &apos;%2&apos;. Passmark is empty.</source>
         <translation>Impossible de configurer le cran d&apos;assemblage &apos;%1&apos; dans la pièce &apos;%2&apos;. Le cran d&apos;assemblage est absent.</translation>
     </message>
@@ -14972,25 +14972,25 @@ This option will take an affect after restart.</source>
         <translation>Utilisation incorrecte du champ %1. Ce champ n&apos;est pas disponible pour configurer une étiquette de patron, mais seulement de pièce.</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vlayout/vlayoutpiece.cpp" line="453"/>
+        <location filename="../../src/libs/vlayout/vlayoutpiece.cpp" line="452"/>
         <location filename="../../src/libs/vlayout/vtextmanager.cpp" line="661"/>
         <source>No data for the height dimension.</source>
         <translation>Absence de données pour la dimension stature.</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vlayout/vlayoutpiece.cpp" line="454"/>
+        <location filename="../../src/libs/vlayout/vlayoutpiece.cpp" line="453"/>
         <location filename="../../src/libs/vlayout/vtextmanager.cpp" line="662"/>
         <source>No data for the size dimension.</source>
         <translation>Absence de données pour la dimension taille commerciale.</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vlayout/vlayoutpiece.cpp" line="455"/>
+        <location filename="../../src/libs/vlayout/vlayoutpiece.cpp" line="454"/>
         <location filename="../../src/libs/vlayout/vtextmanager.cpp" line="663"/>
         <source>No data for the hip dimension.</source>
         <translation>Absence de données pour la dimension tour de hanches.</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vlayout/vlayoutpiece.cpp" line="456"/>
+        <location filename="../../src/libs/vlayout/vlayoutpiece.cpp" line="455"/>
         <location filename="../../src/libs/vlayout/vtextmanager.cpp" line="664"/>
         <source>No data for the waist dimension.</source>
         <translation>Absence de données pour la dimension tour de taille.</translation>
@@ -15031,7 +15031,7 @@ This option will take an affect after restart.</source>
         <translation>Pièce &apos;%1&apos;. Ligne de pli invalide.</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vpatterndb/vpiece.cpp" line="1367"/>
+        <location filename="../../src/libs/vpatterndb/vpiece.cpp" line="1400"/>
         <source>Invalid global value for a passmark length. Piece &apos;%1&apos;. Length is less than minimal allowed.</source>
         <translation>Valeur par défaut de longueur de cran d&apos;assemblage invalide. Pièce &apos;%1&apos;. La longueur est inférieure à la longueur minimale autorisée.</translation>
     </message>
@@ -15113,25 +15113,25 @@ This option will take an affect after restart.</source>
         <translation>Voulez vous vraiment supprimer?</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vlayout/vlayoutpiece.cpp" line="458"/>
+        <location filename="../../src/libs/vlayout/vlayoutpiece.cpp" line="457"/>
         <location filename="../../src/libs/vlayout/vtextmanager.cpp" line="666"/>
         <source>No data for the X dimension.</source>
         <translation>Pas de données pour la dimension X.</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vlayout/vlayoutpiece.cpp" line="459"/>
+        <location filename="../../src/libs/vlayout/vlayoutpiece.cpp" line="458"/>
         <location filename="../../src/libs/vlayout/vtextmanager.cpp" line="667"/>
         <source>No data for the Y dimension.</source>
         <translation>Pas de données pour la dimension Y.</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vlayout/vlayoutpiece.cpp" line="460"/>
+        <location filename="../../src/libs/vlayout/vlayoutpiece.cpp" line="459"/>
         <location filename="../../src/libs/vlayout/vtextmanager.cpp" line="668"/>
         <source>No data for the Z dimension.</source>
         <translation>Pas de données pour la dimension Z.</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vlayout/vlayoutpiece.cpp" line="461"/>
+        <location filename="../../src/libs/vlayout/vlayoutpiece.cpp" line="460"/>
         <location filename="../../src/libs/vlayout/vtextmanager.cpp" line="669"/>
         <source>No data for the W dimension.</source>
         <translation>Pas de données pour la dimension W.</translation>
@@ -15159,22 +15159,22 @@ This option will take an affect after restart.</source>
         <translation>Courbe &apos;%1&apos;. La partie segmentée (%2) est de longueur trop élevée. Paramétrez une valeur au plus égale au maximum possible.</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vpatterndb/vpiece.cpp" line="1614"/>
+        <location filename="../../src/libs/vpatterndb/vpiece.cpp" line="1647"/>
         <source>Piece &apos;%1&apos;. Internal path &apos;%2&apos; intersects with internal path &apos;%3&apos;.</source>
         <translation>Pièce &apos;%1&apos;. Le chemin interne &apos;%2&apos; a une intersection avec le chemin interne &apos;%3&apos;.</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vpatterndb/vpiece.cpp" line="1529"/>
+        <location filename="../../src/libs/vpatterndb/vpiece.cpp" line="1562"/>
         <source>Piece &apos;%1&apos;. Internal path &apos;%2&apos; intersects with cutting contour.</source>
         <translation>Pièce &apos;%1&apos;. Le chemin interne &apos;%2&apos; a une intersection avec le contour de découpe.</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vpatterndb/vpiece.cpp" line="1402"/>
+        <location filename="../../src/libs/vpatterndb/vpiece.cpp" line="1435"/>
         <source>Invalid global value for a passmark width. Piece &apos;%1&apos;. Width is less than minimal allowed.</source>
         <translation>Valeur globale invalide pour l&apos;épaisseur des crans d&apos;assemblage.  Pièce &apos;%1&apos;. L&apos;épaisseur est inférieure au minimum alloué.</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vpatterndb/vpiece.cpp" line="1540"/>
+        <location filename="../../src/libs/vpatterndb/vpiece.cpp" line="1573"/>
         <source>Piece &apos;%1&apos;. Internal path &apos;%2&apos; not inside of cutting contour.</source>
         <translation>Pièce &apos;%1&apos;. Le chemin interne &apos;%2&apos; n&apos;est pas à l&apos;intérieur du contour de découpe.</translation>
     </message>
@@ -19381,7 +19381,7 @@ Voulez-vous enregistrer vos changements ?</translation>
 <context>
     <name>VAbstractPiece</name>
     <message>
-        <location filename="../../src/libs/vlayout/vabstractpiece.cpp" line="1074"/>
+        <location filename="../../src/libs/vlayout/vabstractpiece.cpp" line="1130"/>
         <source>Piece &apos;%1&apos;. Not enough points to build seam allowance.</source>
         <translation>Pièce &apos;%1&apos;. Il n&apos;y pas assez de points pour construire la marge de couture.</translation>
     </message>
@@ -21419,12 +21419,12 @@ Voulez-vous enregistrer vos changements ?</translation>
 <context>
     <name>VLayoutPiece</name>
     <message>
-        <location filename="../../src/libs/vlayout/vlayoutpiece.cpp" line="695"/>
+        <location filename="../../src/libs/vlayout/vlayoutpiece.cpp" line="694"/>
         <source>Piece %1 doesn&apos;t have shape.</source>
         <translation>La pièce %1 n&apos;a pas de forme.</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vlayout/vlayoutpiece.cpp" line="1961"/>
+        <location filename="../../src/libs/vlayout/vlayoutpiece.cpp" line="1960"/>
         <source>Invalid SVG font &apos;%1&apos;. Fallback to outline font.</source>
         <translation>Police SVG &apos;%1&apos; invalide. Retour à la police vectorielle.</translation>
     </message>
@@ -21496,7 +21496,7 @@ Voulez-vous enregistrer vos changements ?</translation>
         <translation>Dans le plan de coupe</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/tools/nodeDetails/vnodepoint.cpp" line="374"/>
+        <location filename="../../src/libs/vtools/tools/nodeDetails/vnodepoint.cpp" line="376"/>
         <source>Delete</source>
         <translation>Supprimer</translation>
     </message>
@@ -21506,37 +21506,37 @@ Voulez-vous enregistrer vos changements ?</translation>
         <translation>Interdire le placement en miroir</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/tools/nodeDetails/vnodepoint.cpp" line="468"/>
+        <location filename="../../src/libs/vtools/tools/nodeDetails/vnodepoint.cpp" line="470"/>
         <source>by length</source>
         <translation>Suivant longueur</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/tools/nodeDetails/vnodepoint.cpp" line="470"/>
+        <location filename="../../src/libs/vtools/tools/nodeDetails/vnodepoint.cpp" line="472"/>
         <source>by points intersetions</source>
         <translation>Suivant points d&apos;intersections</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/tools/nodeDetails/vnodepoint.cpp" line="472"/>
+        <location filename="../../src/libs/vtools/tools/nodeDetails/vnodepoint.cpp" line="474"/>
         <source>by first edge symmetry</source>
         <translation>Par symétrie au premier côté</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/tools/nodeDetails/vnodepoint.cpp" line="474"/>
+        <location filename="../../src/libs/vtools/tools/nodeDetails/vnodepoint.cpp" line="476"/>
         <source>by second edge symmetry</source>
         <translation>Par symétrie au second côté</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/tools/nodeDetails/vnodepoint.cpp" line="476"/>
+        <location filename="../../src/libs/vtools/tools/nodeDetails/vnodepoint.cpp" line="478"/>
         <source>by first edge right angle</source>
         <translation>Par angle droit au premier côté</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/tools/nodeDetails/vnodepoint.cpp" line="478"/>
+        <location filename="../../src/libs/vtools/tools/nodeDetails/vnodepoint.cpp" line="480"/>
         <source>by second edge right angle</source>
         <translation>Par angle droit au second côté</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/tools/nodeDetails/vnodepoint.cpp" line="396"/>
+        <location filename="../../src/libs/vtools/tools/nodeDetails/vnodepoint.cpp" line="398"/>
         <source>Passmark</source>
         <translation>Cran d&apos;assemblage</translation>
     </message>
@@ -21561,112 +21561,112 @@ Voulez-vous enregistrer vos changements ?</translation>
         <translation>Afficher la pièce dépliée</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/tools/nodeDetails/vnodepoint.cpp" line="369"/>
+        <location filename="../../src/libs/vtools/tools/nodeDetails/vnodepoint.cpp" line="371"/>
         <source>Reset piece label template</source>
         <translation>Réinitialiser le modèle d&apos;étiquette</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/tools/nodeDetails/vnodepoint.cpp" line="398"/>
+        <location filename="../../src/libs/vtools/tools/nodeDetails/vnodepoint.cpp" line="400"/>
         <source>None</source>
         <translation>Aucun</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/tools/nodeDetails/vnodepoint.cpp" line="441"/>
+        <location filename="../../src/libs/vtools/tools/nodeDetails/vnodepoint.cpp" line="443"/>
         <source>Seam allowance angle</source>
         <translation>Equerrage de la marge de couture</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/tools/nodeDetails/vnodepoint.cpp" line="494"/>
+        <location filename="../../src/libs/vtools/tools/nodeDetails/vnodepoint.cpp" line="496"/>
         <source>Passmark angle</source>
         <translation>Angle du cran d&apos;assemblage</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/tools/nodeDetails/vnodepoint.cpp" line="507"/>
+        <location filename="../../src/libs/vtools/tools/nodeDetails/vnodepoint.cpp" line="509"/>
         <source>Straightforward</source>
         <translation>Tout droit</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/tools/nodeDetails/vnodepoint.cpp" line="509"/>
+        <location filename="../../src/libs/vtools/tools/nodeDetails/vnodepoint.cpp" line="511"/>
         <source>Bisector</source>
         <translation>Bissectrice</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/tools/nodeDetails/vnodepoint.cpp" line="511"/>
+        <location filename="../../src/libs/vtools/tools/nodeDetails/vnodepoint.cpp" line="513"/>
         <source>Intersection</source>
         <translation>Intersection</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/tools/nodeDetails/vnodepoint.cpp" line="514"/>
+        <location filename="../../src/libs/vtools/tools/nodeDetails/vnodepoint.cpp" line="516"/>
         <source>Intersection (only left)</source>
         <translation>Intersection (seulement à gauche)</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/tools/nodeDetails/vnodepoint.cpp" line="517"/>
+        <location filename="../../src/libs/vtools/tools/nodeDetails/vnodepoint.cpp" line="519"/>
         <source>Intersection (only right)</source>
         <translation>Intersection (seulement à droite)</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/tools/nodeDetails/vnodepoint.cpp" line="519"/>
+        <location filename="../../src/libs/vtools/tools/nodeDetails/vnodepoint.cpp" line="521"/>
         <source>Intersection 2</source>
         <translation>Intersection 2</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/tools/nodeDetails/vnodepoint.cpp" line="522"/>
+        <location filename="../../src/libs/vtools/tools/nodeDetails/vnodepoint.cpp" line="524"/>
         <source>Intersection 2 (only left)</source>
         <translation>Intersection 2 (seulement à gauche)</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/tools/nodeDetails/vnodepoint.cpp" line="525"/>
+        <location filename="../../src/libs/vtools/tools/nodeDetails/vnodepoint.cpp" line="527"/>
         <source>Intersection 2 (only right)</source>
         <translation>Intersection 2 (seulement à droite)</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/tools/nodeDetails/vnodepoint.cpp" line="414"/>
+        <location filename="../../src/libs/vtools/tools/nodeDetails/vnodepoint.cpp" line="416"/>
         <source>One line</source>
         <translation>Un trait</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/tools/nodeDetails/vnodepoint.cpp" line="416"/>
+        <location filename="../../src/libs/vtools/tools/nodeDetails/vnodepoint.cpp" line="418"/>
         <source>Two lines</source>
         <translation>Deux traits</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/tools/nodeDetails/vnodepoint.cpp" line="418"/>
+        <location filename="../../src/libs/vtools/tools/nodeDetails/vnodepoint.cpp" line="420"/>
         <source>Three lines</source>
         <translation>Trois traits</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/tools/nodeDetails/vnodepoint.cpp" line="420"/>
+        <location filename="../../src/libs/vtools/tools/nodeDetails/vnodepoint.cpp" line="422"/>
         <source>T mark</source>
         <translation>En forme de T</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/tools/nodeDetails/vnodepoint.cpp" line="422"/>
+        <location filename="../../src/libs/vtools/tools/nodeDetails/vnodepoint.cpp" line="424"/>
         <source>External V mark</source>
         <translation>Marque en V externe</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/tools/nodeDetails/vnodepoint.cpp" line="424"/>
+        <location filename="../../src/libs/vtools/tools/nodeDetails/vnodepoint.cpp" line="426"/>
         <source>Internal V mark</source>
         <translation>Marque en V interne</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/tools/nodeDetails/vnodepoint.cpp" line="430"/>
+        <location filename="../../src/libs/vtools/tools/nodeDetails/vnodepoint.cpp" line="432"/>
         <source>Check mark</source>
         <translation>En forme de coche</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/tools/nodeDetails/vnodepoint.cpp" line="426"/>
+        <location filename="../../src/libs/vtools/tools/nodeDetails/vnodepoint.cpp" line="428"/>
         <source>U mark</source>
         <translation>En forme de U</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/tools/nodeDetails/vnodepoint.cpp" line="428"/>
+        <location filename="../../src/libs/vtools/tools/nodeDetails/vnodepoint.cpp" line="430"/>
         <source>Box mark</source>
         <translation>Rectangle</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/tools/nodeDetails/vnodepoint.cpp" line="432"/>
+        <location filename="../../src/libs/vtools/tools/nodeDetails/vnodepoint.cpp" line="434"/>
         <source>Turn point</source>
         <translation>Point de changement de direction</translation>
     </message>
@@ -22908,32 +22908,32 @@ Voulez-vous enregistrer vos changements ?</translation>
 <context>
     <name>VPassmark</name>
     <message>
-        <location filename="../../src/libs/vpatterndb/vpassmark.cpp" line="754"/>
+        <location filename="../../src/libs/vpatterndb/vpassmark.cpp" line="774"/>
         <source>Cannot calculate a notch for point &apos;%1&apos; in piece &apos;%2&apos;. Notch collapse.</source>
         <translation>Impossible de calculer un cran d&apos;assemblage pour le point &apos;%1&apos; dans la pièce &apos;%2&apos;. Disparition du cran.</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vpatterndb/vpassmark.cpp" line="763"/>
+        <location filename="../../src/libs/vpatterndb/vpassmark.cpp" line="783"/>
         <source>Cannot calculate a notch for point &apos;%1&apos; in piece &apos;%2&apos;. Cannot find intersection.</source>
         <translation>Impossible de calculer un cran d&apos;assemblage pour le point &apos;%1&apos; dans la pièce &apos;%2&apos;. Impossible de trouver une intersection.</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vpatterndb/vpassmark.cpp" line="944"/>
+        <location filename="../../src/libs/vpatterndb/vpassmark.cpp" line="964"/>
         <source>Cannot calculate a notch for point &apos;%1&apos; in piece &apos;%2&apos; with built in seam allowance. User must manually provide length.</source>
         <translation>Impossible de calculer un cran d&apos;assemblage pour le point &apos;%1&apos; dans la pièce &apos;%2&apos; avec la marge de couture intégrée. Merci de saisir une longueur manuelle.</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vpatterndb/vpassmark.cpp" line="1037"/>
+        <location filename="../../src/libs/vpatterndb/vpassmark.cpp" line="1057"/>
         <source>Cannot calculate a notch for point &apos;%1&apos; in piece &apos;%2&apos;. Seam allowance is empty.</source>
         <translation>Impossible de calculer un cran d&apos;assemblage pour le point &apos;%1&apos; dans la pièce &apos;%2&apos;. La marge de couture n&apos;est pas renseignée.</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vpatterndb/vpassmark.cpp" line="1051"/>
+        <location filename="../../src/libs/vpatterndb/vpassmark.cpp" line="1071"/>
         <source>Cannot calculate a notch for point &apos;%1&apos; in piece &apos;%2&apos;. Cannot find position for a notch.</source>
         <translation>Impossible de calculer un cran d&apos;assemblage pour le point &apos;%1&apos; dans la pièce &apos;%2&apos;. Impossible de déterminer la position du cran.</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vpatterndb/vpassmark.cpp" line="1069"/>
+        <location filename="../../src/libs/vpatterndb/vpassmark.cpp" line="1089"/>
         <source>Cannot calculate a notch for point &apos;%1&apos; in piece &apos;%2&apos;. Unable to fix a notch position.</source>
         <translation>Impossible de calculer un cran d&apos;assemblage pour le point &apos;%1&apos; dans la pièce &apos;%2&apos;. Impossible de corriger la position du cran.</translation>
     </message>
@@ -23382,14 +23382,14 @@ Voulez-vous enregistrer vos changements ?</translation>
         <translation>Contour principal de la pièce %1</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vpatterndb/vpiece.cpp" line="1117"/>
-        <location filename="../../src/libs/vpatterndb/vpiece.cpp" line="1157"/>
-        <location filename="../../src/libs/vpatterndb/vpiece.cpp" line="1242"/>
+        <location filename="../../src/libs/vpatterndb/vpiece.cpp" line="1124"/>
+        <location filename="../../src/libs/vpatterndb/vpiece.cpp" line="1164"/>
+        <location filename="../../src/libs/vpatterndb/vpiece.cpp" line="1247"/>
         <source>Cannot calculate a notch for point &apos;%1&apos; in piece &apos;%2&apos;.</source>
         <translation>Impossible de calculer un cran d&apos;assemblage pour le point &apos;%1&apos; dans la pièce &apos;%2&apos;.</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vpatterndb/vpiece.cpp" line="1271"/>
+        <location filename="../../src/libs/vpatterndb/vpiece.cpp" line="1304"/>
         <source>Notch for point &apos;%1&apos; in piece &apos;%2&apos; will be disabled. Manual length is less than allowed value.</source>
         <translation>Le cran d&apos;assemblage pour le point &apos;%1&apos; dans la pièce&apos;%2&apos; va être désactivé. La longueur manuelle spécifiée est inférieure à la longueur autorisée.</translation>
     </message>
