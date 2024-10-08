@@ -355,7 +355,9 @@ auto VNodePoint::InitContextMenu(QMenu *menu, vidtype pieceId, quint32 referens)
     QAction *showFullPieceOption = menu->addAction(QCoreApplication::translate("VNodePoint", "Show full piece"));
     showFullPieceOption->setCheckable(true);
     {
-        const QLineF mirrorLine = detail.SeamAllowanceMirrorLine(&(VAbstractTool::data));
+        // We cannot use current VContainer because it doesn't have current seam allowance value
+        const VContainer pData = VAbstractPattern::getTool(pieceId)->getData();
+        const QLineF mirrorLine = detail.SeamAllowanceMirrorLine(&pData);
         showFullPieceOption->setEnabled(not mirrorLine.isNull());
         showFullPieceOption->setChecked(true);
         if (not mirrorLine.isNull())
