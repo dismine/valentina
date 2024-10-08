@@ -392,7 +392,7 @@ Module {
                     "-Wmissing-declarations",
                     "-Wmissing-field-initializers",
                     "-Wmissing-format-attribute",
-                    "-Wmissing-include-dirs",
+//                    "-Wmissing-include-dirs",
                     "-Wmissing-method-return-type",
                     "-Wmissing-noreturn",
                     "-Wmissing-prototypes",
