@@ -69,7 +69,27 @@ auto GetSeamPassmarkSAPoint(const VPiecePassmarkData &passmarkData, const QVecto
         return PassmarkStatus::Error; // Something wrong
     }
 
-    point = ekvPoints.constFirst().ToQPointF();
+    if (ekvPoints.size() > 1)
+    {
+        // Prong shape case. Select the closest point to a seam line.
+        point = ekvPoints.at(0);
+        qreal minDistance = QLineF(passmarkData.passmarkSAPoint, point).length();
+
+        for (const QPointF &p : ekvPoints)
+        {
+            qreal const distance = QLineF(passmarkData.passmarkSAPoint, p).length();
+            if (distance < minDistance)
+            {
+                point = p;
+                minDistance = distance;
+            }
+        }
+    }
+    else
+    {
+        point = ekvPoints.constFirst().ToQPointF();
+    }
+
     return needRollback ? PassmarkStatus::Rollback : PassmarkStatus::Common;
 }
 
