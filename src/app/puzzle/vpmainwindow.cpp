@@ -2347,7 +2347,8 @@ void VPMainWindow::ExportData(const VPExportData &data)
 {
     if (data.format == LayoutExportFormats::DXF_AAMA || data.format == LayoutExportFormats::DXF_ASTM ||
         data.format == LayoutExportFormats::RLD || data.format == LayoutExportFormats::HPGL ||
-        data.format == LayoutExportFormats::HPGL2)
+        data.format == LayoutExportFormats::HPGL2 || data.format == LayoutExportFormats::HPGL_PLT ||
+        data.format == LayoutExportFormats::HPGL2_PLT)
     {
         for (int i = 0; i < data.sheets.size(); ++i)
         {
@@ -2418,12 +2419,14 @@ void VPMainWindow::ExportApparelLayout(const VPExportData &data, const QVector<V
             exporter.ExportToRLD(details);
             break;
         case LayoutExportFormats::HPGL:
+        case LayoutExportFormats::HPGL_PLT:
             exporter.SetSingleLineFont(settings->GetSingleLineFonts());
             exporter.SetSingleStrokeOutlineFont(settings->GetSingleStrokeOutlineFont());
             exporter.SetPenWidth(settings->GetLayoutLineWidth());
             exporter.ExportToHPGL(details);
             break;
         case LayoutExportFormats::HPGL2:
+        case LayoutExportFormats::HPGL2_PLT:
             exporter.SetSingleLineFont(settings->GetSingleLineFonts());
             exporter.SetSingleStrokeOutlineFont(settings->GetSingleStrokeOutlineFont());
             exporter.SetPenWidth(settings->GetLayoutLineWidth());

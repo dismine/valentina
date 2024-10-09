@@ -290,6 +290,8 @@ void DialogSaveLayout::SetShowGrainline(bool show)
         case LayoutExportFormats::TIF:
         case LayoutExportFormats::HPGL:
         case LayoutExportFormats::HPGL2:
+        case LayoutExportFormats::HPGL_PLT:
+        case LayoutExportFormats::HPGL2_PLT:
             ui->checkBoxShowGrainline->setChecked(show);
             break;
         default:
@@ -321,6 +323,8 @@ auto DialogSaveLayout::IsShowGrainline() const -> bool
         case LayoutExportFormats::TIF:
         case LayoutExportFormats::HPGL:
         case LayoutExportFormats::HPGL2:
+        case LayoutExportFormats::HPGL_PLT:
+        case LayoutExportFormats::HPGL2_PLT:
             return ui->checkBoxShowGrainline->isChecked();
         default:
             return true;
@@ -519,6 +523,8 @@ void DialogSaveLayout::ShowExample()
             break;
         case LayoutExportFormats::HPGL:
         case LayoutExportFormats::HPGL2:
+        case LayoutExportFormats::HPGL_PLT:
+        case LayoutExportFormats::HPGL2_PLT:
             ui->checkBoxShowGrainline->setVisible(true);
             ui->checkBoxTogetherWithNotches->setVisible(true);
             break;
@@ -779,6 +785,8 @@ auto DialogSaveLayout::InitFormats() -> QVector<std::pair<QString, LayoutExportF
     InitFormat(LayoutExportFormats::TIF);
     InitFormat(LayoutExportFormats::HPGL);
     InitFormat(LayoutExportFormats::HPGL2);
+    InitFormat(LayoutExportFormats::HPGL_PLT);
+    InitFormat(LayoutExportFormats::HPGL2_PLT);
 
     return list;
 }

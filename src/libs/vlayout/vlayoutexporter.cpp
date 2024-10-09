@@ -618,6 +618,10 @@ auto VLayoutExporter::ExportFormatDescription(LayoutExportFormats format) -> QSt
             return QStringLiteral("HP-GL %1 (*.hpgl)").arg(filesStr);
         case LayoutExportFormats::HPGL2:
             return QStringLiteral("HP-GL/2 %1 (*.hpgl)").arg(filesStr);
+        case LayoutExportFormats::HPGL_PLT:
+            return QStringLiteral("PLT (HP-GL) %1 (*.plt)").arg(filesStr);
+        case LayoutExportFormats::HPGL2_PLT:
+            return QStringLiteral("PLT (HP-GL/2) %1 (*.plt)").arg(filesStr);
         default:
             return {};
     }
@@ -662,6 +666,9 @@ auto VLayoutExporter::ExportFormatSuffix(LayoutExportFormats format) -> QString
         case LayoutExportFormats::HPGL:
         case LayoutExportFormats::HPGL2:
             return QStringLiteral(".hpgl");
+        case LayoutExportFormats::HPGL_PLT:
+        case LayoutExportFormats::HPGL2_PLT:
+            return QStringLiteral(".plt");
         default:
             return {};
     }

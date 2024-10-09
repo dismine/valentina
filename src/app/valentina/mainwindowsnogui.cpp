@@ -507,7 +507,8 @@ void MainWindowsNoGUI::ExportData(const QVector<VLayoutPiece> &listDetails)
     if (const LayoutExportFormats format = m_dialogSaveLayout->Format();
         format == LayoutExportFormats::DXF_AAMA || format == LayoutExportFormats::DXF_ASTM ||
         format == LayoutExportFormats::RLD || format == LayoutExportFormats::HPGL ||
-        format == LayoutExportFormats::HPGL2)
+        format == LayoutExportFormats::HPGL2 || format == LayoutExportFormats::HPGL_PLT ||
+        format == LayoutExportFormats::HPGL2_PLT)
     {
         if (m_dialogSaveLayout->Mode() == Draw::Layout)
         {
@@ -696,12 +697,14 @@ void MainWindowsNoGUI::ExportApparelLayout(const QVector<VLayoutPiece> &details,
             exporter.ExportToRLD(details);
             break;
         case LayoutExportFormats::HPGL:
+        case LayoutExportFormats::HPGL_PLT:
             exporter.SetSingleLineFont(settings->GetSingleLineFonts());
             exporter.SetSingleStrokeOutlineFont(settings->GetSingleStrokeOutlineFont());
             exporter.SetPenWidth(qCeil(settings->WidthHairLine()));
             exporter.ExportToHPGL(details);
             break;
         case LayoutExportFormats::HPGL2:
+        case LayoutExportFormats::HPGL2_PLT:
             exporter.SetSingleLineFont(settings->GetSingleLineFonts());
             exporter.SetSingleStrokeOutlineFont(settings->GetSingleStrokeOutlineFont());
             exporter.SetPenWidth(qCeil(settings->WidthHairLine()));

@@ -18,7 +18,8 @@
 - Fix incorrect position of Tape app menu items on Mac OS.
 - Change minimal dimension value and minimal step for multisize measurements table.
 - Fix a notch on mirror line.
-- Fix seam allowance. Prong shape case. 
+- Fix seam allowance. Prong shape case.
+- Added PLT export format as a container for HPGL.
 
 # Valentina 0.7.53 June 25, 2024
 - Fix layout sheet export with empty name.

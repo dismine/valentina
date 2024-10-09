@@ -288,6 +288,8 @@ void DialogSaveManualLayout::SetShowGrainline(bool show)
         case LayoutExportFormats::DXF_AC1027_Flat:
         case LayoutExportFormats::HPGL:
         case LayoutExportFormats::HPGL2:
+        case LayoutExportFormats::HPGL_PLT:
+        case LayoutExportFormats::HPGL2_PLT:
             ui->checkBoxShowGrainline->setChecked(show);
             break;
         default:
@@ -319,6 +321,8 @@ auto DialogSaveManualLayout::IsShowGrainline() const -> bool
         case LayoutExportFormats::DXF_AC1027_Flat:
         case LayoutExportFormats::HPGL:
         case LayoutExportFormats::HPGL2:
+        case LayoutExportFormats::HPGL_PLT:
+        case LayoutExportFormats::HPGL2_PLT:
             return ui->checkBoxShowGrainline->isChecked();
         default:
             return true;
@@ -560,6 +564,8 @@ void DialogSaveManualLayout::ShowExample()
             break;
         case LayoutExportFormats::HPGL:
         case LayoutExportFormats::HPGL2:
+        case LayoutExportFormats::HPGL_PLT:
+        case LayoutExportFormats::HPGL2_PLT:
             ui->checkBoxShowGrainline->setVisible(true);
             break;
         case LayoutExportFormats::SVG:
@@ -633,6 +639,8 @@ auto DialogSaveManualLayout::InitFormats() -> QVector<std::pair<QString, LayoutE
     InitFormat(LayoutExportFormats::TIF);
     InitFormat(LayoutExportFormats::HPGL);
     InitFormat(LayoutExportFormats::HPGL2);
+    InitFormat(LayoutExportFormats::HPGL_PLT);
+    InitFormat(LayoutExportFormats::HPGL2_PLT);
 
     return list;
 }

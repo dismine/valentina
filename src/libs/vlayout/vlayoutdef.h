@@ -64,7 +64,9 @@ enum class LayoutExportFormats : qint8
     TIF = 36,
     HPGL = 37,
     HPGL2 = 38,
-    COUNT /*Use only for validation*/
+    HPGL_PLT = 39,  /* Same as HPGL, but has .plt extension */
+    HPGL2_PLT = 40, /* Same as HPGL2, but has .plt extension */
+    COUNT           /*Use only for validation*/
 };
 
 enum class LayoutErrors : qint8
