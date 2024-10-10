@@ -1136,6 +1136,8 @@ auto QmuParserBase::ParseCmdCodeBulk(int nOffset, int nThreadID) const -> qreal
                 QT_WARNING_PUSH
                 QT_WARNING_DISABLE_GCC("-Wcast-function-type")
                 QT_WARNING_DISABLE_CLANG("-Wundefined-reinterpret-cast")
+                QT_WARNING_DISABLE_CLANG("-Wunknown-warning-option")
+                QT_WARNING_DISABLE_CLANG("-Wcast-function-type-mismatch") // Since Clang 19
                 QT_WARNING_DISABLE_MSVC(4191)
 
                 // switch according to argument count
