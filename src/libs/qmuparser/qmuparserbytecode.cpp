@@ -73,7 +73,7 @@ auto QmuParserByteCode::operator=(const QmuParserByteCode &a_ByteCode) -> QmuPar
 /**
  * @brief Copy state of another object to this.
  *
- * @throw nowthrow
+ * @throw None No exceptions are thrown.
  */
 void QmuParserByteCode::Assign(const QmuParserByteCode &a_ByteCode)
 {
