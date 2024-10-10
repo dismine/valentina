@@ -588,6 +588,12 @@ Module {
                     )
                 }
 
+                if (Utilities.versionCompare(cpp.compilerVersion, "19") >= 0) {
+                    debugFlags.push(
+                        "-Wno-c++20-extensions"
+                    )
+                }
+
                 if (qbs.targetOS.contains("macos")) {
                     // Cannot suppress warnings from Qt headers
                     debugFlags.push(
