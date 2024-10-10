@@ -180,10 +180,10 @@ void VPCarrouselPieceList::startDrag(Qt::DropActions supportedActions)
         mimeData->SetPiecePtr(piece);
 
         QIcon const pieceIcon = pieceItem->CreatePieceIcon(QSize(120, 120), true);
-        QPixmap const pixmap;
+        QPixmap pixmap;
         if (!pieceIcon.isNull())
         {
-            pieceIcon.pixmap(QSize(120, 120));
+            pixmap = pieceIcon.pixmap(QSize(120, 120));
         }
 
         drag->setDragCursor(VPMimeDataPiece::DragCursor(pixmap), Qt::MoveAction);
