@@ -64,7 +64,7 @@ public:
     * @brief Constructor (default).
     *
     * Sets token to an neutral state of type cmUNKNOWN.
-    * @throw nothrow
+    * @throw None No exceptions are thrown.
     * @sa ECmdCode
     */
     QmuParserToken() =default;
@@ -75,7 +75,7 @@ public:
      * @brief Create token from another one.
      *
      * Implemented by calling Assign(...)
-     * @throw nothrow
+     * @throw None No exceptions are thrown.
      * @post m_iType==cmUNKNOWN
      * @sa #Assign
      */
@@ -90,7 +90,7 @@ public:
      *
      * Copy token state from another token and return this.
      * Implemented by calling Assign(...).
-     * @throw nothrow
+     * @throw None No exceptions are thrown.
      */
     auto operator= ( const QmuParserToken &a_Tok ) -> QmuParserToken&
     {
@@ -106,7 +106,7 @@ public:
     /**
      * @brief Copy token information from argument.
      *
-     * @throw nothrow
+     * @throw None No exceptions are thrown.
      */
     void Assign ( const QmuParserToken &a_Tok )
     {
@@ -173,7 +173,7 @@ public:
      * @brief Make this token a value token.
      *
      * Member variables not necessary for value tokens will be invalidated.
-     * @throw nothrow
+     * @throw None No exceptions are thrown.
      */
     auto SetVal ( TBase a_fVal, const TString &a_strTok = TString() ) -> QmuParserToken&
     {
@@ -194,7 +194,7 @@ public:
      * @brief make this token a variable token.
      *
      * Member variables not necessary for variable tokens will be invalidated.
-     * @throw nothrow
+     * @throw None No exceptions are thrown.
      */
     auto SetVar ( TBase *a_pVar, const TString &a_strTok ) -> QmuParserToken&
     {
@@ -212,7 +212,7 @@ public:
      * @brief Make this token a variable token.
      *
      * Member variables not necessary for variable tokens will be invalidated.
-     * @throw nothrow
+     * @throw None No exceptions are thrown.
      */
     auto SetString ( const TString &a_strTok, qmusizetype a_iSize ) -> QmuParserToken&
     {
@@ -268,7 +268,7 @@ public:
      * @brief Return the token type.
      *
      * @return #m_iType
-     * @throw nothrow
+     * @throw None No exceptions are thrown.
      */
     auto GetCode() const -> ECmdCode
     {
@@ -453,7 +453,7 @@ public:
      * If #m_iType is cmSTRING the token identifier is the value of the string argument
      * for a string function.
      * @return #m_strTok
-     * @throw nothrow
+     * @throw None No exceptions are thrown.
      * @sa m_strTok
      */
     auto GetAsString() const -> const TString&

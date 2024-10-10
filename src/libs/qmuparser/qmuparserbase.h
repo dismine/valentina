@@ -401,7 +401,7 @@ inline auto QmuParserBase::GetConst() const -> const valmap_type &
  * @brief Return prototypes of all parser functions.
  * @return #m_FunDef
  * @sa FunProt
- * @throw nothrow
+ * @throw None No exceptions are thrown.
  *
  * The return type is a map of the public type #funmap_type containing the prototype definitions for all numerical
  * parser functions. String functions are not part of this map. The Prototype definition is encapsulated in objects
@@ -425,7 +425,7 @@ inline auto QmuParserBase::GetExpr() const -> const QString &
 /**
  * @brief Query status of built in variables.
  * @return #m_bBuiltInOp; true if built in operators are enabled.
- * @throw nothrow
+ * @throw None No exceptions are thrown.
  */
 inline auto QmuParserBase::HasBuiltInOprt() const -> bool
 {

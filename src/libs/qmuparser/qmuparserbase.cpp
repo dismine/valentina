@@ -130,7 +130,7 @@ QmuParserBase::~QmuParserBase()
  * Implemented by calling Assign(a_Parser). Self assignement is suppressed.
  * @param a_Parser Object to copy to this.
  * @return *this
- * @throw nothrow
+ * @throw None No exceptions are thrown.
  */
 auto QmuParserBase::operator=(const QmuParserBase &a_Parser) -> QmuParserBase &
 {
@@ -205,7 +205,7 @@ void QmuParserBase::ResetLocale()
  * @brief Reset parser to string parsing mode and clear internal buffers.
  *
  * Clear bytecode, reset the token reader.
- * @throw nothrow
+ * @throw None No exceptions are thrown.
  */
 void QmuParserBase::ReInit() const
 {
@@ -1644,7 +1644,7 @@ Q_NORETURN void QmuParserBase::Error(EErrorCodes a_iErrc, qmusizetype a_iPos, co
 //---------------------------------------------------------------------------------------------------------------------
 /**
  * @brief Clear all user defined variables.
- * @throw nothrow
+ * @throw None No exceptions are thrown.
  *
  * Resets the parser to string parsing mode by calling #ReInit.
  */
@@ -1658,7 +1658,7 @@ void QmuParserBase::ClearVar()
 //---------------------------------------------------------------------------------------------------------------------
 /**
  * @brief Remove a variable from internal storage.
- * @throw nothrow
+ * @throw None No exceptions are thrown.
  *
  * Removes a variable if it exists. If the Variable does not exist nothing will be done.
  */
@@ -1676,7 +1676,7 @@ void QmuParserBase::RemoveVar(const QString &a_strVarName)
 /**
  * @brief Clear all functions.
  * @post Resets the parser to string parsing mode.
- * @throw nothrow
+ * @throw None No exceptions are thrown.
  */
 // cppcheck-suppress unusedFunction
 void QmuParserBase::ClearFun()
@@ -1691,7 +1691,7 @@ void QmuParserBase::ClearFun()
  *
  * Both numeric and string constants will be removed from the internal storage.
  * @post Resets the parser to string parsing mode.
- * @throw nothrow
+ * @throw None No exceptions are thrown.
  */
 void QmuParserBase::ClearConst()
 {
@@ -1704,7 +1704,7 @@ void QmuParserBase::ClearConst()
 /**
  * @brief Clear all user defined postfix operators.
  * @post Resets the parser to string parsing mode.
- * @throw nothrow
+ * @throw None No exceptions are thrown.
  */
 void QmuParserBase::ClearPostfixOprt()
 {
@@ -1716,7 +1716,7 @@ void QmuParserBase::ClearPostfixOprt()
 /**
  * @brief Clear all user defined binary operators.
  * @post Resets the parser to string parsing mode.
- * @throw nothrow
+ * @throw None No exceptions are thrown.
  */
 // cppcheck-suppress unusedFunction
 void QmuParserBase::ClearOprt()
@@ -1729,7 +1729,7 @@ void QmuParserBase::ClearOprt()
 /**
  * @brief Clear the user defined Prefix operators.
  * @post Resets the parser to string parser mode.
- * @throw nothrow
+ * @throw None No exceptions are thrown.
  */
 // cppcheck-suppress unusedFunction
 void QmuParserBase::ClearInfixOprt()
@@ -1742,7 +1742,7 @@ void QmuParserBase::ClearInfixOprt()
 /**
  * @brief Enable or disable the formula optimization feature.
  * @post Resets the parser to string parser mode.
- * @throw nothrow
+ * @throw None No exceptions are thrown.
  */
 void QmuParserBase::EnableOptimizer(bool a_bIsOn)
 {
@@ -1768,7 +1768,7 @@ void QmuParserBase::EnableDebugDump(bool bDumpCmd, bool bDumpStack)
 //---------------------------------------------------------------------------------------------------------------------
 /**
  * @brief Enable or disable the built in binary operators.
- * @throw nothrow
+ * @throw None No exceptions are thrown.
  * @sa m_bBuiltInOp, ReInit()
  *
  * If you disable the built in binary operators there will be no binary operators defined. Thus you must add them

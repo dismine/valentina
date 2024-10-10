@@ -49,7 +49,7 @@ namespace qmu
  * @brief Copy constructor.
  *
  * @sa Assign
- * @throw nothrow
+ * @throw None No exceptions are thrown.
  */
 QmuParserTokenReader::QmuParserTokenReader(const QmuParserTokenReader &a_Reader)
   : m_pParser(a_Reader.m_pParser),
@@ -80,7 +80,7 @@ QmuParserTokenReader::QmuParserTokenReader(const QmuParserTokenReader &a_Reader)
  * Self assignement will be suppressed otherwise #Assign is called.
  *
  * @param a_Reader Object to copy to this token reader.
- * @throw nothrow
+ * @throw None No exceptions are thrown.
  */
 auto QmuParserTokenReader::operator=(const QmuParserTokenReader &a_Reader) -> QmuParserTokenReader &
 {
@@ -97,7 +97,7 @@ auto QmuParserTokenReader::operator=(const QmuParserTokenReader &a_Reader) -> Qm
  * @brief Assign state of a token reader to this token reader.
  *
  * @param a_Reader Object from which the state should be copied.
- * @throw nothrow
+ * @throw None No exceptions are thrown.
  */
 void QmuParserTokenReader::Assign(const QmuParserTokenReader &a_Reader)
 {
@@ -149,7 +149,7 @@ QmuParserTokenReader::QmuParserTokenReader(QmuParserBase *a_pParent)
  * This is a factory method the calling function must take care of the object destruction.
  *
  * @return A new QParserTokenReader object.
- * @throw nothrow
+ * @throw None No exceptions are thrown.
  */
 auto QmuParserTokenReader::Clone(QmuParserBase *a_pParent) const -> QmuParserTokenReader *
 {
@@ -203,7 +203,7 @@ void QmuParserTokenReader::SetFormula(const QString &a_strFormula)
  *
  * The syntax flags will be reset to a value appropriate for the start of a formula.
  * @post #m_iPos==0, #m_iSynFlags = noOPT | noBC | noPOSTOP | noSTR
- * @throw nothrow
+ * @throw None No exceptions are thrown.
  * @sa ESynCodes
  */
 void QmuParserTokenReader::ReInit()
@@ -325,7 +325,7 @@ void QmuParserTokenReader::SetParent(QmuParserBase *a_pParent)
  * @param a_sTok [out]  The string that consists entirely of characters listed in a_szCharSet.
  * @param a_iPos [in] Position in the string from where to start reading.
  * @return The Position of the first character not listed in a_szCharSet.
- * @throw nothrow
+ * @throw None No exceptions are thrown.
  */
 QT_WARNING_PUSH
 QT_WARNING_DISABLE_MSVC(4309)
@@ -898,7 +898,7 @@ auto QmuParserTokenReader::IsStrVarTok(token_type &a_Tok) -> bool
  *
  * @param a_Tok [out] If a variable tom_pParser->m_vStringBufken has been found it will be placed here.
  * @return true if a variable token has been found.
- * @throw nothrow
+ * @throw None No exceptions are thrown.
  */
 auto QmuParserTokenReader::IsUndefVarTok(token_type &a_Tok) -> bool
 {

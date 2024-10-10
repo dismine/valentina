@@ -92,7 +92,7 @@ void QmuParserByteCode::Assign(const QmuParserByteCode &a_ByteCode)
 /**
  * @brief Add a Variable pointer to bytecode.
  * @param a_pVar Pointer to be added.
- * @throw nothrow
+ * @throw None No exceptions are thrown.
  */
 void QmuParserByteCode::AddVar(qreal *a_pVar)
 {
@@ -120,7 +120,7 @@ void QmuParserByteCode::AddVar(qreal *a_pVar)
  * </ul>
  *
  * @param a_fVal Value to be added.
- * @throw nothrow
+ * @throw None No exceptions are thrown.
  */
 void QmuParserByteCode::AddVal(qreal a_fVal)
 {
@@ -492,7 +492,7 @@ void QmuParserByteCode::AddBulkFun(generic_fun_type a_pFun, qmusizetype a_iArgc)
 //---------------------------------------------------------------------------------------------------------------------
 /**
  * @brief Add Strung function entry to the parser bytecode.
- * @throw nothrow
+ * @throw None No exceptions are thrown.
  *
  * A string function entry consists of the stack position of the return value, followed by a cmSTRFUNC code, the
  * function pointer and an index into the string buffer maintained by the parser.
@@ -515,7 +515,7 @@ void QmuParserByteCode::AddStrFun(generic_fun_type a_pFun, int a_iArgc, qmusizet
 /**
  * @brief Add end marker to bytecode.
  *
- * @throw nothrow
+ * @throw None No exceptions are thrown.
  */
 void QmuParserByteCode::Finalize()
 {
@@ -564,7 +564,7 @@ auto QmuParserByteCode::GetBase() const -> const SToken*
 /**
  * @brief Delete the bytecode.
  *
- * @throw nothrow
+ * @throw None No exceptions are thrown.
  *
  * The name of this function is a violation of my own coding guidelines but this way it's more in line with the STL
  * functions thus more intuitive.

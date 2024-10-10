@@ -153,7 +153,7 @@ private:
  * @brief Return the current position of the token reader in the formula string.
  *
  * @return #m_iPos
- * @throw nothrow
+ * @throw None No exceptions are thrown.
  */
 inline auto QmuParserTokenReader::GetPos() const -> qmusizetype
 {
@@ -165,7 +165,7 @@ inline auto QmuParserTokenReader::GetPos() const -> qmusizetype
  * @brief Return a reference to the formula.
  *
  * @return #m_strFormula
- * @throw nothrow
+ * @throw None No exceptions are thrown.
  */
 inline auto QmuParserTokenReader::GetExpr() const -> const QString &
 {

@@ -43,7 +43,7 @@ QmuParserCallback::QmuParserCallback(fun_type1 a_pFun, bool a_bAllowOpti, int a_
 //---------------------------------------------------------------------------------------------------------------------
 /**
  * @brief Constructor for constructing funcstion callbacks taking two arguments.
- * @throw nothrow
+ * @throw None No exceptions are thrown.
  */
 QmuParserCallback::QmuParserCallback(fun_type2 a_pFun, bool a_bAllowOpti)
   : d(new QmuParserCallbackData(a_pFun, a_bAllowOpti))
@@ -57,7 +57,7 @@ QmuParserCallback::QmuParserCallback(fun_type2 a_pFun, bool a_bAllowOpti)
  * @param a_bAllowOpti A flag indicating this funcation can be optimized
  * @param a_iPrec The operator precedence
  * @param a_eOprtAsct The operators associativity
- * @throw nothrow
+ * @throw None No exceptions are thrown.
  */
 QmuParserCallback::QmuParserCallback(fun_type2 a_pFun, bool a_bAllowOpti, int a_iPrec, EOprtAssociativity a_eOprtAsct)
   : d(new QmuParserCallbackData(a_pFun, a_bAllowOpti, a_iPrec, a_eOprtAsct))
@@ -127,7 +127,7 @@ QmuParserCallback::QmuParserCallback(bulkfun_type1 a_pFun, bool a_bAllowOpti)
 //---------------------------------------------------------------------------------------------------------------------
 /**
  * @brief Constructor for constructing funcstion callbacks taking two arguments.
- * @throw nothrow
+ * @throw None No exceptions are thrown.
  */
 QmuParserCallback::QmuParserCallback(bulkfun_type2 a_pFun, bool a_bAllowOpti)
   : d(new QmuParserCallbackData(a_pFun, a_bAllowOpti))
@@ -209,7 +209,7 @@ QmuParserCallback::QmuParserCallback(strfun_type3 a_pFun, bool a_bAllowOpti)
 //---------------------------------------------------------------------------------------------------------------------
 /**
  * @brief Default constructor.
- * @throw nothrow
+ * @throw None No exceptions are thrown.
  */
 QmuParserCallback::QmuParserCallback()
   : d(new QmuParserCallbackData)
@@ -219,7 +219,7 @@ QmuParserCallback::QmuParserCallback()
 //---------------------------------------------------------------------------------------------------------------------
 /**
  * @brief Copy constructor.
- * @throw nothrow
+ * @throw None No exceptions are thrown.
  */
 QmuParserCallback::QmuParserCallback(const QmuParserCallback &a_Fun)
   : d(a_Fun.d)
@@ -255,7 +255,7 @@ auto QmuParserCallback::operator=(QmuParserCallback &&a_Fun) noexcept -> QmuPars
  * @brief Return true if the function is conservative.
  *
  * Conservative functions return always the same result for the same argument.
- * @throw nothrow
+ * @throw None No exceptions are thrown.
  */
 // cppcheck-suppress unusedFunction
 auto QmuParserCallback::IsOptimizable() const -> bool
@@ -269,7 +269,7 @@ auto QmuParserCallback::IsOptimizable() const -> bool
  *
  * The type of the address is void. It needs to be recasted according to the argument number to the right type.
  *
- * @throw nothrow
+ * @throw None No exceptions are thrown.
  * @return #pFun
  */
 auto QmuParserCallback::GetAddr() const -> void *
@@ -295,7 +295,7 @@ auto QmuParserCallback::GetType() const -> ETypeCode
 //---------------------------------------------------------------------------------------------------------------------
 /**
  * @brief Return the operator precedence.
- * @throw nothrown
+ * @throw None No exceptions are thrown.n
  *
  * Only valid if the callback token is an operator token (binary or infix).
  */
@@ -307,7 +307,7 @@ auto QmuParserCallback::GetPri() const -> int
 //---------------------------------------------------------------------------------------------------------------------
 /**
  * @brief Return the operators associativity.
- * @throw nothrown
+ * @throw None No exceptions are thrown.n
  *
  * Only valid if the callback token is a binary operator token.
  */
