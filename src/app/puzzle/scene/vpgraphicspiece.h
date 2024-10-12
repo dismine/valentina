@@ -35,8 +35,10 @@
 #include "../layout/layoutdef.h"
 #include "scenedef.h"
 
+class VCommonSettings;
 class VTextManager;
 class VGraphicsFillItem;
+class VFoldLine;
 
 class VPGraphicsPiece : public QGraphicsObject
 {
@@ -136,6 +138,12 @@ private:
     void PaintStickyPath(QPainter *painter);
     void PaintMirrorLine(QPainter *painter, const VPPiecePtr &piece);
     void PaintFoldLine(QPainter *painter, const VPPiecePtr &piece);
+
+    void HideFoldLineLabel();
+    void PrepareFoldLineLabel(const VFoldLine &fLine, VCommonSettings *settings);
+    void AddFoldLinePaths(const VPPiecePtr &piece, const QVector<QPainterPath> &shape, bool singleLineFont);
+    void DrawFoldLineMark(QPainter *painter);
+    void DrawFoldLineLabel(QPainter *painter, const VPPiecePtr &piece, bool singleLineFont);
 
     void GroupMove(const QPointF &pos);
 

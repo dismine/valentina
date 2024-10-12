@@ -142,6 +142,12 @@ inline auto SelectionBrush() -> QBrush
 {
     return {VSceneStylesheet::ManualLayoutStyle().PieceSelectionBrushColor()};
 }
+
+//---------------------------------------------------------------------------------------------------------------------
+auto ShouldSkipPainting(const VPPiecePtr &piece) -> bool
+{
+    return (piece->GetFoldLineType() == FoldLineType::None || (piece->IsShowFullPiece() && !piece->IsShowMirrorLine()));
+}
 } // namespace
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -966,48 +972,35 @@ void VPGraphicsPiece::PaintMirrorLine(QPainter *painter, const VPPiecePtr &piece
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VPGraphicsPiece::PaintFoldLine(QPainter *painter, const VPPiecePtr &piece)
+void VPGraphicsPiece::HideFoldLineLabel()
 {
-    if (piece->GetFoldLineType() == FoldLineType::None || (piece->IsShowFullPiece() && !piece->IsShowMirrorLine()))
+    if (m_foldLineLabelText != nullptr)
     {
-        if (m_foldLineLabelText != nullptr)
-        {
-            m_foldLineLabelText->setVisible(false);
-        }
-
-        return;
+        m_foldLineLabelText->setVisible(false);
     }
+}
 
-    VFoldLine const fLine = piece->FoldLine();
-    QVector<QPainterPath> const shape = fLine.FoldLinePath();
-
-    if (shape.isEmpty())
-    {
-        return;
-    }
-
-    VCommonSettings *settings = VAbstractApplication::VApp()->Settings();
+//---------------------------------------------------------------------------------------------------------------------
+void VPGraphicsPiece::PrepareFoldLineLabel(const VFoldLine &fLine, VCommonSettings *settings)
+{
     if (!m_textAsPaths && !settings->GetSingleStrokeOutlineFont() && !settings->GetSingleLineFonts())
     {
         if (m_foldLineLabelText == nullptr)
         {
             m_foldLineLabelText = new QGraphicsSimpleTextItem(this);
         }
-
         fLine.UpdateFoldLineLabel(m_foldLineLabelText);
-
         m_foldLineLabelText->setBrush(QBrush(PieceColor()));
     }
-    else
+    else if (m_foldLineLabelText != nullptr)
     {
-        if (m_foldLineLabelText != nullptr)
-        {
-            m_foldLineLabelText->setVisible(false);
-        }
+        m_foldLineLabelText->setVisible(false);
     }
+}
 
-    const bool singleLineFont = settings->GetSingleStrokeOutlineFont() || settings->GetSingleLineFonts();
-
+//---------------------------------------------------------------------------------------------------------------------
+void VPGraphicsPiece::AddFoldLinePaths(const VPPiecePtr &piece, const QVector<QPainterPath> &shape, bool singleLineFont)
+{
     if (piece->GetFoldLineType() == FoldLineType::ThreeDots || piece->GetFoldLineType() == FoldLineType::ThreeX ||
         piece->GetFoldLineType() == FoldLineType::TwoArrows)
     {
@@ -1029,26 +1022,63 @@ void VPGraphicsPiece::PaintFoldLine(QPainter *painter, const VPPiecePtr &piece)
             m_foldLineLabelPath.addPath(shape.constLast());
         }
     }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VPGraphicsPiece::DrawFoldLineMark(QPainter *painter)
+{
+    painter->save();
+    painter->setBrush(Qt::SolidPattern);
+    painter->drawPath(m_foldLineMarkPath);
+    painter->restore();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VPGraphicsPiece::DrawFoldLineLabel(QPainter *painter, const VPPiecePtr &piece, bool singleLineFont)
+{
+    const qreal penWidth = VPApplication::VApp()->PuzzleSettings()->GetLayoutLineWidth();
+
+    painter->save();
+    QPen pen = painter->pen();
+    pen.setWidthF(penWidth * qMin(piece->GetXScale(), piece->GetYScale()));
+    pen.setColor(PieceColor());
+    pen.setCapStyle(Qt::RoundCap);
+    pen.setJoinStyle(Qt::RoundJoin);
+    painter->setPen(pen);
+    painter->setBrush(singleLineFont ? Qt::NoBrush : Qt::SolidPattern);
+    painter->drawPath(m_foldLineLabelPath);
+    painter->restore();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VPGraphicsPiece::PaintFoldLine(QPainter *painter, const VPPiecePtr &piece)
+{
+    if (ShouldSkipPainting(piece))
+    {
+        HideFoldLineLabel();
+
+        return;
+    }
+
+    VFoldLine const fLine = piece->FoldLine();
+    QVector<QPainterPath> const shape = fLine.FoldLinePath();
+
+    if (shape.isEmpty())
+    {
+        return;
+    }
+
+    VCommonSettings *settings = VAbstractApplication::VApp()->Settings();
+
+    PrepareFoldLineLabel(fLine, settings);
+
+    const bool singleLineFont = settings->GetSingleStrokeOutlineFont() || settings->GetSingleLineFonts();
+    AddFoldLinePaths(piece, shape, singleLineFont);
 
     if (painter != nullptr)
     {
-        painter->save();
-        painter->setBrush(Qt::SolidPattern);
-        painter->drawPath(m_foldLineMarkPath);
-        painter->restore();
-
-        qreal const penWidth = VPApplication::VApp()->PuzzleSettings()->GetLayoutLineWidth();
-
-        painter->save();
-        QPen pen = painter->pen();
-        pen.setWidthF(penWidth * qMin(piece->GetXScale(), piece->GetYScale()));
-        pen.setColor(PieceColor());
-        pen.setCapStyle(Qt::RoundCap);
-        pen.setJoinStyle(Qt::RoundJoin);
-        painter->setPen(pen);
-        painter->setBrush(singleLineFont ? Qt::NoBrush : Qt::SolidPattern);
-        painter->drawPath(m_foldLineLabelPath);
-        painter->restore();
+        DrawFoldLineMark(painter);
+        DrawFoldLineLabel(painter, piece, singleLineFont);
     }
 }
 
