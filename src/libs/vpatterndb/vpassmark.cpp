@@ -929,50 +929,46 @@ auto VPassmark::BuiltInSAPassmark(const VPiece &piece, const VContainer *data) c
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-auto VPassmark::BuiltInSAPassmarkBaseLine(const VPiece &piece, const QLineF &mirrorLine) const -> QVector<QLineF>
+auto VPassmark::CalculatePassmarkLength(const VPiece &piece) const -> qreal
 {
-    if (m_null)
-    {
-        return {};
-    }
-
     qreal length = 0;
-    if (not piece.IsSeamAllowanceBuiltIn())
+
+    if (!piece.IsSeamAllowanceBuiltIn())
     {
         bool ok = false;
         length = PassmarkLength(m_data, m_data.passmarkSAPoint.MaxLocalSA(m_data.saWidth), ok);
-        if (not ok)
+        if (!ok)
         {
-            return {};
+            return 0;
         }
+    }
+    else if (m_data.passmarkSAPoint.IsManualPasskmarkLength())
+    {
+        length = m_data.passmarkSAPoint.GetPasskmarkLength();
+    }
+    else if (m_data.globalPassmarkLength > accuracyPointOnLine)
+    {
+        length = m_data.globalPassmarkLength;
     }
     else
     {
-        if (m_data.passmarkSAPoint.IsManualPasskmarkLength())
-        {
-            length = m_data.passmarkSAPoint.GetPasskmarkLength();
-        }
-        else
-        {
-            if (m_data.globalPassmarkLength > accuracyPointOnLine)
-            {
-                length = m_data.globalPassmarkLength;
-            }
-            else
-            {
-                const QString errorMsg =
-                    QCoreApplication::translate("VPassmark",
-                                                "Cannot calculate a notch for point '%1' in piece '%2' with built "
-                                                "in seam allowance. User must manually provide length.")
-                        .arg(m_data.nodeName, m_data.pieceName);
-                VAbstractApplication::VApp()->IsPedantic()
-                    ? throw VExceptionInvalidNotch(errorMsg)
-                    : qWarning() << VAbstractValApplication::warningMessageSignature + errorMsg;
-                return {};
-            }
-        }
+        const QString errorMsg =
+            QCoreApplication::translate("VPassmark", "Cannot calculate a notch for point '%1' in piece '%2' with "
+                                                     "built-in seam allowance. User must manually provide length.")
+                .arg(m_data.nodeName, m_data.pieceName);
+
+        VAbstractApplication::VApp()->IsPedantic()
+            ? throw VExceptionInvalidNotch(errorMsg)
+            : qWarning() << VAbstractValApplication::warningMessageSignature + errorMsg;
+        return 0;
     }
 
+    return length;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+auto VPassmark::DetermineEdges(const VPiece &piece, const QLineF &mirrorLine) const -> std::pair<QLineF, QLineF>
+{
     QLineF edge1;
     QLineF edge2;
 
@@ -1012,10 +1008,30 @@ auto VPassmark::BuiltInSAPassmarkBaseLine(const VPiece &piece, const QLineF &mir
         edge2 = QLineF(m_data.passmarkSAPoint, m_data.nextSAPoint);
     }
 
-    edge1.setAngle(edge1.angle() + edge1.angleTo(edge2) / 2.);
-    edge1.setLength(length);
+    return {edge1, edge2};
+}
 
-    return {edge1};
+//---------------------------------------------------------------------------------------------------------------------
+auto VPassmark::BuiltInSAPassmarkBaseLine(const VPiece &piece, const QLineF &mirrorLine) const -> QVector<QLineF>
+{
+    if (m_null)
+    {
+        return {};
+    }
+
+    const qreal length = CalculatePassmarkLength(piece);
+    if (length <= 0)
+    {
+        return {};
+    }
+
+    const auto edges = DetermineEdges(piece, mirrorLine);
+
+    QLineF adjustedEdge = edges.first;
+    adjustedEdge.setAngle(adjustedEdge.angle() + adjustedEdge.angleTo(edges.second) / 2.);
+    adjustedEdge.setLength(length);
+
+    return {adjustedEdge};
 }
 
 //---------------------------------------------------------------------------------------------------------------------

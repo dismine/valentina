@@ -122,6 +122,9 @@ private:
 
     auto CreatePassmarkLines(const QVector<QLineF> &lines, const QVector<QPointF> &seamAllowance,
                              PassmarkSide side) const -> QVector<QLineF>;
+
+    auto CalculatePassmarkLength(const VPiece &piece) const -> qreal;
+    auto DetermineEdges(const VPiece &piece, const QLineF &mirrorLine) const -> std::pair<QLineF, QLineF>;
 };
 
 #endif // VPASSMARK_H
