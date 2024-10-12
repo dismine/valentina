@@ -871,7 +871,7 @@ void RollbackBySecondEdgeRightAngle(QVector<VRawSAPoint> &ekvPoints, const QVect
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-auto FoundProng(QLineF bigLine1, QLineF bigLine2, const VSAPoint &ekvPoint, qreal width, qreal caseAngle,
+auto FoundProng(const QLineF &bigLine1, const QLineF &bigLine2, const VSAPoint &ekvPoint, qreal width, qreal caseAngle,
                 QPointF crosPoint, QVector<VRawSAPoint> &points) -> bool
 {
     if (not VFuzzyComparePossibleNulls(ekvPoint.GetSABefore(width), ekvPoint.GetSAAfter(width)) &&
