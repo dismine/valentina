@@ -19,8 +19,7 @@ class dxfWriter
 {
 public:
     explicit dxfWriter(std::ofstream *stream)
-      : filestr(stream),
-        encoder()
+      : filestr(stream)
     {
     }
 
@@ -43,7 +42,7 @@ protected:
 
 private:
     Q_DISABLE_COPY_MOVE(dxfWriter) // NOLINT
-    DRW_TextCodec encoder;
+    DRW_TextCodec encoder{};
 };
 
 class dxfWriterBinary : public dxfWriter
@@ -51,26 +50,26 @@ class dxfWriterBinary : public dxfWriter
 public:
     using dxfWriter::dxfWriter;
 
-    virtual ~dxfWriterBinary() = default;
-    virtual auto writeString(int code, const std::string &text) -> bool override;
-    virtual auto writeInt16(int code, int data) -> bool override;
-    virtual auto writeInt32(int code, int data) -> bool override;
-    virtual auto writeInt64(int code, unsigned long long int data) -> bool override;
-    virtual auto writeDouble(int code, double data) -> bool override;
-    virtual auto writeBool(int code, bool data) -> bool override;
+    ~dxfWriterBinary() override = default;
+    auto writeString(int code, const std::string &text) -> bool override;
+    auto writeInt16(int code, int data) -> bool override;
+    auto writeInt32(int code, int data) -> bool override;
+    auto writeInt64(int code, unsigned long long int data) -> bool override;
+    auto writeDouble(int code, double data) -> bool override;
+    auto writeBool(int code, bool data) -> bool override;
 };
 
 class dxfWriterAscii final : public dxfWriter
 {
 public:
     explicit dxfWriterAscii(std::ofstream *stream);
-    virtual ~dxfWriterAscii() = default;
-    virtual auto writeString(int code, const std::string &text) -> bool override;
-    virtual auto writeInt16(int code, int data) -> bool override;
-    virtual auto writeInt32(int code, int data) -> bool override;
-    virtual auto writeInt64(int code, unsigned long long int data) -> bool override;
-    virtual auto writeDouble(int code, double data) -> bool override;
-    virtual auto writeBool(int code, bool data) -> bool override;
+    ~dxfWriterAscii() override = default;
+    auto writeString(int code, const std::string &text) -> bool override;
+    auto writeInt16(int code, int data) -> bool override;
+    auto writeInt32(int code, int data) -> bool override;
+    auto writeInt64(int code, unsigned long long int data) -> bool override;
+    auto writeDouble(int code, double data) -> bool override;
+    auto writeBool(int code, bool data) -> bool override;
 };
 
 #endif // DXFWRITER_H
