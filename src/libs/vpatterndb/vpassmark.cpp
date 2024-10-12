@@ -72,7 +72,7 @@ auto GetSeamPassmarkSAPoint(const VPiecePassmarkData &passmarkData, const QVecto
     if (ekvPoints.size() > 1)
     {
         // Prong shape case. Select the closest point to a seam line.
-        point = ekvPoints.at(0);
+        point = ekvPoints.at(0).ToQPointF();
         qreal minDistance = QLineF(passmarkData.passmarkSAPoint, point).length();
 
         for (const QPointF &p : ekvPoints)
