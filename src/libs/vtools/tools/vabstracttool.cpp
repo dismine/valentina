@@ -125,7 +125,8 @@ VAbstractTool::~VAbstractTool()
  * @param toolId [in] tool's id.
  * @param formula [in|out] string with formula.
  * @param data [in] container with variables. Need for math parser.
- * @throw QmuParserError.
+ * @throw QmuParserError If a parsing error occurs in the formula.
+ * @throw VExceptionUndo If the user fails to fix the wrong formula and decides to undo.
  * @return result of calculation formula.
  */
 auto VAbstractTool::CheckFormula(const quint32 &toolId, QString &formula, VContainer *data) -> qreal
