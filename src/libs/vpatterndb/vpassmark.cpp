@@ -211,7 +211,7 @@ auto FixNotchPoint(const QVector<QPointF> &seamAllowance, const VPiecePassmarkDa
     }
 
     // Point is on seam allowance
-    if (VAbstractCurve::IsPointOnCurve(seamAllowance, *notch))
+    if (VAbstractCurve::IsPointOnCurve(seamAllowance, axis.p2()))
     { // Fixing distortion
         axis.setLength(axis.length() + accuracyPointOnLine * 10);
         const QVector<QPointF> points = VAbstractCurve::CurveIntersectLine(seamAllowance, axis);
