@@ -140,6 +140,71 @@ auto AppFilePath(const QString &appName) -> QString
 } // namespace
 
 //---------------------------------------------------------------------------------------------------------------------
+inline void LogMessageDetails(QtMsgType type, const QMessageLogContext &context, const QString &msg)
+{
+    QString debugdate = "["_L1 + QDateTime::currentDateTime().toString(QStringLiteral("yyyy.MM.dd hh:mm:ss"));
+    QString const file = VAbstractApplication::ReduceLogContextFilePath(context.file);
+    const bool isPatternMessage = VAbstractApplication::VApp()->IsWarningMessage(msg);
+
+    switch (type)
+    {
+        case QtDebugMsg:
+            debugdate += QStringLiteral(":DEBUG:%1(%2)] %3: %4: %5")
+                             .arg(file)
+                             .arg(context.line)
+                             .arg(context.function, context.category, msg);
+            vStdOut() << QApplication::translate("vNoisyHandler", "DEBUG:") << msg << "\n";
+            break;
+        case QtWarningMsg:
+            if (isPatternMessage)
+            {
+                VAbstractValApplication::VApp()->PostWarningMessage(msg, type);
+            }
+            debugdate += QStringLiteral(":WARNING:%1(%2)] %3: %4: %5")
+                             .arg(file)
+                             .arg(context.line)
+                             .arg(context.function, context.category, msg);
+            vStdErr() << QApplication::translate("vNoisyHandler", "WARNING:") << msg << "\n";
+            break;
+        case QtCriticalMsg:
+            if (isPatternMessage)
+            {
+                VAbstractValApplication::VApp()->PostWarningMessage(msg, type);
+            }
+            debugdate += QStringLiteral(":CRITICAL:%1(%2)] %3: %4: %5")
+                             .arg(file)
+                             .arg(context.line)
+                             .arg(context.function, context.category, msg);
+            vStdErr() << QApplication::translate("vNoisyHandler", "CRITICAL:") << msg << "\n";
+            break;
+        case QtFatalMsg:
+            debugdate += QStringLiteral(":FATAL:%1(%2)] %3: %4: %5")
+                             .arg(file)
+                             .arg(context.line)
+                             .arg(context.function, context.category, msg);
+            vStdErr() << QApplication::translate("vNoisyHandler", "FATAL:") << msg << "\n";
+            break;
+        case QtInfoMsg:
+            if (isPatternMessage)
+            {
+                VAbstractValApplication::VApp()->PostWarningMessage(msg, type);
+            }
+            debugdate += QStringLiteral(":INFO:%1(%2)] %3: %4: %5")
+                             .arg(file)
+                             .arg(context.line)
+                             .arg(context.function, context.category, msg);
+            vStdOut() << QApplication::translate("vNoisyHandler", "INFO:") << msg << "\n";
+            break;
+        default:
+            break;
+    }
+    vStdOut().flush();
+    vStdErr().flush();
+
+    (*VApplication::VApp()->LogFile()) << debugdate << Qt::endl;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 inline void noisyFailureMsgHandler(QtMsgType type, const QMessageLogContext &context, const QString &msg)
 {
     // only the GUI thread should display message boxes.  If you are
@@ -223,67 +288,7 @@ inline void noisyFailureMsgHandler(QtMsgType type, const QMessageLogContext &con
         logMsg = logMsg.remove(VAbstractValApplication::warningMessageSignature);
     }
 
-    {
-        QString debugdate = "["_L1 + QDateTime::currentDateTime().toString(QStringLiteral("yyyy.MM.dd hh:mm:ss"));
-        QString const file = VAbstractApplication::ReduceLogContextFilePath(context.file);
-
-        switch (type)
-        {
-            case QtDebugMsg:
-                debugdate += QStringLiteral(":DEBUG:%1(%2)] %3: %4: %5")
-                                 .arg(file)
-                                 .arg(context.line)
-                                 .arg(context.function, context.category, logMsg);
-                vStdOut() << QApplication::translate("vNoisyHandler", "DEBUG:") << logMsg << "\n";
-                break;
-            case QtWarningMsg:
-                if (isPatternMessage)
-                {
-                    VAbstractValApplication::VApp()->PostWarningMessage(logMsg, type);
-                }
-                debugdate += QStringLiteral(":WARNING:%1(%2)] %3: %4: %5")
-                                 .arg(file)
-                                 .arg(context.line)
-                                 .arg(context.function, context.category, logMsg);
-                vStdErr() << QApplication::translate("vNoisyHandler", "WARNING:") << logMsg << "\n";
-                break;
-            case QtCriticalMsg:
-                if (isPatternMessage)
-                {
-                    VAbstractValApplication::VApp()->PostWarningMessage(logMsg, type);
-                }
-                debugdate += QStringLiteral(":CRITICAL:%1(%2)] %3: %4: %5")
-                                 .arg(file)
-                                 .arg(context.line)
-                                 .arg(context.function, context.category, logMsg);
-                vStdErr() << QApplication::translate("vNoisyHandler", "CRITICAL:") << logMsg << "\n";
-                break;
-            case QtFatalMsg:
-                debugdate += QStringLiteral(":FATAL:%1(%2)] %3: %4: %5")
-                                 .arg(file)
-                                 .arg(context.line)
-                                 .arg(context.function, context.category, logMsg);
-                vStdErr() << QApplication::translate("vNoisyHandler", "FATAL:") << logMsg << "\n";
-                break;
-            case QtInfoMsg:
-                if (isPatternMessage)
-                {
-                    VAbstractValApplication::VApp()->PostWarningMessage(logMsg, type);
-                }
-                debugdate += QStringLiteral(":INFO:%1(%2)] %3: %4: %5")
-                                 .arg(file)
-                                 .arg(context.line)
-                                 .arg(context.function, context.category, logMsg);
-                vStdOut() << QApplication::translate("vNoisyHandler", "INFO:") << logMsg << "\n";
-                break;
-            default:
-                break;
-        }
-        vStdOut().flush();
-        vStdErr().flush();
-
-        (*VApplication::VApp()->LogFile()) << debugdate << Qt::endl;
-    }
+    LogMessageDetails(type, context, logMsg);
 
     if (isGuiThread)
     {

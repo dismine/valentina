@@ -826,24 +826,31 @@ auto VLayoutPiece::GetMappedFullSeamAllowancePoints() const -> QVector<VLayoutPo
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+auto VLayoutPiece::CorrectSeamAllowanceMirrorLine() const -> QLineF
+{
+    QLineF correctedSeamAllowanceMirrorLine = d->m_seamAllowanceMirrorLine;
+
+    QVector<QPointF> seamAllowancePoints;
+    CastTo(d->m_seamAllowance, seamAllowancePoints);
+
+    if (!VAbstractCurve::IsPointOnCurve(seamAllowancePoints, d->m_seamAllowanceMirrorLine.p1()) ||
+        !VAbstractCurve::IsPointOnCurve(seamAllowancePoints, d->m_seamAllowanceMirrorLine.p2()))
+    {
+        correctedSeamAllowanceMirrorLine = SeamAllowanceMirrorLine(d->m_seamMirrorLine, seamAllowancePoints);
+    }
+
+    return correctedSeamAllowanceMirrorLine;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 auto VLayoutPiece::GetFullSeamAllowancePoints() const -> QVector<VLayoutPoint>
 {
     QVector<VLayoutPoint> points;
     points.reserve(d->m_seamAllowance.size());
     if (!d->m_seamAllowanceMirrorLine.isNull() && IsShowFullPiece())
     {
-        QLineF seamAllowanceMirrorLine = d->m_seamAllowanceMirrorLine;
-        { // Trying to correct a seam allowance mirror line based on seam mirror line
-            QVector<QPointF> seamAllowance;
-            CastTo(d->m_seamAllowance, seamAllowance);
-
-            if (!VAbstractCurve::IsPointOnCurve(seamAllowance, seamAllowanceMirrorLine.p1()) ||
-                !VAbstractCurve::IsPointOnCurve(seamAllowance, seamAllowanceMirrorLine.p2()))
-            {
-                seamAllowanceMirrorLine = SeamAllowanceMirrorLine(d->m_seamMirrorLine, seamAllowance);
-            }
-        }
-
+        // Trying to correct a seam allowance mirror line based on seam mirror line
+        const QLineF seamAllowanceMirrorLine = CorrectSeamAllowanceMirrorLine();
         points = VAbstractPiece::FullSeamAllowancePath(d->m_seamAllowance, seamAllowanceMirrorLine, GetName());
         points = CheckLoops(CorrectEquidistantPoints(points)); // A path can contains loops
     }

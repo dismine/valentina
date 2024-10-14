@@ -271,6 +271,8 @@ private:
 
     auto Edge(const QVector<QPointF> &path, int i) const -> QLineF;
     auto EdgeByPoint(const QVector<QPointF> &path, const QPointF &p1) const -> EdgeIndex;
+
+    auto CorrectSeamAllowanceMirrorLine() const -> QLineF;
 };
 
 QT_WARNING_POP

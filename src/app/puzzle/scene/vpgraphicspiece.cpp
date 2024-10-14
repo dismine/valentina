@@ -148,6 +148,23 @@ auto ShouldSkipPainting(const VPPiecePtr &piece) -> bool
 {
     return (piece->GetFoldLineType() == FoldLineType::None || (piece->IsShowFullPiece() && !piece->IsShowMirrorLine()));
 }
+
+//---------------------------------------------------------------------------------------------------------------------
+auto AdjustSeamAllowanceMirrorLine(const VPPiecePtr &piece, const QLineF &seamAllowanceMirrorLine) -> QLineF
+{
+    QLineF adjustedLine = seamAllowanceMirrorLine;
+
+    QVector<QPointF> seamAllowance;
+    CastTo(piece->GetMappedContourPoints(), seamAllowance);
+
+    if (!VAbstractCurve::IsPointOnCurve(seamAllowance, seamAllowanceMirrorLine.p1()) ||
+        !VAbstractCurve::IsPointOnCurve(seamAllowance, seamAllowanceMirrorLine.p2()))
+    {
+        adjustedLine = piece->SeamAllowanceMirrorLine(piece->GetMappedSeamMirrorLine(), seamAllowance);
+    }
+
+    return adjustedLine;
+}
 } // namespace
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -940,17 +957,7 @@ void VPGraphicsPiece::PaintMirrorLine(QPainter *painter, const VPPiecePtr &piece
         QLineF seamAllowanceMirrorLine = piece->GetMappedSeamAllowanceMirrorLine();
         if (!seamAllowanceMirrorLine.isNull() && piece->IsShowMirrorLine())
         {
-            { // Trying to correct a seam allowance mirror line based on seam mirror line
-                QVector<QPointF> seamAllowance;
-                CastTo(piece->GetMappedContourPoints(), seamAllowance);
-
-                if (!VAbstractCurve::IsPointOnCurve(seamAllowance, seamAllowanceMirrorLine.p1()) ||
-                    !VAbstractCurve::IsPointOnCurve(seamAllowance, seamAllowanceMirrorLine.p2()))
-                {
-                    seamAllowanceMirrorLine =
-                        piece->SeamAllowanceMirrorLine(piece->GetMappedSeamMirrorLine(), seamAllowance);
-                }
-            }
+            seamAllowanceMirrorLine = AdjustSeamAllowanceMirrorLine(piece, seamAllowanceMirrorLine);
 
             QPainterPath mirrorPath;
             mirrorPath.moveTo(seamAllowanceMirrorLine.p1());
