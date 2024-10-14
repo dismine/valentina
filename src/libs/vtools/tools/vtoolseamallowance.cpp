@@ -982,7 +982,7 @@ void VToolSeamAllowance::ResetChildren(QGraphicsItem *pItem)
         m_patternInfo->Reset();
     }
 
-    if (auto *pGLI = qgraphicsitem_cast<VGrainlineItem *>(pItem);
+    if (const auto *pGLI = qgraphicsitem_cast<VGrainlineItem *>(pItem);
         pGLI != m_grainLine && detail.GetGrainlineGeometry().IsEnabled())
     {
         m_grainLine->Reset();

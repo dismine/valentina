@@ -908,7 +908,7 @@ auto VLayoutPiece::GetPieceText() const -> QStringList
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VLayoutPiece::SetPieceText(VAbstractPattern *pDoc, const QString &qsName, const VPieceLabelData &data,
+void VLayoutPiece::SetPieceText(const VAbstractPattern *pDoc, const QString &qsName, const VPieceLabelData &data,
                                 const QFont &font, const QString &SVGFontFamily, const VContainer *pattern)
 {
     QPointF ptPos;
@@ -984,7 +984,7 @@ auto VLayoutPiece::GetPatternText() const -> QStringList
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VLayoutPiece::SetPatternInfo(VAbstractPattern *pDoc, const VPatternLabelData &geom, const QFont &font,
+void VLayoutPiece::SetPatternInfo(const VAbstractPattern *pDoc, const VPatternLabelData &geom, const QFont &font,
                                   const QString &SVGFontFamily, const VContainer *pattern)
 {
     QPointF ptPos;

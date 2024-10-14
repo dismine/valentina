@@ -116,11 +116,11 @@ public:
     void SetInternalPaths(const QVector<VLayoutPiecePath> &internalPaths);
 
     auto GetPieceText() const -> QStringList;
-    void SetPieceText(VAbstractPattern *pDoc, const QString &qsName, const VPieceLabelData &data, const QFont &font,
-                      const QString &SVGFontFamily, const VContainer *pattern);
+    void SetPieceText(const VAbstractPattern *pDoc, const QString &qsName, const VPieceLabelData &data,
+                      const QFont &font, const QString &SVGFontFamily, const VContainer *pattern);
 
     auto GetPatternText() const -> QStringList;
-    void SetPatternInfo(VAbstractPattern *pDoc, const VPatternLabelData &geom, const QFont &font,
+    void SetPatternInfo(const VAbstractPattern *pDoc, const VPatternLabelData &geom, const QFont &font,
                         const QString &SVGFontFamily, const VContainer *pattern);
 
     void SetGrainline(const VGrainlineData &geom, const VContainer *pattern);

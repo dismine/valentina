@@ -1075,7 +1075,7 @@ void VPGraphicsPiece::PaintFoldLine(QPainter *painter, const VPPiecePtr &piece)
         return;
     }
 
-    VCommonSettings *settings = VAbstractApplication::VApp()->Settings();
+    const VCommonSettings *settings = VAbstractApplication::VApp()->Settings();
 
     PrepareFoldLineLabel(fLine, settings);
 
