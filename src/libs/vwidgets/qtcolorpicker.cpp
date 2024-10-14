@@ -293,13 +293,6 @@ QtColorPicker::QtColorPicker(QWidget *parent, int columns, bool enableColorDialo
     connect(this, SIGNAL(toggled(bool)), SLOT(buttonPressed(bool)));
 }
 
-/*!
-    Destructs the QtColorPicker.
-*/
-QtColorPicker::~QtColorPicker()
-{
-}
-
 /*! \internal
 
     Pops up the color grid, and makes sure the status of

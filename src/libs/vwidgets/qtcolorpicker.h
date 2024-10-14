@@ -66,7 +66,7 @@ class QtColorPicker : public QPushButton
 public:
     explicit QtColorPicker(QWidget *parent = nullptr, int columns = -1, bool enableColorDialog = true);
 
-    ~QtColorPicker() override;
+    ~QtColorPicker() override = default;
 
     void insertColor(const QColor &color, const QString &text = QString(), int index = -1);
 
