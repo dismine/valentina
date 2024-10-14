@@ -128,9 +128,9 @@ public slots:
     void EnableToolMove(bool move);
     void AllowHover(bool enabled) override;
     void AllowSelecting(bool enabled) override;
-    virtual void ResetChildren(QGraphicsItem *pItem);
-    virtual void UpdateAll();
-    virtual void retranslateUi();
+    void ResetChildren(QGraphicsItem *pItem);
+    void UpdateAll();
+    void retranslateUi();
     void Highlight(quint32 id);
     void UpdateDetailLabel();
     void UpdatePatternInfo();
