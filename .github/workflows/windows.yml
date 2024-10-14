@@ -18,14 +18,14 @@ defaults:
 
 env:
   SOURCE_DIR: ${{ github.workspace }}
-  INSTALL_QT: 6.7.1
+  INSTALL_QT: 6.8.0
   QBS_VERSION: 2.4.1
   VALENTINA_VERSION: 0_7_53
   ACCESS_TOKEN: ${{ secrets.DROPBOX_ACCESS_TOKEN }}
 
 jobs:
-  Windows_Qt_6_7_MSVC_x64:
-    name: Windows Qt 6.7 (MSVC x64)
+  Windows_Qt_6_8_MSVC_x64:
+    name: Windows Qt 6.8 (MSVC x64)
     runs-on:  windows-latest
     env:
       DEPLOY: 'true'
@@ -40,7 +40,7 @@ jobs:
         run: git fetch --prune --unshallow --tags
 
       - name: Install Qt
-        uses: jurplel/install-qt-action@v3
+        uses: jurplel/install-qt-action@v4
         with:
           version:      ${{ env.INSTALL_QT }}
           host:         'windows'
@@ -229,5 +229,5 @@ jobs:
           TARGET_PLATFORM: "Windows10+"
           ARCH: x64
           COMPILER: msvc
-          QT_VERSION: Qt6_7
+          QT_VERSION: Qt6_8
         run: ./scripts/appveyor-deploy.ps1
