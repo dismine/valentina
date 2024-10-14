@@ -981,7 +981,7 @@ void VPGraphicsPiece::HideFoldLineLabel()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VPGraphicsPiece::PrepareFoldLineLabel(const VFoldLine &fLine, VCommonSettings *settings)
+void VPGraphicsPiece::PrepareFoldLineLabel(const VFoldLine &fLine, const VCommonSettings *settings)
 {
     if (!m_textAsPaths && !settings->GetSingleStrokeOutlineFont() && !settings->GetSingleLineFonts())
     {

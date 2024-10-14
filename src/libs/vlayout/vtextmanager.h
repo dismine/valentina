@@ -161,7 +161,8 @@ public:
     friend auto operator<<(QDataStream &dataStream, const VTextManager &data) -> QDataStream &;
     friend auto operator>>(QDataStream &dataStream, VTextManager &data) -> QDataStream &;
 
-    static auto PrepareLabelInfo(VAbstractPattern *doc, const VContainer *pattern, bool pieceLabel) -> VPieceLabelInfo;
+    static auto PrepareLabelInfo(const VAbstractPattern *doc, const VContainer *pattern, bool pieceLabel)
+        -> VPieceLabelInfo;
 
 private:
     QFont m_font{};

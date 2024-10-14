@@ -501,7 +501,7 @@ void InsertPlaceholderValue(const VContainer &completeData, const QString &formu
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void PreparePieceLabelPlaceholders(VContainer &completeData, const VPieceLabelInfo &info,
+void PreparePieceLabelPlaceholders(const VContainer &completeData, const VPieceLabelInfo &info,
                                    QMap<QString, QString> &placeholders, const QSet<QString> &uniquePlaceholders)
 {
     if (uniquePlaceholders.contains('%' + pl_currentArea + '%'))
@@ -555,7 +555,7 @@ void InsertMeasurementPlaceholder(const VContainer &completeData, const VFinalMe
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void PrepareFinalMeasurementPlaceholders(const VPieceLabelInfo &info, VContainer &completeData,
+void PrepareFinalMeasurementPlaceholders(const VPieceLabelInfo &info, const VContainer &completeData,
                                          QMap<QString, QString> &placeholders, const QSet<QString> &uniquePlaceholders)
 {
     for (int i = 0; i < info.finalMeasurements.size(); ++i)
@@ -1200,7 +1200,7 @@ auto VTextManager::BreakTextIntoLines(const QString &text, const VSvgFont &font,
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-auto VTextManager::PrepareLabelInfo(VAbstractPattern *doc, const VContainer *pattern, bool pieceLabel)
+auto VTextManager::PrepareLabelInfo(const VAbstractPattern *doc, const VContainer *pattern, bool pieceLabel)
     -> VPieceLabelInfo
 {
     VPieceLabelInfo info(doc->GetCompleteData());

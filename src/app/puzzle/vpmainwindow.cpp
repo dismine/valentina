@@ -475,7 +475,7 @@ auto VPMainWindow::LoadFile(const QString &path) -> bool
     // Check if file already opened
     QList<VPMainWindow *> list = VPApplication::VApp()->MainWindows();
     if (auto w = std::find_if(list.begin(), list.end(),
-                              [path](VPMainWindow *window) { return window->CurrentFile() == path; });
+                              [path](const VPMainWindow *window) { return window->CurrentFile() == path; });
         w != list.end())
     {
         (*w)->activateWindow();

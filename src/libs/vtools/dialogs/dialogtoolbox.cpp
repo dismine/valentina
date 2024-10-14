@@ -609,7 +609,7 @@ auto EachPointLabelIsUnique(QListWidget *listWidget) -> bool
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-auto DialogWarningIcon(QWidget *w) -> QString
+auto DialogWarningIcon(const QWidget *w) -> QString
 {
     const QIcon icon = FromTheme(VThemeIcon::DialogWarning);
 

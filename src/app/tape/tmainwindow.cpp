@@ -423,7 +423,7 @@ auto TMainWindow::LoadFile(const QString &path) -> bool
     // Check if file already opened
     const QList<TMainWindow *> list = MApplication::VApp()->MainTapeWindows();
     if (auto w = std::find_if(list.begin(), list.end(),
-                              [path](TMainWindow *window) { return window->CurrentFile() == path; });
+                              [path](const TMainWindow *window) { return window->CurrentFile() == path; });
         w != list.end())
     {
         (*w)->activateWindow();
@@ -4084,7 +4084,7 @@ auto TMainWindow::LoadFromExistingFile(const QString &path) -> bool
     // Check if file already opened
     const QList<TMainWindow *> list = MApplication::VApp()->MainTapeWindows();
     if (auto w = std::find_if(list.begin(), list.end(),
-                              [path](TMainWindow *window) { return window->CurrentFile() == path; });
+                              [path](const TMainWindow *window) { return window->CurrentFile() == path; });
         w != list.end())
     {
         (*w)->activateWindow();
