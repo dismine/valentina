@@ -1025,10 +1025,10 @@ auto VPassmark::BuiltInSAPassmarkBaseLine(const VPiece &piece, const QLineF &mir
         return {};
     }
 
-    const auto edges = DetermineEdges(piece, mirrorLine);
+    const auto [firstEdge, secondEdge] = DetermineEdges(piece, mirrorLine);
 
-    QLineF adjustedEdge = edges.first;
-    adjustedEdge.setAngle(adjustedEdge.angle() + adjustedEdge.angleTo(edges.second) / 2.);
+    QLineF adjustedEdge = firstEdge;
+    adjustedEdge.setAngle(adjustedEdge.angle() + adjustedEdge.angleTo(secondEdge) / 2.);
     adjustedEdge.setLength(length);
 
     return {adjustedEdge};
