@@ -409,8 +409,7 @@ void DialogRotation::FXAngle()
 //---------------------------------------------------------------------------------------------------------------------
 void DialogRotation::SuffixChanged()
 {
-    auto *edit = qobject_cast<QLineEdit *>(sender());
-    if (edit)
+    if (const auto *edit = qobject_cast<QLineEdit *>(sender()); edit)
     {
         const QString suffix = edit->text();
         if (suffix.isEmpty())
@@ -449,8 +448,7 @@ void DialogRotation::SuffixChanged()
 //---------------------------------------------------------------------------------------------------------------------
 void DialogRotation::GroupNameChanged()
 {
-    auto *edit = qobject_cast<QLineEdit *>(sender());
-    if (edit)
+    if (const auto *edit = qobject_cast<QLineEdit *>(sender()); edit)
     {
         const QString name = edit->text();
         if (name.isEmpty())

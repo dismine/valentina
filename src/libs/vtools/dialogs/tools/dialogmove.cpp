@@ -506,8 +506,7 @@ void DialogMove::FXLength()
 //---------------------------------------------------------------------------------------------------------------------
 void DialogMove::SuffixChanged()
 {
-    auto *edit = qobject_cast<QLineEdit *>(sender());
-    if (edit)
+    if (const auto *edit = qobject_cast<QLineEdit *>(sender()); edit)
     {
         const QString suffix = edit->text();
         if (suffix.isEmpty())
@@ -546,8 +545,7 @@ void DialogMove::SuffixChanged()
 //---------------------------------------------------------------------------------------------------------------------
 void DialogMove::GroupNameChanged()
 {
-    auto *edit = qobject_cast<QLineEdit *>(sender());
-    if (edit)
+    if (const auto *edit = qobject_cast<QLineEdit *>(sender()); edit)
     {
         const QString name = edit->text();
         if (name.isEmpty())

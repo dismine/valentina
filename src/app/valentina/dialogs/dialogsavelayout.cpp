@@ -105,7 +105,7 @@ DialogSaveLayout::DialogSaveLayout(int count, Draw mode, const QString &fileName
         }
     }
 
-    for (auto &[first, second] : InitFormats())
+    for (const auto &[first, second] : InitFormats())
     {
         ui->comboBoxFormat->addItem(first, QVariant(static_cast<int>(second)));
     }

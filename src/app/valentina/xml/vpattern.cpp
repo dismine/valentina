@@ -2992,7 +2992,7 @@ void VPattern::ParseToolSplinePath(VMainGraphicsScene *scene, const QDomElement 
 
         if (spl != nullptr)
         {
-            auto *window = qobject_cast<VAbstractMainWindow *>(VAbstractValApplication::VApp()->getMainWindow());
+            const auto *window = qobject_cast<VAbstractMainWindow *>(VAbstractValApplication::VApp()->getMainWindow());
             SCASSERT(window != nullptr)
             connect(spl, &VToolSplinePath::ToolTip, window, &VAbstractMainWindow::ShowToolTip);
         }

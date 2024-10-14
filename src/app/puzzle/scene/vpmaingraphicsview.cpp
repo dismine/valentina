@@ -326,7 +326,7 @@ void VPMainGraphicsView::keyReleaseEvent(QKeyEvent *event)
 //---------------------------------------------------------------------------------------------------------------------
 void VPMainGraphicsView::contextMenuEvent(QContextMenuEvent *event)
 {
-    if (QGraphicsItem *item = itemAt(event->pos()); item != nullptr && item->type() == VPGraphicsPiece::Type)
+    if (const QGraphicsItem *item = itemAt(event->pos()); item != nullptr && item->type() == VPGraphicsPiece::Type)
     {
         VMainGraphicsView::contextMenuEvent(event);
         return;

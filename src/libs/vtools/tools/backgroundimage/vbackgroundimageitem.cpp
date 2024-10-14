@@ -445,7 +445,7 @@ void VBackgroundImageItem::contextMenuEvent(QGraphicsSceneContextMenuEvent *even
     QAction *actionReset = menu.addAction(tr("Reset transformation"));
     actionReset->setEnabled(not m_image.Hold());
 
-    QAction *actionRemove = menu.addAction(FromTheme(VThemeIcon::EditDelete), tr("Delete"));
+    const QAction *actionRemove = menu.addAction(FromTheme(VThemeIcon::EditDelete), tr("Delete"));
 
     QAction *selectedAction = menu.exec(event->screenPos());
     if (selectedAction == holdOption)

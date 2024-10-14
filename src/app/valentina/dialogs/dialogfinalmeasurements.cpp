@@ -390,7 +390,7 @@ void DialogFinalMeasurements::SaveFormula()
     // Replace line return character with spaces for calc if exist
     QString const text = ui->plainTextEditFormula->toPlainText();
 
-    if (QTableWidgetItem *formulaField = ui->tableWidget->item(row, 2); formulaField->text() == text)
+    if (const QTableWidgetItem *formulaField = ui->tableWidget->item(row, 2); formulaField->text() == text)
     {
         QTableWidgetItem *result = ui->tableWidget->item(row, 1);
         // Show unit in dialog lable (cm, mm or inch)

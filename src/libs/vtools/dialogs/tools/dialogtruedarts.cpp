@@ -365,8 +365,8 @@ void DialogTrueDarts::NameChanged(QLabel *labelEditNamePoint, const QString &poi
 {
     SCASSERT(labelEditNamePoint != nullptr)
     SCASSERT(secondPointName != nullptr)
-    auto *edit = qobject_cast<QLineEdit *>(sender());
-    if (edit)
+
+    if (auto *edit = qobject_cast<QLineEdit *>(sender()); edit)
     {
         CheckName(edit, labelEditNamePoint, pointD1Name, pointD2Name, secondPointName, flagName);
     }

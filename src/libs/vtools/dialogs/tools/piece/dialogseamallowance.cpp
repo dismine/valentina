@@ -1040,8 +1040,7 @@ void DialogSeamAllowance::SetPatternDoc(VAbstractPattern *doc)
 //---------------------------------------------------------------------------------------------------------------------
 void DialogSeamAllowance::NameDetailChanged()
 {
-    auto *edit = qobject_cast<QLineEdit *>(sender());
-    if (edit)
+    if (const auto *edit = qobject_cast<QLineEdit *>(sender());edit)
     {
         if (edit->text().isEmpty())
         {
@@ -1060,8 +1059,7 @@ void DialogSeamAllowance::NameDetailChanged()
 //---------------------------------------------------------------------------------------------------------------------
 void DialogSeamAllowance::DetailUUIDChanged()
 {
-    auto *edit = qobject_cast<QLineEdit *>(sender());
-    if (edit)
+    if (const auto *edit = qobject_cast<QLineEdit *>(sender());edit)
     {
         static QRegularExpression const re("^$|^{[0-9a-fA-F]{8}\\-[0-9a-fA-F]{4}\\-[0-9a-fA-F]{4}\\-[0-9a-fA-F]{4}\\-"
                                            "[0-9a-fA-F]{12}}$");
@@ -5565,7 +5563,7 @@ void DialogSeamAllowance::SetOptionControls()
         return;
     }
 
-    QListWidgetItem *rowItem = uiTabPaths->listWidgetMainPath->item(row);
+    const QListWidgetItem *rowItem = uiTabPaths->listWidgetMainPath->item(row);
     SCASSERT(rowItem != nullptr)
     auto rowNode = qvariant_cast<VPieceNode>(rowItem->data(Qt::UserRole));
 

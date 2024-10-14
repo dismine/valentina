@@ -616,7 +616,7 @@ auto DialogWarningIcon(const QWidget *w) -> QString
     qreal scaleFactor = 1;
     if (w != nullptr)
     {
-        if (QScreen *wScreen = w->screen())
+        if (const QScreen *wScreen = w->screen())
         {
             scaleFactor = wScreen->devicePixelRatio();
         }

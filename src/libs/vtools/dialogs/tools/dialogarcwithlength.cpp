@@ -358,7 +358,7 @@ void DialogArcWithLength::ChosenObject(quint32 id, const SceneObject &type)
     {
         if (vis != nullptr)
         {
-            auto *window = qobject_cast<VAbstractMainWindow *>(VAbstractValApplication::VApp()->getMainWindow());
+            const auto *window = qobject_cast<VAbstractMainWindow *>(VAbstractValApplication::VApp()->getMainWindow());
             SCASSERT(window != nullptr)
             connect(vis.data(), &Visualization::ToolTip, window, &VAbstractMainWindow::ShowToolTip);
 

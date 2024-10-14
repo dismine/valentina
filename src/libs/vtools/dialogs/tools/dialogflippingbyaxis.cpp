@@ -313,8 +313,7 @@ void DialogFlippingByAxis::SelectedObject(bool selected, quint32 object, quint32
 //---------------------------------------------------------------------------------------------------------------------
 void DialogFlippingByAxis::SuffixChanged()
 {
-    auto *edit = qobject_cast<QLineEdit *>(sender());
-    if (edit)
+    if (const auto *edit = qobject_cast<QLineEdit *>(sender()); edit)
     {
         const QString suffix = edit->text();
         if (suffix.isEmpty())
@@ -353,8 +352,7 @@ void DialogFlippingByAxis::SuffixChanged()
 //---------------------------------------------------------------------------------------------------------------------
 void DialogFlippingByAxis::GroupNameChanged()
 {
-    auto *edit = qobject_cast<QLineEdit *>(sender());
-    if (edit)
+    if (const auto *edit = qobject_cast<QLineEdit *>(sender()); edit)
     {
         const QString name = edit->text();
         if (name.isEmpty())

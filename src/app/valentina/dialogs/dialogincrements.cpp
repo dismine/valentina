@@ -205,7 +205,7 @@ DialogIncrements::DialogIncrements(VContainer *data, VPattern *doc, QWidget *par
         UpdateShortcuts();
     }
 
-    QPushButton *bClose = ui->buttonBox->button(QDialogButtonBox::Close);
+    const QPushButton *bClose = ui->buttonBox->button(QDialogButtonBox::Close);
     SCASSERT(bClose != nullptr)
     connect(bClose, &QPushButton::clicked, this, &DialogIncrements::accept);
 }
@@ -1358,7 +1358,7 @@ void DialogIncrements::RefreshPattern()
     if (m_hasChanges)
     {
         QVector<VFormulaField> expressions = m_doc->ListExpressions();
-        for (auto &[first, second] : m_renameList)
+        for (const auto &[first, second] : m_renameList)
         {
             m_doc->ReplaceNameInFormula(expressions, first, second);
         }
@@ -1788,7 +1788,7 @@ void DialogIncrements::SaveIncrFormula()
     QString const text = textEdit->toPlainText();
     QSharedPointer<VIncrement> const incr = m_data->GetVariable<VIncrement>(nameField->text());
 
-    if (QTableWidgetItem *formulaField = table->item(row, 2); formulaField->text() == text)
+    if (const QTableWidgetItem *formulaField = table->item(row, 2); formulaField->text() == text)
     {
         QTableWidgetItem *result = table->item(row, 1);
         if (incr->IsSpecialUnits())

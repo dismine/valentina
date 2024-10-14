@@ -831,7 +831,7 @@ void MainWindow::SetToolButton(bool checked, Tool t, const QString &cursor, cons
         emit EnableItemMove(false);
         m_currentTool = m_lastUsedTool = t;
 
-        if (VValentinaSettings *settings = VAbstractValApplication::VApp()->ValentinaSettings();
+        if (const VValentinaSettings *settings = VAbstractValApplication::VApp()->ValentinaSettings();
             settings->GetPointerMode() == VToolPointerMode::ToolIcon)
         {
             const auto resource = QStringLiteral("toolcursor");

@@ -422,7 +422,7 @@ void VPGraphicsPieceControls::mousePressEvent(QGraphicsSceneMouseEvent *event)
         }
         else
         {
-            if (QGraphicsView *view = ItemView(); view != nullptr)
+            if (const QGraphicsView *view = ItemView(); view != nullptr)
             {
                 setCursor(view->viewport()->cursor()); // clazy:exclude=clazy-qt6-deprecated-api-fixes
             }
@@ -521,7 +521,7 @@ void VPGraphicsPieceControls::mouseReleaseEvent(QGraphicsSceneMouseEvent *event)
         }
         else
         {
-            if (QGraphicsView *view = ItemView(); view != nullptr)
+            if (const QGraphicsView *view = ItemView(); view != nullptr)
             {
                 setCursor(view->viewport()->cursor()); // clazy:exclude=clazy-qt6-deprecated-api-fixes
             }
@@ -762,7 +762,7 @@ auto VPGraphicsPieceControls::PiecesBoundingRect(const QList<VPPiecePtr> &select
 //---------------------------------------------------------------------------------------------------------------------
 auto VPGraphicsPieceControls::ItemView() -> QGraphicsView *
 {
-    if (QGraphicsScene *scene = this->scene(); scene != nullptr)
+    if (const QGraphicsScene *scene = this->scene(); scene != nullptr)
     {
         if (QList<QGraphicsView *> const views = scene->views(); not views.isEmpty())
         {
@@ -784,7 +784,7 @@ void VPGraphicsPieceControls::UpdateCursor(VPHandleCorner corner)
     }
     else
     {
-        if (QGraphicsView *view = ItemView(); view != nullptr)
+        if (const QGraphicsView *view = ItemView(); view != nullptr)
         {
             setCursor(view->viewport()->cursor()); // clazy:exclude=clazy-qt6-deprecated-api-fixes
         }

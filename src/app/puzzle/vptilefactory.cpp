@@ -72,7 +72,7 @@ auto GetWatermarkScaledImageInfo(const VWatermarkData &watermarkData, const QStr
                                  qreal yScale) -> WatermarkScaledImageInfo
 {
     // Check if the value is already cached
-    WatermarkScaledImageInfo *info =
+    const WatermarkScaledImageInfo *info =
         watermarkSizeCache->object(GenerateWatermarkScaledSizeCacheKey(watermarkPath, xScale, yScale));
     if (info != nullptr)
     {

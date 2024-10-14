@@ -460,7 +460,7 @@ auto ExtractUniquePieceNames(const VPieceLabelInfo &info, const QSet<QString> &u
 //---------------------------------------------------------------------------------------------------------------------
 void PopulatePieceData(VContainer &completeData, const QSet<QString> &uniquePieceNames)
 {
-    QHash<quint32, VPiece> *pieces = completeData.DataPieces();
+    const QHash<quint32, VPiece> *pieces = completeData.DataPieces();
     Unit const patternUnits = VAbstractValApplication::VApp()->patternUnits();
     QSet<QString> processedNames;
 

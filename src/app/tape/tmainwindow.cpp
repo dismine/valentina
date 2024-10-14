@@ -2253,7 +2253,7 @@ void TMainWindow::SaveMValue()
 
     QString const text = ui->plainTextEditFormula->toPlainText();
 
-    if (QTableWidgetItem *formulaField = ui->tableWidget->item(row, ColumnFormula); formulaField->text() == text)
+    if (const QTableWidgetItem *formulaField = ui->tableWidget->item(row, ColumnFormula); formulaField->text() == text)
     {
         QTableWidgetItem *result = ui->tableWidget->item(row, ColumnCalcValue);
         const QString postfix = UnitsToStr(m_mUnit); // Show unit in dialog lable (cm, mm or inch)

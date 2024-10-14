@@ -218,7 +218,7 @@ void DialogInsertNode::ShowContextMenu(const QPoint &pos)
     QListWidgetItem *rowItem = ui->listWidget->item(row);
     SCASSERT(rowItem != nullptr)
 
-    QAction *actionDelete = menu->addAction(FromTheme(VThemeIcon::EditDelete), tr("Delete"));
+    const QAction *actionDelete = menu->addAction(FromTheme(VThemeIcon::EditDelete), tr("Delete"));
 
     QAction *selectedAction = menu->exec(ui->listWidget->viewport()->mapToGlobal(pos));
     if (selectedAction == actionDelete)
