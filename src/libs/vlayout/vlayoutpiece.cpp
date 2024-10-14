@@ -702,15 +702,13 @@ auto VLayoutPiece::Create(const VPiece &piece, vidtype id, const VContainer *pat
         det.SetPieceText(pDoc, piece.GetName(), data, settings->GetLabelFont(), settings->GetLabelSVGFont(), pattern);
     }
 
-    const VPatternLabelData &geom = piece.GetPatternLabelData();
-    if (geom.IsEnabled())
+    if (const VPatternLabelData &geom = piece.GetPatternLabelData(); geom.IsEnabled())
     {
         VAbstractPattern *pDoc = VAbstractValApplication::VApp()->getCurrentDocument();
         det.SetPatternInfo(pDoc, geom, settings->GetLabelFont(), settings->GetLabelSVGFont(), pattern);
     }
 
-    const VGrainlineData &grainlineGeom = piece.GetGrainlineGeometry();
-    if (grainlineGeom.IsEnabled())
+    if (const VGrainlineData &grainlineGeom = piece.GetGrainlineGeometry(); grainlineGeom.IsEnabled())
     {
         det.SetGrainline(grainlineGeom, pattern);
     }

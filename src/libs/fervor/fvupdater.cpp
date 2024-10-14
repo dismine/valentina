@@ -537,8 +537,8 @@ auto FvUpdater::VersionIsIgnored(const QString &version) -> bool
         return true;
     }
 
-    const unsigned lastSkippedVersion = VAbstractApplication::VApp()->Settings()->GetLatestSkippedVersion();
-    if (lastSkippedVersion != 0x0 && decVersion == lastSkippedVersion)
+    if (const unsigned lastSkippedVersion = VAbstractApplication::VApp()->Settings()->GetLatestSkippedVersion();
+        lastSkippedVersion != 0x0 && decVersion == lastSkippedVersion)
     {
         // Implicitly skipped version - skip
         return true;

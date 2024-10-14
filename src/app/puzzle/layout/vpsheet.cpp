@@ -172,11 +172,10 @@ void ValidatePiecesGapePosition(const VPiecesValidationData &data, QHash<QString
                 continue;
             }
 
-            QRectF const path2Rect =
-                VLayoutPiece::BoundingRect(p.m_externalContourPoints)
-                    .adjusted(-data.m_pieceGap, -data.m_pieceGap, data.m_pieceGap, data.m_pieceGap);
-
-            if (!path1Rect.intersects(path2Rect) && !path1Rect.contains(path2Rect) && !path2Rect.contains(path1Rect))
+            if (QRectF const path2Rect =
+                    VLayoutPiece::BoundingRect(p.m_externalContourPoints)
+                        .adjusted(-data.m_pieceGap, -data.m_pieceGap, data.m_pieceGap, data.m_pieceGap);
+                !path1Rect.intersects(path2Rect) && !path1Rect.contains(path2Rect) && !path2Rect.contains(path1Rect))
             {
                 continue;
             }

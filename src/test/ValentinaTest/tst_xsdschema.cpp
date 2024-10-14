@@ -69,10 +69,10 @@ void ValidateSchema(const QString &schema)
     const char *schemaData = data.constData();
     const auto schemaSize = static_cast<size_t>(data.size());
 
-    QScopedPointer<XERCES_CPP_NAMESPACE::InputSource> const grammarSource(new XERCES_CPP_NAMESPACE::MemBufInputSource(
-        reinterpret_cast<const XMLByte *>(schemaData), schemaSize, "schema"));
-
-    if (domParser.loadGrammar(*grammarSource, XERCES_CPP_NAMESPACE::Grammar::SchemaGrammarType, true) == nullptr)
+    if (QScopedPointer<XERCES_CPP_NAMESPACE::InputSource> const grammarSource(
+            new XERCES_CPP_NAMESPACE::MemBufInputSource(reinterpret_cast<const XMLByte *>(schemaData), schemaSize,
+                                                        "schema"));
+        domParser.loadGrammar(*grammarSource, XERCES_CPP_NAMESPACE::Grammar::SchemaGrammarType, true) == nullptr)
     {
         QFAIL(qUtf8Printable(QStringLiteral("%1 Could not load schema file '%2'.")
                                  .arg(parserErrorHandler.StatusMessage(), fileSchema.fileName())));

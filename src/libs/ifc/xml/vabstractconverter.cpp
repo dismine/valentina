@@ -201,10 +201,10 @@ void VAbstractConverter::ValidateXML(const QString &schema) const
     const char *schemaData = data.constData();
     const auto schemaSize = static_cast<size_t>(data.size());
 
-    QScopedPointer<XERCES_CPP_NAMESPACE::InputSource> const grammarSource(new XERCES_CPP_NAMESPACE::MemBufInputSource(
-        reinterpret_cast<const XMLByte *>(schemaData), schemaSize, "schema"));
-
-    if (domParser.loadGrammar(*grammarSource, XERCES_CPP_NAMESPACE::Grammar::SchemaGrammarType, true) == nullptr)
+    if (QScopedPointer<XERCES_CPP_NAMESPACE::InputSource> const grammarSource(
+            new XERCES_CPP_NAMESPACE::MemBufInputSource(reinterpret_cast<const XMLByte *>(schemaData), schemaSize,
+                                                        "schema"));
+        domParser.loadGrammar(*grammarSource, XERCES_CPP_NAMESPACE::Grammar::SchemaGrammarType, true) == nullptr)
     {
         VException e(parserErrorHandler.StatusMessage());
         e.AddMoreInformation(tr("Could not load schema file '%1'.").arg(fileSchema.fileName()));
