@@ -122,7 +122,7 @@ appimage_task_template: &APPIMAGE_TASK_TEMPLATE
     - bash -c "$PACKAGE_MANAGER_INSTALL qt515base qt515svg qt515tools qt515xmlpatterns qt515translations qt515doc qt515imageformats poppler-utils git xvfb ccache build-essential libgl1-mesa-dev libicu-dev python3-pip cmake"
     - git fetch --tags
     - python3 --version
-    - pip3 install --user --upgrade pip dropbox py7zr 'urllib3<2.0' conan==1.63.0 requests
+    - pip3 install --user --upgrade pip 'packaging>=22.0' dropbox py7zr 'urllib3<2.0' conan==1.65.0 requests
   build_script:
     - uname -a
     - mkdir -pm 0700 $XDG_RUNTIME_DIR
@@ -333,7 +333,7 @@ macos_task_template: &MACOS_TASK_TEMPLATE
     - export PATH="${HOME}/.local/bin:`python3 -m site --user-base`/bin:$PATH"
     - echo $PATH
     - python3 --version
-    - pip3 install --break-system-packages --user --upgrade pip dropbox py7zr 'urllib3<2.0' conan==1.63.0 requests setuptools
+    - pip3 install --break-system-packages --user --upgrade pip dropbox py7zr 'urllib3<2.0' conan==1.65.0 requests setuptools
     - ccache --set-config sloppiness=pch_defines,time_macros max_size="$CCACHE_SIZE"
     - qmake --version
     - which qmake
