@@ -142,8 +142,8 @@ private:
     void HideFoldLineLabel();
     void PrepareFoldLineLabel(const VFoldLine &fLine, VCommonSettings *settings);
     void AddFoldLinePaths(const VPPiecePtr &piece, const QVector<QPainterPath> &shape, bool singleLineFont);
-    void DrawFoldLineMark(QPainter *painter);
-    void DrawFoldLineLabel(QPainter *painter, const VPPiecePtr &piece, bool singleLineFont);
+    void DrawFoldLineMark(QPainter *painter) const;
+    void DrawFoldLineLabel(QPainter *painter, const VPPiecePtr &piece, bool singleLineFont) const;
 
     void GroupMove(const QPointF &pos);
 

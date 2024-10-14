@@ -1752,7 +1752,7 @@ auto VCommonSettings::GetCrashEmail() const -> QString
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VCommonSettings::SetCrashEmail(const QString &value)
+void VCommonSettings::SetCrashEmail(const QString &value) const
 {
     QSettings settings(this->format(), this->scope(), this->organizationName(), *commonIniFilename);
     settings.setValue(*settingsConfigurationCrashEmail, value);
@@ -1767,7 +1767,7 @@ auto VCommonSettings::IsSendCrashReport() const -> bool
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VCommonSettings::SeSendCrashReport(bool value)
+void VCommonSettings::SeSendCrashReport(bool value) const
 {
     QSettings settings(this->format(), this->scope(), this->organizationName(), *commonIniFilename);
     settings.setValue(*settingsConfigurationSendCrashReport, value);
@@ -1782,7 +1782,7 @@ auto VCommonSettings::IsAskSendCrashReport() const -> bool
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VCommonSettings::SetAskSendCrashReport(bool value)
+void VCommonSettings::SetAskSendCrashReport(bool value) const
 {
     QSettings settings(this->format(), this->scope(), this->organizationName(), *commonIniFilename);
     settings.setValue(*settingsConfigurationAskSendCrashReport, value);

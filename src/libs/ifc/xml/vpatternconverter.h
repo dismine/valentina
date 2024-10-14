@@ -155,9 +155,9 @@ private:
 
     void ConvertPathAttributesToV0_9_2();
 
-    void ConvertGrainlineToV0_9_6();
+    void ConvertGrainlineToV0_9_6() const;
 
-    void ConvertMirrorLineToV0_9_7();
+    void ConvertMirrorLineToV0_9_7() const;
 };
 
 //---------------------------------------------------------------------------------------------------------------------

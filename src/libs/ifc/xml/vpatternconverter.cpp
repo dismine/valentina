@@ -2237,7 +2237,7 @@ void VPatternConverter::ConvertPathAttributesToV0_9_2()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VPatternConverter::ConvertGrainlineToV0_9_6()
+void VPatternConverter::ConvertGrainlineToV0_9_6() const
 {
     // TODO. Delete if minimal supported version is 0.9.6
     Q_STATIC_ASSERT_X(VPatternConverter::PatternMinVer < FormatVersion(0, 9, 6), "Time to refactor the code.");
@@ -2261,7 +2261,7 @@ void VPatternConverter::ConvertGrainlineToV0_9_6()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VPatternConverter::ConvertMirrorLineToV0_9_7()
+void VPatternConverter::ConvertMirrorLineToV0_9_7() const
 {
     // TODO. Delete if minimal supported version is 0.9.7
     Q_STATIC_ASSERT_X(VPatternConverter::PatternMinVer < FormatVersion(0, 9, 7), "Time to refactor the code.");

@@ -1025,7 +1025,7 @@ void VPGraphicsPiece::AddFoldLinePaths(const VPPiecePtr &piece, const QVector<QP
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VPGraphicsPiece::DrawFoldLineMark(QPainter *painter)
+void VPGraphicsPiece::DrawFoldLineMark(QPainter *painter) const
 {
     painter->save();
     painter->setBrush(Qt::SolidPattern);
@@ -1034,7 +1034,7 @@ void VPGraphicsPiece::DrawFoldLineMark(QPainter *painter)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VPGraphicsPiece::DrawFoldLineLabel(QPainter *painter, const VPPiecePtr &piece, bool singleLineFont)
+void VPGraphicsPiece::DrawFoldLineLabel(QPainter *painter, const VPPiecePtr &piece, bool singleLineFont) const
 {
     const qreal penWidth = VPApplication::VApp()->PuzzleSettings()->GetLayoutLineWidth();
 

@@ -350,13 +350,13 @@ public:
     void SetActionShortcuts(const QString &name, const QStringList &shortcuts);
 
     auto GetCrashEmail() const -> QString;
-    void SetCrashEmail(const QString &value);
+    void SetCrashEmail(const QString &value) const;
 
     auto IsSendCrashReport() const -> bool;
-    void SeSendCrashReport(bool value);
+    void SeSendCrashReport(bool value) const;
 
     auto IsAskSendCrashReport() const -> bool;
-    void SetAskSendCrashReport(bool value);
+    void SetAskSendCrashReport(bool value) const;
 
 signals:
     void SVGFontsPathChanged(const QString &oldPath, const QString &newPath);
