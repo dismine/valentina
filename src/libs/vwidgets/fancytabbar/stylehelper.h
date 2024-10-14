@@ -45,8 +45,6 @@ void qt_blurImage(QPainter *p, QImage &blurImage, qreal radius, bool quality, bo
 class StyleHelper
 {
 public:
-    static const unsigned int DEFAULT_BASE_COLOR = 0x666666;
-
     static auto sidebarFontSize() -> qreal;
     // This is our color table, all colors derive from baseColor
     static auto baseColor(bool lightColored = false) -> QColor;
@@ -59,6 +57,10 @@ public:
     static void drawIconWithShadow(const QIcon &icon, const QRect &rect, QPainter *p, QIcon::Mode iconMode,
                                    int dipRadius = 3, const QColor &color = QColor(0, 0, 0, 130),
                                    const QPoint &dipOffset = QPoint(1, -2));
+
+private:
+    static QColor m_baseColor;          // NOLINT(cppcoreguidelines-avoid-non-const-global-variables)
+    static QColor m_requestedBaseColor; // NOLINT(cppcoreguidelines-avoid-non-const-global-variables)
 };
 
 #endif // STYLEHELPER_H

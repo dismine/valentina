@@ -39,11 +39,8 @@
 #include <QWidget>
 #include <QtMath>
 
-namespace
-{
-QColor m_baseColor;
-QColor m_requestedBaseColor;
-} // namespace
+QColor StyleHelper::m_baseColor;          // NOLINT(cppcoreguidelines-avoid-non-const-global-variables)
+QColor StyleHelper::m_requestedBaseColor; // NOLINT(cppcoreguidelines-avoid-non-const-global-variables)
 
 //---------------------------------------------------------------------------------------------------------------------
 auto StyleHelper::sidebarFontSize() -> qreal
@@ -143,13 +140,14 @@ void StyleHelper::drawIconWithShadow(const QIcon &icon, const QRect &rect, QPain
             QImage im = px.toImage().convertToFormat(QImage::Format_ARGB32);
             for (int y = 0; y < im.height(); ++y)
             {
+                // NOLINTNEXTLINE(cppcoreguidelines-pro-type-reinterpret-cast)
                 auto *scanLine = reinterpret_cast<QRgb *>(im.scanLine(y));
                 for (int x = 0; x < im.width(); ++x)
                 {
                     QRgb const pixel = *scanLine;
                     auto const intensity = static_cast<char>(qGray(pixel));
                     *scanLine = qRgba(intensity, intensity, intensity, qAlpha(pixel));
-                    ++scanLine;
+                    ++scanLine; // NOLINT(cppcoreguidelines-pro-bounds-pointer-arithmetic)
                 }
             }
             px = QPixmap::fromImage(im);
