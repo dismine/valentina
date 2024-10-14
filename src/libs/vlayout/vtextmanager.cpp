@@ -417,7 +417,7 @@ void AddMeasurementTokensToUniqueNames(const VFinalMeasurement &m, QSet<QString>
         // Skip formula errors
     }
 
-    QMapIterator<vsizetype, QString> i(tokens);
+    QMapIterator i(tokens);
     while (i.hasNext())
     {
         i.next();
