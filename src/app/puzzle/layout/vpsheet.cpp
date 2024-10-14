@@ -823,17 +823,17 @@ void VPSheet::CheckPiecesPositionValidity() const
 
         for (const auto &piece : pieces)
         {
-            VSheetPiece data;
-            data.m_showFullPiece = piece->IsShowFullPiece();
-            data.m_id = piece->GetUniqueID();
-            data.m_seamMirrorLine = piece->GetMappedSeamMirrorLine();
-            data.m_seamAllowanceMirrorLine = piece->GetMappedSeamAllowanceMirrorLine();
+            VSheetPiece pieceData;
+            pieceData.m_showFullPiece = piece->IsShowFullPiece();
+            pieceData.m_id = piece->GetUniqueID();
+            pieceData.m_seamMirrorLine = piece->GetMappedSeamMirrorLine();
+            pieceData.m_seamAllowanceMirrorLine = piece->GetMappedSeamAllowanceMirrorLine();
 
             QVector<QPointF> points;
             CastTo(piece->GetMappedExternalContourPoints(), points);
-            data.m_externalContourPoints = points;
+            pieceData.m_externalContourPoints = points;
 
-            sheetPieces.append(data);
+            sheetPieces.append(pieceData);
         }
 
         data.m_pieces = sheetPieces;

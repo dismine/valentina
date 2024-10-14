@@ -1397,10 +1397,11 @@ auto VAbstractPiece::EkvPoint(QVector<VRawSAPoint> points, const VSAPoint &p1Lin
 
                 if ((result1 < 0 || qFuzzyIsNull(result1)) && (result2 < 0 || qFuzzyIsNull(result2)))
                 { // Dart case. A bisector watches outside.
-                    QLineF const edge1(p1Line1, p2Line1);
-                    QLineF const edge2(p1Line2, p2Line2);
+                    QLineF const bisectorEdge1(p1Line1, p2Line1);
+                    QLineF const bisectorEdge2(p1Line2, p2Line2);
 
-                    if (qAbs(edge1.length() - edge2.length()) <= qMax(edge1.length(), edge2.length()) * 0.2)
+                    if (qAbs(bisectorEdge1.length() - bisectorEdge2.length()) <=
+                        qMax(bisectorEdge1.length(), bisectorEdge2.length()) * 0.2)
                     {
                         // Classic dart must be symmetrical.
                         // In some cases a point still valid, but ignore if going outside of an equdistant.

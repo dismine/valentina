@@ -420,23 +420,7 @@ void VPMainGraphicsView::RotatePiecesByAngle(qreal angle)
 
     VPTransformationOrigon const origin = sheet->TransformationOrigin();
 
-    auto PreparePieces = [this]()
-    {
-        QList<VPPiecePtr> pieces;
-        if (VPLayoutPtr const layout = m_layout.toStrongRef(); not layout.isNull())
-        {
-            VPSheetPtr const sheet = layout->GetFocusedSheet();
-            if (not sheet.isNull())
-            {
-                pieces = sheet->GetSelectedPieces();
-            }
-        }
-
-        return pieces;
-    };
-
-    QList<VPPiecePtr> const pieces = PreparePieces();
-
+    QList<VPPiecePtr> const pieces = sheet->GetSelectedPieces();
     if (pieces.size() == 1)
     {
         layout->UndoStack()->push(new VPUndoPieceRotate(pieces.constFirst(), origin, angle, m_allowChangeMerge));
@@ -495,21 +479,7 @@ void VPMainGraphicsView::TranslatePiecesOn(qreal dx, qreal dy)
         return;
     }
 
-    auto PreparePieces = [this]()
-    {
-        QList<VPPiecePtr> pieces;
-        if (VPLayoutPtr const layout = m_layout.toStrongRef(); not layout.isNull())
-        {
-            if (VPSheetPtr const sheet = layout->GetFocusedSheet(); not sheet.isNull())
-            {
-                pieces = sheet->GetSelectedPieces();
-            }
-        }
-
-        return pieces;
-    };
-
-    if (QList<VPPiecePtr> const pieces = PreparePieces(); pieces.size() == 1)
+    if (QList<VPPiecePtr> const pieces = sheet->GetSelectedPieces(); pieces.size() == 1)
     {
         const VPPiecePtr &p = pieces.constFirst();
         auto *command = new VPUndoPieceMove(p, dx, dy, m_allowChangeMerge);
@@ -689,18 +659,7 @@ void VPMainGraphicsView::MovePiece(QKeyEvent *event)
         if (const QList<VPGraphicsPiece *> &graphicsPieces = sheet->SceneData()->GraphicsPieces();
             m_hasStickyPosition && not graphicsPieces.isEmpty() && layout->LayoutSettings().IsStickyEdges())
         {
-            auto PreparePieces = [layout]()
-            {
-                QList<VPPiecePtr> pieces;
-                if (VPSheetPtr const sheet = layout->GetFocusedSheet(); not sheet.isNull())
-                {
-                    pieces = sheet->GetSelectedPieces();
-                }
-
-                return pieces;
-            };
-
-            if (QList<VPPiecePtr> const pieces = PreparePieces(); pieces.size() == 1)
+            if (QList<VPPiecePtr> const pieces = sheet->GetSelectedPieces(); pieces.size() == 1)
             {
                 const VPPiecePtr &p = pieces.constFirst();
 

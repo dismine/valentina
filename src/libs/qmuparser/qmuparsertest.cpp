@@ -1279,7 +1279,7 @@ auto QmuParserTester::EqnTest(const QString &a_str, double a_fRes, bool a_fPass)
     try
     {
         std::unique_ptr<QmuParser> p1;
-        QmuParser p2, p3; // three parser objects
+        // three parser objects
         // they will be used for testing copy and assihnment operators
         // p1 is a pointer since i'm going to delete it in order to test if
         // parsers after copy construction still refer to members of it.

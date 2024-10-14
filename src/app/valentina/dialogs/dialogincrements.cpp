@@ -1150,9 +1150,9 @@ void DialogIncrements::InitIncrementsSearchHistory()
                     auto *action = qobject_cast<QAction *>(sender());
                     if (action != nullptr)
                     {
-                        QString const term = action->data().toString();
-                        ui->lineEditFind->setText(term);
-                        m_search->Find(term);
+                        QString const termText = action->data().toString();
+                        ui->lineEditFind->setText(termText);
+                        m_search->Find(termText);
                         ui->lineEditFind->setFocus();
                     }
                 });
@@ -1183,9 +1183,9 @@ void DialogIncrements::InitPreviewCalculationsSearchHistory()
                     auto *action = qobject_cast<QAction *>(sender());
                     if (action != nullptr)
                     {
-                        QString const term = action->data().toString();
-                        ui->lineEditFindPC->setText(term);
-                        m_searchPC->Find(term);
+                        QString const termText = action->data().toString();
+                        ui->lineEditFindPC->setText(termText);
+                        m_searchPC->Find(termText);
                         ui->lineEditFindPC->setFocus();
                     }
                 });
