@@ -112,6 +112,7 @@ AppDir:
       QT_QPA_PLATFORMTHEME: xdgdesktopportal
       GDK_PIXBUF_MODULEDIR: $APPDIR/usr/lib/x86_64-linux-gnu/gdk-pixbuf-2.0/2.10.0/loaders
       GDK_PIXBUF_MODULE_FILE: $APPDIR/usr/lib/x86_64-linux-gnu/gdk-pixbuf-2.0/2.10.0/loaders.cache
+      GDK_BACKEND: x11
   test:
     fedora-30:
       image: appimagecrafters/tests-env:fedora-30
