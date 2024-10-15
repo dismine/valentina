@@ -95,7 +95,11 @@ DialogExportToCSV::DialogExportToCSV(QWidget *parent)
     ui->groupBoxPreview->setVisible(false);
 
     connect(ui->comboBoxCodec, QOverload<int>::of(&QComboBox::currentIndexChanged), this, [this]() { ShowPreview(); });
+#if QT_VERSION >= QT_VERSION_CHECK(6, 7, 0)
+    connect(ui->checkBoxWithHeader, &QCheckBox::checkStateChanged, this, [this]() { ShowPreview(); });
+#else
     connect(ui->checkBoxWithHeader, &QCheckBox::stateChanged, this, [this]() { ShowPreview(); });
+#endif
     connect(ui->buttonGroup, &QButtonGroup::idClicked, this, [this]() { ShowPreview(); });
 }
 

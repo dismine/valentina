@@ -579,7 +579,11 @@ void DialogEditWrongFormula::InitVariables()
     connect(ui->radioButtonFunctions, &QRadioButton::clicked, this, &DialogEditWrongFormula::Functions);
     connect(ui->radioButtonFunctions, &QRadioButton::clicked, this, ClearFilterFormulaInputs);
 
+#if QT_VERSION >= QT_VERSION_CHECK(6, 7, 0)
+    connect(ui->checkBoxHideEmpty, &QCheckBox::checkStateChanged, this, &DialogEditWrongFormula::Measurements);
+#else
     connect(ui->checkBoxHideEmpty, &QCheckBox::stateChanged, this, &DialogEditWrongFormula::Measurements);
+#endif
 }
 
 //---------------------------------------------------------------------------------------------------------------------

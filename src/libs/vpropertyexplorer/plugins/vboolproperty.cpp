@@ -69,7 +69,12 @@ auto VPE::VBoolProperty::createEditor(QWidget *parent, const QStyleOptionViewIte
     Q_UNUSED(delegate)
     auto* tmpEditor = new QCheckBox(parent);
     tmpEditor->setCheckState(d_ptr->VariantValue.toBool() ? Qt::Checked : Qt::Unchecked);
+
+#if QT_VERSION >= QT_VERSION_CHECK(6, 7, 0)
+    connect(tmpEditor, &QCheckBox::checkStateChanged, this, &VBoolProperty::StateChanged);
+#else
     connect(tmpEditor, &QCheckBox::stateChanged, this, &VBoolProperty::StateChanged);
+#endif
 
     VProperty::d_ptr->editor = tmpEditor;
     return VProperty::d_ptr->editor;

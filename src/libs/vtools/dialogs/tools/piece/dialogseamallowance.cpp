@@ -3945,7 +3945,11 @@ void DialogSeamAllowance::InitPieceTab()
     uiTabPaths->lineEditName->setClearButtonEnabled(true);
     uiTabPaths->lineEditName->setText(GetDefaultPieceName());
 
+#if QT_VERSION >= QT_VERSION_CHECK(6, 7, 0)
+    connect(uiTabPaths->checkBoxForbidFlipping, &QCheckBox::checkStateChanged, this,
+#else
     connect(uiTabPaths->checkBoxForbidFlipping, &QCheckBox::stateChanged, this,
+#endif
             [this](int state)
             {
                 if (state == Qt::Checked)
@@ -3954,7 +3958,11 @@ void DialogSeamAllowance::InitPieceTab()
                 }
             });
 
+#if QT_VERSION >= QT_VERSION_CHECK(6, 7, 0)
+    connect(uiTabPaths->checkBoxForceFlipping, &QCheckBox::checkStateChanged, this,
+#else
     connect(uiTabPaths->checkBoxForceFlipping, &QCheckBox::stateChanged, this,
+#endif
             [this](int state)
             {
                 if (state == Qt::Checked)
@@ -4436,10 +4444,17 @@ void DialogSeamAllowance::InitPassmarksTab()
             &DialogSeamAllowance::PassmarkLineTypeChanged);
     connect(uiTabPassmarks->buttonGroupAngleType, &QButtonGroup::idClicked, this,
             &DialogSeamAllowance::PassmarkAngleTypeChanged);
+#if QT_VERSION >= QT_VERSION_CHECK(6, 7, 0)
+    connect(uiTabPassmarks->checkBoxShowSecondPassmark, &QCheckBox::checkStateChanged, this,
+            &DialogSeamAllowance::PassmarkShowSecondChanged);
+    connect(uiTabPassmarks->checkBoxClockwiseOpening, &QCheckBox::checkStateChanged, this,
+            &DialogSeamAllowance::PassmarkClockwiseOrientationChanged);
+#else
     connect(uiTabPassmarks->checkBoxShowSecondPassmark, &QCheckBox::stateChanged, this,
             &DialogSeamAllowance::PassmarkShowSecondChanged);
     connect(uiTabPassmarks->checkBoxClockwiseOpening, &QCheckBox::stateChanged, this,
             &DialogSeamAllowance::PassmarkClockwiseOrientationChanged);
+#endif
 }
 
 //---------------------------------------------------------------------------------------------------------------------
