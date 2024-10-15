@@ -124,8 +124,7 @@ appimage_task_template: &APPIMAGE_TASK_TEMPLATE
     - python3 --version
     - pip3 install --user --upgrade pip
     - export PATH="${PATH}:/root/.local/bin"
-    - pip3 install --user --upgrade setuptools==70.0.0
-    - pip3 install --user --upgrade dropbox py7zr 'urllib3<2.0' conan==1.65.0 requests
+    - pip3 install --user --upgrade dropbox py7zr 'pyzstd<=0.16.0' 'urllib3<2.0' conan==1.65.0 requests
   build_script:
     - uname -a
     - mkdir -pm 0700 $XDG_RUNTIME_DIR
