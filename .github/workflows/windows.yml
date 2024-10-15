@@ -139,7 +139,7 @@ jobs:
         run: |
           git fetch --tags
           qbs-setup-toolchains --detect
-          qbs-setup-qt %Qt6_DIR%\bin\qmake.exe qt6
+          qbs-setup-qt %QT_ROOT_DIR%\bin\qmake.exe qt6
           qbs-config defaultProfile qt6
           qbs-setup-toolchains.exe --type msvc "${{ steps.cl-path.outputs.cl-path }}" msvc
           qbs-config.exe profiles.qt6.baseProfile msvc
@@ -184,7 +184,7 @@ jobs:
         if: env.WITH_CRASH_REPORTING == 'True'
         shell: pwsh
         run: |
-          $qmakeOutput = & "$env:Qt6_DIR\bin\qmake.exe" -query QT_VERSION
+          $qmakeOutput = & "$env:QT_ROOT_DIR\bin\qmake.exe" -query QT_VERSION
           $majorMinorVersion = $qmakeOutput -replace '(\d+)\.(\d+).*', '$1_$2'
           $env:CRASH_QT_VERSION = $majorMinorVersion
 
