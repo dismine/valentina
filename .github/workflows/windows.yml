@@ -126,7 +126,7 @@ jobs:
 
       # To cache Conan 1.x packages in GitHub Actions, you can save the .conan/data directory for every OS like this:
       - name: Setup path to Conan home folder
-        run: echo CONAN_USER_HOME=${{ runner.temp }} >> ${{ github.env }}
+        run: echo "CONAN_USER_HOME=${{ runner.temp }}" >> ${{ github.env }}
       - name: Cache Conan packages
         uses: actions/cache@v4
         with:
@@ -150,10 +150,10 @@ jobs:
           conan profile update settings.os=Windows valentina
           conan profile update settings.arch=x86_64 valentina
           conan profile update settings.compiler=msvc valentina
-          conan profile update settings.compiler.cppstd=17 valentina
+          conan profile update settings.compiler.cppstd=20 valentina
           conan profile update settings.compiler.runtime=dynamic valentina
           conan profile update settings.compiler.runtime_type=Release valentina
-          conan profile update settings.compiler.version=192 valentina
+          conan profile update settings.compiler.version=194 valentina
           qbs-config --list profiles
           conan profile list
 
