@@ -31,6 +31,7 @@ jobs:
       DEPLOY: 'true'
       RUN_TESTS: 'true'
       WITH_CRASH_REPORTING: 'True'
+      CONAN_USER_HOME: ${{ runner.temp }}
 
     steps:
       - name: Checkout repo
@@ -125,8 +126,6 @@ jobs:
           echo "cl-path=$clPath" >> $env:GITHUB_OUTPUT
 
       # To cache Conan 1.x packages in GitHub Actions, you can save the .conan/data directory for every OS like this:
-      - name: Setup path to Conan home folder
-        run: echo "CONAN_USER_HOME=${{ runner.temp }}" >> ${{ github.env }}
       - name: Cache Conan packages
         uses: actions/cache@v4
         with:
