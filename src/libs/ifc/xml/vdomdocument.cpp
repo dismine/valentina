@@ -742,23 +742,37 @@ void VDomDocument::CacheRefreshed()
 void VDomDocument::setXMLContent(const QString &fileName)
 {
     QFile file(fileName);
-    if (file.open(QIODevice::ReadOnly) == false)
+    if (!file.open(QIODevice::ReadOnly))
     {
         const QString errorMsg(tr("Can't open file %1:\n%2.").arg(fileName, file.errorString()));
         throw VException(errorMsg);
     }
 
+    auto HandleParsingError = [fileName](const QString &errorMsg, int errorLine, int errorColumn)
+    {
+        VException e(errorMsg);
+        e.AddMoreInformation(
+            tr("Parsing error in file %3 at line %1, column %2").arg(errorLine).arg(errorColumn).arg(fileName));
+        throw e;
+    };
+
+#if QT_VERSION >= QT_VERSION_CHECK(6, 5, 0)
+    if (const QDomDocument::ParseResult result = QDomDocument::setContent(&file); !result)
+    {
+        file.close();
+        HandleParsingError(result.errorMessage, static_cast<int>(result.errorLine),
+                           static_cast<int>(result.errorColumn));
+    }
+#else
     QString errorMsg;
     int errorLine = -1;
     int errorColumn = -1;
-    if (QDomDocument::setContent(&file, &errorMsg, &errorLine, &errorColumn) == false)
+    if (!QDomDocument::setContent(&file, &errorMsg, &errorLine, &errorColumn))
     {
         file.close();
-        VException e(errorMsg);
-        e.AddMoreInformation(
-            tr("Parsing error file %3 in line %1 column %2").arg(errorLine).arg(errorColumn).arg(fileName));
-        throw e;
+        HandleParsingError(errorMsg, errorLine, errorColumn);
     }
+#endif // QT_VERSION >= QT_VERSION_CHECK(6, 5, 0)
 
     RefreshElementIdCache();
 }
