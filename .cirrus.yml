@@ -123,7 +123,8 @@ appimage_task_template: &APPIMAGE_TASK_TEMPLATE
     - git fetch --tags
     - python3 --version
     - pip3 install --user --upgrade pip
-    - pip install --user --upgrade setuptools==70.0.0 'packaging>=22.0'
+    - export PATH="${PATH}:/root/.local/bin"
+    - pip3 install --user --upgrade setuptools==70.0.0
     - pip3 install --user --upgrade dropbox py7zr 'urllib3<2.0' conan==1.65.0 requests
   build_script:
     - uname -a
