@@ -698,13 +698,13 @@ auto VLayoutPiece::Create(const VPiece &piece, vidtype id, const VContainer *pat
     det.SetQuantity(data.GetQuantity());
     if (data.IsEnabled())
     {
-        VAbstractPattern *pDoc = VAbstractValApplication::VApp()->getCurrentDocument();
+        const VAbstractPattern *pDoc = VAbstractValApplication::VApp()->getCurrentDocument();
         det.SetPieceText(pDoc, piece.GetName(), data, settings->GetLabelFont(), settings->GetLabelSVGFont(), pattern);
     }
 
     if (const VPatternLabelData &geom = piece.GetPatternLabelData(); geom.IsEnabled())
     {
-        VAbstractPattern *pDoc = VAbstractValApplication::VApp()->getCurrentDocument();
+        const VAbstractPattern *pDoc = VAbstractValApplication::VApp()->getCurrentDocument();
         det.SetPatternInfo(pDoc, geom, settings->GetLabelFont(), settings->GetLabelSVGFont(), pattern);
     }
 
