@@ -66,7 +66,7 @@ public:
         m_category(context.category)
     {
 #ifndef V_NO_ASSERT
-        assert(context.version == 2);
+        assert(context.version <= 3);
 #endif
         moveToThread(thread);
         connect(QThread::currentThread(), &QThread::finished, this, &WorkerClass::deleteLater);
