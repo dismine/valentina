@@ -591,12 +591,12 @@ auto VAbstractTool::AddSANode(VAbstractPattern *doc, const QString &tagName, con
         doc->SetAttributeOrRemoveIf<bool>(nod, VAbstractPattern::AttrManualPassmarkAngle, node.IsManualPassmarkAngle(),
                                           [node](bool manualPassmarkAngle) noexcept {
                                               return not manualPassmarkAngle ||
-                                                     node.GetPassmarkAngleType() == PassmarkAngleType::Straightforward;
+                                                     node.GetPassmarkAngleType() != PassmarkAngleType::Straightforward;
                                           });
         doc->SetAttributeOrRemoveIf<QString>(nod, VAbstractPattern::AttrPassmarkAngle, node.GetFormulaPassmarkAngle(),
                                              [node](const QString &) noexcept {
                                                  return not node.IsManualPassmarkAngle() ||
-                                                        node.GetPassmarkAngleType() ==
+                                                        node.GetPassmarkAngleType() !=
                                                             PassmarkAngleType::Straightforward;
                                              });
     }

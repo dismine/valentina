@@ -20,6 +20,7 @@
 - Fix a notch on mirror line.
 - Fix seam allowance. Prong shape case.
 - Added PLT export format as a container for HPGL.
+- Fix saving a notch manual angle value.
 
 # Valentina 0.7.53 June 25, 2024
 - Fix layout sheet export with empty name.
