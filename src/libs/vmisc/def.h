@@ -725,8 +725,8 @@ Q_REQUIRED_RESULT auto darkenPixmap(const QPixmap &pixmap) -> QPixmap;
 
 void ShowInGraphicalShell(const QString &filePath);
 
-Q_REQUIRED_RESULT constexpr static inline auto VFuzzyComparePossibleNulls(double p1, double p2) -> bool;
-constexpr static inline auto VFuzzyComparePossibleNulls(double p1, double p2) -> bool
+Q_REQUIRED_RESULT constexpr static auto VFuzzyComparePossibleNulls(double p1, double p2) -> bool;
+constexpr static auto VFuzzyComparePossibleNulls(double p1, double p2) -> bool
 {
     if (qFuzzyIsNull(p1))
     {

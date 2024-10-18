@@ -58,71 +58,68 @@ QT_WARNING_POP
 // Classification methods
 //
 
-template <typename B, typename I, unsigned int F> constexpr inline auto fpclassify(fixed<B, I, F> x) noexcept -> int
+template <typename B, typename I, unsigned int F> constexpr auto fpclassify(fixed<B, I, F> x) noexcept -> int
 {
     return (x.raw_value() == 0) ? FP_ZERO : FP_NORMAL;
 }
 
-template <typename B, typename I, unsigned int F>
-constexpr inline auto isfinite(fixed<B, I, F> /*unused*/) noexcept -> bool
+template <typename B, typename I, unsigned int F> constexpr auto isfinite(fixed<B, I, F> /*unused*/) noexcept -> bool
 {
     return true;
 }
 
-template <typename B, typename I, unsigned int F>
-constexpr inline auto isinf(fixed<B, I, F> /*unused*/) noexcept -> bool
+template <typename B, typename I, unsigned int F> constexpr auto isinf(fixed<B, I, F> /*unused*/) noexcept -> bool
 {
     return false;
 }
 
-template <typename B, typename I, unsigned int F>
-constexpr inline auto isnan(fixed<B, I, F> /*unused*/) noexcept -> bool
+template <typename B, typename I, unsigned int F> constexpr auto isnan(fixed<B, I, F> /*unused*/) noexcept -> bool
 {
     return false;
 }
 
-template <typename B, typename I, unsigned int F> constexpr inline auto isnormal(fixed<B, I, F> x) noexcept -> bool
+template <typename B, typename I, unsigned int F> constexpr auto isnormal(fixed<B, I, F> x) noexcept -> bool
 {
     return x.raw_value() != 0;
 }
 
-template <typename B, typename I, unsigned int F> constexpr inline auto signbit(fixed<B, I, F> x) noexcept -> bool
+template <typename B, typename I, unsigned int F> constexpr auto signbit(fixed<B, I, F> x) noexcept -> bool
 {
     return x.raw_value() < 0;
 }
 
 template <typename B, typename I, unsigned int F>
-constexpr inline auto isgreater(fixed<B, I, F> x, fixed<B, I, F> y) noexcept -> bool
+constexpr auto isgreater(fixed<B, I, F> x, fixed<B, I, F> y) noexcept -> bool
 {
     return x > y;
 }
 
 template <typename B, typename I, unsigned int F>
-constexpr inline auto isgreaterequal(fixed<B, I, F> x, fixed<B, I, F> y) noexcept -> bool
+constexpr auto isgreaterequal(fixed<B, I, F> x, fixed<B, I, F> y) noexcept -> bool
 {
     return x >= y;
 }
 
 template <typename B, typename I, unsigned int F>
-constexpr inline auto isless(fixed<B, I, F> x, fixed<B, I, F> y) noexcept -> bool
+constexpr auto isless(fixed<B, I, F> x, fixed<B, I, F> y) noexcept -> bool
 {
     return x < y;
 }
 
 template <typename B, typename I, unsigned int F>
-constexpr inline auto islessequal(fixed<B, I, F> x, fixed<B, I, F> y) noexcept -> bool
+constexpr auto islessequal(fixed<B, I, F> x, fixed<B, I, F> y) noexcept -> bool
 {
     return x <= y;
 }
 
 template <typename B, typename I, unsigned int F>
-constexpr inline auto islessgreater(fixed<B, I, F> x, fixed<B, I, F> y) noexcept -> bool
+constexpr auto islessgreater(fixed<B, I, F> x, fixed<B, I, F> y) noexcept -> bool
 {
     return x != y;
 }
 
 template <typename B, typename I, unsigned int F>
-constexpr inline auto isunordered(fixed<B, I, F> /*x*/, fixed<B, I, F> /*y*/) noexcept -> bool
+constexpr auto isunordered(fixed<B, I, F> /*x*/, fixed<B, I, F> /*y*/) noexcept -> bool
 {
     return false;
 }
@@ -177,8 +174,7 @@ template <typename B, typename I, unsigned int F> auto nearbyint(fixed<B, I, F> 
     return fixed<B, I, F>::from_raw_value(value * FRAC);
 }
 
-template <typename B, typename I, unsigned int F>
-constexpr inline auto rint(fixed<B, I, F> x) noexcept -> fixed<B, I, F>
+template <typename B, typename I, unsigned int F> constexpr auto rint(fixed<B, I, F> x) noexcept -> fixed<B, I, F>
 {
     // Rounding mode is assumed to be FE_TONEAREST
     return nearbyint(x);
@@ -187,19 +183,19 @@ constexpr inline auto rint(fixed<B, I, F> x) noexcept -> fixed<B, I, F>
 //
 // Mathematical functions
 //
-template <typename B, typename I, unsigned int F> constexpr inline auto abs(fixed<B, I, F> x) noexcept -> fixed<B, I, F>
+template <typename B, typename I, unsigned int F> constexpr auto abs(fixed<B, I, F> x) noexcept -> fixed<B, I, F>
 {
     return (x >= fixed<B, I, F>{0}) ? x : -x;
 }
 
 template <typename B, typename I, unsigned int F>
-constexpr inline auto fmod(fixed<B, I, F> x, fixed<B, I, F> y) noexcept -> fixed<B, I, F>
+constexpr auto fmod(fixed<B, I, F> x, fixed<B, I, F> y) noexcept -> fixed<B, I, F>
 {
     return assert(y.raw_value() != 0), fixed<B, I, F>::from_raw_value(x.raw_value() % y.raw_value());
 }
 
 template <typename B, typename I, unsigned int F>
-constexpr inline auto remainder(fixed<B, I, F> x, fixed<B, I, F> y) noexcept -> fixed<B, I, F>
+constexpr auto remainder(fixed<B, I, F> x, fixed<B, I, F> y) noexcept -> fixed<B, I, F>
 {
     return assert(y.raw_value() != 0), x - nearbyint(x / y) * y;
 }
@@ -218,13 +214,13 @@ inline auto remquo(fixed<B, I, F> x, fixed<B, I, F> y, int *quo) noexcept -> fix
 //
 
 template <typename B, typename I, unsigned int F, typename C, typename J, unsigned int G>
-constexpr inline auto copysign(fixed<B, I, F> x, fixed<C, J, G> y) noexcept -> fixed<B, I, F>
+constexpr auto copysign(fixed<B, I, F> x, fixed<C, J, G> y) noexcept -> fixed<B, I, F>
 {
     return x = abs(x), (y >= fixed<C, J, G>{0}) ? x : -x;
 }
 
 template <typename B, typename I, unsigned int F>
-constexpr inline auto nextafter(fixed<B, I, F> from, fixed<B, I, F> to) noexcept -> fixed<B, I, F>
+constexpr auto nextafter(fixed<B, I, F> from, fixed<B, I, F> to) noexcept -> fixed<B, I, F>
 {
     return from == to  ? to
            : to > from ? fixed<B, I, F>::from_raw_value(from.raw_value() + 1)
@@ -232,7 +228,7 @@ constexpr inline auto nextafter(fixed<B, I, F> from, fixed<B, I, F> to) noexcept
 }
 
 template <typename B, typename I, unsigned int F>
-constexpr inline auto nexttoward(fixed<B, I, F> from, fixed<B, I, F> to) noexcept -> fixed<B, I, F>
+constexpr auto nexttoward(fixed<B, I, F> from, fixed<B, I, F> to) noexcept -> fixed<B, I, F>
 {
     return nextafter(from, to);
 }
