@@ -92,11 +92,11 @@ private:
     /** @brief ui keeps information about user interface */
     Ui::DialogIncrements *ui;
 
-    /** @brief data container with data */
+    /** @brief m_data container with data */
     VContainer *m_data; // need because we must change data //-V703
 
-    /** @brief doc dom document container */
-    VPattern *m_doc;
+    /** @brief m_patternDoc dom document container */
+    VPattern *m_patternDoc;
 
     /** @brief m_completeData need to show all internal variables */
     VContainer m_completeData;
