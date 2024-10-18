@@ -1125,8 +1125,7 @@ void VPatternConverter::RemoveColorToolCutV0_3_1()
     const QDomNodeList list = elementsByTagName(*strPoint);
     for (int i = 0; i < list.size(); ++i)
     {
-        QDomElement element = list.at(i).toElement();
-        if (not element.isNull())
+        if (QDomElement element = list.at(i).toElement(); not element.isNull())
         {
             const QString type = element.attribute(*strType);
             if (type == *strCutArc || type == *strCutSpline || type == *strCutSplinePath)
@@ -1466,8 +1465,7 @@ void VPatternConverter::FixCutPoint()
     const QDomNodeList list = elementsByTagName(*strPoint);
     for (int i = 0; i < list.size(); ++i)
     {
-        QDomElement const element = list.at(i).toElement();
-        if (not element.isNull())
+        if (QDomElement const element = list.at(i).toElement(); not element.isNull())
         {
             const QString type = element.attribute(*strType);
             switch (types.indexOf(type))
@@ -1510,16 +1508,14 @@ void VPatternConverter::FixSubPaths(int i, quint32 id, quint32 baseCurve)
     const QDomNodeList listPoints = elementsByTagName(*strPoint);
     for (int j = i + 1; j < listPoints.size(); ++j)
     {
-        QDomElement element = listPoints.at(j).toElement();
-        if (not element.isNull())
+        if (QDomElement element = listPoints.at(j).toElement(); not element.isNull())
         {
             const QString type = element.attribute(*strType);
             switch (pointTypes.indexOf(type))
             {
                 case 0: // strCutSplinePath
                 {
-                    const quint32 spl = element.attribute(*strSplinePath).toUInt();
-                    if (spl == id + 1 || spl == id + 2)
+                    if (const quint32 spl = element.attribute(*strSplinePath).toUInt(); spl == id + 1 || spl == id + 2)
                     {
                         element.setAttribute(*strSplinePath, baseCurve);
                     }
@@ -1527,8 +1523,7 @@ void VPatternConverter::FixSubPaths(int i, quint32 id, quint32 baseCurve)
                 }
                 case 1: // strCutSpline
                 {
-                    const quint32 spl = element.attribute(*strSpline).toUInt();
-                    if (spl == id + 1 || spl == id + 2)
+                    if (const quint32 spl = element.attribute(*strSpline).toUInt(); spl == id + 1 || spl == id + 2)
                     {
                         element.setAttribute(*strSpline, baseCurve);
                     }
@@ -1551,8 +1546,7 @@ void VPatternConverter::FixSubPaths(int i, quint32 id, quint32 baseCurve)
                 }
                 case 3: // strCurveIntersectAxis
                 {
-                    const quint32 spl = element.attribute(*strCurve).toUInt();
-                    if (spl == id + 1 || spl == id + 2)
+                    if (const quint32 spl = element.attribute(*strCurve).toUInt(); spl == id + 1 || spl == id + 2)
                     {
                         element.setAttribute(*strCurve, baseCurve);
                     }
@@ -1560,8 +1554,7 @@ void VPatternConverter::FixSubPaths(int i, quint32 id, quint32 baseCurve)
                 }
                 case 4: // strPointFromArcAndTangent
                 {
-                    const quint32 spl = element.attribute(*strArc).toUInt();
-                    if (spl == id + 1 || spl == id + 2)
+                    if (const quint32 spl = element.attribute(*strArc).toUInt(); spl == id + 1 || spl == id + 2)
                     {
                         element.setAttribute(*strArc, baseCurve);
                     }
@@ -1593,8 +1586,7 @@ void VPatternConverter::FixSubPaths(int i, quint32 id, quint32 baseCurve)
     const QDomNodeList listSplines = elementsByTagName(*strSpline);
     for (int j = 0; j < listSplines.size(); ++j)
     {
-        QDomElement element = listSplines.at(j).toElement();
-        if (not element.isNull())
+        if (QDomElement element = listSplines.at(j).toElement(); not element.isNull())
         {
             const QString type = element.attribute(*strType);
             switch (splTypes.indexOf(type))
@@ -1602,8 +1594,7 @@ void VPatternConverter::FixSubPaths(int i, quint32 id, quint32 baseCurve)
                 case 0: // strModelingPath
                 case 1: // strModelingSpline
                 {
-                    const quint32 spl = element.attribute(*strIdObject).toUInt();
-                    if (spl == id + 1 || spl == id + 2)
+                    if (const quint32 spl = element.attribute(*strIdObject).toUInt(); spl == id + 1 || spl == id + 2)
                     {
                         element.setAttribute(*strIdObject, baseCurve);
                     }
@@ -1618,8 +1609,7 @@ void VPatternConverter::FixSubPaths(int i, quint32 id, quint32 baseCurve)
     const QDomNodeList listArcs = elementsByTagName(*strArc);
     for (int j = 0; j < listArcs.size(); ++j)
     {
-        QDomElement element = listArcs.at(j).toElement();
-        if (not element.isNull())
+        if (QDomElement element = listArcs.at(j).toElement(); not element.isNull())
         {
             const QString type = element.attribute(*strType);
             if (type == *strModeling)
@@ -1688,8 +1678,7 @@ void VPatternConverter::TagDetailToV0_4_0()
             const QDomNodeList childList = dom.childNodes();
             for (qint32 i = 0; i < childList.size(); ++i)
             {
-                const QDomElement element = childList.at(i).toElement();
-                if (not element.isNull())
+                if (const QDomElement element = childList.at(i).toElement(); not element.isNull())
                 {
                     switch (tags.indexOf(element.tagName()))
                     {
@@ -1755,8 +1744,7 @@ auto VPatternConverter::GetUnionDetailNodesV0_4_0(const QDomElement &detail) -> 
         const QDomNodeList childList = detail.childNodes();
         for (qint32 i = 0; i < childList.size(); ++i)
         {
-            const QDomElement node = childList.at(i).toElement();
-            if (not node.isNull())
+            if (const QDomElement node = childList.at(i).toElement(); not node.isNull())
             {
                 QDomElement tagNode = createElement(*strNode);
 
@@ -1787,8 +1775,7 @@ auto VPatternConverter::GetUnionChildrenNodesV0_4_0(const QDomElement &detail) -
         const QDomNodeList childList = detail.childNodes();
         for (qint32 i = 0; i < childList.size(); ++i)
         {
-            const QDomElement node = childList.at(i).toElement();
-            if (not node.isNull())
+            if (const QDomElement node = childList.at(i).toElement(); not node.isNull())
             {
                 QDomElement const tagNode = node.cloneNode().toElement();
                 tagNodes.appendChild(tagNode);
@@ -1806,10 +1793,8 @@ void VPatternConverter::LabelTagToV0_4_4(const QString &tagName)
     Q_STATIC_ASSERT_X(VPatternConverter::PatternMinVer < FormatVersion(0, 4, 4), "Time to refactor the code.");
 
     Unit unit = Unit::Cm;
-    const auto units = QStringList() << "mm"
-                                     << "cm"
-                                     << "inch";
-    switch (units.indexOf(UniqueTagText(*strUnit)))
+
+    switch (const auto units = QStringList{"mm", "cm", "inch"}; units.indexOf(UniqueTagText(*strUnit)))
     {
         case 0: // mm
             unit = Unit::Mm;
@@ -1869,8 +1854,7 @@ auto VPatternConverter::AddTagPatternLabelV0_5_1() -> QDomElement
         QDomElement pattern = documentElement();
         for (vsizetype i = tags.indexOf(element.tagName()) - 1; i >= 0; --i)
         {
-            const QDomNodeList list = elementsByTagName(tags.at(i));
-            if (not list.isEmpty())
+            if (const QDomNodeList list = elementsByTagName(tags.at(i)); not list.isEmpty())
             {
                 pattern.insertAfter(element, list.at(0));
                 break;
@@ -1915,8 +1899,7 @@ void VPatternConverter::PortPatternLabeltoV0_6_0(QDomElement &label)
         AddLabelTemplateLineV0_6_0(label, "%customer%", false, true, 0, 0);
     }
 
-    const QString sizeField = UniqueTagText(*strSize);
-    if (not sizeField.isEmpty())
+    if (const QString sizeField = UniqueTagText(*strSize); not sizeField.isEmpty())
     {
         AddLabelTemplateLineV0_6_0(label, sizeField, false, false, 0, 0);
     }
@@ -1984,8 +1967,7 @@ void VPatternConverter::PortPieceLabelstoV0_6_0()
 
             QString line;
 
-            const auto material = static_cast<int>(GetParametrUInt(domMCP, *strMaterial, QChar('0')));
-            switch (material)
+            switch (const auto material = static_cast<int>(GetParametrUInt(domMCP, *strMaterial, QChar('0'))); material)
             {
                 case 0:
                     line.append("%mFabric%");
@@ -2083,8 +2065,7 @@ void VPatternConverter::AddTagPreviewCalculationsV0_6_2()
     // TODO. Delete if minimal supported version is 0.6.2
     Q_STATIC_ASSERT_X(VPatternConverter::PatternMinVer < FormatVersion(0, 6, 2), "Time to refactor the code.");
 
-    const QDomNodeList list = elementsByTagName(*strIncrements);
-    if (not list.isEmpty())
+    if (const QDomNodeList list = elementsByTagName(*strIncrements); not list.isEmpty())
     {
         QDomElement pattern = documentElement();
         pattern.insertAfter(createElement(*strPreviewCalculations), list.at(0));
@@ -2129,11 +2110,9 @@ void VPatternConverter::ConvertImageToV0_9_0()
     // TODO. Delete if minimal supported version is 0.9.0
     Q_STATIC_ASSERT_X(VPatternConverter::PatternMinVer < FormatVersion(0, 9, 0), "Time to refactor the code.");
 
-    const QDomNodeList list = elementsByTagName(*strImage);
-    if (not list.isEmpty())
+    if (const QDomNodeList list = elementsByTagName(*strImage); not list.isEmpty())
     {
-        QDomElement img = list.at(0).toElement();
-        if (not img.isNull())
+        if (QDomElement img = list.at(0).toElement(); not img.isNull())
         {
             QString const extension = img.attribute(*strExtension);
             img.removeAttribute(*strExtension);
@@ -2186,11 +2165,9 @@ void VPatternConverter::ConvertMeasurementsPathToV0_9_1()
         return;
     }
 
-    const QDomNode domNode = nodeList.at(0);
-    if (not domNode.isNull() && domNode.isElement())
+    if (const QDomNode domNode = nodeList.at(0); not domNode.isNull() && domNode.isElement())
     {
-        QDomElement domElement = domNode.toElement();
-        if (not domElement.isNull())
+        if (QDomElement domElement = domNode.toElement(); not domElement.isNull())
         {
             const QString path = domElement.text();
             if (path.isEmpty())
@@ -2309,8 +2286,7 @@ void VPatternConverter::TagUnionDetailsToV0_4_0()
             nodes.reserve(childList.size());
             for (qint32 i = 0; i < childList.size(); ++i)
             {
-                const QDomElement element = childList.at(i).toElement();
-                if (not element.isNull())
+                if (const QDomElement element = childList.at(i).toElement(); not element.isNull())
                 {
                     switch (tags.indexOf(element.tagName()))
                     {

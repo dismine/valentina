@@ -393,14 +393,12 @@ void VVSTConverter::RemoveTagsForV0_5_0()
 
     QDomElement root = documentElement();
 
-    const QDomElement sizeTag = root.firstChildElement(QStringLiteral("size"));
-    if (not sizeTag.isNull())
+    if (const QDomElement sizeTag = root.firstChildElement(QStringLiteral("size")); not sizeTag.isNull())
     {
         root.removeChild(sizeTag);
     }
 
-    const QDomElement heightTag = root.firstChildElement(QStringLiteral("height"));
-    if (not heightTag.isNull())
+    if (const QDomElement heightTag = root.firstChildElement(QStringLiteral("height")); not heightTag.isNull())
     {
         root.removeChild(heightTag);
     }

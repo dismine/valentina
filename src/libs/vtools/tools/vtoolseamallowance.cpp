@@ -2196,8 +2196,7 @@ void VToolSeamAllowance::ResetPieceLabelTemplate()
     const VPiece oldDet = VAbstractTool::data.GetPiece(m_id);
     VPiece newDet = oldDet;
 
-    const QString path = doc->GetDefaultPieceLabelPath();
-    if (not path.isEmpty())
+    if (const QString path = doc->GetDefaultPieceLabelPath(); not path.isEmpty())
     {
         QVector<VLabelTemplateLine> lines;
         try
@@ -2586,9 +2585,7 @@ auto VToolSeamAllowance::SelectedTools() const -> QList<VToolSeamAllowance *>
     QList<VToolSeamAllowance *> tools;
     if (m_sceneDetails)
     {
-        const QList<QGraphicsItem *> list = m_sceneDetails->selectedItems();
-
-        if (not list.isEmpty())
+        if (const QList<QGraphicsItem *> list = m_sceneDetails->selectedItems(); not list.isEmpty())
         {
             tools.reserve(list.size());
             for (auto *item : list)

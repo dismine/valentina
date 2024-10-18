@@ -65,10 +65,9 @@ void DeletePatternPiece::undo()
     }
     else
     { // first in the list, add before tag draw
-        const QDomNodeList list = rootElement.elementsByTagName(VAbstractPattern::TagDraw);
         QDomElement draw;
 
-        if (not list.isEmpty())
+        if (const QDomNodeList list = rootElement.elementsByTagName(VAbstractPattern::TagDraw); not list.isEmpty())
         {
             draw = list.at(0).toElement();
         }

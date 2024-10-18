@@ -865,8 +865,7 @@ auto GetChildren(VAbstractPattern *doc, quint32 id, const QString &tagName) -> Q
 
     for (int i = 0; i < listChildren.size(); ++i)
     {
-        const QDomElement domElement = listChildren.at(i).toElement();
-        if (not domElement.isNull())
+        if (const QDomElement domElement = listChildren.at(i).toElement(); not domElement.isNull())
         {
             childrenId.append(domElement.text().toUInt());
         }

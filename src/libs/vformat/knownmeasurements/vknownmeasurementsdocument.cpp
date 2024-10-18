@@ -90,8 +90,7 @@ VKnownMeasurementsDocument::VKnownMeasurementsDocument(QObject *parent)
 auto VKnownMeasurementsDocument::SaveDocument(const QString &fileName, QString &error) -> bool
 {
     // Update comment with Valentina version
-    QDomNode const commentNode = documentElement().firstChild();
-    if (commentNode.isComment())
+    if (QDomNode const commentNode = documentElement().firstChild(); commentNode.isComment())
     {
         QDomComment comment = commentNode.toComment();
         comment.setData(FileComment());
@@ -255,8 +254,7 @@ void VKnownMeasurementsDocument::MoveBottom(const QString &name)
 //---------------------------------------------------------------------------------------------------------------------
 auto VKnownMeasurementsDocument::GetUId() const -> QUuid
 {
-    QDomNode const root = documentElement();
-    if (not root.isNull() && root.isElement())
+    if (QDomNode const root = documentElement(); not root.isNull() && root.isElement())
     {
         const QDomElement rootElement = root.toElement();
         if (not rootElement.isNull())
@@ -270,8 +268,7 @@ auto VKnownMeasurementsDocument::GetUId() const -> QUuid
 //---------------------------------------------------------------------------------------------------------------------
 void VKnownMeasurementsDocument::SetUId(const QUuid &id)
 {
-    QDomNode const root = documentElement();
-    if (not root.isNull() && root.isElement())
+    if (QDomNode const root = documentElement(); not root.isNull() && root.isElement())
     {
         QDomElement rootElement = root.toElement();
         if (not rootElement.isNull())
@@ -312,8 +309,7 @@ void VKnownMeasurementsDocument::SetDescription(const QString &desc)
 //---------------------------------------------------------------------------------------------------------------------
 auto VKnownMeasurementsDocument::IsReadOnly() const -> bool
 {
-    QDomNode const root = documentElement();
-    if (not root.isNull() && root.isElement())
+    if (QDomNode const root = documentElement(); not root.isNull() && root.isElement())
     {
         const QDomElement rootElement = root.toElement();
         if (not rootElement.isNull())
@@ -327,8 +323,7 @@ auto VKnownMeasurementsDocument::IsReadOnly() const -> bool
 //---------------------------------------------------------------------------------------------------------------------
 void VKnownMeasurementsDocument::SetReadOnly(bool ro)
 {
-    QDomNode const root = documentElement();
-    if (not root.isNull() && root.isElement())
+    if (QDomNode const root = documentElement(); not root.isNull() && root.isElement())
     {
         QDomElement rootElement = root.toElement();
         if (not rootElement.isNull())
@@ -361,8 +356,7 @@ auto VKnownMeasurementsDocument::KnownMeasurements() const -> VKnownMeasurements
 //---------------------------------------------------------------------------------------------------------------------
 void VKnownMeasurementsDocument::SetMGroup(const QString &name, const QString &text)
 {
-    QDomElement node = FindM(name);
-    if (not node.isNull())
+    if (QDomElement node = FindM(name); not node.isNull())
     {
         SetAttribute(node, *attrGroup, text);
     }
@@ -375,8 +369,7 @@ void VKnownMeasurementsDocument::SetMGroup(const QString &name, const QString &t
 //---------------------------------------------------------------------------------------------------------------------
 void VKnownMeasurementsDocument::SetMName(const QString &name, const QString &text)
 {
-    QDomElement node = FindM(name);
-    if (not node.isNull())
+    if (QDomElement node = FindM(name); not node.isNull())
     {
         SetAttribute(node, *attrName, text);
     }
@@ -389,8 +382,7 @@ void VKnownMeasurementsDocument::SetMName(const QString &name, const QString &te
 //---------------------------------------------------------------------------------------------------------------------
 void VKnownMeasurementsDocument::SetMFormula(const QString &name, const QString &text)
 {
-    QDomElement node = FindM(name);
-    if (not node.isNull())
+    if (QDomElement node = FindM(name); not node.isNull())
     {
         SetAttribute(node, *attrFormula, text);
     }
@@ -403,8 +395,7 @@ void VKnownMeasurementsDocument::SetMFormula(const QString &name, const QString 
 //---------------------------------------------------------------------------------------------------------------------
 void VKnownMeasurementsDocument::SetMSpecialUnits(const QString &name, bool special)
 {
-    QDomElement node = FindM(name);
-    if (not node.isNull())
+    if (QDomElement node = FindM(name); not node.isNull())
     {
         SetAttributeOrRemoveIf<bool>(node, *attrSpecialUnits, special,
                                      [](bool special) noexcept { return not special; });
@@ -418,8 +409,7 @@ void VKnownMeasurementsDocument::SetMSpecialUnits(const QString &name, bool spec
 //---------------------------------------------------------------------------------------------------------------------
 void VKnownMeasurementsDocument::SetMDescription(const QString &name, const QString &text)
 {
-    QDomElement node = FindM(name);
-    if (not node.isNull())
+    if (QDomElement node = FindM(name); not node.isNull())
     {
         SetAttributeOrRemoveIf<QString>(node, *attrDescription, text,
                                         [](const QString &text) noexcept { return text.isEmpty(); });
@@ -433,8 +423,7 @@ void VKnownMeasurementsDocument::SetMDescription(const QString &name, const QStr
 //---------------------------------------------------------------------------------------------------------------------
 void VKnownMeasurementsDocument::SetMFullName(const QString &name, const QString &text)
 {
-    QDomElement node = FindM(name);
-    if (not node.isNull())
+    if (QDomElement node = FindM(name); not node.isNull())
     {
         SetAttribute(node, *attrFullName, text);
     }
@@ -447,8 +436,7 @@ void VKnownMeasurementsDocument::SetMFullName(const QString &name, const QString
 //---------------------------------------------------------------------------------------------------------------------
 void VKnownMeasurementsDocument::SetMImage(const QString &name, const QUuid &imageId)
 {
-    QDomElement node = FindM(name);
-    if (not node.isNull())
+    if (QDomElement node = FindM(name); not node.isNull())
     {
         SetAttributeOrRemoveIf<QUuid>(node, *attrDiagram, imageId,
                                       [](const QUuid &imageId) noexcept { return imageId.isNull(); });
@@ -462,8 +450,7 @@ void VKnownMeasurementsDocument::SetMImage(const QString &name, const QUuid &ima
 //---------------------------------------------------------------------------------------------------------------------
 void VKnownMeasurementsDocument::SetImageContent(const QUuid &id, const VPatternImage &image)
 {
-    QDomElement node = FindImage(id);
-    if (not node.isNull())
+    if (QDomElement node = FindImage(id); not node.isNull())
     {
         setTagText(node, image.ContentData());
         node.setAttribute(*attrContentType, image.ContentType());
@@ -477,8 +464,7 @@ void VKnownMeasurementsDocument::SetImageContent(const QUuid &id, const VPattern
 //---------------------------------------------------------------------------------------------------------------------
 void VKnownMeasurementsDocument::SetImageTitle(const QUuid &id, const QString &text)
 {
-    QDomElement node = FindImage(id);
-    if (not node.isNull())
+    if (QDomElement node = FindImage(id); not node.isNull())
     {
         SetAttributeOrRemoveIf<QString>(node, *attrTitle, text,
                                         [](const QString &text) noexcept { return text.isEmpty(); });
@@ -492,8 +478,7 @@ void VKnownMeasurementsDocument::SetImageTitle(const QUuid &id, const QString &t
 //---------------------------------------------------------------------------------------------------------------------
 void VKnownMeasurementsDocument::SetImageSizeScale(const QUuid &id, qreal scale)
 {
-    QDomElement node = FindImage(id);
-    if (not node.isNull())
+    if (QDomElement node = FindImage(id); not node.isNull())
     {
         SetAttributeOrRemoveIf<qreal>(node, *attrSize, scale,
                                       [](qreal scale) noexcept { return VFuzzyComparePossibleNulls(scale, 100.0); });
@@ -507,8 +492,7 @@ void VKnownMeasurementsDocument::SetImageSizeScale(const QUuid &id, qreal scale)
 //---------------------------------------------------------------------------------------------------------------------
 void VKnownMeasurementsDocument::SetImageId(const QUuid &id, const QUuid &newId)
 {
-    QDomElement node = FindImage(id);
-    if (not node.isNull())
+    if (QDomElement node = FindImage(id); not node.isNull())
     {
         SetAttribute<QUuid>(node, *attrUId, newId);
 

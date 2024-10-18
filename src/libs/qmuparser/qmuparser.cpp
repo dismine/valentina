@@ -103,8 +103,7 @@ auto CSR(qreal length, qreal split, qreal arcLength) -> qreal
         tmp.setAngle(tmp.angle() + angle * sign);
 
         QPointF crosPoint;
-        const auto type = line.intersects(tmp, &crosPoint);
-        if (type == QLineF::NoIntersection)
+        if (const auto type = line.intersects(tmp, &crosPoint); type == QLineF::NoIntersection)
         {
             return 0;
         }

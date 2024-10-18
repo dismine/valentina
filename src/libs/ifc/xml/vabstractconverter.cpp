@@ -388,8 +388,7 @@ void VAbstractConverter::SetVersion(const QString &version)
 //---------------------------------------------------------------------------------------------------------------------
 auto VAbstractConverter::XSDSchema(unsigned int ver) const -> QString
 {
-    const QHash<unsigned, QString> schemas = Schemas();
-    if (schemas.contains(ver))
+    if (const QHash<unsigned, QString> schemas = Schemas(); schemas.contains(ver))
     {
         return schemas.value(ver);
     }

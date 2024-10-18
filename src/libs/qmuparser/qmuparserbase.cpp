@@ -429,8 +429,8 @@ void QmuParserBase::CheckName(const QString &a_sName, const QString &a_szCharSet
 void QmuParserBase::SetExpr(const QString &a_sExpr)
 {
     // Check locale compatibility
-    std::locale const loc;
-    if (m_pTokenReader->GetArgSep() == QChar(std::use_facet<std::numpunct<char_type>>(loc).decimal_point()))
+    if (std::locale const loc;
+        m_pTokenReader->GetArgSep() == QChar(std::use_facet<std::numpunct<char_type>>(loc).decimal_point()))
     {
         Error(ecLOCALE);
     }

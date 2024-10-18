@@ -79,8 +79,7 @@ void VWatermark::CreateEmptyWatermark()
 auto VWatermark::SaveDocument(const QString &fileName, QString &error) -> bool
 {
     // Update comment with Valentina version
-    QDomNode const commentNode = documentElement().firstChild();
-    if (commentNode.isComment())
+    if (QDomNode const commentNode = documentElement().firstChild(); commentNode.isComment())
     {
         QDomComment comment = commentNode.toComment();
         comment.setData(FileComment());
@@ -94,14 +93,12 @@ auto VWatermark::GetWatermark() const -> VWatermarkData
 {
     VWatermarkData data;
 
-    QDomNode const root = documentElement();
-    if (not root.isNull() && root.isElement())
+    if (QDomNode const root = documentElement(); not root.isNull() && root.isElement())
     {
         const QDomElement rootElement = root.toElement();
         data.opacity = GetParametrInt(rootElement, AttrOpacity, QChar('2'));
 
-        QDomElement const text = rootElement.firstChildElement(TagText);
-        if (not text.isNull())
+        if (QDomElement const text = rootElement.firstChildElement(TagText); not text.isNull())
         {
             data.showText = GetParametrBool(text, AttrShow, trueStr);
             data.text = GetParametrEmptyString(text, AttrText);
@@ -115,8 +112,7 @@ auto VWatermark::GetWatermark() const -> VWatermarkData
             data.textColor = color;
         }
 
-        QDomElement const image = rootElement.firstChildElement(TagImage);
-        if (not image.isNull())
+        if (QDomElement const image = rootElement.firstChildElement(TagImage); not image.isNull())
         {
             data.showImage = GetParametrBool(image, AttrShow, trueStr);
             data.path = GetParametrEmptyString(image, AttrPath);
@@ -131,14 +127,12 @@ auto VWatermark::GetWatermark() const -> VWatermarkData
 //---------------------------------------------------------------------------------------------------------------------
 void VWatermark::SetWatermark(const VWatermarkData &data)
 {
-    QDomNode const root = documentElement();
-    if (not root.isNull() && root.isElement())
+    if (QDomNode const root = documentElement(); not root.isNull() && root.isElement())
     {
         QDomElement rootElement = root.toElement();
         SetAttribute(rootElement, AttrOpacity, data.opacity);
 
-        QDomElement text = rootElement.firstChildElement(TagText);
-        if (not text.isNull())
+        if (QDomElement text = rootElement.firstChildElement(TagText); not text.isNull())
         {
             SetAttribute(text, AttrShow, data.showText);
             SetAttributeOrRemoveIf<QString>(text, AttrText, data.text,
@@ -150,8 +144,7 @@ void VWatermark::SetWatermark(const VWatermarkData &data)
             SetAttribute(text, AttrColor, data.textColor.name());
         }
 
-        QDomElement image = rootElement.firstChildElement(TagImage);
-        if (not image.isNull())
+        if (QDomElement image = rootElement.firstChildElement(TagImage); not image.isNull())
         {
             SetAttribute(image, AttrShow, data.showImage);
             SetAttributeOrRemoveIf<QString>(image, AttrPath, data.path,

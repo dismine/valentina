@@ -88,8 +88,7 @@ void SaveNodeCanonically(QXmlStreamWriter &stream, const QDomNode &domNode)
 
     if (domNode.isElement())
     {
-        const QDomElement domElement = domNode.toElement();
-        if (not domElement.isNull())
+        if (const QDomElement domElement = domNode.toElement(); not domElement.isNull())
         {
             stream.writeStartElement(domElement.tagName());
 
@@ -169,10 +168,8 @@ auto LessThen(const QDomNode &element1, const QDomNode &element2) -> bool
     }
 
     QString const tag1 = element1.nodeName();
-    QString const tag2 = element2.nodeName();
 
-    // qDebug() << tag1 <<tag2;
-    if (tag1 != tag2)
+    if (QString const tag2 = element2.nodeName(); tag1 != tag2)
     {
         return tag1 < tag2;
     }
@@ -542,8 +539,7 @@ auto VDomDocument::GetParametrBool(const QDomElement &domElement, const QString 
 //---------------------------------------------------------------------------------------------------------------------
 auto VDomDocument::GetParametrUsage(const QDomElement &domElement, const QString &name) -> NodeUsage
 {
-    const bool value = GetParametrBool(domElement, name, trueStr);
-    if (value)
+    if (const bool value = GetParametrBool(domElement, name, trueStr); value)
     {
         return NodeUsage::InUse;
     }
@@ -663,8 +659,7 @@ auto VDomDocument::GetParametrId(const QDomElement &domElement) -> quint32
 //---------------------------------------------------------------------------------------------------------------------
 auto VDomDocument::UniqueTagText(const QString &tagName, const QString &defVal) const -> QString
 {
-    QDomElement const domElement = UniqueTag(tagName);
-    if (not domElement.isNull())
+    if (QDomElement const domElement = UniqueTag(tagName); not domElement.isNull())
     {
         QString text = domElement.text();
         if (text.isEmpty())
@@ -813,8 +808,7 @@ auto VDomDocument::SaveDocument(const QString &fileName, QString &error) -> bool
     if (file.open(QIODevice::WriteOnly))
     {
         // See issue #666. QDomDocument produces random attribute order.
-        const int indent = 4;
-        if (not SaveCanonicalXML(&file, indent, error))
+        if (const int indent = 4; not SaveCanonicalXML(&file, indent, error))
         {
             return false;
         }
@@ -893,8 +887,7 @@ auto VDomDocument::GetFormatVersionStr() const -> QString
         throw VException(errorMsg);
     }
 
-    const QDomNode domNode = nodeList.at(0);
-    if (domNode.isNull() == false && domNode.isElement())
+    if (const QDomNode domNode = nodeList.at(0); domNode.isNull() == false && domNode.isElement())
     {
         const QDomElement domElement = domNode.toElement();
         if (domElement.isNull() == false)
@@ -939,15 +932,13 @@ auto VDomDocument::GetFormatVersion(const QString &version) -> unsigned
 //---------------------------------------------------------------------------------------------------------------------
 auto VDomDocument::setTagText(const QString &tag, const QString &text) -> bool
 {
-    const QDomNodeList nodeList = this->elementsByTagName(tag);
-    if (nodeList.isEmpty())
+    if (const QDomNodeList nodeList = this->elementsByTagName(tag); nodeList.isEmpty())
     {
         qDebug() << "Can't save tag " << tag << Q_FUNC_INFO;
     }
     else
     {
-        QDomNode const domNode = nodeList.at(0);
-        if (not domNode.isNull() && domNode.isElement())
+        if (QDomNode const domNode = nodeList.at(0); not domNode.isNull() && domNode.isElement())
         {
             QDomElement domElement = domNode.toElement();
             return setTagText(domElement, text);
@@ -995,11 +986,9 @@ auto VDomDocument::UniqueTag(const QString &tagName) const -> QDomElement
         return {};
     }
 
-    const QDomNode domNode = nodeList.at(0);
-    if (not domNode.isNull() && domNode.isElement())
+    if (const QDomNode domNode = nodeList.at(0); not domNode.isNull() && domNode.isElement())
     {
-        const QDomElement domElement = domNode.toElement();
-        if (not domElement.isNull())
+        if (const QDomElement domElement = domNode.toElement(); not domElement.isNull())
         {
             return domElement;
         }
@@ -1170,11 +1159,10 @@ void VDomDocument::SetLabelTemplate(QDomElement &element, const QVector<VLabelTe
 //---------------------------------------------------------------------------------------------------------------------
 void VDomDocument::ValidateVersion(const QString &version)
 {
-    static const QRegularExpression rx(
-        QStringLiteral("^([0-9]|[1-9][0-9]|[1-2][0-5][0-5]).([0-9]|[1-9][0-9]|[1-2][0-5][0-5])"
-                       ".([0-9]|[1-9][0-9]|[1-2][0-5][0-5])$"));
-
-    if (!rx.match(version).hasMatch())
+    if (static const QRegularExpression rx(
+            QStringLiteral("^([0-9]|[1-9][0-9]|[1-2][0-5][0-5]).([0-9]|[1-9][0-9]|[1-2][0-5][0-5])"
+                           ".([0-9]|[1-9][0-9]|[1-2][0-5][0-5])$"));
+        !rx.match(version).hasMatch())
     {
         const QString errorMsg(tr("Version \"%1\" invalid.").arg(version));
         throw VException(errorMsg);

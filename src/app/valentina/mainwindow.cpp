@@ -1473,9 +1473,10 @@ void MainWindow::ClosedDialogGroup(int result)
     {
         const QPointer<DialogGroup> dialog = qobject_cast<DialogGroup *>(m_dialogTool);
         SCASSERT(not dialog.isNull())
-        const QDomElement group =
-            doc->CreateGroup(pattern->getNextId(), dialog->GetName(), dialog->GetTags(), dialog->GetGroup());
-        if (not group.isNull())
+
+        if (const QDomElement group =
+                doc->CreateGroup(pattern->getNextId(), dialog->GetName(), dialog->GetTags(), dialog->GetGroup());
+                !group.isNull())
         {
             auto *addGroup = new AddGroup(group, doc);
             connect(addGroup, &AddGroup::UpdateGroups, m_groupsWidget, &VWidgetGroups::UpdateGroups);

@@ -86,8 +86,7 @@ const QChar pointsSep = ' '_L1;
 //---------------------------------------------------------------------------------------------------------------------
 auto StringV0_1_2ToPoint(const QString &point) -> QPointF
 {
-    QStringList const coordinates = point.split(coordintatesSep);
-    if (coordinates.count() == 2)
+    if (QStringList const coordinates = point.split(coordintatesSep); coordinates.count() == 2)
     {
         return {coordinates.at(0).toDouble(), coordinates.at(1).toDouble()};
     }
@@ -128,8 +127,7 @@ VLayoutConverter::VLayoutConverter(const QString &fileName)
 //---------------------------------------------------------------------------------------------------------------------
 auto VLayoutConverter::GetFormatVersionStr() const -> QString
 {
-    QDomNode const root = documentElement();
-    if (not root.isNull() && root.isElement())
+    if (QDomNode const root = documentElement(); not root.isNull() && root.isElement())
     {
         const QDomElement layoutElement = root.toElement();
         if (not layoutElement.isNull())
@@ -348,8 +346,7 @@ void VLayoutConverter::ConvertPiecesToV0_1_5()
             {
                 auto StringToPoint = [](const QString &point) -> QPointF
                 {
-                    QStringList const coordinates = point.split(coordintatesSep);
-                    if (coordinates.count() == 2)
+                    if (QStringList const coordinates = point.split(coordintatesSep); coordinates.count() == 2)
                     {
                         return {coordinates.at(0).toDouble(), coordinates.at(1).toDouble()};
                     }
@@ -373,8 +370,7 @@ void VLayoutConverter::ConvertPiecesToV0_1_5()
                 return p;
             };
 
-            const QVector<QPointF> path = StringToPath(node.text());
-            if (not path.isEmpty())
+            if (const QVector<QPointF> path = StringToPath(node.text()); not path.isEmpty())
             {
                 auto LineToString = [](const QLineF &line)
                 {

@@ -439,14 +439,12 @@ auto VPattern::GetCompletePPData(const QString &name) const -> VContainer
 // cppcheck-suppress unusedFunction
 auto VPattern::SPointActiveDraw() -> quint32
 {
-    QDomElement calcElement;
-    if (GetActivNodeElement(TagCalculation, calcElement))
+    if (QDomElement calcElement; GetActivNodeElement(TagCalculation, calcElement))
     {
-        const QDomNode domNode = calcElement.firstChild();
-        if (not domNode.isNull() && domNode.isElement())
+        if (const QDomNode domNode = calcElement.firstChild(); not domNode.isNull() && domNode.isElement())
         {
-            const QDomElement domElement = domNode.toElement();
-            if (not domElement.isNull() && domElement.tagName() == TagPoint &&
+            if (const QDomElement domElement = domNode.toElement();
+                not domElement.isNull() && domElement.tagName() == TagPoint &&
                 domElement.attribute(AttrType, QString()) == VToolBasePoint::ToolType)
             {
                 return GetParametrId(domElement);
@@ -460,8 +458,7 @@ auto VPattern::SPointActiveDraw() -> quint32
 auto VPattern::GetActivePPPieces() const -> QVector<quint32>
 {
     QVector<quint32> pieces;
-    QDomElement drawElement;
-    if (GetActivDrawElement(drawElement))
+    if (QDomElement drawElement; GetActivDrawElement(drawElement))
     {
         const QDomElement details = drawElement.firstChildElement(TagDetails);
         if (not details.isNull())
@@ -469,8 +466,7 @@ auto VPattern::GetActivePPPieces() const -> QVector<quint32>
             QDomElement detail = details.firstChildElement(TagDetail);
             while (not detail.isNull())
             {
-                bool const united = GetParametrBool(detail, VToolSeamAllowance::AttrUnited, falseStr);
-                if (not united)
+                if (bool const united = GetParametrBool(detail, VToolSeamAllowance::AttrUnited, falseStr); not united)
                 {
                     pieces.append(GetParametrId(detail));
                 }
@@ -496,8 +492,7 @@ auto VPattern::SaveDocument(const QString &fileName, QString &error) -> bool
     }
 
     // Update comment with Valentina version
-    QDomNode const commentNode = documentElement().firstChild();
-    if (commentNode.isComment())
+    if (QDomNode const commentNode = documentElement().firstChild(); commentNode.isComment())
     {
         QDomComment comment = commentNode.toComment();
         comment.setData(FileComment());
@@ -528,8 +523,7 @@ void VPattern::LiteParseIncrements()
         QDomNodeList tags = elementsByTagName(TagIncrements);
         if (not tags.isEmpty())
         {
-            const QDomNode domElement = tags.at(0);
-            if (not domElement.isNull())
+            if (const QDomNode domElement = tags.at(0); not domElement.isNull())
             {
                 ParseIncrementsElement(domElement, Document::LiteParse);
             }
@@ -538,8 +532,7 @@ void VPattern::LiteParseIncrements()
         tags = elementsByTagName(TagPreviewCalculations);
         if (not tags.isEmpty())
         {
-            const QDomNode domElement = tags.at(0);
-            if (not domElement.isNull())
+            if (const QDomNode domElement = tags.at(0); not domElement.isNull())
             {
                 ParseIncrementsElement(domElement, Document::LiteParse);
             }
@@ -753,9 +746,10 @@ auto VPattern::ParseDetailNode(const QDomElement &domElement) -> VNodeDetail
     const QString t = GetParametrString(domElement, AttrType, QStringLiteral("NodePoint"));
     Tool tool;
 
-    QStringList const types{VAbstractPattern::NodePoint, VAbstractPattern::NodeArc, VAbstractPattern::NodeSpline,
-                            VAbstractPattern::NodeSplinePath, VAbstractPattern::NodeElArc};
-    switch (types.indexOf(t))
+    switch (QStringList const types{VAbstractPattern::NodePoint, VAbstractPattern::NodeArc,
+                                    VAbstractPattern::NodeSpline, VAbstractPattern::NodeSplinePath,
+                                    VAbstractPattern::NodeElArc};
+            types.indexOf(t))
     {
         case 0: // NodePoint
             tool = Tool::NodePoint;
@@ -1065,8 +1059,7 @@ void VPattern::ParseDetailInternals(const QDomElement &domElement, VPiece &detai
     const QDomNodeList nodeList = domElement.childNodes();
     for (qint32 i = 0; i < nodeList.size(); ++i)
     {
-        const QDomElement element = nodeList.at(i).toElement();
-        if (not element.isNull())
+        if (const QDomElement element = nodeList.at(i).toElement(); not element.isNull())
         {
             switch (tags.indexOf(element.tagName()))
             {
@@ -1225,9 +1218,9 @@ auto VPattern::ParsePieceDataTag(const QDomElement &domElement, VPieceLabelData 
     ppData.SetRotation(GetParametrString(domElement, AttrRotation, QChar('0')));
 
     const quint32 topLeftPin = GetParametrUInt(domElement, VToolSeamAllowance::AttrTopLeftPin, NULL_ID_STR);
-    const quint32 bottomRightPin = GetParametrUInt(domElement, VToolSeamAllowance::AttrBottomRightPin, NULL_ID_STR);
 
-    if (topLeftPin != NULL_ID && bottomRightPin != NULL_ID && topLeftPin != bottomRightPin)
+    if (const quint32 bottomRightPin = GetParametrUInt(domElement, VToolSeamAllowance::AttrBottomRightPin, NULL_ID_STR);
+        topLeftPin != NULL_ID && bottomRightPin != NULL_ID && topLeftPin != bottomRightPin)
     {
         ppData.SetTopLeftPin(topLeftPin);
         ppData.SetBottomRightPin(bottomRightPin);
@@ -1259,9 +1252,9 @@ auto VPattern::ParsePiecePatternInfo(const QDomElement &domElement, VPatternLabe
     patternInfo.SetRotation(GetParametrString(domElement, AttrRotation, QChar('0')));
 
     const quint32 topLeftPin = GetParametrUInt(domElement, VToolSeamAllowance::AttrTopLeftPin, NULL_ID_STR);
-    const quint32 bottomRightPin = GetParametrUInt(domElement, VToolSeamAllowance::AttrBottomRightPin, NULL_ID_STR);
 
-    if (topLeftPin != NULL_ID && bottomRightPin != NULL_ID && topLeftPin != bottomRightPin)
+    if (const quint32 bottomRightPin = GetParametrUInt(domElement, VToolSeamAllowance::AttrBottomRightPin, NULL_ID_STR);
+        topLeftPin != NULL_ID && bottomRightPin != NULL_ID && topLeftPin != bottomRightPin)
     {
         patternInfo.SetTopLeftPin(topLeftPin);
         patternInfo.SetBottomRightPin(bottomRightPin);
@@ -1291,9 +1284,9 @@ auto VPattern::ParsePieceGrainline(const QDomElement &domElement, VGrainlineData
     gGeometry.SetArrowType(static_cast<GrainlineArrowDirection>(GetParametrUInt(domElement, AttrArrows, QChar('0'))));
 
     const quint32 topPin = GetParametrUInt(domElement, VToolSeamAllowance::AttrTopPin, NULL_ID_STR);
-    const quint32 bottomPin = GetParametrUInt(domElement, VToolSeamAllowance::AttrBottomPin, NULL_ID_STR);
 
-    if (topPin != NULL_ID && bottomPin != NULL_ID && topPin != bottomPin)
+    if (const quint32 bottomPin = GetParametrUInt(domElement, VToolSeamAllowance::AttrBottomPin, NULL_ID_STR);
+        topPin != NULL_ID && bottomPin != NULL_ID && topPin != bottomPin)
     {
         gGeometry.SetTopPin(topPin);
         gGeometry.SetBottomPin(bottomPin);
@@ -1545,8 +1538,7 @@ void VPattern::SplinesCommonAttributes(const QDomElement &domElement, quint32 &i
 //---------------------------------------------------------------------------------------------------------------------
 void VPattern::ParseCurrentPP()
 {
-    QDomElement domElement;
-    if (GetActivDrawElement(domElement))
+    if (QDomElement domElement; GetActivDrawElement(domElement))
     {
         ParseDrawElement(domElement, Document::LiteParse);
     }
@@ -2782,9 +2774,7 @@ void VPattern::ParseToolSpline(VMainGraphicsScene *scene, QDomElement &domElemen
         initData.approximationScale = GetParametrDouble(domElement, AttrAScale, QChar('0'));
         initData.aliasSuffix = GetParametrEmptyString(domElement, AttrAlias);
 
-        VToolSpline *spl = VToolSpline::Create(initData);
-
-        if (spl != nullptr)
+        if (VToolSpline *spl = VToolSpline::Create(initData); spl != nullptr)
         {
             auto *window = qobject_cast<VAbstractMainWindow *>(VAbstractValApplication::VApp()->getMainWindow());
             SCASSERT(window != nullptr)
@@ -2988,9 +2978,7 @@ void VPattern::ParseToolSplinePath(VMainGraphicsScene *scene, const QDomElement 
         const QVector<QString> length1 = initData.l1;
         const QVector<QString> length2 = initData.l2;
 
-        VToolSplinePath *spl = VToolSplinePath::Create(initData);
-
-        if (spl != nullptr)
+        if (VToolSplinePath *spl = VToolSplinePath::Create(initData); spl != nullptr)
         {
             const auto *window = qobject_cast<VAbstractMainWindow *>(VAbstractValApplication::VApp()->getMainWindow());
             SCASSERT(window != nullptr)
@@ -3640,11 +3628,9 @@ auto VPattern::FindIncrement(const QString &name) const -> QDomElement
 
     for (int i = 0; i < list.size(); ++i)
     {
-        const QDomElement domElement = list.at(i).toElement();
-        if (not domElement.isNull())
+        if (const QDomElement domElement = list.at(i).toElement(); not domElement.isNull())
         {
-            const QString parameter = domElement.attribute(AttrName);
-            if (parameter == name)
+            if (const QString parameter = domElement.attribute(AttrName); parameter == name)
             {
                 return domElement;
             }
@@ -3761,8 +3747,7 @@ void VPattern::RemoveIncrement(const QString &type, const QString &name)
 //---------------------------------------------------------------------------------------------------------------------
 void VPattern::MoveUpIncrement(const QString &type, const QString &name)
 {
-    const QDomElement node = FindIncrement(name);
-    if (not node.isNull())
+    if (const QDomElement node = FindIncrement(name); not node.isNull())
     {
         const QDomElement prSibling = node.previousSiblingElement(TagIncrement);
         if (not prSibling.isNull())
@@ -3776,8 +3761,7 @@ void VPattern::MoveUpIncrement(const QString &type, const QString &name)
 //---------------------------------------------------------------------------------------------------------------------
 void VPattern::MoveDownIncrement(const QString &type, const QString &name)
 {
-    const QDomElement node = FindIncrement(name);
-    if (not node.isNull())
+    if (const QDomElement node = FindIncrement(name); not node.isNull())
     {
         const QDomElement nextSibling = node.nextSiblingElement(TagIncrement);
         if (not nextSibling.isNull())
@@ -3791,8 +3775,7 @@ void VPattern::MoveDownIncrement(const QString &type, const QString &name)
 //---------------------------------------------------------------------------------------------------------------------
 void VPattern::SetIncrementAttribute(const QString &name, const QString &attr, const QString &text)
 {
-    QDomElement node = FindIncrement(name);
-    if (not node.isNull())
+    if (QDomElement node = FindIncrement(name); not node.isNull())
     {
         SetAttribute(node, attr, text);
         emit patternChanged(false);
@@ -3808,8 +3791,7 @@ auto VPattern::LastDrawName() const -> QString
         return QString();
     }
 
-    const QDomElement &elem = elements.at(elements.size() - 1).toElement();
-    if (not elem.isNull())
+    if (const QDomElement &elem = elements.at(elements.size() - 1).toElement(); not elem.isNull())
     {
         return GetParametrString(elem, AttrName);
     }
@@ -4111,8 +4093,7 @@ void VPattern::ParsePathElement(VMainGraphicsScene *scene, QDomElement &domEleme
         ToolsCommonAttributes(domElement, initData.id);
         initData.idTool = GetParametrUInt(domElement, VAbstractNode::AttrIdTool, NULL_ID_STR);
 
-        const QDomElement element = domElement.firstChildElement(VAbstractPattern::TagNodes);
-        if (not element.isNull())
+        if (const QDomElement element = domElement.firstChildElement(VAbstractPattern::TagNodes); not element.isNull())
         {
             initData.path = ParsePathNodes(element);
 
@@ -4290,8 +4271,7 @@ void VPattern::SetIncrementDescription(const QString &name, const QString &text)
     }
     else
     {
-        QDomElement node = FindIncrement(name);
-        if (not node.isNull())
+        if (QDomElement node = FindIncrement(name); not node.isNull())
         {
             node.removeAttribute(AttrDescription);
             emit patternChanged(false);
@@ -4302,8 +4282,7 @@ void VPattern::SetIncrementDescription(const QString &name, const QString &text)
 //---------------------------------------------------------------------------------------------------------------------
 void VPattern::SetIncrementSpecialUnits(const QString &name, bool special)
 {
-    QDomElement node = FindIncrement(name);
-    if (not node.isNull())
+    if (QDomElement node = FindIncrement(name); not node.isNull())
     {
         SetAttributeOrRemoveIf<bool>(node, AttrSpecialUnits, special,
                                      [](bool special) noexcept { return not special; });

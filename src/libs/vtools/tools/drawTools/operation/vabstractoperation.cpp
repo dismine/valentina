@@ -216,8 +216,7 @@ auto VAbstractOperation::ExtractSourceData(const QDomElement &domElement) -> QVe
             const QDomNodeList srcList = dataElement.childNodes();
             for (qint32 j = 0; j < srcList.size(); ++j)
             {
-                const QDomElement element = srcList.at(j).toElement();
-                if (not element.isNull())
+                if (const QDomElement element = srcList.at(j).toElement(); not element.isNull())
                 {
                     SourceItem item;
                     item.id = VDomDocument::GetParametrUInt(element, AttrIdObject, NULL_ID_STR);
@@ -247,8 +246,7 @@ auto VAbstractOperation::ExtractDestinationData(const QDomElement &domElement) -
             const QDomNodeList srcList = dataElement.childNodes();
             for (qint32 j = 0; j < srcList.size(); ++j)
             {
-                const QDomElement element = srcList.at(j).toElement();
-                if (not element.isNull())
+                if (const QDomElement element = srcList.at(j).toElement(); not element.isNull())
                 {
                     DestinationItem d;
                     d.id = VDomDocument::GetParametrUInt(element, AttrIdObject, NULL_ID_STR);
@@ -983,9 +981,10 @@ void VAbstractOperation::CreateVisibilityGroup(const VAbstractOperationInitData 
 
     const QMap<quint32, quint32> groupData = VisibilityGroupDataFromSource(initData.data, initData.source);
     vidtype const groupId = initData.data->getNextId();
-    const QDomElement group = initData.doc->CreateGroup(groupId, initData.visibilityGroupName,
-                                                        initData.visibilityGroupTags, groupData, initData.id);
-    if (not group.isNull())
+
+    if (const QDomElement group = initData.doc->CreateGroup(groupId, initData.visibilityGroupName,
+                                                            initData.visibilityGroupTags, groupData, initData.id);
+        not group.isNull())
     {
         auto *addGroup = new AddGroup(group, initData.doc);
         connect(addGroup, &AddGroup::UpdateGroups, initData.doc, &VAbstractPattern::UpdateVisiblityGroups);

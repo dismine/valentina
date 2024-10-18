@@ -54,11 +54,9 @@ void AddGroup::undo()
 
     doc->ChangeActivPP(nameActivDraw);//Without this user will not see this change
 
-    QDomElement groups = doc->CreateGroups();
-    if (not groups.isNull())
+    if (QDomElement groups = doc->CreateGroups(); not groups.isNull())
     {
-        QDomElement group = doc->elementById(nodeId, VAbstractPattern::TagGroup);
-        if (group.isElement())
+        if (QDomElement group = doc->elementById(nodeId, VAbstractPattern::TagGroup); group.isElement())
         {
             group.setAttribute(VAbstractPattern::AttrVisible, trueStr);
             doc->ParseGroups(groups);
@@ -102,8 +100,7 @@ void AddGroup::redo()
 
     doc->ChangeActivPP(nameActivDraw);//Without this user will not see this change
 
-    QDomElement groups = doc->CreateGroups();
-    if (not groups.isNull())
+    if (QDomElement groups = doc->CreateGroups(); not groups.isNull())
     {
         groups.appendChild(xml);
         doc->ParseGroups(groups);
@@ -211,8 +208,7 @@ void AddItemToGroup::performUndoRedo(bool isUndo)
 {
     doc->ChangeActivPP(nameActivDraw);//Without this user will not see this change
 
-    QDomElement group = doc->elementById(nodeId, VAbstractPattern::TagGroup);
-    if (group.isElement())
+    if (QDomElement group = doc->elementById(nodeId, VAbstractPattern::TagGroup); group.isElement())
     {
         if(isUndo)
         {
@@ -242,11 +238,11 @@ void AddItemToGroup::performUndoRedo(bool isUndo)
         doc->SetModified(true);
         emit VAbstractValApplication::VApp()->getCurrentDocument()->patternChanged(false);
 
-        QDomElement const groups = doc->CreateGroups();
-        if (not groups.isNull())
+        if (QDomElement const groups = doc->CreateGroups(); not groups.isNull())
         {
             doc->ParseGroups(groups);
-        } else
+        }
+        else
         {
             qCDebug(vUndo, "Can't get tag Groups.");
             return;
@@ -297,8 +293,7 @@ void RemoveItemFromGroup::performUndoRedo(bool isUndo)
 {
     doc->ChangeActivPP(nameActivDraw);//Without this user will not see this change
 
-    QDomElement group = doc->elementById(nodeId, VAbstractPattern::TagGroup);
-    if (group.isElement())
+    if (QDomElement group = doc->elementById(nodeId, VAbstractPattern::TagGroup); group.isElement())
     {
         if(isUndo)
         {
@@ -327,11 +322,11 @@ void RemoveItemFromGroup::performUndoRedo(bool isUndo)
         doc->SetModified(true);
         emit VAbstractValApplication::VApp()->getCurrentDocument()->patternChanged(false);
 
-        QDomElement const groups = doc->CreateGroups();
-        if (not groups.isNull())
+        if (QDomElement const groups = doc->CreateGroups(); not groups.isNull())
         {
             doc->ParseGroups(groups);
-        } else
+        }
+        else
         {
             qCDebug(vUndo, "Can't get tag Groups.");
             return;
@@ -363,8 +358,7 @@ ChangeGroupVisibility::ChangeGroupVisibility(VAbstractPattern *doc, vidtype id, 
 {
     setText(tr("change group visibility"));
     nodeId = id;
-    QDomElement const group = doc->elementById(nodeId, VAbstractPattern::TagGroup);
-    if (group.isElement())
+    if (QDomElement const group = doc->elementById(nodeId, VAbstractPattern::TagGroup); group.isElement())
     {
         m_oldVisibility = doc->GetParametrBool(group, VAbstractPattern::AttrVisible, trueStr);
     }
@@ -395,13 +389,11 @@ void ChangeGroupVisibility::Do(bool visible)
 {
     doc->ChangeActivPP(m_nameActivDraw);//Without this user will not see this change
 
-    QDomElement group = doc->elementById(nodeId, VAbstractPattern::TagGroup);
-    if (group.isElement())
+    if (QDomElement group = doc->elementById(nodeId, VAbstractPattern::TagGroup); group.isElement())
     {
         doc->SetAttribute(group, VAbstractPattern::AttrVisible, visible);
 
-        QDomElement const groups = doc->CreateGroups();
-        if (not groups.isNull())
+        if (QDomElement const groups = doc->CreateGroups(); not groups.isNull())
         {
             doc->ParseGroups(groups);
         }
@@ -430,8 +422,7 @@ ChangeMultipleGroupsVisibility::ChangeMultipleGroupsVisibility(VAbstractPattern 
 
     for(auto & groupId : m_groups)
     {
-        QDomElement const group = doc->elementById(groupId, VAbstractPattern::TagGroup);
-        if (group.isElement())
+        if (QDomElement const group = doc->elementById(groupId, VAbstractPattern::TagGroup); group.isElement())
         {
             m_oldVisibility.insert(groupId, doc->GetParametrBool(group, VAbstractPattern::AttrVisible, trueStr));
         }
@@ -455,8 +446,7 @@ void ChangeMultipleGroupsVisibility::undo()
     QMap<vidtype, bool>::const_iterator i = m_oldVisibility.constBegin();
     while (i != m_oldVisibility.constEnd())
     {
-        QDomElement group = doc->elementById(i.key(), VAbstractPattern::TagGroup);
-        if (group.isElement())
+        if (QDomElement group = doc->elementById(i.key(), VAbstractPattern::TagGroup); group.isElement())
         {
             doc->SetAttribute(group, VAbstractPattern::AttrVisible, i.value());
             groupsState.insert(i.key(), i.value());
@@ -470,8 +460,7 @@ void ChangeMultipleGroupsVisibility::undo()
 
     if (not groupsState.isEmpty())
     {
-        QDomElement const groups = doc->CreateGroups();
-        if (not groups.isNull())
+        if (QDomElement const groups = doc->CreateGroups(); not groups.isNull())
         {
             doc->ParseGroups(groups);
         }
@@ -494,8 +483,7 @@ void ChangeMultipleGroupsVisibility::redo()
 
     for (auto& groupId : m_groups)
     {
-        QDomElement group = doc->elementById(groupId, VAbstractPattern::TagGroup);
-        if (group.isElement())
+        if (QDomElement group = doc->elementById(groupId, VAbstractPattern::TagGroup); group.isElement())
         {
             doc->SetAttribute(group, VAbstractPattern::AttrVisible, m_newVisibility);
             groupsState.insert(groupId, m_newVisibility);
@@ -508,8 +496,7 @@ void ChangeMultipleGroupsVisibility::redo()
 
     if (not groupsState.isEmpty())
     {
-        QDomElement const groups = doc->CreateGroups();
-        if (not groups.isNull())
+        if (QDomElement const groups = doc->CreateGroups(); not groups.isNull())
         {
             doc->ParseGroups(groups);
         }
@@ -541,8 +528,7 @@ void DelGroup::undo()
         emit doc->SetCurrentPP(nameActivDraw);//Without this user will not see this change
     }
 
-    QDomElement groups = doc->CreateGroups();
-    if (not groups.isNull())
+    if (QDomElement groups = doc->CreateGroups(); not groups.isNull())
     {
         groups.appendChild(xml);
         doc->ParseGroups(groups);
@@ -567,11 +553,10 @@ void DelGroup::redo()
     {//Keep first!
         emit doc->SetCurrentPP(nameActivDraw);//Without this user will not see this change
     }
-    QDomElement groups = doc->CreateGroups();
-    if (not groups.isNull())
+
+    if (QDomElement groups = doc->CreateGroups(); not groups.isNull())
     {
-        QDomElement group = doc->elementById(nodeId, VAbstractPattern::TagGroup);
-        if (group.isElement())
+        if (QDomElement group = doc->elementById(nodeId, VAbstractPattern::TagGroup); group.isElement())
         {
             group.setAttribute(VAbstractPattern::AttrVisible, trueStr);
             doc->ParseGroups(groups);

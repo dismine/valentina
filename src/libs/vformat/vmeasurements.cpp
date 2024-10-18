@@ -180,8 +180,7 @@ void VMeasurements::setXMLContent(const QString &fileName)
 auto VMeasurements::SaveDocument(const QString &fileName, QString &error) -> bool
 {
     // Update comment with Valentina version
-    QDomNode const commentNode = documentElement().firstChild();
-    if (commentNode.isComment())
+    if (QDomNode const commentNode = documentElement().firstChild(); commentNode.isComment())
     {
         QDomComment comment = commentNode.toComment();
         comment.setData(FileComment());
@@ -409,8 +408,7 @@ void VMeasurements::ClearForExport()
 
     for (int i = 0; i < list.size(); ++i)
     {
-        QDomElement domElement = list.at(i).toElement();
-        if (not domElement.isNull())
+        if (QDomElement domElement = list.at(i).toElement(); not domElement.isNull())
         {
             if (Type() == MeasurementsType::Individual)
             {
@@ -661,8 +659,7 @@ void VMeasurements::SetFullCircumference(bool fc)
 //---------------------------------------------------------------------------------------------------------------------
 void VMeasurements::SetMName(const QString &name, const QString &text)
 {
-    QDomElement node = FindM(name);
-    if (not node.isNull())
+    if (QDomElement node = FindM(name); not node.isNull())
     {
         SetAttribute(node, AttrName, text);
     }
@@ -675,8 +672,7 @@ void VMeasurements::SetMName(const QString &name, const QString &text)
 //---------------------------------------------------------------------------------------------------------------------
 void VMeasurements::SetMValue(const QString &name, const QString &text)
 {
-    QDomElement node = FindM(name);
-    if (not node.isNull())
+    if (QDomElement node = FindM(name); not node.isNull())
     {
         SetAttribute(node, AttrValue, text);
     }
@@ -689,8 +685,7 @@ void VMeasurements::SetMValue(const QString &name, const QString &text)
 //---------------------------------------------------------------------------------------------------------------------
 void VMeasurements::SetMBaseValue(const QString &name, double value)
 {
-    QDomElement node = FindM(name);
-    if (not node.isNull())
+    if (QDomElement node = FindM(name); not node.isNull())
     {
         SetAttribute(node, AttrBase, value);
     }
@@ -703,8 +698,7 @@ void VMeasurements::SetMBaseValue(const QString &name, double value)
 //---------------------------------------------------------------------------------------------------------------------
 void VMeasurements::SetMShiftA(const QString &name, double value)
 {
-    QDomElement node = FindM(name);
-    if (not node.isNull())
+    if (QDomElement node = FindM(name); not node.isNull())
     {
         SetAttribute(node, AttrShiftA, value);
     }
@@ -717,8 +711,7 @@ void VMeasurements::SetMShiftA(const QString &name, double value)
 //---------------------------------------------------------------------------------------------------------------------
 void VMeasurements::SetMShiftB(const QString &name, double value)
 {
-    QDomElement node = FindM(name);
-    if (not node.isNull())
+    if (QDomElement node = FindM(name); not node.isNull())
     {
         SetAttribute(node, AttrShiftB, value);
     }
@@ -731,8 +724,7 @@ void VMeasurements::SetMShiftB(const QString &name, double value)
 //---------------------------------------------------------------------------------------------------------------------
 void VMeasurements::SetMShiftC(const QString &name, double value)
 {
-    QDomElement node = FindM(name);
-    if (not node.isNull())
+    if (QDomElement node = FindM(name); not node.isNull())
     {
         SetAttribute(node, AttrShiftC, value);
     }
@@ -745,8 +737,7 @@ void VMeasurements::SetMShiftC(const QString &name, double value)
 //---------------------------------------------------------------------------------------------------------------------
 void VMeasurements::SetMSpecialUnits(const QString &name, bool special)
 {
-    QDomElement node = FindM(name);
-    if (not node.isNull())
+    if (QDomElement node = FindM(name); not node.isNull())
     {
         SetAttributeOrRemoveIf<bool>(node, AttrSpecialUnits, special,
                                      [](bool special) noexcept { return not special; });
@@ -760,8 +751,7 @@ void VMeasurements::SetMSpecialUnits(const QString &name, bool special)
 //---------------------------------------------------------------------------------------------------------------------
 void VMeasurements::SetMCorrectionValue(const QString &name, qreal baseA, qreal baseB, qreal baseC, double value)
 {
-    QDomElement mElement = FindM(name);
-    if (not mElement.isNull())
+    if (QDomElement mElement = FindM(name); not mElement.isNull())
     {
         QMap<QString, qreal> corrections = ReadCorrections(mElement);
         const QString hash = VMeasurement::CorrectionHash(baseA, baseB, baseC);
@@ -789,8 +779,7 @@ void VMeasurements::SetMCorrectionValue(const QString &name, qreal baseA, qreal 
 //---------------------------------------------------------------------------------------------------------------------
 void VMeasurements::SetMDescription(const QString &name, const QString &text)
 {
-    QDomElement node = FindM(name);
-    if (not node.isNull())
+    if (QDomElement node = FindM(name); not node.isNull())
     {
         SetAttributeOrRemoveIf<QString>(node, AttrDescription, text,
                                         [](const QString &text) noexcept { return text.isEmpty(); });
@@ -804,8 +793,7 @@ void VMeasurements::SetMDescription(const QString &name, const QString &text)
 //---------------------------------------------------------------------------------------------------------------------
 void VMeasurements::SetMFullName(const QString &name, const QString &text)
 {
-    QDomElement node = FindM(name);
-    if (not node.isNull())
+    if (QDomElement node = FindM(name); not node.isNull())
     {
         SetAttribute(node, AttrFullName, text);
     }
@@ -819,8 +807,7 @@ void VMeasurements::SetMFullName(const QString &name, const QString &text)
 void VMeasurements::SetMDimension(const QString &name, IMD type)
 {
     ClearDimension(type);
-    QDomElement node = FindM(name);
-    if (not node.isNull())
+    if (QDomElement node = FindM(name); not node.isNull())
     {
         SetAttributeOrRemoveIf<QString>(node, AttrDimension, VMeasurements::IMDToStr(type),
                                         [](const QString &type) noexcept
@@ -835,8 +822,7 @@ void VMeasurements::SetMDimension(const QString &name, IMD type)
 //---------------------------------------------------------------------------------------------------------------------
 void VMeasurements::SetMImage(const QString &name, const VPatternImage &image)
 {
-    QDomElement mElement = FindM(name);
-    if (not mElement.isNull())
+    if (QDomElement mElement = FindM(name); not mElement.isNull())
     {
         WriteImage(mElement, image);
     }

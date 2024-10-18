@@ -78,9 +78,7 @@ auto MimeTypeFromByteArray(const QByteArray &data) -> QMimeType
     QSet<QString> aliases = ConvertToSet<QString>(mime.aliases());
     aliases.insert(mime.name());
 
-    QSet<QString> const gzipMime{"application/gzip", "application/x-gzip"};
-
-    if (gzipMime.contains(aliases))
+    if (QSet<QString> const gzipMime{"application/gzip", "application/x-gzip"}; gzipMime.contains(aliases))
     {
         QSvgRenderer const render(data);
         if (render.isValid())

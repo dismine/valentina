@@ -326,9 +326,7 @@ auto VBackgroundPatternImage::Type() const -> PatternImage
         return PatternImage::Unknown;
     }
 
-    QMimeType const mime = MimeTypeFromData();
-
-    if (mime.name().startsWith(QStringLiteral("image/svg+xml")))
+    if (QMimeType const mime = MimeTypeFromData(); mime.name().startsWith(QStringLiteral("image/svg+xml")))
     {
         return PatternImage::Vector;
     }

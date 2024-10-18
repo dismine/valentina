@@ -180,10 +180,9 @@ auto ReadVal(const QString &formula, qreal &val, const QLocale &locale, const QC
     Q_UNUSED(decimalPoint)
     Q_UNUSED(groupSeparator)
 
-    QSet<QChar> const reserved{positiveSign, negativeSign, sign0, sign1, sign2, sign3,    sign4,
-                               sign5,        sign6,        sign7, sign8, sign9, expUpper, expLower};
-
-    if (reserved.contains(decimal) || reserved.contains(thousand))
+    if (QSet<QChar> const reserved{positiveSign, negativeSign, sign0, sign1, sign2, sign3, sign4, sign5, sign6, sign7,
+                                   sign8, sign9, expUpper, expLower};
+        reserved.contains(decimal) || reserved.contains(thousand))
     {
         val = 0;
         return -1;
@@ -281,8 +280,8 @@ auto ReadVal(const QString &formula, qreal &val, const QLocale &locale, const QC
             // Convert to C locale
             QLocale cLocale(QLocale::C);
             const QChar cDecimal = LocaleDecimalPoint(cLocale);
-            const QChar cThousand = LocaleGroupSeparator(cLocale);
-            if (locale != cLocale && (cDecimal != decimal || cThousand != thousand))
+            if (const QChar cThousand = LocaleGroupSeparator(cLocale);
+                locale != cLocale && (cDecimal != decimal || cThousand != thousand))
             {
                 if (decimal == cThousand)
                 { // Handle reverse to C locale case: thousand '.', decimal ','
@@ -424,8 +423,7 @@ auto SupportedLocale(const QLocale &locale) -> bool
 auto LocalePositiveSign(const QLocale &locale) -> QChar
 {
 #if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
-    const QString sign = locale.positiveSign();
-    if (sign.size() == 1)
+    if (const QString sign = locale.positiveSign(); sign.size() == 1)
     {
         return sign.front();
     }
@@ -440,8 +438,7 @@ auto LocalePositiveSign(const QLocale &locale) -> QChar
 auto LocaleNegativeSign(const QLocale &locale) -> QChar
 {
 #if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
-    const QString sign = locale.negativeSign();
-    if (sign.size() == 1)
+    if (const QString sign = locale.negativeSign(); sign.size() == 1)
     {
         return sign.front();
     }
@@ -455,8 +452,7 @@ auto LocaleNegativeSign(const QLocale &locale) -> QChar
 //---------------------------------------------------------------------------------------------------------------------
 auto LocaleSign0(const QLocale &locale) -> QChar
 {
-    const QString sign = locale.toString(0);
-    if (sign.size() == 1)
+    if (const QString sign = locale.toString(0); sign.size() == 1)
     {
         return sign.front();
     }
@@ -471,8 +467,7 @@ auto LocaleSign0(const QLocale &locale) -> QChar
 //---------------------------------------------------------------------------------------------------------------------
 auto LocaleSign1(const QLocale &locale) -> QChar
 {
-    const QString sign = locale.toString(1);
-    if (sign.size() == 1)
+    if (const QString sign = locale.toString(1); sign.size() == 1)
     {
         return sign.front();
     }
@@ -487,8 +482,7 @@ auto LocaleSign1(const QLocale &locale) -> QChar
 //---------------------------------------------------------------------------------------------------------------------
 auto LocaleSign2(const QLocale &locale) -> QChar
 {
-    const QString sign = locale.toString(2);
-    if (sign.size() == 1)
+    if (const QString sign = locale.toString(2); sign.size() == 1)
     {
         return sign.front();
     }
@@ -503,8 +497,7 @@ auto LocaleSign2(const QLocale &locale) -> QChar
 //---------------------------------------------------------------------------------------------------------------------
 auto LocaleSign3(const QLocale &locale) -> QChar
 {
-    const QString sign = locale.toString(3);
-    if (sign.size() == 1)
+    if (const QString sign = locale.toString(3); sign.size() == 1)
     {
         return sign.front();
     }
@@ -519,8 +512,7 @@ auto LocaleSign3(const QLocale &locale) -> QChar
 //---------------------------------------------------------------------------------------------------------------------
 auto LocaleSign4(const QLocale &locale) -> QChar
 {
-    const QString sign = locale.toString(4);
-    if (sign.size() == 1)
+    if (const QString sign = locale.toString(4); sign.size() == 1)
     {
         return sign.front();
     }
@@ -535,8 +527,7 @@ auto LocaleSign4(const QLocale &locale) -> QChar
 //---------------------------------------------------------------------------------------------------------------------
 auto LocaleSign5(const QLocale &locale) -> QChar
 {
-    const QString sign = locale.toString(5);
-    if (sign.size() == 1)
+    if (const QString sign = locale.toString(5); sign.size() == 1)
     {
         return sign.front();
     }
@@ -551,8 +542,7 @@ auto LocaleSign5(const QLocale &locale) -> QChar
 //---------------------------------------------------------------------------------------------------------------------
 auto LocaleSign6(const QLocale &locale) -> QChar
 {
-    const QString sign = locale.toString(6);
-    if (sign.size() == 1)
+    if (const QString sign = locale.toString(6); sign.size() == 1)
     {
         return sign.front();
     }
@@ -567,8 +557,7 @@ auto LocaleSign6(const QLocale &locale) -> QChar
 //---------------------------------------------------------------------------------------------------------------------
 auto LocaleSign7(const QLocale &locale) -> QChar
 {
-    const QString sign = locale.toString(7);
-    if (sign.size() == 1)
+    if (const QString sign = locale.toString(7); sign.size() == 1)
     {
         return sign.front();
     }
@@ -583,8 +572,7 @@ auto LocaleSign7(const QLocale &locale) -> QChar
 //---------------------------------------------------------------------------------------------------------------------
 auto LocaleSign8(const QLocale &locale) -> QChar
 {
-    const QString sign = locale.toString(8);
-    if (sign.size() == 1)
+    if (const QString sign = locale.toString(8); sign.size() == 1)
     {
         return sign.front();
     }
@@ -599,8 +587,7 @@ auto LocaleSign8(const QLocale &locale) -> QChar
 //---------------------------------------------------------------------------------------------------------------------
 auto LocaleSign9(const QLocale &locale) -> QChar
 {
-    const QString sign = locale.toString(9);
-    if (sign.size() == 1)
+    if (const QString sign = locale.toString(9); sign.size() == 1)
     {
         return sign.front();
     }
@@ -616,8 +603,7 @@ auto LocaleSign9(const QLocale &locale) -> QChar
 auto LocaleExpUpper(const QLocale &locale) -> QChar
 {
 #if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
-    const QString sign = locale.exponential();
-    if (sign.size() == 1)
+    if (const QString sign = locale.exponential(); sign.size() == 1)
     {
         return sign.front().toUpper();
     }
@@ -632,8 +618,7 @@ auto LocaleExpUpper(const QLocale &locale) -> QChar
 auto LocaleExpLower(const QLocale &locale) -> QChar
 {
 #if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
-    const QString sign = locale.exponential();
-    if (sign.size() == 1)
+    if (const QString sign = locale.exponential(); sign.size() == 1)
     {
         return sign.front().toLower();
     }
@@ -648,8 +633,7 @@ auto LocaleExpLower(const QLocale &locale) -> QChar
 auto LocaleDecimalPoint(const QLocale &locale) -> QChar
 {
 #if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
-    const QString sign = locale.decimalPoint();
-    if (sign.size() == 1)
+    if (const QString sign = locale.decimalPoint(); sign.size() == 1)
     {
         return sign.front();
     }
@@ -664,8 +648,7 @@ auto LocaleDecimalPoint(const QLocale &locale) -> QChar
 auto LocaleGroupSeparator(const QLocale &locale) -> QChar
 {
 #if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
-    const QString sign = locale.groupSeparator();
-    if (sign.size() == 1)
+    if (const QString sign = locale.groupSeparator(); sign.size() == 1)
     {
         return sign.front();
     }

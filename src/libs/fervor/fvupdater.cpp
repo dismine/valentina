@@ -424,8 +424,7 @@ auto FvUpdater::xmlParseFeed() -> bool
                 {
                     xmlEnclosurePlatform = attribs.value(fervorPlatform).toString().trimmed();
 
-                    const auto attributeUrl = QStringLiteral("url");
-                    if (attribs.hasAttribute(attributeUrl))
+                    if (const auto attributeUrl = QStringLiteral("url"); attribs.hasAttribute(attributeUrl))
                     {
                         xmlEnclosureUrl = attribs.value(attributeUrl).toString().trimmed();
                     }
@@ -580,11 +579,8 @@ void FvUpdater::IgnoreVersion(const QString &version)
 //---------------------------------------------------------------------------------------------------------------------
 auto FvUpdater::CurrentlyRunningOnPlatform(const QString &platform) -> bool
 {
-    const auto platforms = QStringList() << "Q_OS_LINUX"
-                                         << "Q_OS_MAC"
-                                         << "Q_OS_WIN32";
-
-    switch (platforms.indexOf(platform.toUpper().trimmed()))
+    switch (const auto platforms = QStringList({"Q_OS_LINUX", "Q_OS_MAC", "Q_OS_WIN32"});
+            platforms.indexOf(platform.toUpper().trimmed()))
     {
         case 0:   // Q_OS_LINUX
 #ifdef Q_OS_LINUX // Defined on Linux.

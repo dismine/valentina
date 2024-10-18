@@ -320,8 +320,7 @@ void VVITConverter::ConvertCustomerNameToV0_4_0()
 
     // Given name
     QString givenName;
-    const QDomNodeList givenNameList = this->elementsByTagName(*strGivenName);
-    if (not givenNameList.isEmpty())
+    if (const QDomNodeList givenNameList = this->elementsByTagName(*strGivenName); not givenNameList.isEmpty())
     {
         QDomNode const givenNameNode = givenNameList.at(0);
         givenName = givenNameNode.toElement().text();
@@ -330,8 +329,7 @@ void VVITConverter::ConvertCustomerNameToV0_4_0()
 
     // Family name
     QString familyName;
-    const QDomNodeList familyNameList = this->elementsByTagName(*strFamilyName);
-    if (not familyNameList.isEmpty())
+    if (const QDomNodeList familyNameList = this->elementsByTagName(*strFamilyName); not familyNameList.isEmpty())
     {
         QDomNode const familyNameNode = familyNameList.at(0);
         familyName = familyNameNode.toElement().text();
