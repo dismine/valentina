@@ -35,9 +35,9 @@ VPE::VBoolProperty::VBoolProperty(const QString& name) :
               QVariant::Bool)
 #endif
 {
-    d_ptr->VariantValue.setValue(false);
+    vproperty_d_ptr->VariantValue.setValue(false);
 #if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
-    d_ptr->VariantValue.convert(QMetaType(QMetaType::Bool));
+    vproperty_d_ptr->VariantValue.convert(QMetaType(QMetaType::Bool));
 #else
     d_ptr->VariantValue.convert(QVariant::Bool);
 #endif
@@ -47,7 +47,7 @@ VPE::VBoolProperty::VBoolProperty(const QString& name) :
 //! Get the data how it should be displayed
 auto VPE::VBoolProperty::data (int column, int role) const -> QVariant
 {
-    auto* tmpEditor = qobject_cast<QCheckBox*>(VProperty::d_ptr->editor);
+    auto* tmpEditor = qobject_cast<QCheckBox*>(VProperty::vproperty_d_ptr->editor);
 
     if (column == DPC_Data && Qt::DisplayRole == role)
     {
@@ -56,7 +56,7 @@ auto VPE::VBoolProperty::data (int column, int role) const -> QVariant
 
     if (column == DPC_Data && Qt::EditRole == role)
     {
-        return VProperty::d_ptr->VariantValue;
+        return VProperty::vproperty_d_ptr->VariantValue;
     }
 
     return VProperty::data(column, role);
@@ -68,7 +68,7 @@ auto VPE::VBoolProperty::createEditor(QWidget *parent, const QStyleOptionViewIte
     Q_UNUSED(options)
     Q_UNUSED(delegate)
     auto* tmpEditor = new QCheckBox(parent);
-    tmpEditor->setCheckState(d_ptr->VariantValue.toBool() ? Qt::Checked : Qt::Unchecked);
+    tmpEditor->setCheckState(vproperty_d_ptr->VariantValue.toBool() ? Qt::Checked : Qt::Unchecked);
 
 #if QT_VERSION >= QT_VERSION_CHECK(6, 7, 0)
     connect(tmpEditor, &QCheckBox::checkStateChanged, this, &VBoolProperty::StateChanged);
@@ -76,8 +76,8 @@ auto VPE::VBoolProperty::createEditor(QWidget *parent, const QStyleOptionViewIte
     connect(tmpEditor, &QCheckBox::stateChanged, this, &VBoolProperty::StateChanged);
 #endif
 
-    VProperty::d_ptr->editor = tmpEditor;
-    return VProperty::d_ptr->editor;
+    VProperty::vproperty_d_ptr->editor = tmpEditor;
+    return VProperty::vproperty_d_ptr->editor;
 }
 
 auto VPE::VBoolProperty::setEditorData(QWidget *editor) -> bool
@@ -91,7 +91,7 @@ auto VPE::VBoolProperty::setEditorData(QWidget *editor) -> bool
     if (tmpEditor)
     {
         tmpEditor->blockSignals(true);
-        tmpEditor->setCheckState(d_ptr->VariantValue.toBool() ? Qt::Checked : Qt::Unchecked);
+        tmpEditor->setCheckState(vproperty_d_ptr->VariantValue.toBool() ? Qt::Checked : Qt::Unchecked);
         tmpEditor->blockSignals(false);
         return true;
     }
@@ -112,16 +112,16 @@ auto VPE::VBoolProperty::getEditorData(const QWidget *editor) const -> QVariant
 
 void VPE::VBoolProperty::setValue(const QVariant &value)
 {
-    VProperty::d_ptr->VariantValue = value;
+    VProperty::vproperty_d_ptr->VariantValue = value;
 #if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
-    VProperty::d_ptr->VariantValue.convert(QMetaType(QMetaType::Bool));
+    VProperty::vproperty_d_ptr->VariantValue.convert(QMetaType(QMetaType::Bool));
 #else
     VProperty::d_ptr->VariantValue.convert(QVariant::Bool);
 #endif
 
-    if (VProperty::d_ptr->editor != nullptr)
+    if (VProperty::vproperty_d_ptr->editor != nullptr)
     {
-        setEditorData(VProperty::d_ptr->editor);
+        setEditorData(VProperty::vproperty_d_ptr->editor);
     }
 }
 
@@ -148,5 +148,5 @@ auto VPE::VBoolProperty::clone(bool include_children, VProperty *container) cons
 void VPE::VBoolProperty::StateChanged()
 {
     auto *event = new UserChangeEvent();
-    QCoreApplication::postEvent ( VProperty::d_ptr->editor, event );
+    QCoreApplication::postEvent ( VProperty::vproperty_d_ptr->editor, event );
 }

@@ -50,9 +50,9 @@ VPE::VLineColorProperty::VLineColorProperty(const QString &name)
     colors(),
     indexList()
 {
-    VProperty::d_ptr->VariantValue = 0;
+    VProperty::vproperty_d_ptr->VariantValue = 0;
 #if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
-    VProperty::d_ptr->VariantValue.convert(QMetaType(QMetaType::Int));
+    VProperty::vproperty_d_ptr->VariantValue.convert(QMetaType(QMetaType::Int));
 #else
     VProperty::d_ptr->VariantValue.convert(QVariant::Int);
 #endif
@@ -65,7 +65,7 @@ auto VPE::VLineColorProperty::data(int column, int role) const -> QVariant
         return {};
     }
 
-    int tmpIndex = VProperty::d_ptr->VariantValue.toInt();
+    int tmpIndex = VProperty::vproperty_d_ptr->VariantValue.toInt();
 
     if (tmpIndex < 0 || tmpIndex >= indexList.count())
     {
@@ -114,12 +114,12 @@ auto VPE::VLineColorProperty::createEditor(QWidget *parent, const QStyleOptionVi
     }
 
     tmpEditor->setLocale(parent->locale());
-    tmpEditor->setCurrentIndex(VProperty::d_ptr->VariantValue.toInt());
+    tmpEditor->setCurrentIndex(VProperty::vproperty_d_ptr->VariantValue.toInt());
     connect(tmpEditor, QOverload<int>::of(&QComboBox::currentIndexChanged), this,
             &VLineColorProperty::currentIndexChanged);
 
-    VProperty::d_ptr->editor = tmpEditor;
-    return VProperty::d_ptr->editor;
+    VProperty::vproperty_d_ptr->editor = tmpEditor;
+    return VProperty::vproperty_d_ptr->editor;
 }
 
 auto VPE::VLineColorProperty::getEditorData(const QWidget *editor) const -> QVariant
@@ -160,16 +160,16 @@ void VPE::VLineColorProperty::setValue(const QVariant &value)
         tmpIndex = 0;
     }
 
-    VProperty::d_ptr->VariantValue = tmpIndex;
+    VProperty::vproperty_d_ptr->VariantValue = tmpIndex;
 #if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
-    VProperty::d_ptr->VariantValue.convert(QMetaType(QMetaType::Int));
+    VProperty::vproperty_d_ptr->VariantValue.convert(QMetaType(QMetaType::Int));
 #else
     VProperty::d_ptr->VariantValue.convert(QVariant::Int);
 #endif
 
-    if (VProperty::d_ptr->editor != nullptr)
+    if (VProperty::vproperty_d_ptr->editor != nullptr)
     {
-        setEditorData(VProperty::d_ptr->editor);
+        setEditorData(VProperty::vproperty_d_ptr->editor);
     }
 }
 
@@ -199,5 +199,5 @@ void VPE::VLineColorProperty::currentIndexChanged(int index)
 {
     Q_UNUSED(index)
     auto *event = new UserChangeEvent();
-    QCoreApplication::postEvent(VProperty::d_ptr->editor, event);
+    QCoreApplication::postEvent(VProperty::vproperty_d_ptr->editor, event);
 }

@@ -166,7 +166,7 @@ protected:
     explicit VPropertyModel(VPropertyModelPrivate *d, QObject *parent = nullptr);
 
     //! The model data
-    VPropertyModelPrivate *d_ptr;
+    VPropertyModelPrivate *vproperty_d_ptr;
 
 private:
     Q_DISABLE_COPY_MOVE(VPropertyModel) // NOLINT

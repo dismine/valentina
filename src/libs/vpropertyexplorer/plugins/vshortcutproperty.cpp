@@ -48,7 +48,7 @@ auto VPE::VShortcutProperty::data(int column, int role) const -> QVariant
 {
     if (column == DPC_Data && (Qt::DisplayRole == role || Qt::EditRole == role))
     {
-        return d_ptr->VariantValue;
+        return vproperty_d_ptr->VariantValue;
     }
     return VProperty::data(column, role);
 }
@@ -72,7 +72,7 @@ auto VPE::VShortcutProperty::setEditorData(QWidget *editor) -> bool
     auto *tmpWidget = qobject_cast<VShortcutEditWidget *>(editor);
     if (tmpWidget)
     {
-        tmpWidget->setShortcut(d_ptr->VariantValue.toString(), false);
+        tmpWidget->setShortcut(vproperty_d_ptr->VariantValue.toString(), false);
     }
     else
         return false;

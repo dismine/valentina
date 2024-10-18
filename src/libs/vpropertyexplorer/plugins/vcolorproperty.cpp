@@ -44,7 +44,7 @@ auto VPE::VColorProperty::data(int column, int role) const -> QVariant
 {
     if (column == DPC_Data && (Qt::DisplayRole == role))
     {
-        return VColorPropertyEditor::GetColorString(d_ptr->VariantValue.value<QColor>());
+        return VColorPropertyEditor::GetColorString(vproperty_d_ptr->VariantValue.value<QColor>());
     }
     
     if (Qt::EditRole == role)
@@ -54,7 +54,7 @@ auto VPE::VColorProperty::data(int column, int role) const -> QVariant
     
     if (column == DPC_Data && (Qt::DecorationRole == role))
     {
-        return VColorPropertyEditor::GetColorPixmap(d_ptr->VariantValue.value<QColor>());
+        return VColorPropertyEditor::GetColorPixmap(vproperty_d_ptr->VariantValue.value<QColor>());
     }
 
     return VProperty::data(column, role);
@@ -69,7 +69,7 @@ auto VPE::VColorProperty::createEditor(QWidget *parent, const QStyleOptionViewIt
 
     auto *tmpWidget = new VColorPropertyEditor(parent);
     tmpWidget->setLocale(parent->locale());
-    tmpWidget->SetColor(d_ptr->VariantValue.value<QColor>());
+    tmpWidget->SetColor(vproperty_d_ptr->VariantValue.value<QColor>());
     return tmpWidget;
 }
 
@@ -79,7 +79,7 @@ auto VPE::VColorProperty::setEditorData(QWidget *editor) -> bool
     auto *tmpWidget = qobject_cast<VColorPropertyEditor *>(editor);
     if (tmpWidget)
     {
-        tmpWidget->SetColor(d_ptr->VariantValue.value<QColor>());
+        tmpWidget->SetColor(vproperty_d_ptr->VariantValue.value<QColor>());
     }
     else
         return false;

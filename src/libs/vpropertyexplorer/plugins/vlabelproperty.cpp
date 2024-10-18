@@ -51,9 +51,9 @@ VPE::VLabelProperty::VLabelProperty(const QString &name, const QMap<QString, QVa
     typeForParent(0)
 {
     VProperty::setSettings(settings);
-    d_ptr->VariantValue.setValue(QString());
+    vproperty_d_ptr->VariantValue.setValue(QString());
 #if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
-    d_ptr->VariantValue.convert(QMetaType(QMetaType::QString));
+    vproperty_d_ptr->VariantValue.convert(QMetaType(QMetaType::QString));
 #else
     d_ptr->VariantValue.convert(QVariant::String);
 #endif
@@ -63,9 +63,9 @@ VPE::VLabelProperty::VLabelProperty(const QString &name)
   : VProperty(name),
     typeForParent(0)
 {
-    d_ptr->VariantValue.setValue(QString());
+    vproperty_d_ptr->VariantValue.setValue(QString());
 #if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
-    d_ptr->VariantValue.convert(QMetaType(QMetaType::QString));
+    vproperty_d_ptr->VariantValue.convert(QMetaType(QMetaType::QString));
 #else
     d_ptr->VariantValue.convert(QVariant::String);
 #endif
@@ -80,17 +80,17 @@ auto VPE::VLabelProperty::createEditor(QWidget *parent, const QStyleOptionViewIt
     auto *tmpEditor = new QLabel(parent);
     tmpEditor->setLocale(parent->locale());
     tmpEditor->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Preferred);
-    tmpEditor->setText(d_ptr->VariantValue.toString());
+    tmpEditor->setText(vproperty_d_ptr->VariantValue.toString());
 
-    d_ptr->editor = tmpEditor;
-    return d_ptr->editor;
+    vproperty_d_ptr->editor = tmpEditor;
+    return vproperty_d_ptr->editor;
 }
 
 auto VPE::VLabelProperty::setEditorData(QWidget *editor) -> bool
 {
     if (auto *tmpWidget = qobject_cast<QLabel *>(editor))
     {
-        tmpWidget->setText(d_ptr->VariantValue.toString());
+        tmpWidget->setText(vproperty_d_ptr->VariantValue.toString());
         return true;
     }
 

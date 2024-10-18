@@ -91,7 +91,7 @@ protected:
                         const QString &description = QString());
 
     //! The protected data
-    VPropertyFormWidgetPrivate* d_ptr;
+    VPropertyFormWidgetPrivate *vproperty_d_ptr;
 
     //! Event filter for the editor widgets
     auto eventFilter(QObject *object, QEvent *event) -> bool;

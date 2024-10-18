@@ -44,7 +44,7 @@ VFormulaProperty::VFormulaProperty(const QString &name)
               static_cast<QVariant::Type>(VFormula::FormulaTypeId()))
 #endif
 {
-    d_ptr->type = VPE::Property::Complex;
+    vproperty_d_ptr->type = VPE::Property::Complex;
 
     auto *tmpFormula = new VPE::VStringProperty(tr("Formula"));
     addChild(tmpFormula);
@@ -87,12 +87,12 @@ auto VFormulaProperty::createEditor(QWidget *parent, const QStyleOptionViewItem 
     Q_UNUSED(options)
     Q_UNUSED(delegate)
 
-    auto formula = VProperty::d_ptr->VariantValue.value<VFormula>();
+    auto formula = VProperty::vproperty_d_ptr->VariantValue.value<VFormula>();
     auto *tmpEditor = new VFormulaPropertyEditor(parent);
     tmpEditor->setLocale(parent->locale());
     tmpEditor->SetFormula(formula);
-    VProperty::d_ptr->editor = tmpEditor;
-    return VProperty::d_ptr->editor;
+    VProperty::vproperty_d_ptr->editor = tmpEditor;
+    return VProperty::vproperty_d_ptr->editor;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -101,7 +101,7 @@ auto VFormulaProperty::setEditorData(QWidget *editor) -> bool
 {
     if (auto *tmpWidget = qobject_cast<VFormulaPropertyEditor *>(editor); tmpWidget != nullptr)
     {
-        auto formula = VProperty::d_ptr->VariantValue.value<VFormula>();
+        auto formula = VProperty::vproperty_d_ptr->VariantValue.value<VFormula>();
         tmpWidget->SetFormula(formula);
     }
     else
@@ -172,13 +172,13 @@ auto VFormulaProperty::getValue() const -> QVariant
 //---------------------------------------------------------------------------------------------------------------------
 auto VFormulaProperty::GetFormula() const -> VFormula
 {
-    return VProperty::d_ptr->VariantValue.value<VFormula>();
+    return VProperty::vproperty_d_ptr->VariantValue.value<VFormula>();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 void VFormulaProperty::SetFormula(const VFormula &formula)
 {
-    if (d_ptr->Children.count() < 1)
+    if (vproperty_d_ptr->Children.count() < 1)
     {
         return;
     }
@@ -190,7 +190,7 @@ void VFormulaProperty::SetFormula(const VFormula &formula)
 #else
     value.convert(VFormula::FormulaTypeId());
 #endif
-    VProperty::d_ptr->VariantValue = value;
+    VProperty::vproperty_d_ptr->VariantValue = value;
 
     QVariant tmpFormula(formula.GetFormula());
 #if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
@@ -199,11 +199,11 @@ void VFormulaProperty::SetFormula(const VFormula &formula)
     tmpFormula.convert(QVariant::String);
 #endif
 
-    VProperty::d_ptr->Children.at(0)->setValue(tmpFormula);
+    VProperty::vproperty_d_ptr->Children.at(0)->setValue(tmpFormula);
 
-    if (VProperty::d_ptr->editor != nullptr)
+    if (VProperty::vproperty_d_ptr->editor != nullptr)
     {
-        setEditorData(VProperty::d_ptr->editor); // NOLINT(clang-analyzer-optin.cplusplus.VirtualCall)
+        setEditorData(VProperty::vproperty_d_ptr->editor); // NOLINT(clang-analyzer-optin.cplusplus.VirtualCall)
     }
 }
 

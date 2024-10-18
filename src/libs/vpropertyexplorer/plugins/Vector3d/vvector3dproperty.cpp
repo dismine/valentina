@@ -86,14 +86,14 @@ auto VPE::QVector3DProperty::getVector() const -> VPE::Vector3D
 {
     Vector3D tmpVect;
 
-    if (d_ptr->Children.count() < 3)
+    if (vproperty_d_ptr->Children.count() < 3)
     {
         return tmpVect;
     }
 
-    tmpVect.X = d_ptr->Children.at(0)->getValue().toDouble();
-    tmpVect.Y = d_ptr->Children.at(1)->getValue().toDouble();
-    tmpVect.Z = d_ptr->Children.at(2)->getValue().toDouble();
+    tmpVect.X = vproperty_d_ptr->Children.at(0)->getValue().toDouble();
+    tmpVect.Y = vproperty_d_ptr->Children.at(1)->getValue().toDouble();
+    tmpVect.Z = vproperty_d_ptr->Children.at(2)->getValue().toDouble();
 
     return tmpVect;
 }
@@ -106,7 +106,7 @@ void VPE::QVector3DProperty::setVector(const Vector3D &vect)
 
 void VPE::QVector3DProperty::setVector(double x, double y, double z)
 {
-    if (d_ptr->Children.count() < 3)
+    if (vproperty_d_ptr->Children.count() < 3)
     {
         return;
     }
@@ -124,9 +124,9 @@ void VPE::QVector3DProperty::setVector(double x, double y, double z)
     tmpY.convert(QVariant::Double);
     tmpZ.convert(QVariant::Double);
 #endif
-    d_ptr->Children.at(0)->setValue(tmpX);
-    d_ptr->Children.at(1)->setValue(tmpY);
-    d_ptr->Children.at(2)->setValue(tmpZ);
+    vproperty_d_ptr->Children.at(0)->setValue(tmpX);
+    vproperty_d_ptr->Children.at(1)->setValue(tmpY);
+    vproperty_d_ptr->Children.at(2)->setValue(tmpZ);
 }
 
 auto VPE::QVector3DProperty::type() const -> QString

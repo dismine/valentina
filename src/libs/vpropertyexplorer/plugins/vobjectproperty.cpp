@@ -36,9 +36,9 @@ VPE::VObjectProperty::VObjectProperty(const QString &name)
 #endif
     objects()
 {
-    VProperty::d_ptr->VariantValue = 0;
+    VProperty::vproperty_d_ptr->VariantValue = 0;
 #if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
-    VProperty::d_ptr->VariantValue.convert(QMetaType(QMetaType::UInt));
+    VProperty::vproperty_d_ptr->VariantValue.convert(QMetaType(QMetaType::UInt));
 #else
     VProperty::d_ptr->VariantValue.convert(QVariant::UInt);
 #endif
@@ -52,11 +52,11 @@ auto VPE::VObjectProperty::data(int column, int role) const -> QVariant
         return QVariant();
     }
 
-    auto *tmpEditor = qobject_cast<QComboBox *>(VProperty::d_ptr->editor);
+    auto *tmpEditor = qobject_cast<QComboBox *>(VProperty::vproperty_d_ptr->editor);
 
     if (column == DPC_Data && Qt::DisplayRole == role)
     {
-        return VProperty::d_ptr->VariantValue;
+        return VProperty::vproperty_d_ptr->VariantValue;
     }
 
     if (column == DPC_Data && Qt::EditRole == role)
@@ -76,12 +76,12 @@ auto VPE::VObjectProperty::createEditor(QWidget *parent, const QStyleOptionViewI
     tmpEditor->clear();
     tmpEditor->setLocale(parent->locale());
     FillList(tmpEditor, objects);
-    tmpEditor->setCurrentIndex(tmpEditor->findData(VProperty::d_ptr->VariantValue.toUInt()));
+    tmpEditor->setCurrentIndex(tmpEditor->findData(VProperty::vproperty_d_ptr->VariantValue.toUInt()));
     connect(tmpEditor, QOverload<int>::of(&QComboBox::currentIndexChanged), this,
             &VObjectProperty::currentIndexChanged);
 
-    VProperty::d_ptr->editor = tmpEditor;
-    return VProperty::d_ptr->editor;
+    VProperty::vproperty_d_ptr->editor = tmpEditor;
+    return VProperty::vproperty_d_ptr->editor;
 }
 
 auto VPE::VObjectProperty::setEditorData(QWidget *editor) -> bool
@@ -94,7 +94,7 @@ auto VPE::VObjectProperty::setEditorData(QWidget *editor) -> bool
     auto *tmpEditor = qobject_cast<QComboBox *>(editor);
     if (tmpEditor)
     {
-        quint32 const objId = VProperty::d_ptr->VariantValue.toUInt();
+        quint32 const objId = VProperty::vproperty_d_ptr->VariantValue.toUInt();
         qint32 tmpIndex = tmpEditor->findData(objId);
 
         if (tmpIndex == -1)
@@ -139,16 +139,16 @@ auto VPE::VObjectProperty::getObjects() const -> QMap<QString, quint32>
 //! Sets the value of the property
 void VPE::VObjectProperty::setValue(const QVariant &value)
 {
-    VProperty::d_ptr->VariantValue = value;
+    VProperty::vproperty_d_ptr->VariantValue = value;
 #if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
-    VProperty::d_ptr->VariantValue.convert(QMetaType(QMetaType::UInt));
+    VProperty::vproperty_d_ptr->VariantValue.convert(QMetaType(QMetaType::UInt));
 #else
     VProperty::d_ptr->VariantValue.convert(QVariant::UInt);
 #endif
 
-    if (VProperty::d_ptr->editor != nullptr)
+    if (VProperty::vproperty_d_ptr->editor != nullptr)
     {
-        setEditorData(VProperty::d_ptr->editor);
+        setEditorData(VProperty::vproperty_d_ptr->editor);
     }
 }
 
@@ -166,7 +166,7 @@ void VPE::VObjectProperty::currentIndexChanged(int index)
 {
     Q_UNUSED(index)
     auto *event = new UserChangeEvent();
-    QCoreApplication::postEvent(VProperty::d_ptr->editor, event);
+    QCoreApplication::postEvent(VProperty::vproperty_d_ptr->editor, event);
 }
 
 void VPE::VObjectProperty::FillList(QComboBox *box, const QMap<QString, quint32> &list) const

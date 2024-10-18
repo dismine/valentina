@@ -53,9 +53,9 @@ VPE::VTextProperty::VTextProperty(const QString &name, const QMap<QString, QVari
     readOnly(false)
 {
     VProperty::setSettings(settings);
-    d_ptr->VariantValue.setValue(QString());
+    vproperty_d_ptr->VariantValue.setValue(QString());
 #if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
-    d_ptr->VariantValue.convert(QMetaType(QMetaType::QString));
+    vproperty_d_ptr->VariantValue.convert(QMetaType(QMetaType::QString));
 #else
     d_ptr->VariantValue.convert(QVariant::String);
 #endif
@@ -65,9 +65,9 @@ VPE::VTextProperty::VTextProperty(const QString &name)
   : VProperty(name),
     readOnly(false)
 {
-    d_ptr->VariantValue.setValue(QString());
+    vproperty_d_ptr->VariantValue.setValue(QString());
 #if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
-    d_ptr->VariantValue.convert(QMetaType(QMetaType::QString));
+    vproperty_d_ptr->VariantValue.convert(QMetaType(QMetaType::QString));
 #else
     d_ptr->VariantValue.convert(QVariant::String);
 #endif
@@ -83,18 +83,18 @@ auto VPE::VTextProperty::createEditor(QWidget *parent, const QStyleOptionViewIte
     tmpEditor->setLocale(parent->locale());
     tmpEditor->setReadOnly(readOnly);
     tmpEditor->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
-    tmpEditor->setPlainText(d_ptr->VariantValue.toString());
+    tmpEditor->setPlainText(vproperty_d_ptr->VariantValue.toString());
     SetTabStopDistance(tmpEditor);
 
-    d_ptr->editor = tmpEditor;
-    return d_ptr->editor;
+    vproperty_d_ptr->editor = tmpEditor;
+    return vproperty_d_ptr->editor;
 }
 
 auto VPE::VTextProperty::setEditorData(QWidget *editor) -> bool
 {
     if (auto *tmpWidget = qobject_cast<QPlainTextEdit *>(editor))
     {
-        tmpWidget->setPlainText(d_ptr->VariantValue.toString());
+        tmpWidget->setPlainText(vproperty_d_ptr->VariantValue.toString());
         return true;
     }
 

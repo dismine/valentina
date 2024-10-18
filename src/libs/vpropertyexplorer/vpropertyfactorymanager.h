@@ -84,7 +84,7 @@ public:
     auto getSupportedTypes() -> QStringList;
 
 protected:
-    VPropertyFactoryManagerPrivate *d_ptr;
+    VPropertyFactoryManagerPrivate *vproperty_d_ptr;
 
     //! The default manager
     static VPropertyFactoryManager *DefaultManager;

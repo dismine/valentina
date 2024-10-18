@@ -35,9 +35,9 @@ VPE::VPointFProperty::VPointFProperty(const QString &name)
                 QVariant::PointF)
 #endif
 {
-    d_ptr->VariantValue.setValue(0);
+    vproperty_d_ptr->VariantValue.setValue(0);
 #if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
-    d_ptr->VariantValue.convert(QMetaType(QMetaType::QPointF));
+    vproperty_d_ptr->VariantValue.convert(QMetaType(QMetaType::QPointF));
 #else
     d_ptr->VariantValue.convert(QVariant::PointF);
 #endif
@@ -75,13 +75,13 @@ auto VPE::VPointFProperty::getPointF() const -> QPointF
 {
     QPointF tmpValue;
 
-    if (d_ptr->Children.count() < 2)
+    if (vproperty_d_ptr->Children.count() < 2)
     {
         return tmpValue;
     }
 
-    tmpValue.setX(d_ptr->Children.at(0)->getValue().toDouble());
-    tmpValue.setY(d_ptr->Children.at(1)->getValue().toDouble());
+    tmpValue.setX(vproperty_d_ptr->Children.at(0)->getValue().toDouble());
+    tmpValue.setY(vproperty_d_ptr->Children.at(1)->getValue().toDouble());
 
     return tmpValue;
 }
@@ -93,7 +93,7 @@ void VPE::VPointFProperty::setPointF(const QPointF &point)
 
 void VPE::VPointFProperty::setPointF(qreal x, qreal y)
 {
-    if (d_ptr->Children.count() < 2)
+    if (vproperty_d_ptr->Children.count() < 2)
     {
         return;
     }
@@ -112,8 +112,8 @@ void VPE::VPointFProperty::setPointF(qreal x, qreal y)
     tmpY.convert(QVariant::Double);
 #endif
 
-    d_ptr->Children.at(0)->setValue(tmpX);
-    d_ptr->Children.at(1)->setValue(tmpY);
+    vproperty_d_ptr->Children.at(0)->setValue(tmpX);
+    vproperty_d_ptr->Children.at(1)->setValue(tmpY);
 }
 
 auto VPE::VPointFProperty::type() const -> QString

@@ -39,9 +39,9 @@ VPE::VStringProperty::VStringProperty(const QString &name, const QMap<QString, Q
       readOnly(false), typeForParent(0), clearButton(false), m_osSeparator(false)
 {
     VProperty::setSettings(settings);
-    d_ptr->VariantValue.setValue(QString());
+    vproperty_d_ptr->VariantValue.setValue(QString());
 #if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
-    d_ptr->VariantValue.convert(QMetaType(QMetaType::QString));
+    vproperty_d_ptr->VariantValue.convert(QMetaType(QMetaType::QString));
 #else
     d_ptr->VariantValue.convert(QVariant::String);
 #endif
@@ -50,9 +50,9 @@ VPE::VStringProperty::VStringProperty(const QString &name, const QMap<QString, Q
 VPE::VStringProperty::VStringProperty(const QString &name)
     : VProperty(name), readOnly(false), typeForParent(0), clearButton(false), m_osSeparator(false)
 {
-    d_ptr->VariantValue.setValue(QString());
+    vproperty_d_ptr->VariantValue.setValue(QString());
 #if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
-    d_ptr->VariantValue.convert(QMetaType(QMetaType::QString));
+    vproperty_d_ptr->VariantValue.convert(QMetaType(QMetaType::QString));
 #else
     d_ptr->VariantValue.convert(QVariant::String);
 #endif
@@ -70,10 +70,10 @@ auto VPE::VStringProperty::createEditor(QWidget *parent, const QStyleOptionViewI
     tmpEditor->installEventFilter(this);
     tmpEditor->setClearButtonEnabled(clearButton);
     tmpEditor->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Preferred);
-    tmpEditor->setText(d_ptr->VariantValue.toString());
+    tmpEditor->setText(vproperty_d_ptr->VariantValue.toString());
 
-    d_ptr->editor = tmpEditor;
-    return d_ptr->editor;
+    vproperty_d_ptr->editor = tmpEditor;
+    return vproperty_d_ptr->editor;
 }
 
 auto VPE::VStringProperty::setEditorData(QWidget *editor) -> bool
@@ -82,7 +82,7 @@ auto VPE::VStringProperty::setEditorData(QWidget *editor) -> bool
     {
         if (not readOnly)
         {
-            tmpWidget->setText(d_ptr->VariantValue.toString());
+            tmpWidget->setText(vproperty_d_ptr->VariantValue.toString());
         }
         return true;
     }

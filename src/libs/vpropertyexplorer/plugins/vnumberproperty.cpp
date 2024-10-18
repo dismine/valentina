@@ -62,9 +62,9 @@ VPE::VIntegerProperty::VIntegerProperty(const QString &name, const QMap<QString,
     m_singleStep(1.0)
 {
     VProperty::setSettings(settings);
-    VProperty::d_ptr->VariantValue.setValue(0);
+    VProperty::vproperty_d_ptr->VariantValue.setValue(0);
 #if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
-    VProperty::d_ptr->VariantValue.convert(QMetaType(QMetaType::Int));
+    VProperty::vproperty_d_ptr->VariantValue.convert(QMetaType(QMetaType::Int));
 #else
     VProperty::d_ptr->VariantValue.convert(QVariant::Int);
 #endif
@@ -76,9 +76,9 @@ VPE::VIntegerProperty::VIntegerProperty(const QString &name)
     m_maxValue(StandardMax),
     m_singleStep(1.0)
 {
-    VProperty::d_ptr->VariantValue.setValue(0);
+    VProperty::vproperty_d_ptr->VariantValue.setValue(0);
 #if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
-    VProperty::d_ptr->VariantValue.convert(QMetaType(QMetaType::Int));
+    VProperty::vproperty_d_ptr->VariantValue.convert(QMetaType(QMetaType::Int));
 #else
     VProperty::d_ptr->VariantValue.convert(QVariant::Int);
 #endif
@@ -97,12 +97,12 @@ auto VPE::VIntegerProperty::createEditor(QWidget *parent, const QStyleOptionView
     tmpEditor->setMaximum(static_cast<int>(m_maxValue));
     tmpEditor->setSingleStep(static_cast<int>(m_singleStep));
     tmpEditor->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
-    tmpEditor->setValue(VProperty::d_ptr->VariantValue.toInt());
+    tmpEditor->setValue(VProperty::vproperty_d_ptr->VariantValue.toInt());
     tmpEditor->setSuffix(m_suffix);
     connect(tmpEditor, QOverload<int>::of(&QSpinBox::valueChanged), this, &VIntegerProperty::valueChanged);
 
-    VProperty::d_ptr->editor = tmpEditor;
-    return VProperty::d_ptr->editor;
+    VProperty::vproperty_d_ptr->editor = tmpEditor;
+    return VProperty::vproperty_d_ptr->editor;
 }
 
 //! Gets the data from the widget
@@ -180,7 +180,7 @@ auto VPE::VIntegerProperty::clone(bool include_children, VProperty *container) c
 void VPE::VIntegerProperty::valueChanged(int i)
 {
     Q_UNUSED(i)
-    QCoreApplication::postEvent(VProperty::d_ptr->editor, new UserChangeEvent());
+    QCoreApplication::postEvent(VProperty::vproperty_d_ptr->editor, new UserChangeEvent());
 }
 
 const int VPE::VDoubleProperty::StandardMin = -1000000;
@@ -201,9 +201,9 @@ VPE::VDoubleProperty::VDoubleProperty(const QString &name, const QMap<QString, Q
     m_precision(static_cast<int>(StandardPrecision))
 {
     VProperty::setSettings(settings);
-    VProperty::d_ptr->VariantValue.setValue(0);
+    VProperty::vproperty_d_ptr->VariantValue.setValue(0);
 #if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
-    VProperty::d_ptr->VariantValue.convert(QMetaType(QMetaType::Double));
+    VProperty::vproperty_d_ptr->VariantValue.convert(QMetaType(QMetaType::Double));
 #else
     VProperty::d_ptr->VariantValue.convert(QVariant::Double);
 #endif
@@ -216,10 +216,10 @@ VPE::VDoubleProperty::VDoubleProperty(const QString &name)
     m_singleStep(1.0),
     m_precision(static_cast<int>(StandardPrecision))
 {
-    VProperty::d_ptr->VariantValue.setValue(0);
+    VProperty::vproperty_d_ptr->VariantValue.setValue(0);
 #if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
-    VProperty::d_ptr->VariantValue.convert(QMetaType(QMetaType::Double));
-    VProperty::d_ptr->PropertyVariantType = QMetaType::Double;
+    VProperty::vproperty_d_ptr->VariantValue.convert(QMetaType(QMetaType::Double));
+    VProperty::vproperty_d_ptr->PropertyVariantType = QMetaType::Double;
 #else
     VProperty::d_ptr->VariantValue.convert(QVariant::Double);
     VProperty::d_ptr->PropertyVariantType = QVariant::Double;
@@ -240,11 +240,11 @@ auto VPE::VDoubleProperty::createEditor(QWidget *parent, const QStyleOptionViewI
     tmpEditor->setSingleStep(m_singleStep);
     tmpEditor->setSuffix(m_suffix);
     tmpEditor->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Preferred);
-    tmpEditor->setValue(VProperty::d_ptr->VariantValue.toDouble());
+    tmpEditor->setValue(VProperty::vproperty_d_ptr->VariantValue.toDouble());
     connect(tmpEditor, QOverload<double>::of(&QDoubleSpinBox::valueChanged), this, &VDoubleProperty::valueChanged);
 
-    VProperty::d_ptr->editor = tmpEditor;
-    return VProperty::d_ptr->editor;
+    VProperty::vproperty_d_ptr->editor = tmpEditor;
+    return VProperty::vproperty_d_ptr->editor;
 }
 
 //! Gets the data from the widget
@@ -331,5 +331,5 @@ auto VPE::VDoubleProperty::clone(bool include_children, VProperty *container) co
 void VPE::VDoubleProperty::valueChanged(int i)
 {
     Q_UNUSED(i)
-    QCoreApplication::postEvent(VProperty::d_ptr->editor, new UserChangeEvent());
+    QCoreApplication::postEvent(VProperty::vproperty_d_ptr->editor, new UserChangeEvent());
 }

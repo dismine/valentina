@@ -237,7 +237,7 @@ protected:
     explicit VProperty(VPropertyPrivate *d);
 
     //! The protected structure holding the member variables (to assure binary compatibility)
-    VPropertyPrivate *d_ptr;
+    VPropertyPrivate *vproperty_d_ptr;
 
 private:
     // Provide access functions for the d_ptr

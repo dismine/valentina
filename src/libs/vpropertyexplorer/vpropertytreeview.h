@@ -62,7 +62,7 @@ protected:
     VPropertyTreeView(VPropertyTreeViewPrivate *d, bool init_, QWidget *parent = nullptr);
 
     //! The protected data
-    VPropertyTreeViewPrivate *d_ptr;
+    VPropertyTreeViewPrivate *vproperty_d_ptr;
 
 private:
     Q_DISABLE_COPY_MOVE(VPropertyTreeView) // NOLINT
