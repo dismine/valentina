@@ -156,7 +156,7 @@ auto VGAnalyticsWorker::PersistMessageQueue() -> QList<QString>
  */
 void VGAnalyticsWorker::ReadMessagesFromFile(const QList<QString> &dataList)
 {
-    QListIterator<QString> iter(dataList);
+    QListIterator iter(dataList);
     while (iter.hasNext())
     {
         QString const queryString = iter.next();

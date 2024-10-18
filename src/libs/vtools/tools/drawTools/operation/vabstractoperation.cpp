@@ -280,7 +280,7 @@ auto VAbstractOperation::OperationColorsList() -> QMap<QString, QString>
 void VAbstractOperation::FullUpdateFromFile()
 {
     ReadAttributes();
-    QMapIterator<quint32, VAbstractSimple *> i(operatedObjects);
+    QMapIterator i(operatedObjects);
     while (i.hasNext())
     {
         i.next();
@@ -305,7 +305,7 @@ void VAbstractOperation::FullUpdateFromFile()
 //---------------------------------------------------------------------------------------------------------------------
 void VAbstractOperation::AllowHover(bool enabled)
 {
-    QMapIterator<quint32, VAbstractSimple *> i(operatedObjects);
+    QMapIterator i(operatedObjects);
     while (i.hasNext())
     {
         i.next();
@@ -327,7 +327,7 @@ void VAbstractOperation::AllowHover(bool enabled)
 //---------------------------------------------------------------------------------------------------------------------
 void VAbstractOperation::AllowSelecting(bool enabled)
 {
-    QMapIterator<quint32, VAbstractSimple *> i(operatedObjects);
+    QMapIterator i(operatedObjects);
     while (i.hasNext())
     {
         i.next();
@@ -349,7 +349,7 @@ void VAbstractOperation::AllowSelecting(bool enabled)
 //---------------------------------------------------------------------------------------------------------------------
 void VAbstractOperation::EnableToolMove(bool move)
 {
-    QMapIterator<quint32, VAbstractSimple *> i(operatedObjects);
+    QMapIterator i(operatedObjects);
     while (i.hasNext())
     {
         i.next();
@@ -365,7 +365,7 @@ void VAbstractOperation::EnableToolMove(bool move)
 //---------------------------------------------------------------------------------------------------------------------
 void VAbstractOperation::AllowPointHover(bool enabled)
 {
-    QMapIterator<quint32, VAbstractSimple *> i(operatedObjects);
+    QMapIterator i(operatedObjects);
     while (i.hasNext())
     {
         i.next();
@@ -381,7 +381,7 @@ void VAbstractOperation::AllowPointHover(bool enabled)
 //---------------------------------------------------------------------------------------------------------------------
 void VAbstractOperation::AllowPointSelecting(bool enabled)
 {
-    QMapIterator<quint32, VAbstractSimple *> i(operatedObjects);
+    QMapIterator i(operatedObjects);
     while (i.hasNext())
     {
         i.next();
@@ -397,7 +397,7 @@ void VAbstractOperation::AllowPointSelecting(bool enabled)
 //---------------------------------------------------------------------------------------------------------------------
 void VAbstractOperation::AllowPointLabelHover(bool enabled)
 {
-    QMapIterator<quint32, VAbstractSimple *> i(operatedObjects);
+    QMapIterator i(operatedObjects);
     while (i.hasNext())
     {
         i.next();
@@ -413,7 +413,7 @@ void VAbstractOperation::AllowPointLabelHover(bool enabled)
 //---------------------------------------------------------------------------------------------------------------------
 void VAbstractOperation::AllowPointLabelSelecting(bool enabled)
 {
-    QMapIterator<quint32, VAbstractSimple *> i(operatedObjects);
+    QMapIterator i(operatedObjects);
     while (i.hasNext())
     {
         i.next();
@@ -482,7 +482,7 @@ void VAbstractOperation::AllowElArcSelecting(bool enabled)
 void VAbstractOperation::ToolSelectionType(const SelectionType &type)
 {
     VAbstractTool::ToolSelectionType(type);
-    QMapIterator<quint32, VAbstractSimple *> i(operatedObjects);
+    QMapIterator i(operatedObjects);
     while (i.hasNext())
     {
         i.next();
@@ -501,7 +501,7 @@ void VAbstractOperation::Disable(bool disable, const QString &namePP)
     const bool enabled = !CorrectDisable(disable, namePP);
     setEnabled(enabled);
 
-    QMapIterator<quint32, VAbstractSimple *> i(operatedObjects);
+    QMapIterator i(operatedObjects);
     while (i.hasNext())
     {
         i.next();
@@ -566,7 +566,7 @@ VAbstractOperation::VAbstractOperation(const VAbstractOperationInitData &initDat
     connect(initData.doc, &VAbstractPattern::UpdateToolTip, this,
             [this]()
             {
-                QMapIterator<quint32, VAbstractSimple *> i(operatedObjects);
+                QMapIterator i(operatedObjects);
                 while (i.hasNext())
                 {
                     i.next();
@@ -814,7 +814,7 @@ void VAbstractOperation::InitCurve(quint32 id, VContainer *data, GOType curveTyp
 //---------------------------------------------------------------------------------------------------------------------
 void VAbstractOperation::AllowCurveHover(bool enabled, GOType type)
 {
-    QMapIterator<quint32, VAbstractSimple *> i(operatedObjects);
+    QMapIterator i(operatedObjects);
     while (i.hasNext())
     {
         i.next();
@@ -833,7 +833,7 @@ void VAbstractOperation::AllowCurveHover(bool enabled, GOType type)
 //---------------------------------------------------------------------------------------------------------------------
 void VAbstractOperation::AllowCurveSelecting(bool enabled, GOType type)
 {
-    QMapIterator<quint32, VAbstractSimple *> i(operatedObjects);
+    QMapIterator i(operatedObjects);
     while (i.hasNext())
     {
         i.next();

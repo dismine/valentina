@@ -2869,7 +2869,7 @@ void VPMainWindow::OpenWatermark(const QString &path)
 //---------------------------------------------------------------------------------------------------------------------
 void VPMainWindow::CleanWaterkmarkEditors()
 {
-    QMutableListIterator<QPointer<WatermarkWindow>> i(m_watermarkEditors);
+    QMutableListIterator i(m_watermarkEditors);
     while (i.hasNext())
     {
         QPointer<WatermarkWindow> const watermarkEditor = i.next();

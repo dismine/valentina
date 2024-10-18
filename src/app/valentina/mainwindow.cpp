@@ -1961,7 +1961,7 @@ void MainWindow::ExportToCSVData(const QString &fileName, bool withHeader, int m
             }
         }
 
-        QMapIterator<quint32, QString> iMap(map);
+        QMapIterator iMap(map);
         while (iMap.hasNext())
         {
             iMap.next();
@@ -2312,7 +2312,7 @@ void MainWindow::RemoveWatermark()
 //---------------------------------------------------------------------------------------------------------------------
 void MainWindow::CleanWaterkmarkEditors()
 {
-    QMutableListIterator<QPointer<WatermarkWindow>> i(m_watermarkEditors);
+    QMutableListIterator i(m_watermarkEditors);
     while (i.hasNext())
     {
         QPointer<WatermarkWindow> const watermarkEditor = i.next();

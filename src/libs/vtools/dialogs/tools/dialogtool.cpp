@@ -621,7 +621,7 @@ void DialogTool::FillList(QComboBox *box, const QMap<QString, quint32> &list) co
     SCASSERT(box != nullptr)
     box->clear();
 
-    QMapIterator<QString, quint32> iter(list);
+    QMapIterator iter(list);
     while (iter.hasNext())
     {
         iter.next();

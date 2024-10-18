@@ -1656,7 +1656,7 @@ void VMeasurements::ReadMeasurement(const QDomElement &dom, QSharedPointer<VCont
             shiftB = UnitConvertor(shiftB, Units(), *data->GetPatternUnit());
             shiftC = UnitConvertor(shiftC, Units(), *data->GetPatternUnit());
 
-            QMutableMapIterator<QString, qreal> iterator(corrections);
+            QMutableMapIterator iterator(corrections);
             while (iterator.hasNext())
             {
                 iterator.next();

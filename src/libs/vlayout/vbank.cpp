@@ -96,7 +96,7 @@ template <typename T> auto CountDetails(const T &container) -> vsizetype
 auto NotArrangedDetail(QMap<uint, QHash<int, qint64>> &container, QMap<uint, QHash<int, qint64>> &unsorted, int i)
     -> bool
 {
-    QMutableMapIterator<uint, QHash<int, qint64>> iterator(container);
+    QMutableMapIterator iterator(container);
     while (iterator.hasNext())
     {
         iterator.next();
@@ -124,7 +124,7 @@ auto NotArrangedDetail(QMap<uint, QHash<int, qint64>> &container, QMap<uint, QHa
 auto NotArrangedDetail(QMap<uint, QMultiMap<qint64, int>> &container, QMap<uint, QHash<int, qint64>> &unsorted, int i)
     -> bool
 {
-    QMutableMapIterator<uint, QMultiMap<qint64, int>> iterator(container);
+    QMutableMapIterator iterator(container);
     while (iterator.hasNext())
     {
         iterator.next();
@@ -452,7 +452,7 @@ auto VBank::GetBiggestDiagonal() const -> qreal
 //---------------------------------------------------------------------------------------------------------------------
 void VBank::PrepareGroup()
 {
-    QMutableMapIterator<uint, QHash<int, qint64>> i(unsorted);
+    QMutableMapIterator i(unsorted);
     while (i.hasNext())
     {
         i.next();
@@ -583,9 +583,9 @@ auto VBank::GetNextDescGroup(uint priority) const -> int
 {
     auto descGroup = desc.value(priority);
 #if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
-    QMultiMapIterator<qint64, int> i(descGroup);
+    QMultiMapIterator i(descGroup);
 #else
-    QMapIterator<qint64, int> i(descGroup);
+    QMapIterator i(descGroup);
 #endif
     i.toBack();
     if (i.hasPrevious())
@@ -622,7 +622,7 @@ void VBank::SqMaxMin(qint64 &sMax, qint64 &sMin, uint priority) const
 //---------------------------------------------------------------------------------------------------------------------
 auto VBank::ArrangedDetail(QMap<uint, QHash<int, qint64>> &container, int i) -> bool
 {
-    QMutableMapIterator<uint, QHash<int, qint64>> iterator(container);
+    QMutableMapIterator iterator(container);
     while (iterator.hasNext())
     {
         iterator.next();
@@ -648,7 +648,7 @@ auto VBank::ArrangedDetail(QMap<uint, QHash<int, qint64>> &container, int i) -> 
 //---------------------------------------------------------------------------------------------------------------------
 auto VBank::ArrangedDetail(QMap<uint, QMultiMap<qint64, int>> &container, int i) -> bool
 {
-    QMutableMapIterator<uint, QMultiMap<qint64, int>> iterator(container);
+    QMutableMapIterator iterator(container);
     while (iterator.hasNext())
     {
         iterator.next();

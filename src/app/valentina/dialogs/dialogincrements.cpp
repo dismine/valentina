@@ -1413,7 +1413,7 @@ void DialogIncrements::FillIncrementsTable(QTableWidget *table,
     }
 
     qint32 currentRow = -1;
-    QMapIterator<quint32, QString> iMap(map);
+    QMapIterator iMap(map);
     table->setRowCount(static_cast<int>(map.size()));
     while (iMap.hasNext())
     {

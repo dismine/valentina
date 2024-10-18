@@ -169,7 +169,7 @@ VAbstractApplication::VAbstractApplication(int &argc, char **argv)
 VAbstractApplication::~VAbstractApplication()
 {
 #if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
-    QHashIterator<QStringConverter::Encoding, VTextCodec *> i(m_codecs);
+    QHashIterator i(m_codecs);
     while (i.hasNext())
     {
         i.next();

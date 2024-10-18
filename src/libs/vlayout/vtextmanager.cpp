@@ -1022,7 +1022,7 @@ auto VTextManager::BreakTextIntoLines(const QString &text, const QFont &font, in
 
     QStringList lines;
     lines.reserve(words.size());
-    QMutableListIterator<QString> iterator(words);
+    QMutableListIterator iterator(words);
 
     auto AppendWord = [&currentLine, &currentLineWidth](const QString &word, int totalWidth)
     {
@@ -1122,7 +1122,7 @@ auto VTextManager::BreakTextIntoLines(const QString &text, const VSvgFont &font,
 
     QStringList lines;
     lines.reserve(words.size());
-    QMutableListIterator<QString> iterator(words);
+    QMutableListIterator iterator(words);
 
     auto AppendWord = [&currentLine, &currentLineWidth](const QString &word, int totalWidth)
     {
