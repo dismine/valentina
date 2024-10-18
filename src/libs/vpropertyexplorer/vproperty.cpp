@@ -190,7 +190,7 @@ void VPE::VProperty::setValue(const QVariant &value)
 #if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
     vproperty_d_ptr->VariantValue.convert(QMetaType(vproperty_d_ptr->PropertyVariantType));
 #else
-    d_ptr->VariantValue.convert(static_cast<int>(d_ptr->PropertyVariantType));
+    vproperty_d_ptr->VariantValue.convert(static_cast<int>(d_ptr->PropertyVariantType));
 #endif
     if (vproperty_d_ptr->editor != nullptr)
     {

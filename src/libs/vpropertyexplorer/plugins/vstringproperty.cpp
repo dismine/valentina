@@ -43,7 +43,7 @@ VPE::VStringProperty::VStringProperty(const QString &name, const QMap<QString, Q
 #if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
     vproperty_d_ptr->VariantValue.convert(QMetaType(QMetaType::QString));
 #else
-    d_ptr->VariantValue.convert(QVariant::String);
+    vproperty_d_ptr->VariantValue.convert(QVariant::String);
 #endif
 }
 
@@ -54,7 +54,7 @@ VPE::VStringProperty::VStringProperty(const QString &name)
 #if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
     vproperty_d_ptr->VariantValue.convert(QMetaType(QMetaType::QString));
 #else
-    d_ptr->VariantValue.convert(QVariant::String);
+    vproperty_d_ptr->VariantValue.convert(QVariant::String);
 #endif
 }
 

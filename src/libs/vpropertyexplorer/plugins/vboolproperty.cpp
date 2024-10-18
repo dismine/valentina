@@ -39,7 +39,7 @@ VPE::VBoolProperty::VBoolProperty(const QString& name) :
 #if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
     vproperty_d_ptr->VariantValue.convert(QMetaType(QMetaType::Bool));
 #else
-    d_ptr->VariantValue.convert(QVariant::Bool);
+    vproperty_d_ptr->VariantValue.convert(QVariant::Bool);
 #endif
 }
 
