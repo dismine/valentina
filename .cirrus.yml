@@ -411,7 +411,7 @@ macos_task:
     image: ghcr.io/cirruslabs/macos-sonoma:latest
   << : *MACOS_TASK_TEMPLATE
   env:
-    DEPLOY: "false"
+    DEPLOY: "true"
     QT_VERSION: Qt6
     ARCH: armv8
     TARGET_PLATFORM: "macOS_12.4+"

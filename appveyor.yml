@@ -59,7 +59,7 @@ environment:
       TARGET_PLATFORM: "macOS_12+"
       MACOS_DEPLOYMENT_TARGET: 12.0
       MULTI_BUNDLE: true
-      DEPLOY: false
+      DEPLOY: true
 
     - job_name: MacOS_12_Qt_6_5 (singlebundle)
       job_group: 'MacOS_12 (Qt6)'
@@ -73,7 +73,7 @@ environment:
       TARGET_PLATFORM: "macOS_12+"
       MACOS_DEPLOYMENT_TARGET: 12.0
       MULTI_BUNDLE: false
-      DEPLOY: false
+      DEPLOY: true
 
     - job_name: Windows_Qt_5_15_(qbs_GCC_x86)
       job_group: 'Windows (qbs)'
