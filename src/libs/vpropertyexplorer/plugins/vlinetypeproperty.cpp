@@ -50,7 +50,7 @@ VPE::VLineTypeProperty::VLineTypeProperty(const QString &name)
 #if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
     VProperty::vproperty_d_ptr->VariantValue.convert(QMetaType(QMetaType::Int));
 #else
-    VProperty::d_ptr->VariantValue.convert(QVariant::Int);
+    VProperty::vproperty_d_ptr->VariantValue.convert(QVariant::Int);
 #endif
 }
 
@@ -149,7 +149,7 @@ void VPE::VLineTypeProperty::setValue(const QVariant &value)
 #if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
     VProperty::vproperty_d_ptr->VariantValue.convert(QMetaType(QMetaType::Int));
 #else
-    VProperty::d_ptr->VariantValue.convert(QVariant::Int);
+    VProperty::vproperty_d_ptr->VariantValue.convert(QVariant::Int);
 #endif
 
     if (VProperty::vproperty_d_ptr->editor != nullptr)

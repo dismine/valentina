@@ -116,7 +116,7 @@ void VPE::VBoolProperty::setValue(const QVariant &value)
 #if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
     VProperty::vproperty_d_ptr->VariantValue.convert(QMetaType(QMetaType::Bool));
 #else
-    VProperty::d_ptr->VariantValue.convert(QVariant::Bool);
+    VProperty::vproperty_d_ptr->VariantValue.convert(QVariant::Bool);
 #endif
 
     if (VProperty::vproperty_d_ptr->editor != nullptr)

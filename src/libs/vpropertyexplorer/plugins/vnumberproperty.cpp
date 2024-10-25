@@ -66,7 +66,7 @@ VPE::VIntegerProperty::VIntegerProperty(const QString &name, const QMap<QString,
 #if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
     VProperty::vproperty_d_ptr->VariantValue.convert(QMetaType(QMetaType::Int));
 #else
-    VProperty::d_ptr->VariantValue.convert(QVariant::Int);
+    VProperty::vproperty_d_ptr->VariantValue.convert(QVariant::Int);
 #endif
 }
 
@@ -80,7 +80,7 @@ VPE::VIntegerProperty::VIntegerProperty(const QString &name)
 #if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
     VProperty::vproperty_d_ptr->VariantValue.convert(QMetaType(QMetaType::Int));
 #else
-    VProperty::d_ptr->VariantValue.convert(QVariant::Int);
+    VProperty::vproperty_d_ptr->VariantValue.convert(QVariant::Int);
 #endif
 }
 
@@ -205,7 +205,7 @@ VPE::VDoubleProperty::VDoubleProperty(const QString &name, const QMap<QString, Q
 #if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
     VProperty::vproperty_d_ptr->VariantValue.convert(QMetaType(QMetaType::Double));
 #else
-    VProperty::d_ptr->VariantValue.convert(QVariant::Double);
+    VProperty::vproperty_d_ptr->VariantValue.convert(QVariant::Double);
 #endif
 }
 
@@ -221,8 +221,8 @@ VPE::VDoubleProperty::VDoubleProperty(const QString &name)
     VProperty::vproperty_d_ptr->VariantValue.convert(QMetaType(QMetaType::Double));
     VProperty::vproperty_d_ptr->PropertyVariantType = QMetaType::Double;
 #else
-    VProperty::d_ptr->VariantValue.convert(QVariant::Double);
-    VProperty::d_ptr->PropertyVariantType = QVariant::Double;
+    VProperty::vproperty_d_ptr->VariantValue.convert(QVariant::Double);
+    VProperty::vproperty_d_ptr->PropertyVariantType = QVariant::Double;
 #endif
 }
 

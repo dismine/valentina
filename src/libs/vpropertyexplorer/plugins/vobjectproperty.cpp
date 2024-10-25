@@ -40,7 +40,7 @@ VPE::VObjectProperty::VObjectProperty(const QString &name)
 #if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
     VProperty::vproperty_d_ptr->VariantValue.convert(QMetaType(QMetaType::UInt));
 #else
-    VProperty::d_ptr->VariantValue.convert(QVariant::UInt);
+    VProperty::vproperty_d_ptr->VariantValue.convert(QVariant::UInt);
 #endif
 }
 
@@ -143,7 +143,7 @@ void VPE::VObjectProperty::setValue(const QVariant &value)
 #if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
     VProperty::vproperty_d_ptr->VariantValue.convert(QMetaType(QMetaType::UInt));
 #else
-    VProperty::d_ptr->VariantValue.convert(QVariant::UInt);
+    VProperty::vproperty_d_ptr->VariantValue.convert(QVariant::UInt);
 #endif
 
     if (VProperty::vproperty_d_ptr->editor != nullptr)
