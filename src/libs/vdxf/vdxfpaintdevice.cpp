@@ -281,6 +281,12 @@ auto VDxfPaintDevice::metric(QPaintDevice::PaintDeviceMetric metric) const -> in
         case QPaintDevice::PdmDevicePixelRatio:
         case QPaintDevice::PdmDevicePixelRatioScaled:
             return 1;
+#if QT_VERSION >= QT_VERSION_CHECK(6, 8, 0)
+        case QPaintDevice::PdmDevicePixelRatioF_EncodedA:
+            return QPaintDevice::encodeMetricF(QPaintDevice::PdmDevicePixelRatioF_EncodedA, 1.0);
+        case QPaintDevice::PdmDevicePixelRatioF_EncodedB:
+            return QPaintDevice::encodeMetricF(QPaintDevice::PdmDevicePixelRatioF_EncodedB, 1.0);
+#endif
         default:
             qWarning("VDxfPaintDevice::metric(), unhandled metric %d\n", metric);
             break;
