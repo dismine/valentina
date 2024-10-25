@@ -1854,9 +1854,9 @@ auto VPatternConverter::AddTagPatternLabelV0_5_1() -> QDomElement
         QDomElement pattern = documentElement();
         for (vsizetype i = tags.indexOf(element.tagName()) - 1; i >= 0; --i)
         {
-            if (const QDomNodeList list = elementsByTagName(tags.at(i)); not list.isEmpty())
+            if (const QDomNodeList elementsList = elementsByTagName(tags.at(i)); not elementsList.isEmpty())
             {
-                pattern.insertAfter(element, list.at(0));
+                pattern.insertAfter(element, elementsList.at(0));
                 break;
             }
         }
