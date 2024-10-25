@@ -2774,7 +2774,7 @@ void VPattern::ParseToolSpline(VMainGraphicsScene *scene, QDomElement &domElemen
         initData.approximationScale = GetParametrDouble(domElement, AttrAScale, QChar('0'));
         initData.aliasSuffix = GetParametrEmptyString(domElement, AttrAlias);
 
-        if (VToolSpline *spl = VToolSpline::Create(initData); spl != nullptr)
+        if (const VToolSpline *spl = VToolSpline::Create(initData); spl != nullptr)
         {
             auto *window = qobject_cast<VAbstractMainWindow *>(VAbstractValApplication::VApp()->getMainWindow());
             SCASSERT(window != nullptr)
@@ -2978,7 +2978,7 @@ void VPattern::ParseToolSplinePath(VMainGraphicsScene *scene, const QDomElement 
         const QVector<QString> length1 = initData.l1;
         const QVector<QString> length2 = initData.l2;
 
-        if (VToolSplinePath *spl = VToolSplinePath::Create(initData); spl != nullptr)
+        if (const VToolSplinePath *spl = VToolSplinePath::Create(initData); spl != nullptr)
         {
             const auto *window = qobject_cast<VAbstractMainWindow *>(VAbstractValApplication::VApp()->getMainWindow());
             SCASSERT(window != nullptr)
