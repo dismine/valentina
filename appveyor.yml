@@ -47,31 +47,29 @@ environment:
   VALENTINA_VERSION: 0_7_53
 
   matrix:
-    - job_name: MacOS_12_Qt_6_5 (multibundle)
-      job_group: 'MacOS_12 (Qt6)'
-      APPVEYOR_BUILD_WORKER_IMAGE: macos-monterey
+    - job_name: MacOS_13_Qt_6 (multibundle)
+      job_group: 'MacOS_13 (Qt6)'
+      APPVEYOR_BUILD_WORKER_IMAGE: macos-ventura
       COMPILER: clang
-      QT: Qt/6.5/macos
       QT_VERSION: Qt6
       BUILD_SYSTEM: "qbs"
       ARCH: x64
-      XCODE_VERSION: 14.2.0
-      TARGET_PLATFORM: "macOS_12+"
-      MACOS_DEPLOYMENT_TARGET: 12.0
+      XCODE_VERSION: 14.3.0
+      TARGET_PLATFORM: "macOS_13+"
+      MACOS_DEPLOYMENT_TARGET: 13.0
       MULTI_BUNDLE: true
       DEPLOY: true
 
-    - job_name: MacOS_12_Qt_6_5 (singlebundle)
-      job_group: 'MacOS_12 (Qt6)'
-      APPVEYOR_BUILD_WORKER_IMAGE: macos-monterey
+    - job_name: MacOS_13_Qt_6 (singlebundle)
+      job_group: 'MacOS_13 (Qt6)'
+      APPVEYOR_BUILD_WORKER_IMAGE: macos-ventura
       COMPILER: clang
-      QT: Qt/6.5/macos
       QT_VERSION: Qt6
       BUILD_SYSTEM: "qbs"
       ARCH: x64
-      XCODE_VERSION: 14.2.0
-      TARGET_PLATFORM: "macOS_12+"
-      MACOS_DEPLOYMENT_TARGET: 12.0
+      XCODE_VERSION: 14.3.0
+      TARGET_PLATFORM: "macOS_13+"
+      MACOS_DEPLOYMENT_TARGET: 13.0
       MULTI_BUNDLE: false
       DEPLOY: true
 
@@ -153,9 +151,9 @@ matrix:
     - platform: x86
       job_name: Windows_Qt_5_15_(qbs_MSVC_x64)
     - platform: x86
-      job_name: MacOS_12_Qt_6_5 (multibundle)
+      job_name: MacOS_13_Qt_6 (multibundle)
     - platform: x86
-      job_name: MacOS_12_Qt_6_5 (singlebundle)
+      job_name: MacOS_13_Qt_6 (singlebundle)
     - platform: x64
       job_name: Windows_Qt_5_15_(qbs_GCC_x86)   
 
@@ -309,7 +307,7 @@ for:
 -
   matrix:
     only:
-      - job_group: 'MacOS_12 (Qt6)'
+      - job_group: 'MacOS_13 (Qt6)'
 
   environment:
     CONAN_USER_HOME: /Users/appveyor
