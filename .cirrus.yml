@@ -328,7 +328,7 @@ macos_task_template: &MACOS_TASK_TEMPLATE
     # This won't display anything secret.
     - security find-identity -v -p codesigning
     - brew update > /dev/null
-    - brew install -v -d qt6 coreutils ccache qbs cmake ninja git openssl@1.1 pkg-config poppler xerces-c
+    - brew install qt6 coreutils ccache qbs cmake ninja git openssl@3 pkg-config poppler xerces-c
     - brew outdated
     - brew upgrade qt6
     - echo $PATH
@@ -373,12 +373,12 @@ macos_task_template: &MACOS_TASK_TEMPLATE
     - echo $CIRRUS_WORKING_DIR
     - export VALENTINA_WORKING_DIR=/private${CIRRUS_WORKING_DIR}
     - echo $VALENTINA_WORKING_DIR
-    - qbs build -f valentina.qbs -d $VALENTINA_WORKING_DIR/build --jobs $(nproc) config:release modules.buildconfig.enableUnitTests:false modules.buildconfig.enableMultiBundle:${MULTI_BUNDLE} qbs.installRoot:$VALENTINA_WORKING_DIR/build/release/install-root profile:qt6 project.minimumMacosVersion:${MACOS_DEPLOYMENT_TARGET} modules.buildconfig.enableCcache:${ENABLE_CCACHE} moduleProviders.qbspkgconfig.extraPaths:$(brew --prefix xerces-c)/lib/pkgconfig,$(brew --prefix qt6)/lib/pkgconfig,$(brew --prefix openssl@1.1)/lib/pkgconfig "modules.buildconfig.signingIdentity:$MACOS_CERTIFICATE_NAME" modules.macdeployqt.libpath:$(brew --prefix qt6)/lib,$(brew --prefix poppler)/lib modules.macdeployqt.macdeployqtProgramBinPath:${HOME}/macdeployqt-install-dir project.enableConan:true project.conanWithCrashReporting:true project.conanProfiles:valentina
+    - qbs build -f valentina.qbs -d $VALENTINA_WORKING_DIR/build --jobs $(nproc) config:release modules.buildconfig.enableUnitTests:false modules.buildconfig.enableMultiBundle:${MULTI_BUNDLE} qbs.installRoot:$VALENTINA_WORKING_DIR/build/release/install-root profile:qt6 project.minimumMacosVersion:${MACOS_DEPLOYMENT_TARGET} modules.buildconfig.enableCcache:${ENABLE_CCACHE} moduleProviders.qbspkgconfig.extraPaths:$(brew --prefix xerces-c)/lib/pkgconfig,$(brew --prefix qt6)/lib/pkgconfig,$(brew --prefix openssl@3)/lib/pkgconfig "modules.buildconfig.signingIdentity:$MACOS_CERTIFICATE_NAME" modules.macdeployqt.libpath:$(brew --prefix qt6)/lib,$(brew --prefix poppler)/lib modules.macdeployqt.macdeployqtProgramBinPath:${HOME}/macdeployqt-install-dir project.enableConan:true project.conanWithCrashReporting:true project.conanProfiles:valentina
     - export CRASH_QT_VERSION=$(/opt/homebrew/opt/qt6/bin/qmake -query QT_VERSION | awk -F. '{print $1 "_" $2}')
     - export CRASH_SHORT_SHA=$(git log --pretty=format:%h -n 1)
     - curl --proto '=https' --tlsv1.2 -LsSf https://github.com/mozilla/dump_syms/releases/download/v2.3.3/dump_syms-installer.sh | sh
     - python3 scripts/symupload.py $VALENTINA_WORKING_DIR/build/release/install-root $VALENTINA_VERSION g$CRASH_SHORT_SHA $CRASH_QT_VERSION --multibundle=$MULTI_BUNDLE --clean
-    - qbs build -f valentina.qbs -d $VALENTINA_WORKING_DIR/build -p 'Valentina DMG' --force-probe-execution --jobs $(nproc) config:release modules.buildconfig.enableUnitTests:false modules.buildconfig.enableMultiBundle:${MULTI_BUNDLE} qbs.installRoot:$VALENTINA_WORKING_DIR/build/release/install-root profile:qt6 project.minimumMacosVersion:${MACOS_DEPLOYMENT_TARGET} modules.buildconfig.enableCcache:${ENABLE_CCACHE} moduleProviders.qbspkgconfig.extraPaths:$(brew --prefix xerces-c)/lib/pkgconfig,$(brew --prefix qt6)/lib/pkgconfig,$(brew --prefix openssl@1.1)/lib/pkgconfig "modules.buildconfig.signingIdentity:$MACOS_CERTIFICATE_NAME" modules.macdeployqt.libpath:$(brew --prefix qt6)/lib,$(brew --prefix poppler)/lib modules.macdeployqt.macdeployqtProgramBinPath:${HOME}/macdeployqt-install-dir project.enableConan:true project.conanWithCrashReporting:true project.conanProfiles:valentina
+    - qbs build -f valentina.qbs -d $VALENTINA_WORKING_DIR/build -p 'Valentina DMG' --force-probe-execution --jobs $(nproc) config:release modules.buildconfig.enableUnitTests:false modules.buildconfig.enableMultiBundle:${MULTI_BUNDLE} qbs.installRoot:$VALENTINA_WORKING_DIR/build/release/install-root profile:qt6 project.minimumMacosVersion:${MACOS_DEPLOYMENT_TARGET} modules.buildconfig.enableCcache:${ENABLE_CCACHE} moduleProviders.qbspkgconfig.extraPaths:$(brew --prefix xerces-c)/lib/pkgconfig,$(brew --prefix qt6)/lib/pkgconfig,$(brew --prefix openssl@3)/lib/pkgconfig "modules.buildconfig.signingIdentity:$MACOS_CERTIFICATE_NAME" modules.macdeployqt.libpath:$(brew --prefix qt6)/lib,$(brew --prefix poppler)/lib modules.macdeployqt.macdeployqtProgramBinPath:${HOME}/macdeployqt-install-dir project.enableConan:true project.conanWithCrashReporting:true project.conanProfiles:valentina
     - |
       if [ "$DEPLOY" = "true" ]; then
         # Store the notarization credentials so that we can prevent a UI password dialog

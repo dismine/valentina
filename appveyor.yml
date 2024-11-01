@@ -397,7 +397,7 @@ for:
 
       sudo ln -s /usr/local /opt/local;
 
-      cache_tag=usr_local_1 # this can be modified to rebuild deps
+      cache_tag=usr_local_2 # this can be modified to rebuild deps
 
       cdir=$HOME/brew_cache_dir
       cache_tar=$cdir/$cache_tag.tar
@@ -421,7 +421,7 @@ for:
         python3 ./scripts/treestate.py scan /usr/local usrlocal.json
 
         brew update
-        brew install coreutils ccache git openssl@1.1 pkg-config qbs qt6 cmake ninja poppler xerces-c
+        brew install coreutils ccache git openssl@3 pkg-config qbs qt6 cmake ninja poppler xerces-c
 
         # The build environment is now ready for use. We can complete
         # the rest of the process of creating the Homebrew archive
@@ -482,13 +482,13 @@ for:
     - qbs config defaultProfile qt6
     - qbs config profiles.qt6.baseProfile clang
     - conan install . -s os=Macos --build=missing -o with_crash_reporting=True -pr=valentina
-    - qbs build -f valentina.qbs -d ${APPVEYOR_BUILD_FOLDER}/build --jobs $(nproc) config:release modules.buildconfig.enableUnitTests:false modules.buildconfig.enableMultiBundle:${MULTI_BUNDLE} qbs.installRoot:${APPVEYOR_BUILD_FOLDER}/build/release/install-root profile:qt6 project.minimumMacosVersion:${MACOS_DEPLOYMENT_TARGET} modules.buildconfig.enableCcache:true moduleProviders.qbspkgconfig.extraPaths:$(brew --prefix xerces-c)/lib/pkgconfig,$(brew --prefix qt6)/lib/pkgconfig,$(brew --prefix openssl@1.1)/lib/pkgconfig "modules.buildconfig.signingIdentity:$MACOS_CERTIFICATE_NAME" modules.macdeployqt.libpath:$(brew --prefix qt6)/lib,$(brew --prefix poppler)/lib modules.macdeployqt.macdeployqtProgramBinPath:${HOME}/macdeployqt-install-dir project.enableConan:true project.conanWithCrashReporting:true project.conanProfiles:valentina
+    - qbs build -f valentina.qbs -d ${APPVEYOR_BUILD_FOLDER}/build --jobs $(nproc) config:release modules.buildconfig.enableUnitTests:false modules.buildconfig.enableMultiBundle:${MULTI_BUNDLE} qbs.installRoot:${APPVEYOR_BUILD_FOLDER}/build/release/install-root profile:qt6 project.minimumMacosVersion:${MACOS_DEPLOYMENT_TARGET} modules.buildconfig.enableCcache:true moduleProviders.qbspkgconfig.extraPaths:$(brew --prefix xerces-c)/lib/pkgconfig,$(brew --prefix qt6)/lib/pkgconfig,$(brew --prefix openssl@3)/lib/pkgconfig "modules.buildconfig.signingIdentity:$MACOS_CERTIFICATE_NAME" modules.macdeployqt.libpath:$(brew --prefix qt6)/lib,$(brew --prefix poppler)/lib modules.macdeployqt.macdeployqtProgramBinPath:${HOME}/macdeployqt-install-dir project.enableConan:true project.conanWithCrashReporting:true project.conanProfiles:valentina
     - export QTDIR=$(brew --prefix qt6)
     - export CRASH_QT_VERSION=$($QTDIR/bin/qmake -query QT_VERSION | awk -F. '{print $1 "_" $2}')
     - export CRASH_SHORT_SHA=$(git log --pretty=format:%h -n 1)
     - curl --proto '=https' --tlsv1.2 -LsSf https://github.com/mozilla/dump_syms/releases/download/v2.3.3/dump_syms-installer.sh | sh
     - python3 scripts/symupload.py ${APPVEYOR_BUILD_FOLDER}/build/release/install-root $VALENTINA_VERSION g$CRASH_SHORT_SHA $CRASH_QT_VERSION --multibundle=$MULTI_BUNDLE --clean
-    - qbs build -f valentina.qbs -d ${APPVEYOR_BUILD_FOLDER}/build -p 'Valentina DMG' --force-probe-execution --jobs $(nproc) config:release modules.buildconfig.enableUnitTests:false modules.buildconfig.enableMultiBundle:${MULTI_BUNDLE} qbs.installRoot:${APPVEYOR_BUILD_FOLDER}/build/release/install-root profile:qt6 project.minimumMacosVersion:${MACOS_DEPLOYMENT_TARGET} modules.buildconfig.enableCcache:true  moduleProviders.qbspkgconfig.extraPaths:$(brew --prefix xerces-c)/lib/pkgconfig,$(brew --prefix qt6)/lib/pkgconfig,$(brew --prefix openssl@1.1)/lib/pkgconfig "modules.buildconfig.signingIdentity:$MACOS_CERTIFICATE_NAME" modules.macdeployqt.libpath:$(brew --prefix qt6)/lib,$(brew --prefix poppler)/lib modules.macdeployqt.macdeployqtProgramBinPath:${HOME}/macdeployqt-install-dir project.enableConan:true project.conanWithCrashReporting:true project.conanProfiles:valentina
+    - qbs build -f valentina.qbs -d ${APPVEYOR_BUILD_FOLDER}/build -p 'Valentina DMG' --force-probe-execution --jobs $(nproc) config:release modules.buildconfig.enableUnitTests:false modules.buildconfig.enableMultiBundle:${MULTI_BUNDLE} qbs.installRoot:${APPVEYOR_BUILD_FOLDER}/build/release/install-root profile:qt6 project.minimumMacosVersion:${MACOS_DEPLOYMENT_TARGET} modules.buildconfig.enableCcache:true  moduleProviders.qbspkgconfig.extraPaths:$(brew --prefix xerces-c)/lib/pkgconfig,$(brew --prefix qt6)/lib/pkgconfig,$(brew --prefix openssl@3)/lib/pkgconfig "modules.buildconfig.signingIdentity:$MACOS_CERTIFICATE_NAME" modules.macdeployqt.libpath:$(brew --prefix qt6)/lib,$(brew --prefix poppler)/lib modules.macdeployqt.macdeployqtProgramBinPath:${HOME}/macdeployqt-install-dir project.enableConan:true project.conanWithCrashReporting:true project.conanProfiles:valentina
     - |-
       if [ "$DEPLOY" = "true" ]; then
         # Store the notarization credentials so that we can prevent a UI password dialog
