@@ -328,7 +328,7 @@ macos_task_template: &MACOS_TASK_TEMPLATE
     # This won't display anything secret.
     - security find-identity -v -p codesigning
     - brew update-reset
-    - brew update > /dev/null
+    - brew update -d
     - brew install qt6 coreutils ccache qbs cmake ninja git openssl@1.1 pkg-config poppler xerces-c
     - brew outdated
     - brew upgrade qt6
