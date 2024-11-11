@@ -367,13 +367,13 @@ auto NameRegExp(VariableRegex type) -> QString
         switch (type)
         {
             case VariableRegex::Variable:
-                regex = QString("\\A([^\\p{Nd}\\p{Zs}*\\/&|!<>^\\n\\()%1%2%3%4=?:;'\"]){1,1}"
-                                "([^\\p{Zs}*\\/&|!<>^\\n\\()%1%2%3%4=?:;\"]){0,}\\z")
+                regex = QString("\\A([^\\p{Nd}\\\\\\p{Zs}*\\/&|!<>^\\n\\()%1%2%3%4=?:;'\"]){1,1}"
+                                "([^\\\\\\p{Zs}*\\/&|!<>^\\n\\()%1%2%3%4=?:;\"]){0,}\\z")
                             .arg(negativeSigns, positiveSigns, decimalPoints, groupSeparators);
                 break;
             case VariableRegex::KnownMeasurement:
                 regex = QString("\\A([^@\\p{Nd}\\p{Zs}*\\/&|!<>^\\n\\()%1%2%3%4=?:;'\"]){1,1}"
-                                "([^\\p{Zs}*\\/&|!<>^\\n\\()%1%2%3%4=?:;\"]){0,}\\z")
+                                "([^\\\\\\p{Zs}*\\/&|!<>^\\n\\()%1%2%3%4=?:;\"]){0,}\\z")
                             .arg(negativeSigns, positiveSigns, decimalPoints, groupSeparators);
                 break;
             default:
