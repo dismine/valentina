@@ -24,6 +24,7 @@
 - Fix creation of invalid variable names.
 - Divide the list of export file formats into two.
 - Valentina app. Add _1 suffix only when number of sheets bigger than 1.
+- Fix orientation of fabric grainline.
 
 # Valentina 0.7.53 June 25, 2024
 - Fix layout sheet export with empty name.

@@ -240,7 +240,10 @@ void VPPiece::RotateToGrainline(const VPTransformationOrigon &origin)
         QLineF arrow = grainline;
         arrow.setAngle(arrow.angle() + 180);
 
-        qreal const angle = arrow.angleTo(fabricGrainline);
+        QLineF fabricArrow = fabricGrainline;
+        fabricArrow.setAngle(fabricArrow.angle() + 180);
+
+        qreal const angle = arrow.angleTo(fabricArrow);
         angles.append(angle);
         angles.append(-(360. - angle));
     }
@@ -250,7 +253,10 @@ void VPPiece::RotateToGrainline(const VPTransformationOrigon &origin)
         QLineF arrow = grainline;
         arrow.setAngle(arrow.angle() + 90);
 
-        qreal const angle = arrow.angleTo(fabricGrainline);
+        QLineF fabricArrow = fabricGrainline;
+        fabricArrow.setAngle(fabricArrow.angle() + 90);
+
+        qreal const angle = arrow.angleTo(fabricArrow);
         angles.append(angle);
         angles.append(-(360. - angle));
     }
@@ -260,7 +266,10 @@ void VPPiece::RotateToGrainline(const VPTransformationOrigon &origin)
         QLineF arrow = grainline;
         arrow.setAngle(arrow.angle() - 90);
 
-        qreal const angle = arrow.angleTo(fabricGrainline);
+        QLineF fabricArrow = fabricGrainline;
+        fabricArrow.setAngle(fabricArrow.angle() - 90);
+
+        qreal const angle = arrow.angleTo(fabricArrow);
         angles.append(angle);
         angles.append(-(360. - angle));
     }

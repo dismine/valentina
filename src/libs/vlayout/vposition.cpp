@@ -539,7 +539,7 @@ void VPosition::FollowGrainline()
     }
 
     VPieceGrainline const pieceGrainline = m_data.detail.GetGrainline();
-    QLineF detailGrainline(10, 10, 100, 10);
+    QLineF detailGrainline(10, 10, -100, 10);
     detailGrainline.setAngle(pieceGrainline.GetMainLine().angle());
 
     if (m_data.detail.IsForceFlipping())
@@ -556,11 +556,18 @@ void VPosition::FollowGrainline()
         return;
     }
 
-    const qreal angle = detailGrainline.angleTo(FabricGrainline());
+    QLineF fabricGrainline(detailGrainline.p1().x(),
+                           detailGrainline.p1().y(),
+                           detailGrainline.p1().x() - 100,
+                           detailGrainline.p1().y());
+    if (m_data.isOriginPaperOrientationPortrait)
+    {
+        fabricGrainline.setAngle(fabricGrainline.angle() - 90);
+    }
 
     if (pieceGrainline.IsArrowUpEnabled())
     {
-        RotateOnAngle(angle);
+        RotateOnAngle(detailGrainline.angleTo(fabricGrainline));
     }
 
     if (stop->load())
@@ -570,7 +577,13 @@ void VPosition::FollowGrainline()
 
     if (pieceGrainline.IsArrowDownEnabled())
     {
-        RotateOnAngle(angle + 180);
+        QLineF arrow = detailGrainline;
+        arrow.setAngle(arrow.angle() + 180);
+
+        QLineF fabricArrow = fabricGrainline;
+        fabricArrow.setAngle(fabricArrow.angle() + 180);
+
+        RotateOnAngle(arrow.angleTo(fabricArrow));
     }
 
     if (stop->load())
@@ -580,7 +593,13 @@ void VPosition::FollowGrainline()
 
     if (pieceGrainline.IsArrowLeftEnabled())
     {
-        RotateOnAngle(angle + 90);
+        QLineF arrow = detailGrainline;
+        arrow.setAngle(arrow.angle() + 90);
+
+        QLineF fabricArrow = fabricGrainline;
+        fabricArrow.setAngle(fabricArrow.angle() + 90);
+
+        RotateOnAngle(arrow.angleTo(fabricArrow));
     }
 
     if (stop->load())
@@ -590,7 +609,13 @@ void VPosition::FollowGrainline()
 
     if (pieceGrainline.IsArrowRightEnabled())
     {
-        RotateOnAngle(angle - 90);
+        QLineF arrow = detailGrainline;
+        arrow.setAngle(arrow.angle() - 90);
+
+        QLineF fabricArrow = fabricGrainline;
+        fabricArrow.setAngle(fabricArrow.angle() - 90);
+
+        RotateOnAngle(arrow.angleTo(fabricArrow));
     }
 }
 
