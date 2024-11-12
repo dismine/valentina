@@ -85,7 +85,7 @@ DialogSaveLayout::DialogSaveLayout(int count, Draw mode, const QString &fileName
 
     ui->lineEditFileName->setValidator(new QRegularExpressionValidator(QRegularExpression(*baseFilenameRegExp), this));
 
-    const QString mask = fileName + '_'_L1;
+    const QString mask = m_count > 1 ? fileName + '_'_L1 : fileName;
     if (VApplication::IsGUIMode())
     {
         ui->lineEditFileName->setText(mask);
@@ -447,8 +447,17 @@ void DialogSaveLayout::Save()
 
     for (int i = 0; i < m_count; ++i)
     {
-        const QString name =
-            Path() + '/' + FileName() + QString::number(i + 1) + VLayoutExporter::ExportFormatSuffix(Format());
+        QString name;
+
+        if (m_count > 1)
+        {
+            name = Path() + '/' + FileName() + QString::number(i + 1) + VLayoutExporter::ExportFormatSuffix(Format());
+        }
+        else
+        {
+            name = Path() + '/' + FileName() + VLayoutExporter::ExportFormatSuffix(Format());
+        }
+
         if (QFile::exists(name))
         {
             if (QMessageBox::StandardButton const res = QMessageBox::question(
@@ -516,8 +525,17 @@ void DialogSaveLayout::ShowExample()
     }
 
     const LayoutExportFormats currentFormat = Format();
-    ui->labelExample->setText(tr("Example:") + FileName() + '1'_L1 +
-                              VLayoutExporter::ExportFormatSuffix(currentFormat));
+    QString example;
+
+    if (m_count > 1)
+    {
+        example = tr("Example:") + FileName() + '1'_L1 + VLayoutExporter::ExportFormatSuffix(currentFormat);
+    }
+    else
+    {
+        example = tr("Example:") + FileName() + VLayoutExporter::ExportFormatSuffix(currentFormat);
+    }
+    ui->labelExample->setText(example);
 
     ui->groupBoxPaperFormat->setEnabled(false);
     ui->groupBoxMargins->setEnabled(false);
