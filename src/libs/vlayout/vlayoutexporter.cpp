@@ -73,12 +73,14 @@ QT_WARNING_POP
 
 //---------------------------------------------------------------------------------------------------------------------
 /**
- * @brief PrepareTextForDXF prepare QGraphicsSimpleTextItem items for export to flat dxf.
+ * @brief PrepareTextForDXF prepare QGraphicsSimpleTextItem items for export to
+ * flat dxf.
  *
- * Because QPaintEngine::drawTextItem doesn't pass whole string per time we mark end of each string by adding special
- * placholder. This method append it.
+ * Because QPaintEngine::drawTextItem doesn't pass whole string per time we mark
+ * end of each string by adding special placholder. This method append it.
  *
- * @param placeholder placeholder that will be appended to each QGraphicsSimpleTextItem item's text string.
+ * @param placeholder placeholder that will be appended to each
+ * QGraphicsSimpleTextItem item's text string.
  */
 void PrepareDetailsForDXF(const QString &placeholder, const QList<QGraphicsItem *> &paperItems)
 {
@@ -100,12 +102,14 @@ void PrepareDetailsForDXF(const QString &placeholder, const QList<QGraphicsItem 
 
 //---------------------------------------------------------------------------------------------------------------------
 /**
- * @brief RestoreTextAfterDXF restore QGraphicsSimpleTextItem items after export to flat dxf.
+ * @brief RestoreTextAfterDXF restore QGraphicsSimpleTextItem items after export
+ * to flat dxf.
  *
- * Because QPaintEngine::drawTextItem doesn't pass whole string per time we mark end of each string by adding special
- * placholder. This method remove it.
+ * Because QPaintEngine::drawTextItem doesn't pass whole string per time we mark
+ * end of each string by adding special placholder. This method remove it.
  *
- * @param placeholder placeholder that will be removed from each QGraphicsSimpleTextItem item's text string.
+ * @param placeholder placeholder that will be removed from each
+ * QGraphicsSimpleTextItem item's text string.
  */
 void RestoreDetailsAfterDXF(const QString &placeholder, const QList<QGraphicsItem *> &paperItems)
 {
@@ -464,9 +468,10 @@ auto VLayoutExporter::SupportPDFConversion() -> bool
 
 //---------------------------------------------------------------------------------------------------------------------
 /**
- * @brief PdfToPs use external tool "pdftops" for converting pdf too eps or ps format.
- * @param params string with parameter for tool. Parameters have format: "-eps input_file out_file". Use -eps when
- * need create eps file.
+ * @brief PdfToPs use external tool "pdftops" for converting pdf too eps or ps
+ * format.
+ * @param params string with parameter for tool. Parameters have format: "-eps
+ * input_file out_file". Use -eps when need create eps file.
  */
 void VLayoutExporter::PdfToPs(const QStringList &params)
 {
@@ -506,22 +511,24 @@ void VLayoutExporter::PdfToPs(const QStringList &params)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VLayoutExporter::ExportToPDF(QGraphicsScene *scene, const QList<QGraphicsItem *> &details,
+void VLayoutExporter::ExportToPDF(QGraphicsScene *scene,
+                                  const QList<QGraphicsItem *> &details,
                                   const QString &filename) const
 {
     PrepareGrainlineForExport(details, m_showGrainline);
 
     QPrinter printer;
-    printer.setCreator(QGuiApplication::applicationDisplayName() + QChar(QChar::Space) +
-                       QCoreApplication::applicationVersion());
+    printer.setCreator(QGuiApplication::applicationDisplayName() + QChar(QChar::Space)
+                       + QCoreApplication::applicationVersion());
     printer.setOutputFormat(QPrinter::PdfFormat);
     printer.setOutputFileName(filename);
     printer.setDocName(QFileInfo(filename).fileName());
     printer.setResolution(static_cast<int>(PrintDPI));
     printer.setFullPage(m_ignorePrinterMargins);
 
-    QPageLayout::Orientation const imageOrientation =
-        m_imageRect.height() >= m_imageRect.width() ? QPageLayout::Portrait : QPageLayout::Landscape;
+    QPageLayout::Orientation const imageOrientation = m_imageRect.height() >= m_imageRect.width()
+                                                          ? QPageLayout::Portrait
+                                                          : QPageLayout::Landscape;
 
     qreal const width = FromPixel(m_imageRect.width() * m_xScale + m_margins.left() + m_margins.right(), Unit::Mm);
     qreal const height = FromPixel(m_imageRect.height() * m_yScale + m_margins.top() + m_margins.bottom(), Unit::Mm);
@@ -704,4 +711,158 @@ void VLayoutExporter::RestoreGrainlineAfterExport(const QList<QGraphicsItem *> &
             }
         }
     }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+using LayoutExportFileFormatEnum = enum LayoutExportFileFormat; // Stupid Clang format!
+auto VLayoutExporter::LayoutExportFileFormat(LayoutExportFormats format) -> LayoutExportFileFormatEnum
+{
+    Q_STATIC_ASSERT_X(static_cast<int>(LayoutExportFormats::COUNT) == 41, "Update to cover all cases.");
+
+    switch (format)
+    {
+        case LayoutExportFormats::SVG:
+            return LayoutExportFileFormat::SVG;
+
+        case LayoutExportFormats::PS:
+        case LayoutExportFormats::EPS:
+        case LayoutExportFormats::PDF:
+        case LayoutExportFormats::PDFTiled:
+            return LayoutExportFileFormat::PDF;
+
+        case LayoutExportFormats::PNG:
+            return LayoutExportFileFormat::PNG;
+
+        case LayoutExportFormats::OBJ:
+            return LayoutExportFileFormat::OBJ;
+
+        case LayoutExportFormats::DXF_AC1006_Flat:
+        case LayoutExportFormats::DXF_AC1009_Flat:
+        case LayoutExportFormats::DXF_AC1012_Flat:
+        case LayoutExportFormats::DXF_AC1014_Flat:
+        case LayoutExportFormats::DXF_AC1015_Flat:
+        case LayoutExportFormats::DXF_AC1018_Flat:
+        case LayoutExportFormats::DXF_AC1021_Flat:
+        case LayoutExportFormats::DXF_AC1024_Flat:
+        case LayoutExportFormats::DXF_AC1027_Flat:
+        case LayoutExportFormats::DXF_AAMA:
+        case LayoutExportFormats::DXF_ASTM:
+            return LayoutExportFileFormat::DXF;
+
+        case LayoutExportFormats::NC:
+            return LayoutExportFileFormat::NC;
+
+        case LayoutExportFormats::RLD:
+            return LayoutExportFileFormat::RLD;
+
+        case LayoutExportFormats::TIF:
+            return LayoutExportFileFormat::TIF;
+
+        case LayoutExportFormats::HPGL:
+        case LayoutExportFormats::HPGL2:
+            return LayoutExportFileFormat::HPGL;
+
+        case LayoutExportFormats::HPGL_PLT:
+        case LayoutExportFormats::HPGL2_PLT:
+            return LayoutExportFileFormat::PLT;
+
+        case LayoutExportFormats::COUNT:
+            Q_UNREACHABLE();
+            break;
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+auto VLayoutExporter::MapLayoutExportFormats(enum LayoutExportFileFormat format) -> QVector<LayoutExportFormats>
+{
+    Q_STATIC_ASSERT_X(static_cast<int>(LayoutExportFileFormat::COUNT) == 10, "Update to cover all cases.");
+
+    static bool const pdfConversionSupported = VLayoutExporter::SupportPDFConversion();
+
+    switch (format)
+    {
+        case LayoutExportFileFormat::SVG:
+            return {LayoutExportFormats::SVG};
+        case LayoutExportFileFormat::PDF:
+        {
+            QVector<LayoutExportFormats> formats{LayoutExportFormats::PDFTiled, LayoutExportFormats::PDF};
+
+            if (pdfConversionSupported)
+            {
+                formats.append(LayoutExportFormats::PS);
+                formats.append(LayoutExportFormats::EPS);
+            }
+            return formats;
+        }
+        case LayoutExportFileFormat::PNG:
+            return {LayoutExportFormats::PNG};
+        case LayoutExportFileFormat::OBJ:
+            return {LayoutExportFormats::OBJ};
+        case LayoutExportFileFormat::DXF:
+            return {LayoutExportFormats::DXF_AAMA,
+                    LayoutExportFormats::DXF_ASTM,
+                    LayoutExportFormats::DXF_AC1006_Flat,
+                    LayoutExportFormats::DXF_AC1009_Flat,
+                    LayoutExportFormats::DXF_AC1012_Flat,
+                    LayoutExportFormats::DXF_AC1014_Flat,
+                    LayoutExportFormats::DXF_AC1015_Flat,
+                    LayoutExportFormats::DXF_AC1018_Flat,
+                    LayoutExportFormats::DXF_AC1021_Flat,
+                    LayoutExportFormats::DXF_AC1024_Flat,
+                    LayoutExportFormats::DXF_AC1027_Flat};
+        case LayoutExportFileFormat::NC:
+            return {LayoutExportFormats::NC};
+        case LayoutExportFileFormat::RLD:
+            return {LayoutExportFormats::RLD};
+        case LayoutExportFileFormat::TIF:
+            return {LayoutExportFormats::TIF};
+        case LayoutExportFileFormat::HPGL:
+            return {LayoutExportFormats::HPGL2, LayoutExportFormats::HPGL};
+        case LayoutExportFileFormat::PLT:
+            return {LayoutExportFormats::HPGL2_PLT, LayoutExportFormats::HPGL_PLT};
+        case LayoutExportFileFormat::COUNT:
+            Q_UNREACHABLE();
+            break;
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+auto VLayoutExporter::AllLayoutExportFormats() -> QVector<LayoutExportFormats>
+{
+    Q_STATIC_ASSERT_X(static_cast<int>(LayoutExportFormats::COUNT) == 41, "Update to cover all cases.");
+
+    QVector<LayoutExportFormats> list;
+
+    list.append(LayoutExportFormats::SVG);
+    list.append(LayoutExportFormats::PDF);
+    list.append(LayoutExportFormats::PNG);
+    list.append(LayoutExportFormats::OBJ);
+
+    static bool const pdfConversionSupported = VLayoutExporter::SupportPDFConversion();
+    if (pdfConversionSupported)
+    {
+        list.append(LayoutExportFormats::PS);
+        list.append(LayoutExportFormats::EPS);
+    }
+    list.append(LayoutExportFormats::DXF_AC1006_Flat);
+    list.append(LayoutExportFormats::DXF_AC1009_Flat);
+    list.append(LayoutExportFormats::DXF_AC1012_Flat);
+    list.append(LayoutExportFormats::DXF_AC1014_Flat);
+    list.append(LayoutExportFormats::DXF_AC1015_Flat);
+    list.append(LayoutExportFormats::DXF_AC1018_Flat);
+    list.append(LayoutExportFormats::DXF_AC1021_Flat);
+    list.append(LayoutExportFormats::DXF_AC1024_Flat);
+    list.append(LayoutExportFormats::DXF_AC1027_Flat);
+    list.append(LayoutExportFormats::DXF_AAMA);
+    list.append(LayoutExportFormats::DXF_ASTM);
+    list.append(LayoutExportFormats::PDFTiled);
+    //    list.append(LayoutExportFormats::NC);
+    list.append(LayoutExportFormats::RLD);
+    list.append(LayoutExportFormats::TIF);
+    list.append(LayoutExportFormats::HPGL);
+    list.append(LayoutExportFormats::HPGL2);
+    list.append(LayoutExportFormats::HPGL_PLT);
+    list.append(LayoutExportFormats::HPGL2_PLT);
+
+    return list;
 }

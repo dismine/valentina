@@ -39,6 +39,21 @@
 #include <ciso646> // and, not, or
 #endif
 
+enum class LayoutExportFileFormat : qint8
+{
+    SVG,
+    PDF,
+    PNG,
+    OBJ, /* Wavefront OBJ*/
+    DXF,
+    NC,
+    RLD,
+    TIF,
+    HPGL,
+    PLT,
+    COUNT /*Use only for validation*/
+};
+
 enum class LayoutExportFormats : qint8
 {
     SVG = 0,

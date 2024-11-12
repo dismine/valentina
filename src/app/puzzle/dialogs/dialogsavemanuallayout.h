@@ -92,15 +92,12 @@ private:
     bool m_scaleConnected{true};
     bool m_consoleExport;
 
-    static auto SupportPSTest() -> bool;
-    static auto InitFormats() -> QVector<std::pair<QString, LayoutExportFormats>>;
-
-    void RemoveFormatFromList(LayoutExportFormats format);
-
     void ReadSettings();
     void WriteSettings() const;
 
     void InitDxfCompatibility();
+    void InitFileFormats();
+    void InitFileFormatTypes(LayoutExportFileFormat format);
 };
 
 #endif // DIALOGSAVEMANUALLAYOUT_H

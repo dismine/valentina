@@ -22,6 +22,7 @@
 - Added PLT export format as a container for HPGL.
 - Fix saving a notch manual angle value.
 - Fix creation of invalid variable names.
+- Divide the list of export file formats into two.
 
 # Valentina 0.7.53 June 25, 2024
 - Fix layout sheet export with empty name.

@@ -90,6 +90,13 @@
       </widget>
      </item>
      <item>
+      <widget class="QComboBox" name="comboBoxFormatType">
+       <property name="sizeAdjustPolicy">
+        <enum>QComboBox::AdjustToContents</enum>
+       </property>
+      </widget>
+     </item>
+     <item>
       <spacer name="horizontalSpacer_5">
        <property name="orientation">
         <enum>Qt::Horizontal</enum>
@@ -107,7 +114,7 @@
    <item>
     <layout class="QHBoxLayout" name="horizontalLayout_11">
      <item>
-      <widget class="QGroupBox" name="groupBoxFormatOptions_2">
+      <widget class="QGroupBox" name="groupBoxFormatOptions">
        <property name="title">
         <string>Options</string>
        </property>

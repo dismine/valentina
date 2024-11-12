@@ -61,9 +61,6 @@ Q_GLOBAL_STATIC_WITH_ARGS(const QString, baseFilenameRegExp, ("^[^\\:?\"*|\\/<>]
 QT_WARNING_POP
 } // namespace
 
-bool DialogSaveLayout::havePdf = false; // NOLINT(cppcoreguidelines-avoid-non-const-global-variables)
-bool DialogSaveLayout::tested = false;  // NOLINT(cppcoreguidelines-avoid-non-const-global-variables)
-
 //---------------------------------------------------------------------------------------------------------------------
 DialogSaveLayout::DialogSaveLayout(int count, Draw mode, const QString &fileName, QWidget *parent)
   : VAbstractLayoutDialog(parent),
@@ -105,31 +102,34 @@ DialogSaveLayout::DialogSaveLayout(int count, Draw mode, const QString &fileName
         }
     }
 
-    for (const auto &[first, second] : InitFormats())
-    {
-        ui->comboBoxFormat->addItem(first, QVariant(static_cast<int>(second)));
-    }
-#ifdef V_NO_ASSERT // Temporarily unavailable
-    RemoveFormatFromList(LayoutExportFormats::OBJ);
-#endif
+    InitFileFormats();
+    connect(ui->comboBoxFormatType,
+            QOverload<int>::of(&QComboBox::currentIndexChanged),
+            this,
+            &DialogSaveLayout::ShowExample);
+    connect(ui->comboBoxFormat,
+            QOverload<int>::of(&QComboBox::currentIndexChanged),
+            this,
+            [this](int index)
+            {
+                if (index == -1)
+                {
+                    ui->comboBoxFormatType->clear();
+                    return;
+                }
 
-    //    RemoveFormatFromList(LayoutExportFormats::NC); // No support for now
+                ui->comboBoxFormatType->blockSignals(true);
+                InitFileFormatTypes(static_cast<LayoutExportFileFormat>(ui->comboBoxFormat->currentData().toInt()));
+                ui->comboBoxFormatType->setCurrentIndex(-1);
+                ui->comboBoxFormatType->blockSignals(false);
 
-    if (m_mode != Draw::Layout)
-    {
-        RemoveFormatFromList(LayoutExportFormats::PDFTiled);
-    }
-    else
-    {
-        RemoveFormatFromList(LayoutExportFormats::RLD);
-    }
+                ui->comboBoxFormatType->setCurrentIndex(0);
+            });
 
     InitDxfCompatibility();
 
     connect(bOk, &QPushButton::clicked, this, &DialogSaveLayout::Save);
     connect(ui->lineEditFileName, &QLineEdit::textChanged, this, &DialogSaveLayout::ShowExample);
-    connect(ui->comboBoxFormat, QOverload<int>::of(&QComboBox::currentIndexChanged), this,
-            &DialogSaveLayout::ShowExample);
     connect(ui->pushButtonBrowse, &QPushButton::clicked, this,
             [this]()
             {
@@ -171,15 +171,32 @@ void DialogSaveLayout::SelectFormat(LayoutExportFormats format)
 {
     if (static_cast<int>(format) < 0 || format >= LayoutExportFormats::COUNT)
     {
-        throw VException(tr("Tried to use out of range format number."));
+        throw VException(tr("Tried to use out of range file format type number."));
     }
 
-    const int i = ui->comboBoxFormat->findData(static_cast<int>(format));
+    const LayoutExportFileFormat fileFormat = VLayoutExporter::LayoutExportFileFormat(format);
+
+    int i = ui->comboBoxFormat->findData(static_cast<int>(fileFormat));
     if (i < 0)
     {
-        throw VException(tr("Selected not present format."));
+        throw VException(tr("Selected not present file format."));
     }
+
+    ui->comboBoxFormat->blockSignals(true);
     ui->comboBoxFormat->setCurrentIndex(i);
+    ui->comboBoxFormat->blockSignals(false);
+
+    ui->comboBoxFormatType->blockSignals(true);
+    InitFileFormatTypes(fileFormat);
+    ui->comboBoxFormatType->setCurrentIndex(-1);
+    ui->comboBoxFormatType->blockSignals(false);
+
+    i = ui->comboBoxFormatType->findData(static_cast<int>(format));
+    if (i < 0)
+    {
+        throw VException(tr("Selected not present file format type."));
+    }
+    ui->comboBoxFormatType->setCurrentIndex(i);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -335,10 +352,11 @@ auto DialogSaveLayout::IsShowGrainline() const -> bool
 auto DialogSaveLayout::MakeHelpFormatList() -> QString
 {
     auto out = QStringLiteral("\n");
-    const auto formats = InitFormats();
+    const auto formats = VLayoutExporter::AllLayoutExportFormats();
     for (int i = 0; i < formats.size(); ++i)
     {
-        out += "\t* "_L1 + formats.at(i).first + " = "_L1 + QString::number(static_cast<int>(formats.at(i).second));
+        out += "\t* "_L1 + VLayoutExporter::ExportFormatDescription(formats.at(i)) + " = "_L1
+               + QString::number(static_cast<int>(formats.at(i)));
 
         if (i < formats.size() - 1)
         {
@@ -419,7 +437,7 @@ auto DialogSaveLayout::FileName() const -> QString
 //---------------------------------------------------------------------------------------------------------------------
 auto DialogSaveLayout::Format() const -> LayoutExportFormats
 {
-    return static_cast<LayoutExportFormats>(ui->comboBoxFormat->currentData().toInt());
+    return static_cast<LayoutExportFormats>(ui->comboBoxFormatType->currentData().toInt());
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -482,6 +500,21 @@ void DialogSaveLayout::PathChanged(const QString &text)
 //---------------------------------------------------------------------------------------------------------------------
 void DialogSaveLayout::ShowExample()
 {
+    const bool hasValues = ui->comboBoxFormatType->currentIndex() != -1;
+    ui->groupBoxFormatOptions->setEnabled(hasValues);
+    ui->groupBoxScale->setEnabled(hasValues);
+    ui->groupBoxMargins->setEnabled(hasValues);
+    ui->groupBoxPaperFormat->setEnabled(hasValues);
+
+    QPushButton *bOk = ui->buttonBox->button(QDialogButtonBox::Ok);
+    SCASSERT(bOk != nullptr)
+    bOk->setEnabled(hasValues);
+
+    if (!hasValues)
+    {
+        return;
+    }
+
     const LayoutExportFormats currentFormat = Format();
     ui->labelExample->setText(tr("Example:") + FileName() + '1'_L1 +
                               VLayoutExporter::ExportFormatSuffix(currentFormat));
@@ -741,67 +774,6 @@ void DialogSaveLayout::showEvent(QShowEvent *event)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-auto DialogSaveLayout::SupportPSTest() -> bool
-{
-    if (!tested)
-    {
-        havePdf = VLayoutExporter::SupportPDFConversion();
-        tested = true;
-    }
-    return havePdf;
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-auto DialogSaveLayout::InitFormats() -> QVector<std::pair<QString, LayoutExportFormats>>
-{
-    QVector<std::pair<QString, LayoutExportFormats>> list;
-
-    auto InitFormat = [&list](LayoutExportFormats format)
-    { list.append(std::make_pair(VLayoutExporter::ExportFormatDescription(format), format)); };
-
-    InitFormat(LayoutExportFormats::SVG);
-    InitFormat(LayoutExportFormats::PDF);
-    InitFormat(LayoutExportFormats::PNG);
-    InitFormat(LayoutExportFormats::OBJ);
-    if (SupportPSTest())
-    {
-        InitFormat(LayoutExportFormats::PS);
-        InitFormat(LayoutExportFormats::EPS);
-    }
-    InitFormat(LayoutExportFormats::DXF_AC1006_Flat);
-    InitFormat(LayoutExportFormats::DXF_AC1009_Flat);
-    InitFormat(LayoutExportFormats::DXF_AC1012_Flat);
-    InitFormat(LayoutExportFormats::DXF_AC1014_Flat);
-    InitFormat(LayoutExportFormats::DXF_AC1015_Flat);
-    InitFormat(LayoutExportFormats::DXF_AC1018_Flat);
-    InitFormat(LayoutExportFormats::DXF_AC1021_Flat);
-    InitFormat(LayoutExportFormats::DXF_AC1024_Flat);
-    InitFormat(LayoutExportFormats::DXF_AC1027_Flat);
-    InitFormat(LayoutExportFormats::DXF_AAMA);
-    InitFormat(LayoutExportFormats::DXF_ASTM);
-    InitFormat(LayoutExportFormats::PDFTiled);
-    //    InitFormat(LayoutExportFormats::NC);
-    InitFormat(LayoutExportFormats::RLD);
-    InitFormat(LayoutExportFormats::TIF);
-    InitFormat(LayoutExportFormats::HPGL);
-    InitFormat(LayoutExportFormats::HPGL2);
-    InitFormat(LayoutExportFormats::HPGL_PLT);
-    InitFormat(LayoutExportFormats::HPGL2_PLT);
-
-    return list;
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-void DialogSaveLayout::RemoveFormatFromList(LayoutExportFormats format)
-{
-    const int index = ui->comboBoxFormat->findData(static_cast<int>(format));
-    if (index != -1)
-    {
-        ui->comboBoxFormat->removeItem(index);
-    }
-}
-
-//---------------------------------------------------------------------------------------------------------------------
 /**
  * @brief ReadSettings reads the values of the variables needed for the save layout dialog, for instance
  * the margins, teamplte and orientation of tiled pdf. Then sets the corresponding
@@ -939,4 +911,66 @@ void DialogSaveLayout::InitDxfCompatibility()
                                           QVariant(static_cast<int>(DXFApparelCompatibility::RPCADV09)));
     ui->comboBoxDxfCompatibility->addItem("Richpeace CAD V10"_L1,
                                           QVariant(static_cast<int>(DXFApparelCompatibility::RPCADV10)));
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void DialogSaveLayout::InitFileFormats()
+{
+    auto AddItem = [this](const QString &label, LayoutExportFileFormat format)
+    { ui->comboBoxFormat->addItem(label, QVariant(static_cast<int>(format))); };
+
+    Q_STATIC_ASSERT_X(static_cast<int>(LayoutExportFileFormat::COUNT) == 10, "Update to cover all cases.");
+
+    AddItem("PDF"_L1, LayoutExportFileFormat::PDF);
+    AddItem("SVG"_L1, LayoutExportFileFormat::SVG);
+    AddItem("PNG"_L1, LayoutExportFileFormat::PNG);
+#ifdef V_NO_ASSERT
+    AddItem("OBJ"_L1, LayoutExportFileFormat::OBJ); // Temporarily unavailable
+#endif
+    AddItem("DXF"_L1, LayoutExportFileFormat::DXF);
+    // AddItem("NC"_L1, LayoutExportFileFormat::NC);// No support for now
+    if (m_mode != Draw::Layout)
+    {
+        AddItem("RLD"_L1, LayoutExportFileFormat::RLD);
+    }
+    AddItem("PLT"_L1, LayoutExportFileFormat::PLT);
+    AddItem("HPGL"_L1, LayoutExportFileFormat::HPGL);
+    AddItem("TIF"_L1, LayoutExportFileFormat::TIF);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void DialogSaveLayout::InitFileFormatTypes(LayoutExportFileFormat format)
+{
+    ui->comboBoxFormatType->clear();
+    const QVector<LayoutExportFormats> types = VLayoutExporter::MapLayoutExportFormats(format);
+
+    for (const auto &type : types)
+    {
+        ui->comboBoxFormatType->addItem(VLayoutExporter::ExportFormatDescription(type),
+                                        QVariant(static_cast<int>(type)));
+    }
+
+    auto RemoveFormatFromList = [this](LayoutExportFormats format)
+    {
+        const int index = ui->comboBoxFormatType->findData(static_cast<int>(format));
+        if (index != -1)
+        {
+            ui->comboBoxFormatType->removeItem(index);
+        }
+    };
+
+    //    RemoveFormatFromList(LayoutExportFormats::NC); // No support for now
+
+#ifdef V_NO_ASSERT // Temporarily unavailable
+    RemoveFormatFromList(LayoutExportFormats::OBJ);
+#endif
+
+    if (m_mode != Draw::Layout)
+    {
+        RemoveFormatFromList(LayoutExportFormats::PDFTiled);
+    }
+    else
+    {
+        RemoveFormatFromList(LayoutExportFormats::RLD);
+    }
 }

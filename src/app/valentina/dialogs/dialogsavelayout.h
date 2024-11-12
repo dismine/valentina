@@ -114,17 +114,12 @@ private:
     bool m_tiledExportMode{false};
     bool m_scaleConnected{true};
 
-    static bool havePdf; // NOLINT(cppcoreguidelines-avoid-non-const-global-variables)
-    static bool tested;  // NOLINT(cppcoreguidelines-avoid-non-const-global-variables)
-    static auto SupportPSTest() -> bool;
-    static auto InitFormats() -> QVector<std::pair<QString, LayoutExportFormats>>;
-
-    void RemoveFormatFromList(LayoutExportFormats format);
-
     void ReadSettings();
     void WriteSettings() const;
 
     void InitDxfCompatibility();
+    void InitFileFormats();
+    void InitFileFormatTypes(LayoutExportFileFormat format);
 };
 
 #endif // DIALOGSAVELAYOUT_H

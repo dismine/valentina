@@ -112,6 +112,10 @@ public:
     static void PrepareGrainlineForExport(const QList<QGraphicsItem *> &items, bool showGrainline);
     static void RestoreGrainlineAfterExport(const QList<QGraphicsItem *> &items);
 
+    static auto LayoutExportFileFormat(LayoutExportFormats format) -> LayoutExportFileFormat;
+    static auto MapLayoutExportFormats(enum LayoutExportFileFormat format) -> QVector<LayoutExportFormats>;
+    static auto AllLayoutExportFormats() -> QVector<LayoutExportFormats>;
+
     auto offset() const -> QPointF;
     void SetOffset(const QPointF &newOffset);
 
