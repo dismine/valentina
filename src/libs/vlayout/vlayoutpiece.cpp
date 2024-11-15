@@ -664,6 +664,7 @@ auto VLayoutPiece::Create(const VPiece &piece, vidtype id, const VContainer *pat
     det.SetSAWidth(VAbstractValApplication::VApp()->toPixel(piece.GetSAWidth()));
     det.SetForbidFlipping(piece.IsForbidFlipping());
     det.SetForceFlipping(piece.IsForceFlipping());
+    det.SetSymmetricalCopy(piece.IsSymmetricalCopy());
     det.SetFollowGrainline(piece.IsFollowGrainline());
     det.SetSewLineOnDrawing(piece.IsSewLineOnDrawing());
     det.SetShowFullPiece(piece.IsShowFullPiece());
@@ -1687,7 +1688,19 @@ auto VLayoutPiece::MappedLayoutAllowancePath() const -> QPainterPath
 //---------------------------------------------------------------------------------------------------------------------
 void VLayoutPiece::DrawMiniature(QPainter &painter, bool togetherWithNotches) const
 {
-    painter.drawPath(ContourPath(togetherWithNotches, false));
+    QTransform m;
+
+    if (IsForceFlipping())
+    {
+        QRectF rect = DetailBoundingRect();
+        QPointF const center = rect.center();
+
+        m.translate(center.x(), 0);
+        m.scale(-1, 1);
+        m.translate(-center.x(), 0);
+    }
+
+    painter.drawPath(m.map(ContourPath(togetherWithNotches, false)));
 
     for (const auto &path : d->m_internalPaths)
     {
@@ -1697,17 +1710,17 @@ void VLayoutPiece::DrawMiniature(QPainter &painter, bool togetherWithNotches) co
         pen.setStyle(path.PenStyle());
         painter.setPen(pen);
 
-        painter.drawPath(path.GetPainterPath());
+        painter.drawPath(m.map(path.GetPainterPath()));
 
         painter.restore();
     }
 
     for (const auto &label : d->m_placeLabels)
     {
-        painter.drawPath(LabelShapePath(label));
+        painter.drawPath(m.map(LabelShapePath(label)));
     }
 
-    painter.drawPath(VLayoutPiece::GrainlinePath(GetGrainlineShape()));
+    painter.drawPath(m.map(VLayoutPiece::GrainlinePath(GetGrainlineShape())));
 }
 
 //---------------------------------------------------------------------------------------------------------------------

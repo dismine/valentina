@@ -3437,6 +3437,21 @@ auto VPMainWindow::AddLayoutPieces(const QVector<VLayoutPiece> &pieces) -> bool
             }
 
             piece->SetSheet(VPSheetPtr()); // just in case
+
+            if (rawPiece.GetQuantity() > 1 && rawPiece.IsSymmetricalCopy()
+                && (rawPiece.IsForceFlipping() || rawPiece.IsForbidFlipping()) && i % 2 == 0)
+            {
+                // Flip every even-numbered copy
+                if (rawPiece.IsForceFlipping())
+                {
+                    piece->SetForbidFlipping(true);
+                }
+                else if (rawPiece.IsForbidFlipping())
+                {
+                    piece->SetForceFlipping(true);
+                }
+            }
+
             VPLayout::AddPiece(m_layout, piece);
         }
     }

@@ -90,6 +90,9 @@ public:
     auto IsForceFlipping() const -> bool;
     void SetForceFlipping(bool value);
 
+    auto IsSymmetricalCopy() const -> bool;
+    void SetSymmetricalCopy(bool value);
+
     auto IsFollowGrainline() const -> bool;
     void SetFollowGrainline(bool value);
 

@@ -62,8 +62,8 @@ class QDomElement;
  */
 
 const QString VPatternConverter::PatternMinVerStr = QStringLiteral("0.1.4");                     // NOLINT
-const QString VPatternConverter::PatternMaxVerStr = QStringLiteral("0.9.7");                     // NOLINT
-const QString VPatternConverter::CurrentSchema = QStringLiteral("://schema/pattern/v0.9.7.xsd"); // NOLINT
+const QString VPatternConverter::PatternMaxVerStr = QStringLiteral("0.9.8");                     // NOLINT
+const QString VPatternConverter::CurrentSchema = QStringLiteral("://schema/pattern/v0.9.8.xsd"); // NOLINT
 
 // VPatternConverter::PatternMinVer; // <== DON'T FORGET TO UPDATE TOO!!!!
 // VPatternConverter::PatternMaxVer; // <== DON'T FORGET TO UPDATE TOO!!!!
@@ -273,7 +273,8 @@ auto VPatternConverter::XSDSchemas() -> QHash<unsigned int, QString>
         std::make_pair(FormatVersion(0, 9, 4), QStringLiteral("://schema/pattern/v0.9.4.xsd")),
         std::make_pair(FormatVersion(0, 9, 5), QStringLiteral("://schema/pattern/v0.9.5.xsd")),
         std::make_pair(FormatVersion(0, 9, 6), QStringLiteral("://schema/pattern/v0.9.6.xsd")),
-        std::make_pair(FormatVersion(0, 9, 7), CurrentSchema)};
+        std::make_pair(FormatVersion(0, 9, 7), QStringLiteral("://schema/pattern/v0.9.7.xsd")),
+        std::make_pair(FormatVersion(0, 9, 8), CurrentSchema)};
 
     return schemas;
 }
@@ -400,9 +401,12 @@ void VPatternConverter::ApplyPatches()
             Q_FALLTHROUGH();
         case (FormatVersion(0, 9, 6)):
             ToV0_9_7();
-            ValidateXML(CurrentSchema);
             Q_FALLTHROUGH();
         case (FormatVersion(0, 9, 7)):
+            ToV0_9_8();
+            ValidateXML(CurrentSchema);
+            Q_FALLTHROUGH();
+        case (FormatVersion(0, 9, 8)):
             break;
         default:
             InvalidVersion(m_ver);
@@ -420,7 +424,7 @@ void VPatternConverter::DowngradeToCurrentMaxVersion()
 auto VPatternConverter::IsReadOnly() const -> bool
 {
     // Check if attribute readOnly was not changed in file format
-    Q_STATIC_ASSERT_X(VPatternConverter::PatternMaxVer == FormatVersion(0, 9, 7), "Check attribute readOnly.");
+    Q_STATIC_ASSERT_X(VPatternConverter::PatternMaxVer == FormatVersion(0, 9, 8), "Check attribute readOnly.");
 
     // Possibly in future attribute readOnly will change position etc.
     // For now position is the same for all supported format versions.
@@ -616,6 +620,16 @@ void VPatternConverter::ToV0_9_7()
     ConvertMirrorLineToV0_9_7();
 
     SetVersion(QStringLiteral("0.9.7"));
+    Save();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VPatternConverter::ToV0_9_8()
+{
+    // TODO. Delete if minimal supported version is 0.9.8
+    Q_STATIC_ASSERT_X(VPatternConverter::PatternMinVer < FormatVersion(0, 9, 8), "Time to refactor the code.");
+
+    SetVersion(QStringLiteral("0.9.8"));
     Save();
 }
 

@@ -393,6 +393,7 @@ void DialogSeamAllowance::SetPiece(const VPiece &piece)
 
     uiTabPaths->checkBoxForbidFlipping->setChecked(piece.IsForbidFlipping());
     uiTabPaths->checkBoxForceFlipping->setChecked(piece.IsForceFlipping());
+    uiTabPaths->checkBoxSymmetricalCopy->setChecked(piece.IsSymmetricalCopy());
     uiTabPaths->checkBoxFollowGrainline->setChecked(piece.IsFollowGrainline());
     uiTabPaths->checkBoxOnDrawing->setChecked(piece.IsSewLineOnDrawing());
     uiTabPaths->checkBoxSeams->setChecked(piece.IsSeamAllowance());
@@ -3236,6 +3237,7 @@ auto DialogSeamAllowance::CreatePiece() const -> VPiece
     piece.SetPlaceLabels(GetListInternals<quint32>(uiTabPlaceLabels->listWidgetPlaceLabels));
     piece.SetForbidFlipping(uiTabPaths->checkBoxForbidFlipping->isChecked());
     piece.SetForceFlipping(uiTabPaths->checkBoxForceFlipping->isChecked());
+    piece.SetSymmetricalCopy(uiTabPaths->checkBoxSymmetricalCopy->isChecked());
     piece.SetFollowGrainline(uiTabPaths->checkBoxFollowGrainline->isChecked());
     piece.SetSewLineOnDrawing(uiTabPaths->checkBoxOnDrawing->isChecked());
     piece.SetSeamAllowance(uiTabPaths->checkBoxSeams->isChecked());

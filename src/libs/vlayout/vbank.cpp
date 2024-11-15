@@ -55,13 +55,47 @@ QT_WARNING_POP
 namespace
 {
 //---------------------------------------------------------------------------------------------------------------------
+auto HandleSymmetricalCopy(const VLayoutPiece &piece, int copyIndex) -> VLayoutPiece
+{
+    VLayoutPiece copy = piece;
+
+    if (copyIndex % 2 == 1) // Flip every even-numbered copy
+    {
+        if (piece.IsForceFlipping())
+        {
+            copy.SetForbidFlipping(true);
+        }
+        else if (piece.IsForbidFlipping())
+        {
+            copy.SetForceFlipping(true);
+        }
+    }
+
+    return copy;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 auto PrepareQuantity(const QVector<VLayoutPiece> &details) -> QVector<VLayoutPiece>
 {
     QVector<VLayoutPiece> withQuantity;
     withQuantity.reserve(details.size());
     for (const auto &piece : details)
     {
-        for (int i = 0; i < piece.GetQuantity(); ++i)
+        if (const int quantity = piece.GetQuantity(); quantity > 1)
+        {
+            for (int i = 0; i < quantity; ++i)
+            {
+                if (piece.IsSymmetricalCopy() && (piece.IsForceFlipping() || piece.IsForbidFlipping()))
+                {
+                    withQuantity.append(HandleSymmetricalCopy(piece, i));
+                }
+                else
+                {
+                    withQuantity.append(piece);
+                }
+            }
+        }
+        else
         {
             withQuantity.append(piece);
         }

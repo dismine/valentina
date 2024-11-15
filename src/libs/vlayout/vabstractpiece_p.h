@@ -57,6 +57,7 @@ public:
     /** @brief forbidFlipping forbid piece to be mirrored in a layout. */
     bool m_forbidFlipping{false};                            // NOLINT (misc-non-private-member-variables-in-classes)
     bool m_forceFlipping{false};                             // NOLINT (misc-non-private-member-variables-in-classes)
+    bool m_symmetricalCopy{false};                           // NOLINT (misc-non-private-member-variables-in-classes)
     bool m_followGrainline{false};                           // NOLINT (misc-non-private-member-variables-in-classes)
     bool m_seamAllowance{false};                             // NOLINT (misc-non-private-member-variables-in-classes)
     bool m_seamAllowanceBuiltIn{false};                      // NOLINT (misc-non-private-member-variables-in-classes)
@@ -82,7 +83,7 @@ private:
     Q_DISABLE_ASSIGN_MOVE(VAbstractPieceData) // NOLINT
 
     static constexpr quint32 streamHeader = 0x05CDD73A; // CRC-32Q string "VAbstractPieceData"
-    static constexpr quint16 classVersion = 7;
+    static constexpr quint16 classVersion = 8;
 };
 
 QT_WARNING_POP
@@ -127,6 +128,9 @@ inline auto operator<<(QDataStream &dataStream, const VAbstractPieceData &piece)
 
     // Added in classVersion = 7
     dataStream << piece.m_showMirrorLine;
+
+    // Added in classVersion = 8
+    dataStream << piece.m_symmetricalCopy;
 
     return dataStream;
 }
@@ -204,6 +208,11 @@ inline auto operator>>(QDataStream &dataStream, VAbstractPieceData &piece) -> QD
     if (actualClassVersion >= 7)
     {
         dataStream >> piece.m_showMirrorLine;
+    }
+
+    if (actualClassVersion >= 8)
+    {
+        dataStream >> piece.m_symmetricalCopy;
     }
 
     return dataStream;

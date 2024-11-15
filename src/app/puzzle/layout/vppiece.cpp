@@ -172,11 +172,6 @@ void VPPiece::ClearTransformations()
     matrix *= m;
     SetMatrix(matrix);
 
-    // translate the piece so that the top left corner of the bouding rect of the piece is at the position
-    // (0,0) in the sheet coordinate system
-    const QPointF offset = MappedDetailBoundingRect().topLeft();
-    Translate(-offset.x(), -offset.y());
-
     SetVerticallyFlipped(false);
     SetHorizontallyFlipped(false);
 
@@ -184,14 +179,18 @@ void VPPiece::ClearTransformations()
     {
         FlipVertically();
     }
+
+    // translate the piece so that the top left corner of the bouding rect of the piece is at the position
+    // (0,0) in the sheet coordinate system
+    const QPointF offset = MappedDetailBoundingRect().topLeft();
+    Translate(-offset.x(), -offset.y()); 
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 void VPPiece::SetPosition(QPointF point)
 {
     QTransform matrix = GetMatrix();
-    const QPointF offset = MappedDetailBoundingRect().topLeft();
-    matrix.translate(point.x() - offset.x(), point.y() - offset.y());
+    matrix.translate(IsVerticallyFlipped() ? -point.x() : point.x(), point.y());
     SetMatrix(matrix);
 }
 

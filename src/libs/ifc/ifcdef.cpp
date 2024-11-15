@@ -126,6 +126,7 @@ const QString AttrIdObject = QStringLiteral("idObject");
 const QString AttrInLayout = QStringLiteral("inLayout");
 const QString AttrForbidFlipping = QStringLiteral("forbidFlipping");
 const QString AttrForceFlipping = QStringLiteral("forceFlipping");
+const QString AttrSymmetricalCopy = QStringLiteral("symmetricalCopy");
 const QString AttrFollowGrainline = QStringLiteral("followGrainline");
 const QString AttrSewLineOnDrawing = QStringLiteral("sewLineOnDrawing");
 const QString AttrRotationAngle = QStringLiteral("rotationAngle");

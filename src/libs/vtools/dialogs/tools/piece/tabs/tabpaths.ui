@@ -497,6 +497,16 @@
             </widget>
            </item>
            <item>
+            <widget class="QCheckBox" name="checkBoxSymmetricalCopy">
+             <property name="toolTip">
+              <string>When the number of copies is greater than 1 and either 'Force Flipping' or 'Forbid Flipping' is selected, each even-numbered copy of the piece will be flipped vertically. The 'Force Flipping' or 'Forbid Flipping' setting will also toggle for each copy, applying the opposite of the initially selected option for each subsequent copy.</string>
+             </property>
+             <property name="text">
+              <string>Symmetrical copy</string>
+             </property>
+            </widget>
+           </item>
+           <item>
             <widget class="QCheckBox" name="checkBoxFollowGrainline">
              <property name="toolTip">
               <string>Force piece to always follow grainline direction regardless of layout settings.</string>

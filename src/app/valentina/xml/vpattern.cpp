@@ -990,6 +990,7 @@ void VPattern::ParseDetailElement(QDomElement &domElement, const Document &parse
         initData.detail.SetForceFlipping(GetParametrBool(
             domElement, AttrForceFlipping,
             QString().setNum(VAbstractValApplication::VApp()->ValentinaSettings()->GetForceWorkpieceFlipping())));
+        initData.detail.SetSymmetricalCopy(GetParametrBool(domElement, AttrSymmetricalCopy, falseStr));
         initData.detail.SetFollowGrainline(GetParametrBool(domElement, AttrFollowGrainline, falseStr));
         initData.detail.SetSewLineOnDrawing(GetParametrBool(
             domElement, AttrSewLineOnDrawing,

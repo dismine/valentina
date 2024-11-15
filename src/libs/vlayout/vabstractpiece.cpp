@@ -1025,6 +1025,18 @@ void VAbstractPiece::SetForceFlipping(bool value)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+auto VAbstractPiece::IsSymmetricalCopy() const -> bool
+{
+    return d->m_symmetricalCopy;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VAbstractPiece::SetSymmetricalCopy(bool value)
+{
+    d->m_symmetricalCopy = value;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 auto VAbstractPiece::IsFollowGrainline() const -> bool
 {
     return d->m_followGrainline;

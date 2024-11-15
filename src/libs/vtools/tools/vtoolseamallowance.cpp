@@ -640,6 +640,10 @@ void VToolSeamAllowance::AddAttributes(VAbstractPattern *doc, QDomElement &domEl
                                       [](bool inLayout) noexcept { return inLayout; });
     doc->SetAttribute(domElement, AttrForbidFlipping, piece.IsForbidFlipping());
     doc->SetAttribute(domElement, AttrForceFlipping, piece.IsForceFlipping());
+    doc->SetAttributeOrRemoveIf<bool>(domElement,
+                                      AttrSymmetricalCopy,
+                                      piece.IsSymmetricalCopy(),
+                                      [](bool sCopy) noexcept { return not sCopy; });
     doc->SetAttribute(domElement, AttrFollowGrainline, piece.IsFollowGrainline());
     doc->SetAttribute(domElement, AttrSewLineOnDrawing, piece.IsSewLineOnDrawing());
     doc->SetAttributeOrRemoveIf<bool>(domElement, AttrSeamAllowance, piece.IsSeamAllowance(),
