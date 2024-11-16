@@ -32,6 +32,7 @@
 #include "../vmisc/vabstractapplication.h"
 #include "../vpatterndb/vcontainer.h"
 #include "../vtools/tools/vtoolseamallowance.h"
+#include "../vtools/undocommands/renamepiece.h"
 #include "../vtools/undocommands/togglepiecestate.h"
 #include "ui_vwidgetdetails.h"
 
@@ -67,6 +68,7 @@ VWidgetDetails::VWidgetDetails(VContainer *data, VAbstractPattern *doc, QWidget 
     ui->tableWidget->setContextMenuPolicy(Qt::CustomContextMenu);
 
     connect(ui->tableWidget, &QTableWidget::cellClicked, this, &VWidgetDetails::InLayoutStateChanged);
+    connect(ui->tableWidget, &QTableWidget::cellChanged, this, &VWidgetDetails::RenameDetail);
     connect(ui->tableWidget, &QTableWidget::customContextMenuRequested, this, &VWidgetDetails::ShowContextMenu);
 
     m_updateListTimer->setSingleShot(true);
@@ -139,7 +141,7 @@ void VWidgetDetails::InLayoutStateChanged(int row, int column)
     const quint32 id = item->data(Qt::UserRole).toUInt();
     emit Highlight(id);
 
-    if (column != 0)
+    if (column != PieceColumn::InLayout)
     {
         return;
     }
@@ -153,8 +155,29 @@ void VWidgetDetails::InLayoutStateChanged(int row, int column)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+void VWidgetDetails::RenameDetail(int row, int column)
+{
+    QTableWidgetItem *item = ui->tableWidget->item(row, PieceColumn::InLayout);
+    const quint32 id = item->data(Qt::UserRole).toUInt();
+    emit Highlight(id);
+
+    if (column != PieceColumn::PieceName)
+    {
+        return;
+    }
+
+    const QString newName = ui->tableWidget->item(row, column)->text();
+
+    auto *renameDetail = new ::RenamePiece(m_doc, newName, id);
+    connect(renameDetail, &RenamePiece::UpdateList, this, &VWidgetDetails::UpdateList);
+    VAbstractApplication::VApp()->getUndoStack()->push(renameDetail);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 void VWidgetDetails::FillTable(const QHash<quint32, VPiece> *details)
 {
+    ui->tableWidget->blockSignals(true);
+
     const int selectedRow = ui->tableWidget->currentRow();
     ui->tableWidget->clearContents();
 
@@ -178,6 +201,8 @@ void VWidgetDetails::FillTable(const QHash<quint32, VPiece> *details)
     ui->tableWidget->setCurrentCell(selectedRow, 0);
 
     on_checkBoxHideNotInLayout_stateChanged(); // Trigger hide for action from context menu
+
+    ui->tableWidget->blockSignals(false);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -274,10 +299,6 @@ auto VWidgetDetails::PreparePieceNameColumnCell(const VPiece &det) -> QTableWidg
     auto *item = new QTableWidgetItem(name);
     item->setTextAlignment(Qt::AlignLeft | Qt::AlignVCenter);
 
-    // set the item non-editable (view only), and non-selectable
-    Qt::ItemFlags flags = item->flags();
-    flags &= ~(Qt::ItemIsEditable); // reset/clear the flag
-    item->setFlags(flags);
     return item;
 }
 

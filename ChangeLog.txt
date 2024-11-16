@@ -26,6 +26,7 @@
 - Valentina app. Add _1 suffix only when number of sheets bigger than 1.
 - Fix orientation of fabric grainline.
 - New option Symmetrical copy.
+- Renaming a piece name from piece list.
 
 # Valentina 0.7.53 June 25, 2024
 - Fix layout sheet export with empty name.

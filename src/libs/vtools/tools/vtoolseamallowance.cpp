@@ -838,6 +838,14 @@ void VToolSeamAllowance::AddMirrorLine(VAbstractPattern *doc, QDomElement &domEl
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+void VToolSeamAllowance::SetName(const QString &name)
+{
+    VPiece detail = VAbstractTool::data.GetPiece(m_id);
+    detail.SetName(name);
+    VAbstractTool::data.UpdatePiece(m_id, detail);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 void VToolSeamAllowance::Move(qreal x, qreal y)
 {
     setFlag(QGraphicsItem::ItemSendsGeometryChanges, false);

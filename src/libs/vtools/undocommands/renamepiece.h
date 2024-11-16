@@ -1,14 +1,14 @@
 /************************************************************************
  **
- **  @file   movedetail.h
+ **  @file   renamepiece.h
  **  @author Roman Telezhynskyi <dismine(at)gmail.com>
- **  @date   13 6, 2014
+ **  @date   16 11, 2024
  **
  **  @brief
  **  @copyright
  **  This source code is part of the Valentina project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
- **  Copyright (C) 2013-2015 Valentina project
+ **  Copyright (C) 2024 Valentina project
  **  <https://gitlab.com/smart-pattern/valentina> All Rights Reserved.
  **
  **  Valentina is free software: you can redistribute it and/or modify
@@ -25,27 +25,18 @@
  **  along with Valentina.  If not, see <http://www.gnu.org/licenses/>.
  **
  *************************************************************************/
-
-#ifndef MOVEDETAIL_H
-#define MOVEDETAIL_H
-
-#include <QMetaObject>
-#include <QObject>
-#include <QString>
-#include <QtGlobal>
+#ifndef RENAMEPIECE_H
+#define RENAMEPIECE_H
 
 #include "vundocommand.h"
 
-class QGraphicsScene;
-
-class MovePiece : public VUndoCommand
+class RenamePiece : public VUndoCommand
 {
     Q_OBJECT // NOLINT
 
 public:
-    MovePiece(VAbstractPattern *doc, const double &x, const double &y, const quint32 &id, QGraphicsScene *scene,
-              QUndoCommand *parent = nullptr);
-    ~MovePiece() override = default;
+    RenamePiece(VAbstractPattern *doc, QString newName, quint32 id, QUndoCommand *parent = nullptr);
+    ~RenamePiece() override = default;
 
     void undo() override;
     void redo() override;
@@ -53,41 +44,32 @@ public:
     auto mergeWith(const QUndoCommand *command) -> bool override;
     auto id() const -> int override;
 
-    void Do(qreal x, qreal y);
+    void Do(const QString &name);
 
     auto getDetId() const -> quint32;
-    auto getNewX() const -> double;
-    auto getNewY() const -> double;
+    auto getNewName() const -> QString;
+
+signals:
+    void UpdateList();
 
 private:
     // cppcheck-suppress unknownMacro
-    Q_DISABLE_COPY_MOVE(MovePiece) // NOLINT
+    Q_DISABLE_COPY_MOVE(RenamePiece) // NOLINT
 
-    double m_oldX;
-    double m_oldY;
-    double m_newX;
-    double m_newY;
-    QGraphicsScene *m_scene;
-
-    void SaveCoordinates(QDomElement &domElement, double x, double y);
+    QString m_oldName{};
+    QString m_newName;
 };
 
 //---------------------------------------------------------------------------------------------------------------------
-inline auto MovePiece::getDetId() const -> quint32
+inline quint32 RenamePiece::getDetId() const
 {
     return nodeId;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-inline auto MovePiece::getNewX() const -> double
+inline QString RenamePiece::getNewName() const
 {
-    return m_newX;
+    return m_newName;
 }
 
-//---------------------------------------------------------------------------------------------------------------------
-inline auto MovePiece::getNewY() const -> double
-{
-    return m_newY;
-}
-
-#endif // MOVEDETAIL_H
+#endif // RENAMEPIECE_H

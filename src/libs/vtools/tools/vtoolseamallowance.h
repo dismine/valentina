@@ -102,6 +102,7 @@ public:
     static void AddGrainline(VAbstractPattern *doc, QDomElement &domElement, const VPiece &piece);
     static void AddMirrorLine(VAbstractPattern *doc, QDomElement &domElement, const VPiece &piece);
 
+    void SetName(const QString &name);
     void Move(qreal x, qreal y);
     void Update(const VPiece &piece);
     void DisconnectOutsideSignals();

@@ -1,14 +1,14 @@
 /************************************************************************
  **
- **  @file   movedetail.cpp
+ **  @file   renamepiece.cpp
  **  @author Roman Telezhynskyi <dismine(at)gmail.com>
- **  @date   13 6, 2014
+ **  @date   16 11, 2024
  **
  **  @brief
  **  @copyright
  **  This source code is part of the Valentina project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
- **  Copyright (C) 2013-2015 Valentina project
+ **  Copyright (C) 2024 Valentina project
  **  <https://gitlab.com/smart-pattern/valentina> All Rights Reserved.
  **
  **  Valentina is free software: you can redistribute it and/or modify
@@ -26,37 +26,24 @@
  **
  *************************************************************************/
 
-#include "movepiece.h"
+#include <utility>
 
-#include <QDomElement>
-
-#include "../ifc/ifcdef.h"
-#include "../ifc/xml/vabstractpattern.h"
 #include "../tools/vtoolseamallowance.h"
-#include "../vmisc/def.h"
 #include "../vmisc/vabstractvalapplication.h"
-#include "../vwidgets/vmaingraphicsview.h"
-#include "vundocommand.h"
+#include "renamepiece.h"
 
 //---------------------------------------------------------------------------------------------------------------------
-MovePiece::MovePiece(VAbstractPattern *doc, const double &x, const double &y, const quint32 &id,
-                     QGraphicsScene *scene, QUndoCommand *parent)
-    : VUndoCommand(QDomElement(), doc, parent),
-      m_oldX(0.0),
-      m_oldY(0.0),
-      m_newX(x),
-      m_newY(y),
-      m_scene(scene)
+RenamePiece::RenamePiece(VAbstractPattern *doc, QString newName, quint32 id, QUndoCommand *parent)
+  : VUndoCommand(QDomElement(), doc, parent),
+    m_newName(std::move(newName))
 {
-    setText(QObject::tr("move detail"));
+    setText(QObject::tr("rename detail"));
     nodeId = id;
 
-    SCASSERT(scene != nullptr)
     QDomElement const domElement = doc->elementById(id, VAbstractPattern::TagDetail);
     if (domElement.isElement())
     {
-        m_oldX = VAbstractValApplication::VApp()->toPixel(doc->GetParametrDouble(domElement, AttrMx, "0.0"));
-        m_oldY = VAbstractValApplication::VApp()->toPixel(doc->GetParametrDouble(domElement, AttrMy, "0.0"));
+        m_oldName = VAbstractPattern::GetParametrString(domElement, AttrName, tr("Detail"));
     }
     else
     {
@@ -65,69 +52,59 @@ MovePiece::MovePiece(VAbstractPattern *doc, const double &x, const double &y, co
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void MovePiece::undo()
+void RenamePiece::undo()
 {
     qCDebug(vUndo, "Undo.");
-    Do(m_oldX, m_oldY);
+    Do(m_oldName);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void MovePiece::redo()
+void RenamePiece::redo()
 {
     qCDebug(vUndo, "Redo.");
-    Do(m_newX, m_newY);
+    Do(m_newName);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-// cppcheck-suppress unusedFunction
-auto MovePiece::mergeWith(const QUndoCommand *command) -> bool
+auto RenamePiece::mergeWith(const QUndoCommand *command) -> bool
 {
-    const auto *moveCommand = static_cast<const MovePiece *>(command);
-    SCASSERT(moveCommand != nullptr)
-    const quint32 id = moveCommand->getDetId();
+    const auto *renameCommand = static_cast<const RenamePiece *>(command);
+    SCASSERT(renameCommand != nullptr)
+    const quint32 id = renameCommand->getDetId();
 
     if (id != nodeId)
     {
         return false;
     }
 
-    m_newX = moveCommand->getNewX();
-    m_newY = moveCommand->getNewY();
+    m_newName = renameCommand->getNewName();
     return true;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-auto MovePiece::id() const -> int
+auto RenamePiece::id() const -> int
 {
-    return static_cast<int>(UndoCommand::MovePiece);
+    return static_cast<int>(UndoCommand::RenamePiece);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void MovePiece::Do(qreal x, qreal y)
+void RenamePiece::Do(const QString &name)
 {
     qCDebug(vUndo, "Do.");
 
-    QDomElement domElement = doc->elementById(nodeId, VAbstractPattern::TagDetail);
-    if (domElement.isElement())
+    if (QDomElement domElement = doc->elementById(nodeId, VAbstractPattern::TagDetail); domElement.isElement())
     {
-        SaveCoordinates(domElement, x, y);
+        doc->SetAttribute(domElement, AttrName, name);
 
-        auto *tool = qobject_cast<VToolSeamAllowance *>(VAbstractPattern::getTool(nodeId));
-        if (tool != nullptr)
+        if (auto *tool = qobject_cast<VToolSeamAllowance *>(VAbstractPattern::getTool(nodeId)); tool != nullptr)
         {
-            tool->Move(x, y);
+            tool->SetName(name);
         }
-        VMainGraphicsView::NewSceneRect(m_scene, VAbstractValApplication::VApp()->getSceneView(), tool);
+
+        emit UpdateList();
     }
     else
     {
         qCDebug(vUndo, "Can't find detail with id = %u.", nodeId);
     }
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-void MovePiece::SaveCoordinates(QDomElement &domElement, double x, double y)
-{
-    doc->SetAttribute(domElement, AttrMx, QString().setNum(VAbstractValApplication::VApp()->fromPixel(x)));
-    doc->SetAttribute(domElement, AttrMy, QString().setNum(VAbstractValApplication::VApp()->fromPixel(y)));
 }

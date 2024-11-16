@@ -62,6 +62,7 @@ protected:
 
 private slots:
     void InLayoutStateChanged(int row, int column);
+    void RenameDetail(int row, int column);
     void ShowContextMenu(const QPoint &pos);
 
     void on_checkBoxHideNotInLayout_stateChanged();
