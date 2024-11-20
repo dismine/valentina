@@ -55,6 +55,7 @@
 #include "../vmisc/theme/vtheme.h"
 #include "../vmisc/vabstractapplication.h"
 #include "../vmisc/vcommonsettings.h"
+#include "../vmisc/vvalentinasettings.h"
 #include "../vpatterndb/vcontainer.h"
 #include "../vpatterndb/vtranslatevars.h"
 #include "../vwidgets/vabstractmainwindow.h"
@@ -84,7 +85,6 @@ DialogSplinePath::DialogSplinePath(const VContainer *data, VAbstractPattern *doc
     VMouseWheelWidgetAdjustmentGuard::InstallEventFilter(ui->comboBoxNewPoint);
     VMouseWheelWidgetAdjustmentGuard::InstallEventFilter(ui->comboBoxPoint);
     VMouseWheelWidgetAdjustmentGuard::InstallEventFilter(ui->comboBoxPenStyle);
-    VMouseWheelWidgetAdjustmentGuard::InstallEventFilter(ui->comboBoxColor);
     VMouseWheelWidgetAdjustmentGuard::InstallEventFilter(ui->doubleSpinBoxApproximationScale);
 
     InitIcons();
@@ -104,7 +104,8 @@ DialogSplinePath::DialogSplinePath(const VContainer *data, VAbstractPattern *doc
 
     FillComboBoxPoints(ui->comboBoxNewPoint);
     FillComboBoxPoints(ui->comboBoxPoint);
-    FillComboBoxLineColors(ui->comboBoxColor);
+    InitColorPicker(ui->pushButtonColor, VAbstractValApplication::VApp()->ValentinaSettings()->GetUserToolColors());
+    ui->pushButtonColor->setUseNativeDialog(!VAbstractApplication::VApp()->Settings()->IsDontUseNativeDialog());
     FillComboBoxTypeLine(ui->comboBoxPenStyle,
                          CurvePenStylesPics(ui->comboBoxPenStyle->palette().color(QPalette::Base),
                                             ui->comboBoxPenStyle->palette().color(QPalette::Text)));
@@ -158,6 +159,7 @@ DialogSplinePath::DialogSplinePath(const VContainer *data, VAbstractPattern *doc
 //---------------------------------------------------------------------------------------------------------------------
 DialogSplinePath::~DialogSplinePath()
 {
+    VAbstractValApplication::VApp()->ValentinaSettings()->SetUserToolColors(ui->pushButtonColor->CustomColors());
     delete ui;
 }
 
@@ -189,7 +191,7 @@ void DialogSplinePath::SetPath(const VSplinePath &value)
     ValidateAlias();
 
     ChangeCurrentData(ui->comboBoxPenStyle, path.GetPenStyle());
-    ChangeCurrentData(ui->comboBoxColor, path.GetColor());
+    ui->pushButtonColor->setCurrentColor(path.GetColor());
 
     auto *visPath = qobject_cast<VisToolSplinePath *>(vis);
     SCASSERT(visPath != nullptr)
@@ -1036,7 +1038,7 @@ void DialogSplinePath::SavePath()
     path = ExtractPath();
     path.SetApproximationScale(ui->doubleSpinBoxApproximationScale->value());
     path.SetPenStyle(GetComboBoxCurrentData(ui->comboBoxPenStyle, TypeLineLine));
-    path.SetColor(GetComboBoxCurrentData(ui->comboBoxColor, ColorBlack));
+    path.SetColor(ui->pushButtonColor->currentColor().name());
     path.SetAliasSuffix(ui->lineEditAlias->text());
 }
 

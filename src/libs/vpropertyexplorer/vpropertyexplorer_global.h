@@ -40,4 +40,10 @@
     Class &operator=(Class &&) = delete;
 #endif
 
+#if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
+using vsizetype = qsizetype;
+#else
+using vsizetype = int;
+#endif
+
 #endif // VPROPERTYEXPLORER_GLOBAL_H

@@ -49,6 +49,7 @@
 #include "../vmisc/theme/vtheme.h"
 #include "../vmisc/vabstractapplication.h"
 #include "../vmisc/vcommonsettings.h"
+#include "../vmisc/vvalentinasettings.h"
 #include "../vpatterndb/vcontainer.h"
 #include "../vpatterndb/vtranslatevars.h"
 #include "../vwidgets/vabstractmainwindow.h"
@@ -85,7 +86,8 @@ DialogNormal::DialogNormal(const VContainer *data, VAbstractPattern *doc, quint3
     FillComboBoxPoints(ui->comboBoxSecondPoint);
     FillComboBoxTypeLine(ui->comboBoxLineType, LineStylesPics(ui->comboBoxLineType->palette().color(QPalette::Base),
                                                               ui->comboBoxLineType->palette().color(QPalette::Text)));
-    FillComboBoxLineColors(ui->comboBoxLineColor);
+    InitColorPicker(ui->pushButtonLineColor, VAbstractValApplication::VApp()->ValentinaSettings()->GetUserToolColors());
+    ui->pushButtonLineColor->setUseNativeDialog(!VAbstractApplication::VApp()->Settings()->IsDontUseNativeDialog());
 
     connect(ui->toolButtonArrowDown, &QPushButton::clicked, this, [this]() { ui->doubleSpinBoxAngle->setValue(270); });
     connect(ui->toolButtonArrowUp, &QPushButton::clicked, this, [this]() { ui->doubleSpinBoxAngle->setValue(90); });
@@ -181,6 +183,7 @@ void DialogNormal::DeployFormulaTextEdit()
 //---------------------------------------------------------------------------------------------------------------------
 DialogNormal::~DialogNormal()
 {
+    VAbstractValApplication::VApp()->ValentinaSettings()->SetUserToolColors(ui->pushButtonLineColor->CustomColors());
     delete ui;
 }
 
@@ -321,13 +324,13 @@ void DialogNormal::SetSecondPointId(quint32 value)
 //---------------------------------------------------------------------------------------------------------------------
 auto DialogNormal::GetLineColor() const -> QString
 {
-    return GetComboBoxCurrentData(ui->comboBoxLineColor, ColorBlack);
+    return ui->pushButtonLineColor->currentColor().name();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 void DialogNormal::SetLineColor(const QString &value)
 {
-    ChangeCurrentData(ui->comboBoxLineColor, value);
+    ui->pushButtonLineColor->setCurrentColor(value);
 }
 
 //---------------------------------------------------------------------------------------------------------------------

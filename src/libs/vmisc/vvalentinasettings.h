@@ -260,6 +260,9 @@ public:
     auto IsBoundaryTogetherWithNotches() const -> bool;
     void SetBoundaryTogetherWithNotches(bool value);
 
+    auto GetUserToolColors() const -> QVector<QColor>;
+    void SetUserToolColors(const QVector<QColor> &colors);
+
 private:
     Q_DISABLE_COPY_MOVE(VValentinaSettings) // NOLINT
 

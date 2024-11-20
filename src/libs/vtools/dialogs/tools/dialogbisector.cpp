@@ -48,6 +48,7 @@
 #include "../vmisc/theme/vtheme.h"
 #include "../vmisc/vabstractapplication.h"
 #include "../vmisc/vcommonsettings.h"
+#include "../vmisc/vvalentinasettings.h"
 #include "../vpatterndb/vcontainer.h"
 #include "../vpatterndb/vtranslatevars.h"
 #include "../vtools/tools/drawTools/toolpoint/toolsinglepoint/toollinepoint/vtoolbisector.h"
@@ -86,7 +87,8 @@ DialogBisector::DialogBisector(const VContainer *data, VAbstractPattern *doc, qu
     FillComboBoxTypeLine(ui->comboBoxLineType, LineStylesPics(ui->comboBoxLineType->palette().color(QPalette::Base),
                                                               ui->comboBoxLineType->palette().color(QPalette::Text)));
     FillComboBoxPoints(ui->comboBoxThirdPoint);
-    FillComboBoxLineColors(ui->comboBoxLineColor);
+    InitColorPicker(ui->pushButtonLineColor, VAbstractValApplication::VApp()->ValentinaSettings()->GetUserToolColors());
+    ui->pushButtonLineColor->setUseNativeDialog(!VAbstractApplication::VApp()->Settings()->IsDontUseNativeDialog());
 
     connect(ui->toolButtonExprLength, &QPushButton::clicked, this, &DialogBisector::FXLength);
     connect(ui->lineEditNamePoint, &QLineEdit::textChanged, this,
@@ -176,6 +178,7 @@ void DialogBisector::DeployFormulaTextEdit()
 //---------------------------------------------------------------------------------------------------------------------
 DialogBisector::~DialogBisector()
 {
+    VAbstractValApplication::VApp()->ValentinaSettings()->SetUserToolColors(ui->pushButtonLineColor->CustomColors());
     delete ui;
 }
 
@@ -320,13 +323,13 @@ void DialogBisector::SetThirdPointId(const quint32 &value)
 //---------------------------------------------------------------------------------------------------------------------
 auto DialogBisector::GetLineColor() const -> QString
 {
-    return GetComboBoxCurrentData(ui->comboBoxLineColor, ColorBlack);
+    return ui->pushButtonLineColor->currentColor().name();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 void DialogBisector::SetLineColor(const QString &value)
 {
-    ChangeCurrentData(ui->comboBoxLineColor, value);
+    ui->pushButtonLineColor->setCurrentColor(value);
 }
 
 //---------------------------------------------------------------------------------------------------------------------

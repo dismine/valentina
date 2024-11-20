@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>479</width>
-    <height>362</height>
+    <height>374</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -107,16 +107,6 @@
          </property>
         </widget>
        </item>
-       <item row="5" column="1">
-        <widget class="QComboBox" name="comboBoxColor">
-         <property name="sizePolicy">
-          <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
-           <horstretch>0</horstretch>
-           <verstretch>0</verstretch>
-          </sizepolicy>
-         </property>
-        </widget>
-       </item>
        <item row="6" column="0">
         <widget class="QLabel" name="label_3">
          <property name="text">
@@ -168,6 +158,13 @@
          </property>
         </widget>
        </item>
+       <item row="5" column="1">
+        <widget class="VPE::QtColorPicker" name="pushButtonColor">
+         <property name="text">
+          <string>Color</string>
+         </property>
+        </widget>
+       </item>
       </layout>
      </widget>
      <widget class="QWidget" name="tab_2">
@@ -194,6 +191,13 @@
    </item>
   </layout>
  </widget>
+ <customwidgets>
+  <customwidget>
+   <class>VPE::QtColorPicker</class>
+   <extends>QPushButton</extends>
+   <header>../vpropertyexplorer/qtcolorpicker.h</header>
+  </customwidget>
+ </customwidgets>
  <resources>
   <include location="../../../vmisc/share/resources/icon.qrc"/>
  </resources>

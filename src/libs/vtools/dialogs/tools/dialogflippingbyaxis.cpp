@@ -43,11 +43,11 @@
 #include <QStringList>
 #include <QToolButton>
 
-#include "../../tools/drawTools/operation/vabstractoperation.h"
 #include "../../visualization/line/operation/vistoolflippingbyaxis.h"
 #include "../../visualization/visualization.h"
 #include "../ifc/xml/vabstractpattern.h"
 #include "../qmuparser/qmudef.h"
+#include "../vmisc/vvalentinasettings.h"
 #include "../vpatterndb/vcontainer.h"
 #include "../vwidgets/vmaingraphicsscene.h"
 #include "../vwidgets/vmaingraphicsview.h"
@@ -76,7 +76,9 @@ DialogFlippingByAxis::DialogFlippingByAxis(const VContainer *data, VAbstractPatt
                          OperationLineStylesPics(ui->comboBoxPenStyle->palette().color(QPalette::Base),
                                                  ui->comboBoxPenStyle->palette().color(QPalette::Text)),
                          TypeLineDefault);
-    FillComboBoxLineColors(ui->comboBoxColor, VAbstractOperation::OperationColorsList());
+    InitOperationColorPicker(ui->pushButtonColor,
+                             VAbstractValApplication::VApp()->ValentinaSettings()->GetUserToolColors());
+    ui->pushButtonColor->setUseNativeDialog(!VAbstractApplication::VApp()->Settings()->IsDontUseNativeDialog());
 
     ui->comboBoxOriginPoint->setCurrentIndex(-1);
 
@@ -88,8 +90,7 @@ DialogFlippingByAxis::DialogFlippingByAxis(const VContainer *data, VAbstractPatt
     connect(ui->lineEditAlias, &QLineEdit::textEdited, this, &DialogFlippingByAxis::AliasChanged);
     connect(ui->comboBoxPenStyle, QOverload<int>::of(&QComboBox::currentIndexChanged), this,
             &DialogFlippingByAxis::PenStyleChanged);
-    connect(ui->comboBoxColor, QOverload<int>::of(&QComboBox::currentIndexChanged), this,
-            &DialogFlippingByAxis::ColorChanged);
+    connect(ui->pushButtonColor, &VPE::QtColorPicker::colorChanged, this, &DialogFlippingByAxis::ColorChanged);
 
     vis = new VisToolFlippingByAxis(data);
 
@@ -100,6 +101,7 @@ DialogFlippingByAxis::DialogFlippingByAxis(const VContainer *data, VAbstractPatt
 //---------------------------------------------------------------------------------------------------------------------
 DialogFlippingByAxis::~DialogFlippingByAxis()
 {
+    VAbstractValApplication::VApp()->ValentinaSettings()->SetUserToolColors(ui->pushButtonColor->CustomColors());
     delete ui;
 }
 
@@ -375,7 +377,7 @@ void DialogFlippingByAxis::ShowSourceDetails(int row)
 {
     ui->lineEditAlias->setDisabled(true);
     ui->comboBoxPenStyle->setDisabled(true);
-    ui->comboBoxColor->setDisabled(true);
+    ui->pushButtonColor->setDisabled(true);
 
     if (ui->listWidget->count() == 0)
     {
@@ -391,13 +393,13 @@ void DialogFlippingByAxis::ShowSourceDetails(int row)
         ui->labelAlias->setText(tr("Label:"));
 
         ui->comboBoxPenStyle->blockSignals(true);
-        ui->comboBoxColor->blockSignals(true);
+        ui->pushButtonColor->blockSignals(true);
 
         ui->comboBoxPenStyle->setCurrentIndex(-1);
-        ui->comboBoxColor->setCurrentIndex(-1);
+        ui->pushButtonColor->setCurrentColor(QColor());
 
         ui->comboBoxPenStyle->blockSignals(false);
-        ui->comboBoxColor->blockSignals(false);
+        ui->pushButtonColor->blockSignals(false);
     }
     else
     {
@@ -429,18 +431,21 @@ void DialogFlippingByAxis::ShowSourceDetails(int row)
             ui->comboBoxPenStyle->setItemText(index, '<' + tr("Default") + '>');
         }
 
-        SetValue(ui->comboBoxColor, sourceItem.color, ColorDefault);
+        ui->pushButtonColor->blockSignals(true);
+
+        QColor const color(sourceItem.color);
+        ui->pushButtonColor->setCurrentColor(color.isValid() ? color : ColorDefault);
+
+        ui->pushButtonColor->blockSignals(false);
 
         if (sourceItem.color.isEmpty() || sourceItem.color == ColorDefault)
         {
             const QSharedPointer<VAbstractCurve> curve = data->GeometricObject<VAbstractCurve>(sourceItem.id);
-            int const index = ui->comboBoxColor->currentIndex();
-            ui->comboBoxColor->setItemIcon(index, LineColor(ui->comboBoxColor->palette().color(QPalette::Text),
-                                                            ui->comboBoxColor->iconSize().height(), curve->GetColor()));
+            ui->pushButtonColor->setDefaultColor(curve->GetColor());
         }
 
         ui->comboBoxPenStyle->setEnabled(true);
-        ui->comboBoxColor->setEnabled(true);
+        ui->pushButtonColor->setEnabled(true);
     }
 
     ui->lineEditAlias->blockSignals(true);
@@ -498,7 +503,8 @@ void DialogFlippingByAxis::ColorChanged()
     if (auto *item = ui->listWidget->currentItem())
     {
         auto sourceItem = qvariant_cast<SourceItem>(item->data(Qt::UserRole));
-        sourceItem.color = GetComboBoxCurrentData(ui->comboBoxColor, ColorDefault);
+        QColor const color = ui->pushButtonColor->currentColor();
+        sourceItem.color = color.isValid() ? color.name() : ColorDefault;
         item->setData(Qt::UserRole, QVariant::fromValue(sourceItem));
     }
 }

@@ -51,6 +51,7 @@
 #include "../vmisc/theme/vtheme.h"
 #include "../vmisc/vabstractvalapplication.h"
 #include "../vmisc/vcommonsettings.h"
+#include "../vmisc/vvalentinasettings.h"
 #include "../vpatterndb/vcontainer.h"
 #include "../vpatterndb/vtranslatevars.h"
 #include "../vwidgets/vmaingraphicsscene.h"
@@ -98,7 +99,8 @@ DialogSpline::DialogSpline(const VContainer *data, VAbstractPattern *doc, quint3
 
     FillComboBoxPoints(ui->comboBoxP1);
     FillComboBoxPoints(ui->comboBoxP4);
-    FillComboBoxLineColors(ui->comboBoxColor);
+    InitColorPicker(ui->pushButtonColor, VAbstractValApplication::VApp()->ValentinaSettings()->GetUserToolColors());
+    ui->pushButtonColor->setUseNativeDialog(!VAbstractApplication::VApp()->Settings()->IsDontUseNativeDialog());
     FillComboBoxTypeLine(ui->comboBoxPenStyle,
                          CurvePenStylesPics(ui->comboBoxPenStyle->palette().color(QPalette::Base),
                                             ui->comboBoxPenStyle->palette().color(QPalette::Text)));
@@ -148,6 +150,7 @@ DialogSpline::DialogSpline(const VContainer *data, VAbstractPattern *doc, quint3
 //---------------------------------------------------------------------------------------------------------------------
 DialogSpline::~DialogSpline()
 {
+    VAbstractValApplication::VApp()->ValentinaSettings()->SetUserToolColors(ui->pushButtonColor->CustomColors());
     delete ui;
 }
 
@@ -476,7 +479,7 @@ auto DialogSpline::CurrentSpline() const -> VSpline
     VSpline spline(*GetP1(), *GetP4(), angle1, angle1F, angle2, angle2F, length1, length1F, length2, length2F);
     spline.SetApproximationScale(ui->doubleSpinBoxApproximationScale->value());
     spline.SetPenStyle(GetComboBoxCurrentData(ui->comboBoxPenStyle, TypeLineLine));
-    spline.SetColor(GetComboBoxCurrentData(ui->comboBoxColor, ColorBlack));
+    spline.SetColor(ui->pushButtonColor->currentColor().name());
     spline.SetAliasSuffix(ui->lineEditAlias->text());
 
     return spline;
@@ -604,7 +607,7 @@ void DialogSpline::SetSpline(const VSpline &spline)
     spl = spline;
 
     ui->doubleSpinBoxApproximationScale->setValue(spl.GetApproximationScale());
-    ChangeCurrentData(ui->comboBoxColor, spl.GetColor());
+    ui->pushButtonColor->setCurrentColor(spl.GetColor());
     ChangeCurrentData(ui->comboBoxPenStyle, spl.GetPenStyle());
 
     setCurrentPointId(ui->comboBoxP1, spl.GetP1().id());

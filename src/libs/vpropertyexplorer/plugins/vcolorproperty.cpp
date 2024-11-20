@@ -38,7 +38,6 @@ VPE::VColorProperty::VColorProperty(const QString &name) :
 {
 }
 
-
 //! Get the data how it should be displayed
 auto VPE::VColorProperty::data(int column, int role) const -> QVariant
 {
@@ -76,13 +75,14 @@ auto VPE::VColorProperty::createEditor(QWidget *parent, const QStyleOptionViewIt
 //! Sets the property's data to the editor (returns false, if the standard delegate should do that)
 auto VPE::VColorProperty::setEditorData(QWidget *editor) -> bool
 {
-    auto *tmpWidget = qobject_cast<VColorPropertyEditor *>(editor);
-    if (tmpWidget)
+    if (auto *tmpWidget = qobject_cast<VColorPropertyEditor *>(editor); tmpWidget != nullptr)
     {
         tmpWidget->SetColor(vproperty_d_ptr->VariantValue.value<QColor>());
     }
     else
+    {
         return false;
+    }
 
     return true;
 }
@@ -90,21 +90,20 @@ auto VPE::VColorProperty::setEditorData(QWidget *editor) -> bool
 //! Gets the data from the widget
 auto VPE::VColorProperty::getEditorData(const QWidget *editor) const -> QVariant
 {
-    const auto *tmpWidget = qobject_cast<const VColorPropertyEditor *>(editor);
-    if (tmpWidget)
+    if (const auto *tmpWidget = qobject_cast<const VColorPropertyEditor *>(editor); tmpWidget != nullptr)
     {
         return tmpWidget->GetColor();
     }
 
-    return QVariant();
+    return {};
 }
 
 auto VPE::VColorProperty::type() const -> QString
 {
-    return "color";
+    return QStringLiteral("color");
 }
 
 auto VPE::VColorProperty::clone(bool include_children, VProperty *container) const -> VPE::VProperty *
 {
-    return VProperty::clone(include_children, container ? container : new VColorProperty(getName()));
+    return VProperty::clone(include_children, container != nullptr ? container : new VColorProperty(getName()));
 }

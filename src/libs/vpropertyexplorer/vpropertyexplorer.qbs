@@ -7,6 +7,8 @@ VDynamicLib {
     name: "VPropertyExplorerLib"
     version: "1.0.0"
     files: [
+        "qtcolorpicker.cpp",
+        "qtcolorpicker.h",
         "vproperty.cpp",
         "vpropertydef.cpp",
         "vpropertydef.h",

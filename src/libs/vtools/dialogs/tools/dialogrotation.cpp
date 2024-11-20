@@ -45,9 +45,7 @@
 #include <QStringList>
 #include <QTimer>
 #include <QToolButton>
-#include <new>
 
-#include "../../tools/drawTools/operation/vabstractoperation.h"
 #include "../../visualization/line/operation/vistoolrotation.h"
 #include "../../visualization/visualization.h"
 #include "../ifc/xml/vabstractpattern.h"
@@ -57,6 +55,7 @@
 #include "../vmisc/theme/vtheme.h"
 #include "../vmisc/vabstractapplication.h"
 #include "../vmisc/vcommonsettings.h"
+#include "../vmisc/vvalentinasettings.h"
 #include "../vpatterndb/vcontainer.h"
 #include "../vpatterndb/vtranslatevars.h"
 #include "../vwidgets/global.h"
@@ -99,7 +98,9 @@ DialogRotation::DialogRotation(const VContainer *data, VAbstractPattern *doc, qu
                          OperationLineStylesPics(ui->comboBoxPenStyle->palette().color(QPalette::Base),
                                                  ui->comboBoxPenStyle->palette().color(QPalette::Text)),
                          TypeLineDefault);
-    FillComboBoxLineColors(ui->comboBoxColor, VAbstractOperation::OperationColorsList());
+    InitOperationColorPicker(ui->pushButtonColor,
+                             VAbstractValApplication::VApp()->ValentinaSettings()->GetUserToolColors());
+    ui->pushButtonColor->setUseNativeDialog(!VAbstractApplication::VApp()->Settings()->IsDontUseNativeDialog());
 
     connect(ui->lineEditSuffix, &QLineEdit::textChanged, this, &DialogRotation::SuffixChanged);
     connect(ui->lineEditVisibilityGroup, &QLineEdit::textChanged, this, &DialogRotation::GroupNameChanged);
@@ -113,8 +114,7 @@ DialogRotation::DialogRotation(const VContainer *data, VAbstractPattern *doc, qu
     connect(ui->lineEditAlias, &QLineEdit::textEdited, this, &DialogRotation::AliasChanged);
     connect(ui->comboBoxPenStyle, QOverload<int>::of(&QComboBox::currentIndexChanged), this,
             &DialogRotation::PenStyleChanged);
-    connect(ui->comboBoxColor, QOverload<int>::of(&QComboBox::currentIndexChanged), this,
-            &DialogRotation::ColorChanged);
+    connect(ui->pushButtonColor, &VPE::QtColorPicker::colorChanged, this, &DialogRotation::ColorChanged);
 
     vis = new VisToolRotation(data);
 
@@ -125,6 +125,7 @@ DialogRotation::DialogRotation(const VContainer *data, VAbstractPattern *doc, qu
 //---------------------------------------------------------------------------------------------------------------------
 DialogRotation::~DialogRotation()
 {
+    VAbstractValApplication::VApp()->ValentinaSettings()->SetUserToolColors(ui->pushButtonColor->CustomColors());
     delete ui;
 }
 
@@ -668,7 +669,7 @@ void DialogRotation::ShowSourceDetails(int row)
 {
     ui->lineEditAlias->setDisabled(true);
     ui->comboBoxPenStyle->setDisabled(true);
-    ui->comboBoxColor->setDisabled(true);
+    ui->pushButtonColor->setDisabled(true);
 
     if (ui->listWidget->count() == 0)
     {
@@ -684,13 +685,13 @@ void DialogRotation::ShowSourceDetails(int row)
         ui->labelAlias->setText(tr("Label:"));
 
         ui->comboBoxPenStyle->blockSignals(true);
-        ui->comboBoxColor->blockSignals(true);
+        ui->pushButtonColor->blockSignals(true);
 
         ui->comboBoxPenStyle->setCurrentIndex(-1);
-        ui->comboBoxColor->setCurrentIndex(-1);
+        ui->pushButtonColor->setCurrentColor(QColor());
 
         ui->comboBoxPenStyle->blockSignals(false);
-        ui->comboBoxColor->blockSignals(false);
+        ui->pushButtonColor->blockSignals(false);
     }
     else
     {
@@ -722,18 +723,21 @@ void DialogRotation::ShowSourceDetails(int row)
             ui->comboBoxPenStyle->setItemText(index, '<' + tr("Default") + '>');
         }
 
-        SetValue(ui->comboBoxColor, sourceItem.color, ColorDefault);
+        ui->pushButtonColor->blockSignals(true);
+
+        QColor const color(sourceItem.color);
+        ui->pushButtonColor->setCurrentColor(color.isValid() ? color : ColorDefault);
+
+        ui->pushButtonColor->blockSignals(false);
 
         if (sourceItem.color.isEmpty() || sourceItem.color == ColorDefault)
         {
             const QSharedPointer<VAbstractCurve> curve = data->GeometricObject<VAbstractCurve>(sourceItem.id);
-            int const index = ui->comboBoxColor->currentIndex();
-            ui->comboBoxColor->setItemIcon(index, LineColor(ui->comboBoxColor->palette().color(QPalette::Text),
-                                                            ui->comboBoxColor->iconSize().height(), curve->GetColor()));
+            ui->pushButtonColor->setDefaultColor(curve->GetColor());
         }
 
         ui->comboBoxPenStyle->setEnabled(true);
-        ui->comboBoxColor->setEnabled(true);
+        ui->pushButtonColor->setEnabled(true);
     }
 
     ui->lineEditAlias->blockSignals(true);
@@ -791,7 +795,8 @@ void DialogRotation::ColorChanged()
     if (auto *item = ui->listWidget->currentItem())
     {
         auto sourceItem = qvariant_cast<SourceItem>(item->data(Qt::UserRole));
-        sourceItem.color = GetComboBoxCurrentData(ui->comboBoxColor, ColorDefault);
+        QColor const color = ui->pushButtonColor->currentColor();
+        sourceItem.color = color.isValid() ? color.name() : ColorDefault;
         item->setData(Qt::UserRole, QVariant::fromValue(sourceItem));
     }
 }

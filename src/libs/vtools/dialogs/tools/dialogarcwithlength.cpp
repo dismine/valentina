@@ -35,7 +35,6 @@
 #include <QPushButton>
 #include <QTimer>
 #include <QToolButton>
-#include <climits>
 
 #include "../../visualization/path/vistoolarcwithlength.h"
 #include "../../visualization/visualization.h"
@@ -45,6 +44,7 @@
 #include "../vmisc/theme/vtheme.h"
 #include "../vmisc/vabstractapplication.h"
 #include "../vmisc/vcommonsettings.h"
+#include "../vmisc/vvalentinasettings.h"
 #include "../vpatterndb/vcontainer.h"
 #include "../vpatterndb/vtranslatevars.h"
 #include "../vwidgets/global.h"
@@ -83,7 +83,8 @@ DialogArcWithLength::DialogArcWithLength(const VContainer *data, VAbstractPatter
     InitOkCancelApply(ui);
 
     FillComboBoxPoints(ui->comboBoxCenter);
-    FillComboBoxLineColors(ui->comboBoxColor);
+    InitColorPicker(ui->pushButtonColor, VAbstractValApplication::VApp()->ValentinaSettings()->GetUserToolColors());
+    ui->pushButtonColor->setUseNativeDialog(!VAbstractApplication::VApp()->Settings()->IsDontUseNativeDialog());
     FillComboBoxTypeLine(ui->comboBoxPenStyle,
                          CurvePenStylesPics(ui->comboBoxPenStyle->palette().color(QPalette::Base),
                                             ui->comboBoxPenStyle->palette().color(QPalette::Text)));
@@ -118,6 +119,7 @@ DialogArcWithLength::DialogArcWithLength(const VContainer *data, VAbstractPatter
 //---------------------------------------------------------------------------------------------------------------------
 DialogArcWithLength::~DialogArcWithLength()
 {
+    VAbstractValApplication::VApp()->ValentinaSettings()->SetUserToolColors(ui->pushButtonColor->CustomColors());
     delete ui;
 }
 
@@ -226,13 +228,13 @@ void DialogArcWithLength::SetPenStyle(const QString &value)
 //---------------------------------------------------------------------------------------------------------------------
 auto DialogArcWithLength::GetColor() const -> QString
 {
-    return GetComboBoxCurrentData(ui->comboBoxColor, ColorBlack);
+    return ui->pushButtonColor->currentColor().name();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 void DialogArcWithLength::SetColor(const QString &value)
 {
-    ChangeCurrentData(ui->comboBoxColor, value);
+    ui->pushButtonColor->setCurrentColor(value);
 }
 
 //---------------------------------------------------------------------------------------------------------------------

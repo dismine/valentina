@@ -62,8 +62,7 @@
             <string notr="true">...</string>
            </property>
            <property name="icon">
-            <iconset theme="list-add">
-             <normaloff>.</normaloff>.</iconset>
+            <iconset theme="list-add"/>
            </property>
           </widget>
          </item>
@@ -76,8 +75,7 @@
             <string notr="true">...</string>
            </property>
            <property name="icon">
-            <iconset theme="list-remove">
-             <normaloff>.</normaloff>.</iconset>
+            <iconset theme="list-remove"/>
            </property>
           </widget>
          </item>
@@ -226,9 +224,6 @@
            </property>
           </widget>
          </item>
-         <item row="1" column="1">
-          <widget class="QComboBox" name="comboBoxColor"/>
-         </item>
          <item row="3" column="0">
           <widget class="QLabel" name="labelName">
            <property name="text">
@@ -309,6 +304,13 @@
            </property>
           </widget>
          </item>
+         <item row="1" column="1">
+          <widget class="VPE::QtColorPicker" name="pushButtonColor">
+           <property name="text">
+            <string>Color</string>
+           </property>
+          </widget>
+         </item>
         </layout>
        </item>
        <item>
@@ -350,6 +352,13 @@
    </item>
   </layout>
  </widget>
+ <customwidgets>
+  <customwidget>
+   <class>VPE::QtColorPicker</class>
+   <extends>QPushButton</extends>
+   <header>../vpropertyexplorer/qtcolorpicker.h</header>
+  </customwidget>
+ </customwidgets>
  <resources>
   <include location="../../../vmisc/share/resources/icon.qrc"/>
  </resources>

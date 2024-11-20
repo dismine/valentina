@@ -142,7 +142,11 @@
         </widget>
        </item>
        <item row="5" column="1">
-        <widget class="QComboBox" name="comboBoxLineColor"/>
+        <widget class="VPE::QtColorPicker" name="pushButtonLineColor">
+         <property name="text">
+          <string>Color</string>
+         </property>
+        </widget>
        </item>
       </layout>
      </widget>
@@ -170,6 +174,13 @@
    </item>
   </layout>
  </widget>
+ <customwidgets>
+  <customwidget>
+   <class>VPE::QtColorPicker</class>
+   <extends>QPushButton</extends>
+   <header>../vpropertyexplorer/qtcolorpicker.h</header>
+  </customwidget>
+ </customwidgets>
  <tabstops>
   <tabstop>buttonBox</tabstop>
  </tabstops>

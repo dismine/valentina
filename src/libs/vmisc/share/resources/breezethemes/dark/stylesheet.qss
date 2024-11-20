@@ -736,7 +736,7 @@ QMenu::separator
     margin-right: 0.41em;
 }
 
-QFrame[frameShape="2"], /* QFrame::Panel == 0x0003 */
+QFrame[frameShape="2"], /* QFrame::Panel == 0x0002 */
 QFrame[frameShape="3"], /* QFrame::WinPanel == 0x0003 */
 QFrame[frameShape="4"], /* QFrame::HLine == 0x0004 */
 QFrame[frameShape="5"], /* QFrame::VLine == 0x0005 */
@@ -748,6 +748,13 @@ QFrame[frameShape="6"]  /* QFrame::StyledPanel == 0x0006 */
     border-color: #272729;
     background-color: #76797c;
     border-radius: 0.23em;
+}
+
+ColorPickerButton
+{
+    border-width: 0.04em;
+    border-style: solid;
+    border-color: #76797c;
 }
 
 /* Provide highlighting for frame objects. */

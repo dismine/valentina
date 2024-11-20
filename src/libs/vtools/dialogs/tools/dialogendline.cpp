@@ -38,7 +38,6 @@
 #include <QSharedPointer>
 #include <QTimer>
 #include <QToolButton>
-#include <new>
 
 #include "../../visualization/line/vistoolendline.h"
 #include "../../visualization/visualization.h"
@@ -48,6 +47,7 @@
 #include "../vmisc/theme/vtheme.h"
 #include "../vmisc/vabstractapplication.h"
 #include "../vmisc/vcommonsettings.h"
+#include "../vmisc/vvalentinasettings.h"
 #include "../vpatterndb/vcontainer.h"
 #include "../vpatterndb/vtranslatevars.h"
 #include "../vwidgets/global.h"
@@ -99,7 +99,8 @@ DialogEndLine::DialogEndLine(const VContainer *data, VAbstractPattern *doc, quin
     FillComboBoxPoints(ui->comboBoxBasePoint);
     FillComboBoxTypeLine(ui->comboBoxLineType, LineStylesPics(ui->comboBoxLineType->palette().color(QPalette::Base),
                                                               ui->comboBoxLineType->palette().color(QPalette::Text)));
-    FillComboBoxLineColors(ui->comboBoxLineColor);
+    InitColorPicker(ui->pushButtonLineColor, VAbstractValApplication::VApp()->ValentinaSettings()->GetUserToolColors());
+    ui->pushButtonLineColor->setUseNativeDialog(!VAbstractApplication::VApp()->Settings()->IsDontUseNativeDialog());
 
     connect(ui->toolButtonExprLength, &QPushButton::clicked, this, &DialogEndLine::FXLength);
     connect(ui->toolButtonExprAngle, &QPushButton::clicked, this, &DialogEndLine::FXAngle);
@@ -312,13 +313,13 @@ void DialogEndLine::SetBasePointId(const quint32 &value)
 //---------------------------------------------------------------------------------------------------------------------
 auto DialogEndLine::GetLineColor() const -> QString
 {
-    return GetComboBoxCurrentData(ui->comboBoxLineColor, ColorBlack);
+    return ui->pushButtonLineColor->currentColor().name();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 void DialogEndLine::SetLineColor(const QString &value)
 {
-    ChangeCurrentData(ui->comboBoxLineColor, value);
+    ui->pushButtonLineColor->setCurrentColor(value);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -436,6 +437,7 @@ void DialogEndLine::InitIcons()
 //---------------------------------------------------------------------------------------------------------------------
 DialogEndLine::~DialogEndLine()
 {
+    VAbstractValApplication::VApp()->ValentinaSettings()->SetUserToolColors(ui->pushButtonLineColor->CustomColors());
     delete ui;
 }
 

@@ -899,7 +899,12 @@
       <xs:pattern value="image/[-\w]+(\.[-\w]+)*([+][-\w]+)?"/>
     </xs:restriction>
   </xs:simpleType>
-  <xs:simpleType name="colors">
+  <xs:simpleType name="hexColor">
+    <xs:restriction base="xs:string">
+      <xs:pattern value="#[0-9a-fA-F]{6}"/>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="colorNames">
     <xs:restriction base="xs:string">
       <xs:enumeration value="black"/>
       <xs:enumeration value="green"/>
@@ -920,7 +925,10 @@
       <xs:enumeration value="cornflowerblue"/>
     </xs:restriction>
   </xs:simpleType>
-  <xs:simpleType name="operationColors">
+  <xs:simpleType name="colors">
+    <xs:union memberTypes="colorNames hexColor"/>
+  </xs:simpleType>
+  <xs:simpleType name="operationColorsNames">
     <xs:restriction base="xs:string">
       <xs:enumeration value=""/><!--Same as default-->
       <xs:enumeration value="default"/>
@@ -942,6 +950,9 @@
       <xs:enumeration value="deepskyblue"/>
       <xs:enumeration value="cornflowerblue"/>
     </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="operationColors">
+    <xs:union memberTypes="operationColorsNames hexColor"/>
   </xs:simpleType>
   <xs:simpleType name="linePenStyle">
     <xs:restriction base="xs:string">

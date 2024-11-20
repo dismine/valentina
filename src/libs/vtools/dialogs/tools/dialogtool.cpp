@@ -54,8 +54,6 @@
 #include <QTimer>
 #include <QWidget>
 #include <QtDebug>
-#include <climits>
-#include <new>
 #include <qiterator.h>
 #include <qnumeric.h>
 
@@ -277,28 +275,6 @@ void DialogTool::FillComboBoxTypeLine(QComboBox *box, const QMap<QString, QIcon>
     if (index != -1)
     {
         box->setCurrentIndex(index);
-    }
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-void DialogTool::FillComboBoxLineColors(QComboBox *box) const
-{
-    FillComboBoxLineColors(box, VAbstractTool::ColorsList());
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-void DialogTool::FillComboBoxLineColors(QComboBox *box, const QMap<QString, QString> &lineColors) const
-{
-    SCASSERT(box != nullptr)
-
-    box->clear();
-
-    QMap<QString, QString>::const_iterator i = lineColors.constBegin();
-    while (i != lineColors.constEnd())
-    {
-        box->addItem(LineColor(box->palette().color(QPalette::Text), box->iconSize().height(), i.key()), i.value(),
-                     QVariant(i.key()));
-        ++i;
     }
 }
 

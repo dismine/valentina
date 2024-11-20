@@ -32,6 +32,7 @@
 #include "../vgeometry/vcubicbezierpath.h"
 #include "../vgeometry/vsplinepath.h"
 #include "../vmisc/def.h"
+#include "../vmisc/vvalentinasettings.h"
 #include "../vpatterndb/vformula.h"
 #include "../vpropertyexplorer/plugins/vboolproperty.h"
 #include "../vpropertyexplorer/plugins/venumproperty.h"
@@ -48,7 +49,6 @@
 #include "../vwidgets/vgraphicssimpletextitem.h"
 #include "../vwidgets/vsimplecurve.h"
 #include "../vwidgets/vsimplepoint.h"
-#include "qobject.h"
 #include "vformulaproperty.h"
 
 #include "../vtools/tools/drawTools/operation/flipping/vtoolflippingbyaxis.h"
@@ -90,6 +90,7 @@
 #include <QDebug>
 #include <QDockWidget>
 #include <QHBoxLayout>
+#include <QObject>
 #include <QPalette>
 #include <QRegularExpression>
 #include <QScrollArea>
@@ -777,13 +778,10 @@ void VToolOptionsPropertyBrowser::AddPropertyLineColor(Tool *i, const QString &p
                                                        const QMap<QString, QString> &colors, const QString &id)
 {
     auto *lineColorProperty = new VPE::VLineColorProperty(propertyName);
-    lineColorProperty->setColors(colors);
-    const auto index = VPE::VLineColorProperty::IndexOfColor(colors, i->GetLineColor());
-    if (index == -1)
-    {
-        qWarning() << "Can't find line style" << i->GetLineColor() << "in list";
-    }
-    lineColorProperty->setValue(index);
+    lineColorProperty->SetDefaultColors(colors);
+    lineColorProperty->SetCustomColors(VAbstractValApplication::VApp()->ValentinaSettings()->GetUserToolColors());
+    lineColorProperty->SetUseNativeDialog(!VAbstractApplication::VApp()->Settings()->IsDontUseNativeDialog());
+    lineColorProperty->setValue(i->GetLineColor());
     AddProperty(lineColorProperty, id);
 }
 
@@ -1212,6 +1210,9 @@ template <class Tool> void VToolOptionsPropertyBrowser::SetLineColor(VPE::VPrope
         }
 
         i->SetLineColor(color);
+
+        QVector<QColor> const customColors = property->getSetting("customColors"_L1).value<QVector<QColor>>();
+        VAbstractValApplication::VApp()->ValentinaSettings()->SetUserToolColors(customColors);
     }
     else
     {
@@ -3380,10 +3381,7 @@ void VToolOptionsPropertyBrowser::UpdateOptionsToolEndLine()
         m_idToProperty[AttrTypeLine]->setValue(index);
     }
 
-    {
-        const auto index = VPE::VLineColorProperty::IndexOfColor(VAbstractTool::ColorsList(), i->GetLineColor());
-        m_idToProperty[AttrLineColor]->setValue(index);
-    }
+    m_idToProperty[AttrLineColor]->setValue(i->GetLineColor());
 
     QVariant valueFormula;
     valueFormula.setValue(i->GetFormulaLength());
@@ -3414,10 +3412,7 @@ void VToolOptionsPropertyBrowser::UpdateOptionsToolAlongLine()
         m_idToProperty[AttrTypeLine]->setValue(index);
     }
 
-    {
-        const auto index = VPE::VLineColorProperty::IndexOfColor(VAbstractTool::ColorsList(), i->GetLineColor());
-        m_idToProperty[AttrLineColor]->setValue(index);
-    }
+    m_idToProperty[AttrLineColor]->setValue(i->GetLineColor());
 
     QVariant valueFormula;
     valueFormula.setValue(i->GetFormulaLength());
@@ -3461,10 +3456,7 @@ void VToolOptionsPropertyBrowser::UpdateOptionsToolArc()
         m_idToProperty[AttrPenStyle]->setValue(index);
     }
 
-    {
-        const auto index = VPE::VLineColorProperty::IndexOfColor(VAbstractTool::ColorsList(), i->GetLineColor());
-        m_idToProperty[AttrColor]->setValue(index);
-    }
+    m_idToProperty[AttrColor]->setValue(i->GetLineColor());
 
     QVariant valueCenterPoint;
     valueCenterPoint.setValue(i->CenterPointName());
@@ -3506,10 +3498,7 @@ void VToolOptionsPropertyBrowser::UpdateOptionsToolArcWithLength()
         m_idToProperty[AttrPenStyle]->setValue(index);
     }
 
-    {
-        const auto index = VPE::VLineColorProperty::IndexOfColor(VAbstractTool::ColorsList(), i->GetLineColor());
-        m_idToProperty[AttrColor]->setValue(index);
-    }
+    m_idToProperty[AttrColor]->setValue(i->GetLineColor());
 
     QVariant valueCenterPoint;
     valueCenterPoint.setValue(i->CenterPointName());
@@ -3543,10 +3532,7 @@ void VToolOptionsPropertyBrowser::UpdateOptionsToolBisector()
         m_idToProperty[AttrTypeLine]->setValue(index);
     }
 
-    {
-        const auto index = VPE::VLineColorProperty::IndexOfColor(VAbstractTool::ColorsList(), i->GetLineColor());
-        m_idToProperty[AttrLineColor]->setValue(index);
-    }
+    m_idToProperty[AttrLineColor]->setValue(i->GetLineColor());
 
     QVariant valueFirstPoint;
     valueFirstPoint.setValue(i->FirstPointName());
@@ -3672,10 +3658,7 @@ void VToolOptionsPropertyBrowser::UpdateOptionsToolHeight()
         m_idToProperty[AttrTypeLine]->setValue(index);
     }
 
-    {
-        const auto index = VPE::VLineColorProperty::IndexOfColor(VAbstractTool::ColorsList(), i->GetLineColor());
-        m_idToProperty[AttrLineColor]->setValue(index);
-    }
+    m_idToProperty[AttrLineColor]->setValue(i->GetLineColor());
 
     QVariant valueBasePoint;
     valueBasePoint.setValue(i->BasePointName());
@@ -3705,10 +3688,7 @@ void VToolOptionsPropertyBrowser::UpdateOptionsToolLine()
         m_idToProperty[AttrTypeLine]->setValue(index);
     }
 
-    {
-        const auto index = VPE::VLineColorProperty::IndexOfColor(VAbstractTool::ColorsList(), i->GetLineColor());
-        m_idToProperty[AttrLineColor]->setValue(index);
-    }
+    m_idToProperty[AttrLineColor]->setValue(i->GetLineColor());
 
     QVariant valueFirstPoint;
     valueFirstPoint.setValue(i->FirstPointName());
@@ -3768,10 +3748,7 @@ void VToolOptionsPropertyBrowser::UpdateOptionsToolNormal()
         m_idToProperty[AttrTypeLine]->setValue(index);
     }
 
-    {
-        const auto index = VPE::VLineColorProperty::IndexOfColor(VAbstractTool::ColorsList(), i->GetLineColor());
-        m_idToProperty[AttrLineColor]->setValue(index);
-    }
+    m_idToProperty[AttrLineColor]->setValue(i->GetLineColor());
 
     QVariant valueBasePoint;
     valueBasePoint.setValue(i->BasePointName());
@@ -3955,10 +3932,7 @@ void VToolOptionsPropertyBrowser::UpdateOptionsToolShoulderPoint()
         m_idToProperty[AttrTypeLine]->setValue(index);
     }
 
-    {
-        const auto index = VPE::VLineColorProperty::IndexOfColor(VAbstractTool::ColorsList(), i->GetLineColor());
-        m_idToProperty[AttrLineColor]->setValue(index);
-    }
+    m_idToProperty[AttrLineColor]->setValue(i->GetLineColor());
 
     QVariant valueBasePoint;
     valueBasePoint.setValue(i->BasePointName());
@@ -4023,8 +3997,7 @@ void VToolOptionsPropertyBrowser::UpdateOptionsToolSpline()
         m_idToProperty[AttrPenStyle]->setValue(index);
     }
 
-    m_idToProperty[AttrColor]->setValue(
-        VPE::VLineColorProperty::IndexOfColor(VAbstractTool::ColorsList(), i->GetLineColor()));
+    m_idToProperty[AttrColor]->setValue(i->GetLineColor());
 
     QVariant valueApproximationScale;
     valueApproximationScale.setValue(spl.GetApproximationScale());
@@ -4050,8 +4023,7 @@ void VToolOptionsPropertyBrowser::UpdateOptionsToolCubicBezier()
         m_idToProperty[AttrPenStyle]->setValue(index);
     }
 
-    m_idToProperty[AttrColor]->setValue(
-        VPE::VLineColorProperty::IndexOfColor(VAbstractTool::ColorsList(), i->GetLineColor()));
+    m_idToProperty[AttrColor]->setValue(i->GetLineColor());
 
     QVariant valueFirstPoint;
     valueFirstPoint.setValue(i->FirstPointName());
@@ -4093,8 +4065,7 @@ void VToolOptionsPropertyBrowser::UpdateOptionsToolSplinePath()
         m_idToProperty[AttrPenStyle]->setValue(index);
     }
 
-    m_idToProperty[AttrColor]->setValue(
-        VPE::VLineColorProperty::IndexOfColor(VAbstractTool::ColorsList(), i->GetLineColor()));
+    m_idToProperty[AttrColor]->setValue(i->GetLineColor());
 
     QVariant valueApproximationScale;
     valueApproximationScale.setValue(i->getSplinePath().GetApproximationScale());
@@ -4120,8 +4091,7 @@ void VToolOptionsPropertyBrowser::UpdateOptionsToolCubicBezierPath()
         m_idToProperty[AttrPenStyle]->setValue(index);
     }
 
-    m_idToProperty[AttrColor]->setValue(
-        VPE::VLineColorProperty::IndexOfColor(VAbstractTool::ColorsList(), i->GetLineColor()));
+    m_idToProperty[AttrColor]->setValue(i->GetLineColor());
 
     QVariant valueApproximationScale;
     valueApproximationScale.setValue(i->getSplinePath().GetApproximationScale());
@@ -4172,10 +4142,7 @@ void VToolOptionsPropertyBrowser::UpdateOptionsToolLineIntersectAxis()
         m_idToProperty[AttrTypeLine]->setValue(index);
     }
 
-    {
-        const auto index = VPE::VLineColorProperty::IndexOfColor(VAbstractTool::ColorsList(), i->GetLineColor());
-        m_idToProperty[AttrLineColor]->setValue(index);
-    }
+    m_idToProperty[AttrLineColor]->setValue(i->GetLineColor());
 
     QVariant valueAngle;
     valueAngle.setValue(i->GetFormulaAngle());
@@ -4210,10 +4177,7 @@ void VToolOptionsPropertyBrowser::UpdateOptionsToolCurveIntersectAxis()
         m_idToProperty[AttrTypeLine]->setValue(index);
     }
 
-    {
-        const auto index = VPE::VLineColorProperty::IndexOfColor(VAbstractTool::ColorsList(), i->GetLineColor());
-        m_idToProperty[AttrLineColor]->setValue(index);
-    }
+    m_idToProperty[AttrLineColor]->setValue(i->GetLineColor());
 
     QVariant valueAngle;
     valueAngle.setValue(i->GetFormulaAngle());
@@ -4330,8 +4294,7 @@ void VToolOptionsPropertyBrowser::UpdateOptionsToolEllipticalArc()
     valueFormulaRotationAngle.setValue(i->GetFormulaRotationAngle());
     m_idToProperty[AttrRotationAngle]->setValue(valueFormulaRotationAngle);
 
-    const auto index = VPE::VLineColorProperty::IndexOfColor(VAbstractTool::ColorsList(), i->GetLineColor());
-    m_idToProperty[AttrColor]->setValue(index);
+    m_idToProperty[AttrColor]->setValue(i->GetLineColor());
 
     QVariant valueCenterPoint;
     valueCenterPoint.setValue(i->CenterPointName());

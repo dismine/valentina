@@ -47,6 +47,7 @@
 #include "../ifc/ifcdef.h"
 #include "../qmuparser/qmudef.h"
 #include "../vmisc/vabstractapplication.h"
+#include "../vmisc/vvalentinasettings.h"
 #include "../vpatterndb/vcontainer.h"
 #include "../vwidgets/vabstractmainwindow.h"
 #include "dialogtool.h"
@@ -70,7 +71,8 @@ DialogCubicBezierPath::DialogCubicBezierPath(const VContainer *data, VAbstractPa
 
     FillComboBoxPoints(ui->comboBoxNewPoint);
     FillComboBoxPoints(ui->comboBoxPoint);
-    FillComboBoxLineColors(ui->comboBoxColor);
+    InitColorPicker(ui->pushButtonColor, VAbstractValApplication::VApp()->ValentinaSettings()->GetUserToolColors());
+    ui->pushButtonColor->setUseNativeDialog(!VAbstractApplication::VApp()->Settings()->IsDontUseNativeDialog());
     FillComboBoxTypeLine(ui->comboBoxPenStyle,
                          CurvePenStylesPics(ui->comboBoxPenStyle->palette().color(QPalette::Base),
                                             ui->comboBoxPenStyle->palette().color(QPalette::Text)));
@@ -102,6 +104,7 @@ DialogCubicBezierPath::DialogCubicBezierPath(const VContainer *data, VAbstractPa
 //---------------------------------------------------------------------------------------------------------------------
 DialogCubicBezierPath::~DialogCubicBezierPath()
 {
+    VAbstractValApplication::VApp()->ValentinaSettings()->SetUserToolColors(ui->pushButtonColor->CustomColors());
     delete ui;
 }
 
@@ -130,7 +133,7 @@ void DialogCubicBezierPath::SetPath(const VCubicBezierPath &value)
     ValidateAlias();
 
     ChangeCurrentData(ui->comboBoxPenStyle, path.GetPenStyle());
-    ChangeCurrentData(ui->comboBoxColor, path.GetColor());
+    ui->pushButtonColor->setCurrentColor(path.GetColor());
 
     auto *visPath = qobject_cast<VisToolCubicBezierPath *>(vis);
     SCASSERT(visPath != nullptr)
@@ -218,7 +221,7 @@ void DialogCubicBezierPath::SaveData()
     newDuplicate <= -1 ? path.SetDuplicate(d) : path.SetDuplicate(static_cast<quint32>(newDuplicate));
 
     path.SetPenStyle(GetComboBoxCurrentData(ui->comboBoxPenStyle, TypeLineLine));
-    path.SetColor(GetComboBoxCurrentData(ui->comboBoxColor, ColorBlack));
+    path.SetColor(ui->pushButtonColor->currentColor().name());
     path.SetApproximationScale(ui->doubleSpinBoxApproximationScale->value());
     path.SetAliasSuffix(ui->lineEditAlias->text());
 

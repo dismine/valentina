@@ -38,7 +38,6 @@
 #include <QSharedPointer>
 #include <QTimer>
 #include <QToolButton>
-#include <new>
 
 #include "../../visualization/line/vistoolcurveintersectaxis.h"
 #include "../../visualization/visualization.h"
@@ -50,6 +49,7 @@
 #include "../vmisc/theme/vtheme.h"
 #include "../vmisc/vabstractapplication.h"
 #include "../vmisc/vcommonsettings.h"
+#include "../vmisc/vvalentinasettings.h"
 #include "../vpatterndb/vcontainer.h"
 #include "../vpatterndb/vtranslatevars.h"
 #include "../vwidgets/global.h"
@@ -89,7 +89,8 @@ DialogCurveIntersectAxis::DialogCurveIntersectAxis(const VContainer *data, VAbst
     FillComboBoxCurves(ui->comboBoxCurve);
     FillComboBoxTypeLine(ui->comboBoxLineType, LineStylesPics(ui->comboBoxLineType->palette().color(QPalette::Base),
                                                               ui->comboBoxLineType->palette().color(QPalette::Text)));
-    FillComboBoxLineColors(ui->comboBoxLineColor);
+    InitColorPicker(ui->pushButtonLineColor, VAbstractValApplication::VApp()->ValentinaSettings()->GetUserToolColors());
+    ui->pushButtonLineColor->setUseNativeDialog(!VAbstractApplication::VApp()->Settings()->IsDontUseNativeDialog());
 
     connect(ui->toolButtonExprAngle, &QPushButton::clicked, this, &DialogCurveIntersectAxis::FXAngle);
     connect(ui->lineEditNamePoint, &QLineEdit::textChanged, this,
@@ -114,6 +115,7 @@ DialogCurveIntersectAxis::DialogCurveIntersectAxis(const VContainer *data, VAbst
 //---------------------------------------------------------------------------------------------------------------------
 DialogCurveIntersectAxis::~DialogCurveIntersectAxis()
 {
+    VAbstractValApplication::VApp()->ValentinaSettings()->SetUserToolColors(ui->pushButtonLineColor->CustomColors());
     delete ui;
 }
 
@@ -204,13 +206,13 @@ void DialogCurveIntersectAxis::setCurveId(quint32 value)
 //---------------------------------------------------------------------------------------------------------------------
 auto DialogCurveIntersectAxis::GetLineColor() const -> QString
 {
-    return GetComboBoxCurrentData(ui->comboBoxLineColor, ColorBlack);
+    return ui->pushButtonLineColor->currentColor().name();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 void DialogCurveIntersectAxis::SetLineColor(const QString &value)
 {
-    ChangeCurrentData(ui->comboBoxLineColor, value);
+    ui->pushButtonLineColor->setCurrentColor(value);
 }
 
 //---------------------------------------------------------------------------------------------------------------------

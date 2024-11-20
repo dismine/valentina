@@ -39,6 +39,7 @@
 #include "../../visualization/line/vistoolline.h"
 #include "../../visualization/visualization.h"
 #include "../ifc/ifcdef.h"
+#include "../vmisc/vvalentinasettings.h"
 #include "dialogtool.h"
 #include "ui_dialogline.h"
 
@@ -58,14 +59,13 @@ DialogLine::DialogLine(const VContainer *data, VAbstractPattern *doc, quint32 to
 
     FillComboBoxPoints(ui->comboBoxFirstPoint);
     FillComboBoxPoints(ui->comboBoxSecondPoint);
-    FillComboBoxLineColors(ui->comboBoxLineColor);
+    InitColorPicker(ui->pushButtonLineColor, VAbstractValApplication::VApp()->ValentinaSettings()->GetUserToolColors());
+    ui->pushButtonLineColor->setUseNativeDialog(!VAbstractApplication::VApp()->Settings()->IsDontUseNativeDialog());
 
     QMap<QString, QIcon> stylesPics = LineStylesPics(ui->comboBoxLineType->palette().color(QPalette::Base),
                                                      ui->comboBoxLineType->palette().color(QPalette::Text));
     stylesPics.remove(TypeLineNone); // Prevent hiding line
     FillComboBoxTypeLine(ui->comboBoxLineType, stylesPics);
-
-    number = 0;
 
     connect(ui->comboBoxFirstPoint, &QComboBox::currentTextChanged, this, &DialogLine::PointNameChanged);
     connect(ui->comboBoxSecondPoint, &QComboBox::currentTextChanged, this, &DialogLine::PointNameChanged);
@@ -79,6 +79,7 @@ DialogLine::DialogLine(const VContainer *data, VAbstractPattern *doc, quint32 to
 //---------------------------------------------------------------------------------------------------------------------
 DialogLine::~DialogLine()
 {
+    VAbstractValApplication::VApp()->ValentinaSettings()->SetUserToolColors(ui->pushButtonLineColor->CustomColors());
     delete ui;
 }
 
@@ -110,13 +111,13 @@ void DialogLine::SetTypeLine(const QString &value)
 //---------------------------------------------------------------------------------------------------------------------
 auto DialogLine::GetLineColor() const -> QString
 {
-    return GetComboBoxCurrentData(ui->comboBoxLineColor, ColorBlack);
+    return ui->pushButtonLineColor->currentColor().name();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 void DialogLine::SetLineColor(const QString &value)
 {
-    ChangeCurrentData(ui->comboBoxLineColor, value);
+    ui->pushButtonLineColor->setCurrentColor(value);
 }
 
 //---------------------------------------------------------------------------------------------------------------------

@@ -80,8 +80,7 @@
                 <string notr="true">...</string>
                </property>
                <property name="icon">
-                <iconset theme="list-add">
-                 <normaloff>.</normaloff>.</iconset>
+                <iconset theme="list-add"/>
                </property>
               </widget>
              </item>
@@ -94,8 +93,7 @@
                 <string notr="true">...</string>
                </property>
                <property name="icon">
-                <iconset theme="list-remove">
-                 <normaloff>.</normaloff>.</iconset>
+                <iconset theme="list-remove"/>
                </property>
               </widget>
              </item>
@@ -291,8 +289,7 @@
                          <string notr="true"/>
                         </property>
                         <property name="icon">
-                         <iconset theme="go-down">
-                          <normaloff>.</normaloff>.</iconset>
+                         <iconset theme="go-down"/>
                         </property>
                         <property name="iconSize">
                          <size>
@@ -471,8 +468,7 @@
                          <string notr="true"/>
                         </property>
                         <property name="icon">
-                         <iconset theme="go-down">
-                          <normaloff>.</normaloff>.</iconset>
+                         <iconset theme="go-down"/>
                         </property>
                         <property name="iconSize">
                          <size>
@@ -664,8 +660,7 @@
                          <string notr="true"/>
                         </property>
                         <property name="icon">
-                         <iconset theme="go-down">
-                          <normaloff>.</normaloff>.</iconset>
+                         <iconset theme="go-down"/>
                         </property>
                         <property name="iconSize">
                          <size>
@@ -844,8 +839,7 @@
                          <string notr="true"/>
                         </property>
                         <property name="icon">
-                         <iconset theme="go-down">
-                          <normaloff>.</normaloff>.</iconset>
+                         <iconset theme="go-down"/>
                         </property>
                         <property name="iconSize">
                          <size>
@@ -977,9 +971,6 @@
                </property>
               </widget>
              </item>
-             <item row="1" column="1">
-              <widget class="QComboBox" name="comboBoxColor"/>
-             </item>
              <item row="3" column="0">
               <widget class="QLabel" name="labelName">
                <property name="text">
@@ -1056,6 +1047,13 @@
              <item row="4" column="1">
               <widget class="QLineEdit" name="lineEditAlias"/>
              </item>
+             <item row="1" column="1">
+              <widget class="VPE::QtColorPicker" name="pushButtonColor">
+               <property name="text">
+                <string>Color</string>
+               </property>
+              </widget>
+             </item>
             </layout>
            </item>
            <item>
@@ -1102,6 +1100,11 @@
   </layout>
  </widget>
  <customwidgets>
+  <customwidget>
+   <class>VPE::QtColorPicker</class>
+   <extends>QPushButton</extends>
+   <header>../vpropertyexplorer/qtcolorpicker.h</header>
+  </customwidget>
   <customwidget>
    <class>VPlainTextEdit</class>
    <extends>QPlainTextEdit</extends>

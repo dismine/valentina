@@ -270,7 +270,7 @@ auto VAbstractOperation::ExtractDestinationData(const QDomElement &domElement) -
 auto VAbstractOperation::OperationColorsList() -> QMap<QString, QString>
 {
     QMap<QString, QString> list = VAbstractTool::ColorsList();
-    list.insert(ColorDefault, '<' + QCoreApplication::translate("VAbstractOperation", "default") + '>');
+    list.insert(ColorDefault, QCoreApplication::translate("VAbstractOperation", "default"));
     return list;
 }
 

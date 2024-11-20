@@ -84,6 +84,9 @@
                <height>16777215</height>
               </size>
              </property>
+             <property name="sizeAdjustPolicy">
+              <enum>QComboBox::AdjustToContents</enum>
+             </property>
              <property name="iconSize">
               <size>
                <width>80</width>
@@ -100,15 +103,9 @@
             </widget>
            </item>
            <item row="2" column="1">
-            <widget class="QComboBox" name="comboBoxColor">
-             <property name="enabled">
-              <bool>false</bool>
-             </property>
-             <property name="sizePolicy">
-              <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
-               <horstretch>0</horstretch>
-               <verstretch>0</verstretch>
-              </sizepolicy>
+            <widget class="VPE::QtColorPicker" name="pushButtonColor">
+             <property name="text">
+              <string>Color</string>
              </property>
             </widget>
            </item>
@@ -187,7 +184,7 @@
             <string>Formula wizard</string>
            </property>
            <property name="text">
-            <string notr="true"></string>
+            <string notr="true"/>
            </property>
            <property name="icon">
             <iconset resource="../../../vmisc/share/resources/icon.qrc">
@@ -280,8 +277,7 @@
             <string notr="true"/>
            </property>
            <property name="icon">
-            <iconset theme="go-down">
-             <normaloff>.</normaloff>.</iconset>
+            <iconset theme="go-down"/>
            </property>
            <property name="iconSize">
             <size>
@@ -367,7 +363,7 @@
             <string>Formula wizard</string>
            </property>
            <property name="text">
-            <string notr="true"></string>
+            <string notr="true"/>
            </property>
            <property name="icon">
             <iconset resource="../../../vmisc/share/resources/icon.qrc">
@@ -460,8 +456,7 @@
             <string notr="true"/>
            </property>
            <property name="icon">
-            <iconset theme="go-down">
-             <normaloff>.</normaloff>.</iconset>
+            <iconset theme="go-down"/>
            </property>
            <property name="iconSize">
             <size>
@@ -547,7 +542,7 @@
             <string>Formula wizard</string>
            </property>
            <property name="text">
-            <string notr="true"></string>
+            <string notr="true"/>
            </property>
            <property name="icon">
             <iconset resource="../../../vmisc/share/resources/icon.qrc">
@@ -640,8 +635,7 @@
             <string notr="true"/>
            </property>
            <property name="icon">
-            <iconset theme="go-down">
-             <normaloff>.</normaloff>.</iconset>
+            <iconset theme="go-down"/>
            </property>
            <property name="iconSize">
             <size>
@@ -792,14 +786,19 @@
  </widget>
  <customwidgets>
   <customwidget>
-   <class>VCompleterLineEdit</class>
-   <extends>QLineEdit</extends>
-   <header>../vwidgets/vlineedit.h</header>
+   <class>VPE::QtColorPicker</class>
+   <extends>QPushButton</extends>
+   <header>../vpropertyexplorer/qtcolorpicker.h</header>
   </customwidget>
   <customwidget>
    <class>VPlainTextEdit</class>
    <extends>QPlainTextEdit</extends>
    <header>../vwidgets/vplaintextedit.h</header>
+  </customwidget>
+  <customwidget>
+   <class>VCompleterLineEdit</class>
+   <extends>QLineEdit</extends>
+   <header>../vwidgets/vlineedit.h</header>
   </customwidget>
  </customwidgets>
  <resources>

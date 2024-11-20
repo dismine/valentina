@@ -35,7 +35,6 @@
 #include <QPushButton>
 #include <QTimer>
 #include <QToolButton>
-#include <climits>
 
 #include "../../visualization/path/vistoolellipticalarc.h"
 #include "../../visualization/visualization.h"
@@ -45,6 +44,7 @@
 #include "../vmisc/theme/vtheme.h"
 #include "../vmisc/vabstractapplication.h"
 #include "../vmisc/vcommonsettings.h"
+#include "../vmisc/vvalentinasettings.h"
 #include "../vpatterndb/vcontainer.h"
 #include "../vpatterndb/vtranslatevars.h"
 #include "../vwidgets/global.h"
@@ -100,7 +100,8 @@ DialogEllipticalArc::DialogEllipticalArc(const VContainer *data, VAbstractPatter
     InitOkCancelApply(ui);
 
     FillComboBoxPoints(ui->comboBoxBasePoint);
-    FillComboBoxLineColors(ui->comboBoxColor);
+    InitColorPicker(ui->pushButtonColor, VAbstractValApplication::VApp()->ValentinaSettings()->GetUserToolColors());
+    ui->pushButtonColor->setUseNativeDialog(!VAbstractApplication::VApp()->Settings()->IsDontUseNativeDialog());
     FillComboBoxTypeLine(ui->comboBoxPenStyle,
                          CurvePenStylesPics(ui->comboBoxPenStyle->palette().color(QPalette::Base),
                                             ui->comboBoxPenStyle->palette().color(QPalette::Text)));
@@ -144,6 +145,7 @@ DialogEllipticalArc::DialogEllipticalArc(const VContainer *data, VAbstractPatter
 //---------------------------------------------------------------------------------------------------------------------
 DialogEllipticalArc::~DialogEllipticalArc()
 {
+    VAbstractValApplication::VApp()->ValentinaSettings()->SetUserToolColors(ui->pushButtonColor->CustomColors());
     delete ui;
 }
 
@@ -356,7 +358,7 @@ void DialogEllipticalArc::SetPenStyle(const QString &value)
  */
 auto DialogEllipticalArc::GetColor() const -> QString
 {
-    return GetComboBoxCurrentData(ui->comboBoxColor, ColorBlack);
+    return ui->pushButtonColor->currentColor().name();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -366,7 +368,7 @@ auto DialogEllipticalArc::GetColor() const -> QString
  */
 void DialogEllipticalArc::SetColor(const QString &value)
 {
-    ChangeCurrentData(ui->comboBoxColor, value);
+    ui->pushButtonColor->setCurrentColor(value);
 }
 
 //---------------------------------------------------------------------------------------------------------------------

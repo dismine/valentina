@@ -155,7 +155,7 @@ auto VPE::VProperty::getEditorData(const QWidget *editor) const -> QVariant
 {
     if (!editor)
     {
-        return QVariant();
+        return {};
     }
 
     QByteArray const n = editor->metaObject()->userProperty().name();
@@ -164,8 +164,8 @@ auto VPE::VProperty::getEditorData(const QWidget *editor) const -> QVariant
     {
         return editor->property(n);
     }
-    else
-        return QVariant();
+
+    return {};
 }
 
 //! Returns item flags
@@ -175,12 +175,13 @@ auto VPE::VProperty::flags(int column) const -> Qt::ItemFlags
     {
         return Qt::ItemIsEnabled | Qt::ItemIsSelectable;
     }
-    else if (column == DPC_Data)
+
+    if (column == DPC_Data)
     {
         return Qt::ItemIsEnabled | Qt::ItemIsEditable | Qt::ItemIsSelectable;
     }
-    else
-        return Qt::NoItemFlags;
+
+    return Qt::NoItemFlags;
 }
 
 
@@ -381,12 +382,12 @@ auto VPE::VProperty::getSetting(const QString &key) const -> QVariant
 {
     // Not needed in the Standard property
     Q_UNUSED(key)
-    return QVariant();
+    return {};
 }
 
 auto VPE::VProperty::getSettingKeys() const -> QStringList
 {
-    return QStringList();
+    return {};
 }
 
 auto VPE::VProperty::clone(bool include_children, VProperty *container) const -> VPE::VProperty *

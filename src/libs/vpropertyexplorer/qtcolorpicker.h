@@ -54,21 +54,29 @@
 #include <QtCore/QEvent>
 #include <QtCore/QString>
 
+#include "vpropertyexplorer_global.h"
+
 class ColorPickerPopup;
 class ColorPickerItem;
 
-class QtColorPicker : public QPushButton
+namespace VPE
+{
+class VPROPERTYEXPLORERSHARED_EXPORT QtColorPicker : public QPushButton
 {
     Q_OBJECT // NOLINT
 
     Q_PROPERTY(bool colorDialog READ colorDialogEnabled WRITE setColorDialogEnabled)
 
 public:
-    explicit QtColorPicker(QWidget *parent = nullptr, int columns = -1, bool enableColorDialog = true);
+    explicit QtColorPicker(QWidget *parent = nullptr,
+                           int columns = -1,
+                           bool enableColorDialog = true,
+                           bool useNativeDialog = true);
 
     ~QtColorPicker() override = default;
 
     void insertColor(const QColor &color, const QString &text = QString(), int index = -1);
+    void insertCustomColor(const QColor &color, int index = -1);
 
     auto currentColor() const -> QColor;
 
@@ -83,16 +91,21 @@ public:
 
     static auto getColor(const QPoint &point, bool allowCustomColors = true) -> QColor;
 
-public Q_SLOTS:
+    auto getUseNativeDialog() const -> bool;
+    void setUseNativeDialog(bool newUseNativeDialog);
+
+    void setDefaultColor(const QColor &color);
+
+public slots:
     void setCurrentColor(const QColor &color);
 
-Q_SIGNALS:
+signals:
     void colorChanged(const QColor &);
 
 protected:
     void paintEvent(QPaintEvent *e) override;
 
-private Q_SLOTS:
+private slots:
     void buttonPressed(bool toggled);
     void popupClosed();
 
@@ -100,10 +113,12 @@ private:
     // cppcheck-suppress unknownMacro
     Q_DISABLE_COPY_MOVE(QtColorPicker) // NOLINT
     ColorPickerPopup *popup{nullptr};
-    QColor col{};
+    QColor col{Qt::black};
     bool withColorDialog{false};
-    bool dirty{false};
+    bool dirty{true};
     bool firstInserted{false};
 };
+
+} // namespace VPE
 
 #endif

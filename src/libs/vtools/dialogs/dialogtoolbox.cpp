@@ -29,6 +29,7 @@
 
 #include "../ifc/exception/vexceptionbadid.h"
 #include "../qmuparser/qmudef.h"
+#include "../tools/drawTools/operation/vabstractoperation.h"
 #include "../vgeometry/varc.h"
 #include "../vgeometry/vcubicbezier.h"
 #include "../vgeometry/vcubicbezierpath.h"
@@ -43,11 +44,14 @@
 #include "../vpatterndb/variables/vcurvelength.h"
 #include "../vpatterndb/vcontainer.h"
 #include "../vpatterndb/vpiecenode.h"
-#include "qdialogbuttonbox.h"
+#include "../vpropertyexplorer/qtcolorpicker.h"
+#include "../vtools/tools/vabstracttool.h"
 
+#include <qnumeric.h>
 #include <QBuffer>
 #include <QDebug>
 #include <QDialog>
+#include <QDialogButtonBox>
 #include <QLabel>
 #include <QLineEdit>
 #include <QListWidget>
@@ -59,7 +63,6 @@
 #include <QScreen>
 #include <QTextCursor>
 #include <QTimer>
-#include <qnumeric.h>
 
 #if QT_VERSION < QT_VERSION_CHECK(6, 4, 0)
 #include "../vmisc/compatibility.h"
@@ -676,25 +679,6 @@ void SetTabStopDistance(QPlainTextEdit *edit, int tabWidthChar)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-auto LineColor(const QColor &borderColor, int size, const QString &color) -> QIcon
-{
-    // On Mac pixmap should be little bit smaller.
-#if defined(Q_OS_MAC)
-    size -= 2; // Two pixels should be enough.
-#endif         // defined(Q_OS_MAC)
-
-    QPixmap pix(size, size);
-    pix.fill(QColor(color));
-
-    // Draw a white border around the icon
-    QPainter painter(&pix);
-    painter.setPen(borderColor);
-    painter.drawRect(0, 0, size - 1, size - 1);
-
-    return {pix};
-}
-
-//---------------------------------------------------------------------------------------------------------------------
 auto SegmentAliases(GOType curveType, const QString &alias1, const QString &alias2) -> QPair<QString, QString>
 {
     switch (curveType)
@@ -1017,4 +1001,54 @@ auto NodeRowIndex(QListWidget *listWidget, quint32 id) -> int
     }
 
     return -1;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void InitColorPicker(VPE::QtColorPicker *button, const QVector<QColor> &customColor)
+{
+    SCASSERT(button != nullptr)
+
+    const QMap<QString, QString> defaultColors = VAbstractTool::ColorsList();
+
+    auto i = defaultColors.constBegin();
+    while (i != defaultColors.constEnd())
+    {
+        button->insertColor(QColor(i.key()), i.value());
+        ++i;
+    }
+
+    for (auto color : customColor)
+    {
+        button->insertCustomColor(color);
+    }
+
+    button->setCurrentColor(QColor(Qt::black));
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void InitOperationColorPicker(VPE::QtColorPicker *button, const QVector<QColor> &customColor)
+{
+    SCASSERT(button != nullptr)
+
+    QMap<QString, QString> defaultColors = VAbstractOperation::OperationColorsList();
+
+    if (defaultColors.contains(ColorDefault))
+    {
+        button->insertColor(QColor(), defaultColors.value(ColorDefault));
+        defaultColors.remove(ColorDefault);
+    }
+
+    auto i = defaultColors.constBegin();
+    while (i != defaultColors.constEnd())
+    {
+        button->insertColor(QColor(i.key()), i.value());
+        ++i;
+    }
+
+    for (auto color : customColor)
+    {
+        button->insertCustomColor(color);
+    }
+
+    button->setCurrentColor(QColor());
 }

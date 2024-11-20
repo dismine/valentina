@@ -13,7 +13,6 @@ VLib {
 
     name: "VWidgetsLib"
     files: [
-        "qtcolorpicker.cpp",
         "vaspectratiopixmaplabel.cpp",
         "vaspectratiopixmaplabel.h",
         "vcomboboxdelegate.cpp",
@@ -46,7 +45,6 @@ VLib {
         "vlineedit.cpp",
         "vplaintextedit.cpp",
         "vhighlighter.cpp",
-        "qtcolorpicker.h",
         "vcomboboxdelegate.h",
         "vdecorationaligningdelegate.h",
         "velidedlabel.h",

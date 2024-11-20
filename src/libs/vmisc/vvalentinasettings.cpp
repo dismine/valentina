@@ -77,6 +77,7 @@ Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingPatternBackgroundImageDefOpacity
 // NOLINTNEXTLINE
 Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingPatternBoundaryTogetherWithNotches,
                           ("pattern/boundaryTogetherWithNotches"_L1))
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingPatternUserToolColors, ("pattern/userToolColors"_L1))
 
 Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingLayoutWidth, ("layout/width"_L1))             // NOLINT
 Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingLayoutSorting, ("layout/sorting"_L1))         // NOLINT
@@ -1092,6 +1093,34 @@ auto VValentinaSettings::IsBoundaryTogetherWithNotches() const -> bool
 void VValentinaSettings::SetBoundaryTogetherWithNotches(bool value)
 {
     setValue(*settingPatternBoundaryTogetherWithNotches, value);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+auto VValentinaSettings::GetUserToolColors() const -> QVector<QColor>
+{
+    QVector<QColor> colors;
+    const QStringList colorList = value(*settingPatternUserToolColors).toStringList(); // Retrieve from QSettings
+    colors.reserve(colorList.size());
+    for (const QString &colorName : colorList)
+    {
+        if (QColor const color(colorName); color.isValid()) // Convert back to QColor
+        {
+            colors.append(color);
+        }
+    }
+    return colors;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VValentinaSettings::SetUserToolColors(const QVector<QColor> &colors)
+{
+    QStringList colorList;
+    colorList.reserve(colors.size());
+    for (const QColor &color : colors)
+    {
+        colorList.append(color.name()); // Serialize QColor to string
+    }
+    setValue(*settingPatternUserToolColors, colorList);
 }
 
 //---------------------------------------------------------------------------------------------------------------------

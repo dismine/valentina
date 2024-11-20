@@ -99,7 +99,7 @@
             <string>Formula wizard</string>
            </property>
            <property name="text">
-            <string notr="true"></string>
+            <string notr="true"/>
            </property>
            <property name="icon">
             <iconset resource="../../../vmisc/share/resources/icon.qrc">
@@ -198,8 +198,7 @@
             <string notr="true"/>
            </property>
            <property name="icon">
-            <iconset theme="go-down">
-             <normaloff>.</normaloff>.</iconset>
+            <iconset theme="go-down"/>
            </property>
            <property name="iconSize">
             <size>
@@ -285,7 +284,7 @@
             <string>Formula wizard</string>
            </property>
            <property name="text">
-            <string notr="true"></string>
+            <string notr="true"/>
            </property>
            <property name="icon">
             <iconset resource="../../../vmisc/share/resources/icon.qrc">
@@ -384,8 +383,7 @@
             <string notr="true"/>
            </property>
            <property name="icon">
-            <iconset theme="go-down">
-             <normaloff>.</normaloff>.</iconset>
+            <iconset theme="go-down"/>
            </property>
            <property name="iconSize">
             <size>
@@ -471,7 +469,7 @@
             <string>Formula wizard</string>
            </property>
            <property name="text">
-            <string notr="true"></string>
+            <string notr="true"/>
            </property>
            <property name="icon">
             <iconset resource="../../../vmisc/share/resources/icon.qrc">
@@ -570,8 +568,7 @@
             <string notr="true"/>
            </property>
            <property name="icon">
-            <iconset theme="go-down">
-             <normaloff>.</normaloff>.</iconset>
+            <iconset theme="go-down"/>
            </property>
            <property name="iconSize">
             <size>
@@ -657,7 +654,7 @@
             <string>Formula wizard</string>
            </property>
            <property name="text">
-            <string notr="true"></string>
+            <string notr="true"/>
            </property>
            <property name="icon">
             <iconset resource="../../../vmisc/share/resources/icon.qrc">
@@ -756,8 +753,7 @@
             <string notr="true"/>
            </property>
            <property name="icon">
-            <iconset theme="go-down">
-             <normaloff>.</normaloff>.</iconset>
+            <iconset theme="go-down"/>
            </property>
            <property name="iconSize">
             <size>
@@ -843,7 +839,7 @@
             <string>Formula wizard</string>
            </property>
            <property name="text">
-            <string notr="true"></string>
+            <string notr="true"/>
            </property>
            <property name="icon">
             <iconset resource="../../../vmisc/share/resources/icon.qrc">
@@ -942,8 +938,7 @@
             <string notr="true"/>
            </property>
            <property name="icon">
-            <iconset theme="go-down">
-             <normaloff>.</normaloff>.</iconset>
+            <iconset theme="go-down"/>
            </property>
            <property name="iconSize">
             <size>
@@ -980,13 +975,6 @@
           <widget class="QComboBox" name="comboBoxBasePoint">
            <property name="toolTip">
             <string>Select center point of the arc</string>
-           </property>
-          </widget>
-         </item>
-         <item row="2" column="1">
-          <widget class="QComboBox" name="comboBoxColor">
-           <property name="toolTip">
-            <string/>
            </property>
           </widget>
          </item>
@@ -1059,6 +1047,13 @@
            </property>
           </widget>
          </item>
+         <item row="2" column="1">
+          <widget class="VPE::QtColorPicker" name="pushButtonColor">
+           <property name="text">
+            <string>Color</string>
+           </property>
+          </widget>
+         </item>
         </layout>
        </item>
        <item>
@@ -1101,6 +1096,11 @@
   </layout>
  </widget>
  <customwidgets>
+  <customwidget>
+   <class>VPE::QtColorPicker</class>
+   <extends>QPushButton</extends>
+   <header>../vpropertyexplorer/qtcolorpicker.h</header>
+  </customwidget>
   <customwidget>
    <class>VPlainTextEdit</class>
    <extends>QPlainTextEdit</extends>

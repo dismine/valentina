@@ -99,7 +99,7 @@
             <string>Formula wizard</string>
            </property>
            <property name="text">
-            <string notr="true"></string>
+            <string notr="true"/>
            </property>
            <property name="icon">
             <iconset resource="../../../vmisc/share/resources/icon.qrc">
@@ -195,8 +195,7 @@
             <string notr="true"/>
            </property>
            <property name="icon">
-            <iconset theme="go-down">
-             <normaloff>.</normaloff>.</iconset>
+            <iconset theme="go-down"/>
            </property>
            <property name="iconSize">
             <size>
@@ -317,9 +316,6 @@
            </property>
           </widget>
          </item>
-         <item row="4" column="1">
-          <widget class="QComboBox" name="comboBoxLineColor"/>
-         </item>
          <item row="5" column="0">
           <widget class="QLabel" name="labelAlias1">
            <property name="text">
@@ -345,6 +341,13 @@
           <widget class="QLineEdit" name="lineEditAlias2">
            <property name="clearButtonEnabled">
             <bool>true</bool>
+           </property>
+          </widget>
+         </item>
+         <item row="4" column="1">
+          <widget class="VPE::QtColorPicker" name="pushButtonLineColor">
+           <property name="text">
+            <string>Color</string>
            </property>
           </widget>
          </item>
@@ -390,6 +393,11 @@
   </layout>
  </widget>
  <customwidgets>
+  <customwidget>
+   <class>VPE::QtColorPicker</class>
+   <extends>QPushButton</extends>
+   <header>../vpropertyexplorer/qtcolorpicker.h</header>
+  </customwidget>
   <customwidget>
    <class>VPlainTextEdit</class>
    <extends>QPlainTextEdit</extends>

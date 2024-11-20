@@ -38,47 +38,43 @@
 #include <QSize>
 #include <QWidget>
 
+#include "../qtcolorpicker.h"
 #include "../vproperty_p.h"
+
+#if QT_VERSION < QT_VERSION_CHECK(6, 4, 0)
+#include "../vmisc/compatibility.h"
+#endif
+
+using namespace Qt::Literals::StringLiterals;
+
+namespace
+{
+QT_WARNING_PUSH
+QT_WARNING_DISABLE_CLANG("-Wunused-member-function")
+
+// The list of all string we use for conversion
+// Better to use global variables because repeating QStringLiteral blows up code size
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, defaultColorName, ("default"_L1))     // NOLINT
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, StrCustomColors, ("customColors"_L1)) // NOLINT
+
+QT_WARNING_POP
+} // namespace
 
 VPE::VLineColorProperty::VLineColorProperty(const QString &name)
   : VProperty(name,
 #if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
-              QMetaType::Int),
+              QMetaType::QString)
 #else
-              QVariant::Int),
+              QVariant::QString)
 #endif
-    colors(),
-    indexList()
 {
-    VProperty::vproperty_d_ptr->VariantValue = 0;
-#if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
-    VProperty::vproperty_d_ptr->VariantValue.convert(QMetaType(QMetaType::Int));
-#else
-    VProperty::vproperty_d_ptr->VariantValue.convert(QVariant::Int);
-#endif
 }
 
 auto VPE::VLineColorProperty::data(int column, int role) const -> QVariant
 {
-    if (colors.empty())
+    if (column == DPC_Data && (Qt::DisplayRole == role || Qt::EditRole == role))
     {
-        return {};
-    }
-
-    int tmpIndex = VProperty::vproperty_d_ptr->VariantValue.toInt();
-
-    if (tmpIndex < 0 || tmpIndex >= indexList.count())
-    {
-        tmpIndex = 0;
-    }
-
-    if (column == DPC_Data && Qt::DisplayRole == role)
-    {
-        return indexList.at(tmpIndex);
-    }
-    if (column == DPC_Data && Qt::EditRole == role)
-    {
-        return tmpIndex;
+        return vproperty_d_ptr->VariantValue.toString();
     }
 
     return VProperty::data(column, role);
@@ -89,88 +85,85 @@ auto VPE::VLineColorProperty::createEditor(QWidget *parent, const QStyleOptionVi
 {
     Q_UNUSED(options)
     Q_UNUSED(delegate)
-    auto *tmpEditor = new QComboBox(parent);
-    tmpEditor->setPalette(parent->palette());
+    auto *tmpPicker = new VPE::QtColorPicker(parent);
+    tmpPicker->setPalette(parent->palette());
+    tmpPicker->setUseNativeDialog(useNativeDialog);
 
-    int size = tmpEditor->iconSize().height(); // NOLINT(misc-const-correctness)
-    // On Mac pixmap should be little bit smaller.
-#if defined(Q_OS_MAC)
-    size -= 2; // Two pixels should be enough.
-#endif         // defined(Q_OS_MAC)
+    bool foundDefaultColor = false;
 
-    QMap<QString, QString>::const_iterator i = colors.constBegin();
-    while (i != colors.constEnd())
+    if (defaultColors.contains(*defaultColorName))
     {
-        QPixmap pix(size, size);
-        pix.fill(QColor(i.key()));
+        tmpPicker->insertColor(QColor(), defaultColors.value(*defaultColorName));
+        defaultColors.remove(*defaultColorName);
+        foundDefaultColor = true;
+    }
 
-        // Draw a white border around the icon
-        QPainter painter(&pix);
-        painter.setPen(tmpEditor->palette().color(QPalette::Text));
-        painter.drawRect(0, 0, size - 1, size - 1);
-
-        tmpEditor->addItem(QIcon(pix), i.value(), QVariant(i.key()));
+    auto i = defaultColors.constBegin();
+    while (i != defaultColors.constEnd())
+    {
+        tmpPicker->insertColor(QColor(i.key()), i.value());
         ++i;
     }
 
-    tmpEditor->setLocale(parent->locale());
-    tmpEditor->setCurrentIndex(VProperty::vproperty_d_ptr->VariantValue.toInt());
-    connect(tmpEditor, QOverload<int>::of(&QComboBox::currentIndexChanged), this,
-            &VLineColorProperty::currentIndexChanged);
+    for (auto color : customColors)
+    {
+        tmpPicker->insertCustomColor(color);
+    }
 
-    VProperty::vproperty_d_ptr->editor = tmpEditor;
+    tmpPicker->setCurrentColor(foundDefaultColor ? QColor() : QColor(Qt::black));
+    tmpPicker->setLocale(parent->locale());
+    tmpPicker->setCurrentColor(vproperty_d_ptr->VariantValue.value<QColor>());
+    connect(tmpPicker, &VPE::QtColorPicker::colorChanged, this, &VLineColorProperty::currentColorChanged);
+
+    VProperty::vproperty_d_ptr->editor = tmpPicker;
     return VProperty::vproperty_d_ptr->editor;
+}
+
+auto VPE::VLineColorProperty::setEditorData(QWidget *editor) -> bool
+{
+    if (auto *tmpWidget = qobject_cast<VPE::QtColorPicker *>(editor); tmpWidget != nullptr)
+    {
+        QString const colorName = vproperty_d_ptr->VariantValue.toString();
+        QColor const color = colorName != *defaultColorName ? QColor(colorName) : QColor();
+
+        tmpWidget->setCurrentColor(color);
+    }
+    else
+    {
+        return false;
+    }
+
+    return true;
 }
 
 auto VPE::VLineColorProperty::getEditorData(const QWidget *editor) const -> QVariant
 {
-    const auto *tmpEditor = qobject_cast<const QComboBox *>(editor);
-    if (tmpEditor)
+    if (const auto *tmpPicker = qobject_cast<const VPE::QtColorPicker *>(editor); tmpPicker != nullptr)
     {
-        return tmpEditor->currentIndex();
+        QColor const color = tmpPicker->currentColor();
+        return color.isValid() ? color : *defaultColorName;
     }
 
-    return {0};
+    return *defaultColorName;
 }
 
-void VPE::VLineColorProperty::setColors(const QMap<QString, QString> &colors)
+auto VPE::VLineColorProperty::getSetting(const QString &key) const -> QVariant
 {
-    this->colors = colors;
-    indexList.clear();
-    QMap<QString, QString>::const_iterator i = colors.constBegin();
-    while (i != colors.constEnd())
+    if (key == *StrCustomColors)
     {
-        indexList.append(i.key());
-        ++i;
+        if (const auto *tmpPicker = qobject_cast<const VPE::QtColorPicker *>(VProperty::vproperty_d_ptr->editor);
+            tmpPicker != nullptr)
+        {
+            return QVariant::fromValue(tmpPicker->CustomColors());
+        }
     }
+
+    return VProperty::getSetting(key);
 }
 
-// cppcheck-suppress unusedFunction
-auto VPE::VLineColorProperty::getColors() const -> QMap<QString, QString>
+auto VPE::VLineColorProperty::getSettingKeys() const -> QStringList
 {
-    return colors;
-}
-
-void VPE::VLineColorProperty::setValue(const QVariant &value)
-{
-    int tmpIndex = value.toInt();
-
-    if (tmpIndex < 0 || tmpIndex >= indexList.count())
-    {
-        tmpIndex = 0;
-    }
-
-    VProperty::vproperty_d_ptr->VariantValue = tmpIndex;
-#if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
-    VProperty::vproperty_d_ptr->VariantValue.convert(QMetaType(QMetaType::Int));
-#else
-    VProperty::vproperty_d_ptr->VariantValue.convert(QVariant::Int);
-#endif
-
-    if (VProperty::vproperty_d_ptr->editor != nullptr)
-    {
-        setEditorData(VProperty::vproperty_d_ptr->editor);
-    }
+    return {*StrCustomColors};
 }
 
 auto VPE::VLineColorProperty::type() const -> QString
@@ -183,21 +176,24 @@ auto VPE::VLineColorProperty::clone(bool include_children, VProperty *container)
     return VProperty::clone(include_children, container ? container : new VLineColorProperty(getName()));
 }
 
-auto VPE::VLineColorProperty::IndexOfColor(const QMap<QString, QString> &colors, const QString &color) -> vpesizetype
+void VPE::VLineColorProperty::currentColorChanged(const QColor &color)
 {
-    QVector<QString> indexList;
-    QMap<QString, QString>::const_iterator i = colors.constBegin();
-    while (i != colors.constEnd())
-    {
-        indexList.append(i.key());
-        ++i;
-    }
-    return indexList.indexOf(color);
-}
-
-void VPE::VLineColorProperty::currentIndexChanged(int index)
-{
-    Q_UNUSED(index)
+    Q_UNUSED(color)
     auto *event = new UserChangeEvent();
     QCoreApplication::postEvent(VProperty::vproperty_d_ptr->editor, event);
+}
+
+void VPE::VLineColorProperty::SetUseNativeDialog(bool newUseNativeDialog)
+{
+    useNativeDialog = newUseNativeDialog;
+}
+
+void VPE::VLineColorProperty::SetCustomColors(const QVector<QColor> &newCustomColors)
+{
+    customColors = newCustomColors;
+}
+
+void VPE::VLineColorProperty::SetDefaultColors(const QMap<QString, QString> &newDefaultColors)
+{
+    defaultColors = newDefaultColors;
 }

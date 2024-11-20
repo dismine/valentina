@@ -27,7 +27,6 @@
 #include <QStyleOptionViewItem>
 #include <QVariant>
 #include <QtGlobal>
-#include <stddef.h>
 
 #include "../vproperty.h"
 #include "../vpropertyexplorer_global.h"

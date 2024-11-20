@@ -128,6 +128,8 @@ WatermarkWindow::WatermarkWindow(const QString &patternPath, QWidget *parent)
     connect(ui->groupBoxWatermarkText, &QGroupBox::toggled, this, [this]() { WatermarkChangesWereSaved(false); });
     connect(ui->groupBoxWatermarkImage, &QGroupBox::toggled, this, [this]() { WatermarkChangesWereSaved(false); });
 
+    ui->pushButtonColorPicker->setUseNativeDialog(!VAbstractApplication::VApp()->Settings()->IsDontUseNativeDialog());
+
     ui->pushButtonColorPicker->insertColor(Qt::black, tr("Black", "color"));
     ui->pushButtonColorPicker->insertColor(Qt::red, tr("Red", "color"));
     ui->pushButtonColorPicker->insertColor(Qt::darkRed, tr("Dark red", "color"));
@@ -151,7 +153,9 @@ WatermarkWindow::WatermarkWindow(const QString &patternPath, QWidget *parent)
         ui->pushButtonColorPicker->insertColor(color);
     }
 
-    connect(ui->pushButtonColorPicker, &QtColorPicker::colorChanged, this,
+    connect(ui->pushButtonColorPicker,
+            &VPE::QtColorPicker::colorChanged,
+            this,
             [this]() { WatermarkChangesWereSaved(false); });
 }
 
