@@ -714,7 +714,7 @@ void VLayoutExporter::RestoreGrainlineAfterExport(const QList<QGraphicsItem *> &
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-using LayoutExportFileFormatEnum = enum LayoutExportFileFormat; // Stupid Clang format!
+using LayoutExportFileFormatEnum = LayoutExportFileFormat; // Stupid Clang format!
 auto VLayoutExporter::LayoutExportFileFormat(LayoutExportFormats format) -> LayoutExportFileFormatEnum
 {
     Q_STATIC_ASSERT_X(static_cast<int>(LayoutExportFormats::COUNT) == 41, "Update to cover all cases.");
