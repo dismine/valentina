@@ -767,6 +767,7 @@ auto VLayoutExporter::LayoutExportFileFormat(LayoutExportFormats format) -> Layo
             return LayoutExportFileFormat::PLT;
 
         case LayoutExportFormats::COUNT:
+        default:
             Q_UNREACHABLE();
             break;
     }
@@ -821,6 +822,7 @@ auto VLayoutExporter::MapLayoutExportFormats(enum LayoutExportFileFormat format)
         case LayoutExportFileFormat::PLT:
             return {LayoutExportFormats::HPGL2_PLT, LayoutExportFormats::HPGL_PLT};
         case LayoutExportFileFormat::COUNT:
+        default:
             Q_UNREACHABLE();
             break;
     }
