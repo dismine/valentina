@@ -714,9 +714,9 @@ void DialogSaveManualLayout::InitFileFormatTypes(LayoutExportFileFormat format)
                                         QVariant(static_cast<int>(type)));
     }
 
-    auto RemoveFormatFromList = [this](LayoutExportFormats format)
+    auto RemoveFormatFromList = [this](LayoutExportFormats exportFormat)
     {
-        const int index = ui->comboBoxFormatType->findData(static_cast<int>(format));
+        const int index = ui->comboBoxFormatType->findData(static_cast<int>(exportFormat));
         if (index != -1)
         {
             ui->comboBoxFormatType->removeItem(index);

@@ -96,9 +96,8 @@ void VWidgetDetails::SelectDetail(quint32 id)
     const int rowCount = ui->tableWidget->rowCount();
     for (int row = 0; row < rowCount; ++row)
     {
-        QTableWidgetItem *item = ui->tableWidget->item(row, PieceColumn::InLayout);
-
-        if (item->data(Qt::UserRole).toUInt() == id)
+        if (QTableWidgetItem *item = ui->tableWidget->item(row, PieceColumn::InLayout);
+            item->data(Qt::UserRole).toUInt() == id)
         {
             ui->tableWidget->setCurrentItem(item);
             return;
@@ -112,9 +111,8 @@ void VWidgetDetails::ToggledPiece(quint32 id)
     const int rowCount = ui->tableWidget->rowCount();
     for (int row = 0; row < rowCount; ++row)
     {
-        QTableWidgetItem *item = ui->tableWidget->item(row, PieceColumn::InLayout);
-
-        if (item && item->data(Qt::UserRole).toUInt() == id)
+        if (QTableWidgetItem *item = ui->tableWidget->item(row, PieceColumn::InLayout);
+            item && item->data(Qt::UserRole).toUInt() == id)
         {
             ToggledPieceItem(item);
             return;
@@ -137,7 +135,7 @@ void VWidgetDetails::changeEvent(QEvent *event)
 //---------------------------------------------------------------------------------------------------------------------
 void VWidgetDetails::InLayoutStateChanged(int row, int column)
 {
-    QTableWidgetItem *item = ui->tableWidget->item(row, PieceColumn::InLayout);
+    const QTableWidgetItem *item = ui->tableWidget->item(row, PieceColumn::InLayout);
     const quint32 id = item->data(Qt::UserRole).toUInt();
     emit Highlight(id);
 
@@ -157,7 +155,7 @@ void VWidgetDetails::InLayoutStateChanged(int row, int column)
 //---------------------------------------------------------------------------------------------------------------------
 void VWidgetDetails::RenameDetail(int row, int column)
 {
-    QTableWidgetItem *item = ui->tableWidget->item(row, PieceColumn::InLayout);
+    const QTableWidgetItem *item = ui->tableWidget->item(row, PieceColumn::InLayout);
     const quint32 id = item->data(Qt::UserRole).toUInt();
     emit Highlight(id);
 

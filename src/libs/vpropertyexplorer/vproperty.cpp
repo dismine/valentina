@@ -137,9 +137,7 @@ auto VPE::VProperty::setEditorData(QWidget *editor) -> bool
         return false;
     }
 
-    QByteArray const n = editor->metaObject()->userProperty().name();
-
-    if (!n.isEmpty())
+    if (QByteArray const n = editor->metaObject()->userProperty().name(); !n.isEmpty())
     {
         editor->blockSignals(true);
         editor->setProperty(n, vproperty_d_ptr->VariantValue);
@@ -158,9 +156,7 @@ auto VPE::VProperty::getEditorData(const QWidget *editor) const -> QVariant
         return {};
     }
 
-    QByteArray const n = editor->metaObject()->userProperty().name();
-
-    if (!n.isEmpty())
+    if (QByteArray const n = editor->metaObject()->userProperty().name(); !n.isEmpty())
     {
         return editor->property(n);
     }

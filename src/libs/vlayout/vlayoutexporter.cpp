@@ -840,8 +840,7 @@ auto VLayoutExporter::AllLayoutExportFormats() -> QVector<LayoutExportFormats>
     list.append(LayoutExportFormats::PNG);
     list.append(LayoutExportFormats::OBJ);
 
-    static bool const pdfConversionSupported = VLayoutExporter::SupportPDFConversion();
-    if (pdfConversionSupported)
+    if (static bool const pdfConversionSupported = VLayoutExporter::SupportPDFConversion(); pdfConversionSupported)
     {
         list.append(LayoutExportFormats::PS);
         list.append(LayoutExportFormats::EPS);
