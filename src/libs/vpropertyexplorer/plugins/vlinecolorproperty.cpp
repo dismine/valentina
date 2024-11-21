@@ -65,7 +65,7 @@ VPE::VLineColorProperty::VLineColorProperty(const QString &name)
 #if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
               QMetaType::QString)
 #else
-              QVariant::QString)
+              QVariant::String)
 #endif
 {
 }
