@@ -493,7 +493,7 @@ void InsertPlaceholderValue(const VContainer &completeData, const QString &formu
     }
     catch (qmu::QmuParserError &e)
     {
-        const QString error = QObject::tr("%1 %2.").arg(errorMsg).arg(e.GetMsg());
+        const QString error = QStringLiteral("%1 %2.").arg(errorMsg).arg(e.GetMsg());
         VAbstractApplication::VApp()->IsPedantic()
             ? throw VException(error)
             : qWarning() << VAbstractValApplication::warningMessageSignature + error;
