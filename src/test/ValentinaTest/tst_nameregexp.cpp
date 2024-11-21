@@ -92,24 +92,24 @@ void TST_NameRegExp::TestNameRegExp_data()
         tag = localeName + ". First character can't be "_L1 + sign9;
         QTest::newRow(qUtf8Printable(tag)) << sign9 + 'a'_L1 << false;
 
-        tag = localeName + ". First character can't be \""_L1 + negativeSign + '\"'_L1;
+        tag = localeName + R"(. First character can't be ")" + negativeSign + '\"'_L1;
         QTest::newRow(qUtf8Printable(tag)) << negativeSign + 'a'_L1 << false;
 
-        tag = localeName + ". First character can't be \""_L1 + decimalPoint + '\"'_L1;
+        tag = localeName + R"(. First character can't be ")" + decimalPoint + '\"'_L1;
         QTest::newRow(qUtf8Printable(tag)) << decimalPoint + 'a'_L1 << false;
 
-        tag = localeName + ". First character can't be \""_L1 + groupSeparator + '\"'_L1;
+        tag = localeName + R"(. First character can't be ")" + groupSeparator + '\"'_L1;
         QTest::newRow(qUtf8Printable(tag)) << groupSeparator + 'a'_L1 << false;
 
-        tag = localeName + ". Any next character can't be \""_L1 + negativeSign + '\"'_L1;
+        tag = localeName + R"(. Any next character can't be ")" + negativeSign + '\"'_L1;
         QTest::newRow(qUtf8Printable(tag)) << 'a'_L1 + negativeSign << false;
 
-        tag = localeName + ". Any next character can't be \""_L1 + decimalPoint + '\"'_L1;
+        tag = localeName + R"(. Any next character can't be ")" + decimalPoint + '\"'_L1;
         QTest::newRow(qUtf8Printable(tag)) << 'a'_L1 + decimalPoint << false;
 
         if (groupSeparator != '\'')
         {
-            tag = localeName + ". Any next character can't be \""_L1 + groupSeparator + '\"'_L1;
+            tag = localeName + R"(. Any next character can't be ")" + groupSeparator + '\"'_L1;
             QTest::newRow(qUtf8Printable(tag)) << 'a'_L1 + groupSeparator << false;
         }
     }
@@ -126,14 +126,13 @@ void TST_NameRegExp::TestNameRegExp_data()
     QTest::newRow("First character can't be \":\"") << ":a" << false;
     QTest::newRow("First character can't be \";\"") << ";a" << false;
     QTest::newRow("First character can't be \"'\"") << "'a" << false;
-    QTest::newRow("First character can't be \"\"\"") << "\"a" << false;
+    QTest::newRow(R"(First character can't be """)") << "\"a" << false;
     QTest::newRow("First character can't be \"&\"") << "&a" << false;
     QTest::newRow("First character can't be \"|\"") << "|a" << false;
     QTest::newRow("First character can't be \"!\"") << "!a" << false;
     QTest::newRow("First character can't be \"<\"") << "<a" << false;
     QTest::newRow("First character can't be \">\"") << ">a" << false;
-
-    QTest::newRow("First character can be \"\\\"") << "\\a" << true;
+    QTest::newRow(R"(First character can't be "\")") << "\\a" << false;
 
     QTest::newRow("Any next character can't be \"+\"") << "a+" << false;
     QTest::newRow("Any next character can't be \"*\"") << "a*" << false;
@@ -146,14 +145,13 @@ void TST_NameRegExp::TestNameRegExp_data()
     QTest::newRow("Any next character can't be \"?\"") << "a?" << false;
     QTest::newRow("Any next character can't be \":\"") << "a:" << false;
     QTest::newRow("Any next character can't be \";\"") << "a;" << false;
-    QTest::newRow("Any next character can't be \"\"\"") << "a\"" << false;
+    QTest::newRow(R"(Any next character can't be """)") << "a\"" << false;
     QTest::newRow("Any next character can't be \"&\"") << "a&" << false;
     QTest::newRow("Any next character can't be \"|\"") << "a|" << false;
     QTest::newRow("Any next character can't be \"!\"") << "a!" << false;
     QTest::newRow("Any next character can't be \"<\"") << "a<" << false;
     QTest::newRow("Any next character can't be \">\"") << "a>" << false;
-
-    QTest::newRow("Any next character can be \"\\\"") << "a\\" << true;
+    QTest::newRow(R"(Any next character can't be "\")") << "a\\" << false;
 
     QTest::newRow("Good name \"p12\"") << "p12" << true;
     QTest::newRow("Good name \"height\"") << "height" << true;
@@ -166,8 +164,8 @@ void TST_NameRegExp::TestNameRegExp()
 {
     const QRegularExpression re(NameRegExp());
 
-    QFETCH(QString, name);
-    QFETCH(bool, result);
+    QFETCH(QString, name); // NOLINT
+    QFETCH(bool, result);  // NOLINT
 
     QCOMPARE(re.match(name).hasMatch(), result);
 }
