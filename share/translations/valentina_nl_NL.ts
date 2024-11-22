@@ -90,14 +90,10 @@
 <context>
     <name>ColorPickerPopup</name>
     <message>
-        <source>Custom</source>
-        <translation type="vanished">Op maat</translation>
-    </message>
-    <message>
         <location filename="../../src/libs/vpropertyexplorer/qtcolorpicker.cpp" line="1237"/>
         <source>Custom</source>
         <comment>color</comment>
-        <translation type="unfinished">Op maat</translation>
+        <translation>Op maat</translation>
     </message>
 </context>
 <context>
@@ -678,9 +674,8 @@
         <translation>Gereedschap</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogalongline.ui" line="332"/>
         <source>Color</source>
-        <translation type="unfinished">Kleur</translation>
+        <translation type="vanished">Kleur</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogalongline.ui" line="355"/>
@@ -747,9 +742,8 @@
         <translation type="vanished">Gelijke hoeken</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogarc.ui" line="672"/>
         <source>Color</source>
-        <translation>Kleur</translation>
+        <translation type="vanished">Kleur</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogarc.cpp" line="473"/>
@@ -899,9 +893,8 @@
         <translation type="vanished">Selecteer middelpunt van boog</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogarcwithlength.ui" line="665"/>
         <source>Color</source>
-        <translation>Kleur</translation>
+        <translation type="vanished">Kleur</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogarcwithlength.cpp" line="402"/>
@@ -1191,9 +1184,8 @@
         <translation>Gereedschap</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogbisector.ui" line="328"/>
         <source>Color</source>
-        <translation type="unfinished">Kleur</translation>
+        <translation type="vanished">Kleur</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogbisector.ui" line="351"/>
@@ -1288,9 +1280,8 @@
         <translation>Alias:</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogcubicbezier.ui" line="164"/>
         <source>Color</source>
-        <translation type="unfinished">Kleur</translation>
+        <translation type="vanished">Kleur</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogcubicbezier.ui" line="172"/>
@@ -1390,9 +1381,8 @@
         <translation>Alias:</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogcubicbezierpath.ui" line="310"/>
         <source>Color</source>
-        <translation type="unfinished">Kleur</translation>
+        <translation type="vanished">Kleur</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogcubicbezierpath.ui" line="333"/>
@@ -1519,9 +1509,8 @@
         <translation>Gereedschap</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogcurveintersectaxis.ui" line="350"/>
         <source>Color</source>
-        <translation type="unfinished">Kleur</translation>
+        <translation type="vanished">Kleur</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogcurveintersectaxis.ui" line="373"/>
@@ -2995,9 +2984,8 @@
         <translation>Alias:</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogellipticalarc.ui" line="1053"/>
         <source>Color</source>
-        <translation type="unfinished">Kleur</translation>
+        <translation type="vanished">Kleur</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogellipticalarc.ui" line="1076"/>
@@ -3142,9 +3130,8 @@
         <translation>Gereedschap</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogendline.ui" line="526"/>
         <source>Color</source>
-        <translation type="unfinished">Kleur</translation>
+        <translation type="vanished">Kleur</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogendline.ui" line="549"/>
@@ -3505,9 +3492,8 @@
         <translation>Kleur:</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogflippingbyaxis.ui" line="101"/>
         <source>Color</source>
-        <translation type="unfinished">Kleur</translation>
+        <translation type="vanished">Kleur</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogflippingbyaxis.ui" line="205"/>
@@ -3661,9 +3647,8 @@
         <translation>Kleur:</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogflippingbyline.ui" line="101"/>
         <source>Color</source>
-        <translation type="unfinished">Kleur</translation>
+        <translation type="vanished">Kleur</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogflippingbyline.ui" line="205"/>
@@ -3865,9 +3850,8 @@
         <translation>Gereedschap</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogheight.ui" line="147"/>
         <source>Color</source>
-        <translation type="unfinished">Kleur</translation>
+        <translation type="vanished">Kleur</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogheight.ui" line="155"/>
@@ -5233,9 +5217,8 @@ Toch de instellingen aanpassen?</translation>
         <translation>Gereedschap</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogline.ui" line="152"/>
         <source>Color</source>
-        <translation type="unfinished">Kleur</translation>
+        <translation type="vanished">Kleur</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogline.ui" line="160"/>
@@ -5470,9 +5453,8 @@ Toch de instellingen aanpassen?</translation>
         <translation>Gereedschap</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialoglineintersectaxis.ui" line="349"/>
         <source>Color</source>
-        <translation type="unfinished">Kleur</translation>
+        <translation type="vanished">Kleur</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialoglineintersectaxis.ui" line="372"/>
@@ -5873,9 +5855,8 @@ Toch de instellingen aanpassen?</translation>
         <translation>Kleur:</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogmove.ui" line="108"/>
         <source>Color</source>
-        <translation type="unfinished">Kleur</translation>
+        <translation type="vanished">Kleur</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogmove.ui" line="744"/>
@@ -6191,9 +6172,8 @@ Toch de instellingen aanpassen?</translation>
         <translation>Gereedschap</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialognormal.ui" line="522"/>
         <source>Color</source>
-        <translation type="unfinished">Kleur</translation>
+        <translation type="vanished">Kleur</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialognormal.ui" line="545"/>
@@ -8221,11 +8201,6 @@ Toch de instellingen aanpassen?</translation>
         <translation>Kleur:</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogrotation.ui" line="101"/>
-        <source>PushButton</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogrotation.ui" line="370"/>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogrotation.cpp" line="823"/>
         <source>Ready</source>
@@ -8643,14 +8618,6 @@ Toch de instellingen aanpassen?</translation>
         <location filename="../../src/app/puzzle/dialogs/dialogsavemanuallayout.cpp" line="141"/>
         <source>Select folder</source>
         <translation>Selecteer map</translation>
-    </message>
-    <message>
-        <source>Tried to use out of range format number.</source>
-        <translation type="vanished">Geprobeerd het buiten bereik indelings nummer te gebruiken.</translation>
-    </message>
-    <message>
-        <source>Selected not present format.</source>
-        <translation type="vanished">Geen huidige indeling geselecteerd.</translation>
     </message>
     <message>
         <location filename="../../src/app/puzzle/dialogs/dialogsavemanuallayout.cpp" line="186"/>
@@ -9654,9 +9621,8 @@ Toch de instellingen aanpassen?</translation>
         <translation>Gereedschap</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogshoulderpoint.ui" line="379"/>
         <source>Color</source>
-        <translation type="unfinished">Kleur</translation>
+        <translation type="vanished">Kleur</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogshoulderpoint.ui" line="402"/>
@@ -9758,9 +9724,8 @@ Toch de instellingen aanpassen?</translation>
         <translation>Simpele kromming</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogspline.ui" line="931"/>
         <source>Color</source>
-        <translation>Kleur</translation>
+        <translation type="vanished">Kleur</translation>
     </message>
     <message>
         <source>Coefficient of curvature of the curve:</source>
@@ -9950,9 +9915,8 @@ Toch de instellingen aanpassen?</translation>
         <translation>Selecteer punt van krommingspad</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogsplinepath.ui" line="1053"/>
         <source>Color</source>
-        <translation>Kleur</translation>
+        <translation type="vanished">Kleur</translation>
     </message>
     <message>
         <source>Coefficient of curvature of the curve:</source>
@@ -15066,11 +15030,6 @@ Deze optie wordt actief na een herstart..</translation>
         <translation>Kan geen teken van de formule &apos;%1&apos; verkrijgen. Formule fout: %2.</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vlayout/vtextmanager.cpp" line="496"/>
-        <source>%1 %2.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <location filename="../../src/libs/vlayout/vtextmanager.cpp" line="548"/>
         <location filename="../../src/libs/vtools/dialogs/support/dialogeditlabel.cpp" line="693"/>
         <source>Failed to prepare final measurement placeholder. Parser error at line %1: %2.</source>
@@ -15582,13 +15541,6 @@ Deze optie wordt actief na een herstart..</translation>
     </message>
 </context>
 <context>
-    <name>QtColorPicker</name>
-    <message>
-        <source>Custom</source>
-        <translation type="vanished">Op maat</translation>
-    </message>
-</context>
-<context>
     <name>RemoveItemFromGroup</name>
     <message>
         <location filename="../../src/libs/vtools/undocommands/undogroup.cpp" line="273"/>
@@ -15625,7 +15577,7 @@ Deze optie wordt actief na een herstart..</translation>
     <message>
         <location filename="../../src/libs/vtools/undocommands/renamepiece.cpp" line="46"/>
         <source>Detail</source>
-        <translation type="unfinished">Detail</translation>
+        <translation>Detail</translation>
     </message>
 </context>
 <context>
@@ -21961,7 +21913,7 @@ Wil je deze veranderingen opslaan?</translation>
         <location filename="../../src/libs/vpropertyexplorer/qtcolorpicker.cpp" line="579"/>
         <source>Custom</source>
         <comment>color</comment>
-        <translation type="unfinished">Op maat</translation>
+        <translation>Op maat</translation>
     </message>
 </context>
 <context>
@@ -23070,10 +23022,6 @@ Wil je deze veranderingen opslaan?</translation>
         <location filename="../../src/libs/vpatterndb/vpassmark.cpp" line="783"/>
         <source>Cannot calculate a notch for point &apos;%1&apos; in piece &apos;%2&apos;. Cannot find intersection.</source>
         <translation>Kan geen inkeping berekenen voor punt &apos;%1&apos; in patroondeel &apos;%2&apos;. Vind geen positie kruispunt.</translation>
-    </message>
-    <message>
-        <source>Cannot calculate a notch for point &apos;%1&apos; in piece &apos;%2&apos; with built in seam allowance. User must manually provide length.</source>
-        <translation type="vanished">Kan geen inkeping berekenen voor punt &apos;%1&apos; in werkstuk &apos;%2&apos; met de ingebouwde naadtoeslag. Gebruiker moet manueel de lengte ingeven.</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vpassmark.cpp" line="956"/>
@@ -27126,37 +27074,37 @@ Raw layout format compatibility error: actualFileVersion = %1 and fileVersion = 
         <translation>Vorm</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/dialogs/vwidgetdetails.cpp" line="296"/>
+        <location filename="../../src/app/valentina/dialogs/vwidgetdetails.cpp" line="294"/>
         <source>Unnamed</source>
         <translation>Onbenoemd</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/dialogs/vwidgetdetails.cpp" line="309"/>
+        <location filename="../../src/app/valentina/dialogs/vwidgetdetails.cpp" line="307"/>
         <source>Select all</source>
         <translation>Selecteer alles</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/dialogs/vwidgetdetails.cpp" line="310"/>
+        <location filename="../../src/app/valentina/dialogs/vwidgetdetails.cpp" line="308"/>
         <source>Select none</source>
         <translation>Selecteer niets</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/dialogs/vwidgetdetails.cpp" line="380"/>
+        <location filename="../../src/app/valentina/dialogs/vwidgetdetails.cpp" line="378"/>
         <source>select all details</source>
         <translation>Selecteer alle details</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/dialogs/vwidgetdetails.cpp" line="387"/>
+        <location filename="../../src/app/valentina/dialogs/vwidgetdetails.cpp" line="385"/>
         <source>select none details</source>
         <translation>Selecteer geen details</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/dialogs/vwidgetdetails.cpp" line="314"/>
+        <location filename="../../src/app/valentina/dialogs/vwidgetdetails.cpp" line="312"/>
         <source>Invert selection</source>
         <translation>Draai selectie om</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/dialogs/vwidgetdetails.cpp" line="393"/>
+        <location filename="../../src/app/valentina/dialogs/vwidgetdetails.cpp" line="391"/>
         <source>invert selection</source>
         <translation>draai selectie om</translation>
     </message>
@@ -27166,17 +27114,17 @@ Raw layout format compatibility error: actualFileVersion = %1 and fileVersion = 
         <translation>Verberg niet in opmaak</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/dialogs/vwidgetdetails.cpp" line="334"/>
+        <location filename="../../src/app/valentina/dialogs/vwidgetdetails.cpp" line="332"/>
         <source>Piece options</source>
         <translation>Werkstuk opties</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/dialogs/vwidgetdetails.cpp" line="336"/>
+        <location filename="../../src/app/valentina/dialogs/vwidgetdetails.cpp" line="334"/>
         <source>Delete piece</source>
         <translation>Verwijder werkstuk</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/dialogs/vwidgetdetails.cpp" line="342"/>
+        <location filename="../../src/app/valentina/dialogs/vwidgetdetails.cpp" line="340"/>
         <source>Cannot find piece by id &apos;%1&apos;</source>
         <translation>Kan werkstuk met id &apos;%1&apos; niet vinden</translation>
     </message>
@@ -27760,9 +27708,8 @@ Raw layout format compatibility error: actualFileVersion = %1 and fileVersion = 
         <translation>Onbekende fout gebeurd, bijvoorbeeld een volledige partitie voorkomt het schrijven uit het vergrendelingsbestand. Negeren als u wilt doorgaan (niet aanbevolen, kan leiden tot gegevensbeschadiging).</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vlayout/dialogs/watermarkwindow.ui" line="193"/>
         <source>Color</source>
-        <translation>Kleur</translation>
+        <translation type="vanished">Kleur</translation>
     </message>
     <message>
         <location filename="../../src/libs/vlayout/dialogs/watermarkwindow.ui" line="200"/>

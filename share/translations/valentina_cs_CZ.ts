@@ -90,14 +90,10 @@
 <context>
     <name>ColorPickerPopup</name>
     <message>
-        <source>Custom</source>
-        <translation type="vanished">Vlastní</translation>
-    </message>
-    <message>
         <location filename="../../src/libs/vpropertyexplorer/qtcolorpicker.cpp" line="1237"/>
         <source>Custom</source>
         <comment>color</comment>
-        <translation type="unfinished">Vlastní</translation>
+        <translation>Vlastní</translation>
     </message>
 </context>
 <context>
@@ -678,9 +674,8 @@
         <translation>Nástroj</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogalongline.ui" line="332"/>
         <source>Color</source>
-        <translation type="unfinished">Barva</translation>
+        <translation type="vanished">Barva</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogalongline.ui" line="355"/>
@@ -747,9 +742,8 @@
         <translation type="vanished">Úhly jsou si rovny</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogarc.ui" line="672"/>
         <source>Color</source>
-        <translation>Barva</translation>
+        <translation type="vanished">Barva</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogarc.cpp" line="473"/>
@@ -899,9 +893,8 @@
         <translation type="vanished">Vybrat bod středu oblouku</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogarcwithlength.ui" line="665"/>
         <source>Color</source>
-        <translation>Barva</translation>
+        <translation type="vanished">Barva</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogarcwithlength.cpp" line="402"/>
@@ -1191,9 +1184,8 @@
         <translation>Nástroj</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogbisector.ui" line="328"/>
         <source>Color</source>
-        <translation type="unfinished">Barva</translation>
+        <translation type="vanished">Barva</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogbisector.ui" line="351"/>
@@ -1288,9 +1280,8 @@
         <translation>Přezdívka:</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogcubicbezier.ui" line="164"/>
         <source>Color</source>
-        <translation type="unfinished">Barva</translation>
+        <translation type="vanished">Barva</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogcubicbezier.ui" line="172"/>
@@ -1390,9 +1381,8 @@
         <translation>Přezdívka:</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogcubicbezierpath.ui" line="310"/>
         <source>Color</source>
-        <translation type="unfinished">Barva</translation>
+        <translation type="vanished">Barva</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogcubicbezierpath.ui" line="333"/>
@@ -1519,9 +1509,8 @@
         <translation>Nástroj</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogcurveintersectaxis.ui" line="350"/>
         <source>Color</source>
-        <translation type="unfinished">Barva</translation>
+        <translation type="vanished">Barva</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogcurveintersectaxis.ui" line="373"/>
@@ -2995,9 +2984,8 @@
         <translation>Přezdívka:</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogellipticalarc.ui" line="1053"/>
         <source>Color</source>
-        <translation type="unfinished">Barva</translation>
+        <translation type="vanished">Barva</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogellipticalarc.ui" line="1076"/>
@@ -3142,9 +3130,8 @@
         <translation>Nástroj</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogendline.ui" line="526"/>
         <source>Color</source>
-        <translation type="unfinished">Barva</translation>
+        <translation type="vanished">Barva</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogendline.ui" line="549"/>
@@ -3505,9 +3492,8 @@
         <translation>Barva:</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogflippingbyaxis.ui" line="101"/>
         <source>Color</source>
-        <translation type="unfinished">Barva</translation>
+        <translation type="vanished">Barva</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogflippingbyaxis.ui" line="205"/>
@@ -3661,9 +3647,8 @@
         <translation>Barva:</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogflippingbyline.ui" line="101"/>
         <source>Color</source>
-        <translation type="unfinished">Barva</translation>
+        <translation type="vanished">Barva</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogflippingbyline.ui" line="205"/>
@@ -3865,9 +3850,8 @@
         <translation>Nástroj</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogheight.ui" line="147"/>
         <source>Color</source>
-        <translation type="unfinished">Barva</translation>
+        <translation type="vanished">Barva</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogheight.ui" line="155"/>
@@ -5233,9 +5217,8 @@ Přesto použít nastavení?</translation>
         <translation>Nástroj</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogline.ui" line="152"/>
         <source>Color</source>
-        <translation type="unfinished">Barva</translation>
+        <translation type="vanished">Barva</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogline.ui" line="160"/>
@@ -5470,9 +5453,8 @@ Přesto použít nastavení?</translation>
         <translation>Nástroj</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialoglineintersectaxis.ui" line="349"/>
         <source>Color</source>
-        <translation type="unfinished">Barva</translation>
+        <translation type="vanished">Barva</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialoglineintersectaxis.ui" line="372"/>
@@ -5873,9 +5855,8 @@ Přesto použít nastavení?</translation>
         <translation>Barva:</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogmove.ui" line="108"/>
         <source>Color</source>
-        <translation type="unfinished">Barva</translation>
+        <translation type="vanished">Barva</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogmove.ui" line="744"/>
@@ -6191,9 +6172,8 @@ Přesto použít nastavení?</translation>
         <translation>Nástroj</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialognormal.ui" line="522"/>
         <source>Color</source>
-        <translation type="unfinished">Barva</translation>
+        <translation type="vanished">Barva</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialognormal.ui" line="545"/>
@@ -8223,11 +8203,6 @@ Přesto použít nastavení?</translation>
         <translation>Barva:</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogrotation.ui" line="101"/>
-        <source>PushButton</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogrotation.ui" line="370"/>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogrotation.cpp" line="823"/>
         <source>Ready</source>
@@ -8645,14 +8620,6 @@ Přesto použít nastavení?</translation>
         <location filename="../../src/app/puzzle/dialogs/dialogsavemanuallayout.cpp" line="141"/>
         <source>Select folder</source>
         <translation>Vybrat složku</translation>
-    </message>
-    <message>
-        <source>Tried to use out of range format number.</source>
-        <translation type="vanished">Použité číslo formátu leží mimo rozsah.</translation>
-    </message>
-    <message>
-        <source>Selected not present format.</source>
-        <translation type="vanished">Vybrat nepřítomný formát.</translation>
     </message>
     <message>
         <location filename="../../src/app/puzzle/dialogs/dialogsavemanuallayout.cpp" line="186"/>
@@ -9656,9 +9623,8 @@ Přesto použít nastavení?</translation>
         <translation>Nástroj</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogshoulderpoint.ui" line="379"/>
         <source>Color</source>
-        <translation type="unfinished">Barva</translation>
+        <translation type="vanished">Barva</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogshoulderpoint.ui" line="402"/>
@@ -9760,9 +9726,8 @@ Přesto použít nastavení?</translation>
         <translation>Jednoduchá křivka</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogspline.ui" line="931"/>
         <source>Color</source>
-        <translation>Barva</translation>
+        <translation type="vanished">Barva</translation>
     </message>
     <message>
         <source>Coefficient of curvature of the curve:</source>
@@ -9952,9 +9917,8 @@ Přesto použít nastavení?</translation>
         <translation>Vybrat bod cesty křivky</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogsplinepath.ui" line="1053"/>
         <source>Color</source>
-        <translation>Barva</translation>
+        <translation type="vanished">Barva</translation>
     </message>
     <message>
         <source>Coefficient of curvature of the curve:</source>
@@ -15070,11 +15034,6 @@ Tato volba se projeví po opětovném spuštění.</translation>
         <translation>Nelze získat symboly ze vzorce &apos;%1&apos;. Chyba ve vzorci: %2.</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vlayout/vtextmanager.cpp" line="496"/>
-        <source>%1 %2.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <location filename="../../src/libs/vlayout/vtextmanager.cpp" line="548"/>
         <location filename="../../src/libs/vtools/dialogs/support/dialogeditlabel.cpp" line="693"/>
         <source>Failed to prepare final measurement placeholder. Parser error at line %1: %2.</source>
@@ -15586,81 +15545,6 @@ Tato volba se projeví po opětovném spuštění.</translation>
     </message>
 </context>
 <context>
-    <name>QtColorPicker</name>
-    <message>
-        <source>Black</source>
-        <translation type="vanished">Černá</translation>
-    </message>
-    <message>
-        <source>White</source>
-        <translation type="vanished">Bílá</translation>
-    </message>
-    <message>
-        <source>Red</source>
-        <translation type="vanished">Červená</translation>
-    </message>
-    <message>
-        <source>Dark red</source>
-        <translation type="vanished">Tmavě červená</translation>
-    </message>
-    <message>
-        <source>Green</source>
-        <translation type="vanished">Zelená</translation>
-    </message>
-    <message>
-        <source>Dark green</source>
-        <translation type="vanished">Tmavě zelená</translation>
-    </message>
-    <message>
-        <source>Blue</source>
-        <translation type="vanished">Modrá</translation>
-    </message>
-    <message>
-        <source>Dark blue</source>
-        <translation type="vanished">Tmavě modrá</translation>
-    </message>
-    <message>
-        <source>Cyan</source>
-        <translation type="vanished">Modrozelená</translation>
-    </message>
-    <message>
-        <source>Dark cyan</source>
-        <translation type="vanished">Tmavě modrozelená</translation>
-    </message>
-    <message>
-        <source>Magenta</source>
-        <translation type="vanished">Červenorudá</translation>
-    </message>
-    <message>
-        <source>Dark magenta</source>
-        <translation type="vanished">Tmavě červenorudá</translation>
-    </message>
-    <message>
-        <source>Yellow</source>
-        <translation type="vanished">Žlutá</translation>
-    </message>
-    <message>
-        <source>Dark yellow</source>
-        <translation type="vanished">Tmavě žlutá</translation>
-    </message>
-    <message>
-        <source>Gray</source>
-        <translation type="vanished">Šedá</translation>
-    </message>
-    <message>
-        <source>Dark gray</source>
-        <translation type="vanished">Tmavě šedá</translation>
-    </message>
-    <message>
-        <source>Light gray</source>
-        <translation type="vanished">Světle šedá</translation>
-    </message>
-    <message>
-        <source>Custom</source>
-        <translation type="vanished">Vlastní</translation>
-    </message>
-</context>
-<context>
     <name>RemoveItemFromGroup</name>
     <message>
         <location filename="../../src/libs/vtools/undocommands/undogroup.cpp" line="273"/>
@@ -15697,7 +15581,7 @@ Tato volba se projeví po opětovném spuštění.</translation>
     <message>
         <location filename="../../src/libs/vtools/undocommands/renamepiece.cpp" line="46"/>
         <source>Detail</source>
-        <translation type="unfinished"></translation>
+        <translation>Jednotlivost (díl střihu)</translation>
     </message>
 </context>
 <context>
@@ -21930,110 +21814,110 @@ Chcete uložit změny?</translation>
         <location filename="../../src/libs/vpropertyexplorer/qtcolorpicker.cpp" line="474"/>
         <location filename="../../src/libs/vpropertyexplorer/qtcolorpicker.cpp" line="621"/>
         <source>Black</source>
-        <translation type="unfinished">Černá</translation>
+        <translation>Černá</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpropertyexplorer/qtcolorpicker.cpp" line="475"/>
         <location filename="../../src/libs/vpropertyexplorer/qtcolorpicker.cpp" line="622"/>
         <source>White</source>
-        <translation type="unfinished">Bílá</translation>
+        <translation>Bílá</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpropertyexplorer/qtcolorpicker.cpp" line="476"/>
         <location filename="../../src/libs/vpropertyexplorer/qtcolorpicker.cpp" line="623"/>
         <source>Red</source>
-        <translation type="unfinished">Červená</translation>
+        <translation>Červená</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpropertyexplorer/qtcolorpicker.cpp" line="477"/>
         <location filename="../../src/libs/vpropertyexplorer/qtcolorpicker.cpp" line="624"/>
         <source>Dark red</source>
-        <translation type="unfinished"></translation>
+        <translation>Tmavě červená</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpropertyexplorer/qtcolorpicker.cpp" line="478"/>
         <location filename="../../src/libs/vpropertyexplorer/qtcolorpicker.cpp" line="625"/>
         <source>Green</source>
-        <translation type="unfinished">Zelená</translation>
+        <translation>Zelená</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpropertyexplorer/qtcolorpicker.cpp" line="479"/>
         <location filename="../../src/libs/vpropertyexplorer/qtcolorpicker.cpp" line="626"/>
         <source>Dark green</source>
-        <translation type="unfinished">Tmavě zelená</translation>
+        <translation>Tmavě zelená</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpropertyexplorer/qtcolorpicker.cpp" line="480"/>
         <location filename="../../src/libs/vpropertyexplorer/qtcolorpicker.cpp" line="627"/>
         <source>Blue</source>
-        <translation type="unfinished">Modrá</translation>
+        <translation>Modrá</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpropertyexplorer/qtcolorpicker.cpp" line="481"/>
         <location filename="../../src/libs/vpropertyexplorer/qtcolorpicker.cpp" line="628"/>
         <source>Dark blue</source>
-        <translation type="unfinished">Tmavě modrá</translation>
+        <translation>Tmavě modrá</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpropertyexplorer/qtcolorpicker.cpp" line="482"/>
         <location filename="../../src/libs/vpropertyexplorer/qtcolorpicker.cpp" line="629"/>
         <source>Cyan</source>
-        <translation type="unfinished">Modrozelená</translation>
+        <translation>Modrozelená</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpropertyexplorer/qtcolorpicker.cpp" line="483"/>
         <location filename="../../src/libs/vpropertyexplorer/qtcolorpicker.cpp" line="630"/>
         <source>Dark cyan</source>
-        <translation type="unfinished">Tmavě modrozelená</translation>
+        <translation>Tmavě modrozelená</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpropertyexplorer/qtcolorpicker.cpp" line="484"/>
         <location filename="../../src/libs/vpropertyexplorer/qtcolorpicker.cpp" line="631"/>
         <source>Magenta</source>
-        <translation type="unfinished">Červenorudá</translation>
+        <translation>Červenorudá</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpropertyexplorer/qtcolorpicker.cpp" line="485"/>
         <location filename="../../src/libs/vpropertyexplorer/qtcolorpicker.cpp" line="632"/>
         <source>Dark magenta</source>
-        <translation type="unfinished">Tmavě červenorudá</translation>
+        <translation>Tmavě červenorudá</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpropertyexplorer/qtcolorpicker.cpp" line="486"/>
         <location filename="../../src/libs/vpropertyexplorer/qtcolorpicker.cpp" line="633"/>
         <source>Yellow</source>
-        <translation type="unfinished">Žlutá</translation>
+        <translation>Žlutá</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpropertyexplorer/qtcolorpicker.cpp" line="487"/>
         <location filename="../../src/libs/vpropertyexplorer/qtcolorpicker.cpp" line="634"/>
         <source>Dark yellow</source>
-        <translation type="unfinished">Tmavě žlutá</translation>
+        <translation>Tmavě žlutá</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpropertyexplorer/qtcolorpicker.cpp" line="488"/>
         <location filename="../../src/libs/vpropertyexplorer/qtcolorpicker.cpp" line="635"/>
         <source>Gray</source>
-        <translation type="unfinished">Šedá</translation>
+        <translation>Šedá</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpropertyexplorer/qtcolorpicker.cpp" line="489"/>
         <location filename="../../src/libs/vpropertyexplorer/qtcolorpicker.cpp" line="636"/>
         <source>Dark gray</source>
-        <translation type="unfinished">Tmavě šedá</translation>
+        <translation>Tmavě šedá</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpropertyexplorer/qtcolorpicker.cpp" line="490"/>
         <location filename="../../src/libs/vpropertyexplorer/qtcolorpicker.cpp" line="637"/>
         <source>Light gray</source>
-        <translation type="unfinished">Světle šedá</translation>
+        <translation>Světle šedá</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpropertyexplorer/qtcolorpicker.cpp" line="575"/>
         <location filename="../../src/libs/vpropertyexplorer/qtcolorpicker.cpp" line="579"/>
         <source>Custom</source>
         <comment>color</comment>
-        <translation type="unfinished">Vlastní</translation>
+        <translation>Vlastní</translation>
     </message>
 </context>
 <context>
@@ -23142,10 +23026,6 @@ Chcete uložit změny?</translation>
         <location filename="../../src/libs/vpatterndb/vpassmark.cpp" line="783"/>
         <source>Cannot calculate a notch for point &apos;%1&apos; in piece &apos;%2&apos;. Cannot find intersection.</source>
         <translation>Nelze spočítat zářez pro bod &apos;%1&apos; v dílu &apos;%2&apos;. Nelze najít průsečík.</translation>
-    </message>
-    <message>
-        <source>Cannot calculate a notch for point &apos;%1&apos; in piece &apos;%2&apos; with built in seam allowance. User must manually provide length.</source>
-        <translation type="vanished">Nelze spočítat zářez pro bod &apos;%1&apos; v dílu &apos;%2&apos; se zabudovanou švovou záložkou. Uživatel musí zadat délku ručně.</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vpassmark.cpp" line="956"/>
@@ -27199,37 +27079,37 @@ Chyba kompatibility formátu nezpracovaného rozvržení: ActualFileVersion = %1
         <translation>Formulář</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/dialogs/vwidgetdetails.cpp" line="296"/>
+        <location filename="../../src/app/valentina/dialogs/vwidgetdetails.cpp" line="294"/>
         <source>Unnamed</source>
         <translation>Bez názvu</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/dialogs/vwidgetdetails.cpp" line="309"/>
+        <location filename="../../src/app/valentina/dialogs/vwidgetdetails.cpp" line="307"/>
         <source>Select all</source>
         <translation>Vybrat vše</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/dialogs/vwidgetdetails.cpp" line="310"/>
+        <location filename="../../src/app/valentina/dialogs/vwidgetdetails.cpp" line="308"/>
         <source>Select none</source>
         <translation>Žádný výběr</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/dialogs/vwidgetdetails.cpp" line="380"/>
+        <location filename="../../src/app/valentina/dialogs/vwidgetdetails.cpp" line="378"/>
         <source>select all details</source>
         <translation>Vybrat všechny jednotlivosti (díly střihu)</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/dialogs/vwidgetdetails.cpp" line="387"/>
+        <location filename="../../src/app/valentina/dialogs/vwidgetdetails.cpp" line="385"/>
         <source>select none details</source>
         <translation>Nevybrat žádné jednotlivosti (díly střihu)</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/dialogs/vwidgetdetails.cpp" line="314"/>
+        <location filename="../../src/app/valentina/dialogs/vwidgetdetails.cpp" line="312"/>
         <source>Invert selection</source>
         <translation>Obrátit výběr</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/dialogs/vwidgetdetails.cpp" line="393"/>
+        <location filename="../../src/app/valentina/dialogs/vwidgetdetails.cpp" line="391"/>
         <source>invert selection</source>
         <translation>Obrátit výběr</translation>
     </message>
@@ -27239,17 +27119,17 @@ Chyba kompatibility formátu nezpracovaného rozvržení: ActualFileVersion = %1
         <translation>Skrýt ne v rozvržení</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/dialogs/vwidgetdetails.cpp" line="334"/>
+        <location filename="../../src/app/valentina/dialogs/vwidgetdetails.cpp" line="332"/>
         <source>Piece options</source>
         <translation>Volby pro díl</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/dialogs/vwidgetdetails.cpp" line="336"/>
+        <location filename="../../src/app/valentina/dialogs/vwidgetdetails.cpp" line="334"/>
         <source>Delete piece</source>
         <translation>Smazat díl</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/dialogs/vwidgetdetails.cpp" line="342"/>
+        <location filename="../../src/app/valentina/dialogs/vwidgetdetails.cpp" line="340"/>
         <source>Cannot find piece by id &apos;%1&apos;</source>
         <translation>Nelze najít díl podle ID &apos;%1&apos;</translation>
     </message>
@@ -27833,9 +27713,8 @@ Chyba kompatibility formátu nezpracovaného rozvržení: ActualFileVersion = %1
         <translation>Vyskytla se neznámá chyba. Například plný disk zabránil tomu, aby byl soubor se zámkem zapsán. Nevšímejte si této zprávy, pokud chcete pokračovat (nedoporučuje se, může vést k poškození dat).</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vlayout/dialogs/watermarkwindow.ui" line="193"/>
         <source>Color</source>
-        <translation>Barva</translation>
+        <translation type="vanished">Barva</translation>
     </message>
     <message>
         <location filename="../../src/libs/vlayout/dialogs/watermarkwindow.ui" line="200"/>

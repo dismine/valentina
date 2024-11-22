@@ -90,14 +90,10 @@
 <context>
     <name>ColorPickerPopup</name>
     <message>
-        <source>Custom</source>
-        <translation type="vanished">Personalizzato</translation>
-    </message>
-    <message>
         <location filename="../../src/libs/vpropertyexplorer/qtcolorpicker.cpp" line="1237"/>
         <source>Custom</source>
         <comment>color</comment>
-        <translation type="unfinished">Personalizzato</translation>
+        <translation>Personalizzato</translation>
     </message>
 </context>
 <context>
@@ -678,9 +674,8 @@
         <translation>Strumento</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogalongline.ui" line="332"/>
         <source>Color</source>
-        <translation type="unfinished">Colore</translation>
+        <translation type="vanished">Colore</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogalongline.ui" line="355"/>
@@ -747,9 +742,8 @@
         <translation type="vanished">Angoli uguali</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogarc.ui" line="672"/>
         <source>Color</source>
-        <translation>Colore</translation>
+        <translation type="vanished">Colore</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogarc.cpp" line="473"/>
@@ -899,9 +893,8 @@
         <translation type="vanished">Seleziona il punto al centro dell&apos;arco</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogarcwithlength.ui" line="665"/>
         <source>Color</source>
-        <translation>Colore</translation>
+        <translation type="vanished">Colore</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogarcwithlength.cpp" line="402"/>
@@ -1191,9 +1184,8 @@
         <translation>Strumento</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogbisector.ui" line="328"/>
         <source>Color</source>
-        <translation type="unfinished">Colore</translation>
+        <translation type="vanished">Colore</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogbisector.ui" line="351"/>
@@ -1288,9 +1280,8 @@
         <translation>sopranome:</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogcubicbezier.ui" line="164"/>
         <source>Color</source>
-        <translation type="unfinished">Colore</translation>
+        <translation type="vanished">Colore</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogcubicbezier.ui" line="172"/>
@@ -1386,9 +1377,8 @@
         <translation>sopranome:</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogcubicbezierpath.ui" line="310"/>
         <source>Color</source>
-        <translation type="unfinished">Colore</translation>
+        <translation type="vanished">Colore</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogcubicbezierpath.ui" line="333"/>
@@ -1515,9 +1505,8 @@
         <translation>Strumento</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogcurveintersectaxis.ui" line="350"/>
         <source>Color</source>
-        <translation type="unfinished">Colore</translation>
+        <translation type="vanished">Colore</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogcurveintersectaxis.ui" line="373"/>
@@ -2987,9 +2976,8 @@
         <translation>sopranome:</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogellipticalarc.ui" line="1053"/>
         <source>Color</source>
-        <translation type="unfinished">Colore</translation>
+        <translation type="vanished">Colore</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogellipticalarc.ui" line="1076"/>
@@ -3134,9 +3122,8 @@
         <translation>Strumento</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogendline.ui" line="526"/>
         <source>Color</source>
-        <translation type="unfinished">Colore</translation>
+        <translation type="vanished">Colore</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogendline.ui" line="549"/>
@@ -3497,9 +3484,8 @@
         <translation>Colore:</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogflippingbyaxis.ui" line="101"/>
         <source>Color</source>
-        <translation type="unfinished">Colore</translation>
+        <translation type="vanished">Colore</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogflippingbyaxis.ui" line="205"/>
@@ -3653,9 +3639,8 @@
         <translation>Colore:</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogflippingbyline.ui" line="101"/>
         <source>Color</source>
-        <translation type="unfinished">Colore</translation>
+        <translation type="vanished">Colore</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogflippingbyline.ui" line="205"/>
@@ -3857,9 +3842,8 @@
         <translation>Strumento</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogheight.ui" line="147"/>
         <source>Color</source>
-        <translation type="unfinished">Colore</translation>
+        <translation type="vanished">Colore</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogheight.ui" line="155"/>
@@ -5225,9 +5209,8 @@ Applicare la configurazione comunque?</translation>
         <translation>Strumento</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogline.ui" line="152"/>
         <source>Color</source>
-        <translation type="unfinished">Colore</translation>
+        <translation type="vanished">Colore</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogline.ui" line="160"/>
@@ -5462,9 +5445,8 @@ Applicare la configurazione comunque?</translation>
         <translation>Strumento</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialoglineintersectaxis.ui" line="349"/>
         <source>Color</source>
-        <translation type="unfinished">Colore</translation>
+        <translation type="vanished">Colore</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialoglineintersectaxis.ui" line="372"/>
@@ -5865,9 +5847,8 @@ Applicare la configurazione comunque?</translation>
         <translation>Colore:</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogmove.ui" line="108"/>
         <source>Color</source>
-        <translation type="unfinished">Colore</translation>
+        <translation type="vanished">Colore</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogmove.ui" line="744"/>
@@ -6183,9 +6164,8 @@ Applicare la configurazione comunque?</translation>
         <translation>Strumento</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialognormal.ui" line="522"/>
         <source>Color</source>
-        <translation type="unfinished">Colore</translation>
+        <translation type="vanished">Colore</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialognormal.ui" line="545"/>
@@ -8213,11 +8193,6 @@ Applicare la configurazione comunque?</translation>
         <translation>Colore:</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogrotation.ui" line="101"/>
-        <source>PushButton</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogrotation.ui" line="370"/>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogrotation.cpp" line="823"/>
         <source>Ready</source>
@@ -8635,14 +8610,6 @@ Applicare la configurazione comunque?</translation>
         <location filename="../../src/app/puzzle/dialogs/dialogsavemanuallayout.cpp" line="141"/>
         <source>Select folder</source>
         <translation>Seleziona cartella</translation>
-    </message>
-    <message>
-        <source>Tried to use out of range format number.</source>
-        <translation type="vanished">Si è cercato di utilizzare un formato di numero fuori gamma.</translation>
-    </message>
-    <message>
-        <source>Selected not present format.</source>
-        <translation type="vanished">Selezionato formato non presente.</translation>
     </message>
     <message>
         <location filename="../../src/app/puzzle/dialogs/dialogsavemanuallayout.cpp" line="186"/>
@@ -9646,9 +9613,8 @@ Applicare la configurazione comunque?</translation>
         <translation>Strumento</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogshoulderpoint.ui" line="379"/>
         <source>Color</source>
-        <translation type="unfinished">Colore</translation>
+        <translation type="vanished">Colore</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogshoulderpoint.ui" line="402"/>
@@ -9750,9 +9716,8 @@ Applicare la configurazione comunque?</translation>
         <translation>Curva semplice</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogspline.ui" line="931"/>
         <source>Color</source>
-        <translation>Colore</translation>
+        <translation type="vanished">Colore</translation>
     </message>
     <message>
         <source>Coefficient of curvature of the curve:</source>
@@ -9942,9 +9907,8 @@ Applicare la configurazione comunque?</translation>
         <translation>Seleziona punto del tracciato curvo</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogsplinepath.ui" line="1053"/>
         <source>Color</source>
-        <translation>Colore</translation>
+        <translation type="vanished">Colore</translation>
     </message>
     <message>
         <source>Coefficient of curvature of the curve:</source>
@@ -15055,11 +15019,6 @@ Questa opzione sarà effettiva dopo il riavvio del programma.</translation>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/libs/vlayout/vtextmanager.cpp" line="496"/>
-        <source>%1 %2.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <location filename="../../src/libs/vlayout/vtextmanager.cpp" line="548"/>
         <location filename="../../src/libs/vtools/dialogs/support/dialogeditlabel.cpp" line="693"/>
         <source>Failed to prepare final measurement placeholder. Parser error at line %1: %2.</source>
@@ -15571,13 +15530,6 @@ Questa opzione sarà effettiva dopo il riavvio del programma.</translation>
     </message>
 </context>
 <context>
-    <name>QtColorPicker</name>
-    <message>
-        <source>Custom</source>
-        <translation type="vanished">Personalizzato</translation>
-    </message>
-</context>
-<context>
     <name>RemoveItemFromGroup</name>
     <message>
         <location filename="../../src/libs/vtools/undocommands/undogroup.cpp" line="273"/>
@@ -15614,7 +15566,7 @@ Questa opzione sarà effettiva dopo il riavvio del programma.</translation>
     <message>
         <location filename="../../src/libs/vtools/undocommands/renamepiece.cpp" line="46"/>
         <source>Detail</source>
-        <translation type="unfinished">Dettaglio</translation>
+        <translation>Dettaglio</translation>
     </message>
 </context>
 <context>
@@ -21871,7 +21823,7 @@ Vuoi salvare le tue modifiche?</translation>
         <location filename="../../src/libs/vpropertyexplorer/qtcolorpicker.cpp" line="579"/>
         <source>Custom</source>
         <comment>color</comment>
-        <translation type="unfinished">Personalizzato</translation>
+        <translation>Personalizzato</translation>
     </message>
 </context>
 <context>
@@ -26771,37 +26723,37 @@ Raw layout format compatibility error: actualFileVersion = %1 and fileVersion = 
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/dialogs/vwidgetdetails.cpp" line="296"/>
+        <location filename="../../src/app/valentina/dialogs/vwidgetdetails.cpp" line="294"/>
         <source>Unnamed</source>
         <translation>Senza Nome</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/dialogs/vwidgetdetails.cpp" line="309"/>
+        <location filename="../../src/app/valentina/dialogs/vwidgetdetails.cpp" line="307"/>
         <source>Select all</source>
         <translation>Seleziona tutto</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/dialogs/vwidgetdetails.cpp" line="310"/>
+        <location filename="../../src/app/valentina/dialogs/vwidgetdetails.cpp" line="308"/>
         <source>Select none</source>
         <translation>Nessuna selezione</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/dialogs/vwidgetdetails.cpp" line="380"/>
+        <location filename="../../src/app/valentina/dialogs/vwidgetdetails.cpp" line="378"/>
         <source>select all details</source>
         <translation>Seleziona tutti i dettagli</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/dialogs/vwidgetdetails.cpp" line="387"/>
+        <location filename="../../src/app/valentina/dialogs/vwidgetdetails.cpp" line="385"/>
         <source>select none details</source>
         <translation>Non selezionare i dettagli</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/dialogs/vwidgetdetails.cpp" line="314"/>
+        <location filename="../../src/app/valentina/dialogs/vwidgetdetails.cpp" line="312"/>
         <source>Invert selection</source>
         <translation>Inverti selezione</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/dialogs/vwidgetdetails.cpp" line="393"/>
+        <location filename="../../src/app/valentina/dialogs/vwidgetdetails.cpp" line="391"/>
         <source>invert selection</source>
         <translation>Inverti selezione</translation>
     </message>
@@ -26811,17 +26763,17 @@ Raw layout format compatibility error: actualFileVersion = %1 and fileVersion = 
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/dialogs/vwidgetdetails.cpp" line="334"/>
+        <location filename="../../src/app/valentina/dialogs/vwidgetdetails.cpp" line="332"/>
         <source>Piece options</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/dialogs/vwidgetdetails.cpp" line="336"/>
+        <location filename="../../src/app/valentina/dialogs/vwidgetdetails.cpp" line="334"/>
         <source>Delete piece</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/dialogs/vwidgetdetails.cpp" line="342"/>
+        <location filename="../../src/app/valentina/dialogs/vwidgetdetails.cpp" line="340"/>
         <source>Cannot find piece by id &apos;%1&apos;</source>
         <translation type="unfinished"></translation>
     </message>
@@ -27369,9 +27321,8 @@ Raw layout format compatibility error: actualFileVersion = %1 and fileVersion = 
         <translation>Si è verificato un errore sconosciuto, come ad esempio il fallimento di una partizione completa durante la trascrizione di un file bloccato. Ignora se vuoi continuare (scelta non consigliata, può causare un danneggiamento dei dati).</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vlayout/dialogs/watermarkwindow.ui" line="193"/>
         <source>Color</source>
-        <translation>Colore</translation>
+        <translation type="vanished">Colore</translation>
     </message>
     <message>
         <location filename="../../src/libs/vlayout/dialogs/watermarkwindow.ui" line="200"/>

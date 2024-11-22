@@ -90,14 +90,10 @@
 <context>
     <name>ColorPickerPopup</name>
     <message>
-        <source>Custom</source>
-        <translation type="vanished">Benutzerdefiniert</translation>
-    </message>
-    <message>
         <location filename="../../src/libs/vpropertyexplorer/qtcolorpicker.cpp" line="1237"/>
         <source>Custom</source>
         <comment>color</comment>
-        <translation type="unfinished">Benutzerdefiniert</translation>
+        <translation>Benutzerdefiniert</translation>
     </message>
 </context>
 <context>
@@ -678,9 +674,8 @@
         <translation>Werkzeug</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogalongline.ui" line="332"/>
         <source>Color</source>
-        <translation type="unfinished">Farbe</translation>
+        <translation type="vanished">Farbe</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogalongline.ui" line="355"/>
@@ -747,9 +742,8 @@
         <translation type="vanished">Beide Winkel sind identisch</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogarc.ui" line="672"/>
         <source>Color</source>
-        <translation>Farbe</translation>
+        <translation type="vanished">Farbe</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogarc.cpp" line="473"/>
@@ -899,9 +893,8 @@
         <translation type="vanished">Mittelpunkt des Bogens auswählen</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogarcwithlength.ui" line="665"/>
         <source>Color</source>
-        <translation>Farbe</translation>
+        <translation type="vanished">Farbe</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogarcwithlength.cpp" line="402"/>
@@ -1191,9 +1184,8 @@
         <translation>Werkzeug</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogbisector.ui" line="328"/>
         <source>Color</source>
-        <translation type="unfinished">Farbe</translation>
+        <translation type="vanished">Farbe</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogbisector.ui" line="351"/>
@@ -1288,9 +1280,8 @@
         <translation>Pseudonym:</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogcubicbezier.ui" line="164"/>
         <source>Color</source>
-        <translation type="unfinished">Farbe</translation>
+        <translation type="vanished">Farbe</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogcubicbezier.ui" line="172"/>
@@ -1390,9 +1381,8 @@
         <translation>Pseudonym:</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogcubicbezierpath.ui" line="310"/>
         <source>Color</source>
-        <translation type="unfinished">Farbe</translation>
+        <translation type="vanished">Farbe</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogcubicbezierpath.ui" line="333"/>
@@ -1519,9 +1509,8 @@
         <translation>Werkzeug</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogcurveintersectaxis.ui" line="350"/>
         <source>Color</source>
-        <translation type="unfinished">Farbe</translation>
+        <translation type="vanished">Farbe</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogcurveintersectaxis.ui" line="373"/>
@@ -2995,9 +2984,8 @@
         <translation>Pseudonym:</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogellipticalarc.ui" line="1053"/>
         <source>Color</source>
-        <translation type="unfinished">Farbe</translation>
+        <translation type="vanished">Farbe</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogellipticalarc.ui" line="1076"/>
@@ -3142,9 +3130,8 @@
         <translation>Werkzeug</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogendline.ui" line="526"/>
         <source>Color</source>
-        <translation type="unfinished">Farbe</translation>
+        <translation type="vanished">Farbe</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogendline.ui" line="549"/>
@@ -3505,9 +3492,8 @@
         <translation>Farbe:</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogflippingbyaxis.ui" line="101"/>
         <source>Color</source>
-        <translation type="unfinished">Farbe</translation>
+        <translation type="vanished">Farbe</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogflippingbyaxis.ui" line="205"/>
@@ -3661,9 +3647,8 @@
         <translation>Farbe:</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogflippingbyline.ui" line="101"/>
         <source>Color</source>
-        <translation type="unfinished">Farbe</translation>
+        <translation type="vanished">Farbe</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogflippingbyline.ui" line="205"/>
@@ -3865,9 +3850,8 @@
         <translation>Werkzeug</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogheight.ui" line="147"/>
         <source>Color</source>
-        <translation type="unfinished">Farbe</translation>
+        <translation type="vanished">Farbe</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogheight.ui" line="155"/>
@@ -5232,9 +5216,8 @@ Einstellungen trotzdem anwenden?</translation>
         <translation>Werkzeug</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogline.ui" line="152"/>
         <source>Color</source>
-        <translation type="unfinished">Farbe</translation>
+        <translation type="vanished">Farbe</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogline.ui" line="160"/>
@@ -5469,9 +5452,8 @@ Einstellungen trotzdem anwenden?</translation>
         <translation>Werkzeug</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialoglineintersectaxis.ui" line="349"/>
         <source>Color</source>
-        <translation type="unfinished">Farbe</translation>
+        <translation type="vanished">Farbe</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialoglineintersectaxis.ui" line="372"/>
@@ -5872,9 +5854,8 @@ Einstellungen trotzdem anwenden?</translation>
         <translation>Farbe:</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogmove.ui" line="108"/>
         <source>Color</source>
-        <translation type="unfinished">Farbe</translation>
+        <translation type="vanished">Farbe</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogmove.ui" line="744"/>
@@ -6190,9 +6171,8 @@ Einstellungen trotzdem anwenden?</translation>
         <translation>Werkzeug</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialognormal.ui" line="522"/>
         <source>Color</source>
-        <translation type="unfinished">Farbe</translation>
+        <translation type="vanished">Farbe</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialognormal.ui" line="545"/>
@@ -8220,11 +8200,6 @@ Einstellungen trotzdem anwenden?</translation>
         <translation>Farbe:</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogrotation.ui" line="101"/>
-        <source>PushButton</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogrotation.ui" line="370"/>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogrotation.cpp" line="823"/>
         <source>Ready</source>
@@ -8642,14 +8617,6 @@ Einstellungen trotzdem anwenden?</translation>
         <location filename="../../src/app/puzzle/dialogs/dialogsavemanuallayout.cpp" line="141"/>
         <source>Select folder</source>
         <translation>Ordner auswählen</translation>
-    </message>
-    <message>
-        <source>Tried to use out of range format number.</source>
-        <translation type="vanished">Die verwendete Formatnummer liegt außerhalb der Reichweite.</translation>
-    </message>
-    <message>
-        <source>Selected not present format.</source>
-        <translation type="vanished">Ausgewähltes Format nicht vorhanden.</translation>
     </message>
     <message>
         <location filename="../../src/app/puzzle/dialogs/dialogsavemanuallayout.cpp" line="186"/>
@@ -9653,9 +9620,8 @@ Einstellungen trotzdem anwenden?</translation>
         <translation>Werkzeug</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogshoulderpoint.ui" line="379"/>
         <source>Color</source>
-        <translation type="unfinished">Farbe</translation>
+        <translation type="vanished">Farbe</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogshoulderpoint.ui" line="402"/>
@@ -9757,9 +9723,8 @@ Einstellungen trotzdem anwenden?</translation>
         <translation>Einfache Kurve</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogspline.ui" line="931"/>
         <source>Color</source>
-        <translation>Farbe</translation>
+        <translation type="vanished">Farbe</translation>
     </message>
     <message>
         <source>Coefficient of curvature of the curve:</source>
@@ -9949,9 +9914,8 @@ Einstellungen trotzdem anwenden?</translation>
         <translation>Punkt für den Kurvenpfad auswählen</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogsplinepath.ui" line="1053"/>
         <source>Color</source>
-        <translation>Farbe</translation>
+        <translation type="vanished">Farbe</translation>
     </message>
     <message>
         <source>Coefficient of curvature of the curve:</source>
@@ -15066,11 +15030,6 @@ Diese Option wird nach einem Neustart aktiv.</translation>
         <translation>Kann die Symbole aus Formel &apos;%1&apos; nicht lesen. Lese-Fehler: %2.</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vlayout/vtextmanager.cpp" line="496"/>
-        <source>%1 %2.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <location filename="../../src/libs/vlayout/vtextmanager.cpp" line="548"/>
         <location filename="../../src/libs/vtools/dialogs/support/dialogeditlabel.cpp" line="693"/>
         <source>Failed to prepare final measurement placeholder. Parser error at line %1: %2.</source>
@@ -15582,81 +15541,6 @@ Diese Option wird nach einem Neustart aktiv.</translation>
     </message>
 </context>
 <context>
-    <name>QtColorPicker</name>
-    <message>
-        <source>Black</source>
-        <translation type="vanished">Schwarz</translation>
-    </message>
-    <message>
-        <source>White</source>
-        <translation type="vanished">Weiß</translation>
-    </message>
-    <message>
-        <source>Red</source>
-        <translation type="vanished">Rot</translation>
-    </message>
-    <message>
-        <source>Dark red</source>
-        <translation type="vanished">Dunkles Rot</translation>
-    </message>
-    <message>
-        <source>Green</source>
-        <translation type="vanished">Grün</translation>
-    </message>
-    <message>
-        <source>Dark green</source>
-        <translation type="vanished">Dunkelgrün</translation>
-    </message>
-    <message>
-        <source>Blue</source>
-        <translation type="vanished">Blau</translation>
-    </message>
-    <message>
-        <source>Dark blue</source>
-        <translation type="vanished">Dunkelblau</translation>
-    </message>
-    <message>
-        <source>Cyan</source>
-        <translation type="vanished">Blaugrün</translation>
-    </message>
-    <message>
-        <source>Dark cyan</source>
-        <translation type="vanished">Dunkelblaugrün</translation>
-    </message>
-    <message>
-        <source>Magenta</source>
-        <translation type="vanished">Purpurrot</translation>
-    </message>
-    <message>
-        <source>Dark magenta</source>
-        <translation type="vanished">Dunkelpurpurrot</translation>
-    </message>
-    <message>
-        <source>Yellow</source>
-        <translation type="vanished">Gelb</translation>
-    </message>
-    <message>
-        <source>Dark yellow</source>
-        <translation type="vanished">Dunkelgelb</translation>
-    </message>
-    <message>
-        <source>Gray</source>
-        <translation type="vanished">Grau</translation>
-    </message>
-    <message>
-        <source>Dark gray</source>
-        <translation type="vanished">Dunkelgrau</translation>
-    </message>
-    <message>
-        <source>Light gray</source>
-        <translation type="vanished">Hellgrau</translation>
-    </message>
-    <message>
-        <source>Custom</source>
-        <translation type="vanished">Benutzerdefiniert</translation>
-    </message>
-</context>
-<context>
     <name>RemoveItemFromGroup</name>
     <message>
         <location filename="../../src/libs/vtools/undocommands/undogroup.cpp" line="273"/>
@@ -15693,7 +15577,7 @@ Diese Option wird nach einem Neustart aktiv.</translation>
     <message>
         <location filename="../../src/libs/vtools/undocommands/renamepiece.cpp" line="46"/>
         <source>Detail</source>
-        <translation type="unfinished">Detail</translation>
+        <translation>Detail</translation>
     </message>
 </context>
 <context>
@@ -21923,110 +21807,110 @@ Do you want to save your changes?</source>
         <location filename="../../src/libs/vpropertyexplorer/qtcolorpicker.cpp" line="474"/>
         <location filename="../../src/libs/vpropertyexplorer/qtcolorpicker.cpp" line="621"/>
         <source>Black</source>
-        <translation type="unfinished">Schwarz</translation>
+        <translation>Schwarz</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpropertyexplorer/qtcolorpicker.cpp" line="475"/>
         <location filename="../../src/libs/vpropertyexplorer/qtcolorpicker.cpp" line="622"/>
         <source>White</source>
-        <translation type="unfinished">Weiß</translation>
+        <translation>Weiß</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpropertyexplorer/qtcolorpicker.cpp" line="476"/>
         <location filename="../../src/libs/vpropertyexplorer/qtcolorpicker.cpp" line="623"/>
         <source>Red</source>
-        <translation type="unfinished">Rot</translation>
+        <translation>Rot</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpropertyexplorer/qtcolorpicker.cpp" line="477"/>
         <location filename="../../src/libs/vpropertyexplorer/qtcolorpicker.cpp" line="624"/>
         <source>Dark red</source>
-        <translation type="unfinished"></translation>
+        <translation>Dunkelrot</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpropertyexplorer/qtcolorpicker.cpp" line="478"/>
         <location filename="../../src/libs/vpropertyexplorer/qtcolorpicker.cpp" line="625"/>
         <source>Green</source>
-        <translation type="unfinished">Grün</translation>
+        <translation>Grün</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpropertyexplorer/qtcolorpicker.cpp" line="479"/>
         <location filename="../../src/libs/vpropertyexplorer/qtcolorpicker.cpp" line="626"/>
         <source>Dark green</source>
-        <translation type="unfinished">Dunkelgrün</translation>
+        <translation>Dunkelgrün</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpropertyexplorer/qtcolorpicker.cpp" line="480"/>
         <location filename="../../src/libs/vpropertyexplorer/qtcolorpicker.cpp" line="627"/>
         <source>Blue</source>
-        <translation type="unfinished">Blau</translation>
+        <translation>Blau</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpropertyexplorer/qtcolorpicker.cpp" line="481"/>
         <location filename="../../src/libs/vpropertyexplorer/qtcolorpicker.cpp" line="628"/>
         <source>Dark blue</source>
-        <translation type="unfinished">Dunkelblau</translation>
+        <translation>Dunkelblau</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpropertyexplorer/qtcolorpicker.cpp" line="482"/>
         <location filename="../../src/libs/vpropertyexplorer/qtcolorpicker.cpp" line="629"/>
         <source>Cyan</source>
-        <translation type="unfinished">Blaugrün</translation>
+        <translation>Blaugrün</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpropertyexplorer/qtcolorpicker.cpp" line="483"/>
         <location filename="../../src/libs/vpropertyexplorer/qtcolorpicker.cpp" line="630"/>
         <source>Dark cyan</source>
-        <translation type="unfinished">Dunkelblaugrün</translation>
+        <translation>Dunkelblaugrün</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpropertyexplorer/qtcolorpicker.cpp" line="484"/>
         <location filename="../../src/libs/vpropertyexplorer/qtcolorpicker.cpp" line="631"/>
         <source>Magenta</source>
-        <translation type="unfinished">Purpurrot</translation>
+        <translation>Purpurrot</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpropertyexplorer/qtcolorpicker.cpp" line="485"/>
         <location filename="../../src/libs/vpropertyexplorer/qtcolorpicker.cpp" line="632"/>
         <source>Dark magenta</source>
-        <translation type="unfinished">Dunkelpurpurrot</translation>
+        <translation>Dunkelpurpurrot</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpropertyexplorer/qtcolorpicker.cpp" line="486"/>
         <location filename="../../src/libs/vpropertyexplorer/qtcolorpicker.cpp" line="633"/>
         <source>Yellow</source>
-        <translation type="unfinished">Gelb</translation>
+        <translation>Gelb</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpropertyexplorer/qtcolorpicker.cpp" line="487"/>
         <location filename="../../src/libs/vpropertyexplorer/qtcolorpicker.cpp" line="634"/>
         <source>Dark yellow</source>
-        <translation type="unfinished">Dunkelgelb</translation>
+        <translation>Dunkelgelb</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpropertyexplorer/qtcolorpicker.cpp" line="488"/>
         <location filename="../../src/libs/vpropertyexplorer/qtcolorpicker.cpp" line="635"/>
         <source>Gray</source>
-        <translation type="unfinished">Grau</translation>
+        <translation>Grau</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpropertyexplorer/qtcolorpicker.cpp" line="489"/>
         <location filename="../../src/libs/vpropertyexplorer/qtcolorpicker.cpp" line="636"/>
         <source>Dark gray</source>
-        <translation type="unfinished">Dunkelgrau</translation>
+        <translation>Dunkelgrau</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpropertyexplorer/qtcolorpicker.cpp" line="490"/>
         <location filename="../../src/libs/vpropertyexplorer/qtcolorpicker.cpp" line="637"/>
         <source>Light gray</source>
-        <translation type="unfinished">Hellgrau</translation>
+        <translation>Hellgrau</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpropertyexplorer/qtcolorpicker.cpp" line="575"/>
         <location filename="../../src/libs/vpropertyexplorer/qtcolorpicker.cpp" line="579"/>
         <source>Custom</source>
         <comment>color</comment>
-        <translation type="unfinished">Benutzerdefiniert</translation>
+        <translation>Benutzerdefiniert</translation>
     </message>
 </context>
 <context>
@@ -23135,10 +23019,6 @@ Do you want to save your changes?</source>
         <location filename="../../src/libs/vpatterndb/vpassmark.cpp" line="783"/>
         <source>Cannot calculate a notch for point &apos;%1&apos; in piece &apos;%2&apos;. Cannot find intersection.</source>
         <translation>Cannot calculate a notch for point &apos;%1&apos; in piece &apos;%2&apos;. Kann keinen Schnittpunkt finden.</translation>
-    </message>
-    <message>
-        <source>Cannot calculate a notch for point &apos;%1&apos; in piece &apos;%2&apos; with built in seam allowance. User must manually provide length.</source>
-        <translation type="vanished">Kann keinen Einschnitt für Punkt &apos;%1&apos; in Schnittteil &apos;%2&apos; berechnen mit vorgegebener Nahtzugabe. Der Benutzer muss die Länge manuell vorgeben.</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vpassmark.cpp" line="956"/>
@@ -27191,37 +27071,37 @@ Raw layout format compatibility error: actualFileVersion = %1 and fileVersion = 
         <translation>Form</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/dialogs/vwidgetdetails.cpp" line="296"/>
+        <location filename="../../src/app/valentina/dialogs/vwidgetdetails.cpp" line="294"/>
         <source>Unnamed</source>
         <translation>Unbenannt</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/dialogs/vwidgetdetails.cpp" line="309"/>
+        <location filename="../../src/app/valentina/dialogs/vwidgetdetails.cpp" line="307"/>
         <source>Select all</source>
         <translation>Alles auswählen</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/dialogs/vwidgetdetails.cpp" line="310"/>
+        <location filename="../../src/app/valentina/dialogs/vwidgetdetails.cpp" line="308"/>
         <source>Select none</source>
         <translation>Nichts auswählen</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/dialogs/vwidgetdetails.cpp" line="380"/>
+        <location filename="../../src/app/valentina/dialogs/vwidgetdetails.cpp" line="378"/>
         <source>select all details</source>
         <translation>alle Details auswählen</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/dialogs/vwidgetdetails.cpp" line="387"/>
+        <location filename="../../src/app/valentina/dialogs/vwidgetdetails.cpp" line="385"/>
         <source>select none details</source>
         <translation>Keine Details auswählen</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/dialogs/vwidgetdetails.cpp" line="314"/>
+        <location filename="../../src/app/valentina/dialogs/vwidgetdetails.cpp" line="312"/>
         <source>Invert selection</source>
         <translation>Auswahl umkehren</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/dialogs/vwidgetdetails.cpp" line="393"/>
+        <location filename="../../src/app/valentina/dialogs/vwidgetdetails.cpp" line="391"/>
         <source>invert selection</source>
         <translation>Auswahl umkehren</translation>
     </message>
@@ -27231,17 +27111,17 @@ Raw layout format compatibility error: actualFileVersion = %1 and fileVersion = 
         <translation>Nicht im Layout ausblenden</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/dialogs/vwidgetdetails.cpp" line="334"/>
+        <location filename="../../src/app/valentina/dialogs/vwidgetdetails.cpp" line="332"/>
         <source>Piece options</source>
         <translation>Teil Optionen</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/dialogs/vwidgetdetails.cpp" line="336"/>
+        <location filename="../../src/app/valentina/dialogs/vwidgetdetails.cpp" line="334"/>
         <source>Delete piece</source>
         <translation>Teil löschen</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/dialogs/vwidgetdetails.cpp" line="342"/>
+        <location filename="../../src/app/valentina/dialogs/vwidgetdetails.cpp" line="340"/>
         <source>Cannot find piece by id &apos;%1&apos;</source>
         <translation>Teil mit der Bezeichnung &apos;%1&apos; kann nicht gefunden werden</translation>
     </message>
@@ -27809,9 +27689,8 @@ Raw layout format compatibility error: actualFileVersion = %1 and fileVersion = 
         <translation>Ein unbekannter Fehler ist aufgetreten, zum Beispiel hat eine volle Festplattenpartition verhindert, dass die Sperrdatei geschrieben werden konnte. Ignorieren Sie diese Nachricht, wenn Sie fortfahren wollen (nicht empfohlen, kann zu Datenverlust führen).</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vlayout/dialogs/watermarkwindow.ui" line="193"/>
         <source>Color</source>
-        <translation>Farbe</translation>
+        <translation type="vanished">Farbe</translation>
     </message>
     <message>
         <location filename="../../src/libs/vlayout/dialogs/watermarkwindow.ui" line="200"/>

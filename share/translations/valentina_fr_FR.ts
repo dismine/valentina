@@ -90,14 +90,10 @@
 <context>
     <name>ColorPickerPopup</name>
     <message>
-        <source>Custom</source>
-        <translation type="vanished">Personnalisé</translation>
-    </message>
-    <message>
         <location filename="../../src/libs/vpropertyexplorer/qtcolorpicker.cpp" line="1237"/>
         <source>Custom</source>
         <comment>color</comment>
-        <translation type="unfinished"></translation>
+        <translation>Personnalisée</translation>
     </message>
 </context>
 <context>
@@ -678,9 +674,8 @@
         <translation>Outil</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogalongline.ui" line="332"/>
         <source>Color</source>
-        <translation type="unfinished">Couleur</translation>
+        <translation type="vanished">Couleur</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogalongline.ui" line="355"/>
@@ -747,9 +742,8 @@
         <translation type="vanished">Les angles ont pour valeurs</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogarc.ui" line="672"/>
         <source>Color</source>
-        <translation>Couleur</translation>
+        <translation type="vanished">Couleur</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogarc.cpp" line="473"/>
@@ -899,9 +893,8 @@
         <translation type="vanished">Choisir le point central de l&apos;arc</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogarcwithlength.ui" line="665"/>
         <source>Color</source>
-        <translation>Couleur</translation>
+        <translation type="vanished">Couleur</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogarcwithlength.cpp" line="402"/>
@@ -1191,9 +1184,8 @@
         <translation>Outil</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogbisector.ui" line="328"/>
         <source>Color</source>
-        <translation type="unfinished">Couleur</translation>
+        <translation type="vanished">Couleur</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogbisector.ui" line="351"/>
@@ -1288,9 +1280,8 @@
         <translation>Alias :</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogcubicbezier.ui" line="164"/>
         <source>Color</source>
-        <translation type="unfinished">Couleur</translation>
+        <translation type="vanished">Couleur</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogcubicbezier.ui" line="172"/>
@@ -1390,9 +1381,8 @@
         <translation>Alias :</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogcubicbezierpath.ui" line="310"/>
         <source>Color</source>
-        <translation type="unfinished">Couleur</translation>
+        <translation type="vanished">Couleur</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogcubicbezierpath.ui" line="333"/>
@@ -1519,9 +1509,8 @@
         <translation>Outil</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogcurveintersectaxis.ui" line="350"/>
         <source>Color</source>
-        <translation type="unfinished">Couleur</translation>
+        <translation type="vanished">Couleur</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogcurveintersectaxis.ui" line="373"/>
@@ -2995,9 +2984,8 @@
         <translation>Alias :</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogellipticalarc.ui" line="1053"/>
         <source>Color</source>
-        <translation type="unfinished">Couleur</translation>
+        <translation type="vanished">Couleur</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogellipticalarc.ui" line="1076"/>
@@ -3142,9 +3130,8 @@
         <translation>Outil</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogendline.ui" line="526"/>
         <source>Color</source>
-        <translation type="unfinished">Couleur</translation>
+        <translation type="vanished">Couleur</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogendline.ui" line="549"/>
@@ -3505,9 +3492,8 @@
         <translation>Couleur :</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogflippingbyaxis.ui" line="101"/>
         <source>Color</source>
-        <translation type="unfinished">Couleur</translation>
+        <translation type="vanished">Couleur</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogflippingbyaxis.ui" line="205"/>
@@ -3661,9 +3647,8 @@
         <translation>Couleur :</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogflippingbyline.ui" line="101"/>
         <source>Color</source>
-        <translation type="unfinished">Couleur</translation>
+        <translation type="vanished">Couleur</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogflippingbyline.ui" line="205"/>
@@ -3865,9 +3850,8 @@
         <translation>Outil</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogheight.ui" line="147"/>
         <source>Color</source>
-        <translation type="unfinished">Couleur</translation>
+        <translation type="vanished">Couleur</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogheight.ui" line="155"/>
@@ -5233,9 +5217,8 @@ Appliquer quand même les réglages ?</translation>
         <translation>Outil</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogline.ui" line="152"/>
         <source>Color</source>
-        <translation type="unfinished">Couleur</translation>
+        <translation type="vanished">Couleur</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogline.ui" line="160"/>
@@ -5470,9 +5453,8 @@ Appliquer quand même les réglages ?</translation>
         <translation>Outil</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialoglineintersectaxis.ui" line="349"/>
         <source>Color</source>
-        <translation type="unfinished">Couleur</translation>
+        <translation type="vanished">Couleur</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialoglineintersectaxis.ui" line="372"/>
@@ -5873,9 +5855,8 @@ Appliquer quand même les réglages ?</translation>
         <translation>Couleur :</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogmove.ui" line="108"/>
         <source>Color</source>
-        <translation type="unfinished">Couleur</translation>
+        <translation type="vanished">Couleur</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogmove.ui" line="744"/>
@@ -6191,9 +6172,8 @@ Appliquer quand même les réglages ?</translation>
         <translation>Outil</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialognormal.ui" line="522"/>
         <source>Color</source>
-        <translation type="unfinished">Couleur</translation>
+        <translation type="vanished">Couleur</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialognormal.ui" line="545"/>
@@ -8221,11 +8201,6 @@ Appliquer quand même les réglages ?</translation>
         <translation>Couleur :</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogrotation.ui" line="101"/>
-        <source>PushButton</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogrotation.ui" line="370"/>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogrotation.cpp" line="823"/>
         <source>Ready</source>
@@ -8461,17 +8436,17 @@ Appliquer quand même les réglages ?</translation>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialogsavelayout.cpp" line="174"/>
         <source>Tried to use out of range file format type number.</source>
-        <translation type="unfinished"></translation>
+        <translation>Vous avez tenté d&apos;utiliser un type de format de fichier en dehors de la plage de valeur.</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialogsavelayout.cpp" line="182"/>
         <source>Selected not present file format.</source>
-        <translation type="unfinished"></translation>
+        <translation>Format de fichier sélectionné, absent.</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialogsavelayout.cpp" line="197"/>
         <source>Selected not present file format type.</source>
-        <translation type="unfinished"></translation>
+        <translation>Type de format de fichier selectionné, absent.</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialogsavelayout.cpp" line="378"/>
@@ -8645,27 +8620,19 @@ Appliquer quand même les réglages ?</translation>
         <translation>Sélectionner un dossier</translation>
     </message>
     <message>
-        <source>Tried to use out of range format number.</source>
-        <translation type="vanished">Nombre au delà de la plage de valeur.</translation>
-    </message>
-    <message>
-        <source>Selected not present format.</source>
-        <translation type="vanished">Format sélectionné, absent.</translation>
-    </message>
-    <message>
         <location filename="../../src/app/puzzle/dialogs/dialogsavemanuallayout.cpp" line="186"/>
         <source>Tried to use out of range file format type number.</source>
-        <translation type="unfinished"></translation>
+        <translation>Vous avez tenté d&apos;utiliser un type de format de fichier en dehors de la plage de valeur.</translation>
     </message>
     <message>
         <location filename="../../src/app/puzzle/dialogs/dialogsavemanuallayout.cpp" line="194"/>
         <source>Selected not present file format.</source>
-        <translation type="unfinished"></translation>
+        <translation>Format de fichier sélectionné, absent.</translation>
     </message>
     <message>
         <location filename="../../src/app/puzzle/dialogs/dialogsavemanuallayout.cpp" line="209"/>
         <source>Selected not present file format type.</source>
-        <translation type="unfinished"></translation>
+        <translation>Type de format de fichier selectionné, absent.</translation>
     </message>
     <message>
         <location filename="../../src/app/puzzle/dialogs/dialogsavemanuallayout.cpp" line="380"/>
@@ -9654,9 +9621,8 @@ Appliquer quand même les réglages ?</translation>
         <translation>Outil</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogshoulderpoint.ui" line="379"/>
         <source>Color</source>
-        <translation type="unfinished">Couleur</translation>
+        <translation type="vanished">Couleur</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogshoulderpoint.ui" line="402"/>
@@ -9758,9 +9724,8 @@ Appliquer quand même les réglages ?</translation>
         <translation>Courbe cubique simple</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogspline.ui" line="931"/>
         <source>Color</source>
-        <translation>Couleur</translation>
+        <translation type="vanished">Couleur</translation>
     </message>
     <message>
         <source>Coefficient of curvature of the curve:</source>
@@ -9950,9 +9915,8 @@ Appliquer quand même les réglages ?</translation>
         <translation>Sélectionner un point de la courbe</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogsplinepath.ui" line="1053"/>
         <source>Color</source>
-        <translation>Couleur</translation>
+        <translation type="vanished">Couleur</translation>
     </message>
     <message>
         <source>Coefficient of curvature of the curve:</source>
@@ -15064,9 +15028,8 @@ This option will take an affect after restart.</source>
         <translation>Les champs saisis dans la formule &apos;%1&apos; sont erronés. Erreur de formule : %2.</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vlayout/vtextmanager.cpp" line="496"/>
         <source>%1 %2.</source>
-        <translation type="unfinished"></translation>
+        <translation type="vanished">%1 %2.</translation>
     </message>
     <message>
         <location filename="../../src/libs/vlayout/vtextmanager.cpp" line="548"/>
@@ -15327,7 +15290,7 @@ This option will take an affect after restart.</source>
     <message>
         <location filename="../../src/libs/vtools/undocommands/renamepiece.cpp" line="40"/>
         <source>rename detail</source>
-        <translation type="unfinished"></translation>
+        <translation>Renommer la pièce</translation>
     </message>
 </context>
 <context>
@@ -15582,81 +15545,6 @@ This option will take an affect after restart.</source>
     </message>
 </context>
 <context>
-    <name>QtColorPicker</name>
-    <message>
-        <source>Black</source>
-        <translation type="vanished">Noir</translation>
-    </message>
-    <message>
-        <source>White</source>
-        <translation type="vanished">Blanc</translation>
-    </message>
-    <message>
-        <source>Red</source>
-        <translation type="vanished">Rouge</translation>
-    </message>
-    <message>
-        <source>Dark red</source>
-        <translation type="vanished">Rouge foncé</translation>
-    </message>
-    <message>
-        <source>Green</source>
-        <translation type="vanished">Vert</translation>
-    </message>
-    <message>
-        <source>Dark green</source>
-        <translation type="vanished">Vert foncé</translation>
-    </message>
-    <message>
-        <source>Blue</source>
-        <translation type="vanished">Bleu</translation>
-    </message>
-    <message>
-        <source>Dark blue</source>
-        <translation type="vanished">Bleu foncé</translation>
-    </message>
-    <message>
-        <source>Cyan</source>
-        <translation type="vanished">Cyan</translation>
-    </message>
-    <message>
-        <source>Dark cyan</source>
-        <translation type="vanished">Cyan foncé</translation>
-    </message>
-    <message>
-        <source>Magenta</source>
-        <translation type="vanished">Magenta</translation>
-    </message>
-    <message>
-        <source>Dark magenta</source>
-        <translation type="vanished">Magenta foncé</translation>
-    </message>
-    <message>
-        <source>Yellow</source>
-        <translation type="vanished">Jaune</translation>
-    </message>
-    <message>
-        <source>Dark yellow</source>
-        <translation type="vanished">Gris anthracite</translation>
-    </message>
-    <message>
-        <source>Gray</source>
-        <translation type="vanished">Gris</translation>
-    </message>
-    <message>
-        <source>Dark gray</source>
-        <translation type="vanished">Gris foncé</translation>
-    </message>
-    <message>
-        <source>Light gray</source>
-        <translation type="vanished">Gris clair</translation>
-    </message>
-    <message>
-        <source>Custom</source>
-        <translation type="vanished">Personnalisé</translation>
-    </message>
-</context>
-<context>
     <name>RemoveItemFromGroup</name>
     <message>
         <location filename="../../src/libs/vtools/undocommands/undogroup.cpp" line="273"/>
@@ -15693,7 +15581,7 @@ This option will take an affect after restart.</source>
     <message>
         <location filename="../../src/libs/vtools/undocommands/renamepiece.cpp" line="46"/>
         <source>Detail</source>
-        <translation type="unfinished"></translation>
+        <translation>Pièces</translation>
     </message>
 </context>
 <context>
@@ -18375,12 +18263,12 @@ Voulez-vous enregistrer vos changements ?</translation>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabpaths.ui" line="502"/>
         <source>When the number of copies is greater than 1 and either &apos;Force Flipping&apos; or &apos;Forbid Flipping&apos; is selected, each even-numbered copy of the piece will be flipped vertically. The &apos;Force Flipping&apos; or &apos;Forbid Flipping&apos; setting will also toggle for each copy, applying the opposite of the initially selected option for each subsequent copy.</source>
-        <translation type="unfinished"></translation>
+        <translation>Si le nombre de copies est supérieur à 1 et que les options &quot;Forcer le placement en miroir&quot; ou &quot;Interdire le placement en miroir&quot;, sont sélectionnées, chaque copie paire de la pièce sera retournée verticalement. L&apos;option &quot;Forcer le placement en miroir&quot; ou &quot;Interdire le placement en miroir&quot;, sera aussi inversée dans ces copies paires par rapport à l&apos;option initialement cochée.</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabpaths.ui" line="505"/>
         <source>Symmetrical copy</source>
-        <translation type="unfinished"></translation>
+        <translation>Copie symétrique</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabpaths.ui" line="512"/>
@@ -21214,7 +21102,7 @@ Voulez-vous enregistrer vos changements ?</translation>
     <message>
         <location filename="../../src/libs/ifc/xml/vdomdocument.cpp" line="750"/>
         <source>Parsing error in file %3 at line %1, column %2</source>
-        <translation type="unfinished"></translation>
+        <translation>Erreur d&apos;analyse : fichier %3, ligne %1, colonne %2</translation>
     </message>
     <message>
         <location filename="../../src/libs/ifc/xml/vdomdocument.cpp" line="880"/>
@@ -21926,110 +21814,110 @@ Voulez-vous enregistrer vos changements ?</translation>
         <location filename="../../src/libs/vpropertyexplorer/qtcolorpicker.cpp" line="474"/>
         <location filename="../../src/libs/vpropertyexplorer/qtcolorpicker.cpp" line="621"/>
         <source>Black</source>
-        <translation type="unfinished">Noir</translation>
+        <translation>Noir</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpropertyexplorer/qtcolorpicker.cpp" line="475"/>
         <location filename="../../src/libs/vpropertyexplorer/qtcolorpicker.cpp" line="622"/>
         <source>White</source>
-        <translation type="unfinished">Blanc</translation>
+        <translation>Blanc</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpropertyexplorer/qtcolorpicker.cpp" line="476"/>
         <location filename="../../src/libs/vpropertyexplorer/qtcolorpicker.cpp" line="623"/>
         <source>Red</source>
-        <translation type="unfinished">Rouge</translation>
+        <translation>Rouge</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpropertyexplorer/qtcolorpicker.cpp" line="477"/>
         <location filename="../../src/libs/vpropertyexplorer/qtcolorpicker.cpp" line="624"/>
         <source>Dark red</source>
-        <translation type="unfinished">Rouge foncé</translation>
+        <translation>Rouge foncé</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpropertyexplorer/qtcolorpicker.cpp" line="478"/>
         <location filename="../../src/libs/vpropertyexplorer/qtcolorpicker.cpp" line="625"/>
         <source>Green</source>
-        <translation type="unfinished">Vert</translation>
+        <translation>Vert</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpropertyexplorer/qtcolorpicker.cpp" line="479"/>
         <location filename="../../src/libs/vpropertyexplorer/qtcolorpicker.cpp" line="626"/>
         <source>Dark green</source>
-        <translation type="unfinished">Vert foncé</translation>
+        <translation>Vert foncé</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpropertyexplorer/qtcolorpicker.cpp" line="480"/>
         <location filename="../../src/libs/vpropertyexplorer/qtcolorpicker.cpp" line="627"/>
         <source>Blue</source>
-        <translation type="unfinished">Bleu</translation>
+        <translation>Bleu</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpropertyexplorer/qtcolorpicker.cpp" line="481"/>
         <location filename="../../src/libs/vpropertyexplorer/qtcolorpicker.cpp" line="628"/>
         <source>Dark blue</source>
-        <translation type="unfinished">Bleu foncé</translation>
+        <translation>Bleu foncé</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpropertyexplorer/qtcolorpicker.cpp" line="482"/>
         <location filename="../../src/libs/vpropertyexplorer/qtcolorpicker.cpp" line="629"/>
         <source>Cyan</source>
-        <translation type="unfinished">Cyan</translation>
+        <translation>Cyan</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpropertyexplorer/qtcolorpicker.cpp" line="483"/>
         <location filename="../../src/libs/vpropertyexplorer/qtcolorpicker.cpp" line="630"/>
         <source>Dark cyan</source>
-        <translation type="unfinished">Cyan foncé</translation>
+        <translation>Cyan foncé</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpropertyexplorer/qtcolorpicker.cpp" line="484"/>
         <location filename="../../src/libs/vpropertyexplorer/qtcolorpicker.cpp" line="631"/>
         <source>Magenta</source>
-        <translation type="unfinished">Magenta</translation>
+        <translation>Magenta</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpropertyexplorer/qtcolorpicker.cpp" line="485"/>
         <location filename="../../src/libs/vpropertyexplorer/qtcolorpicker.cpp" line="632"/>
         <source>Dark magenta</source>
-        <translation type="unfinished">Magenta foncé</translation>
+        <translation>Magenta foncé</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpropertyexplorer/qtcolorpicker.cpp" line="486"/>
         <location filename="../../src/libs/vpropertyexplorer/qtcolorpicker.cpp" line="633"/>
         <source>Yellow</source>
-        <translation type="unfinished">Jaune</translation>
+        <translation>Jaune</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpropertyexplorer/qtcolorpicker.cpp" line="487"/>
         <location filename="../../src/libs/vpropertyexplorer/qtcolorpicker.cpp" line="634"/>
         <source>Dark yellow</source>
-        <translation type="unfinished">Gris anthracite</translation>
+        <translation>Gris anthracite</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpropertyexplorer/qtcolorpicker.cpp" line="488"/>
         <location filename="../../src/libs/vpropertyexplorer/qtcolorpicker.cpp" line="635"/>
         <source>Gray</source>
-        <translation type="unfinished">Gris</translation>
+        <translation>Gris</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpropertyexplorer/qtcolorpicker.cpp" line="489"/>
         <location filename="../../src/libs/vpropertyexplorer/qtcolorpicker.cpp" line="636"/>
         <source>Dark gray</source>
-        <translation type="unfinished">Gris foncé</translation>
+        <translation>Gris foncé</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpropertyexplorer/qtcolorpicker.cpp" line="490"/>
         <location filename="../../src/libs/vpropertyexplorer/qtcolorpicker.cpp" line="637"/>
         <source>Light gray</source>
-        <translation type="unfinished">Gris clair</translation>
+        <translation>Gris clair</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpropertyexplorer/qtcolorpicker.cpp" line="575"/>
         <location filename="../../src/libs/vpropertyexplorer/qtcolorpicker.cpp" line="579"/>
         <source>Custom</source>
         <comment>color</comment>
-        <translation type="unfinished"></translation>
+        <translation>Personnalisée</translation>
     </message>
 </context>
 <context>
@@ -23140,13 +23028,9 @@ Voulez-vous enregistrer vos changements ?</translation>
         <translation>Impossible de calculer un cran d&apos;assemblage pour le point &apos;%1&apos; dans la pièce &apos;%2&apos;. Impossible de trouver une intersection.</translation>
     </message>
     <message>
-        <source>Cannot calculate a notch for point &apos;%1&apos; in piece &apos;%2&apos; with built in seam allowance. User must manually provide length.</source>
-        <translation type="vanished">Impossible de calculer un cran d&apos;assemblage pour le point &apos;%1&apos; dans la pièce &apos;%2&apos; avec la marge de couture intégrée. Merci de saisir une longueur manuelle.</translation>
-    </message>
-    <message>
         <location filename="../../src/libs/vpatterndb/vpassmark.cpp" line="956"/>
         <source>Cannot calculate a notch for point &apos;%1&apos; in piece &apos;%2&apos; with built-in seam allowance. User must manually provide length.</source>
-        <translation type="unfinished"></translation>
+        <translation>Impossible de calculer un cran d&apos;assemblage pour le point &apos;%1&apos; dans la pièce &apos;%2&apos; avec la marge de couture intégrée. Merci de saisir une longueur manuelle.</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vpassmark.cpp" line="1073"/>
@@ -27195,37 +27079,37 @@ Erreur de compatibilité du format .rld: actualFileVersion = %1 alors que fileVe
         <translation>Formulaire</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/dialogs/vwidgetdetails.cpp" line="296"/>
+        <location filename="../../src/app/valentina/dialogs/vwidgetdetails.cpp" line="294"/>
         <source>Unnamed</source>
         <translation>Sans nom</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/dialogs/vwidgetdetails.cpp" line="309"/>
+        <location filename="../../src/app/valentina/dialogs/vwidgetdetails.cpp" line="307"/>
         <source>Select all</source>
         <translation>Tout sélectionner</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/dialogs/vwidgetdetails.cpp" line="310"/>
+        <location filename="../../src/app/valentina/dialogs/vwidgetdetails.cpp" line="308"/>
         <source>Select none</source>
         <translation>Tout désélectionner</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/dialogs/vwidgetdetails.cpp" line="380"/>
+        <location filename="../../src/app/valentina/dialogs/vwidgetdetails.cpp" line="378"/>
         <source>select all details</source>
         <translation>Selectionner toutes les pièces</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/dialogs/vwidgetdetails.cpp" line="387"/>
+        <location filename="../../src/app/valentina/dialogs/vwidgetdetails.cpp" line="385"/>
         <source>select none details</source>
         <translation>Ne sélectionner aucune pièce</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/dialogs/vwidgetdetails.cpp" line="314"/>
+        <location filename="../../src/app/valentina/dialogs/vwidgetdetails.cpp" line="312"/>
         <source>Invert selection</source>
         <translation>Inverser la sélection</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/dialogs/vwidgetdetails.cpp" line="393"/>
+        <location filename="../../src/app/valentina/dialogs/vwidgetdetails.cpp" line="391"/>
         <source>invert selection</source>
         <translation>inverser la sélection</translation>
     </message>
@@ -27235,17 +27119,17 @@ Erreur de compatibilité du format .rld: actualFileVersion = %1 alors que fileVe
         <translation>Afficher dans le plan de coupe</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/dialogs/vwidgetdetails.cpp" line="334"/>
+        <location filename="../../src/app/valentina/dialogs/vwidgetdetails.cpp" line="332"/>
         <source>Piece options</source>
         <translation>Options de la pièce</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/dialogs/vwidgetdetails.cpp" line="336"/>
+        <location filename="../../src/app/valentina/dialogs/vwidgetdetails.cpp" line="334"/>
         <source>Delete piece</source>
         <translation>Supprimer la pièce</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/dialogs/vwidgetdetails.cpp" line="342"/>
+        <location filename="../../src/app/valentina/dialogs/vwidgetdetails.cpp" line="340"/>
         <source>Cannot find piece by id &apos;%1&apos;</source>
         <translation>Impossible de trouver la pièce avec l&apos;identifiant &apos;%1&apos;</translation>
     </message>
@@ -27829,9 +27713,8 @@ Erreur de compatibilité du format .rld: actualFileVersion = %1 alors que fileVe
         <translation>Une erreur inconnue s&apos;est produite, par exemple pour cause de partition pleine. Ignorer pour continuer (déconseillé, peut entraîner une corruption de données).</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vlayout/dialogs/watermarkwindow.ui" line="193"/>
         <source>Color</source>
-        <translation>Couleur</translation>
+        <translation type="vanished">Couleur</translation>
     </message>
     <message>
         <location filename="../../src/libs/vlayout/dialogs/watermarkwindow.ui" line="200"/>
