@@ -329,7 +329,7 @@
          <item row="4" column="1">
           <widget class="VPE::QtColorPicker" name="pushButtonLineColor">
            <property name="text">
-            <string>Color</string>
+            <string notr="true">Color</string>
            </property>
           </widget>
          </item>
