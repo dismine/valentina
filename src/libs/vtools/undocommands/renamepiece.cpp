@@ -70,9 +70,8 @@ auto RenamePiece::mergeWith(const QUndoCommand *command) -> bool
 {
     const auto *renameCommand = static_cast<const RenamePiece *>(command);
     SCASSERT(renameCommand != nullptr)
-    const quint32 id = renameCommand->getDetId();
 
-    if (id != nodeId)
+    if (const quint32 id = renameCommand->getDetId(); id != nodeId)
     {
         return false;
     }

@@ -212,7 +212,7 @@ class ColorPickerPopup : public QFrame
 
 public:
     ColorPickerPopup(int width, bool withColorDialog, QWidget *parent = nullptr);
-    ~ColorPickerPopup() override;
+    ~ColorPickerPopup() override = default;
 
     void insertColor(const QColor &col, const QString &text, vsizetype index, bool custom = false);
     void exec();
@@ -229,7 +229,7 @@ public:
     auto getUseNativeDialog() const -> bool;
     void setUseNativeDialog(bool newUseNativeDialog);
 
-    void setDefaultColor(const QColor &color);
+    void setDefaultColor(const QColor &color) const;
 
 signals:
     void selected(const QColor &color);
@@ -255,7 +255,6 @@ private:
     QList<ColorPickerItem *> items{};
     QGridLayout *grid{nullptr};
     ColorPickerButton *moreButton{nullptr};
-    QEventLoop *eventLoop{nullptr};
 
     int lastPos{0};
     int cols;
@@ -265,7 +264,7 @@ private:
 
     auto findFocusedWidget(int &row, int &col) -> bool;
 
-    void navigateLeft(int &row, int &col);
+    void navigateLeft(int &row, int &col) const;
     void navigateRight(int &row, int &col);
     static void navigateUp(int &row, int &col);
     void navigateDown(int &row, int &col);
@@ -668,21 +667,7 @@ ColorPickerPopup::ColorPickerPopup(int width, bool withColorDialog, QWidget *par
         moreButton = nullptr;
     }
 
-    eventLoop = nullptr;
-    grid = nullptr;
     regenerateGrid();
-}
-
-/*! \internal
-
-    Destructs the popup widget.
-*/
-ColorPickerPopup::~ColorPickerPopup()
-{
-    if (eventLoop != nullptr)
-    {
-        eventLoop->exit();
-    }
 }
 
 /*! \internal
@@ -692,11 +677,11 @@ ColorPickerPopup::~ColorPickerPopup()
 */
 auto ColorPickerPopup::find(const QColor &col) const -> ColorPickerItem *
 {
-    auto item = std::find_if(items.begin(),
-                             items.end(),
-                             [col](ColorPickerItem *item) { return (item != nullptr) && item->color() == col; });
-
-    if (item != items.end())
+    if (auto item = std::find_if(items.begin(),
+                                 items.end(),
+                                 [col](const ColorPickerItem *currentItem)
+                                 { return (currentItem != nullptr) && currentItem->color() == col; });
+        item != items.end())
     {
         return *item;
     }
@@ -763,8 +748,7 @@ auto ColorPickerPopup::color(int index) const -> QColor
         return {};
     }
 
-    auto *that = const_cast<ColorPickerPopup *>(this); // NOLINT(cppcoreguidelines-pro-type-const-cast)
-    return that->items.at(index)->color();
+    return items.at(index)->color();
 }
 
 auto ColorPickerPopup::CustomItems() const -> QVector<ColorPickerItem *>
@@ -790,10 +774,9 @@ void ColorPickerPopup::exec()
 {
     show();
 
-    QEventLoop e;
-    eventLoop = &e;
-    (void)e.exec();
-    eventLoop = nullptr;
+    QEventLoop eventLoop;
+    connect(this, &ColorPickerPopup::hid, &eventLoop, &QEventLoop::quit);
+    eventLoop.exec();
 }
 
 /*! \internal
@@ -801,12 +784,11 @@ void ColorPickerPopup::exec()
 */
 void ColorPickerPopup::updateSelected()
 {
-    QLayoutItem *layoutItem = nullptr;
+    const QLayoutItem *layoutItem = nullptr;
     int i = 0;
     while ((layoutItem = grid->itemAt(i)) != nullptr)
     {
-        QWidget *w = layoutItem->widget();
-        if ((w != nullptr) && w->inherits("ColorPickerItem"))
+        if (QWidget *w = layoutItem->widget(); (w != nullptr) && w->inherits("ColorPickerItem"))
         {
             // NOLINTNEXTLINE(cppcoreguidelines-pro-type-reinterpret-cast)
             auto *litem = reinterpret_cast<ColorPickerItem *>(layoutItem->widget());
@@ -890,11 +872,6 @@ void ColorPickerPopup::keyPressEvent(QKeyEvent *e)
 */
 void ColorPickerPopup::hideEvent(QHideEvent *e)
 {
-    if (eventLoop != nullptr)
-    {
-        eventLoop->exit();
-    }
-
     setFocus();
 
     emit hid();
@@ -975,7 +952,8 @@ void ColorPickerPopup::regenerateGrid()
         if (item != nullptr)
         {
             widgetAt[crow][ccol] = item;
-            grid->addWidget(item, crow, ccol++);
+            grid->addWidget(item, crow, ccol);
+            ++ccol;
             if (ccol == columns)
             {
                 ++crow;
@@ -1002,7 +980,7 @@ void ColorPickerPopup::setUseNativeDialog(bool newUseNativeDialog)
     useNativeDialog = newUseNativeDialog;
 }
 
-void ColorPickerPopup::setDefaultColor(const QColor &color)
+void ColorPickerPopup::setDefaultColor(const QColor &color) const
 {
     if (ColorPickerItem *existingItem = find(color); existingItem != nullptr)
     {
@@ -1048,7 +1026,7 @@ auto ColorPickerPopup::findFocusedWidget(int &row, int &col) -> bool
     \param row Reference to the current row index, updated during navigation.
     \param col Reference to the current column index, updated during navigation.
 */
-void ColorPickerPopup::navigateLeft(int &row, int &col)
+void ColorPickerPopup::navigateLeft(int &row, int &col) const
 {
     if (col > 0)
     {
@@ -1120,7 +1098,7 @@ void ColorPickerPopup::navigateDown(int &row, int &col)
 {
     if (row < grid->rowCount() - 1)
     {
-        if (QWidget *w = widgetAt[row + 1][col]; w != nullptr)
+        if (const QWidget *w = widgetAt[row + 1][col]; w != nullptr)
         {
             ++row;
         }
@@ -1177,11 +1155,11 @@ void ColorPickerPopup::selectColor(ColorPickerItem *item)
 {
     item->setSelected(true);
 
-    QLayoutItem *layoutItem = nullptr;
+    const QLayoutItem *layoutItem = nullptr;
     int i = 0;
     while ((layoutItem = grid->itemAt(i)) != nullptr)
     {
-        if (QWidget *wl = layoutItem->widget(); (wl != nullptr) && wl->inherits("ColorPickerItem"))
+        if (const QWidget *wl = layoutItem->widget(); (wl != nullptr) && wl->inherits("ColorPickerItem"))
         {
             // NOLINTNEXTLINE(cppcoreguidelines-pro-type-reinterpret-cast)
             auto *litem = reinterpret_cast<ColorPickerItem *>(layoutItem->widget());
@@ -1222,7 +1200,7 @@ void ColorPickerPopup::setFocusOnWidget(int row, int col)
 */
 void ColorPickerPopup::getColorFromDialog()
 {
-    QColorDialog::ColorDialogOptions options = QColorDialog::ColorDialogOptions();
+    auto options = QColorDialog::ColorDialogOptions();
     if (!useNativeDialog)
     {
         options = QColorDialog::DontUseNativeDialog;
