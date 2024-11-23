@@ -1987,6 +1987,78 @@ void MainWindow::ExportToCSVData(const QString &fileName, bool withHeader, int m
     csv.toCSV(fileName, error, withHeader, separator, VTextCodec::codecForMib(mib));
 }
 
+//---------------------------------------------------------------------------------------------------------------------
+void MainWindow::dragEnterEvent(QDragEnterEvent* event)
+{
+    if (const QMimeData *mime = event->mimeData(); mime != nullptr && mime->hasText())
+    {
+        if (QUrl const urlPath(mime->text().simplified()); urlPath.isLocalFile())
+        {
+            if (QMimeType const mimeType = QMimeDatabase().mimeTypeForFile(urlPath.toLocalFile(),
+                                                                     QMimeDatabase::MatchDefault);
+                mimeType.name() == "application/xml"_L1 || mimeType.name().endsWith("+xml"_L1))
+            {
+                event->acceptProposedAction();
+            }
+            else
+            {
+                event->ignore();
+            }
+        }
+    }
+
+    MainWindowsNoGUI::dragEnterEvent(event);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void MainWindow::dragMoveEvent(QDragMoveEvent* event)
+{
+    if (const QMimeData *mime = event->mimeData(); mime != nullptr && mime->hasText())
+    {
+        if (QUrl const urlPath(mime->text().simplified()); urlPath.isLocalFile())
+        {
+            if (QMimeType const mimeType = QMimeDatabase().mimeTypeForFile(urlPath.toLocalFile(),
+                                                                           QMimeDatabase::MatchDefault);
+                mimeType.name() == "application/xml"_L1 || mimeType.name().endsWith("+xml"_L1))
+            {
+                event->acceptProposedAction();
+            }
+            else
+            {
+                event->ignore();
+            }
+        }
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void MainWindow::dragLeaveEvent(QDragLeaveEvent* event)
+{
+    event->accept();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void MainWindow::dropEvent(QDropEvent* event)
+{
+    if (const QMimeData *mime = event->mimeData(); mime != nullptr && mime->hasText())
+    {
+        if (QUrl const urlPath(mime->text().simplified()); urlPath.isLocalFile())
+        {
+            QString const filePath = urlPath.toLocalFile();
+            if (QMimeType const mimeType = QMimeDatabase().mimeTypeForFile(filePath, QMimeDatabase::MatchDefault);
+                mimeType.name() == "application/xml"_L1 || mimeType.name().endsWith("+xml"_L1))
+            {
+                LoadPattern(filePath);
+                event->acceptProposedAction();
+            }
+            else
+            {
+                event->ignore();
+            }
+        }
+    }
+}
+
 #if defined(Q_OS_MAC)
 //---------------------------------------------------------------------------------------------------------------------
 void MainWindow::ToolBarStyle(QToolBar *bar) const
@@ -4714,6 +4786,7 @@ void MainWindow::SetEnableWidgets(bool enable)
     // Now we don't want allow user call context menu
     m_sceneDraw->SetDisableTools(!enable, doc->GetNameActivPP());
     ui->view->setEnabled(enable);
+    ui->view->setAcceptDrops(enable);
 }
 
 //---------------------------------------------------------------------------------------------------------------------

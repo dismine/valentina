@@ -650,38 +650,43 @@ void VMainGraphicsView::mouseDoubleClickEvent(QMouseEvent *event)
 void VMainGraphicsView::dragEnterEvent(QDragEnterEvent *event)
 {
     const QMimeData *mime = event->mimeData();
-    auto *currentScene = qobject_cast<VMainGraphicsScene *>(scene());
-    if (currentScene != nullptr && currentScene->AcceptDrop() && mime != nullptr && mime->hasText())
+
+    if (auto *currentScene = qobject_cast<VMainGraphicsScene *>(scene());
+        currentScene != nullptr && currentScene->AcceptDrop() && mime != nullptr && mime->hasText())
     {
-        QUrl const urlPath(mime->text().simplified());
-        if (urlPath.isLocalFile())
+        if (QUrl const urlPath(mime->text().simplified()); urlPath.isLocalFile())
         {
             const QString fileName = urlPath.toLocalFile();
-            QFileInfo const f(fileName);
-            if (f.exists() && IsMimeTypeImage(QMimeDatabase().mimeTypeForFile(fileName)))
+            if (QFileInfo const f(fileName); f.exists() && IsMimeTypeImage(QMimeDatabase().mimeTypeForFile(fileName)))
             {
                 event->acceptProposedAction();
             }
+            else
+            {
+                event->ignore();
+            }
         }
     }
-    QGraphicsView::dragEnterEvent(event);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 void VMainGraphicsView::dragMoveEvent(QDragMoveEvent *event)
 {
     const QMimeData *mime = event->mimeData();
-    auto *currentScene = qobject_cast<VMainGraphicsScene *>(scene());
-    if (currentScene != nullptr && currentScene->AcceptDrop() && mime != nullptr && mime->hasText())
+
+    if (auto *currentScene = qobject_cast<VMainGraphicsScene *>(scene());
+        currentScene != nullptr && currentScene->AcceptDrop() && mime != nullptr && mime->hasText())
     {
-        QUrl const urlPath(mime->text().simplified());
-        if (urlPath.isLocalFile())
+        if (QUrl const urlPath(mime->text().simplified()); urlPath.isLocalFile())
         {
             const QString fileName = urlPath.toLocalFile();
-            QFileInfo const f(fileName);
-            if (f.exists() && IsMimeTypeImage(QMimeDatabase().mimeTypeForFile(fileName)))
+            if (QFileInfo const f(fileName); f.exists() && IsMimeTypeImage(QMimeDatabase().mimeTypeForFile(fileName)))
             {
                 event->acceptProposedAction();
+            }
+            else
+            {
+                event->ignore();
             }
         }
     }
@@ -691,18 +696,21 @@ void VMainGraphicsView::dragMoveEvent(QDragMoveEvent *event)
 void VMainGraphicsView::dropEvent(QDropEvent *event)
 {
     const QMimeData *mime = event->mimeData();
-    auto *currentScene = qobject_cast<VMainGraphicsScene *>(scene());
-    if (currentScene != nullptr && currentScene->AcceptDrop() && mime != nullptr && mime->hasText())
+
+    if (auto *currentScene = qobject_cast<VMainGraphicsScene *>(scene());
+        currentScene != nullptr && currentScene->AcceptDrop() && mime != nullptr && mime->hasText())
     {
-        QUrl const urlPath(mime->text().simplified());
-        if (urlPath.isLocalFile())
+        if (QUrl const urlPath(mime->text().simplified()); urlPath.isLocalFile())
         {
             const QString fileName = urlPath.toLocalFile();
-            QFileInfo const f(fileName);
-            if (f.exists() && IsMimeTypeImage(QMimeDatabase().mimeTypeForFile(fileName)))
+            if (QFileInfo const f(fileName); f.exists() && IsMimeTypeImage(QMimeDatabase().mimeTypeForFile(fileName)))
             {
                 emit currentScene->AddBackgroundImage(mapToScene(DropEventPos(event)), fileName);
                 event->acceptProposedAction();
+            }
+            else
+            {
+                event->ignore();
             }
         }
     }

@@ -28,6 +28,7 @@
 - New option Symmetrical copy.
 - Renaming a piece name from piece list.
 - Tool color picker.
+- Valentina app. Added support for drag and drop of pattern files.
 
 # Valentina 0.7.53 June 25, 2024
 - Fix layout sheet export with empty name.

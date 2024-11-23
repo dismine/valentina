@@ -120,11 +120,9 @@ void VPMainGraphicsView::RefreshLayout() const
 //---------------------------------------------------------------------------------------------------------------------
 void VPMainGraphicsView::RefreshPieces() const
 {
-    VPLayoutPtr const layout = m_layout.toStrongRef();
-    if (not layout.isNull())
+    if (VPLayoutPtr const layout = m_layout.toStrongRef(); not layout.isNull())
     {
-        VPSheetPtr const sheet = layout->GetFocusedSheet();
-        if (not sheet.isNull())
+        if (VPSheetPtr const sheet = layout->GetFocusedSheet(); not sheet.isNull())
         {
             sheet->SceneData()->RefreshPieces();
         }
@@ -134,9 +132,7 @@ void VPMainGraphicsView::RefreshPieces() const
 //---------------------------------------------------------------------------------------------------------------------
 void VPMainGraphicsView::dragEnterEvent(QDragEnterEvent *event)
 {
-    const QMimeData *mime = event->mimeData();
-
-    if (mime->hasFormat(VPMimeDataPiece::mineFormatPiecePtr))
+    if (const QMimeData *mime = event->mimeData(); mime->hasFormat(VPMimeDataPiece::mineFormatPiecePtr))
     {
         VPLayoutPtr const layout = m_layout.toStrongRef();
         if (layout.isNull())
@@ -144,8 +140,8 @@ void VPMainGraphicsView::dragEnterEvent(QDragEnterEvent *event)
             return;
         }
 
-        const auto *mimePiece = qobject_cast<const VPMimeDataPiece *>(mime);
-        if (mimePiece != nullptr && mimePiece->LayoutUuid() == layout->Uuid())
+        if (const auto *mimePiece = qobject_cast<const VPMimeDataPiece *>(mime);
+            mimePiece != nullptr && mimePiece->LayoutUuid() == layout->Uuid())
         {
             qCDebug(pMainGraphicsView(), "drag enter");
             event->acceptProposedAction();
@@ -156,9 +152,7 @@ void VPMainGraphicsView::dragEnterEvent(QDragEnterEvent *event)
 //---------------------------------------------------------------------------------------------------------------------
 void VPMainGraphicsView::dragMoveEvent(QDragMoveEvent *event)
 {
-    const QMimeData *mime = event->mimeData();
-
-    if (mime->hasFormat(VPMimeDataPiece::mineFormatPiecePtr))
+    if (const QMimeData *mime = event->mimeData(); mime->hasFormat(VPMimeDataPiece::mineFormatPiecePtr))
     {
         VPLayoutPtr const layout = m_layout.toStrongRef();
         if (layout.isNull())
@@ -166,8 +160,8 @@ void VPMainGraphicsView::dragMoveEvent(QDragMoveEvent *event)
             return;
         }
 
-        const auto *mimePiece = qobject_cast<const VPMimeDataPiece *>(mime);
-        if (mimePiece != nullptr && mimePiece->LayoutUuid() == layout->Uuid())
+        if (const auto *mimePiece = qobject_cast<const VPMimeDataPiece *>(mime);
+            mimePiece != nullptr && mimePiece->LayoutUuid() == layout->Uuid())
         {
             event->acceptProposedAction();
         }
@@ -202,8 +196,7 @@ void VPMainGraphicsView::dropEvent(QDropEvent *event)
             return;
         }
 
-        VPPiecePtr const piece = mimePiece->GetPiecePtr();
-        if (not piece.isNull())
+        if (VPPiecePtr const piece = mimePiece->GetPiecePtr(); not piece.isNull())
         {
             qCDebug(pMainGraphicsView(), "element dropped, %s", qUtf8Printable(piece->GetName()));
             event->acceptProposedAction();

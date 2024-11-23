@@ -121,6 +121,10 @@ protected:
     void CleanLayout() override;
     void PrepareSceneList(PreviewQuatilty quality) override;
     void ExportToCSVData(const QString &fileName, bool withHeader, int mib, const QChar &separator) override;
+    void dragEnterEvent(QDragEnterEvent *event) override;
+    void dragMoveEvent(QDragMoveEvent *event) override;
+    void dragLeaveEvent(QDragLeaveEvent *event) override;
+    void dropEvent(QDropEvent *event) override;
 #if defined(Q_OS_MAC)
     void ToolBarStyle(QToolBar *bar) const override;
 #endif
