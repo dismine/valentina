@@ -580,10 +580,7 @@ void VPosition::FollowGrainline()
         QLineF arrow = detailGrainline;
         arrow.setAngle(arrow.angle() + 180);
 
-        QLineF fabricArrow = fabricGrainline;
-        fabricArrow.setAngle(fabricArrow.angle() + 180);
-
-        RotateOnAngle(arrow.angleTo(fabricArrow));
+        RotateOnAngle(arrow.angleTo(fabricGrainline));
     }
 
     if (stop->load())
@@ -596,10 +593,7 @@ void VPosition::FollowGrainline()
         QLineF arrow = detailGrainline;
         arrow.setAngle(arrow.angle() + 90);
 
-        QLineF fabricArrow = fabricGrainline;
-        fabricArrow.setAngle(fabricArrow.angle() + 90);
-
-        RotateOnAngle(arrow.angleTo(fabricArrow));
+        RotateOnAngle(arrow.angleTo(fabricGrainline));
     }
 
     if (stop->load())
@@ -612,10 +606,7 @@ void VPosition::FollowGrainline()
         QLineF arrow = detailGrainline;
         arrow.setAngle(arrow.angle() - 90);
 
-        QLineF fabricArrow = fabricGrainline;
-        fabricArrow.setAngle(fabricArrow.angle() - 90);
-
-        RotateOnAngle(arrow.angleTo(fabricArrow));
+        RotateOnAngle(arrow.angleTo(fabricGrainline));
     }
 }
 
