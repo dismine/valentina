@@ -417,11 +417,29 @@ auto VPApplication::NewMainWindow() -> VPMainWindow *
 //---------------------------------------------------------------------------------------------------------------------
 auto VPApplication::NewMainWindow(const VPCommandLinePtr &cmd) -> VPMainWindow *
 {
+    Clean();
+    int maxIndex = 1;
+    QSet<int> occupiedIndices;
+    for (const auto &window : m_mainWindows)
+    {
+        if (window->IsUntitled())
+        {
+            occupiedIndices.insert(window->GetUntitledIndex());
+        }
+    }
+
+    while (occupiedIndices.contains(maxIndex))
+    {
+        ++maxIndex;
+    }
+
     auto *puzzle = new VPMainWindow(cmd);
     m_mainWindows.prepend(puzzle);
     puzzle->show();
+    puzzle->SetUntitledIndex(maxIndex);
     puzzle->UpdateWindowTitle();
     puzzle->InitZoom();
+
     return puzzle;
 }
 

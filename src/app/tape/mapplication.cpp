@@ -799,11 +799,28 @@ void MApplication::BeginLogging()
 //---------------------------------------------------------------------------------------------------------------------
 auto MApplication::NewMainTapeWindow() -> TMainWindow *
 {
+    CleanTapeWindows();
+    int maxIndex = 1;
+    QSet<int> occupiedIndices;
+    for (const auto &window : m_mainWindows)
+    {
+        if (window->IsUntitled())
+        {
+            occupiedIndices.insert(window->GetUntitledIndex());
+        }
+    }
+
+    while (occupiedIndices.contains(maxIndex))
+    {
+        ++maxIndex;
+    }
+
     auto *tape = new TMainWindow();
     m_mainWindows.prepend(tape);
     if (not MApplication::VApp()->IsTestMode())
     {
         tape->show();
+        tape->SetUntitledIndex(maxIndex);
         tape->UpdateWindowTitle();
     }
     return tape;
@@ -836,11 +853,28 @@ auto MApplication::MainKMWindows() -> QList<TKMMainWindow *>
 //---------------------------------------------------------------------------------------------------------------------
 auto MApplication::NewMainKMWindow() -> TKMMainWindow *
 {
+    CleanKMWindows();
+    int maxIndex = 1;
+    QSet<int> occupiedIndices;
+    for (const auto &window : m_kmMainWindows)
+    {
+        if (window->IsUntitled())
+        {
+            occupiedIndices.insert(window->GetUntitledIndex());
+        }
+    }
+
+    while (occupiedIndices.contains(maxIndex))
+    {
+        ++maxIndex;
+    }
+
     auto *known = new TKMMainWindow();
     m_kmMainWindows.prepend(known);
     if (not MApplication::VApp()->IsTestMode())
     {
         known->show();
+        known->SetUntitledIndex(maxIndex);
         known->UpdateWindowTitle();
     }
     return known;

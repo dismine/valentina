@@ -3778,14 +3778,7 @@ void TMainWindow::UpdateWindowTitle()
     }
     else
     {
-        if (auto index = MApplication::VApp()->MainTapeWindows().indexOf(this); index != -1)
-        {
-            showName = tr("untitled %1").arg(index + 1);
-        }
-        else
-        {
-            showName = tr("untitled");
-        }
+        showName = untitledIndex > 0 ? tr("untitled %1").arg(untitledIndex) : tr("untitled");
         m_mType == MeasurementsType::Multisize ? showName += ".vst"_L1 : showName += ".vit"_L1;
     }
 
@@ -3879,6 +3872,24 @@ void TMainWindow::SyncKnownMeasurements()
         ui->lineEditFullName->setText(known.fullName);
         ui->lineEditFullName->blockSignals(false);
     }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+auto TMainWindow::IsUntitled() const -> bool
+{
+    return m_curFile.isEmpty();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+auto TMainWindow::GetUntitledIndex() const -> int
+{
+    return untitledIndex;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void TMainWindow::SetUntitledIndex(int newUntitledIndex)
+{
+    untitledIndex = newUntitledIndex;
 }
 
 //---------------------------------------------------------------------------------------------------------------------

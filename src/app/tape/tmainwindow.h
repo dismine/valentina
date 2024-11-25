@@ -73,6 +73,11 @@ public:
 
     void SyncKnownMeasurements();
 
+    auto IsUntitled() const -> bool;
+
+    auto GetUntitledIndex() const -> int;
+    void SetUntitledIndex(int newUntitledIndex);
+
 public slots:
     void ToolBarStyles();
 
@@ -205,6 +210,8 @@ private:
     QMultiHash<VShortcutAction, QAction *> m_actionShortcuts{};
     QMultiHash<VShortcutAction, QAbstractButton *> m_buttonShortcuts{};
     QHash<QAbstractButton *, QString> m_serachButtonTooltips{};
+
+    int untitledIndex{0};
 
     void SetupMenu();
     void InitWindow();

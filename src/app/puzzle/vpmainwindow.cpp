@@ -875,6 +875,18 @@ void VPMainWindow::CurrentPieceHorizontallyFlippedToggled(bool checked)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+auto VPMainWindow::GetUntitledIndex() const -> int
+{
+    return untitledIndex;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VPMainWindow::SetUntitledIndex(int newUntitledIndex)
+{
+    untitledIndex = newUntitledIndex;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 void VPMainWindow::InitPropertyTabCurrentPiece()
 {
     connect(ui->checkBoxCurrentPieceShowSeamline, &QCheckBox::toggled, this,
@@ -1787,15 +1799,7 @@ void VPMainWindow::UpdateWindowTitle()
     }
     else
     {
-        vsizetype const index = VPApplication::VApp()->MainWindows().indexOf(this);
-        if (index != -1)
-        {
-            showName = tr("untitled %1.vlt").arg(index + 1);
-        }
-        else
-        {
-            showName = tr("untitled.vlt");
-        }
+        showName = untitledIndex > 0 ? tr("untitled %1.vlt").arg(untitledIndex) : tr("untitled.vlt");
     }
 
     showName += "[*]"_L1;
@@ -1830,6 +1834,12 @@ void VPMainWindow::UpdateWindowTitle()
     }
     setWindowIcon(icon);
 #endif // defined(Q_OS_MAC)
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+auto VPMainWindow::IsUntitled() const -> bool
+{
+    return curFile.isEmpty();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -4353,7 +4363,12 @@ void VPMainWindow::on_ExportLayout()
     }
 
     const QString layoutTitle = m_layout->LayoutSettings().GetTitle();
-    const QString fileName = !IsValidFileName(layoutTitle) ? QFileInfo(curFile).baseName() : layoutTitle;
+    QString fileName = !IsValidFileName(layoutTitle) ? QFileInfo(curFile).baseName() : layoutTitle;
+
+    if (fileName.isEmpty())
+    {
+        fileName = untitledIndex > 0 ? tr("untitled %1").arg(untitledIndex) : tr("untitled");
+    }
 
     DialogSaveManualLayout dialog(sheets.size(), false, fileName, this);
 

@@ -61,6 +61,11 @@ public:
 
     void UpdateWindowTitle();
 
+    auto IsUntitled() const -> bool;
+
+    auto GetUntitledIndex() const -> int;
+    void SetUntitledIndex(int newUntitledIndex);
+
 public slots:
     void ToolBarStyles();
 
@@ -136,6 +141,8 @@ private:
     VKnownMeasurements m_known{};
 
     QCompleter *m_groupCompleter{};
+
+    int untitledIndex{0};
 
     void SetupMenu();
     void InitWindow();

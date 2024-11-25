@@ -97,6 +97,11 @@ public:
 
     void UpdateWindowTitle();
 
+    auto IsUntitled() const -> bool;
+
+    auto GetUntitledIndex() const -> int;
+    void SetUntitledIndex(int newUntitledIndex);
+
 public slots:
     /**
      * @brief on_actionNew_triggered When the menu action File > New
@@ -362,6 +367,8 @@ private:
         int tileRow{-1};
         int tileCol{-1};
     };
+
+    int untitledIndex{0};
 
     /**
      * @brief InitMenuBar Inits the menu bar (File, Edit, Help ...)

@@ -293,14 +293,7 @@ void TKMMainWindow::UpdateWindowTitle()
     }
     else
     {
-        if (auto index = MApplication::VApp()->MainKMWindows().indexOf(this); index != -1)
-        {
-            showName = tr("untitled %1").arg(index + 1);
-        }
-        else
-        {
-            showName = tr("untitled");
-        }
+        showName = untitledIndex > 0 ? tr("untitled %1").arg(untitledIndex) : tr("untitled");
         showName += ".vkm"_L1;
     }
 
@@ -336,6 +329,24 @@ void TKMMainWindow::UpdateWindowTitle()
     }
     setWindowIcon(icon);
 #endif // defined(Q_OS_MAC)
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+auto TKMMainWindow::IsUntitled() const -> bool
+{
+    return m_curFile.isEmpty();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+auto TKMMainWindow::GetUntitledIndex() const -> int
+{
+    return untitledIndex;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void TKMMainWindow::SetUntitledIndex(int newUntitledIndex)
+{
+    untitledIndex = newUntitledIndex;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
