@@ -1591,7 +1591,11 @@ auto VLayoutPiece::ContourPath(bool togetherWithNotches, bool showLayoutAllowanc
 
             for (const auto &item : sequence)
             {
-                const auto itemPath = item.item.value<VLayoutPiecePath>().Points();
+                auto itemPath = item.item.value<VLayoutPiecePath>().Points();
+                if (itemPath.size() > 2)
+                {
+                    itemPath.append(itemPath.constFirst());
+                }
                 QVector<QPointF> convertedPoints;
                 CastTo(itemPath, convertedPoints);
                 path.addPolygon(QPolygonF(convertedPoints));
