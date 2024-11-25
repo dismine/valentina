@@ -779,20 +779,28 @@ void ColorPickerPopup::exec()
     eventLoop.exec();
 }
 
+#if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
+#define CONST const
+#else
+#define CONST
+#endif
+
 /*! \internal
 
 */
 void ColorPickerPopup::updateSelected()
 {
-    const QLayoutItem *layoutItem = nullptr;
+    // The CONST macro is used to handle differences in Qt 5 and Qt 6:
+    // - In Qt 6, QLayoutItem::widget() is declared as a const method, requiring a const-qualified QLayoutItem pointer.
+    // - In Qt 5, QLayoutItem::widget() is not const, so the const qualifier is omitted to avoid compiler errors.
+    CONST QLayoutItem *layoutItem = nullptr;
     int i = 0;
     while ((layoutItem = grid->itemAt(i)) != nullptr)
     {
-        if (QWidget *w = layoutItem->widget(); (w != nullptr) && w->inherits("ColorPickerItem"))
+        if (CONST QWidget *w = layoutItem->widget(); (w != nullptr) && w->inherits("ColorPickerItem"))
         {
             // NOLINTNEXTLINE(cppcoreguidelines-pro-type-reinterpret-cast)
-            auto *litem = reinterpret_cast<ColorPickerItem *>(layoutItem->widget());
-            if (litem != sender())
+            if (auto *litem = reinterpret_cast<ColorPickerItem *>(layoutItem->widget()); litem != sender())
             {
                 litem->setSelected(false);
             }
@@ -1155,15 +1163,18 @@ void ColorPickerPopup::selectColor(ColorPickerItem *item)
 {
     item->setSelected(true);
 
-    const QLayoutItem *layoutItem = nullptr;
+    // The CONST macro is used to handle differences in Qt 5 and Qt 6:
+    // - In Qt 6, QLayoutItem::widget() is declared as a const method, requiring a const-qualified QLayoutItem pointer.
+    // - In Qt 5, QLayoutItem::widget() is not const, so the const qualifier is omitted to avoid compiler errors.
+
+    CONST QLayoutItem *layoutItem = nullptr;
     int i = 0;
     while ((layoutItem = grid->itemAt(i)) != nullptr)
     {
-        if (const QWidget *wl = layoutItem->widget(); (wl != nullptr) && wl->inherits("ColorPickerItem"))
+        if (CONST QWidget *wl = layoutItem->widget(); (wl != nullptr) && wl->inherits("ColorPickerItem"))
         {
             // NOLINTNEXTLINE(cppcoreguidelines-pro-type-reinterpret-cast)
-            auto *litem = reinterpret_cast<ColorPickerItem *>(layoutItem->widget());
-            if (litem != item)
+            if (auto *litem = reinterpret_cast<ColorPickerItem *>(layoutItem->widget()); litem != item)
             {
                 litem->setSelected(false);
             }
