@@ -30,6 +30,7 @@
 
 #include <QDir>
 #include <QGlobalStatic>
+#include <QTableWidget>
 #include <QVariant>
 
 #if QT_VERSION < QT_VERSION_CHECK(6, 4, 0)
@@ -44,6 +45,8 @@ QT_WARNING_PUSH
 QT_WARNING_DISABLE_CLANG("-Wunused-member-function")
 
 Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingKnownMeasurementsRecentFileList, ("kmRecentFileList"_L1)) // NOLINT
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingMainWindowColumnWidths, ("mainWindowColumnWidths"_L1))    // NOLINT
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingKMMainWindowColumnWidths, ("KMMainWindowColumnWidths"_L1)) // NOLINT
 
 Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingPathsTemplates, ("paths/templates"_L1)) // NOLINT
 
@@ -245,4 +248,62 @@ auto VTapeSettings::GetRecentKMFileList() const -> QStringList
 void VTapeSettings::SetRecentKMFileList(const QStringList &value)
 {
     setValue(*settingKnownMeasurementsRecentFileList, value);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VTapeSettings::RestoreMainWindowColumnWidths(QTableWidget *tableWidget)
+{
+    SCASSERT(tableWidget != nullptr)
+
+    int const size = beginReadArray(*settingMainWindowColumnWidths);
+    for (int i = 0; i < size; ++i)
+    {
+        setArrayIndex(i);
+        int const width = value("width"_L1, tableWidget->columnWidth(i)).toInt();
+        tableWidget->setColumnWidth(i, width);
+    }
+    endArray();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VTapeSettings::SaveMainWindowColumnWidths(QTableWidget *tableWidget)
+{
+    SCASSERT(tableWidget != nullptr)
+
+    beginWriteArray(*settingMainWindowColumnWidths);
+    for (int i = 0; i < tableWidget->columnCount(); ++i)
+    {
+        setArrayIndex(i);
+        setValue("width"_L1, tableWidget->columnWidth(i));
+    }
+    endArray();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VTapeSettings::RestoreKMMainWindowColumnWidths(QTableWidget *tableWidget)
+{
+    SCASSERT(tableWidget != nullptr)
+
+    int const size = beginReadArray(*settingKMMainWindowColumnWidths);
+    for (int i = 0; i < size; ++i)
+    {
+        setArrayIndex(i);
+        int const width = value("width"_L1, tableWidget->columnWidth(i)).toInt();
+        tableWidget->setColumnWidth(i, width);
+    }
+    endArray();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VTapeSettings::SaveKMMainWindowColumnWidths(QTableWidget *tableWidget)
+{
+    SCASSERT(tableWidget != nullptr)
+
+    beginWriteArray(*settingKMMainWindowColumnWidths);
+    for (int i = 0; i < tableWidget->columnCount(); ++i)
+    {
+        setArrayIndex(i);
+        setValue("width"_L1, tableWidget->columnWidth(i));
+    }
+    endArray();
 }

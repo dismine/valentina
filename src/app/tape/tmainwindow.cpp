@@ -3338,7 +3338,6 @@ void TMainWindow::InitTable()
 
     ShowUnits();
 
-    ui->tableWidget->resizeColumnsToContents();
     ui->tableWidget->resizeRowsToContents();
     ui->tableWidget->horizontalHeader()->setStretchLastSection(true);
 }
@@ -4008,7 +4007,7 @@ void TMainWindow::MeasurementGUI()
 //---------------------------------------------------------------------------------------------------------------------
 void TMainWindow::ReadSettings()
 {
-    const VTapeSettings *settings = MApplication::VApp()->TapeSettings();
+    VTapeSettings *settings = MApplication::VApp()->TapeSettings();
 
     if (settings->status() == QSettings::NoError)
     {
@@ -4017,6 +4016,8 @@ void TMainWindow::ReadSettings()
 
         // Text under tool buton icon
         ToolBarStyles();
+
+        settings->RestoreMainWindowColumnWidths(ui->tableWidget);
 
         // Stack limit
         // VAbstractApplication::VApp()->getUndoStack()->setUndoLimit(settings->GetUndoCount());
@@ -4043,6 +4044,8 @@ void TMainWindow::WriteSettings()
     settings->SetTapeSearchOptionWholeWord(m_search->IsMatchWord());
     settings->SetTapeSearchOptionRegexp(m_search->IsMatchRegexp());
     settings->SetTapeSearchOptionUseUnicodeProperties(m_search->IsUseUnicodePreperties());
+
+    settings->SaveMainWindowColumnWidths(ui->tableWidget);
 
     settings->sync();
     if (settings->status() == QSettings::AccessError)

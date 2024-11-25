@@ -1652,7 +1652,6 @@ void TKMMainWindow::InitWindow()
     ui->labelToolTip->setVisible(false);
     ui->tabWidget->setVisible(true);
     ui->tabWidget->setCurrentIndex(0); // measurements
-    ui->tableWidget->resizeColumnsToContents();
     ui->tableWidget->resizeRowsToContents();
     ui->tableWidget->horizontalHeader()->setStretchLastSection(true);
 
@@ -1996,7 +1995,7 @@ auto TKMMainWindow::AddCell(const QString &text, int row, int column, int aligme
 //---------------------------------------------------------------------------------------------------------------------
 void TKMMainWindow::ReadSettings()
 {
-    const VTapeSettings *settings = MApplication::VApp()->TapeSettings();
+    VTapeSettings *settings = MApplication::VApp()->TapeSettings();
 
     if (settings->status() == QSettings::NoError)
     {
@@ -2005,6 +2004,8 @@ void TKMMainWindow::ReadSettings()
 
         // Text under tool buton icon
         ToolBarStyles();
+
+        settings->RestoreKMMainWindowColumnWidths(ui->tableWidget);
 
         // Stack limit
         // VAbstractApplication::VApp()->getUndoStack()->setUndoLimit(settings->GetUndoCount());
@@ -2031,6 +2032,8 @@ void TKMMainWindow::WriteSettings()
     settings->SetKMSearchOptionWholeWord(m_search->IsMatchWord());
     settings->SetKMSearchOptionRegexp(m_search->IsMatchRegexp());
     settings->SetKMSearchOptionUseUnicodeProperties(m_search->IsUseUnicodePreperties());
+
+    settings->SaveKMMainWindowColumnWidths(ui->tableWidget);
 
     settings->sync();
     if (settings->status() == QSettings::AccessError)
