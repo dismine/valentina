@@ -651,7 +651,7 @@ void VMainGraphicsView::dragEnterEvent(QDragEnterEvent *event)
 {
     const QMimeData *mime = event->mimeData();
 
-    if (auto *currentScene = qobject_cast<VMainGraphicsScene *>(scene());
+    if (const auto *currentScene = qobject_cast<VMainGraphicsScene *>(scene());
         currentScene != nullptr && currentScene->AcceptDrop() && mime != nullptr && mime->hasText())
     {
         if (QUrl const urlPath(mime->text().simplified()); urlPath.isLocalFile())
@@ -674,7 +674,7 @@ void VMainGraphicsView::dragMoveEvent(QDragMoveEvent *event)
 {
     const QMimeData *mime = event->mimeData();
 
-    if (auto *currentScene = qobject_cast<VMainGraphicsScene *>(scene());
+    if (const auto *currentScene = qobject_cast<VMainGraphicsScene *>(scene());
         currentScene != nullptr && currentScene->AcceptDrop() && mime != nullptr && mime->hasText())
     {
         if (QUrl const urlPath(mime->text().simplified()); urlPath.isLocalFile())

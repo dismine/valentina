@@ -266,7 +266,7 @@ void VTapeSettings::RestoreMainWindowColumnWidths(QTableWidget *tableWidget)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VTapeSettings::SaveMainWindowColumnWidths(QTableWidget *tableWidget)
+void VTapeSettings::SaveMainWindowColumnWidths(const QTableWidget *tableWidget)
 {
     SCASSERT(tableWidget != nullptr)
 
@@ -295,7 +295,7 @@ void VTapeSettings::RestoreKMMainWindowColumnWidths(QTableWidget *tableWidget)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VTapeSettings::SaveKMMainWindowColumnWidths(QTableWidget *tableWidget)
+void VTapeSettings::SaveKMMainWindowColumnWidths(const QTableWidget *tableWidget)
 {
     SCASSERT(tableWidget != nullptr)
 

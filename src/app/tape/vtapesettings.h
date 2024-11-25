@@ -90,10 +90,10 @@ public:
     void SetRecentKMFileList(const QStringList &value);
 
     void RestoreMainWindowColumnWidths(QTableWidget *tableWidget);
-    void SaveMainWindowColumnWidths(QTableWidget *tableWidget);
+    void SaveMainWindowColumnWidths(const QTableWidget *tableWidget);
 
     void RestoreKMMainWindowColumnWidths(QTableWidget *tableWidget);
-    void SaveKMMainWindowColumnWidths(QTableWidget *tableWidget);
+    void SaveKMMainWindowColumnWidths(const QTableWidget *tableWidget);
 
 private:
     Q_DISABLE_COPY_MOVE(VTapeSettings) // NOLINT

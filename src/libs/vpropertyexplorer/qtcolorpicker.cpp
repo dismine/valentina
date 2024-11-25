@@ -437,7 +437,7 @@ void VPE::QtColorPicker::setUseNativeDialog(bool useNativeDialog)
     }
 }
 
-void VPE::QtColorPicker::setDefaultColor(const QColor &color)
+void VPE::QtColorPicker::setDefaultColor(const QColor &color) const
 {
     popup->setDefaultColor(color);
 }

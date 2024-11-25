@@ -94,7 +94,7 @@ public:
     auto getUseNativeDialog() const -> bool;
     void setUseNativeDialog(bool newUseNativeDialog);
 
-    void setDefaultColor(const QColor &color);
+    void setDefaultColor(const QColor &color) const;
 
 public slots:
     void setCurrentColor(const QColor &color);
