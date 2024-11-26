@@ -499,9 +499,9 @@ void DialogPlaceLabel::InitControlTab()
 //---------------------------------------------------------------------------------------------------------------------
 void DialogPlaceLabel::FillPlaceLabelTypes()
 {
+    ui->comboBoxLabelType->addItem(tr("Cross"), static_cast<int>(PlaceLabelType::Cross));
     ui->comboBoxLabelType->addItem(tr("Segment"), static_cast<int>(PlaceLabelType::Segment));
     ui->comboBoxLabelType->addItem(tr("Rectangle"), static_cast<int>(PlaceLabelType::Rectangle));
-    ui->comboBoxLabelType->addItem(tr("Cross"), static_cast<int>(PlaceLabelType::Cross));
     ui->comboBoxLabelType->addItem(tr("T-shaped"), static_cast<int>(PlaceLabelType::Tshaped));
     ui->comboBoxLabelType->addItem(tr("Doubletree"), static_cast<int>(PlaceLabelType::Doubletree));
     ui->comboBoxLabelType->addItem(tr("Corner"), static_cast<int>(PlaceLabelType::Corner));
