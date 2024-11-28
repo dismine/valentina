@@ -222,5 +222,11 @@
         <file>prong/output.json</file>
         <file>prong_acute_angle/input.json</file>
         <file>prong_acute_angle/output.json</file>
+        <file>mirror_notch_case1/boundary.json</file>
+        <file>mirror_notch_case1/passmarks.json</file>
+        <file>mirror_notch_case1/points.json</file>
+        <file>mirror_notch_case2/boundary.json</file>
+        <file>mirror_notch_case2/passmarks.json</file>
+        <file>mirror_notch_case2/points.json</file>
     </qresource>
 </RCC>

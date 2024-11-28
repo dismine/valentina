@@ -26,6 +26,8 @@ VTestApp {
 
     files: [
         "qttestmainlambda.cpp",
+        "tst_vboundary.cpp",
+        "tst_vboundary.h",
         "tst_vposter.cpp",
         "tst_vspline.cpp",
         "tst_nameregexp.cpp",

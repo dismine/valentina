@@ -42,6 +42,7 @@
 #include "tst_vabstractcurve.h"
 #include "tst_vabstractpiece.h"
 #include "tst_varc.h"
+#include "tst_vboundary.h"
 #include "tst_vcommandline.h"
 #include "tst_vcubicbezierpath.h"
 #include "tst_vellipticalarc.h"
@@ -105,6 +106,7 @@ auto main(int argc, char **argv) -> int
     ASSERT_TEST(new TST_VToolUnionDetails());
     ASSERT_TEST(new TST_XSDShema());
     ASSERT_TEST(new TST_VSVGPathTokenizer());
+    ASSERT_TEST(new TST_VBoundary());
 
     return status;
 }

@@ -1,14 +1,14 @@
 /************************************************************************
  **
- **  @file
+ **  @file   tst_vboundary.h
  **  @author Roman Telezhynskyi <dismine(at)gmail.com>
- **  @date   15 4, 2017
+ **  @date   28 11, 2024
  **
  **  @brief
  **  @copyright
  **  This source code is part of the Valentina project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
- **  Copyright (C) 2017 Valentina project
+ **  Copyright (C) 2024 Valentina project
  **  <https://gitlab.com/smart-pattern/valentina> All Rights Reserved.
  **
  **  Valentina is free software: you can redistribute it and/or modify
@@ -25,40 +25,24 @@
  **  along with Valentina.  If not, see <http://www.gnu.org/licenses/>.
  **
  *************************************************************************/
+#ifndef TST_VBOUNDARY_H
+#define TST_VBOUNDARY_H
 
-#ifndef VINTERACTIVETOOL_H
-#define VINTERACTIVETOOL_H
+#include "../vtest/abstracttest.h"
 
-#include "vabstracttool.h"
-#include "../dialogs/tools/dialogtool.h"
-
-#include <QtCore/qglobal.h>
-
-class VInteractiveTool : public VAbstractTool
+class TST_VBoundary : public AbstractTest
 {
     Q_OBJECT // NOLINT
+
 public:
-    VInteractiveTool(VAbstractPattern *doc, VContainer *data, quint32 id, QObject *parent = nullptr);
-    ~VInteractiveTool() override = default;
+    explicit TST_VBoundary(QObject *parent = nullptr);
 
-    void DialogLinkDestroy();
-
-public slots:
-    virtual void FullUpdateFromGuiOk(int result);
-    virtual void FullUpdateFromGuiApply();
-
-protected:
-    /** @brief m_dialog tool's dialog options.*/
-    QPointer<DialogTool> m_dialog{}; // NOLINT(cppcoreguidelines-non-private-member-variables-in-classes)
-
-    /** @brief setDialog set dialog when user want change tool option. */
-    virtual void SetDialog()
-    { /*do nothing by default*/
-    }
-    virtual void SaveDialogChange(const QString &undoText = QString())=0;
+private slots:
+    void CombineSeamAllowance_data();
+    void CombineSeamAllowance() const;
 
 private:
-    Q_DISABLE_COPY_MOVE(VInteractiveTool) // NOLINT
+    Q_DISABLE_COPY_MOVE(TST_VBoundary)
 };
 
-#endif // VINTERACTIVETOOL_H
+#endif // TST_VBOUNDARY_H

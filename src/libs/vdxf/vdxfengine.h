@@ -208,6 +208,8 @@ private:
 
     static void CheckLabelCompatibilityRPCADV09(const VLayoutPiece &detail);
     static void CheckLabelCompatibilityRPCADV08(const VLayoutPiece &detail);
+
+    auto PieceOutline(const VLayoutPiece &detail) const -> QVector<VLayoutPoint>;
 };
 
 #endif // VDXFENGINE_H

@@ -44,7 +44,6 @@
 #include "../layout/vpsheet.h"
 #include "../vformat/vsinglelineoutlinechar.h"
 #include "../vgeometry/vlayoutplacelabel.h"
-#include "../vlayout/vboundary.h"
 #include "../vlayout/vfoldline.h"
 #include "../vlayout/vgraphicsfillitem.h"
 #include "../vlayout/vlayoutpiecepath.h"
@@ -147,23 +146,6 @@ inline auto SelectionBrush() -> QBrush
 auto ShouldSkipPainting(const VPPiecePtr &piece) -> bool
 {
     return (piece->GetFoldLineType() == FoldLineType::None || (piece->IsShowFullPiece() && !piece->IsShowMirrorLine()));
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-auto AdjustSeamAllowanceMirrorLine(const VPPiecePtr &piece, const QLineF &seamAllowanceMirrorLine) -> QLineF
-{
-    QLineF adjustedLine = seamAllowanceMirrorLine;
-
-    QVector<QPointF> seamAllowance;
-    CastTo(piece->GetMappedContourPoints(), seamAllowance);
-
-    if (!VAbstractCurve::IsPointOnCurve(seamAllowance, seamAllowanceMirrorLine.p1()) ||
-        !VAbstractCurve::IsPointOnCurve(seamAllowance, seamAllowanceMirrorLine.p2()))
-    {
-        adjustedLine = piece->SeamAllowanceMirrorLine(piece->GetMappedSeamMirrorLine(), seamAllowance);
-    }
-
-    return adjustedLine;
 }
 } // namespace
 
@@ -655,59 +637,24 @@ void VPGraphicsPiece::PaintPiece(QPainter *painter)
 //---------------------------------------------------------------------------------------------------------------------
 void VPGraphicsPiece::PaintSeamLine(QPainter *painter, const VPPiecePtr &piece)
 {
-    if (piece->IsHideMainPath() && piece->IsSeamAllowance() && not piece->IsSeamAllowanceBuiltIn())
-    {
-        return;
-    }
-
-    QVector<VLayoutPoint> const seamLinePoints = piece->GetMappedFullContourPoints();
-
-    if (seamLinePoints.isEmpty())
-    {
-        return;
-    }
-
     VPLayoutPtr const layout = piece->Layout();
     if (layout.isNull())
     {
         return;
     }
 
-    if (layout->LayoutSettings().IsBoundaryTogetherWithNotches())
+    QVector<VLayoutPoint> const seamLinePoints = piece->GetMappedFullContourPoints(
+        layout->LayoutSettings().IsBoundaryTogetherWithNotches());
+    if (seamLinePoints.isEmpty())
     {
-        QVector<VLayoutPassmark> const passmarks = piece->GetMappedPassmarks();
-
-        bool const seamAllowance = piece->IsSeamAllowance() && piece->IsSeamAllowanceBuiltIn();
-        bool const builtInSeamAllowance = piece->IsSeamAllowance() && piece->IsSeamAllowanceBuiltIn();
-
-        VBoundary boundary(seamLinePoints, seamAllowance, builtInSeamAllowance);
-        boundary.SetPieceName(piece->GetName());
-        if (piece->IsShowFullPiece())
-        {
-            boundary.SetMirrorLine(piece->GetMappedSeamMirrorLine());
-        }
-        const QList<VBoundarySequenceItemData> sequence = boundary.Combine(passmarks, false, false);
-
-        QVector<QPointF> combinedBoundary;
-        for (const auto &item : sequence)
-        {
-            const auto path = item.item.value<VLayoutPiecePath>().Points();
-            QVector<QPointF> convertedPoints;
-            CastTo(path, convertedPoints);
-            combinedBoundary += convertedPoints;
-        }
-
-        m_seamLine.addPolygon(QPolygonF(combinedBoundary));
-        m_seamLine.closeSubpath();
+        return;
     }
-    else
-    {
-        QVector<QPointF> convertedPoints;
-        CastTo(seamLinePoints, convertedPoints);
 
-        m_seamLine.addPolygon(QPolygonF(convertedPoints));
-        m_seamLine.closeSubpath();
-    }
+    QVector<QPointF> convertedPoints;
+    CastTo(seamLinePoints, convertedPoints);
+
+    m_seamLine.addPolygon(QPolygonF(convertedPoints));
+    m_seamLine.closeSubpath();
 
     if (painter != nullptr)
     {
@@ -721,63 +668,31 @@ void VPGraphicsPiece::PaintSeamLine(QPainter *painter, const VPPiecePtr &piece)
 //---------------------------------------------------------------------------------------------------------------------
 void VPGraphicsPiece::PaintCuttingLine(QPainter *painter, const VPPiecePtr &piece)
 {
-    if (piece->IsSeamAllowance() && not piece->IsSeamAllowanceBuiltIn())
+    VPLayoutPtr const layout = piece->Layout();
+    if (layout.isNull())
     {
-        QVector<VLayoutPoint> const cuttingLinepoints = piece->GetMappedFullSeamAllowancePoints();
-        if (cuttingLinepoints.isEmpty())
-        {
-            return;
-        }
+        return;
+    }
 
-        VPLayoutPtr const layout = piece->Layout();
-        if (layout.isNull())
-        {
-            return;
-        }
+    QVector<VLayoutPoint> const cuttingLinepoints = piece->GetMappedFullSeamAllowancePoints(
+        layout->LayoutSettings().IsBoundaryTogetherWithNotches());
+    if (cuttingLinepoints.isEmpty())
+    {
+        return;
+    }
 
-        if (layout->LayoutSettings().IsBoundaryTogetherWithNotches())
-        {
-            const QVector<VLayoutPassmark> passmarks = piece->GetMappedPassmarks();
+    QVector<QPointF> convertedPoints;
+    CastTo(cuttingLinepoints, convertedPoints);
 
-            bool const seamAllowance = piece->IsSeamAllowance() && !piece->IsSeamAllowanceBuiltIn();
-            bool const builtInSeamAllowance = piece->IsSeamAllowance() && piece->IsSeamAllowanceBuiltIn();
+    m_cuttingLine.addPolygon(QPolygonF(convertedPoints));
+    m_cuttingLine.closeSubpath();
 
-            VBoundary boundary(cuttingLinepoints, seamAllowance, builtInSeamAllowance);
-            boundary.SetPieceName(piece->GetName());
-            if (piece->IsShowFullPiece())
-            {
-                boundary.SetMirrorLine(piece->GetMappedSeamAllowanceMirrorLine());
-            }
-            const QList<VBoundarySequenceItemData> sequence = boundary.Combine(passmarks, false, false);
-
-            QVector<QPointF> combinedBoundary;
-            for (const auto &item : sequence)
-            {
-                const auto path = item.item.value<VLayoutPiecePath>().Points();
-                QVector<QPointF> convertedPoints;
-                CastTo(path, convertedPoints);
-                combinedBoundary += convertedPoints;
-            }
-
-            m_cuttingLine.addPolygon(QPolygonF(combinedBoundary));
-            m_cuttingLine.closeSubpath();
-        }
-        else
-        {
-            QVector<QPointF> convertedPoints;
-            CastTo(cuttingLinepoints, convertedPoints);
-
-            m_cuttingLine.addPolygon(QPolygonF(convertedPoints));
-            m_cuttingLine.closeSubpath();
-        }
-
-        if (painter != nullptr)
-        {
-            painter->save();
-            painter->setBrush(piece->IsSelected() ? SelectionBrush() : NoBrush());
-            painter->drawPath(m_cuttingLine);
-            painter->restore();
-        }
+    if (painter != nullptr)
+    {
+        painter->save();
+        painter->setBrush(piece->IsSelected() ? SelectionBrush() : NoBrush());
+        painter->drawPath(m_cuttingLine);
+        painter->restore();
     }
 }
 
@@ -934,40 +849,25 @@ void VPGraphicsPiece::PaintStickyPath(QPainter *painter)
 //---------------------------------------------------------------------------------------------------------------------
 void VPGraphicsPiece::PaintMirrorLine(QPainter *painter, const VPPiecePtr &piece)
 {
-    if (!piece->IsShowFullPiece())
+    VPLayoutPtr const layout = piece->Layout();
+    if (layout.isNull() || !piece->IsShowFullPiece())
     {
         return;
     }
 
-    bool mirrorFlag = false;
-    if (not piece->IsSeamAllowance() || piece->IsSeamAllowanceBuiltIn())
+    QLineF const mirrorLine = piece->GetMappedCorrectedMirrorLine(
+        layout->LayoutSettings().IsBoundaryTogetherWithNotches());
+    if (mirrorLine.isNull())
     {
-        QLineF const seamMirrorLine = piece->GetMappedSeamMirrorLine();
-        if (!seamMirrorLine.isNull() && piece->IsShowMirrorLine())
-        {
-            QPainterPath mirrorPath;
-            mirrorPath.moveTo(seamMirrorLine.p1());
-            mirrorPath.lineTo(seamMirrorLine.p2());
-            m_mirrorLinePath.addPath(mirrorPath);
-            mirrorFlag = true;
-        }
-    }
-    else if (not piece->IsSeamAllowanceBuiltIn())
-    {
-        QLineF seamAllowanceMirrorLine = piece->GetMappedSeamAllowanceMirrorLine();
-        if (!seamAllowanceMirrorLine.isNull() && piece->IsShowMirrorLine())
-        {
-            seamAllowanceMirrorLine = AdjustSeamAllowanceMirrorLine(piece, seamAllowanceMirrorLine);
-
-            QPainterPath mirrorPath;
-            mirrorPath.moveTo(seamAllowanceMirrorLine.p1());
-            mirrorPath.lineTo(seamAllowanceMirrorLine.p2());
-            m_mirrorLinePath.addPath(mirrorPath);
-            mirrorFlag = true;
-        }
+        return;
     }
 
-    if (mirrorFlag && painter != nullptr)
+    QPainterPath mirrorPath;
+    mirrorPath.moveTo(mirrorLine.p1());
+    mirrorPath.lineTo(mirrorLine.p2());
+    m_mirrorLinePath.addPath(mirrorPath);
+
+    if (painter != nullptr)
     {
         painter->save();
         QPen pen = painter->pen();

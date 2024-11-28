@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<pattern labelPrefix="en">
+    <!--Pattern created with Valentina v0.7.53.80 (https://smart-pattern.com.ua/).-->
+    <version>0.9.8</version>
+    <unit>cm</unit>
+    <description/>
+    <notes/>
+    <measurements/>
+    <increments/>
+    <previewCalculations/>
+    <draw name="Pattern piece 1">
+        <calculation>
+            <point id="1" mx="0.264583" my="0.396875" name="A" showLabel="true" type="single" x="0.79375" y="1.05833"/>
+            <point angle="90" basePoint="1" id="2" length="20" lineColor="black" mx="0.264583" my="0.396875" name="A1" showLabel="true" type="endLine" typeLine="hair"/>
+            <point angle="180" basePoint="2" id="3" length="10" lineColor="#dfdd65" mx="0.264583" my="0.396875" name="A2" showLabel="true" type="endLine" typeLine="hair"/>
+            <point firstPoint="3" id="4" mx="0.264583" my="0.396875" name="A3" secondPoint="1" showLabel="true" type="pointOfIntersection"/>
+            <line firstPoint="3" id="5" lineColor="black" secondPoint="4" typeLine="hair"/>
+            <line firstPoint="4" id="6" lineColor="black" secondPoint="1" typeLine="hair"/>
+            <point angle="110.684" basePoint="4" id="12" length="12.6362" lineColor="#000000" mx="0.264583" my="0.396875" name="A4" showLabel="true" type="endLine" typeLine="hair"/>
+            <arc aScale="0" angle1="328.584" angle2="190.964" center="12" color="#000000" id="13" penStyle="hair" radius="2.09866" type="simple"/>
+            <point angle="65.2915" basePoint="4" id="14" length="11.4899" lineColor="#000000" mx="0.264583" my="0.396875" name="A5" showLabel="true" type="endLine" typeLine="hair"/>
+            <point firstPoint="3" id="16" length="2.59496" lineColor="#000000" mx="0.264583" my="0.396875" name="A6" secondPoint="2" showLabel="true" type="alongLine" typeLine="none"/>
+        </calculation>
+        <modeling>
+            <point id="7" idObject="3" inUse="false" mx="0.264583" my="0.396875" showLabel="true" type="modeling"/>
+            <point id="8" idObject="2" inUse="false" mx="0.264583" my="0.396875" showLabel="true" type="modeling"/>
+            <point id="9" idObject="1" inUse="false" mx="0.264583" my="0.396875" showLabel="true" type="modeling"/>
+            <point id="10" idObject="4" inUse="false" mx="0.264583" my="0.396875" showLabel="true" type="modeling"/>
+            <point angle="0" height="1" id="15" idObject="14" inUse="false" placeLabelType="2" type="placeLabel" visible="1" width="1"/>
+            <point id="17" idObject="16" inUse="false" mx="0.47625" my="-1.42875" showLabel="true" type="modeling"/>
+            <point id="18" idObject="3" inUse="true" mx="0.264583" my="0.396875" showLabel="true" type="modeling"/>
+            <point id="19" idObject="16" inUse="true" mx="0.47625" my="-1.42875" showLabel="true" type="modeling"/>
+            <point id="20" idObject="2" inUse="true" mx="0.264583" my="0.396875" showLabel="true" type="modeling"/>
+            <point id="21" idObject="1" inUse="true" mx="0.264583" my="0.396875" showLabel="true" type="modeling"/>
+            <point id="22" idObject="4" inUse="true" mx="0.264583" my="0.396875" showLabel="true" type="modeling"/>
+            <point angle="0" height="1" id="23" idObject="14" inUse="true" placeLabelType="2" type="placeLabel" visible="1" width="1"/>
+            <point id="25" idObject="3" inUse="false" mx="0.264583" my="0.396875" showLabel="true" type="modeling"/>
+            <point id="26" idObject="16" inUse="false" mx="0.47625" my="-1.42875" showLabel="true" type="modeling"/>
+            <point id="27" idObject="2" inUse="false" mx="0.264583" my="0.396875" showLabel="true" type="modeling"/>
+            <point id="28" idObject="1" inUse="false" mx="0.264583" my="0.396875" showLabel="true" type="modeling"/>
+            <point id="29" idObject="4" inUse="false" mx="0.264583" my="0.396875" showLabel="true" type="modeling"/>
+            <point angle="0" height="1" id="30" idObject="14" inUse="true" placeLabelType="2" type="placeLabel" visible="1" width="1"/>
+        </modeling>
+        <details>
+            <detail followGrainline="false" forbidFlipping="true" forceFlipping="false" hideMainPath="false" id="11" mx="0" my="0" name="Case 1" seamAllowance="true" sewLineOnDrawing="false" uuid="{2ff46ae4-a23b-4555-b6b7-04c02c97106e}" version="2" width="2">
+                <data annotation="" foldPosition="" height="10" letter="" mx="0" my="0" onFold="false" orientation="" quantity="1" rotation="0" rotationWay="" tilt="" visible="false" width="10"/>
+                <patternInfo height="10" mx="0" my="0" rotation="0" visible="false" width="10"/>
+                <grainline arrows="0" enabled="false" length="10" mx="0" my="0" rotation="90" visible="true"/>
+                <nodes>
+                    <node idObject="7" type="NodePoint"/>
+                    <node idObject="8" passmark="true" passmarkAngle="straightforward" passmarkLine="vMark2" type="NodePoint"/>
+                    <node idObject="9" passmark="false" passmarkAngle="straightforward" passmarkLine="uMark" type="NodePoint"/>
+                    <node idObject="10" type="NodePoint"/>
+                </nodes>
+                <placeLabels>
+                    <record>15</record>
+                </placeLabels>
+                <mirrorLine p1="8" p2="9" type="2ArrowsTextAbove"/>
+            </detail>
+            <detail followGrainline="false" forbidFlipping="true" forceFlipping="false" hideMainPath="false" id="24" mx="25.0037" my="0.00434407" name="Case 2" seamAllowance="true" sewLineOnDrawing="false" uuid="{c5dda82b-6369-4ecd-aeef-4c417cc1e825}" version="2" width="2">
+                <data annotation="" foldPosition="" height="10" letter="" mx="0" my="0" onFold="false" orientation="" quantity="1" rotation="0" rotationWay="" tilt="" visible="false" width="10"/>
+                <patternInfo height="10" mx="0" my="0" rotation="0" visible="false" width="10"/>
+                <grainline arrows="0" enabled="false" length="10" mx="0" my="0" rotation="90" visible="true"/>
+                <nodes>
+                    <node idObject="18" type="NodePoint"/>
+                    <node idObject="19" passmark="true" passmarkAngle="straightforward" passmarkLine="vMark2" type="NodePoint"/>
+                    <node idObject="20" passmark="true" passmarkAngle="straightforward" passmarkLine="vMark2" type="NodePoint"/>
+                    <node idObject="21" passmark="false" passmarkAngle="straightforward" passmarkLine="uMark" type="NodePoint"/>
+                    <node idObject="22" type="NodePoint"/>
+                </nodes>
+                <placeLabels>
+                    <record>23</record>
+                </placeLabels>
+                <mirrorLine p1="20" p2="21" type="2ArrowsTextAbove"/>
+            </detail>
+        </details>
+        <groups/>
+    </draw>
+</pattern>

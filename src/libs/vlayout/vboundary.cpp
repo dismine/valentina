@@ -168,6 +168,71 @@ void ConvertThreeLinesPassmark(const VLayoutPassmark &passmark, QList<VBoundaryS
         FillSequance(itemData, notchSequence);
     }
 }
+
+//---------------------------------------------------------------------------------------------------------------------
+auto BoundaryLength(const QVector<VLayoutPoint> &path) -> qreal
+{
+    if (path.size() < 2)
+    {
+        return 0;
+    }
+
+    QPainterPath splinePath;
+    splinePath.moveTo(path.at(0));
+    for (qint32 i = 1; i < path.count(); ++i)
+    {
+        splinePath.lineTo(path.at(i));
+    }
+    return splinePath.length();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+// Helper to insert boundary items into the sequence
+void InsertBoundaryItems(QList<VBoundarySequenceItemData> &sequence,
+                         int index,
+                         const QVector<VLayoutPoint> &startSub,
+                         const QVector<VLayoutPoint> &subShape,
+                         const QVector<VLayoutPoint> &endSub,
+                         bool drawMode)
+{
+    if (!endSub.isEmpty())
+    {
+        sequence.insert(index, PrepareSequenceItem(endSub, drawMode, VBoundarySequenceItem::Boundary));
+    }
+
+    sequence.insert(index, PrepareSequenceItem(subShape, drawMode, VBoundarySequenceItem::PassmarkShape));
+
+    if (!startSub.isEmpty())
+    {
+        sequence.insert(index, PrepareSequenceItem(startSub, drawMode, VBoundarySequenceItem::Boundary));
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+// Helper to optimize the sequence by merging connected boundaries
+void OptimizeBoundarySequence(QList<VBoundarySequenceItemData> &sequence)
+{
+    if (sequence.size() > 1 && sequence.constFirst().type == VBoundarySequenceItem::Boundary
+        && sequence.constLast().type == VBoundarySequenceItem::Boundary)
+    {
+        auto firstBoundary = sequence.constFirst().item.value<VLayoutPiecePath>().Points();
+        auto lastBoundaryPath = sequence.constLast().item.value<VLayoutPiecePath>();
+        auto lastBoundary = lastBoundaryPath.Points();
+
+        if (!firstBoundary.isEmpty() && !lastBoundary.isEmpty()
+            && lastBoundary.constLast() == firstBoundary.constFirst())
+        {
+            // Merge boundaries
+            firstBoundary.removeFirst();
+            lastBoundary += firstBoundary;
+
+            sequence.removeFirst(); // Remove the first boundary
+
+            lastBoundaryPath.SetPoints(lastBoundary);
+            sequence.last().item = QVariant::fromValue(lastBoundaryPath);
+        }
+    }
+}
 } // namespace
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -221,8 +286,8 @@ auto VBoundary::Combine(const QVector<VLayoutPassmark> &passmarks, bool drawMode
 
             if (!m_mirrorLine.isNull())
             {
-                auto passmark = item.item.value<VLayoutPassmark>();
-                if (!VGObject::IsPointOnLineviaPDP(passmark.baseLine.p1(), m_mirrorLine.p1(), m_mirrorLine.p2()))
+                if (auto passmark = item.item.value<VLayoutPassmark>();
+                    !VGObject::IsPointOnLineviaPDP(passmark.baseLine.p1(), m_mirrorLine.p1(), m_mirrorLine.p2()))
                 {
                     item.mirror = true;
                     InsertPassmark(item, sequence, drawMode);
@@ -271,8 +336,7 @@ void VBoundary::InsertPassmark(const VBoundarySequenceItemData &item, QList<VBou
     bool inserted = false;
     for (int i = 0; i < sequence.size(); ++i)
     {
-        const VBoundarySequenceItemData &itemData = sequence.at(i);
-        if (itemData.type != VBoundarySequenceItem::Boundary)
+        if (const VBoundarySequenceItemData &itemData = sequence.at(i); itemData.type != VBoundarySequenceItem::Boundary)
         {
             continue;
         }
@@ -376,49 +440,46 @@ auto VBoundary::InsertDisconnect(QList<VBoundarySequenceItemData> &sequence, int
 auto VBoundary::InsertCutOut(QList<VBoundarySequenceItemData> &sequence, int i, const VBoundarySequenceItemData &item,
                              bool drawMode) const -> bool
 {
+    // Extract passmark and prepare shape
     auto passmark = item.item.value<VLayoutPassmark>();
-
     QVector<QVector<VLayoutPoint>> const shape = PreparePassmarkShape(passmark, drawMode, item.mirror);
-    if (shape.isEmpty())
+    if (shape.isEmpty() || shape.constFirst().size() < 2)
     {
-        return false;
+        return false; // Invalid shape or insufficient points
     }
 
     const QVector<VLayoutPoint> &subShape = shape.constFirst();
-    if (subShape.size() < 2)
-    {
-        return false;
-    }
-
     const auto boundary = sequence.at(i).item.value<VLayoutPiecePath>().Points();
 
+    // Subdivide the boundary at the first and last points of the subShape
     QVector<VLayoutPoint> startSub1;
     QVector<VLayoutPoint> startSub2;
-    if (!VAbstractPiece::SubdividePath(boundary, subShape.constFirst(), startSub1, startSub2))
-    {
-        return false;
-    }
-
     QVector<VLayoutPoint> endSub1;
     QVector<VLayoutPoint> endSub2;
-    if (!VAbstractPiece::SubdividePath(boundary, subShape.constLast(), endSub1, endSub2))
+    if (!VAbstractPiece::SubdividePath(boundary, subShape.constFirst(), startSub1, startSub2)
+        || !VAbstractPiece::SubdividePath(boundary, subShape.constLast(), endSub1, endSub2))
     {
-        return false;
+        return false; // Subdivision failed
     }
 
+    // Compare subdivisions and modify the sequence accordingly
     sequence.removeAt(i);
-
-    if (not endSub2.isEmpty())
+    if (BoundaryLength(startSub1) <= BoundaryLength(endSub1))
     {
-        sequence.insert(i, PrepareSequenceItem(endSub2, drawMode, VBoundarySequenceItem::Boundary));
+        InsertBoundaryItems(sequence, i, startSub1, subShape, endSub2, drawMode);
+    }
+    else
+    {
+        // Recalculate subdivisions for consistency
+        if (!VAbstractPiece::SubdividePath(startSub1, subShape.constLast(), endSub1, endSub2))
+        {
+            return false;
+        }
+        InsertBoundaryItems(sequence, i, {}, subShape, endSub2, drawMode);
     }
 
-    sequence.insert(i, PrepareSequenceItem(subShape, drawMode, VBoundarySequenceItem::PassmarkShape));
-
-    if (not startSub1.isEmpty())
-    {
-        sequence.insert(i, PrepareSequenceItem(startSub1, drawMode, VBoundarySequenceItem::Boundary));
-    }
+    // Optimize boundaries to merge connected segments
+    OptimizeBoundarySequence(sequence);
 
     return true;
 }

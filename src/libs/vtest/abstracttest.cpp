@@ -153,15 +153,15 @@ void AbstractTest::PassmarkDataFromJson(const QString &json, VPiecePassmarkData 
     try
     {
         VSAPoint previousSAPoint;
-        PointFromJson(passmarkData[QStringLiteral("previousSAPoint")].toObject(), previousSAPoint);
+        ItemFromJson(passmarkData[QStringLiteral("previousSAPoint")].toObject(), previousSAPoint);
         data.previousSAPoint = previousSAPoint;
 
         VSAPoint passmarkSAPoint;
-        PointFromJson(passmarkData[QStringLiteral("passmarkSAPoint")].toObject(), passmarkSAPoint);
+        ItemFromJson(passmarkData[QStringLiteral("passmarkSAPoint")].toObject(), passmarkSAPoint);
         data.passmarkSAPoint = passmarkSAPoint;
 
         VSAPoint nextSAPoint;
-        PointFromJson(passmarkData[QStringLiteral("nextSAPoint")].toObject(), nextSAPoint);
+        ItemFromJson(passmarkData[QStringLiteral("nextSAPoint")].toObject(), nextSAPoint);
         data.nextSAPoint = nextSAPoint;
     }
     catch (const VException &e)
@@ -616,7 +616,7 @@ void AbstractTest::ReadPointValue(const QJsonObject &itemObject, const QString &
 {
     if (itemObject.contains(attribute))
     {
-        PointFromJson(itemObject[attribute].toObject(), value);
+        ItemFromJson(itemObject[attribute].toObject(), value);
     }
     else
     {
@@ -819,8 +819,8 @@ auto AbstractTest::QLineFromJson(const QJsonObject &itemObject) -> QLineF
 {
     QPointF p1;
     QPointF p2;
-    PointFromJson(itemObject[QStringLiteral("p1")].toObject(), p1);
-    PointFromJson(itemObject[QStringLiteral("p2")].toObject(), p2);
+    ItemFromJson(itemObject[QStringLiteral("p1")].toObject(), p1);
+    ItemFromJson(itemObject[QStringLiteral("p2")].toObject(), p2);
     return {p1, p2};
 }
 
@@ -911,7 +911,7 @@ void AbstractTest::DBFromJson(const QJsonObject &dbObject, QSharedPointer<VConta
                 case GOType::Point:
                 {
                     VPointF point;
-                    PointFromJson(itemObject, point);
+                    ItemFromJson(itemObject, point);
                     data->UpdateGObject(point.id(), new VPointF(point));
                     break;
                 }

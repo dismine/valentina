@@ -85,14 +85,22 @@ public:
     auto GetUniqueID() const -> QString override;
 
     auto GetMappedContourPoints() const -> QVector<VLayoutPoint>;
-    auto GetMappedFullContourPoints() const -> QVector<VLayoutPoint>;
-    auto GetFullContourPoints() const -> QVector<VLayoutPoint>;
+    auto GetMappedFullContourPoints(bool togetherWithNotches = false,
+                                    bool drawMode = false,
+                                    bool layoutAllowance = false) const -> QVector<VLayoutPoint>;
+    auto GetFullContourPoints(bool togetherWithNotches = false,
+                              bool drawMode = false,
+                              bool layoutAllowance = false) const -> QVector<VLayoutPoint>;
     auto GetContourPoints() const -> QVector<VLayoutPoint>;
     void SetContourPoints(const QVector<VLayoutPoint> &points, bool hideMainPath = false);
 
     auto GetMappedSeamAllowancePoints() const -> QVector<VLayoutPoint>;
-    auto GetMappedFullSeamAllowancePoints() const -> QVector<VLayoutPoint>;
-    auto GetFullSeamAllowancePoints() const -> QVector<VLayoutPoint>;
+    auto GetMappedFullSeamAllowancePoints(bool togetherWithNotches = false,
+                                          bool drawMode = false,
+                                          bool layoutAllowance = false) const -> QVector<VLayoutPoint>;
+    auto GetFullSeamAllowancePoints(bool togetherWithNotches = false,
+                                    bool drawMode = false,
+                                    bool layoutAllowance = false) const -> QVector<VLayoutPoint>;
     auto GetSeamAllowancePoints() const -> QVector<VLayoutPoint>;
     void SetSeamAllowancePoints(const QVector<VLayoutPoint> &points, bool seamAllowance = true,
                                 bool seamAllowanceBuiltIn = false);
@@ -171,6 +179,9 @@ public:
 
     auto GetPatternLabelData() const -> VTextManager;
     void SetPatternLabelData(const VTextManager &data);
+
+    auto GetMappedCorrectedMirrorLine(bool togetherWithNotches = false) const -> QLineF;
+    auto GetCorrectedMirrorLine(bool togetherWithNotches = false) const -> QLineF;
 
     auto GetMappedSeamMirrorLine() const -> QLineF;
     auto GetSeamMirrorLine() const -> QLineF;

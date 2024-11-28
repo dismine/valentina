@@ -136,7 +136,8 @@ protected:
 
     template <class T> static auto ReadPointData(const QJsonObject &pointObject) -> T;
 
-    template <class T> static auto PointFromJson(const QJsonObject &pointObject, T &point) -> void;
+    template<class T>
+    static auto ItemFromJson(const QJsonObject &pointObject, T &point) -> void;
 
     auto QLineFromJson(const QJsonObject &itemObject) -> QLineF;
     void SplineFromJson(const QJsonObject &itemObject, QSharedPointer<VContainer> &data);
@@ -167,7 +168,7 @@ template <class T> inline auto AbstractTest::VectorFromJson(const QString &json)
         try
         {
             T point;
-            PointFromJson(item.toObject(), point);
+            ItemFromJson(item.toObject(), point);
             vector.append(point);
         }
         catch (const VException &e)
@@ -188,10 +189,11 @@ template <class T> inline void AbstractTest::CheckClassType(const QJsonObject &i
     AbstractTest::ReadStringValue(itemObject, typeKey, type);
 
     const QStringList types{
-        QStringLiteral("QPointF"),      // 0
-        QStringLiteral("VLayoutPoint"), // 1
-        QStringLiteral("VRawSAPoint"),  // 2
-        QStringLiteral("VSAPoint"),     // 3
+        QStringLiteral("QPointF"),         // 0
+        QStringLiteral("VLayoutPoint"),    // 1
+        QStringLiteral("VRawSAPoint"),     // 2
+        QStringLiteral("VSAPoint"),        // 3
+        QStringLiteral("VLayoutPassmark"), // 4
     };
 
     bool res = false;
@@ -208,6 +210,9 @@ template <class T> inline void AbstractTest::CheckClassType(const QJsonObject &i
             break;
         case 3:
             res = (typeid(T) == typeid(VSAPoint));
+            break;
+        case 4:
+            res = (typeid(T) == typeid(VLayoutPassmark));
             break;
         default:
             break;
@@ -235,14 +240,16 @@ template <class T> inline auto AbstractTest::ReadPointData(const QJsonObject &po
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-template <class T> inline auto AbstractTest::PointFromJson(const QJsonObject &pointObject, T &point) -> void
+template<class T>
+inline auto AbstractTest::ItemFromJson(const QJsonObject &pointObject, T &point) -> void
 {
     CheckClassType<T>(pointObject);
     point = ReadPointData<T>(pointObject);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-template <> inline auto AbstractTest::PointFromJson(const QJsonObject &pointObject, VPointF &point) -> void
+template<>
+inline auto AbstractTest::ItemFromJson(const QJsonObject &pointObject, VPointF &point) -> void
 {
     vidtype id = NULL_ID;
     AbstractTest::ReadDoubleValue(pointObject, QStringLiteral("id"), id);
@@ -267,6 +274,85 @@ template <> inline auto AbstractTest::PointFromJson(const QJsonObject &pointObje
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+template<>
+inline auto AbstractTest::ItemFromJson(const QJsonObject &object, VLayoutPassmark &passmark) -> void
+{
+    // Read "lines" array
+    if (object.contains(QStringLiteral("lines")) && object[QStringLiteral("lines")].isArray())
+    {
+        QJsonArray linesArray = object[QStringLiteral("lines")].toArray();
+        QVector<QLineF> lines;
+
+        for (const auto lineValue : linesArray)
+        {
+            if (lineValue.isObject())
+            {
+                QJsonObject lineObject = lineValue.toObject();
+
+                qreal x1 = 0;
+                AbstractTest::ReadDoubleValue(lineObject, QStringLiteral("x1"), x1);
+
+                qreal y1 = 0;
+                AbstractTest::ReadDoubleValue(lineObject, QStringLiteral("y1"), y1);
+
+                qreal x2 = 0;
+                AbstractTest::ReadDoubleValue(lineObject, QStringLiteral("x2"), x2);
+
+                qreal y2 = 0;
+                AbstractTest::ReadDoubleValue(lineObject, QStringLiteral("y2"), y2);
+
+                lines.append(QLineF(x1, y1, x2, y2));
+            }
+        }
+        passmark.lines = lines;
+    }
+
+    // Read "type" if present
+    if (object.contains(QStringLiteral("passmarkType")))
+    {
+        passmark.type = static_cast<PassmarkLineType>(object[QStringLiteral("passmarkType")].toInt());
+    }
+
+    // Read "baseLine" if present
+    if (object.contains(QStringLiteral("baseLine")) && object[QStringLiteral("baseLine")].isObject())
+    {
+        QJsonObject baseLineObject = object[QStringLiteral("baseLine")].toObject();
+
+        qreal x1 = 0;
+        AbstractTest::ReadDoubleValue(baseLineObject, QStringLiteral("x1"), x1);
+
+        qreal y1 = 0;
+        AbstractTest::ReadDoubleValue(baseLineObject, QStringLiteral("y1"), y1);
+
+        qreal x2 = 0;
+        AbstractTest::ReadDoubleValue(baseLineObject, QStringLiteral("x2"), x2);
+
+        qreal y2 = 0;
+        AbstractTest::ReadDoubleValue(baseLineObject, QStringLiteral("y2"), y2);
+
+        passmark.baseLine = QLineF(x1, y1, x2, y2);
+    }
+
+    // Read "isBuiltIn" if present
+    if (object.contains(QStringLiteral("isBuiltIn")))
+    {
+        ReadBooleanValue(object, QStringLiteral("isBuiltIn"), passmark.isBuiltIn);
+    }
+
+    // Read "isClockwiseOpening" if present
+    if (object.contains(QStringLiteral("isClockwiseOpening")))
+    {
+        ReadBooleanValue(object, QStringLiteral("isClockwiseOpening"), passmark.isClockwiseOpening);
+    }
+
+    // Read "label" if present
+    if (object.contains(QStringLiteral("label")))
+    {
+        AbstractTest::ReadStringValue(object, QStringLiteral("label"), passmark.label);
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 template <> inline auto AbstractTest::ReadPointData(const QJsonObject &pointObject) -> VLayoutPoint
 {
     VLayoutPoint point(ReadPointData<QPointF>(pointObject));
@@ -283,14 +369,16 @@ template <> inline auto AbstractTest::ReadPointData(const QJsonObject &pointObje
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-template <> inline auto AbstractTest::PointFromJson(const QJsonObject &pointObject, VLayoutPoint &point) -> void
+template<>
+inline auto AbstractTest::ItemFromJson(const QJsonObject &pointObject, VLayoutPoint &point) -> void
 {
     CheckClassType<VLayoutPoint>(pointObject);
     point = ReadPointData<VLayoutPoint>(pointObject);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-template <> inline auto AbstractTest::PointFromJson(const QJsonObject &pointObject, VSAPoint &point) -> void
+template<>
+inline auto AbstractTest::ItemFromJson(const QJsonObject &pointObject, VSAPoint &point) -> void
 {
     CheckClassType<VSAPoint>(pointObject);
 
@@ -355,7 +443,8 @@ template <> inline auto AbstractTest::PointFromJson(const QJsonObject &pointObje
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-template <> inline auto AbstractTest::PointFromJson(const QJsonObject &pointObject, VRawSAPoint &point) -> void
+template<>
+inline auto AbstractTest::ItemFromJson(const QJsonObject &pointObject, VRawSAPoint &point) -> void
 {
     CheckClassType<VRawSAPoint>(pointObject);
 

@@ -80,6 +80,8 @@ struct VLayoutPassmark
     friend auto operator<<(QDataStream &dataStream, const VLayoutPassmark &data) -> QDataStream &;
     friend auto operator>>(QDataStream &dataStream, VLayoutPassmark &data) -> QDataStream &;
 
+    auto toJson() const -> QJsonObject;
+
 private:
     static const quint32 streamHeader;
     static const quint16 classVersion;

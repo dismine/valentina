@@ -1,0 +1,124 @@
+{
+    "vector": [
+        {
+            "turnPoint": true,
+            "type": "VLayoutPoint",
+            "x": -276.34006443627254,
+            "y": -791.4961889763781
+        },
+        {
+            "turnPoint": true,
+            "type": "VLayoutPoint",
+            "x": -249.87552755905506,
+            "y": -753.7009133858268
+        },
+        {
+            "turnPoint": true,
+            "type": "VLayoutPoint",
+            "x": -223.4109906818376,
+            "y": -791.4961889763781
+        },
+        {
+            "turnPoint": true,
+            "type": "VLayoutPoint",
+            "x": -223.4109906818376,
+            "y": -791.4961889763781
+        },
+        {
+            "turnPoint": true,
+            "type": "VLayoutPoint",
+            "x": 3.535463122782634,
+            "y": -791.4961889763781
+        },
+        {
+            "turnPoint": true,
+            "type": "VLayoutPoint",
+            "x": 3.535463122782634,
+            "y": -791.4961889763781
+        },
+        {
+            "turnPoint": true,
+            "type": "VLayoutPoint",
+            "x": 30.000000000000114,
+            "y": -753.7009133858268
+        },
+        {
+            "turnPoint": true,
+            "type": "VLayoutPoint",
+            "x": 56.4645368772176,
+            "y": -791.4961889763781
+        },
+        {
+            "turnPoint": true,
+            "type": "VLayoutPoint",
+            "x": 56.4645368772176,
+            "y": -791.4961889763781
+        },
+        {
+            "turnPoint": true,
+            "type": "VLayoutPoint",
+            "x": 283.41099068183746,
+            "y": -791.4961889763781
+        },
+        {
+            "turnPoint": true,
+            "type": "VLayoutPoint",
+            "x": 283.41099068183746,
+            "y": -791.4961889763781
+        },
+        {
+            "turnPoint": true,
+            "type": "VLayoutPoint",
+            "x": 309.87552755905494,
+            "y": -753.7009133858268
+        },
+        {
+            "turnPoint": true,
+            "type": "VLayoutPoint",
+            "x": 336.3400644362724,
+            "y": -791.4961889763781
+        },
+        {
+            "turnPoint": true,
+            "type": "VLayoutPoint",
+            "x": 336.3400644362724,
+            "y": -791.4961889763781
+        },
+        {
+            "turnPoint": true,
+            "type": "VLayoutPoint",
+            "x": 483.54330708661405,
+            "y": -791.4961889763781
+        },
+        {
+            "turnPoint": true,
+            "type": "VLayoutPoint",
+            "x": 483.54330708661405,
+            "y": 115.5904251968504
+        },
+        {
+            "turnPoint": true,
+            "type": "VLayoutPoint",
+            "x": 29.999999999999943,
+            "y": 115.59042519685045
+        },
+        {
+            "turnPoint": true,
+            "type": "VLayoutPoint",
+            "x": -423.54330708661416,
+            "y": 115.5904251968504
+        },
+        {
+            "turnPoint": true,
+            "type": "VLayoutPoint",
+            "x": -423.54330708661416,
+            "y": -791.4961889763781
+        },
+        {
+            "turnPoint": true,
+            "type": "VLayoutPoint",
+            "x": -276.34006443627254,
+            "y": -791.4961889763781
+        }
+    ]
+}

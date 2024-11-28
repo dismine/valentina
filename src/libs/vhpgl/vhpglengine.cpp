@@ -29,7 +29,6 @@
 
 #include "../vformat/vsinglelineoutlinechar.h"
 #include "../vgeometry/vlayoutplacelabel.h"
-#include "../vlayout/vboundary.h"
 #include "../vlayout/vfoldline.h"
 #include "../vlayout/vlayoutpiece.h"
 #include "../vlayout/vlayoutpiecepath.h"
@@ -372,85 +371,35 @@ void VHPGLEngine::GenerateHPGLFooter(QTextStream &out)
 //---------------------------------------------------------------------------------------------------------------------
 void VHPGLEngine::PlotSewLine(QTextStream &out, const VLayoutPiece &detail)
 {
-    if (detail.IsSeamAllowance() && not detail.IsHideMainPath() && not detail.IsSeamAllowanceBuiltIn())
+    if (!detail.IsSeamAllowance() || detail.IsHideMainPath() || detail.IsSeamAllowanceBuiltIn())
     {
-        QVector<VLayoutPoint> const sewLine = detail.GetMappedFullContourPoints();
-
-        if (m_togetherWithNotches)
-        {
-            const QVector<VLayoutPassmark> passmarks = detail.GetMappedPassmarks();
-
-            bool const seamAllowance = detail.IsSeamAllowance() && detail.IsSeamAllowanceBuiltIn();
-            bool const builtInSeamAllowance = detail.IsSeamAllowance() && detail.IsSeamAllowanceBuiltIn();
-
-            VBoundary boundary(sewLine, seamAllowance, builtInSeamAllowance);
-            boundary.SetPieceName(detail.GetName());
-            if (detail.IsShowFullPiece() && !detail.GetMappedSeamMirrorLine().isNull())
-            {
-                boundary.SetMirrorLine(detail.GetMappedSeamMirrorLine());
-            }
-            const QList<VBoundarySequenceItemData> sequence = boundary.Combine(passmarks, true, false);
-
-            for (const auto &item : sequence)
-            {
-                const auto path = CastToPoint(ConvertPath(item.item.value<VLayoutPiecePath>().Points()));
-                PlotPath(out, path, Qt::SolidLine);
-            }
-        }
-        else
-        {
-            QVector<QPoint> points = CastToPoint(ConvertPath(sewLine));
-
-            if (points.size() > 1 && points.first() != points.last())
-            {
-                points.append(points.first()); // must be closed
-            }
-
-            PlotPath(out, points, Qt::SolidLine);
-        }
+        return;
     }
+
+    QVector<VLayoutPoint> const sewLine = detail.GetMappedFullContourPoints(m_togetherWithNotches, true, false);
+    QVector<QPoint> points = CastToPoint(ConvertPath(sewLine));
+    if (points.size() > 1 && points.first() != points.last())
+    {
+        points.append(points.first()); // must be closed
+    }
+
+    PlotPath(out, points, Qt::SolidLine);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 void VHPGLEngine::PlotSeamAllowance(QTextStream &out, const VLayoutPiece &detail)
 {
-    QVector<VLayoutPoint> pieceBoundary = detail.IsSeamAllowance() && not detail.IsSeamAllowanceBuiltIn()
-                                              ? detail.GetMappedFullSeamAllowancePoints()
-                                              : detail.GetMappedFullContourPoints();
+    QVector<VLayoutPoint> const pieceBoundary = detail.IsSeamAllowance() && not detail.IsSeamAllowanceBuiltIn()
+                                                    ? detail.GetMappedFullSeamAllowancePoints(m_togetherWithNotches)
+                                                    : detail.GetMappedFullContourPoints(m_togetherWithNotches);
 
-    if (m_togetherWithNotches)
+    QVector<QPoint> points = CastToPoint(ConvertPath(pieceBoundary));
+    if (points.size() > 1 && points.first() != points.last())
     {
-        const QVector<VLayoutPassmark> passmarks = detail.GetMappedPassmarks();
-
-        bool const seamAllowance = detail.IsSeamAllowance() && !detail.IsSeamAllowanceBuiltIn();
-        bool const builtInSeamAllowance = detail.IsSeamAllowance() && detail.IsSeamAllowanceBuiltIn();
-
-        VBoundary boundary(pieceBoundary, seamAllowance, builtInSeamAllowance);
-        boundary.SetPieceName(detail.GetName());
-        if (detail.IsShowFullPiece() && !detail.GetMappedSeamAllowanceMirrorLine().isNull())
-        {
-            boundary.SetMirrorLine(detail.GetMappedSeamAllowanceMirrorLine());
-        }
-        const QList<VBoundarySequenceItemData> sequence = boundary.Combine(passmarks, false, false);
-
-        pieceBoundary.clear();
-
-        for (const auto &item : sequence)
-        {
-            const auto path = CastToPoint(ConvertPath(item.item.value<VLayoutPiecePath>().Points()));
-            PlotPath(out, path, Qt::SolidLine);
-        }
+        points.append(points.first()); // must be closed
     }
-    else
-    {
-        QVector<QPoint> points = CastToPoint(ConvertPath(pieceBoundary));
-        if (points.size() > 1 && points.first() != points.last())
-        {
-            points.append(points.first()); // must be closed
-        }
 
-        PlotPath(out, points, Qt::SolidLine);
-    }
+    PlotPath(out, points, Qt::SolidLine);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -564,13 +513,15 @@ void VHPGLEngine::PlotGrainline(QTextStream &out, const VLayoutPiece &detail)
 //---------------------------------------------------------------------------------------------------------------------
 void VHPGLEngine::PlotMirrorLine(QTextStream &out, const VLayoutPiece &detail)
 {
-    if (detail.IsShowFullPiece())
+    if (!detail.IsShowFullPiece())
     {
-        const QLineF mirrorLine = detail.GetMappedSeamAllowanceMirrorLine();
-        if (not mirrorLine.isNull() && detail.IsShowMirrorLine())
-        {
-            PlotPath(out, CastToPoint(ConvertPath<QPointF>({mirrorLine.p1(), mirrorLine.p2()})), Qt::DashDotLine);
-        }
+        return;
+    }
+
+    if (const QLineF mirrorLine = detail.GetMappedCorrectedMirrorLine(m_togetherWithNotches);
+        not mirrorLine.isNull() && detail.IsShowMirrorLine())
+    {
+        PlotPath(out, CastToPoint(ConvertPath<QPointF>({mirrorLine.p1(), mirrorLine.p2()})), Qt::DashDotLine);
     }
 }
 

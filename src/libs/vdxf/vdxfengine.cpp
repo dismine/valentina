@@ -56,7 +56,6 @@
 
 #include "../vgeometry/vgeometrydef.h"
 #include "../vgeometry/vlayoutplacelabel.h"
-#include "../vlayout/vboundary.h"
 #include "../vlayout/vfoldline.h"
 #include "../vlayout/vlayoutpiece.h"
 #include "../vlayout/vlayoutpiecepath.h"
@@ -117,16 +116,6 @@ Q_GLOBAL_STATIC_WITH_ARGS(const UTF8STRING, layer87, (UTF8STRING("87"))) // NOLI
 QT_WARNING_POP
 
 //---------------------------------------------------------------------------------------------------------------------
-auto PieceOutline(const VLayoutPiece &detail) -> QVector<VLayoutPoint>
-{
-    if (detail.IsSeamAllowance() && not detail.IsSeamAllowanceBuiltIn())
-    {
-        return detail.GetMappedFullSeamAllowancePoints();
-    }
-    return detail.GetMappedFullContourPoints();
-}
-
-//---------------------------------------------------------------------------------------------------------------------
 inline auto LineFont(const TextLine &tl, const QFont &base) -> QFont
 {
     QFont fnt = base;
@@ -153,20 +142,21 @@ inline auto LineAlign(const TextLine &tl, const QString &text, const QFontMetric
 
     return dX;
 }
-} // namespace
 
 //---------------------------------------------------------------------------------------------------------------------
-static inline auto svgEngineFeatures() -> QPaintEngine::PaintEngineFeatures
+inline auto svgEngineFeatures() -> QPaintEngine::PaintEngineFeatures
 {
     QT_WARNING_PUSH
     QT_WARNING_DISABLE_CLANG("-Wsign-conversion")
     QT_WARNING_DISABLE_INTEL(68)
 
-    return {QPaintEngine::AllFeatures & ~QPaintEngine::PatternBrush & ~QPaintEngine::PerspectiveTransform &
-            ~QPaintEngine::ConicalGradientFill & ~QPaintEngine::PorterDuff};
+    return {QPaintEngine::AllFeatures & ~QPaintEngine::PatternBrush & ~QPaintEngine::PerspectiveTransform
+            & ~QPaintEngine::ConicalGradientFill & ~QPaintEngine::PorterDuff};
 
     QT_WARNING_POP
 }
+} // namespace
+
 
 //---------------------------------------------------------------------------------------------------------------------
 VDxfEngine::VDxfEngine()
@@ -377,8 +367,10 @@ void VDxfEngine::drawEllipse(const QRectF &rect)
     const QRectF newRect = m_matrix.mapRect(rect);
     const double rotationAngle = atan(m_matrix.m12() / m_matrix.m11());
 
-    double majorX, majorY; // distanse between center and endpoint of the major axis
-    double ratio;          // ratio of minor axis to major axis
+    // distanse between center and endpoint of the major axis
+    double majorX = 0;
+    double majorY = 0;
+    double ratio = 0; // ratio of minor axis to major axis
     if (rect.width() <= rect.height())
     {
         majorX = (rect.top() - rect.center().y()) * sin(rotationAngle) * m_matrix.m11() / cos(rotationAngle);
@@ -817,27 +809,6 @@ void VDxfEngine::ExportAAMAOutline(const QSharedPointer<dx_ifaceBlock> &detailBl
 
     if (m_togetherWithNotches)
     {
-        const QVector<VLayoutPassmark> passmarks = detail.GetMappedPassmarks();
-
-        bool const seamAllowance = detail.IsSeamAllowance() && !detail.IsSeamAllowanceBuiltIn();
-        bool const builtInSeamAllowance = detail.IsSeamAllowance() && detail.IsSeamAllowanceBuiltIn();
-
-        VBoundary boundary(points, seamAllowance, builtInSeamAllowance);
-        boundary.SetPieceName(detail.GetName());
-        if (detail.IsShowFullPiece() && !detail.GetMappedSeamAllowanceMirrorLine().isNull())
-        {
-            boundary.SetMirrorLine(detail.GetMappedSeamAllowanceMirrorLine());
-        }
-        const QList<VBoundarySequenceItemData> sequence = boundary.Combine(passmarks, false, false);
-
-        points.clear();
-
-        for (const auto &item : sequence)
-        {
-            const auto path = item.item.value<VLayoutPiecePath>().Points();
-            points += path;
-        }
-
         points = VAbstractPiece::RemoveDublicates(points, false);
     }
 
@@ -858,16 +829,18 @@ void VDxfEngine::ExportAAMADraw(const QSharedPointer<dx_ifaceBlock> &detailBlock
     ExportAAMADrawPlaceLabels(detailBlock, detail);
     ExportAAMADrawFoldLine(detailBlock, detail);
 
-    if (detail.IsShowFullPiece())
+    if (!detail.IsShowFullPiece())
     {
-        const QLineF mirrorLine = detail.GetMappedSeamAllowanceMirrorLine();
-        if (not mirrorLine.isNull() && detail.IsShowMirrorLine())
+        return;
+    }
+
+    if (QLineF const mirrorLine = detail.GetMappedCorrectedMirrorLine(m_togetherWithNotches);
+        not mirrorLine.isNull() && detail.IsShowMirrorLine())
+    {
+        if (DRW_Entity *e = AAMALine(mirrorLine, *layer8))
         {
-            if (DRW_Entity *e = AAMALine(mirrorLine, *layer8))
-            {
-                e->lineType = dx_iface::QtPenStyleToString(Qt::DashDotLine);
-                detailBlock->ent.push_back(e);
-            }
+            e->lineType = dx_iface::QtPenStyleToString(Qt::DashDotLine);
+            detailBlock->ent.push_back(e);
         }
     }
 }
@@ -875,48 +848,25 @@ void VDxfEngine::ExportAAMADraw(const QSharedPointer<dx_ifaceBlock> &detailBlock
 //---------------------------------------------------------------------------------------------------------------------
 void VDxfEngine::ExportAAMADrawSewLine(const QSharedPointer<dx_ifaceBlock> &detailBlock, const VLayoutPiece &detail)
 {
-    if (detail.IsSeamAllowance() && not detail.IsHideMainPath() && not detail.IsSeamAllowanceBuiltIn())
+    if (!detail.IsSeamAllowance() || detail.IsHideMainPath() || detail.IsSeamAllowanceBuiltIn())
     {
-        const UTF8STRING &layer = not detail.IsSewLineOnDrawing() ? *layer14 : *layer8;
-        QVector<VLayoutPoint> const points = detail.GetMappedFullContourPoints();
-
-        auto DrawPolygon = [this, detailBlock, &layer](const QVector<VLayoutPoint> &points, bool forceClosed)
-        {
-            if (DRW_Entity *e = AAMAPolygon(points, layer, forceClosed))
-            {
-                detailBlock->ent.push_back(e);
-            }
-
-            ExportTurnPoints(detailBlock, points);
-            ExportCurvePoints(detailBlock, points);
-        };
-
-        if (m_togetherWithNotches)
-        {
-            const QVector<VLayoutPassmark> passmarks = detail.GetMappedPassmarks();
-
-            bool const seamAllowance = detail.IsSeamAllowance() && detail.IsSeamAllowanceBuiltIn();
-            bool const builtInSeamAllowance = detail.IsSeamAllowance() && detail.IsSeamAllowanceBuiltIn();
-
-            VBoundary boundary(points, seamAllowance, builtInSeamAllowance);
-            boundary.SetPieceName(detail.GetName());
-            if (detail.IsShowFullPiece() && !detail.GetMappedSeamAllowanceMirrorLine().isNull())
-            {
-                boundary.SetMirrorLine(detail.GetMappedSeamAllowanceMirrorLine());
-            }
-            const QList<VBoundarySequenceItemData> sequence = boundary.Combine(passmarks, true, false);
-
-            for (const auto &item : sequence)
-            {
-                const auto path = item.item.value<VLayoutPiecePath>().Points();
-                DrawPolygon(path, false);
-            }
-        }
-        else
-        {
-            DrawPolygon(points, true);
-        }
+        return;
     }
+
+    QVector<VLayoutPoint> const points = detail.GetMappedFullContourPoints(m_togetherWithNotches, true, false);
+    if (points.isEmpty())
+    {
+        return;
+    }
+
+    if (const UTF8STRING &layer = not detail.IsSewLineOnDrawing() ? *layer14 : *layer8;
+        DRW_Entity *e = AAMAPolygon(points, layer, true))
+    {
+        detailBlock->ent.push_back(e);
+    }
+
+    ExportTurnPoints(detailBlock, points);
+    ExportCurvePoints(detailBlock, points);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -1379,30 +1329,8 @@ auto VDxfEngine::ExportToASTM(const QVector<VLayoutPiece> &details) -> bool
 void VDxfEngine::ExportASTMPieceBoundary(const QSharedPointer<dx_ifaceBlock> &detailBlock, const VLayoutPiece &detail)
 {
     QVector<VLayoutPoint> pieceBoundary = PieceOutline(detail);
-
     if (m_togetherWithNotches)
     {
-        const QVector<VLayoutPassmark> passmarks = detail.GetMappedPassmarks();
-
-        bool const seamAllowance = detail.IsSeamAllowance() && !detail.IsSeamAllowanceBuiltIn();
-        bool const builtInSeamAllowance = detail.IsSeamAllowance() && detail.IsSeamAllowanceBuiltIn();
-
-        VBoundary boundary(pieceBoundary, seamAllowance, builtInSeamAllowance);
-        boundary.SetPieceName(detail.GetName());
-        if (detail.IsShowFullPiece() && !detail.GetMappedSeamAllowanceMirrorLine().isNull())
-        {
-            boundary.SetMirrorLine(detail.GetMappedSeamAllowanceMirrorLine());
-        }
-        const QList<VBoundarySequenceItemData> sequence = boundary.Combine(passmarks, false, false);
-
-        pieceBoundary.clear();
-
-        for (const auto &item : sequence)
-        {
-            const auto path = item.item.value<VLayoutPiecePath>().Points();
-            pieceBoundary += path;
-        }
-
         pieceBoundary = VAbstractPiece::RemoveDublicates(pieceBoundary, false);
     }
 
@@ -1425,53 +1353,26 @@ void VDxfEngine::ExportASTMPieceBoundary(const QSharedPointer<dx_ifaceBlock> &de
 //---------------------------------------------------------------------------------------------------------------------
 void VDxfEngine::ExportASTMSewLine(const QSharedPointer<dx_ifaceBlock> &detailBlock, const VLayoutPiece &detail)
 {
-    if (detail.IsSeamAllowance() && not detail.IsHideMainPath() && not detail.IsSeamAllowanceBuiltIn())
+    if (!detail.IsSeamAllowance() || detail.IsHideMainPath() || detail.IsSeamAllowanceBuiltIn())
     {
-        QVector<VLayoutPoint> const sewLine = detail.GetMappedFullContourPoints();
+        return;
+    }
 
-        auto DrawPolygon = [this, detailBlock](const QVector<VLayoutPoint> &points, bool forceClosed)
-        {
-            // Sew lines
-            if (DRW_Entity *e = AAMAPolygon(points, *layer14, forceClosed))
-            {
-                detailBlock->ent.push_back(e);
-            }
+    QVector<VLayoutPoint> const sewLine = detail.GetMappedFullContourPoints(m_togetherWithNotches, true, false);
 
-            ExportTurnPoints(detailBlock, points);
-            ExportCurvePoints(detailBlock, points);
+    // Sew lines
+    if (DRW_Entity *e = AAMAPolygon(sewLine, *layer14, true))
+    {
+        detailBlock->ent.push_back(e);
+    }
 
-            // Sew lines quality validation curves
-            if (DRW_Entity *e = AAMAPolygon(points, *layer87, forceClosed))
-            {
-                detailBlock->ent.push_back(e);
-            }
-        };
+    ExportTurnPoints(detailBlock, sewLine);
+    ExportCurvePoints(detailBlock, sewLine);
 
-        if (m_togetherWithNotches)
-        {
-            const QVector<VLayoutPassmark> passmarks = detail.GetMappedPassmarks();
-
-            bool const seamAllowance = detail.IsSeamAllowance() && detail.IsSeamAllowanceBuiltIn();
-            bool const builtInSeamAllowance = detail.IsSeamAllowance() && detail.IsSeamAllowanceBuiltIn();
-
-            VBoundary boundary(sewLine, seamAllowance, builtInSeamAllowance);
-            boundary.SetPieceName(detail.GetName());
-            if (detail.IsShowFullPiece() && !detail.GetMappedSeamAllowanceMirrorLine().isNull())
-            {
-                boundary.SetMirrorLine(detail.GetMappedSeamAllowanceMirrorLine());
-            }
-            const QList<VBoundarySequenceItemData> sequence = boundary.Combine(passmarks, true, false);
-
-            for (const auto &item : sequence)
-            {
-                const auto path = item.item.value<VLayoutPiecePath>().Points();
-                DrawPolygon(path, false);
-            }
-        }
-        else
-        {
-            DrawPolygon(sewLine, true);
-        }
+    // Sew lines quality validation curves
+    if (DRW_Entity *e = AAMAPolygon(sewLine, *layer87, true))
+    {
+        detailBlock->ent.push_back(e);
     }
 }
 
@@ -1711,7 +1612,12 @@ void VDxfEngine::ExportASTMNotches(const QSharedPointer<dx_ifaceBlock> &detailBl
 //---------------------------------------------------------------------------------------------------------------------
 void VDxfEngine::ExportASTMMirrorLine(const QSharedPointer<dx_ifaceBlock> &detailBlock, const VLayoutPiece &detail)
 {
-    const QLineF mirrorLine = detail.GetMappedSeamAllowanceMirrorLine();
+    if (detail.IsShowFullPiece())
+    {
+        return;
+    }
+
+    QLineF const mirrorLine = detail.GetMappedCorrectedMirrorLine(m_togetherWithNotches);
     if (mirrorLine.isNull())
     {
         return;
@@ -2245,4 +2151,14 @@ auto VDxfEngine::CreateAAMAPolygon(const QVector<C> &polygon, const UTF8STRING &
     }
 
     return poly;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+auto VDxfEngine::PieceOutline(const VLayoutPiece &detail) const -> QVector<VLayoutPoint>
+{
+    if (detail.IsSeamAllowance() && not detail.IsSeamAllowanceBuiltIn())
+    {
+        return detail.GetMappedFullSeamAllowancePoints(m_togetherWithNotches);
+    }
+    return detail.GetMappedFullContourPoints(m_togetherWithNotches);
 }

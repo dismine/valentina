@@ -777,13 +777,15 @@ auto VLayoutPiece::GetMappedContourPoints() const -> QVector<VLayoutPoint>
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-auto VLayoutPiece::GetMappedFullContourPoints() const -> QVector<VLayoutPoint>
+auto VLayoutPiece::GetMappedFullContourPoints(bool togetherWithNotches, bool drawMode, bool layoutAllowance) const
+    -> QVector<VLayoutPoint>
 {
-    return Map(GetFullContourPoints());
+    return Map(GetFullContourPoints(togetherWithNotches, drawMode, layoutAllowance));
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-auto VLayoutPiece::GetFullContourPoints() const -> QVector<VLayoutPoint>
+auto VLayoutPiece::GetFullContourPoints(bool togetherWithNotches, bool drawMode, bool layoutAllowance) const
+    -> QVector<VLayoutPoint>
 {
     QVector<VLayoutPoint> points;
     points.reserve(d->m_contour.size());
@@ -795,6 +797,30 @@ auto VLayoutPiece::GetFullContourPoints() const -> QVector<VLayoutPoint>
     else
     {
         points = d->m_contour;
+    }
+
+    if (togetherWithNotches)
+    {
+        QVector<VLayoutPassmark> const passmarks = GetPassmarks();
+
+        bool const seamAllowance = IsSeamAllowance() && IsSeamAllowanceBuiltIn();
+        bool const builtInSeamAllowance = IsSeamAllowance() && IsSeamAllowanceBuiltIn();
+
+        VBoundary boundary(points, seamAllowance, builtInSeamAllowance);
+        boundary.SetPieceName(GetName());
+        if (IsShowFullPiece())
+        {
+            boundary.SetMirrorLine(GetSeamMirrorLine());
+        }
+        const QList<VBoundarySequenceItemData> sequence = boundary.Combine(passmarks, drawMode, layoutAllowance);
+
+        QVector<VLayoutPoint> combinedBoundary;
+        for (const auto &item : sequence)
+        {
+            combinedBoundary += item.item.value<VLayoutPiecePath>().Points();
+        }
+
+        return combinedBoundary;
     }
 
     return points;
@@ -821,9 +847,10 @@ auto VLayoutPiece::GetMappedSeamAllowancePoints() const -> QVector<VLayoutPoint>
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-auto VLayoutPiece::GetMappedFullSeamAllowancePoints() const -> QVector<VLayoutPoint>
+auto VLayoutPiece::GetMappedFullSeamAllowancePoints(bool togetherWithNotches, bool drawMode, bool layoutAllowance) const
+    -> QVector<VLayoutPoint>
 {
-    return Map(GetFullSeamAllowancePoints());
+    return Map(GetFullSeamAllowancePoints(togetherWithNotches, drawMode, layoutAllowance));
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -844,7 +871,8 @@ auto VLayoutPiece::CorrectSeamAllowanceMirrorLine() const -> QLineF
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-auto VLayoutPiece::GetFullSeamAllowancePoints() const -> QVector<VLayoutPoint>
+auto VLayoutPiece::GetFullSeamAllowancePoints(bool togetherWithNotches, bool drawMode, bool layoutAllowance) const
+    -> QVector<VLayoutPoint>
 {
     QVector<VLayoutPoint> points;
     points.reserve(d->m_seamAllowance.size());
@@ -858,6 +886,30 @@ auto VLayoutPiece::GetFullSeamAllowancePoints() const -> QVector<VLayoutPoint>
     else
     {
         points = d->m_seamAllowance;
+    }
+
+    if (togetherWithNotches)
+    {
+        const QVector<VLayoutPassmark> passmarks = GetPassmarks();
+
+        bool const seamAllowance = IsSeamAllowance() && !IsSeamAllowanceBuiltIn();
+        bool const builtInSeamAllowance = IsSeamAllowance() && IsSeamAllowanceBuiltIn();
+
+        VBoundary boundary(points, seamAllowance, builtInSeamAllowance);
+        boundary.SetPieceName(GetName());
+        if (IsShowFullPiece())
+        {
+            boundary.SetMirrorLine(GetSeamAllowanceMirrorLine());
+        }
+        const QList<VBoundarySequenceItemData> sequence = boundary.Combine(passmarks, drawMode, layoutAllowance);
+
+        QVector<VLayoutPoint> combinedBoundary;
+        for (const auto &item : sequence)
+        {
+            combinedBoundary += item.item.value<VLayoutPiecePath>().Points();
+        }
+
+        return combinedBoundary;
     }
 
     return points;
@@ -1048,6 +1100,62 @@ auto VLayoutPiece::GetPatternLabelData() const -> VTextManager
 void VLayoutPiece::SetPatternLabelData(const VTextManager &data)
 {
     d->m_tmPattern = data;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+auto VLayoutPiece::GetMappedCorrectedMirrorLine(bool togetherWithNotches) const -> QLineF
+{
+    return d->m_matrix.map(GetCorrectedMirrorLine(togetherWithNotches));
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+auto VLayoutPiece::GetCorrectedMirrorLine(bool togetherWithNotches) const -> QLineF
+{
+    if (!IsShowFullPiece())
+    {
+        return {};
+    }
+
+    QLineF mirrorLine;
+    QVector<VLayoutPoint> points;
+
+    if (!IsSeamAllowance() || IsSeamAllowanceBuiltIn())
+    {
+        mirrorLine = GetSeamMirrorLine();
+        points = GetFullContourPoints(togetherWithNotches);
+    }
+    else if (not IsSeamAllowanceBuiltIn())
+    {
+        mirrorLine = GetSeamAllowanceMirrorLine();
+        points = GetFullSeamAllowancePoints(togetherWithNotches);
+    }
+
+    if (mirrorLine.isNull() || points.isEmpty())
+    {
+        return {};
+    }
+
+    QPointF p1 = mirrorLine.p1();
+    QPointF p2 = mirrorLine.p2();
+
+    QVector<QPointF> seam;
+    CastTo(points, seam);
+
+    if (QVector<QPointF> const intersectionPoints = VAbstractCurve::CurveIntersectLine(seam,
+                                                                                       QLineF(mirrorLine.center(), p1));
+        !intersectionPoints.isEmpty())
+    {
+        p1 = intersectionPoints.constFirst();
+    }
+
+    if (QVector<QPointF> const intersectionPoints = VAbstractCurve::CurveIntersectLine(seam,
+                                                                                       QLineF(mirrorLine.center(), p2));
+        !intersectionPoints.isEmpty())
+    {
+        p2 = intersectionPoints.constFirst();
+    }
+
+    return {p1, p2};
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -1440,31 +1548,11 @@ void VLayoutPiece::SetLayoutAllowancePoints(bool togetherWithNotches)
 
     if (d->m_layoutWidth > 0)
     {
-        QVector<VLayoutPoint> pieceBoundary = IsSeamAllowance() && not IsSeamAllowanceBuiltIn()
-                                                  ? GetMappedFullSeamAllowancePoints()
-                                                  : GetMappedFullContourPoints();
-
-        if (togetherWithNotches)
-        {
-            const QVector<VLayoutPassmark> passmarks = GetMappedPassmarks();
-            bool const seamAllowance = IsSeamAllowance() && !IsSeamAllowanceBuiltIn();
-            bool const builtInSeamAllowance = IsSeamAllowance() && IsSeamAllowanceBuiltIn();
-
-            VBoundary boundary(pieceBoundary, seamAllowance, builtInSeamAllowance);
-            boundary.SetPieceName(GetName());
-            if (IsShowFullPiece())
-            {
-                boundary.SetMirrorLine(GetMappedSeamAllowanceMirrorLine());
-            }
-            const QList<VBoundarySequenceItemData> sequence = boundary.Combine(passmarks, false, true);
-
-            pieceBoundary.clear();
-
-            for (const auto &item : sequence)
-            {
-                pieceBoundary += item.item.value<VLayoutPiecePath>().Points();
-            }
-        }
+        QVector<VLayoutPoint> const pieceBoundary = IsSeamAllowance() && not IsSeamAllowanceBuiltIn()
+                                                        ? GetMappedFullSeamAllowancePoints(togetherWithNotches,
+                                                                                           false,
+                                                                                           true)
+                                                        : GetMappedFullContourPoints(togetherWithNotches, false, true);
 
         QVector<VSAPoint> pieceBoundaryPoints;
         CastTo(pieceBoundary, pieceBoundaryPoints);
@@ -1576,35 +1664,8 @@ auto VLayoutPiece::ContourPath(bool togetherWithNotches, bool showLayoutAllowanc
     // sew line
     if (not IsHideMainPath() || not IsSeamAllowance() || IsSeamAllowanceBuiltIn())
     {
-        if (togetherWithNotches)
-        {
-            bool const seamAllowance = IsSeamAllowance() && IsSeamAllowanceBuiltIn();
-            bool const builtInSeamAllowance = IsSeamAllowance() && IsSeamAllowanceBuiltIn();
-
-            VBoundary boundary(GetFullContourPoints(), seamAllowance, builtInSeamAllowance);
-            boundary.SetPieceName(GetName());
-            if (IsShowFullPiece())
-            {
-                boundary.SetMirrorLine(d->m_seamMirrorLine);
-            }
-            const QList<VBoundarySequenceItemData> sequence = boundary.Combine(d->m_passmarks, true, false);
-
-            for (const auto &item : sequence)
-            {
-                auto itemPath = item.item.value<VLayoutPiecePath>().Points();
-                if (itemPath.size() > 2)
-                {
-                    itemPath.append(itemPath.constFirst());
-                }
-                QVector<QPointF> convertedPoints;
-                CastTo(itemPath, convertedPoints);
-                path.addPolygon(QPolygonF(convertedPoints));
-            }
-        }
-        else
-        {
-            path = VGObject::PainterPath(GetFullContourPoints());
-        }
+        QVector<VLayoutPoint> points = GetFullContourPoints(togetherWithNotches, true, false);
+        path = VGObject::PainterPath(points);
     }
 
     // seam allowance
@@ -1612,35 +1673,13 @@ auto VLayoutPiece::ContourPath(bool togetherWithNotches, bool showLayoutAllowanc
     {
         if (not IsSeamAllowanceBuiltIn())
         {
-            // Draw seam allowance
-            if (togetherWithNotches)
+            QVector<VLayoutPoint> points = GetFullSeamAllowancePoints(togetherWithNotches, true, false);
+            if (points.constLast().toPoint() != points.constFirst().toPoint())
             {
-                VBoundary boundary(GetFullSeamAllowancePoints(), true);
-                boundary.SetPieceName(GetName());
-                if (IsShowFullPiece())
-                {
-                    boundary.SetMirrorLine(d->m_seamAllowanceMirrorLine);
-                }
-                const QList<VBoundarySequenceItemData> sequence = boundary.Combine(d->m_passmarks, true, false);
-
-                for (const auto &item : sequence)
-                {
-                    const auto itemPath = item.item.value<VLayoutPiecePath>().Points();
-                    QVector<QPointF> convertedPoints;
-                    CastTo(itemPath, convertedPoints);
-                    path.addPolygon(QPolygonF(convertedPoints));
-                }
+                points.append(points.at(0)); // Should be always closed
             }
-            else
-            {
-                QVector<VLayoutPoint> points = GetFullSeamAllowancePoints();
-                if (points.constLast().toPoint() != points.constFirst().toPoint())
-                {
-                    points.append(points.at(0)); // Should be always closed
-                }
 
-                path.addPath(VGObject::PainterPath(points));
-            }
+            path.addPath(VGObject::PainterPath(points));
         }
 
         if (!togetherWithNotches)
@@ -1791,30 +1830,12 @@ auto VLayoutPiece::GetItem(bool textAsPaths, bool togetherWithNotches, bool show
 
     if (IsShowFullPiece())
     {
-        bool mirrorFlag = false;
-        QPainterPath mirrorLinePath;
-        if (not IsSeamAllowance() || IsSeamAllowanceBuiltIn())
+        if (const QLineF mirrorLine = GetMappedCorrectedMirrorLine(togetherWithNotches); !mirrorLine.isNull())
         {
-            if (!d->m_seamMirrorLine.isNull())
-            {
-                QPainterPath mirrorPath;
-                mirrorPath.moveTo(d->m_matrix.map(d->m_seamMirrorLine.p1()));
-                mirrorPath.lineTo(d->m_matrix.map(d->m_seamMirrorLine.p2()));
-                mirrorLinePath.addPath(mirrorPath);
-                mirrorFlag = true;
-            }
-        }
-        else if (not IsSeamAllowanceBuiltIn() && !d->m_seamAllowanceMirrorLine.isNull())
-        {
-            QPainterPath mirrorPath;
-            mirrorPath.moveTo(d->m_matrix.map(d->m_seamAllowanceMirrorLine.p1()));
-            mirrorPath.lineTo(d->m_matrix.map(d->m_seamAllowanceMirrorLine.p2()));
-            mirrorLinePath.addPath(mirrorPath);
-            mirrorFlag = true;
-        }
+            QPainterPath mirrorLinePath;
+            mirrorLinePath.moveTo(mirrorLine.p1());
+            mirrorLinePath.lineTo(mirrorLine.p2());
 
-        if (mirrorFlag)
-        {
             auto *mirrorLineItem = new QGraphicsPathItem(item);
             QPen pen = mirrorLineItem->pen();
             pen.setWidthF(VAbstractApplication::VApp()->Settings()->WidthHairLine());
@@ -1830,30 +1851,12 @@ auto VLayoutPiece::GetItem(bool textAsPaths, bool togetherWithNotches, bool show
 //---------------------------------------------------------------------------------------------------------------------
 auto VLayoutPiece::IsLayoutAllowanceValid(bool togetherWithNotches) const -> bool
 {
-    QVector<VLayoutPoint> base =
-        (IsSeamAllowance() && not IsSeamAllowanceBuiltIn()) ? GetFullSeamAllowancePoints() : GetFullContourPoints();
+    QVector<VLayoutPoint> base = (IsSeamAllowance() && not IsSeamAllowanceBuiltIn())
+                                     ? GetFullSeamAllowancePoints(togetherWithNotches, false, true)
+                                     : GetFullContourPoints(togetherWithNotches, false, true);
 
     if (togetherWithNotches)
     {
-        const QVector<VLayoutPassmark> passmarks = GetMappedPassmarks();
-        bool const seamAllowance = IsSeamAllowance() && !IsSeamAllowanceBuiltIn();
-        bool const builtInSeamAllowance = IsSeamAllowance() && IsSeamAllowanceBuiltIn();
-
-        VBoundary boundary(base, seamAllowance, builtInSeamAllowance);
-        boundary.SetPieceName(GetName());
-        if (IsShowFullPiece())
-        {
-            boundary.SetMirrorLine(d->m_seamAllowanceMirrorLine);
-        }
-        const QList<VBoundarySequenceItemData> sequence = boundary.Combine(passmarks, false, true);
-
-        base.clear();
-
-        for (const auto &item : sequence)
-        {
-            base += item.item.value<VLayoutPiecePath>().Points();
-        }
-
         base = VAbstractPiece::RemoveDublicates(base, false);
     }
 

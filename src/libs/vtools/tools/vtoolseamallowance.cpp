@@ -188,7 +188,7 @@ void UpdateLabelItem(VTextGraphicsItem *labelItem, QPointF pos, qreal labelAngle
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-auto RenderSeamPath(const VPiece &detail, bool combineTogether, const VContainer *data) -> QPainterPath
+auto SeamPoints(const VPiece &detail, bool combineTogether, const VContainer *data) -> QVector<VLayoutPoint>
 {
     if (combineTogether)
     {
@@ -198,63 +198,94 @@ auto RenderSeamPath(const VPiece &detail, bool combineTogether, const VContainer
         bool const seamAllowance = detail.IsSeamAllowance() && detail.IsSeamAllowanceBuiltIn();
         bool const builtInSeamAllowance = detail.IsSeamAllowance() && detail.IsSeamAllowanceBuiltIn();
 
+        // DumpVector(points, QStringLiteral("points.json.XXXXXX")); // Uncomment for dumping test data
+        // DumpVector(passmarks, QStringLiteral("passmarks.json.XXXXXX")); // Uncomment for dumping test data
+
         VBoundary boundary(points, seamAllowance, builtInSeamAllowance);
         boundary.SetPieceName(detail.GetName());
 
-        QLineF const mirrorLine = detail.SeamMirrorLine(data);
-        if (!mirrorLine.isNull() && detail.IsShowFullPiece())
+        if (QLineF const mirrorLine = detail.SeamMirrorLine(data); !mirrorLine.isNull() && detail.IsShowFullPiece())
         {
             boundary.SetMirrorLine(mirrorLine);
         }
         const QList<VBoundarySequenceItemData> sequence = boundary.Combine(passmarks, false, false);
 
-        QVector<QPointF> combinedBoundary;
+        QVector<VLayoutPoint> combinedBoundary;
         for (const auto &item : sequence)
         {
-            const auto path = item.item.value<VLayoutPiecePath>().Points();
-            QVector<QPointF> convertedPoints;
-            CastTo(path, convertedPoints);
-            combinedBoundary += convertedPoints;
+            combinedBoundary += item.item.value<VLayoutPiecePath>().Points();
         }
 
+        // DumpVector(combinedBoundary, QStringLiteral("boundary.json.XXXXXX")); // Uncomment for dumping test data
+        return combinedBoundary;
+    }
+
+    return detail.FullMainPathPoints(data);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+auto RenderSeamPath(const VPiece &detail, bool combineTogether, const VContainer *data) -> QPainterPath
+{
+    QVector<VLayoutPoint> const points = SeamPoints(detail, combineTogether, data);
+    QVector<QPointF> boundary;
+    CastTo(points, boundary);
+
+    if (combineTogether)
+    {
         QPainterPath combinedPath;
-        combinedPath.addPolygon(QPolygonF(combinedBoundary));
+        combinedPath.addPolygon(QPolygonF(boundary));
         combinedPath.closeSubpath();
         combinedPath.setFillRule(Qt::OddEvenFill);
 
         return combinedPath;
     }
 
-    return detail.FullMainPathPath(data);
+    return VPiece::MainPathPath(boundary);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-auto RenderSeamAllowancePath(const VPiece &detail, bool combineTogether, const VContainer *data) -> QPainterPath
+auto SeamAllowancePoints(const VPiece &detail, bool combineTogether, const VContainer *data) -> QVector<VLayoutPoint>
 {
     if (combineTogether)
     {
         const QVector<VLayoutPassmark> passmarks = VLayoutPiece::ConvertPassmarks(detail, data);
         const QVector<VLayoutPoint> points = detail.FullSeamAllowancePoints(data);
 
+        // DumpVector(points, QStringLiteral("points.json.XXXXXX"));       // Uncomment for dumping test data
+        // DumpVector(passmarks, QStringLiteral("passmarks.json.XXXXXX")); // Uncomment for dumping test data
+
         VBoundary boundary(points, true);
         boundary.SetPieceName(detail.GetName());
 
-        QLineF const mirrorLine = detail.SeamAllowanceMirrorLine(data);
-        if (!mirrorLine.isNull() && detail.IsShowFullPiece())
+        if (QLineF const mirrorLine = detail.SeamAllowanceMirrorLine(data);
+            !mirrorLine.isNull() && detail.IsShowFullPiece())
         {
             boundary.SetMirrorLine(mirrorLine);
         }
 
         const QList<VBoundarySequenceItemData> sequence = boundary.Combine(passmarks, false, false);
 
-        QVector<QPointF> combinedBoundary;
+        QVector<VLayoutPoint> combinedBoundary;
         for (const auto &item : sequence)
         {
-            const auto path = item.item.value<VLayoutPiecePath>().Points();
-            QVector<QPointF> convertedPoints;
-            CastTo(path, convertedPoints);
-            combinedBoundary += convertedPoints;
+            combinedBoundary += item.item.value<VLayoutPiecePath>().Points();
         }
+
+        // DumpVector(combinedBoundary, QStringLiteral("boundary.json.XXXXXX")); // Uncomment for dumping test data
+        return combinedBoundary;
+    }
+
+    return detail.FullSeamAllowancePoints(data);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+auto RenderSeamAllowancePath(const VPiece &detail, bool combineTogether, const VContainer *data) -> QPainterPath
+{
+    QVector<VLayoutPoint> const points = SeamAllowancePoints(detail, combineTogether, data);
+    if (combineTogether)
+    {
+        QVector<QPointF> combinedBoundary;
+        CastTo(points, combinedBoundary);
 
         QPainterPath combinedPath;
         combinedPath.addPolygon(QPolygonF(combinedBoundary));
@@ -264,7 +295,7 @@ auto RenderSeamAllowancePath(const VPiece &detail, bool combineTogether, const V
         return combinedPath;
     }
 
-    return detail.FullSeamAllowancePath(data);
+    return detail.SeamAllowancePath(points);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -392,6 +423,74 @@ auto RenderFoldLine(const VPiece &detail, const VContainer *data) -> VFoldLine
     }
 
     return fLine;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+auto RenderMirrorLine(const VPiece &detail, const VContainer *data, bool combineTogether) -> QPainterPath
+{
+    if (!detail.IsShowFullPiece() || !detail.IsShowMirrorLine())
+    {
+        return {};
+    }
+
+    // Determine the appropriate seam line and points based on the seam allowance state
+    QLineF mirrorLine;
+    QVector<VLayoutPoint> points;
+
+    if (!detail.IsSeamAllowance() || detail.IsSeamAllowanceBuiltIn())
+    {
+        mirrorLine = detail.SeamMirrorLine(data);
+        if (combineTogether)
+        {
+            points = SeamPoints(detail, combineTogether, data);
+        }
+    }
+    else
+    {
+        mirrorLine = detail.SeamAllowanceMirrorLine(data);
+        if (combineTogether)
+        {
+            points = SeamAllowancePoints(detail, combineTogether, data);
+        }
+    }
+
+    // Return empty path if no valid mirror line is found
+    if (mirrorLine.isNull())
+    {
+        return {};
+    }
+
+    QPointF p1 = mirrorLine.p1();
+    QPointF p2 = mirrorLine.p2();
+
+    // Adjust points based on intersections, if required
+    if (combineTogether && !points.isEmpty())
+    {
+        QVector<QPointF> seam;
+        CastTo(points, seam);
+
+        if (QVector<QPointF> const intersectionPoints = VAbstractCurve::CurveIntersectLine(seam,
+                                                                                           QLineF(mirrorLine.center(),
+                                                                                                  p1));
+            !intersectionPoints.isEmpty())
+        {
+            p1 = intersectionPoints.constFirst();
+        }
+
+        if (QVector<QPointF> const intersectionPoints = VAbstractCurve::CurveIntersectLine(seam,
+                                                                                           QLineF(mirrorLine.center(),
+                                                                                                  p2));
+            !intersectionPoints.isEmpty())
+        {
+            p2 = intersectionPoints.constFirst();
+        }
+    }
+
+    // Construct and return the path
+    QPainterPath path;
+    path.moveTo(p1);
+    path.lineTo(p2);
+    return path;
 }
 } // namespace
 
@@ -1873,19 +1972,7 @@ void VToolSeamAllowance::RefreshGeometry(bool updateChildren)
         QtConcurrent::run([this, detail]() { return RenderFoldLine(detail, getData()); });
 
     QFuture<QPainterPath> const futureMirrorLine = QtConcurrent::run(
-        [this, detail]()
-        {
-            if (QLineF const mirrorLine = detail.SeamAllowanceMirrorLine(getData());
-                detail.IsShowFullPiece() && detail.IsShowMirrorLine() && !mirrorLine.isNull())
-            {
-                QPainterPath path;
-                path.moveTo(mirrorLine.p1());
-                path.lineTo(mirrorLine.p2());
-                return path;
-            }
-
-            return QPainterPath();
-        });
+        [this, detail, combineTogether]() { return RenderMirrorLine(detail, getData(), combineTogether); });
 
     QFuture<QPainterPath> futureSeamAllowance;
     QFuture<bool> futureSeamAllowanceValid;

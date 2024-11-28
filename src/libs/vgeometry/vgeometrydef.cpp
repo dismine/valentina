@@ -31,6 +31,8 @@
 #include "../ifc/exception/vexception.h"
 
 #include <QCoreApplication>
+#include <QJsonArray>
+#include <QJsonObject>
 
 #if QT_VERSION < QT_VERSION_CHECK(6, 4, 0)
 #include "../vmisc/compatibility.h"
@@ -107,4 +109,64 @@ auto SingleParallelPoint(const QPointF &p1, const QPointF &p2, qreal angle, qrea
 auto SimpleParallelLine(const QPointF &p1, const QPointF &p2, qreal width) -> QLineF
 {
     return {SingleParallelPoint(p1, p2, 90, width), SingleParallelPoint(p2, p1, -90, width)};
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+auto VLayoutPassmark::toJson() const -> QJsonObject
+{
+    QJsonObject object;
+    object["type"_L1] = "VLayoutPassmark";
+
+    // Serialize lines if not empty
+    if (!lines.isEmpty())
+    {
+        QJsonArray linesArray;
+        for (const auto &line : lines)
+        {
+            QJsonObject lineObject;
+            lineObject["x1"_L1] = line.x1();
+            lineObject["y1"_L1] = line.y1();
+            lineObject["x2"_L1] = line.x2();
+            lineObject["y2"_L1] = line.y2();
+            linesArray.append(lineObject);
+        }
+        object["lines"_L1] = linesArray;
+    }
+
+    // Serialize type if not the default value
+    if (type != PassmarkLineType::OneLine)
+    {
+        object["passmarkType"_L1] = static_cast<int>(type);
+    }
+
+    // Serialize baseLine if it's not default
+    if (baseLine != QLineF{})
+    {
+        object["baseLine"_L1] = QJsonObject{
+            {"x1"_L1, baseLine.x1()},
+            {"y1"_L1, baseLine.y1()},
+            {"x2"_L1, baseLine.x2()},
+            {"y2"_L1, baseLine.y2()},
+        };
+    }
+
+    // Serialize isBuiltIn if not false
+    if (isBuiltIn)
+    {
+        object["isBuiltIn"_L1] = isBuiltIn;
+    }
+
+    // Serialize isClockwiseOpening if not false
+    if (isClockwiseOpening)
+    {
+        object["isClockwiseOpening"_L1] = isClockwiseOpening;
+    }
+
+    // Serialize label if not empty
+    if (!label.isEmpty())
+    {
+        object["label"_L1] = label;
+    }
+
+    return object;
 }
