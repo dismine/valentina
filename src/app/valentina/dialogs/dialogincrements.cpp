@@ -207,7 +207,7 @@ DialogIncrements::DialogIncrements(VContainer *data, VPattern *doc, QWidget *par
 
     const QPushButton *bClose = ui->buttonBox->button(QDialogButtonBox::Close);
     SCASSERT(bClose != nullptr)
-    connect(bClose, &QPushButton::clicked, this, &DialogIncrements::accept);
+    connect(bClose, &QPushButton::clicked, this, &DialogIncrements::close);
 }
 
 //---------------------------------------------------------------------------------------------------------------------

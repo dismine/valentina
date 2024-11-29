@@ -31,6 +31,7 @@
 - Valentina app. Added support for drag and drop of pattern files.
 - Tape app. Save and restore the column width of a table between sessions.
 - Fix boundary together with notches. Case with notch on mirror line.
+- Fix applying changes to increments when close the dialog.
 
 # Valentina 0.7.53 June 25, 2024
 - Fix layout sheet export with empty name.
