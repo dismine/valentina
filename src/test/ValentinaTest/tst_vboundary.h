@@ -38,7 +38,7 @@ public:
     explicit TST_VBoundary(QObject *parent = nullptr);
 
 private slots:
-    void CombineSeamAllowance_data();
+    void CombineSeamAllowance_data() const;
     void CombineSeamAllowance() const;
 
 private:

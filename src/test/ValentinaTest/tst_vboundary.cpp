@@ -39,7 +39,7 @@ TST_VBoundary::TST_VBoundary(QObject *parent)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void TST_VBoundary::CombineSeamAllowance_data()
+void TST_VBoundary::CombineSeamAllowance_data() const
 {
     QTest::addColumn<QVector<VLayoutPoint>>("points");
     QTest::addColumn<QString>("pieceName");
