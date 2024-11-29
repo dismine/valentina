@@ -780,9 +780,9 @@ void ColorPickerPopup::exec()
 }
 
 #if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
-#define CONST const
+#define V_CONST const
 #else
-#define CONST
+#define V_CONST
 #endif
 
 /*! \internal
@@ -793,11 +793,11 @@ void ColorPickerPopup::updateSelected()
     // The CONST macro is used to handle differences in Qt 5 and Qt 6:
     // - In Qt 6, QLayoutItem::widget() is declared as a const method, requiring a const-qualified QLayoutItem pointer.
     // - In Qt 5, QLayoutItem::widget() is not const, so the const qualifier is omitted to avoid compiler errors.
-    CONST QLayoutItem *layoutItem = nullptr;
+    V_CONST QLayoutItem *layoutItem = nullptr;
     int i = 0;
     while ((layoutItem = grid->itemAt(i)) != nullptr)
     {
-        if (CONST QWidget *w = layoutItem->widget(); (w != nullptr) && w->inherits("ColorPickerItem"))
+        if (V_CONST QWidget *w = layoutItem->widget(); (w != nullptr) && w->inherits("ColorPickerItem"))
         {
             // NOLINTNEXTLINE(cppcoreguidelines-pro-type-reinterpret-cast)
             if (auto *litem = reinterpret_cast<ColorPickerItem *>(layoutItem->widget()); litem != sender())
@@ -1167,11 +1167,11 @@ void ColorPickerPopup::selectColor(ColorPickerItem *item)
     // - In Qt 6, QLayoutItem::widget() is declared as a const method, requiring a const-qualified QLayoutItem pointer.
     // - In Qt 5, QLayoutItem::widget() is not const, so the const qualifier is omitted to avoid compiler errors.
 
-    CONST QLayoutItem *layoutItem = nullptr;
+    V_CONST QLayoutItem *layoutItem = nullptr;
     int i = 0;
     while ((layoutItem = grid->itemAt(i)) != nullptr)
     {
-        if (CONST QWidget *wl = layoutItem->widget(); (wl != nullptr) && wl->inherits("ColorPickerItem"))
+        if (V_CONST QWidget *wl = layoutItem->widget(); (wl != nullptr) && wl->inherits("ColorPickerItem"))
         {
             // NOLINTNEXTLINE(cppcoreguidelines-pro-type-reinterpret-cast)
             if (auto *litem = reinterpret_cast<ColorPickerItem *>(layoutItem->widget()); litem != item)
