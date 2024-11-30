@@ -80,7 +80,7 @@ void VPE::VPropertyFormWidget::build()
     vproperty_d_ptr->EditorWidgets.clear();
     if (layout() != nullptr)
     {
-        while (!layout()->isEmpty())
+        while (layout()->count() > 0)
         {
             if (QLayoutItem *child = layout()->takeAt(0); child != nullptr)
             {
