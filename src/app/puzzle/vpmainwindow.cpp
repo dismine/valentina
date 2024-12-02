@@ -779,11 +779,9 @@ void VPMainWindow::InitProperties()
 //---------------------------------------------------------------------------------------------------------------------
 void VPMainWindow::CurrentPieceShowSeamLineToggled(bool checked)
 {
-    QList<VPPiecePtr> const selectedPieces = SelectedPieces();
-    if (selectedPieces.size() == 1)
+    if (QList<VPPiecePtr> const selectedPieces = SelectedPieces(); selectedPieces.size() == 1)
     {
-        const VPPiecePtr &selectedPiece = selectedPieces.constFirst();
-        if (not selectedPiece.isNull())
+        if (const VPPiecePtr &selectedPiece = selectedPieces.constFirst(); not selectedPiece.isNull())
         {
             selectedPiece->SetHideMainPath(not checked);
             LayoutWasSaved(false);
@@ -796,12 +794,10 @@ void VPMainWindow::CurrentPieceShowSeamLineToggled(bool checked)
 //---------------------------------------------------------------------------------------------------------------------
 void VPMainWindow::ShowFullPieceToggled(bool checked)
 {
-
-    QList<VPPiecePtr> const selectedPieces = SelectedPieces();
-    if (selectedPieces.size() == 1)
+    if (QList<VPPiecePtr> const selectedPieces = SelectedPieces(); selectedPieces.size() == 1)
     {
-        const VPPiecePtr &selectedPiece = selectedPieces.constFirst();
-        if (not selectedPiece.isNull() && selectedPiece->IsShowFullPiece() != checked)
+        if (const VPPiecePtr &selectedPiece = selectedPieces.constFirst();
+            not selectedPiece.isNull() && selectedPiece->IsShowFullPiece() != checked)
         {
             selectedPiece->SetShowFullPiece(checked);
             LayoutWasSaved(false);
