@@ -109,6 +109,7 @@ enum class MainPathContextMenuOption : int
     Uniqueness,
     TurnPoint,
     Excluded,
+    DuplicateNode,
     Delete,
     LAST_ONE_DO_NOT_USE
 };
@@ -1108,7 +1109,7 @@ void DialogSeamAllowance::ShowMainPathContextMenu(const QPoint &pos)
         rowItem->setText(GetNodeName(data, rowNode, true));
     };
 
-    Q_STATIC_ASSERT_X(static_cast<int>(MainPathContextMenuOption::LAST_ONE_DO_NOT_USE) == 16,
+    Q_STATIC_ASSERT_X(static_cast<int>(MainPathContextMenuOption::LAST_ONE_DO_NOT_USE) == 17,
                       "Not all options were handled.");
 
     QT_WARNING_PUSH
@@ -1172,6 +1173,17 @@ void DialogSeamAllowance::ShowMainPathContextMenu(const QPoint &pos)
             rowItem->setText(GetNodeName(data, rowNode, true));
             rowItem->setFont(NodeFont(rowItem->font(), rowNode.IsExcluded()));
             break;
+        case MainPathContextMenuOption::DuplicateNode:
+        {
+            VPieceNode duplicate = rowNode;
+            duplicate.SetExcluded(true);
+
+            auto *item = new QListWidgetItem(GetNodeName(data, duplicate, true));
+            item->setFont(NodeFont(item->font(), true));
+            item->setData(Qt::UserRole, QVariant::fromValue(duplicate));
+            uiTabPaths->listWidgetMainPath->addItem(item);
+            break;
+        }
         case MainPathContextMenuOption::Delete:
             delete uiTabPaths->listWidgetMainPath->item(row);
             break;
@@ -3922,6 +3934,29 @@ void DialogSeamAllowance::InitMainPathTab()
                 rowItem->setText(GetNodeName(data, rowNode, true));
             });
 
+    connect(uiTabPaths->toolButtonDuplicateNode, &QToolButton::toggled, this,
+            [this]()
+            {
+                const int row = uiTabPaths->listWidgetMainPath->currentRow();
+                if (row < 0)
+                {
+                    uiTabPaths->toolButtonDuplicateNode->setEnabled(false);
+                    return;
+                }
+
+                QListWidgetItem *rowItem = uiTabPaths->listWidgetMainPath->item(row);
+                SCASSERT(rowItem != nullptr)
+                auto rowNode = qvariant_cast<VPieceNode>(rowItem->data(Qt::UserRole));
+
+                VPieceNode duplicate = rowNode;
+                duplicate.SetExcluded(true);
+
+                auto *item = new QListWidgetItem(GetNodeName(data, duplicate, true));
+                item->setFont(NodeFont(item->font(), true));
+                item->setData(Qt::UserRole, QVariant::fromValue(duplicate));
+                uiTabPaths->listWidgetMainPath->addItem(item);
+            });
+
     connect(uiTabPaths->toolButtonDelete, &QToolButton::clicked, this,
             [this]()
             {
@@ -5438,6 +5473,10 @@ auto DialogSeamAllowance::InitMainPathContextMenu(QMenu *menu, const VPieceNode 
         actionReverse->setCheckable(true);
         actionReverse->setChecked(rowNode.GetReverse());
         contextMenu.insert(static_cast<int>(MainPathContextMenuOption::Reverse), actionReverse);
+
+        QAction *actionDuplicate = menu->addAction(FromTheme(VThemeIcon::DuplicateNode),
+                                                  QApplication::translate("DialogSeamAllowance", "Duplicate"));
+        contextMenu.insert(static_cast<int>(MainPathContextMenuOption::DuplicateNode), actionDuplicate);
     }
     else
     {
@@ -5558,6 +5597,7 @@ void DialogSeamAllowance::SetOptionControls()
     uiTabPaths->toolButtonTurnPoint->setEnabled(false);
     uiTabPaths->toolButtonCheckUniqness->setEnabled(false);
     uiTabPaths->toolButtonPassmark->setEnabled(false);
+    uiTabPaths->toolButtonDuplicateNode->setEnabled(false);
     uiTabPaths->toolButtonDelete->setEnabled(false);
 
     auto SetChecked = [](QToolButton *toolButton, bool checked = false)
@@ -5572,6 +5612,7 @@ void DialogSeamAllowance::SetOptionControls()
     SetChecked(uiTabPaths->toolButtonTurnPoint);
     SetChecked(uiTabPaths->toolButtonCheckUniqness);
     SetChecked(uiTabPaths->toolButtonPassmark);
+    SetChecked(uiTabPaths->toolButtonDuplicateNode);
     SetChecked(uiTabPaths->toolButtonDelete);
 
     const int row = uiTabPaths->listWidgetMainPath->currentRow();
@@ -5587,6 +5628,7 @@ void DialogSeamAllowance::SetOptionControls()
     if (rowNode.GetTypeTool() != Tool::NodePoint)
     {
         uiTabPaths->toolButtonReverse->setEnabled(true);
+        uiTabPaths->toolButtonDuplicateNode->setEnabled(true);
         SetChecked(uiTabPaths->toolButtonReverse, rowNode.GetReverse());
     }
     else

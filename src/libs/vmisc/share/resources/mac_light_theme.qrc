@@ -4275,5 +4275,7 @@
         <file>icons/La-Sierra-Light/actions/22x22/add-placemark.svg</file>
         <file>icons/La-Sierra-Light/actions/22x22@2x/snap-nodes-rotation-center.svg</file>
         <file>icons/La-Sierra-Light/actions/22x22@2x/add-placemark.svg</file>
+        <file>icons/La-Sierra-Light/actions/22x22/duplicate-node.svg</file>
+        <file>icons/La-Sierra-Light/actions/22x22@2x/duplicate-node.svg</file>
     </qresource>
 </RCC>

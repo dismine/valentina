@@ -204,6 +204,25 @@
               </widget>
              </item>
              <item>
+              <widget class="QToolButton" name="toolButtonDuplicateNode">
+               <property name="enabled">
+                <bool>false</bool>
+               </property>
+               <property name="toolTip">
+                <string>Duplicate</string>
+               </property>
+               <property name="text">
+                <string notr="true">...</string>
+               </property>
+               <property name="icon">
+                <iconset theme="duplicate-node"/>
+               </property>
+               <property name="checkable">
+                <bool>true</bool>
+               </property>
+              </widget>
+             </item>
+             <item>
               <widget class="QToolButton" name="toolButtonDelete">
                <property name="enabled">
                 <bool>false</bool>

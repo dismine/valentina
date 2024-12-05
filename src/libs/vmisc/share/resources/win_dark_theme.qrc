@@ -15989,5 +15989,13 @@
         <!-- <file>icons/Eleven-Dark/symbolic@2x/status/notifications-applet-symbolic.svg</file> -->
         <!-- <file>icons/Eleven-Dark/symbolic@2x/status/notifications-new-symbolic.svg</file> -->
         <!-- <file>icons/Eleven-Dark/symbolic@2x/status/notifications-symbolic.svg</file> -->
+        <file>icons/Eleven-Dark/16/actions/duplicate-node.svg</file>
+        <file>icons/Eleven-Dark/16@2x/actions/duplicate-node.svg</file>
+        <file>icons/Eleven-Dark/22/actions/duplicate-node.svg</file>
+        <file>icons/Eleven-Dark/22@2x/actions/duplicate-node.svg</file>
+        <file>icons/Eleven-Dark/24/actions/duplicate-node.svg</file>
+        <file>icons/Eleven-Dark/24@2x/actions/duplicate-node.svg</file>
+        <file>icons/Eleven-Dark/32/actions/duplicate-node.svg</file>
+        <file>icons/Eleven-Dark/32@2x/actions/duplicate-node.svg</file>
     </qresource>
 </RCC>
