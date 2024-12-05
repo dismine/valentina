@@ -71,6 +71,9 @@ public slots:
     void ChosenObject(quint32 id, const SceneObject &type) override;
     void ShowDialog(bool click) override;
 
+protected:
+    auto eventFilter(QObject *obj, QEvent *event) -> bool override;
+
 private slots:
     void NameDetailChanged();
     void DetailUUIDChanged();

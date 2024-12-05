@@ -584,6 +584,23 @@ void DialogSeamAllowance::ShowDialog(bool click)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+auto DialogSeamAllowance::eventFilter(QObject* obj, QEvent* event) -> bool
+{
+    if (obj == uiTabPaths->listWidgetMainPath && event->type() == QEvent::KeyPress)
+    {
+        if (QKeyEvent* keyEvent = static_cast<QKeyEvent*>(event); keyEvent->key() == Qt::Key_Delete)
+        {
+            if (QListWidgetItem* selectedItem = uiTabPaths->listWidgetMainPath->currentItem();selectedItem)
+            {
+                delete selectedItem;
+            }
+            return true; // Event is handled
+        }
+    }
+    return DialogTool::eventFilter(obj, event);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 void DialogSeamAllowance::SaveData()
 {
     SavePatternLabelData();
@@ -3969,6 +3986,8 @@ void DialogSeamAllowance::InitMainPathTab()
 
                 delete uiTabPaths->listWidgetMainPath->item(row);
             });
+
+    uiTabPaths->listWidgetMainPath->installEventFilter(this);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -5553,7 +5572,8 @@ auto DialogSeamAllowance::InitMainPathContextMenu(QMenu *menu, const VPieceNode 
     contextMenu.insert(static_cast<int>(MainPathContextMenuOption::Excluded), actionExcluded);
 
     QAction *actionDelete =
-        menu->addAction(FromTheme(VThemeIcon::EditDelete), QApplication::translate("DialogSeamAllowance", "Delete"));
+        menu->addAction(FromTheme(VThemeIcon::EditDelete), QApplication::translate("DialogSeamAllowance", "Delete"),
+                        QKeySequence::Delete);
     contextMenu.insert(static_cast<int>(MainPathContextMenuOption::Delete), actionDelete);
 
     return contextMenu;
