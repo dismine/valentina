@@ -684,40 +684,42 @@ void VToolSeamAllowance::InsertNodes(const QVector<VPieceNode> &nodes, quint32 p
     SCASSERT(data != nullptr)
     SCASSERT(doc != nullptr)
 
-    if (pieceId > NULL_ID && not nodes.isEmpty())
+    if (pieceId <= NULL_ID || nodes.isEmpty())
     {
-        VPiece oldDet;
-        try
-        {
-            oldDet = data->GetPiece(pieceId);
-        }
-        catch (const VExceptionBadId &)
+        return;
+    }
+
+    VPiece oldDet;
+    try
+    {
+        oldDet = data->GetPiece(pieceId);
+    }
+    catch (const VExceptionBadId &)
+    {
+        return;
+    }
+
+    VPiece newDet = oldDet;
+
+    for (auto node : nodes)
+    {
+        const quint32 id = PrepareNode(node, scene, doc, data);
+        if (id == NULL_ID)
         {
             return;
         }
 
-        VPiece newDet = oldDet;
+        node.SetId(id);
+        newDet.GetPath().Append(node);
 
-        for (auto node : nodes)
-        {
-            const quint32 id = PrepareNode(node, scene, doc, data);
-            if (id == NULL_ID)
-            {
-                return;
-            }
+        // Seam allowance tool already initializated and can't init the node
+        auto *saTool = qobject_cast<VToolSeamAllowance *>(VAbstractPattern::getTool(pieceId));
+        SCASSERT(saTool != nullptr);
 
-            node.SetId(id);
-            newDet.GetPath().Append(node);
-
-            // Seam allowance tool already initializated and can't init the node
-            auto *saTool = qobject_cast<VToolSeamAllowance *>(VAbstractPattern::getTool(pieceId));
-            SCASSERT(saTool != nullptr);
-
-            InitNode(node, scene, saTool);
-        }
-
-        VAbstractApplication::VApp()->getUndoStack()->push(new SavePieceOptions(oldDet, newDet, doc, pieceId));
+        InitNode(node, scene, saTool);
     }
+
+    VAbstractApplication::VApp()->getUndoStack()->push(new SavePieceOptions(oldDet, newDet, doc, pieceId));
 }
 
 //---------------------------------------------------------------------------------------------------------------------
