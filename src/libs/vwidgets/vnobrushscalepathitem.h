@@ -39,14 +39,14 @@ class VNoBrushScalePathItem : public QGraphicsPathItem
 {
 public:
     explicit VNoBrushScalePathItem(QGraphicsItem *parent = nullptr);
+    ~VNoBrushScalePathItem() override = default;
 
     void SetWidth(qreal width);
 
 protected:
-    virtual void paint(QPainter * painter, const QStyleOptionGraphicsItem * option,
-                       QWidget * widget = nullptr) override;
+    void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget = nullptr) override;
 
-    virtual auto type() const -> int override { return Type; }
+    auto type() const -> int override { return Type; }
     enum { Type = UserType + static_cast<int>(Vis::NoBrush)};
 
 private:
