@@ -865,8 +865,13 @@ auto VPassmark::PassmarkIntersectionBaseLine(const QVector<QPointF> &path, Passm
         (side == PassmarkSide::All || side == PassmarkSide::Left))
     {
         // first passmark
-        lines += PassmarkIntersection(path, QLineF(m_data.nextSAPoint, m_data.passmarkSAPoint),
-                                      m_data.passmarkSAPoint.GetSABefore(m_data.saWidth));
+        if (QLineF const intersection = PassmarkIntersection(path,
+                                                             QLineF(m_data.nextSAPoint, m_data.passmarkSAPoint),
+                                                             m_data.passmarkSAPoint.GetSABefore(m_data.saWidth));
+            !intersection.isNull())
+        {
+            lines += intersection;
+        }
     }
 
     if ((m_data.passmarkAngleType == PassmarkAngleType::Intersection ||
@@ -874,8 +879,13 @@ auto VPassmark::PassmarkIntersectionBaseLine(const QVector<QPointF> &path, Passm
         (side == PassmarkSide::All || side == PassmarkSide::Right))
     {
         // second passmark
-        lines += PassmarkIntersection(path, QLineF(m_data.previousSAPoint, m_data.passmarkSAPoint),
-                                      m_data.passmarkSAPoint.GetSAAfter(m_data.saWidth));
+        if (QLineF const intersection = PassmarkIntersection(path,
+                                                             QLineF(m_data.previousSAPoint, m_data.passmarkSAPoint),
+                                                             m_data.passmarkSAPoint.GetSAAfter(m_data.saWidth));
+            !intersection.isNull())
+        {
+            lines += intersection;
+        }
     }
 
     return lines;
@@ -892,7 +902,14 @@ auto VPassmark::PassmarkIntersection2BaseLine(const QVector<QPointF> &path, Pass
         // first passmark
         QLineF line(m_data.passmarkSAPoint, m_data.previousSAPoint);
         line.setAngle(line.angle() - 90);
-        lines += PassmarkIntersection(path, line, m_data.passmarkSAPoint.GetSABefore(m_data.saWidth));
+
+        if (QLineF const intersection = PassmarkIntersection(path,
+                                                             line,
+                                                             m_data.passmarkSAPoint.GetSABefore(m_data.saWidth));
+            !intersection.isNull())
+        {
+            lines += intersection;
+        }
     }
 
     if ((m_data.passmarkAngleType == PassmarkAngleType::Intersection2 ||
@@ -902,7 +919,13 @@ auto VPassmark::PassmarkIntersection2BaseLine(const QVector<QPointF> &path, Pass
         // second passmark
         QLineF line(m_data.passmarkSAPoint, m_data.nextSAPoint);
         line.setAngle(line.angle() + 90);
-        lines += PassmarkIntersection(path, line, m_data.passmarkSAPoint.GetSAAfter(m_data.saWidth));
+        if (QLineF const intersection = PassmarkIntersection(path,
+                                                             line,
+                                                             m_data.passmarkSAPoint.GetSAAfter(m_data.saWidth));
+            !intersection.isNull())
+        {
+            lines += intersection;
+        }
     }
 
     return lines;
