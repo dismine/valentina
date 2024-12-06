@@ -5572,8 +5572,8 @@ auto DialogSeamAllowance::InitMainPathContextMenu(QMenu *menu, const VPieceNode 
     contextMenu.insert(static_cast<int>(MainPathContextMenuOption::Excluded), actionExcluded);
 
     QAction *actionDelete =
-        menu->addAction(FromTheme(VThemeIcon::EditDelete), QApplication::translate("DialogSeamAllowance", "Delete"),
-                        QKeySequence::Delete);
+        menu->addAction(FromTheme(VThemeIcon::EditDelete), QApplication::translate("DialogSeamAllowance", "Delete"));
+    actionDelete->setShortcut(QKeySequence::Delete);
     contextMenu.insert(static_cast<int>(MainPathContextMenuOption::Delete), actionDelete);
 
     return contextMenu;
