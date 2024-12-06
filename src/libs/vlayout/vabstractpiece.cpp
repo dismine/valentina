@@ -2191,7 +2191,7 @@ auto VAbstractPiece::LabelShapePath(const PlaceLabelImg &shape) -> QPainterPath
 auto VAbstractPiece::SeamAllowanceMirrorLine(const QLineF &seamMirrorLine,
                                              const QVector<QPointF> &seamAllowancePoints) const -> QLineF
 {
-    if (!IsSeamAllowance() || (IsSeamAllowance() && IsSeamAllowanceBuiltIn()))
+    if (!IsSeamAllowance() || (IsSeamAllowance() && IsSeamAllowanceBuiltIn()) || seamMirrorLine.isNull())
     {
         return seamMirrorLine;
     }

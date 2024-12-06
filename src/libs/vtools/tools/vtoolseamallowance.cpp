@@ -440,6 +440,12 @@ auto RenderMirrorLine(const VPiece &detail, const VContainer *data, bool combine
     if (!detail.IsSeamAllowance() || detail.IsSeamAllowanceBuiltIn())
     {
         mirrorLine = detail.SeamMirrorLine(data);
+        // Return empty path if no valid mirror line is found
+        if (mirrorLine.isNull())
+        {
+            return {};
+        }
+
         if (combineTogether)
         {
             points = SeamPoints(detail, combineTogether, data);
@@ -448,16 +454,16 @@ auto RenderMirrorLine(const VPiece &detail, const VContainer *data, bool combine
     else
     {
         mirrorLine = detail.SeamAllowanceMirrorLine(data);
+        // Return empty path if no valid mirror line is found
+        if (mirrorLine.isNull())
+        {
+            return {};
+        }
+
         if (combineTogether)
         {
             points = SeamAllowancePoints(detail, combineTogether, data);
         }
-    }
-
-    // Return empty path if no valid mirror line is found
-    if (mirrorLine.isNull())
-    {
-        return {};
     }
 
     QPointF p1 = mirrorLine.p1();

@@ -1702,7 +1702,11 @@ auto VPiece::SeamMirrorLine(const VContainer *data) const -> QLineF
 //---------------------------------------------------------------------------------------------------------------------
 auto VPiece::SeamAllowanceMirrorLine(const VContainer *data) const -> QLineF
 {
-    QLineF seamMirrorLine = SeamMirrorLine(data);
+    QLineF const seamMirrorLine = SeamMirrorLine(data);
+    if (seamMirrorLine.isNull())
+    {
+        return {};
+    }
 
     QVector<QPointF> points;
     CastTo(SeamAllowancePoints(data), points);
