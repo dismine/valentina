@@ -333,6 +333,24 @@ auto VPiece::MainPathPath(const QVector<QPointF> &points) -> QPainterPath
             path.lineTo(points.at(i));
         }
         path.lineTo(points.at(0));
+
+#if !defined(V_NO_ASSERT)
+        // uncomment for debug
+        // QFont font;
+        // font.setPixelSize(1);
+        // for (qint32 i = 0; i < points.count(); ++i)
+        // {
+        //     path.addEllipse(points.at(i).x() - accuracyPointOnLine,
+        //                     points.at(i).y() - accuracyPointOnLine,
+        //                     accuracyPointOnLine * 2.,
+        //                     accuracyPointOnLine * 2.);
+        //     path.addText(points.at(i).x() - accuracyPointOnLine,
+        //                  points.at(i).y() - accuracyPointOnLine,
+        //                  font,
+        //                  QString::number(i + 1));
+        // }
+#endif
+
         path.setFillRule(Qt::WindingFill);
     }
 
