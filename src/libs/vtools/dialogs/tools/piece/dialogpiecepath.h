@@ -68,6 +68,7 @@ protected:
     void closeEvent(QCloseEvent *event) override;
     void changeEvent(QEvent *event) override;
     auto IsValid() const -> bool override;
+    auto eventFilter(QObject *obj, QEvent *event) -> bool override;
 
 private slots:
     void ShowContextMenu(const QPoint &pos);
@@ -107,6 +108,7 @@ private slots:
     void DeployPassmarkAngle();
 
     void SetMoveControls();
+    void SetOptionControls();
 
 private:
     Q_DISABLE_COPY_MOVE(DialogPiecePath) // NOLINT

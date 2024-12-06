@@ -342,6 +342,23 @@ void DialogPiecePath::changeEvent(QEvent *event)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+auto DialogPiecePath::eventFilter(QObject *obj, QEvent *event) -> bool
+{
+    if (obj == ui->listWidget && event->type() == QEvent::KeyPress)
+    {
+        if (QKeyEvent *keyEvent = static_cast<QKeyEvent *>(event); keyEvent->key() == Qt::Key_Delete)
+        {
+            if (QListWidgetItem *selectedItem = ui->listWidget->currentItem(); selectedItem)
+            {
+                delete selectedItem;
+            }
+            return true; // Event is handled
+        }
+    }
+    return DialogTool::eventFilter(obj, event);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 void DialogPiecePath::ShowContextMenu(const QPoint &pos)
 {
     const int row = ui->listWidget->currentRow();
@@ -461,6 +478,7 @@ void DialogPiecePath::ListChanged()
     InitPassmarksList();
     InitNodesList();
     SetMoveControls();
+    SetOptionControls();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -1172,6 +1190,63 @@ void DialogPiecePath::SetMoveControls()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+void DialogPiecePath::SetOptionControls()
+{
+    ui->toolButtonReverse->setEnabled(false);
+    ui->toolButtonExcluded->setEnabled(false);
+    ui->toolButtonTurnPoint->setEnabled(false);
+    ui->toolButtonCheckUniqness->setEnabled(false);
+    ui->toolButtonPassmark->setEnabled(false);
+    ui->toolButtonDelete->setEnabled(false);
+
+    auto SetChecked = [](QToolButton *toolButton, bool checked = false)
+    {
+        toolButton->blockSignals(true);
+        toolButton->setChecked(checked);
+        toolButton->blockSignals(false);
+    };
+
+    SetChecked(ui->toolButtonReverse);
+    SetChecked(ui->toolButtonExcluded);
+    SetChecked(ui->toolButtonTurnPoint);
+    SetChecked(ui->toolButtonCheckUniqness);
+    SetChecked(ui->toolButtonPassmark);
+    SetChecked(ui->toolButtonDelete);
+
+    const int row = ui->listWidget->currentRow();
+    if (row < 0)
+    {
+        return;
+    }
+
+    const QListWidgetItem *rowItem = ui->listWidget->item(row);
+    SCASSERT(rowItem != nullptr)
+    auto rowNode = qvariant_cast<VPieceNode>(rowItem->data(Qt::UserRole));
+
+    if (rowNode.GetTypeTool() != Tool::NodePoint)
+    {
+        ui->toolButtonReverse->setEnabled(true);
+        SetChecked(ui->toolButtonReverse, rowNode.GetReverse());
+    }
+    else
+    {
+        ui->toolButtonPassmark->setEnabled(true);
+        SetChecked(ui->toolButtonPassmark, rowNode.IsPassmark());
+
+        ui->toolButtonCheckUniqness->setEnabled(true);
+        SetChecked(ui->toolButtonCheckUniqness, rowNode.IsCheckUniqueness());
+
+        ui->toolButtonTurnPoint->setEnabled(true);
+        SetChecked(ui->toolButtonTurnPoint, rowNode.IsTurnPoint());
+    }
+
+    ui->toolButtonExcluded->setEnabled(true);
+    SetChecked(ui->toolButtonExcluded, rowNode.IsExcluded());
+
+    ui->toolButtonDelete->setEnabled(true);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 void DialogPiecePath::InitPathTab()
 {
     ui->lineEditName->setClearButtonEnabled(true);
@@ -1199,6 +1274,7 @@ void DialogPiecePath::InitPathTab()
     connect(ui->listWidget, &QListWidget::customContextMenuRequested, this, &DialogPiecePath::ShowContextMenu);
     connect(ui->listWidget->model(), &QAbstractItemModel::rowsMoved, this, &DialogPiecePath::ListChanged);
     connect(ui->listWidget, &QListWidget::itemSelectionChanged, this, &DialogPiecePath::SetMoveControls);
+    connect(ui->listWidget, &QListWidget::itemSelectionChanged, this, &DialogPiecePath::SetOptionControls);
 
     connect(ui->listWidget->model(), &QAbstractItemModel::rowsMoved, this, [this]() { ValidObjects(PathIsValid()); });
 
@@ -1226,6 +1302,129 @@ void DialogPiecePath::InitPathTab()
                 MoveListRowBottom(ui->listWidget);
                 ValidObjects(PathIsValid());
             });
+
+    connect(ui->toolButtonReverse,
+            &QToolButton::toggled,
+            this,
+            [this]()
+            {
+                const int row = ui->listWidget->currentRow();
+                if (row < 0)
+                {
+                    ui->toolButtonReverse->setEnabled(false);
+                    return;
+                }
+
+                QListWidgetItem *rowItem = ui->listWidget->item(row);
+                SCASSERT(rowItem != nullptr)
+                auto rowNode = qvariant_cast<VPieceNode>(rowItem->data(Qt::UserRole));
+
+                rowNode.SetReverse(not rowNode.GetReverse());
+                rowItem->setData(Qt::UserRole, QVariant::fromValue(rowNode));
+                rowItem->setText(GetNodeName(data, rowNode, true));
+            });
+
+    connect(ui->toolButtonExcluded,
+            &QToolButton::toggled,
+            this,
+            [this]()
+            {
+                const int row = ui->listWidget->currentRow();
+                if (row < 0)
+                {
+                    ui->toolButtonExcluded->setEnabled(false);
+                    return;
+                }
+
+                QListWidgetItem *rowItem = ui->listWidget->item(row);
+                SCASSERT(rowItem != nullptr)
+                auto rowNode = qvariant_cast<VPieceNode>(rowItem->data(Qt::UserRole));
+
+                rowNode.SetExcluded(not rowNode.IsExcluded());
+                rowItem->setData(Qt::UserRole, QVariant::fromValue(rowNode));
+                rowItem->setText(GetNodeName(data, rowNode, true));
+                rowItem->setFont(NodeFont(rowItem->font(), rowNode.IsExcluded()));
+            });
+
+    connect(ui->toolButtonTurnPoint,
+            &QToolButton::toggled,
+            this,
+            [this]()
+            {
+                const int row = ui->listWidget->currentRow();
+                if (row < 0)
+                {
+                    ui->toolButtonTurnPoint->setEnabled(false);
+                    return;
+                }
+
+                QListWidgetItem *rowItem = ui->listWidget->item(row);
+                SCASSERT(rowItem != nullptr)
+                auto rowNode = qvariant_cast<VPieceNode>(rowItem->data(Qt::UserRole));
+
+                rowNode.SetTurnPoint(not rowNode.IsTurnPoint());
+                rowItem->setData(Qt::UserRole, QVariant::fromValue(rowNode));
+                rowItem->setText(GetNodeName(data, rowNode, true));
+            });
+
+    connect(ui->toolButtonCheckUniqness,
+            &QToolButton::toggled,
+            this,
+            [this]()
+            {
+                const int row = ui->listWidget->currentRow();
+                if (row < 0)
+                {
+                    ui->toolButtonCheckUniqness->setEnabled(false);
+                    return;
+                }
+
+                QListWidgetItem *rowItem = ui->listWidget->item(row);
+                SCASSERT(rowItem != nullptr)
+                auto rowNode = qvariant_cast<VPieceNode>(rowItem->data(Qt::UserRole));
+
+                rowNode.SetCheckUniqueness(not rowNode.IsCheckUniqueness());
+                rowItem->setData(Qt::UserRole, QVariant::fromValue(rowNode));
+                rowItem->setText(GetNodeName(data, rowNode, true));
+            });
+
+    connect(ui->toolButtonPassmark,
+            &QToolButton::toggled,
+            this,
+            [this](bool checked)
+            {
+                const int row = ui->listWidget->currentRow();
+                if (row < 0)
+                {
+                    ui->toolButtonPassmark->setEnabled(false);
+                    return;
+                }
+
+                QListWidgetItem *rowItem = ui->listWidget->item(row);
+                SCASSERT(rowItem != nullptr)
+                auto rowNode = qvariant_cast<VPieceNode>(rowItem->data(Qt::UserRole));
+
+                rowNode.SetPassmark(checked);
+                rowItem->setData(Qt::UserRole, QVariant::fromValue(rowNode));
+                rowItem->setText(GetNodeName(data, rowNode, true));
+            });
+
+    connect(ui->toolButtonDelete,
+            &QToolButton::clicked,
+            this,
+            [this]()
+            {
+                const int row = ui->listWidget->currentRow();
+                if (row < 0)
+                {
+                    ui->toolButtonDelete->setEnabled(false);
+                    return;
+                }
+
+                delete ui->listWidget->item(row);
+            });
+
+    ui->listWidget->installEventFilter(this);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -2355,6 +2554,7 @@ auto DialogPiecePath::InitContextMenu(QMenu *menu, const VPieceNode &rowNode) ->
 
     QAction *actionDelete =
         menu->addAction(FromTheme(VThemeIcon::EditDelete), QApplication::translate("DialogSeamAllowance", "Delete"));
+    actionDelete->setShortcut(QKeySequence::Delete);
     contextMenu.insert(static_cast<int>(ContextMenuOption::Delete), actionDelete);
 
     return contextMenu;
