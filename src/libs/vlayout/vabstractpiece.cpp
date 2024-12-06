@@ -1322,6 +1322,18 @@ auto VAbstractPiece::EkvPoint(QVector<VRawSAPoint> points, const VSAPoint &p1Lin
         }
         return points;
     }
+    else if (VFuzzyComparePossibleNulls(a, 360))
+    {
+        QLineF ext1 = bigLine1;
+        ext1.setLength(ext1.length() + p2Line1.GetSABefore(width));
+        points.append(VRawSAPoint(ext1.p2(), p2Line1.CurvePoint(), p2Line1.TurnPoint()));
+
+        QLineF ext2(bigLine2.p2(), bigLine2.p1());
+        ext2.setLength(ext2.length() + p2Line2.GetSAAfter(width));
+        points.append(VRawSAPoint(ext2.p2(), p2Line1.CurvePoint(), p2Line1.TurnPoint()));
+
+        return points;
+    }
     else if (a > 345)
     {
         points.append(VRawSAPoint(bigLine1.p2(), p2Line1.CurvePoint(), p2Line1.TurnPoint()));

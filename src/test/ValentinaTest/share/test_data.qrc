@@ -228,5 +228,7 @@
         <file>mirror_notch_case2/boundary.json</file>
         <file>mirror_notch_case2/passmarks.json</file>
         <file>mirror_notch_case2/points.json</file>
+        <file>trousers_block/input.json</file>
+        <file>trousers_block/output.json</file>
     </qresource>
 </RCC>

@@ -965,6 +965,13 @@ void TST_VAbstractPiece::BrokenDetailEquidistant_data()
     // See the file "collection/bugs/prong_acute_angle.val"
     ASSERT_TEST_CASE("Coat", QStringLiteral("://prong_acute_angle/input.json"),
                      QStringLiteral("://prong_acute_angle/output.json"), 37.795275590551185 /*seam allowance width*/);
+
+    // See the file "valentina_private_collection/bugs/Trousers Block/1.228 Men's Trousers Block.val"
+    // X:B180 Y:B6
+    ASSERT_TEST_CASE("Big Poc interfac",
+                     QStringLiteral("://trousers_block/input.json"),
+                     QStringLiteral("://trousers_block/output.json"),
+                     37.795275590551185 /*seam allowance width*/);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
