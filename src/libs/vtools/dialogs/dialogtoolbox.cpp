@@ -416,14 +416,14 @@ auto FindNotExcludedNeighborNodeDown(QListWidget *listWidget, int candidate) -> 
             break;
         }
 
-        --i;
-        if (i < 0)
+        ++i;
+        if (i >= listWidget->count())
         {
-            // Wrap around to the end of the list
-            i = listWidget->count() - 1;
+            // Wrap around to the beginning of the list
+            i = 0;
         }
 
-    } while (i != candidate);
+    } while (i != candidate); // Continue until we reach back to the starting point or find a neighbor
 
     if (!foundNeighbor)
     {
@@ -462,14 +462,14 @@ auto FindNotExcludedNeighborNodeUp(QListWidget *listWidget, int candidate) -> in
             break;
         }
 
-        ++i;
-        if (i >= listWidget->count())
+        --i;
+        if (i < 0)
         {
-            // Wrap around to the beginning of the list
-            i = 0;
+            // Wrap around to the end of the list
+            i = listWidget->count() - 1;
         }
 
-    } while (i != candidate); // Continue until we reach back to the starting point or find a neighbor
+    } while (i != candidate);
 
     if (!foundNeighbor)
     {
@@ -976,8 +976,8 @@ auto MirrorLinePointsNeighbors(QListWidget *listWidget, quint32 startPoint, quin
         prevIndex = listWidget->count() - 1;
     }
 
-    const int next = FindNotExcludedNeighborNodeDown(listWidget, prevIndex);
-    const int prev = FindNotExcludedNeighborNodeUp(listWidget, nextIndex);
+    const int next = FindNotExcludedNeighborNodeDown(listWidget, nextIndex);
+    const int prev = FindNotExcludedNeighborNodeUp(listWidget, prevIndex);
 
     return (next >= 0 && endPoint == RowNode(listWidget, next).GetId()) ||
            (prev >= 0 && endPoint == RowNode(listWidget, prev).GetId());
