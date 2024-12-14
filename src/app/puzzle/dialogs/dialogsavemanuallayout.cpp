@@ -700,6 +700,7 @@ void DialogSaveManualLayout::InitFileFormats()
     AddItem("PLT"_L1, LayoutExportFileFormat::PLT);
     AddItem("HPGL"_L1, LayoutExportFileFormat::HPGL);
     AddItem("TIF"_L1, LayoutExportFileFormat::TIF);
+    AddItem("RLD"_L1, LayoutExportFileFormat::RLD);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -714,6 +715,7 @@ void DialogSaveManualLayout::InitFileFormatTypes(LayoutExportFileFormat format)
                                         QVariant(static_cast<int>(type)));
     }
 
+#ifdef V_NO_ASSERT // Temporarily unavailable
     auto RemoveFormatFromList = [this](LayoutExportFormats exportFormat)
     {
         const int index = ui->comboBoxFormatType->findData(static_cast<int>(exportFormat));
@@ -724,10 +726,6 @@ void DialogSaveManualLayout::InitFileFormatTypes(LayoutExportFileFormat format)
     };
 
     //    RemoveFormatFromList(LayoutExportFormats::NC); // No support for now
-
-#ifdef V_NO_ASSERT // Temporarily unavailable
     RemoveFormatFromList(LayoutExportFormats::OBJ);
 #endif
-
-    RemoveFormatFromList(LayoutExportFormats::RLD);
 }
