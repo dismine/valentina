@@ -10654,7 +10654,7 @@ Appliquer quand même les réglages ?</translation>
 <context>
     <name>InitPieceLabelLanguages</name>
     <message>
-        <location filename="../../src/libs/vmisc/def.cpp" line="576"/>
+        <location filename="../../src/libs/vmisc/def.cpp" line="577"/>
         <source>Default</source>
         <translation>Par défaut</translation>
     </message>
@@ -14691,12 +14691,12 @@ This option will take an affect after restart.</source>
         <translation>Erreur de compatibilité VTextManager : actualClassVersion = %1 et classVersion = %2</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vmisc/def.cpp" line="615"/>
+        <location filename="../../src/libs/vmisc/def.cpp" line="616"/>
         <source>CustomSARecord prefix mismatch error: actualStreamHeader = 0x%1 and streamHeader = 0x%2</source>
         <translation>Erreur de correspondance de préfixe CustomSARecord : actualStreamHeader = 0x%1 et streamHeader = 0x%2</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vmisc/def.cpp" line="627"/>
+        <location filename="../../src/libs/vmisc/def.cpp" line="628"/>
         <source>CustomSARecord compatibility error: actualClassVersion = %1 and classVersion = %2</source>
         <translation>Erreur de compatibilité CustomSARecord : actualClassVersion = %1 et classVersion = %2</translation>
     </message>
@@ -14738,17 +14738,17 @@ This option will take an affect after restart.</source>
         <translation type="vanished">Créer un nouvel élément de patron pour commencer.</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vmisc/def.cpp" line="545"/>
+        <location filename="../../src/libs/vmisc/def.cpp" line="546"/>
         <source>mm</source>
         <translation>mm</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vmisc/def.cpp" line="554"/>
+        <location filename="../../src/libs/vmisc/def.cpp" line="555"/>
         <source>cm</source>
         <translation>cm</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vmisc/def.cpp" line="547"/>
+        <location filename="../../src/libs/vmisc/def.cpp" line="548"/>
         <source>inch</source>
         <translation>Pouce</translation>
     </message>
@@ -14766,7 +14766,7 @@ This option will take an affect after restart.</source>
         <translation>Valeur</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vmisc/def.cpp" line="549"/>
+        <location filename="../../src/libs/vmisc/def.cpp" line="550"/>
         <source>px</source>
         <translation>px</translation>
     </message>

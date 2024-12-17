@@ -34,7 +34,7 @@
 - Fix applying changes to increments when close the dialog.
 - Duplicate a curve inside Seam allowance tool dialog.
 - Fix broken seam allowance.
-- Added Croatian and Hungarian languages.
+- Added Croatian, Hungarian and Portuguese languages.
 
 # Valentina 0.7.53 June 25, 2024
 - Fix layout sheet export with empty name.

@@ -10657,7 +10657,7 @@ Aplicar configurações de qualquer forma?</translation>
 <context>
     <name>InitPieceLabelLanguages</name>
     <message>
-        <location filename="../../src/libs/vmisc/def.cpp" line="576"/>
+        <location filename="../../src/libs/vmisc/def.cpp" line="577"/>
         <source>Default</source>
         <translation>Padrão</translation>
     </message>
@@ -14697,12 +14697,12 @@ Esta opção terá um efeito após o reinício.</translation>
         <translation>VTextManager compatibility error: actualClassVersion = %1 and classVersion = %2</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vmisc/def.cpp" line="615"/>
+        <location filename="../../src/libs/vmisc/def.cpp" line="616"/>
         <source>CustomSARecord prefix mismatch error: actualStreamHeader = 0x%1 and streamHeader = 0x%2</source>
         <translation>CustomSARecord prefix mismatch error: actualStreamHeader = 0x%1 and streamHeader = 0x%2</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vmisc/def.cpp" line="627"/>
+        <location filename="../../src/libs/vmisc/def.cpp" line="628"/>
         <source>CustomSARecord compatibility error: actualClassVersion = %1 and classVersion = %2</source>
         <translation>CustomSARecord compatibility error: actualClassVersion = %1 and classVersion = %2</translation>
     </message>
@@ -14744,17 +14744,17 @@ Esta opção terá um efeito após o reinício.</translation>
         <translation type="vanished">Crie uma nova peça de modelagem para começar a trabalhar.</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vmisc/def.cpp" line="545"/>
+        <location filename="../../src/libs/vmisc/def.cpp" line="546"/>
         <source>mm</source>
         <translation>mm</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vmisc/def.cpp" line="554"/>
+        <location filename="../../src/libs/vmisc/def.cpp" line="555"/>
         <source>cm</source>
         <translation>cm</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vmisc/def.cpp" line="547"/>
+        <location filename="../../src/libs/vmisc/def.cpp" line="548"/>
         <source>inch</source>
         <translation>polegada</translation>
     </message>
@@ -14772,7 +14772,7 @@ Esta opção terá um efeito após o reinício.</translation>
         <translation>Valor</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vmisc/def.cpp" line="549"/>
+        <location filename="../../src/libs/vmisc/def.cpp" line="550"/>
         <source>px</source>
         <translation>px</translation>
     </message>

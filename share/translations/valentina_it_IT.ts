@@ -10646,7 +10646,7 @@ Applicare la configurazione comunque?</translation>
 <context>
     <name>InitPieceLabelLanguages</name>
     <message>
-        <location filename="../../src/libs/vmisc/def.cpp" line="576"/>
+        <location filename="../../src/libs/vmisc/def.cpp" line="577"/>
         <source>Default</source>
         <translation>Default</translation>
     </message>
@@ -14682,12 +14682,12 @@ Questa opzione sarà effettiva dopo il riavvio del programma.</translation>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/libs/vmisc/def.cpp" line="615"/>
+        <location filename="../../src/libs/vmisc/def.cpp" line="616"/>
         <source>CustomSARecord prefix mismatch error: actualStreamHeader = 0x%1 and streamHeader = 0x%2</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/libs/vmisc/def.cpp" line="627"/>
+        <location filename="../../src/libs/vmisc/def.cpp" line="628"/>
         <source>CustomSARecord compatibility error: actualClassVersion = %1 and classVersion = %2</source>
         <translation type="unfinished"></translation>
     </message>
@@ -14729,17 +14729,17 @@ Questa opzione sarà effettiva dopo il riavvio del programma.</translation>
         <translation type="vanished">Crea nuovo pezzo di cartamodello per iniziare a lavorare.</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vmisc/def.cpp" line="545"/>
+        <location filename="../../src/libs/vmisc/def.cpp" line="546"/>
         <source>mm</source>
         <translation>mm</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vmisc/def.cpp" line="554"/>
+        <location filename="../../src/libs/vmisc/def.cpp" line="555"/>
         <source>cm</source>
         <translation>cm</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vmisc/def.cpp" line="547"/>
+        <location filename="../../src/libs/vmisc/def.cpp" line="548"/>
         <source>inch</source>
         <translation>pollice</translation>
     </message>
@@ -14757,7 +14757,7 @@ Questa opzione sarà effettiva dopo il riavvio del programma.</translation>
         <translation>Valore</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vmisc/def.cpp" line="549"/>
+        <location filename="../../src/libs/vmisc/def.cpp" line="550"/>
         <source>px</source>
         <translation>px</translation>
     </message>
