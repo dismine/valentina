@@ -155,8 +155,22 @@ void SetItemOverrideCursor(QGraphicsItem *item, const QString &pixmapPath, int h
 //---------------------------------------------------------------------------------------------------------------------
 auto SupportedLocales() -> QStringList
 {
-    return QStringList{"uk_UA", "de_DE", "cs_CZ", "he_IL", "fr_FR", "it_IT", "nl_NL", "id_ID",
-                       "es_ES", "fi_FI", "ro_RO", "zh_CN", "pt_BR", "el_GR", "pl_PL"};
+    return QStringList{"uk_UA",
+                       "de_DE",
+                       "cs_CZ",
+                       "he_IL",
+                       "fr_FR",
+                       "it_IT",
+                       "nl_NL",
+                       "id_ID",
+                       "es_ES",
+                       "fi_FI",
+                       "ro_RO",
+                       "zh_CN",
+                       "pt_BR",
+                       "el_GR",
+                       "pl_PL",
+                       "hr_HR"};
 }
 
 //---------------------------------------------------------------------------------------------------------------------

@@ -6607,32 +6607,32 @@ Apply settings anyway?</source>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.ui" line="120"/>
         <source>Reverse node direction</source>
-        <translation type="unfinished">Зворотний напрямок вузла</translation>
+        <translation>Зворотний напрямок вузла</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.ui" line="139"/>
         <source>Excluded node</source>
-        <translation type="unfinished">Виключений вузол</translation>
+        <translation>Виключений вузол</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.ui" line="158"/>
         <source>Turn point</source>
-        <translation type="unfinished"></translation>
+        <translation>Точка повороту</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.ui" line="177"/>
         <source>Check node uniqness</source>
-        <translation type="unfinished">Перевіряти унікальність вузла</translation>
+        <translation>Перевіряти унікальність вузла</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.ui" line="196"/>
         <source>Notch</source>
-        <translation type="unfinished">Надсічка</translation>
+        <translation>Надсічка</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.ui" line="215"/>
         <source>Delete node</source>
-        <translation type="unfinished">Видалити вузол</translation>
+        <translation>Видалити вузол</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.ui" line="339"/>

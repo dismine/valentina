@@ -6620,7 +6620,7 @@ Aplicar configurações de qualquer forma?</translation>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.ui" line="158"/>
         <source>Turn point</source>
-        <translation type="unfinished">Turn point</translation>
+        <translation>Turn point</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.ui" line="177"/>

@@ -6607,32 +6607,32 @@ Appliquer quand même les réglages ?</translation>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.ui" line="120"/>
         <source>Reverse node direction</source>
-        <translation type="unfinished">Inverser la direction</translation>
+        <translation>Inverser la direction</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.ui" line="139"/>
         <source>Excluded node</source>
-        <translation type="unfinished">Exclure l&apos;objet</translation>
+        <translation>Exclure l&apos;objet</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.ui" line="158"/>
         <source>Turn point</source>
-        <translation type="unfinished">Point de changement de direction</translation>
+        <translation>Point de changement de direction</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.ui" line="177"/>
         <source>Check node uniqness</source>
-        <translation type="unfinished">Vérifier objet unique</translation>
+        <translation>Vérifier objet unique</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.ui" line="196"/>
         <source>Notch</source>
-        <translation type="unfinished">Cran d&apos;assemblage</translation>
+        <translation>Cran d&apos;assemblage</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.ui" line="215"/>
         <source>Delete node</source>
-        <translation type="unfinished">Supprimer l&apos;objet</translation>
+        <translation>Supprimer l&apos;objet</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.ui" line="339"/>
