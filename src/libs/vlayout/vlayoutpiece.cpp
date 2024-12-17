@@ -2093,7 +2093,10 @@ void VLayoutPiece::LabelStringsOutlineFont(QGraphicsItem *parent, const QVector<
     {
         QFont fnt = tm.GetFont();
         fnt.setPointSize(qMax(tm.GetFont().pointSize() + tl.m_iFontSize, 1));
-        fnt.setBold(tl.m_bold);
+        if (!settings->GetSingleStrokeOutlineFont())
+        {
+            fnt.setBold(tl.m_bold);
+        }
         fnt.setItalic(tl.m_italic);
 
         VSingleLineOutlineChar const corrector(fnt);

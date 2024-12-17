@@ -771,7 +771,10 @@ void VTextGraphicsItem::PaintLabelOutlineFont(QPainter *painter)
     for (const auto &tl : labelLines)
     {
         fnt.setPointSize(qMax(m_tm.GetFont().pointSize() + tl.m_iFontSize, 1));
-        fnt.setBold(tl.m_bold);
+        if (!settings->GetSingleStrokeOutlineFont())
+        {
+            fnt.setBold(tl.m_bold);
+        }
         fnt.setItalic(tl.m_italic);
 
         QString const qsText = tl.m_qsText;

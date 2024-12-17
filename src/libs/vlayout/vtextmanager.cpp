@@ -858,7 +858,10 @@ auto VTextManager::GetLabelSourceLines(int width, const QFont &font) const -> QV
     for (const auto &tl : m_liLines)
     {
         fnt.setPointSize(qMax(fSize + tl.m_iFontSize, 1));
-        fnt.setBold(tl.m_bold);
+        if (!VAbstractApplication::VApp()->Settings()->GetSingleStrokeOutlineFont())
+        {
+            fnt.setBold(tl.m_bold);
+        }
         fnt.setItalic(tl.m_italic);
 
         QString const qsText = tl.m_qsText;
