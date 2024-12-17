@@ -83,14 +83,10 @@
 <context>
     <name>ColorPickerPopup</name>
     <message>
-        <source>Custom</source>
-        <translation type="vanished">מותאם אישית</translation>
-    </message>
-    <message>
         <location filename="../../src/libs/vpropertyexplorer/qtcolorpicker.cpp" line="1226"/>
         <source>Custom</source>
         <comment>color</comment>
-        <translation type="unfinished">מותאם אישית</translation>
+        <translation>מותאם אישית</translation>
     </message>
 </context>
 <context>
@@ -563,10 +559,6 @@
         <translation>כלי</translation>
     </message>
     <message>
-        <source>Color</source>
-        <translation type="obsolete">צבע</translation>
-    </message>
-    <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogalongline.ui" line="355"/>
         <source>Notes</source>
         <translation>הערות</translation>
@@ -1037,10 +1029,6 @@
         <translation>כלי</translation>
     </message>
     <message>
-        <source>Color</source>
-        <translation type="obsolete">צבע</translation>
-    </message>
-    <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogbisector.ui" line="351"/>
         <source>Notes</source>
         <translation>הערות</translation>
@@ -1129,10 +1117,6 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Color</source>
-        <translation type="obsolete">צבע</translation>
-    </message>
-    <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogcubicbezier.ui" line="172"/>
         <source>Notes</source>
         <translation>הערות</translation>
@@ -1174,10 +1158,6 @@
         <location filename="../../src/libs/vtools/dialogs/tools/dialogcubicbezierpath.ui" line="36"/>
         <source>New point:</source>
         <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>...</source>
-        <translation type="obsolete">...</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogcubicbezierpath.ui" line="134"/>
@@ -1228,10 +1208,6 @@
         <location filename="../../src/libs/vtools/dialogs/tools/dialogcubicbezierpath.ui" line="296"/>
         <source>Alias:</source>
         <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Color</source>
-        <translation type="obsolete">צבע</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogcubicbezierpath.ui" line="333"/>
@@ -1340,10 +1316,6 @@
         <location filename="../../src/libs/vtools/dialogs/tools/dialogcurveintersectaxis.ui" line="28"/>
         <source>Tool</source>
         <translation>כלי</translation>
-    </message>
-    <message>
-        <source>Color</source>
-        <translation type="obsolete">צבע</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogcurveintersectaxis.ui" line="373"/>
@@ -2140,10 +2112,6 @@
         <translation>שם קובץ גזרה</translation>
     </message>
     <message>
-        <source>Measurments file name</source>
-        <translation type="vanished">שם קובץ מידות</translation>
-    </message>
-    <message>
         <location filename="../../src/libs/vtools/dialogs/support/dialogeditlabel.cpp" line="707"/>
         <source>Piece letter</source>
         <translation>אות חלק</translation>
@@ -2717,10 +2685,6 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Color</source>
-        <translation type="obsolete">צבע</translation>
-    </message>
-    <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogellipticalarc.ui" line="1076"/>
         <source>Notes</source>
         <translation>הערות</translation>
@@ -2849,10 +2813,6 @@
         <location filename="../../src/libs/vtools/dialogs/tools/dialogendline.ui" line="37"/>
         <source>Tool</source>
         <translation>כלי</translation>
-    </message>
-    <message>
-        <source>Color</source>
-        <translation type="obsolete">צבע</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogendline.ui" line="549"/>
@@ -3201,10 +3161,6 @@
         <translation>צבע</translation>
     </message>
     <message>
-        <source>Color</source>
-        <translation type="obsolete">צבע</translation>
-    </message>
-    <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogflippingbyaxis.ui" line="205"/>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogflippingbyaxis.cpp" line="682"/>
         <source>Ready</source>
@@ -3350,10 +3306,6 @@
         <location filename="../../src/libs/vtools/dialogs/tools/dialogflippingbyline.ui" line="94"/>
         <source>Color:</source>
         <translation>צבע</translation>
-    </message>
-    <message>
-        <source>Color</source>
-        <translation type="obsolete">צבע</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogflippingbyline.ui" line="205"/>
@@ -3539,10 +3491,6 @@
         <translation>כלי</translation>
     </message>
     <message>
-        <source>Color</source>
-        <translation type="obsolete">צבע</translation>
-    </message>
-    <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogheight.ui" line="155"/>
         <source>Notes</source>
         <translation>הערות</translation>
@@ -3653,12 +3601,6 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/dialogs/dialoghistory.cpp" line="776"/>
-        <source>Empty</source>
-        <comment>list</comment>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <location filename="../../src/app/valentina/dialogs/dialoghistory.cpp" line="447"/>
         <source>%1 - point of curves intersection</source>
         <translation type="unfinished"></translation>
@@ -3740,6 +3682,12 @@
     <message>
         <location filename="../../src/app/valentina/dialogs/dialoghistory.cpp" line="486"/>
         <source>Move objects. Suffix &apos;%1&apos;</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/app/valentina/dialogs/dialoghistory.cpp" line="776"/>
+        <source>Empty</source>
+        <comment>list</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -4229,7 +4177,7 @@
     <message>
         <location filename="../../src/app/tape/dialogs/dialogknownmeasurementscsvcolumns.ui" line="28"/>
         <source>Preview</source>
-        <translation type="unfinished">תצוגה מקדימה</translation>
+        <translation>תצוגה מקדימה</translation>
     </message>
     <message>
         <location filename="../../src/app/tape/dialogs/dialogknownmeasurementscsvcolumns.ui" line="34"/>
@@ -4266,7 +4214,7 @@
         <location filename="../../src/app/tape/dialogs/dialogknownmeasurementscsvcolumns.cpp" line="164"/>
         <source>Name</source>
         <comment>measurement column</comment>
-        <translation type="unfinished">שם</translation>
+        <translation>שם</translation>
     </message>
     <message>
         <location filename="../../src/app/tape/dialogs/dialogknownmeasurementscsvcolumns.cpp" line="166"/>
@@ -4300,7 +4248,7 @@
     <message>
         <location filename="../../src/app/tape/dialogs/dialogknownmeasurementscsvcolumns.cpp" line="446"/>
         <source>Name</source>
-        <translation type="unfinished">שם</translation>
+        <translation>שם</translation>
     </message>
     <message>
         <location filename="../../src/app/tape/dialogs/dialogknownmeasurementscsvcolumns.cpp" line="485"/>
@@ -4737,10 +4685,6 @@ Apply settings anyway?</source>
         <translation>כלי</translation>
     </message>
     <message>
-        <source>Color</source>
-        <translation type="obsolete">צבע</translation>
-    </message>
-    <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogline.ui" line="160"/>
         <source>Notes</source>
         <translation>הערות</translation>
@@ -4953,10 +4897,6 @@ Apply settings anyway?</source>
         <translation>כלי</translation>
     </message>
     <message>
-        <source>Color</source>
-        <translation type="obsolete">צבע</translation>
-    </message>
-    <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialoglineintersectaxis.ui" line="372"/>
         <source>Notes</source>
         <translation>הערות</translation>
@@ -4979,7 +4919,7 @@ Apply settings anyway?</source>
         <location filename="../../src/app/tape/dialogs/dialogmdatabase.cpp" line="310"/>
         <source>General</source>
         <comment>Measurement section</comment>
-        <translation type="unfinished">כללי</translation>
+        <translation>כללי</translation>
     </message>
     <message>
         <location filename="../../src/app/tape/dialogs/dialogmdatabase.cpp" line="245"/>
@@ -5111,14 +5051,6 @@ Apply settings anyway?</source>
         <location filename="../../src/app/tape/dialogs/dialogmeasurementscsvcolumns.cpp" line="501"/>
         <source>Skip</source>
         <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Name</source>
-        <translation type="vanished">שם</translation>
-    </message>
-    <message>
-        <source>Value</source>
-        <translation type="vanished">ערך</translation>
     </message>
     <message>
         <location filename="../../src/app/tape/dialogs/dialogmeasurementscsvcolumns.cpp" line="828"/>
@@ -5272,10 +5204,6 @@ Apply settings anyway?</source>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogmove.ui" line="101"/>
         <source>Color:</source>
         <translation>צבע</translation>
-    </message>
-    <message>
-        <source>Color</source>
-        <translation type="obsolete">צבע</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogmove.ui" line="744"/>
@@ -5565,10 +5493,6 @@ Apply settings anyway?</source>
         <location filename="../../src/libs/vtools/dialogs/tools/dialognormal.ui" line="31"/>
         <source>Tool</source>
         <translation>כלי</translation>
-    </message>
-    <message>
-        <source>Color</source>
-        <translation type="obsolete">צבע</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialognormal.ui" line="545"/>
@@ -7290,10 +7214,6 @@ Apply settings anyway?</source>
         <translation>צבע</translation>
     </message>
     <message>
-        <source>Color</source>
-        <translation type="obsolete">צבע</translation>
-    </message>
-    <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogrotation.ui" line="370"/>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogrotation.cpp" line="823"/>
         <source>Ready</source>
@@ -7522,6 +7442,12 @@ Apply settings anyway?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../../src/app/valentina/dialogs/dialogsavelayout.cpp" line="378"/>
+        <location filename="../../src/app/valentina/dialogs/dialogsavelayout.cpp" line="924"/>
+        <source>By standard</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <location filename="../../src/app/valentina/dialogs/dialogsavelayout.cpp" line="464"/>
         <source>Name conflict</source>
         <translation type="unfinished"></translation>
@@ -7540,12 +7466,6 @@ Apply settings anyway?</source>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialogsavelayout.cpp" line="140"/>
         <source>Select folder</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../../src/app/valentina/dialogs/dialogsavelayout.cpp" line="378"/>
-        <location filename="../../src/app/valentina/dialogs/dialogsavelayout.cpp" line="924"/>
-        <source>By standard</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -8651,10 +8571,6 @@ Apply settings anyway?</source>
         <translation>כלי</translation>
     </message>
     <message>
-        <source>Color</source>
-        <translation type="obsolete">צבע</translation>
-    </message>
-    <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogshoulderpoint.ui" line="402"/>
         <source>Notes</source>
         <translation>הערות</translation>
@@ -8904,10 +8820,6 @@ Apply settings anyway?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>...</source>
-        <translation type="obsolete">...</translation>
-    </message>
-    <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogsplinepath.ui" line="123"/>
         <source>First control point</source>
         <translation type="unfinished"></translation>
@@ -8921,26 +8833,6 @@ Apply settings anyway?</source>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogsplinepath.ui" line="494"/>
         <source>Second control point</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogsplinepath.ui" line="881"/>
-        <source>Move on top</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogsplinepath.ui" line="898"/>
-        <source>Move up</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogsplinepath.ui" line="915"/>
-        <source>Move down</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogsplinepath.ui" line="932"/>
-        <source>Move on bottom</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -9023,6 +8915,26 @@ Apply settings anyway?</source>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogsplinepath.ui" line="814"/>
         <source>Calculation</source>
         <translation>חישובים</translation>
+    </message>
+    <message>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogsplinepath.ui" line="881"/>
+        <source>Move on top</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogsplinepath.ui" line="898"/>
+        <source>Move up</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogsplinepath.ui" line="915"/>
+        <source>Move down</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogsplinepath.ui" line="932"/>
+        <source>Move on bottom</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogsplinepath.ui" line="991"/>
@@ -9545,7 +9457,7 @@ Apply settings anyway?</source>
 <context>
     <name>InitPieceLabelLanguages</name>
     <message>
-        <location filename="../../src/libs/vmisc/def.cpp" line="577"/>
+        <location filename="../../src/libs/vmisc/def.cpp" line="578"/>
         <source>Default</source>
         <translation type="unfinished"></translation>
     </message>
@@ -9613,11 +9525,6 @@ Apply settings anyway?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/mapplication.cpp" line="1026"/>
-        <source>Activate known measurements mode.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <location filename="../../src/app/tape/mapplication.cpp" line="1257"/>
         <source>Invalid base size argument. Must be cm, mm or inch.</source>
         <translation type="unfinished"></translation>
@@ -9680,6 +9587,11 @@ Apply settings anyway?</source>
     <message>
         <location filename="../../src/app/tape/mapplication.cpp" line="1024"/>
         <source>The pattern units</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/app/tape/mapplication.cpp" line="1026"/>
+        <source>Activate known measurements mode.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -10204,56 +10116,6 @@ Apply settings anyway?</source>
     <message>
         <location filename="../../src/app/valentina/mainwindow.cpp" line="1640"/>
         <source>Select curve</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="3118"/>
-        <source>Point at a given distance tools</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="3132"/>
-        <source>Perpendicular/Bisector tools</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="3158"/>
-        <source>Triangular tools</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="3172"/>
-        <source>Point intersecting with axis tools</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="3217"/>
-        <source>Points intersecting with arcs/curves and tangents/segments tools</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="3274"/>
-        <source>Curves and arcs tools</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="3304"/>
-        <source>Flipping objects tools</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="3317"/>
-        <source>Rotating/moving objects tools</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="3352"/>
-        <source>Merge/duplicate pieces tools</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="3367"/>
-        <source>Adding objects for Details mode tools</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -10977,6 +10839,21 @@ Apply settings anyway?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="3145"/>
+        <source>Point at the intersections of lines/axis tools</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="3188"/>
+        <source>Point segmenting curves/arcs tools</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="3202"/>
+        <source>Points intersecting with 2 curves/arcs/circles tools</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <location filename="../../src/app/valentina/mainwindow.cpp" line="3975"/>
         <source>You can&apos;t use Detail mode yet. Please, create at least one workpiece.</source>
         <translation type="unfinished"></translation>
@@ -11501,18 +11378,53 @@ Apply settings anyway?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="3145"/>
-        <source>Point at the intersections of lines/axis tools</source>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="3118"/>
+        <source>Point at a given distance tools</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="3188"/>
-        <source>Point segmenting curves/arcs tools</source>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="3132"/>
+        <source>Perpendicular/Bisector tools</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="3202"/>
-        <source>Points intersecting with 2 curves/arcs/circles tools</source>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="3158"/>
+        <source>Triangular tools</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="3172"/>
+        <source>Point intersecting with axis tools</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="3217"/>
+        <source>Points intersecting with arcs/curves and tangents/segments tools</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="3274"/>
+        <source>Curves and arcs tools</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="3304"/>
+        <source>Flipping objects tools</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="3317"/>
+        <source>Rotating/moving objects tools</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="3352"/>
+        <source>Merge/duplicate pieces tools</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="3367"/>
+        <source>Adding objects for Details mode tools</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -11790,7 +11702,7 @@ Apply settings anyway?</source>
     <message>
         <location filename="../../src/libs/vlayout/vtextmanager.cpp" line="976"/>
         <source>Error</source>
-        <translation type="unfinished">טעות</translation>
+        <translation>טעות</translation>
     </message>
 </context>
 <context>
@@ -11836,18 +11748,6 @@ Apply settings anyway?</source>
         <translation>שפת תווית</translation>
     </message>
     <message>
-        <source>Pattern making system</source>
-        <translation type="vanished">שיטת תדמיתנות</translation>
-    </message>
-    <message>
-        <source>Pattern making system:</source>
-        <translation type="vanished">עריכת גזרה</translation>
-    </message>
-    <message>
-        <source>Book:</source>
-        <translation type="vanished">ספר</translation>
-    </message>
-    <message>
         <location filename="../../src/app/valentina/dialogs/configpages/preferencesconfigurationpage.ui" line="166"/>
         <source>Pattern editing</source>
         <translation type="unfinished"></translation>
@@ -11873,12 +11773,6 @@ Apply settings anyway?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/dialogs/configpages/preferencesconfigurationpage.cpp" line="392"/>
-        <source>System</source>
-        <comment>theme</comment>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <location filename="../../src/app/valentina/dialogs/configpages/preferencesconfigurationpage.cpp" line="338"/>
         <source>send crash report</source>
         <translation type="unfinished"></translation>
@@ -11886,6 +11780,12 @@ Apply settings anyway?</source>
     <message>
         <location filename="../../src/app/valentina/dialogs/configpages/preferencesconfigurationpage.cpp" line="345"/>
         <source>user email in case of crash</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/app/valentina/dialogs/configpages/preferencesconfigurationpage.cpp" line="392"/>
+        <source>System</source>
+        <comment>theme</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -13033,12 +12933,12 @@ This option will take an affect after restart.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/libs/vmisc/def.cpp" line="616"/>
+        <location filename="../../src/libs/vmisc/def.cpp" line="617"/>
         <source>CustomSARecord prefix mismatch error: actualStreamHeader = 0x%1 and streamHeader = 0x%2</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/libs/vmisc/def.cpp" line="628"/>
+        <location filename="../../src/libs/vmisc/def.cpp" line="629"/>
         <source>CustomSARecord compatibility error: actualClassVersion = %1 and classVersion = %2</source>
         <translation type="unfinished"></translation>
     </message>
@@ -13076,17 +12976,17 @@ This option will take an affect after restart.</source>
 <context>
     <name>QObject</name>
     <message>
-        <location filename="../../src/libs/vmisc/def.cpp" line="546"/>
+        <location filename="../../src/libs/vmisc/def.cpp" line="547"/>
         <source>mm</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/libs/vmisc/def.cpp" line="555"/>
+        <location filename="../../src/libs/vmisc/def.cpp" line="556"/>
         <source>cm</source>
         <translation>ס&quot;מ</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vmisc/def.cpp" line="548"/>
+        <location filename="../../src/libs/vmisc/def.cpp" line="549"/>
         <source>inch</source>
         <translation type="unfinished"></translation>
     </message>
@@ -13104,7 +13004,7 @@ This option will take an affect after restart.</source>
         <translation>ערך</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vmisc/def.cpp" line="550"/>
+        <location filename="../../src/libs/vmisc/def.cpp" line="551"/>
         <source>px</source>
         <translation type="unfinished"></translation>
     </message>
@@ -13829,13 +13729,6 @@ This option will take an affect after restart.</source>
     </message>
 </context>
 <context>
-    <name>QtColorPicker</name>
-    <message>
-        <source>Custom</source>
-        <translation type="vanished">מותאם אישית</translation>
-    </message>
-</context>
-<context>
     <name>RemoveItemFromGroup</name>
     <message>
         <location filename="../../src/libs/vtools/undocommands/undogroup.cpp" line="273"/>
@@ -13872,7 +13765,7 @@ This option will take an affect after restart.</source>
     <message>
         <location filename="../../src/libs/vtools/undocommands/renamepiece.cpp" line="46"/>
         <source>Detail</source>
-        <translation type="unfinished">פרט</translation>
+        <translation>פרט</translation>
     </message>
 </context>
 <context>
@@ -13962,7 +13855,7 @@ This option will take an affect after restart.</source>
     <message>
         <location filename="../../src/app/tape/tkmmainwindow.ui" line="58"/>
         <source>Measurements</source>
-        <translation type="unfinished">מידות</translation>
+        <translation>מידות</translation>
     </message>
     <message>
         <location filename="../../src/app/tape/tkmmainwindow.ui" line="72"/>
@@ -14035,7 +13928,7 @@ This option will take an affect after restart.</source>
         <location filename="../../src/app/tape/tkmmainwindow.cpp" line="2544"/>
         <source>Name</source>
         <comment>measurement column</comment>
-        <translation type="unfinished">שם</translation>
+        <translation>שם</translation>
     </message>
     <message>
         <location filename="../../src/app/tape/tkmmainwindow.ui" line="325"/>
@@ -14057,7 +13950,7 @@ This option will take an affect after restart.</source>
         <location filename="../../src/app/tape/tkmmainwindow.ui" line="719"/>
         <location filename="../../src/app/tape/tkmmainwindow.ui" line="722"/>
         <source>Details</source>
-        <translation type="unfinished">פרטים</translation>
+        <translation>פרטים</translation>
     </message>
     <message>
         <location filename="../../src/app/tape/tkmmainwindow.ui" line="362"/>
@@ -14094,7 +13987,7 @@ This option will take an affect after restart.</source>
         <location filename="../../src/app/tape/tkmmainwindow.ui" line="474"/>
         <location filename="../../src/app/tape/tkmmainwindow.ui" line="910"/>
         <source>Name:</source>
-        <translation type="unfinished">שם</translation>
+        <translation>שם</translation>
     </message>
     <message>
         <location filename="../../src/app/tape/tkmmainwindow.ui" line="484"/>
@@ -14165,10 +14058,6 @@ This option will take an affect after restart.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>...</source>
-        <translation type="obsolete">...</translation>
-    </message>
-    <message>
         <location filename="../../src/app/tape/tkmmainwindow.ui" line="780"/>
         <source>Save image</source>
         <translation type="unfinished"></translation>
@@ -14196,12 +14085,12 @@ This option will take an affect after restart.</source>
     <message>
         <location filename="../../src/app/tape/tkmmainwindow.ui" line="964"/>
         <source>File</source>
-        <translation type="unfinished">קובץ</translation>
+        <translation>קובץ</translation>
     </message>
     <message>
         <location filename="../../src/app/tape/tkmmainwindow.ui" line="983"/>
         <source>&amp;Help</source>
-        <translation type="unfinished">ועזרה</translation>
+        <translation>ועזרה</translation>
     </message>
     <message>
         <location filename="../../src/app/tape/tkmmainwindow.ui" line="997"/>
@@ -14222,7 +14111,7 @@ This option will take an affect after restart.</source>
     <message>
         <location filename="../../src/app/tape/tkmmainwindow.ui" line="1063"/>
         <source>&amp;Save</source>
-        <translation type="unfinished">ושמור</translation>
+        <translation>ושמור</translation>
     </message>
     <message>
         <location filename="../../src/app/tape/tkmmainwindow.ui" line="1077"/>
@@ -14247,7 +14136,7 @@ This option will take an affect after restart.</source>
     <message>
         <location filename="../../src/app/tape/tkmmainwindow.ui" line="1118"/>
         <source>&amp;New</source>
-        <translation type="unfinished">וחדש</translation>
+        <translation>וחדש</translation>
     </message>
     <message>
         <location filename="../../src/app/tape/tkmmainwindow.ui" line="1136"/>
@@ -14257,12 +14146,12 @@ This option will take an affect after restart.</source>
     <message>
         <location filename="../../src/app/tape/tkmmainwindow.ui" line="1144"/>
         <source>Preferences</source>
-        <translation type="unfinished">העדפות</translation>
+        <translation>העדפות</translation>
     </message>
     <message>
         <location filename="../../src/app/tape/tkmmainwindow.ui" line="1155"/>
         <source>&amp;Open</source>
-        <translation type="unfinished">ופתח</translation>
+        <translation>ופתח</translation>
     </message>
     <message>
         <location filename="../../src/app/tape/tkmmainwindow.ui" line="1158"/>
@@ -14299,7 +14188,7 @@ This option will take an affect after restart.</source>
     <message>
         <location filename="../../src/app/tape/tkmmainwindow.cpp" line="260"/>
         <source>File error.</source>
-        <translation type="unfinished">טעות קובץ.</translation>
+        <translation>טעות קובץ.</translation>
     </message>
     <message>
         <location filename="../../src/app/tape/tkmmainwindow.cpp" line="296"/>
@@ -14341,7 +14230,7 @@ This option will take an affect after restart.</source>
     <message>
         <location filename="../../src/app/tape/tkmmainwindow.cpp" line="604"/>
         <source>Save as</source>
-        <translation type="unfinished">שמירה בשם</translation>
+        <translation>שמירה בשם</translation>
     </message>
     <message>
         <location filename="../../src/app/tape/tkmmainwindow.cpp" line="624"/>
@@ -14351,7 +14240,7 @@ This option will take an affect after restart.</source>
     <message>
         <location filename="../../src/app/tape/tkmmainwindow.cpp" line="640"/>
         <source>Could not save file</source>
-        <translation type="unfinished">לא ניתן לשמור את הקובץ</translation>
+        <translation>לא ניתן לשמור את הקובץ</translation>
     </message>
     <message>
         <location filename="../../src/app/tape/tkmmainwindow.cpp" line="666"/>
@@ -14422,7 +14311,7 @@ This option will take an affect after restart.</source>
     <message>
         <location filename="../../src/app/tape/tkmmainwindow.cpp" line="1936"/>
         <source>Save</source>
-        <translation type="unfinished">שמור</translation>
+        <translation>שמור</translation>
     </message>
     <message>
         <location filename="../../src/app/tape/tkmmainwindow.cpp" line="1941"/>
@@ -14479,7 +14368,7 @@ This option will take an affect after restart.</source>
     <message>
         <location filename="../../src/app/tape/tkmmainwindow.cpp" line="2472"/>
         <source>None</source>
-        <translation type="unfinished">ללא</translation>
+        <translation>ללא</translation>
     </message>
     <message>
         <location filename="../../src/app/tape/tkmmainwindow.cpp" line="2517"/>
@@ -15348,7 +15237,7 @@ This option will take an affect after restart.</source>
     <message>
         <location filename="../../src/app/tape/tmainwindow.cpp" line="4758"/>
         <source>None</source>
-        <translation type="unfinished">ללא</translation>
+        <translation>ללא</translation>
     </message>
     <message>
         <location filename="../../src/app/tape/tmainwindow.cpp" line="4767"/>
@@ -15554,13 +15443,13 @@ This option will take an affect after restart.</source>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabfoldline.ui" line="67"/>
         <source>Bold</source>
         <comment>Font formating</comment>
-        <translation type="unfinished">מודגש</translation>
+        <translation>מודגש</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabfoldline.ui" line="86"/>
         <source>Italic</source>
         <comment>Font formating</comment>
-        <translation type="unfinished">נטוי</translation>
+        <translation>נטוי</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabfoldline.ui" line="105"/>
@@ -15570,7 +15459,7 @@ This option will take an affect after restart.</source>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabfoldline.ui" line="127"/>
         <source>Centers horizontally in the available space</source>
-        <translation type="unfinished">מקם אופקית במקום האפשרי</translation>
+        <translation>מקם אופקית במקום האפשרי</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabfoldline.ui" line="149"/>
@@ -15603,21 +15492,21 @@ This option will take an affect after restart.</source>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabfoldline.ui" line="543"/>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabfoldline.ui" line="771"/>
         <source>Formula wizard</source>
-        <translation type="unfinished">אשף הפורמולות</translation>
+        <translation>אשף הפורמולות</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabfoldline.ui" line="372"/>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabfoldline.ui" line="600"/>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabfoldline.ui" line="828"/>
         <source>Value</source>
-        <translation type="unfinished">ערך</translation>
+        <translation>ערך</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabfoldline.ui" line="404"/>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabfoldline.ui" line="632"/>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabfoldline.ui" line="860"/>
         <source>Calculation</source>
-        <translation type="unfinished">חישובים</translation>
+        <translation>חישובים</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabfoldline.ui" line="429"/>
@@ -15629,13 +15518,13 @@ This option will take an affect after restart.</source>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabfoldline.ui" line="460"/>
         <source>Width</source>
-        <translation type="unfinished">רוחב</translation>
+        <translation>רוחב</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabfoldline.ui" line="520"/>
         <source>Width:</source>
         <comment>notch width</comment>
-        <translation type="unfinished">רוחב:</translation>
+        <translation>רוחב:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabfoldline.ui" line="688"/>
@@ -15651,10 +15540,6 @@ This option will take an affect after restart.</source>
 </context>
 <context>
     <name>TabGrainline</name>
-    <message>
-        <source>Grainline visible</source>
-        <translation type="vanished">קו ישר נראה</translation>
-    </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabgrainline.ui" line="39"/>
         <source>Grainline enabled</source>
@@ -16606,18 +16491,6 @@ This option will take an affect after restart.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Pattern making system</source>
-        <translation type="vanished">שיטת תדמיתנות</translation>
-    </message>
-    <message>
-        <source>Pattern making system:</source>
-        <translation type="vanished">עריכת גזרה</translation>
-    </message>
-    <message>
-        <source>Book:</source>
-        <translation type="vanished">ספר</translation>
-    </message>
-    <message>
         <location filename="../../src/app/tape/dialogs/configpages/tapepreferencesconfigurationpage.ui" line="84"/>
         <source>Default known measurements</source>
         <translation type="unfinished"></translation>
@@ -16754,7 +16627,7 @@ This option will take an affect after restart.</source>
     <message>
         <location filename="../../src/app/tape/dialogs/configpages/tapepreferencesconfigurationpage.cpp" line="382"/>
         <source>None</source>
-        <translation type="unfinished">ללא</translation>
+        <translation>ללא</translation>
     </message>
     <message>
         <location filename="../../src/app/tape/dialogs/configpages/tapepreferencesconfigurationpage.cpp" line="392"/>
@@ -16817,7 +16690,7 @@ This option will take an affect after restart.</source>
     <message>
         <location filename="../../src/app/tape/dialogs/configpages/tapepreferencespathpage.ui" line="101"/>
         <source>Edit</source>
-        <translation type="unfinished">ערוך</translation>
+        <translation>ערוך</translation>
     </message>
     <message>
         <location filename="../../src/app/tape/dialogs/configpages/tapepreferencespathpage.cpp" line="127"/>
@@ -19617,7 +19490,7 @@ This option will take an affect after restart.</source>
         <location filename="../../src/libs/vpropertyexplorer/qtcolorpicker.cpp" line="578"/>
         <source>Custom</source>
         <comment>color</comment>
-        <translation type="unfinished">מותאם אישית</translation>
+        <translation>מותאם אישית</translation>
     </message>
 </context>
 <context>
@@ -20355,7 +20228,7 @@ This option will take an affect after restart.</source>
     <message>
         <location filename="../../src/app/puzzle/vpmainwindow.ui" line="1829"/>
         <source>Cut on fold</source>
-        <translation type="unfinished">חתוך על קיפול בד</translation>
+        <translation>חתוך על קיפול בד</translation>
     </message>
     <message>
         <location filename="../../src/app/puzzle/vpmainwindow.ui" line="1838"/>
@@ -24255,10 +24128,6 @@ Raw layout format compatibility error: actualFileVersion = %1 and fileVersion = 
         <location filename="../../src/libs/vlayout/dialogs/watermarkwindow.cpp" line="705"/>
         <source>Unknown error happened, for instance a full partition prevented writing out the lock file. Ignore if you want to continue (not recommended, can cause a data corruption).</source>
         <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Color</source>
-        <translation type="vanished">צבע</translation>
     </message>
     <message>
         <location filename="../../src/libs/vlayout/dialogs/watermarkwindow.ui" line="200"/>

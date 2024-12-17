@@ -228,12 +228,12 @@ void TST_TSLocaleTranslation::TestPunctuation()
             if ((locale == "el_GR"_L1
                  // Greek question mark
                  // https://en.wikipedia.org/wiki/Question_mark#Greek_question_mark
-                 && (cSource == '?'_L1 && cTranslation == ';'_L1)) ||
-                (locale == "zh_CN"_L1
-                 // Beside usage similar to that of English, the colon has other functions. Several
-                 // compatibility forms for Chinese and Japanese typography are encoded in Unicode.
-                 // https://en.wikipedia.org/wiki/Colon_(punctuation)#Usage_in_other_languages
-                 && (cSource == ':'_L1 && cTranslation == QStringLiteral("："))))
+                 && (cSource == '?'_L1 && cTranslation == ';'_L1))
+                || ((locale == "zh_CN"_L1 || locale == "ja_JP"_L1)
+                    // Beside usage similar to that of English, the colon has other functions. Several
+                    // compatibility forms for Chinese and Japanese typography are encoded in Unicode.
+                    // https://en.wikipedia.org/wiki/Colon_(punctuation)#Usage_in_other_languages
+                    && (cSource == ':'_L1 && cTranslation == QStringLiteral("："))))
             {
                 testFail = false;
             }

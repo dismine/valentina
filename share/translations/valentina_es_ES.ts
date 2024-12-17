@@ -10653,7 +10653,7 @@ Aplicar características de todos modos?</translation>
 <context>
     <name>InitPieceLabelLanguages</name>
     <message>
-        <location filename="../../src/libs/vmisc/def.cpp" line="577"/>
+        <location filename="../../src/libs/vmisc/def.cpp" line="578"/>
         <source>Default</source>
         <translation>Predeterminado</translation>
     </message>
@@ -14694,12 +14694,12 @@ Esta opción surtirá efecto después de reiniciar.</translation>
         <translation>Error de compatibilidad en administrador de texto V: Version de clase actual = %1 y version de clase = %2</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vmisc/def.cpp" line="616"/>
+        <location filename="../../src/libs/vmisc/def.cpp" line="617"/>
         <source>CustomSARecord prefix mismatch error: actualStreamHeader = 0x%1 and streamHeader = 0x%2</source>
         <translation>Error de discordancia de prefijo de registro personalizado SA: encabezado actual de secuencia = 0x%1 y encabezado de secuencia = 0x%2</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vmisc/def.cpp" line="628"/>
+        <location filename="../../src/libs/vmisc/def.cpp" line="629"/>
         <source>CustomSARecord compatibility error: actualClassVersion = %1 and classVersion = %2</source>
         <translation>Error de compatibilidad en registro SA personalizado: Version de clase actual = %1 y version de clase = %2</translation>
     </message>
@@ -14741,17 +14741,17 @@ Esta opción surtirá efecto después de reiniciar.</translation>
         <translation type="vanished">Crear nueva pieza de patrón para comenzar a trabajar.</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vmisc/def.cpp" line="546"/>
+        <location filename="../../src/libs/vmisc/def.cpp" line="547"/>
         <source>mm</source>
         <translation>mm</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vmisc/def.cpp" line="555"/>
+        <location filename="../../src/libs/vmisc/def.cpp" line="556"/>
         <source>cm</source>
         <translation>cm</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vmisc/def.cpp" line="548"/>
+        <location filename="../../src/libs/vmisc/def.cpp" line="549"/>
         <source>inch</source>
         <translation>pulgadas</translation>
     </message>
@@ -14769,7 +14769,7 @@ Esta opción surtirá efecto después de reiniciar.</translation>
         <translation>Valor</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vmisc/def.cpp" line="550"/>
+        <location filename="../../src/libs/vmisc/def.cpp" line="551"/>
         <source>px</source>
         <translation>px</translation>
     </message>

@@ -641,7 +641,7 @@ auto VTranslateVars::InternalVarToUser(const QString &var) const -> QString
 auto VTranslateVars::VarToUser(const QString &var) const -> QString
 {
     const QString locale = VAbstractApplication::VApp()->Settings()->GetLocale();
-    if (locale == QStringLiteral("zh_CN") || locale == QStringLiteral("he_IL"))
+    if (locale == QStringLiteral("zh_CN") || locale == QStringLiteral("he_IL") || locale == QStringLiteral("ja_JP"))
     {
         return var; // We do not support translation of variables for these locales
     }
@@ -664,7 +664,7 @@ auto VTranslateVars::VarToUser(const QString &var) const -> QString
 auto VTranslateVars::VarFromUser(const QString &var) const -> QString
 {
     const QString locale = VAbstractApplication::VApp()->Settings()->GetLocale();
-    if (locale == QStringLiteral("zh_CN") || locale == QStringLiteral("he_IL"))
+    if (locale == QStringLiteral("zh_CN") || locale == QStringLiteral("he_IL") || locale == QStringLiteral("ja_JP"))
     {
         return var; // We do not support translation of variables for Chinese
     }

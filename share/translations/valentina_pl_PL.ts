@@ -9980,7 +9980,7 @@ Apply settings anyway?</source>
 <context>
     <name>InitPieceLabelLanguages</name>
     <message>
-        <location filename="../../src/libs/vmisc/def.cpp" line="577"/>
+        <location filename="../../src/libs/vmisc/def.cpp" line="578"/>
         <source>Default</source>
         <translation>Domyślny</translation>
     </message>
@@ -13628,12 +13628,12 @@ This option will take an affect after restart.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/libs/vmisc/def.cpp" line="616"/>
+        <location filename="../../src/libs/vmisc/def.cpp" line="617"/>
         <source>CustomSARecord prefix mismatch error: actualStreamHeader = 0x%1 and streamHeader = 0x%2</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/libs/vmisc/def.cpp" line="628"/>
+        <location filename="../../src/libs/vmisc/def.cpp" line="629"/>
         <source>CustomSARecord compatibility error: actualClassVersion = %1 and classVersion = %2</source>
         <translation type="unfinished"></translation>
     </message>
@@ -13675,17 +13675,17 @@ This option will take an affect after restart.</source>
         <translation type="vanished">Stwórz nowy wykrój, aby zacząć pracę.</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vmisc/def.cpp" line="546"/>
+        <location filename="../../src/libs/vmisc/def.cpp" line="547"/>
         <source>mm</source>
         <translation>mm</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vmisc/def.cpp" line="555"/>
+        <location filename="../../src/libs/vmisc/def.cpp" line="556"/>
         <source>cm</source>
         <translation>cm</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vmisc/def.cpp" line="548"/>
+        <location filename="../../src/libs/vmisc/def.cpp" line="549"/>
         <source>inch</source>
         <translation type="unfinished"></translation>
     </message>
@@ -13703,7 +13703,7 @@ This option will take an affect after restart.</source>
         <translation>Wartość</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vmisc/def.cpp" line="550"/>
+        <location filename="../../src/libs/vmisc/def.cpp" line="551"/>
         <source>px</source>
         <translation>px</translation>
     </message>
