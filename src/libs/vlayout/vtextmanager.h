@@ -164,6 +164,8 @@ public:
     static auto PrepareLabelInfo(const VAbstractPattern *doc, const VContainer *pattern, bool pieceLabel)
         -> VPieceLabelInfo;
 
+    static auto HorizontalAdvance(const QString &text, const QFont &font) -> int;
+
 private:
     QFont m_font{};
     QString m_svgFontFamily{};

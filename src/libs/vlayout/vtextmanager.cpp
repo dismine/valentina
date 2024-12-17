@@ -865,8 +865,7 @@ auto VTextManager::GetLabelSourceLines(int width, const QFont &font) const -> QV
         fnt.setItalic(tl.m_italic);
 
         QString const qsText = tl.m_qsText;
-        QFontMetrics const fm(fnt);
-        if (fm.horizontalAdvance(qsText) > width)
+        if (HorizontalAdvance(qsText, fnt) > width)
         {
             const QStringList brokeLines = BreakTextIntoLines(qsText, fnt, width);
             for (const auto &lineText : brokeLines)
@@ -1015,12 +1014,11 @@ void VTextManager::UpdatePatternLabelInfo(const VPieceLabelInfo &info)
 //---------------------------------------------------------------------------------------------------------------------
 auto VTextManager::BreakTextIntoLines(const QString &text, const QFont &font, int maxWidth) -> QStringList
 {
-    QFontMetrics const fontMetrics(font);
     QStringList words = text.split(' ');
 
     QString currentLine;
     int currentLineWidth = 0;
-    const int spaceWidth = fontMetrics.horizontalAdvance(QChar(' '));
+    const int spaceWidth = HorizontalAdvance(QChar(' '), font);
     const float tolerance = 0.3F;
 
     QStringList lines;
@@ -1040,7 +1038,7 @@ auto VTextManager::BreakTextIntoLines(const QString &text, const QFont &font, in
     while (iterator.hasNext())
     {
         const QString &word = iterator.next();
-        int const wordWidth = fontMetrics.horizontalAdvance(word);
+        int const wordWidth = HorizontalAdvance(word, font);
         int const totalWidth = !currentLine.isEmpty() ? currentLineWidth + spaceWidth + wordWidth : wordWidth;
 
         if (totalWidth <= maxWidth)
@@ -1059,7 +1057,7 @@ auto VTextManager::BreakTextIntoLines(const QString &text, const QFont &font, in
         else
         {
             // Word is too long, force line break
-            if (currentLineWidth + spaceWidth + fontMetrics.horizontalAdvance(word.at(0)) > maxWidth)
+            if (currentLineWidth + spaceWidth + HorizontalAdvance(word.at(0), font) > maxWidth)
             {
                 lines.append(currentLine);
                 currentLine.clear();
@@ -1075,7 +1073,7 @@ auto VTextManager::BreakTextIntoLines(const QString &text, const QFont &font, in
             }
             else
             {
-                const int width = fontMetrics.horizontalAdvance(subWords.constFirst());
+                const int width = HorizontalAdvance(subWords.constFirst(), font);
                 const int tWidth = !currentLine.isEmpty() ? currentLineWidth + spaceWidth + width : width;
                 AppendWord(subWords.constFirst(), tWidth);
                 lines.append(currentLine);
@@ -1249,4 +1247,24 @@ auto VTextManager::PrepareLabelInfo(const VAbstractPattern *doc, const VContaine
     }
 
     return info;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+auto VTextManager::HorizontalAdvance(const QString &text, const QFont &font) -> int
+{
+    VCommonSettings *settings = VAbstractApplication::VApp()->Settings();
+    qreal const penWidth = VAbstractApplication::VApp()->Settings()->WidthHairLine();
+
+    QFontMetrics const fm(font);
+    if (settings->GetSingleStrokeOutlineFont())
+    {
+        int w = 0;
+        for (auto c : qAsConst(text))
+        {
+            w += fm.horizontalAdvance(c) + qRound(penWidth / 2.0);
+        }
+
+        return w;
+    }
+    return fm.horizontalAdvance(text);
 }

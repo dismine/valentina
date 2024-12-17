@@ -815,6 +815,10 @@ void VTextGraphicsItem::PaintLabelOutlineFont(QPainter *painter)
             {
                 path.addPath(corrector.DrawChar(w, static_cast<qreal>(fm.ascent()), c));
                 w += fm.horizontalAdvance(c);
+                if (settings->GetSingleStrokeOutlineFont())
+                {
+                    w += qRound(penWidth / 2.0);
+                }
             }
 
             QTransform matrix;
@@ -897,7 +901,7 @@ void VTextGraphicsItem::PaintLabelSVGFont(QPainter *painter)
         engine.Draw(painter, QRectF(0, iY, iW, lineHeight), tl.m_qsText, tl.m_eAlign);
 
         // check if the next line will go out of bounds
-        qreal const nextStep = iY + engine.FontHeight() - painter->pen().widthF() * 2;
+        qreal const nextStep = iY + engine.FontHeight() + painter->pen().widthF() * 2 + MmToPixel(1.);
         if (nextStep > boundingRect.height())
         {
             NotEnoughSpace();
