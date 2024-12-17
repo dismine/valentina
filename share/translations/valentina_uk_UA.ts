@@ -10657,7 +10657,7 @@ Apply settings anyway?</source>
 <context>
     <name>InitPieceLabelLanguages</name>
     <message>
-        <location filename="../../src/libs/vmisc/def.cpp" line="561"/>
+        <location filename="../../src/libs/vmisc/def.cpp" line="576"/>
         <source>Default</source>
         <translation>По замовчуванню</translation>
     </message>
@@ -14696,12 +14696,12 @@ This option will take an affect after restart.</source>
         <translation>Помилка сумісності VTextManager: actualClassVersion = %1 and classVersion = %2</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vmisc/def.cpp" line="600"/>
+        <location filename="../../src/libs/vmisc/def.cpp" line="615"/>
         <source>CustomSARecord prefix mismatch error: actualStreamHeader = 0x%1 and streamHeader = 0x%2</source>
         <translation>Помилка невідповідності префікса CustomSARecord: actualStreamHeader = 0x%1 and streamHeader = 0x%2</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vmisc/def.cpp" line="612"/>
+        <location filename="../../src/libs/vmisc/def.cpp" line="627"/>
         <source>CustomSARecord compatibility error: actualClassVersion = %1 and classVersion = %2</source>
         <translation>Помилка сумісності CustomSARecord: actualClassVersion = %1 and classVersion = %2</translation>
     </message>
@@ -14743,17 +14743,17 @@ This option will take an affect after restart.</source>
         <translation type="vanished">Створіть нове креслення для початку роботи.</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vmisc/def.cpp" line="530"/>
+        <location filename="../../src/libs/vmisc/def.cpp" line="545"/>
         <source>mm</source>
         <translation>мм</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vmisc/def.cpp" line="539"/>
+        <location filename="../../src/libs/vmisc/def.cpp" line="554"/>
         <source>cm</source>
         <translation>см</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vmisc/def.cpp" line="532"/>
+        <location filename="../../src/libs/vmisc/def.cpp" line="547"/>
         <source>inch</source>
         <translation>дюйми</translation>
     </message>
@@ -14771,7 +14771,7 @@ This option will take an affect after restart.</source>
         <translation>Значення</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vmisc/def.cpp" line="534"/>
+        <location filename="../../src/libs/vmisc/def.cpp" line="549"/>
         <source>px</source>
         <translation>пікселі</translation>
     </message>

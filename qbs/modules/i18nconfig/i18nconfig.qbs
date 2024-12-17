@@ -15,7 +15,8 @@ Module {
         "pt_BR",
         "el_GR",
         "pl_PL",
-        "hr_HR"
+        "hr_HR",
+        "hu_HU"
     ]
 
     property bool limitDeploymentOfQtTranslations: true
@@ -45,7 +46,7 @@ Module {
 //        "fa", Not supported by Valentina
 //        "gd", Not supported by Valentina
 //        "gl", Not supported by Valentina
-//        "hu", Not supported by Valentina
+        "hu",
 //        "ja", Not supported by Valentina
 //        "ko", Not supported by Valentina
 //        "lt", Not supported by Valentina

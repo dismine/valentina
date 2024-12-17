@@ -10657,7 +10657,7 @@ Přesto použít nastavení?</translation>
 <context>
     <name>InitPieceLabelLanguages</name>
     <message>
-        <location filename="../../src/libs/vmisc/def.cpp" line="561"/>
+        <location filename="../../src/libs/vmisc/def.cpp" line="576"/>
         <source>Default</source>
         <translation>Výchozí</translation>
     </message>
@@ -14697,12 +14697,12 @@ Tato volba se projeví po opětovném spuštění.</translation>
         <translation>Chyba kompatibility VTextManager: actualClassVersion = %1 a classVersion = %2</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vmisc/def.cpp" line="600"/>
+        <location filename="../../src/libs/vmisc/def.cpp" line="615"/>
         <source>CustomSARecord prefix mismatch error: actualStreamHeader = 0x%1 and streamHeader = 0x%2</source>
         <translation>Chyba v nesouladu předpony CustomSARecord: actualStreamHeader = 0x%1 a streamHeader = 0x%2</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vmisc/def.cpp" line="612"/>
+        <location filename="../../src/libs/vmisc/def.cpp" line="627"/>
         <source>CustomSARecord compatibility error: actualClassVersion = %1 and classVersion = %2</source>
         <translation>Chyba kompatibility CustomSARecord: actualClassVersion = %1 a classVersion = %2</translation>
     </message>
@@ -14744,17 +14744,17 @@ Tato volba se projeví po opětovném spuštění.</translation>
         <translation type="vanished">Začněte vytvořením nového dílu střihu.</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vmisc/def.cpp" line="530"/>
+        <location filename="../../src/libs/vmisc/def.cpp" line="545"/>
         <source>mm</source>
         <translation>mm</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vmisc/def.cpp" line="539"/>
+        <location filename="../../src/libs/vmisc/def.cpp" line="554"/>
         <source>cm</source>
         <translation>cm</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vmisc/def.cpp" line="532"/>
+        <location filename="../../src/libs/vmisc/def.cpp" line="547"/>
         <source>inch</source>
         <translation>palec</translation>
     </message>
@@ -14772,7 +14772,7 @@ Tato volba se projeví po opětovném spuštění.</translation>
         <translation>Hodnota</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vmisc/def.cpp" line="534"/>
+        <location filename="../../src/libs/vmisc/def.cpp" line="549"/>
         <source>px</source>
         <translation>px</translation>
     </message>
