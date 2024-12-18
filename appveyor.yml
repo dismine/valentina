@@ -186,7 +186,7 @@ for:
     - set PATH=%QTDIR%\bin;%QTDIR%\include;C:\ProgramData\chocolatey\bin;C:\Qt\Tools\QtCreator\bin;C:\Tools\PsTools;C:\Program Files\Git\cmd;C:\Program Files\Git\usr\bin;C:\Program Files\Git LFS;C:\Tools\GitVersion;C:\Windows\system32;C:\Windows;C:\Windows\System32\WindowsPowerShell\v1.0\;C:\Program Files\CMake\bin;%PYTHON%;%PYTHON%\Scripts;C:\Program Files (x86)\Inno Setup 6
     # Set VC variables for the platform
     - ps: |
-        & choco install qbs -y --version=2.5.0
+        & choco install qbs -y --version=2.4.2
         if ($env:COMPILER -eq "msvc") {
           if ($env:APPVEYOR_BUILD_WORKER_IMAGE -eq "Visual Studio 2022") {
             if ($env:ARCH -eq "x64") {
@@ -397,7 +397,7 @@ for:
 
       sudo ln -s /usr/local /opt/local;
 
-      cache_tag=usr_local_2 # this can be modified to rebuild deps
+      cache_tag=usr_local_3 # this can be modified to rebuild deps
 
       cdir=$HOME/brew_cache_dir
       cache_tar=$cdir/$cache_tag.tar
@@ -421,7 +421,12 @@ for:
         python3 ./scripts/treestate.py scan /usr/local usrlocal.json
 
         brew update
-        brew install coreutils ccache git openssl@3 pkg-config qbs qt6 cmake ninja poppler xerces-c
+        brew install coreutils ccache git openssl@3 pkg-config qt6 cmake ninja poppler xerces-c
+
+        # Version 2.4.2. Version 2.5.0 crashes.
+        curl https://github.com/Homebrew/homebrew-core/blob/7aa8c7a3818d7d14bbbde1ea42ffca457739c093/Formula/q/qbs.rb > qbs.rb
+        brew install --formula ./qbs.rb
+        brew pin qbs
 
         # The build environment is now ready for use. We can complete
         # the rest of the process of creating the Homebrew archive
