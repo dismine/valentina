@@ -424,7 +424,7 @@ for:
         brew install coreutils ccache git openssl@3 pkg-config qt6 cmake ninja poppler xerces-c
 
         # Version 2.4.2. Version 2.5.0 crashes.
-        curl https://github.com/Homebrew/homebrew-core/blob/7aa8c7a3818d7d14bbbde1ea42ffca457739c093/Formula/q/qbs.rb > qbs.rb
+        curl https://raw.githubusercontent.com/Homebrew/homebrew-core/7aa8c7a3818d7d14bbbde1ea42ffca457739c093/Formula/q/qbs.rb > qbs.rb
         brew install --formula ./qbs.rb
         brew pin qbs
 
