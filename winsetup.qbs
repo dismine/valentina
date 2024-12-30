@@ -58,7 +58,7 @@ InnoSetup {
             return "10.0";
         }
 
-        return "6.1";
+        return "6.1sp1";
 
     }
 
