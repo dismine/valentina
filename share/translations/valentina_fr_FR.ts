@@ -13407,7 +13407,7 @@ Do you want to save your changes?</source>
         <translation>au pli</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vlayout/vtextmanager.cpp" line="976"/>
+        <location filename="../../src/libs/vlayout/vtextmanager.cpp" line="978"/>
         <source>Error</source>
         <translation>Erreur</translation>
     </message>
@@ -15019,7 +15019,7 @@ This option will take an affect after restart.</source>
         <translation>Impossible de préparer l&apos;emplacement réservé à la surface de la ligne de couture de la pièce. %1.</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vlayout/vtextmanager.cpp" line="983"/>
+        <location filename="../../src/libs/vlayout/vtextmanager.cpp" line="985"/>
         <source>Incorrect use of placeholder %1. This placeholder is not available in pattern label.</source>
         <translation>Utilisation incorrecte du champ %1. Ce champ n&apos;est pas disponible pour configurer une étiquette de patron, mais seulement de pièce.</translation>
     </message>
@@ -21151,22 +21151,22 @@ Voulez-vous enregistrer vos changements ?</translation>
 <context>
     <name>VDxfEngine</name>
     <message>
-        <location filename="../../src/libs/vdxf/vdxfengine.cpp" line="1033"/>
+        <location filename="../../src/libs/vdxf/vdxfengine.cpp" line="1036"/>
         <source>Piece &apos;%1&apos;. Piece System Text is missing.</source>
         <translation>Pièce &apos;%1&apos;. Piece System Text = données de spécifications des pièces pour DXF normalisé, manquant.</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vdxf/vdxfengine.cpp" line="1189"/>
+        <location filename="../../src/libs/vdxf/vdxfengine.cpp" line="1192"/>
         <source>Style System Text is missing.</source>
         <translation>Style System Text = données de spécifications du patron pour DXF normalisé, manquant.</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vdxf/vdxfengine.cpp" line="2078"/>
+        <location filename="../../src/libs/vdxf/vdxfengine.cpp" line="2081"/>
         <source>Piece &apos;%1&apos;. &apos;Piece Name:&apos; or &apos;Size:&apos; identifier is missing.</source>
         <translation>Pièce &apos;%1&apos;. &apos;Piece Name:&apos; -nom de la pièce-, ou &apos;Size:&apos; -taille-, identifiant manquant.</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vdxf/vdxfengine.cpp" line="2113"/>
+        <location filename="../../src/libs/vdxf/vdxfengine.cpp" line="2116"/>
         <source>Piece &apos;%1&apos;. &apos;Piece Name:&apos; identifier requires &apos;Size:&apos; identifier to be present.</source>
         <translation>Pièce &apos;%1&apos;. L&apos;identifiant de &apos;Piece Name:&apos; -nom de la pièce-, nécessite que l&apos;identifiant &apos;Size:&apos; -taille-, soit également défini.</translation>
     </message>
@@ -21923,12 +21923,12 @@ Voulez-vous enregistrer vos changements ?</translation>
 <context>
     <name>VPGraphicsPiece</name>
     <message>
-        <location filename="../../src/app/puzzle/scene/vpgraphicspiece.cpp" line="316"/>
+        <location filename="../../src/app/puzzle/scene/vpgraphicspiece.cpp" line="319"/>
         <source>Move to</source>
         <translation>Déplacer vers</translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/scene/vpgraphicspiece.cpp" line="330"/>
+        <location filename="../../src/app/puzzle/scene/vpgraphicspiece.cpp" line="333"/>
         <source>Remove from Sheet</source>
         <translation>Supprimer de la feuille</translation>
     </message>
@@ -23728,22 +23728,22 @@ Erreur de compatibilité du format .rld: actualFileVersion = %1 alors que fileVe
 <context>
     <name>VTextGraphicsItem</name>
     <message>
-        <location filename="../../src/libs/vwidgets/vtextgraphicsitem.cpp" line="857"/>
+        <location filename="../../src/libs/vwidgets/vtextgraphicsitem.cpp" line="864"/>
         <source>Invalid SVG font &apos;%1&apos;. Fallback to outline font.</source>
         <translation>Police SVG &apos;%1&apos; invalide. Retour à la police vectorielle.</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vwidgets/vtextgraphicsitem.cpp" line="915"/>
+        <location filename="../../src/libs/vwidgets/vtextgraphicsitem.cpp" line="922"/>
         <source>Piece &apos;%1&apos;. Not enough space for pattern info label.</source>
         <translation>Pièce &apos;%1&apos;. Espace insuffisant pour l&apos;étiquette de patron.</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vwidgets/vtextgraphicsitem.cpp" line="918"/>
+        <location filename="../../src/libs/vwidgets/vtextgraphicsitem.cpp" line="925"/>
         <source>Piece &apos;%1&apos;. Not enough space for piece info label.</source>
         <translation>Pièce &apos;%1&apos;. Espace insuffisant pour l&apos;étiquette de pièce.</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vwidgets/vtextgraphicsitem.cpp" line="922"/>
+        <location filename="../../src/libs/vwidgets/vtextgraphicsitem.cpp" line="929"/>
         <source>Piece &apos;%1&apos;. Not enough space for label.</source>
         <translation>Pièce &apos;%1&apos;. Espace insuffisant pour l&apos;étiquette.</translation>
     </message>

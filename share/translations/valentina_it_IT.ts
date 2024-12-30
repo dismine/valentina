@@ -13396,7 +13396,7 @@ Vuoi salvare i cambiamenti?</translation>
         <translation>sulla piega</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vlayout/vtextmanager.cpp" line="976"/>
+        <location filename="../../src/libs/vlayout/vtextmanager.cpp" line="978"/>
         <source>Error</source>
         <translation>Errore</translation>
     </message>
@@ -15010,7 +15010,7 @@ Questa opzione sarà effettiva dopo il riavvio del programma.</translation>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/libs/vlayout/vtextmanager.cpp" line="983"/>
+        <location filename="../../src/libs/vlayout/vtextmanager.cpp" line="985"/>
         <source>Incorrect use of placeholder %1. This placeholder is not available in pattern label.</source>
         <translation type="unfinished"></translation>
     </message>
@@ -21061,22 +21061,22 @@ Vuoi salvare le tue modifiche?</translation>
 <context>
     <name>VDxfEngine</name>
     <message>
-        <location filename="../../src/libs/vdxf/vdxfengine.cpp" line="1033"/>
+        <location filename="../../src/libs/vdxf/vdxfengine.cpp" line="1036"/>
         <source>Piece &apos;%1&apos;. Piece System Text is missing.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/libs/vdxf/vdxfengine.cpp" line="1189"/>
+        <location filename="../../src/libs/vdxf/vdxfengine.cpp" line="1192"/>
         <source>Style System Text is missing.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/libs/vdxf/vdxfengine.cpp" line="2078"/>
+        <location filename="../../src/libs/vdxf/vdxfengine.cpp" line="2081"/>
         <source>Piece &apos;%1&apos;. &apos;Piece Name:&apos; or &apos;Size:&apos; identifier is missing.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/libs/vdxf/vdxfengine.cpp" line="2113"/>
+        <location filename="../../src/libs/vdxf/vdxfengine.cpp" line="2116"/>
         <source>Piece &apos;%1&apos;. &apos;Piece Name:&apos; identifier requires &apos;Size:&apos; identifier to be present.</source>
         <translation type="unfinished"></translation>
     </message>
@@ -21833,12 +21833,12 @@ Vuoi salvare le tue modifiche?</translation>
 <context>
     <name>VPGraphicsPiece</name>
     <message>
-        <location filename="../../src/app/puzzle/scene/vpgraphicspiece.cpp" line="316"/>
+        <location filename="../../src/app/puzzle/scene/vpgraphicspiece.cpp" line="319"/>
         <source>Move to</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/scene/vpgraphicspiece.cpp" line="330"/>
+        <location filename="../../src/app/puzzle/scene/vpgraphicspiece.cpp" line="333"/>
         <source>Remove from Sheet</source>
         <translation type="unfinished"></translation>
     </message>
@@ -23629,22 +23629,22 @@ Raw layout format compatibility error: actualFileVersion = %1 and fileVersion = 
 <context>
     <name>VTextGraphicsItem</name>
     <message>
-        <location filename="../../src/libs/vwidgets/vtextgraphicsitem.cpp" line="857"/>
+        <location filename="../../src/libs/vwidgets/vtextgraphicsitem.cpp" line="864"/>
         <source>Invalid SVG font &apos;%1&apos;. Fallback to outline font.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/libs/vwidgets/vtextgraphicsitem.cpp" line="915"/>
+        <location filename="../../src/libs/vwidgets/vtextgraphicsitem.cpp" line="922"/>
         <source>Piece &apos;%1&apos;. Not enough space for pattern info label.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/libs/vwidgets/vtextgraphicsitem.cpp" line="918"/>
+        <location filename="../../src/libs/vwidgets/vtextgraphicsitem.cpp" line="925"/>
         <source>Piece &apos;%1&apos;. Not enough space for piece info label.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/libs/vwidgets/vtextgraphicsitem.cpp" line="922"/>
+        <location filename="../../src/libs/vwidgets/vtextgraphicsitem.cpp" line="929"/>
         <source>Piece &apos;%1&apos;. Not enough space for label.</source>
         <translation type="unfinished"></translation>
     </message>

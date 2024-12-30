@@ -13410,7 +13410,7 @@ Do you want to save your changes?</source>
         <translation>на згин</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vlayout/vtextmanager.cpp" line="976"/>
+        <location filename="../../src/libs/vlayout/vtextmanager.cpp" line="978"/>
         <source>Error</source>
         <translation>Помилка</translation>
     </message>
@@ -15024,7 +15024,7 @@ This option will take an affect after restart.</source>
         <translation>Не вдалося підготувати заповнювач площі лінії шва. %1.</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vlayout/vtextmanager.cpp" line="983"/>
+        <location filename="../../src/libs/vlayout/vtextmanager.cpp" line="985"/>
         <source>Incorrect use of placeholder %1. This placeholder is not available in pattern label.</source>
         <translation>Неправильне використання заповнювача %1. Цей заповнювач недоступний в мітці деталі.</translation>
     </message>
@@ -21155,22 +21155,22 @@ Do you want to save your changes?</source>
 <context>
     <name>VDxfEngine</name>
     <message>
-        <location filename="../../src/libs/vdxf/vdxfengine.cpp" line="1033"/>
+        <location filename="../../src/libs/vdxf/vdxfengine.cpp" line="1036"/>
         <source>Piece &apos;%1&apos;. Piece System Text is missing.</source>
         <translation>Деталь &apos;%1&apos;. Відсутній системний текст деталі.</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vdxf/vdxfengine.cpp" line="1189"/>
+        <location filename="../../src/libs/vdxf/vdxfengine.cpp" line="1192"/>
         <source>Style System Text is missing.</source>
         <translation>Відсутній системний текст дизайну.</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vdxf/vdxfengine.cpp" line="2078"/>
+        <location filename="../../src/libs/vdxf/vdxfengine.cpp" line="2081"/>
         <source>Piece &apos;%1&apos;. &apos;Piece Name:&apos; or &apos;Size:&apos; identifier is missing.</source>
         <translation>Деталь &apos;%1&apos;. Відсутній ідентифікатор &apos;Piece Name:&apos; або &apos;Size:&apos;.</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vdxf/vdxfengine.cpp" line="2113"/>
+        <location filename="../../src/libs/vdxf/vdxfengine.cpp" line="2116"/>
         <source>Piece &apos;%1&apos;. &apos;Piece Name:&apos; identifier requires &apos;Size:&apos; identifier to be present.</source>
         <translation>Деталь &apos;%1&apos;. Ідентифікатор &apos;Piece Name:&apos; вимагає присутності ідентифікатора &apos;Size:&apos;.</translation>
     </message>
@@ -21927,12 +21927,12 @@ Do you want to save your changes?</source>
 <context>
     <name>VPGraphicsPiece</name>
     <message>
-        <location filename="../../src/app/puzzle/scene/vpgraphicspiece.cpp" line="316"/>
+        <location filename="../../src/app/puzzle/scene/vpgraphicspiece.cpp" line="319"/>
         <source>Move to</source>
         <translation>Перемістити до</translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/scene/vpgraphicspiece.cpp" line="330"/>
+        <location filename="../../src/app/puzzle/scene/vpgraphicspiece.cpp" line="333"/>
         <source>Remove from Sheet</source>
         <translation>Видалити з аркуша</translation>
     </message>
@@ -23732,22 +23732,22 @@ Raw layout format compatibility error: actualFileVersion = %1 and fileVersion = 
 <context>
     <name>VTextGraphicsItem</name>
     <message>
-        <location filename="../../src/libs/vwidgets/vtextgraphicsitem.cpp" line="857"/>
+        <location filename="../../src/libs/vwidgets/vtextgraphicsitem.cpp" line="864"/>
         <source>Invalid SVG font &apos;%1&apos;. Fallback to outline font.</source>
         <translation>Неправильний SVG-шрифт &apos;%1&apos;. Відбудеться перехід до контурного шрифту.</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vwidgets/vtextgraphicsitem.cpp" line="915"/>
+        <location filename="../../src/libs/vwidgets/vtextgraphicsitem.cpp" line="922"/>
         <source>Piece &apos;%1&apos;. Not enough space for pattern info label.</source>
         <translation>Деталь &apos;%1&apos;. Недостатньо простору для мітки інформації про лекало.</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vwidgets/vtextgraphicsitem.cpp" line="918"/>
+        <location filename="../../src/libs/vwidgets/vtextgraphicsitem.cpp" line="925"/>
         <source>Piece &apos;%1&apos;. Not enough space for piece info label.</source>
         <translation>Деталь &apos;%1&apos;. Недостатньо простору для мітки інформації про деталь.</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vwidgets/vtextgraphicsitem.cpp" line="922"/>
+        <location filename="../../src/libs/vwidgets/vtextgraphicsitem.cpp" line="929"/>
         <source>Piece &apos;%1&apos;. Not enough space for label.</source>
         <translation>Деталь &apos;%1&apos;. Недостатньо простору для мітки.</translation>
     </message>
