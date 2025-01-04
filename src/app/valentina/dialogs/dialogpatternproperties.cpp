@@ -216,8 +216,9 @@ auto DialogPatternProperties::eventFilter(QObject *object, QEvent *event) -> boo
     {
         if (event->type() == QEvent::KeyPress)
         {
-            auto *keyEvent = static_cast<QKeyEvent *>(event); // NOLINT(cppcoreguidelines-pro-type-static-cast-downcast)
-            if ((keyEvent->key() == Qt::Key_Space) && ((keyEvent->modifiers() & Qt::ControlModifier) != 0U))
+            // NOLINTNEXTLINE(cppcoreguidelines-pro-type-static-cast-downcast)
+            if (const auto *keyEvent = static_cast<QKeyEvent *>(event);
+                (keyEvent->key() == Qt::Key_Space) && ((keyEvent->modifiers() & Qt::ControlModifier) != 0U))
             {
                 m_completerLength->complete();
                 return true;
@@ -231,8 +232,9 @@ auto DialogPatternProperties::eventFilter(QObject *object, QEvent *event) -> boo
     {
         if (event->type() == QEvent::KeyPress)
         {
-            auto *keyEvent = static_cast<QKeyEvent *>(event); // NOLINT(cppcoreguidelines-pro-type-static-cast-downcast)
-            if ((keyEvent->key() == Qt::Key_Space) && ((keyEvent->modifiers() & Qt::ControlModifier) != 0U))
+            // NOLINTNEXTLINE(cppcoreguidelines-pro-type-static-cast-downcast)
+            if (const auto *keyEvent = static_cast<QKeyEvent *>(event);
+                (keyEvent->key() == Qt::Key_Space) && ((keyEvent->modifiers() & Qt::ControlModifier) != 0U))
             {
                 m_completerWidth->complete();
                 return true;

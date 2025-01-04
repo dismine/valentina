@@ -588,7 +588,7 @@ auto DialogSeamAllowance::eventFilter(QObject* obj, QEvent* event) -> bool
 {
     if (obj == uiTabPaths->listWidgetMainPath && event->type() == QEvent::KeyPress)
     {
-        if (auto* keyEvent = static_cast<QKeyEvent*>(event); keyEvent->key() == Qt::Key_Delete)
+        if (const auto* keyEvent = static_cast<QKeyEvent*>(event); keyEvent->key() == Qt::Key_Delete)
         {
             if (QListWidgetItem* selectedItem = uiTabPaths->listWidgetMainPath->currentItem();selectedItem)
             {
@@ -3961,7 +3961,7 @@ void DialogSeamAllowance::InitMainPathTab()
                     return;
                 }
 
-                QListWidgetItem *rowItem = uiTabPaths->listWidgetMainPath->item(row);
+                const QListWidgetItem *rowItem = uiTabPaths->listWidgetMainPath->item(row);
                 SCASSERT(rowItem != nullptr)
                 auto rowNode = qvariant_cast<VPieceNode>(rowItem->data(Qt::UserRole));
 

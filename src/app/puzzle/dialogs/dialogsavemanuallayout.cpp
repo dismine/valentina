@@ -395,8 +395,8 @@ auto DialogSaveManualLayout::IsTextAsPaths() const -> bool
 //---------------------------------------------------------------------------------------------------------------------
 void DialogSaveManualLayout::SetTextAsPaths(bool textAsPaths)
 {
-    VCommonSettings *settings = VAbstractApplication::VApp()->Settings();
-    if (settings->GetSingleLineFonts() || settings->GetSingleStrokeOutlineFont())
+    if (const VCommonSettings *settings = VAbstractApplication::VApp()->Settings();
+        settings->GetSingleLineFonts() || settings->GetSingleStrokeOutlineFont())
     {
         ui->checkBoxTextAsPaths->setChecked(true);
     }
@@ -571,7 +571,7 @@ void DialogSaveManualLayout::ShowExample()
     }
     ui->labelExample->setText(example);
 
-    VCommonSettings *settings = VAbstractApplication::VApp()->Settings();
+    const VCommonSettings *settings = VAbstractApplication::VApp()->Settings();
 
     ui->labelOptionsNotAvailable->setVisible(false);
     ui->checkBoxBinaryDXF->setVisible(false);

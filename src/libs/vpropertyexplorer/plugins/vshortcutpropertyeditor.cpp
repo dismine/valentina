@@ -55,7 +55,7 @@ auto VPE::VShortcutEditWidget::eventFilter(QObject *obj, QEvent *event) -> bool
 {
     if (obj == LineEdit && event->type() == QEvent::KeyPress)
     {
-        auto *keyEvent = static_cast<QKeyEvent *>(event);
+        const auto *keyEvent = static_cast<QKeyEvent *>(event);
 
         int keys = keyEvent->key();
 

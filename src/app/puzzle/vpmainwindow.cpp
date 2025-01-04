@@ -3308,7 +3308,7 @@ auto VPMainWindow::PrintLayoutTiledSheetPage(QPrinter *printer, QPainter &painte
 {
     page.sheet->SceneData()->PrepareForExport();
 
-    VCommonSettings *settings = VAbstractApplication::VApp()->Settings();
+    const VCommonSettings *settings = VAbstractApplication::VApp()->Settings();
     page.sheet->SceneData()->SetTextAsPaths(settings->GetSingleLineFonts() || settings->GetSingleStrokeOutlineFont());
 
     auto clean = qScopeGuard(

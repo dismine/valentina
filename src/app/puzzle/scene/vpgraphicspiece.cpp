@@ -474,7 +474,7 @@ void VPGraphicsPiece::InitPieceLabelOutlineFont(const QVector<QPointF> &labelSha
 
     qreal dY = 0;
 
-    VCommonSettings *settings = VAbstractApplication::VApp()->Settings();
+    const VCommonSettings *settings = VAbstractApplication::VApp()->Settings();
 
     bool textAsPaths = m_textAsPaths;
     if (settings->GetSingleStrokeOutlineFont())
@@ -555,8 +555,7 @@ void VPGraphicsPiece::InitPieceLabelOutlineFont(const QVector<QPointF> &labelSha
 //---------------------------------------------------------------------------------------------------------------------
 void VPGraphicsPiece::InitPieceLabel(const QVector<QPointF> &labelShape, const VTextManager &tm)
 {
-    VCommonSettings *settings = VAbstractApplication::VApp()->Settings();
-    if (settings->GetSingleLineFonts())
+    if (const VCommonSettings *settings = VAbstractApplication::VApp()->Settings(); settings->GetSingleLineFonts())
     {
         InitPieceLabelSVGFont(labelShape, tm);
     }

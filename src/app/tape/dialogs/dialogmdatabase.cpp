@@ -144,7 +144,8 @@ auto DialogMDataBase::eventFilter(QObject *target, QEvent *event) -> bool
 {
     if (target == ui->treeWidget && event->type() == QEvent::KeyPress)
     {
-        auto *keyEvent = static_cast<QKeyEvent *>(event); // NOLINT(cppcoreguidelines-pro-type-static-cast-downcast)
+        const auto *keyEvent = static_cast<QKeyEvent *>(
+            event); // NOLINT(cppcoreguidelines-pro-type-static-cast-downcast)
         switch (keyEvent->key())
         {
             case Qt::Key_Up:

@@ -346,7 +346,7 @@ auto DialogPiecePath::eventFilter(QObject *obj, QEvent *event) -> bool
 {
     if (obj == ui->listWidget && event->type() == QEvent::KeyPress)
     {
-        if (auto *keyEvent = static_cast<QKeyEvent *>(event); keyEvent->key() == Qt::Key_Delete)
+        if (const auto *keyEvent = static_cast<QKeyEvent *>(event); keyEvent->key() == Qt::Key_Delete)
         {
             if (QListWidgetItem *selectedItem = ui->listWidget->currentItem(); selectedItem)
             {

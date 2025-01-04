@@ -254,8 +254,8 @@ auto FilterObject(QObject *object, QEvent *event) -> bool
     {
         if (event->type() == QEvent::KeyPress)
         {
-            auto *keyEvent = static_cast<QKeyEvent *>(event);
-            if ((keyEvent->key() == Qt::Key_Period) && (keyEvent->modifiers() & Qt::KeypadModifier))
+            if (const auto *keyEvent = static_cast<QKeyEvent *>(event);
+                (keyEvent->key() == Qt::Key_Period) && (keyEvent->modifiers() & Qt::KeypadModifier))
             {
                 if (VAbstractApplication::VApp()->Settings()->GetOsSeparator())
                 {

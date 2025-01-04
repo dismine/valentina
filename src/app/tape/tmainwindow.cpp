@@ -800,8 +800,9 @@ auto TMainWindow::eventFilter(QObject *object, QEvent *event) -> bool
     {
         if (event->type() == QEvent::KeyPress)
         {
-            auto *keyEvent = static_cast<QKeyEvent *>(event); // NOLINT(cppcoreguidelines-pro-type-static-cast-downcast)
-            if ((keyEvent->key() == Qt::Key_Period) && ((keyEvent->modifiers() & Qt::KeypadModifier) != 0U))
+            // NOLINTNEXTLINE(cppcoreguidelines-pro-type-static-cast-downcast)
+            if (const auto *keyEvent = static_cast<QKeyEvent *>(event);
+                (keyEvent->key() == Qt::Key_Period) && ((keyEvent->modifiers() & Qt::KeypadModifier) != 0U))
             {
                 if (VAbstractApplication::VApp()->Settings()->GetOsSeparator())
                 {
@@ -819,8 +820,9 @@ auto TMainWindow::eventFilter(QObject *object, QEvent *event) -> bool
     {
         if (event->type() == QEvent::KeyPress)
         {
-            auto *keyEvent = static_cast<QKeyEvent *>(event); // NOLINT(cppcoreguidelines-pro-type-static-cast-downcast)
-            if ((keyEvent->key() == Qt::Key_Period) && ((keyEvent->modifiers() & Qt::KeypadModifier) != 0U))
+            // NOLINTNEXTLINE(cppcoreguidelines-pro-type-static-cast-downcast)
+            if (const auto *keyEvent = static_cast<QKeyEvent *>(event);
+                (keyEvent->key() == Qt::Key_Period) && ((keyEvent->modifiers() & Qt::KeypadModifier) != 0U))
             {
                 if (VAbstractApplication::VApp()->Settings()->GetOsSeparator())
                 {

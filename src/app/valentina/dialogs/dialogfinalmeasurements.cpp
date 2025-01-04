@@ -170,8 +170,9 @@ auto DialogFinalMeasurements::eventFilter(QObject *object, QEvent *event) -> boo
     {
         if (event->type() == QEvent::KeyPress)
         {
-            auto *keyEvent = static_cast<QKeyEvent *>(event); // NOLINT(cppcoreguidelines-pro-type-static-cast-downcast)
-            if ((keyEvent->key() == Qt::Key_Period) && (keyEvent->modifiers() & Qt::KeypadModifier))
+            // NOLINTNEXTLINE(cppcoreguidelines-pro-type-static-cast-downcast)
+            if (const auto *keyEvent = static_cast<QKeyEvent *>(event);
+                (keyEvent->key() == Qt::Key_Period) && (keyEvent->modifiers() & Qt::KeypadModifier))
             {
                 if (VAbstractApplication::VApp()->Settings()->GetOsSeparator())
                 {
