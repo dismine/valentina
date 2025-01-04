@@ -588,7 +588,7 @@ auto DialogSeamAllowance::eventFilter(QObject* obj, QEvent* event) -> bool
 {
     if (obj == uiTabPaths->listWidgetMainPath && event->type() == QEvent::KeyPress)
     {
-        if (QKeyEvent* keyEvent = static_cast<QKeyEvent*>(event); keyEvent->key() == Qt::Key_Delete)
+        if (auto* keyEvent = static_cast<QKeyEvent*>(event); keyEvent->key() == Qt::Key_Delete)
         {
             if (QListWidgetItem* selectedItem = uiTabPaths->listWidgetMainPath->currentItem();selectedItem)
             {
