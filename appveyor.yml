@@ -421,7 +421,7 @@ for:
         python3 ./scripts/treestate.py scan /usr/local usrlocal.json
 
         brew update
-        brew install coreutils ccache git openssl@3 pkg-config qt6 cmake ninja poppler xerces-c
+        brew install coreutils ccache git openssl@3 pkgconf qt6 cmake ninja poppler xerces-c
 
         # Version 2.4.2. Version 2.5.0 crashes.
         curl https://raw.githubusercontent.com/Homebrew/homebrew-core/7aa8c7a3818d7d14bbbde1ea42ffca457739c093/Formula/q/qbs.rb > qbs.rb

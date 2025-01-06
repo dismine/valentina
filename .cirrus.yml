@@ -328,7 +328,7 @@ macos_task_template: &MACOS_TASK_TEMPLATE
     # This won't display anything secret.
     - security find-identity -v -p codesigning
     - brew update > /dev/null
-    - brew install qt6 coreutils ccache cmake ninja git openssl@3 pkg-config poppler xerces-c
+    - brew install qt6 coreutils ccache cmake ninja git openssl@3 pkgconf poppler xerces-c
     # Version 2.4.2. Version 2.5.0 crashes.
     - curl https://raw.githubusercontent.com/Homebrew/homebrew-core/7aa8c7a3818d7d14bbbde1ea42ffca457739c093/Formula/q/qbs.rb > qbs.rb
     - brew install --formula ./qbs.rb
