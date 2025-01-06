@@ -125,15 +125,9 @@ private:
     void UpdateBox();
     void CorrectLabel();
 
-    void AdjustFont(const TextLine &tl, QFont &fnt, const VCommonSettings *settings) const;
-    auto ProcessTextLine(const TextLine &tl,
-                         QFont &fnt,
-                         QPainter *painter,
-                         const QRectF &boundingRect,
-                         qreal &iY,
-                         int iW,
-                         bool textAsPaths,
-                         const VCommonSettings *settings) const -> bool;
+    auto ProcessTextLine(
+        const TextLine &tl, QPainter *painter, const QRectF &boundingRect, qreal &iY, int iW, bool textAsPaths) const
+        -> bool;
 };
 
 #endif // VTEXTGRAPHICSITEM_H

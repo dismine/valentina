@@ -190,25 +190,23 @@ auto CalculateTextAlignment(const TextLine &tl,
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void DrawTextAsPlain(
-    const TextLine &tl, const QString &qsText, const QFont &fnt, int iW, qreal lineHeight, QPainter *painter, qreal iY)
+void DrawTextAsPlain(const TextLine &tl, const QFont &fnt, int iW, qreal lineHeight, QPainter *painter, qreal iY)
 {
     painter->save();
     painter->setFont(fnt);
-    painter->drawText(QRectF(0, iY, iW, lineHeight * 2), static_cast<int>(tl.m_eAlign), qsText);
+    painter->drawText(QRectF(0, iY, iW, lineHeight * 2), static_cast<int>(tl.m_eAlign), tl.m_qsText);
     painter->restore();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 void DrawTextAsPaths(const TextLine &tl,
-                     const QString &qsText,
                      const QFont &fnt,
                      const QFontMetrics &fm,
                      const QRectF &boundingRect,
                      qreal iY,
                      QPainter *painter)
 {
-    const qreal dX = CalculateTextAlignment(tl, qsText, fm, boundingRect);
+    const qreal dX = CalculateTextAlignment(tl, tl.m_qsText, fm, boundingRect);
 
     VSingleLineOutlineChar const corrector(fnt);
     if (!corrector.IsPopulated())
@@ -217,7 +215,7 @@ void DrawTextAsPaths(const TextLine &tl,
     }
 
     QPainterPath path;
-    ConstructPath(qsText, corrector, fm, path);
+    ConstructPath(tl.m_qsText, corrector, fm, path);
 
     QTransform matrix;
     matrix.translate(dX, iY);
@@ -227,6 +225,18 @@ void DrawTextAsPaths(const TextLine &tl,
     painter->setBrush(QBrush(Qt::NoBrush));
     painter->drawPath(path);
     painter->restore();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+auto AdjustFont(const TextLine &tl, QFont fnt) -> QFont
+{
+    fnt.setPointSize(qMax(fnt.pointSize() + tl.m_iFontSize, 1));
+    if (!VAbstractApplication::VApp()->Settings()->GetSingleStrokeOutlineFont())
+    {
+        fnt.setBold(tl.m_bold);
+    }
+    fnt.setItalic(tl.m_italic);
+    return fnt;
 }
 } // namespace
 
@@ -856,17 +866,14 @@ void VTextGraphicsItem::PaintLabelOutlineFont(QPainter *painter)
 {
     const QRectF boundingRect = this->boundingRect();
     const int iW = qFloor(boundingRect.width());
-    QFont fnt = m_tm.GetFont();
-    const QVector<TextLine> labelLines = m_tm.GetLabelSourceLines(iW, fnt);
-
-    const VCommonSettings *settings = VAbstractApplication::VApp()->Settings();
-    bool const textAsPaths = settings->GetSingleStrokeOutlineFont();
+    const QVector<TextLine> labelLines = m_tm.GetLabelSourceLines(iW, m_tm.GetFont());
+    bool const textAsPaths = VAbstractApplication::VApp()->Settings()->GetSingleStrokeOutlineFont();
     qreal iY = InitializePainter(painter, textAsPaths, boundingRect);
 
     // draw text lines
     for (const auto &tl : labelLines)
     {
-        if (!ProcessTextLine(tl, fnt, painter, boundingRect, iY, iW, textAsPaths, settings))
+        if (!ProcessTextLine(tl, painter, boundingRect, iY, iW, textAsPaths))
         {
             break;
         }
@@ -958,28 +965,11 @@ void VTextGraphicsItem::NotEnoughSpace() const
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VTextGraphicsItem::AdjustFont(const TextLine &tl, QFont &fnt, const VCommonSettings *settings) const
+auto VTextGraphicsItem::ProcessTextLine(
+    const TextLine &tl, QPainter *painter, const QRectF &boundingRect, qreal &iY, int iW, bool textAsPaths) const
+    -> bool
 {
-    fnt.setPointSize(qMax(m_tm.GetFont().pointSize() + tl.m_iFontSize, 1));
-    if (!settings->GetSingleStrokeOutlineFont())
-    {
-        fnt.setBold(tl.m_bold);
-    }
-    fnt.setItalic(tl.m_italic);
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-auto VTextGraphicsItem::ProcessTextLine(const TextLine &tl,
-                                        QFont &fnt,
-                                        QPainter *painter,
-                                        const QRectF &boundingRect,
-                                        qreal &iY,
-                                        int iW,
-                                        bool textAsPaths,
-                                        const VCommonSettings *settings) const -> bool
-{
-    AdjustFont(tl, fnt, settings);
-    QString const qsText = tl.m_qsText;
+    const QFont fnt = AdjustFont(tl, m_tm.GetFont());
     QFontMetrics const fm(fnt);
     qreal lineHeight = fm.height();
 
@@ -990,11 +980,11 @@ auto VTextGraphicsItem::ProcessTextLine(const TextLine &tl,
 
     if (textAsPaths)
     {
-        DrawTextAsPaths(tl, qsText, fnt, fm, boundingRect, iY, painter);
+        DrawTextAsPaths(tl, fnt, fm, boundingRect, iY, painter);
     }
     else
     {
-        DrawTextAsPlain(tl, qsText, fnt, iW, lineHeight, painter, iY);
+        DrawTextAsPlain(tl, fnt, iW, lineHeight, painter, iY);
     }
 
     qreal const nextStep = CalculateNextStep(iY, fm, textAsPaths);
