@@ -1252,7 +1252,7 @@ auto VTextManager::PrepareLabelInfo(const VAbstractPattern *doc, const VContaine
 //---------------------------------------------------------------------------------------------------------------------
 auto VTextManager::HorizontalAdvance(const QString &text, const QFont &font) -> int
 {
-    VCommonSettings *settings = VAbstractApplication::VApp()->Settings();
+    const VCommonSettings *settings = VAbstractApplication::VApp()->Settings();
     qreal const penWidth = VAbstractApplication::VApp()->Settings()->WidthHairLine();
 
     QFontMetrics const fm(font);
