@@ -288,7 +288,7 @@ inline void noisyFailureMsgHandler(QtMsgType type, const QMessageLogContext &con
         logMsg = logMsg.remove(VAbstractValApplication::warningMessageSignature);
     }
 
-    LogMessageDetails(type, context, logMsg);
+    LogMessageDetails(type, context, msg);
 
     if (isGuiThread)
     {
