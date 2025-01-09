@@ -101,32 +101,42 @@ inline auto NativeLinuxDarkThemeAvailable() -> bool
 //---------------------------------------------------------------------------------------------------------------------
 void ActivateCustomLightTheme()
 {
-    QFile f(QStringLiteral(":/light/stylesheet.qss"));
-    if (!f.exists())
+    if (QFile f(QStringLiteral(":/light/stylesheet.qss")); !f.exists())
     {
         qDebug() << "Unable to set stylesheet, file not found\n";
     }
     else
     {
-        f.open(QFile::ReadOnly | QFile::Text);
-        QTextStream ts(&f);
-        qApp->setStyleSheet(ts.readAll()); // NOLINT(cppcoreguidelines-pro-type-static-cast-downcast)
+        if (f.open(QFile::ReadOnly | QFile::Text))
+        {
+            QTextStream ts(&f);
+            qApp->setStyleSheet(ts.readAll()); // NOLINT(cppcoreguidelines-pro-type-static-cast-downcast)
+        }
+        else
+        {
+            qDebug() << "Unable to set stylesheet, unable to open file\n";
+        }
     }
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 void ActivateCustomDarkTheme()
 {
-    QFile f(QStringLiteral(":/dark/stylesheet.qss"));
-    if (!f.exists())
+    if (QFile f(QStringLiteral(":/dark/stylesheet.qss")); !f.exists())
     {
         qDebug() << "Unable to set stylesheet, file not found\n";
     }
     else
     {
-        f.open(QFile::ReadOnly | QFile::Text);
-        QTextStream ts(&f);
-        qApp->setStyleSheet(ts.readAll()); // NOLINT(cppcoreguidelines-pro-type-static-cast-downcast)
+        if (f.open(QFile::ReadOnly | QFile::Text))
+        {
+            QTextStream ts(&f);
+            qApp->setStyleSheet(ts.readAll()); // NOLINT(cppcoreguidelines-pro-type-static-cast-downcast)
+        }
+        else
+        {
+            qDebug() << "Unable to set stylesheet, unable to open file\n";
+        }
     }
 }
 

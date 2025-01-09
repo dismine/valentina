@@ -134,7 +134,8 @@ Module {
             "QT_MESSAGELOGCONTEXT",
 
             "QBS_BUILD",
-            "QT_NO_FOREACH"
+            "QT_NO_FOREACH",
+            "QT_USE_NODISCARD_FILE_OPEN"
         ];
 
         if (qbs.targetOS.contains("unix")) {

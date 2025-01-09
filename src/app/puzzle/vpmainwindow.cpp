@@ -500,18 +500,30 @@ auto VPMainWindow::LoadFile(const QString &path) -> bool
         m_curFileFormatVersion = converter.GetCurrentFormatVersion();
         m_curFileFormatVersionStr = converter.GetFormatVersionStr();
 
-        QFile file(converter.Convert());
-        file.open(QIODevice::ReadOnly);
-
-        VPLayoutFileReader fileReader;
-        m_layout->Clear();
-
-        fileReader.ReadFile(m_layout, &file);
-
-        if (fileReader.hasError())
+        const QString tmpPath = converter.Convert();
+        if (QFile file(tmpPath); file.open(QIODevice::ReadOnly))
         {
-            qCCritical(pWindow, "%s\n\n%s", qUtf8Printable(tr("File error.")),
-                       qUtf8Printable(tr("Unable to read a layout file. %1").arg(fileReader.errorString())));
+            VPLayoutFileReader fileReader;
+            m_layout->Clear();
+
+            fileReader.ReadFile(m_layout, &file);
+
+            if (fileReader.hasError())
+            {
+                qCCritical(pWindow,
+                           "%s\n\n%s",
+                           qUtf8Printable(tr("File error.")),
+                           qUtf8Printable(tr("Unable to read a layout file. %1").arg(fileReader.errorString())));
+                lock.reset();
+                return false;
+            }
+        }
+        else
+        {
+            qCCritical(pWindow,
+                       "%s\n\n%s",
+                       qUtf8Printable(tr("File error.")),
+                       qUtf8Printable(tr("Failed to read %1").arg(tmpPath)));
             lock.reset();
             return false;
         }
