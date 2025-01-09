@@ -46,6 +46,10 @@
 #include <QtGlobal>
 #include <qtestcase.h>
 
+#if QT_VERSION >= QT_VERSION_CHECK(6, 8, 0)
+#include <QDirListing>
+#endif
+
 #include "../vgeometry/vgobject.h"
 #include "../vgeometry/vpointf.h"
 #include "../vgeometry/vspline.h"
@@ -455,17 +459,32 @@ auto AbstractTest::Run(int exit, const QString &program, const QStringList &argu
 //---------------------------------------------------------------------------------------------------------------------
 auto AbstractTest::CopyRecursively(const QString &srcFilePath, const QString &tgtFilePath) const -> bool
 {
-    QFileInfo const srcFileInfo(srcFilePath);
-    if (srcFileInfo.isDir())
+    if (QFileInfo const srcFileInfo(srcFilePath); srcFileInfo.isDir())
     {
         QDir targetDir(tgtFilePath);
         targetDir.cdUp();
         const QString dirName = QFileInfo(tgtFilePath).fileName();
+
         if (not targetDir.mkdir(dirName))
         {
             qWarning("Can't create dir '%s'.", qUtf8Printable(dirName));
             return false;
         }
+
+#if QT_VERSION >= QT_VERSION_CHECK(6, 8, 0)
+        using ItFlag = QDirListing::IteratorFlag;
+        QDirListing sourceDirListing(srcFilePath, ItFlag::IncludeHidden);
+        for (const auto &entry : sourceDirListing)
+        {
+            const QString newSrcFilePath = entry.absoluteFilePath();
+            const QString newTgtFilePath = tgtFilePath + QDir::separator() + entry.fileName();
+
+            if (!CopyRecursively(newSrcFilePath, newTgtFilePath))
+            {
+                return false;
+            }
+        }
+#else
         QDir const sourceDir(srcFilePath);
         const QStringList fileNames =
             sourceDir.entryList(QDir::Files | QDir::Dirs | QDir::NoDotAndDotDot | QDir::Hidden | QDir::System);
@@ -478,6 +497,7 @@ auto AbstractTest::CopyRecursively(const QString &srcFilePath, const QString &tg
                 return false;
             }
         }
+#endif
     }
     else
     {

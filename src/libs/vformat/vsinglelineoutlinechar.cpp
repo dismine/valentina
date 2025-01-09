@@ -40,6 +40,10 @@
 #include <QRawFont>
 #include <QtDebug>
 
+#if QT_VERSION >= QT_VERSION_CHECK(6, 8, 0)
+#include <QDirListing>
+#endif
+
 namespace
 {
 QT_WARNING_PUSH
@@ -160,14 +164,34 @@ void VSingleLineOutlineChar::LoadCorrections(const QString &dirPath) const
 {
     auto const fileName = QStringLiteral("%1.json").arg(m_font.family());
 
+#if QT_VERSION >= QT_VERSION_CHECK(6, 8, 0)
+    using F = QDirListing::IteratorFlag;
+
+    QDirListing dirListing(dirPath, QStringList(fileName), F::FilesOnly);
+    QString filePath;
+    for (const auto &entry : dirListing)
+    {
+        if (entry.fileName() == fileName)
+        {
+            filePath = entry.absoluteFilePath();
+            break; // Exit after finding the first match
+        }
+    }
+
+    if (filePath.isEmpty())
+    {
+        return; // No matching files found
+    }
+#else
     QDir directory(dirPath);
     directory.setNameFilters(QStringList(fileName));
     QStringList const matchingFiles = directory.entryList();
     if (matchingFiles.isEmpty())
     {
-        return;
+        return; // No matching files found
     }
     QString const filePath = directory.absoluteFilePath(matchingFiles.constFirst());
+#endif
 
     QFile jsonFile(filePath);
     if (!jsonFile.open(QIODevice::ReadOnly | QIODevice::Text))
