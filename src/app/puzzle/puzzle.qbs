@@ -33,7 +33,6 @@ VToolApp {
     buildconfig.appTarget: qbs.targetOS.contains("macos") ? "Puzzle" : "puzzle"
     targetName: buildconfig.appTarget
     multibundle.targetApps: ["Valentina"]
-    type: base.concat("install_root_svg_fonts")
 
     Properties {
         condition: buildconfig.useConanPackages && buildconfig.conanXercesEnabled && qbs.targetOS.contains("macos") && buildconfig.enableMultiBundle
@@ -288,12 +287,15 @@ VToolApp {
     }
 
     Group {
+        condition: product.qbs.targetOS.contains("macos") && product.buildconfig.enableMultiBundle
         name: "SVG Fonts"
         prefix: project.sourceDirectory + "/src/app/share/svgfonts/"
         files: [
             "**/*.svg"
         ]
-        fileTags:["svg_fonts"]
+        qbs.install: true
+        qbs.installDir: product.buildconfig.installDataPath + "/svgfonts"
+        qbs.installSourceBase: project.sourceDirectory + "/src/app/share/svgfonts/"
     }
 
     Group {
@@ -311,27 +313,4 @@ VToolApp {
                                   product.targetName) + ' %F',
        'X-Application-Version': product.version,
     })
-
-    Rule {
-        condition: product.qbs.targetOS.contains("macos") && product.buildconfig.enableMultiBundle
-        inputs: ["svg_fonts"]
-        Artifact {
-            filePath: {
-                var dstDir = product.qbs.installRoot + product.qbs.installPrefix + "/" +
-                        product.buildconfig.installDataPath + "/svgfonts";
-                return dstDir + "/" + input.filePath.split("src/app/share/svgfonts/")[1];
-            }
-            fileTags: ["install_root_svg_fonts"]
-        }
-        prepare: {
-            console.info(output.filePath)
-            var cmd = new JavaScriptCommand();
-            cmd.description = "Installing " + input.fileName;
-            cmd.highlight = "codegen";
-            cmd.sourceCode = function() {
-                File.copy(input.filePath, output.filePath);
-            }
-            return [cmd];
-        }
-    }
 }
