@@ -942,9 +942,7 @@ void DialogSaveLayout::InitFileFormats()
     AddItem("PDF"_L1, LayoutExportFileFormat::PDF);
     AddItem("SVG"_L1, LayoutExportFileFormat::SVG);
     AddItem("PNG"_L1, LayoutExportFileFormat::PNG);
-#ifdef V_NO_ASSERT
-    AddItem("OBJ"_L1, LayoutExportFileFormat::OBJ); // Temporarily unavailable
-#endif
+    // AddItem("OBJ"_L1, LayoutExportFileFormat::OBJ); // Temporarily unavailable
     AddItem("DXF"_L1, LayoutExportFileFormat::DXF);
     // AddItem("NC"_L1, LayoutExportFileFormat::NC);// No support for now
     if (m_mode != Draw::Layout)
