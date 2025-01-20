@@ -22726,7 +22726,7 @@ Do you want to save your changes?</source>
     <message>
         <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="526"/>
         <source>Failed to read %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Не вдалося прочитати %1</translation>
     </message>
     <message>
         <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="740"/>
