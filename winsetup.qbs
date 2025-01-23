@@ -78,7 +78,8 @@ InnoSetup {
         "MyAppArchitecture=" + arhitecture,
         "MyAppMinWinVersion=" + minVersion,
         "buildDirectory=" + project.qbs.installRoot,
-        "DependencyVCRedist=" + vc_redist
+        "DependencyVCRedist=" + vc_redist,
+        "InnoLanguagesPath=" + project.sourceDirectory + "/dist/win/inno/Languages"
     ]
     innosetup.compilerFlags: ["/V9"]
 
