@@ -6250,34 +6250,34 @@ Aplicar características de todos modos?</translation>
         <translation>Sin imagen</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/dialogs/dialogpatternproperties.cpp" line="388"/>
+        <location filename="../../src/app/valentina/dialogs/dialogpatternproperties.cpp" line="386"/>
         <source>Delete image</source>
         <translation>Borrar imagen</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/dialogs/dialogpatternproperties.cpp" line="389"/>
-        <location filename="../../src/app/valentina/dialogs/dialogpatternproperties.cpp" line="397"/>
+        <location filename="../../src/app/valentina/dialogs/dialogpatternproperties.cpp" line="387"/>
+        <location filename="../../src/app/valentina/dialogs/dialogpatternproperties.cpp" line="395"/>
         <source>Change image</source>
         <translation>Cambiar imagen</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/dialogs/dialogpatternproperties.cpp" line="390"/>
+        <location filename="../../src/app/valentina/dialogs/dialogpatternproperties.cpp" line="388"/>
         <source>Save image to file</source>
         <translation>Guardar imagen a un archivo</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/dialogs/dialogpatternproperties.cpp" line="391"/>
+        <location filename="../../src/app/valentina/dialogs/dialogpatternproperties.cpp" line="389"/>
         <source>Show image</source>
         <translation>Mostrar imagen</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/dialogs/dialogpatternproperties.cpp" line="428"/>
+        <location filename="../../src/app/valentina/dialogs/dialogpatternproperties.cpp" line="426"/>
         <source>Image for pattern</source>
         <translation>Imagen para el patrón</translation>
     </message>
     <message>
+        <location filename="../../src/app/valentina/dialogs/dialogpatternproperties.cpp" line="542"/>
         <location filename="../../src/app/valentina/dialogs/dialogpatternproperties.cpp" line="544"/>
-        <location filename="../../src/app/valentina/dialogs/dialogpatternproperties.cpp" line="546"/>
         <source>Label template</source>
         <translation>Pantilla de etiqueta</translation>
     </message>
@@ -6294,7 +6294,7 @@ Aplicar características de todos modos?</translation>
         <translation type="vanished">Guardar Archivo</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/dialogs/dialogpatternproperties.cpp" line="471"/>
+        <location filename="../../src/app/valentina/dialogs/dialogpatternproperties.cpp" line="469"/>
         <source>untitled</source>
         <translation>sin título</translation>
     </message>
@@ -6393,23 +6393,23 @@ Aplicar características de todos modos?</translation>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/dialogs/dialogpatternproperties.cpp" line="441"/>
+        <location filename="../../src/app/valentina/dialogs/dialogpatternproperties.cpp" line="439"/>
         <source>Invalid image. Error: %1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/dialogs/dialogpatternproperties.cpp" line="464"/>
-        <location filename="../../src/app/valentina/dialogs/dialogpatternproperties.cpp" line="495"/>
+        <location filename="../../src/app/valentina/dialogs/dialogpatternproperties.cpp" line="462"/>
+        <location filename="../../src/app/valentina/dialogs/dialogpatternproperties.cpp" line="493"/>
         <source>Unable to save image. Error: %1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/dialogs/dialogpatternproperties.cpp" line="479"/>
+        <location filename="../../src/app/valentina/dialogs/dialogpatternproperties.cpp" line="477"/>
         <source>Save Image</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/dialogs/dialogpatternproperties.cpp" line="507"/>
+        <location filename="../../src/app/valentina/dialogs/dialogpatternproperties.cpp" line="505"/>
         <source>Unable to show image. Error: %1</source>
         <translation type="unfinished"></translation>
     </message>
