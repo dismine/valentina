@@ -101,9 +101,7 @@ DialogPatternProperties::DialogPatternProperties(VPattern *doc, VContainer *patt
         ui->comboBoxLabelLanguage->addItem(QLocale(name).nativeLanguageName(), name);
     }
 
-    if (int const index = ui->comboBoxLabelLanguage->findData(
-            VAbstractValApplication::VApp()->ValentinaSettings()->GetLabelLanguage());
-        index != -1)
+    if (int const index = ui->comboBoxLabelLanguage->findData(m_doc->GetLabelPrefix()); index != -1)
     {
         ui->comboBoxLabelLanguage->setCurrentIndex(index);
     }
