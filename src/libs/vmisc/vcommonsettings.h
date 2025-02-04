@@ -75,6 +75,9 @@ public:
     auto GetPathManualLayouts() const -> QString;
     void SetPathManualLayouts(const QString &value);
 
+    auto GetPathLayoutExport() const -> QString;
+    void SetPathLayoutExport(const QString &value);
+
     auto GetPathCustomImage() const -> QString;
     void SetPathCustomImage(const QString &value);
 

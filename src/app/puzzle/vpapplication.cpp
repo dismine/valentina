@@ -609,6 +609,7 @@ auto VPApplication::event(QEvent *e) -> bool
                 if (VPMainWindow *mw = MainWindow(); mw != nullptr)
                 {
                     mw->LoadFile(macFileOpen); // open file in existing window
+                    PuzzleSettings()->SetPathManualLayouts(QFileInfo(macFileOpen).absolutePath());
                 }
                 return true;
             }
@@ -752,7 +753,7 @@ auto VPApplication::StartWithFiles(const VPCommandLinePtr &cmd, const QStringLis
             if (not rawLayouts.isEmpty())
             {
                 // Maybe already opened
-                QList<VPMainWindow *> list = VPApplication::VApp()->MainWindows();
+                QList<VPMainWindow *> list = MainWindows();
                 auto w = std::find_if(list.begin(), list.end(),
                                       [arg](VPMainWindow *window) { return window->CurrentFile() == arg; });
                 if (w != list.end())
@@ -762,6 +763,10 @@ auto VPApplication::StartWithFiles(const VPCommandLinePtr &cmd, const QStringLis
                 }
             }
             continue;
+        }
+        else
+        {
+            PuzzleSettings()->SetPathManualLayouts(QFileInfo(arg).absolutePath());
         }
 
         if (not rawLayouts.isEmpty())

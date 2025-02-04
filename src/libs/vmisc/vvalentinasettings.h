@@ -55,9 +55,6 @@ public:
     auto GetLabelLanguage() const -> QString;
     void SetLabelLanguage(const QString &value);
 
-    auto GetPathLayout() const -> QString;
-    void SetPathLayout(const QString &value);
-
     auto GetPathLabelTemplate() const -> QString;
     void SetPathLabelTemplate(const QString &value);
 

@@ -132,10 +132,12 @@ DialogSaveManualLayout::DialogSaveManualLayout(vsizetype count, bool consoleExpo
     connect(ui->comboBoxFormat, QOverload<int>::of(&QComboBox::currentIndexChanged), this,
             &DialogSaveManualLayout::ShowExample);
 
-    connect(ui->pushButtonBrowse, &QPushButton::clicked, this,
+    connect(ui->pushButtonBrowse,
+            &QPushButton::clicked,
+            this,
             [this]()
             {
-                const QString dirPath = VPApplication::VApp()->PuzzleSettings()->GetPathManualLayouts();
+                const QString dirPath = VPApplication::VApp()->PuzzleSettings()->GetPathLayoutExport();
 
                 const QString dir = QFileDialog::getExistingDirectory(
                     this, tr("Select folder"), dirPath,
@@ -145,12 +147,12 @@ DialogSaveManualLayout::DialogSaveManualLayout(vsizetype count, bool consoleExpo
                 { // If paths equal the signal will not be called, we will do this manually
                     dir == ui->lineEditPath->text() ? PathChanged(dir) : ui->lineEditPath->setText(dir);
 
-                    VPApplication::VApp()->PuzzleSettings()->SetPathManualLayouts(dir);
+                    VPApplication::VApp()->PuzzleSettings()->SetPathLayoutExport(dir);
                 }
             });
     connect(ui->lineEditPath, &QLineEdit::textChanged, this, &DialogSaveManualLayout::PathChanged);
 
-    ui->lineEditPath->setText(VPApplication::VApp()->PuzzleSettings()->GetPathManualLayouts());
+    ui->lineEditPath->setText(VPApplication::VApp()->PuzzleSettings()->GetPathLayoutExport());
 
     ReadSettings();
 

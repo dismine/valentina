@@ -64,7 +64,6 @@ Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingConfigurationUseToolGroups, ("co
 Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingAutoRefreshPatternMessage,
                           ("configuration/autoRefreshPatternMessage"_L1))
 
-Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingPathsLayout, ("paths/layout"_L1))        // NOLINT
 Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingPathsLabelTemplate, ("paths/labels"_L1)) // NOLINT
 
 // NOLINTNEXTLINE
@@ -214,21 +213,6 @@ auto VValentinaSettings::GetLabelLanguage() const -> QString
 void VValentinaSettings::SetLabelLanguage(const QString &value)
 {
     setValue(*settingConfigurationLabelLanguage, value);
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-auto VValentinaSettings::GetPathLayout() const -> QString
-{
-    QSettings const settings(this->format(), this->scope(), this->organizationName(), this->applicationName());
-    return settings.value(*settingPathsLayout, QDir::homePath()).toString();
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-void VValentinaSettings::SetPathLayout(const QString &value)
-{
-    QSettings settings(this->format(), this->scope(), this->organizationName(), this->applicationName());
-    settings.setValue(*settingPathsLayout, value);
-    settings.sync();
 }
 
 //---------------------------------------------------------------------------------------------------------------------

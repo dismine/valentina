@@ -134,7 +134,7 @@ DialogSaveLayout::DialogSaveLayout(int count, Draw mode, const QString &fileName
             [this]()
             {
                 VValentinaSettings *settings = VAbstractValApplication::VApp()->ValentinaSettings();
-                const QString dirPath = settings->GetPathLayout();
+                const QString dirPath = settings->GetPathLayoutExport();
 
                 const QString dir = QFileDialog::getExistingDirectory(
                     this, tr("Select folder"), dirPath,
@@ -144,12 +144,12 @@ DialogSaveLayout::DialogSaveLayout(int count, Draw mode, const QString &fileName
                 { // If paths equal the signal will not be called, we will do this manually
                     dir == ui->lineEditPath->text() ? PathChanged(dir) : ui->lineEditPath->setText(dir);
 
-                    settings->SetPathLayout(dir);
+                    settings->SetPathLayoutExport(dir);
                 }
             });
     connect(ui->lineEditPath, &QLineEdit::textChanged, this, &DialogSaveLayout::PathChanged);
 
-    ui->lineEditPath->setText(VAbstractValApplication::VApp()->ValentinaSettings()->GetPathLayout());
+    ui->lineEditPath->setText(VAbstractValApplication::VApp()->ValentinaSettings()->GetPathLayoutExport());
 
     InitTileTemplates(ui->comboBoxTemplates);
 
@@ -476,7 +476,7 @@ void DialogSaveLayout::Save()
 
     if (QFile::exists(Path()))
     {
-        VAbstractValApplication::VApp()->ValentinaSettings()->SetPathLayout(Path());
+        VAbstractValApplication::VApp()->ValentinaSettings()->SetPathLayoutExport(Path());
     }
 
     accept();

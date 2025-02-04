@@ -92,6 +92,7 @@ Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingPathsIndividualMeasurements, ("p
 Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingPathsMultisizeMeasurements, ("paths/standard_measurements"_L1))
 Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingPathsPattern, ("paths/pattern"_L1))                         // NOLINT
 Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingPathsManualLayouts, ("paths/manualLayouts"_L1))             // NOLINT
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingPathsLayoutExport, ("paths/layoutExport"_L1))               // NOLINT
 Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingPathsCustomImage, ("paths/customImage"_L1))                 // NOLINT
 Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingPathsSVGFonts, ("paths/svgFonts"_L1))                       // NOLINT
 Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingPathsFontCorrections, ("paths/fontCorrections"_L1))         // NOLINT
@@ -326,6 +327,21 @@ void VCommonSettings::SetPathManualLayouts(const QString &value)
 {
     QSettings settings(this->format(), this->scope(), this->organizationName(), *commonIniFilename);
     settings.setValue(*settingPathsManualLayouts, value);
+    settings.sync();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+auto VCommonSettings::GetPathLayoutExport() const -> QString
+{
+    QSettings const settings(this->format(), this->scope(), this->organizationName(), *commonIniFilename);
+    return settings.value(*settingPathsLayoutExport, QDir::homePath()).toString();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VCommonSettings::SetPathLayoutExport(const QString &value)
+{
+    QSettings settings(this->format(), this->scope(), this->organizationName(), *commonIniFilename);
+    settings.setValue(*settingPathsLayoutExport, value);
     settings.sync();
 }
 

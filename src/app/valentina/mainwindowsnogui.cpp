@@ -558,7 +558,7 @@ void MainWindowsNoGUI::ExportFlatLayout(const QList<QGraphicsScene *> &scenes, c
         return;
     }
 
-    VAbstractValApplication::VApp()->ValentinaSettings()->SetPathLayout(path);
+    VAbstractValApplication::VApp()->ValentinaSettings()->SetPathLayoutExport(path);
 
     if (const LayoutExportFormats format = m_dialogSaveLayout->Format();
         format == LayoutExportFormats::PDFTiled && m_dialogSaveLayout->Mode() == Draw::Layout)
@@ -663,7 +663,7 @@ void MainWindowsNoGUI::ExportApparelLayout(const QVector<VLayoutPiece> &details,
     }
 
     VValentinaSettings *settings = VAbstractValApplication::VApp()->ValentinaSettings();
-    settings->SetPathLayout(path);
+    settings->SetPathLayoutExport(path);
     const LayoutExportFormats format = m_dialogSaveLayout->Format();
 
     QT_WARNING_PUSH

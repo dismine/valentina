@@ -36,6 +36,7 @@
 - Fix broken seam allowance.
 - Added Croatian, Hungarian, Portuguese and Japanese languages.
 - Fix incorrect label language in pattern properties.
+- Remember last selected manual layout separately from last export path.
 
 # Valentina 0.7.53 June 25, 2024
 - Fix layout sheet export with empty name.

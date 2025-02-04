@@ -706,6 +706,8 @@ void VPMainWindow::SetupMenu()
                             {
                                 VPApplication::VApp()->NewMainWindow()->LoadFile(filePath);
                             }
+                            VPApplication::VApp()->PuzzleSettings()->SetPathManualLayouts(
+                                QFileInfo(filePath).absolutePath());
                         }
                     }
                 });
@@ -2413,7 +2415,7 @@ void VPMainWindow::ExportApparelLayout(const VPExportData &data, const QVector<V
     }
 
     VPSettings *settings = VPApplication::VApp()->PuzzleSettings();
-    settings->SetPathManualLayouts(path);
+    settings->SetPathLayoutExport(path);
 
     QT_WARNING_PUSH
     QT_WARNING_DISABLE_GCC("-Wnoexcept")
@@ -2479,7 +2481,7 @@ void VPMainWindow::ExportFlatLayout(const VPExportData &data)
 
     m_layout->RefreshScenePieces();
 
-    VPApplication::VApp()->PuzzleSettings()->SetPathManualLayouts(path);
+    VPApplication::VApp()->PuzzleSettings()->SetPathLayoutExport(path);
 
     if (data.format == LayoutExportFormats::PDFTiled)
     {
@@ -3737,7 +3739,7 @@ void VPMainWindow::on_actionOpen_triggered()
     qCDebug(pWindow, "Openning puzzle layout file.");
 
     const QString filter(tr("Layout files") + QStringLiteral(" (*.vlt)"));
-    // Use standard path to individual measurements
+    // Use standard path to anual layouts
     const QString pathTo = VPApplication::VApp()->PuzzleSettings()->GetPathManualLayouts();
 
     const QString mPath = QFileDialog::getOpenFileName(this, tr("Open file"), pathTo, filter, nullptr,
