@@ -43,29 +43,32 @@
 // Fix bug in Qt. Deprecation warning in QMessageBox::critical.
 #if QT_VERSION >= QT_VERSION_CHECK(6, 2, 0) && QT_VERSION < QT_VERSION_CHECK(6, 6, 0)
 #undef QT_REQUIRE_VERSION
-#define QT_REQUIRE_VERSION(argc, argv, str)                                                                            \
-    {                                                                                                                  \
-        QString s = QString::fromLatin1(str);                                                                          \
-        QString sq = QString::fromLatin1(qVersion());                                                                  \
-        if ((sq.section(QChar::fromLatin1('.'), 0, 0).toInt() << 16) +                                                 \
-                (sq.section(QChar::fromLatin1('.'), 1, 1).toInt() << 8) +                                              \
-                sq.section(QChar::fromLatin1('.'), 2, 2).toInt() <                                                     \
-            (s.section(QChar::fromLatin1('.'), 0, 0).toInt() << 16) +                                                  \
-                (s.section(QChar::fromLatin1('.'), 1, 1).toInt() << 8) +                                               \
-                s.section(QChar::fromLatin1('.'), 2, 2).toInt())                                                       \
-        {                                                                                                              \
-            if (!qApp)                                                                                                 \
-            {                                                                                                          \
-                new QApplication(argc, argv);                                                                          \
-            }                                                                                                          \
-            QString s = QApplication::tr("Executable '%1' requires Qt %2, found Qt %3.")                               \
-                            .arg(qAppName())                                                                           \
-                            .arg(QString::fromLatin1(str))                                                             \
-                            .arg(QString::fromLatin1(qVersion()));                                                     \
-            QMessageBox::critical(0, QApplication::tr("Incompatible Qt Library Error"), s, QMessageBox::Abort,         \
-                                  static_cast<QMessageBox::StandardButton>(0));                                        \
-            qFatal("%s", s.toLatin1().data());                                                                         \
-        }                                                                                                              \
+#define QT_REQUIRE_VERSION(argc, argv, str) \
+    { \
+        QString s = QString::fromLatin1(str); \
+        QString sq = QString::fromLatin1(qVersion()); \
+        if ((sq.section(QChar::fromLatin1('.'), 0, 0).toInt() << 16) \
+                + (sq.section(QChar::fromLatin1('.'), 1, 1).toInt() << 8) \
+                + sq.section(QChar::fromLatin1('.'), 2, 2).toInt() \
+            < (s.section(QChar::fromLatin1('.'), 0, 0).toInt() << 16) \
+                  + (s.section(QChar::fromLatin1('.'), 1, 1).toInt() << 8) \
+                  + s.section(QChar::fromLatin1('.'), 2, 2).toInt()) \
+        { \
+            if (!qApp) \
+            { \
+                new QApplication(argc, argv); \
+            } \
+            QString s = QApplication::tr("Executable '%1' requires Qt %2, found Qt %3.") \
+                            .arg(qAppName()) \
+                            .arg(QString::fromLatin1(str)) \
+                            .arg(QString::fromLatin1(qVersion())); \
+            QMessageBox::critical(nullptr, \
+                                  QApplication::tr("Incompatible Qt Library Error"), \
+                                  s, \
+                                  QMessageBox::Abort, \
+                                  static_cast<QMessageBox::StandardButton>(0)); \
+            qFatal("%s", s.toLatin1().data()); \
+        } \
     }
 #endif
 
