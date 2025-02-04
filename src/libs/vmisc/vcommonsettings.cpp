@@ -278,7 +278,7 @@ auto VCommonSettings::GetPathIndividualMeasurements() const -> QString
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VCommonSettings::SetPathIndividualMeasurements(const QString &value)
+void VCommonSettings::SetPathIndividualMeasurements(const QString &value) const
 {
     QSettings settings(this->format(), this->scope(), this->organizationName(), *commonIniFilename);
     settings.setValue(*settingPathsIndividualMeasurements, value);
@@ -293,7 +293,7 @@ auto VCommonSettings::GetPathMultisizeMeasurements() const -> QString
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VCommonSettings::SetPathMultisizeMeasurements(const QString &value)
+void VCommonSettings::SetPathMultisizeMeasurements(const QString &value) const
 {
     QSettings settings(this->format(), this->scope(), this->organizationName(), *commonIniFilename);
     settings.setValue(*settingPathsMultisizeMeasurements, value);
@@ -308,7 +308,7 @@ auto VCommonSettings::GetPathPattern() const -> QString
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VCommonSettings::SetPathPattern(const QString &value)
+void VCommonSettings::SetPathPattern(const QString &value) const
 {
     QSettings settings(this->format(), this->scope(), this->organizationName(), *commonIniFilename);
     settings.setValue(*settingPathsPattern, value);
@@ -323,7 +323,7 @@ auto VCommonSettings::GetPathManualLayouts() const -> QString
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VCommonSettings::SetPathManualLayouts(const QString &value)
+void VCommonSettings::SetPathManualLayouts(const QString &value) const
 {
     QSettings settings(this->format(), this->scope(), this->organizationName(), *commonIniFilename);
     settings.setValue(*settingPathsManualLayouts, value);
@@ -338,7 +338,7 @@ auto VCommonSettings::GetPathLayoutExport() const -> QString
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VCommonSettings::SetPathLayoutExport(const QString &value)
+void VCommonSettings::SetPathLayoutExport(const QString &value) const
 {
     QSettings settings(this->format(), this->scope(), this->organizationName(), *commonIniFilename);
     settings.setValue(*settingPathsLayoutExport, value);
@@ -353,7 +353,7 @@ auto VCommonSettings::GetPathCustomImage() const -> QString
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VCommonSettings::SetPathCustomImage(const QString &value)
+void VCommonSettings::SetPathCustomImage(const QString &value) const
 {
     QSettings settings(this->format(), this->scope(), this->organizationName(), *commonIniFilename);
     settings.setValue(*settingPathsCustomImage, value);
@@ -427,7 +427,7 @@ auto VCommonSettings::GetPathFontCorrections() const -> QString
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VCommonSettings::SetPathFontCorrections(const QString &value)
+void VCommonSettings::SetPathFontCorrections(const QString &value) const
 {
     QSettings settings(this->format(), this->scope(), this->organizationName(), *commonIniFilename);
     settings.setValue(*settingPathsFontCorrections, value);
@@ -657,7 +657,7 @@ auto VCommonSettings::GetThemeMode() const -> VThemeMode
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VCommonSettings::SetThemeMode(VThemeMode mode)
+void VCommonSettings::SetThemeMode(VThemeMode mode) const
 {
     QSettings settings(this->format(), this->scope(), this->organizationName(), *commonIniFilename);
     settings.setValue(*settingConfigurationThemeMode, static_cast<int>(mode));
@@ -895,7 +895,7 @@ auto VCommonSettings::IsAutomaticallyCheckUpdates() const -> bool
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VCommonSettings::SetAutomaticallyCheckUpdates(bool value)
+void VCommonSettings::SetAutomaticallyCheckUpdates(bool value) const
 {
     QSettings settings(this->format(), this->scope(), this->organizationName(), *commonIniFilename);
     settings.setValue(*settingAutomaticallyCheckUpdates, value);
@@ -910,7 +910,7 @@ auto VCommonSettings::GetLatestSkippedVersion() const -> unsigned
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VCommonSettings::SetLatestSkippedVersion(unsigned value)
+void VCommonSettings::SetLatestSkippedVersion(unsigned value) const
 {
     QSettings settings(this->format(), this->scope(), this->organizationName(), *commonIniFilename);
     settings.setValue(*settingLatestSkippedVersion, value);
@@ -925,7 +925,7 @@ auto VCommonSettings::GetDateOfLastRemind() const -> QDate
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VCommonSettings::SetDateOfLastRemind(const QDate &date)
+void VCommonSettings::SetDateOfLastRemind(const QDate &date) const
 {
     QSettings settings(this->format(), this->scope(), this->organizationName(), *commonIniFilename);
     settings.setValue(*settingDateOfLastRemind, date);
@@ -1003,7 +1003,7 @@ void VCommonSettings::SetDoublePassmark(bool value)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VCommonSettings::SetCSVWithHeader(bool withHeader)
+void VCommonSettings::SetCSVWithHeader(bool withHeader) const
 {
     QSettings settings(this->format(), this->scope(), this->organizationName(), *commonIniFilename);
     settings.setValue(*settingCSVWithHeader, withHeader);
@@ -1023,7 +1023,7 @@ auto VCommonSettings::GetDefCSVWithHeader() -> bool
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VCommonSettings::SetCSVCodec(int mib)
+void VCommonSettings::SetCSVCodec(int mib) const
 {
     QSettings settings(this->format(), this->scope(), this->organizationName(), *commonIniFilename);
     settings.setValue(*settingCSVCodec, mib);
@@ -1043,7 +1043,7 @@ auto VCommonSettings::GetDefCSVCodec() -> int
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VCommonSettings::SetCSVSeparator(const QChar &separator)
+void VCommonSettings::SetCSVSeparator(const QChar &separator) const
 {
     QSettings settings(this->format(), this->scope(), this->organizationName(), *commonIniFilename);
     switch (separator.toLatin1())
@@ -1429,7 +1429,7 @@ auto VCommonSettings::IsDontUseNativeDialog() const -> bool
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VCommonSettings::SetDontUseNativeDialog(bool value)
+void VCommonSettings::SetDontUseNativeDialog(bool value) const
 {
     QSettings settings(this->format(), this->scope(), this->organizationName(), *commonIniFilename);
     settings.setValue(*settingConfigurationDontUseNativeDialog, value);
@@ -1476,7 +1476,7 @@ auto VCommonSettings::GetScrollingDuration() const -> int
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VCommonSettings::SetScrollingDuration(int duration)
+void VCommonSettings::SetScrollingDuration(int duration) const
 {
     scrollingDurationCached = qBound(scrollingDurationMin, duration, scrollingDurationMax);
     QSettings settings(this->format(), this->scope(), this->organizationName(), *commonIniFilename);
@@ -1493,7 +1493,7 @@ auto VCommonSettings::GetScrollingUpdateInterval() const -> int
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VCommonSettings::SetScrollingUpdateInterval(int updateInterval)
+void VCommonSettings::SetScrollingUpdateInterval(int updateInterval) const
 {
     scrollingUpdateIntervalCached = qBound(scrollingUpdateIntervalMin, updateInterval, scrollingUpdateIntervalMax);
     QSettings settings(this->format(), this->scope(), this->organizationName(), *commonIniFilename);
@@ -1510,7 +1510,7 @@ auto VCommonSettings::GetSensorMouseScale() const -> qreal
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VCommonSettings::SetSensorMouseScale(qreal scale)
+void VCommonSettings::SetSensorMouseScale(qreal scale) const
 {
     scrollingSensorMouseScaleCached = qBound(sensorMouseScaleMin, scale, sensorMouseScaleMax);
     QSettings settings(this->format(), this->scope(), this->organizationName(), *commonIniFilename);
@@ -1527,7 +1527,7 @@ auto VCommonSettings::GetWheelMouseScale() const -> qreal
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VCommonSettings::SetWheelMouseScale(qreal scale)
+void VCommonSettings::SetWheelMouseScale(qreal scale) const
 {
     scrollingWheelMouseScaleCached = qBound(wheelMouseScaleMin, scale, wheelMouseScaleMax);
     QSettings settings(this->format(), this->scope(), this->organizationName(), *commonIniFilename);
@@ -1544,7 +1544,7 @@ auto VCommonSettings::GetScrollingAcceleration() const -> qreal
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VCommonSettings::SetScrollingAcceleration(qreal acceleration)
+void VCommonSettings::SetScrollingAcceleration(qreal acceleration) const
 {
     scrollingAccelerationCached = qBound(scrollingAccelerationMin, acceleration, scrollingAccelerationMax);
     QSettings settings(this->format(), this->scope(), this->organizationName(), *commonIniFilename);
@@ -1560,7 +1560,7 @@ auto VCommonSettings::IsOpenGLRender() const -> bool
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VCommonSettings::SetOpenGLRender(bool value)
+void VCommonSettings::SetOpenGLRender(bool value) const
 {
     QSettings settings(this->format(), this->scope(), this->organizationName(), *commonIniFilename);
     settings.setValue(*settingPatternUseOpenGLRender, value);
@@ -1575,7 +1575,7 @@ auto VCommonSettings::GetGraphicalOutput() const -> bool
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VCommonSettings::SetGraphicalOutput(const bool &value)
+void VCommonSettings::SetGraphicalOutput(const bool &value) const
 {
     QSettings settings(this->format(), this->scope(), this->organizationName(), *commonIniFilename);
     settings.setValue(*settingPatternGraphicalOutput, value);
@@ -1662,7 +1662,7 @@ auto VCommonSettings::GetWatermarkCustomColors() const -> QVector<QColor>
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VCommonSettings::SetWatermarkCustomColors(QVector<QColor> colors)
+void VCommonSettings::SetWatermarkCustomColors(QVector<QColor> colors) const
 {
     QSettings settings(this->format(), this->scope(), this->organizationName(), *commonIniFilename);
 
@@ -1691,7 +1691,7 @@ auto VCommonSettings::IsAskCollectStatistic() const -> bool
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VCommonSettings::SetAskCollectStatistic(bool value)
+void VCommonSettings::SetAskCollectStatistic(bool value) const
 {
     QSettings settings(this->format(), this->scope(), this->organizationName(), *commonIniFilename);
     settings.setValue(*settingsStatistictAskCollect, value);
@@ -1706,7 +1706,7 @@ auto VCommonSettings::IsCollectStatistic() const -> bool
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VCommonSettings::SetCollectStatistic(bool value)
+void VCommonSettings::SetCollectStatistic(bool value) const
 {
     QSettings settings(this->format(), this->scope(), this->organizationName(), *commonIniFilename);
     settings.setValue(*settingsStatistictCollect, value);
@@ -1721,7 +1721,7 @@ auto VCommonSettings::GetClientID() const -> QString
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VCommonSettings::SetClientID(const QString &clientID)
+void VCommonSettings::SetClientID(const QString &clientID) const
 {
     QSettings settings(this->format(), this->scope(), this->organizationName(), *commonIniFilename);
     settings.setValue(*settingsStatistictClientID, clientID);
@@ -1736,7 +1736,7 @@ auto VCommonSettings::IsTranslateFormula() const -> bool
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VCommonSettings::SetTranslateFormula(bool value)
+void VCommonSettings::SetTranslateFormula(bool value) const
 {
     QSettings settings(this->format(), this->scope(), this->organizationName(), *commonIniFilename);
     settings.setValue(*settingsPatternTranslateFormula, value);
@@ -1752,7 +1752,7 @@ auto VCommonSettings::GetActionShortcuts(const QString &name, const QStringList 
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VCommonSettings::SetActionShortcuts(const QString &name, const QStringList &shortcuts)
+void VCommonSettings::SetActionShortcuts(const QString &name, const QStringList &shortcuts) const
 {
     QSettings settings(this->format(), this->scope(), this->organizationName(), *commonIniFilename);
     settings.beginGroup("shortcuts"_L1);

@@ -64,22 +64,22 @@ public:
     static auto CastToLayoutExportFormat(qint8 f) -> qint8;
 
     auto GetPathIndividualMeasurements() const -> QString;
-    void SetPathIndividualMeasurements(const QString &value);
+    void SetPathIndividualMeasurements(const QString &value) const;
 
     auto GetPathMultisizeMeasurements() const -> QString;
-    void SetPathMultisizeMeasurements(const QString &value);
+    void SetPathMultisizeMeasurements(const QString &value) const;
 
     auto GetPathPattern() const -> QString;
-    void SetPathPattern(const QString &value);
+    void SetPathPattern(const QString &value) const;
 
     auto GetPathManualLayouts() const -> QString;
-    void SetPathManualLayouts(const QString &value);
+    void SetPathManualLayouts(const QString &value) const;
 
     auto GetPathLayoutExport() const -> QString;
-    void SetPathLayoutExport(const QString &value);
+    void SetPathLayoutExport(const QString &value) const;
 
     auto GetPathCustomImage() const -> QString;
-    void SetPathCustomImage(const QString &value);
+    void SetPathCustomImage(const QString &value) const;
 
     static auto GetDefPathSVGFonts() -> QString;
     auto GetPathSVGFonts() const -> QString;
@@ -87,7 +87,7 @@ public:
 
     static auto GetDefPathFontCorrections() -> QString;
     auto GetPathFontCorrections() const -> QString;
-    void SetPathFontCorrections(const QString &value);
+    void SetPathFontCorrections(const QString &value) const;
 
     static auto GetDefPathKnownMeasurements() -> QString;
     auto GetPathKnownMeasurements() const -> QString;
@@ -132,7 +132,7 @@ public:
     void SetToolboxIconSizeSmall(bool value);
 
     auto GetThemeMode() const -> VThemeMode;
-    void SetThemeMode(VThemeMode mode);
+    void SetThemeMode(VThemeMode mode) const;
 
     auto IsFreeCurveMode() const -> bool;
     void SetFreeCurveMode(bool value);
@@ -186,13 +186,13 @@ public:
     void SetDialogSplinePathSize(const QSize &sz);
 
     auto IsAutomaticallyCheckUpdates() const -> bool;
-    void SetAutomaticallyCheckUpdates(bool value);
+    void SetAutomaticallyCheckUpdates(bool value) const;
 
     auto GetLatestSkippedVersion() const -> unsigned;
-    void SetLatestSkippedVersion(unsigned value);
+    void SetLatestSkippedVersion(unsigned value) const;
 
     auto GetDateOfLastRemind() const -> QDate;
-    void SetDateOfLastRemind(const QDate &date);
+    void SetDateOfLastRemind(const QDate &date) const;
 
     auto GetForbidWorkpieceFlipping() const -> bool;
     void SetForbidWorkpieceFlipping(bool value);
@@ -209,15 +209,15 @@ public:
     auto IsDoublePassmark() const -> bool;
     void SetDoublePassmark(bool value);
 
-    void SetCSVWithHeader(bool withHeader);
+    void SetCSVWithHeader(bool withHeader) const;
     auto GetCSVWithHeader() const -> bool;
     static auto GetDefCSVWithHeader() -> bool;
 
-    void SetCSVCodec(int mib);
+    void SetCSVCodec(int mib) const;
     auto GetCSVCodec() const -> int;
     static auto GetDefCSVCodec() -> int;
 
-    void SetCSVSeparator(const QChar &separator);
+    void SetCSVSeparator(const QChar &separator) const;
     auto GetCSVSeparator() const -> QChar;
     static auto GetDefCSVSeparator() -> QChar;
 
@@ -278,7 +278,7 @@ public:
     void SetPieceShowMainPath(bool value);
 
     auto IsDontUseNativeDialog() const -> bool;
-    void SetDontUseNativeDialog(bool value);
+    void SetDontUseNativeDialog(bool value) const;
 
     static auto DefaultLineWidth() -> qreal;
     static auto MinimalLineWidth() -> qreal;
@@ -299,58 +299,58 @@ public:
     static const int scrollingDurationMin;
     static const int scrollingDurationMax;
     auto GetScrollingDuration() const -> int;
-    void SetScrollingDuration(int duration);
+    void SetScrollingDuration(int duration) const;
 
     static const int defaultScrollingUpdateInterval;
     static const int scrollingUpdateIntervalMin;
     static const int scrollingUpdateIntervalMax;
     auto GetScrollingUpdateInterval() const -> int;
-    void SetScrollingUpdateInterval(int updateInterval);
+    void SetScrollingUpdateInterval(int updateInterval) const;
 
     static const qreal defaultSensorMouseScale;
     static const qreal sensorMouseScaleMin;
     static const qreal sensorMouseScaleMax;
     auto GetSensorMouseScale() const -> qreal;
-    void SetSensorMouseScale(qreal scale);
+    void SetSensorMouseScale(qreal scale) const;
 
     static const qreal defaultWheelMouseScale;
     static const qreal wheelMouseScaleMin;
     static const qreal wheelMouseScaleMax;
     auto GetWheelMouseScale() const -> qreal;
-    void SetWheelMouseScale(qreal scale);
+    void SetWheelMouseScale(qreal scale) const;
 
     static const qreal defaultScrollingAcceleration;
     static const qreal scrollingAccelerationMin;
     static const qreal scrollingAccelerationMax;
     auto GetScrollingAcceleration() const -> qreal;
-    void SetScrollingAcceleration(qreal acceleration);
+    void SetScrollingAcceleration(qreal acceleration) const;
 
     auto IsOpenGLRender() const -> bool;
-    void SetOpenGLRender(bool value);
+    void SetOpenGLRender(bool value) const;
 
     auto GetGraphicalOutput() const -> bool;
-    void SetGraphicalOutput(const bool &value);
+    void SetGraphicalOutput(const bool &value) const;
 
     auto GetWatermarkEditorSize() const -> QSize;
     void SetWatermarkEditorSize(const QSize &sz);
 
     auto GetWatermarkCustomColors() const -> QVector<QColor>;
-    void SetWatermarkCustomColors(QVector<QColor> colors);
+    void SetWatermarkCustomColors(QVector<QColor> colors) const;
 
     auto IsAskCollectStatistic() const -> bool;
-    void SetAskCollectStatistic(bool value);
+    void SetAskCollectStatistic(bool value) const;
 
     auto IsCollectStatistic() const -> bool;
-    void SetCollectStatistic(bool value);
+    void SetCollectStatistic(bool value) const;
 
     auto GetClientID() const -> QString;
-    void SetClientID(const QString &clientID);
+    void SetClientID(const QString &clientID) const;
 
     auto IsTranslateFormula() const -> bool;
-    void SetTranslateFormula(bool value);
+    void SetTranslateFormula(bool value) const;
 
     auto GetActionShortcuts(const QString &name, const QStringList &defaultShortcuts) -> QStringList;
-    void SetActionShortcuts(const QString &name, const QStringList &shortcuts);
+    void SetActionShortcuts(const QString &name, const QStringList &shortcuts) const;
 
     auto GetCrashEmail() const -> QString;
     void SetCrashEmail(const QString &value) const;
