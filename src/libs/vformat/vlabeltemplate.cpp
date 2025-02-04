@@ -54,7 +54,7 @@ void VLabelTemplate::CreateEmptyTemplate()
 void VLabelTemplate::AddLines(const QVector<VLabelTemplateLine> &lines)
 {
     const QDomNodeList listLines = elementsByTagName(TagLines);
-    if (listLines.size() == 0)
+    if (listLines.isEmpty())
     {
         return;
     }
@@ -67,7 +67,7 @@ void VLabelTemplate::AddLines(const QVector<VLabelTemplateLine> &lines)
 auto VLabelTemplate::ReadLines() const -> QVector<VLabelTemplateLine>
 {
     const QDomNodeList listLines = elementsByTagName(TagLines);
-    if (listLines.size() == 0)
+    if (listLines.isEmpty())
     {
         return QVector<VLabelTemplateLine>();
     }

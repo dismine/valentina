@@ -3787,7 +3787,7 @@ void VPattern::SetIncrementAttribute(const QString &name, const QString &attr, c
 auto VPattern::LastDrawName() const -> QString
 {
     const QDomNodeList elements = this->documentElement().elementsByTagName(TagDraw);
-    if (elements.size() == 0)
+    if (elements.isEmpty())
     {
         return QString();
     }

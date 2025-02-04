@@ -389,7 +389,7 @@ auto VAbstractPattern::GetActivDrawElement(QDomElement &element) const -> bool
     if (nameActivPP.isEmpty() == false)
     {
         const QDomNodeList elements = this->documentElement().elementsByTagName(TagDraw);
-        if (elements.size() == 0)
+        if (elements.isEmpty())
         {
             return false;
         }
@@ -436,7 +436,7 @@ auto VAbstractPattern::CheckExistNamePP(const QString &name) const -> bool
 {
     Q_ASSERT_X(not name.isEmpty(), Q_FUNC_INFO, "name draw is empty");
     const QDomNodeList elements = this->documentElement().elementsByTagName(TagDraw);
-    if (elements.size() == 0)
+    if (elements.isEmpty())
     {
         return false;
     }
@@ -548,7 +548,7 @@ auto VAbstractPattern::GetPPElement(const QString &name) -> QDomElement
     if (not name.isEmpty())
     {
         const QDomNodeList elements = this->documentElement().elementsByTagName(TagDraw);
-        if (elements.size() == 0)
+        if (elements.isEmpty())
         {
             return QDomElement();
         }
@@ -1185,7 +1185,7 @@ auto VAbstractPattern::GetPatternLabelTemplate() const -> QVector<VLabelTemplate
     if (patternLabelLines.isEmpty())
     {
         const QDomNodeList list = elementsByTagName(TagPatternLabel);
-        if (list.isEmpty() || list.at(0).childNodes().count() == 0)
+        if (list.isEmpty() || list.at(0).childNodes().isEmpty())
         {
             return QVector<VLabelTemplateLine>();
         }
@@ -1252,7 +1252,7 @@ auto VAbstractPattern::GetPatternMaterials() const -> QMap<int, QString>
     if (patternMaterials.isEmpty())
     {
         const QDomNodeList list = elementsByTagName(TagPatternMaterials);
-        if (list.isEmpty() || list.at(0).childNodes().count() == 0)
+        if (list.isEmpty() || list.at(0).childNodes().isEmpty())
         {
             return QMap<int, QString>();
         }
@@ -1267,7 +1267,7 @@ auto VAbstractPattern::GetPatternMaterials() const -> QMap<int, QString>
 auto VAbstractPattern::GetFinalMeasurements() const -> QVector<VFinalMeasurement>
 {
     const QDomNodeList list = elementsByTagName(TagFinalMeasurements);
-    if (list.isEmpty() || list.at(0).childNodes().count() == 0)
+    if (list.isEmpty() || list.at(0).childNodes().isEmpty())
     {
         return QVector<VFinalMeasurement>();
     }
@@ -1501,7 +1501,7 @@ void VAbstractPattern::DeleteBackgroundImage(const QUuid &id)
                 {
                     imagesTag.removeChild(imageElement);
 
-                    if (imagesTag.childNodes().size() == 0)
+                    if (imagesTag.childNodes().isEmpty())
                     {
                         QDomNode parent = imagesTag.parentNode();
                         if (not parent.isNull())
