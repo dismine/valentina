@@ -486,7 +486,7 @@ void DialogSetupMultisize::InitDimensionMinMax(QDoubleSpinBox *doubleSpinBoxMinV
 
     doubleSpinBoxMinValue->blockSignals(true);
     doubleSpinBoxMinValue->setSuffix(unitStr);
-    doubleSpinBoxMinValue->setDecimals(dimension->Units() == Unit::Mm ? 0 : 1);
+    doubleSpinBoxMinValue->setDecimals(dimension->Decimals());
     doubleSpinBoxMinValue->setMinimum(m && fc ? dimension->RangeMin() * 2 : dimension->RangeMin());
     doubleSpinBoxMinValue->setMaximum(m && fc ? dimension->MaxValue() * 2 : dimension->MaxValue());
     doubleSpinBoxMinValue->setValue(m && fc ? dimension->MinValue() * 2 : dimension->MinValue());
@@ -494,7 +494,7 @@ void DialogSetupMultisize::InitDimensionMinMax(QDoubleSpinBox *doubleSpinBoxMinV
 
     doubleSpinBoxMaxValue->blockSignals(true);
     doubleSpinBoxMaxValue->setSuffix(unitStr);
-    doubleSpinBoxMaxValue->setDecimals(dimension->Units() == Unit::Mm ? 0 : 1);
+    doubleSpinBoxMaxValue->setDecimals(dimension->Decimals());
     doubleSpinBoxMaxValue->setMinimum(m && fc ? dimension->MinValue() * 2 : dimension->MinValue());
     doubleSpinBoxMaxValue->setMaximum(m && fc ? dimension->RangeMax() * 2 : dimension->RangeMax());
     doubleSpinBoxMaxValue->setValue(m && fc ? dimension->RangeMax() * 2 : dimension->RangeMax());

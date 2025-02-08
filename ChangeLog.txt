@@ -37,6 +37,7 @@
 - Added Croatian, Hungarian, Portuguese and Japanese languages.
 - Fix incorrect label language in pattern properties.
 - Remember last selected manual layout separately from last export path.
+- Increase precision for multisize table's dimensions to hold converted values from inches.
 
 # Valentina 0.7.53 June 25, 2024
 - Fix layout sheet export with empty name.

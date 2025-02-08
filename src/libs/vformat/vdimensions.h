@@ -134,11 +134,13 @@ public:
 
     auto Units() const -> Unit;
 
+    auto Decimals() const -> int;
+
     auto IsBodyMeasurement() const -> bool;
     void SetBodyMeasurement(bool measurement);
 
-    auto RangeMin() const -> int;
-    auto RangeMax() const -> int;
+    auto RangeMin() const -> qreal;
+    auto RangeMax() const -> qreal;
 
     virtual auto Axis() const -> QChar = 0;
 

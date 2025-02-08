@@ -54,13 +54,28 @@ auto VAbstartMeasurementDimension::IsValid() -> bool
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-auto VAbstartMeasurementDimension::RangeMin() const -> int
+auto VAbstartMeasurementDimension::Decimals() const -> int
+{
+    if (m_units == Unit::Mm)
+    {
+        return 2;
+    }
+    else if (m_units == Unit::Inch)
+    {
+        return 5;
+    }
+
+    return 3;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+auto VAbstartMeasurementDimension::RangeMin() const -> qreal
 {
     if (m_measurement)
     {
-        const int rangeMinCm = 10;
-        const int rangeMinMm = 100;
-        const int rangeMinInch = 4;
+        const qreal rangeMinCm = 1;
+        const qreal rangeMinMm = 10;
+        const qreal rangeMinInch = 2.54;
 
         switch (Units())
         {
@@ -79,13 +94,13 @@ auto VAbstartMeasurementDimension::RangeMin() const -> int
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-auto VAbstartMeasurementDimension::RangeMax() const -> int
+auto VAbstartMeasurementDimension::RangeMax() const -> qreal
 {
     if (m_measurement)
     {
-        const int rangeMaxCm = 272;
-        const int rangeMaxMm = 2720;
-        const int rangeMaxInch = 107;
+        const qreal rangeMaxCm = 272;
+        const qreal rangeMaxMm = 2720;
+        const qreal rangeMaxInch = 107.09;
 
         switch (Units())
         {
@@ -100,7 +115,7 @@ auto VAbstartMeasurementDimension::RangeMax() const -> int
         }
     }
 
-    return 100;
+    return 272;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -121,7 +136,16 @@ auto VAbstartMeasurementDimension::ValidSteps() const -> QVector<qreal>
     }
     else if (diff > 0)
     {
-        const qreal step = (m_units == Unit::Mm ? 1 : 0.1);
+        qreal step = 0.01;
+        if (m_units == Unit::Mm)
+        {
+            step = 0.1;
+        }
+        else if (m_units == Unit::Inch)
+        {
+            step = 0.03937;
+        }
+
         const int stepsCount = qRound(diff / step);
         steps.reserve(stepsCount);
 

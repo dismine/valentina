@@ -68,7 +68,7 @@
         <item>
          <layout class="QFormLayout" name="formLayout_2">
           <property name="fieldGrowthPolicy">
-           <enum>QFormLayout::ExpandingFieldsGrow</enum>
+           <enum>QFormLayout::FieldGrowthPolicy::ExpandingFieldsGrow</enum>
           </property>
           <item row="0" column="0">
            <widget class="QLabel" name="label">
@@ -130,7 +130,7 @@
              <string>Minimal value described in the column</string>
             </property>
             <property name="decimals">
-             <number>1</number>
+             <number>3</number>
             </property>
            </widget>
           </item>
@@ -140,7 +140,7 @@
              <string>Maximal value described in the column</string>
             </property>
             <property name="decimals">
-             <number>1</number>
+             <number>3</number>
             </property>
            </widget>
           </item>
@@ -206,7 +206,7 @@
         <item>
          <layout class="QFormLayout" name="formLayout_3">
           <property name="fieldGrowthPolicy">
-           <enum>QFormLayout::ExpandingFieldsGrow</enum>
+           <enum>QFormLayout::FieldGrowthPolicy::ExpandingFieldsGrow</enum>
           </property>
           <item row="0" column="0">
            <widget class="QLabel" name="label_5">
@@ -268,7 +268,10 @@
              <string>Minimal value described in the column</string>
             </property>
             <property name="decimals">
-             <number>1</number>
+             <number>3</number>
+            </property>
+            <property name="singleStep">
+             <double>1.000000000000000</double>
             </property>
            </widget>
           </item>
@@ -278,7 +281,7 @@
              <string>Maximal value described in the column</string>
             </property>
             <property name="decimals">
-             <number>1</number>
+             <number>3</number>
             </property>
            </widget>
           </item>
@@ -344,7 +347,7 @@
         <item>
          <layout class="QFormLayout" name="formLayout_5">
           <property name="fieldGrowthPolicy">
-           <enum>QFormLayout::ExpandingFieldsGrow</enum>
+           <enum>QFormLayout::FieldGrowthPolicy::ExpandingFieldsGrow</enum>
           </property>
           <item row="0" column="0">
            <widget class="QLabel" name="label_13">
@@ -406,7 +409,7 @@
              <string>Minimal value described in the column</string>
             </property>
             <property name="decimals">
-             <number>1</number>
+             <number>3</number>
             </property>
            </widget>
           </item>
@@ -416,7 +419,7 @@
              <string>Maximal value described in the column</string>
             </property>
             <property name="decimals">
-             <number>1</number>
+             <number>3</number>
             </property>
            </widget>
           </item>
@@ -482,7 +485,7 @@
         <item>
          <layout class="QFormLayout" name="formLayout_4">
           <property name="fieldGrowthPolicy">
-           <enum>QFormLayout::ExpandingFieldsGrow</enum>
+           <enum>QFormLayout::FieldGrowthPolicy::ExpandingFieldsGrow</enum>
           </property>
           <item row="0" column="0">
            <widget class="QLabel" name="label_9">
@@ -544,7 +547,7 @@
              <string>Minimal value described in the column</string>
             </property>
             <property name="decimals">
-             <number>1</number>
+             <number>3</number>
             </property>
            </widget>
           </item>
@@ -554,7 +557,7 @@
              <string>Maximal value described in the column</string>
             </property>
             <property name="decimals">
-             <number>1</number>
+             <number>3</number>
             </property>
            </widget>
           </item>
@@ -594,10 +597,10 @@
    <item>
     <widget class="QDialogButtonBox" name="buttonBox">
      <property name="orientation">
-      <enum>Qt::Horizontal</enum>
+      <enum>Qt::Orientation::Horizontal</enum>
      </property>
      <property name="standardButtons">
-      <set>QDialogButtonBox::Cancel|QDialogButtonBox::Ok</set>
+      <set>QDialogButtonBox::StandardButton::Cancel|QDialogButtonBox::StandardButton::Ok</set>
      </property>
     </widget>
    </item>
