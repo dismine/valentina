@@ -1372,7 +1372,10 @@ public:
         hasActual = true;
         actual = value;
     }
-    auto getActualMeasurement() const -> double { return actual; }
+    auto getActualMeasurement() const -> double
+    {
+        return actual;
+    } /*!< Actual measurement (optional; read-only value), code 42 */
 
 protected:
     auto getPt2() const -> DRW_Coord { return clonePoint; }
