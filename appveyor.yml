@@ -397,7 +397,7 @@ for:
 
       sudo ln -s /usr/local /opt/local;
 
-      cache_tag=usr_local_4 # this can be modified to rebuild deps
+      cache_tag=usr_local_5 # this can be modified to rebuild deps
 
       cdir=$HOME/brew_cache_dir
       cache_tar=$cdir/$cache_tag.tar
@@ -420,13 +420,9 @@ for:
         echo "Recording /usr/local state"
         python3 ./scripts/treestate.py scan /usr/local usrlocal.json
 
+        brew unpin qbs
         brew update
-        brew install coreutils ccache git openssl@3 pkgconf qt6 cmake ninja poppler xerces-c
-
-        # Version 2.4.2. Version 2.5.0 crashes.
-        curl https://raw.githubusercontent.com/Homebrew/homebrew-core/7aa8c7a3818d7d14bbbde1ea42ffca457739c093/Formula/q/qbs.rb > qbs.rb
-        brew install --formula ./qbs.rb
-        brew pin qbs
+        brew install coreutils ccache git openssl@3 pkgconf qt6 cmake ninja poppler xerces-c qbs
 
         # The build environment is now ready for use. We can complete
         # the rest of the process of creating the Homebrew archive
