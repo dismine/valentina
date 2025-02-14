@@ -14,12 +14,16 @@
 #include "intern/drw_dbg.h"
 #include "intern/dxfreader.h"
 #include "intern/dxfwriter.h"
-#include <QScopedPointer>
+
 #include <algorithm>
 #include <cassert>
+#include <cerrno>
+#include <cstring>
+#include <filesystem>
 #include <fstream>
 #include <memory>
 #include <sstream>
+#include <QScopedPointer>
 
 #define FIRSTHANDLE 48
 
@@ -70,7 +74,7 @@ auto dxfRW::read(DRW_Interface *interface_, bool ext) -> bool
         return setError(DRW::BAD_UNKNOWN);
     }
     DRW_DBG("dxfRW::read 1def\n");
-    filestr.open(fileName.c_str(), std::ios_base::in | std::ios::binary);
+    filestr.open(std::filesystem::u8path(fileName), std::ios_base::in | std::ios::binary);
     if (!filestr.is_open() || !filestr.good())
     {
         return setError(DRW::BAD_OPEN);
@@ -86,7 +90,7 @@ auto dxfRW::read(DRW_Interface *interface_, bool ext) -> bool
     DRW_DBG("dxfRW::read 2\n");
     if (strcmp(line, line2) == 0)
     {
-        filestr.open(fileName.c_str(), std::ios_base::in | std::ios::binary);
+        filestr.open(std::filesystem::u8path(fileName), std::ios_base::in | std::ios::binary);
         binFile = true;
         // skip sentinel
         filestr.seekg(22, std::ios::beg);
@@ -96,7 +100,7 @@ auto dxfRW::read(DRW_Interface *interface_, bool ext) -> bool
     else
     {
         binFile = false;
-        filestr.open(fileName.c_str(), std::ios_base::in);
+        filestr.open(std::filesystem::u8path(fileName), std::ios_base::in);
         reader = std::make_unique<dxfReaderAscii>(&filestr);
     }
 
@@ -115,11 +119,11 @@ auto dxfRW::write(DRW_Interface *interface_, DRW::Version ver, bool bin) -> bool
     iface = interface_;
     if (binFile)
     {
-        filestr.open(fileName.c_str(), std::ios_base::out | std::ios::binary | std::ios::trunc);
+        filestr.open(std::filesystem::u8path(fileName), std::ios_base::out | std::ios::binary | std::ios::trunc);
 
         if (!filestr.is_open())
         {
-            errorString = "Error opening file!";
+            errorString = std::string("Error opening file: ") + strerror(errno);
             writer.reset();
             return false;
         }
@@ -131,11 +135,11 @@ auto dxfRW::write(DRW_Interface *interface_, DRW::Version ver, bool bin) -> bool
     }
     else
     {
-        filestr.open(fileName.c_str(), std::ios_base::out | std::ios::trunc);
+        filestr.open(std::filesystem::u8path(fileName), std::ios_base::out | std::ios::trunc);
 
         if (!filestr.is_open())
         {
-            errorString = "Error opening file!";
+            errorString = std::string("Error opening file: ") + strerror(errno);
             writer.reset();
             return false;
         }
