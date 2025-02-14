@@ -235,8 +235,7 @@ auto VAbstractArc::GetPath() const -> QPainterPath
 {
     QPainterPath path;
 
-    const QVector<QPointF> points = GetPoints();
-    if (points.count() >= 2)
+    if (const QVector<QPointF> points = GetPoints(); points.count() >= 2)
     {
         path.addPolygon(QPolygonF(points));
     }

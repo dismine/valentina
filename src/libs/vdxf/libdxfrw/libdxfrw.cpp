@@ -1093,8 +1093,8 @@ auto dxfRW::writePolyline(DRW_Polyline *ent) -> bool
     {
         writer->writeInt16(75, ent->curvetype);
     }
-    DRW_Coord const crd = ent->extPoint;
-    if (not qFuzzyIsNull(crd.x) || not qFuzzyIsNull(crd.y) || not DRW_FuzzyComparePossibleNulls(crd.z, 1))
+    if (DRW_Coord const crd = ent->extPoint;
+        not qFuzzyIsNull(crd.x) || not qFuzzyIsNull(crd.y) || not DRW_FuzzyComparePossibleNulls(crd.z, 1))
     {
         writer->writeDouble(210, crd.x);
         writer->writeDouble(220, crd.y);
@@ -1394,8 +1394,8 @@ auto dxfRW::writeDimension(DRW_Dimension *ent) -> bool
             {
                 auto *dd = static_cast<DRW_DimAligned *>(ent);
                 writer->writeString(100, "AcDbAlignedDimension");
-                DRW_Coord const crd = dd->getClonepoint();
-                if (not qFuzzyIsNull(crd.x) || not qFuzzyIsNull(crd.y) || not qFuzzyIsNull(crd.z))
+                if (DRW_Coord const crd = dd->getClonepoint();
+                    not qFuzzyIsNull(crd.x) || not qFuzzyIsNull(crd.y) || not qFuzzyIsNull(crd.z))
                 {
                     writer->writeDouble(12, crd.x);
                     writer->writeDouble(22, crd.y);
@@ -3596,13 +3596,12 @@ auto dxfRW::processDimension() -> bool
             nextentity = reader->getString();
             DRW_DBG(nextentity);
             DRW_DBG("\n");
-            int const type = dim.type & 0x0F;
 
             QT_WARNING_PUSH
             QT_WARNING_DISABLE_GCC("-Wswitch-default")
             QT_WARNING_DISABLE_CLANG("-Wswitch-default")
 
-            switch (type)
+            switch (int const type = dim.type & 0x0F; type)
             {
                 case 0:
                 {

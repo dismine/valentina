@@ -116,8 +116,7 @@ auto GetSystemMemorySize() -> qint64
 //---------------------------------------------------------------------------------------------------------------------
 auto GetSystemMemorySizeGB() -> double
 {
-    qint64 const totalMemoryBytes = GetSystemMemorySize();
-    if (totalMemoryBytes != -1)
+    if (qint64 const totalMemoryBytes = GetSystemMemorySize(); totalMemoryBytes != -1)
     {
         return static_cast<double>(totalMemoryBytes) / (1024 * 1024 * 1024); // Convert bytes to gigabytes
     }

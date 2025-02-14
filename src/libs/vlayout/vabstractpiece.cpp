@@ -138,9 +138,8 @@ auto AngleByLength(QVector<VRawSAPoint> points, QPointF p1, QPointF p2, QPointF 
     {
         QLineF const edge1(p2, p1);
         QLineF const edge2(p2, p3);
-        const qreal angle = edge1.angleTo(edge2);
 
-        if (angle > 180 && p.GetAngleType() != PieceNodeAngle::ByLengthCurve)
+        if (const qreal angle = edge1.angleTo(edge2); angle > 180 && p.GetAngleType() != PieceNodeAngle::ByLengthCurve)
         {
             if (VGObject::IsPointOnLineSegment(sp2, bigLine2.p1(), bigLine2.p2()))
             {
@@ -227,9 +226,8 @@ auto AngleByIntersection(const QVector<VRawSAPoint> &points, QPointF p1, QPointF
     {
         QLineF const edge1(p2, p1);
         QLineF const edge2(p2, p3);
-        const qreal angle = edge1.angleTo(edge2);
 
-        if (angle > 180)
+        if (const qreal angle = edge1.angleTo(edge2); angle > 180)
         {
             return AngleByLength(points, p1, p2, p3, bigLine1, sp2, bigLine2, p, width, needRollback);
         }
@@ -314,9 +312,8 @@ auto AngleByFirstSymmetry(const QVector<VRawSAPoint> &points, QPointF p1, QPoint
     {
         QLineF const edge1(p2, p1);
         QLineF const edge2(p2, p3);
-        const qreal angle = edge1.angleTo(edge2);
 
-        if (angle > 180)
+        if (const qreal angle = edge1.angleTo(edge2); angle > 180)
         {
             return AngleByLength(points, p1, p2, p3, bigLine1, sp2, bigLine2, p, width, needRollback);
         }
@@ -395,9 +392,8 @@ auto AngleBySecondSymmetry(const QVector<VRawSAPoint> &points, QPointF p1, QPoin
     {
         QLineF const edge1(p2, p1);
         QLineF const edge2(p2, p3);
-        const qreal angle = edge1.angleTo(edge2);
 
-        if (angle > 180)
+        if (const qreal angle = edge1.angleTo(edge2); angle > 180)
         {
             return AngleByLength(points, p1, p2, p3, bigLine1, sp2, bigLine2, p, width, needRollback);
         }
@@ -478,9 +474,8 @@ auto AngleByFirstRightAngle(const QVector<VRawSAPoint> &points, QPointF p1, QPoi
     {
         QLineF const edge1(p2, p1);
         QLineF const edge2(p2, p3);
-        const qreal angle = edge1.angleTo(edge2);
 
-        if (angle > 270)
+        if (const qreal angle = edge1.angleTo(edge2); angle > 270)
         {
             return AngleByLength(points, p1, p2, p3, bigLine1, sp2, bigLine2, p, width, needRollback);
         }
@@ -491,9 +486,8 @@ auto AngleByFirstRightAngle(const QVector<VRawSAPoint> &points, QPointF p1, QPoi
     QLineF const edge(p1, p2);
 
     QPointF px;
-    QLineF::IntersectType const type = edge.intersects(bigLine2, &px);
 
-    if (type == QLineF::NoIntersection)
+    if (QLineF::IntersectType const type = edge.intersects(bigLine2, &px); type == QLineF::NoIntersection)
     {
         return AngleByLength(points, p1, p2, p3, bigLine1, sp2, bigLine2, p, width, needRollback);
     }
@@ -515,9 +509,8 @@ auto AngleByFirstRightAngle(const QVector<VRawSAPoint> &points, QPointF p1, QPoi
     {
         QLineF const edge1(p2, p1);
         QLineF const edge2(p2, p3);
-        const qreal angle = edge1.angleTo(edge2);
 
-        if (angle > 180)
+        if (const qreal angle = edge1.angleTo(edge2); angle > 180)
         {
             return AngleByLength(points, p1, p2, p3, bigLine1, sp2, bigLine2, p, width, needRollback);
         }
@@ -546,9 +539,8 @@ auto AngleBySecondRightAngle(QVector<VRawSAPoint> points, QPointF p1, QPointF p2
     {
         QLineF const edge1(p2, p1);
         QLineF const edge2(p2, p3);
-        const qreal angle = edge1.angleTo(edge2);
 
-        if (angle > 270)
+        if (const qreal angle = edge1.angleTo(edge2); angle > 270)
         {
             return AngleByLength(points, p1, p2, p3, bigLine1, sp2, bigLine2, p, width, needRollback);
         }
@@ -563,9 +555,8 @@ auto AngleBySecondRightAngle(QVector<VRawSAPoint> points, QPointF p1, QPointF p2
     QLineF const edge(p2, p3);
 
     QPointF px;
-    QLineF::IntersectType const type = edge.intersects(bigLine1, &px);
 
-    if (type == QLineF::NoIntersection)
+    if (QLineF::IntersectType const type = edge.intersects(bigLine1, &px); type == QLineF::NoIntersection)
     {
         return AngleByLength(points, p1, p2, p3, bigLine1, sp2, bigLine2, p, width, needRollback);
     }
@@ -592,9 +583,8 @@ auto AngleBySecondRightAngle(QVector<VRawSAPoint> points, QPointF p1, QPointF p2
     {
         QLineF const edge1(p2, p1);
         QLineF const edge2(p2, p3);
-        const qreal angle = edge1.angleTo(edge2);
 
-        if (angle > 180)
+        if (const qreal angle = edge1.angleTo(edge2); angle > 180)
         {
             return AngleByLength(points, p1, p2, p3, bigLine1, sp2, bigLine2, p, width, needRollback);
         }
@@ -647,9 +637,8 @@ auto BisectorLine(const QPointF &p1, const QPointF &p2, const QPointF &p3) -> QL
     QLineF bLine;
 
     const qreal angle1 = line1.angleTo(line2);
-    const qreal angle2 = line2.angleTo(line1);
 
-    if (angle1 <= angle2)
+    if (const qreal angle2 = line2.angleTo(line1); angle1 <= angle2)
     {
         bLine = line1;
         bLine.setAngle(bLine.angle() + angle1 / 2.0);
@@ -793,9 +782,8 @@ void RollbackByPointsIntersection(QVector<VRawSAPoint> &ekvPoints, const QVector
     const QLineF bigLine1 = VAbstractPiece::ParallelLine(points.at(points.size() - 2), points.at(0), width);
     QVector<VRawSAPoint> temp = ekvPoints;
     temp.insert(ekvPoints.size() - 1, VRawSAPoint(bigLine1.p2(), points.at(0).CurvePoint(), points.at(0).TurnPoint()));
-    bool const success = Rollback(temp, QLineF(points.constLast(), points.at(1)));
 
-    if (success)
+    if (bool const success = Rollback(temp, QLineF(points.constLast(), points.at(1))); success)
     {
         ekvPoints = temp;
     }
@@ -1234,9 +1222,8 @@ auto VAbstractPiece::SumTrapezoids(const QVector<QPointF> &points) -> qreal
 {
     // Calculation a polygon area through the sum of the areas of trapezoids
     qreal s, res = 0;
-    const auto n = points.size();
 
-    if (n > 2)
+    if (const auto n = points.size(); n > 2)
     {
         for (int i = 0; i < n; ++i)
         {
@@ -1342,9 +1329,8 @@ auto VAbstractPiece::EkvPoint(QVector<VRawSAPoint> points, const VSAPoint &p1Lin
     }
 
     QPointF crosPoint;
-    const QLineF::IntersectType type = bigLine1.intersects(bigLine2, &crosPoint);
 
-    switch (type)
+    switch (const QLineF::IntersectType type = bigLine1.intersects(bigLine2, &crosPoint); type)
     { // There are at least three big cases
         case (QLineF::BoundedIntersection):
             // The easiest, real intersection
@@ -1366,10 +1352,9 @@ auto VAbstractPiece::EkvPoint(QVector<VRawSAPoint> points, const VSAPoint &p1Lin
             const QLineF b1 = BisectorLine(p1Line1, p2Line1, p1Line2);
             const QLineF b2 = BisectorLine(bigLine1.p1(), crosPoint, bigLine2.p2());
 
-            const qreal angle = AngleBetweenBisectors(b1, b2);
-
             // Comparison bisector angles helps to find direction
-            if (angle < 135 || VFuzzyComparePossibleNulls(angle, 135.0)) // Go in a same direction
+            if (const qreal angle = AngleBetweenBisectors(b1, b2);
+                angle < 135 || VFuzzyComparePossibleNulls(angle, 135.0)) // Go in a same direction
             {                                                            // Regular equdistant case
                 QT_WARNING_PUSH
                 QT_WARNING_DISABLE_GCC("-Wswitch-default")
@@ -1458,9 +1443,9 @@ auto VAbstractPiece::EkvPoint(QVector<VRawSAPoint> points, const VSAPoint &p1Lin
                 else
                 { // New subcase. This is not a dart. An angle is acute and bisector watch inside.
                     const qreal result1 = PointPosition(crosPoint, QLineF(p1Line1, p2Line1));
-                    const qreal result2 = PointPosition(crosPoint, QLineF(p2Line2, p1Line2));
 
-                    if ((result1 < 0 || qFuzzyIsNull(result1)) && (result2 < 0 || qFuzzyIsNull(result2)))
+                    if (const qreal result2 = PointPosition(crosPoint, QLineF(p2Line2, p1Line2));
+                        (result1 < 0 || qFuzzyIsNull(result1)) && (result2 < 0 || qFuzzyIsNull(result2)))
                     { // The cross point is still outside of a piece
                         if (line.length() >= localWidth)
                         {
@@ -1515,9 +1500,8 @@ auto VAbstractPiece::IsAllowanceValid(const QVector<QPointF> &base, const QVecto
 
     // First check direction
     const qreal baseDirection = VPiece::SumTrapezoids(base);
-    const qreal allowanceDirection = VPiece::SumTrapezoids(allowance);
 
-    if (baseDirection >= 0 || allowanceDirection >= 0)
+    if (const qreal allowanceDirection = VPiece::SumTrapezoids(allowance); baseDirection >= 0 || allowanceDirection >= 0)
     {
         return false; // Wrong direction
     }
@@ -1843,8 +1827,7 @@ auto VAbstractPiece::IsItemContained(const QRectF &parentBoundingRect, const QVe
 auto VAbstractPiece::CorrectPosition(const QRectF &parentBoundingRect, QVector<QPointF> points) -> QVector<QPointF>
 {
     qreal dX = 0;
-    qreal dY = 0;
-    if (not IsItemContained(parentBoundingRect, points, dX, dY))
+    if (qreal dY = 0; not IsItemContained(parentBoundingRect, points, dX, dY))
     {
         for (auto &point : points)
         {
@@ -1861,9 +1844,8 @@ auto VAbstractPiece::FindGrainlineGeometry(const VGrainlineData &geom, const VCo
     SCASSERT(pattern != nullptr)
 
     const quint32 topPin = geom.TopPin();
-    const quint32 bottomPin = geom.BottomPin();
 
-    if (topPin != NULL_ID && bottomPin != NULL_ID)
+    if (const quint32 bottomPin = geom.BottomPin(); topPin != NULL_ID && bottomPin != NULL_ID)
     {
         try
         {
@@ -1906,8 +1888,7 @@ auto VAbstractPiece::FindGrainlineGeometry(const VGrainlineData &geom, const VCo
         return false;
     }
 
-    const quint32 centerPin = geom.CenterPin();
-    if (centerPin != NULL_ID)
+    if (const quint32 centerPin = geom.CenterPin(); centerPin != NULL_ID)
     {
         try
         {
@@ -1966,8 +1947,7 @@ auto VAbstractPiece::GrainlineMainLine(const VGrainlineData &geom, const VContai
     }
 
     qreal dX = 0;
-    qreal dY = 0;
-    if (not IsItemContained(boundingRect, v, dX, dY))
+    if (qreal dY = 0; not IsItemContained(boundingRect, v, dX, dY))
     {
         pt1.rx() += dX;
         pt1.ry() += dY;

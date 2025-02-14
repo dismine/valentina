@@ -165,8 +165,7 @@ auto DRW_Entity::parseDxfGroups(int code, const std::unique_ptr<dxfReader> &read
     std::list<DRW_Variant> ls;
     DRW_Variant c;
     int nc;
-    std::string appName = reader->getString();
-    if (!appName.empty() && appName.at(0) == '{')
+    if (std::string appName = reader->getString(); !appName.empty() && appName.at(0) == '{')
     {
         c.addString(appName.substr(1, static_cast<size_t>(appName.size() - 1)));
         c.code = code;

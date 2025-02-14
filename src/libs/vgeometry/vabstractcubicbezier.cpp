@@ -134,17 +134,15 @@ auto PointBezier_r(qreal x1, qreal y1, qreal x2, qreal y2, qreal x3, qreal y3, q
     const double dy = y4 - y1;
 
     double d2 = fabs((x2 - x4) * dy - (y2 - y4) * dx);
-    double d3 = fabs((x3 - x4) * dy - (y3 - y4) * dx);
 
-    switch ((static_cast<int>(d2 > curve_collinearity_epsilon) << 1) +
-            static_cast<int>(d3 > curve_collinearity_epsilon))
+    switch (double d3 = fabs((x3 - x4) * dy - (y3 - y4) * dx); (static_cast<int>(d2 > curve_collinearity_epsilon) << 1)
+                                                               + static_cast<int>(d3 > curve_collinearity_epsilon))
     {
         case 0:
         {
             // All collinear OR p1==p4
             //----------------------
-            double k = dx * dx + dy * dy;
-            if (k < 0.000000001)
+            if (double k = dx * dx + dy * dy; k < 0.000000001)
             {
                 d2 = CalcSqDistance(x1, y1, x2, y2);
                 d3 = CalcSqDistance(x4, y4, x3, y3);

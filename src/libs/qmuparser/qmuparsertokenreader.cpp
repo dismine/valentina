@@ -294,8 +294,7 @@ auto QmuParserTokenReader::ReadNextToken(const QLocale &locale, bool cNumbers, c
     // !!! From this point on there is no exit without an exception possible...
     //
     QString strTok;
-    qmusizetype const iEnd = ExtractToken(m_pParser->ValidNameChars(), strTok, m_iPos);
-    if (iEnd != m_iPos)
+    if (qmusizetype const iEnd = ExtractToken(m_pParser->ValidNameChars(), strTok, m_iPos); iEnd != m_iPos)
     {
         Error(ecUNASSIGNABLE_TOKEN, m_iPos, strTok);
     }
@@ -559,8 +558,7 @@ auto QmuParserTokenReader::IsEOF(token_type &a_Tok) -> bool
 auto QmuParserTokenReader::IsInfixOpTok(token_type &a_Tok) -> bool
 {
     QString sTok;
-    qmusizetype const iEnd = ExtractToken(m_pParser->ValidInfixOprtChars(), sTok, m_iPos);
-    if (iEnd == m_iPos)
+    if (qmusizetype const iEnd = ExtractToken(m_pParser->ValidInfixOprtChars(), sTok, m_iPos); iEnd == m_iPos)
     {
         return false;
     }
@@ -637,9 +635,7 @@ auto QmuParserTokenReader::IsFunTok(token_type &a_Tok) -> bool
 auto QmuParserTokenReader::IsOprt(token_type &a_Tok) -> bool
 {
     QString strTok;
-
-    qmusizetype const iEnd = ExtractOperatorToken(strTok, m_iPos);
-    if (iEnd == m_iPos)
+    if (qmusizetype const iEnd = ExtractOperatorToken(strTok, m_iPos); iEnd == m_iPos)
     {
         return false;
     }
@@ -724,8 +720,7 @@ auto QmuParserTokenReader::IsPostOpTok(token_type &a_Tok) -> bool
 
     // Test if there could be a postfix operator
     QString sTok;
-    qmusizetype const iEnd = ExtractToken(m_pParser->ValidOprtChars(), sTok, m_iPos);
-    if (iEnd == m_iPos)
+    if (qmusizetype const iEnd = ExtractToken(m_pParser->ValidOprtChars(), sTok, m_iPos); iEnd == m_iPos)
     {
         return false;
     }

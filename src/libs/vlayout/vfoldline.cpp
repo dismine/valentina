@@ -394,8 +394,7 @@ auto VFoldLine::FoldLineTwoArrowsTextAbovePath() const -> QVector<QPainterPath>
     QVector<QPainterPath> shape;
     shape.append(TwoArrowsPath(data.arrowsWidth, data.arrowsHeight));
 
-    VCommonSettings *settings = VAbstractApplication::VApp()->Settings();
-    if (settings->GetSingleLineFonts())
+    if (VCommonSettings *settings = VAbstractApplication::VApp()->Settings(); settings->GetSingleLineFonts())
     {
         shape.append(SVGFontLabel(data.base, data.labelWidth, data.labelHeight));
     }
@@ -420,8 +419,7 @@ auto VFoldLine::FoldLineTwoArrowsTextUnderPath() const -> QVector<QPainterPath>
     QVector<QPainterPath> shape;
     shape.append(TwoArrowsPath(data.arrowsWidth, data.arrowsHeight));
 
-    VCommonSettings *settings = VAbstractApplication::VApp()->Settings();
-    if (settings->GetSingleLineFonts())
+    if (VCommonSettings *settings = VAbstractApplication::VApp()->Settings(); settings->GetSingleLineFonts())
     {
         shape.append(SVGFontLabel(data.base, data.labelWidth, data.labelHeight));
     }
@@ -443,8 +441,7 @@ auto VFoldLine::FoldLineTextPath() const -> QVector<QPainterPath>
 
     TextPosData const data = TextData();
 
-    VCommonSettings *settings = VAbstractApplication::VApp()->Settings();
-    if (settings->GetSingleLineFonts())
+    if (VCommonSettings *settings = VAbstractApplication::VApp()->Settings(); settings->GetSingleLineFonts())
     {
         return {SVGFontLabel(data.base, data.labelWidth, data.labelHeight)};
     }
@@ -595,8 +592,7 @@ auto VFoldLine::OutlineFontLabel(const QLineF &base, qreal width, qreal textHeig
 
     QPainterPath labelPath;
 
-    VCommonSettings *settings = VAbstractApplication::VApp()->Settings();
-    if (settings->GetSingleStrokeOutlineFont())
+    if (VCommonSettings *settings = VAbstractApplication::VApp()->Settings(); settings->GetSingleStrokeOutlineFont())
     {
         VSingleLineOutlineChar const corrector(font);
         if (!corrector.IsPopulated())
@@ -775,8 +771,7 @@ auto VFoldLine::SVGFontLabel(const QLineF &base, qreal width, qreal textHeight) 
 //---------------------------------------------------------------------------------------------------------------------
 auto VFoldLine::LabelTextHeight() const -> qreal
 {
-    VCommonSettings *settings = VAbstractApplication::VApp()->Settings();
-    if (settings->GetSingleLineFonts())
+    if (VCommonSettings *settings = VAbstractApplication::VApp()->Settings(); settings->GetSingleLineFonts())
     {
         VSvgFontEngine engine;
         if (LabelSVGFontEngine(engine))

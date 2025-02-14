@@ -630,8 +630,8 @@ void VMeasurements::SetReadOnly(bool ro)
 //---------------------------------------------------------------------------------------------------------------------
 auto VMeasurements::IsFullCircumference() const -> bool
 {
-    QDomElement const dimenstionsTag = documentElement().firstChildElement(TagDimensions);
-    if (not dimenstionsTag.isNull())
+    if (QDomElement const dimenstionsTag = documentElement().firstChildElement(TagDimensions);
+        not dimenstionsTag.isNull())
     {
         return GetParametrBool(dimenstionsTag, AttrFullCircumference, falseStr);
     }
@@ -1214,8 +1214,7 @@ auto VMeasurements::UniqueTagAttr(const QString &tag, const QString &attr, qreal
         return defVal;
     }
 
-    const QDomNode domNode = nodeList.at(0);
-    if (!domNode.isNull() && domNode.isElement())
+    if (const QDomNode domNode = nodeList.at(0); !domNode.isNull() && domNode.isElement())
     {
         const QDomElement domElement = domNode.toElement();
         if (!domElement.isNull())

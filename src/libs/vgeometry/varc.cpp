@@ -419,9 +419,9 @@ auto VArc::OptimalApproximationScale(qreal radius, qreal f1, qreal f2, qreal tol
     {
         VArc arc(VPointF(), radius, f1, f2);
         arc.SetApproximationScale(scale);
-        qreal const curvature = Curvature(arc.GetPoints());
 
-        if (expectedCurvature - curvature <= expectedCurvature * tolerance)
+        if (qreal const curvature = Curvature(arc.GetPoints());
+            expectedCurvature - curvature <= expectedCurvature * tolerance)
         {
             return scale;
         }

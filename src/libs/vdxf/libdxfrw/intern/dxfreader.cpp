@@ -107,8 +107,7 @@ auto dxfReader::getHandleString() -> int
     if ( !Succeeded || Succeeded == EOF )
         res = 0;
 #else
-    std::istringstream Convert(strData);
-    if ( !(Convert >> std::hex >>res) )
+    if (std::istringstream Convert(strData); !(Convert >> std::hex >> res))
         res = 0;
 #endif
     return res;

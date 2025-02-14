@@ -129,8 +129,7 @@ auto VAbstartMeasurementDimension::ValidSteps() const -> QVector<qreal>
 {
     QVector<qreal> steps;
 
-    const qreal diff = m_maxValue - m_minValue;
-    if (qFuzzyIsNull(diff))
+    if (const qreal diff = m_maxValue - m_minValue; qFuzzyIsNull(diff))
     {
         steps.append(0); // only one possible value
     }

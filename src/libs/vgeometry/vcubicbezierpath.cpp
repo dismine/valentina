@@ -242,8 +242,7 @@ auto VCubicBezierPath::GetStartAngle() const -> qreal
 //---------------------------------------------------------------------------------------------------------------------
 auto VCubicBezierPath::GetEndAngle() const -> qreal
 {
-    const vsizetype count = CountSubSpl();
-    if (count > 0)
+    if (const vsizetype count = CountSubSpl(); count > 0)
     {
         return GetSpline(count).GetEndAngle();
     }
@@ -263,8 +262,7 @@ auto VCubicBezierPath::GetC1Length() const -> qreal
 //---------------------------------------------------------------------------------------------------------------------
 auto VCubicBezierPath::GetC2Length() const -> qreal
 {
-    const vsizetype count = CountSubSpl();
-    if (count > 0)
+    if (const vsizetype count = CountSubSpl(); count > 0)
     {
         return GetSpline(count).GetC2Length();
     }
@@ -355,8 +353,7 @@ auto VCubicBezierPath::FirstPoint() const -> VPointF
 //---------------------------------------------------------------------------------------------------------------------
 auto VCubicBezierPath::LastPoint() const -> VPointF
 {
-    const vsizetype count = CountSubSpl();
-    if (count >= 1)
+    if (const vsizetype count = CountSubSpl(); count >= 1)
     {
         return d->path.at(SubSplOffset(count) + 3); // Take last point of the last real spline
     }

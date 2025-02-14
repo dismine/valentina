@@ -326,8 +326,7 @@ auto VAbstractCurve::GetPath() const -> QPainterPath
 {
     QPainterPath path;
 
-    const QVector<QPointF> points = GetPoints();
-    if (points.count() >= 2)
+    if (const QVector<QPointF> points = GetPoints(); points.count() >= 2)
     {
         path.addPolygon(QPolygonF(points));
     }
@@ -567,8 +566,7 @@ auto VAbstractCurve::DirectionArrows() const -> QVector<DirectionArrow>
 {
     QVector<DirectionArrow> arrows;
 
-    const QVector<QPointF> points = GetPoints();
-    if (points.count() >= 2)
+    if (const QVector<QPointF> points = GetPoints(); points.count() >= 2)
     {
         /*Need find coordinate midle of curve.
           Universal way is take all points and find sum.*/
@@ -649,8 +647,7 @@ void VAbstractCurve::SetAliasSuffix(const QString &aliasSuffix)
 //---------------------------------------------------------------------------------------------------------------------
 auto VAbstractCurve::Curvature(const QVector<QPointF> &vertices) -> double
 {
-    vsizetype const numVertices = vertices.size();
-    if (numVertices < 3)
+    if (vsizetype const numVertices = vertices.size(); numVertices < 3)
     {
         // A polygonal chain needs at least 3 vertices
         return 0.0;

@@ -255,8 +255,7 @@ auto VHPGLEngine::GenerateHPGL(const QVector<VLayoutPiece> &details) -> bool
 
     m_currentPos = QPoint(-1, -1); // Fake position
 
-    QFile data(m_fileName);
-    if (data.open(QFile::WriteOnly | QFile::Truncate))
+    if (QFile data(m_fileName); data.open(QFile::WriteOnly | QFile::Truncate))
     {
         QTextStream out(&data);
         out.setRealNumberPrecision(0);
@@ -295,8 +294,7 @@ auto VHPGLEngine::GenerateHPGL2(const QVector<VLayoutPiece> &details) -> bool
     m_ver2 = true;
     m_currentPos = QPoint(-1, -1); // Fake position
 
-    QFile data(m_fileName);
-    if (data.open(QFile::WriteOnly | QFile::Truncate))
+    if (QFile data(m_fileName); data.open(QFile::WriteOnly | QFile::Truncate))
     {
         QTextStream out(&data);
         out.setRealNumberPrecision(6);

@@ -223,9 +223,8 @@ auto VGAnalyticsWorker::SendAnalytics() -> QNetworkReply *
 
     QueryBuffer const buffer = m_messageQueue.head();
     QDateTime const sendTime = QDateTime::currentDateTime();
-    qint64 const timeDiff = buffer.time.msecsTo(sendTime);
 
-    if (timeDiff > fourHours)
+    if (qint64 const timeDiff = buffer.time.msecsTo(sendTime); timeDiff > fourHours)
     {
         // too old.
         m_messageQueue.dequeue();
@@ -276,8 +275,8 @@ void VGAnalyticsWorker::SendAnalyticsFinished()
 {
     auto *reply = qobject_cast<QNetworkReply *>(sender());
 
-    int const httpStausCode = reply->attribute(QNetworkRequest::HttpStatusCodeAttribute).toInt();
-    if (httpStausCode < 200 || httpStausCode > 299)
+    if (int const httpStausCode = reply->attribute(QNetworkRequest::HttpStatusCodeAttribute).toInt();
+        httpStausCode < 200 || httpStausCode > 299)
     {
         LogMessage(VGAnalytics::Error, QStringLiteral("Error posting message: %1").arg(reply->errorString()));
 

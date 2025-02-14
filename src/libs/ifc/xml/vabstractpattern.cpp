@@ -1411,8 +1411,7 @@ auto VAbstractPattern::GetBackgroundImages() const -> QVector<VBackgroundPattern
         return images;
     }
 
-    QDomElement const imagesTag = list.at(0).toElement();
-    if (not imagesTag.isNull())
+    if (QDomElement const imagesTag = list.at(0).toElement(); not imagesTag.isNull())
     {
         QDomNode imageNode = imagesTag.firstChild();
         while (not imageNode.isNull())

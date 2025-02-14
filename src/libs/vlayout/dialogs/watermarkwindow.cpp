@@ -282,8 +282,7 @@ void WatermarkWindow::showEvent(QShowEvent *event)
     }
     // do your init stuff here
 
-    QSize const sz = VAbstractApplication::VApp()->Settings()->GetWatermarkEditorSize();
-    if (not sz.isEmpty())
+    if (QSize const sz = VAbstractApplication::VApp()->Settings()->GetWatermarkEditorSize(); not sz.isEmpty())
     {
         resize(sz);
     }
@@ -402,11 +401,7 @@ auto WatermarkWindow::on_actionSave_triggered() -> bool
     // #ifdef Q_OS_WIN32
     //         qt_ntfs_permission_lookup++; // turn checking on
     // #endif /*Q_OS_WIN32*/
-    const bool isFileWritable = QFileInfo(m_curFile).isWritable();
-    // #ifdef Q_OS_WIN32
-    //         qt_ntfs_permission_lookup--; // turn it off again
-    // #endif /*Q_OS_WIN32*/
-    if (not isFileWritable)
+    if (const bool isFileWritable = QFileInfo(m_curFile).isWritable(); not isFileWritable)
     {
         QMessageBox messageBox(this);
         messageBox.setIcon(QMessageBox::Question);
@@ -443,6 +438,10 @@ auto WatermarkWindow::on_actionSave_triggered() -> bool
             return false;
         }
     }
+
+    // #ifdef Q_OS_WIN32
+    //         qt_ntfs_permission_lookup--; // turn it off again
+    // #endif /*Q_OS_WIN32*/
 
     QString error;
     bool const result = SaveWatermark(m_curFile, error);
@@ -612,9 +611,7 @@ auto WatermarkWindow::ContinueFormatRewrite(const QString &currentFormatVersion,
         msgBox.setDefaultButton(QDialogButtonBox::No);
         msgBox.setIconPixmap(QApplication::style()->standardIcon(QStyle::SP_MessageBoxQuestion).pixmap(32, 32));
 
-        int const dialogResult = msgBox.exec();
-
-        if (dialogResult == QDialog::Accepted)
+        if (int const dialogResult = msgBox.exec(); dialogResult == QDialog::Accepted)
         {
             VAbstractApplication::VApp()->Settings()->SetConfirmFormatRewriting(not msgBox.isChecked());
             return true;

@@ -208,8 +208,7 @@ auto VPatternRecipe::Measurement(const QSharedPointer<VMeasurement> &m) -> QDomE
     {
         SetAttribute(measurement, QStringLiteral("fullName"), m->GetGuiText());
 
-        QString const formula = m->GetFormula();
-        if (not formula.isEmpty())
+        if (QString const formula = m->GetFormula(); not formula.isEmpty())
         {
             SetAttribute(measurement, QStringLiteral("formula"), m->GetFormula());
         }
@@ -350,8 +349,7 @@ auto VPatternRecipe::Step(const VToolRecord &tool, const VContainer &data) -> QD
     // This check helps to find missed tools in the switch
     Q_STATIC_ASSERT_X(static_cast<int>(Tool::LAST_ONE_DO_NOT_USE) == 61, "Not all tools were used in history.");
 
-    const QDomElement domElem = m_pattern->elementById(tool.getId());
-    if (not domElem.isElement() && tool.IsMandatory())
+    if (const QDomElement domElem = m_pattern->elementById(tool.getId()); not domElem.isElement() && tool.IsMandatory())
     {
         throw VExceptionInvalidHistory(tr("Can't find element by id '%1'").arg(tool.getId()));
     }

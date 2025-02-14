@@ -176,9 +176,7 @@ auto VAbstractMainWindow::ContinueFormatRewrite(const QString &currentFormatVers
         msgBox.setDefaultButton(QDialogButtonBox::No);
         msgBox.setIconPixmap(QApplication::style()->standardIcon(QStyle::SP_MessageBoxQuestion).pixmap(32, 32));
 
-        int const dialogResult = msgBox.exec();
-
-        if (dialogResult == QDialog::Accepted)
+        if (int const dialogResult = msgBox.exec(); dialogResult == QDialog::Accepted)
         {
             VAbstractApplication::VApp()->Settings()->SetConfirmFormatRewriting(not msgBox.isChecked());
             return true;

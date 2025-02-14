@@ -1865,8 +1865,7 @@ void DRW_Header::addCoord(const std::string &key, const DRW_Coord &value, int co
 auto DRW_Header::getDouble(const std::string &key, double *varDouble) const -> bool
 {
     bool result = false;
-    auto it = vars.find(key);
-    if (it != vars.end())
+    if (auto it = vars.find(key); it != vars.end())
     {
         DRW_Variant *var = (*it).second;
         if (var->type == DRW_Variant::DOUBLE)
@@ -1881,8 +1880,7 @@ auto DRW_Header::getDouble(const std::string &key, double *varDouble) const -> b
 auto DRW_Header::getInt(const std::string &key, int *varInt) const -> bool
 {
     bool result = false;
-    auto it = vars.find(key);
-    if (it != vars.end())
+    if (auto it = vars.find(key); it != vars.end())
     {
         DRW_Variant *var = (*it).second;
         if (var->type == DRW_Variant::INTEGER)
@@ -1897,8 +1895,7 @@ auto DRW_Header::getInt(const std::string &key, int *varInt) const -> bool
 auto DRW_Header::getStr(const std::string &key, std::string *varStr) const -> bool
 {
     bool result = false;
-    auto it = vars.find(key);
-    if (it != vars.end())
+    if (auto it = vars.find(key); it != vars.end())
     {
         DRW_Variant *var = (*it).second;
         if (var->type == DRW_Variant::STRING)
@@ -1913,8 +1910,7 @@ auto DRW_Header::getStr(const std::string &key, std::string *varStr) const -> bo
 auto DRW_Header::getCoord(const std::string &key, DRW_Coord *varCoord) const -> bool
 {
     bool result = false;
-    auto it = vars.find(key);
-    if (it != vars.end())
+    if (auto it = vars.find(key); it != vars.end())
     {
         DRW_Variant *var = (*it).second;
         if (var->type == DRW_Variant::COORD)

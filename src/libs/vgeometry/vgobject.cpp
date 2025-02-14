@@ -69,8 +69,7 @@ auto PerpDotProduct(const QPointF &p1, const QPointF &p2, const QPointF &t) -> d
 auto GetEpsilon(const QPointF &t, QPointF p1, QPointF p2, qreal accuracy) -> double
 {
     QLineF edge1(p1, p2);
-    QLineF const edge2(p1, t);
-    if (edge2.length() > edge1.length())
+    if (QLineF const edge2(p1, t); edge2.length() > edge1.length())
     {
         edge1.setLength(edge2.length());
         p1 = edge1.p1();
@@ -506,9 +505,9 @@ auto VGObject::ClosestPoint(const QLineF &line, const QPointF &point) -> QPointF
     qreal const y = b + point.y();
     QLineF const lin(point, QPointF(x, y));
     QPointF p;
-    QLineF::IntersectType const intersect = line.intersects(lin, &p);
 
-    if (intersect == QLineF::UnboundedIntersection || intersect == QLineF::BoundedIntersection)
+    if (QLineF::IntersectType const intersect = line.intersects(lin, &p);
+        intersect == QLineF::UnboundedIntersection || intersect == QLineF::BoundedIntersection)
     {
         return p;
     }

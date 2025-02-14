@@ -1829,8 +1829,7 @@ void QmuParserBase::StackDump(const QStack<token_type> &a_stVal, const QStack<to
 
     while (stOprt.empty() == false)
     {
-        const token_type &topToken = stOprt.top();
-        if (topToken.GetCode() <= cmASSIGN)
+        if (const token_type &topToken = stOprt.top(); topToken.GetCode() <= cmASSIGN)
         {
             qDebug() << "OPRT_INTRNL \"" << QmuParserBase::GetOprtDef()[topToken.GetCode()] << "\" \n";
         }

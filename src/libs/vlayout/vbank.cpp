@@ -186,8 +186,7 @@ auto NotArrangedDetail(QMap<uint, QMultiMap<qint64, int>> &container, QMap<uint,
 //---------------------------------------------------------------------------------------------------------------------
 auto TakeFirstForPriority(const QMap<uint, QHash<int, qint64>> &container, uint priority) -> int
 {
-    const QHash<int, qint64> priorityGroup = container.value(priority);
-    if (not priorityGroup.isEmpty())
+    if (const QHash<int, qint64> priorityGroup = container.value(priority); not priorityGroup.isEmpty())
     {
         return priorityGroup.constBegin().key();
     }

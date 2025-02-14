@@ -309,8 +309,7 @@ auto DRW_ConvTable::toUtf8(const std::string &s) -> std::string
     std::string res;
     for (auto it = s.begin(); it < s.end(); ++it)
     {
-        auto c = static_cast<unsigned char>(*it);
-        if (c < 0x80)
+        if (auto c = static_cast<unsigned char>(*it); c < 0x80)
         {
             // check for \U+ encoded text
             if (c == '\\')
@@ -406,8 +405,7 @@ auto DRW_Converter::encodeNum(int c) -> std::string
 auto DRW_Converter::decodeNum(const std::string &s, unsigned int *b) -> int
 {
     int code = 0;
-    auto c = static_cast<unsigned char>(s.at(0));
-    if ((c & 0xE0) == 0xC0)
+    if (auto c = static_cast<unsigned char>(s.at(0)); (c & 0xE0) == 0xC0)
     { // 2 bytes
         code = (c & 0x1F) << 6;
         code = (s.at(1) & 0x3F) | code;
@@ -482,8 +480,7 @@ template <size_t DoubleTableSize> auto DRW_ConvDBCSTable<DoubleTableSize>::toUtf
     for (auto it = s.begin(); it < s.end(); ++it)
     {
         bool notFound = true;
-        auto c = static_cast<unsigned char>(*it);
-        if (c < 0x80)
+        if (auto c = static_cast<unsigned char>(*it); c < 0x80)
         {
             notFound = false;
             // check for \U+ encoded text
@@ -593,8 +590,7 @@ auto DRW_Conv932Table::toUtf8(const std::string &s) -> std::string
     for (auto it = s.begin(); it < s.end(); ++it)
     {
         bool notFound = true;
-        auto c = static_cast<unsigned char>(*it);
-        if (c < 0x80)
+        if (auto c = static_cast<unsigned char>(*it); c < 0x80)
         {
             notFound = false;
             // check for \U+ encoded text

@@ -370,13 +370,12 @@ void QmuParserByteCode::AddOp(ECmdCode a_Oprt)
         return;
     }
 
-    qmusizetype const sz = m_vRPN.size();
-
     // Check for foldable constants like:
     //   cmVAL cmVAL cmADD
     // where cmADD can stand fopr any binary operator applied to
     // two constant values.
-    if (sz>=2 && m_vRPN.at(sz-2).Cmd == cmVAL && m_vRPN.at(sz-1).Cmd == cmVAL)
+    if (qmusizetype const sz = m_vRPN.size();
+        sz >= 2 && m_vRPN.at(sz - 2).Cmd == cmVAL && m_vRPN.at(sz - 1).Cmd == cmVAL)
     {
         ConstantFolding(a_Oprt);
         bOptimized = true;

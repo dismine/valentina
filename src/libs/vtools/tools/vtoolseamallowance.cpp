@@ -2431,9 +2431,9 @@ auto VToolSeamAllowance::FindGrainlineGeometry(const VGrainlineData &geom, const
                                                qreal &rotationAngle, QPointF &pos) -> VPieceItem::MoveTypes
 {
     const quint32 topPin = geom.TopPin();
-    const quint32 bottomPin = geom.BottomPin();
 
-    if (topPin != NULL_ID && pins.contains(topPin) && bottomPin != NULL_ID && pins.contains(bottomPin))
+    if (const quint32 bottomPin = geom.BottomPin();
+        topPin != NULL_ID && pins.contains(topPin) && bottomPin != NULL_ID && pins.contains(bottomPin))
     {
         try
         {
@@ -2484,8 +2484,7 @@ auto VToolSeamAllowance::FindGrainlineGeometry(const VGrainlineData &geom, const
         return VPieceItem::Error;
     }
 
-    const quint32 centerPin = geom.CenterPin();
-    if (centerPin != NULL_ID && pins.contains(centerPin))
+    if (const quint32 centerPin = geom.CenterPin(); centerPin != NULL_ID && pins.contains(centerPin))
     {
         try
         {
