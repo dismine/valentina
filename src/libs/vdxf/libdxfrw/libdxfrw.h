@@ -31,7 +31,7 @@
 class dxfRW
 {
 public:
-    explicit dxfRW(const char *name);
+    explicit dxfRW(const std::string &name);
     ~dxfRW();
 
     static void setDebug(DRW::DebugLevel lvl);

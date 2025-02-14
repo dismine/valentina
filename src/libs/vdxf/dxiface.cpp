@@ -17,11 +17,9 @@
 #include <QDateTime>
 #include <QFont>
 #include <QLocale>
-#include <algorithm>
-#include <iostream>
 
 dx_iface::dx_iface(const std::string &file, DRW::Version v, VarMeasurement varMeasurement, VarInsunits varInsunits)
-  : dxfW(new dxfRW(file.c_str())),
+  : dxfW(new dxfRW(file)),
     cData(),
     version(v)
 {

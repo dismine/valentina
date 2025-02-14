@@ -191,8 +191,8 @@ auto VDxfEngine::begin(QPaintDevice *pdev) -> bool
         return false;
     }
 
-    m_input =
-        QSharedPointer<dx_iface>(new dx_iface(GetFileNameForLocale(), m_version, m_varMeasurement, m_varInsunits));
+    m_input = QSharedPointer<dx_iface>(
+        new dx_iface(m_fileName.toUtf8().toStdString(), m_version, m_varMeasurement, m_varInsunits));
     m_input->AddDefHeaderData();
     m_input->AddQtLTypes();
     m_input->AddDefLayers();
@@ -745,7 +745,10 @@ auto VDxfEngine::ExportToAAMA(const QVector<VLayoutPiece> &details) -> bool
         return false;
     }
 
-    m_input = QSharedPointer<dx_iface>::create(GetFileNameForLocale(), m_version, m_varMeasurement, m_varInsunits);
+    m_input = QSharedPointer<dx_iface>::create(m_fileName.toUtf8().toStdString(),
+                                               m_version,
+                                               m_varMeasurement,
+                                               m_varInsunits);
     m_input->AddXSpaceBlock(false);
     m_input->AddAAMAHeaderData();
     if (m_version > DRW::AC1009)
@@ -1264,8 +1267,8 @@ auto VDxfEngine::ExportToASTM(const QVector<VLayoutPiece> &details) -> bool
         return false;
     }
 
-    m_input =
-        QSharedPointer<dx_iface>(new dx_iface(GetFileNameForLocale(), m_version, m_varMeasurement, m_varInsunits));
+    m_input = QSharedPointer<dx_iface>(
+        new dx_iface(m_fileName.toUtf8().toStdString(), m_version, m_varMeasurement, m_varInsunits));
     m_input->AddXSpaceBlock(false);
     m_input->AddAAMAHeaderData();
     if (m_version > DRW::AC1009)
@@ -1886,22 +1889,6 @@ auto VDxfEngine::AAMACircle(const QPointF &pos, const std::string &layer, qreal 
     circle->layer = layer;
     circle->radious = FromPixel(radius, m_varInsunits);
     return circle;
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-auto VDxfEngine::FromUnicodeToCodec(const QString &str, VTextCodec *codec) -> std::string
-{
-    return codec->fromUnicode(str).toStdString();
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-auto VDxfEngine::GetFileNameForLocale() const -> std::string
-{
-#if defined(Q_OS_WIN)
-    return VDxfEngine::FromUnicodeToCodec(m_fileName, VTextCodec::codecForName("System"));
-#else
-    return m_fileName.toStdString();
-#endif
 }
 
 //---------------------------------------------------------------------------------------------------------------------

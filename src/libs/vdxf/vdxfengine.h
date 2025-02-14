@@ -191,9 +191,6 @@ private:
     Q_REQUIRED_RESULT auto CreateAAMAPolygon(const QVector<C> &polygon, const UTF8STRING &layer, bool forceClosed)
         -> P *;
 
-    static auto FromUnicodeToCodec(const QString &str, VTextCodec *codec) -> std::string;
-    auto GetFileNameForLocale() const -> std::string;
-
     static auto NotchPrecedingPoint(const QVector<VLayoutPoint> &boundary, QPointF notchBase, QPointF &point) -> bool;
 
     void AAMADrawFoldLineTwoArrows(const QVector<QVector<QPointF>> &points,

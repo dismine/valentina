@@ -36,7 +36,7 @@
     secObjects
 };*/
 
-dxfRW::dxfRW(const char *name)
+dxfRW::dxfRW(const std::string &name)
   : fileName(name)
 {
     DRW_DBGSL(DRW_dbg::Level::None);
@@ -74,7 +74,14 @@ auto dxfRW::read(DRW_Interface *interface_, bool ext) -> bool
         return setError(DRW::BAD_UNKNOWN);
     }
     DRW_DBG("dxfRW::read 1def\n");
-    filestr.open(std::filesystem::u8path(fileName), std::ios_base::in | std::ios::binary);
+
+#if __cplusplus >= 202002L // C++20 or newer
+    std::filesystem::path filePath = std::filesystem::path(fileName);
+#else // C++17 and older
+    std::filesystem::path filePath = std::filesystem::u8path(fileName);
+#endif
+
+    filestr.open(filePath, std::ios_base::in | std::ios::binary);
     if (!filestr.is_open() || !filestr.good())
     {
         return setError(DRW::BAD_OPEN);
@@ -90,7 +97,7 @@ auto dxfRW::read(DRW_Interface *interface_, bool ext) -> bool
     DRW_DBG("dxfRW::read 2\n");
     if (strcmp(line, line2) == 0)
     {
-        filestr.open(std::filesystem::u8path(fileName), std::ios_base::in | std::ios::binary);
+        filestr.open(filePath, std::ios_base::in | std::ios::binary);
         binFile = true;
         // skip sentinel
         filestr.seekg(22, std::ios::beg);
@@ -100,7 +107,7 @@ auto dxfRW::read(DRW_Interface *interface_, bool ext) -> bool
     else
     {
         binFile = false;
-        filestr.open(std::filesystem::u8path(fileName), std::ios_base::in);
+        filestr.open(filePath, std::ios_base::in);
         reader = std::make_unique<dxfReaderAscii>(&filestr);
     }
 
@@ -117,9 +124,16 @@ auto dxfRW::write(DRW_Interface *interface_, DRW::Version ver, bool bin) -> bool
     version = ver;
     binFile = bin;
     iface = interface_;
+
+#if __cplusplus >= 202002L // C++20 or newer
+    std::filesystem::path filePath = std::filesystem::path(fileName);
+#else // C++17 and older
+    std::filesystem::path filePath = std::filesystem::u8path(fileName);
+#endif
+
     if (binFile)
     {
-        filestr.open(std::filesystem::u8path(fileName), std::ios_base::out | std::ios::binary | std::ios::trunc);
+        filestr.open(filePath, std::ios_base::out | std::ios::binary | std::ios::trunc);
 
         if (!filestr.is_open())
         {
@@ -135,7 +149,7 @@ auto dxfRW::write(DRW_Interface *interface_, DRW::Version ver, bool bin) -> bool
     }
     else
     {
-        filestr.open(std::filesystem::u8path(fileName), std::ios_base::out | std::ios::trunc);
+        filestr.open(filePath, std::ios_base::out | std::ios::trunc);
 
         if (!filestr.is_open())
         {
