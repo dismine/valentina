@@ -246,11 +246,11 @@ auto VPiece::CuttingPathPoints(const VContainer *data) const -> QVector<QPointF>
     QVector<QPointF> points;
     if (IsSeamAllowance() && not IsSeamAllowanceBuiltIn())
     {
-        CastTo(SeamAllowancePoints(data), points);
+        CastTo(FullSeamAllowancePoints(data), points);
         return points;
     }
 
-    CastTo(MainPathPoints(data), points);
+    CastTo(FullMainPathPoints(data), points);
     return points;
 }
 
