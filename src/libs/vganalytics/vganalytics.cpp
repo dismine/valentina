@@ -159,7 +159,7 @@ auto VGAnalytics::Instance() -> VGAnalytics *
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VGAnalytics::Init(VCommonSettings *settings)
+void VGAnalytics::Init(const VCommonSettings *settings)
 {
     SCASSERT(settings != nullptr)
 

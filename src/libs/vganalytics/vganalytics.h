@@ -48,7 +48,7 @@ public:
 
     static auto Instance() -> VGAnalytics *;
 
-    static void Init(VCommonSettings *settings);
+    static void Init(const VCommonSettings *settings);
 
     enum LogLevel
     {
