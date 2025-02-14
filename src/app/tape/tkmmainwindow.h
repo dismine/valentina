@@ -119,6 +119,8 @@ private slots:
 
     void UpdateShortcuts();
 
+    void RefreshMeasurementImagePreview(int index);
+
 private:
     // cppcheck-suppress unknownMacro
     Q_DISABLE_COPY_MOVE(TKMMainWindow) // NOLINT
@@ -143,6 +145,8 @@ private:
     QCompleter *m_groupCompleter{};
 
     int untitledIndex{0};
+
+    int lastSelectedTab{0};
 
     void SetupMenu();
     void InitWindow();

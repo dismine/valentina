@@ -120,6 +120,8 @@ TKMMainWindow::TKMMainWindow(QWidget *parent)
     m_search = QSharedPointer<VTableSearch>(new VTableSearch(ui->tableWidget));
     ui->tabWidget->setVisible(false);
 
+    connect(ui->tabWidget, &QTabWidget::currentChanged, this, &TKMMainWindow::RefreshMeasurementImagePreview);
+
     ui->toolBar->setContextMenuPolicy(Qt::PreventContextMenu);
 
     m_recentFileActs.fill(nullptr);
@@ -1034,22 +1036,43 @@ void TKMMainWindow::SaveImage()
 //---------------------------------------------------------------------------------------------------------------------
 void TKMMainWindow::ShowImage()
 {
-    auto *item = ui->listWidget->currentItem();
+    VPatternImage image;
 
-    if (item == nullptr)
+    if (lastSelectedTab == ui->tabWidget->indexOf(ui->tabMeasurements)
+        || ui->tabWidget->currentIndex() == ui->tabWidget->indexOf(ui->tabMeasurements))
+    {
+        const QTableWidgetItem *nameField = ui->tableWidget->item(ui->tableWidget->currentRow(), ColumnName); // name
+        if (nameField == nullptr)
+        {
+            return;
+        }
+
+        VKnownMeasurement const m = m_known.Measurement(nameField->data(Qt::UserRole).toString());
+        image = m_known.Image(m.diagram);
+    }
+    else if (lastSelectedTab == ui->tabWidget->indexOf(ui->tabImages)
+             || ui->tabWidget->currentIndex() == ui->tabWidget->indexOf(ui->tabImages))
+    {
+        QListWidgetItem *item = ui->listWidget->currentItem();
+        if (item == nullptr)
+        {
+            return;
+        }
+
+        QMap<QUuid, VPatternImage> const images = m_known.Images();
+
+        QUuid const id = item->data(Qt::UserRole).toUuid();
+        if (!images.contains(id))
+        {
+            return;
+        }
+
+        image = images.value(id);
+    }
+    else
     {
         return;
     }
-
-    QMap<QUuid, VPatternImage> const images = m_known.Images();
-
-    QUuid const id = item->data(Qt::UserRole).toUuid();
-    if (!images.contains(id))
-    {
-        return;
-    }
-
-    const VPatternImage image = images.value(id);
 
     if (not image.IsValid())
     {
@@ -1188,6 +1211,8 @@ void TKMMainWindow::ShowImageData()
     const QListWidgetItem *activeImage = ui->listWidget->item(ui->listWidget->currentRow());
     QUuid const imageId = activeImage->data(Qt::UserRole).toUuid();
     VPatternImage const image = m_known.Image(imageId);
+
+    ShowMDiagram(image);
 
     // Don't block all signal for QLineEdit. Need for correct handle with clear button.
     disconnect(ui->lineEditImageTitle, &QLineEdit::editingFinished, this, &TKMMainWindow::SaveImageTitle);
@@ -1557,6 +1582,26 @@ void TKMMainWindow::UpdateShortcuts()
         manager->UpdateButtonShortcut(m_buttonShortcuts);
         manager->UpdateActionShortcuts(m_actionShortcuts);
         UpdateSearchControlsTooltips();
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void TKMMainWindow::RefreshMeasurementImagePreview(int index)
+{
+    if (index == -1)
+    {
+        return;
+    }
+
+    if (index == ui->tabWidget->indexOf(ui->tabMeasurements))
+    {
+        ShowMData();
+        lastSelectedTab = ui->tabWidget->indexOf(ui->tabMeasurements);
+    }
+    else if (index == ui->tabWidget->indexOf(ui->tabImages))
+    {
+        ShowImageData();
+        lastSelectedTab = ui->tabWidget->indexOf(ui->tabImages);
     }
 }
 
