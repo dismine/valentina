@@ -5,15 +5,15 @@
 #include "drw_cptable949.h"
 #include "drw_cptable950.h"
 #include "drw_cptables.h"
-#include <QDebug>
-#include <QSet>
-#include <QString>
 #include <algorithm>
 #include <cstddef>
 #include <cstring>
 #include <iomanip>
 #include <memory>
 #include <sstream>
+#include <QDebug>
+#include <QSet>
+#include <QString>
 
 DRW_TextCodec::DRW_TextCodec()
   : version(DRW::AC1021),
@@ -405,25 +405,34 @@ auto DRW_Converter::encodeNum(int c) -> std::string
 auto DRW_Converter::decodeNum(const std::string &s, unsigned int *b) -> int
 {
     int code = 0;
-    if (auto c = static_cast<unsigned char>(s.at(0)); (c & 0xE0) == 0xC0)
+
+    auto to_int = [](std::byte b) { return std::to_integer<unsigned char>(b); };
+
+    if (auto c = static_cast<std::byte>(s.at(0)); (to_int(c) & 0xE0) == 0xC0)
     { // 2 bytes
-        code = (c & 0x1F) << 6;
-        code = (s.at(1) & 0x3F) | code;
+        auto c1 = static_cast<std::byte>(s.at(1));
+        code = (to_int(c) & 0x1F) << 6;
+        code = (to_int(c1) & 0x3F) | code;
         *b = 2;
     }
-    else if ((c & 0xF0) == 0xE0)
+    else if ((to_int(c) & 0xF0) == 0xE0)
     { // 3 bytes
-        code = (c & 0x0F) << 12;
-        code = ((s.at(1) & 0x3F) << 6) | code;
-        code = (s.at(2) & 0x3F) | code;
+        auto c1 = static_cast<std::byte>(s.at(1));
+        auto c2 = static_cast<std::byte>(s.at(2));
+        code = (to_int(c) & 0x0F) << 12;
+        code = ((to_int(c1) & 0x3F) << 6) | code;
+        code = (to_int(c2) & 0x3F) | code;
         *b = 3;
     }
-    else if ((c & 0xF8) == 0xF0)
+    else if ((to_int(c) & 0xF8) == 0xF0)
     { // 4 bytes
-        code = (c & 0x07) << 18;
-        code = ((s.at(1) & 0x3F) << 12) | code;
-        code = ((s.at(2) & 0x3F) << 6) | code;
-        code = (s.at(3) & 0x3F) | code;
+        auto c1 = static_cast<std::byte>(s.at(1));
+        auto c2 = static_cast<std::byte>(s.at(2));
+        auto c3 = static_cast<std::byte>(s.at(3));
+        code = (to_int(c) & 0x07) << 18;
+        code = ((to_int(c1) & 0x3F) << 12) | code;
+        code = ((to_int(c2) & 0x3F) << 6) | code;
+        code = (to_int(c3) & 0x3F) | code;
         *b = 4;
     }
 
