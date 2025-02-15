@@ -26,6 +26,7 @@
  **
  *************************************************************************/
 #include "vplaintextedit.h"
+#include <QDebug>
 
 // Header <ciso646> is removed in C++20.
 #if __cplusplus <= 201703L

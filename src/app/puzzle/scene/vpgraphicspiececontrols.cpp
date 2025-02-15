@@ -27,6 +27,7 @@
  *************************************************************************/
 #include "vpgraphicspiececontrols.h"
 
+#include <cmath>
 #include <QCursor>
 #include <QFileInfo>
 #include <QGraphicsScene>
@@ -37,6 +38,7 @@
 #include <QPainter>
 #include <QScreen>
 #include <QtDebug>
+#include <QtMath>
 
 #include "../layout/vplayout.h"
 #include "../layout/vppiece.h"
