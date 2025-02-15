@@ -87,7 +87,7 @@ constexpr VRawSAPoint::VRawSAPoint(const VLayoutPoint &p) noexcept
 
 //---------------------------------------------------------------------------------------------------------------------
 constexpr VRawSAPoint::VRawSAPoint(const VRawSAPoint &other) noexcept
-  : VLayoutPoint(other),
+  : VLayoutPoint(static_cast<const VLayoutPoint &>(other)),
     m_loopPoint(other.m_loopPoint),
     m_primary(other.m_primary)
 {
