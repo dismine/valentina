@@ -41,17 +41,20 @@ QT_WARNING_DISABLE_CLANG("-Wnon-virtual-dtor")
 class VLayoutPoint : public QPointF
 {
 public:
-    constexpr VLayoutPoint() = default;
-    constexpr VLayoutPoint(qreal xpos, qreal ypos);
-    constexpr explicit VLayoutPoint(QPointF p);
+    constexpr VLayoutPoint() noexcept = default;
+    constexpr VLayoutPoint(qreal xpos, qreal ypos) noexcept;
+    constexpr explicit VLayoutPoint(QPointF p) noexcept;
+    constexpr VLayoutPoint(const VLayoutPoint &other) noexcept;
+    constexpr VLayoutPoint &operator=(const VLayoutPoint &other) noexcept;
+    virtual ~VLayoutPoint() = default;
 
-    constexpr auto TurnPoint() const -> bool;
-    constexpr auto CurvePoint() const -> bool;
+    constexpr auto TurnPoint() const noexcept -> bool;
+    constexpr auto CurvePoint() const noexcept -> bool;
 
-    constexpr void SetTurnPoint(bool newTurnPoint);
-    constexpr void SetCurvePoint(bool newCurvePoint);
+    constexpr void SetTurnPoint(bool newTurnPoint) noexcept;
+    constexpr void SetCurvePoint(bool newCurvePoint) noexcept;
 
-    auto toJson() const -> QJsonObject;
+    virtual auto toJson() const -> QJsonObject;
     auto ToQPointF() const -> QPointF;
 
 private:
@@ -104,37 +107,57 @@ auto operator>>(QDataStream &, VLayoutPoint &) -> QDataStream &;
 #endif
 
 //---------------------------------------------------------------------------------------------------------------------
-constexpr VLayoutPoint::VLayoutPoint(qreal xpos, qreal ypos)
+constexpr VLayoutPoint::VLayoutPoint(qreal xpos, qreal ypos) noexcept
   : QPointF(xpos, ypos)
 {
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-constexpr VLayoutPoint::VLayoutPoint(QPointF p)
+constexpr VLayoutPoint::VLayoutPoint(QPointF p) noexcept
   : QPointF(p)
 {
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-constexpr auto VLayoutPoint::TurnPoint() const -> bool
+constexpr VLayoutPoint::VLayoutPoint(const VLayoutPoint &other) noexcept
+  : QPointF(other),
+    m_turnPoint(other.m_turnPoint),
+    m_curvePoint(other.m_curvePoint)
+{
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+constexpr VLayoutPoint &VLayoutPoint::operator=(const VLayoutPoint &other) noexcept
+{
+    if (this != &other)
+    {
+        QPointF::operator=(other);
+        m_turnPoint = other.m_turnPoint;
+        m_curvePoint = other.m_curvePoint;
+    }
+    return *this;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+constexpr auto VLayoutPoint::TurnPoint() const noexcept -> bool
 {
     return m_turnPoint;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-constexpr void VLayoutPoint::SetTurnPoint(bool newTurnPoint)
+constexpr void VLayoutPoint::SetTurnPoint(bool newTurnPoint) noexcept
 {
     m_turnPoint = newTurnPoint;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-constexpr auto VLayoutPoint::CurvePoint() const -> bool
+constexpr auto VLayoutPoint::CurvePoint() const noexcept -> bool
 {
     return m_curvePoint;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-constexpr void VLayoutPoint::SetCurvePoint(bool newCurvePoint)
+constexpr void VLayoutPoint::SetCurvePoint(bool newCurvePoint) noexcept
 {
     m_curvePoint = newCurvePoint;
 }

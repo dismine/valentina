@@ -41,20 +41,23 @@ QT_WARNING_DISABLE_CLANG("-Wnon-virtual-dtor")
 class VRawSAPoint final : public VLayoutPoint
 {
 public:
-    constexpr VRawSAPoint() = default;
-    constexpr VRawSAPoint(qreal xpos, qreal ypos);
-    constexpr explicit VRawSAPoint(QPointF p);
-    constexpr explicit VRawSAPoint(const VLayoutPoint &p);
-    constexpr VRawSAPoint(QPointF p, bool curvePoint, bool turnPoint);
-    constexpr VRawSAPoint(QPointF p, bool curvePoint, bool turnPoint, bool loopPoint);
+    constexpr VRawSAPoint() noexcept = default;
+    constexpr VRawSAPoint(qreal xpos, qreal ypos) noexcept;
+    constexpr explicit VRawSAPoint(QPointF p) noexcept;
+    constexpr explicit VRawSAPoint(const VLayoutPoint &p) noexcept;
+    constexpr VRawSAPoint(const VRawSAPoint &other) noexcept;
+    constexpr VRawSAPoint(QPointF p, bool curvePoint, bool turnPoint) noexcept;
+    constexpr VRawSAPoint(QPointF p, bool curvePoint, bool turnPoint, bool loopPoint) noexcept;
+    constexpr VRawSAPoint &operator=(const VRawSAPoint &other) noexcept;
+    ~VRawSAPoint() override = default;
 
-    constexpr auto LoopPoint() const -> bool;
-    constexpr void SetLoopPoint(bool loopPoint);
+    constexpr auto LoopPoint() const noexcept -> bool;
+    constexpr void SetLoopPoint(bool loopPoint) noexcept;
 
-    constexpr auto Primary() const -> bool;
-    constexpr void SetPrimary(bool primary);
+    constexpr auto Primary() const noexcept -> bool;
+    constexpr void SetPrimary(bool primary) noexcept;
 
-    auto toJson() const -> QJsonObject;
+    auto toJson() const -> QJsonObject override;
 
 private:
     bool m_loopPoint{false};
@@ -65,25 +68,33 @@ Q_DECLARE_METATYPE(VRawSAPoint)                  // NOLINT
 Q_DECLARE_TYPEINFO(VRawSAPoint, Q_MOVABLE_TYPE); // NOLINT
 
 //---------------------------------------------------------------------------------------------------------------------
-constexpr VRawSAPoint::VRawSAPoint(qreal xpos, qreal ypos)
+constexpr VRawSAPoint::VRawSAPoint(qreal xpos, qreal ypos) noexcept
   : VLayoutPoint(xpos, ypos)
 {
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-constexpr VRawSAPoint::VRawSAPoint(QPointF p)
+constexpr VRawSAPoint::VRawSAPoint(QPointF p) noexcept
   : VLayoutPoint(p)
 {
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-constexpr VRawSAPoint::VRawSAPoint(const VLayoutPoint &p)
+constexpr VRawSAPoint::VRawSAPoint(const VLayoutPoint &p) noexcept
   : VLayoutPoint(p)
 {
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-constexpr VRawSAPoint::VRawSAPoint(QPointF p, bool curvePoint, bool turnPoint)
+constexpr VRawSAPoint::VRawSAPoint(const VRawSAPoint &other) noexcept
+  : VLayoutPoint(other),
+    m_loopPoint(other.m_loopPoint),
+    m_primary(other.m_primary)
+{
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+constexpr VRawSAPoint::VRawSAPoint(QPointF p, bool curvePoint, bool turnPoint) noexcept
   : VLayoutPoint(p)
 {
     SetCurvePoint(curvePoint);
@@ -91,7 +102,7 @@ constexpr VRawSAPoint::VRawSAPoint(QPointF p, bool curvePoint, bool turnPoint)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-constexpr VRawSAPoint::VRawSAPoint(QPointF p, bool curvePoint, bool turnPoint, bool loopPoint)
+constexpr VRawSAPoint::VRawSAPoint(QPointF p, bool curvePoint, bool turnPoint, bool loopPoint) noexcept
   : VLayoutPoint(p),
     m_loopPoint(loopPoint)
 {
@@ -100,25 +111,37 @@ constexpr VRawSAPoint::VRawSAPoint(QPointF p, bool curvePoint, bool turnPoint, b
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-constexpr auto VRawSAPoint::LoopPoint() const -> bool
+constexpr VRawSAPoint &VRawSAPoint::operator=(const VRawSAPoint &other) noexcept
+{
+    if (this != &other)
+    {
+        VLayoutPoint::operator=(other); // Assign base class
+        m_loopPoint = other.m_loopPoint;
+        m_primary = other.m_primary;
+    }
+    return *this;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+constexpr auto VRawSAPoint::LoopPoint() const noexcept -> bool
 {
     return m_loopPoint;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-constexpr void VRawSAPoint::SetLoopPoint(bool loopPoint)
+constexpr void VRawSAPoint::SetLoopPoint(bool loopPoint) noexcept
 {
     m_loopPoint = loopPoint;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-constexpr auto VRawSAPoint::Primary() const -> bool
+constexpr auto VRawSAPoint::Primary() const noexcept -> bool
 {
     return m_primary;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-constexpr void VRawSAPoint::SetPrimary(bool primary)
+constexpr void VRawSAPoint::SetPrimary(bool primary) noexcept
 {
     m_primary = primary;
 }
