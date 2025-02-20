@@ -84,7 +84,7 @@ auto dxfRW::read(DRW_Interface *interface_, bool ext) -> bool
 #if ((defined(__clang__) && (__clang_major__ < 9)) \
      || (!defined(__clang__) && defined(__GNUC__) && (__GNUC__ < 9 || (__GNUC__ == 9 && __GNUC_MINOR__ < 1))) \
      || (defined(_MSC_VER) && (_MSC_VER < 1920)))
-    filestr.open(filePath.wstring(), std::ios_base::in | std::ios::binary);
+    filestr.open(filePath.string(), std::ios_base::in | std::ios::binary);
 #else
     filestr.open(filePath, std::ios_base::in | std::ios::binary);
 #endif
@@ -154,7 +154,7 @@ auto dxfRW::write(DRW_Interface *interface_, DRW::Version ver, bool bin) -> bool
 #if ((defined(__clang__) && (__clang_major__ < 9)) \
      || (!defined(__clang__) && defined(__GNUC__) && (__GNUC__ < 9 || (__GNUC__ == 9 && __GNUC_MINOR__ < 1))) \
      || (defined(_MSC_VER) && (_MSC_VER < 1920)))
-        filestr.open(filePath.wstring(), std::ios_base::out | std::ios::binary | std::ios::trunc);
+        filestr.open(filePath.string(), std::ios_base::out | std::ios::binary | std::ios::trunc);
 #else
         filestr.open(filePath, std::ios_base::out | std::ios::binary | std::ios::trunc);
 #endif
