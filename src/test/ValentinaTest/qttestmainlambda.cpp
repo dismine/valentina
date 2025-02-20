@@ -34,6 +34,7 @@
 #endif
 
 #include "../vmisc/testvapplication.h"
+#include "tst_dxf.h"
 #include "tst_findpoint.h"
 #include "tst_misc.h"
 #include "tst_nameregexp.h"
@@ -107,6 +108,7 @@ auto main(int argc, char **argv) -> int
     ASSERT_TEST(new TST_XSDShema());
     ASSERT_TEST(new TST_VSVGPathTokenizer());
     ASSERT_TEST(new TST_VBoundary());
+    ASSERT_TEST(new TST_DXF());
 
     return status;
 }

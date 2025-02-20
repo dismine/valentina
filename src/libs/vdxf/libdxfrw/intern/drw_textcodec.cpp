@@ -400,7 +400,7 @@ auto DRW_Converter::encodeNum(int c) -> std::string
 }
 
 /** 's' is a string with at least 4 bytes length
-** returned 'b' is byte length of encoded char: 2,3 or 4
+** returned 'b' is byte length of encoded char: 2, 3 or 4
 **/
 auto DRW_Converter::decodeNum(const std::string &s, unsigned int *b) -> int
 {
@@ -408,31 +408,31 @@ auto DRW_Converter::decodeNum(const std::string &s, unsigned int *b) -> int
 
     auto to_int = [](std::byte b) { return std::to_integer<unsigned char>(b); };
 
-    if (auto c = static_cast<std::byte>(s.at(0)); (to_int(c) & 0xE0) == 0xC0)
+    if (const auto c = static_cast<std::byte>(s.at(0)); ((c & std::byte{0xE0}) == std::byte{0xC0}))
     { // 2 bytes
-        auto c1 = static_cast<std::byte>(s.at(1));
-        code = (to_int(c) & 0x1F) << 6;
-        code = (to_int(c1) & 0x3F) | code;
+        const auto c1 = static_cast<std::byte>(s.at(1));
+        code = to_int(c & std::byte{0x1F}) << 6;
+        code = to_int(c1 & std::byte{0x3F}) | code;
         *b = 2;
     }
-    else if ((to_int(c) & 0xF0) == 0xE0)
+    else if ((c & std::byte{0xF0}) == std::byte{0xE0})
     { // 3 bytes
-        auto c1 = static_cast<std::byte>(s.at(1));
-        auto c2 = static_cast<std::byte>(s.at(2));
-        code = (to_int(c) & 0x0F) << 12;
-        code = ((to_int(c1) & 0x3F) << 6) | code;
-        code = (to_int(c2) & 0x3F) | code;
+        const auto c1 = static_cast<std::byte>(s.at(1));
+        const auto c2 = static_cast<std::byte>(s.at(2));
+        code = to_int(c & std::byte{0x0F}) << 12;
+        code = (to_int(c1 & std::byte{0x3F}) << 6) | code;
+        code = to_int(c2 & std::byte{0x3F}) | code;
         *b = 3;
     }
-    else if ((to_int(c) & 0xF8) == 0xF0)
+    else if ((c & std::byte{0xF8}) == std::byte{0xF0})
     { // 4 bytes
-        auto c1 = static_cast<std::byte>(s.at(1));
-        auto c2 = static_cast<std::byte>(s.at(2));
-        auto c3 = static_cast<std::byte>(s.at(3));
-        code = (to_int(c) & 0x07) << 18;
-        code = ((to_int(c1) & 0x3F) << 12) | code;
-        code = ((to_int(c2) & 0x3F) << 6) | code;
-        code = (to_int(c3) & 0x3F) | code;
+        const auto c1 = static_cast<std::byte>(s.at(1));
+        const auto c2 = static_cast<std::byte>(s.at(2));
+        const auto c3 = static_cast<std::byte>(s.at(3));
+        code = to_int(c & std::byte{0x07}) << 18;
+        code = (to_int(c1 & std::byte{0x3F}) << 12) | code;
+        code = (to_int(c2 & std::byte{0x3F}) << 6) | code;
+        code = to_int(c3 & std::byte{0x3F}) | code;
         *b = 4;
     }
 
