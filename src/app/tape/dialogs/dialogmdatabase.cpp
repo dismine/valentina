@@ -108,18 +108,37 @@ auto DialogMDataBase::ImgTag(const VPatternImage &image) -> QString
         return QStringLiteral(R"(<img src="wrong.png" align="center" />)"); // In case of error
     }
 
-    QString size;
-
-    if (!VFuzzyComparePossibleNulls(image.GetSizeScale(), 100.0))
+    // If scaling is not needed, use the original base64 data
+    if (VFuzzyComparePossibleNulls(image.GetSizeScale(), 100.0))
     {
-        QSizeF const imaheSize = image.Size();
-        size = QStringLiteral(R"(width="%1" height="%2")")
-                   .arg(imaheSize.width() * image.GetSizeScale() / 100)
-                   .arg(imaheSize.height() * image.GetSizeScale() / 100);
+        return QStringLiteral(R"(<img src="data:%1;base64,%2" align="center" />)")
+            .arg(image.ContentType(), QString::fromLatin1(image.ContentData()));
     }
 
-    return QStringLiteral(R"(<img src="data:%1;base64,%2" align="center" %3% />)")
-        .arg(image.ContentType(), QString(image.ContentData()), size);
+    // Load the original image from base64
+    QImage originalImage;
+    originalImage.loadFromData(QByteArray::fromBase64(image.ContentData()));
+
+    if (originalImage.isNull())
+    {
+        return QStringLiteral(R"(<img src="wrong.png" align="center" />)");
+    }
+
+    // Scale the image manually
+    const qreal scaleFactor = image.GetSizeScale() / 100.0;
+    const QSize newSize(static_cast<int>(originalImage.width() * scaleFactor),
+                        static_cast<int>(originalImage.height() * scaleFactor));
+    const QImage scaledImage = originalImage.scaled(newSize, Qt::KeepAspectRatio, Qt::SmoothTransformation);
+
+    // Convert the scaled image to base64
+    QByteArray byteArray;
+    QBuffer buffer(&byteArray);
+    buffer.open(QIODevice::WriteOnly);
+    scaledImage.save(&buffer, image.ContentType().split("/").last().toUpper().toUtf8().constData());
+
+    const QString base64Data = QString::fromLatin1(byteArray.toBase64());
+
+    return QStringLiteral(R"(<img src="data:%1;base64,%2" align="center" />)").arg(image.ContentType(), base64Data);
 }
 
 //---------------------------------------------------------------------------------------------------------------------

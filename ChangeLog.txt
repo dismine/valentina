@@ -38,7 +38,8 @@
 - Fix incorrect label language in pattern properties.
 - Remember last selected manual layout separately from last export path.
 - Increase precision for multisize table's dimensions to hold converted values from inches.
-- Fix error in VPiece::CuttingPathPoints. It must return full piece path if the piece mirrored. 
+- Fix error in VPiece::CuttingPathPoints. It must return full piece path if the piece mirrored.
+- Optimize image scaling in database of known measurements. 
 
 # Valentina 0.7.53 June 25, 2024
 - Fix layout sheet export with empty name.
