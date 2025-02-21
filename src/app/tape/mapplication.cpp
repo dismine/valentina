@@ -50,6 +50,8 @@
 #include "QtConcurrent/qtconcurrentrun.h"
 #include <QCommandLineParser>
 #include <QDir>
+#include <QDirIterator>
+#include <QEvent>
 #include <QFileOpenEvent>
 #include <QFileSystemWatcher>
 #include <QFuture>
@@ -67,7 +69,6 @@
 #include <QUuid>
 
 #if !defined(BUILD_REVISION) && defined(QBS_BUILD)
-#include <QEvent>
 #include <vcsRepoState.h>
 #define BUILD_REVISION VCS_REPO_STATE_REVISION
 #endif
@@ -759,7 +760,18 @@ void MApplication::RestartKnownMeasurementsDatabaseWatcher()
     {
         delete m_knownMeasurementsDatabaseWatcher;
         m_knownMeasurementsDatabaseWatcher = new QFileSystemWatcher({settings->GetPathKnownMeasurements()}, this);
-        connect(m_knownMeasurementsDatabaseWatcher, &QFileSystemWatcher::directoryChanged, this,
+
+        QDirIterator it(settings->GetPathKnownMeasurements(),
+                        QDir::Dirs | QDir::NoDotAndDotDot,
+                        QDirIterator::Subdirectories);
+        while (it.hasNext())
+        {
+            m_knownMeasurementsDatabaseWatcher->addPath(it.next());
+        }
+
+        connect(m_knownMeasurementsDatabaseWatcher,
+                &QFileSystemWatcher::directoryChanged,
+                this,
                 &MApplication::RepopulateMeasurementsDatabase);
     }
 }
@@ -932,7 +944,18 @@ void MApplication::RepopulateMeasurementsDatabase(const QString &path)
     Q_UNUSED(path)
     if (m_knownMeasurementsDatabase != nullptr)
     {
-        connect(qApp, &QCoreApplication::aboutToQuit, m_knownMeasurementsRepopulateWatcher,
+        if (QFileInfo f(path); f.isDir() && f.exists())
+        {
+            QDirIterator it(path, QDir::Dirs | QDir::NoDotAndDotDot, QDirIterator::Subdirectories);
+            while (it.hasNext())
+            {
+                m_knownMeasurementsDatabaseWatcher->addPath(it.next());
+            }
+        }
+
+        connect(qApp,
+                &QCoreApplication::aboutToQuit,
+                m_knownMeasurementsRepopulateWatcher,
                 [this]()
                 {
                     m_knownMeasurementsRepopulateWatcher->cancel();
