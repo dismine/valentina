@@ -231,7 +231,6 @@ auto VAbstractApplication::translationsPath(const QString &locale) -> QString
         return dir.absolutePath();
     }
 
-#ifdef QBS_BUILD
 #if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
     dir.setPath(QCoreApplication::applicationDirPath() + "/../../.." + PKGDATADIR + trPath);
 #else
@@ -241,7 +240,6 @@ auto VAbstractApplication::translationsPath(const QString &locale) -> QString
     {
         return dir.absolutePath();
     }
-#endif // QBS_BUILD
 
 #if defined(APPIMAGE) && defined(Q_OS_LINUX)
     /* Fix path to translations when run inside AppImage. */
@@ -264,7 +262,6 @@ auto VAbstractApplication::QtTranslationsPath(const QString &locale) -> QString
         return dir.absolutePath();
     }
 
-#ifdef QBS_BUILD
 #if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
     dir.setPath(QCoreApplication::applicationDirPath() + "/../../.."_L1 + PKGDATADIR + trPath);
 #else
@@ -274,7 +271,6 @@ auto VAbstractApplication::QtTranslationsPath(const QString &locale) -> QString
     {
         return dir.absolutePath();
     }
-#endif // QBS_BUILD
 
 #if defined(APPIMAGE)
     Q_UNUSED(locale)
@@ -371,7 +367,7 @@ void VAbstractApplication::LoadTranslation(QString locale)
     LoadQM(qtTranslator, QStringLiteral("qt_"), locale, qtQmDir);
     installTranslator(qtTranslator);
 
-#if (defined(Q_OS_WIN) && !defined(QBS_BUILD)) || defined(APPIMAGE)
+#if defined(APPIMAGE)
     qtxmlTranslator = new QTranslator(this);
     LoadQM(qtxmlTranslator, QStringLiteral("qtxmlpatterns_"), locale, qtQmDir);
     installTranslator(qtxmlTranslator);
@@ -379,7 +375,7 @@ void VAbstractApplication::LoadTranslation(QString locale)
     qtBaseTranslator = new QTranslator(this);
     LoadQM(qtBaseTranslator, QStringLiteral("qtbase_"), locale, qtQmDir);
     installTranslator(qtBaseTranslator);
-#endif // defined(Q_OS_WIN) && !defined(QBS_BUILD)
+#endif // defined(APPIMAGE)
 
     appTranslator = new QTranslator(this);
     LoadQM(appTranslator, QStringLiteral("valentina_"), locale, appQmDir);
@@ -397,7 +393,7 @@ void VAbstractApplication::ClearTranslation()
         delete qtTranslator;
     }
 
-#if (defined(Q_OS_WIN) && !defined(QBS_BUILD)) || defined(APPIMAGE)
+#if defined(APPIMAGE)
     if (not qtxmlTranslator.isNull())
     {
         removeTranslator(qtxmlTranslator);
@@ -409,7 +405,7 @@ void VAbstractApplication::ClearTranslation()
         removeTranslator(qtBaseTranslator);
         delete qtBaseTranslator;
     }
-#endif // defined(Q_OS_WIN) && !defined(QBS_BUILD)
+#endif // defined(APPIMAGE)
 
     if (not appTranslator.isNull())
     {

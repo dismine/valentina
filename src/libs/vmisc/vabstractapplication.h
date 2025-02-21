@@ -140,10 +140,10 @@ protected:
     VCommonSettings *settings{nullptr};
 
     QPointer<QTranslator> qtTranslator{nullptr};
-#if (defined(Q_OS_WIN) && !defined(QBS_BUILD)) || defined(APPIMAGE)
+#if defined(APPIMAGE)
     QPointer<QTranslator> qtxmlTranslator{nullptr};
     QPointer<QTranslator> qtBaseTranslator{nullptr};
-#endif // defined(Q_OS_WIN) && !defined(QBS_BUILD)
+#endif // defined(APPIMAGE)
     QPointer<QTranslator> appTranslator{nullptr};
 
     QElapsedTimer m_uptimeTimer{};

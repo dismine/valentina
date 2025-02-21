@@ -45,6 +45,7 @@
 #include "vvalentinashortcutmanager.h"
 
 #include "QtConcurrent/qtconcurrentrun.h"
+#include <vcsRepoState.h>
 #include <QDateTime>
 #include <QDir>
 #include <QEvent>
@@ -67,11 +68,6 @@
 
 #if QT_VERSION < QT_VERSION_CHECK(6, 0, 0)
 #include <QtXmlPatterns>
-#endif
-
-#if !defined(BUILD_REVISION) && defined(QBS_BUILD)
-#include <vcsRepoState.h>
-#define BUILD_REVISION VCS_REPO_STATE_REVISION
 #endif
 
 #if QT_VERSION < QT_VERSION_CHECK(6, 4, 0)
@@ -113,21 +109,12 @@ auto AppFilePath(const QString &appName) -> QString
     }
 #endif // defined(APPIMAGE) && defined(Q_OS_LINUX)
 
-#if defined(Q_OS_MACOS) && defined(QBS_BUILD) && defined(MULTI_BUNDLE)
+#if defined(Q_OS_MACOS) && defined(MULTI_BUNDLE)
     QFileInfo multiBundleFile(
         QStringLiteral("%1/../../../%2.app/Contents/MacOS/%2").arg(QCoreApplication::applicationDirPath(), appName));
     if (multiBundleFile.exists())
     {
         return multiBundleFile.absoluteFilePath();
-    }
-#endif
-
-#if !defined(QBS_BUILD)
-    QFileInfo debugFile(QStringLiteral("%1/../../%2/bin/%3")
-                            .arg(QCoreApplication::applicationDirPath(), appName, appName + executableSuffix));
-    if (debugFile.exists())
-    {
-        return debugFile.absoluteFilePath();
     }
 #endif
 
@@ -578,7 +565,7 @@ void VApplication::InitOptions()
     StartLogging();
 
     qDebug() << "Version:" << AppVersionStr();
-    qDebug() << "Build revision:" << BUILD_REVISION;
+    qDebug() << "Build revision:" << VCS_REPO_STATE_REVISION;
     qDebug() << buildCompatibilityString();
     qDebug() << "Built on" << __DATE__ << "at" << __TIME__;
     qDebug() << "Command-line arguments:" << arguments();

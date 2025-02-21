@@ -38,11 +38,7 @@
 #include <QShowEvent>
 #include <QUrl>
 #include <QtDebug>
-
-#if !defined(BUILD_REVISION) && defined(QBS_BUILD)
 #include <vcsRepoState.h>
-#define BUILD_REVISION VCS_REPO_STATE_REVISION
-#endif
 
 //---------------------------------------------------------------------------------------------------------------------
 DialogAboutTape::DialogAboutTape(QWidget *parent)
@@ -131,7 +127,7 @@ void DialogAboutTape::FontPointSize(QWidget *w, int pointSize)
 void DialogAboutTape::RetranslateUi()
 {
     ui->label_Tape_Version->setText(QStringLiteral("Tape %1").arg(AppVersionStr()));
-    ui->labelBuildRevision->setText(tr("Build revision: %1").arg(QStringLiteral(BUILD_REVISION)));
+    ui->labelBuildRevision->setText(tr("Build revision: %1").arg(QStringLiteral(VCS_REPO_STATE_REVISION)));
     ui->label_QT_Version->setText(buildCompatibilityString());
 
     const QDate date = QLocale::c().toDate(QStringLiteral(__DATE__).simplified(), QStringLiteral("MMM d yyyy"));

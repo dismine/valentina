@@ -233,7 +233,6 @@ auto VSvgFontDatabase::SystemSVGFontPath() -> QString
         return dir.absolutePath();
     }
 
-#ifdef QBS_BUILD
 #if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
     dir.setPath(QCoreApplication::applicationDirPath() + "/../../.."_L1 + PKGDATADIR + fontPath);
 #else
@@ -243,7 +242,6 @@ auto VSvgFontDatabase::SystemSVGFontPath() -> QString
     {
         return dir.absolutePath();
     }
-#endif // QBS_BUILD
 
 #if defined(APPIMAGE) && defined(Q_OS_LINUX)
     /* Fix path to trasnaltions when run inside AppImage. */

@@ -41,6 +41,7 @@
 #include "vpmainwindow.h"
 #include "vpuzzleshortcutmanager.h"
 
+#include <vcsRepoState.h>
 #include <QCommandLineParser>
 #include <QEvent>
 #include <QFileOpenEvent>
@@ -53,11 +54,6 @@
 
 #if QT_VERSION < QT_VERSION_CHECK(6, 4, 0)
 #include "../vmisc/compatibility.h"
-#endif
-
-#if !defined(BUILD_REVISION) && defined(QBS_BUILD)
-#include <vcsRepoState.h>
-#define BUILD_REVISION VCS_REPO_STATE_REVISION
 #endif
 
 using namespace Qt::Literals::StringLiterals;
@@ -451,7 +447,7 @@ void VPApplication::InitOptions()
     StartLogging();
 
     qCDebug(pApp, "Version: %s", qUtf8Printable(AppVersionStr()));
-    qCDebug(pApp, "Build revision: %s", BUILD_REVISION);
+    qCDebug(pApp, "Build revision: %s", VCS_REPO_STATE_REVISION);
     qCDebug(pApp, "%s", qUtf8Printable(buildCompatibilityString()));
     qCDebug(pApp, "Built on %s at %s", __DATE__, __TIME__);
     qCDebug(pApp, "Command-line arguments: %s", qUtf8Printable(arguments().join(QStringLiteral(", "))));

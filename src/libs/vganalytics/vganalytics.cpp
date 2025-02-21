@@ -28,6 +28,7 @@
 #include "vganalytics.h"
 #include "vganalyticsworker.h"
 
+#include <vcsRepoState.h>
 #include <QDataStream>
 #include <QDebug>
 #include <QGuiApplication>
@@ -58,11 +59,6 @@
 
 #if QT_VERSION < QT_VERSION_CHECK(6, 4, 0)
 #include "../vmisc/compatibility.h"
-#endif
-
-#if !defined(BUILD_REVISION) && defined(QBS_BUILD)
-#include <vcsRepoState.h>
-#define BUILD_REVISION VCS_REPO_STATE_REVISION
 #endif
 
 #include "../vmisc/vcommonsettings.h"
@@ -173,7 +169,7 @@ void VGAnalytics::Init(const VCommonSettings *settings)
     statistic->SetGUILanguage(settings->GetLocale());
     statistic->SetMeasurementId(GA_MEASUREMENT_ID);
     statistic->SetApiSecret(GA_API_SECRET);
-    statistic->SetRepoRevision(QLatin1String(BUILD_REVISION));
+    statistic->SetRepoRevision(QLatin1String(VCS_REPO_STATE_REVISION));
     statistic->Enable(settings->IsCollectStatistic());
 }
 

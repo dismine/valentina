@@ -48,6 +48,7 @@
 #include "vtapeshortcutmanager.h"
 
 #include "QtConcurrent/qtconcurrentrun.h"
+#include <vcsRepoState.h>
 #include <QCommandLineParser>
 #include <QDir>
 #include <QDirIterator>
@@ -67,11 +68,6 @@
 #include <QThread>
 #include <QTranslator>
 #include <QUuid>
-
-#if !defined(BUILD_REVISION) && defined(QBS_BUILD)
-#include <vcsRepoState.h>
-#define BUILD_REVISION VCS_REPO_STATE_REVISION
-#endif
 
 #if QT_VERSION < QT_VERSION_CHECK(6, 4, 0)
 #include "../vmisc/compatibility.h"
@@ -477,7 +473,7 @@ void MApplication::InitOptions()
     StartLogging();
 
     qCDebug(mApp, "Version: %s", qUtf8Printable(AppVersionStr()));
-    qCDebug(mApp, "Build revision: %s", BUILD_REVISION);
+    qCDebug(mApp, "Build revision: %s", VCS_REPO_STATE_REVISION);
     qCDebug(mApp, "%s", qUtf8Printable(buildCompatibilityString()));
     qCDebug(mApp, "Built on %s at %s", __DATE__, __TIME__);
     qCDebug(mApp, "Command-line arguments: %s", qUtf8Printable(arguments().join(QStringLiteral(", "))));

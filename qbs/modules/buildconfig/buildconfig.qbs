@@ -133,7 +133,6 @@ Module {
             // We need this information also in release builds. For this need define QT_MESSAGELOGCONTEXT.
             "QT_MESSAGELOGCONTEXT",
 
-            "QBS_BUILD",
             "QT_NO_FOREACH",
             "QT_USE_NODISCARD_FILE_OPEN"
         ];

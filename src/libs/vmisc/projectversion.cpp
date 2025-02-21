@@ -36,7 +36,7 @@
 #include <QSysInfo>
 #include <QtGlobal>
 
-#if !defined(LATEST_TAG_DISTANCE) && defined(QBS_BUILD)
+#if !defined(LATEST_TAG_DISTANCE)
 #include <vcsRepoState.h>
 #define LATEST_TAG_DISTANCE VCS_REPO_STATE_DISTANCE
 #endif

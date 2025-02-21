@@ -36,11 +36,7 @@
 #include <QDesktopServices>
 #include <QMessageBox>
 #include <QtDebug>
-
-#if !defined(BUILD_REVISION) && defined(QBS_BUILD)
 #include <vcsRepoState.h>
-#define BUILD_REVISION VCS_REPO_STATE_REVISION
-#endif
 
 //---------------------------------------------------------------------------------------------------------------------
 DialogAboutApp::DialogAboutApp(QWidget *parent)
@@ -53,7 +49,7 @@ DialogAboutApp::DialogAboutApp(QWidget *parent)
                                                                            : setLocale(QLocale::c());
 
     ui->label_Valentina_Version->setText(QStringLiteral("Valentina %1").arg(AppVersionStr()));
-    ui->labelBuildRevision->setText(QStringLiteral("Build revision: %1").arg(QStringLiteral(BUILD_REVISION)));
+    ui->labelBuildRevision->setText(QStringLiteral("Build revision: %1").arg(QStringLiteral(VCS_REPO_STATE_REVISION)));
     ui->label_QT_Version->setText(buildCompatibilityString());
 
     QDate const date = QLocale::c().toDate(QStringLiteral(__DATE__).simplified(), QStringLiteral("MMM d yyyy"));
