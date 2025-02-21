@@ -4769,20 +4769,23 @@ void TMainWindow::InitKnownMeasurements(QComboBox *combo)
         combo->addItem(tr("Invalid link"), kmId);
     }
 
-    int index = 1;
-    auto i = known.constBegin();
-    while (i != known.constEnd())
+    const QString rootPath = MApplication::VApp()->TapeSettings()->GetPathKnownMeasurements();
+
+    for (auto i = known.constBegin(); i != known.constEnd(); ++i)
     {
         QString name = i.value().name;
 
-        if (i.value().name.isEmpty())
+        if (name.isEmpty())
         {
-            name = tr("Known measurements %1").arg(index);
-            ++index;
+            QString fullPath = i.value().path;
+            if (fullPath.startsWith(rootPath))
+            {
+                fullPath.remove(0, rootPath.length() + 1); // Remove root folder path
+            }
+            name = fullPath;
         }
 
         combo->addItem(name, i.key());
-        ++i;
     }
 }
 
