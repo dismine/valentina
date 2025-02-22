@@ -423,8 +423,9 @@ private:
 
     void InitScenes();
 
-    auto LoadMeasurements(const QString &path) -> bool;
-    auto UpdateMeasurements(const QString &path, qreal baseA, qreal baseB, qreal baseC) -> bool;
+    auto LoadMeasurements(const QString &patternPath, const QString &path) -> bool;
+    auto UpdateMeasurements(const QString &patternPath, const QString &path, qreal baseA, qreal baseB, qreal baseC)
+        -> bool;
     auto UpdateMeasurements(const QSharedPointer<VMeasurements> &mFile, qreal baseA, qreal baseB, qreal baseC) -> bool;
 
     void ReadMeasurements(qreal baseA, qreal baseB, qreal baseC);

@@ -147,9 +147,7 @@ protected:
     auto ExportFMeasurementsToCSVData(const QString &fileName, bool withHeader, int mib, const QChar &separator) const
         -> bool;
 
-    auto OpenMeasurementFile(const QString &path) const -> QSharedPointer<VMeasurements>;
-
-    void CheckRequiredMeasurements(const VMeasurements *m) const;
+    auto OpenMeasurementFile(const QString &patternPath, const QString &path) -> QSharedPointer<VMeasurements>;
 
 private:
     Q_DISABLE_COPY_MOVE(MainWindowsNoGUI) // NOLINT

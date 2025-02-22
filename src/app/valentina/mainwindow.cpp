@@ -655,9 +655,9 @@ void MainWindow::InitScenes()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-auto MainWindow::LoadMeasurements(const QString &path) -> bool
+auto MainWindow::LoadMeasurements(const QString &patternPath, const QString &path) -> bool
 {
-    m_m = OpenMeasurementFile(path);
+    m_m = OpenMeasurementFile(patternPath, path);
 
     if (m_m->isNull())
     {
@@ -705,9 +705,9 @@ auto MainWindow::LoadMeasurements(const QString &path) -> bool
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-auto MainWindow::UpdateMeasurements(const QString &path, qreal baseA, qreal baseB, qreal baseC) -> bool
+auto MainWindow::UpdateMeasurements(const QString &patternPath, const QString &path, qreal baseA, qreal baseB, qreal baseC) -> bool
 {
-    return UpdateMeasurements(OpenMeasurementFile(path), baseA, baseB, baseC);
+    return UpdateMeasurements(OpenMeasurementFile(patternPath, path), baseA, baseB, baseC);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -2102,24 +2102,25 @@ void MainWindow::LoadIndividual()
 
     if (not mPath.isEmpty())
     {
-        if (LoadMeasurements(mPath))
-        {
-            if (not doc->MPath().isEmpty())
-            {
-                m_watcher->removePath(AbsoluteMPath(VAbstractValApplication::VApp()->GetPatternPath(), doc->MPath()));
-            }
-            ui->actionUnloadMeasurements->setEnabled(true);
-            doc->SetMPath(RelativeMPath(VAbstractValApplication::VApp()->GetPatternPath(), mPath));
-            m_watcher->addPath(mPath);
-            PatternChangesWereSaved(false);
-            ui->actionEditCurrent->setEnabled(true);
-            statusBar()->showMessage(tr("Measurements loaded"), 5000);
-            doc->LiteParseTree(Document::FullLiteParse);
+      if (const QString patternPath = VAbstractValApplication::VApp()->GetPatternPath();
+          LoadMeasurements(patternPath, mPath))
+      {
+          if (not doc->MPath().isEmpty())
+          {
+              m_watcher->removePath(AbsoluteMPath(patternPath, doc->MPath()));
+          }
+          ui->actionUnloadMeasurements->setEnabled(true);
+          doc->SetMPath(RelativeMPath(patternPath, mPath));
+          m_watcher->addPath(mPath);
+          PatternChangesWereSaved(false);
+          ui->actionEditCurrent->setEnabled(true);
+          statusBar()->showMessage(tr("Measurements loaded"), 5000);
+          doc->LiteParseTree(Document::FullLiteParse);
 
-            UpdateWindowTitle();
-        }
+          UpdateWindowTitle();
+      }
 
-        settings->SetPathIndividualMeasurements(QFileInfo(mPath).absolutePath());
+      settings->SetPathIndividualMeasurements(QFileInfo(mPath).absolutePath());
     }
 }
 
@@ -2138,17 +2139,18 @@ void MainWindow::LoadMultisize()
         return;
     }
 
-    if (!LoadMeasurements(mPath))
+    const QString patternPath = VAbstractValApplication::VApp()->GetPatternPath();
+    if (!LoadMeasurements(patternPath, mPath))
     {
         return;
     }
 
     if (not doc->MPath().isEmpty())
     {
-        m_watcher->removePath(AbsoluteMPath(VAbstractValApplication::VApp()->GetPatternPath(), doc->MPath()));
+        m_watcher->removePath(AbsoluteMPath(patternPath, doc->MPath()));
     }
     ui->actionUnloadMeasurements->setEnabled(true);
-    doc->SetMPath(RelativeMPath(VAbstractValApplication::VApp()->GetPatternPath(), mPath));
+    doc->SetMPath(RelativeMPath(patternPath, mPath));
     m_watcher->addPath(mPath);
     PatternChangesWereSaved(false);
     ui->actionEditCurrent->setEnabled(true);
@@ -2302,12 +2304,13 @@ void MainWindow::SyncMeasurements()
 {
     if (m_mChanges)
     {
-        const QString path = AbsoluteMPath(VAbstractValApplication::VApp()->GetPatternPath(), doc->MPath());
+        const QString patternPath = VAbstractValApplication::VApp()->GetPatternPath();
+        const QString path = AbsoluteMPath(patternPath, doc->MPath());
 
         // Temporarily remove the path to prevent infinite synchronization after a format conversion.
         m_watcher->removePath(path);
 
-        if (UpdateMeasurements(path, m_currentDimensionA, m_currentDimensionB, m_currentDimensionC))
+        if (UpdateMeasurements(patternPath, path, m_currentDimensionA, m_currentDimensionB, m_currentDimensionC))
         {
             const QString msg = tr("Measurements have been synced");
             qCDebug(vMainWindow, "%s", qUtf8Printable(msg));
@@ -4917,7 +4920,8 @@ void MainWindow::GradationChanged()
 
     if (m_m->isNull())
     {
-        m_m = OpenMeasurementFile(AbsoluteMPath(VAbstractValApplication::VApp()->GetPatternPath(), doc->MPath()));
+        const QString patternPath = VAbstractValApplication::VApp()->GetPatternPath();
+        m_m = OpenMeasurementFile(patternPath, AbsoluteMPath(patternPath, doc->MPath()));
     }
 
     if (UpdateMeasurements(m_m, m_currentDimensionA, m_currentDimensionB, m_currentDimensionC))
@@ -6531,49 +6535,49 @@ auto MainWindow::LoadPattern(QString fileName, const QString &customMeasureFile)
         }
         VAbstractValApplication::VApp()->SetPatternUnits(doc->Units());
 
-        QString path = AbsoluteMPath(fileName, doc->MPath());
+        const QString path = AbsoluteMPath(fileName, doc->MPath());
         QString fixedMPath;
 
         // See issue #976. Pattern can lost link to measurements
         if (path.isEmpty() && doc->RequiresMeasurements())
         {
-            const auto fakeName = QStringLiteral("unknown_measurements.vit");
+            const auto fakePath = QStringLiteral("unknown_measurements.vit");
             // Check if exist
-            fixedMPath = CheckPathToMeasurements(fileName, fakeName);
+            fixedMPath = CheckPathToMeasurements(fileName, fakePath);
             if (fixedMPath.isEmpty())
             {
                 VAbstractValApplication::VApp()->setOpeningPattern(); // End opening file
                 Clear();
                 qCCritical(vMainWindow, "%s",
-                           qUtf8Printable(tr("The measurements file '%1' could not be found.").arg(fakeName)));
+                           qUtf8Printable(tr("The measurements file '%1' could not be found.").arg(fakePath)));
                 if (not VApplication::IsGUIMode())
                 {
                     QCoreApplication::exit(V_EX_NOINPUT);
                 }
                 return false;
             }
-
-            path = AbsoluteMPath(fileName, doc->MPath());
+        }
+        else if (not path.isEmpty())
+        {
+          // Check if exist
+          fixedMPath = CheckPathToMeasurements(fileName, path);
+          if (fixedMPath.isEmpty())
+          {
+              VAbstractValApplication::VApp()->setOpeningPattern(); // End opening file
+              Clear();
+              qCCritical(vMainWindow, "%s",
+                         qUtf8Printable(tr("The measurements file '%1' could not be found.").arg(path)));
+              if (not VApplication::IsGUIMode())
+              {
+                  QCoreApplication::exit(V_EX_NOINPUT);
+              }
+              return false;
+          }
         }
 
-        if (not path.isEmpty())
+        if (not fixedMPath.isEmpty())
         {
-            // Check if exist
-            fixedMPath = CheckPathToMeasurements(fileName, path);
-            if (fixedMPath.isEmpty())
-            {
-                VAbstractValApplication::VApp()->setOpeningPattern(); // End opening file
-                Clear();
-                qCCritical(vMainWindow, "%s",
-                           qUtf8Printable(tr("The measurements file '%1' could not be found.").arg(path)));
-                if (not VApplication::IsGUIMode())
-                {
-                    QCoreApplication::exit(V_EX_NOINPUT);
-                }
-                return false;
-            }
-
-            if (not LoadMeasurements(fixedMPath))
+            if (not LoadMeasurements(fileName, fixedMPath))
             {
                 qCCritical(vMainWindow, "%s",
                            qUtf8Printable(tr("The measurements file '%1' could not be found or "
@@ -7102,55 +7106,6 @@ auto MainWindow::CheckPathToMeasurements(const QString &patternPath, const QStri
     {
         throw VException(tr("Measurement file has unknown format."));
     }
-
-    if (patternType == MeasurementsType::Multisize)
-    {
-        VVSTConverter converter(mPath);
-        m->setXMLContent(converter.Convert()); // Read again after conversion
-
-        VCommonSettings *settings = VAbstractApplication::VApp()->Settings();
-        if (settings->IsCollectStatistic())
-        {
-            auto *statistic = VGAnalytics::Instance();
-
-            if (QString clientID = settings->GetClientID(); clientID.isEmpty())
-            {
-                clientID = QUuid::createUuid().toString();
-                settings->SetClientID(clientID);
-                statistic->SetClientID(clientID);
-            }
-
-            statistic->Enable(true);
-
-            const qint64 uptime = VAbstractApplication::VApp()->AppUptime();
-            statistic->SendMultisizeMeasurementsFormatVersion(uptime, converter.GetFormatVersionStr());
-        }
-    }
-    else
-    {
-        VVITConverter converter(mPath);
-        m->setXMLContent(converter.Convert()); // Read again after conversion
-
-        VCommonSettings *settings = VAbstractApplication::VApp()->Settings();
-        if (settings->IsCollectStatistic())
-        {
-            auto *statistic = VGAnalytics::Instance();
-
-            if (QString clientID = settings->GetClientID(); clientID.isEmpty())
-            {
-                clientID = QUuid::createUuid().toString();
-                settings->SetClientID(clientID);
-                statistic->SetClientID(clientID);
-            }
-
-            statistic->Enable(true);
-
-            const qint64 uptime = VAbstractApplication::VApp()->AppUptime();
-            statistic->SendIndividualMeasurementsFormatVersion(uptime, converter.GetFormatVersionStr());
-        }
-    }
-
-    CheckRequiredMeasurements(m.data());
 
     VAbstractValApplication::VApp()->SetMeasurementsType(patternType);
     doc->SetMPath(RelativeMPath(patternPath, mPath));

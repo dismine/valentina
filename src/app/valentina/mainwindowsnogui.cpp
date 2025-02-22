@@ -1295,103 +1295,179 @@ auto MainWindowsNoGUI::ExportFMeasurementsToCSVData(const QString &fileName, boo
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-auto MainWindowsNoGUI::OpenMeasurementFile(const QString &path) const -> QSharedPointer<VMeasurements>
+auto MainWindowsNoGUI::OpenMeasurementFile(const QString &patternPath, const QString &path)
+    -> QSharedPointer<VMeasurements>
 {
-    QSharedPointer<VMeasurements> m;
     if (path.isEmpty())
     {
-        return m;
+        return {};
     }
 
-    try
+    QSharedPointer<VMeasurements> m;
+    QString currentPath = path;
+
+    while (true)
     {
-        m = QSharedPointer<VMeasurements>(new VMeasurements(pattern));
-        m->setXMLContent(path);
-
-        if (m->Type() == MeasurementsType::Unknown)
+        try
         {
-            throw VException(QCoreApplication::translate("MainWindowsNoGUI", "Measurement file has unknown format."));
-        }
+            m = QSharedPointer<VMeasurements>(new VMeasurements(pattern));
+            m->setXMLContent(currentPath);
 
-        if (m->Type() == MeasurementsType::Multisize)
-        {
-            VVSTConverter converter(path);
-            m->setXMLContent(converter.Convert()); // Read again after conversion
-
-            VCommonSettings *settings = VAbstractApplication::VApp()->Settings();
-            if (settings->IsCollectStatistic())
+            if (m->Type() == MeasurementsType::Unknown)
             {
-                auto *statistic = VGAnalytics::Instance();
+                throw VException(
+                    QCoreApplication::translate("MainWindowsNoGUI", "Measurement file has unknown format."));
+            }
 
-                if (QString clientID = settings->GetClientID(); clientID.isEmpty())
+            if (currentPath != path)
+            {
+                VAbstractValApplication::VApp()->SetMeasurementsType(m->Type());
+                doc->SetMPath(RelativeMPath(patternPath, currentPath));
+            }
+
+            auto ProcessConversion = [currentPath, m](auto &&sendMeasurementFunction)
+            {
+                VVSTConverter converter(currentPath);
+                m->setXMLContent(converter.Convert()); // Read again after conversion
+
+                VCommonSettings *settings = VAbstractApplication::VApp()->Settings();
+                if (settings->IsCollectStatistic())
                 {
-                    clientID = QUuid::createUuid().toString();
-                    settings->SetClientID(clientID);
-                    statistic->SetClientID(clientID);
+                    auto *statistic = VGAnalytics::Instance();
+
+                    if (QString clientID = settings->GetClientID(); clientID.isEmpty())
+                    {
+                        clientID = QUuid::createUuid().toString();
+                        settings->SetClientID(clientID);
+                        statistic->SetClientID(clientID);
+                    }
+
+                    statistic->Enable(true);
+
+                    const qint64 uptime = VAbstractApplication::VApp()->AppUptime();
+                    (statistic->*sendMeasurementFunction)(uptime, converter.GetFormatVersionStr());
+                }
+            };
+
+            ProcessConversion(m->Type() == MeasurementsType::Multisize
+                                  ? &VGAnalytics::SendMultisizeMeasurementsFormatVersion
+                                  : &VGAnalytics::SendIndividualMeasurementsFormatVersion);
+
+            const QSet<QString> match = ConvertToSet<QString>(doc->ListMeasurements())
+                                            .subtract(ConvertToSet<QString>(m->ListAll()));
+
+            if (match.isEmpty())
+            {
+                return m; // Return the loaded file if it contains all required measurements
+            }
+
+            // If missing measurements, ask for another file
+            QStringList const list = ConvertToList(match);
+            QString message = tr("Measurement file doesn't include all required measurements.\n\n"
+                                 "Missing: %1\n\nWould you like to select another file?")
+                                  .arg(list.join(", "_L1));
+
+            if (VApplication::IsGUIMode())
+            {
+                if (bool selectNewFile = QMessageBox::question(this, tr("Missing Measurements"), message)
+                                         == QMessageBox::Yes;
+                    !selectNewFile)
+                {
+                    if (not m.isNull())
+                    {
+                        m->clear();
+                    }
+
+                    return m; // Return empty pointer if user doesn't want to select a new file
                 }
 
-                statistic->Enable(true);
-
-                const qint64 uptime = VAbstractApplication::VApp()->AppUptime();
-                statistic->SendMultisizeMeasurementsFormatVersion(uptime, converter.GetFormatVersionStr());
-            }
-        }
-        else
-        {
-            VVITConverter converter(path);
-            m->setXMLContent(converter.Convert()); // Read again after conversion
-
-            VCommonSettings *settings = VAbstractApplication::VApp()->Settings();
-            if (settings->IsCollectStatistic())
-            {
-                auto *statistic = VGAnalytics::Instance();
-
-                if (QString clientID = settings->GetClientID(); clientID.isEmpty())
+                auto FindLocation = [this](const QString &filter, const QString &dirPath, const QString &selectedName)
                 {
-                    clientID = QUuid::createUuid().toString();
-                    settings->SetClientID(clientID);
-                    statistic->SetClientID(clientID);
+                    QFileDialog dialog(this, tr("Select Measurement File"), dirPath, filter);
+                    dialog.selectFile(selectedName);
+                    dialog.setFileMode(QFileDialog::ExistingFile);
+                    dialog.setOption(QFileDialog::DontUseNativeDialog,
+                                     VAbstractApplication::VApp()->Settings()->IsDontUseNativeDialog());
+
+                    QString mPath;
+                    if (dialog.exec() == QDialog::Accepted)
+                    {
+                        mPath = dialog.selectedFiles().value(0);
+                    }
+
+                    return mPath;
+                };
+
+                auto DirPath = [currentPath](QString &selectedName)
+                {
+                    QFileInfo const table(currentPath);
+                    selectedName = table.fileName();
+                    return table.absoluteFilePath();
+                };
+
+                if (m->Type() == MeasurementsType::Multisize)
+                {
+                    const QString filter = tr("Multisize measurements") + " (*.vst);;"_L1
+                                           + tr("Individual measurements") + " (*.vit)"_L1;
+                    // Use standard path to multisize measurements
+                    QString selectedName;
+                    const QString dirPath = DirPath(selectedName);
+                    currentPath = FindLocation(filter, dirPath, selectedName);
+                    if (!currentPath.isEmpty())
+                    {
+                        VAbstractValApplication::VApp()->ValentinaSettings()->SetPathMultisizeMeasurements(currentPath);
+                    }
+                }
+                else
+                {
+                    const QString filter = tr("Individual measurements") + " (*.vit);;"_L1
+                                           + tr("Multisize measurements") + " (*.vst)"_L1;
+                    // Use standard path to individual measurements
+                    QString selectedName;
+                    const QString dirPath = DirPath(selectedName);
+                    currentPath = FindLocation(filter, dirPath, selectedName);
+                    if (!currentPath.isEmpty())
+                    {
+                        VAbstractValApplication::VApp()->ValentinaSettings()->SetPathIndividualMeasurements(currentPath);
+                    }
                 }
 
-                statistic->Enable(true);
+                if (currentPath.isEmpty())
+                {
+                    if (not m.isNull())
+                    {
+                        m->clear();
+                    }
 
-                const qint64 uptime = VAbstractApplication::VApp()->AppUptime();
-                statistic->SendIndividualMeasurementsFormatVersion(uptime, converter.GetFormatVersionStr());
+                    return m; // Return empty pointer if no file selected
+                }
+            }
+            else
+            {
+                VException e(tr("Measurement file doesn't include all required measurements."));
+                e.AddMoreInformation(tr("Please, additionally provide: %1").arg(list.join(", "_L1)));
+                throw e;
             }
         }
-
-        CheckRequiredMeasurements(m.data());
-    }
-    catch (VException &e)
-    {
-        qCCritical(vMainNoGUIWindow, "%s\n\n%s\n\n%s",
-                   qUtf8Printable(QCoreApplication::translate("MainWindowsNoGUI", "File error.")),
-                   qUtf8Printable(e.ErrorMessage()), qUtf8Printable(e.DetailedInformation()));
-        if (not m.isNull())
+        catch (VException &e)
         {
-            m->clear();
-        }
+            qCCritical(vMainNoGUIWindow,
+                       "%s\n\n%s\n\n%s",
+                       qUtf8Printable(QCoreApplication::translate("MainWindowsNoGUI", "File error.")),
+                       qUtf8Printable(e.ErrorMessage()),
+                       qUtf8Printable(e.DetailedInformation()));
 
-        if (not VApplication::IsGUIMode())
-        {
-            QCoreApplication::exit(V_EX_NOINPUT);
+            if (not m.isNull())
+            {
+                m->clear();
+            }
+
+            if (not VApplication::IsGUIMode())
+            {
+                QCoreApplication::exit(V_EX_NOINPUT);
+            }
+            return m;
         }
-        return m;
     }
     return m;
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-void MainWindowsNoGUI::CheckRequiredMeasurements(const VMeasurements *m) const
-{
-    const QSet<QString> match =
-        ConvertToSet<QString>(doc->ListMeasurements()).subtract(ConvertToSet<QString>(m->ListAll()));
-
-    if (not match.isEmpty())
-    {
-        QStringList const list = ConvertToList(match);
-        VException e(tr("Measurement file doesn't include all required measurements."));
-        e.AddMoreInformation(tr("Please, additionally provide: %1").arg(list.join(", "_L1)));
-        throw e;
-    }
 }
