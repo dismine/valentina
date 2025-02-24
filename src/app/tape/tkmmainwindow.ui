@@ -745,6 +745,9 @@
                 <property name="enabled">
                  <bool>true</bool>
                 </property>
+                <property name="toolTip">
+                 <string>Add images</string>
+                </property>
                 <property name="text">
                  <string notr="true">...</string>
                 </property>
@@ -760,7 +763,7 @@
                  <bool>false</bool>
                 </property>
                 <property name="toolTip">
-                 <string>Delete measurement</string>
+                 <string>Delete image</string>
                 </property>
                 <property name="text">
                  <string notr="true"/>

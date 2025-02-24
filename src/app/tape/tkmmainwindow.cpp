@@ -904,28 +904,34 @@ void TKMMainWindow::AddImage()
 {
     VTapeSettings *settings = MApplication::VApp()->TapeSettings();
 
-    const QString filePath =
-        QFileDialog::getOpenFileName(this, tr("Measurement image"), settings->GetPathCustomImage(),
-                                     PrepareImageFilters(), nullptr, VAbstractApplication::VApp()->NativeFileDialog());
+    const QStringList filePaths = QFileDialog::getOpenFileNames(this,
+                                                                tr("Measurement images"),
+                                                                settings->GetPathCustomImage(),
+                                                                PrepareImageFilters(),
+                                                                nullptr,
+                                                                VAbstractApplication::VApp()->NativeFileDialog());
 
-    if (!filePath.isEmpty())
+    if (!filePaths.isEmpty())
     {
-        if (QFileInfo::exists(filePath))
+        for (const auto &filePath : filePaths)
         {
-            settings->SetPathCustomImage(QFileInfo(filePath).absolutePath());
+            if (QFileInfo f(filePath); f.exists())
+            {
+                settings->SetPathCustomImage(f.absolutePath());
+            }
+
+            VPatternImage const image = VPatternImage::FromFile(filePath);
+
+            if (not image.IsValid())
+            {
+                qCritical() << tr("Invalid image. Error: %1").arg(image.ErrorString());
+                continue;
+            }
+
+            m_m->AddImage(image);
+
+            MeasurementsWereSaved(false);
         }
-
-        VPatternImage const image = VPatternImage::FromFile(filePath);
-
-        if (not image.IsValid())
-        {
-            qCritical() << tr("Invalid image. Error: %1").arg(image.ErrorString());
-            return;
-        }
-
-        m_m->AddImage(image);
-
-        MeasurementsWereSaved(false);
 
         m_known = VKnownMeasurements();
         RefreshImages();
