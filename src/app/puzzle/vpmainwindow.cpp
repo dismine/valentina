@@ -774,6 +774,12 @@ void VPMainWindow::SetupMenu()
                 ui->menuWindow->clear();
                 CreateWindowMenu(ui->menuWindow);
             });
+
+    // Help
+    connect(ui->actionSettingsDirectory,
+            &QAction::triggered,
+            this,
+            []() { ShowInGraphicalShell(VPApplication::VApp()->PuzzleSettings()->fileName()); });
 }
 
 //---------------------------------------------------------------------------------------------------------------------

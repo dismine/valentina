@@ -6204,6 +6204,11 @@ void MainWindow::CreateActions()
                 qCDebug(vMainWindow, "Open shop");
                 QDesktopServices::openUrl(QUrl(QStringLiteral("https://smart-pattern.com.ua/catalogue/")));
             });
+    connect(ui->actionSettingsDirectory, &QAction::triggered, this,
+            []()
+            {
+                ShowInGraphicalShell(VAbstractValApplication::VApp()->ValentinaSettings()->fileName());
+            });
 
     connect(ui->actionLast_tool, &QAction::triggered, this, &MainWindow::LastUsedTool);
 

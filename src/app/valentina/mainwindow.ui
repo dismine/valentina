@@ -37,10 +37,10 @@
        <bool>false</bool>
       </property>
       <property name="verticalScrollBarPolicy">
-       <enum>Qt::ScrollBarAlwaysOn</enum>
+       <enum>Qt::ScrollBarPolicy::ScrollBarAlwaysOn</enum>
       </property>
       <property name="horizontalScrollBarPolicy">
-       <enum>Qt::ScrollBarAlwaysOn</enum>
+       <enum>Qt::ScrollBarPolicy::ScrollBarAlwaysOn</enum>
       </property>
      </widget>
     </item>
@@ -90,6 +90,7 @@
      <string>&amp;Help</string>
     </property>
     <addaction name="actionReportBug"/>
+    <addaction name="actionSettingsDirectory"/>
     <addaction name="actionShop"/>
     <addaction name="actionAbout_Qt"/>
     <addaction name="actionAbout_Valentina"/>
@@ -202,7 +203,7 @@
     <string>Toolbar files</string>
    </property>
    <property name="toolButtonStyle">
-    <enum>Qt::ToolButtonTextUnderIcon</enum>
+    <enum>Qt::ToolButtonStyle::ToolButtonTextUnderIcon</enum>
    </property>
    <attribute name="toolBarArea">
     <enum>TopToolBarArea</enum>
@@ -229,7 +230,7 @@
     <string>ToolBar modes</string>
    </property>
    <property name="toolButtonStyle">
-    <enum>Qt::ToolButtonTextUnderIcon</enum>
+    <enum>Qt::ToolButtonStyle::ToolButtonTextUnderIcon</enum>
    </property>
    <attribute name="toolBarArea">
     <enum>TopToolBarArea</enum>
@@ -254,7 +255,7 @@
     <string>Toolbar pattern</string>
    </property>
    <property name="toolButtonStyle">
-    <enum>Qt::ToolButtonTextUnderIcon</enum>
+    <enum>Qt::ToolButtonStyle::ToolButtonTextUnderIcon</enum>
    </property>
    <attribute name="toolBarArea">
     <enum>TopToolBarArea</enum>
@@ -274,7 +275,7 @@
     <string>Toolbar options</string>
    </property>
    <property name="toolButtonStyle">
-    <enum>Qt::ToolButtonTextUnderIcon</enum>
+    <enum>Qt::ToolButtonStyle::ToolButtonTextUnderIcon</enum>
    </property>
    <attribute name="toolBarArea">
     <enum>BottomToolBarArea</enum>
@@ -296,7 +297,7 @@
     <string>Toolbar tools</string>
    </property>
    <property name="toolButtonStyle">
-    <enum>Qt::ToolButtonTextUnderIcon</enum>
+    <enum>Qt::ToolButtonStyle::ToolButtonTextUnderIcon</enum>
    </property>
    <attribute name="toolBarArea">
     <enum>TopToolBarArea</enum>
@@ -325,10 +326,10 @@
   </widget>
   <widget class="QDockWidget" name="dockWidgetLayoutPages">
    <property name="features">
-    <set>QDockWidget::NoDockWidgetFeatures</set>
+    <set>QDockWidget::DockWidgetFeature::NoDockWidgetFeatures</set>
    </property>
    <property name="allowedAreas">
-    <set>Qt::RightDockWidgetArea</set>
+    <set>Qt::DockWidgetArea::RightDockWidgetArea</set>
    </property>
    <property name="windowTitle">
     <string>Layout pages</string>
@@ -347,10 +348,10 @@
         </sizepolicy>
        </property>
        <property name="frameShape">
-        <enum>QFrame::StyledPanel</enum>
+        <enum>QFrame::Shape::StyledPanel</enum>
        </property>
        <property name="frameShadow">
-        <enum>QFrame::Sunken</enum>
+        <enum>QFrame::Shadow::Sunken</enum>
        </property>
        <property name="tabKeyNavigation">
         <bool>true</bool>
@@ -365,22 +366,22 @@
         </size>
        </property>
        <property name="movement">
-        <enum>QListView::Static</enum>
+        <enum>QListView::Movement::Static</enum>
        </property>
        <property name="flow">
-        <enum>QListView::TopToBottom</enum>
+        <enum>QListView::Flow::TopToBottom</enum>
        </property>
        <property name="isWrapping" stdset="0">
         <bool>false</bool>
        </property>
        <property name="resizeMode">
-        <enum>QListView::Adjust</enum>
+        <enum>QListView::ResizeMode::Adjust</enum>
        </property>
        <property name="spacing">
         <number>10</number>
        </property>
        <property name="viewMode">
-        <enum>QListView::IconMode</enum>
+        <enum>QListView::ViewMode::IconMode</enum>
        </property>
       </widget>
      </item>
@@ -505,10 +506,10 @@
        <item>
         <spacer name="horizontalSpacer">
          <property name="orientation">
-          <enum>Qt::Horizontal</enum>
+          <enum>Qt::Orientation::Horizontal</enum>
          </property>
          <property name="sizeType">
-          <enum>QSizePolicy::Expanding</enum>
+          <enum>QSizePolicy::Policy::Expanding</enum>
          </property>
          <property name="sizeHint" stdset="0">
           <size>
@@ -573,7 +574,7 @@
     </size>
    </property>
    <property name="toolButtonStyle">
-    <enum>Qt::ToolButtonIconOnly</enum>
+    <enum>Qt::ToolButtonStyle::ToolButtonIconOnly</enum>
    </property>
    <attribute name="toolBarArea">
     <enum>LeftToolBarArea</enum>
@@ -700,7 +701,7 @@
     <string notr="true">Ctrl+N</string>
    </property>
    <property name="menuRole">
-    <enum>QAction::NoRole</enum>
+    <enum>QAction::MenuRole::NoRole</enum>
    </property>
   </action>
   <action name="actionOpen">
@@ -720,7 +721,7 @@
     <string>Ctrl+O</string>
    </property>
    <property name="menuRole">
-    <enum>QAction::NoRole</enum>
+    <enum>QAction::MenuRole::NoRole</enum>
    </property>
   </action>
   <action name="actionSave">
@@ -743,7 +744,7 @@
     <string notr="true">Ctrl+S</string>
    </property>
    <property name="menuRole">
-    <enum>QAction::NoRole</enum>
+    <enum>QAction::MenuRole::NoRole</enum>
    </property>
   </action>
   <action name="actionSaveAs">
@@ -763,7 +764,7 @@
     <string notr="true">Ctrl+Shift+S</string>
    </property>
    <property name="menuRole">
-    <enum>QAction::NoRole</enum>
+    <enum>QAction::MenuRole::NoRole</enum>
    </property>
   </action>
   <action name="actionDraw">
@@ -790,7 +791,7 @@
     <string notr="true">Ctrl+W</string>
    </property>
    <property name="menuRole">
-    <enum>QAction::NoRole</enum>
+    <enum>QAction::MenuRole::NoRole</enum>
    </property>
   </action>
   <action name="actionDetails">
@@ -814,7 +815,7 @@
     <string notr="true">Ctrl+E</string>
    </property>
    <property name="menuRole">
-    <enum>QAction::NoRole</enum>
+    <enum>QAction::MenuRole::NoRole</enum>
    </property>
   </action>
   <action name="actionArrowTool">
@@ -837,6 +838,9 @@
    <property name="shortcut">
     <string notr="true"/>
    </property>
+   <property name="menuRole">
+    <enum>QAction::MenuRole::NoRole</enum>
+   </property>
   </action>
   <action name="actionNewDraw">
    <property name="enabled">
@@ -856,7 +860,7 @@
     <string notr="true">Ctrl+Shift+N</string>
    </property>
    <property name="menuRole">
-    <enum>QAction::NoRole</enum>
+    <enum>QAction::MenuRole::NoRole</enum>
    </property>
   </action>
   <action name="actionOptionDraw">
@@ -877,7 +881,7 @@
     <string notr="true"/>
    </property>
    <property name="menuRole">
-    <enum>QAction::NoRole</enum>
+    <enum>QAction::MenuRole::NoRole</enum>
    </property>
   </action>
   <action name="actionTable">
@@ -901,7 +905,7 @@
     <string notr="true">Ctrl+T</string>
    </property>
    <property name="menuRole">
-    <enum>QAction::NoRole</enum>
+    <enum>QAction::MenuRole::NoRole</enum>
    </property>
   </action>
   <action name="actionHistory">
@@ -922,7 +926,7 @@
     <string notr="true">Ctrl+H</string>
    </property>
    <property name="menuRole">
-    <enum>QAction::NoRole</enum>
+    <enum>QAction::MenuRole::NoRole</enum>
    </property>
   </action>
   <action name="actionLayout">
@@ -946,7 +950,7 @@
     <string notr="true">Ctrl+L</string>
    </property>
    <property name="menuRole">
-    <enum>QAction::NoRole</enum>
+    <enum>QAction::MenuRole::NoRole</enum>
    </property>
   </action>
   <action name="actionAbout_Qt">
@@ -957,7 +961,7 @@
     <string notr="true"/>
    </property>
    <property name="menuRole">
-    <enum>QAction::AboutQtRole</enum>
+    <enum>QAction::MenuRole::AboutQtRole</enum>
    </property>
   </action>
   <action name="actionAbout_Valentina">
@@ -971,7 +975,7 @@
     <string notr="true"/>
    </property>
    <property name="menuRole">
-    <enum>QAction::AboutRole</enum>
+    <enum>QAction::MenuRole::AboutRole</enum>
    </property>
   </action>
   <action name="actionExit">
@@ -988,7 +992,7 @@
     <string notr="true">Ctrl+Q</string>
    </property>
    <property name="menuRole">
-    <enum>QAction::QuitRole</enum>
+    <enum>QAction::MenuRole::QuitRole</enum>
    </property>
   </action>
   <action name="actionPreferences">
@@ -999,7 +1003,7 @@
     <string notr="true"/>
    </property>
    <property name="menuRole">
-    <enum>QAction::PreferencesRole</enum>
+    <enum>QAction::MenuRole::PreferencesRole</enum>
    </property>
   </action>
   <action name="actionPattern_properties">
@@ -1010,7 +1014,7 @@
     <string notr="true"/>
    </property>
    <property name="menuRole">
-    <enum>QAction::NoRole</enum>
+    <enum>QAction::MenuRole::NoRole</enum>
    </property>
   </action>
   <action name="actionZoomIn">
@@ -1030,7 +1034,7 @@
     <string notr="true"/>
    </property>
    <property name="menuRole">
-    <enum>QAction::NoRole</enum>
+    <enum>QAction::MenuRole::NoRole</enum>
    </property>
   </action>
   <action name="actionZoomOut">
@@ -1050,7 +1054,7 @@
     <string notr="true"/>
    </property>
    <property name="menuRole">
-    <enum>QAction::NoRole</enum>
+    <enum>QAction::MenuRole::NoRole</enum>
    </property>
   </action>
   <action name="actionZoomOriginal">
@@ -1070,7 +1074,7 @@
     <string notr="true"/>
    </property>
    <property name="menuRole">
-    <enum>QAction::NoRole</enum>
+    <enum>QAction::MenuRole::NoRole</enum>
    </property>
   </action>
   <action name="actionZoomFitBest">
@@ -1087,7 +1091,7 @@
     <string notr="true">Ctrl+=</string>
    </property>
    <property name="menuRole">
-    <enum>QAction::NoRole</enum>
+    <enum>QAction::MenuRole::NoRole</enum>
    </property>
   </action>
   <action name="actionReportBug">
@@ -1101,7 +1105,7 @@
     <string notr="true"/>
    </property>
    <property name="menuRole">
-    <enum>QAction::NoRole</enum>
+    <enum>QAction::MenuRole::NoRole</enum>
    </property>
   </action>
   <action name="actionClosePattern">
@@ -1118,7 +1122,7 @@
     <string notr="true"/>
    </property>
    <property name="menuRole">
-    <enum>QAction::NoRole</enum>
+    <enum>QAction::MenuRole::NoRole</enum>
    </property>
   </action>
   <action name="actionLast_tool">
@@ -1135,7 +1139,7 @@
     <string notr="true">L</string>
    </property>
    <property name="menuRole">
-    <enum>QAction::NoRole</enum>
+    <enum>QAction::MenuRole::NoRole</enum>
    </property>
   </action>
   <action name="actionShowCurveDetails">
@@ -1155,7 +1159,7 @@
     <string notr="true">F2</string>
    </property>
    <property name="menuRole">
-    <enum>QAction::NoRole</enum>
+    <enum>QAction::MenuRole::NoRole</enum>
    </property>
   </action>
   <action name="actionPrint">
@@ -1175,7 +1179,7 @@
     <string notr="true"/>
    </property>
    <property name="menuRole">
-    <enum>QAction::NoRole</enum>
+    <enum>QAction::MenuRole::NoRole</enum>
    </property>
   </action>
   <action name="actionPrintTiled">
@@ -1195,7 +1199,7 @@
     <string notr="true"/>
    </property>
    <property name="menuRole">
-    <enum>QAction::NoRole</enum>
+    <enum>QAction::MenuRole::NoRole</enum>
    </property>
   </action>
   <action name="actionPrintPreview">
@@ -1215,7 +1219,7 @@
     <string notr="true"/>
    </property>
    <property name="menuRole">
-    <enum>QAction::NoRole</enum>
+    <enum>QAction::MenuRole::NoRole</enum>
    </property>
   </action>
   <action name="actionPrintPreviewTiled">
@@ -1235,7 +1239,7 @@
     <string notr="true"/>
    </property>
    <property name="menuRole">
-    <enum>QAction::NoRole</enum>
+    <enum>QAction::MenuRole::NoRole</enum>
    </property>
   </action>
   <action name="actionExportAs">
@@ -1256,7 +1260,7 @@
     <string notr="true"/>
    </property>
    <property name="menuRole">
-    <enum>QAction::NoRole</enum>
+    <enum>QAction::MenuRole::NoRole</enum>
    </property>
   </action>
   <action name="actionLoadIndividual">
@@ -1273,7 +1277,7 @@
     <string notr="true"/>
    </property>
    <property name="menuRole">
-    <enum>QAction::NoRole</enum>
+    <enum>QAction::MenuRole::NoRole</enum>
    </property>
   </action>
   <action name="actionLoadMultisize">
@@ -1293,7 +1297,7 @@
     <string notr="true"/>
    </property>
    <property name="menuRole">
-    <enum>QAction::NoRole</enum>
+    <enum>QAction::MenuRole::NoRole</enum>
    </property>
   </action>
   <action name="actionOpenTape">
@@ -1307,7 +1311,7 @@
     <string notr="true"/>
    </property>
    <property name="menuRole">
-    <enum>QAction::NoRole</enum>
+    <enum>QAction::MenuRole::NoRole</enum>
    </property>
   </action>
   <action name="actionEditCurrent">
@@ -1324,7 +1328,7 @@
     <string notr="true"/>
    </property>
    <property name="menuRole">
-    <enum>QAction::NoRole</enum>
+    <enum>QAction::MenuRole::NoRole</enum>
    </property>
   </action>
   <action name="actionSyncMeasurements">
@@ -1345,7 +1349,7 @@
     <string notr="true"/>
    </property>
    <property name="menuRole">
-    <enum>QAction::NoRole</enum>
+    <enum>QAction::MenuRole::NoRole</enum>
    </property>
   </action>
   <action name="actionUnloadMeasurements">
@@ -1362,7 +1366,7 @@
     <string notr="true"/>
    </property>
    <property name="menuRole">
-    <enum>QAction::NoRole</enum>
+    <enum>QAction::MenuRole::NoRole</enum>
    </property>
   </action>
   <action name="actionExportIncrementsToCSV">
@@ -1373,7 +1377,7 @@
     <string>Export increments to CSV</string>
    </property>
    <property name="menuRole">
-    <enum>QAction::NoRole</enum>
+    <enum>QAction::MenuRole::NoRole</enum>
    </property>
   </action>
   <action name="actionZoomFitBestCurrent">
@@ -1390,7 +1394,7 @@
     <string notr="true">Ctrl+M</string>
    </property>
    <property name="menuRole">
-    <enum>QAction::NoRole</enum>
+    <enum>QAction::MenuRole::NoRole</enum>
    </property>
   </action>
   <action name="actionLabelTemplateEditor">
@@ -1398,7 +1402,7 @@
     <string>Label template editor</string>
    </property>
    <property name="menuRole">
-    <enum>QAction::NoRole</enum>
+    <enum>QAction::MenuRole::NoRole</enum>
    </property>
   </action>
   <action name="actionFinalMeasurements">
@@ -1411,6 +1415,9 @@
    <property name="shortcut">
     <string notr="true">Ctrl+I</string>
    </property>
+   <property name="menuRole">
+    <enum>QAction::MenuRole::NoRole</enum>
+   </property>
   </action>
   <action name="actionExportFinalMeasurementsToCSV">
    <property name="enabled">
@@ -1420,7 +1427,7 @@
     <string>Export Final Measurements to CSV</string>
    </property>
    <property name="menuRole">
-    <enum>QAction::NoRole</enum>
+    <enum>QAction::MenuRole::NoRole</enum>
    </property>
   </action>
   <action name="actionNextPatternPiece">
@@ -1434,7 +1441,7 @@
     <string>Ctrl+PgDown</string>
    </property>
    <property name="menuRole">
-    <enum>QAction::NoRole</enum>
+    <enum>QAction::MenuRole::NoRole</enum>
    </property>
   </action>
   <action name="actionPreviousPatternPiece">
@@ -1448,7 +1455,7 @@
     <string>Ctrl+PgUp</string>
    </property>
    <property name="menuRole">
-    <enum>QAction::NoRole</enum>
+    <enum>QAction::MenuRole::NoRole</enum>
    </property>
   </action>
   <action name="actionIncreaseLabelFont">
@@ -1462,7 +1469,7 @@
     <string>Increase label font</string>
    </property>
    <property name="menuRole">
-    <enum>QAction::NoRole</enum>
+    <enum>QAction::MenuRole::NoRole</enum>
    </property>
   </action>
   <action name="actionDecreaseLabelFont">
@@ -1476,7 +1483,7 @@
     <string>Decrease label font</string>
    </property>
    <property name="menuRole">
-    <enum>QAction::NoRole</enum>
+    <enum>QAction::MenuRole::NoRole</enum>
    </property>
   </action>
   <action name="actionOriginalLabelFont">
@@ -1490,7 +1497,7 @@
     <string>Original label font</string>
    </property>
    <property name="menuRole">
-    <enum>QAction::NoRole</enum>
+    <enum>QAction::MenuRole::NoRole</enum>
    </property>
   </action>
   <action name="actionHideLabels">
@@ -1504,7 +1511,7 @@
     <string>Hide labels</string>
    </property>
    <property name="menuRole">
-    <enum>QAction::NoRole</enum>
+    <enum>QAction::MenuRole::NoRole</enum>
    </property>
   </action>
   <action name="actionExportRecipe">
@@ -1518,7 +1525,7 @@
     <string>Export recipe</string>
    </property>
    <property name="menuRole">
-    <enum>QAction::NoRole</enum>
+    <enum>QAction::MenuRole::NoRole</enum>
    </property>
   </action>
   <action name="actionShowMainPath">
@@ -1535,7 +1542,7 @@
     <string>Globally show pieces main path</string>
    </property>
    <property name="menuRole">
-    <enum>QAction::NoRole</enum>
+    <enum>QAction::MenuRole::NoRole</enum>
    </property>
   </action>
   <action name="actionLoadWatermark">
@@ -1549,7 +1556,7 @@
     <string>Load</string>
    </property>
    <property name="menuRole">
-    <enum>QAction::NoRole</enum>
+    <enum>QAction::MenuRole::NoRole</enum>
    </property>
   </action>
   <action name="actionRemoveWatermark">
@@ -1563,7 +1570,7 @@
     <string>Remove</string>
    </property>
    <property name="menuRole">
-    <enum>QAction::NoRole</enum>
+    <enum>QAction::MenuRole::NoRole</enum>
    </property>
   </action>
   <action name="actionEditCurrentWatermark">
@@ -1574,7 +1581,7 @@
     <string>Edit current</string>
    </property>
    <property name="menuRole">
-    <enum>QAction::NoRole</enum>
+    <enum>QAction::MenuRole::NoRole</enum>
    </property>
   </action>
   <action name="actionWatermarkEditor">
@@ -1588,7 +1595,7 @@
     <string>Create or edit a watermark</string>
    </property>
    <property name="menuRole">
-    <enum>QAction::NoRole</enum>
+    <enum>QAction::MenuRole::NoRole</enum>
    </property>
   </action>
   <action name="actionOpenPuzzle">
@@ -1599,7 +1606,7 @@
     <string>Open the Puzzle app</string>
    </property>
    <property name="menuRole">
-    <enum>QAction::NoRole</enum>
+    <enum>QAction::MenuRole::NoRole</enum>
    </property>
   </action>
   <action name="actionCreateManualLayout">
@@ -1613,7 +1620,7 @@
     <string>Create manual layout</string>
    </property>
    <property name="menuRole">
-    <enum>QAction::NoRole</enum>
+    <enum>QAction::MenuRole::NoRole</enum>
    </property>
   </action>
   <action name="actionUpdateManualLayout">
@@ -1627,7 +1634,7 @@
     <string>Update manual layout</string>
    </property>
    <property name="menuRole">
-    <enum>QAction::NoRole</enum>
+    <enum>QAction::MenuRole::NoRole</enum>
    </property>
   </action>
   <action name="actionShop">
@@ -1635,7 +1642,7 @@
     <string>Shop</string>
    </property>
    <property name="menuRole">
-    <enum>QAction::NoRole</enum>
+    <enum>QAction::MenuRole::NoRole</enum>
    </property>
   </action>
   <action name="actionAddBackgroundImage">
@@ -1646,7 +1653,7 @@
     <string>Add background image</string>
    </property>
    <property name="menuRole">
-    <enum>QAction::NoRole</enum>
+    <enum>QAction::MenuRole::NoRole</enum>
    </property>
   </action>
   <action name="actionShowAccuracyRadius">
@@ -1658,6 +1665,9 @@
    </property>
    <property name="text">
     <string>Show accuracy radius</string>
+   </property>
+   <property name="menuRole">
+    <enum>QAction::MenuRole::NoRole</enum>
    </property>
   </action>
   <action name="actionInteractiveTools">
@@ -1673,6 +1683,9 @@
    <property name="shortcut">
     <string>Ctrl+D</string>
    </property>
+   <property name="menuRole">
+    <enum>QAction::MenuRole::NoRole</enum>
+   </property>
   </action>
   <action name="actionExportFontCorrections">
    <property name="enabled">
@@ -1680,6 +1693,9 @@
    </property>
    <property name="text">
     <string>Export font corrections</string>
+   </property>
+   <property name="menuRole">
+    <enum>QAction::MenuRole::NoRole</enum>
    </property>
   </action>
   <action name="actionToolSelect">
@@ -1697,7 +1713,7 @@
     <string>Tool &quot;Select&quot;</string>
    </property>
    <property name="menuRole">
-    <enum>QAction::NoRole</enum>
+    <enum>QAction::MenuRole::NoRole</enum>
    </property>
   </action>
   <action name="actionLayoutSettings">
@@ -1717,7 +1733,7 @@
     <string>Create new Layout</string>
    </property>
    <property name="menuRole">
-    <enum>QAction::NoRole</enum>
+    <enum>QAction::MenuRole::NoRole</enum>
    </property>
   </action>
   <action name="actionLayoutExportAs">
@@ -1738,7 +1754,7 @@
     <string>Export original layout</string>
    </property>
    <property name="menuRole">
-    <enum>QAction::NoRole</enum>
+    <enum>QAction::MenuRole::NoRole</enum>
    </property>
   </action>
   <action name="actionEndLineTool">
@@ -1752,14 +1768,14 @@
     <bool>false</bool>
    </property>
    <property name="icon">
-    <iconset resource="share/resources/toolicon.qrc">
+    <iconset>
      <normaloff>:/toolicon/light/segment.png</normaloff>:/toolicon/light/segment.png</iconset>
    </property>
    <property name="text">
     <string>Point at distance and angle</string>
    </property>
    <property name="menuRole">
-    <enum>QAction::NoRole</enum>
+    <enum>QAction::MenuRole::NoRole</enum>
    </property>
   </action>
   <action name="actionPointOfIntersectionArcsTool">
@@ -1770,14 +1786,14 @@
     <bool>false</bool>
    </property>
    <property name="icon">
-    <iconset resource="share/resources/toolicon.qrc">
+    <iconset>
      <normaloff>:/toolicon/light/point_of_intersection_arcs.png</normaloff>:/toolicon/light/point_of_intersection_arcs.png</iconset>
    </property>
    <property name="text">
     <string>Point of intersection arcs</string>
    </property>
    <property name="menuRole">
-    <enum>QAction::NoRole</enum>
+    <enum>QAction::MenuRole::NoRole</enum>
    </property>
   </action>
   <action name="actionArcIntersectAxisTool">
@@ -1788,14 +1804,14 @@
     <bool>false</bool>
    </property>
    <property name="icon">
-    <iconset resource="share/resources/toolicon.qrc">
+    <iconset>
      <normaloff>:/toolicon/light/arc_intersect_axis.png</normaloff>:/toolicon/light/arc_intersect_axis.png</iconset>
    </property>
    <property name="text">
     <string>Point of intersection arc and axis</string>
    </property>
    <property name="menuRole">
-    <enum>QAction::NoRole</enum>
+    <enum>QAction::MenuRole::NoRole</enum>
    </property>
   </action>
   <action name="actionArcCutPointTool">
@@ -1806,14 +1822,14 @@
     <bool>false</bool>
    </property>
    <property name="icon">
-    <iconset resource="share/resources/toolicon.qrc">
+    <iconset>
      <normaloff>:/toolicon/light/arc_cut.png</normaloff>:/toolicon/light/arc_cut.png</iconset>
    </property>
    <property name="text">
     <string>Segment an arc</string>
    </property>
    <property name="menuRole">
-    <enum>QAction::NoRole</enum>
+    <enum>QAction::MenuRole::NoRole</enum>
    </property>
   </action>
   <action name="actionArcTool">
@@ -1824,14 +1840,14 @@
     <bool>false</bool>
    </property>
    <property name="icon">
-    <iconset resource="share/resources/toolicon.qrc">
+    <iconset>
      <normaloff>:/toolicon/light/arc.png</normaloff>:/toolicon/light/arc.png</iconset>
    </property>
    <property name="text">
     <string>Arc</string>
    </property>
    <property name="menuRole">
-    <enum>QAction::NoRole</enum>
+    <enum>QAction::MenuRole::NoRole</enum>
    </property>
   </action>
   <action name="actionCurveIntersectAxisTool">
@@ -1842,14 +1858,14 @@
     <bool>false</bool>
    </property>
    <property name="icon">
-    <iconset resource="share/resources/toolicon.qrc">
+    <iconset>
      <normaloff>:/toolicon/light/curve_intersect_axis.png</normaloff>:/toolicon/light/curve_intersect_axis.png</iconset>
    </property>
    <property name="text">
     <string>Point intersect curve and axis</string>
    </property>
    <property name="menuRole">
-    <enum>QAction::NoRole</enum>
+    <enum>QAction::MenuRole::NoRole</enum>
    </property>
   </action>
   <action name="actionIntersectionCurvesTool">
@@ -1860,14 +1876,14 @@
     <bool>false</bool>
    </property>
    <property name="icon">
-    <iconset resource="share/resources/toolicon.qrc">
+    <iconset>
      <normaloff>:/toolicon/light/intersection_curves.png</normaloff>:/toolicon/light/intersection_curves.png</iconset>
    </property>
    <property name="text">
     <string>Point intersection curves</string>
    </property>
    <property name="menuRole">
-    <enum>QAction::NoRole</enum>
+    <enum>QAction::MenuRole::NoRole</enum>
    </property>
   </action>
   <action name="actionCubicBezierPathTool">
@@ -1878,14 +1894,14 @@
     <bool>false</bool>
    </property>
    <property name="icon">
-    <iconset resource="share/resources/toolicon.qrc">
+    <iconset>
      <normaloff>:/toolicon/light/cubic_bezier_path.png</normaloff>:/toolicon/light/cubic_bezier_path.png</iconset>
    </property>
    <property name="text">
     <string>Curved path tool which uses point as control handle</string>
    </property>
    <property name="menuRole">
-    <enum>QAction::NoRole</enum>
+    <enum>QAction::MenuRole::NoRole</enum>
    </property>
   </action>
   <action name="actionSplinePathCutPointTool">
@@ -1896,14 +1912,14 @@
     <bool>false</bool>
    </property>
    <property name="icon">
-    <iconset resource="share/resources/toolicon.qrc">
+    <iconset>
      <normaloff>:/toolicon/light/splinePath_cut_point.png</normaloff>:/toolicon/light/splinePath_cut_point.png</iconset>
    </property>
    <property name="text">
     <string>Segment a curved path</string>
    </property>
    <property name="menuRole">
-    <enum>QAction::NoRole</enum>
+    <enum>QAction::MenuRole::NoRole</enum>
    </property>
   </action>
   <action name="actionAlongLineTool">
@@ -1914,14 +1930,14 @@
     <bool>false</bool>
    </property>
    <property name="icon">
-    <iconset resource="share/resources/toolicon.qrc">
+    <iconset>
      <normaloff>:/toolicon/light/along_line.png</normaloff>:/toolicon/light/along_line.png</iconset>
    </property>
    <property name="text">
     <string>Point at distance along line</string>
    </property>
    <property name="menuRole">
-    <enum>QAction::NoRole</enum>
+    <enum>QAction::MenuRole::NoRole</enum>
    </property>
   </action>
   <action name="actionNormalTool">
@@ -1932,14 +1948,14 @@
     <bool>false</bool>
    </property>
    <property name="icon">
-    <iconset resource="share/resources/toolicon.qrc">
+    <iconset>
      <normaloff>:/toolicon/light/normal.png</normaloff>:/toolicon/light/normal.png</iconset>
    </property>
    <property name="text">
     <string>Point along perpendicular</string>
    </property>
    <property name="menuRole">
-    <enum>QAction::NoRole</enum>
+    <enum>QAction::MenuRole::NoRole</enum>
    </property>
   </action>
   <action name="actionBisectorTool">
@@ -1950,14 +1966,14 @@
     <bool>false</bool>
    </property>
    <property name="icon">
-    <iconset resource="share/resources/toolicon.qrc">
+    <iconset>
      <normaloff>:/toolicon/light/bisector.png</normaloff>:/toolicon/light/bisector.png</iconset>
    </property>
    <property name="text">
     <string>Point along bisector</string>
    </property>
    <property name="menuRole">
-    <enum>QAction::NoRole</enum>
+    <enum>QAction::MenuRole::NoRole</enum>
    </property>
   </action>
   <action name="actionShoulderPointTool">
@@ -1968,14 +1984,14 @@
     <bool>false</bool>
    </property>
    <property name="icon">
-    <iconset resource="share/resources/toolicon.qrc">
+    <iconset>
      <normaloff>:/toolicon/light/shoulder.png</normaloff>:/toolicon/light/shoulder.png</iconset>
    </property>
    <property name="text">
     <string>Special point on shoulder</string>
    </property>
    <property name="menuRole">
-    <enum>QAction::NoRole</enum>
+    <enum>QAction::MenuRole::NoRole</enum>
    </property>
   </action>
   <action name="actionTriangleTool">
@@ -1986,14 +2002,14 @@
     <bool>false</bool>
    </property>
    <property name="icon">
-    <iconset resource="share/resources/toolicon.qrc">
+    <iconset>
      <normaloff>:/toolicon/light/triangle.png</normaloff>:/toolicon/light/triangle.png</iconset>
    </property>
    <property name="text">
     <string>Triangle tool</string>
    </property>
    <property name="menuRole">
-    <enum>QAction::NoRole</enum>
+    <enum>QAction::MenuRole::NoRole</enum>
    </property>
   </action>
   <action name="actionPointOfIntersectionTool">
@@ -2004,14 +2020,14 @@
     <bool>false</bool>
    </property>
    <property name="icon">
-    <iconset resource="share/resources/toolicon.qrc">
+    <iconset>
      <normaloff>:/toolicon/light/point_of_intersection.png</normaloff>:/toolicon/light/point_of_intersection.png</iconset>
    </property>
    <property name="text">
     <string>Point from X and Y of two other points</string>
    </property>
    <property name="menuRole">
-    <enum>QAction::NoRole</enum>
+    <enum>QAction::MenuRole::NoRole</enum>
    </property>
   </action>
   <action name="actionHeightTool">
@@ -2022,14 +2038,14 @@
     <bool>false</bool>
    </property>
    <property name="icon">
-    <iconset resource="share/resources/toolicon.qrc">
+    <iconset>
      <normaloff>:/toolicon/light/height.png</normaloff>:/toolicon/light/height.png</iconset>
    </property>
    <property name="text">
     <string>Perpendicular point along line</string>
    </property>
    <property name="menuRole">
-    <enum>QAction::NoRole</enum>
+    <enum>QAction::MenuRole::NoRole</enum>
    </property>
   </action>
   <action name="actionLineIntersectAxisTool">
@@ -2040,14 +2056,14 @@
     <bool>false</bool>
    </property>
    <property name="icon">
-    <iconset resource="share/resources/toolicon.qrc">
+    <iconset>
      <normaloff>:/toolicon/light/line_intersect_axis.png</normaloff>:/toolicon/light/line_intersect_axis.png</iconset>
    </property>
    <property name="text">
     <string>Point intersect line and axis</string>
    </property>
    <property name="menuRole">
-    <enum>QAction::NoRole</enum>
+    <enum>QAction::MenuRole::NoRole</enum>
    </property>
   </action>
   <action name="actionMidpointTool">
@@ -2058,14 +2074,14 @@
     <bool>false</bool>
    </property>
    <property name="icon">
-    <iconset resource="share/resources/toolicon.qrc">
+    <iconset>
      <normaloff>:/toolicon/light/midpoint.png</normaloff>:/toolicon/light/midpoint.png</iconset>
    </property>
    <property name="text">
     <string>Midpoint between two points</string>
    </property>
    <property name="menuRole">
-    <enum>QAction::NoRole</enum>
+    <enum>QAction::MenuRole::NoRole</enum>
    </property>
   </action>
   <action name="actionLineIntersectTool">
@@ -2076,14 +2092,14 @@
     <bool>false</bool>
    </property>
    <property name="icon">
-    <iconset resource="share/resources/toolicon.qrc">
+    <iconset>
      <normaloff>:/toolicon/light/intersect.png</normaloff>:/toolicon/light/intersect.png</iconset>
    </property>
    <property name="text">
     <string>Point at line intersection</string>
    </property>
    <property name="menuRole">
-    <enum>QAction::NoRole</enum>
+    <enum>QAction::MenuRole::NoRole</enum>
    </property>
   </action>
   <action name="actionLineTool">
@@ -2094,14 +2110,14 @@
     <bool>false</bool>
    </property>
    <property name="icon">
-    <iconset resource="share/resources/toolicon.qrc">
+    <iconset>
      <normaloff>:/toolicon/light/line.png</normaloff>:/toolicon/light/line.png</iconset>
    </property>
    <property name="text">
     <string>Line between points</string>
    </property>
    <property name="menuRole">
-    <enum>QAction::NoRole</enum>
+    <enum>QAction::MenuRole::NoRole</enum>
    </property>
   </action>
   <action name="actionSplineTool">
@@ -2112,14 +2128,14 @@
     <bool>false</bool>
    </property>
    <property name="icon">
-    <iconset resource="share/resources/toolicon.qrc">
+    <iconset>
      <normaloff>:/toolicon/light/spline.png</normaloff>:/toolicon/light/spline.png</iconset>
    </property>
    <property name="text">
     <string>Simple curve</string>
    </property>
    <property name="menuRole">
-    <enum>QAction::NoRole</enum>
+    <enum>QAction::MenuRole::NoRole</enum>
    </property>
   </action>
   <action name="actionSplineCutPointTool">
@@ -2130,14 +2146,14 @@
     <bool>false</bool>
    </property>
    <property name="icon">
-    <iconset resource="share/resources/toolicon.qrc">
+    <iconset>
      <normaloff>:/toolicon/light/spline_cut_point.png</normaloff>:/toolicon/light/spline_cut_point.png</iconset>
    </property>
    <property name="text">
     <string>Segmenting a simple curve</string>
    </property>
    <property name="menuRole">
-    <enum>QAction::NoRole</enum>
+    <enum>QAction::MenuRole::NoRole</enum>
    </property>
   </action>
   <action name="actionCubicBezierTool">
@@ -2148,14 +2164,14 @@
     <bool>false</bool>
    </property>
    <property name="icon">
-    <iconset resource="share/resources/toolicon.qrc">
+    <iconset>
      <normaloff>:/toolicon/light/cubic_bezier.png</normaloff>:/toolicon/light/cubic_bezier.png</iconset>
    </property>
    <property name="text">
     <string>Curve tool which uses point as control handle</string>
    </property>
    <property name="menuRole">
-    <enum>QAction::NoRole</enum>
+    <enum>QAction::MenuRole::NoRole</enum>
    </property>
   </action>
   <action name="actionSplinePathTool">
@@ -2166,14 +2182,14 @@
     <bool>false</bool>
    </property>
    <property name="icon">
-    <iconset resource="share/resources/toolicon.qrc">
+    <iconset>
      <normaloff>:/toolicon/light/splinePath.png</normaloff>:/toolicon/light/splinePath.png</iconset>
    </property>
    <property name="text">
     <string>Curved path</string>
    </property>
    <property name="menuRole">
-    <enum>QAction::NoRole</enum>
+    <enum>QAction::MenuRole::NoRole</enum>
    </property>
   </action>
   <action name="actionEllipticalArcTool">
@@ -2184,14 +2200,14 @@
     <bool>false</bool>
    </property>
    <property name="icon">
-    <iconset resource="share/resources/toolicon.qrc">
+    <iconset>
      <normaloff>:/toolicon/light/el_arc.png</normaloff>:/toolicon/light/el_arc.png</iconset>
    </property>
    <property name="text">
     <string>Elliptical Arc</string>
    </property>
    <property name="menuRole">
-    <enum>QAction::NoRole</enum>
+    <enum>QAction::MenuRole::NoRole</enum>
    </property>
   </action>
   <action name="actionArcWithLengthTool">
@@ -2202,14 +2218,14 @@
     <bool>false</bool>
    </property>
    <property name="icon">
-    <iconset resource="share/resources/toolicon.qrc">
+    <iconset>
      <normaloff>:/toolicon/light/arc_with_length.png</normaloff>:/toolicon/light/arc_with_length.png</iconset>
    </property>
    <property name="text">
     <string>Arc with given length</string>
    </property>
    <property name="menuRole">
-    <enum>QAction::NoRole</enum>
+    <enum>QAction::MenuRole::NoRole</enum>
    </property>
   </action>
   <action name="actionPointOfIntersectionCirclesTool">
@@ -2220,14 +2236,14 @@
     <bool>false</bool>
    </property>
    <property name="icon">
-    <iconset resource="share/resources/toolicon.qrc">
+    <iconset>
      <normaloff>:/toolicon/light/point_of_intersection_circles.png</normaloff>:/toolicon/light/point_of_intersection_circles.png</iconset>
    </property>
    <property name="text">
     <string>Point of intersection circles</string>
    </property>
    <property name="menuRole">
-    <enum>QAction::NoRole</enum>
+    <enum>QAction::MenuRole::NoRole</enum>
    </property>
   </action>
   <action name="actionPointFromArcAndTangentTool">
@@ -2238,14 +2254,14 @@
     <bool>false</bool>
    </property>
    <property name="icon">
-    <iconset resource="share/resources/toolicon.qrc">
+    <iconset>
      <normaloff>:/toolicon/light/point_from_arc_and_tangent.png</normaloff>:/toolicon/light/point_from_arc_and_tangent.png</iconset>
    </property>
    <property name="text">
     <string>Point from arc and tangent</string>
    </property>
    <property name="menuRole">
-    <enum>QAction::NoRole</enum>
+    <enum>QAction::MenuRole::NoRole</enum>
    </property>
   </action>
   <action name="actionPointFromCircleAndTangentTool">
@@ -2256,14 +2272,14 @@
     <bool>false</bool>
    </property>
    <property name="icon">
-    <iconset resource="share/resources/toolicon.qrc">
+    <iconset>
      <normaloff>:/toolicon/light/point_from_circle_and_tangent.png</normaloff>:/toolicon/light/point_from_circle_and_tangent.png</iconset>
    </property>
    <property name="text">
     <string>Point from circle and tangent</string>
    </property>
    <property name="menuRole">
-    <enum>QAction::NoRole</enum>
+    <enum>QAction::MenuRole::NoRole</enum>
    </property>
   </action>
   <action name="actionPointOfContactTool">
@@ -2274,14 +2290,14 @@
     <bool>false</bool>
    </property>
    <property name="icon">
-    <iconset resource="share/resources/toolicon.qrc">
+    <iconset>
      <normaloff>:/toolicon/light/point_of_contact.png</normaloff>:/toolicon/light/point_of_contact.png</iconset>
    </property>
    <property name="text">
     <string>Point of intersection circle and segment</string>
    </property>
    <property name="menuRole">
-    <enum>QAction::NoRole</enum>
+    <enum>QAction::MenuRole::NoRole</enum>
    </property>
   </action>
   <action name="actionFlippingByAxisTool">
@@ -2292,14 +2308,14 @@
     <bool>false</bool>
    </property>
    <property name="icon">
-    <iconset resource="share/resources/toolicon.qrc">
+    <iconset>
      <normaloff>:/toolicon/light/flipping_axis.png</normaloff>:/toolicon/light/flipping_axis.png</iconset>
    </property>
    <property name="text">
     <string>Flipping objects by axis</string>
    </property>
    <property name="menuRole">
-    <enum>QAction::NoRole</enum>
+    <enum>QAction::MenuRole::NoRole</enum>
    </property>
   </action>
   <action name="actionFlippingByLineTool">
@@ -2310,14 +2326,14 @@
     <bool>false</bool>
    </property>
    <property name="icon">
-    <iconset resource="share/resources/toolicon.qrc">
+    <iconset>
      <normaloff>:/toolicon/light/flipping_line.png</normaloff>:/toolicon/light/flipping_line.png</iconset>
    </property>
    <property name="text">
     <string>Flipping objects by line</string>
    </property>
    <property name="menuRole">
-    <enum>QAction::NoRole</enum>
+    <enum>QAction::MenuRole::NoRole</enum>
    </property>
   </action>
   <action name="actionRotationTool">
@@ -2328,14 +2344,14 @@
     <bool>false</bool>
    </property>
    <property name="icon">
-    <iconset resource="share/resources/toolicon.qrc">
+    <iconset>
      <normaloff>:/toolicon/light/rotation.png</normaloff>:/toolicon/light/rotation.png</iconset>
    </property>
    <property name="text">
     <string>Rotate objects</string>
    </property>
    <property name="menuRole">
-    <enum>QAction::NoRole</enum>
+    <enum>QAction::MenuRole::NoRole</enum>
    </property>
   </action>
   <action name="actionMoveTool">
@@ -2346,14 +2362,14 @@
     <bool>false</bool>
    </property>
    <property name="icon">
-    <iconset resource="share/resources/toolicon.qrc">
+    <iconset>
      <normaloff>:/toolicon/light/move.png</normaloff>:/toolicon/light/move.png</iconset>
    </property>
    <property name="text">
     <string>Move objects</string>
    </property>
    <property name="menuRole">
-    <enum>QAction::NoRole</enum>
+    <enum>QAction::MenuRole::NoRole</enum>
    </property>
   </action>
   <action name="actionGroupTool">
@@ -2364,14 +2380,14 @@
     <bool>false</bool>
    </property>
    <property name="icon">
-    <iconset resource="share/resources/toolicon.qrc">
+    <iconset>
      <normaloff>:/toolicon/light/group_plus.png</normaloff>:/toolicon/light/group_plus.png</iconset>
    </property>
    <property name="text">
     <string>Visibility group</string>
    </property>
    <property name="menuRole">
-    <enum>QAction::NoRole</enum>
+    <enum>QAction::MenuRole::NoRole</enum>
    </property>
   </action>
   <action name="actionTrueDartsTool">
@@ -2382,14 +2398,14 @@
     <bool>false</bool>
    </property>
    <property name="icon">
-    <iconset resource="share/resources/toolicon.qrc">
+    <iconset>
      <normaloff>:/toolicon/light/true_darts.png</normaloff>:/toolicon/light/true_darts.png</iconset>
    </property>
    <property name="text">
     <string>True darts</string>
    </property>
    <property name="menuRole">
-    <enum>QAction::NoRole</enum>
+    <enum>QAction::MenuRole::NoRole</enum>
    </property>
   </action>
   <action name="actionExportDraw">
@@ -2407,7 +2423,7 @@
     <string>Draw export</string>
    </property>
    <property name="menuRole">
-    <enum>QAction::NoRole</enum>
+    <enum>QAction::MenuRole::NoRole</enum>
    </property>
   </action>
   <action name="actionNewDetailTool">
@@ -2418,14 +2434,14 @@
     <bool>false</bool>
    </property>
    <property name="icon">
-    <iconset resource="share/resources/toolicon.qrc">
+    <iconset>
      <normaloff>:/toolicon/light/new_detail.png</normaloff>:/toolicon/light/new_detail.png</iconset>
    </property>
    <property name="text">
     <string>Workpiece tool</string>
    </property>
    <property name="menuRole">
-    <enum>QAction::NoRole</enum>
+    <enum>QAction::MenuRole::NoRole</enum>
    </property>
   </action>
   <action name="actionUnionDetailsTool">
@@ -2436,14 +2452,14 @@
     <bool>false</bool>
    </property>
    <property name="icon">
-    <iconset resource="share/resources/toolicon.qrc">
+    <iconset>
      <normaloff>:/toolicon/light/union.png</normaloff>:/toolicon/light/union.png</iconset>
    </property>
    <property name="text">
     <string>Union tool</string>
    </property>
    <property name="menuRole">
-    <enum>QAction::NoRole</enum>
+    <enum>QAction::MenuRole::NoRole</enum>
    </property>
   </action>
   <action name="actionDuplicateDetailTool">
@@ -2454,14 +2470,14 @@
     <bool>false</bool>
    </property>
    <property name="icon">
-    <iconset resource="share/resources/toolicon.qrc">
+    <iconset>
      <normaloff>:/toolicon/light/duplicate_detail.png</normaloff>:/toolicon/light/duplicate_detail.png</iconset>
    </property>
    <property name="text">
     <string>Duplicate detail tool</string>
    </property>
    <property name="menuRole">
-    <enum>QAction::NoRole</enum>
+    <enum>QAction::MenuRole::NoRole</enum>
    </property>
   </action>
   <action name="actionInternalPathTool">
@@ -2472,14 +2488,14 @@
     <bool>false</bool>
    </property>
    <property name="icon">
-    <iconset resource="share/resources/toolicon.qrc">
+    <iconset>
      <normaloff>:/toolicon/light/path.png</normaloff>:/toolicon/light/path.png</iconset>
    </property>
    <property name="text">
     <string>Internal path tool</string>
    </property>
    <property name="menuRole">
-    <enum>QAction::NoRole</enum>
+    <enum>QAction::MenuRole::NoRole</enum>
    </property>
   </action>
   <action name="actionPinTool">
@@ -2490,14 +2506,14 @@
     <bool>false</bool>
    </property>
    <property name="icon">
-    <iconset resource="share/resources/toolicon.qrc">
+    <iconset>
      <normaloff>:/toolicon/light/pin.png</normaloff>:/toolicon/light/pin.png</iconset>
    </property>
    <property name="text">
     <string>Pin tool</string>
    </property>
    <property name="menuRole">
-    <enum>QAction::NoRole</enum>
+    <enum>QAction::MenuRole::NoRole</enum>
    </property>
   </action>
   <action name="actionInsertNodeTool">
@@ -2508,14 +2524,14 @@
     <bool>false</bool>
    </property>
    <property name="icon">
-    <iconset resource="share/resources/toolicon.qrc">
+    <iconset>
      <normaloff>:/toolicon/light/insert_node.png</normaloff>:/toolicon/light/insert_node.png</iconset>
    </property>
    <property name="text">
     <string>Insert node tool</string>
    </property>
    <property name="menuRole">
-    <enum>QAction::NoRole</enum>
+    <enum>QAction::MenuRole::NoRole</enum>
    </property>
   </action>
   <action name="actionPlaceLabelTool">
@@ -2526,14 +2542,14 @@
     <bool>false</bool>
    </property>
    <property name="icon">
-    <iconset resource="share/resources/toolicon.qrc">
+    <iconset>
      <normaloff>:/toolicon/light/place_label.png</normaloff>:/toolicon/light/place_label.png</iconset>
    </property>
    <property name="text">
     <string>Place label tool</string>
    </property>
    <property name="menuRole">
-    <enum>QAction::NoRole</enum>
+    <enum>QAction::MenuRole::NoRole</enum>
    </property>
   </action>
   <action name="actionDetailExportAs">
@@ -2551,7 +2567,7 @@
     <string>Export details skiping the Layout stage</string>
    </property>
    <property name="menuRole">
-    <enum>QAction::NoRole</enum>
+    <enum>QAction::MenuRole::NoRole</enum>
    </property>
   </action>
   <action name="actionArcStartPointTool">
@@ -2562,14 +2578,14 @@
     <bool>false</bool>
    </property>
    <property name="icon">
-    <iconset resource="share/resources/toolicon.qrc">
+    <iconset>
      <normaloff>:/toolicon/light/arc_start.png</normaloff>:/toolicon/light/arc_start.png</iconset>
    </property>
    <property name="text">
     <string>Arc start point</string>
    </property>
    <property name="menuRole">
-    <enum>QAction::NoRole</enum>
+    <enum>QAction::MenuRole::NoRole</enum>
    </property>
   </action>
   <action name="actionArcEndPointTool">
@@ -2580,14 +2596,14 @@
     <bool>false</bool>
    </property>
    <property name="icon">
-    <iconset resource="share/resources/toolicon.qrc">
+    <iconset>
      <normaloff>:/toolicon/light/arc_end.png</normaloff>:/toolicon/light/arc_end.png</iconset>
    </property>
    <property name="text">
     <string>Arc end point</string>
    </property>
    <property name="menuRole">
-    <enum>QAction::NoRole</enum>
+    <enum>QAction::MenuRole::NoRole</enum>
    </property>
   </action>
   <action name="actionBoundaryTogetherWithNotches">
@@ -2599,6 +2615,17 @@
    </property>
    <property name="text">
     <string>Boundary together with notches</string>
+   </property>
+   <property name="menuRole">
+    <enum>QAction::MenuRole::NoRole</enum>
+   </property>
+  </action>
+  <action name="actionSettingsDirectory">
+   <property name="text">
+    <string>Settings Directory</string>
+   </property>
+   <property name="menuRole">
+    <enum>QAction::MenuRole::NoRole</enum>
    </property>
   </action>
  </widget>
@@ -2621,7 +2648,6 @@
   </customwidget>
  </customwidgets>
  <resources>
-  <include location="share/resources/toolicon.qrc"/>
   <include location="../../libs/vmisc/share/resources/icon.qrc"/>
  </resources>
  <connections/>

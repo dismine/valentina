@@ -37,7 +37,7 @@
        <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:18pt;&quot;&gt;Select New to create a measurement file.&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
       </property>
       <property name="alignment">
-       <set>Qt::AlignCenter</set>
+       <set>Qt::AlignmentFlag::AlignCenter</set>
       </property>
      </widget>
     </item>
@@ -105,7 +105,7 @@
           <item>
            <widget class="Line" name="line_3">
             <property name="orientation">
-             <enum>Qt::Vertical</enum>
+             <enum>Qt::Orientation::Vertical</enum>
             </property>
            </widget>
           </item>
@@ -119,7 +119,7 @@
           <item>
            <widget class="Line" name="line_2">
             <property name="orientation">
-             <enum>Qt::Vertical</enum>
+             <enum>Qt::Orientation::Vertical</enum>
             </property>
            </widget>
           </item>
@@ -251,7 +251,7 @@
           <item>
            <widget class="Line" name="line">
             <property name="orientation">
-             <enum>Qt::Vertical</enum>
+             <enum>Qt::Orientation::Vertical</enum>
             </property>
            </widget>
           </item>
@@ -303,7 +303,7 @@
         <item>
          <widget class="QSplitter" name="splitter">
           <property name="orientation">
-           <enum>Qt::Vertical</enum>
+           <enum>Qt::Orientation::Vertical</enum>
           </property>
           <widget class="QTableWidget" name="tableWidget">
            <property name="sizePolicy">
@@ -316,7 +316,7 @@
             <bool>true</bool>
            </property>
            <property name="selectionBehavior">
-            <enum>QAbstractItemView::SelectRows</enum>
+            <enum>QAbstractItemView::SelectionBehavior::SelectRows</enum>
            </property>
            <attribute name="horizontalHeaderStretchLastSection">
             <bool>true</bool>
@@ -389,7 +389,7 @@
               <property name="spacing">
                <number>9</number>
               </property>
-              <item alignment="Qt::AlignLeft">
+              <item alignment="Qt::AlignmentFlag::AlignLeft">
                <widget class="QToolButton" name="toolButtonTop">
                 <property name="enabled">
                  <bool>false</bool>
@@ -405,7 +405,7 @@
                 </property>
                </widget>
               </item>
-              <item alignment="Qt::AlignLeft">
+              <item alignment="Qt::AlignmentFlag::AlignLeft">
                <widget class="QToolButton" name="toolButtonUp">
                 <property name="enabled">
                  <bool>false</bool>
@@ -421,7 +421,7 @@
                 </property>
                </widget>
               </item>
-              <item alignment="Qt::AlignLeft">
+              <item alignment="Qt::AlignmentFlag::AlignLeft">
                <widget class="QToolButton" name="toolButtonDown">
                 <property name="enabled">
                  <bool>false</bool>
@@ -437,7 +437,7 @@
                 </property>
                </widget>
               </item>
-              <item alignment="Qt::AlignLeft">
+              <item alignment="Qt::AlignmentFlag::AlignLeft">
                <widget class="QToolButton" name="toolButtonBottom">
                 <property name="enabled">
                  <bool>false</bool>
@@ -456,7 +456,7 @@
               <item>
                <spacer name="horizontalSpacer">
                 <property name="orientation">
-                 <enum>Qt::Horizontal</enum>
+                 <enum>Qt::Orientation::Horizontal</enum>
                 </property>
                 <property name="sizeHint" stdset="0">
                  <size>
@@ -487,7 +487,7 @@
             <item>
              <layout class="QFormLayout" name="formLayout">
               <property name="fieldGrowthPolicy">
-               <enum>QFormLayout::ExpandingFieldsGrow</enum>
+               <enum>QFormLayout::FieldGrowthPolicy::ExpandingFieldsGrow</enum>
               </property>
               <item row="0" column="0">
                <widget class="QLabel" name="labelMUnits">
@@ -832,7 +832,7 @@
        </attribute>
        <layout class="QFormLayout" name="formLayout_2">
         <property name="fieldGrowthPolicy">
-         <enum>QFormLayout::ExpandingFieldsGrow</enum>
+         <enum>QFormLayout::FieldGrowthPolicy::ExpandingFieldsGrow</enum>
         </property>
         <item row="0" column="0">
          <widget class="QLabel" name="label_21">
@@ -882,7 +882,7 @@
             </property>
            </widget>
           </item>
-          <item alignment="Qt::AlignRight">
+          <item alignment="Qt::AlignmentFlag::AlignRight">
            <widget class="QPushButton" name="pushButtonShowInExplorer">
             <property name="enabled">
              <bool>false</bool>
@@ -938,17 +938,17 @@
            <string>Base Values:</string>
           </property>
           <property name="alignment">
-           <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
+           <set>Qt::AlignmentFlag::AlignLeading|Qt::AlignmentFlag::AlignLeft|Qt::AlignmentFlag::AlignVCenter</set>
           </property>
          </widget>
         </item>
         <item row="5" column="1">
          <widget class="QFrame" name="frameBaseValue">
           <property name="frameShape">
-           <enum>QFrame::Box</enum>
+           <enum>QFrame::Shape::Box</enum>
           </property>
           <property name="frameShadow">
-           <enum>QFrame::Sunken</enum>
+           <enum>QFrame::Shadow::Sunken</enum>
           </property>
           <property name="lineWidth">
            <number>1</number>
@@ -1183,6 +1183,7 @@
     <property name="title">
      <string>&amp;Help</string>
     </property>
+    <addaction name="actionSettingsDirectory"/>
     <addaction name="actionAboutQt"/>
     <addaction name="actionAboutTape"/>
    </widget>
@@ -1221,7 +1222,7 @@
     <string/>
    </property>
    <property name="toolButtonStyle">
-    <enum>Qt::ToolButtonTextUnderIcon</enum>
+    <enum>Qt::ToolButtonStyle::ToolButtonTextUnderIcon</enum>
    </property>
    <attribute name="toolBarArea">
     <enum>TopToolBarArea</enum>
@@ -1246,7 +1247,7 @@
     <bool>false</bool>
    </property>
    <property name="allowedAreas">
-    <set>Qt::AllToolBarAreas</set>
+    <set>Qt::ToolBarArea::AllToolBarAreas</set>
    </property>
    <property name="floatable">
     <bool>false</bool>
@@ -1334,7 +1335,7 @@
        <item>
         <spacer name="horizontalSpacer_2">
          <property name="orientation">
-          <enum>Qt::Horizontal</enum>
+          <enum>Qt::Orientation::Horizontal</enum>
          </property>
          <property name="sizeHint" stdset="0">
           <size>
@@ -1346,7 +1347,7 @@
        </item>
       </layout>
      </item>
-     <item alignment="Qt::AlignHCenter">
+     <item alignment="Qt::AlignmentFlag::AlignHCenter">
       <widget class="VAspectRatioPixmapLabel" name="labelDiagram">
        <property name="sizePolicy">
         <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
@@ -1373,7 +1374,7 @@
     <string>&amp;Open individual …</string>
    </property>
    <property name="menuRole">
-    <enum>QAction::NoRole</enum>
+    <enum>QAction::MenuRole::NoRole</enum>
    </property>
   </action>
   <action name="actionSave">
@@ -1387,7 +1388,7 @@
     <string>&amp;Save</string>
    </property>
    <property name="menuRole">
-    <enum>QAction::NoRole</enum>
+    <enum>QAction::MenuRole::NoRole</enum>
    </property>
   </action>
   <action name="actionSaveAs">
@@ -1401,7 +1402,7 @@
     <string>Save &amp;As …</string>
    </property>
    <property name="menuRole">
-    <enum>QAction::NoRole</enum>
+    <enum>QAction::MenuRole::NoRole</enum>
    </property>
   </action>
   <action name="actionQuit">
@@ -1412,7 +1413,7 @@
     <string>&amp;Quit</string>
    </property>
    <property name="menuRole">
-    <enum>QAction::QuitRole</enum>
+    <enum>QAction::MenuRole::QuitRole</enum>
    </property>
   </action>
   <action name="actionAboutQt">
@@ -1420,7 +1421,7 @@
     <string>About &amp;Qt</string>
    </property>
    <property name="menuRole">
-    <enum>QAction::AboutQtRole</enum>
+    <enum>QAction::MenuRole::AboutQtRole</enum>
    </property>
   </action>
   <action name="actionAboutTape">
@@ -1431,7 +1432,7 @@
     <string>&amp;About Tape</string>
    </property>
    <property name="menuRole">
-    <enum>QAction::AboutRole</enum>
+    <enum>QAction::MenuRole::AboutRole</enum>
    </property>
   </action>
   <action name="actionNew">
@@ -1442,7 +1443,7 @@
     <string>&amp;New</string>
    </property>
    <property name="menuRole">
-    <enum>QAction::NoRole</enum>
+    <enum>QAction::MenuRole::NoRole</enum>
    </property>
   </action>
   <action name="actionAddKnown">
@@ -1457,7 +1458,7 @@
     <string>Add known</string>
    </property>
    <property name="menuRole">
-    <enum>QAction::NoRole</enum>
+    <enum>QAction::MenuRole::NoRole</enum>
    </property>
   </action>
   <action name="actionAddCustom">
@@ -1472,7 +1473,7 @@
     <string>Add custom</string>
    </property>
    <property name="menuRole">
-    <enum>QAction::NoRole</enum>
+    <enum>QAction::MenuRole::NoRole</enum>
    </property>
   </action>
   <action name="actionReadOnly">
@@ -1490,7 +1491,7 @@
     <string>Read only</string>
    </property>
    <property name="menuRole">
-    <enum>QAction::NoRole</enum>
+    <enum>QAction::MenuRole::NoRole</enum>
    </property>
   </action>
   <action name="actionOpenMultisize">
@@ -1501,7 +1502,7 @@
     <string>Open multisize …</string>
    </property>
    <property name="menuRole">
-    <enum>QAction::NoRole</enum>
+    <enum>QAction::MenuRole::NoRole</enum>
    </property>
   </action>
   <action name="actionOpenTemplate">
@@ -1512,7 +1513,7 @@
     <string>Open template</string>
    </property>
    <property name="menuRole">
-    <enum>QAction::NoRole</enum>
+    <enum>QAction::MenuRole::NoRole</enum>
    </property>
   </action>
   <action name="actionPreferences">
@@ -1520,7 +1521,7 @@
     <string>Preferences</string>
    </property>
    <property name="menuRole">
-    <enum>QAction::PreferencesRole</enum>
+    <enum>QAction::MenuRole::NoRole</enum>
    </property>
   </action>
   <action name="actionImportFromPattern">
@@ -1531,7 +1532,7 @@
     <string>Import from a pattern</string>
    </property>
    <property name="menuRole">
-    <enum>QAction::NoRole</enum>
+    <enum>QAction::MenuRole::NoRole</enum>
    </property>
   </action>
   <action name="actionCreateFromExisting">
@@ -1545,7 +1546,7 @@
     <string notr="true"/>
    </property>
    <property name="menuRole">
-    <enum>QAction::NoRole</enum>
+    <enum>QAction::MenuRole::NoRole</enum>
    </property>
   </action>
   <action name="actionExportToCSV">
@@ -1556,7 +1557,7 @@
     <string>Export to CSV</string>
    </property>
    <property name="menuRole">
-    <enum>QAction::NoRole</enum>
+    <enum>QAction::MenuRole::NoRole</enum>
    </property>
   </action>
   <action name="actionImportFromCSV">
@@ -1570,7 +1571,7 @@
     <string>Import from CSV</string>
    </property>
    <property name="menuRole">
-    <enum>QAction::NoRole</enum>
+    <enum>QAction::MenuRole::NoRole</enum>
    </property>
   </action>
   <action name="actionMeasurementDiagram">
@@ -1588,7 +1589,7 @@
     <string>Measurement diagram</string>
    </property>
    <property name="menuRole">
-    <enum>QAction::NoRole</enum>
+    <enum>QAction::MenuRole::NoRole</enum>
    </property>
   </action>
   <action name="actionExportToIndividual">
@@ -1608,7 +1609,7 @@
     <bool>false</bool>
    </property>
    <property name="menuRole">
-    <enum>QAction::NoRole</enum>
+    <enum>QAction::MenuRole::NoRole</enum>
    </property>
   </action>
   <action name="actionUseFullCircumference">
@@ -1620,6 +1621,9 @@
    </property>
    <property name="visible">
     <bool>false</bool>
+   </property>
+   <property name="menuRole">
+    <enum>QAction::MenuRole::NoRole</enum>
    </property>
   </action>
   <action name="actionRestrictSecondDimension">
@@ -1633,7 +1637,7 @@
     <bool>false</bool>
    </property>
    <property name="menuRole">
-    <enum>QAction::NoRole</enum>
+    <enum>QAction::MenuRole::NoRole</enum>
    </property>
   </action>
   <action name="actionRestrictThirdDimension">
@@ -1647,7 +1651,7 @@
     <bool>false</bool>
    </property>
    <property name="menuRole">
-    <enum>QAction::NoRole</enum>
+    <enum>QAction::MenuRole::NoRole</enum>
    </property>
   </action>
   <action name="actionDimensionLabels">
@@ -1659,6 +1663,9 @@
    </property>
    <property name="visible">
     <bool>false</bool>
+   </property>
+   <property name="menuRole">
+    <enum>QAction::MenuRole::NoRole</enum>
    </property>
   </action>
   <action name="actionRestrictFirstDimension">
@@ -1672,7 +1679,7 @@
     <bool>false</bool>
    </property>
    <property name="menuRole">
-    <enum>QAction::NoRole</enum>
+    <enum>QAction::MenuRole::NoRole</enum>
    </property>
   </action>
   <action name="actionAddSeparator">
@@ -1686,6 +1693,9 @@
    <property name="text">
     <string>Add separator</string>
    </property>
+   <property name="menuRole">
+    <enum>QAction::MenuRole::NoRole</enum>
+   </property>
   </action>
   <action name="actionDimensionCustomNames">
    <property name="enabled">
@@ -1697,10 +1707,16 @@
    <property name="visible">
     <bool>false</bool>
    </property>
+   <property name="menuRole">
+    <enum>QAction::MenuRole::NoRole</enum>
+   </property>
   </action>
   <action name="actionCreateKnownMeasurements">
    <property name="text">
     <string>Create Known Measurements</string>
+   </property>
+   <property name="menuRole">
+    <enum>QAction::MenuRole::NoRole</enum>
    </property>
   </action>
   <action name="actionEditCurrentKnownMeasurements">
@@ -1709,6 +1725,9 @@
    </property>
    <property name="text">
     <string>Edit current Known Measurements</string>
+   </property>
+   <property name="menuRole">
+    <enum>QAction::MenuRole::NoRole</enum>
    </property>
   </action>
   <action name="actionAlwaysOnTop">
@@ -1722,7 +1741,15 @@
     <string>Keep window always on top</string>
    </property>
    <property name="menuRole">
-    <enum>QAction::NoRole</enum>
+    <enum>QAction::MenuRole::NoRole</enum>
+   </property>
+  </action>
+  <action name="actionSettingsDirectory">
+   <property name="text">
+    <string>Settings Directory</string>
+   </property>
+   <property name="menuRole">
+    <enum>QAction::MenuRole::NoRole</enum>
    </property>
   </action>
  </widget>

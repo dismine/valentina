@@ -1679,6 +1679,10 @@ void TKMMainWindow::SetupMenu()
     AboutToShowWindowMenu();
 
     // Help
+    connect(ui->actionSettingsDirectory,
+            &QAction::triggered,
+            this,
+            []() { ShowInGraphicalShell(MApplication::VApp()->TapeSettings()->fileName()); });
     connect(ui->actionAboutQt, &QAction::triggered, this, [this]() { QMessageBox::aboutQt(this, tr("About Qt")); });
     connect(ui->actionAboutTape, &QAction::triggered, this,
             [this]()
