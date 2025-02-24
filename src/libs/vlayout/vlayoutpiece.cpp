@@ -985,7 +985,7 @@ void VLayoutPiece::SetPieceText(const VAbstractPattern *pDoc, const QString &qsN
         v[i] = RotatePoint(ptCenter, v.at(i), dAng);
     }
 
-    QScopedPointer<QGraphicsItem> const item(GetMainPathItem());
+    QScopedPointer<QGraphicsItem> const item(GetExternalContourPathItem());
     d->m_detailLabel = CorrectPosition(item->boundingRect(), v);
 
     // generate text
@@ -1059,7 +1059,7 @@ void VLayoutPiece::SetPatternInfo(const VAbstractPattern *pDoc, const VPatternLa
     {
         v[i] = RotatePoint(ptCenter, v.at(i), dAng);
     }
-    QScopedPointer<QGraphicsItem> const item(GetMainPathItem());
+    QScopedPointer<QGraphicsItem> const item(GetExternalContourPathItem());
     d->m_patternInfo = CorrectPosition(item->boundingRect(), v);
 
     // Generate text
@@ -1263,7 +1263,7 @@ void VLayoutPiece::SetGrainline(const VPieceGrainline &grainline)
 //---------------------------------------------------------------------------------------------------------------------
 void VLayoutPiece::SetGrainline(const VGrainlineData &geom, const VContainer *pattern)
 {
-    QScopedPointer<QGraphicsItem> const item(GetMainPathItem());
+    QScopedPointer<QGraphicsItem> const item(GetExternalContourPathItem());
 
     QLineF const mainLine = GrainlineMainLine(geom, pattern, item->boundingRect());
     if (mainLine.isNull())
@@ -2321,7 +2321,7 @@ auto VLayoutPiece::GetMainItem(bool togetherWithNotches, bool showLayoutAllowanc
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-auto VLayoutPiece::GetMainPathItem() const -> QGraphicsPathItem *
+auto VLayoutPiece::GetExternalContourPathItem() const -> QGraphicsPathItem *
 {
     auto *item = new QGraphicsPathItem();
     QPen pen = item->pen();
@@ -2331,7 +2331,7 @@ auto VLayoutPiece::GetMainPathItem() const -> QGraphicsPathItem *
     QPainterPath path;
 
     // contour
-    QVector<VLayoutPoint> const points = GetMappedFullContourPoints();
+    QVector<VLayoutPoint> const points = GetMappedExternalContourPoints();
 
     path.moveTo(points.at(0));
     for (qint32 i = 1; i < points.count(); ++i)

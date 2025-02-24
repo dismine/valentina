@@ -40,7 +40,8 @@
 - Increase precision for multisize table's dimensions to hold converted values from inches.
 - Fix error in VPiece::CuttingPathPoints. It must return full piece path if the piece mirrored.
 - Optimize image scaling in database of known measurements.
-- Allow user to select another measurements file if current doesn't provide necessary list of measurements. 
+- Allow user to select another measurements file if current doesn't provide necessary list of measurements.
+- Fix calculation of label position for layout piece. 
 
 # Valentina 0.7.53 June 25, 2024
 - Fix layout sheet export with empty name.

@@ -265,7 +265,7 @@ private:
     auto DetailPath() const -> QVector<VLayoutPoint>;
 
     Q_REQUIRED_RESULT auto GetMainItem(bool togetherWithNotches, bool showLayoutAllowance) const -> QGraphicsPathItem *;
-    Q_REQUIRED_RESULT auto GetMainPathItem() const -> QGraphicsPathItem *;
+    Q_REQUIRED_RESULT auto GetExternalContourPathItem() const -> QGraphicsPathItem *;
 
     void LabelStringsSVGFont(QGraphicsItem *parent, const QVector<QPointF> &labelShape, const VTextManager &tm,
                              bool textAsPaths) const;
