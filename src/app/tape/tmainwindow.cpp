@@ -1280,6 +1280,10 @@ void TMainWindow::Remove()
     {
         MFields(false);
 
+        ui->toolButtonAddImage->setEnabled(false);
+        ui->toolButtonRemoveImage->setEnabled(false);
+        ui->toolButtonSaveImage->setEnabled(false);
+
         ui->actionExportToCSV->setEnabled(false);
 
         ui->lineEditName->blockSignals(true);
