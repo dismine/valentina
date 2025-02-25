@@ -680,6 +680,9 @@
              <height>4</height>
             </size>
            </property>
+           <property name="acceptDrops">
+            <bool>true</bool>
+           </property>
            <property name="iconSize">
             <size>
              <width>96</width>

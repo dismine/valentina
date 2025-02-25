@@ -201,6 +201,8 @@ private:
     auto eventFilter(QObject *object, QEvent *event) -> bool override;
     void ExportToCSVData(const QString &fileName, bool withHeader, int mib, const QChar &separator) override;
     auto RecentFileList() const -> QStringList override;
+
+    void AddMeasurementImages(const QStringList &imagePaths);
 };
 
 #endif // TKMMAINWINDOW_H

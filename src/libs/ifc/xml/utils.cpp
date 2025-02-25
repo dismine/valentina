@@ -91,17 +91,30 @@ auto MimeTypeFromByteArray(const QByteArray &data) -> QMimeType
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-auto PrepareImageFilters() -> QString
+auto SupportedFormats() -> QStringList
 {
     const QList<QByteArray> supportedFormats = QImageReader::supportedImageFormats();
     const QSet<QString> filterFormats{"bmp", "jpeg", "jpg", "png", "svg", "svgz", "tif", "tiff", "webp"};
-    QStringList sufixes;
+    QStringList formats;
     for (const auto &format : supportedFormats)
     {
         if (filterFormats.contains(format))
         {
-            sufixes.append(QStringLiteral("*.%1").arg(QString(format)));
+            formats.append(format);
         }
+    }
+    return formats;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+auto PrepareImageFilters() -> QString
+{
+    const QStringList supportedFormats = SupportedFormats();
+    QStringList sufixes;
+    sufixes.reserve(supportedFormats.size());
+    for (const auto &format : supportedFormats)
+    {
+        sufixes.append("*."_L1 + format);
     }
 
     QStringList filters;

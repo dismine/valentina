@@ -43,6 +43,7 @@
 - Allow user to select another measurements file if current doesn't provide necessary list of measurements.
 - Fix calculation of label position for layout piece.
 - Tape app. Enable adding multiple images at once.
+- Tape app. Adding measurement image in known measurement database by drag and drop.
 
 # Valentina 0.7.53 June 25, 2024
 - Fix layout sheet export with empty name.

@@ -42,6 +42,7 @@ class QStringList;
 auto IsMimeTypeImage(const QMimeType &mime) -> bool;
 auto SplitString(QString str) -> QStringList;
 auto MimeTypeFromByteArray(const QByteArray &data) -> QMimeType;
+auto SupportedFormats() -> QStringList;
 auto PrepareImageFilters() -> QString;
 
 #endif // UTILS_H

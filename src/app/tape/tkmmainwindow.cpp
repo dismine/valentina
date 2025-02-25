@@ -46,6 +46,7 @@
 #include "knownmeasurements/vknownmeasurements.h"
 #include "mapplication.h" // Should be last because of definning qApp
 #include "ui_tkmmainwindow.h"
+#include <qmimedata.h>
 
 #include <QAbstractButton>
 #include <QCloseEvent>
@@ -116,6 +117,10 @@ TKMMainWindow::TKMMainWindow(QWidget *parent)
 
     ui->lineEditFind->installEventFilter(this);
     ui->plainTextEditFormula->installEventFilter(this);
+    ui->listWidget->installEventFilter(this);
+    // QListView::setViewMode overwriting the acceptDrops property
+    // https://forum.qt.io/post/688467
+    ui->listWidget->setDragDropMode(QAbstractItemView::DropOnly);
 
     m_search = QSharedPointer<VTableSearch>(new VTableSearch(ui->tableWidget));
     ui->tabWidget->setVisible(false);
@@ -453,6 +458,63 @@ auto TKMMainWindow::eventFilter(QObject *object, QEvent *event) -> bool
             }
         }
     }
+    else if (auto *listWidget = qobject_cast<QListWidget *>(object))
+    {
+        if (listWidget == ui->listWidget && (event->type() == QEvent::DragEnter || event->type() == QEvent::DragMove))
+        {
+            if (QDragEnterEvent *dragEvent = static_cast<QDragEnterEvent *>(event); dragEvent->mimeData()->hasUrls())
+            {
+                int supportedImagesCount = 0;
+                const QStringList formats = SupportedFormats();
+                const QList<QUrl> &urls = dragEvent->mimeData()->urls();
+                for (const QUrl &url : urls)
+                {
+                    if (url.isLocalFile())
+                    {
+                        if (const QString ext = QFileInfo(url.toLocalFile()).suffix().toLower(); formats.contains(ext))
+                        {
+                            ++supportedImagesCount;
+                        }
+                    }
+                }
+
+                if (supportedImagesCount == urls.size())
+                {
+                    dragEvent->acceptProposedAction();
+                    return true;
+                }
+            }
+        }
+        else if (listWidget == ui->listWidget && event->type() == QEvent::Drop)
+        {
+            if (QDropEvent *dropEvent = static_cast<QDropEvent *>(event); dropEvent->mimeData()->hasUrls())
+            {
+                int supportedImagesCount = 0;
+                QStringList imagePaths;
+                const QStringList formats = SupportedFormats();
+                const QList<QUrl> &urls = dropEvent->mimeData()->urls();
+                for (const QUrl &url : urls)
+                {
+                    if (url.isLocalFile())
+                    {
+                        const QString filePath = url.toLocalFile();
+                        if (const QString ext = QFileInfo(filePath).suffix().toLower(); formats.contains(ext))
+                        {
+                            imagePaths.append(url.toLocalFile());
+                            ++supportedImagesCount;
+                        }
+                    }
+                }
+
+                if (supportedImagesCount == urls.size())
+                {
+                    AddMeasurementImages(imagePaths);
+                    dropEvent->acceptProposedAction();
+                    return true;
+                }
+            }
+        }
+    }
 
     // pass the event on to the parent class
     return QMainWindow::eventFilter(object, event);
@@ -501,6 +563,41 @@ void TKMMainWindow::ExportToCSVData(const QString &fileName, bool withHeader, in
 auto TKMMainWindow::RecentFileList() const -> QStringList
 {
     return MApplication::VApp()->TapeSettings()->GetRecentKMFileList();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void TKMMainWindow::AddMeasurementImages(const QStringList &imagePaths)
+{
+    if (imagePaths.isEmpty())
+    {
+        return;
+    }
+
+    const VTapeSettings *settings = MApplication::VApp()->TapeSettings();
+
+    for (const auto &filePath : imagePaths)
+    {
+        if (QFileInfo f(filePath); f.exists())
+        {
+            settings->SetPathCustomImage(f.absolutePath());
+        }
+
+        VPatternImage const image = VPatternImage::FromFile(filePath);
+        if (not image.IsValid())
+        {
+            qCritical() << tr("Invalid image. Error: %1").arg(image.ErrorString());
+            continue;
+        }
+
+        m_m->AddImage(image);
+
+        MeasurementsWereSaved(false);
+    }
+
+    m_known = VKnownMeasurements();
+    RefreshImages();
+
+    ShowImageData();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -902,8 +999,7 @@ void TKMMainWindow::MoveBottom()
 //---------------------------------------------------------------------------------------------------------------------
 void TKMMainWindow::AddImage()
 {
-    VTapeSettings *settings = MApplication::VApp()->TapeSettings();
-
+    const VTapeSettings *settings = MApplication::VApp()->TapeSettings();
     const QStringList filePaths = QFileDialog::getOpenFileNames(this,
                                                                 tr("Measurement images"),
                                                                 settings->GetPathCustomImage(),
@@ -911,33 +1007,7 @@ void TKMMainWindow::AddImage()
                                                                 nullptr,
                                                                 VAbstractApplication::VApp()->NativeFileDialog());
 
-    if (!filePaths.isEmpty())
-    {
-        for (const auto &filePath : filePaths)
-        {
-            if (QFileInfo f(filePath); f.exists())
-            {
-                settings->SetPathCustomImage(f.absolutePath());
-            }
-
-            VPatternImage const image = VPatternImage::FromFile(filePath);
-
-            if (not image.IsValid())
-            {
-                qCritical() << tr("Invalid image. Error: %1").arg(image.ErrorString());
-                continue;
-            }
-
-            m_m->AddImage(image);
-
-            MeasurementsWereSaved(false);
-        }
-
-        m_known = VKnownMeasurements();
-        RefreshImages();
-
-        ShowImageData();
-    }
+    AddMeasurementImages(filePaths);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
