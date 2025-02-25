@@ -1325,33 +1325,42 @@ auto MainWindowsNoGUI::OpenMeasurementFile(const QString &patternPath, const QSt
                 doc->SetMPath(RelativeMPath(patternPath, currentPath));
             }
 
-            auto ProcessConversion = [currentPath, m](auto &&sendMeasurementFunction)
+            std::unique_ptr<VAbstractMConverter> converter;
+            if (m->Type() == MeasurementsType::Multisize)
             {
-                VVSTConverter converter(currentPath);
-                m->setXMLContent(converter.Convert()); // Read again after conversion
+                converter = std::make_unique<VVSTConverter>(currentPath);
+            }
+            else
+            {
+                converter = std::make_unique<VVITConverter>(currentPath);
+            }
 
-                VCommonSettings *settings = VAbstractApplication::VApp()->Settings();
-                if (settings->IsCollectStatistic())
+            m->setXMLContent(converter->Convert()); // Read again after conversion
+
+            if (const VCommonSettings *settings = VAbstractApplication::VApp()->Settings();
+                settings->IsCollectStatistic())
+            {
+                auto *statistic = VGAnalytics::Instance();
+
+                if (QString clientID = settings->GetClientID(); clientID.isEmpty())
                 {
-                    auto *statistic = VGAnalytics::Instance();
-
-                    if (QString clientID = settings->GetClientID(); clientID.isEmpty())
-                    {
-                        clientID = QUuid::createUuid().toString();
-                        settings->SetClientID(clientID);
-                        statistic->SetClientID(clientID);
-                    }
-
-                    statistic->Enable(true);
-
-                    const qint64 uptime = VAbstractApplication::VApp()->AppUptime();
-                    (statistic->*sendMeasurementFunction)(uptime, converter.GetFormatVersionStr());
+                    clientID = QUuid::createUuid().toString();
+                    settings->SetClientID(clientID);
+                    statistic->SetClientID(clientID);
                 }
-            };
 
-            ProcessConversion(m->Type() == MeasurementsType::Multisize
-                                  ? &VGAnalytics::SendMultisizeMeasurementsFormatVersion
-                                  : &VGAnalytics::SendIndividualMeasurementsFormatVersion);
+                statistic->Enable(true);
+
+                if (const qint64 uptime = VAbstractApplication::VApp()->AppUptime();
+                    m->Type() == MeasurementsType::Multisize)
+                {
+                    statistic->SendMultisizeMeasurementsFormatVersion(uptime, converter->GetFormatVersionStr());
+                }
+                else
+                {
+                    statistic->SendIndividualMeasurementsFormatVersion(uptime, converter->GetFormatVersionStr());
+                }
+            }
 
             const QSet<QString> match = ConvertToSet<QString>(doc->ListMeasurements())
                                             .subtract(ConvertToSet<QString>(m->ListAll()));
