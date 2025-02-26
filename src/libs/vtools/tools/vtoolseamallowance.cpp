@@ -1056,8 +1056,7 @@ void VToolSeamAllowance::GroupVisibility(quint32 object, bool visible)
 //---------------------------------------------------------------------------------------------------------------------
 void VToolSeamAllowance::FullUpdateFromFile()
 {
-    const bool updateChildren = false; // Chilren have their own signals. Avoid double refresh.
-    RefreshGeometry(updateChildren);
+    // Do nothing. Refresh triggered outside
 }
 
 //---------------------------------------------------------------------------------------------------------------------

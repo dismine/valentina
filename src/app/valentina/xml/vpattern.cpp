@@ -103,9 +103,12 @@
 #include "../vtools/tools/vtooluniondetails.h"
 #include "../vwidgets/vabstractmainwindow.h"
 
+#include <chrono>
+#include <functional>
 #include <QDebug>
 #include <QFileInfo>
 #include <QFuture>
+#include <QFutureWatcher>
 #include <QMessageBox>
 #include <QScopeGuard>
 #include <QTimer>
@@ -113,8 +116,6 @@
 #include <QtConcurrentMap>
 #include <QtConcurrentRun>
 #include <QtNumeric>
-#include <chrono>
-#include <functional>
 
 using namespace std::chrono_literals;
 
@@ -202,10 +203,20 @@ VPattern::VPattern(VContainer *data, VMainGraphicsScene *sceneDraw, VMainGraphic
   : VAbstractPattern(parent),
     data(data),
     sceneDraw(sceneDraw),
-    sceneDetail(sceneDetail)
+    sceneDetail(sceneDetail),
+    m_refreshPieceGeometryWatcher(new QFutureWatcher<void>(this))
 {
     SCASSERT(sceneDraw != nullptr)
     SCASSERT(sceneDetail != nullptr)
+
+    connect(qApp,
+            &QCoreApplication::aboutToQuit,
+            m_refreshPieceGeometryWatcher,
+            [this]()
+            {
+                m_refreshPieceGeometryWatcher->cancel();
+                m_refreshPieceGeometryWatcher->waitForFinished();
+            });
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -266,7 +277,6 @@ void VPattern::Parse(const Document &parse)
     }
 
     emit PreParseState();
-    m_parsing = true;
     SCASSERT(sceneDraw != nullptr)
     SCASSERT(sceneDetail != nullptr)
     PrepareForParse(parse);
@@ -286,7 +296,6 @@ void VPattern::Parse(const Document &parse)
     {
         RefreshPieceGeometry();
     }
-    m_parsing = false;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -728,9 +737,67 @@ void VPattern::customEvent(QEvent *event)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+auto VPattern::IsPieceGeometryDirty() const -> bool
+{
+    return m_pieceGeometryDirty;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VPattern::SetPieceGeometryDirty(bool newPieceGeometryDirty)
+{
+    m_pieceGeometryDirty = newPieceGeometryDirty;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VPattern::RefreshDirtyPieceGeometry(const QList<vidtype> &list)
+{
+    if (m_refreshPieceGeometryWatcher->isRunning())
+    {
+        m_refreshPieceGeometryWatcher->cancel();
+        m_refreshPieceGeometryWatcher->waitForFinished();
+    }
+
+    auto future = QtConcurrent::run(
+        [this, list]()
+        {
+            for (auto pieceId : qAsConst(list))
+            {
+                QMetaObject::invokeMethod(
+                    QApplication::instance(),
+                    [pieceId]()
+                    {
+                        try
+                        {
+                            if (auto *piece = qobject_cast<VToolSeamAllowance *>(VAbstractPattern::getTool(pieceId)))
+                            {
+                                piece->RefreshGeometry();
+                            }
+                        }
+                        catch (const VExceptionBadId &)
+                        {
+                            // do nothing
+                        }
+                    },
+                    Qt::QueuedConnection);
+            }
+
+            QMetaObject::invokeMethod(
+                QApplication::instance(),
+                [this]()
+                {
+                    emit CheckLayout();
+                    VMainGraphicsView::NewSceneRect(sceneDetail, VAbstractValApplication::VApp()->getSceneView());
+                },
+                Qt::QueuedConnection);
+        });
+
+    m_refreshPieceGeometryWatcher->setFuture(future);
+    m_pieceGeometryDirty = false;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 void VPattern::Clear()
 {
-    m_parsing = true;
     VAbstractPattern::Clear();
 }
 
@@ -3823,46 +3890,17 @@ auto VPattern::PPLastToolId(const QString &name) const -> quint32
 //---------------------------------------------------------------------------------------------------------------------
 void VPattern::RefreshPieceGeometry()
 {
-    auto CleanRefreshList = qScopeGuard(
-        [this]()
-        {
-            updatePieces.clear();
-            VMainGraphicsView::NewSceneRect(sceneDetail, VAbstractValApplication::VApp()->getSceneView());
-        });
-
-    if (VApplication::IsGUIMode() && m_parsing)
+    if (!VAbstractApplication::VApp()->IsAppInGUIMode()
+        || VAbstractValApplication::VApp()->GetDrawMode() == Draw::Modeling)
     {
-        return;
+        RefreshDirtyPieceGeometry(updatePieces);
+    }
+    else
+    {
+        m_pieceGeometryDirty = true;
     }
 
-    for (auto pieceId : qAsConst(updatePieces))
-    {
-        if (VApplication::IsGUIMode() && m_parsing)
-        {
-            return;
-        }
-
-        try
-        {
-            if (auto *piece = qobject_cast<VToolSeamAllowance *>(VAbstractPattern::getTool(pieceId)))
-            {
-                piece->RefreshGeometry();
-            }
-        }
-        catch (const VExceptionBadId &)
-        {
-            // do nothing
-        }
-
-        QApplication::processEvents();
-
-        if (VApplication::IsGUIMode() && m_parsing)
-        {
-            return;
-        }
-    }
-
-    emit CheckLayout();
+    updatePieces.clear();
 }
 
 //---------------------------------------------------------------------------------------------------------------------

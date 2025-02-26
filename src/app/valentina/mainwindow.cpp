@@ -2898,6 +2898,17 @@ auto MainWindow::FullParsePattern() -> bool
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+void MainWindow::RefreshPieceGeometry()
+{
+  if(!doc->IsPieceGeometryDirty())
+  {
+    return;
+  }
+
+  doc->RefreshDirtyPieceGeometry(pattern->DataPieces()->keys());
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 #if defined(Q_OS_MAC)
 void MainWindow::OpenAt(QAction *where)
 {
@@ -4014,6 +4025,7 @@ void MainWindow::ActionDetails(bool checked)
         m_statusLabel->setText(QString());
 
         WarningNotUniquePieceName(pattern->DataPieces());
+        RefreshPieceGeometry();
     }
     else
     {

@@ -480,6 +480,8 @@ private:
     auto SavePatternAs(const QString &fileName) -> bool;
 
     auto FullParsePattern() -> bool;
+
+    void RefreshPieceGeometry();
 };
 
 #endif // MAINWINDOW_H

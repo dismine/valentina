@@ -115,6 +115,11 @@ public:
 
     auto ElementsToParse() const -> int;
 
+    auto IsPieceGeometryDirty() const -> bool;
+    void SetPieceGeometryDirty(bool newPieceGeometryDirty);
+
+    void RefreshDirtyPieceGeometry(const QList<vidtype> &list);
+
 signals:
     void PreParseState();
 
@@ -135,12 +140,11 @@ private:
 
     VMainGraphicsScene *sceneDraw;
     VMainGraphicsScene *sceneDetail;
-    QVector<vidtype> updatePieces{};
+    QList<vidtype> updatePieces{};
 
-    /**
-     * @brief m_parsing true if parsing a pattern. Helps to stop updating piece when new parsing happend before
-     * finish */
-    bool m_parsing{false};
+    QFutureWatcher<void> *m_refreshPieceGeometryWatcher;
+
+    bool m_pieceGeometryDirty{true};
 
     static auto ParseDetailNode(const QDomElement &domElement) -> VNodeDetail;
 
