@@ -221,6 +221,7 @@ int scrollingUpdateIntervalCached = -1;     // NOLINT(cppcoreguidelines-avoid-no
 qreal scrollingSensorMouseScaleCached = -1; // NOLINT(cppcoreguidelines-avoid-non-const-global-variables)
 qreal scrollingWheelMouseScaleCached = -1;  // NOLINT(cppcoreguidelines-avoid-non-const-global-variables)
 qreal scrollingAccelerationCached = -1;     // NOLINT(cppcoreguidelines-avoid-non-const-global-variables)
+int patternTranslateFormulaCached = -1;     // NOLINT(cppcoreguidelines-avoid-non-const-global-variables)
 
 //---------------------------------------------------------------------------------------------------------------------
 auto ClearFormats(const QStringList &predefinedFormats, QStringList formats) -> QStringList
@@ -1731,8 +1732,13 @@ void VCommonSettings::SetClientID(const QString &clientID) const
 //---------------------------------------------------------------------------------------------------------------------
 auto VCommonSettings::IsTranslateFormula() const -> bool
 {
-    QSettings const settings(this->format(), this->scope(), this->organizationName(), *commonIniFilename);
-    return settings.value(*settingsPatternTranslateFormula, 1).toBool();
+    if (patternTranslateFormulaCached < 0)
+    {
+        QSettings const settings(this->format(), this->scope(), this->organizationName(), *commonIniFilename);
+        patternTranslateFormulaCached = settings.value(*settingsPatternTranslateFormula, 1).toBool();
+    }
+
+    return patternTranslateFormulaCached;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -1741,6 +1747,7 @@ void VCommonSettings::SetTranslateFormula(bool value) const
     QSettings settings(this->format(), this->scope(), this->organizationName(), *commonIniFilename);
     settings.setValue(*settingsPatternTranslateFormula, value);
     settings.sync();
+    patternTranslateFormulaCached = value;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
