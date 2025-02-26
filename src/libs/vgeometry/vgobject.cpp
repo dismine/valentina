@@ -561,39 +561,38 @@ auto VGObject::IsPointOnLineSegment(const QPointF &t, const QPointF &p1, const Q
 
     // Calculate the main rectangle shape. QLineF is not 100% accurate in calculating positions for points, but this
     // should be good enough for us.
-    const qreal degrees = 90;
+
+    // Compute the perpendicular vector scaled by `accuracy`
     QLineF edge(p1, p2);
-    edge.setAngle(edge.angle() + degrees);
+    edge.setAngle(edge.angle() + 90);
     edge.setLength(accuracy);
-    QPointF const sP1 = edge.p2();
+    QPointF offset = edge.p2() - p1; // Store the perpendicular offset vector
 
-    edge = QLineF(p2, p1);
-    edge.setAngle(edge.angle() - degrees);
-    edge.setLength(accuracy);
-    QPointF const sP2 = edge.p2();
+    // Define the expanded bounding rectangle
+    const QPointF sP1 = p1 + offset;
+    const QPointF sP2 = p2 + offset;
+    const QPointF sP3 = p2 - offset;
+    const QPointF sP4 = p1 - offset;
 
-    edge = QLineF(p2, p1);
-    edge.setAngle(edge.angle() + degrees);
-    edge.setLength(accuracy);
-    QPointF const sP3 = edge.p2();
+    // Early exit if `t` is outside the bounding box (expanded by `accuracy`)
+    const qreal minX = std::min({sP1.x(), sP2.x(), sP3.x(), sP4.x()});
+    const qreal maxX = std::max({sP1.x(), sP2.x(), sP3.x(), sP4.x()});
+    const qreal minY = std::min({sP1.y(), sP2.y(), sP3.y(), sP4.y()});
+    const qreal maxY = std::max({sP1.y(), sP2.y(), sP3.y(), sP4.y()});
 
-    edge = QLineF(p1, p2);
-    edge.setAngle(edge.angle() - degrees);
-    edge.setLength(accuracy);
-    QPointF const sP4 = edge.p2();
-
-    QVector<QPointF> const shape{sP1, sP2, sP3, sP4, sP1};
-
-    for (int i = 0; i < shape.size() - 1; ++i)
+    if (t.x() < minX || t.x() > maxX || t.y() < minY || t.y() > maxY)
     {
-        const QPointF &sp1 = shape.at(i);
-        const QPointF &sp2 = shape.at(i + 1);
-        // This formula helps to determine on which side of a vector lies a point.
-        qreal const position = (sp2.x() - sp1.x()) * (t.y() - sp1.y()) - (sp2.y() - sp1.y()) * (t.x() - sp1.x());
-        if (position < 0)
-        {
-            return false;
-        }
+        return false;
+    }
+
+    // Use cross-product to determine if `t` is inside the expanded rectangle
+    auto CrossProduct = [](QPointF a, QPointF b, QPointF c)
+    { return (b.x() - a.x()) * (c.y() - a.y()) - (b.y() - a.y()) * (c.x() - a.x()); };
+
+    if (CrossProduct(sP1, sP2, t) < 0 || CrossProduct(sP2, sP3, t) < 0 || CrossProduct(sP3, sP4, t) < 0
+        || CrossProduct(sP4, sP1, t) < 0)
+    {
+        return false;
     }
 
     return true;
