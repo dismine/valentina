@@ -97,8 +97,7 @@ auto MoveSpline::id() const -> int
 //---------------------------------------------------------------------------------------------------------------------
 void MoveSpline::Do(const VSpline &spl)
 {
-    QDomElement domElement = doc->elementById(nodeId, VAbstractPattern::TagSpline);
-    if (domElement.isElement())
+    if (QDomElement domElement = doc->elementById(nodeId, VAbstractPattern::TagSpline); domElement.isElement())
     {
         doc->SetAttribute(domElement, AttrPoint1,  spl.GetP1().id());
         doc->SetAttribute(domElement, AttrPoint4,  spl.GetP4().id());
