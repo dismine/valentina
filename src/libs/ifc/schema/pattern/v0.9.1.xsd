@@ -1067,6 +1067,7 @@
       <xs:enumeration value="hr"/>
       <xs:enumeration value="sr"/>
       <xs:enumeration value="bs"/>
+      <xs:enumeration value="cs"/>
     </xs:restriction>
   </xs:simpleType>
   <xs:simpleType name="incrementType">
