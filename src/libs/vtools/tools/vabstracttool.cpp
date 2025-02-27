@@ -135,12 +135,12 @@ auto VAbstractTool::CheckFormula(const quint32 &toolId, QString &formula, VConta
     qreal result = 0;
     try
     {
-        QScopedPointer<Calculator> const cal(new Calculator());
-        result = cal->EvalFormula(data->DataVariables(), formula);
+        Calculator cal;
+        result = cal.EvalFormula(data->DataVariables(), formula);
 
         if (qIsInf(result) || qIsNaN(result))
         {
-            qDebug() << "Invalid the formula value";
+            qDebug() << "Invalid formula value";
             return 0;
         }
     }
