@@ -71,47 +71,34 @@ inline auto CalcSqDistance(qreal x1, qreal y1, qreal x2, qreal y2) -> qreal
  * @param x4 х coordinate last point.
  * @param y4 у coordinate last point.
  * @param level level of recursion. In the begin 0.
- * @param points spline points coordinates.
  * @param approximationScale curve approximation scale.
  */
-auto PointBezier_r(qreal x1, qreal y1, qreal x2, qreal y2, qreal x3, qreal y3, qreal x4, qreal y4, qint16 level,
-                   QVector<QPointF> points, qreal approximationScale) -> QVector<QPointF>
+auto PointBezier_r(qreal x1,
+                   qreal y1,
+                   qreal x2,
+                   qreal y2,
+                   qreal x3,
+                   qreal y3,
+                   qreal x4,
+                   qreal y4,
+                   qint16 level,
+                   qreal approximationScale) -> QVector<QPointF>
 {
-    if (points.size() >= 2)
-    {
-        for (int i = 1; i < points.size(); ++i)
-        {
-            if (points.at(i - 1) == points.at(i))
-            {
-                qDebug("All neighbors points in path must be unique.");
-            }
-        }
-    }
+    static constexpr double curve_collinearity_epsilon = 1e-30;
+    static constexpr double curve_angle_tolerance_epsilon = 0.01;
+    static constexpr double m_angle_tolerance = 0.0;
+    static constexpr qint16 curve_recursion_limit = 32;
+    static constexpr double m_cusp_limit = 0.0;
 
-    const double curve_collinearity_epsilon = 1e-30;
-    const double curve_angle_tolerance_epsilon = 0.01;
-    const double m_angle_tolerance = 0.0;
-    enum curve_recursion_limit_e
+    if (level > curve_recursion_limit)
     {
-        curve_recursion_limit = 32
-    };
-    const double m_cusp_limit = 0.0;
-
-    double m_approximation_scale = approximationScale;
-    if (m_approximation_scale < minCurveApproximationScale || m_approximation_scale > maxCurveApproximationScale)
-    {
-        m_approximation_scale = VAbstractApplication::VApp()->Settings()->GetCurveApproximationScale();
+        return {};
     }
 
     double m_distance_tolerance_square;
 
-    m_distance_tolerance_square = 0.5 / m_approximation_scale;
+    m_distance_tolerance_square = 0.5 / approximationScale;
     m_distance_tolerance_square *= m_distance_tolerance_square;
-
-    if (level > curve_recursion_limit)
-    {
-        return points;
-    }
 
     // Calculate all the mid-points of the line segments
     //----------------------
@@ -134,6 +121,8 @@ auto PointBezier_r(qreal x1, qreal y1, qreal x2, qreal y2, qreal x3, qreal y3, q
     const double dy = y4 - y1;
 
     double d2 = fabs((x2 - x4) * dy - (y2 - y4) * dx);
+
+    QVector<QPointF> points;
 
     switch (double d3 = fabs((x3 - x4) * dy - (y3 - y4) * dx); (static_cast<int>(d2 > curve_collinearity_epsilon) << 1)
                                                                + static_cast<int>(d3 > curve_collinearity_epsilon))
@@ -342,26 +331,8 @@ auto PointBezier_r(qreal x1, qreal y1, qreal x2, qreal y2, qreal x3, qreal y3, q
 
     // Continue subdivision
     //----------------------
-    auto BezierTailPoints = [x1234, y1234, x234, y234, x34, y34, x4, y4, level, approximationScale]()
-    {
-        QVector<QPointF> const tail;
-        return PointBezier_r(x1234, y1234, x234, y234, x34, y34, x4, y4, static_cast<qint16>(level + 1), tail,
-                             approximationScale);
-    };
-
-    auto BezierPoints = [x1, y1, x12, y12, x123, y123, x1234, y1234, level, points, approximationScale]()
-    {
-        return PointBezier_r(x1, y1, x12, y12, x123, y123, x1234, y1234, static_cast<qint16>(level + 1), points,
-                             approximationScale);
-    };
-
-    if (level < 1)
-    {
-        QFuture<QVector<QPointF>> const futureBezier = QtConcurrent::run(BezierPoints);
-        const QVector<QPointF> tail = BezierTailPoints();
-        return futureBezier.result() + tail;
-    }
-    return BezierPoints() + BezierTailPoints();
+    return PointBezier_r(x1, y1, x12, y12, x123, y123, x1234, y1234, level + 1, approximationScale)
+           + PointBezier_r(x1234, y1234, x234, y234, x34, y34, x4, y4, level + 1, approximationScale);
 }
 } // namespace
 
@@ -574,11 +545,16 @@ void VAbstractCubicBezier::CreateAlias()
 auto VAbstractCubicBezier::GetCubicBezierPoints(const QPointF &p1, const QPointF &p2, const QPointF &p3,
                                                 const QPointF &p4, qreal approximationScale) -> QVector<QPointF>
 {
+    if (approximationScale < minCurveApproximationScale || approximationScale > maxCurveApproximationScale)
+    {
+        approximationScale = VAbstractApplication::VApp()->Settings()->GetCurveApproximationScale();
+    }
+
     QVector<QPointF> pvector;
     pvector.append(p1);
-    pvector =
-        PointBezier_r(p1.x(), p1.y(), p2.x(), p2.y(), p3.x(), p3.y(), p4.x(), p4.y(), 0, pvector, approximationScale);
+    pvector += PointBezier_r(p1.x(), p1.y(), p2.x(), p2.y(), p3.x(), p3.y(), p4.x(), p4.y(), 0, approximationScale);
     pvector.append(p4);
+
     return pvector;
 }
 
