@@ -11086,7 +11086,7 @@ Svejedno primijeniti postavke?</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.ui" line="735"/>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="5810"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="5822"/>
         <source>Save</source>
         <translation>Spremi</translation>
     </message>
@@ -11152,7 +11152,7 @@ Svejedno primijeniti postavke?</translation>
     <message>
         <location filename="../../src/app/valentina/mainwindow.ui" line="809"/>
         <location filename="../../src/app/valentina/mainwindow.cpp" line="1843"/>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="4007"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="4018"/>
         <source>Details</source>
         <translation>Detalji</translation>
     </message>
@@ -11286,8 +11286,8 @@ Svejedno primijeniti postavke?</translation>
         <translation type="vanished">Prikaži online pomoć</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="4804"/>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="5179"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="4816"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="5191"/>
         <source>Pattern piece %1</source>
         <translation>Krojni dio %1</translation>
     </message>
@@ -11380,7 +11380,7 @@ Svejedno primijeniti postavke?</translation>
         <translation>Odaberite krivulju</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="6181"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="6193"/>
         <source>About Qt</source>
         <translation>O Qt</translation>
     </message>
@@ -11401,12 +11401,12 @@ Svejedno primijeniti postavke?</translation>
         <translation type="vanished">Datoteke krojeva (*.val)</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="4147"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="4159"/>
         <source>pattern</source>
         <translation>kroj</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="4154"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="4166"/>
         <source>Save as</source>
         <translation>Spremi kao</translation>
     </message>
@@ -11419,8 +11419,8 @@ Svejedno primijeniti postavke?</translation>
         <location filename="../../src/app/valentina/mainwindow.cpp" line="2100"/>
         <location filename="../../src/app/valentina/mainwindow.cpp" line="2134"/>
         <location filename="../../src/app/valentina/mainwindow.cpp" line="2364"/>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="4254"/>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="7002"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="4266"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="7014"/>
         <source>Open file</source>
         <translation>Otvori datoteku</translation>
     </message>
@@ -11437,7 +11437,7 @@ Svejedno primijeniti postavke?</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.cpp" line="2871"/>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="4645"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="4657"/>
         <source>Error empty parameter.</source>
         <translation>Greška: prazni parametar.</translation>
     </message>
@@ -11453,17 +11453,17 @@ Svejedno primijeniti postavke?</translation>
         <translation>Greška pri obradi datoteke  (std::bad_alloc).</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="4634"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="4646"/>
         <source>Bad id.</source>
         <translation>Neispravan ID.</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="5644"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="5656"/>
         <source>File saved</source>
         <translation>Datoteka spremljena</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="7548"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="7560"/>
         <source>untitled.val</source>
         <translation>neimenovano.val</translation>
     </message>
@@ -11474,23 +11474,23 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.cpp" line="1831"/>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="5856"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="5868"/>
         <source>&amp;Undo</source>
         <translation>&amp;Poništi</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.cpp" line="1832"/>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="5863"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="5875"/>
         <source>&amp;Redo</source>
         <translation>&amp;Ponovi</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="6338"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="6350"/>
         <source>Pattern piece:</source>
         <translation>Krojni dio:</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="6340"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="6352"/>
         <source>Enter a new label for the pattern piece.</source>
         <translation>Unesite novu oznaku za krojni dio.</translation>
     </message>
@@ -11509,8 +11509,8 @@ Do you want to save your changes?</source>
     <message>
         <location filename="../../src/app/valentina/mainwindow.cpp" line="693"/>
         <location filename="../../src/app/valentina/mainwindow.cpp" line="740"/>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="6439"/>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="6630"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="6451"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="6642"/>
         <source>File error.</source>
         <translation>Pogreška u datoteci.</translation>
     </message>
@@ -11519,12 +11519,12 @@ Do you want to save your changes?</source>
         <translation type="vanished">Datoteka učitana</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="6964"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="6976"/>
         <source>Valentina didn&apos;t shut down correctly. Do you want reopen files (%1) you had open?</source>
         <translation>Valentina nije ispravno zatvorena. Želite li ponovno otvoriti datoteke (%1) koje ste imali otvorene?</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="6966"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="6978"/>
         <source>Reopen files.</source>
         <translation>Ponovno otvori datoteke.</translation>
     </message>
@@ -11766,7 +11766,7 @@ Do you want to save your changes?</source>
         <translation>Odaberite prvu točku osnovne linije</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="3977"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="3988"/>
         <source>Detail mode</source>
         <translation>Način detalja</translation>
     </message>
@@ -11775,12 +11775,12 @@ Do you want to save your changes?</source>
         <translation type="vanished">Ne možete sada koristiti način detalja. Molimo, izradite barem jedan radni dio.</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="4060"/>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="4073"/>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="4096"/>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="4287"/>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="4366"/>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="6892"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="4072"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="4085"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="4108"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="4299"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="4378"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="6904"/>
         <source>Layout mode</source>
         <translation>Način rasporeda</translation>
     </message>
@@ -11789,7 +11789,7 @@ Do you want to save your changes?</source>
         <translation type="vanished">Ne možete sada koristiti način rasporeda. Molimo, izradite barem jedan radni dio.</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="5799"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="5811"/>
         <source>Unsaved changes</source>
         <translation>Nespremljene promjene</translation>
     </message>
@@ -11828,7 +11828,7 @@ Do you want to save your changes?</source>
         <translation type="vanished">Standardna mjerenja (.vst);;Individualna mjerenja (.vit)</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="7196"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="7208"/>
         <source>You can&apos;t export empty scene.</source>
         <translation>Ne možete izvesti praznu scenu.</translation>
     </message>
@@ -11851,7 +11851,7 @@ Do you want to save your changes?</source>
         <translation type="vanished">%1, %2 (%3)</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="4181"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="4193"/>
         <source>Failed to lock. This file already opened in another window.</source>
         <translation>Neuspješno zaključavanje. Ova datoteka je već otvorena u drugom prozoru.</translation>
     </message>
@@ -11865,7 +11865,7 @@ Do you want to save your changes?</source>
         <translation type="vanished">Datoteka mjerenja sadrži nevažeća poznata mjerenja.</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="7112"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="7124"/>
         <source>Measurement file has unknown format.</source>
         <translation>Datoteka mjerenja ima nepoznat format.</translation>
     </message>
@@ -11892,13 +11892,13 @@ Do you want to save your changes?</source>
         <translation>Nije moguće sinkronizirati mjerenja.</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="4935"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="4947"/>
         <source>Couldn&apos;t update measurements.</source>
         <translation>Nije moguće ažurirati mjerenja.</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="6557"/>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="6574"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="6569"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="6586"/>
         <source>The measurements file &apos;%1&apos; could not be found.</source>
         <translation>Datoteka mjerenja &apos;%1&apos; nije pronađena.</translation>
     </message>
@@ -11907,7 +11907,7 @@ Do you want to save your changes?</source>
         <translation type="vanished">Datoteka mjerenja &lt;br/&gt;&lt;br/&gt; &lt;b&gt;%1&lt;/b&gt; &lt;br/&gt;&lt;br/&gt; nije pronađena. Želite li ažurirati lokaciju datoteke?</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="7033"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="7045"/>
         <source>Loading measurements file</source>
         <translation>Učitavanje datoteke mjerenja</translation>
     </message>
@@ -11924,9 +11924,9 @@ Do you want to save your changes?</source>
         <translation type="vanished">Nije moguće postaviti veličinu. Datoteka nije otvorena.</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="7379"/>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="7422"/>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="7465"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="7391"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="7434"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="7477"/>
         <source>The method %1 does nothing in GUI mode</source>
         <translation>Metoda %1 ne radi u GUI načinu rada</translation>
     </message>
@@ -11943,15 +11943,15 @@ Do you want to save your changes?</source>
         <translation type="vanished">Nije moguće postaviti visinu. Datoteka nije otvorena.</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="6875"/>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="6931"/>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="7244"/>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="7284"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="6887"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="6943"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="7256"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="7296"/>
         <source>Export error.</source>
         <translation>Pogreška pri izvozu.</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="7492"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="7504"/>
         <source>Please, provide one input file.</source>
         <translation>Molimo, navedite jednu ulaznu datoteku.</translation>
     </message>
@@ -12028,7 +12028,7 @@ Do you want to save your changes?</source>
         <translation type="vanished">Spremi...</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="5815"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="5827"/>
         <source>Don&apos;t Save</source>
         <translation>Nemoj spremiti</translation>
     </message>
@@ -12145,13 +12145,13 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.cpp" line="1839"/>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="3939"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="3950"/>
         <source>Contains all visibility groups</source>
         <translation>Sadrži sve grupe vidljivosti</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.cpp" line="1844"/>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="4009"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="4020"/>
         <source>Show which details will go in layout</source>
         <translation>Prikaži koji će detalji ići u raspored</translation>
     </message>
@@ -12178,7 +12178,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.cpp" line="1834"/>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="2988"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="2999"/>
         <source>Pattern Piece:</source>
         <translation>Krojni dio:</translation>
     </message>
@@ -12191,7 +12191,7 @@ Do you want to save your changes?</source>
         <translation type="vanished">Veličina:</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="7028"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="7040"/>
         <source>The measurements file &lt;br/&gt;&lt;br/&gt; &lt;b&gt;%1&lt;/b&gt; &lt;br/&gt;&lt;br/&gt; could not be found. Do you want to update the file location?</source>
         <translation>Datoteka mjerenja &lt;br/&gt;&lt;br/&gt; &lt;b&gt;%1&lt;/b&gt; &lt;br/&gt;&lt;br/&gt; nije pronađena. Želite li ažurirati lokaciju datoteke?</translation>
     </message>
@@ -12240,12 +12240,12 @@ Do you want to save your changes?</source>
         <translation>Odaberite glavne objekte putanje u smjeru kazaljke na satu.</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="4224"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="4236"/>
         <source>Could not save the file</source>
         <translation>Nije moguće spremiti datoteku</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="7598"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="7610"/>
         <source>read only</source>
         <translation>samo za čitanje</translation>
     </message>
@@ -12318,22 +12318,22 @@ Do you want to save your changes?</source>
     <message>
         <location filename="../../src/app/valentina/mainwindow.cpp" line="2095"/>
         <location filename="../../src/app/valentina/mainwindow.cpp" line="2130"/>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="7074"/>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="7088"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="7086"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="7100"/>
         <source>Individual measurements</source>
         <translation>Individualna mjerenja</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.cpp" line="2095"/>
         <location filename="../../src/app/valentina/mainwindow.cpp" line="2130"/>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="7074"/>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="7088"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="7086"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="7100"/>
         <source>Multisize measurements</source>
         <translation>Mjerenja za više veličina</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="4153"/>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="4240"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="4165"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="4252"/>
         <source>Pattern files</source>
         <translation>Datoteke krojeva</translation>
     </message>
@@ -12378,37 +12378,37 @@ Do you want to save your changes?</source>
         <translation>Formula</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="3148"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="3159"/>
         <source>Point at the intersections of lines/axis tools</source>
         <translation>Točka na presjeku linija/alata za osi</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="3191"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="3202"/>
         <source>Point segmenting curves/arcs tools</source>
         <translation>Točka segmentiranja krivulja/lukova</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="3205"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="3216"/>
         <source>Points intersecting with 2 curves/arcs/circles tools</source>
         <translation>Točke na presjeku dviju krivulja/lukova/krugova</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="3978"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="3989"/>
         <source>You can&apos;t use Detail mode yet. Please, create at least one workpiece.</source>
         <translation>Još ne možete koristiti način detalja. Molimo, izradite barem jedan radni dio.</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="4061"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="4073"/>
         <source>You can&apos;t use Layout mode yet. Please, create at least one workpiece.</source>
         <translation>Još ne možete koristiti način rasporeda. Molimo, izradite barem jedan radni dio.</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="4074"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="4086"/>
         <source>You can&apos;t use Layout mode yet. Please, include at least one detail in layout.</source>
         <translation>Još ne možete koristiti način rasporeda. Molimo, uključite barem jedan detalj u raspored.</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="4097"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="4109"/>
         <source>You can&apos;t use Layout mode yet.</source>
         <translation>Još ne možete koristiti način rasporeda.</translation>
     </message>
@@ -12428,23 +12428,23 @@ Do you want to save your changes?</source>
         <translation>Izvoz detalja preskačući fazu rasporeda</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="4288"/>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="4367"/>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="6893"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="4300"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="4379"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="6905"/>
         <source>You don&apos;t have enough details to export. Please, include at least one detail in layout.</source>
         <translation>Nemate dovoljno detalja za izvoz. Molimo, uključite barem jedan detalj u raspored.</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="4301"/>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="4380"/>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="6906"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="4313"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="4392"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="6918"/>
         <source>Export details</source>
         <translation>Izvezi detalje</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="4301"/>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="4380"/>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="6906"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="4313"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="4392"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="6918"/>
         <source>Can&apos;t export details.</source>
         <translation>Nije moguće izvesti detalje.</translation>
     </message>
@@ -12479,7 +12479,7 @@ Do you want to save your changes?</source>
         <translation>Izvezi kao…</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="5809"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="5821"/>
         <source>Save…</source>
         <translation>Spremi…</translation>
     </message>
@@ -12494,17 +12494,17 @@ Do you want to save your changes?</source>
         <translation>Izvezi završna mjerenja u CSV</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="7206"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="7218"/>
         <source>You can&apos;t export empty scene. Please, include at least one detail in layout.</source>
         <translation>Ne možete izvesti praznu scenu. Molimo, uključite barem jedan detalj u raspored.</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="7312"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="7324"/>
         <source>Export final measurements error.</source>
         <translation>Pogreška pri izvozu završnih mjerenja.</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="7313"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="7325"/>
         <source>Destination path is empty.</source>
         <translation>Ciljna putanja je prazna.</translation>
     </message>
@@ -12559,12 +12559,12 @@ Do you want to save your changes?</source>
         <translation>Odaberite središnju točku za oznaku</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="6588"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="6600"/>
         <source>The measurements file &apos;%1&apos; could not be found or provides not enough information.</source>
         <translation>Datoteka mjerenja &apos;%1&apos; nije pronađena ili ne sadrži dovoljno informacija.</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="2946"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="2957"/>
         <source>Scale:</source>
         <translation>Skala:</translation>
     </message>
@@ -12579,7 +12579,7 @@ Do you want to save your changes?</source>
         <translation>Promjene su primijenjene.</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="5785"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="5797"/>
         <source>Cannot save settings. Access denied.</source>
         <translation>Ne mogu spremiti postavke. Pristup odbijen.</translation>
     </message>
@@ -12589,7 +12589,7 @@ Do you want to save your changes?</source>
         <translation>Ctrl+O</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="5761"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="5773"/>
         <source>Cannot read settings from a malformed .INI file.</source>
         <translation>Ne mogu čitati postavke iz neispravno oblikovane .INI datoteke.</translation>
     </message>
@@ -12639,28 +12639,28 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.cpp" line="1838"/>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="3937"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="3948"/>
         <source>Groups of visibility</source>
         <translation>Grupe vidljivosti</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.ui" line="1525"/>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="5153"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="5165"/>
         <source>Export recipe</source>
         <translation>Izvoz recepta</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="5151"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="5163"/>
         <source>Recipe files</source>
         <translation>Datoteke recepata</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="5153"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="5165"/>
         <source>recipe</source>
         <translation>recept</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="5166"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="5178"/>
         <source>Could not save recipe. %1</source>
         <translation>Nije moguće spremiti recept. %1</translation>
     </message>
@@ -12686,7 +12686,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.ui" line="411"/>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="7926"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="7938"/>
         <source>Pattern messages</source>
         <translation>Poruke kroja</translation>
     </message>
@@ -12701,27 +12701,27 @@ Do you want to save your changes?</source>
         <translation>Filter</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="7903"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="7915"/>
         <source>DEBUG</source>
         <translation>DEBUG</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="7906"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="7918"/>
         <source>WARNING</source>
         <translation>UPOZORENJE</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="7909"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="7921"/>
         <source>CRITICAL</source>
         <translation>KRITIČNO</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="7912"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="7924"/>
         <source>FATAL</source>
         <translation>FATALNO</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="7915"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="7927"/>
         <source>INFO</source>
         <translation>INFO</translation>
     </message>
@@ -12801,78 +12801,78 @@ Do you want to save your changes?</source>
         <translation>Ažuriraj ručni raspored</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="4335"/>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="4410"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="4347"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="4422"/>
         <source>Unable to prepare raw layout data.</source>
         <translation>Nije moguće pripremiti sirove podatke rasporeda.</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="4342"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="4354"/>
         <source>Manual layout files</source>
         <translation>Datoteke ručnog rasporeda</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="4349"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="4361"/>
         <source>Select manual layout</source>
         <translation>Odaberite ručni raspored</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="4451"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="4463"/>
         <source>Select folder</source>
         <translation>Odaberite mapu</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="5800"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="5812"/>
         <source>The pattern has been modified. Do you want to save your changes?</source>
         <translation>Kroj je izmijenjen. Želite li spremiti svoje promjene?</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="7360"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="7372"/>
         <source>Not supported dimension A value &apos;%1&apos; for this pattern file.</source>
         <translation>Nepodržana vrijednost dimenzije A &apos;%1&apos; za ovu datoteku kroja.</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="7367"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="7379"/>
         <source>Couldn&apos;t set dimension A. Need a file with multisize measurements.</source>
         <translation>Nije moguće postaviti dimenziju A. Potrebna je datoteka s višestrukim mjerenjima.</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="7373"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="7385"/>
         <source>Couldn&apos;t set dimension A. File wasn&apos;t opened.</source>
         <translation>Nije moguće postaviti dimenziju A. Datoteka nije otvorena.</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="7403"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="7415"/>
         <source>Not supported dimension B value &apos;%1&apos; for this pattern file.</source>
         <translation>Nepodržana vrijednost dimenzije B &apos;%1&apos; za ovu datoteku kroja.</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="7410"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="7422"/>
         <source>Couldn&apos;t set dimension B. Need a file with multisize measurements.</source>
         <translation>Nije moguće postaviti dimenziju B. Potrebna je datoteka s višestrukim mjerenjima.</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="7416"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="7428"/>
         <source>Couldn&apos;t set dimension B. File wasn&apos;t opened.</source>
         <translation>Nije moguće postaviti dimenziju B. Datoteka nije otvorena.</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="7446"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="7458"/>
         <source>Not supported dimension C value &apos;%1&apos; for this pattern file.</source>
         <translation>Nepodržana vrijednost dimenzije C &apos;%1&apos; za ovu datoteku kroja.</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="7453"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="7465"/>
         <source>Couldn&apos;t set dimension C. Need a file with multisize measurements.</source>
         <translation>Nije moguće postaviti dimenziju C. Potrebna je datoteka s višestrukim mjerenjima.</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="7459"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="7471"/>
         <source>Couldn&apos;t set dimension C. File wasn&apos;t opened.</source>
         <translation>Nije moguće postaviti dimenziju C. Datoteka nije otvorena.</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="5171"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="5183"/>
         <source>Could not create recipe file. %1</source>
         <translation>Nije moguće izraditi datoteku recepta. %1</translation>
     </message>
@@ -12882,12 +12882,12 @@ Do you want to save your changes?</source>
         <translation>Trgovina</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="6827"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="6839"/>
         <source>Scalable Vector Graphics files</source>
         <translation>Datoteke skalabilne vektorske grafike</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="6829"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="6841"/>
         <source>Save draw</source>
         <translation>Spremi crtanje</translation>
     </message>
@@ -12917,83 +12917,83 @@ Do you want to save your changes?</source>
         <translation>Nevažeća slika. Pogreška: %1</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="3121"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="3132"/>
         <source>Point at a given distance tools</source>
         <translation>Točka na zadanoj udaljenosti</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="3135"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="3146"/>
         <source>Perpendicular/Bisector tools</source>
         <translation>Alati za okomice/simetralu</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="3161"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="3172"/>
         <source>Triangular tools</source>
         <translation>Alati za trokute</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="3175"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="3186"/>
         <source>Point intersecting with axis tools</source>
         <translation>Točka na presjeku s osi</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="3220"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="3231"/>
         <source>Points intersecting with arcs/curves and tangents/segments tools</source>
         <translation>Točke na presjeku s lukovima/krivuljama i tangentama/segmentima</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="3277"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="3288"/>
         <source>Curves and arcs tools</source>
         <translation>Alati za krivulje i lukove</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="3307"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="3318"/>
         <source>Flipping objects tools</source>
         <translation>Alati za preokretanje objekata</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="3320"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="3331"/>
         <source>Rotating/moving objects tools</source>
         <translation>Alati za rotaciju/pomicanje objekata</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="3355"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="3366"/>
         <source>Merge/duplicate pieces tools</source>
         <translation>Alati za spajanje/dupliciranje dijelova</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="3370"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="3381"/>
         <source>Adding objects for Details mode tools</source>
         <translation>Alati za dodavanje objekata za način Detalji</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="4418"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="4430"/>
         <source>Select background image</source>
         <translation>Odaberite pozadinsku sliku</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="5063"/>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="5103"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="5075"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="5115"/>
         <source>Unable to save image. Error: %1</source>
         <translation>Nije moguće spremiti sliku. Pogreška: %1</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="5069"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="5081"/>
         <source>Unable to save image. No data.</source>
         <translation>Nije moguće spremiti sliku. Nema podataka.</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="5075"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="5087"/>
         <source>untitled</source>
         <translation>neimenovano</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="5088"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="5100"/>
         <source>All files</source>
         <translation>Sve datoteke</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="5092"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="5104"/>
         <source>Save Image</source>
         <translation>Spremi sliku</translation>
     </message>
@@ -13164,17 +13164,17 @@ Do you want to save your changes?</source>
         <translation>Datoteka mjerenja ima nepoznat format.</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindowsnogui.cpp" line="1456"/>
+        <location filename="../../src/app/valentina/mainwindowsnogui.cpp" line="1465"/>
         <source>File error.</source>
         <translation>Pogreška u datoteci.</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindowsnogui.cpp" line="1447"/>
+        <location filename="../../src/app/valentina/mainwindowsnogui.cpp" line="1456"/>
         <source>Measurement file doesn&apos;t include all required measurements.</source>
         <translation>Datoteka mjerenja ne uključuje sva potrebna mjerenja.</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindowsnogui.cpp" line="1366"/>
+        <location filename="../../src/app/valentina/mainwindowsnogui.cpp" line="1375"/>
         <source>Measurement file doesn&apos;t include all required measurements.
 
 Missing: %1
@@ -13183,29 +13183,29 @@ Would you like to select another file?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindowsnogui.cpp" line="1372"/>
+        <location filename="../../src/app/valentina/mainwindowsnogui.cpp" line="1381"/>
         <source>Missing Measurements</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindowsnogui.cpp" line="1386"/>
+        <location filename="../../src/app/valentina/mainwindowsnogui.cpp" line="1395"/>
         <source>Select Measurement File</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindowsnogui.cpp" line="1410"/>
-        <location filename="../../src/app/valentina/mainwindowsnogui.cpp" line="1424"/>
+        <location filename="../../src/app/valentina/mainwindowsnogui.cpp" line="1419"/>
+        <location filename="../../src/app/valentina/mainwindowsnogui.cpp" line="1433"/>
         <source>Multisize measurements</source>
-        <translation type="unfinished">Mjerenja za više veličina</translation>
+        <translation>Mjerenja za više veličina</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindowsnogui.cpp" line="1411"/>
-        <location filename="../../src/app/valentina/mainwindowsnogui.cpp" line="1423"/>
+        <location filename="../../src/app/valentina/mainwindowsnogui.cpp" line="1420"/>
+        <location filename="../../src/app/valentina/mainwindowsnogui.cpp" line="1432"/>
         <source>Individual measurements</source>
-        <translation type="unfinished">Individualna mjerenja</translation>
+        <translation>Individualna mjerenja</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindowsnogui.cpp" line="1448"/>
+        <location filename="../../src/app/valentina/mainwindowsnogui.cpp" line="1457"/>
         <source>Please, additionally provide: %1</source>
         <translation>Molimo, dodatno navedite: %1</translation>
     </message>
@@ -14922,7 +14922,7 @@ Ova će se opcija primijeniti nakon ponovnog pokretanja.</translation>
     </message>
     <message>
         <location filename="../../src/libs/vlayout/vlayoutpiece.cpp" line="678"/>
-        <location filename="../../src/libs/vtools/tools/vtoolseamallowance.cpp" line="2023"/>
+        <location filename="../../src/libs/vtools/tools/vtoolseamallowance.cpp" line="2022"/>
         <source>Piece &apos;%1&apos;. Seam allowance is not valid.</source>
         <translation>Dio &apos;%1&apos;. Širina šava nije valjana.</translation>
     </message>
@@ -15105,7 +15105,7 @@ Ova će se opcija primijeniti nakon ponovnog pokretanja.</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/tools/vtoolseamallowance.cpp" line="538"/>
-        <location filename="../../src/libs/vtools/tools/vtoolseamallowance.cpp" line="2319"/>
+        <location filename="../../src/libs/vtools/tools/vtoolseamallowance.cpp" line="2318"/>
         <source>Piece &apos;%1&apos;. Unable to load default piece label template.
 %2
 %3</source>
@@ -15114,12 +15114,12 @@ Ova će se opcija primijeniti nakon ponovnog pokretanja.</translation>
 %3</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/tools/vtoolseamallowance.cpp" line="1255"/>
+        <location filename="../../src/libs/vtools/tools/vtoolseamallowance.cpp" line="1254"/>
         <source>Piece &apos;%1&apos;. Grainline is not valid.</source>
         <translation>Dio &apos;%1&apos;. Smjer vlakna nije valjan.</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/tools/vtoolseamallowance.cpp" line="2973"/>
+        <location filename="../../src/libs/vtools/tools/vtoolseamallowance.cpp" line="2972"/>
         <source>Piece &apos;%1&apos;. Fold line is not valid.</source>
         <translation>Dio &apos;%1&apos;. Linija preklopa nije valjana.</translation>
     </message>
@@ -15152,13 +15152,13 @@ Ova će se opcija primijeniti nakon ponovnog pokretanja.</translation>
         <translation>Nije moguće postaviti margine pisača</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vgeometry/vabstractcubicbezier.cpp" line="425"/>
+        <location filename="../../src/libs/vgeometry/vabstractcubicbezier.cpp" line="396"/>
         <location filename="../../src/libs/vgeometry/vellipticalarc.cpp" line="852"/>
         <source>Curve &apos;%1&apos;. Length of a cut segment is too small. Optimize it to minimal value.</source>
         <translation>Krivulja &apos;%1&apos;. Duljina segmenta rezanja je premala. Optimizirajte na minimalnu vrijednost.</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vgeometry/vabstractcubicbezier.cpp" line="442"/>
+        <location filename="../../src/libs/vgeometry/vabstractcubicbezier.cpp" line="413"/>
         <location filename="../../src/libs/vgeometry/vellipticalarc.cpp" line="870"/>
         <source>Curve &apos;%1&apos;. Length of a cut segment is too big. Optimize it to maximal value.</source>
         <translation>Krivulja &apos;%1&apos;. Duljina segmenta rezanja je prevelika. Optimizirajte na maksimalnu vrijednost.</translation>
@@ -15240,13 +15240,13 @@ Ova će se opcija primijeniti nakon ponovnog pokretanja.</translation>
         <translation>z vrijednost pomicanja dijelova</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vgeometry/vabstractcubicbezier.cpp" line="419"/>
+        <location filename="../../src/libs/vgeometry/vabstractcubicbezier.cpp" line="390"/>
         <location filename="../../src/libs/vgeometry/vellipticalarc.cpp" line="846"/>
         <source>Curve &apos;%1&apos;. Length of a cut segment (%2) is too small. Optimize it to minimal value.</source>
         <translation>Krivulja &apos;%1&apos;. Duljina segmenta rezanja (%2) je premala. Optimizirajte na minimalnu vrijednost.</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vgeometry/vabstractcubicbezier.cpp" line="437"/>
+        <location filename="../../src/libs/vgeometry/vabstractcubicbezier.cpp" line="408"/>
         <location filename="../../src/libs/vgeometry/vellipticalarc.cpp" line="865"/>
         <source>Curve &apos;%1&apos;. Length of a cut segment (%2) is too big. Optimize it to maximal value.</source>
         <translation>Krivulja &apos;%1&apos;. Duljina segmenta rezanja (%2) je prevelika. Optimizirajte na maksimalnu vrijednost.</translation>
@@ -15886,7 +15886,7 @@ Ova će se opcija primijeniti nakon ponovnog pokretanja.</translation>
     <message>
         <location filename="../../src/app/tape/tkmmainwindow.ui" line="769"/>
         <source>Delete image</source>
-        <translation type="unfinished">Izbriši sliku</translation>
+        <translation>Izbriši sliku</translation>
     </message>
     <message>
         <location filename="../../src/app/tape/tkmmainwindow.ui" line="818"/>
@@ -16107,10 +16107,6 @@ Ova će se opcija primijeniti nakon ponovnog pokretanja.</translation>
         <location filename="../../src/app/tape/tkmmainwindow.cpp" line="805"/>
         <source>Comma-Separated Values</source>
         <translation>Vrijednosti odvojene zarezima</translation>
-    </message>
-    <message>
-        <source>Measurement image</source>
-        <translation type="vanished">Slika mjerenja</translation>
     </message>
     <message>
         <location filename="../../src/app/tape/tkmmainwindow.cpp" line="588"/>
@@ -17366,10 +17362,6 @@ Do you want to save your changes?</source>
         <location filename="../../src/app/tape/tmainwindow.cpp" line="4777"/>
         <source>Invalid link</source>
         <translation>Nevažeća veza</translation>
-    </message>
-    <message>
-        <source>Known measurements %1</source>
-        <translation type="vanished">Poznata mjerenja %1</translation>
     </message>
     <message>
         <location filename="../../src/app/tape/tmainwindow.cpp" line="4843"/>
@@ -23115,74 +23107,74 @@ Do you want to save your changes?</source>
         <translation type="vanished">Greška: nije jedinstveni ID.</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="551"/>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="579"/>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="641"/>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="685"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="560"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="588"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="650"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="694"/>
         <source>Error parsing file.</source>
         <translation>Greška pri obradi datoteke.</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="558"/>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="652"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="567"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="661"/>
         <source>Error can&apos;t convert value.</source>
         <translation>Greška: ne može se pretvoriti vrijednost.</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="565"/>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="663"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="574"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="672"/>
         <source>Error empty parameter.</source>
         <translation>Greška: prazni parametar.</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="572"/>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="674"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="581"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="683"/>
         <source>Error wrong id.</source>
         <translation>Greška: pogrešan ID.</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="586"/>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="696"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="595"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="705"/>
         <source>Error parsing file (std::bad_alloc).</source>
         <translation>Greška pri obradi datoteke  (std::bad_alloc).</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="1028"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="1095"/>
         <source>Error creating or updating detail</source>
         <translation>Greška pri stvaranju ili ažuriranju detalja</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="1646"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="1713"/>
         <source>Error creating or updating single point</source>
         <translation>Greška pri stvaranju ili ažuriranju pojedinačne točke</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="1691"/>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="1697"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="1758"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="1764"/>
         <source>Error creating or updating point of end line</source>
         <translation>Greška pri stvaranju ili ažuriranju krajnje točke linije</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="1741"/>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="1747"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="1808"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="1814"/>
         <source>Error creating or updating point along line</source>
         <translation>Greška pri stvaranju ili ažuriranju točke duž linije</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="1786"/>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="1792"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="1853"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="1859"/>
         <source>Error creating or updating point of shoulder</source>
         <translation>Greška pri stvaranju ili ažuriranju točke ramena</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="1831"/>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="1837"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="1898"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="1904"/>
         <source>Error creating or updating point of normal</source>
         <translation>Greška pri stvaranju ili ažuriranju normalne točke</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="1876"/>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="1882"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="1943"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="1949"/>
         <source>Error creating or updating point of bisector</source>
         <translation>Greška pri stvaranju ili ažuriranju točke simetrale</translation>
     </message>
@@ -23191,270 +23183,270 @@ Do you want to save your changes?</source>
         <translation type="vanished">Greška pri stvaranju ili ažuriranju točke presjeka linija</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="1952"/>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="1958"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="2019"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="2025"/>
         <source>Error creating or updating point of contact</source>
         <translation>Greška pri stvaranju ili ažuriranju točke dodira</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="2008"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="2075"/>
         <source>Error creating or updating modeling point</source>
         <translation>Greška pri stvaranju ili ažuriranju modelirane točke</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="2152"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="2219"/>
         <source>Error creating or updating height</source>
         <translation>Greška pri stvaranju ili ažuriranju visine</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="2183"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="2250"/>
         <source>Error creating or updating triangle</source>
         <translation>Greška pri stvaranju ili ažuriranju trokuta</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="2213"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="2280"/>
         <source>Error creating or updating point of intersection</source>
         <translation>Greška pri stvaranju ili ažuriranju točke presjeka</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="2252"/>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="2258"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="2319"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="2325"/>
         <source>Error creating or updating cut spline point</source>
         <translation>Greška pri stvaranju ili ažuriranju točke rezanja splajna</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="2297"/>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="2303"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="2364"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="2370"/>
         <source>Error creating or updating cut spline path point</source>
         <translation>Greška pri stvaranju ili ažuriranju točke rezanja putanje splajna</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="2342"/>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="2348"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="2409"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="2415"/>
         <source>Error creating or updating cut arc point</source>
         <translation>Greška pri stvaranju ili ažuriranju točke rezanja luka</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="2389"/>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="2395"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="2456"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="2462"/>
         <source>Error creating or updating point of intersection line and axis</source>
         <translation>Greška pri stvaranju ili ažuriranju točke presjeka linije i osi</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="2442"/>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="2448"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="2509"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="2515"/>
         <source>Error creating or updating point of intersection curve and axis</source>
         <translation>Greška pri stvaranju ili ažuriranju točke presjeka krivulje i osi</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="1525"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="1592"/>
         <source>Error creating or updating line</source>
         <translation>Greška pri stvaranju ili ažuriranju linije</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="2735"/>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="2798"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="2802"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="2865"/>
         <source>Error creating or updating simple curve</source>
         <translation>Greška pri stvaranju ili ažuriranju jednostavne krivulje</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="2927"/>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="3012"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="2994"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="3079"/>
         <source>Error creating or updating curve path</source>
         <translation>Greška pri stvaranju ili ažuriranju putanje krivulje</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="3127"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="3194"/>
         <source>Error creating or updating modeling simple curve</source>
         <translation>Greška pri stvaranju ili ažuriranju modelirane jednostavne krivulje</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="3174"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="3241"/>
         <source>Error creating or updating modeling curve path</source>
         <translation>Greška pri izradi ili ažuriranju putanje modelirane krivulje</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="3221"/>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="3227"/>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="3412"/>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="3418"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="3288"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="3294"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="3479"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="3485"/>
         <source>Error creating or updating simple arc</source>
         <translation>Greška pri stvaranju ili ažuriranju jednostavnog luka</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="3365"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="3432"/>
         <source>Error creating or updating modeling arc</source>
         <translation>Greška pri stvaranju ili ažuriranju modeliranog luka</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="4036"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="4074"/>
         <source>Error creating or updating union details</source>
         <translation>Greška pri stvaranju ili ažuriranju spojenih detalja</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="2479"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="2546"/>
         <source>Error creating or updating point of intersection arcs</source>
         <translation>Greška pri stvaranju ili ažuriranju točke presjeka lukova</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="2522"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="2589"/>
         <source>Error creating or updating point of intersection circles</source>
         <translation>Greška pri stvaranju ili ažuriranju točke presjeka kružnica</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="2604"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="2671"/>
         <source>Error creating or updating point from circle and tangent</source>
         <translation>Greška pri stvaranju ili ažuriranju točke od kružnice i tangente</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="2635"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="2702"/>
         <source>Error creating or updating point from arc and tangent</source>
         <translation>Greška pri stvaranju ili ažuriranju točke od luka i tangente</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="2685"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="2752"/>
         <source>Error creating or updating true darts</source>
         <translation>Greška pri stvaranju ili ažuriranju pravih ušitaka</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="770"/>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="878"/>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="955"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="837"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="945"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="1022"/>
         <source>Wrong tag name &apos;%1&apos;.</source>
         <translation>Pogrešno ime oznake &apos;%1&apos;.</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="1492"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="1559"/>
         <source>Unknown point type &apos;%1&apos;.</source>
         <translation>Nepoznat tip točke &apos;%1&apos;.</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="3926"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="3964"/>
         <source>Unknown spline type &apos;%1&apos;.</source>
         <translation>Nepoznat tip splajna &apos;%1&apos;.</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="3962"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="4000"/>
         <source>Unknown arc type &apos;%1&apos;.</source>
         <translation>Nepoznat tip luka &apos;%1&apos;.</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="4042"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="4080"/>
         <source>Unknown tools type &apos;%1&apos;.</source>
         <translation>Nepoznat tip alata &apos;%1&apos;.</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="489"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="498"/>
         <source>Error not unique id.</source>
         <translation>Pogreška: nije jedinstveni ID.</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="2564"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="2631"/>
         <source>Error creating or updating point of intersection curves</source>
         <translation>Greška pri stvaranju ili ažuriranju točke presjeka krivulja</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="2804"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="2871"/>
         <source>Error creating or updating simple interactive spline</source>
         <translation>Greška pri stvaranju ili ažuriranju jednostavnog interaktivnog splajna</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="3018"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="3085"/>
         <source>Error creating or updating interactive spline path</source>
         <translation>Greška pri stvaranju ili ažuriranju interaktivne putanje splajna</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="2858"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="2925"/>
         <source>Error creating or updating cubic bezier curve</source>
         <translation>Greška pri stvaranju ili ažuriranju kubične Bezierove krivulje</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="3079"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="3146"/>
         <source>Error creating or updating cubic bezier path curve</source>
         <translation>Greška pri stvaranju ili ažuriranju putanje kubične Bezierove krivulje</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="3458"/>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="3464"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="3525"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="3531"/>
         <source>Error creating or updating operation of rotation</source>
         <translation>Greška pri stvaranju ili ažuriranju operacije rotacije</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="4075"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="4113"/>
         <source>Unknown operation type &apos;%1&apos;.</source>
         <translation>Nepoznat tip operacije &apos;%1&apos;.</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="3496"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="3563"/>
         <source>Error creating or updating operation of flipping by line</source>
         <translation>Greška pri stvaranju ili ažuriranju operacije zrcaljenja prema liniji</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="3528"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="3595"/>
         <source>Error creating or updating operation of flipping by axis</source>
         <translation>Greška pri stvaranju ili ažuriranju operacije zrcaljenja prema osi</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="3574"/>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="3580"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="3641"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="3647"/>
         <source>Error creating or updating operation of moving</source>
         <translation>Greška pri stvaranju ili ažuriranju operacije pomicanja</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="1913"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="1980"/>
         <source>Error creating or updating point of line intersection</source>
         <translation>Greška pri stvaranju ili ažuriranju točke presjeka linija</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="3281"/>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="3287"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="3348"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="3354"/>
         <source>Error creating or updating simple elliptical arc</source>
         <translation>Greška pri stvaranju ili ažuriranju jednostavnog eliptičnog luka</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="3994"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="4032"/>
         <source>Unknown elliptical arc type &apos;%1&apos;.</source>
         <translation>Nepoznat tip eliptičnog luka &apos;%1&apos;.</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="3326"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="3393"/>
         <source>Error creating or updating modeling elliptical arc</source>
         <translation>Greška pri stvaranju ili ažuriranju modelnog eliptičnog luka</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="972"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="1039"/>
         <source>Detail</source>
         <translation>Detalj</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="4125"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="4163"/>
         <source>Unnamed path</source>
         <translation>Neimenovana putanja</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="4118"/>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="4141"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="4156"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="4179"/>
         <source>Error creating or updating a piece path</source>
         <translation>Greška pri stvaranju ili ažuriranju putanje dijela</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="2047"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="2114"/>
         <source>Error creating or updating pin point</source>
         <translation>Greška pri stvaranju ili ažuriranju točke pribadanja</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="4119"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="4157"/>
         <source>Piece path doesn&apos;t contain nodes</source>
         <translation>Putanja dijela ne sadrži čvorove</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="2116"/>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="2122"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="2183"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="2189"/>
         <source>Error creating or updating place label</source>
         <translation>Greška pri stvaranju ili ažuriranju oznake</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="4294"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="4332"/>
         <source>Can&apos;t find increment &apos;%1&apos;</source>
         <translation>Nije moguće pronaći povećanje &apos;%1&apos;</translation>
     </message>
@@ -25249,107 +25241,107 @@ Raw layout format compatibility error: actualFileVersion = %1 and fileVersion = 
         <translation>Trenutna širina šava</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/tools/vtoolseamallowance.cpp" line="1278"/>
+        <location filename="../../src/libs/vtools/tools/vtoolseamallowance.cpp" line="1277"/>
         <source>move pattern piece label</source>
         <translation>pomakni oznaku krojnog dijela</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/tools/vtoolseamallowance.cpp" line="1297"/>
+        <location filename="../../src/libs/vtools/tools/vtoolseamallowance.cpp" line="1296"/>
         <source>resize pattern piece label</source>
         <translation>promijeni veličinu oznake krojnog dijela</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/tools/vtoolseamallowance.cpp" line="1317"/>
+        <location filename="../../src/libs/vtools/tools/vtoolseamallowance.cpp" line="1316"/>
         <source>rotate pattern piece label</source>
         <translation>rotiraj oznaku krojnog dijela</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/tools/vtoolseamallowance.cpp" line="1332"/>
+        <location filename="../../src/libs/vtools/tools/vtoolseamallowance.cpp" line="1331"/>
         <source>move pattern info label</source>
         <translation>pomakni informativnu oznaku krojnog dijela</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/tools/vtoolseamallowance.cpp" line="1351"/>
+        <location filename="../../src/libs/vtools/tools/vtoolseamallowance.cpp" line="1350"/>
         <source>resize pattern info label</source>
         <translation>promijeni veličinu informativne oznake krojnog dijela</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/tools/vtoolseamallowance.cpp" line="1369"/>
+        <location filename="../../src/libs/vtools/tools/vtoolseamallowance.cpp" line="1368"/>
         <source>rotate pattern info label</source>
         <translation>rotiraj informativnu oznaku krojnog dijela</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/tools/vtoolseamallowance.cpp" line="1382"/>
+        <location filename="../../src/libs/vtools/tools/vtoolseamallowance.cpp" line="1381"/>
         <source>move grainline</source>
         <translation>pomakni nit tkanja</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/tools/vtoolseamallowance.cpp" line="1397"/>
+        <location filename="../../src/libs/vtools/tools/vtoolseamallowance.cpp" line="1396"/>
         <source>resize grainline</source>
         <translation>promijeni veličinu niti tkanja</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/tools/vtoolseamallowance.cpp" line="1411"/>
+        <location filename="../../src/libs/vtools/tools/vtoolseamallowance.cpp" line="1410"/>
         <source>rotate grainline</source>
         <translation>rotiraj nit tkanja</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/tools/vtoolseamallowance.cpp" line="1692"/>
+        <location filename="../../src/libs/vtools/tools/vtoolseamallowance.cpp" line="1691"/>
         <source>Options</source>
         <translation>Opcije</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/tools/vtoolseamallowance.cpp" line="1696"/>
+        <location filename="../../src/libs/vtools/tools/vtoolseamallowance.cpp" line="1695"/>
         <source>In layout</source>
         <translation>U rasporedu</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/tools/vtoolseamallowance.cpp" line="1700"/>
+        <location filename="../../src/libs/vtools/tools/vtoolseamallowance.cpp" line="1699"/>
         <source>Hide main path</source>
         <translation>Sakrij glavnu putanju</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/tools/vtoolseamallowance.cpp" line="1712"/>
+        <location filename="../../src/libs/vtools/tools/vtoolseamallowance.cpp" line="1711"/>
         <source>Show full piece</source>
         <translation>Prikaži cijeli dio</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/tools/vtoolseamallowance.cpp" line="1724"/>
+        <location filename="../../src/libs/vtools/tools/vtoolseamallowance.cpp" line="1723"/>
         <source>Reset piece label template</source>
         <translation>Vrati predložak oznake krojnog dijela na zadano</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/tools/vtoolseamallowance.cpp" line="1727"/>
+        <location filename="../../src/libs/vtools/tools/vtoolseamallowance.cpp" line="1726"/>
         <source>Delete</source>
         <translation>Obriši</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/tools/vtoolseamallowance.cpp" line="1488"/>
+        <location filename="../../src/libs/vtools/tools/vtoolseamallowance.cpp" line="1487"/>
         <source>apply save detail options</source>
         <translation>primijeni i spremi opcije detalja</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/tools/vtoolseamallowance.cpp" line="1788"/>
+        <location filename="../../src/libs/vtools/tools/vtoolseamallowance.cpp" line="1787"/>
         <source>multi deletion</source>
         <translation>višestruko brisanje</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/tools/vtoolseamallowance.cpp" line="1704"/>
+        <location filename="../../src/libs/vtools/tools/vtoolseamallowance.cpp" line="1703"/>
         <source>Forbid flipping</source>
         <translation>Zabranjeno okretanje</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/tools/vtoolseamallowance.cpp" line="1708"/>
+        <location filename="../../src/libs/vtools/tools/vtoolseamallowance.cpp" line="1707"/>
         <source>Force flipping</source>
         <translation>Forsirano okretanje</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/tools/vtoolseamallowance.cpp" line="1497"/>
+        <location filename="../../src/libs/vtools/tools/vtoolseamallowance.cpp" line="1496"/>
         <source>This id (%1) is not unique.</source>
         <translation>Ovaj ID (%1) nije jedinstven.</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/tools/vtoolseamallowance.cpp" line="2638"/>
+        <location filename="../../src/libs/vtools/tools/vtoolseamallowance.cpp" line="2637"/>
         <source>Tool was used after deleting.</source>
         <translation>Alat je korišten nakon brisanja.</translation>
     </message>
