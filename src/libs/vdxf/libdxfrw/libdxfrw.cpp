@@ -485,14 +485,14 @@ bool dxfRW::writeView(DRW_View *ent)
 
     writer->writeDouble(11, ent->viewDirectionFromTarget.x);
     writer->writeDouble(21, ent->viewDirectionFromTarget.y);
-    if (ent->viewDirectionFromTarget.z != 0.0)
+    if (!qFuzzyIsNull(ent->viewDirectionFromTarget.z))
     {
         writer->writeDouble(31, ent->viewDirectionFromTarget.z);
     }
 
     writer->writeDouble(12, ent->targetPoint.x);
     writer->writeDouble(22, ent->targetPoint.y);
-    if (ent->targetPoint.z != 0.0)
+    if (!qFuzzyIsNull(ent->targetPoint.z))
     {
         writer->writeDouble(32, ent->targetPoint.z);
     }
@@ -518,21 +518,21 @@ bool dxfRW::writeView(DRW_View *ent)
     {
         writer->writeDouble(110, ent->ucsOrigin.x);
         writer->writeDouble(120, ent->ucsOrigin.y);
-        if (ent->ucsOrigin.z != 0.0)
+        if (!qFuzzyIsNull(ent->ucsOrigin.z))
         {
             writer->writeDouble(130, ent->ucsOrigin.z);
         }
 
         writer->writeDouble(111, ent->ucsXAxis.x);
         writer->writeDouble(121, ent->ucsXAxis.y);
-        if (ent->ucsXAxis.z != 0.0)
+        if (!qFuzzyIsNull(ent->ucsXAxis.z))
         {
             writer->writeDouble(131, ent->ucsXAxis.z);
         }
 
         writer->writeDouble(112, ent->ucsYAxis.x);
         writer->writeDouble(122, ent->ucsYAxis.y);
-        if (ent->ucsYAxis.z != 0.0)
+        if (!qFuzzyIsNull(ent->ucsYAxis.z))
         {
             writer->writeDouble(132, ent->ucsYAxis.z);
         }
