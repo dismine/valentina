@@ -50,6 +50,7 @@ public:
     auto write(DRW_Interface *interface_, DRW::Version ver, bool bin) -> bool;
     auto writeLineType(DRW_LType *ent) -> bool;
     auto writeLayer(DRW_Layer *ent) -> bool;
+    auto writeView(DRW_View *ent) -> bool;
     auto writeDimstyle(DRW_Dimstyle *ent) -> bool;
     auto writeTextstyle(DRW_Textstyle *ent) -> bool;
     auto writeVport(DRW_Vport *ent) -> bool;
@@ -102,6 +103,7 @@ private:
     auto processDimStyle() -> bool;
     auto processTextStyle() -> bool;
     auto processVports() -> bool;
+    auto processView() -> bool;
     auto processAppId() -> bool;
 
     auto processPoint() -> bool;

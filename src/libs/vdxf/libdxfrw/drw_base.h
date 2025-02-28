@@ -165,7 +165,6 @@ public:
         (void)y;
         (void)z;
     }
-    DebugPrinter() = default;
     virtual ~DebugPrinter() = default;
 };
 
@@ -267,6 +266,11 @@ class DRW_Coord
 {
 public:
     DRW_Coord() = default;
+    DRW_Coord(double ix, double iy)
+      : x(ix),
+        y(iy)
+    {
+    }
     DRW_Coord(double ix, double iy, double iz)
       : x(ix),
         y(iy),
@@ -296,9 +300,12 @@ public:
     /*!< convert to unitary vector */
     void unitize()
     {
-        double dist;
-        dist = hypot(hypot(x, y), z);
-        if (dist > 0.0)
+#if __cplusplus < 201703
+        double dist = std::hypot(std::hypot(x, y), z);
+#else
+        double dist = std::hypot(x, y, z);
+#endif
+        if (std::isnormal(dist))
         {
             x = x / dist;
             y = y / dist;
@@ -320,30 +327,20 @@ public:
 class DRW_Vertex2D
 {
 public:
-    DRW_Vertex2D()
-      : x(),
-        y(),
-        stawidth(0),
-        endwidth(0),
-        bulge(0)
-    {
-        //        eType = DRW::LWPOLYLINE;
-    }
+    DRW_Vertex2D() = default;
     DRW_Vertex2D(double sx, double sy, double b = 0.0)
       : x(sx),
         y(sy),
-        stawidth(0),
-        endwidth(0),
         bulge(b)
     {
     }
 
 public:
-    double x;        /*!< x coordinate, code 10 */
-    double y;        /*!< y coordinate, code 20 */
-    double stawidth; /*!< Start width, code 40 */
-    double endwidth; /*!< End width, code 41 */
-    double bulge;    /*!< bulge, code 42 */
+    double x{0.};        /*!< x coordinate, code 10 */
+    double y{0.};        /*!< y coordinate, code 20 */
+    double stawidth{0.}; /*!< Start width, code 40 */
+    double endwidth{0.}; /*!< End width, code 41 */
+    double bulge{0.};    /*!< bulge, code 42 */
 };
 
 //! Class to handle header vars
@@ -502,8 +499,8 @@ private:
 
 public:
     DRW_VarContent content;
-    TYPE type;
-    int code; /*!< dxf code of this value*/
+    TYPE type{INVALID};
+    int code{0}; /*!< dxf code of this value*/
 
 private:
     auto operator=(const DRW_Variant &) -> DRW_Variant &Q_DECL_EQ_DELETE;

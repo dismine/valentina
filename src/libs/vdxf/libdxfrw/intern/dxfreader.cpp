@@ -172,10 +172,10 @@ auto dxfReaderBinary::readInt16() -> bool
 auto dxfReaderBinary::readInt32() -> bool
 {
     type = INT32;
-    unsigned int *int32p;
+    unsigned *int32p;
     char buffer[4];
     filestr->read(buffer,4);
-    int32p = reinterpret_cast<unsigned int *>(buffer);
+    int32p = reinterpret_cast<unsigned *>(buffer);
     intData = static_cast<signed int>(*int32p);
     // cppcheck-suppress danglingLifetime
     DRW_DBG(intData); DRW_DBG("\n");

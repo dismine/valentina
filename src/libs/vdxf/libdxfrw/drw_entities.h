@@ -816,32 +816,15 @@ class DRW_Vertex final : public DRW_Point
 
 public:
     DRW_Vertex()
-      : stawidth(0),
-        endwidth(0),
-        bulge(0),
-        flags(0),
-        tgdir(),
-        vindex1(0),
-        vindex2(0),
-        vindex3(0),
-        vindex4(0),
-        identifier(0)
     {
         eType = DRW::VERTEX;
     }
 
     DRW_Vertex(double sx, double sy, double sz = 0.0, double b = 0.0)
-      : stawidth(0),
-        endwidth(0),
-        bulge(b),
-        flags(0),
-        tgdir(),
-        vindex1(0),
-        vindex2(0),
-        vindex3(0),
-        vindex4(0),
-        identifier(0)
+      : bulge(b)
+
     {
+        eType = DRW::VERTEX;
         basePoint.x = sx;
         basePoint.y = sy;
         basePoint.z = sz;
@@ -851,17 +834,17 @@ protected:
     auto parseCode(int code, const std::unique_ptr<dxfReader> &reader) -> bool override;
 
 public:
-    double stawidth; /*!< Start width, code 40 */
-    double endwidth; /*!< End width, code 41 */
-    double bulge;    /*!< bulge, code 42 */
+    double stawidth{0}; /*!< Start width, code 40 */
+    double endwidth{0}; /*!< End width, code 41 */
+    double bulge{0};    /*!< bulge, code 42 */
 
-    int flags;      /*!< vertex flag, code 70, default 0 */
-    double tgdir;   /*!< curve fit tangent direction, code 50 */
-    int vindex1;    /*!< polyface mesh vertex index, code 71, default 0 */
-    int vindex2;    /*!< polyface mesh vertex index, code 72, default 0 */
-    int vindex3;    /*!< polyface mesh vertex index, code 73, default 0 */
-    int vindex4;    /*!< polyface mesh vertex index, code 74, default 0 */
-    int identifier; /*!< vertex identifier, code 91, default 0 */
+    int flags{0};      /*!< vertex flag, code 70, default 0 */
+    double tgdir{0};   /*!< curve fit tangent direction, code 50 */
+    int vindex1{0};    /*!< polyface mesh vertex index, code 71, default 0 */
+    int vindex2{0};    /*!< polyface mesh vertex index, code 72, default 0 */
+    int vindex3{0};    /*!< polyface mesh vertex index, code 73, default 0 */
+    int vindex4{0};    /*!< polyface mesh vertex index, code 74, default 0 */
+    int identifier{0}; /*!< vertex identifier, code 91, default 0 */
 };
 
 //! Class to handle polyline entity
@@ -962,23 +945,7 @@ class DRW_Spline : public DRW_Entity
 
 public:
     DRW_Spline()
-      : normalVec(),
-        tgStart(),
-        tgEnd(),
-        flags(0),
-        degree(),
-        nknots(0),
-        ncontrol(0),
-        nfit(0),
-        tolknot(0.0000001),
-        tolcontrol(0.0000001),
-        tolfit(0.0000001),
-        knotslist(),
-        weightlist(),
-        controllist(),
-        fitlist(),
-        controlpoint(),
-        fitpoint()
+      : degree()
     {
         eType = DRW::SPLINE;
     }
@@ -995,13 +962,7 @@ public:
         nfit(p.nfit),
         tolknot(p.tolknot),
         tolcontrol(p.tolcontrol),
-        tolfit(p.tolfit),
-        knotslist(),
-        weightlist(),
-        controllist(),
-        fitlist(),
-        controlpoint(),
-        fitpoint()
+        tolfit(p.tolfit)
     {
         eType = DRW::SPLINE;
 
@@ -1016,9 +977,13 @@ public:
     ~DRW_Spline()
     {
         for (DRW_Coord *item : controllist)
+        {
             delete item;
+        }
         for (DRW_Coord *item : fitlist)
+        {
             delete item;
+        }
     }
     void applyExtrusion() override {}
 
@@ -1029,33 +994,33 @@ public:
     //    double ex;                /*!< normal vector x coordinate, code 210 */
     //    double ey;                /*!< normal vector y coordinate, code 220 */
     //    double ez;                /*!< normal vector z coordinate, code 230 */
-    DRW_Coord normalVec; /*!< normal vector, code 210, 220, 230 */
-    DRW_Coord tgStart;   /*!< start tangent, code 12, 22, 32 */
-                         //    double tgsx;              /*!< start tangent x coordinate, code 12 */
-                         //    double tgsy;              /*!< start tangent y coordinate, code 22 */
-                         //    double tgsz;              /*!< start tangent z coordinate, code 32 */
-    DRW_Coord tgEnd;     /*!< end tangent, code 13, 23, 33 */
-                         //    double tgex;              /*!< end tangent x coordinate, code 13 */
-                         //    double tgey;              /*!< end tangent y coordinate, code 23 */
-                         //    double tgez;              /*!< end tangent z coordinate, code 33 */
-    int flags;           /*!< spline flag, code 70 */
+    DRW_Coord normalVec{}; /*!< normal vector, code 210, 220, 230 */
+    DRW_Coord tgStart{};   /*!< start tangent, code 12, 22, 32 */
+                           //    double tgsx;              /*!< start tangent x coordinate, code 12 */
+                           //    double tgsy;              /*!< start tangent y coordinate, code 22 */
+                           //    double tgsz;              /*!< start tangent z coordinate, code 32 */
+    DRW_Coord tgEnd{};     /*!< end tangent, code 13, 23, 33 */
+                           //    double tgex;              /*!< end tangent x coordinate, code 13 */
+                           //    double tgey;              /*!< end tangent y coordinate, code 23 */
+                           //    double tgez;              /*!< end tangent z coordinate, code 33 */
+    int flags{0};          /*!< spline flag, code 70 */
     int degree;          /*!< degree of the spline, code 71 */
-    dint32 nknots;       /*!< number of knots, code 72, default 0 */
-    dint32 ncontrol;     /*!< number of control points, code 73, default 0 */
-    dint32 nfit;         /*!< number of fit points, code 74, default 0 */
-    double tolknot;      /*!< knot tolerance, code 42, default 0.0000001 */
-    double tolcontrol;   /*!< control point tolerance, code 43, default 0.0000001 */
-    double tolfit;       /*!< fit point tolerance, code 44, default 0.0000001 */
+    dint32 nknots{0};    /*!< number of knots, code 72, default 0 */
+    dint32 ncontrol{0};  /*!< number of control points, code 73, default 0 */
+    dint32 nfit{0};      /*!< number of fit points, code 74, default 0 */
+    double tolknot{0.0000001};    /*!< knot tolerance, code 42, default 0.0000001 */
+    double tolcontrol{0.0000001}; /*!< control point tolerance, code 43, default 0.0000001 */
+    double tolfit{0.0000001};     /*!< fit point tolerance, code 44, default 0.0000001 */
 
-    std::vector<double> knotslist;        /*!< knots list, code 40 */
-    std::vector<double> weightlist;       /*!< weight list, code 41 */
-    std::vector<DRW_Coord *> controllist; /*!< control points list, code 10, 20 & 30 */
-    std::vector<DRW_Coord *> fitlist;     /*!< fit points list, code 11, 21 & 31 */
+    std::vector<double> knotslist{};        /*!< knots list, code 40 */
+    std::vector<double> weightlist{};       /*!< weight list, code 41 */
+    std::vector<DRW_Coord *> controllist{}; /*!< control points list, code 10, 20 & 30 */
+    std::vector<DRW_Coord *> fitlist{};     /*!< fit points list, code 11, 21 & 31 */
 
 private:
     auto operator=(const DRW_Spline &) -> DRW_Spline &Q_DECL_EQ_DELETE;
-    DRW_Coord *controlpoint; /*!< current control point to add data */
-    DRW_Coord *fitpoint;     /*!< current fit point to add data */
+    DRW_Coord *controlpoint{nullptr}; /*!< current control point to add data */
+    DRW_Coord *fitpoint{nullptr};     /*!< current fit point to add data */
 };
 
 //! Class to handle hatch loop

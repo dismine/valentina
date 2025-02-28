@@ -47,6 +47,8 @@ public:
     virtual void addDimStyle(const DRW_Dimstyle &) {}
     /** Called for every VPORT table. */
     virtual void addVport(const DRW_Vport &) {}
+    /** Called for every VIEW table. */
+    virtual void addView(const DRW_View &) {}
     /** Called for every text style. */
     virtual void addTextStyle(const DRW_Textstyle &) {}
     /** Called for every AppId entry. */
@@ -189,6 +191,7 @@ public:
     virtual void writeEntities() {}
     virtual void writeLTypes() {}
     virtual void writeLayers() {}
+    virtual void writeViews() {}
     virtual void writeTextstyles() {}
     virtual void writeVports() {}
     virtual void writeDimstyles() {}

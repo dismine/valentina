@@ -102,7 +102,7 @@ auto dxfRW::read(DRW_Interface *interface_, bool ext) -> bool
     filestr.close();
     iface = interface_;
     DRW_DBG("dxfRW::read 2\n");
-    if (strcmp(line, line2) == 0)
+    if (strncmp(line, line2, 21) == 0)
     {
 #if ((defined(__clang__) && (__clang_major__ < 9)) \
      || (!defined(__clang__) && defined(__GNUC__) && (__GNUC__ < 9 || (__GNUC__ == 9 && __GNUC_MINOR__ < 1))) \
@@ -451,6 +451,103 @@ auto dxfRW::writeLayer(DRW_Layer *ent) -> bool
         writeExtData(ent->extData);
     }
     //    writer->writeString(347, "10012");
+    return true;
+}
+
+bool dxfRW::writeView(DRW_View *ent)
+{
+    writer->writeString(0, "VIEW");
+    if (version > DRW::AC1009)
+    {
+        writer->writeString(5, toHexStr(++entCount));
+    }
+    if (version > DRW::AC1012)
+    {
+        writer->writeString(
+            330, "42"); // 	Soft-pointer ID/handle to owner object, fixme - check whether id is fixed as for layers?
+    }
+    if (version > DRW::AC1009)
+    {
+        writer->writeString(100, "AcDbSymbolTableRecord");
+        writer->writeString(100, "AcDbViewTableRecord");
+        writer->writeUtf8String(2, ent->name);
+    }
+    else
+    {
+        writer->writeUtf8Caps(2, ent->name);
+    }
+    writer->writeInt16(70, ent->flags);
+
+    writer->writeDouble(40, ent->size.y);
+    writer->writeDouble(10, ent->center.x);
+    writer->writeDouble(20, ent->center.y);
+    writer->writeDouble(41, ent->size.x);
+
+    writer->writeDouble(11, ent->viewDirectionFromTarget.x);
+    writer->writeDouble(21, ent->viewDirectionFromTarget.y);
+    if (ent->viewDirectionFromTarget.z != 0.0)
+    {
+        writer->writeDouble(31, ent->viewDirectionFromTarget.z);
+    }
+
+    writer->writeDouble(12, ent->targetPoint.x);
+    writer->writeDouble(22, ent->targetPoint.y);
+    if (ent->targetPoint.z != 0.0)
+    {
+        writer->writeDouble(32, ent->targetPoint.z);
+    }
+
+    writer->writeDouble(42, ent->lensLen);
+    writer->writeDouble(43, ent->frontClippingPlaneOffset);
+    writer->writeDouble(44, ent->backClippingPlaneOffset);
+    writer->writeDouble(50, ent->twistAngle);
+    writer->writeInt16(71, ent->viewMode);
+    writer->writeInt16(281, static_cast<int>(ent->renderMode));
+
+    writer->writeBool(72, ent->hasUCS);
+    writer->writeBool(73, ent->cameraPlottable);
+
+    /*
+     * fixme - investigate deep whether we should support these attributes
+    writer->writeString(332, "42"); // Soft-pointer ID/handle to background object (optional)
+    writer->writeString(334, "42"); // Soft-pointer ID/handle to live section object (optional)
+    writer->writeString(348, "42"); // Hard-pointer ID/handle to visual style object (optional)
+    */
+
+    if (ent->hasUCS)
+    {
+        writer->writeDouble(110, ent->ucsOrigin.x);
+        writer->writeDouble(120, ent->ucsOrigin.y);
+        if (ent->ucsOrigin.z != 0.0)
+        {
+            writer->writeDouble(130, ent->ucsOrigin.z);
+        }
+
+        writer->writeDouble(111, ent->ucsXAxis.x);
+        writer->writeDouble(121, ent->ucsXAxis.y);
+        if (ent->ucsXAxis.z != 0.0)
+        {
+            writer->writeDouble(131, ent->ucsXAxis.z);
+        }
+
+        writer->writeDouble(112, ent->ucsYAxis.x);
+        writer->writeDouble(122, ent->ucsYAxis.y);
+        if (ent->ucsYAxis.z != 0.0)
+        {
+            writer->writeDouble(132, ent->ucsYAxis.z);
+        }
+
+        writer->writeInt16(79, ent->ucsOrthoType);
+        writer->writeDouble(146, ent->ucsElevation);
+
+        /*
+     * fixme - investigate deep whether we should support these attributes
+    //ID/handle of AcDbUCSTableRecord if UCS is a named UCS. If not present, then UCS is unnamed (appears only if code 72 is set to 1)
+    writer->writeString(345, "42");
+    // Soft-pointer ID/handle to live section object (optional)
+    writer->writeString(346, "42");
+    */
+    }
     return true;
 }
 
@@ -1244,6 +1341,7 @@ auto dxfRW::writeSpline(DRW_Spline *ent) -> bool
         writer->writeInt16(74, ent->nfit);
         writer->writeDouble(42, ent->tolknot);
         writer->writeDouble(43, ent->tolcontrol);
+        writer->writeDouble(44, ent->tolfit);
         // RLZ: warning check if nknots are correct and ncontrol
         for (int i = 0; i < ent->nknots; i++)
         {
@@ -1259,6 +1357,13 @@ auto dxfRW::writeSpline(DRW_Spline *ent) -> bool
             writer->writeDouble(10, crd->x);
             writer->writeDouble(20, crd->y);
             writer->writeDouble(30, crd->z);
+        }
+        for (int i = 0; i < ent->nfit; i++)
+        {
+            auto crd = ent->fitlist.at(static_cast<std::size_t>(i));
+            writer->writeDouble(11, crd->x);
+            writer->writeDouble(21, crd->y);
+            writer->writeDouble(31, crd->z);
         }
     }
     else
@@ -1964,7 +2069,6 @@ auto dxfRW::writeTables() -> bool
     writer->writeInt16(73, 0);
     writer->writeDouble(40, 0.0);
     // Application linetypes
-    iface->writeLTypes();
     writer->writeString(0, "ENDTAB");
     /*** LAYER ***/
     writer->writeString(0, "TABLE");
@@ -2023,6 +2127,7 @@ auto dxfRW::writeTables() -> bool
         writer->writeString(100, "AcDbSymbolTable");
     }
     writer->writeInt16(70, 0); // end table def
+    iface->writeViews();
     writer->writeString(0, "ENDTAB");
 
     writer->writeString(0, "TABLE");
@@ -2619,7 +2724,7 @@ auto dxfRW::processTables() -> bool
                     }
                     else if (sectionstr == "VIEW")
                     {
-                        //                        processView();
+                        processView();
                     }
                     else if (sectionstr == "UCS")
                     {
@@ -2646,6 +2751,47 @@ auto dxfRW::processTables() -> bool
         }
     }
 
+    return setError(DRW::BAD_READ_TABLES);
+}
+
+bool dxfRW::processView()
+{
+    DRW_DBG("dxfRW::processView\n");
+    int code;
+    std::string sectionstr;
+    bool reading = false;
+    DRW_View view;
+    while (reader->readRec(&code))
+    {
+        DRW_DBG(code);
+        DRW_DBG("\n");
+        if (code == 0)
+        {
+            if (reading)
+            {
+                iface->addView(view);
+            }
+            sectionstr = reader->getString();
+            DRW_DBG(sectionstr);
+            DRW_DBG("\n");
+            if (sectionstr == "VIEW")
+            {
+                reading = true;
+                view.reset();
+            }
+            else if (sectionstr == "ENDTAB")
+            {
+                return true; //found ENDTAB terminate
+            }
+        }
+        else if (reading)
+        {
+            if (!view.parseCode(code, reader))
+            {
+                return setError(DRW::BAD_CODE_PARSED);
+            }
+        }
+    }
     return setError(DRW::BAD_READ_TABLES);
 }
 
@@ -3408,7 +3554,7 @@ auto dxfRW::processInsert() -> bool
 auto dxfRW::processLWPolyline() -> bool
 {
     DRW_DBG("dxfRW::processLWPolyline");
-    int code;
+    int code = 0;
     DRW_LWPolyline pl;
     while (reader->readRec(&code))
     {
