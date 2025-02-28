@@ -93,7 +93,7 @@ void VGraphicsSimpleTextItem::paint(QPainter *painter, const QStyleOptionGraphic
     QFont font = this->font();
     if (font.pointSize() != VAbstractApplication::VApp()->Settings()->GetPatternLabelFontSize())
     {
-        font.setPointSize(qMax(VAbstractApplication::VApp()->Settings()->GetPatternLabelFontSize(), 1));
+        font.setPointSize(qMax(VAbstractApplication::VApp()->Settings()->GetPatternLabelFontSize(), 6));
         setFont(font);
     }
 
