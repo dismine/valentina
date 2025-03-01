@@ -751,20 +751,24 @@ void VPattern::SetPieceGeometryDirty(bool newPieceGeometryDirty)
 //---------------------------------------------------------------------------------------------------------------------
 void VPattern::RefreshDirtyPieceGeometry(const QList<vidtype> &list)
 {
-    if (m_refreshPieceGeometryWatcher->isRunning())
+    if (!list.isEmpty())
     {
-        m_refreshPieceGeometryWatcher->cancel();
-        m_refreshPieceGeometryWatcher->waitForFinished();
+        if (m_refreshPieceGeometryWatcher->isRunning())
+        {
+            m_refreshPieceGeometryWatcher->cancel();
+            m_refreshPieceGeometryWatcher->waitForFinished();
+        }
+
+        auto future = QtConcurrent::run(
+            [this, list]()
+            {
+                RefreshPieceGeometryForList(list);
+                PostRefreshActions();
+            });
+
+        m_refreshPieceGeometryWatcher->setFuture(future);
     }
 
-    auto future = QtConcurrent::run(
-        [this, list]()
-        {
-            RefreshPieceGeometryForList(list);
-            PostRefreshActions();
-        });
-
-    m_refreshPieceGeometryWatcher->setFuture(future);
     m_pieceGeometryDirty = false;
 }
 
