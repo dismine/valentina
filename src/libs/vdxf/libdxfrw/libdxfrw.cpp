@@ -75,18 +75,17 @@ auto dxfRW::read(DRW_Interface *interface_, bool ext) -> bool
     }
     DRW_DBG("dxfRW::read 1def\n");
 
-#if __cplusplus >= 202002L // C++20 or newer
-    auto filePath = std::filesystem::path(fileName);
-#else // C++17 and older
-    auto filePath = std::filesystem::u8path(fileName);
-#endif
-
 #if ((defined(__clang__) && (__clang_major__ < 9)) \
      || (!defined(__clang__) && defined(__GNUC__) && (__GNUC__ < 9 || (__GNUC__ == 9 && __GNUC_MINOR__ < 1))) \
      || (defined(_MSC_VER) && (_MSC_VER < 1920)))
-    Q_UNUSED(filePath);
     filestr.open(fileName, std::ios_base::in | std::ios::binary);
 #else
+#if __cplusplus >= 202002L // C++20 or newer
+    auto filePath = std::filesystem::path(fileName);
+#else                      // C++17 and older
+    auto filePath = std::filesystem::u8path(fileName);
+#endif
+
     filestr.open(filePath, std::ios_base::in | std::ios::binary);
 #endif
     if (!filestr.is_open() || !filestr.good())
@@ -107,7 +106,6 @@ auto dxfRW::read(DRW_Interface *interface_, bool ext) -> bool
 #if ((defined(__clang__) && (__clang_major__ < 9)) \
      || (!defined(__clang__) && defined(__GNUC__) && (__GNUC__ < 9 || (__GNUC__ == 9 && __GNUC_MINOR__ < 1))) \
      || (defined(_MSC_VER) && (_MSC_VER < 1920)))
-        Q_UNUSED(filePath);
         filestr.open(fileName, std::ios_base::in | std::ios::binary);
 #else
         filestr.open(filePath, std::ios_base::in | std::ios::binary);
@@ -124,7 +122,6 @@ auto dxfRW::read(DRW_Interface *interface_, bool ext) -> bool
 #if ((defined(__clang__) && (__clang_major__ < 9)) \
      || (!defined(__clang__) && defined(__GNUC__) && (__GNUC__ < 9 || (__GNUC__ == 9 && __GNUC_MINOR__ < 1))) \
      || (defined(_MSC_VER) && (_MSC_VER < 1920)))
-        Q_UNUSED(filePath);
         filestr.open(fileName, std::ios_base::in);
 #else
         filestr.open(filePath, std::ios_base::in);
@@ -146,20 +143,19 @@ auto dxfRW::write(DRW_Interface *interface_, DRW::Version ver, bool bin) -> bool
     binFile = bin;
     iface = interface_;
 
-#if __cplusplus >= 202002L // C++20 or newer
-    auto filePath = std::filesystem::path(fileName);
-#else // C++17 and older
-    auto filePath = std::filesystem::u8path(fileName);
-#endif
-
     if (binFile)
     {
 #if ((defined(__clang__) && (__clang_major__ < 9)) \
      || (!defined(__clang__) && defined(__GNUC__) && (__GNUC__ < 9 || (__GNUC__ == 9 && __GNUC_MINOR__ < 1))) \
      || (defined(_MSC_VER) && (_MSC_VER < 1920)))
-        Q_UNUSED(filePath);
         filestr.open(fileName, std::ios_base::out | std::ios::binary | std::ios::trunc);
 #else
+#if __cplusplus >= 202002L // C++20 or newer
+        auto filePath = std::filesystem::path(fileName);
+#else                      // C++17 and older
+        auto filePath = std::filesystem::u8path(fileName);
+#endif
+
         filestr.open(filePath, std::ios_base::out | std::ios::binary | std::ios::trunc);
 #endif
 
@@ -180,9 +176,14 @@ auto dxfRW::write(DRW_Interface *interface_, DRW::Version ver, bool bin) -> bool
 #if ((defined(__clang__) && (__clang_major__ < 9)) \
      || (!defined(__clang__) && defined(__GNUC__) && (__GNUC__ < 9 || (__GNUC__ == 9 && __GNUC_MINOR__ < 1))) \
      || (defined(_MSC_VER) && (_MSC_VER < 1920)))
-        Q_UNUSED(filePath);
         filestr.open(fileName, std::ios_base::out | std::ios::trunc);
 #else
+#if __cplusplus >= 202002L // C++20 or newer
+        auto filePath = std::filesystem::path(fileName);
+#else                      // C++17 and older
+        auto filePath = std::filesystem::u8path(fileName);
+#endif
+
         filestr.open(filePath, std::ios_base::out | std::ios::trunc);
 #endif
 
