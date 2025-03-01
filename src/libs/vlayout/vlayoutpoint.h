@@ -44,7 +44,7 @@ public:
     constexpr VLayoutPoint() noexcept = default;
     constexpr VLayoutPoint(qreal xpos, qreal ypos) noexcept;
     constexpr explicit VLayoutPoint(QPointF p) noexcept;
-    constexpr VLayoutPoint(const VLayoutPoint &other) noexcept;
+    constexpr VLayoutPoint(const VLayoutPoint &other) noexcept = default;
     constexpr VLayoutPoint &operator=(const VLayoutPoint &other) noexcept;
     virtual ~VLayoutPoint() = default;
 
@@ -115,14 +115,6 @@ constexpr VLayoutPoint::VLayoutPoint(qreal xpos, qreal ypos) noexcept
 //---------------------------------------------------------------------------------------------------------------------
 constexpr VLayoutPoint::VLayoutPoint(QPointF p) noexcept
   : QPointF(p)
-{
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-constexpr VLayoutPoint::VLayoutPoint(const VLayoutPoint &other) noexcept
-  : QPointF(other),
-    m_turnPoint(other.m_turnPoint),
-    m_curvePoint(other.m_curvePoint)
 {
 }
 

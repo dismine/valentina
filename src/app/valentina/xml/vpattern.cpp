@@ -760,35 +760,8 @@ void VPattern::RefreshDirtyPieceGeometry(const QList<vidtype> &list)
     auto future = QtConcurrent::run(
         [this, list]()
         {
-            for (auto pieceId : qAsConst(list))
-            {
-                QMetaObject::invokeMethod(
-                    QApplication::instance(),
-                    [pieceId]()
-                    {
-                        try
-                        {
-                            if (auto *piece = qobject_cast<VToolSeamAllowance *>(VAbstractPattern::getTool(pieceId)))
-                            {
-                                piece->RefreshGeometry();
-                            }
-                        }
-                        catch (const VExceptionBadId &)
-                        {
-                            // do nothing
-                        }
-                    },
-                    Qt::QueuedConnection);
-            }
-
-            QMetaObject::invokeMethod(
-                QApplication::instance(),
-                [this]()
-                {
-                    emit CheckLayout();
-                    VMainGraphicsView::NewSceneRect(sceneDetail, VAbstractValApplication::VApp()->getSceneView());
-                },
-                Qt::QueuedConnection);
+            RefreshPieceGeometryForList(list);
+            PostRefreshActions();
         });
 
     m_refreshPieceGeometryWatcher->setFuture(future);
@@ -796,9 +769,41 @@ void VPattern::RefreshDirtyPieceGeometry(const QList<vidtype> &list)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VPattern::Clear()
+void VPattern::RefreshPieceGeometryForList(const QList<vidtype> &list)
 {
-    VAbstractPattern::Clear();
+    for (auto pieceId : qAsConst(list))
+    {
+        QMetaObject::invokeMethod(
+            QApplication::instance(),
+            [pieceId]()
+            {
+                try
+                {
+                    if (auto *piece = qobject_cast<VToolSeamAllowance *>(VAbstractPattern::getTool(pieceId)))
+                    {
+                        piece->RefreshGeometry();
+                    }
+                }
+                catch (const VExceptionBadId &)
+                {
+                    // do nothing
+                }
+            },
+            Qt::QueuedConnection);
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VPattern::PostRefreshActions()
+{
+    QMetaObject::invokeMethod(
+        QApplication::instance(),
+        [this]()
+        {
+            emit CheckLayout();
+            VMainGraphicsView::NewSceneRect(sceneDetail, VAbstractValApplication::VApp()->getSceneView());
+        },
+        Qt::QueuedConnection);
 }
 
 //---------------------------------------------------------------------------------------------------------------------

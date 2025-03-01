@@ -46,43 +46,29 @@ namespace
 //---------------------------------------------------------------------------------------------------------------------
 /**
  * @brief CalcSqDistance calculate squared distance.
- * @param x1 х coordinate first point.
- * @param y1 у coordinate first point.
- * @param x2 х coordinate second point.
- * @param y2 у coordinate second point.
+ * @param p1 coordinate of first point.
+ * @param p2 coordinate of second point.
  * @return squared length.
  */
-inline auto CalcSqDistance(qreal x1, qreal y1, qreal x2, qreal y2) -> qreal
+inline auto CalcSqDistance(QPointF p1, QPointF p2) -> qreal
 {
-    const qreal dx = x2 - x1;
-    const qreal dy = y2 - y1;
+    const qreal dx = p2.x() - p1.x();
+    const qreal dy = p2.y() - p1.y();
     return dx * dx + dy * dy;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 /**
  * @brief PointBezier_r find spline point using four point of spline.
- * @param x1 х coordinate first point.
- * @param y1 у coordinate first point.
- * @param x2 х coordinate first control point.
- * @param y2 у coordinate first control point.
- * @param x3 х coordinate second control point.
- * @param y3 у coordinate second control point.
- * @param x4 х coordinate last point.
- * @param y4 у coordinate last point.
+ * @param p1 coordinate of first point.
+ * @param p2 coordinate of first control point.
+ * @param p3 coordinate of second control point.
+ * @param p4 coordinate of last point.
  * @param level level of recursion. In the begin 0.
  * @param approximationScale curve approximation scale.
  */
-auto PointBezier_r(qreal x1,
-                   qreal y1,
-                   qreal x2,
-                   qreal y2,
-                   qreal x3,
-                   qreal y3,
-                   qreal x4,
-                   qreal y4,
-                   qint16 level,
-                   qreal approximationScale) -> QVector<QPointF>
+auto PointBezier_r(QPointF p1, QPointF p2, QPointF p3, QPointF p4, qint16 level, qreal approximationScale)
+    -> QVector<QPointF>
 {
     static constexpr double curve_collinearity_epsilon = 1e-30;
     static constexpr double curve_angle_tolerance_epsilon = 0.01;
@@ -102,12 +88,12 @@ auto PointBezier_r(qreal x1,
 
     // Calculate all the mid-points of the line segments
     //----------------------
-    const double x12 = (x1 + x2) / 2;
-    const double y12 = (y1 + y2) / 2;
-    const double x23 = (x2 + x3) / 2;
-    const double y23 = (y2 + y3) / 2;
-    const double x34 = (x3 + x4) / 2;
-    const double y34 = (y3 + y4) / 2;
+    const double x12 = (p1.x() + p2.x()) / 2;
+    const double y12 = (p1.y() + p2.y()) / 2;
+    const double x23 = (p2.x() + p3.x()) / 2;
+    const double y23 = (p2.y() + p3.y()) / 2;
+    const double x34 = (p3.x() + p4.x()) / 2;
+    const double y34 = (p3.y() + p4.y()) / 2;
     const double x123 = (x12 + x23) / 2;
     const double y123 = (y12 + y23) / 2;
     const double x234 = (x23 + x34) / 2;
@@ -117,15 +103,15 @@ auto PointBezier_r(qreal x1,
 
     // Try to approximate the full cubic curve by a single straight line
     //------------------
-    const double dx = x4 - x1;
-    const double dy = y4 - y1;
+    const double dx = p4.x() - p1.x();
+    const double dy = p4.y() - p1.y();
 
-    double d2 = fabs((x2 - x4) * dy - (y2 - y4) * dx);
+    double d2 = fabs((p2.x() - p4.x()) * dy - (p2.y() - p4.y()) * dx);
 
     QVector<QPointF> points;
 
-    switch (double d3 = fabs((x3 - x4) * dy - (y3 - y4) * dx); (static_cast<int>(d2 > curve_collinearity_epsilon) << 1)
-                                                               + static_cast<int>(d3 > curve_collinearity_epsilon))
+    switch (double d3 = fabs((p3.x() - p4.x()) * dy - (p3.y() - p4.y()) * dx);
+            (static_cast<int>(d2 > curve_collinearity_epsilon) << 1) + static_cast<int>(d3 > curve_collinearity_epsilon))
     {
         case 0:
         {
@@ -133,20 +119,20 @@ auto PointBezier_r(qreal x1,
             //----------------------
             if (double k = dx * dx + dy * dy; k < 0.000000001)
             {
-                d2 = CalcSqDistance(x1, y1, x2, y2);
-                d3 = CalcSqDistance(x4, y4, x3, y3);
+                d2 = CalcSqDistance(p1, p2);
+                d3 = CalcSqDistance(p4, p3);
             }
             else
             {
                 k = 1 / k;
                 {
-                    const double da1 = x2 - x1;
-                    const double da2 = y2 - y1;
+                    const double da1 = p2.x() - p1.x();
+                    const double da2 = p2.y() - p1.y();
                     d2 = k * (da1 * dx + da2 * dy);
                 }
                 {
-                    const double da1 = x3 - x1;
-                    const double da2 = y3 - y1;
+                    const double da1 = p3.x() - p1.x();
+                    const double da2 = p3.y() - p1.y();
                     d3 = k * (da1 * dx + da2 * dy);
                 }
                 if (d2 > 0 && d2 < 1 && d3 > 0 && d3 < 1)
@@ -157,35 +143,35 @@ auto PointBezier_r(qreal x1,
                 }
                 if (d2 <= 0)
                 {
-                    d2 = CalcSqDistance(x2, y2, x1, y1);
+                    d2 = CalcSqDistance(p2, p1);
                 }
                 else if (d2 >= 1)
                 {
-                    d2 = CalcSqDistance(x2, y2, x4, y4);
+                    d2 = CalcSqDistance(p2, p4);
                 }
                 else
                 {
-                    d2 = CalcSqDistance(x2, y2, x1 + d2 * dx, y1 + d2 * dy);
+                    d2 = CalcSqDistance(p2, {p1.x() + d2 * dx, p1.y() + d2 * dy});
                 }
 
                 if (d3 <= 0)
                 {
-                    d3 = CalcSqDistance(x3, y3, x1, y1);
+                    d3 = CalcSqDistance(p3, p1);
                 }
                 else if (d3 >= 1)
                 {
-                    d3 = CalcSqDistance(x3, y3, x4, y4);
+                    d3 = CalcSqDistance(p3, p4);
                 }
                 else
                 {
-                    d3 = CalcSqDistance(x3, y3, x1 + d3 * dx, y1 + d3 * dy);
+                    d3 = CalcSqDistance(p3, {p1.x() + d3 * dx, p1.y() + d3 * dy});
                 }
             }
             if (d2 > d3)
             {
                 if (d2 < m_distance_tolerance_square)
                 {
-                    points.append(QPointF(x2, y2));
+                    points.append(p2);
                     return points;
                 }
             }
@@ -193,7 +179,7 @@ auto PointBezier_r(qreal x1,
             {
                 if (d3 < m_distance_tolerance_square)
                 {
-                    points.append(QPointF(x3, y3));
+                    points.append(p3);
                     return points;
                 }
             }
@@ -213,7 +199,7 @@ auto PointBezier_r(qreal x1,
 
                 // Angle Condition
                 //----------------------
-                double da1 = fabs(atan2(y4 - y3, x4 - x3) - atan2(y3 - y2, x3 - x2));
+                double da1 = fabs(atan2(p4.y() - p3.y(), p4.x() - p3.x()) - atan2(p3.y() - p2.y(), p3.x() - p2.x()));
                 if (da1 >= M_PI)
                 {
                     da1 = M_2PI - da1;
@@ -221,14 +207,14 @@ auto PointBezier_r(qreal x1,
 
                 if (da1 < m_angle_tolerance)
                 {
-                    points.append(QPointF(x2, y2));
-                    points.append(QPointF(x3, y3));
+                    points.append(p2);
+                    points.append(p3);
                     return points;
                 }
 
                 if ((m_cusp_limit > 0.0 || m_cusp_limit < 0.0) && da1 > m_cusp_limit)
                 {
-                    points.append(QPointF(x3, y3));
+                    points.append(p3);
                     return points;
                 }
             }
@@ -248,7 +234,7 @@ auto PointBezier_r(qreal x1,
 
                 // Angle Condition
                 //----------------------
-                double da1 = fabs(atan2(y3 - y2, x3 - x2) - atan2(y2 - y1, x2 - x1));
+                double da1 = fabs(atan2(p3.y() - p2.y(), p3.x() - p2.x()) - atan2(p2.y() - p1.y(), p2.x() - p1.x()));
                 if (da1 >= M_PI)
                 {
                     da1 = M_2PI - da1;
@@ -256,15 +242,15 @@ auto PointBezier_r(qreal x1,
 
                 if (da1 < m_angle_tolerance)
                 {
-                    points.append(QPointF(x2, y2));
+                    points.append(p2);
 
-                    points.append(QPointF(x3, y3));
+                    points.append(p3);
                     return points;
                 }
 
                 if ((m_cusp_limit > 0.0 || m_cusp_limit < 0.0) && da1 > m_cusp_limit)
                 {
-                    points.append(QPointF(x2, y2));
+                    points.append(p2);
                     return points;
                 }
             }
@@ -287,9 +273,9 @@ auto PointBezier_r(qreal x1,
 
                 // Angle & Cusp Condition
                 //----------------------
-                const double k = atan2(y3 - y2, x3 - x2);
-                double da1 = fabs(k - atan2(y2 - y1, x2 - x1));
-                double da2 = fabs(atan2(y4 - y3, x4 - x3) - k);
+                const double k = atan2(p3.y() - p2.y(), p3.x() - p2.x());
+                double da1 = fabs(k - atan2(p2.y() - p1.y(), p2.x() - p1.x()));
+                double da2 = fabs(atan2(p4.y() - p3.y(), p4.x() - p3.x()) - k);
                 if (da1 >= M_PI)
                 {
                     da1 = M_2PI - da1;
@@ -312,13 +298,13 @@ auto PointBezier_r(qreal x1,
                 {
                     if (da1 > m_cusp_limit)
                     {
-                        points.append(QPointF(x2, y2));
+                        points.append(p2);
                         return points;
                     }
 
                     if (da2 > m_cusp_limit)
                     {
-                        points.append(QPointF(x3, y3));
+                        points.append(p3);
                         return points;
                     }
                 }
@@ -331,8 +317,8 @@ auto PointBezier_r(qreal x1,
 
     // Continue subdivision
     //----------------------
-    return PointBezier_r(x1, y1, x12, y12, x123, y123, x1234, y1234, level + 1, approximationScale)
-           + PointBezier_r(x1234, y1234, x234, y234, x34, y34, x4, y4, level + 1, approximationScale);
+    return PointBezier_r(p1, {x12, y12}, {x123, y123}, {x1234, y1234}, level + 1, approximationScale)
+           + PointBezier_r({x1234, y1234}, {x234, y234}, {x34, y34}, p4, level + 1, approximationScale);
 }
 } // namespace
 
@@ -552,7 +538,7 @@ auto VAbstractCubicBezier::GetCubicBezierPoints(const QPointF &p1, const QPointF
 
     QVector<QPointF> pvector;
     pvector.append(p1);
-    pvector += PointBezier_r(p1.x(), p1.y(), p2.x(), p2.y(), p3.x(), p3.y(), p4.x(), p4.y(), 0, approximationScale);
+    pvector += PointBezier_r(p1, p2, p3, p4, 0, approximationScale);
     pvector.append(p4);
 
     return pvector;

@@ -408,7 +408,7 @@ auto DRW_Converter::decodeNum(const std::string &s, unsigned int *b) -> int
 
     auto to_int = [](std::byte b) { return std::to_integer<unsigned char>(b); };
 
-    if (const auto c = static_cast<std::byte>(s.at(0)); ((c & std::byte{0xE0}) == std::byte{0xC0}))
+    if (const auto c = static_cast<std::byte>(s.at(0)); (c & std::byte{0xE0}) == std::byte{0xC0})
     { // 2 bytes
         const auto c1 = static_cast<std::byte>(s.at(1));
         code = to_int(c & std::byte{0x1F}) << 6;

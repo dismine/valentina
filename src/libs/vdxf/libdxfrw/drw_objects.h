@@ -94,7 +94,7 @@ public:
 
 protected:
     virtual auto parseCode(int code, const std::unique_ptr<dxfReader> &reader) -> bool;
-    void reset()
+    virtual void reset()
     {
         flags = 0;
         for (auto it = extData.begin(); it != extData.end(); ++it)
@@ -198,10 +198,10 @@ public:
         dimlwd(),
         dimlwe()
     {
-        reset();
+        DRW_Dimstyle::reset();
     }
 
-    void reset()
+    void reset() override
     {
         tType = DRW::DIMSTYLE;
         dimasz = dimtxt = dimcen = 2.5;
@@ -326,10 +326,10 @@ public:
         path(),
         pathIdx()
     {
-        reset();
+        DRW_LType::reset();
     }
 
-    void reset()
+    void reset() override
     {
         tType = DRW::LTYPE;
         desc = "";
@@ -374,10 +374,10 @@ public:
         handlePlotS(),
         handleMaterialS()
     {
-        reset();
+        DRW_Layer::reset();
     }
 
-    void reset()
+    void reset() override
     {
         tType = DRW::LAYER;
         lineType = "CONTINUOUS";
@@ -413,10 +413,10 @@ public:
     DRW_Block_Record()
       : insUnits()
     {
-        reset();
+        DRW_Block_Record::reset();
     }
 
-    void reset()
+    void reset() override
     {
         tType = DRW::BLOCK_RECORD;
         flags = 0;
@@ -436,9 +436,9 @@ class DRW_View : public DRW_TableEntry
     SETOBJFRIENDS
 
 public:
-    DRW_View() { reset(); }
+    DRW_View() { DRW_View::reset(); }
 
-    void reset()
+    void reset() override
     {
         size.x = size.y = size.z = 0.0;
         center.x = center.y = center.z = 0.0;
@@ -525,10 +525,10 @@ public:
         bigFont(),
         fontFamily()
     {
-        reset();
+        DRW_Textstyle::reset();
     }
 
-    void reset()
+    void reset() override
     {
         tType = DRW::STYLE;
         height = oblique = 0.0;
@@ -589,10 +589,10 @@ public:
         snapIsopair(),
         gridBehavior()
     {
-        reset();
+        DRW_Vport::reset();
     }
 
-    void reset()
+    void reset() override
     {
         tType = DRW::VPORT;
         UpperRight.x = UpperRight.y = 1.0;
@@ -670,10 +670,10 @@ public:
         resolution(),
         reactors()
     {
-        reset();
+        DRW_ImageDef::reset();
     }
 
-    void reset()
+    void reset() override
     {
         tType = DRW::IMAGEDEF;
         imgVersion = 0;
@@ -707,9 +707,9 @@ class DRW_PlotSettings : public DRW_TableEntry
     SETOBJFRIENDS
 
 public:
-    DRW_PlotSettings() { reset(); }
+    DRW_PlotSettings() { DRW_PlotSettings::reset(); }
 
-    void reset()
+    void reset() override
     {
         tType = DRW::PLOTSETTINGS;
         marginLeft = 0.0;
@@ -740,13 +740,14 @@ class DRW_AppId final : public DRW_TableEntry
     SETOBJFRIENDS
 
 public:
-    DRW_AppId() { reset(); }
+    DRW_AppId() { DRW_AppId::reset(); }
 
-    void reset()
+    void reset() override
     {
         tType = DRW::APPID;
         flags = 0;
         name = "";
+        DRW_TableEntry::reset();
     }
 };
 

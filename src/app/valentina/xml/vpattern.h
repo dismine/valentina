@@ -100,7 +100,6 @@ public:
 
     auto GenerateLabel(const LabelType &type, const QString &reservedName = QString()) const -> QString override;
     auto GenerateSuffix() const -> QString override;
-    void Clear() override;
 
     auto IsReadOnly() const -> bool;
     void SetReadOnly(bool rOnly);
@@ -259,6 +258,9 @@ private:
     auto LastDrawName() const -> QString;
     auto LastToolId() const -> quint32;
     auto PPLastToolId(const QString &name) const -> quint32;
+
+    void PostRefreshActions();
+    void RefreshPieceGeometryForList(const QList<vidtype> &list);
 };
 
 #endif // VPATTERN_H

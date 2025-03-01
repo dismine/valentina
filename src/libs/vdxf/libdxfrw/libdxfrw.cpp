@@ -455,7 +455,7 @@ auto dxfRW::writeLayer(DRW_Layer *ent) -> bool
     return true;
 }
 
-bool dxfRW::writeView(DRW_View *ent)
+bool dxfRW::writeView(const DRW_View *ent)
 {
     writer->writeString(0, "VIEW");
     if (version > DRW::AC1009)
@@ -2785,12 +2785,9 @@ bool dxfRW::processView()
                 return true; //found ENDTAB terminate
             }
         }
-        else if (reading)
+        else if (reading && !view.parseCode(code, reader))
         {
-            if (!view.parseCode(code, reader))
-            {
-                return setError(DRW::BAD_CODE_PARSED);
-            }
+            return setError(DRW::BAD_CODE_PARSED);
         }
     }
     return setError(DRW::BAD_READ_TABLES);

@@ -87,7 +87,7 @@ public:
     constexpr auto IsPassmarkClockwiseOpening() const -> bool;
     constexpr void SetPassmarkClockwiseOpening(bool clockwise);
 
-    auto toJson() const -> QJsonObject;
+    auto toJson() const -> QJsonObject override;
 
     static constexpr qreal passmarkFactor{0.5};
     static constexpr qreal maxPassmarkLength{MmToPixel(10.)};
