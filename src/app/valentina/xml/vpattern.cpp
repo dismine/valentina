@@ -3893,6 +3893,10 @@ void VPattern::RefreshPieceGeometry()
     if (!VAbstractApplication::VApp()->IsAppInGUIMode()
         || VAbstractValApplication::VApp()->GetDrawMode() == Draw::Modeling)
     {
+        if (updatePieces.isEmpty())
+        {
+            updatePieces = data->DataPieces()->keys();
+        }
         RefreshDirtyPieceGeometry(updatePieces);
     }
     else
