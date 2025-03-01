@@ -177,7 +177,7 @@ template <typename T> inline void VAbstractSpline::ShowToolVisualization(bool sh
     }
     else
     {
-        delete vis;
+        delete vis.data();
     }
 
     if (m_detailsMode)

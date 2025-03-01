@@ -109,10 +109,7 @@ VAbstractTool::VAbstractTool(VAbstractPattern *doc, VContainer *data, quint32 id
 //---------------------------------------------------------------------------------------------------------------------
 VAbstractTool::~VAbstractTool()
 {
-    if (not vis.isNull())
-    {
-        delete vis;
-    }
+    delete vis.data();
 }
 
 //---------------------------------------------------------------------------------------------------------------------

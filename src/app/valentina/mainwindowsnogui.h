@@ -173,6 +173,14 @@ private:
     void ExportDetailsAsFlatLayout(const QVector<VLayoutPiece> &listDetails);
 
     void ShowLayoutError(const LayoutErrors &state);
+
+    auto LoadMeasurements(const QString &patternPath, QString &currentPath, const QString &oldPath)
+        -> QSharedPointer<VMeasurements>;
+    auto ApplyConverter(QSharedPointer<VMeasurements> &m, const QString &path) -> QString;
+    void CollectStatistics(MeasurementsType measurementsType, const QString &formatVersion);
+    auto HandleMissingMeasurements(QSharedPointer<VMeasurements> &m, const QSet<QString> &missing, QString &currentPath)
+        -> bool;
+    auto SelectNewFile(QSharedPointer<VMeasurements> &m, QString &currentPath) -> bool;
 };
 
 #endif // MAINWINDOWSNOGUI_H

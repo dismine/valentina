@@ -48,10 +48,7 @@ AddPiece::AddPiece(const QDomElement &xml, VAbstractPattern *doc, const VContain
 //---------------------------------------------------------------------------------------------------------------------
 AddPiece::~AddPiece()
 {
-    if (not m_tool.isNull())
-    {
-        delete m_tool;
-    }
+    delete m_tool.data();
 }
 
 //---------------------------------------------------------------------------------------------------------------------

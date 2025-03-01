@@ -243,7 +243,7 @@ DialogSeamAllowance::DialogSeamAllowance(const VContainer *data, VAbstractPatter
 //---------------------------------------------------------------------------------------------------------------------
 DialogSeamAllowance::~DialogSeamAllowance()
 {
-    delete m_visSpecialPoints;
+    delete m_visSpecialPoints.data();
     delete m_tabFoldLine;
     delete m_tabPlaceLabels;
     delete m_tabPassmarks;
@@ -260,10 +260,7 @@ DialogSeamAllowance::~DialogSeamAllowance()
 
     for (auto &command : m_undoStack)
     {
-        if (not command.isNull())
-        {
-            delete command;
-        }
+        delete command.data();
     }
 }
 
@@ -1796,7 +1793,7 @@ void DialogSeamAllowance::PathDialogClosed(int result)
                       qUtf8Printable(e.ErrorMessage()), qUtf8Printable(e.DetailedInformation()));
         }
     }
-    delete m_dialog;
+    delete m_dialog.data();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -1848,7 +1845,7 @@ void DialogSeamAllowance::PlaceLabelDialogClosed(int result)
                       qUtf8Printable(e.ErrorMessage()), qUtf8Printable(e.DetailedInformation()));
         }
     }
-    delete m_dialog;
+    delete m_dialog.data();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -1913,10 +1910,7 @@ void DialogSeamAllowance::FancyTabChanged(int index)
     }
     else
     {
-        if (not m_visSpecialPoints.isNull())
-        {
-            delete m_visSpecialPoints;
-        }
+        delete m_visSpecialPoints.data();
     }
 }
 
@@ -1929,10 +1923,7 @@ void DialogSeamAllowance::TabChanged(int index)
     }
     else
     {
-        if (not m_visSpecialPoints.isNull())
-        {
-            delete m_visSpecialPoints;
-        }
+        delete m_visSpecialPoints.data();
     }
 }
 

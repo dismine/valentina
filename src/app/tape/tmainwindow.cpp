@@ -1647,7 +1647,7 @@ void TMainWindow::ShowImage()
         name += '.'_L1 + suffixes.at(0);
     }
 
-    delete m_tmpImage;
+    delete m_tmpImage.data();
     m_tmpImage = new QTemporaryFile(name, this);
     if (m_tmpImage->open())
     {

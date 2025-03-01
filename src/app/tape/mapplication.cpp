@@ -342,10 +342,7 @@ MApplication::~MApplication()
     qDeleteAll(m_kmMainWindows);
 
     delete m_trVars;
-    if (not m_dataBase.isNull())
-    {
-        delete m_dataBase;
-    }
+    delete m_dataBase.data();
 }
 
 //---------------------------------------------------------------------------------------------------------------------

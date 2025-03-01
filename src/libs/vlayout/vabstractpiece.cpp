@@ -1401,8 +1401,8 @@ auto VAbstractPiece::EkvPoint(QVector<VRawSAPoint> points, const VSAPoint &p1Lin
                 QLineF bisector(p2Line1, p1Line1);
                 bisector.setAngle(b1.angle());
 
-                const qreal result1 = PointPosition(bisector.p2(), QLineF(p1Line1, p2Line1));
-                const qreal result2 = PointPosition(bisector.p2(), QLineF(p2Line2, p1Line2));
+                qreal result1 = PointPosition(bisector.p2(), QLineF(p1Line1, p2Line1));
+                qreal result2 = PointPosition(bisector.p2(), QLineF(p2Line2, p1Line2));
 
                 if ((result1 < 0 || qFuzzyIsNull(result1)) && (result2 < 0 || qFuzzyIsNull(result2)))
                 { // Dart case. A bisector watches outside.
@@ -1442,9 +1442,9 @@ auto VAbstractPiece::EkvPoint(QVector<VRawSAPoint> points, const VSAPoint &p1Lin
                 }
                 else
                 { // New subcase. This is not a dart. An angle is acute and bisector watch inside.
-                    const qreal result1 = PointPosition(crosPoint, QLineF(p1Line1, p2Line1));
+                    result1 = PointPosition(crosPoint, QLineF(p1Line1, p2Line1));
 
-                    if (const qreal result2 = PointPosition(crosPoint, QLineF(p2Line2, p1Line2));
+                    if (result2 = PointPosition(crosPoint, QLineF(p2Line2, p1Line2));
                         (result1 < 0 || qFuzzyIsNull(result1)) && (result2 < 0 || qFuzzyIsNull(result2)))
                     { // The cross point is still outside of a piece
                         if (line.length() >= localWidth)

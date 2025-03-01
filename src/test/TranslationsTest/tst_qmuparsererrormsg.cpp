@@ -49,7 +49,7 @@ TST_QmuParserErrorMsg::TST_QmuParserErrorMsg(const QString &locale, QObject *par
 //---------------------------------------------------------------------------------------------------------------------
 TST_QmuParserErrorMsg::~TST_QmuParserErrorMsg()
 {
-    delete appTranslator;
+    delete appTranslator.data();
     delete msg;
 }
 
@@ -171,7 +171,7 @@ auto TST_QmuParserErrorMsg::LoadTranslation(const QString &checkedLocale) -> int
     {
         qWarning("Can't load translation for locale = %s. \nFull path: %s/%s", qUtf8Printable(checkedLocale),
                  qUtf8Printable(path), qUtf8Printable(file));
-        delete appTranslator;
+        delete appTranslator.data();
         return ErrorLoad;
     }
 
@@ -179,7 +179,7 @@ auto TST_QmuParserErrorMsg::LoadTranslation(const QString &checkedLocale) -> int
     {
         qWarning("Can't install translation for locale = %s. \nFull path: %s/%s", qUtf8Printable(checkedLocale),
                  qUtf8Printable(path), qUtf8Printable(file));
-        delete appTranslator;
+        delete appTranslator.data();
         return ErrorInstall;
     }
 
@@ -200,6 +200,6 @@ void TST_QmuParserErrorMsg::RemoveTranslation()
         {
             qWarning("Can't remove translation for locale = %s", qUtf8Printable(m_locale));
         }
-        delete appTranslator;
+        delete appTranslator.data();
     }
 }

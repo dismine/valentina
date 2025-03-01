@@ -196,10 +196,7 @@ void GraphicsViewZoom::set_zoom_factor_base(double value)
 //---------------------------------------------------------------------------------------------------------------------
 void GraphicsViewZoom::InitScrollingAnimation()
 {
-    if (not verticalScrollAnim.isNull())
-    {
-        delete verticalScrollAnim;
-    }
+    delete verticalScrollAnim.data();
 
     VCommonSettings *settings = VAbstractApplication::VApp()->Settings();
 
@@ -209,10 +206,7 @@ void GraphicsViewZoom::InitScrollingAnimation()
     connect(verticalScrollAnim.data(), &QTimeLine::valueChanged, this, &GraphicsViewZoom::VerticalScrollingTime);
     connect(verticalScrollAnim.data(), &QTimeLine::finished, this, &GraphicsViewZoom::animFinished);
 
-    if (not horizontalScrollAnim.isNull())
-    {
-        delete horizontalScrollAnim;
-    }
+    delete horizontalScrollAnim.data();
 
     horizontalScrollAnim = new QTimeLine(settings->GetScrollingDuration(), this);
     horizontalScrollAnim->setUpdateInterval(settings->GetScrollingUpdateInterval());

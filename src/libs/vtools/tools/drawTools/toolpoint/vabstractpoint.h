@@ -89,7 +89,7 @@ template <typename T> void VAbstractPoint::ShowToolVisualization(bool show)
     }
     else
     {
-        delete vis;
+        delete vis.data();
     }
 }
 

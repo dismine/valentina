@@ -80,10 +80,7 @@ DeletePiece::DeletePiece(VAbstractPattern *doc, quint32 id, const VContainer &da
 //---------------------------------------------------------------------------------------------------------------------
 DeletePiece::~DeletePiece()
 {
-    if (not m_tool.isNull())
-    {
-        delete m_tool;
-    }
+    delete m_tool.data();
 }
 
 //---------------------------------------------------------------------------------------------------------------------

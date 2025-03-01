@@ -89,7 +89,7 @@ void FvUpdater::drop()
 {
     static QMutex mutex;
     mutex.lock();
-    delete m_Instance;
+    delete m_Instance.data();
     mutex.unlock();
 }
 
@@ -109,8 +109,8 @@ auto FvUpdater::IsTestBuild() -> bool
 FvUpdater::~FvUpdater()
 {
     hideUpdaterWindow();
-    delete m_reply;
-    delete m_updaterWindow;
+    delete m_reply.data();
+    delete m_updaterWindow.data();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -499,7 +499,7 @@ auto FvUpdater::searchDownloadedFeedForUpdates(const QString &xmlEnclosureUrl, c
     // to the user.
     //
 
-    delete m_proposedUpdate;
+    delete m_proposedUpdate.data();
     m_proposedUpdate = new FvAvailableUpdate(this);
     m_proposedUpdate->SetEnclosureUrl(xmlEnclosureUrl);
     m_proposedUpdate->SetEnclosureVersion(xmlEnclosureVersion);

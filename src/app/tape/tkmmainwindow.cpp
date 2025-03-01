@@ -420,49 +420,21 @@ auto TKMMainWindow::eventFilter(QObject *object, QEvent *event) -> bool
 {
     if (auto *plainTextEdit = qobject_cast<QPlainTextEdit *>(object))
     {
-        if (event->type() == QEvent::KeyPress)
-        {
-            // NOLINTNEXTLINE(cppcoreguidelines-pro-type-static-cast-downcast)
-            if (const auto *keyEvent = static_cast<QKeyEvent *>(event);
-                (keyEvent->key() == Qt::Key_Period) && ((keyEvent->modifiers() & Qt::KeypadModifier) != 0U))
-            {
-                if (VAbstractApplication::VApp()->Settings()->GetOsSeparator())
-                {
-                    plainTextEdit->insertPlainText(LocaleDecimalPoint(QLocale()));
-                }
-                else
-                {
-                    plainTextEdit->insertPlainText(LocaleDecimalPoint(QLocale::c()));
-                }
-                return true;
-            }
-        }
+        return HandleKeyPress(plainTextEdit, event);
     }
-    else if (auto *textEdit = qobject_cast<QLineEdit *>(object))
+
+    if (auto *textEdit = qobject_cast<QLineEdit *>(object))
     {
-        if (event->type() == QEvent::KeyPress)
-        {
-            // NOLINTNEXTLINE(cppcoreguidelines-pro-type-static-cast-downcast)
-            if (const auto *keyEvent = static_cast<QKeyEvent *>(event);
-                (keyEvent->key() == Qt::Key_Period) && ((keyEvent->modifiers() & Qt::KeypadModifier) != 0U))
-            {
-                if (VAbstractApplication::VApp()->Settings()->GetOsSeparator())
-                {
-                    textEdit->insert(LocaleDecimalPoint(QLocale()));
-                }
-                else
-                {
-                    textEdit->insert(LocaleDecimalPoint(QLocale::c()));
-                }
-                return true;
-            }
-        }
+        return HandleKeyPress(textEdit, event);
     }
-    else if (auto *listWidget = qobject_cast<QListWidget *>(object))
+
+    if (const auto *listWidget = qobject_cast<QListWidget *>(object))
     {
+        return HandleListWidgetEvent(listWidget, event);
+
         if (listWidget == ui->listWidget && (event->type() == QEvent::DragEnter || event->type() == QEvent::DragMove))
         {
-            if (QDragEnterEvent *dragEvent = static_cast<QDragEnterEvent *>(event); dragEvent->mimeData()->hasUrls())
+            if (auto *dragEvent = static_cast<QDragEnterEvent *>(event); dragEvent->mimeData()->hasUrls())
             {
                 int supportedImagesCount = 0;
                 const QStringList formats = SupportedFormats();
@@ -487,7 +459,7 @@ auto TKMMainWindow::eventFilter(QObject *object, QEvent *event) -> bool
         }
         else if (listWidget == ui->listWidget && event->type() == QEvent::Drop)
         {
-            if (QDropEvent *dropEvent = static_cast<QDropEvent *>(event); dropEvent->mimeData()->hasUrls())
+            if (auto *dropEvent = static_cast<QDropEvent *>(event); dropEvent->mimeData()->hasUrls())
             {
                 int supportedImagesCount = 0;
                 QStringList imagePaths;
@@ -518,6 +490,113 @@ auto TKMMainWindow::eventFilter(QObject *object, QEvent *event) -> bool
 
     // pass the event on to the parent class
     return QMainWindow::eventFilter(object, event);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+auto TKMMainWindow::HandleKeyPress(QWidget *widget, QEvent *event) const -> bool
+{
+    if (event->type() != QEvent::KeyPress)
+    {
+        return false;
+    }
+
+    if (const auto *keyEvent = static_cast<QKeyEvent *>(event);
+        keyEvent->key() != Qt::Key_Period || !(keyEvent->modifiers() & Qt::KeypadModifier))
+    {
+        return false;
+    }
+
+    const QString decimalSeparator = VAbstractApplication::VApp()->Settings()->GetOsSeparator()
+                                         ? LocaleDecimalPoint(QLocale())
+                                         : LocaleDecimalPoint(QLocale::c());
+
+    if (auto *plainTextEdit = qobject_cast<QPlainTextEdit *>(widget))
+    {
+        plainTextEdit->insertPlainText(decimalSeparator);
+        return true;
+    }
+
+    if (auto *lineEdit = qobject_cast<QLineEdit *>(widget))
+    {
+        lineEdit->insert(decimalSeparator);
+        return true;
+    }
+
+    return false;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+auto TKMMainWindow::HandleListWidgetEvent(const QListWidget *listWidget, QEvent *event) -> bool
+{
+    if (listWidget != ui->listWidget)
+    {
+        return false;
+    }
+
+    if (event->type() == QEvent::DragEnter || event->type() == QEvent::DragMove)
+    {
+        return HandleDragEnterMove(static_cast<QDragEnterEvent *>(event));
+    }
+
+    if (event->type() == QEvent::Drop)
+    {
+        return HandleDrop(static_cast<QDropEvent *>(event));
+    }
+
+    return false;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+auto TKMMainWindow::HandleDragEnterMove(QDragEnterEvent *dragEvent) -> bool
+{
+    if (!dragEvent->mimeData()->hasUrls())
+    {
+        return false;
+    }
+
+    const QStringList formats = SupportedFormats();
+    if (const auto urls = dragEvent->mimeData()->urls();
+        std::all_of(urls.begin(),
+                    urls.end(),
+                    [formats](const QUrl &url)
+                    { return url.isLocalFile() && formats.contains(QFileInfo(url.toLocalFile()).suffix().toLower()); }))
+    {
+        dragEvent->acceptProposedAction();
+        return true;
+    }
+    return false;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+auto TKMMainWindow::HandleDrop(QDropEvent *dropEvent) -> bool
+{
+    if (!dropEvent->mimeData()->hasUrls())
+    {
+        return false;
+    }
+
+    const QStringList formats = SupportedFormats();
+    const auto urls = dropEvent->mimeData()->urls();
+    QStringList imagePaths;
+    imagePaths.reserve(urls.size());
+    for (const QUrl &url : urls)
+    {
+        if (url.isLocalFile())
+        {
+            if (const QString filePath = url.toLocalFile(); formats.contains(QFileInfo(filePath).suffix().toLower()))
+            {
+                imagePaths.append(filePath);
+            }
+        }
+    }
+
+    if (imagePaths.size() == urls.size())
+    {
+        AddMeasurementImages(imagePaths);
+        dropEvent->acceptProposedAction();
+        return true;
+    }
+    return false;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -1129,7 +1208,7 @@ void TKMMainWindow::ShowImage()
     else if (lastSelectedTab == ui->tabWidget->indexOf(ui->tabImages)
              || ui->tabWidget->currentIndex() == ui->tabWidget->indexOf(ui->tabImages))
     {
-        QListWidgetItem *item = ui->listWidget->currentItem();
+        const QListWidgetItem *item = ui->listWidget->currentItem();
         if (item == nullptr)
         {
             return;
@@ -1164,7 +1243,7 @@ void TKMMainWindow::ShowImage()
         name += '.'_L1 + suffixes.at(0);
     }
 
-    delete m_tmpImage;
+    delete m_tmpImage.data();
     m_tmpImage = new QTemporaryFile(name, this);
     if (m_tmpImage->open())
     {

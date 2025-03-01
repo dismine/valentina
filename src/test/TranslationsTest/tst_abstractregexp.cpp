@@ -60,7 +60,7 @@ TST_AbstractRegExp::TST_AbstractRegExp(const QString &locale, QObject *parent)
 //---------------------------------------------------------------------------------------------------------------------
 TST_AbstractRegExp::~TST_AbstractRegExp()
 {
-    delete m_vTranslator;
+    delete m_vTranslator.data();
     delete m_trMs;
 }
 
@@ -83,7 +83,7 @@ auto TST_AbstractRegExp::LoadVariables(const QString &checkedLocale) -> int
     {
         qWarning("Can't load translation variables for locale = %s. \nFull path: %s/%s", qUtf8Printable(checkedLocale),
                  qUtf8Printable(path), qUtf8Printable(file));
-        delete m_vTranslator;
+        delete m_vTranslator.data();
         return ErrorLoad;
     }
 
@@ -91,7 +91,7 @@ auto TST_AbstractRegExp::LoadVariables(const QString &checkedLocale) -> int
     {
         qWarning("Can't install translation variables for locale = %s. \nFull path: %s/%s",
                  qUtf8Printable(checkedLocale), qUtf8Printable(path), qUtf8Printable(file));
-        delete m_vTranslator;
+        delete m_vTranslator.data();
         return ErrorInstall;
     }
 
@@ -109,7 +109,7 @@ void TST_AbstractRegExp::RemoveTrVariables(const QString &checkedLocale)
         {
             qWarning("Can't remove translation variables for locale = %s", qUtf8Printable(checkedLocale));
         }
-        delete m_vTranslator;
+        delete m_vTranslator.data();
     }
 }
 

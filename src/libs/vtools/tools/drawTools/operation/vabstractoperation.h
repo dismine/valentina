@@ -234,7 +234,7 @@ template <typename T> void VAbstractOperation::ShowToolVisualization(bool show)
     }
     else
     {
-        delete vis;
+        delete vis.data();
     }
 }
 

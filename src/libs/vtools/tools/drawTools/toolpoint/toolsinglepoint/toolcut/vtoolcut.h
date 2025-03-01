@@ -123,7 +123,7 @@ template <typename T> inline void VToolCut::ShowToolVisualization(bool show)
     }
     else
     {
-        delete vis;
+        delete vis.data();
     }
 
     VDataTool *parent = VAbstractPattern::getTool(VAbstractTool::data.GetGObject(baseCurveId)->getIdTool());

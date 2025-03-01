@@ -659,7 +659,7 @@ auto MainWindow::LoadMeasurements(const QString &patternPath, const QString &pat
 {
     m_m = OpenMeasurementFile(patternPath, path);
 
-    if (m_m->isNull())
+    if (m_m.isNull())
     {
         return false;
     }
@@ -716,7 +716,7 @@ auto MainWindow::UpdateMeasurements(const QSharedPointer<VMeasurements> &mFile, 
 {
     m_m = mFile;
 
-    if (m_m->isNull())
+    if (m_m.isNull())
     {
         return false;
     }
@@ -2933,24 +2933,10 @@ void MainWindow::ToolBarOption()
 {
     ui->toolBarOption->clear();
 
-    if (not m_zoomScale.isNull())
-    {
-        delete m_zoomScale;
-    }
-    if (not m_doubleSpinBoxScale.isNull())
-    {
-        delete m_doubleSpinBoxScale;
-    }
-
-    if (not m_mouseCoordinate.isNull())
-    {
-        delete m_mouseCoordinate;
-    }
-
-    if (not m_unreadPatternMessage.isNull())
-    {
-        delete m_unreadPatternMessage;
-    }
+    delete m_zoomScale.data();
+    delete m_doubleSpinBoxScale.data();
+    delete m_mouseCoordinate.data();
+    delete m_unreadPatternMessage.data();
 
     InitDimensionControls();
 
@@ -5144,7 +5130,7 @@ void MainWindow::ActionHistory_triggered(bool checked)
                 [this]()
                 {
                     ui->actionHistory->setChecked(false);
-                    delete m_dialogHistory;
+                    delete m_dialogHistory.data();
                 });
         // Fix issue #526. Dialog Detail is not on top after selection second object on Mac.
         m_dialogHistory->setWindowFlags(m_dialogHistory->windowFlags() | Qt::WindowStaysOnTopHint);
@@ -5319,32 +5305,12 @@ void MainWindow::UpdateShortcuts()
 //---------------------------------------------------------------------------------------------------------------------
 void MainWindow::InitDimensionControls()
 {
-    if (not m_dimensionA.isNull())
-    {
-        delete m_dimensionA;
-    }
-    if (not m_dimensionALabel.isNull())
-    {
-        delete m_dimensionALabel;
-    }
-
-    if (not m_dimensionB.isNull())
-    {
-        delete m_dimensionB;
-    }
-    if (not m_dimensionBLabel.isNull())
-    {
-        delete m_dimensionBLabel;
-    }
-
-    if (not m_dimensionC.isNull())
-    {
-        delete m_dimensionC;
-    }
-    if (not m_dimensionCLabel.isNull())
-    {
-        delete m_dimensionCLabel;
-    }
+    delete m_dimensionA.data();
+    delete m_dimensionALabel.data();
+    delete m_dimensionB.data();
+    delete m_dimensionBLabel.data();
+    delete m_dimensionC.data();
+    delete m_dimensionCLabel.data();
 
     if (VAbstractValApplication::VApp()->GetMeasurementsType() == MeasurementsType::Multisize)
     {

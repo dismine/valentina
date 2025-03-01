@@ -46,6 +46,7 @@ class VKnownMeasurementsDocument;
 class VPatternImage;
 class QCompleter;
 class QxtCsvModel;
+class QListWidget;
 
 class TKMMainWindow final : public VAbstractMainWindow
 {
@@ -203,6 +204,11 @@ private:
     auto RecentFileList() const -> QStringList override;
 
     void AddMeasurementImages(const QStringList &imagePaths);
+
+    auto HandleKeyPress(QWidget *widget, QEvent *event) const -> bool;
+    auto HandleListWidgetEvent(const QListWidget *listWidget, QEvent *event) -> bool;
+    auto HandleDragEnterMove(QDragEnterEvent *dragEvent) -> bool;
+    auto HandleDrop(QDropEvent *dropEvent) -> bool;
 };
 
 #endif // TKMMAINWINDOW_H

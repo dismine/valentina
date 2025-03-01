@@ -48,7 +48,7 @@ VisToolSpecialPoint::VisToolSpecialPoint(const VContainer *data, QGraphicsItem *
 //---------------------------------------------------------------------------------------------------------------------
 VisToolSpecialPoint::~VisToolSpecialPoint()
 {
-    delete m_point;
+    delete m_point.data();
 }
 
 //---------------------------------------------------------------------------------------------------------------------

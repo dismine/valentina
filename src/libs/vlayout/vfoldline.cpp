@@ -394,7 +394,7 @@ auto VFoldLine::FoldLineTwoArrowsTextAbovePath() const -> QVector<QPainterPath>
     QVector<QPainterPath> shape;
     shape.append(TwoArrowsPath(data.arrowsWidth, data.arrowsHeight));
 
-    if (VCommonSettings *settings = VAbstractApplication::VApp()->Settings(); settings->GetSingleLineFonts())
+    if (const VCommonSettings *settings = VAbstractApplication::VApp()->Settings(); settings->GetSingleLineFonts())
     {
         shape.append(SVGFontLabel(data.base, data.labelWidth, data.labelHeight));
     }
@@ -441,7 +441,7 @@ auto VFoldLine::FoldLineTextPath() const -> QVector<QPainterPath>
 
     TextPosData const data = TextData();
 
-    if (VCommonSettings *settings = VAbstractApplication::VApp()->Settings(); settings->GetSingleLineFonts())
+    if (const VCommonSettings *settings = VAbstractApplication::VApp()->Settings(); settings->GetSingleLineFonts())
     {
         return {SVGFontLabel(data.base, data.labelWidth, data.labelHeight)};
     }
@@ -592,7 +592,8 @@ auto VFoldLine::OutlineFontLabel(const QLineF &base, qreal width, qreal textHeig
 
     QPainterPath labelPath;
 
-    if (VCommonSettings *settings = VAbstractApplication::VApp()->Settings(); settings->GetSingleStrokeOutlineFont())
+    if (const VCommonSettings *settings = VAbstractApplication::VApp()->Settings();
+        settings->GetSingleStrokeOutlineFont())
     {
         VSingleLineOutlineChar const corrector(font);
         if (!corrector.IsPopulated())
@@ -771,10 +772,9 @@ auto VFoldLine::SVGFontLabel(const QLineF &base, qreal width, qreal textHeight) 
 //---------------------------------------------------------------------------------------------------------------------
 auto VFoldLine::LabelTextHeight() const -> qreal
 {
-    if (VCommonSettings *settings = VAbstractApplication::VApp()->Settings(); settings->GetSingleLineFonts())
+    if (const VCommonSettings *settings = VAbstractApplication::VApp()->Settings(); settings->GetSingleLineFonts())
     {
-        VSvgFontEngine engine;
-        if (LabelSVGFontEngine(engine))
+        if (VSvgFontEngine engine; LabelSVGFontEngine(engine))
         {
             return engine.FontHeight();
         }

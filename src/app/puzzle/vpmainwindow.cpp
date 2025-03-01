@@ -1761,11 +1761,7 @@ void VPMainWindow::InitMainGraphics()
 //---------------------------------------------------------------------------------------------------------------------
 void VPMainWindow::InitZoomToolBar()
 {
-    if (not m_doubleSpinBoxScale.isNull())
-    {
-        delete m_doubleSpinBoxScale;
-    }
-
+    delete m_doubleSpinBoxScale.data();
     delete m_mouseCoordinate;
 
     // connect the zoom buttons and shortcuts to the slots

@@ -477,7 +477,7 @@ void VToolLine::ShowVisualization(bool show)
     }
     else
     {
-        delete vis;
+        delete vis.data();
         hoverLeaveEvent(nullptr);
     }
 }

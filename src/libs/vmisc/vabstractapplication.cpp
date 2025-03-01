@@ -390,27 +390,27 @@ void VAbstractApplication::ClearTranslation()
     if (not qtTranslator.isNull())
     {
         removeTranslator(qtTranslator);
-        delete qtTranslator;
+        delete qtTranslator.data();
     }
 
 #if defined(APPIMAGE)
     if (not qtxmlTranslator.isNull())
     {
         removeTranslator(qtxmlTranslator);
-        delete qtxmlTranslator;
+        delete qtxmlTranslator.data();
     }
 
     if (not qtBaseTranslator.isNull())
     {
         removeTranslator(qtBaseTranslator);
-        delete qtBaseTranslator;
+        delete qtBaseTranslator.data();
     }
 #endif // defined(APPIMAGE)
 
     if (not appTranslator.isNull())
     {
         removeTranslator(appTranslator);
-        delete appTranslator;
+        delete appTranslator.data();
     }
 }
 
