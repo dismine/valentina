@@ -48,7 +48,11 @@ public:
     constexpr VRawSAPoint(const VRawSAPoint &other) noexcept;
     constexpr VRawSAPoint(QPointF p, bool curvePoint, bool turnPoint) noexcept;
     constexpr VRawSAPoint(QPointF p, bool curvePoint, bool turnPoint, bool loopPoint) noexcept;
+#if __cplusplus >= 202302L // C++23 or later
     constexpr VRawSAPoint &operator=(const VRawSAPoint &other) noexcept = default;
+#else
+    constexpr VRawSAPoint &operator=(const VRawSAPoint &other) noexcept;
+#endif
     ~VRawSAPoint() override = default;
 
     constexpr auto LoopPoint() const noexcept -> bool;
@@ -109,6 +113,20 @@ constexpr VRawSAPoint::VRawSAPoint(QPointF p, bool curvePoint, bool turnPoint, b
     SetCurvePoint(curvePoint);
     SetTurnPoint(turnPoint);
 }
+
+//---------------------------------------------------------------------------------------------------------------------
+#if __cplusplus < 202302L
+constexpr VRawSAPoint &VRawSAPoint::operator=(const VRawSAPoint &other) noexcept
+{
+    if (this != &other)
+    {
+        VLayoutPoint::operator=(other); // Assign base class
+        m_loopPoint = other.m_loopPoint;
+        m_primary = other.m_primary;
+    }
+    return *this;
+}
+#endif
 
 //---------------------------------------------------------------------------------------------------------------------
 constexpr auto VRawSAPoint::LoopPoint() const noexcept -> bool

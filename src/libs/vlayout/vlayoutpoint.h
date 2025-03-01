@@ -45,7 +45,11 @@ public:
     constexpr VLayoutPoint(qreal xpos, qreal ypos) noexcept;
     constexpr explicit VLayoutPoint(QPointF p) noexcept;
     constexpr VLayoutPoint(const VLayoutPoint &other) noexcept = default;
+#if __cplusplus >= 202302L // C++23 or later
     constexpr VLayoutPoint &operator=(const VLayoutPoint &other) noexcept = default;
+#else
+    constexpr VLayoutPoint &operator=(const VLayoutPoint &other) noexcept;
+#endif
     virtual ~VLayoutPoint() = default;
 
     constexpr auto TurnPoint() const noexcept -> bool;
@@ -117,6 +121,20 @@ constexpr VLayoutPoint::VLayoutPoint(QPointF p) noexcept
   : QPointF(p)
 {
 }
+
+//---------------------------------------------------------------------------------------------------------------------
+#if __cplusplus < 202302L
+constexpr VLayoutPoint &VLayoutPoint::operator=(const VLayoutPoint &other) noexcept
+{
+    if (this != &other)
+    {
+        QPointF::operator=(other);
+        m_turnPoint = other.m_turnPoint;
+        m_curvePoint = other.m_curvePoint;
+    }
+    return *this;
+}
+#endif
 
 //---------------------------------------------------------------------------------------------------------------------
 constexpr auto VLayoutPoint::TurnPoint() const noexcept -> bool
