@@ -1934,9 +1934,9 @@ void MainWindow::ExportToCSVData(const QString &fileName, bool withHeader, int m
 {
     QxtCsvModel csv;
 
-    csv.insertColumn(0);
-    csv.insertColumn(1);
-    csv.insertColumn(2);
+    csv.insertSingleColumn(0);
+    csv.insertSingleColumn(1);
+    csv.insertSingleColumn(2);
 
     if (withHeader)
     {
@@ -1969,7 +1969,7 @@ void MainWindow::ExportToCSVData(const QString &fileName, bool withHeader, int m
             QSharedPointer<VIncrement> const incr = increments.value(iMap.value());
             currentRow++;
 
-            csv.insertRow(currentRow);
+            csv.insertSingleRow(currentRow);
             csv.setText(currentRow, 0, incr->GetName()); // name
             csv.setText(currentRow, 1,
                         VAbstractApplication::VApp()->LocaleToString(*incr->GetValue())); // calculated value

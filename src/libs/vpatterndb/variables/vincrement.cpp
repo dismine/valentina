@@ -102,7 +102,7 @@ auto VIncrement::GetIndex() const -> quint32
 //---------------------------------------------------------------------------------------------------------------------
 void VIncrement::SetFormula(qreal base, const QString &formula, bool ok)
 {
-    VInternalVariable::SetValue(base);
+    StoreValue(base);
     d->formula = formula;
     d->formulaOk = ok;
 }

@@ -90,8 +90,7 @@ void VPlainTextEdit::appendPlainText(const QString &text)
     else
     {
         m_allLines.append(text);
-        const vsizetype diff = m_allLines.size() - maximumBlockCount();
-        if (diff > 0)
+        if (const vsizetype diff = m_allLines.size() - maximumBlockCount(); diff > 0)
         {
             m_allLines = m_allLines.mid(diff);
         }

@@ -96,7 +96,7 @@ namespace
 //---------------------------------------------------------------------------------------------------------------------
 auto GetPiecePath(int piece, VAbstractPattern *doc, quint32 id) -> VPiecePath
 {
-    const QDomElement tool = doc->elementById(id, VAbstractPattern::TagTools);
+    const QDomElement tool = doc->FindElementById(id, VAbstractPattern::TagTools);
     if (tool.isNull())
     {
         throw VException(QStringLiteral("Can't get tool by id='%1'.").arg(id));
@@ -138,7 +138,7 @@ auto GetPiece2MainPath(VAbstractPattern *doc, quint32 id) -> VPiecePath
 //---------------------------------------------------------------------------------------------------------------------
 auto GetPiece2CSAPaths(VAbstractPattern *doc, quint32 id) -> QVector<CustomSARecord>
 {
-    const QDomElement tool = doc->elementById(id, VAbstractPattern::TagTools);
+    const QDomElement tool = doc->FindElementById(id, VAbstractPattern::TagTools);
     if (tool.isNull())
     {
         throw VException(QStringLiteral("Can't get tool by id='%1'.").arg(id));
@@ -168,7 +168,7 @@ auto GetPiece2CSAPaths(VAbstractPattern *doc, quint32 id) -> QVector<CustomSARec
 //---------------------------------------------------------------------------------------------------------------------
 auto GetPiece2InternalPaths(VAbstractPattern *doc, quint32 id) -> QVector<quint32>
 {
-    const QDomElement tool = doc->elementById(id, VAbstractPattern::TagTools);
+    const QDomElement tool = doc->FindElementById(id, VAbstractPattern::TagTools);
     if (tool.isNull())
     {
         throw VException(QStringLiteral("Can't get tool by id='%1'.").arg(id));
@@ -198,7 +198,7 @@ auto GetPiece2InternalPaths(VAbstractPattern *doc, quint32 id) -> QVector<quint3
 //---------------------------------------------------------------------------------------------------------------------
 auto GetPiece2Pins(VAbstractPattern *doc, quint32 id) -> QVector<quint32>
 {
-    const QDomElement tool = doc->elementById(id, VAbstractPattern::TagTools);
+    const QDomElement tool = doc->FindElementById(id, VAbstractPattern::TagTools);
     if (tool.isNull())
     {
         throw VException(QStringLiteral("Can't get tool by id='%1'.").arg(id));
@@ -228,7 +228,7 @@ auto GetPiece2Pins(VAbstractPattern *doc, quint32 id) -> QVector<quint32>
 //---------------------------------------------------------------------------------------------------------------------
 auto GetPiece2PlaceLabels(VAbstractPattern *doc, quint32 id) -> QVector<quint32>
 {
-    const QDomElement tool = doc->elementById(id, VAbstractPattern::TagTools);
+    const QDomElement tool = doc->FindElementById(id, VAbstractPattern::TagTools);
     if (tool.isNull())
     {
         throw VException(QStringLiteral("Can't get tool by id='%1'.").arg(id));
@@ -258,13 +258,13 @@ auto GetPiece2PlaceLabels(VAbstractPattern *doc, quint32 id) -> QVector<quint32>
 //---------------------------------------------------------------------------------------------------------------------
 auto DrawName(VAbstractPattern *doc, quint32 d1id, quint32 d2id) -> QString
 {
-    const QDomElement detail1 = doc->elementById(d1id, VAbstractPattern::TagDetail);
+    const QDomElement detail1 = doc->FindElementById(d1id, VAbstractPattern::TagDetail);
     if (detail1.isNull())
     {
         return {};
     }
 
-    const QDomElement detail2 = doc->elementById(d2id, VAbstractPattern::TagDetail);
+    const QDomElement detail2 = doc->FindElementById(d2id, VAbstractPattern::TagDetail);
     if (detail2.isNull())
     {
         return {};
@@ -777,7 +777,7 @@ void FindIndexJ(qint32 pointsD2, const VPiecePath &d2Path, quint32 indexD2, qint
 //---------------------------------------------------------------------------------------------------------------------
 auto GetTagChildren(VAbstractPattern *doc, quint32 id) -> QDomElement
 {
-    QDomElement toolUnion = doc->elementById(id, VAbstractPattern::TagTools);
+    QDomElement toolUnion = doc->FindElementById(id, VAbstractPattern::TagTools);
     if (toolUnion.isNull())
     {
         throw VException(QStringLiteral("Can't get tool by id='%1'.").arg(id));
@@ -841,7 +841,7 @@ void SavePlaceLabelsChildren(VAbstractPattern *doc, quint32 id, const QVector<qu
 //---------------------------------------------------------------------------------------------------------------------
 auto GetChildren(VAbstractPattern *doc, quint32 id, const QString &tagName) -> QVector<quint32>
 {
-    const QDomElement toolUnion = doc->elementById(id, VAbstractPattern::TagTools);
+    const QDomElement toolUnion = doc->FindElementById(id, VAbstractPattern::TagTools);
     if (toolUnion.isNull())
     {
         return {};
@@ -1681,7 +1681,7 @@ void VToolUnionDetails::incrementReferens()
             doc->IncrementReferens(object);
         }
 
-        QDomElement domElement = doc->elementById(m_id, getTagName());
+        QDomElement domElement = doc->FindElementById(m_id, getTagName());
         if (domElement.isElement())
         {
             VAbstractPattern::SetParametrUsage(domElement, AttrInUse, NodeUsage::InUse);
@@ -1701,7 +1701,7 @@ void VToolUnionDetails::decrementReferens()
             doc->DecrementReferens(object);
         }
 
-        QDomElement domElement = doc->elementById(m_id, getTagName());
+        QDomElement domElement = doc->FindElementById(m_id, getTagName());
         if (domElement.isElement())
         {
             VAbstractPattern::SetParametrUsage(domElement, AttrInUse, NodeUsage::NotInUse);
@@ -1830,7 +1830,7 @@ void VToolUnionDetails::AddDetail(QDomElement &domElement, const VPiece &d) cons
  */
 void VToolUnionDetails::AddToModeling(const QDomElement &domElement)
 {
-    const QDomElement duplicate = doc->elementById(m_id);
+    const QDomElement duplicate = doc->FindElementById(m_id);
     if (not duplicate.isNull())
     {
         throw VExceptionWrongId(tr("This id (%1) is not unique.").arg(m_id), duplicate);
@@ -1854,7 +1854,7 @@ void VToolUnionDetails::AddToModeling(const QDomElement &domElement)
 auto VToolUnionDetails::GetReferenceObjects() const -> QVector<quint32>
 {
     QVector<quint32> list;
-    const QDomElement tool = doc->elementById(m_id, getTagName());
+    const QDomElement tool = doc->FindElementById(m_id, getTagName());
     if (tool.isNull())
     {
         return list;

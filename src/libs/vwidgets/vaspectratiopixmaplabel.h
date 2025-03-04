@@ -47,7 +47,7 @@ public:
     auto ScaledPixmap() const -> QPixmap;
 
 public slots:
-    void setPixmap(const QPixmap &p);
+    void setResizedPixmap(const QPixmap &p);
     void resizeEvent(QResizeEvent *e) override;
 
 signals:

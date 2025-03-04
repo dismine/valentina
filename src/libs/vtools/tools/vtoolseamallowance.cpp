@@ -1490,7 +1490,7 @@ void VToolSeamAllowance::FullUpdateFromGuiApply()
 //---------------------------------------------------------------------------------------------------------------------
 void VToolSeamAllowance::AddToFile()
 {
-    const QDomElement duplicate = doc->elementById(m_id);
+    const QDomElement duplicate = doc->FindElementById(m_id);
     if (not duplicate.isNull())
     {
         throw VExceptionWrongId(tr("This id (%1) is not unique.").arg(m_id), duplicate);
@@ -1521,7 +1521,7 @@ void VToolSeamAllowance::AddToFile()
 //---------------------------------------------------------------------------------------------------------------------
 void VToolSeamAllowance::RefreshDataInFile()
 {
-    QDomElement domElement = doc->elementById(m_id, VToolSeamAllowance::getTagName());
+    QDomElement domElement = doc->FindElementById(m_id, VToolSeamAllowance::getTagName());
     if (!domElement.isElement())
     {
         return;

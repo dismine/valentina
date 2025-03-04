@@ -143,7 +143,7 @@ VApplicationStyle::VApplicationStyle(QStyle *style)
 
 #if QT_VERSION >= QT_VERSION_CHECK(6, 1, 0)
 //---------------------------------------------------------------------------------------------------------------------
-auto VApplicationStyle::name() const -> QString
+auto VApplicationStyle::StyleName() const -> QString
 {
     return m_style->name();
 }

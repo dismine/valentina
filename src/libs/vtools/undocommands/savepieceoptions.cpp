@@ -56,7 +56,7 @@ void SavePieceOptions::undo()
 {
     qCDebug(vUndo, "Undo.");
 
-    QDomElement domElement = doc->elementById(nodeId, VAbstractPattern::TagDetail);
+    QDomElement domElement = doc->FindElementById(nodeId, VAbstractPattern::TagDetail);
     if (domElement.isElement())
     {
         VToolSeamAllowance::AddAttributes(doc, domElement, nodeId, m_oldDet);
@@ -104,7 +104,7 @@ void SavePieceOptions::redo()
 {
     qCDebug(vUndo, "Redo.");
 
-    QDomElement domElement = doc->elementById(nodeId, VAbstractPattern::TagDetail);
+    QDomElement domElement = doc->FindElementById(nodeId, VAbstractPattern::TagDetail);
     if (domElement.isElement())
     {
         VToolSeamAllowance::AddAttributes(doc, domElement, nodeId, m_newDet);

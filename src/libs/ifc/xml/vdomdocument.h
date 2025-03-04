@@ -97,7 +97,7 @@ public:
 
     explicit VDomDocument(QObject *parent = nullptr);
     virtual ~VDomDocument();
-    auto elementById(quint32 id, const QString &tagName = QString(), bool updateCache = true) -> QDomElement;
+    auto FindElementById(quint32 id, const QString &tagName = QString(), bool updateCache = true) -> QDomElement;
 
     template <typename T> void SetAttribute(QDomElement &domElement, const QString &name, const T &value) const;
 

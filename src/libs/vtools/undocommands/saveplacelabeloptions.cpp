@@ -48,7 +48,7 @@ void SavePlaceLabelOptions::undo()
 {
     qCDebug(vUndo, "Undo.");
 
-    QDomElement domElement = doc->elementById(nodeId, VAbstractPattern::TagPoint);
+    QDomElement domElement = doc->FindElementById(nodeId, VAbstractPattern::TagPoint);
     if (domElement.isElement())
     {
         VToolPlaceLabel::AddAttributes(doc, domElement, nodeId, m_oldLabel);
@@ -81,7 +81,7 @@ void SavePlaceLabelOptions::redo()
 {
     qCDebug(vUndo, "Redo.");
 
-    QDomElement domElement = doc->elementById(nodeId, VAbstractPattern::TagPoint);
+    QDomElement domElement = doc->FindElementById(nodeId, VAbstractPattern::TagPoint);
     if (domElement.isElement())
     {
         VToolPlaceLabel::AddAttributes(doc, domElement, nodeId, m_newLabel);

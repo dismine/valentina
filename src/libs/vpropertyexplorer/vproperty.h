@@ -182,7 +182,7 @@ public:
     virtual auto getParent() const -> VProperty *;
 
     //! Sets the parent of this property
-    virtual void setParent(VProperty *parent);
+    virtual void setPropertyParent(VProperty *parent);
 
     //! Removes a child from the children list, doesn't delete the child!
     virtual void removeChild(VProperty *child);

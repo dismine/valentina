@@ -62,7 +62,7 @@ public:
 
     void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget = nullptr) override;
 
-    void setEnabled(bool enabled);
+    void SetEnabledState(bool enabled);
     void LabelSelectionType(const SelectionType &type);
 
     void SetShowParentTooltip(bool show);

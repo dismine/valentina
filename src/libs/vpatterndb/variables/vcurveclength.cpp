@@ -58,7 +58,7 @@ VCurveCLength::VCurveCLength(const quint32 &id, const quint32 &parentId, const V
     SCASSERT(curve != nullptr)
     if (cType == CurveCLength::C1)
     {
-        SetValue(FromPixel(curve->GetC1Length(), patternUnit));
+        StoreValue(FromPixel(curve->GetC1Length(), patternUnit));
         SetName(c1Length_V + curve->name());
 
         if (not curve->GetAlias().isEmpty())
@@ -68,7 +68,7 @@ VCurveCLength::VCurveCLength(const quint32 &id, const quint32 &parentId, const V
     }
     else
     {
-        SetValue(FromPixel(curve->GetC2Length(), patternUnit));
+        StoreValue(FromPixel(curve->GetC2Length(), patternUnit));
         SetName(c2Length_V + curve->name());
 
         if (not curve->GetAlias().isEmpty())
@@ -89,7 +89,7 @@ VCurveCLength::VCurveCLength(const quint32 &id, const quint32 &parentId, const V
     SetType(VarType::CurveCLength);
     if (cType == CurveCLength::C1)
     {
-        SetValue(FromPixel(spl.GetC1Length(), patternUnit));
+        StoreValue(FromPixel(spl.GetC1Length(), patternUnit));
         SetName(c1Length_V + baseCurve->name() + '_'_L1 + seg_ + QString().setNum(segment));
 
         if (not baseCurve->GetAlias().isEmpty())
@@ -99,7 +99,7 @@ VCurveCLength::VCurveCLength(const quint32 &id, const quint32 &parentId, const V
     }
     else
     {
-        SetValue(FromPixel(spl.GetC2Length(), patternUnit));
+        StoreValue(FromPixel(spl.GetC2Length(), patternUnit));
         SetName(c2Length_V + baseCurve->name() + '_'_L1 + seg_ + QString().setNum(segment));
 
         if (not baseCurve->GetAlias().isEmpty())

@@ -40,7 +40,7 @@ RenamePiece::RenamePiece(VAbstractPattern *doc, QString newName, quint32 id, QUn
     setText(QObject::tr("rename detail"));
     nodeId = id;
 
-    QDomElement const domElement = doc->elementById(id, VAbstractPattern::TagDetail);
+    QDomElement const domElement = doc->FindElementById(id, VAbstractPattern::TagDetail);
     if (domElement.isElement())
     {
         m_oldName = VAbstractPattern::GetParametrString(domElement, AttrName, tr("Detail"));
@@ -91,7 +91,7 @@ void RenamePiece::Do(const QString &name)
 {
     qCDebug(vUndo, "Do.");
 
-    if (QDomElement domElement = doc->elementById(nodeId, VAbstractPattern::TagDetail); domElement.isElement())
+    if (QDomElement domElement = doc->FindElementById(nodeId, VAbstractPattern::TagDetail); domElement.isElement())
     {
         doc->SetAttribute(domElement, AttrName, name);
 

@@ -55,7 +55,7 @@ VArcRadius::VArcRadius(const quint32 &id, const quint32 &parentId, const VArc *a
     {
         SetAlias(radius_V + arc->GetAlias());
     }
-    SetValue(FromPixel(arc->GetRadius(), patternUnit));
+    StoreValue(FromPixel(arc->GetRadius(), patternUnit));
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -75,11 +75,11 @@ VArcRadius::VArcRadius(const quint32 &id, const quint32 &parentId, const VEllipt
 
     if (numberRadius == 1)
     {
-        SetValue(FromPixel(elArc->GetRadius1(), patternUnit));
+        StoreValue(FromPixel(elArc->GetRadius1(), patternUnit));
     }
     else
     {
-        SetValue(FromPixel(elArc->GetRadius2(), patternUnit));
+        StoreValue(FromPixel(elArc->GetRadius2(), patternUnit));
     }
 }
 

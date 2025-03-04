@@ -262,7 +262,7 @@ auto DialogHistory::Record(const VToolRecord &tool) const -> HistoryRecord
     record.id = tool.getId();
 
     bool const updateCache = false;
-    const QDomElement domElem = m_doc->elementById(tool.getId(), QString(), updateCache);
+    const QDomElement domElem = m_doc->FindElementById(tool.getId(), QString(), updateCache);
     if (not domElem.isElement())
     {
         qDebug() << "Can't find element by id" << record.id << Q_FUNC_INFO;

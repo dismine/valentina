@@ -864,7 +864,7 @@ void TMainWindow::ExportToCSVData(const QString &fileName, bool withHeader, int 
     int colCount = 0;
     for (int column = 0; column <= columns; ++column)
     {
-        csv.insertColumn(colCount++);
+        csv.insertSingleColumn(colCount++);
     }
 
     if (withHeader)
@@ -2117,7 +2117,7 @@ void TMainWindow::ShowNewMData(bool fresh)
 //---------------------------------------------------------------------------------------------------------------------
 void TMainWindow::ShowMDiagram(const QSharedPointer<VMeasurement> &m)
 {
-    ui->labelDiagram->setPixmap(QPixmap());
+    ui->labelDiagram->setResizedPixmap(QPixmap());
     ui->labelDiagram->setCursor(QCursor());
     ui->labelDiagram->disconnect();
 
@@ -2144,7 +2144,7 @@ void TMainWindow::ShowMDiagram(const QSharedPointer<VMeasurement> &m)
     if (image.IsValid())
     {
         ui->labelDiagram->setCursor(Qt::PointingHandCursor);
-        ui->labelDiagram->setPixmap(image.GetPixmap());
+        ui->labelDiagram->setResizedPixmap(image.GetPixmap());
         connect(ui->labelDiagram, &VAspectRatioPixmapLabel::clicked, this, &TMainWindow::ShowImage,
                 Qt::UniqueConnection);
     }
@@ -4904,7 +4904,7 @@ auto TMainWindow::CSVColumnHeader(int column) const -> QString
 void TMainWindow::ExportRowToCSV(QxtCsvModel &csv, int row, const QSharedPointer<VMeasurement> &meash,
                                  const VKnownMeasurements &knownDB) const
 {
-    csv.insertRow(row);
+    csv.insertSingleRow(row);
 
     VKnownMeasurement const known = knownDB.Measurement(meash->GetName());
 

@@ -57,7 +57,7 @@ ShowDoubleLabel::ShowDoubleLabel(VAbstractPattern *doc, quint32 toolId, quint32 
         setText(tr("togggle the second dart label"));
     }
 
-    const QDomElement domElement = doc->elementById(m_idTool, VAbstractPattern::TagPoint);
+    const QDomElement domElement = doc->FindElementById(m_idTool, VAbstractPattern::TagPoint);
     if (domElement.isElement())
     {
         if (type == ShowDoublePoint::FirstPoint)
@@ -94,7 +94,7 @@ void ShowDoubleLabel::redo()
 //---------------------------------------------------------------------------------------------------------------------
 void ShowDoubleLabel::Do(bool visible)
 {
-    QDomElement domElement = doc->elementById(m_idTool, VAbstractPattern::TagPoint);
+    QDomElement domElement = doc->FindElementById(m_idTool, VAbstractPattern::TagPoint);
     if (domElement.isElement())
     {
         if (m_type == ShowDoublePoint::FirstPoint)

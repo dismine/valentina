@@ -136,11 +136,9 @@ auto VPE::VPropertyModel::parent(const QModelIndex &index) const -> QModelIndex
         return {};
     }
 
-    VProperty* childItem = getProperty(index);
-    if (childItem)
+    if (VProperty *childItem = getProperty(index))
     {
-        VProperty* parentItem = childItem->getParent();
-        if (parentItem)
+        if (VProperty *parentItem = childItem->getParent())
         {
             VProperty* grandParentItem = parentItem->getParent();
             vpesizetype const parents_row = grandParentItem != nullptr

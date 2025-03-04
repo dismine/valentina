@@ -83,16 +83,16 @@ public:
     auto headerText(int column) const -> QString;
     void setHeaderText(int column, const QString &value);
 
-    auto insertRow(int row, const QModelIndex &parent = QModelIndex()) -> bool;
+    auto insertSingleRow(int row, const QModelIndex &parent = QModelIndex()) -> bool;
     virtual auto insertRows(int row, int count, const QModelIndex &parent = QModelIndex()) -> bool override;
 
-    auto removeRow(int row, const QModelIndex &parent = QModelIndex()) -> bool;
+    auto removeSingleRow(int row, const QModelIndex &parent = QModelIndex()) -> bool;
     virtual auto removeRows(int row, int count, const QModelIndex &parent = QModelIndex()) -> bool override;
 
-    auto insertColumn(int col, const QModelIndex &parent = QModelIndex()) -> bool;
+    auto insertSingleColumn(int col, const QModelIndex &parent = QModelIndex()) -> bool;
     virtual auto insertColumns(int col, int count, const QModelIndex &parent = QModelIndex()) -> bool override;
 
-    auto removeColumn(int col, const QModelIndex &parent = QModelIndex()) -> bool;
+    auto removeSingleColumn(int col, const QModelIndex &parent = QModelIndex()) -> bool;
     virtual auto removeColumns(int col, int count, const QModelIndex &parent = QModelIndex()) -> bool override;
 
     void setSource(QIODevice *file, bool withHeader = false, QChar separator = ',', VTextCodec *codec = nullptr);

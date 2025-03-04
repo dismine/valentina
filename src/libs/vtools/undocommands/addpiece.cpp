@@ -59,7 +59,7 @@ void AddPiece::undo()
     QDomElement details = GetDetailsSection();
     if (not details.isNull())
     {
-        QDomElement const domElement = doc->elementById(nodeId, VAbstractPattern::TagDetail);
+        QDomElement const domElement = doc->FindElementById(nodeId, VAbstractPattern::TagDetail);
         if (domElement.isElement())
         {
             if (details.removeChild(domElement).isNull())

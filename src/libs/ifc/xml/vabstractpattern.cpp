@@ -2425,7 +2425,7 @@ auto VAbstractPattern::GroupLinkedToTool(vidtype toolId) const -> vidtype
 auto VAbstractPattern::GetGroupName(quint32 id) -> QString
 {
     QString name = QCoreApplication::translate("VAbstractPattern", "New group");
-    if (QDomElement const group = elementById(id, TagGroup); group.isElement())
+    if (QDomElement const group = FindElementById(id, TagGroup); group.isElement())
     {
         name = GetParametrString(group, AttrName, name);
     }
@@ -2436,7 +2436,7 @@ auto VAbstractPattern::GetGroupName(quint32 id) -> QString
 //---------------------------------------------------------------------------------------------------------------------
 void VAbstractPattern::SetGroupName(quint32 id, const QString &name)
 {
-    if (QDomElement group = elementById(id, TagGroup); group.isElement())
+    if (QDomElement group = FindElementById(id, TagGroup); group.isElement())
     {
         group.setAttribute(AttrName, name);
         modified = true;
@@ -2448,7 +2448,7 @@ void VAbstractPattern::SetGroupName(quint32 id, const QString &name)
 auto VAbstractPattern::GetGroupTags(vidtype id) -> QStringList
 {
     QStringList tags;
-    if (QDomElement const group = elementById(id, TagGroup); group.isElement())
+    if (QDomElement const group = FindElementById(id, TagGroup); group.isElement())
     {
         tags = FilterGroupTags(GetParametrEmptyString(group, AttrTags));
     }
@@ -2459,7 +2459,7 @@ auto VAbstractPattern::GetGroupTags(vidtype id) -> QStringList
 //---------------------------------------------------------------------------------------------------------------------
 void VAbstractPattern::SetGroupTags(quint32 id, const QStringList &tags)
 {
-    if (QDomElement group = elementById(id, TagGroup); group.isElement())
+    if (QDomElement group = FindElementById(id, TagGroup); group.isElement())
     {
         SetAttributeOrRemoveIf<QString>(group, AttrTags, tags.join(','_L1),
                                         [](const QString &rawTags) noexcept { return rawTags.isEmpty(); });
@@ -2799,7 +2799,7 @@ auto VAbstractPattern::ReadCompanyName() const -> QString
  */
 auto VAbstractPattern::AddItemToGroup(quint32 toolId, quint32 objectId, quint32 groupId) -> QDomElement
 {
-    if (QDomElement group = elementById(groupId, TagGroup); not group.isNull())
+    if (QDomElement group = FindElementById(groupId, TagGroup); not group.isNull())
     {
         if (objectId == 0)
         {
@@ -2842,7 +2842,7 @@ auto VAbstractPattern::AddItemToGroup(quint32 toolId, quint32 objectId, quint32 
  */
 auto VAbstractPattern::RemoveItemFromGroup(quint32 toolId, quint32 objectId, quint32 groupId) -> QDomElement
 {
-    if (QDomElement group = elementById(groupId, TagGroup); not group.isNull())
+    if (QDomElement group = FindElementById(groupId, TagGroup); not group.isNull())
     {
         if (objectId == 0)
         {
@@ -2895,7 +2895,7 @@ auto VAbstractPattern::RemoveItemFromGroup(quint32 toolId, quint32 objectId, qui
 //---------------------------------------------------------------------------------------------------------------------
 auto VAbstractPattern::GetGroupVisibility(quint32 id) -> bool
 {
-    if (QDomElement const group = elementById(id, TagGroup); group.isElement())
+    if (QDomElement const group = FindElementById(id, TagGroup); group.isElement())
     {
         return GetParametrBool(group, AttrVisible, trueStr);
     }
@@ -2906,7 +2906,7 @@ auto VAbstractPattern::GetGroupVisibility(quint32 id) -> bool
 //---------------------------------------------------------------------------------------------------------------------
 auto VAbstractPattern::PieceDrawName(quint32 id) -> QString
 {
-    const QDomElement detail = elementById(id, VAbstractPattern::TagDetail);
+    const QDomElement detail = FindElementById(id, VAbstractPattern::TagDetail);
     if (detail.isNull())
     {
         return QString();

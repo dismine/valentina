@@ -81,7 +81,7 @@ void VSimplePoint::SetPointHighlight(bool value)
 void VSimplePoint::SetEnabled(bool enabled)
 {
     setEnabled(enabled);
-    m_namePoint->setEnabled(enabled);
+    m_namePoint->SetEnabledState(enabled);
 }
 
 //---------------------------------------------------------------------------------------------------------------------

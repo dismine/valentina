@@ -43,7 +43,7 @@ public:
     void RefreshGeometry() override;
     void VisualMode(quint32 id = NULL_ID) override;
 
-    void SetPoints(const QVector<quint32> &pins);
+    void SetSpecialPoints(const QVector<quint32> &pins);
     void SetShowRect(bool show);
     void SetRect(const QRectF &rect);
 
@@ -63,7 +63,7 @@ private:
 };
 
 //---------------------------------------------------------------------------------------------------------------------
-inline void VisPieceSpecialPoints::SetPoints(const QVector<quint32> &pins)
+inline void VisPieceSpecialPoints::SetSpecialPoints(const QVector<quint32> &pins)
 {
     m_spoints = pins;
 }

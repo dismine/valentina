@@ -91,7 +91,7 @@ auto VInternalVariable::GetValue() -> qreal *
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VInternalVariable::SetValue(const qreal &value)
+void VInternalVariable::StoreValue(qreal value)
 {
     d->value = value;
 }

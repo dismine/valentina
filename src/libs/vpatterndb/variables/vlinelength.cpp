@@ -106,8 +106,7 @@ void VLengthLine::SetValue(const VPointF *p1, const VPointF *p2)
     SCASSERT(p1 != nullptr)
     SCASSERT(p2 != nullptr)
 
-    VInternalVariable::SetValue(
-        FromPixel(QLineF(static_cast<QPointF>(*p1), static_cast<QPointF>(*p2)).length(), d->patternUnit));
+    StoreValue(FromPixel(QLineF(static_cast<QPointF>(*p1), static_cast<QPointF>(*p2)).length(), d->patternUnit));
 }
 
 //---------------------------------------------------------------------------------------------------------------------

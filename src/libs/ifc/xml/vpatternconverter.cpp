@@ -1261,7 +1261,7 @@ void VPatternConverter::SaveChildrenToolUnionToV0_2_4(quint32 id, const QVector<
     // TODO. Delete if minimal supported version is 0.2.4
     Q_STATIC_ASSERT_X(VPatternConverter::PatternMinVer < FormatVersion(0, 2, 4), "Time to refactor the code.");
 
-    QDomElement toolUnion = elementById(id);
+    QDomElement toolUnion = FindElementById(id);
     if (toolUnion.isNull())
     {
         return;

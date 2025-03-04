@@ -1219,9 +1219,9 @@ auto MainWindowsNoGUI::ExportFMeasurementsToCSVData(const QString &fileName, boo
 {
     QxtCsvModel csv;
 
-    csv.insertColumn(0);
-    csv.insertColumn(1);
-    csv.insertColumn(2);
+    csv.insertSingleColumn(0);
+    csv.insertSingleColumn(1);
+    csv.insertSingleColumn(2);
 
     if (withHeader)
     {
@@ -1238,7 +1238,7 @@ auto MainWindowsNoGUI::ExportFMeasurementsToCSVData(const QString &fileName, boo
     {
         const VFinalMeasurement &m = measurements.at(i);
 
-        csv.insertRow(i);
+        csv.insertSingleRow(i);
         csv.setText(i, 0, m.name); // name
 
         if (not m.formula.isEmpty())

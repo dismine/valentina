@@ -40,7 +40,7 @@ public:
     ~VApplicationStyle() override = default;
 
 #if QT_VERSION >= QT_VERSION_CHECK(6, 1, 0)
-    auto name() const -> QString;
+    auto StyleName() const -> QString;
 #endif
 
     void drawPrimitive(PrimitiveElement pe, const QStyleOption *opt, QPainter *p, const QWidget *w) const override;

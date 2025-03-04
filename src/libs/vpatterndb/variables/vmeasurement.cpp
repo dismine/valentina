@@ -49,7 +49,7 @@ VMeasurement::VMeasurement(quint32 index, const QString &name)
     d(new VMeasurementData(index, MeasurementType::Separator))
 {
     SetType(VarType::MeasurementSeparator);
-    VInternalVariable::SetValue(0);
+    StoreValue(0);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -63,7 +63,7 @@ VMeasurement::VMeasurement(quint32 index, const QString &name, qreal baseA, qrea
     d(new VMeasurementData(index, baseA, baseB, baseC, base))
 {
     SetType(VarType::Measurement);
-    VInternalVariable::SetValue(d->shiftBase);
+    StoreValue(d->shiftBase);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -78,7 +78,7 @@ VMeasurement::VMeasurement(VContainer *data, quint32 index, const QString &name,
     d(new VMeasurementData(data, index, formula, ok, base))
 {
     SetType(VarType::Measurement);
-    VInternalVariable::SetValue(base);
+    StoreValue(base);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -232,7 +232,7 @@ auto VMeasurement::GetValue() const -> qreal
 //---------------------------------------------------------------------------------------------------------------------
 auto VMeasurement::GetValue() -> qreal *
 {
-    VInternalVariable::SetValue(CalcValue());
+    StoreValue(CalcValue());
     return VInternalVariable::GetValue();
 }
 

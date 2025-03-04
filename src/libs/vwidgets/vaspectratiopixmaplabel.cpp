@@ -44,7 +44,7 @@ VAspectRatioPixmapLabel::VAspectRatioPixmapLabel(const QString &text, QWidget *p
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VAspectRatioPixmapLabel::setPixmap(const QPixmap &p)
+void VAspectRatioPixmapLabel::setResizedPixmap(const QPixmap &p)
 {
     m_pix = p;
     QLabel::setPixmap(ScaledPixmap());

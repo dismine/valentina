@@ -66,7 +66,7 @@ VCurveAngle::VCurveAngle(const quint32 &id, const quint32 &parentId, const VAbst
     SCASSERT(curve != nullptr)
     if (angle == CurveAngle::StartAngle)
     {
-        SetValue(curve->GetStartAngle());
+        StoreValue(curve->GetStartAngle());
         SetName(angle1_V + curve->name());
 
         if (not curve->GetAlias().isEmpty())
@@ -76,7 +76,7 @@ VCurveAngle::VCurveAngle(const quint32 &id, const quint32 &parentId, const VAbst
     }
     else
     {
-        SetValue(curve->GetEndAngle());
+        StoreValue(curve->GetEndAngle());
         SetName(angle2_V + curve->name());
 
         if (not curve->GetAlias().isEmpty())
@@ -97,7 +97,7 @@ VCurveAngle::VCurveAngle(const quint32 &id, const quint32 &parentId, const VAbst
     SetType(VarType::CurveAngle);
     if (angle == CurveAngle::StartAngle)
     {
-        SetValue(spl.GetStartAngle());
+        StoreValue(spl.GetStartAngle());
         SetName(angle1_V + baseCurve->name() + '_'_L1 + seg_ + QString().setNum(segment));
 
         if (not baseCurve->GetAlias().isEmpty())
@@ -107,7 +107,7 @@ VCurveAngle::VCurveAngle(const quint32 &id, const quint32 &parentId, const VAbst
     }
     else
     {
-        SetValue(spl.GetEndAngle());
+        StoreValue(spl.GetEndAngle());
         SetName(angle2_V + baseCurve->name() + '_'_L1 + seg_ + QString().setNum(segment));
 
         if (not baseCurve->GetAlias().isEmpty())
@@ -130,7 +130,7 @@ VEllipticalArcRotation::VEllipticalArcRotation(const quint32 &id, const quint32 
 {
     SetType(VarType::CurveAngle);
     SCASSERT(elArc != nullptr)
-    SetValue(elArc->GetRotationAngle());
+    StoreValue(elArc->GetRotationAngle());
     SetName(rotation_V + elArc->name());
 
     if (not elArc->GetAlias().isEmpty())

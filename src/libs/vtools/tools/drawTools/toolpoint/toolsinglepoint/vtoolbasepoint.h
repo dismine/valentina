@@ -83,11 +83,6 @@ public:
 public slots:
     virtual void FullUpdateFromFile() override;
     virtual void EnableToolMove(bool move) override;
-signals:
-    /**
-     * @brief FullUpdateTree handle if need update pattern file.
-     */
-    void LiteUpdateTree();
 
 protected:
     virtual void AddToFile() override;

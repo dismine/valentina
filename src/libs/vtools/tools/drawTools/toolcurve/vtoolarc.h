@@ -82,7 +82,7 @@ public:
     auto GetFormulaF2() const -> VFormula;
     void SetFormulaF2(const VFormula &value);
 
-    auto GetApproximationScale() const -> qreal;
+    auto GetApproximationScale() const -> qreal override;
     void SetApproximationScale(qreal value);
 
     void ShowVisualization(bool show) override;

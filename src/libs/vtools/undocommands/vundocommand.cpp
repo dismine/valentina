@@ -177,7 +177,7 @@ void VUndoCommand::DecrementReferences(const QVector<VPieceNode> &nodes) const
 //---------------------------------------------------------------------------------------------------------------------
 auto VUndoCommand::GetDestinationObject(quint32 idTool, quint32 idPoint) const -> QDomElement
 {
-    const QDomElement tool = doc->elementById(idTool, VAbstractPattern::TagOperation);
+    const QDomElement tool = doc->FindElementById(idTool, VAbstractPattern::TagOperation);
     if (tool.isElement())
     {
         QDomElement correctDest;

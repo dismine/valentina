@@ -399,7 +399,7 @@ auto QxtCsvModel::setData(const QModelIndex &index, const QVariant &data, int ro
 /*!
     \reimp
  */
-auto QxtCsvModel::insertRow(int row, const QModelIndex &parent) -> bool
+auto QxtCsvModel::insertSingleRow(int row, const QModelIndex &parent) -> bool
 {
     return insertRows(row, 1, parent);
 }
@@ -436,7 +436,7 @@ auto QxtCsvModel::insertRows(int row, int count, const QModelIndex &parent) -> b
 /*!
     \reimp
  */
-auto QxtCsvModel::removeRow(int row, const QModelIndex &parent) -> bool
+auto QxtCsvModel::removeSingleRow(int row, const QModelIndex &parent) -> bool
 {
     return removeRows(row, 1, parent);
 }
@@ -471,7 +471,7 @@ auto QxtCsvModel::removeRows(int row, int count, const QModelIndex &parent) -> b
 /*!
     \reimp
  */
-auto QxtCsvModel::insertColumn(int col, const QModelIndex &parent) -> bool
+auto QxtCsvModel::insertSingleColumn(int col, const QModelIndex &parent) -> bool
 {
     return insertColumns(col, 1, parent);
 }
@@ -511,7 +511,7 @@ auto QxtCsvModel::insertColumns(int col, int count, const QModelIndex &parent) -
 /*!
     \reimp
  */
-auto QxtCsvModel::removeColumn(int col, const QModelIndex &parent) -> bool
+auto QxtCsvModel::removeSingleColumn(int col, const QModelIndex &parent) -> bool
 {
     return removeColumns(col, 1, parent);
 }

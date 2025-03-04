@@ -289,17 +289,16 @@ VDomDocument::~VDomDocument()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-auto VDomDocument::elementById(quint32 id, const QString &tagName, bool updateCache) -> QDomElement
+auto VDomDocument::FindElementById(quint32 id, const QString &tagName, bool updateCache) -> QDomElement
 {
     if (id == 0)
     {
-        return QDomElement();
+        return {};
     }
 
     if (m_elementIdCache.contains(id))
     {
-        const QDomElement e = m_elementIdCache.value(id);
-        if (e.parentNode().nodeType() != QDomNode::BaseNode)
+        if (const QDomElement e = m_elementIdCache.value(id); e.parentNode().nodeType() != QDomNode::BaseNode)
         {
             if (not tagName.isEmpty())
             {
@@ -323,8 +322,7 @@ auto VDomDocument::elementById(quint32 id, const QString &tagName, bool updateCa
     if (tagName.isEmpty())
     {
         // Because VDomDocument::find checks for unique id we must use temp cache
-        QHash<quint32, QDomElement> tmpCache;
-        if (VDomDocument::find(tmpCache, this->documentElement(), id))
+        if (QHash<quint32, QDomElement> tmpCache; VDomDocument::find(tmpCache, this->documentElement(), id))
         {
             return tmpCache.value(id);
         }
@@ -334,12 +332,10 @@ auto VDomDocument::elementById(quint32 id, const QString &tagName, bool updateCa
         const QDomNodeList list = elementsByTagName(tagName);
         for (int i = 0; i < list.size(); ++i)
         {
-            const QDomElement domElement = list.at(i).toElement();
-            if (not domElement.isNull() && domElement.hasAttribute(AttrId))
+            if (const QDomElement domElement = list.at(i).toElement();
+                not domElement.isNull() && domElement.hasAttribute(AttrId))
             {
-                const quint32 elementId = GetParametrUInt(domElement, AttrId, NULL_ID_STR);
-
-                if (elementId == id)
+                if (const quint32 elementId = GetParametrUInt(domElement, AttrId, NULL_ID_STR); elementId == id)
                 {
                     return domElement;
                 }
@@ -347,7 +343,7 @@ auto VDomDocument::elementById(quint32 id, const QString &tagName, bool updateCa
         }
     }
 
-    return QDomElement();
+    return {};
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -1029,7 +1025,7 @@ auto VDomDocument::CloneNodeById(const quint32 &nodeId) -> QDomElement
 //---------------------------------------------------------------------------------------------------------------------
 auto VDomDocument::NodeById(const quint32 &nodeId, const QString &tagName) -> QDomElement
 {
-    QDomElement const domElement = elementById(nodeId, tagName);
+    QDomElement const domElement = FindElementById(nodeId, tagName);
     if (domElement.isNull() || domElement.isElement() == false)
     {
         throw VExceptionBadId(tr("Couldn't get node"), nodeId);

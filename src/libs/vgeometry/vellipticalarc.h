@@ -95,7 +95,7 @@ public:
     auto GetTransform() const -> QTransform;
     void SetTransform(const QTransform &matrix, bool combine = false);
 
-    auto GetCenter() const -> VPointF;
+    auto GetCenter() const -> VPointF override;
     auto GetPoints() const -> QVector<QPointF> override;
     auto GetStartAngle() const -> qreal override;
     auto GetEndAngle() const -> qreal override;

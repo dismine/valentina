@@ -5002,7 +5002,7 @@ void DialogSeamAllowance::ShowPieceSpecialPointsWithRect(const QListWidget *list
         m_visSpecialPoints = new VisPieceSpecialPoints(data);
     }
 
-    m_visSpecialPoints->SetPoints(GetListInternals<quint32>(list));
+    m_visSpecialPoints->SetSpecialPoints(GetListInternals<quint32>(list));
     m_visSpecialPoints->SetShowRect(showRect);
     m_visSpecialPoints->SetRect(CurrentRect());
 

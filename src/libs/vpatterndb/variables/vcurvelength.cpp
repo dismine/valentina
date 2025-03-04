@@ -63,7 +63,7 @@ VCurveLength::VCurveLength(const quint32 &id, const quint32 &parentId, const VAb
         SetAlias(curve->GetAlias());
     }
 
-    SetValue(FromPixel(curve->GetLength(), patternUnit));
+    StoreValue(FromPixel(curve->GetLength(), patternUnit));
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -81,7 +81,7 @@ VCurveLength::VCurveLength(const quint32 &id, const quint32 &parentId, const VAb
         SetAlias(baseCurve->GetAlias() + '_'_L1 + seg_ + QString().setNum(segment));
     }
 
-    SetValue(FromPixel(spl.GetLength(), patternUnit));
+    StoreValue(FromPixel(spl.GetLength(), patternUnit));
 }
 
 //---------------------------------------------------------------------------------------------------------------------

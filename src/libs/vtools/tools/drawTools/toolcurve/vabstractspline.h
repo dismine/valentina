@@ -88,7 +88,7 @@ public:
 
     auto name() const -> QString;
 
-    auto GetApproximationScale() const -> qreal;
+    virtual auto GetApproximationScale() const -> qreal;
 
     auto GetDuplicate() const -> quint32;
 

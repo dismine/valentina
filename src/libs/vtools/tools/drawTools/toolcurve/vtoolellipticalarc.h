@@ -89,7 +89,7 @@ public:
     auto GetFormulaRotationAngle() const -> VFormula;
     void SetFormulaRotationAngle(const VFormula &value);
 
-    auto GetApproximationScale() const -> qreal;
+    auto GetApproximationScale() const -> qreal override;
     void SetApproximationScale(qreal value);
 
     void ShowVisualization(bool show) override;

@@ -127,7 +127,7 @@ void VPE::VPropertySet::removeProperty(VProperty* prop, bool delete_property)
     removePropertyFromSet(prop);
 
     // Remove from parent and optionally delete
-    prop->setParent(nullptr);
+    prop->setPropertyParent(nullptr);
 
     if (delete_property)
     {

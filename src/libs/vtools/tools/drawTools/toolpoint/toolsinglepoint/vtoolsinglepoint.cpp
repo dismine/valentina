@@ -201,7 +201,7 @@ void VToolSinglePoint::Disable(bool disable, const QString &namePP)
 {
     const bool enabled = !CorrectDisable(disable, namePP);
     SetEnabled(enabled);
-    m_namePoint->setEnabled(enabled);
+    m_namePoint->SetEnabledState(enabled);
 }
 
 //---------------------------------------------------------------------------------------------------------------------

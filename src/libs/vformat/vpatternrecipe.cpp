@@ -349,7 +349,7 @@ auto VPatternRecipe::Step(const VToolRecord &tool, const VContainer &data) -> QD
     // This check helps to find missed tools in the switch
     Q_STATIC_ASSERT_X(static_cast<int>(Tool::LAST_ONE_DO_NOT_USE) == 61, "Not all tools were used in history.");
 
-    if (const QDomElement domElem = m_pattern->elementById(tool.getId()); not domElem.isElement() && tool.IsMandatory())
+    if (const QDomElement domElem = m_pattern->FindElementById(tool.getId()); not domElem.isElement() && tool.IsMandatory())
     {
         throw VExceptionInvalidHistory(tr("Can't find element by id '%1'").arg(tool.getId()));
     }

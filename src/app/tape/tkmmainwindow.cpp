@@ -608,7 +608,7 @@ void TKMMainWindow::ExportToCSVData(const QString &fileName, bool withHeader, in
     int colCount = 0;
     for (int column = 0; column <= columns; ++column)
     {
-        csv.insertColumn(colCount++);
+        csv.insertSingleColumn(colCount++);
     }
 
     if (withHeader)
@@ -625,7 +625,7 @@ void TKMMainWindow::ExportToCSVData(const QString &fileName, bool withHeader, in
     {
         const VKnownMeasurement &m = iMap.value();
 
-        csv.insertRow(row);
+        csv.insertSingleRow(row);
         csv.setText(row, 0, m.name);
         csv.setText(row, 1, m.fullName);
         csv.setText(row, 2, m.group);
@@ -2518,14 +2518,14 @@ void TKMMainWindow::RefreshImages()
 //---------------------------------------------------------------------------------------------------------------------
 void TKMMainWindow::ShowMDiagram(const VPatternImage &image)
 {
-    ui->labelDiagram->setPixmap(QPixmap());
+    ui->labelDiagram->setResizedPixmap(QPixmap());
     ui->labelDiagram->setCursor(QCursor());
     ui->labelDiagram->disconnect();
 
     if (image.IsValid())
     {
         ui->labelDiagram->setCursor(Qt::PointingHandCursor);
-        ui->labelDiagram->setPixmap(image.GetPixmap());
+        ui->labelDiagram->setResizedPixmap(image.GetPixmap());
         connect(ui->labelDiagram, &VAspectRatioPixmapLabel::clicked, this, &TKMMainWindow::ShowImage,
                 Qt::UniqueConnection);
     }

@@ -86,7 +86,7 @@ void VAbstractNode::incrementReferens()
             doc->IncrementReferens(node->getIdTool());
         }
         ShowNode();
-        QDomElement domElement = doc->elementById(m_id, getTagName());
+        QDomElement domElement = doc->FindElementById(m_id, getTagName());
         if (domElement.isElement())
         {
             doc->SetParametrUsage(domElement, AttrInUse, NodeUsage::InUse);
@@ -113,7 +113,7 @@ void VAbstractNode::decrementReferens()
             doc->DecrementReferens(node->getIdTool());
         }
         HideNode();
-        QDomElement domElement = doc->elementById(m_id, getTagName());
+        QDomElement domElement = doc->FindElementById(m_id, getTagName());
         if (domElement.isElement())
         {
             doc->SetParametrUsage(domElement, AttrInUse, NodeUsage::NotInUse);
@@ -172,7 +172,7 @@ void VAbstractNode::ToolCreation(const Source &typeCreation)
  */
 void VAbstractNode::AddToModeling(const QDomElement &domElement)
 {
-    const QDomElement duplicate = doc->elementById(m_id);
+    const QDomElement duplicate = doc->FindElementById(m_id);
     if (not duplicate.isNull())
     {
         throw VExceptionWrongId(tr("This id (%1) is not unique.").arg(m_id), duplicate);

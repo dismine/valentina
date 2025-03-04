@@ -55,7 +55,7 @@ MoveDoubleLabel::MoveDoubleLabel(VAbstractPattern *doc, const QPointF &pos, Move
         setText(tr("move the second dart label"));
     }
 
-    const QDomElement domElement = doc->elementById(m_idTool, VAbstractPattern::TagPoint);
+    const QDomElement domElement = doc->FindElementById(m_idTool, VAbstractPattern::TagPoint);
     if (domElement.isElement())
     {
         if (type == MoveDoublePoint::FirstPoint)
@@ -133,7 +133,7 @@ void MoveDoubleLabel::Do(const QPointF &pos)
         qCDebug(vUndo, "New my2 %f", pos.y());
     }
 
-    QDomElement domElement = doc->elementById(m_idTool, VAbstractPattern::TagPoint);
+    QDomElement domElement = doc->FindElementById(m_idTool, VAbstractPattern::TagPoint);
     if (domElement.isElement())
     {
         if (m_type == MoveDoublePoint::FirstPoint)

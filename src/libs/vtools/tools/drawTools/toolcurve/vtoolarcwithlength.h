@@ -80,7 +80,7 @@ public:
     auto GetFormulaLength() const -> VFormula;
     void SetFormulaLength(const VFormula &value);
 
-    auto GetApproximationScale() const -> qreal;
+    auto GetApproximationScale() const -> qreal override;
     void SetApproximationScale(qreal value);
 
     void ShowVisualization(bool show) override;

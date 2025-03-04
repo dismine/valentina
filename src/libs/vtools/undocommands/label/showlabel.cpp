@@ -46,7 +46,7 @@ ShowLabel::ShowLabel(VAbstractPattern *doc, quint32 id, bool visible, QUndoComma
 
     nodeId = id;
 
-    QDomElement const domElement = doc->elementById(nodeId, VAbstractPattern::TagPoint);
+    QDomElement const domElement = doc->FindElementById(nodeId, VAbstractPattern::TagPoint);
     if (domElement.isElement())
     {
         m_oldVisible = VDomDocument::GetParametrBool(domElement, AttrShowLabel, trueStr);
@@ -76,7 +76,7 @@ void ShowLabel::redo()
 //---------------------------------------------------------------------------------------------------------------------
 void ShowLabel::Do(bool visible)
 {
-    QDomElement domElement = doc->elementById(nodeId, VAbstractPattern::TagPoint);
+    QDomElement domElement = doc->FindElementById(nodeId, VAbstractPattern::TagPoint);
     if (domElement.isElement())
     {
         doc->SetAttribute<bool>(domElement, AttrShowLabel, visible);

@@ -70,7 +70,7 @@ void TogglePieceInLayout::redo()
 //---------------------------------------------------------------------------------------------------------------------
 void TogglePieceInLayout::Do(bool state)
 {
-    QDomElement detail = doc->elementById(m_id, VAbstractPattern::TagDetail);
+    QDomElement detail = doc->FindElementById(m_id, VAbstractPattern::TagDetail);
     if (detail.isElement())
     {
         doc->SetAttributeOrRemoveIf<bool>(detail, AttrInLayout, state, [](bool state) noexcept { return state; });
@@ -119,7 +119,7 @@ TogglePieceForceForbidFlipping::TogglePieceForceForbidFlipping(quint32 id, bool 
 //---------------------------------------------------------------------------------------------------------------------
 void TogglePieceForceForbidFlipping::undo()
 {
-    QDomElement detail = doc->elementById(m_id, VAbstractPattern::TagDetail);
+    QDomElement detail = doc->FindElementById(m_id, VAbstractPattern::TagDetail);
     if (detail.isElement())
     {
         VPiece det = m_data->DataPieces()->value(m_id);
@@ -147,7 +147,7 @@ void TogglePieceForceForbidFlipping::undo()
 //---------------------------------------------------------------------------------------------------------------------
 void TogglePieceForceForbidFlipping::redo()
 {
-    QDomElement detail = doc->elementById(m_id, VAbstractPattern::TagDetail);
+    QDomElement detail = doc->FindElementById(m_id, VAbstractPattern::TagDetail);
     if (detail.isElement())
     {
         VPiece det = m_data->DataPieces()->value(m_id);
@@ -200,7 +200,7 @@ void ToggleHideMainPath::redo()
 //---------------------------------------------------------------------------------------------------------------------
 void ToggleHideMainPath::Do(bool state)
 {
-    QDomElement detail = doc->elementById(m_id, VAbstractPattern::TagDetail);
+    QDomElement detail = doc->FindElementById(m_id, VAbstractPattern::TagDetail);
     if (detail.isElement())
     {
         doc->SetAttribute(detail, VToolSeamAllowance::AttrHideMainPath, state);
@@ -246,7 +246,7 @@ void ToggleShowFullPiece::redo()
 //---------------------------------------------------------------------------------------------------------------------
 void ToggleShowFullPiece::Do(bool state)
 {
-    QDomElement detail = doc->elementById(m_id, VAbstractPattern::TagDetail);
+    QDomElement detail = doc->FindElementById(m_id, VAbstractPattern::TagDetail);
     if (detail.isElement())
     {
         doc->SetAttribute(detail, VToolSeamAllowance::AttrShowFullPiece, state);

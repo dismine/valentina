@@ -93,7 +93,7 @@ auto MoveSplinePath::id() const -> int
 //---------------------------------------------------------------------------------------------------------------------
 void MoveSplinePath::Do(const VSplinePath &splPath)
 {
-    QDomElement domElement = doc->elementById(nodeId, VAbstractPattern::TagSpline);
+    QDomElement domElement = doc->FindElementById(nodeId, VAbstractPattern::TagSpline);
     if (domElement.isElement())
     {
         VToolSplinePath::UpdatePathPoints(doc, domElement, splPath);

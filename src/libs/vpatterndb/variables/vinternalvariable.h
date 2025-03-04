@@ -70,7 +70,7 @@ public:
     virtual auto IsNotUsed() const -> bool;
 
 protected:
-    void SetValue(const qreal &value);
+    void StoreValue(qreal value);
     void SetType(const VarType &type);
 
 private:

@@ -52,7 +52,7 @@ VPE::VProperty::VProperty(VPropertyPrivate *d)
 
 VPE::VProperty::~VProperty()
 {
-    VPE::VProperty::setParent(nullptr);
+    VPE::VProperty::setPropertyParent(nullptr);
 
     while (!vproperty_d_ptr->Children.isEmpty())
     {
@@ -269,7 +269,7 @@ auto VPE::VProperty::getParent() const -> VPE::VProperty *
 }
 
 //! Sets the parent of this property
-void VPE::VProperty::setParent(VProperty* parent)
+void VPE::VProperty::setPropertyParent(VProperty *parent)
 {
     if (vproperty_d_ptr->Parent == parent)
     {
@@ -294,7 +294,7 @@ auto VPE::VProperty::addChild(VProperty *child) -> vpesizetype
 {
     if (child && child->getParent() != this)
     {
-        child->setParent(this);
+        child->setPropertyParent(this);
     }
 
     if (!vproperty_d_ptr->Children.contains(child) && child != nullptr)
@@ -315,7 +315,7 @@ void VPE::VProperty::removeChild(VProperty* child)
 
     if (child && child->getParent() == this)
     {
-        child->setParent(nullptr);
+        child->setPropertyParent(nullptr);
     }
 }
 

@@ -65,13 +65,13 @@ VPieceArea::VPieceArea(PieceAreaType type, quint32 pieceId, const VPiece &piece,
     {
         SetType(VarType::PieceExternalArea);
         SetName(pieceArea_ + shortName);
-        VInternalVariable::SetValue(FromPixel2(piece.ExternalArea(&tempData), unit));
+        StoreValue(FromPixel2(piece.ExternalArea(&tempData), unit));
     }
     else
     {
         SetType(VarType::PieceSeamLineArea);
         SetName(pieceSeamLineArea_ + shortName);
-        VInternalVariable::SetValue(FromPixel2(piece.SeamLineArea(&tempData), unit));
+        StoreValue(FromPixel2(piece.SeamLineArea(&tempData), unit));
     }
 }
 
@@ -111,8 +111,8 @@ void VPieceArea::SetValue(quint32 pieceId, const VPiece &piece, const VContainer
     // cppcheck-suppress unknownMacro
     SCASSERT(data != nullptr)
     d->m_pieceId = pieceId;
-    VInternalVariable::SetValue(FromPixel2(
-        GetType() == VarType::PieceExternalArea ? piece.ExternalArea(data) : piece.SeamLineArea(data), unit));
+    StoreValue(FromPixel2(GetType() == VarType::PieceExternalArea ? piece.ExternalArea(data) : piece.SeamLineArea(data),
+                          unit));
 }
 
 //---------------------------------------------------------------------------------------------------------------------

@@ -106,7 +106,7 @@ void VDrawTool::SaveDialogChange(const QString &undoText)
 {
     Q_UNUSED(undoText)
     qCDebug(vTool, "Saving tool options after using dialog");
-    QDomElement const oldDomElement = doc->elementById(m_id, getTagName());
+    QDomElement const oldDomElement = doc->FindElementById(m_id, getTagName());
     if (oldDomElement.isElement())
     {
         QDomElement newDomElement = oldDomElement.cloneNode().toElement();
@@ -150,7 +150,7 @@ void VDrawTool::AddToFile()
 void VDrawTool::SaveOption(QSharedPointer<VGObject> &obj)
 {
     qCDebug(vTool, "Saving tool options");
-    QDomElement const oldDomElement = doc->elementById(m_id, getTagName());
+    QDomElement const oldDomElement = doc->FindElementById(m_id, getTagName());
     if (oldDomElement.isElement())
     {
         QDomElement newDomElement = oldDomElement.cloneNode().toElement();
@@ -205,7 +205,7 @@ auto VDrawTool::CorrectDisable(bool disable, const QString &namePP) const -> boo
 //---------------------------------------------------------------------------------------------------------------------
 void VDrawTool::ReadAttributes()
 {
-    const QDomElement domElement = doc->elementById(m_id, getTagName());
+    const QDomElement domElement = doc->FindElementById(m_id, getTagName());
     if (domElement.isElement())
     {
         ReadToolAttributes(domElement);
@@ -250,7 +250,7 @@ void VDrawTool::ChangeLabelVisibility(quint32 id, bool visible)
  */
 void VDrawTool::AddToCalculation(const QDomElement &domElement)
 {
-    const QDomElement duplicate = doc->elementById(m_id);
+    const QDomElement duplicate = doc->FindElementById(m_id);
     if (not duplicate.isNull())
     {
         throw VExceptionWrongId(tr("This id (%1) is not unique.").arg(m_id), duplicate);
