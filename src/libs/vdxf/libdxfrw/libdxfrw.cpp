@@ -78,7 +78,7 @@ auto dxfRW::read(DRW_Interface *interface_, bool ext) -> bool
 #if ((defined(__clang__) && (__clang_major__ < 9)) \
      || (!defined(__clang__) && defined(__GNUC__) && (__GNUC__ < 9 || (__GNUC__ == 9 && __GNUC_MINOR__ < 1))) \
      || (defined(_MSC_VER) && (_MSC_VER < 1920)))
-    filestr.open(fileName, std::ios_base::in | std::ios::binary);
+    filestr.open(fileName.c_str(), std::ios_base::in | std::ios::binary);
 #else
 #if __cplusplus >= 202002L // C++20 or newer
     auto filePath = std::filesystem::path(fileName);
@@ -106,7 +106,7 @@ auto dxfRW::read(DRW_Interface *interface_, bool ext) -> bool
 #if ((defined(__clang__) && (__clang_major__ < 9)) \
      || (!defined(__clang__) && defined(__GNUC__) && (__GNUC__ < 9 || (__GNUC__ == 9 && __GNUC_MINOR__ < 1))) \
      || (defined(_MSC_VER) && (_MSC_VER < 1920)))
-        filestr.open(fileName, std::ios_base::in | std::ios::binary);
+        filestr.open(fileName.c_str(), std::ios_base::in | std::ios::binary);
 #else
         filestr.open(filePath, std::ios_base::in | std::ios::binary);
 #endif
@@ -122,7 +122,7 @@ auto dxfRW::read(DRW_Interface *interface_, bool ext) -> bool
 #if ((defined(__clang__) && (__clang_major__ < 9)) \
      || (!defined(__clang__) && defined(__GNUC__) && (__GNUC__ < 9 || (__GNUC__ == 9 && __GNUC_MINOR__ < 1))) \
      || (defined(_MSC_VER) && (_MSC_VER < 1920)))
-        filestr.open(fileName, std::ios_base::in);
+        filestr.open(fileName.c_str(), std::ios_base::in);
 #else
         filestr.open(filePath, std::ios_base::in);
 #endif
@@ -148,7 +148,7 @@ auto dxfRW::write(DRW_Interface *interface_, DRW::Version ver, bool bin) -> bool
 #if ((defined(__clang__) && (__clang_major__ < 9)) \
      || (!defined(__clang__) && defined(__GNUC__) && (__GNUC__ < 9 || (__GNUC__ == 9 && __GNUC_MINOR__ < 1))) \
      || (defined(_MSC_VER) && (_MSC_VER < 1920)))
-        filestr.open(fileName, std::ios_base::out | std::ios::binary | std::ios::trunc);
+        filestr.open(fileName.c_str(), std::ios_base::out | std::ios::binary | std::ios::trunc);
 #else
 #if __cplusplus >= 202002L // C++20 or newer
         auto filePath = std::filesystem::path(fileName);
@@ -176,7 +176,7 @@ auto dxfRW::write(DRW_Interface *interface_, DRW::Version ver, bool bin) -> bool
 #if ((defined(__clang__) && (__clang_major__ < 9)) \
      || (!defined(__clang__) && defined(__GNUC__) && (__GNUC__ < 9 || (__GNUC__ == 9 && __GNUC_MINOR__ < 1))) \
      || (defined(_MSC_VER) && (_MSC_VER < 1920)))
-        filestr.open(fileName, std::ios_base::out | std::ios::trunc);
+        filestr.open(fileName.c_str(), std::ios_base::out | std::ios::trunc);
 #else
 #if __cplusplus >= 202002L // C++20 or newer
         auto filePath = std::filesystem::path(fileName);
