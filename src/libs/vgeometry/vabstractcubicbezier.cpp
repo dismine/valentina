@@ -317,8 +317,9 @@ auto PointBezier_r(QPointF p1, QPointF p2, QPointF p3, QPointF p4, qint16 level,
 
     // Continue subdivision
     //----------------------
-    return PointBezier_r(p1, {x12, y12}, {x123, y123}, {x1234, y1234}, level + 1, approximationScale)
-           + PointBezier_r({x1234, y1234}, {x234, y234}, {x34, y34}, p4, level + 1, approximationScale);
+    const auto nextLevel = static_cast<qint16>(level + 1);
+    return PointBezier_r(p1, {x12, y12}, {x123, y123}, {x1234, y1234}, nextLevel, approximationScale)
+           + PointBezier_r({x1234, y1234}, {x234, y234}, {x34, y34}, p4, nextLevel, approximationScale);
 }
 } // namespace
 

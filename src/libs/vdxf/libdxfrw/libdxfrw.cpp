@@ -19,11 +19,15 @@
 #include <cassert>
 #include <cerrno>
 #include <cstring>
-#include <filesystem>
 #include <fstream>
 #include <memory>
 #include <sstream>
 #include <QScopedPointer>
+
+#if ((defined(__clang__) && (__clang_major__ >= 9)) || (!defined(__clang__) && defined(__GNUC__) && __GNUC__ >= 9) \
+     || (defined(_MSC_VER) && (_MSC_VER >= 1920)))
+#include <filesystem>
+#endif
 
 #define FIRSTHANDLE 48
 

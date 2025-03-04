@@ -52,20 +52,6 @@ VLib {
         ]
     }
 
-    Properties {
-        condition: qbs.toolchain.contains("gcc") && !qbs.toolchain.contains("clang") &&
-                   Utilities.versionCompare(cpp.compilerVersion, "9.1") < 0
-
-        cpp.staticLibraries: ["stdc++fs"]
-    }
-
-    Properties {
-        condition: qbs.toolchain.contains("clang") &&
-                   Utilities.versionCompare(cpp.compilerVersion, "9.0") < 0
-
-        cpp.staticLibraries: ["c++fs"]
-    }
-
     Export {
         Depends { name: "cpp" }
         cpp.includePaths: [exportingProduct.sourceDirectory]

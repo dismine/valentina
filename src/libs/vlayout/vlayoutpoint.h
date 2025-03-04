@@ -41,7 +41,14 @@ QT_WARNING_DISABLE_CLANG("-Wnon-virtual-dtor")
 class VLayoutPoint : public QPointF
 {
 public:
+#if QT_VERSION < QT_VERSION_CHECK(6, 0, 0)
+    constexpr VLayoutPoint() noexcept
+      : QPointF()
+    {
+    }
+#else
     constexpr VLayoutPoint() noexcept = default;
+#endif
     constexpr VLayoutPoint(qreal xpos, qreal ypos) noexcept;
     constexpr explicit VLayoutPoint(QPointF p) noexcept;
     constexpr VLayoutPoint(const VLayoutPoint &other) noexcept = default;
