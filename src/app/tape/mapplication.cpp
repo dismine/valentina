@@ -484,7 +484,7 @@ void MApplication::InitOptions()
                        []()
                        {
                            QString const country = VGAnalytics::CountryCode();
-                           if (country == "ru"_L1 || country == "by"_L1)
+                           if (country == "ru"_L1 || country == "by"_L1 || country == "ir"_L1)
                            {
                                QCoreApplication::exit();
                            }

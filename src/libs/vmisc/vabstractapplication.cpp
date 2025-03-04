@@ -78,7 +78,7 @@ auto FilterLocales(const QStringList &locales) -> QStringList
     QStringList filtered;
     for (const auto &locale : locales)
     {
-        if (not locale.startsWith("ru"_L1))
+        if (not locale.startsWith("ru"_L1) && not locale.startsWith("ir"_L1))
         {
             filtered.append(locale);
         }
@@ -336,7 +336,7 @@ void VAbstractApplication::WinAttachConsole()
 //---------------------------------------------------------------------------------------------------------------------
 void VAbstractApplication::LoadTranslation(QString locale)
 {
-    if (locale.startsWith("ru"_L1))
+    if (locale.startsWith("ru"_L1) || locale.startsWith("ir"_L1))
     {
         locale = QString();
     }
@@ -517,7 +517,7 @@ auto VAbstractApplication::GetPlaceholderTranslator() -> QSharedPointer<VTransla
         pieceLabelLocale = settings->GetLocale();
     }
 
-    if (pieceLabelLocale.startsWith("ru"_L1))
+    if (pieceLabelLocale.startsWith("ru"_L1) || pieceLabelLocale.startsWith("ir"_L1))
     {
         return QSharedPointer<VTranslator>(new VTranslator);
     }
@@ -557,8 +557,8 @@ void VAbstractApplication::CacheTextCodec(QStringConverter::Encoding encoding, V
 //---------------------------------------------------------------------------------------------------------------------
 void VAbstractApplication::CheckSystemLocale()
 {
-    const QString defLocale = QLocale::system().name();
-    if (defLocale.startsWith("ru"_L1))
+    if (const QString defLocale = QLocale::system().name();
+        defLocale.startsWith("ru"_L1) || defLocale.startsWith("ir"_L1))
     {
         QCoreApplication::exit();
         return;
@@ -586,13 +586,37 @@ void VAbstractApplication::CheckSystemLocale()
     }
 
     QString const timeZoneId = QString::fromUtf8(QTimeZone::systemTimeZone().id());
-    QSet<QString> const timeZones{"Asia/Anadyr",        "Asia/Barnaul",       "Asia/Chita",       "Asia/Irkutsk",
-                                  "Asia/Kamchatka",     "Asia/Khandyga",      "Asia/Krasnoyarsk", "Asia/Magadan",
-                                  "Asia/Novokuznetsk",  "Asia/Novosibirsk",   "Asia/Omsk",        "Asia/Sakhalin",
-                                  "Asia/Srednekolymsk", "Asia/Tomsk",         "Asia/Ust-Nera",    "Asia/Vladivostok",
-                                  "Asia/Yakutsk",       "Asia/Yekaterinburg", "Europe/Astrakhan", "Europe/Kaliningrad",
-                                  "Europe/Kirov",       "Europe/Moscow",      "Europe/Samara",    "Europe/Saratov",
-                                  "Europe/Simferopol",  "Europe/Ulyanovsk",   "Europe/Volgograd", "W-SU"};
+    QSet<QString> const timeZones{"Asia/Anadyr",
+                                  "Asia/Barnaul",
+                                  "Asia/Chita",
+                                  "Asia/Irkutsk",
+                                  "Asia/Kamchatka",
+                                  "Asia/Khandyga",
+                                  "Asia/Krasnoyarsk",
+                                  "Asia/Magadan",
+                                  "Asia/Novokuznetsk",
+                                  "Asia/Novosibirsk",
+                                  "Asia/Omsk",
+                                  "Asia/Sakhalin",
+                                  "Asia/Srednekolymsk",
+                                  "Asia/Tomsk",
+                                  "Asia/Ust-Nera",
+                                  "Asia/Vladivostok",
+                                  "Asia/Yakutsk",
+                                  "Asia/Yekaterinburg",
+                                  "Europe/Astrakhan",
+                                  "Europe/Kaliningrad",
+                                  "Europe/Kirov",
+                                  "Europe/Moscow",
+                                  "Europe/Samara",
+                                  "Europe/Saratov",
+                                  "Europe/Simferopol",
+                                  "Europe/Ulyanovsk",
+                                  "Europe/Volgograd",
+                                  "W-SU",
+                                  "Europe/Minsk",
+                                  "Asia/Tehran",
+                                  "Iran"};
     if (timeZones.contains(timeZoneId))
     {
         QCoreApplication::exit();

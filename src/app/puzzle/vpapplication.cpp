@@ -461,11 +461,12 @@ void VPApplication::InitOptions()
 
     CheckSystemLocale();
 
-    QTimer::singleShot(0, this,
+    QTimer::singleShot(0,
+                       this,
                        []()
                        {
-                           QString const country = VGAnalytics::CountryCode();
-                           if (country == "ru"_L1 || country == "by"_L1)
+                           if (QString const country = VGAnalytics::CountryCode();
+                               country == "ru"_L1 || country == "by"_L1 || country == "ir"_L1)
                            {
                                QCoreApplication::exit();
                            }
