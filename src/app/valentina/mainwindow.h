@@ -272,8 +272,6 @@ private:
     /** @brief ui keeps information about user interface */
     Ui::MainWindow *ui;
 
-    QFileSystemWatcher *m_watcher;
-
     /** @brief tool current tool */
     Tool m_currentTool{Tool::Arrow};
 
@@ -423,9 +421,8 @@ private:
 
     void InitScenes();
 
-    auto LoadMeasurements(const QString &patternPath, const QString &path) -> bool;
-    auto UpdateMeasurements(const QString &patternPath, const QString &path, qreal baseA, qreal baseB, qreal baseC)
-        -> bool;
+    auto LoadMeasurements(const QString &patternPath, QString &path) -> bool;
+    auto UpdateMeasurements(const QString &patternPath, QString &path, qreal baseA, qreal baseB, qreal baseC) -> bool;
     auto UpdateMeasurements(const QSharedPointer<VMeasurements> &mFile, qreal baseA, qreal baseB, qreal baseC) -> bool;
 
     void ReadMeasurements(qreal baseA, qreal baseB, qreal baseC);

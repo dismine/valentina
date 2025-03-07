@@ -133,7 +133,9 @@ void InsertGlobalContours(const QList<QGraphicsScene *> &scenes, const QList<QGr
 //---------------------------------------------------------------------------------------------------------------------
 MainWindowsNoGUI::MainWindowsNoGUI(QWidget *parent)
   : VAbstractMainWindow(parent),
-    pattern(new VContainer(VAbstractApplication::VApp()->TrVars(), VAbstractValApplication::VApp()->patternUnitsP(),
+    m_watcher(new QFileSystemWatcher(this)),
+    pattern(new VContainer(VAbstractApplication::VApp()->TrVars(),
+                           VAbstractValApplication::VApp()->patternUnitsP(),
                            valentinaNamespace))
 #if defined(Q_OS_WIN32) && QT_VERSION < QT_VERSION_CHECK(6, 0, 0)
     ,
@@ -1295,8 +1297,7 @@ auto MainWindowsNoGUI::ExportFMeasurementsToCSVData(const QString &fileName, boo
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-auto MainWindowsNoGUI::OpenMeasurementFile(const QString &patternPath, const QString &path)
-    -> QSharedPointer<VMeasurements>
+auto MainWindowsNoGUI::OpenMeasurementFile(const QString &patternPath, QString &path) -> QSharedPointer<VMeasurements>
 {
     if (path.isEmpty())
     {
@@ -1317,6 +1318,7 @@ auto MainWindowsNoGUI::OpenMeasurementFile(const QString &patternPath, const QSt
                                                       .subtract(ConvertToSet<QString>(m->ListAll()));
         if (missingMeasurements.isEmpty())
         {
+            path = currentPath;
             return m;
         }
 
@@ -1344,7 +1346,12 @@ auto MainWindowsNoGUI::LoadMeasurements(const QString &patternPath, QString &cur
         if (currentPath != oldPath)
         {
             VAbstractValApplication::VApp()->SetMeasurementsType(m->Type());
+            if (not doc->MPath().isEmpty())
+            {
+                m_watcher->removePath(AbsoluteMPath(patternPath, doc->MPath()));
+            }
             doc->SetMPath(RelativeMPath(patternPath, currentPath));
+            m_watcher->addPath(currentPath);
         }
 
         const QString formatVersion = ApplyConverter(m, currentPath);

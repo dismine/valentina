@@ -336,7 +336,6 @@ void WarningNotUniquePieceName(const QHash<quint32, VPiece> *allDetails)
 MainWindow::MainWindow(QWidget *parent)
   : MainWindowsNoGUI(parent),
     ui(new Ui::MainWindow),
-    m_watcher(new QFileSystemWatcher(this)),
     m_dialogTable(nullptr),
     m_dialogHistory(nullptr),
     m_dialogFMeasurements(nullptr),
@@ -655,7 +654,7 @@ void MainWindow::InitScenes()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-auto MainWindow::LoadMeasurements(const QString &patternPath, const QString &path) -> bool
+auto MainWindow::LoadMeasurements(const QString &patternPath, QString &path) -> bool
 {
     m_m = OpenMeasurementFile(patternPath, path);
 
@@ -705,7 +704,7 @@ auto MainWindow::LoadMeasurements(const QString &patternPath, const QString &pat
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-auto MainWindow::UpdateMeasurements(const QString &patternPath, const QString &path, qreal baseA, qreal baseB, qreal baseC) -> bool
+auto MainWindow::UpdateMeasurements(const QString &patternPath, QString &path, qreal baseA, qreal baseB, qreal baseC) -> bool
 {
     return UpdateMeasurements(OpenMeasurementFile(patternPath, path), baseA, baseB, baseC);
 }
@@ -2097,7 +2096,7 @@ void MainWindow::LoadIndividual()
     // Use standard path to individual measurements
     const QString path = settings->GetPathIndividualMeasurements();
 
-    const QString mPath = QFileDialog::getOpenFileName(this, tr("Open file"), path, filter, nullptr,
+    QString mPath = QFileDialog::getOpenFileName(this, tr("Open file"), path, filter, nullptr,
                                                        VAbstractApplication::VApp()->NativeFileDialog());
 
     if (not mPath.isEmpty())
@@ -2131,7 +2130,7 @@ void MainWindow::LoadMultisize()
                            QStringLiteral("(*.vit)");
     // Use standard path to multisize measurements
     QString const path = VAbstractValApplication::VApp()->ValentinaSettings()->GetPathMultisizeMeasurements();
-    const QString mPath = QFileDialog::getOpenFileName(this, tr("Open file"), path, filter, nullptr,
+    QString mPath = QFileDialog::getOpenFileName(this, tr("Open file"), path, filter, nullptr,
                                                        VAbstractApplication::VApp()->NativeFileDialog());
 
     if (mPath.isEmpty())
@@ -2305,7 +2304,7 @@ void MainWindow::SyncMeasurements()
     if (m_mChanges)
     {
         const QString patternPath = VAbstractValApplication::VApp()->GetPatternPath();
-        const QString path = AbsoluteMPath(patternPath, doc->MPath());
+        QString path = AbsoluteMPath(patternPath, doc->MPath());
 
         // Temporarily remove the path to prevent infinite synchronization after a format conversion.
         m_watcher->removePath(path);
@@ -4919,7 +4918,8 @@ void MainWindow::GradationChanged()
     if (m_m->isNull())
     {
         const QString patternPath = VAbstractValApplication::VApp()->GetPatternPath();
-        m_m = OpenMeasurementFile(patternPath, AbsoluteMPath(patternPath, doc->MPath()));
+        QString mPath = AbsoluteMPath(patternPath, doc->MPath());
+        m_m = OpenMeasurementFile(patternPath, mPath);
     }
 
     if (UpdateMeasurements(m_m, m_currentDimensionA, m_currentDimensionB, m_currentDimensionC))

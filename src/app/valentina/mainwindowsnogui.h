@@ -101,6 +101,8 @@ protected:
 
     QGraphicsScene *tempSceneLayout{nullptr}; // NOLINT(misc-non-private-member-variables-in-classes)
 
+    QFileSystemWatcher *m_watcher; // NOLINT(misc-non-private-member-variables-in-classes)
+
     /** @brief pattern container with data (points, arcs, splines, spline paths, variables) */
     VContainer *pattern; // NOLINT(misc-non-private-member-variables-in-classes)
 
@@ -147,7 +149,7 @@ protected:
     auto ExportFMeasurementsToCSVData(const QString &fileName, bool withHeader, int mib, const QChar &separator) const
         -> bool;
 
-    auto OpenMeasurementFile(const QString &patternPath, const QString &path) -> QSharedPointer<VMeasurements>;
+    auto OpenMeasurementFile(const QString &patternPath, QString &path) -> QSharedPointer<VMeasurements>;
 
 private:
     Q_DISABLE_COPY_MOVE(MainWindowsNoGUI) // NOLINT
