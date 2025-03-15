@@ -1318,9 +1318,9 @@ void TKMMainWindow::ShowMData()
     ui->plainTextEditDescription->blockSignals(false);
 
     // Don't block all signal for QLineEdit. Need for correct handle with clear button.
-    disconnect(ui->lineEditName, &QLineEdit::editingFinished, this, &TKMMainWindow::SaveMName);
+    disconnect(ui->lineEditName, &QLineEdit::textEdited, this, &TKMMainWindow::SaveMName);
     ui->lineEditName->setText(m.name);
-    connect(ui->lineEditName, &QLineEdit::editingFinished, this, &TKMMainWindow::SaveMName);
+    connect(ui->lineEditName, &QLineEdit::textEdited, this, &TKMMainWindow::SaveMName);
 
     disconnect(ui->lineEditFullName, &QLineEdit::editingFinished, this, &TKMMainWindow::SaveMFullName);
     ui->lineEditFullName->setText(m.fullName);
@@ -1882,7 +1882,7 @@ void TKMMainWindow::InitWindow()
     connect(ui->toolButtonBottom, &QToolButton::clicked, this, &TKMMainWindow::MoveBottom);
 
     connect(ui->pushButtonGrow, &QPushButton::clicked, this, &TKMMainWindow::DeployFormula);
-    connect(ui->lineEditName, &QLineEdit::editingFinished, this, &TKMMainWindow::SaveMName);
+    connect(ui->lineEditName, &QLineEdit::textEdited, this, &TKMMainWindow::SaveMName);
     connect(ui->plainTextEditDescription, &QPlainTextEdit::textChanged, this, &TKMMainWindow::SaveMDescription);
     connect(ui->lineEditFullName, &QLineEdit::editingFinished, this, &TKMMainWindow::SaveMFullName);
     connect(ui->lineEditGroup, &QLineEdit::editingFinished, this, &TKMMainWindow::SaveMGroup);
