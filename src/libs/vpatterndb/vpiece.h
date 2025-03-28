@@ -177,6 +177,7 @@ public:
     auto ExternalArea(const VContainer *data) const -> qreal;
     auto SeamLineArea(const VContainer *data) const -> qreal;
 
+    auto SeamMirrorLinePoints(const VContainer *data) const -> QVector<VPointF>;
     auto SeamMirrorLine(const VContainer *data) const -> QLineF;
     auto SeamAllowanceMirrorLine(const VContainer *data) const -> QLineF;
 

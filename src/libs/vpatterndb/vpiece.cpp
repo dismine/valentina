@@ -205,7 +205,14 @@ auto VPiece::FullMainPathPoints(const VContainer *data) const -> QVector<VLayout
     QLineF const mirrorLine = SeamMirrorLine(data);
     if (!mirrorLine.isNull() && IsShowFullPiece())
     {
-        points = VAbstractPiece::FullSeamPath(points, mirrorLine, GetName());
+        QString mirrorP1Label;
+        QString mirrorP2Label;
+        if (const QVector<VPointF> mirrorLinePoints = SeamMirrorLinePoints(data); mirrorLinePoints.size() >= 2)
+        {
+            mirrorP1Label = mirrorLinePoints.constFirst().name();
+            mirrorP2Label = mirrorLinePoints.constLast().name();
+        }
+        points = VAbstractPiece::FullSeamPath(points, mirrorLine, GetName(), mirrorP1Label, mirrorP2Label);
     }
 
     points = CheckLoops(CorrectEquidistantPoints(points)); // A path can contains loops
@@ -859,10 +866,17 @@ auto VPiece::FullSeamAllowancePointsWithRotation(const VContainer *data, vsizety
 {
     QVector<VLayoutPoint> points = SeamAllowancePointsWithRotation(data, makeFirst);
 
-    QLineF const mirrorLine = SeamAllowanceMirrorLine(data);
-    if (!mirrorLine.isNull() && IsShowFullPiece())
+    if (QLineF const mirrorLine = SeamAllowanceMirrorLine(data); !mirrorLine.isNull() && IsShowFullPiece())
     {
-        points = VAbstractPiece::FullSeamAllowancePath(points, mirrorLine, GetName());
+        QString mirrorP1Label;
+        QString mirrorP2Label;
+        if (const QVector<VPointF> mirrorLinePoints = SeamMirrorLinePoints(data); mirrorLinePoints.size() >= 2)
+        {
+            mirrorP1Label = mirrorLinePoints.constFirst().name();
+            mirrorP2Label = mirrorLinePoints.constLast().name();
+        }
+
+        points = VAbstractPiece::FullSeamAllowancePath(points, mirrorLine, GetName(), mirrorP1Label, mirrorP2Label);
         points = CheckLoops(CorrectEquidistantPoints(points)); // A path can contains loops
     }
 
@@ -1694,12 +1708,10 @@ auto VPiece::SeamLineArea(const VContainer *data) const -> qreal
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-auto VPiece::SeamMirrorLine(const VContainer *data) const -> QLineF
+auto VPiece::SeamMirrorLinePoints(const VContainer *data) const -> QVector<VPointF>
 {
-    Q_UNUSED(data);
-
-    if (d->m_mirrorLineStartPoint == d->m_mirrorLineEndPoint || d->m_mirrorLineStartPoint == NULL_ID ||
-        d->m_mirrorLineEndPoint == NULL_ID)
+    if (d->m_mirrorLineStartPoint == d->m_mirrorLineEndPoint || d->m_mirrorLineStartPoint == NULL_ID
+        || d->m_mirrorLineEndPoint == NULL_ID)
     {
         return {};
     }
@@ -1709,12 +1721,24 @@ auto VPiece::SeamMirrorLine(const VContainer *data) const -> QLineF
         const QSharedPointer<VPointF> startPoint = data->GeometricObject<VPointF>(d->m_mirrorLineStartPoint);
         const QSharedPointer<VPointF> endPoint = data->GeometricObject<VPointF>(d->m_mirrorLineEndPoint);
 
-        return {startPoint->toQPointF(), endPoint->toQPointF()};
+        return {*startPoint, *endPoint};
     }
     catch (const VExceptionBadId &)
     {
         return {};
     }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+auto VPiece::SeamMirrorLine(const VContainer *data) const -> QLineF
+{
+    const QVector<VPointF> points = SeamMirrorLinePoints(data);
+    if (points.size() < 2)
+    {
+        return {};
+    }
+
+    return {points.constFirst().toQPointF(), points.constLast().toQPointF()};
 }
 
 //---------------------------------------------------------------------------------------------------------------------

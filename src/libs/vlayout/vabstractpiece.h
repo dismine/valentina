@@ -190,11 +190,18 @@ public:
 
     template <class T> static auto MirrorPath(const QVector<T> &points, const QLineF &mirrorLine) -> QVector<T>;
 
-    template <class T>
-    static auto FullSeamPath(QVector<T> points, const QLineF &mirrorLine, const QString &pieceName) -> QVector<T>;
-    template <class T>
-    static auto FullSeamAllowancePath(const QVector<T> &points, QLineF mirrorLine, const QString &pieceName)
-        -> QVector<T>;
+    template<class T>
+    static auto FullSeamPath(QVector<T> points,
+                             const QLineF &mirrorLine,
+                             const QString &pieceName,
+                             const QString &mirrorP1Label = QString(),
+                             const QString &mirrorP2Label = QString()) -> QVector<T>;
+    template<class T>
+    static auto FullSeamAllowancePath(const QVector<T> &points,
+                                      QLineF mirrorLine,
+                                      const QString &pieceName,
+                                      const QString &mirrorP1Label = QString(),
+                                      const QString &mirrorP2Label = QString()) -> QVector<T>;
 
     template <class T>
     static auto MapVector(QVector<T> points, const QTransform &matrix, bool mirror = false) -> QVector<T>;
@@ -863,9 +870,12 @@ inline auto VAbstractPiece::MirrorPath<VLayoutPoint>(const QVector<VLayoutPoint>
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-template <class T>
-inline auto VAbstractPiece::FullSeamPath(QVector<T> points, const QLineF &mirrorLine, const QString &pieceName)
-    -> QVector<T>
+template<class T>
+inline auto VAbstractPiece::FullSeamPath(QVector<T> points,
+                                         const QLineF &mirrorLine,
+                                         const QString &pieceName,
+                                         const QString &mirrorP1Label,
+                                         const QString &mirrorP2Label) -> QVector<T>
 {
     // DumpVector(points, QStringLiteral("input.json.XXXXXX")); // Uncomment for dumping test data
 
@@ -901,7 +911,10 @@ inline auto VAbstractPiece::FullSeamPath(QVector<T> points, const QLineF &mirror
         QVector<T> sub2;
         if (!VAbstractPiece::SubdividePath(points, mirrorLine.p1(), sub1, sub2))
         {
-            const QString errorMsg = QObject::tr("Piece '%1'. Unable to generate full seam path.").arg(pieceName);
+            const QString errorMsg = !mirrorP1Label.isEmpty()
+                                         ? QObject::tr("Piece '%1'. Unable to generate full seam path at %2.")
+                                               .arg(pieceName, mirrorP1Label)
+                                         : QObject::tr("Piece '%1'. Unable to generate full seam path.").arg(pieceName);
             VAbstractApplication::VApp()->IsPedantic()
                 ? throw VException(errorMsg)
                 : qWarning() << VAbstractApplication::warningMessageSignature + errorMsg;
@@ -912,7 +925,10 @@ inline auto VAbstractPiece::FullSeamPath(QVector<T> points, const QLineF &mirror
         QVector<T> sub4;
         if (!VAbstractPiece::SubdividePath(points, mirrorLine.p2(), sub3, sub4))
         {
-            const QString errorMsg = QObject::tr("Piece '%1'. Unable to generate full seam path.").arg(pieceName);
+            const QString errorMsg = !mirrorP2Label.isEmpty()
+                                         ? QObject::tr("Piece '%1'. Unable to generate full seam path at %2.")
+                                               .arg(pieceName, mirrorP2Label)
+                                         : QObject::tr("Piece '%1'. Unable to generate full seam path.").arg(pieceName);
             VAbstractApplication::VApp()->IsPedantic()
                 ? throw VException(errorMsg)
                 : qWarning() << VAbstractApplication::warningMessageSignature + errorMsg;
@@ -932,9 +948,12 @@ inline auto VAbstractPiece::FullSeamPath(QVector<T> points, const QLineF &mirror
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-template <class T>
-inline auto VAbstractPiece::FullSeamAllowancePath(const QVector<T> &points, QLineF mirrorLine, const QString &pieceName)
-    -> QVector<T>
+template<class T>
+inline auto VAbstractPiece::FullSeamAllowancePath(const QVector<T> &points,
+                                                  QLineF mirrorLine,
+                                                  const QString &pieceName,
+                                                  const QString &mirrorP1Label,
+                                                  const QString &mirrorP2Label) -> QVector<T>
 {
     // DumpVector(points, QStringLiteral("input.json.XXXXXX")); // Uncomment for dumping test data
 
@@ -958,7 +977,11 @@ inline auto VAbstractPiece::FullSeamAllowancePath(const QVector<T> &points, QLin
     QVector<T> sub2;
     if (!VAbstractPiece::SubdividePath(points, mirrorLine.p1(), sub1, sub2))
     {
-        const QString errorMsg = QObject::tr("Piece '%1'. Unable to generate full seam allowance path.").arg(pieceName);
+        const QString errorMsg = !mirrorP1Label.isEmpty()
+                                     ? QObject::tr("Piece '%1'. Unable to generate full seam allowance path at %2.")
+                                           .arg(pieceName, mirrorP1Label)
+                                     : QObject::tr("Piece '%1'. Unable to generate full seam allowance path.")
+                                           .arg(pieceName);
         VAbstractApplication::VApp()->IsPedantic()
             ? throw VException(errorMsg)
             : qWarning() << VAbstractApplication::warningMessageSignature + errorMsg;
@@ -974,7 +997,11 @@ inline auto VAbstractPiece::FullSeamAllowancePath(const QVector<T> &points, QLin
     QVector<T> sub4;
     if (!VAbstractPiece::SubdividePath(sub2, mirrorLine.p2(), sub3, sub4))
     {
-        const QString errorMsg = QObject::tr("Piece '%1'. Unable to generate full seam allowance path.").arg(pieceName);
+        const QString errorMsg = !mirrorP2Label.isEmpty()
+                                     ? QObject::tr("Piece '%1'. Unable to generate full seam allowance path at %2.")
+                                           .arg(pieceName, mirrorP2Label)
+                                     : QObject::tr("Piece '%1'. Unable to generate full seam allowance path.")
+                                           .arg(pieceName);
         VAbstractApplication::VApp()->IsPedantic()
             ? throw VException(errorMsg)
             : qWarning() << VAbstractApplication::warningMessageSignature + errorMsg;
