@@ -128,6 +128,8 @@ private:
     auto ProcessTextLine(
         const TextLine &tl, QPainter *painter, const QRectF &boundingRect, qreal &iY, int iW, bool textAsPaths) const
         -> bool;
+    void DrawTextAsPlain(
+        const TextLine &tl, const QFont &fnt, int iW, qreal lineHeight, QPainter *painter, qreal iY) const;
 };
 
 #endif // VTEXTGRAPHICSITEM_H

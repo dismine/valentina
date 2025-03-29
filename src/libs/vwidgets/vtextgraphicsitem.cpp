@@ -49,6 +49,7 @@
 #include "../vmisc/svgfont/vsvgfont.h"
 #include "../vmisc/svgfont/vsvgfontdatabase.h"
 #include "../vmisc/vabstractvalapplication.h"
+#include "../vwidgets/global.h"
 #include "theme/vscenestylesheet.h"
 #include "vtextgraphicsitem.h"
 
@@ -187,15 +188,6 @@ auto CalculateTextAlignment(const TextLine &tl,
         return boundingRect.width() - fm.horizontalAdvance(qsText);
     }
     return 0;
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-void DrawTextAsPlain(const TextLine &tl, const QFont &fnt, int iW, qreal lineHeight, QPainter *painter, qreal iY)
-{
-    painter->save();
-    painter->setFont(fnt);
-    painter->drawText(QRectF(0, iY, iW, lineHeight * 2), static_cast<int>(tl.m_eAlign), tl.m_qsText);
-    painter->restore();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -978,7 +970,7 @@ auto VTextGraphicsItem::ProcessTextLine(
         lineHeight = boundingRect.height() - iY;
     }
 
-    if (textAsPaths)
+    if (textAsPaths || (fnt.pointSize() * SceneScale(this->scene()) < minVisibleFontSize))
     {
         DrawTextAsPaths(tl, fnt, fm, boundingRect, iY, painter);
     }
@@ -996,4 +988,17 @@ auto VTextGraphicsItem::ProcessTextLine(
 
     iY = nextStep + m_tm.GetSpacing();
     return true;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VTextGraphicsItem::DrawTextAsPlain(
+    const TextLine &tl, const QFont &fnt, int iW, qreal lineHeight, QPainter *painter, qreal iY) const
+{
+    if (fnt.pointSize() * SceneScale(this->scene()) >= minVisibleFontSize)
+    {
+        painter->save();
+        painter->setFont(fnt);
+        painter->drawText(QRectF(0, iY, iW, lineHeight * 2), static_cast<int>(tl.m_eAlign), tl.m_qsText);
+        painter->restore();
+    }
 }

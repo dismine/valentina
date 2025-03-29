@@ -36,7 +36,7 @@
 #include <QGraphicsSceneMouseEvent>
 #include <QGraphicsView>
 
-const qreal minVisibleFontSize = 5;
+const qreal minVisibleFontSize = 4;
 
 extern auto qt_regionToPath(const QRegion &region) -> QPainterPath;
 

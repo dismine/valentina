@@ -93,7 +93,8 @@ void VGraphicsSimpleTextItem::paint(QPainter *painter, const QStyleOptionGraphic
     QFont font = this->font();
     if (font.pointSize() != VAbstractApplication::VApp()->Settings()->GetPatternLabelFontSize())
     {
-        font.setPointSize(qMax(VAbstractApplication::VApp()->Settings()->GetPatternLabelFontSize(), 6));
+        font.setPointSize(qMax(VAbstractApplication::VApp()->Settings()->GetPatternLabelFontSize(),
+                               static_cast<int>(minVisibleFontSize)));
         setFont(font);
     }
 
@@ -118,6 +119,12 @@ void VGraphicsSimpleTextItem::paint(QPainter *painter, const QStyleOptionGraphic
     {
         VMainGraphicsView::NewSceneRect(scene, view, this);
     }
+
+    if (font.pointSize() * scale < minVisibleFontSize)
+    {
+        return; // smaller font size will cause problems on Windows
+    }
+
     PaintWithFixItemHighlightSelected<QGraphicsSimpleTextItem>(this, painter, option, widget);
 }
 
@@ -125,7 +132,7 @@ void VGraphicsSimpleTextItem::paint(QPainter *painter, const QStyleOptionGraphic
 void VGraphicsSimpleTextItem::SetEnabledState(bool enabled)
 {
     QGraphicsSimpleTextItem::setEnabled(enabled);
-    if (scene())
+    if (scene() != nullptr)
     {
         setBrush(scene()->palette().brush(enabled ? QPalette::Active : QPalette::Disabled, QPalette::Text));
     }
