@@ -7870,12 +7870,12 @@ void MainWindow::ToolSelectDetail()
 void MainWindow::PrintPatternMessage(QEvent *event)
 {
     SCASSERT(event != nullptr)
-    auto *patternMessage =
+    auto *patternMessageEvent =
         static_cast<WarningMessageEvent *>(event); // NOLINT(cppcoreguidelines-pro-type-static-cast-downcast)
 
     QString severity;
 
-    switch (patternMessage->Severity())
+    switch (patternMessageEvent->Severity())
     {
         case QtDebugMsg:
             severity = tr("DEBUG");
@@ -7896,8 +7896,10 @@ void MainWindow::PrintPatternMessage(QEvent *event)
             break;
     }
 
+    const QString patternMessage = patternMessageEvent->Message()
+            .remove(VAbstractValApplication::warningMessageSignature);
     const QString time = QDateTime::currentDateTime().toString(QStringLiteral("hh:mm:ss"));
-    const auto message = QStringLiteral("%1: [%2] %3").arg(time, severity, patternMessage->Message());
+    const auto message = QStringLiteral("%1: [%2] %3").arg(time, severity, patternMessage);
     ui->plainTextEditPatternMessages->appendPlainText(message);
     if (not m_unreadPatternMessage.isNull())
     {
