@@ -145,15 +145,25 @@ auto VToolLineIntersect::Create(VToolLineIntersectInitData initData) -> VToolLin
     QPointF fPoint;
     const QLineF::IntersectType intersect = line1.intersects(line2, &fPoint);
 
-    if (intersect == QLineF::NoIntersection)
+    if (intersect == QLineF::NoIntersection
+        // QLineF::intersects not always accurate on edge cases
+        || (intersect == QLineF::UnboundedIntersection
+            && ((VFuzzyComparePossibleNulls(line1.p1().x(), line1.p2().x())
+                 && VFuzzyComparePossibleNulls(line2.p1().x(), line2.p2().x()))
+                || (VFuzzyComparePossibleNulls(line1.p1().y(), line1.p2().y())
+                    && VFuzzyComparePossibleNulls(line2.p1().y(), line2.p2().y())))))
     {
-        const QString errorMsg =
-            tr("Error calculating point '%1'. Lines (%2;%3) and (%4;%5) have no point of "
-               "intersection")
-                .arg(initData.name, p1Line1->name(), p2Line1->name(), p1Line2->name(), p2Line2->name());
+        const QString errorMsg = tr("Error calculating point '%1'. Lines (%2;%3) and (%4;%5) have no point of "
+                                    "intersection")
+                                     .arg(initData.name,
+                                          p1Line1->name(),
+                                          p2Line1->name(),
+                                          p1Line2->name(),
+                                          p2Line2->name());
         VAbstractApplication::VApp()->IsPedantic()
             ? throw VExceptionObjectError(errorMsg)
             : qWarning() << VAbstractValApplication::warningMessageSignature + errorMsg;
+        fPoint = QPointF();
     }
 
     auto *p = new VPointF(fPoint, initData.name, initData.mx, initData.my);

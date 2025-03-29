@@ -45,6 +45,7 @@
 - Tape app. Enable adding multiple images at once.
 - Tape app. Adding measurement image in known measurement database by drag and drop.
 - Fixed validation of Label language. Missed support for Czech alphabet.
+- [smart-pattern/valentina#223] Incorrect calculation of the intersection point of segments.
 
 # Valentina 0.7.53 June 25, 2024
 - Fix layout sheet export with empty name.

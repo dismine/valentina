@@ -33,7 +33,6 @@
 #include <QLineF>
 #include <QPointF>
 #include <QSharedPointer>
-#include <new>
 
 #include "../vgeometry/vpointf.h"
 #include "../visualization.h"
@@ -109,6 +108,15 @@ void VisToolLineIntersect::RefreshGeometry()
 
                     if (intersect == QLineF::UnboundedIntersection || intersect == QLineF::BoundedIntersection)
                     {
+                        // QLineF::intersects not always accurate on edge cases
+                        if (intersect == QLineF::UnboundedIntersection
+                            && ((VFuzzyComparePossibleNulls(l1.p1().x(), l1.p2().x())
+                                 && VFuzzyComparePossibleNulls(l2.p1().x(), l2.p2().x()))
+                                || (VFuzzyComparePossibleNulls(l1.p1().y(), l1.p2().y())
+                                    && VFuzzyComparePossibleNulls(l2.p1().y(), l2.p2().y()))))
+                        {
+                            fPoint = QPointF();
+                        }
                         DrawPoint(m_point, fPoint);
                     }
                 }
