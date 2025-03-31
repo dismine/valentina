@@ -117,6 +117,9 @@ public:
     auto GetShowGrainline() const -> bool;
     void SetShowGrainline(bool value);
 
+    auto GetHideRuler() const -> bool;
+    void SetHideRuler(bool value);
+
 private:
     Q_DISABLE_COPY_MOVE(VPSettings) // NOLINT
 };

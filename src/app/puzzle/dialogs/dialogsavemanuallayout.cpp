@@ -467,6 +467,32 @@ auto DialogSaveManualLayout::IsTilesScheme() const -> bool
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+void DialogSaveManualLayout::SetHideRuler(bool value)
+{
+    switch (Format())
+    {
+        case LayoutExportFormats::PDFTiled:
+            ui->checkBoxHideRuler->setChecked(value);
+            break;
+        default:
+            ui->checkBoxHideRuler->setChecked(false);
+            break;
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+auto DialogSaveManualLayout::IsHideRuler() const -> bool
+{
+    switch (Format())
+    {
+        case LayoutExportFormats::PDFTiled:
+            return ui->checkBoxHideRuler->isChecked();
+        default:
+            return false;
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 void DialogSaveManualLayout::showEvent(QShowEvent *event)
 {
     QDialog::showEvent(event);
@@ -583,6 +609,7 @@ void DialogSaveManualLayout::ShowExample()
     ui->checkBoxShowGrainline->setVisible(false);
     ui->labelDxfCompatibility->setVisible(false);
     ui->comboBoxDxfCompatibility->setVisible(false);
+    ui->checkBoxHideRuler->setVisible(false);
 
     const bool editableTextAsPaths = !settings->GetSingleLineFonts() && !settings->GetSingleStrokeOutlineFont();
 
@@ -599,6 +626,7 @@ void DialogSaveManualLayout::ShowExample()
             ui->checkBoxTilesScheme->setVisible(true);
             ui->checkBoxExportUnified->setVisible(m_count > 1);
             ui->checkBoxShowGrainline->setVisible(true);
+            ui->checkBoxHideRuler->setVisible(true);
             break;
         case LayoutExportFormats::PDF:
         case LayoutExportFormats::PS:
@@ -651,8 +679,8 @@ void DialogSaveManualLayout::ReadSettings()
         qDebug() << qUtf8Printable(e.ErrorMessage());
     }
     SetShowGrainline(settings->GetShowGrainline());
-
     SetDxfCompatibility(static_cast<DXFApparelCompatibility>(settings->GetDxfCompatibility()));
+    SetHideRuler(settings->GetHideRuler());
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -666,8 +694,8 @@ void DialogSaveManualLayout::WriteSettings() const
     VPSettings *settings = VPApplication::VApp()->PuzzleSettings();
     settings->SetLayoutExportFormat(static_cast<qint8>(Format()));
     settings->SetShowGrainline(IsShowGrainline());
-
     settings->SetDxfCompatibility(static_cast<qint8>(DxfCompatibility()));
+    settings->SetHideRuler(IsHideRuler());
 }
 
 //---------------------------------------------------------------------------------------------------------------------

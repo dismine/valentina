@@ -75,6 +75,9 @@ public:
     void SetTilesScheme(bool value);
     auto IsTilesScheme() const -> bool;
 
+    void SetHideRuler(bool value);
+    auto IsHideRuler() const -> bool;
+
 protected:
     void showEvent(QShowEvent *event) override;
 

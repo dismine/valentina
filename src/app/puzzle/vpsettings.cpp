@@ -76,6 +76,7 @@ Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingDxfCompatibility, ("layout/dxfCo
 Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingLayoutLineWidth, ("layout/lineWidth"_L1))         // NOLINT
 Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingLayoutShowGrainline, ("layout/showGrainline"_L1)) // NOLINT
 Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingPathsRawLayoutData, ("paths/rawLatoutData"_L1))   // NOLINT
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingLayoutHideRuler, ("layout/hideRuler"_L1))         // NOLINT
 
 QT_WARNING_POP
 
@@ -412,4 +413,16 @@ auto VPSettings::GetShowGrainline() const -> bool
 void VPSettings::SetShowGrainline(bool value)
 {
     setValue(*settingLayoutShowGrainline, value);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+auto VPSettings::GetHideRuler() const -> bool
+{
+    return value(*settingLayoutHideRuler, false).toBool();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VPSettings::SetHideRuler(bool value)
+{
+    setValue(*settingLayoutHideRuler, value);
 }

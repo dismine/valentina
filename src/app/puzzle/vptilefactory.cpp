@@ -219,7 +219,8 @@ void VPTileFactory::RefreshWatermarkData()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VPTileFactory::drawTile(QPainter *painter, QPrinter *printer, const VPSheetPtr &sheet, int row, int col)
+void VPTileFactory::drawTile(
+    QPainter *painter, QPrinter *printer, const VPSheetPtr &sheet, int row, int col, bool showRuler)
 {
     SCASSERT(painter != nullptr)
     SCASSERT(printer != nullptr)
@@ -290,7 +291,10 @@ void VPTileFactory::drawTile(QPainter *painter, QPrinter *printer, const VPSheet
         DrawSolidBottomLine(painter, col, nbCol);
     }
 
-    DrawRuler(painter, xscale);
+    if (showRuler)
+    {
+        DrawRuler(painter, xscale);
+    }
     DrawWatermark(painter);
 
     if (col < nbCol - 1)

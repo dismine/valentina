@@ -318,6 +318,7 @@ struct VPExportData
     bool exportUnified{true};
     bool showTilesScheme{false};
     bool showGrainline{true};
+    bool hideRuler{false};
 };
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -2781,8 +2782,11 @@ void VPMainWindow::ExportPdfTiledFile(const VPExportData &data)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-auto VPMainWindow::GeneratePdfTiledFile(const VPSheetPtr &sheet, const VPExportData &data, QPainter *painter,
-                                        const QSharedPointer<QPrinter> &printer, bool &firstPage) -> bool
+auto VPMainWindow::GeneratePdfTiledFile(const VPSheetPtr &sheet,
+                                        const VPExportData &data,
+                                        QPainter *painter,
+                                        const QSharedPointer<QPrinter> &printer,
+                                        bool &firstPage) -> bool
 {
     SCASSERT(not sheet.isNull())
     SCASSERT(painter != nullptr)
@@ -2849,7 +2853,7 @@ auto VPMainWindow::GeneratePdfTiledFile(const VPSheetPtr &sheet, const VPExportD
                 }
             }
 
-            m_layout->TileFactory()->drawTile(painter, printer.data(), sheet, row, col);
+            m_layout->TileFactory()->drawTile(painter, printer.data(), sheet, row, col, !data.hideRuler);
 
             firstPage = false;
         }
@@ -4407,6 +4411,7 @@ void VPMainWindow::on_ExportLayout()
     data.showTilesScheme = dialog.IsTilesScheme();
     data.showGrainline = dialog.IsShowGrainline();
     data.dxfCompatibility = dialog.DxfCompatibility();
+    data.hideRuler = dialog.IsHideRuler();
 
     ExportData(data);
 }
@@ -4459,6 +4464,7 @@ void VPMainWindow::on_ExportSheet()
     data.showTilesScheme = dialog.IsTilesScheme();
     data.showGrainline = dialog.IsShowGrainline();
     data.dxfCompatibility = dialog.DxfCompatibility();
+    data.hideRuler = dialog.IsHideRuler();
 
     ExportData(data);
 }

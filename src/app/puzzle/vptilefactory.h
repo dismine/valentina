@@ -54,8 +54,9 @@ public:
      * @param painter pointer to painter
      * @param row current row
      * @param col current column
+     * @param showRuler show ruler at the bottom of page
      */
-    void drawTile(QPainter *painter, QPrinter *printer, const VPSheetPtr &sheet, int row, int col);
+    void drawTile(QPainter *painter, QPrinter *printer, const VPSheetPtr &sheet, int row, int col, bool showRuler = true);
 
     /**
      * @brief refreshTileInfos Resfreshes the tile infos (m_drawingAreaHeight, m_drawingAreaWidth)
