@@ -143,15 +143,7 @@ auto VToolLineIntersect::Create(VToolLineIntersectInitData initData) -> VToolLin
     QLineF const line1(static_cast<QPointF>(*p1Line1), static_cast<QPointF>(*p2Line1));
     QLineF const line2(static_cast<QPointF>(*p1Line2), static_cast<QPointF>(*p2Line2));
     QPointF fPoint;
-    const QLineF::IntersectType intersect = line1.intersects(line2, &fPoint);
-
-    if (intersect == QLineF::NoIntersection
-        // QLineF::intersects not always accurate on edge cases
-        || (intersect == QLineF::UnboundedIntersection
-            && ((VFuzzyComparePossibleNulls(line1.p1().x(), line1.p2().x())
-                 && VFuzzyComparePossibleNulls(line2.p1().x(), line2.p2().x()))
-                || (VFuzzyComparePossibleNulls(line1.p1().y(), line1.p2().y())
-                    && VFuzzyComparePossibleNulls(line2.p1().y(), line2.p2().y())))))
+    if (VGObject::LinesIntersect(line1, line2, &fPoint) == QLineF::NoIntersection)
     {
         const QString errorMsg = tr("Error calculating point '%1'. Lines (%2;%3) and (%4;%5) have no point of "
                                     "intersection")

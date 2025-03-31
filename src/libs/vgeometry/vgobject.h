@@ -121,6 +121,9 @@ public:
 
     static auto FlippingMatrix(const QLineF &axis) -> QTransform;
 
+    static auto LinesIntersect(const QLineF &line1, const QLineF &line2, QPointF *intersectionPoint = nullptr)
+        -> QLineF::IntersectionType;
+
 private:
     QSharedDataPointer<VGObjectData> d;
 

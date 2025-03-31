@@ -719,3 +719,42 @@ auto VGObject::FlippingMatrix(const QLineF &axis) -> QTransform
 
     return matrix;
 }
+
+//---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief Determines the intersection type between two QLineF lines, with handling for floating-point inaccuracies.
+ * 
+ * This function wraps QLineF::intersects to address an edge case where parallel lines can be incorrectly detected
+ * as intersecting due to floating-point precision errors. In particular, QLineF::intersects may return
+ * QLineF::UnboundedIntersection when two lines are nearly parallel, which is inaccurate.
+ * 
+ * To resolve this, we perform a cross-product check to confirm parallelism manually. If the lines are determined 
+ * to be parallel (using a small tolerance to account for floating-point errors), the function returns 
+ * QLineF::NoIntersection instead of UnboundedIntersection.
+ * 
+ * @param line1 The first line segment.
+ * @param line2 The second line segment.
+ * @param intersectionPoint If lines intersect, stores the intersection point (can be nullptr if not needed).
+ * @return QLineF::IntersectionType - The type of intersection (NoIntersection, BoundedIntersection, or 
+ * UnboundedIntersection).
+ */
+auto VGObject::LinesIntersect(const QLineF &line1, const QLineF &line2, QPointF *intersectionPoint)
+    -> QLineF::IntersectionType
+{
+    const auto IsParallel = [](const QLineF &l1, const QLineF &l2, double tolerance = 1e-6)
+    {
+        const QPointF d1 = l1.p2() - l1.p1();
+        const QPointF d2 = l2.p2() - l2.p1();
+        return qAbs(d1.x() * d2.y() - d1.y() * d2.x()) < tolerance;
+    };
+
+    QLineF::IntersectType intersect = line1.intersects(line2, intersectionPoint);
+
+    // Handle edge case where nearly parallel lines are incorrectly detected as intersecting
+    if (intersect == QLineF::UnboundedIntersection && IsParallel(line1, line2))
+    {
+        intersect = QLineF::NoIntersection;
+    }
+
+    return intersect;
+}

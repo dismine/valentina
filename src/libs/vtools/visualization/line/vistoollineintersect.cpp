@@ -104,21 +104,12 @@ void VisToolLineIntersect::RefreshGeometry()
                     QLineF const l1(static_cast<QPointF>(*first), static_cast<QPointF>(*second));
                     QLineF const l2(static_cast<QPointF>(*third), static_cast<QPointF>(*forth));
                     QPointF fPoint;
-                    QLineF::IntersectType const intersect = l1.intersects(l2, &fPoint);
-
-                    if (intersect == QLineF::UnboundedIntersection || intersect == QLineF::BoundedIntersection)
+                    if (VGObject::LinesIntersect(l1, l2, &fPoint) == QLineF::NoIntersection)
                     {
-                        // QLineF::intersects not always accurate on edge cases
-                        if (intersect == QLineF::UnboundedIntersection
-                            && ((VFuzzyComparePossibleNulls(l1.p1().x(), l1.p2().x())
-                                 && VFuzzyComparePossibleNulls(l2.p1().x(), l2.p2().x()))
-                                || (VFuzzyComparePossibleNulls(l1.p1().y(), l1.p2().y())
-                                    && VFuzzyComparePossibleNulls(l2.p1().y(), l2.p2().y()))))
-                        {
-                            fPoint = QPointF();
-                        }
-                        DrawPoint(m_point, fPoint);
+                        fPoint = QPointF();
                     }
+
+                    DrawPoint(m_point, fPoint);
                 }
             }
         }
