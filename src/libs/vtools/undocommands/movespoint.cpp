@@ -52,8 +52,8 @@ MoveSPoint::MoveSPoint(VAbstractPattern *doc, const double &x, const double &y, 
     QDomElement const domElement = doc->FindElementById(id, VAbstractPattern::TagPoint);
     if (domElement.isElement())
     {
-        oldX = VAbstractValApplication::VApp()->toPixel(doc->GetParametrDouble(domElement, AttrX, "0.0"));
-        oldY = VAbstractValApplication::VApp()->toPixel(doc->GetParametrDouble(domElement, AttrY, "0.0"));
+        oldX = VAbstractValApplication::VApp()->toPixel(VDomDocument::GetParametrDouble(domElement, AttrX, "0.0"));
+        oldY = VAbstractValApplication::VApp()->toPixel(VDomDocument::GetParametrDouble(domElement, AttrY, "0.0"));
 
         qCDebug(vUndo, "SPoint oldX %f", oldX);
         qCDebug(vUndo, "SPoint oldY %f", oldY);

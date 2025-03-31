@@ -417,10 +417,10 @@ void VToolLine::ReadToolAttributes(const QDomElement &domElement)
 {
     VDrawTool::ReadToolAttributes(domElement);
 
-    firstPoint = doc->GetParametrUInt(domElement, AttrFirstPoint, NULL_ID_STR);
-    secondPoint = doc->GetParametrUInt(domElement, AttrSecondPoint, NULL_ID_STR);
-    m_lineType = doc->GetParametrString(domElement, AttrTypeLine, TypeLineLine);
-    lineColor = doc->GetParametrString(domElement, AttrLineColor, ColorBlack);
+    firstPoint = VAbstractPattern::GetParametrUInt(domElement, AttrFirstPoint, NULL_ID_STR);
+    secondPoint = VAbstractPattern::GetParametrUInt(domElement, AttrSecondPoint, NULL_ID_STR);
+    m_lineType = VDomDocument::GetParametrString(domElement, AttrTypeLine, TypeLineLine);
+    lineColor = VDomDocument::GetParametrString(domElement, AttrLineColor, ColorBlack);
 }
 
 //---------------------------------------------------------------------------------------------------------------------

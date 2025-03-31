@@ -302,12 +302,12 @@ void VToolLineIntersectAxis::ReadToolAttributes(const QDomElement &domElement)
 {
     VToolLinePoint::ReadToolAttributes(domElement);
 
-    m_lineType = doc->GetParametrString(domElement, AttrTypeLine, TypeLineLine);
-    lineColor = doc->GetParametrString(domElement, AttrLineColor, ColorBlack);
-    basePointId = doc->GetParametrUInt(domElement, AttrBasePoint, NULL_ID_STR);
-    firstPointId = doc->GetParametrUInt(domElement, AttrP1Line, NULL_ID_STR);
-    secondPointId = doc->GetParametrUInt(domElement, AttrP2Line, NULL_ID_STR);
-    formulaAngle = doc->GetParametrString(domElement, AttrAngle, QString());
+    m_lineType = VDomDocument::GetParametrString(domElement, AttrTypeLine, TypeLineLine);
+    lineColor = VDomDocument::GetParametrString(domElement, AttrLineColor, ColorBlack);
+    basePointId = VAbstractPattern::GetParametrUInt(domElement, AttrBasePoint, NULL_ID_STR);
+    firstPointId = VAbstractPattern::GetParametrUInt(domElement, AttrP1Line, NULL_ID_STR);
+    secondPointId = VAbstractPattern::GetParametrUInt(domElement, AttrP2Line, NULL_ID_STR);
+    formulaAngle = VDomDocument::GetParametrString(domElement, AttrAngle, QString());
 }
 
 //---------------------------------------------------------------------------------------------------------------------

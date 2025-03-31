@@ -121,7 +121,7 @@ void PuzzlePreferencesPathPage::EditPath()
             path = VPApplication::VApp()->PuzzleSettings()->GetPathFontCorrections();
             break;
         case 2: // known measurements
-            path = VPApplication::VApp()->PuzzleSettings()->GetDefPathKnownMeasurements();
+            path = VCommonSettings::GetDefPathKnownMeasurements();
             break;
         default:
             break;

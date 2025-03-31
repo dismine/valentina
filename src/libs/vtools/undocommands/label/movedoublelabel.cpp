@@ -61,9 +61,9 @@ MoveDoubleLabel::MoveDoubleLabel(VAbstractPattern *doc, const QPointF &pos, Move
         if (type == MoveDoublePoint::FirstPoint)
         {
             m_oldPos.rx() =
-                    VAbstractValApplication::VApp()->toPixel(doc->GetParametrDouble(domElement, AttrMx1, "0.0"));
+                    VAbstractValApplication::VApp()->toPixel(VDomDocument::GetParametrDouble(domElement, AttrMx1, "0.0"));
             m_oldPos.ry() =
-                    VAbstractValApplication::VApp()->toPixel(doc->GetParametrDouble(domElement, AttrMy1, "0.0"));
+                    VAbstractValApplication::VApp()->toPixel(VDomDocument::GetParametrDouble(domElement, AttrMy1, "0.0"));
 
             qCDebug(vUndo, "Label old Mx1 %f", m_oldPos.x());
             qCDebug(vUndo, "Label old My1 %f", m_oldPos.y());
@@ -71,9 +71,9 @@ MoveDoubleLabel::MoveDoubleLabel(VAbstractPattern *doc, const QPointF &pos, Move
         else
         {
             m_oldPos.rx() =
-                    VAbstractValApplication::VApp()->toPixel(doc->GetParametrDouble(domElement, AttrMx2, "0.0"));
+                    VAbstractValApplication::VApp()->toPixel(VDomDocument::GetParametrDouble(domElement, AttrMx2, "0.0"));
             m_oldPos.ry() =
-                    VAbstractValApplication::VApp()->toPixel(doc->GetParametrDouble(domElement, AttrMy2, "0.0"));
+                    VAbstractValApplication::VApp()->toPixel(VDomDocument::GetParametrDouble(domElement, AttrMy2, "0.0"));
 
             qCDebug(vUndo, "Label old Mx2 %f", m_oldPos.x());
             qCDebug(vUndo, "Label old My2 %f", m_oldPos.y());

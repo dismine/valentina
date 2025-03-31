@@ -200,7 +200,7 @@ auto VUndoCommand::GetDestinationObject(quint32 idTool, quint32 idPoint) const -
                 const QDomElement obj = destObjects.at(i).toElement();
                 if (not obj.isNull() && obj.isElement())
                 {
-                    const quint32 id = doc->GetParametrUInt(obj, AttrIdObject, NULL_ID_STR);
+                    const quint32 id = VAbstractPattern::GetParametrUInt(obj, AttrIdObject, NULL_ID_STR);
                     if (idPoint == id)
                     {
                         return obj;

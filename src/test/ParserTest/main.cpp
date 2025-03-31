@@ -61,5 +61,5 @@ auto main(int argc, char *argv[]) -> int
     qInstallMessageHandler(testMessageOutput);
     qmu::Test::QmuParserTester const pt;
     QTimer::singleShot(0, &pt, &qmu::Test::QmuParserTester::Run);
-    return a.exec();
+    return QCoreApplication::exec();
 }

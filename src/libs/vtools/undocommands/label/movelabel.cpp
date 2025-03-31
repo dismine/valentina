@@ -48,8 +48,8 @@ MoveLabel::MoveLabel(VAbstractPattern *doc, const QPointF &pos, const quint32 &i
     QDomElement const domElement = doc->FindElementById(nodeId, VAbstractPattern::TagPoint);
     if (domElement.isElement())
     {
-        m_oldPos.rx() = VAbstractValApplication::VApp()->toPixel(doc->GetParametrDouble(domElement, AttrMx, "0.0"));
-        m_oldPos.ry() = VAbstractValApplication::VApp()->toPixel(doc->GetParametrDouble(domElement, AttrMy, "0.0"));
+        m_oldPos.rx() = VAbstractValApplication::VApp()->toPixel(VDomDocument::GetParametrDouble(domElement, AttrMx, "0.0"));
+        m_oldPos.ry() = VAbstractValApplication::VApp()->toPixel(VDomDocument::GetParametrDouble(domElement, AttrMy, "0.0"));
 
         qCDebug(vUndo, "Label old Mx %f", m_oldPos.x());
         qCDebug(vUndo, "Label old My %f", m_oldPos.y());

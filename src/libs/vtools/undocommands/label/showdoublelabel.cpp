@@ -62,11 +62,11 @@ ShowDoubleLabel::ShowDoubleLabel(VAbstractPattern *doc, quint32 toolId, quint32 
     {
         if (type == ShowDoublePoint::FirstPoint)
         {
-            m_oldVisible = doc->GetParametrBool(domElement, AttrShowLabel1, trueStr);
+            m_oldVisible = VDomDocument::GetParametrBool(domElement, AttrShowLabel1, trueStr);
         }
         else
         {
-            m_oldVisible = doc->GetParametrBool(domElement, AttrShowLabel2, trueStr);
+            m_oldVisible = VDomDocument::GetParametrBool(domElement, AttrShowLabel2, trueStr);
         }
     }
     else

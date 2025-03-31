@@ -54,7 +54,7 @@ OperationShowLabel::OperationShowLabel(VAbstractPattern *doc, quint32 idTool, qu
     const QDomElement element = GetDestinationObject(m_idTool, nodeId);
     if (element.isElement())
     {
-        m_oldVisible = doc->GetParametrBool(element, AttrShowLabel, trueStr);
+        m_oldVisible = VDomDocument::GetParametrBool(element, AttrShowLabel, trueStr);
     }
     else
     {

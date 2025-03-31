@@ -55,8 +55,8 @@ MovePiece::MovePiece(VAbstractPattern *doc, const double &x, const double &y, co
     QDomElement const domElement = doc->FindElementById(id, VAbstractPattern::TagDetail);
     if (domElement.isElement())
     {
-        m_oldX = VAbstractValApplication::VApp()->toPixel(doc->GetParametrDouble(domElement, AttrMx, "0.0"));
-        m_oldY = VAbstractValApplication::VApp()->toPixel(doc->GetParametrDouble(domElement, AttrMy, "0.0"));
+        m_oldX = VAbstractValApplication::VApp()->toPixel(VDomDocument::GetParametrDouble(domElement, AttrMx, "0.0"));
+        m_oldY = VAbstractValApplication::VApp()->toPixel(VDomDocument::GetParametrDouble(domElement, AttrMy, "0.0"));
     }
     else
     {

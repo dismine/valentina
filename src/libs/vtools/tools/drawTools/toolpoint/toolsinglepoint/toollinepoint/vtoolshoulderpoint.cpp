@@ -307,12 +307,12 @@ void VToolShoulderPoint::ReadToolAttributes(const QDomElement &domElement)
 {
     VToolLinePoint::ReadToolAttributes(domElement);
 
-    m_lineType = doc->GetParametrString(domElement, AttrTypeLine, TypeLineLine);
-    lineColor = doc->GetParametrString(domElement, AttrLineColor, ColorBlack);
-    formulaLength = doc->GetParametrString(domElement, AttrLength, QString());
-    basePointId = doc->GetParametrUInt(domElement, AttrP1Line, NULL_ID_STR);
-    p2Line = doc->GetParametrUInt(domElement, AttrP2Line, NULL_ID_STR);
-    pShoulder = doc->GetParametrUInt(domElement, AttrPShoulder, NULL_ID_STR);
+    m_lineType = VDomDocument::GetParametrString(domElement, AttrTypeLine, TypeLineLine);
+    lineColor = VDomDocument::GetParametrString(domElement, AttrLineColor, ColorBlack);
+    formulaLength = VDomDocument::GetParametrString(domElement, AttrLength, QString());
+    basePointId = VAbstractPattern::GetParametrUInt(domElement, AttrP1Line, NULL_ID_STR);
+    p2Line = VAbstractPattern::GetParametrUInt(domElement, AttrP2Line, NULL_ID_STR);
+    pShoulder = VAbstractPattern::GetParametrUInt(domElement, AttrPShoulder, NULL_ID_STR);
 }
 
 //---------------------------------------------------------------------------------------------------------------------

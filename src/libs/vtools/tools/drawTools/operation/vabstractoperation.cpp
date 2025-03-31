@@ -708,7 +708,7 @@ void VAbstractOperation::ReadToolAttributes(const QDomElement &domElement)
 
     source = ExtractSourceData(domElement);
     destination = ExtractDestinationData(domElement);
-    suffix = doc->GetParametrString(domElement, AttrSuffix);
+    suffix = VDomDocument::GetParametrString(domElement, AttrSuffix);
 }
 
 //---------------------------------------------------------------------------------------------------------------------

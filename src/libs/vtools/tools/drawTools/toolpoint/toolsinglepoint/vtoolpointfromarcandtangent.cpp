@@ -318,9 +318,10 @@ void VToolPointFromArcAndTangent::ReadToolAttributes(const QDomElement &domEleme
 {
     VToolSinglePoint::ReadToolAttributes(domElement);
 
-    arcId = doc->GetParametrUInt(domElement, AttrArc, NULL_ID_STR);
-    tangentPointId = doc->GetParametrUInt(domElement, AttrTangent, NULL_ID_STR);
-    crossPoint = static_cast<CrossCirclesPoint>(doc->GetParametrUInt(domElement, AttrCrossPoint, QChar('1')));
+    arcId = VAbstractPattern::GetParametrUInt(domElement, AttrArc, NULL_ID_STR);
+    tangentPointId = VAbstractPattern::GetParametrUInt(domElement, AttrTangent, NULL_ID_STR);
+    crossPoint = static_cast<CrossCirclesPoint>(
+        VAbstractPattern::GetParametrUInt(domElement, AttrCrossPoint, QChar('1')));
 }
 
 //---------------------------------------------------------------------------------------------------------------------

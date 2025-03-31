@@ -346,11 +346,12 @@ void VToolPointOfIntersectionCircles::ReadToolAttributes(const QDomElement &domE
 {
     VToolSinglePoint::ReadToolAttributes(domElement);
 
-    firstCircleCenterId = doc->GetParametrUInt(domElement, AttrC1Center, NULL_ID_STR);
-    secondCircleCenterId = doc->GetParametrUInt(domElement, AttrC2Center, NULL_ID_STR);
-    firstCircleRadius = doc->GetParametrString(domElement, AttrC1Radius);
-    secondCircleRadius = doc->GetParametrString(domElement, AttrC2Radius);
-    crossPoint = static_cast<CrossCirclesPoint>(doc->GetParametrUInt(domElement, AttrCrossPoint, QChar('1')));
+    firstCircleCenterId = VAbstractPattern::GetParametrUInt(domElement, AttrC1Center, NULL_ID_STR);
+    secondCircleCenterId = VAbstractPattern::GetParametrUInt(domElement, AttrC2Center, NULL_ID_STR);
+    firstCircleRadius = VDomDocument::GetParametrString(domElement, AttrC1Radius);
+    secondCircleRadius = VDomDocument::GetParametrString(domElement, AttrC2Radius);
+    crossPoint = static_cast<CrossCirclesPoint>(
+        VAbstractPattern::GetParametrUInt(domElement, AttrCrossPoint, QChar('1')));
 }
 
 //---------------------------------------------------------------------------------------------------------------------

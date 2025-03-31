@@ -227,8 +227,8 @@ void VToolFlippingByLine::ReadToolAttributes(const QDomElement &domElement)
 {
     VAbstractFlipping::ReadToolAttributes(domElement);
 
-    m_firstLinePointId = doc->GetParametrUInt(domElement, AttrP1Line, NULL_ID_STR);
-    m_secondLinePointId = doc->GetParametrUInt(domElement, AttrP2Line, NULL_ID_STR);
+    m_firstLinePointId = VAbstractPattern::GetParametrUInt(domElement, AttrP1Line, NULL_ID_STR);
+    m_secondLinePointId = VAbstractPattern::GetParametrUInt(domElement, AttrP2Line, NULL_ID_STR);
 }
 
 //---------------------------------------------------------------------------------------------------------------------

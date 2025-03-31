@@ -376,8 +376,8 @@ void VToolRotation::ReadToolAttributes(const QDomElement &domElement)
 {
     VAbstractOperation::ReadToolAttributes(domElement);
 
-    origPointId = doc->GetParametrUInt(domElement, AttrCenter, NULL_ID_STR);
-    formulaAngle = doc->GetParametrString(domElement, AttrAngle, QChar('0'));
+    origPointId = VAbstractPattern::GetParametrUInt(domElement, AttrCenter, NULL_ID_STR);
+    formulaAngle = VDomDocument::GetParametrString(domElement, AttrAngle, QChar('0'));
 }
 
 //---------------------------------------------------------------------------------------------------------------------

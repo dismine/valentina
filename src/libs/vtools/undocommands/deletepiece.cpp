@@ -68,7 +68,9 @@ DeletePiece::DeletePiece(VAbstractPattern *doc, quint32 id, const VContainer &da
         else
         {
             // Better save id of previous detail instead of reference to node.
-            m_siblingId = doc->GetParametrUInt(previousDetail.toElement(), VDomDocument::AttrId, NULL_ID_STR);
+            m_siblingId = VAbstractPattern::GetParametrUInt(previousDetail.toElement(),
+                                                            VDomDocument::AttrId,
+                                                            NULL_ID_STR);
         }
     }
     else

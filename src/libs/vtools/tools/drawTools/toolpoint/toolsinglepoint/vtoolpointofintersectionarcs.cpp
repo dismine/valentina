@@ -339,9 +339,10 @@ void VToolPointOfIntersectionArcs::ReadToolAttributes(const QDomElement &domElem
 {
     VToolSinglePoint::ReadToolAttributes(domElement);
 
-    firstArcId = doc->GetParametrUInt(domElement, AttrFirstArc, NULL_ID_STR);
-    secondArcId = doc->GetParametrUInt(domElement, AttrSecondArc, NULL_ID_STR);
-    crossPoint = static_cast<CrossCirclesPoint>(doc->GetParametrUInt(domElement, AttrCrossPoint, QChar('1')));
+    firstArcId = VAbstractPattern::GetParametrUInt(domElement, AttrFirstArc, NULL_ID_STR);
+    secondArcId = VAbstractPattern::GetParametrUInt(domElement, AttrSecondArc, NULL_ID_STR);
+    crossPoint = static_cast<CrossCirclesPoint>(
+        VAbstractPattern::GetParametrUInt(domElement, AttrCrossPoint, QChar('1')));
 }
 
 //---------------------------------------------------------------------------------------------------------------------

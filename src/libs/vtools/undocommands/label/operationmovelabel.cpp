@@ -53,8 +53,8 @@ OperationMoveLabel::OperationMoveLabel(quint32 idTool, VAbstractPattern *doc, co
     const QDomElement element = GetDestinationObject(m_idTool, nodeId);
     if (element.isElement())
     {
-        m_oldPos.rx() = VAbstractValApplication::VApp()->toPixel(doc->GetParametrDouble(element, AttrMx, "0.0"));
-        m_oldPos.ry() = VAbstractValApplication::VApp()->toPixel(doc->GetParametrDouble(element, AttrMy, "0.0"));
+        m_oldPos.rx() = VAbstractValApplication::VApp()->toPixel(VDomDocument::GetParametrDouble(element, AttrMx, "0.0"));
+        m_oldPos.ry() = VAbstractValApplication::VApp()->toPixel(VDomDocument::GetParametrDouble(element, AttrMy, "0.0"));
 
         qCDebug(vUndo, "Label old Mx %f", m_oldPos.x());
         qCDebug(vUndo, "Label old My %f", m_oldPos.y());

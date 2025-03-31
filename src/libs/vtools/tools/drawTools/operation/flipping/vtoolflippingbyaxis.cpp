@@ -240,8 +240,8 @@ void VToolFlippingByAxis::ReadToolAttributes(const QDomElement &domElement)
 {
     VAbstractFlipping::ReadToolAttributes(domElement);
 
-    m_originPointId = doc->GetParametrUInt(domElement, AttrCenter, NULL_ID_STR);
-    m_axisType = static_cast<AxisType>(doc->GetParametrUInt(domElement, AttrAxisType, QChar('1')));
+    m_originPointId = VAbstractPattern::GetParametrUInt(domElement, AttrCenter, NULL_ID_STR);
+    m_axisType = static_cast<AxisType>(VAbstractPattern::GetParametrUInt(domElement, AttrAxisType, QChar('1')));
 }
 
 //---------------------------------------------------------------------------------------------------------------------

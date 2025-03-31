@@ -310,10 +310,11 @@ void VToolPointFromCircleAndTangent::ReadToolAttributes(const QDomElement &domEl
 {
     VToolSinglePoint::ReadToolAttributes(domElement);
 
-    circleCenterId = doc->GetParametrUInt(domElement, AttrCCenter, NULL_ID_STR);
-    tangentPointId = doc->GetParametrUInt(domElement, AttrTangent, NULL_ID_STR);
-    circleRadius = doc->GetParametrString(domElement, AttrCRadius);
-    crossPoint = static_cast<CrossCirclesPoint>(doc->GetParametrUInt(domElement, AttrCrossPoint, QChar('1')));
+    circleCenterId = VAbstractPattern::GetParametrUInt(domElement, AttrCCenter, NULL_ID_STR);
+    tangentPointId = VAbstractPattern::GetParametrUInt(domElement, AttrTangent, NULL_ID_STR);
+    circleRadius = VAbstractPattern::GetParametrString(domElement, AttrCRadius);
+    crossPoint = static_cast<CrossCirclesPoint>(
+        VAbstractPattern::GetParametrUInt(domElement, AttrCrossPoint, QChar('1')));
 }
 
 //---------------------------------------------------------------------------------------------------------------------

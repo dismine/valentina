@@ -247,11 +247,11 @@ void VToolHeight::ReadToolAttributes(const QDomElement &domElement)
 {
     VToolLinePoint::ReadToolAttributes(domElement);
 
-    m_lineType = doc->GetParametrString(domElement, AttrTypeLine, TypeLineLine);
-    lineColor = doc->GetParametrString(domElement, AttrLineColor, ColorBlack);
-    basePointId = doc->GetParametrUInt(domElement, AttrBasePoint, NULL_ID_STR);
-    p1LineId = doc->GetParametrUInt(domElement, AttrP1Line, NULL_ID_STR);
-    p2LineId = doc->GetParametrUInt(domElement, AttrP2Line, NULL_ID_STR);
+    m_lineType = VDomDocument::GetParametrString(domElement, AttrTypeLine, TypeLineLine);
+    lineColor = VDomDocument::GetParametrString(domElement, AttrLineColor, ColorBlack);
+    basePointId = VAbstractPattern::GetParametrUInt(domElement, AttrBasePoint, NULL_ID_STR);
+    p1LineId = VAbstractPattern::GetParametrUInt(domElement, AttrP1Line, NULL_ID_STR);
+    p2LineId = VAbstractPattern::GetParametrUInt(domElement, AttrP2Line, NULL_ID_STR);
 }
 
 //---------------------------------------------------------------------------------------------------------------------

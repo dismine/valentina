@@ -89,7 +89,7 @@ void VAbstractNode::incrementReferens()
         QDomElement domElement = doc->FindElementById(m_id, getTagName());
         if (domElement.isElement())
         {
-            doc->SetParametrUsage(domElement, AttrInUse, NodeUsage::InUse);
+            VDomDocument::SetParametrUsage(domElement, AttrInUse, NodeUsage::InUse);
         }
     }
 }
@@ -116,7 +116,7 @@ void VAbstractNode::decrementReferens()
         QDomElement domElement = doc->FindElementById(m_id, getTagName());
         if (domElement.isElement())
         {
-            doc->SetParametrUsage(domElement, AttrInUse, NodeUsage::NotInUse);
+            VDomDocument::SetParametrUsage(domElement, AttrInUse, NodeUsage::NotInUse);
         }
     }
 }

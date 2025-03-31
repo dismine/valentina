@@ -209,11 +209,11 @@ void VToolEndLine::ReadToolAttributes(const QDomElement &domElement)
 {
     VToolLinePoint::ReadToolAttributes(domElement);
 
-    m_lineType = doc->GetParametrString(domElement, AttrTypeLine, TypeLineLine);
-    lineColor = doc->GetParametrString(domElement, AttrLineColor, ColorBlack);
-    formulaLength = doc->GetParametrString(domElement, AttrLength, QString());
-    basePointId = doc->GetParametrUInt(domElement, AttrBasePoint, NULL_ID_STR);
-    formulaAngle = doc->GetParametrString(domElement, AttrAngle, QString());
+    m_lineType = VDomDocument::GetParametrString(domElement, AttrTypeLine, TypeLineLine);
+    lineColor = VDomDocument::GetParametrString(domElement, AttrLineColor, ColorBlack);
+    formulaLength = VDomDocument::GetParametrString(domElement, AttrLength, QString());
+    basePointId = VAbstractPattern::GetParametrUInt(domElement, AttrBasePoint, NULL_ID_STR);
+    formulaAngle = VDomDocument::GetParametrString(domElement, AttrAngle, QString());
 }
 
 //---------------------------------------------------------------------------------------------------------------------

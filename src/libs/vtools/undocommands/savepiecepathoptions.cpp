@@ -61,7 +61,7 @@ void SavePiecePathOptions::undo()
     if (domElement.isElement())
     {
         VToolPiecePath::AddAttributes(doc, domElement, nodeId, m_oldPath);
-        doc->RemoveAllChildren(domElement);//Very important to clear before rewrite
+        VDomDocument::RemoveAllChildren(domElement); //Very important to clear before rewrite
         VToolPiecePath::AddNodes(doc, domElement, m_oldPath);
 
         DecrementReferences(m_newPath.MissingNodes(m_oldPath));
@@ -93,7 +93,7 @@ void SavePiecePathOptions::redo()
     if (domElement.isElement())
     {
         VToolPiecePath::AddAttributes(doc, domElement, nodeId, m_newPath);
-        doc->RemoveAllChildren(domElement);//Very important to clear before rewrite
+        VDomDocument::RemoveAllChildren(domElement); //Very important to clear before rewrite
         VToolPiecePath::AddNodes(doc, domElement, m_newPath);
 
         DecrementReferences(m_oldPath.MissingNodes(m_newPath));

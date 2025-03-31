@@ -44,7 +44,7 @@ AddGroup::AddGroup(const QDomElement &xml, VAbstractPattern *doc, QUndoCommand *
     : VUndoCommand(xml, doc, parent), nameActivDraw(doc->GetNameActivPP())
 {
     setText(tr("add group"));
-    nodeId = doc->GetParametrId(xml);
+    nodeId = VDomDocument::GetParametrId(xml);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -220,8 +220,8 @@ void AddItemToGroup::performUndoRedo(bool isUndo)
 
             // set the item visible. Because if the undo is done when unvisible and it's not in any group after the
             // undo, it stays unvisible until the entire drawing is completly rerendered.
-            quint32 const objectId = doc->GetParametrUInt(xml, QStringLiteral("object"), NULL_ID_STR);
-            quint32 const toolId = doc->GetParametrUInt(xml, QStringLiteral("tool"), NULL_ID_STR);
+            quint32 const objectId = VAbstractPattern::GetParametrUInt(xml, QStringLiteral("object"), NULL_ID_STR);
+            quint32 const toolId = VAbstractPattern::GetParametrUInt(xml, QStringLiteral("tool"), NULL_ID_STR);
             VDataTool* tool = VAbstractPattern::getTool(toolId);
             tool->GroupVisibility(objectId,true);
         }
@@ -313,8 +313,8 @@ void RemoveItemFromGroup::performUndoRedo(bool isUndo)
 
             // set the item visible. Because if the undo is done when unvisibile and it's not in any group after the
             // undo, it stays unvisible until the entire drawing is completly rerendered.
-            quint32 const objectId = doc->GetParametrUInt(xml, QStringLiteral("object"), NULL_ID_STR);
-            quint32 const toolId = doc->GetParametrUInt(xml, QStringLiteral("tool"), NULL_ID_STR);
+            quint32 const objectId = VAbstractPattern::GetParametrUInt(xml, QStringLiteral("object"), NULL_ID_STR);
+            quint32 const toolId = VAbstractPattern::GetParametrUInt(xml, QStringLiteral("tool"), NULL_ID_STR);
             VDataTool* tool = VAbstractPattern::getTool(toolId);
             tool->GroupVisibility(objectId,true);
         }
@@ -360,7 +360,7 @@ ChangeGroupVisibility::ChangeGroupVisibility(VAbstractPattern *doc, vidtype id, 
     nodeId = id;
     if (QDomElement const group = doc->FindElementById(nodeId, VAbstractPattern::TagGroup); group.isElement())
     {
-        m_oldVisibility = doc->GetParametrBool(group, VAbstractPattern::AttrVisible, trueStr);
+        m_oldVisibility = VDomDocument::GetParametrBool(group, VAbstractPattern::AttrVisible, trueStr);
     }
     else
     {
@@ -424,7 +424,8 @@ ChangeMultipleGroupsVisibility::ChangeMultipleGroupsVisibility(VAbstractPattern 
     {
         if (QDomElement const group = doc->FindElementById(groupId, VAbstractPattern::TagGroup); group.isElement())
         {
-            m_oldVisibility.insert(groupId, doc->GetParametrBool(group, VAbstractPattern::AttrVisible, trueStr));
+            m_oldVisibility.insert(groupId,
+                                   VDomDocument::GetParametrBool(group, VAbstractPattern::AttrVisible, trueStr));
         }
         else
         {

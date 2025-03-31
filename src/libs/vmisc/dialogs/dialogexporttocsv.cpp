@@ -80,7 +80,7 @@ DialogExportToCSV::DialogExportToCSV(QWidget *parent)
                 ui->checkBoxWithHeader->blockSignals(true);
                 ui->buttonGroup->blockSignals(true);
 
-                ui->checkBoxWithHeader->setChecked(VAbstractApplication::VApp()->Settings()->GetDefCSVWithHeader());
+                ui->checkBoxWithHeader->setChecked(VCommonSettings::GetDefCSVWithHeader());
                 ui->comboBoxCodec->setCurrentIndex(ui->comboBoxCodec->findData(VCommonSettings::GetDefCSVCodec()));
 
                 SetSeparator(VCommonSettings::GetDefCSVSeparator());

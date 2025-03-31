@@ -355,8 +355,8 @@ void VToolCutSplinePath::ReadToolAttributes(const QDomElement &domElement)
 {
     VToolCut::ReadToolAttributes(domElement);
 
-    formula = doc->GetParametrString(domElement, AttrLength, QString());
-    baseCurveId = doc->GetParametrUInt(domElement, AttrSplinePath, NULL_ID_STR);
+    formula = VDomDocument::GetParametrString(domElement, AttrLength, QString());
+    baseCurveId = VAbstractPattern::GetParametrUInt(domElement, AttrSplinePath, NULL_ID_STR);
 }
 
 //---------------------------------------------------------------------------------------------------------------------

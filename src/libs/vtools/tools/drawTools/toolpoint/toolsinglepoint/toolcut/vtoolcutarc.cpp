@@ -261,8 +261,8 @@ void VToolCutArc::ReadToolAttributes(const QDomElement &domElement)
 {
     VToolCut::ReadToolAttributes(domElement);
 
-    formula = doc->GetParametrString(domElement, AttrLength, QString());
-    baseCurveId = doc->GetParametrUInt(domElement, AttrArc, NULL_ID_STR);
+    formula = VDomDocument::GetParametrString(domElement, AttrLength, QString());
+    baseCurveId = VAbstractPattern::GetParametrUInt(domElement, AttrArc, NULL_ID_STR);
 }
 
 //---------------------------------------------------------------------------------------------------------------------

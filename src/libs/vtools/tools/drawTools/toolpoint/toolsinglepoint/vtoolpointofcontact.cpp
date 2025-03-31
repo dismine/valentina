@@ -336,10 +336,10 @@ void VToolPointOfContact::ReadToolAttributes(const QDomElement &domElement)
 {
     VToolSinglePoint::ReadToolAttributes(domElement);
 
-    arcRadius = doc->GetParametrString(domElement, AttrRadius, QString());
-    center = doc->GetParametrUInt(domElement, AttrCenter, NULL_ID_STR);
-    firstPointId = doc->GetParametrUInt(domElement, AttrFirstPoint, NULL_ID_STR);
-    secondPointId = doc->GetParametrUInt(domElement, AttrSecondPoint, NULL_ID_STR);
+    arcRadius = VDomDocument::GetParametrString(domElement, AttrRadius, QString());
+    center = VAbstractPattern::GetParametrUInt(domElement, AttrCenter, NULL_ID_STR);
+    firstPointId = VAbstractPattern::GetParametrUInt(domElement, AttrFirstPoint, NULL_ID_STR);
+    secondPointId = VAbstractPattern::GetParametrUInt(domElement, AttrSecondPoint, NULL_ID_STR);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
