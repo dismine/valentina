@@ -7900,7 +7900,7 @@ void MainWindow::PrintPatternMessage(QEvent *event)
             .remove(VAbstractValApplication::warningMessageSignature);
     const QString time = QDateTime::currentDateTime().toString(QStringLiteral("hh:mm:ss"));
     const auto message = QStringLiteral("%1: [%2] %3").arg(time, severity, patternMessage);
-    ui->plainTextEditPatternMessages->appendPlainText(message);
+    ui->plainTextEditPatternMessages->appendFilteredText(message);
     if (not m_unreadPatternMessage.isNull())
     {
         m_unreadPatternMessage->setText(DialogWarningIcon(m_unreadPatternMessage) + tr("Pattern messages"));

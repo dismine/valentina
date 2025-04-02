@@ -81,7 +81,7 @@ void VPlainTextEdit::SetFilter(const QString &filter)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VPlainTextEdit::appendPlainText(const QString &text)
+void VPlainTextEdit::appendFilteredText(const QString &text)
 {
     if (m_filter.isEmpty())
     {

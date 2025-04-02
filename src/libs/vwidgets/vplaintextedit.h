@@ -43,7 +43,7 @@ public:
 
     void SetFilter(const QString &filter);
 
-    void appendPlainText(const QString &text);
+    void appendFilteredText(const QString &text);
 
 private slots:
     void MatchParentheses();
