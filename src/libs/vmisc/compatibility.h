@@ -64,6 +64,7 @@ inline namespace StringLiterals
 {
 
 QT_WARNING_PUSH
+QT_WARNING_DISABLE_CLANG("-Wunknown-warning-option")
 QT_WARNING_DISABLE_CLANG("-Wreserved-identifier")
 
 //---------------------------------------------------------------------------------------------------------------------

@@ -561,10 +561,15 @@ Module {
                     "-Qunused-arguments",
                     "-fcolor-diagnostics",
                     "-Wno-gnu-zero-variadic-macro-arguments",
-                    "-fms-extensions", // Need for pragma message
-                    "-Wcompletion-handler",
-                    "-Wno-pre-c++17-compat-pedantic"
+                    "-fms-extensions" // Need for pragma message
                 )
+
+                if (!qbs.targetOS.contains("macos")) {
+                    debugFlags.push(
+                        "-Wcompletion-handler",
+                        "-Wno-pre-c++17-compat-pedantic"
+                    )
+                }
 
                 if (Utilities.versionCompare(cpp.compilerVersion, "13") >= 0) {
                     debugFlags.push(
