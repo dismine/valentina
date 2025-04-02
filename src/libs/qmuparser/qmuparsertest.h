@@ -187,7 +187,7 @@ private:
     static auto StrFun2(const QString &v1, qreal v2) -> qreal
     {
         int const val = v1.toInt();
-        return static_cast<qreal>(val + v2);
+        return val + v2;
     }
 
     static auto StrFun3(const QString &v1, qreal v2, qreal v3) -> qreal
@@ -203,11 +203,11 @@ private:
     }
 
     // postfix operator callback
-    static auto Mega(qreal a_fVal) -> qreal { return a_fVal * static_cast<qreal>(1e6); }
+    static auto Mega(qreal a_fVal) -> qreal { return a_fVal * 1e6; }
 
-    static auto Micro(qreal a_fVal) -> qreal { return a_fVal * static_cast<qreal>(1e-6); }
+    static auto Micro(qreal a_fVal) -> qreal { return a_fVal * 1e-6; }
 
-    static auto Milli(qreal a_fVal) -> qreal { return a_fVal / static_cast<qreal>(1e3); }
+    static auto Milli(qreal a_fVal) -> qreal { return a_fVal / 1e3; }
 
     // Custom value recognition
     static auto IsHexVal(const QString &a_szExpr, qmusizetype *a_iPos, qreal *a_fVal, const QLocale &locale,

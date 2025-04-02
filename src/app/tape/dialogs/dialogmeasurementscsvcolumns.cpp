@@ -228,7 +228,7 @@ auto DialogMeasurementsCSVColumns::ColumnMandatory(int column) const -> bool
         mandatory += qMin(static_cast<int>(m_dimensions.size()), 2);
     }
 
-    return static_cast<int>(column) < mandatory;
+    return column < mandatory;
 }
 
 //---------------------------------------------------------------------------------------------------------------------

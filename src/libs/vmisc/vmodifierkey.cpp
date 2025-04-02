@@ -37,7 +37,7 @@ using namespace Qt::Literals::StringLiterals;
 
 //---------------------------------------------------------------------------------------------------------------------
 VModifierKey::VModifierKey(int key)
-  : m_nativeText(QKeySequence(static_cast<int>(key)).toString(QKeySequence::NativeText))
+  : m_nativeText(QKeySequence(key).toString(QKeySequence::NativeText))
 {
     if (m_nativeText.endsWith('+'_L1))
     {

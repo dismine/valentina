@@ -263,7 +263,7 @@ auto PrepareSAPassmark(const VPiece &piece, const VContainer *pattern, const VPa
         return {};
     }
 
-    QVector<QLineF> const baseLines = passmark.SAPassmarkBaseLine(piece, pattern, static_cast<PassmarkSide>(side));
+    QVector<QLineF> const baseLines = passmark.SAPassmarkBaseLine(piece, pattern, side);
     if (baseLines.isEmpty())
     {
         const QString errorMsg =

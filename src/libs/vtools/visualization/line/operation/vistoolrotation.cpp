@@ -125,7 +125,7 @@ void VisToolRotation::RefreshGeometry()
         QT_WARNING_DISABLE_GCC("-Wswitch-default")
         QT_WARNING_DISABLE_CLANG("-Wswitch-default")
 
-        switch (static_cast<GOType>(obj->getType()))
+        switch (obj->getType())
         {
             case GOType::Point:
             {

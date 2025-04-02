@@ -1287,8 +1287,8 @@ auto QmuParserTester::EqnTest(const QString &a_str, double a_fRes, bool a_fPass)
 
         p1.reset(new qmu::QmuParser());
         // Add constants
-        p1->DefineConst("pi", static_cast<qreal>(M_PI));
-        p1->DefineConst("e", static_cast<qreal>(M_E));
+        p1->DefineConst("pi", M_PI);
+        p1->DefineConst("e", M_E);
         p1->DefineConst("const", 1);
         p1->DefineConst("const1", 2);
         p1->DefineConst("const2", 3);

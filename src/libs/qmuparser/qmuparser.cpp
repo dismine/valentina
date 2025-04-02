@@ -514,8 +514,8 @@ void QmuParser::InitFun()
  */
 void QmuParser::InitConst()
 {
-    DefineConst(QStringLiteral("_pi"), static_cast<qreal>(M_PI));
-    DefineConst(QStringLiteral("_e"), static_cast<qreal>(M_E));
+    DefineConst(QStringLiteral("_pi"), M_PI);
+    DefineConst(QStringLiteral("_e"), M_E);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -580,7 +580,7 @@ auto QmuParser::Diff(qreal *a_Var, qreal a_fPos, qreal a_fEpsilon) const -> qrea
     // his own epsilon
     if (qFuzzyIsNull(fEpsilon))
     {
-        fEpsilon = qFuzzyIsNull(a_fPos) ? static_cast<qreal>(1e-10) : static_cast<qreal>(1e-7) * a_fPos;
+        fEpsilon = qFuzzyIsNull(a_fPos) ? 1e-10 : 1e-7 * a_fPos;
     }
 
     *a_Var = a_fPos + 2 * fEpsilon;

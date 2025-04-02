@@ -82,7 +82,7 @@ auto GetOriginPoint(const QVector<SourceItem> &objects, const VContainer *data, 
         // This check helps to find missed objects in the switch
         Q_STATIC_ASSERT_X(static_cast<int>(GOType::Unknown) == 8, "Not all objects were handled.");
 
-        switch (static_cast<GOType>(obj->getType()))
+        switch (obj->getType())
         {
             case GOType::Point:
                 originObjects.append(data->GeometricObject<VPointF>(object.id)->toQPointF());
@@ -203,7 +203,7 @@ auto VToolMove::Create(VToolMoveInitData &initData) -> VToolMove *
             QT_WARNING_DISABLE_GCC("-Wswitch-default")
             QT_WARNING_DISABLE_CLANG("-Wswitch-default")
 
-            switch (static_cast<GOType>(obj->getType()))
+            switch (obj->getType())
             {
                 case GOType::Point:
                     initData.destination.append(CreatePoint(initData.id, object, calcAngle, calcLength,
@@ -263,7 +263,7 @@ auto VToolMove::Create(VToolMoveInitData &initData) -> VToolMove *
             QT_WARNING_DISABLE_GCC("-Wswitch-default")
             QT_WARNING_DISABLE_CLANG("-Wswitch-default")
 
-            switch (static_cast<GOType>(obj->getType()))
+            switch (obj->getType())
             {
                 case GOType::Point:
                     UpdatePoint(initData.id, object, calcAngle, calcLength, calcRotationAngle, rotationOrigin,
