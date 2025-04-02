@@ -380,6 +380,7 @@ auto DialogSaveLayout::MakeHelpDxfApparelCompatibilityList() -> QString
     out += QStringLiteral("\t* Richpeace CAD V8 = %1,\n").arg(static_cast<int>(DXFApparelCompatibility::RPCADV08));
     out += QStringLiteral("\t* Richpeace CAD V9 = %1,\n").arg(static_cast<int>(DXFApparelCompatibility::RPCADV09));
     out += QStringLiteral("\t* Richpeace CAD V10 = %1.\n").arg(static_cast<int>(DXFApparelCompatibility::RPCADV10));
+    out += QStringLiteral("\t* Clo3D = %1.\n").arg(static_cast<int>(DXFApparelCompatibility::CLO3D));
 
     return out;
 }
@@ -929,6 +930,7 @@ void DialogSaveLayout::InitDxfCompatibility()
                                           QVariant(static_cast<int>(DXFApparelCompatibility::RPCADV09)));
     ui->comboBoxDxfCompatibility->addItem("Richpeace CAD V10"_L1,
                                           QVariant(static_cast<int>(DXFApparelCompatibility::RPCADV10)));
+    ui->comboBoxDxfCompatibility->addItem("Clo3D"_L1, QVariant(static_cast<int>(DXFApparelCompatibility::CLO3D)));
 }
 
 //---------------------------------------------------------------------------------------------------------------------

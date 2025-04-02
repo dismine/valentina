@@ -709,6 +709,7 @@ void DialogSaveManualLayout::InitDxfCompatibility()
                                           QVariant(static_cast<int>(DXFApparelCompatibility::RPCADV09)));
     ui->comboBoxDxfCompatibility->addItem("Richpeace CAD V10"_L1,
                                           QVariant(static_cast<int>(DXFApparelCompatibility::RPCADV10)));
+    ui->comboBoxDxfCompatibility->addItem("Clo3D"_L1, QVariant(static_cast<int>(DXFApparelCompatibility::CLO3D)));
 }
 
 //---------------------------------------------------------------------------------------------------------------------
