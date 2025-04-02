@@ -43,7 +43,7 @@ Module {
     Rule {
 //        alwaysRun: true
         multiplex: true
-        condition: product.qbs.targetOS.contains("macos") && product.bundle.isBundle && (product.buildconfig.enableMultiBundle || (!product.buildconfig.enableMultiBundle && product.primaryApp))
+        condition: product.qbs.targetOS.contains("macos") && product.buildconfig.runMacDeployQt && product.bundle.isBundle && (product.buildconfig.enableMultiBundle || (!product.buildconfig.enableMultiBundle && product.primaryApp))
         inputs: ["bundle.content"]
 
         prepare: {

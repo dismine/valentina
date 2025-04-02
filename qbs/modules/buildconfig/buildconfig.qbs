@@ -29,6 +29,9 @@ Module {
 
     property bool enableMultiBundle: false
 
+    // Use this property to disable running macdeployqt tool. Produced app bundle will not be standalone.
+    property bool runMacDeployQt: true
+
     property string valentina_copyright_year: { return new Date().getFullYear().toString(); }
     property string valentina_copyright_string: "(C) 2013-" + valentina_copyright_year + ", Valentina project"
 
