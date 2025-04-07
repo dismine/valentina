@@ -3828,6 +3828,11 @@ void TMainWindow::UpdateWindowTitle()
 //---------------------------------------------------------------------------------------------------------------------
 void TMainWindow::SyncKnownMeasurements()
 {
+    if (m_m == nullptr)
+    {
+        return;
+    }
+
     ui->comboBoxKnownMeasurements->blockSignals(true);
     ui->comboBoxKnownMeasurements->clear();
     InitKnownMeasurements(ui->comboBoxKnownMeasurements);
