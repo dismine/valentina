@@ -1,14 +1,14 @@
 /************************************************************************
  **
- **  @file   scenedef.h
+ **  @file   vsvghandler.h
  **  @author Roman Telezhynskyi <dismine(at)gmail.com>
- **  @date   7 8, 2021
+ **  @date   3 4, 2025
  **
  **  @brief
  **  @copyright
  **  This source code is part of the Valentina project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
- **  Copyright (C) 2021 Valentina project
+ **  Copyright (C) 2025 Valentina project
  **  <https://gitlab.com/smart-pattern/valentina> All Rights Reserved.
  **
  **  Valentina is free software: you can redistribute it and/or modify
@@ -25,21 +25,45 @@
  **  along with Valentina.  If not, see <http://www.gnu.org/licenses/>.
  **
  *************************************************************************/
-#ifndef SCENEDEF_H
-#define SCENEDEF_H
+#ifndef VSVGHANDLER_H
+#define VSVGHANDLER_H
 
-#include <QColor>
-#include <QtGlobal>
+#include <QPainterPath>
+#include <QStack>
+#include <QXmlStreamReader>
 
-enum class PGraphicsItem : int
+class VSvgHandler
 {
-    Piece = 1,
-    Handles = 2,
-    TransformationOrigin = 3
+public:
+    explicit VSvgHandler(const QString &filePath);
+
+    void Render(QPainter *painter);
+
+    auto PageSize() const -> QRectF;
+
+private:
+    QXmlStreamReader m_xml;
+    QPainterPath m_path;
+    QTransform m_currentTransform;
+    QStack<QTransform> m_transformStack;
+    QStack<QPainterPath> m_pathStack;
+    QRectF m_pageSize;
+
+    void ToPainterPath(const QString &filePath);
+
+    void ResetState();
+    void HandleStartElement();
+    void ParseSvgAttributes();
+    void InitialTransformFromViewBox();
+    void SaveCurrentGroup();
+    void RestorePreviousGroup();
+    void ParsePathElement();
 };
 
-constexpr qreal foldTextMargin = 5;
-constexpr int foldFontSize = 34;
-constexpr QColor tileColor(180, 180, 180);
+//---------------------------------------------------------------------------------------------------------------------
+inline auto VSvgHandler::PageSize() const -> QRectF
+{
+    return m_pageSize;
+}
 
-#endif // SCENEDEF_H
+#endif // VSVGHANDLER_H

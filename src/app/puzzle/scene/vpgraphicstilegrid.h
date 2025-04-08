@@ -38,6 +38,7 @@
 class VPTileFactory;
 class VPLayout;
 struct VWatermarkData;
+class VSvgFontEngine;
 
 class VPGraphicsTileGrid : public QGraphicsItem
 {
@@ -48,12 +49,45 @@ public:
     auto boundingRect() const -> QRectF override;
     void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget) override;
 
+    auto PrintMode() const -> bool;
+    void SetPrintMode(bool newPrintMode);
+
 private:
     // cppcheck-suppress unknownMacro
     Q_DISABLE_COPY_MOVE(VPGraphicsTileGrid) // NOLINT
 
     VPLayoutWeakPtr m_layout;
     QUuid m_sheetUuid;
+    bool m_printMode{false};
+
+    void PaintTileNumberOutlineFont(QPainter *painter,
+                                    const QRectF &img,
+                                    int i,
+                                    int j,
+                                    const VPLayoutPtr &layout,
+                                    const QFont &font,
+                                    int nbCol) const;
+    void PaintTileNumberSVGFont(QPainter *painter,
+                                const QRectF &img,
+                                int i,
+                                int j,
+                                const VPLayoutPtr &layout,
+                                const QFont &font,
+                                int nbCol,
+                                const VSvgFontEngine &engine) const;
+    void DrawGrid(QPainter *painter, int nbRow, int nbCol, const QMarginsF &margins, qreal width, qreal height) const;
 };
+
+//---------------------------------------------------------------------------------------------------------------------
+inline auto VPGraphicsTileGrid::PrintMode() const -> bool
+{
+    return m_printMode;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+inline void VPGraphicsTileGrid::SetPrintMode(bool newPrintMode)
+{
+    m_printMode = newPrintMode;
+}
 
 #endif // VPGRAPHICSTILEGRID_H

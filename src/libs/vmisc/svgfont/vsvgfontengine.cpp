@@ -167,7 +167,7 @@ void VSvgFontEngine::AddGlyph(QChar unicode, const QPainterPath &path, qreal hor
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-auto VSvgFontEngine::DrawPath(const QPointF &point, const QString &str) const -> QPainterPath
+auto VSvgFontEngine::DrawPath(const QPointF &point, const QString &str, qreal penWidth) const -> QPainterPath
 {
     qreal const pixelSize = FontPixelSize();
 
@@ -194,7 +194,7 @@ auto VSvgFontEngine::DrawPath(const QPointF &point, const QString &str) const ->
             }
         }
         path.addPath(matrix.map(d->m_glyphs[unicode].Path()));
-        matrix.translate(d->m_glyphs[unicode].HorizAdvX(), 0);
+        matrix.translate(d->m_glyphs[unicode].HorizAdvX() + penWidth / 2.0, 0);
     }
 
     return path;
@@ -322,6 +322,12 @@ auto VSvgFontEngine::TextHorizAdvX(const QString &str) const -> int
 auto VSvgFontEngine::TextWidth(const QString &str, qreal penWidth) const -> qreal
 {
     return FromFontUnits(TextHorizAdvX(str) + static_cast<int>(str.length()) * penWidth);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+auto VSvgFontEngine::BoundingRect(const QString &str, qreal penWidth) const -> QRectF
+{
+    return DrawPath(QPointF(), str, penWidth).boundingRect();
 }
 
 //---------------------------------------------------------------------------------------------------------------------

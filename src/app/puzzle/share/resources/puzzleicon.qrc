@@ -27,5 +27,7 @@
         <file>puzzleicon/dark/32x32/vertical_grainline.png</file>
         <file>puzzleicon/dark/32x32/horizontal_grainline.png</file>
         <file>puzzleicon/dark/32x32/horizontal_grainline@2x.png</file>
+        <file>puzzleicon/svg/icon_scissors_plotter_vertical.svg</file>
+        <file>puzzleicon/svg/icon_scissors_plotter_horizontal.svg</file>
     </qresource>
 </RCC>

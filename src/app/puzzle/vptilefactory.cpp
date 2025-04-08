@@ -2,15 +2,23 @@
 
 #include <QtSvg>
 
+#include "../vformat/vsinglelineoutlinechar.h"
 #include "../vlayout/vprintlayout.h"
 #include "../vmisc/compatibility.h"
 #include "../vmisc/def.h"
 #include "../vmisc/literals.h"
+#include "../vmisc/svgfont/vsvgfontdatabase.h"
+#include "../vmisc/svgfont/vsvgfontengine.h"
+#include "../vmisc/svgfont/vsvghandler.h"
 #include "../vmisc/vcommonsettings.h"
 #include "../vwidgets/vmaingraphicsscene.h"
 #include "layout/vplayout.h"
+#include "layout/vppiece.h"
 #include "layout/vpsheet.h"
+#include "scene/scenedef.h"
 #include "theme/vtheme.h"
+#include "vpapplication.h"
+#include "vtextmanager.h"
 
 using namespace Qt::Literals::StringLiterals;
 
@@ -19,8 +27,7 @@ namespace
 QT_WARNING_PUSH
 QT_WARNING_DISABLE_CLANG("-Wunused-member-function")
 
-Q_GLOBAL_STATIC_WITH_ARGS(QColor, tileColor, (180, 180, 180))            // NOLINT
-Q_GLOBAL_STATIC_WITH_ARGS(QBrush, triangleBush, (QColor(200, 200, 200))) // NOLINT
+Q_GLOBAL_STATIC_WITH_ARGS(QBrush, triangleBush, (QColor(200, 200, 200, 225))) // NOLINT
 
 struct WatermarkScaledImageInfo
 {
@@ -33,6 +40,8 @@ using WatermarkScaledSize = QCache<QString, WatermarkScaledImageInfo>;
 Q_GLOBAL_STATIC(WatermarkScaledSize, watermarkSizeCache) // NOLINT
 
 QT_WARNING_POP
+
+const int tileTextFontSize = 12; // Adjust as needed
 
 //---------------------------------------------------------------------------------------------------------------------
 inline auto GenerateWatermarkScaledSizeCacheKey(const QString &watermarkPath, qreal xScale, qreal yScale) -> QString
@@ -167,6 +176,34 @@ auto TriangleBasic() -> QPainterPath
     triangleBasic.lineTo(rectBasic.topLeft());
     return triangleBasic;
 }
+
+//---------------------------------------------------------------------------------------------------------------------
+void InitPrimaryCuttingLineStyle(QPen &pen)
+{
+    if (const VPSettings *settings = VPApplication::VApp()->PuzzleSettings();
+        settings->GetSingleStrokeOutlineFont() || settings->GetSingleLineFonts())
+    {
+        pen.setDashPattern({24, 4});
+    }
+    else
+    {
+        pen.setStyle(Qt::DashLine);
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void InitSecondaryCuttingLineStyle(QPen &pen)
+{
+    if (const VPSettings *settings = VPApplication::VApp()->PuzzleSettings();
+        settings->GetSingleStrokeOutlineFont() || settings->GetSingleLineFonts())
+    {
+        pen.setDashPattern({12, 4});
+    }
+    else
+    {
+        pen.setStyle(Qt::DotLine);
+    }
+}
 } // namespace
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -240,10 +277,10 @@ void VPTileFactory::drawTile(
 
     DrawTilePageContent(painter, sheet, row, col, printer);
 
+    painter->save();
+
     // add the tiles decorations (cutting and gluing lines, scissors, infos etc.)
     painter->setPen(PenTileInfos());
-
-    painter->save();
 
     const auto [xscale, yscale] = VPrintLayout::PrinterScaleDiff(printer);
     painter->scale(xscale, yscale);
@@ -311,7 +348,8 @@ void VPTileFactory::drawTile(
     }
 
     // prepare the painting for the text information
-    DrawTextInformation(painter, row, col, nbRow, nbCol, sheet->GetName());
+    DrawGridTextInformation(painter, row, col);
+    DrawPageTextInformation(painter, row, col, nbRow, nbCol, sheet->GetName());
 
     painter->restore();
 }
@@ -379,7 +417,7 @@ void VPTileFactory::DrawRuler(QPainter *painter, qreal scale) const
         return;
     }
 
-    QPen const rulePen(*tileColor, 1, Qt::SolidLine);
+    QPen const rulePen(tileColor, 1, Qt::SolidLine);
 
     painter->save();
     painter->setPen(rulePen);
@@ -460,7 +498,7 @@ void VPTileFactory::DrawWatermark(QPainter *painter) const
 //---------------------------------------------------------------------------------------------------------------------
 inline auto VPTileFactory::PenTileInfos() const -> QPen
 {
-    return {*tileColor, m_commonSettings->WidthHairLine(), Qt::DashLine, Qt::RoundCap, Qt::RoundJoin};
+    return {tileColor, m_commonSettings->WidthHairLine(), Qt::DashLine, Qt::RoundCap, Qt::RoundJoin};
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -532,27 +570,128 @@ void VPTileFactory::DrawRightTriangle(QPainter *painter) const
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+auto VPTileFactory::ShowTopLine() const -> bool
+{
+    if (VPLayoutPtr const layout = m_layout.toStrongRef(); !layout.isNull())
+    {
+        const VPLayoutSettings &settings = layout->LayoutSettings();
+        if (settings.IgnoreTilesMargins())
+        {
+            return false;
+        }
+
+        if (QMarginsF const tilesMargins = settings.GetTilesMargins(); qFuzzyIsNull(tilesMargins.top()))
+        {
+            return false;
+        }
+    }
+
+    return true;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+auto VPTileFactory::ShowLeftLine() const -> bool
+{
+    if (VPLayoutPtr const layout = m_layout.toStrongRef(); !layout.isNull())
+    {
+        const VPLayoutSettings &settings = layout->LayoutSettings();
+        if (settings.IgnoreTilesMargins())
+        {
+            return false;
+        }
+
+        if (QMarginsF const tilesMargins = settings.GetTilesMargins(); qFuzzyIsNull(tilesMargins.left()))
+        {
+            return false;
+        }
+    }
+
+    return true;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 void VPTileFactory::DrawTopLineScissors(QPainter *painter) const
 {
-    QSvgRenderer svgRenderer(QStringLiteral("://puzzleicon/svg/icon_scissors_horizontal.svg"));
-    svgRenderer.render(painter, QRectF(m_drawingAreaWidth - tileStripeWidth, 0, UnitConvertor(0.95, Unit::Cm, Unit::Px),
-                                       UnitConvertor(0.56, Unit::Cm, Unit::Px)));
+    if (!ShowTopLine())
+    {
+        return;
+    }
+
+    painter->save();
+    QPen pen = painter->pen();
+    pen.setColor(tileColor);
+    pen.setWidthF(m_commonSettings->WidthHairLine());
+    pen.setStyle(Qt::SolidLine);
+    painter->setPen(pen);
+
+    const VPSettings *settings = VPApplication::VApp()->PuzzleSettings();
+    if (const bool singleLineFont = settings->GetSingleStrokeOutlineFont() || settings->GetSingleLineFonts();
+        !singleLineFont)
+    {
+        static QSvgRenderer svgRenderer(QStringLiteral("://puzzleicon/svg/icon_scissors_horizontal.svg"));
+        svgRenderer.render(painter,
+                           QRectF(m_drawingAreaWidth - tileStripeWidth,
+                                  0,
+                                  UnitConvertor(0.95, Unit::Cm, Unit::Px),
+                                  UnitConvertor(0.56, Unit::Cm, Unit::Px)));
+    }
+    else
+    {
+        static VSvgHandler handler(QStringLiteral("://puzzleicon/svg/icon_scissors_plotter_horizontal.svg"));
+        painter->save();
+        painter->translate(m_drawingAreaWidth - tileStripeWidth, 0);
+        handler.Render(painter);
+        painter->restore();
+    }
+    painter->restore();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 void VPTileFactory::DrawLeftLineScissors(QPainter *painter) const
 {
-    QSvgRenderer svgRenderer(QStringLiteral("://puzzleicon/svg/icon_scissors_vertical.svg"));
-    svgRenderer.render(painter,
-                       QRectF(0, m_drawingAreaHeight - tileStripeWidth, UnitConvertor(0.56, Unit::Cm, Unit::Px),
-                              UnitConvertor(0.95, Unit::Cm, Unit::Px)));
+    if (!ShowLeftLine())
+    {
+        return;
+    }
+
+    painter->save();
+    QPen pen = painter->pen();
+    pen.setColor(tileColor);
+    pen.setWidthF(m_commonSettings->WidthHairLine());
+    painter->setPen(pen);
+
+    const VPSettings *settings = VPApplication::VApp()->PuzzleSettings();
+    if (const bool singleLineFont = settings->GetSingleStrokeOutlineFont() || settings->GetSingleLineFonts();
+        !singleLineFont)
+    {
+        static QSvgRenderer svgRenderer(QStringLiteral("://puzzleicon/svg/icon_scissors_vertical.svg"));
+        svgRenderer.render(painter,
+                           QRectF(0,
+                                  m_drawingAreaHeight - tileStripeWidth,
+                                  UnitConvertor(0.56, Unit::Cm, Unit::Px),
+                                  UnitConvertor(0.95, Unit::Cm, Unit::Px)));
+    }
+    else
+    {
+        static VSvgHandler handler(QStringLiteral("://puzzleicon/svg/icon_scissors_plotter_vertical.svg"));
+        painter->save();
+        painter->translate(0, m_drawingAreaHeight - tileStripeWidth);
+        handler.Render(painter);
+        painter->restore();
+    }
+
+    painter->restore();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 void VPTileFactory::DrawTopCuttingLine(QPainter *painter) const
 {
+    if (!ShowTopLine())
+    {
+        return;
+    }
     QPen penTileInfos = PenTileInfos();
-    penTileInfos.setStyle(Qt::DashLine);
+    InitPrimaryCuttingLineStyle(penTileInfos);
     painter->setPen(penTileInfos);
     painter->drawLine(QPointF(), QPointF(m_drawingAreaWidth, 0));
 }
@@ -560,8 +699,12 @@ void VPTileFactory::DrawTopCuttingLine(QPainter *painter) const
 //---------------------------------------------------------------------------------------------------------------------
 void VPTileFactory::DrawLeftCuttingLine(QPainter *painter) const
 {
+    if (!ShowLeftLine())
+    {
+        return;
+    }
     QPen penTileInfos = PenTileInfos();
-    penTileInfos.setStyle(Qt::DashLine);
+    InitPrimaryCuttingLineStyle(penTileInfos);
     painter->setPen(penTileInfos);
     painter->drawLine(QPointF(), QPointF(0, m_drawingAreaHeight));
 }
@@ -570,7 +713,7 @@ void VPTileFactory::DrawLeftCuttingLine(QPainter *painter) const
 void VPTileFactory::DrawBottomCuttingLine(QPainter *painter) const
 {
     QPen penTileInfos = PenTileInfos();
-    penTileInfos.setStyle(Qt::DotLine);
+    InitSecondaryCuttingLineStyle(penTileInfos);
     painter->setPen(penTileInfos);
     painter->drawLine(QPointF(0, m_drawingAreaHeight - tileStripeWidth),
                       QPointF(m_drawingAreaWidth, m_drawingAreaHeight - tileStripeWidth));
@@ -580,7 +723,7 @@ void VPTileFactory::DrawBottomCuttingLine(QPainter *painter) const
 void VPTileFactory::DrawRightCuttingLine(QPainter *painter) const
 {
     QPen penTileInfos = PenTileInfos();
-    penTileInfos.setStyle(Qt::DotLine);
+    InitSecondaryCuttingLineStyle(penTileInfos);
     painter->setPen(penTileInfos);
     painter->drawLine(QPointF(m_drawingAreaWidth - tileStripeWidth, 0),
                       QPointF(m_drawingAreaWidth - tileStripeWidth, m_drawingAreaHeight));
@@ -589,6 +732,11 @@ void VPTileFactory::DrawRightCuttingLine(QPainter *painter) const
 //---------------------------------------------------------------------------------------------------------------------
 void VPTileFactory::DrawSolidTopLine(QPainter *painter, int col, int nbCol) const
 {
+    if (!ShowTopLine())
+    {
+        return;
+    }
+
     QPen penTileInfos = PenTileInfos();
     penTileInfos.setStyle(Qt::SolidLine);
     painter->setPen(penTileInfos);
@@ -606,6 +754,11 @@ void VPTileFactory::DrawSolidTopLine(QPainter *painter, int col, int nbCol) cons
 //---------------------------------------------------------------------------------------------------------------------
 void VPTileFactory::DrawSolidLeftLine(QPainter *painter, int row, int nbRow) const
 {
+    if (!ShowLeftLine())
+    {
+        return;
+    }
+
     QPen penTileInfos = PenTileInfos();
     penTileInfos.setStyle(Qt::SolidLine);
     painter->setPen(penTileInfos);
@@ -660,48 +813,259 @@ void VPTileFactory::DrawSolidRightLine(QPainter *painter, int row, int nbRow) co
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VPTileFactory::DrawTextInformation(QPainter *painter, int row, int col, int nbRow, int nbCol,
-                                        const QString &sheetName) const
+void VPTileFactory::DrawGridTextInformation(QPainter *painter, int row, int col) const
 {
-    QTextDocument td;
-    td.setPageSize(QSizeF(m_drawingAreaWidth - UnitConvertor(2, Unit::Cm, Unit::Px), m_drawingAreaHeight));
+    if (const QString grid = tr("Grid ( %1 , %2 )").arg(row + 1).arg(col + 1); m_commonSettings->GetSingleLineFonts())
+    {
+        DrawGridTextInformationSVGFont(painter, grid);
+    }
+    else
+    {
+        DrawGridTextInformationOutlineFont(painter, grid);
+    }
+}
 
-    // paint the grid information
-    const QString grid = tr("Grid ( %1 , %2 )").arg(row + 1).arg(col + 1);
-    const QString tileColorStr =
-        QStringLiteral("%1,%2,%3").arg(tileColor->red()).arg(tileColor->green()).arg(tileColor->blue());
-
-    td.setHtml(u"<table width='100%' style='color:rgb(%1);'>"
-               u"<tr>"
-               u"<td align='center'>%2</td>"
-               u"</tr>"
-               u"</table>"_s.arg(tileColorStr, grid));
-    painter->setPen(PenTileInfos());
+//---------------------------------------------------------------------------------------------------------------------
+void VPTileFactory::DrawGridTextInformationOutlineFont(QPainter *painter, const QString &text) const
+{
     painter->save();
-    painter->translate(QPointF(UnitConvertor(1, Unit::Cm, Unit::Px), m_drawingAreaHeight - tileStripeWidth / 1.3));
-    td.drawContents(painter);
+
+    QPen textPen = PenTileInfos();
+    textPen.setStyle(Qt::SolidLine);
+    painter->setPen(textPen);
+
+    if (m_commonSettings->GetSingleStrokeOutlineFont())
+    {
+        // Setup painter font
+        QFont font = m_font;
+        font.setPointSize(tileTextFontSize);
+        painter->setFont(font);
+
+        VSingleLineOutlineChar const corrector(font);
+        if (!corrector.IsPopulated())
+        {
+            corrector.LoadCorrections(m_commonSettings->GetPathFontCorrections());
+        }
+
+        QPainterPath path;
+        QFontMetrics const fm(font);
+
+        int w = 0;
+        for (auto c : qAsConst(text))
+        {
+            path.addPath(corrector.DrawChar(w, static_cast<qreal>(fm.ascent()), c));
+            w += fm.horizontalAdvance(c);
+        }
+
+        // Compute position to center the text
+        qreal const x = UnitConvertor(1, Unit::Cm, Unit::Px);
+        qreal const y = m_drawingAreaHeight - tileStripeWidth / 1.3;
+        qreal const centerX = (m_drawingAreaWidth - tileStripeWidth - UnitConvertor(1, Unit::Cm, Unit::Px)) / 2.0
+                              - w / 2.0;
+
+        painter->translate(x + centerX, y);
+
+        painter->drawPath(path);
+    }
+    else
+    {
+        QTextDocument td;
+        td.setPageSize(QSizeF(m_drawingAreaWidth - UnitConvertor(2, Unit::Cm, Unit::Px), m_drawingAreaHeight));
+
+        // paint the grid information
+        const QString tileColorStr
+            = QStringLiteral("%1,%2,%3").arg(tileColor.red()).arg(tileColor.green()).arg(tileColor.blue());
+
+        td.setHtml(u"<table width='100%' style='color:rgb(%1);'>"
+                   u"<tr>"
+                   u"<td align='center'>%2</td>"
+                   u"</tr>"
+                   u"</table>"_s.arg(tileColorStr, text));
+        painter->save();
+        painter->translate(QPointF(UnitConvertor(1, Unit::Cm, Unit::Px), m_drawingAreaHeight - tileStripeWidth / 1.3));
+        td.drawContents(painter);
+        painter->restore();
+    }
+
     painter->restore();
+}
 
-    // paint the page information
-    const QString page = tr("Page %1 of %2").arg(row * nbCol + col + 1).arg(nbCol * nbRow);
+//---------------------------------------------------------------------------------------------------------------------
+void VPTileFactory::DrawGridTextInformationSVGFont(QPainter *painter, const QString &text) const
+{
+    VSvgFontDatabase *db = VAbstractApplication::VApp()->SVGFontDatabase();
+    const VSvgFontEngine engine = db->FontEngine(m_svgFontFamily,
+                                                 SVGFontStyle::Normal,
+                                                 SVGFontWeight::Normal,
+                                                 tileTextFontSize);
 
-    td.setPageSize(QSizeF(m_drawingAreaHeight - UnitConvertor(2, Unit::Cm, Unit::Px), m_drawingAreaWidth));
+    VSvgFont const svgFont = engine.Font();
+    if (!svgFont.IsValid())
+    {
+        auto const errorMsg = QStringLiteral("Invalid SVG font '%1'. Fallback to outline font.").arg(svgFont.Name());
+        qDebug() << errorMsg;
+        DrawGridTextInformationOutlineFont(painter, text);
+        return;
+    }
 
-    auto const metrix = QFontMetrics(td.defaultFont());
-    int const maxWidth = metrix.horizontalAdvance(QString().fill('z', 50));
-    QString const clippedSheetName = metrix.elidedText(sheetName, Qt::ElideMiddle, maxWidth);
-
-    td.setHtml(QStringLiteral("<table width='100%' style='color:rgb(%1);'>"
-                              "<tr>"
-                              "<td align='center'>%2 - %3</td>"
-                              "</tr>"
-                              "</table>")
-                   .arg(tileColorStr, page, clippedSheetName));
     painter->save();
+
+    QPen textPen = PenTileInfos();
+    textPen.setStyle(Qt::SolidLine);
+    painter->setPen(textPen);
+
+    // Compute position to center the text
+    qreal const x = UnitConvertor(1, Unit::Cm, Unit::Px);
+    qreal const y = m_drawingAreaHeight - tileStripeWidth / 1.3;
+    qreal const centerX = (m_drawingAreaWidth - tileStripeWidth - UnitConvertor(1, Unit::Cm, Unit::Px)) / 2.0
+                          - engine.TextWidth(text, textPen.widthF()) / 2.0;
+
+    painter->translate(x + centerX, y);
+
+    painter->drawPath(engine.DrawPath(QPointF(), text, textPen.widthF()));
+
+    painter->restore();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VPTileFactory::DrawPageTextInformation(
+    QPainter *painter, int row, int col, int nbRow, int nbCol, const QString &sheetName) const
+{
+    if (const QString page = tr("Page %1 of %2").arg(row * nbCol + col + 1).arg(nbCol * nbRow);
+        m_commonSettings->GetSingleLineFonts())
+    {
+        DrawPageTextInformationSVGFont(painter, page, sheetName);
+    }
+    else
+    {
+        DrawPageTextInformationOutlineFont(painter, page, sheetName);
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VPTileFactory::DrawPageTextInformationOutlineFont(QPainter *painter,
+                                                       const QString &text,
+                                                       const QString &sheetName) const
+{
+    painter->save();
+
+    QPen textPen = PenTileInfos();
+    textPen.setStyle(Qt::SolidLine);
+    painter->setPen(textPen);
+
+    if (m_commonSettings->GetSingleStrokeOutlineFont())
+    {
+        // Setup painter font
+        QFont font = m_font;
+        font.setPointSize(tileTextFontSize);
+        painter->setFont(font);
+
+        VSingleLineOutlineChar const corrector(font);
+        if (!corrector.IsPopulated())
+        {
+            corrector.LoadCorrections(m_commonSettings->GetPathFontCorrections());
+        }
+
+        auto const metrix = QFontMetrics(font);
+        int const maxWidth = metrix.horizontalAdvance(QString().fill('z', 50));
+        QString const clippedSheetName = metrix.elidedText(sheetName, Qt::ElideMiddle, maxWidth);
+
+        const QString page = text + " - "_L1 + clippedSheetName;
+
+        QPainterPath path;
+        QFontMetrics const fm(font);
+
+        int w = 0;
+        for (auto c : qAsConst(page))
+        {
+            path.addPath(corrector.DrawChar(w, static_cast<qreal>(fm.ascent()), c));
+            w += fm.horizontalAdvance(c);
+        }
+
+        painter->rotate(-90);
+
+        // Compute position to center the text
+        qreal const x = -m_drawingAreaHeight / 2.0 - w / 2.0;
+        qreal const y = m_drawingAreaWidth - tileStripeWidth;
+
+        painter->translate(QPointF(x, y));
+
+        painter->drawPath(path);
+    }
+    else
+    {
+        const QString tileColorStr
+            = QStringLiteral("%1,%2,%3").arg(tileColor.red()).arg(tileColor.green()).arg(tileColor.blue());
+
+        // paint the page information
+        QTextDocument td;
+        td.setPageSize(QSizeF(m_drawingAreaHeight - UnitConvertor(2, Unit::Cm, Unit::Px), m_drawingAreaWidth));
+
+        auto const metrix = QFontMetrics(td.defaultFont());
+        int const maxWidth = metrix.horizontalAdvance(QString().fill('z', 50));
+        QString const clippedSheetName = metrix.elidedText(sheetName, Qt::ElideMiddle, maxWidth);
+
+        td.setHtml(QStringLiteral("<table width='100%' style='color:rgb(%1);'>"
+                                  "<tr>"
+                                  "<td align='center'>%2 - %3</td>"
+                                  "</tr>"
+                                  "</table>")
+                       .arg(tileColorStr, text, clippedSheetName));
+        painter->save();
+        painter->rotate(-90);
+        painter->translate(QPointF(-(m_drawingAreaHeight) + UnitConvertor(1, Unit::Cm, Unit::Px),
+                                   m_drawingAreaWidth - tileStripeWidth));
+        td.drawContents(painter);
+        painter->restore();
+    }
+
+    painter->restore();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VPTileFactory::DrawPageTextInformationSVGFont(QPainter *painter,
+                                                   const QString &text,
+                                                   const QString &sheetName) const
+{
+    VSvgFontDatabase *db = VAbstractApplication::VApp()->SVGFontDatabase();
+    const VSvgFontEngine engine = db->FontEngine(m_svgFontFamily,
+                                                 SVGFontStyle::Normal,
+                                                 SVGFontWeight::Normal,
+                                                 tileTextFontSize);
+
+    VSvgFont const svgFont = engine.Font();
+    if (!svgFont.IsValid())
+    {
+        auto const errorMsg = QStringLiteral("Invalid SVG font '%1'. Fallback to outline font.").arg(svgFont.Name());
+        qDebug() << errorMsg;
+        DrawPageTextInformationOutlineFont(painter, text, sheetName);
+        return;
+    }
+
+    painter->save();
+
+    QPen textPen = PenTileInfos();
+    textPen.setStyle(Qt::SolidLine);
+    painter->setPen(textPen);
+
+    int const maxWidth = qFloor(engine.TextWidth(QString().fill('z', 50), textPen.widthF()));
+    QString const clippedSheetName = engine.ElidedText(sheetName,
+                                                       SVGTextElideMode::ElideRight,
+                                                       maxWidth,
+                                                       textPen.widthF());
+
+    const QString page = text + " - "_L1 + clippedSheetName;
+
     painter->rotate(-90);
-    painter->translate(
-        QPointF(-(m_drawingAreaHeight) + UnitConvertor(1, Unit::Cm, Unit::Px), m_drawingAreaWidth - tileStripeWidth));
-    td.drawContents(painter);
+
+    // Compute position to center the text
+    qreal const x = -m_drawingAreaHeight / 2.0 - engine.TextWidth(page, textPen.widthF()) / 2.0;
+    qreal const y = m_drawingAreaWidth - tileStripeWidth;
+
+    painter->translate(QPointF(x, y));
+
+    painter->drawPath(engine.DrawPath(QPointF(), page, textPen.widthF()));
+
     painter->restore();
 }
 
@@ -862,4 +1226,128 @@ void VPTileFactory::PaintWatermarkImage(QPainter *painter, const QRectF &img, co
     }
 
     painter->restore();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VPTileFactory::InitTileSingleStrokeOutlineFont()
+{
+    m_font = QFont();
+
+    if (!m_commonSettings->GetSingleStrokeOutlineFont())
+    {
+        return;
+    }
+
+    VPLayoutPtr const layout = m_layout.toStrongRef();
+    if (layout.isNull())
+    {
+        return;
+    }
+
+    QList<VPPiecePtr> const allPieces = layout->GetPieces();
+    if (allPieces.isEmpty())
+    {
+        return;
+    }
+
+    QMap<QString, QFont> fontMap;
+
+    for (const auto &piece : allPieces)
+    {
+        if (QVector<QPointF> const labelShape = piece->GetPieceLabelRect(); labelShape.count() == 4)
+        {
+            const QFont &font = piece->GetPieceLabelData().GetFont();
+            fontMap.insert(font.family(), font);
+        }
+
+        if (QVector<QPointF> const labelShape = piece->GetPatternLabelRect(); labelShape.count() == 4)
+        {
+            const QFont &font = piece->GetPatternLabelData().GetFont();
+            fontMap.insert(font.family(), font);
+        }
+    }
+
+    if (fontMap.size() == 1)
+    {
+        m_font = fontMap.first();
+        return;
+    }
+
+    if (fontMap.size() > 1)
+    {
+        const QList<QString> sortedFamilies = fontMap.keys();
+        const QString &selectedFamily = sortedFamilies.first();
+        const QFont &selectedFont = fontMap[selectedFamily];
+
+        // Step 2: Build list of font names for warning
+        const QString warning = tr("Warning: Multiple single stroke outline fonts detected (%1). "
+                                   "The font \"%2\" was selected.")
+                                    .arg(sortedFamilies.join(", "_L1), selectedFamily);
+
+        qWarning().noquote() << warning;
+
+        m_font = selectedFont;
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VPTileFactory::InitTileSingleLineSVGFont()
+{
+    m_svgFontFamily.clear();
+
+    if (!m_commonSettings->GetSingleLineFonts())
+    {
+        return;
+    }
+
+    VPLayoutPtr const layout = m_layout.toStrongRef();
+    if (layout.isNull())
+    {
+        return;
+    }
+
+    QList<VPPiecePtr> const allPieces = layout->GetPieces();
+    if (allPieces.isEmpty())
+    {
+        return;
+    }
+
+    QSet<QString> fonts;
+
+    for (const auto &piece : allPieces)
+    {
+        if (QVector<QPointF> const labelShape = piece->GetPieceLabelRect(); labelShape.count() == 4)
+        {
+            fonts.insert(piece->GetPieceLabelData().GetSVGFontFamily());
+        }
+
+        if (QVector<QPointF> const labelShape = piece->GetPatternLabelRect(); labelShape.count() == 4)
+        {
+            fonts.insert(piece->GetPatternLabelData().GetSVGFontFamily());
+        }
+    }
+
+    if (fonts.size() == 1)
+    {
+        m_svgFontFamily = *fonts.constBegin();
+        return;
+    }
+
+    if (fonts.size() > 1)
+    {
+        QList<QString> fontList = fonts.values();
+        std::sort(fontList.begin(),
+                  fontList.end(),
+                  [](const QString &a, const QString &b) { return a.compare(b, Qt::CaseInsensitive) < 0; });
+
+        const QString selectedFont = fontList.first();
+
+        const QString warning = tr("Warning: Multiple single-line SVG fonts detected (%1). "
+                                   "The font \"%2\" was selected.")
+                                    .arg(fontList.join(", "_L1), selectedFont);
+
+        qWarning().noquote() << warning;
+
+        m_svgFontFamily = selectedFont;
+    }
 }

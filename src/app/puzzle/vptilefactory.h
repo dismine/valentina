@@ -102,6 +102,12 @@ public:
                                     const QString &watermarkPath, bool folowColorScheme, qreal xScale = 1.0,
                                     qreal yScale = 1.0);
 
+    void InitTileSingleStrokeOutlineFont();
+    void InitTileSingleLineSVGFont();
+
+    auto SingleStrokeOutlineFont() const -> QFont;
+    auto SVGFontFamily() const -> QString;
+
 private:
     // cppcheck-suppress unknownMacro
     Q_DISABLE_COPY_MOVE(VPTileFactory) // NOLINT
@@ -121,6 +127,16 @@ private:
 
     VWatermarkData m_watermarkData{};
 
+    /**
+     * @brief m_font single stroke outline font, if defined
+     */
+    QFont m_font{};
+
+    /**
+     * @brief m_font SVG font name, if defined
+     */
+    QString m_svgFontFamily{};
+
     void DrawRuler(QPainter *painter, qreal scale) const;
     void DrawWatermark(QPainter *painter) const;
 
@@ -132,6 +148,9 @@ private:
     void DrawLeftTriangle(QPainter *painter) const;
     void DrawBottomTriangle(QPainter *painter) const;
     void DrawRightTriangle(QPainter *painter) const;
+
+    auto ShowTopLine() const -> bool;
+    auto ShowLeftLine() const -> bool;
 
     void DrawTopLineScissors(QPainter *painter) const;
     void DrawLeftLineScissors(QPainter *painter) const;
@@ -146,7 +165,26 @@ private:
     void DrawSolidBottomLine(QPainter *painter, int col, int nbCol) const;
     void DrawSolidRightLine(QPainter *painter, int row, int nbRow) const;
 
-    void DrawTextInformation(QPainter *painter, int row, int col, int nbRow, int nbCol, const QString &sheetName) const;
+    void DrawGridTextInformation(QPainter *painter, int row, int col) const;
+    void DrawGridTextInformationOutlineFont(QPainter *painter, const QString &text) const;
+    void DrawGridTextInformationSVGFont(QPainter *painter, const QString &text) const;
+
+    void DrawPageTextInformation(
+        QPainter *painter, int row, int col, int nbRow, int nbCol, const QString &sheetName) const;
+    void DrawPageTextInformationOutlineFont(QPainter *painter, const QString &text, const QString &sheetName) const;
+    void DrawPageTextInformationSVGFont(QPainter *painter, const QString &text, const QString &sheetName) const;
 };
+
+//---------------------------------------------------------------------------------------------------------------------
+inline auto VPTileFactory::SingleStrokeOutlineFont() const -> QFont
+{
+    return m_font;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+inline auto VPTileFactory::SVGFontFamily() const -> QString
+{
+    return m_svgFontFamily;
+}
 
 #endif // VPTILEFACTORY_H

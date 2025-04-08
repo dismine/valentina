@@ -250,6 +250,7 @@ VPSheetSceneData::VPSheetSceneData(const VPLayoutPtr &layout, const QUuid &sheet
     m_scene->addItem(m_graphicsSheet);
 
     m_graphicsTileGrid = new VPGraphicsTileGrid(layout, m_sheetUuid);
+    m_graphicsTileGrid->setZValue(10);
     m_scene->addItem(m_graphicsTileGrid);
 
     m_rotationControls = new VPGraphicsPieceControls(layout);
@@ -482,6 +483,8 @@ void VPSheetSceneData::PrepareTilesScheme()
         layout->LayoutSettings().SetShowWatermark(false);
     }
 
+    m_graphicsTileGrid->SetPrintMode(true);
+
     RefreshLayout();
 }
 
@@ -493,6 +496,8 @@ void VPSheetSceneData::ClearTilesScheme()
         layout->LayoutSettings().SetShowTiles(m_showTilesSchemeTmp);
         layout->LayoutSettings().SetShowWatermark(m_showTilesWatermarkSchemeTmp);
     }
+
+    m_graphicsTileGrid->SetPrintMode(false);
 
     RefreshLayout();
 }

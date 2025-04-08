@@ -2828,6 +2828,15 @@ auto VPMainWindow::GeneratePdfTiledFile(const VPSheetPtr &sheet,
         painter->setRenderHint(QPainter::Antialiasing, true);
     }
 
+    if (VAbstractApplication::VApp()->Settings()->GetSingleLineFonts())
+    {
+        m_layout->TileFactory()->InitTileSingleLineSVGFont();
+    }
+    else if (VAbstractApplication::VApp()->Settings()->GetSingleStrokeOutlineFont())
+    {
+        m_layout->TileFactory()->InitTileSingleStrokeOutlineFont();
+    }
+
     if (data.showTilesScheme)
     {
         if (not DrawTilesScheme(printer.data(), painter, sheet, firstPage))
@@ -3359,6 +3368,15 @@ auto VPMainWindow::PrintLayoutTiledSheetPage(QPrinter *printer, QPainter &painte
                             Qt::RoundCap, Qt::RoundJoin));
         painter.setBrush(QBrush(Qt::NoBrush));
         painter.setRenderHint(QPainter::Antialiasing, true);
+    }
+
+    if (VAbstractApplication::VApp()->Settings()->GetSingleLineFonts())
+    {
+        m_layout->TileFactory()->InitTileSingleLineSVGFont();
+    }
+    else if (VAbstractApplication::VApp()->Settings()->GetSingleStrokeOutlineFont())
+    {
+        m_layout->TileFactory()->InitTileSingleStrokeOutlineFont();
     }
 
     if (page.tilesScheme)

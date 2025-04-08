@@ -133,6 +133,8 @@ VLib {
             "vsvgglyph.cpp",
             "vsvgglyph.h",
             "vsvgglyph_p.h",
+            "vsvghandler.cpp",
+            "vsvghandler.h",
             "vsvgpathtokenizer.cpp",
             "vsvgpathtokenizer.h",
         ]

@@ -64,12 +64,14 @@ public:
 
     void AddGlyph(QChar unicode, const QPainterPath &path, qreal horizAdvX = -1);
 
-    auto DrawPath(const QPointF &point, const QString &str) const -> QPainterPath;
+    auto DrawPath(const QPointF &point, const QString &str, qreal penWidth = 0) const -> QPainterPath;
 
     void Draw(QPainter *p, const QPointF &point, const QString &str) const;
     void Draw(QPainter *p, const QRectF &rect, const QString &str, Qt::Alignment alignment = Qt::AlignLeft) const;
 
     auto TextWidth(const QString &str, qreal penWidth = 0) const -> qreal;
+
+    auto BoundingRect(const QString &str, qreal penWidth = 0) const -> QRectF;
 
     auto InFont(QChar ch) const -> bool;
     auto CanRender(const QString &str) const -> bool;
