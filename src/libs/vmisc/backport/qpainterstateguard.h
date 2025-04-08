@@ -27,7 +27,14 @@ public:
         : m_painter(std::exchange(other.m_painter, nullptr))
         , m_level(std::exchange(other.m_level, 0))
     {}
-    QT_MOVE_ASSIGNMENT_OPERATOR_IMPL_VIA_MOVE_AND_SWAP(QPainterStateGuard)
+
+    QPainterStateGuard &operator=(QPainterStateGuard &&other) noexcept
+    {
+        QPainterStateGuard moved(std::move(other));
+        swap(moved);
+        return *this;
+    }
+
     void swap(QPainterStateGuard &other) noexcept
     {
         qt_ptr_swap(m_painter, other.m_painter);
