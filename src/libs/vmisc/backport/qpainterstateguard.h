@@ -12,6 +12,15 @@
 
 #include <QtGui/qpainter.h>
 
+#if QT_VERSION < QT_VERSION_CHECK(6, 6, 0)
+#if __has_cpp_attribute(nodiscard) >= 201907L /* used for both P1771 and P1301... */
+// [[nodiscard]] constructor (P1771)
+#ifndef Q_NODISCARD_CTOR
+#define Q_NODISCARD_CTOR [[nodiscard]]
+#endif
+#endif
+#endif
+
 QT_BEGIN_NAMESPACE
 
 class QPainterStateGuard
