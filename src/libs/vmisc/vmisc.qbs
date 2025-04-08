@@ -216,6 +216,16 @@ VLib {
         condition: buildconfig.useConanPackages && buildconfig.conanCrashReportingEnabled
     }
 
+    Group {
+        name: "backport"
+        prefix: "backport/"
+        files: [
+            "qpainterstateguard.h",
+            "qpainterstateguard.cpp",
+        ]
+        condition: Utilities.versionCompare(Qt.core.version, "6.9") < 0
+    }
+
     Export {
         Depends { name: "cpp" }
         Depends { name: "Qt"; submodules: ["printsupport", "widgets"] }

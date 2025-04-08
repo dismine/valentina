@@ -50,6 +50,12 @@
 #include <QMessageBox>
 #include <QUndoStack>
 
+#if QT_VERSION < QT_VERSION_CHECK(6, 9, 0)
+#include "../vmisc/backport/qpainterstateguard.h"
+#else
+#include <QPainterStateGuard>
+#endif
+
 //---------------------------------------------------------------------------------------------------------------------
 VBackgroundImageItem::VBackgroundImageItem(const VBackgroundPatternImage &image, VAbstractPattern *doc,
                                            QGraphicsItem *parent)
@@ -153,14 +159,12 @@ void VBackgroundImageItem::paint(QPainter *painter, const QStyleOptionGraphicsIt
 
     if (m_showHover)
     {
-        painter->save();
+        QPainterStateGuard const guard(painter);
 
         QBrush const brush(QColor(177, 216, 250, 25));
         painter->setBrush(brush);
 
         painter->drawRect(boundingRect());
-
-        painter->restore();
     }
 }
 

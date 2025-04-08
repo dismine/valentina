@@ -33,6 +33,12 @@
 #include <QPen>
 #include <QPainter>
 
+#if QT_VERSION < QT_VERSION_CHECK(6, 9, 0)
+#include "../vmisc/backport/qpainterstateguard.h"
+#else
+#include <QPainterStateGuard>
+#endif
+
 //---------------------------------------------------------------------------------------------------------------------
 VBackgroundSVGItem::VBackgroundSVGItem(const VBackgroundPatternImage &image, VAbstractPattern *doc,
                                        QGraphicsItem *parent)
@@ -69,14 +75,12 @@ void VBackgroundSVGItem::paint(QPainter *painter, const QStyleOptionGraphicsItem
         return;
     }
 
-    painter->save();
+    QPainterStateGuard const guard(painter);
     painter->setTransform(Image().Matrix(), true);
     painter->setOpacity(Image().Opacity());
     painter->scale(PrintDPI / 90., PrintDPI / 90.);
 
     renderer->render(painter, QRectF(QPointF(0, 0), renderer->defaultSize()));
-
-    painter->restore();
 
     VBackgroundImageItem::paint(painter, option, widget);
 }

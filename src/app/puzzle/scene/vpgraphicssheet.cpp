@@ -39,6 +39,12 @@
 #include <QFontMetrics>
 #include <QtMath>
 
+#if QT_VERSION < QT_VERSION_CHECK(6, 9, 0)
+#include "../vmisc/backport/qpainterstateguard.h"
+#else
+#include <QPainterStateGuard>
+#endif
+
 namespace
 {
 constexpr qreal foldArrowMargin = 20;
@@ -166,7 +172,7 @@ void VPGraphicsSheet::PaintVerticalFold(QPainter *painter, const QRectF &sheetRe
         not layout.isNull() && layout->LayoutSettings().IsCutOnFold())
     {
         QString const foldText = FoldText();
-        painter->save();
+        QPainterStateGuard guard(painter);
         QFont font = QApplication::font();
         font.setPointSize(foldFontSize);
         painter->setFont(font);
@@ -179,7 +185,7 @@ void VPGraphicsSheet::PaintVerticalFold(QPainter *painter, const QRectF &sheetRe
         textRect.translate(0, -(sheetRect.center().y() - sheetRect.topLeft().y()) - foldTextMargin -
                                   textRect.height() / 2.);
         // painter->drawRect(textRect); // uncomment for debug
-        painter->restore();
+        guard.restore();
 
         if (sheetRect.width() >= textRect.width() * 2)
         {
@@ -192,14 +198,14 @@ void VPGraphicsSheet::PaintVerticalFold(QPainter *painter, const QRectF &sheetRe
             QPainterPath leftArrowPath = VLayoutPiece::GrainlinePath(leftArrow.Shape());
             leftArrowPath.setFillRule(Qt::WindingFill);
 
-            painter->save();
+            guard.save();
             QPen pen = painter->pen();
             pen.setCapStyle(Qt::RoundCap);
             pen.setJoinStyle(Qt::RoundJoin);
             painter->setPen(pen);
             painter->setBrush(QBrush(pen.color(), Qt::SolidPattern));
             painter->drawPath(leftArrowPath);
-            painter->restore();
+            guard.restore();
 
             QLineF const rightLine(QPointF(sheetRect.center().x() + arrowMargin, baseY),
                                    QPointF(sheetRect.topRight().x(), baseY));
@@ -207,14 +213,13 @@ void VPGraphicsSheet::PaintVerticalFold(QPainter *painter, const QRectF &sheetRe
             QPainterPath rightArrowPath = VLayoutPiece::GrainlinePath(rightArrow.Shape());
             rightArrowPath.setFillRule(Qt::WindingFill);
 
-            painter->save();
+            guard.save();
             pen = painter->pen();
             pen.setCapStyle(Qt::RoundCap);
             pen.setJoinStyle(Qt::RoundJoin);
             painter->setPen(pen);
             painter->setBrush(QBrush(pen.color(), Qt::SolidPattern));
             painter->drawPath(rightArrowPath);
-            painter->restore();
         }
     }
 }
@@ -226,7 +231,7 @@ void VPGraphicsSheet::PaintHorizontalFold(QPainter *painter, const QRectF &sheet
         not layout.isNull() && layout->LayoutSettings().IsCutOnFold())
     {
         QString const foldText = FoldText();
-        painter->save();
+        QPainterStateGuard guard(painter);
         QFont font = QApplication::font();
         font.setPointSize(foldFontSize);
         painter->setFont(font);
@@ -239,7 +244,7 @@ void VPGraphicsSheet::PaintHorizontalFold(QPainter *painter, const QRectF &sheet
         painter->rotate(90);
         painter->translate(-sheetRect.center());
         painter->drawText(textPosition, foldText);
-        painter->restore();
+        guard.restore();
 
         QRectF swappedRect = SwapRect(textRect);
         swappedRect.translate(sheetRect.center() - swappedRect.center());
@@ -259,14 +264,14 @@ void VPGraphicsSheet::PaintHorizontalFold(QPainter *painter, const QRectF &sheet
             QPainterPath leftArrowPath = VLayoutPiece::GrainlinePath(leftArrow.Shape());
             leftArrowPath.setFillRule(Qt::WindingFill);
 
-            painter->save();
+            guard.save();
             QPen pen = painter->pen();
             pen.setCapStyle(Qt::RoundCap);
             pen.setJoinStyle(Qt::RoundJoin);
             painter->setPen(pen);
             painter->setBrush(QBrush(pen.color(), Qt::SolidPattern));
             painter->drawPath(leftArrowPath);
-            painter->restore();
+            guard.restore();
 
             QLineF const rightLine(QPointF(baseX, sheetRect.center().y() + arrowMargin),
                                    QPointF(baseX, sheetRect.bottomRight().y()));
@@ -274,14 +279,13 @@ void VPGraphicsSheet::PaintHorizontalFold(QPainter *painter, const QRectF &sheet
             QPainterPath rightArrowPath = VLayoutPiece::GrainlinePath(rightArrow.Shape());
             rightArrowPath.setFillRule(Qt::WindingFill);
 
-            painter->save();
+            guard.save();
             pen = painter->pen();
             pen.setCapStyle(Qt::RoundCap);
             pen.setJoinStyle(Qt::RoundJoin);
             painter->setPen(pen);
             painter->setBrush(QBrush(pen.color(), Qt::SolidPattern));
             painter->drawPath(rightArrowPath);
-            painter->restore();
         }
     }
 }
@@ -308,10 +312,9 @@ void VPGraphicsSheet::PaintMargins(QPainter *painter) const
                  Qt::RoundJoin);
         pen.setCosmetic(true);
 
-        painter->save();
+        QPainterStateGuard const guard(painter);
         painter->setPen(pen);
         painter->drawRect(GetMarginsRect());
-        painter->restore();
     }
 }
 
@@ -326,7 +329,7 @@ void VPGraphicsSheet::PaintBorder(QPainter *painter) const
                  Qt::RoundJoin);
         pen.setCosmetic(true);
 
-        painter->save();
+        QPainterStateGuard const guard(painter);
         painter->setPen(pen);
         painter->drawRect(sheetRect);
 
@@ -342,8 +345,6 @@ void VPGraphicsSheet::PaintBorder(QPainter *painter) const
                 PaintHorizontalFoldShadow(painter, sheetRect);
             }
         }
-
-        painter->restore();
     }
 }
 
@@ -377,7 +378,7 @@ void VPGraphicsSheet::PaintGrid(QPainter *painter) const
                  Qt::RoundJoin);
         pen.setCosmetic(true);
 
-        painter->save();
+        QPainterStateGuard const guard(painter);
         painter->setPen(pen);
 
         QRectF const sheetRect = GetSheetRect();
@@ -404,7 +405,6 @@ void VPGraphicsSheet::PaintGrid(QPainter *painter) const
                 rowY += rowHeight;
             }
         }
-        painter->restore();
     }
 }
 

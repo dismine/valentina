@@ -53,6 +53,12 @@
 #include "../vpatterndb/vcontainer.h"
 #include "../vwidgets/global.h"
 
+#if QT_VERSION < QT_VERSION_CHECK(6, 9, 0)
+#include "../vmisc/backport/qpainterstateguard.h"
+#else
+#include <QPainterStateGuard>
+#endif
+
 #if QT_VERSION < QT_VERSION_CHECK(6, 4, 0)
 #include "../vmisc/compatibility.h"
 #endif
@@ -108,7 +114,7 @@ void VAbstractSpline::paint(QPainter *painter, const QStyleOptionGraphicsItem *o
     {
         if (m_isHovered || m_detailsMode)
         {
-            painter->save();
+            QPainterStateGuard const guard(painter);
 
             QPen arrowPen(pen());
             arrowPen.setStyle(Qt::SolidLine);
@@ -119,8 +125,6 @@ void VAbstractSpline::paint(QPainter *painter, const QStyleOptionGraphicsItem *o
             painter->drawPath(VAbstractCurve::ShowDirection(
                 curve->DirectionArrows(),
                 ScaleWidth(VAbstractCurve::LengthCurveDirectionArrow(), SceneScale(scene()))));
-
-            painter->restore();
         }
 
         PaintWithFixItemHighlightSelected<QGraphicsPathItem>(this, painter, option, widget);

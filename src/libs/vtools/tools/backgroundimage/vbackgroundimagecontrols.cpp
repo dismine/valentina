@@ -45,6 +45,12 @@
 #include "../vwidgets/global.h"
 #include "../vwidgets/vmaingraphicsview.h"
 
+#if QT_VERSION < QT_VERSION_CHECK(6, 9, 0)
+#include "../vmisc/backport/qpainterstateguard.h"
+#else
+#include <QPainterStateGuard>
+#endif
+
 namespace
 {
 //---------------------------------------------------------------------------------------------------------------------
@@ -280,7 +286,7 @@ void VBackgroundImageControls::paint(QPainter *painter, const QStyleOptionGraphi
     }
 
     const qreal sceneScale = SceneScale(scene());
-    painter->save();
+    QPainterStateGuard guard(painter);
     QPen pen = painter->pen();
     pen.setStyle(Qt::DashLine);
     painter->setPen(pen);
@@ -289,19 +295,18 @@ void VBackgroundImageControls::paint(QPainter *painter, const QStyleOptionGraphi
     rect = QRectF(rect.topLeft() * sceneScale, rect.bottomRight() * sceneScale);
 
     painter->drawRect(rect.adjusted(-pen.width(), -pen.width(), pen.width(), pen.width()));
-    painter->restore();
+    guard.restore();
 
     if (m_showOrigin)
     {
-        painter->save();
+        guard.save();
         painter->setBrush(pen.brush());
         painter->drawPath(OriginCircle1());
-        painter->restore();
+        guard.restore();
 
-        painter->save();
+        guard.save();
         painter->setBrush(QBrush());
         painter->drawPath(OriginCircle2());
-        painter->restore();
     }
 }
 

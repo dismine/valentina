@@ -53,6 +53,12 @@
 #include "theme/vscenestylesheet.h"
 #include "vtextgraphicsitem.h"
 
+#if QT_VERSION < QT_VERSION_CHECK(6, 9, 0)
+#include "../vmisc/backport/qpainterstateguard.h"
+#else
+#include <QPainterStateGuard>
+#endif
+
 namespace
 {
 constexpr qreal resizeSquare = MmToPixel(3.);
@@ -213,10 +219,9 @@ void DrawTextAsPaths(const TextLine &tl,
     matrix.translate(dX, iY);
     path = matrix.map(path);
 
-    painter->save();
+    QPainterStateGuard const guard(painter);
     painter->setBrush(QBrush(Qt::NoBrush));
     painter->drawPath(path);
-    painter->restore();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -996,9 +1001,8 @@ void VTextGraphicsItem::DrawTextAsPlain(
 {
     if (fnt.pointSize() * SceneScale(this->scene()) >= minVisibleFontSize)
     {
-        painter->save();
+        QPainterStateGuard const guard(painter);
         painter->setFont(fnt);
         painter->drawText(QRectF(0, iY, iW, lineHeight * 2), static_cast<int>(tl.m_eAlign), tl.m_qsText);
-        painter->restore();
     }
 }

@@ -33,6 +33,12 @@
 #include <QPainter>
 #include <QStyleOptionGraphicsItem>
 
+#if QT_VERSION < QT_VERSION_CHECK(6, 9, 0)
+#include "../vmisc/backport/qpainterstateguard.h"
+#else
+#include <QPainterStateGuard>
+#endif
+
 extern auto qt_regionToPath(const QRegion &region) -> QPainterPath;
 
 namespace
@@ -86,13 +92,11 @@ void VBackgroundPixmapItem::paint(QPainter *painter, const QStyleOptionGraphicsI
 {
     painter->setRenderHint(QPainter::SmoothPixmapTransform, (m_transformationMode == Qt::SmoothTransformation));
 
-    painter->save();
+    QPainterStateGuard const guard(painter);
     painter->setTransform(Image().Matrix(), true);
     painter->setOpacity(Image().Opacity());
 
     painter->drawPixmap(QPointF(), Pixmap());
-
-    painter->restore();
 
     VBackgroundImageItem::paint(painter, option, widget);
 }

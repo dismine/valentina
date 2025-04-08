@@ -77,6 +77,12 @@
 #include "vlayoutpiece_p.h"
 #include "vtextmanager.h"
 
+#if QT_VERSION < QT_VERSION_CHECK(6, 9, 0)
+#include "../vmisc/backport/qpainterstateguard.h"
+#else
+#include <QPainterStateGuard>
+#endif
+
 using namespace Qt::Literals::StringLiterals;
 
 namespace
@@ -1747,15 +1753,13 @@ void VLayoutPiece::DrawMiniature(QPainter &painter, bool togetherWithNotches) co
 
     for (const auto &path : d->m_internalPaths)
     {
-        painter.save();
+        QPainterStateGuard const guard(&painter);
 
         QPen pen = painter.pen();
         pen.setStyle(path.PenStyle());
         painter.setPen(pen);
 
         painter.drawPath(m.map(path.GetPainterPath()));
-
-        painter.restore();
     }
 
     for (const auto &label : d->m_placeLabels)

@@ -19,6 +19,12 @@
 
 #include <../vmisc/svgfont/vsvgfontdatabase.h>
 
+#if QT_VERSION < QT_VERSION_CHECK(6, 9, 0)
+#include "../vmisc/backport/qpainterstateguard.h"
+#else
+#include <QPainterStateGuard>
+#endif
+
 namespace
 {
 constexpr qreal penWidth = 1;
@@ -352,7 +358,7 @@ void VPGraphicsTileGrid::PaintTileNumberOutlineFont(
         return;
     }
 
-    painter->save();
+    QPainterStateGuard const guard(painter);
 
     painter->setFont(font);
 
@@ -408,8 +414,6 @@ void VPGraphicsTileGrid::PaintTileNumberOutlineFont(
     {
         painter->drawText(img, Qt::AlignCenter, QString::number(j * nbCol + i + 1));
     }
-
-    painter->restore();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -435,7 +439,7 @@ void VPGraphicsTileGrid::PaintTileNumberSVGFont(QPainter *painter,
         return;
     }
 
-    painter->save();
+    QPainterStateGuard const guard(painter);
 
     QPen pen = painter->pen();
 
@@ -463,15 +467,13 @@ void VPGraphicsTileGrid::PaintTileNumberSVGFont(QPainter *painter,
     QPainterPath const path = engine.DrawPath(QPointF(), tileNumber, pen.widthF());
 
     painter->drawPath(transform.map(path));
-
-    painter->restore();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 void VPGraphicsTileGrid::DrawGrid(
     QPainter *painter, int nbRow, int nbCol, const QMarginsF &margins, qreal width, qreal height) const
 {
-    painter->save();
+    QPainterStateGuard const guard(painter);
 
     const VCommonSettings *settings = VAbstractApplication::VApp()->Settings();
     const bool penPrinting = m_printMode && (settings->GetSingleLineFonts() || settings->GetSingleStrokeOutlineFont());
@@ -509,6 +511,4 @@ void VPGraphicsTileGrid::DrawGrid(
         const qreal x = left + i * width;
         painter->drawLine(QPointF(x, top), QPointF(x, top + totalHeight));
     }
-
-    painter->restore();
 }

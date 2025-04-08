@@ -49,6 +49,12 @@
 #include "../vmisc/theme/vtheme.h"
 #include "../vwidgets/global.h"
 
+#if QT_VERSION < QT_VERSION_CHECK(6, 9, 0)
+#include "../vmisc/backport/qpainterstateguard.h"
+#else
+#include <QPainterStateGuard>
+#endif
+
 namespace
 {
 constexpr qreal penWidth = 2;
@@ -145,15 +151,14 @@ void VPGraphicsTransformationOrigin::paint(QPainter *painter, const QStyleOption
 
     if (m_originVisible)
     {
-        painter->save();
+        QPainterStateGuard guard(painter);
         painter->setBrush(QBrush(CurrentColor()));
         painter->drawPath(Center1());
-        painter->restore();
+        guard.restore();
 
-        painter->save();
+        guard.save();
         painter->setBrush(QBrush());
         painter->drawPath(Center2());
-        painter->restore();
     }
 }
 
@@ -238,10 +243,9 @@ auto VPGraphicsTransformationOrigin::RotationCenter(QPainter *painter) const -> 
 
     if (painter != nullptr)
     {
-        painter->save();
+        QPainterStateGuard const guard(painter);
         painter->setBrush(QBrush(CurrentColor()));
         painter->drawPath(Center1());
-        painter->restore();
     }
     path.addPath(center1);
 
@@ -254,10 +258,9 @@ auto VPGraphicsTransformationOrigin::RotationCenter(QPainter *painter) const -> 
 
     if (painter != nullptr)
     {
-        painter->save();
+        QPainterStateGuard const guard(painter);
         painter->setBrush(QBrush());
         painter->drawPath(Center2());
-        painter->restore();
     }
     path.addPath(center2);
 

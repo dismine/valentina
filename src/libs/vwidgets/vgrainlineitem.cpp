@@ -43,6 +43,12 @@
 #include "vgrainlineitem.h"
 #include "vpiecegrainline.h"
 
+#if QT_VERSION < QT_VERSION_CHECK(6, 9, 0)
+#include "../vmisc/backport/qpainterstateguard.h"
+#else
+#include <QPainterStateGuard>
+#endif
+
 constexpr int rectWidth = 30;
 constexpr int resizeRectSize = 10;
 constexpr int rotateCircR = 7;
@@ -88,7 +94,7 @@ void VGrainlineItem::paint(QPainter *pP, const QStyleOptionGraphicsItem *pOption
 {
     Q_UNUSED(pOption)
     Q_UNUSED(pWidget)
-    pP->save();
+    QPainterStateGuard guard(pP);
     QColor clr = m_color;
 
     if (m_role != VColorRole::CustomColor)
@@ -165,7 +171,7 @@ void VGrainlineItem::paint(QPainter *pP, const QStyleOptionGraphicsItem *pOption
             pP->drawEllipse(ptC, dRad, dRad);
 
             pP->setBrush(Qt::NoBrush);
-            pP->save();
+            guard.save();
             pP->translate(ptC);
             pP->rotate(qRadiansToDegrees(-m_dRotation));
             int const iX = qRound(m_dLength / 2 - 0.5 * dRad);
@@ -176,10 +182,8 @@ void VGrainlineItem::paint(QPainter *pP, const QStyleOptionGraphicsItem *pOption
             pP->drawArc(-iX, iY - iR, iR, iR, 270 * 16, -90 * 16);
             pP->drawArc(-iX, -iY, iR, iR, 180 * 16, -90 * 16);
             pP->drawArc(iX - iR, -iY, iR, iR, 90 * 16, -90 * 16);
-            pP->restore();
         }
     }
-    pP->restore();
 }
 
 //---------------------------------------------------------------------------------------------------------------------

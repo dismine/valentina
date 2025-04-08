@@ -27,7 +27,6 @@
  *************************************************************************/
 #include "vsvghandler.h"
 
-#include <utility>
 #include <QFile>
 #include <QPainter>
 #include <QRegularExpression>
@@ -37,6 +36,12 @@
 
 #if QT_VERSION < QT_VERSION_CHECK(6, 4, 0)
 #include "../compatibility.h"
+#endif
+
+#if QT_VERSION < QT_VERSION_CHECK(6, 9, 0)
+#include "../backport/qpainterstateguard.h"
+#else
+#include <QPainterStateGuard>
 #endif
 
 using namespace Qt::Literals::StringLiterals;
@@ -233,14 +238,13 @@ void VSvgHandler::ToPainterPath(const QString &filePath)
 //---------------------------------------------------------------------------------------------------------------------
 void VSvgHandler::Render(QPainter *painter)
 {
-    painter->save();
+    QPainterStateGuard const guard(painter);
 
     const qreal penWidth = painter->pen().widthF();
     const QRectF clipRect = m_pageSize.adjusted(-penWidth / 2, -penWidth / 2, penWidth / 2, penWidth / 2);
     painter->setClipRect(clipRect);
 
     painter->drawPath(m_path);
-    painter->restore();
 }
 
 //---------------------------------------------------------------------------------------------------------------------

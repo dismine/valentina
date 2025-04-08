@@ -42,6 +42,12 @@
 #include <QStyle>
 #include <QStyleOptionGraphicsItem>
 
+#if QT_VERSION < QT_VERSION_CHECK(6, 9, 0)
+#include "../vmisc/backport/qpainterstateguard.h"
+#else
+#include <QPainterStateGuard>
+#endif
+
 //---------------------------------------------------------------------------------------------------------------------
 VScenePoint::VScenePoint(VColorRole role, QGraphicsItem *parent)
   : QGraphicsEllipseItem(parent),
@@ -70,7 +76,7 @@ void VScenePoint::paint(QPainter *painter, const QStyleOptionGraphicsItem *optio
 
     if (settings->GetShowAccuracyRadius())
     {
-        painter->save();
+        QPainterStateGuard const guard(painter);
 
         QPen pen = painter->pen();
         pen.setWidthF(accuracyPointOnLine / 15);
@@ -79,7 +85,6 @@ void VScenePoint::paint(QPainter *painter, const QStyleOptionGraphicsItem *optio
 
         painter->setPen(pen);
         painter->drawEllipse(PointRect(accuracyPointOnLine));
-        painter->restore();
     }
 
     if (settings->GetPatternLabelFontSize() * scale < minVisibleFontSize || settings->GetHideLabels())

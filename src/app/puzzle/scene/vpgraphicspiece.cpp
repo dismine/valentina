@@ -59,6 +59,12 @@
 #include "undocommands/vpundopiecemove.h"
 #include "vpiecegrainline.h"
 
+#if QT_VERSION < QT_VERSION_CHECK(6, 9, 0)
+#include "../vmisc/backport/qpainterstateguard.h"
+#else
+#include <QPainterStateGuard>
+#endif
+
 #include <QLoggingCategory>
 
 QT_WARNING_PUSH
@@ -665,10 +671,9 @@ void VPGraphicsPiece::PaintSeamLine(QPainter *painter, const VPPiecePtr &piece)
 
     if (painter != nullptr)
     {
-        painter->save();
+        QPainterStateGuard const guard(painter);
         painter->setBrush(piece->IsSelected() ? SelectionBrush() : NoBrush());
         painter->drawPath(m_seamLine);
-        painter->restore();
     }
 }
 
@@ -701,10 +706,9 @@ void VPGraphicsPiece::PaintCuttingLine(QPainter *painter, const VPPiecePtr &piec
 
     if (painter != nullptr)
     {
-        painter->save();
+        QPainterStateGuard const guard(painter);
         painter->setBrush(piece->IsSelected() ? SelectionBrush() : NoBrush());
         painter->drawPath(m_cuttingLine);
-        painter->restore();
     }
 }
 
@@ -729,12 +733,11 @@ void VPGraphicsPiece::PaintInternalPaths(QPainter *painter, const VPPiecePtr &pi
 
         if (painter != nullptr)
         {
-            painter->save();
+            QPainterStateGuard const guard(painter);
             QPen pen = painter->pen();
             pen.setStyle(piecePath.PenStyle());
             painter->setPen(pen);
             painter->drawPath(path);
-            painter->restore();
         }
         m_internalPaths.addPath(path);
     }
@@ -788,10 +791,9 @@ void VPGraphicsPiece::PaintPassmarks(QPainter *painter, const VPPiecePtr &piece)
 
         if (painter != nullptr)
         {
-            painter->save();
+            QPainterStateGuard const guard(painter);
             painter->setBrush(NoBrush());
             painter->drawPath(m_passmarks);
-            painter->restore();
         }
     }
 }
@@ -821,10 +823,9 @@ void VPGraphicsPiece::PaintPlaceLabels(QPainter *painter, const VPPiecePtr &piec
 
         if (painter != nullptr)
         {
-            painter->save();
+            QPainterStateGuard const guard(painter);
             painter->setBrush(NoBrush());
             painter->drawPath(path);
-            painter->restore();
         }
 
         m_placeLabels.addPath(path);
@@ -844,7 +845,7 @@ void VPGraphicsPiece::PaintStickyPath(QPainter *painter)
 
         if (painter != nullptr)
         {
-            painter->save();
+            QPainterStateGuard const guard(painter);
             painter->setBrush(QBrush(VSceneStylesheet::ManualLayoutStyle().PieceOkColor(), Qt::BDiagPattern));
 
             QPen pen = painter->pen();
@@ -853,7 +854,6 @@ void VPGraphicsPiece::PaintStickyPath(QPainter *painter)
             painter->setPen(pen);
 
             painter->drawPath(m_stickyPath);
-            painter->restore();
         }
     }
 }
@@ -881,12 +881,11 @@ void VPGraphicsPiece::PaintMirrorLine(QPainter *painter, const VPPiecePtr &piece
 
     if (painter != nullptr)
     {
-        painter->save();
+        QPainterStateGuard const guard(painter);
         QPen pen = painter->pen();
         pen.setStyle(Qt::DashDotLine);
         painter->setPen(pen);
         painter->drawPath(m_mirrorLinePath);
-        painter->restore();
     }
 }
 
@@ -946,10 +945,9 @@ void VPGraphicsPiece::AddFoldLinePaths(const VPPiecePtr &piece, const QVector<QP
 //---------------------------------------------------------------------------------------------------------------------
 void VPGraphicsPiece::DrawFoldLineMark(QPainter *painter) const
 {
-    painter->save();
+    QPainterStateGuard const guard(painter);
     painter->setBrush(Qt::SolidPattern);
     painter->drawPath(m_foldLineMarkPath);
-    painter->restore();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -957,7 +955,7 @@ void VPGraphicsPiece::DrawFoldLineLabel(QPainter *painter, const VPPiecePtr &pie
 {
     const qreal penWidth = VPApplication::VApp()->PuzzleSettings()->GetLayoutLineWidth();
 
-    painter->save();
+    QPainterStateGuard const guard(painter);
     QPen pen = painter->pen();
     pen.setWidthF(penWidth * qMin(piece->GetXScale(), piece->GetYScale()));
     pen.setColor(PieceColor());
@@ -966,7 +964,6 @@ void VPGraphicsPiece::DrawFoldLineLabel(QPainter *painter, const VPPiecePtr &pie
     painter->setPen(pen);
     painter->setBrush(singleLineFont ? Qt::NoBrush : Qt::SolidPattern);
     painter->drawPath(m_foldLineLabelPath);
-    painter->restore();
 }
 
 //---------------------------------------------------------------------------------------------------------------------

@@ -40,6 +40,12 @@
 #include <QRegion>
 #include <QSet>
 
+#if QT_VERSION < QT_VERSION_CHECK(6, 9, 0)
+#include "../backport/qpainterstateguard.h"
+#else
+#include <QPainterStateGuard>
+#endif
+
 using namespace Qt::Literals::StringLiterals;
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -212,7 +218,7 @@ void VSvgFontEngine::Draw(QPainter *p, const QPointF &point, const QString &str)
 
     const qreal baseLine = FromFontUnits(d->m_font.Ascent());
 
-    p->save();
+    QPainterStateGuard const guard(p);
     p->translate(point.x(), point.y() + baseLine);
     p->scale(pixelSize / d->m_font.UnitsPerEm(), -pixelSize / d->m_font.UnitsPerEm());
 
@@ -236,7 +242,6 @@ void VSvgFontEngine::Draw(QPainter *p, const QPointF &point, const QString &str)
         p->drawPath(d->m_glyphs[unicode].Path());
         p->translate(d->m_glyphs[unicode].HorizAdvX(), 0);
     }
-    p->restore();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -253,7 +258,7 @@ void VSvgFontEngine::Draw(QPainter *p, const QRectF &rect, const QString &str, Q
 
     const qreal baseLine = FromFontUnits(d->m_font.Ascent());
 
-    p->save();
+    QPainterStateGuard const guard(p);
     p->setClipRect(rect);
     p->translate(rect.x() + p->pen().widthF(), rect.y() + baseLine + p->pen().widthF());
     p->scale(pixelSize / d->m_font.UnitsPerEm(), -pixelSize / d->m_font.UnitsPerEm());
@@ -295,7 +300,6 @@ void VSvgFontEngine::Draw(QPainter *p, const QRectF &rect, const QString &str, Q
         p->drawPath(d->m_glyphs[unicode].Path());
         p->translate(d->m_glyphs[unicode].HorizAdvX(), 0);
     }
-    p->restore();
 }
 
 //---------------------------------------------------------------------------------------------------------------------

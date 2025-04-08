@@ -34,6 +34,12 @@
 
 #include <QPainter>
 
+#if QT_VERSION < QT_VERSION_CHECK(6, 9, 0)
+#include "../vmisc/backport/qpainterstateguard.h"
+#else
+#include <QPainterStateGuard>
+#endif
+
 //---------------------------------------------------------------------------------------------------------------------
 VCurvePathItem::VCurvePathItem(VColorRole role, QGraphicsItem *parent)
   : QGraphicsPathItem(parent),
@@ -81,7 +87,7 @@ void VCurvePathItem::paint(QPainter *painter, const QStyleOptionGraphicsItem *op
 
     if (arrowsPath != QPainterPath())
     {
-        painter->save();
+        QPainterStateGuard const guard(painter);
 
         QPen arrowPen(pen());
 
@@ -95,8 +101,6 @@ void VCurvePathItem::paint(QPainter *painter, const QStyleOptionGraphicsItem *op
         painter->setPen(arrowPen);
         painter->setBrush(brush());
         painter->drawPath(arrowsPath);
-
-        painter->restore();
     }
 
     PaintWithFixItemHighlightSelected<QGraphicsPathItem>(this, painter, option, widget);

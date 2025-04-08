@@ -28,6 +28,12 @@
 
 #include "vgraphicsfillitem.h"
 
+#if QT_VERSION < QT_VERSION_CHECK(6, 9, 0)
+#include "../vmisc/backport/qpainterstateguard.h"
+#else
+#include <QPainterStateGuard>
+#endif
+
 //---------------------------------------------------------------------------------------------------------------------
 VGraphicsFillItem::VGraphicsFillItem(QGraphicsItem *parent)
   : QGraphicsPathItem(parent)
@@ -45,7 +51,7 @@ void VGraphicsFillItem::paint(QPainter *painter, const QStyleOptionGraphicsItem 
 {
     Q_UNUSED(option)
     Q_UNUSED(widget)
-    painter->save();
+    QPainterStateGuard const guard(painter);
 
     QPen pen;
 
@@ -64,7 +70,6 @@ void VGraphicsFillItem::paint(QPainter *painter, const QStyleOptionGraphicsItem 
 
     painter->setBrush(painter->pen().color());
     painter->drawPath(path());
-    painter->restore();
 }
 
 //---------------------------------------------------------------------------------------------------------------------

@@ -20,6 +20,12 @@
 #include "vpapplication.h"
 #include "vtextmanager.h"
 
+#if QT_VERSION < QT_VERSION_CHECK(6, 9, 0)
+#include "../vmisc/backport/qpainterstateguard.h"
+#else
+#include <QPainterStateGuard>
+#endif
+
 using namespace Qt::Literals::StringLiterals;
 
 namespace
@@ -277,7 +283,7 @@ void VPTileFactory::drawTile(
 
     DrawTilePageContent(painter, sheet, row, col, printer);
 
-    painter->save();
+    QPainterStateGuard const guard(painter);
 
     // add the tiles decorations (cutting and gluing lines, scissors, infos etc.)
     painter->setPen(PenTileInfos());
@@ -350,8 +356,6 @@ void VPTileFactory::drawTile(
     // prepare the painting for the text information
     DrawGridTextInformation(painter, row, col);
     DrawPageTextInformation(painter, row, col, nbRow, nbCol, sheet->GetName());
-
-    painter->restore();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -419,7 +423,7 @@ void VPTileFactory::DrawRuler(QPainter *painter, qreal scale) const
 
     QPen const rulePen(tileColor, 1, Qt::SolidLine);
 
-    painter->save();
+    QPainterStateGuard guard(painter);
     painter->setPen(rulePen);
 
     const qreal notchHeight = UnitConvertor(3, Unit::Mm, Unit::Px);
@@ -445,7 +449,7 @@ void VPTileFactory::DrawRuler(QPainter *painter, qreal scale) const
         }
         else
         {
-            painter->save();
+            guard.save();
 
             QFont fnt = painter->font();
             const int size = qRound(10 / scale);
@@ -460,12 +464,10 @@ void VPTileFactory::DrawRuler(QPainter *painter, qreal scale) const
                                       m_drawingAreaHeight - tileStripeWidth + notchHeight + shortNotchHeight),
                               units);
 
-            painter->restore();
+            guard.restore();
         }
         ++i;
     }
-
-    painter->restore();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -617,7 +619,7 @@ void VPTileFactory::DrawTopLineScissors(QPainter *painter) const
         return;
     }
 
-    painter->save();
+    QPainterStateGuard guard(painter);
     QPen pen = painter->pen();
     pen.setColor(tileColor);
     pen.setWidthF(m_commonSettings->WidthHairLine());
@@ -638,12 +640,10 @@ void VPTileFactory::DrawTopLineScissors(QPainter *painter) const
     else
     {
         static VSvgHandler handler(QStringLiteral("://puzzleicon/svg/icon_scissors_plotter_horizontal.svg"));
-        painter->save();
+        guard.save();
         painter->translate(m_drawingAreaWidth - tileStripeWidth, 0);
         handler.Render(painter);
-        painter->restore();
     }
-    painter->restore();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -654,7 +654,7 @@ void VPTileFactory::DrawLeftLineScissors(QPainter *painter) const
         return;
     }
 
-    painter->save();
+    QPainterStateGuard guard(painter);
     QPen pen = painter->pen();
     pen.setColor(tileColor);
     pen.setWidthF(m_commonSettings->WidthHairLine());
@@ -674,13 +674,10 @@ void VPTileFactory::DrawLeftLineScissors(QPainter *painter) const
     else
     {
         static VSvgHandler handler(QStringLiteral("://puzzleicon/svg/icon_scissors_plotter_vertical.svg"));
-        painter->save();
+        guard.save();
         painter->translate(0, m_drawingAreaHeight - tileStripeWidth);
         handler.Render(painter);
-        painter->restore();
     }
-
-    painter->restore();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -828,7 +825,7 @@ void VPTileFactory::DrawGridTextInformation(QPainter *painter, int row, int col)
 //---------------------------------------------------------------------------------------------------------------------
 void VPTileFactory::DrawGridTextInformationOutlineFont(QPainter *painter, const QString &text) const
 {
-    painter->save();
+    QPainterStateGuard guard(painter);
 
     QPen textPen = PenTileInfos();
     textPen.setStyle(Qt::SolidLine);
@@ -881,13 +878,10 @@ void VPTileFactory::DrawGridTextInformationOutlineFont(QPainter *painter, const 
                    u"<td align='center'>%2</td>"
                    u"</tr>"
                    u"</table>"_s.arg(tileColorStr, text));
-        painter->save();
+        guard.save();
         painter->translate(QPointF(UnitConvertor(1, Unit::Cm, Unit::Px), m_drawingAreaHeight - tileStripeWidth / 1.3));
         td.drawContents(painter);
-        painter->restore();
     }
-
-    painter->restore();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -908,7 +902,7 @@ void VPTileFactory::DrawGridTextInformationSVGFont(QPainter *painter, const QStr
         return;
     }
 
-    painter->save();
+    QPainterStateGuard const guard(painter);
 
     QPen textPen = PenTileInfos();
     textPen.setStyle(Qt::SolidLine);
@@ -923,8 +917,6 @@ void VPTileFactory::DrawGridTextInformationSVGFont(QPainter *painter, const QStr
     painter->translate(x + centerX, y);
 
     painter->drawPath(engine.DrawPath(QPointF(), text, textPen.widthF()));
-
-    painter->restore();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -947,7 +939,7 @@ void VPTileFactory::DrawPageTextInformationOutlineFont(QPainter *painter,
                                                        const QString &text,
                                                        const QString &sheetName) const
 {
-    painter->save();
+    QPainterStateGuard guard(painter);
 
     QPen textPen = PenTileInfos();
     textPen.setStyle(Qt::SolidLine);
@@ -1011,15 +1003,12 @@ void VPTileFactory::DrawPageTextInformationOutlineFont(QPainter *painter,
                                   "</tr>"
                                   "</table>")
                        .arg(tileColorStr, text, clippedSheetName));
-        painter->save();
+        guard.save();
         painter->rotate(-90);
         painter->translate(QPointF(-(m_drawingAreaHeight) + UnitConvertor(1, Unit::Cm, Unit::Px),
                                    m_drawingAreaWidth - tileStripeWidth));
         td.drawContents(painter);
-        painter->restore();
     }
-
-    painter->restore();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -1042,7 +1031,7 @@ void VPTileFactory::DrawPageTextInformationSVGFont(QPainter *painter,
         return;
     }
 
-    painter->save();
+    QPainterStateGuard const guard(painter);
 
     QPen textPen = PenTileInfos();
     textPen.setStyle(Qt::SolidLine);
@@ -1065,8 +1054,6 @@ void VPTileFactory::DrawPageTextInformationSVGFont(QPainter *painter,
     painter->translate(QPointF(x, y));
 
     painter->drawPath(engine.DrawPath(QPointF(), page, textPen.widthF()));
-
-    painter->restore();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -1075,7 +1062,7 @@ void VPTileFactory::PaintWatermarkText(QPainter *painter, const QRectF &img, con
 {
     SCASSERT(painter != nullptr)
 
-    painter->save();
+    QPainterStateGuard const guard(painter);
 
     painter->setOpacity(watermarkData.opacity / 100.);
 
@@ -1105,8 +1092,6 @@ void VPTileFactory::PaintWatermarkText(QPainter *painter, const QRectF &img, con
     text = t.map(text);
 
     painter->drawPath(text);
-
-    painter->restore();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -1178,9 +1163,8 @@ void VPTileFactory::PaintWatermarkImage(QPainter *painter, const QRectF &img, co
     {
         QScopedPointer<QSvgRenderer> const svgRenderer(new QSvgRenderer());
 
-        painter->save();
+        QPainterStateGuard const guard(painter);
         painter->setOpacity(opacity);
-        painter->restore();
 
         QString const grayscale = watermarkData.grayscale ? QStringLiteral("_grayscale") : QString();
         svgRenderer->load(QStringLiteral("://puzzleicon/svg/watermark_placeholder%1.svg").arg(grayscale));
@@ -1207,7 +1191,7 @@ void VPTileFactory::PaintWatermarkImage(QPainter *painter, const QRectF &img, co
         watermark = BrokenImage();
     }
 
-    painter->save();
+    QPainterStateGuard const guard(painter);
     painter->setOpacity(watermarkData.opacity / 100.);
 
     QRect imagePosition(0, 0, watermark.width(), watermark.height());
@@ -1224,8 +1208,6 @@ void VPTileFactory::PaintWatermarkImage(QPainter *painter, const QRectF &img, co
 
         painter->drawPixmap(croppedRect, cropped);
     }
-
-    painter->restore();
 }
 
 //---------------------------------------------------------------------------------------------------------------------

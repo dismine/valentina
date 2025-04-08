@@ -37,6 +37,12 @@
 #include <QStackedLayout>
 #include <QToolTip>
 
+#if QT_VERSION < QT_VERSION_CHECK(6, 9, 0)
+#include "../vmisc/backport/qpainterstateguard.h"
+#else
+#include <QPainterStateGuard>
+#endif
+
 using namespace Qt::Literals::StringLiterals;
 
 const int FancyTabBar::m_rounding = 22;
@@ -453,7 +459,7 @@ void FancyTabBar::PaintTab(QPainter *painter, int tabIndex) const
         qWarning("invalid index");
         return;
     }
-    painter->save();
+    QPainterStateGuard guard(painter);
 
     QRect const rect = TabRect(tabIndex);
     bool const selected = (tabIndex == m_currentIndex);
@@ -462,12 +468,12 @@ void FancyTabBar::PaintTab(QPainter *painter, int tabIndex) const
     if (selected)
     {
         // background
-        painter->save();
+        guard.save();
         QLinearGradient grad(GetCorner(rect, OutsideBeginning), GetCorner(rect, InsideBeginning));
         grad.setColorAt(0, QColor(255, 255, 255, 140));
         grad.setColorAt(1, QColor(255, 255, 255, 210));
         painter->fillRect(AdjustRect(rect, 0, 0, 0, -1), grad);
-        painter->restore();
+        guard.restore();
 
         // shadows (the black lines immediately before/after (active && selected)-backgrounds)
         painter->setPen(QColor(0, 0, 0, 110));
@@ -524,7 +530,7 @@ void FancyTabBar::PaintTab(QPainter *painter, int tabIndex) const
     // hover
     if (!selected && enabled)
     {
-        painter->save();
+        guard.save();
         auto const fader = static_cast<int>(m_attachedTabs[tabIndex]->fader());
         QLinearGradient grad(GetCorner(rect, OutsideBeginning), GetCorner(rect, InsideBeginning));
 
@@ -545,7 +551,7 @@ void FancyTabBar::PaintTab(QPainter *painter, int tabIndex) const
             painter->drawLine(rect.bottomLeft(), rect.bottomRight());
         }
 
-        painter->restore();
+        guard.restore();
     }
 #endif // #ifndef Q_OS_MAC
 
@@ -565,7 +571,6 @@ void FancyTabBar::PaintTab(QPainter *painter, int tabIndex) const
 
     painter->translate(0, -1);
     painter->drawText(tabTextRect, textFlags, tabText);
-    painter->restore();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
