@@ -681,6 +681,7 @@ void DialogSaveManualLayout::ReadSettings()
     SetShowGrainline(settings->GetShowGrainline());
     SetDxfCompatibility(static_cast<DXFApparelCompatibility>(settings->GetDxfCompatibility()));
     SetHideRuler(settings->GetHideRuler());
+    SetTilesScheme(settings->GetTilesScheme());
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -696,6 +697,7 @@ void DialogSaveManualLayout::WriteSettings() const
     settings->SetShowGrainline(IsShowGrainline());
     settings->SetDxfCompatibility(static_cast<qint8>(DxfCompatibility()));
     settings->SetHideRuler(IsHideRuler());
+    settings->SetTilesScheme(IsTilesScheme());
 }
 
 //---------------------------------------------------------------------------------------------------------------------

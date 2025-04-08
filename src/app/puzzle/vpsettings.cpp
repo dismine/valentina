@@ -77,6 +77,7 @@ Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingLayoutLineWidth, ("layout/lineWi
 Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingLayoutShowGrainline, ("layout/showGrainline"_L1)) // NOLINT
 Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingPathsRawLayoutData, ("paths/rawLatoutData"_L1))   // NOLINT
 Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingLayoutHideRuler, ("layout/hideRuler"_L1))         // NOLINT
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingLayoutTilesScheme, ("layout/tilesScheme"_L1))     // NOLINT
 
 QT_WARNING_POP
 
@@ -425,4 +426,16 @@ auto VPSettings::GetHideRuler() const -> bool
 void VPSettings::SetHideRuler(bool value)
 {
     setValue(*settingLayoutHideRuler, value);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+auto VPSettings::GetTilesScheme() const -> bool
+{
+    return value(*settingLayoutTilesScheme, false).toBool();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VPSettings::SetTilesScheme(bool value)
+{
+    setValue(*settingLayoutTilesScheme, value);
 }

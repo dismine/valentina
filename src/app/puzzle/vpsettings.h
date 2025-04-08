@@ -120,6 +120,9 @@ public:
     auto GetHideRuler() const -> bool;
     void SetHideRuler(bool value);
 
+    auto GetTilesScheme() const -> bool;
+    void SetTilesScheme(bool value);
+
 private:
     Q_DISABLE_COPY_MOVE(VPSettings) // NOLINT
 };
