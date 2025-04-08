@@ -564,10 +564,9 @@ Module {
                     "-fms-extensions" // Need for pragma message
                 )
 
-                if (!qbs.targetOS.contains("macos")) {
+                if (Utilities.versionCompare(cpp.compilerVersion, "12") >= 0) {
                     debugFlags.push(
-                        "-Wcompletion-handler",
-                        "-Wno-pre-c++17-compat-pedantic"
+                        "-Wcompletion-handler"
                     )
                 }
 
@@ -576,7 +575,8 @@ Module {
                         "-Wreserved-identifier",
                         "-Wno-error=reserved-identifier",
                         "-Wunused-but-set-parameter",
-                        "-Wunused-but-set-variable"
+                        "-Wunused-but-set-variable",
+                        "-Wno-pre-c++17-compat-pedantic"
                     )
                 }
 
