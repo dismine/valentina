@@ -23030,12 +23030,12 @@ Do you want to save your changes?</source>
     <message>
         <location filename="../../src/app/puzzle/vptilefactory.cpp" line="1265"/>
         <source>Warning: Multiple single stroke outline fonts detected (%1). The font &quot;%2&quot; was selected.</source>
-        <translation type="unfinished"></translation>
+        <translation>Попередження: Виявлено декілька монолінійних контурних шрифтів (%1). Вибрано шрифт «%2».</translation>
     </message>
     <message>
         <location filename="../../src/app/puzzle/vptilefactory.cpp" line="1327"/>
         <source>Warning: Multiple single-line SVG fonts detected (%1). The font &quot;%2&quot; was selected.</source>
-        <translation type="unfinished"></translation>
+        <translation>Попередження: Виявлено декілька монолінійних SVG-шрифтів (%1). Вибрано шрифт «%2».</translation>
     </message>
     <message>
         <location filename="../../src/app/puzzle/vptilefactory.cpp" line="461"/>

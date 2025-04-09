@@ -1103,7 +1103,7 @@
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogbisector.ui" line="14"/>
         <source>Point along bisector</source>
-        <translation>Bod podél osy úhlu</translation>
+        <translation>Bod na ose úhlu</translation>
     </message>
     <message>
         <source>Line color</source>
@@ -3758,7 +3758,7 @@
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogheight.ui" line="14"/>
         <source>Perpendicular point along line</source>
-        <translation>Bod v pravém úhlu podél čáry</translation>
+        <translation>Bod podél kolmice</translation>
     </message>
     <message>
         <source>Base Point</source>
@@ -3933,22 +3933,22 @@
     <message>
         <location filename="../../src/app/valentina/dialogs/dialoghistory.cpp" line="441"/>
         <source>%1 - point of arcs intersection</source>
-        <translation>%1 - průsečík oblouků</translation>
+        <translation>%1 - průsečík dvou oblouků</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialoghistory.cpp" line="444"/>
         <source>%1 - point of circles intersection</source>
-        <translation>%1 - průsečík kruhů</translation>
+        <translation>%1 - bod průsečíku kruhů</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialoghistory.cpp" line="450"/>
         <source>%1 - point from circle and tangent</source>
-        <translation>%1 - průsečík kruhu a tangenty</translation>
+        <translation>%1 - bod průsečíku kruhu a tangenty</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialoghistory.cpp" line="453"/>
         <source>%1 - point from arc and tangent</source>
-        <translation>%1 - průsečík oblouku a tangenty</translation>
+        <translation>%1 - bod průsečíku oblouku a tangenty</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialoghistory.cpp" line="457"/>
@@ -3958,7 +3958,7 @@
     <message>
         <location filename="../../src/app/valentina/dialogs/dialoghistory.cpp" line="447"/>
         <source>%1 - point of curves intersection</source>
-        <translation>%1 - průsečík křivek</translation>
+        <translation>%1 - bod průsečíku křivek</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialoghistory.cpp" line="352"/>
@@ -6035,7 +6035,7 @@ Přesto použít nastavení?</translation>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialognormal.ui" line="14"/>
         <source>Point along perpendicular</source>
-        <translation>Bod podél v pravém úhlu</translation>
+        <translation>Bod podél kolmice</translation>
     </message>
     <message>
         <source>First point of line</source>
@@ -7298,7 +7298,7 @@ Přesto použít nastavení?</translation>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogpointfromarcandtangent.ui" line="14"/>
         <source>Point from arc and tangent</source>
-        <translation>Průsečík oblouku a tangenty</translation>
+        <translation>Bod průsečíku oblouku a tangenty</translation>
     </message>
     <message>
         <source>Point label</source>
@@ -7371,7 +7371,7 @@ Přesto použít nastavení?</translation>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogpointfromcircleandtangent.ui" line="14"/>
         <source>Point from circle and tangent</source>
-        <translation>Průsečík kruhu a tangenty</translation>
+        <translation>Bod průsečíku kruhu a tangenty</translation>
     </message>
     <message>
         <source>Radius</source>
@@ -7869,7 +7869,7 @@ Přesto použít nastavení?</translation>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogpointofintersectioncircles.ui" line="14"/>
         <source>Tool point of intersection circles</source>
-        <translation>Nástroj Průsečík kruhů</translation>
+        <translation>Nástroj Bod průsečíku kruhů</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogpointofintersectioncircles.ui" line="28"/>
@@ -7887,7 +7887,7 @@ Přesto použít nastavení?</translation>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogpointofintersectioncurves.ui" line="14"/>
         <source>Tool point of intersection curves</source>
-        <translation>Nástroj Průsečík křivek</translation>
+        <translation>Nástroj Bod průsečíku křivek</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogpointofintersectioncurves.ui" line="42"/>
@@ -10883,17 +10883,17 @@ Přesto použít nastavení?</translation>
     <message>
         <location filename="../../src/app/valentina/mainwindow.ui" line="1955"/>
         <source>Point along perpendicular</source>
-        <translation>Bod podél pravého úhlu</translation>
+        <translation>Bod podél kolmice</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.ui" line="2045"/>
         <source>Perpendicular point along line</source>
-        <translation>Bod v pravém úhlu podél čáry</translation>
+        <translation>Kolmý bod na ose úsečky</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.ui" line="1973"/>
         <source>Point along bisector</source>
-        <translation>Bod podél osy úhlu</translation>
+        <translation>Bod na ose úhlu</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.ui" line="1775"/>
@@ -11152,7 +11152,7 @@ Přesto použít nastavení?</translation>
     <message>
         <location filename="../../src/app/valentina/mainwindow.ui" line="785"/>
         <source>Draw</source>
-        <translation>Kreslení</translation>
+        <translation>Výkres</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.ui" line="809"/>
@@ -11621,7 +11621,7 @@ Chcete uložit své změny?</translation>
     <message>
         <location filename="../../src/app/valentina/mainwindow.ui" line="1136"/>
         <source>Activate last used tool again</source>
-        <translation>Vybrat znovu naposledy použitý nástroj</translation>
+        <translation>Zapnout znovu naposledy použitý nástroj</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.cpp" line="1350"/>
@@ -11666,22 +11666,22 @@ Chcete uložit své změny?</translation>
     <message>
         <location filename="../../src/app/valentina/mainwindow.ui" line="1793"/>
         <source>Point of intersection arcs</source>
-        <translation>Průsečík oblouků</translation>
+        <translation>Bod průsečíku oblouků</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.ui" line="2243"/>
         <source>Point of intersection circles</source>
-        <translation>Průsečík kruhů</translation>
+        <translation>Bod průsečíku kruhů</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.ui" line="2279"/>
         <source>Point from circle and tangent</source>
-        <translation>Průsečík kruhu a tangenty</translation>
+        <translation>Bod průsečíku kruhu a tangenty</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.ui" line="2261"/>
         <source>Point from arc and tangent</source>
-        <translation>Průsečík oblouku a tangenty</translation>
+        <translation>Bod průsečíku oblouku a tangenty</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.ui" line="2225"/>
@@ -11984,7 +11984,7 @@ Chcete uložit své změny?</translation>
     <message>
         <location filename="../../src/app/valentina/mainwindow.ui" line="812"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Mode for working with details. Before you will be able to enable the &amp;quot;Details mode&amp;quot; need create at least one detail on the stage &amp;quot;Draw mode&amp;quot;. Details created on this stage will be used for creating a layout. &lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Režim pro práci s jednotlivostmi (díly střihu). Předtím než můžete dále pracovat v &amp;quot;režimu jednotlivosti&amp;quot;, musíte alespoň jednu jednotlivost (díl střihu) vytvořit v &amp;quot;režimu kreslení&amp;quot;. Jednotlivosti (díly střihu) vytvořené v tomto kroku se použijí na vytvoření rozvržení.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Režim pro práci s jednotlivostmi (díly střihu). Předtím než můžete dále pracovat v &amp;quot;režimu jednotlivosti&amp;quot;, musíte alespoň jednu jednotlivost (díl střihu) vytvořit v &amp;quot;režimu výkresu&amp;quot;. Jednotlivosti (díly střihu) vytvořené v tomto kroku se použijí na vytvoření rozvržení.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.ui" line="947"/>
@@ -12069,7 +12069,7 @@ Chcete uložit své změny?</translation>
     <message>
         <location filename="../../src/app/valentina/mainwindow.ui" line="1883"/>
         <source>Point intersection curves</source>
-        <translation>Průsečík dvou křivek</translation>
+        <translation>Bod průsečíku křivek</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.cpp" line="1685"/>
@@ -12087,7 +12087,7 @@ Chcete uložit své změny?</translation>
     <message>
         <location filename="../../src/app/valentina/mainwindow.ui" line="2171"/>
         <source>Curve tool which uses point as control handle</source>
-        <translation>Nástroj křivky, který jako ovládací úchop používá bod</translation>
+        <translation>Nástroj pro jednoduchou křivku s použitím bodů jako řídicích úchytů</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.cpp" line="1167"/>
@@ -12895,12 +12895,12 @@ Chcete uložit své změny?</translation>
     <message>
         <location filename="../../src/app/valentina/mainwindow.cpp" line="6807"/>
         <source>Save draw</source>
-        <translation>Uložit kreslení</translation>
+        <translation>Uložit výkres</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.ui" line="2423"/>
         <source>Draw export</source>
-        <translation>Vyvedení kreslení</translation>
+        <translation>Vyvedení výkresu</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.ui" line="539"/>
@@ -14091,12 +14091,12 @@ Tato volba se projeví po opětovném spuštění.</translation>
     <message>
         <location filename="../../src/app/valentina/dialogs/configpages/preferencespatternpage.ui" line="200"/>
         <source>By default export to DXF-AAMA sew line on Draw layer for all new created workpieces</source>
-        <translation>Při výchozím vyvedení do formátu DXF-AAMA šít čáru na vrstvě pro kreslení pro všechny nově vytvořené střihové díly</translation>
+        <translation>Při výchozím vyvedení do formátu DXF-AAMA šít čáru ve vrstvě výkresu pro všechny nově vytvořené střihové díly</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/configpages/preferencespatternpage.ui" line="203"/>
         <source>Sew line on drawing</source>
-        <translation>Čára švu pro kreslení</translation>
+        <translation>Čára švu na výkresu</translation>
     </message>
 </context>
 <context>
@@ -18557,7 +18557,7 @@ Chcete uložit změny?</translation>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabpaths.ui" line="89"/>
         <source>Export to DXF-AAMA sew line on Draw layer</source>
-        <translation type="unfinished"></translation>
+        <translation>Při uložení ve formátu DXF-AAMA zahrnout data čáry švu do vrstvy výkresu</translation>
     </message>
 </context>
 <context>
@@ -18891,7 +18891,7 @@ Chcete uložit změny?</translation>
     <message>
         <location filename="../../src/app/tape/dialogs/configpages/tapepreferencespathpage.ui" line="20"/>
         <source>Paths that Tape uses</source>
-        <translation type="unfinished"></translation>
+        <translation>Cesty používané Tape</translation>
     </message>
     <message>
         <location filename="../../src/app/tape/dialogs/configpages/tapepreferencespathpage.ui" line="45"/>
@@ -18936,7 +18936,7 @@ Chcete uložit změny?</translation>
     <message>
         <location filename="../../src/libs/vtools/undocommands/togglepiecestate.cpp" line="182"/>
         <source>detail hide main path</source>
-        <translation type="unfinished"></translation>
+        <translation>Skrýt hlavní obrys dílu</translation>
     </message>
 </context>
 <context>
@@ -19459,7 +19459,7 @@ Chcete uložit změny?</translation>
         <location filename="../../src/libs/vmisc/vabstractshortcutmanager.cpp" line="303"/>
         <source>Zoom original</source>
         <comment>shortcut for action</comment>
-        <translation type="unfinished"></translation>
+        <translation>Výchozí zvětšení</translation>
     </message>
     <message>
         <location filename="../../src/libs/vmisc/vabstractshortcutmanager.cpp" line="305"/>
@@ -19477,25 +19477,25 @@ Chcete uložit změny?</translation>
         <location filename="../../src/libs/vmisc/vabstractshortcutmanager.cpp" line="309"/>
         <source>Increase point label font size</source>
         <comment>shortcut for action</comment>
-        <translation type="unfinished"></translation>
+        <translation>Zvětšit velikost písma popisu bodů</translation>
     </message>
     <message>
         <location filename="../../src/libs/vmisc/vabstractshortcutmanager.cpp" line="311"/>
         <source>Decrease point label font size</source>
         <comment>shortcut for action</comment>
-        <translation type="unfinished"></translation>
+        <translation>Zmenšit velikost písma popisu bodů</translation>
     </message>
     <message>
         <location filename="../../src/libs/vmisc/vabstractshortcutmanager.cpp" line="313"/>
         <source>Original point label font size</source>
         <comment>shortcut for action</comment>
-        <translation type="unfinished"></translation>
+        <translation>Původní velikost písma popisu bodů</translation>
     </message>
     <message>
         <location filename="../../src/libs/vmisc/vabstractshortcutmanager.cpp" line="315"/>
         <source>Hide point labels</source>
         <comment>shortcut for action</comment>
-        <translation type="unfinished"></translation>
+        <translation>Skrýt popisy bodů</translation>
     </message>
     <message>
         <location filename="../../src/libs/vmisc/vabstractshortcutmanager.cpp" line="317"/>
@@ -19537,7 +19537,7 @@ Chcete uložit změny?</translation>
         <location filename="../../src/libs/vmisc/vabstractshortcutmanager.cpp" line="329"/>
         <source>Draw mode</source>
         <comment>shortcut for action</comment>
-        <translation>Režim kreslení</translation>
+        <translation>Režim výkresu</translation>
     </message>
     <message>
         <location filename="../../src/libs/vmisc/vabstractshortcutmanager.cpp" line="331"/>
@@ -19573,19 +19573,19 @@ Chcete uložit změny?</translation>
         <location filename="../../src/libs/vmisc/vabstractshortcutmanager.cpp" line="341"/>
         <source>Interactive tools mode</source>
         <comment>shortcut for action</comment>
-        <translation type="unfinished"></translation>
+        <translation>Režim vzájemně působících nástrojů</translation>
     </message>
     <message>
         <location filename="../../src/libs/vmisc/vabstractshortcutmanager.cpp" line="343"/>
         <source>Open Table of variables dialog</source>
         <comment>shortcut for action</comment>
-        <translation type="unfinished"></translation>
+        <translation>Otevřít tabulku proměnných</translation>
     </message>
     <message>
         <location filename="../../src/libs/vmisc/vabstractshortcutmanager.cpp" line="345"/>
         <source>Open pattern history dialog</source>
         <comment>shortcut for action</comment>
-        <translation type="unfinished"></translation>
+        <translation>Otevřít historii střihů</translation>
     </message>
     <message>
         <location filename="../../src/libs/vmisc/vabstractshortcutmanager.cpp" line="347"/>
@@ -19597,103 +19597,103 @@ Chcete uložit změny?</translation>
         <location filename="../../src/libs/vmisc/vabstractshortcutmanager.cpp" line="349"/>
         <source>Activate last used tool</source>
         <comment>shortcut for action</comment>
-        <translation type="unfinished"></translation>
+        <translation>Zapnout naposledy použitý nástroj</translation>
     </message>
     <message>
         <location filename="../../src/libs/vmisc/vabstractshortcutmanager.cpp" line="351"/>
         <source>Show curve details</source>
         <comment>shortcut for action</comment>
-        <translation type="unfinished"></translation>
+        <translation>Zobrazit podrobnosti křivky</translation>
     </message>
     <message>
         <location filename="../../src/libs/vmisc/vabstractshortcutmanager.cpp" line="353"/>
         <source>Open final measurements dialog</source>
         <comment>shortcut for action</comment>
-        <translation type="unfinished"></translation>
+        <translation>Otevřít tabulku konečných měření</translation>
     </message>
     <message>
         <location filename="../../src/libs/vmisc/vabstractshortcutmanager.cpp" line="355"/>
         <source>Case sensitive match</source>
         <comment>shortcut for action</comment>
-        <translation type="unfinished"></translation>
+        <translation>Hledání obsahuje alespoň</translation>
     </message>
     <message>
         <location filename="../../src/libs/vmisc/vabstractshortcutmanager.cpp" line="357"/>
         <source>Whole word match</source>
         <comment>shortcut for action</comment>
-        <translation type="unfinished"></translation>
+        <translation>Hledání obsahuje přesně</translation>
     </message>
     <message>
         <location filename="../../src/libs/vmisc/vabstractshortcutmanager.cpp" line="359"/>
         <source>Regex match</source>
         <comment>shortcut for action</comment>
-        <translation type="unfinished"></translation>
+        <translation>Hledání pomocí regulárních výrazů</translation>
     </message>
     <message>
         <location filename="../../src/libs/vmisc/vabstractshortcutmanager.cpp" line="361"/>
         <source>Search history</source>
         <comment>shortcut for action</comment>
-        <translation type="unfinished"></translation>
+        <translation>Historie hledání</translation>
     </message>
     <message>
         <location filename="../../src/libs/vmisc/vabstractshortcutmanager.cpp" line="363"/>
         <source>Regex match by unicode properties</source>
         <comment>shortcut for action</comment>
-        <translation type="unfinished"></translation>
+        <translation>Hledání pomocí regulárních výrazů se znaky Unicode</translation>
     </message>
     <message>
         <location filename="../../src/libs/vmisc/vabstractshortcutmanager.cpp" line="365"/>
         <source>Find next match</source>
         <comment>shortcut for action</comment>
-        <translation type="unfinished"></translation>
+        <translation>Najít další shodu</translation>
     </message>
     <message>
         <location filename="../../src/libs/vmisc/vabstractshortcutmanager.cpp" line="367"/>
         <source>Find previus match</source>
         <comment>shortcut for action</comment>
-        <translation type="unfinished"></translation>
+        <translation>Najít předchozí shodu</translation>
     </message>
     <message>
         <location filename="../../src/libs/vmisc/vabstractshortcutmanager.cpp" line="369"/>
         <source>Tool &apos;Point at distance and angle&apos;</source>
         <comment>shortcut for action</comment>
-        <translation type="unfinished"></translation>
+        <translation>Nástroj Bod ve vzdálenosti a úhlu</translation>
     </message>
     <message>
         <location filename="../../src/libs/vmisc/vabstractshortcutmanager.cpp" line="371"/>
         <source>Tool &apos;Line between points&apos;</source>
         <comment>shortcut for action</comment>
-        <translation type="unfinished"></translation>
+        <translation>Nástroj Čára mezi body</translation>
     </message>
     <message>
         <location filename="../../src/libs/vmisc/vabstractshortcutmanager.cpp" line="373"/>
         <source>Tool &apos;Point at distance along line&apos;</source>
         <comment>shortcut for action</comment>
-        <translation type="unfinished"></translation>
+        <translation>Nástroj Bod ve vzdálenosti podél čáry</translation>
     </message>
     <message>
         <location filename="../../src/libs/vmisc/vabstractshortcutmanager.cpp" line="375"/>
         <source>Tool &apos;Special point on shoulder&apos;</source>
         <comment>shortcut for action</comment>
-        <translation type="unfinished"></translation>
+        <translation>Nástroj Zvláštní bod na rameni</translation>
     </message>
     <message>
         <location filename="../../src/libs/vmisc/vabstractshortcutmanager.cpp" line="377"/>
         <source>Tool &apos;Point along perpendicular&apos;</source>
         <comment>shortcut for action</comment>
-        <translation type="unfinished"></translation>
+        <translation>Nástroj Bod podél kolmice</translation>
     </message>
     <message>
         <location filename="../../src/libs/vmisc/vabstractshortcutmanager.cpp" line="379"/>
         <source>Tool &apos;Point along bisector&apos;</source>
         <comment>shortcut for action</comment>
-        <translation type="unfinished"></translation>
+        <translation>Nástroj Bod na ose úhlu</translation>
     </message>
     <message>
         <location filename="../../src/libs/vmisc/vabstractshortcutmanager.cpp" line="381"/>
         <source>Tool &apos;Point at line intersection&apos;</source>
         <comment>shortcut for action</comment>
-        <translation type="unfinished"></translation>
+        <translation>Nástroj Bod na průsečíku čar</translation>
     </message>
     <message>
         <location filename="../../src/libs/vmisc/vabstractshortcutmanager.cpp" line="383"/>
@@ -19705,13 +19705,13 @@ Chcete uložit změny?</translation>
         <location filename="../../src/libs/vmisc/vabstractshortcutmanager.cpp" line="385"/>
         <source>Tool &apos;Curve which uses point as control handle&apos;</source>
         <comment>shortcut for action</comment>
-        <translation type="unfinished"></translation>
+        <translation>Nástroj Jednoduchá křivka s použitím bodů jako řídicích úchytů</translation>
     </message>
     <message>
         <location filename="../../src/libs/vmisc/vabstractshortcutmanager.cpp" line="387"/>
         <source>Tool &apos;Arc&apos;</source>
         <comment>shortcut for action</comment>
-        <translation type="unfinished"></translation>
+        <translation>Nástroj Oblouk</translation>
     </message>
     <message>
         <location filename="../../src/libs/vmisc/vabstractshortcutmanager.cpp" line="389"/>
@@ -19723,7 +19723,7 @@ Chcete uložit změny?</translation>
         <location filename="../../src/libs/vmisc/vabstractshortcutmanager.cpp" line="391"/>
         <source>Tool &apos;Curved path which uses point as control handle&apos;</source>
         <comment>shortcut for action</comment>
-        <translation>Nástroj pro složenou křivku s použitím bodů jako řídicích úchytů</translation>
+        <translation>Nástroj Složená křivka s použitím bodů jako řídicích úchytů</translation>
     </message>
     <message>
         <location filename="../../src/libs/vmisc/vabstractshortcutmanager.cpp" line="393"/>
@@ -19741,25 +19741,25 @@ Chcete uložit změny?</translation>
         <location filename="../../src/libs/vmisc/vabstractshortcutmanager.cpp" line="397"/>
         <source>Tool &apos;Internal path tool&apos;</source>
         <comment>shortcut for action</comment>
-        <translation type="unfinished"></translation>
+        <translation>Nástroj Vnitřní cesta</translation>
     </message>
     <message>
         <location filename="../../src/libs/vmisc/vabstractshortcutmanager.cpp" line="399"/>
         <source>Tool &apos;Perpendicular point along line&apos;</source>
         <comment>shortcut for action</comment>
-        <translation type="unfinished"></translation>
+        <translation>Nástroj Kolmý bod na ose úsečky</translation>
     </message>
     <message>
         <location filename="../../src/libs/vmisc/vabstractshortcutmanager.cpp" line="401"/>
         <source>Tool &apos;Triangle&apos;</source>
         <comment>shortcut for action</comment>
-        <translation type="unfinished"></translation>
+        <translation>Nástroj Trojúhelník</translation>
     </message>
     <message>
         <location filename="../../src/libs/vmisc/vabstractshortcutmanager.cpp" line="403"/>
         <source>Tool &apos;Point from X and Y of two other points&apos;</source>
         <comment>shortcut for action</comment>
-        <translation type="unfinished"></translation>
+        <translation>Nástroj Bod z X a Y dvou jiných bodů</translation>
     </message>
     <message>
         <location filename="../../src/libs/vmisc/vabstractshortcutmanager.cpp" line="405"/>
@@ -19777,13 +19777,13 @@ Chcete uložit změny?</translation>
         <location filename="../../src/libs/vmisc/vabstractshortcutmanager.cpp" line="409"/>
         <source>Tool &apos;Piece union&apos;</source>
         <comment>shortcut for action</comment>
-        <translation type="unfinished"></translation>
+        <translation>Nástroj Spojení dílů</translation>
     </message>
     <message>
         <location filename="../../src/libs/vmisc/vabstractshortcutmanager.cpp" line="411"/>
         <source>Tool &apos;Duplicate piece&apos;</source>
         <comment>shortcut for action</comment>
-        <translation type="unfinished"></translation>
+        <translation>Nástroj Zdvojení dílů</translation>
     </message>
     <message>
         <location filename="../../src/libs/vmisc/vabstractshortcutmanager.cpp" line="413"/>
@@ -19795,19 +19795,19 @@ Chcete uložit změny?</translation>
         <location filename="../../src/libs/vmisc/vabstractshortcutmanager.cpp" line="415"/>
         <source>Tool &apos;Point of intersection line and axis&apos;</source>
         <comment>shortcut for action</comment>
-        <translation type="unfinished"></translation>
+        <translation>Nástroj Bod průsečíku čáry a úhlu</translation>
     </message>
     <message>
         <location filename="../../src/libs/vmisc/vabstractshortcutmanager.cpp" line="417"/>
         <source>Tool &apos;Point of intersection curve and axis&apos;</source>
         <comment>shortcut for action</comment>
-        <translation type="unfinished"></translation>
+        <translation>Nástroj Bod průsečíku křivky a osy</translation>
     </message>
     <message>
         <location filename="../../src/libs/vmisc/vabstractshortcutmanager.cpp" line="419"/>
         <source>Tool &apos;Point of intersection arc and axis&apos;</source>
         <comment>shortcut for action</comment>
-        <translation type="unfinished"></translation>
+        <translation>Nástroj Bod průsečíku oblouku a osy</translation>
     </message>
     <message>
         <location filename="../../src/libs/vmisc/vabstractshortcutmanager.cpp" line="421"/>
@@ -19819,55 +19819,55 @@ Chcete uložit změny?</translation>
         <location filename="../../src/libs/vmisc/vabstractshortcutmanager.cpp" line="423"/>
         <source>Tool &apos;Point of intersection arcs&apos;</source>
         <comment>shortcut for action</comment>
-        <translation type="unfinished"></translation>
+        <translation>Nástroj Bod průsečíku oblouků</translation>
     </message>
     <message>
         <location filename="../../src/libs/vmisc/vabstractshortcutmanager.cpp" line="425"/>
         <source>Tool &apos;Point of intersection circles&apos;</source>
         <comment>shortcut for action</comment>
-        <translation type="unfinished"></translation>
+        <translation>Nástroj Bod průsečíku kruhů</translation>
     </message>
     <message>
         <location filename="../../src/libs/vmisc/vabstractshortcutmanager.cpp" line="427"/>
         <source>Tool &apos;Point intersection curves&apos;</source>
         <comment>shortcut for action</comment>
-        <translation type="unfinished"></translation>
+        <translation>Nástroj Bod průsečíku křivek</translation>
     </message>
     <message>
         <location filename="../../src/libs/vmisc/vabstractshortcutmanager.cpp" line="429"/>
         <source>Tool &apos;Point from circle and tangent&apos;</source>
         <comment>shortcut for action</comment>
-        <translation type="unfinished"></translation>
+        <translation>Nástroj Bod průsečíku kruhu a tangenty</translation>
     </message>
     <message>
         <location filename="../../src/libs/vmisc/vabstractshortcutmanager.cpp" line="431"/>
         <source>Tool &apos;Point from arc and tangent&apos;</source>
         <comment>shortcut for action</comment>
-        <translation type="unfinished"></translation>
+        <translation>Nástroj Bod průsečíku oblouku a tangenty</translation>
     </message>
     <message>
         <location filename="../../src/libs/vmisc/vabstractshortcutmanager.cpp" line="433"/>
         <source>Tool &apos;Arc with given length&apos;</source>
         <comment>shortcut for action</comment>
-        <translation type="unfinished"></translation>
+        <translation>Nástroj Oblouk s danou délkou</translation>
     </message>
     <message>
         <location filename="../../src/libs/vmisc/vabstractshortcutmanager.cpp" line="435"/>
         <source>Tool &apos;True darts&apos;</source>
         <comment>shortcut for action</comment>
-        <translation type="unfinished"></translation>
+        <translation>Nástroj Vyrovnat délku záševku</translation>
     </message>
     <message>
         <location filename="../../src/libs/vmisc/vabstractshortcutmanager.cpp" line="437"/>
         <source>Tool &apos;Visibility group&apos;</source>
         <comment>shortcut for action</comment>
-        <translation type="unfinished"></translation>
+        <translation>Nástroj Skupina viditelnosti</translation>
     </message>
     <message>
         <location filename="../../src/libs/vmisc/vabstractshortcutmanager.cpp" line="439"/>
         <source>Tool &apos;Rotate objects&apos;</source>
         <comment>shortcut for action</comment>
-        <translation type="unfinished"></translation>
+        <translation>Nástroj Otočit předměty</translation>
     </message>
     <message>
         <location filename="../../src/libs/vmisc/vabstractshortcutmanager.cpp" line="441"/>
@@ -19885,19 +19885,19 @@ Chcete uložit změny?</translation>
         <location filename="../../src/libs/vmisc/vabstractshortcutmanager.cpp" line="445"/>
         <source>Tool &apos;Move objects&apos;</source>
         <comment>shortcut for action</comment>
-        <translation type="unfinished"></translation>
+        <translation>Nástroj Posunout předměty</translation>
     </message>
     <message>
         <location filename="../../src/libs/vmisc/vabstractshortcutmanager.cpp" line="447"/>
         <source>Tool &apos;Midpoint between two points&apos;</source>
         <comment>shortcut for action</comment>
-        <translation type="unfinished"></translation>
+        <translation>Nástroj Středový bod mezi dvěma body</translation>
     </message>
     <message>
         <location filename="../../src/libs/vmisc/vabstractshortcutmanager.cpp" line="449"/>
         <source>Export draw as</source>
         <comment>shortcut for action</comment>
-        <translation type="unfinished"></translation>
+        <translation>Vyvést výkres jako</translation>
     </message>
     <message>
         <location filename="../../src/libs/vmisc/vabstractshortcutmanager.cpp" line="451"/>
@@ -19909,13 +19909,13 @@ Chcete uložit změny?</translation>
         <location filename="../../src/libs/vmisc/vabstractshortcutmanager.cpp" line="453"/>
         <source>Export details as</source>
         <comment>shortcut for action</comment>
-        <translation type="unfinished"></translation>
+        <translation>Vyvést jednotlivosti (díly střihu) jako</translation>
     </message>
     <message>
         <location filename="../../src/libs/vmisc/vabstractshortcutmanager.cpp" line="455"/>
         <source>Tool &apos;Elliptical Arc&apos;</source>
         <comment>shortcut for action</comment>
-        <translation type="unfinished"></translation>
+        <translation>Nástroj Elipsovitý oblouk</translation>
     </message>
     <message>
         <location filename="../../src/libs/vmisc/vabstractshortcutmanager.cpp" line="457"/>
@@ -19927,25 +19927,25 @@ Chcete uložit změny?</translation>
         <location filename="../../src/libs/vmisc/vabstractshortcutmanager.cpp" line="459"/>
         <source>Tool &apos;Insert node&apos;</source>
         <comment>shortcut for action</comment>
-        <translation type="unfinished"></translation>
+        <translation>Nástroj Vložit uzel</translation>
     </message>
     <message>
         <location filename="../../src/libs/vmisc/vabstractshortcutmanager.cpp" line="461"/>
         <source>Tool &apos;Place label&apos;</source>
         <comment>shortcut for action</comment>
-        <translation type="unfinished"></translation>
+        <translation>Nástroj Umístit popis</translation>
     </message>
     <message>
         <location filename="../../src/libs/vmisc/vabstractshortcutmanager.cpp" line="463"/>
         <source>Tool &apos;Arc start&apos;</source>
         <comment>shortcut for action</comment>
-        <translation type="unfinished"></translation>
+        <translation>Nástroj Začátek oblouku</translation>
     </message>
     <message>
         <location filename="../../src/libs/vmisc/vabstractshortcutmanager.cpp" line="465"/>
         <source>Tool &apos;Arc end&apos;</source>
         <comment>shortcut for action</comment>
-        <translation type="unfinished"></translation>
+        <translation>Nástroj Konec oblouku</translation>
     </message>
 </context>
 <context>
@@ -20251,12 +20251,12 @@ Chcete uložit změny?</translation>
     <message>
         <location filename="../../src/libs/vlayout/vboundary.cpp" line="380"/>
         <source>Unable to insert notch for point &apos;%1&apos;.</source>
-        <translation type="unfinished"></translation>
+        <translation>Nelze vložit zářez pro bod &apos;%1&apos;.</translation>
     </message>
     <message>
         <location filename="../../src/libs/vlayout/vboundary.cpp" line="384"/>
         <source>Unable to insert notch.</source>
-        <translation type="unfinished"></translation>
+        <translation>Nelze vložit zářez.</translation>
     </message>
 </context>
 <context>
@@ -20625,12 +20625,12 @@ Chcete uložit změny?</translation>
     <message>
         <location filename="../../src/app/valentina/core/vcmdexport.cpp" line="640"/>
         <source>Number corresponding to compatibility mode for DXF AAMA/ASTM format (default = 0, export mode):</source>
-        <translation type="unfinished"></translation>
+        <translation>Číslo odpovídající režimu kompatibility pro formát DXF AAMA/ASTM (výchozí = 0, režim vyvedení):</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/core/vcmdexport.cpp" line="643"/>
         <source>Mode number</source>
-        <translation type="unfinished"></translation>
+        <translation>Číslo režimu</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/core/vcmdexport.cpp" line="644"/>
@@ -21231,7 +21231,7 @@ Chcete uložit změny?</translation>
     <message>
         <location filename="../../src/libs/vdxf/vdxfengine.cpp" line="1039"/>
         <source>Piece &apos;%1&apos;. Piece System Text is missing.</source>
-        <translation type="unfinished"></translation>
+        <translation>Díl &apos;%1&apos;. Chybí systémový text dílu, tj. specifikace dílů pro standardní DXF.</translation>
     </message>
     <message>
         <location filename="../../src/libs/vdxf/vdxfengine.cpp" line="1195"/>
@@ -21241,12 +21241,12 @@ Chcete uložit změny?</translation>
     <message>
         <location filename="../../src/libs/vdxf/vdxfengine.cpp" line="2068"/>
         <source>Piece &apos;%1&apos;. &apos;Piece Name:&apos; or &apos;Size:&apos; identifier is missing.</source>
-        <translation type="unfinished"></translation>
+        <translation>Díl &apos;%1&apos;. Chybí identifikátor &apos;Piece Name:&apos; název dílu, nebo &apos;Size:&apos; velikost.</translation>
     </message>
     <message>
         <location filename="../../src/libs/vdxf/vdxfengine.cpp" line="2103"/>
         <source>Piece &apos;%1&apos;. &apos;Piece Name:&apos; identifier requires &apos;Size:&apos; identifier to be present.</source>
-        <translation type="unfinished"></translation>
+        <translation>Díl &apos;%1&apos;. Identifikátor &apos;Piece Name:&apos; název dílu vyžaduje stanovení identifikátoru &apos;Size:&apos; velikost.</translation>
     </message>
 </context>
 <context>
@@ -21362,7 +21362,7 @@ Chcete uložit změny?</translation>
         <location filename="../../src/libs/vformat/knownmeasurements/vknownmeasurementsdocument.cpp" line="488"/>
         <location filename="../../src/libs/vformat/knownmeasurements/vknownmeasurementsdocument.cpp" line="503"/>
         <source>Can&apos;t find image by id &apos;%1&apos;</source>
-        <translation type="unfinished"></translation>
+        <translation>Nelze najít obrázek podle ID &apos;%1&apos;</translation>
     </message>
     <message>
         <location filename="../../src/libs/vformat/knownmeasurements/vknownmeasurementsdocument.cpp" line="520"/>
@@ -21372,7 +21372,7 @@ Chcete uložit změny?</translation>
     <message>
         <location filename="../../src/libs/vformat/knownmeasurements/vknownmeasurementsdocument.cpp" line="563"/>
         <source>The image id is empty!</source>
-        <translation type="unfinished"></translation>
+        <translation>Identifikátor obrázku je prázdný!</translation>
     </message>
 </context>
 <context>
@@ -21614,7 +21614,7 @@ Chcete uložit změny?</translation>
     <message>
         <location filename="../../src/libs/vtools/tools/nodeDetails/vnodepoint.cpp" line="371"/>
         <source>Reset piece label template</source>
-        <translation type="unfinished"></translation>
+        <translation>Obnovit výchozí předlohu popisu dílu</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/tools/nodeDetails/vnodepoint.cpp" line="400"/>
@@ -22062,7 +22062,7 @@ Chcete uložit změny?</translation>
     <message>
         <location filename="../../src/app/puzzle/xml/vplayoutfilereader.cpp" line="480"/>
         <source>Piece %1 invalid. %2</source>
-        <translation type="unfinished"></translation>
+        <translation>Díl %1 je neplatný. %2</translation>
     </message>
 </context>
 <context>
@@ -22080,7 +22080,7 @@ Chcete uložit změny?</translation>
     <message>
         <location filename="../../src/app/puzzle/scene/vpmaingraphicsview.cpp" line="621"/>
         <source>Remove pieces</source>
-        <translation type="unfinished"></translation>
+        <translation>Odstranit díly</translation>
     </message>
 </context>
 <context>
@@ -22113,7 +22113,7 @@ Chcete uložit změny?</translation>
     <message>
         <location filename="../../src/app/puzzle/vpmainwindow.ui" line="159"/>
         <source>Piece Carrousel</source>
-        <translation type="unfinished"></translation>
+        <translation>Kolotoč s díly</translation>
     </message>
     <message>
         <location filename="../../src/app/puzzle/vpmainwindow.ui" line="198"/>
@@ -22575,12 +22575,12 @@ Chcete uložit změny?</translation>
     <message>
         <location filename="../../src/app/puzzle/vpmainwindow.ui" line="429"/>
         <source>Superposition of pieces</source>
-        <translation type="unfinished"></translation>
+        <translation>Překrývání se dílů</translation>
     </message>
     <message>
         <location filename="../../src/app/puzzle/vpmainwindow.ui" line="443"/>
         <source>Piece gape</source>
-        <translation type="unfinished"></translation>
+        <translation>Rozestupy mezi díly</translation>
     </message>
     <message>
         <location filename="../../src/app/puzzle/vpmainwindow.ui" line="459"/>
@@ -22995,7 +22995,7 @@ Chcete uložit změny?</translation>
     <message>
         <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="3474"/>
         <source>Piece %1 invalid. %2</source>
-        <translation type="unfinished"></translation>
+        <translation>Díl %1 je neplatný. %2</translation>
     </message>
 </context>
 <context>
@@ -23115,7 +23115,7 @@ Chcete uložit změny?</translation>
     <message>
         <location filename="../../src/libs/vpatterndb/vpassmark.cpp" line="979"/>
         <source>Cannot calculate a notch for point &apos;%1&apos; in piece &apos;%2&apos; with built-in seam allowance. User must manually provide length.</source>
-        <translation type="unfinished"></translation>
+        <translation>Nelze spočítat zářez pro bod &apos;%1&apos; v dílu &apos;%2&apos; se zabudovanou švovou záložkou. Uživatel musí zadat délku ručně.</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vpassmark.cpp" line="1096"/>
@@ -23476,7 +23476,7 @@ Chcete uložit změny?</translation>
         <location filename="../../src/app/valentina/xml/vpattern.cpp" line="2192"/>
         <location filename="../../src/app/valentina/xml/vpattern.cpp" line="2198"/>
         <source>Error creating or updating place label</source>
-        <translation>Chyba při vytváření nebo aktualizaci popisu umístění</translation>
+        <translation>Chyba při vytváření nebo aktualizaci umístění popisu</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/xml/vpattern.cpp" line="4345"/>
@@ -23834,17 +23834,17 @@ Chyba kompatibility formátu nezpracovaného rozvržení: ActualFileVersion = %1
     <message>
         <location filename="../../src/libs/vwidgets/vtextgraphicsitem.cpp" line="948"/>
         <source>Piece &apos;%1&apos;. Not enough space for pattern info label.</source>
-        <translation type="unfinished"></translation>
+        <translation>Díl &apos;%1&apos;. Nedostatek místa pro popis s informacemi o střihu.</translation>
     </message>
     <message>
         <location filename="../../src/libs/vwidgets/vtextgraphicsitem.cpp" line="951"/>
         <source>Piece &apos;%1&apos;. Not enough space for piece info label.</source>
-        <translation type="unfinished"></translation>
+        <translation>Díl &apos;%1&apos;. Nedostatek místa pro popis s informacemi o dílu.</translation>
     </message>
     <message>
         <location filename="../../src/libs/vwidgets/vtextgraphicsitem.cpp" line="955"/>
         <source>Piece &apos;%1&apos;. Not enough space for label.</source>
-        <translation type="unfinished"></translation>
+        <translation>Díl &apos;%1&apos;. Nedostatek místa pro popis.</translation>
     </message>
 </context>
 <context>
@@ -24359,7 +24359,7 @@ Chyba kompatibility formátu nezpracovaného rozvržení: ActualFileVersion = %1
     <message>
         <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="2823"/>
         <source>Point along bisector</source>
-        <translation>Bod podél osy úhlu</translation>
+        <translation>Bod na ose úhlu</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="2860"/>
@@ -24379,7 +24379,7 @@ Chyba kompatibility formátu nezpracovaného rozvržení: ActualFileVersion = %1
     <message>
         <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="2905"/>
         <source>Perpendicular point along line</source>
-        <translation>Bod v pravém úhlu podél čáry</translation>
+        <translation>Kolmý bod na ose úsečky</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="2924"/>
@@ -24394,7 +24394,7 @@ Chyba kompatibility formátu nezpracovaného rozvržení: ActualFileVersion = %1
     <message>
         <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="2958"/>
         <source>Point along perpendicular</source>
-        <translation>Bod podél v pravém úhlu</translation>
+        <translation>Bod podél kolmice</translation>
     </message>
     <message>
         <source>Additional angle degrees</source>
@@ -25341,7 +25341,7 @@ Chyba kompatibility formátu nezpracovaného rozvržení: ActualFileVersion = %1
     <message>
         <location filename="../../src/libs/vtools/tools/vtoolseamallowance.cpp" line="1723"/>
         <source>Reset piece label template</source>
-        <translation type="unfinished"></translation>
+        <translation>Obnovit výchozí předlohu popisu dílu</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/tools/vtoolseamallowance.cpp" line="1726"/>
@@ -25812,7 +25812,7 @@ Chyba kompatibility formátu nezpracovaného rozvržení: ActualFileVersion = %1
     <message>
         <source>Integrating Draping, Drafting and Drawing</source>
         <comment>Book name</comment>
-        <translation type="vanished">Integrating Draping, Drafting and Drawing</translation>
+        <translation type="vanished">Integrace aranžování, rýsování a kreslení</translation>
     </message>
     <message>
         <source>Fukomoto</source>
@@ -26981,13 +26981,13 @@ Chyba kompatibility formátu nezpracovaného rozvržení: ActualFileVersion = %1
         <location filename="../../src/libs/vpatterndb/vtranslatevars.cpp" line="96"/>
         <source>PieceArea_</source>
         <comment>Left symbol _ in the name</comment>
-        <translation type="unfinished"></translation>
+        <translation>PlochaDílu_</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatevars.cpp" line="98"/>
         <source>PieceSeamLineArea_</source>
         <comment>Left symbol _ in the name</comment>
-        <translation type="unfinished"></translation>
+        <translation>PlochaČáryŠvuDílu_</translation>
     </message>
 </context>
 <context>
