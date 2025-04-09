@@ -18,6 +18,10 @@
 #ifndef Q_NODISCARD_CTOR
 #define Q_NODISCARD_CTOR [[nodiscard]]
 #endif
+#else
+#ifndef Q_NODISCARD_CTOR
+#define Q_NODISCARD_CTOR
+#endif
 #endif
 #endif // QT_VERSION < QT_VERSION_CHECK(6, 6, 0)
 
