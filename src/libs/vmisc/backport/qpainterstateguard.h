@@ -8,7 +8,7 @@
 
 #if QT_VERSION >= QT_VERSION_CHECK(6, 5, 0)
 #include <QtCore/qtclasshelpermacros.h>
-#endif
+#endif // QT_VERSION >= QT_VERSION_CHECK(6, 5, 0)
 
 #include <QtGui/qpainter.h>
 
@@ -19,15 +19,27 @@
 #define Q_NODISCARD_CTOR [[nodiscard]]
 #endif
 #endif
-#endif
+#endif // QT_VERSION < QT_VERSION_CHECK(6, 6, 0)
 
 QT_BEGIN_NAMESPACE
+
+#if QT_VERSION < QT_VERSION_CHECK(6, 2, 4)
+// pure compile-time micro-optimization for our own headers, so not documented:
+template<typename T>
+constexpr inline void qt_ptr_swap(T *&lhs, T *&rhs) noexcept
+{
+    T *tmp = lhs;
+    lhs = rhs;
+    rhs = tmp;
+}
+#endif // QT_VERSION < QT_VERSION_CHECK(6, 5, 0)
 
 class QPainterStateGuard
 {
     Q_DISABLE_COPY(QPainterStateGuard)
 public:
-    enum class InitialState : quint8 {
+    enum class InitialState : quint8
+    {
         Save,
         NoSave,
     };
@@ -37,7 +49,7 @@ public:
         , m_level(std::exchange(other.m_level, 0))
     {}
 
-    QPainterStateGuard &operator=(QPainterStateGuard &&other) noexcept
+    auto operator=(QPainterStateGuard &&other) noexcept -> QPainterStateGuard &
     {
         QPainterStateGuard moved(std::move(other));
         swap(moved);
@@ -56,13 +68,17 @@ public:
     {
         verifyPainter();
         if (state == InitialState::Save)
+        {
             save();
+        }
     }
 
     ~QPainterStateGuard()
     {
         while (m_level > 0)
+        {
             restore();
+        }
     }
 
     void save()
