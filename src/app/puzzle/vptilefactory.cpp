@@ -1238,13 +1238,13 @@ void VPTileFactory::InitTileSingleStrokeOutlineFont()
     {
         if (QVector<QPointF> const labelShape = piece->GetPieceLabelRect(); labelShape.count() == 4)
         {
-            const QFont &font = piece->GetPieceLabelData().GetFont();
+            const QFont font = piece->GetPieceLabelData().GetFont();
             fontMap.insert(font.family(), font);
         }
 
         if (QVector<QPointF> const labelShape = piece->GetPatternLabelRect(); labelShape.count() == 4)
         {
-            const QFont &font = piece->GetPatternLabelData().GetFont();
+            const QFont font = piece->GetPatternLabelData().GetFont();
             fontMap.insert(font.family(), font);
         }
     }
