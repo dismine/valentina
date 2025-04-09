@@ -42,12 +42,12 @@ public:
     auto PageSize() const -> QRectF;
 
 private:
-    QXmlStreamReader m_xml;
-    QPainterPath m_path;
-    QTransform m_currentTransform;
-    QStack<QTransform> m_transformStack;
-    QStack<QPainterPath> m_pathStack;
-    QRectF m_pageSize;
+    QXmlStreamReader m_xml{};
+    QPainterPath m_path{};
+    QTransform m_currentTransform{};
+    QStack<QTransform> m_transformStack{};
+    QStack<QPainterPath> m_pathStack{};
+    QRectF m_pageSize{};
 
     void ToPainterPath(const QString &filePath);
 
