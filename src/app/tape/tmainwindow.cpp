@@ -269,6 +269,30 @@ TMainWindow::TMainWindow(QWidget *parent)
     ui->plainTextEditFormula->installEventFilter(this);
 
     m_search = QSharedPointer<VTableSearch>(new VTableSearch(ui->tableWidget));
+
+    connect(ui->tabWidget,
+            &QTabWidget::currentChanged,
+            this,
+            [this](int index)
+            {
+                if (index == -1)
+                {
+                    return;
+                }
+
+                if (index == ui->tabWidget->indexOf(ui->tabMeasurements))
+                {
+                    ui->actionAddCustom->setEnabled(true);
+                    ui->actionAddKnown->setEnabled(true);
+                    ui->actionAddSeparator->setEnabled(true);
+                }
+                else if (index == ui->tabWidget->indexOf(ui->tabInformation))
+                {
+                    ui->actionAddCustom->setEnabled(false);
+                    ui->actionAddKnown->setEnabled(false);
+                    ui->actionAddSeparator->setEnabled(false);
+                }
+            });
     ui->tabWidget->setVisible(false);
 
     ui->mainToolBar->setContextMenuPolicy(Qt::PreventContextMenu);

@@ -1752,11 +1752,17 @@ void TKMMainWindow::RefreshMeasurementImagePreview(int index)
     {
         ShowMData();
         lastSelectedTab = ui->tabWidget->indexOf(ui->tabMeasurements);
+        ui->actionAddKnown->setEnabled(true);
     }
     else if (index == ui->tabWidget->indexOf(ui->tabImages))
     {
         ShowImageData();
         lastSelectedTab = ui->tabWidget->indexOf(ui->tabImages);
+        ui->actionAddKnown->setEnabled(false);
+    }
+    else if (index == ui->tabWidget->indexOf(ui->tabInformation))
+    {
+        ui->actionAddKnown->setEnabled(false);
     }
 }
 
