@@ -304,18 +304,18 @@ Q_NORETURN void VAbstractConverter::InvalidVersion(unsigned ver) const
 {
     if (ver < MinVer())
     {
-        const QString errorMsg(tr("Invalid version. Minimum supported format version is %1").arg(MinVerStr()));
-        throw VException(errorMsg);
+        throw VException(
+            tr("This file was created with an outdated version of the app and cannot be opened. Please re-save it "
+               "using a newer version of the app that is compatible with this one."));
     }
 
     if (ver > MaxVer())
     {
-        const QString errorMsg(tr("Invalid version. Maximum supported format version is %1").arg(MaxVerStr()));
-        throw VException(errorMsg);
+        throw VException(tr("This file was created with a newer version of the app and cannot be opened. Please "
+                            "update your app to the latest version."));
     }
 
-    const QString errorMsg(tr("Unexpected version \"%1\".").arg(ver, 0, 16));
-    throw VException(errorMsg);
+    throw VException(tr("Unexpected version \"%1\".").arg(ver, 0, 16));
 }
 
 //---------------------------------------------------------------------------------------------------------------------
