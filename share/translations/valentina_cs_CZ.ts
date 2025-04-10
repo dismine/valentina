@@ -1969,7 +1969,7 @@
     </message>
     <message>
         <source>Material/Cut number/Placement</source>
-        <translation type="vanished">Materiál/Číslo střihu/Umístění</translation>
+        <translation type="vanished">Materiál/Množství/Umístění</translation>
     </message>
     <message>
         <source>Material type:</source>
@@ -1977,7 +1977,7 @@
     </message>
     <message>
         <source>Cut number:</source>
-        <translation type="vanished">Číslo střihu:</translation>
+        <translation type="vanished">Množství:</translation>
     </message>
     <message>
         <source>Placement:</source>
@@ -2005,7 +2005,7 @@
     </message>
     <message>
         <source>Pattern label visible</source>
-        <translation type="vanished">Popis vzoru viditelný</translation>
+        <translation type="vanished">Popis střihu viditelný</translation>
     </message>
     <message>
         <source>Fabric</source>
@@ -2343,7 +2343,7 @@
     <message>
         <location filename="../../src/libs/vtools/dialogs/support/dialogeditlabel.cpp" line="585"/>
         <source>Pattern extension</source>
-        <translation>Rozšíření střihu</translation>
+        <translation>Přípona souboru střihu</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/support/dialogeditlabel.cpp" line="586"/>
@@ -4361,7 +4361,7 @@
         <location filename="../../src/app/valentina/dialogs/dialogincrements.ui" line="656"/>
         <location filename="../../src/app/valentina/dialogs/dialogincrements.ui" line="1322"/>
         <source>Refresh a pattern with all changes you made</source>
-        <translation>Obnovit vzor se všemi provedenými změnami</translation>
+        <translation>Obnovit střihový vzor se všemi provedenými změnami</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialogincrements.ui" line="659"/>
@@ -5509,7 +5509,7 @@ Přesto použít nastavení?</translation>
     <message>
         <source>Patternmaking measurements</source>
         <comment>Measurement section</comment>
-        <translation type="vanished">Měření střihových vzorů</translation>
+        <translation type="vanished">Míry pro tvorbu střihových vzorů</translation>
     </message>
     <message>
         <location filename="../../src/app/tape/dialogs/dialogmdatabase.cpp" line="153"/>
@@ -6363,7 +6363,7 @@ Přesto použít nastavení?</translation>
     </message>
     <message>
         <source>Use %1 and %2 to insert pattern size and height</source>
-        <translation type="vanished">použít %1 and %2 pro vložení velikosti střihu a výšky</translation>
+        <translation type="vanished">Použít %1 a %2 pro vložení velikosti střihu a výšky</translation>
     </message>
     <message>
         <source>Show date of layout creation (%1)</source>
@@ -11108,7 +11108,7 @@ Přesto použít nastavení?</translation>
     <message>
         <location filename="../../src/app/valentina/mainwindow.ui" line="1681"/>
         <source>Interactive tools</source>
-        <translation>Vzájemně působící nástroje</translation>
+        <translation>Interaktivní nástroje</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.ui" line="1684"/>
@@ -11250,11 +11250,11 @@ Přesto použít nastavení?</translation>
     </message>
     <message>
         <source>Original zoom </source>
-        <translation type="vanished">Původní přiblížení</translation>
+        <translation type="vanished">Původní zvětšení</translation>
     </message>
     <message>
         <source>Original Zoom </source>
-        <translation type="vanished">Původní přiblížení</translation>
+        <translation type="vanished">Původní zvětšení</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.ui" line="1088"/>
@@ -11979,7 +11979,7 @@ Chcete uložit své změny?</translation>
     <message>
         <location filename="../../src/app/valentina/mainwindow.ui" line="788"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Mode for working with pattern pieces. These pattern pieces are base for going to the next stage &amp;quot;Details mode&amp;quot;. Before you will be able to enable the &amp;quot;Details mode&amp;quot; need create at least one detail.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Režim pro práci s jednotlivostmi (díly střihu). Tyto díly střihu jsou základem pro další krok v &amp;quot;režimu jednotlivosti&amp;quot;. Předtím než můžete dále pracovat v &amp;quot;režimu jednotlivosti&amp;quot;, musíte vytvořit alespoň jednu jednotlivost (díl střihu).&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Režim pro práci s díly střihu. Tyto díly střihu jsou základem pro další krok v &amp;quot;režimu jednotlivosti&amp;quot;. Předtím než můžete dále pracovat v &amp;quot;režimu jednotlivosti&amp;quot;, musíte vytvořit alespoň jednu jednotlivost (díl střihu).&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.ui" line="812"/>
@@ -12169,7 +12169,7 @@ Chcete uložit své změny?</translation>
         <location filename="../../src/app/valentina/mainwindow.ui" line="1068"/>
         <location filename="../../src/app/valentina/mainwindow.ui" line="1071"/>
         <source>Original zoom</source>
-        <translation>Původní přiblížení</translation>
+        <translation>Původní zvětšení</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.cpp" line="1674"/>
@@ -13678,7 +13678,7 @@ Chcete vybrat jiný soubor?</translation>
         <location filename="../../src/app/valentina/dialogs/configpages/preferencesconfigurationpage.ui" line="479"/>
         <location filename="../../src/app/valentina/dialogs/configpages/preferencesconfigurationpage.ui" line="613"/>
         <source>Scrolling</source>
-        <translation>Posunování</translation>
+        <translation>Posun</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/configpages/preferencesconfigurationpage.ui" line="485"/>
@@ -13693,7 +13693,7 @@ Chcete vybrat jiný soubor?</translation>
     <message>
         <location filename="../../src/app/valentina/dialogs/configpages/preferencesconfigurationpage.ui" line="501"/>
         <source>Scrolling animation duration</source>
-        <translation>Doba trvání posunovací animace</translation>
+        <translation>Doba trvání animace posunu</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/configpages/preferencesconfigurationpage.ui" line="504"/>
@@ -13726,7 +13726,7 @@ Chcete vybrat jiný soubor?</translation>
     <message>
         <location filename="../../src/app/valentina/dialogs/configpages/preferencesconfigurationpage.ui" line="565"/>
         <source>Scale scrolling sensitivity for mouse with sensor</source>
-        <translation>Citlivost posunování měřítka pro myš s čidlem</translation>
+        <translation>Změnit velikost citlivosti posunu pro myš s čidlem</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/configpages/preferencesconfigurationpage.ui" line="584"/>
@@ -13737,7 +13737,7 @@ Chcete vybrat jiný soubor?</translation>
     <message>
         <location filename="../../src/app/valentina/dialogs/configpages/preferencesconfigurationpage.ui" line="591"/>
         <source>Scale scrolling sensitivity for mouse with wheel</source>
-        <translation>Citlivost posunování měřítka pro myš s kolečkem</translation>
+        <translation>Změnit velikost citlivosti posunu pro myš s kolečkem</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/configpages/preferencesconfigurationpage.ui" line="622"/>
@@ -13817,7 +13817,7 @@ Chcete vybrat jiný soubor?</translation>
     <message>
         <location filename="../../src/app/valentina/dialogs/configpages/preferencesconfigurationpage.ui" line="211"/>
         <source>Interactive tools</source>
-        <translation>Vzájemně působící nástroje</translation>
+        <translation>Interaktivní nástroje</translation>
     </message>
 </context>
 <context>
@@ -14226,7 +14226,7 @@ Tato volba se projeví po opětovném spuštění.</translation>
         <location filename="../../src/app/puzzle/dialogs/configpages/puzzlepreferencesconfigurationpage.ui" line="321"/>
         <location filename="../../src/app/puzzle/dialogs/configpages/puzzlepreferencesconfigurationpage.ui" line="470"/>
         <source>Scrolling</source>
-        <translation>Posunování</translation>
+        <translation>Posun</translation>
     </message>
     <message>
         <location filename="../../src/app/puzzle/dialogs/configpages/puzzlepreferencesconfigurationpage.ui" line="342"/>
@@ -14241,7 +14241,7 @@ Tato volba se projeví po opětovném spuštění.</translation>
     <message>
         <location filename="../../src/app/puzzle/dialogs/configpages/puzzlepreferencesconfigurationpage.ui" line="358"/>
         <source>Scrolling animation duration</source>
-        <translation>Doba trvání posunovací animace</translation>
+        <translation>Doba trvání animace posunu</translation>
     </message>
     <message>
         <location filename="../../src/app/puzzle/dialogs/configpages/puzzlepreferencesconfigurationpage.ui" line="361"/>
@@ -14274,7 +14274,7 @@ Tato volba se projeví po opětovném spuštění.</translation>
     <message>
         <location filename="../../src/app/puzzle/dialogs/configpages/puzzlepreferencesconfigurationpage.ui" line="422"/>
         <source>Scale scrolling sensitivity for mouse with sensor</source>
-        <translation>Citlivost posunování měřítka pro myš s čidlem</translation>
+        <translation>Změnit velikost citlivosti posunu pro myš s čidlem</translation>
     </message>
     <message>
         <location filename="../../src/app/puzzle/dialogs/configpages/puzzlepreferencesconfigurationpage.ui" line="441"/>
@@ -14285,7 +14285,7 @@ Tato volba se projeví po opětovném spuštění.</translation>
     <message>
         <location filename="../../src/app/puzzle/dialogs/configpages/puzzlepreferencesconfigurationpage.ui" line="448"/>
         <source>Scale scrolling sensitivity for mouse with wheel</source>
-        <translation>Citlivost posunování měřítka pro myš s kolečkem</translation>
+        <translation>Změnit velikost citlivosti posunu pro myš s kolečkem</translation>
     </message>
     <message>
         <location filename="../../src/app/puzzle/dialogs/configpages/puzzlepreferencesconfigurationpage.ui" line="479"/>
@@ -15739,7 +15739,7 @@ Tato volba se projeví po opětovném spuštění.</translation>
     </message>
     <message>
         <location filename="../../src/app/tape/tkmmainwindow.ui" line="109"/>
-        <location filename="../../src/app/tape/tkmmainwindow.cpp" line="1993"/>
+        <location filename="../../src/app/tape/tkmmainwindow.cpp" line="1999"/>
         <source>0 results</source>
         <translation>0 výsledků</translation>
     </message>
@@ -15790,21 +15790,21 @@ Tato volba se projeví po opětovném spuštění.</translation>
     </message>
     <message>
         <location filename="../../src/app/tape/tkmmainwindow.ui" line="320"/>
-        <location filename="../../src/app/tape/tkmmainwindow.cpp" line="2750"/>
+        <location filename="../../src/app/tape/tkmmainwindow.cpp" line="2756"/>
         <source>Name</source>
         <comment>measurement column</comment>
         <translation>Název</translation>
     </message>
     <message>
         <location filename="../../src/app/tape/tkmmainwindow.ui" line="325"/>
-        <location filename="../../src/app/tape/tkmmainwindow.cpp" line="2752"/>
+        <location filename="../../src/app/tape/tkmmainwindow.cpp" line="2758"/>
         <source>Full name</source>
         <comment>measurement column</comment>
         <translation>Plný název</translation>
     </message>
     <message>
         <location filename="../../src/app/tape/tkmmainwindow.ui" line="330"/>
-        <location filename="../../src/app/tape/tkmmainwindow.cpp" line="2754"/>
+        <location filename="../../src/app/tape/tkmmainwindow.cpp" line="2760"/>
         <source>Group</source>
         <comment>measurement column</comment>
         <translation>Skupina</translation>
@@ -16158,141 +16158,141 @@ Tato volba se projeví po opětovném spuštění.</translation>
         <translation>Nepodařilo se zobrazit obrázek. Chyba: %1</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tkmmainwindow.cpp" line="1841"/>
+        <location filename="../../src/app/tape/tkmmainwindow.cpp" line="1847"/>
         <source>About Qt</source>
         <translation>O Qt</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tkmmainwindow.cpp" line="2081"/>
+        <location filename="../../src/app/tape/tkmmainwindow.cpp" line="2087"/>
         <source>Empty</source>
         <translation>Prázdný</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tkmmainwindow.cpp" line="2082"/>
+        <location filename="../../src/app/tape/tkmmainwindow.cpp" line="2088"/>
         <source>File was not saved yet.</source>
         <translation>Soubor ještě nebyl uložen.</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tkmmainwindow.cpp" line="2133"/>
+        <location filename="../../src/app/tape/tkmmainwindow.cpp" line="2139"/>
         <source>Unsaved changes</source>
         <translation>Neuložené změny</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tkmmainwindow.cpp" line="2134"/>
+        <location filename="../../src/app/tape/tkmmainwindow.cpp" line="2140"/>
         <source>Measurements have been modified. Do you want to save your changes?</source>
         <translation>Míry byly změněny. Chcete uložit změny?</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tkmmainwindow.cpp" line="2142"/>
+        <location filename="../../src/app/tape/tkmmainwindow.cpp" line="2148"/>
         <source>Save…</source>
         <translation>Uložit…</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tkmmainwindow.cpp" line="2142"/>
+        <location filename="../../src/app/tape/tkmmainwindow.cpp" line="2148"/>
         <source>Save</source>
         <translation>Uložit</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tkmmainwindow.cpp" line="2147"/>
+        <location filename="../../src/app/tape/tkmmainwindow.cpp" line="2153"/>
         <source>Don&apos;t Save</source>
         <translation>Neukládat</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tkmmainwindow.cpp" line="2226"/>
+        <location filename="../../src/app/tape/tkmmainwindow.cpp" line="2232"/>
         <source>Cannot read settings from a malformed .INI file.</source>
         <translation>Nelze číst nastavení z poškozeného souboru .INI.</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tkmmainwindow.cpp" line="2247"/>
+        <location filename="../../src/app/tape/tkmmainwindow.cpp" line="2253"/>
         <source>Cannot save settings. Access denied.</source>
         <translation>Nelze uložit nastavení. Přístup odepřen.</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tkmmainwindow.cpp" line="2276"/>
+        <location filename="../../src/app/tape/tkmmainwindow.cpp" line="2282"/>
         <source>Empty</source>
         <comment>list</comment>
         <translation>Prázdný</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tkmmainwindow.cpp" line="2349"/>
+        <location filename="../../src/app/tape/tkmmainwindow.cpp" line="2355"/>
         <source>Unknown measurement</source>
         <translation>Neznámé měření</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tkmmainwindow.cpp" line="2357"/>
+        <location filename="../../src/app/tape/tkmmainwindow.cpp" line="2363"/>
         <source>&amp;New Window</source>
         <translation>&amp;Nové okno</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tkmmainwindow.cpp" line="2500"/>
-        <location filename="../../src/app/tape/tkmmainwindow.cpp" line="2686"/>
+        <location filename="../../src/app/tape/tkmmainwindow.cpp" line="2506"/>
+        <location filename="../../src/app/tape/tkmmainwindow.cpp" line="2692"/>
         <source>Unnamed image %1</source>
         <translation>Nepojmenovaný obrázek %1</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tkmmainwindow.cpp" line="2541"/>
+        <location filename="../../src/app/tape/tkmmainwindow.cpp" line="2547"/>
         <source>Open file</source>
         <translation>Otevřít soubor</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tkmmainwindow.cpp" line="2660"/>
+        <location filename="../../src/app/tape/tkmmainwindow.cpp" line="2666"/>
         <source>Length units</source>
         <translation>Délkové jednotky</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tkmmainwindow.cpp" line="2661"/>
+        <location filename="../../src/app/tape/tkmmainwindow.cpp" line="2667"/>
         <source>Degrees</source>
         <translation>Stupně</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tkmmainwindow.cpp" line="2678"/>
+        <location filename="../../src/app/tape/tkmmainwindow.cpp" line="2684"/>
         <source>None</source>
         <translation>Žádný</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tkmmainwindow.cpp" line="2723"/>
+        <location filename="../../src/app/tape/tkmmainwindow.cpp" line="2729"/>
         <source>Measurement name is empty.</source>
         <translation>Název míry je prázdný.</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tkmmainwindow.cpp" line="2728"/>
+        <location filename="../../src/app/tape/tkmmainwindow.cpp" line="2734"/>
         <source>Imported file must not contain the same name twice.</source>
         <translation>Zavedený soubor nesmí obsahovat stejný název dvakrát.</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tkmmainwindow.cpp" line="2733"/>
+        <location filename="../../src/app/tape/tkmmainwindow.cpp" line="2739"/>
         <source>Measurement &apos;%1&apos; doesn&apos;t match regex pattern.</source>
         <translation>Rozměry &apos;%1&apos; neodpovídají vzoru regulárního výrazu.</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tkmmainwindow.cpp" line="2738"/>
+        <location filename="../../src/app/tape/tkmmainwindow.cpp" line="2744"/>
         <source>Measurement &apos;%1&apos; already used in the file.</source>
         <translation>Míra &apos;%1&apos; již použita v souboru.</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tkmmainwindow.cpp" line="2756"/>
+        <location filename="../../src/app/tape/tkmmainwindow.cpp" line="2762"/>
         <source>Formula</source>
         <comment>measurement column</comment>
         <translation>Vzorec</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tkmmainwindow.cpp" line="2758"/>
+        <location filename="../../src/app/tape/tkmmainwindow.cpp" line="2764"/>
         <source>Description</source>
         <comment>measurement column</comment>
         <translation>Popis</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tkmmainwindow.cpp" line="2782"/>
+        <location filename="../../src/app/tape/tkmmainwindow.cpp" line="2788"/>
         <source>Error in row %1. The measurement name is empty.</source>
         <translation>Chyba na řádku %1. Název míry je prázdný.</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tkmmainwindow.cpp" line="2823"/>
+        <location filename="../../src/app/tape/tkmmainwindow.cpp" line="2829"/>
         <source>Error in row %1. %2</source>
         <translation>Chyba na řádku %1. %2</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tkmmainwindow.cpp" line="2836"/>
+        <location filename="../../src/app/tape/tkmmainwindow.cpp" line="2842"/>
         <source>Individual measurements require at least 2 columns.</source>
         <translation>Individuální míry vyžadují alespoň 2 sloupce.</translation>
     </message>
@@ -16473,8 +16473,8 @@ Tato volba se projeví po opětovném spuštění.</translation>
     </message>
     <message>
         <location filename="../../src/app/tape/tmainwindow.ui" line="64"/>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="657"/>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="678"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="681"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="702"/>
         <source>Measurements</source>
         <translation>Míry</translation>
     </message>
@@ -16493,7 +16493,7 @@ Tato volba se projeví po opětovném spuštění.</translation>
         <translation type="vanished">Otevřít individuální...</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="3457"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="3481"/>
         <source>Save</source>
         <translation>Uložit</translation>
     </message>
@@ -16552,34 +16552,34 @@ Tato volba se projeví po opětovném spuštění.</translation>
     </message>
     <message>
         <location filename="../../src/app/tape/tmainwindow.ui" line="1521"/>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="1169"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="1193"/>
         <source>Preferences</source>
         <translation>Nastavení</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="3790"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="3814"/>
         <source>untitled %1</source>
         <translation>bez názvu %1</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="1816"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="1840"/>
         <source>This file already opened in another window.</source>
         <translation>Tento soubor je již otevřen v jiném okně.</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="538"/>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="1848"/>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="4185"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="562"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="1872"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="4209"/>
         <source>File error.</source>
         <translation>Chyba souboru.</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="1020"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="1044"/>
         <source>Could not save file</source>
         <translation>Nepodařilo se uložit soubor</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="954"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="978"/>
         <source>measurements</source>
         <translation>Míry</translation>
     </message>
@@ -16592,17 +16592,17 @@ Tato volba se projeví po opětovném spuštění.</translation>
         <translation type="vanished">Obvyklé míry (*.vst)</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="976"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="1000"/>
         <source>Save as</source>
         <translation>Uložit jako</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="4210"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="4234"/>
         <source>&amp;New Window</source>
         <translation>&amp;Nové okno</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="1447"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="1471"/>
         <source>Edit measurement</source>
         <translation>Upravit míru</translation>
     </message>
@@ -16611,22 +16611,22 @@ Tato volba se projeví po opětovném spuštění.</translation>
         <translation type="vanished">R_%1</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="2273"/>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="3928"/>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="3951"/>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="3967"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="2297"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="3952"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="3975"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="3991"/>
         <source>Error</source>
         <translation>Chyba</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="2273"/>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="3928"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="2297"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="3952"/>
         <source>Empty field.</source>
         <translation>Prázdné pole.</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="3967"/>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="3968"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="3991"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="3992"/>
         <source>Parser error: %1</source>
         <translation>Chyba zpracování: %1</translation>
     </message>
@@ -16643,18 +16643,18 @@ Tato volba se projeví po opětovném spuštění.</translation>
         <translation type="vanished">Velikost:</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="624"/>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="640"/>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="748"/>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="958"/>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="2593"/>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="2998"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="648"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="664"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="772"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="982"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="2617"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="3022"/>
         <source>Individual measurements</source>
         <translation>Individuální míry</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="1581"/>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="3790"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="1605"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="3814"/>
         <source>untitled</source>
         <translation>bez názvu</translation>
     </message>
@@ -16663,7 +16663,7 @@ Tato volba se projeví po opětovném spuštění.</translation>
         <translation type="vanished">&lt;prázdné&gt;</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="3448"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="3472"/>
         <source>Unsaved changes</source>
         <translation>Neuložené změny</translation>
     </message>
@@ -16674,34 +16674,34 @@ Do you want to save your changes?</source>
 Chcete uložit změny?</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="3929"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="3953"/>
         <source>Empty field</source>
         <translation>Prázdné pole</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="3962"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="3986"/>
         <source>Value</source>
         <translation>Hodnota</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="3976"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="4000"/>
         <source>Open file</source>
         <translation>Otevřít soubor</translation>
     </message>
     <message>
         <location filename="../../src/app/tape/tmainwindow.ui" line="1532"/>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="1807"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="1831"/>
         <source>Import from a pattern</source>
         <translation>Zavést ze střihu</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="1803"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="1827"/>
         <source>Pattern files (*.val)</source>
         <translation>Soubory se střihy (*.val)</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="772"/>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="5046"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="796"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="5070"/>
         <source>Pattern unit:</source>
         <translation>Jednotka střihu:</translation>
     </message>
@@ -16738,12 +16738,12 @@ Chcete uložit změny?</translation>
         <translation type="vanished">Míry (*.vst);;Všechny soubory (*.*)</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="1004"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="1028"/>
         <source>Failed to lock. This file already opened in another window.</source>
         <translation>Nepodařilo se uzamknout. Tento soubor je již otevřen v jiném okně.</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="1054"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="1078"/>
         <source>Failed to lock. This file already opened in another window. Expect collissions when run 2 copies of the program.</source>
         <translation>Nepodařilo se uzamknout. Tento soubor je již otevřen v jiném okně. Při zdvojeném vykonávání (dvě kopie programu) může dojít ke střetům.</translation>
     </message>
@@ -16752,8 +16752,8 @@ Chcete uložit změny?</translation>
         <translation type="vanished">Soubor obsahuje neplatnou(é) známou míru(y).</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="453"/>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="4143"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="477"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="4167"/>
         <source>File has unknown format.</source>
         <translation>Soubor má neznámý formát.</translation>
     </message>
@@ -16762,21 +16762,21 @@ Chcete uložit změny?</translation>
         <translation type="vanished">Plný název</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="415"/>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="4105"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="439"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="4129"/>
         <source>File &apos;%1&apos; doesn&apos;t exist!</source>
         <translation>Soubor &apos;%1&apos; není!</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="2244"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="2268"/>
         <source>The name of known measurement forbidden to change.</source>
         <translation>Nelze změnit název známé míry.</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="1441"/>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="2210"/>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="2286"/>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="2496"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="1465"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="2234"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="2310"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="2520"/>
         <source>Can&apos;t find measurement &apos;%1&apos;.</source>
         <translation>Nelze najít míru &apos;%1&apos;.</translation>
     </message>
@@ -16793,7 +16793,7 @@ Chcete uložit změny?</translation>
         <translation type="vanished">Nelze změnit hodnotu zvětšení výšky známé míry.</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="2515"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="2539"/>
         <source>The full name of known measurement forbidden to change.</source>
         <translation>Nelze změnit úplný název známé míry.</translation>
     </message>
@@ -16822,19 +16822,19 @@ Chcete uložit změny?</translation>
         <translation>Smazat míru</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="5122"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="5146"/>
         <source>unknown</source>
         <comment>gender</comment>
         <translation>Neznámý</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="5123"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="5147"/>
         <source>male</source>
         <comment>gender</comment>
         <translation>muž</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="5124"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="5148"/>
         <source>female</source>
         <comment>gender</comment>
         <translation>žena</translation>
@@ -16858,7 +16858,7 @@ Chcete uložit změny?</translation>
         <translation>Vytvořit ze stávajícího souboru</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="680"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="704"/>
         <source>Select file</source>
         <translation>Vybrat soubor</translation>
     </message>
@@ -16881,12 +16881,12 @@ Chcete uložit změny?</translation>
         <translation type="vanished">&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:340pt;&quot;&gt;?&lt;/span&gt;&lt;/p&gt;&lt;p align=&quot;center&quot;&gt;Neznámá míra&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="2921"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="2945"/>
         <source>About Qt</source>
         <translation>O Qt</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="3397"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="3421"/>
         <source>File was not saved yet.</source>
         <translation>Soubor ještě nebyl uložen.</translation>
     </message>
@@ -16927,7 +16927,7 @@ Chcete uložit změny?</translation>
         <translation type="vanished">Uložit...</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="3462"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="3486"/>
         <source>Don&apos;t Save</source>
         <translation>Neukládat</translation>
     </message>
@@ -16969,12 +16969,12 @@ Chcete uložit změny?</translation>
         <translation type="vanished">Neplatná hodnota</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="289"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="313"/>
         <source>Show in Finder</source>
         <translation>Ukázat ve okně pro hledání</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="1092"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="1116"/>
         <source>Comma-Separated Values</source>
         <translation>Čárkou oddělené hodnoty</translation>
     </message>
@@ -17001,40 +17001,40 @@ Chcete uložit změny?</translation>
         <translation type="vanished">Velikost:</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="625"/>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="641"/>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="657"/>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="678"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="649"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="665"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="681"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="702"/>
         <source>All files</source>
         <translation>Všechny soubory</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="928"/>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="2639"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="952"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="2663"/>
         <source>Could not save the file</source>
         <translation>Nepodařilo se uložit soubor</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="3798"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="3822"/>
         <source>read only</source>
         <translation>Pouze pro čtení</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="624"/>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="640"/>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="739"/>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="963"/>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="2948"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="648"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="664"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="763"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="987"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="2972"/>
         <source>Multisize measurements</source>
         <translation>Měření více velikostí</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="3952"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="3976"/>
         <source>Invalid result. Value is infinite or NaN. Please, check your calculations.</source>
         <translation>Neplatný výsledek. Hodnota je nekonečná nebo NaN. Prověřte, prosím, své výpočty.</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="3396"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="3420"/>
         <source>Empty</source>
         <translation>Prázdný</translation>
     </message>
@@ -17054,34 +17054,34 @@ Chcete uložit změny?</translation>
         <translation>Vytvořit ze stávajícího…</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="3457"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="3481"/>
         <source>Save…</source>
         <translation>Uložit…</translation>
     </message>
     <message>
         <location filename="../../src/app/tape/tmainwindow.ui" line="1568"/>
         <location filename="../../src/app/tape/tmainwindow.ui" line="1571"/>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="1095"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="1119"/>
         <source>Import from CSV</source>
         <translation>Zavést z CSV</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="4343"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="4367"/>
         <source>Individual measurements require at least 2 columns.</source>
         <translation>Individuální míry vyžadují alespoň 2 sloupce.</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="4424"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="4448"/>
         <source>Multisize measurements require at least 4 columns.</source>
         <translation>Měření více velikostí vyžaduje alespoň 4 sloupce.</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="4295"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="4319"/>
         <source>Imported file must not contain the same name twice.</source>
         <translation>Zavedený soubor nesmí obsahovat stejný název dvakrát.</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="4068"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="4092"/>
         <source>Cannot save settings. Access denied.</source>
         <translation>Nelze uložit nastavení. Přístup odepřen.</translation>
     </message>
@@ -17136,44 +17136,44 @@ Chcete uložit změny?</translation>
         <translation>&amp;Nový</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="4047"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="4071"/>
         <source>Cannot read settings from a malformed .INI file.</source>
         <translation>Nelze číst nastavení z poškozeného souboru .INI.</translation>
     </message>
     <message>
         <location filename="../../src/app/tape/tmainwindow.ui" line="326"/>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="4840"/>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="4856"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="4864"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="4880"/>
         <source>Name</source>
         <comment>measurement column</comment>
         <translation>Název</translation>
     </message>
     <message>
         <location filename="../../src/app/tape/tmainwindow.ui" line="331"/>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="4842"/>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="4861"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="4866"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="4885"/>
         <source>Full name</source>
         <comment>measurement column</comment>
         <translation>Plný název</translation>
     </message>
     <message>
         <location filename="../../src/app/tape/tmainwindow.ui" line="336"/>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="4844"/>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="4866"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="4868"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="4890"/>
         <source>Calculated value</source>
         <comment>measurement column</comment>
         <translation>Vypočítaná hodnota</translation>
     </message>
     <message>
         <location filename="../../src/app/tape/tmainwindow.ui" line="341"/>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="4846"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="4870"/>
         <source>Formula</source>
         <comment>measurement column</comment>
         <translation>Vzorec</translation>
     </message>
     <message>
         <location filename="../../src/app/tape/tmainwindow.ui" line="346"/>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="4871"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="4895"/>
         <source>Base value</source>
         <comment>measurement column</comment>
         <translation>Základní hodnota</translation>
@@ -17241,7 +17241,7 @@ Chcete uložit změny?</translation>
     </message>
     <message>
         <location filename="../../src/app/tape/tmainwindow.ui" line="1603"/>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="2595"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="2619"/>
         <source>Export to individual</source>
         <translation>Vyvést do individuálního</translation>
     </message>
@@ -17296,153 +17296,153 @@ Chcete uložit změny?</translation>
         <translation>Adresář s nastavením</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="339"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="363"/>
         <source>The table doesn&apos;t provide dimensions</source>
         <translation>Tabulka neuvádí rozměry</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="350"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="374"/>
         <source>Invalid base value for dimension A</source>
         <translation>Neplatná základní hodnota pro rozměr A</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="360"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="384"/>
         <source>The table doesn&apos;t support dimension B</source>
         <translation>Tabulka nepodporuje rozměr B</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="371"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="395"/>
         <source>Invalid base value for dimension B</source>
         <translation>Neplatná základní hodnota pro rozměr B</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="381"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="405"/>
         <source>The table doesn&apos;t support dimension C</source>
         <translation>Tabulka nepodporuje rozměr C</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="392"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="416"/>
         <source>Invalid base value for dimension C</source>
         <translation>Neplatná základní hodnota pro rozměr C</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="1485"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="1509"/>
         <source>Measurement image</source>
         <translation>Obrázek měření</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="1499"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="1523"/>
         <source>Invalid image. Error: %1</source>
         <translation>Neplatný obrázek. Chyba: %1</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="1574"/>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="1605"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="1598"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="1629"/>
         <source>Unable to save image. Error: %1</source>
         <translation>Nepodařilo se uložit obrázek. Chyba: %1</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="1589"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="1613"/>
         <source>Save Image</source>
         <translation>Uložit obrázek</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="1638"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="1662"/>
         <source>Unable to show image. Error: %1</source>
         <translation>Nepodařilo se zobrazit obrázek. Chyba: %1</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="2594"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="2618"/>
         <source>measurements.vit</source>
         <translation>míry.vit</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="2904"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="2928"/>
         <source>Unknown known measurements: %1</source>
         <translation>Neznámá známá měření: %1</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="3319"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="3343"/>
         <source>Shift (%1):</source>
         <translation>Shift (%1):</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="3449"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="3473"/>
         <source>Measurements have been modified. Do you want to save your changes?</source>
         <translation>Míry byly změněny. Chcete uložit změny?</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="4737"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="4761"/>
         <source>Unknown measurement</source>
         <translation>Neznámé měření</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="4773"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="4797"/>
         <source>None</source>
         <translation>Žádný</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="4782"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="4806"/>
         <source>Invalid link</source>
         <translation>Neplatný odkaz</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="4848"/>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="4902"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="4872"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="4926"/>
         <source>Description</source>
         <comment>measurement column</comment>
         <translation>Popis</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="4882"/>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="4891"/>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="4897"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="4906"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="4915"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="4921"/>
         <source>Shift</source>
         <comment>measurement column</comment>
         <translation>Mezera</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="5290"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="5314"/>
         <source>Empty</source>
         <comment>list</comment>
         <translation>Prázdný</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="5369"/>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="5379"/>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="5389"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="5393"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="5403"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="5413"/>
         <source>%1 shift</source>
         <translation>%1 posun</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="4514"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="4538"/>
         <source>Cannot convert base value to double in column 2.</source>
         <translation>Nelze převést základní hodnotu na dvojnásobek ve sloupci 2.</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="4518"/>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="4524"/>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="4531"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="4542"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="4548"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="4555"/>
         <source>Cannot convert shift value to double in column %1.</source>
         <translation>Nelze převést hodnotu posunu na dvojnásobek ve sloupci %1.</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="5093"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="5117"/>
         <source>Millimeters</source>
         <translation>Milimetry</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="5096"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="5120"/>
         <source>Inches</source>
         <translation>Palce</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="5099"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="5123"/>
         <source>Centimeters</source>
         <translation>Centimetry</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="5108"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="5132"/>
         <source>Degrees</source>
         <translation>Stupně</translation>
     </message>
@@ -17468,7 +17468,7 @@ Chcete uložit změny?</translation>
     </message>
     <message>
         <location filename="../../src/app/tape/tmainwindow.ui" line="115"/>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="5207"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="5231"/>
         <source>0 results</source>
         <translation>0 výsledků</translation>
     </message>
@@ -17528,33 +17528,33 @@ Chcete uložit změny?</translation>
         <translation>Vlastní názvy rozměrů</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="4290"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="4314"/>
         <source>Measurement name is empty.</source>
         <translation>Název míry je prázdný.</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="4300"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="4324"/>
         <source>Measurement &apos;%1&apos; doesn&apos;t match regex pattern.</source>
         <translation>Rozměry &apos;%1&apos; neodpovídají vzoru regulárního výrazu.</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="4305"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="4329"/>
         <source>Measurement &apos;%1&apos; already used in the file.</source>
         <translation>Míra &apos;%1&apos; již použita v souboru.</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="4358"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="4382"/>
         <source>Error in row %1. The measurement name is empty.</source>
         <translation>Chyba na řádku %1. Název míry je prázdný.</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="4496"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="4520"/>
         <source>The measurement name is empty.</source>
         <translation>Název měření je prázdný.</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="4391"/>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="4447"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="4415"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="4471"/>
         <source>Error in row %1. %2</source>
         <translation>Chyba na řádku %1. %2</translation>
     </message>
@@ -17848,7 +17848,7 @@ Chcete uložit změny?</translation>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tablabels.ui" line="1128"/>
         <source>Pattern label visible</source>
-        <translation>Popis vzoru viditelný</translation>
+        <translation>Popis střihu viditelný</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tablabels.ui" line="51"/>
@@ -19109,7 +19109,17 @@ Chcete uložit změny?</translation>
         <translation>Chyba při vytváření záložní kopie: %1.</translation>
     </message>
     <message>
-        <location filename="../../src/libs/ifc/xml/vabstractconverter.cpp" line="317"/>
+        <location filename="../../src/libs/ifc/xml/vabstractconverter.cpp" line="308"/>
+        <source>This file was created with an outdated version of the app and cannot be opened. Please re-save it using a newer version of the app that is compatible with this one.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/libs/ifc/xml/vabstractconverter.cpp" line="314"/>
+        <source>This file was created with a newer version of the app and cannot be opened. Please update your app to the latest version.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/libs/ifc/xml/vabstractconverter.cpp" line="318"/>
         <source>Unexpected version &quot;%1&quot;.</source>
         <translation>Neočekávaná verze &quot;%1&quot;.</translation>
     </message>
@@ -19118,14 +19128,12 @@ Chcete uložit změny?</translation>
         <translation type="vanished">Chyba při nahrazování symbolického souboru skutečným souborem: %1.</translation>
     </message>
     <message>
-        <location filename="../../src/libs/ifc/xml/vabstractconverter.cpp" line="307"/>
         <source>Invalid version. Minimum supported format version is %1</source>
-        <translation>Neplatná verze. Nejnižší podporovaná verze formátu je %1</translation>
+        <translation type="vanished">Neplatná verze. Nejnižší podporovaná verze formátu je %1</translation>
     </message>
     <message>
-        <location filename="../../src/libs/ifc/xml/vabstractconverter.cpp" line="313"/>
         <source>Invalid version. Maximum supported format version is %1</source>
-        <translation>Neplatná verze. Nejvyšší podporovaná verze formátu je %1</translation>
+        <translation type="vanished">Neplatná verze. Nejvyšší podporovaná verze formátu je %1</translation>
     </message>
     <message>
         <location filename="../../src/libs/ifc/xml/vabstractconverter.cpp" line="236"/>
@@ -19573,7 +19581,7 @@ Chcete uložit změny?</translation>
         <location filename="../../src/libs/vmisc/vabstractshortcutmanager.cpp" line="341"/>
         <source>Interactive tools mode</source>
         <comment>shortcut for action</comment>
-        <translation>Režim vzájemně působících nástrojů</translation>
+        <translation>Režim interaktivních nástrojů</translation>
     </message>
     <message>
         <location filename="../../src/libs/vmisc/vabstractshortcutmanager.cpp" line="343"/>
@@ -19921,7 +19929,7 @@ Chcete uložit změny?</translation>
         <location filename="../../src/libs/vmisc/vabstractshortcutmanager.cpp" line="457"/>
         <source>Tool &apos;Pin&apos;</source>
         <comment>shortcut for action</comment>
-        <translation type="unfinished"></translation>
+        <translation>Nástroj Špendlík</translation>
     </message>
     <message>
         <location filename="../../src/libs/vmisc/vabstractshortcutmanager.cpp" line="459"/>
@@ -20660,7 +20668,7 @@ Chcete uložit změny?</translation>
     <message>
         <location filename="../../src/app/valentina/core/vcmdexport.cpp" line="733"/>
         <source>Export boundary together with notches (export mode).</source>
-        <translation type="unfinished"></translation>
+        <translation>Vyvést přídavek na šev společně se zářezy (režim vyvedení).</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/core/vcmdexport.cpp" line="765"/>
@@ -21156,7 +21164,7 @@ Chcete uložit změny?</translation>
     <message>
         <location filename="../../src/libs/ifc/xml/vdomdocument.cpp" line="746"/>
         <source>Parsing error in file %3 at line %1, column %2</source>
-        <translation type="unfinished"></translation>
+        <translation>Chyba při zpracování: soubor %3, řádek %1, sloupec %2</translation>
     </message>
     <message>
         <location filename="../../src/libs/ifc/xml/vdomdocument.cpp" line="876"/>
@@ -21236,7 +21244,7 @@ Chcete uložit změny?</translation>
     <message>
         <location filename="../../src/libs/vdxf/vdxfengine.cpp" line="1195"/>
         <source>Style System Text is missing.</source>
-        <translation type="unfinished"></translation>
+        <translation>Text systému stylů, tj. údaje o specifikaci vzoru pro standardní DXF, chybí.</translation>
     </message>
     <message>
         <location filename="../../src/libs/vdxf/vdxfengine.cpp" line="2068"/>
@@ -21262,7 +21270,7 @@ Chcete uložit změny?</translation>
     <message>
         <location filename="../../src/libs/vlayout/vfoldline.cpp" line="795"/>
         <source>Invalid SVG font &apos;%1&apos;. Fallback to outline font.</source>
-        <translation type="unfinished"></translation>
+        <translation>Neplatný font SVG &apos;%1&apos;. Zpět na obrysové písmo.</translation>
     </message>
 </context>
 <context>
@@ -21429,7 +21437,7 @@ Chcete uložit změny?</translation>
         <location filename="../../src/libs/vlayout/vlayoutexporter.cpp" line="409"/>
         <location filename="../../src/libs/vlayout/vlayoutexporter.cpp" line="428"/>
         <source>Can&apos;t create an HP-GL file.</source>
-        <translation type="unfinished"></translation>
+        <translation>Nelze vytvořit soubor HP-GL.</translation>
     </message>
     <message>
         <location filename="../../src/libs/vlayout/vlayoutexporter.cpp" line="577"/>
@@ -21477,7 +21485,7 @@ Chcete uložit změny?</translation>
     <message>
         <location filename="../../src/libs/vlayout/vlayoutpiece.cpp" line="1989"/>
         <source>Invalid SVG font &apos;%1&apos;. Fallback to outline font.</source>
-        <translation type="unfinished"></translation>
+        <translation>Neplatný font SVG &apos;%1&apos;. Zpět na obrysové písmo.</translation>
     </message>
 </context>
 <context>
@@ -21526,7 +21534,7 @@ Chcete uložit změny?</translation>
     <message>
         <location filename="../../src/libs/vformat/vmeasurements.cpp" line="1364"/>
         <source>Dimension is not valid</source>
-        <translation type="unfinished"></translation>
+        <translation>Rozměr není platný</translation>
     </message>
     <message>
         <location filename="../../src/libs/vformat/vmeasurements.cpp" line="1072"/>
@@ -22016,7 +22024,7 @@ Chcete uložit změny?</translation>
     <message>
         <location filename="../../src/app/puzzle/scene/vpgraphicssheet.cpp" line="436"/>
         <source>FOLD</source>
-        <translation type="unfinished"></translation>
+        <translation>ZÁHYB</translation>
     </message>
 </context>
 <context>
@@ -22037,7 +22045,7 @@ Chcete uložit změny?</translation>
     <message>
         <location filename="../../src/app/puzzle/xml/vplayoutfilereader.cpp" line="658"/>
         <source>Error in line %1. Grainline main line is empty.</source>
-        <translation type="unfinished"></translation>
+        <translation>Chyba na řádku %1. Hlavní řádek dráhy nitě je prázdný.</translation>
     </message>
     <message>
         <location filename="../../src/app/puzzle/xml/vplayoutfilereader.cpp" line="1065"/>
@@ -22560,17 +22568,17 @@ Chcete uložit změny?</translation>
     <message>
         <location filename="../../src/app/puzzle/vpmainwindow.ui" line="385"/>
         <source>Copy number:</source>
-        <translation type="unfinished"></translation>
+        <translation>Počet kopií:</translation>
     </message>
     <message>
         <location filename="../../src/app/puzzle/vpmainwindow.ui" line="402"/>
         <source>Status</source>
-        <translation type="unfinished"></translation>
+        <translation>Stav</translation>
     </message>
     <message>
         <location filename="../../src/app/puzzle/vpmainwindow.ui" line="415"/>
         <source>Out of bound</source>
-        <translation type="unfinished"></translation>
+        <translation>Mimo oblast tisku</translation>
     </message>
     <message>
         <location filename="../../src/app/puzzle/vpmainwindow.ui" line="429"/>
@@ -22638,12 +22646,12 @@ Chcete uložit změny?</translation>
     <message>
         <location filename="../../src/app/puzzle/vpmainwindow.ui" line="717"/>
         <source>Vertically flipped</source>
-        <translation type="unfinished"></translation>
+        <translation>Svisle převrácené</translation>
     </message>
     <message>
         <location filename="../../src/app/puzzle/vpmainwindow.ui" line="724"/>
         <source>Horizontally flipped</source>
-        <translation type="unfinished"></translation>
+        <translation>Vodorovně převrácené</translation>
     </message>
     <message>
         <location filename="../../src/app/puzzle/vpmainwindow.ui" line="884"/>
@@ -22765,7 +22773,7 @@ Chcete uložit změny?</translation>
         <location filename="../../src/app/puzzle/vpmainwindow.ui" line="2355"/>
         <location filename="../../src/app/puzzle/vpmainwindow.ui" line="2407"/>
         <source>Print preview tiled</source>
-        <translation>Náhled tisku dlaždicový</translation>
+        <translation>Vytisknout dlaždicový náhled</translation>
     </message>
     <message>
         <location filename="../../src/app/puzzle/vpmainwindow.ui" line="2426"/>
@@ -22805,7 +22813,7 @@ Chcete uložit změny?</translation>
     <message>
         <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="527"/>
         <source>Failed to read %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Nepovedlo se přečíst %1</translation>
     </message>
     <message>
         <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="743"/>
@@ -22990,7 +22998,7 @@ Chcete uložit změny?</translation>
     <message>
         <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="4457"/>
         <source>sheet</source>
-        <translation type="unfinished"></translation>
+        <translation>list</translation>
     </message>
     <message>
         <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="3474"/>
@@ -23004,17 +23012,17 @@ Chcete uložit změny?</translation>
         <location filename="../../src/app/puzzle/layout/vppiece.cpp" line="486"/>
         <location filename="../../src/app/puzzle/layout/vppiece.cpp" line="492"/>
         <source>Seam line is empty</source>
-        <translation type="unfinished"></translation>
+        <translation>Čára švu není stanovena</translation>
     </message>
     <message>
         <location filename="../../src/app/puzzle/layout/vppiece.cpp" line="498"/>
         <source>Seam allowance line is empty</source>
-        <translation type="unfinished"></translation>
+        <translation>Čára švové záložky není stanovena</translation>
     </message>
     <message>
         <location filename="../../src/app/puzzle/layout/vppiece.cpp" line="504"/>
         <source>Grainline is empty</source>
-        <translation type="unfinished"></translation>
+        <translation>Dráha nitě je prázdná</translation>
     </message>
 </context>
 <context>
@@ -23032,12 +23040,12 @@ Chcete uložit změny?</translation>
     <message>
         <location filename="../../src/app/puzzle/vptilefactory.cpp" line="1265"/>
         <source>Warning: Multiple single stroke outline fonts detected (%1). The font &quot;%2&quot; was selected.</source>
-        <translation type="unfinished"></translation>
+        <translation>Varování: Bylo zjištěno více jednotahových obrysových písem (%1). Bylo vybráno písmo „%2“.</translation>
     </message>
     <message>
         <location filename="../../src/app/puzzle/vptilefactory.cpp" line="1327"/>
         <source>Warning: Multiple single-line SVG fonts detected (%1). The font &quot;%2&quot; was selected.</source>
-        <translation type="unfinished"></translation>
+        <translation>Varování: Bylo zjištěno více jednočárových písem SVG (%1). Bylo vybráno písmo „%2“.</translation>
     </message>
     <message>
         <location filename="../../src/app/puzzle/vptilefactory.cpp" line="461"/>
@@ -23742,12 +23750,12 @@ Chyba kompatibility formátu nezpracovaného rozvržení: ActualFileVersion = %1
     <message>
         <location filename="../../src/libs/vmisc/dialogs/vshortcutdialog.cpp" line="119"/>
         <source>Shortcut Already Used</source>
-        <translation type="unfinished"></translation>
+        <translation>Klávesová zkratka již použita</translation>
     </message>
     <message>
         <location filename="../../src/libs/vmisc/dialogs/vshortcutdialog.cpp" line="120"/>
         <source>&quot;%1&quot; is already bound to &quot;%2&quot;</source>
-        <translation type="unfinished"></translation>
+        <translation>&quot;%1&quot; je již vázáno na &quot;%2&quot;</translation>
     </message>
 </context>
 <context>
@@ -23755,7 +23763,7 @@ Chyba kompatibility formátu nezpracovaného rozvržení: ActualFileVersion = %1
     <message>
         <location filename="../../src/libs/vformat/vsinglelineoutlinechar.cpp" line="151"/>
         <source>Failed to open file for writing.</source>
-        <translation type="unfinished"></translation>
+        <translation>Soubor se nepodařilo otevřít pro zápis.</translation>
     </message>
 </context>
 <context>
@@ -23783,7 +23791,7 @@ Chyba kompatibility formátu nezpracovaného rozvržení: ActualFileVersion = %1
         <location filename="../../src/libs/vmisc/svgfont/vsvgfontreader.cpp" line="164"/>
         <location filename="../../src/libs/vmisc/svgfont/vsvgfontreader.cpp" line="208"/>
         <source>Incorrect file</source>
-        <translation type="unfinished"></translation>
+        <translation>Neplatný soubor</translation>
     </message>
     <message>
         <location filename="../../src/libs/vmisc/svgfont/vsvgfontreader.cpp" line="324"/>
@@ -23829,7 +23837,7 @@ Chyba kompatibility formátu nezpracovaného rozvržení: ActualFileVersion = %1
     <message>
         <location filename="../../src/libs/vwidgets/vtextgraphicsitem.cpp" line="890"/>
         <source>Invalid SVG font &apos;%1&apos;. Fallback to outline font.</source>
-        <translation type="unfinished"></translation>
+        <translation>Neplatné písmo SVG &apos;%1&apos;. Zpět na obrysové písmo.</translation>
     </message>
     <message>
         <location filename="../../src/libs/vwidgets/vtextgraphicsitem.cpp" line="948"/>
@@ -25902,7 +25910,7 @@ Chyba kompatibility formátu nezpracovaného rozvržení: ActualFileVersion = %1
     <message>
         <source>How to Make Your Own Sewing Patterns</source>
         <comment>Book name</comment>
-        <translation type="vanished">Jak si vytvořit vlastní šicí vzory</translation>
+        <translation type="vanished">Jak si vytvořit vlastní šicí střihové vzory</translation>
     </message>
     <message>
         <source>Zarapkar</source>
@@ -27285,7 +27293,7 @@ Chyba kompatibility formátu nezpracovaného rozvržení: ActualFileVersion = %1
     <message>
         <location filename="../../src/libs/vtools/visualization/line/vistoolalongline.cpp" line="115"/>
         <source>Length = %1%2; &lt;b&gt;Mouse click&lt;/b&gt; - finish selecting the length, &lt;b&gt;%3&lt;/b&gt; - skip</source>
-        <translation type="unfinished"></translation>
+        <translation>Délka = %1%2; &lt;b&gt;Klepněte tlačítkem myši&lt;/b&gt; - potvrďte délku, &lt;b&gt;%3&lt;/b&gt; - dokončeno</translation>
     </message>
 </context>
 <context>
@@ -27293,17 +27301,17 @@ Chyba kompatibility formátu nezpracovaného rozvržení: ActualFileVersion = %1
     <message>
         <location filename="../../src/libs/vtools/visualization/path/vistoolarc.cpp" line="90"/>
         <source>&lt;b&gt;Arc&lt;/b&gt;: radius = %1%2; &lt;b&gt;Mouse click&lt;/b&gt; - finish selecting the radius, &lt;b&gt;%3&lt;/b&gt; - skip</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;b&gt;Oblouk&lt;/b&gt;: poloměr = %1%2; &lt;b&gt;Klepněte tlačítkem myši&lt;/b&gt; - potvrďte poloměr, &lt;b&gt;%3&lt;/b&gt; - dokončeno</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/visualization/path/vistoolarc.cpp" line="108"/>
         <source>&lt;b&gt;Arc&lt;/b&gt;: radius = %1%2, first angle = %3°; &lt;b&gt;Mouse click&lt;/b&gt; - finish selecting the first angle, &lt;b&gt;%4&lt;/b&gt; - sticking angle, &lt;b&gt;%5&lt;/b&gt; - skip</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;b&gt;Oblouk&lt;/b&gt;: poloměr = %1%2, první úhel = %3°; &lt;b&gt;Klepněte tlačítkem myši&lt;/b&gt; - potvrďte první úhel, &lt;b&gt;%4&lt;/b&gt; - magnetický úhel, &lt;b&gt;%5&lt;/b&gt; - dokončeno</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/visualization/path/vistoolarc.cpp" line="122"/>
         <source>&lt;b&gt;Arc&lt;/b&gt;: radius = %1%2, first angle = %3°, second angle = %4°; &lt;b&gt;Mouse click&lt;/b&gt; - finish creating, &lt;b&gt;%5&lt;/b&gt; - sticking angle, &lt;b&gt;%6&lt;/b&gt; - sticking end, &lt;b&gt;%7&lt;/b&gt; - skip</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;b&gt;Oblouk&lt;/b&gt;: poloměr = %1%2, první úhel = %3°, druhý úhel = %4°; &lt;b&gt;Klepněte tlačítkem myši&lt;/b&gt; - potvrďte, &lt;b&gt;%5&lt;/b&gt; - magnetický úhel, &lt;b&gt;%6&lt;/b&gt; - magnetický konec, &lt;b&gt;%7&lt;/b&gt; - dokončeno</translation>
     </message>
 </context>
 <context>
@@ -27311,17 +27319,17 @@ Chyba kompatibility formátu nezpracovaného rozvržení: ActualFileVersion = %1
     <message>
         <location filename="../../src/libs/vtools/visualization/path/vistoolarcwithlength.cpp" line="88"/>
         <source>&lt;b&gt;Arc&lt;/b&gt;: radius = %1%2; &lt;b&gt;Mouse click&lt;/b&gt; - finish selecting the radius, &lt;b&gt;%3&lt;/b&gt; - skip</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;b&gt;Oblouk&lt;/b&gt;: poloměr = %1%2; &lt;b&gt;Klepněte tlačítkem myši&lt;/b&gt; - potvrďte poloměr, &lt;b&gt;%3&lt;/b&gt; - dokončeno</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/visualization/path/vistoolarcwithlength.cpp" line="106"/>
         <source>&lt;b&gt;Arc&lt;/b&gt;: radius = %1%2, first angle = %3°; &lt;b&gt;Mouse click&lt;/b&gt; - finish selecting the first angle, &lt;b&gt;%4&lt;/b&gt; - sticking angle, &lt;b&gt;%5&lt;/b&gt; - skip</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;b&gt;Oblouk&lt;/b&gt;: poloměr = %1%2, první úhel = %3°; &lt;b&gt;Klepněte tlačítkem myši&lt;/b&gt; - potvrďte první úhel, &lt;b&gt;%4&lt;/b&gt; - magnetický úhel, &lt;b&gt;%5&lt;/b&gt; - dokončeno</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/visualization/path/vistoolarcwithlength.cpp" line="119"/>
         <source>&lt;b&gt;Arc&lt;/b&gt;: radius = %1%2, first angle = %3°, arc length = %4%2; &lt;b&gt;Mouse click&lt;/b&gt; - finish creating, &lt;b&gt;%5&lt;/b&gt; - skip</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;b&gt;Oblouk&lt;/b&gt;: poloměr = %1%2, první úhel = %3°, délka oblouku = %4%2; &lt;b&gt;Klepněte tlačítkem myši&lt;/b&gt; - potvrďte, &lt;b&gt;%5&lt;/b&gt; - dokončeno</translation>
     </message>
 </context>
 <context>
@@ -27329,7 +27337,7 @@ Chyba kompatibility formátu nezpracovaného rozvržení: ActualFileVersion = %1
     <message>
         <location filename="../../src/libs/vtools/visualization/line/vistoolbisector.cpp" line="128"/>
         <source>Length = %1%2; &lt;b&gt;Mouse click&lt;/b&gt; - finish selecting the length, &lt;b&gt;%3&lt;/b&gt; - skip</source>
-        <translation type="unfinished"></translation>
+        <translation>Délka = %1%2; &lt;b&gt;Klepněte tlačítkem myši&lt;/b&gt; - potvrďte délku, &lt;b&gt;%3&lt;/b&gt; - dokončeno</translation>
     </message>
 </context>
 <context>
@@ -27371,7 +27379,7 @@ Chyba kompatibility formátu nezpracovaného rozvržení: ActualFileVersion = %1
     <message>
         <location filename="../../src/libs/vtools/visualization/path/vistoolcutarc.cpp" line="90"/>
         <source>Length = %1%2; &lt;b&gt;Mouse click&lt;/b&gt; - finish selecting the length, &lt;b&gt;%3&lt;/b&gt; - skip</source>
-        <translation type="unfinished"></translation>
+        <translation>Délka = %1%2; &lt;b&gt;Klepněte tlačítkem myši&lt;/b&gt; - potvrďte délku, &lt;b&gt;%3&lt;/b&gt; - dokončeno</translation>
     </message>
 </context>
 <context>
@@ -27379,7 +27387,7 @@ Chyba kompatibility formátu nezpracovaného rozvržení: ActualFileVersion = %1
     <message>
         <location filename="../../src/libs/vtools/visualization/path/vistoolcutspline.cpp" line="98"/>
         <source>Length = %1%2; &lt;b&gt;Mouse click&lt;/b&gt; - finish selecting the length, &lt;b&gt;%3&lt;/b&gt; - skip</source>
-        <translation type="unfinished"></translation>
+        <translation>Délka = %1%2; &lt;b&gt;Klepněte tlačítkem myši&lt;/b&gt; - potvrďte délku, &lt;b&gt;%3&lt;/b&gt; - dokončeno</translation>
     </message>
 </context>
 <context>
@@ -27387,7 +27395,7 @@ Chyba kompatibility formátu nezpracovaného rozvržení: ActualFileVersion = %1
     <message>
         <location filename="../../src/libs/vtools/visualization/path/vistoolcutsplinepath.cpp" line="97"/>
         <source>Length = %1%2; &lt;b&gt;Mouse click&lt;/b&gt; - finish selecting the length, &lt;b&gt;%3&lt;/b&gt; - skip</source>
-        <translation type="unfinished"></translation>
+        <translation>Délka = %1%2; &lt;b&gt;Klepněte tlačítkem myši&lt;/b&gt; - potvrďte délku, &lt;b&gt;%3&lt;/b&gt; - dokončeno</translation>
     </message>
 </context>
 <context>
@@ -27395,27 +27403,27 @@ Chyba kompatibility formátu nezpracovaného rozvržení: ActualFileVersion = %1
     <message>
         <location filename="../../src/libs/vtools/visualization/path/vistoolellipticalarc.cpp" line="86"/>
         <source>&lt;b&gt;Elliptical arc&lt;/b&gt;: radius1 = %1%2; &lt;b&gt;Mouse click&lt;/b&gt; - finish selecting the first radius, &lt;b&gt;%3&lt;/b&gt; - skip</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;b&gt; Elipsovitý oblouk&lt;/b&gt;: poloměr1 = %1%2; &lt;b&gt;Klepněte tlačítkem myši&lt;/b&gt; - potvrďte první úhel, &lt;b&gt;%3&lt;/b&gt; - dokončeno</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/visualization/path/vistoolellipticalarc.cpp" line="103"/>
         <source>&lt;b&gt;Elliptical arc&lt;/b&gt;: radius1 = %1%2, radius2 = %3%2; &lt;b&gt;Mouse click&lt;/b&gt; - finish selecting the second radius, &lt;b&gt;%4&lt;/b&gt; - skip</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;b&gt;Elipsovitý oblouk&lt;/b&gt;: poloměr1 = %1%2, poloměr2 = %3%2; &lt;b&gt;Klepněte tlačítkem myši&lt;/b&gt; - potvrďte druhý poloměr, &lt;b&gt;%4&lt;/b&gt; - dokončeno</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/visualization/path/vistoolellipticalarc.cpp" line="119"/>
         <source>&lt;b&gt;Elliptical arc&lt;/b&gt;: radius1 = %1%2, radius2 = %3%2, angle1 = %4°; &lt;b&gt;Mouse click&lt;/b&gt; - finish selecting the second radius, &lt;b&gt;%5&lt;/b&gt; - sticking angle, &lt;b&gt;%6&lt;/b&gt; - skip</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;b&gt;Elipsovitý oblouk&lt;/b&gt;: poloměr1 = %1%2, poloměr2 = %3%2, úhel1 = %4°; &lt;b&gt;Klepněte tlačítkem myši&lt;/b&gt; - potvrďte druhý poloměr, &lt;b&gt;%5&lt;/b&gt; - magnetický úhel, &lt;b&gt;%6&lt;/b&gt; - dokončeno</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/visualization/path/vistoolellipticalarc.cpp" line="137"/>
         <source>&lt;b&gt;Elliptical arc&lt;/b&gt;: radius1 = %1%2, radius2 = %3%2, angle1 = %4°, angle2 = %5°; &lt;b&gt;Mouse click&lt;/b&gt; - finish selecting the second radius, &lt;b&gt;%6&lt;/b&gt; - sticking angle, &lt;b&gt;%7&lt;/b&gt; - skip</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;b&gt;Elipsovitý oblouk&lt;/b&gt;: poloměr1 = %1%2, poloměr2 = %3%2, úhel1 = %4°, úhel2 = %5°; &lt;b&gt;Klepněte tlačítkem myši&lt;/b&gt; - potvrďte druhý poloměr, &lt;b&gt;%6&lt;/b&gt; - magnetický úhel, &lt;b&gt;%7&lt;/b&gt; - dokončeno</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/visualization/path/vistoolellipticalarc.cpp" line="160"/>
         <source>&lt;b&gt;Elliptical arc&lt;/b&gt;: radius1 = %1%2, radius2 = %3%2, angle1 = %4°, angle2 = %5°, rotation = %6°; &lt;b&gt;Mouse click&lt;/b&gt; - finish selecting the second radius, &lt;b&gt;%7&lt;/b&gt; - sticking angle, &lt;b&gt;%8&lt;/b&gt; - skip</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;b&gt;Elipsovitý oblouk&lt;/b&gt;: poloměr1 = %1%2, poloměr2 = %3%2, úhel1 = %4°, úhel2 = %5°, otočení = %6°; &lt;b&gt;Klepněte tlačítkem myši&lt;/b&gt; - potvrďte druhý poloměr, &lt;b&gt;%7&lt;/b&gt; - magnetický úhel, &lt;b&gt;%8&lt;/b&gt; - dokončeno</translation>
     </message>
 </context>
 <context>
@@ -27468,7 +27476,7 @@ Chyba kompatibility formátu nezpracovaného rozvržení: ActualFileVersion = %1
     <message>
         <location filename="../../src/libs/vtools/visualization/line/vistoolnormal.cpp" line="110"/>
         <source>Length = %1%2; &lt;b&gt;Mouse click&lt;/b&gt; - finish selecting the length, &lt;b&gt;%3&lt;/b&gt; - skip</source>
-        <translation type="unfinished"></translation>
+        <translation>Délka = %1%2; &lt;b&gt;Klepněte tlačítkem myši&lt;/b&gt; - potvrďte délku, &lt;b&gt;%3&lt;/b&gt; - dokončeno</translation>
     </message>
 </context>
 <context>
@@ -27476,7 +27484,7 @@ Chyba kompatibility formátu nezpracovaného rozvržení: ActualFileVersion = %1
     <message>
         <location filename="../../src/libs/vtools/visualization/line/vistoolpointfromcircleandtangent.cpp" line="100"/>
         <source>Radius = %1%2; &lt;b&gt;Mouse click&lt;/b&gt; - finish selecting the radius, &lt;b&gt;%3&lt;/b&gt; - skip</source>
-        <translation type="unfinished"></translation>
+        <translation>Poloměr = %1%2; &lt;b&gt;Klepněte tlačítkem myši&lt;/b&gt; - potvrďte poloměr, &lt;b&gt;%3&lt;/b&gt; - dokončeno</translation>
     </message>
 </context>
 <context>
@@ -27484,7 +27492,7 @@ Chyba kompatibility formátu nezpracovaného rozvržení: ActualFileVersion = %1
     <message>
         <location filename="../../src/libs/vtools/visualization/line/vistoolpointofcontact.cpp" line="107"/>
         <source>Radius = %1%2; &lt;b&gt;Mouse click&lt;/b&gt; - finish selecting the radius, &lt;b&gt;%3&lt;/b&gt; - skip</source>
-        <translation type="unfinished"></translation>
+        <translation>Poloměr = %1%2; &lt;b&gt;Klepněte tlačítkem myši&lt;/b&gt; - potvrďte poloměr, &lt;b&gt;%3&lt;/b&gt; - dokončeno</translation>
     </message>
 </context>
 <context>
@@ -27492,12 +27500,12 @@ Chyba kompatibility formátu nezpracovaného rozvržení: ActualFileVersion = %1
     <message>
         <location filename="../../src/libs/vtools/visualization/line/vistoolpointofintersectioncircles.cpp" line="108"/>
         <source>Radius = %1%2; &lt;b&gt;Mouse click&lt;/b&gt; - finish selecting the second radius, &lt;b&gt;%3&lt;/b&gt; - skip</source>
-        <translation type="unfinished"></translation>
+        <translation>Poloměr = %1%2; &lt;b&gt;Klepněte tlačítkem myši&lt;/b&gt; - potvrďte druhý poloměr, &lt;b&gt;%3&lt;/b&gt; - dokončeno</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/visualization/line/vistoolpointofintersectioncircles.cpp" line="124"/>
         <source>Radius = %1%2; &lt;b&gt;Mouse click&lt;/b&gt; - finish selecting the first radius, &lt;b&gt;%3&lt;/b&gt; - skip</source>
-        <translation type="unfinished"></translation>
+        <translation>Poloměr = %1%2; &lt;b&gt;Klepněte tlačítkem myši&lt;/b&gt; - potvrďte první poloměr, &lt;b&gt;%3&lt;/b&gt; - dokončeno</translation>
     </message>
 </context>
 <context>
@@ -27517,7 +27525,7 @@ Chyba kompatibility formátu nezpracovaného rozvržení: ActualFileVersion = %1
     <message>
         <location filename="../../src/libs/vtools/visualization/line/vistoolshoulderpoint.cpp" line="115"/>
         <source>Length = %1%2; &lt;b&gt;Mouse click&lt;/b&gt; - finish selecting the length, &lt;b&gt;%3&lt;/b&gt; - skip</source>
-        <translation type="unfinished"></translation>
+        <translation>Délka = %1%2; &lt;b&gt;Klepněte tlačítkem myši&lt;/b&gt; - potvrďte délku, &lt;b&gt;%3&lt;/b&gt; - dokončeno</translation>
     </message>
 </context>
 <context>
@@ -27906,7 +27914,7 @@ Chyba kompatibility formátu nezpracovaného rozvržení: ActualFileVersion = %1
     <message>
         <location filename="../../src/libs/vlayout/dialogs/watermarkwindow.cpp" line="502"/>
         <source>The watermark has been modified. Do you want to save your changes?</source>
-        <translation type="unfinished"></translation>
+        <translation>Vodoznak byl změněn. Chcete uložit své změny?</translation>
     </message>
 </context>
 <context>
