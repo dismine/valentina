@@ -1531,16 +1531,16 @@ void VMeasurements::WriteCorrections(QDomElement &mElement, const QMap<QString, 
             SetAttributeOrRemoveIf<QString>(correctionTag,
                                             AttrCoordinates,
                                             i.key(),
-                                            [i](const QString &)
+                                            [i](const QString &) noexcept
                                             { return qFuzzyIsNull(i.value().correction) && i.value().alias.isEmpty(); });
             SetAttributeOrRemoveIf<qreal>(correctionTag,
                                           AttrCorrection,
                                           i.value().correction,
-                                          [](qreal c) { return qFuzzyIsNull(c); });
+                                          [](qreal c) noexcept { return qFuzzyIsNull(c); });
             SetAttributeOrRemoveIf<QString>(correctionTag,
                                             AttrAlias,
                                             i.value().alias,
-                                            [](const QString &alias) { return alias.isEmpty(); });
+                                            [](const QString &alias) noexcept { return alias.isEmpty(); });
 
             correctionsTag.appendChild(correctionTag);
             ++i;
