@@ -2351,72 +2351,72 @@
         <translation>Nom du fichier du patron</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/support/dialogeditlabel.cpp" line="707"/>
+        <location filename="../../src/libs/vtools/dialogs/support/dialogeditlabel.cpp" line="710"/>
         <source>Piece letter</source>
         <translation>Lettre de la pièce</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/support/dialogeditlabel.cpp" line="708"/>
+        <location filename="../../src/libs/vtools/dialogs/support/dialogeditlabel.cpp" line="711"/>
         <source>Piece annotation</source>
         <translation>Annotation de la pièce</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/support/dialogeditlabel.cpp" line="709"/>
+        <location filename="../../src/libs/vtools/dialogs/support/dialogeditlabel.cpp" line="712"/>
         <source>Piece orientation</source>
         <translation>Orientation de la pièce</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/support/dialogeditlabel.cpp" line="710"/>
+        <location filename="../../src/libs/vtools/dialogs/support/dialogeditlabel.cpp" line="713"/>
         <source>Piece rotation</source>
         <translation>Rotation de la pièce</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/support/dialogeditlabel.cpp" line="711"/>
+        <location filename="../../src/libs/vtools/dialogs/support/dialogeditlabel.cpp" line="714"/>
         <source>Piece tilt</source>
         <translation>Inclinaison de la pièce</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/support/dialogeditlabel.cpp" line="712"/>
+        <location filename="../../src/libs/vtools/dialogs/support/dialogeditlabel.cpp" line="715"/>
         <source>Piece fold position</source>
         <translation>Position du pli de la pièce</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/support/dialogeditlabel.cpp" line="713"/>
+        <location filename="../../src/libs/vtools/dialogs/support/dialogeditlabel.cpp" line="716"/>
         <source>Piece name</source>
         <translation>Nom de la pièce du patron</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/support/dialogeditlabel.cpp" line="714"/>
+        <location filename="../../src/libs/vtools/dialogs/support/dialogeditlabel.cpp" line="717"/>
         <source>Quantity</source>
         <translation>Quantité</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/support/dialogeditlabel.cpp" line="715"/>
+        <location filename="../../src/libs/vtools/dialogs/support/dialogeditlabel.cpp" line="718"/>
         <source>Material: Fabric</source>
         <translation>Matière: Tissu</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/support/dialogeditlabel.cpp" line="716"/>
+        <location filename="../../src/libs/vtools/dialogs/support/dialogeditlabel.cpp" line="719"/>
         <source>Material: Lining</source>
         <translation>Matière: Doublure</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/support/dialogeditlabel.cpp" line="718"/>
+        <location filename="../../src/libs/vtools/dialogs/support/dialogeditlabel.cpp" line="721"/>
         <source>Material: Interfacing</source>
         <translation>Matière: Entoilage</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/support/dialogeditlabel.cpp" line="720"/>
+        <location filename="../../src/libs/vtools/dialogs/support/dialogeditlabel.cpp" line="723"/>
         <source>Material: Interlining</source>
         <translation>Matière: Entoilage</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/support/dialogeditlabel.cpp" line="721"/>
+        <location filename="../../src/libs/vtools/dialogs/support/dialogeditlabel.cpp" line="724"/>
         <source>Word: Cut</source>
         <translation>Mot : Couper</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/support/dialogeditlabel.cpp" line="722"/>
+        <location filename="../../src/libs/vtools/dialogs/support/dialogeditlabel.cpp" line="725"/>
         <source>Word: on fold</source>
         <translation>Mot : au pli</translation>
     </message>
@@ -2531,27 +2531,27 @@
         <translation>Libellé de la valeur de tour de taille</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/support/dialogeditlabel.cpp" line="689"/>
+        <location filename="../../src/libs/vtools/dialogs/support/dialogeditlabel.cpp" line="692"/>
         <source>Final measurement: %1</source>
         <translation>Mesure finale : %1</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/support/dialogeditlabel.cpp" line="740"/>
+        <location filename="../../src/libs/vtools/dialogs/support/dialogeditlabel.cpp" line="743"/>
         <source>No data for the height dimension.</source>
         <translation>Pas de valeur trouvée pour la stature.</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/support/dialogeditlabel.cpp" line="741"/>
+        <location filename="../../src/libs/vtools/dialogs/support/dialogeditlabel.cpp" line="744"/>
         <source>No data for the size dimension.</source>
         <translation>Pas de valeur trouvée pour la taille commerciale.</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/support/dialogeditlabel.cpp" line="742"/>
+        <location filename="../../src/libs/vtools/dialogs/support/dialogeditlabel.cpp" line="745"/>
         <source>No data for the hip dimension.</source>
         <translation>Pas de valeur trouvée pour la mesure du tour de bassin.</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/support/dialogeditlabel.cpp" line="743"/>
+        <location filename="../../src/libs/vtools/dialogs/support/dialogeditlabel.cpp" line="746"/>
         <source>No data for the waist dimension.</source>
         <translation>Pas de valeur trouvée pour la mesure du tour de taille.</translation>
     </message>
@@ -2614,22 +2614,27 @@
         <translation>Extension du fichier de mesures</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/support/dialogeditlabel.cpp" line="745"/>
+        <location filename="../../src/libs/vtools/dialogs/support/dialogeditlabel.cpp" line="668"/>
+        <source>Measurement %1 value alias</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/libs/vtools/dialogs/support/dialogeditlabel.cpp" line="748"/>
         <source>No data for the X dimension.</source>
         <translation>Pas de données trouvées pour la mesure X.</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/support/dialogeditlabel.cpp" line="746"/>
+        <location filename="../../src/libs/vtools/dialogs/support/dialogeditlabel.cpp" line="749"/>
         <source>No data for the Y dimension.</source>
         <translation>Pas de données trouvées pour la mesure Y.</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/support/dialogeditlabel.cpp" line="747"/>
+        <location filename="../../src/libs/vtools/dialogs/support/dialogeditlabel.cpp" line="750"/>
         <source>No data for the Z dimension.</source>
         <translation>Pas de données trouvées pour la mesure Z.</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/support/dialogeditlabel.cpp" line="748"/>
+        <location filename="../../src/libs/vtools/dialogs/support/dialogeditlabel.cpp" line="751"/>
         <source>No data for the W dimension.</source>
         <translation>Pas de données trouvées pour la mesure W.</translation>
     </message>
@@ -2639,12 +2644,12 @@
         <translation>Unités de surface</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/support/dialogeditlabel.cpp" line="676"/>
+        <location filename="../../src/libs/vtools/dialogs/support/dialogeditlabel.cpp" line="679"/>
         <source>Piece full area</source>
         <translation>Surface totale de la pièce</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/support/dialogeditlabel.cpp" line="677"/>
+        <location filename="../../src/libs/vtools/dialogs/support/dialogeditlabel.cpp" line="680"/>
         <source>Piece seam line area</source>
         <translation>Surface hors marge de couture</translation>
     </message>
@@ -8680,85 +8685,85 @@ Appliquer quand même les réglages ?</translation>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.cpp" line="2479"/>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="1231"/>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="5482"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="5485"/>
         <source>Reverse</source>
         <translation>Inverser</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.cpp" line="2489"/>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="5496"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="5499"/>
         <source>Passmark</source>
         <translation>Cran d&apos;assemblage</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.cpp" line="2509"/>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="5516"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="5519"/>
         <source>One line</source>
         <translation>Un trait</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.cpp" line="2512"/>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="5519"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="5522"/>
         <source>Two lines</source>
         <translation>Deux traits</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.cpp" line="2515"/>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="5522"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="5525"/>
         <source>Three lines</source>
         <translation>Trois traits</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.cpp" line="2518"/>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="5525"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="5528"/>
         <source>T mark</source>
         <translation>En forme de T</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.cpp" line="2522"/>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="5529"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="5532"/>
         <source>External V mark</source>
         <translation>Marque en V externe</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.cpp" line="2526"/>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="5533"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="5536"/>
         <source>Internal V mark</source>
         <translation>Marque en V interne</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.cpp" line="2529"/>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="5536"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="5539"/>
         <source>U mark</source>
         <translation>En forme de U</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.cpp" line="2532"/>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="5539"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="5542"/>
         <source>Box mark</source>
         <translation>Rectangle</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.cpp" line="2535"/>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="5542"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="5545"/>
         <source>Check mark</source>
         <translation>En forme de coche</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.cpp" line="2539"/>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="5547"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="5550"/>
         <source>Check uniqueness</source>
         <translation>Vérifier objet unique</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.cpp" line="2544"/>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="5553"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="5556"/>
         <source>Turn point</source>
         <translation>Point de changement de direction</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.cpp" line="2550"/>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="5560"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="5563"/>
         <source>Excluded</source>
         <translation>Exclus</translation>
     </message>
@@ -8768,7 +8773,7 @@ Appliquer quand même les réglages ?</translation>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="1278"/>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="1312"/>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="1374"/>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="5566"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="5569"/>
         <source>Delete</source>
         <translation>Effacer</translation>
     </message>
@@ -8875,7 +8880,7 @@ Appliquer quand même les réglages ?</translation>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.cpp" line="2492"/>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="4205"/>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="4601"/>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="5499"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="5502"/>
         <source>None</source>
         <translation>Aucun</translation>
     </message>
@@ -9199,17 +9204,22 @@ Appliquer quand même les réglages ?</translation>
         <translation>Trois X</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="5488"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="5212"/>
+        <source>Measurement %1 value alias</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="5491"/>
         <source>Duplicate</source>
         <translation>Dupliquer</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="5676"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="5679"/>
         <source>Save label data.</source>
         <translation>Sauvegarder les données de l&apos;étiquette.</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="5677"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="5680"/>
         <source>Label data were changed. Do you want to save them before editing label template?</source>
         <translation>Les données de l&apos;étiquette ont été modifiées. Souhaitez-vous les enregistrer avant de poursuivre ?</translation>
     </message>
@@ -11422,7 +11432,7 @@ Appliquer quand même les réglages ?</translation>
         <location filename="../../src/app/valentina/mainwindow.cpp" line="2133"/>
         <location filename="../../src/app/valentina/mainwindow.cpp" line="2363"/>
         <location filename="../../src/app/valentina/mainwindow.cpp" line="4251"/>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="6980"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="6981"/>
         <source>Open file</source>
         <translation>Ouvrir fichier</translation>
     </message>
@@ -11465,7 +11475,7 @@ Appliquer quand même les réglages ?</translation>
         <translation>Fichier sauvegardé</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="7526"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="7527"/>
         <source>untitled.val</source>
         <translation>sanstitre.val</translation>
     </message>
@@ -11521,12 +11531,12 @@ Do you want to save your changes?</source>
         <translation type="vanished">Fichier chargé</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="6942"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="6943"/>
         <source>Valentina didn&apos;t shut down correctly. Do you want reopen files (%1) you had open?</source>
         <translation>Valentina ne s&apos;est pas fermé correctement. Voulez vous ré-ouvrir le fichier %1 qui était en cours d&apos;utilisation ?</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="6944"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="6945"/>
         <source>Reopen files.</source>
         <translation>Réouvrir.</translation>
     </message>
@@ -11782,7 +11792,7 @@ Do you want to save your changes?</source>
         <location filename="../../src/app/valentina/mainwindow.cpp" line="4093"/>
         <location filename="../../src/app/valentina/mainwindow.cpp" line="4284"/>
         <location filename="../../src/app/valentina/mainwindow.cpp" line="4363"/>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="6870"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="6871"/>
         <source>Layout mode</source>
         <translation>Mode Plan de coupe</translation>
     </message>
@@ -11830,7 +11840,7 @@ Do you want to save your changes?</source>
         <translation type="vanished">Mensurations multi-tailles (*.vst);;Mensurations individuelles (*.vit)</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="7174"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="7175"/>
         <source>You can&apos;t export empty scene.</source>
         <translation>Impossible d&apos;exporter, l&apos;espace de travail est vide.</translation>
     </message>
@@ -11867,7 +11877,7 @@ Do you want to save your changes?</source>
         <translation type="vanished">Le fichier contient une ou des mensurations invalides (de type &apos;connue&apos;).</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="7090"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="7091"/>
         <source>Measurement file has unknown format.</source>
         <translation>Format de fichier de mensurations inconnu.</translation>
     </message>
@@ -11909,7 +11919,7 @@ Do you want to save your changes?</source>
         <translation type="vanished">La table de mensurations &lt;br/&gt;&lt;br/&gt; &lt;b&gt;%1&lt;/b&gt; &lt;br/&gt;&lt;br/&gt;est introuvable depuis le chemin spécifié. Voulez-vous la rechercher depuis un autre emplacement ?</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="7011"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="7012"/>
         <source>Loading measurements file</source>
         <translation>Chargement de la table de mensurations</translation>
     </message>
@@ -11926,9 +11936,9 @@ Do you want to save your changes?</source>
         <translation type="vanished">Impossible de définir une autre taille. Le fichier n&apos;a pas été ouvert.</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="7357"/>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="7400"/>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="7443"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="7358"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="7401"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="7444"/>
         <source>The method %1 does nothing in GUI mode</source>
         <translation>La méthode %1 n&apos;a aucun effet en mode d&apos;interface</translation>
     </message>
@@ -11945,15 +11955,15 @@ Do you want to save your changes?</source>
         <translation type="vanished">Impossible de définir une autre stature. Le fichier n&apos;a pas été ouvert.</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="6853"/>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="6909"/>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="7222"/>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="7262"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="6854"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="6910"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="7223"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="7263"/>
         <source>Export error.</source>
         <translation>Erreur d&apos;exportation.</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="7470"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="7471"/>
         <source>Please, provide one input file.</source>
         <translation>Merci de choisir un fichier.</translation>
     </message>
@@ -12193,7 +12203,7 @@ Do you want to save your changes?</source>
         <translation type="vanished">Taille :</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="7006"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="7007"/>
         <source>The measurements file &lt;br/&gt;&lt;br/&gt; &lt;b&gt;%1&lt;/b&gt; &lt;br/&gt;&lt;br/&gt; could not be found. Do you want to update the file location?</source>
         <translation>La table de mensurations &lt;br/&gt;&lt;br/&gt; &lt;b&gt;%1&lt;/b&gt; &lt;br/&gt;&lt;br/&gt;est introuvable depuis le chemin spécifié. Voulez-vous la rechercher depuis un autre emplacement ?</translation>
     </message>
@@ -12247,7 +12257,7 @@ Do you want to save your changes?</source>
         <translation>Le fichier n&apos;a pas pu être enregistré</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="7576"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="7577"/>
         <source>read only</source>
         <translation>Lecture seule</translation>
     </message>
@@ -12320,16 +12330,16 @@ Do you want to save your changes?</source>
     <message>
         <location filename="../../src/app/valentina/mainwindow.cpp" line="2094"/>
         <location filename="../../src/app/valentina/mainwindow.cpp" line="2129"/>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="7052"/>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="7066"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="7053"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="7067"/>
         <source>Individual measurements</source>
         <translation>Mensurations individuelles</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.cpp" line="2094"/>
         <location filename="../../src/app/valentina/mainwindow.cpp" line="2129"/>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="7052"/>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="7066"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="7053"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="7067"/>
         <source>Multisize measurements</source>
         <translation>Mensurations multi-tailles</translation>
     </message>
@@ -12432,21 +12442,21 @@ Do you want to save your changes?</source>
     <message>
         <location filename="../../src/app/valentina/mainwindow.cpp" line="4285"/>
         <location filename="../../src/app/valentina/mainwindow.cpp" line="4364"/>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="6871"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="6872"/>
         <source>You don&apos;t have enough details to export. Please, include at least one detail in layout.</source>
         <translation>Vous ne pouvez pas exporter, car aucune pièce n&apos;est intégrée pour transfert dans le plan de coupe.</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.cpp" line="4298"/>
         <location filename="../../src/app/valentina/mainwindow.cpp" line="4377"/>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="6884"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="6885"/>
         <source>Export details</source>
         <translation>Exporter les pièces</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.cpp" line="4298"/>
         <location filename="../../src/app/valentina/mainwindow.cpp" line="4377"/>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="6884"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="6885"/>
         <source>Can&apos;t export details.</source>
         <translation>Impossible d&apos;exporter les pièces.</translation>
     </message>
@@ -12496,17 +12506,17 @@ Do you want to save your changes?</source>
         <translation>Exporter les mesures finales au format CSV</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="7184"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="7185"/>
         <source>You can&apos;t export empty scene. Please, include at least one detail in layout.</source>
         <translation>Vous ne pouvez pas exporter, car aucune pièce n&apos;est intégrée pour transfert dans le plan de coupe.</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="7290"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="7291"/>
         <source>Export final measurements error.</source>
         <translation>Erreur d&apos;exportation des mesures finales.</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="7291"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="7292"/>
         <source>Destination path is empty.</source>
         <translation>Le chemin de destination est vide.</translation>
     </message>
@@ -12688,7 +12698,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.ui" line="411"/>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="7906"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="7907"/>
         <source>Pattern messages</source>
         <translation>Messages d&apos;avertissement</translation>
     </message>
@@ -12703,27 +12713,27 @@ Do you want to save your changes?</source>
         <translation>Filtre</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="7881"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="7882"/>
         <source>DEBUG</source>
         <translation>DEBUGAGE</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="7884"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="7885"/>
         <source>WARNING</source>
         <translation>AVERTISSEMENT</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="7887"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="7888"/>
         <source>CRITICAL</source>
         <translation>CRITIQUE</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="7890"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="7891"/>
         <source>FATAL</source>
         <translation>FATALE</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="7893"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="7894"/>
         <source>INFO</source>
         <translation>INFO</translation>
     </message>
@@ -12829,47 +12839,47 @@ Do you want to save your changes?</source>
         <translation>Le patron a été modifié. Voulez-vous sauvegarder les modifications apportées ?</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="7338"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="7339"/>
         <source>Not supported dimension A value &apos;%1&apos; for this pattern file.</source>
         <translation>Valeur &apos;%1&apos; de dimension A non prise en charge pour ce patron.</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="7345"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="7346"/>
         <source>Couldn&apos;t set dimension A. Need a file with multisize measurements.</source>
         <translation>Impossible de définir la dimension A. Un tableau de mensurations multi-tailles est nécessaire.</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="7351"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="7352"/>
         <source>Couldn&apos;t set dimension A. File wasn&apos;t opened.</source>
         <translation>Impossible de définir la dimension A. Le fichier n&apos;a pas été ouvert.</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="7381"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="7382"/>
         <source>Not supported dimension B value &apos;%1&apos; for this pattern file.</source>
         <translation>Valeur &apos;%1&apos; de dimension B non prise en charge pour ce patron.</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="7388"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="7389"/>
         <source>Couldn&apos;t set dimension B. Need a file with multisize measurements.</source>
         <translation>Impossible de définir la dimension B. Un tableau de mensurations multi-tailles est nécessaire.</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="7394"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="7395"/>
         <source>Couldn&apos;t set dimension B. File wasn&apos;t opened.</source>
         <translation>Impossible de définir la dimension B. Le fichier n&apos;a pas été ouvert.</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="7424"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="7425"/>
         <source>Not supported dimension C value &apos;%1&apos; for this pattern file.</source>
         <translation>Valeur &apos;%1&apos; de dimension C non prise en charge pour ce patron.</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="7431"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="7432"/>
         <source>Couldn&apos;t set dimension C. Need a file with multisize measurements.</source>
         <translation>Impossible de définir la dimension C. Un tableau de mensurations multi-tailles est nécessaire.</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="7437"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="7438"/>
         <source>Couldn&apos;t set dimension C. File wasn&apos;t opened.</source>
         <translation>Impossible de définir la dimension C. Le fichier n&apos;a pas été ouvert.</translation>
     </message>
@@ -12884,12 +12894,12 @@ Do you want to save your changes?</source>
         <translation>E-Boutique</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="6805"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="6806"/>
         <source>Scalable Vector Graphics files</source>
         <translation>Fichiers SVG</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="6807"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="6808"/>
         <source>Save draw</source>
         <translation>Enregistrer le dessin</translation>
     </message>
@@ -13417,43 +13427,43 @@ Voulez-vous charger un autre fichier de mesures ?</translation>
 <context>
     <name>Placeholder</name>
     <message>
-        <location filename="../../src/libs/vlayout/vtextmanager.cpp" line="640"/>
-        <location filename="../../src/libs/vtools/dialogs/support/dialogeditlabel.cpp" line="715"/>
+        <location filename="../../src/libs/vlayout/vtextmanager.cpp" line="641"/>
+        <location filename="../../src/libs/vtools/dialogs/support/dialogeditlabel.cpp" line="718"/>
         <source>Fabric</source>
         <translation>Tissu</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vlayout/vtextmanager.cpp" line="641"/>
-        <location filename="../../src/libs/vtools/dialogs/support/dialogeditlabel.cpp" line="716"/>
+        <location filename="../../src/libs/vlayout/vtextmanager.cpp" line="642"/>
+        <location filename="../../src/libs/vtools/dialogs/support/dialogeditlabel.cpp" line="719"/>
         <source>Lining</source>
         <translation>Doublure</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vlayout/vtextmanager.cpp" line="642"/>
-        <location filename="../../src/libs/vtools/dialogs/support/dialogeditlabel.cpp" line="718"/>
+        <location filename="../../src/libs/vlayout/vtextmanager.cpp" line="643"/>
+        <location filename="../../src/libs/vtools/dialogs/support/dialogeditlabel.cpp" line="721"/>
         <source>Interfacing</source>
         <translation>Entoilage</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vlayout/vtextmanager.cpp" line="643"/>
-        <location filename="../../src/libs/vtools/dialogs/support/dialogeditlabel.cpp" line="720"/>
+        <location filename="../../src/libs/vlayout/vtextmanager.cpp" line="644"/>
+        <location filename="../../src/libs/vtools/dialogs/support/dialogeditlabel.cpp" line="723"/>
         <source>Interlining</source>
         <translation>Entoilage</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vlayout/vtextmanager.cpp" line="644"/>
-        <location filename="../../src/libs/vtools/dialogs/support/dialogeditlabel.cpp" line="721"/>
+        <location filename="../../src/libs/vlayout/vtextmanager.cpp" line="645"/>
+        <location filename="../../src/libs/vtools/dialogs/support/dialogeditlabel.cpp" line="724"/>
         <source>Cut</source>
         <translation>Couper</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vlayout/vtextmanager.cpp" line="679"/>
-        <location filename="../../src/libs/vtools/dialogs/support/dialogeditlabel.cpp" line="834"/>
+        <location filename="../../src/libs/vlayout/vtextmanager.cpp" line="680"/>
+        <location filename="../../src/libs/vtools/dialogs/support/dialogeditlabel.cpp" line="837"/>
         <source>on fold</source>
         <translation>au pli</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vlayout/vtextmanager.cpp" line="978"/>
+        <location filename="../../src/libs/vlayout/vtextmanager.cpp" line="979"/>
         <source>Error</source>
         <translation>Erreur</translation>
     </message>
@@ -14926,7 +14936,7 @@ This option will take an affect after restart.</source>
         <translation>La pièce &apos;%1&apos; a une valeur de marge invalide dans le plan de coupe. Merci de vérifier la marge de couture pour vérifier son comportement.</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vlayout/vlayoutpiece.cpp" line="684"/>
+        <location filename="../../src/libs/vlayout/vlayoutpiece.cpp" line="685"/>
         <location filename="../../src/libs/vtools/tools/vtoolseamallowance.cpp" line="2022"/>
         <source>Piece &apos;%1&apos;. Seam allowance is not valid.</source>
         <translation>Pièce &apos;%1&apos;. La marge de couture est invalide.</translation>
@@ -15049,47 +15059,47 @@ This option will take an affect after restart.</source>
         <translation>Les champs saisis dans la formule &apos;%1&apos; sont erronés. Erreur de formule : %2.</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vlayout/vtextmanager.cpp" line="548"/>
-        <location filename="../../src/libs/vtools/dialogs/support/dialogeditlabel.cpp" line="693"/>
+        <location filename="../../src/libs/vlayout/vtextmanager.cpp" line="549"/>
+        <location filename="../../src/libs/vtools/dialogs/support/dialogeditlabel.cpp" line="696"/>
         <source>Failed to prepare final measurement placeholder. Parser error at line %1: %2.</source>
         <translation>Champ de mesure finale invalide. Erreur d&apos;analyse ligne %1: %2.</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/support/dialogeditlabel.cpp" line="853"/>
+        <location filename="../../src/libs/vtools/dialogs/support/dialogeditlabel.cpp" line="856"/>
         <source>Failed to prepare full piece area placeholder. %1.</source>
         <translation>Impossible de préparer l&apos;emplacement réservé à la surface totale de la pièce. %1.</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/support/dialogeditlabel.cpp" line="867"/>
+        <location filename="../../src/libs/vtools/dialogs/support/dialogeditlabel.cpp" line="870"/>
         <source>Failed to prepare piece seam line area placeholder. %1.</source>
         <translation>Impossible de préparer l&apos;emplacement réservé à la surface de la ligne de couture de la pièce. %1.</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vlayout/vtextmanager.cpp" line="985"/>
+        <location filename="../../src/libs/vlayout/vtextmanager.cpp" line="986"/>
         <source>Incorrect use of placeholder %1. This placeholder is not available in pattern label.</source>
         <translation>Utilisation incorrecte du champ %1. Ce champ n&apos;est pas disponible pour configurer une étiquette de patron, mais seulement de pièce.</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vlayout/vlayoutpiece.cpp" line="458"/>
-        <location filename="../../src/libs/vlayout/vtextmanager.cpp" line="704"/>
+        <location filename="../../src/libs/vlayout/vlayoutpiece.cpp" line="459"/>
+        <location filename="../../src/libs/vlayout/vtextmanager.cpp" line="705"/>
         <source>No data for the height dimension.</source>
         <translation>Absence de données pour la dimension stature.</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vlayout/vlayoutpiece.cpp" line="459"/>
-        <location filename="../../src/libs/vlayout/vtextmanager.cpp" line="705"/>
+        <location filename="../../src/libs/vlayout/vlayoutpiece.cpp" line="460"/>
+        <location filename="../../src/libs/vlayout/vtextmanager.cpp" line="706"/>
         <source>No data for the size dimension.</source>
         <translation>Absence de données pour la dimension taille commerciale.</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vlayout/vlayoutpiece.cpp" line="460"/>
-        <location filename="../../src/libs/vlayout/vtextmanager.cpp" line="706"/>
+        <location filename="../../src/libs/vlayout/vlayoutpiece.cpp" line="461"/>
+        <location filename="../../src/libs/vlayout/vtextmanager.cpp" line="707"/>
         <source>No data for the hip dimension.</source>
         <translation>Absence de données pour la dimension tour de hanches.</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vlayout/vlayoutpiece.cpp" line="461"/>
-        <location filename="../../src/libs/vlayout/vtextmanager.cpp" line="707"/>
+        <location filename="../../src/libs/vlayout/vlayoutpiece.cpp" line="462"/>
+        <location filename="../../src/libs/vlayout/vtextmanager.cpp" line="708"/>
         <source>No data for the waist dimension.</source>
         <translation>Absence de données pour la dimension tour de taille.</translation>
     </message>
@@ -15211,26 +15221,26 @@ This option will take an affect after restart.</source>
         <translation>Voulez vous vraiment supprimer?</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vlayout/vlayoutpiece.cpp" line="463"/>
-        <location filename="../../src/libs/vlayout/vtextmanager.cpp" line="709"/>
+        <location filename="../../src/libs/vlayout/vlayoutpiece.cpp" line="464"/>
+        <location filename="../../src/libs/vlayout/vtextmanager.cpp" line="710"/>
         <source>No data for the X dimension.</source>
         <translation>Pas de données pour la dimension X.</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vlayout/vlayoutpiece.cpp" line="464"/>
-        <location filename="../../src/libs/vlayout/vtextmanager.cpp" line="710"/>
+        <location filename="../../src/libs/vlayout/vlayoutpiece.cpp" line="465"/>
+        <location filename="../../src/libs/vlayout/vtextmanager.cpp" line="711"/>
         <source>No data for the Y dimension.</source>
         <translation>Pas de données pour la dimension Y.</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vlayout/vlayoutpiece.cpp" line="465"/>
-        <location filename="../../src/libs/vlayout/vtextmanager.cpp" line="711"/>
+        <location filename="../../src/libs/vlayout/vlayoutpiece.cpp" line="466"/>
+        <location filename="../../src/libs/vlayout/vtextmanager.cpp" line="712"/>
         <source>No data for the Z dimension.</source>
         <translation>Pas de données pour la dimension Z.</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vlayout/vlayoutpiece.cpp" line="466"/>
-        <location filename="../../src/libs/vlayout/vtextmanager.cpp" line="712"/>
+        <location filename="../../src/libs/vlayout/vlayoutpiece.cpp" line="467"/>
+        <location filename="../../src/libs/vlayout/vtextmanager.cpp" line="713"/>
         <source>No data for the W dimension.</source>
         <translation>Pas de données pour la dimension W.</translation>
     </message>
@@ -16382,22 +16392,22 @@ This option will take an affect after restart.</source>
         <translation>Nom complet:</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.ui" line="831"/>
+        <location filename="../../src/app/tape/tmainwindow.ui" line="848"/>
         <source>Information</source>
         <translation>Informations</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.ui" line="840"/>
+        <location filename="../../src/app/tape/tmainwindow.ui" line="857"/>
         <source>Type:</source>
         <translation>Type:</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.ui" line="847"/>
+        <location filename="../../src/app/tape/tmainwindow.ui" line="864"/>
         <source>Measurement type</source>
         <translation>Type de mesures</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.ui" line="854"/>
+        <location filename="../../src/app/tape/tmainwindow.ui" line="871"/>
         <source>Path:</source>
         <translation>Chemin d&apos;accès:</translation>
     </message>
@@ -16406,7 +16416,7 @@ This option will take an affect after restart.</source>
         <translation type="vanished">Chemin d&apos;accès</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.ui" line="897"/>
+        <location filename="../../src/app/tape/tmainwindow.ui" line="914"/>
         <source>Show in Explorer</source>
         <translation>Afficher dans l&apos;explorateur</translation>
     </message>
@@ -16435,7 +16445,7 @@ This option will take an affect after restart.</source>
         <translation type="vanished">Nom de famille:</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.ui" line="1031"/>
+        <location filename="../../src/app/tape/tmainwindow.ui" line="1048"/>
         <source>Birth date:</source>
         <translation>Date de naissance:</translation>
     </message>
@@ -16444,12 +16454,12 @@ This option will take an affect after restart.</source>
         <translation type="vanished">aaaa-mm-jj</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.ui" line="1093"/>
+        <location filename="../../src/app/tape/tmainwindow.ui" line="1110"/>
         <source>Email:</source>
         <translation>Email:</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.ui" line="1119"/>
+        <location filename="../../src/app/tape/tmainwindow.ui" line="1136"/>
         <source>Notes:</source>
         <translation>Notes:</translation>
     </message>
@@ -16473,12 +16483,12 @@ This option will take an affect after restart.</source>
         <translation>Mesures</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.ui" line="1219"/>
+        <location filename="../../src/app/tape/tmainwindow.ui" line="1236"/>
         <source>Menu</source>
         <translation>Menu</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.ui" line="1244"/>
+        <location filename="../../src/app/tape/tmainwindow.ui" line="1261"/>
         <source>Gradation</source>
         <translation>Gradation</translation>
     </message>
@@ -16487,7 +16497,7 @@ This option will take an affect after restart.</source>
         <translation type="vanished">Ouvrir individuelles ...</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="3481"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="3530"/>
         <source>Save</source>
         <translation>Enregistrer</translation>
     </message>
@@ -16500,7 +16510,7 @@ This option will take an affect after restart.</source>
         <translation type="vanished">Quitter</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.ui" line="1421"/>
+        <location filename="../../src/app/tape/tmainwindow.ui" line="1438"/>
         <source>About &amp;Qt</source>
         <translation>À propos de &amp;Qt</translation>
     </message>
@@ -16513,17 +16523,17 @@ This option will take an affect after restart.</source>
         <translation type="vanished">Nouveau</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.ui" line="1458"/>
+        <location filename="../../src/app/tape/tmainwindow.ui" line="1475"/>
         <source>Add known</source>
         <translation>Ajouter connue</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.ui" line="1473"/>
+        <location filename="../../src/app/tape/tmainwindow.ui" line="1490"/>
         <source>Add custom</source>
         <translation>Ajouter personnalisée</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.ui" line="1491"/>
+        <location filename="../../src/app/tape/tmainwindow.ui" line="1508"/>
         <source>Read only</source>
         <translation>Lecture seule</translation>
     </message>
@@ -16532,7 +16542,7 @@ This option will take an affect after restart.</source>
         <translation type="vanished">Ouvrir standard ...</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.ui" line="1513"/>
+        <location filename="../../src/app/tape/tmainwindow.ui" line="1530"/>
         <source>Open template</source>
         <translation>Ouvrir modèle</translation>
     </message>
@@ -16545,13 +16555,13 @@ This option will take an affect after restart.</source>
         <translation type="vanished">Afficher les informations de toutes les mensurations connues</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.ui" line="1521"/>
+        <location filename="../../src/app/tape/tmainwindow.ui" line="1538"/>
         <location filename="../../src/app/tape/tmainwindow.cpp" line="1193"/>
         <source>Preferences</source>
         <translation>Préférences</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="3814"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="3877"/>
         <source>untitled %1</source>
         <translation>sans nom %1</translation>
     </message>
@@ -16563,7 +16573,7 @@ This option will take an affect after restart.</source>
     <message>
         <location filename="../../src/app/tape/tmainwindow.cpp" line="562"/>
         <location filename="../../src/app/tape/tmainwindow.cpp" line="1872"/>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="4209"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="4272"/>
         <source>File error.</source>
         <translation>Erreur de fichier.</translation>
     </message>
@@ -16591,7 +16601,7 @@ This option will take an affect after restart.</source>
         <translation>Enregistrer sous</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="4234"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="4297"/>
         <source>&amp;New Window</source>
         <translation>&amp;Nouvelle Fenêtre</translation>
     </message>
@@ -16605,22 +16615,22 @@ This option will take an affect after restart.</source>
         <translation type="vanished">M_%1</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="2297"/>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="3952"/>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="3975"/>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="3991"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="2345"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="4015"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="4038"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="4054"/>
         <source>Error</source>
         <translation>Erreur</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="2297"/>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="3952"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="2345"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="4015"/>
         <source>Empty field.</source>
         <translation>Champ vide.</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="3991"/>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="3992"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="4054"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="4055"/>
         <source>Parser error: %1</source>
         <translation>Erreur analyseur : %1</translation>
     </message>
@@ -16641,14 +16651,14 @@ This option will take an affect after restart.</source>
         <location filename="../../src/app/tape/tmainwindow.cpp" line="664"/>
         <location filename="../../src/app/tape/tmainwindow.cpp" line="772"/>
         <location filename="../../src/app/tape/tmainwindow.cpp" line="982"/>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="2617"/>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="3022"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="2665"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="3070"/>
         <source>Individual measurements</source>
         <translation>Mesures individuelles</translation>
     </message>
     <message>
         <location filename="../../src/app/tape/tmainwindow.cpp" line="1605"/>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="3814"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="3877"/>
         <source>untitled</source>
         <translation>sans nom</translation>
     </message>
@@ -16657,7 +16667,7 @@ This option will take an affect after restart.</source>
         <translation type="vanished">&lt;Empty&gt;</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="3472"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="3521"/>
         <source>Unsaved changes</source>
         <translation>Modifications non enregistrées</translation>
     </message>
@@ -16668,22 +16678,22 @@ Do you want to save your changes?</source>
 Voulez-vous enregistrer vos changements ?</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="3953"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="4016"/>
         <source>Empty field</source>
         <translation>Champ vide</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="3986"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="4049"/>
         <source>Value</source>
         <translation>Valeur</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="4000"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="4063"/>
         <source>Open file</source>
         <translation>Ouvrir fichier</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.ui" line="1532"/>
+        <location filename="../../src/app/tape/tmainwindow.ui" line="1549"/>
         <location filename="../../src/app/tape/tmainwindow.cpp" line="1831"/>
         <source>Import from a pattern</source>
         <translation>Importer depuis un patron</translation>
@@ -16695,7 +16705,7 @@ Voulez-vous enregistrer vos changements ?</translation>
     </message>
     <message>
         <location filename="../../src/app/tape/tmainwindow.cpp" line="796"/>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="5070"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="5133"/>
         <source>Pattern unit:</source>
         <translation>Unité du patron:</translation>
     </message>
@@ -16747,7 +16757,7 @@ Voulez-vous enregistrer vos changements ?</translation>
     </message>
     <message>
         <location filename="../../src/app/tape/tmainwindow.cpp" line="477"/>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="4167"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="4230"/>
         <source>File has unknown format.</source>
         <translation>Format de fichier inconnu.</translation>
     </message>
@@ -16757,20 +16767,20 @@ Voulez-vous enregistrer vos changements ?</translation>
     </message>
     <message>
         <location filename="../../src/app/tape/tmainwindow.cpp" line="439"/>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="4129"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="4192"/>
         <source>File &apos;%1&apos; doesn&apos;t exist!</source>
         <translation>Le fichier &apos;%1&apos; n&apos;existe pas !</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="2268"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="2280"/>
         <source>The name of known measurement forbidden to change.</source>
         <translation>Il n&apos;est pas possible de modifier le nom de mesures de type &apos;connue&apos;.</translation>
     </message>
     <message>
         <location filename="../../src/app/tape/tmainwindow.cpp" line="1465"/>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="2234"/>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="2310"/>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="2520"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="2246"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="2358"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="2568"/>
         <source>Can&apos;t find measurement &apos;%1&apos;.</source>
         <translation>Impossible de trouver la mesure &apos;%1&apos;.</translation>
     </message>
@@ -16787,7 +16797,7 @@ Voulez-vous enregistrer vos changements ?</translation>
         <translation type="vanished">Il n&apos;est pas possible de modifier l&apos;intervalle d&apos;augmentation de stature de mesures connues.</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="2539"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="2587"/>
         <source>The full name of known measurement forbidden to change.</source>
         <translation>Il n&apos;est pas possible de modifier le nom complet de mesures connues.</translation>
     </message>
@@ -16816,25 +16826,25 @@ Voulez-vous enregistrer vos changements ?</translation>
         <translation>Supprimer la mesure</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="5146"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="5209"/>
         <source>unknown</source>
         <comment>gender</comment>
         <translation>inconnu</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="5147"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="5210"/>
         <source>male</source>
         <comment>gender</comment>
         <translation>homme</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="5148"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="5211"/>
         <source>female</source>
         <comment>gender</comment>
         <translation>femme</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.ui" line="1073"/>
+        <location filename="../../src/app/tape/tmainwindow.ui" line="1090"/>
         <source>Gender:</source>
         <translation>Genre:</translation>
     </message>
@@ -16847,7 +16857,7 @@ Voulez-vous enregistrer vos changements ?</translation>
         <translation type="vanished">Créer depuis individuelles existantes …</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.ui" line="1543"/>
+        <location filename="../../src/app/tape/tmainwindow.ui" line="1560"/>
         <source>Create from existing file</source>
         <translation>Créer à partir d&apos;un fichier existant</translation>
     </message>
@@ -16861,8 +16871,8 @@ Voulez-vous enregistrer vos changements ?</translation>
         <translation type="vanished">L&apos;export des mensurations multi-tailles n&apos;est pas pris en charge.</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.ui" line="1270"/>
-        <location filename="../../src/app/tape/tmainwindow.ui" line="1589"/>
+        <location filename="../../src/app/tape/tmainwindow.ui" line="1287"/>
+        <location filename="../../src/app/tape/tmainwindow.ui" line="1606"/>
         <source>Measurement diagram</source>
         <translation>Diagramme des mesures</translation>
     </message>
@@ -16875,12 +16885,12 @@ Voulez-vous enregistrer vos changements ?</translation>
         <translation type="vanished">&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:340pt;&quot;&gt;?&lt;/span&gt;&lt;/p&gt;&lt;p align=&quot;center&quot;&gt;Mesure inconnue&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="2945"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="2993"/>
         <source>About Qt</source>
         <translation>À propos de Qt</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="3421"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="3470"/>
         <source>File was not saved yet.</source>
         <translation>Fichier non sauvegardé.</translation>
     </message>
@@ -16921,7 +16931,7 @@ Voulez-vous enregistrer vos changements ?</translation>
         <translation type="vanished">Sauvegarder ...</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="3486"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="3535"/>
         <source>Don&apos;t Save</source>
         <translation>Ne pas sauvegarder</translation>
     </message>
@@ -16950,7 +16960,7 @@ Voulez-vous enregistrer vos changements ?</translation>
         <translation type="vanished">Une erreur inconnue s&apos;est produite, il est possible qu&apos;une partition pleine empêche d&apos;écrire le fichier en lecture seule.</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.ui" line="1557"/>
+        <location filename="../../src/app/tape/tmainwindow.ui" line="1574"/>
         <source>Export to CSV</source>
         <translation>Exporter sous format .csv</translation>
     </message>
@@ -16973,7 +16983,7 @@ Voulez-vous enregistrer vos changements ?</translation>
         <translation>Tableur format texte</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.ui" line="1021"/>
+        <location filename="../../src/app/tape/tmainwindow.ui" line="1038"/>
         <source>Customer&apos;s name</source>
         <translation>Nom du client</translation>
     </message>
@@ -16982,7 +16992,7 @@ Voulez-vous enregistrer vos changements ?</translation>
         <translation type="vanished">Nom de famille du client</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.ui" line="1109"/>
+        <location filename="../../src/app/tape/tmainwindow.ui" line="1126"/>
         <source>Customer&apos;s email address</source>
         <translation>Adresse email du client</translation>
     </message>
@@ -17004,12 +17014,12 @@ Voulez-vous enregistrer vos changements ?</translation>
     </message>
     <message>
         <location filename="../../src/app/tape/tmainwindow.cpp" line="952"/>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="2663"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="2711"/>
         <source>Could not save the file</source>
         <translation>Le fichier n&apos;a pas pu être enregistré</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="3822"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="3885"/>
         <source>read only</source>
         <translation>Lecture seule</translation>
     </message>
@@ -17018,156 +17028,156 @@ Voulez-vous enregistrer vos changements ?</translation>
         <location filename="../../src/app/tape/tmainwindow.cpp" line="664"/>
         <location filename="../../src/app/tape/tmainwindow.cpp" line="763"/>
         <location filename="../../src/app/tape/tmainwindow.cpp" line="987"/>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="2972"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="3020"/>
         <source>Multisize measurements</source>
         <translation>Mensurations multi-tailles</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="3976"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="4039"/>
         <source>Invalid result. Value is infinite or NaN. Please, check your calculations.</source>
         <translation>Résultat invalide. La valeur est infinie ou n&apos;est pas une valeur numérique. Veuillez vérifier vos calculs.</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="3420"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="3469"/>
         <source>Empty</source>
         <translation>Vide</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.ui" line="1005"/>
+        <location filename="../../src/app/tape/tmainwindow.ui" line="1022"/>
         <source>Customer name:</source>
         <translation>Nom du client :</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.ui" line="1502"/>
+        <location filename="../../src/app/tape/tmainwindow.ui" line="1519"/>
         <source>Open multisize …</source>
         <translation>Ouvrir mesures multi-tailles …</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.ui" line="1540"/>
+        <location filename="../../src/app/tape/tmainwindow.ui" line="1557"/>
         <source>Create from existing …</source>
         <translation>Créer depuis individuelles existantes …</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="3481"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="3530"/>
         <source>Save…</source>
         <translation>Enregistrer …</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.ui" line="1568"/>
-        <location filename="../../src/app/tape/tmainwindow.ui" line="1571"/>
+        <location filename="../../src/app/tape/tmainwindow.ui" line="1585"/>
+        <location filename="../../src/app/tape/tmainwindow.ui" line="1588"/>
         <location filename="../../src/app/tape/tmainwindow.cpp" line="1119"/>
         <source>Import from CSV</source>
         <translation>Importer d&apos;un fichier .csv</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="4367"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="4430"/>
         <source>Individual measurements require at least 2 columns.</source>
         <translation>2 colonnes minimum doivent être remplies en mesures individuelles.</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="4448"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="4511"/>
         <source>Multisize measurements require at least 4 columns.</source>
         <translation>4 colonnes minimum doivent être remplies en mesures multi-tailles.</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="4319"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="4382"/>
         <source>Imported file must not contain the same name twice.</source>
         <translation>Le fichier importé ne doit pas contenir deux fois le même nom.</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="4092"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="4155"/>
         <source>Cannot save settings. Access denied.</source>
         <translation>Impossible d&apos;enregistrer les réglages. Accès refusé.</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.ui" line="1156"/>
+        <location filename="../../src/app/tape/tmainwindow.ui" line="1173"/>
         <source>&amp;File</source>
         <translation>&amp;Fichier</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.ui" line="1179"/>
+        <location filename="../../src/app/tape/tmainwindow.ui" line="1196"/>
         <source>&amp;Window</source>
         <translation>&amp;Fenêtre</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.ui" line="1184"/>
+        <location filename="../../src/app/tape/tmainwindow.ui" line="1201"/>
         <source>&amp;Help</source>
         <translation>Aid&amp;e</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.ui" line="1192"/>
+        <location filename="../../src/app/tape/tmainwindow.ui" line="1209"/>
         <source>&amp;Measurements</source>
         <translation>&amp;Mesures</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.ui" line="1374"/>
+        <location filename="../../src/app/tape/tmainwindow.ui" line="1391"/>
         <source>&amp;Open individual …</source>
         <translation>Ouvrir mesures individuelles …</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.ui" line="1388"/>
+        <location filename="../../src/app/tape/tmainwindow.ui" line="1405"/>
         <source>&amp;Save</source>
         <translation>&amp;Sauvegarder</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.ui" line="1402"/>
+        <location filename="../../src/app/tape/tmainwindow.ui" line="1419"/>
         <source>Save &amp;As …</source>
         <translation>S&amp;auvegarder sous …</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.ui" line="1413"/>
+        <location filename="../../src/app/tape/tmainwindow.ui" line="1430"/>
         <source>&amp;Quit</source>
         <translation>&amp;Quitter</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.ui" line="1432"/>
+        <location filename="../../src/app/tape/tmainwindow.ui" line="1449"/>
         <source>&amp;About Tape</source>
         <translation>&amp;A propos de Tape</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.ui" line="1443"/>
+        <location filename="../../src/app/tape/tmainwindow.ui" line="1460"/>
         <source>&amp;New</source>
         <translation>&amp;Nouveau</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="4071"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="4134"/>
         <source>Cannot read settings from a malformed .INI file.</source>
         <translation>Lecture des réglages impossible, fichier .INI invalide.</translation>
     </message>
     <message>
         <location filename="../../src/app/tape/tmainwindow.ui" line="326"/>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="4864"/>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="4880"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="4927"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="4943"/>
         <source>Name</source>
         <comment>measurement column</comment>
         <translation>Nom</translation>
     </message>
     <message>
         <location filename="../../src/app/tape/tmainwindow.ui" line="331"/>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="4866"/>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="4885"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="4929"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="4948"/>
         <source>Full name</source>
         <comment>measurement column</comment>
         <translation>Nom complet</translation>
     </message>
     <message>
         <location filename="../../src/app/tape/tmainwindow.ui" line="336"/>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="4868"/>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="4890"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="4931"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="4953"/>
         <source>Calculated value</source>
         <comment>measurement column</comment>
         <translation>Valeur calculée</translation>
     </message>
     <message>
         <location filename="../../src/app/tape/tmainwindow.ui" line="341"/>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="4870"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="4933"/>
         <source>Formula</source>
         <comment>measurement column</comment>
         <translation>Formule</translation>
     </message>
     <message>
         <location filename="../../src/app/tape/tmainwindow.ui" line="346"/>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="4895"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="4958"/>
         <source>Base value</source>
         <comment>measurement column</comment>
         <translation>Valeur de base</translation>
@@ -17209,83 +17219,93 @@ Voulez-vous enregistrer vos changements ?</translation>
         <translation>Sélectionnez l&apos;une des mesures pour pouvoir utiliser ultérieurement sa valeur dans une étiquette de mentions du patron</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.ui" line="906"/>
+        <location filename="../../src/app/tape/tmainwindow.ui" line="821"/>
+        <source>Alias:</source>
+        <translation type="unfinished">Alias :</translation>
+    </message>
+    <message>
+        <location filename="../../src/app/tape/tmainwindow.ui" line="828"/>
+        <source>Optional text alias for this value. Useful for referencing in pattern piece labels</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/app/tape/tmainwindow.ui" line="923"/>
         <source>Known measurements:</source>
         <translation>Mesures connues :</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.ui" line="938"/>
+        <location filename="../../src/app/tape/tmainwindow.ui" line="955"/>
         <source>Base Values:</source>
         <translation>Valeurs de base :</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.ui" line="1291"/>
+        <location filename="../../src/app/tape/tmainwindow.ui" line="1308"/>
         <source>Add image</source>
         <translation>Ajouter une image</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.ui" line="1308"/>
+        <location filename="../../src/app/tape/tmainwindow.ui" line="1325"/>
         <source>Remove image</source>
         <translation>Supprimer l&apos;image</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.ui" line="1325"/>
+        <location filename="../../src/app/tape/tmainwindow.ui" line="1342"/>
         <source>Save image</source>
         <translation>Enregistrer l&apos;image</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.ui" line="1603"/>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="2619"/>
+        <location filename="../../src/app/tape/tmainwindow.ui" line="1620"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="2667"/>
         <source>Export to individual</source>
         <translation>Exporter comme mesures individuelles</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.ui" line="1606"/>
+        <location filename="../../src/app/tape/tmainwindow.ui" line="1623"/>
         <source>Export to individual measurements</source>
         <translation>Exporter comme mesures individuelles</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.ui" line="1620"/>
+        <location filename="../../src/app/tape/tmainwindow.ui" line="1637"/>
         <source>Use full circumference</source>
         <translation>Avec circonférence entière</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.ui" line="1634"/>
+        <location filename="../../src/app/tape/tmainwindow.ui" line="1651"/>
         <source>Restrict second dimension</source>
         <translation>Moins de valeurs pour mesure Y</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.ui" line="1648"/>
+        <location filename="../../src/app/tape/tmainwindow.ui" line="1665"/>
         <source>Restrict third dimension</source>
         <translation>Moins de valeurs pour mesure Z</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.ui" line="1662"/>
+        <location filename="../../src/app/tape/tmainwindow.ui" line="1679"/>
         <source>Dimension labels</source>
         <translation>Libellés des valeurs</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.ui" line="1716"/>
+        <location filename="../../src/app/tape/tmainwindow.ui" line="1733"/>
         <source>Create Known Measurements</source>
         <translation>Créer des mesures connues</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.ui" line="1727"/>
+        <location filename="../../src/app/tape/tmainwindow.ui" line="1744"/>
         <source>Edit current Known Measurements</source>
         <translation>Modifier les Mesures Connues en cours d&apos;utilisation</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.ui" line="1738"/>
+        <location filename="../../src/app/tape/tmainwindow.ui" line="1755"/>
         <source>Always on top</source>
         <translation>Au premier plan</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.ui" line="1741"/>
+        <location filename="../../src/app/tape/tmainwindow.ui" line="1758"/>
         <source>Keep window always on top</source>
         <translation>Ancrer cette fenêtre au premier plan</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.ui" line="1749"/>
+        <location filename="../../src/app/tape/tmainwindow.ui" line="1766"/>
         <source>Settings Directory</source>
         <translation>Dossier des paramètres</translation>
     </message>
@@ -17346,102 +17366,102 @@ Voulez-vous enregistrer vos changements ?</translation>
         <translation>Impossible d&apos;afficher l&apos;image. Erreur : %1</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="2618"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="2666"/>
         <source>measurements.vit</source>
         <translation>mesures-individuelles.vit</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="2928"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="2976"/>
         <source>Unknown known measurements: %1</source>
         <translation>Mesures de type connu, inconnues : %1</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="3343"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="3392"/>
         <source>Shift (%1):</source>
         <translation>Intervalle (%1):</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="3473"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="3522"/>
         <source>Measurements have been modified. Do you want to save your changes?</source>
         <translation>Les mesures ont été modifiées. Voulez-vous sauvegarder les modifications que vous avez apportées ?</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="4761"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="4824"/>
         <source>Unknown measurement</source>
         <translation>Mesure de type personnalisé</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="4797"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="4860"/>
         <source>None</source>
         <translation>Aucun</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="4806"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="4869"/>
         <source>Invalid link</source>
         <translation>Lien invalide</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="4872"/>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="4926"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="4935"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="4989"/>
         <source>Description</source>
         <comment>measurement column</comment>
         <translation>Description</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="4906"/>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="4915"/>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="4921"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="4969"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="4978"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="4984"/>
         <source>Shift</source>
         <comment>measurement column</comment>
         <translation>Intervalle</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="5314"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="5377"/>
         <source>Empty</source>
         <comment>list</comment>
         <translation>Vide</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="5393"/>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="5403"/>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="5413"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="5456"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="5466"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="5476"/>
         <source>%1 shift</source>
         <translation>%1 intervalle</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="4538"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="4601"/>
         <source>Cannot convert base value to double in column 2.</source>
         <translation>Impossible de doubler la valeur de base de la colonne 2.</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="4542"/>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="4548"/>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="4555"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="4605"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="4611"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="4618"/>
         <source>Cannot convert shift value to double in column %1.</source>
         <translation>Impossible de convertir la valeur d&apos;intervalle en double à la colonne %1.</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="5117"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="5180"/>
         <source>Millimeters</source>
         <translation>Millimètres</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="5120"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="5183"/>
         <source>Inches</source>
         <translation>Pouces</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="5123"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="5186"/>
         <source>Centimeters</source>
         <translation>Centimètres</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="5132"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="5195"/>
         <source>Degrees</source>
         <translation>Degrés</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.ui" line="1676"/>
+        <location filename="../../src/app/tape/tmainwindow.ui" line="1693"/>
         <source>Restrict first dimension</source>
         <translation>Moins de valeurs pour mesure X</translation>
     </message>
@@ -17462,7 +17482,7 @@ Voulez-vous enregistrer vos changements ?</translation>
     </message>
     <message>
         <location filename="../../src/app/tape/tmainwindow.ui" line="115"/>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="5231"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="5294"/>
         <source>0 results</source>
         <translation>0 résultat trouvé</translation>
     </message>
@@ -17512,43 +17532,43 @@ Voulez-vous enregistrer vos changements ?</translation>
         <translation>F3</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.ui" line="1694"/>
+        <location filename="../../src/app/tape/tmainwindow.ui" line="1711"/>
         <source>Add separator</source>
         <translation>Ajouter séparateur</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.ui" line="1705"/>
+        <location filename="../../src/app/tape/tmainwindow.ui" line="1722"/>
         <source>Dimension custom names</source>
         <translation>Noms personnalisés dimensions</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="4314"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="4377"/>
         <source>Measurement name is empty.</source>
         <translation>Le champ &apos;nom de la mesure&apos; n&apos;est pas renseigné.</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="4324"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="4387"/>
         <source>Measurement &apos;%1&apos; doesn&apos;t match regex pattern.</source>
         <translation>La mesure &apos;%1&apos; ne correspond pas au système de codage de caractères.</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="4329"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="4392"/>
         <source>Measurement &apos;%1&apos; already used in the file.</source>
         <translation>La mesure &apos;%1&apos; est déjà utilisée dans le fichier.</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="4382"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="4445"/>
         <source>Error in row %1. The measurement name is empty.</source>
         <translation>Erreur dans la ligne %1. Le nom de la mesure n&apos;est pas renseigné.</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="4520"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="4583"/>
         <source>The measurement name is empty.</source>
         <translation>Le champ &apos;nom de la mesure&apos; n&apos;est pas renseigné.</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="4415"/>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="4471"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="4478"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="4534"/>
         <source>Error in row %1. %2</source>
         <translation>Erreur à la ligne %1. %2</translation>
     </message>
@@ -19120,14 +19140,6 @@ Voulez-vous enregistrer vos changements ?</translation>
     <message>
         <source>Error replacing a symlink by real file: %1.</source>
         <translation type="vanished">Erreur de remplacement d&apos;un lien symbolique par un fichier réel : %1.</translation>
-    </message>
-    <message>
-        <source>Invalid version. Minimum supported format version is %1</source>
-        <translation type="vanished">Version non valide. La version minimale supportée est  %1</translation>
-    </message>
-    <message>
-        <source>Invalid version. Maximum supported format version is %1</source>
-        <translation type="vanished">Version non valide. La version maximale supportée est  %1</translation>
     </message>
     <message>
         <location filename="../../src/libs/ifc/xml/vabstractconverter.cpp" line="236"/>
@@ -21472,12 +21484,12 @@ Voulez-vous enregistrer vos changements ?</translation>
 <context>
     <name>VLayoutPiece</name>
     <message>
-        <location filename="../../src/libs/vlayout/vlayoutpiece.cpp" line="701"/>
+        <location filename="../../src/libs/vlayout/vlayoutpiece.cpp" line="702"/>
         <source>Piece %1 doesn&apos;t have shape.</source>
         <translation>La pièce %1 n&apos;a pas de forme.</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vlayout/vlayoutpiece.cpp" line="1989"/>
+        <location filename="../../src/libs/vlayout/vlayoutpiece.cpp" line="1990"/>
         <source>Invalid SVG font &apos;%1&apos;. Fallback to outline font.</source>
         <translation>Police SVG &apos;%1&apos; invalide. Retour à la police vectorielle.</translation>
     </message>
@@ -21485,53 +21497,55 @@ Voulez-vous enregistrer vos changements ?</translation>
 <context>
     <name>VMeasurements</name>
     <message>
-        <location filename="../../src/libs/vformat/vmeasurements.cpp" line="668"/>
-        <location filename="../../src/libs/vformat/vmeasurements.cpp" line="681"/>
-        <location filename="../../src/libs/vformat/vmeasurements.cpp" line="694"/>
-        <location filename="../../src/libs/vformat/vmeasurements.cpp" line="707"/>
-        <location filename="../../src/libs/vformat/vmeasurements.cpp" line="720"/>
-        <location filename="../../src/libs/vformat/vmeasurements.cpp" line="733"/>
-        <location filename="../../src/libs/vformat/vmeasurements.cpp" line="747"/>
-        <location filename="../../src/libs/vformat/vmeasurements.cpp" line="775"/>
-        <location filename="../../src/libs/vformat/vmeasurements.cpp" line="789"/>
-        <location filename="../../src/libs/vformat/vmeasurements.cpp" line="802"/>
-        <location filename="../../src/libs/vformat/vmeasurements.cpp" line="818"/>
-        <location filename="../../src/libs/vformat/vmeasurements.cpp" line="831"/>
+        <location filename="../../src/libs/vformat/vmeasurements.cpp" line="760"/>
+        <location filename="../../src/libs/vformat/vmeasurements.cpp" line="773"/>
+        <location filename="../../src/libs/vformat/vmeasurements.cpp" line="786"/>
+        <location filename="../../src/libs/vformat/vmeasurements.cpp" line="799"/>
+        <location filename="../../src/libs/vformat/vmeasurements.cpp" line="812"/>
+        <location filename="../../src/libs/vformat/vmeasurements.cpp" line="825"/>
+        <location filename="../../src/libs/vformat/vmeasurements.cpp" line="839"/>
+        <location filename="../../src/libs/vformat/vmeasurements.cpp" line="867"/>
+        <location filename="../../src/libs/vformat/vmeasurements.cpp" line="895"/>
+        <location filename="../../src/libs/vformat/vmeasurements.cpp" line="911"/>
+        <location filename="../../src/libs/vformat/vmeasurements.cpp" line="925"/>
+        <location filename="../../src/libs/vformat/vmeasurements.cpp" line="938"/>
+        <location filename="../../src/libs/vformat/vmeasurements.cpp" line="954"/>
+        <location filename="../../src/libs/vformat/vmeasurements.cpp" line="967"/>
         <source>Can&apos;t find measurement &apos;%1&apos;</source>
         <translation>Impossible de trouver la mesure &apos;%1&apos;</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vformat/vmeasurements.cpp" line="1260"/>
+        <location filename="../../src/libs/vformat/vmeasurements.cpp" line="1396"/>
         <source>The measurement name is empty!</source>
         <translation>Le nom de la mesure est vide !</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vformat/vmeasurements.cpp" line="1066"/>
+        <location filename="../../src/libs/vformat/vmeasurements.cpp" line="1202"/>
         <source>None</source>
         <translation>Aucun</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vformat/vmeasurements.cpp" line="1068"/>
+        <location filename="../../src/libs/vformat/vmeasurements.cpp" line="1204"/>
         <source>Height</source>
         <translation>Stature</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vformat/vmeasurements.cpp" line="1070"/>
+        <location filename="../../src/libs/vformat/vmeasurements.cpp" line="1206"/>
         <source>Size</source>
         <translation>Taille commerciale</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vformat/vmeasurements.cpp" line="1074"/>
+        <location filename="../../src/libs/vformat/vmeasurements.cpp" line="1210"/>
         <source>Hip</source>
         <translation>Bassin</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vformat/vmeasurements.cpp" line="1364"/>
+        <location filename="../../src/libs/vformat/vmeasurements.cpp" line="1500"/>
         <source>Dimension is not valid</source>
         <translation>La dimension est invalide</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vformat/vmeasurements.cpp" line="1072"/>
+        <location filename="../../src/libs/vformat/vmeasurements.cpp" line="1208"/>
         <source>Waist</source>
         <translation>Taille</translation>
     </message>

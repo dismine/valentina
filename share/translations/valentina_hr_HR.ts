@@ -2351,72 +2351,72 @@
         <translation>Naziv datoteke kroja</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/support/dialogeditlabel.cpp" line="707"/>
+        <location filename="../../src/libs/vtools/dialogs/support/dialogeditlabel.cpp" line="710"/>
         <source>Piece letter</source>
         <translation>Slovo krojnog dijela</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/support/dialogeditlabel.cpp" line="708"/>
+        <location filename="../../src/libs/vtools/dialogs/support/dialogeditlabel.cpp" line="711"/>
         <source>Piece annotation</source>
         <translation>Oznaka krojnog dijela</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/support/dialogeditlabel.cpp" line="709"/>
+        <location filename="../../src/libs/vtools/dialogs/support/dialogeditlabel.cpp" line="712"/>
         <source>Piece orientation</source>
         <translation>Orijentacija krojnog dijela</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/support/dialogeditlabel.cpp" line="710"/>
+        <location filename="../../src/libs/vtools/dialogs/support/dialogeditlabel.cpp" line="713"/>
         <source>Piece rotation</source>
         <translation>Rotacija krojnog dijela</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/support/dialogeditlabel.cpp" line="711"/>
+        <location filename="../../src/libs/vtools/dialogs/support/dialogeditlabel.cpp" line="714"/>
         <source>Piece tilt</source>
         <translation>Nagib krojnog dijela</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/support/dialogeditlabel.cpp" line="712"/>
+        <location filename="../../src/libs/vtools/dialogs/support/dialogeditlabel.cpp" line="715"/>
         <source>Piece fold position</source>
         <translation>Pozicija preklopa krojnog dijela</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/support/dialogeditlabel.cpp" line="713"/>
+        <location filename="../../src/libs/vtools/dialogs/support/dialogeditlabel.cpp" line="716"/>
         <source>Piece name</source>
         <translation>Naziv krojnog dijela</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/support/dialogeditlabel.cpp" line="714"/>
+        <location filename="../../src/libs/vtools/dialogs/support/dialogeditlabel.cpp" line="717"/>
         <source>Quantity</source>
         <translation>Količina</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/support/dialogeditlabel.cpp" line="715"/>
+        <location filename="../../src/libs/vtools/dialogs/support/dialogeditlabel.cpp" line="718"/>
         <source>Material: Fabric</source>
         <translation>Materijal: Tkanina</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/support/dialogeditlabel.cpp" line="716"/>
+        <location filename="../../src/libs/vtools/dialogs/support/dialogeditlabel.cpp" line="719"/>
         <source>Material: Lining</source>
         <translation>Materijal: Podstava</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/support/dialogeditlabel.cpp" line="718"/>
+        <location filename="../../src/libs/vtools/dialogs/support/dialogeditlabel.cpp" line="721"/>
         <source>Material: Interfacing</source>
         <translation>Materijal: Pojačanje</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/support/dialogeditlabel.cpp" line="720"/>
+        <location filename="../../src/libs/vtools/dialogs/support/dialogeditlabel.cpp" line="723"/>
         <source>Material: Interlining</source>
         <translation>Materijal: Međupodstava</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/support/dialogeditlabel.cpp" line="721"/>
+        <location filename="../../src/libs/vtools/dialogs/support/dialogeditlabel.cpp" line="724"/>
         <source>Word: Cut</source>
         <translation>Riječ: Izrezati</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/support/dialogeditlabel.cpp" line="722"/>
+        <location filename="../../src/libs/vtools/dialogs/support/dialogeditlabel.cpp" line="725"/>
         <source>Word: on fold</source>
         <translation>Riječ: na preklopu</translation>
     </message>
@@ -2531,27 +2531,27 @@
         <translation>Oznaka struka</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/support/dialogeditlabel.cpp" line="689"/>
+        <location filename="../../src/libs/vtools/dialogs/support/dialogeditlabel.cpp" line="692"/>
         <source>Final measurement: %1</source>
         <translation>Konačno mjerenje: %1</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/support/dialogeditlabel.cpp" line="740"/>
+        <location filename="../../src/libs/vtools/dialogs/support/dialogeditlabel.cpp" line="743"/>
         <source>No data for the height dimension.</source>
         <translation>Nema podataka za visinu.</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/support/dialogeditlabel.cpp" line="741"/>
+        <location filename="../../src/libs/vtools/dialogs/support/dialogeditlabel.cpp" line="744"/>
         <source>No data for the size dimension.</source>
         <translation>Nema podataka za veličinu.</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/support/dialogeditlabel.cpp" line="742"/>
+        <location filename="../../src/libs/vtools/dialogs/support/dialogeditlabel.cpp" line="745"/>
         <source>No data for the hip dimension.</source>
         <translation>Nema podataka za obujam bokova.</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/support/dialogeditlabel.cpp" line="743"/>
+        <location filename="../../src/libs/vtools/dialogs/support/dialogeditlabel.cpp" line="746"/>
         <source>No data for the waist dimension.</source>
         <translation>Nema podataka za obujam struka.</translation>
     </message>
@@ -2614,22 +2614,27 @@
         <translation>Ekstenzija mjerenja</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/support/dialogeditlabel.cpp" line="745"/>
+        <location filename="../../src/libs/vtools/dialogs/support/dialogeditlabel.cpp" line="668"/>
+        <source>Measurement %1 value alias</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/libs/vtools/dialogs/support/dialogeditlabel.cpp" line="748"/>
         <source>No data for the X dimension.</source>
         <translation>Nema podataka za dimenziju X.</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/support/dialogeditlabel.cpp" line="746"/>
+        <location filename="../../src/libs/vtools/dialogs/support/dialogeditlabel.cpp" line="749"/>
         <source>No data for the Y dimension.</source>
         <translation>Nema podataka za dimenziju Y.</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/support/dialogeditlabel.cpp" line="747"/>
+        <location filename="../../src/libs/vtools/dialogs/support/dialogeditlabel.cpp" line="750"/>
         <source>No data for the Z dimension.</source>
         <translation>Nema podataka za dimenziju Z.</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/support/dialogeditlabel.cpp" line="748"/>
+        <location filename="../../src/libs/vtools/dialogs/support/dialogeditlabel.cpp" line="751"/>
         <source>No data for the W dimension.</source>
         <translation>Nema podataka za dimenziju W.</translation>
     </message>
@@ -2639,12 +2644,12 @@
         <translation>Jedinice površine</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/support/dialogeditlabel.cpp" line="676"/>
+        <location filename="../../src/libs/vtools/dialogs/support/dialogeditlabel.cpp" line="679"/>
         <source>Piece full area</source>
         <translation>Puna površina krojnog dijela</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/support/dialogeditlabel.cpp" line="677"/>
+        <location filename="../../src/libs/vtools/dialogs/support/dialogeditlabel.cpp" line="680"/>
         <source>Piece seam line area</source>
         <translation>Površina unutar linije šivanja krojnog dijela</translation>
     </message>
@@ -8682,85 +8687,85 @@ Svejedno primijeniti postavke?</translation>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.cpp" line="2479"/>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="1231"/>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="5482"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="5485"/>
         <source>Reverse</source>
         <translation>Obrni</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.cpp" line="2489"/>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="5496"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="5499"/>
         <source>Passmark</source>
         <translation>Oznaka</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.cpp" line="2509"/>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="5516"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="5519"/>
         <source>One line</source>
         <translation>Jedna crta</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.cpp" line="2512"/>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="5519"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="5522"/>
         <source>Two lines</source>
         <translation>Dvije crte</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.cpp" line="2515"/>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="5522"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="5525"/>
         <source>Three lines</source>
         <translation>Tri crte</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.cpp" line="2518"/>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="5525"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="5528"/>
         <source>T mark</source>
         <translation>T oznaka</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.cpp" line="2522"/>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="5529"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="5532"/>
         <source>External V mark</source>
         <translation>Vanjska V oznaka</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.cpp" line="2526"/>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="5533"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="5536"/>
         <source>Internal V mark</source>
         <translation>Unutarnja V oznaka</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.cpp" line="2529"/>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="5536"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="5539"/>
         <source>U mark</source>
         <translation>U oznaka</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.cpp" line="2532"/>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="5539"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="5542"/>
         <source>Box mark</source>
         <translation>Oznaka pravokutnik</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.cpp" line="2535"/>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="5542"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="5545"/>
         <source>Check mark</source>
         <translation>Oznaka provjere</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.cpp" line="2539"/>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="5547"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="5550"/>
         <source>Check uniqueness</source>
         <translation>Provjeri jedinstvenost</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.cpp" line="2544"/>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="5553"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="5556"/>
         <source>Turn point</source>
         <translation>Okretna točka</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.cpp" line="2550"/>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="5560"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="5563"/>
         <source>Excluded</source>
         <translation>Isključeno</translation>
     </message>
@@ -8770,7 +8775,7 @@ Svejedno primijeniti postavke?</translation>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="1278"/>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="1312"/>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="1374"/>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="5566"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="5569"/>
         <source>Delete</source>
         <translation>Obriši</translation>
     </message>
@@ -8877,7 +8882,7 @@ Svejedno primijeniti postavke?</translation>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.cpp" line="2492"/>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="4205"/>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="4601"/>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="5499"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="5502"/>
         <source>None</source>
         <translation>Ništa</translation>
     </message>
@@ -9201,17 +9206,22 @@ Svejedno primijeniti postavke?</translation>
         <translation>Tri X</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="5488"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="5212"/>
+        <source>Measurement %1 value alias</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="5491"/>
         <source>Duplicate</source>
         <translation>Dupliciraj</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="5676"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="5679"/>
         <source>Save label data.</source>
         <translation>Spremi podatke oznake.</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="5677"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="5680"/>
         <source>Label data were changed. Do you want to save them before editing label template?</source>
         <translation>Podaci oznake su promijenjeni. Želite li ih spremiti prije uređivanja predloška oznake?</translation>
     </message>
@@ -11425,7 +11435,7 @@ Svejedno primijeniti postavke?</translation>
         <location filename="../../src/app/valentina/mainwindow.cpp" line="2133"/>
         <location filename="../../src/app/valentina/mainwindow.cpp" line="2363"/>
         <location filename="../../src/app/valentina/mainwindow.cpp" line="4251"/>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="6980"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="6981"/>
         <source>Open file</source>
         <translation>Otvori datoteku</translation>
     </message>
@@ -11468,7 +11478,7 @@ Svejedno primijeniti postavke?</translation>
         <translation>Datoteka spremljena</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="7526"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="7527"/>
         <source>untitled.val</source>
         <translation>neimenovano.val</translation>
     </message>
@@ -11524,12 +11534,12 @@ Do you want to save your changes?</source>
         <translation type="vanished">Datoteka učitana</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="6942"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="6943"/>
         <source>Valentina didn&apos;t shut down correctly. Do you want reopen files (%1) you had open?</source>
         <translation>Valentina nije ispravno zatvorena. Želite li ponovno otvoriti datoteke (%1) koje ste imali otvorene?</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="6944"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="6945"/>
         <source>Reopen files.</source>
         <translation>Ponovno otvori datoteke.</translation>
     </message>
@@ -11785,7 +11795,7 @@ Do you want to save your changes?</source>
         <location filename="../../src/app/valentina/mainwindow.cpp" line="4093"/>
         <location filename="../../src/app/valentina/mainwindow.cpp" line="4284"/>
         <location filename="../../src/app/valentina/mainwindow.cpp" line="4363"/>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="6870"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="6871"/>
         <source>Layout mode</source>
         <translation>Način rasporeda</translation>
     </message>
@@ -11833,7 +11843,7 @@ Do you want to save your changes?</source>
         <translation type="vanished">Standardna mjerenja (.vst);;Individualna mjerenja (.vit)</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="7174"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="7175"/>
         <source>You can&apos;t export empty scene.</source>
         <translation>Ne možete izvesti praznu scenu.</translation>
     </message>
@@ -11870,7 +11880,7 @@ Do you want to save your changes?</source>
         <translation type="vanished">Datoteka mjerenja sadrži nevažeća poznata mjerenja.</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="7090"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="7091"/>
         <source>Measurement file has unknown format.</source>
         <translation>Datoteka mjerenja ima nepoznat format.</translation>
     </message>
@@ -11912,7 +11922,7 @@ Do you want to save your changes?</source>
         <translation type="vanished">Datoteka mjerenja &lt;br/&gt;&lt;br/&gt; &lt;b&gt;%1&lt;/b&gt; &lt;br/&gt;&lt;br/&gt; nije pronađena. Želite li ažurirati lokaciju datoteke?</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="7011"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="7012"/>
         <source>Loading measurements file</source>
         <translation>Učitavanje datoteke mjerenja</translation>
     </message>
@@ -11929,9 +11939,9 @@ Do you want to save your changes?</source>
         <translation type="vanished">Nije moguće postaviti veličinu. Datoteka nije otvorena.</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="7357"/>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="7400"/>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="7443"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="7358"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="7401"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="7444"/>
         <source>The method %1 does nothing in GUI mode</source>
         <translation>Metoda %1 ne radi u GUI načinu rada</translation>
     </message>
@@ -11948,15 +11958,15 @@ Do you want to save your changes?</source>
         <translation type="vanished">Nije moguće postaviti visinu. Datoteka nije otvorena.</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="6853"/>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="6909"/>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="7222"/>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="7262"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="6854"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="6910"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="7223"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="7263"/>
         <source>Export error.</source>
         <translation>Pogreška pri izvozu.</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="7470"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="7471"/>
         <source>Please, provide one input file.</source>
         <translation>Molimo, navedite jednu ulaznu datoteku.</translation>
     </message>
@@ -12196,7 +12206,7 @@ Do you want to save your changes?</source>
         <translation type="vanished">Veličina:</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="7006"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="7007"/>
         <source>The measurements file &lt;br/&gt;&lt;br/&gt; &lt;b&gt;%1&lt;/b&gt; &lt;br/&gt;&lt;br/&gt; could not be found. Do you want to update the file location?</source>
         <translation>Datoteka mjerenja &lt;br/&gt;&lt;br/&gt; &lt;b&gt;%1&lt;/b&gt; &lt;br/&gt;&lt;br/&gt; nije pronađena. Želite li ažurirati lokaciju datoteke?</translation>
     </message>
@@ -12250,7 +12260,7 @@ Do you want to save your changes?</source>
         <translation>Nije moguće spremiti datoteku</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="7576"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="7577"/>
         <source>read only</source>
         <translation>samo za čitanje</translation>
     </message>
@@ -12323,16 +12333,16 @@ Do you want to save your changes?</source>
     <message>
         <location filename="../../src/app/valentina/mainwindow.cpp" line="2094"/>
         <location filename="../../src/app/valentina/mainwindow.cpp" line="2129"/>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="7052"/>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="7066"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="7053"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="7067"/>
         <source>Individual measurements</source>
         <translation>Individualna mjerenja</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.cpp" line="2094"/>
         <location filename="../../src/app/valentina/mainwindow.cpp" line="2129"/>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="7052"/>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="7066"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="7053"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="7067"/>
         <source>Multisize measurements</source>
         <translation>Mjerenja za više veličina</translation>
     </message>
@@ -12435,21 +12445,21 @@ Do you want to save your changes?</source>
     <message>
         <location filename="../../src/app/valentina/mainwindow.cpp" line="4285"/>
         <location filename="../../src/app/valentina/mainwindow.cpp" line="4364"/>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="6871"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="6872"/>
         <source>You don&apos;t have enough details to export. Please, include at least one detail in layout.</source>
         <translation>Nemate dovoljno detalja za izvoz. Molimo, uključite barem jedan detalj u raspored.</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.cpp" line="4298"/>
         <location filename="../../src/app/valentina/mainwindow.cpp" line="4377"/>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="6884"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="6885"/>
         <source>Export details</source>
         <translation>Izvezi detalje</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.cpp" line="4298"/>
         <location filename="../../src/app/valentina/mainwindow.cpp" line="4377"/>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="6884"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="6885"/>
         <source>Can&apos;t export details.</source>
         <translation>Nije moguće izvesti detalje.</translation>
     </message>
@@ -12499,17 +12509,17 @@ Do you want to save your changes?</source>
         <translation>Izvezi završna mjerenja u CSV</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="7184"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="7185"/>
         <source>You can&apos;t export empty scene. Please, include at least one detail in layout.</source>
         <translation>Ne možete izvesti praznu scenu. Molimo, uključite barem jedan detalj u raspored.</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="7290"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="7291"/>
         <source>Export final measurements error.</source>
         <translation>Pogreška pri izvozu završnih mjerenja.</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="7291"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="7292"/>
         <source>Destination path is empty.</source>
         <translation>Ciljna putanja je prazna.</translation>
     </message>
@@ -12691,7 +12701,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.ui" line="411"/>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="7906"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="7907"/>
         <source>Pattern messages</source>
         <translation>Poruke kroja</translation>
     </message>
@@ -12706,27 +12716,27 @@ Do you want to save your changes?</source>
         <translation>Filter</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="7881"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="7882"/>
         <source>DEBUG</source>
         <translation>DEBUG</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="7884"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="7885"/>
         <source>WARNING</source>
         <translation>UPOZORENJE</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="7887"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="7888"/>
         <source>CRITICAL</source>
         <translation>KRITIČNO</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="7890"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="7891"/>
         <source>FATAL</source>
         <translation>FATALNO</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="7893"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="7894"/>
         <source>INFO</source>
         <translation>INFO</translation>
     </message>
@@ -12832,47 +12842,47 @@ Do you want to save your changes?</source>
         <translation>Kroj je izmijenjen. Želite li spremiti svoje promjene?</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="7338"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="7339"/>
         <source>Not supported dimension A value &apos;%1&apos; for this pattern file.</source>
         <translation>Nepodržana vrijednost dimenzije A &apos;%1&apos; za ovu datoteku kroja.</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="7345"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="7346"/>
         <source>Couldn&apos;t set dimension A. Need a file with multisize measurements.</source>
         <translation>Nije moguće postaviti dimenziju A. Potrebna je datoteka s višestrukim mjerenjima.</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="7351"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="7352"/>
         <source>Couldn&apos;t set dimension A. File wasn&apos;t opened.</source>
         <translation>Nije moguće postaviti dimenziju A. Datoteka nije otvorena.</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="7381"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="7382"/>
         <source>Not supported dimension B value &apos;%1&apos; for this pattern file.</source>
         <translation>Nepodržana vrijednost dimenzije B &apos;%1&apos; za ovu datoteku kroja.</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="7388"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="7389"/>
         <source>Couldn&apos;t set dimension B. Need a file with multisize measurements.</source>
         <translation>Nije moguće postaviti dimenziju B. Potrebna je datoteka s višestrukim mjerenjima.</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="7394"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="7395"/>
         <source>Couldn&apos;t set dimension B. File wasn&apos;t opened.</source>
         <translation>Nije moguće postaviti dimenziju B. Datoteka nije otvorena.</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="7424"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="7425"/>
         <source>Not supported dimension C value &apos;%1&apos; for this pattern file.</source>
         <translation>Nepodržana vrijednost dimenzije C &apos;%1&apos; za ovu datoteku kroja.</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="7431"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="7432"/>
         <source>Couldn&apos;t set dimension C. Need a file with multisize measurements.</source>
         <translation>Nije moguće postaviti dimenziju C. Potrebna je datoteka s višestrukim mjerenjima.</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="7437"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="7438"/>
         <source>Couldn&apos;t set dimension C. File wasn&apos;t opened.</source>
         <translation>Nije moguće postaviti dimenziju C. Datoteka nije otvorena.</translation>
     </message>
@@ -12887,12 +12897,12 @@ Do you want to save your changes?</source>
         <translation>Trgovina</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="6805"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="6806"/>
         <source>Scalable Vector Graphics files</source>
         <translation>Datoteke skalabilne vektorske grafike</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="6807"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="6808"/>
         <source>Save draw</source>
         <translation>Spremi crtanje</translation>
     </message>
@@ -13416,43 +13426,43 @@ Would you like to select another file?</source>
 <context>
     <name>Placeholder</name>
     <message>
-        <location filename="../../src/libs/vlayout/vtextmanager.cpp" line="640"/>
-        <location filename="../../src/libs/vtools/dialogs/support/dialogeditlabel.cpp" line="715"/>
+        <location filename="../../src/libs/vlayout/vtextmanager.cpp" line="641"/>
+        <location filename="../../src/libs/vtools/dialogs/support/dialogeditlabel.cpp" line="718"/>
         <source>Fabric</source>
         <translation>Tkanina</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vlayout/vtextmanager.cpp" line="641"/>
-        <location filename="../../src/libs/vtools/dialogs/support/dialogeditlabel.cpp" line="716"/>
+        <location filename="../../src/libs/vlayout/vtextmanager.cpp" line="642"/>
+        <location filename="../../src/libs/vtools/dialogs/support/dialogeditlabel.cpp" line="719"/>
         <source>Lining</source>
         <translation>Podstava</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vlayout/vtextmanager.cpp" line="642"/>
-        <location filename="../../src/libs/vtools/dialogs/support/dialogeditlabel.cpp" line="718"/>
+        <location filename="../../src/libs/vlayout/vtextmanager.cpp" line="643"/>
+        <location filename="../../src/libs/vtools/dialogs/support/dialogeditlabel.cpp" line="721"/>
         <source>Interfacing</source>
         <translation>Pojačanje</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vlayout/vtextmanager.cpp" line="643"/>
-        <location filename="../../src/libs/vtools/dialogs/support/dialogeditlabel.cpp" line="720"/>
+        <location filename="../../src/libs/vlayout/vtextmanager.cpp" line="644"/>
+        <location filename="../../src/libs/vtools/dialogs/support/dialogeditlabel.cpp" line="723"/>
         <source>Interlining</source>
         <translation>Međupodstava</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vlayout/vtextmanager.cpp" line="644"/>
-        <location filename="../../src/libs/vtools/dialogs/support/dialogeditlabel.cpp" line="721"/>
+        <location filename="../../src/libs/vlayout/vtextmanager.cpp" line="645"/>
+        <location filename="../../src/libs/vtools/dialogs/support/dialogeditlabel.cpp" line="724"/>
         <source>Cut</source>
         <translation>Izreži</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vlayout/vtextmanager.cpp" line="679"/>
-        <location filename="../../src/libs/vtools/dialogs/support/dialogeditlabel.cpp" line="834"/>
+        <location filename="../../src/libs/vlayout/vtextmanager.cpp" line="680"/>
+        <location filename="../../src/libs/vtools/dialogs/support/dialogeditlabel.cpp" line="837"/>
         <source>on fold</source>
         <translation>na preklop</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vlayout/vtextmanager.cpp" line="978"/>
+        <location filename="../../src/libs/vlayout/vtextmanager.cpp" line="979"/>
         <source>Error</source>
         <translation>Pogreška</translation>
     </message>
@@ -14927,7 +14937,7 @@ Ova će se opcija primijeniti nakon ponovnog pokretanja.</translation>
         <translation>Dio &apos;%1&apos; ima nevažeći raspored margine. Molimo, provjerite širinu šava kako biste provjerili ponašanje šava.</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vlayout/vlayoutpiece.cpp" line="684"/>
+        <location filename="../../src/libs/vlayout/vlayoutpiece.cpp" line="685"/>
         <location filename="../../src/libs/vtools/tools/vtoolseamallowance.cpp" line="2022"/>
         <source>Piece &apos;%1&apos;. Seam allowance is not valid.</source>
         <translation>Dio &apos;%1&apos;. Širina šava nije valjana.</translation>
@@ -15050,47 +15060,47 @@ Ova će se opcija primijeniti nakon ponovnog pokretanja.</translation>
         <translation>Nije moguće dobiti tokene iz formule &apos;%1&apos;. Pogreška u formuli: %2.</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vlayout/vtextmanager.cpp" line="548"/>
-        <location filename="../../src/libs/vtools/dialogs/support/dialogeditlabel.cpp" line="693"/>
+        <location filename="../../src/libs/vlayout/vtextmanager.cpp" line="549"/>
+        <location filename="../../src/libs/vtools/dialogs/support/dialogeditlabel.cpp" line="696"/>
         <source>Failed to prepare final measurement placeholder. Parser error at line %1: %2.</source>
         <translation>Nije uspjelo pripremanje rezerviranog mjesta za konačnu mjeru. Pogreška analizatora u retku %1: %2.</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/support/dialogeditlabel.cpp" line="853"/>
+        <location filename="../../src/libs/vtools/dialogs/support/dialogeditlabel.cpp" line="856"/>
         <source>Failed to prepare full piece area placeholder. %1.</source>
         <translation>Nije uspjelo pripremanje rezerviranog mjesta za punu površinu dijela. %1.</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/support/dialogeditlabel.cpp" line="867"/>
+        <location filename="../../src/libs/vtools/dialogs/support/dialogeditlabel.cpp" line="870"/>
         <source>Failed to prepare piece seam line area placeholder. %1.</source>
         <translation>Nije uspjelo pripremanje rezerviranog mjesta za površinu linije šava dijela. %1.</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vlayout/vtextmanager.cpp" line="985"/>
+        <location filename="../../src/libs/vlayout/vtextmanager.cpp" line="986"/>
         <source>Incorrect use of placeholder %1. This placeholder is not available in pattern label.</source>
         <translation>Neispravna upotreba rezerviranog mjesta %1. Ovo rezervirano mjesto nije dostupno u oznaci kroja.</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vlayout/vlayoutpiece.cpp" line="458"/>
-        <location filename="../../src/libs/vlayout/vtextmanager.cpp" line="704"/>
+        <location filename="../../src/libs/vlayout/vlayoutpiece.cpp" line="459"/>
+        <location filename="../../src/libs/vlayout/vtextmanager.cpp" line="705"/>
         <source>No data for the height dimension.</source>
         <translation>Nema podataka za visinu.</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vlayout/vlayoutpiece.cpp" line="459"/>
-        <location filename="../../src/libs/vlayout/vtextmanager.cpp" line="705"/>
+        <location filename="../../src/libs/vlayout/vlayoutpiece.cpp" line="460"/>
+        <location filename="../../src/libs/vlayout/vtextmanager.cpp" line="706"/>
         <source>No data for the size dimension.</source>
         <translation>Nema podataka za veličinu.</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vlayout/vlayoutpiece.cpp" line="460"/>
-        <location filename="../../src/libs/vlayout/vtextmanager.cpp" line="706"/>
+        <location filename="../../src/libs/vlayout/vlayoutpiece.cpp" line="461"/>
+        <location filename="../../src/libs/vlayout/vtextmanager.cpp" line="707"/>
         <source>No data for the hip dimension.</source>
         <translation>Nema podataka za obujam bokova.</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vlayout/vlayoutpiece.cpp" line="461"/>
-        <location filename="../../src/libs/vlayout/vtextmanager.cpp" line="707"/>
+        <location filename="../../src/libs/vlayout/vlayoutpiece.cpp" line="462"/>
+        <location filename="../../src/libs/vlayout/vtextmanager.cpp" line="708"/>
         <source>No data for the waist dimension.</source>
         <translation>Nema podataka za obujam struka.</translation>
     </message>
@@ -15212,26 +15222,26 @@ Ova će se opcija primijeniti nakon ponovnog pokretanja.</translation>
         <translation>Želite li stvarno izbrisati?</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vlayout/vlayoutpiece.cpp" line="463"/>
-        <location filename="../../src/libs/vlayout/vtextmanager.cpp" line="709"/>
+        <location filename="../../src/libs/vlayout/vlayoutpiece.cpp" line="464"/>
+        <location filename="../../src/libs/vlayout/vtextmanager.cpp" line="710"/>
         <source>No data for the X dimension.</source>
         <translation>Nema podataka za dimenziju X.</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vlayout/vlayoutpiece.cpp" line="464"/>
-        <location filename="../../src/libs/vlayout/vtextmanager.cpp" line="710"/>
+        <location filename="../../src/libs/vlayout/vlayoutpiece.cpp" line="465"/>
+        <location filename="../../src/libs/vlayout/vtextmanager.cpp" line="711"/>
         <source>No data for the Y dimension.</source>
         <translation>Nema podataka za dimenziju Y.</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vlayout/vlayoutpiece.cpp" line="465"/>
-        <location filename="../../src/libs/vlayout/vtextmanager.cpp" line="711"/>
+        <location filename="../../src/libs/vlayout/vlayoutpiece.cpp" line="466"/>
+        <location filename="../../src/libs/vlayout/vtextmanager.cpp" line="712"/>
         <source>No data for the Z dimension.</source>
         <translation>Nema podataka za dimenziju Z.</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vlayout/vlayoutpiece.cpp" line="466"/>
-        <location filename="../../src/libs/vlayout/vtextmanager.cpp" line="712"/>
+        <location filename="../../src/libs/vlayout/vlayoutpiece.cpp" line="467"/>
+        <location filename="../../src/libs/vlayout/vtextmanager.cpp" line="713"/>
         <source>No data for the W dimension.</source>
         <translation>Nema podataka za dimenziju W.</translation>
     </message>
@@ -16383,22 +16393,22 @@ Ova će se opcija primijeniti nakon ponovnog pokretanja.</translation>
         <translation>Puno ime:</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.ui" line="831"/>
+        <location filename="../../src/app/tape/tmainwindow.ui" line="848"/>
         <source>Information</source>
         <translation>Informacija</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.ui" line="840"/>
+        <location filename="../../src/app/tape/tmainwindow.ui" line="857"/>
         <source>Type:</source>
         <translation>Vrsta:</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.ui" line="847"/>
+        <location filename="../../src/app/tape/tmainwindow.ui" line="864"/>
         <source>Measurement type</source>
         <translation>Tip mjerenja</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.ui" line="854"/>
+        <location filename="../../src/app/tape/tmainwindow.ui" line="871"/>
         <source>Path:</source>
         <translation>Putanja:</translation>
     </message>
@@ -16407,7 +16417,7 @@ Ova će se opcija primijeniti nakon ponovnog pokretanja.</translation>
         <translation type="vanished">Putanja do datoteke</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.ui" line="897"/>
+        <location filename="../../src/app/tape/tmainwindow.ui" line="914"/>
         <source>Show in Explorer</source>
         <translation>Prikaži u Exploreru</translation>
     </message>
@@ -16436,7 +16446,7 @@ Ova će se opcija primijeniti nakon ponovnog pokretanja.</translation>
         <translation type="vanished">Prezime:</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.ui" line="1031"/>
+        <location filename="../../src/app/tape/tmainwindow.ui" line="1048"/>
         <source>Birth date:</source>
         <translation>Datum rođenja:</translation>
     </message>
@@ -16445,12 +16455,12 @@ Ova će se opcija primijeniti nakon ponovnog pokretanja.</translation>
         <translation type="vanished">yyyy-MM-dd</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.ui" line="1093"/>
+        <location filename="../../src/app/tape/tmainwindow.ui" line="1110"/>
         <source>Email:</source>
         <translation>E-pošta:</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.ui" line="1119"/>
+        <location filename="../../src/app/tape/tmainwindow.ui" line="1136"/>
         <source>Notes:</source>
         <translation>Bilješke:</translation>
     </message>
@@ -16474,12 +16484,12 @@ Ova će se opcija primijeniti nakon ponovnog pokretanja.</translation>
         <translation>Mjerenja</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.ui" line="1219"/>
+        <location filename="../../src/app/tape/tmainwindow.ui" line="1236"/>
         <source>Menu</source>
         <translation>Izbornik</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.ui" line="1244"/>
+        <location filename="../../src/app/tape/tmainwindow.ui" line="1261"/>
         <source>Gradation</source>
         <translation>Gradacija</translation>
     </message>
@@ -16488,7 +16498,7 @@ Ova će se opcija primijeniti nakon ponovnog pokretanja.</translation>
         <translation type="vanished">Otvori pojedinačna ...</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="3481"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="3530"/>
         <source>Save</source>
         <translation>Spremi</translation>
     </message>
@@ -16501,7 +16511,7 @@ Ova će se opcija primijeniti nakon ponovnog pokretanja.</translation>
         <translation type="vanished">Izlaz</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.ui" line="1421"/>
+        <location filename="../../src/app/tape/tmainwindow.ui" line="1438"/>
         <source>About &amp;Qt</source>
         <translation>O &amp;Qt</translation>
     </message>
@@ -16514,17 +16524,17 @@ Ova će se opcija primijeniti nakon ponovnog pokretanja.</translation>
         <translation type="vanished">Novi</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.ui" line="1458"/>
+        <location filename="../../src/app/tape/tmainwindow.ui" line="1475"/>
         <source>Add known</source>
         <translation>Dodaj poznato</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.ui" line="1473"/>
+        <location filename="../../src/app/tape/tmainwindow.ui" line="1490"/>
         <source>Add custom</source>
         <translation>Dodaj prilagođeno</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.ui" line="1491"/>
+        <location filename="../../src/app/tape/tmainwindow.ui" line="1508"/>
         <source>Read only</source>
         <translation>Samo za čitanje</translation>
     </message>
@@ -16533,7 +16543,7 @@ Ova će se opcija primijeniti nakon ponovnog pokretanja.</translation>
         <translation type="vanished">Otvori standard ...</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.ui" line="1513"/>
+        <location filename="../../src/app/tape/tmainwindow.ui" line="1530"/>
         <source>Open template</source>
         <translation>Otvori predložak</translation>
     </message>
@@ -16546,13 +16556,13 @@ Ova će se opcija primijeniti nakon ponovnog pokretanja.</translation>
         <translation type="vanished">Prikaži informacije o svim poznatim mjerenjima</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.ui" line="1521"/>
+        <location filename="../../src/app/tape/tmainwindow.ui" line="1538"/>
         <location filename="../../src/app/tape/tmainwindow.cpp" line="1193"/>
         <source>Preferences</source>
         <translation>Postavke</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="3814"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="3877"/>
         <source>untitled %1</source>
         <translation>neimenovano %1</translation>
     </message>
@@ -16564,7 +16574,7 @@ Ova će se opcija primijeniti nakon ponovnog pokretanja.</translation>
     <message>
         <location filename="../../src/app/tape/tmainwindow.cpp" line="562"/>
         <location filename="../../src/app/tape/tmainwindow.cpp" line="1872"/>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="4209"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="4272"/>
         <source>File error.</source>
         <translation>Pogreška u datoteci.</translation>
     </message>
@@ -16592,7 +16602,7 @@ Ova će se opcija primijeniti nakon ponovnog pokretanja.</translation>
         <translation>Spremi kao</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="4234"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="4297"/>
         <source>&amp;New Window</source>
         <translation>&amp;Novi prozor</translation>
     </message>
@@ -16606,22 +16616,22 @@ Ova će se opcija primijeniti nakon ponovnog pokretanja.</translation>
         <translation type="vanished">M_%1</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="2297"/>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="3952"/>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="3975"/>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="3991"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="2345"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="4015"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="4038"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="4054"/>
         <source>Error</source>
         <translation>Pogreška</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="2297"/>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="3952"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="2345"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="4015"/>
         <source>Empty field.</source>
         <translation>Prazno polje.</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="3991"/>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="3992"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="4054"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="4055"/>
         <source>Parser error: %1</source>
         <translation>Pogreška analizatora: %1</translation>
     </message>
@@ -16642,14 +16652,14 @@ Ova će se opcija primijeniti nakon ponovnog pokretanja.</translation>
         <location filename="../../src/app/tape/tmainwindow.cpp" line="664"/>
         <location filename="../../src/app/tape/tmainwindow.cpp" line="772"/>
         <location filename="../../src/app/tape/tmainwindow.cpp" line="982"/>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="2617"/>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="3022"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="2665"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="3070"/>
         <source>Individual measurements</source>
         <translation>Individualna mjerenja</translation>
     </message>
     <message>
         <location filename="../../src/app/tape/tmainwindow.cpp" line="1605"/>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="3814"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="3877"/>
         <source>untitled</source>
         <translation>neimenovano</translation>
     </message>
@@ -16658,7 +16668,7 @@ Ova će se opcija primijeniti nakon ponovnog pokretanja.</translation>
         <translation type="vanished">&lt;Prazno&gt;</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="3472"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="3521"/>
         <source>Unsaved changes</source>
         <translation>Nespremljene promjene</translation>
     </message>
@@ -16669,22 +16679,22 @@ Do you want to save your changes?</source>
 Želite li spremiti promjene?</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="3953"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="4016"/>
         <source>Empty field</source>
         <translation>Prazno polje</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="3986"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="4049"/>
         <source>Value</source>
         <translation>Vrijednost</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="4000"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="4063"/>
         <source>Open file</source>
         <translation>Otvori datoteku</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.ui" line="1532"/>
+        <location filename="../../src/app/tape/tmainwindow.ui" line="1549"/>
         <location filename="../../src/app/tape/tmainwindow.cpp" line="1831"/>
         <source>Import from a pattern</source>
         <translation>Uvezi iz kroja</translation>
@@ -16696,7 +16706,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <location filename="../../src/app/tape/tmainwindow.cpp" line="796"/>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="5070"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="5133"/>
         <source>Pattern unit:</source>
         <translation>Jedinica kroja:</translation>
     </message>
@@ -16748,7 +16758,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <location filename="../../src/app/tape/tmainwindow.cpp" line="477"/>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="4167"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="4230"/>
         <source>File has unknown format.</source>
         <translation>Datoteka ima nepoznat format.</translation>
     </message>
@@ -16758,20 +16768,20 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <location filename="../../src/app/tape/tmainwindow.cpp" line="439"/>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="4129"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="4192"/>
         <source>File &apos;%1&apos; doesn&apos;t exist!</source>
         <translation>Datoteka &apos;%1&apos; ne postoji!</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="2268"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="2280"/>
         <source>The name of known measurement forbidden to change.</source>
         <translation>Naziv poznatog mjerenja nije dopušteno mijenjati.</translation>
     </message>
     <message>
         <location filename="../../src/app/tape/tmainwindow.cpp" line="1465"/>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="2234"/>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="2310"/>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="2520"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="2246"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="2358"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="2568"/>
         <source>Can&apos;t find measurement &apos;%1&apos;.</source>
         <translation>Nije moguće pronaći mjerenje &apos;%1&apos;.</translation>
     </message>
@@ -16788,7 +16798,7 @@ Do you want to save your changes?</source>
         <translation type="vanished">Vrijednost povećanja visine poznatog mjerenja nije dopušteno mijenjati.</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="2539"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="2587"/>
         <source>The full name of known measurement forbidden to change.</source>
         <translation>Puno ime poznatog mjerenja nije dopušteno mijenjati.</translation>
     </message>
@@ -16817,25 +16827,25 @@ Do you want to save your changes?</source>
         <translation>Izbriši mjerenje</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="5146"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="5209"/>
         <source>unknown</source>
         <comment>gender</comment>
         <translation>nepoznato</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="5147"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="5210"/>
         <source>male</source>
         <comment>gender</comment>
         <translation>muški</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="5148"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="5211"/>
         <source>female</source>
         <comment>gender</comment>
         <translation>ženski</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.ui" line="1073"/>
+        <location filename="../../src/app/tape/tmainwindow.ui" line="1090"/>
         <source>Gender:</source>
         <translation>Spol:</translation>
     </message>
@@ -16848,7 +16858,7 @@ Do you want to save your changes?</source>
         <translation type="vanished">Stvori iz postojeće ...</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.ui" line="1543"/>
+        <location filename="../../src/app/tape/tmainwindow.ui" line="1560"/>
         <source>Create from existing file</source>
         <translation>Stvori iz postojeće datoteke</translation>
     </message>
@@ -16862,8 +16872,8 @@ Do you want to save your changes?</source>
         <translation type="vanished">Izvoz standardnih mjerenja nije podržan.</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.ui" line="1270"/>
-        <location filename="../../src/app/tape/tmainwindow.ui" line="1589"/>
+        <location filename="../../src/app/tape/tmainwindow.ui" line="1287"/>
+        <location filename="../../src/app/tape/tmainwindow.ui" line="1606"/>
         <source>Measurement diagram</source>
         <translation>Dijagram mjerenja</translation>
     </message>
@@ -16876,12 +16886,12 @@ Do you want to save your changes?</source>
         <translation type="vanished">&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:340pt;&quot;&gt;?&lt;/span&gt;&lt;/p&gt;&lt;p align=&quot;center&quot;&gt;Nepoznato mjerenje&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="2945"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="2993"/>
         <source>About Qt</source>
         <translation>O Qt</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="3421"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="3470"/>
         <source>File was not saved yet.</source>
         <translation>Datoteka još nije spremljena.</translation>
     </message>
@@ -16922,7 +16932,7 @@ Do you want to save your changes?</source>
         <translation type="vanished">Spremi...</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="3486"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="3535"/>
         <source>Don&apos;t Save</source>
         <translation>Nemoj spremiti</translation>
     </message>
@@ -16951,7 +16961,7 @@ Do you want to save your changes?</source>
         <translation type="vanished">Dogodila se nepoznata pogreška, na primjer, puna particija spriječila je zapisivanje datoteke za zaključavanje.</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.ui" line="1557"/>
+        <location filename="../../src/app/tape/tmainwindow.ui" line="1574"/>
         <source>Export to CSV</source>
         <translation>Izvoz u CSV</translation>
     </message>
@@ -16974,7 +16984,7 @@ Do you want to save your changes?</source>
         <translation>Vrijednosti odvojene zarezima</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.ui" line="1021"/>
+        <location filename="../../src/app/tape/tmainwindow.ui" line="1038"/>
         <source>Customer&apos;s name</source>
         <translation>Ime kupca</translation>
     </message>
@@ -16983,7 +16993,7 @@ Do you want to save your changes?</source>
         <translation type="vanished">Prezime kupca</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.ui" line="1109"/>
+        <location filename="../../src/app/tape/tmainwindow.ui" line="1126"/>
         <source>Customer&apos;s email address</source>
         <translation>E-mail adresa kupca</translation>
     </message>
@@ -17005,12 +17015,12 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <location filename="../../src/app/tape/tmainwindow.cpp" line="952"/>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="2663"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="2711"/>
         <source>Could not save the file</source>
         <translation>Nije moguće spremiti datoteku</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="3822"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="3885"/>
         <source>read only</source>
         <translation>samo za čitanje</translation>
     </message>
@@ -17019,156 +17029,156 @@ Do you want to save your changes?</source>
         <location filename="../../src/app/tape/tmainwindow.cpp" line="664"/>
         <location filename="../../src/app/tape/tmainwindow.cpp" line="763"/>
         <location filename="../../src/app/tape/tmainwindow.cpp" line="987"/>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="2972"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="3020"/>
         <source>Multisize measurements</source>
         <translation>Mjerenja za više veličina</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="3976"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="4039"/>
         <source>Invalid result. Value is infinite or NaN. Please, check your calculations.</source>
         <translation>Nevažeći rezultat. Vrijednost je beskonačna ili NaN. Molimo, provjerite svoje izračune.</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="3420"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="3469"/>
         <source>Empty</source>
         <translation>Prazno</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.ui" line="1005"/>
+        <location filename="../../src/app/tape/tmainwindow.ui" line="1022"/>
         <source>Customer name:</source>
         <translation>Ime kupca:</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.ui" line="1502"/>
+        <location filename="../../src/app/tape/tmainwindow.ui" line="1519"/>
         <source>Open multisize …</source>
         <translation>Otvori više veličina …</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.ui" line="1540"/>
+        <location filename="../../src/app/tape/tmainwindow.ui" line="1557"/>
         <source>Create from existing …</source>
         <translation>Stvori iz postojećeg …</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="3481"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="3530"/>
         <source>Save…</source>
         <translation>Spremi…</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.ui" line="1568"/>
-        <location filename="../../src/app/tape/tmainwindow.ui" line="1571"/>
+        <location filename="../../src/app/tape/tmainwindow.ui" line="1585"/>
+        <location filename="../../src/app/tape/tmainwindow.ui" line="1588"/>
         <location filename="../../src/app/tape/tmainwindow.cpp" line="1119"/>
         <source>Import from CSV</source>
         <translation>Uvezi iz CSV-a</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="4367"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="4430"/>
         <source>Individual measurements require at least 2 columns.</source>
         <translation>Pojedinačna mjerenja zahtijevaju najmanje 2 stupca.</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="4448"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="4511"/>
         <source>Multisize measurements require at least 4 columns.</source>
         <translation>Mjerenja za više veličina zahtijevaju najmanje 4 stupca.</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="4319"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="4382"/>
         <source>Imported file must not contain the same name twice.</source>
         <translation>Uvezena datoteka ne smije sadržavati isti naziv dvaput.</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="4092"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="4155"/>
         <source>Cannot save settings. Access denied.</source>
         <translation>Ne mogu spremiti postavke. Pristup odbijen.</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.ui" line="1156"/>
+        <location filename="../../src/app/tape/tmainwindow.ui" line="1173"/>
         <source>&amp;File</source>
         <translation>&amp;Datoteka</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.ui" line="1179"/>
+        <location filename="../../src/app/tape/tmainwindow.ui" line="1196"/>
         <source>&amp;Window</source>
         <translation>&amp;Prozor</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.ui" line="1184"/>
+        <location filename="../../src/app/tape/tmainwindow.ui" line="1201"/>
         <source>&amp;Help</source>
         <translation>&amp;Pomoć</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.ui" line="1192"/>
+        <location filename="../../src/app/tape/tmainwindow.ui" line="1209"/>
         <source>&amp;Measurements</source>
         <translation>&amp;Mjerenja</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.ui" line="1374"/>
+        <location filename="../../src/app/tape/tmainwindow.ui" line="1391"/>
         <source>&amp;Open individual …</source>
         <translation>&amp;Otvori pojedinačna …</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.ui" line="1388"/>
+        <location filename="../../src/app/tape/tmainwindow.ui" line="1405"/>
         <source>&amp;Save</source>
         <translation>&amp;Spremi</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.ui" line="1402"/>
+        <location filename="../../src/app/tape/tmainwindow.ui" line="1419"/>
         <source>Save &amp;As …</source>
         <translation>Spremi &amp;Kao …</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.ui" line="1413"/>
+        <location filename="../../src/app/tape/tmainwindow.ui" line="1430"/>
         <source>&amp;Quit</source>
         <translation>&amp;Izlaz</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.ui" line="1432"/>
+        <location filename="../../src/app/tape/tmainwindow.ui" line="1449"/>
         <source>&amp;About Tape</source>
         <translation>&amp;O Tape</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.ui" line="1443"/>
+        <location filename="../../src/app/tape/tmainwindow.ui" line="1460"/>
         <source>&amp;New</source>
         <translation>&amp;Novi</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="4071"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="4134"/>
         <source>Cannot read settings from a malformed .INI file.</source>
         <translation>Ne mogu čitati postavke iz neispravno oblikovane .INI datoteke.</translation>
     </message>
     <message>
         <location filename="../../src/app/tape/tmainwindow.ui" line="326"/>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="4864"/>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="4880"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="4927"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="4943"/>
         <source>Name</source>
         <comment>measurement column</comment>
         <translation>Naziv</translation>
     </message>
     <message>
         <location filename="../../src/app/tape/tmainwindow.ui" line="331"/>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="4866"/>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="4885"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="4929"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="4948"/>
         <source>Full name</source>
         <comment>measurement column</comment>
         <translation>Puno ime</translation>
     </message>
     <message>
         <location filename="../../src/app/tape/tmainwindow.ui" line="336"/>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="4868"/>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="4890"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="4931"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="4953"/>
         <source>Calculated value</source>
         <comment>measurement column</comment>
         <translation>Izračunata vrijednost</translation>
     </message>
     <message>
         <location filename="../../src/app/tape/tmainwindow.ui" line="341"/>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="4870"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="4933"/>
         <source>Formula</source>
         <comment>measurement column</comment>
         <translation>Formula</translation>
     </message>
     <message>
         <location filename="../../src/app/tape/tmainwindow.ui" line="346"/>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="4895"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="4958"/>
         <source>Base value</source>
         <comment>measurement column</comment>
         <translation>Osnovna vrijednost</translation>
@@ -17210,83 +17220,93 @@ Do you want to save your changes?</source>
         <translation>Odaberite jednu od dimenzija kako biste kasnije koristili vrijednost mjerenja u oznaci komada</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.ui" line="906"/>
+        <location filename="../../src/app/tape/tmainwindow.ui" line="821"/>
+        <source>Alias:</source>
+        <translation type="unfinished">Pseudonim:</translation>
+    </message>
+    <message>
+        <location filename="../../src/app/tape/tmainwindow.ui" line="828"/>
+        <source>Optional text alias for this value. Useful for referencing in pattern piece labels</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/app/tape/tmainwindow.ui" line="923"/>
         <source>Known measurements:</source>
         <translation>Poznata mjerenja:</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.ui" line="938"/>
+        <location filename="../../src/app/tape/tmainwindow.ui" line="955"/>
         <source>Base Values:</source>
         <translation>Osnovne vrijednosti:</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.ui" line="1291"/>
+        <location filename="../../src/app/tape/tmainwindow.ui" line="1308"/>
         <source>Add image</source>
         <translation>Dodaj sliku</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.ui" line="1308"/>
+        <location filename="../../src/app/tape/tmainwindow.ui" line="1325"/>
         <source>Remove image</source>
         <translation>Ukloni sliku</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.ui" line="1325"/>
+        <location filename="../../src/app/tape/tmainwindow.ui" line="1342"/>
         <source>Save image</source>
         <translation>Spremi sliku</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.ui" line="1603"/>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="2619"/>
+        <location filename="../../src/app/tape/tmainwindow.ui" line="1620"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="2667"/>
         <source>Export to individual</source>
         <translation>Izvezi u pojedinačna</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.ui" line="1606"/>
+        <location filename="../../src/app/tape/tmainwindow.ui" line="1623"/>
         <source>Export to individual measurements</source>
         <translation>Izvezi u pojedinačna mjerenja</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.ui" line="1620"/>
+        <location filename="../../src/app/tape/tmainwindow.ui" line="1637"/>
         <source>Use full circumference</source>
         <translation>Koristi cijeli opseg</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.ui" line="1634"/>
+        <location filename="../../src/app/tape/tmainwindow.ui" line="1651"/>
         <source>Restrict second dimension</source>
         <translation>Ograniči drugu dimenziju</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.ui" line="1648"/>
+        <location filename="../../src/app/tape/tmainwindow.ui" line="1665"/>
         <source>Restrict third dimension</source>
         <translation>Ograniči treću dimenziju</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.ui" line="1662"/>
+        <location filename="../../src/app/tape/tmainwindow.ui" line="1679"/>
         <source>Dimension labels</source>
         <translation>Oznake dimenzija</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.ui" line="1716"/>
+        <location filename="../../src/app/tape/tmainwindow.ui" line="1733"/>
         <source>Create Known Measurements</source>
         <translation>Stvori poznata mjerenja</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.ui" line="1727"/>
+        <location filename="../../src/app/tape/tmainwindow.ui" line="1744"/>
         <source>Edit current Known Measurements</source>
         <translation>Uredi trenutna poznata mjerenja</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.ui" line="1738"/>
+        <location filename="../../src/app/tape/tmainwindow.ui" line="1755"/>
         <source>Always on top</source>
         <translation>Uvijek na vrhu</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.ui" line="1741"/>
+        <location filename="../../src/app/tape/tmainwindow.ui" line="1758"/>
         <source>Keep window always on top</source>
         <translation>Drži prozor uvijek na vrhu</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.ui" line="1749"/>
+        <location filename="../../src/app/tape/tmainwindow.ui" line="1766"/>
         <source>Settings Directory</source>
         <translation type="unfinished"></translation>
     </message>
@@ -17347,102 +17367,102 @@ Do you want to save your changes?</source>
         <translation>Nije moguće prikazati sliku. Pogreška: %1</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="2618"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="2666"/>
         <source>measurements.vit</source>
         <translation>mjerenja.vit</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="2928"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="2976"/>
         <source>Unknown known measurements: %1</source>
         <translation>Nepoznata poznata mjerenja: %1</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="3343"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="3392"/>
         <source>Shift (%1):</source>
         <translation>Pomak (%1):</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="3473"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="3522"/>
         <source>Measurements have been modified. Do you want to save your changes?</source>
         <translation>Mjerenja su izmijenjena. Želite li spremiti svoje promjene?</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="4761"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="4824"/>
         <source>Unknown measurement</source>
         <translation>Nepoznato mjerenje</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="4797"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="4860"/>
         <source>None</source>
         <translation>Ništa</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="4806"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="4869"/>
         <source>Invalid link</source>
         <translation>Nevažeća veza</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="4872"/>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="4926"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="4935"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="4989"/>
         <source>Description</source>
         <comment>measurement column</comment>
         <translation>Opis</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="4906"/>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="4915"/>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="4921"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="4969"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="4978"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="4984"/>
         <source>Shift</source>
         <comment>measurement column</comment>
         <translation>Pomak</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="5314"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="5377"/>
         <source>Empty</source>
         <comment>list</comment>
         <translation>Prazno</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="5393"/>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="5403"/>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="5413"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="5456"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="5466"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="5476"/>
         <source>%1 shift</source>
         <translation>%1 pomak</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="4538"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="4601"/>
         <source>Cannot convert base value to double in column 2.</source>
         <translation>Nije moguće pretvoriti osnovnu vrijednost u decimalni broj u stupcu 2.</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="4542"/>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="4548"/>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="4555"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="4605"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="4611"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="4618"/>
         <source>Cannot convert shift value to double in column %1.</source>
         <translation>Nije moguće pretvoriti vrijednost pomaka u decimalni broj u stupcu %1.</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="5117"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="5180"/>
         <source>Millimeters</source>
         <translation>Milimetri</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="5120"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="5183"/>
         <source>Inches</source>
         <translation>Inči</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="5123"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="5186"/>
         <source>Centimeters</source>
         <translation>Centimetri</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="5132"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="5195"/>
         <source>Degrees</source>
         <translation>Stupnjevi</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.ui" line="1676"/>
+        <location filename="../../src/app/tape/tmainwindow.ui" line="1693"/>
         <source>Restrict first dimension</source>
         <translation>Ograniči prvu dimenziju</translation>
     </message>
@@ -17463,7 +17483,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <location filename="../../src/app/tape/tmainwindow.ui" line="115"/>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="5231"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="5294"/>
         <source>0 results</source>
         <translation>0 rezultata</translation>
     </message>
@@ -17513,43 +17533,43 @@ Do you want to save your changes?</source>
         <translation>F3</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.ui" line="1694"/>
+        <location filename="../../src/app/tape/tmainwindow.ui" line="1711"/>
         <source>Add separator</source>
         <translation>Dodaj separator</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.ui" line="1705"/>
+        <location filename="../../src/app/tape/tmainwindow.ui" line="1722"/>
         <source>Dimension custom names</source>
         <translation>Prilagođena imena dimenzija</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="4314"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="4377"/>
         <source>Measurement name is empty.</source>
         <translation>Ime mjerenja je prazno.</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="4324"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="4387"/>
         <source>Measurement &apos;%1&apos; doesn&apos;t match regex pattern.</source>
         <translation>Mjerenje &apos;%1&apos; ne odgovara obrascu regularnog izraza.</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="4329"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="4392"/>
         <source>Measurement &apos;%1&apos; already used in the file.</source>
         <translation>Mjerenje &apos;%1&apos; je već upotrijebljeno u datoteci.</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="4382"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="4445"/>
         <source>Error in row %1. The measurement name is empty.</source>
         <translation>Pogreška u retku %1. Ime mjerenja je prazno.</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="4520"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="4583"/>
         <source>The measurement name is empty.</source>
         <translation>Ime mjerenja je prazno.</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="4415"/>
-        <location filename="../../src/app/tape/tmainwindow.cpp" line="4471"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="4478"/>
+        <location filename="../../src/app/tape/tmainwindow.cpp" line="4534"/>
         <source>Error in row %1. %2</source>
         <translation>Pogreška u retku %1. %2</translation>
     </message>
@@ -19121,14 +19141,6 @@ Do you want to save your changes?</source>
     <message>
         <source>Error replacing a symlink by real file: %1.</source>
         <translation type="vanished">Greška pri zamjeni simboličke veze stvarnom datotekom: %1.</translation>
-    </message>
-    <message>
-        <source>Invalid version. Minimum supported format version is %1</source>
-        <translation type="vanished">Neispravna verzija. Minimalno podržana verzija formata je %1</translation>
-    </message>
-    <message>
-        <source>Invalid version. Maximum supported format version is %1</source>
-        <translation type="vanished">Neispravna verzija. Maksimalno podržana verzija formata je %1</translation>
     </message>
     <message>
         <location filename="../../src/libs/ifc/xml/vabstractconverter.cpp" line="236"/>
@@ -21473,12 +21485,12 @@ Do you want to save your changes?</source>
 <context>
     <name>VLayoutPiece</name>
     <message>
-        <location filename="../../src/libs/vlayout/vlayoutpiece.cpp" line="701"/>
+        <location filename="../../src/libs/vlayout/vlayoutpiece.cpp" line="702"/>
         <source>Piece %1 doesn&apos;t have shape.</source>
         <translation>Krojni dio %1 nema oblik.</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vlayout/vlayoutpiece.cpp" line="1989"/>
+        <location filename="../../src/libs/vlayout/vlayoutpiece.cpp" line="1990"/>
         <source>Invalid SVG font &apos;%1&apos;. Fallback to outline font.</source>
         <translation>Nevažeći SVG font &apos;%1&apos;. Prelazak na konturu fonta.</translation>
     </message>
@@ -21486,53 +21498,55 @@ Do you want to save your changes?</source>
 <context>
     <name>VMeasurements</name>
     <message>
-        <location filename="../../src/libs/vformat/vmeasurements.cpp" line="668"/>
-        <location filename="../../src/libs/vformat/vmeasurements.cpp" line="681"/>
-        <location filename="../../src/libs/vformat/vmeasurements.cpp" line="694"/>
-        <location filename="../../src/libs/vformat/vmeasurements.cpp" line="707"/>
-        <location filename="../../src/libs/vformat/vmeasurements.cpp" line="720"/>
-        <location filename="../../src/libs/vformat/vmeasurements.cpp" line="733"/>
-        <location filename="../../src/libs/vformat/vmeasurements.cpp" line="747"/>
-        <location filename="../../src/libs/vformat/vmeasurements.cpp" line="775"/>
-        <location filename="../../src/libs/vformat/vmeasurements.cpp" line="789"/>
-        <location filename="../../src/libs/vformat/vmeasurements.cpp" line="802"/>
-        <location filename="../../src/libs/vformat/vmeasurements.cpp" line="818"/>
-        <location filename="../../src/libs/vformat/vmeasurements.cpp" line="831"/>
+        <location filename="../../src/libs/vformat/vmeasurements.cpp" line="760"/>
+        <location filename="../../src/libs/vformat/vmeasurements.cpp" line="773"/>
+        <location filename="../../src/libs/vformat/vmeasurements.cpp" line="786"/>
+        <location filename="../../src/libs/vformat/vmeasurements.cpp" line="799"/>
+        <location filename="../../src/libs/vformat/vmeasurements.cpp" line="812"/>
+        <location filename="../../src/libs/vformat/vmeasurements.cpp" line="825"/>
+        <location filename="../../src/libs/vformat/vmeasurements.cpp" line="839"/>
+        <location filename="../../src/libs/vformat/vmeasurements.cpp" line="867"/>
+        <location filename="../../src/libs/vformat/vmeasurements.cpp" line="895"/>
+        <location filename="../../src/libs/vformat/vmeasurements.cpp" line="911"/>
+        <location filename="../../src/libs/vformat/vmeasurements.cpp" line="925"/>
+        <location filename="../../src/libs/vformat/vmeasurements.cpp" line="938"/>
+        <location filename="../../src/libs/vformat/vmeasurements.cpp" line="954"/>
+        <location filename="../../src/libs/vformat/vmeasurements.cpp" line="967"/>
         <source>Can&apos;t find measurement &apos;%1&apos;</source>
         <translation>Ne mogu pronaći mjeru &apos;%1&apos;</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vformat/vmeasurements.cpp" line="1260"/>
+        <location filename="../../src/libs/vformat/vmeasurements.cpp" line="1396"/>
         <source>The measurement name is empty!</source>
         <translation>Naziv mjere je prazan!</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vformat/vmeasurements.cpp" line="1066"/>
+        <location filename="../../src/libs/vformat/vmeasurements.cpp" line="1202"/>
         <source>None</source>
         <translation>Ništa</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vformat/vmeasurements.cpp" line="1068"/>
+        <location filename="../../src/libs/vformat/vmeasurements.cpp" line="1204"/>
         <source>Height</source>
         <translation>Visina</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vformat/vmeasurements.cpp" line="1070"/>
+        <location filename="../../src/libs/vformat/vmeasurements.cpp" line="1206"/>
         <source>Size</source>
         <translation>Veličina</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vformat/vmeasurements.cpp" line="1074"/>
+        <location filename="../../src/libs/vformat/vmeasurements.cpp" line="1210"/>
         <source>Hip</source>
         <translation>Bokovi</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vformat/vmeasurements.cpp" line="1364"/>
+        <location filename="../../src/libs/vformat/vmeasurements.cpp" line="1500"/>
         <source>Dimension is not valid</source>
         <translation>Dimenzija nije valjana</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vformat/vmeasurements.cpp" line="1072"/>
+        <location filename="../../src/libs/vformat/vmeasurements.cpp" line="1208"/>
         <source>Waist</source>
         <translation>Struk</translation>
     </message>
