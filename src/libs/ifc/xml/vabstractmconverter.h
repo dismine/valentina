@@ -38,6 +38,8 @@
 
 class VAbstractMConverter : public VAbstractConverter
 {
+    Q_OBJECT // NOLINT
+
 public:
     explicit VAbstractMConverter(const QString &fileName);
     ~VAbstractMConverter() override = default;

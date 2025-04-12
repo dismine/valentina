@@ -49,7 +49,7 @@ public:
     static const QString MeasurementMaxVerStr;
     static const QString CurrentSchema;
     static constexpr const unsigned MeasurementMinVer = FormatVersion(0, 2, 0);
-    static constexpr const unsigned MeasurementMaxVer = FormatVersion(0, 6, 1);
+    static constexpr const unsigned MeasurementMaxVer = FormatVersion(0, 6, 2);
 
     static auto XSDSchemas() -> QHash<unsigned, QString>;
 
@@ -86,6 +86,7 @@ private:
     void ToV0_3_3();
     void ToV0_4_0();
     void ToV0_6_1();
+    void ToV0_6_2();
 };
 
 //---------------------------------------------------------------------------------------------------------------------

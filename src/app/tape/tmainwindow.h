@@ -134,6 +134,7 @@ private slots:
     void DeployFormula();
 
     void SaveMName(const QString &text);
+    void SaveMValueAlias(const QString &text);
     void SaveMValue();
     void SaveMBaseValue(double value);
     void SaveMShiftA(double value);

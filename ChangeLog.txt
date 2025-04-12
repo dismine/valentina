@@ -49,6 +49,7 @@
 - Puzzle app. Export PDF tiles. Make the ruler optional.
 - DXF AAMA/ASTM. Compatibility export with Clo3D.
 - Puzzle app. Optimization tile PDFs for pen plotter.
+- Measurement value alias.
 
 # Valentina 0.7.53 June 25, 2024
 - Fix layout sheet export with empty name.

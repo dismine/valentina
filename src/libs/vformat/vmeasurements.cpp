@@ -94,6 +94,7 @@ const QString VMeasurements::AttrSpecialUnits = QStringLiteral("specialUnits");
 const QString VMeasurements::AttrDescription = QStringLiteral("description");
 const QString VMeasurements::AttrName = QStringLiteral("name");
 const QString VMeasurements::AttrFullName = QStringLiteral("full_name");
+const QString VMeasurements::AttrValueAlias = QStringLiteral("valueAlias");
 const QString VMeasurements::AttrMin = QStringLiteral("min");
 const QString VMeasurements::AttrMax = QStringLiteral("max");
 const QString VMeasurements::AttrStep = QStringLiteral("step");
@@ -127,6 +128,103 @@ QT_WARNING_POP
 auto FileComment() -> QString
 {
     return u"Measurements created with Valentina v%1 (https://smart-pattern.com.ua/)."_s.arg(AppVersionStr());
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+auto ReadCorrections(const QDomElement &mElement) -> QMap<QString, VMeasurementCorrection>
+{
+    if (mElement.isNull())
+    {
+        return {};
+    }
+
+    QDomElement const correctionsTag = mElement.firstChildElement(VMeasurements::TagCorrections);
+    if (correctionsTag.isNull())
+    {
+        return {};
+    }
+
+    QMap<QString, VMeasurementCorrection> corrections;
+
+    QDomNode correctionTag = correctionsTag.firstChild();
+    while (not correctionTag.isNull())
+    {
+        if (correctionTag.isElement())
+        {
+            const QDomElement c = correctionTag.toElement();
+            const QString hash = VDomDocument::GetParametrString(c, VMeasurements::AttrCoordinates);
+
+            VMeasurementCorrection correction;
+            correction.correction = VDomDocument::GetParametrDouble(c, VMeasurements::AttrCorrection, QChar('0'));
+            correction.alias = VDomDocument::GetParametrEmptyString(c, AttrAlias);
+
+            corrections.insert(hash, correction);
+        }
+        correctionTag = correctionTag.nextSibling();
+    }
+
+    return corrections;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+auto EvalFormula(VContainer *data, const QString &formula, bool *ok) -> qreal
+{
+    if (formula.isEmpty())
+    {
+        *ok = true;
+        return 0;
+    }
+
+    try
+    {
+        QScopedPointer<Calculator> const cal(new Calculator());
+        const qreal result = cal->EvalFormula(data->DataVariables(), formula);
+
+        (qIsInf(result) || qIsNaN(result)) ? *ok = false : *ok = true;
+        return result;
+    }
+    catch (qmu::QmuParserError &e)
+    {
+        Q_UNUSED(e)
+        *ok = false;
+        return 0;
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+auto ReadDimensionLabels(const QDomElement &dElement) -> DimesionLabels
+{
+    if (dElement.isNull())
+    {
+        return {};
+    }
+
+    QDomElement const labelsTag = dElement.firstChildElement(VMeasurements::TagLabels);
+    if (labelsTag.isNull())
+    {
+        return {};
+    }
+
+    DimesionLabels labels;
+
+    QDomNode labelTag = labelsTag.firstChild();
+    while (not labelTag.isNull())
+    {
+        if (labelTag.isElement())
+        {
+            const QDomElement l = labelTag.toElement();
+            const qreal value = VDomDocument::GetParametrDouble(l, VMeasurements::AttrValue, QChar('0'));
+            const QString label = VDomDocument::GetParametrEmptyString(l, VMeasurements::AttrLabel);
+
+            if (value > 0 && not label.isEmpty())
+            {
+                labels.insert(value, label);
+            }
+        }
+        labelTag = labelTag.nextSibling();
+    }
+
+    return labels;
 }
 } // namespace
 
@@ -440,8 +538,7 @@ auto VMeasurements::DimensionABase() const -> qreal
 {
     if (type == MeasurementsType::Multisize)
     {
-        const auto dimensions = Dimensions();
-        if (not dimensions.isEmpty())
+        if (const auto dimensions = Dimensions(); not dimensions.isEmpty())
         {
             return dimensions.first()->BaseValue();
         }
@@ -455,8 +552,7 @@ auto VMeasurements::DimensionBBase() const -> qreal
 {
     if (type == MeasurementsType::Multisize)
     {
-        const auto dimensions = Dimensions();
-        if (not dimensions.isEmpty() && dimensions.size() >= 2)
+        if (const auto dimensions = Dimensions(); not dimensions.isEmpty() && dimensions.size() >= 2)
         {
             return dimensions.values().at(1)->BaseValue();
         }
@@ -470,8 +566,7 @@ auto VMeasurements::DimensionCBase() const -> qreal
 {
     if (type == MeasurementsType::Multisize)
     {
-        const auto dimensions = Dimensions();
-        if (not dimensions.isEmpty() && dimensions.size() == 3)
+        if (const auto dimensions = Dimensions(); not dimensions.isEmpty() && dimensions.size() == 3)
         {
             return dimensions.last()->BaseValue();
         }
@@ -485,8 +580,7 @@ auto VMeasurements::DimensionAStep() const -> qreal
 {
     if (type == MeasurementsType::Multisize)
     {
-        const auto dimensions = Dimensions();
-        if (not dimensions.isEmpty())
+        if (const auto dimensions = Dimensions(); not dimensions.isEmpty())
         {
             return dimensions.first()->Step();
         }
@@ -500,8 +594,7 @@ auto VMeasurements::DimensionBStep() const -> qreal
 {
     if (type == MeasurementsType::Multisize)
     {
-        const auto dimensions = Dimensions();
-        if (not dimensions.isEmpty() && dimensions.size() >= 2)
+        if (const auto dimensions = Dimensions(); not dimensions.isEmpty() && dimensions.size() >= 2)
         {
             return dimensions.values().at(1)->Step();
         }
@@ -515,8 +608,7 @@ auto VMeasurements::DimensionCStep() const -> qreal
 {
     if (type == MeasurementsType::Multisize)
     {
-        const auto dimensions = Dimensions();
-        if (not dimensions.isEmpty() && dimensions.size() == 3)
+        if (const auto dimensions = Dimensions(); not dimensions.isEmpty() && dimensions.size() == 3)
         {
             return dimensions.last()->Step();
         }
@@ -753,22 +845,66 @@ void VMeasurements::SetMCorrectionValue(const QString &name, qreal baseA, qreal 
 {
     if (QDomElement mElement = FindM(name); not mElement.isNull())
     {
-        QMap<QString, qreal> corrections = ReadCorrections(mElement);
+        QMap<QString, VMeasurementCorrection> corrections = ReadCorrections(mElement);
         const QString hash = VMeasurement::CorrectionHash(baseA, baseB, baseC);
 
-        if (not qFuzzyIsNull(value))
+        VMeasurementCorrection c = corrections.value(hash);
+        c.correction = value;
+
+        if (qFuzzyIsNull(c.correction) && c.alias.isEmpty())
         {
-            corrections.insert(hash, value);
+            corrections.remove(hash);
         }
         else
         {
-            if (corrections.contains(hash))
-            {
-                corrections.remove(hash);
-            }
+            corrections.insert(hash, c);
         }
 
         WriteCorrections(mElement, corrections);
+    }
+    else
+    {
+        qWarning() << tr("Can't find measurement '%1'").arg(name);
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VMeasurements::SetMValueAlias(const QString &name, qreal baseA, qreal baseB, qreal baseC, const QString &alias)
+{
+    if (QDomElement mElement = FindM(name); not mElement.isNull())
+    {
+        QMap<QString, VMeasurementCorrection> corrections = ReadCorrections(mElement);
+        const QString hash = VMeasurement::CorrectionHash(baseA, baseB, baseC);
+
+        VMeasurementCorrection c = corrections.value(hash);
+        c.alias = alias;
+
+        if (qFuzzyIsNull(c.correction) && c.alias.isEmpty())
+        {
+            corrections.remove(hash);
+        }
+        else
+        {
+            corrections.insert(hash, c);
+        }
+
+        WriteCorrections(mElement, corrections);
+    }
+    else
+    {
+        qWarning() << tr("Can't find measurement '%1'").arg(name);
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VMeasurements::SetMValueAlias(const QString &name, const QString &alias)
+{
+    if (QDomElement node = FindM(name); not node.isNull())
+    {
+        SetAttributeOrRemoveIf<QString>(node,
+                                        AttrValueAlias,
+                                        alias,
+                                        [](const QString &alias) noexcept { return alias.isEmpty(); });
     }
     else
     {
@@ -1102,11 +1238,11 @@ auto VMeasurements::ListKnown() const -> QStringList
     QStringList listNames;
     const QStringList list = ListAll();
     listNames.reserve(list.size());
-    for (int i = 0; i < list.size(); ++i)
+    for (const auto &i : list)
     {
-        if (list.at(i).indexOf(CustomMSign) != 0)
+        if (i.indexOf(CustomMSign) != 0)
         {
-            listNames.append(list.at(i));
+            listNames.append(i);
         }
     }
 
@@ -1373,68 +1509,9 @@ auto VMeasurements::ReadDimensions() const -> VDimensions
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-auto VMeasurements::EvalFormula(VContainer *data, const QString &formula, bool *ok) const -> qreal
+void VMeasurements::WriteCorrections(QDomElement &mElement, const QMap<QString, VMeasurementCorrection> &corrections)
 {
-    if (formula.isEmpty())
-    {
-        *ok = true;
-        return 0;
-    }
-
-    try
-    {
-        QScopedPointer<Calculator> const cal(new Calculator());
-        const qreal result = cal->EvalFormula(data->DataVariables(), formula);
-
-        (qIsInf(result) || qIsNaN(result)) ? *ok = false : *ok = true;
-        return result;
-    }
-    catch (qmu::QmuParserError &e)
-    {
-        Q_UNUSED(e)
-        *ok = false;
-        return 0;
-    }
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-auto VMeasurements::ReadCorrections(const QDomElement &mElement) const -> QMap<QString, qreal>
-{
-    if (mElement.isNull())
-    {
-        return {};
-    }
-
-    QDomElement const correctionsTag = mElement.firstChildElement(TagCorrections);
-    if (correctionsTag.isNull())
-    {
-        return {};
-    }
-
-    QMap<QString, qreal> corrections;
-
-    QDomNode correctionTag = correctionsTag.firstChild();
-    while (not correctionTag.isNull())
-    {
-        if (correctionTag.isElement())
-        {
-            const QDomElement c = correctionTag.toElement();
-            const QString hash = GetParametrString(c, AttrCoordinates);
-            const qreal correction = GetParametrDouble(c, AttrCorrection, QChar('0'));
-
-            corrections.insert(hash, correction);
-        }
-        correctionTag = correctionTag.nextSibling();
-    }
-
-    return corrections;
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-void VMeasurements::WriteCorrections(QDomElement &mElement, const QMap<QString, qreal> &corrections)
-{
-    QDomElement correctionsTag = mElement.firstChildElement(TagCorrections);
-    if (not corrections.isEmpty())
+    if (QDomElement correctionsTag = mElement.firstChildElement(TagCorrections); not corrections.isEmpty())
     {
         if (not correctionsTag.isNull())
         {
@@ -1446,13 +1523,24 @@ void VMeasurements::WriteCorrections(QDomElement &mElement, const QMap<QString, 
             mElement.appendChild(correctionsTag);
         }
 
-        QMap<QString, qreal>::const_iterator i = corrections.constBegin();
+        QMap<QString, VMeasurementCorrection>::const_iterator i = corrections.constBegin();
         while (i != corrections.constEnd())
         {
             QDomElement correctionTag = createElement(TagCorrection);
 
-            SetAttribute(correctionTag, AttrCorrection, i.value());
-            SetAttribute(correctionTag, AttrCoordinates, i.key());
+            SetAttributeOrRemoveIf<QString>(correctionTag,
+                                            AttrCoordinates,
+                                            i.key(),
+                                            [i](const QString &)
+                                            { return qFuzzyIsNull(i.value().correction) && i.value().alias.isEmpty(); });
+            SetAttributeOrRemoveIf<qreal>(correctionTag,
+                                          AttrCorrection,
+                                          i.value().correction,
+                                          [](qreal c) { return qFuzzyIsNull(c); });
+            SetAttributeOrRemoveIf<QString>(correctionTag,
+                                            AttrAlias,
+                                            i.value().alias,
+                                            [](const QString &alias) { return alias.isEmpty(); });
 
             correctionsTag.appendChild(correctionTag);
             ++i;
@@ -1558,42 +1646,6 @@ void VMeasurements::SaveDimesionLabels(QDomElement &dElement, const DimesionLabe
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-auto VMeasurements::ReadDimensionLabels(const QDomElement &dElement) const -> DimesionLabels
-{
-    if (dElement.isNull())
-    {
-        return {};
-    }
-
-    QDomElement const labelsTag = dElement.firstChildElement(TagLabels);
-    if (labelsTag.isNull())
-    {
-        return {};
-    }
-
-    DimesionLabels labels;
-
-    QDomNode labelTag = labelsTag.firstChild();
-    while (not labelTag.isNull())
-    {
-        if (labelTag.isElement())
-        {
-            const QDomElement l = labelTag.toElement();
-            const qreal value = GetParametrDouble(l, AttrValue, QChar('0'));
-            const QString label = GetParametrEmptyString(l, AttrLabel);
-
-            if (value > 0 && not label.isEmpty())
-            {
-                labels.insert(value, label);
-            }
-        }
-        labelTag = labelTag.nextSibling();
-    }
-
-    return labels;
-}
-
-//---------------------------------------------------------------------------------------------------------------------
 void VMeasurements::ClearDimension(IMD type)
 {
     const QString d = VMeasurements::IMDToStr(type);
@@ -1625,7 +1677,7 @@ void VMeasurements::ReadMeasurement(const QDomElement &dom, QSharedPointer<VCont
         qreal shiftA = GetParametrDouble(dom, AttrShiftA, QChar('0'));
         qreal shiftB = GetParametrDouble(dom, AttrShiftB, QChar('0'));
         qreal shiftC = GetParametrDouble(dom, AttrShiftC, QChar('0'));
-        QMap<QString, qreal> corrections = ReadCorrections(dom);
+        QMap<QString, VMeasurementCorrection> corrections = ReadCorrections(dom);
 
         qreal convertedBaseA = DimensionABase();
         qreal convertedBaseB = DimensionBBase();
@@ -1645,7 +1697,9 @@ void VMeasurements::ReadMeasurement(const QDomElement &dom, QSharedPointer<VCont
             while (iterator.hasNext())
             {
                 iterator.next();
-                iterator.setValue(UnitConvertor(iterator.value(), Units(), *data->GetPatternUnit()));
+                VMeasurementCorrection c = iterator.value();
+                c.correction = UnitConvertor(c.correction, Units(), *data->GetPatternUnit());
+                iterator.setValue(c);
             }
 
             convertedBaseA = UnitConvertor(convertedBaseA, Units(), *data->GetPatternUnit());
@@ -1698,12 +1752,15 @@ void VMeasurements::ReadMeasurement(const QDomElement &dom, QSharedPointer<VCont
             value = UnitConvertor(value, Units(), *data->GetPatternUnit());
         }
 
+        const QString alias = GetParametrEmptyString(dom, AttrValueAlias);
+
         meash = QSharedPointer<VMeasurement>::create(data, static_cast<quint32>(i), name, value, formula, ok);
         meash->SetGuiText(fullName);
         meash->SetDescription(description);
         meash->SetSpecialUnits(specialUnits);
         meash->SetDimension(dimension);
         meash->SetKnownMeasurementsId(KnownMeasurements());
+        meash->SetValueAlias(alias);
 
         if (meash->IsCustom())
         {

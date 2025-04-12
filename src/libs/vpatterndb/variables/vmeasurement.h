@@ -34,10 +34,10 @@
 #include <QString>
 #include <QStringList>
 #include <QTypeInfo>
+#include <QUuid>
 #include <QtGlobal>
 
 #include "../vmisc/def.h"
-#include "quuid.h"
 #include "vvariable.h"
 
 class VContainer;
@@ -118,11 +118,16 @@ public:
 
     auto GetCorrection(qreal baseA, qreal baseB, qreal baseC) const -> qreal;
 
-    auto GetCorrections() const -> QMap<QString, qreal>;
-    void SetCorrections(const QMap<QString, qreal> &corrections);
+    auto GetCorrections() const -> QMap<QString, VMeasurementCorrection>;
+    void SetCorrections(const QMap<QString, VMeasurementCorrection> &corrections);
 
     auto GetImage() const -> VPatternImage;
     void SetImage(const VPatternImage &image);
+
+    auto GetValueAlias(qreal baseA, qreal baseB, qreal baseC) const -> QString;
+
+    auto GetValueAlias() const -> QString;
+    void SetValueAlias(const QString &alias);
 
     static auto CorrectionHash(qreal baseA, qreal baseB = 0, qreal baseC = 0) -> QString;
 

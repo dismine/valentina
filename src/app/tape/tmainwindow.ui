@@ -743,14 +743,14 @@
                 </property>
                </widget>
               </item>
-              <item row="10" column="0">
+              <item row="11" column="0">
                <widget class="QLabel" name="labelFullName">
                 <property name="text">
                  <string>Full name:</string>
                 </property>
                </widget>
               </item>
-              <item row="10" column="1">
+              <item row="11" column="1">
                <widget class="QLineEdit" name="lineEditFullName">
                 <property name="enabled">
                  <bool>false</bool>
@@ -766,14 +766,14 @@
                 </property>
                </widget>
               </item>
-              <item row="11" column="0">
+              <item row="12" column="0">
                <widget class="QLabel" name="label_7">
                 <property name="text">
                  <string>Description:</string>
                 </property>
                </widget>
               </item>
-              <item row="11" column="1">
+              <item row="12" column="1">
                <widget class="VPlainTextEdit" name="plainTextEditDescription">
                 <property name="enabled">
                  <bool>false</bool>
@@ -812,6 +812,23 @@
                 </property>
                 <property name="toolTip">
                  <string>Select one of the dimensions to later use the measurement value in piece label</string>
+                </property>
+               </widget>
+              </item>
+              <item row="10" column="0">
+               <widget class="QLabel" name="labelAlias">
+                <property name="text">
+                 <string>Alias:</string>
+                </property>
+               </widget>
+              </item>
+              <item row="10" column="1">
+               <widget class="QLineEdit" name="lineEditAlias">
+                <property name="toolTip">
+                 <string>Optional text alias for this value. Useful for referencing in pattern piece labels</string>
+                </property>
+                <property name="clearButtonEnabled">
+                 <bool>true</bool>
                 </property>
                </widget>
               </item>

@@ -664,6 +664,9 @@ void DialogEditLabel::InitPlaceholders()
             QString const description = i.value()->GetGuiText().isEmpty() ? i.key() : i.value()->GetGuiText();
             m_placeholders.insert(pl_measurement + i.key(), qMakePair(tr("Measurement: %1").arg(description),
                                                                       QString::number(*i.value()->GetValue())));
+            m_placeholders.insert(pl_measurement + i.key() + pl_valueAlias,
+                                  qMakePair(tr("Measurement %1 value alias").arg(description),
+                                            i.value()->GetValueAlias()));
             ++i;
         }
     }

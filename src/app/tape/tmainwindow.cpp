@@ -2007,6 +2007,9 @@ void TMainWindow::ShowNewMData(bool fresh)
     ui->labelFullName->setVisible(meash->GetType() == VarType::Measurement);
     ui->lineEditFullName->setVisible(meash->GetType() == VarType::Measurement);
 
+    ui->labelAlias->setVisible(meash->GetType() == VarType::Measurement);
+    ui->lineEditAlias->setVisible(meash->GetType() == VarType::Measurement);
+
     // Don't block all signal for QLineEdit. Need for correct handle with clear button.
     disconnect(ui->lineEditName, &QLineEdit::textEdited, this, &TMainWindow::SaveMName);
     ui->plainTextEditDescription->blockSignals(true);
@@ -2072,6 +2075,9 @@ void TMainWindow::ShowNewMData(bool fresh)
         ui->doubleSpinBoxShiftA->blockSignals(true);
         ui->doubleSpinBoxShiftB->blockSignals(true);
         ui->doubleSpinBoxShiftC->blockSignals(true);
+        ui->lineEditAlias->blockSignals(true);
+
+        ui->lineEditAlias->setText(meash->GetValueAlias(m_currentDimensionA, m_currentDimensionB, m_currentDimensionC));
 
         QString calculatedValue;
 
@@ -2087,6 +2093,7 @@ void TMainWindow::ShowNewMData(bool fresh)
                 UnitConvertor(*m_data->DataVariables()->value(meash->GetName())->GetValue(), m_mUnit, m_pUnit);
             calculatedValue = VAbstractApplication::VApp()->LocaleToString(value) + QChar(QChar::Space) + postfix;
         }
+
         ui->labelCalculatedValue->setText(calculatedValue);
 
         if (fresh)
@@ -2105,6 +2112,7 @@ void TMainWindow::ShowNewMData(bool fresh)
         ui->doubleSpinBoxShiftA->blockSignals(false);
         ui->doubleSpinBoxShiftB->blockSignals(false);
         ui->doubleSpinBoxShiftC->blockSignals(false);
+        ui->lineEditAlias->blockSignals(false);
     }
     else
     {
@@ -2133,6 +2141,10 @@ void TMainWindow::ShowNewMData(bool fresh)
         ui->comboBoxDimension->setCurrentIndex(
             ui->comboBoxDimension->findData(static_cast<int>(meash->GetDimension())));
         ui->comboBoxDimension->blockSignals(false);
+
+        ui->lineEditAlias->blockSignals(true);
+        ui->lineEditAlias->setText(meash->GetValueAlias());
+        ui->lineEditAlias->blockSignals(false);
     }
 
     MeasurementGUI();
@@ -2267,6 +2279,42 @@ void TMainWindow::SaveMName(const QString &text)
     {
         qCWarning(tMainWindow, "%s", qUtf8Printable(tr("The name of known measurement forbidden to change.")));
     }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void TMainWindow::SaveMValueAlias(const QString &text)
+{
+    const int row = ui->tableWidget->currentRow();
+
+    if (row == -1)
+    {
+        return;
+    }
+
+    if (const QTableWidgetItem *nameField = ui->tableWidget->item(ui->tableWidget->currentRow(), ColumnName);
+        m_mType == MeasurementsType::Multisize)
+    {
+        m_m->SetMValueAlias(nameField->data(Qt::UserRole).toString(),
+                            m_currentDimensionA,
+                            m_currentDimensionB,
+                            m_currentDimensionC,
+                            text);
+    }
+    else
+    {
+        m_m->SetMValueAlias(nameField->data(Qt::UserRole).toString(), text);
+    }
+
+    MeasurementsWereSaved(false);
+
+    RefreshData();
+    m_search->RefreshList(ui->lineEditFind->text());
+
+    ui->tableWidget->blockSignals(true);
+    ui->tableWidget->selectRow(row);
+    ui->tableWidget->blockSignals(false);
+
+    ShowNewMData(false);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -3109,6 +3157,7 @@ void TMainWindow::InitWindow()
     connect(ui->toolButtonRemoveImage, &QToolButton::clicked, this, &TMainWindow::RemoveImage);
     connect(ui->toolButtonSaveImage, &QToolButton::clicked, this, &TMainWindow::SaveImage);
 
+    connect(ui->lineEditAlias, &QLineEdit::textEdited, this, &TMainWindow::SaveMValueAlias);
     connect(ui->lineEditName, &QLineEdit::textEdited, this, &TMainWindow::SaveMName);
     connect(ui->plainTextEditDescription, &QPlainTextEdit::textChanged, this, &TMainWindow::SaveMDescription);
     connect(ui->lineEditFullName, &QLineEdit::textEdited, this, &TMainWindow::SaveMFullName);
@@ -3642,6 +3691,11 @@ void TMainWindow::RefreshMeasurementData(const QSharedPointer<VMeasurement> &mea
             calculatedValue = locale().toString(UnitConvertor(*meash->GetValue(), m_mUnit, m_pUnit));
         }
 
+        if (const QString valueAlias = meash->GetValueAlias(); !valueAlias.isEmpty())
+        {
+            calculatedValue = QStringLiteral("%1 (%2)").arg(calculatedValue, valueAlias);
+        }
+
         AddCell(calculatedValue, currentRow, ColumnCalcValue, Qt::AlignHCenter | Qt::AlignVCenter,
                 meash->IsFormulaOk()); // calculated value
 
@@ -3675,6 +3729,14 @@ void TMainWindow::RefreshMeasurementData(const QSharedPointer<VMeasurement> &mea
             const qreal value =
                 UnitConvertor(*m_data->DataVariables()->value(meash->GetName())->GetValue(), m_mUnit, m_pUnit);
             calculatedValue = locale().toString(value);
+        }
+
+        if (const QString valueAlias = meash->GetValueAlias(m_currentDimensionA,
+                                                            m_currentDimensionB,
+                                                            m_currentDimensionC);
+            !valueAlias.isEmpty())
+        {
+            calculatedValue = QStringLiteral("%1 (%2)").arg(calculatedValue, valueAlias);
         }
 
         AddCell(calculatedValue, currentRow, ColumnCalcValue, Qt::AlignHCenter | Qt::AlignVCenter,
@@ -3761,6 +3823,7 @@ void TMainWindow::MFields(bool enabled)
     ui->plainTextEditDescription->setEnabled(enabled);
     ui->lineEditFullName->setEnabled(enabled);
     ui->comboBoxMUnits->setEnabled(enabled);
+    ui->lineEditAlias->setEnabled(enabled);
 
     if (m_mType == MeasurementsType::Multisize)
     {

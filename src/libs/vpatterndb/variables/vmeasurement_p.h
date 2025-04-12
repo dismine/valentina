@@ -33,6 +33,8 @@
 
 #include "../ifc/xml/vpatternimage.h"
 #include "../vcontainer.h"
+#include "../vmisc/def.h"
+#include <utility>
 #include <QUuid>
 
 QT_WARNING_PUSH
@@ -44,7 +46,7 @@ class VMeasurementData final : public QSharedData
 public:
     VMeasurementData(quint32 index, MeasurementType varType);
     VMeasurementData(quint32 index, qreal baseA, qreal baseB, qreal baseC, qreal base);
-    VMeasurementData(VContainer *data, quint32 index, const QString &formula, bool ok, qreal base);
+    VMeasurementData(VContainer *data, quint32 index, QString formula, bool ok, qreal base);
     VMeasurementData(const VMeasurementData &m) = default;
     ~VMeasurementData() = default;
 
@@ -52,6 +54,7 @@ public:
     quint32 index;                     // NOLINT(misc-non-private-member-variables-in-classes)
     QString formula{};                 // NOLINT(misc-non-private-member-variables-in-classes)
     QString gui_text{};                // NOLINT(misc-non-private-member-variables-in-classes)
+    QString valueAlias{};              // NOLINT(misc-non-private-member-variables-in-classes)
     bool formulaOk{true};              // NOLINT(misc-non-private-member-variables-in-classes)
 
     qreal currentBaseA{0}; // NOLINT(misc-non-private-member-variables-in-classes)
@@ -72,7 +75,7 @@ public:
     qreal baseB{0}; // NOLINT(misc-non-private-member-variables-in-classes)
     qreal baseC{0}; // NOLINT(misc-non-private-member-variables-in-classes)
 
-    QMap<QString, qreal> corrections{}; // NOLINT(misc-non-private-member-variables-in-classes)
+    QMap<QString, VMeasurementCorrection> corrections{}; // NOLINT(misc-non-private-member-variables-in-classes)
 
     bool specialUnits{false}; // NOLINT(misc-non-private-member-variables-in-classes)
 
@@ -108,10 +111,10 @@ inline VMeasurementData::VMeasurementData(quint32 index, qreal baseA, qreal base
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-inline VMeasurementData::VMeasurementData(VContainer *data, quint32 index, const QString &formula, bool ok, qreal base)
+inline VMeasurementData::VMeasurementData(VContainer *data, quint32 index, QString formula, bool ok, qreal base)
   : data(QSharedPointer<VContainer>(new VContainer(*data))),
     index(index),
-    formula(formula),
+    formula(std::move(formula)),
     formulaOk(ok),
     shiftBase(base)
 {

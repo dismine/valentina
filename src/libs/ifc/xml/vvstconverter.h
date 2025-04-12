@@ -40,7 +40,7 @@ class QDomElement;
 
 class VVSTConverter final : public VAbstractMConverter
 {
-    Q_DECLARE_TR_FUNCTIONS(VVSTConverter) // NOLINT
+    Q_OBJECT // NOLINT
 
 public:
     explicit VVSTConverter(const QString &fileName);
@@ -49,7 +49,7 @@ public:
     static const QString MeasurementMaxVerStr;
     static const QString CurrentSchema;
     static constexpr const unsigned MeasurementMinVer = FormatVersion(0, 3, 0);
-    static constexpr const unsigned MeasurementMaxVer = FormatVersion(0, 6, 1);
+    static constexpr const unsigned MeasurementMaxVer = FormatVersion(0, 6, 2);
 
     static auto XSDSchemas() -> QHash<unsigned, QString>;
 
@@ -91,6 +91,7 @@ private:
     void ToV0_5_0();
     void ToV0_5_4();
     void ToV0_6_1();
+    void ToV0_6_2();
 };
 
 //---------------------------------------------------------------------------------------------------------------------

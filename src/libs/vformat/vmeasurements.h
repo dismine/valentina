@@ -125,6 +125,8 @@ public:
     void SetMShiftC(const QString &name, double value);
     void SetMSpecialUnits(const QString &name, bool special);
     void SetMCorrectionValue(const QString &name, qreal baseA, qreal baseB, qreal baseC, double value);
+    void SetMValueAlias(const QString &name, qreal baseA, qreal baseB, qreal baseC, const QString &alias);
+    void SetMValueAlias(const QString &name, const QString &alias);
     void SetMDescription(const QString &name, const QString &text);
     void SetMFullName(const QString &name, const QString &text);
     void SetMDimension(const QString &name, IMD type);
@@ -175,6 +177,7 @@ public:
     static const QString AttrDescription;
     static const QString AttrName;
     static const QString AttrFullName;
+    static const QString AttrValueAlias;
     static const QString AttrMin;
     static const QString AttrMax;
     static const QString AttrStep;
@@ -238,16 +241,12 @@ private:
     auto ReadUnits() const -> Unit;
     auto ReadDimensions() const -> VDimensions;
 
-    auto EvalFormula(VContainer *data, const QString &formula, bool *ok) const -> qreal;
-
-    auto ReadCorrections(const QDomElement &mElement) const -> QMap<QString, qreal>;
-    void WriteCorrections(QDomElement &mElement, const QMap<QString, qreal> &corrections);
+    void WriteCorrections(QDomElement &mElement, const QMap<QString, VMeasurementCorrection> &corrections);
 
     static auto ReadImage(const QDomElement &mElement) -> VPatternImage;
     void WriteImage(QDomElement &mElement, const VPatternImage &image);
 
     void SaveDimesionLabels(QDomElement &dElement, const DimesionLabels &labels);
-    auto ReadDimensionLabels(const QDomElement &dElement) const -> DimesionLabels;
 
     void ClearDimension(IMD type);
 

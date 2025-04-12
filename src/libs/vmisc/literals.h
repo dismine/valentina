@@ -143,6 +143,7 @@ extern const QString pl_measurement;
 extern const QString pl_finalMeasurement;
 extern const QString pl_currentArea;
 extern const QString pl_currentSeamLineArea;
+extern const QString pl_valueAlias;
 
 extern const QString cursorArrowOpenHand;
 extern const QString cursorArrowCloseHand;

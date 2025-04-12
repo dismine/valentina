@@ -433,6 +433,7 @@ auto PrepareGradationPlaceholders(const VContainer *data) -> QMap<QString, QStri
         while (i != measurements.constEnd())
         {
             placeholders.insert(pl_measurement + i.key(), QString::number(*i.value()->GetValue()));
+            placeholders.insert(pl_measurement + i.key() + pl_valueAlias, i.value()->GetValueAlias());
             ++i;
         }
     }

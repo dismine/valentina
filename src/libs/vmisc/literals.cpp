@@ -139,6 +139,7 @@ const QString pl_measurement = QStringLiteral("measurement_");
 const QString pl_finalMeasurement = QStringLiteral("finalMeasurement_");
 const QString pl_currentArea = QStringLiteral("currentArea");
 const QString pl_currentSeamLineArea = QStringLiteral("currentSeamLineArea");
+const QString pl_valueAlias = QStringLiteral("_value_alias");
 
 const QString cursorArrowOpenHand = QStringLiteral("://cursor/cursor-arrow-openhand.png");
 const QString cursorArrowCloseHand = QStringLiteral("://cursor/cursor-arrow-closehand.png");

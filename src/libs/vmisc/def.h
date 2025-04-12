@@ -396,6 +396,12 @@ enum class IMD : qint8 // Individual measurement dimension
     Z  // hip half circumference
 };
 
+struct VMeasurementCorrection
+{
+    qreal correction{0};
+    QString alias{};
+};
+
 /* QImage supports a maximum of 32768x32768 px images (signed short).
  * This follows from the condition: width * height * colordepth < INT_MAX (4 billion) -> 32768 * 32768 * 4 = 4 billion.
  * The second condition is of course that malloc is able to allocate the requested memory.

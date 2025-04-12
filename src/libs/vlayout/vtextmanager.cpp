@@ -332,6 +332,7 @@ void PrepareMeasurementsPlaceholders(const VPieceLabelInfo &info, QMap<QString, 
     while (i != measurements.constEnd())
     {
         AddPlaceholder(pl_measurement + i.key(), QString::number(*i.value()->GetValue()));
+        AddPlaceholder(pl_measurement + i.key() + pl_valueAlias, i.value()->GetValueAlias());
         ++i;
     }
 }

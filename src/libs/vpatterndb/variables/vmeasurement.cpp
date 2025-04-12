@@ -162,10 +162,10 @@ auto VMeasurement::CalcValue() const -> qreal
 //---------------------------------------------------------------------------------------------------------------------
 auto VMeasurement::Correction() const -> qreal
 {
-    const QString hash = CorrectionHash(d->currentBaseA, d->currentBaseB, d->currentBaseC);
-    if (d->corrections.contains(hash))
+    if (const QString hash = CorrectionHash(d->currentBaseA, d->currentBaseB, d->currentBaseC);
+        d->corrections.contains(hash))
     {
-        return d->corrections.value(hash);
+        return d->corrections.value(hash).correction;
     }
 
     return 0;
@@ -385,17 +385,22 @@ void VMeasurement::SetDimension(IMD type)
 //---------------------------------------------------------------------------------------------------------------------
 auto VMeasurement::GetCorrection(qreal baseA, qreal baseB, qreal baseC) const -> qreal
 {
-    return d->corrections.value(VMeasurement::CorrectionHash(baseA, baseB, baseC), 0);
+    if (const QString hash = VMeasurement::CorrectionHash(baseA, baseB, baseC); d->corrections.contains(hash))
+    {
+        return d->corrections[hash].correction;
+    }
+
+    return 0;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-auto VMeasurement::GetCorrections() const -> QMap<QString, qreal>
+auto VMeasurement::GetCorrections() const -> QMap<QString, VMeasurementCorrection>
 {
     return d->corrections;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VMeasurement::SetCorrections(const QMap<QString, qreal> &corrections)
+void VMeasurement::SetCorrections(const QMap<QString, VMeasurementCorrection> &corrections)
 {
     d->corrections = corrections;
 }
@@ -410,4 +415,32 @@ auto VMeasurement::GetImage() const -> VPatternImage
 void VMeasurement::SetImage(const VPatternImage &image)
 {
     d->image = image;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+auto VMeasurement::GetValueAlias(qreal baseA, qreal baseB, qreal baseC) const -> QString
+{
+    if (const QString hash = VMeasurement::CorrectionHash(baseA, baseB, baseC); d->corrections.contains(hash))
+    {
+        return d->corrections[hash].alias;
+    }
+
+    return {};
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+auto VMeasurement::GetValueAlias() const -> QString
+{
+    if (qFuzzyIsNull(d->currentBaseA))
+    {
+        return d->valueAlias;
+    }
+
+    return GetValueAlias(d->currentBaseA, d->currentBaseB, d->currentBaseC);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VMeasurement::SetValueAlias(const QString &alias)
+{
+    d->valueAlias = alias;
 }
