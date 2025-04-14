@@ -1005,8 +1005,8 @@ void VPTileFactory::DrawPageTextInformationOutlineFont(QPainter *painter,
                        .arg(tileColorStr, text, clippedSheetName));
         guard.save();
         painter->rotate(-90);
-        painter->translate(QPointF(-(m_drawingAreaHeight) + UnitConvertor(1, Unit::Cm, Unit::Px),
-                                   m_drawingAreaWidth - tileStripeWidth));
+        painter->translate(
+            QPointF(-m_drawingAreaHeight + UnitConvertor(1, Unit::Cm, Unit::Px), m_drawingAreaWidth - tileStripeWidth));
         td.drawContents(painter);
     }
 }
