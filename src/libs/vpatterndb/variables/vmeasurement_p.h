@@ -46,7 +46,7 @@ class VMeasurementData final : public QSharedData
 public:
     VMeasurementData(quint32 index, MeasurementType varType);
     VMeasurementData(quint32 index, qreal baseA, qreal baseB, qreal baseC, qreal base);
-    VMeasurementData(VContainer *data, quint32 index, QString formula, bool ok, qreal base);
+    VMeasurementData(const VContainer *data, quint32 index, QString formula, bool ok, qreal base);
     VMeasurementData(const VMeasurementData &m) = default;
     ~VMeasurementData() = default;
 
@@ -111,7 +111,7 @@ inline VMeasurementData::VMeasurementData(quint32 index, qreal baseA, qreal base
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-inline VMeasurementData::VMeasurementData(VContainer *data, quint32 index, QString formula, bool ok, qreal base)
+inline VMeasurementData::VMeasurementData(const VContainer *data, quint32 index, QString formula, bool ok, qreal base)
   : data(QSharedPointer<VContainer>(new VContainer(*data))),
     index(index),
     formula(std::move(formula)),

@@ -1330,7 +1330,7 @@ auto MainWindowsNoGUI::OpenMeasurementFile(const QString &patternPath, QString &
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-auto MainWindowsNoGUI::LoadMeasurements(const QString &patternPath, QString &currentPath, const QString &oldPath)
+auto MainWindowsNoGUI::LoadMeasurements(const QString &patternPath, const QString &currentPath, const QString &oldPath)
     -> QSharedPointer<VMeasurements>
 {
     try
@@ -1377,7 +1377,7 @@ auto MainWindowsNoGUI::LoadMeasurements(const QString &patternPath, QString &cur
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-auto MainWindowsNoGUI::ApplyConverter(QSharedPointer<VMeasurements> &m, const QString &path) -> QString
+auto MainWindowsNoGUI::ApplyConverter(const QSharedPointer<VMeasurements> &m, const QString &path) -> QString
 {
     std::unique_ptr<VAbstractMConverter> converter;
     if (m->Type() == MeasurementsType::Multisize)
@@ -1452,7 +1452,7 @@ auto MainWindowsNoGUI::HandleMissingMeasurements(QSharedPointer<VMeasurements> &
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-auto MainWindowsNoGUI::SelectNewFile(QSharedPointer<VMeasurements> &m, QString &currentPath) -> bool
+auto MainWindowsNoGUI::SelectNewFile(const QSharedPointer<VMeasurements> &m, QString &currentPath) -> bool
 {
     QString filter;
     if (m->Type() == MeasurementsType::Multisize)

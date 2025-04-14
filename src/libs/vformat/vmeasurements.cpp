@@ -167,7 +167,7 @@ auto ReadCorrections(const QDomElement &mElement) -> QMap<QString, VMeasurementC
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-auto EvalFormula(VContainer *data, const QString &formula, bool *ok) -> qreal
+auto EvalFormula(const VContainer *data, const QString &formula, bool *ok) -> qreal
 {
     if (formula.isEmpty())
     {
