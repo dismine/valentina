@@ -123,7 +123,7 @@ auto OptimizeSVGFontSizeToFitTextInRect(const QString &family,
                                         int maxIterationNumber = 10) -> qreal
 {
     qreal fontSize = 1;
-    VSvgFontDatabase *db = VAbstractApplication::VApp()->SVGFontDatabase();
+    const VSvgFontDatabase *db = VAbstractApplication::VApp()->SVGFontDatabase();
     VSvgFontEngine engine = db->FontEngine(family, style, weight, qRound(fontSize));
 
     if (VSvgFont const svgFont = engine.Font(); !svgFont.IsValid())
@@ -301,7 +301,7 @@ void VPGraphicsTileGrid::paint(QPainter *painter, const QStyleOptionGraphicsItem
     if (m_printMode && settings->GetSingleLineFonts())
     {
         svgFontFamily = layout->TileFactory()->SVGFontFamily();
-        VSvgFontDatabase *db = VAbstractApplication::VApp()->SVGFontDatabase();
+        const VSvgFontDatabase *db = VAbstractApplication::VApp()->SVGFontDatabase();
         qreal const fontSize = OptimizeSVGFontSizeToFitTextInRect(svgFontFamily,
                                                                   SVGFontStyle::Normal,
                                                                   SVGFontWeight::Normal,

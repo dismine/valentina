@@ -887,7 +887,7 @@ void VPTileFactory::DrawGridTextInformationOutlineFont(QPainter *painter, const 
 //---------------------------------------------------------------------------------------------------------------------
 void VPTileFactory::DrawGridTextInformationSVGFont(QPainter *painter, const QString &text) const
 {
-    VSvgFontDatabase *db = VAbstractApplication::VApp()->SVGFontDatabase();
+    const VSvgFontDatabase *db = VAbstractApplication::VApp()->SVGFontDatabase();
     const VSvgFontEngine engine = db->FontEngine(m_svgFontFamily,
                                                  SVGFontStyle::Normal,
                                                  SVGFontWeight::Normal,
@@ -1015,7 +1015,7 @@ void VPTileFactory::DrawPageTextInformationSVGFont(QPainter *painter,
                                                    const QString &text,
                                                    const QString &sheetName) const
 {
-    VSvgFontDatabase *db = VAbstractApplication::VApp()->SVGFontDatabase();
+    const VSvgFontDatabase *db = VAbstractApplication::VApp()->SVGFontDatabase();
     const VSvgFontEngine engine = db->FontEngine(m_svgFontFamily,
                                                  SVGFontStyle::Normal,
                                                  SVGFontWeight::Normal,

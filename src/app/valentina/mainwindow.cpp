@@ -7871,8 +7871,8 @@ void MainWindow::ToolSelectDetail()
 void MainWindow::PrintPatternMessage(QEvent *event)
 {
     SCASSERT(event != nullptr)
-    auto *patternMessageEvent =
-        static_cast<WarningMessageEvent *>(event); // NOLINT(cppcoreguidelines-pro-type-static-cast-downcast)
+    // NOLINTNEXTLINE(cppcoreguidelines-pro-type-static-cast-downcast)
+    const auto *patternMessageEvent = static_cast<WarningMessageEvent *>(event);
 
     QString severity;
 

@@ -419,7 +419,7 @@ auto VFoldLine::FoldLineTwoArrowsTextUnderPath() const -> QVector<QPainterPath>
     QVector<QPainterPath> shape;
     shape.append(TwoArrowsPath(data.arrowsWidth, data.arrowsHeight));
 
-    if (VCommonSettings *settings = VAbstractApplication::VApp()->Settings(); settings->GetSingleLineFonts())
+    if (const VCommonSettings *settings = VAbstractApplication::VApp()->Settings(); settings->GetSingleLineFonts())
     {
         shape.append(SVGFontLabel(data.base, data.labelWidth, data.labelHeight));
     }
