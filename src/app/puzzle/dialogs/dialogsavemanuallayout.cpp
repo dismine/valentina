@@ -469,27 +469,13 @@ auto DialogSaveManualLayout::IsTilesScheme() const -> bool
 //---------------------------------------------------------------------------------------------------------------------
 void DialogSaveManualLayout::SetHideRuler(bool value)
 {
-    switch (Format())
-    {
-        case LayoutExportFormats::PDFTiled:
-            ui->checkBoxHideRuler->setChecked(value);
-            break;
-        default:
-            ui->checkBoxHideRuler->setChecked(false);
-            break;
-    }
+    ui->checkBoxHideRuler->setChecked(Format() == LayoutExportFormats::PDFTiled ? value : false);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 auto DialogSaveManualLayout::IsHideRuler() const -> bool
 {
-    switch (Format())
-    {
-        case LayoutExportFormats::PDFTiled:
-            return ui->checkBoxHideRuler->isChecked();
-        default:
-            return false;
-    }
+    return Format() == LayoutExportFormats::PDFTiled && ui->checkBoxHideRuler->isChecked();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
