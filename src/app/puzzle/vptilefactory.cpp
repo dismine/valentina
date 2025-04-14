@@ -893,8 +893,7 @@ void VPTileFactory::DrawGridTextInformationSVGFont(QPainter *painter, const QStr
                                                  SVGFontWeight::Normal,
                                                  tileTextFontSize);
 
-    VSvgFont const svgFont = engine.Font();
-    if (!svgFont.IsValid())
+    if (VSvgFont const svgFont = engine.Font(); !svgFont.IsValid())
     {
         auto const errorMsg = QStringLiteral("Invalid SVG font '%1'. Fallback to outline font.").arg(svgFont.Name());
         qDebug() << errorMsg;
@@ -1022,8 +1021,7 @@ void VPTileFactory::DrawPageTextInformationSVGFont(QPainter *painter,
                                                  SVGFontWeight::Normal,
                                                  tileTextFontSize);
 
-    VSvgFont const svgFont = engine.Font();
-    if (!svgFont.IsValid())
+    if (VSvgFont const svgFont = engine.Font(); !svgFont.IsValid())
     {
         auto const errorMsg = QStringLiteral("Invalid SVG font '%1'. Fallback to outline font.").arg(svgFont.Name());
         qDebug() << errorMsg;
