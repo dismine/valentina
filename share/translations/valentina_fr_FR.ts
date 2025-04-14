@@ -17221,7 +17221,7 @@ Voulez-vous enregistrer vos changements ?</translation>
     <message>
         <location filename="../../src/app/tape/tmainwindow.ui" line="821"/>
         <source>Alias:</source>
-        <translation type="unfinished">Alias :</translation>
+        <translation>Alias :</translation>
     </message>
     <message>
         <location filename="../../src/app/tape/tmainwindow.ui" line="828"/>

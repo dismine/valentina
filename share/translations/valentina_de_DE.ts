@@ -17216,7 +17216,7 @@ Do you want to save your changes?</source>
     <message>
         <location filename="../../src/app/tape/tmainwindow.ui" line="821"/>
         <source>Alias:</source>
-        <translation type="unfinished">Pseudonym:</translation>
+        <translation>Pseudonym:</translation>
     </message>
     <message>
         <location filename="../../src/app/tape/tmainwindow.ui" line="828"/>

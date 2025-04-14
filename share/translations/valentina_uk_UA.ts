@@ -2616,7 +2616,7 @@
     <message>
         <location filename="../../src/libs/vtools/dialogs/support/dialogeditlabel.cpp" line="668"/>
         <source>Measurement %1 value alias</source>
-        <translation type="unfinished"></translation>
+        <translation>Мірка %1 псевдонім значення</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/support/dialogeditlabel.cpp" line="748"/>
@@ -9208,7 +9208,7 @@ Apply settings anyway?</source>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="5212"/>
         <source>Measurement %1 value alias</source>
-        <translation type="unfinished"></translation>
+        <translation>Мірка %1 псевдонім значення</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="5491"/>
@@ -17226,12 +17226,12 @@ Do you want to save your changes?</source>
     <message>
         <location filename="../../src/app/tape/tmainwindow.ui" line="821"/>
         <source>Alias:</source>
-        <translation type="unfinished">Псевдонім:</translation>
+        <translation>Псевдонім:</translation>
     </message>
     <message>
         <location filename="../../src/app/tape/tmainwindow.ui" line="828"/>
         <source>Optional text alias for this value. Useful for referencing in pattern piece labels</source>
-        <translation type="unfinished"></translation>
+        <translation>Необов&apos;язковий текстовий псевдонім для цього значення. Корисний для посилань у мітках деталей</translation>
     </message>
     <message>
         <location filename="../../src/app/tape/tmainwindow.ui" line="923"/>
@@ -19130,12 +19130,12 @@ Do you want to save your changes?</source>
     <message>
         <location filename="../../src/libs/ifc/xml/vabstractconverter.cpp" line="308"/>
         <source>This file was created with an outdated version of the app and cannot be opened. Please re-save it using a newer version of the app that is compatible with this one.</source>
-        <translation type="unfinished"></translation>
+        <translation>Цей файл було створено за допомогою застарілої версії програми, і його неможливо відкрити. Будь ласка, збережіть його повторно, використовуючи новішу версію програми, сумісну з цією.</translation>
     </message>
     <message>
         <location filename="../../src/libs/ifc/xml/vabstractconverter.cpp" line="314"/>
         <source>This file was created with a newer version of the app and cannot be opened. Please update your app to the latest version.</source>
-        <translation type="unfinished"></translation>
+        <translation>Цей файл було створено у новішій версії програми, і його неможливо відкрити. Будь ласка, оновіть вашу програму до останньої версії.</translation>
     </message>
     <message>
         <location filename="../../src/libs/ifc/xml/vabstractconverter.cpp" line="318"/>

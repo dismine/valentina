@@ -15998,7 +15998,7 @@ Czy chcesz zapisać zmiany?</translation>
     <message>
         <location filename="../../src/app/tape/tmainwindow.ui" line="821"/>
         <source>Alias:</source>
-        <translation type="unfinished">Odnośnik:</translation>
+        <translation>Odnośnik:</translation>
     </message>
     <message>
         <location filename="../../src/app/tape/tmainwindow.ui" line="828"/>
