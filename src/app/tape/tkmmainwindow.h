@@ -205,9 +205,9 @@ private:
 
     void AddMeasurementImages(const QStringList &imagePaths);
 
-    auto HandleKeyPress(QWidget *widget, QEvent *event) const -> bool;
+    static auto HandleKeyPress(QWidget *widget, QEvent *event) -> bool;
     auto HandleListWidgetEvent(const QListWidget *listWidget, QEvent *event) -> bool;
-    auto HandleDragEnterMove(QDragEnterEvent *dragEvent) -> bool;
+    static auto HandleDragEnterMove(QDragEnterEvent *dragEvent) -> bool;
     auto HandleDrop(QDropEvent *dropEvent) -> bool;
 };
 

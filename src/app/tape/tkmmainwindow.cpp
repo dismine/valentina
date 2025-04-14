@@ -431,61 +431,6 @@ auto TKMMainWindow::eventFilter(QObject *object, QEvent *event) -> bool
     if (const auto *listWidget = qobject_cast<QListWidget *>(object))
     {
         return HandleListWidgetEvent(listWidget, event);
-
-        if (listWidget == ui->listWidget && (event->type() == QEvent::DragEnter || event->type() == QEvent::DragMove))
-        {
-            if (auto *dragEvent = static_cast<QDragEnterEvent *>(event); dragEvent->mimeData()->hasUrls())
-            {
-                int supportedImagesCount = 0;
-                const QStringList formats = SupportedFormats();
-                const QList<QUrl> &urls = dragEvent->mimeData()->urls();
-                for (const QUrl &url : urls)
-                {
-                    if (url.isLocalFile())
-                    {
-                        if (const QString ext = QFileInfo(url.toLocalFile()).suffix().toLower(); formats.contains(ext))
-                        {
-                            ++supportedImagesCount;
-                        }
-                    }
-                }
-
-                if (supportedImagesCount == urls.size())
-                {
-                    dragEvent->acceptProposedAction();
-                    return true;
-                }
-            }
-        }
-        else if (listWidget == ui->listWidget && event->type() == QEvent::Drop)
-        {
-            if (auto *dropEvent = static_cast<QDropEvent *>(event); dropEvent->mimeData()->hasUrls())
-            {
-                int supportedImagesCount = 0;
-                QStringList imagePaths;
-                const QStringList formats = SupportedFormats();
-                const QList<QUrl> &urls = dropEvent->mimeData()->urls();
-                for (const QUrl &url : urls)
-                {
-                    if (url.isLocalFile())
-                    {
-                        const QString filePath = url.toLocalFile();
-                        if (const QString ext = QFileInfo(filePath).suffix().toLower(); formats.contains(ext))
-                        {
-                            imagePaths.append(url.toLocalFile());
-                            ++supportedImagesCount;
-                        }
-                    }
-                }
-
-                if (supportedImagesCount == urls.size())
-                {
-                    AddMeasurementImages(imagePaths);
-                    dropEvent->acceptProposedAction();
-                    return true;
-                }
-            }
-        }
     }
 
     // pass the event on to the parent class
@@ -493,13 +438,14 @@ auto TKMMainWindow::eventFilter(QObject *object, QEvent *event) -> bool
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-auto TKMMainWindow::HandleKeyPress(QWidget *widget, QEvent *event) const -> bool
+auto TKMMainWindow::HandleKeyPress(QWidget *widget, QEvent *event) -> bool
 {
     if (event->type() != QEvent::KeyPress)
     {
         return false;
     }
 
+    // NOLINTNEXTLINE(cppcoreguidelines-pro-type-static-cast-downcast)
     if (const auto *keyEvent = static_cast<QKeyEvent *>(event);
         keyEvent->key() != Qt::Key_Period || !(keyEvent->modifiers() & Qt::KeypadModifier))
     {
@@ -535,11 +481,13 @@ auto TKMMainWindow::HandleListWidgetEvent(const QListWidget *listWidget, QEvent 
 
     if (event->type() == QEvent::DragEnter || event->type() == QEvent::DragMove)
     {
+        // NOLINTNEXTLINE(cppcoreguidelines-pro-type-static-cast-downcast)
         return HandleDragEnterMove(static_cast<QDragEnterEvent *>(event));
     }
 
     if (event->type() == QEvent::Drop)
     {
+        // NOLINTNEXTLINE(cppcoreguidelines-pro-type-static-cast-downcast)
         return HandleDrop(static_cast<QDropEvent *>(event));
     }
 
