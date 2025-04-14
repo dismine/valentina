@@ -126,7 +126,7 @@ public:
     void SetMSpecialUnits(const QString &name, bool special);
     void SetMCorrectionValue(const QString &name, qreal baseA, qreal baseB, qreal baseC, double value);
     void SetMValueAlias(const QString &name, qreal baseA, qreal baseB, qreal baseC, const QString &alias);
-    void SetMValueAlias(const QString &name, const QString &alias);
+    void SetMValueAlias(const QString &name, const QString &alias) const;
     void SetMDescription(const QString &name, const QString &text);
     void SetMFullName(const QString &name, const QString &text);
     void SetMDimension(const QString &name, IMD type);

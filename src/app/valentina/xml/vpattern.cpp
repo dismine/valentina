@@ -773,7 +773,7 @@ void VPattern::RefreshDirtyPieceGeometry(const QList<vidtype> &list)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VPattern::RefreshPieceGeometryForList(const QList<vidtype> &list)
+void VPattern::RefreshPieceGeometryForList(const QList<vidtype> &list) const
 {
     for (auto pieceId : qAsConst(list))
     {

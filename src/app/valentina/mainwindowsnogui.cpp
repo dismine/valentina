@@ -1377,7 +1377,7 @@ auto MainWindowsNoGUI::LoadMeasurements(const QString &patternPath, const QStrin
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-auto MainWindowsNoGUI::ApplyConverter(const QSharedPointer<VMeasurements> &m, const QString &path) -> QString
+auto MainWindowsNoGUI::ApplyConverter(const QSharedPointer<VMeasurements> &m, const QString &path) const -> QString
 {
     std::unique_ptr<VAbstractMConverter> converter;
     if (m->Type() == MeasurementsType::Multisize)
@@ -1394,7 +1394,7 @@ auto MainWindowsNoGUI::ApplyConverter(const QSharedPointer<VMeasurements> &m, co
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void MainWindowsNoGUI::CollectStatistics(MeasurementsType measurementsType, const QString &formatVersion)
+void MainWindowsNoGUI::CollectStatistics(MeasurementsType measurementsType, const QString &formatVersion) const
 {
     const VCommonSettings *settings = VAbstractApplication::VApp()->Settings();
     if (!settings->IsCollectStatistic())

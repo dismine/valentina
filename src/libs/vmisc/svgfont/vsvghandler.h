@@ -37,7 +37,7 @@ class VSvgHandler
 public:
     explicit VSvgHandler(const QString &filePath);
 
-    void Render(QPainter *painter);
+    void Render(QPainter *painter) const;
 
     auto PageSize() const -> QRectF;
 

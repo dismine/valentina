@@ -260,7 +260,7 @@ private:
     auto PPLastToolId(const QString &name) const -> quint32;
 
     void PostRefreshActions();
-    void RefreshPieceGeometryForList(const QList<vidtype> &list);
+    void RefreshPieceGeometryForList(const QList<vidtype> &list) const;
 };
 
 #endif // VPATTERN_H

@@ -236,7 +236,7 @@ void VSvgHandler::ToPainterPath(const QString &filePath)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VSvgHandler::Render(QPainter *painter)
+void VSvgHandler::Render(QPainter *painter) const
 {
     QPainterStateGuard const guard(painter);
 

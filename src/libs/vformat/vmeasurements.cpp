@@ -897,7 +897,7 @@ void VMeasurements::SetMValueAlias(const QString &name, qreal baseA, qreal baseB
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VMeasurements::SetMValueAlias(const QString &name, const QString &alias)
+void VMeasurements::SetMValueAlias(const QString &name, const QString &alias) const
 {
     if (QDomElement node = FindM(name); not node.isNull())
     {
