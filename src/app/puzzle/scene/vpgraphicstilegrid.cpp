@@ -118,7 +118,7 @@ auto OptimizeSVGFontSizeToFitTextInRect(const QString &family,
                                         SVGFontWeight weight,
                                         const QRectF &drawRect,
                                         const QString &text,
-                                        qreal penWidth = 0,
+                                        qreal textPenWidth = 0,
                                         double goalError = 0.01,
                                         int maxIterationNumber = 10) -> qreal
 {
@@ -137,7 +137,7 @@ auto OptimizeSVGFontSizeToFitTextInRect(const QString &family,
     while ((error > goalError) && (iterationNumber < maxIterationNumber))
     {
         iterationNumber++;
-        QRectF const fontBoundRect = engine.BoundingRect(text, penWidth);
+        QRectF const fontBoundRect = engine.BoundingRect(text, textPenWidth);
         if (fontBoundRect.isNull())
         {
             return 0.00000001;
@@ -487,7 +487,7 @@ void VPGraphicsTileGrid::DrawGrid(
 
     const qreal left = margins.left();
     const qreal top = margins.top();
-    const qreal penWidth = pen.widthF();
+    const qreal gridPenWidth = pen.widthF();
     const qreal totalWidth = nbCol * width;
     const qreal totalHeight = nbRow * height;
 
@@ -499,7 +499,7 @@ void VPGraphicsTileGrid::DrawGrid(
         // Apply pen margin only for the first line
         if (j == 0)
         {
-            y += penWidth * 2;
+            y += gridPenWidth * 2;
         }
 
         painter->drawLine(QPointF(left, y), QPointF(left + totalWidth, y));

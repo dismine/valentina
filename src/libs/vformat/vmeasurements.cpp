@@ -904,7 +904,7 @@ void VMeasurements::SetMValueAlias(const QString &name, const QString &alias)
         SetAttributeOrRemoveIf<QString>(node,
                                         AttrValueAlias,
                                         alias,
-                                        [](const QString &alias) noexcept { return alias.isEmpty(); });
+                                        [](const QString &str) noexcept { return str.isEmpty(); });
     }
     else
     {
