@@ -160,8 +160,9 @@ auto VAbstractTool::CheckFormula(const quint32 &toolId, QString &formula, VConta
                     const UndoButton resultUndo = dialogUndo->Result();
                     if (resultUndo == UndoButton::Fix)
                     {
-                        auto *dialog =
-                            new DialogEditWrongFormula(data, toolId, VAbstractValApplication::VApp()->getMainWindow());
+                        QScopedPointer<DialogEditWrongFormula> dialog(
+                            new DialogEditWrongFormula(data, toolId, VAbstractValApplication::VApp()->getMainWindow()));
+
                         dialog->setWindowTitle(tr("Edit wrong formula"));
                         dialog->SetFormula(formula);
                         if (dialog->exec() == QDialog::Accepted)
@@ -169,7 +170,7 @@ auto VAbstractTool::CheckFormula(const quint32 &toolId, QString &formula, VConta
                             formula = dialog->GetFormula();
                             /* Need delete dialog here because parser in dialog don't allow use correct separator for
                              * parsing here. */
-                            delete dialog;
+                            dialog.reset();
                             QScopedPointer<Calculator> const cal1(new Calculator());
                             result = cal1->EvalFormula(data->DataVariables(), formula);
 
@@ -181,7 +182,6 @@ auto VAbstractTool::CheckFormula(const quint32 &toolId, QString &formula, VConta
 
                             break;
                         }
-                        delete dialog;
                     }
                     else
                     {
