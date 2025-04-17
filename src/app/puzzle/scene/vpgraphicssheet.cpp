@@ -176,24 +176,32 @@ void VPGraphicsSheet::PaintVerticalFold(QPainter *painter, const QRectF &sheetRe
         QFont font = QApplication::font();
         font.setPointSize(foldFontSize);
         painter->setFont(font);
-        QRectF textRect = painter->fontMetrics().boundingRect(foldText);
+        QRectF const textRect = painter->fontMetrics().boundingRect(foldText);
+        // int const textAscent = painter->fontMetrics().ascent();
         int const textDescent = painter->fontMetrics().descent();
         QPointF const textPosition(sheetRect.center().x() - textRect.width() / 2.,
-                                   sheetRect.topLeft().y() - foldTextMargin - textDescent);
+                                   sheetRect.center().y() - sheetRect.width() / 2. - foldTextMargin - textDescent);
+        painter->translate(sheetRect.center());
+        painter->rotate(90);
+        painter->translate(-sheetRect.center());
         painter->drawText(textPosition, foldText);
-        textRect.translate(sheetRect.center() - textRect.center());
-        textRect.translate(0, -(sheetRect.center().y() - sheetRect.topLeft().y()) - foldTextMargin -
-                                  textRect.height() / 2.);
-        // painter->drawRect(textRect); // uncomment for debug
         guard.restore();
+
+        QRectF swappedRect = SwapRect(textRect);
+        swappedRect.translate(sheetRect.center() - swappedRect.center());
+        swappedRect.translate((sheetRect.topRight().x() - sheetRect.center().x()) + foldTextMargin
+                                  + textRect.height() / 2.,
+                              0);
+        // painter->drawRect(swappedRect); // uncomment for debug
 
         if (sheetRect.width() >= textRect.width() * 2)
         {
-            qreal const baseY = textRect.center().y();
+            // qreal const baseX = sheetRect.topRight().x() + foldTextMargin + textDescent + textAscent / 2.;
+            qreal const baseX = swappedRect.center().x();
             qreal const arrowMargin = foldArrowMargin + textRect.width() / 2.;
+            QLineF const leftLine(QPointF(baseX, sheetRect.topRight().y()),
+                                  QPointF(baseX, sheetRect.center().y() - arrowMargin));
 
-            QLineF const leftLine(QPointF(sheetRect.topLeft().x(), baseY),
-                                  QPointF(sheetRect.center().x() - arrowMargin, baseY));
             VPieceGrainline const leftArrow(leftLine, GrainlineArrowDirection::oneWayDown);
             QPainterPath leftArrowPath = VLayoutPiece::GrainlinePath(leftArrow.Shape());
             leftArrowPath.setFillRule(Qt::WindingFill);
@@ -207,8 +215,8 @@ void VPGraphicsSheet::PaintVerticalFold(QPainter *painter, const QRectF &sheetRe
             painter->drawPath(leftArrowPath);
             guard.restore();
 
-            QLineF const rightLine(QPointF(sheetRect.center().x() + arrowMargin, baseY),
-                                   QPointF(sheetRect.topRight().x(), baseY));
+            QLineF const rightLine(QPointF(baseX, sheetRect.center().y() + arrowMargin),
+                                   QPointF(baseX, sheetRect.bottomRight().y()));
             VPieceGrainline const rightArrow(rightLine, GrainlineArrowDirection::oneWayUp);
             QPainterPath rightArrowPath = VLayoutPiece::GrainlinePath(rightArrow.Shape());
             rightArrowPath.setFillRule(Qt::WindingFill);
@@ -235,31 +243,25 @@ void VPGraphicsSheet::PaintHorizontalFold(QPainter *painter, const QRectF &sheet
         QFont font = QApplication::font();
         font.setPointSize(foldFontSize);
         painter->setFont(font);
-        QRectF const textRect = painter->fontMetrics().boundingRect(foldText);
-        // int const textAscent = painter->fontMetrics().ascent();
+        QRectF textRect = painter->fontMetrics().boundingRect(foldText);
         int const textDescent = painter->fontMetrics().descent();
         QPointF const textPosition(sheetRect.center().x() - textRect.width() / 2.,
-                                   sheetRect.center().y() - sheetRect.width() / 2. - foldTextMargin - textDescent);
-        painter->translate(sheetRect.center());
-        painter->rotate(90);
-        painter->translate(-sheetRect.center());
+                                   sheetRect.topLeft().y() - foldTextMargin - textDescent);
         painter->drawText(textPosition, foldText);
+        textRect.translate(sheetRect.center() - textRect.center());
+        textRect.translate(0,
+                           -(sheetRect.center().y() - sheetRect.topLeft().y()) - foldTextMargin
+                               - textRect.height() / 2.);
+        // painter->drawRect(textRect); // uncomment for debug
         guard.restore();
-
-        QRectF swappedRect = SwapRect(textRect);
-        swappedRect.translate(sheetRect.center() - swappedRect.center());
-        swappedRect.translate(
-            (sheetRect.topRight().x() - sheetRect.center().x()) + foldTextMargin + textRect.height() / 2., 0);
-        // painter->drawRect(swappedRect); // uncomment for debug
 
         if (sheetRect.height() >= textRect.width() * 2)
         {
-            // qreal const baseX = sheetRect.topRight().x() + foldTextMargin + textDescent + textAscent / 2.;
-            qreal const baseX = swappedRect.center().x();
+            qreal const baseY = textRect.center().y();
             qreal const arrowMargin = foldArrowMargin + textRect.width() / 2.;
-            QLineF const leftLine(QPointF(baseX, sheetRect.topRight().y()),
-                                  QPointF(baseX, sheetRect.center().y() - arrowMargin));
 
+            QLineF const leftLine(QPointF(sheetRect.topLeft().x(), baseY),
+                                  QPointF(sheetRect.center().x() - arrowMargin, baseY));
             VPieceGrainline const leftArrow(leftLine, GrainlineArrowDirection::oneWayDown);
             QPainterPath leftArrowPath = VLayoutPiece::GrainlinePath(leftArrow.Shape());
             leftArrowPath.setFillRule(Qt::WindingFill);
@@ -273,8 +275,8 @@ void VPGraphicsSheet::PaintHorizontalFold(QPainter *painter, const QRectF &sheet
             painter->drawPath(leftArrowPath);
             guard.restore();
 
-            QLineF const rightLine(QPointF(baseX, sheetRect.center().y() + arrowMargin),
-                                   QPointF(baseX, sheetRect.bottomRight().y()));
+            QLineF const rightLine(QPointF(sheetRect.center().x() + arrowMargin, baseY),
+                                   QPointF(sheetRect.topRight().x(), baseY));
             VPieceGrainline const rightArrow(rightLine, GrainlineArrowDirection::oneWayUp);
             QPainterPath rightArrowPath = VLayoutPiece::GrainlinePath(rightArrow.Shape());
             rightArrowPath.setFillRule(Qt::WindingFill);
@@ -336,7 +338,14 @@ void VPGraphicsSheet::PaintBorder(QPainter *painter) const
         if (VPLayoutPtr const layout = m_layout.toStrongRef();
             !layout.isNull() && layout->LayoutSettings().IsCutOnFold())
         {
-            if (sheetRect.width() >= sheetRect.height())
+            GrainlineType grainlineType = GrainlineType::NotFixed;
+            if (VPSheetPtr const sheet = layout->GetFocusedSheet(); !sheet.isNull())
+            {
+                grainlineType = sheet->GetGrainlineType();
+            }
+
+            if (const bool isWide = sheetRect.width() >= sheetRect.height();
+                grainlineType == GrainlineType::Horizontal || (grainlineType == GrainlineType::NotFixed && isWide))
             {
                 PaintVerticalFoldShadow(painter, sheetRect);
             }
@@ -351,19 +360,29 @@ void VPGraphicsSheet::PaintBorder(QPainter *painter) const
 //---------------------------------------------------------------------------------------------------------------------
 void VPGraphicsSheet::PaintFold(QPainter *painter) const
 {
-    if (VPLayoutPtr const layout = m_layout.toStrongRef(); !layout.isNull() && layout->LayoutSettings().IsCutOnFold())
+    VPLayoutPtr const layout = m_layout.toStrongRef();
+    if (layout.isNull() || !layout->LayoutSettings().IsCutOnFold())
     {
-        QRectF const sheetRect = GetSheetRect();
-        QRectF const foldField = m_showBorder ? sheetRect : FoldField(GetMarginsRect());
+        return;
+    }
 
-        if (sheetRect.width() >= sheetRect.height())
-        {
-            PaintVerticalFold(painter, foldField);
-        }
-        else
-        {
-            PaintHorizontalFold(painter, foldField);
-        }
+    GrainlineType grainlineType = GrainlineType::NotFixed;
+    if (VPSheetPtr const sheet = layout->GetFocusedSheet(); !sheet.isNull())
+    {
+        grainlineType = sheet->GetGrainlineType();
+    }
+
+    QRectF const sheetRect = GetSheetRect();
+    QRectF const foldField = m_showBorder ? sheetRect : FoldField(GetMarginsRect());
+
+    if (const bool isWide = sheetRect.width() >= sheetRect.height();
+        grainlineType == GrainlineType::Horizontal || (grainlineType == GrainlineType::NotFixed && isWide))
+    {
+        PaintHorizontalFold(painter, foldField);
+    }
+    else
+    {
+        PaintVerticalFold(painter, foldField);
     }
 }
 

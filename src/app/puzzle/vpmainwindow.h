@@ -535,6 +535,8 @@ private:
     void RotatePieces();
 
     void InitIcons();
+
+    void ToggleGrainlineControls(bool followGrainline, bool cutOnFold, GrainlineType type);
 };
 
 #endif // VPMAINWINDOW_H

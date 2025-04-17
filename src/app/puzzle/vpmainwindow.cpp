@@ -1085,6 +1085,7 @@ void VPMainWindow::InitPaperSizeData(const QString &suffix)
 
                 RotatePiecesToGrainline();
                 LayoutWasSaved(false);
+                m_graphicsView->RefreshLayout();
             });
 
     connect(ui->toolButtonGrainlineVerticalOrientation, &QToolButton::clicked, this,
@@ -1108,6 +1109,7 @@ void VPMainWindow::InitPaperSizeData(const QString &suffix)
 
                 RotatePiecesToGrainline();
                 LayoutWasSaved(false);
+                m_graphicsView->RefreshLayout();
             });
 
     connect(ui->pushButtonSheetRemoveUnusedLength, &QPushButton::clicked, this,
@@ -1326,23 +1328,31 @@ void VPMainWindow::InitPropertyTabLayout()
                 }
             });
 
-    connect(ui->checkBoxFollowGainline, &QCheckBox::toggled, this,
+    connect(ui->checkBoxFollowGainline,
+            &QCheckBox::toggled,
+            this,
             [this](bool checked)
             {
-                ui->toolButtonGrainlineHorizontalOrientation->setEnabled(ui->checkBoxFollowGainline->isChecked());
-                ui->toolButtonGrainlineVerticalOrientation->setEnabled(ui->checkBoxFollowGainline->isChecked());
-
-                if (not m_layout.isNull())
+                if (m_layout.isNull())
                 {
-                    m_layout->LayoutSettings().SetFollowGrainline(checked);
-
-                    if (checked)
-                    {
-                        RotatePiecesToGrainline();
-                    }
-
-                    LayoutWasSaved(false);
+                    return;
                 }
+
+                m_layout->LayoutSettings().SetFollowGrainline(checked);
+
+                if (VPSheetPtr const sheet = m_layout->GetFocusedSheet(); !sheet.isNull())
+                {
+                    ToggleGrainlineControls(checked,
+                                            m_layout->LayoutSettings().IsCutOnFold(),
+                                            sheet->GetGrainlineType());
+                }
+
+                if (checked)
+                {
+                    RotatePiecesToGrainline();
+                }
+
+                LayoutWasSaved(false);
             });
 
     connect(ui->checkBoxTogetherWithNotches, &QCheckBox::toggled, this, &VPMainWindow::TogetherWithNotchesChanged);
@@ -1547,11 +1557,9 @@ void VPMainWindow::SetPropertyTabSheetData()
             ui->doubleSpinBoxSheetMarginTop->setDisabled(ignoreMargins);
             ui->doubleSpinBoxSheetMarginBottom->setDisabled(ignoreMargins);
 
-            GrainlineType const type = sheet->GetGrainlineType();
-            ui->toolButtonGrainlineHorizontalOrientation->setChecked(type == GrainlineType::Horizontal);
-            ui->toolButtonGrainlineHorizontalOrientation->setEnabled(ui->checkBoxFollowGainline->isChecked());
-            ui->toolButtonGrainlineVerticalOrientation->setChecked(type == GrainlineType::Vertical);
-            ui->toolButtonGrainlineVerticalOrientation->setEnabled(ui->checkBoxFollowGainline->isChecked());
+            ToggleGrainlineControls(m_layout->LayoutSettings().GetFollowGrainline(),
+                                    m_layout->LayoutSettings().IsCutOnFold(),
+                                    sheet->GetGrainlineType());
 
             // set placement grid
             ui->groupBoxSheetGrid->setDisabled(false);
@@ -3702,6 +3710,26 @@ void VPMainWindow::InitIcons()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+void VPMainWindow::ToggleGrainlineControls(bool followGrainline, bool cutOnFold, GrainlineType type)
+{
+    const bool enableGrainlineOptions = followGrainline || cutOnFold;
+
+    ui->toolButtonGrainlineHorizontalOrientation->setEnabled(enableGrainlineOptions);
+    ui->toolButtonGrainlineVerticalOrientation->setEnabled(enableGrainlineOptions);
+
+    if (enableGrainlineOptions)
+    {
+        ui->toolButtonGrainlineHorizontalOrientation->setChecked(type == GrainlineType::Horizontal);
+        ui->toolButtonGrainlineVerticalOrientation->setChecked(type == GrainlineType::Vertical);
+    }
+    else
+    {
+        ui->toolButtonGrainlineHorizontalOrientation->setChecked(false);
+        ui->toolButtonGrainlineVerticalOrientation->setChecked(false);
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 void VPMainWindow::on_actionNew_triggered() // NOLINT(readability-convert-member-functions-to-static)
 {
     VPApplication::VApp()->NewMainWindow();
@@ -5055,7 +5083,7 @@ void VPMainWindow::LayoutWarningPiecesOutOfBound_toggled(bool checked)
 
         if (checked)
         {
-            if (VPSheetPtr sheet = m_layout->GetFocusedSheet(); !sheet.isNull())
+            if (VPSheetPtr const sheet = m_layout->GetFocusedSheet(); !sheet.isNull())
             {
                 sheet->CheckPiecesPositionValidity();
             }
@@ -5071,9 +5099,11 @@ void VPMainWindow::LayoutCutOnFold_toggled(bool checked)
     {
         m_layout->LayoutSettings().SetCutOnFold(checked);
         LayoutWasSaved(false);
-        if (VPSheetPtr sheet = m_layout->GetFocusedSheet(); !sheet.isNull())
+        if (VPSheetPtr const sheet = m_layout->GetFocusedSheet(); !sheet.isNull())
         {
             sheet->CheckPiecesPositionValidity();
+
+            ToggleGrainlineControls(m_layout->LayoutSettings().GetFollowGrainline(), checked, sheet->GetGrainlineType());
         }
         m_graphicsView->RefreshLayout();
     }
