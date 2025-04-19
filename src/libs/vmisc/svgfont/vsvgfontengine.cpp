@@ -48,6 +48,28 @@
 
 using namespace Qt::Literals::StringLiterals;
 
+namespace
+{
+//---------------------------------------------------------------------------------------------------------------------
+auto CalcOffset(const QPainterPath &path) -> QPointF
+{
+    const QRectF bounds = path.boundingRect();
+
+    // Shift path if top-left is positive
+    QPointF offset;
+    if (bounds.topLeft().x() > 0)
+    {
+        offset.setX(bounds.topLeft().x());
+    }
+    if (bounds.topLeft().y() > 0)
+    {
+        offset.setY(bounds.topLeft().y());
+    }
+
+    return offset;
+}
+} // namespace
+
 //---------------------------------------------------------------------------------------------------------------------
 VSvgFontEngine::VSvgFontEngine()
   : d(new VSvgFontEngineData())
@@ -203,6 +225,11 @@ auto VSvgFontEngine::DrawPath(const QPointF &point, const QString &str, qreal pe
         matrix.translate(d->m_glyphs[unicode].HorizAdvX() + penWidth / 2.0, 0);
     }
 
+    if (const QPointF offset = CalcOffset(path); !offset.isNull())
+    {
+        path.translate(-offset);
+    }
+
     return path;
 }
 
@@ -331,7 +358,20 @@ auto VSvgFontEngine::TextWidth(const QString &str, qreal penWidth) const -> qrea
 //---------------------------------------------------------------------------------------------------------------------
 auto VSvgFontEngine::BoundingRect(const QString &str, qreal penWidth) const -> QRectF
 {
-    return DrawPath(QPointF(), str, penWidth).boundingRect();
+    if (str.isEmpty() || str.trimmed().isEmpty())
+    {
+        return {}; // Mimic QFontMetrics behavior for space/empty
+    }
+
+    QPainterPath path = DrawPath(QPointF(), str, penWidth);
+
+    // Shift path if top-left is positive
+    if (QPointF offset = CalcOffset(path); !offset.isNull())
+    {
+        path.translate(-offset);
+    }
+
+    return path.boundingRect();
 }
 
 //---------------------------------------------------------------------------------------------------------------------

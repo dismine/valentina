@@ -71,7 +71,7 @@ public:
      */
     void RefreshLayout();
 
-    void RefreshPieces();
+    void RefreshPieces(bool printMode = false);
 
     /**
      * @brief PrepareForExport prepares the graphic for an export (i.e hide margin etc)
@@ -93,7 +93,8 @@ public:
     void RemovePiece(VPGraphicsPiece *piece);
     void AddPiece(VPGraphicsPiece *piece);
 
-    void SetTextAsPaths(bool textAsPaths) const;
+    auto IsTextAsPaths() const -> bool;
+    void SetTextAsPaths(bool textAsPaths);
 
     void PrepareTilesScheme();
     void ClearTilesScheme();
@@ -137,6 +138,7 @@ private:
     bool m_outOfBoundTmp{false};
     bool m_pieceSuperpositionTmp{false};
     bool m_pieceGapePositionTmp{false};
+    bool m_textAsPaths{false};
 
     void ConnectPiece(VPGraphicsPiece *piece) const;
 };
@@ -326,6 +328,12 @@ private:
 
     auto SheetUnits() const -> Unit;
 };
+
+//---------------------------------------------------------------------------------------------------------------------
+inline auto VPSheetSceneData::IsTextAsPaths() const -> bool
+{
+    return m_textAsPaths;
+}
 
 Q_DECLARE_METATYPE(VPSheetPtr) // NOLINT
 

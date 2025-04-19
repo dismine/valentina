@@ -95,7 +95,7 @@ public:
     auto TileFactory() const -> QSharedPointer<VPTileFactory>;
     void SetTileFactory(const QSharedPointer<VPTileFactory> &newTileFactory);
 
-    void RefreshScenePieces() const;
+    void RefreshScenePieces(bool printMode) const;
 
     auto WatermarkData() const -> VWatermarkData;
 

@@ -668,6 +668,7 @@ void DialogSaveManualLayout::ReadSettings()
     SetDxfCompatibility(static_cast<DXFApparelCompatibility>(settings->GetDxfCompatibility()));
     SetHideRuler(settings->GetHideRuler());
     SetTilesScheme(settings->GetTilesScheme());
+    SetTextAsPaths(settings->GetTextAsPaths());
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -684,6 +685,7 @@ void DialogSaveManualLayout::WriteSettings() const
     settings->SetDxfCompatibility(static_cast<qint8>(DxfCompatibility()));
     settings->SetHideRuler(IsHideRuler());
     settings->SetTilesScheme(IsTilesScheme());
+    settings->SetTextAsPaths(IsTextAsPaths());
 }
 
 //---------------------------------------------------------------------------------------------------------------------

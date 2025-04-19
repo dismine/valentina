@@ -64,10 +64,14 @@ public:
     auto CustomPen() const -> bool;
     void SetCustomPen(bool newCustomPen);
 
+    auto IsNoBrush() const -> bool;
+    void SetNoBrush(bool noBrush);
+
 private:
     Q_DISABLE_COPY_MOVE(VGraphicsFillItem) // NOLINT
     qreal width{1};
     bool m_customPen{false};
+    bool m_noBrush{false};
 };
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -92,6 +96,18 @@ inline auto VGraphicsFillItem::CustomPen() const -> bool
 inline void VGraphicsFillItem::SetCustomPen(bool newCustomPen)
 {
     m_customPen = newCustomPen;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+inline auto VGraphicsFillItem::IsNoBrush() const -> bool
+{
+    return m_noBrush;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+inline void VGraphicsFillItem::SetNoBrush(bool noBrush)
+{
+    m_noBrush = noBrush;
 }
 
 class VGraphicsFoldLineItem : public VGraphicsFillItem

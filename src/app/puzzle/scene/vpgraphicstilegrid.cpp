@@ -5,6 +5,7 @@
 #include "../layout/vplayout.h"
 #include "../layout/vpsheet.h"
 #include "../vformat/vsinglelineoutlinechar.h"
+#include "../vmisc/svgfont/vsvgfontdatabase.h"
 #include "../vmisc/svgfont/vsvgfontengine.h"
 #include "../vmisc/theme/vscenestylesheet.h"
 #include "../vmisc/vabstractapplication.h"
@@ -16,8 +17,6 @@
 #include <QImageReader>
 #include <QPixmapCache>
 #include <QSvgRenderer>
-
-#include <../vmisc/svgfont/vsvgfontdatabase.h>
 
 #if QT_VERSION < QT_VERSION_CHECK(6, 9, 0)
 #include "../vmisc/backport/qpainterstateguard.h"
@@ -373,8 +372,6 @@ void VPGraphicsTileGrid::PaintTileNumberOutlineFont(
     }
     painter->setPen(pen);
 
-    const qreal scale = SceneScale(scene());
-
     if (const VCommonSettings *settings = VAbstractApplication::VApp()->Settings();
         m_printMode && settings->GetSingleStrokeOutlineFont())
     {
@@ -398,6 +395,7 @@ void VPGraphicsTileGrid::PaintTileNumberOutlineFont(
 
         pen = painter->pen();
         pen.setStyle(Qt::SolidLine);
+        pen.setWidthF(ToPixel(0.3, Unit::Mm));
         painter->setPen(pen);
 
         QRectF const textRect = fm.boundingRect(tileNumber);
@@ -410,9 +408,35 @@ void VPGraphicsTileGrid::PaintTileNumberOutlineFont(
         painter->setRenderHint(QPainter::Antialiasing);
         painter->drawPath(transform.map(path));
     }
-    else if (font.pointSizeF() * scale >= minTextFontSize)
+    else if ((m_printMode && !m_textAsPaths && !settings->GetSingleStrokeOutlineFont())
+             || (!m_printMode && font.pointSizeF() * SceneScale(scene()) >= minTextFontSize))
     {
         painter->drawText(img, Qt::AlignCenter, QString::number(j * nbCol + i + 1));
+    }
+    else
+    {
+        const QString tileNumber = QString::number(j * nbCol + i + 1);
+
+        QPainterPath path;
+        path.addText(QPointF(), font, tileNumber);
+
+        QFontMetrics const fm(font);
+
+        QRectF const textRect = fm.boundingRect(tileNumber);
+        QPointF const textOffset(textRect.width() / 2.0, textRect.height() / 2.0);
+        QPointF const centerPoint = img.center();
+
+        QTransform transform;
+        transform.translate(centerPoint.x() - textOffset.x(), centerPoint.y() - textOffset.y() + textRect.height());
+
+        pen = painter->pen();
+        pen.setStyle(Qt::SolidLine);
+        pen.setWidthF(0.1);
+        painter->setPen(pen);
+
+        painter->setRenderHint(QPainter::Antialiasing);
+        painter->setBrush(QBrush(painter->pen().color(), Qt::SolidPattern));
+        painter->drawPath(transform.map(path));
     }
 }
 
@@ -450,6 +474,7 @@ void VPGraphicsTileGrid::PaintTileNumberSVGFont(QPainter *painter,
     else
     {
         pen.setColor(tileColor);
+        pen.setWidthF(ToPixel(0.3, Unit::Mm));
     }
 
     pen.setStyle(Qt::SolidLine);

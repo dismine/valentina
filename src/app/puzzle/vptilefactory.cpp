@@ -48,6 +48,8 @@ Q_GLOBAL_STATIC(WatermarkScaledSize, watermarkSizeCache) // NOLINT
 QT_WARNING_POP
 
 const int tileTextFontSize = 12; // Adjust as needed
+constexpr qreal notchHeight = UnitConvertor(3, Unit::Mm, Unit::Px);
+constexpr qreal shortNotchHeight = UnitConvertor(1.1, Unit::Mm, Unit::Px);
 
 //---------------------------------------------------------------------------------------------------------------------
 inline auto GenerateWatermarkScaledSizeCacheKey(const QString &watermarkPath, qreal xScale, qreal yScale) -> QString
@@ -336,7 +338,7 @@ void VPTileFactory::drawTile(
 
     if (showRuler)
     {
-        DrawRuler(painter, xscale);
+        DrawRuler(painter, xscale, sheet->SceneData()->IsTextAsPaths());
     }
     DrawWatermark(painter);
 
@@ -354,8 +356,8 @@ void VPTileFactory::drawTile(
     }
 
     // prepare the painting for the text information
-    DrawGridTextInformation(painter, row, col);
-    DrawPageTextInformation(painter, row, col, nbRow, nbCol, sheet->GetName());
+    DrawGridTextInformation(painter, row, col, sheet->SceneData()->IsTextAsPaths());
+    DrawPageTextInformation(painter, row, col, nbRow, nbCol, sheet->GetName(), sheet->SceneData()->IsTextAsPaths());
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -413,7 +415,7 @@ auto VPTileFactory::WatermarkData() const -> const VWatermarkData &
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VPTileFactory::DrawRuler(QPainter *painter, qreal scale) const
+void VPTileFactory::DrawRuler(QPainter *painter, qreal scale, bool testAsPaths) const
 {
     VPLayoutPtr const layout = m_layout.toStrongRef();
     if (layout.isNull())
@@ -423,11 +425,8 @@ void VPTileFactory::DrawRuler(QPainter *painter, qreal scale) const
 
     QPen const rulePen(tileColor, 1, Qt::SolidLine);
 
-    QPainterStateGuard guard(painter);
+    QPainterStateGuard const guard(painter);
     painter->setPen(rulePen);
-
-    const qreal notchHeight = UnitConvertor(3, Unit::Mm, Unit::Px);
-    const qreal shortNotchHeight = UnitConvertor(1.1, Unit::Mm, Unit::Px);
 
     Unit const layoutUnits = layout->LayoutSettings().GetUnit();
     Unit const rulerUnits = layoutUnits == Unit::Inch ? layoutUnits : Unit::Cm;
@@ -449,25 +448,153 @@ void VPTileFactory::DrawRuler(QPainter *painter, qreal scale) const
         }
         else
         {
-            guard.save();
-
-            QFont fnt = painter->font();
-            const int size = qRound(10 / scale);
-            size > 0 ? fnt.setPointSize(size) : fnt.setPointSize(10);
-            painter->setFont(fnt);
-
-            qreal unitsWidth = 0;
-            QFontMetrics const fm(fnt);
-            QString const units = rulerUnits != Unit::Inch ? tr("cm", "unit") : tr("in", "unit");
-            unitsWidth = fm.horizontalAdvance(units);
-            painter->drawText(QPointF(step * 0.5 - unitsWidth * 0.6,
-                                      m_drawingAreaHeight - tileStripeWidth + notchHeight + shortNotchHeight),
-                              units);
-
-            guard.restore();
+            if (m_commonSettings->GetSingleLineFonts())
+            {
+                DrawRulerSVGFont(painter, scale, testAsPaths);
+            }
+            else
+            {
+                DrawRulerOutlineFont(painter, scale, testAsPaths);
+            }
         }
         ++i;
     }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VPTileFactory::DrawRulerOutlineFont(QPainter *painter, qreal scale, bool testAsPaths) const
+{
+    VPLayoutPtr const layout = m_layout.toStrongRef();
+    if (layout.isNull())
+    {
+        return;
+    }
+
+    QPainterStateGuard const guard(painter);
+
+    Unit const layoutUnits = layout->LayoutSettings().GetUnit();
+    Unit const rulerUnits = layoutUnits == Unit::Inch ? layoutUnits : Unit::Cm;
+    const qreal step = UnitConvertor(1, rulerUnits, Unit::Px);
+
+    QString const units = rulerUnits != Unit::Inch ? tr("cm", "unit") : tr("in", "unit");
+
+    if (m_commonSettings->GetSingleStrokeOutlineFont())
+    {
+        QPen textPen = PenTileInfos();
+        textPen.setStyle(Qt::SolidLine);
+        painter->setPen(textPen);
+
+        QFont font = m_font;
+        const int size = qRound(10 / scale);
+        size > 0 ? font.setPointSize(size) : font.setPointSize(10);
+
+        VSingleLineOutlineChar const corrector(font);
+        if (!corrector.IsPopulated())
+        {
+            corrector.LoadCorrections(m_commonSettings->GetPathFontCorrections());
+        }
+
+        QFontMetrics const fm(font);
+
+        QPainterPath path;
+
+        int w = 0;
+        for (auto c : qAsConst(units))
+        {
+            path.addPath(corrector.DrawChar(w, static_cast<qreal>(fm.ascent()), c));
+            w += fm.horizontalAdvance(c);
+        }
+
+        const QRectF textRect = fm.boundingRect(units);
+        qreal const unitsWidth = fm.horizontalAdvance(units);
+
+        painter->translate(
+            QPointF(step * 0.5 - unitsWidth * 0.6,
+                    m_drawingAreaHeight - tileStripeWidth + notchHeight + shortNotchHeight * 2 - textRect.height()));
+
+        painter->drawPath(path);
+    }
+    else if (!testAsPaths)
+    {
+        QFont fnt = painter->font();
+        const int size = qRound(10 / scale);
+        size > 0 ? fnt.setPointSize(size) : fnt.setPointSize(10);
+        painter->setFont(fnt);
+
+        QFontMetrics const fm(fnt);
+        qreal const unitsWidth = fm.horizontalAdvance(units);
+
+        painter->drawText(QPointF(step * 0.5 - unitsWidth * 0.6,
+                                  m_drawingAreaHeight - tileStripeWidth + notchHeight + shortNotchHeight),
+                          units);
+    }
+    else
+    {
+        QPen textPen = PenTileInfos();
+        textPen.setStyle(Qt::SolidLine);
+        textPen.setWidthF(0.1);
+        painter->setPen(textPen);
+        painter->setBrush(QBrush(textPen.color(), Qt::SolidPattern));
+
+        QFont fnt = painter->font();
+        const int size = qRound(10 / scale);
+        size > 0 ? fnt.setPointSize(size) : fnt.setPointSize(10);
+        painter->setFont(fnt);
+
+        QFontMetrics const fm(fnt);
+        qreal const unitsWidth = fm.horizontalAdvance(units);
+
+        QPainterPath path;
+        path.addText(QPointF(), fnt, units);
+
+        painter->translate(QPointF(step * 0.5 - unitsWidth * 0.6,
+                                   m_drawingAreaHeight - tileStripeWidth + notchHeight + shortNotchHeight));
+
+        painter->drawPath(path);
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VPTileFactory::DrawRulerSVGFont(QPainter *painter, qreal scale, bool testAsPaths) const
+{
+    VPLayoutPtr const layout = m_layout.toStrongRef();
+    if (layout.isNull())
+    {
+        return;
+    }
+
+    int size = qRound(10 / scale);
+    size = size > 0 ? size : 10;
+
+    const VSvgFontDatabase *db = VAbstractApplication::VApp()->SVGFontDatabase();
+    const VSvgFontEngine engine = db->FontEngine(m_svgFontFamily, SVGFontStyle::Normal, SVGFontWeight::Normal, size);
+
+    if (VSvgFont const svgFont = engine.Font(); !svgFont.IsValid())
+    {
+        auto const errorMsg = QStringLiteral("Invalid SVG font '%1'. Fallback to outline font.").arg(svgFont.Name());
+        qDebug() << errorMsg;
+        DrawRulerOutlineFont(painter, scale, testAsPaths);
+        return;
+    }
+
+    QPainterStateGuard const guard(painter);
+
+    QPen textPen = PenTileInfos();
+    textPen.setStyle(Qt::SolidLine);
+    painter->setPen(textPen);
+
+    Unit const layoutUnits = layout->LayoutSettings().GetUnit();
+    Unit const rulerUnits = layoutUnits == Unit::Inch ? layoutUnits : Unit::Cm;
+    const qreal step = UnitConvertor(1, rulerUnits, Unit::Px);
+    QString const units = rulerUnits != Unit::Inch ? tr("cm", "unit") : tr("in", "unit");
+    qreal const unitsWidth = engine.TextWidth(units, textPen.widthF());
+    const QRectF textRect = engine.BoundingRect(units, textPen.widthF());
+
+    painter->translate(
+        QPointF(step * 0.5 - unitsWidth * 0.6,
+                m_drawingAreaHeight - tileStripeWidth + notchHeight + shortNotchHeight - textRect.height()));
+
+    painter->drawPath(engine.DrawPath(QPointF(), units, textPen.widthF()));
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -810,20 +937,20 @@ void VPTileFactory::DrawSolidRightLine(QPainter *painter, int row, int nbRow) co
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VPTileFactory::DrawGridTextInformation(QPainter *painter, int row, int col) const
+void VPTileFactory::DrawGridTextInformation(QPainter *painter, int row, int col, bool testAsPaths) const
 {
     if (const QString grid = tr("Grid ( %1 , %2 )").arg(row + 1).arg(col + 1); m_commonSettings->GetSingleLineFonts())
     {
-        DrawGridTextInformationSVGFont(painter, grid);
+        DrawGridTextInformationSVGFont(painter, grid, testAsPaths);
     }
     else
     {
-        DrawGridTextInformationOutlineFont(painter, grid);
+        DrawGridTextInformationOutlineFont(painter, grid, testAsPaths);
     }
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VPTileFactory::DrawGridTextInformationOutlineFont(QPainter *painter, const QString &text) const
+void VPTileFactory::DrawGridTextInformationOutlineFont(QPainter *painter, const QString &text, bool testAsPaths) const
 {
     QPainterStateGuard guard(painter);
 
@@ -856,7 +983,7 @@ void VPTileFactory::DrawGridTextInformationOutlineFont(QPainter *painter, const 
 
         // Compute position to center the text
         qreal const x = UnitConvertor(1, Unit::Cm, Unit::Px);
-        qreal const y = m_drawingAreaHeight - tileStripeWidth / 1.3;
+        qreal const y = m_drawingAreaHeight - tileStripeWidth + notchHeight + shortNotchHeight;
         qreal const centerX = (m_drawingAreaWidth - tileStripeWidth - UnitConvertor(1, Unit::Cm, Unit::Px)) / 2.0
                               - w / 2.0;
 
@@ -864,7 +991,7 @@ void VPTileFactory::DrawGridTextInformationOutlineFont(QPainter *painter, const 
 
         painter->drawPath(path);
     }
-    else
+    else if (!testAsPaths)
     {
         QTextDocument td;
         td.setPageSize(QSizeF(m_drawingAreaWidth - UnitConvertor(2, Unit::Cm, Unit::Px), m_drawingAreaHeight));
@@ -882,10 +1009,37 @@ void VPTileFactory::DrawGridTextInformationOutlineFont(QPainter *painter, const 
         painter->translate(QPointF(UnitConvertor(1, Unit::Cm, Unit::Px), m_drawingAreaHeight - tileStripeWidth / 1.3));
         td.drawContents(painter);
     }
+    else
+    {
+        // Setup painter font
+        QFont font = m_font;
+        font.setPointSize(tileTextFontSize);
+
+        textPen.setStyle(Qt::SolidLine);
+        textPen.setWidthF(0.1);
+        painter->setPen(textPen);
+        painter->setBrush(QBrush(textPen.color(), Qt::SolidPattern));
+
+        const QFontMetrics fm(font);
+        const QRectF textRect = fm.boundingRect(text);
+
+        QPainterPath path;
+        path.addText(QPointF(), font, text);
+
+        // Compute position to center the text
+        qreal const x = UnitConvertor(1, Unit::Cm, Unit::Px);
+        qreal const y = m_drawingAreaHeight - tileStripeWidth / 1.3 + textRect.height();
+        qreal const centerX = (m_drawingAreaWidth - tileStripeWidth - UnitConvertor(1, Unit::Cm, Unit::Px)) / 2.0
+                              - textRect.width() / 2.0;
+
+        painter->translate(x + centerX, y);
+
+        painter->drawPath(path);
+    }
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VPTileFactory::DrawGridTextInformationSVGFont(QPainter *painter, const QString &text) const
+void VPTileFactory::DrawGridTextInformationSVGFont(QPainter *painter, const QString &text, bool testAsPaths) const
 {
     const VSvgFontDatabase *db = VAbstractApplication::VApp()->SVGFontDatabase();
     const VSvgFontEngine engine = db->FontEngine(m_svgFontFamily,
@@ -897,7 +1051,7 @@ void VPTileFactory::DrawGridTextInformationSVGFont(QPainter *painter, const QStr
     {
         auto const errorMsg = QStringLiteral("Invalid SVG font '%1'. Fallback to outline font.").arg(svgFont.Name());
         qDebug() << errorMsg;
-        DrawGridTextInformationOutlineFont(painter, text);
+        DrawGridTextInformationOutlineFont(painter, text, testAsPaths);
         return;
     }
 
@@ -909,7 +1063,7 @@ void VPTileFactory::DrawGridTextInformationSVGFont(QPainter *painter, const QStr
 
     // Compute position to center the text
     qreal const x = UnitConvertor(1, Unit::Cm, Unit::Px);
-    qreal const y = m_drawingAreaHeight - tileStripeWidth / 1.3;
+    qreal const y = m_drawingAreaHeight - tileStripeWidth + notchHeight + shortNotchHeight;
     qreal const centerX = (m_drawingAreaWidth - tileStripeWidth - UnitConvertor(1, Unit::Cm, Unit::Px)) / 2.0
                           - engine.TextWidth(text, textPen.widthF()) / 2.0;
 
@@ -920,23 +1074,24 @@ void VPTileFactory::DrawGridTextInformationSVGFont(QPainter *painter, const QStr
 
 //---------------------------------------------------------------------------------------------------------------------
 void VPTileFactory::DrawPageTextInformation(
-    QPainter *painter, int row, int col, int nbRow, int nbCol, const QString &sheetName) const
+    QPainter *painter, int row, int col, int nbRow, int nbCol, const QString &sheetName, bool testAsPaths) const
 {
     if (const QString page = tr("Page %1 of %2").arg(row * nbCol + col + 1).arg(nbCol * nbRow);
         m_commonSettings->GetSingleLineFonts())
     {
-        DrawPageTextInformationSVGFont(painter, page, sheetName);
+        DrawPageTextInformationSVGFont(painter, page, sheetName, testAsPaths);
     }
     else
     {
-        DrawPageTextInformationOutlineFont(painter, page, sheetName);
+        DrawPageTextInformationOutlineFont(painter, page, sheetName, testAsPaths);
     }
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 void VPTileFactory::DrawPageTextInformationOutlineFont(QPainter *painter,
                                                        const QString &text,
-                                                       const QString &sheetName) const
+                                                       const QString &sheetName,
+                                                       bool testAsPaths) const
 {
     QPainterStateGuard guard(painter);
 
@@ -957,14 +1112,13 @@ void VPTileFactory::DrawPageTextInformationOutlineFont(QPainter *painter,
             corrector.LoadCorrections(m_commonSettings->GetPathFontCorrections());
         }
 
-        auto const metrix = QFontMetrics(font);
-        int const maxWidth = metrix.horizontalAdvance(QString().fill('z', 50));
-        QString const clippedSheetName = metrix.elidedText(sheetName, Qt::ElideMiddle, maxWidth);
+        auto const fm = QFontMetrics(font);
+        int const maxWidth = fm.horizontalAdvance(QString().fill('z', 50));
+        QString const clippedSheetName = fm.elidedText(sheetName, Qt::ElideMiddle, maxWidth);
 
         const QString page = text + " - "_L1 + clippedSheetName;
 
         QPainterPath path;
-        QFontMetrics const fm(font);
 
         int w = 0;
         for (auto c : qAsConst(page))
@@ -983,7 +1137,7 @@ void VPTileFactory::DrawPageTextInformationOutlineFont(QPainter *painter,
 
         painter->drawPath(path);
     }
-    else
+    else if (!testAsPaths)
     {
         const QString tileColorStr
             = QStringLiteral("%1,%2,%3").arg(tileColor.red()).arg(tileColor.green()).arg(tileColor.blue());
@@ -1008,12 +1162,45 @@ void VPTileFactory::DrawPageTextInformationOutlineFont(QPainter *painter,
             QPointF(-m_drawingAreaHeight + UnitConvertor(1, Unit::Cm, Unit::Px), m_drawingAreaWidth - tileStripeWidth));
         td.drawContents(painter);
     }
+    else
+    {
+        // Setup painter font
+        QFont font = m_font;
+        font.setPointSize(tileTextFontSize);
+
+        textPen.setStyle(Qt::SolidLine);
+        textPen.setWidthF(0.1);
+        painter->setPen(textPen);
+        painter->setBrush(QBrush(textPen.color(), Qt::SolidPattern));
+
+        auto const fm = QFontMetrics(font);
+        int const maxWidth = fm.horizontalAdvance(QString().fill('z', 50));
+        QString const clippedSheetName = fm.elidedText(sheetName, Qt::ElideMiddle, maxWidth);
+
+        const QString page = text + " - "_L1 + clippedSheetName;
+
+        const QRectF textRect = fm.boundingRect(page);
+
+        QPainterPath path;
+        path.addText(QPointF(), font, page);
+
+        painter->rotate(-90);
+
+        // Compute position to center the text
+        qreal const x = -m_drawingAreaHeight / 2.0 - textRect.width() / 2.0;
+        qreal const y = m_drawingAreaWidth - tileStripeWidth + textRect.height();
+
+        painter->translate(QPointF(x, y));
+
+        painter->drawPath(path);
+    }
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 void VPTileFactory::DrawPageTextInformationSVGFont(QPainter *painter,
                                                    const QString &text,
-                                                   const QString &sheetName) const
+                                                   const QString &sheetName,
+                                                   bool testAsPaths) const
 {
     const VSvgFontDatabase *db = VAbstractApplication::VApp()->SVGFontDatabase();
     const VSvgFontEngine engine = db->FontEngine(m_svgFontFamily,
@@ -1025,7 +1212,7 @@ void VPTileFactory::DrawPageTextInformationSVGFont(QPainter *painter,
     {
         auto const errorMsg = QStringLiteral("Invalid SVG font '%1'. Fallback to outline font.").arg(svgFont.Name());
         qDebug() << errorMsg;
-        DrawPageTextInformationOutlineFont(painter, text, sheetName);
+        DrawPageTextInformationOutlineFont(painter, text, sheetName, testAsPaths);
         return;
     }
 
@@ -1047,7 +1234,7 @@ void VPTileFactory::DrawPageTextInformationSVGFont(QPainter *painter,
 
     // Compute position to center the text
     qreal const x = -m_drawingAreaHeight / 2.0 - engine.TextWidth(page, textPen.widthF()) / 2.0;
-    qreal const y = m_drawingAreaWidth - tileStripeWidth;
+    qreal const y = m_drawingAreaWidth - tileStripeWidth + ToPixel(1, Unit::Mm);
 
     painter->translate(QPointF(x, y));
 

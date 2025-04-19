@@ -286,7 +286,7 @@ void VPSheetSceneData::RefreshLayout()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VPSheetSceneData::RefreshPieces()
+void VPSheetSceneData::RefreshPieces(bool printMode)
 {
     qDeleteAll(m_graphicsPieces);
     m_graphicsPieces.clear();
@@ -314,6 +314,7 @@ void VPSheetSceneData::RefreshPieces()
         }
 
         auto *graphicsPiece = new VPGraphicsPiece(piece);
+        graphicsPiece->SetPrintMode(printMode);
         m_graphicsPieces.append(graphicsPiece);
         m_scene->addItem(graphicsPiece);
 
@@ -333,8 +334,11 @@ void VPSheetSceneData::PrepareForExport()
     VStylesheetStyle::SetExportColorScheme(ExportColorScheme::BackAndWhite);
     VSceneStylesheet::ResetStyles();
 
+    const bool printMode = true;
+
     m_graphicsSheet->SetShowBorder(false);
     m_graphicsSheet->SetShowMargin(false);
+    m_graphicsSheet->SetPrintMode(printMode);
 
     m_rotationControls->setVisible(false);
     m_rotationOrigin->setVisible(false);
@@ -368,8 +372,8 @@ void VPSheetSceneData::PrepareForExport()
         layout->LayoutSettings().SetWarningPieceGapePosition(false);
     }
 
+    RefreshPieces(printMode);
     RefreshLayout();
-    RefreshPieces();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -378,8 +382,11 @@ void VPSheetSceneData::CleanAfterExport()
     VStylesheetStyle::SetExportColorScheme(ExportColorScheme::Default);
     VSceneStylesheet::ResetStyles();
 
+    const bool printMode = false;
+
     m_graphicsSheet->SetShowBorder(true);
     m_graphicsSheet->SetShowMargin(true);
+    m_graphicsSheet->SetPrintMode(printMode);
 
     m_rotationControls->setVisible(true);
 
@@ -402,8 +409,8 @@ void VPSheetSceneData::CleanAfterExport()
         layout->LayoutSettings().SetWarningPieceGapePosition(m_pieceGapePositionTmp);
     }
 
+    RefreshPieces(printMode);
     RefreshLayout();
-    RefreshPieces();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -460,15 +467,17 @@ void VPSheetSceneData::AddPiece(VPGraphicsPiece *piece)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VPSheetSceneData::SetTextAsPaths(bool textAsPaths) const
+void VPSheetSceneData::SetTextAsPaths(bool textAsPaths)
 {
-    for (auto *piece : m_graphicsPieces)
+    for (auto *piece : qAsConst(m_graphicsPieces))
     {
         if (piece != nullptr)
         {
             piece->SetTextAsPaths(textAsPaths);
         }
     }
+
+    m_textAsPaths = textAsPaths;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -484,6 +493,7 @@ void VPSheetSceneData::PrepareTilesScheme()
     }
 
     m_graphicsTileGrid->SetPrintMode(true);
+    m_graphicsTileGrid->SetTextAsPaths(m_textAsPaths);
 
     RefreshLayout();
 }
@@ -498,6 +508,7 @@ void VPSheetSceneData::ClearTilesScheme()
     }
 
     m_graphicsTileGrid->SetPrintMode(false);
+    m_graphicsTileGrid->SetTextAsPaths(false);
 
     RefreshLayout();
 }

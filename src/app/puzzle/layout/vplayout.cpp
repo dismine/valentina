@@ -163,14 +163,14 @@ void VPLayout::SetTileFactory(const QSharedPointer<VPTileFactory> &newTileFactor
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VPLayout::RefreshScenePieces() const
+void VPLayout::RefreshScenePieces(bool printMode) const
 {
     const QList<VPSheetPtr> sheets = GetSheets();
     for (const auto &sheet : sheets)
     {
         if (not sheet.isNull())
         {
-            sheet->SceneData()->RefreshPieces();
+            sheet->SceneData()->RefreshPieces(printMode);
         }
     }
 }

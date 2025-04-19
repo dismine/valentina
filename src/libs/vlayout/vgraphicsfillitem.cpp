@@ -53,22 +53,28 @@ void VGraphicsFillItem::paint(QPainter *painter, const QStyleOptionGraphicsItem 
     Q_UNUSED(widget)
     QPainterStateGuard const guard(painter);
 
-    QPen pen;
-
     if (m_customPen)
     {
-        pen = this->pen();
+        painter->setPen(this->pen());
     }
     else
     {
-        pen = painter->pen();
+        QPen pen = painter->pen();
         pen.setWidthF(width);
         pen.setCapStyle(Qt::RoundCap);
         pen.setJoinStyle(Qt::RoundJoin);
+        painter->setPen(pen);
     }
-    painter->setPen(pen);
 
-    painter->setBrush(painter->pen().color());
+    if (m_noBrush)
+    {
+        painter->setBrush(QBrush(Qt::NoBrush));
+    }
+    else
+    {
+        painter->setBrush(painter->pen().color());
+    }
+
     painter->drawPath(path());
 }
 

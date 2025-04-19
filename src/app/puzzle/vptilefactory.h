@@ -137,7 +137,9 @@ private:
      */
     QString m_svgFontFamily{};
 
-    void DrawRuler(QPainter *painter, qreal scale) const;
+    void DrawRuler(QPainter *painter, qreal scale, bool testAsPaths) const;
+    void DrawRulerOutlineFont(QPainter *painter, qreal scale, bool testAsPaths) const;
+    void DrawRulerSVGFont(QPainter *painter, qreal scale, bool testAsPaths) const;
     void DrawWatermark(QPainter *painter) const;
 
     auto PenTileInfos() const -> QPen;
@@ -165,14 +167,20 @@ private:
     void DrawSolidBottomLine(QPainter *painter, int col, int nbCol) const;
     void DrawSolidRightLine(QPainter *painter, int row, int nbRow) const;
 
-    void DrawGridTextInformation(QPainter *painter, int row, int col) const;
-    void DrawGridTextInformationOutlineFont(QPainter *painter, const QString &text) const;
-    void DrawGridTextInformationSVGFont(QPainter *painter, const QString &text) const;
+    void DrawGridTextInformation(QPainter *painter, int row, int col, bool testAsPaths) const;
+    void DrawGridTextInformationOutlineFont(QPainter *painter, const QString &text, bool testAsPaths) const;
+    void DrawGridTextInformationSVGFont(QPainter *painter, const QString &text, bool testAsPaths) const;
 
     void DrawPageTextInformation(
-        QPainter *painter, int row, int col, int nbRow, int nbCol, const QString &sheetName) const;
-    void DrawPageTextInformationOutlineFont(QPainter *painter, const QString &text, const QString &sheetName) const;
-    void DrawPageTextInformationSVGFont(QPainter *painter, const QString &text, const QString &sheetName) const;
+        QPainter *painter, int row, int col, int nbRow, int nbCol, const QString &sheetName, bool testAsPaths) const;
+    void DrawPageTextInformationOutlineFont(QPainter *painter,
+                                            const QString &text,
+                                            const QString &sheetName,
+                                            bool testAsPaths) const;
+    void DrawPageTextInformationSVGFont(QPainter *painter,
+                                        const QString &text,
+                                        const QString &sheetName,
+                                        bool testAsPaths) const;
 };
 
 //---------------------------------------------------------------------------------------------------------------------

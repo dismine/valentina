@@ -324,7 +324,7 @@ void VPGraphicsPiece::contextMenuEvent(QGraphicsSceneContextMenuEvent *event)
     {
         QMenu *moveMenu = menu.addMenu(tr("Move to"));
 
-        for (const auto &sheet : sheets)
+        for (const auto &sheet : qAsConst(sheets))
         {
             if (not sheet.isNull())
             {
@@ -357,6 +357,13 @@ void VPGraphicsPiece::SetTextAsPaths(bool newTextAsPaths)
 {
     m_textAsPaths = newTextAsPaths;
     InitLabels();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VPGraphicsPiece::SetPrintMode(bool newPrintMode)
+{
+    m_printMode = newPrintMode;
+    InitGrainlineItem();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -593,10 +600,16 @@ void VPGraphicsPiece::InitGrainlineItem()
         }
         m_grainlineItem->setPath(VLayoutPiece::GrainlinePath(piece->GetMappedGrainlineShape()));
 
-        VPSettings *settings = VPApplication::VApp()->PuzzleSettings();
+        const VPSettings *settings = VPApplication::VApp()->PuzzleSettings();
+
         QPen const pen(PieceColor(), settings->GetLayoutLineWidth(), Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin);
         m_grainlineItem->SetCustomPen(true);
         m_grainlineItem->setPen(pen);
+
+        const bool penPrinting = m_printMode
+                                 && (settings->GetSingleLineFonts() || settings->GetSingleStrokeOutlineFont());
+        m_grainlineItem->SetNoBrush(penPrinting);
+
         m_grainlineItem->show();
     }
 }

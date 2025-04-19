@@ -123,6 +123,9 @@ public:
     auto GetTilesScheme() const -> bool;
     void SetTilesScheme(bool value);
 
+    auto GetTextAsPaths() const -> bool;
+    void SetTextAsPaths(bool value);
+
 private:
     Q_DISABLE_COPY_MOVE(VPSettings) // NOLINT
 };

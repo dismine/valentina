@@ -2031,7 +2031,8 @@ void VPMainWindow::ConnectToPreferences(const QSharedPointer<DialogPuzzlePrefere
             {
                 if (not m_layout.isNull())
                 {
-                    m_layout->RefreshScenePieces();
+                    const bool printMode = false;
+                    m_layout->RefreshScenePieces(printMode);
                 }
             });
 }
@@ -2490,7 +2491,8 @@ void VPMainWindow::ExportFlatLayout(const VPExportData &data)
         return;
     }
 
-    m_layout->RefreshScenePieces();
+    const bool printMode = true;
+    m_layout->RefreshScenePieces(printMode);
 
     VPApplication::VApp()->PuzzleSettings()->SetPathLayoutExport(path);
 
@@ -2510,6 +2512,8 @@ void VPMainWindow::ExportFlatLayout(const VPExportData &data)
     }
 
     RemoveLayoutPath(path, usedNotExistedDir);
+
+    m_layout->RefreshScenePieces(!printMode);
 }
 
 //---------------------------------------------------------------------------------------------------------------------

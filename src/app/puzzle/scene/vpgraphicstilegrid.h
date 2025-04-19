@@ -49,8 +49,8 @@ public:
     auto boundingRect() const -> QRectF override;
     void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget) override;
 
-    auto PrintMode() const -> bool;
     void SetPrintMode(bool newPrintMode);
+    void SetTextAsPaths(bool textAsPaths);
 
 private:
     // cppcheck-suppress unknownMacro
@@ -59,6 +59,7 @@ private:
     VPLayoutWeakPtr m_layout;
     QUuid m_sheetUuid;
     bool m_printMode{false};
+    bool m_textAsPaths{false};
 
     void PaintTileNumberOutlineFont(QPainter *painter,
                                     const QRectF &img,
@@ -79,15 +80,15 @@ private:
 };
 
 //---------------------------------------------------------------------------------------------------------------------
-inline auto VPGraphicsTileGrid::PrintMode() const -> bool
-{
-    return m_printMode;
-}
-
-//---------------------------------------------------------------------------------------------------------------------
 inline void VPGraphicsTileGrid::SetPrintMode(bool newPrintMode)
 {
     m_printMode = newPrintMode;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+inline void VPGraphicsTileGrid::SetTextAsPaths(bool textAsPaths)
+{
+    m_textAsPaths = textAsPaths;
 }
 
 #endif // VPGRAPHICSTILEGRID_H

@@ -64,6 +64,8 @@ public:
 
     void SetTextAsPaths(bool newTextAsPaths);
 
+    void SetPrintMode(bool newPrintMode);
+
 signals:
     void HideTransformationHandles(bool hide);
     void PieceTransformationChanged();
@@ -118,6 +120,8 @@ private:
     bool m_textAsPaths{false};
 
     bool m_hoverMode{false};
+
+    bool m_printMode{false};
 
     VGraphicsFillItem *m_grainlineItem{nullptr};
     QVector<QGraphicsPathItem *> m_labelPathItems{};

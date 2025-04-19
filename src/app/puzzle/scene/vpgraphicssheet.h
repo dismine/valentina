@@ -67,6 +67,9 @@ public:
 
     static auto FoldText() -> QString;
 
+    auto PrintMode() const -> bool;
+    void SetPrintMode(bool newPrintMode);
+
 private:
     // cppcheck-suppress unknownMacro
     Q_DISABLE_COPY_MOVE(VPGraphicsSheet) // NOLINT
@@ -75,6 +78,8 @@ private:
 
     bool m_showMargin{true};
     bool m_showBorder{true};
+
+    bool m_printMode{false};
 
     void PaintVerticalFold(QPainter *painter, const QRectF &sheetRect) const;
     void PaintHorizontalFold(QPainter *painter, const QRectF &sheetRect) const;
@@ -85,6 +90,24 @@ private:
     void PaintGrid(QPainter *painter) const;
 
     auto FoldField(const QRectF &sheetRect) const -> QRectF;
+
+    auto PaintHorizontalFoldTextOutlineFont(QPainter *painter, const QRectF &sheetRect) const -> QRectF;
+    auto PaintHorizontalFoldTextSVGFont(QPainter *painter, const QRectF &sheetRect) const -> QRectF;
+
+    auto PaintVerticalFoldTextOutlineFont(QPainter *painter, const QRectF &sheetRect) const -> QRectF;
+    auto PaintVerticalFoldTextSVGFont(QPainter *painter, const QRectF &sheetRect) const -> QRectF;
 };
+
+//---------------------------------------------------------------------------------------------------------------------
+inline auto VPGraphicsSheet::PrintMode() const -> bool
+{
+    return m_printMode;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+inline void VPGraphicsSheet::SetPrintMode(bool newPrintMode)
+{
+    m_printMode = newPrintMode;
+}
 
 #endif // VPGRAPHICSSHEET_H
