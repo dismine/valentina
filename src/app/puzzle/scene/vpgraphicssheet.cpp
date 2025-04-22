@@ -444,6 +444,11 @@ void VPGraphicsSheet::PaintGrid(QPainter *painter) const
 //---------------------------------------------------------------------------------------------------------------------
 auto VPGraphicsSheet::FoldField(const QRectF &sheetRect) const -> QRectF
 {
+    if (!m_PDFTiledExport)
+    {
+        return sheetRect;
+    }
+
     VPLayoutPtr const layout = m_layout.toStrongRef();
 
     if (layout.isNull())

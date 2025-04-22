@@ -2496,6 +2496,15 @@ void VPMainWindow::ExportFlatLayout(const VPExportData &data)
 
     VPApplication::VApp()->PuzzleSettings()->SetPathLayoutExport(path);
 
+    if (VAbstractApplication::VApp()->Settings()->GetSingleLineFonts())
+    {
+        m_layout->TileFactory()->InitTileSingleLineSVGFont();
+    }
+    else if (VAbstractApplication::VApp()->Settings()->GetSingleStrokeOutlineFont())
+    {
+        m_layout->TileFactory()->InitTileSingleStrokeOutlineFont();
+    }
+
     if (data.format == LayoutExportFormats::PDFTiled)
     {
         ExportPdfTiledFile(data);
@@ -2542,7 +2551,7 @@ void VPMainWindow::ExportScene(const VPExportData &data)
             continue;
         }
 
-        sheet->SceneData()->PrepareForExport();
+        sheet->SceneData()->PrepareForExport(data.format);
         sheet->SceneData()->SetTextAsPaths(data.textAsPaths);
 
         exporter.SetMargins(sheet->GetSheetMargins());
@@ -2729,7 +2738,7 @@ void VPMainWindow::GenerateUnifiedPdfFile(const VPExportData &data, const QStrin
             }
         }
 
-        sheet->SceneData()->PrepareForExport(); // Go first because recreates pieces
+        sheet->SceneData()->PrepareForExport(data.format); // Go first because recreates pieces
         VLayoutExporter::PrepareGrainlineForExport(sheet->SceneData()->GraphicsPiecesAsItems(), data.showGrainline);
         QRectF const imageRect = sheet->GetMarginsRect();
         sheet->SceneData()->Scene()->render(&painter, VPrintLayout::SceneTargetRect(printer.data(), imageRect),
@@ -2804,7 +2813,7 @@ auto VPMainWindow::GeneratePdfTiledFile(const VPSheetPtr &sheet,
     SCASSERT(painter != nullptr)
     SCASSERT(not printer.isNull())
 
-    sheet->SceneData()->PrepareForExport(); // Go first because recreates pieces
+    sheet->SceneData()->PrepareForExport(data.format); // Go first because recreates pieces
     VLayoutExporter::PrepareGrainlineForExport(sheet->SceneData()->GraphicsPiecesAsItems(), data.showGrainline);
     m_layout->TileFactory()->RefreshTileInfos();
     m_layout->TileFactory()->RefreshWatermarkData();
@@ -2838,15 +2847,6 @@ auto VPMainWindow::GeneratePdfTiledFile(const VPSheetPtr &sheet,
                              Qt::RoundCap, Qt::RoundJoin));
         painter->setBrush(QBrush(Qt::NoBrush));
         painter->setRenderHint(QPainter::Antialiasing, true);
-    }
-
-    if (VAbstractApplication::VApp()->Settings()->GetSingleLineFonts())
-    {
-        m_layout->TileFactory()->InitTileSingleLineSVGFont();
-    }
-    else if (VAbstractApplication::VApp()->Settings()->GetSingleStrokeOutlineFont())
-    {
-        m_layout->TileFactory()->InitTileSingleStrokeOutlineFont();
     }
 
     if (data.showTilesScheme)
@@ -3245,7 +3245,7 @@ auto VPMainWindow::PrintLayoutSheetPage(QPrinter *printer, QPainter &painter, co
         return false;
     }
 
-    sheet->SceneData()->PrepareForExport();
+    sheet->SceneData()->PrepareForExport(LayoutExportFormats::PDF);
     QRectF const imageRect = sheet->GetMarginsRect();
     sheet->SceneData()->Scene()->render(&painter, VPrintLayout::SceneTargetRect(printer, imageRect), imageRect,
                                         Qt::IgnoreAspectRatio);
@@ -3347,7 +3347,7 @@ auto VPMainWindow::PrepareLayoutTilePages(const QList<VPSheetPtr> &sheets) -> QV
 auto VPMainWindow::PrintLayoutTiledSheetPage(QPrinter *printer, QPainter &painter, const VPLayoutPrinterPage &page,
                                              bool firstPage) -> bool
 {
-    page.sheet->SceneData()->PrepareForExport();
+    page.sheet->SceneData()->PrepareForExport(LayoutExportFormats::PDFTiled);
 
     const VCommonSettings *settings = VAbstractApplication::VApp()->Settings();
     page.sheet->SceneData()->SetTextAsPaths(settings->GetSingleLineFonts() || settings->GetSingleStrokeOutlineFont());
@@ -5049,7 +5049,7 @@ void VPMainWindow::LayoutWarningPieceGapePosition_toggled(bool checked)
         LayoutWasSaved(false);
         if (checked)
         {
-            if (VPSheetPtr sheet = m_layout->GetFocusedSheet(); !sheet.isNull())
+            if (VPSheetPtr const sheet = m_layout->GetFocusedSheet(); !sheet.isNull())
             {
                 sheet->CheckPiecesPositionValidity();
             }
@@ -5067,8 +5067,7 @@ void VPMainWindow::LayoutWarningPiecesSuperposition_toggled(bool checked)
         LayoutWasSaved(false);
         if (checked)
         {
-
-            if (VPSheetPtr sheet = m_layout->GetFocusedSheet(); !sheet.isNull())
+            if (VPSheetPtr const sheet = m_layout->GetFocusedSheet(); !sheet.isNull())
             {
                 sheet->CheckPiecesPositionValidity();
             }

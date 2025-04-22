@@ -329,7 +329,7 @@ void VPSheetSceneData::RefreshPieces(bool printMode)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VPSheetSceneData::PrepareForExport()
+void VPSheetSceneData::PrepareForExport(LayoutExportFormats format)
 {
     VStylesheetStyle::SetExportColorScheme(ExportColorScheme::BackAndWhite);
     VSceneStylesheet::ResetStyles();
@@ -339,6 +339,7 @@ void VPSheetSceneData::PrepareForExport()
     m_graphicsSheet->SetShowBorder(false);
     m_graphicsSheet->SetShowMargin(false);
     m_graphicsSheet->SetPrintMode(printMode);
+    m_graphicsSheet->SetPDFTiledExport(format == LayoutExportFormats::PDFTiled);
 
     m_rotationControls->setVisible(false);
     m_rotationOrigin->setVisible(false);
@@ -387,6 +388,7 @@ void VPSheetSceneData::CleanAfterExport()
     m_graphicsSheet->SetShowBorder(true);
     m_graphicsSheet->SetShowMargin(true);
     m_graphicsSheet->SetPrintMode(printMode);
+    m_graphicsSheet->SetPDFTiledExport(false);
 
     m_rotationControls->setVisible(true);
 

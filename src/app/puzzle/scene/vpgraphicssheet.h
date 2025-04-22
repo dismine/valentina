@@ -70,6 +70,9 @@ public:
     auto PrintMode() const -> bool;
     void SetPrintMode(bool newPrintMode);
 
+    bool PDFTiledExport() const;
+    void SetPDFTiledExport(bool newPDFTiledExport);
+
 private:
     // cppcheck-suppress unknownMacro
     Q_DISABLE_COPY_MOVE(VPGraphicsSheet) // NOLINT
@@ -80,6 +83,8 @@ private:
     bool m_showBorder{true};
 
     bool m_printMode{false};
+
+    bool m_PDFTiledExport{false};
 
     void PaintVerticalFold(QPainter *painter, const QRectF &sheetRect) const;
     void PaintHorizontalFold(QPainter *painter, const QRectF &sheetRect) const;
@@ -108,6 +113,18 @@ inline auto VPGraphicsSheet::PrintMode() const -> bool
 inline void VPGraphicsSheet::SetPrintMode(bool newPrintMode)
 {
     m_printMode = newPrintMode;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+inline auto VPGraphicsSheet::PDFTiledExport() const -> bool
+{
+    return m_PDFTiledExport;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+inline void VPGraphicsSheet::SetPDFTiledExport(bool newPDFTiledExport)
+{
+    m_PDFTiledExport = newPDFTiledExport;
 }
 
 #endif // VPGRAPHICSSHEET_H

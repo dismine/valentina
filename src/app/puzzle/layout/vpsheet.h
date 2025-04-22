@@ -36,9 +36,9 @@
 #include <QSizeF>
 #include <QUuid>
 
-#include "layoutdef.h"
-
+#include "../vlayout/vlayoutdef.h"
 #include "../vmisc/def.h"
+#include "layoutdef.h"
 
 class VPLayout;
 class VPPiece;
@@ -76,7 +76,7 @@ public:
     /**
      * @brief PrepareForExport prepares the graphic for an export (i.e hide margin etc)
      */
-    void PrepareForExport();
+    void PrepareForExport(LayoutExportFormats format);
 
     /**
      * @brief CleanAfterExport cleans the graphic for an export (i.e show margin etc)
