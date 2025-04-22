@@ -211,6 +211,8 @@ void DialogSaveManualLayout::SelectFormat(LayoutExportFormats format)
         throw VException(tr("Selected not present file format type."));
     }
     ui->comboBoxFormatType->setCurrentIndex(i);
+
+    SetExportUnified(m_count > 1);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
