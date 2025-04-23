@@ -51,6 +51,7 @@
 - Puzzle app. Optimization tile PDFs for pen plotter.
 - Measurement value alias.
 - Sync fold line position to grainline orientation.
+- Valentina app. Fix incorrect color of PDF tile's foot notes.
 
 # Valentina 0.7.53 June 25, 2024
 - Fix layout sheet export with empty name.

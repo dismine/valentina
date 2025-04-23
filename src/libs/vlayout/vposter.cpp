@@ -256,7 +256,7 @@ auto VPoster::Borders(QGraphicsItem *parent, const PosterData &img, vsizetype sh
         sheet = QCoreApplication::translate("VPoster", "Sheet %1 of %2").arg(img.index + 1).arg(sheets);
     }
 
-    labels->setHtml(u"<table width='100%'>"
+    labels->setHtml(u"<table width='100%' style='color:rgb(0,0,0);'>"
                     u"<tr>"
                     u"<td>%1</td><td align='center'>%2</td><td align='right'>%3</td>"
                     u"</tr>"
@@ -490,6 +490,7 @@ void VPoster::Ruler(QVector<QGraphicsItem *> &data, QGraphicsItem *parent, QRect
         else
         {
             auto *units = new QGraphicsTextItem(parent);
+            units->setDefaultTextColor(Qt::black);
             units->setPlainText(patternUnits == Unit::Cm || patternUnits == Unit::Mm ? tr("cm", "unit")
                                                                                      : tr("in", "unit"));
             QFont fnt = units->font();
