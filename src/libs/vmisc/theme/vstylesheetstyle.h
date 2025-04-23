@@ -39,7 +39,7 @@ class QColor;
 enum class ExportColorScheme
 {
     Default,
-    BackAndWhite
+    BlackAndWhite
 };
 
 class VStylesheetStyle

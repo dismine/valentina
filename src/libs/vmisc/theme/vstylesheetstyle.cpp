@@ -86,7 +86,7 @@ auto VStylesheetStyle::GetResourceName() -> QString
     const auto light = QStringLiteral("light");
     QString colorSheme;
 
-    if (exportColorScheme == ExportColorScheme::BackAndWhite)
+    if (exportColorScheme == ExportColorScheme::BlackAndWhite)
     {
         colorSheme = light;
     }

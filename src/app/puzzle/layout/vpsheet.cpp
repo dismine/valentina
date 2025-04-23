@@ -331,7 +331,7 @@ void VPSheetSceneData::RefreshPieces(bool printMode)
 //---------------------------------------------------------------------------------------------------------------------
 void VPSheetSceneData::PrepareForExport(LayoutExportFormats format)
 {
-    VStylesheetStyle::SetExportColorScheme(ExportColorScheme::BackAndWhite);
+    VStylesheetStyle::SetExportColorScheme(ExportColorScheme::BlackAndWhite);
     VSceneStylesheet::ResetStyles();
 
     const bool printMode = true;
