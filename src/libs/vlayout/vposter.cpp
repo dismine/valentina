@@ -448,11 +448,8 @@ auto VPoster::PageRect() const -> QRect
         const QRect pageRectFP(0, 0, qFloor(ToPixel(newRect.width())), qFloor(ToPixel(newRect.height())));
         return pageRectFP;
     }
-    else
-    {
-        const QRect pageRect(0, 0, qFloor(ToPixel(rect.width())), qFloor(ToPixel(rect.height())));
-        return pageRect;
-    }
+
+    return {0, 0, qFloor(ToPixel(rect.width())), qFloor(ToPixel(rect.height()))};
 }
 
 //---------------------------------------------------------------------------------------------------------------------
