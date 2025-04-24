@@ -39,6 +39,14 @@ jobs:
       - name: Fetch tags
         run: git fetch --prune --unshallow --tags
 
+      - name: Install Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.x'
+          architecture: "x64"
+          cache: 'pip'
+          cache-dependency-path: 'share/ci/requirements-ci.txt'
+
       - name: Install Qt
         uses: jurplel/install-qt-action@v4
         with:
@@ -54,14 +62,6 @@ jobs:
 
       - name: Setup cmake
         uses: jwlawson/actions-setup-cmake@v2
-
-      - name: Install Python
-        uses: actions/setup-python@v5
-        with:
-          python-version: '3.x'
-          architecture: "x64"
-          cache: 'pip'
-          cache-dependency-path: 'share/ci/requirements-ci.txt'
 
       - name: Set up Visual Studio shell
         uses: egor-tensin/vs-shell@v2
