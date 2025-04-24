@@ -3779,6 +3779,11 @@ void VPMainWindow::changeEvent(QEvent *event)
         InitIcons();
     }
 
+    if (event->type() == QEvent::ThemeChange)
+    {
+        VTheme::Instance()->ResetColorScheme();
+    }
+
     // remember to call base class implementation
     QMainWindow::changeEvent(event);
 }

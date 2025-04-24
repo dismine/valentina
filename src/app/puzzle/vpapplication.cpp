@@ -51,6 +51,7 @@
 #include <QMessageBox>
 #include <QPixmapCache>
 #include <QStyleFactory>
+#include <QTimer>
 
 #if QT_VERSION < QT_VERSION_CHECK(6, 4, 0)
 #include "../vmisc/compatibility.h"

@@ -66,6 +66,7 @@
 #include <QSpacerItem>
 #include <QStyleFactory>
 #include <QThread>
+#include <QTimer>
 #include <QTranslator>
 #include <QUuid>
 

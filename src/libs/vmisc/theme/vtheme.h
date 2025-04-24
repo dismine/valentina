@@ -30,9 +30,8 @@
 
 #include <QObject>
 #include <QString>
-#include <QTimer>
 
-enum class VColorSheme
+enum class VColorSheme : std::uint8_t
 {
     Light,
     Dark
@@ -69,6 +68,9 @@ public:
     static void InitThemeMode();
     static auto ThemeStylesheet() -> QString;
 
+public slots:
+    void ResetColorScheme();
+
 signals:
     void ThemeSettingsChanged();
 
@@ -78,10 +80,8 @@ private:
     explicit VTheme(QObject *parent = nullptr);
 
     QString m_defaultThemeName{};
-#if QT_VERSION < QT_VERSION_CHECK(6, 5, 0)
-    QTimer *m_themeTimer{nullptr};
-    bool m_darkTheme{false};
-#endif
+    bool m_isProcessingColorSchemeChange{false};
+    bool m_darkTheme;
 };
 
 #endif // VTHEME_H
