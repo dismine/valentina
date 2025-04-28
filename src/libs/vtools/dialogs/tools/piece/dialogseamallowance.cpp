@@ -2715,9 +2715,14 @@ void DialogSeamAllowance::ResetLabelsWarning()
 //---------------------------------------------------------------------------------------------------------------------
 void DialogSeamAllowance::EvalWidth()
 {
+    // Avoid circular dependency. CurrentSeamAllowance value based on the width field value. On this stage, we must
+    // hide from user the existence of CurrentSeamAllowance variable.
+    QHash<QString, QSharedPointer<VInternalVariable>> variables = *data->DataVariables();
+    variables.remove(currentSeamAllowance);
+
     FormulaData formulaData;
     formulaData.formula = uiTabPaths->plainTextEditFormulaWidth->toPlainText();
-    formulaData.variables = data->DataVariables();
+    formulaData.variables = &variables;
     formulaData.labelEditFormula = uiTabPaths->labelEditWidth;
     formulaData.labelResult = uiTabPaths->labelResultWidth;
     formulaData.postfix = UnitsToStr(VAbstractValApplication::VApp()->patternUnits(), true);
@@ -2727,7 +2732,7 @@ void DialogSeamAllowance::EvalWidth()
 
     if (m_saWidth >= 0)
     {
-        auto *locData = const_cast<VContainer *>(data);
+        auto *locData = const_cast<VContainer *>(data); // NOLINT(cppcoreguidelines-pro-type-const-cast)
 
         auto *currentSA = new VIncrement(locData, currentSeamAllowance);
         currentSA->SetFormula(m_saWidth, QString().setNum(m_saWidth), true);
@@ -2952,7 +2957,12 @@ void DialogSeamAllowance::EvalFoldCenter()
 //---------------------------------------------------------------------------------------------------------------------
 void DialogSeamAllowance::FXWidth()
 {
-    QScopedPointer<DialogEditWrongFormula> const dialog(new DialogEditWrongFormula(data, toolId, this));
+    // Avoid circular dependency. CurrentSeamAllowance value based on the width field value. On this stage, we must
+    // hide from user the existence of CurrentSeamAllowance variable.
+    VContainer localData = *data;
+    localData.RemoveVariable(currentSeamAllowance);
+
+    QScopedPointer<DialogEditWrongFormula> const dialog(new DialogEditWrongFormula(&localData, toolId, this));
     dialog->setWindowTitle(tr("Edit seam allowance width"));
     dialog->SetFormula(GetFormulaSAWidth());
     dialog->setCheckLessThanZero(true);

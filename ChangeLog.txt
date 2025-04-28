@@ -53,6 +53,7 @@
 - Sync fold line position to grainline orientation.
 - Valentina app. Fix incorrect color of PDF tile's foot notes.
 - Improve handling color schema switch on Linux.
+- Fix a circular dependency with the CurrentSeamAllowance variable.
 
 # Valentina 0.7.53 June 25, 2024
 - Fix layout sheet export with empty name.
