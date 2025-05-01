@@ -18,19 +18,29 @@ defaults:
 
 env:
   SOURCE_DIR: ${{ github.workspace }}
-  INSTALL_QT: 6.9.0
   QBS_VERSION: 2.4.2
   VALENTINA_VERSION: 0_7_53
   ACCESS_TOKEN: ${{ secrets.DROPBOX_ACCESS_TOKEN }}
 
 jobs:
-  Windows_Qt_6_8_MSVC_x64:
-    name: Windows Qt 6.8 (MSVC x64)
-    runs-on:  windows-latest
+  build:
+    name: Windows Qt ${{ matrix.qt_version }} (MSVC x64)
+    runs-on: windows-latest
+
+    strategy:
+      matrix:
+        qt:
+          - install: 6.8.3
+            label: Qt6_8
+          - install: 6.9.0
+            label: Qt6_9
+
     env:
       DEPLOY: 'true'
       RUN_TESTS: 'true'
       WITH_CRASH_REPORTING: 'True'
+      INSTALL_QT: ${{ matrix.qt.install }}
+      QT_VERSION: ${{ matrix.qt.label }}
 
     steps:
       - name: Checkout repo
@@ -232,5 +242,5 @@ jobs:
           TARGET_PLATFORM: "Windows10+"
           ARCH: x64
           COMPILER: msvc
-          QT_VERSION: Qt6_8
         run: ./scripts/appveyor-deploy.ps1
+
