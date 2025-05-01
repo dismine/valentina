@@ -24,7 +24,7 @@ env:
 
 jobs:
   build:
-    name: Windows Qt ${{ matrix.qt_version }} (MSVC x64)
+    name: Windows Qt ${{ matrix.qt.install }} (MSVC x64)
     runs-on: windows-latest
 
     strategy:
