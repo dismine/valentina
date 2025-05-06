@@ -85,16 +85,15 @@ DialogSaveLayout::DialogSaveLayout(int count, Draw mode, const QString &fileName
 
     ui->lineEditFileName->setValidator(new QRegularExpressionValidator(QRegularExpression(*baseFilenameRegExp), this));
 
-    const QString mask = m_count > 1 ? fileName + '_'_L1 : fileName;
     if (VApplication::IsGUIMode())
     {
-        ui->lineEditFileName->setText(mask);
+        ui->lineEditFileName->setText(fileName);
     }
     else
     {
-        if (QRegularExpression(*baseFilenameRegExp).match(mask).hasMatch())
+        if (QRegularExpression(*baseFilenameRegExp).match(fileName).hasMatch())
         {
-            ui->lineEditFileName->setText(mask);
+            ui->lineEditFileName->setText(fileName);
         }
         else
         {
@@ -432,7 +431,8 @@ auto DialogSaveLayout::Path() const -> QString
 //---------------------------------------------------------------------------------------------------------------------
 auto DialogSaveLayout::FileName() const -> QString
 {
-    return ui->lineEditFileName->text();
+    const QString fileName = ui->lineEditFileName->text();
+    return m_count > 1 && Format() != LayoutExportFormats::PDFTiled ? fileName + '_'_L1 : fileName;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -528,7 +528,7 @@ void DialogSaveLayout::ShowExample()
     const LayoutExportFormats currentFormat = Format();
     QString example;
 
-    if (m_count > 1)
+    if (m_count > 1 && currentFormat != LayoutExportFormats::PDFTiled)
     {
         example = tr("Example:") + FileName() + '1'_L1 + VLayoutExporter::ExportFormatSuffix(currentFormat);
     }

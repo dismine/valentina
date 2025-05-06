@@ -516,9 +516,9 @@ void MainWindowsNoGUI::ExportData(const QVector<VLayoutPiece> &listDetails)
         {
             for (int i = 0; i < detailsOnLayout.size(); ++i)
             {
-                const QString name = m_dialogSaveLayout->Path() + '/'_L1 + m_dialogSaveLayout->FileName() +
-                                     QString::number(i + 1) +
-                                     VLayoutExporter::ExportFormatSuffix(m_dialogSaveLayout->Format());
+                const QString index = detailsOnLayout.size() > 1 ? QString::number(i + 1) : QString();
+                const QString name = m_dialogSaveLayout->Path() + '/'_L1 + m_dialogSaveLayout->FileName() + index
+                                     + VLayoutExporter::ExportFormatSuffix(m_dialogSaveLayout->Format());
 
                 auto *paper = qgraphicsitem_cast<QGraphicsRectItem *>(m_layoutSettings->LayoutPapers().at(i));
                 SCASSERT(paper != nullptr)
@@ -565,7 +565,7 @@ void MainWindowsNoGUI::ExportFlatLayout(const QList<QGraphicsScene *> &scenes, c
     if (const LayoutExportFormats format = m_dialogSaveLayout->Format();
         format == LayoutExportFormats::PDFTiled && m_dialogSaveLayout->Mode() == Draw::Layout)
     {
-        const QString name = path + '/'_L1 + m_dialogSaveLayout->FileName() + '1'_L1;
+        const QString name = path + '/'_L1 + m_dialogSaveLayout->FileName();
         PdfTiledFile(name);
     }
     else
@@ -797,8 +797,8 @@ void MainWindowsNoGUI::ExportDetailsAsApparelLayout(QVector<VLayoutPiece> listDe
         listDetails[i].SetMatrix(moveMatrix);
     }
 
-    const QString name = m_dialogSaveLayout->Path() + '/' + m_dialogSaveLayout->FileName() + QString::number(1) +
-                         VLayoutExporter::ExportFormatSuffix(m_dialogSaveLayout->Format());
+    const QString name = m_dialogSaveLayout->Path() + '/' + m_dialogSaveLayout->FileName()
+                         + VLayoutExporter::ExportFormatSuffix(m_dialogSaveLayout->Format());
 
     ExportApparelLayout(listDetails, name, rect.size());
 }
@@ -1087,9 +1087,9 @@ void MainWindowsNoGUI::ExportScene(const QList<QGraphicsScene *> &scenes, const 
         auto *paper = qgraphicsitem_cast<QGraphicsRectItem *>(papers.at(i));
         if (paper != nullptr)
         {
-            const QString name = m_dialogSaveLayout->Path() + '/' + m_dialogSaveLayout->FileName() +
-                                 QString::number(i + 1) +
-                                 VLayoutExporter::ExportFormatSuffix(m_dialogSaveLayout->Format());
+            const QString index = scenes.size() > 1 ? QString::number(i + 1) : QString();
+            const QString name = m_dialogSaveLayout->Path() + '/' + m_dialogSaveLayout->FileName() + index
+                                 + VLayoutExporter::ExportFormatSuffix(m_dialogSaveLayout->Format());
             auto *brush = new QBrush();
             brush->setColor(QColor(Qt::white));
             QGraphicsScene *scene = scenes.at(i);
