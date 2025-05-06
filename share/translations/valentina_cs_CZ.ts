@@ -8415,22 +8415,22 @@ Přesto použít nastavení?</translation>
 <context>
     <name>DialogSaveLayout</name>
     <message>
-        <location filename="../../src/app/valentina/dialogs/dialogsavelayout.cpp" line="174"/>
+        <location filename="../../src/app/valentina/dialogs/dialogsavelayout.cpp" line="173"/>
         <source>Tried to use out of range file format type number.</source>
         <translation>Použitý typ formátu souboru leží mimo rozsah.</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/dialogs/dialogsavelayout.cpp" line="182"/>
+        <location filename="../../src/app/valentina/dialogs/dialogsavelayout.cpp" line="181"/>
         <source>Selected not present file format.</source>
         <translation>Vybraný formát souboru není přítomen.</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/dialogs/dialogsavelayout.cpp" line="197"/>
+        <location filename="../../src/app/valentina/dialogs/dialogsavelayout.cpp" line="196"/>
         <source>Selected not present file format type.</source>
         <translation>Vybraný typ formátu souboru není přítomen.</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/dialogs/dialogsavelayout.cpp" line="378"/>
+        <location filename="../../src/app/valentina/dialogs/dialogsavelayout.cpp" line="377"/>
         <location filename="../../src/app/valentina/dialogs/dialogsavelayout.cpp" line="925"/>
         <source>By standard</source>
         <translation>Standardní</translation>
@@ -8452,7 +8452,7 @@ Přesto použít nastavení?</translation>
         <translation>Příklad:</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/dialogs/dialogsavelayout.cpp" line="140"/>
+        <location filename="../../src/app/valentina/dialogs/dialogsavelayout.cpp" line="139"/>
         <source>Select folder</source>
         <translation>Vybrat složku</translation>
     </message>
@@ -8497,12 +8497,12 @@ Přesto použít nastavení?</translation>
         <translation type="vanished">Název souboru databáze neodpovídá regulárnímu výrazu (název souboru obsahuje nedovolené znaky).</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/dialogs/dialogsavelayout.cpp" line="405"/>
+        <location filename="../../src/app/valentina/dialogs/dialogsavelayout.cpp" line="404"/>
         <source>The destination directory doesn&apos;t exists or is not readable.</source>
         <translation>Cílový adresář neexistuje, nebo není čitelný.</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/dialogs/dialogsavelayout.cpp" line="101"/>
+        <location filename="../../src/app/valentina/dialogs/dialogsavelayout.cpp" line="100"/>
         <source>The base filename does not match a regular expression.</source>
         <translation>Název souboru databáze neodpovídá regulárnímu výrazu (název souboru obsahuje nedovolené znaky).</translation>
     </message>

@@ -8405,22 +8405,22 @@ Applicare la configurazione comunque?</translation>
 <context>
     <name>DialogSaveLayout</name>
     <message>
-        <location filename="../../src/app/valentina/dialogs/dialogsavelayout.cpp" line="174"/>
+        <location filename="../../src/app/valentina/dialogs/dialogsavelayout.cpp" line="173"/>
         <source>Tried to use out of range file format type number.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/dialogs/dialogsavelayout.cpp" line="182"/>
+        <location filename="../../src/app/valentina/dialogs/dialogsavelayout.cpp" line="181"/>
         <source>Selected not present file format.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/dialogs/dialogsavelayout.cpp" line="197"/>
+        <location filename="../../src/app/valentina/dialogs/dialogsavelayout.cpp" line="196"/>
         <source>Selected not present file format type.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/dialogs/dialogsavelayout.cpp" line="378"/>
+        <location filename="../../src/app/valentina/dialogs/dialogsavelayout.cpp" line="377"/>
         <location filename="../../src/app/valentina/dialogs/dialogsavelayout.cpp" line="925"/>
         <source>By standard</source>
         <translation type="unfinished"></translation>
@@ -8442,7 +8442,7 @@ Applicare la configurazione comunque?</translation>
         <translation>Esempio:</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/dialogs/dialogsavelayout.cpp" line="140"/>
+        <location filename="../../src/app/valentina/dialogs/dialogsavelayout.cpp" line="139"/>
         <source>Select folder</source>
         <translation>Seleziona cartella</translation>
     </message>
@@ -8487,12 +8487,12 @@ Applicare la configurazione comunque?</translation>
         <translation type="vanished">Il nome del file di base non ha corrispondenza con espressioni regolari.</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/dialogs/dialogsavelayout.cpp" line="405"/>
+        <location filename="../../src/app/valentina/dialogs/dialogsavelayout.cpp" line="404"/>
         <source>The destination directory doesn&apos;t exists or is not readable.</source>
         <translation>La directory di destinazione non esiste o non è leggibile.</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/dialogs/dialogsavelayout.cpp" line="101"/>
+        <location filename="../../src/app/valentina/dialogs/dialogsavelayout.cpp" line="100"/>
         <source>The base filename does not match a regular expression.</source>
         <translation>Il nome del file di base non ha corrispondenza con espressioni regolari.</translation>
     </message>
@@ -19241,19 +19241,19 @@ Vuoi salvare le tue modifiche?</translation>
         <location filename="../../src/libs/vlayout/dialogs/vabstractlayoutdialog.cpp" line="110"/>
         <source>Roll 48in</source>
         <comment>Paper format</comment>
-        <translation type="unfinished">Rotolo 44pollici {48i?}</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/libs/vlayout/dialogs/vabstractlayoutdialog.cpp" line="111"/>
         <source>Roll 62in</source>
         <comment>Paper format</comment>
-        <translation type="unfinished">Rotolo 44pollici {62i?}</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/libs/vlayout/dialogs/vabstractlayoutdialog.cpp" line="112"/>
         <source>Roll 72in</source>
         <comment>Paper format</comment>
-        <translation type="unfinished">Rotolo 44pollici {72i?}</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/libs/vlayout/dialogs/vabstractlayoutdialog.cpp" line="113"/>

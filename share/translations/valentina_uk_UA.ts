@@ -8415,22 +8415,22 @@ Apply settings anyway?</source>
 <context>
     <name>DialogSaveLayout</name>
     <message>
-        <location filename="../../src/app/valentina/dialogs/dialogsavelayout.cpp" line="174"/>
+        <location filename="../../src/app/valentina/dialogs/dialogsavelayout.cpp" line="173"/>
         <source>Tried to use out of range file format type number.</source>
         <translation>Спроба використати номер типу формату файлу поза діапазоном.</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/dialogs/dialogsavelayout.cpp" line="182"/>
+        <location filename="../../src/app/valentina/dialogs/dialogsavelayout.cpp" line="181"/>
         <source>Selected not present file format.</source>
         <translation>Вибрано неіснуючий формат файлу.</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/dialogs/dialogsavelayout.cpp" line="197"/>
+        <location filename="../../src/app/valentina/dialogs/dialogsavelayout.cpp" line="196"/>
         <source>Selected not present file format type.</source>
         <translation>Вибрано неіснуючий тип формату файлу.</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/dialogs/dialogsavelayout.cpp" line="378"/>
+        <location filename="../../src/app/valentina/dialogs/dialogsavelayout.cpp" line="377"/>
         <location filename="../../src/app/valentina/dialogs/dialogsavelayout.cpp" line="925"/>
         <source>By standard</source>
         <translation>Згідно зі стандартом</translation>
@@ -8452,7 +8452,7 @@ Apply settings anyway?</source>
         <translation>Приклад:</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/dialogs/dialogsavelayout.cpp" line="140"/>
+        <location filename="../../src/app/valentina/dialogs/dialogsavelayout.cpp" line="139"/>
         <source>Select folder</source>
         <translation>Вибрати теку</translation>
     </message>
@@ -8497,12 +8497,12 @@ Apply settings anyway?</source>
         <translation type="vanished">Базова назва файлу не відповідає регулярному виразу.</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/dialogs/dialogsavelayout.cpp" line="405"/>
+        <location filename="../../src/app/valentina/dialogs/dialogsavelayout.cpp" line="404"/>
         <source>The destination directory doesn&apos;t exists or is not readable.</source>
         <translation>Каталог призначення не існує або не читається.</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/dialogs/dialogsavelayout.cpp" line="101"/>
+        <location filename="../../src/app/valentina/dialogs/dialogsavelayout.cpp" line="100"/>
         <source>The base filename does not match a regular expression.</source>
         <translation>Базова назва файлу не відповідає регулярному виразу.</translation>
     </message>

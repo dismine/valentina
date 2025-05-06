@@ -8413,22 +8413,22 @@ Appliquer quand même les réglages ?</translation>
 <context>
     <name>DialogSaveLayout</name>
     <message>
-        <location filename="../../src/app/valentina/dialogs/dialogsavelayout.cpp" line="174"/>
+        <location filename="../../src/app/valentina/dialogs/dialogsavelayout.cpp" line="173"/>
         <source>Tried to use out of range file format type number.</source>
         <translation>Vous avez tenté d&apos;utiliser un type de format de fichier en dehors de la plage de valeur.</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/dialogs/dialogsavelayout.cpp" line="182"/>
+        <location filename="../../src/app/valentina/dialogs/dialogsavelayout.cpp" line="181"/>
         <source>Selected not present file format.</source>
         <translation>Format de fichier sélectionné, absent.</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/dialogs/dialogsavelayout.cpp" line="197"/>
+        <location filename="../../src/app/valentina/dialogs/dialogsavelayout.cpp" line="196"/>
         <source>Selected not present file format type.</source>
         <translation>Type de format de fichier selectionné, absent.</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/dialogs/dialogsavelayout.cpp" line="378"/>
+        <location filename="../../src/app/valentina/dialogs/dialogsavelayout.cpp" line="377"/>
         <location filename="../../src/app/valentina/dialogs/dialogsavelayout.cpp" line="925"/>
         <source>By standard</source>
         <translation>Standard</translation>
@@ -8450,7 +8450,7 @@ Appliquer quand même les réglages ?</translation>
         <translation>Exemple :</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/dialogs/dialogsavelayout.cpp" line="140"/>
+        <location filename="../../src/app/valentina/dialogs/dialogsavelayout.cpp" line="139"/>
         <source>Select folder</source>
         <translation>Sélectionner un dossier</translation>
     </message>
@@ -8495,12 +8495,12 @@ Appliquer quand même les réglages ?</translation>
         <translation type="vanished">Le nom du fichier de base ne correspond pas à une expression régulière.</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/dialogs/dialogsavelayout.cpp" line="405"/>
+        <location filename="../../src/app/valentina/dialogs/dialogsavelayout.cpp" line="404"/>
         <source>The destination directory doesn&apos;t exists or is not readable.</source>
         <translation>Le répertoire de destination n&apos;existe pas ou vous n&apos;avez pas les droits de lecture dessus.</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/dialogs/dialogsavelayout.cpp" line="101"/>
+        <location filename="../../src/app/valentina/dialogs/dialogsavelayout.cpp" line="100"/>
         <source>The base filename does not match a regular expression.</source>
         <translation>Le nom du fichier de base ne correspond pas à une expression régulière.</translation>
     </message>

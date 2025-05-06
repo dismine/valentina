@@ -318,7 +318,7 @@
     <message>
         <location filename="../../src/app/valentina/dialogs/dialogaboutapp.cpp" line="56"/>
         <source>Built on %1 at %2</source>
-        <translation type="unfinished">Dibuat pada %3 at %2 {1 ?}</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialogaboutapp.ui" line="315"/>
@@ -370,7 +370,7 @@
     <message>
         <location filename="../../src/app/tape/dialogs/dialogabouttape.cpp" line="134"/>
         <source>Built on %1 at %2</source>
-        <translation type="unfinished">Dibuat pada %3 at %2 {1 ?}</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/app/tape/dialogs/dialogabouttape.ui" line="267"/>
@@ -7214,22 +7214,22 @@ Apply settings anyway?</source>
 <context>
     <name>DialogSaveLayout</name>
     <message>
-        <location filename="../../src/app/valentina/dialogs/dialogsavelayout.cpp" line="174"/>
+        <location filename="../../src/app/valentina/dialogs/dialogsavelayout.cpp" line="173"/>
         <source>Tried to use out of range file format type number.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/dialogs/dialogsavelayout.cpp" line="182"/>
+        <location filename="../../src/app/valentina/dialogs/dialogsavelayout.cpp" line="181"/>
         <source>Selected not present file format.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/dialogs/dialogsavelayout.cpp" line="197"/>
+        <location filename="../../src/app/valentina/dialogs/dialogsavelayout.cpp" line="196"/>
         <source>Selected not present file format type.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/dialogs/dialogsavelayout.cpp" line="378"/>
+        <location filename="../../src/app/valentina/dialogs/dialogsavelayout.cpp" line="377"/>
         <location filename="../../src/app/valentina/dialogs/dialogsavelayout.cpp" line="925"/>
         <source>By standard</source>
         <translation type="unfinished"></translation>
@@ -7251,17 +7251,17 @@ Apply settings anyway?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/dialogs/dialogsavelayout.cpp" line="140"/>
+        <location filename="../../src/app/valentina/dialogs/dialogsavelayout.cpp" line="139"/>
         <source>Select folder</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/dialogs/dialogsavelayout.cpp" line="405"/>
+        <location filename="../../src/app/valentina/dialogs/dialogsavelayout.cpp" line="404"/>
         <source>The destination directory doesn&apos;t exists or is not readable.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/dialogs/dialogsavelayout.cpp" line="101"/>
+        <location filename="../../src/app/valentina/dialogs/dialogsavelayout.cpp" line="100"/>
         <source>The base filename does not match a regular expression.</source>
         <translation type="unfinished"></translation>
     </message>
@@ -19148,7 +19148,7 @@ This option will take an affect after restart.</source>
     <message>
         <location filename="../../src/app/puzzle/dialogs/vpdialogabout.cpp" line="139"/>
         <source>Built on %1 at %2</source>
-        <translation type="unfinished">Dibuat pada %3 at %2 {1 ?}</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/app/puzzle/dialogs/vpdialogabout.cpp" line="146"/>

@@ -184,7 +184,7 @@ Module {
         }
 
         Artifact {
-            filePath: product.sourceDirectory + "/" + product.name + ".i18n.json"
+            filePath: product.buildDirectory + "/" + product.name + ".i18n.json"
             fileTags: ["i18n.json"]
         }
     }
