@@ -31,9 +31,9 @@
 
 #include "../../libs/vmisc/projectversion.h"
 
-#define VER_INTERNALNAME_STR        "Valentina"
-#define VER_ORIGINALFILENAME_STR    "valentina.exe"
-#define VER_PRODUCTNAME_STR         "Valentina"
-#define VER_FILEDESCRIPTION_STR     "Patternmaking program."
+#define VER_INTERNALNAME_STR "Valentina"         // NOLINT(cppcoreguidelines-macro-usage)
+#define VER_ORIGINALFILENAME_STR "valentina.exe" // NOLINT(cppcoreguidelines-macro-usage)
+#define VER_PRODUCTNAME_STR "Valentina"          // NOLINT(cppcoreguidelines-macro-usage)
+#define VER_FILEDESCRIPTION_STR "Valentina"      // NOLINT(cppcoreguidelines-macro-usage)
 
 #endif // VERSION_H

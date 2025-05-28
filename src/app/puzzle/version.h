@@ -31,9 +31,9 @@
 
 #include "../../libs/vmisc/projectversion.h"
 
-#define VER_INTERNALNAME_STR "Puzzle"
-#define VER_ORIGINALFILENAME_STR "puzzle.exe"
-#define VER_PRODUCTNAME_STR "Puzzle"
-#define VER_FILEDESCRIPTION_STR "Valentina's manual layout creator."
+#define VER_INTERNALNAME_STR "Puzzle"         // NOLINT(cppcoreguidelines-macro-usage)
+#define VER_ORIGINALFILENAME_STR "puzzle.exe" // NOLINT(cppcoreguidelines-macro-usage)
+#define VER_PRODUCTNAME_STR "Valentina"       // NOLINT(cppcoreguidelines-macro-usage)
+#define VER_FILEDESCRIPTION_STR "Puzzle"      // NOLINT(cppcoreguidelines-macro-usage)
 
 #endif // VERSION_H
