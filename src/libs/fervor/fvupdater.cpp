@@ -61,9 +61,9 @@ QT_WARNING_PUSH
 QT_WARNING_DISABLE_CLANG("-Wunused-member-function")
 
 // NOLINTNEXTLINE
-Q_GLOBAL_STATIC_WITH_ARGS(const QString, defaultFeedURL, ("https://valentinaproject.bitbucket.io/Appcast.xml"_L1))
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, defaultFeedURL, ("https://smart-pattern.com.ua/appcast.xml?appID=%1"_L1))
 // NOLINTNEXTLINE
-Q_GLOBAL_STATIC_WITH_ARGS(const QString, testFeedURL, ("https://valentinaproject.bitbucket.io/Appcast_testing.xml"_L1))
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, testFeedURL, ("https://smart-pattern.com.ua/appcast_edge.xml?appID=%1"_L1))
 
 QT_WARNING_POP
 } // namespace
@@ -96,7 +96,15 @@ void FvUpdater::drop()
 //---------------------------------------------------------------------------------------------------------------------
 auto FvUpdater::CurrentFeedURL() -> QString
 {
-    return FvUpdater::IsTestBuild() ? *testFeedURL : *defaultFeedURL;
+    const VCommonSettings *settings = VAbstractApplication::VApp()->Settings();
+    QString clientID = settings->GetClientID();
+    if (clientID.isEmpty())
+    {
+        clientID = QUuid::createUuid().toString();
+        settings->SetClientID(clientID);
+    }
+
+    return FvUpdater::IsTestBuild() ? (*testFeedURL).arg(clientID) : (*defaultFeedURL).arg(clientID);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
