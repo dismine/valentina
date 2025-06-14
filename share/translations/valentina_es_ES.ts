@@ -10579,28 +10579,28 @@ Aplicar características de todos modos?</translation>
 <context>
     <name>FvUpdater</name>
     <message>
-        <location filename="../../src/libs/fervor/fvupdater.cpp" line="230"/>
+        <location filename="../../src/libs/fervor/fvupdater.cpp" line="238"/>
         <source>Cannot open your default browser.</source>
         <translation>No se puede abrir su navegador predeterminado.</translation>
     </message>
     <message>
-        <location filename="../../src/libs/fervor/fvupdater.cpp" line="373"/>
+        <location filename="../../src/libs/fervor/fvupdater.cpp" line="381"/>
         <source>Feed download failed: %1.</source>
         <translation>Falló la descarga de entrega: %1.</translation>
     </message>
     <message>
-        <location filename="../../src/libs/fervor/fvupdater.cpp" line="460"/>
+        <location filename="../../src/libs/fervor/fvupdater.cpp" line="468"/>
         <source>Feed parsing failed: %1 %2.</source>
         <translation>Falló la descarga de entrega: %1 %2.</translation>
     </message>
     <message>
-        <location filename="../../src/libs/fervor/fvupdater.cpp" line="467"/>
-        <location filename="../../src/libs/fervor/fvupdater.cpp" line="492"/>
+        <location filename="../../src/libs/fervor/fvupdater.cpp" line="475"/>
+        <location filename="../../src/libs/fervor/fvupdater.cpp" line="500"/>
         <source>No updates were found.</source>
         <translation>No se encontraron actualizaciones.</translation>
     </message>
     <message>
-        <location filename="../../src/libs/fervor/fvupdater.cpp" line="483"/>
+        <location filename="../../src/libs/fervor/fvupdater.cpp" line="491"/>
         <source>Feed error: invalid &quot;enclosure&quot; with the download link</source>
         <translation>Error de entrega: &quot;anexo&quot; inválido con el enlace de descarga</translation>
     </message>

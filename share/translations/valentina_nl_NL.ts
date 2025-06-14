@@ -10580,28 +10580,28 @@ Toch de instellingen aanpassen?</translation>
 <context>
     <name>FvUpdater</name>
     <message>
-        <location filename="../../src/libs/fervor/fvupdater.cpp" line="230"/>
+        <location filename="../../src/libs/fervor/fvupdater.cpp" line="238"/>
         <source>Cannot open your default browser.</source>
         <translation>Kan uw standaard browser niet openen.</translation>
     </message>
     <message>
-        <location filename="../../src/libs/fervor/fvupdater.cpp" line="373"/>
+        <location filename="../../src/libs/fervor/fvupdater.cpp" line="381"/>
         <source>Feed download failed: %1.</source>
         <translation>Doorstroming van download is mislukt: %1.</translation>
     </message>
     <message>
-        <location filename="../../src/libs/fervor/fvupdater.cpp" line="460"/>
+        <location filename="../../src/libs/fervor/fvupdater.cpp" line="468"/>
         <source>Feed parsing failed: %1 %2.</source>
         <translation>Doorstroming van opsplitsen is mislukt: %1%2.</translation>
     </message>
     <message>
-        <location filename="../../src/libs/fervor/fvupdater.cpp" line="467"/>
-        <location filename="../../src/libs/fervor/fvupdater.cpp" line="492"/>
+        <location filename="../../src/libs/fervor/fvupdater.cpp" line="475"/>
+        <location filename="../../src/libs/fervor/fvupdater.cpp" line="500"/>
         <source>No updates were found.</source>
         <translation>Er zijn geen opwaarderingen gevonden.</translation>
     </message>
     <message>
-        <location filename="../../src/libs/fervor/fvupdater.cpp" line="483"/>
+        <location filename="../../src/libs/fervor/fvupdater.cpp" line="491"/>
         <source>Feed error: invalid &quot;enclosure&quot; with the download link</source>
         <translation>Doorstroming fout: Ongeldige &quot;omgeving&quot; met de download verbinding</translation>
     </message>

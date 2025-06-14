@@ -10572,28 +10572,28 @@ Applicare la configurazione comunque?</translation>
 <context>
     <name>FvUpdater</name>
     <message>
-        <location filename="../../src/libs/fervor/fvupdater.cpp" line="230"/>
+        <location filename="../../src/libs/fervor/fvupdater.cpp" line="238"/>
         <source>Cannot open your default browser.</source>
         <translation>Non è possibile aprire il browser predefinito.</translation>
     </message>
     <message>
-        <location filename="../../src/libs/fervor/fvupdater.cpp" line="373"/>
+        <location filename="../../src/libs/fervor/fvupdater.cpp" line="381"/>
         <source>Feed download failed: %1.</source>
         <translation>Download fallito: %1.</translation>
     </message>
     <message>
-        <location filename="../../src/libs/fervor/fvupdater.cpp" line="460"/>
+        <location filename="../../src/libs/fervor/fvupdater.cpp" line="468"/>
         <source>Feed parsing failed: %1 %2.</source>
         <translation>Analisi fallita: %1 %2.</translation>
     </message>
     <message>
-        <location filename="../../src/libs/fervor/fvupdater.cpp" line="467"/>
-        <location filename="../../src/libs/fervor/fvupdater.cpp" line="492"/>
+        <location filename="../../src/libs/fervor/fvupdater.cpp" line="475"/>
+        <location filename="../../src/libs/fervor/fvupdater.cpp" line="500"/>
         <source>No updates were found.</source>
         <translation>Non è stato trovato nessun aggiornamento.</translation>
     </message>
     <message>
-        <location filename="../../src/libs/fervor/fvupdater.cpp" line="483"/>
+        <location filename="../../src/libs/fervor/fvupdater.cpp" line="491"/>
         <source>Feed error: invalid &quot;enclosure&quot; with the download link</source>
         <translation type="unfinished"></translation>
     </message>

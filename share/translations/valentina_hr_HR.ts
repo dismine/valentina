@@ -10583,28 +10583,28 @@ Svejedno primijeniti postavke?</translation>
 <context>
     <name>FvUpdater</name>
     <message>
-        <location filename="../../src/libs/fervor/fvupdater.cpp" line="230"/>
+        <location filename="../../src/libs/fervor/fvupdater.cpp" line="238"/>
         <source>Cannot open your default browser.</source>
         <translation>Nije moguće otvoriti zadani preglednik.</translation>
     </message>
     <message>
-        <location filename="../../src/libs/fervor/fvupdater.cpp" line="373"/>
+        <location filename="../../src/libs/fervor/fvupdater.cpp" line="381"/>
         <source>Feed download failed: %1.</source>
         <translation>Preuzimanje sadržaja nije uspjelo: %1.</translation>
     </message>
     <message>
-        <location filename="../../src/libs/fervor/fvupdater.cpp" line="460"/>
+        <location filename="../../src/libs/fervor/fvupdater.cpp" line="468"/>
         <source>Feed parsing failed: %1 %2.</source>
         <translation>Obrada sadržaja nije uspjela: %1 %2.</translation>
     </message>
     <message>
-        <location filename="../../src/libs/fervor/fvupdater.cpp" line="467"/>
-        <location filename="../../src/libs/fervor/fvupdater.cpp" line="492"/>
+        <location filename="../../src/libs/fervor/fvupdater.cpp" line="475"/>
+        <location filename="../../src/libs/fervor/fvupdater.cpp" line="500"/>
         <source>No updates were found.</source>
         <translation>Nisu pronađena ažuriranja.</translation>
     </message>
     <message>
-        <location filename="../../src/libs/fervor/fvupdater.cpp" line="483"/>
+        <location filename="../../src/libs/fervor/fvupdater.cpp" line="491"/>
         <source>Feed error: invalid &quot;enclosure&quot; with the download link</source>
         <translation>Greška sadržaja: nevažeći &apos;privitci&apos; s poveznicom za preuzimanje</translation>
     </message>
