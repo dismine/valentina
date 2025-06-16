@@ -1422,7 +1422,7 @@ void MainWindowsNoGUI::CollectStatistics(MeasurementsType measurementsType, cons
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-auto MainWindowsNoGUI::HandleMissingMeasurements(QSharedPointer<VMeasurements> &m,
+auto MainWindowsNoGUI::HandleMissingMeasurements(const QSharedPointer<VMeasurements> &m,
                                                  const QSet<QString> &missing,
                                                  QString &currentPath) -> bool
 {

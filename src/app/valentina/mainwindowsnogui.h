@@ -180,8 +180,9 @@ private:
         -> QSharedPointer<VMeasurements>;
     auto ApplyConverter(const QSharedPointer<VMeasurements> &m, const QString &path) const -> QString;
     void CollectStatistics(MeasurementsType measurementsType, const QString &formatVersion) const;
-    auto HandleMissingMeasurements(QSharedPointer<VMeasurements> &m, const QSet<QString> &missing, QString &currentPath)
-        -> bool;
+    auto HandleMissingMeasurements(const QSharedPointer<VMeasurements> &m,
+                                   const QSet<QString> &missing,
+                                   QString &currentPath) -> bool;
     auto SelectNewFile(const QSharedPointer<VMeasurements> &m, QString &currentPath) -> bool;
 };
 
