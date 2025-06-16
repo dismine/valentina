@@ -870,8 +870,8 @@ auto VPGraphicsSheet::PaintVerticalFoldTextSVGFont(QPainter *painter, const QRec
     // Text position calculation
     const qreal centerX = realSheetRect.center().x();
     const qreal centerY = realSheetRect.center().y();
-    const QPointF textPosition = QPointF(centerX - textRect.width() / 2.,
-                                         centerY - realSheetRect.width() / 2. + foldTextMargin + textRect.height() / 2);
+    const auto textPosition = QPointF(centerX - textRect.width() / 2.,
+                                      centerY - realSheetRect.width() / 2. + foldTextMargin + textRect.height() / 2);
 
     guard.save();
 
