@@ -25,7 +25,7 @@ regular_task_template: &REGULER_TASK_TEMPLATE
 linux_qt6_task_template: &LINUX_QT6_TASK_TEMPLATE
   << : *QBS_TASK_FILTER
   install_script:
-    - bash -c "$PACKAGE_MANAGER_INSTALL -y qt6-base-dev qt6-l10n-tools libqt6svg6-dev qt6-base-dev-tools qmake6 libxerces-c-dev poppler-utils libgl1-mesa-dev"
+    - bash -c "$PACKAGE_MANAGER_INSTALL -y qt6-base-dev qt6-l10n-tools libqt6svg6-dev qt6-base-dev-tools qmake6 libxerces-c-dev poppler-utils libgl1-mesa-dev git"
     - git fetch --tags
   build_script:
     - uname -a
@@ -88,7 +88,7 @@ linux_qt6_sonar_task_template: &LINUX_QT6_TASK_SONAR_TEMPLATE
 linux_qt5_qbs_task_template: &LINUX_QT5_QBS_TASK_TEMPLATE
   << : *QBS_TASK_FILTER
   install_script:
-    - bash -c "$PACKAGE_MANAGER_INSTALL qtbase5-dev libqt5svg5-dev qttools5-dev-tools libqt5xmlpatterns5-dev libqt5core5a libqt5gui5 libqt5printsupport5 libqt5svg5 libqt5widgets5 libqt5xml5 libqt5xmlpatterns5 poppler-utils"
+    - bash -c "$PACKAGE_MANAGER_INSTALL qtbase5-dev libqt5svg5-dev qttools5-dev-tools libqt5xmlpatterns5-dev libqt5core5a libqt5gui5 libqt5printsupport5 libqt5svg5 libqt5widgets5 libqt5xml5 libqt5xmlpatterns5 poppler-utils git"
     - git fetch --tags
   build_script:
     - uname -a
