@@ -46,7 +46,7 @@
 #include "../vmisc/defglobal.h"
 
 // Header <ciso646> is removed in C++20.
-#if __cplusplus <= 201703L
+#if defined(Q_CC_MSVC) && __cplusplus <= 201703L
 #include <ciso646> // and, not, or
 #endif
 
