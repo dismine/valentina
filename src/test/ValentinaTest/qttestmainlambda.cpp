@@ -40,6 +40,7 @@
 #include "tst_nameregexp.h"
 #include "tst_qmutokenparser.h"
 #include "tst_readval.h"
+#include "tst_svgfontwritingsystem.h"
 #include "tst_vabstractcurve.h"
 #include "tst_vabstractpiece.h"
 #include "tst_varc.h"
@@ -109,6 +110,7 @@ auto main(int argc, char **argv) -> int
     ASSERT_TEST(new TST_VSVGPathTokenizer());
     ASSERT_TEST(new TST_VBoundary());
     ASSERT_TEST(new TST_DXF());
+    ASSERT_TEST(new TST_SVGFontWritingSystem());
 
     return status;
 }

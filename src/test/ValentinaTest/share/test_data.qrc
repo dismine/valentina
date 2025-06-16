@@ -230,5 +230,7 @@
         <file>mirror_notch_case2/points.json</file>
         <file>trousers_block/input.json</file>
         <file>trousers_block/output.json</file>
+        <file>svg_font_writing_system/simplified_chinese_writing_system.json</file>
+        <file>svg_font_writing_system/traditional_chinese_writing_system.json</file>
     </qresource>
 </RCC>
