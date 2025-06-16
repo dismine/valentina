@@ -397,7 +397,7 @@ for:
 
       sudo ln -s /usr/local /opt/local;
 
-      cache_tag=usr_local_5 # this can be modified to rebuild deps
+      cache_tag=usr_local_6 # this can be modified to rebuild deps
 
       cdir=$HOME/brew_cache_dir
       cache_tar=$cdir/$cache_tag.tar
